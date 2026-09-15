@@ -27,6 +27,23 @@
     --link-underline: rgba(14, 90, 67, 0.3);
     --selection: rgba(255, 179, 0, 0.35);
     --border: rgb(220, 230, 225);
+
+    /* CTA-Karte (Affiliate) – abgeleitet aus den Marken-Tokens, damit
+       Hell-/Dark-Wert an einem Ort stehen (14.09.2026, Agentur-Politur). */
+    --ff-cta-surface: color-mix(in srgb, var(--ff-yellow) 9%, var(--entry));
+    --ff-cta-surface-note: color-mix(in srgb, var(--ff-yellow) 6%, var(--entry));
+    --ff-cta-line: color-mix(in srgb, var(--ff-yellow) 34%, var(--border));
+    --ff-cta-note: color-mix(in srgb, var(--primary) 84%, var(--ff-yellow-dark));
+}
+
+:root[data-theme="dark"] {
+    /* Dark: Signalton als Fläche (14 %), Linie aus dem Dark-Rand gemischt.
+       Sekundärtext vom Farbton der Fläche abgetönt – nie neutral-grau
+       (DESIGN.md §1). */
+    --ff-cta-surface: color-mix(in srgb, var(--ff-yellow) 14%, var(--entry));
+    --ff-cta-surface-note: color-mix(in srgb, var(--ff-yellow) 9%, var(--entry));
+    --ff-cta-line: color-mix(in srgb, var(--ff-yellow) 26%, var(--border));
+    --ff-cta-note: color-mix(in srgb, var(--secondary) 78%, var(--ff-yellow));
 }
 
 /* ---------- Typografie (Top-Level) ---------- */
@@ -287,81 +304,214 @@ html[data-theme="dark"] .ff-brand .ff-wm { fill: #F3F7F5; }
     color: var(--ff-white);
 }
 
-/* ---------- Affiliate-CTA im Artikel (gelber Pill-Button-Look) ---------- */
+/* ---------- Affiliate-CTA im Artikel (CTA-Karte in Signalgelb) ---------- */
 /* Vertrag mit der Pipeline: CTA-Links laufen seit 11.08. ueber das
    /go/-Gateway (Affiliate-Shield) – Selector deckt rohe Netzwerk-URLs UND
-   /go/-Links ab. design_guard D10 waercht das (Regelwerk). */
+   /go/-Links ab. design_guard D10 waercht das (Regelwerk).
+
+   Reparatur 14.09.2026 (Agentur-Niveau). Ausloeser war ein beschaedigter
+   gelber Kasten im Gasvergleich-Artikel: eine Dangling-Klammer hinter dem
+   Markdown-Link landete sichtbar in der Karte, kein Gate hatte sie gesehen.
+   Beim Hinsehen kamen drei Handwerksfehler der alten Karte zutage:
+     1. display:flex + flex-direction:column machte jeden anonymen
+        Text-Run zu einer eigenen Zeile – das 💡-Emoji stand allein
+        ueber dem Label, der Satz wurde mittig zerhackt.
+     2. border: 1px dashed = Platzhalter-Optik, Radius 10px ausserhalb der
+        Skala, zusaetzlicher Schatten unter der Linie (doppelte Elevation).
+     3. white-space: nowrap + text-overflow: ellipsis im Button –
+        CTA-Labels wurden auf schmalen Viewports abgeschnitten.
+   Neu dazu: der Werbehinweis klebt als Fuss an der Karte (Kennzeichnung
+   direkt an der Anzeige, nicht losgeloest darunter) und der Mittel-CTA im
+   Blockquote bekommt keine zweite Karte (kein Karten-in-Karte).        */
+
+/* 1) Kartenrumpf: eine Flaeche, eine Elevation (Haarlinie), Radius lg.
+      Der Mittel-CTA steckt in einem Blockquote – Regel 8 nimmt die Karte
+      dort zurueck (expliziter Reset statt komplexem :not(), damit ein
+      einzelner nicht unterstützter Selektor nicht das ganze Bauteil kippt). */
 .post-content hr + p:has(> strong > a),
+.post-content p:has(> a[href^="/go/"]),
 .post-content p:has(> a[href*="check24.net"]),
 .post-content p:has(> a[href*="partner-versicherung.de"]) {
-    /* CTA-Kasten: zentriert (Text UND Button), sanfter gelber Hintergrund */
-    background: rgba(255, 179, 0, 0.10);
-    border: 1px dashed rgba(255, 179, 0, 0.6);
-    border-radius: 10px;
-    padding: 14px 18px;
-    text-align: center;           /* zentriert den CTA-Text */
-    display: flex;
-    flex-direction: column;
-    align-items: center;          /* zentriert den Pill-Button */
-    gap: 8px;
-    margin: 22px auto;            /* Kasten zentriert, etwas Abstand */
-    max-width: 520px;             /* Kasten nicht überbreit auf Desktop */
-}
-
-/* Der CTA-Text (👉 …:) als Block, damit Text + Button untereinander stehen */
-.post-content p:has(> a[href*="check24.net"]) strong,
-.post-content p:has(> a[href*="partner-versicherung.de"]) strong {
-    display: block;
-    margin-bottom: 4px;
-}
-
-/* CTA mit "---"-Trenner (hr + p) ebenfalls zentriert */
-.post-content hr + p:has(> strong > a) {
+    background: var(--ff-cta-surface);
+    border: 1px solid var(--ff-cta-line);
+    border-radius: var(--ff-radius-lg);
+    padding: 18px 22px 20px;
+    margin: 24px auto;
+    max-width: 520px;             /* Kasten nicht ueberbreit auf Desktop */
     text-align: center;
-    align-items: center;
+    text-wrap: pretty;
 }
 
+/* 2) Label-Zeile ueber dem Button. NUR direktes Kind – das <strong> im
+      Button bleibt unveraendert (die alte Regel traf beide). */
+.post-content hr + p:has(> strong > a) > strong,
+.post-content p:has(> a[href^="/go/"]) > strong,
+.post-content p:has(> a[href*="check24.net"]) > strong,
+.post-content p:has(> a[href*="partner-versicherung.de"]) > strong {
+    display: block;
+    margin: 0 0 2px;
+}
+
+/* 3) Der Button: Signalgelb, contentgrosso, Tap-Ziel >= 44px, Label bricht
+      um statt abgeschnitten zu werden. Schatten = dokumentierter CTA-Glow. */
 .post-content a[href^="/go/"],
 .post-content a[href*="check24.net"],
 .post-content a[href*="partner-versicherung.de"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     background: var(--ff-yellow);
-    color: var(--ff-anthracite);
-    padding: 8px 22px;
+    color: var(--ff-anthracite);              /* 8.9:1 auf Signalgelb */
+    padding: 11px 24px;
     border-radius: 999px;
     font-weight: 700;
+    line-height: 1.3;
     text-decoration: none;
-    transition: background 0.15s ease;
-    width: auto;                  /* Button passt sich dem Text an */
+    text-wrap: balance;
     max-width: 100%;
-    align-self: center;           /* im Flex-Kasten (p) zentriert */
-    flex: 0 1 auto;               /* als Flex-Item nicht dehnen */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 10px rgba(255, 179, 0, 0.40);
+    transition: background 0.16s ease,
+                box-shadow 0.16s ease,
+                transform 0.16s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Das <strong> im CTA-Button ist ein Flex-Item (inline wird in Flex-
-   Containern blockifiziert) – deshalb NICHT dehnen lassen:
-   flex: 0 1 auto + overflow hidden. */
-.post-content p:has(> a[href^="/go/"]) a strong,
-.post-content p:has(> a[href*="check24.net"]) a strong,
-.post-content p:has(> a[href*="partner-versicherung.de"]) a strong,
-.post-content a[href^="/go/"] > strong,
-.post-content a[href*="check24.net"] > strong,
-.post-content a[href*="partner-versicherung.de"] > strong {
-    flex: 0 1 auto;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+/* 4) In der Karte steht der Button als eigene, zentrierte Zeile
+      (Blockfluss – kein Flex-Container mehr, der den Text zerhackt). */
+.post-content hr + p:not(blockquote > p):has(> strong > a) > a[href^="/go/"],
+.post-content p:not(blockquote > p):has(> a[href^="/go/"]) > a[href^="/go/"],
+.post-content p:not(blockquote > p):has(> a[href*="check24.net"]) > a[href*="check24.net"],
+.post-content p:not(blockquote > p):has(> a[href*="partner-versicherung.de"]) > a[href*="partner-versicherung.de"] {
+    display: flex;
+    width: fit-content;
+    margin: 12px auto 0;
 }
 
+/* 5) Hover / Aktiv: ein Lift, ein Ton – kein Bounce. */
 .post-content a[href^="/go/"]:hover,
 .post-content a[href*="check24.net"]:hover,
 .post-content a[href*="partner-versicherung.de"]:hover {
     background: var(--ff-yellow-dark);
     color: var(--ff-anthracite);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(255, 179, 0, 0.45);
+}
+
+.post-content a[href^="/go/"]:active,
+.post-content a[href*="check24.net"]:active,
+.post-content a[href*="partner-versicherung.de"]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+}
+
+/* 6) Fokus auf gelber Flaeche: der Signalgelb-Ring der Site waere auf dem
+      gelben Button unsichtbar (1.4:1) – hier Smaragd (8.4:1 auf Karten-
+      flaeche, hell) bzw. Smaragd-Bright (Dark). 3px bleiben Pflicht. */
+.post-content a[href^="/go/"]:focus-visible,
+.post-content a[href*="check24.net"]:focus-visible,
+.post-content a[href*="partner-versicherung.de"]:focus-visible {
+    outline: 3px solid var(--ff-emerald) !important;
+    outline-offset: 3px !important;
+}
+
+:root[data-theme="dark"] .post-content a[href^="/go/"]:focus-visible,
+:root[data-theme="dark"] .post-content a[href*="check24.net"]:focus-visible,
+:root[data-theme="dark"] .post-content a[href*="partner-versicherung.de"]:focus-visible {
+    outline-color: var(--ff-emerald-bright) !important;
+}
+
+/* 7) Werbehinweis als Fuss derselben Karte: einzeiliger italic-Absatz
+      direkt unter der CTA (end_cta-Vorlage von affiliate_marketer.py). */
+.post-content hr + p:not(blockquote > p):has(> strong > a):has(+ p > em:only-child),
+.post-content p:not(blockquote > p):has(> a[href^="/go/"]):has(+ p > em:only-child),
+.post-content p:not(blockquote > p):has(> a[href*="check24.net"]):has(+ p > em:only-child),
+.post-content p:not(blockquote > p):has(> a[href*="partner-versicherung.de"]):has(+ p > em:only-child) {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0;
+    padding-bottom: 16px;
+}
+
+.post-content hr + p:not(blockquote > p):has(> strong > a) + p:has(> em:only-child),
+.post-content p:not(blockquote > p):has(> a[href^="/go/"]) + p:has(> em:only-child),
+.post-content p:not(blockquote > p):has(> a[href*="check24.net"]) + p:has(> em:only-child),
+.post-content p:not(blockquote > p):has(> a[href*="partner-versicherung.de"]) + p:has(> em:only-child) {
+    background: var(--ff-cta-surface-note);
+    border: 1px solid var(--ff-cta-line);
+    border-top: 0;
+    border-radius: 0 0 var(--ff-radius-lg) var(--ff-radius-lg);
+    margin: 0 auto 24px;
+    padding: 10px 22px 14px;
+    max-width: 520px;
+    text-align: center;
+    font-size: 0.84em;
+    line-height: 1.5;
+    color: var(--ff-cta-note);
+}
+
+/* 8) Mittel-CTA im Blockquote: der Callout IST schon eine Flaeche – die
+      Karte bleibt dort aus, sonst verschachteln zwei Karten ineinander. */
+.post-content blockquote > p:has(> a[href^="/go/"]),
+.post-content blockquote > p:has(> a[href*="check24.net"]),
+.post-content blockquote > p:has(> a[href*="partner-versicherung.de"]) {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    text-align: left;
+}
+
+.post-content blockquote > p:has(> a[href^="/go/"]) > a[href^="/go/"],
+.post-content blockquote > p:has(> a[href*="check24.net"]) > a[href*="check24.net"] {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+}
+
+.post-content blockquote > p:has(> a[href^="/go/"]) > strong {
+    display: inline;
+    margin: 0;
+}
+
+/* Motion-Respekt fuer den Lift (die globalen reduced-motion-Regeln von
+   custom.css erfassen Uebergaenge pauschal; der Hover-Transform bleibt
+   sonst als Sprung bestehen). */
+@media (prefers-reduced-motion: reduce) {
+    .post-content a[href^="/go/"],
+    .post-content a[href*="check24.net"],
+    .post-content a[href*="partner-versicherung.de"] {
+        transition: none;
+    }
+    .post-content a[href^="/go/"]:hover,
+    .post-content a[href*="check24.net"]:hover,
+    .post-content a[href*="partner-versicherung.de"]:hover {
+        transform: none;
+    }
+}
+
+/* Mobile: Kasten nutzt die ganze Breite, kompaktere Innenabstaende. */
+@media (max-width: 600px) {
+    .post-content hr + p:has(> strong > a),
+    .post-content p:has(> a[href^="/go/"]),
+    .post-content p:has(> a[href*="check24.net"]),
+    .post-content p:has(> a[href*="partner-versicherung.de"]),
+    .post-content hr + p:not(blockquote > p):has(> strong > a) + p:has(> em:only-child),
+    .post-content p:not(blockquote > p):has(> a[href^="/go/"]) + p:has(> em:only-child) {
+        padding: 16px 16px 18px;
+        margin-block: 20px;
+    }
+    .post-content hr + p:not(blockquote > p):has(> strong > a):has(+ p > em:only-child),
+    .post-content p:not(blockquote > p):has(> a[href^="/go/"]):has(+ p > em:only-child) {
+        margin-bottom: 0;
+    }
+    .post-content hr + p:not(blockquote > p):has(> strong > a) + p:has(> em:only-child),
+    .post-content p:not(blockquote > p):has(> a[href^="/go/"]) + p:has(> em:only-child) {
+        margin-top: 0;
+        padding: 10px 16px 14px;
+    }
 }
 
 /* ---------- FAQ ---------- */
@@ -783,17 +933,10 @@ input:focus-visible {
 
 /* AUTO-HEILUNG (design_guard D10, 11.08.2026): Das Affiliate-Shield
    ersetzte direkte Netzwerk-Links durch /go/-Gateway-Links; das CSS
-   des gelben CTA-Kastens feuerte nur fuer die rohen Domains – Kasten
-   fiel aus. Dieser Block wird bei Fehlen automatisch wiederhergestellt. */
-.post-content p:has(> a[href^="/go/"]),
-.post-content p:has(> a[href*="check24.net"]),
-.post-content p:has(> a[href*="partner-versicherung.de"]) {
-    background: rgba(255, 179, 0, 0.10);
-    border: 1px dashed rgba(255, 179, 0, 0.6);
-    border-radius: 10px; padding: 14px 18px;
-    text-align: center; display: flex; flex-direction: column;
-    align-items: center; gap: 8px; margin: 22px auto; max-width: 520px;
-}
-.post-content p:has(> a[href^="/go/"]) strong,
-.post-content p:has(> a[href*="check24.net"]) strong,
-.post-content p:has(> a[href*="partner-versicherung.de"]) strong { display: block; margin-bottom: 4px; }
+   des gelben CTA-Kastens feuerte nur fuer die rohen Domains – der Kasten
+   fiel aus. Dieser Block wurde deshalb frueher bei Fehlen automatisch
+   wiederhergestellt.
+   D10-Kontrakt ist erfuellt: der /go/-Fall wird laengst im Komponenten-
+   Block dieses Files mitbedient (Selektor `.post-content p:has(> a[href^=
+   "/go/"])`, Regeln 1–8). Eigene Deklarationen an zweiter Stelle waeren
+   Duplikate mit Drift-Risiko – deshalb bleibt hier nur der Beleg stehen. */

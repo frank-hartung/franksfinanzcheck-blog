@@ -60,6 +60,22 @@ REST_MIN = 20            # R3: Rest nach Anhängsel-Entfernung muss aussagekräf
 # Gate blockiert den Artikel bis Freigabe (sicher); die Liste ist
 # bewusst großzügig für typische Ratgeber-Endungen.
 R5_END_WHITELIST = {
+    # REPARATUR 14.09.2026: Der Gasvergleich-/Frugalismus-Lauf zeigte,
+    # dass die Liste häufige saubere Endungen nicht kannte und deshalb
+    # 7 von 57 Titeln blockierte (5 live!) – „… dein Netz beschleunigt“,
+    # „… Energiediebe im Haushalt stoppen“, „… sparst du sofort“ sind
+    # vollständige Titel. Nachziehen ist sicherer als Nachbessern: Die
+    # Truncations-Falle bleibt für hängende Konnektoren und Pronomen an.
+    "beschleunigt", "beschleunigen", "beschleunigst",
+    "stoppen", "stopst", "stoppt",
+    "ändern", "änderst", "ändert", "vermeiden", "vermeidest", "vermeidet",
+    "senken", "reduzieren", "optimieren", "strukturieren", "organisieren",
+    "einrichten", "umsetzen", "loslegen", "spüren", "entlasten",
+    # Adverbien/Partikel, die einen Ratgebertitel regulär beenden
+    "sofort", "endlich", "wirklich", "bewusst", "effizient", "nachhaltig",
+    "vor", "zurück", "mit", "hoch", "runter",
+    # Adjektive („Denke dich reich“, „Lebe bewusst minimal“) 
+    "reich", "arm", "schlau", "sicher", "schnell", "günstig", "happy",
     # Verben (Person/Infinitiv), die Titles ordentlich beenden
     "ist", "sind", "war", "waren", "hat", "haben", "kann", "können",
     "kannst", "muss", "müssen", "musst", "will", "willst", "sollst",

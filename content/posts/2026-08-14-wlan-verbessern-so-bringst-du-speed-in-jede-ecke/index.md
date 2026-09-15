@@ -54,14 +54,13 @@ Du hast drei Optionen, um das Signal in entfernte Räume zu bringen. Sie heißen
 | **Powerline (DLAN über Stromnetz)** | 60–120 € | Schwankend | 50–150 Mbit/s | Dicke Altbauwände / über Stockwerke |
 | **Mesh-WLAN-System (z. B. AVM / TP-Link)** | 80–180 € | **Sehr niedrig (top)** | **bis zu 95 % des Originals** | **Große Wohnungen & Einfamilienhäuser** |
 
-Ein einfacher Repeater halbiert die Bandbreite. Er muss Daten gleichzeitig empfangen und senden. Ein Mesh-System spannt ein intelligentes Funknetz auf. Mehrere Knoten reden über ein eigenes Band. So bleibst du im ganzen Haus bei voller Datenrate.
+Ein einfacher Repeater halbiert die Bandbreite. Er muss Daten gleichzeitig empfangen und senden.
+
+Ein Mesh-System spannt ein intelligentes Funknetz auf. Mehrere Knoten reden über ein eigenes Band. So bleibst du im ganzen Haus bei voller Datenrate.
 
 Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € und 150 €. Es amortisiert sich durch dauerhaften Arbeits- und Streamingkomfort sofort.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/dsl/)
-
 
 ## 5 Sofort-Tipps zur Optimierung deines Heimnetzwerks
 
@@ -71,13 +70,17 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
 5. **Regelmäßige Firmware-Updates installieren:** Halte das Betriebssystem deines Routers stets auf dem neuesten Stand. Sicherheits-Patches und Optimierungen der Treiber bringen oft 10 bis 15 % mehr Stabilität.
 
-Willst du generell sparen? Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo Geld liegen bleibt. Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
+Willst du generell sparen? Unser Leitfaden [Sparen im Herbst – die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/) zeigt, wo Geld liegen bleibt.
+
+Ein Wechsel zum modernen Provider bringt oft über 350 € in 24 Monaten. Mehr dazu steht im Leitfaden zum [DSL-Wechselbonus und Prämien](../../posts/2026-08-10-dsl-wechselbonus-sichern/). Auch die Übersicht [Günstigeres Internet durch Tarifvergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) hilft weiter.
 
 <!-- premium-length-2026 -->
 
 ## Rechenbeispiel: Was ein Funkloch wirklich kostet
 
-Ein 100-Mbit/s-Anschluss kostet 34,99 € im Monat. Kommen im Homeoffice nur 12 Mbit/s an, nützt das wenig. Video-Calls brechen ab. Die Cloud-Sicherung dauert dreimal so lang. Der Stream fällt auf 480p. Der Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
+Ein 100-Mbit/s-Anschluss kostet 34,99 € im Monat. Kommen im Homeoffice nur 12 Mbit/s an, nützt das wenig.
+
+Video-Calls brechen ab. Die Cloud-Sicherung dauert dreimal so lang. Der Stream fällt auf 480p. Der Preis pro nutzbarem Megabit steigt von 0,35 € auf fast 3 €.
 
 Drei realistische Wege, Stand 2026:
 
@@ -88,7 +91,9 @@ Drei realistische Wege, Stand 2026:
 | 2er-Mesh (WLAN 6) | 150–250 € | 0 € | Haus, mehrere Wände, Homeoffice |
 | Powerline mit WLAN | 70–130 € | 0 € | Altbau mit dicken Wänden, Stromkreis zusammen |
 
-Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das ist weniger als eine unnötige Router-Miete. Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahlst du doppelt. Einmal für die Hardware. Und einmal für Leistung, die nie ankommt.
+Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das ist weniger als eine unnötige Router-Miete.
+
+Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahlst du doppelt. Einmal für die Hardware. Und einmal für Leistung, die nie ankommt.
 
 ## Typische WLAN-Fehler, die Speed fressen
 
@@ -114,13 +119,19 @@ Ein Mesh-Set für 180 € kostet über 36 Monate gerechnet 5 € im Monat. Das
 
 ## Was Mesh, Repeater und Powerline 2026 konkret unterscheiden
 
-Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den stärksten Knoten weiter. Zoom bricht nicht ab. Repeater schaffen das oft nicht. Dein Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverkabelung. LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
+Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den stärksten Knoten weiter. Zoom bricht nicht ab. Repeater schaffen das oft nicht.
+
+Dein Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverkabelung.
+
+LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
 
 Hast du Glasfaser mit 300 Mbit/s oder mehr? Dann binde den zweiten Knoten per LAN-Kabel an. So bleibt das Funkband den Geräten. Im Homeoffice kommt an, wofür du zahlst.
 
 ## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
 
-Du musst dich nicht mit Funklöchern abfinden. Oft reichen ein guter Router-Standort und getrennte Funkbänder. Schon das verbessert dein **WLAN** spürbar. Für große Wohnungen ist ein Mesh-Set die beste Wahl. Es bringt stabiles Arbeiten und flüssiges Entertainment.
+Du musst dich nicht mit Funklöchern abfinden. Oft reichen ein guter Router-Standort und getrennte Funkbänder.
+
+Schon das verbessert dein **WLAN** spürbar. Für große Wohnungen ist ein Mesh-Set die beste Wahl. Es bringt stabiles Arbeiten und flüssiges Entertainment.
 
 **Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 

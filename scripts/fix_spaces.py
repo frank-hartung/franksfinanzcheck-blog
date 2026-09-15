@@ -29,8 +29,17 @@ WAS ER KANN:
 NICHT ANGE FASTET: Tabellenzeilen (|), Inline-Code (`), Blockquotes (>),
 Überschriften-Markup, Link-URLs, bereits gesetzte NBSP.
 
+PRÜFWEG (15.09.2026): `--selftest` und `--check` sind TROCKENLAUF – der Selbsttest
+läuft vor jedem Zugriff und ein Prüf-Aufruf schreibt darum keinen Artikel mehr.
+Der NACKTE Aufruf heilt weiterhin: so rufen ihn content-engine-v2.yml und
+seo-weekly.yml auf, und ein Default-Wechsel wäre der Wegfall der Regel, nicht ihre
+Härtung. (Anlass: fix_spaces war der einzige von 165 Skripten, der den Site-Bestand
+ohne Heil-Flag veränderte – gefunden vom Audit „Beweisen ist nicht Heilen".)
+
 Aufruf:  python3 scripts/fix_spaces.py            (alle Dateien)
          python3 scripts/fix_spaces.py --dry-run  (nur anzeigen)
+         python3 scripts/fix_spaces.py --selftest (Regelbeweis, schreibt nie)
+         python3 scripts/fix_spaces.py --check    (Bericht, schreibt nie)
 """
 import glob
 import os
@@ -288,6 +297,12 @@ def fix_line(line: str) -> tuple[str, int]:
     # URLs unveraendert wiederherstellen (Platzhalter zurueck)
     # (fix_line arbeitet auf maskierter Zeile – wir maskieren hier erneut,
     # damit die Regeln URLs nie anfassen koennen.)
+    # BILANZ (15.09.2026): gemeldet wird nur, was die Zeile wirklich veraendert.
+    # re.subn zaehlt auch Ersetzungen, die Text zurueckgeben, der schon dastand –
+    # Regel F traf z. B. das von ihr selbst gesetzte NBSP erneut. Ohne diese Bilanz
+    # schrieb der Generator 53 Dateien um, in denen kein Zeichen anders war.
+    if line == orig:
+        changed = 0
     return line, changed
 
 
@@ -327,8 +342,69 @@ def fix_body(body: str) -> tuple[str, int]:
     return "\n".join(out), changed
 
 
+# ------------------------------------------------------------
+# SELBSTTEST (eingefroren): Abweichung -> Exit 2, vor JEDEM Zugriff
+#   (erwartet, eingang) – ein Paar pro Fall. Der Schutz-Teil ist der eigentliche
+#    Wert: eine Regel, die nicht beweisen kann, was sie verschont, heilt auf Dauer kaputt.
+# ------------------------------------------------------------
+SELBSTTEST = [
+    # A) doppelte Leerzeichen
+    ("Zwei  Leerzeichen im Satz", "Zwei Leerzeichen im Satz"),
+    # Hard-Break am Zeilenende ist bewusst gesetztes Markup
+    ("Text mit Hardbreak  ", "Text mit Hardbreak  "),
+    # B) Listen-Marker
+    ("*   Marker mit drei Leerzeichen", "* Marker mit drei Leerzeichen"),
+    ("-    Marker mit vieren", "- Marker mit vieren"),
+    # C) Leerzeichen vor Satzzeichen
+    ("Hallo ,du da", "Hallo, du da"),
+    # D) fehlendes Leerzeichen nach .!?
+    ("Satz.Neuer Anfang", "Satz. Neuer Anfang"),
+    ("Das gilt z. B. ab morgen", "Das gilt z. B. ab morgen"),
+    ("Kosten ca. 3 Euro", "Kosten ca. 3 Euro"),
+    ("Siehe https://a.de/b für Details", "Siehe https://a.de/b für Details"),
+    ("Adresse www.example.de ist gemeint", "Adresse www.example.de ist gemeint"),
+    ("18.000 Menschen lesen mit", "18.000 Menschen lesen mit"),
+    # E) Komma
+    ("Hallo,Welt ohne Leerzeichen", "Hallo, Welt ohne Leerzeichen"),
+    ("Wert 3,5 und 1,2 kg bleiben", "Wert 3,5 und 1,2 kg bleiben"),
+    # H) zerrissene Domains – und die Stadt, die keine Domain ist
+    ("www. google. de ist zerrissen", "www.google.de ist zerrissen"),
+    ("die Stadt. de bleibt stehen", "die Stadt. de bleibt stehen"),
+    # F) geschütztes Leerzeichen zwischen Zahl und Einheit
+    ("bis zu 150 € pro Stück", "bis zu 150\xa0€ pro Stück"),
+    ("rendite von 7 % im Jahr", "rendite von 7\xa0% im Jahr"),
+    # geschützte Kontexte
+    ("| Tabelle | 1.2 3,4 |", "| Tabelle | 1.2 3,4 |"),
+    ("Code `a  b` bleibt", "Code `a  b` bleibt"),
+    ("> Blockquote  mit Doppel", "> Blockquote  mit Doppel"),
+]
+
+
+def selbsttest() -> list:
+    fehler = []
+    for nr, (eingang, erwartet) in enumerate(SELBSTTEST, 1):
+        got, _n = fix_line_safe(eingang)
+        if got != erwartet:
+            fehler.append(f"  Fall {nr}: {eingang!r}\n    erwartet {erwartet!r}\n    bekam    {got!r}")
+        again, n2 = fix_line_safe(got)
+        if n2 or again != got:
+            fehler.append(f"  Fall {nr}: nicht idempotent – zweiter Lauf ändert erneut ({again!r})")
+    return fehler
+
+
 def main() -> int:
-    dry = "--dry-run" in sys.argv
+    beweis = "--selftest" in sys.argv
+    if beweis:
+        errs = selbsttest()
+        if errs:
+            print("🛑 FIX-SPACES-SELBSTTEST FEHLGESCHLAGEN – Wache geschützt.")
+            print("\n".join(errs))
+            return 2
+        print(f"✅ Fix-Spaces-Selbsttest: {len(SELBSTTEST) * 2} Fälle grün "
+              f"(Regel + Idempotenz).")
+        return 0
+    # Pruefen ist kein Heilen: --dry-run und --check schreiben nie.
+    dry = "--dry-run" in sys.argv or "--check" in sys.argv
     files = (sorted(glob.glob(f"{BLOG_DIR}/content/posts/*/index.md"))
              + sorted(glob.glob(f"{BLOG_DIR}/content/pillar/*/index.md")))
     total = 0
@@ -343,7 +419,8 @@ def main() -> int:
             print(f"  {f.split('/')[-2]}: {n} Korrektur(en)")
             if not dry:
                 open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
-    print(f"\n{'DRY-RUN: ' if dry else ''}Leerzeichen-Generator: {total} Korrekturen in {len(files)} Dateien.")
+    modus = "DRY-RUN" if dry else "FIX"
+    print(f"\n[{modus}] Leerzeichen-Generator: {total} Korrekturen in {len(files)} Dateien.")
     if not dry:
         try:
             from audit_log import log_event

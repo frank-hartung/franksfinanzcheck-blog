@@ -108,7 +108,7 @@ Wer zusätzlich zur Preisgarantie seine **[Heizkosten senken](../../posts/2026-0
 
 ## Was eine Gaspreisgarantie 2026 wirklich absichert – und was nicht
 
-Blicken wir ein Stück voraus: Die Energiewende sorgt für strukturelle Veränderungen. Eine Gaspreisgarantie im Jahr 2026 ist deshalb so wichtig, weil die CO2-Preise ab diesem Zeitpunkt nicht mehr fix durch den Staat festgelegt werden, sondern in einem Korridor (zwischen 55 und 65 € pro Tonne) versteigert werden könnten. Das bedeutet zusätzliche Unsicherheit.
+Blicken wir ein Stück voraus: Die Energiewende sorgt für strukturelle Veränderungen. Eine Gaspreisgarantie im Jahr 2026 ist deshalb so wichtig, weil die CO2-Preise ab diesem Zeitpunkt nicht mehr fix durch den Staat festgelegt werden, sondern in einem Korridor (zwischen 55 € und 65 € pro Tonne) versteigert werden könnten. Das bedeutet zusätzliche Unsicherheit.
 
 **Der Schutzmechanismus:** Eine Garantie sichert dir den Einkaufspreis des Versorgers. Wenn Deutschland im Winter 2025/2026 eine extreme Kälteperiode erlebt und die Speicher schneller leer werden als geplant, schießen die Preise am Spotmarkt (kurzfristiger Handel) nach oben. Du merkst davon nichts. Dein Versorger hat das Gas für dich bereits im Voraus (Hedging) eingekauft und durch die Garantie versprochen, diesen Vorteil an dich weiterzugeben.
 

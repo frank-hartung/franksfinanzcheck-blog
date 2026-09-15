@@ -39,7 +39,19 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "DOKTOR-REPORT.md"
 HISTORY = ROOT / "data/doctor_history.jsonl"
 
-DRY = "--dry-run" in sys.argv
+def trocken(argv) -> bool:
+    """Trockenlauf = die Kette schreibt nichts.
+
+    Der Selbsttest zaehlt seit 15.09.2026 dazu: main() fuehrt NACH dem Selbsttest die
+    ganze Kette aus, und ein nacktes `--selftest` reichte bis dahin, um Live-Artikel zu
+    heilen – real passiert, als ein Agent den Selbsttest verlangte: unit_guard und
+    dash_guard schrieben dabei 10 Artikel um (NBSP vor €, Gedankenstriche in
+    Zahlbereichen). Wer einen Beweis verlangt, darf keinen Eingriff bekommen.
+    """
+    return "--dry-run" in argv or "--selftest" in argv
+
+
+DRY = trocken(sys.argv)
 NEW_ONLY = "--new-only" in sys.argv
 
 # ------------------------------------------------------------
@@ -55,10 +67,14 @@ KETTE = [
     ("integrity_guard.py",    [],                          "0-LOCK", "Kern-Integritaet (Signatruehe nach Drift)"),
     # HISTORY-GUARD (09.09.): Append-Only-Beweisketten zuerst –
     # Merge-Artefakte/Marker in *_history.jsonl = Sabotage (Exit 2).
-    ("history_guard.py",      [],                          "0-LOCK", "Append-Only-Historien: marker-frei, JSON-rein, chronologisch"),
+    ("history_guard.py",      [],                          "0-LOCK", "Append-Only-Historien: marker-frei, JSON-rein, chronologisch, verlustfrei (H6)"),
 
     # (skript, basis-args, phase, zweck)
     ("heading_guard.py",      ["--fix"],                "A-Text", "Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu)"),
+    # LISTEN-GUARD (15.09.): vor den uebrigen Text-Wachen – er verschiebt
+    # Zeilengrenzen (geleimte Aufzählungen), und Dash-/Unit-/Stil-Wachen
+    # sollen das Ergebnis sehen, nicht den Fehler.
+    ("listen_guard.py",        ["--fix"],              "A-Text", "Geleimte Listenpunkte L1, Marker-Stil je Ebene L2 (Wortbeweis)"),
     # Casing fuehrt die Textkette: es stellt Marken-/Akronym-Kanon und
     # Tagschreibung her, worauf Dash-/Compound-/Unit-Wachen aufsetzen. Der
     # --plan-Schritt heilt data/pinterest_plan.yaml (Quelle der Pin-Texte)
@@ -101,10 +117,21 @@ SELFTEST = [
 ]
 
 
+def kinder_args(script: str, args: list, dry: bool, new_only: bool) -> list:
+    """Argument-Bau fuer eine Wache – eigen, damit der Selbsttest ihn pruefen kann.
+
+    DRY-RUN bedeutet: nichts schreiben. Frueher wurde nur --dry-runanhaengt, und das
+    zweimal schief: (a) kennen mehrere Wachen (u. a. link_density_guard, casing_guard)
+    kein --dry-run, sondern schreiben bei --fix trotzdem – der Dry-Run hat Live-Artikel
+    umgeschrieben; (b) war workspace_guard vom --dry-run ausgenommen und hat im Dry-Run
+    ungenutzte Deckbilder geloescht (60 Dateien). Deshalb im Dry-Run: --fix abziehen.
+    """
+    eff = [a for a in args if not (dry and a == "--fix")]
+    return [sys.executable, str(ROOT / "scripts" / script)] + eff + (["--new-only"] if new_only else [])
+
+
 def run_guard(script, args, phase, dry):
-    cmd = [sys.executable, str(ROOT / "scripts" / script)] + args + (["--new-only"] if NEW_ONLY else [])
-    if dry:
-        cmd.append("--dry-run") if script != "workspace_guard.py" else None
+    cmd = kinder_args(script, args, dry, NEW_ONLY)
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=600)
     return r.returncode, (r.stdout + r.stderr)[:280]
 
@@ -122,6 +149,23 @@ def selftest() -> list:
             fehler.append(f"  Kette kaputt: scripts/{script} fehlt!")
     if len({k[0] for k in KETTE}) != len(KETTE):
         fehler.append("  Doppelter Eintrag in KETTE")
+    # Dry-Run darf nichts schreiben: keiner Wache darf im Dry-Run --fix erreichen.
+    # (Regel-Lock, weil 2026-09-14 genau dort Live-Artikel umgeschrieben und 60
+    #  Deckbilder geloescht wurden – trotz --dry-run.)
+    for script, args, *_ in KETTE:
+        eff = kinder_args(script, args, True, False)
+        if "--fix" in eff:
+            fehler.append(f"  Dry-Run schreibt: {script} bekommt --fix weitergereicht!")
+    if "--fix" not in kinder_args("dash_guard.py", ["--fix"], False, False):
+        fehler.append("  Dry-Run-Regel kaputt: im scharfen Lauf fehlt --fix")
+    # Der Selbsttest-Lauf selbst ist ein Trockenlauf: er soll beweisen, nicht heilen.
+    if not trocken(["--selftest"]):
+        fehler.append("  Selbsttest-Lauf ist nicht trocken: er wuerde die Kette schreiben")
+    if trocken([]) or not trocken(["--dry-run"]):
+        fehler.append("  Trockenregel unverstaendlich: scharfer oder Dry-Run-Lauf falsch klassifiziert")
+    for script, args, *_ in KETTE:
+        if "--fix" in kinder_args(script, args, trocken(["--selftest"]), False):
+            fehler.append(f"  Selbsttest schreibt: {script} bekommt --fix weitergereicht!")
     return fehler
 
 

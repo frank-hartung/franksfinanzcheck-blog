@@ -25,7 +25,7 @@ pinwand: "Budget & Haushaltskasse: clever planen"
 ---
 Zahlst du deiner Bank noch 7 €, 10 € oder gar 15 € im Monat? Nur dafür, dass dein Gehalt kommt und du Geld überweist? Viele Sparkassen und Volksbanken nehmen so schnell **120 € bis 180 € im Jahr**. Rechnest du das auf zehn Jahre hoch, schenkst du deiner Bank 1.800 € – Geld, das stattdessen in deinem ETF-Sparplan oder im nächsten Familienurlaub arbeiten könnte.
 
-Dabei geht es auch kostenlos: Ein modernes **kostenloses Girokonto** bietet alle wichtigen Bank-Leistungen ohne Gebühr – App, Karte, Echtzeit-Überweisung, oft sogar Zinsen aufs Guthaben. In diesem Guide erfährst du, wie du die Spreu vom Weizen trennst, welche Fallstricke im Kleingedruckten lauern und warum ein Wechsel 2026 so einfach ist wie nie zuvor.
+Dabei geht es auch kostenlos: Ein modernes **kostenloses Girokonto** bietet alle wichtigen Bank-Leistungen ohne Gebühr – App, Karte, Echtzeit-Überweisung, oft sogar Zinsen aufs Guthaben. Du trennst die Spreu vom Weizen, erkennst die Fallstricke im Kleingedruckten – und siehst, warum ein Wechsel 2026 so einfach ist wie nie zuvor.
 
 ---
 
@@ -71,9 +71,9 @@ Schauen wir uns die nackten Zahlen an. Viele unterschätzen die „Kleckerbeträ
 | **Girocard / Debitkarte** | 12,00 € / Jahr | **0,00 €** | 12,00 € |
 | **Echtzeit-Überweisung** | 0,50 € pro Transaktion | **0,00 €** | Zeitgewinn & ca. 10 € |
 | **Bargeldabhebung** | Nur im eigenen Verbund frei | **Weltweit/Deutschlandweit frei** | Maximale Flexibilität |
-| **Dispozins** | ca. 14,5 % p.a. | **ca. 7,5 % - 11 % p.a.** | Günstiger bei Engpässen |
+| **Dispozins** | ca. 14,5 % p.a. | **ca. 7,5 % – 11 % p.a.** | Günstiger bei Engpässen |
 | **Guthabenzinsen** | 0,00 % | **Bis zu 2,5 % oder mehr** | passives Einkommen |
-| **Gesamtkosten/Jahr** | **ca. 160 € - 210 €** | **0,00 € (zzgl. Zinsgewinn!)** | **Mind. 180 € Cash-Vorteil** |
+| **Gesamtkosten/Jahr** | **ca. 160 € – 210 €** | **0,00 € (zzgl. Zinsgewinn!)** | **Mind. 180 € Cash-Vorteil** |
 
 > 💶 **Spar-Tipp von FranksFinanzcheck:** Wer heute noch Kontogebühren zahlt, verbrennt buchstäblich Geld. Ein Wechsel ist die einfachste Form der Gehaltserhöhung. [**Sichere dir hier dein kostenloses Konto**](/go/girokonto/)
 

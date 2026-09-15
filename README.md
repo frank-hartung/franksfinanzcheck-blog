@@ -141,7 +141,7 @@ er im Markdown steht:
 
 | Prüfung | Was bewiesen wird |
 |---|---|
-| **AI1 Struktur** | Jede CTA-Zeile enthält einen vollständigen Markdown-Link (kein Dangling `[**Text**` ohne `](url)`) |
+| **AI1 Struktur** | Jede CTA-Zeile enthält einen vollständigen Markdown-Link (kein Dangling `[**Text**` ohne `](url)`) – der Rest der Zeile muss balanciert sein (Klammer/Zusatz nach dem Link, Vorfall 14.09.2026) |
 | **AI2 Registry** | Jedes `/go/<key>/` ist in `check24_links.yaml` registriert; **keine** rohen Partner-URLs im Content (Tracking-/Kennzeichnungsumgehung) |
 | **AI3 Plausibilität** | Verstümmelter Text direkt an der CTA fällt auf (hunspell) |
 | **AI4 Render-Beweis** | Jeder Markdown-Link steht **schlüsselgenau** als `<a href="/go/<key>/…">` im gebauten HTML – inkl. `rel="sponsored"` (Werbekennzeichnung) und Umami-Klick-Attribution |

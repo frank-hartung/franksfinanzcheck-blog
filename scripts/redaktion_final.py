@@ -111,9 +111,15 @@ def gate_check(f: Path) -> list[str]:
         broken.append(f"G5 Wortzahl {words} (< 1000)")
 
     # G3 Affiliate-Gate
-    if "Schnell-Tipp von FranksFinanzcheck" not in body:
+    # Strich-Toleranz (14.09.2026): Die Engine schreibt „Schnell‑Tipp" und
+    # „Affiliate‑Links" teils mit Nicht-trennendem Bindestrich (U+2011). Die
+    # harten String-Vergleiche übersahen die Bausteine dann und meldeten
+    # „fehlt" – ein falscher Blocker kurz vor der Veröffentlichung. Dieselbe
+    # Klasse hat affiliate_integrity_gate.py über marker_view() bekommen.
+    norm = re.sub(r"[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]", "-", body)
+    if "Schnell-Tipp von FranksFinanzcheck" not in norm:
         broken.append("G3 Schnell-Tipp-Box fehlt")
-    if "Affiliate-Links (Werbung)" not in body:
+    if "Affiliate-Links (Werbung)" not in norm:
         broken.append("G3 Disclaimer fehlt")
     for m in re.finditer(r"/go/([\w-]+)/", body):
         if m.group(1) not in GO_KEYS:

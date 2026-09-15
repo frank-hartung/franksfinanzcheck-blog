@@ -103,12 +103,39 @@ def existing_slugs() -> set:
     return slugs
 
 
-def find_orphan_covers(files: list, slugs: set) -> list:
+# Referenzierte Deckbilder: content/*.md (front matter cover_image, pp.), hugo.toml.
+# Nötig, weil der Name nicht immer einem Artikel-Slug entspricht: pillar-frugalismus.jpg
+# gehört zu content/pillar/frugalismus/, brand-franksfinanzcheck.jpg zu hugo.toml, und
+# Deckbilder von Einzeldatei-Posts (content/posts/<slug>.md) haben keinen Bundle-Ordner.
+# Ohne diesen Nachweis hätte W2 am 14.09. beim ersten durchlaufenden Doktor-Besuch 60
+# Dateien per git rm entfernt – inklusive aller sechs Pillar-Cover und des Brand-Covers.
+COVER_REFERENZ_RX = re.compile(
+    r"images/covers/(?:\d+/)?(?:avif/|webp/)?([\w-]+)\.(?:jpg|webp|avif)")
+
+
+def referenzierte_stems() -> set:
+    stems = set()
+    quellen = list((ROOT / "content").rglob("*.md"))
+    if (ROOT / "hugo.toml").exists():
+        quellen.append(ROOT / "hugo.toml")
+    for p in quellen:
+        try:
+            text = p.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        for m in COVER_REFERENZ_RX.finditer(text):
+            stems.add(m.group(1))
+    return stems
+
+
+def find_orphan_covers(files: list, slugs: set, refs: set | None = None) -> list:
+    if refs is None:
+        refs = referenzierte_stems()
     out = []
     for p in files:
         rel = str(p.relative_to(ROOT))
         m = ORPHAN_PATTERN.match(rel)
-        if m and m.group(1) not in slugs:
+        if m and m.group(1) not in slugs and m.group(1) not in refs:
             out.append(rel)
     return sorted(out)
 
@@ -239,6 +266,12 @@ SELFTEST = [
     ("no-dup",       _dup_billig, (["x/a.md", "x/b.md"],), False),
     ("orphan",       lambda a: bool(ORPHAN_PATTERN.match(a)), ("static/images/covers/denne.jpg",), True),
     ("no-orphan",    lambda a: bool(ORPHAN_PATTERN.match(a)), ("content/posts/x/index.md",), False),
+    # W2-Falschpositiv-Schutz (14.09.): referenziertes Deckbild ist keine Waise,
+    # auch wenn sein Name keinem Artikel-Slug entspricht (pillar-*, brand-*).
+    ("waise-referenz", lambda rel: bool(find_orphan_covers([ROOT / rel], set(), refs={"pillar-frugalismus"})),
+     ("static/images/covers/pillar-frugalismus.jpg",), False),
+    ("waise-echt",     lambda rel: bool(find_orphan_covers([ROOT / rel], set(), refs=set())),
+     ("static/images/covers/alt-last.jpg",), True),
     ("marker-start", lambda t: bool(MARKER_START.search(t)), ("<<<<<<< HEAD\nneu\n=======\nalt\n>>>>>>> x\n",), True),
     ("marker-clean", lambda t: bool(MARKER_START.search(t)), ("## Alles sauber\n\nKein Bruch.\n",), False),
 ]
@@ -294,7 +327,7 @@ def main() -> None:
         mark = "✅" if (not total or (DO_FIX and fixed_hint)) else ("🩹 geheilt" if DO_FIX and fixed_hint else "⚠️")
         L.append(f"| {name} | {len(total) if isinstance(total, list) else total} | {mark} |")
     row("W1 Muell-Dateien", len(junk), bool(fixed_junk))
-    row("W2 Phantom-Cover (kein Artikel)", len(orphans), bool(fixed_orphans))
+    row("W2 Phantom-Cover (kein Artikel, keine Referenz)", len(orphans), bool(fixed_orphans))
     row("W3 Duplikate (identische Dateien)", len(dups), False)
     row("W4 Dickschiffe (>300/500 KB)", len(heavy), False)
     row("W5 History-Rotation (>400 Zeilen)", len(rotated), bool(rotated))

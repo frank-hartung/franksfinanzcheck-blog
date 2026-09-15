@@ -93,7 +93,7 @@ Gehe die Punkte nacheinander durch, um optimal vorbereitet zu sein:
 4. **Thermostate testen:** Drehe alle Regler voll auf und zu, um die Gängigkeit der Ventile sicherzustellen.
 5. **Tarif-Check durchführen:** Vergleiche online, ob dein aktueller Gasvertrag noch zu den Top-Konditionen passt.
 
-[Hier kannst du direkt deinen Gasanbieter vergleichen und wechseln](/go/gas/){rel="sponsored"}.
+Der Tarif-Check ist in wenigen Minuten erledigt – halte dafür deine letzte Jahresabrechnung bereit, die Kündigung übernimmt der neue Anbieter.
 
 ## Was bringt das regelmäßige Heizung prüfen wirklich?
 
@@ -181,7 +181,11 @@ Hier entweicht oft massiv Energie direkt nach draußen in die kalte Umgebung.
 Spezielle Dämmmatten zum Nachrüsten lassen sich einfach in die Kästen einkleben. 
 Solche Maßnahmen unterstützen dich effektiv dabei, deine Gasrechnung senken zu können.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Standby Kosten reduzieren: So entlarvst du Stromfresser](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Standby Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [günstige Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
+
+## Fazit: Gasrechnung senken – Dein Strategieplan im Spätsommer
+
+Über 1.000 € Sparpotenzial liegen im Spätsommer bereit, weil Handwerker Termine haben, Tarife noch ruhig stehen und dein Abschlag noch formbar ist. Arbeite die Fünf-Schritte-Checkliste ab, dann geht dein Heizsystem vorbereitet in den Herbst und nicht erst im Januar durch die Decke.
 
 ## Häufige Fragen
 

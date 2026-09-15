@@ -39,9 +39,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Die unverzichtbaren Grundbausteine einer Gebäudeversicherung
 
-Eine [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
+Eine Wohngebäudeversicherung schützt dein Haus und alles, was fest damit verbunden ist. Dazu zählen etwa Heizung, Bad und fest eingebaute Küchen. Diese Gefahren deckt sie ab:
 
-1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase. 2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.
+1. **Feuer & Brand:** Schutz bei offenem Brand, Blitzeinschlag, Explosion, Implosion oder Verpuffung sowie Schäden durch Löschwasser und Rauchgase.
+2. **Leitungswasser:** Schutz bei bestimmungswidrig austretendem Wasser aus Zu‑ und Ableitungsrohren der Wasserversorgung, Heizungsrohren oder Waschmaschinenschläuchen einschließlich Frost‑ und Bruchschäden an Rohrleitungen.
 3. **Sturm & Hagel:** Deckung für Schäden durch Stürme ab Windstärke 8 (ab 62 km/h) sowie Hagelschlag an Dach, Fassade, Fenstern und Solaranlagen.
 
 ### Kostenfaktor Selbstbeteiligung
@@ -62,7 +63,8 @@ Der optionale Zusatz **Elementarschutz** deckt dann diese Schäden ab:
 
 ### Zahlen, die überzeugen
 
-* Laut GDV lag die durchschnittliche Schadenhöhe für Elementarschäden 2025 bei **12.300 €** pro Vorfall. * In den letzten zehn Jahren haben 27 % aller Wohngebäude in den ZÜRS‑Zonen 1‑2 mindestens einen Starkregen‑Schaden erlitten.
+* Laut GDV lag die durchschnittliche Schadenhöhe für Elementarschäden 2025 bei **12.300 €** pro Vorfall.
+* In den letzten zehn Jahren haben 27 % aller Wohngebäude in den ZÜRS‑Zonen 1‑2 mindestens einen Starkregen‑Schaden erlitten.
 * Der Aufpreis für den Elementarschutz liegt zwischen **80 € und 300 €** jährlich – ein Bruchteil der durchschnittlichen Schadenssumme.
 
 ## Die 5 wichtigsten Klauseln im Kleingedruckten
@@ -121,9 +123,12 @@ Bist du unterversichert, kürzt der Versicherer im Schaden mit. Beispiel: Ein Ha
 
 ## Vergleich in sechs Schritten
 
-1. **Wertermittlung** – Wohnfläche, Wiederaufbauwert und Sonderausstattungen exakt erfassen. 2. **Elementar‑Ja/Nein** – Lage, Hanglage, Kanalisation und die letzten 10 Jahre Starkregen‑Statistik prüfen.
-3. **Klauseln** – Grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik, Wärmepumpe und mögliche Unterversicherungs‑Verzicht‑Klausel. 4. **Selbstbeteiligung** – Zwei Angebote mit 0 € und 500 € SB vergleichen; rechne die Gesamtkosten über 10 Jahre.
-5. **Vorschäden ehrlich angeben** – sonst Gefahr der Anfechtung im Schadensfall. 6. **Altvertrag erst kündigen**, wenn die neue Police mit Beginn‑Datum vorliegt. Bei Immobilienkredit oft Bank als Gläubiger eintragen.
+1. **Wertermittlung** – Wohnfläche, Wiederaufbauwert und Sonderausstattungen exakt erfassen.
+2. **Elementar‑Ja/Nein** – Lage, Hanglage, Kanalisation und die letzten 10 Jahre Starkregen‑Statistik prüfen.
+3. **Klauseln** – Grobe Fahrlässigkeit, Ableitungsrohre, Photovoltaik, Wärmepumpe und mögliche Unterversicherungs‑Verzicht‑Klausel.
+4. **Selbstbeteiligung** – Zwei Angebote mit 0 € und 500 € SB vergleichen; rechne die Gesamtkosten über 10 Jahre.
+5. **Vorschäden ehrlich angeben** – sonst Gefahr der Anfechtung im Schadensfall.
+6. **Altvertrag erst kündigen**, wenn die neue Police mit Beginn‑Datum vorliegt. Bei Immobilienkredit oft Bank als Gläubiger eintragen.
 
 Ein Gebäudevertrag ist langweilig, bis er der einzige Grund ist, warum du nach einem Sturm nicht den Kredit nachfinanzieren musst.
 
@@ -151,12 +156,12 @@ In ZÜRS‑Stufe 3 (z. B. teile von Brandenburg, Sachsen) ist der Elementars
 | 7 | Selbstbeteiligung sinnvoll gewählt? |
 | 8 | Unterversicherungs‑Verzicht (Neuwert‑Garantie) vorhanden? |
 
-[**Download PDF**](/downloads/wohngebaeudeversicherung-checkliste. pdf)
-
 ## Vorteile von Online‑Vergleichsplattformen
 
-* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote. * **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
-* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht. * **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
+* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote.
+* **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
+* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht.
+* **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
 
 Achte jedoch darauf, dass die Plattform **nicht** nur den Preis, sondern auch die Vertragsbedingungen filtert. Ein reiner „Billig‑Tarif“ ohne Elementarschutz kann im Ernstfall teurer werden.
 

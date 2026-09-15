@@ -3,8 +3,9 @@ title: "Heizungswartung: So bereitest du dein Heim effizient vor"
 description: Eine professionelle Heizungswartung im Spätsommer spart bares Geld. Erfahre, wie du dein Heim winterfest machst und gaskosten senken kannst.
 date: 2026-09-11T20:00:05Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-11T20:00:17Z
-cadence_grund: "publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig; Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert…"
+cadence_grund: "Hold aufgehoben (PR #289): check_titles-R5-Fehlalarm behoben (R5_END_WHITELIST): 0 Titel-Verstoesse im Korpus, 0 Stale-Cover – Re-Queue für den vollen Gate-Durchlauf"
 tags: ["Heizungswartung", "Winterfest machen Wohnung", "Spätsommer Heizung", "Gaskosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -33,8 +34,6 @@ Drei Dinge zählen für eine effiziente Saison: der technische Check-up durch Fa
 * **Zeitpunkt:** die ideale Phase für die Vorbereitung liegt zwischen August und September, um Engpässe bei Handwerkern zu vermeiden.
 * **Einsparpotenzial:** durch technische Optimierungen und Verhaltensanpassungen lassen sich die [Heizkosten](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) um ca. 10–15 % reduzieren.
 * **Wartungspflicht:** Mieter und Eigentümer sollten einmal jährlich prüfen, ob das System effizient arbeitet, um Verschleiß vorzubeugen.
-
-
 
 ---
 
@@ -88,10 +87,7 @@ So gehst du vor:
 
 Sollte der Druck nach dem Entlüften zu niedrig sein, muss Wasser nachgefüllt werden. Dies ist ein kritischer Punkt, da ein zu geringer Anlagendruck die Umwälzpumpe beschädigen kann. In einem Mehrfamilienhaus solltest du hierzu die Hausverwaltung oder den Hausmeister kontaktieren, bevor du selbst tätig wirst.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
-
 
 ## Typische Fehler bei der Vorbereitung auf den Winter
 
@@ -126,9 +122,9 @@ In vielen Kellern liegen die Heizungsrohre noch blank. Das ist reine Energievers
 
 Prüfe zudem das Alter deiner Umwälzpumpe. Alte Modelle laufen oft mit einer konstanten, hohen Wattzahl, egal ob Wärme benötigt wird oder nicht. Moderne Hocheffizienzpumpen passen ihre Leistung dem tatsächlichen Bedarf an. Der Austausch kostet zwar Geld, spart aber über die Jahre massiv Stromkosten ein. In Kombination mit einem hydraulischen Abgleich ist dies das "Dreamteam" der Heizungsoptimierung.
 
-## Fazit: Heizungswartung – so startest du effizient in die Saison
+## Fazit: Heizungswartung – So bereitest du dein Heim effizient vor
 
-Sich gezielt mit dem Thema **Heizungswartung: So bereitest du dein Heim effizient vor** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Der Hebel bei **Heizungswartung: So bereitest du dein Heim effizient vor** sitzt nicht im Verzicht, sondern im Nachrechnen. Gewartet wird zwischen August und September – dann sinkt der Verbrauch um 10 bis 15 %, und wer mit 12 Cent pro kWh rechnet, sieht den Unterschied bei rund 1.440 € Jahreskosten sofort. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

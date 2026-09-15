@@ -422,6 +422,10 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Listenpunkte, die in einer Zeile stehen (15.09.2026, als 24. Wache verdrahtet) (Leser sehen Sterne im Fließtext) | `listen_guard.py --fix` L1, mit Wortbeweis und Nachkontrolle – seit 15.09. in der Kette |
+| Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score- UND Zeichenlänge-Holds am SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
+| Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026; Schiebefenster der Rotation ist erlaubt) |
+| Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
 | LanguageTool-API down | grammar_check: Report-Banner „API nicht erreichbar“ + Exit 2 (kein falsch-grün) |
 | Titel geändert → Cover alt | check_covers Manifest-Abgleich (--fix) |
@@ -442,6 +446,10 @@ jeder Schreibaktion.
 | Website down | uptime-check → Issue (auto-schließend!) |
 | Workflow-Fehler | alert-on-failure → Issue (Abdeckung: alle Kern-Workflows) |
 | Text-Regelverstoß | die sechs Guards oben (korrigieren selbst) |
+| Doctor-Dry-Run schreibt trotzdem (Live-Artikel entlinkt, 63 Deckbilder zum Loeschen vorgemerkt) | `blog_doctor.kinder_args()`: im `--dry-run` wird `--fix` abgezogen, der Doktor-Selbsttest haelt die Regel als Fall fest (14.09.) |
+| Leerzeichen um Listen-Marker, um `€`/`%`, zerrissene Domains | `fix_spaces.py` (Regeln A–H; seit 15.09.2026 mit `--selftest` – 40 Fälle, `--selftest`/`--check` sind Trockenlauf, die Bilanz meldet nur echte Änderungen) |
+| Prüflauf heilt nebenbei (ein Selbsttest schreibt den Bestand um) | `governance_contract.py` C15 Beweis-Trockenlauf – Nacktheiler müssen `--selftest` trocken führen, `--fix` darf im Selbsttest nicht an Kinder weitergereicht werden |
+| Pillar-/Brand-Deckbild als „Phantom“ fehlklassifiziert und von W2 zum `git rm` vorgemerkt | `workspace_guard.py` W2 prueft vor jeder Loeschung `referenzierte_stems()` (content/*.md + hugo.toml) |
 | Marken-Text verändert | brand_guard (Lock-Reset) |
 | Actions veraltet | Dependabot + Auto-Merge (Patch/Minor auto) |
 
@@ -465,6 +473,149 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **15.09.2026:** Rückweg in die Kadenz, Fazit-Schmiede, Linkdichte, zwei Gate-Korrekturen.
+  (1) Die durch die blockierte Kette verursachten Qualitäts-Abstufungen wurden nicht per
+  Hand zurückgedreht, sondern über `park_state.rearm()` mit Begründung und `cadence_wait`
+  in die Kadenz zurückgeholt (9 × `queue`, 2 × `hold`; `draft` bleibt, solange die Ursache
+  steht). (2) `fazit_schmiede.py` lieferte für neun Artikel denselben Fremd-Absatz
+  („Kfz‑Versicherung …“) – Ursache: `route_for()` schnüffelte in den ersten 1200 Zeichen
+  des Einleitungsfließtexts statt im Titel. Neu: Titelfenster vor dem Intro-Sniff, plus
+  Selbsttest-Fall „Gateway schlägt Intro“. Die neun Absätze sind von Hand nachgeschrieben
+  (Zahlen aus dem Artikel), die generatorseitigen Standardsätze sind ent-formularisiert.
+  (3) Frugalismus-Cluster umbenannt (3 live + 1 Entwurf, Slugs unverändert), `pin_title`
+  entwirrt, fehlende `kurzantwort` ergänzt; R5-Phantome in `check_titles.py` bereinigt.
+  (4) Linkdichte erst redaktionell gehoben, dann dedupliziert: `internal_linker.py --apply`
+  (12 Links, Anker von Hand geprüft) + 4 Inline-Links + 5 Weiterlesen-Zeilen mit lebenden
+  Zielen, danach `link_density_guard --fix` (38 Ziel-Duplikate). Korridor 76 % → 100 %,
+  unterversorgt 11 → 0, überladen 1 → 0. Nebenbefunde repariert: Markdown-Links in
+  `tags`/`keywords` eines WLAN-Artikels, an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen.
+  (5) **Rücknahme eines gemeldeten Befunds.** Ich hatte „`spam_guard` und `stil_guard`
+  schreiben ihre Historie zu, statt anzuhängen“ diagnostiziert und als Fund gemeldet.
+  Das war falsch – ich hatte einen Diff-Hunk-Header gelesen statt die Dateien selbst. Beide Skripte hängen korrekt an (`spam_guard.py:189`,
+  `stil_guard.py:287`). Der Schwund ist die **dokumentierte W5-Rotation** in
+  `workspace_guard.py`: jede `data/*_history.jsonl` über `HIST_MAX_LINES = 400` wird auf
+  die neuesten 400 Zeilen gestutzt (Zeile 1894 → 400 bei `spam_history.jsonl`). Wer einen
+  Befund nicht an der Quelle prüft, meldet Geister.
+  (6) Neu am Regelwerk: `fazit_schmiede.py --altlasten` meldet und heilt den Altbaustil der
+  ersten Generation – auf Satzebene, damit dazwischenstehender Redaktionstext überlebt, und
+  gegen die Titel-Verstümmelung `^[0-9-\s.]+` (die fraß „50-30-20-Regel“ zu „Regel“).
+  Bewusst opt-in: Maschinentext in Artikeln darf kein Selbstläufer der Kette werden. Für
+  die 11 betroffenen Beiträge gilt der Modus als Struktur-Untergrenze; der Mittelsatz ist
+  je Artikel redaktionell nach dessen eigenen Zahlen gefasst (200–2.500 €, 5–15 %,
+  10–15 % bei 12 Cent/kWh, Dispo 8–14 % gegen Tagesgeld, 80–150 € Standby, 30–80 €
+  Repeater gegen 150–400 € Mesh, 6–8 Wochen und 10–15 % bei Flugtickets).
+  (7) Schema-Gate: S3 akzeptiert `wordCount` jetzt auch in Fließkomma-Schreibweise
+  („2000.0“), weil Hugo gecachte Seitenwerte so liefert – die Bildmaß-Regel derselben
+  Wache tat das längst, und eine Wache, die strenger ist als ihr eigener Nachbarbefund,
+  meldet Phantome auf Live-Seiten. Text statt Zahl, Null, Negative und gebrochene Werte
+  melden weiterhin (Selbsttest 9b/9c/9d). Auslöser: ein Live-Artikel, dessen Wortzahl nach
+  der Fazit-Kur genau 2000 betrug.
+  (8) `history_guard.py` bekommt **H6 VERLUSTPRÜFUNG (rotation-bewusst)**: Vergleich
+  Arbeitstree gegen den letzten Commit-Stand (HEAD, sonst Index). Anhängen erlaubt;
+  Schrumpfen nur, wenn es exakt die W5-Rotation ist (länger als die Kapazität, erhalten
+  bleibt der schwanzidentische Teil) – dann gilt es als erlaubt und wird als Rotation
+  ausgewiesen. Umschreiben im Mittelteil oder Verlust unter die Kapazität: Exit 2. Die
+  Kapazität liest die Wache aus `workspace_guard.py` aus und meldet Auseinanderlaufen der
+  beiden Werte. Ohne Git-Baseline (flacher Klon, fehlendes Blob) schweigt H6 – eine Wache,
+  die im Zweifel rot meldet, macht ihren Bericht unbrauchbar. Bewiesen an drei
+  Selbsttest-Fällen plus Probe am Live-Korpus: mittig umgeschrieben → Exit 2, auf 2
+  Zeilen gestutzt → Exit 2, normal angehängt → grün.
+  (9) Die zwei am längsten liegenden `hold`-Artikel (`finanzielle-freiheit`, `flugtickets`) standen
+  seit 07.09. wegen „publish-gate: Zeichenlänge nicht bestanden“ – eine Ursache, die seit ihrer
+  Setzung niemand mehr nachsieht: `check_length.py` überspringt Entwürfe (`draft: true`
+  → continue) und `publish_gate` prüft nur Kandidaten des heutigen Datums. Beide messen
+  inzwischen 14.107 bzw. 17.276 Zeichen. `requeue_quality_holds.py` kennt jetzt diese
+  zweite Klasse und misst sie am Length-SSOT nach (Selbsttest: 2000 Wörter → zu kurz,
+  2600 → reif, 30000 → zu lang); reif heißt: `rearm`, also Kadenz plus voller
+  Gate-Durchlauf, niemals Direkt-Live. Vorher redaktionell nachgearbeitet: geleimte
+  Aufzählungen ausgeleimt (7), 21 Zeilen gerade Anführungszeichen auf deutsche gesetzt,
+  9 klebende Überschriften gelöst, Ich/Du-Verlust in einer Anekdote berichtigt, ein
+  irreführender Gas-Link in einem Flug-Artikel entfernt, ein doppeltes Fehler-Kapitel
+  umbenannt, zwei Kurzantworten auf die belegten Zahlen des Textes zurückgeholt
+  („mindestens 20 %“ und „10–15 %“ standen so nie im Körper), Fazits auf Hausstruktur,
+  `social_posted: true` auf zwei nie geposteten Entwürfen zurückgesetzt (der Schalter
+  wäre nach dem Publish als „bereits gepostet“ gelesen worden). Im übrigen Bestand:
+  nach dem Einmal-Suchlauf 9 Artikel / 26 Punkte – die Wache misst strenger und
+  vollständiger (Task-Listen `- [ ] …` mitzählend, Mathe-Zeilen verwerfend):
+  **11 Artikel, 40 Zeilen, 41 Punkte, 8 live**. Bewusst keine Flächenheilkur in diesem
+  Schritt – die Zeilen stehen auf Live-Seiten und brauchen eine eigene, selbstgetestete
+  Wache statt eines Einmal-Skripts (Punkt 10).
+  (10) Neu am Regelwerk: `listen_guard.py` – **L1 GELEIMTER PUNKT** (heilbar) und
+  **L2 MARKER-STIL JE EBENE** (heilbar), als 24. Wache in der Doktor-Kette (Phase A-Text,
+  `--fix` nur im scharfen Lauf). L1 schneidet eine Listenzeile an jedem Marker ab, der
+  nach einem Satzzeichen folgt – der Schnitt liegt VOR dem Marker, darum kann der Splitter
+  kein Zeichen erfinden und keinen Marker verlieren (Genau das war der Fehler, den der
+  Hold-Lauf vom 15.09. zweimal baute). Mathe (`- 40 Watt * 24 Stunden`) und Preisstufen
+  (`ab 1. - 5 %`) bleiben Ruhe, weil nach dem Marker kein listenüblicher Anfang steht.
+  L2 lernte aus dem ersten Entwurf: `* außen / - darin` ist korrektes Markdown, kein
+  Befund – verglichen wird nur innerhalb derselben Einrückungsstufe, Ziel ist die Mehrheit
+  der Stufe, bei Gleichstand der erste Eintrag (Autorenwille; der Bestand führt beide
+  Kugeln gleichwertig: 320 `-` gegen 240 `*`). Jede Heilung muss den **Wortbeweis**
+  bestehen (Wortfolge unverändert, bei L2 höchstens die Marker), sonst wird gemeldet und
+  nichts geschrieben; nach dem Schreiben prüft die Wache erneut. 40 Befunde in 11 Artikeln
+  geheilt, zweiter Lauf: 0. Nebenbei ein verwaistes `**` ohne Öffner auf einer Live-Seite
+  entfernt (renderte literal – dasselbe Muster wie die einzelne Klammer im CTA-Kasten).
+  (11) H6 musste nachgezogen werden, und zwar an der Regel, nicht an der Historie: Der
+  erste Kettenlauf meldete `stil_history.jsonl` als „umgeschrieben“. Tatsächlich stand die
+  Datei bereits auf der Kapazität, Rotation und Anhängen verschieben dort nur das Fenster
+  (400 → 400: vorne fällt eine Zeile, hinten kommt eine). H6 vergleicht deshalb jetzt die
+  längste Überlappung von Alt- und Neu-Bestand und lässt das Schiebefenster zu, wenn das
+  Ergebnis die Kapazität füllt und vor der Rotation die Kapazität überschritten war.
+  Eingefrorener Fall `schiebefenster` im Selbsttest (14 Fälle), Gegenproben am echten
+  Korpus: 400 → 400 mit Anhang → 🟢, 400 → 398 ohne Anhang → 🛑 Exit 2.
+  (12) Falle im Doktor selbst gefunden, beim Belegholen für (10): `blog_doctor.py --selftest`
+  war kein reiner Beweis – `main()` führt nach dem Selbsttest die ganze Kette aus, und die
+  Trockenregel kannte nur `--dry-run`. Der Selbsttest-Lauf lief also als VISIT und hat dabei
+  10 Live-Artikel umgeschrieben (`unit_guard`: NBSP vor `€`, `dash_guard`: Gedankenstriche in
+  Zahlbereichen – inhaltlich korrekte Hausregeln, aber zur unrechten Zeit und von einer
+  Abfrage, die nur nach einem Beweis fragte). Neu: `trocken(argv)` gilt für `--dry-run`
+  UND `--selftest`; der Bericht weist den Modus aus, und drei Selbsttest-Fälle verbieten
+  jetzt, dass einem Wache im Selbsttest-Lauf `--fix` weitergereicht wird. Die 10 Zeilen
+  bleiben im Bestand – sie sind idempotent und wären beim nächsten scharfen Lauf dieselben.
+  (13) Nach (12) die Frage nach der Familie: Wo heilt im Haus ein Aufruf, der nur zur
+  Prüfung bestellt war? Grundwahrheit empirisch statt statisch geholt – alle 165 Skripte
+  von `scripts/` nackt und mit `--selftest` durch eine Arbeitskopie, als Änderung zählt nur
+  `content/`, `layouts/`, `assets/`, `static/`: genau EIN Treffer, `fix_spaces.py`
+  (4 Artikel, Marker-Doppelleerzeichen `*  ` → `* `). Ein statisches Zählen der Heil-Schalter
+  (72 als riskant gemeldet) war wertlos, weil im Haus --fix, --apply, --live und ein
+  handgeschriebenes „--fix in argv“ nebeneinander stehen; die Laufzeit-Kopie ist der Beweis,
+  die Zählung war Rauschen. Der Default wird NICHT umgedreht – content-engine-v2.yml und
+  seo-weekly.yml rufen den nackten Aufruf als Heiler auf, und ein Prüf-Default wäre der
+  Wegfall der Regel, nicht ihre Härtung (Workflows sind für Agenten ohnehin tabu).
+  Stattdessen: `fix_spaces.py` hat jetzt einen echten `--selftest` – 20 Paare, jede Regel
+  A–H plus der Beweis, was sie verschont (Hard-Break am Zeilenende, z. B., 18.000, 3,5,
+  www.example.de, „die Stadt. de“, Tabellen-, Inline-Code- und Blockquote-Zeilen), je ein
+  Idempotenz-Fall darunter, und `--selftest` gilt wie `--check` als Trockenlauf. Der
+  Selbsttest fand im Anlauf sofort einen echten Defekt: re.subn zählt auch Ersetzungen, die
+  den Text so lassen, wie er steht – Regel F traf das von ihr selbst gesetzte NBSP erneut.
+  Gemeldet waren 869 Korrekturen in 57 Dateien, geschrieben wurden 53 Umschreibungen ohne
+  ein einziges anderes Zeichen. Bilanz jetzt: gemeldet wird nur, was eine Zeile wirklich
+  verändert – ehrlich sind es 8 Korrekturen in 4 Artikeln, Wortbeweis 6878 → 6878 über
+  alle vier. Dauerhaft im Vertrag: **C15 Beweis-Trockenlauf** mit drei Klauseln
+  (registrierte Nacktheiler brauchen einen trockenen `--selftest`, jeder Workflow-
+  Nacktaufruf eines `fix_*`-Skripts muss einen Beweispfad ausweisen, ein Kettenleiter darf
+  `--fix` im eigenen Selbsttest nicht an seine Kinder weitergeben), vier Kunstbefunden im
+  Vertrags-Selbsttest – und beide Altstände laufen ihm nachweislich auf:
+  `HEAD:scripts/fix_spaces.py` und `HEAD~1:scripts/blog_doctor.py` werden gefunden, der
+  aktuelle Stand bleibt still.
+  Lehre: Ein Werkzeug, das „nur prüfen" verspricht, muss das auch gegen seine eigene
+  Aufrufreihenfolge verteidigen.
+- **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
+  repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
+  einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
+  Visite seit 12.09. an Wache 1 und 22 von 23 Heilungen liefen nie. Nach Sichtung
+  der drei offenen Abweichungen (Encoding-Fix, Design-Rollout – beide laengst live)
+  und neuer Signatur (42 Dateien) lief die Kette erstmals durch. Dabei zeigte sich:
+  (1) `blog_doctor.py --dry-run` war nicht schreibfrei. Es haengte nur `--dry-run`
+  an, Wachen ohne dieses Flag (`link_density_guard`, `casing_guard`) schrieben
+  trotzdem, und `workspace_guard` war vom Flag ausdruecklich ausgenommen – ein
+  Dry-Run entlinkte Live-Artikel und merkte 63 Deckbilder zum `git rm` vor. Neu:
+  `kinder_args()` zieht im Dry-Run `--fix` ab; der Doktor-Selbsttest prueft das
+  fuer jede Kette-Wache. (2) `workspace_guard.py` W2 glich Cover-Namen nur mit
+  Artikel-Ordner-Namen ab: `pillar-*.jpg`, `brand-franksfinanzcheck.jpg` und Cover
+  von Einzeldatei-Posts galten als „Phantom“, obwohl content/*.md und hugo.toml sie
+  referenzieren. Neu: `referenzierte_stems()` vor jeder Loeschung, plus
+  Selbsttest-Faelle „waise-referenz“. Fund auf heutigem Stand: 63 → 0.
 - **09.09.2026:** Casing-Bund auf C1–C17 + T1 erweitert: gemeinsamer
   Marken-/Tag-Kanon, Satzanfangs- und Einheiten-Schutz, sichere
   HeadGlue-Trennung, C16-Fettdruck- und C17-Komposita-Entscheider.

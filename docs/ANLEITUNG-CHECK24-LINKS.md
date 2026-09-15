@@ -78,8 +78,9 @@ Die Integritäts-Wache läuft zusätzlich **täglich automatisch**
 
 | Prüfung | Beweis |
 |---|---|
-| AI1 | vollständiger Markdown-Link in jeder CTA-Zeile (kein Dangling) |
+| AI1 | vollständiger Markdown-Link in jeder CTA-Zeile (kein Dangling) – und **kein unbalancierter Rest dahinter** (seit 14.09.2026: ein überzähliges `)` landete sichtbar im CTA-Kasten, obwohl der Link selbst korrekt war) |
 | AI2 | nur registrierte `/go/<key>/`, keine rohen Partner-URLs im Content |
+| Marker-Fund | CTA-Marker werden strich-normalisiert (`Schnell‑Tipp` mit U+2011 zählt) und in GROSS/klein mit Doppelpunkt erkannt – 82 statt 71 CTA-Zeilen im Bestand stehen damit unter Wache |
 | AI3 | kein verstümmelter Text an der CTA |
 | AI4 | jeder Link steht **schlüsselgenau** im gebauten HTML – mit `rel="sponsored"` und Klick-Attribution |
 | AI5 | jede `/go/<key>/`-Seite leitet `noindex` auf exakt die registrierte Partner-URL weiter |

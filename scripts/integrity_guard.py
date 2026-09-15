@@ -42,9 +42,20 @@ HISTORY = ROOT / "data" / "integrity_history.jsonl"
 
 SET_CURRENT = "--set-current" in sys.argv
 ADD_PATH = None
-for _a in sys.argv:
+for _i, _a in enumerate(sys.argv):
     if _a.startswith("--add="):
         ADD_PATH = _a.split("=", 1)[1]
+    elif _a == "--add":
+        # Die Aufrufzeile der Doku lautet „--add <pfad>" (Leerzeichen), der
+        # Parser kannte nur „--add=<pfad>". Wer der Doku folgte, bekam einen
+        # stillen No-Return mit Exit 0 – bei einem Signatur-Werkzeug der
+        # gefährliche Fall: jemand glaubt, signiert zu haben. Jetzt beide
+        # Formen, und ein fehlender Pfad endet laut statt grün.
+        nxt = sys.argv[_i + 1] if _i + 1 < len(sys.argv) else ""
+        if not nxt or nxt.startswith("-"):
+            print("🛑 --add erwartet einen Pfad, z. B. "
+                  "--add=assets/css/extended/custom.css"); sys.exit(2)
+        ADD_PATH = nxt
 
 # KRITISCH = zentrale Buende: veraendernde?! nur nach Signierung
 KRITISCH = {

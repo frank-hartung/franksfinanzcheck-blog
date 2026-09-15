@@ -26,6 +26,7 @@ pinwand: "Budget & Haushaltskasse: clever planen"
 
 
 
+
 Nach Jahren mit Nullzinsen ist das **Tagesgeld** 2026 wieder attraktiv. Das Girokonto bringt 0,0 %, das Sparbuch oft unter 0,5 %. Viele Banken zahlen dagegen **1,8 bis 3,2 %** – bei täglicher Verfügbarkeit und ohne Kursrisiko. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** ist Tagesgeld darum ideal. Wo es die hohen Zinsen gibt, wie die Einlagensicherung funktioniert und welche Fallen lauern, zeige ich dir jetzt.
 
 ---
@@ -50,7 +51,7 @@ Die wichtigsten Merkmale im Überblick:
 Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark angehoben. Auch wenn sie 2025 und 2026 wieder senkt: Die Tagesgeld-Zinsen liegen 2026 noch deutlich über dem Null-Niveau. Drei Gründe sprechen für Tagesgeld:
 
 1. **Kaufkraft teilweise erhalten:** Bei 2,0 bis 3,0 % Zinsen und einer Inflation von rund 2,0 bis 2,5 % (Juli 2026) bleibt unter dem Strich zumindest ein leichter Realertrag.
-2. **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)-Reserve:** Wer drei bis sechs Monatsausgaben auf Tagesgeld parkt, ist vor teuren Dispokrediten (7 bis 14 % effektiv!) bei plötzlichen Ausgaben geschützt.
+2. **Notgroschen-Reserve:** Wer drei bis sechs Monatsausgaben auf Tagesgeld parkt, ist vor teuren Dispokrediten (7 bis 14 % effektiv!) bei plötzlichen Ausgaben geschützt.
 3. **Psychologischer Puffer:** Geld, das auf einem separaten Tagesgeldkonto liegt, ist in der Vorstellung "weg vom Alltag" und wird weniger spontan ausgegeben.
 
 ## Tagesgeld vs. Festgeld vs. Girokonto
@@ -67,7 +68,7 @@ Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark a
 **Faustregel für die Aufteilung deiner Sparguthaben:**
 
 - **Girokonto:** 1–2 Monatsausgaben als Puffer
-- **Tagesgeld:** 3–6 Monatsausgaben als [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
+- **Tagesgeld:** 3–6 Monatsausgaben als Notgroschen
 - **Festgeld:** Geld, das du in 1–5 Jahren sicher brauchst (z. B. Urlaub, Autokauf, Anzahlung)
 - **ETF-Sparplan / Aktien-ETF:** Vermögensaufbau mit 10+ Jahren Anlagehorizont
 
@@ -132,7 +133,7 @@ Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinsen 
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Angenommen, du hast einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von 15.000 €**:
+Angenommen, du hast einen **Notgroschen von 15.000 €**:
 
 | Anlageform | Zinssatz | Zinsertrag pro Jahr |
 |:---|---:|---:|

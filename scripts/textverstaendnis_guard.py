@@ -296,7 +296,9 @@ def check_nested_links(rel: str, body: str) -> list:
 # In deutscher Prosa kommt das praktisch nie vor (Ausnahme: Ortsnamen wie
 # „Aachen") — darum harter Fehler, kaum False-Positive-Risiko.
 R9_KLEBE_RX = re.compile(r"\b([A-ZÄÖÜa-zäöü])([A-ZÄÖÜa-zäöü])([a-zäöü][\wÄÖÜäöüß]*)")
-R9_ALLOW = {"Aachen", "Aachener", "Ggf", "ggf"}  # Abk. „gegebenenfalls“ ist legitim
+R9_ALLOW = {"Aachen", "Aachener", "Ggf", "ggf", "Zzgl", "zzgl"}
+#  Abk. „gegebenenfalls“ und „zzgl.“ (zusätzlich) sind legitimes Deutsch –
+#  der Klebe-Detektor sieht in „zz“ nur vermeintlich ein doppeltes Wortanfangs-Muster.
 
 
 def check_klebewoerter(rel: str, body: str) -> list:

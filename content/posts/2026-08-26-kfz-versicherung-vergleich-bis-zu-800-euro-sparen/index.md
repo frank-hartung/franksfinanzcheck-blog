@@ -24,10 +24,9 @@ pin_description: "*Werbung | Stichtag 30.11. nicht verpassen: Bis dahin kannst d
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
-Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei. 10, 15 oder gar 25 Prozent. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
+Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei. 10, 15 oder gar 25 %. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
 
 **30. November, 23:59 Uhr:** Bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
-
 
 ---
 
@@ -107,7 +106,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. Kennen und nutzen
+### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
@@ -167,7 +166,6 @@ Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“. Der ist i
 Die SF-Klasse ist der größte Hebel. Nach der Regionalklasse. Falsch übertragen heißt falscher Preis.
 
 Nimm die Zweitwagenregelung über den Erstvertrag. Setze den Fahrerkreis eng. Gib Kilometer mit Puffer an. Nimm die Werkstattbindung nur, wenn das Netz passt. Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. Im Kalender. Vergleiche in KW 42, nicht in KW 48.
-
 
 ## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
 

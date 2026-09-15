@@ -108,11 +108,13 @@ Ein Einfamilienhaus verbraucht ca. 20.000 kWh Gas im Jahr.
 * **Alternativer Tarif:** Preis pro kWh ca. 10 Cent – Jährliche Kosten: ca. 2.000 €
 * **Potenzielle Ersparnis:** ca. 800 € pro Jahr
 
-Diese 800 € sind kein theoretischer Wert. Das ist echtes Geld für deinen nächsten Urlaub oder deine Altersvorsorge. Der Wechsel des Anbieters dauert online weniger als zehn Minuten. Vergleiche jetzt direkt deine Optionen: [Gasanbieter vergleichen](/go/gas/).
+Diese 800 € sind kein theoretischer Wert. Das ist echtes Geld für deinen nächsten Urlaub oder deine Altersvorsorge. Der Wechsel des Anbieters dauert online weniger als zehn Minuten.
+
+> 💶 **Spar-Tipp zwischendurch:** Deine letzte Jahresabrechnung reicht als Datengrundlage – mehr brauchst du für den Vergleich nicht: [**Vergleichen & sparen**](/go/gas/)
 
 ## Die Checkliste für die Heizperiode
 
-Damit du optimal vorbereitet bist, habe ich diese Liste erstellt. Gehe die Punkte im September schrittweise durch:**
+Damit du optimal vorbereitet bist, habe ich diese Liste erstellt. Gehe die Punkte im September schrittweise durch.
 
 | Maßnahme | Aufwand | Potenzial |
 | :--- | :--- | :--- |
@@ -141,8 +143,12 @@ Kalkuliere aber immer, wie teuer der Tarif im zweiten Jahr ohne Bonus wird. Oft 
 
 
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Standby Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [günstige Gastarife 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 **Lesetipp:** [Standby Kosten reduzieren: So entlarvst du Stromfresser](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
+
+## Fazit: Gasrechnung senken – So bereitest du dich im Spätsommer vor
+
+Rund 800 € pro Jahr lassen sich mit Wartung, Verhalten und einem rechtzeitigen Tarif-Check zurückholen, und der Spätsommer ist genau das Fenster, in dem Handwerkertermine und Gastarife gleichzeitig günstig sind. Kombiniere die drei Hebel statt dich für einen zu entscheiden, dann startet die Heizperiode mit einer Rechnung, die zu dir passt.
 
 ## Häufige Fragen
 

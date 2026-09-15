@@ -8,11 +8,10 @@ Fazit- und FAQ-Blöcke für jeden Artikel, dem sie fehlen. Diese Blöcke sind
 per Konstruktion nahezu wortgleich:
 
     ## Fazit: <Titel>
-    "Sich gezielt mit dem Thema **X** zu beschäftigen, ist einer der
-     einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen
-     und bares Geld zu sparen." <route-satz>
-    "Fang am besten heute an, vergleiche die Angebote und sichere dir
-     deine Ersparnis! 💸🚀"
+    "Der Hebel bei **X** sitzt nicht im Verzicht, sondern im
+     Nachrechnen." <route-satz>
+    "Prüfe einmal deine aktuellen Konditionen, halte den Unterschied
+     schriftlich fest und wiederhole den Check jährlich …"
 
     ## Häufige Fragen
     ### <Frage aus FAQ_POOL>

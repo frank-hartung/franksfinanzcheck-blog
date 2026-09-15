@@ -26,8 +26,6 @@ pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
 
-
-
 Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -61,7 +59,8 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 Staub, Vorhänge und Möbel blockieren die Wärmeabgabe. Das Thermostat reagiert zu spät, weil die Raumtemperatur langsamer steigt.
 
 **Maßnahmen:** * **30 cm Abstand** zu Möbeln und Vorhängen einhalten.
-* **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen. * **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
+* **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen.
+* **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
 
 **Kosten/Nutzen:** 15 € für ein Set Dichtungsbänder → Ersparnis 50–80 € pro Saison.
 
@@ -112,8 +111,10 @@ Ein **Gastarifwechsel** im Spätsommer kann also leicht **hundert Euro** einspar
 
 ## Schritt‑für‑Schritt: Dein Spätsommer‑Heizungs‑Check
 
-1. **Testlauf starten:** Schalte die Heizung an einem kühlen Spätsommerabend probehalber ein und drehe alle Thermostate auf Stufe 5. Werden alle Heizkörper schnell und gleichmäßig warm? 2. **Entlüften:** Halte einen Lappen und einen Becher unter das Entlüftungsventil und öffne es vorsichtig mit dem Vierkantschlüssel, bis zischende Luft entweicht und Wasser austritt.
-3. **Vorlauftemperatur prüfen:** Eine zu hohe Vorlauftemperatur an der Heiztherme verschwendet unnötig Gas. Ein Blick in die Bedienungsanleitung oder Rücksprache mit dem Schornsteinfeger hilft, die Heizkurve optimal einzustellen (typisch 55 °C bei gut gedämmten Häusern). 4. **Hydraulischen Abgleich erwägen:** Werden einzelne Räume im Haus trotz voll geöffneter Ventile nicht warm, während andere überhitzen, sorgt ein hydraulischer Abgleich für die optimale Verteilung der Heizwassermenge. Die Investition liegt bei 300–500 €, wird aber häufig mit 10 %‑15 % Einsparung belohnt und kann über die BEG‑Förderung (bis zu 20 % der Kosten) gefördert werden.
+1. **Testlauf starten:** Schalte die Heizung an einem kühlen Spätsommerabend probehalber ein und drehe alle Thermostate auf Stufe 5. Werden alle Heizkörper schnell und gleichmäßig warm?
+2. **Entlüften:** Halte einen Lappen und einen Becher unter das Entlüftungsventil und öffne es vorsichtig mit dem Vierkantschlüssel, bis zischende Luft entweicht und Wasser austritt.
+3. **Vorlauftemperatur prüfen:** Eine zu hohe Vorlauftemperatur an der Heiztherme verschwendet unnötig Gas. Ein Blick in die Bedienungsanleitung oder Rücksprache mit dem Schornsteinfeger hilft, die Heizkurve optimal einzustellen (typisch 55 °C bei gut gedämmten Häusern).
+4. **Hydraulischen Abgleich erwägen:** Werden einzelne Räume im Haus trotz voll geöffneter Ventile nicht warm, während andere überhitzen, sorgt ein hydraulischer Abgleich für die optimale Verteilung der Heizwassermenge. Die Investition liegt bei 300–500 €, wird aber häufig mit 10 %‑15 % Einsparung belohnt und kann über die BEG‑Förderung (bis zu 20 % der Kosten) gefördert werden.
 5. **Tarifkonditionen checken:** Vergleiche deinen aktuellen Arbeitspreis mit den besonders günstigen Angeboten an deinem Wohnort und sichere dir einen Festpreis. Achte dabei auf **Grundpreis**, **Arbeitspreis** und **Laufzeit**.
 
 Wie du deinen Gasvertrag absicherst, zeigen der Beitrag zur [Gaspreisgarantie für ein sicheres Zuhause](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) und der [Leitfaden zu Preisgarantie‑Tarifen für 2026](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/).
@@ -213,13 +214,14 @@ Mindestens einmal im Monat, besser zu Beginn und Ende jedes Abrechnungszeitraums
 ### Welche Förderungen gibt es für energetische Maßnahmen? *
 
 **BEG‑Wärme** – Zuschüsse für Heizungsoptimierung, hydraulischen Abgleich und neue Brennwertkessel (bis zu 35 % der Kosten).
-* **KfW‑Effizienzhaus‑Programm** – zinsgünstige Darlehen für umfassende Dämmung und Smart‑Home‑Lösungen. * **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
+* **KfW‑Effizienzhaus‑Programm** – zinsgünstige Darlehen für umfassende Dämmung und Smart‑Home‑Lösungen.
+* **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
 
 ## Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen
 
 Senke deine **Gasrechnung**, bevor die Kälte kommt. Entlüftete Heizkörper, smarte Thermostate, ein hydraulischer Abgleich und ein günstiger Gastarif entlasten dich um bis zu **720 €** im Jahr. Nutze die warmen Tage für die Vorbereitung – dein Geldbeutel und die Umwelt danken es dir.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): So schützt dich eine Gaspreisgarantie · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · Sicher heizen: So schützt dich eine Gaspreisgarantie · [Preisgarantie Gas](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): So sicherst du [günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) für 2026
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/gas/)
 

@@ -5,7 +5,7 @@ title: "So bekommst du WLAN in jeden Winkel: Repeater oder Mesh?"
 description: "Repeater oder Mesh? So bekommst du WLAN in jeden Winkel: Entscheidungshilfe mit Preisen, Stromkosten und dem Null-Euro-Trick mit deinem alten Router."
 date: 2026-09-07T04:52:22Z
 draft: true
-tags: ["WLAN-Repeater oder Mesh", "[WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)", "Powerline vs. Mesh", "Internet im ganzen Haus"]
+tags: ["WLAN-Repeater oder Mesh", "WLAN verbessern", "Powerline vs. Mesh", "Internet im ganzen Haus"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
@@ -22,7 +22,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "WLAN-Repeater sind ab ca. 20 Euro die preiswerteste Lösung für einzelne Räume, reduzieren die Datenrate jedoch meist um 50 Prozent. Um dauerhaft Geld zu sparen, kannst du alte Router oft kostenlos als Mesh-Knoten weiternutzen und durch eine automatisierte WLAN-Zeitschaltung die jährlichen Stromkosten um bis zu 15 Euro pro Gerät senken."
 
-keywords: ["WLAN-Repeater oder Mesh", "WLAN verbessern", "Powerline vs. Mesh", "Internet im ganzen Haus", "So bekommst du WLAN in jeden Winkel", "[DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/)"]
+keywords: ["WLAN-Repeater oder Mesh", "WLAN verbessern", "Powerline vs. Mesh", "Internet im ganzen Haus", "So bekommst du WLAN in jeden Winkel", "DSL-Vergleich"]
 pin_title: "Repeater oder Mesh? So bekommst du WLAN in jeden Winkel"
 pin_description: "*Werbung | Schwaches WLAN im Arbeitszimmer muss nicht sein: Wir vergleichen Repeater, Powerline und Mesh-Systeme – mit Preisen, Vor- und Nachteilen und einer klaren Empfehlung für Mietwohnung, Reihenhaus und Altbau. Jetzt die passende Lösung finden!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
@@ -38,17 +38,17 @@ Ein weiterer Aspekt wird selten erwähnt: die Stromrechnung. Jedes Zusatzgerät 
 
 **Das Wichtigste in Kürze**  
 
-- Ein Repeater für rund 20 – 60 € lohnt sich nur für eine einzelne tote Ecke in Sichtweite des Routers. - Ein Mesh‑System für rund 150 – 250 € versorgt große Wohnungen und Häuser nahezu verlustfrei – inklusive automatischer Übergabe zwischen den Funkpunkten.
-- Viele alte Router lassen sich kostenlos als Mesh‑Knoten oder Access Point umrüsten – das spart den kompletten Neukauf. - Per WLAN‑Zeitschaltung sparst du bis zu rund 15 € Strom pro Gerät und Jahr, Stand 09/2026 bei ca. 0,40 €/kWh.
+- Ein Repeater für rund 20–60 € lohnt sich nur für eine einzelne tote Ecke in Sichtweite des Routers. Ein Mesh‑System für rund 150–250 € versorgt große Wohnungen und Häuser nahezu verlustfrei – inklusive automatischer Übergabe zwischen den Funkpunkten.
+- Viele alte Router lassen sich kostenlos als Mesh‑Knoten oder Access Point umrüsten – das spart den kompletten Neukauf. Per WLAN‑Zeitschaltung sparst du bis zu rund 15 € Strom pro Gerät und Jahr, Stand 09/2026 bei ca. 0,40 €/kWh.
 
 💡 **Schnell‑Tipp von FranksFinanzcheck:** WLAN‑Hardware nützt wenig, wenn der Tarif dahinter schwächelt. Prüfe in zwei Minuten, ob an deiner Adresse schnelleres Internet günstiger ist: [**Kostenlos vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_  
 
 ## Was kann ein Repeater – und was nicht?
 
-Ein WLAN‑Repeater empfängt das Signal deines Routers und sendet es verstärkt weiter. Die günstigsten Modelle kosten rund 20 – 60 € und lassen sich in fünf Minuten einrichten. Für eine einzelne schwach versorgte Ecke – etwa das Schlafzimmer neben dem Flur – reicht das oft völlig aus.  
+Ein WLAN‑Repeater empfängt das Signal deines Routers und sendet es verstärkt weiter. Die günstigsten Modelle kosten rund 20–60 € und lassen sich in fünf Minuten einrichten. Für eine einzelne schwach versorgte Ecke – etwa das Schlafzimmer neben dem Flur – reicht das oft völlig aus.  
 
-Der Haken liegt in der Technik: Repeater empfangen und senden auf derselben Frequenz. Jedes Datenpaket legt die Strecke zweimal zurück, sodass die erreichbare Datenrate etwa halbiert wird. Aus 100 Mbit/s am Router werden am Laptop hinter dem Repeater häufig nur noch 40 – 50 Mbit/s.  
+Der Haken liegt in der Technik: Repeater empfangen und senden auf derselben Frequenz. Jedes Datenpaket legt die Strecke zweimal zurück, sodass die erreichbare Datenrate etwa halbiert wird. Aus 100 Mbit/s am Router werden am Laptop hinter dem Repeater häufig nur noch 40–50 Mbit/s.  
 
 Ein weiteres Komfortproblem: Viele Repeater melden dem Handy keinen stärkeren Funkpunkt. Du läufst mit dem Smartphone durch die Wohnung und bleibst am schwachen Signal hängen, bis du manuell neu verbindest.  
 
@@ -60,13 +60,13 @@ Ein Mesh‑System besteht aus zwei bis drei gleichberechtigten Funkpunkten, die 
 
 Der Unterschied zum Repeater: Mesh‑Knoten stimmen sich über reservierte Funkkanäle oder ein LAN‑Kabel ab. Deine Geräte teilen sich die Luftzeit nicht mit dem internen Verkehr. In der Praxis bleiben so bis zu ca. 90 % der Router‑Leistung am Arbeitsplatz erhalten.  
 
-Der Preis: Ein gutes 2‑er‑Set mit modernem WLAN 6 kostet rund 150 – 250 €, ein 3‑er‑Set für größere Häuser etwa 200 – 350 € (Stand 09/2026). Auf drei Jahre gerechnet entspricht das ca. 5 € pro Monat – weniger als die Miete für einen Provider‑Router.  
+Der Preis: Ein gutes 2‑er‑Set mit modernem WLAN 6 kostet rund 150–250 €, ein 3‑er‑Set für größere Häuser etwa 200–350 € (Stand 09/2026). Auf drei Jahre gerechnet entspricht das ca. 5 € pro Monat – weniger als die Miete für einen Provider‑Router.  
 
 **Für wen sich Mesh lohnt:** Wohnungen ab vier Zimmern, mehrere Etagen, dauerhaftes Homeoffice oder paralleles Streaming im Haushalt. Dort, wo Aussetzer Geld oder Nerven kosten, zahlt sich ein Mesh‑System aus.
 
 ## Brauchst du überhaupt die volle Leistung?
 
-Bevor du 250 € ausgibst, prüfe deinen echten Bedarf. Ein HD‑Video‑Call benötigt ca. 3 – 5 Mbit/s. Ein 4K‑Stream kommt mit rund 25 Mbit/s aus. Selbst die halbierte Leistung eines 100‑Mbit‑Tarifs – also etwa 40 – 50 Mbit/s – deckt beides gleichzeitig ab.  
+Bevor du 250 € ausgibst, prüfe deinen echten Bedarf. Ein HD‑Video‑Call benötigt ca. 3–5 Mbit/s. Ein 4K‑Stream kommt mit rund 25 Mbit/s aus. Selbst die halbierte Leistung eines 100‑Mbit‑Tarifs – also etwa 40–50 Mbit/s – deckt beides gleichzeitig ab.  
 
 Teurer wird es nur, wenn große Datenmengen zählen: schnelle Cloud‑Backups, große Spiele‑Downloads oder vier Personen streamen parallel. Erst dann lohnt sich jedes zusätzliche Megabit. Wer überwiegend surft, mailt und abends einen Film schaut, kommt mit einem Repeater für rund 30 € genauso gut – und spart die Differenz.  
 
@@ -90,11 +90,11 @@ Die ehrliche Antwort hängt von Grundriss, Wänden und deinem Nutzungsverhalten 
 
 | Dein Zuhause | Passende Lösung | Einmal‑Kosten |
 |:---|:---|---:|
-| 2 – 3 Zimmer, eine tote Ecke | Einfacher Repeater auf halber Strecke | rund 20 – 60 € |
-| 4‑Zimmer‑Wohnung, Homeoffice | 2‑er‑Mesh‑Set (WLAN 6) | rund 150 – 250 € |
-| Altbau mit Stahlbetonwänden | Powerline mit WLAN‑Adapter testen | rund 70 – 130 € |
+| 2–3 Zimmer, eine tote Ecke | Einfacher Repeater auf halber Strecke | rund 20–60 € |
+| 4‑Zimmer‑Wohnung, Homeoffice | 2‑er‑Mesh‑Set (WLAN 6) | rund 150–250 € |
+| Altbau mit Stahlbetonwänden | Powerline mit WLAN‑Adapter testen | rund 70–130 € |
 | Alter Fritz‑Router im Schrank | Mesh‑Repeater‑Modus oder Access Point | 0 € |
-| Reihenhaus über 2 – 3 Etagen | 3‑er‑Mesh, zweiter Knoten per LAN | rund 200 – 350 € |
+| Reihenhaus über 2–3 Etagen | 3‑er‑Mesh, zweiter Knoten per LAN | rund 200–350 € |
 
 **Powerline vs. Mesh**: Powerline schickt das Netzwerk durch die Stromleitung und erzeugt am Zielort ein eigenes WLAN. Die Leistung hängt stark von der Elektroinstallation ab – kaufe deshalb mit Rückgaberecht und teste 48 Stunden.  
 
@@ -109,7 +109,7 @@ Jedes Funkgerät zieht rund um die Uhr Strom. Bei einem Strompreis von ca. 0,4
 | Einfacher Repeater | ca. 5 W | rund 18 € |
 | Mesh‑Knoten | ca. 8 W | rund 28 € |
 | Leistungsstarker Mesh‑Knoten | ca. 12 W | rund 42 € |
-| Haupt‑Router | ca. 10 – 15 W | rund 35 – 53 € |
+| Haupt‑Router | ca. 10–15 W | rund 35–53 € |
 
 Ein Sparhebel, der kaum genutzt wird, ist die automatische WLAN‑Zeitschaltung. Fast jeder Router und jeder Mesh‑Knoten erlaubt Zeitpläne, etwa Abschalten von 0 bis 6 Uhr. So sparst du pro Gerät bis zu rund 15 € im Jahr – bei drei Funkpunkten bis zu ca. 45 €.  
 
@@ -117,9 +117,12 @@ Wichtig: Die Zeitschaltung des Haupt‑Routers sollte Geräte mit Nachtschicht n
 
 ## Schritt für Schritt: WLAN‑Abdeckung an einem Abend
 
-1. **Bestandsaufnahme mit Zahlen.** Miss per Speedtest‑App an drei Orten: direkt neben dem Router, im Problembereich und an einem Mittelpunkt. Notiere Download, Upload und Ping – nur so erkennst du später, ob eine Maßnahme wirkt. 2. **Kabel‑Referenz prüfen.** Teste einmal per LAN‑Kabel am Router. Liegt der Wert deutlich unter deinem Tarif, sammle Belege und melde die Störung dem Provider – bevor du Hardware kaufst.
-3. **Router frei und erhöht stellen.** Mindestens einen Meter Höhe, nicht im Schrank, nicht neben Mikrowelle oder DECT‑Basisstation. Dieser Schritt bringt oft ein Drittel mehr Flächenabdeckung. 4. **Null‑Euro‑Option zuerst testen.** Hängt noch ein alter Router im Schrank, richte ihn als Mesh‑Knoten oder Access Point ein (siehe oben). Erst wenn das nicht reicht, lohnt der Kauf.
-5. **Kauf nach Grundriss.** Eine tote Ecke → Repeater. Mehrere Räume oder Etagen → Mesh‑Set. Massive Altbauwände → Powerline mit Rückgaberecht testen. 6. **Zeitschaltung aktivieren.** Nachtabschaltung für Zusatz‑Knoten einrichten und nach einer Woche erneut an denselben drei Punkten messen. Vergleiche die Werte mit Schritt 1.
+1. **Bestandsaufnahme mit Zahlen.** Miss per Speedtest‑App an drei Orten: direkt neben dem Router, im Problembereich und an einem Mittelpunkt. Notiere Download, Upload und Ping – nur so erkennst du später, ob eine Maßnahme wirkt.
+2. **Kabel‑Referenz prüfen.** Teste einmal per LAN‑Kabel am Router. Liegt der Wert deutlich unter deinem Tarif, sammle Belege und melde die Störung dem Provider – bevor du Hardware kaufst.
+3. **Router frei und erhöht stellen.** Mindestens einen Meter Höhe, nicht im Schrank, nicht neben Mikrowelle oder DECT‑Basisstation. Dieser Schritt bringt oft ein Drittel mehr Flächenabdeckung.
+4. **Null‑Euro‑Option zuerst testen.** Hängt noch ein alter Router im Schrank, richte ihn als Mesh‑Knoten oder Access Point ein (siehe oben). Erst wenn das nicht reicht, lohnt der Kauf.
+5. **Kauf nach Grundriss.** Eine tote Ecke → Repeater. Mehrere Räume oder Etagen → Mesh‑Set. Massive Altbauwände → Powerline mit Rückgaberecht testen.
+6. **Zeitschaltung aktivieren.** Nachtabschaltung für Zusatz‑Knoten einrichten und nach einer Woche erneut an denselben drei Punkten messen. Vergleiche die Werte mit Schritt 1.
 
 Viele Anbieter liefern Neukunden routerseitig moderne WLAN‑6‑Geräte mit Mesh‑Fähigkeit. Der [DSL‑Wechselbonus](../../posts/2026-08-10-dsl-wechselbonus-sichern/) von oft mehreren hundert Euro kann die Entscheidung direkt mitfinanzieren.  
 

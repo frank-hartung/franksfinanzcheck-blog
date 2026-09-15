@@ -497,8 +497,7 @@ def _check_article(rel: str, blk: dict, base: str, F: Findings) -> None:
         img_url = img.get("url")
         w, h = img.get("width"), img.get("height")
         for name, val in (("width", w), ("height", h)):
-            if val is not None and not (isinstance(val, int)
-                                        or (isinstance(val, float) and val.is_integer())):
+            if val is not None and not _ganzzahlig(val):
                 F.add("S3", rel, f"image.{name} ist keine Ganzzahl: {val!r}")
     elif isinstance(img, str):
         img_url = img
@@ -522,8 +521,24 @@ def _check_article(rel: str, blk: dict, base: str, F: Findings) -> None:
             if val is None:
                 F.add("S3", rel, f"publisher.{field} fehlt", soft=True)
     wc = blk.get("wordCount")
-    if wc is not None and (not isinstance(wc, int) or wc <= 0):
+    if wc is not None and (not _ganzzahlig(wc) or wc <= 0):
         F.add("S3", rel, f"wordCount unschlüssig: {wc!r}")
+
+
+def _ganzzahlig(wert) -> bool:
+    """Ganzzahl – auch in Fließkomma-Schreibweise.
+
+    Hugo liefert gecachte Seitenwerte wiederholt als float64, das JSON steht dann
+    mit „2000.0" im Build. Das ist eine Wortzahl, kein Unsinn: Google parst die
+    Zahl ohne Weiteres, und die Bildmaß-Regel weiter oben akzeptiert dieselbe
+    Form seit dem Premium-Audit. Strenger darf eine Wache nicht sein als ihr
+    eigener Nachbarbefund – sonst meldet sie Phantome auf Live-Seiten. Was
+    bleiben muss: Text statt Zahl, Null, Negatives, gebrochene Werte."""
+    if isinstance(wert, bool):
+        return False
+    if isinstance(wert, int):
+        return True
+    return isinstance(wert, float) and wert.is_integer()
 
 
 def _check_faq(rel: str, blk: dict, F: Findings) -> None:
@@ -858,6 +873,32 @@ def _selftest() -> list[str]:
         code, hard, _ = run()
         if not any(h.startswith("S3") and "Redaktionsdatum" in h for h in hard):
             errs.append(f"Fall 9: erfundene dateModified-Frische wird nicht gesehen: {hard}")
+        with open(p, "w", encoding="utf-8") as f:
+            f.write(art(True))
+
+        # --- Fall 9b: wordCount als ganze Zahl in Fließkomma-Schreibweise ---
+        ld9 = json.loads(re.search(LD_RE, read(p)).group(1))
+        head9 = read(p).split("<script")[0]
+        faq9 = re.search(LD_RE, read(p)).group(0)
+
+        def _setze(wert):
+            ld9["wordCount"] = wert
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(head9 + f"<script type=application/ld+json>{json.dumps(ld9)}</script>"
+                        + faq9 + "</head><body><img src=/i/cover.jpg alt=x></body></html>")
+
+        _setze(1850.0)
+        code, hard, _ = run()
+        if any("wordCount" in h for h in hard):
+            errs.append(f"Fall 9b: ganzzahlige Fließkomma-Wortzahl falsch gemeldet: {hard}")
+        _setze("viele")
+        code, hard, _ = run()
+        if not any(h.startswith("S3") and "wordCount" in h for h in hard):
+            errs.append(f"Fall 9c: Wortzahl als Text wird nicht gesehen: {hard}")
+        _setze(0)
+        code, hard, _ = run()
+        if not any(h.startswith("S3") and "wordCount" in h for h in hard):
+            errs.append(f"Fall 9d: Wortzahl Null wird nicht gesehen: {hard}")
         with open(p, "w", encoding="utf-8") as f:
             f.write(art(True))
 

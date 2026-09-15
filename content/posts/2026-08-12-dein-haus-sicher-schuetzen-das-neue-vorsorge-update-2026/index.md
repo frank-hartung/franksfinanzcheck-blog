@@ -132,12 +132,14 @@ Wer auch die eigene Absicherung prüfen will, liest unsere [Erklärung zur Priva
 
 ## Elementar 2026: Pflichtgefühl gegen Markt
 
-Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in ZÜRS 3–4 ohne Schutz bleibt, trägt ein großes Risiko. Hol dir Angebote, auch wenn sie teuer sind. Und stelle wichtige Technik nicht in den Keller. Prävention senkt nicht immer die Prämie. Sie senkt aber den Schaden.
+Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in ZÜRS 3–4 ohne Schutz bleibt, trägt ein großes Risiko.
+
+Hol dir Angebote, auch wenn sie teuer sind. Und stelle wichtige Technik nicht in den Keller. Prävention senkt nicht immer die Prämie. Sie senkt aber den Schaden.
 
 ## Klauseln, die nach dem Schaden zu spät kommen
 
-- Neuwert statt Zeitwert bei Hausrat - Aufräum‑ und Abbruchkosten ausreichend hoch
-- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage - Datenrettung und Schlossänderung nach Einbruch
+- Neuwert statt Zeitwert bei Hausrat – Aufräum‑ und Abbruchkosten ausreichend hoch
+- Hotelkosten nach Unbewohnbarkeit, mind. 150–200 Tage – Datenrettung und Schlossänderung nach Einbruch
 - Ableitungsrohre auf dem Grundstück
 
 Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir einen Nachmittag und lies deine drei PDFs. Frage dich: Würde ich das nach einem Sturm noch fair finden? Wenn nein, vergleiche und ersetze den Vertrag nahtlos.
@@ -146,7 +148,8 @@ Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir ei
 
 ## Der 60‑Minuten‑Vorsorge‑Abend für Eigentümer
 
-Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Prüfe Deckung, Selbstbeteiligung, Elementar und das Datum der letzten Anpassung.  
+Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Prüfe Deckung, Selbstbeteiligung, Elementar und das Datum der letzten Anpassung.
+
 Minute 15–30: Wohnfläche, Wert 1914 oder Wertermittlung, Liste von Solaranlage und Wärmepumpe.  
 Minute 30–45: Fotos von Dach, Keller und Rückstauklappe – nicht für Instagram, sondern für den Schadenfall. Minute 45–60: Vergleiche oder kläre mit einem Makler, was die Klauseln bedeuten.
 
@@ -154,9 +157,12 @@ Machst du das einmal im Jahr, brauchst du kein gutes Gefühl, sondern eine Liste
 
 ## Checkliste für den Jahres‑Check (Kurz & Knapp)
 
-- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen. - [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑Zusatz‑Risiko“ suchen.
-- [ ] **Selbstbeteiligung**: Ideal 0 €–150 €; höher reduziert Prämie, erhöht aber Eigenanteil. - [ ] **Klausel „grobe Fahrlässigkeit“**: Verzicht muss ausdrücklich stehen.
-- [ ] **Zusatz‑Sicherungen**: Fahrrad‑Diebstahl, Cyber‑Schutz, Photovoltaik‑Versicherung. - [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, nicht erst im Schadenfall suchen.
+- [ ] **Versicherungs‑Summe**: Wohnfläche × 650 € = Versicherungssumme prüfen.
+- [ ] **Elementarschutz**: In den Vertragsbedingungen nach „Zahlungs‑Zusatz‑Risiko“ suchen.
+- [ ] **Selbstbeteiligung**: Ideal 0 €–150 €; höher reduziert Prämie, erhöht aber Eigenanteil.
+- [ ] **Klausel „grobe Fahrlässigkeit“**: Verzicht muss ausdrücklich stehen.
+- [ ] **Zusatz‑Sicherungen**: Fahrrad‑Diebstahl, Cyber‑Schutz, Photovoltaik‑Versicherung.
+- [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, nicht erst im Schadenfall suchen.
 
 ## Häufige Fragen
 
@@ -191,7 +197,8 @@ Alte Verträge schützen bei heutigen Unwettern oft zu wenig. Ersetze sie durch 
 ## Häufige Fragen (Ergänzt)
 
 ### Wie kann ich meine Prämie senken, ohne den Schutz zu reduzieren?
-- **Selbstbeteiligung erhöhen**: 150 € – 300 € senken die Jahresprämie um bis zu 15 %. - **Bündelung**: Kombiniere Hausrat‑, Wohngebäude‑ und Haftpflichtversicherung beim selben Anbieter.
+- **Selbstbeteiligung erhöhen**: 150 € – 300 € senken die Jahresprämie um bis zu 15 %.
+- **Bündelung**: Kombiniere Hausrat‑, Wohngebäude‑ und Haftpflichtversicherung beim selben Anbieter.
 - **Risikomanagement**: Installiere Rückstauklappen, Regenwasser‑Sammelsysteme oder ein automatisches Abschalt‑Ventil für die Heizung – manche Versicherer honorieren solche Maßnahmen mit Rabatten von 5 % bis 12 %.
 
 ### Was passiert, wenn ich nach einem Schaden die Police wechsle?
