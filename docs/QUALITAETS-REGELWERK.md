@@ -422,6 +422,7 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score- UND Zeichenlänge-Holds am SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
 | Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026) |
 | Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
@@ -516,6 +517,21 @@ jeder Schreibaktion.
   die im Zweifel rot meldet, macht ihren Bericht unbrauchbar. Bewiesen an drei
   Selbsttest-Fällen plus Probe am Live-Korpus: mittig umgeschrieben → Exit 2, auf 2
   Zeilen gestutzt → Exit 2, normal angehängt → grün.
+  (9) Die zwei am längsten liegenden `hold`-Artikel (`finanzielle-freiheit`, `flugtickets`) standen
+  seit 07.09. wegen „publish-gate: Zeichenlänge nicht bestanden“ – eine Ursache, die seit ihrer
+  Setzung niemand mehr nachsieht: `check_length.py` überspringt Entwürfe (`draft: true`
+  → continue) und `publish_gate` prüft nur Kandidaten des heutigen Datums. Beide messen
+  inzwischen 14.107 bzw. 17.276 Zeichen. `requeue_quality_holds.py` kennt jetzt diese
+  zweite Klasse und misst sie am Length-SSOT nach (Selbsttest: 2000 Wörter → zu kurz,
+  2600 → reif, 30000 → zu lang); reif heißt: `rearm`, also Kadenz plus voller
+  Gate-Durchlauf, niemals Direkt-Live. Vorher redaktionell nachgearbeitet: geleimte
+  Aufzählungen ausgeleimt (7), 21 Zeilen gerade Anführungszeichen auf deutsche gesetzt,
+  9 klebende Überschriften gelöst, Ich/Du-Verlust in einer Anekdote berichtigt, ein
+  irreführender Gas-Link in einem Flug-Artikel entfernt, ein doppeltes Fehler-Kapitel
+  umbenannt, zwei Kurzantworten auf die belegten Zahlen des Textes zurückgeholt
+  („mindestens 20 %“ und „10–15 %“ standen so nie im Körper), Fazits auf Hausstruktur,
+  `social_posted: true` auf zwei nie geposteten Entwürfen zurückgesetzt (der Schalter
+  wäre nach dem Publish als „bereits gepostet“ gelesen worden).
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede

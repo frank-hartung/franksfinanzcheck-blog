@@ -17,14 +17,25 @@ Beide Fehler sind behoben (template_boilerplate.py + quality_score.py). Die
 bereits geparkten Artikel blieben aber als „hold“ liegen – hold wird von der
 Kadenz-Wache bewusst NIE automatisch rearmt (Schutz vor echter Gate-Hemmung).
 
-Dieses Skript ist die gezielte Selbstheilung für genau diese Klasse:
-  - NUR Holds mit `cadence_grund`, das mit „quality-score“ beginnt,
-    werden neu bewertet (alles andere bleibt unangetastet).
-  - Liegt der NEUE Score ≥ 0.80 (Review-Schwelle), wird der Hold in eine
-    Re-Queue verwandelt (cadence_wait: true) – der Artikel durchläuft beim
-    nächsten Slot den VOLLEN Gate-Durchlauf (publish_gate STRICT +
-    publication_release), bevor er live geht.
-  - Bleibt der Score < 0.80, bleibt der Hold bestehen (echter Bedarf).
+Dieses Skript ist die gezielte Selbstheilung für genau diese Klassen:
+  - Holds mit `cadence_grund`, der mit „quality-score“ beginnt → neu bewertet
+    gegen quality_score (Alles andere bleibt unangetastet).
+  - Holds, deren Grund eine verhängte Zeicbenlänge meldet („Zeichenlänge“) →
+    neu gemessen am Length-SSOT `length_policy` (15.09.2026, zweiter Fund).
+    Anlass: zwei Artikel lagen seit 07.09. mit „publish-gate: Zeichenlänge
+    (check_length.py) nicht bestanden“, obwohl sie längst 13.812 bzw.
+    17.1xx Zeichen messen. Niemandem fiel es auf, weil check_length.py
+    Entwürfe überspringt (`draft: true` → continue) und publish_gate nur
+    Kandidaten des HEUTIGEN Datums prüft: ein Hold auf einem Entwurf wird von
+    der Wache, die ihn setzte, nie wieder angefasst.
+  - Liegt der NEUE Score ≥ 0.80 (Review-Schwelle) bzw. die Länge im Korridor,
+    wird der Hold in eine Re-Queue verwandelt (cadence_wait: true) – der
+    Artikel durchläuft beim nächsten Slot den VOLLEN Gate-Durchlauf
+    (publish_gate STRICT + publication_release), bevor er live geht.
+  - Bleibt die Ursache bestehen, bleibt der Hold (echter Bedarf).
+
+Kein automatischer Publish: rearm setzt nur cadence_wait. Wer „hold“ bewusst
+gesetzt hat (redaktioneller Grund, Duplikat-Verdacht), wird nicht angefasst.
 
 Nutzung:
   python3 scripts/requeue_quality_holds.py            # Report (weich)
@@ -33,6 +44,7 @@ Nutzung:
 """
 import os
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -45,9 +57,60 @@ def is_quality_hold(grund):
     return bool(grund) and str(grund).startswith("quality-score")
 
 
+def is_length_hold(grund):
+    """Ein Länge-Hold des Publish-Gates? (zweite Klasse, 15.09.2026)
+
+    Erkennung am Wort, nicht an der Zeile: der Gate-Text lautet
+    „publish-gate: Zeichenlänge (check_length.py) nicht bestanden“, und die
+    Präfix-Regel wie bei quality-score würde ihn verfehlen, sobald das Gate den
+    Satz umformuliert – verfehlen wäre hier das Gefährliche (der Hold bliebe).
+    """
+    return bool(grund) and "Zeichenlänge" in str(grund)
+
+
+def length_reif(text):
+    """Länge neu gemessen am SSOT – Rückgabe (reif?, Belegtext).
+
+    Bewusst NICHT über check_length.py: dessen collect() überspringt Entwürfe,
+    und ein Länge-Hold gilt definitionell einem Entwurf.
+    """
+    import length_policy as lp
+
+    _w, chars = lp.measure(text)
+    floor, maxm = lp.POSTS["heal_chars"], lp.POSTS["fat_chars"]
+    z = lambda n: f"{n:,}".replace(",", ".")   # 12345 -> 12.345 (nur Gruppen, kein Satzzeichen)
+    if chars < floor:
+        return False, f"{z(chars)} Zeichen < Floor {z(floor)}"
+    if chars > maxm:
+        return False, f"{z(chars)} Zeichen > Maximum {z(maxm)}"
+    return True, (f"{z(chars)} Zeichen im Korridor (Floor {z(floor)}, "
+                  f"Maximum {z(maxm)})")
+
+
 def should_requeue(score):
     """Neu bewerteter Artikel ist reif genug für den vollen Gate-Durchlauf."""
     return score is not None and score >= REQUEUE_BAR
+
+
+def _holds(cg, posts_dir=None):
+    """Alle Holds, die diesem Skript gehören – quality-score oder Länge."""
+    for p in cg.load_posts(posts_dir):
+        grund = p.get("grund")
+        if p.get("state") == "hold" and (is_quality_hold(grund) or is_length_hold(grund)):
+            yield p
+
+
+def bewertung(p, qs):
+    """Nachbewertung eines Holds -> (reif?, Belegtext). Der Beleg kommt ins
+    Frontmatter, deshalb muss er die Zahl nennen, die die Aufhebung trägt."""
+    if is_quality_hold(p.get("grund")):
+        score = qs.score_article(p["path"])["score"]
+        return should_requeue(score), (f"Score {score:.3f} ≥ {REQUEUE_BAR:.2f}"
+                                      if should_requeue(score)
+                                      else f"Score {score:.3f} < {REQUEUE_BAR:.2f}")
+    text = Path(p["path"]).read_text(encoding="utf-8")
+    reif, beleg = length_reif(text)
+    return reif, beleg
 
 
 def evaluate(posts_dir=None):
@@ -60,18 +123,13 @@ def evaluate(posts_dir=None):
     import quality_score as qs
 
     requeued, kept, errors = [], [], []
-    for p in cg.load_posts(posts_dir):
-        if p.get("state") != "hold" or not is_quality_hold(p.get("grund")):
-            continue
+    for p in _holds(cg, posts_dir):
         try:
-            score = qs.score_article(p["path"])["score"]
+            reif, beleg = bewertung(p, qs)
         except Exception as exc:  # noqa: BLE001 – nie am Scorer scheitern
             errors.append((p["slug"], None, str(exc)))
             continue
-        if should_requeue(score):
-            requeued.append((p["slug"], score))
-        else:
-            kept.append((p["slug"], score))
+        (requeued if reif else kept).append((p["slug"], beleg))
     return requeued, kept, errors
 
 
@@ -82,21 +140,21 @@ def fix(posts_dir=None):
     import quality_score as qs
 
     requeued, kept, errors = [], [], []
-    for p in cg.load_posts(posts_dir):
-        if p.get("state") != "hold" or not is_quality_hold(p.get("grund")):
-            continue
+    for p in _holds(cg, posts_dir):
         try:
-            score = qs.score_article(p["path"])["score"]
+            reif, beleg = bewertung(p, qs)
         except Exception as exc:  # noqa: BLE001
             errors.append((p["slug"], None, str(exc)))
             continue
-        if should_requeue(score):
-            grund = (f"quality-hold aufgehoben (#251): Score {score:.3f} ≥ "
-                     f"{REQUEUE_BAR:.2f} – Re-Queue für vollen Gate-Durchlauf")
+        if reif:
+            kind = ("quality-hold" if is_quality_hold(p.get("grund"))
+                    else "length-hold")
+            grund = (f"{kind} aufgehoben: {beleg} – Re-Queue für vollen "
+                     f"Gate-Durchlauf (PR #289)")
             park_state.rearm(p["path"], grund)
-            requeued.append((p["slug"], score))
+            requeued.append((p["slug"], beleg))
         else:
-            kept.append((p["slug"], score))
+            kept.append((p["slug"], beleg))
     return requeued, kept, errors
 
 
@@ -112,6 +170,22 @@ def run_selftest() -> list:
         fehler.append("Score an der Review-Schwelle wird nicht requeued")
     if should_requeue(0.79) or should_requeue(None):
         fehler.append("Score unter der Review-Schwelle/None wird fälschlich requeued")
+    # zweite Klasse: Länge
+    gate_grund = "publish-gate: Zeichenlänge (check_length.py) nicht bestanden"
+    if not is_length_hold(gate_grund):
+        fehler.append("Zeichenlänge-Hold des Publish-Gates wird nicht erkannt")
+    if is_length_hold("quality-score: Score 0.70 < 0.80") or is_length_hold(None):
+        fehler.append("fremder Grund wird als Zeichenlänge-Hold erkannt")
+    if is_quality_hold(gate_grund):
+        fehler.append("Zeichenlänge-Hold wird fälschlich als quality-score-Hold erkannt")
+    for n, erwartung in ((2000, False), (2600, True), (30000, False)):
+        text = "wort " * n
+        reif, beleg = length_reif(text)
+        if reif != erwartung:
+            fehler.append(f"length_reif({n} Wörter): reif={reif}, erwartet "
+                          f"{erwartung} ({beleg})")
+        if "Zeichen" not in beleg:
+            fehler.append(f"length_reif({n} Wörter) nennt keine Zahl im Beleg: {beleg}")
     return fehler
 
 
@@ -130,13 +204,13 @@ def main() -> int:
     do_fix = "--fix" in args
     requeued, kept, errors = (fix() if do_fix else evaluate())
 
-    print(f"Quality-Holds neu bewertet: {len(requeued)} reif → Re-Queue, "
+    print(f"Holds neu bewertet: {len(requeued)} reif → Re-Queue, "
           f"{len(kept)} bleiben gehalten, {len(errors)} Fehler.")
-    for slug, score in requeued:
-        print(f"  🟢 {slug}: Score {score:.3f} ≥ {REQUEUE_BAR:.2f} "
+    for slug, beleg in requeued:
+        print(f"  🟢 {slug}: {beleg} "
               f"→ {'cadence_wait: true gesetzt' if do_fix else 'Re-Queue möglich'}")
-    for slug, score in kept:
-        print(f"  🔴 {slug}: Score {score:.3f} < {REQUEUE_BAR:.2f} → Hold bleibt")
+    for slug, beleg in kept:
+        print(f"  🔴 {slug}: {beleg} → Hold bleibt")
     for slug, _score, err in errors:
         print(f"  ⚠ {slug}: Bewertung fehlgeschlagen ({err})")
     return 0
