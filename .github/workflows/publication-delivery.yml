@@ -16,7 +16,10 @@ jobs:
   verify:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    # Includes one bounded source-recovery run (cadence + deploy) before the
+    # final public receipt.  The old 12-minute budget allowed the check to
+    # fail while its own recovery was still queued.
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,11 +34,33 @@ jobs:
         with:
           name: publication-receipt
           path: tmp/publication-receipt.json
-      - name: Reconcile one delivery incident and request recovery
+      - name: Reconcile delivery incident without racing recovery
         if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
           RECEIPT_OK: ${{ steps.receipt.outcome == 'success' }}
+          DEFER_RECOVERY: true
+        run: python3 scripts/publication_incident.py
+      - name: Run bounded recovery and wait for its deploy
+        if: ${{ steps.receipt.outcome != 'success' && !cancelled() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publication_recovery.py --timeout 2700
+      - name: Re-check public receipt after recovery
+        id: recovered_receipt
+        if: ${{ steps.receipt.outcome != 'success' && !cancelled() }}
+        continue-on-error: true
+        run: python3 scripts/publication_check.py --online --attempts 5 --delay 60
+      - name: Close incident when the recovered receipt is public
+        if: ${{ steps.receipt.outcome != 'success' && steps.recovered_receipt.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_OK: true
         run: python3 scripts/publication_incident.py
       - name: Missing public delivery is a failed run
-        run: test '${{ steps.receipt.outcome }}' = success
+        run: |
+          if [ '${{ steps.receipt.outcome }}' = success ]; then
+            exit 0
+          fi
+          test '${{ steps.recovered_receipt.outcome }}' = success

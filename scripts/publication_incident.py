@@ -67,6 +67,12 @@ def main():
            '--title', 'P1: Öffentliche Artikel-Auslieferung unter Mindestziel',
            '--body', body)
     # Bounded recovery: fixed monitoring slots only; no workflow_run cycle.
+    # Publication Delivery can opt into the synchronous orchestrator so its
+    # final assertion does not race an asynchronously dispatched backstop.
+    # Other callers retain the original fire-and-forget recovery behaviour.
+    if os.environ.get('DEFER_RECOVERY') == 'true':
+        print('Recovery is handed to publication_recovery.py; waiting before final receipt.')
+        return
     # Source-Defizit → zuerst Endkontrolle (Quote), dann Deploy.
     # Public-only-Defizit → Deploy reicht (CDN/Build).
     now = dt.datetime.now(dt.timezone.utc)
