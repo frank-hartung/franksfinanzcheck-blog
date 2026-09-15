@@ -531,7 +531,10 @@ jeder Schreibaktion.
   umbenannt, zwei Kurzantworten auf die belegten Zahlen des Textes zurückgeholt
   („mindestens 20 %“ und „10–15 %“ standen so nie im Körper), Fazits auf Hausstruktur,
   `social_posted: true` auf zwei nie geposteten Entwürfen zurückgesetzt (der Schalter
-  wäre nach dem Publish als „bereits gepostet“ gelesen worden).
+  wäre nach dem Publish als „bereits gepostet“ gelesen worden). Im übrigen Bestand:
+  9 Artikel mit 26 geleimten Listen-Punkten (7 live) – bewusst keine Flächenheilkur in
+  diesem Schritt, die Zeilen stehen auf Live-Seiten und brauchen eine eigene,
+  selbstgetestete Wache statt eines Einmal-Skripts.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
