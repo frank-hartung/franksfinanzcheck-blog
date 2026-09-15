@@ -25,3 +25,35 @@
 {"ts": "2026-09-15T08:47:38Z", "module": "governance_gate", "action": "emit:scorecard", "input": {"exit": 0, "report": "EDITORIAL-SCORECARD.md"}, "output": {"level": "green", "code": "ok"}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-15T09:31:26Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
 {"ts": "2026-09-15T10:27:50Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 52}, "output": {"changed": 1}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:07Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:16Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:21Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:27Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:36Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:17:42Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:19:18Z", "module": "fix_spaces", "action": "apply", "input": {"files": 59}, "output": {"fixes": 75}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:49Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 8}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 20}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:21:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:03Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:08Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:10Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug"]}, "output": {"gated": ["2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:14Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:20Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:25Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:22:31Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:23:52Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:24:29Z", "module": "fix_spaces", "action": "apply", "input": {"files": 59}, "output": {"fixes": 29}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:25:54Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:25:54Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 20}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:00Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:06Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:12Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:18Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:24Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:31Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 2, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-15T12:26:33Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug"]}, "output": {"gated": ["2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug"], "demoted": []}, "status": "gated", "critical": false, "commit": null}

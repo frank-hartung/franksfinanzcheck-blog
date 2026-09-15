@@ -2,7 +2,7 @@
 
 title: "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks"
 description: "Frugalismus im Alltag: 5 einfache Tricks, mit denen du ohne echten Verzicht deine Fixkosten senkst und mehr finanziellen Spielraum gewinnst."
-date: 2026-09-11T08:13:34Z
+date: 2026-09-15T12:11:59Z
 draft: true
 reserve: true
 tags: ["Frugalismus im Alltag", "Frugalismus", "Geld sparen", "Minimalistisch Leben"]
@@ -31,7 +31,7 @@ Letzte Woche stand ich in der Mittagspause vor der Wahl: das belegte Baguette be
 Wer Frugalismus als Lifestyle versteht, jagt nicht nur verbissen jedem Cent hinterher. Es geht vielmehr darum, sich durch bewussten Konsum Zeit und Freiheit zu kaufen. Stell dir vor, du könntest früher in Rente gehen oder deine Arbeitszeit reduzieren, nur weil du dein Konsumverhalten hinterfragst.
 
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Drei Dinge zählen beim Start in ein frugales Leben: die Analyse der Status-quo-Ausgaben, das Eliminieren unnötiger Fixkosten und die Disziplin bei kleinen täglichen Versuchungen.
 

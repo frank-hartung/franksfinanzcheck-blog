@@ -617,7 +617,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-15T09:39:52+00:00",
+  "ts": "2026-09-15T12:25:51+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -675,6 +675,69 @@
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
+  "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
+  "ts": "2026-09-15T12:25:23+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
+  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
+  "ts": "2026-09-15T12:21:26+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-15-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
+  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
+  "ts": "2026-09-15T12:21:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-15-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
+  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
+  "ts": "2026-09-15T12:21:33+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-15-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
+  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
+  "ts": "2026-09-15T12:21:36+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
+  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
+  "ts": "2026-09-15T12:25:48+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-15-energie-update-was-sich-jetzt-fuer-dich-aendert": {
+  "title": "Energie-Update: Was sich jetzt für dich ändert",
+  "ts": "2026-09-15T12:25:35+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }
