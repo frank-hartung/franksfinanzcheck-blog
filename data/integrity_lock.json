@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-15T02:12:07.378969+00:00",
-  "head": "3579c2e",
+  "signed_at": "2026-09-15T02:31:21.624084+00:00",
+  "head": "5c1578d",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
@@ -23,7 +23,7 @@
     "scripts/affiliate_integrity_gate.py": "a7d3627181b2c790bc6dbd37937dae737458a226874bcf15e24f402882ffa2ba",
     "scripts/affiliate_marketer.py": "037a1803a76d9b9d351b6d04b41cbbfc94e72cc7e073b1612f712deff613f90b",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-    "scripts/blog_doctor.py": "f81ba363234923bdcb851b10e291714a73ad7921c865aa803ff331b1d9d5aa0e",
+    "scripts/blog_doctor.py": "372cf6663167220969658676818f5543d781fa8d95cd982a06dcdc9b60f9be33",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
     "scripts/casing_guard.py": "632b9c92cde0249fe9f6c57ce22a5ef2e1695d049c31532da8ed99fbd6f3d3c6",
     "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",

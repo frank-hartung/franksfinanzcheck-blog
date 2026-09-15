@@ -55,7 +55,7 @@ KETTE = [
     ("integrity_guard.py",    [],                          "0-LOCK", "Kern-Integritaet (Signatruehe nach Drift)"),
     # HISTORY-GUARD (09.09.): Append-Only-Beweisketten zuerst –
     # Merge-Artefakte/Marker in *_history.jsonl = Sabotage (Exit 2).
-    ("history_guard.py",      [],                          "0-LOCK", "Append-Only-Historien: marker-frei, JSON-rein, chronologisch"),
+    ("history_guard.py",      [],                          "0-LOCK", "Append-Only-Historien: marker-frei, JSON-rein, chronologisch, verlustfrei (H6)"),
 
     # (skript, basis-args, phase, zweck)
     ("heading_guard.py",      ["--fix"],                "A-Text", "Überschriften-Hygiene H1-H3: kein <br>, Anker-stabil (27.08. hinzu)"),

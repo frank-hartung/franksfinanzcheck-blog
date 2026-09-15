@@ -22,6 +22,22 @@
 #        dürfen legitim asynchron anhängen (realer Fall: audit-08-31),
 #        ts-Reihenfolge ist deshalb KEIN Beweis.
 #    H5  BLANKZEILEN: leere Zeilen im Log -> Fund (kein Sabotage).
+#    H6  VERLUSTPRÜFUNG (rotation-bewusst, 15.09.2026): verglichen wird die
+#        Arbeitstree-Datei mit dem letzten Commit-Stand (HEAD, sonst Index).
+#        Anhängen ist erlaubt. Schrumpfen ist NUR erlaubt, wenn es die
+#        dokumentierte W5-Rotation von workspace_guard ist (Kap HIST_MAX_LINES,
+#        erhaltener Teil = exakter Schwanz des Vorzustands). Umschreiben im
+#        Mittelteil oder Verlust über die Kapazität hinaus -> Exit 2.
+#        Kein Befund, kein Verlust: ohne Git-Baseline (frischer Shallow-Klon,
+#        CI ohne Blob) schweigt die Prüfung – eine Wache, die im Zweifel rot
+#        meldet, macht ihren eigenen Bericht unbrauchbar.
+#
+#  Zusammenspiel W5/H6: workspace_guard.py „GESCHICHTSLINIE-ROTATION“ stutzt
+#  jede data/*_history.jsonl jenseits von HIST_MAX_LINES (400) auf den neuesten
+#  Teil – das ist erlaubt und dokumentiert, aber es ist eben auch ein Schrumpf-
+#  ereignis. H6 ist deshalb so gebaut, dass es genau diese Form erkennt und
+#  alles andere meldet; die Kapazität liest es aus workspace_guard.py aus und
+#  meldet Auseinanderlaufen beider Werte.
 #
 #  KEINE Dedupe: gleiche Werte mehrfach = echte Einzelläufe
 #  (Konvention aller *_history.jsonl). Die Wache entfernt NICHTS –
@@ -40,6 +56,7 @@
 
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -48,6 +65,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
 HISTORY_GLOB = "data/*_history.jsonl"
+ROTATION_KAP = 400          # == workspace_guard.HIST_MAX_LINES (wird gegengeprüft)
 AUDIT_GLOB = "data/audit/*.jsonl"
 
 # Doktor/Engine reichen --dry-run / --new-only durch; die Wache ist
@@ -129,6 +147,48 @@ def check_lines(name: str, lines: list[str]) -> tuple[list[str], list[str]]:
 
 
 # ------------------------------------------------------------
+# H6: Verlustprüfung gegen den Vorzustand – als reine Funktion auf Zeilenlisten,
+# damit der Selbsttest sie ohne Git durchspielen kann.
+# ------------------------------------------------------------
+def rotation_kapazitaet() -> int:
+    """Kapazität aus workspace_guard.py ablesen (kein Import – dort läuft
+    Modulcode). Finst der Reader nichts, gilt die eigene Konstante."""
+    try:
+        txt = (ROOT / "scripts" / "workspace_guard.py").read_text(encoding="utf-8")
+        m = re.search(r"^HIST_MAX_LINES\s*=\s*(\d+)", txt, re.M)
+        return int(m.group(1)) if m else ROTATION_KAP
+    except Exception:  # noqa: BLE001
+        return ROTATION_KAP
+
+
+def check_verlust(name: str, vorher: list, jetzt: list, kap=None):
+    """(harte Fehler, Funde, Info) für einen Historien-Vergleich.
+
+    vor = Zeilen des letzten Commit-Stands, jetzt = Arbeitstree. leer =
+    keine Baseline (dann schweigt die Prüfung)."""
+    hard: list = []
+    warn: list = []
+    info = ""
+    kapz = kap if kap is not None else rotation_kapazitaet()
+    if not vorher or not jetzt:
+        return hard, warn, info
+    if jetzt[:len(vorher)] == vorher:
+        return hard, warn, (f"angewachsen um {len(jetzt) - len(vorher)}"
+                            if len(jetzt) > len(vorher) else "unverändert")
+    if len(vorher) > kapz and len(jetzt) == kapz and jetzt == vorher[-kapz:]:
+        return hard, warn, f"W5-Rotation {len(vorher)} → {kapz} Records (erlaubt)"
+    if len(jetzt) < len(vorher):
+        hard.append(f"{name}: H6 Historie geschrumpft: {len(vorher)} → {len(jetzt)} "
+                    f"Records, nicht als W5-Rotation erklärbar (Kapazität {kapz}) – "
+                    f"Records fehlen oder Reihenfolge gedreht")
+    else:
+        hard.append(f"{name}: H6 Append-Only verletzt: die {len(vorher)} Zeilen des "
+                    f"letzten Stands stehen nicht mehr unverändert am Anfang – "
+                    f"Historie wurde umgeschrieben, nicht angehängt")
+    return hard, warn, info
+
+
+# ------------------------------------------------------------
 # SELBSTTEST (eingefroren, Wache-immun): Abweichung -> Exit 2
 # ------------------------------------------------------------
 SELFTEST = [
@@ -141,6 +201,27 @@ SELFTEST = [
                             '{"date": "2026-08-12", "kritisch": 0, "fest": 0}'], 1, 0),
     ("pflichtfeld-typ", ['{"date": "2026-08-12", "kritisch": "x", "fest": 0}'], 1, 0),
     ("blank-zeile", ['{"date": "2026-08-12", "kritisch": 0, "fest": 0}', ""], 0, 1),
+]
+
+
+# H6-Faelle: (name, vorher, jetzt, erwartete harte Fehler, Info-Pflichtwort)
+SELBSTTEST_VERLUST = [
+    ("anhangen", ['{"ts": "2026-08-12T00:00:00Z"}', '{"ts": "2026-08-13T00:00:00Z"}'],
+     ['{"ts": "2026-08-12T00:00:00Z"}', '{"ts": "2026-08-13T00:00:00Z"}',
+      '{"ts": "2026-08-14T00:00:00Z"}'], 0, "angewachsen"),
+    ("unveraendert", ['{"ts": "2026-08-12T00:00:00Z"}'],
+     ['{"ts": "2026-08-12T00:00:00Z"}'], 0, "unverändert"),
+    ("rotation-erlaubt", ['{"n": %d}' % n for n in range(1, 41)],
+     ['{"n": %d}' % n for n in range(13, 41)], 0, "W5-Rotation"),
+    ("schwunderhalb", ['{"ts": "2026-08-01T00:00:00Z"}', '{"ts": "2026-08-02T00:00:00Z"}',
+                       '{"ts": "2026-08-03T00:00:00Z"}'],
+     ['{"ts": "2026-08-02T00:00:00Z"}', '{"ts": "2026-08-03T00:00:00Z"}'], 1, "geschrumpft"),
+    ("mittelteil-umgeschrieben", ['{"ts": "2026-08-01T00:00:00Z"}', '{"ts": "2026-08-02T00:00:00Z"}'],
+     ['{"ts": "2026-08-01T00:00:00Z"}', '{"ts": "2026-08-09T00:00:00Z"}',
+      '{"ts": "2026-08-03T00:00:00Z"}'], 1, "Append-Only verletzt"),
+    ("austausch-same-length", ['{"ts": "2026-08-01T00:00:00Z"}', '{"ts": "2026-08-02T00:00:00Z"}'],
+     ['{"ts": "2026-08-11T00:00:00Z"}', '{"ts": "2026-08-12T00:00:00Z"}'], 1, "umgeschrieben"),
+    ("keine-baseline", [], ['{"ts": "2026-08-01T00:00:00Z"}'], 0, ""),
 ]
 
 
@@ -159,7 +240,35 @@ def selftest() -> list[str]:
             fehler.append(f"  Fall '{name}': erwartet {exp_hard} hard/"
                           f"{exp_warn} warn, bekam {len(hard)}/{len(warn)} "
                           f"({hard[:1]})")
+    # H6 – Verlustprüfung, mit fest vorgegebener Kapazität (28), damit der Fall
+    # nicht von der workspace_guard-Konstanten abhängt
+    for name, vorher, jetzt, exp_hard, info_pflicht in SELBSTTEST_VERLUST:
+        hard, warn, info = check_verlust(name + ".jsonl", vorher, jetzt, kap=28)
+        if len(hard) != exp_hard:
+            fehler.append(f"  H6-Fall '{name}': erwartet {exp_hard} hart, "
+                          f"bekam {len(hard)} ({hard[:1]})")
+        # Harte Faelle beweisen ueber ihre Meldung, saubere ueber die Info-Zeile.
+        beleg = (hard[0] if hard else info)
+        if info_pflicht and info_pflicht not in beleg:
+            fehler.append(f"  H6-Fall '{name}': Beleg „{info_pflicht}“ fehlt ({beleg!r})")
+    if rotation_kapazitaet() != 400:
+        fehler.append(f"  H6: Rotationskapazität läuft auseinander – history_guard "
+                      f"kennt 400, workspace_guard meldet {rotation_kapazitaet()}")
     return fehler
+
+
+def baseline_zeilen(rel: str) -> list:
+    """Zeilen des letzten Commit-Stands; erst HEAD, dann der Index. Kein Git,
+    kein Blob, flacher Klon ohne Objekt -> leere Liste (Prüfung schweigt)."""
+    for rev in (f"HEAD:{rel}", f":{rel}"):
+        try:
+            r = subprocess.run(["git", "show", rev], cwd=ROOT,
+                               capture_output=True, timeout=25)
+        except Exception:  # noqa: BLE001
+            return []
+        if r.returncode == 0:
+            return r.stdout.decode("utf-8", "replace").splitlines()
+    return []
 
 
 def main() -> int:
@@ -169,15 +278,24 @@ def main() -> int:
         print("   Bitte scripts/history_guard.py pruefen:")
         print("\n".join(stf))
         return 2
-    print(f"✅ History-Guard-Selbsttest: {len(SELFTEST)} Fälle grün.")
+    print(f"✅ History-Guard-Selbsttest: {len(SELFTEST) + len(SELBSTTEST_VERLUST)} Fälle grün.")
 
     paths = sorted(DATA.glob("*.jsonl")) + sorted((DATA / "audit").glob("*.jsonl"))
     paths = [p for p in paths if p.name.endswith("_history.jsonl")
              or p.parent.name == "audit"]
     total_hard, total_warn, files_ok = 0, 0, 0
+    rotationen = []
     for path in paths:
         lines = path.read_text(encoding="utf-8").splitlines()
         hard, warn = check_lines(path.name, lines)
+        rel = str(path.relative_to(ROOT))
+        v_hard, v_warn, v_info = check_verlust(path.name, baseline_zeilen(rel), lines)
+        hard += v_hard
+        warn += v_warn
+        if "W5-Rotation" in v_info:
+            rotationen.append(path.name)
+        elif v_info and v_info.startswith("angewachsen"):
+            pass    # normaler Betrieb: Anhängen ist der Erwartungsfall
         if lines and lines[-1] == "":
             warn.append(f"{path.name}:EOF: überflüssige Leerzeile")
         total_hard += len(hard)
@@ -191,6 +309,11 @@ def main() -> int:
             for msg in hard + warn:
                 print(f"      - {msg}")
 
+    if rotationen:
+        print(f"  📜 Rotation (W5, erlaubt): {len(rotationen)} Historie(n) auf "
+              f"{rotation_kapazitaet()} Records gestutzt – "
+              + ", ".join(rotationen[:6])
+              + (" …" if len(rotationen) > 6 else ""))
     print(f"🧾 {files_ok}/{len(paths)} Historien sauber · "
           f"{total_hard} harte Fehler · {total_warn} Funde.")
     if total_hard:

@@ -422,6 +422,7 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026) |
 | Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
 | LanguageTool-API down | grammar_check: Report-Banner „API nicht erreichbar“ + Exit 2 (kein falsch-grün) |
@@ -468,46 +469,53 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
-- **15.09.2026:** Rückweg in die Kadenz, Fazit-Nachschieben, Linkdichte. (1) Die durch die
-  blockierte Kette verursachten Qualitäts-Abstufungen wurden nicht per Hand
-  zurückgedreht, sondern über `park_state.rearm()` mit Begründung und
-  `cadence_wait` in die Kadenz zurückgeholt (9 × `queue`, 2 × `hold`; `draft`
-  bleibt, solange die Ursache steht). (2) `fazit_schmiede.py` lieferte für neun
-  Artikel denselben Fremd-Absatz („Kfz‑Versicherung …") – Ursache: `route_for()`
-  schnüffelte in den ersten 1200 Zeichen des Einleitungsfließtexts statt im Titel.
-  Neu: Titelfenster vor dem Intro-Sniff, plus Selbsttest-Fall „Gateway schlägt
-  Intro". Die neun Absätze sind von Hand nachgeschrieben (Zahlen aus dem Artikel),
-  die generatorseitigen Standardsätze sind ent-formularisiert. (3) Frugalismus-
-  Cluster umbenannt (3 live + 1 Entwurf, Slugs unverändert), pin_title entwirrt,
-  fehlende `kurzantwort` ergänzt; R5-Phantome in `check_titles.py` bereinigt.
-  (4) Linkdichte erst redaktionell gehoben, dann dedupliziert:
-  `internal_linker.py --apply` (12 Links, Anker von Hand geprüft) + 4 Inline-Links
-  + 5 Weiterlesen-Zeilen mit lebenden Zielen, danach `link_density_guard --fix`
-  (38 Ziel-Duplikate). Korridor 76 % → 100 %, unterversorgt 11 → 0, überladen 1 → 0.
-  Nebenbefunde repariert: Markdown-Links in `tags`/`keywords` eines WLAN-Artikels,
-  an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen. (5) **Fund, noch nicht behoben (zwei getrennte Dinge):** (a) Im VISIT-Lauf wurde
-  `data/spam_history.jsonl` von 1497 auf 3 Zeilen gestutzt und
-  `data/stil_history.jsonl` Zeile für Zeile ausgetauscht (51/51, Länge bleibt 51 –
-  Letzte-Messung-Ledger pro Artikel statt Historie). `history_guard` meldet 🟢,
-  weil er Form und Chronologie prüft, nicht Schwund. (b) Jede Visite schreibt
-  Historien-Zeilen, auch `--dry-run` (+67 Zeilen im Testlauf, content/ bleibt
-  unberührt): schreibarm, aber nicht schreibfrei. Wer (a) behebt, hängt in
-  `spam_guard`/`stil_guard` an statt zu schreiben, und ergänzt in `history_guard`
-  eine Schwund-Prüfung (Zeilenanzahl einer Historie darf nicht fallen).
-  (6) Neu am Regelwerk: `fazit_schmiede.py --altlasten` meldet und heilt den Altbaustil
-  der ersten Generation – auf Satzebene, damit dazwischenstehender Redaktionstext
-  überlebt, und gegen die Titel-Verstümmelung „^[0-9-\s.]+“ (fraß „50-30-20-Regel“
-  zu „Regel“). Der Modus ist bewusst opt-in: Maschinentext in Artikeln darf kein
-  Selbstläufer der Kette werden. Für die 11 betroffenen Beiträge gilt der Modus als
-  Struktur-Untergrenze, der Mittelsatz ist je Artikel redaktionell nach dessen
-  eigenen Zahlen gefasst (200–2.500 €
-  (7) Neue Befundlage am Schema-Gate: S3 akzeptiert `wordCount` jetzt auch in
-  Fließkomma-Schreibweise („2000.0“), weil Hugo gecachte Seitenwerte so liefert –
-  die Bildmaß-Regel derselben Wache tat das längst, und eine Wache, die strenger
-  ist als ihr eigener Nachbarbefund, meldet Phantome auf Live-Seiten. Text statt
-  Zahl, Null, Negative und gebrochene Werte melden weiterhin (Selbsttest
-  9b/9c/9d). Auslöser: ein Live-Artikel, dessen Wortzahl nach der Fazit-Kur genau
-  2000 war., 5–15 %, 10–15 %, 8–14 %, 80–150 € u. a.).
+- **15.09.2026:** Rückweg in die Kadenz, Fazit-Schmiede, Linkdichte, zwei Gate-Korrekturen.
+  (1) Die durch die blockierte Kette verursachten Qualitäts-Abstufungen wurden nicht per
+  Hand zurückgedreht, sondern über `park_state.rearm()` mit Begründung und `cadence_wait`
+  in die Kadenz zurückgeholt (9 × `queue`, 2 × `hold`; `draft` bleibt, solange die Ursache
+  steht). (2) `fazit_schmiede.py` lieferte für neun Artikel denselben Fremd-Absatz
+  („Kfz‑Versicherung …“) – Ursache: `route_for()` schnüffelte in den ersten 1200 Zeichen
+  des Einleitungsfließtexts statt im Titel. Neu: Titelfenster vor dem Intro-Sniff, plus
+  Selbsttest-Fall „Gateway schlägt Intro“. Die neun Absätze sind von Hand nachgeschrieben
+  (Zahlen aus dem Artikel), die generatorseitigen Standardsätze sind ent-formularisiert.
+  (3) Frugalismus-Cluster umbenannt (3 live + 1 Entwurf, Slugs unverändert), `pin_title`
+  entwirrt, fehlende `kurzantwort` ergänzt; R5-Phantome in `check_titles.py` bereinigt.
+  (4) Linkdichte erst redaktionell gehoben, dann dedupliziert: `internal_linker.py --apply`
+  (12 Links, Anker von Hand geprüft) + 4 Inline-Links + 5 Weiterlesen-Zeilen mit lebenden
+  Zielen, danach `link_density_guard --fix` (38 Ziel-Duplikate). Korridor 76 % → 100 %,
+  unterversorgt 11 → 0, überladen 1 → 0. Nebenbefunde repariert: Markdown-Links in
+  `tags`/`keywords` eines WLAN-Artikels, an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen.
+  (5) **Rücknahme eines gemeldeten Befunds.** Ich hatte „`spam_guard` und `stil_guard`
+  schreiben ihre Historie zu, statt anzuhängen“ diagnostiziert und als Fund gemeldet.
+  Das war falsch – ich hatte einen Diff-Hunk-Header gelesen statt die Dateien selbst. Beide Skripte hängen korrekt an (`spam_guard.py:189`,
+  `stil_guard.py:287`). Der Schwund ist die **dokumentierte W5-Rotation** in
+  `workspace_guard.py`: jede `data/*_history.jsonl` über `HIST_MAX_LINES = 400` wird auf
+  die neuesten 400 Zeilen gestutzt (Zeile 1894 → 400 bei `spam_history.jsonl`). Wer einen
+  Befund nicht an der Quelle prüft, meldet Geister.
+  (6) Neu am Regelwerk: `fazit_schmiede.py --altlasten` meldet und heilt den Altbaustil der
+  ersten Generation – auf Satzebene, damit dazwischenstehender Redaktionstext überlebt, und
+  gegen die Titel-Verstümmelung `^[0-9-\s.]+` (die fraß „50-30-20-Regel“ zu „Regel“).
+  Bewusst opt-in: Maschinentext in Artikeln darf kein Selbstläufer der Kette werden. Für
+  die 11 betroffenen Beiträge gilt der Modus als Struktur-Untergrenze; der Mittelsatz ist
+  je Artikel redaktionell nach dessen eigenen Zahlen gefasst (200–2.500 €, 5–15 %,
+  10–15 % bei 12 Cent/kWh, Dispo 8–14 % gegen Tagesgeld, 80–150 € Standby, 30–80 €
+  Repeater gegen 150–400 € Mesh, 6–8 Wochen und 10–15 % bei Flugtickets).
+  (7) Schema-Gate: S3 akzeptiert `wordCount` jetzt auch in Fließkomma-Schreibweise
+  („2000.0“), weil Hugo gecachte Seitenwerte so liefert – die Bildmaß-Regel derselben
+  Wache tat das längst, und eine Wache, die strenger ist als ihr eigener Nachbarbefund,
+  meldet Phantome auf Live-Seiten. Text statt Zahl, Null, Negative und gebrochene Werte
+  melden weiterhin (Selbsttest 9b/9c/9d). Auslöser: ein Live-Artikel, dessen Wortzahl nach
+  der Fazit-Kur genau 2000 betrug.
+  (8) `history_guard.py` bekommt **H6 VERLUSTPRÜFUNG (rotation-bewusst)**: Vergleich
+  Arbeitstree gegen den letzten Commit-Stand (HEAD, sonst Index). Anhängen erlaubt;
+  Schrumpfen nur, wenn es exakt die W5-Rotation ist (länger als die Kapazität, erhalten
+  bleibt der schwanzidentische Teil) – dann gilt es als erlaubt und wird als Rotation
+  ausgewiesen. Umschreiben im Mittelteil oder Verlust unter die Kapazität: Exit 2. Die
+  Kapazität liest die Wache aus `workspace_guard.py` aus und meldet Auseinanderlaufen der
+  beiden Werte. Ohne Git-Baseline (flacher Klon, fehlendes Blob) schweigt H6 – eine Wache,
+  die im Zweifel rot meldet, macht ihren Bericht unbrauchbar. Bewiesen an drei
+  Selbsttest-Fällen plus Probe am Live-Korpus: mittig umgeschrieben → Exit 2, auf 2
+  Zeilen gestutzt → Exit 2, normal angehängt → grün.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
