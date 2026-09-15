@@ -25,7 +25,10 @@ pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**. Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**.
+
+Sie ziehen rund um die Uhr Strom – auch wenn niemand zu Hause ist. Alte Geräte und dauerlaufende Elektronik treiben den Verbrauch um hunderte Kilowattstunden nach oben. Ich zeige dir, wie du **[Stromfresser finden](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)** und stoppen kannst. So sparst du bis zu **420 €** im Jahr.
+
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -77,7 +80,10 @@ Ein Infrarot‑Thermometer (z. B. **Fluke 62 Max**) erkennt überhitzte Netzte
 
 ### 4. Smart‑Plug‑Analyse
 
-Plugs mit integriertem Messwert (z. B. **AVM FRITZ!DECT 200**) liefern Echtzeit‑Daten in der App. Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00–06:00 Uhr).
+Plugs mit integriertem Messwert (z. B. **AVM FRITZ!DECT 200**) liefern Echtzeit‑Daten in der App.
+
+Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00–06:00 Uhr).
+
 
 #### Vor‑ und Nachteile von Smart‑Plugs vs. klassischen Messgeräten
 
@@ -220,9 +226,11 @@ Viele Stadtwerke, Verbraucherzentralen und Energieagenturen verleihen Messgerät
 
 Der Wechsel läuft komplett online:
 1. **Postleitzahl**, **Zählernummer** und **Jahresverbrauch** (z. B. 3.500 kWh) bereithalten.
+
 2. Im Vergleichs‑Tool das gewünschte **Tarif‑Modell** (Preisgarantie, Ökostrom) auswählen.
 3. **Kündigungs‑Check**: Der neue Anbieter übernimmt die Kündigung beim alten Lieferanten.
-4. **Bestätigung** per E‑Mail erhalten – der Wechsel erfolgt meist zum **1. Monatsende**.
+4. **Bestätigung** per E‑Mail erhalten – der Wechsel erfolgt meist zum **1 Monatsende**.
+
 
 ### Wie erkenne ich, ob ein Gerät im Standby mehr als 5 W verbraucht?
 
@@ -230,7 +238,10 @@ Stecke das Gerät für **30 Minuten** in ein **Zwischenstecker‑Messgerät** 
 
 ### Kann ich meine Stromrechnung mit einem einfachen Excel‑Sheet tracken?
 
-Ja. Lege Spalten für **Datum**, **Zählerstand**, **Verbrauch (kWh)** und **Kosten** an. Nutze die Formel `= (NeuerStand‑AlterStand) * PreisProkWh`. Ergänze eine **Pivot‑Tabelle**, um monatliche Trends zu visualisieren. So erkennst du sofort ungewöhnliche Sprünge und kannst gezielt nach Energiedieben suchen.
+Ja. Lege Spalten für **Datum**, **Zählerstand**, **Verbrauch (kWh)** und **Kosten** an.
+
+Nutze die Formel `= (NeuerStand‑AlterStand) * PreisProkWh`. Ergänze eine **Pivot‑Tabelle**, um monatliche Trends zu visualisieren. So erkennst du sofort ungewöhnliche Sprünge und kannst gezielt nach Energiedieben suchen.
+
 
 ---
 

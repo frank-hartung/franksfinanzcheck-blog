@@ -81,10 +81,15 @@ Schauen wir uns die nackten Zahlen an. Viele unterschätzen die „Kleckerbeträ
 
 Es gibt keine Geschenke ohne Hintergedanken. Aber der „Haken“ ist bei Direktbanken meist fair kalkuliert. Banken verdienen auch bei einem kostenlosen Konto Geld durch:
 1. **Interchange-Gebühren:** Jedes Mal, wenn du mit deiner Karte im Supermarkt bezahlst, zahlt der Händler eine kleine Gebühr an deine Bank.
+
 2. **Zinsmarge:** Die Bank verleiht das Geld, das auf deinem Konto liegt, zu höheren Zinsen weiter (z. B. als Kredite).
 3. **Cross-Selling:** In der App werden dir oft Versicherungen, Depots oder Kredite angeboten. Solange du diese nicht nutzt, bleibt das Konto für dich 100 % gratis.
 
-Ein wichtiger Punkt ist der **Dispositionskredit**. Wenn dein Konto ins Minus rutscht, langen auch manche Direktbanken zu. Vergleiche hier unbedingt die Sätze. Ein fairer Dispozins im Jahr 2026 liegt zwischen 7 % und 10 %. Alles über 12 % ist schlichtweg zu teuer.
+
+Ein wichtiger Punkt ist der **Dispositionskredit**. Wenn dein Konto ins Minus rutscht, langen auch manche Direktbanken zu.
+
+Vergleiche hier unbedingt die Sätze. Ein fairer Dispozins im Jahr 2026 liegt zwischen 7 % und 10 %. Alles über 12 % ist schlichtweg zu teuer.
+
 
 ## So unkompliziert gelingt der gesetzliche Kontowechsel
 
@@ -134,8 +139,10 @@ Für alle anderen gilt: Die „Beratung“ in der Filiale kostet dich indirekt T
 
 Wenn du schon wechselst, optimiere direkt dein gesamtes System. Viele Finanzprofis nutzen die 3-Konten-Logik:
 1. **Girokonto (0 €):** Hier geht das Gehalt ein. Alle Fixkosten (Miete, Strom, Versicherungen) gehen hier ab.
+
 2. **Konsumkonto (0 €):** Ein zweites kostenloses Konto oder ein „Pocket“ deines Hauptkontos. Hierhin überweist du dir am Monatsanfang dein „Taschengeld“ für Essen, Freizeit und Shopping. Ist das Konto leer, ist Schluss für den Monat.
 3. **Tagesgeld/[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/):** Hier liegen 3 Nettomonatsgehälter für Notfälle.
+
 
 Dank moderner Apps wie der von C24 kannst du dieses System oft innerhalb einer einzigen App mit Unterkonten abbilden, ohne fünf verschiedene Bankzugänge zu verwalten.
 

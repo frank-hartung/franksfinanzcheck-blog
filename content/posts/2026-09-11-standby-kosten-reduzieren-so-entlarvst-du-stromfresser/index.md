@@ -53,7 +53,10 @@ Der erste Schritt zu einer niedrigeren Rechnung ist die genaue Analyse. Du kanns
 
 Stecke das Messgerät einfach zwischen die Wandsteckdose und das jeweilige Gerät. Auf dem Display siehst du sofort den aktuellen Verbrauch in Watt. Besonders aufschlussreich ist die Messung im scheinbar ausgeschalteten Zustand. Zeigt das Gerät einen Wert über null Watt an, hast du einen Dauerverbraucher gefunden.
 
-Prüfe systematisch jeden Raum deines Hauses. Beginne im Wohnzimmer bei der TV-Wand und gehe dann ins Arbeitszimmer über. Auch Wärme ist ein klarer Indikator für Energieverlust. Wenn ein Netzteil im "Aus-Zustand" handwarm ist, fließt dort Strom. Wer so seine **Stromfresser entlarven** kann, findet schnell die größten Sparpotenziale.
+Prüfe systematisch jeden Raum deines Hauses. Beginne im Wohnzimmer bei der TV-Wand und gehe dann ins Arbeitszimmer über.
+
+Auch Wärme ist ein klarer Indikator für Energieverlust. Wenn ein Netzteil im "Aus-Zustand" handwarm ist, fließt dort Strom. Wer so seine **Stromfresser entlarven** kann, findet schnell die größten Sparpotenziale.
+
 
 ## Die 5 kritischsten Bereiche für hohe Standby Kosten
 Konzentriere dich auf die folgenden Kategorien, um den größten Hebel anzusetzen. Hier verstecken sich oft die massivsten **Dauerverbraucher** deines Haushalts.
@@ -82,7 +85,10 @@ Stellen wir uns vor, deine Standby-Verbraucher summieren sich auf 40 Watt.
 - 1 kWh pro Tag * 365 Tage = 365 kWh pro Jahr.
 - Mit dem aktuellen Schnitt von 0,40 € je Kilowattstunde ergibt das **einen Jahresbetrag von rund 146 €**.
 
-Diese 146 € zahlst du jedes Jahr für absolut keine Leistung. Senkst du diesen Wert durch schaltbare Leisten auf 5 Watt, sparst du über 120 € pro Jahr. Das entspricht einem guten Abendessen oder einem Versicherungsbeitrag. Jedes eingesparte Watt reduziert deine Rechnung um ca. 3,50 € bis 4,00 € pro Jahr.
+Diese 146 € zahlst du jedes Jahr für absolut keine Leistung. Senkst du diesen Wert durch schaltbare Leisten auf 5 Watt, sparst du über 120 € pro Jahr.
+
+Das entspricht einem guten Abendessen oder einem Versicherungsbeitrag. Jedes eingesparte Watt reduziert deine Rechnung um ca. 3,50 € bis 4,00 € pro Jahr.
+
 
 
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
@@ -91,7 +97,10 @@ Diese 146 € zahlst du jedes Jahr für absolut keine Leistung. Senkst du diese
 ## Welche Fehler kosten dich unnötig Geld?
 Viele Menschen glauben, moderne Geräte verbrauchten kaum noch Strom. EU-Verordnungen begrenzen den Standby-Verbrauch zwar auf unter 0,5 Watt bei Neuware. Doch diese Regeln gelten oft nicht für Geräte mit aktiver Netzwerkverbindung. Hier sind Werte bis zu 8 Watt völlig normal und rechtlich zulässig.
 
-Ein weiterer Irrtum betrifft die Haltbarkeit der Technik. Mancher denkt, ständiges Ein- und Ausschalten schade der Elektronik. Das Gegenteil ist oft der Fall. Moderne Netzteile leben häufig länger, wenn sie nicht permanent unter Spannung stehen. Du erwärmst dich weniger und verschleißt dadurch langsamer.
+Ein weiterer Irrtum betrifft die Haltbarkeit der Technik. Mancher denkt, ständiges Ein- und Ausschalten schade der Elektronik.
+
+Das Gegenteil ist oft der Fall. Moderne Netzteile leben häufig länger, wenn sie nicht permanent unter Spannung stehen. Du erwärmst dich weniger und verschleißt dadurch langsamer.
+
 
 Vergiss zudem die versteckten Orte in deiner Wohnung nicht. Das Ladegerät der elektrischen Zahnbürste oder der Verstärker der Satellitenanlage ziehen oft unbemerkt Strom. Wer nur im Wohnzimmer sucht, übersieht die Hälfte der Einsparpotenziale. Ein systematischer Rundgang durch alle Räume ist daher absolut unerlässlich.
 

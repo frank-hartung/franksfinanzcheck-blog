@@ -119,8 +119,11 @@ Bevor du den Vertrag unterschreibst, solltest du beide Seiten der Medaille kenne
 ## Hardware-Check: Mieten oder kaufen?
 
 Beim **Internetvertrag wechseln** wird dir oft ein Miet-Router angeboten. Die Kosten liegen meist zwischen 4,99 € und 7,99 € pro Monat. 
-* **Miete:** Vorteil ist der Support und der sofortige Austausch bei Defekt. Nachteil: Nach 24 Monaten hast du bis zu 192 € bezahlt und das Gerät gehört dir nicht.
+* **Miete:** Vorteil ist der Support und der sofortige Austausch bei Defekt.
+
+Nachteil: Nach 24 Monaten hast du bis zu 192 € bezahlt und das Gerät gehört dir nicht.
 * **Kauf:** Eine FRITZ!Box 7530 AX kostet einmalig ca. 140–150 €. Nach weniger als zwei Jahren hast du die Kosten im Vergleich zur Miete rausgeholt. Zudem kannst du das Gerät beim nächsten Wechsel einfach weiterverwenden oder bei eBay für gutes Geld verkaufen.
+
 
 Wenn der Anbieter im Rahmen des **DSL-Wechselbonus** den Router für 0 € dazu gibt (echtes Eigentum nach 24 Monaten), solltest du zuschlagen. Ist es nur eine "0 € Miete für 12 Monate", rechne die Kosten für das zweite Jahr genau durch.
 

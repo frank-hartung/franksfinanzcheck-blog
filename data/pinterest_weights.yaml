@@ -1,0 +1,6 @@
+# Pinterest-Performance-Gewichte (für Content-Engine, datengetrieben)
+# Generiert: 2026-09-15 · Quelle: data/pinterest_perf.yaml
+# Lese-Hinweis: engine_generate.py nutzt diese Datei für gewichtete
+# Themen-Auswahl (random.choices) – höheres Gewicht = höhere Priorität.
+
+weights:

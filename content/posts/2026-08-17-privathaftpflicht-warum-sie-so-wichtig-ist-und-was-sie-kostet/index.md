@@ -84,9 +84,15 @@ Wer auch Haus oder Wohnung absichern will, findet Tipps im Beitrag zum [Gebäude
 
 Stell dir vor, du bist mit deinem E-Scooter (privat, ohne Versicherungspflicht auf Privatgelände oder als Fußgänger mit einem Leihgerät unachtsam) unterwegs. Du übersiehst einen Fahrradfahrer. Er stürzt und bricht sich das Schlüsselbein. Zwei Wochen Klinik, drei Monate Therapie, Lohnausfall.
 
-Ohne Haftpflicht zahlst du alles selbst. Die Behandlung kostet schnell fünfstellig. Der Lohnausfall liegt je nach Job bei 4.000–12.000 €. Schmerzensgeld kommt extra. Mit einer guten Police prüft dein Versicherer die Forderung, wehrt sie ab oder zahlt.
+Ohne Haftpflicht zahlst du alles selbst. Die Behandlung kostet schnell fünfstellig.
 
-Ein zweites Szenario: **Mietsachschäden**. Eine Badewanne läuft über, während du kurz telefonierst. Die Wohnung darunter ist drei Wochen unbewohnbar, da die Decke saniert werden muss. Trocknung, neues Parkett beim Nachbarn, Hotelkosten für den Geschädigten: 8.000–20.000 € sind keine Ausnahme. Manche Billigpolicen decken nur Schäden am Gebäude, aber nicht am Inventar des Nachbarn. Ein moderner **Haftpflicht Vergleich** zeigt dir sofort, welche Tarife hier lückenlos leisten.
+Der Lohnausfall liegt je nach Job bei 4.000–12.000 €. Schmerzensgeld kommt extra. Mit einer guten Police prüft dein Versicherer die Forderung, wehrt sie ab oder zahlt.
+
+
+Ein zweites Szenario: **Mietsachschäden**. Eine Badewanne läuft über, während du kurz telefonierst.
+
+Die Wohnung darunter ist drei Wochen unbewohnbar, da die Decke saniert werden muss. Trocknung, neues Parkett beim Nachbarn, Hotelkosten für den Geschädigten: 8.000–20.000 € sind keine Ausnahme. Manche Billigpolicen decken nur Schäden am Gebäude, aber nicht am Inventar des Nachbarn. Ein moderner **Haftpflicht Vergleich** zeigt dir sofort, welche Tarife hier lückenlos leisten.
+
 
 **Kosten der Absicherung:** Ein Single-Tarif mit 50 Millionen € Deckung, Forderungsausfall und Schlüsselverlust kostet 2026 oft 40–70 € im Jahr. Familien zahlen 70–110 €. Das ist weniger als ein Essen im Monat – und [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor dem wirtschaftlichen Aus.
 
@@ -137,7 +143,10 @@ Eine Privathaftpflicht ersetzt zudem keine Hausrat-, Gebäude- oder Kfz-Police. 
 
 ## Fazit: Unverzichtbarer Basisschutz für jeden Geldbeutel
 
-Die **Privathaftpflicht** ist das Fundament deiner Absicherung. Es gibt keine andere Versicherung, die für so wenig Geld (ca. 4–6 € im Monat) ein so gigantisches Risiko (unbegrenzte Haftung mit dem gesamten Privatvermögen) abfängt. Wer sie aufschiebt, weil bisher nichts passiert ist, verwechselt Statistik mit Glück. Ein einziger unachtsamer Schritt auf die Straße kann genügen.
+Die **Privathaftpflicht** ist das Fundament deiner Absicherung. Es gibt keine andere Versicherung, die für so wenig Geld (ca.
+
+4–6 € im Monat) ein so gigantisches Risiko (unbegrenzte Haftung mit dem gesamten Privatvermögen) abfängt. Wer sie aufschiebt, weil bisher nichts passiert ist, verwechselt Statistik mit Glück. Ein einziger unachtsamer Schritt auf die Straße kann genügen.
+
 
 Achte beim **Haftpflicht Vergleich** auf die Details wie Forderungsausfall und grobe Fahrlässigkeit. So bleibt deine [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Freiheit auch dann erhalten, wenn das Leben mal nicht nach Plan läuft.
 

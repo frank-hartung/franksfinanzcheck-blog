@@ -40,9 +40,12 @@ Telekommunikations­unternehmen in Deutschland arbeiten nach einem simplen Prinz
 Hier sind die harten Fakten, warum du aktiv werden solltest:
 - **Reduzierte Grundgebühr:** In den ersten 6 bis 12 Monaten zahlst du oft nur 9,99 € bis 19,99 € statt der regulären 44,99 €. Diese Ersparnis bildet den größten Teil deines finanziellen Vorteils.
 - **Wechselboni & Cashback:** Vergleichsportale wie CHECK24 oder Verivox, aber auch die Anbieter selbst, gewähren oft Einmalgutschriften von 100 € bis 220 €. Dieses Geld wird oft schon wenige Wochen nach der ersten Rechnung direkt auf dein Bankkonto überwiesen.
-- **Hardware-Upgrade:** **Highspeed Internet** benötigt moderne Hardware. Ein alter Router von 2018 kann oft kein Wi-Fi 6, was in dicht besiedelten Mietshäusern zu massivem Geschwindigkeitsverlust führt. Ein Wechsel bringt dich technisch auf den neuesten Stand.
+- **Hardware-Upgrade:** **Highspeed Internet** benötigt moderne Hardware.
+
+Ein alter Router von 2018 kann oft kein Wi-Fi 6, was in dicht besiedelten Mietshäusern zu massivem Geschwindigkeitsverlust führt. Ein Wechsel bringt dich technisch auf den neuesten Stand.
 - **Monatliche Kündbarkeit:** Seit der TKG-Novelle 2021 kannst du Verträge nach Ablauf der 24-monatigen Mindestlaufzeit jederzeit mit einer Frist von einem Monat kündigen. Das nimmt den Druck raus, stärkt aber deine Verhandlungsposition.
 - **Technologiewechsel:** Vielleicht liegt bei dir mittlerweile Glasfaser im Keller oder das Kabelnetz wurde modernisiert. Ein Wechsel ist die beste Chance, von der alten Kupferleitung (DSL) auf stabilere Medien umzusteigen.
+
 
 ## Welche Geschwindigkeit brauchst du wirklich?
 
@@ -145,8 +148,11 @@ Beim **Internet Anbieterwechsel** lauern kleine Gebühren, die die Ersparnis auf
 
 ## Sonderfall: Umzug und Anbieterwechsel
 
-Ziehust du um, hast du ein Sonderkündigungsrecht, falls der Anbieter am neuen Wohnort die Leistung nicht erbringen kann (z. B. du hast 250 Mbit/s gebucht, dort liegen aber nur 16 Mbit/s). Kann er liefern, läuft der Vertrag weiter.
+Ziehust du um, hast du ein Sonderkündigungsrecht, falls der Anbieter am neuen Wohnort die Leistung nicht erbringen kann (z. B. du hast 250 Mbit/s gebucht, dort liegen aber nur 16 Mbit/s).
+
+Kann er liefern, läuft der Vertrag weiter.
 **Strategie:** Prüfe 3 Monate vor dem Umzug, ob dein Vertrag aus der Mindestlaufzeit raus ist. Wenn ja: Kündige regulär und buche für die neue Wohnung einen Neukunden-Tarif mit vollem Bonus. Das ist fast immer günstiger als ein "Umzugsservice" des alten Anbieters, der oft sogar die Laufzeit neu auf 24 Monate startet, ohne dir Rabatte zu geben.
+
 
 ## Fazit: Mit minimalem Aufwand hunderte Euro sparen
 
