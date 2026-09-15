@@ -39,7 +39,19 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "DOKTOR-REPORT.md"
 HISTORY = ROOT / "data/doctor_history.jsonl"
 
-DRY = "--dry-run" in sys.argv
+def trocken(argv) -> bool:
+    """Trockenlauf = die Kette schreibt nichts.
+
+    Der Selbsttest zaehlt seit 15.09.2026 dazu: main() fuehrt NACH dem Selbsttest die
+    ganze Kette aus, und ein nacktes `--selftest` reichte bis dahin, um Live-Artikel zu
+    heilen – real passiert, als ein Agent den Selbsttest verlangte: unit_guard und
+    dash_guard schrieben dabei 10 Artikel um (NBSP vor €, Gedankenstriche in
+    Zahlbereichen). Wer einen Beweis verlangt, darf keinen Eingriff bekommen.
+    """
+    return "--dry-run" in argv or "--selftest" in argv
+
+
+DRY = trocken(sys.argv)
 NEW_ONLY = "--new-only" in sys.argv
 
 # ------------------------------------------------------------
@@ -146,6 +158,14 @@ def selftest() -> list:
             fehler.append(f"  Dry-Run schreibt: {script} bekommt --fix weitergereicht!")
     if "--fix" not in kinder_args("dash_guard.py", ["--fix"], False, False):
         fehler.append("  Dry-Run-Regel kaputt: im scharfen Lauf fehlt --fix")
+    # Der Selbsttest-Lauf selbst ist ein Trockenlauf: er soll beweisen, nicht heilen.
+    if not trocken(["--selftest"]):
+        fehler.append("  Selbsttest-Lauf ist nicht trocken: er wuerde die Kette schreiben")
+    if trocken([]) or not trocken(["--dry-run"]):
+        fehler.append("  Trockenregel unverstaendlich: scharfer oder Dry-Run-Lauf falsch klassifiziert")
+    for script, args, *_ in KETTE:
+        if "--fix" in kinder_args(script, args, trocken(["--selftest"]), False):
+            fehler.append(f"  Selbsttest schreibt: {script} bekommt --fix weitergereicht!")
     return fehler
 
 

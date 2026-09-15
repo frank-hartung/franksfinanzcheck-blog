@@ -422,7 +422,7 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
-| Listenpunkte, die in einer Zeile stehen (Leser sehen Sterne im Fließtext) | `listen_guard.py --fix` L1, mit Wortbeweis und Nachkontrolle – seit 15.09. in der Kette |
+| Listenpunkte, die in einer Zeile stehen (15.09.2026, als 24. Wache verdrahtet) (Leser sehen Sterne im Fließtext) | `listen_guard.py --fix` L1, mit Wortbeweis und Nachkontrolle – seit 15.09. in der Kette |
 | Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score- UND Zeichenlänge-Holds am SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
 | Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026; Schiebefenster der Rotation ist erlaubt) |
 | Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
@@ -561,6 +561,17 @@ jeder Schreibaktion.
   Ergebnis die Kapazität füllt und vor der Rotation die Kapazität überschritten war.
   Eingefrorener Fall `schiebefenster` im Selbsttest (14 Fälle), Gegenproben am echten
   Korpus: 400 → 400 mit Anhang → 🟢, 400 → 398 ohne Anhang → 🛑 Exit 2.
+  (12) Falle im Doktor selbst gefunden, beim Belegholen für (10): `blog_doctor.py --selftest`
+  war kein reiner Beweis – `main()` führt nach dem Selbsttest die ganze Kette aus, und die
+  Trockenregel kannte nur `--dry-run`. Der Selbsttest-Lauf lief also als VISIT und hat dabei
+  10 Live-Artikel umgeschrieben (`unit_guard`: NBSP vor `€`, `dash_guard`: Gedankenstriche in
+  Zahlbereichen – inhaltlich korrekte Hausregeln, aber zur unrechten Zeit und von einer
+  Abfrage, die nur nach einem Beweis fragte). Neu: `trocken(argv)` gilt für `--dry-run`
+  UND `--selftest`; der Bericht weist den Modus aus, und drei Selbsttest-Fälle verbieten
+  jetzt, dass einem Wache im Selbsttest-Lauf `--fix` weitergereicht wird. Die 10 Zeilen
+  bleiben im Bestand – sie sind idempotent und wären beim nächsten scharfen Lauf dieselben.
+  Lehre: Ein Werkzeug, das „nur prüfen" verspricht, muss das auch gegen seine eigene
+  Aufrufreihenfolge verteidigen.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
