@@ -467,6 +467,28 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **15.09.2026:** Rückweg in die Kadenz, Fazit-Nachschieben, Linkdichte. (1) Die durch die
+  blockierte Kette verursachten Qualitäts-Abstufungen wurden nicht per Hand
+  zurückgedreht, sondern über `park_state.rearm()` mit Begründung und
+  `cadence_wait` in die Kadenz zurückgeholt (9 × `queue`, 2 × `hold`; `draft`
+  bleibt, solange die Ursache steht). (2) `fazit_schmiede.py` lieferte für neun
+  Artikel denselben Fremd-Absatz („Kfz‑Versicherung …") – Ursache: `route_for()`
+  schnüffelte in den ersten 1200 Zeichen des Einleitungsfließtexts statt im Titel.
+  Neu: Titelfenster vor dem Intro-Sniff, plus Selbsttest-Fall „Gateway schlägt
+  Intro". Die neun Absätze sind von Hand nachgeschrieben (Zahlen aus dem Artikel),
+  die generatorseitigen Standardsätze sind ent-formularisiert. (3) Frugalismus-
+  Cluster umbenannt (3 live + 1 Entwurf, Slugs unverändert), pin_title entwirrt,
+  fehlende `kurzantwort` ergänzt; R5-Phantome in `check_titles.py` bereinigt.
+  (4) Linkdichte erst redaktionell gehoben, dann dedupliziert:
+  `internal_linker.py --apply` (12 Links, Anker von Hand geprüft) + 4 Inline-Links
+  + 5 Weiterlesen-Zeilen mit lebenden Zielen, danach `link_density_guard --fix`
+  (38 Ziel-Duplikate). Korridor 76 % → 100 %, unterversorgt 11 → 0, überladen 1 → 0.
+  Nebenbefunde repariert: Markdown-Links in `tags`/`keywords` eines WLAN-Artikels,
+  an `**Weiterlesen:**` geklebte `**Lesetipp:**`-Zeilen. (5) **Fund, noch nicht
+  behoben:** `spam_guard` und `stil_guard` schreiben ihre Historie im VISIT-Lauf
+  neu statt anzuhängen (`spam_history.jsonl` 1497 → 3 Zeilen,
+  `stil_history.jsonl` 51/51 überschrieben); `history_guard` prüft nur die Form
+  und meldet 🟢. Schreibmodus „a" statt „w" gehört in beide Skripte.
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
