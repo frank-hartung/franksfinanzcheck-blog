@@ -144,6 +144,10 @@ Viele Menschen zahlen für Dienste, die sie kaum nutzen. Ein regelmäßiger Chec
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
 
+## Fazit: einfache Frugalismus-Tricks für den Alltag
+
+Die fünf Tricks wirken zusammen: Ausgaben tracken, Energie messen, Verträge prüfen, geplant einkaufen und Abos ausmisten. Nach einem Monat steht schwarz auf Weiß, was vorher nur Gefühl war – und der Trick, der dich am meisten nervt, ist der richtige Anfang.
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie oft sollte ich meine Ausgaben tracken?

@@ -146,6 +146,10 @@ Kalkuliere aber immer, wie teuer der Tarif im zweiten Jahr ohne Bonus wird. Oft 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
 **Lesetipp:** [Standby Kosten reduzieren: So entlarvst du Stromfresser](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 
+## Fazit: Gasrechnung senken – So bereitest du dich im Spätsommer vor
+
+Rund 800 € pro Jahr lassen sich mit Wartung, Verhalten und einem rechtzeitigen Tarif-Check zurückholen, und der Spätsommer ist genau das Fenster, in dem Handwerkertermine und Gastarife gleichzeitig günstig sind. Kombiniere die drei Hebel statt dich für einen zu entscheiden, dann startet die Heizperiode mit einer Rechnung, die zu dir passt.
+
 ## Häufige Fragen
 
 ### Wann ist der beste Zeitpunkt, die Heizung zu prüfen?

@@ -96,10 +96,31 @@ DEEP_HINTS = [
     (re.compile(r"budget|haushaltsbuch|frugal|notgroschen|50.30.20|monatsbudget|nebenverdienst|impulskaeufe", re.I), "allgemein"),
 ]
 
-def route_for(text: str, pillar: str = "") -> str:
+GO_ROUTE_RX = re.compile(r"/go/([a-z0-9][a-z0-9-]*)/?", re.I)
+BEKANNTE_ROUTEN = {k for _, k in DEEP_HINTS} | set(PILLAR_ROUTE.values()) | {"allgemein"}
+
+
+def route_for(text: str, pillar: str = "", title: str = "") -> str:
     """Wählt den konversionsstärksten Deep-Link. Erst Thema aus dem Artikel
-    (Titel + Tags + Intro), dann sauberer Pillar-Fallback."""
-    ctx = text.lower()[:1200]
+    (Titel + Tags + Intro), dann sauberer Pillar-Fallback.
+
+    Zwei Vorstöße seit 15.09.2026, beide vor dem 1200-Zeichen-Fenster:
+    (1) der TITEL ist die sauberste Themen-Aussage, (2) ein /go/<route>/-Gateway
+    im Artikel ist eine redaktionelle Entscheidung. Ohne sie überstimmte ein
+    „Kasko" im Intro den Mietwagen-Artikel (kfz|kasko steht in DEEP_HINTS vor
+    mietwagen) – die Fazit-Schmiede setzte dadurch in neun Artikel einen
+    thematisch fremdenDomainsatz.
+    """
+    txt = text or ""
+    if title:
+        for pat, key in DEEP_HINTS:
+            if pat.search(title):
+                return key
+    for m in GO_ROUTE_RX.finditer(txt):
+        key = m.group(1).lower()
+        if key in BEKANNTE_ROUTEN:
+            return key
+    ctx = txt.lower()[:1200]
     for pat, key in DEEP_HINTS:
         if pat.search(ctx):
             return key
@@ -265,12 +286,21 @@ SELFTEST = [
     ("Ganz ohne passendes Fachthema im Text", "konto-karten", "girokonto"),
     # bewusst breites Budget-Thema bleibt beim Portal:
     ("Haushaltsbuch führen: So behältst du dein Monatsbudget im Griff", "", "allgemein"),
+    # 15.09.2026: der im Artikel stehende Gateway-Link ist die Wahrheit – auch
+    # gegen ein Fremdstichwort im Intro-Fenster (Kasko/SF-Klasse -> kfz).
+    ("Kasko, SF-Klasse und was am Schalter zählt [Vergleich](/go/mietwagen/)", "", "mietwagen"),
 ]
 
 
 def run_selftest() -> list[str]:
     """Prüft jede kanonische Route. Liefert Fehlerliste (leer = alles gut)."""
     fehler = []
+    # Titel-Fenster (15.09.): ein Kasko-Hinweis im Text darf den Mietwagen-Titel
+    # nicht überstimmen – route_for(title=...) ist die Quelle für Fazit & FAQ.
+    got_titel = route_for("Kasko und SF-Klasse am Schalter", "",
+                         "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub")
+    if got_titel != "mietwagen":
+        fehler.append(f"  Titel-Fenster: erwartet /go/mietwagen/, bekam /go/{got_titel}/")
     for i, (txt, pillar, want) in enumerate(SELFTEST, 1):
         got = route_for(txt, pillar)
         if got != want:

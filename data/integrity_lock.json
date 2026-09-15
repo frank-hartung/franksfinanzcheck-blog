@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-14T23:48:52.033399+00:00",
-  "head": "ce71743",
+  "signed_at": "2026-09-15T00:52:00.823699+00:00",
+  "head": "f571e15",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
@@ -21,7 +21,7 @@
     "layouts/shortcodes/einspartabelle.html": "527d9dccebf232ba9876e64df51ca0fc52ead3518575fca613b9048942a70cf7",
     "layouts/shortcodes/tarifvergleich.html": "2e9027e722fad0cbe33e6ecf736f3fd407c1a2b175b07f4008f651e4733161ca",
     "scripts/affiliate_integrity_gate.py": "a7d3627181b2c790bc6dbd37937dae737458a226874bcf15e24f402882ffa2ba",
-    "scripts/affiliate_marketer.py": "7983219b8b8d55a2fdce78e3356f32a50beef8ff3d92622bf8e60ef520fc6093",
+    "scripts/affiliate_marketer.py": "037a1803a76d9b9d351b6d04b41cbbfc94e72cc7e073b1612f712deff613f90b",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "f81ba363234923bdcb851b10e291714a73ad7921c865aa803ff331b1d9d5aa0e",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
@@ -29,7 +29,7 @@
     "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",
     "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
     "scripts/content_audit.py": "99a482e8f6a1bb035e841f905a68da6cbf42a32346682ecb3e339c7d48550689",
-    "scripts/fazit_schmiede.py": "71f7e1b8417fdb199b9293b73276522518ee87ead2989217e5b443037a6aae78",
+    "scripts/fazit_schmiede.py": "c22dc6a256762858b1838ac17c5a4ecd0b540ab4a9d2d45752f0db292f581176",
     "scripts/generate_covers.py": "8e0a9d7c57ca37502349432f0cd9cb979b7a558f118b58c39ade5a48223e2b4a",
     "scripts/hardcases_guard.py": "e1ef51101d045973d3ab31b638bb2c1a78ab15ec342eec89cafdcc646cc03130",
     "scripts/internal_linker.py": "99ca6d25c0a43988cd498dde641ef1ab0ca182787187aab3c9b31143d2320dc5",

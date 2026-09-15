@@ -53,7 +53,7 @@ try:
     ROUTE_SNIFFER = am.route_for
 except Exception:
     # Minimal-Fallback falls Import fehlschlägt
-    def ROUTE_SNIFFER(text, pillar=""):
+    def ROUTE_SNIFFER(text, pillar="", title=""):
         return "allgemein"
 
 # --- FAQ-POOL PRO AFFILIATE-ROUTE (100% redaktionelle Qualität) ---
@@ -259,9 +259,15 @@ def generate_fazit_text(title: str, route: str) -> str:
     }
     sentence_map["fluege"] = sentence_map["reisen"]
     
-    s1 = f"Sich gezielt mit dem Thema **{cleantitle}** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen."
+    # Der fruhere Einstieg („Sich gezielt mit dem Thema X zu beschäftigen, ist einer
+    # der einfachsten Hebel … bares Geld zu sparen“) war in jedem Fazit identisch und
+    # genau die Formel, die R7 als Template-Sprache meldet. Neu: kurzer, sachlicher
+    # Rahmen – Route-spezifischer Satz (s2) bleibt die eigentliche Aussage.
+    s1 = f"Der Hebel bei **{cleantitle}** sitzt nicht im Verzicht, sondern im Nachrechnen."
     s2 = sentence_map.get(route, sentence_map["allgemein"])
-    s3 = "Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀"
+    # Kein Emoji-Doppel, kein „fang heute an“: der konkrete Nachschlag-Step.
+    s3 = ("Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich "
+          "fest und wiederhole den Check jährlich – fünf Minuten reichen.")
     
     # Ueberschriftentraeger: „## Fazit: <H1 komplett> schlau nutzen“ war dreifach
     # kaputt – (1) der CTA-Satz „schlau nutzen“ klebte in der Ueberschrift (Hugo
@@ -430,7 +436,12 @@ def main() -> int:
             missing_faq_count += 1
             
         if not has_fazit or not has_faq:
-            route = ROUTE_SNIFFER(body_part)
+            # Titel mitgeben: ohne ihn entscheidet das 1200-Zeichen-Intro und ein
+            # Streifwort (Kasko, Haftpflicht) überstimmt das eigentliche Thema.
+            try:
+                route = ROUTE_SNIFFER(body_part, "", title)
+            except TypeError:      # Signatur ohne Titel-Parameter (Fallback-Def)
+                route = ROUTE_SNIFFER(body_part)
             
             if DO_FIX and not DRY_RUN:
                 updated_content = insert_sections(full_content, has_fazit, has_faq, title, route)
