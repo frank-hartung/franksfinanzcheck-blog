@@ -57,6 +57,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel."
+  ki_news_used: true
 
 - id: versicherung-beitragsanpassung-jahresende
   kategorie: versicherung
