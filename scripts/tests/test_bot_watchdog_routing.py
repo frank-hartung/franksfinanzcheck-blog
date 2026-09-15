@@ -27,8 +27,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(
 import alert_router as ar  # noqa: E402
 import bot_watchdog as bw  # noqa: E402
 
-NOW = datetime.datetime(2026, 9, 12, 12, 0, tzinfo=datetime.timezone.utc)
-FRISCH = (NOW - datetime.timedelta(hours=2)).isoformat()
+# Zeit-Anker relativ zur echten Uhr: der Watchdog misst die Lagebild-Frische an
+# now() (Fenster: STATE_MAX_AGE_HOURS = 48 h). Ein absolut datierter Anker ist eine
+# Zeitbombe – am 14.09.2026 sind genau vier dieser Tests umgefallen, weil ihr „NOW"
+# der 12.09. war und jeder Lauf danach in den Zweig „Lagebild veraltet" lief.
+# Deterministisch bleibt es trotzdem: eine Stunde alt ist frisch, fünf Tage alt ist
+# veraltet – unabhängig vom Laufdatum.
+NOW = datetime.datetime.now(datetime.timezone.utc)
+FRISCH = (NOW - datetime.timedelta(hours=1)).isoformat()
 
 
 def _state(state="dead", severity="red", checked_at=FRISCH, renewable=False,
