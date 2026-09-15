@@ -73,7 +73,7 @@ offene Rechtschreib-Funde < 30 · 0 Duplikate · 0 Keyword-Dumps · 0 Intro-Form
 | R2 | `textverstaendnis_guard.py` | Keyword-Dump: Fließtext-Absatz > 200 Zeichen, > 12 Kommas, > 40 Tokens, ≤ 2 Verben | hart, blockierend |
 | R3 | `textverstaendnis_guard.py` + `data/terminologie.yaml` | Je Konzept ein Leitbegriff (z. B. „DNS-Server“); Synonyme > `max_synonyme` im Artikel → Fund; Ersterwähnung darf erklären | hart, blockierend |
 | R4 | `textverstaendnis_guard.py` | Satzanfangs-Echo: gleicher Anfang > 20 % der Fließtextsätze ODER > 4×/1.000 Wörter | weich (Report) |
-| R5 | `textverstaendnis_guard.py` + `r5_absatz_splitter.py` | Fließtext-Absatz > 4 Sätze → Fund; > 6 Sätze → hart; Splitter teilt an Satzgrenzen (2+3) | hart ab > 6 Sätzen; Splitter für Bestand |
+| R5 | `textverstaendnis_guard.py` + `r5_absatz_splitter.py` | Fließtext-Absatz > 4 Sätze → Fund; > 6 Sätze → hart; Splitter teilt iterativ an Satzgrenzen, bis keine harte Hälfte bleibt | hart ab > 6 Sätzen; Publish-Gate/Re-Queue heilen deterministisch vor dem Blocker |
 | R6 | `readability_check.py` (gehärtet) | Flesch ≥ 60, Ø Satzlänge ≤ 16, >25-Wort-Sätze < 10 %, Keyword-Dumps & Absatzlängen separat gemessen, Silbenzählung deutsch korrigiert (End-e nicht abgezogen, -ion/-ie-Endungen), Satzlängen-SD als Metrik | `--new-only` blockierend |
 | R7 | `textverstaendnis_guard.py` | Intro-Formel „In diesem Ratgeber/Artikel/…“ → 0 Toleranz | hart, blockierend; Engine-Prompt rotiert 8 Öffnungen |
 | R8 | `textverstaendnis_guard.py` + `link_guard.py` | Ankertext-Substantive gegen Titel/Slug des Ziels; Leerzeichen im Slug → hart | hart bei Leerzeichen-Slug; Ziel-Mismatch weich |
@@ -420,10 +420,10 @@ jeder Schreibaktion.
 |---|---|
 | Schwache KI-Antwort → kein Artikel | Engine v2 (3-Ebenen-Fallback) |
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
-| Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
-| Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation); R5-ABSATZ-HART wird vorher deterministisch gesplittet |
+| Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (iterativer Satzgrenzen-Split, Abkürzungs-Schutz) |
 | Listenpunkte, die in einer Zeile stehen (15.09.2026, als 24. Wache verdrahtet) (Leser sehen Sterne im Fließtext) | `listen_guard.py --fix` L1, mit Wortbeweis und Nachkontrolle – seit 15.09. in der Kette |
-| Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score- UND Zeichenlänge-Holds am SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
+| Hold auf einem Entwurf, dessen Ursache längst behoben ist (niemand sieht sie nach) | `requeue_quality_holds.py` neu bewertet quality-score-, Zeichenlänge- UND R5-ABSATZ-HART-Holds am jeweiligen SSOT → `rearm` in die Kadenz, nie Direkt-Live (15.09.2026) |
 | Historie verlustig oder im Mittelteil umgeschrieben (nicht durch W5-Rotation erklärbar) | `history_guard.py` H6 → Exit 2, harte Kette; die Wache heilt nicht, sie nimmt den Befund weg (15.09.2026; Schiebefenster der Rotation ist erlaubt) |
 | Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
@@ -534,7 +534,18 @@ jeder Schreibaktion.
   umbenannt, zwei Kurzantworten auf die belegten Zahlen des Textes zurückgeholt
   („mindestens 20 %“ und „10–15 %“ standen so nie im Körper), Fazits auf Hausstruktur,
   `social_posted: true` auf zwei nie geposteten Entwürfen zurückgesetzt (der Schalter
-  wäre nach dem Publish als „bereits gepostet“ gelesen worden). Im übrigen Bestand:
+  wäre nach dem Publish als „bereits gepostet“ gelesen worden).
+  (9b) Produktions-Wache #286 (14.09.: 1/2 LIVE, 11 Holds) war dieselbe
+  Bauklasse für `R5-ABSATZ-HART`: der Splitter existierte, aber nicht jeder
+  Freigabepfad konnte ihn schreiben. Jetzt exportiert `r5_absatz_splitter.py`
+  einen in-memory-Heiler, `publish_gate.py` nutzt ihn als letzte Linie vor der
+  harten Textverständnisprüfung, `publication_release.accept_candidate()` heilt
+  Re-Queue/Reserve-Kandidaten **vor** dem STRICT-Dry-Run-Gate (mit Snapshot-
+  Rückbau bei Ablehnung), und `requeue_quality_holds.py` hebt reparierte
+  R5-Holds nur nach Gegenprüfung mit `textverstaendnis_guard.py` wieder in die
+  Re-Queue. Ergebnis: heilbarer Absatzfehler = Satzgrenzen-Split + voller
+  Gate-Durchlauf, nie Dauer-Hold und nie ungeprüft live.
+  Im übrigen Bestand:
   nach dem Einmal-Suchlauf 9 Artikel / 26 Punkte – die Wache misst strenger und
   vollständiger (Task-Listen `- [ ] …` mitzählend, Mathe-Zeilen verwerfend):
   **11 Artikel, 40 Zeilen, 41 Punkte, 8 live**. Bewusst keine Flächenheilkur in diesem

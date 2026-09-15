@@ -15,7 +15,10 @@ import profi_polish
 import publication_check as pc
 import publication_release as pr
 import publish_day_check as watchdog
+import publish_gate as pg
+import requeue_quality_holds as rqh
 import reserve_pool as rp
+import r5_absatz_splitter as r5
 import spellcheck
 
 
@@ -204,6 +207,79 @@ class DraftScopedHealerTests(unittest.TestCase):
         self.assertIn('0 Artikel live heute', note)
         self.assertIn('2 Entwurf', note)
         self.assertIn('unter LIVE-Mindestziel', note)
+
+
+class R5HoldRecoveryTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / 'content' / 'posts'
+        self.posts.mkdir(parents=True)
+
+    def long_post(self, slug='2026-09-07-r5-hold', *, draft=True, hold=True):
+        p = self.posts / slug / 'index.md'
+        p.parent.mkdir(parents=True)
+        extra = ''
+        if hold:
+            extra = ('cadence_demoted: 2026-09-06T12:00:00Z\n'
+                     'cadence_grund: "publish-gate: Textverständnis-Gate nicht bestanden: R5-ABSATZ-HART"\n')
+        p.write_text(
+            '---\n'
+            'title: "R5 Hold"\n'
+            'description: "Test"\n'
+            'date: 2026-09-07T06:00:00Z\n'
+            f'draft: {str(draft).lower()}\n'
+            f'{extra}'
+            '---\n\n'
+            'Der erste Satz hat genug Wörter. Der zweite Satz hat genug Wörter. '
+            'Der dritte Satz hat genug Wörter. Der vierte Satz hat genug Wörter. '
+            'Der fünfte Satz hat genug Wörter. Der sechste Satz hat genug Wörter. '
+            'Der siebte Satz hat genug Wörter.\n',
+            encoding='utf-8',
+        )
+        return p
+
+    def test_r5_hold_wird_geheilt_und_nur_requeued(self):
+        index = self.long_post()
+        requeued, kept, errors = rqh.fix(posts_dir=self.posts)
+        self.assertEqual([x[0] for x in requeued], ['2026-09-07-r5-hold'])
+        self.assertEqual(kept, [])
+        self.assertEqual(errors, [])
+        text = index.read_text(encoding='utf-8')
+        self.assertIn('draft: true', text)          # kein Direktpublish
+        self.assertIn('cadence_wait: true', text)  # nächster Slot entscheidet
+        self.assertIn('r5-hold aufgehoben', text)
+        self.assertFalse(r5.hard_r5_findings(text, 'fixture'))
+        self.assertGreaterEqual(text.count('\n\n'), 2)
+
+    def test_publish_gate_heilt_r5_vor_der_harten_pruefung(self):
+        slug = '2026-09-07-r5-live'
+        index = self.long_post(slug, draft=False, hold=False)
+        old = (pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT)
+        try:
+            pg.POSTS_DIR = str(self.posts)
+            pg.DRY_RUN = False
+            pg.STRICT = True
+            with patch.object(pg, 'todays_live_candidates', return_value=[slug]), \
+                 patch.object(pg, 'check_length_failures', return_value=(set(), None)), \
+                 patch.object(pg, 'seo_audit_failures', return_value=(set(), None)), \
+                 patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
+                 patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
+                 patch.object(pg, 'title_integrity_failures', return_value=set()), \
+                 patch.object(pg, 'readability_failures', return_value=({}, None)):
+                self.assertEqual(pg.main(), 0)
+        finally:
+            pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT = old
+        text = index.read_text(encoding='utf-8')
+        self.assertIn('draft: false', text)
+        self.assertFalse(r5.hard_r5_findings(text, 'fixture'))
+        self.assertGreaterEqual(text.count('\n\n'), 2)
+
+    def test_acceptance_preheal_arbeitet_vor_dry_run_gate(self):
+        index = self.long_post('2026-09-07-r5-reserve', draft=False, hold=False)
+        changes = pr.preheal_candidate(index)
+        self.assertEqual(changes, ['R5-ABSATZ-HART: 1 Absatz-Split(s)'])
+        self.assertFalse(r5.hard_r5_findings(index.read_text(encoding='utf-8'), 'fixture'))
 
 
 if __name__ == '__main__':
