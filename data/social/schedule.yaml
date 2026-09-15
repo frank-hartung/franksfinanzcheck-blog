@@ -553,9 +553,9 @@ items:
   date: '2026-09-15'
   time: '19:15'
   scheduled_at: '2026-09-15T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:takeaway:2026-09-16
   channel: telegram
   slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
