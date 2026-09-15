@@ -1,4 +1,33 @@
-# Veröffentlichungs-Zuverlässigkeit – Issue #217
+# Veröffentlichungs-Zuverlässigkeit – Issue #217 / #287
+
+## Befund am 15.09.2026 (Issue #287 – öffentlicher Mindestziel-Bruch)
+
+- Mo 14.09. UTC: Source hatte zeitweise nur **1 LIVE-Artikel**. Der öffentliche
+  Nachweis (`publication_check.py --online`) meldete zu Recht
+  `delivered=[frugalismus-tricks]`, `ok=false` → Issue #287.
+- Root-Cause: `publish_gate.py` im **Deploy** verwarf den neuen Tages-Artikel
+  (`2026-09-14-finanzplan-…`, FM-Korruption `---TITEL:`) und stufte/verwarf
+  weitere Kandidaten. Die Quote-Nachfüllung (Re-Queue + Reserve) lief nur in
+  Engine-Endabnahme und Kadenz-Backstop – **nicht** im Deploy. Zwischen
+  Gate-Verwurf (~22:23 UTC) und nächtlichem Backstop (~23:11 UTC) stand die
+  öffentliche Site unter dem Mindestziel.
+- Zweitrangig: `data/reserve-readiness.json` zählte bereits live geschaltete
+  Slugs weiter als `ready=true` → Content-Reserve-Gate sah 6/6, obwohl der
+  echte Pool kleiner war (Issue #295).
+
+### Dauerhafte Reparatur 15.09.2026
+
+1. `publication_release.refill_to_min()` – gemeinsame Brandschutzlinie
+   (Re-Queue → Reserve bis LIVE-Minimum, ohne KI).
+2. `deploy.yml` ruft nach `publish_gate` `publication_release.py --refill-only`
+   auf; Heilungen laufen über den bestehenden Gate-Diff-Commit.
+3. `reserve_readiness`/`reserve_gate` zählen ready **nur** aus aktuellen
+   `draft+reserve`-Entwürfen (kein Blindvertrauen auf das `ready`-Feld).
+4. `reserve_pool.reserve_drafts()` priorisiert hash-zertifizierte Kandidaten.
+5. `publication_incident` stößt bei Source-Defizit zuerst die Kadenz-
+   Endkontrolle an, nicht nur Deploy.
+6. Regressionen: `scripts/tests/test_publication_reliability.py`
+   (`QuoteRefillAfterGateLossTests`, `ReserveCertFreshnessTests`).
 
 ## Befund am 08.09.2026
 
@@ -74,13 +103,15 @@ Danach:
 python3 -m unittest discover -s scripts/tests -v
 python3 scripts/engine_generate.py --selftest
 python3 scripts/reserve_pool.py --selftest
+python3 scripts/publication_release.py --selftest
 python3 scripts/cadence_guard.py --selftest
 ```
 
 Abgedeckt: Entwürfe zählen nicht, Wochenendkadenz, Mindestziel, Gate-Ablehnung
 mit nächstem Kandidaten, Wiederholung ohne Doppelveröffentlichung, manueller
 Entwurfsschutz, Werkzeugfehler mit Rollback, Off-Day-Schutz, HTTP-Soft-404,
-Netzfehler und Folgetagsalarm trotz eines vorhandenen Artikels.
+Netzfehler, Folgetagsalarm trotz eines vorhandenen Artikels, **Quote-Nachfüllung
+nach Gate-Verlust im Deploy (#287)**, Reserve-Zertifikat ohne LIVE-Geister (#295).
 
 Vollständige Provider-/Hugo-/Pages-Integration wird in der Produktionsabnahme
 geprüft; lokale Unit-Tests allein beweisen keine erfolgreiche Auslieferung.

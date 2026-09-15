@@ -67,7 +67,14 @@ def is_draft(text: str) -> bool:
 
 
 def reserve_drafts(posts_dir: Path = POSTS) -> list:
-    """Alle Reserve-Entwürfe (draft: true + reserve: true), älteste zuerst."""
+    """Alle Reserve-Entwürfe (draft: true + reserve: true), älteste zuerst.
+
+    Premium-Fix 15.09.2026 (#287): Wenn data/reserve-readiness.json
+    hash-gesicherte ready-Zertifikate trägt, kommen zertifizierte
+    Kandidaten ZUERST – so greift die Quote-Nachfüllung bevorzugt zu
+    Artikeln, die publish_gate STRICT bereits bestanden haben, statt
+    blind den ältesten (ggf. abgelehnten) Entwurf zu versuchen.
+    """
     out = []
     if not posts_dir.is_dir():
         return out
@@ -75,7 +82,44 @@ def reserve_drafts(posts_dir: Path = POSTS) -> list:
         text = index.read_text(encoding="utf-8")
         if is_draft(text) and is_reserve(text):
             out.append(index)
-    return out
+    return _prefer_certified(out)
+
+
+def _prefer_certified(drafts: list) -> list:
+    """Stable: ready-zertifizierte zuerst, Rest in Originalreihenfolge."""
+    import hashlib
+    import json
+    cert_path = ROOT / "data" / "reserve-readiness.json"
+    if not cert_path.exists() or not drafts:
+        return drafts
+    try:
+        data = json.loads(cert_path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001 – Zertifikat optional
+        return drafts
+    ready_ok = set()
+    for row in data.get("candidates") or []:
+        if not row.get("ready"):
+            continue
+        slug = row.get("slug")
+        sha = row.get("sha256")
+        if not slug:
+            continue
+        # Hash-Match: nur EXAKT dieser Inhalt gilt als zertifiziert.
+        path = next((p for p in drafts if p.parent.name == slug), None)
+        if path is None:
+            continue
+        try:
+            body = path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        if sha and hashlib.sha256(body.encode()).hexdigest() != sha:
+            continue
+        ready_ok.add(slug)
+    if not ready_ok:
+        return drafts
+    head = [p for p in drafts if p.parent.name in ready_ok]
+    tail = [p for p in drafts if p.parent.name not in ready_ok]
+    return head + tail
 
 
 def live_count_today(posts_dir: Path = POSTS) -> int:

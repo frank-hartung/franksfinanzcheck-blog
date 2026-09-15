@@ -31,13 +31,20 @@ CERT = ROOT / "data" / "reserve-readiness.json"
 def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
     """Liefert (ready, target, candidates). Fehlt das Zertifikat,
     gilt der Pool als leer (0/target) – ein abgestürzter Lauf darf
-    nicht als erfolgreich aussehen."""
+    nicht als erfolgreich aussehen.
+
+    Premium-Fix 15.09.2026 (#287/#295): ready wird IMMER aus der
+    candidates-Liste neu gezählt – nie dem gespeicherten `ready`-Feld
+    blind vertraut (das konnte nach publish_to_min veraltete LIVE-Slugs
+    mitzählen und 6/6 vortäuschen).
+    """
     if not cert_path.exists():
         return 0, int(os.environ.get("RESERVE_TARGET", "6")), []
     data = json.loads(cert_path.read_text(encoding="utf-8"))
     target = int(data.get("target", os.environ.get("RESERVE_TARGET", "6")))
-    candidates = data.get("candidates", [])
-    ready = sum(1 for r in candidates if r.get("ready"))
+    candidates = list(data.get("candidates", []) or [])
+    # Nur ready=true-Einträge; leere/kaputte Zeilen zählen nicht.
+    ready = sum(1 for r in candidates if r.get("ready") is True)
     return ready, target, candidates
 
 

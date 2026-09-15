@@ -319,6 +319,19 @@ jobs:
       - name: Publish-Gate (5 harte Prüfungen inkl. Cover-Text-Komplettheit)
         run: python3 scripts/publish_gate.py
 
+      # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
+      # Kernbefund Mo 14.09.2026: publish_gate verwarf den neuen Tages-Artikel
+      # (FM-Korruption „---TITEL:“) und ließ nur 1 LIVE-Post stehen. Die
+      # Endkontrolle füllt die Quote – aber Deploy tat es nicht. Bis zum
+      # nächsten Backstop (Stunden später) blieb die öffentliche Auslieferung
+      # unter dem Mindestziel. Ab sofort: nach JEDEM Gate-Lauf deterministisch
+      # Re-Queue + Reserve bis LIVE-Minimum nachschieben (ohne KI, fail-closed
+      # pro Kandidat). Commit/Rebuild übernimmt der bestehende Gate-Diff-Pfad.
+      - name: Quote-Nachfüllung nach Gate-Verlust (Re-Queue + Reserve → Min)
+        run: |
+          python3 scripts/publication_release.py --selftest
+          python3 scripts/publication_release.py --refill-only
+
       - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
         id: gate_diff
         run: |

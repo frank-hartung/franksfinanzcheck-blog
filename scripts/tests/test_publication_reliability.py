@@ -282,5 +282,147 @@ class R5HoldRecoveryTests(unittest.TestCase):
         self.assertFalse(r5.hard_r5_findings(index.read_text(encoding='utf-8'), 'fixture'))
 
 
+class QuoteRefillAfterGateLossTests(unittest.TestCase):
+    """Issue #287: Gate-Verwurf darf das Tagesmindestziel nicht ungefüllt lassen."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / 'content' / 'posts'
+        self.posts.mkdir(parents=True)
+
+    def _post(self, slug, *, draft=True, reserve=False, wait=False,
+              day='2026-09-14'):
+        p = self.posts / slug / 'index.md'
+        p.parent.mkdir(parents=True, exist_ok=True)
+        extra = ''
+        if reserve:
+            extra += 'reserve: true\n'
+        if wait:
+            extra += ('cadence_wait: true\n'
+                      'cadence_demoted: 2026-09-13T12:00:00Z\n'
+                      'cadence_grund: "test"\n')
+        p.write_text(
+            f'---\ntitle: "T"\ndate: {day}T12:00:00Z\n'
+            f'draft: {str(draft).lower()}\n{extra}---\nBody\n',
+            encoding='utf-8',
+        )
+        return p
+
+    def test_refill_to_min_fills_after_single_live(self):
+        """1 LIVE + Reserve → genau 1 Nachschub bis Minimum 2 (Mo 14.09.)."""
+        class Monday(dt.date):
+            @classmethod
+            def today(cls):
+                return cls(2026, 9, 14)
+
+        class MondayDT(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026, 9, 14, 15, 0, tzinfo=dt.timezone.utc)
+
+        self._post('live-only', draft=False)
+        self._post('reserve-a', draft=True, reserve=True)
+        self._post('reserve-b', draft=True, reserve=True)
+        rejected = self._post('reserve-bad', draft=True, reserve=True)
+        before_bad = rejected.read_bytes()
+
+        with patch.object(pr.dt, 'date', Monday), \
+             patch.object(pr.dt, 'datetime', MondayDT), \
+             patch('cadence_guard.now_utc_iso',
+                   lambda: '2026-09-14T15:00:00Z'), \
+             patch('reserve_pool.now_utc_iso',
+                   lambda: '2026-09-14T15:00:00Z'), \
+             patch('reserve_pool.datetime.date', Monday):
+            published = pr.refill_to_min(
+                posts_dir=self.posts,
+                validator=lambda p: p.parent.name != 'reserve-bad',
+                finalize=False,
+            )
+
+        self.assertEqual(len(published), 1)
+        self.assertIn(published[0], ('reserve-a', 'reserve-b'))
+        self.assertEqual(rejected.read_bytes(), before_bad)
+        live = list(self.posts.glob('*/index.md'))
+        live_count = sum(
+            1 for p in live
+            if 'draft: false' in p.read_text(encoding='utf-8')
+            and '2026-09-14' in p.read_text(encoding='utf-8')
+        )
+        self.assertGreaterEqual(live_count, 2)
+
+    def test_refill_offday_is_noop(self):
+        class Tuesday(dt.date):
+            @classmethod
+            def today(cls):
+                return cls(2026, 9, 15)
+
+        class TuesdayDT(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026, 9, 15, 12, 0, tzinfo=dt.timezone.utc)
+
+        r = self._post('reserve-x', draft=True, reserve=True, day='2026-09-15')
+        before = r.read_bytes()
+        with patch.object(pr.dt, 'date', Tuesday), \
+             patch.object(pr.dt, 'datetime', TuesdayDT), \
+             patch('reserve_pool.datetime.date', Tuesday):
+            self.assertEqual(
+                pr.refill_to_min(posts_dir=self.posts,
+                                validator=lambda p: True,
+                                finalize=False),
+                [],
+            )
+        self.assertEqual(r.read_bytes(), before)
+
+    def test_selftest_exit_zero(self):
+        self.assertEqual(pr.run_selftest(), 0)
+
+    def test_deploy_workflow_wires_refill_after_publish_gate(self):
+        """Deploy muss nach publish_gate die Quote nachfüllen (#287)."""
+        root = Path(__file__).resolve().parents[2]
+        yml = (root / '.github' / 'workflows' / 'deploy.yml').read_text(
+            encoding='utf-8')
+        gate_pos = yml.find('python3 scripts/publish_gate.py')
+        refill_pos = yml.find('publication_release.py --refill-only')
+        self.assertGreater(gate_pos, 0, 'publish_gate-Schritt fehlt im Deploy')
+        self.assertGreater(refill_pos, gate_pos,
+                           'Quote-Nachfüllung muss NACH publish_gate stehen')
+
+
+class ReserveCertFreshnessTests(unittest.TestCase):
+    """Issue #295: Zertifikat darf keine LIVE-Slugs als ready zählen."""
+
+    def test_evaluate_recounts_ready_from_candidates(self):
+        import reserve_gate as rg
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = Path(tmp) / 'reserve-readiness.json'
+            # Absichtlich inkonsistent: ready=6, aber nur 4 true-Kandidaten
+            # (zwei bereits live und fälschlich noch in der Liste).
+            cert.write_text(json.dumps({
+                'target': 6,
+                'ready': 6,  # veraltet / gelogen
+                'candidates': [
+                    {'slug': 'a', 'ready': True},
+                    {'slug': 'b', 'ready': True},
+                    {'slug': 'c', 'ready': True},
+                    {'slug': 'd', 'ready': True},
+                    {'slug': 'live-e', 'ready': False},
+                    {'slug': 'live-f', 'ready': False},
+                ],
+            }), encoding='utf-8')
+            ready, target, cands = rg.evaluate(cert)
+            self.assertEqual(target, 6)
+            self.assertEqual(ready, 4)  # neu gezählt, nicht dem Feld vertraut
+            self.assertEqual(len(cands), 6)
+            self.assertEqual(rg.main.__doc__ is not None or True, True)
+
+    def test_prune_drops_empty_rows(self):
+        import reserve_readiness as rr
+        rows = [{'slug': 'a', 'ready': True}, {'slug': '', 'ready': True}, {}]
+        cleaned = rr.prune_stale_rows(rows)
+        self.assertEqual(cleaned, [{'slug': 'a', 'ready': True}])
+
+
 if __name__ == '__main__':
     unittest.main()

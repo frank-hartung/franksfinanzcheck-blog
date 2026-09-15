@@ -1,41 +1,13 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 0,
+  "pool_size": 5,
+  "generated_at": "2026-09-15T10:48:35Z",
   "candidates": [
     {
-      "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
-      "ready": true,
-      "sha256": "845b8ab4aa6853e7195b048b48731574b0a48d622f3cbe07f2a41b533e21bb76",
-      "score": 0.96,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
-      "ready": true,
-      "sha256": "9d84101bcf24b43a3da537faa0239e6ce0afa9b5f8cb4f977fc1c8e767ed55ba",
-      "score": 0.986,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
       "slug": "2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
-      "ready": true,
-      "sha256": "d454733f3d4e15afd177222dbd40e176dc18aacabf7c32206848cef6b037eb90",
+      "ready": false,
+      "sha256": "7357a4158581511c5cb51584b80643802c513ee6cb3831868a3d0db6cc6042f3",
       "score": 0.938,
       "parts": {
         "spelling": 0.96,
@@ -45,12 +17,13 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
-      }
+      },
+      "reason": "Zertifikat veraltet (Inhalt geändert oder nach #287 neu bewertet) – nächster content-reserve-Lauf zertifiziert neu"
     },
     {
       "slug": "2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
-      "ready": true,
-      "sha256": "d3922b9a3eb3581f0f2987d764a35fbef7190b338a9ff76ec2e9b7b76ada5282",
+      "ready": false,
+      "sha256": "1e198feb1c99813bb1d877305a0ded7e5a738e5300c03c6b4b6ae301b5d8b5f3",
       "score": 0.968,
       "parts": {
         "spelling": 0.84,
@@ -60,12 +33,13 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
-      }
+      },
+      "reason": "Zertifikat veraltet (Inhalt geändert oder nach #287 neu bewertet) – nächster content-reserve-Lauf zertifiziert neu"
     },
     {
       "slug": "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
-      "ready": true,
-      "sha256": "91d27e1d1206cad6c9cea872749eee0a99fb4bd422be39ff874fd852884257b1",
+      "ready": false,
+      "sha256": "46db20474e6e7ab54598098bcc9e836d3ad8072f009e3871ebecfc581d013dfa",
       "score": 0.944,
       "parts": {
         "spelling": 0.8200000000000001,
@@ -75,12 +49,13 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.9
-      }
+      },
+      "reason": "Zertifikat veraltet (Inhalt geändert oder nach #287 neu bewertet) – nächster content-reserve-Lauf zertifiziert neu"
     },
     {
       "slug": "2026-09-13-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "e7d812df74243cb5877b819a8bfdc389c53d3c3ca289d629e719610c01af608a",
+      "ready": false,
+      "sha256": "2042bfb51a7169c9bd82e1100c363c934426545be1bfbeef9e4aab733f977955",
       "score": 0.889,
       "parts": {
         "spelling": 0.88,
@@ -90,12 +65,13 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
-      }
+      },
+      "reason": "Zertifikat veraltet (Inhalt geändert oder nach #287 neu bewertet) – nächster content-reserve-Lauf zertifiziert neu"
     },
     {
       "slug": "2026-09-14-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
       "ready": false,
-      "sha256": "9b54b9f24b74227e149349c6868fc0be455e17adca1bf410a5ded5b02ab54d16",
+      "sha256": "f9e4a2c69701ab29dd73495b5eefe7648651359237167dfede28da8eb195c35b",
       "reason": "publish_gate/hugo abgelehnt (STRICT dry-run) – Details im Workflow-Log",
       "score": 0.94,
       "parts": {
@@ -108,5 +84,6 @@
         "readability": 0.8
       }
     }
-  ]
+  ],
+  "note": "Bereinigt 15.09.2026 (#287): LIVE-Slugs aus Zertifikat entfernt; nur draft+reserve-Entwürfe. Nächster content-reserve-Lauf zertifiziert frisch über publish_gate STRICT."
 }

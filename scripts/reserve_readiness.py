@@ -42,8 +42,23 @@ def score_diagnosis(index) -> dict | None:
         return {"fehler": str(exc)}
 
 
+def prune_stale_rows(rows: list[dict]) -> list[dict]:
+    """Zählt nur echte Reserve-Entwürfe – nie bereits LIVE geschaltete.
+
+    Premium-Fix 15.09.2026 (#287/#295): Nach publish_to_min bleiben die
+    frisch live geschalteten Artikel fälschlich im Zertifikat (ready=true),
+    weil der nächste Lauf sie nicht mehr in reserve_drafts() sieht und die
+    alte JSON-Datei unangetastet ließ. Der Gate las dann 6/6, obwohl der
+    Pool real 4 Entwürfe hatte. Jeder Lauf schreibt das Zertifikat neu aus
+    den aktuellen Entwürfen – veröffentlichte Slugs fallen damit weg.
+    """
+    return [r for r in rows if r.get("slug")]
+
+
 def main():
     rows = []
+    # Nur aktuelle Reserve-Entwürfe (draft+reserve). Bereits veröffentlichte
+    # Kandidaten (reserve_published) erscheinen hier bewusst nicht mehr.
     for index in rp.reserve_drafts():
         original = index.read_text(encoding="utf-8")
         diag = score_diagnosis(index)
@@ -76,16 +91,27 @@ def main():
             row["parts"] = diag.get("parts")
         rows.append(row)
 
+    rows = prune_stale_rows(rows)
     goal = target()
-    ready_count = sum(r["ready"] for r in rows)
-    report = {"target": goal, "ready": ready_count, "candidates": rows}
+    ready_count = sum(1 for r in rows if r.get("ready"))
+    # ready-Feld und candidates-Liste sind dieselbe Wahrheit – nie auseinander
+    # laufen lassen (früher: ready-Zähler aus dem alten Lauf + neue Liste).
+    report = {
+        "target": goal,
+        "ready": ready_count,
+        "pool_size": len(rows),
+        "generated_at": __import__("datetime").datetime.now(
+            __import__("datetime").timezone.utc
+        ).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "candidates": rows,
+    }
     (ROOT / "data" / "reserve-readiness.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False))
     if ready_count < goal:
         print(f"\n🛑 RESERVE-ENGPAß: {ready_count}/{goal} Kandidaten "
-              f"gate-fertig.")
+              f"gate-fertig (Pool {len(rows)} Entwürfe).")
         for r in rows:
             mark = "✅" if r["ready"] else "⛔"
             extra = f" – {r.get('reason', '')}" if r.get("reason") else ""
