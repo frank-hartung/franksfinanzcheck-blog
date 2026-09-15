@@ -78,7 +78,11 @@ jobs:
   reserve:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # 120 statt 90 Minuten (15.09.2026, #295): Die Konvergenz-Stufe darf bis
+    # 60 Minuten arbeiten; „sichern“ + End-Gate brauchen danach garantiert
+    # noch Platz. Der Deckel ist reine Reserve – ein gesunder Lauf braucht
+    # ~10–25 Minuten.
+    timeout-minutes: 120
     env:
       RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
     steps:
@@ -164,13 +168,20 @@ jobs:
         id: convergence
         if: ${{ !cancelled() }}
         continue-on-error: true
+        # Zeitdeckel doppelt gesichert (Nachtrag 15.09.2026, #295): Die Stufe
+        # bricht selbst nach 45 Minuten sauber ab (--max-minuten) und dieser
+        # Step-Timeout ist der Notausgang, falls ein einzelner Kindprozess
+        # hängt. In BEIDEN Fällen laufen „sichern“ und End-Gate weiter – sonst
+        # würde der 90-Minuten-Job gekillt und der erarbeitete Pool-Stand wäre
+        # verloren, ohne dass der Lauf seine Diagnose schreiben könnte.
+        timeout-minutes: 60
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
           AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
           RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
-        run: python3 scripts/reserve_converge.py --runden 3
+        run: python3 scripts/reserve_converge.py --runden 3 --max-minuten 45
 
       # ================= RUNDE 3 (TRIAGE) =================
       # Reserve heißt nicht Stapel. Jeder Entwurf bekommt einen begründeten

@@ -16,6 +16,9 @@ werden hier als Verträge festgenagelt:
   4. KONVERGENZ: Der Pool muss das Ziel in derselben Nacht erreichen können
      (begrenzte, zielgerichtete Runden statt eines wirkungslosen Einzelblocks).
   5. FRISCHE: Ein veraltetes Zertifikat ist kein Reife-Nachweis.
+  6. HEILER-DECKUNG: Jedes Gate, das über die Reife entscheidet, braucht
+     einen Heiler (Struktur → check_length, Meta-Satzende → meta_optimizer).
+     Ein Gate ohne Heiler macht den Zielbestand unerreichbar.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -30,6 +33,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import check_length as cl            # noqa: E402
+import meta_optimizer as mo          # noqa: E402
 import reserve_converge as rc        # noqa: E402
 import reserve_finisher as rf        # noqa: E402
 import reserve_gate as rg            # noqa: E402
@@ -210,7 +214,36 @@ class KonvergenzTests(unittest.TestCase):
                     log=lambda *_: None)
         self.assertEqual([e["RESERVE_TOPUP_BATCH"] for e in envs],
                          ["4", "4", "4"])
-        self.assertTrue(all(e["RESERVE_FORCE_TOPUP"] == "1" for e in envs))
+        self.assertEqual([e["RESERVE_FORCE_TOPUP"] for e in envs],
+                         ["1", "1", "1"],
+                         "Der In-Flight-Schutz muss im Nachschub aufgehoben sein")
+
+    def test_zeitbudget_stoppt_vor_dem_job_timeout(self):
+        """#295: Eine langsame Nacht darf den 90-Minuten-Job nicht sprengen –
+        sonst killt GitHub den Job samt „sichern“ und End-Gate (roter Lauf
+        OHNE Diagnose und ohne gepushten Pool-Stand)."""
+        rufe = []
+        uhr = {"t": 0.0}
+        runde = {"n": 0}
+
+        def runner(cmd, env_extra=None, timeout=0):
+            rufe.append(timeout)
+            uhr["t"] += 400.0
+            return 0
+
+        def reader():
+            runde["n"] += 1
+            return {"target": 6, "ready": runde["n"],
+                    "pool_size": runde["n"] + 1, "exists": True}
+
+        res = rc.converge(runner=runner, state_reader=reader, max_runden=3,
+                          max_sekunden=900, now=lambda: uhr["t"] + 1.0,
+                          log=lambda *_: None)
+        self.assertEqual(res["abbruch"], "zeit-budget")
+        self.assertEqual(res["runden"], 1, "nur die erste Runde lief")
+        self.assertEqual(len(rufe), 3, "drei Schritte, dann kein weiterer")
+        self.assertTrue(all(0 < t <= 900 for t in rufe),
+                        f"Restbudget muss als Schritt-Timeout gelten: {rufe}")
 
 
 class GateFrischeTests(unittest.TestCase):
@@ -274,6 +307,82 @@ class LaengenHeilungTests(unittest.TestCase):
         # Regressionsschutz: der Live-Korpuslauf darf durch die neue Signatur
         # keine Entwürfe einsammeln (Aufruf ohne Argumente).
         self.assertEqual(cl.collect.__defaults__, (None, False))
+
+
+class MetaSatzendeHeilungTests(unittest.TestCase):
+    """#295 (zweiter Befund derselben Klasse): Das Meta-Gate
+    (quality_score: `desc[-1] in ".!?…"`, sonst −0,3) hatte KEINEN Heiler –
+    meta_optimizer prüfte nur die Länge. Ein Pool-Kandidat mit korrekt langer,
+    aber punktloser Description hing deshalb dauerhaft bei meta 0.70 unter der
+    Publish-Schwelle 0.85 (genau der Zustand, in dem der harte End-Gate jede
+    Nacht „Stock shortage“ meldete und den Pool nie auf RESERVE_TARGET kam).
+    """
+
+    DESC_OHNE_PUNKT = ("Erfahre, wie du im Spätsommer deine Gasrechnung senken "
+                       "kannst. Mit diesen Tipps startest du vorbereitet in den "
+                       "Herbst und sparst bei der Heizung bares Geld")
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.post = Path(self.tmp.name) / "2026-09-15-kandidat" / "index.md"
+        self.post.parent.mkdir(parents=True)
+
+    def _write(self, desc: str) -> None:
+        self.post.write_text(
+            "---\n"
+            'title: "Gasrechnung senken: Dein Strategieplan im Spätsommer"\n'
+            f"description: {desc}\n"
+            "date: 2026-09-15T06:00:00Z\n"
+            "draft: true\n"
+            "reserve: true\n"
+            "kurzantwort: \"Kurz gesagt: Vor dem Herbst prüfen und vergleichen.\"\n"
+            'keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst"]\n'
+            "---\n\nText.\n",
+            encoding="utf-8")
+
+    def _article(self) -> dict:
+        return mo.load_articles([str(self.post)])[0]
+
+    def _description(self) -> str:
+        return self._article()["description"]
+
+    def test_audit_erkennt_fehlendes_satzende(self):
+        self._write(self.DESC_OHNE_PUNKT)
+        issues = mo.audit(self._article())["issues"]
+        self.assertIn("Description ohne Satzende (Punkt/!/?/… fehlt)", issues)
+        # Regressionsschutz: gültige Satzenden bleiben beanstandungsfrei.
+        for ok in (".", "!", "?", "…"):
+            self._write(f'"{self.DESC_OHNE_PUNKT}{ok}"')
+            self._assert_no_satzende_issue()
+
+    def _assert_no_satzende_issue(self):
+        issues = mo.audit(self._article())["issues"]
+        self.assertNotIn("Description ohne Satzende (Punkt/!/?/… fehlt)", issues)
+
+    def test_fix_ergaenzt_satzende_deterministisch(self):
+        # Ohne KI, ohne Netz: der Heiler muss das Gate-Hindernis selbst lösen.
+        self._write(self.DESC_OHNE_PUNKT)
+        self.assertTrue(mo.fix_meta(self._article(), use_ai=False))
+        self.assertTrue(self._description().endswith("."))
+        # Der Heiler und das Gate stimmen jetzt überein (SSOT-Vertrag).
+        import quality_score as qs
+        self.assertEqual(qs.score_article(str(self.post))["parts"]["meta"], 1.0)
+        # Satzende-Marker für das Meta-Gate ist erfüllt (Ende oder Zitat-Ende).
+        self.assertTrue(mo.desc_has_sentence_end(self._description()))
+
+    def test_fix_ist_idempotent(self):
+        self._write(f'"{self.DESC_OHNE_PUNKT}."')
+        self.assertFalse(mo.fix_meta(self._article(), use_ai=False),
+                         "Ein geheilter Kandidat darf nicht erneut geändert werden")
+
+    def test_langenlimit_wird_nicht_ueberschritten(self):
+        lang = "Wort " * 34  # 170 Zeichen, kein Satzende
+        self._write(lang.strip())
+        mo.fix_meta(self._article(), use_ai=False)
+        desc = self._description()
+        self.assertLessEqual(len(desc), mo.DESC_MAX)
+        self.assertTrue(desc.endswith("."))
 
 
 if __name__ == "__main__":
