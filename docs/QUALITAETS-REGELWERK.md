@@ -500,7 +500,14 @@ jeder Schreibaktion.
   zu „Regel“). Der Modus ist bewusst opt-in: Maschinentext in Artikeln darf kein
   Selbstläufer der Kette werden. Für die 11 betroffenen Beiträge gilt der Modus als
   Struktur-Untergrenze, der Mittelsatz ist je Artikel redaktionell nach dessen
-  eigenen Zahlen gefasst (200–2.500 €, 5–15 %, 10–15 %, 8–14 %, 80–150 € u. a.).
+  eigenen Zahlen gefasst (200–2.500 €
+  (7) Neue Befundlage am Schema-Gate: S3 akzeptiert `wordCount` jetzt auch in
+  Fließkomma-Schreibweise („2000.0“), weil Hugo gecachte Seitenwerte so liefert –
+  die Bildmaß-Regel derselben Wache tat das längst, und eine Wache, die strenger
+  ist als ihr eigener Nachbarbefund, meldet Phantome auf Live-Seiten. Text statt
+  Zahl, Null, Negative und gebrochene Werte melden weiterhin (Selbsttest
+  9b/9c/9d). Auslöser: ein Live-Artikel, dessen Wortzahl nach der Fazit-Kur genau
+  2000 war., 5–15 %, 10–15 %, 8–14 %, 80–150 € u. a.).
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede
