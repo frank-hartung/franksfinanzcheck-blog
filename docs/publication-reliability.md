@@ -29,6 +29,48 @@
 6. Regressionen: `scripts/tests/test_publication_reliability.py`
    (`QuoteRefillAfterGateLossTests`, `ReserveCertFreshnessTests`).
 
+## Befund am 15.09.2026 (Issue #295 – Content-Reserve tagelang rot)
+
+- Der nächtliche Reserve-Lauf `34949097389` (03:25 UTC) war nach 12 grünen
+  Fachstufen rot: Der Sicherungs-Schritt kollidierte beim Rebase mit dem
+  parallel laufenden Deploy-/Auslieferungslauf genau auf
+  `data/reserve-readiness.json` (Deploy-Commit `344bc20`, 10:50:30 UTC), und der
+  End-Gate meldete zu Recht Knappheit (Pool 5 Entwürfe < Ziel 6).
+- Drei weitere Ursachen machten die Knappheit chronisch: Der Top-up produzierte
+  höchstens einen Kandidaten pro Nacht (Verbrauch: bis 3/Tag), der
+  In-Flight-Schutz blockierte den Nachschub derselben Nacht, und
+  `check_length.py` übersprang Entwürfe – zwei Pool-Kandidaten wurden deshalb
+  nie verlängert (Struktur-Score 0.70 bei < 1.200 Wörtern).
+- Zusätzlich staggte der Lauf mit `git add -A` auch LIVE-Content und Live-Cover
+  mit, die korpusweite Heiler der Veredelungs-Kette nebenbei verändert hatten.
+
+### Dauerhafte Reparatur 15.09.2026
+
+1. `git_sync.sh`: Zertifikat und Cover-Manifest sind maschinengenerierte
+   Artefakte → Auto-Heilung nach „letzter Schreiber gewinnt“ (echte
+   Content-Konflikte bleiben ein harter Stopp).
+2. `reserve_finisher.py`: **Live-Korpus-Isolation** – außerhalb der
+   Pool-Kandidaten wird jede Änderung bytegenau zurückgestellt, neue
+   Fremd-Dateien wandern in Quarantäne; Cover werden nur noch pro Kandidat
+   gerendert.
+3. `reserve_stage_guard.py` (neu): Staging-Politik – nur Pool-Content wird
+   committet, Live-Content wird gemeldet statt mitgeschrieben.
+4. `reserve_converge.py` (neu): begrenzte, zielgerichtete Konvergenz
+   (max. 3 Runden, Batch = Fehlbestand, Dedup + Kapazitätsdeckel) ersetzt den
+   wirkungslosen Einzel-Nachschub; `RESERVE_FORCE_TOPUP` hebt den
+   In-Flight-Schutz nur dort und nur begrenzt auf.
+5. `check_length.py`: `--include-drafts` + `--file` – Pool-Kandidaten werden
+   verlängert, der Korpus bleibt unangetastet (Reserve-#4-Klasse).
+6. `reserve_gate.py`: Frische-Prüfung des Zertifikats
+   (`RESERVE_CERT_MAX_AGE_H`, Default 36 h) – veraltete Zertifikate sind kein
+   Reife-Nachweis.
+7. Regressionen: `scripts/tests/test_reserve_pipeline.py` (neu),
+   `scripts/tests/test_git_sync.py` (Zertifikat-/Manifest-Konflikt),
+   Selbsttests in `content-reserve.yml`.
+
+Details, Beweise und Runbook:
+`docs/archiv/CONTENT-RESERVE-295-REPARATUR-2026-09-15.md`.
+
 ## Befund am 08.09.2026
 
 - Issue #217 dokumentiert am 07.09. mehrfach 0 veröffentlichte Artikel und
@@ -61,8 +103,12 @@ eine absolute Ausfallfreiheit kann weder GitHub noch ein KI-Provider garantieren
 4. Backstop um 10:35, 16:35, 19:35 und 21:35 UTC. Commit auch bei Teildefizit,
    expliziter Deploy auch bei unverändertem Source-Stand. Fehlende Quote = rot.
 5. Reserve-Produktion täglich um 03:25 UTC, unabhängig vom Publikationstag.
-   Maximal zwei Generierungen pro Lauf; Ziel sechs **gate-geprüfte** Kandidaten,
-   Bestand auf zwölf begrenzt. Ein Hash schützt vor veralteten Zertifikaten.
+   Ziel sechs **gate-geprüfte** Kandidaten, Bestand auf zwölf begrenzt.
+   Der Nachschub ist bedarfsgesteuert statt mengenbegrenzt: Die Konvergenz-Stufe
+   produziert in bis zu drei Runden exakt den Fehlbestand
+   (`RESERVE_TOPUP_BATCH`, hart gedeckelt auf vier Generierungen pro Aufruf)
+   und bricht bei Zielerreichung oder ohne Fortschritt ab. Ein Hash schützt vor
+   veralteten Zertifikaten, ein Alter-Gate (36 h) vor eingefrorenen Nachweisen.
    Vorprüfung schreibt `data/reserve-readiness.json`. Freigabe prüft erneut;
    das Zertifikat ist niemals ein Gate-Bypass.
 6. Öffentlicher Nachweis um 20:17/22:17 UTC und am Folgetag 07:17 UTC:

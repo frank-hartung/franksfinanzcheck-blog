@@ -649,7 +649,7 @@ def _frontmatter(text: str) -> str:
 
 
 def _reserve_topup(topics, quelle, used_titles, used_topics,
-                   reserve_target=None):
+                   reserve_target=None, force=None):
     """RESERVE-POOL-Top-up (Premium-Fix 03.09.2026, „zwingend 2–3 LIVE“):
     Nach einem GESUNDEN Produktionstag wird der Redaktions-Reserve-Pool
     (fertige Premium-Entwürfe, `reserve: true`) wieder aufgefüllt, falls er
@@ -712,14 +712,31 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             return 0
         # In-Flight-Schutz: Heutige, noch nicht zertifizierte Kandidaten
         # gehören zum heutigen Veredelungs-Schub – nicht stapeln.
+        if force is None:
+            force = os.environ.get("RESERVE_FORCE_TOPUP") == "1"
         today = datetime.date.today().isoformat()
         inflight = [p for p in pool if p.parent.name.startswith(today)
                     and p.parent.name not in certified]
-        if inflight:
+        if inflight and not force:
             print(f"  ⏳ {len(inflight)} Kandidat(en) von heute warten auf die "
                   f"Veredelungs-Stufe (reserve_finisher) – kein weiterer "
                   f"Top-up, um Themen-Duplikate zu vermeiden.")
             return 0
+        if inflight and force:
+            # REPARATUR 15.09.2026 (Issue #295 – „Pool erreicht das Ziel nie“):
+            # Der In-Flight-Schutz machte den Zielbestand UNERREICHBAR: Die
+            # Veredelungs-Stufe hebt jeden offenen Kandidaten auf HEUTE, also
+            # ist nach ihr *jeder* unzertifizierte Kandidat „in flight“ – der
+            # Konvergenz-Nachschub derselben Nacht wurde damit blockiert, auch
+            # wenn die Charge im selben Lauf bereits fertig zertifiziert war.
+            # Die Konvergenz-Stufe (scripts/reserve_converge.py) hebt den
+            # Schutz deshalb ausdrücklich auf (RESERVE_FORCE_TOPUP=1) – aber
+            # weiterhin begrenzt (Ziel, Kapazitätsdeckel 12, Themen-Dedup über
+            # _pool_conflicts), damit keine Themen-Duplikat-Kaskade entsteht.
+            print(f"  🔁 Konvergenz-Nachschub: {len(inflight)} Kandidat(en) sind "
+                  f"im heutigen Schub durch die Gates gegangen, der Pool liegt "
+                  f"aber bei READY {ready}/{reserve_target} – ein Ersatz-Thema "
+                  f"wird zusätzlich produziert (Themen-Dedup aktiv).")
         freie = [t for t in topics
                  if not g.topic_already_covered(t["title"], used_titles)
                  and id(t) not in used_topics
@@ -1034,9 +1051,27 @@ def main():
         topics = g.load_topics()
         used_topics = set()
         produced = 0
-        for _ in range(2):  # bounded API cost; subsequent daily runs continue
-            produced += _reserve_topup(topics, "Themenpool", used_titles,
-                                       used_topics)
+        # REPARATUR 15.09.2026 (#295): Die Zahl der Produktionsversuche pro
+        # Aufruf ist jetzt steuerbar. Die Konvergenz-Stufe
+        # (scripts/reserve_converge.py) überschreibt sie mit dem exakten
+        # Fehlbestand (RESERVE_TOPUP_BATCH) und hebt mit
+        # RESERVE_FORCE_TOPUP=1 den In-Flight-Schutz auf – nur so kann der
+        # Zielbestand in derselben Nacht erreicht werden. Der harte Deckel
+        # (max. 4) hält die API-Kosten deterministisch.
+        try:
+            batch = int(os.environ.get("RESERVE_TOPUP_BATCH") or "2")
+        except ValueError:
+            batch = 2
+        batch = max(1, min(batch, 4))
+        force = os.environ.get("RESERVE_FORCE_TOPUP") == "1"
+        for _ in range(batch):  # bounded API cost; subsequent daily runs continue
+            got = _reserve_topup(topics, "Themenpool", used_titles,
+                                 used_topics, force=force)
+            produced += got
+            if got == 0:
+                # Kein Fortschritt möglich (kein freies Thema, API-Ausfall
+                # oder Schutz aktiv) – kein weiterer API-Aufwand.
+                break
         import reserve_pool
         count = len(reserve_pool.reserve_drafts())
         write_status(f"Reserve-Produktion: {count} Kandidaten "

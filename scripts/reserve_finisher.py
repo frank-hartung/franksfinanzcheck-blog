@@ -192,7 +192,12 @@ HEALER_CHAIN = [
     ("fix_linebreaks.py", [], "file"),
     ("fix_dash_und.py", ["--fix"]),
     ("fix_dash_eol.py", ["--fix"]),
-    ("check_length.py", ["--fix"]),
+    # REPARATUR 15.09.2026 (#295): Datei-bezirkelt + `--include-drafts`.
+    # Vorher lief der Sammellauf korpusweit und übersprang Entwürfe komplett –
+    # die Pool-Kandidaten (bewusst Entwürfe) wurden deshalb NIE verlängert
+    # (1.134 bzw. 1.149 Wörter < 1.200 = Struktur-Score 0.70) und hingen
+    # dauerhaft unter der Publish-Schwelle fest.
+    ("check_length.py", ["--fix", "--include-drafts"], "file"),
     ("fix_spaces.py", []),
     ("spellcheck.py", ["--fix", "--include-drafts"], "file"),
     ("grammar_check.py", ["--fix", "--include-drafts"], "file"),
@@ -212,10 +217,21 @@ HEALER_CHAIN = [
     ("affiliate_marketer.py", ["--fix", "--new-only"]),
     ("link_guard.py", ["--fix", "--new-only"]),
     ("check_titles.py", ["--fix"]),
-    ("generate_covers.py", []),
+    # Cover NUR für die Pool-Kandidaten (Scope „slug“). Vorher lief
+    # `generate_covers.py` (ohne Scope) plus `check_covers.py --fix` über
+    # den ganzen Korpus und hat Live-Cover neu gerendert – Binärdateien, die
+    # anschließend mitgepusht wurden und den Rebase gegen den parallelen
+    # Deploy-Lauf kollidieren ließen (#295). Der Isolation-Wächter würde
+    # solche Änderungen ohnehin zurückstellen; hier wird der Bedarf gar nicht
+    # erst erzeugt (schneller, kein Cover-Churn, keine KI-/Render-Kosten).
+    ("generate_covers.py", ["--slug", "{slug}"], "slug"),
     # --- Phase 3 (Sofort-Optimierung, ohne internal_linker) ---
     ("meta_optimizer.py", ["--fix", "--ai"], "file"),
     ("check_titles.py", ["--fix"]),
+    # Cover-Referenzen prüfen/heilen. Läuft korpusweit (er hält sich an die
+    # Live-Engine-Semantik), aber der Isolation-Wächter stellt jede Änderung
+    # außerhalb der Pool-Kandidaten bytegenau zurück – Live-Cover und
+    # Live-Frontmatter können so nicht mehr „nebenbei“ mitgepusht werden.
     ("check_covers.py", ["--fix"]),
     ("generate_kurzantworten.py", [], "file"),
     ("affiliate_profi_check.py", ["--fix"]),
@@ -235,16 +251,198 @@ HEALER_CHAIN = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# LIVE-KORPUS-ISOLATION (Premium-Fix 15.09.2026, Issue #295)
+#
+# Kernbefund aus Run 34949097389: Die Veredelungs-Kette enthält bewusst die
+# BEWÄHRTEN Heiler der Live-Engine – darunter korpusweite Läufe
+# (`--fix` ohne Scope) sowie `generate_covers.py`/`check_covers.py`. Diese
+# dürfen laut Workflow-Vertrag („Stufe 2: nur Pool“) NUR die Pool-Kandidaten
+# verbessern. Real schreiben sie aber den ganzen Korpus: sie heilen Live-Posts
+# (die ebenfalls auf „heute“ datiert sind), regenerieren Live-Cover und
+# schreiben Manifeste. Zwei Folgen:
+#   1. Der Reserve-Lauf committete LIVE-Änderungen (Content + Cover-Bilder)
+#      mit. Genau die kollidierten beim Rebase mit dem parallel laufenden
+#      Deploy-/Auslieferungslauf -> „Rebase-Konflikt … Kein Push“ -> roter Lauf.
+#   2. Ein nächtlicher Pool-Lauf konnte so Live-Bestand verändern – inhaltlich
+#      falsch (Besitzverhältnis: Live-Content gehört der Engine/Deploy-Kette).
+#
+# Lösung: Ein deterministischer Isolations-Wächter um die Kette. Vor dem Lauf
+# wird der Arbeitsbaum-Zustand aller geschützten Wurzeln (content/ static/
+# data/ layouts/ assets/ archetypes/ hugo.toml) eingefroren; nach dem Lauf
+# wird JEDE Änderung außerhalb der erlaubten Kandidaten-Pfade bytegenau
+# zurückgestellt (getrackte Dateien) bzw. in Quarantäne verschoben (neue
+# Dateien). Der Wächter ist die Instanz, die den Vertrag durchsetzt – auch
+# wenn in Zukunft ein Heiler dazukommt.
+# ---------------------------------------------------------------------------
+PROTECTED_ROOTS = ("content", "static", "data", "layouts", "assets",
+                   "archetypes", "hugo.toml")
+# Maschinengenerierte Artefakte, die die Kette absichtlich neu schreibt
+# (werden von jedem Lauf komplett neu erzeugt; letzter Schreiber gewinnt,
+# siehe scripts/git_sync.sh).
+ALLOWED_ARTIFACTS = ("data/reserve-readiness.json",
+                     "data/covers_manifest.json")
+QUARANTINE = Path(tempfile.gettempdir()) / "reserve-isolation-quarantine"
+
+
+def _git_out(*args: str) -> str:
+    """Git-Aufruf im Repo-Wurzelverzeichnis (read-only)."""
+    proc = subprocess.run(["git", *args], cwd=str(BLOG_DIR), timeout=120,
+                          capture_output=True, text=True)
+    return proc.stdout
+
+
+def _porcelain_paths() -> set:
+    """Alle aktuell geänderten/neuen Pfade im Arbeitsbaum (relativ, POSIX)."""
+    out = _git_out("status", "--porcelain=v1", "-uall", "--", *PROTECTED_ROOTS)
+    paths = set()
+    for line in out.splitlines():
+        if len(line) < 4:
+            continue
+        raw = line[3:]
+        if " -> " in raw:                      # Rename: beide Seiten schützen
+            old, new = raw.split(" -> ", 1)
+            paths.update({old.strip().strip('"'), new.strip().strip('"')})
+        else:
+            paths.add(raw.strip().strip('"'))
+    return {p for p in paths if p}
+
+
+def _tracked(paths: set) -> set:
+    if not paths:
+        return set()
+    out = _git_out("ls-files", "-z", "--", *sorted(paths))
+    return {p for p in out.split("\0") if p}
+
+
+def allowed_paths_for(targets: list) -> set:
+    """Erlaubte Schreibziele der Kette: ausschließlich die Kandidaten selbst
+    (Beitragsordner) sowie deren Cover-Dateien."""
+    allowed = set()
+    for index in targets:
+        slug = index.parent.name
+        allowed.add(f"content/posts/{slug}")
+        allowed.add(f"static/images/covers/{slug}")
+    return allowed
+
+
+def isolation_baseline(allowed_paths: set) -> dict:
+    """Zustand VOR der Kette: (dirty_paths, bytes_snapshots, allowed)."""
+    dirty = _porcelain_paths()
+    snapshots = {}
+    # Bereits vor dem Lauf geänderte Dateien gehören dem Lauf (z. B. die
+    # Lift-Umbenennungen). Sie werden NICHT zurückgestellt, aber bytegenau
+    # gesichert, damit der Wächter sie nicht mit den Ketten-Änderungen
+    # verwechselt (Pfad-Menge statt Byte-Vergleich).
+    for path in dirty:
+        full = BLOG_DIR / path
+        if full.is_file():
+            try:
+                snapshots[path] = full.read_bytes()
+            except OSError:
+                pass
+    return {"dirty": dirty, "snapshots": snapshots,
+            "allowed": {p for p in allowed_paths}}
+
+
+def _is_allowed(path: str, allowed: set) -> bool:
+    if path in ALLOWED_ARTIFACTS:
+        return True
+    # Append-only-Historien (data/**/*.jsonl) sind das Audit-Gedächtnis des
+    # Blogs. Sie werden von den Heilern fortgeschrieben und beim Rebase
+    # dedupliziert zusammengeführt (git_sync.sh) – sie dürfen bleiben.
+    if path.startswith("data/") and path.endswith(".jsonl"):
+        return True
+    for a in allowed:
+        if path == a or path.startswith(a.rstrip("/") + "/"):
+            return True
+    return False
+
+
+def isolation_enforce(baseline: dict) -> list:
+    """Setzt den Vertrag NACH der Kette durch. Rückgabe: Liste der Eingriffe."""
+    eingriffe = []
+    allowed = baseline["allowed"]
+    dirty_before = baseline["dirty"]
+    dirty_after = _porcelain_paths()
+    neu = sorted(p for p in dirty_after - dirty_before
+                 if not _is_allowed(p, allowed))
+    if not neu:
+        return eingriffe
+    tracked = _tracked(set(neu))
+    for path in neu:
+        full = BLOG_DIR / path
+        if path in tracked or not full.exists():
+            # getrackte Datei: bytegenau aus dem Index (= HEAD-Kandidat) zurück
+            proc = subprocess.run(["git", "checkout", "--", path],
+                                  cwd=str(BLOG_DIR), timeout=120,
+                                  capture_output=True, text=True)
+            ok = proc.returncode == 0
+            eingriffe.append({"pfad": path, "aktion": "zurückgestellt",
+                              "ok": ok})
+            wort = "zurückgestellt" if ok else "NICHT zurückstellbar"
+            print(f"  🛡 Isolation: {wort}: {path}")
+        else:
+            # neue, nicht angeforderte Datei -> Quarantäne (nichts wird gelöscht)
+            try:
+                goal = QUARANTINE / path
+                goal.parent.mkdir(parents=True, exist_ok=True)
+                if goal.exists():
+                    goal = goal.with_suffix(goal.suffix + ".dup")
+                full.replace(goal)
+                eingriffe.append({"pfad": path, "aktion": "quarantäne",
+                                  "ok": True, "ziel": str(goal)})
+                print(f"  🛡 Isolation: neue Fremd-Datei in Quarantäne: {path}")
+            except OSError as exc:
+                eingriffe.append({"pfad": path, "aktion": "quarantäne",
+                                  "ok": False, "fehler": str(exc)})
+                print(f"  ⚠ Isolation: Quarantäne fehlgeschlagen: {path}: {exc}")
+    return eingriffe
+
+
 def run_chain(results: list, targets: list, env: dict | None = None) -> None:
     """Führt die Heiler-Kette aus. Fehler einzelner Heiler sind Hinweise –
     die Zertifizierung ist die Instanz, die über Reife entscheidet.
 
     `targets`: Liste der Lift-Pfade (Kandidaten). Heiler mit Scope „file"
-    laufen einmal pro Kandidat (--file <pfad>) und nie korpusweit.
+    laufen einmal pro Kandidat (--file <pfad>) und nie korpusweit; Scope
+    „slug" ersetzt den Platzhalter {slug} je Kandidat (z. B. Cover-Render)
+    und läuft ebenfalls nur für Pool-Kandidaten.
     """
     for entry in HEALER_CHAIN:
-        script, args = entry[0], list(entry[1])
+        script = entry[0]
+        raw_args = list(entry[1])
         scope = entry[2] if len(entry) > 2 else "corpus"
+        if scope == "slug":
+            for index in targets:
+                args = [index.parent.name if a == "{slug}" else a
+                        for a in raw_args]
+                label = f"{script} {' '.join(args)}".strip()
+                try:
+                    proc = subprocess.run(
+                        [sys.executable,
+                         str(BLOG_DIR / "scripts" / script)] + args,
+                        cwd=str(BLOG_DIR), env=env, timeout=900,
+                        capture_output=True, text=True)
+                    tail = (proc.stdout or "").strip().splitlines()
+                    results.append({
+                        "heiler": label, "ok": proc.returncode == 0,
+                        "letzte_zeile": tail[-1][:160] if tail else "",
+                        "rc": proc.returncode})
+                    if proc.returncode != 0:
+                        print(f"  ⚠ Heiler meldete rc={proc.returncode}: {label}")
+                except subprocess.TimeoutExpired:
+                    results.append({"heiler": label, "ok": False,
+                                    "letzte_zeile": "TIMEOUT > 900s",
+                                    "rc": None})
+                    print(f"  ⚠ Heiler TIMEOUT: {label}")
+                except Exception as exc:  # noqa: BLE001
+                    results.append({"heiler": label, "ok": False,
+                                    "letzte_zeile": f"Fehler: {exc}",
+                                    "rc": None})
+                    print(f"  ⚠ Heiler nicht ausführbar: {label} ({exc})")
+            continue
+        args = raw_args
         if scope == "file":
             for index in targets:
                 label = (f"{script} {' '.join(args)} --file {index.parent.name}"
@@ -307,7 +505,8 @@ def quality_snapshot(index: Path) -> dict | None:
         return {"score": None, "fehler": str(exc)}
 
 
-def write_report(results: list, targets: list, started_iso: str) -> None:
+def write_report(results: list, targets: list, started_iso: str,
+                 isolation: list | None = None) -> None:
     today = today_prefix()
     lines = [
         "# 🛟 Reserve-Finish-Report (Veredelung des täglichen Vorrats)",
@@ -346,6 +545,21 @@ def write_report(results: list, targets: list, started_iso: str) -> None:
                     parts.items(), key=lambda kv: kv[1])[:3]) if parts else ""
             lines.append(f"- {index.parent.name}: Score {score}"
                          f"{' (schwach: ' + schwach + ')' if schwach else ''}")
+    if isolation:
+        lines += ["", "## Live-Korpus-Isolation (Vertrag: nur Pool anfassen)",
+                  "",
+                  "| Pfad | Aktion | Ergebnis |",
+                  "|---|---|---|"]
+        for e in isolation:
+            lines.append(f"| `{e['pfad']}` | {e['aktion']} | "
+                         f"{'✅' if e.get('ok') else '⚠️'} |")
+        lines += ["", "> Diese Dateien wurden von korpusweiten Heilern "
+                      "angefasst und deterministisch zurückgestellt – der "
+                      "Reserve-Lauf ändert ausschließlich seine Kandidaten "
+                      "(und damit auch nie den Live-Bestand)."]
+    else:
+        lines += ["", "## Live-Korpus-Isolation (Vertrag: nur Pool anfassen)",
+                  "", "- ✅ keine Fremd-Änderung – der Lauf blieb im Pool."]
     lines += ["", "_Nächster Schritt im Workflow: reserve_readiness.py "
                   "(hugo + publish_gate, STRICT) schreibt die Zertifikate._", ""]
     REPORT.write_text("\n".join(lines), encoding="utf-8")
@@ -381,6 +595,11 @@ def finish() -> int:
         write_report([], [], started)
         return 0
     results = []
+    isolation = []
+    # Isolation-Baseline NACH dem Lift: ab hier ist JEDE Änderung außerhalb der
+    # Kandidaten-Pfade eine Vertragsverletzung und wird zurückgestellt.
+    allowed = allowed_paths_for(targets)
+    baseline = isolation_baseline(allowed)
     try:
         run_chain(results, targets)
     except Exception:  # noqa: BLE001 – katastrophal: Rollback auf Snapshot
@@ -397,12 +616,24 @@ def finish() -> int:
                 original.write_bytes(raw)
             except OSError as exc:
                 print(f"  ⚠ Rollback unvollständig: {original}: {exc}")
-        write_report(results, targets, started)
+        try:
+            isolation = isolation_enforce(baseline)
+        except Exception as exc:  # noqa: BLE001 – Wächter darf nie werfen
+            print(f"  ⚠ Isolation-Wächter nicht ausführbar: {exc}")
+        write_report(results, targets, started, isolation)
         return 1
-    write_report(results, targets, started)
+    try:
+        isolation = isolation_enforce(baseline)
+    except Exception as exc:  # noqa: BLE001 – Wächter darf nie werfen
+        print(f"  ⚠ Isolation-Wächter nicht ausführbar: {exc}")
+    write_report(results, targets, started, isolation)
     print(f"Reserve-Finish: {len(targets)} Kandidat(en) veredelt – "
           f"{len(results)} Heiler-Läufe, {sum(1 for r in results if not r['ok'])} "
           f"mit Hinweisen. Reife prüft reserve_readiness.py.")
+    if isolation:
+        print(f"  🛡 Live-Korpus-Isolation: {len(isolation)} Fremd-Änderung(en) "
+              f"außerhalb der Pool-Kandidaten zurückgestellt "
+              f"(Details: RESERVE-FINISH-REPORT.md).")
     return 0
 
 

@@ -223,6 +223,36 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         # Deterministisch: der FRISCHE Lauf (B) gewinnt.
         self.assertEqual(self.origin_read("SEO-REPORT.md"), "Stand aus Lauf B\n")
 
+    def test_reserve_zertifikat_konflikt_heilt_frischer_lauf_gewinnt(self):
+        """Issue #295: Das Reserve-Zertifikat ist ein maschinengeneriertes
+        Artefakt und wird von JEDEM Lauf komplett neu geschrieben. Ein
+        Rebase-Konflikt darauf darf den nächtlichen Reserve-Lauf nicht mehr
+        rot machen (Run 34949097389: Deploy-Lauf committete dieselbe Datei
+        um 10:50:30, während der Reserve-Lauf pushte)."""
+        cert = "data/reserve-readiness.json"
+        self._commit(self.bot_a, cert, '{"target": 6, "ready": 6}\n',
+                     "A: zertifikat (deploy)")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        # Der frische Reserve-Lauf hat SEIN (ehrlicheres) Zertifikat dabei.
+        self._commit(self.bot_b, cert, '{"target": 6, "ready": 3}\n',
+                     "B: zertifikat (reserve)")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Bot-Artefakt-Konflikte automatisch gelöst", res.stdout)
+        self.assertEqual(self.origin_read(cert), '{"target": 6, "ready": 3}\n')
+
+    def test_cover_manifest_konflikt_heilt_frischer_lauf_gewinnt(self):
+        """Dasselbe für das Cover-Manifest (Fingerprints, rein generiert)."""
+        manifest = "data/covers_manifest.json"
+        self._commit(self.bot_a, manifest, '{"a": {"title": "alt"}}\n',
+                     "A: manifest")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, manifest, '{"a": {"title": "neu"}}\n',
+                     "B: manifest")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("neu", self.origin_read(manifest))
+
     def test_jsonl_konflikt_wird_union_gemerget(self):
         base_jsonl = 'data/history.jsonl'
         self._commit(self.bot_a, base_jsonl, '{"run": "basis"}\n', "init jsonl")

@@ -52,6 +52,20 @@
 #         auch ein mitten im Rennen abgelehnter Push (paralleler Bot)
 #         heilt sich durch erneutes Angleichen selbst.
 #
+#  HÄRTUNG #295 (Content-Reserve, 15.09.2026):
+#    Der nächtliche Reserve-Lauf startete um 03:25 UTC, arbeitete 12 Minuten
+#    fehlerfrei (Produktion, Veredelung, Zertifizierung, Triage) und wurde am
+#    ENDE rot: Der Rebase auf origin/main kollidierte auf
+#    `data/reserve-readiness.json` – genau der Datei, die der Lauf selbst
+#    frisch geschrieben hatte und die ein paralleler Deploy-/Auslieferungslauf
+#    (10:50:30 UTC) gleichzeitig nach main schrieb. Die Auto-Heilung kannte nur
+#    Reports/JSONL, also brach sie ab ("Kein Push").
+#    Dauerhaft: maschinengenerierte Zertifikate/Manifeste
+#    (data/reserve-readiness.json, data/covers_manifest.json) sind jetzt als
+#    „letzter Schreiber gewinnt“ eingestuft – der frische Lauf gewinnt, weil
+#    jeder Lauf diese Dateien ohnehin vollständig neu erzeugt. Echte Content-
+#    Konflikte bleiben unverändert ein harter Stopp.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -233,6 +247,27 @@ PY
           git add -- "$f"
           ;;
         .meta_cache.json|.meta_report.json|.keyword_suggestions.json|.affiliate_report.json|.affiliate_integrity_state.json|.indexnow_submitted.json)
+          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+          git add -- "$f"
+          ;;
+        data/reserve-readiness.json|data/covers_manifest.json)
+          # REPARATUR 15.09.2026 (Issue #295 – „Content-Reserve rot trotz
+          # gesundem Inhalt“):
+          #   Diese beiden Dateien sind REINE MASCHINEN-ARTEFAKTE und werden von
+          #   JEDEM schreibenden Workflow bei jedem Lauf komplett neu erzeugt:
+          #     * data/reserve-readiness.json – hash-gesichertes Reife-Zertifikat
+          #       des Reserve-Pools (reserve_readiness.py),
+          #     * data/covers_manifest.json   – Cover-Fingerprints
+          #       (generate_covers.py / check_covers.py).
+          #   Der content-reserve-Lauf (03:25 UTC) schrieb sein Zertifikat genau
+          #   in dem Moment nach main, in dem ein paralleler Lauf (Deploy/
+          #   Auslieferung) dieselbe Datei committete. Der Rebase-Konflikt brach
+          #   den Push ab -> der ganze Lauf wurde rot, obwohl Pool und Content
+          #   gesund waren (Run 34949097389, 15.09.2026, 10:50 UTC).
+          #   Auflösung = letzter Schreiber gewinnt (--theirs = der frische Lauf,
+          #   dessen Ergebnis gerade gepusht wird). Die Dateien sind hash- bzw.
+          #   rein generiert: kein fachlicher Merge nötig, kein Datenverlust,
+          #   weil der jeweils nächste Lauf sie ohnehin vollständig neu schreibt.
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
