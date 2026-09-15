@@ -4,8 +4,9 @@ title: "Gasvergleich: Wie du teure Fehler beim Wechsel vermeidest"
 description: Mit einem Gasvergleich sparst du bares Geld. Erfahre hier, wie du Gastarife wechseln kannst, um deine Heizkosten dauerhaft zu senken.
 date: 2026-09-14T09:26:54Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-14T12:53:44Z
-cadence_grund: "publish-gate: Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): Kein vollständiger Markdown-Link in CTA-Zeile ('Spar-Tipp zwischendurch')"
+cadence_grund: "Hold aufgehoben (PR #289): CTA-Defekt repariert (drei kanonische CTA-Zeilen, AI1/AI1b gruen) – Re-Queue für den vollen Gate-Durchlauf"
 tags: ["Gasvergleich", "Gastarife wechseln", "Gaskosten sparen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -135,9 +136,9 @@ Du trägst also kein technisches Risiko bei deiner Entscheidung. Möchtest du de
 Bereite eine kleine digitale Mappe für deinen Wechsel vor. Das spart Zeit und vermeidet unnötige Rückfragen der neuen Versorger. Mit den richtigen Daten erledigst du alles in Rekordzeit. So wird der Wechsel zum Kinderspiel.
 
 **Checkliste für deinen Wechsel:**
-* letzte Jahresabrechnung für Verbrauch und Kundennummer.
+* Letzte Jahresabrechnung für Verbrauch und Kundennummer.
 * Zählernummer vom Gaszähler im Keller oder Flur.
-* aktueller Zählerstand zum Stichtag des Wechsels.
+* Aktueller Zählerstand zum Stichtag des Wechsels.
 * Bankverbindung für das SEPA-Lastschriftmandat des Anbieters.
 * Kalender-Erinnerung für das Ende der neuen Mindestlaufzeit.
 

@@ -25,9 +25,6 @@ pin_description: "*Werbung | Die 5 teuersten Spätsommer-Fehler treiben die Gasr
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-
-
-
 Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.  
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -61,7 +58,8 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 Staub, Vorhänge und Möbel blockieren die Wärmeabgabe. Das Thermostat reagiert zu spät, weil die Raumtemperatur langsamer steigt.
 
 **Maßnahmen:** * **30 cm Abstand** zu Möbeln und Vorhängen einhalten.
-* **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen. * **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
+* **Bürste** (Weichbürste oder Staubsauger‑Aufsatz) einmal pro Monat die Lamellen reinigen.
+*  **Dichtungsbänder** an Türen und Fenstern anbringen – verhindert Zugluft, die die Thermostate nach oben treiben lässt.
 
 **Kosten/Nutzen:** 15 € für ein Set Dichtungsbänder → Ersparnis 50–80 € pro Saison.
 
@@ -213,7 +211,8 @@ Mindestens einmal im Monat, besser zu Beginn und Ende jedes Abrechnungszeitraums
 ### Welche Förderungen gibt es für energetische Maßnahmen? *
 
 **BEG‑Wärme** – Zuschüsse für Heizungsoptimierung, hydraulischen Abgleich und neue Brennwertkessel (bis zu 35 % der Kosten).
-* **KfW‑Effizienzhaus‑Programm** – zinsgünstige Darlehen für umfassende Dämmung und Smart‑Home‑Lösungen. * **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
+* **KfW‑Effizienzhaus‑Programm** – zinsgünstige Darlehen für umfassende Dämmung und Smart‑Home‑Lösungen.
+*  **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
 
 ## Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen
 

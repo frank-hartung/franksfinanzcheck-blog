@@ -183,13 +183,17 @@ Sich mit **[Finanzieller Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-ve
 
 ## Häufige Fragen
 
-### Wie viel Geld muss ich monatlich sparen, um frei zu sein? Das hängt von deinem Lebensstil ab. Meist brauchst du das 25‑fache deiner Jahresausgaben. Wer bescheiden lebt, schafft das schneller. Rechne mit deinen echten Fixkosten.
+### Wie viel Geld muss ich monatlich sparen, um frei zu sein?
+
+Das hängt von deinem Lebensstil ab. Meist brauchst du das 25‑fache deiner Jahresausgaben. Wer bescheiden lebt, schafft das schneller. Rechne mit deinen echten Fixkosten.
 
 ### Kann man auch mit Schulden investieren?
 
 Nein, meist nicht. Tilge zuerst deine Konsumkredite. Sie kosten mehr, als der Markt bringt. Eine Ausnahme: sehr günstige Immobilienkredite. Dort kann beides parallel laufen.
 
-### Welches Risiko gehe ich beim Vermögensaufbau ein? Jede Anlage hat Risiken. Aktien schwanken. Immobilien kosten für Reparaturen. Breite Streuung senkt das Risiko. Über 15 Jahre schrumpft die Gefahr stark.
+### Welches Risiko gehe ich beim Vermögensaufbau ein?
+
+Jede Anlage hat Risiken. Aktien schwanken. Immobilien kosten für Reparaturen. Breite Streuung senkt das Risiko. Über 15 Jahre schrumpft die Gefahr stark.
 
 ### Muss ich auf alles verzichten, um finanzielle Freiheit zu erreichen?
 

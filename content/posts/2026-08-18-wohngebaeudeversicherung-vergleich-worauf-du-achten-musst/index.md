@@ -25,7 +25,6 @@ pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversic
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
-
 Dein Haus ist meist deine größte Investition. Ein schweres Unwetter, ein Brand oder ein Rohrbruch kann es schnell zerstören. Ohne guten Schutz droht dann der [finanzielle](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) Ruin.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -151,12 +150,12 @@ In ZÜRS‑Stufe 3 (z. B. teile von Brandenburg, Sachsen) ist der Elementars
 | 7 | Selbstbeteiligung sinnvoll gewählt? |
 | 8 | Unterversicherungs‑Verzicht (Neuwert‑Garantie) vorhanden? |
 
-[**Download PDF**](/downloads/wohngebaeudeversicherung-checkliste. pdf)
-
 ## Vorteile von Online‑Vergleichsplattformen
 
-* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote. * **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
-* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht. * **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
+* **Zeitersparnis:** 5‑10 Minuten für bis zu 12 Angebote.
+*  **Transparenz:** Alle wichtigen Klauseln (grobe Fahrlässigkeit, Elementar) werden im Ergebnis‑Report hervorgehoben.
+* **Preis‑Garantie:** Viele Plattformen bieten die günstigste Prämie plus 30‑Tage‑Rücktrittsrecht.
+*  **Unabhängige Bewertung:** Nutzer‑Reviews und Schadens‑Statistiken geben Aufschluss über Service‑Qualität.
 
 Achte jedoch darauf, dass die Plattform **nicht** nur den Preis, sondern auch die Vertragsbedingungen filtert. Ein reiner „Billig‑Tarif“ ohne Elementarschutz kann im Ernstfall teurer werden.
 

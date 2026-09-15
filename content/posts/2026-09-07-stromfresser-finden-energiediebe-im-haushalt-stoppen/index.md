@@ -3,8 +3,9 @@ title: "Stromfresser finden: Energiediebe im Haushalt stoppen"
 description: Effektiv Stromfresser finden und Kosten senken. Erfahre, welche Geräte heimlich Energie ziehen und wie du deine Stromrechnung dauerhaft reduzierst.
 date: 2026-09-11T19:39:02Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-09-11T19:39:08Z
-cadence_grund: "publish-gate: Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig"
+cadence_grund: "Hold aufgehoben (PR #289): check_titles-R5-Fehlalarm behoben (R5_END_WHITELIST): 0 Titel-Verstoesse im Korpus, 0 Stale-Cover – Re-Queue für den vollen Gate-Durchlauf"
 tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -34,8 +35,6 @@ Zahlst du jeden Monat zu viel für Energie, ohne den Grund zu kennen? Deine mona
 - **Sparpotenzial:** neue Technik und besseres Verhalten entlasten deine Rechnung oft um 200 € bis 350 € jährlich.
 
 Drei Faktoren entscheiden über einen sparsamen Haushalt: die regelmäßige Kontrolle der Werte, der Verzicht auf Bereitschaftsbetrieb und moderne Effizienzklassen.
-
-
 
 ---
 
@@ -85,10 +84,7 @@ Blicke auf die nackten Zahlen, um die Dimensionen zu verstehen. Wir vergleichen 
 
 Dieses Beispiel zeigt deutlich: Die Anschaffung amortisiert sich bereits nach wenigen Jahren allein durch gesparte Energiekosten. Hinzu kommen die bessere Isolierung und leisere Motoren. Wer seine **Energiekosten senken** will, sollte solche Rechnungen für alle Großgeräte aufstellen.
 
-
-
 > 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
-
 
 ## So gehst du vor: Die Schritt-für-Schritt-Analyse
 

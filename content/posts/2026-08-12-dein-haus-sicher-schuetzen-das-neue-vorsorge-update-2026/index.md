@@ -132,7 +132,9 @@ Wer auch die eigene Absicherung prüfen will, liest unsere [Erklärung zur Priva
 
 ## Elementar 2026: Pflichtgefühl gegen Markt
 
-Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in ZÜRS 3–4 ohne Schutz bleibt, trägt ein großes Risiko. Hol dir Angebote, auch wenn sie teuer sind. Und stelle wichtige Technik nicht in den Keller. Prävention senkt nicht immer die Prämie. Sie senkt aber den Schaden.
+Die Politik diskutiert über eine Pflicht. Abgeschlossen ist sie nicht. Wer in ZÜRS 3–4 ohne Schutz bleibt, trägt ein großes Risiko.
+
+Hol dir Angebote, auch wenn sie teuer sind. Und stelle wichtige Technik nicht in den Keller. Prävention senkt nicht immer die Prämie. Sie senkt aber den Schaden.
 
 ## Klauseln, die nach dem Schaden zu spät kommen
 
@@ -146,7 +148,8 @@ Ein Vorsorge‑Update ist kein neuer Vertrag um des Wechsels willen. Nimm dir ei
 
 ## Der 60‑Minuten‑Vorsorge‑Abend für Eigentümer
 
-Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Prüfe Deckung, Selbstbeteiligung, Elementar und das Datum der letzten Anpassung.  
+Minute 0–15: Drei PDFs öffnen (Gebäude, Hausrat, Haftpflicht). Prüfe Deckung, Selbstbeteiligung, Elementar und das Datum der letzten Anpassung.
+
 Minute 15–30: Wohnfläche, Wert 1914 oder Wertermittlung, Liste von Solaranlage und Wärmepumpe.  
 Minute 30–45: Fotos von Dach, Keller und Rückstauklappe – nicht für Instagram, sondern für den Schadenfall. Minute 45–60: Vergleiche oder kläre mit einem Makler, was die Klauseln bedeuten.
 
