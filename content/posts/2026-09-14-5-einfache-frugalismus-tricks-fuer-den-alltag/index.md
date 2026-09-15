@@ -6,7 +6,7 @@ draft: true
 tags: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben"]
+keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben", "Frugalismus für Einsteiger", "Einsteiger"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 

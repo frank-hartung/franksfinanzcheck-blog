@@ -23,3 +23,4 @@
 {"ts": "2026-09-15T08:47:37Z", "module": "governance_gate", "action": "emit:awin", "input": {"exit": 0, "report": "AWIN-REPORT.md"}, "output": {"level": "info", "code": "no_data"}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-15T08:47:37Z", "module": "governance_gate", "action": "emit:live-policy", "input": {"exit": 1, "report": "LIVE-POLICY-REPORT.md"}, "output": {"level": "red", "code": "red_finding"}, "status": "error", "critical": true, "commit": null}
 {"ts": "2026-09-15T08:47:38Z", "module": "governance_gate", "action": "emit:scorecard", "input": {"exit": 0, "report": "EDITORIAL-SCORECARD.md"}, "output": {"level": "green", "code": "ok"}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-15T09:31:26Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
