@@ -175,7 +175,7 @@ Manche Discounter nehmen Geld für den Telefon-Support. Oder es gibt nur einen C
 
 Viele Anbieter geben Rabatt beim Bündel. Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat.
 
-Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/).
 
 
 <!-- premium-length-2026 -->
@@ -198,7 +198,7 @@ Noch nie war der Markt so günstig. Allnet-Flats mit 5G gibt es unter 10 €. T
 Ein Vergleich dauert 15 Minuten. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
 
 
-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [Günstigeres Internet im DSL-Vergleich finden](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

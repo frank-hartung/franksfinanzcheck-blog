@@ -98,9 +98,8 @@ Frugalismus scheitert nicht an fehlenden Tricks, sondern an fehlendem Rhythmus. 
 1. [Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)
 2. [Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 3. [Haushaltsbuch](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
-4. [Sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
-5. [Tagesgeld](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
-6. [Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
+4. [Tagesgeld](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
+5. [Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 
 Ohne Haushaltsbuch bleibt Frugalismus Stimmung. Ohne Tagesgeld bleibt der Puffer auf dem Giro und wird zu Urlaub. Ohne Giro-Check zahlst du 8 € dafür, dass du sparsam bist.
 

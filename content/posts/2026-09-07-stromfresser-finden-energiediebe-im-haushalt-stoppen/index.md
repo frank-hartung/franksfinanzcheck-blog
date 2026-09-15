@@ -98,7 +98,7 @@ Werde zum Detektiv im eigenen Haus, wenn du systematisch Kosten senken willst. G
 
 ## Typische Fehler beim Energiesparen im Alltag
 
-Ein häufiger Fehler passiert bei der Beleuchtung. Viele Menschen tauschen nur Lampen aus, die sie selten nutzen. Die größte Wirkung erzielst du aber dort, wo das Licht am längsten brennt. Wohnzimmer und Flur stehen hier an erster Stelle. Hier sind **[Strom sparen](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/) tipps** besonders effektiv, wenn du konsequent auf LED umstellst.
+Ein häufiger Fehler passiert bei der Beleuchtung. Viele Menschen tauschen nur Lampen aus, die sie selten nutzen. Die größte Wirkung erzielst du aber dort, wo das Licht am längsten brennt. Wohnzimmer und Flur stehen hier an erster Stelle. Hier sind **[Strom-Spartipps](../../pillar/strom-sparen/)** besonders effektiv, wenn du konsequent auf LED umstellst.
 
 Ein weiterer Irrtum betrifft den Geschirrspüler. Viele denken, das Kurzprogramm sei sparsamer wegen der kürzeren Zeit. Tatsächlich verbrauchen Eco-Programme deutlich weniger Energie, auch wenn sie drei Stunden laufen. Sie nutzen eine niedrigere Wassertemperatur und längere Einweichzeiten. Das entlastet die Heizung – den größten Stromfresser im Gerät.
 

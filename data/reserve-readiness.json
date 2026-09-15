@@ -1,7 +1,7 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 6,
+  "ready": 3,
+  "pool_size": 4,
   "generated_at": "2026-09-15T12:26:33Z",
   "candidates": [
     {
@@ -14,21 +14,6 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-15-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "3338f72cebd154ec631bbdc62bf020a937415829fb7713b88dc6a1ef5b4170d7",
-      "score": 0.942,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.78,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -62,21 +47,6 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.9
-      }
-    },
-    {
-      "slug": "2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
-      "ready": true,
-      "sha256": "8b42004d904c5314573b9dae90b331a66c8f099954870e2862fa722e68cad876",
-      "score": 0.942,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.84,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
       }
     },
     {

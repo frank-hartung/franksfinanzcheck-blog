@@ -157,7 +157,7 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 | **VivaGas** | 12 Monate | 9,10 | 10,50 | 100 € (nach 12 Mon.) | 4,2 |
 | **EcoEnergy** | 18 Monate | 8,60 | 12,50 | 130 € (nach 18 Mon.) | 4,5 |
 
-*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
+*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 

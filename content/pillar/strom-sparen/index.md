@@ -99,13 +99,12 @@ Wie du die Fallstricke bei der Heizkostenabrechnung meidest, erläutere ich ausf
 
 ## Cluster-Lesereihenfolge
 
-1. [Strom sparen im Haushalt](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)
-2. [Energiediebe finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
-3. [Gasrechnung Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
-4. [Gasanbieter wechseln](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
-5. [Preisgarantie Gas sichern](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
-6. [Preisgarantie vor Sprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
-7. [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)
+1. [Energiediebe finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
+2. [Gasrechnung Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
+3. [Gasanbieter wechseln](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
+4. [Preisgarantie Gas sichern](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
+5. [Preisgarantie vor Sprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
+6. [Sicher heizen](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)
 
 Verbrauch zuerst, Preis danach. Wer nur wechselt, ohne zu messen, kauft denselben Schlendrian zum neuen Centbetrag.
 

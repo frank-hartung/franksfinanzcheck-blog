@@ -47,7 +47,7 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 
 **Was passiert?** Luft in den Heizkörpern stört den Wasserfluss. Oben bleibt der Heizkörper kalt, die Pumpe läuft länger und verbraucht mehr Energie. Der Verbrauch steigt um 5 % – 10 %.
 
-**Wie du das [vermeidest](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/):** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
+**Wie du das [vermeidest](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/):** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
 2. **Druck prüfen:** Das Manometer sollte 1,2–1,8 bar anzeigen (kalt). Bei Bedarf Wasser nachfüllen – am besten destilliertes Wasser, um Kalkablagerungen zu vermeiden.
 
 **Pro & Contra**  

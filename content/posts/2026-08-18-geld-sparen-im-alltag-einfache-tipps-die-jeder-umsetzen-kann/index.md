@@ -241,7 +241,7 @@ Alltagssparen braucht keine eiserne Disziplin. Es braucht kluge Systeme.
 Der Dauerauftrag aufs Tagesgeld läuft automatisch. Die Budgets sind klar begrenzt. Dein Vermögen wächst dann Monat für Monat.
 
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Konto & Karten optimieren](../../pillar/konto-karten/) · [Sparen im Herbst](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Konto & Karten optimieren](../../pillar/konto-karten/) · [Haushaltsbuch führen](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
 
 ## Häufige Fragen
 

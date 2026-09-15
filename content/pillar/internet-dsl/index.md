@@ -93,13 +93,12 @@ Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb geh�
 
 ## Cluster: welche Artikel du in welcher Reihenfolge liest
 
-1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
-2. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
-3. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
-4. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
-5. Funk – [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
-6. Feinschliff – [DNS wechseln](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
-7. Mobil – [Handytarif 2026](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
+1. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
+2. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
+3. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
+4. Funk – [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
+5. Feinschliff – [DNS wechseln](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
+6. Mobil – [Handytarif 2026](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
 
 Die Reihenfolge verhindert, dass du 1 Gbit kaufst und dann merkst, dass der Router im Schrank steht.
 
