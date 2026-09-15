@@ -1,6 +1,38 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 15.09.2026, NACHZUG (Fehler #295, Run 34967470666 – der Lauf
+#  war NACH der ersten Reparatur erneut rot, 5/6 statt 6/6):
+#    5. EINE CTA ÜBER ZWEI ZEILEN machte einen Kandidaten dauerhaft unreif.
+#       Realer Befund im Pool (2026-09-15-finanzieller-puffer-…):
+#           > 💶 **Spar‑Tipp zwischendurch:** … in wenigen Minuten –
+#           > [**Vergleichen & sparen**](/go/allgemein/)
+#       Die Affiliate-Wache prüft ZEILENWEISE (AI1) und meldete korrekt
+#       „Kein vollständiger Markdown-Link in CTA-Zeile“. Heilen durfte sie
+#       nicht: Die Zertifizierung läuft im STRICT-DRY-RUN, und die Wache sah
+#       ohnehin nur Live-Artikel – Pool-Kandidaten sind bewusst Entwürfe.
+#       Kein Heiler der Kette kannte die Klasse, also blieb der Fund: 5/6,
+#       End-Gate rot, Nacht für Nacht.
+#       Fix: affiliate_integrity_gate.py --heal --file <pfad> (Entwürfe
+#       erlaubt, Markdown-Ebene, kein Build), zweimal in der Heiler-Kette.
+#       Der Heiler fasst den Block erst zusammen (Link in der Folgezeile =
+#       er gehört zur CTA) und entfernt ihn nur komplett, wenn eine intakte
+#       CTA derselben Art bereits im Artikel steht – halbe Reparaturen
+#       (Marker weg, Link-Zeile bleibt als Waise) sind ausdrücklich verboten.
+#    6. EIN DAUER-BLOCKER machte das Ziel strukturell unerreichbar. Der
+#       Konvergenz-Nachschub fand kein freies Thema mehr (Themen-Dedup), der
+#       Pool stand bei 6 Entwürfen – ein einziger unreparierbarer Kandidat
+#       hält den Stand dann für immer unter RESERVE_TARGET. Fix:
+#       scripts/reserve_quarantine.py mustert nach RESERVE_QUARANTINE_HITS
+#       (Default 2) Zertifizierungen mit DEMSELBEN Fund aus (nur
+#       deterministische Content-Funde, nie Werkzeug-/API-Ausnahmen). Der
+#       Entwurf bleibt im Bestand, verliert nur die reserve-Fahne und ist in
+#       draft_triage weiter sichtbar – nichts wird gelöscht.
+#    7. DIE DIAGNOSE WAR EIN PLATZHALTER. Das Zertifikat schrieb nur
+#       „publish_gate/hugo abgelehnt – Details im Workflow-Log“, und Logs
+#       verfallen. reserve_readiness.py liest die Gate-Ausgabe jetzt mit und
+#       schreibt den KONKRETEN Fund (reason) plus alle Funde (details).
+#
 #  REPARATUR 15.09.2026 (Fehler #295, „dauerhaft auf Premium-Level“):
 #  Der Lauf (Run 34949097389) hatte VIER Befunde – alle vier sind behoben:
 #    1. Der Zielbestand war UNERREICHBAR. Der Top-up produzierte höchstens
@@ -116,6 +148,12 @@ jobs:
           python3 scripts/reserve_gate.py --selftest
           python3 scripts/reserve_converge.py --selftest
           python3 scripts/reserve_stage_guard.py --selftest
+          # REPARATUR 15.09.2026 (#295, Run 34967470666): Der CTA-Heiler der
+          # Affiliate-Wache läuft jetzt IN der Reserve-Kette (Entwürfe!), und
+          # die Quarantäne entscheidet, wann ein Kandidat den Pool verlässt.
+          # Beides greift in den Bestand – ohne Selbsttest darf es das nicht.
+          python3 scripts/affiliate_integrity_gate.py --selftest
+          python3 scripts/reserve_quarantine.py --selftest
           python3 scripts/affiliate_marketer.py  # Routing-Selbsttest, dann Report (read-only)
 
       # ================= RUNDE 1 =================

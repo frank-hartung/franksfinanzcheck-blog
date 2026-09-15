@@ -74,7 +74,7 @@ Für dich bedeutet das, dass du regelmäßig deine Vertragsbedingungen prüfen s
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](https://a.check24.net/misc/click.php?pid=80968&aid=18)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)
 
 ***Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

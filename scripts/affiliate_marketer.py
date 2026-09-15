@@ -79,12 +79,29 @@ DEEP_HINTS = [
     (re.compile(r"mietwagen|mietauto|autovermiet", re.I), "mietwagen"),
     (re.compile(r"flug|fluege|flugzeug|flugticket", re.I), "fluege"),
     (re.compile(r"pauschal|last.minute|urlaubskasse|all.inclusive|urlaub", re.I), "reisen"),
-    (re.compile(r"elementar|starkregen|hochwasser|flut|sturm|unwetter", re.I), "hausrat"),
+    # 15.09.2026 (#295): „flut“ und „sturm“ ohne Kontext sind Alltagswörter –
+    # „die Flut an Informationen“ routete einen Energie-Artikel auf die
+    # Hausrat-Versicherung (real beobachtet: der Entwurf „Energie-Update …“
+    # bekam /go/hausrat/ statt einer Energie-Route). Die Elementarschaden-
+    # Bedeutung bleibt über die Fachbegriffe erhalten.
+    (re.compile(r"elementar|starkregen|hochwasser|unwetter|sturmflut"
+                r"|flutkatastroph|flutschaden|flutopfer|flutversicherung", re.I),
+     "hausrat"),
     # 11.09.2026 (Reserve #5): „Gas-Tarif“ mit Bindestrich, Gasrechnung/
     # Gasvergleich fehlten – ein Gas-Artikel mit /go/tagesgeld/-Fehllink
     # wurde so nicht auf die korrekte Route zurueckgeholt.
     (re.compile(r"gasanbieter|gaspreis|gas[-\u00a0\u202f\s]?tarif|gasheizung|gasrechnung|gasvergleich|gaswechsel", re.I), "gas"),
-    (re.compile(r"strom|wärmepumpe|kühl|nachtspeicher|stromfresser|stromvergleich|eigend|balkonkraft|e-auto", re.I), "strom"),
+    # 15.09.2026 (#295): Der Energiemarkt-Vokabular-Fallback fehlte komplett –
+    # „Energie-Update …“ (Grundversorger/Energiemarkt, kein „Strom“ im Intro)
+    # fiel auf den Pillar-Fallback und landete über das Alltagswort „Flut“
+    # sogar bei /go/hausrat/. Redaktioneller Bestand dieser Serie verlinkt
+    # /go/strom/ (siehe 2026-09-10-energie-update-…), also ist das die
+    # thematisch richtige Route. Bewusst NUR Fachbegriffe, nicht das nackte
+    # Wort „Energie“ – das stünde sonst über Spar- und Haushaltsartikeln.
+    (re.compile(r"strom|wärmepumpe|kühl|nachtspeicher|stromfresser|stromvergleich"
+                r"|eigend|balkonkraft|e-auto|strompreis|grundversorger"
+                r"|energiemarkt|energiekosten|energiepreis|energieanbieter"
+                r"|energie-update", re.I), "strom"),
     (re.compile(r"handy|mobilfunktarif|datenvolumen|sim.karte", re.I), "handytarife"),
     (re.compile(r"breitband|glasfaser|router|fritz", re.I), "dsl"),
     (re.compile(r"dsl", re.I), "dsl"),
@@ -289,6 +306,16 @@ SELFTEST = [
     # 15.09.2026: der im Artikel stehende Gateway-Link ist die Wahrheit – auch
     # gegen ein Fremdstichwort im Intro-Fenster (Kasko/SF-Klasse -> kfz).
     ("Kasko, SF-Klasse und was am Schalter zählt [Vergleich](/go/mietwagen/)", "", "mietwagen"),
+    # 15.09.2026 (#295): Energiemarkt-Vokabular gehört auf die Energie-Route,
+    # nicht über das Alltagswort „Flut“ in die Hausrat-Versicherung. Realer
+    # Befund: Entwurf „Energie-Update …“ (Grundversorger/Energiemarkt) bekam
+    # /go/hausrat/ – die Redaktion verlinkt diese Serie aber auf /go/strom/.
+    ("Viele Grundversorger überarbeiten zum Jahresende ihre Tarife. "
+     "Der Energiemarkt bleibt dynamisch, ein Wechsel lohnt sich.", "", "strom"),
+    ("Gleichzeitig kann die Flut an Informationen verwirrend wirken. "
+     "Prüfe deinen Vertrag und vergleiche die Konditionen.", "", "allgemein"),
+    ("Nach dem Starkregen zeigt sich: Die Elementarschaden-Deckung fehlt.",
+     "", "hausrat"),
 ]
 
 
