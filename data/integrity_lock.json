@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-15T00:52:00.823699+00:00",
-  "head": "f571e15",
+  "signed_at": "2026-09-15T02:12:07.378969+00:00",
+  "head": "3579c2e",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
@@ -29,7 +29,7 @@
     "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",
     "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
     "scripts/content_audit.py": "99a482e8f6a1bb035e841f905a68da6cbf42a32346682ecb3e339c7d48550689",
-    "scripts/fazit_schmiede.py": "c22dc6a256762858b1838ac17c5a4ecd0b540ab4a9d2d45752f0db292f581176",
+    "scripts/fazit_schmiede.py": "72cd34760f4fd58f0a7885383e36b1956a9f01782675ece5a61ec239e48ce237",
     "scripts/generate_covers.py": "8e0a9d7c57ca37502349432f0cd9cb979b7a558f118b58c39ade5a48223e2b4a",
     "scripts/hardcases_guard.py": "e1ef51101d045973d3ab31b638bb2c1a78ab15ec342eec89cafdcc646cc03130",
     "scripts/internal_linker.py": "99ca6d25c0a43988cd498dde641ef1ab0ca182787187aab3c9b31143d2320dc5",

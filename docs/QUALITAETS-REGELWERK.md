@@ -422,6 +422,7 @@ jeder Schreibaktion.
 | Artikel zu dünn | length_guard (KI-Module, Gate-verifiziert; seit 01.09.2026 R9-Shingle-Check gegen Duplikat-Erzeugung) |
 | Neuer Artikel verletzt Verständnis-Regeln (R1/R2/R3/R6/R7/R8) | Verständnis-Gates in content-engine-v2.yml parken ihn als draft (Entwurf statt Publikation) |
 | Absätze > 4 Sätze im Bestand | `r5_absatz_splitter.py --apply` (Satzgrenzen-Split 2+3, Abkürzungs-Schutz) |
+| Fazit im Altbaustil der ersten Schmiede-Generation („Sich gezielt mit dem Thema …“ + „Fang am besten heute an … 💸🚀“, dazu ein Satz der falschen Affiliate-Route) | `fazit_schmiede.py --altlasten` (melden) bzw. `--altlasten --fix` (tauschen); opt-in, nicht in der Kette – nur Sätze mit Formel *und* Aufruf/Emoji, redaktionelle Fazits bleiben |
 | Hunspell kennt korrekte Komposita nicht (Rauschen) | `absorb_whitelist.py --apply` (Wort in ≥ 3 Artikeln „unbekannt“ → Whitelist) |
 | LanguageTool-API down | grammar_check: Report-Banner „API nicht erreichbar“ + Exit 2 (kein falsch-grün) |
 | Titel geändert → Cover alt | check_covers Manifest-Abgleich (--fix) |
@@ -493,6 +494,13 @@ jeder Schreibaktion.
   unberührt): schreibarm, aber nicht schreibfrei. Wer (a) behebt, hängt in
   `spam_guard`/`stil_guard` an statt zu schreiben, und ergänzt in `history_guard`
   eine Schwund-Prüfung (Zeilenanzahl einer Historie darf nicht fallen).
+  (6) Neu am Regelwerk: `fazit_schmiede.py --altlasten` meldet und heilt den Altbaustil
+  der ersten Generation – auf Satzebene, damit dazwischenstehender Redaktionstext
+  überlebt, und gegen die Titel-Verstümmelung „^[0-9-\s.]+“ (fraß „50-30-20-Regel“
+  zu „Regel“). Der Modus ist bewusst opt-in: Maschinentext in Artikeln darf kein
+  Selbstläufer der Kette werden. Für die 11 betroffenen Beiträge gilt der Modus als
+  Struktur-Untergrenze, der Mittelsatz ist je Artikel redaktionell nach dessen
+  eigenen Zahlen gefasst (200–2.500 €, 5–15 %, 10–15 %, 8–14 %, 80–150 € u. a.).
 - **14.09.2026:** Doktor-Kette wieder in Betrieb – und die zwei Defekte
   repariert, die ihr Stillstand verdeckt hatte. Der Integritaets-Lock zeigte auf
   einen Commit (f0078db), der auf GitHub nicht mehr existiert; damit stoppte jede

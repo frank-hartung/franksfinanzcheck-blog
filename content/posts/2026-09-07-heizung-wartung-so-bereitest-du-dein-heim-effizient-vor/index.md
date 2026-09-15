@@ -122,9 +122,9 @@ In vielen Kellern liegen die Heizungsrohre noch blank. Das ist reine Energievers
 
 Prüfe zudem das Alter deiner Umwälzpumpe. Alte Modelle laufen oft mit einer konstanten, hohen Wattzahl, egal ob Wärme benötigt wird oder nicht. Moderne Hocheffizienzpumpen passen ihre Leistung dem tatsächlichen Bedarf an. Der Austausch kostet zwar Geld, spart aber über die Jahre massiv Stromkosten ein. In Kombination mit einem hydraulischen Abgleich ist dies das "Dreamteam" der Heizungsoptimierung.
 
-## Fazit: Heizungswartung – so startest du effizient in die Saison
+## Fazit: Heizungswartung – So bereitest du dein Heim effizient vor
 
-Sich gezielt mit dem Thema **Heizungswartung: So bereitest du dein Heim effizient vor** zu beschäftigen, ist einer der einfachsten Hebel, um deine Finanzen selbst in die Hand zu nehmen und bares Geld zu sparen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Fang am besten heute an, vergleiche die Angebote und sichere dir deine Ersparnis! 💸🚀
+Der Hebel bei **Heizungswartung: So bereitest du dein Heim effizient vor** sitzt nicht im Verzicht, sondern im Nachrechnen. Gewartet wird zwischen August und September – dann sinkt der Verbrauch um 10 bis 15 %, und wer mit 12 Cent pro kWh rechnet, sieht den Unterschied bei rund 1.440 € Jahreskosten sofort. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 
