@@ -159,6 +159,11 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
                 "--reserve-only"], env, timeout=rest)
         runner([PY, str(ROOT / "scripts" / "reserve_finisher.py"), "--finish"],
                timeout=rest)
+        # Die Zertifizierung zieht die Quarantäne nach (reserve_quarantine):
+        # Ein Kandidat, der zum zweiten Mal am SELBEN Fund scheitert, verlässt
+        # den Pool – die nächste Runde produziert dann Ersatz für ihn. Ohne
+        # diesen Abgang bliebe der Zielbestand unerreichbar, sobald die
+        # Themen-Dedup keinen Nachschub mehr hergibt (Nachtrag #295).
         runner([PY, str(ROOT / "scripts" / "reserve_readiness.py")],
                timeout=rest)
         nachher = state_reader()

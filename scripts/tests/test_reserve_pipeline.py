@@ -385,5 +385,168 @@ class MetaSatzendeHeilungTests(unittest.TestCase):
         self.assertTrue(desc.endswith("."))
 
 
+class CtaHeilungTests(unittest.TestCase):
+    """Nachzug #295 (Run 34967470666): eine CTA über zwei Zeilen.
+
+    Der reale Befund war keine „CTA ohne Link“, sondern eine CTA, deren Link
+    in der FOLGEZEILE stand. Das Gate prüft zeilenweise (AI1) und lehnte den
+    Kandidaten ab; heilen durfte es im STRICT-DRY-RUN nicht, und die Wache sah
+    nur Live-Artikel – der Pool-Kandidat (bewusst Entwurf) blieb dauerhaft
+    unreif: 5/6, End-Gate rot.
+    """
+
+    KAPUTT = ("> \U0001f4b6 **Spar\u2011Tipp zwischendurch:** Faire Konditionen "
+              "findest du online in wenigen Minuten \u2013\n"
+              "> [**Vergleichen & sparen**](/go/allgemein/)")
+    INTAKT = ("> \U0001f4b6 **Spar-Tipp zwischendurch:** faire Konditionen gibt "
+              "es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)")
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import affiliate_integrity_gate as aig
+        self.aig = aig
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / "content" / "posts"
+
+    def _entwurf(self, slug: str, body: str) -> Path:
+        d = self.posts / slug
+        d.mkdir(parents=True)
+        (d / "index.md").write_text(
+            "---\ntitle: \"T\"\npillar: \"frugalismus\"\ndraft: true\n"
+            "reserve: true\n---\n\nIntro.\n\n" + body + "\n\nSchluss.\n",
+            encoding="utf-8")
+        return d / "index.md"
+
+    def test_zweizeilige_cta_wird_geheilt_ohne_waise(self):
+        index = self._entwurf("2026-09-15-doppel", self.KAPUTT + "\n\n"
+                              + self.INTAKT)
+        res = self.aig.heal_file(index, self.aig.load_registry())
+        self.assertTrue(res["healed"], res)
+        self.assertFalse(res["problems"], res)
+        text = index.read_text(encoding="utf-8")
+        self.assertNotIn("Spar\u2011Tipp", text,
+                         "verstümmelte CTA muss weg sein")
+        self.assertEqual(text.count("[**Vergleichen & sparen**](/go/allgemein/)"),
+                         1, "die Link-Zeile darf nicht als Waise bleiben")
+        self.assertNotIn("\n> [", text,
+                         "keine Blockquote-Zeile darf mit einem nackten "
+                         "Link beginnen")
+
+    def test_einzelne_zweizeilige_cta_behaelt_den_link(self):
+        """Ohne intakte Schwester muss der Link ERHALTEN bleiben."""
+        index = self._entwurf("2026-09-15-solo", self.KAPUTT)
+        res = self.aig.heal_file(index, self.aig.load_registry())
+        self.assertFalse(res["problems"], res)
+        text = index.read_text(encoding="utf-8")
+        self.assertIn("/go/allgemein/", text,
+                      "Affiliate-Link darf nicht verloren gehen")
+        self.assertTrue(self.aig.MD_LINK_RE.search(
+            [l for l in text.splitlines() if "Spar-Tipp" in l
+             or "Spar\u2011Tipp" in l][0]),
+            "nach der Heilung muss der Link IN der CTA-Zeile stehen")
+
+    def test_heilung_ist_idempotent_und_dateibegrenzt(self):
+        index = self._entwurf("2026-09-15-doppel", self.KAPUTT + "\n\n"
+                              + self.INTAKT)
+        andere = self._entwurf("2026-09-01-live",
+                               "💡 **Schnell-Tipp von FranksFinanzcheck:** Die "
+                               "besten Tarife: [**Vergleich**](/go/strom/)")
+        vor = andere.read_text(encoding="utf-8")
+        self.aig.heal_file(index, self.aig.load_registry())
+        danach = index.read_text(encoding="utf-8")
+        self.assertFalse(self.aig.heal_file(index, self.aig.load_registry())["gefunden"],
+                         "zweiter Lauf darf nichts mehr ändern")
+        self.assertEqual(index.read_text(encoding="utf-8"), danach)
+        self.assertEqual(andere.read_text(encoding="utf-8"), vor,
+                         "datei-bezirkelte Heilung darf nichts anderes anfassen")
+
+    def test_heiler_ist_in_der_reserve_kette_verdrahtet(self):
+        """Heiler-Deckung: Das Gate, das ablehnt, braucht einen Heiler."""
+        cta_schritte = [e for e in rf.HEALER_CHAIN
+                        if e[0] == "affiliate_integrity_gate.py"]
+        self.assertTrue(cta_schritte,
+                        "affiliate_integrity_gate.py fehlt in der Heiler-Kette")
+        self.assertTrue(all("--heal" in e[1] and e[2] == "file"
+                            for e in cta_schritte),
+                        "CTA-Heilung muss datei-bezirkelt laufen (nie korpusweit)")
+        self.assertGreaterEqual(len(cta_schritte), 2,
+                                "nach jedem KI-Schritt und vor der "
+                                "Zertifizierung heilen")
+
+
+class QuarantaeneTests(unittest.TestCase):
+    """Nachzug #295: Ein Dauer-Blocker darf den Zielbestand nicht erpressen."""
+
+    FUND = ("Affiliate-Link-Integrität nicht bestanden: Kein vollständiger "
+            "Markdown-Link in CTA-Zeile ('Spar-Tipp zwischendurch')")
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_quarantine as rq
+        import reserve_pool as rp
+        self.rq, self.rp = rq, rp
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / "content" / "posts"
+        self.state = Path(self.tmp.name) / "reserve-quarantine.json"
+        d = self.posts / "2026-09-15-block"
+        d.mkdir(parents=True)
+        (d / "index.md").write_text(
+            "---\ntitle: \"Block\"\ndraft: true\nreserve: true\n---\n\nText.\n",
+            encoding="utf-8")
+
+    def test_pool_verlaesst_den_zaehler_nach_schwelle(self):
+        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        self.assertEqual(self.rq.record(rows, self.state, self.posts), [])
+        self.assertTrue(self.rp.reserve_drafts(self.posts),
+                        "nach dem ersten Fund muss der Kandidat im Pool bleiben")
+        blocked = self.rq.record(rows, self.state, self.posts)
+        self.assertEqual([b["slug"] for b in blocked], ["2026-09-15-block"])
+        self.assertEqual(self.rp.reserve_drafts(self.posts), [],
+                         "ausgemusterter Kandidat darf nicht mehr im Pool zählen")
+
+    def test_werkzeugfehler_zaehlen_nicht(self):
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": "Gate-Ausnahme: hugo timeout"}]
+        self.rq.record(rows, self.state, self.posts)
+        self.assertFalse(self.rq.record(rows, self.state, self.posts))
+        self.assertIn("reserve: true",
+                      (self.posts / "2026-09-15-block" / "index.md")
+                      .read_text(encoding="utf-8"))
+
+
+class GateDiagnoseTests(unittest.TestCase):
+    """Nachzug #295: Das Zertifikat muss den KONKRETEN Fund nennen."""
+
+    LOG = (
+        "Publish-Gate: 1 Kandidat(en) für heute → ['2026-09-15-pool']\n"
+        "  🛑 2026-09-15-pool: WIRD VERWORFEN (kein Artefakt, nächster Lauf "
+        "versucht neues Thema)\n"
+        "     - Affiliate-Link-Integrität nicht bestanden (defekte/nicht "
+        "gerenderte CTA): Kein vollständiger Markdown-Link in CTA-Zeile "
+        "('Spar-Tipp zwischendurch')\n"
+        "\nErgebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft).\n")
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_readiness as rr
+        self.rr = rr
+
+    def test_konkreter_fund_statt_platzhalter(self):
+        funde = self.rr.gate_findings(self.LOG)
+        self.assertTrue(any("Markdown-Link in CTA-Zeile" in f for f in funde),
+                        funde)
+        grund = self.rr.grund_aus_funden(funde)
+        self.assertIn("Markdown-Link in CTA-Zeile", grund)
+        self.assertNotIn("WIRD VERWORFEN", grund,
+                         "die Überschriftszeile ist keine Begründung")
+        self.assertNotIn("Workflow-Log", grund,
+                         "der Platzhalter darf nicht mehr geschrieben werden")
+
+    def test_ohne_fund_bleibt_eine_erklarung(self):
+        self.assertIn("STRICT dry-run", self.rr.grund_aus_funden([]))
+
+
 if __name__ == "__main__":
     unittest.main()

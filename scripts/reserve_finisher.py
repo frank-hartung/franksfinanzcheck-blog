@@ -189,6 +189,17 @@ HEALER_CHAIN = [
     # Der Polish kann die kanonische Partner-CTA verkleben ("Ddiebesten")
     # – deterministisch zurücksetzen, bevor die übrigen Heiler laufen.
     ("fix_cta_hygiene.py", [], "file"),
+    # REPARATUR 15.09.2026 (#295, Run 34967470666): Der Polish schreibt die
+    # Mid-CTA auch KOMPLETT UM und verliert dabei den Link – realer Befund:
+    #   > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen findest du
+    #     online in wenigen Minuten –
+    # (Satz abgeschnitten, kein Link, Label mit U+2011). Das Affiliate-
+    # Integritäts-Gate erkannte den Fund (AI1), durfte im STRICT-DRY-RUN der
+    # Zertifizierung aber nichts schreiben, und die Wache selbst sah nur
+    # Live-Artikel – der Kandidat blieb dauerhaft „nicht reif“, der Pool hing
+    # bei 5/6, der harte End-Gate wurde rot. Die Wache heilt diese Klasse
+    # jetzt datei-bezirkelt und entwurfsfähig (Markdown-Ebene, kein Build).
+    ("affiliate_integrity_gate.py", ["--heal"], "file"),
     ("fix_linebreaks.py", [], "file"),
     ("fix_dash_und.py", ["--fix"]),
     ("fix_dash_eol.py", ["--fix"]),
@@ -247,6 +258,12 @@ HEALER_CHAIN = [
     ("fix_linebreaks.py", ["--heal-only"], "file"),
     # Letztes deterministisches Wort zur CTA-Kanonic vor der Zertifizierung.
     ("fix_cta_hygiene.py", [], "file"),
+    # Und der letzte Beweis, dass jede CTA-Zeile einen gültigen /go/-Link
+    # trägt (#295): Lektorat-/Meta-KI kann dieselbe Klasse neu erzeugen, die
+    # Zertifizierung ist fail-closed – also wird hier erneut geheilt, nicht
+    # nur geprüft. Ein Fund, den kein Heiler auflösen kann, macht den Step
+    # rot (rc=1) und steht damit im Finish-Report statt still im Pool.
+    ("affiliate_integrity_gate.py", ["--heal"], "file"),
     ("fix_url_hygiene.py", ["--fix"]),
 ]
 

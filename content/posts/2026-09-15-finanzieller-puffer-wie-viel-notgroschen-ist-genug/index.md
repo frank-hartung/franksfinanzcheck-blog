@@ -84,9 +84,6 @@ Nutze die vollen 20 % für deine Reserve. Pausiere alle anderen Sparpläne in 
 4. **Dauerauftrag einrichten:** Spare automatisch direkt nach dem Gehaltseingang.
 5. **Summe anpassen:** Prüfe den Betrag bei steigenden Preisen jährlich.
 
-> 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen findest du online in wenigen Minuten –
-> [**Vergleichen & sparen**](/go/allgemein/)
-
 ## Rechenbeispiel: Notgroschen‑Aufbau
 
 Ein Single in einer Großstadt verdient 2.500 € Netto. Die Fixkosten betragen 1.650 € pro Monat. Darin enthalten sind Miete, Essen, Versicherungen und Mobilität.

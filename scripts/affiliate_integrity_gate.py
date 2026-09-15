@@ -228,6 +228,16 @@ DRY_RUN = "--dry-run" in ARGS
 AS_JSON = "--json" in ARGS
 SELFTEST = "--selftest" in ARGS
 NO_BUILD = "--no-build" in ARGS
+# REPARATUR 15.09.2026 (Issue #295, Run 34967470666): Die Wache erkannte eine
+# verstümmelte Mid-CTA im Reserve-Pool („Spar‑Tipp zwischendurch … –“ ohne
+# Link, Label mit U+2011), durfte sie im STRICT-DRY-RUN der Zertifizierung
+# aber nicht heilen – und kein Heiler der Kette kannte die Klasse. Der
+# Kandidat blieb dauerhaft „nicht reif“, der Pool hing bei 5/6, der harte
+# End-Gate wurde rot. `--heal --file <pfad>` macht dieselbe Heilung
+# datei-bezirkelt und entwurfsfähig verfügbar (Markdown-Ebene, kein Build).
+HEAL = "--heal" in ARGS
+HEAL_FILES: list[str] = [ARGS[i + 1] for i, a in enumerate(ARGS)
+                         if a == "--file" and i + 1 < len(ARGS)]
 ONLY_SLUGS: list[str] = []
 if "--slug" in ARGS:
     ONLY_SLUGS = [ARGS[i + 1] for i, a in enumerate(ARGS)
@@ -266,7 +276,20 @@ def article_route(article: dict, reg: dict) -> str:
     return route if route in reg else "allgemein"
 
 
-def load_live_articles(posts_dir: Path | None = None) -> list[dict]:
+def load_live_articles(posts_dir: Path | None = None, *,
+                       include_drafts: bool = False,
+                       only_paths: list | None = None) -> list[dict]:
+    """Artikel des Baums als Prüf-Dicts.
+
+    REPARATUR 15.09.2026 (#295): Die Wache sah ausschließlich LIVE-Artikel
+    (draft:true wurde übersprungen) und heilte im DRY-RUN grundsätzlich nicht.
+    Die Reserve-Kandidaten sind aber BEWUSST Entwürfe – eine defekte CTA dort
+    wurde damit von niemandem geheilt, nur gezählt. `include_drafts` öffnet
+    den Blick für die datei-bezirkelte Heilung (`--heal --file <pfad>`);
+    `only_paths` begrenzt sie auf genau diese Dateien. Beide Parameter sind
+    opt-in: Ohne sie verhält sich die Wache exakt wie vorher (Live-Bestand,
+    kein Entwurf wird angefasst).
+    """
     posts_dir = posts_dir or POSTS_DIR
     arts = []
     if not posts_dir.is_dir():
@@ -280,7 +303,8 @@ def load_live_articles(posts_dir: Path | None = None) -> list[dict]:
             continue
         parts = text.split("---", 2)
         fm, body = parts[1], parts[2]
-        if re.search(r"^draft:\s*true\s*$", fm, re.MULTILINE):
+        if not include_drafts and re.search(r"^draft:\s*true\s*$", fm,
+                                            re.MULTILINE):
             continue
         pillar_m = re.search(r'^pillar:\s*"?([\w-]+)', fm, re.MULTILINE)
         arts.append({
@@ -293,6 +317,9 @@ def load_live_articles(posts_dir: Path | None = None) -> list[dict]:
         })
     if ONLY_SLUGS:
         arts = [a for a in arts if a["slug"] in ONLY_SLUGS]
+    if only_paths:
+        wanted = {Path(p).resolve() for p in only_paths}
+        arts = [a for a in arts if Path(a["path"]).resolve() in wanted]
     return arts
 
 
@@ -654,36 +681,186 @@ def cta_generators():
     return {"top": am.build_top_cta, "mid": am.mid_cta, "end": am.end_cta}
 
 
-def heal_article_ctas(article: dict, broken_kinds: set,
-                      reg: dict | None = None) -> list[str]:
+def cta_line_findings(body: str, reg_keys: set) -> tuple[list[dict], set]:
+    """(defekte CTA-Zeilen, intakte CTA-Arten) – EINE Wahrheit für Prüfer und
+    Heiler.
+
+    REPARATUR 15.09.2026 (#295): Prüfen und Heilen benutzten zwei verschiedene
+    Wege zur CTA-Zeile. `check_cta_line` findet über `find_cta_lines` auch die
+    Strich-Varianten (U+2010…U+2015, U+2212), die die Dash-Heiler im Bestand
+    verteilen; `heal_article_ctas` suchte die Zeile dagegen mit einem
+    Roh-Vergleich gegen den ORIGINAL-Body – eine „Spar‑Tipp“-Zeile mit U+2011
+    wurde deshalb GEZÄHLT, aber nie GEHEILT (der Fund blieb dauerhaft, der
+    Kandidat dauerhaft „nicht reif“). Beide Seiten lesen jetzt dieselbe Liste.
+    """
+    broken: list[dict] = []
+    ok_kinds: set = set()
+    for marker, kind, line, start, end in find_cta_lines(body):
+        problems = check_cta_line(marker, line, reg_keys)
+        if problems:
+            broken.append({"kind": kind, "marker": marker, "line": line,
+                           "start": start, "end": end, "problems": problems})
+        else:
+            ok_kinds.add(kind)
+    return broken, ok_kinds
+
+
+QUOTE_PREFIX_RE = re.compile(r"^[ \t]*(?:>[ \t]?)+")
+# Reine Link-Zeile (mit oder ohne Blockquote-Präfix) – die typische zweite
+# Zeile einer auseinandergelaufenen CTA.
+LINK_ONLY_RE = re.compile(r"^[ \t]*(?:>[ \t]?)?\[\*{0,2}[^\]\n]+\*{0,2}\]\([^)\s]+\)")
+
+
+def cta_block_span(body: str, start: int, end: int,
+                   max_zeilen: int = 2) -> tuple[int, int]:
+    """Erweitert den Zeilen-Span um Folgezeilen DERSELBEN CTA.
+
+    REPARATUR 15.09.2026 (#295, Run 34967470666): Der reale Befund war keine
+    „CTA ohne Link“, sondern eine CTA, die über ZWEI Blockquote-Zeilen
+    auseinanderlief:
+
+        > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen findest du … –
+        > [**Vergleichen & sparen**](/go/allgemein/)
+
+    AI1 prüft zeilenweise, also stand der Fund korrekt da („Kein vollständiger
+    Markdown-Link in CTA-Zeile“). Jeder Heiler, der nur die Marker-Zeile
+    sieht, repariert aber halb: Wird nur sie ersetzt oder entfernt, bleibt die
+    nackte Link-Zeile als Waise im Text – ein Affiliate-Link ohne Kontext und
+    ohne CTA-Rahmen. Der Span gehört deshalb zusammengefasst, BEVOR geheilt
+    wird.
+    """
+    line = body[start:end]
+    hat_quote = bool(QUOTE_PREFIX_RE.match(line))
+    ende = end
+    for _ in range(max(0, max_zeilen)):
+        # `ende` zeigt auf das Zeilenende-Zeichen selbst (find_cta_lines
+        # liefert body.find("\n", pos)) – die Folgezeile beginnt dahinter.
+        # Ohne diesen Sprung beginnt der Slice mit "\n" und keine Präfix-
+        # Regel greift (genau der Fehler des ersten Reparatur-Versuchs).
+        cursor = ende + 1 if ende < len(body) and body[ende] == "\n" else ende
+        if cursor >= len(body):
+            break
+        naechste_ende = body.find("\n", cursor)
+        if naechste_ende == -1:
+            naechste_ende = len(body)
+        naechste = body[cursor:naechste_ende]
+        if not naechste.strip():
+            break
+        fortsetzung = ((hat_quote and bool(QUOTE_PREFIX_RE.match(naechste)))
+                       or bool(LINK_ONLY_RE.match(naechste)))
+        if not fortsetzung:
+            break
+        ende = naechste_ende
+        if MD_LINK_RE.search(body[start:ende]):
+            break
+    return start, ende
+
+
+def merge_cta_block(body: str, start: int, end: int) -> str:
+    """Führt einen mehrzeiligen CTA-Block in EINE Zeile zurück (link-treu)."""
+    block = body[start:end]
+    prefix_m = QUOTE_PREFIX_RE.match(block)
+    prefix = prefix_m.group(0).rstrip() + " " if prefix_m else ""
+    teile = []
+    for zeile in block.split("\n"):
+        inhalt = QUOTE_PREFIX_RE.sub("", zeile).strip()
+        if inhalt:
+            teile.append(inhalt)
+    merged = prefix + " ".join(teile)
+    # Hängenden Gedankenstrich vor dem Link auflösen: „… Minuten – [**…**](…)“
+    # liest sich wie ein abgerissener Satz; kanonisch ist der Doppelpunkt.
+    merged = re.sub(r"[ \t]*[–—-][ \t]*(?=\[)", ": ", merged)
+    return merged
+
+
+def _splice(body: str, start: int, end: int, ersatz: str) -> str:
+    """Ersetzt body[start:end] durch `ersatz` und pflegt NUR die Nahtstelle.
+
+    Eine dokumentenweite Leerzeichen-Normalisierung wäre ein Eingriff in den
+    ganzen Artikel (beobachtet beim ersten Reparatur-Versuch: drei Leerzeilen
+    vor einer völlig unbeteiligten CTA wurden mit aufgeräumt). Deshalb wird
+    die Naht betrachtet, nicht das Dokument.
+    """
+    davor, danach = body[:start], body[end:]
+    text = davor + ersatz + danach
+    if not ersatz:
+        # Beim Löschen können 3+ Umbrüche an der Naht entstehen – Goldmark
+        # baut daraus sichtbaren Leerraum, der Typografie-Score meldet es.
+        # Gezählt wird der Umbruch-Block ÜBER die Naht hinweg (die Umbrüche
+        # davor gehören dazu), sonst bleibt genau die Kaskade stehen, die
+        # hier weg soll.
+        naht = len(davor)
+        links = naht
+        while links > 0 and text[links - 1] == "\n":
+            links -= 1
+        rechts = naht
+        while rechts < len(text) and text[rechts] == "\n":
+            rechts += 1
+        if rechts - links > 2:
+            text = text[:links] + "\n\n" + text[rechts:]
+    return text
+
+
+def heal_article_ctas(article: dict, broken_kinds: set | None = None,
+                      reg: dict | None = None, *, dedupe: bool = True) -> list[str]:
     """Ersetzt JEDE defekte CTA-Zeile komplett durch eine neu generierte,
     garantiert syntaktisch korrekte Version (keine Text-Patches – die haben
-    den Vorfall 14.08.2026 verursacht)."""
-    import affiliate_marketer as am
+    den Vorfall 14.08.2026 verursacht).
+
+    REPARATUR 15.09.2026 (#295), drei Befunde:
+      1. ZEILENGENAU statt „erste Zeile dieser Art“: Der Heiler suchte pro
+         CTA-Art den ERSTEN Marker-Treffer. War der defekt UND stand eine
+         intakte CTA derselben Art weiter unten im Text, wurde die INTAKTE
+         Zeile überschrieben und die defekte blieb stehen (Churn am gesunden
+         Content, Fund weiter offen).
+      2. STRICH-VARIANTEN: Vergleich gegen den Original-Body statt gegen die
+         strich-normalisierte Such-Sicht – U+2011 im Label („Spar‑Tipp“)
+         machte die Zeile unheilbar (siehe `cta_line_findings`).
+      3. DOPPEL-CTA: Eine verstümmelte zweite Mid-CTA wird jetzt ENTFERNT,
+         wenn eine intakte CTA derselben Art im Artikel steht. Neu generieren
+         würde zwei identische Anker-Phrasen in einem Artikel erzeugen
+         (AM4-Muster-Risiko, Conversion-Kannibalisierung) – die Redaktion
+         hat sich mit der intakten Zeile bereits positioniert.
+    `broken_kinds` bleibt als Signatur erhalten (bestehende Aufrufer), ist
+    aber keine eigene Wahrheit mehr: maßgeblich ist der Detektor.
+    """
     reg = reg if reg is not None else load_registry()
     body = article["body"]
     generators = cta_generators()
     healed: list[str] = []
 
-    for marker, kind in CTA_MARKERS:
-        if kind not in broken_kinds:
+    broken, ok_kinds = cta_line_findings(body, set(reg))
+    # Rückwärts heilen: Jeder Eingriff verschiebt alle folgenden Offsets.
+    for span in sorted(broken, key=lambda s: s["start"], reverse=True):
+        kind = span["kind"]
+        # Erst den Block bestimmen (Folgezeilen gehören zur CTA), dann heilen.
+        start, end = cta_block_span(body, span["start"], span["end"])
+
+        if dedupe and kind in ok_kinds:
+            # Eine intakte CTA derselben Art steht bereits im Artikel: Die
+            # Redaktion hat sich positioniert – die defekte Doppel-CTA wird
+            # KOMPLETT entfernt (inklusive ihrer Link-Zeile), statt eine
+            # zweite Anker-Phrase zu erzeugen (AM4-Muster-Risiko).
+            body = _splice(body, start, end, "")
+            healed.append(f"{kind}-CTA entfernt (intakte {kind}-CTA vorhanden)")
             continue
-        idx = -1
-        for pos, mk, kd in marker_hits(body):
-            if mk == marker and body[pos:pos + len(marker)].lower() == marker.lower():
-                idx = pos
-                break
-        if idx == -1:
+
+        # Kein intakter Vertreter dieser Art: Die CTA muss erhalten bleiben.
+        # Erst der billigste, texttreueste Schritt – mehrzeiligen Block
+        # zusammenführen (der Link ist ja da, nur in der falschen Zeile).
+        zusammengefuehrt = merge_cta_block(body, start, end)
+        if MD_LINK_RE.search(zusammengefuehrt) and not check_cta_line(
+                span["marker"], zusammengefuehrt, set(reg)):
+            body = _splice(body, start, end, zusammengefuehrt)
+            healed.append(f"{kind}-CTA zusammengeführt (Link stand in der "
+                          f"Folgezeile)")
             continue
-        line_start = body.rfind("\n", 0, idx) + 1
-        line_end = body.find("\n", idx)
-        if line_end == -1:
-            line_end = len(body)
+
         new_block = generators[kind](article["pillar"], reg, body).strip("\n")
         if kind == "mid":
-            body = body[:line_start] + new_block + body[line_end:]
+            body = _splice(body, start, end, new_block)
         else:
-            rest = body[line_end:]
+            rest = body[end:]
             # Die Vorlage bringt ihren eigenen Werbehinweis mit. Steht unter
             # der defekten Zeile schon einer, wird er ÜBERNOMMEN statt
             # verdoppelt. Toleranz gegen Leerzeile + italic-Umrandlung
@@ -695,10 +872,11 @@ def heal_article_ctas(article: dict, broken_kinds: set,
                 rest)
             if disclaimer_m:
                 rest = rest[disclaimer_m.end():]
-            prefix = re.sub(r"\n?---\s*\n?\Z", "\n", body[:line_start])
+            prefix = re.sub(r"\n?---\s*\n?\Z", "\n", body[:start])
             body = prefix + new_block + "\n" + rest
-        if kind not in healed:
-            healed.append(kind)
+        label = f"{kind}-CTA neu generiert"
+        if label not in healed:
+            healed.append(label)
 
     if not healed:
         return []
@@ -849,19 +1027,13 @@ def detector_drift() -> list[str]:
 # ------------------------------------------------------------------ #
 #  Hauptlauf
 # ------------------------------------------------------------------ #
-def run(root: Path | None = None, posts_dir: Path | None = None,
-        do_heal: bool | None = None, allow_build: bool = True) -> dict:
-    """Kernprüfung – von CLI, publish_gate und bestand_gate genutzt."""
-    root = root or ROOT
-    posts_dir = posts_dir or POSTS_DIR
-    do_heal = (not DRY_RUN) if do_heal is None else do_heal
+def markdown_findings(articles: list[dict], reg_keys: set) -> dict[str, dict]:
+    """Markdown-Prüfung (AI1–AI3) – gemeinsame Basis von Wache und Heiler.
 
-    reg = load_registry(root)
-    reg_keys = set(reg)
-    articles = load_live_articles(posts_dir)
-    errors: list[str] = []
-
-    # ---- Markdown-Prüfung (AI1–AI3) --------------------------------
+    Aus `run()` herausgezogen (15.09.2026, #295), damit die datei-bezirkelte
+    Heilung (`--heal --file`) exakt dieselben Regeln anwendet wie der
+    Korpuslauf – keine zweite, langsam driftende Prüf-Implementierung.
+    """
     findings: dict[str, dict] = {}
     for a in articles:
         problems: list[str] = []
@@ -884,30 +1056,95 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
         if problems:
             findings[a["slug"]] = {"problems": sorted(set(problems)),
                                    "broken_kinds": broken_kinds, "healed": []}
+    return findings
+
+
+def heal_markdown(articles: list[dict], reg: dict,
+                  findings: dict[str, dict]) -> list[str]:
+    """Selbstheilung auf Markdown-Ebene (nie Text-Patch, nie Verwerfen).
+
+    Reihenfolge ist Vertrag: Erst werden Linkziele neu geroutet (rohe
+    Partner-URL → Artikel-Route), dann werden defekte CTA-Zeilen ersetzt
+    bzw. bei Doppel-CTA entfernt. Danach wird neu geprüft, damit der Report
+    nur echte Restfunde zeigt.
+    """
+    reg_keys = set(reg)
+    healed_slugs: list[str] = []
+    for a in articles:
+        f = findings.get(a["slug"])
+        if not f:
+            continue
+        actions: list[str] = []
+        rerouted = heal_unregistered_keys(a, reg)
+        if rerouted:
+            actions.append("Linkziele neu geroutet: " + "; ".join(rerouted))
+        if f["broken_kinds"]:
+            kinds = heal_article_ctas(a, f["broken_kinds"], reg)
+            if kinds:
+                actions.append("CTA geheilt: " + "; ".join(kinds))
+        if actions:
+            # Nach Heilung neu prüfen (Markdown-Ebene)
+            f["healed"] = actions
+            healed_slugs.append(a["slug"])
+            remaining = []
+            for marker, kind, line, *_ in find_cta_lines(a["body"]):
+                remaining.extend(check_cta_line(marker, line, reg_keys))
+            f["problems"] = sorted(set(remaining))
+    return healed_slugs
+
+
+def heal_file(path: Path, reg: dict | None = None) -> dict:
+    """Datei-bezirkelte CTA-Heilung – Entwürfe ausdrücklich erlaubt.
+
+    REPARATUR 15.09.2026 (#295): Die Reserve-Kette veredelt Pool-Kandidaten,
+    die BEWUSST `draft: true` sind. Die Wache prüfte aber nur Live-Artikel und
+    heilte im STRICT-DRY-RUN der Zertifizierung grundsätzlich nicht. Eine
+    verstümmelte CTA im Pool wurde damit von niemandem repariert – der
+    Kandidat blieb dauerhaft „nicht reif“, der Zielbestand war unerreichbar
+    (5/6), der harte End-Gate rot. Diese Funktion ist die fehlende Instanz:
+    Markdown-Ebene, eine Datei, kein Hugo-Build, keine Fremd-Dateien.
+
+    Rückgabe: {"slug", "healed": [...], "problems": [...], "gefunden": bool}
+    """
+    path = Path(path)
+    reg = reg if reg is not None else load_registry()
+    # Der Baum ist content/posts/<slug>/index.md – der Loader liest den
+    # POSTS-Ordner und filtert anschließend auf genau diese Datei.
+    posts_dir = path.parent.parent if path.name == "index.md" else path.parent
+    articles = load_live_articles(posts_dir, include_drafts=True,
+                                  only_paths=[path])
+    if not articles:
+        return {"slug": path.parent.name, "healed": [], "problems": [],
+                "gefunden": False, "fehler": "Artikel nicht lesbar (Frontmatter?)"}
+    findings = markdown_findings(articles, set(reg))
+    if not findings:
+        return {"slug": path.parent.name, "healed": [], "problems": [],
+                "gefunden": False}
+    heal_markdown(articles, reg, findings)
+    f = findings.get(articles[0]["slug"], {})
+    return {"slug": path.parent.name, "healed": f.get("healed", []),
+            "problems": f.get("problems", []), "gefunden": True}
+
+
+def run(root: Path | None = None, posts_dir: Path | None = None,
+        do_heal: bool | None = None, allow_build: bool = True) -> dict:
+    """Kernprüfung – von CLI, publish_gate und bestand_gate genutzt."""
+    root = root or ROOT
+    posts_dir = posts_dir or POSTS_DIR
+    do_heal = (not DRY_RUN) if do_heal is None else do_heal
+
+    reg = load_registry(root)
+    reg_keys = set(reg)
+    articles = load_live_articles(posts_dir)
+    errors: list[str] = []
+
+    # ---- Markdown-Prüfung (AI1–AI3) --------------------------------
+    findings = markdown_findings(articles, reg_keys)
 
     # ---- Selbstheilung (nie Text-Patch, nie Löschen) ----------------
     healed_slugs: list[str] = []
     if findings and do_heal:
-        for a in articles:
-            f = findings.get(a["slug"])
-            if not f:
-                continue
-            actions: list[str] = []
-            rerouted = heal_unregistered_keys(a, reg)
-            if rerouted:
-                actions.append("Linkziele neu geroutet: " + "; ".join(rerouted))
-            if f["broken_kinds"]:
-                kinds = heal_article_ctas(a, f["broken_kinds"], reg)
-                if kinds:
-                    actions.append("CTA neu generiert: " + ", ".join(kinds))
-            if actions:
-                # Nach Heilung neu prüfen (Markdown-Ebene)
-                f["healed"] = actions
-                healed_slugs.append(a["slug"])
-                remaining = []
-                for marker, kind, line, *_ in find_cta_lines(a["body"]):
-                    remaining.extend(check_cta_line(marker, line, reg_keys))
-                f["problems"] = sorted(set(remaining))
+        healed_slugs = heal_markdown(articles, reg, findings)
 
     # ---- Render-Beweis (AI4 + AI5) ---------------------------------
     render_problems: dict[str, str] = {}
@@ -1380,6 +1617,82 @@ def run_selftest() -> list[str]:
             expect(not check_cta_line(marker, line, reg_keys),
                    f"geheilte CTA ({kind}) muss die Prüfung bestehen")
 
+    # 5b) Schadensbild #295 (Run 34967470666): verstümmelte Mid-CTA im
+    #     RESERVE-ENTWURF, Label mit U+2011, Satz ohne Link abgeschnitten,
+    #     dazu eine intakte Mid-CTA weiter unten. Genau diese Kombination
+    #     machte den Zielbestand unerreichbar (5/6) und den Lauf rot.
+    with tempfile.TemporaryDirectory() as tmp3:
+        root3 = Path(tmp3)
+        pool_dir = root3 / "content" / "posts" / "2026-09-15-pool"
+        live_dir = root3 / "content" / "posts" / "2026-09-01-live"
+        pool_dir.mkdir(parents=True)
+        live_dir.mkdir(parents=True)
+        # Original des Vorfalls (bytegenau): Die CTA lief über ZWEI
+        # Blockquote-Zeilen auseinander – Link in der Folgezeile, Label mit
+        # U+2011. AI1 prüft zeilenweise, also war der Fund korrekt.
+        kaputt = ("> \U0001f4b6 **Spar\u2011Tipp zwischendurch:** Faire Konditionen "
+                  "findest du online in wenigen Minuten \u2013\n"
+                  "> [**Vergleichen & sparen**](/go/allgemein/)")
+        intakt = ("> \U0001f4b6 **Spar-Tipp zwischendurch:** faire Konditionen gibt "
+                  "es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)")
+        entwurf = ("---\ntitle: \"Pool-Kandidat\"\npillar: \"frugalismus\"\n"
+                   "draft: true\nreserve: true\n---\n\nIntro.\n\n"
+                   + kaputt + "\n\n## Abschnitt\n\nText.\n\n"
+                   + intakt + "\n\n## Fazit\n\nSchluss.\n")
+        (pool_dir / "index.md").write_text(entwurf, encoding="utf-8")
+        live_text = ("---\ntitle: \"Live\"\ndraft: false\n---\n\n"
+                     "💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife: "
+                     "[**Kostenlos vergleichen**](/go/strom/)\n")
+        (live_dir / "index.md").write_text(live_text, encoding="utf-8")
+
+        vor_broken, _vor_ok = cta_line_findings(entwurf.split("---", 2)[2],
+                                                set(load_registry()))
+        vor = [f["kind"] for f in vor_broken]
+        expect(vor == ["mid"], f"die defekte Mid-CTA muss erkannt werden: {vor}")
+
+        res = heal_file(pool_dir / "index.md", load_registry())
+        expect(res["gefunden"] and res["healed"],
+               f"Reserve-Entwurf muss heilbar sein (draft:true): {res}")
+        expect(not res["problems"], f"nach Heilung darf kein Fund bleiben: {res}")
+        geheilt_text = (pool_dir / "index.md").read_text(encoding="utf-8")
+        expect(kaputt not in geheilt_text,
+               "verstümmelte CTA-Zeile muss entfernt sein")
+        expect(geheilt_text.count("[**Vergleichen & sparen**](/go/allgemein/)") == 1,
+               "die Link-Zeile der Doppel-CTA darf nicht als Waise bleiben "
+               "(Affiliate-Link ohne CTA-Rahmen)")
+        expect("\n> [" not in geheilt_text,
+               "keine Blockquote-Zeile darf mit einem nackten Link beginnen")
+        expect(intakt in geheilt_text,
+               "die intakte Mid-CTA muss bytegenau erhalten bleiben")
+        expect(geheilt_text.count("Spar-Tipp zwischendurch")
+               + geheilt_text.count("Spar\u2011Tipp zwischendurch") == 1,
+               "Doppel-CTA: es darf genau EINE Mid-CTA übrig bleiben "
+               "(keine zweite Anker-Phrase)")
+        expect("\n\n\n" not in geheilt_text,
+               "Entfernen darf keine Leerzeilen-Kaskade hinterlassen")
+        expect((live_dir / "index.md").read_text(encoding="utf-8") == live_text,
+               "datei-bezirkelte Heilung darf keine andere Datei anfassen")
+
+        # Idempotenz: zweiter Lauf findet nichts mehr (kein Churn)
+        res2 = heal_file(pool_dir / "index.md", load_registry())
+        expect(not res2["gefunden"] and not res2["healed"],
+               f"Heilung muss idempotent sein: {res2}")
+
+        # Variante OHNE intakte Schwester: Die Strich-Variante muss heilbar
+        # sein (U+2011) – vorher blieb genau sie dauerhaft offen.
+        solo_dir = root3 / "content" / "posts" / "2026-09-15-solo"
+        solo_dir.mkdir(parents=True)
+        (solo_dir / "index.md").write_text(
+            "---\ntitle: \"Solo\"\npillar: \"frugalismus\"\ndraft: true\n---\n\n"
+            "Intro.\n\n" + kaputt + "\n\n## Fazit\n\nSchluss.\n",
+            encoding="utf-8")
+        res3 = heal_file(solo_dir / "index.md", load_registry())
+        solo_text = (solo_dir / "index.md").read_text(encoding="utf-8")
+        expect(bool(res3["healed"]) and not res3["problems"],
+               f"einzelne defekte Mid-CTA (U+2011) muss neu generiert werden: {res3}")
+        expect(kaputt not in solo_text and "/go/" in solo_text,
+               "neu generierte CTA muss einen gültigen /go/-Link tragen")
+
     # 6) Build-Frische-Erkennung (eigenes Wurzel-Fixture, unabhängig von 4/5)
     with tempfile.TemporaryDirectory() as tmp2:
         root2 = Path(tmp2)
@@ -1495,8 +1808,31 @@ def main() -> int:
               "Erkennung inkl. ?subid=/Legacy/unminifiziert, rohe Partner-Links, "
               "AI1–AI3-Schadensbilder, Deduplikation, AI5-Gateway-Beweis, "
               "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext, "
-              "Herzschlag vs. Befund aus #281).")
+              "Herzschlag vs. Befund aus #281, CTA-Heilung für Entwürfe #295).")
         return EXIT_OK
+
+    # ---- Datei-bezirkelte Heilung (#295) ------------------------------
+    # `--heal --file <pfad>` (mehrfach möglich): heilt genau diese Artikel auf
+    # Markdown-Ebene, Entwürfe eingeschlossen, ohne Hugo-Build und ohne
+    # Report-/State-Schreiben. Das ist die Instanz, die in der Reserve-Kette
+    # fehlt (dort sind Kandidaten bewusst Entwürfe und das Zertifizierungs-Gate
+    # läuft im DRY-RUN). Exit 0 = sauber oder geheilt; 1 = Restfund, den kein
+    # deterministischer Heiler auflösen kann (die Zertifizierung entscheidet).
+    if HEAL and HEAL_FILES:
+        reg = load_registry()
+        rest_funde = 0
+        for raw in HEAL_FILES:
+            res = heal_file(Path(raw), reg)
+            if res.get("fehler"):
+                print(f"  ⚠ {res['slug']}: {res['fehler']}")
+                continue
+            for action in res["healed"]:
+                print(f"  🩹 {res['slug']}: {action}")
+            if res["problems"]:
+                rest_funde += 1
+                for p in res["problems"]:
+                    print(f"  ⛔ {res['slug']}: {p}")
+        return EXIT_CONTENT if rest_funde else EXIT_OK
 
     result = run()
 
