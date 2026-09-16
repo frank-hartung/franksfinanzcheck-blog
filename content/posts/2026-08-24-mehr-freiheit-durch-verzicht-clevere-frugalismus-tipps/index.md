@@ -36,9 +36,9 @@ Mit den richtigen **[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-
 
 
 ---
-Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verwechselst du Knausrigkeit mit Frugalismus.
+Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verwechselst du Knausrigkeit mit [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
-Mit den richtigen **Frugalismus‑Tipps** bleibt dir jeden Monat ein Überschuss von **350 € bis 600 €**. Er liegt auf einem guten Tagesgeldkonto oder in breiten Sparplänen. Dort arbeitet er für dich.
+Mit den richtigen **Frugalismus‑Tipps** bleibt dir jeden Monat ein Überschuss von **350 € bis 600 €**. Er liegt auf einem guten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oder in breiten Sparplänen. Dort arbeitet er für dich.
 
 
 ---

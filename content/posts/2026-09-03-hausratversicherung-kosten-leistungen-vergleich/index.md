@@ -171,7 +171,7 @@ Bei einem geschätzten Diebstahlschaden von 18.000 € entscheidet allein die v
 
 ## Häufige Fragen zur Hausratversicherung
 
-**Was ist der Unterschied zwischen Hausrat- und Wohngebäudeversicherung?** Die Hausratversicherung sichert deine beweglichen Sachen: Möbel, Elektronik, Kleidung. Die Gebäudeversicherung sichert das Haus: Wände, Dach, feste Einbauten. Eigentümer brauchen beide. Mieter nur die Hausratversicherung.
+**Was ist der Unterschied zwischen Hausrat- und [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/)?** Die Hausratversicherung sichert deine beweglichen Sachen: Möbel, Elektronik, Kleidung. Die Gebäudeversicherung sichert das Haus: Wände, Dach, feste Einbauten. Eigentümer brauchen beide. Mieter nur die Hausratversicherung.
 
 **Muss ich jede einzelne Sache angeben?** Nein. Du vereinbarst eine Summe anhand der Wohnfläche. Nur sehr teure Dinge wie Schmuck trägst du gesondert ein.
 

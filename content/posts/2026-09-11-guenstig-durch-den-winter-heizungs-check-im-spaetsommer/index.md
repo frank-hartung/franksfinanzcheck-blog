@@ -169,7 +169,7 @@ Damit verschenken sie jedes Jahr bares Geld an ihren Versorger.
 
 Vergleiche deshalb nicht nur die Boni für Neukunden.
 Achte vor allem auf die Preisgarantie, die Laufzeit und den effektiven Arbeitspreis pro Kilowattstunde.
-Ein guter Tarif schützt dich vor bösen Überraschungen in den kalten Monaten.
+Ein guter Tarif [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor bösen Überraschungen in den kalten Monaten.
 
 Kombinierst du den Technik-Check mit einem Tarifwechsel, wirkt die Ersparnis doppelt.
 Du senkst deinen Verbrauch und zahlst gleichzeitig weniger für jede verbrauchte Einheit.

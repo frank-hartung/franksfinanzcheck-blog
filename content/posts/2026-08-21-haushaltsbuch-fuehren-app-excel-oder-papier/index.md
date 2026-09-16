@@ -132,7 +132,7 @@ Viele hören nach ein paar Wochen auf. Sie wollen jede Ausgabe bis auf den Cent 
 
 * **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos.
 * **30 % → Wünsche & Freizeit:** Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys.
-* **20 % → Sparen & Vermögensaufbau:** [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem Tagesgeldkonto, ETF-Sparplan, Sondertilgung.
+* **20 % → Sparen & Vermögensaufbau:** [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
 
 Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate. Drückst du die Fixkosten auf 1.000 €, steigt die Sparrate auf 750 €. Das gelingt mit [einem kostenlosen Girokonto](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) sowie guten Versicherungs- und Energietarifen. Dein Lebensstandard bleibt gleich.
 

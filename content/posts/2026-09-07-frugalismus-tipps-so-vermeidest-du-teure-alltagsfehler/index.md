@@ -41,7 +41,7 @@ Das Wichtigste in Kürze:
 
 Lukas hätte das Geld lieber in seinen ETF-Sparplan gesteckt. Er merkte jedoch erst beim nächsten Kassensturz, dass sein Konto trotz vermeintlicher Schnäppchen am Monatsende leer war.
 
-Viele Menschen verwechseln Alltagsfrugalismus mit purem Geiz. Doch beim Frugalismus geht es darum, die eigenen Ressourcen so einzusetzen, dass sie den maximalen Lebenswert erzeugen. Wer nur blind spart, verliert schnell die Motivation. In der Praxis scheitern die meisten Versuche an mangelnder Struktur und psychologischen Fallen.
+Viele Menschen verwechseln Alltagsfrugalismus mit purem Geiz. Doch beim [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) geht es darum, die eigenen Ressourcen so einzusetzen, dass sie den maximalen Lebenswert erzeugen. Wer nur blind spart, verliert schnell die Motivation. In der Praxis scheitern die meisten Versuche an mangelnder Struktur und psychologischen Fallen.
 
 
 
@@ -87,7 +87,7 @@ So gehst du vor:
 
 In der Praxis reicht es oft aus, die Ausgaben einmal pro Woche für zehn Minuten zu prüfen. Das verhindert, dass sich ein Berg an Belegen ansammelt.
 
-Wer sein **Haushaltsbuch führen** will, sollte es so einfach wie möglich gestalten. Komplizierte Excel-Tabellen schrecken eher ab. Eine simple App oder ein kleines Notizbuch tun es oft auch.
+Wer sein **[Haushaltsbuch führen](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** will, sollte es so einfach wie möglich gestalten. Komplizierte Excel-Tabellen schrecken eher ab. Eine simple App oder ein kleines Notizbuch tun es oft auch.
 
 
 ## Warum scheitern die meisten Sparmethoden im Alltag?
@@ -140,7 +140,7 @@ Software, Streaming-Dienste, Fitnessstudios oder Zeitschriften belasten dein Kon
 
 Gehe einmal im Quartal deine Kontoauszüge durch. Identifiziere jede automatische Abbuchung. Frage dich bei jedem Posten: „Habe ich diesen Dienst im letzten Monat wirklich genutzt?“ Wenn die Antwort nein lautet, kündige sofort. Viele Anbieter lassen dich monatlich aussteigen, was dir maximale Flexibilität gibt.
 
-Oft gibt es auch kostenlose Alternativen. Die örtliche Bibliothek bietet oft Zugriff auf Filme, Magazine und sogar Streaming-Plattformen. Wer seine Fixkosten auf diese Weise drückt, schafft sich finanziellen Spielraum ohne täglichen Verzicht-Stress. Das ist einer der wirkungsvollsten Ansätze beim Thema **Geld sparen im Alltag**.
+Oft gibt es auch kostenlose Alternativen. Die örtliche Bibliothek bietet oft Zugriff auf Filme, Magazine und sogar Streaming-Plattformen. Wer seine Fixkosten auf diese Weise drückt, schafft sich finanziellen Spielraum ohne täglichen Verzicht-Stress. Das ist einer der wirkungsvollsten Ansätze beim Thema **[Geld sparen im Alltag](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)**.
 
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 

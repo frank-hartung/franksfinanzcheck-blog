@@ -52,10 +52,10 @@ Der erste Topf umfasst 50 % deines Geldes für alle lebensnotwendigen Ausgaben.
 
 Der zweite Topf reserviert 30 % für deine persönlichen Wünsche. Das ist dein „Lifestyle-Budget“.
 
-Hierzu gehören Kinobesuche, Restaurantessen, das neue Smartphone, Streaming-Abos oder Hobbys. Dieser Bereich sorgt dafür, dass du dich nicht einschränkst, bis das Leben an dir vorbeizieht. Frugalismus bedeutet nicht Askese, sondern bewusster Konsum.
+Hierzu gehören Kinobesuche, Restaurantessen, das neue Smartphone, Streaming-Abos oder Hobbys. Dieser Bereich sorgt dafür, dass du dich nicht einschränkst, bis das Leben an dir vorbeizieht. [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) bedeutet nicht Askese, sondern bewusster Konsum.
 
 
-Die restlichen 20 % fließen direkt in deine finanzielle Zukunft. Das ist der wichtigste Teil für den langfristigen Vermögensaufbau oder die Schuldentilgung. Ob du damit einen ETF-Sparplan fütterst, deinen Notgroschen aufbaust oder Kredite schneller zurückzahlst, bleibt dir überlassen. Entscheidend ist, dass dieses Geld arbeitet, anstatt für Konsum verpufft zu werden.
+Die restlichen 20 % fließen direkt in deine finanzielle Zukunft. Das ist der wichtigste Teil für den langfristigen Vermögensaufbau oder die Schuldentilgung. Ob du damit einen ETF-Sparplan fütterst, deinen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) aufbaust oder Kredite schneller zurückzahlst, bleibt dir überlassen. Entscheidend ist, dass dieses Geld arbeitet, anstatt für Konsum verpufft zu werden.
 
 ## Warum reicht die klassische Formel 2026 nicht mehr aus?
 

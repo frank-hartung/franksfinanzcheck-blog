@@ -85,7 +85,7 @@ Nutze die 30‑Tage‑Regel bei großen Käufen. Warte einen Monat ab. Oft verge
 
 | Tool | Kosten | Was es automatisiert | Pro | Contra |
 |------|--------|----------------------|-----|--------|
-| **Bank‑Dauerauftrag** | kostenlos | Sparrate, Notgroschen‑Transfer | Einfach, sofort verfügbar | Keine Flexibilität bei variabler Rate |
+| **Bank‑Dauerauftrag** | kostenlos | Sparrate, [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)‑Transfer | Einfach, sofort verfügbar | Keine Flexibilität bei variabler Rate |
 | **Finanz‑App (z. B. Outbank, MoneyControl)** | 0‑5 €/Monat | Kategorisierung, Benachrichtigungen | Übersicht, Echtzeit‑Warnungen | Lernkurve, Datenschutz‑Bedenken |
 | **Robo‑Advisor (Scalable Capital, Growney)** | 0,5‑1 % p.a. | Portfolio‑Rebalancing, Sparplan | Professionelle Streuung | Gebühren, weniger Kontrolle |
 | **IFTTT/Zapier** | kostenlos bis 20 €/Monat | Verknüpfung von Bank‑API mit Spreadsheet | Vollständig anpassbar | Technischer Aufwand |
@@ -149,7 +149,7 @@ Auch kleine Gebühren fressen Rendite. [Kontokosten](../../posts/2026-08-17-kost
 | Fehler | Beispiel | Verpasste Chance (10 Jahre, 7 % Rendite) |
 |--------|----------|------------------------------------------|
 | **Spart nicht automatisiert** | Manuelle Überweisungen, 30 % vergessen | ca. 12.000 € weniger Endkapital |
-| **Zu hohe Kontoführungsgebühren** | 5 €/Monat bei 2 % Rendite | ca. 1.200 € Verlust |
+| **Zu hohe [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)** | 5 €/Monat bei 2 % Rendite | ca. 1.200 € Verlust |
 | **Kauf von Marken‑Kaffee täglich** | 3 €/Tag = 1.095 €/Jahr | ca. 4.000 € nach 10 Jahren |
 | **Keine Steueroptimierung** | Nicht‑Nutzung Sparer‑Pauschbetrag | ca. 800 € an Steuern jährlich |
 
@@ -173,12 +173,12 @@ Frage vor jedem Kauf: Bringt er mir langfristig etwas? Macht er mich dauerhaft g
 
 | Aspekt | Frugalismus | Minimalismus |
 |--------|-------------|--------------|
-| **Ziel** | Geld sparen, Vermögen aufbauen | Reduktion von Besitz, Fokus auf Lebensqualität |
+| **Ziel** | [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/), Vermögen aufbauen | Reduktion von Besitz, Fokus auf Lebensqualität |
 | **Strategie** | Preis‑ und Nutzen‑Check, günstige Alternativen | Ausmisten, bewusstes Konsum‑Reduzieren |
 | **Vorteil** | Schnellere Sparroutinen, mehr Kapital für Investitionen | Mehr mentale Klarheit, weniger Ablenkung |
 | **Nachteil** | Gefahr von „zu billig“ – Qualität kann leiden | Keine direkte Geld‑Multiplikation, eher indirekt |
 
-Beide Wege unterstützen **finanzielle Freiheit erreichen**, wenn du sie gezielt kombinierst: Spare bewusst, investiere das Gesparte und lebe mit weniger Ballast.
+Beide Wege unterstützen **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) erreichen**, wenn du sie gezielt kombinierst: Spare bewusst, investiere das Gesparte und lebe mit weniger Ballast.
 
 ## Fazit: Finanzielle Freiheit – denk dich reich, handle bewusst
 

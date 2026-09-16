@@ -37,7 +37,7 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 * Ein Notgroschen orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
 * Für Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit.
 * Selbstständige planen besser mit sechs bis zwölf Monatsausgaben.
-* Ein separates Tagesgeldkonto ist meist der beste Parkplatz für die Reserve.
+* Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ist meist der beste Parkplatz für die Reserve.
 
 ---
 

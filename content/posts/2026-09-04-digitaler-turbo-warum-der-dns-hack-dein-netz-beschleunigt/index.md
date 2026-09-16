@@ -49,7 +49,7 @@ Der **DNS-Hack** ist nur der manuelle Wechsel dieser Stelle. Du wählst selbst e
 
 2026 ist die Technik weit fortgeschritten. Früher waren Anfragen einfacher Text.
 
-Heute sind fast alle Verbindungen verschlüsselt. Ein guter DNS-Server schützt dich sogar vor Phishing-Seiten. Er löst schädliche Adressen gar nicht erst auf. Dein Netz wird sicherer – ohne zusätzliche Software.
+Heute sind fast alle Verbindungen verschlüsselt. Ein guter DNS-Server [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) sogar vor Phishing-Seiten. Er löst schädliche Adressen gar nicht erst auf. Dein Netz wird sicherer – ohne zusätzliche Software.
 
 ## Warum bremst der DNS-Server deines Providers dich aus?
 
