@@ -57,7 +57,7 @@ Seit 2022 sind die Lebenshaltungskosten dauerhaft hoch. Lebensmittel, Energie un
 
 * **Abo-Schlupflöcher:** Streaming-Dienste, Cloud-Speicher, Fitnessstudio, Zeitungs-Flatrates und Lieferdienste summieren sich oft auf 80 € bis 150 € pro Monat – ohne dass man einzeln bewusst darauf verzichtet.
 * **Kleinvieh-Mist:** Ein Coffee-to-go für 3,50 €, der Snack am Bahnhof oder die spontane Bestellung machen im Monat schnell 120 € bis 200 € aus.
-* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 Ein Haushaltsbuch wirkt wie eine Lupe. Es zeigt, wo Monat für Monat Geld versickert. Ziel ist nicht Verzicht. Ziel ist eine **bewusste Entscheidung** statt einer automatischen Ausgabe.
 
