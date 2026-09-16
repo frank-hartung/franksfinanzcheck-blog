@@ -19,7 +19,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-09-14T12:54:09+00:00",
+  "ts": "2026-09-16T13:24:12+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -274,8 +274,8 @@
   }
  },
  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-  "title": "Finanzielle Freiheit erreichen: Denke dich reich",
-  "ts": "2026-09-09T11:07:51+00:00",
+  "title": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
+  "ts": "2026-09-16T13:24:18+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -617,7 +617,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-16T08:59:48+00:00",
+  "ts": "2026-09-16T13:24:15+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -774,6 +774,15 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-16-5-einfache-frugalismus-tricks-fuer-den-alltag": {
+  "title": "5 einfache Frugalismus-Tricks für den Alltag",
+  "ts": "2026-09-16T13:24:23+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }
