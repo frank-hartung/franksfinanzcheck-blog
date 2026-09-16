@@ -6,7 +6,7 @@ date: 2026-09-15T09:30:31Z
 draft: true
 tags: ["Energie-Update: was sich jetzt für dich ändert", "Energie"]
 categories: ["News"]
-keywords: ["Energie-Update: Was sich jetzt für dich ändert"]
+keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "chatgpt"
@@ -16,6 +16,8 @@ cover:
   image: "images/covers/2026-09-15-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Energie-Update: Was sich jetzt für dich ändert"
   caption: "Tipp von FranksFinanzcheck"
+pin_title: "Energie-Update: Was sich jetzt für dich ändert"
+pin_description: "*Werbung | Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
 ---
 
 

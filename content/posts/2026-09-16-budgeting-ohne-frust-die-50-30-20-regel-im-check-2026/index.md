@@ -12,7 +12,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Budgeting ohne Frust", "Budgeting", "50-30-20-Regel"]
+keywords: ["Budgeting ohne Frust", "50-30-20-Regel", "Geld sparen"]
 pin_title: "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026"
 pin_description: "*Werbung | Budgeting ohne Frust: Erfahre, wie du mit der 50-30-20-Regel dein Geld 2026 optimal aufteilst. Praxisnah, ehrlich und mit konkreten Tipps für deine Sparquote… Mehr Spartipps auf FranksFinanzcheck! #budgetingohnefrust #budgeting #503020regel"
 ai_generated: true

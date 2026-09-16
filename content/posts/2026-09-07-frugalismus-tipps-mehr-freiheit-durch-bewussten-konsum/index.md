@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Frugalismus-Tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen", "Frugalismus", "Geld sparen", "Frugalismus Tipps", "Kleine Beträge, große Wirkung"]
+keywords: ["Frugalismus-Tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen", "Frugalismus", "Geld sparen", "Frugalismus Tipps", "Kleine Beträge"]
 pinwand: Geld sparen im Alltag | Frugalismus-Tipps
 pin_title: "Frugalismus-Einstieg: kleine Beträge, große Wirkung"
 pin_description: "*Werbung | Entdecke effektive Frugalismus-Tipps für dein Leben. Lerne, wie du ohne Verzicht Geld sparen im Alltag meisterst und deine Finanzen optimierst. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #sparmethoden"
