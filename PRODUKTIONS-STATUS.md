@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-16 20:25 UTC  
+**Stand:** 2026-09-16 22:50 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-09-16): 3 Artikel – Ziel erfüllt. – Bestand: 7 förderfähig in der Re-Queue, 1 von Gates gehalten (ältester 0 Tage: quality-score: 0.79 < 0.85; finale Freigabe fehlt)
 
