@@ -697,9 +697,9 @@ items:
   date: '2026-09-16'
   time: '19:15'
   scheduled_at: '2026-09-16T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-03-hausratversicherung-kosten-leistungen-vergleich:nutzen:2026-09-17
   channel: telegram
   slug: 2026-09-03-hausratversicherung-kosten-leistungen-vergleich
