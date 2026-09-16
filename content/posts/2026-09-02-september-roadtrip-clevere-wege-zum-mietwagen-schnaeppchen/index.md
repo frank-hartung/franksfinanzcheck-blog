@@ -37,7 +37,7 @@ Die Hitze des Hochsommers ist weg. Andere haben im August viel für einen Kleinw
 
 Du hast dein **Mietwagen-Schnäppchen** schon Wochen vorher gesichert. Die Ersparnis reicht locker für drei Abendessen in einer guten Fischtaverne.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 In der Praxis läuft es oft anders. Du buchst zu spät.
 

@@ -28,7 +28,7 @@ Vor der Buchung zeigt die Hotel-Webseite drei Zahlungsoptionen. Kreditkarte, Las
 
 Für viele ist die Kreditkarte eine unsichtbare Gebührenquelle. Zwölf Euro im Jahr hier, zwei Prozent im Ausland dort. Und am Monatsende lockt die Ratenzahlung mit hohen Zinsen. Dabei gibt es längst Karten, die dauerhaft nichts kosten.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Dieser Ratgeber zeigt, worauf es beim Kreditkarten-[Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) ankommt: Kosten, Sicherheit und versteckte Klauseln. Am Ende bekommst du eine Checkliste für deinen Alltag.
 

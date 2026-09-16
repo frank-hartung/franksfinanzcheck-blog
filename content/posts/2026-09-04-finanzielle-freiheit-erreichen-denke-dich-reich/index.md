@@ -64,7 +64,7 @@ Reichtum beginnt im Kopf. Übernimm die Verantwortung für deine Finanzen. Gib n
 | **Visualisierung** | Langfristige Ziele greifbar machen | Schließe die Augen, stelle dir dein Leben ohne Geldsorgen vor – z. B. ein Haus am See. |
 | **Kosten‑Check‑Liste** | Impulskäufe reduzieren | Vor jedem Kauf: „Brauche ich das wirklich?“ – notiere „Ja/Nein“. |
 
-Durch die tägliche Routine verankert sich ein **geld mindset**, das Sparroutinen unterstützt und das Risiko von Fehlentscheidungen senkt.
+Durch die tägliche Routine verankert sich ein **Geld mindset**, das Sparroutinen unterstützt und das Risiko von Fehlentscheidungen senkt.
 
 ## Welche Sparroutinen bringen dich wirklich voran?
 

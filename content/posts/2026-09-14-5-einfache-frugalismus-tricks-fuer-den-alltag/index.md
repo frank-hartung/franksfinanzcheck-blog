@@ -35,11 +35,11 @@ Ein klarer Blick auf die Zahlen ist die Basis. Kleine Käufe im Alltag summieren
 
 | Kategorie | Ausgaben im Monat (Beispiel) | Hinweis zur Optimierung |
 |---|---|---|
-| Lebensmittel | 250 € | Wochenplan nutzen, Reste verkochen |
-| Bus & Bahn | 80 € | Ticket prüfen, Rad nutzen |
-| Streaming | 15 € | Kündigen bei Nichtnutzung |
-| Spontanes | 30 € | 24-Stunden-Regel testen |
-| Sonstiges | 40 € | Feste Grenze setzen |
+| Lebensmittel | 250 € | Wochenplan nutzen, Reste verkochen |
+| Bus & Bahn | 80 € | Ticket prüfen, Rad nutzen |
+| Streaming | 15 € | Kündigen bei Nichtnutzung |
+| Spontanes | 30 € | 24-Stunden-Regel testen |
+| Sonstiges | 40 € | Feste Grenze setzen |
 
 > **Rechenbeispiel:**
 > Du gibst 5 % von 2.500 € Netto für Spontanes aus (125 €). Nutzt du die 24-Stunden-Regel, sparst du 75 € im Monat. Das bringt dir 900 € im Jahr für dein Tagesgeld.
@@ -56,11 +56,11 @@ Strom und Gas kosten viel Geld. Oft reichen kleine Griffe im Alltag aus.
 
 | Maßnahme | Ersparnis (Faustregel) | Aufwand |
 |---|---|---|
-| Geräte ganz ausschalten | 5 % Strom | gering |
-| LED statt Glühbirne | 10 % Strom | gering |
-| Regler am Wasserhahn | 5 % Gas | gering |
-| Heizung entlüften | 3 % Gas | gering |
-| Wäsche bei 30 °C waschen | 2 % Strom | gering |
+| Geräte ganz ausschalten | 5 % Strom | gering |
+| LED statt Glühbirne | 10 % Strom | gering |
+| Regler am Wasserhahn | 5 % Gas | gering |
+| Heizung entlüften | 3 % Gas | gering |
+| Wäsche bei 30 °C waschen | 2 % Strom | gering |
 
 > **Rechenbeispiel:**
 > Dein Strom kostet 80 € im Monat. Das Ausschalten von Stand-by spart 4 € monatlich. Wechselst du auf LED, sparst du 8 € mehr. Das macht 144 € Ersparnis im Jahr.
@@ -92,9 +92,9 @@ Essen ist ein großer Ausgabenblock. Durch gute Planung sparst du viel Geld.
 
 | Maßnahme | Ersparnis (Faustregel) | Aufwand |
 |---|---|---|
-| Wochenplan erstellen | 10 % beim Einkauf | gering |
-| Reste verkochen | 5 % beim Einkauf | gering |
-| Vorräte nutzen | 7 % beim Einkauf | mittel |
+| Wochenplan erstellen | 10 % beim Einkauf | gering |
+| Reste verkochen | 5 % beim Einkauf | gering |
+| Vorräte nutzen | 7 % beim Einkauf | mittel |
 
 > **Rechenbeispiel:**
 > Du kaufst für 300 € Essen ein. Ein Wochenplan spart 30 € im Monat. Die Resteverwertung bringt 15 € mehr. Das sind 540 € Ersparnis pro Jahr.
@@ -112,9 +112,9 @@ Manche Abos laufen ungenutzt weiter. Ein Check stoppt unnötige Kosten.
 
 | Abo / Dienst | Monatliche Kosten | Nutzung | Handlung |
 |---|---|---|---|
-| Musik-Dienst | 10 € | kaum | Kündigen |
-| Fitnessstudio | 30 € | selten | Pausieren |
-| Magazin | 8 € | nie | Kündigen |
+| Musik-Dienst | 10 € | kaum | Kündigen |
+| Fitnessstudio | 30 € | selten | Pausieren |
+| Magazin | 8 € | nie | Kündigen |
 
 > **Rechenbeispiel:**
 > Drei Abos kosten 45 € im Monat, werden aber kaum genutzt. Streichst du zwei davon, sparst du 270 € im Jahr für deinen Puffer.
@@ -147,7 +147,7 @@ Erfasse Ausgaben einmal täglich kurz. Am Monatsende ziehst du Bilanz.
 Ja, Wechsel sparen bei Strom und Gas oft hunderte Euro im Jahr.
 
 ### Was ist die 50-30-20-Regel?
-50 % für Grundbedarf, 30 % für Wünsche und 20 % für das Sparen.
+50 % für Grundbedarf, 30 % für Wünsche und 20 % für das Sparen.
 
 ---
 

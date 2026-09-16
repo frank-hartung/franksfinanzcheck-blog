@@ -29,7 +29,7 @@ Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung
 10, 15 oder gar 25 %. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen August und November**.
 
 
-**30. November, 23:59 Uhr:** Bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
+**30. November, 23:59 Uhr:** bis dahin muss deine Kündigung beim alten Versicherer sein. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 
 ---
 
@@ -112,7 +112,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. kennen und nutzen
+### 7. Den Stichtag 30.11. Kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.

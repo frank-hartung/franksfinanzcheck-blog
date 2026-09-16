@@ -36,7 +36,7 @@ Wer bis zum ersten Frost wartet, zahlt oft zu viel. Die Preise für Gas steigen 
 In der Grundversorgung verschenkst du jeden Monat bares Geld. Der Wechsel dauert meist unter zehn Minuten. Du erledigst das bequem am Rechner.
 
 **Das Wichtigste in Kürze**
-* **Ersparnis:** Ein Wechsel spart oft 200 € bis 500 € im Jahr.
+* **Ersparnis:** Ein Wechsel spart oft 200 € bis 500 € im Jahr.
 * **Timing:** Vergleiche deine Tarife am besten im Spätsommer.
 * **Sicherheit:** Deine Versorgung ist lückenlos vom Gesetz geschützt.
 * **Fristen:** Achte auf Laufzeiten, um Kündigungstermine zu wahren.
@@ -69,7 +69,7 @@ Wähle Verträge mit **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-s
 
 Um deine **[Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** zu können, musst du den Preis kennen. Er besteht aus Steuern, Netzkosten und der CO2-Abgabe. Diese Abgaben legt der Staat fest. Dein Hebel liegt beim reinen Energiepreis des Versorgers.
 
-Schlanke Anbieter kaufen Energie günstig an der Börse ein. Das spart dir direkt viel Geld. Nutze den günstigen Tarif zusammen mit bewusstem Heizen. Ein Grad weniger im Raum spart rund 6 % Energie.
+Schlanke Anbieter kaufen Energie günstig an der Börse ein. Das spart dir direkt viel Geld. Nutze den günstigen Tarif zusammen mit bewusstem Heizen. Ein Grad weniger im Raum spart rund 6 % Energie.
 
 Günstige Tarife und sparsames Heizen ergänzen sich perfekt. Wer klug vergleicht und bewusst heizt, spart doppelt. So bleibt die kalte Zeit bezahlbar.
 
@@ -103,10 +103,10 @@ Ein Haushalt mit vier Personen verbraucht ca. 20.000 kWh Gas im Jahr. Der Wechse
 | Posten | Grundversorgung (alt) | Neuer Tarif | Ersparnis |
 | :--- | :--- | :--- | :--- |
 | Arbeitspreis pro kWh | 14,5 Cent | 10,2 Cent | 4,3 Cent |
-| Grundpreis pro Jahr | 180 € | 150 € | 30 € |
-| Gesamtkosten im Jahr | 3.080 € | 2.190 € | **890 €** |
+| Grundpreis pro Jahr | 180 € | 150 € | 30 € |
+| Gesamtkosten im Jahr | 3.080 € | 2.190 € | **890 €** |
 
-Der Haushalt spart im Beispiel fast 900 €. Auch ohne Boni bleibt die Ersparnis riesig. Ein **Gasvergleich** rechnet sich fast immer.
+Der Haushalt spart im Beispiel fast 900 €. Auch ohne Boni bleibt die Ersparnis riesig. Ein **Gasvergleich** rechnet sich fast immer.
 
 ## Die Rolle von Ökotarifen
 

@@ -42,7 +42,7 @@ Auch der Markt verändertsich. Neben festen Tarifen gibt es dynamische Modelle. 
 
 Höhere Rechnungen belasten die Kasse. Ein früher Check bringt dir Ruhe. Du findest rasch einen günstigen Tarif. Das schützt dich vor bösen Überraschungen. Du behältst die Kontrolle über deine Kosten.
 
-Ein Beispiel macht das klar. Bei 3.500 kWh Strom und 15.000 kWh Gas bringt schon 1 Cent Ersparnis viel. Du sparst rasch über 200 € im Jahr. Dieses Geld stärkt deinen Notgroschen oder dein Sparen.
+Ein Beispiel macht das klar. Bei 3.500 kWh Strom und 15.000 kWh Gas bringt schon 1 Cent Ersparnis viel. Du sparst rasch über 200 € im Jahr. Dieses Geld stärkt deinen Notgroschen oder dein Sparen.
 
 Achte auch auf die Preisgarantie. Lange Bindungen klingen gut. Aber sinken die Marktpreise, zahlst du zu viel. Dein **Energie-Update** sollte flexibel bleiben.
 
@@ -95,8 +95,8 @@ Viele Versorger setzen Abschläge zu hoch an. Das mindert dein Geld auf dem Kont
 ## Effizienz schlägt Tarifwechsel
 
 Jede gesparte Kilowattstunde bringt echten Gewinn. Diese Schritte helfen sofort:
-* **Hydraulischer Abgleich:** Spart bis zu 15 % Gas.
-* **Smarte Regler:** Senken die Heizkosten um bis zu 10 %.
+* **Hydraulischer Abgleich:** Spart bis zu 15 % Gas.
+* **Smarte Regler:** Senken die Heizkosten um bis zu 10 %.
 * **Rohre dämmen:** Kostet wenig und wirkt sofort.
 
 **Lesetipp:** [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
@@ -110,7 +110,7 @@ Ein veralteter Tarif kostet mehr als nötig. Prüfe deinen Vertrag nach der Abre
 ## FAQ – die wichtigsten Fragen zur Meldung
 
 ### Warum steigen die Nachzahlungen im Herbst und Winter besonders stark?
-Der Verbrauch steigt im Winter stark an. Das vierte Quartal macht oft 40 % des Jahresverbrauchs aus. Wenn Abschläge gleich bleiben, entsteht ein Minus.
+Der Verbrauch steigt im Winter stark an. Das vierte Quartal macht oft 40 % des Jahresverbrauchs aus. Wenn Abschläge gleich bleiben, entsteht ein Minus.
 
 ### Wie oft sollte ich meinen Strom- und Gastarif prüfen?
 Prüfe deine Tarife einmal im Jahr. Der Frühherbst ist dafür ideal. Auch bei neuen Netzkosten lohnt sich der Blick.

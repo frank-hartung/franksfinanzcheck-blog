@@ -11,7 +11,7 @@ lastmod: 2026-09-11
 
 ## So findest du den passenden Ratgeber
 
-1. **Thema wählen:** Die [sechs Themenwelten oben](#deine-6-themenwelten) führen dich zu einem Überblick mit den zugehörigen Artikeln.
+1. **Thema wählen:** die [sechs Themenwelten oben](#deine-6-themenwelten) führen dich zu einem Überblick mit den zugehörigen Artikeln.
 2. **In Ruhe vergleichen:** Achte auf Gesamtkosten, Laufzeiten und Leistungen – nicht nur auf einen Bonus oder den ersten Monatspreis.
 3. **Bewusst entscheiden:** Prüfe, ob ein Angebot zu deinem Verbrauch, deinem Budget und deiner Lebenssituation passt. Nicht jeder Wechsel lohnt sich für jeden.
 

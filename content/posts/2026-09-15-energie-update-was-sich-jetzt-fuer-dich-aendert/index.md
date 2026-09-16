@@ -41,20 +41,20 @@ Du musst prüfen, ob dein aktueller Vertrag noch zu deinen Bedürfnissen passt. 
 
 ## Was du jetzt konkret tun kannst
 
-1. **Sammle deine Vertragsunterlagen** – Öffne deine letzte Rechnung und notiere die wichtigsten Eckdaten.  
-2. **Vergleiche aktuelle Angebote** – Nutze unabhängige Vergleichsportale, um einen Überblick über die verfügbaren Tarife zu erhalten.  
-3. **Prüfe die Kündigungsfristen** – Achte darauf, wann dein aktueller Vertrag endet und welche Fristen gelten.  
-4. **Bewerte Service und Nachhaltigkeit** – Neben dem Preis können Kundenservice und der Anteil erneuerbarer Energien wichtig sein.  
-5. **Fordere ein individuelles Angebot an** – Kontaktiere potenzielle Anbieter und lass dir ein persönliches Angebot zusenden.  
-6. **Entscheide dich bewusst** – Wenn du ein passendes Angebot gefunden hast, melde dich beim neuen Anbieter und kümmere dich um die formelle Kündigung deines alten Vertrags.  
+1. **Sammle deine Vertragsunterlagen** – Öffne deine letzte Rechnung und notiere die wichtigsten Eckdaten.
+2. **Vergleiche aktuelle Angebote** – Nutze unabhängige Vergleichsportale, um einen Überblick über die verfügbaren Tarife zu erhalten.
+3. **Prüfe die Kündigungsfristen** – Achte darauf, wann dein aktueller Vertrag endet und welche Fristen gelten.
+4. **Bewerte Service und Nachhaltigkeit** – Neben dem Preis können Kundenservice und der Anteil erneuerbarer Energien wichtig sein.
+5. **Fordere ein individuelles Angebot an** – Kontaktiere potenzielle Anbieter und lass dir ein persönliches Angebot zusenden.
+6. **Entscheide dich bewusst** – Wenn du ein passendes Angebot gefunden hast, melde dich beim neuen Anbieter und kümmere dich um die formelle Kündigung deines alten Vertrags.
 
 ## Hintergrund: So funktioniert der Markt dahinter
 
 Der Energiemarkt in Deutschland ist liberalisiert. Das bedeutet, dass mehrere Anbieter um deine Kundschaft kämpfen. Grundversorger haben dabei die Aufgabe, die Grundversorgung sicherzustellen. Sie dürfen ihre Preise jährlich anpassen, weil sie ihre Kosten neu kalkulieren müssen.  
 
-**Faustregel 1:** Ein hoher Wettbewerb führt in der Regel zu besseren Konditionen für den Verbraucher. Wenn viele Anbieter gleichzeitig neue Preise präsentieren, steigt die Auswahl.  
+**Faustregel 1:** Ein hoher Wettbewerb führt in der Regel zu besseren Konditionen für den Verbraucher. Wenn viele Anbieter gleichzeitig neue Preise präsentieren, steigt die Auswahl.
 
-**Faustregel 2:** Preisänderungen hängen stark von den Beschaffungskosten der Energie ab. Wenn die Beschaffung günstiger wird, können Anbieter ihre Preise senken. Umgekehrt können steigende Beschaffungskosten zu höheren Endkundenpreisen führen.  
+**Faustregel 2:** Preisänderungen hängen stark von den Beschaffungskosten der Energie ab. Wenn die Beschaffung günstiger wird, können Anbieter ihre Preise senken. Umgekehrt können steigende Beschaffungskosten zu höheren Endkundenpreisen führen.
 
 **Faustregel 3:** Vertragslaufzeiten und Kündigungsfristen sind zentrale Elemente. Kurze Laufzeiten geben dir mehr Flexibilität, während lange Laufzeiten oft mit Preisgarantien verbunden sind. Prüfe immer, welche Regelungen für dich gelten, bevor du dich bindest.
 
@@ -66,15 +66,15 @@ Viele Anbieter passen ihre Preise zum Jahreswechsel an, weil sie dann ihre Koste
 
 ### 2. Muss ich sofort wechseln, wenn ich ein günstigeres Angebot finde?
 
-Ein sofortiger Wechsel ist nicht zwingend. Prüfe zuerst, ob dein aktueller Vertrag Sonderkonditionen enthält und ob ein vorzeitiger Wechsel Kosten verursacht.  
+Ein sofortiger Wechsel ist nicht zwingend. Prüfe zuerst, ob dein aktueller Vertrag Sonderkonditionen enthält und ob ein vorzeitiger Wechsel Kosten verursacht.
 
 ### 3. Wie kann ich sicher sein, dass ein neuer Tarif wirklich günstiger ist?
 
-Vergleiche die Gesamtkosten über die gesamte Vertragslaufzeit und achte auf versteckte Kosten. Nutze unabhängige Vergleichsplattformen und prüfe die Vertragsbedingungen genau.  
+Vergleiche die Gesamtkosten über die gesamte Vertragslaufzeit und achte auf versteckte Kosten. Nutze unabhängige Vergleichsplattformen und prüfe die Vertragsbedingungen genau.
 
 ### 4. Was passiert, wenn ich meinen Vertrag nicht rechtzeitig kündige?
 
-Wenn du die Kündigungsfrist verpasst, bleibt dein alter Vertrag weiterlaufen. Das kann bedeuten, dass du die alten Konditionen weiter zahlst, bis der Vertrag endet oder du eine Sonderkündigung beantragst.  
+Wenn du die Kündigungsfrist verpasst, bleibt dein alter Vertrag weiterlaufen. Das kann bedeuten, dass du die alten Konditionen weiter zahlst, bis der Vertrag endet oder du eine Sonderkündigung beantragst.
 
 ## Ausblick: So geht es weiter
 

@@ -34,7 +34,7 @@ Drei Dinge machen eine Verbindung stabil. Erstens die Bandbreite. Zweitens die S
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/dsl/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was verbirgt sich hinter dem DNS-Hack?
