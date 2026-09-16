@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 6,
-  "generated_at": "2026-09-15T12:26:33Z",
+  "ready": 7,
+  "pool_size": 7,
+  "generated_at": "2026-09-16T08:49:19Z",
   "candidates": [
     {
       "slug": "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
@@ -14,21 +14,6 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-15-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "3338f72cebd154ec631bbdc62bf020a937415829fb7713b88dc6a1ef5b4170d7",
-      "score": 0.942,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.78,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -65,34 +50,63 @@
       }
     },
     {
-      "slug": "2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
+      "slug": "2026-09-16-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
       "ready": true,
-      "sha256": "8b42004d904c5314573b9dae90b331a66c8f099954870e2862fa722e68cad876",
-      "score": 0.942,
+      "sha256": "7b9e8aa625750d81974e83b75637d455b118fc5fae1f7e260f23e86252082f57",
+      "score": 0.924,
       "parts": {
-        "spelling": 0.84,
+        "spelling": 0.62,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.84,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
-      "slug": "2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
-      "ready": false,
-      "sha256": "49085f2098ae564d1f3be6eb78b3afd2c3833f1fda254d5cd3281dc2ed017571",
-      "reason": "publish_gate/hugo abgelehnt (STRICT dry-run) – Details im Workflow-Log",
-      "score": 0.962,
+      "slug": "2026-09-16-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+      "ready": true,
+      "sha256": "14303c3f2b4130166521bde538c6af1657be677bfecb4b1605810b7ede291c0d",
+      "score": 0.966,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-09-16-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "ready": true,
+      "sha256": "de3fa7d4ed2580c6e791de9b478b53a44cee0f151eb02013f7cac71a069b11c0",
+      "score": 0.946,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.78,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-16-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
+      "ready": true,
+      "sha256": "597d275736747ce17adc5d387e5c52457d94b07f90a6422a72fd0646cd8f54f7",
+      "score": 0.93,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
       }
     }
   ]
