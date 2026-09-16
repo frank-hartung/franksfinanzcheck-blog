@@ -649,9 +649,9 @@ items:
   date: '2026-09-16'
   time: '12:15'
   scheduled_at: '2026-09-16T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-09-16
   channel: x
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -661,9 +661,9 @@ items:
   date: '2026-09-16'
   time: '13:15'
   scheduled_at: '2026-09-16T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:zahl:2026-09-16
   channel: facebook
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
@@ -673,9 +673,9 @@ items:
   date: '2026-09-16'
   time: '15:15'
   scheduled_at: '2026-09-16T15:15:00+02:00'
-  status: planned
-  attempts: 0
-  reason: ''
+  status: blocked
+  attempts: 1
+  reason: Artikel nicht mehr im Bestand
 - id: threads:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:nutzen:2026-09-16
   channel: threads
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -685,9 +685,9 @@ items:
   date: '2026-09-16'
   time: '16:15'
   scheduled_at: '2026-09-16T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-08-10-dsl-wechselbonus-sichern:mythos:2026-09-16
   channel: x
   slug: 2026-08-10-dsl-wechselbonus-sichern
