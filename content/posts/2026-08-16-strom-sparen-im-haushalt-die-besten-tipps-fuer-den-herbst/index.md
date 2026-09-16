@@ -2,11 +2,8 @@
 lastmod: 2026-09-02
 title: "Strom sparen im Haushalt: Die besten Tipps für den Herbst"
 description: "Ströme sparen im Haushalt: Mit diesen 8 Praxistipps für Beleuchtung, Standby, Elektrogeräte & Tarifwechsel senkst du deine Stromrechnung um bis zu 460 €."
-date: 2026-09-09T14:47:01Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-09T14:47:07Z
-cadence_grund: "Hold aufgehoben (PR #289): R5-ABSATZ-HART durch r5_absatz_splitter --apply geheilt (7/6/10 Absaetze gesplittet) – Re-Queue für den vollen Gate-Durchlauf"
+date: 2026-09-16T11:29:12Z
+draft: false
 tags: ["Strom sparen", "Haushalt Strom sparen", "Stromverbrauch senken", "Stromtarif wechseln", "Standby Stromfresser"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
