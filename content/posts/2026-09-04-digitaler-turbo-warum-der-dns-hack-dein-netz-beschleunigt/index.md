@@ -1,11 +1,8 @@
 ---
 title: "Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt"
 description: "Dns hack: Erfahre, wie der DNS-Hack deine Ladezeiten minimiert und die DNS Privatsphäre stärkt. Optimiere dein System für schnelleres WLAN und mehr Sicherheit."
-date: 2026-09-07T04:52:22Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-07T04:52:29Z
-cadence_grund: "Hold aufgehoben (PR #289): check_titles-R5-Fehlalarm behoben (R5_END_WHITELIST): 0 Titel-Verstoesse im Korpus, 0 Stale-Cover – Re-Queue für den vollen Gate-Durchlauf"
+date: 2026-09-16T08:58:26Z
+draft: false
 tags: ["DNS Hack", "DNS Privatsphäre", "Schnelleres WLAN", "Internet Tipps und Tricks"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
