@@ -78,7 +78,7 @@ Neben der Technik prägt dein Tarif die jährliche Rechnung. Schau in deine letz
 | Rohr-Dämmung        | 0,5 €/m (Baumarkt) | 4–7 %            | 1–2 h  | Langfristig, reduziert Wärmeverlust |
 | Thermostat-Upgrade  | 30–80 € pro Stück | 5–10 %           | 10 min | Präzise Raum-Steuerung |
 | Brennwert-Kessel    | 3.000–5.000 €     | 15–20 %          | 1–2 Tage | Hohe Amortisation (5–7 Jahre) |
-SATZ: | Hydraulischer Abgleich | 200 – 400 €        | 5 – 12 %           | 1 – 2 Tage | Gleichmäßige Wärme, Komfortsteigerung |
+SATZ: | Hydraulischer Abgleich | 200–400 €        | 5–12 %           | 1–2 Tage | Gleichmäßige Wärme, Komfortsteigerung |
 
 ## So gehst du vor: Die 5-Schritte-Checkliste für den Herbst
 

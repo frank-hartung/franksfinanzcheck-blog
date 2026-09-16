@@ -42,7 +42,7 @@ Ein klarer Blick auf die Zahlen ist die Basis. Kleine Käufe im Alltag summieren
 | Sonstiges | 40 € | Feste Grenze setzen |
 
 > **Rechenbeispiel:**
-> Du gibst 5 % von 2.500 € Netto für Spontanes aus (125 €). Nutzt du die 24-Stunden-Regel, sparst du 75 € im Monat. Das bringt dir 900 € im Jahr für dein Tagesgeld.
+> Du gibst 5 % von 2.500 € Netto für Spontanes aus (125 €). Nutzt du die 24-Stunden-Regel, sparst du 75 € im Monat. Das bringt dir 900 € im Jahr für dein Tagesgeld.
 
 **So startest du:**
 1. Lade eine kostenlose Budget-App herunter.
@@ -63,7 +63,7 @@ Strom und Gas kosten viel Geld. Oft reichen kleine Griffe im Alltag aus.
 | Wäsche bei 30 °C waschen | 2 % Strom | gering |
 
 > **Rechenbeispiel:**
-> Dein Strom kostet 80 € im Monat. Das Ausschalten von Stand-by spart 4 € monatlich. Wechselst du auf LED, sparst du 8 € mehr. Das macht 144 € Ersparnis im Jahr.
+> Dein Strom kostet 80 € im Monat. Das Ausschalten von Stand-by spart 4 € monatlich. Wechselst du auf LED, sparst du 8 € mehr. Das macht 144 € Ersparnis im Jahr.
 
 **Tipps:**
 - Nutze Zeitschaltuhren für Kaffeemaschinen oder Lampen.
@@ -82,7 +82,7 @@ Anbieter passen Preise oft an. Viele Kunden bleiben aus Bequemlichkeit im alten 
 | Wechseln | Formularen folgen | 10 Min |
 
 > **Rechenbeispiel:**
-> Dein Tarif kostet 30 Cent/kWh bei 3.500 kWh Bedarf (105 €/Monat). Ein neuer Tarif liegt bei 27 Cent/kWh. Du sparst über 100 € im Jahr.
+> Dein Tarif kostet 30 Cent/kWh bei 3.500 kWh Bedarf (105 €/Monat). Ein neuer Tarif liegt bei 27 Cent/kWh. Du sparst über 100 € im Jahr.
 
 **Hinweis:** Der Wechsel ist gratis. Achte nur auf Kündigungsfristen im Vertrag.
 
@@ -97,7 +97,7 @@ Essen ist ein großer Ausgabenblock. Durch gute Planung sparst du viel Geld.
 | Vorräte nutzen | 7 % beim Einkauf | mittel |
 
 > **Rechenbeispiel:**
-> Du kaufst für 300 € Essen ein. Ein Wochenplan spart 30 € im Monat. Die Resteverwertung bringt 15 € mehr. Das sind 540 € Ersparnis pro Jahr.
+> Du kaufst für 300 € Essen ein. Ein Wochenplan spart 30 € im Monat. Die Resteverwertung bringt 15 € mehr. Das sind 540 € Ersparnis pro Jahr.
 
 **So geht es:**
 1. Schreibe sonntags einen Speiseplan für die Woche.
@@ -117,7 +117,7 @@ Manche Abos laufen ungenutzt weiter. Ein Check stoppt unnötige Kosten.
 | Magazin | 8 € | nie | Kündigen |
 
 > **Rechenbeispiel:**
-> Drei Abos kosten 45 € im Monat, werden aber kaum genutzt. Streichst du zwei davon, sparst du 270 € im Jahr für deinen Puffer.
+> Drei Abos kosten 45 € im Monat, werden aber kaum genutzt. Streichst du zwei davon, sparst du 270 € im Jahr für deinen Puffer.
 
 **Check im Monat:**
 - Schau auf deine Kontoauszüge nach Daueraufträgen.

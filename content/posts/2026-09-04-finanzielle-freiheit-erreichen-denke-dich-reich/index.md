@@ -24,7 +24,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 social_posted: false
----Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden. Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erreichen? Dann löse zuerst die Ketten im Kopf. Wer nur Statussymbolen jagt, bleibt Sklave seiner Ausgaben.
+---
+
+Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden. Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erreichen? Dann löse zuerst die Ketten im Kopf. Wer nur Statussymbolen jagt, bleibt Sklave seiner Ausgaben.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
