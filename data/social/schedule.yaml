@@ -841,9 +841,9 @@ items:
   date: '2026-09-17'
   time: '19:15'
   scheduled_at: '2026-09-17T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:frage:2026-09-18
   channel: telegram
   slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
