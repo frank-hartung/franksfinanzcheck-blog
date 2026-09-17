@@ -266,6 +266,13 @@ jobs:
       - name: Cover-Gate (Varianten, Stale, Brand, C4 Text-Komplettheit – selbstheilend)
         run: python3 scripts/check_covers.py --fix || echo "⚠ Cover-Gate – Funde im Log"
 
+      - name: Keyword-Gate (Premium #303 – Titel/Description/First-Para/H2/Dichte – selbstheilend)
+        run: |
+          python3 scripts/keyword_optimizer.py --selftest
+          python3 scripts/keyword_optimizer.py --fix || echo "⚠ Keyword-Gate – Funde im Log (selbstgeheilt)"
+          python3 scripts/keyword_gate.py --selftest
+          python3 scripts/keyword_gate.py --fix || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
+
       # ================= DRAFT-LINK-GATE (PREM-AUDIT 26.08.2026) =================
       # Kadenz-Heilung stuft Posts auf draft (Re-Queue) zurück – ihre URLs
       # verschwinden aus dem Build, kontextuelle Links in live Artikeln

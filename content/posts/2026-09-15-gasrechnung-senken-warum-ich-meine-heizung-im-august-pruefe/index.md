@@ -26,7 +26,7 @@ cover:
 kurzantwort: "Ja, du kannst deine Gasrechnung senken, indem du im August deine Heizung checkst, Lecks schließt und den Brennwert optimierst. So sparst du im Winter meist zwischen 200 € – 500 € – je nach Verbrauch und Vertragskonditionen. Die Maßnahme kostet meist nur ein paar Euro für den Fachmann."
 ---
 
-Stell dir vor, es ist der erste richtig frostige Abend im Oktober. Du kommst nach Hause, freust dich auf ein warmes Wohnzimmer, drehst das Thermostat auf, und nichts passiert. Oder schlimmer noch: Die Heizung gluckert bedrohlich, wird aber nur lauwarm. Genau das ist mir vor drei Jahren passiert.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Stell dir vor, es ist der erste richtig frostige Abend im Oktober. Du kommst nach Hause, freust dich auf ein warmes Wohnzimmer, drehst das Thermostat auf, und nichts passiert. Oder schlimmer noch: Die Heizung gluckert bedrohlich, wird aber nur lauwarm. Genau das ist mir vor drei Jahren passiert.
 
 Damals saß ich mit Wolldecke und schlechter Laune auf der Couch, während der Heizungsnotdienst am Wochenende einen saftigen Aufschlag verlangte. Seit diesem Winter-Debakel habe ich meine Strategie geändert.
 

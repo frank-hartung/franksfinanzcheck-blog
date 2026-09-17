@@ -25,8 +25,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Eine professionelle Heizungswartung im Spätsommer senkt den Gasverbrauch um etwa 5 %–15 % und vermeidet teure Reparaturen im Winter. Durch gereinigte Brenner, korrekt eingestellte Regelungen und überprüfte Dichtungen läuft die Anlage effizienter. So bleibt dein Heim warm, die Kosten bleiben niedrig."
----
-Stell dir vor, der erste Frost überzieht die Fensterscheiben und in deiner Wohnung bleibt es klamm, weil die Heizkörper gluckern oder komplett kalt bleiben. In diesem Moment einen Handwerker zu finden, gleicht einem Lottogewinn mit geringen Erfolgsaussichten. Wer klug handelt, sorgt vor, solange die Temperaturen draußen noch zweistellig sind. Eine rechtzeitige Heizungswartung ist die Basis für einen sorgenfreien Winter und [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor bösen Überraschungen bei der nächsten Abrechnung.
+---Du willst heizungswartung? Stell dir vor, der erste Frost überzieht die Fensterscheiben und in deiner Wohnung bleibt es klamm, weil die Heizkörper gluckern oder komplett kalt bleiben. In diesem Moment einen Handwerker zu finden, gleicht einem Lottogewinn mit geringen Erfolgsaussichten. Wer klug handelt, sorgt vor, solange die Temperaturen draußen noch zweistellig sind. Eine rechtzeitige Heizungswartung ist die Basis für einen sorgenfreien Winter und [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor bösen Überraschungen bei der nächsten Abrechnung.
 
 Drei Dinge zählen für eine effiziente Saison: der technische Check-up durch Fachpersonal, die manuelle Optimierung deiner Heizkörper und der prüfende Blick auf deinen aktuellen Energietarif.
 
