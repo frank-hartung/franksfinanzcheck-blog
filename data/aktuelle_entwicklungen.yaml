@@ -64,6 +64,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen statt sie automatisch zu verlängern."
+  ki_news_used: true
 
 - id: konto-gebuehren-transparenz
   kategorie: konto
