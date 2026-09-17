@@ -225,16 +225,19 @@ class R5HoldRecoveryTests(unittest.TestCase):
                      'cadence_grund: "publish-gate: Textverständnis-Gate nicht bestanden: R5-ABSATZ-HART"\n')
         p.write_text(
             '---\n'
-            'title: "R5 Hold"\n'
-            'description: "Test"\n'
+            'title: "R5 Hold: Gasrechnung senken"\n'
+            'description: "R5 Hold: Gasrechnung senken – Test für Absatz-Healing mit Keyword im ersten Absatz und H2."\n'
             'date: 2026-09-07T06:00:00Z\n'
             f'draft: {str(draft).lower()}\n'
+            'keywords: ["Gasrechnung senken"]\n'
             f'{extra}'
             '---\n\n'
-            'Der erste Satz hat genug Wörter. Der zweite Satz hat genug Wörter. '
+            'Gasrechnung senken im Check: Der erste Satz hat genug Wörter. Der zweite Satz hat genug Wörter. '
             'Der dritte Satz hat genug Wörter. Der vierte Satz hat genug Wörter. '
             'Der fünfte Satz hat genug Wörter. Der sechste Satz hat genug Wörter. '
-            'Der siebte Satz hat genug Wörter.\n',
+            'Der siebte Satz hat genug Wörter.\n\n'
+            '## Gasrechnung senken – Details\n\n'
+            'Weitere Infos zur Gasrechnung senken mit 0.5% Dichte und mehr Text damit die Dichte passt.\n',
             encoding='utf-8',
         )
         return p
@@ -266,7 +269,10 @@ class R5HoldRecoveryTests(unittest.TestCase):
                  patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
                  patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
                  patch.object(pg, 'title_integrity_failures', return_value=set()), \
-                 patch.object(pg, 'readability_failures', return_value=({}, None)):
+                 patch.object(pg, 'readability_failures', return_value=({}, None)), \
+                 patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \
+                 patch.object(pg, 'keyword_failures', return_value=({}, None)), \
+                 patch.object(pg, 'keyword_self_heal_candidates', return_value=0):
                 self.assertEqual(pg.main(), 0)
         finally:
             pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT = old

@@ -452,10 +452,6 @@ def profi_quality_ok(body, keywords=None):
     faq = len(re.findall(r"^###\s.*\?", body, re.M))
     if faq < 4:
         problems.append(f"nur {faq} FAQ-Fragen (Premium: ≥4)")
-    # REDAKTIONS-STANDARD (02.09.2026, Capital/WiWo/ZEIT): Die Pflicht-Module
-    # gehören schon ins Geburts-Gate – so wird der Prompt-Fehler sofort neu
-    # gewürfelt statt erst in Phase 2 geheilt/geparkt (RS1/RS3; RS2/RS4
-    # prüft die Wache redaktions_standard.py in der Engine-Kette).
     if "das wichtigste in kürze" not in text:
         problems.append("kein „Das Wichtigste in Kürze“-Modul (RS1)")
     if "faustregel" not in text:
@@ -467,6 +463,38 @@ def profi_quality_ok(body, keywords=None):
         kws = [k.strip().strip('"').lower() for k in keywords if k.strip()]
         if kws and kws[0] not in text:
             problems.append(f"Keyword „{kws[0]}“ fehlt")
+        # PREMIUM #303: Keyword muss in Titel/Description/erster Absatz/H2 – hier prüfen wir
+        # ersten Absatz (erste 350 Zeichen) und H2/H3, damit die Engine sofort neu würfelt
+        # statt erst in Phase 2 zu heilen. Das ist die Geburts-Gate-Härtung für Keywords.
+        if kws:
+            main_kw = kws[0]
+            # Norm für Keyword-Check (wie in keyword_optimizer)
+            def _norm(s):
+                s = s.lower()
+                s = re.sub(r"[äàáâ]", "ae", s)
+                s = re.sub(r"[öòóô]", "oe", s)
+                s = re.sub(r"[üùúû]", "ue", s)
+                s = re.sub(r"ß", "ss", s)
+                return re.sub(r"[^a-z0-9]+", " ", s).strip()
+            nk = _norm(main_kw)
+            core = next((t for t in nk.split() if len(t) >= 3), nk)
+            def _has_kw(txt):
+                txt_n = _norm(txt)
+                if nk in txt_n:
+                    return True
+                for w in txt_n.split():
+                    if w == core or w.startswith(core):
+                        return True
+                    if len(w) >= 4 and core.startswith(w):
+                        return True
+                return False
+            first_350 = body[:400]
+            if not _has_kw(first_350):
+                problems.append(f"Keyword „{main_kw}“ fehlt im ersten Absatz (Premium #303)")
+            # H2/H3 Check
+            h2_texts = re.findall(r"^#{2,3}\s+(.+)$", body, re.M)
+            if h2_texts and not any(_has_kw(h) for h in h2_texts):
+                problems.append(f"Keyword „{main_kw}“ fehlt in H2/H3 (Premium #303)")
     if not re.search(r"(^|\n)[-*]\s", body, re.M) and "|" not in body:
         problems.append("keine Liste/Tabelle")
 

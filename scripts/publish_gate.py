@@ -2,7 +2,7 @@
 """publish_gate.py – Harte Vor-Publish-Kontrolle (13.08.2026)
 
 Betriebsregel (Frank, 13.08.2026, erweitert 14.08.2026): Zukünftige Artikel
-werden nur dann tatsächlich live geschaltet, wenn sie SIEBEN automatische
+werden nur dann tatsächlich live geschaltet, wenn sie ACHT automatische
 Prüfungen bestehen:
 
   1. check_length.py          – Zeichenlänge Premium (Floor 10.000, Optimum 12.000–18.000)
@@ -356,6 +356,119 @@ def r5_self_heal_candidates(candidates):
 
 
 
+def keyword_self_heal_candidates(candidates):
+    """PREMIUM-FIX #303: Keyword-Healing als letzte Linie."""
+    try:
+        import sys, os
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+        # Actually BLOG_DIR already defined in publish_gate, use that
+        from pathlib import Path
+        import importlib.util, sys
+        # Use BLOG_DIR from caller scope – we will inject via closure? Simpler: import via sys.path
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    except Exception:
+        pass
+    try:
+        import keyword_optimizer as ko
+        errs = ko._selftest()
+        if errs:
+            print(f"  ⚠ Keyword-Gate Selftest fehlgeschlagen – keine Heilung: {errs[:2]}")
+            return 0
+    except Exception as exc:
+        print(f"  ⚠ Keyword-Healer am Gate nicht verfügbar: {exc}")
+        return 0
+    healed = 0
+    # BLOG_DIR and POSTS_DIR and DRY_RUN are expected to be in globals of publish_gate
+    # We access via globals()
+    g = globals()
+    BLOG_DIR = g.get("BLOG_DIR")
+    POSTS_DIR = g.get("POSTS_DIR")
+    DRY_RUN = g.get("DRY_RUN", False)
+    import os, re
+    for slug in list(candidates):
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        try:
+            with open(path, encoding="utf-8") as fh:
+                before = fh.read()
+            fm = before.split("---", 2)[1] if before.startswith("---") and before.count("---") >= 2 else ""
+            if "draft: true" in fm:
+                continue
+            if not DRY_RUN:
+                changed, actions = ko.heal_article_file(path)
+                if changed:
+                    healed += 1
+                    print(f"  🔑 {slug}: Keyword-Healing {'; '.join(actions[:2])}")
+            else:
+                # dry-run check
+                def get_fm(key):
+                    m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+                    return m.group(1).strip() if m else ""
+                kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
+                if kw_m:
+                    kws = [k.strip().strip("\"'") for k in kw_m.group(1).split(",") if k.strip()]
+                else:
+                    kws = [k.strip().strip("\"'") for k in get_fm("keywords").split(",") if k.strip()]
+                if not kws:
+                    continue
+                body = before.split("---", 2)[2] if len(before.split("---", 2)) == 3 else before
+                a = {"file": slug+".md", "path": path, "slug": slug, "title": get_fm("title"), "description": get_fm("description"), "keywords": kws, "body": body}
+                res = ko.check_article(a)
+                if res["score"] < 100:
+                    healed += 1
+                    print(f"  🔑 {slug}: würde geheilt (Score {res['score']}) – {res['issues'][:2]}")
+        except Exception as exc:
+            print(f"  ⚠ {slug}: Keyword-Healing fehlgeschlagen – {exc}")
+    return healed
+
+
+def keyword_failures(candidates):
+    """Prüft Kandidaten auf Keyword-Score <60 (kritisch)."""
+    try:
+        import keyword_optimizer as ko
+        errs = ko._selftest()
+        if errs:
+            reason = f"Keyword-Gate Selftest fehlgeschlagen (fail-closed): {errs[0]}"
+            return {slug: [reason] for slug in candidates}, None
+    except Exception as exc:
+        reason = f"Keyword-Prüfung nicht verfügbar: {exc}"
+        return {slug: [reason] for slug in candidates}, None
+
+    failed = {}
+    import os, re
+    g = globals()
+    POSTS_DIR = g.get("POSTS_DIR")
+    for slug in candidates:
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        try:
+            content = open(path, encoding="utf-8").read()
+            fm = content.split("---", 2)[1] if content.startswith("---") and content.count("---") >= 2 else ""
+            body = content.split("---", 2)[2] if len(content.split("---", 2)) == 3 else content
+
+            def get(key):
+                m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+                return m.group(1).strip() if m else ""
+
+            kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
+            if kw_m:
+                kws = [k.strip().strip("\"'") for k in kw_m.group(1).split(",") if k.strip()]
+            else:
+                kws = [k.strip().strip("\"'") for k in get("keywords").split(",") if k.strip()]
+
+            from post_utils import slug_of
+            a = {"file": slug+".md", "path": path, "slug": slug_of(path), "title": get("title"), "description": get("description"), "keywords": kws, "body": body}
+            import keyword_optimizer as ko
+            res = ko.check_article(a)
+            if res["score"] < 60:
+                failed[slug] = [f"Keyword-Score {res['score']}/100 (<60 kritisch): {'; '.join(res['issues'][:3])}"]
+        except Exception as exc:
+            failed[slug] = [f"Keyword-Prüfung nicht auswertbar: {exc}"]
+    return failed, None
+
+
 def discard_article(slug):
     """Löscht einen durchgefallenen Artikel vollständig: Content-Bundle +
     generierte Cover-Bilder (alle Größen/Formate). Kein Artefakt bleibt
@@ -420,6 +533,10 @@ def main():
     # direkt VOR der harten Textverständnisprüfung. Bleibt danach noch ein
     # R5-Hart-Fund, blockiert `textverstaendnis_failures()` wie bisher.
     r5_self_heal_candidates(candidates)
+    # ============ KEYWORD-GATE ALS LETZTE LINIE (PREMIUM #303) ===========
+    # Deterministische Heilung für Keyword-Lücken (Titel/Description/First-Para/H2/Dichte)
+    # vor der harten Prüfung – idempotent, fail-closed, wie alle Gates.
+    keyword_self_heal_candidates(candidates)
 
     today = datetime.date.today().isoformat()
     len_fail, len_warn = check_length_failures()
@@ -427,6 +544,7 @@ def main():
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
+    keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
     for w in (len_warn, seo_warn):
@@ -436,6 +554,8 @@ def main():
         print(f"⚠ {aff_warn}")
     if integ_warn:
         print(f"⚠ {integ_warn}")
+    if keyword_warn:
+        print(f"⚠ {keyword_warn}")
     if readability_warn:
         print(f"⚠ {readability_warn}")
     if understanding_warn:
@@ -480,6 +600,8 @@ def main():
         if slug in r5_fail:
             reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
                            "Titel vermutlich unvollständig")
+        if slug in keyword_fail:
+            reasons.append("Keyword-Gate nicht bestanden: " + "; ".join(keyword_fail[slug]))
         if slug in readability_fail:
             reasons.append("Lesbarkeits-Gate nicht bestanden: " + "; ".join(readability_fail[slug]))
         if slug in understanding_fail:

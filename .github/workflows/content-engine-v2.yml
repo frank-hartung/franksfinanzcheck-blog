@@ -232,6 +232,11 @@ jobs:
           python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
           echo "== Titel-Gate (check_titles, selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
+          echo "== Keyword-Gate (Premium #303, Titel/Description/First-Para/H2/Dichte selbstheilend) =="
+          python3 scripts/keyword_optimizer.py --selftest
+          python3 scripts/keyword_optimizer.py --fix --new-only || echo "⚠ Keyword-Gate – Funde im Log (selbstgeheilt)"
+          python3 scripts/keyword_gate.py --selftest
+          python3 scripts/keyword_gate.py --fix --new-only || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
           echo "== Cover generieren =="
           pip install -q pillow pillow-avif-plugin
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
@@ -351,6 +356,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/meta_optimizer.py --fix --ai || echo "⚠ Meta-Fehler (nicht kritisch)"
+          echo "== Keyword-Gate nach Meta-Optimierung (Premium #303, selbstheilend) =="
+          python3 scripts/keyword_optimizer.py --fix --new-only || echo "⚠ Keyword-Gate – Funde im Log (selbstgeheilt)"
+          python3 scripts/keyword_gate.py --fix --new-only || echo "⚠ Keyword-Gate (Premium) – Funde im Log (selbstgeheilt)"
           echo "== Titel-Gate nach Meta-Optimierung (selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
           echo "== Pinterest/Google-SEO-Healer (Titel, Cover-Text, Pin-SEO, Keywords) =="

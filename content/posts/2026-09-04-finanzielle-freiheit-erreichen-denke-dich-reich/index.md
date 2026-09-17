@@ -1,7 +1,7 @@
 ---
 
 title: "Finanzielle Freiheit erreichen: Denke dich reich – Geld"
-description: "Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen."
+description: "finanzielle freiheit erreichen: Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen."
 kurzantwort: "Finanzielle Freiheit entsteht meist nicht durch ein höheres Einkommen, sondern durch klare Gewohnheiten: Ausgaben steuern, Sparraten automatisieren und früh breit gestreut investieren. Schon 300 € monatlich können bei 7 % Rendite in 20 Jahren auf rund 156.000 € anwachsen."
 date: 2026-09-16T08:58:26Z
 draft: false

@@ -136,10 +136,10 @@ def detector_selftest() -> tuple[bool, str]:
 
 
 def run_gate():
-    """Importiert publish_gate.py und ruft dieselben vier Prüf-Funktionen
+    """Importiert publish_gate.py und ruft dieselben Prüf-Funktionen
     auf, die auch für druckfrische Artikel gelten – echte Wiederverwendung,
     kein Parallel-Code. Setzt daher voraus, dass vorher `hugo --minify`
-    gelaufen ist (wie publish_gate.py selbst dokumentiert)."""
+    gelaufen ist."""
     if "publish_gate" in sys.modules:
         del sys.modules["publish_gate"]
     pg = __import__("publish_gate")
@@ -147,24 +147,64 @@ def run_gate():
     length_failed, length_err = pg.check_length_failures()
     seo_failed, seo_err = pg.seo_audit_failures()
     affiliate_failed, affiliate_err = pg.affiliate_profi_failures()
-    # Bestand: bewusst OHNE Kandidaten-Filter (alles prüfen) – bestand_gate
-    # ist die nicht-destruktive Bestands-Wache, die jeden Fund meldet
-    #    und zu heilen versucht. Werkzeugfehler (exit_code 2) kommen als
-    #    errors-Liste zurück und landen im Report + Exit 2 (fail-closed).
     integrity_failed, integrity_err, integrity_tool_error = \
         pg.affiliate_integrity_failures()
 
-    errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err) if e]
+    # Keyword-Gate (Premium #303)
+    try:
+        if "keyword_optimizer" in sys.modules:
+            del sys.modules["keyword_optimizer"]
+        import keyword_optimizer as ko
+        selftest_errs = ko._selftest()
+        if selftest_errs:
+            keyword_failed = set()
+            keyword_err = f"Keyword-Gate Selftest fehlgeschlagen (fail-closed): {selftest_errs[0]}"
+            keyword_tool_error = True
+        else:
+            from post_utils import list_post_paths, slug_of
+            keyword_failed = set()
+            keyword_err = None
+            keyword_tool_error = False
+            for path in list_post_paths():
+                content = open(path, encoding="utf-8").read()
+                fm = content.split("---", 2)[1] if len(content.split("---", 2))==3 else ""
+                if "draft: true" in fm:
+                    continue
+                parts = content.split("---", 2)
+                fm = parts[1] if len(parts)>1 else ""
+                body = parts[2] if len(parts)==3 else content
+                def get(k):
+                    mm = re.search(rf"^{k}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
+                    return mm.group(1).strip() if mm else ""
+                kw_m = re.search(r"^keywords:\s*\[(.*?)\]", fm, re.M)
+                if kw_m:
+                    kws = [k.strip().strip("\"'") for k in kw_m.group(1).split(",") if k.strip()]
+                else:
+                    kws = [k.strip().strip("\"'") for k in get("keywords").split(",") if k.strip()]
+                if not kws:
+                    continue
+                slug = slug_of(path)
+                a = {"file": slug+".md", "path": path, "slug": slug, "title": get("title"), "description": get("description"), "keywords": kws, "body": body}
+                res = ko.check_article(a)
+                if res["score"] < 60:
+                    keyword_failed.add(slug)
+    except Exception as exc:
+        keyword_failed = set()
+        keyword_err = f"Keyword-Prüfung nicht verfügbar: {exc}"
+        keyword_tool_error = False
+
+    errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err, keyword_err) if e]
     if integrity_tool_error:
-        # fail-closed sichtbar machen: kein Bestand darf als "sauber" gelten,
-        # solange der Render-Beweis nicht geführt werden konnte.
         errors.append("Affiliate-Render-Beweis nicht möglich (Werkzeugfehler) – "
                       "Bestand gilt als NICHT geprüft")
+    if keyword_tool_error:
+        errors.append("Keyword-Gate nicht beweisbar (Werkzeugfehler) – Bestand gilt als NICHT geprüft")
     return {
         "length": length_failed,
         "seo": seo_failed,
         "affiliate": affiliate_failed,
         "integrity": integrity_failed,
+        "keyword": keyword_failed,
     }, errors
 
 
@@ -196,6 +236,9 @@ def heal(dimension: str) -> None:
         # melden – das ist die vom Nutzer geforderte "sofortige Reparatur"
         # für bereits veröffentlichte Bestandsartikel.
         subprocess.run([sys.executable, str(SCRIPTS / "affiliate_integrity_gate.py")],
+                        cwd=ROOT, capture_output=True, text=True, timeout=180)
+    elif dimension == "keyword":
+        subprocess.run([sys.executable, str(SCRIPTS / "keyword_optimizer.py"), "--fix"],
                         cwd=ROOT, capture_output=True, text=True, timeout=180)
     # "length" (zu kurz/zu lang) ist nicht automatisch heilbar – braucht
     # echte Textarbeit, wird nur gemeldet.
@@ -485,6 +528,8 @@ def render_report(all_slugs: set[str], still_affected: dict, errors: list[str],
                 lines.append("- ⚠️ Länge außerhalb 700-1800 Wörter (braucht echte Textarbeit, nicht automatisch heilbar)")
             if detail["seo"]:
                 lines.append("- ⚠️ SEO-Mangel laut seo_audit.py besteht nach meta_optimizer.py --fix weiter")
+            if detail.get("keyword"):
+                lines.append("- ⚠️ Keyword-Mangel (Score <60) besteht nach keyword_optimizer.py --fix weiter")
             for msg in detail["affiliate"]:
                 lines.append(f"- ⚠️ {msg}")
             for msg in detail["integrity"]:
@@ -520,7 +565,7 @@ def main():
         # 2) Bewertung mit denselben publish_gate-Funktionen wie für
         #    druckfrische Artikel.
         findings, errors = run_gate()
-        affected = {s for s in (findings["length"] | findings["seo"]
+        affected = {s for s in (findings["length"] | findings["seo"] | findings.get("keyword", set())
                                 | set(findings["affiliate"].keys())
                                 | set(findings["integrity"].keys()))
                     if s in all_slugs}
@@ -536,6 +581,9 @@ def main():
             if affected & set(findings["integrity"].keys()):
                 heal("integrity")
                 healed_dims.append("integrity")
+            if affected & findings.get("keyword", set()):
+                heal("keyword")
+                healed_dims.append("keyword")
             if healed_dims and rebuild_hugo():
                 findings, errors = run_gate()  # erneut prüfen nach Heilungsversuch
 
@@ -543,11 +591,12 @@ def main():
             s: {
                 "length": s in findings["length"],
                 "seo": s in findings["seo"],
+                "keyword": s in findings.get("keyword", set()),
                 "affiliate": findings["affiliate"].get(s, []),
                 "integrity": findings["integrity"].get(s, []),
             }
             for s in all_slugs
-            if s in findings["length"] or s in findings["seo"] or s in findings["affiliate"]
+            if s in findings["length"] or s in findings["seo"] or s in findings.get("keyword", set()) or s in findings["affiliate"]
             or s in findings["integrity"]
         }
 

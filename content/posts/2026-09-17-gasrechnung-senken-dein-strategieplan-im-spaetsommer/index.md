@@ -26,11 +26,11 @@ cover:
 kurzantwort: "Senkst du die Raumtemperatur im Spätsommer auf etwa 19 °C, sparst du rund 6 % Heizenergie pro Grad. Schließe ungeöffnete Fenster und Türen, decke Zugluft mit Dichtungsband ab und nutze Zeitschaltuhren für die Heizung. Einmal pro Jahr prüfst du den Druck deiner Heizungsanlage – das verhindert unnötigen Energieverbrauch."
 ---
 
-1.072 € pro Jahr – so viel Sparpotenzial steckt oft in einer durchschnittlichen Heizung. Viele Haushalte verschenken dieses Geld ungenutzt im Keller. Die meisten merken erst beim ersten Frost, dass ihre Anlage gluckert. Wer erst im Winter reagiert, zahlt oft teure Gebühren für Notdienste.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. 1.072 € pro Jahr – so viel Sparpotenzial steckt oft in einer durchschnittlichen Heizung. Viele Haushalte verschenken dieses Geld ungenutzt im Keller. Die meisten merken erst beim ersten Frost, dass ihre Anlage gluckert. Wer erst im Winter reagiert, zahlt oft teure Gebühren für Notdienste.
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Nutze jetzt die warme Zeit für deinen persönlichen Strategieplan. So kannst du nachhaltig deine Gasrechnung senken. Ein paar Handgriffe und ein kurzer Blick in den Vertrag genügen meist schon. Du startest so völlig entspannt in die kalte Jahreszeit.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Nutze jetzt die warme Zeit für deinen persönlichen Strategieplan. So kannst du nachhaltig deine Gasrechnung senken. Ein paar Handgriffe und ein kurzer Blick in den Vertrag genügen meist schon. Du startest so völlig entspannt in die kalte Jahreszeit.
 
 **Das Wichtigste in Kürze:**
 - **Früher Check:** eine Wartung im September verhindert teure Notfälle im Winter.

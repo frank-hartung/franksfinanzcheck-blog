@@ -182,6 +182,18 @@ def main() -> int:
     # HEADING-HEILUNG (nach der Description-Runde): anker-stabil, idempotent.
     # blockiert=0 → Exit 0; blockiert>0 → Exit 1 (Fund, keine Sabotage).
     heading_mode = "--dry-run" if DRY_RUN else "--fix"
+    # KEYWORD-GATE (Premium #303): tägliche Heilung für Keyword-Lücken
+    keyword_run = subprocess.run(
+        [sys.executable, os.path.join(ROOT, "scripts", "keyword_gate.py"), "--fix"],
+        capture_output=True, text=True, timeout=600,
+    )
+    keyword_summary = ""
+    for zeile in (keyword_run.stdout or "").splitlines():
+        if "KEYWORD-GATE" in zeile or "Keyword-Optimierung" in zeile or "geheilt" in zeile.lower():
+            keyword_summary = zeile.strip()
+            break
+    keyword_exit = keyword_run.returncode
+
     heading_run = subprocess.run(
         [sys.executable, os.path.join(ROOT, "scripts", "heading_guard.py"), heading_mode],
         capture_output=True, text=True, timeout=600,
@@ -213,6 +225,8 @@ def main() -> int:
         "",
         f"**Überschriften-Hygiene (heading_guard {heading_mode}):** "
         + (heading_summary or f"exit {heading_exit} – Details: HEADING-REPORT.md"),
+        f"**Keyword-Hygiene (keyword_gate --fix):** "
+        + (keyword_summary or f"exit {keyword_exit} – Details: KEYWORD-GATE-REPORT.md"),
     ]
     lines += [
         "",
@@ -228,8 +242,13 @@ def main() -> int:
     for rel, fx in healed:
         print(f"  ✅ {rel}: {'; '.join(fx)}")
     # Exit-Code ehrlich weiterreichen: 1 = unheilbare Funde (Ankerschutz),
-    # 2 = Sabotage. Sonst 0.
-    return heading_exit if heading_exit in (1, 2) else 0
+    # 2 = Sabotage. Sonst 0. Keyword-Gate fließt mit ein.
+    final_exit = 0
+    if heading_exit in (1,2):
+        final_exit = heading_exit
+    if keyword_exit in (1,2) and final_exit == 0:
+        final_exit = keyword_exit
+    return final_exit
 
 
 if __name__ == "__main__":

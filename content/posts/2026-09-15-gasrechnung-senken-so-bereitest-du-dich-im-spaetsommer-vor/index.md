@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Eine Herbstwartung spart – entlüfte Heizkörper, stelle Thermostatventile auf 20 °C Raumtemperatur und prüfe den Brennwertkessel auf Fehlfunktionen. So senkst du den Jahresverbrauch um bis zu 15 % und vermeidest unnötige Spitzenabrechnungen. Gleichzeitig lässt du den Energieversorger einen Abschlag für den kommenden Winter festlegen."
 ---
 
-Verschenkst du jedes Jahr 800 € an deinen Gasanbieter? Viele Haushalte zahlen diesen Betrag völlig unnötig. Nutze den Spätsommer für eine kluge Finanz-Strategie. Mit der richtigen **Herbst Vorbereitung** sicherst du dir niedrige Preise, bevor die Heizperiode startet.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Verschenkst du jedes Jahr 800 € an deinen Gasanbieter? Viele Haushalte zahlen diesen Betrag völlig unnötig. Nutze den Spätsommer für eine kluge Finanz-Strategie. Mit der richtigen **Herbst Vorbereitung** sicherst du dir niedrige Preise, bevor die Heizperiode startet.
 
 Im Keller lauert oft ein unterschätzter Kostenfresser. Sobald die Temperaturen sinken, springt deine Anlage wieder an.
 
