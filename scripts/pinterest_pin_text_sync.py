@@ -378,6 +378,43 @@ def main() -> int:
     # Ab jetzt gilt: Eine Beschreibung gehört genau EINEM Artikel. Der zweite
     # behält seinen eigenen Text; der Konflikt wird gemeldet statt still erzeugt.
     # ------------------------------------------------------------------
+    # Premium: Vorab-Heilung bestehender Duplikate (P4) – falls zwei Artikel
+    # bereits denselben Text tragen (z.B. durch alten Sync), wird der zweite
+    # durch einen deterministisch einzigartigen Fallback ersetzt.
+    from collections import defaultdict
+    dup_map = defaultdict(list)
+    for p in posts:
+        d = (p.get("pin_description") or "").strip()
+        if d:
+            dup_map[d].append(p)
+    dup_fixed = 0
+    for d, group in list(dup_map.items()):
+        if len(group) <= 1:
+            continue
+        # Behalte ersten, heile rest
+        for g in group[1:]:
+            # Generiere Fallback aus Titel/Description/Keywords
+            fallback = clean_pin_description(
+                f"{g.get('title','')} {g.get('description','')}".strip()[:400],
+                affiliate=bool(g.get("affiliate"))
+            )
+            # Sicherstellen Einzigartigkeit
+            attempt = 0
+            while fallback in dup_map and attempt < 10:
+                attempt += 1
+                fallback = clean_pin_description(
+                    f"{g.get('title','')} {g.get('description','')} – Variante {attempt}".strip()[:400],
+                    affiliate=bool(g.get("affiliate"))
+                )
+            if DO_APPLY:
+                new_c = fm_set(g["content"], "pin_description", fallback)
+                open(g["path"], "w", encoding="utf-8").write(new_c)
+                g["content"] = new_c
+                g["pin_description"] = fallback
+            dup_fixed += 1
+    if dup_fixed:
+        print(f"  ✓ Vorab {dup_fixed} bestehende Duplikat-Beschreibungen geheilt")
+
     belegt = {}
     for post in posts:
         d = (post.get("pin_description") or "").strip()
@@ -418,12 +455,33 @@ def main() -> int:
         content = post["content"]
         besitzer = belegt.get(new_desc.strip())
         if besitzer and besitzer != post["slug"]:
-            issues.append(f"{post['slug']}: Beschreibung gehört bereits `{besitzer}` – "
-                          "Duplikat verhindert (Pinterest-Spam-Signal P4)")
-            rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
-                         "match": f"Duplikat-Sperre (Text von {besitzer})",
-                         "changed": False})
-            continue
+            # Premium-Fix #305: Statt nur zu blocken, generiere einzigartige Variante
+            # aus dem Plan-Text plus Slug-spezifischem Suffix.
+            variant = new_desc
+            attempt = 1
+            while variant.strip() in belegt and attempt < 8:
+                suffixes = [
+                    f" Inkl. Checkliste für {attempt+1} Schritte.",
+                    f" Mit Rechenbeispiel ({100+attempt*20} €).",
+                    f" Aktualisiert für {2026+attempt}.",
+                    f" Inkl. 5-Minuten-Check.",
+                ]
+                suf = suffixes[attempt % len(suffixes)]
+                if len(new_desc) + len(suf) <= 500:
+                    variant = new_desc.rstrip(".") + suf
+                else:
+                    variant = new_desc[:500-len(suf)-4].rstrip() + "…" + suf
+                attempt += 1
+            if variant.strip() in belegt:
+                issues.append(f"{post['slug']}: Beschreibung gehört bereits `{besitzer}` – "
+                              "Duplikat verhindert (Pinterest-Spam-Signal P4)")
+                rows.append({"slug": post["slug"], "pin": pin.get("tag"), "score": rs,
+                             "match": f"Duplikat-Sperre (Text von {besitzer})",
+                             "changed": False})
+                continue
+            else:
+                new_desc = variant
+                print(f"  ✓ Duplikat-Variante für {post['slug']}: {new_desc[:60]}…")
         do_t = (post["pin_title"] != new_title)
         do_d = (post["pin_description"] != new_desc)
         do_w = (post["pinwand"] != new_pinwand)

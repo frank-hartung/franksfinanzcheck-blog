@@ -17,8 +17,8 @@ cover:
   image: "images/covers/2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Energie-Update: Was sich jetzt für dich ändert"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Energie-Update: Was sich jetzt für dich ändert"
-pin_description: "*Werbung | Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
+pin_title: "Energie-Update September: Was sich jetzt für dich ändert"
+pin_description: "*Werbung | Energie-Update September: Was sich bei Strom- und Gastarifen jetzt ändert, welche Fristen gelten und wie du mit einem kurzen Tarif-Check bis zu 300 € im Jahr sparst. Jetzt einordnen und handeln! #energieupdate #stromsparen #gaswechsel"
 kurzantwort: "Der Staat hat die Strompreisbremse eingeführt, die den durchschnittlichen Haushaltsstrompreis um ca. 10 %–15 % senkt. Damit zahlst du künftig weniger – etwa 15 € weniger pro Monat bei einem Verbrauch von 3 500 kWh. Prüfe jetzt deine Jahresabrechnung, beantrage den automatischen Rabatt bei deinem Anbieter und reiche den Antrag bis 31 Dezember 2024 ein."
 ---
 **Stand: 10.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

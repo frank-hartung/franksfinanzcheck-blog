@@ -13,7 +13,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gasvergleich", "Gastarife wechseln", "Gaskosten sparen", "Heizkosten senken", "Vermeidest", "Gaspreisgarantie", "Gastarif wechseln"]
 pinwand: Strom & Gas sparen | Tarife clever wechseln
-pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
+pin_title: "Gasvergleich 2026: So vermeidest du teure Wechsel-Fehler"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
 ai_generated: true
 ai_provider: "Content-Engine v2"

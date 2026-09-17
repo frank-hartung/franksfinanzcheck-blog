@@ -738,6 +738,40 @@ def c16_heartbeat(deploy_text, script_texts):
     return out
 
 
+def c17_pinterest_duplicate_guard(script_texts, wflows, root=BLOG_DIR):
+    """C17: Pinterest-Duplikate (P4) sind ein Spam-Signal – der Guard muss existieren
+    und in den relevanten Workflows laufen (Watchdog + Content-Engine).
+
+    Hintergrund #305: Zwei Artikel mit identischer pin_description führten zum
+    Issue "Pinterest-Check: Probleme gefunden". Der Guard heilt Duplikate
+    deterministisch und ist idempotent. Ohne ihn kehrt das Spam-Risiko zurück.
+    """
+    out = []
+    guard_path = os.path.join(root, "scripts", "pinterest_duplicate_guard.py")
+    if not os.path.exists(guard_path):
+        out.append(("C17", "scripts/pinterest_duplicate_guard.py fehlt – kein Schutz gegen DUPLIKAT-Description (P4) (#305)."))
+        return out
+    guard_text = script_texts.get("pinterest_duplicate_guard.py", "")
+    if "_unique_desc" not in guard_text or "_unique_title" not in guard_text:
+        out.append(("C17", "pinterest_duplicate_guard.py: Unique-Generator fehlt – Duplikate würden nicht geheilt."))
+    # Workflows prüfen
+    watchdog = ""
+    for p, txt in wflows.items():
+        if "pinterest-watchdog" in p:
+            watchdog = txt
+            break
+    if watchdog and "pinterest_duplicate_guard" not in watchdog:
+        out.append(("C17", "pinterest-watchdog.yml: ruft pinterest_duplicate_guard nicht auf – Duplikate würden erst spät erkannt (#305)."))
+    engine = ""
+    for p, txt in wflows.items():
+        if "content-engine-v2" in p:
+            engine = txt
+            break
+    if engine and "pinterest_duplicate_guard" not in engine:
+        out.append(("C17", "content-engine-v2.yml: ruft pinterest_duplicate_guard nicht auf – neue Artikel könnten mit Duplikat live gehen (#305)."))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -797,6 +831,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c15_proof_not_healing(script_texts, wflows)
     deploy_yml = _read(os.path.join(root, ".github", "workflows", "deploy.yml"))
     checks += c16_heartbeat(deploy_yml, script_texts)
+    checks += c17_pinterest_duplicate_guard(script_texts, wflows, root=root)
     return checks
 
 
@@ -846,6 +881,10 @@ RULE_TEXT = {
            "muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im "
            "eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, "
            "verändert die Messgröße, die er prüfen will (15.09.2026).",
+    "C17": "Pinterest-Duplikate (P4) sind Spam: pin_title und pin_description müssen "
+           "über alle Artikel hinweg einzigartig sein – der Duplicate-Guard heilt "
+           "deterministisch, läuft in Watchdog und Content-Engine und verhindert "
+           "Repeat-Pin-Spam (#305).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -1178,8 +1217,9 @@ def main(argv=None):
             if annotate:
                 print(f"::error::{line}")
     else:
-        print("🔒 GOVERNANCE-VERTRAG erfüllt – alle sechzehn Regeln prüfen in beide "
-              "Richtungen (Fehler UND Schein-Sicherheit).")
+        count = len(RULE_TEXT)
+        print(f"🔒 GOVERNANCE-VERTRAG erfüllt – alle {count} Regeln prüfen in beide "
+              f"Richtungen (Fehler UND Schein-Sicherheit).")
     if "--md" in argv:
         target = argv[argv.index("--md") + 1]
         try:
