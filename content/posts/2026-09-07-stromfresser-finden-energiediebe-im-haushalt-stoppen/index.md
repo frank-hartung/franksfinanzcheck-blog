@@ -9,8 +9,8 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["stromfresser finden", "strom sparen tipps", "energiekosten senken", "standby kosten"]
 pinwand: Strom & Gas sparen | Tarife clever wechseln
-pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
-pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
+pin_title: Diese 5 Geräte treiben deine Stromrechnung in die Höhe
+pin_description: "*Werbung | Trockner, Heizlüfter, alte Kühltruhe: Die größten Stromfresser stehen oft unauffällig in der Ecke – und kosten bis zu 250 € im Jahr. Wir zeigen die Top 5 inklusive Verbrauchskosten und den günstigsten Alternativen. Jetzt nachrechnen! Aktualisiert für 2028."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"

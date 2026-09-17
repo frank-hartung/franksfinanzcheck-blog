@@ -19,7 +19,7 @@ cover:
   image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "5 einfache Frugalismus-Tricks für den Alltag"
+pin_title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
 pin_description: "*Werbung | 5 einfache Frugalismus-Tricks für den Alltag: So senkst du Fixkosten, vermeidest Geldfallen und sparst Monat für Monat ohne echten Verzicht. Mehr Spartipps auf FranksFinanzcheck! #frugalismus #geldsparen #alltagstipps"
 ---
 

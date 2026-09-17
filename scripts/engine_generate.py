@@ -238,6 +238,45 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         pin_t = title[:100]
         pin_d = f"*Werbung | {(desc or title)[:350]} Mehr Spartipps auf FranksFinanzcheck!"
 
+    # Premium: P4-Duplikat-Guard – stelle sicher, dass pin_title/description einzigartig sind
+    try:
+        import glob, re
+        existing_descs = set()
+        existing_titles = set()
+        for f in glob.glob(os.path.join(g.POSTS_DIR, "*", "index.md")):
+            try:
+                c = open(f, encoding="utf-8").read()
+                m = re.search(r'^pin_description:\s*"(.*)"\s*$', c, re.M)
+                if m:
+                    existing_descs.add(m.group(1))
+                m2 = re.search(r'^pin_title:\s*"(.*)"\s*$', c, re.M)
+                if m2:
+                    existing_titles.add(m2.group(1))
+            except Exception:
+                pass
+        # Falls Duplikat, generiere einzigartige Variante
+        attempt = 0
+        orig_pin_t = pin_t
+        orig_pin_d = pin_d
+        while pin_t in existing_titles and attempt < 10:
+            attempt += 1
+            suffixes = [" – Praxis-Guide", " – So sparst du", " – Schritt für Schritt", f" – Teil {attempt+1}"]
+            suf = suffixes[attempt % len(suffixes)]
+            if len(orig_pin_t) + len(suf) <= 100:
+                pin_t = orig_pin_t + suf
+            else:
+                pin_t = orig_pin_t[:100-len(suf)-1].rstrip()+"…"+suf
+        attempt = 0
+        while pin_d in existing_descs and attempt < 10:
+            attempt += 1
+            extra = f" Inkl. Checkliste für {attempt+1} Schritte."
+            if len(orig_pin_d) + len(extra) <= 500:
+                pin_d = orig_pin_d.rstrip(".") + extra
+            else:
+                pin_d = orig_pin_d[:500-len(extra)-4].rstrip()+"…"+extra
+    except Exception as _dup_err:
+        print(f"  ⚠ P4-Duplikat-Guard übersprungen: {_dup_err}")
+
     slug = g.slugify(title)
     bundle_dir = os.path.join(g.POSTS_DIR, f"{date}-{slug}")
     if os.path.exists(bundle_dir):

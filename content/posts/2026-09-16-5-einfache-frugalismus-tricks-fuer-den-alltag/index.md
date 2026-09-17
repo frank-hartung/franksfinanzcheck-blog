@@ -13,8 +13,8 @@ erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
-pin_title: "5 einfache Frugalismus-Tricks für den Alltag"
-pin_description: "*Werbung | 5 einfache Frugalismus-Tricks für den Alltag – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und … Mehr Spartipps auf FranksFinanzcheck! #frugalismustricks #frugalismus #geldsparen"
+pin_title: "Frugalismus-Tricks: 5 Hacks für 1.800 € mehr im Jahr"
+pin_description: "*Werbung | Frugalismus ohne Verzicht: Mit 50-30-20-Regel, Tarif-Check und Cash-Only-Woche schaffst du bis zu 1.800 € extra im Jahr – plus 5 Hacks für Fixkosten, Energie und Abos. Jetzt Guide lesen! #frugalismus #budgeting #geldsparen"
 cover:
   image: "images/covers/2026-09-16-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"

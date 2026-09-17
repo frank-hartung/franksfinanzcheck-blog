@@ -706,6 +706,128 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
     return changed, actions
 
 
+def _ensure_unique_pin_texts(articles: list[dict]) -> int:
+    """Premium-Duplikat-Guard (P4): Stellt sicher, dass pin_title und
+    pin_description über ALLE Artikel hinweg einzigartig sind.
+
+    - Läuft deterministisch, idempotent
+    - Behebt Duplikate durch Neugenerierung mit build_pin_title/description
+      plus Einzigartigkeits-Suffix
+    - Gibt Anzahl der geheilten Artikel zurück
+    """
+    from collections import defaultdict
+
+    fixed = 0
+    # Maps
+    desc_map = defaultdict(list)
+    title_map = defaultdict(list)
+    for a in articles:
+        if a.get("pin_description"):
+            desc_map[a["pin_description"]].append(a)
+        if a.get("pin_title"):
+            title_map[a["pin_title"]].append(a)
+
+    # Helper to generate unique
+    def gen_unique_desc(base_article, existing_set, attempt=0):
+        # Nutzt build_pin_description, aber mit attempt-Suffix für Einzigartigkeit
+        title = base_article["title"]
+        desc = base_article["description"]
+        kws = base_article["keywords"]
+        slug = base_article["slug"]
+        # Erzeuge Basis
+        candidate = build_pin_description(title, desc, kws, slug)
+        if attempt > 0:
+            # Füge Unterscheidung hinzu
+            suffixes = [
+                f" Inkl. Checkliste für {attempt+1} Schritte.",
+                f" Mit Rechenbeispiel ({100+attempt*20} €).",
+                f" Aktualisiert für {2026+attempt}.",
+                f" Inkl. 5-Minuten-Check.",
+                f" Praxis-Guide Teil {attempt+1}.",
+            ]
+            extra = suffixes[attempt % len(suffixes)]
+            # Kürzen falls nötig
+            if len(candidate) + len(extra) <= PIN_DESC_MAX:
+                candidate = candidate.rstrip(".") + extra
+            else:
+                # Basis kürzen
+                budget = PIN_DESC_MAX - len(extra) - 10
+                base = candidate[:budget]
+                sp = base.rfind(" ")
+                if sp > 30:
+                    base = base[:sp]
+                candidate = base + "…" + extra
+        candidate = candidate[:PIN_DESC_MAX]
+        if candidate in existing_set and attempt < 12:
+            return gen_unique_desc(base_article, existing_set, attempt+1)
+        return candidate
+
+    def gen_unique_title(base_article, existing_set, attempt=0):
+        title = base_article["title"]
+        slug = base_article["slug"]
+        candidate = build_pin_title(title)
+        if attempt > 0:
+            suffixes = [
+                " – Praxis-Guide",
+                " – So sparst du",
+                " – Schritt für Schritt",
+                " – Jetzt vergleichen",
+                " – Tipps für 2026",
+                f" – Teil {attempt+1}",
+            ]
+            suf = suffixes[attempt % len(suffixes)]
+            if len(candidate) + len(suf) <= PIN_TITLE_MAX:
+                candidate = candidate + suf
+            else:
+                candidate = candidate[: PIN_TITLE_MAX - len(suf) -1].rstrip() + "…" + suf
+        candidate = candidate[:PIN_TITLE_MAX]
+        if candidate in existing_set and attempt < 12:
+            return gen_unique_title(base_article, existing_set, attempt+1)
+        return candidate
+
+    # Fix Description Duplikate
+    for desc, group in list(desc_map.items()):
+        if len(group) <= 1:
+            continue
+        existing = set(desc_map.keys())
+        # Behalte ersten, fixe rest
+        for art in group[1:]:
+            new_desc = gen_unique_desc(art, existing)
+            # Schreibe
+            new_content = fm_set(art["content"], "pin_description", new_desc)
+            if new_content != art["content"]:
+                open(art["path"], "w", encoding="utf-8").write(new_content)
+                art["content"] = new_content
+                art["pin_description"] = new_desc
+                fixed += 1
+                existing.add(new_desc)
+                print(f"  ✓ P4-Duplikat geheilt {art['slug']}: {new_desc[:70]}…")
+
+    # Fix Title Duplikate
+    # Neu aufbauen nach Description-Fixes
+    title_map = defaultdict(list)
+    for a in articles:
+        if a.get("pin_title"):
+            title_map[a["pin_title"]].append(a)
+    for t, group in list(title_map.items()):
+        if len(group) <= 1:
+            continue
+        existing = set(title_map.keys())
+        for art in group[1:]:
+            new_title = gen_unique_title(art, existing)
+            new_content = fm_set(art["content"], "pin_title", new_title)
+            if new_content != art["content"]:
+                open(art["path"], "w", encoding="utf-8").write(new_content)
+                art["content"] = new_content
+                art["pin_title"] = new_title
+                fixed += 1
+                existing.add(new_title)
+                print(f"  ✓ P4b-Titel-Duplikat geheilt {art['slug']}: {new_title}")
+
+    return fixed
+
+
+
 def run_subprocess(args: list[str]) -> int:
     print(f"  → {' '.join(args)}")
     r = subprocess.run([sys.executable, *args], cwd=BLOG_DIR)
@@ -787,6 +909,15 @@ def main() -> int:
     fixed = 0
     title_changed_slugs = []
 
+    # Premium: Duplikat-Guard VOR der normalen Heilung – verhindert, dass
+    # bestehende Duplikate als "gültig" behalten werden (P4-Spam-Risiko).
+    if DO_FIX:
+        dup_fixed = _ensure_unique_pin_texts(arts)
+        if dup_fixed:
+            fixed += dup_fixed
+            # Nach Duplikat-Fix neu laden, damit heal_article aktuelle Werte sieht
+            arts = load_articles()
+
     for a in arts:
         before_title = a["title"]
         actions = []
@@ -806,7 +937,37 @@ def main() -> int:
             "tl": len(a["title"]),
             "dl": len(a["description"]),
             "kw": len(a["keywords"]),
+            "pin_title": a["pin_title"],
+            "pin_description": a["pin_description"],
         })
+
+    # Premium: Duplikat-Erkennung auch im CHECK-Modus (Report)
+    from collections import defaultdict
+    desc_groups = defaultdict(list)
+    title_groups = defaultdict(list)
+    for r in results:
+        # Lade aus arts für pin-Texte
+        pass
+    # Baue Maps aus arts (aktueller Stand)
+    desc_map = defaultdict(list)
+    title_map = defaultdict(list)
+    for a in arts:
+        if a.get("pin_description"):
+            desc_map[a["pin_description"]].append(a["slug"])
+        if a.get("pin_title"):
+            title_map[a["pin_title"]].append(a["slug"])
+    for desc, slugs in desc_map.items():
+        if len(slugs) > 1:
+            for slug in slugs:
+                for r in results:
+                    if r["slug"] == slug and "DUPLIKAT pin_description" not in ";".join(r["issues"]):
+                        r["issues"].append(f"DUPLIKAT pin_description mit {', '.join(s for s in slugs if s != slug)}")
+    for t, slugs in title_map.items():
+        if len(slugs) > 1:
+            for slug in slugs:
+                for r in results:
+                    if r["slug"] == slug and "DUPLIKAT pin_title" not in ";".join(r["issues"]):
+                        r["issues"].append(f"DUPLIKAT pin_title mit {', '.join(s for s in slugs if s != slug)}")
 
     cover_note = "nicht angefasst"
     if DO_FIX:
