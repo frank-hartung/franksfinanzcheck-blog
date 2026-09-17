@@ -101,67 +101,51 @@
 
 {{- /* bundle all required css */}}
 {{- /* Add extended css after theme style */ -}}
-{{- /* ---------- Kritischer Pfad: automatischer LCP-Bild-Preload ---------- */ -}}
-{{- /* scripts/lcp_image_optimizer.py schreibt data/lcp_images.json. Das Manifest
-       bestimmt pro Seite den wahrscheinlich größten Above-the-fold-Bildkandidaten
-       und hält Preload, sizes und srcset synchron mit cover.html. Fallback:
-       deterministische Hugo-Erkennung, falls das Manifest lokal fehlt. */ -}}
-{{- $lcpCover := "" }}{{- $lcpDir := "" }}{{- $lcpBase := "" }}{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" }}
+{{- /* ---------- Kritischer Pfad: automatischer LCP-Bild-Preload (Profi-Agentur) ---------- */ -}}
+{{- /* Deterministische Erkennung des gerenderten LCP-Bildes direkt aus dem Hugo-Seitenbaum.
+       PRELOAD-BREMSE: Pager-Seiten (/page/2/, /posts/page/3/) und noindex-Archive
+       bekommen KEINEN Bild-Preload.
+       - Single-Seiten: Eigenes Artikelcover (falls nicht hidden oder preload:false).
+       - Home-Startseite (Seite 1): Erstes sichtbares Cover des Home-Feeds.
+       - Blog-Übersicht (/posts/, Seite 1): Erstes sichtbares Cover des Blog-Feeds.
+       - Pager-Seiten, Archive (eq .Kind "term"), Taxonomien: KEIN Preload ($noPreload). */ -}}
+{{- $lcpCover := "" -}}
+{{- $lcpSizes := "(min-width: 768px) 620px, 100vw" -}}
 {{- $lcpWidths := slice "360" "480" "620" "720" -}}
-{{- $pageKey := .RelPermalink -}}
-{{- /* PRELOAD-BREMSE (Premium-Audit 11.09.2026, Fund S9 der neuen Wache):
-       Pager-Seiten (/page/2/, /posts/page/3/, /categories/ratgeber/page/2/)
-       und die noindex-Archive bekommen KEINEN Bild-Preload.
-       Warum: Hugos .RelPermalink ist auf einer Pager-Seite die Basis-URL –
-       das LCP-Manifest (keyed nach .RelPermalink) wurde deshalb auch auf
-       Seite 2, 3, 4 … angezogen und lud das Cover des NEUESTEN Artikels, das
-       auf genau diesen Seiten gar nicht vorkommt (Seite 1 ist dort schon
-       durch). Folge: unnütze Bytes beim wichtigsten Klickpfad und ein
-       Lighthouse-Fund „Preload wird nicht verwendet". Archive werden
-       notorisch nicht indexiert – Vorladen lohnt dort nicht.
-       Pager-Erkennung: .Paginator.PageNumber > 1. Bewusst NICHTE .Truncated
-       benutzt – das Flag steht auf JEDEM Artikel mit >70 Wörtern (Summary-
-       Schnitt) und hätte den legitimen Cover-Preload aller Artikel
-       abgeschaltet. .PagingMetadata/.OutputPath existieren in Hugo 0.164
-       nicht auf der Seite (verifiziert). */ -}}
+
 {{- $isPager := false -}}
 {{- if or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") (eq .Kind "taxonomy") -}}
   {{- with .Paginator -}}{{- if gt (.PageNumber | int) 1 -}}{{- $isPager = true -}}{{- end -}}{{- end -}}
 {{- end -}}
 {{- $noPreload := or $isPager (eq .Kind "term") (eq .Kind "taxonomy") -}}
-{{- if $noPreload -}}{{- $pageKey = "___kein-preload___" -}}{{- end -}}
-{{- $lcpManifest := dict -}}
-{{- if os.FileExists "data/lcp_images.json" -}}{{- $lcpManifest = (readFile "data/lcp_images.json" | transform.Unmarshal) -}}{{- end -}}
-{{- with $lcpManifest.pages -}}
-    {{- with index . $pageKey -}}
-      {{- with .image }}{{- $lcpCover = . -}}{{- end -}}
-      {{- with .sizes }}{{- $lcpSizes = . -}}{{- end -}}
-      {{- with .widths }}{{- $lcpWidths = . -}}{{- end -}}
-    {{- end -}}
-{{- end -}}
 
-{{- if not $lcpCover -}}
-  {{- $isList := or (eq .Kind "home") (eq .Kind "section") (eq .Kind "term") -}}
-  {{- if and $isList (not $noPreload) -}}
-    {{- $lcpPages := .RegularPages -}}
-    {{- if .IsHome -}}
-      {{- $lcpPages = where site.RegularPages "Section" "eq" "posts" -}}
-      {{- $lcpPages = where $lcpPages "Params.hiddenInHomeList" "!=" "true" -}}
-    {{- end -}}
-    {{- if gt (len $lcpPages) 0 -}}
-      {{- with index $lcpPages 0 -}}
-        {{- with .Params.cover.image }}{{- $lcpCover = . -}}{{- end -}}
-      {{- end -}}
-    {{- end -}}
-  {{- else if and .Params.cover.image (eq .Kind "page") (ne .Params.cover.preload false) -}}
+{{- if and (not $noPreload) (eq .Kind "page") -}}
+  {{- $coverHidden := or (.Param "cover.hiddenInSingle") (.Param "cover.hidden") -}}
+  {{- if and .Params.cover.image (not $coverHidden) (ne .Params.cover.preload false) -}}
     {{- $lcpCover = .Params.cover.image -}}
     {{- $lcpSizes = "(min-width: 768px) 720px, 100vw" -}}
   {{- end -}}
+{{- else if and (not $noPreload) (or .IsHome (and (eq .Kind "section") (eq .Section "posts"))) -}}
+  {{- $targetPages := slice -}}
+  {{- if .IsHome -}}
+    {{- $targetPages = where site.RegularPages "Section" "eq" "posts" -}}
+    {{- $targetPages = where $targetPages "Params.hiddenInHomeList" "!=" "true" -}}
+  {{- else -}}
+    {{- $targetPages = (union .RegularPages .Sections).ByDate.Reverse -}}
+  {{- end -}}
+  {{- if gt (len $targetPages) 0 -}}
+    {{- $firstPost := index $targetPages 0 -}}
+    {{- $coverHidden := or ($firstPost.Param "cover.hiddenInList") ($firstPost.Param "cover.hidden") -}}
+    {{- if and $firstPost.Params.cover.image (not $coverHidden) -}}
+      {{- $lcpCover = $firstPost.Params.cover.image -}}
+      {{- $lcpSizes = "(min-width: 768px) 620px, 100vw" -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
-{{- if and $lcpCover (not $noPreload) -}}
-{{- $lcpDir = path.Dir $lcpCover -}}
-{{- $lcpBase = strings.TrimSuffix (path.Ext (path.Base $lcpCover)) (path.Base $lcpCover) -}}
+{{- if $lcpCover -}}
+{{- $lcpDir := path.Dir $lcpCover -}}
+{{- $lcpBase := strings.TrimSuffix (path.Ext (path.Base $lcpCover)) (path.Base $lcpCover) -}}
 {{- $lcpSrcset := slice -}}
 {{- range $w := $lcpWidths -}}
   {{- $ws := printf "%v" $w -}}

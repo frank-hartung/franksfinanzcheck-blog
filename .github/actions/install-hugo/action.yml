@@ -88,8 +88,8 @@ runs:
         set -euo pipefail
         VER="${{ inputs.version }}"
         echo "→ PyPI-Fallback: hugo==${VER}"
-        python3 -m pip install --quiet --disable-pip-version-check "hugo==${VER}"
-        BIN="$(python3 -c "import hugo, os; print(os.path.join(os.path.dirname(hugo.__file__), 'binaries', 'hugo'))")"
+        python3 -m pip install --quiet --disable-pip-version-check --break-system-packages "hugo==${VER}" 2>/dev/null || python3 -m pip install --quiet --disable-pip-version-check "hugo==${VER}"
+        BIN="$(python3 -c "import hugo, os; p = getattr(hugo, '__file__', None); base = os.path.dirname(p) if p else (hugo.__path__[0] if hasattr(hugo, '__path__') else ''); print(os.path.join(base, 'binaries', 'hugo'))")"
         if [ ! -x "$BIN" ]; then
           echo "❌ PyPI-Paket ohne Binary gefunden: $BIN"
           exit 2
