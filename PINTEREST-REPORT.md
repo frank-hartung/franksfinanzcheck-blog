@@ -1,7 +1,9 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-09-16 09:23 UTC · Modus: FIX
+**Stand:** 2026-09-17 09:32 UTC · Modus: FIX
 
-Probleme: 0 · Geheilt: 0
+Probleme: 1 · Geheilt: 0
 
-✅ Alle Pinterest-Signale im Profi-Bereich.
+| Code | Artikel | Problem |
+|---|---|---|
+| P4 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden, 2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen | DUPLIKAT-Description (Spam-Risiko) |
