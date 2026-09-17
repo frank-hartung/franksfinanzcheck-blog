@@ -59,11 +59,24 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
         return (m.group(1).strip().strip('"\'') if m else default)
 
     cover = ""
+    cover_hidden = False
+    cover_hidden_in_list = False
+    cover_hidden_in_single = False
     m = re.search(r"^cover:\s*\n(?P<body>(?:\s+[^\n]+\n?)+)", fm, re.M)
     if m:
-        cm = re.search(r"^\s*image:\s*[\"']?([^\"'\n]+)[\"']?\s*$", m.group("body"), re.M)
+        body = m.group("body")
+        cm = re.search(r"^\s*image:\s*[\"']?([^\"'\n]+)[\"']?\s*$", body, re.M)
         if cm:
             cover = cm.group(1).strip()
+        hm = re.search(r"^\s*hidden:\s*(true|yes|1)\b", body, re.M | re.I)
+        if hm:
+            cover_hidden = True
+        hl = re.search(r"^\s*hiddenInList:\s*(true|yes|1)\b", body, re.M | re.I)
+        if hl:
+            cover_hidden_in_list = True
+        hs = re.search(r"^\s*hiddenInSingle:\s*(true|yes|1)\b", body, re.M | re.I)
+        if hs:
+            cover_hidden_in_single = True
 
     def boolean(name: str) -> bool:
         value = scalar(name, "false").lower()
@@ -81,8 +94,11 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
         "date": date,
         "timestamp": timestamp,
         "cover": cover,
+        "coverHidden": cover_hidden or boolean("coverHidden"),
+        "coverHiddenInList": cover_hidden or cover_hidden_in_list or boolean("coverHiddenInList"),
+        "coverHiddenInSingle": cover_hidden or cover_hidden_in_single or boolean("coverHiddenInSingle"),
         "hiddenInHomeList": boolean("hiddenInHomeList"),
-        "draft": boolean("draft"),
+        "draft": boolean("draft") or boolean("cadence_wait"),
     }
 
 
@@ -111,7 +127,7 @@ def collect_posts() -> list[Post]:
             date=fm.get("date", ""),
             timestamp=float(fm.get("timestamp", 0.0)),
             cover=cover,
-            hidden_in_home=bool(fm.get("hiddenInHomeList", False)),
+            hidden_in_home=bool(fm.get("hiddenInHomeList", False)) or bool(fm.get("coverHiddenInList", False)),
             draft=bool(fm.get("draft", False)),
         ))
     posts.sort(key=lambda p: (p.timestamp, p.rel_permalink), reverse=True)

@@ -14,17 +14,6 @@
     {{- $isLcpCandidate := false }}
     {{- if $.IsSingle }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
     {{- if $.IsFirst }}{{ $loading = "eager" }}{{ $fetchPriority = "high" }}{{ $isLcpCandidate = true }}{{ end }}
-    {{- if $.IsSingle }}
-      {{- $lcpManifest := dict -}}
-      {{- if os.FileExists "data/lcp_images.json" -}}{{- $lcpManifest = (readFile "data/lcp_images.json" | transform.Unmarshal) -}}{{- end -}}
-      {{- with $lcpManifest.pages }}
-        {{- with index . $.cxt.RelPermalink }}
-          {{- if eq .image $.cxt.Params.cover.image }}
-            {{- $loading = "eager" }}{{- $fetchPriority = "high" }}{{- $isLcpCandidate = true -}}
-          {{- end }}
-        {{- end }}
-      {{- end }}
-    {{- end }}
     {{- if not $fetchPriority }}{{ $fetchPriority = "low" }}{{ end }}
     {{- $fcpImageRole := cond $isLcpCandidate "lcp" "deferred" }}
     {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}

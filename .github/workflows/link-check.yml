@@ -45,7 +45,7 @@ jobs:
       # .duplizierendes Issue den main-Zweig nicht mehr erreichen kann.
       # ------------------------------------------------------------
       - name: Python-Abhängigkeiten (für Governance-Skripte)
-        run: python3 -m pip install -q pyyaml pillow 2>/dev/null || true
+        run: python3 -m pip install -q --break-system-packages pyyaml pillow 2>/dev/null || python3 -m pip install -q pyyaml pillow 2>/dev/null || true
 
       - name: Governance-Selbsttests (alle Wachen)
         # Die Zahl im Schritt-Namen war fix ("11 Wachen") und damit bereits
