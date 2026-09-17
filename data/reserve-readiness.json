@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 7,
-  "pool_size": 7,
-  "generated_at": "2026-09-16T08:49:19Z",
+  "ready": 8,
+  "pool_size": 8,
+  "generated_at": "2026-09-17T08:52:55Z",
   "candidates": [
     {
       "slug": "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
@@ -50,21 +50,6 @@
       }
     },
     {
-      "slug": "2026-09-16-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
-      "ready": true,
-      "sha256": "7b9e8aa625750d81974e83b75637d455b118fc5fae1f7e260f23e86252082f57",
-      "score": 0.924,
-      "parts": {
-        "spelling": 0.62,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-09-16-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
       "ready": true,
       "sha256": "14303c3f2b4130166521bde538c6af1657be677bfecb4b1605810b7ede291c0d",
@@ -80,9 +65,39 @@
       }
     },
     {
-      "slug": "2026-09-16-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "slug": "2026-09-17-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
       "ready": true,
-      "sha256": "de3fa7d4ed2580c6e791de9b478b53a44cee0f151eb02013f7cac71a069b11c0",
+      "sha256": "921c97729f5c51f93518de9208e5212603525d685ad3377b872b5b873ee1f66e",
+      "score": 0.934,
+      "parts": {
+        "spelling": 0.6799999999999999,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-17-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
+      "ready": true,
+      "sha256": "01b2c724a6f95fad1f0e52f4daeaa6fe3daf7c274f266ad898ea0d25e9161568",
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-17-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "ready": true,
+      "sha256": "8d58a410e9d04e55e10a5c34805653a9ecc605524d3629bd17275294ae8d4e39",
       "score": 0.946,
       "parts": {
         "spelling": 0.84,
@@ -95,15 +110,15 @@
       }
     },
     {
-      "slug": "2026-09-16-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
+      "slug": "2026-09-17-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
       "ready": true,
-      "sha256": "597d275736747ce17adc5d387e5c52457d94b07f90a6422a72fd0646cd8f54f7",
-      "score": 0.93,
+      "sha256": "125c460f85e4b979b218867ba64873db85a7dc7b1a6a8b6f97a61abf14f2befc",
+      "score": 0.936,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
