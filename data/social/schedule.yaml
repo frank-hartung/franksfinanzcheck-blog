@@ -709,9 +709,9 @@ items:
   date: '2026-09-17'
   time: 07:00
   scheduled_at: '2026-09-17T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen:zahl:2026-09-17
   channel: linkedin
   slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
@@ -721,9 +721,9 @@ items:
   date: '2026-09-17'
   time: 07:45
   scheduled_at: '2026-09-17T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:mythos:2026-09-17
   channel: bluesky
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -733,9 +733,9 @@ items:
   date: '2026-09-17'
   time: 08:15
   scheduled_at: '2026-09-17T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:zahl:2026-09-17
   channel: x
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -745,9 +745,9 @@ items:
   date: '2026-09-17'
   time: 08:45
   scheduled_at: '2026-09-17T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:takeaway:2026-09-17
   channel: threads
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
@@ -757,9 +757,9 @@ items:
   date: '2026-09-17'
   time: 09:15
   scheduled_at: '2026-09-17T09:15:00+02:00'
-  status: planned
-  attempts: 0
-  reason: ''
+  status: blocked
+  attempts: 1
+  reason: Artikel nicht mehr im Bestand
 - id: facebook:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:takeaway:2026-09-17
   channel: facebook
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -769,9 +769,9 @@ items:
   date: '2026-09-17'
   time: 09:45
   scheduled_at: '2026-09-17T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:nutzen:2026-09-17
   channel: instagram
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
@@ -781,9 +781,9 @@ items:
   date: '2026-09-17'
   time: '11:45'
   scheduled_at: '2026-09-17T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:frage:2026-09-17
   channel: bluesky
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
