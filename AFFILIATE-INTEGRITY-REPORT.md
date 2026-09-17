@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-16 08:58:45 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-17 09:04:46 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 32 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
+**Geprüfte Live-Artikel:** 35 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 19
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -37,8 +37,11 @@
 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
 | 2026-09-03-hausratversicherung-kosten-leistungen-vergleich | 3 → 3 ✅ | /go/hausrat/ |
 | 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | 2 → 3 ✅ | /go/kreditkarte/, /go/reisekrankenversicherung/ |
+| 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt | 3 → 3 ✅ | /go/dsl/ |
+| 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich | 3 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler | 3 → 3 ✅ | /go/allgemein/ |
+| 2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen | 3 → 3 ✅ | /go/strom/ |
 | 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster | 3 → 4 ✅ | /go/tagesgeld/ |
 | 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag | 2 → 3 ✅ | /go/allgemein/, /go/strom/ |
 | 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026 | 3 → 3 ✅ | /go/tagesgeld/ |
