@@ -3,7 +3,7 @@ title: "Versicherung-Update: Was sich jetzt für dich ändert"
 description: "Versicherung-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt …"
 date: 2026-09-17T09:33:22Z
 draft: true
-tags: ["Versicherung-Update: Was sich jetzt für dich ändert", "Versicherung"]
+tags: ["Versicherung-Update: was sich jetzt für dich ändert", "Versicherung"]
 categories: ["News"]
 keywords: ["Versicherung-Update: Was sich jetzt für dich ändert"]
 author: "Frank Hartung"
