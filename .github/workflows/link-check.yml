@@ -201,16 +201,18 @@ jobs:
       # ------------------------------------------------------------
       #  EIGENE FEHLER-MELDUNG DES GATES (18.09.2026)
       #
-      #  Befund: Dieses Gate ist in zwei aufeinanderfolgenden Nächten rot
-      #  gewesen – 17.09. 06:09:16 UTC (Run 35188605416) und 18.09. 05:56:22 UTC
-      #  (Run 35312783057) – und hat in BEIDEN Fällen keinen einzigen
-      #  Fehler-Alerting-Lauf ausgelöst. Es entstand kein Issue, niemand wurde
-      #  informiert; der Betreiber erfuhr es durch Nachschauen. Der Vergleich
-      #  zeigt, dass es nicht am `schedule`-Auslöser liegt: Uptime-Monitor
-      #  (ebenfalls schedule) hat am 18.09. 01:32:43 sehr wohl einen
-      #  Alerting-Lauf ausgelöst. Das zentrale Alerting hängt damit an einem
-      #  Namens-Matching über `workflow_run`, das für dieses Gate nicht greift –
-      #  und ein Gate, dessen Rot niemandem gemeldet wird, ist kein Gate.
+      #  Befund: Dieses Gate war 14 Mal rot seit dem 05.09.2026 (10 Mal seit
+      #  dem 08.09.: 3 x schedule, 2 x push, 9 x pull_request) – darunter die
+      #  Nächte 17.09. (Run 35188605416) und 18.09. (Run 35312783057) – und hat
+      #  in KEINEM einzigen Fall eine Meldung erzeugt. Es existiert kein Issue
+      #  mit dem Alerting-Titel, in keinem Zustand. Die Konfiguration von
+      #  alert-on-failure.yml ist nachweislich korrekt (Name geparst und
+      #  byteweise identisch, types: [completed], alarm bei failure) – die
+      #  `workflow_run`-EREIGNISSE kommen nur nicht an: repo-weit 602
+      #  Alerting-Läufe auf 922 abgeschlossene Läufe gelisteter Workflows seit
+      #  dem 08.09. (~35 % fehlen). Ein Gate, dessen Rot niemandem gemeldet
+      #  wird, ist kein Gate – und sich auf eine fremde Zustellung zu verlassen,
+      #  die man nicht zählt, ist Wunschdenken.
       #
       #  Deshalb meldet sich das Gate jetzt SELBST, unabhängig von jedem
       #  Fremd-Workflow: gleicher Dedupe-/Schließ-Pfad wie die beiden

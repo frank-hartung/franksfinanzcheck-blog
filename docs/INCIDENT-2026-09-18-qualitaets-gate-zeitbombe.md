@@ -5,10 +5,12 @@
 
 ## Kurzfassung
 
-Zwei Dinge sind passiert: Das Gate war rot — **und es hat niemanden alarmiert**,
-obwohl `alert-on-failure.yml` dieses Gate ausdrücklich überwachen soll. Zwei
-Nächte lang (17./18.09.) lief das Gate rot, ohne dass ein Alerting-Lauf oder ein
-Issue entstand. Deshalb meldet sich das Gate jetzt selbst.
+Zwei Dinge sind passiert: Das Gate war rot — **und es hat niemanden alarmiert,
+kein einziges Mal.** Obwohl `alert-on-failure.yml` dieses Gate ausdrücklich
+überwachen soll, erzeugten **14 rote Gate-Läufe seit dem 05.09.2026 keine
+einzige Meldung**; repo-weit kamen seit dem 08.09. nur 602 Alerting-Läufe auf 922
+abgeschlossene Läufe gelisteter Workflows (~35 % der Ereignisse fehlen). Deshalb
+meldet sich das Gate jetzt selbst.
 
 Die **Ursache der Röte** ist ein Selbsttest-Fixture, das die Wanduhr zweimal las —
 einmal zum Prägen, einmal zum Vergleichen. Ab dem 13.09. drifteten beide Lesungen
@@ -84,7 +86,7 @@ Der Selbsttest maß also nicht die Wache, sondern den Kalender. Folgen:
 | B | `audio_coverage_check --selftest`: Fixture `2026-12-24-c` als „Zukunft" hart codiert | Ab dem **24.12.2026** täglich rot — Gate, Governance C6, Content-Reserve, Lesehilfen | Zeitbombe (schlafend) |
 | C | Die Wachen-Liste im Gate war eine **Handkopie** von `governance_contract.GUARDS` und still veraltet: `readability_check`, `pinterest_auth`, `social_studio`, `alert_router`, `affiliate_integrity_gate` liefen im Gate nicht mit | 5 Wachen ungeprüft, obwohl das Regelwerk sie verlangt | Abtippen statt Ableiten |
 | D | `publish_gate.py` und `affiliate_marketer.py` erwähnen `--selftest` im Kommentar, **implementieren es nicht** | Ein Aufruf mit der Flagge startet die Standard-Aktion. Während der Diagnose real ausgelöst: `publish_gate` stufte einen LIVE-Artikel (`2026-09-11-wlan-probleme-loesen-…`) auf `draft: true` herab, weil der lokale `public/`-Build älter war als der Bestand. Änderung zurückgenommen, Artikel unverändert live. | Prüf-Aufruf heilt (C15) |
-| E | **Das rote Gate hat niemanden alarmiert.** `alert-on-failure.yml` führt das Gate zwar in seiner `workflow_run`-Liste, ausgelöst wurde es aber nicht: Für die Fehlschläge vom 17.09. 06:09:16 UTC (Run 35188605416) und 18.09. 05:56:22 UTC (Run 35312783057) existiert **kein einziger Fehler-Alerting-Lauf** und kein Issue. Am `schedule`-Auslöser liegt es nicht — Uptime-Monitor (ebenfalls `schedule`) hat am 18.09. 01:32:43 sehr wohl einen Alerting-Lauf ausgelöst, und die Workflow-Namen sind byteweise identisch. | Zwei Nächte rotes Gate ohne Meldung; der Betreiber erfuhr es durch Nachschauen | Monitoring blind |
+| E | **Das rote Gate hat niemanden alarmiert — und zwar nie.** `alert-on-failure.yml` listet das Gate korrekt (Name geparst **und** byteweise identisch, 39 eindeutige Einträge, `types: [completed]`), aber: **14 rote Gate-Läufe seit dem 05.09.2026** (10 seit dem 08.09.: 3 × schedule, 2 × push, 9 × pull_request) — **kein einziges Issue** mit dem Alerting-Titel existiert, in keinem Zustand, zu keinem Zeitpunkt. Für die Fehlschläge Run 35188605416 (17.09. 06:09:36 UTC Ende) und Run 35312783057 (18.09. 05:56:34 UTC Ende) gibt es keinen Alerting-Lauf; der nächste lief 43 min später. Repo-weit dasselbe Bild: seit dem 08.09. stehen **922 abgeschlossenen Läufen** gelisteter Workflows (ohne 90 `skipped`) nur **602 Fehler-Alerting-Läufe** gegenüber — rund **320 Ereignisse (~35 %) kamen nie an**. Andere Workflows treffen es ebenfalls (Uptime-Monitor 70/70, Content-Reserve 8/8 in der Stichprobe), das Gate 0/14. | Rotes Gate = keine Meldung, reproduzierbar; der Betreiber erfuhr es durch Nachschauen | Monitoring blind (`workflow_run`-Zustellung) |
 | F | **Zwei Unittests bewiesen die Verdrahtung mit einer Namens-Suche in der YAML** (`assertIn("newsletter_digest", link-check.yml)`). Als die Bash-Liste durch den Runner ersetzt wurde, fiel `test_newsletter_digest` aus (CI-Lauf 35333234041, Issue #312) – und `test_draft_triage` bestand **nur noch, weil ein YAML-Kommentar** den Namen erwähnte. | Ein Test, der rot wird, obwohl die Wache läuft; und ein Test, der grün bleibt, obwohl er nichts mehr beweist | Text statt Mechanismus |
 | G | **`selftest_runner.regelwerk()` konnte das falsche Regelwerk lesen.** `sys.path.insert(0, ziel)` ist wirkungslos, wenn der Ziel-Ordner bereits in `sys.path` liegt (beim Runner immer: sein eigener Ordner) – ein vorher eingefügter Stub-Ordner bleibt dann vorn und seine `GUARDS` werden als die echten gelesen. | SSOT-Abgleich gegen eine fremde Liste, unbemerkt | Gefunden vom neuen Verdrahtungs-Nachweis, nicht von einem Menschen |
 
@@ -236,13 +238,21 @@ Verdrahtungs-Test noch die alte Bash-Liste suchte (Befund F).
    Selbsttest-Liste wie das Gate vorher. Sie ist aktuell, aber nicht abgeglichen;
    ein Wechsel auf `scripts/selftest_runner.py` würde auch dort die Lücke C
    schließen (Kosten: ~50 s in einem 90-Minuten-Lauf).
-4. **`alert-on-failure.yml` löst für dieses Gate nicht aus** (Befund E). Die
-   Eigenmeldung des Gates macht den Betrieb wieder sicher, aber die Ursache im
-   zentralen Alerting ist damit nicht beseitigt — andere Workflows derselben
-   Liste könnten ebenso blind sein. Empfehlung: das Namens-Matching durch
-   `workflow_run`-Filterung per `workflow_id`/Dateinamen ersetzen oder
-   wöchentlich nachweisen, dass für jeden gelisteten Workflow mindestens ein
-   Alerting-Lauf existiert („Wächter-Herzschlag" für das Alerting selbst).
+4. **`alert-on-failure.yml` bekommt seine Ereignisse nicht** (Befund E). Die
+   Konfiguration ist nachweislich korrekt (Name geparst und byteweise identisch,
+   39 eindeutige Einträge, `types: [completed]`, `alarm` bei `failure`),
+   trotzdem kamen seit dem 08.09. nur 602 Alerting-Läufe auf 922 abgeschlossene
+   Läufe gelisteter Workflows — ~35 % der Ereignisse fehlen, beim Gate 14 von 14.
+   Die Eigenmeldung des Gates macht **diesen** Betrieb wieder sicher, aber die
+   Zustellung ist nicht repariert und andere Workflows derselben Liste sind
+   weiterhin im Blindflug (Deploy: 13 rote Läufe seit 08.09., Lesehilfen-Gate: 9).
+   **Vorschlag — „Alerting-Herzschlag":** ein täglicher Lauf, der genau die
+   Rechnung dieses Berichts als Wache stellt: abgeschlossene Läufe gelisteter
+   Workflows der letzten 24 h gegen Alerting-Läufe zählen, Differenz = Befund,
+   Meldung als Issue (selbstmeldend wie das Gate, nicht abhängig von
+   `workflow_run`). Alternativ/ergänzend: `workflow_run` durch einen
+   Polling-Wächter ersetzen, der Runs per API abfragt — Zustellung, die man
+   zählt, statt Ereignisse, die man erwartet.
 5. **5 Entwürfe im Reserve-Bestand haben eine geklebte Frontmatter-Grenze**
    (`---Text`, Klasse `fm-grenze`) — von `draft_triage` korrekt als BLOCKIERT
    gemeldet, also kein neuer Befund, aber offene Redaktionsarbeit.
