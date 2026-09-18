@@ -108,7 +108,13 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # getrennt – sein --selftest ist ein reiner Logik-Beweis (kein
           # Bericht, kein data/*.jsonl, keine Kette) und gehört damit ins
           # vertragliche Minimum statt in die Runner-Ausnahme.
-          "blog_doctor.py"]
+          "blog_doctor.py",
+          # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 4 /
+          # Befund E): Der Herzschlag zählt die workflow_run-Zustellung des
+          # Fehler-Alertings täglich nach (~35 % der Ereignisse kamen
+          # 08.–18.09. nie an). Eine Wache, die Zählung nur dokumentiert,
+          # statt sie zu verlangen, ist keine Wache – also ins Minimum.
+          "alerting_heartbeat.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

@@ -15,6 +15,11 @@
 #  BEWUSST NICHT ÜBERWACHT:
 #    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
 #    - "Textverständnis-Patches einspielen (einmalig)" (Einmal-Aktion)
+#    - "Alerting-Herzschlag (workflow_run-Zustellung)" – er ist die Wache
+#      ÜBER DIESEN KANAL: zählt täglich per cron nach, ob die Ereignisse
+#      überhaupt ankommen (Befund E des Gate-Vorfalls 18.09.2026: ~35 %
+#      kamen nie an). Ihn über eben diesen Kanal beobachten hieße, im
+#      Störungsfall ausgerechnet dann zu schweigen. Er meldet sich selbst.
 # ============================================================
 name: Fehler-Alerting
 

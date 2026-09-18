@@ -1,0 +1,137 @@
+# ============================================================
+#  ALERTING-HERZSCHLAG – die Zustellung des Fehler-Alertings
+#  wird nachgezählt, jeden Tag.
+#
+#  WARUM (18.09.2026, Befund E des Qualitäts-Gate-Vorfalls):
+#  `alert-on-failure.yml` ist nachweislich KORREKT konfiguriert
+#  (39 Namen byteweise identisch, types: [completed], Alarm bei
+#  failure), trotzdem kamen 08.–18.09. nur 602 Alerting-Läufe auf
+#  922 abgeschlossene Läufe gelisteter Workflows – rund 35 % der
+#  `workflow_run`-Ereignisse gingen nie zu (14 rote Gate-Läufe:
+#  0 Meldungen; Deploy: 13 rote Läufe ohne Meldung; Lesehilfen:
+#  9). Nachweis und Messmethodik: docs/INCIDENT-2026-09-18-
+#  qualitaets-gate-zeitbombe.md, Befund E.
+#
+#  DIESES WORKFLOW läuft deshalb per CRON, niemals per
+#  `workflow_run`: Das wäre der Kanal, der verliert – ein Wächter,
+#  der über die gestörte Leitung alarmiert werden will, schweigt
+#  genau dann, wenn er gebraucht wird. Er meldet sich selbst wie
+#  das Qualitäts-Gate (Issue öffnen/aktualisieren bei Befund,
+#  schließen bei Grün, Label auto-report). Der Titel kommt aus
+#  `scripts/alerting_heartbeat.py` (ISSUE_TITEL), nicht aus einer
+#  YAML-Kopie – abgetippte Listen sind die Fehlerklasse, die
+#  dieses Repo am 18.09.2026 zweimal gebissen hat.
+#
+#  Die Zählung selbst (Fenster 26 h, Gnadenfrist 90 min, Rot-
+#  sofort-Befund) liegt mit Selbsttest im Skript; der Vertrag
+#  verlangt ihn (governance_contract.GUARDS), und das
+#  Qualitäts-Gate führt den Selbsttest über den Runner mit.
+#
+#  Dieser Workflow steht BEWUSST NICHT in der Wacht-Liste von
+#  alert-on-failure.yml (Selbst-Beobachtung über den beobachteten
+#  Kanal ist keine). Sein Befund ist im Issue und am roten Lauf
+#  sichtbar.
+# ============================================================
+name: Alerting-Herzschlag (workflow_run-Zustellung)
+
+on:
+  schedule:
+    - cron: "50 4 * * *"   # täglich 04:50 UTC – nach dem nächtlichen Gate,
+                           # vor dem Morgen; Fenster deckt 26 h rückwärts ab
+  workflow_dispatch: {}
+
+permissions:
+  actions: read    # die Läufe der beobachteten Workflows zählen (gleiches Recht wie alert-on-failure.yml)
+  issues: write    # Eigenmeldung (Label auto-report)
+
+concurrency:
+  group: alerting-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  herzschlag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python-Abhängigkeit (PyYAML für die Wacht-Liste, Fallback im Skript)
+        run: python3 -m pip install -q --break-system-packages pyyaml 2>/dev/null || python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Selbsttest der Herzschlag-Logik (vorm Messen)
+        run: python3 scripts/alerting_heartbeat.py --selftest
+
+      - name: Herzschlag messen (Zustellung der letzten 26 h nachzählen)
+        id: messung
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -o pipefail
+          python3 scripts/alerting_heartbeat.py --md | tee herzschlag.log
+
+      # ------------------------------------------------------------
+      #  EIGENMELDUNG (cron, nicht workflow_run – s. Kopf):
+      #  Befund -> Issue öffnen oder aktualisieren (Dedupe über Titel),
+      #  grün -> offene Meldung schließen. Gleiches bewährtes Muster
+      #  wie die Selbstmeldung des Qualitäts-Gates (18.09.2026).
+      # ------------------------------------------------------------
+      - name: Störung melden (Issue öffnen oder aktualisieren)
+        if: ${{ steps.messung.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITEL="$(python3 -c 'import sys; sys.path.insert(0, "scripts"); import alerting_heartbeat as ah; print(ah.ISSUE_TITEL)')"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          BEFUNDE="$(grep -E '^  ❌' herzschlag.log 2>/dev/null | sed 's/^  ❌ /- /' || true)"
+          TABELLE="$(sed -n '/^### /,/^---$/p' herzschlag.log 2>/dev/null | head -n 60 || true)"
+
+          BODY=$(cat <<EOF
+          ## ${TITEL}
+
+          **Run:** [${GITHUB_RUN_ID}](${RUN_URL}) · **Commit:** \`${GITHUB_SHA:0:8}\`
+
+          ${BEFUNDE:-Details im Run-Log.}
+
+          <details><summary>Zählung des Laufs (Fenster, Quoten, rote Läufe)</summary>
+
+          ${TABELLE}
+
+          </details>
+
+          Hintergrund und Messmethodik: \`docs/INCIDENT-2026-09-18-qualitaets-gate-zeitbombe.md\`
+          (Befund E: ~35 % der \`workflow_run\`-Ereignisse kamen 08.–18.09.2026 nie an).
+          Diese Meldung wird automatisch geschlossen, sobald die Zählung wieder
+          vollständig ist, und nach der Aufräum-Frist dauerhaft gelöscht.
+          EOF
+          )
+
+          gh label create auto-report --repo "$GITHUB_REPOSITORY" \
+            --color "d73a4a" --description "Automatisch erkannte Fehlermeldung" --force || true
+
+          EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            | jq -r --arg t "$TITEL" '.[] | select(.title == $t) | .number' | head -n 1)"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" \
+              --body "Erneuter Befund bei [Run ${GITHUB_RUN_ID}](${RUN_URL})."$'\n\n'"${BEFUNDE:-Details im Run-Log.}"
+            echo "→ Bestehendes Issue #${EXISTING} aktualisiert."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" --label auto-report --body "$BODY"
+            echo "→ Neues Issue erstellt."
+          fi
+
+      - name: Meldung schließen (Zustellung wieder vollständig)
+        if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITEL="$(python3 -c 'import sys; sys.path.insert(0, "scripts"); import alerting_heartbeat as ah; print(ah.ISSUE_TITEL)')"
+          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            | jq -r --arg t "$TITEL" '.[] | select(.title == $t) | .number'); do
+            gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
+              --comment "✅ Behoben: die Zustellung ist im Fenster wieder vollständig ([Run](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+            echo "→ Issue #$n geschlossen ($TITEL)."
+          done
