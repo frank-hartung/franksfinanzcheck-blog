@@ -18,13 +18,34 @@
 #  Selbstheilungs-Prinzip: der Doktor loescht selbst NICHTS ausser
 #  ueber die legitimen Guards. Er orchestriert, beweist, stoppt.
 #
-#  Aufruf:
-#    python3 scripts/blog_doctor.py            # Visite (alle Heilen)
-#    python3 scripts/blog_doctor.py --dry-run  # ohne Schreibung
-#    python3 scripts/blog_doctor.py --new-only # nur Geburtstage
+#  TRENNUNG Beweis/Visite (Folge-Reparatur 18.09.2026 aus dem
+#  Qualitäts-Gate-Vorfall): `--selftest` leitete bis dahin nur auf
+#  Trockenlauf um und lief die GANZE Visite mit – das ist ein Lauf,
+#  kein Test: Er schrieb den Bericht und data/*.jsonl (deshalb war
+#  der Doktor im Selftest-Runner als „Kettenleiter“ ausgenommen), und
+#  in der dunklen Vorversion heilte ein Beweis-Aufruf sogar den
+#  Live-Bestand (unit_guard/dash_guard legten 13 Artikel um, ein
+#  Agent hatte nur den Selbsttest sehen wollen; danach noch einmal
+#  10 Artikel + 60 gelöschte Deckbilder über den Dry-Run).
+#  Deshalb gilt jetzt:
+#    · `--selftest` ist ein REINER LOGIK-BEWEIS: keine Kette, kein
+#      Bericht, kein data/*.jsonl, kein einziger Schreibzugriff.
+#      Unsere Struktur-Garantie: main() verzweigt VOR der Visite
+#      (`laeuft_kette`), nicht in ihr. Die Laufzeit-Kopie steht im
+#      Selftest-Runner – jeder Selbsttest, der den Arbeitsbaum
+#      anfasst, wird dort zum Befund (Vertragsregel C15), und die
+#      Uhr-Probe beweist Datumsfreiheit.
+#    · die Visite hat eine eigene Flagge: `--visite` (ein nackter
+#      Aufruf bleibt aus Kompatibilität ebenfalls die Visite –
+#      README, Engine-Kette und Gewohnheit rufen ihn so).
 #
-#  Workflow: .github/workflows/blog-doktor.yml
-#  + Engine-Kette (new-only). — Frank-Beschluss 12.08.
+#  Aufruf (EIN Aufruf = EIN Modus):
+#    python3 scripts/blog_doctor.py --visite    # Visite (alle Heilen; = nackter Aufruf)
+#    python3 scripts/blog_doctor.py --dry-run   # Kette ohne Schreibung
+#    python3 scripts/blog_doctor.py --new-only  # nur Geburtstage
+#    python3 scripts/blog_doctor.py --selftest  # NUR Logik-Beweis (schreibt nie)
+#
+#  Workflow: blog-health-daily.yml (Umgebung) + Engine-Kette (new-only).
 # ============================================================
 
 import json
@@ -39,20 +60,44 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "DOKTOR-REPORT.md"
 HISTORY = ROOT / "data/doctor_history.jsonl"
 
+
+def beweis(argv) -> bool:
+    """`--selftest` = reiner Logik-Beweis. Die Kette wird in diesem Modus
+    strukturell nie erreicht – ein Beweis ist kein Eingriff, auch kein
+    getarnter („nur mal eben gucken“ durfte hier schon zweimal heilen)."""
+    return "--selftest" in argv
+
+
+def laeuft_kette(argv) -> bool:
+    """Die Kette läuft genau dann, wenn NICHT bewiesen wird.
+
+    Bis 18.09.2026 galt hier nur „trocken“: `--selftest` lief die ganze
+    Visite mit allen Seiteneffekten der Kette im Trockenlauf. Ein Beweis,
+    der das System anfasst, das er misst, ist keiner – deshalb endet der
+    Beweis-Pfad in main() VOR `besuch()`, nicht in ihm.
+    """
+    return not beweis(argv)
+
+
 def trocken(argv) -> bool:
     """Trockenlauf = die Kette schreibt nichts.
 
-    Der Selbsttest zaehlt seit 15.09.2026 dazu: main() fuehrt NACH dem Selbsttest die
-    ganze Kette aus, und ein nacktes `--selftest` reichte bis dahin, um Live-Artikel zu
-    heilen – real passiert, als ein Agent den Selbsttest verlangte: unit_guard und
-    dash_guard schrieben dabei 10 Artikel um (NBSP vor €, Gedankenstriche in
-    Zahlbereichen). Wer einen Beweis verlangt, darf keinen Eingriff bekommen.
+    Der Selbsttest zaehlt seit 15.09.2026 dazu (Zweitverteidigung, falls je
+    jemand die Modus-Trennung oberhalb bricht): main() fuehrte NACH dem
+    Selbsttest die ganze Kette aus, und ein nacktes `--selftest` reichte, um
+    Live-Artikel zu heilen – real passiert, als ein Agent den Selbsttest
+    verlangte: unit_guard und dash_guard schrieben dabei 10 Artikel um
+    (NBSP vor €, Gedankenstriche in Zahlbereichen). Wer einen Beweis
+    verlangt, darf keinen Eingriff bekommen.
     """
     return "--dry-run" in argv or "--selftest" in argv
 
 
 DRY = trocken(sys.argv)
 NEW_ONLY = "--new-only" in sys.argv
+# --visite ist die explizite Selbstbezeichnung des Standard-Modus –
+# dokumentiert, damit „die Visite hat eine eigene Flagge" nicht nur eine
+# Konvention bleibt. Kein eigener Zustand: visite == nackter Aufruf.
 
 # ------------------------------------------------------------
 # DIE WACHE-LISTE in kanonischer Reihenfolge (bewiesen 11./12.08.).
@@ -158,26 +203,50 @@ def selftest() -> list:
             fehler.append(f"  Dry-Run schreibt: {script} bekommt --fix weitergereicht!")
     if "--fix" not in kinder_args("dash_guard.py", ["--fix"], False, False):
         fehler.append("  Dry-Run-Regel kaputt: im scharfen Lauf fehlt --fix")
-    # Der Selbsttest-Lauf selbst ist ein Trockenlauf: er soll beweisen, nicht heilen.
+    # ------------------------------------------------------------
+    # MODUS-TRENNUNG (Folge-Reparatur 18.09.2026): Ein Beweis-Aufruf darf
+    # die Kette NIEMALS erreichen – nicht einmal trocken. Bis dahin lief
+    # `--selftest` als getarnter Trockenlauf der ganzen Visite mit und
+    # schrieb Bericht + data/*.jsonl; im Selftest-Runner war der Doktor
+    # deshalb der einzige begründet ausgenommene „Prüfer" im Haus.
+    # Die Wahrheitstabelle unten nagelt die Trennung fest; ihre
+    # Laufzeit-Kopie ist die C15-Arbeitsbaum-Wache des Runners.
+    # ------------------------------------------------------------
+    for argv, soll_kette, soll_trocken in (
+        ([], True, False),                          # nackt = Visite (Kompat)
+        (["--visite"], True, False),                # Visite als eigene Flagge
+        (["--new-only"], True, False),              # Geburten, scharf
+        (["--dry-run"], True, True),                # Kette, aber lesend
+        (["--new-only", "--dry-run"], True, True),  # Geburten lesend
+        (["--selftest"], False, True),              # DER Beweis: nie die Kette
+        (["--selftest", "--new-only"], False, True),
+        (["--selftest", "--dry-run"], False, True),
+        (["--selftest", "--visite"], False, True),  # Beweis schlägt Visite
+        (["--selftest", "--fix"], False, True),     # auch nicht mit Heil-Flag
+    ):
+        if laeuft_kette(argv) != soll_kette:
+            fehler.append(f"  Modus-Trennung kaputt: {argv!r} erreicht "
+                          f"{'die Kette' if laeuft_kette(argv) else 'die Kette nicht'} – "
+                          "ein Beweis darf die Kette nie erreichen, ein Aufruf ohne "
+                          "--selftest muss sie erreichen")
+        if trocken(argv) != soll_trocken:
+            fehler.append(f"  Trockenregel unverstaendlich: {argv!r} -> trocken="
+                          f"{trocken(argv)}, erwartet {soll_trocken}")
+    # Historisch dokumentierte Folge-Faelle der alten Semantik (dort blieb
+    # `--selftest` auf der Kette und schrieb im Trockenlauf):
     if not trocken(["--selftest"]):
-        fehler.append("  Selbsttest-Lauf ist nicht trocken: er wuerde die Kette schreiben")
-    if trocken([]) or not trocken(["--dry-run"]):
-        fehler.append("  Trockenregel unverstaendlich: scharfer oder Dry-Run-Lauf falsch klassifiziert")
+        fehler.append("  Zweitverteidigung fehlt: --selftest gilt nicht als trocken")
     for script, args, *_ in KETTE:
         if "--fix" in kinder_args(script, args, trocken(["--selftest"]), False):
             fehler.append(f"  Selbsttest schreibt: {script} bekommt --fix weitergereicht!")
     return fehler
 
 
-def main() -> None:
-    stf = selftest()
-    if stf:
-        print("🛑 DOKTOR-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert.")
-        print("   Keine Visite geschrieben/stattgegeben. Bitte blog_doctor.py pruefen:")
-        print("\n".join(stf))
-        sys.exit(2)
-    print(f"✅ Doktor-Selbsttest: {len(SELFTEST)} Faelle gruen, Kette {len(KETTE)} Wachen.")
-
+def besuch() -> None:
+    """Die Visite: Selbsttest als Einlass, dann die kanonische Kette,
+    Bericht (DOKTOR-REPORT.md) und Historie (data/doctor_history.jsonl).
+    Wird ausschließlich von main() erreicht – und dort nur, wenn NICHT
+    bewiesen wird (`laeuft_kette`)."""
     heute = date.today().isoformat()
     ergebnisse = []
     hard_stop = False
@@ -225,6 +294,31 @@ def main() -> None:
                              "hard_stop": hard_stop}, ensure_ascii=False) + "\n")
 
     sys.exit(2 if hard_stop else (1 if (find or fail) else 0))
+
+
+def main() -> None:
+    # WEICHE VOR DER VISITE: Ein Beweis-Aufruf betritt die Visite nie.
+    # (18.09.2026: bis dahin war `--selftest` nur ein Trockenlauf-Schalter
+    #  und lief die ganze Kette mit – ein Lauf, kein Test.)
+    if not laeuft_kette(sys.argv):
+        stf = selftest()
+        if stf:
+            print("🛑 DOKTOR-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert.")
+            print("   (Reiner Beweis: die Kette wurde nicht betreten, nichts geschrieben.)")
+            print("\n".join(stf))
+            sys.exit(2)
+        print(f"✅ Doktor-Selbsttest: {len(SELFTEST)} Faelle gruen, Kette {len(KETTE)} Wachen "
+              "– reiner Beweis, kein Eingriff, kein Schreibzugriff.")
+        return
+
+    stf = selftest()
+    if stf:
+        print("🛑 DOKTOR-SELBSTTEST FEHLGESCHLAGEN – Sabotage verhindert.")
+        print("   Keine Visite geschrieben/stattgegeben. Bitte blog_doctor.py pruefen:")
+        print("\n".join(stf))
+        sys.exit(2)
+    print(f"✅ Doktor-Selbsttest: {len(SELFTEST)} Faelle gruen, Kette {len(KETTE)} Wachen.")
+    besuch()
 
 
 if __name__ == "__main__":
