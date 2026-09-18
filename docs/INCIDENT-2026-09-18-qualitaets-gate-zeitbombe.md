@@ -1,6 +1,6 @@
 # Vorfall-Bericht: „Qualitäts-Gate (Build + interne Links)" rot auf main — Selbsttest als Zeitbombe
 
-**Datum:** 18.09.2026 · **Status:** behoben (dauerhaft, mit Wache und Eigenmeldung) · **Schweregrad:** mittel
+**Datum:** 18.09.2026 · **Status:** behoben, auf `main` seit 10:43 UTC (PR #311) · **Schweregrad:** mittel
 (Gate blind + Produktionslauf verbrannt, **kein** Live-Schaden an Artikeln, Links oder Builds)
 
 ## Kurzfassung
@@ -256,6 +256,31 @@ Verdrahtungs-Test noch die alte Bash-Liste suchte (Befund F).
 5. **5 Entwürfe im Reserve-Bestand haben eine geklebte Frontmatter-Grenze**
    (`---Text`, Klasse `fm-grenze`) — von `draft_triage` korrekt als BLOCKIERT
    gemeldet, also kein neuer Befund, aber offene Redaktionsarbeit.
+
+## Abschluss — Nachweis im Produktivbetrieb
+
+Gemergt nach `main` als [PR #311](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/311)
+(Rebase-Merge, linearer Verlauf wie im Rest der Historie): `58f2b4b`, `d3d83a6`,
+`5584ac8`.
+
+| Prüfung | Lauf | Ergebnis |
+|---|---|---|
+| Qualitäts-Gate auf `main` (push) | [35336071070](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35336071070) | ✅ success — alle Schritte, Selbsttest-Meldung blieb `skipped`, „Meldung schließen" lief |
+| Qualitäts-Gate auf dem PR | 35333233969 · 35334510801 · 35335709130 | ✅ success (3 ×) |
+| Publication reliability regression tests | 35335709110 | ✅ success — 271 Tests, vorher 270/1 (Befund F) |
+| Deploy auf GitHub Pages | 35336071192 | ✅ success — kein Live-Schaden |
+| Content-Reserve **Stufe 5**, lokal Zeile für Zeile nachgebaut | — | ✅ `--selftest` Exit 0 · `--md` Exit 0 (47 Zeilen) · `--check-decisions` von `\|\| echo` abgefangen · Arbeitsbaum unberührt |
+
+Issue [#310](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/310)
+(Content-Reserve Stufe 5) ist damit gegenstandslos: dieselbe Wurzel (Befund A),
+dieselbe Reparatur, lokal im Original-Wortlaut der Stufe belegt. Der nächste
+planmäßige Lauf bestätigt es produktiv; schlägt er erneut fehl, öffnet das
+Alerting eine frische Meldung — und das Gate meldet sich unabhängig davon selbst.
+
+Offen und **nicht** Teil dieses Laufs: Folge-Befund 1 (Integritäts-Lock im HARD
+STOP — Neu-Signatur ist Betreiber-Entscheidung) und Folge-Befund 4
+(`workflow_run`-Zustellung — Vorschlag „Alerting-Herzschlag"). Beide brauchen
+eine Entscheidung, keine weitere Diagnose.
 
 ## Selbst prüfen
 
