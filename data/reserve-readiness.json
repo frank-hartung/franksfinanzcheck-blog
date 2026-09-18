@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 8,
-  "pool_size": 8,
-  "generated_at": "2026-09-17T08:52:55Z",
+  "ready": 9,
+  "pool_size": 9,
+  "generated_at": "2026-09-18T08:30:40Z",
   "candidates": [
     {
       "slug": "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
@@ -17,36 +17,6 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-15-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "ready": true,
-      "sha256": "c3a48cb307d54fd35a49b1c7c6537be4d713c6bef030f65f929288d28986adef",
-      "score": 0.932,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-15-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
-      "ready": true,
-      "sha256": "656c3403df28f4a7a52735dc927ad200b9a7a2e639e8d514b670d39bf31932b7",
-      "score": 0.944,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
       }
     },
     {
@@ -65,51 +35,6 @@
       }
     },
     {
-      "slug": "2026-09-17-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
-      "ready": true,
-      "sha256": "921c97729f5c51f93518de9208e5212603525d685ad3377b872b5b873ee1f66e",
-      "score": 0.934,
-      "parts": {
-        "spelling": 0.6799999999999999,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-17-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
-      "ready": true,
-      "sha256": "01b2c724a6f95fad1f0e52f4daeaa6fe3daf7c274f266ad898ea0d25e9161568",
-      "score": 0.95,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-17-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "8d58a410e9d04e55e10a5c34805653a9ecc605524d3629bd17275294ae8d4e39",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.78,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-09-17-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
       "ready": true,
       "sha256": "125c460f85e4b979b218867ba64873db85a7dc7b1a6a8b6f97a61abf14f2befc",
@@ -122,6 +47,96 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-18-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
+      "ready": true,
+      "sha256": "ff6eaa0a77ba2cbd776bd30ff520da5a2efdce65bf18537018b4ab0d9234f3fd",
+      "score": 0.934,
+      "parts": {
+        "spelling": 0.6799999999999999,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-18-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
+      "ready": true,
+      "sha256": "63362b4e64b47aa19ec943b2c15feb455e3cc71a412dcc2fb8b62205ae7a7fd1",
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-18-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+      "ready": true,
+      "sha256": "98244d99f5cefaf45f5747aca5f4cab28cdd1a052e52f1e46b47e502cf2c15a9",
+      "score": 0.946,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.78,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-18-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "ready": true,
+      "sha256": "f3a6da4e2077efe4a12b7c97a837ddceff36eff00dde05a7915b4658025520da",
+      "score": 0.936,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-18-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "ready": true,
+      "sha256": "4a781579a429ebe3cdc76f35f25132030aa2f7d14134bf83ef4790dd341c9731",
+      "score": 0.984,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-18-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
+      "ready": true,
+      "sha256": "503d6d3585512f81710fe09406ef2f54065872edcaf6ba516d89de2af9ab53e9",
+      "score": 0.926,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
       }
     }
   ]
