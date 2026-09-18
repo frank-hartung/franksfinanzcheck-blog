@@ -19,7 +19,7 @@ Nutzung:
     python3 scripts/check_uniqueness.py            # alle Artikel prüfen
     python3 scripts/check_uniqueness.py --strict   # strengere Schwelle (5-Wort-Phrasen)
     python3 scripts/check_uniqueness.py --sameday --fix  # Geburts-Modus (Engine)
-    python3 scripts/check_uniqueness.py --selftest       # nur Sabotage-Schutz (Wachen-Loop)
+    python3 scripts/check_uniqueness.py --selftest       # nur Sabotage-Schutz (Selbsttest-Runner)
 """
 import os
 import re
@@ -246,7 +246,8 @@ def main():
         print("\n".join(fehler))
         sys.exit(2)
     print(f"✅ Selbsttest: {len(SELFTEST_SAMEDAY)} Twin-Faelle + Slug-/Gram-Report-Pinne stimmen.")
-    # --selftest ist der Eintrittspunkt des Wachen-Loops (link-check.yml) und von
+    # --selftest ist der Eintrittspunkt des Selbsttest-Runners
+    # (scripts/selftest_runner.py, läuft im Qualitäts-Gate link-check.yml) und von
     # governance_contract C6: hier ends the run – der Selbsttest prüft die Logik,
     # nicht den Bestand. Sonst hinge ein grüner Selbsttest davon ab, ob gerade
     # jemand zwei Artikel ähnlich geschrieben hat (und ein roter von einem Fund,
