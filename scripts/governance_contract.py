@@ -102,7 +102,13 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # rot, weil seine Fixtures von der echten Wanduhr, die Erwartung aber
           # von einem eingefrorenen Testdatum abhingen. Beide Wachen zusammen
           # machen „läuft an jedem Kalendertag" beweisbar statt gehofft.
-          "selftest_clock.py", "selftest_runner.py"]
+          "selftest_clock.py", "selftest_runner.py",
+          # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 2 des
+          # Vorfall-Berichts): Beweis und Visite des Doktors sind jetzt
+          # getrennt – sein --selftest ist ein reiner Logik-Beweis (kein
+          # Bericht, kein data/*.jsonl, keine Kette) und gehört damit ins
+          # vertragliche Minimum statt in die Runner-Ausnahme.
+          "blog_doctor.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

@@ -84,14 +84,17 @@ ZEITDECKEL = 240
 # und dass die Ausnahme tatsächlich existiert – eine Ausnahme für ein Skript, das
 # es nicht mehr gibt, ist eine stille Lücke.
 AUSNAHMEN = {
-    "blog_doctor.py":
-        "Kettenleiter: sein `--selftest` läuft die ganze Visite (24 Wachen im "
-        "Trockenlauf) und schreibt data/*.jsonl – das ist ein Lauf, kein "
-        "Selbsttest. Heimat: blog-health-daily.yml / content-engine-v2.yml.",
     "selftest_runner.py":
         "Dieser Runner: sein Selbsttest baut eigene Probe-Skripte und würde sich "
         "hier selbst aufrufen (Rekursion). Läuft als eigener Schritt im Gate.",
 }
+# blog_doctor.py stand hier bis zum 18.09.2026 als begründete Ausnahme
+# („Kettenleiter: sein --selftest läuft die ganze Visite und schreibt
+# data/*.jsonl“). Die Folge-Reparatur hat den Beweis von der Visite getrennt:
+# Sein --selftest ist jetzt ein reiner Logik-Beweis ohne Schreibzugriff – der
+# Doktor läuft hier deshalb ganz normal mit (inklusive Uhr-Proben), und jeder
+# Rückfall in „der Selbsttest heilt/schreibt“ wird von der C15-Wache unten
+# zum Befund.
 
 
 # Entdeckungs-Kennung: das Argument QUOTIERT, also dort, wo es ein
