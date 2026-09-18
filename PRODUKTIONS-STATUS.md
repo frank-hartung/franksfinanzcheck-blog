@@ -1,14 +1,14 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-18 11:11 UTC  
+**Stand:** 2026-09-18 17:40 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-18): 2 Artikel – Ziel erfüllt. – Bestand: 2 förderfähig in der Re-Queue, 4 von Gates gehalten (ältester 2 Tage: quality-score: 0.83 < 0.85; finale Freigabe fehlt)
+**Befund:** Letzter Publikationstag (2026-09-18): 3 Artikel – Ziel erfüllt. – Bestand: 2 förderfähig in der Re-Queue, 4 von Gates gehalten (ältester 2 Tage: publish-gate: Zeichenlänge (check_length.py) nicht bestanden)
 
 | Kennzahl | Wert |
 |---|---|
 | Heute | 2026-09-18 (Freitag) |
 | Publikationstag heute | ja |
-| Artikel letzter Publikationstag (2026-09-18) | 2 |
+| Artikel letzter Publikationstag (2026-09-18) | 3 |
 | Letzter Artikel überhaupt | 2026-09-18 (0 Tage her) |
 | Live-Artikel gesamt | 37 |
 | Förderfähig in der Re-Queue | 2 |
