@@ -1,18 +1,18 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-17 22:52 UTC  
+**Stand:** 2026-09-18 11:11 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-16): 3 Artikel – Ziel erfüllt. – Bestand: 7 förderfähig in der Re-Queue, 1 von Gates gehalten (ältester 1 Tage: quality-score: 0.79 < 0.85; finale Freigabe fehlt)
+**Befund:** Letzter Publikationstag (2026-09-18): 2 Artikel – Ziel erfüllt. – Bestand: 2 förderfähig in der Re-Queue, 4 von Gates gehalten (ältester 2 Tage: quality-score: 0.83 < 0.85; finale Freigabe fehlt)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-09-17 (Donnerstag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-09-16) | 3 |
-| Letzter Artikel überhaupt | 2026-09-16 (1 Tage her) |
-| Live-Artikel gesamt | 35 |
-| Förderfähig in der Re-Queue | 7 |
-| Von Gates gehalten (braucht Korrektur) | 1 |
+| Heute | 2026-09-18 (Freitag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-09-18) | 2 |
+| Letzter Artikel überhaupt | 2026-09-18 (0 Tage her) |
+| Live-Artikel gesamt | 37 |
+| Förderfähig in der Re-Queue | 2 |
+| Von Gates gehalten (braucht Korrektur) | 4 |
 | Mindestziel/Tag | 2 |
 
 _Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._
