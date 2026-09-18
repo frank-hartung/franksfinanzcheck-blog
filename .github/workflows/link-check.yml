@@ -5,11 +5,20 @@
 #  auf DEFEKTE INTERNE LINKS geprüft (Rendering-Ebene – erkennt auch
 #  Theme-Links, /go/-Weiterleitungen, Bilder und Menü-Links).
 #
-#  Bei kaputten Links  →  Issue "🔗 Defekte interne Links gefunden"
-#                          (Label auto-report, ohne Duplikate)
-#  Bei sauberem Build  →  offenes Link-Issue wird automatisch geschlossen
+#  Meldet (Label auto-report, ohne Duplikate, automatisch geschlossen bei Grün):
+#    · kaputte interne Links   → "🔗 Defekte interne Links gefunden"
+#    · Schema-/SEO-Funde       → "🧠 Schema-/SEO-Gate meldet Funde"
+#    · roter Selbsttest/Vertrag/Build
+#                              → "🚨 Qualitäts-Gate rot (Selbsttests, Vertrag
+#                                 oder Build)"   ← seit 18.09.2026, weil das
+#                                 zentrale Fehler-Alerting für die nächtlichen
+#                                 Läufe dieses Gates nachweislich nicht griff
+#                                 (17./18.09. rot – ohne eine einzige Meldung).
 #
-#  Läuft: bei Pull Requests, täglich um 05:00 UTC und manuell.
+#  Läuft: bei Push auf main/master, bei Pull Requests, täglich um 01:15 UTC
+#  (03:15 MESZ) und manuell. Die Kopfzeile nannte lange „05:00 UTC" – eine
+#  veraltete Dokumentation ist dieselbe Fehlerklasse wie eine veraltete
+#  Wachen-Liste: Sie beschreibt nicht, was läuft. Maßgeblich ist der Cron unten.
 #  (Affiliate-/Extern-/Anker-Links werden bewusst NICHT geprüft.)
 # ============================================================
 name: Qualitäts-Gate (Build + interne Links)
@@ -47,33 +56,47 @@ jobs:
       - name: Python-Abhängigkeiten (für Governance-Skripte)
         run: python3 -m pip install -q --break-system-packages pyyaml pillow 2>/dev/null || python3 -m pip install -q pyyaml pillow 2>/dev/null || true
 
-      - name: Governance-Selbsttests (alle Wachen)
-        # Die Zahl im Schritt-Namen war fix ("11 Wachen") und damit bereits
-        # überholt, als die elfte Wache dazukam – eine Wache, die nicht läuft,
-        # weil sie im Loop vergessen wurde, ist der teurere Fehler. Deshalb:
-        # Liste als Variable, Anzahl wird aus der Liste gebildet.
-        # schema_seo_gate + generate_pwa_icons sind neu (11.09.2026).
+      - name: Governance-Selbsttests (alle Wachen – entdeckt, uhrfest, schreibfrei)
+        # ------------------------------------------------------------
+        #  WARUM hier keine Bash-Liste mehr steht
+        #  (18.09.2026 · Run 35312783057 · Commit 83526d5 · Gate rot auf main)
+        #
+        #  1. Die Liste war eine HANDKOPIE des Regelwerks – und bereits still
+        #     veraltet: readability_check, pinterest_auth, social_studio,
+        #     alert_router und affiliate_integrity_gate standen in
+        #     governance_contract.GUARDS, liefen im Gate aber nicht mehr mit.
+        #     Der Kommentar über der alten Liste warnte wortwörtlich vor genau
+        #     diesem Fall („eine Wache, die nicht läuft, weil sie im Loop
+        #     vergessen wurde, ist der teurere Fehler").
+        #  2. `draft_triage --selftest` war sechs Tage nach dem Einbau rot, ohne
+        #     dass jemand den Code angefasst hätte: Fixtures von der echten
+        #     Wanduhr, Erwartung aus einem eingefrorenen Testdatum. Dieselbe
+        #     Bombe lag scharf in `audio_coverage_check` (Verfallsdatum
+        #     24.12.2026). Ein Selbsttest, der die Wanduhr liest, ist kein Test,
+        #     sondern eine Verabredung mit dem Kalender.
+        #
+        #  Der Runner (scripts/selftest_runner.py, selbst selbsttestend)
+        #    · entdeckt die Wachen im Dateibaum statt sie abzutippen,
+        #    · gleicht mit governance_contract.GUARDS ab (eine Quelle),
+        #    · läuft jeden Selbsttest zusätzlich unter einer um 97 und 1461 Tage
+        #      VORGESTELLTEN Uhr → Datums-Abhängigkeiten kippen am Tag des
+        #      Einbaus, nicht an einem Feiertag in drei Monaten,
+        #    · führt nur Skripte, die `--selftest` WIRKLICH implementieren
+        #      (eine bloße Erwähnung im Kommentar würde die Standard-Aktion
+        #      starten – real passiert: publish_gate stufte einen LIVE-Artikel
+        #      auf draft herab),
+        #    · meldet es als Befund, wenn ein Selbsttest in den Arbeitsbaum
+        #      schreibt (Vertragsregel C15: ein Prüf-Aufruf heilt nicht).
+        #  Laufzeit: ~50 s für 74 Wachen + 148 Uhr-Proben.
+        # ------------------------------------------------------------
         run: |
-          WACHEN="editorial_scorecard cwv_guard secrets_age_guard decay_radar \
-                  governance_gate governance_contract umami_clicks click_attribution \
-                  awin_provisions pinterest_perf_feedback pinterest_token \
-                  schema_seo_gate generate_pwa_icons report_hygiene \
-                  live_policy_guard draft_triage check_uniqueness audio_coverage_check \
-                  newsletter_digest"
-          fail=0
-          n=0
-          for s in $WACHEN; do
-            n=$((n+1))
-            if ! python3 "scripts/$s.py" --selftest >/tmp/st.log 2>&1; then
-              echo "::error::scripts/$s --selftest fehlgeschlagen"
-              tail -n 25 /tmp/st.log
-              fail=1
-            fi
-          done
-          echo "Selbsttests gelaufen: $n Wachen"
-          exit $fail
+          set -o pipefail
+          python3 scripts/selftest_runner.py | tee selbsttests.log
 
-      - name: Governance-Vertrag C1–C12 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus)
+      # Namens-Nachzug 18.09.2026: Der Vertrag umfasst längst C1–C16 (der Schritt
+      # hieß noch „C1–C12"). Ein Schritt-Name, der den Inhalt untertreibt, ist
+      # dieselbe Klasse wie eine Wachen-Liste, die nicht mehr stimmt.
+      - name: Governance-Vertrag C1–C16 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus)
         run: python3 scripts/governance_contract.py --quick
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
@@ -174,16 +197,86 @@ jobs:
             echo "→ Neues Issue erstellt."
           fi
 
-      
-      - name: Meldung schließen (alles grün)
-        # Beide Melder werden geschlossen, wenn BEIDE Prüfer grün sind – sonst
-        # bleibt eine erledigte Meldung offen stehen und das nächste Gate-
-        # Ergebnis wirkt älter, als es ist.
-        if: steps.links.outcome == 'success' && steps.schema.outcome == 'success'
+
+      # ------------------------------------------------------------
+      #  EIGENE FEHLER-MELDUNG DES GATES (18.09.2026)
+      #
+      #  Befund: Dieses Gate ist in zwei aufeinanderfolgenden Nächten rot
+      #  gewesen – 17.09. 06:09:16 UTC (Run 35188605416) und 18.09. 05:56:22 UTC
+      #  (Run 35312783057) – und hat in BEIDEN Fällen keinen einzigen
+      #  Fehler-Alerting-Lauf ausgelöst. Es entstand kein Issue, niemand wurde
+      #  informiert; der Betreiber erfuhr es durch Nachschauen. Der Vergleich
+      #  zeigt, dass es nicht am `schedule`-Auslöser liegt: Uptime-Monitor
+      #  (ebenfalls schedule) hat am 18.09. 01:32:43 sehr wohl einen
+      #  Alerting-Lauf ausgelöst. Das zentrale Alerting hängt damit an einem
+      #  Namens-Matching über `workflow_run`, das für dieses Gate nicht greift –
+      #  und ein Gate, dessen Rot niemandem gemeldet wird, ist kein Gate.
+      #
+      #  Deshalb meldet sich das Gate jetzt SELBST, unabhängig von jedem
+      #  Fremd-Workflow: gleicher Dedupe-/Schließ-Pfad wie die beiden
+      #  Fach-Meldungen unten (Label auto-report, aktualisieren statt duplizieren,
+      #  schließen bei Grün). Bewusst NICHT bei Link-/Schema-Funden – dafür gibt
+      #  es die präziseren Meldungen, doppelt wäre Lärm.
+      # ------------------------------------------------------------
+      - name: Gate-Fehlschlag melden (Selbsttests, Vertrag oder Build)
+        if: ${{ failure() && steps.links.outcome != 'failure' && steps.schema.outcome != 'failure' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          for TITLE in "🔗 Defekte interne Links gefunden" "🧠 Schema-/SEO-Gate meldet Funde"; do
+          TITEL="🚨 Qualitäts-Gate rot (Selbsttests, Vertrag oder Build)"
+          # Welche Schritte sind wirklich gefallen? (API statt Raterei)
+          SCHRITTE="$(gh run view "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --json jobs --jq '.jobs[].steps[] | select(.conclusion=="failure") | .name' \
+            2>/dev/null | paste -sd', ' - || true)"
+          FUNDE="$(grep -E '❌|🛑|::error::' selbsttests.log 2>/dev/null | head -n 40 || true)"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          BODY=$(cat <<EOF
+          ## ${TITEL}
+
+          **Run:** [${GITHUB_RUN_ID}](${RUN_URL})
+          **Commit:** \`${GITHUB_SHA:0:8}\` · **Branch:** \`${GITHUB_REF_NAME}\`
+          **Gefallene Schritte:** ${SCHRITTE:-siehe Run-Log}
+
+          \`\`\`
+          ${FUNDE:-Details im Run-Log oben.}
+          \`\`\`
+
+          Dieses Gate meldet sich selbst, weil das zentrale Fehler-Alerting für
+          seine nächtlichen Läufe nachweislich nicht ausgelöst wurde (17./18.09.2026).
+          Die Meldung wird automatisch geschlossen, sobald das Gate wieder grün ist.
+          EOF
+          )
+
+          gh label create auto-report --repo "$GITHUB_REPOSITORY" \
+            --color "d73a4a" --description "Automatisch erkannte Fehlermeldung" --force || true
+
+          EXISTING="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
+            --json number,title \
+            | jq -r --arg t "$TITEL" '.[] | select(.title == $t) | .number' | head -n 1)"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" \
+              --body "Erneuter Fehlschlag bei [Run ${GITHUB_RUN_ID}](${RUN_URL}) (Commit \`${GITHUB_SHA:0:8}\`, Schritte: ${SCHRITTE:-unbekannt})."
+            echo "→ Bestehendes Issue #${EXISTING} aktualisiert."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" --label auto-report --body "$BODY"
+            echo "→ Neues Issue erstellt."
+          fi
+
+      - name: Meldung schließen (alles grün)
+        # Alle Melder werden geschlossen, wenn der Job grün ist – sonst bleibt
+        # eine erledigte Meldung offen stehen und das nächste Gate-Ergebnis wirkt
+        # älter, als es ist. `success()` ist strenger als die alte Bedingung
+        # (beide Prüfer grün) und umfasst ausdrücklich auch Selbsttests, Vertrag
+        # und Build: Ein Gate, das vorn rot ist und hinten nicht lief, darf keine
+        # alte „erledigt"-Meldung stehen lassen.
+        if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for TITLE in "🔗 Defekte interne Links gefunden" "🧠 Schema-/SEO-Gate meldet Funde" \
+                       "🚨 Qualitäts-Gate rot (Selbsttests, Vertrag oder Build)"; do
             for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
               --json number,title \
               | jq -r --arg t "$TITLE" '.[] | select(.title == $t) | .number'); do

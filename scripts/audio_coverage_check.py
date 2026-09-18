@@ -19,13 +19,15 @@ Bestands mit den Tonspuren, die in einem Ort liegen, den man angeben kann:
     python3 scripts/audio_coverage_check.py --dir public/audio/articles
     python3 scripts/audio_coverage_check.py --strict             # Exit 1 bei Lücken
     python3 scripts/audio_coverage_check.py --json
-    python3 scripts/audio_coverage_check.py --selftest           # 5 Fälle, ohne Netz
+    python3 scripts/audio_coverage_check.py --selftest           # 5 Fälle × 5 Testdaten,
+                                                                # ohne Netz, unter Uhr-Zwang
 
 Exit: 0 = vollständig oder ohne Nachweis (Hinweis) · 1 = Lücke (--strict) · 2 = Fehler
 """
 from __future__ import annotations
 
 import argparse
+import datetime
 import glob
 import json
 import os
@@ -53,10 +55,14 @@ def assert_worktree(root: str) -> None:
         raise SystemExit(f"❌ audio_coverage_check: {root} ist kein Git-Worktree.")
 
 
-def live_artikel(root: str) -> list[str]:
-    """Slugs der Artikel, die Hugo wirklich baut (draft:false, nicht in Zukunft)."""
-    import datetime
-    heute = datetime.date.today()
+def live_artikel(root: str, heute: "datetime.date | None" = None) -> list[str]:
+    """Slugs der Artikel, die Hugo wirklich baut (draft:false, nicht in Zukunft).
+
+    `heute` ist injizierbar: Ohne diese Zeile hing der Selbsttest an der echten
+    Wanduhr und hatte ein Verfallsdatum (24.12.2026). Produktion ruft weiter
+    ohne Argument auf – dann gilt der echte Kalendertag.
+    """
+    heute = heute or datetime.date.today()
     out = []
     for idx in sorted(glob.glob(os.path.join(root, "content", "posts", "*", "index.md"))):
         with open(idx, encoding="utf-8") as fh:
@@ -106,9 +112,9 @@ def spuren_von_ref(root: str, ref: str, vorpfad: str = "audio/articles") -> tupl
     return _liste(root, ref, vorpfad)
 
 
-def auswerten(root: str, ref: str, dire: str) -> dict:
+def auswerten(root: str, ref: str, dire: str, heute=None) -> dict:
     """→ {"artikel": [...], "spuren": set, "quelle": str, "fehlend": [...]}"""
-    artikel = live_artikel(root)
+    artikel = live_artikel(root, heute)
     if dire:
         spuren, quelle = spuren_von_dir(os.path.join(root, dire)), dire
     elif ref:
@@ -145,35 +151,52 @@ def tabelle(res: dict) -> str:
 
 
 # ---------------------------------------------------------------------- Selbsttest
-def _selftest() -> int:
+# DETERMINISMUS-VERTRAG (Reparatur 18.09.2026, gleiche Klasse wie draft_triage):
+# Die Fixtures hingen mit FESTEN Daten („2026-12-24-c" = Zukunft) an der echten
+# Wanduhr. Am 24.12.2026 wäre dieser Selbsttest gekippt – und mit ihm das
+# Qualitäts-Gate, die Governance (C6) und die Content-Reserve, jeden Tag, ohne
+# eine einzige Code-Änderung. Deshalb: Fälle relativ zum Testdatum, Uhr-Zwang im
+# Modus `strikt` und dasselbe Szenario unter fünf Testdaten.
+PROBETAGE = (
+    datetime.date(2026, 9, 12),   # Ursprung: an diesem Tag war der Test grün
+    datetime.date(2026, 12, 23),  # einen Tag vor dem alten Verfallsdatum
+    datetime.date(2026, 12, 24),  # Heiligabend 2026 – hier wäre er gekippt
+    datetime.date(2028, 2, 29),   # Schalttag
+    datetime.date(2031, 5, 4),    # vier Jahre voraus
+)
+
+
+def _szenario(heute: "datetime.date") -> list:
+    """Ein Bestand, RELATIV zu `heute` gebaut. Gibt die Abweichungen zurück."""
     import shutil
     import tempfile
     errs: list[str] = []
     tmp = tempfile.mkdtemp(prefix="audio-cov-selftest-")
     try:
         root = os.path.join(tmp, "repo")
-        os.makedirs(os.path.join(root, "content", "posts", "2026-08-01-a", "audio"),
+        versatz = {"a": -42, "b": -41, "c": +97, "d": -40}
+        slug = {k: f"{(heute + datetime.timedelta(days=v)).isoformat()}-{k}"
+                for k, v in versatz.items()}
+        os.makedirs(os.path.join(root, "content", "posts", slug["a"], "audio"),
                     exist_ok=True)
-        os.makedirs(os.path.join(root, "content", "posts", "2026-08-02-b"), exist_ok=True)
-        os.makedirs(os.path.join(root, "content", "posts", "2026-12-24-c"), exist_ok=True)
-        os.makedirs(os.path.join(root, "content", "posts", "2026-08-03-d"), exist_ok=True)
-        for slug, draft, datum in (("2026-08-01-a", "false", "2026-08-01"),
-                                   ("2026-08-02-b", "false", "2026-08-02"),
-                                   ("2026-12-24-c", "false", "2026-12-24"),
-                                   ("2026-08-03-d", "true", "2026-08-03")):
-            with open(os.path.join(root, "content", "posts", slug, "index.md"),
+        for k in ("b", "c", "d"):
+            os.makedirs(os.path.join(root, "content", "posts", slug[k]), exist_ok=True)
+        for k, draft in (("a", "false"), ("b", "false"), ("c", "false"), ("d", "true")):
+            datum = (heute + datetime.timedelta(days=versatz[k])).isoformat()
+            with open(os.path.join(root, "content", "posts", slug[k], "index.md"),
                       "w", encoding="utf-8") as fh:
-                fh.write(f"---\ntitle: {slug}\ndate: {datum}T09:00:00Z\ndraft: {draft}\n---\nText\n")
+                fh.write(f"---\ntitle: {slug[k]}\ndate: {datum}T09:00:00Z\n"
+                         f"draft: {draft}\n---\nText\n")
         d = os.path.join(root, "public", "audio", "articles")
         os.makedirs(d, exist_ok=True)
-        open(os.path.join(d, "2026-08-01-a.mp3"), "w").write("x")
-        open(os.path.join(d, "2026-08-01-a.timemap.json"), "w").write("{}")
+        open(os.path.join(d, slug["a"] + ".mp3"), "w").write("x")
+        open(os.path.join(d, slug["a"] + ".timemap.json"), "w").write("{}")
 
         # 1) Fundort im Build: 1 von 2 (Zukunfts-C zählt nicht, Draft-D auch nicht)
-        res = auswerten(root, "", "public/audio/articles")
-        if res["artikel"] != ["2026-08-01-a", "2026-08-02-b"]:
+        res = auswerten(root, "", "public/audio/articles", heute=heute)
+        if res["artikel"] != [slug["a"], slug["b"]]:
             errs.append(f"Live-Artikel falsch: {res['artikel']}")
-        if res["fehlend"] != ["2026-08-02-b"]:
+        if res["fehlend"] != [slug["b"]]:
             errs.append(f"Lücke nicht erkannt: {res['fehlend']}")
         if "1/2 Live-Artikel" not in tabelle(res):
             errs.append("Tabelle meldet die falsche Quote")
@@ -185,8 +208,8 @@ def _selftest() -> int:
             errs.append("fehlender Nachweis wird als Lücke verkauft")
 
         # 3) vollständig => friedlich
-        open(os.path.join(d, "2026-08-02-b.mp3"), "w").write("x")
-        res3 = auswerten(root, "", "public/audio/articles")
+        open(os.path.join(d, slug["b"] + ".mp3"), "w").write("x")
+        res3 = auswerten(root, "", "public/audio/articles", heute=heute)
         if res3["fehlend"]:
             errs.append(f"nach dem Ziehen immer noch Lücke: {res3['fehlend']}")
         if "✅" not in tabelle(res3):
@@ -195,20 +218,20 @@ def _selftest() -> int:
         # 4) Ref-Modus: Tonspuren liegen auf dem Pages-Zweig, nicht im Quellbaum
         spuren_dir = os.path.join(root, "audio", "articles")
         os.makedirs(spuren_dir, exist_ok=True)
-        with open(os.path.join(spuren_dir, "2026-08-01-a.mp3"), "w") as fh:
+        with open(os.path.join(spuren_dir, slug["a"] + ".mp3"), "w") as fh:
             fh.write("x")
         for cmd in (("init", "-q", "."), ("config", "user.email", "t@x"),
                     ("config", "user.name", "t"), ("add", "-A"),
                     ("commit", "-q", "-m", "basis"),
                     ("checkout", "-q", "--orphan", "gh-pages"),
-                    ("add", "-f", "audio/articles/2026-08-01-a.mp3"),
+                    ("add", "-f", f"audio/articles/{slug['a']}.mp3"),
                     ("commit", "-q", "-m", "audio")):
             _git(root, *cmd)
         spuren, quelle = spuren_von_ref(root, "gh-pages")
-        if spuren != {"2026-08-01-a"}:
+        if spuren != {slug["a"]}:
             errs.append(f"Ref-Auslese liefert {spuren} (Quelle {quelle})")
-        res4 = auswerten(root, "gh-pages", "")
-        if res4["fehlend"] != ["2026-08-02-b"]:
+        res4 = auswerten(root, "gh-pages", "", heute=heute)
+        if res4["fehlend"] != [slug["b"]]:
             errs.append(f"Ref-Modus rechnet falsch: {res4}")
 
         # 5) Worktree-Sperre: fremdes Verzeichnis wird abgewiesen (Fall 7)
@@ -222,12 +245,31 @@ def _selftest() -> int:
         errs.append(f"Ausführung: {exc.__class__.__name__}: {exc}")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    if errs:
+    return errs
+
+
+def _selftest() -> int:
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from selftest_clock import MITTAG, MODUS_STRIKT, uhr  # type: ignore
+    except Exception as exc:  # noqa: BLE001
+        print(f"🛑 audio_coverage_check-Selbsttest FEHLGESCHLAGEN:\n"
+              f"  - scripts/selftest_clock.py nicht nutzbar ({exc.__class__.__name__}) "
+              "– ohne Uhr-Zwang wäre dieser Selbsttest wieder eine Verabredung "
+              "mit dem Kalender (Verfallsdatum 24.12.2026).")
+        return 2
+    fehler: list[str] = []
+    for tag in PROBETAGE:
+        with uhr(datetime.datetime.combine(tag, MITTAG, tzinfo=datetime.timezone.utc),
+                 MODUS_STRIKT, module=[sys.modules[__name__]]):
+            fehler += [f"[Testdatum {tag.isoformat()}] {e}" for e in _szenario(tag)]
+    if fehler:
         print("🛑 audio_coverage_check-Selbsttest FEHLGESCHLAGEN:")
-        for e in errs:
+        for e in fehler:
             print("  -", e)
         return 2
-    print("✅ Audio-Abdeckungs-Selbsttest: 5 Fälle grün (Build, Ref, Hinweis, Sperre).")
+    print(f"✅ Audio-Abdeckungs-Selbsttest: 5 Fälle × {len(PROBETAGE)} Testdaten grün "
+          "(Build, Ref, Hinweis, Sperre, Uhr-Zwang strikt).")
     return 0
 
 
