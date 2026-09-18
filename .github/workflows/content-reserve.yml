@@ -137,24 +137,28 @@ jobs:
       # Jeder Heiler, der den Pool umbaut, muss erst seinen Selbsttest
       # bestehen (gleicher Kodex wie die Live-Engine): ein kaputter
       # Gate-/Heiler darf nicht still weiterarbeiten.
-      - name: Selbsttests der Reserve-Produktionslinie
+      #
+      # 18.09.2026 (Folge-Befund 3 des Qualitäts-Gate-Vorfalls): Hier stand
+      # dieselbe HANDKOPIERTE Selbsttest-Liste wie vorher im Qualitäts-Gate –
+      # und genau diese Fehlerklasse hatte das Gate sechs Tage lang rot
+      # werden lassen (Befund C: eine abgetippte Wachen-Liste altert still).
+      # Deshalb läuft jetzt auch hier der Runner: ER ENTDECKT die Selbsttests
+      # statt sie abzutippen, gleicht mit governance_contract.GUARDS ab
+      # (eine Quelle), legt jeden Selbsttest zusätzlich unter eine um 97 und
+      # 1461 Tage vorgestellte Uhr (Datumsbomben kippen am Tag des Einbaus)
+      # und meldet es als Befund, wenn ein Selbsttest den Arbeitsbaum
+      # schreibt (C15). Kosten: ~1 Minute in einem 120-Minuten-Lauf.
+      - name: Selbsttests aller Wachen (entdeckt, uhrfest, schreibfrei)
         run: |
-          python3 scripts/engine_generate.py --selftest
-          python3 scripts/reserve_pool.py --selftest
-          python3 scripts/reserve_finisher.py --selftest
-          python3 scripts/fix_cta_hygiene.py --selftest
-          python3 scripts/r5_absatz_splitter.py --selftest
-          python3 scripts/fix_linebreaks.py --selftest
-          python3 scripts/reserve_gate.py --selftest
-          python3 scripts/reserve_converge.py --selftest
-          python3 scripts/reserve_stage_guard.py --selftest
-          # REPARATUR 15.09.2026 (#295, Run 34967470666): Der CTA-Heiler der
-          # Affiliate-Wache läuft jetzt IN der Reserve-Kette (Entwürfe!), und
-          # die Quarantäne entscheidet, wann ein Kandidat den Pool verlässt.
-          # Beides greift in den Bestand – ohne Selbsttest darf es das nicht.
-          python3 scripts/affiliate_integrity_gate.py --selftest
-          python3 scripts/reserve_quarantine.py --selftest
-          python3 scripts/affiliate_marketer.py  # Routing-Selbsttest, dann Report (read-only)
+          set -o pipefail
+          python3 scripts/selftest_runner.py | tee selbsttests.log
+
+      # affiliate_marketer.py hat bewusst KEINEN --selftest-Schalter (ein
+      # Aufruf mit der Flagge würde seine Standard-Aktion starten – siehe
+      # GEFAHREN-Liste im Runner); der nackte Aufruf ist sein dokumentierter
+      # Routing-Nachweis und read-only.
+      - name: Affiliate-Marketer Routing-Nachweis (read-only)
+        run: python3 scripts/affiliate_marketer.py
 
       # ================= RUNDE 1 =================
       # Stufe 1 – PRODUKTION
