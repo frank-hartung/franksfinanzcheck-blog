@@ -937,9 +937,9 @@ items:
   date: '2026-09-18'
   time: '12:15'
   scheduled_at: '2026-09-18T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-09-18
   channel: x
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
@@ -949,9 +949,9 @@ items:
   date: '2026-09-18'
   time: '13:15'
   scheduled_at: '2026-09-18T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-09-18
   channel: facebook
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -961,9 +961,9 @@ items:
   date: '2026-09-18'
   time: '15:15'
   scheduled_at: '2026-09-18T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:mythos:2026-09-18
   channel: threads
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -973,9 +973,9 @@ items:
   date: '2026-09-18'
   time: '16:15'
   scheduled_at: '2026-09-18T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-09-18
   channel: x
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
