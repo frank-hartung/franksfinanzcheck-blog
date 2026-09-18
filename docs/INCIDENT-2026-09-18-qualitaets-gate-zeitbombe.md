@@ -1,0 +1,235 @@
+# Vorfall-Bericht: „Qualitäts-Gate (Build + interne Links)" rot auf main — Selbsttest als Zeitbombe
+
+**Datum:** 18.09.2026 · **Status:** behoben (dauerhaft, mit Wache und Eigenmeldung) · **Schweregrad:** mittel
+(Gate blind + Produktionslauf verbrannt, **kein** Live-Schaden an Artikeln, Links oder Builds)
+
+## Kurzfassung
+
+Zwei Dinge sind passiert: Das Gate war rot — **und es hat niemanden alarmiert**,
+obwohl `alert-on-failure.yml` dieses Gate ausdrücklich überwachen soll. Zwei
+Nächte lang (17./18.09.) lief das Gate rot, ohne dass ein Alerting-Lauf oder ein
+Issue entstand. Deshalb meldet sich das Gate jetzt selbst.
+
+Die **Ursache der Röte** ist ein Selbsttest-Fixture, das die Wanduhr zweimal las —
+einmal zum Prägen, einmal zum Vergleichen. Ab dem 13.09. drifteten beide Lesungen
+auseinander, am 18.09. riss die Erwartung. Dieselbe Bauweise lag schlafend in
+`audio_coverage_check.py` (Zündung 24.12.2026), und die Wachen-Liste im Gate war
+eine still veraltete Handkopie des Regelwerks (5 Wachen ungeprüft).
+
+Behebungen: `scripts/selftest_clock.py` (verschiebbare Uhr + System-Uhr-Falle),
+deterministische Fixtures in `draft_triage.py` und `audio_coverage_check.py`,
+`scripts/selftest_runner.py` (Entdeckung aller Selbsttests aus dem Regelwerk statt
+Handkopie), `governance_contract.GUARDS` als einzige Liste und
+`.github/workflows/link-check.yml` ohne kopierte Wachen-Liste, dafür mit
+Eigenmeldung. Die Uhr-Falle deckt die ganze Befallsklasse ab, nicht nur die zwei
+bekannten Fälle.
+
+## Was gemeldet wurde
+
+| Lauf | Workflow | Auslöser | Commit | Ergebnis |
+|---|---|---|---|---|
+| [35312783057](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35312783057) | Qualitäts-Gate (Build + interne Links) | schedule 01:15 UTC (03:15 MESZ) | `83526d5` | ❌ Schritt „Governance-Selbsttests (alle Wachen)" |
+| [35324109630](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35324109630) | Content-Reserve (täglicher Vorrat) | schedule | `27da912` | ❌ Stufe 5, Issue [#310](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/310) |
+
+Meldung im Run-Log, beide Male dieselbe:
+
+```
+::error::scripts/draft_triage --selftest fehlgeschlagen
+🛑 draft_triage-Selbsttest FEHLGESCHLAGEN:
+  - Auffrischungs-Hinweis macht einen reifen Entwurf kaputt
+  - Entscheidungs-Zähler verbiegt sich: 2
+```
+
+## Was tatsächlich passiert ist
+
+**Niemand hatte den Code geändert.** Der Selbsttest war am 12.09.2026 grün und
+wurde von allein rot — sechs Tage später, am 18.09.2026.
+
+`scripts/draft_triage.py --selftest` baute seine Prüf-Fixtures mit
+
+```python
+alt   = (today - datetime.date.fromisoformat(tag)).days      # today = 2026-09-12 (hart codiert)
+stamp = os.path.getmtime(pfad) - alt * 86400                 # JETZT = echte Wanduhr
+```
+
+und verglich das Ergebnis gegen dasselbe hart codierte `today`. Solange beide
+Uhren denselben Tag zeigten, ging die Rechnung auf. Ab dem 13.09. drifteten sie:
+
+| Tag des Laufs | Drift | Fall „Auffrischung" (Soll 27 Tage) | Gate |
+|---|---|---|---|
+| 12.09.2026 | 0 | 27 → `VERWAIST` | 🟢 |
+| 16.09.2026 | 4 | 23 → `VERWAIST` | 🟢 (Run 35061978142) |
+| 17.09.2026 | 5 | 22 → `VERWAIST` | 🟢 |
+| **18.09.2026** | **6** | **21 → `REIF`** (Schwelle ist `> 21`) | 🔴 Run 35312783057 |
+
+Der Selbsttest maß also nicht die Wache, sondern den Kalender. Folgen:
+
+1. **Qualitäts-Gate rot** — und zwar *vor* dem Hugo-Build: Die Schritte „Seite
+   bauen", „Interne Links prüfen" und „Schema-/SEO-Gate" liefen gar nicht erst.
+   Das Gate war an diesem Tag nicht „rot wegen eines Fehlers", sondern blind.
+2. **Content-Reserve Stufe 5** brach nach 7:27 min ab (Issue #310), nachdem die
+   Stufen 1–4 (Kandidaten, Veredelung, Produktions-Gates, Konvergenz) gelaufen
+   waren — die teuerste Stelle der Kette für die billigste Zeile Code.
+3. **Aussagekraft verloren:** Ein rotes Gate, dessen Ursache „heute ist der
+   18.09." lautet, trainiert Alarm-Müdigkeit — derselbe Effekt, den der
+   Governance-Vertrag wegen Report #206 überhaupt eingeführt hat.
+
+## Ursachen und Nebenfunde (5 unabhängig voneinander)
+
+| # | Befund | Wirkung | Klasse |
+|---|---|---|---|
+| A | `draft_triage --selftest`: Fixtures von der echten Uhr, Erwartung aus hart codiertem Datum | Gate ab dem 18.09. täglich rot | Zeitbombe (scharf) |
+| B | `audio_coverage_check --selftest`: Fixture `2026-12-24-c` als „Zukunft" hart codiert | Ab dem **24.12.2026** täglich rot — Gate, Governance C6, Content-Reserve, Lesehilfen | Zeitbombe (schlafend) |
+| C | Die Wachen-Liste im Gate war eine **Handkopie** von `governance_contract.GUARDS` und still veraltet: `readability_check`, `pinterest_auth`, `social_studio`, `alert_router`, `affiliate_integrity_gate` liefen im Gate nicht mit | 5 Wachen ungeprüft, obwohl das Regelwerk sie verlangt | Abtippen statt Ableiten |
+| D | `publish_gate.py` und `affiliate_marketer.py` erwähnen `--selftest` im Kommentar, **implementieren es nicht** | Ein Aufruf mit der Flagge startet die Standard-Aktion. Während der Diagnose real ausgelöst: `publish_gate` stufte einen LIVE-Artikel (`2026-09-11-wlan-probleme-loesen-…`) auf `draft: true` herab, weil der lokale `public/`-Build älter war als der Bestand. Änderung zurückgenommen, Artikel unverändert live. | Prüf-Aufruf heilt (C15) |
+| E | **Das rote Gate hat niemanden alarmiert.** `alert-on-failure.yml` führt das Gate zwar in seiner `workflow_run`-Liste, ausgelöst wurde es aber nicht: Für die Fehlschläge vom 17.09. 06:09:16 UTC (Run 35188605416) und 18.09. 05:56:22 UTC (Run 35312783057) existiert **kein einziger Fehler-Alerting-Lauf** und kein Issue. Am `schedule`-Auslöser liegt es nicht — Uptime-Monitor (ebenfalls `schedule`) hat am 18.09. 01:32:43 sehr wohl einen Alerting-Lauf ausgelöst, und die Workflow-Namen sind byteweise identisch. | Zwei Nächte rotes Gate ohne Meldung; der Betreiber erfuhr es durch Nachschauen | Monitoring blind |
+
+Beweis für B (Selbsttest unter eine um 1461 Tage vorgestellte Uhr gelegt):
+
+```
+🛑 audio_coverage_check-Selbsttest FEHLGESCHLAGEN:
+  - Live-Artikel falsch: ['2026-08-01-a', '2026-08-02-b', '2026-12-24-c']
+  - Lücke nicht erkannt: ['2026-08-02-b', '2026-12-24-c']
+```
+
+## Behebung
+
+**A — `scripts/draft_triage.py`: Selbsttest deterministisch**
+- Fixtures sind **relativ zum Testdatum** beschrieben („42 Tage alt"), nie
+  absolut (`2026-08-01`) und nie relativ zur echten Uhr.
+- Dateialter wird **absolut** gestempelt (`selftest_clock.stempel`, lokaler
+  Mittag — hält eine Zeitumstellung aus, weil ±1 h nie den Kalendertag kippt).
+- Der ganze Ablauf läuft unter **Uhr-Zwang `strikt`**: ein einziger Lesezugriff
+  auf `date.today()` / `datetime.now()` / `time.localtime()` bricht den Test.
+- **Neues Kern-Assert:** gemessenes Alter == beabsichtigtes Alter, je Fall.
+  Genau diese Zeile hätte den Ausfall am Tag des Einbaus gemeldet.
+- Berichtskopf `as_md(..., stand=…)` ist injizierbar (vorher: echte Wanduhr im
+  Selbsttest-Pfad).
+10 Fälle × 6 Testdaten × 4 Zeitzonen, darunter der Schalttag 29.02.2028 und die
+Zeitumstellung 25.10.2026. Neu abgedeckt: Verfalls-Schwelle exakt (21 = REIF,
+22 = VERWAIST) und „Git-Nachweis schlägt mtime" (frisch gestempelt, alt
+committet) — beides war vorher ungeprüft.
+
+**B — `scripts/audio_coverage_check.py`: dieselbe Reparatur**
+`live_artikel(root, heute=None)` und `auswerten(..., heute=None)` bekommen ein
+injizierbares Referenzdatum (Produktion ruft weiter ohne Argument auf → echter
+Kalendertag). Selbsttest: 5 Fälle × 5 Testdaten, ausdrücklich inklusive
+23.12. **und 24.12.2026**.
+
+**C — `scripts/selftest_runner.py` (neu) ersetzt die Bash-Liste im Gate**
+- **entdecken** statt abtippen: jedes `scripts/*.py` mit echtem `--selftest`,
+- **SSOT-Abgleich** gegen `governance_contract.GUARDS` (eine Quelle),
+- **Uhr-Probe:** jeder Selbsttest läuft zusätzlich unter einer um **97** und
+  **1461 Tage vorgestellten** Uhr (`selftest_clock.trap`) — Datums-Abhängigkeit
+  kippt am Tag des Einbaus, nicht an einem Feiertag,
+- **nur echte Kennung:** entdeckt wird das Argument in Anführungszeichen
+  (`"--selftest"`), eine Kommentar-Erwähnung reicht nicht (Befund D),
+- **C15-Wache:** ändert sich der Arbeitsbaum während des Laufs, ist das ein
+  Befund — ein Prüf-Aufruf heilt nicht,
+- **Zeitdeckel** 240 s je Wache (langsamste heute: 8,5 s), Timeout = Befund,
+- **Ausnahmen brauchen einen Grund** und altern nicht still (Eintrag für ein
+  geheiltes oder entferntes Skript wird selbst zum Befund).
+Stand nach der Reparatur: **74 Wachen, 148 Uhr-Proben, ~50 s, grün, Arbeitsbaum
+unberührt.** Ausnahme: `blog_doctor.py` (Kettenleiter, s. u.).
+
+**D — `scripts/selftest_clock.py` (neu): Uhr-Zwang als Werkzeug**
+`uhr(instant, modus, module=…)` (strict/verschoben), `stempel(pfad, tag)`
+(absolutes Dateialter), `trap(script, offset)` (fremde Uhr um einen fremden
+Selbsttest). `time.time()` bleibt **immer** echt — Dauer- und Timeout-Schleifen
+dürfen nie einfrieren, sonst erzeugt die Garantie einen Hänger. `isinstance`
+bleibt über eine Metaklasse in beide Richtungen wahr, damit Shim-Klassen keine
+PyYAML-/C-API-Objekte entwerten. Verschachtelung ist erlaubt (die CI-Probe legt
+eine fremde Uhr um einen Selbsttest, der selbst Uhr-Zwang einschaltet).
+
+**E — `.github/workflows/link-check.yml`: das Gate meldet sich selbst**
+Neuer Schritt „Gate-Fehlschlag melden (Selbsttests, Vertrag oder Build)" mit
+`if: failure()` — unabhängig von jedem Fremd-Workflow und damit vom
+Namens-Matching des zentralen Alertings. Er nennt die **gefallenen Schritte**
+(aus der Actions-API, nicht geraten), hängt die `❌`-Zeilen des Runner-Protokolls
+an, dedupliziert über das Label `auto-report` (kommentieren statt doppelt öffnen)
+und wird bei Grün wieder geschlossen. Bewusst **nicht** bei Link-/Schema-Funden:
+Dafür gibt es die beiden präziseren Meldungen, doppelt wäre Lärm. Der
+Schließ-Schritt läuft jetzt auf `success()` und räumt alle drei Meldungstypen ab
+— vorher blieb bei einem roten Selbsttest-Schritt eine alte „erledigt"-Meldung
+offen stehen. Beide Pfade (Anlegen / Kommentieren / Schließen) wurden mit
+einem `gh`-Stub durchgespielt.
+
+**Regelwerk** — `governance_contract.GUARDS` enthält `selftest_clock.py` und
+`selftest_runner.py`: Der Vertrag prüft damit auch die Prüfer (C6).
+
+**Workflow-Kopfzeile** — Die Kopfzeile von `link-check.yml` nannte seit Langem
+„täglich um 05:00 UTC"; der Cron darunter läuft um 01:15 UTC. Korrektur nebenbei:
+Eine veraltete Dokumentation ist dieselbe Fehlerklasse wie eine veraltete
+Wachen-Liste — sie beschreibt nicht, was tatsächlich läuft.
+
+## Nachweis (Mutationstests — der Test muss beißen)
+
+Jede Mutation wurde in einer Kopie des Baums eingespielt; der Selbsttest **muss**
+rot werden:
+
+| Mutation | Ergebnis |
+|---|---|
+| Alter-Bombe zurück (`mtime = JETZT − n Tage`) | 🔴 „Alter 36 Tage gemessen, 42 beabsichtigt – der Prüfpfad liest eine andere Uhr als der Fixture-Bau" |
+| Verfalls-Schwelle `>=` statt `>` | 🔴 „schwelle: Zustand VERWAIST statt REIF" |
+| `fm-grenze`-Erkennung entfernt | 🔴 „geklebt: Hindernis „fm-grenze" fehlt" |
+| Git-Alter ignoriert (nur mtime) | 🔴 „git-alter: Alter 0 Tage gemessen, 30 beabsichtigt" |
+| Auffrischung wird Blocker | 🔴 „auffrischung: Zustand BLOCKIERT statt VERWAIST" |
+| `audio_coverage_check`: feste Fixtures zurück | 🔴 „[Testdatum 2026-12-24] Live-Artikel falsch" |
+| Runner: rote Wache / Datumsbombe / schreibender Selbsttest / leere Entdeckung / veraltete Ausnahme | 🔴 je eigener Befund |
+
+Zusätzlich: komplettes Gate lokal nachgebaut (Selbsttests → Vertrag → `hugo
+--minify` → interne Links → Schema-Gate): **grün**, 2861 interne Links ohne
+Defekt, 385 Seiten, 0 harte Schema-Funde.
+
+## Folge-Befunde (nicht Teil dieses Laufs, bewusst nicht still mitrepariert)
+
+1. **🔴 Integritäts-Lock steht auf HARD STOP.** `scripts/integrity_guard.py`
+   meldet Exit 3: `data/integrity_lock.json` ist am 15.09.2026 (head `be04d2a`)
+   signiert, seitdem drifteten 4 gesperrte Dateien —
+   `layouts/_partials/head.html` (**kritisch**), `layouts/_partials/cover.html`,
+   `scripts/affiliate_integrity_gate.py`, `scripts/affiliate_marketer.py`.
+   Die Änderungen kamen über regulär gemergte PRs (#308/#309, LCP-Preload,
+   Kadenz-/Cover-Heilungen), aber **ohne Neu-Signatur**. Einziger Abnehmer ist
+   `blog_doctor.py --new-only` in `content-engine-v2.yml` — mit
+   `|| echo "⚠ Doktor-Befund (nicht kritisch)"`. Damit ist der Sabotage-Schutz
+   seit drei Tagen scharf ausgelöst und wird verschluckt.
+   **Vorschlag:** Diff der vier Dateien sichten und dann
+   `python3 scripts/integrity_guard.py --set-current` (Signatur ist laut
+   Guard-Design eine Betreiber-Entscheidung, deshalb hier nicht automatisch
+   gesetzt). Zusätzlich sollte ein Exit 3 des Doktors niemals in einem `|| echo`
+   enden.
+2. **`blog_doctor.py --selftest` ist kein Selbsttest.** Der Aufruf läuft die
+   ganze Visite (24 Wachen im Trockenlauf) und schreibt `data/*.jsonl`
+   (`doctor_history`, `integrity_history`). Deshalb ist er im Runner als
+   Kettenleiter ausgenommen — mit Grund, maschinell geprüft. Sauber wäre:
+   `--selftest` beweist nur die Logik, die Visite bekommt eine eigene Flagge.
+3. **`content-reserve.yml` (Zeile 140–157)** hat dieselbe handkopierte
+   Selbsttest-Liste wie das Gate vorher. Sie ist aktuell, aber nicht abgeglichen;
+   ein Wechsel auf `scripts/selftest_runner.py` würde auch dort die Lücke C
+   schließen (Kosten: ~50 s in einem 90-Minuten-Lauf).
+4. **`alert-on-failure.yml` löst für dieses Gate nicht aus** (Befund E). Die
+   Eigenmeldung des Gates macht den Betrieb wieder sicher, aber die Ursache im
+   zentralen Alerting ist damit nicht beseitigt — andere Workflows derselben
+   Liste könnten ebenso blind sein. Empfehlung: das Namens-Matching durch
+   `workflow_run`-Filterung per `workflow_id`/Dateinamen ersetzen oder
+   wöchentlich nachweisen, dass für jeden gelisteten Workflow mindestens ein
+   Alerting-Lauf existiert („Wächter-Herzschlag" für das Alerting selbst).
+5. **5 Entwürfe im Reserve-Bestand haben eine geklebte Frontmatter-Grenze**
+   (`---Text`, Klasse `fm-grenze`) — von `draft_triage` korrekt als BLOCKIERT
+   gemeldet, also kein neuer Befund, aber offene Redaktionsarbeit.
+
+## Selbst prüfen
+
+```bash
+python3 scripts/selftest_clock.py --selftest            # Uhr-Zwang-Werkzeug
+python3 scripts/selftest_runner.py --selftest           # Runner-Logik
+python3 scripts/draft_triage.py --selftest              # 10 Fälle × 6 Daten × 4 Zonen
+python3 scripts/audio_coverage_check.py --selftest      # 5 Fälle × 5 Daten
+python3 scripts/selftest_runner.py                      # alle Wachen + Uhr-Proben
+python3 scripts/selftest_clock.py --trap scripts/draft_triage.py --offset 1461
+```
+
+---
+_Ursache ohne Wache zu reparieren wäre eine Leihgabe: Deshalb liegt der Beweis
+jetzt im Repo (`selftest_clock.py`, `selftest_runner.py`) und läuft bei jedem
+Push, jedem PR und jede Nacht um 03:15 MESZ im Qualitäts-Gate mit._

@@ -96,7 +96,13 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "alert_router.py",
           # Wache-Herzschlag (#281): der Selbsttest friert ein, dass ein
           # zweiter Lauf mit gleichem Befund den Zeitstempel ERNEUERT
-          "affiliate_integrity_gate.py"]
+          "affiliate_integrity_gate.py",
+          # Uhr-Zwang + Selbsttest-Runner (18.09.2026, Run 35312783057): der
+          # draft_triage-Selbsttest war an einem Tag grün und sechs Tage später
+          # rot, weil seine Fixtures von der echten Wanduhr, die Erwartung aber
+          # von einem eingefrorenen Testdatum abhingen. Beide Wachen zusammen
+          # machen „läuft an jedem Kalendertag" beweisbar statt gehofft.
+          "selftest_clock.py", "selftest_runner.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
