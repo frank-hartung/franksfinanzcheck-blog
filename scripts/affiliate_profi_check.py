@@ -47,6 +47,8 @@ import sys
 import datetime
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 PUBLIC = os.path.join(BLOG_DIR, "public")
 REPORT = os.path.join(BLOG_DIR, "AFFILIATE-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -219,7 +221,8 @@ def _check_internal_links():
                 guard = 0
                 while _count_internal_links(body) < 2 and guard < 3:
                     guard += 1
-                    rel = _pick_related_live_post(slug, "---".join(parts[:2]) + "---" + body)
+                    rel = _pick_related_live_post(
+                        slug, join_article(parts[1], body, parts[0]))
                     if not rel:
                         break
                     rslug, rtitle = rel
@@ -236,7 +239,7 @@ def _check_internal_links():
                     FIXED.append(("A3", slug, f"Lesetipp-Link ergänzt (→ {rslug})"))
                 if changed:
                     parts[2] = body
-                    c = "---".join(parts)
+                    c = join_article(parts[1], parts[2], parts[0])
                     open(p, "w", encoding="utf-8").write(c)
             # Verifikation NACH der Heilung – nur Reste alarmieren
             n = _count_internal_links(c)
@@ -347,7 +350,8 @@ def _check_cta():
                    f"[**Jetzt {label}**](/go/{go_key}/) – in wenigen Minuten "
                    f"siehst du, was du sparst.\n")
             parts[2] = body[:ip] + cta + body[ip:]
-            open(p, "w", encoding="utf-8").write("---".join(parts))
+            open(p, "w", encoding="utf-8").write(
+                join_article(parts[1], parts[2], parts[0]))
             FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
             continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
         PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))

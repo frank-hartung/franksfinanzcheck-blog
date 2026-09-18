@@ -409,8 +409,13 @@ jeder Schreibaktion.
 3. Code-Fences, Inline-Code, Markdown-Links, Bild-URLs, HTML-Kommentare: unantastbar.
 4. Listen-/Zitat-Marker und Überschriften-Hashes bleiben (Inhalt hinter dem Marker wird geprüft).
 5. Eigennamen-Whitelists (z. B. „Franks Finanzcheck").
-6. Bekannter Blog-Eigenbau: geklebte Front-Matter-Fences (`---Text`) werden von allen
-   Guards korrekt aufgedröselt (Fence bleibt, Text wird geregelt).
+6. **Die FM-Schlussgrenze steht allein.** Geklebte Fences (`---Text`) sind kein
+   Eigenbau, sondern ein Defekt: Hugo rendert den Rest zwar als Body, aber
+   zeilenweise lesende Wachen werden blind (`park_state.set_field` → still
+   `False`, `compound_guard` → 0 statt 1 Fund). Seit 18.09.2026 gilt: Schreiber
+   setzen Content-Dateien über `post_utils.join_article` zusammen, die Wache
+   `fm_boundary_guard.py` meldet `---Text` als **F6 baukritisch** und trennt die
+   Naht mit `--fix` (Naht-SSOT: `post_utils.heal_glued_close`).
 
 ---
 
@@ -473,6 +478,18 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **18.09.2026:** FM-Klebefugen dauerhaft geschlossen (Folge-Befund 5 des
+  Gate-Vorfalls). Die Schlussgrenze klebte in 13 Dateien (9 live) am ersten
+  Absatz; zwei Produzenten sind per Git-Blame belegt (`keyword_optimizer`:
+  `body.split("\n\n")` verlor den führenden Umbruch — 9 Dateien, `6c772fd`;
+  `redaktions_standard`: gestrippte KI-Antwort in `parts[2]` — 4 Dateien,
+  `7b51187`/`37c1b3d`/`a261d64`, inkl. live sichtbarem Prompt-Gerüst
+  „TITEL:/ARTIKEL:"). Neu: Naht-SSOT in `post_utils` (`split_article`,
+  `join_article`, `glued_close`, `strip_generator_scaffolding`,
+  `heal_glued_close`), 27 Schreiber darauf umgestellt, Regel **F6** in
+  `fm_boundary_guard.py` (ohne `--fix` Exit 1, mit `--fix` bytegleiche
+  Naht-Heilung), 5 Regressionstests, Wache im GUARDS-Minimum. Schutzzone 6
+  neu gefasst (vorher: „geklebte Fences sind Eigenbau").
 - **15.09.2026:** Rückweg in die Kadenz, Fazit-Schmiede, Linkdichte, zwei Gate-Korrekturen.
   (1) Die durch die blockierte Kette verursachten Qualitäts-Abstufungen wurden nicht per
   Hand zurückgedreht, sondern über `park_state.rearm()` mit Begründung und `cadence_wait`

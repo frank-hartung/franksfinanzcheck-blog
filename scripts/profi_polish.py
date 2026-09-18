@@ -34,7 +34,8 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, slug_of
+from post_utils import (list_post_paths, slug_of,  # noqa: E402
+                        join_article, strip_generator_scaffolding)
 import groq_config
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
 
@@ -252,6 +253,14 @@ def write_polished(a, new_body):
     content = a["path"] and open(a["path"], encoding="utf-8").read()
     parts = content.split("---", 2)
 
+    # Prompt-Gerüst-Schutz (18.09.2026): Modelle spiegeln gern den Kopf des
+    # Auftrags („TITEL: …\n\nARTIKEL:\n\n…"). Das ist kein Artikeltext – es
+    # stand in einem Live-Artikel (7b51187) über der ersten Zeile.
+    new_body, geruest = strip_generator_scaffolding(new_body)
+    if geruest:
+        print(f"  ⚠ Prompt-Gerüst der KI-Antwort entfernt "
+              f"({len(geruest)} Zeile(n): {geruest[0].strip()[:40]!r})")
+
     # Titel-Duplikat-Schutz: Wenn die KI den Titel als erste Zeile wiederholt,
     # entfernen (der Titel steht bereits im Frontmatter/als Seiten-Titel).
     first_line = new_body.strip().split("\n", 1)[0].strip()
@@ -260,7 +269,10 @@ def write_polished(a, new_body):
     if first_norm == title_norm or first_norm == title_norm + ":":
         new_body = new_body.strip().split("\n", 1)[1].lstrip()
 
-    content = parts[0] + "---" + parts[1] + "---" + new_body
+    # Naht über die SSOT: Ein gestripptes Body-Fragment kann so keine
+    # Klebefuge mehr erzeugen (genau daran sind am 17.09. neun Dateien
+    # gescheitert – `"---" + fm + "---" + new_body` klebt ohne Umbruch).
+    content = join_article(parts[1], new_body, parts[0])
     open(a["path"], "w", encoding="utf-8").write(content)
 
 

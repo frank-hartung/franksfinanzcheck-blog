@@ -253,9 +253,12 @@ Verdrahtungs-Test noch die alte Bash-Liste suchte (Befund F).
    `workflow_run`). Alternativ/ergänzend: `workflow_run` durch einen
    Polling-Wächter ersetzen, der Runs per API abfragt — Zustellung, die man
    zählt, statt Ereignisse, die man erwartet.
-5. **5 Entwürfe im Reserve-Bestand haben eine geklebte Frontmatter-Grenze**
-   (`---Text`, Klasse `fm-grenze`) — von `draft_triage` korrekt als BLOCKIERT
-   gemeldet, also kein neuer Befund, aber offene Redaktionsarbeit.
+5. **Entwürfe im Reserve-Bestand mit geklebter Frontmatter-Grenze** (`---Text`,
+   Klasse `fm-grenze`) — von `draft_triage` korrekt als BLOCKIERT gemeldet.
+   Nachgemessen: **13 Dateien (9 live, 4 Entwürfe)**, nicht 5 — die Klasse war
+   seit dem 07.09. dreimal nachsaniert und dreimal zurückgekehrt, weil nur die
+   Symptome geheilt wurden. Ursachen und Dauer-Reparatur:
+   [Folge-Reparatur 5](#folge-reparatur-5--fm-klebefugen-dauerhaft-geschlossen).
 
 ## Abschluss — Nachweis im Produktivbetrieb
 
@@ -391,15 +394,64 @@ Runner-Stufe, nächster Engine-Lauf mit Lock-Vorprüfung. Der nächste planmäß
 Lauf des Qualitäts-Gates beweist Doktor und Herzschlag mit (beide stehen im
 GUARDS-Minimum).
 
-**Weiter offen (bewusst unverändert):** Folge-Befund 5 — 5 Reserve-Entwürfe mit
-geklebter Frontmatter-Grenze (`fm-grenze`) sind redaktionelle Arbeit, kein
-Wachen-Defekt.
+## Folge-Reparatur 5 — FM-Klebefugen dauerhaft geschlossen
+
+**Befund:** Die Frontmatter-Schlussgrenze klebt in 13 Dateien (9 live,
+4 Entwürfe) am ersten Absatz (`---Text`). Belegt ist außerdem ein sichtbarer
+Live-Schaden: `content/posts/2026-09-04-digitaler-turbo-…/index.md` trug das
+Prompt-Gerüst der KI-Antwort als Artikeltext — im `public/`-Build als
+`<p>TITEL: …</p><p>ARTIKEL:</p>` direkt vor dem Einstiegsabsatz.
+
+**Zwei belegte Produzenten** (Git-Blame auf die Klebezeile im Stand vor der
+Heilung — nicht auf Absatztext, das war die Falle bei früheren Suchen):
+
+| Produzent | Mechanismus | Beleg |
+|---|---|---|
+| `keyword_optimizer.heal_first_paragraph` | `body.split("\n\n")` legt den leeren Rest vor dem ersten Absatz in `paras[0]`; der erste Absatz wurde mitgestrippt, der Body verlor den führenden Umbruch, `"---" + fm + "---" + new_body` klebte | `6c772fd` (17.09.), 9 Dateien |
+| `redaktions_standard.py` (KI-Heilpfad) | Modellantwort landete gestrippt in `parts[2]`, `"---".join(parts)` klebte sie an die Grenze — inklusive gespiegeltem Prompt-Gerüst | `7b51187`, `37c1b3d`, `a261d64` (16.–18.09.), 4 Dateien |
+
+**Warum die Klasse so lange unentdeckt blieb (gemessen, nicht behauptet):**
+
+* Hugo rendert `---Text` **wie** `---\n\nText` — der Kleber ist in der
+  Auslieferung unsichtbar; die frühere Notiz „der Rest gehört NICHT zum Body"
+  war falsch und ist aus `fm_boundary_guard.py` entfernt.
+* Zeilenweise lesende Wachen erkennen das FM-Ende nur an einer **allein**
+  stehenden `---`-Zeile und werden blind: `park_state.set_field` liefert still
+  `False` (ein maschinell geparkter Artikel sieht danach wie ein menschlicher
+  Entwurf aus und wird nie promotet), `compound_guard` findet geklebt 0 statt 1
+  Verstoß (`Preisgarantie Gas`). Genau daran hing die Reserve.
+
+**Reparatur — eine Wahrheit statt 21 Sonderfälle:**
+
+* `scripts/post_utils.py` ist die Naht-SSOT: `split_article` (Hugo-konform),
+  `join_article` (kanonische Naht für **alle** Schreiber), `glued_close`,
+  `strip_generator_scaffolding`, `heal_glued_close` (idempotent).
+* 27 Skripte setzen Content-Dateien über `join_article` zusammen; beide
+  Produzenten sind zusätzlich fachlich geheilt (`keyword_optimizer`: der
+  führende Umbruch gehört zur Naht, nicht zum Absatz; `redaktions_standard`:
+  Gerüst wird entfernt, die KI-Antwort läuft durch die SSOT).
+* Die FM-Wache führt die Klasse als **F6** und ist damit baukritisch:
+  `--check` → Exit 1; `--fix` trennt die Naht in einem Schreibvorgang
+  (bytegleich außer der Naht) und entfernt Prompt-Gerüst. Selbsttest + fünf
+  Regressionstests (`scripts/tests/test_fm_boundaries.py::KleberFugeTests`)
+  halten Erkennung, Naht-Treue, Gerüst-Fall, Idempotenz und die SSOT fest.
+  Die Wache steht im GUARDS-Minimum (`governance_contract.py`, C6).
+
+**Nachweis dieses Laufs:** 13/13 Dateien geheilt, jede Änderung exakt aus dem
+Altstand ableitbar (Naht + Gerüst, sonst bytegleich); `--check` danach Exit 0,
+zweiter `--fix`-Lauf ohne Änderung (konvergent); `draft_triage` = 21 Entwürfe
+(REIF 7 · BLOCKIERT 14), die zuvor an `fm-grenze` hängenden drei Entwürfe
+(`flugtickets`, `heizkosten-senken`, `heizung-wartung`) sind jetzt REIF, der
+vierte (`so-bekommst-du-wlan…`) bleibt wegen `lastmod < date` blockiert —
+ein echter, eigener Befund; 292 Unittests OK; Selbsttest-Runner 76 Wachen /
+152 Uhr-Proben grün; Governance-Vertrag (C1–C17) grün.
 
 ## Selbst prüfen
 
 ```bash
 python3 scripts/selftest_clock.py --selftest            # Uhr-Zwang-Werkzeug
 python3 scripts/selftest_runner.py --selftest           # Runner-Logik
+python3 scripts/fm_boundary_guard.py --selftest         # F1–F6 inkl. Naht-Treue/Gerüst
 python3 scripts/draft_triage.py --selftest              # 10 Fälle × 6 Daten × 4 Zonen
 python3 scripts/audio_coverage_check.py --selftest      # 5 Fälle × 5 Daten
 python3 scripts/blog_doctor.py --selftest               # reiner Beweis, schreibt nie

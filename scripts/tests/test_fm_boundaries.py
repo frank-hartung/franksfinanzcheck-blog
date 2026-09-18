@@ -6,6 +6,15 @@ Frontmatter und der gesamte Deploy stirbt im Bauschritt. Diese Tests halten
 drei Dinge fest: (1) die Wache findet genau diese Klasse, (2) die Heilung
 verändert ausschließlich die Quote-Ebene und ist konvergent, (3) legale
 Konstrukte (Flow-Sequences mit Doppelpunkt im Element) bleiben unangetastet.
+
+Seit 18.09.2026 zusätzlich: Regel F6 (geklebte Schlussgrenze `---Text`).
+Ursache waren zwei echte Produzenten – `keyword_optimizer.heal_first_paragraph`
+verlor den führenden Umbruch des ersten Absatzes (Commit 6c772fd, 9 Dateien),
+`redaktions_standard` schrieb die KI-Antwort samt Prompt-Gerüst („TITEL: … /
+ARTIKEL:") zurück (7b51187). Der Bestand ist geheilt; diese Tests halten fest,
+dass die Klasse erkannt, ohne `--fix` baukritisch gemeldet und mit `--fix`
+bytegleich bis auf die Naht geheilt wird – und dass die Naht-SSOT
+(`post_utils.join_article`/`split_article`) nicht mehr kleben kann.
 """
 import shutil
 import sys
@@ -16,6 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import fm_boundary_guard as fm  # noqa: E402
+import post_utils  # noqa: E402  – Naht-SSOT (join/split/heal)
 
 try:
     import yaml
@@ -122,6 +132,84 @@ class BestandTests(unittest.TestCase):
         self.assertEqual([h[1] for h in hart if h[1] == "F2"], ["F2"])
         self.assertEqual(datei.read_text(encoding="utf-8"), vorher)
         self.assertTrue(residual or unheilbar)
+
+
+# ---------------------------------------------------------------- F6 Klebefuge
+class KleberFugeTests(unittest.TestCase):
+    """F6: geklebte Schlussgrenze erkennen, hart melden, mit --fix heilen.
+
+    Die Fixtures sind die zwei REALEN Produzenten-Muster des Bestands:
+    `keyword_optimizer` („Du willst x? …" direkt an der Grenze) und
+    `redaktions_standard` (KI-Antwort mit Prompt-Gerüst „TITEL: …/ARTIKEL:").
+    """
+
+    KLEBER = ("---\ntitle: Klebefuge\ndraft: true\n---Du willst gaspreis "
+              "sparen? So geht's.\n\nZweiter Absatz steht.\n")
+    GERUEST = ("---\ntitle: Turbolader\ndraft: true\n---TITEL: Turbolader\n\n"
+               "ARTIKEL:\n\nKlickst du auf einen Link?\n\nMehr Text.\n")
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="fmfuge-"))
+        self.dir = self.tmp / "content" / "posts" / "demo"
+        self.dir.mkdir(parents=True)
+        self.datei = self.dir / "index.md"
+        self.datei.write_text(self.KLEBER, encoding="utf-8")
+        self._pf, self._rep = fm.content_files, fm.REPORT
+        fm.content_files = lambda: sorted(
+            str(q) for q in (self.tmp / "content").rglob("*.md"))
+        fm.REPORT = str(self.tmp / "FM-GRENZEN-REPORT.md")
+
+    def tearDown(self):
+        fm.content_files, fm.REPORT = self._pf, self._rep
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_check_meldet_f6_baukritisch_und_laesst_die_datei_ruhen(self):
+        vorher = self.datei.read_text(encoding="utf-8")
+        hart, kleber, heilungen, unheilbar, _residual, _geprueft = fm.run(fix=False)
+        self.assertIn("F6", [h[1] for h in hart],
+                      "ohne --fix muss der Kleber baukritisch sein (Exit 1)")
+        self.assertEqual([k[1] for k in kleber], ["F6"])
+        self.assertFalse(heilungen and unheilbar)
+        self.assertEqual(self.datei.read_text(encoding="utf-8"), vorher,
+                         "ein Prüflauf darf nie schreiben (Vertragsregel C15)")
+
+    def test_fix_trennt_die_naht_und_erhaelt_den_text(self):
+        fm.run(fix=True)
+        text = self.datei.read_text(encoding="utf-8")
+        self.assertIsNone(post_utils.glued_close(text)[0])
+        self.assertTrue(text.startswith(
+            "---\ntitle: Klebefuge\ndraft: true\n---\n\n"
+            "Du willst gaspreis sparen? So geht's.\n\nZweiter Absatz steht.\n"))
+        # Bytegleich bis auf die Naht: keine Zeile verloren, keine erfunden.
+        self.assertEqual(text.replace("---\n\n", "---", 1), self.KLEBER)
+
+    def test_fix_ist_konvergent(self):
+        fm.run(fix=True)
+        einmal = self.datei.read_text(encoding="utf-8")
+        _hart, kleber, _heil, _unh, residual, _g = fm.run(fix=True)
+        self.assertEqual(kleber, [])
+        self.assertEqual(residual, [])
+        self.assertEqual(self.datei.read_text(encoding="utf-8"), einmal)
+
+    def test_prompt_geruest_verschwindet_und_der_einstieg_bleibt(self):
+        self.datei.write_text(self.GERUEST, encoding="utf-8")
+        _hart, kleber, _heil, _unh, _res, _g = fm.run(fix=True)
+        self.assertTrue(kleber and kleber[0][3],
+                        "die Gerüst-Entfernung muss im Befund belegt sein")
+        text = self.datei.read_text(encoding="utf-8")
+        self.assertNotIn("TITEL:", text)
+        self.assertNotIn("ARTIKEL:", text)
+        self.assertIn("Klickst du auf einen Link?", text)
+
+    def test_naht_ssot_klebt_nie_und_verliert_nie(self):
+        for fragment in ("Text.", "\nText.", "\n\n\nText.", "Text.\n",
+                         "\n\n  Text mit Einzug."):
+            datei = post_utils.join_article("title: x", fragment)
+            self.assertIsNone(post_utils.glued_close(datei)[0],
+                              f"join_article klebt bei {fragment!r}")
+            self.assertEqual(post_utils.split_article(datei)[2].lstrip("\n"),
+                             fragment.lstrip("\n"),
+                             f"join/split verliert Text bei {fragment!r}")
 
 
 def preher_body(text):

@@ -39,7 +39,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths
+from post_utils import list_post_paths, join_article  # Naht-SSOT
 import groq_config
 TRACKING_FILE = os.path.join(BLOG_DIR, ".article_updates.json")
 REPORT_FILE = os.path.join(BLOG_DIR, "ARTIKEL-UPDATE-REPORT.md")
@@ -266,7 +266,7 @@ def set_lastmod(a, new_body):
     # Body ersetzen (nach dem zweiten ---)
     parts = content.split("---", 2)
     if len(parts) == 3:
-        content = parts[0] + "---" + parts[1] + "---" + new_body
+        content = join_article(parts[1], new_body, parts[0])
 
     open(a["path"], "w", encoding="utf-8").write(content)
     return today_iso

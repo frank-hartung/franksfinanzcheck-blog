@@ -34,7 +34,7 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
-from post_utils import list_post_paths, slug_of  # noqa: E402
+from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-SEO-HEALER-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -129,7 +129,7 @@ def fm_set(content: str, key: str, value: str, quote: bool = True) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
-    return "---" + fm2 + "---" + body
+    return join_article(fm2, body)
 
 
 def fm_set_list(content: str, key: str, items: list[str]) -> str:
@@ -141,7 +141,7 @@ def fm_set_list(content: str, key: str, items: list[str]) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
-    return "---" + fm2 + "---" + body
+    return join_article(fm2, body)
 
 
 def fm_set_cover_alt(content: str, alt: str) -> str:
@@ -690,7 +690,7 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
                 f'  alt: "{good_alt}"\n'
                 f'  caption: "Tipp von FranksFinanzcheck"\n'
             )
-            content = "---" + fm.rstrip("\n") + "\n" + block + "---" + body
+            content = join_article(fm.rstrip("\n") + "\n" + block, body)
             actions.append("Cover-Frontmatter angelegt")
 
     changed = content != a["content"]

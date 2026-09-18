@@ -168,6 +168,7 @@ STATE = ROOT / ".affiliate_integrity_state.json"
 RENDER_HOOK = ROOT / "layouts" / "_default" / "_markup" / "render-link.html"
 
 sys.path.insert(0, str(SCRIPTS))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 
 EXIT_OK = 0
 EXIT_CONTENT = 1
@@ -914,7 +915,7 @@ def write_article(article: dict, new_body: str) -> None:
     """Schreibt den Artikel neu – Frontmatter 1:1, Vorspann erhalten."""
     prefix = article["content"].split("---", 1)[0]
     article["body"] = new_body
-    article["content"] = prefix + "---" + article["fm"] + "---" + new_body
+    article["content"] = join_article(article["fm"], new_body, prefix)
     Path(article["path"]).write_text(article["content"], encoding="utf-8")
 
 

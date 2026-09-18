@@ -56,6 +56,8 @@ import tempfile
 ROOT = os.environ.get("GITHUB_WORKSPACE") or os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 
 REPORT = os.path.join(ROOT, "BLOG-GESUNDHEIT-REPORT.md")
 DRY_RUN = "--dry-run" in sys.argv
@@ -97,7 +99,7 @@ def fix_article(path: str, dry: bool | None = None) -> list[str]:
     # WICHTIG: schließendes --- braucht einen eigenen Zeilenumbruch davor,
     # sonst klebt es am letzten Frontmatter-Wert (TOML kaputt). FRONT_RX hat
     # das \n vor --- konsumiert → hier wiederherstellen.
-    new_content = f"---\n{fm}\n---\n{body}"
+    new_content = join_article(fm, body)
     _dry = DRY_RUN if dry is None else dry
     if new_content != content and not _dry:
         with open(path, "w", encoding="utf-8") as f:

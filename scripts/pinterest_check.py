@@ -47,6 +47,8 @@ import datetime
 import unicodedata
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 PUBLIC = os.path.join(BLOG_DIR, "public")
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -181,7 +183,7 @@ def _fm_set(content, key, value):
                 fm = parts[1]
                 body = parts[2]
                 fm2 = fm.rstrip("\n") + "\n" + line + "\n"
-                new_content = "---" + fm2 + "---" + body
+                new_content = join_article(fm2, body)
             else:
                 new_content = content
         else:

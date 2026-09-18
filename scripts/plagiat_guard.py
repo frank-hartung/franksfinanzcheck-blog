@@ -42,6 +42,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 REPORT = ROOT / "PLAGIAT-REPORT.md"
 FINGERPRINTS = ROOT / "data" / "content_fingerprints.jsonl"
 HISTORY = ROOT / "data" / "plagiat_history.jsonl"
@@ -249,7 +251,7 @@ def quarantaene(a):
     else:
         parts = s.split("---", 2)
         if len(parts) == 3:
-            s = parts[0] + "---" + parts[1] + "draft: true\n" + "---" + parts[2]
+            s = join_article(parts[1] + "draft: true", parts[2], parts[0])
         else:
             return False
     s += ("\n\n<!-- PLAGIAT-QUARANTAENE (plagiat_guard.py, "

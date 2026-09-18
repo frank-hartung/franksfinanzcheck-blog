@@ -34,9 +34,13 @@ REPARATUR 11.09.2026 (Reserve #5, Workflow #247):
   * --selftest als Sabotage-Schutz wie bei den anderen Heilern.
 """
 import argparse
+import os
 import re
 import sys
 import glob
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 
 APPLY = "--apply" in sys.argv
 MAX_SENT = 4
@@ -166,7 +170,7 @@ def heal_text(text: str, *, verbose: bool = False,
         parts[2], verbose=verbose, label=label)
     if new_body == parts[2]:
         return text, total, warnings
-    return parts[0] + "---" + parts[1] + "---" + new_body, total, warnings
+    return join_article(parts[1], new_body, parts[0]), total, warnings
 
 
 def hard_r5_findings(text: str, rel: str = "candidate") -> list:

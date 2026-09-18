@@ -35,17 +35,37 @@ PRÜFPRINZIP (bewusst anders als die Text-Wachen):
   Ohne PyYAML arbeitet die Wache deterministisch nach Regelkanon (F5), heilt
   aber nur die eindeutig gefahrlosen Fälle.
 
-KLEBER (Hinweis, nicht baukritisch): Hugo schließt das Frontmatter an der
-ERSTEN Zeile ab Index 1, die mit „---“ BEGINNT – auch wenn der erste Absatz
-direkt dahinterklebt („---Warum zahlen …“). Der geklebte Rest gehört dann
-NICHT zum Body. Diese Wache mirrornt das Verhalten (sonst meldet jede
-Kleber-Datei einen falschen Grenzfehler) und meldet den Fund nur; das
-Zerlegen ist Aufgabe der Umbruch-/Casing-Wache.
+KLEBER (F6 – baukritisch seit 18.09.2026): Hugo schließt das Frontmatter an der
+ERSTEN Zeile ab Index 1, die mit „---“ BEGINNT – auch wenn Text direkt
+dahinterklebt („---Warum zahlen …“). Der geklebte Rest RENDERT als Body (im
+Hugo-Labor gemessen: „---Text“ und „---\n\nText“ liefern identisches HTML; die
+frühere Annahme „gehört nicht zum Body“ war falsch). Der Schaden liegt
+woanders, und er ist belegt:
+
+  · ZEILENWEISE lesende Wachen erkennen das FM-Ende an einer exakt
+    alleinstehenden `---`-Zeile. Bleibt sie aus, gilt der ganze Artikel als
+    Frontmatter und wird nie geprüft – grün, obwohl blind.
+    Beweis: derselbe Verstoß („Preisgarantie Gas“) ergibt in `compound_guard`
+    sauber 1 Fund, geklebt 0 Funde.
+  · `park_state.set_field` liefert auf geklebten Dateien still `False`: die
+    Re-Queue-Maschine kann einen maschinell geparkten Artikel nicht mehr
+    markieren – er sieht danach wie ein menschlicher Entwurf aus und wird nie
+    promotet. Genau daran hingen die vier Reserve-Entwürfe, die am 18.09. als
+    „fm-grenze“-Blockierte feststeckten.
+  · Produzenten waren real: `keyword_optimizer.py` (9 Dateien, Commit 6c772fd)
+    und `redaktions_standard.py` (KI-Antwort samt Prompt-Gerüst, 7b51187).
+
+Diese Wache heilt den Kleber jetzt selbst (Naht zerlegen, Prompt-Gerüst am
+Anfang entfernen) – über `post_utils.heal_glued_close`, dieselbe Quelle, die
+alle Schreiber über `post_utils.join_article` benutzen. Ohne `--fix` ist der
+Kleber ein harter Befund (F6, Exit 1): Eine Klasse, die 13 Dateien befallen
+und eine Live-Seite mit „TITEL:/ARTIKEL:“ versehen hat, darf nicht als
+„Hinweis“ durchlaufen.
 
 AUFRUF:
   python3 scripts/fm_boundary_guard.py --selftest   # Sabotage-Schutz, Exit 2
-  python3 scripts/fm_boundary_guard.py --check      # nur melden, Exit 1 bei F1–F4
-  python3 scripts/fm_boundary_guard.py --fix         # heilen (konvergent)
+  python3 scripts/fm_boundary_guard.py --check      # melden, Exit 1 bei F1–F6
+  python3 scripts/fm_boundary_guard.py --fix        # heilen (konvergent)
 """
 import datetime
 import os
@@ -53,6 +73,11 @@ import re
 import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Die Naht-Logik ist EINE Wahrheit für Schreiber, Heiler und Prüfer
+# (post_utils.join_article / split_article / heal_glued_close).
+import post_utils  # noqa: E402
+
 CONTENT_DIR = os.path.join(BLOG_DIR, "content")
 REPORT = os.path.join(BLOG_DIR, "FM-GRENZEN-REPORT.md")
 
@@ -93,14 +118,13 @@ def split_fm(text):
 
 
 def closing_glue(text):
-    """Kleber-Rest der FM-Schlusszeile: '---Warum zahlen …' → 'Warum zahlen …'."""
-    lines = text.split("\n")
-    if not lines or not OPEN_RX.match(lines[0]):
-        return ""
-    for i in range(1, len(lines)):
-        if CLOSE_RX.match(lines[i]):
-            return lines[i][3:].strip()
-    return ""
+    """Kleber-Rest der FM-Schlusszeile: '---Warum zahlen …' → 'Warum zahlen …'.
+
+    Delegiert an die Naht-SSOT (`post_utils.glued_close`) – es gibt genau EINE
+    Erkennung im Repo, damit Prüfer, Heiler und Schreiber nie auseinanderlaufen.
+    """
+    _i, rest = post_utils.glued_close(text)
+    return rest.strip()
 
 
 def parse_ok(block_text):
@@ -220,10 +244,12 @@ def inspect(path):
     return None, closing_glue(text), text, find_defects(fm_lines)
 
 
-def heal(path, text, defects):
-    """Werte quotieren – und NUR schreiben, wenn der Block danach parst.
+def heal_values(text, defects):
+    """Wert-Ebene heilen – Rückgabe (neuer Text, Änderungen, ok).
 
-    Rückgabe: (changes, ok). ok=False → nichts geschrieben (unheilbar)."""
+    Schreibt NICHTS: der Aufrufer entscheidet, ob und in welcher Reihenfolge
+    er Wert-Quotes und Kleber-Heilung auf die Platte bringt (ein Schreibvorgang
+    je Datei). ok=False → die Heilung wäre keine Verbesserung (unheilbar)."""
     fm_lines, begin, _end = split_fm(text)
     lines = text.split("\n")
     changes = []
@@ -234,19 +260,36 @@ def heal(path, text, defects):
             changes.append((real, lines[real], fixed))
             lines[real] = fixed
     if not changes:
-        return [], True
+        return text, [], True
     new_text = "\n".join(lines)
     new_fm, _b, new_end = split_fm(new_text)
     if _yaml is not None and (new_end is None or parse_ok("\n".join(new_fm) + "\n") is not True):
-        return [], False                                # Heilung hilft nicht
+        return text, [], False                          # Heilung hilft nicht
+    return new_text, [(alt, neu) for _i, alt, neu in changes], True
+
+
+def heal(path, text, defects):
+    """Werte quotieren – und NUR schreiben, wenn der Block danach parst.
+
+    Rückgabe: (changes, ok). ok=False → nichts geschrieben (unheilbar)."""
+    new_text, changes, ok = heal_values(text, defects)
+    if not changes:
+        return [], ok
+    if not ok:
+        return [], False
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(new_text)
-    return [(alt, neu) for _i, alt, neu in changes], True
+    return changes, True
 
 
 def run(fix):
-    """→ (hart, hinweise, heilungen, unheilbar, geprüfte_dateien)."""
-    hart, hinweise, heilungen, unheilbar, geprüfte = [], [], [], [], 0
+    """→ (hart, kleber, heilungen, unheilbar, residual, geprüfte_dateien).
+
+    `kleber` = F6-Funde (Schlussgrenze zugeklebt). Mit `--fix` werden sie
+    ZUSAMMEN mit der Wert-Ebene in einem Schreibvorgang geheilt; ohne `--fix`
+    sind sie harte Befunde (Exit 1), damit die Klasse nicht wieder still
+    durchläuft. Jeder Eintrag: (pfad, "F6", meldung, notizen)."""
+    hart, kleber, heilungen, unheilbar, geprüfte = [], [], [], [], 0
     for path in content_files():
         geprüfte += 1
         rel = os.path.relpath(path, BLOG_DIR)
@@ -257,33 +300,43 @@ def run(fix):
                          "zum Frontmatter")
             hart.append((rel, grenze, note))
             continue
+        notizen = []
+        arbeits_text = text
         if glue:
-            hinweise.append((rel, "G",
-                             f"FM-Schlussgrenze zugeklebt: '---{glue[:56]}'"))
-        if not defects:
+            meldung = f"Schlussgrenze zugeklebt: '---{glue[:56]}'"
+            if fix:
+                arbeits_text, notizen = post_utils.heal_glued_close(text)
+            else:
+                hart.append((rel, "F6", meldung))     # ohne --fix baukritisch
+            kleber.append((rel, "F6", meldung, notizen))
+        if not defects and arbeits_text == text:
             continue
         for idx, regel, msg in defects:
             hart.append((rel, regel, msg))
         if not fix:
             continue
-        changes, ok = heal(path, text, defects)
+        neu, changes, ok = heal_values(arbeits_text, defects)
         if not ok:
             unheilbar.append(rel)
             continue
-        for alt, neu in changes:
-            heilungen.append((rel, alt, neu))
+        if neu != text:
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write(neu)
+        for alt, ziel in changes:
+            heilungen.append((rel, alt, ziel))
     residual = []
-    if fix and heilungen:
+    if fix:
         for path in content_files():
             rel = os.path.relpath(path, BLOG_DIR)
-            grenze, _glue, _text, defects = inspect(path)
-            if grenze or defects:
+            grenze, glue, _text, defects = inspect(path)
+            if grenze or glue or defects:
                 residual.append(rel)
-    return hart, hinweise, heilungen, unheilbar, residual, geprüfte
+    return hart, kleber, heilungen, unheilbar, residual, geprüfte
 
 
-def write_report(hart, hinweise, heilungen, unheilbar, residual, geprüfte, modus):
+def write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte, modus):
     stand = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M")
+    geheilt_f6 = [k for k in kleber if k[3]]
     zeilen = [
         "# 🧱 FM-GRENZEN-REPORT (fm_boundary_guard.py)",
         "",
@@ -291,11 +344,13 @@ def write_report(hart, hinweise, heilungen, unheilbar, residual, geprüfte, modu
         f"**Geprüfte Dateien:** {geprüfte} · **baukritisch:** {len(hart)} · "
         f"**automatisch geheilt:** {len(heilungen)} · **unheilbar:** "
         f"{len(unheilbar)} · **offen nach Heilung:** {len(residual)} · "
-        f"**Kleber-Hinweise:** {len(hinweise)}",
+        f"**Klebefugen (F6):** {len(kleber)}"
+        + (f" (davon {len(geheilt_f6)} geheilt)" if geheilt_f6 else ""),
         "",
         "**Regelkanon:** F1 Grenze oben · F2 Grenze unten · F3 Block/Zeile "
         "nicht YAML-parbar · F4 Quote/Flow nicht geschlossen · F5 "
-        "Fallback-Regel ohne PyYAML · G Kleber an der Schlussgrenze (Hinweis)",
+        "Fallback-Regel ohne PyYAML · F6 Schlussgrenze zugeklebt (baukritisch, "
+        "mit --fix selbstheilend)",
         "",
         f"**Gegenprüfung:** PyYAML "
         f"{'aktiv (Block-Parse vor und nach jeder Heilung)' if _yaml is not None else 'fehlt – nur deterministische Formregeln, Heilung auf eindeutig gefahrlose Fälle beschränkt'}",
@@ -315,23 +370,28 @@ def write_report(hart, hinweise, heilungen, unheilbar, residual, geprüfte, modu
         zeilen += ["", "## Selbstheilung (nur Wert-Quote, Text bytegleich)", ""]
         zeilen += [f"- `{rel}`: `{alt[:70]}` → `{neu[:70]}`"
                    for rel, alt, neu in heilungen[:60]]
+    if kleber:
+        zeilen += ["", "## F6 – zugeklebte FM-Schlussgrenze (`---Text`)", "",
+                   "Hugo rendert den Rest der Grenzzeile als Body (gemessen: "
+                   "HTML identisch zu `---\\n\\nText`). Der Schaden ist ein "
+                   "anderer: **zeilenweise** lesende Wachen erkennen das "
+                   "FM-Ende nur an einer alleinstehenden `---`-Zeile – bleibt "
+                   "die aus, gilt der ganze Artikel als Frontmatter und wird "
+                   "nie geprüft (grün, obwohl blind), und "
+                   "`park_state.set_field` schreibt still gar nichts. "
+                   "`--fix` trennt die Naht (bytegleich außer der Grenze) und "
+                   "entfernt Prompt-Gerüst am Textanfang.", ""]
+        for rel, _regel, msg, notizen in kleber[:30]:
+            zusatz = f" → {'; '.join(notizen)}" if notizen else ""
+            zeilen.append(f"- `{rel}` {msg}{zusatz}")
+        if len(kleber) > 30:
+            zeilen.append(f"- … {len(kleber) - 30} weitere")
     if unheilbar:
         zeilen += ["", "## ⚠️ Nicht automatisch heilbar (manuell)", ""]
         zeilen += [f"- `{rel}`" for rel in unheilbar[:40]]
     if residual:
         zeilen += ["", "## ⚠️ Nach Heilung weiterhin auffällig", ""]
         zeilen += [f"- `{rel}`" for rel in residual[:40]]
-    if hinweise:
-        zeilen += ["", "## Hinweise: Kleber an der FM-Schlussgrenze", "",
-                   "Hugo schließt das Frontmatter an der ersten Zeile, die mit "
-                   "`---` beginnt – der Text dahinter ist damit NICHT Teil des "
-                   "Body (deshalb erscheint der Einstiegsabsatz doppelt, wenn er "
-                   "unter der Grenze noch einmal steht). Zerlegen ist Aufgabe "
-                   "der Umbruch-/Casing-Wache, hier nur gemeldet.", "",
-                   ]
-        zeilen += [f"- `{rel}` {msg}" for rel, _r, msg in hinweise[:20]]
-        if len(hinweise) > 20:
-            zeilen.append(f"- … {len(hinweise) - 20} weitere")
     zeilen += ["", "---",
                "_Hartes Gate VOR `hugo --minify` (deploy.yml): FM-Fehler sind "
                "die einzige Klasse, die den gesamten Deploy stoppt – ohne "
@@ -448,6 +508,45 @@ def selftest():
     listenzeile = 'tags: ["Energie-Update: was sich jetzt ändert"]'
     if find_defects([listenzeile]):
         fehler.append("Schema-Risiko: legale Flow-Sequence würde umgeschrieben")
+    # F6 – Klebefuge: erkennen, heilen, Naht-Treue, Prompt-Gerüst, Idempotenz.
+    # Die Fälle sind die zwei REALEN Produzenten-Muster des Bestands
+    # (keyword_optimizer: „Du willst x? …" bzw. „x im Check: …";
+    #  redaktions_standard: KI-Antwort mit Prompt-Gerüst).
+    kleber_fall = ("---\ntitle: x\n---Du willst gaspreis-probe? Zahlst du zu "
+                   "viel?\n\nZweiter Absatz.\n")
+    if closing_glue(kleber_fall) != "Du willst gaspreis-probe? Zahlst du zu viel?":
+        fehler.append("F6: Klebefuge nicht erkannt")
+    geheilt, notizen = post_utils.heal_glued_close(kleber_fall)
+    soll = ("---\ntitle: x\n---\n\nDu willst gaspreis-probe? Zahlst du zu "
+            "viel?\n\nZweiter Absatz.\n")
+    if geheilt != soll:
+        fehler.append(f"F6: Heilung falsch: {geheilt!r}")
+    if geheilt.replace("---\n\n", "---", 1) != kleber_fall:
+        fehler.append("F6: Heilung ist nicht bytegleich außer der Naht")
+    if not notizen or "getrennt" not in notizen[0]:
+        fehler.append("F6: Heilung ohne Nachweis-Notiz")
+    if post_utils.heal_glued_close(geheilt)[0] != geheilt:
+        fehler.append("F6: Heilung ist nicht idempotent")
+    if post_utils.heal_glued_close("---\ntitle: x\n---\n\nBody.\n")[0] != \
+            "---\ntitle: x\n---\n\nBody.\n":
+        fehler.append("F6: saubere Datei wird angefasst")
+    schablone = ("---\ntitle: x\n---TITEL: Digitaler Turbo\n\nARTIKEL:\n\n"
+                 "Klickst du auf einen Link?\n")
+    geruest_frei, g_notizen = post_utils.heal_glued_close(schablone)
+    if geruest_frei != "---\ntitle: x\n---\n\nKlickst du auf einen Link?\n":
+        fehler.append(f"F6: Prompt-Gerüst nicht entfernt: {geruest_frei!r}")
+    if not any("Gerüst" in n for n in g_notizen):
+        fehler.append("F6: Gerüst-Entfernung nicht belegt")
+    nur_schablone = "TITEL: x\n\nARTIKEL:\n"
+    if post_utils.strip_generator_scaffolding(nur_schablone)[0] != nur_schablone:
+        fehler.append("F6: Schablone ohne Inhalt darf nicht geleert werden")
+    # Naht-SSOT: kein Body-Fragment – gestrippt oder nicht – darf kleben.
+    for fragment in ("Text.", "\nText.", "\n\n\nText.", "Text.\n"):
+        z = post_utils.join_article("title: x", fragment)
+        if post_utils.glued_close(z)[0] is not None:
+            fehler.append(f"Naht-SSOT: join_article klebt bei {fragment!r}")
+        if post_utils.split_article(z)[2].lstrip("\n") != fragment.lstrip("\n"):
+            fehler.append(f"Naht-SSOT: join/split verliert Text bei {fragment!r}")
     for h in hinweise:
         print(f"ℹ FM-Grenzen-Selbsttest: {h}")
     if fehler:
@@ -466,13 +565,17 @@ def main():
     if "--selftest" in sys.argv:
         return selftest()
     fix = "--fix" in sys.argv
-    hart, hinweise, heilungen, unheilbar, residual, geprüfte = run(fix)
-    write_report(hart, hinweise, heilungen, unheilbar, residual, geprüfte,
+    hart, kleber, heilungen, unheilbar, residual, geprüfte = run(fix)
+    write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte,
                  "fix" if fix else "check")
     for rel, regel, msg in hart:
         print(f"⚠ FM-Grenze {regel}: {rel} – {msg}")
     for rel, alt, neu in heilungen:
         print(f"🩹 FM-Grenze geheilt: {rel}: {alt[:60]} → {neu[:60]}")
+    if fix:
+        for rel, _r, _m, notizen in kleber:
+            if notizen:
+                print(f"🩹 FM-Klebefuge geheilt: {rel}: {'; '.join(notizen)}")
     if unheilbar:
         for rel in unheilbar:
             print(f"❌ nicht automatisch heilbar: {rel}")
@@ -492,9 +595,13 @@ def main():
         print(f"❌ {len(hart)} baukritische(r) FM-Fund/Funde (--fix heilt "
               f"deterministisch). Report: FM-GRENZEN-REPORT.md")
         return 1
-    print(f"✅ FM-Grenzen sauber ({geprüfte} Dateien, {len(hinweise)} "
-          f"Kleber-Hinweis(e) gemeldet) – der Build kann am Frontmatter nicht "
-          f"mehr sterben.")
+    if kleber:
+        print(f"✅ FM-Grenzen: {len(kleber)} Klebefuge(n) mit --fix getrennt "
+              f"({geprüfte} Dateien geprüft) – die Wachen sehen jetzt denselben "
+              f"Text wie Hugo.")
+        return 0
+    print(f"✅ FM-Grenzen sauber ({geprüfte} Dateien) – Grenzen stehen allein, "
+          f"Werte sind YAML-konform: die Wachen und Hugo lesen denselben Text.")
     return 0
 
 

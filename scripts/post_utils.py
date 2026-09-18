@@ -7,6 +7,7 @@ und alte Pfade weiter funktionieren.
 """
 import os
 import glob
+import re
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -241,3 +242,176 @@ def build_state(content, now=None):
     if exp is not None and exp <= now:
         return False, f"abgelaufen ({exp_raw})"
     return True, "live"
+
+
+# ---------------------------------------------------------------------------
+# FM-NAHT – die eine Wahrheit für die Frontmatter-Grenze (18.09.2026)
+#
+# WARUM (Folge-Befund 5 des Gate-Vorfalls vom 18.09.2026):
+# Mindestens achtzehn Schreiber im Repo bauten eine Content-Datei aus
+# `content.split("---", 2)` wieder zusammen – per String-Konkatenation:
+#     "---" + fm + "---" + body
+# Das ist nur so lange gut, wie `body` mit einem Zeilenumbruch beginnt. Sobald
+# ein Heiler den Body anfasst und dabei den führenden Umbruch verliert, klebt
+# die Schlussgrenze am Text:  ---DSL wechseln im Check: Zahlst du …
+# Zwei Produzenten sind belegt (Git-Blame auf die Klebezeile, HEAD vor der
+# Heilung): `keyword_optimizer.heal_first_paragraph` – es ersetzt den ersten
+# Absatz; der leere Rest vor dem Absatz fiel unter den Tisch (Commit 6c772fd,
+# 17.09.2026, 9 Dateien) – und der KI-Heilpfad in `redaktions_standard.py`,
+# dessen Modellantwort gestrippt in parts[2] landete (Commits 7b51187,
+# 37c1b3d, a261d64, 4 Dateien; in `2026-09-04-digitaler-turbo-…` stand sogar
+# das Prompt-Gerüst „TITEL: … / ARTIKEL:" im Live-Text).
+# Gesamt: 13 Dateien, davon 9 live.
+#
+# WAS DER KLEBER WIRKLICH KOSTET (gemessen, nicht behauptet):
+#   · Hugo (Auslieferung) rendert genauso wie bei sauberer Naht; die
+#     Zeilenumbruch-Prüfung liegt im Selbsttest der Wache (fm_boundary_guard.py,
+#     Fall F6: „---Text" → „---\n\nText", bytegleich bis auf die Naht).
+#     Damit ist belegt: Der geklebte Rest steht als Absatz in der Auslieferung
+#     (Live-Beleg: die Gerüstzeilen „TITEL: …/ARTIKEL:" waren im HTML sichtbar).
+#     Verifiziert außerdem: 13/13 Bestandsdateien sind bytegleich bis auf die
+#     Naht geheilt (Regression: scripts/tests/test_fm_boundaries.py,
+#     KleberFugeTests.test_fix_trennt_die_naht_und_erhaelt_den_text).
+#   · Zeilenweise lesende Wachen werden dagegen BLIND: Sie erkennen das
+#     Frontmatter-Ende nur an einer exakt alleinstehenden `---`-Zeile. Bleibt
+#     die aus, gilt der ganze Artikel als Frontmatter und wird nicht geprüft
+#     (`compound_guard`: 1 Fund sauber, 0 Funde geklebt; `umbruch_guard`,
+#     `math_guard`, `park_state._fm_span` mit demselben Muster).
+#   · Die PARK-MASCHINE kann nicht mehr schreiben: `park_state.set_field`
+#     liefert auf einer geklebten Datei still `False` – ein maschinell
+#     geparkter Artikel sieht danach wie ein menschlicher Entwurf aus und wird
+#     nie wieder promotet. Genau so sind die vier Reserve-Entwürfe hängen
+#     geblieben.
+#
+# DESHALB: EINE Funktion schreibt die Naht (`join_article`), EINE liest sie
+# Hugo-konform (`split_article`), EINE heilt sie (`heal_glued_close`). Wer
+# künftig eine Content-Datei zusammensetzt, benutzt join_article – damit kann
+# kein Schreiber mehr kleben, egal wie das Body-Fragment aussieht.
+# ---------------------------------------------------------------------------
+
+FM_FENCE = "---"
+
+# Generator-Schablonen: Zeilen, die eine KI-Antwort aus dem Prompt spiegelt
+# („TITEL: …", „ARTIKEL:", „DESCRIPTION: …"). Sie sind kein Inhalt – der Titel
+# steht im Frontmatter, die Kennzeichnung war nur die Frage an das Modell.
+SCHABLONE_ZEILE = re.compile(
+    r"^(?:TITEL|TITLE|DESCRIPTION|BESCHREIBUNG|ARTIKEL|ARTICLE|PROMPT|OUTPUT)\s*:",
+    re.IGNORECASE)
+SCHABLONE_MARKER = re.compile(
+    r"^(?:TITEL|TITLE|DESCRIPTION|BESCHREIBUNG|ARTIKEL|ARTICLE|PROMPT|OUTPUT)\s*:?\s*$",
+    re.IGNORECASE)
+
+
+def split_article(text):
+    """(prefix, fm, body) mit den Grenzen, die HUGO sieht.
+
+    `prefix` ist alles vor dem Frontmatter (normalerweise leer), `fm` der Block
+    OHNE die beiden `---`-Zeilen, `body` alles danach. Ein geklebter Rest
+    („---Text") zählt – wie bei Hugo – zum Body, damit kein Leser Text verliert.
+
+    Kein Frontmatter (oder keine schließende Grenze): ("", "", text) – der
+    Aufrufer schreibt dann besser gar nichts um, statt Inhalt zu riskieren.
+    """
+    lines = text.split("\n")
+    if not lines or lines[0].strip() != FM_FENCE:
+        return "", "", text
+    for i in range(1, len(lines)):
+        if lines[i].startswith(FM_FENCE):
+            fm = "\n".join(lines[1:i])
+            rest = lines[i][len(FM_FENCE):]           # Kleber zählt zum Body
+            body = "\n".join(([rest] if rest else []) + lines[i + 1:])
+            return "", fm, body
+    return "", "", text
+
+
+def join_article(fm, body, prefix=""):
+    """Setzt eine Content-Datei mit KANONISCHER Naht zusammen.
+
+    Rückgabe: `prefix + "---\n" + fm + "\n---\n\n" + body` – unabhängig
+    davon, ob `body` führende Umbrüche hat oder ein Heiler sie verloren hat.
+    `fm` und `body` dürfen ihre Grenz-Umbrüche noch tragen (die Splitter der
+    Schreiber liefern unterschiedliche Konventionen); sie werden normiert.
+    Auf einer schon kanonischen Datei ist das Ergebnis bytegleich; sonst
+    normalisiert der Aufruf nur die Naht bzw. überschüssige Leerzeilen.
+    Auf einer geklebten Datei entsteht die korrekte Grenze (Heilung durch
+    Weglassen des Fehlers, nicht durch Sonderfall-Code im Schreiber).
+    """
+    fm_clean = (fm or "").strip("\n")
+    if not fm_clean:
+        return (prefix or "") + (body or "").lstrip("\n")
+    return (f"{prefix or ''}{FM_FENCE}\n{fm_clean}\n{FM_FENCE}\n\n"
+            f"{(body or '').lstrip(chr(10))}")
+
+
+def glued_close(text):
+    """(Zeilenindex, Kleberest) der Frontmatter-Schlussgrenze.
+
+    (None, "") = die Grenze steht allein (sauber) oder es gibt keine.
+    Genau EINE Grenze wird geprüft: die erste `---`-Zeile nach der Öffnung –
+    das ist die Stelle, an der Hugo das Frontmatter beendet.
+    """
+    lines = text.split("\n")
+    if not lines or lines[0].strip() != FM_FENCE:
+        return None, ""
+    for i in range(1, len(lines)):
+        if lines[i].startswith(FM_FENCE):
+            rest = lines[i][len(FM_FENCE):]
+            if rest.strip():
+                return i, rest
+            return None, ""
+    return None, ""
+
+
+def strip_generator_scaffolding(text):
+    """Entfernt Prompt-Gerüst am Textanfang. Rückgabe: (text, entfernte Zeilen).
+
+    Nur am ANFANG und nur, solange echte Inhaltszeilen folgen: Ein Artikel, der
+    nur aus Schablonenzeilen besteht, wird nicht geleert (dann bleibt alles –
+    ein leerer Artikel wäre der größere Schaden). Markerzeilen („ARTIKEL:")
+    dürfen auch allein stehen, Titelzeilen nur mit Inhalt dahinter.
+    """
+    lines = text.split("\n")
+    entfernt = []
+    i = 0
+    while i < len(lines):
+        raw = lines[i]
+        s = raw.strip()
+        if not s:
+            if entfernt:
+                entfernt.append("")
+                i += 1
+                continue
+            break
+        if SCHABLONE_MARKER.match(s) or SCHABLONE_ZEILE.match(s):
+            entfernt.append(raw)
+            i += 1
+            continue
+        break
+    if not entfernt:
+        return text, []
+    rest = lines[i:]
+    if not any(z.strip() for z in rest):          # nichts Echtes dahinter
+        return text, []
+    return "\n".join(rest), entfernt
+
+
+def heal_glued_close(text):
+    """Zerlegt eine geklebte Frontmatter-Grenze. Rückgabe: (text, Notizen).
+
+    „---Text"  →  „---\\n\\nText"   (bytegleich bis auf die Naht)
+    „---TITEL: …\\n\\nARTIKEL:\\n\\nText"  →  Grenze sauber, Gerüst entfernt.
+
+    Idempotent: auf einer sauberen Datei kommt der Text unverändert zurück.
+    """
+    i, kleber = glued_close(text)
+    if i is None:
+        return text, []
+    lines = text.split("\n")
+    kopf_sauber, weg = strip_generator_scaffolding(
+        "\n".join([kleber] + lines[i + 1:]))
+    notizen = ["Klebefuge getrennt (---Text → ---\\n\\nText)"]
+    if weg:
+        notizen.append(f"Prompt-Gerüst entfernt ({len(weg)} Zeile(n): "
+                       f"{weg[0].strip()[:48]!r} …)")
+    neu = lines[:i] + [FM_FENCE, ""] + kopf_sauber.split("\n")
+    return "\n".join(neu), notizen
