@@ -48,7 +48,23 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
-        
+
+      # ================= INTEGRITÄTS-LOCK (HARD STOP) =================
+      # Zuerst der Safe, dann die Arbeit: Der Lock (integrity_guard.py)
+      # bürgt, dass Kern-Layouts, CTA-Shortcodes und die Dienst-Wachen exakt
+      # dem zuletzt SIGNIERTEN Stand entsprechen. Drift = Exit 3 (kritisch)
+      # bzw. 1 (fest) – und dieser Schritt hat KEIN `|| echo`: Ein
+      # Sabotage-Verdacht, der als „⚠ nicht kritisch" durchrutscht, ist
+      # kein Schutz, sondern Deko. Genau das geschah bis 18.09.2026 im
+      # Oberarzt-Schritt (Folge-Befund 1 des Qualitäts-Gate-Vorfalls: der
+      # Lock stand seit dem 15.09. auf HARD STOP, und der
+      # Doktor-Aufruf verschluckte es mit `|| echo`).
+      # Heilung ist eine Entscheidung, keine Automatik: Abweichung sichten
+      # (INTEGRITY-REPORT.md), dann `python3 scripts/integrity_guard.py
+      # --set-current` signieren oder die Änderung zurücknehmen.
+      - name: Integritäts-Lock prüfen (HARD STOP – Sabotage-Schutz)
+        run: python3 scripts/integrity_guard.py
+
       - name: Python-Abhängigkeiten installieren
         run: |
           python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
@@ -263,7 +279,24 @@ jobs:
           echo "== Redaktionelle Endabnahme (Profi-Gate G1-G5, Zertifikat) =="
           python3 scripts/redaktion_final.py || echo "⚠ Endabnahme: Funde im REDAKTION-FINAL-REPORT (nicht blockierend)"
           echo "== Oberarzt-Beweis nach der Geburt (Kette in Kanonfreiheit) =="
-          python3 scripts/blog_doctor.py --new-only || echo "⚠ Doktor-Befund (nicht kritisch)"
+          # HARD STOP heißt HARD STOP (Folge-Befund 1, Qualitäts-Gate-
+          # Vorfall 18.09.2026): Exit ≥ 2 des Doktors heißt Selbsttest- oder
+          # Sabotage-Fehlschlag einer Wache – inkl. Exit 3 des Integritäts-
+          # Locks, der in der Kette als Exit 2 weitergereicht wird. Der darf
+          # NIEMALS in einem `|| echo "⚠ … (nicht kritisch)"` landen:
+          # 15.–18.09. genau so geschehen – drei Tage HARD STOP, niemand
+          # hat es gesehen. Funde (Exit 1) bleiben weich, wie gehabt.
+          set +e
+          python3 scripts/blog_doctor.py --new-only
+          doktor_rc=$?
+          set -e
+          if [ "$doktor_rc" -ge 2 ]; then
+            echo "::error::Blog-Doktor HARD STOP (Exit ${doktor_rc}): Sabotage-Verdacht oder gebrochener Integritäts-Lock. DOKTOR-REPORT.md / INTEGRITY-REPORT.md sichten, Lock ggf. neu signieren (python3 scripts/integrity_guard.py --set-current)."
+            exit "$doktor_rc"
+          fi
+          if [ "$doktor_rc" -eq 1 ]; then
+            echo "⚠ Doktor-Befund (nicht kritisch) – Funde im DOKTOR-REPORT.md"
+          fi
           echo "== Qualitäts-Score (FrankAutoOps, Threshold >= 0.85) =="
           # S2-FIX (Agentur-Audit): `|| echo` gehörte auf dieselbe Zeile wie das
           # Heredoc-BEGINN. Vorher stand es als eigene Zeile nach `PYEOF` –
