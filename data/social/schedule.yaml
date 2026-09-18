@@ -985,9 +985,9 @@ items:
   date: '2026-09-18'
   time: '19:15'
   scheduled_at: '2026-09-18T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:vergleich:2026-09-19
   channel: telegram
   slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
