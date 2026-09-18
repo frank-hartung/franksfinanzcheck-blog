@@ -282,6 +282,119 @@ STOP — Neu-Signatur ist Betreiber-Entscheidung) und Folge-Befund 4
 (`workflow_run`-Zustellung — Vorschlag „Alerting-Herzschlag"). Beide brauchen
 eine Entscheidung, keine weitere Diagnose.
 
+> **Stand 18.09.2026 (zweiter Lauf):** Die Entscheidungen sind gefallen — alle
+> vier Folge-Befunde sind repariert, siehe den Abschnitt
+> [„Folge-Reparaturen"](#folge-reparaturen-18092026-zweiter-lauf) unten.
+
+## Folge-Reparaturen (18.09.2026, zweiter Lauf)
+
+Alle vier Folge-Befunde behoben, derselbe Maßstab wie im ersten Lauf: Jede
+Reparatur hat ihren Selbsttest, jede Aussage ihren Mechanismus-Nachweis, und
+die Mutationen unten mussten beißen.
+
+### 1 — Integritäts-Lock: HARD STOP ist jetzt hart, und der Lock ist neu signiert
+
+**Sichtung vor der Signatur** (Betreiber-Entscheidung, hier dokumentiert). Der
+Lock war am 15.09. 03:11 UTC (`be04d2a`) signiert; seitdem drifteten 4 Dateien.
+Diff jeder Datei gegen die PRs und Commits gelegt:
+
+| Datei | Klasse | Änderung seit Signatur | Urteil |
+|---|---|---|---|
+| `layouts/_partials/head.html` | **kritisch** | `b733ed2` (Head-DOM entlastet: obsoletes `X-UA-Compatible`, `keywords`-Meta, favicon.ico-Data-URI, msapplication-TileColor entfernt) + `24da795` (LCP-Preload deterministisch aus dem Hugo-Seitenbaum statt aus `data/lcp_images.json`-Manifest, mit Pager-Bremse) | ✅ beabsichtigte Qualitäts-/SEO-Arbeit, keine Fremdbeiträge |
+| `layouts/_partials/cover.html` | fest | `24da795`: Manifest-Logik spiegelbildlich entfernt (dasselbe PR wie head.html) | ✅ konsistent mit head.html, kein Seiteneffekt |
+| `scripts/affiliate_integrity_gate.py` | fest | `b9c1125` (#295: CTA-Heiler für Entwürfe, mehrzeilige CTA-Blöcke, opt-in `include_drafts`) + `6657ead` (#281: Herzschlag-State) | ✅ dokumentierte Reparaturen mit eigenen Selbsttests |
+| `scripts/affiliate_marketer.py` | fest | `b9c1125` + `f7a196a` (Fazit-Wurzel-Korrektur) | ✅ dokumentierte Redaktions-Reparatur |
+
+Kein einziger unerklärter Hunk; jede Änderung kam über einen regulär gemergten
+PR auf `main`. Danach neu signiert: `python3 scripts/integrity_guard.py
+--set-current` (42 Dateien, SHA-256, HEAD `01e955f`), anschließender Verify
+**Exit 0** („Der Kern entspricht exakt dem letzten signierten Zustand").
+
+**Der Verschluck-Pfad ist beseitigt** (`content-engine-v2.yml`): Neuer eigener
+Schritt **„Integritäts-Lock prüfen (HARD STOP – Sabotage-Schutz)"** direkt nach
+dem Checkout, ohne `||` — Drift stoppt den Lauf, bevor ein Generationsschritt
+KI-Budget verbrennt oder heilt. Und der Oberarzt-Aufruf wertet seinen
+Exit-Code jetzt aus: **≥ 2** (Selbsttest-/Sabotage-Fehlschlag einer Wache,
+inklusive Lock-Exit 3, der in der Kette als Exit 2 weitergereicht wird)
+beendet die Phase hart mit `::error`; nur Funde (Exit 1) bleiben weich wie
+gehabt. Ein Exit 3 des Locks endet nie mehr in einem `|| echo`.
+
+### 2 — `blog_doctor.py`: Beweis von der Visite getrennt
+
+`--selftest` lief die ganze Visite (24 Wachen) und schrieb Bericht +
+`data/doctor_history.jsonl` — ein Lauf, kein Test; im Runner deshalb die
+einzige Ausnahme. Jetzt gilt: **EIN Aufruf = EIN Modus.** `main()` verzweigt
+über `laeuft_kette()` **vor** der Visite; der Beweis-Pfad endet ohne Kette,
+ohne Bericht, ohne Schreibzugriff (`.tmp`-Blindheit von `.gitignore` dabei
+mitgeprüft: die Laufzeit-Kopie ist die C15-Wache des Runners, die am echten
+`data/doctor_history.jsonl` beißt — Beweis in der Mutationstabelle). Die
+Visite hat eine eigene Flagge (`--visite`; der nackte Aufruf bleibt aus
+Kompatibilität die Visite). Der Selbsttest nagelt die Wahrheitstabelle aller
+Modus-Kombinationen fest (Beweis schlägt `--fix`, `--new-only`, `--dry-run`,
+`--visite`). Folge: Die Runner-Ausnahme **entfällt** — der Doktor ist jetzt
+ein ganz normaler Prüfer (im Gate, mit Uhr-Proben) und steht zusätzlich im
+vertraglichen Minimum (`governance_contract.GUARDS`).
+
+### 3 — `content-reserve.yml`: Runner statt Handkopie
+
+Die kopierte Selbsttest-Liste (damals Zeilen 140–157) ist durch
+`python3 scripts/selftest_runner.py` ersetzt: Entdeckung statt Abtippen,
+SSOT-Abgleich, Uhr-Proben, C15 — ~1 Minute in einem 120-Minuten-Lauf. Der bare
+`affiliate_marketer`-Aufruf (bewusst ohne `--selftest`-Implementierung,
+GEFAHREN-Liste) blieb — als eigener, dokumentierter read-only-Schritt.
+
+### 4 — Alerting-Herzschlag: die Zustellung wird täglich nachgezählt
+
+Neu: `scripts/alerting_heartbeat.py` + `.github/workflows/alerting-heartbeat.yml`.
+Die Wache macht exakt die Rechnung dieses Berichts (Befund E) zur täglichen
+Routine: **abgeschlossene Läufe der gelisteten Workflows** (Wacht-Liste wird
+aus `alert-on-failure.yml` gelesen, nie abgetippt — inklusive der
+YAML-1.1-Falle `on:` → `True`, mit Regex-Fallback) **gegen erstellte
+„Fehler-Alerting"-Läufe**, Fenster 26 h rückwärts, Gnadenfrist 90 min
+(gemessene echte Verzögerung im Vorfall: 43 min), Zuordnung ±(5/90) min.
+Urteil scharf: **jeder ungedeckte rote Lauf ist sofort ein Befund** (das ist
+die Vorfall-Lage), ≥ 2 verlorene Ereignisse sind ein Muster-Befund, ein
+Einzelverlust bleibt ein Hinweis. Der Workflow läuft per **cron** — niemals
+per `workflow_run`, denn das ist der beobachtete Kanal, der verliert — und
+meldet sich selbst wie das Gate (Issue öffnen/aktualisieren/schließen, Label
+`auto-report`, Titel aus `ISSUE_TITEL` im Skript, nicht aus einer YAML-Kopie).
+Er steht bewusst **nicht** in der eigenen Wacht-Liste (dort kommentiert), ist
+im `GUARDS`-Minimum verankert und bringt 16 Unittests mit.
+
+### Nachweis (Mutationstests — jede Reparatur muss beißen)
+
+| Mutation | Ergebnis |
+|---|---|
+| Doktor: `laeuft_kette()` liefert immer `True` (Beweis läuft die Visite mit) | 🔴 „Modus-Trennung kaputt: ['--selftest', '--visite'] erreicht die Kette" |
+| Doktor: `beweis()` liefert immer `False` | 🔴 „Modus-Trennung kaputt" |
+| Doktor: `--selftest` zählt nicht mehr als trocken | 🔴 „Selbsttest schreibt: link_density_guard.py bekommt --fix weitergereicht" |
+| Doktor: „Beweis" schreibt wieder `data/doctor_history.jsonl` (das alte Verhalten) | 🔴 Runner **C15**: „Selbsttest hat in den Arbeitsbaum geschrieben … : M data/doctor_history.jsonl" (das ist der Rückfall auf die alte Ausnahme — jetzt gefangen) |
+| Herzschlag: `timed_out` zählt nicht mehr als rot | 🔴 Selbsttest rot |
+| Herzschlag: Muster-Schwelle 2 → 3 | 🔴 „zwei verlorene Ereignisse müssen ein Befund sein" |
+
+Zusätzlich: Runner komplett **76 Wachen, 152 Uhr-Proben, ~55 s, grün** (74 +
+Doktor + Herzschlag; einzige Ausnahme ist jetzt der Runner selbst) ·
+`governance_contract.py` und `--quick` grün (C1–C17) · Regressionssuite
+**287 Tests OK** (271 + 16 Herzschlag-Tests) · `bash -n` über alle
+`run:`-Blöcke der geänderten Workflows 0 Fehler · YAML-Parse aller geänderten
+Workflows ok · Herzschlag-Selbsttest uhrfest (+97/+1461 Tage) ·
+Lock-Verify Exit 0.
+
+**Commits dieses Laufs:** `834cacb` (Doktor-Trennung), `cf6552a` (Reserve-Runner),
+`e2d73c3` (Engine-HARD-STOP), `01e955f` (Alerting-Herzschlag), danach die
+Neu-Signatur des Locks und dieser Berichtsabschnitt.
+
+**Produktiv erwartet (nicht lokal beweisbar):** erster Herzschlag-Lauf um
+04:50 UTC (öffnet bei Bestätigung des Befunds das Zähl-Issue und schließt es,
+sobald die Zustellung wieder vollständig ist), nächtlicher Reserve-Lauf mit
+Runner-Stufe, nächster Engine-Lauf mit Lock-Vorprüfung. Der nächste planmäßige
+Lauf des Qualitäts-Gates beweist Doktor und Herzschlag mit (beide stehen im
+GUARDS-Minimum).
+
+**Weiter offen (bewusst unverändert):** Folge-Befund 5 — 5 Reserve-Entwürfe mit
+geklebter Frontmatter-Grenze (`fm-grenze`) sind redaktionelle Arbeit, kein
+Wachen-Defekt.
+
 ## Selbst prüfen
 
 ```bash
@@ -289,9 +402,12 @@ python3 scripts/selftest_clock.py --selftest            # Uhr-Zwang-Werkzeug
 python3 scripts/selftest_runner.py --selftest           # Runner-Logik
 python3 scripts/draft_triage.py --selftest              # 10 Fälle × 6 Daten × 4 Zonen
 python3 scripts/audio_coverage_check.py --selftest      # 5 Fälle × 5 Daten
+python3 scripts/blog_doctor.py --selftest               # reiner Beweis, schreibt nie
+python3 scripts/alerting_heartbeat.py --selftest        # Zähl-Urteil + YAML-Falle
+python3 scripts/integrity_guard.py                      # Lock-Verify (Exit 0 = Siegel rein)
 python3 scripts/selftest_runner.py                      # alle Wachen + Uhr-Proben
 python3 scripts/selftest_clock.py --trap scripts/draft_triage.py --offset 1461
-python3 -m unittest discover -s scripts/tests         # Regression (271 Tests)
+python3 -m unittest discover -s scripts/tests         # Regression (287 Tests)
 ```
 
 ---
