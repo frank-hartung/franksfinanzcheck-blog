@@ -29,6 +29,8 @@ kurzantwort: "Reduziere die Raumtemperatur um 1 °C und spare bis zu 6 % deiner
 
 Du willst Heizkosten senken? Stell dir vor, du kommst an einem nass‑kalten Novemberabend nach Hause. Deine Finger sind klamm, die Nasenspitze ist rot.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Dein erster Reflex: Du stürmst zum Heizkörper und drehst das Thermostat mit Schwung auf die höchste Stufe. Du glaubst, dass es so schneller warm wird, doch in Wahrheit passiert etwas ganz anderes in den Rohren. Während du auf die Wärme wartest, schießt dein Geldbeutel virtuell bereits die ersten Euro‑Scheine durch den Schornstein. Wenn du jetzt nicht handelst, wird die nächste Abrechnung eine böse Überraschung bereithalten, denn wer seine [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) will, muss das System hinter der Wärme verstehen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
