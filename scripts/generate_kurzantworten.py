@@ -21,7 +21,7 @@ import json
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from post_utils import list_post_paths
+from post_utils import list_post_paths, join_article  # Naht-SSOT
 import generate_drafts as g
 
 PROMPT = (
@@ -70,7 +70,7 @@ def set_kurzantwort(path, answer):
         fm2 = re.sub(r"^kurzantwort:.*$", f"kurzantwort: {quoted}", fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip() + f"\nkurzantwort: {quoted}\n"
-    open(path, "w", encoding="utf-8").write("---".join([parts[0], fm2, parts[2]]))
+    open(path, "w", encoding="utf-8").write(join_article(fm2, parts[2], parts[0]))
 
 
 def main():

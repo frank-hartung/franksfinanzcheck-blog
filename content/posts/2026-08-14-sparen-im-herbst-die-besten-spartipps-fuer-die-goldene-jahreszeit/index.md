@@ -23,7 +23,9 @@ keywords: ["Sparen im Herbst", "Herbst Spartipps", "Fixkosten senken", "Kfz Stic
 pin_title: Mit diesen 5 Frugalismus-Tricks sparst du jeden Monat dreistellig
 pin_description: "*Werbung | 100 €, 150 €, 200 € mehr am Monatsende – ohne harte Diät fürs Leben: Diese 5 Frugalismus-Tricks zielen genau auf die größten Geldfresser des Alltags, von Abo-Leichen über Meal Prep bis zur Einkaufslisten-Regel. Jetzt durchrechnen!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
----Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter färben sich bunt. Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) stellen. Der Wechsel der Kfz‑Versicherung läuft zum **30. November**.
+---
+
+Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter färben sich bunt. Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) stellen. Der Wechsel der Kfz‑Versicherung läuft zum **30. November**.
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 

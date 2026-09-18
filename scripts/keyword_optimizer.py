@@ -42,7 +42,8 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from post_utils import list_post_paths, slug_of, safe_title_cut  # noqa: E402
+from post_utils import (list_post_paths, slug_of, safe_title_cut,  # noqa: E402
+                        join_article)
 import groq_config  # noqa: E402
 
 DENSITY_MIN = 0.003
@@ -87,7 +88,7 @@ def fm_set(content: str, key: str, value: str) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
-    return "---" + fm2 + "---" + body
+    return join_article(fm2, body)
 
 
 def fm_set_list(content: str, key: str, items: list[str]) -> str:
@@ -99,7 +100,7 @@ def fm_set_list(content: str, key: str, items: list[str]) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
-    return "---" + fm2 + "---" + body
+    return join_article(fm2, body)
 
 
 # ---------------------------------------------------------------------------
@@ -260,6 +261,12 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
         return body
     if norm(main_kw) in norm(body[:350]):
         return body
+    # Führende Umbrüche gehören zur NAHT, nicht zum Absatz: `split("\n\n")`
+    # legt den leeren Rest vor dem ersten Absatz in paras[0] – der erste
+    # Absatz selbst beginnt dann mit "\n" und wurde früher mitgestrippt, so
+    # dass die Grenze am Text klebte (---Du willst x? …, 17.09.2026, 9 Dateien).
+    lead = body[:len(body) - len(body.lstrip("\n"))]
+    body = body.lstrip("\n")
     paras = body.split("\n\n")
     first_idx = -1
     for i, p in enumerate(paras):
@@ -278,8 +285,10 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
         first_idx = i
         break
     if first_idx == -1:
-        lead = f"{main_kw} im Check: So vermeidest du teure Fehler und sparst bares Geld – praxisgetestet und sofort umsetzbar.\n\n"
-        return lead + body
+        einstieg = (f"{main_kw} im Check: So vermeidest du teure Fehler und "
+                    f"sparst bares Geld – praxisgetestet und sofort "
+                    f"umsetzbar.\n\n")
+        return lead + einstieg + body
     first_para = paras[first_idx].strip()
     lowered_kw = main_kw.lower()
     if "gasrechnung" in norm(main_kw):
@@ -292,7 +301,7 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
         # natürliche Einleitung
         new_first = f"Du willst {lowered_kw}? {first_para}"
     paras[first_idx] = new_first
-    return "\n\n".join(paras)
+    return lead + "\n\n".join(paras)
 
 
 def heal_h2(body: str, main_kw: str) -> str:
@@ -463,7 +472,7 @@ def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, li
 
     if changed and new_body != body:
         fm_part, _, _ = split_fm(new_content)
-        new_content = "---" + fm_part + "---" + new_body
+        new_content = join_article(fm_part, new_body)
 
     if changed:
         try:

@@ -67,6 +67,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 REPORT = ROOT / "HARDCASES-REPORT.md"
 HISTORY = ROOT / "data" / "hardcases_history.jsonl"
 
@@ -284,10 +286,8 @@ def main():
             fixed_body, n = apply_fixes(body)
             total_fixed += n
             if n:
-                s3 = parts[0] + "---" + parts[1] + "---" + (
-                    fixed_body if len(parts) == 3 else fixed_body)
-                if len(parts) == 3:
-                    s3 = parts[0] + "---" + parts[1] + "---" + fixed_body
+                s3 = (join_article(parts[1], fixed_body, parts[0])
+                      if len(parts) == 3 else fixed_body)
                 Path(pfad).write_text(s3, encoding="utf-8")
         for f in funde:
             report_rows.append({"slug": slug, **f})

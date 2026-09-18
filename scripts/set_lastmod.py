@@ -18,6 +18,8 @@ import subprocess
 import datetime
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 
 
@@ -37,7 +39,7 @@ def set_lastmod(path, date):
             fm2 = fm.rstrip() + f"\nlastmod: {date}\n"
     if fm2 == fm:
         return False
-    open(path, "w", encoding="utf-8").write("---".join([parts[0], fm2, parts[2]]))
+    open(path, "w", encoding="utf-8").write(join_article(fm2, parts[2], parts[0]))
     return True
 
 

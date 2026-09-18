@@ -37,6 +37,8 @@ import urllib.error
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 import groq_config
 import length_policy as lp
 MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or lp.POSTS["target_min_chars"])
@@ -216,7 +218,7 @@ def extend_article(path, min_words, dry=False, min_chars=None):
         if dry:
             return True, f"DRY-RUN ok: {nw} Wörter / {nh2} H2 (via {name})"
         with open(path, "w", encoding="utf-8") as f:
-            f.write("---" + front + "---" + new_body.strip() + "\n")
+            f.write(join_article(front, new_body) + "\n")
         print(f"    ✅ {name}: {words} → {nw} Wörter ({nh2} H2)")
         time.sleep(4)  # Rate-Limit-Schonung
         return True, f"verlängert {words} → {nw} Wörter via {name}"

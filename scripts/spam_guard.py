@@ -66,7 +66,7 @@ from email.utils import parsedate_to_datetime
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
-from post_utils import list_post_paths, slug_of          # noqa: E402
+from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 from check_titles import check_title                      # noqa: E402
 import plagiat_guard as plag                               # noqa: E402
 import cadence_guard as cad                                # noqa: E402
@@ -513,7 +513,7 @@ def fix_blog(findings):
                     lines.insert(insert_at, DISCLOSURE_TEXT.rstrip("\n"))
                     parts[2] = "\n\n".join(lines)
                     open(post["path"], "w", encoding="utf-8").write(
-                        "---\n".join(parts))
+                        join_article(parts[1], parts[2], parts[0]))
                 post_heals.append("B3-Disclosure eingefügt")
             if "B8" in hard_rules:
                 if not DRY_RUN:

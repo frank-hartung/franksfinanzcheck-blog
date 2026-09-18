@@ -54,6 +54,8 @@ REPORT = ROOT / "DASH-REPORT.md"
 HISTORY = ROOT / "data" / "dash_guard_history.jsonl"
 
 import groq_config
+sys.path.insert(0, str(ROOT / "scripts"))
+import post_utils                                # Naht-SSOT (R9)
 
 GROQ_KEY = groq_config.api_key()
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -167,19 +169,19 @@ R8_IMPERATIV = re.compile(r"(?<=[.!?] )Ließ (das|dein|deine|deinen|mein|meine|h
 # R9: Geklebte Front-Matter-SCHLUSS-Fence normalisieren.
 # „---Text" wird zu „---\n\nText" – NUR an genau einer Stelle: der ersten
 # Fence-Zeile nach dem oeffnenden Front-Matter. Verhindert YAML-Parse-Fehler
-# in Editoren (GitHub Web-UI!) ohne jedes Layout-Risiko (Hugo aendert nichts).
+# in Editoren (GitHub Web-UI!) und – wichtiger – die Blindheit zeilenweise
+# lesender Wachen (compound_guard, park_state._fm_span).
+#
+# SEIT 18.09.2026 delegiert R9 an die Naht-SSOT `post_utils.heal_glued_close`:
+# Es gibt genau EINE Implementierung der Klebefugen-Heilung im Repo (dieselbe,
+# die `fm_boundary_guard --fix` benutzt, inklusive Prompt-Gerüst-Entfernung –
+# das Gerüst „TITEL: …/ARTIKEL:" hat einen Live-Artikel verunstaltet).
 def normalize_glued_fence(text: str) -> tuple[str, bool]:
-    lines = text.split("\n")
-    if not lines or lines[0].strip() != "---":
-        return text, False
-    for j in range(1, min(len(lines), 80)):
-        if lines[j].startswith("---"):
-            rest = lines[j][3:]
-            if rest.strip():                       # geklebt: ---Text
-                lines[j] = "---\n" + rest if False else "---\n\n" + rest
-                return "\n".join(lines), True
-            return text, False                     # sauber: nichts zu tun
-    return text, False
+    lo, _rest = post_utils.glued_close(text)
+    if lo is None:
+        return text, False                         # sauber: nichts zu tun
+    neu, _notizen = post_utils.heal_glued_close(text)
+    return neu, True
 
 
 def fix_r7_r8(line: str) -> tuple[str, list[str]]:

@@ -22,7 +22,9 @@ keywords: ["Strom sparen im Haushalt", "Stromfresser finden", "Stromkosten senke
 pin_title: "Stromfresser-Checkliste: Wo dein Geld unbemerkt verpufft"
 pin_description: "*Werbung | Diese Checkliste gehört an jeden Kühlschrank: Die 10 häufigsten Stromfallen im Haushalt – mit jährlichen Kosten in Euro und der jeweils wichtigsten Gegenmaßnahme. Abhaken und sparen: So holst du dir bis zu 300 € im Jahr zurück. Jetzt lesen!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
----Im Herbst wird es früher dunkel. Der Alltag verändert sich. Das Licht brennt nachmittags. Der Fernseher läuft öfter.
+---
+
+Im Herbst wird es früher dunkel. Der Alltag verändert sich. Das Licht brennt nachmittags. Der Fernseher läuft öfter.
 
 Der Wasserkocher ist im Dauereinsatz. Der Trockner ersetzt die Wäscheleine. So steigt der Verbrauch oft um ca. 20 bis 30 %.
 

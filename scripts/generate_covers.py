@@ -30,7 +30,7 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, slug_of
+from post_utils import list_post_paths, slug_of, join_article  # Naht-SSOT
 OUT_DIR = os.path.join(BLOG_DIR, "static", "images", "covers")
 MANIFEST_PATH = os.path.join(BLOG_DIR, "data", "covers_manifest.json")
 
@@ -621,7 +621,7 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
     if content.startswith("---"):
         parts = content.split("---", 2)
         if len(parts) == 3:
-            content = parts[0] + "---" + parts[1] + block + "---" + parts[2]
+            content = join_article(parts[1] + block, parts[2], parts[0])
     with open(md_path, "w", encoding="utf-8") as f:
         f.write(content)
     return True

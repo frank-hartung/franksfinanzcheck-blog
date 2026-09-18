@@ -58,7 +58,8 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
-from post_utils import list_post_paths, slug_of  # noqa: E402
+from post_utils import (list_post_paths, slug_of,  # noqa: E402
+                        join_article, strip_generator_scaffolding)
 import groq_config  # noqa: E402
 
 REPORT = os.path.join(BLOG_DIR, "REDAKTIONS-STANDARD-REPORT.md")
@@ -318,8 +319,7 @@ def fix_rs7(path, a):
         return None
     content = open(path, encoding="utf-8").read()
     parts = content.split("---", 2)
-    parts[1] = fm
-    return "---".join(parts)
+    return join_article(fm, parts[2], parts[0])
 
 
 # ---------------------------------------------------------------------------
@@ -549,7 +549,7 @@ def register_korrektur():
                       f"{today}: {grund}"[:200])
     parts[1] = fm
     with open(path, "w", encoding="utf-8") as fh:
-        fh.write("---".join(parts))
+        fh.write(join_article(parts[1], parts[2], parts[0]))
     # YAML-Log ergänzen
     eintraege = []
     if os.path.exists(KORREKTUR_LOG):
@@ -703,14 +703,20 @@ def main():
             neu_body = heal_article_ai(a, r)
             if not neu_body:
                 continue
+            # Prompt-Gerüst („TITEL: …/ARTIKEL:") ist kein Artikeltext: Die KI
+            # spiegelt den Kopf des Auftrags, die Prüfung sieht nur Links/H2/
+            # Länge – das Gerüst rutschte so bis in die Auslieferung (7b51187).
+            neu_body, geruest = strip_generator_scaffolding(neu_body)
+            if geruest:
+                print(f"  ⚠ Prompt-Gerüst der KI-Antwort entfernt "
+                      f"({len(geruest)} Zeile(n): {geruest[0].strip()[:40]!r})")
             if DRY_RUN:
                 print(f"  [dry-run] würde heilen: {r['slug']}")
                 continue
             content = open(r["path"], encoding="utf-8").read()
             parts = content.split("---", 2)
-            parts[2] = neu_body
             with open(r["path"], "w", encoding="utf-8") as fh:
-                fh.write("---".join(parts))
+                fh.write(join_article(parts[1], neu_body, parts[0]))
             gehärtet.append(f"{r['slug']}: {', '.join(r['hart_missing']) or 'RS5/RS6'}")
             history.append({"slug": r["slug"], "regel": "RS1-RS6",
                             "aktion": "fix-ki"})

@@ -58,6 +58,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 
 STATE = ROOT / "data" / "reserve-quarantine.json"
 POSTS_DIR = ROOT / "content" / "posts"
@@ -151,7 +152,7 @@ def block_candidate(slug: str, grund: str, posts_dir: Path = POSTS_DIR) -> str |
                         lambda _m: eintrag, fm, count=1)
     if not n:
         return None                      # kein Pool-Kandidat -> nichts tun
-    index.write_text("---" + fm_neu + "---" + parts[2], encoding="utf-8")
+    index.write_text(join_article(fm_neu, parts[2]), encoding="utf-8")
     return grund
 
 

@@ -51,6 +51,8 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 REPORT = ROOT / "FAZIT-REPORT.md"
 HISTORY = ROOT / "data" / "fazit_history.jsonl"
 
@@ -335,7 +337,7 @@ def insert_sections(full_doc: str, has_fazit: bool, has_faq: bool, title: str, r
         if faq_match:
             insert_pos = faq_match.start()
             new_body = body_part[:insert_pos] + fazit_block + "\n" + body_part[insert_pos:]
-            return f"---{fm_part}---{new_body}"
+            return join_article(fm_part, new_body)
         else:
             insert_payload = f"\n\n{fazit_block}\n"
     elif faq_block:
@@ -356,7 +358,7 @@ def insert_sections(full_doc: str, has_fazit: bool, has_faq: bool, title: str, r
         # Fallback: Einfach am Ende anhängen
         new_body = body_part.rstrip() + insert_payload
         
-    return f"---{fm_part}---{new_body}"
+    return join_article(fm_part, new_body)
 
 
 # ------------------------------------------------------------
@@ -439,7 +441,7 @@ def normalize_altlasten(full_doc: str, title: str, route: str) -> tuple[str, boo
             neuer_body = neuer_body.replace(kopf.group(0), gewollt, 1)
     if neuer_body == body_part:
         return full_doc, False, "bereits Hausstil"
-    return f"---{fm_part}---{neuer_body}", True, "Altbaustil ersetzt"
+    return join_article(fm_part, neuer_body), True, "Altbaustil ersetzt"
 
 
 # ============================================================

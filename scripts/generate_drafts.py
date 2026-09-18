@@ -41,7 +41,7 @@ import yaml
 # ---------------------------------------------------------------- Konfiguration
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, slug_of
+from post_utils import list_post_paths, slug_of, join_article  # Naht-SSOT
 import groq_config
 # AGC-AUTOPILOT (08.09.2026): optionaler Kontext aus der Blog-Automatik
 # (Brand Brain + geroutete Tages-Recherche + Kampagnen-CTA). Der Import DARF
@@ -840,7 +840,8 @@ def validate_frontmatter(path):
             elif f == "description:":
                 add += 'description: "Tipps und Einordnung zu diesem Thema."\n'
         parts[1] = fm.rstrip() + "\n" + add
-        open(path, "w", encoding="utf-8").write("---".join(parts))
+        open(path, "w", encoding="utf-8").write(
+            join_article(parts[1], parts[2], parts[0]))
         print(f"    ✓ Frontmatter repariert: {', '.join(fixes)} ergänzt")
 
 

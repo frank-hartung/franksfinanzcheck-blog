@@ -26,6 +26,8 @@ import sys
 from collections import defaultdict
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 DO_FIX = "--fix" in sys.argv
 
 DESC_MAX = 500
@@ -141,7 +143,7 @@ def _fm_set(content, key, value):
             fm=parts[1]
             body=parts[2]
             fm2=fm.rstrip("\n")+"\n"+line+"\n"
-            return "---"+fm2+"---"+body
+            return join_article(fm2, body)
         return content
 
 def main():

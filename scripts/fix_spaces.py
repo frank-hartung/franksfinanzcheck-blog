@@ -47,6 +47,8 @@ import re
 import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 
 NBSP = "\u00a0"
 
@@ -418,7 +420,8 @@ def main() -> int:
             total += n
             print(f"  {f.split('/')[-2]}: {n} Korrektur(en)")
             if not dry:
-                open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
+                open(f, "w", encoding="utf-8").write(
+                    join_article(parts[1], new_body, parts[0]))
     modus = "DRY-RUN" if dry else "FIX"
     print(f"\n[{modus}] Leerzeichen-Generator: {total} Korrekturen in {len(files)} Dateien.")
     if not dry:

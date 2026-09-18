@@ -49,7 +49,8 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from post_utils import build_state, list_post_paths, slug_of  # noqa: E402
+from post_utils import (build_state, list_post_paths, slug_of,  # noqa: E402
+                        join_article)  # Naht-SSOT
 
 REPORT = os.path.join(BLOG_DIR, "DRAFT-LINK-REPORT.md")
 
@@ -139,7 +140,7 @@ def heal_content(content, posts, unlink_transient=False):
         return m.group(0)
 
     new_body = POST_LINK_RX.sub(repl, body)
-    new_content = ("---" + fm + "---" + new_body) if fm else new_body
+    new_content = join_article(fm, new_body) if fm else new_body
     return new_content, geaendert, details
 
 

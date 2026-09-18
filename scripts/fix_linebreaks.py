@@ -36,6 +36,8 @@ import urllib.error
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 import groq_config
 
 # REPARATUR 11.09.2026 (Reserve #5): Auch „## FAQ – kurze Antworten“ gilt
@@ -366,7 +368,8 @@ def main() -> int:
             total += n
             print(f"  {f.split('/')[-2]}: {n} Änderung(en)")
             if not dry:
-                open(f, "w", encoding="utf-8").write(parts[0] + "---" + parts[1] + "---" + new_body)
+                open(f, "w", encoding="utf-8").write(
+                    join_article(parts[1], new_body, parts[0]))
     print(f"\n{'DRY-RUN: ' if dry else ''}Zeilenumbruch-Generator (KI): {total} Änderungen.")
     if not dry:
         try:

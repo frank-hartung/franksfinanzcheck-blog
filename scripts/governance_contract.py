@@ -114,7 +114,16 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Fehler-Alertings täglich nach (~35 % der Ereignisse kamen
           # 08.–18.09. nie an). Eine Wache, die Zählung nur dokumentiert,
           # statt sie zu verlangen, ist keine Wache – also ins Minimum.
-          "alerting_heartbeat.py"]
+          "alerting_heartbeat.py",
+          # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
+          # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
+          # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber
+          # zeilenweise lesende Wachen werden blind (park_state.set_field
+          # liefert still False, compound_guard zählt 0 statt 1) – und eine
+          # Live-Seite trug das Prompt-Gerüst „TITEL:/ARTIKEL:". Der Selbsttest
+          # der Wache hält Kleber-Erkennung, Naht-Treue, Gerüst-Entfernung und
+          # Idempotenz fest; sie heilt über die Naht-SSOT in post_utils.
+          "fm_boundary_guard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
