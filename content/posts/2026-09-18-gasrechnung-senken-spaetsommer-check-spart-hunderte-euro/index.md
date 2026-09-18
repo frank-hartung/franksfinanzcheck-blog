@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Gasrechnung"]
+keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Spätsommer-Check", "Gaspreisgarantie"]
 pin_title: "Gasrechnung senken: Spätsommer-Check spart hunderte Euro"
 pin_description: "*Werbung | Jetzt die Gasrechnung senken: Bereite dein Zuhause im Spätsommer optimal vor. Tipps zum Heizkosten sparen und Heizung prüfen für einen günstigen Winter. Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
 ai_generated: true

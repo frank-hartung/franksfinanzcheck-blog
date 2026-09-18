@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-18T08:40:15+00:00",
+  "generatedAt": "2026-09-18T09:05:25+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest.jpg",
+      "image": "images/covers/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest.jpg",
+      "image": "images/covers/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -176,6 +176,22 @@
     },
     "/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/": {
       "image": "images/covers/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/": {
+      "image": "images/covers/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -526,22 +542,6 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor/": {
-      "image": "images/covers/2026-09-07-heizung-wartung-so-bereitest-du-dein-heim-effizient-vor.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen/": {
       "image": "images/covers/2026-09-07-stromfresser-finden-energiediebe-im-haushalt-stoppen.jpg",
       "type": "single",
@@ -592,22 +592,6 @@
     },
     "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/": {
       "image": "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/": {
-      "image": "images/covers/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
