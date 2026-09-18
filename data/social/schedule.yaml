@@ -853,9 +853,9 @@ items:
   date: '2026-09-18'
   time: 07:00
   scheduled_at: '2026-09-18T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum:vergleich:2026-09-18
   channel: linkedin
   slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
@@ -865,9 +865,9 @@ items:
   date: '2026-09-18'
   time: 07:45
   scheduled_at: '2026-09-18T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:zitat:2026-09-18
   channel: bluesky
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -877,9 +877,9 @@ items:
   date: '2026-09-18'
   time: 08:15
   scheduled_at: '2026-09-18T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:takeaway:2026-09-18
   channel: x
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
@@ -889,9 +889,9 @@ items:
   date: '2026-09-18'
   time: 08:45
   scheduled_at: '2026-09-18T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-10-dsl-wechselbonus-sichern:frage:2026-09-18
   channel: threads
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -901,9 +901,9 @@ items:
   date: '2026-09-18'
   time: 09:15
   scheduled_at: '2026-09-18T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:takeaway:2026-09-18
   channel: facebook
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -913,9 +913,9 @@ items:
   date: '2026-09-18'
   time: 09:45
   scheduled_at: '2026-09-18T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:frage:2026-09-18
   channel: instagram
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
@@ -925,9 +925,9 @@ items:
   date: '2026-09-18'
   time: '11:45'
   scheduled_at: '2026-09-18T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-09-18
   channel: bluesky
   slug: 2026-08-10-dsl-wechselbonus-sichern
