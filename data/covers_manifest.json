@@ -617,7 +617,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-17T10:04:28+00:00",
+  "ts": "2026-09-18T08:40:15+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -869,10 +869,19 @@
  },
  "2026-09-18-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
   "title": "Gasrechnung senken: Spätsommer-Check spart hunderte Euro",
-  "ts": "2026-09-18T08:29:26+00:00",
+  "ts": "2026-09-18T08:40:13+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert": {
+  "title": "Versicherung-Update: Was sich jetzt für dich ändert",
+  "ts": "2026-09-18T08:39:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
    "savings": ""
   }
  }

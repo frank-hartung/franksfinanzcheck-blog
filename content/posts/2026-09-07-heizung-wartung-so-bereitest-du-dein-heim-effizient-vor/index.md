@@ -1,11 +1,10 @@
 ---
 title: "Heizungswartung: So bereitest du dein Heim effizient vor"
 description: Eine professionelle Heizungswartung im Spätsommer spart bares Geld. Erfahre, wie du dein Heim winterfest machst und gaskosten senken kannst.
-date: 2026-09-11T20:00:05Z
+date: 2026-09-18T08:38:46Z
 draft: true
-cadence_wait: true
-cadence_demoted: 2026-09-11T20:00:17Z
-cadence_grund: "Hold aufgehoben (PR #289): check_titles-R5-Fehlalarm behoben (R5_END_WHITELIST): 0 Titel-Verstoesse im Korpus, 0 Stale-Cover – Re-Queue für den vollen Gate-Durchlauf"
+cadence_demoted: 2026-09-18T08:39:23Z
+cadence_grund: "publish-gate: Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 57 (Ziel ≥ 60); 8 Absätze > 4 Sätze; 18 Passiv-Formulierungen"
 tags: ["Heizungswartung", "Winterfest machen Wohnung", "Spätsommer Heizung", "Gaskosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
