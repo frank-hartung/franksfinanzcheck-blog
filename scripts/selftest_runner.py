@@ -40,6 +40,15 @@ Dieser Runner ersetzt beides durch Nachweis:
               ein Prüf-Aufruf heilt nicht (Vertragsregel C15).
   ZEITDECKEL  eine hängende Wache kostet ihr Budget und wird gemeldet – sie
               frisst nicht das Zeitlimit des ganzen Jobs.
+  VERDRAHTUNG `verdrahtet(name)` beweist für eine einzelne Wache, dass sie im
+              Qualitäts-Gate wirklich läuft – über den MECHANISMUS (Regelwerk →
+              Gate ruft diesen Runner → Runner entdeckt die quotierte Kennung →
+              keine Ausnahme), nicht über eine Namens-Suche in der YAML.
+              Grund: Bis zum 18.09.2026 bewiesen zwei Unittests die Verdrahtung
+              mit `assertIn("newsletter_digest", link-check.yml)`. Als die
+              Bash-Liste durch diesen Runner ersetzt wurde, fiel der eine Test
+              aus – und der andere bestand nur noch, weil ein YAML-KOMMENTAR den
+              Namen erwähnte. Ein Kommentar ist keine Verdrahtung.
 
 Nutzung:
     python3 scripts/selftest_runner.py                 # Basis + Uhr-Proben
@@ -54,6 +63,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import importlib.util
 import json
 import os
 import re
@@ -105,6 +115,13 @@ GEFAHREN = {
 }
 
 
+# Wo die Verdrahtung bewiesen wird: das Qualitäts-Gate und der Aufruf, der alle
+# Wachen laufen lässt. Steht hier (und nicht in den Unittests), damit die
+# Antwort auf „läuft diese Wache im Gate?" eine einzige Quelle hat.
+GATE_DATEI = (".github", "workflows", "link-check.yml")
+GATE_AUFRUF = "scripts/selftest_runner.py"
+
+
 def entdecken(skript_dir: str = SKRIPT_DIR) -> tuple:
     """(echte Selbsttests, Erwähnungen ohne Implementierung) – aus dem Dateibaum.
 
@@ -147,15 +164,115 @@ def arbeitsbaum(root: str = BLOG_DIR):
 def regelwerk(skript_dir: str = SKRIPT_DIR) -> list:
     """`governance_contract.GUARDS` – die Mindestmenge des Vertrags (SSOT).
 
-    Der Import-Cache wird bewusst geleert: Wer einen anderen Skript-Ordner
-    übergibt (der Selbsttest tut das mit einem Stub), muss auch dessen Regelwerk
-    lesen und nicht das zuletzt importierte.
+    Geladen ÜBER DEN DATEIPFAD und unter privatem Modulnamen, nicht über
+    `sys.path` und `import governance_contract`:
+
+      · Wer einen anderen Skript-Ordner übergibt (der Selbsttest tut das mit
+        einem Stub), muss auch dessen Regelwerk lesen.
+      · `sys.path.insert(0, …)` allein reicht dafür nicht: Liegt der eigene
+        Ordner bereits in `sys.path`, wird gar nichts eingefügt – und ein früher
+        eingefügter Stub-Ordner bleibt vorn. Genau so las diese Funktion am
+        18.09.2026 das Stub-Regelwerk statt des echten; entdeckt hat es der
+        Verdrahtungs-Nachweis im eigenen Selbsttest, nicht ein Mensch.
+      · Kein `sys.modules`-Eintrag heißt: kein Import-Cache, der einem anderen
+        Prüfer ein fremdes Regelwerk unterschiebt.
+
+    Fehler (Datei fehlt, Lader fehlt, `GUARDS` fehlt) steigen auf – `pruefen`
+    meldet sie als Befund. Still `[]` zurückzugeben wäre ein SSOT-Abgleich, der
+    nichts abgleicht.
     """
-    if skript_dir not in sys.path:
-        sys.path.insert(0, skript_dir)
-    sys.modules.pop("governance_contract", None)
-    from governance_contract import GUARDS  # type: ignore
-    return list(GUARDS)
+    pfad = os.path.join(skript_dir, "governance_contract.py")
+    if not os.path.isfile(pfad):
+        raise FileNotFoundError(pfad)
+    spec = importlib.util.spec_from_file_location("_ffc_regelwerk", pfad)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"kein Lader für {pfad}")
+    modul = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modul)
+    return list(modul.GUARDS)
+
+
+def _ohne_kommentare(text: str) -> str:
+    """Zeilen raus, die mit `#` beginnen – ein Kommentar ist keine Verdrahtung."""
+    return "\n".join(z for z in text.splitlines() if not z.lstrip().startswith("#"))
+
+
+def gate_aufrufe(root: str = BLOG_DIR) -> list[str]:
+    """Die `run:`-Texte des Qualitäts-Gates, kommentarbereinigt.
+
+    Bewusst nicht `GATE_AUFRUF in open(link-check.yml).read()`: Diese Datei
+    erwähnt `scripts/selftest_runner.py` auch in ihren Erklär-Kommentaren, und
+    ein Mutationstest („Aufruf ersetzt, Kommentar stehen gelassen") lief damit
+    als grün durch. Wer den Text statt des Mechanismus prüft, bekommt genau die
+    Schein-Sicherheit, die dieser Runner abschaffen soll.
+
+    PyYAML ist im Gate installiert (Schritt „Python-Abhängigkeiten"); fehlt es,
+    wird die ganze Datei kommentarbereinigt durchsucht – schwächer, aber immer
+    noch ohne die Kommentar-Falle.
+    """
+    with open(os.path.join(root, *GATE_DATEI), encoding="utf-8") as fh:
+        roh = fh.read()
+    texte: list[str] = [roh]
+    try:
+        import yaml
+        daten = yaml.safe_load(roh) or {}
+        texte = [schritt["run"]
+                 for job in (daten.get("jobs") or {}).values()
+                 for schritt in (job.get("steps") or [])
+                 if isinstance(schritt.get("run"), str)]
+    except Exception:  # noqa: BLE001 – ohne PyYAML gilt die Rohtext-Fallback-Stufe
+        pass
+    return [_ohne_kommentare(t) for t in texte]
+
+
+def verdrahtet(name: str, root: str = BLOG_DIR,
+               skript_dir: str = SKRIPT_DIR) -> list[str]:
+    """Gründe, warum `name` im Qualitäts-Gate NICHT läuft – leer heißt: sie läuft.
+
+    Geprüft wird der MECHANISMUS, nicht der Text:
+
+      1. `scripts/<name>` existiert,
+      2. es implementiert `--selftest` wirklich (quotierte Kennung),
+      3. es steht im Regelwerk `governance_contract.GUARDS` (SSOT),
+      4. das Gate (`link-check.yml`) ruft diesen Runner auf,
+      5. es ist nicht als Ausnahme eingetragen.
+
+    Bewusst kein `assertIn("<name>", link-check.yml)`: Solche Prüfungen bestanden
+    solange der Name in der Bash-Liste stand – und sie bestanden am 18.09.2026
+    sogar noch, als der Name nur in einem YAML-KOMMENTAR vorkam. Beides sagt
+    nichts darüber, ob die Wache läuft. Ob sie GRÜN ist, prüft der Runner zur
+    Laufzeit (`pruefen`), nicht diese Funktion.
+    """
+    gründe: list[str] = []
+    basis = os.path.basename(str(name).strip().replace("\\", "/"))
+    if not basis.endswith(".py"):
+        basis += ".py"
+
+    if not os.path.isfile(os.path.join(skript_dir, basis)):
+        gründe.append(f"scripts/{basis} existiert nicht")
+    elif basis not in {os.path.basename(p) for p in entdecken(skript_dir)[0]}:
+        gründe.append(f"scripts/{basis} implementiert `--selftest` nicht (keine "
+                      "quotierte Kennung) – der Runner würde es überspringen")
+    try:
+        guards = regelwerk(skript_dir)
+    except Exception as exc:  # noqa: BLE001 – ein unlesbares Regelwerk ist ein Grund
+        guards = None
+        gründe.append(f"governance_contract.GUARDS nicht lesbar "
+                      f"({exc.__class__.__name__}) – der SSOT-Abgleich fällt aus")
+    if guards is not None and basis not in guards:
+        gründe.append(f"scripts/{basis} steht nicht in governance_contract.GUARDS "
+                      "– das Regelwerk verlangt diese Wache nicht")
+    try:
+        if not any(GATE_AUFRUF in t for t in gate_aufrufe(root)):
+            gründe.append(f"{'/'.join(GATE_DATEI)} ruft {GATE_AUFRUF} nicht auf "
+                          "(Kommentare zählen nicht) – damit läuft keine Wache "
+                          "automatisch im Gate")
+    except OSError:
+        gründe.append(f"Qualitäts-Gate nicht lesbar: {'/'.join(GATE_DATEI)}")
+    if basis in AUSNAHMEN:
+        gründe.append(f"scripts/{basis} ist als Ausnahme eingetragen und läuft im "
+                      f"Gate deshalb nicht mit: {AUSNAHMEN[basis]}")
+    return gründe
 
 
 def _laufen(befehl: list, deckel: int) -> tuple:
@@ -385,6 +502,44 @@ def _selftest() -> int:
             fehler.append(f"Uhr-Proben {erg['uhr_proben']} statt "
                           f"{5 * len(UHR_PROBE_TAGE)}")
 
+        # ------------------------------------------------------------
+        # VERDRAHTUNGS-NACHWEIS: `verdrahtet()` muss den Mechanismus prüfen,
+        # nicht den Text. Bis zum 18.09.2026 bewiesen zwei Unittests die
+        # Verdrahtung mit `assertIn("<name>", link-check.yml)` – der eine fiel
+        # aus, als die Bash-Liste durch diesen Runner ersetzt wurde, der andere
+        # bestand nur noch dank eines YAML-Kommentars. Beides ist hier nachgebaut.
+        # ------------------------------------------------------------
+        gate_dir = os.path.join(tmp, ".github", "workflows")
+        os.makedirs(gate_dir, exist_ok=True)
+        gate_datei = os.path.join(gate_dir, "link-check.yml")
+        gate_gruen = ("name: Qualitäts-Gate\n"
+                      "jobs:\n  gate:\n    steps:\n"
+                      f"      - run: python3 {GATE_AUFRUF}\n")
+        with open(gate_datei, "w", encoding="utf-8") as fh:
+            fh.write(gate_gruen)
+        # Kommentar statt Aufruf: die Falle, in der der alte Test bestand
+        with open(gate_datei, "w", encoding="utf-8") as fh:
+            fh.write("# hier stand mal gut.py in einer Bash-Liste\n")
+        if not verdrahtet("gut.py", root=tmp, skript_dir=skripte):
+            fehler.append("verdrahtet() hält einen YAML-KOMMENTAR für Verdrahtung")
+        with open(gate_datei, "w", encoding="utf-8") as fh:
+            fh.write(gate_gruen)
+        if verdrahtet("gut.py", root=tmp, skript_dir=skripte):
+            fehler.append("verdrahtet() erkennt eine echt verdrahtete Wache nicht")
+        if verdrahtet("scripts/gut.py", root=tmp, skript_dir=skripte):
+            fehler.append("verdrahtet() stolpert über ein scripts/-Präfix")
+        for name, muss in (("kaputt.py", "GUARDS"),          # läuft, aber nicht verlangt
+                           ("gibt_es_nicht.py", "existiert nicht"),
+                           ("erwaehnung.py", "quotierte Kennung"),
+                           ("kettenleiter.py", "Ausnahme")):
+            gründe = verdrahtet(name, root=tmp, skript_dir=skripte)
+            if not any(muss in g for g in gründe):
+                fehler.append(f"verdrahtet('{name}') nennt '{muss}' nicht: {gründe}")
+        # Und am echten Baum: genau das ersetzt die Namens-Suche in den Unittests.
+        if verdrahtet("draft_triage.py"):
+            fehler.append(f"draft_triage.py ist im echten Baum nicht verdrahtet: "
+                          f"{verdrahtet('draft_triage.py')}")
+
         # Ausnahmen und Gefahren-Liste dürfen nicht still altern
         globals()["AUSNAHMEN"] = {"kettenleiter.py": "   "}
         if not any("ohne Begründung" in b for b in
@@ -455,7 +610,7 @@ def _selftest() -> int:
         return 2
     print("✅ Runner-Selbsttest grün: Entdeckung (nur echte Kennung), SSOT-Abgleich, "
           "Ausnahmen- und Gefahren-Pflicht, rote Wache, Datumsbombe, C15-Wache, "
-          "leerer Baum, Markdown.")
+          "leerer Baum, Verdrahtungs-Nachweis, Markdown.")
     return 0
 
 

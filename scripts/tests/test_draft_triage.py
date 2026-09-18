@@ -34,6 +34,7 @@ def _load(name: str, path: str):
 
 dt = _load("draft_triage", os.path.join(SCRIPTS, "draft_triage.py"))
 gc = _load("governance_contract", os.path.join(SCRIPTS, "governance_contract.py"))
+sr = _load("selftest_runner", os.path.join(SCRIPTS, "selftest_runner.py"))
 
 FUELL = "".join(f"\n## Abschnitt {i}\n\nSpartipp mit Zahlen, belegt und gerechnet.\n"
                 for i in range(6)) * 60
@@ -162,8 +163,14 @@ class BestandUndVertrag(unittest.TestCase):
         # Und sie darf den Root nicht zumüllen: kein Report-Schreibpfad im Workflow
         self.assertNotIn("--report", yml)
         self.assertNotIn("DRAFT-TRIAGE-REPORT", yml)
-        self.assertIn("draft_triage", open(os.path.join(ROOT, ".github", "workflows",
-                                      "link-check.yml"), encoding="utf-8").read())
+        # Qualitäts-Gate: die Verdrahtung über den MECHANISMUS beweisen
+        # (Regelwerk → Gate ruft den Runner → Runner entdeckt die quotierte
+        # Kennung → keine Ausnahme) statt über eine Namens-Suche in der YAML.
+        # `assertIn("draft_triage", link-check.yml)` bestand am 18.09.2026 auch
+        # noch, als der Name längst nur in einem Erklär-KOMMENTAR stand – ein
+        # Kommentar ist keine Verdrahtung (Issue: Run 35312783057).
+        self.assertEqual([], sr.verdrahtet("draft_triage.py"),
+                         "draft_triage läuft nicht im Qualitäts-Gate")
 
     def test_selbsttest_beruehrt_nie_den_echten_bestand(self):
         with tempfile.TemporaryDirectory() as td:

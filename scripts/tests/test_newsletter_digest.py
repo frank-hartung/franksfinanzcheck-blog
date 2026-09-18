@@ -39,6 +39,7 @@ def _load(name: str, path: str):
 
 nd = _load("newsletter_digest", os.path.join(SCRIPTS, "newsletter_digest.py"))
 gc = _load("governance_contract", os.path.join(SCRIPTS, "governance_contract.py"))
+sr = _load("selftest_runner", os.path.join(SCRIPTS, "selftest_runner.py"))
 
 
 class Baum:
@@ -281,9 +282,13 @@ class Verdrahtung(unittest.TestCase):
             self.assertIn(marke, wf, f"Workflow enthält nicht: {marke}")
         # Kein Weg, ohne Absender zu senden – und kein roter Lauf ohne ihn
         self.assertIn("ARGS=\"${ARGS/--send/}\"", wf)
-        lc = open(os.path.join(ROOT, ".github/workflows/link-check.yml"),
-                  encoding="utf-8").read()
-        self.assertIn("newsletter_digest", lc)
+        # Qualitäts-Gate: `assertIn("newsletter_digest", link-check.yml)` war bis
+        # zum 18.09.2026 der Verdrahtungs-Beweis – und fiel aus, als die
+        # abgetippte Bash-Wachen-Liste durch scripts/selftest_runner.py ersetzt
+        # wurde (Run 35312783057). Dieselbe Prüfung als Textsuche wäre außerdem
+        # mit einem bloßen Kommentar zufrieden. Deshalb: Mechanismus prüfen.
+        self.assertEqual([], sr.verdrahtet("newsletter_digest.py"),
+                         "newsletter_digest läuft nicht im Qualitäts-Gate")
 
     def test_landingsseite_ist_gebaut_und_ohne_falsches_versprechen(self):
         seite = os.path.join(ROOT, "public/newsletter/index.html")

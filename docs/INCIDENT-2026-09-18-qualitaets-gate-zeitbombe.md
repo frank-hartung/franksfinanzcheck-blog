@@ -22,7 +22,9 @@ deterministische Fixtures in `draft_triage.py` und `audio_coverage_check.py`,
 Handkopie), `governance_contract.GUARDS` als einzige Liste und
 `.github/workflows/link-check.yml` ohne kopierte Wachen-Liste, dafür mit
 Eigenmeldung. Die Uhr-Falle deckt die ganze Befallsklasse ab, nicht nur die zwei
-bekannten Fälle.
+bekannten Fälle. Zwei weitere Befunde kamen beim Einbau dazu: Verdrahtungs-Tests,
+die Namen in der YAML suchten (F), und ein Regelwerk-Import, der eine
+Schatten-Kopie lesen konnte (G) — beide vom neuen Nachweis selbst entdeckt.
 
 ## Was gemeldet wurde
 
@@ -74,7 +76,7 @@ Der Selbsttest maß also nicht die Wache, sondern den Kalender. Folgen:
    18.09." lautet, trainiert Alarm-Müdigkeit — derselbe Effekt, den der
    Governance-Vertrag wegen Report #206 überhaupt eingeführt hat.
 
-## Ursachen und Nebenfunde (5 unabhängig voneinander)
+## Ursachen und Nebenfunde (7 unabhängig voneinander)
 
 | # | Befund | Wirkung | Klasse |
 |---|---|---|---|
@@ -83,6 +85,8 @@ Der Selbsttest maß also nicht die Wache, sondern den Kalender. Folgen:
 | C | Die Wachen-Liste im Gate war eine **Handkopie** von `governance_contract.GUARDS` und still veraltet: `readability_check`, `pinterest_auth`, `social_studio`, `alert_router`, `affiliate_integrity_gate` liefen im Gate nicht mit | 5 Wachen ungeprüft, obwohl das Regelwerk sie verlangt | Abtippen statt Ableiten |
 | D | `publish_gate.py` und `affiliate_marketer.py` erwähnen `--selftest` im Kommentar, **implementieren es nicht** | Ein Aufruf mit der Flagge startet die Standard-Aktion. Während der Diagnose real ausgelöst: `publish_gate` stufte einen LIVE-Artikel (`2026-09-11-wlan-probleme-loesen-…`) auf `draft: true` herab, weil der lokale `public/`-Build älter war als der Bestand. Änderung zurückgenommen, Artikel unverändert live. | Prüf-Aufruf heilt (C15) |
 | E | **Das rote Gate hat niemanden alarmiert.** `alert-on-failure.yml` führt das Gate zwar in seiner `workflow_run`-Liste, ausgelöst wurde es aber nicht: Für die Fehlschläge vom 17.09. 06:09:16 UTC (Run 35188605416) und 18.09. 05:56:22 UTC (Run 35312783057) existiert **kein einziger Fehler-Alerting-Lauf** und kein Issue. Am `schedule`-Auslöser liegt es nicht — Uptime-Monitor (ebenfalls `schedule`) hat am 18.09. 01:32:43 sehr wohl einen Alerting-Lauf ausgelöst, und die Workflow-Namen sind byteweise identisch. | Zwei Nächte rotes Gate ohne Meldung; der Betreiber erfuhr es durch Nachschauen | Monitoring blind |
+| F | **Zwei Unittests bewiesen die Verdrahtung mit einer Namens-Suche in der YAML** (`assertIn("newsletter_digest", link-check.yml)`). Als die Bash-Liste durch den Runner ersetzt wurde, fiel `test_newsletter_digest` aus (CI-Lauf 35333234041, Issue #312) – und `test_draft_triage` bestand **nur noch, weil ein YAML-Kommentar** den Namen erwähnte. | Ein Test, der rot wird, obwohl die Wache läuft; und ein Test, der grün bleibt, obwohl er nichts mehr beweist | Text statt Mechanismus |
+| G | **`selftest_runner.regelwerk()` konnte das falsche Regelwerk lesen.** `sys.path.insert(0, ziel)` ist wirkungslos, wenn der Ziel-Ordner bereits in `sys.path` liegt (beim Runner immer: sein eigener Ordner) – ein vorher eingefügter Stub-Ordner bleibt dann vorn und seine `GUARDS` werden als die echten gelesen. | SSOT-Abgleich gegen eine fremde Liste, unbemerkt | Gefunden vom neuen Verdrahtungs-Nachweis, nicht von einem Menschen |
 
 Beweis für B (Selbsttest unter eine um 1461 Tage vorgestellte Uhr gelegt):
 
@@ -154,6 +158,27 @@ Schließ-Schritt läuft jetzt auf `success()` und räumt alle drei Meldungstypen
 offen stehen. Beide Pfade (Anlegen / Kommentieren / Schließen) wurden mit
 einem `gh`-Stub durchgespielt.
 
+**F — Verdrahtung wird über den Mechanismus bewiesen, nicht über den Text**
+`selftest_runner.verdrahtet(name)` gibt die Gründe zurück, warum eine Wache im
+Gate **nicht** läuft (leer = sie läuft): Datei vorhanden → `--selftest` wirklich
+implementiert (quotierte Kennung) → in `governance_contract.GUARDS` → Gate ruft
+`scripts/selftest_runner.py` auf → keine Ausnahme. Beide Unittests
+(`test_draft_triage`, `test_newsletter_digest`) prüfen jetzt diese Funktion statt
+die YAML; die `run:`-Texte werden dafür **kommentarbereinigt** gelesen
+(`gate_aufrufe()`, PyYAML mit Rohtext-Fallback), denn ein Name im Kommentar ist
+keine Verdrahtung. Nachweis durch Mutation: Aufruf ersetzt, Aufruf
+auskommentiert, `--selftest`-Kennung entfernt, `verdrahtet()` auf `return []`
+verstümmelt — alle vier Fälle werden rot, im Runner-Selbsttest **und** in den
+beiden Unittests.
+
+**G — `regelwerk()` lädt das Regelwerk über den Dateipfad**
+`importlib.util.spec_from_file_location` unter privatem Modulnamen statt
+`sys.path.insert` + `import governance_contract`: kein Import-Cache, der einem
+anderen Prüfer ein fremdes Regelwerk unterschiebt, und kein Schatten-Ordner, der
+vorn bleibt. Fehler steigen auf (`pruefen` meldet „Regelwerk nicht lesbar"),
+statt still `[]` zu liefern — ein SSOT-Abgleich, der nichts abgleicht, ist
+schlimmer als einer, der fehlt.
+
 **Regelwerk** — `governance_contract.GUARDS` enthält `selftest_clock.py` und
 `selftest_runner.py`: Der Vertrag prüft damit auch die Prüfer (C6).
 
@@ -176,10 +201,14 @@ rot werden:
 | Auffrischung wird Blocker | 🔴 „auffrischung: Zustand BLOCKIERT statt VERWAIST" |
 | `audio_coverage_check`: feste Fixtures zurück | 🔴 „[Testdatum 2026-12-24] Live-Artikel falsch" |
 | Runner: rote Wache / Datumsbombe / schreibender Selbsttest / leere Entdeckung / veraltete Ausnahme | 🔴 je eigener Befund |
+| Runner: Gate-Aufruf ersetzt (Kommentar bleibt) / Aufruf auskommentiert / `--selftest`-Kennung aus `draft_triage` entfernt / `verdrahtet()` liefert immer `[]` | 🔴 je eigener Befund – **und** 🔴 in `test_draft_triage` + `test_newsletter_digest` |
 
 Zusätzlich: komplettes Gate lokal nachgebaut (Selbsttests → Vertrag → `hugo
 --minify` → interne Links → Schema-Gate): **grün**, 2861 interne Links ohne
-Defekt, 385 Seiten, 0 harte Schema-Funde.
+Defekt, 385 Seiten, 0 harte Schema-Funde. Dazu die Regressionssuite des
+`publication-reliability-tests`-Workflows (`python3 -m unittest discover -s
+scripts/tests`): **271 Tests, 0 Fehler** — vor der Reparatur 270/1, weil ein
+Verdrahtungs-Test noch die alte Bash-Liste suchte (Befund F).
 
 ## Folge-Befunde (nicht Teil dieses Laufs, bewusst nicht still mitrepariert)
 
@@ -227,6 +256,7 @@ python3 scripts/draft_triage.py --selftest              # 10 Fälle × 6 Daten �
 python3 scripts/audio_coverage_check.py --selftest      # 5 Fälle × 5 Daten
 python3 scripts/selftest_runner.py                      # alle Wachen + Uhr-Proben
 python3 scripts/selftest_clock.py --trap scripts/draft_triage.py --offset 1461
+python3 -m unittest discover -s scripts/tests         # Regression (271 Tests)
 ```
 
 ---
