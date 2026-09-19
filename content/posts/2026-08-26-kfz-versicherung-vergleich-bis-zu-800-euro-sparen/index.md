@@ -33,7 +33,7 @@ Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/haftpflicht/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die drei Bausteine der Kfz-Versicherung

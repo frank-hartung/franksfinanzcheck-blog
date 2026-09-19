@@ -1,12 +1,12 @@
 {
-  "signed_at": "2026-09-19T15:47:25.407031+00:00",
-  "head": "146e9a7",
+  "signed_at": "2026-09-19T16:57:33.642169+00:00",
+  "head": "70879da",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
     "hugo.toml": "3665fcf4e87be3b171b4555387bab693ca8c479392f524153fa05fd7b1d42e4d",
-    "layouts/_default/_markup/render-link.html": "5618b0078ed7022452e1eda0f664022d1289244493a2cd273b871d6dbc2098b1",
-    "layouts/_partials/affiliate_anchor_attrs.html": "b1c74e96527557bee74beb0b53a090d1f721b8a73d643009929dacd17ad753af",
+    "layouts/_default/_markup/render-link.html": "d80fc9ba268fedb721fdcb02199796747c073c84570cc46ed1239341fb6bc40e",
+    "layouts/_partials/affiliate_anchor_attrs.html": "9ca094a11204ff33f4fc8977e19d605c148e8eb2a8f80e6acc0744d3eecd3826",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
@@ -15,7 +15,7 @@
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "334d8d7cfa66d31263582a5a4418f3e2ead7aaa8dddde2e8fb0bf2e2d9d4ad78",
+    "layouts/pillar/list.html": "a48c030852177b846dd04f1e227c47ccd96a4f2be59a8d7d693c1ba1212c295d",
     "layouts/pillar/single.html": "10e7ce5a3af2246ec56be397f8e37f74331de5da26c28c95a562979a09327455",
     "layouts/robots.txt": "ed88bb3ffbb57272ed5418d3ac0246c1ca8ac082213549fdf13e09b6a9cd5246",
     "layouts/shortcodes/einspartabelle.html": "527d9dccebf232ba9876e64df51ca0fc52ead3518575fca613b9048942a70cf7",
@@ -210,6 +210,16 @@
         "layouts/pillar/list.html",
         "scripts/affiliate_marketer.py",
         "scripts/check24_links.yaml"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "art": "set-current",
+      "head": "70879da",
+      "geaendert": [
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/pillar/list.html"
       ]
     }
   ]

@@ -28,6 +28,16 @@ strom: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter
 Partner-Dashboard. Deep-Pfade aus dem Partnerprogramm (PDF) verwenden –
 **niemals** Kategorien erraten.
 
+**Geprüfte Ausnahmen (19.09.2026, E2E mit Redirect-Kette):**
+
+- `wohngebaeudeversicherung`: Die CHECK24-Deeps dieser Kategorie liefern
+  eine **404** – die Route läuft deshalb über Tarifcheck
+  (`partner_id=47086&ad_id=15&deep=wohngebaeudeversicherung`).
+- `fluege`: Einen eigenständigen Flug-Deep-Link gibt es im
+  CHECK24-Partnerprogramm **nicht** (`deep=fluege` endet auf einer 404).
+  `/go/fluege/` ist ehrlich der **Pauschalreise**-Vergleich (Flug im Paket)
+  und muss in Ankern und Sätzen auch so benannt werden.
+
 ## 2. Gateway (/go/) neu generieren
 
 ```bash
@@ -71,7 +81,18 @@ python3 scripts/affiliate_integrity_gate.py
 
 # 2) E2E-Kette (Redirect-Ziel, Kategorie, PID, Gateway-Drift)
 python3 scripts/affiliate_health.py --no-net
+
+# 3) Intent-Wache (IW0-IW9): liefert jeder Link das Angebot, das Anker,
+#    CTA-Satz und Artikelthema versprechen? (heilt deterministisch)
+python3 scripts/affiliate_intent_guard.py --selftest
+python3 scripts/affiliate_intent_guard.py --fix
 ```
+
+Die Intent-Wache ist die Antwort auf den Vorfall vom 19.09.2026 (Kfz-Artikel
+→ `/go/haftpflicht/`, Girokonto → `/go/kredit/`, Mietwagen →
+`/go/kfz-versicherung/` …): Ein Besucher mit konkreter Kaufabsicht darf
+niemals auf einem fremden Produkt landen. Betriebsanleitung:
+`docs/ANLEITUNG-AFFILIATE-INTENT.md`.
 
 Die Integritäts-Wache läuft zusätzlich **täglich automatisch**
 (Actions → „Affiliate-Integritäts-Wache (täglich)", 06:00 MESZ) und beweist:

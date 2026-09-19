@@ -38,7 +38,7 @@ Dein erster Reflex: Du stürmst zum Heizkörper und drehst das Thermostat mit Sc
 
 ---
 
-💡 **Schnell‑Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner‑Vergleich: [**Angebote in deiner Region sehen**](/go/gas/)  
+💡 **Schnell‑Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner‑Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum heizen wir oft am Ziel vorbei?
@@ -85,7 +85,7 @@ Warum ist das sinnvoll? Ein zu niedriger Abschlag wirkt wie ein zinsloses Darleh
 
 Behalte deinen Zählerstand im Auge. Ich empfehle, einmal im Monat den Stand zu notieren. So siehst du sofort, ob deine Sparmaßnahmen greifen oder ob es irgendwo ein Leck im System gibt. Wer seinen Verbrauch kennt, kann viel entspannter mit dem Thema Energie umgehen.
 
-> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/gas/)
+> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Gas-Anbieter vergleichen & sparen**](/go/gas/)
 
 ## Schritt‑für‑Schritt‑Anleitung: Heizkörper richtig entlüften
 Wenn dein Heizkörper nur im unteren Bereich warm wird oder seltsame Geräusche macht, ist Luft im System. Das Entlüften ist eine einfache Aufgabe, die du selbst erledigen kannst.
@@ -166,6 +166,6 @@ Die meisten Energieversorger erlauben eine Anpassung des Abschlags mehrmals im J
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)
+👉 **Jetzt vergleichen und sparen:** [**→ Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

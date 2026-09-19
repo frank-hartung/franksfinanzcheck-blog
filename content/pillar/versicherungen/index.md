@@ -176,6 +176,6 @@ Singles erhalten erstklassige Tarife mit 50 Millionen Euro Deckungssumme bereits
 
 ---
 
-👉 **Jetzt bestehende Policen prüfen und bis zu 500 € sparen:** [**→ Jetzt Tarife vergleichen**](/go/haftpflicht/)
+👉 **Jetzt bestehende Policen prüfen und bis zu 500 € sparen:** [**→ Jetzt Haftpflichtversicherung vergleichen**](/go/haftpflicht/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

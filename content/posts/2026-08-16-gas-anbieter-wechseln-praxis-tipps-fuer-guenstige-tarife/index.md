@@ -80,7 +80,7 @@ Viele **günstige Gastarife** werben mit massiven Boni. Hier ist Genauigkeit gef
 
 **Strategie-Tipp:** Wenn du bereit bist, jedes Jahr einen **Gasanbieter Wechsel** durchzuführen, nimm die Boni mit. Wenn du lieber 2–3 Jahre Ruhe haben willst, wähle einen „effektiven Tarif“ ohne Boni, der dauerhaft niedrige Arbeitspreise bietet.
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**→ Tarife vergleichen & sparen**](/go/gas/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**→ Jetzt Gastarife vergleichen**](/go/gas/)
 
 ## Beispielrechnung: Grundversorgung vs. Wechseltarif
 
@@ -102,7 +102,7 @@ Viele **günstige Gastarife** werben mit massiven Boni. Hier ist Genauigkeit gef
     {{< zeile label="Vertragslaufzeit" >}}unbegrenzt{{< /zeile >}}
   {{< /tarif >}}
 
-  {{< tarif name="Alternativ-Tarif" tag="⚡ Solide" tone="mid" cta_text="Tarife prüfen →" >}}
+  {{< tarif name="Alternativ-Tarif" tag="⚡ Solide" tone="mid" cta_text="Gastarife vergleichen →" >}}
     {{< zeile label="Grundpreis / Monat" >}}9,90 €<br><small>118,80 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,20 Ct{{< /zeile >}}
     {{< zeile label="Jahreskosten (20.000 kWh)" >}}**1.959 €**{{< /zeile >}}
@@ -114,7 +114,7 @@ Viele **günstige Gastarife** werben mit massiven Boni. Hier ist Genauigkeit gef
     {{< zeile label="Vertragslaufzeit" >}}12 Monate{{< /zeile >}}
   {{< /tarif >}}
 
-  {{< tarif name="Wechseltarif" tag="🏆 Empfehlung" tone="good" win="true" cta_text="🏆 Jetzt wechseln" >}}
+  {{< tarif name="Wechseltarif" tag="🏆 Empfehlung" tone="good" win="true" cta_text="🏆 Gastarife vergleichen" >}}
     {{< zeile label="Grundpreis / Monat" >}}11,00 €<br><small>132 € / Jahr</small>{{< /zeile >}}
     {{< zeile label="Arbeitspreis pro kWh" >}}9,50 Ct{{< /zeile >}}
     {{< zeile label="Jahreskosten (20.000 kWh)" >}}**2.032 €**{{< /zeile >}}
@@ -194,7 +194,7 @@ Der Wechsel ist eine der besten Entscheidungen für dein Geld. Er dauert unter 1
 
 Eine Familie mit 20.000 kWh spart **im ersten Jahr bis zu 882 €**. Auch danach bleiben hunderte Euro pro Jahr Ersparnis im Vergleich zur Grundversorgung. Wer seine **Gaskosten reduzieren** möchte, kommt um einen regelmäßigen **Gas Preisvergleich** nicht herum. Die Zeitinvestition von wenigen Minuten bringt einen Stundenlohn, den man im Berufsalltag selten erreicht.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Bis 882 € sparen – Angebote vergleichen**](/go/gas/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Gastarife vergleichen**](/go/gas/)
 
 **Weiterlesen:** [Pillar Strom & Gas sparen](../../pillar/strom-sparen/) · [Gasrechnung senken im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) · [Günstige Tarife mit Preisgarantie](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 

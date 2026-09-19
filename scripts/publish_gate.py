@@ -23,6 +23,13 @@ Prüfungen bestehen:
                                   ersten drei Prüfungen NICHT erkannt wurden
                                   (siehe Kopfkommentar in
                                   affiliate_integrity_gate.py).
+  5. affiliate_intent_guard.py  – IW0-IW9: liefert jeder Affiliate-Link das
+                                  Angebot, das Anker, CTA-Satz und Artikel-
+                                  thema versprechen? (Auftrag Frank
+                                  19.09.2026: „Ein Besucher mit konkreter
+                                  Kaufabsicht darf niemals auf einem anderen
+                                  Produkt landen." Deterministische Heilung
+                                  läuft mit; was bleibt, blockiert.)
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -246,6 +253,66 @@ def affiliate_integrity_failures(candidates=None):
                     if slug in set(candidates)}
     return per_slug, None, False
 
+
+def affiliate_intent_failures(candidates=None):
+    """Gate #5 (19.09.2026): Intent-Wache IW0–IW9 – liefert der Link das
+    versprochene Angebot?
+
+    Auftrag Frank 19.09.2026: „Ein Besucher mit konkreter Kaufabsicht darf
+    niemals auf einem anderen Produkt landen als der CTA versprochen hat."
+    Fund des Tages: Kfz-Vergleich → /go/haftpflicht/, Girokonto-Artikel →
+    /go/kredit/, Kreditkartenvergleich → /go/reisekrankenversicherung/,
+    Mietwagen-Ratgeber → /go/kfz-versicherung/, Wohngebäude → /go/hausrat/,
+    Flugticket-Ratgeber → /go/mietwagen/, Tagesgeld → C24 ohne Nennung.
+
+    Die Wache heilt deterministisch (kein KI-Rewriting), deshalb läuft sie
+    hier MIT Heilung: Ein druckfrischer Kandidat soll nicht wegen eines
+    automatisch korrigierbaren Ankers verworfen werden. Was nach der Heilung
+    bleibt, ist redaktionell (z. B. ein Vergleichs-Versprechen in Prosa zu
+    einem Einzelanbieter-Angebot) und blockiert die Veröffentlichung.
+
+    Rückgabe: (je-Slug-Gründe, Warnung, Werkzeugfehler). Bei Werkzeugfehler
+    gilt fail-closed: nichts veröffentlichen, nichts vernichten.
+    """
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import affiliate_intent_guard as aig
+    except Exception as exc:  # noqa: BLE001 – Gate darf nie am Wächter scheitern
+        return {}, f"Intent-Wache nicht ladbar: {exc}", True
+
+    alt = getattr(aig, "DRY_RUN", False)
+    try:
+        # Trockenlauf ist ein Beweislauf: Er schreibt weder Report noch Zustand
+        # (Betriebsregel „Beweisläufe schreiben nichts"). Der tägliche CI-Lauf
+        # ruft die Wache direkt auf und setzt dort den Herzschlag.
+        aig.DRY_RUN = bool(DRY_RUN)
+        res = aig.run(do_heal=not DRY_RUN)
+    except Exception as exc:  # noqa: BLE001
+        return {}, f"Intent-Wache lief nicht durch: {exc}", True
+    finally:
+        aig.DRY_RUN = alt
+
+    if res.get("errors"):
+        return {}, "Intent-Wache: " + "; ".join(res["errors"]), True
+
+    per_slug = {}
+    for f in res.get("findings", []):
+        if not f.get("blocking"):
+            continue                     # Hinweise (ehrliches Cross-Selling)
+        slug = f.get("slug", "")
+        per_slug.setdefault(slug, []).append(
+            f"{f.get('code')} Zeile {f.get('line_datei')}: {f.get('problem')}")
+    if candidates is not None:
+        wanted = set(candidates)
+        per_slug = {slug: probs for slug, probs in per_slug.items()
+                    if slug in wanted}
+    geheilt = res.get("healed_count", 0)
+    warn = None
+    if geheilt:
+        warn = (f"Intent-Wache: {geheilt} Fundstelle(n) deterministisch "
+                f"geheilt (Anker/Route/Satz aus dem Intent-Kontrakt)")
+        print(f"⚠ {warn}")
+    return per_slug, warn, False
 
 
 def readability_failures(candidates):
@@ -543,6 +610,7 @@ def main():
     seo_fail, seo_warn = seo_audit_failures()
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
+    intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
     keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
@@ -568,6 +636,21 @@ def main():
     # Also: nichts veröffentlichen – aber auch NICHTS vernichten. Exit 1 bricht
     # den Deploy-Schritt sichtbar ab (alert-on-failure meldet es), die Artikel
     # bleiben unangetastet und gehen beim nächsten Lauf erneut ins Gate.
+    if intent_tool_error:
+        print("\n🛑 AFFILIATE-INTENT NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
+        print(f"   {intent_warn}")
+        print("   Diagnose: python3 scripts/affiliate_intent_guard.py --selftest")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="intent_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": intent_warn}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
     if integ_tool_error:
         print("\n🛑 AFFILIATE-INTEGRITÄT NICHT BEWEISBAR → Publish-Gate stoppt "
               "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
@@ -597,6 +680,10 @@ def main():
         if slug in integ_fail:
             reasons.append("Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): "
                             + "; ".join(integ_fail[slug]))
+        if slug in intent_fail:
+            reasons.append("Affiliate-Intent nicht bestanden (Link liefert ein anderes "
+                           "Produkt als Anker/Satz versprechen): "
+                            + "; ".join(intent_fail[slug]))
         if slug in r5_fail:
             reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
                            "Titel vermutlich unvollständig")

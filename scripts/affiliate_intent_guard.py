@@ -109,6 +109,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -189,12 +190,34 @@ CTA_MARKERS = [
 ]
 
 
+# Struktur-Erkennung (19.09.2026): Nicht jeder CTA trägt einen kanonischen
+# Marker. Pillar-Seiten und ältere Artikel bauen dieselbe Struktur mit eigenen
+# Worten („👉 **Passendes Tagesgeldkonto finden:** [**→ …**](/go/…)"). Ohne
+# diese Erkennung galten sie als In-Text-Prosa, und die Wache durfte sie nicht
+# deterministisch heilen (Menschen-Fund statt Kontrakt-Zeile).
+# Im Bestand vorkommende CTA-Emojis: 👉 (78×), 💡 (51×), 💶 (44×).
+CTA_STRUKTUR = re.compile(
+    r"^(?:>\s*)?(?P<emoji>\U0001F4A1|\U0001F4B6|\U0001F449)\s*"
+    r"\*\*[^*\n]{3,}:?\*\*.*?\[\*\*[^\]\n]+\*\*\]\(/go/")
+SLOT_EMOJI = {"\U0001F4A1": "top", "\U0001F4B6": "mid", "\U0001F449": "end"}
+
+
 def slot_of_line(line: str) -> str:
-    """top/mid/end für eine CTA-Marker-Zeile, sonst "intext"."""
+    """top/mid/end für eine CTA-Zeile, sonst "intext".
+
+    Zwei Beweise: (1) kanonischer Marker-Text ( Hausstil, den auch
+    affiliate_integrity_gate.py kennt), (2) CTA-Struktur (Emoji + fetter
+    Marker + fetter /go/-Link). Prosa mit ungefettetem Link bleibt intext –
+    dort ist der Anker Teil der Grammatik und darf nicht automatisiert
+    umgebaut werden.
+    """
     view = marker_view(line).lower()
     for marker, slot in CTA_MARKERS:
         if marker.lower() + ":" in view or marker.lower() + "**:" in view:
             return slot
+    m = CTA_STRUKTUR.match(line)
+    if m:
+        return SLOT_EMOJI.get(m.group("emoji"), "mid")
     return "intext"
 
 
@@ -377,6 +400,24 @@ def befund(code: str, art: dict, zeile: int, route: str, anchor: str,
     }
 
 
+def body_anfang(text: str) -> int:
+    """Offset, an dem der Body beginnt (direkt hinter der Frontmatter-Naht).
+
+    Bewusst KEIN `post_utils.join_article()` zum Zurückschreiben: Die
+    Naht-Normalisierung fräße Leerzeilen hinter der Frontmatter (Fund
+    19.09.2026: 59 Leerzeilen in 25 Artikeln im Diff, obwohl nur Anker
+    geheilt wurden). Ein Heiler darf ausschließlich die Zeilen anfassen,
+    die er heilt – alles andere bleibt byte-exakt.
+    """
+    if not text.startswith("---"):
+        return 0
+    ende = text.find("\n---", 3)
+    if ende < 0:
+        return 0
+    nl = text.find("\n", ende + 1)
+    return nl + 1 if nl >= 0 else len(text)
+
+
 def body_offset(art: dict) -> int:
     """Zeilenversatz des Bodys in der Datei – der Report nennt DATEIzeilen
     (Menschen öffnen die Datei, nicht den Body)."""
@@ -413,6 +454,13 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
     funde: list[dict] = []
     th = themen(art)
     dominant = th["dominant"]
+    # Themenwelten-/Pillar-Seiten sind HUBS: Sie bündeln bewusst mehrere
+    # Angebote (Konto & Karten = Girokonto + Kreditkarte + Tagesgeld +
+    # Kredit). Ein „dominantes Thema" gibt es dort nicht – IW2/IW4 würden
+    # jedes ehrliche Zweitangebot als Fund melden (15 Hinweise auf 3 Pillar-
+    # Seiten, 19.09.2026). Ehrlichkeit (IW1/IW3/IW8) gilt dort natürlich
+    # weiter: Jeder Anker nennt sein Produkt.
+    hub = art.get("section") == "pillar" or "/pillar/" in art.get("rel", "")
     view = marker_view(body)
 
     # interne Link-Ziele desselben Artikels (für IW7b)
@@ -432,6 +480,12 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
                                  else len(body)])
         z = vk.ziel(key)
         primär = slot in ("top", "mid", "end")
+        # Prosa = In-Text-Link ohne Fettung, grammatisch Teil des Satzes
+        # („Bei der [C24 Bank](/go/girokonto/) sind Kategorien integriert“).
+        # So einen Anker gegen eine CTA-Phrase zu tauschen erzeugt kaputtes
+        # Deutsch – und wenn er Partner oder Produkt nennt, ist er auch
+        # ehrlich. Deshalb: IW8 greift in Prosa nur ohne Ziel-Nennung.
+        ist_prosa = not primär and not anchor.startswith("**")
 
         # --- IW2a: Route nicht registriert (Register-Gate) ---------------
         if key not in reg:
@@ -486,7 +540,7 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
         # (generischer Anker). Ehrliches Cross-Selling (Anker nennt Produkt
         # oder Partner) bleibt erlaubt und wird nur als Hinweis gemeldet –
         # sonst würde die Wache redaktionelle Zweitangebote zerstoeren.
-        if primär and dominant != "allgemein":
+        if primär and dominant != "allgemein" and not hub:
             grund = vk.nie_paar(dominant, key)
             if grund:
                 transparent = vk.nennt_ziel(anchor_klar, key)
@@ -509,7 +563,7 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
                     continue
 
         # --- IW2: Primär-CTA dient nicht dem Artikelthema ---------------
-        if primär and key != dominant and dominant != "allgemein":
+        if primär and key != dominant and dominant != "allgemein" and not hub:
             ctx = kontext_route(view, pos)
             if ctx != key:
                 dz = vk.ziel(dominant)
@@ -535,18 +589,58 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
         cta_zeile = body[zeilen_anfang:zeilen_ende if zeilen_ende > 0 else len(body)]
         satz = cta_zeile if primär else _satz_um(body, pos)
         ok, grund = z.ehrlich(satz)
-        if not ok:
-            heilung, owner = _ehrlich_heilung(z, anchor_klar, primär, slot, art)
-            funde.append(befund(
-                "IW3", art, zeile, key, anchor_klar, slot,
-                f"Angebot wird falsch benannt: {grund}",
-                heilung=heilung, owner=owner, ziel_route=key,
-                ziel_anker=z.anker_fuer(slot if primär else "intext",
-                                        art["slug"])))
-            continue
+        # Satz-Ehrlichkeit (19.09.2026): Auch ein korrekter Anker kann von
+        # einem Satz umgeben sein, der mehr verspricht als das Ziel liefert
+        # („Vergleiche jetzt führende gebührenfreie Girokonten" → ein einziges
+        # C24-Angebot). Bei Primär-CTAs wird OHNE Haus-Marker geprüft: Der
+        # Marker („Jetzt vergleichen und sparen:") ist Hausstil und wird von
+        # AI1/AI3, dash_guard und umbruch_guard erkannt – ihn umzuschreiben
+        # würde den CTA für alle Wächter unsichtbar machen.
+        satz_ok, satz_grund = True, ""
+        marker_grund = ""
+        if ok and z.abweichung and z.abweichung.satz_verbot:
+            if primär:
+                m2 = CTA_LINE.match(cta_zeile)
+                prefix = m2.group("prefix") if m2 else ""
+                teilsatz = (m2.group("satz") if m2 else "") + " " + anchor_klar
+                satz_ok, satz_grund = z.satz_ehrlich(teilsatz)
+                # Kanonische Haus-Marker („Jetzt vergleichen und sparen:")
+                # sind Vertrag: AI1/AI3, dash_guard und umbruch_guard
+                # erkennen CTA-Zeilen an diesem Text – er darf nicht
+                # umgeschrieben werden. EIGENE Marker-Formulierungen schon.
+                kanonisch = any(mk.lower() in marker_view(prefix).lower()
+                                for mk, _ in CTA_MARKERS)
+                if prefix and not kanonisch:
+                    m_ok, m_grund = z.satz_ehrlich(prefix)
+                    if not m_ok:
+                        marker_grund = m_grund
+            else:
+                satz_ok, satz_grund = z.satz_ehrlich(satz)
+        if not ok or not satz_ok or marker_grund:
+            if marker_grund and ok and satz_ok:
+                funde.append(befund(
+                    "IW3", art, zeile, key, anchor_klar, slot,
+                    f"CTA-Marker benennt das Angebot falsch: {marker_grund}",
+                    heilung=("Marker-Text ohne Vergleichs-Versprechen "
+                             "formulieren (Anker und Ziel werden getrennt "
+                             "geprüft/geheilt)"),
+                    owner="human", ziel_route=key, ziel_anker=anchor_klar))
+                # kein continue: Ein generischer Anker in derselben Zeile
+                # wird trotzdem deterministisch geheilt (IW8 unten) – ein
+                # Menschen-Fund darf die Automatik nicht ausbremsen.
+            else:
+                heilung, owner, ziel_anker = _ehrlich_heilung(
+                    z, anchor_klar, primär, slot, art, nur_satz=bool(ok))
+                funde.append(befund(
+                    "IW3", art, zeile, key, anchor_klar, slot,
+                    f"Angebot wird falsch benannt: {grund or satz_grund}",
+                    heilung=heilung, owner=owner, ziel_route=key,
+                    ziel_anker=ziel_anker))
+                continue
 
         # --- IW8: generischer Anker (kein Angebot genannt) --------------
-        if vk.anker_ist_generisch(anchor_klar):
+        if vk.anker_ist_generisch(anchor_klar) and not (
+                ist_prosa and vk.nennt_ziel(anchor_klar, key)):
             neu = z.anker_fuer(slot if primär else "intext", art["slug"])
             funde.append(befund(
                 "IW8", art, zeile, key, anchor_klar, slot,
@@ -558,42 +652,133 @@ def pruefe_artikel(art: dict, reg: dict, titel_pfad: dict[str, str]) -> list[dic
         # --- Anker nennt das Produkt, Route passt, Ehrlichkeit ok -------
         # (Cross-Selling bleibt erlaubt: der Anker selbst ist das Versprechen.)
 
-    # --- Shortcode-CTAs (IW9, Content-Seite) -----------------------------
-    for m in CTA_PARAM.finditer(body):
-        key = m.group("key").lower()
+    # --- Shortcode-CTAs (tarifvergleich / einspartabelle) ---------------
+    # Jede ZEILE mit cta_text wird geprüft, nicht nur der erste Treffer im
+    # Umkreis des cta_url: Eine Vergleichstabelle hat mehrere Tarif-Zeilen,
+    # und am 19.09. sah die Wache nur die erste („Nicht empfohlen") – die
+    # generischen Anker der Klick-Zeilen blieben unsichtbar.
+    #
+    # `cta_muted="true"` rendert ein <span class="ff-tv-btn--muted">, also
+    # KEINEN Link (layouts/shortcodes/tarifvergleich.html): „Nicht
+    # empfohlen" ist ein redaktionelles Urteil, kein Angebots-Versprechen.
+    funde.extend(_shortcode_funde(body, art, reg))
+    return funde
+
+
+_DEKO_VORN = re.compile(r"^[^\w]*")
+_DEKO_HINTEN = re.compile(r"[^\w]*$")
+_MUTED_PARAM = re.compile(r'cta[_-]muted\s*=\s*"(?:true|1|yes|ja)"', re.I)
+
+
+def cta_deko(alt: str, neu: str) -> str:
+    """Emoji-/Pfeil-Garnitur eines cta_text erhalten (Design-Sprache der
+    Vergleichstabellen): „🏆 Jetzt wechseln" → „🏆 Gastarife vergleichen",
+    „Tarife prüfen →" → „Gastarife vergleichen →"."""
+    vorn = _DEKO_VORN.match(alt or "").group(0)
+    hinten = _DEKO_HINTEN.search(alt or "").group(0)
+    if len(hinten) > 3:                 # kein Satzende-Schluck
+        hinten = ""
+    return f"{vorn}{neu}{hinten}"
+
+
+SHORTCODE_TOKEN = re.compile(
+    r"\{\{<\s*(?P<close>/)?\s*(?P<name>[\w-]+)(?P<params>.*?)(?:/)?\}\}", re.S)
+
+
+def _shortcode_funde(body: str, art: dict, reg: dict) -> list[dict]:
+    """Prüft Shortcode-CTAs mit echter Block-Scope (Stack statt Fenster).
+
+    Warum nicht „nächstes cta_url im Umkreis": Eine Vergleichstabelle
+    (`tarifvergleich`) trägt das cta_url im ELTERN-Tag, die cta_text-Werte
+    stehen in den KIND-Tags (`tarif`). Zwischen beiden schließen Kind-Tags
+    (`{{< /tarif >}}`, `{{< /zeile >}}`) – ein zeilenweiser „Reset" hätte
+    die gültige URL verworfen und die Klick-Zeilen unsichtbar gemacht
+    (Fund 19.09.2026: gesehen wurde nur die stumme Zeile „Nicht
+    empfohlen"). Der Stack liefert zu jedem cta_text das zuständige cta_url.
+    """
+    funde: list[dict] = []
+    stack: list[tuple[str, str]] = []          # (Name, Parameter)
+    for tok in SHORTCODE_TOKEN.finditer(body):
+        if tok.group("close"):
+            name = tok.group("name")
+            for i in range(len(stack) - 1, -1, -1):
+                if stack[i][0] == name:
+                    del stack[i:]
+                    break
+            continue
+        params = tok.group("params") or ""
+        stack.append((tok.group("name"), params))
+        tm = CTA_TEXT_PARAM.search(params)
+        if not tm:
+            continue
+        if _MUTED_PARAM.search(params):
+            continue                    # <span class="ff-tv-btn--muted">: kein Link
+        um = CTA_PARAM.search(params)
+        url = um.group("url") if um else ""
+        if not url:
+            for _, eltern in reversed(stack[:-1]):
+                um2 = CTA_PARAM.search(eltern)
+                if um2:
+                    url = um2.group("url")
+                    break
+        if not url:
+            continue
+        key = url.strip("/").split("/")[-1].lower()
+        anchor = tm.group("text").strip()
+        zeile = body.count("\n", 0, tok.start() + tm.start()) + 1
         z = vk.ziel(key)
-        fenster = body[max(0, m.start() - 400):m.end() + 400]
-        tm = CTA_TEXT_PARAM.search(fenster)
-        anchor = tm.group("text") if tm else ""
-        zeile = zeile_von(body, m.start())
         if key not in reg or z is None:
             funde.append(befund(
                 "IW0", art, zeile, key, anchor, "shortcode",
                 f"Shortcode-CTA auf nicht registrierte/unbekannte Route /go/{key}/",
                 owner="human"))
             continue
-        ok, grund = z.ehrlich(anchor or fenster)
+        neu_anker = cta_deko(anchor, z.anker_fuer("intext", art["slug"]))
+        ok, grund = z.ehrlich(anchor)
         if not ok:
             funde.append(befund(
                 "IW3", art, zeile, key, anchor, "shortcode",
                 f"Shortcode-CTA benennt das Angebot falsch: {grund}",
-                heilung=f"cta_text → „{z.anker_fuer('intext', art['slug'])}“",
-                owner="auto", ziel_anker=z.anker_fuer("intext", art["slug"])))
-        elif anchor and vk.anker_ist_generisch(anchor):
+                heilung=f"cta_text → „{neu_anker}“", owner="auto",
+                ziel_anker=neu_anker))
+        elif vk.anker_ist_generisch(anchor):
             funde.append(befund(
                 "IW8", art, zeile, key, anchor, "shortcode",
-                "Shortcode-CTA nennt kein Angebot",
-                heilung=f"cta_text → „{z.anker_fuer('intext', art['slug'])}“",
-                owner="auto", ziel_anker=z.anker_fuer("intext", art["slug"])))
+                "Shortcode-CTA nennt kein Angebot – der Leser erfährt erst "
+                f"nach dem Klick, dass er zu „{z.produkt}“ ({z.partner}) kommt",
+                heilung=f"cta_text → „{neu_anker}“", owner="auto",
+                ziel_anker=neu_anker))
         else:
             routen = vk.anker_routes(anchor)
             if len(routen) == 1 and routen[0] != key:
+                verspricht = vk.ziel(routen[0])
                 funde.append(befund(
                     "IW1", art, zeile, key, anchor, "shortcode",
-                    f"Shortcode-CTA verspricht „{vk.ziel(routen[0]).produkt}“, "
+                    "Shortcode-CTA verspricht "
+                    f"„{verspricht.produkt if verspricht else routen[0]}“, "
                     f"führt zu „{z.produkt}“",
-                    heilung=f"cta_url → /go/{routen[0]}/", ziel_route=routen[0]))
+                    heilung=f"cta_url → /go/{routen[0]}/ (oder cta_text anpassen)",
+                    owner="human", ziel_route=routen[0]))
     return funde
+
+
+def _heile_shortcode(body: str, f: dict) -> tuple[str, list[str]]:
+    """Ersetzt den cta_text einer Shortcode-Zeile (Garnitur bleibt)."""
+    zeilen = body.split("\n")
+    idx = f["line"] - 1
+    if idx >= len(zeilen) or not zeilen[idx].strip():
+        return body, []
+    zl = zeilen[idx]
+    neu = f.get("ziel_anker") or ""
+    if not neu:
+        return body, []
+    m = CTA_TEXT_PARAM.search(zl)
+    if not m or m.group("text").strip() == neu:
+        return body, []                 # schon geheilt (Idempotenz)
+    zeilen[idx] = zl[:m.start(1)] + neu + zl[m.end(1):]
+    return ("\n".join(zeilen),
+            [f"{f['code']} L{f['line']}: Shortcode-CTA „{m.group('text')}“ "
+             f"→ „{neu}“ (/go/{f['route']}/)"])
 
 
 def _satz_um(body: str, pos: int) -> str:
@@ -605,26 +790,31 @@ def _satz_um(body: str, pos: int) -> str:
 
 
 def _ehrlich_heilung(z: vk.Ziel, anchor: str, primär: bool, slot: str,
-                     art: dict) -> tuple[str, str]:
-    """(Heilungstext, owner) für eine Ehrlichkeits-Verletzung.
+                     art: dict, nur_satz: bool = False) -> tuple[str, str, str]:
+    """(Heilungstext, owner, Ziel-Anker) für eine Ehrlichkeits-Verletzung.
 
-    Primär-CTA: Zeile wird komplett neu gesetzt (Haus-Regel: CTA-Boxen nie
-    text-flicken). In-Text: Anhang nur, wenn er grammatisch trägt – sonst
-    redaktioneller Fund mit Vorschlag (halbe Automatik wäre halb ehrlich).
+    Ein Anker, ein Entscheidungsweg – Prüfen und Heilen dürfen hier nicht
+    auseinanderlaufen (Lehre aus #295: zwei Wege zur CTA-Zeile zählten einen
+    Fund, der nie geheilt wurde). Stufen:
+      1. Anhang („verzinstes Tagesgeldkonto der C24 Bank") – nur wenn er
+         grammatisch trägt UND danach ein Produkt im Anker steht.
+      2. Primär-CTA: Kontrakt-Anker (Satz bleibt, wenn er ehrlich ist).
+      3. In-Text: Kontrakt-Anker ist eine CTA-Phrase und in Prosa
+         grammatisch riskant → Menschen-Fund mit Vorschlag.
     """
-    neu = z.anker_fuer(slot if primär else "intext", art["slug"])
+    kontrakt = z.anker_fuer(slot if primär else "intext", art["slug"])
+    if vk.anhang_sicher(z, anchor) and not nur_satz:
+        mit_anhang = anchor + z.abweichung.anhang
+        if not vk.anker_ist_generisch(mit_anhang):
+            return f"Anker → „{mit_anhang}“", "auto", mit_anhang
     if primär:
-        return (f"CTA-Zeile neu aus Kontrakt (Satz + Anker „{neu}“)", "auto")
-    if vk.anhang_sicher(z, anchor):
-        return f"Anker → „{anchor}{z.abweichung.anhang}“", "auto"
-    return (f"Satz/Anker redaktionell umbauen, Vorschlag: „{neu}“ "
-            f"({z.abweichung.hinweis if z.abweichung else 'Abweichung'})",
-            "human")
+        return (f"CTA-Zeile aus dem Kontrakt (ehrlicher Satz + Anker "
+                f"„{kontrakt}“)", "auto", kontrakt)
+    hinweis = z.abweichung.hinweis if z.abweichung else ""
+    return (f"Satz/Anker redaktionell umbauen, Vorschlag: „{kontrakt}“"
+            + (f" ({hinweis})" if hinweis else ""), "human", kontrakt)
 
 
-# ------------------------------------------------------------------ #
-#  Heilung
-# ------------------------------------------------------------------ #
 def heile_artikel(art: dict, funde: list[dict], reg: dict,
                   titel_pfad: dict[str, str]) -> tuple[str, list[str]]:
     """Setzt die Funde deterministisch um. Rückgabe: (neuer Body, Aktionen).
@@ -639,7 +829,21 @@ def heile_artikel(art: dict, funde: list[dict], reg: dict,
     body = art["body"] or ""
     aktionen: list[str] = []
 
-    link_funde = [f for f in funde if f["code"] in ("IW1", "IW2", "IW3", "IW4", "IW8")]
+    sc_funde = [f for f in funde if f["slot"] == "shortcode"
+                and f["owner"] == "auto"]
+    for f in sorted(sc_funde, key=lambda x: -x["line"]):
+        body, akt = _heile_shortcode(body, f)
+        aktionen.extend(akt)
+
+    link_funde = [f for f in funde
+                  if f["code"] in ("IW1", "IW2", "IW3", "IW4", "IW8")
+                  and f["slot"] != "shortcode"]
+    # Eine Zeile, ein Urteil: Trifft IW8/IW2/IW4 (Kontrakt-Anker) UND IW3
+    # (Anhang) dieselbe Zeile, gewinnt der stärkere Heilweg – der Kontrakt-
+    # Anker ist produkt-exakt UND ehrlich, der Anhang nur ehrlich.
+    stark = {(f["line"]) for f in link_funde if f["code"] in ("IW2", "IW4", "IW8")}
+    link_funde = [f for f in link_funde
+                  if not (f["code"] == "IW3" and f["line"] in stark)]
     for f in sorted(link_funde, key=lambda x: -x["line"]):
         body, akt = _heile_link(body, art, f, reg)
         aktionen.extend(akt)
@@ -752,17 +956,20 @@ def _heile_link(body: str, art: dict, f: dict, reg: dict) -> tuple[str, list[str
         if f["owner"] == "human":
             return body, [f"IW3 L{f['line']}: {f['problem']} – Vorschlag "
                           f"„{f.get('ziel_anker', '')}“ (redaktionell umbauen)"]
-        if vk.anhang_sicher(neu_z, anchor_klar):
-            neu_anker = anchor_klar + neu_z.abweichung.anhang
-        else:
-            neu_anker = (f.get("ziel_anker")
-                         or neu_z.anker_fuer(slot if primär else "intext",
-                                             art["slug"]))
+        neu_anker = (f.get("ziel_anker")
+                     or neu_z.anker_fuer(slot if primär else "intext",
+                                         art["slug"]))
 
     # ---- Primär-CTA: ganze Zeile aus dem Kontrakt, wenn der SATZ lügt --
-    satz_luegt = bool(neu_z and neu_z.abweichung
-                      and neu_z.abweichung.art != "portal"
-                      and not neu_z.ehrlich(zeile.replace(anchor_klar, neu_anker))[0])
+    satz_luegt = False
+    if neu_z and neu_z.abweichung and neu_z.abweichung.art != "portal":
+        probe = zeile.replace(anchor_klar, neu_anker)
+        if not neu_z.ehrlich(probe)[0]:
+            satz_luegt = True
+        elif neu_z.abweichung.satz_verbot:
+            m2 = CTA_LINE.match(zeile)
+            teil = (m2.group("satz") if m2 else probe) + " " + neu_anker
+            satz_luegt = not neu_z.satz_ehrlich(teil)[0]
     if primär and (satz_luegt or (code in ("IW2", "IW4"))):
         neue_zeile, ok = _cta_zeile_neu(zeile, neu_route, slot, art["slug"])
         if ok:
@@ -815,7 +1022,9 @@ def _cta_zeile_neu(zeile: str, route: str, slot: str, slug: str) -> tuple[str, b
     prefix, satz, rest = m.group("prefix"), m.group("satz"), m.group("rest")
     anker = z.anker_fuer(slot, slug)
     abw = z.abweichung
-    braucht_satz = bool(abw and abw.art != "portal" and not z.ehrlich(satz + anker)[0])
+    braucht_satz = bool(abw and abw.art != "portal" and (
+        not z.ehrlich(satz + anker)[0]
+        or not z.satz_ehrlich(satz + " " + anker)[0]))
     if braucht_satz:
         neu_satz = z.saetze.get(slot) or z.saetze.get("top") or ""
         if not neu_satz:
@@ -943,11 +1152,11 @@ def pruefe_iw5(reg: dict) -> list[dict]:
             funde.append(befund("IW5", pseudo, 0, route, "", "",
                                 "Gateway ohne noindex – Werbeseite im Index",
                                 owner="auto", heilung="Gateway neu backen"))
-        if z.gateway not in html:
+        if z.ziel_phrase() not in html:
             funde.append(befund("IW5", pseudo, 0, route, "", "",
                                 f"Gateway nennt das echte Ziel nicht "
-                                f"(erwartet „{z.gateway}“, Seite sagt "
-                                f"„{_gateway_name(html)}“) – unehrliche "
+                                f"(erwartet „Weiter {z.ziel_phrase()}“, Seite "
+                                f"sagt „{_gateway_name(html)}“) – unehrliche "
                                 "Übergabe", owner="auto",
                                 heilung="Gateway neu backen"))
     return funde
@@ -958,20 +1167,41 @@ def _gateway_name(html: str) -> str:
     return m.group(1) if m else "?"
 
 
+def _md5(pfad: Path) -> str:
+    try:
+        return hashlib.md5(pfad.read_bytes()).hexdigest()
+    except OSError:
+        return ""
+
+
 def backe_gateways(reg: dict) -> int:
     """Gateway-Seiten aus dem Kontrakt neu erzeugen (affiliate_shield ist der
-    Generator; hier mit den ehrlichen Namen aus dem Intent-Kontrakt)."""
+    Generator; hier mit den ehrlichen Namen aus dem Intent-Kontrakt).
+
+    Rückgabe: Anzahl der Seiten, die sich WIRKLICH geändert haben. Ein Bake,
+    das jeden Lauf „20 Seiten gebacken" meldet, obwohl die Bytes identisch
+    bleiben, ist ein falsches Heilungs-Signal: Der tägliche CI-Lauf würde
+    daraus Commit + Deploy ableiten und eine Reparatur behaupten, die keine
+    war. Erst vergleichen, dann zählen.
+    """
     try:
         import affiliate_shield as sh
     except Exception:  # noqa: BLE001
         return 0
     sh.GO_NAMES = {k: vk.ZIELE[k].gateway for k in reg if k in vk.ZIELE}
-    return sh.generate_go_pages(reg)
+    pfade = [GO_DIR / k / "index.html" for k in reg]
+    vorher = {p_: _md5(p_) for p_ in pfade}
+    sh.generate_go_pages(reg)
+    return sum(1 for p_ in pfade if _md5(p_) != vorher[p_])
 
 
 def backe_daten() -> bool:
+    """Datendatei aus dem Kontrakt backen – True nur bei echter Änderung."""
+    neu = vk.bake_yaml()
+    if DATA_ZIELE.is_file() and DATA_ZIELE.read_text(encoding="utf-8") == neu:
+        return False
     DATA_ZIELE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_ZIELE.write_text(vk.bake_yaml(), encoding="utf-8")
+    DATA_ZIELE.write_text(neu, encoding="utf-8")
     return True
 
 
@@ -1129,10 +1359,14 @@ def run(root: Path | None = None, do_heal: bool | None = None) -> dict:
         if BAKE_ONLY or any(f["code"] == "IW0" and f["owner"] == "auto" for f in funde):
             if backe_daten():
                 geheilt.append("data/affiliate_ziele.yaml aus dem Kontrakt gebacken")
+            elif BAKE_ONLY:
+                print("ℹ data/affiliate_ziele.yaml ist auf Kontrakt-Stand – nichts zu backen.")
         if not NO_GATEWAY:
             n = backe_gateways(reg)
             if n:
                 geheilt.append(f"{n} Gateway-Seiten mit ehrlichen Zielnamen gebacken")
+            elif BAKE_ONLY:
+                print(f"ℹ {len(reg)} Gateway-Seiten sind auf Kontrakt-Stand – nichts zu backen.")
         for art in arts:
             art_funde = [f for f in funde if f["slug"] == art["slug"]
                          and f["owner"] == "auto" and f.get("blocking")]
@@ -1143,9 +1377,17 @@ def run(root: Path | None = None, do_heal: bool | None = None) -> dict:
                 geheilt.extend(f"{art['slug']}: {a}" for a in aktionen)
             if neuer_body != art["body"]:
                 if not DRY_RUN:
-                    art["path"].write_text(
-                        join_article(art["fm"], neuer_body, art["prefix"]),
-                        encoding="utf-8")
+                    raw = art.get("text", "")
+                    anfang = body_anfang(raw)
+                    if raw[anfang:] == (art["body"] or ""):
+                        neu_text = raw[:anfang] + neuer_body   # byte-exakt
+                    else:
+                        # Naht unerwartet – Sicherheit vor Schönheit:
+                        # kanonischer Weg über die post_utils-Naht.
+                        neu_text = join_article(art["fm"], neuer_body,
+                                                art["prefix"])
+                    art["path"].write_text(neu_text, encoding="utf-8")
+                    art["text"] = neu_text
                 art["body"] = neuer_body
 
     # Nach der Heilung: Restfund (Beweis, dass die Heilung trägt)
@@ -1559,6 +1801,117 @@ def run_selftest() -> list[str]:
     neu_haus, _ = heile_artikel(haus, haus_funde, reg, titel_pfad)
     muss(neu_haus == haus["body"],
          "ehrlich benanntes Zweitangebot darf nicht umgeschrieben werden")
+
+    # 3c) Ehrlichkeits-Heilung: bleibt der Anhang generisch, gewinnt der
+    #     produkt-exakte Kontrakt-Anker (ein Fund, ein Heilweg).
+    giro = art_neu("girokonto")
+    giro["body"] = ("\n> 💶 **Spar-Tipp von FranksFinanzcheck:** Wer heute noch "
+                    "Kontogebühren zahlt, verbrennt Geld. [**Sichere dir hier "
+                    "dein kostenloses Konto**](/go/girokonto/)\n")
+    gf = [f for f in pruefe_artikel(giro, reg, titel_pfad) if f["code"] == "IW3"]
+    muss(len(gf) == 1 and gf[0]["owner"] == "auto",
+         f"Girokonto-In-Text-CTA muss automatisch heilbar sein: {gf}")
+    muss("Girokonto" in gf[0]["ziel_anker"],
+         f"Ziel-Anker muss das Produkt nennen: {gf[0]['ziel_anker']}")
+    gneu, _ = heile_artikel(giro, gf, reg, titel_pfad)
+    muss("Wer heute noch Kontogebühren zahlt, verbrennt Geld." in gneu,
+         f"redaktioneller Satz muss bleiben: {gneu}")
+    muss("kostenloses Konto**" not in gneu and "C24" in gneu,
+         f"Anker muss produkt-exakt und ehrlich sein: {gneu}")
+    muss(not [f for f in pruefe_artikel(
+        {**giro, "body": gneu}, reg, titel_pfad) if f.get("blocking")],
+         "nach der Heilung darf kein harter Fund bleiben")
+
+    # 3d) Satz-Ehrlichkeit: Anker nennt C24, der SATZ verspricht aber einen
+    #     Marktvergleich → Primär-CTA wird neu gesetzt, Prosa bleibt Menschen-Fund.
+    satz_art = art_neu("girokonto")
+    satz_art["body"] = (
+        "\n💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt führende "
+        "gebührenfreie Girokonten: [**Kostenloses C24 Girokonto eröffnen**]"
+        "(/go/girokonto/)  \n_(Werbung)_\n\n"
+        "Sieh dir unseren detaillierten Vergleich zur [Gebührenfreien "
+        "Girokonto-Auswahl](/go/girokonto/) an.\n")
+    sf = pruefe_artikel(satz_art, reg, titel_pfad)
+    top = [f for f in sf if f["slot"] == "top"]
+    muss(len(top) == 1 and top[0]["code"] == "IW3" and top[0]["owner"] == "auto",
+         f"Vergleichs-Satz zur C24-Route muss IW3 (auto) sein: {sf}")
+    menschen = [f for f in sf if f["owner"] == "human"]
+    muss(menschen and "vergleich" in menschen[0]["problem"].lower(),
+         f"Prosa-Vergleich muss Menschen-Fund sein: {sf}")
+    satz_neu, _ = heile_artikel(satz_art, [f for f in sf if f["owner"] == "auto"],
+                                reg, titel_pfad)
+    muss("Vergleiche jetzt führende gebührenfreie Girokonten" not in satz_neu,
+         f"unehrlicher Satz muss verschwinden: {satz_neu}")
+    muss("C24 Bank" in satz_neu.split("\n")[1],
+         f"neuer Top-CTA-Satz muss C24 nennen: {satz_neu.split(chr(10))[1]}")
+    muss("detaillierten Vergleich zur [Gebührenfreien Girokonto-Auswahl]" in satz_neu,
+         f"Prosa darf nicht automatisch umgeschrieben werden: {satz_neu}")
+    rest_satz = [f for f in pruefe_artikel({**satz_art, "body": satz_neu}, reg, titel_pfad)
+                 if f.get("blocking") and f["owner"] == "auto"]
+    muss(not rest_satz, f"Satz-Heilung ist nicht idempotent: {rest_satz}")
+
+    # 3d2) Eigener (nicht kanonischer) Marker mit Vergleichs-Versprechen:
+    #      Menschen-Fund – kanonische Haus-Marker bleiben dagegen Vertrag.
+    marker_art = art_neu("konto-karten") if "konto-karten" in FIXTURES else art_neu("girokonto")
+    marker_art["title"] = "Konto & Karten: Girokonto, Kreditkarte, Tagesgeld"
+    marker_art["rel"] = "content/pillar/konto-karten/index.md"
+    marker_art["section"] = "pillar"
+    marker_art["body"] = (
+        "\n👉 **Jetzt kostenloses Girokonto bei unserem Testsieger "
+        "eröffnen:** [**→ Kostenloses Girokonto bei der C24 Bank eröffnen**]"
+        "(/go/girokonto/)\n\n"
+        "👉 **Jetzt vergleichen und sparen:** [**→ Kostenloses Girokonto bei "
+        "der C24 Bank eröffnen**](/go/girokonto/)\n")
+    mf = pruefe_artikel(marker_art, reg, titel_pfad)
+    muss(len(mf) == 1 and mf[0]["owner"] == "human" and "Marker" in mf[0]["problem"],
+         f"eigener Marker mit Testsieger-Versprechen muss Menschen-Fund sein: {mf}")
+    muss("kanonisch" not in str(mf), "kanonischer Marker darf kein Fund sein")
+
+    # 3e) Prosa mit Partner-Nennung bleibt unangetastet (Grammatik-Schutz)
+    prosa = art_neu("clean")
+    prosa["title"] = "Haushaltsbuch führen: App, Excel oder Papier"
+    prosa["body"] = ("\n\n\n\nBei der [C24 Bank](/go/girokonto/) sind "
+                     "Kategorien und Haushaltsbuch direkt im Girokonto "
+                     "integriert – ohne Zusatz-App.\n\n"
+                     "👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote "
+                     "vergleichen**](/go/girokonto/)\n")
+    prosa_funde = pruefe_artikel(prosa, reg, titel_pfad)
+    muss(not any(f["code"] == "IW8" and "C24 Bank" == f["anchor"]
+                 for f in prosa_funde),
+         f"Prosa-Anker mit Partner-Nennung darf kein IW8-Fund sein: {prosa_funde}")
+    prosa_neu, _ = heile_artikel(prosa, [f for f in prosa_funde
+                                         if f["owner"] == "auto"], reg, titel_pfad)
+    muss("Bei der [C24 Bank](/go/girokonto/) sind Kategorien" in prosa_neu,
+         f"Prosa-Satz darf nicht umgebaut werden: {prosa_neu}")
+    muss(prosa_neu.startswith("\n\n\n\n"),
+         "Leerzeilen hinter der Frontmatter müssen byte-exakt bleiben")
+    muss("Jetzt Angebote vergleichen" not in prosa_neu
+         and "C24" in prosa_neu.split("👉")[1]
+         and "Girokonto" in prosa_neu.split("👉")[1],
+         f"fetter End-CTA muss den Kontrakt-Anker bekommen: {prosa_neu}")
+
+    # 3f) Themenwelten (Pillar-Hubs) bündeln mehrere Angebote – IW2/IW4
+    #     gelten dort nicht, Ehrlichkeit (IW3/IW8) schon.
+    hub_art = art_neu("clean")
+    hub_art["rel"] = "content/pillar/konto-karten/index.md"
+    hub_art["section"] = "pillar"
+    hub_art["title"] = "Konto & Karten: Girokonto, Kreditkarte, Tagesgeld"
+    hub_art["tags"] = ["Konto", "Karten"]
+    hub_art["body"] = (
+        "\n👉 **Jetzt kostenloses Girokonto eröffnen:** [**→ Kostenloses "
+        "Girokonto bei der C24 Bank eröffnen**](/go/girokonto/)\n\n"
+        "👉 **Kreditkarte ohne Jahresgebühr:** [**→ Jetzt Kreditkarten "
+        "vergleichen**](/go/kreditkarte/)\n\n"
+        "👉 **Zinsen sichern:** [**→ Jetzt C24 Bank Tagesgeld ansehen**]"
+        "(/go/tagesgeld/)\n")
+    hub_funde = pruefe_artikel(hub_art, reg, titel_pfad)
+    muss(not hub_funde,
+         f"Pillar-Hub mit ehrlichen Angeboten darf keine Funde haben: "
+         f"{[(f['code'], f['anchor'][:40]) for f in hub_funde]}")
+    hub_art["body"] = hub_art["body"].replace(
+        "→ Jetzt Kreditkarten vergleichen", "→ Jetzt Angebote vergleichen")
+    muss(any(f["code"] == "IW8" for f in pruefe_artikel(hub_art, reg, titel_pfad)),
+         "generischer Anker muss auch auf Hub-Seiten auffallen")
 
     # 4) Cross-Selling mit ehrlichem Anker bleibt erlaubt
     cross = {

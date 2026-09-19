@@ -91,6 +91,14 @@ class Abweichung:
     grund: str = ""
     anhang: str = ""     # grammatisch sicherer Anhang für In-Text-Anker
     hinweis: str = ""    # Klartext für Report/Issue/Tooltip-Zusatz
+    # satz_verbot: Wörter, die schon den UMGEBENDEN SATZ unehrlich machen,
+    # selbst wenn der Anker den Partner korrekt nennt („Vergleiche jetzt
+    # führende gebührenfreie Girokonten … C24 Bank" verspricht Auswahl,
+    # die es nicht gibt). Bewusst NICHT für Bündel-Abweichungen: Der
+    # CHECK24-Pauschalreise-Vergleich VERGLEICHT wirklich – dort wäre
+    # „vergleich" ein Fehlalarm (Satz „Jetzt Pauschalreisen mit Flug
+    # vergleichen" ist ehrlich).
+    satz_verbot: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -98,7 +106,7 @@ class Ziel:
     """Ein registriertes Affiliate-Ziel – Angebots-Wahrheit pro Route."""
 
     key: str
-    partner: str                       # Check24 | C24 Bank | Tarifcheck
+    partner: str                       # CHECK24 | C24 Bank | Tarifcheck
     produkt: str                       # was beworben wird (Klartext)
     anzeige: str                       # Tooltip/Title im Render-Hook
     gateway: str                       # Name auf der /go/-Übergabeseite
@@ -107,11 +115,21 @@ class Ziel:
     abweichung: Abweichung | None = None
     netz: str = ""                     # check24 | tarifcheck (für Health-Check)
     saetze: dict[str, str] = field(default_factory=dict)
+    # Dativ-Phrase für die Übergabeseite static/go/<route>/: „Weiter {phrase}".
+    # Bewusst als Phrase und nicht als Name: „Weiter zu C24 Bank" ist
+    # gebrochenes Deutsch, „Weiter zum Tagesgeld der C24 Bank" nicht. Die
+    # Gateway-Seite sieht JEDER Affiliate-Klick – sie ist die teuerste
+    # Textfläche des Blogs (Vertrauen im Moment des Klicks).
+    weiter_zu: str = ""
     # ^ Ehrliche CTA-Sätze je Slot (top/mid/end). NUR bei Abweichung nötig:
     #   Dann verspricht schon der SATZ ein Angebot, das es so nicht gibt
     #   („Die besten Tarife findest du über unseren Partner-Vergleich“ auf
     #   einer Route, die zu EINER Bank führt). Die Wache ersetzt in dem Fall
     #   die ganze CTA-Zeile aus diesem Satz + `anker` – nie per Textflicken.
+
+    def ziel_phrase(self) -> str:
+        """Grammatisch fertige Übergabe-Phrase für die Gateway-Seite."""
+        return self.weiter_zu or f"zu {self.gateway}"
 
     def anker_fuer(self, slot: str, stabilisator: str = "") -> str:
         """Ehrlicher Anker für einen CTA-Slot (top/mid/end/intext).
@@ -127,6 +145,24 @@ class Ziel:
         if len(varianten) == 1 or not stabilisator:
             return varianten[0]
         return varianten[sum(ord(c) for c in stabilisator) % len(varianten)]
+
+    def satz_ehrlich(self, text: str) -> tuple[bool, str]:
+        """Prüft den SATZ (ohne Haus-Marker) auf Versprechen, die das Ziel
+        nicht einlöst – z. B. „Vergleich" bei einem Einzelanbieter-Angebot.
+
+        Getrennt von `ehrlich()`, weil die Marker („Jetzt vergleichen und
+        sparen:") Hausstil sind und von affiliate_integrity_gate.py (AI1/AI3),
+        dash_guard und umbruch_guard erkannt werden: Ein Marker darf nicht
+        umgeschrieben werden, ein Satz schon.
+        """
+        if not self.abweichung or not self.abweichung.satz_verbot:
+            return True, ""
+        low = (text or "").lower()
+        for wort in self.abweichung.satz_verbot:
+            if wort.lower() in low:
+                return False, (f"Satz verspricht „{wort}“, das Ziel liefert "
+                               f"aber {self.abweichung.ziel}")
+        return True, ""
 
     def ehrlich(self, text: str) -> tuple[bool, str]:
         """Prüft einen Anker/eine CTA-Zeile auf Ehrlichkeit (Abweichung).
@@ -158,22 +194,23 @@ class Ziel:
 
 _C24 = Abweichung(
     art="einzelanbieter",
-    ziel="ein Angebot der C24 Bank (Check24-Tochter), kein Marktvergleich",
+    ziel="ein Angebot der C24 Bank (CHECK24-Tochter), kein Marktvergleich",
     pflicht=("C24",),
-    grund=("Check24-Partnerprogramm hat keinen Girokonto-/Tagesgeld-Vergleich: "
+    grund=("CHECK24-Partnerprogramm hat keinen Girokonto-/Tagesgeld-Vergleich: "
            "der offizielle Deep ist c24bank&cat=14 (Frank, 11.08.2026)."),
     anhang=" der C24 Bank",
-    hinweis=("Angebot der C24 Bank (Check24-Tochter) – kein Vergleich "
+    hinweis=("Angebot der C24 Bank (CHECK24-Tochter) – kein Vergleich "
              "mehrerer Banken."),
+    satz_verbot=("vergleich", "marktüberblick", "marktueberblick", "testsieger"),
 )
 
 _FLUG = Abweichung(
     art="buendelung",
-    ziel="der Check24-Pauschalreise-Vergleich (Flug nur im Paket mit Hotel)",
+    ziel="der CHECK24-Pauschalreise-Vergleich (Flug nur im Paket mit Hotel)",
     pflicht=("Pauschalreise", "Urlaubspaket", "Flug + Hotel", "Flug und Hotel"),
     verbot=("Flugvergleich", "Flüge vergleichen", "Flugtickets vergleichen",
             "Billigflüge", "Flugpreise vergleichen"),
-    grund=("Es gibt im Check24-Partnerprogramm KEINEN Flug-Deep-Link: "
+    grund=("Es gibt im CHECK24-Partnerprogramm KEINEN Flug-Deep-Link: "
            "deep=fluege landet E2E auf check24.net/fluege/ = 404 (geprüft "
            "19.09.2026), offizieller Flug-Deep ist pauschalreisen-vergleich "
            "&cat=9 (Frank, 11.08.2026). Also: ehrlich als Paket benennen."),
@@ -184,40 +221,42 @@ _FLUG = Abweichung(
 
 _PORTAL = Abweichung(
     art="portal",
-    ziel="die Check24-Portalstartseite (alle Vergleiche, kein Fach-Rechner)",
+    ziel="die CHECK24-Portalstartseite (alle Vergleiche, kein Fach-Rechner)",
     pflicht=(),
     verbot=(),
     grund=("Bewusster Fallback für Themen ohne eigenes Fach-Deep (z. B. "
            "Frugalismus/Budget). Der Anker darf dann KEIN Einzelprodukt "
            "nennen – sonst gilt IW1 (Anker nennt Produkt → Route falsch)."),
     anhang="",
-    hinweis="Check24-Portalstartseite (kein Fach-Rechner).",
+    hinweis="CHECK24-Portalstartseite (kein Fach-Rechner).",
 )
 
 ZIELE: dict[str, Ziel] = {z.key: z for z in (
     Ziel(
         key="allgemein",
-        partner="Check24",
-        produkt="Check24 Vergleichsportal",
-        anzeige="Check24 Vergleichsportal (Startseite)",
-        gateway="Check24 Vergleichsportal",
+        partner="CHECK24",
+        produkt="CHECK24-Vergleichsportal",
+        anzeige="CHECK24-Vergleichsportal (Startseite)",
+        gateway="CHECK24-Vergleichsportal",
+        weiter_zu="zum CHECK24-Vergleichsportal (Startseite)",
         landing="check24.net – Portalstartseite",
         netz="check24",
         abweichung=_PORTAL,
         anker={
-            "top": ("Jetzt Fixkosten auf Check24 prüfen",
-                    "Check24 Vergleichsportal öffnen"),
-            "mid": ("Fixkosten auf Check24 prüfen",),
-            "end": ("→ Jetzt Fixkosten auf Check24 prüfen",),
-            "intext": ("Check24 Vergleichsportal",),
+            "top": ("Jetzt Fixkosten auf CHECK24 prüfen",
+                    "CHECK24-Vergleichsportal öffnen"),
+            "mid": ("Fixkosten auf CHECK24 prüfen",),
+            "end": ("→ Jetzt Fixkosten auf CHECK24 prüfen",),
+            "intext": ("CHECK24-Vergleichsportal",),
         },
     ),
     Ziel(
         key="strom",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Stromtarife",
-        anzeige="Check24 · Stromtarife",
-        gateway="Check24",
+        anzeige="CHECK24 · Stromtarife",
+        gateway="CHECK24",
+        weiter_zu="zu den CHECK24-Stromtarifen",
         landing="check24.net/stromanbieter-wechseln/",
         netz="check24",
         anker={
@@ -232,10 +271,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="gas",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Gastarife",
-        anzeige="Check24 · Gastarife",
-        gateway="Check24",
+        anzeige="CHECK24 · Gastarife",
+        gateway="CHECK24",
+        weiter_zu="zu den CHECK24-Gastarifen",
         landing="check24.net/gasanbieter-wechseln/",
         netz="check24",
         anker={
@@ -250,10 +290,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="dsl",
-        partner="Check24",
+        partner="CHECK24",
         produkt="DSL- & Internettarife",
-        anzeige="Check24 · DSL & Internet",
-        gateway="Check24",
+        anzeige="CHECK24 · DSL & Internet",
+        gateway="CHECK24",
+        weiter_zu="zum CHECK24-DSL- und Internetvergleich",
         landing="check24.net/dsl-anbieterwechsel/",
         netz="check24",
         anker={
@@ -268,10 +309,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="handytarife",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Handytarife",
-        anzeige="Check24 · Handytarife",
-        gateway="Check24",
+        anzeige="CHECK24 · Handytarife",
+        gateway="CHECK24",
+        weiter_zu="zu den CHECK24-Handytarifen",
         landing="check24.net/handytarife/",
         netz="check24",
         anker={
@@ -283,10 +325,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="mietwagen",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Mietwagen",
-        anzeige="Check24 · Mietwagen",
-        gateway="Check24",
+        anzeige="CHECK24 · Mietwagen",
+        gateway="CHECK24",
+        weiter_zu="zum CHECK24-Mietwagenvergleich",
         landing="check24.net/mietwagen-preisvergleich/",
         netz="check24",
         anker={
@@ -300,10 +343,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="reisen",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Pauschalreisen",
-        anzeige="Check24 · Pauschalreisen & Urlaub",
-        gateway="Check24",
+        anzeige="CHECK24 · Pauschalreisen & Urlaub",
+        gateway="CHECK24",
+        weiter_zu="zu den CHECK24-Pauschalreisen",
         landing="check24.net/pauschalreisen-vergleich/",
         netz="check24",
         anker={
@@ -317,10 +361,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="fluege",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Pauschalreisen mit Flug",
-        anzeige="Check24 · Pauschalreisen (Flug im Paket)",
-        gateway="Check24 Pauschalreisen (Flug im Paket)",
+        anzeige="CHECK24 · Pauschalreisen (Flug im Paket)",
+        gateway="CHECK24 Pauschalreisen (Flug im Paket)",
+        weiter_zu="zu den CHECK24-Pauschalreisen (Flug im Paket)",
         landing="check24.net/pauschalreisen-vergleich/ (Flug nur im Paket)",
         netz="check24",
         abweichung=_FLUG,
@@ -344,14 +389,15 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         key="girokonto",
         partner="C24 Bank",
         produkt="Girokonto der C24 Bank",
-        anzeige="C24 Bank (Check24) · Girokonto",
-        gateway="C24 Bank (von Check24)",
+        anzeige="C24 Bank (CHECK24) · Girokonto",
+        gateway="C24 Bank (von CHECK24)",
+        weiter_zu="zum Girokonto der C24 Bank (CHECK24-Tochter)",
         landing="check24.net/c24bank/ – Girokonto der C24 Bank",
         netz="check24",
         abweichung=_C24,
         saetze={
             "top": ("Ein dauerhaft kostenloses Girokonto mit Verzinsung "
-                    "bekommst du bei der C24 Bank (Check24-Tochter)"),
+                    "bekommst du bei der C24 Bank (CHECK24-Tochter)"),
             "mid": ("Das kostenlose Girokonto der C24 Bank ist in Minuten "
                     "eröffnet"),
             "end": ("Jetzt das Girokonto der C24 Bank ansehen"),
@@ -369,14 +415,15 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         key="tagesgeld",
         partner="C24 Bank",
         produkt="Tagesgeld der C24 Bank",
-        anzeige="C24 Bank (Check24) · Tagesgeld",
-        gateway="C24 Bank (von Check24)",
+        anzeige="C24 Bank (CHECK24) · Tagesgeld",
+        gateway="C24 Bank (von CHECK24)",
+        weiter_zu="zum Tagesgeld der C24 Bank (CHECK24-Tochter)",
         landing="check24.net/c24bank/ – Tagesgeld/Konto der C24 Bank",
         netz="check24",
         abweichung=_C24,
         saetze={
             "top": ("Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt "
-                    "es bei der C24 Bank (Check24-Tochter)"),
+                    "es bei der C24 Bank (CHECK24-Tochter)"),
             "mid": ("Dein Tagesgeld liegt bei der C24 Bank verzinst und "
                     "täglich verfügbar"),
             "end": ("Jetzt das Tagesgeld-Angebot der C24 Bank ansehen"),
@@ -393,10 +440,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="kredit",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Ratenkredit",
-        anzeige="Check24 · Kreditvergleich",
-        gateway="Check24",
+        anzeige="CHECK24 · Kreditvergleich",
+        gateway="CHECK24",
+        weiter_zu="zum CHECK24-Kreditvergleich",
         landing="check24.net/kredit-vergleich/",
         netz="check24",
         anker={
@@ -408,10 +456,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="kreditkarte",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Kreditkarten",
-        anzeige="Check24 · Kreditkarten",
-        gateway="Check24",
+        anzeige="CHECK24 · Kreditkarten",
+        gateway="CHECK24",
+        weiter_zu="zum CHECK24-Kreditkartenvergleich",
         landing="check24.net/kreditkarte/",
         netz="check24",
         anker={
@@ -425,10 +474,11 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
     ),
     Ziel(
         key="kfz-versicherung",
-        partner="Check24",
+        partner="CHECK24",
         produkt="Kfz-Versicherung",
-        anzeige="Check24 · Kfz-Versicherung",
-        gateway="Check24",
+        anzeige="CHECK24 · Kfz-Versicherung",
+        gateway="CHECK24",
+        weiter_zu="zum CHECK24-Kfz-Versicherungsvergleich",
         landing="check24.net/kfz-versicherung/",
         netz="check24",
         anker={
@@ -446,6 +496,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Privathaftpflicht",
         anzeige="Tarifcheck · Privathaftpflicht",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Privathaftpflichtvergleich",
         landing="tarifcheck.de/haftpflichtversicherung/",
         netz="tarifcheck",
         anker={
@@ -463,6 +514,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Hausratversicherung",
         anzeige="Tarifcheck · Hausratversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Hausratvergleich",
         landing="tarifcheck.de/hausratversicherung/",
         netz="tarifcheck",
         anker={
@@ -480,6 +532,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Wohngebäudeversicherung",
         anzeige="Tarifcheck · Wohngebäudeversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Wohngebäudevergleich",
         landing="tarifcheck.de/wohngebaeudeversicherung/",
         netz="tarifcheck",
         anker={
@@ -497,6 +550,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Unfallversicherung",
         anzeige="Tarifcheck · Unfallversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Unfallversicherungsvergleich",
         landing="tarifcheck.de/unfallversicherung/",
         netz="tarifcheck",
         anker={
@@ -512,6 +566,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Reisekrankenversicherung",
         anzeige="Tarifcheck · Reisekrankenversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Reisekrankenvergleich",
         landing="tarifcheck.de/reisekrankenversicherung/",
         netz="tarifcheck",
         anker={
@@ -528,6 +583,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Zahnzusatzversicherung",
         anzeige="Tarifcheck · Zahnzusatzversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Zahnzusatzvergleich",
         landing="tarifcheck.de/zahnzusatzversicherung/",
         netz="tarifcheck",
         anker={
@@ -543,6 +599,7 @@ ZIELE: dict[str, Ziel] = {z.key: z for z in (
         produkt="Tierkrankenversicherung",
         anzeige="Tarifcheck · Tierkrankenversicherung",
         gateway="Tarifcheck",
+        weiter_zu="zum Tarifcheck-Tierkrankenvergleich",
         landing="tarifcheck.de/hundekrankenversicherung/",
         netz="tarifcheck",
         anker={
@@ -1100,6 +1157,21 @@ def selftest() -> list[str]:
     muss(anker_ist_generisch("Tarifrechner starten"),
          "„Tarifrechner starten“ muss als generisch gelten")
 
+    # 5a2) Gateway-Phrase: grammatisch (Präposition) und ehrlich (Partner)
+    for key, z in ZIELE.items():
+        ph = z.ziel_phrase()
+        muss(ph.split(" ")[0] in ("zu", "zum", "zur", "zu den".split()[0])
+             or ph.startswith("zu den "),
+             f"{key}: Gateway-Phrase ohne Präposition: „{ph}“")
+        muss(z.partner.lower().replace("check24", "check24") in ph.lower()
+             or "c24" in ph.lower(),
+             f"{key}: Gateway-Phrase nennt den Partner nicht: „{ph}“")
+        ok, grund = z.ehrlich(ph)
+        muss(ok, f"{key}: Gateway-Phrase unehrlich: {grund}")
+    muss(ZIELE["tagesgeld"].ziel_phrase() ==
+         "zum Tagesgeld der C24 Bank (CHECK24-Tochter)",
+         "Tagesgeld-Phrase muss das Einzelanbieter-Ziel nennen")
+
     # 5b) Transparenz + Anhang-Sicherheit (Cross-Selling-Grenze, 19.09.)
     muss(nennt_ziel("Jetzt Hausratversicherung vergleichen", "hausrat"),
          "produkt-exakter Anker ist transparent")
@@ -1113,6 +1185,24 @@ def selftest() -> list[str]:
          "Verben-Anker darf nicht angehängt werden (Grammatik)")
     muss(not anhang_sicher(ZIELE["tagesgeld"], "Tagesgeldvergleich"),
          "Vergleichs-Versprechen darf nicht per Anhang geheilt werden")
+
+    # 5b2) Satz-Ehrlichkeit: Die eigenen Kontrakt-Sätze müssen bestehen
+    #      (sonst wäre die Heilung nicht idempotent), fremde Vergleichs-
+    #      Versprechen auf Einzelanbieter-Routen müssen auffallen.
+    for key, z in ZIELE.items():
+        for slot, satz in z.saetze.items():
+            ok, grund = z.satz_ehrlich(satz)
+            muss(ok, f"Kontrakt-Satz {key}/{slot} verletzt satz_verbot: {grund}")
+    ok, _ = ZIELE["girokonto"].satz_ehrlich(
+        "Vergleiche jetzt führende gebührenfreie Girokonten")
+    muss(not ok, "Vergleichs-Satz auf C24-Route muss auffallen")
+    ok, _ = ZIELE["girokonto"].satz_ehrlich(
+        "Ein dauerhaft kostenloses Girokonto bekommst du bei der C24 Bank")
+    muss(ok, "ehrlicher C24-Satz darf nicht auffallen")
+    ok, _ = ZIELE["fluege"].satz_ehrlich("Jetzt Pauschalreisen mit Flug vergleichen")
+    muss(ok, "Pauschalreise-Vergleich ist echt – kein Fehlalarm bei Bündelung")
+    ok, _ = ZIELE["fluege"].satz_ehrlich("Unser Partner vergleicht keine Einzelflüge")
+    muss(ok, "ehrliche Flug-Einordnung darf nicht auffallen")
 
     # 5c) Jeder Kontrakt-Anker erfüllt den Maßstab der Wache selbst:
     #     produkt-exakt (nicht generisch, IW8) und ehrlich (IW3).

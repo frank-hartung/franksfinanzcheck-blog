@@ -42,7 +42,7 @@ Ein weiterer Aspekt wird selten erwähnt: die Stromrechnung. Jedes Zusatzgerät 
 - Ein Repeater für rund 20–60 € lohnt sich nur für eine einzelne tote Ecke in Sichtweite des Routers. Ein Mesh‑System für rund 150–250 € versorgt große Wohnungen und Häuser nahezu verlustfrei – inklusive automatischer Übergabe zwischen den Funkpunkten.
 - Viele alte Router lassen sich kostenlos als Mesh‑Knoten oder Access Point umrüsten – das spart den kompletten Neukauf. Per WLAN‑Zeitschaltung sparst du bis zu rund 15 € Strom pro Gerät und Jahr, Stand 09/2026 bei ca. 0,40 €/kWh.
 
-💡 **Schnell‑Tipp von FranksFinanzcheck:** WLAN‑Hardware nützt wenig, wenn der Tarif dahinter schwächelt. Prüfe in zwei Minuten, ob an deiner Adresse schnelleres Internet günstiger ist: [**Kostenlos vergleichen**](/go/dsl/)  
+💡 **Schnell‑Tipp von FranksFinanzcheck:** WLAN‑Hardware nützt wenig, wenn der Tarif dahinter schwächelt. Prüfe in zwei Minuten, ob an deiner Adresse schnelleres Internet günstiger ist: [**Jetzt DSL-Tarife vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_  
 
 ## Was kann ein Repeater – und was nicht?
@@ -133,7 +133,7 @@ Viele Anbieter liefern Neukunden routerseitig moderne WLAN‑6‑Geräte mit Mes
 
 Der größte Hebel liegt oft in der kostenlosen Variante: der alte Router als Mesh‑Knoten oder Access Point. Kombiniert mit einer nächtlichen WLAN‑Zeitschaltung sinken sogar die laufenden Kosten. So bekommst du starkes WLAN in jeden Winkel, ohne dein Budget zu sprengen.  
 
-💶 **Fehlt es gar nicht am Funknetz, sondern am Tarif?** Dann ist ein Wechsel die beste Investition: Neukunden sichern sich regelmäßig Boni und Cashbacks – [**jetzt Tarife vergleichen**](/go/dsl/).  
+💶 **Fehlt es gar nicht am Funknetz, sondern am Tarif?** Dann ist ein Wechsel die beste Investition: Neukunden sichern sich regelmäßig Boni und Cashbacks – [**Jetzt DSL-Tarife vergleichen**](/go/dsl/).  
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) **Lesetipp:** [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 
@@ -159,6 +159,6 @@ Beides stößt an Stahlbeton schnell an Grenzen. In diesem Fall ist **Powerline 
 
 Band Steering ist eine Mesh‑Funktion, die deine Geräte automatisch auf das passende Frequenzband (2,4 GHz oder 5 GHz) und den stärksten Funkpunkt lotst. Du merkst davon nichts – außer dass das Netz überall gleichmäßig schnell bleibt.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Angebote prüfen**](/go/dsl/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

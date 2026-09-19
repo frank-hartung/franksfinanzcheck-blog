@@ -86,15 +86,15 @@ def deep_map(reg: dict) -> dict:
 # 19.09.2026 (Intent-Wache): Die Namen kommen JETZT aus dem zentralen
 # Intent-Kontrakt (scripts/affiliate_intent_contract.py) – dieselbe Wahrheit,
 # aus der auch Anker, Tooltips und data/affiliate_ziele.yaml entstehen.
-# Fund vom 19.09.: /go/fluege/ sagte nur „Check24", obwohl die Kette im
+# Fund vom 19.09.: /go/fluege/ sagte nur „CHECK24", obwohl die Kette im
 # Pauschalreise-Vergleich landet (kein Flugvergleich) – eine unehrliche
 # Übergabe. Die Fallback-Tabelle bleibt als Netz, falls der Kontrakt nicht
 # ladbar ist; affiliate_intent_guard.py IW5 beweist Seite fuer Seite, dass
 # der echte Zielname auf der Gateway-Seite steht.
 _FALLBACK_NAMES = {
-    "tagesgeld": "C24 Bank (von Check24)",
-    "girokonto": "C24 Bank (von Check24)",
-    "fluege": "Check24 Pauschalreisen (Flug im Paket)",
+    "tagesgeld": "C24 Bank (von CHECK24)",
+    "girokonto": "C24 Bank (von CHECK24)",
+    "fluege": "CHECK24 Pauschalreisen (Flug im Paket)",
     "haftpflicht": "Tarifcheck",
     "hausrat": "Tarifcheck",
     "unfallversicherung": "Tarifcheck",
@@ -102,8 +102,20 @@ _FALLBACK_NAMES = {
     "reisekrankenversicherung": "Tarifcheck",
     "hunde": "Tarifcheck",
     "wohngebaeudeversicherung": "Tarifcheck",
-    "allgemein": "Check24 Vergleichsportal",
+    "allgemein": "CHECK24-Vergleichsportal",
 }
+
+
+def _kontrakt_phrasen() -> dict:
+    """Dativ-Phrasen für die Übergabeseite aus dem Intent-Kontrakt."""
+    try:
+        import affiliate_intent_contract as vk
+        return {k: z.ziel_phrase() for k, z in vk.ZIELE.items()}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+GO_PHRASEN = _kontrakt_phrasen()
 
 
 def _kontrakt_names() -> dict:
@@ -164,19 +176,25 @@ def generate_go_pages(reg: dict) -> int:
 })();
 </script>
 <meta http-equiv="refresh" content="0; url={url}">
-<title>Weiter zu {zielname} | FranksFinanzcheck</title>
+<title>Weiter {zielname} | FranksFinanzcheck</title>
 </head><body style="font-family:sans-serif;text-align:center;padding:60px 20px;color:#19324c">
-<p>Du wirst zu <strong>{zielname}</strong> weitergeleitet …</p>
+<p>Du wirst {zielname} weitergeleitet …</p>
 <h1 style="font-size:20px">FranksFinanzcheck</h1>
-<p><a href="{url}" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: weiter zu {zielname}</a></p>
+<p><a href="{url}" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: weiter {zielname}</a></p>
 <p style="color:#798897;font-size:12px;margin-top:40px">Partnerlink (Werbung). Wir erhalten ggf. eine Provision – für dich kostenlos. Es ändert sich nichts am Preis, nur die Seite wechselt.</p>
 </body></html>
 """
     for key, url in reg.items():
         dest = GO_DIR / key / "index.html"
         dest.parent.mkdir(parents=True, exist_ok=True)
+        # 19.09.2026 (Intent-Wache): Die Übergabe-Phrase kommt aus dem
+        # Intent-Kontrakt (`Ziel.ziel_phrase()`) und ist grammatisch fertig
+        # („Weiter zum Tagesgeld der C24 Bank", nicht „Weiter zu C24 Bank").
+        # Diese Seite sieht JEDER Affiliate-Klick – Ehrlichkeit + Deutsch
+        # im Moment des Klicks.
+        phrase = GO_PHRASEN.get(key) or f"zu {GO_NAMES.get(key, 'CHECK24')}"
         dest.write_text(tpl.replace("{url}", url)
-                        .replace("{zielname}", GO_NAMES.get(key, "Check24")), encoding="utf-8")
+                        .replace("{zielname}", phrase), encoding="utf-8")
         count += 1
     return count
 
@@ -192,7 +210,7 @@ def shield_line(body: str, dmap: dict, reg: dict, fname: str, reports: list,
         if not d:
             if ctx_route and ctx_route in reg:
                 # /go/allgemein/ == funktional identisch zum bisherigen
-                # Check24-Generik-Link; thematische Routen sind klar besser.
+                # CHECK24-Generik-Link; thematische Routen sind klar besser.
                 reports.append((fname, f"AUTO-DEEP → /go/{ctx_route}/", url))
                 return f"/go/{ctx_route}/"
             reports.append((fname, "GENERIC-link (Checker zuständig)", url))

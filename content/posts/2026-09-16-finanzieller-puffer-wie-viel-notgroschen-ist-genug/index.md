@@ -113,7 +113,7 @@ Versicherungen decken existenzielle Risiken ab.
 | Selbstständig | 6–12 | Fehlende gesetzliche Absicherung |
 | Rentner | 4–5 | Unverhoffte Kosten für die Gesundheit |
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/allgemein/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 ## Finanzielle Check-Ups: Mehr als nur Sparen
 
@@ -209,6 +209,6 @@ Bei 2 % Inflation verliert dein Geld real an Kaufkraft. Deshalb sollte das Tage
 
 Ehrliches Rechnen führt dich zum Erfolg. Drei bis sechs Monatskosten auf dem Tagesgeldkonto kosten dich fast nichts. Ein teurer Dispo-Kredit belastet dich hingegen schwer. Prüfe heute deine Kosten, starte deinen Dauerauftrag und schütze deine Finanzen.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/allgemein/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
