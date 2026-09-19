@@ -122,6 +122,20 @@ jobs:
         id: selftest
         run: python3 scripts/affiliate_integrity_gate.py --selftest
 
+      # ============ STAGE 1a: INTENT-WACHE-SELBSTTEST (fail-closed) ======
+      # 19.09.2026 (Auftrag Frank: „Falsche Affiliate-Ziele sofort
+      # reparieren … und eine automatische Intent-Wache, die verhindert,
+      # dass ein Kfz-Artikel je wieder zur Haftpflicht führt").
+      # Der Selbsttest spielt die sieben Live-Funde vom 19.09.2026 als
+      # Regressionstest durch (Erkennung + Heilung + Idempotenz). Ohne ihn
+      # wäre eine blinde Wache schlimmer als keine (Vorfall 01.09.2026:
+      # ein Detektor, der nur „anblickte", machte sich still blind).
+      - name: Intent-Wache-Selbsttest (IW0–IW9 müssen sehen können)
+        id: intent_selftest
+        run: |
+          python3 scripts/affiliate_intent_contract.py
+          python3 scripts/affiliate_intent_guard.py --selftest
+
       # ============ STAGE 1b: HUGO-BUILD MIT WIEDERHOLUNG ============
       # continue-on-error: Das Gate darf den Rebuild selbst versuchen.
       # Bei Fehlschlag wird public/ gelöscht, damit ensure_build() nicht
@@ -184,6 +198,46 @@ jobs:
           esac
           exit "$code"
 
+      # ============ STAGE 2b: INTENT-WACHE (prüfen + sofort heilen) ======
+      # Die Wache heilt deterministisch aus scripts/affiliate_intent_contract.py
+      # (keine KI, idempotent): Route folgt dem Anker, Anker folgt dem
+      # Artikelthema, Abweichungen (C24 Bank, Pauschalreise statt Einzelflug)
+      # werden im Anker/Satz benannt. Exit 1 = Restfund für Menschen
+      # (redaktionelle Ehrlichkeit), Exit 2 = Werkzeugfehler (fail-closed).
+      - name: Intent-Wache ausführen (prüfen + sofort heilen)
+        id: intent
+        if: ${{ always() && !cancelled() && steps.intent_selftest.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/affiliate_intent_guard.py --fix | tee /tmp/intent_log.txt
+          code=${PIPESTATUS[0]}
+          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          state = Path(".affiliate_intent_state.json")
+          geheilt = 0
+          offen = 0
+          if state.is_file():
+              try:
+                  daten = json.loads(state.read_text(encoding="utf-8"))
+                  geheilt = int(daten.get("healed_count", 0) or 0)
+                  offen = sum(1 for f in daten.get("findings", []) if f.get("owner") == "human")
+              except Exception:
+                  pass
+          print(f"healed={'true' if geheilt else 'false'}")
+          print(f"healed_count={geheilt}")
+          print(f"human_findings={offen}")
+          PY
+          case "$code" in
+            0) echo "✅ Jeder Affiliate-Link liefert das versprochene Angebot." ;;
+            1) echo "🔴 Intent-Fund offen, der einen Menschen braucht – Details im Report." ;;
+            2) echo "🟠 WERKZEUGFEHLER – Intent-Beweis nicht möglich (fail-closed)." ;;
+            *) echo "⚠ Unerwarteter Exit-Code ${code}" ;;
+          esac
+          exit "$code"
+
       - name: Heilungs-Status aus Zustand ableiten
         id: state
         if: ${{ always() && !cancelled() }}
@@ -223,6 +277,8 @@ jobs:
         env:
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
           VERDICT_CHANGED: ${{ steps.state.outputs.verdict_changed }}
+          INTENT_HEALED: ${{ steps.intent.outputs.healed }}
+          INTENT_HEALED_COUNT: ${{ steps.intent.outputs.healed_count }}
         run: |
           set +e
           git config user.name "Affiliate-Integrity-Bot"
@@ -234,6 +290,15 @@ jobs:
           git add content/ 2>/dev/null || true
           git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
           git add .affiliate_integrity_state.json 2>/dev/null || true
+          # Intent-Wache (19.09.2026): Report, Herzschlag, Historie, die
+          # gebackene Datendatei für die Hugo-Tooltips und die ebenfalls
+          # gebackenen /go/-Übergabeseiten gehören zum selben Beweis.
+          git add -f AFFILIATE-INTENT-REPORT.md 2>/dev/null || true
+          git add -f .affiliate_intent_state.json 2>/dev/null || true
+          git add -f data/affiliate_intent_history.jsonl 2>/dev/null || true
+          git add -f data/affiliate_ziele.yaml 2>/dev/null || true
+          git add static/go/ 2>/dev/null || true
+          git add layouts/ 2>/dev/null || true
           echo "pushed=false" >> "$GITHUB_OUTPUT"
           echo "push_verified=false" >> "$GITHUB_OUTPUT"
           if git diff --cached --quiet; then
@@ -245,6 +310,8 @@ jobs:
           # Lebenszeichen darf keinen Deploy anstoßen (#281).
           if [ "${{ steps.state.outputs.healed }}" = "true" ]; then
             MSG="fix(content): Affiliate-Integritäts-Wache – CTA-Boxen/Linkziele automatisch geheilt (${HEALED_COUNT} Artikel)"
+          elif [ "$INTENT_HEALED" = "true" ]; then
+            MSG="fix(content): Intent-Wache – Anker/Route/CTA-Satz auf das versprochene Angebot geheilt (${INTENT_HEALED_COUNT} Fundstellen)"
           elif [ "$VERDICT_CHANGED" = "true" ]; then
             MSG="chore(affiliate): Beweis-Lage aktualisiert – kein Fund offen (ohne Heilung)"
           else
@@ -274,7 +341,7 @@ jobs:
           exit 0
 
       - name: Deploy anstoßen (nur wenn wirklich geheilt UND der Nachweis gepusht wurde)
-        if: ${{ steps.state.outputs.healed == 'true' && steps.commit.outputs.pushed == 'true' && steps.commit.outputs.push_verified == 'true' }}
+        if: ${{ (steps.state.outputs.healed == 'true' || steps.intent.outputs.healed == 'true') && steps.commit.outputs.pushed == 'true' && steps.commit.outputs.push_verified == 'true' }}
         uses: actions/github-script@v7
         env:
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
@@ -428,19 +495,24 @@ jobs:
             echo "| Offene Funde | ${{ steps.state.outputs.content_problems }} |"
             echo "| Werkzeugfehler | ${{ steps.state.outputs.tool_errors }} |"
             echo "| Nachweis in origin/main | ${{ steps.commit.outputs.push_verified }} |"
+            echo "| Intent-Wache (IW0–IW9) Exit | ${{ steps.intent.outputs.exit_code }} |"
+            echo "| Intent: automatisch geheilt | ${{ steps.intent.outputs.healed_count }} Fundstellen |"
+            echo "| Intent: Funde für Menschen | ${{ steps.intent.outputs.human_findings }} |"
             echo ""
             echo "_Herzschlag = Lebenszeichen der Wache (jeder Lauf erneuert ihn) · Lage = Befund "
             echo "(nur bei Änderung); der Bot-Watchdog prüft beides getrennt (Issue #281)._"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Diagnose-Artefakt bei Rot (Report, Log, Zustand)
-        if: always() && !cancelled() && steps.gate.outputs.exit_code != '0'
+        if: always() && !cancelled() && (steps.gate.outputs.exit_code != '0' || steps.intent.outputs.exit_code != '0')
         uses: actions/upload-artifact@v7
         with:
           name: affiliate-integrity-run-${{ github.run_id }}
           path: |
             AFFILIATE-INTEGRITY-REPORT.md
             .affiliate_integrity_state.json
+            AFFILIATE-INTENT-REPORT.md
+            .affiliate_intent_state.json
           if-no-files-found: ignore
           retention-days: 14
 
@@ -450,6 +522,8 @@ jobs:
         if: ${{ always() && !cancelled() }}
         run: |
           SELF="${{ steps.selftest.outcome }}"
+          INTENT_SELF="${{ steps.intent_selftest.outcome }}"
+          INTENT="${{ steps.intent.outputs.exit_code }}"
           GATE="${{ steps.gate.outputs.exit_code }}"
           HUGO="${{ steps.hugo.outcome }}"
           VERIFIED="${{ steps.commit.outputs.push_verified }}"
@@ -457,6 +531,17 @@ jobs:
           if [ "$SELF" != "success" ]; then
             echo "::error::Detektor-Selbsttest nicht bestanden – fail-closed."
             exit 1
+          fi
+          if [ "$INTENT_SELF" != "success" ]; then
+            echo "::error::Intent-Wachen-Selbsttest nicht bestanden – fail-closed (eine blinde Wache heilt falsch)."
+            exit 1
+          fi
+          if [ "$INTENT" = "2" ]; then
+            echo "::error::Intent-Wache: Werkzeugfehler (Exit 2) – Intent-Beweis nicht geführt, fail-closed."
+            exit 1
+          fi
+          if [ "$INTENT" = "1" ]; then
+            echo "🔴 Intent-Fund offen (braucht einen Menschen) – fachlicher Befund, Lauf bleibt betrieblich grün."
           fi
           # #281: Ein ausgebliebener Nachweis-Push ist ein HINWEIS (der
           # Bot-Watchdog liest ihn als Hinweis, ab 54 h als Befund) – kein

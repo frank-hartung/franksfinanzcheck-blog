@@ -57,13 +57,32 @@ GITHUB_BASE_REF (Ziel-Zweig des PR), GITHUB_STEP_SUMMARY (Kurzbericht).
 
 Exit-Codes: 0 = Vertrag erfüllt (oder nicht prüfbar, dann ::warning::)
             1 = Vertrag verletzt · 2 = Selbsttest defekt / Aufruffehler
+NACHTRAG 19.09.2026 (zweiter Vorfall – Deploy-Ausfall, Issue #320)
+-------------------------------------------------------------------
+Dieselbe Wache meldete „✅ Vertrag erfüllt“, während `main` seit Stunden keinen
+einzigen Commit der Automation mehr annahm: Das Ruleset verlangte den Pflicht-
+Check `Integritäts-Siegel`, hatte aber KEINEN Bypass-Akteur. Pflicht-Checks
+gelten für jeden Push – dieser Check entsteht jedoch nur in Pull Requests.
+Deploy #998 scheiterte im Schritt „Gate-Heilungen committen“, „Deploy auf
+gh-pages“ wurde übersprungen, die Seite blieb vier Stunden alt.
+
+Der Vertrag war also erfüllt, nur um den Preis der direkten Pushes. Deshalb
+prüft die Wache im GRÜNEN Fall zusätzlich nach (best effort, ändert nie das
+Urteil): Verlangt ein aktives Ruleset einen Pflicht-Check auf dem Ziel-Zweig,
+ohne dass irgendjemand vorbeikommt, UND committen Workflows selbst auf diesen
+Zweig? Dann ::warning:: mit Reparatur-Anleitung statt stiller Schein-Sicherheit.
+Ein Admin-Eingriff bleibt Menschen vorbehalten (C15/Runbook) – die Wache meldet,
+sie repariert nicht.
+
 Runbook: docs/PFLICHT-CHECK-RUNBOOK.md
 """
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.error
@@ -152,6 +171,67 @@ def beurteilen(regeln, erwartet: str, job_id: str = "",
                      f"niemand.{hinweis}"}
 
 
+def zielt_auf(rs: dict, branch: str) -> bool:
+    """Trifft das Ruleset den Zweig? Treffer sind `~DEFAULT_BRANCH`/`~ALL`,
+    `refs/heads/<branch>`, `<branch>` und Platzhalter-Muster; `exclude` sticht.
+    (Die Wache prüft praktisch immer den Default-Zweig, deshalb zählt
+    `~DEFAULT_BRANCH` hier als Treffer für `branch`.)"""
+    bed = (rs.get("conditions") or {}).get("ref_name") or {}
+    inc, exc = bed.get("include") or [], bed.get("exclude") or []
+
+    def trifft(muster) -> bool:
+        m = str(muster or "")
+        if not m:
+            return False
+        if m in ("~DEFAULT_BRANCH", "~ALL", branch, f"refs/heads/{branch}"):
+            return True
+        return fnmatch.fnmatch(branch, m.removeprefix("refs/heads/"))
+
+    return any(trifft(m) for m in inc) and not any(trifft(m) for m in exc)
+
+
+def blockiert_direkte_pushes(details: list[dict], branch: str = "main") -> list[dict]:
+    """Regelwerke, die `branch` einen Pflicht-Status-Check abverlangen und KEINEN
+    Bypass-Akteur haben (`bypass_actors: null` oder `[]`).
+
+    Warum das ein Befund ist: Ein `required status check` gilt für JEDEN Push.
+    Entsteht der verlangte Check aber nur in Pull Requests, kann ein direkter
+    Push ihn nie erfüllen – er wird abgelehnt, und jede Automation, die selbst
+    auf den Zweig committet (Deploy-Heilungen, Content-Engine, Social-Autopilot),
+    steht. Siehe Vorfall 19.09.2026 im Kopf dieser Datei."""
+    treffer = []
+    for rs in details or []:
+        if not isinstance(rs, dict) or str(rs.get("enforcement", "")).lower() != "active":
+            continue
+        checks = verlangte_checks(rs.get("rules") or []) or []
+        if not checks or not zielt_auf(rs, branch) or rs.get("bypass_actors"):
+            continue
+        treffer.append({"id": rs.get("id"), "name": rs.get("name", "?"),
+                        "checks": [c["context"] for c in checks]})
+    return treffer
+
+
+def direkt_pusher(workflows: dict[str, str]) -> list[str]:
+    """Workflows, die selbst committen/pushen: `contents: write` UND ein Push-
+    Aufruf (`git_sync.sh` / `git push`). Sie sind die Kunden eines Bypass-Akteurs;
+    gibt es keine, ist ein Ruleset ohne Bypass harmlos (dann nur PRs betroffen)."""
+    treffer = []
+    for datei, text in (workflows or {}).items():
+        t = str(text or "")
+        if re.search(r"contents:\s*write", t) and re.search(r"git_sync\.sh|git\s+push\b", t):
+            treffer.append(str(datei))
+    return sorted(treffer)
+
+
+def workflow_nur_pull_request(text: str) -> bool:
+    """True, wenn der Workflow einen `pull_request`-, aber keinen `push:`-Trigger
+    hat: Sein Check kann auf einem direkten Push nie entstehen – der Pflicht-Check
+    ist dann eine Sackgasse, kein Sicherheitsgewinn."""
+    kopf = re.split(r"^jobs:", str(text or ""), maxsplit=1, flags=re.M)[0]
+    return bool(re.search(r"^\s*pull_request\s*:", kopf, re.M)) \
+        and not re.search(r"^\s*push\s*:", kopf, re.M)
+
+
 def ruleset_diagnose(rulesets: list[dict]) -> list[str]:
     """Lesbare Zeilen je Ruleset (Name, Zustand, Ziel-Zweige, verlangte Checks) –
     für den Fall, dass der Ziel-Zweig nichts verlangt: Meist existiert das
@@ -218,6 +298,72 @@ def repo_aus_umgebung() -> str:
         if marker in url:
             return url.split(marker, 1)[1].strip("/")
     return ""
+
+
+def workflows_laden() -> dict[str, str]:
+    """Alle Workflow-Dateien des Hauses (Name → Text). read-only, kein Netz."""
+    verzeichnis = os.path.join(BLOG_DIR, ".github", "workflows")
+    texte: dict[str, str] = {}
+    try:
+        namen = sorted(os.listdir(verzeichnis))
+    except OSError:
+        return texte
+    for name in namen:
+        if not name.endswith((".yml", ".yaml")):
+            continue
+        try:
+            with open(os.path.join(verzeichnis, name), encoding="utf-8") as fh:
+                texte[name] = fh.read()
+        except OSError:
+            continue
+    return texte
+
+
+def bypass_pruefung(repo: str, token: str, branch: str, rules_file: str = "") -> list[str]:
+    """Nachprüfung im GRÜNEN Fall: Der Vertrag ist erfüllt – kommt die Automation
+    trotzdem noch durch? Liefert Meldungszeilen (leer = nichts zu melden) und
+    ändert nie das Urteil (best effort: kein Netz/kein Repo → keine Meldung)."""
+    if not repo or rules_file:
+        return []
+    liste, fehler = api_get(f"/repos/{repo}/rulesets", token)
+    if fehler or not isinstance(liste, list):
+        return []
+    details = []
+    for rs in liste[:10]:
+        if isinstance(rs, dict) and rs.get("target", "branch") == "branch" and "id" in rs:
+            d, f2 = api_get(f"/repos/{repo}/rulesets/{rs['id']}", token)
+            if isinstance(d, dict) and not f2:
+                details.append(d)
+    blocker = blockiert_direkte_pushes(details, branch)
+    if not blocker:
+        return []
+    workflows = workflows_laden()
+    pusher = direkt_pusher(workflows)
+    if not pusher:
+        return []   # niemand pusht direkt – dann bindet der Check nur PRs (gewollt)
+    zeilen = []
+    for b in blocker:
+        pfad = gc.PFLICHT_CHECK_WORKFLOW
+        nur_pr = workflow_nur_pull_request(workflows.get(os.path.basename(pfad), ""))
+        checks = ", ".join(f"`{c}`" for c in b["checks"])
+        zeilen.append(f"⚠️  Schein-Sicherheit: Ruleset „{b['name']}“ (#{b['id']}) verlangt "
+                      f"{checks} auf `{branch}`, hat aber KEINEN Bypass-Akteur.")
+        zeilen.append("Pflicht-Checks gelten auch für DIREKTE Pushes"
+                      + (f" – {checks} entsteht jedoch nur in Pull Requests "
+                         f"(Trigger in {pfad}: pull_request, kein push)." if nur_pr
+                         else " – jeder Push ohne bestandenen Check wird abgelehnt."))
+        gezeigt = ", ".join(pusher[:6]) + (f" … und {len(pusher) - 6} weitere"
+                                           if len(pusher) > 6 else "")
+        zeilen.append(f"Betroffene Automation ({len(pusher)} Workflows committen selbst auf "
+                      f"`{branch}`): {gezeigt}.")
+        zeilen.append("Folge: Push abgelehnt → git_sync.sh bricht sofort mit Klasse „schutz“ ab "
+                      "→ Folge-Schritte (z. B. „Deploy auf gh-pages“) werden übersprungen.")
+        zeilen.append("Reparatur (Admin, Menschen vorbehalten): Bypass-Akteur für die Automation "
+                      "ODER Ruleset-Schichtung – Lösch-/Force-Push-Schutz ohne Bypass, "
+                      "Pflicht-Check mit Bypass (Rolle „Write“, Modus „Always“).")
+        zeilen.append(f"Anleitung + API-Einzeiler: {RUNBOOK}, Abschnitt "
+                      "„Direkte Pushes und Automation“.")
+    return zeilen
 
 
 def erwarteter_check() -> tuple[str, str, str]:
@@ -310,8 +456,18 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
                       if c["context"] == erwartet and c["ruleset_id"] is not None})
         print(f"✅ Vertrag erfüllt: `{branch}` verlangt `{erwartet}`"
               + (f" (Ruleset #{', #'.join(ids)})" if ids else "") + " – das Siegel entscheidet.")
+        # Grün heißt nicht „alles gut“: Kommt die Automation noch durch?
+        # Best effort, nur GET, ändert das Urteil nie (Vorfall 19.09.2026).
+        zusatz = bypass_pruefung(repo, token, branch, rules_file)
+        for z in zusatz:
+            print(z if z.startswith("⚠️") else f"   {z}")
+        if zusatz:
+            annotate("warning", f"Pflicht-Check `{erwartet}` ohne Bypass-Akteur: direkte Pushes "
+                                f"auf `{branch}` werden abgelehnt – Automation steht. "
+                                f"Reparatur: {RUNBOOK}")
         step_summary([f"### ✅ Pflicht-Check `{erwartet}` wird auf `{branch}` verlangt", "",
-                      f"Ruleset: {', '.join('#' + i for i in ids) or '–'}"])
+                      f"Ruleset: {', '.join('#' + i for i in ids) or '–'}"]
+                     + (["", *[z.strip() for z in zusatz]] if zusatz else []))
         return 0
 
     # Rot – mit Diagnose (best effort, ändert das Urteil nicht) und Reparatur.
@@ -421,13 +577,67 @@ def selftest() -> int:
     if echt is not None and echt != gc.PFLICHT_CHECK_NAME:
         f.append(f"Fall9: {WORKFLOW_PFAD} meldet `{echt}`, Vertrag erwartet `{gc.PFLICHT_CHECK_NAME}` – "
                  f"Umbenennung ohne Vertrag (Ruleset im selben Atemzug!).")
+    # 10) Ziel-Treffer: Default-Zweig, refs/heads/…, Glob – und `exclude` sticht
+    def _rs(inc, exc=(), rules=None, bypass=None, enf="active"):
+        return {"id": 7, "name": "R", "enforcement": enf,
+                "conditions": {"ref_name": {"include": list(inc), "exclude": list(exc)}},
+                "rules": [_regel((name, GITHUB_ACTIONS_APP_ID))] if rules is None else rules,
+                "bypass_actors": bypass}
+    for muster in ("~DEFAULT_BRANCH", "~ALL", "main", "refs/heads/main", "refs/heads/*", "*"):
+        if not zielt_auf(_rs([muster]), "main"):
+            f.append(f"Fall10: Muster `{muster}` trifft `main` nicht.")
+    for muster in ("develop", "refs/heads/develop", "release-*"):
+        if zielt_auf(_rs([muster]), "main"):
+            f.append(f"Fall10b: Muster `{muster}` trifft `main` fälschlich.")
+    if zielt_auf(_rs([]), "main"):
+        f.append("Fall10c: leere include-Liste darf keinen Zweig treffen (Befund #316).")
+    if zielt_auf(_rs(["~DEFAULT_BRANCH"], ["main"]), "main"):
+        f.append("Fall10d: `exclude` muss den Treffer aufheben.")
+
+    # 11) Bypass-Lücke: Pflicht-Check ohne Bypass-Akteur blockiert direkte Pushes
+    if len(blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"], bypass=None)], "main")) != 1:
+        f.append("Fall11: Ruleset mit Pflicht-Check und bypass_actors=null wird nicht erkannt.")
+    if len(blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"], bypass=[])], "main")) != 1:
+        f.append("Fall11b: leere Bypass-Liste muss wie „niemand darf vorbei“ gelten.")
+    if blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"],
+                                     bypass=[{"actor_id": 5, "actor_type": "RepositoryRole",
+                                              "bypass_mode": "always"}])], "main"):
+        f.append("Fall11c: Ruleset MIT Bypass-Akteur darf nicht gemeldet werden.")
+    if blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"], enf="disabled")], "main"):
+        f.append("Fall11d: deaktiviertes Ruleset darf nicht gemeldet werden.")
+    if blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"],
+                                     rules=[{"type": "deletion"}, {"type": "non_fast_forward"}])],
+                                "main"):
+        f.append("Fall11e: Ruleset ohne Status-Check darf nicht gemeldet werden.")
+    if blockiert_direkte_pushes([_rs(["develop"])], "main"):
+        f.append("Fall11f: Ruleset auf anderem Zweig darf nicht gemeldet werden.")
+
+    # 12) Direkt-Pusher: nur Workflows mit contents:write UND Push-Aufruf
+    pusher = direkt_pusher({
+        "deploy.yml": "permissions:\n  contents: write\njobs:\n  a:\n    steps:\n"
+                      "      - run: bash scripts/git_sync.sh --push-only\n",
+        "nur-push.yml": "permissions:\n  contents: read\n      - run: git push origin main\n",
+        "nur-write.yml": "permissions:\n  contents: write\n      - run: hugo\n",
+        "gate.yml": "permissions:\n  contents: read\n"})
+    if pusher != ["deploy.yml"]:
+        f.append(f"Fall12: Direkt-Pusher falsch bestimmt: {pusher}")
+
+    # 13) Trigger-Lage des Gate-Workflows: ohne `push:` entsteht der Check nie direkt
+    if not workflow_nur_pull_request("on:\n  pull_request:\n    branches: [main]\njobs:\n  x:\n"):
+        f.append("Fall13: pull_request-only Workflow wird nicht als solcher erkannt.")
+    if workflow_nur_pull_request("on:\n  push:\n  pull_request:\njobs:\n  x:\n"):
+        f.append("Fall13b: Workflow mit push-Trigger darf nicht als PR-only gelten.")
+    if workflow_nur_pull_request("on:\n  workflow_dispatch:\njobs:\n  x:\n"):
+        f.append("Fall13c: Workflow ohne pull_request darf nicht als PR-only gelten.")
+
     if f:
         print("❌ PFLICHTCHECK-SELBSTTEST FEHLGESCHLAGEN:")
         for z in f:
             print("   -", z)
         return 2
-    print(f"✅ Pflichtcheck-Selbsttest bestanden (9 Fälle: Urteile, Diagnose, Reparatur, "
-          f"Namensquelle – erwartet `{gc.PFLICHT_CHECK_NAME}`).")
+    print(f"✅ Pflichtcheck-Selbsttest bestanden (13 Fälle: Urteile, Diagnose, Reparatur, "
+          f"Namensquelle, Ziel-Treffer, Bypass-Lücke, Direkt-Pusher, Trigger-Lage – "
+          f"erwartet `{gc.PFLICHT_CHECK_NAME}`).")
     return 0
 
 

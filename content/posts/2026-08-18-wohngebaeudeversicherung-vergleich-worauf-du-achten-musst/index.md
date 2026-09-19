@@ -33,7 +33,7 @@ Wer eine **[Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-sc
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Schütze dein Hab und Gut mit den fairsten Konditionen am Markt: [**Versicherungsvergleich starten**](/go/hausrat/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Schütze dein Hab und Gut mit den fairsten Konditionen am Markt: [**Gebäudeversicherung prüfen & sparen**](/go/wohngebaeudeversicherung/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die unverzichtbaren Grundbausteine einer Gebäudeversicherung
@@ -85,7 +85,7 @@ Nach einem Brand bleibt oft giftiger Schutt. Das Entsorgen kostet viel. Die Vers
 ### 5. Hotelkosten bei Unbewohnbarkeit
 Kannst du nach einem Schaden nicht im Haus wohnen, brauchst du ein Hotel. Die Versicherung sollte das zahlen. Ein guter Tarif übernimmt etwa 150 € pro Tag, oft bis zu 24 Monate.
 
-> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/hausrat/)
+> 💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Wohngebäudeversicherung vergleichen**](/go/wohngebaeudeversicherung/)
 
 ## Tarif‑ und Kostenvergleich für ein Einfamilienhaus (140 m²)
 
@@ -203,6 +203,6 @@ Ja. Beim Eigentümerwechsel gilt die Police automatisch für den neuen Eigentüm
 
 Bevor du dich für einen Tarif entscheidest, führe einen **Wohngebäude‑Tarifcheck** durch: Notiere deine Wunsch‑Klauseln, vergleiche mindestens drei Angebote und prüfe die **Gebäudeversicherung Elementarschutz**‑Leistung separat. So stellst du sicher, dass du nicht nur den günstigsten Preis, sondern das optimale Preis‑Leistungs‑Verhältnis bekommst.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/haftpflicht/)
+👉 **Jetzt vergleichen und sparen:** [**→ Wohngebäude-Tarife vergleichen**](/go/wohngebaeudeversicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

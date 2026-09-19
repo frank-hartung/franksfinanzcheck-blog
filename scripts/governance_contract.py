@@ -106,6 +106,16 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Wache-Herzschlag (#281): der Selbsttest friert ein, dass ein
           # zweiter Lauf mit gleichem Befund den Zeitstempel ERNEUERT
           "affiliate_integrity_gate.py",
+          # Intent-Wache (19.09.2026, Auftrag Frank: „Ein Besucher mit
+          # konkreter Kaufabsicht darf niemals auf einem anderen Produkt
+          # landen"): IW0–IW9 auf Anker↔Route, CTA↔Artikelthema und
+          # Name↔wirkliches Angebot. Der Selbsttest friert die sieben
+          # Live-Funde ein (Erkennung, Heilung, Idempotenz) UND den
+          # Datenpfad der Templates – hugo.Data/site.Data im Layout lässt
+          # Hugo den ganzen data/-Baum inklusive *.jsonl parsen und den
+          # Build sterben. Der Kontrakt ist die Datendatei dahinter und
+          # selbsttestet Angebotstreue, Nie-Paare und Themen-Muster.
+          "affiliate_intent_guard.py", "affiliate_intent_contract.py",
           # Uhr-Zwang + Selbsttest-Runner (18.09.2026, Run 35312783057): der
           # draft_triage-Selbsttest war an einem Tag grün und sechs Tage später
           # rot, weil seine Fixtures von der echten Wanduhr, die Erwartung aber

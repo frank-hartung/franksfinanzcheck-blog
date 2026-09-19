@@ -106,7 +106,9 @@ GIT_SYNC_FETCH_TRIES="${GIT_SYNC_FETCH_TRIES:-3}"
 GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
 
 # Warum der letzte Synchronisierungsversuch gescheitert ist:
-#   netzwerk | auth | konflikt | rebase | autostash | leer
+#   netzwerk | auth | schutz | konflikt | rebase | autostash | leer
+#   „schutz“ = Branch-Schutz/Ruleset lehnt den Push ab: Wiederholen bringt
+#   nichts, der Lauf bricht sofort ab und nennt die Reparatur-Anleitung.
 SYNC_FAIL_URSACHE=""
 
 PUSH_ONLY=0
@@ -148,6 +150,24 @@ sync_ok() {
 ist_auth_fehler() {
   printf '%s' "$1" | grep -qiE \
     'could not read [Uu]sername|[Aa]uthentication failed|[Aa]uthorization failed|[Pp]ermission denied|[Aa]ccess denied|HTTP 403|403 [Ff]orbidden|remote: Permission to|supported authentication'
+}
+
+# --- Schutz-Ablehnung (Branch-Schutz / Ruleset) -----------------------------
+#  GH006/GH013/GH014 sind GitHubs Antwort, wenn ein REGELWERK den Push ablehnt:
+#  verlangte Status-Checks, Pflicht-Reviews, Signaturpflicht, Namensregeln,
+#  Lösch-/Force-Push-Verbot. Entscheidend: Ein `required status check` gilt auch
+#  für DIREKTE Pushes. Entsteht der Check aber nur in Pull Requests (Workflow-
+#  Trigger `pull_request`), blockiert er jeden Bot-Push, bis ein Bypass-Akteur im
+#  Ruleset steht – Wiederholen ändert daran nichts.
+#  Vorfall 2026-09-19: Deploy #998 verbrannte drei Runden im Backoff, gab als
+#  „netzwerk“ auf, der Schritt „Deploy auf gh-pages“ wurde übersprungen – die
+#  Seite blieb vier Stunden alt und das Log nannte die wahre Ursache nicht.
+#  Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, Abschnitt „Direkte Pushes“.
+ist_schutz_fehler() {
+  printf '%s' "$1" | grep -qiE \
+    'GH006|GH013|GH014|protected branch|repository rule|rule violation|'\
+'required status check|changes must be made through a pull request|hook '\
+'declined|push declined|update-ref failed|must be signed'
 }
 
 backoff_sekunden() {  # $1 = Rundennummer (1-basiert)
@@ -407,6 +427,16 @@ sync_und_push() {
         return 0
       fi
       printf '%s\n' "$out" | sed 's/^/  push: /'
+      if ist_schutz_fehler "$out"; then
+        SYNC_FAIL_URSACHE=schutz
+        echo "::error::git_sync.sh: Push auf origin/$BRANCH von "\
+             "Branch-Schutz/Ruleset abgelehnt (Ursache: schutz) – kein Retry "\
+             "sinnvoll, dieselbe Regel lehnt wieder ab. Häufigste Ursache: "\
+             "verlangter Status-Check OHNE Bypass-Akteur (Pflicht-Checks gelten "\
+             "auch für direkte Pushes). Reparatur: "\
+             "docs/PFLICHT-CHECK-RUNBOOK.md, „Direkte Pushes“."
+        return 1
+      fi
       if ist_auth_fehler "$out"; then
         SYNC_FAIL_URSACHE=auth
         echo "::error::git_sync.sh: Push auf origin/$BRANCH abgelehnt "\
@@ -430,6 +460,14 @@ sync_und_push() {
             return 0
           fi
           printf '%s\n' "$out" | sed 's/^/  push: /'
+          if ist_schutz_fehler "$out"; then
+            SYNC_FAIL_URSACHE=schutz
+            echo "::error::git_sync.sh: Auch der Rettungsanker-Push wurde von "\
+                 "Branch-Schutz/Ruleset abgelehnt (Ursache: schutz) – kein Retry "\
+                 "sinnvoll. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, "\
+                 "„Direkte Pushes“."
+            return 1
+          fi
           if ist_auth_fehler "$out"; then
             SYNC_FAIL_URSACHE=auth
             echo "::error::git_sync.sh: Auch der Rettungsanker-Push wurde "\
@@ -460,7 +498,9 @@ sync_und_push() {
   echo "::error::git_sync.sh: Synchronisation nach $GIT_SYNC_TRIES Runden "\
        "fehlgeschlagen (zuletzt: $SYNC_FAIL_URSACHE). Mögliche Ursachen: "\
        "GitHub-Transient, fehlende 'contents: write'-Berechtigung, "\
-       "Branch-Schutz oder ein anderer Workflow schreibt gleichzeitig."
+       "Branch-Schutz (Ruleset mit Pflicht-Check ohne Bypass-Akteur – "\
+       "docs/PFLICHT-CHECK-RUNBOOK.md) oder ein anderer Workflow schreibt "\
+       "gleichzeitig."
   return 1
 }
 

@@ -40,7 +40,7 @@ Geh die Flugsuche mit System an. Das gesparte Geld gib lieber vor Ort aus. Zum B
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Kostenlos vergleichen**](/go/mietwagen/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Flug + Hotel im Paket vergleichen**](/go/fluege/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum schwanken die Preise für Flugtickets so extrem?
@@ -93,7 +93,7 @@ Die Preisspanne ist gewaltig. Ich habe reale Daten für die Strecke München (MU
 
 **Analyse:** Der Last-Minute-Preis war fast zehnmal so hoch wie der Bestpreis für Frühbucher. Spannend ist der Vergleich zwischen Billigflieger und Linie: Sobald du beim Billigflieger Koffer und Sitzplatz zubuchst, schrumpft der Preisvorteil oft auf ein Minimum. Die Linie bietet dann oft das bessere Gesamtpaket inklusive besserem Terminal und mehr Beinfreiheit.
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Pauschalreise mit Flug vergleichen**](/go/fluege/)
 
 ## Welche Fehler kosten dich bei der Buchung unnötig Geld?
 
@@ -210,6 +210,6 @@ Kluges Reisen beginnt im Kopf und am Bildschirm. Nutze die Tools für den **Flug
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/mietwagen/)
+👉 **Jetzt vergleichen und sparen:** [**→ Flug + Hotel als Urlaubspaket vergleichen**](/go/fluege/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

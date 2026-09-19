@@ -125,7 +125,7 @@ Dann kann die Reservierung verfallen. Bei Flugverspätungen: Melde dich sofort b
 
 
 
-> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/mietwagen/)
+> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)
 
 
 ## Checkliste für eine stressfreie Fahrzeugübernahme

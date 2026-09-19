@@ -35,7 +35,7 @@ Wie du einen **Mietwagen ohne Kaution** buchst (oder die Kaution klein hältst),
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere dir vor der Buchung einen Preisvergleich inklusive Vollkasko ohne Selbstbeteiligung: [**Jetzt Mietwagen vergleichen**](/go/kfz-versicherung/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere dir vor der Buchung einen Preisvergleich inklusive Vollkasko ohne Selbstbeteiligung: [**Jetzt Mietwagen vergleichen**](/go/mietwagen/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was ist die Mietwagen-Kaution überhaupt?
@@ -70,7 +70,7 @@ Auch bei Vollkasko verlangt der Vermieter eine kleine Summe. Meist sind es 100 
 
 Grundsätzlich ist jeder Mietwagen in Europa haftpflichtversichert. Im Preisvergleich enthalten die meisten Billig-Angebote darüber hinaus eine **Vollkasko mit hoher Selbstbeteiligung** von 900 € bis 1.500 €. Bei einem Kratzer oder Steinschlag zahlst du bis zu dieser Summe selbst.
 
-**So umgehst du sie:** Buche konsequent ein Paket mit **"Vollkasko ohne Selbstbeteiligung"** (auch "Zero Excess", "Super Cover" oder "Vollkasko ohne SB"). Das kostet im Schnitt nur 3 € bis 8 € pro Tag mehr. Im Vergleich zur Selbstbeteiligung ist das ein Schnäppchen. Wer über einen [deutschen Vergleichsrechner](/go/mietwagen/) bucht, bekommt diese Option meist inklusive.
+**So umgehst du sie:** Buche konsequent ein Paket mit **"Vollkasko ohne Selbstbeteiligung"** (auch "Zero Excess", "Super Cover" oder "Vollkasko ohne SB"). Das kostet im Schnitt nur 3 € bis 8 € pro Tag mehr. Im Vergleich zur Selbstbeteiligung ist das ein Schnäppchen. Wer über einen [Mietwagen-Preisvergleich](/go/mietwagen/) bucht, bekommt diese Option meist inklusive.
 
 ### 2. Die Zweitfahrer-Gebühr
 
@@ -274,6 +274,6 @@ Sichere Fotos und das Protokoll helfen. Widersprich schriftlich und setze eine F
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen**](/go/kfz-versicherung/)
+👉 **Jetzt vergleichen und sparen:** [**→ Mietwagen mit Vollkasko ohne Selbstbeteiligung vergleichen**](/go/mietwagen/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

@@ -35,7 +35,7 @@ Drei Dinge machen eine Verbindung stabil. Erstens die Bandbreite. Zweitens die S
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was verbirgt sich hinter dem DNS-Hack?
@@ -98,7 +98,7 @@ Das folgende Beispiel verdeutlicht die theoretische Wirkung. Eine typische Nachr
 
 Rufst du beispielsweise 100 Seiten am Tag auf, sparst du in dieser Modellrechnung rund 275 Sekunden. Auf das Jahr hochgerechnet ergibt dies theoretisch über 100.000 Sekunden, was einer Wartezeit von etwa 28 Stunden entspricht – allein erzielt durch eine geänderte Konfiguration.
 
-> 💶 **Spar-Tipp zwischendurch:** Faire Konditionen für deinen Anschluss gibt es online in wenigen Minuten: [**Vergleichen & sparen**](/go/dsl/)
+> 💶 **Spar-Tipp zwischendurch:** Faire Konditionen für deinen Anschluss gibt es online in wenigen Minuten: [**Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
 ## Welche Fehler machen die Umstellung zunichte?
 
@@ -160,6 +160,6 @@ Sollte ein DNS-Server nicht erreichbar sein, können Webadressen nicht mehr in I
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/dsl/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
