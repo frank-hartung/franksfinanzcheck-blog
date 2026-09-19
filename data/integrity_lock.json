@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-19T08:47:29.654989+00:00",
-  "head": "e499d6ff",
+  "signed_at": "2026-09-19T10:24:32.029781+00:00",
+  "head": "5493744",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
@@ -8,14 +8,14 @@
     "layouts/_default/_markup/render-link.html": "8776bb0e218456f141d4681a8227c374fc7511b7eadb890434fed4423066d677",
     "layouts/_partials/affiliate_anchor_attrs.html": "7c40d768453393e2b915e819cc0c8922732f9bf43c3c04cab9f7eddf19601cf5",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "4fd69572b2530a9161a666f1301a9daa2916f165dc14381fc8b1a2ca251b162d",
-    "layouts/_partials/extend_post_content.html": "f5bce9358bf0afa09f131a9fe54ee60e618ec782de600692587782736d2d3bd3",
+    "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
+    "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
     "layouts/_partials/head.html": "c3fc452f35429f4266548c8736c79f0ce0531328802a60a3d750d50162d5c0e4",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
-    "layouts/_partials/pillar_box.html": "c9f3e598255ca292094ef5fc93bfd565adb05f3c5c1f8957dfb4d6c1d4ac5a34",
+    "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "a075f99a8353d719d077cdec27513fbf1cfe0660e4de4bf6e17710a9fceb22e6",
+    "layouts/pillar/list.html": "73ddd7e6bcdd4b675c9815319955e03efaa76e9cfdd23f2f2416c253b6d1fbf5",
     "layouts/pillar/single.html": "10e7ce5a3af2246ec56be397f8e37f74331de5da26c28c95a562979a09327455",
     "layouts/robots.txt": "ed88bb3ffbb57272ed5418d3ac0246c1ca8ac082213549fdf13e09b6a9cd5246",
     "layouts/shortcodes/einspartabelle.html": "527d9dccebf232ba9876e64df51ca0fc52ead3518575fca613b9048942a70cf7",
@@ -187,6 +187,17 @@
           ],
           "commits_art": "letzte-commits"
         }
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "art": "set-current",
+      "head": "5493744",
+      "geaendert": [
+        "layouts/_partials/extend_footer.html",
+        "layouts/_partials/extend_post_content.html",
+        "layouts/_partials/pillar_box.html",
+        "layouts/pillar/list.html"
       ]
     }
   ]

@@ -21,22 +21,16 @@
     Logik (ffConsent/ffConsentShow/Escape) bleibt im Footer-Skript
     (extend_footer.html) – findet das Element per ID.
 ============================================================ */}}
-<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen" style="position:fixed; bottom:0; left:0; right:0; z-index:999999;
-     background:#ffffff; border-top:3px solid #1F6F5C; box-shadow:0 -4px 20px rgba(0,0,0,.25); padding:10px 16px;
-     font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;">
-  <div style="max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-    <div style="flex:1 1 60%; font-size:.88em; line-height:1.4; color:#222;">
-      <strong style="color:#1F6F5C;"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen:</strong>
+<div id="ff-consent-banner" role="region" aria-label="Cookie-Einstellungen">
+  <div class="ff-consent-banner__inner">
+    <div class="ff-consent-banner__text">
+      <strong class="ff-consent-banner__title"><span aria-hidden="true">🍪 </span>Cookie-Einstellungen:</strong>
       Nur technisch notwendige Cookies. Beim Klick auf Affiliate-Links (z.&nbsp;B. zu CHECK24) können Anbieter Tracking-Cookies setzen – hier verwalten.
-      <a href="{{ "datenschutz/" | absURL }}" style="color:#1F6F5C; font-weight:600; white-space:nowrap;">Datenschutzerklärung</a>
+      <a href="{{ "datenschutz/" | absURL }}" class="ff-consent-banner__link">Datenschutzerklärung</a>
     </div>
-    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-left:auto;">
-      <button onclick="ffConsent('all')"
-        style="background:#FFB300; color:#111; border:none; border-radius:999px; padding:8px 16px;
-               font-weight:700; font-size:.88em; cursor:pointer;">Alle akzeptieren</button>
-      <button onclick="ffConsent('necessary')"
-        style="background:#1F6F5C; color:#fff; border:none; border-radius:999px; padding:8px 16px;
-               font-weight:700; font-size:.88em; cursor:pointer;">Nur notwendige</button>
+    <div class="ff-consent-banner__buttons">
+      <button onclick="ffConsent('all')" class="ff-consent-banner__btn-accept">Alle akzeptieren</button>
+      <button onclick="ffConsent('necessary')" class="ff-consent-banner__btn-necessary">Nur notwendige</button>
     </div>
   </div>
 </div>

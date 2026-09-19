@@ -1,7 +1,22 @@
 {{- define "main" }}
-<div class="not-found">
-    <h1 class="not-found-title">404 – Seite nicht gefunden</h1>
-    <p>Die gesuchte Seite existiert nicht (mehr) oder die Adresse ist falsch.</p>
-    <p><a href="{{ "" | absLangURL }}">Zur Startseite</a></p>
+<div class="not-found ff-404-page">
+    <div class="ff-404-badge" aria-hidden="true">404</div>
+    <h1 class="not-found-title ff-404-title">Seite nicht gefunden</h1>
+    <p class="ff-404-desc">Die gesuchte Seite existiert leider nicht (mehr) oder die Adresse wurde geändert. Hier findest du den Weg zurück zu den wichtigsten Spar-Ratgebern:</p>
+    <div class="ff-404-actions">
+      <a href="{{ "" | absLangURL }}" class="ff-btn ff-btn-primary">← Zur Startseite</a>
+      <a href="{{ "posts/" | absLangURL }}" class="ff-btn ff-btn-secondary">Alle Ratgeber &amp; Spartipps</a>
+    </div>
+    <div class="ff-404-topics">
+      <span class="ff-404-topics-title">Direkt zu den Sparthemen:</span>
+      <div class="ff-404-pills">
+        <a href="{{ "pillar/strom-sparen/" | absLangURL }}" class="ff-pc-chip">⚡ Strom &amp; Gas</a>
+        <a href="{{ "pillar/versicherungen/" | absLangURL }}" class="ff-pc-chip">🛡️ Versicherungen</a>
+        <a href="{{ "pillar/internet-dsl/" | absLangURL }}" class="ff-pc-chip">🌐 Internet &amp; DSL</a>
+        <a href="{{ "pillar/konto-karten/" | absLangURL }}" class="ff-pc-chip">💳 Konto &amp; Karten</a>
+        <a href="{{ "pillar/frugalismus/" | absLangURL }}" class="ff-pc-chip">🌱 Frugalismus</a>
+        <a href="{{ "pillar/mietwagen/" | absLangURL }}" class="ff-pc-chip">🚗 Mietwagen</a>
+      </div>
+    </div>
 </div>
 {{- end }}{{/* end main */ -}}

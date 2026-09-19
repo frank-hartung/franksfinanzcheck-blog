@@ -5,19 +5,21 @@
     – unterstützt Googles E-E-A-T-Bewertung (Erfahrung/Expertise)
 ============================================================ */}}
 {{- if eq .Section "posts" -}}
-<div class="ff-trust" style="margin:36px 0 8px; padding:24px; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:14px; display:flex; gap:18px; flex-wrap:wrap; align-items:center;">
-  <img src="{{ "images/frank-hartung.jpg" | absURL }}" alt="Frank Hartung" width="72" height="72" loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred"
-       style="border-radius:50%; object-fit:cover; border:2px solid #EAF4EF; flex:0 0 auto;">
-  <div style="flex:1 1 280px; min-width:0;">
-    <p style="margin:0 0 4px; font-family:'Inter',sans-serif; font-weight:800; color:#0E5A43; font-size:1.05em;">Warum mir vertrauen?</p>
-    <p style="margin:0 0 8px; font-size:.9em; line-height:1.55; color:#444;">
+<div class="ff-trust-box" role="complementary" aria-label="Über den Autor und Transparenz">
+  <div class="ff-trust-box__avatar-wrap">
+    <img src="{{ "images/frank-hartung.jpg" | absURL }}" alt="Frank Hartung" width="72" height="72" loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred" class="ff-trust-box__img">
+    <span class="ff-trust-box__badge" title="Geprüfter Finanz-Praktiker" aria-hidden="true">✓</span>
+  </div>
+  <div class="ff-trust-box__content">
+    <p class="ff-trust-box__title">Warum mir vertrauen?</p>
+    <p class="ff-trust-box__bio">
       Dieser Beitrag wurde von <strong>Frank Hartung</strong> erstellt – über 10 Jahre Erfahrung in
       privater Finanzplanung, hunderte selbst durchgeführte Tarifvergleiche und ständiges Testen in der Praxis.
     </p>
-    <p style="margin:0; font-size:.82em; line-height:1.5; color:#666;">
+    <p class="ff-trust-box__transparency">
       <strong>Transparenz:</strong> Dieser Artikel kann Affiliate-Links enthalten (CHECK24, Tarifcheck) –
       für dich entstehen keine Mehrkosten. Die Empfehlungen sind unabhängig von Provisionen.
-      <a href="{{ "ueber/" | absURL }}" style="color:#0E5A43; font-weight:600;">Mehr über mich →</a>
+      <a href="{{ "ueber/" | absURL }}" class="ff-trust-box__link">Mehr über mich →</a>
     </p>
   </div>
 </div>

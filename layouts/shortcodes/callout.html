@@ -4,20 +4,24 @@
 {{- $text := .Get "text" | default "" -}}
 {{- $inner := .Inner | default "" -}}
 {{- $body := cond (gt (len (trim $inner " \t\r\n")) 0) $inner $text -}}
-{{- $color := "border-left:4px solid #3b82f6; background:#eff6ff;" -}}
+{{- $cls := "ff-callout--info" -}}
 {{- $label := "ℹ Hinweis" -}}
 {{- if eq $type "warning" -}}
-  {{- $color = "border-left:4px solid #eab308; background:#fefce8;" -}}
+  {{- $cls = "ff-callout--warning" -}}
   {{- $label = "⚠ Wichtiger Hinweis" -}}
 {{- else if eq $type "tip" -}}
-  {{- $color = "border-left:4px solid #0E5A43; background:#EAF4EF;" -}}
+  {{- $cls = "ff-callout--tip" -}}
   {{- $label = "💡 Tipp" -}}
 {{- end -}}
-<div style="{{ $color }} border-radius:6px; padding:12px 16px; margin:16px 0;">
-  <strong>{{ $label }}:</strong>
-  {{- if gt (len (trim $inner " \t\r\n")) 0 }}
-  <div style="margin-top:6px;">{{ $inner | markdownify }}</div>
-  {{- else }}
-  {{ $body }}
-  {{- end }}
+<div class="ff-callout {{ $cls }}" role="note">
+  <div class="ff-callout__head">
+    <strong>{{ $label }}:</strong>
+  </div>
+  <div class="ff-callout__body">
+    {{- if gt (len (trim $inner " \t\r\n")) 0 }}
+    {{ $inner | markdownify }}
+    {{- else }}
+    {{ $body }}
+    {{- end }}
+  </div>
 </div>
