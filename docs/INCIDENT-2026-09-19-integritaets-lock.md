@@ -177,3 +177,46 @@ python3 scripts/selftest_runner.py                 # alle Wachen + Uhr-Proben
 > weiterhin nur bewusst signiert werden (`--set-current`) oder zurückgenommen
 > werden. Der PR-Gate-Satz „im selben PR signieren" macht daraus eine
 > Sichtungs-Entscheidung **vor** dem Merge — der Ort, an dem sie hingehört.
+
+## Nachtrag 19.09.2026 — der Pflicht-Check hieß `lock` und schützte nichts
+
+**Befund (per API belegt, 09:14 UTC).** Der Gate-Job trug keinen Anzeigenamen
+und meldete sich bei GitHub darum unter seiner Job-ID **`lock`**. Um 09:11 UTC
+wurde er unter genau diesem Namen als Pflicht-Check in das Ruleset
+„Integritäts-Lock (PR-Gate)“ (#23695872, *active*) eingetragen — das Ruleset
+hatte aber **keinen Ziel-Zweig** (`conditions.ref_name.include: []`).
+`GET /repos/…/rules/branches/main` antwortete `[]`, `main` stand auf
+`protected: false`: ein aktives Häkchen, das nichts schützte. Dieselbe
+Fehlerklasse wie der Vorfall selbst — still, grün, folgenlos — nur eine Ebene
+höher: nicht im Gate, sondern im Vertrag *um* das Gate.
+
+**Reparatur — der Name ist jetzt ein Vertrag (Governance-Regel C18).**
+
+| Ort | Vorher | Nachher |
+|---|---|---|
+| `integrity-lock.yml` | Job ohne `name:` → Check `lock` | `name: Integritäts-Siegel` — sprechend, stabil, im Kopf der Datei als Vertrag erklärt |
+| `governance_contract.py` | — | **C18 Pflicht-Check:** `PFLICHT_CHECK_NAME = "Integritäts-Siegel"` ist die Quelle; die Workflow-Datei muss ihn tragen, bei jedem PR auf `main` laufen, **ohne** `paths`-Filter (sonst „Expected“ für immer), **ohne** `if:` am Job und `continue-on-error` am Gate-Schritt (sonst Scheingrün), nur mit Leserechten |
+| `pflichtcheck_guard.py` (neu, letzter Gate-Schritt) | — | **Wächter des Wächters:** liest den Check-Namen aus der Workflow-Datei, fragt `rules/branches/<Ziel-Zweig>` und urteilt `VERLANGT` / `FEHLT` / `FALSCHE_QUELLE` / `UNGESCHUETZT` — bei Rot mit Diagnose je Ruleset (Name, Zustand, Ziel-Zweige, verlangte Checks) und Reparatur in Klicks. API nicht erreichbar → `::warning::`, nicht rot |
+| Doku | — | `docs/PFLICHT-CHECK-RUNBOOK.md` (Zustand prüfen, Ruleset reparieren, Reihenfolge beim Umbenennen) |
+
+Die Wache gegen den Ist-Zustand vom 19.09.:
+
+```
+🛑 PFLICHT-CHECK-VERTRAG VERLETZT – Kein aktives Ruleset verlangt einen Status-Check auf dem
+   Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.
+   Diagnose: Ruleset „Integritäts-Lock (PR-Gate)“ (#23695872, active): verlangt `lock`,
+             zielt auf KEINEN Zweig (include: []).
+   Fix (Admin, drei Klicks): … Include default branch … `lock` entfernen, `Integritäts-Siegel` hinzufügen
+```
+
+**Nachweis:** `governance_contract.py --selftest` (C1–C18, jede C18-Klausel mit
+Kunst-Workflow in beide Richtungen), `pflichtcheck_guard.py --selftest` (9 Fälle,
+kein Netz, schreibt nie; Fall 9 koppelt Workflow-Datei und Konstante),
+`scripts/tests/test_pflichtcheck.py` (21 Tests am echten Workflow inkl.
+Mutationen und Verdrahtung über den Runner-Mechanismus). `pflichtcheck_guard.py`
+steht im `GUARDS`-Minimum.
+
+**Was nur ein Mensch kann (Admin-Recht):** das Ruleset auf den Default-Branch
+zielen lassen und `lock` gegen `Integritäts-Siegel` tauschen — Klickweg und
+API-Einzeiler im Runbook. Bis dahin ist der letzte Gate-Schritt in jedem PR
+**absichtlich rot** und sagt, warum.
