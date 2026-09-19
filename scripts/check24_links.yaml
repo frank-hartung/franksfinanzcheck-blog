@@ -73,3 +73,14 @@ links:
   #    Deep ist der im Artikel verwendete und landet exakter.
   #    Fund via UNREGISTERED-deep-Report (August 2026),
   #    auf Franks Entscheid als eigene Route aufgenommen.
+  wohngebaeudeversicherung: "https://a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=wohngebaeudeversicherung&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=wohngebaeudeversicherung"
+  #  ^ [E2E VERIFIZIERT 19.09.2026]: Neuer Fund der Intent-Wache – der
+  #    Wohngebaeude-Vergleichsartikel bewarb /go/hausrat/ und /go/haftpflicht/
+  #    (fremde Policen!). Das Tarifcheck-Partnerprogramm liefert den Deep
+  #    `wohngebaeudeversicherung`: die Kette
+  #      a.partner-versicherung.de/click.php?partner_id=47086&ad_id=15&deep=wohngebaeudeversicherung
+  #    landet auf tarifcheck.de/wohngebaeudeversicherung/ (Wohngebaeude-
+  #    Vergleich, 200). Gegenprobe: ein erfundener Deep-Wert liefert keine
+  #    Produktseite. Damit hat die Route denselben Status wie hausrat/
+  #    haftpflicht (gleiches Netz, gleiche PID, produkt-exakt).
+  #    Kontrolle: affiliate_health.py ROUTE_CONTRACT + Intent-Wache IW0/IW5.

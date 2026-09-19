@@ -6,25 +6,26 @@
    - Alles andere bleibt 1:1 Default-Ausgabe. */ -}}
 
 {{- $names := dict
-  "allgemein"            "Check24 Vergleichsportal"
-  "strom"                "Check24 · Stromtarife"
-  "gas"                  "Check24 · Gastarife"
-  "dsl"                  "Check24 · DSL & Internet"
-  "fluege"               "Check24 · Flüge & Pauschalreisen"
-  "handytarife"          "Check24 · Handytarife"
-  "kredit"               "Check24 · Kreditvergleich"
-  "kreditkarte"          "Check24 · Kreditkarten"
-  "kfz-versicherung"     "Check24 · Kfz-Versicherung"
-  "mietwagen"            "Check24 · Mietwagen"
-  "reisen"               "Check24 · Reisen & Urlaub"
-  "girokonto"            "C24 Bank (Check24) · Girokonto"
-  "tagesgeld"            "C24 Bank (Check24) · Tagesgeld"
-  "haftpflicht"          "Tarifcheck · Haftpflicht"
-  "hausrat"              "Tarifcheck · Hausrat"
-  "unfallversicherung"   "Tarifcheck · Unfallversicherung"
-  "reisekrankenversicherung" "Tarifcheck · Reisekranken"
-  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatz"
-  "hunde"                "Tarifcheck · Hunde­krankenversicherung"
+  "allgemein"                "CHECK24-Vergleichsportal (Startseite)"
+  "dsl"                      "CHECK24 · DSL & Internet"
+  "fluege"                   "CHECK24 · Pauschalreisen (Flug im Paket)"
+  "gas"                      "CHECK24 · Gastarife"
+  "girokonto"                "C24 Bank (CHECK24) · Girokonto"
+  "haftpflicht"              "Tarifcheck · Privathaftpflicht"
+  "handytarife"              "CHECK24 · Handytarife"
+  "hausrat"                  "Tarifcheck · Hausratversicherung"
+  "hunde"                    "Tarifcheck · Tierkrankenversicherung"
+  "kfz-versicherung"         "CHECK24 · Kfz-Versicherung"
+  "kredit"                   "CHECK24 · Kreditvergleich"
+  "kreditkarte"              "CHECK24 · Kreditkarten"
+  "mietwagen"                "CHECK24 · Mietwagen"
+  "reisekrankenversicherung" "Tarifcheck · Reisekrankenversicherung"
+  "reisen"                   "CHECK24 · Pauschalreisen & Urlaub"
+  "strom"                    "CHECK24 · Stromtarife"
+  "tagesgeld"                "C24 Bank (CHECK24) · Tagesgeld"
+  "unfallversicherung"       "Tarifcheck · Unfallversicherung"
+  "wohngebaeudeversicherung" "Tarifcheck · Wohngebäudeversicherung"
+  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatzversicherung"
 -}}
 
 {{- $href := .Destination -}}
@@ -101,8 +102,24 @@
 
 {{- $slug := "" -}}
 {{- if $isGo }}{{ $slug = $href | strings.TrimPrefix "/go/" | strings.TrimSuffix "/" }}{{ end -}}
+{{- $key := $slug -}}
 {{- $ziel := "" -}}
-{{- if $isGo }}{{ $ziel = index $names $slug | default (print "Partner: " $slug) }}{{ end -}}
+{{- if $isGo -}}
+  {{- /* Zielname: ZUERST aus data/affiliate_ziele.yaml (gebacken aus dem
+         Intent-Kontrakt scripts/affiliate_intent_contract.py); das Dict oben
+         ist nur Fallback. Drift prüft IW0 der Intent-Wache bei jedem Lauf.
+         Geladen über layouts/_partials/affiliate_ziele_data.html – NIEMALS
+         hugo.Data/site.Data: data/ enthält *.jsonl-Protokolle, daran stirbt
+         der Build (Vorfall 19.09.2026). */ -}}
+  {{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
+    {{- with .ziele -}}
+      {{- with index . $key -}}
+        {{- with .anzeige }}{{ $ziel = . }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $ziel }}{{ $ziel = index $names $key | default (print "Partner: " $key) }}{{ end -}}
+{{- end -}}
 {{- $tooltip := "" -}}
 {{- if $isGo }}{{ $tooltip = print "Weiter zu " $ziel " (Partnerlink = Werbung)" }}{{ end -}}
 {{- /* Klick-Attribution: Robust vor nil-.Page.File (Sektionen/Wrapper). */ -}}

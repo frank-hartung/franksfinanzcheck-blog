@@ -41,6 +41,9 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import affiliate_intent_contract as vk  # noqa: E402  (SSOT Anker/Sätze/Routen)
+
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "scripts" / "check24_links.yaml"
 REPORT = ROOT / "AFFILIATE-MARKETING-REPORT.md"
@@ -65,53 +68,14 @@ PILLAR_ROUTE = {
 # THEMA-SCHNÜFFLER: Wenn der Pillar ein Fremdpaket war (gestern: fast alle
 # hartkodiert auf konto-karten!), lenkt dieser Kontextabgleich auf bessere
 # Routen, ohne das System zu destabilisieren. Reihenfolge = Spezifität.
-DEEP_HINTS = [
-    # Reihenfolge = Spezifität (Supertrumpf erst). Aussicht: kein „übergreifendes
-    # Wort" (z.B. „konto|internet|heiz") darf frueher als ein Fach treffen.
-    (re.compile(r"unfall", re.I), "unfallversicherung"),
-    (re.compile(r"tierkranken|hundekranken|katzenkranken|pferdekranken|tierversicherung|hundeversicherung|katzenversicherung|tier[- ]?op[- ]?versicherung", re.I), "hunde"),
-    (re.compile(r"reisekranken", re.I), "reisekrankenversicherung"),
-    (re.compile(r"zahn", re.I), "zahnzusatzversicherung"),
-    (re.compile(r"privathaftpflicht", re.I), "haftpflicht"),
-    (re.compile(r"hausrat", re.I), "hausrat"),
-    (re.compile(r"haftpflicht", re.I), "haftpflicht"),
-    (re.compile(r"kfz|kasko|sf-klasse", re.I), "kfz-versicherung"),
-    (re.compile(r"mietwagen|mietauto|autovermiet", re.I), "mietwagen"),
-    (re.compile(r"flug|fluege|flugzeug|flugticket", re.I), "fluege"),
-    (re.compile(r"pauschal|last.minute|urlaubskasse|all.inclusive|urlaub", re.I), "reisen"),
-    # 15.09.2026 (#295): „flut“ und „sturm“ ohne Kontext sind Alltagswörter –
-    # „die Flut an Informationen“ routete einen Energie-Artikel auf die
-    # Hausrat-Versicherung (real beobachtet: der Entwurf „Energie-Update …“
-    # bekam /go/hausrat/ statt einer Energie-Route). Die Elementarschaden-
-    # Bedeutung bleibt über die Fachbegriffe erhalten.
-    (re.compile(r"elementar|starkregen|hochwasser|unwetter|sturmflut"
-                r"|flutkatastroph|flutschaden|flutopfer|flutversicherung", re.I),
-     "hausrat"),
-    # 11.09.2026 (Reserve #5): „Gas-Tarif“ mit Bindestrich, Gasrechnung/
-    # Gasvergleich fehlten – ein Gas-Artikel mit /go/tagesgeld/-Fehllink
-    # wurde so nicht auf die korrekte Route zurueckgeholt.
-    (re.compile(r"gasanbieter|gaspreis|gas[-\u00a0\u202f\s]?tarif|gasheizung|gasrechnung|gasvergleich|gaswechsel", re.I), "gas"),
-    # 15.09.2026 (#295): Der Energiemarkt-Vokabular-Fallback fehlte komplett –
-    # „Energie-Update …“ (Grundversorger/Energiemarkt, kein „Strom“ im Intro)
-    # fiel auf den Pillar-Fallback und landete über das Alltagswort „Flut“
-    # sogar bei /go/hausrat/. Redaktioneller Bestand dieser Serie verlinkt
-    # /go/strom/ (siehe 2026-09-10-energie-update-…), also ist das die
-    # thematisch richtige Route. Bewusst NUR Fachbegriffe, nicht das nackte
-    # Wort „Energie“ – das stünde sonst über Spar- und Haushaltsartikeln.
-    (re.compile(r"strom|wärmepumpe|kühl|nachtspeicher|stromfresser|stromvergleich"
-                r"|eigend|balkonkraft|e-auto|strompreis|grundversorger"
-                r"|energiemarkt|energiekosten|energiepreis|energieanbieter"
-                r"|energie-update", re.I), "strom"),
-    (re.compile(r"handy|mobilfunktarif|datenvolumen|sim.karte", re.I), "handytarife"),
-    (re.compile(r"breitband|glasfaser|router|fritz", re.I), "dsl"),
-    (re.compile(r"dsl", re.I), "dsl"),
-    (re.compile(r"internet", re.I), "dsl"),
-    (re.compile(r"tagesgeld|festgeld|zinsgarantie|sparzinsen|etf|sparplan|aktie|börse|boerse|depot|vermögensaufbau|zinseszins|sparquote|investieren|zinses|vermögens", re.I), "tagesgeld"),
-    (re.compile(r"kreditkarte", re.I), "kreditkarte"),
-    (re.compile(r"ratenkredit|kredit|umschuldung|dispo", re.I), "kredit"),
-    (re.compile(r"girokonto|bankkonto|kontoführung|wechselservice|kontowechsel", re.I), "girokonto"),
-    (re.compile(r"budget|haushaltsbuch|frugal|notgroschen|50.30.20|monatsbudget|nebenverdienst|impulskaeufe", re.I), "allgemein"),
-]
+# 19.09.2026 (Intent-Wache): DIESELBE Themen-Reihe wie der Intent-Kontrakt –
+# scripts/affiliate_intent_contract.py ist die eine Wahrheit für Route,
+# Anker und Satz. Vorher stand hier eine Kopie, und die Kopie kannte die
+# Wohngebäude-Route nicht: Ein Wohngebäude-Artikel fiel auf „elementar" →
+# /go/hausrat/ (Fund 19.09.2026). Kopien driften, deshalb keine Kopie.
+# Die historischen Begründungen (#295 Alltagswörter, Reserve #5 Gas-Tarif,
+# Energiemarkt-Fallback) stehen kommentiert im Kontrakt.
+DEEP_HINTS = list(vk.DEEP_HINTS)
 
 GO_ROUTE_RX = re.compile(r"/go/([a-z0-9][a-z0-9-]*)/?", re.I)
 BEKANNTE_ROUTEN = {k for _, k in DEEP_HINTS} | set(PILLAR_ROUTE.values()) | {"allgemein"}
@@ -382,12 +346,77 @@ def run_selftest() -> list[str]:
         fehler.append(f"  NR: Selbsttest-Ausnahme: {exc}")
     return fehler
 
-CTA_POOL = [
-    ("Jetzt Angebote vergleichen", "Vergleichen & sparen"),
-    ("Kostenlos vergleichen", "Kostenlos prüfen"),
-    ("Angebote in deiner Region sehen", "Passende Angebote ansehen"),
-    ("Tarifrechner starten", "Jetzt Prämie berechnen"),
-]
+# ============================================================
+#  CTA-WAHRHEIT AUS DEM INTENT-KONTRAKT (19.09.2026)
+# ------------------------------------------------------------
+#  Vorher: CTA_POOL mit vier generischen Anker-Paaren, ausgewählt über
+#  `date.today().day` – derselbe Artikel bekam je nach Kalendertag einen
+#  anderen Anker („Jetzt Angebote vergleichen", „Tarifrechner starten",
+#  „Kostenlos vergleichen"), und KEINER nannte das Produkt. Das war die
+#  Quelle der Fehlrouten vom 19.09.2026 (Kfz-Artikel → Haftpflicht,
+#  Girokonto → Ratenkredit, Kreditkarte → Reisekrankenversicherung,
+#  Mietwagen → Kfz, Flüge → Mietwagen, Wohngebäude → Hausrat): Ein Anker,
+#  der nichts verspricht, widerspricht sich nie – und fiel durch jedes
+#  Raster, während der Besucher auf einem fremden Produkt landete.
+#
+#  Jetzt: Anker UND Satz kommen aus dem Kontrakt (produkt-exakt, bei
+#  Abweichung ehrlich benannt: C24 Bank, Pauschalreise statt Flug).
+#  Die Variante wird über den Artikel-Slug deterministisch gewählt –
+#  stabil über Läufe (Idempotenz, kein Tages-Churn) und trotzdem
+#  variantenreich über Artikel hinweg (AM4 „Christologie").
+#
+#  Bewacht von scripts/affiliate_intent_guard.py (IW6): Die Wache ruft
+#  diese drei Bauer für JEDE Route auf und verlangt Route + produkt-
+#  exakten + ehrlichen Anker. Wer hier wieder generisch wird, bekommt
+#  Exit 1 und keine Veröffentlichung.
+# ============================================================
+
+
+def cta_route(pillar: str, artikel_text: str = "") -> str:
+    """Route für einen CTA: Artikelthema schlägt Pillar-Fallback."""
+    if artikel_text:
+        return route_for(artikel_text, pillar)
+    return PILLAR_ROUTE.get(pillar, "allgemein")
+
+
+def cta_url(route: str, reg: dict) -> str:
+    """Nur registrierte Routen werden verlinkt (nie ein totes Gateway)."""
+    return f"/go/{route}/" if route in reg else "/go/allgemein/"
+
+
+def mid_cta(pillar: str, reg: dict, artikel_text: str = "", slug: str = "") -> str:
+    """AM7 (Frank 12.08.): In-Text-CTA - midlanger Artikel, Conversion
+    weiter hoch, 2-flaechig oben/unten -> Streifen in der Mitte."""
+    route = cta_route(pillar, artikel_text)
+    url = cta_url(route, reg)
+    satz, anchor = vk.cta_bausteine(route, "mid", slug or route)
+    return (
+        f'\n> 💶 **Spar-Tipp zwischendurch:** {satz}: '
+        f'[**{anchor}**]({url})\n'
+    )
+
+
+def build_top_cta(pillar: str, reg: dict, artikel_text: str = "", slug: str = "") -> str:
+    route = cta_route(pillar, artikel_text)
+    url = cta_url(route, reg)
+    satz, anchor = vk.cta_bausteine(route, "top", slug or route)
+    return (
+        f'\n---\n\n💡 **Schnell-Tipp von FranksFinanzcheck:** {satz}: '
+        f'[**{anchor}**]({url})\n'
+        f'_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link '
+        f'erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_'
+    )
+
+
+def end_cta(pillar: str, reg: dict, artikel_text: str = "", slug: str = "") -> str:
+    route = cta_route(pillar, artikel_text)
+    url = cta_url(route, reg)
+    _, anchor = vk.cta_bausteine(route, "end", slug or route)
+    return (
+        f'\n---\n\n👉 **Sparend zuerst vergleichen:** [**{anchor}**]({url})\n\n'
+        f'*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link '
+        f'erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*'
+    )
 
 
 def load_registry():
@@ -422,52 +451,11 @@ def first_affil_quote(bodysplit: list[str]) -> float:
     return 0.0
 
 
-# Frank-Regel (11.08.2026): Ziel ist die C24 Bank -> im Linktext nennen.
-C24_ROUTES = ("tagesgeld", "girokonto")
-C24_ANCHOR = "Jetzt C24 Bank Angebote vergleichen"
-
-
-def mid_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
-    """AM7 (Frank 12.08.): In-Text-CTA - midlanger Artikel, Conversion
-    weiter hoch, 2-flaechig oben/unten -> Streifen in der Mitte."""
-    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
-    url = f"/go/{route}/" if route in reg else "/go/allgemein/"
-    anchor = C24_ANCHOR if route in C24_ROUTES else "Vergleichen & sparen"
-    return (
-        f'\n> 💶 **Spar-Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: '
-        f'[**{anchor}**]({url})\n'
-    )
-
-
-def build_top_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
-    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
-    url = f"/go/{route}/" if route in reg else "/go/allgemein/"
-    anchor, klass = CTA_POOL[(date.today().day + len(route)) % len(CTA_POOL)]
-    if route in C24_ROUTES:
-        anchor = C24_ANCHOR
-    return (
-        f'\n---\n\n💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren '
-        f'Partner-Vergleich: [**{anchor}**]({url})\n'
-        f'_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link '
-        f'erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_'
-    )
-
-
-def end_cta(pillar: str, reg: dict, artikel_text: str = "") -> str:
-    route = route_for(artikel_text, pillar) if artikel_text else PILLAR_ROUTE.get(pillar, "allgemein")
-    url = f"/go/{route}/" if route in reg else "/go/allgemein/"
-    anchor, klass = CTA_POOL[(date.today().day + 1) % len(CTA_POOL)]
-    if route in C24_ROUTES:
-        anchor = C24_ANCHOR
-    return (
-        f'\n---\n\n👉 **Sparend zuerst vergleichen:** [**{anchor}**]({url})\n\n'
-        f'*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link '
-        f'erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*'
-    )
-
-
 def process(path: Path, reg: dict) -> dict:
     text = path.read_text(encoding="utf-8")
+    # Artikel-Slug = Stabilisator für die Anker-Variante (deterministisch,
+    # kein Tages-Churn, Idempotenz der Wache – siehe vk.Ziel.anker_fuer).
+    slug = path.parent.name if path.name == "index.md" else path.stem
     body_stripped = text.split("\n")
     # Front-Matter skippen
     i = 0
@@ -502,7 +490,7 @@ def process(path: Path, reg: dict) -> dict:
     if not affils:
         status.append(("AM1", "kein Affiliate-Link", "kritisch"))
         if DO_FIX and not DRY_RUN:
-            text = text.rstrip() + end_cta(pillar, reg, text) + "\n"
+            text = text.rstrip() + end_cta(pillar, reg, text, slug) + "\n"
             fixes["am1"] = True
     else:
         pos = first_affil_quote(body_lines)
@@ -521,7 +509,7 @@ def process(path: Path, reg: dict) -> dict:
                         idx_h2 = body_start + filled[2]
                 if idx_h2 is not None:
                     text_lines = text.split("\n")
-                    text_lines = text_lines[:idx_h2] + ["", build_top_cta(pillar, reg, text), ""] + text_lines[idx_h2:]
+                    text_lines = text_lines[:idx_h2] + ["", build_top_cta(pillar, reg, text, slug), ""] + text_lines[idx_h2:]
                     text = "\n".join(text_lines)
                     fixes["am2"] = True
     if not has_disclaimer:
@@ -551,8 +539,8 @@ def process(path: Path, reg: dict) -> dict:
         if insert_at:
             route = route_for(text, pillar)
             # Verdopplung-Pfosten: nie zwei Anker denselben Namen ins selbe Auge
-            if mid_cta(pillar, reg, text).strip() not in text:
-                text_lines = text_lines[:insert_at] + ["", mid_cta(pillar, reg, text), ""] + text_lines[insert_at:]
+            if mid_cta(pillar, reg, text, slug).strip() not in text:
+                text_lines = text_lines[:insert_at] + ["", mid_cta(pillar, reg, text, slug), ""] + text_lines[insert_at:]
                 text = "\n".join(text_lines)
                 fixes["am7"] = True
                 status.append(("AM7", f"In-Text-CTA hinzu, Ziel /go/{route}/", "info"))

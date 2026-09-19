@@ -175,6 +175,12 @@ FEST = {
     # Deshalb: zentraler Attribut-Vertrag + die beiden CTA-Shortcodes +
     # die Wache selbst unter Siegel. Aenderung nur mit Neu-Signatur.
     "layouts/_partials/affiliate_anchor_attrs.html",
+    # Datenpfad der Affiliate-Zielnamen (19.09.2026): Dieses Partial lädt
+    # data/affiliate_ziele.yaml per os.ReadFile – weil ein hugo.Data/site.Data-
+    # Zugriff Hugo den ganzen data/-Baum inklusive *.jsonl-Bot-Protokolle
+    # parsen lässt und der Build stirbt (Seite baut nicht, kein Deploy).
+    # Wer hier ändert, ändert die Build-Fähigkeit der ganzen Site.
+    "layouts/_partials/affiliate_ziele_data.html",
     "layouts/shortcodes/tarifvergleich.html",
     "layouts/shortcodes/einspartabelle.html",
     "scripts/affiliate_integrity_gate.py",

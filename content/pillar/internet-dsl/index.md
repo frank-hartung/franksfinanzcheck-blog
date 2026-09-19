@@ -177,7 +177,7 @@ In den meisten Fällen nicht. Nach zwei bis drei Jahren übersteigen die monatli
 
 ---
 
-👉 **DSL- und Mobilfunktarife vergleichen:** [**→ Jetzt Tarife vergleichen**](/go/dsl/)
+👉 **DSL- und Mobilfunktarife vergleichen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

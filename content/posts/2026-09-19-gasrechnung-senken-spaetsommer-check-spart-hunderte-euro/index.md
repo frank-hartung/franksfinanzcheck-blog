@@ -41,7 +41,7 @@ Nutze lieber die ruhigen Wochen im Spätsommer für deine Strategie.
 * **Vertrags-Check:** ein Anbieterwechsel spart je nach Verbrauch oft 200 bis 600 €.
 * **kleine Maßnahmen:** Fenster abdichten kostet wenig, verhindert aber teure Wärmeverluste.
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/strom/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 *(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
 
 ## Warum ist der Spätsommer die beste Zeit zum Handeln?
@@ -79,7 +79,7 @@ Du benötigst dafür nur deine letzte Abrechnung und die Zählernummer.
 3. Achte gezielt auf den Arbeitspreis und die monatliche Grundgebühr.
 4. Schließe den neuen Vertrag mit wenigen Klicks direkt online ab.
 
-**Hier kannst du direkt prüfen, wie viel du bei deinem [Gasvergleich](/go/strom/) erhältst.**
+**Hier kannst du direkt prüfen, wie viel du bei deinem [Gasvergleich](/go/gas/) erhältst.**
 Oft trennen dich nur wenige Minuten von einer hohen Ersparnis.
 Das gesparte Geld bleibt so für schönere Dinge auf deinem Konto.
 
@@ -121,7 +121,7 @@ Hier ist eine kurze Checkliste für deinen Alltag:
 * Türen zu kühleren Räumen konsequent geschlossen halten.
 * Temperatur bei Abwesenheit senken, aber nicht komplett ausschalten.
 
-> 💶 **Spar-Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Vergleichen & sparen**](/go/strom/)
+> 💶 **Spar-Tipp zwischendurch:** Faire Konditionen gibt es online in Minuten: [**Gas-Anbieter vergleichen & sparen**](/go/gas/)
 
 ## Die Herbst Vorbereitung für deine Fenster und Türen
 
@@ -238,6 +238,6 @@ Die moderne Heizungssteuerung regelt die Pumpe ohnehin automatisch ab.
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)
+👉 **Jetzt vergleichen und sparen:** [**→ Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

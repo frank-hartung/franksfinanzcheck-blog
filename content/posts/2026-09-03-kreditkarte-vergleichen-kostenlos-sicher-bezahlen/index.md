@@ -36,7 +36,7 @@ Dieser Ratgeber zeigt, worauf es beim Kreditkarten-[Vergleich 2026](../../posts/
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Tarifrechner starten**](/go/reisekrankenversicherung/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Kreditkarten vergleichen**](/go/kreditkarte/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Die wichtigste Frage zuerst: Was kostet die Karte wirklich?

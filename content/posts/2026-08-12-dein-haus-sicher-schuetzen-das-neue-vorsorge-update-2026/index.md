@@ -34,7 +34,7 @@ Starkregen, Sturm und Überschwemmungen zeigen: Dein Zuhause kann schnell in Gef
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt moderne Hausrat- und Wohngebäudetarife inklusive Elementarschutz und spare bis zu 280 € im Jahr: [**Jetzt Hausratversicherung vergleichen**](/go/hausrat/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche jetzt moderne Wohngebäudetarife inklusive Elementarschutz und spare bis zu 280 € im Jahr: [**Jetzt Wohngebäudeversicherung vergleichen**](/go/wohngebaeudeversicherung/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie setzen sich die drei Säulen des Immobilienschutzes zusammen?
@@ -42,7 +42,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 Für vollen Schutz brauchst du drei Bausteine, die zusammenpassen:
 
 1. **Wohngebäudeversicherung:** Schützt das eigentliche Gebäude (Mauerwerk, Dach, fest verbaute Heizungsanlagen, Fenster) gegen Feuer, Sturm, Hagel und Leitungswasser.
-2. **Hausratversicherung:** Sichert alle beweglichen Gegenstände in deinen vier Wänden (Möbel, Kleidung, Elektrogeräte, Wertsachen) zum Neuwert ab.
+2. **Hausratversicherung:** Sichert alle beweglichen Gegenstände in deinen vier Wänden (Möbel, Kleidung, Elektrogeräte, Wertsachen) zum Neuwert ab – passende Tarife zeigt der [**Hausratversicherungs-Vergleich**](/go/hausrat/).
 3. **Erweiterter Elementarschadenschutz (ZÜRS):** Deckt Schäden durch Naturgewalten wie Starkregen, Überschwemmung, Rückstau aus der Kanalisation, Schneedruck und Erdrutsch ab – dieser Baustein ist in alten Verträgen fast nie automatisch enthalten!
 
 ## Warum ist der Schutz gegen Elementarschäden heute unverzichtbar?
@@ -58,7 +58,7 @@ Veränderte Wetterlagen bringen Starkregen auch dorthin, wo er früher selten wa
 | **Überflutung durch Oberflächenwasser** | ❌ **Kein Schutz** | ✅ **Vollständig versichert** |
 | **Schneedruck auf dem Dach** | ❌ **Kein Schutz** | ✅ **Vollständig versichert** |
 
-> 💶 **Spar‑Tipp zwischendurch:** Schütze dein Hab und Gut vor existenzbedrohenden Naturgewalten zum fairen Jahresbeitrag: [**Vergleichen & sparen**](/go/hausrat/)
+> 💶 **Spar‑Tipp zwischendurch:** Schütze dein Hab und Gut vor existenzbedrohenden Naturgewalten zum fairen Jahresbeitrag: [**Jetzt Wohngebäudeversicherung vergleichen**](/go/wohngebaeudeversicherung/)
 
 ### Pro & Contra des Elementarschutzes (2026)
 
@@ -213,6 +213,6 @@ Alte Verträge schützen bei heutigen Unwettern oft zu wenig. Ersetze sie durch 
 ### Was passiert, wenn ich nach einem Schaden die Police wechsle?
 Der neue Versicherer übernimmt in der Regel keinen Schaden, der vor Vertragsbeginn eingetreten ist. Daher gilt: **Schaden melden, regulieren lassen und erst danach den Anbieter wechseln**. Dokumentiere die gesamte Korrespondenz sorgfältig, um den späteren Wechsel zu erleichtern.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/hausrat/)
+👉 **Jetzt vergleichen und sparen:** [**→ Wohngebäude-Tarife vergleichen**](/go/wohngebaeudeversicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
