@@ -1,5 +1,4 @@
 ---
-
 lastmod: 2026-09-02
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnungen senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten & Tarifen und spare bis zu 720 €."
@@ -21,7 +20,7 @@ kurzantwort: "Wer im Spätsommer (August bis Oktober) seine Heizungsanlage warte
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
-pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern! Mit Rechenbeispiel (120 €)."
+pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern! Aktualisiert für 2028."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 

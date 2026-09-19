@@ -9,7 +9,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
 pinwand: Strom & Gas sparen | Tarife clever wechseln
-pin_title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
+pin_title: Diese 5 Geräte treiben deine Stromrechnung in die Höhe
 pin_description: "*Werbung | Trockner, Heizlüfter, alte Kühltruhe: Die größten Stromfresser stehen oft unauffällig in der Ecke – und kosten bis zu 250 € im Jahr. Wir zeigen die Top 5 inklusive Verbrauchskosten und den günstigsten Alternativen. Jetzt nachrechnen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"

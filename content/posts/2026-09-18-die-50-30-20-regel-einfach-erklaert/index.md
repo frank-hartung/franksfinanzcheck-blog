@@ -3,7 +3,7 @@ title: "Die 50-30-20-Regel einfach erklärt"
 description: "Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-09-18T09:05:49Z
 draft: true
-tags: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel"]
+tags: ["Die 50-30-20-Regel einfach erklärt", "50-30-20-Regel"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel"]

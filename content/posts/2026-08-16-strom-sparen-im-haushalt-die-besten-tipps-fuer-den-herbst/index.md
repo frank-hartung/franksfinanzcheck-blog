@@ -26,7 +26,7 @@ pin_description: "*Werbung | Diese Checkliste gehört an jeden Kühlschrank: Die
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-Du willst strom sparen im haushalt? Im Herbst wird es früher dunkel, und dein Alltag verlagert sich zunehmend in die eigenen vier Wände. Das Licht brennt bereits am frühen Nachmittag, der Fernseher läuft öfter zur Unterhaltung, und die Küche wird zum Zentrum der Gemütlichkeit.
+Du willst strom sparen im Haushalt? Im Herbst wird es früher dunkel, und dein Alltag verlagert sich zunehmend in die eigenen vier Wände. Das Licht brennt bereits am frühen Nachmittag, der Fernseher läuft öfter zur Unterhaltung, und die Küche wird zum Zentrum der Gemütlichkeit.
 
 Der Wasserkocher ist im Dauereinsatz für Tee, und der Trockner ersetzt die nun weniger effektive Wäscheleine im Freien. Erfahrungsgemäß steigt der Verbrauch in dieser Zeit oft um ca. 20 bis 30 %. Doch wer gezielt gegensteuert, kann beim **Strom sparen im Haushalt** in der Regel jährliche Kosten von **ca. 350 bis 500 €** vermeiden – und das ohne nennenswerten Komfortverlust. Wir analysieren für dich die größten Stromfresser und geben dir praxistaugliche Tipps für die [goldene Jahreszeit](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/).
 
