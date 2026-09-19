@@ -68,8 +68,21 @@ STEPS = {
     "secrets": {"report": "SECRETS-REPORT.md",    "label": "Secrets-/Token-Wache"},
     "pinperf": {"report": "PINTEREST-PERF-REPORT.md", "label": "Pinterest-Performance"},
     "umami":   {"report": "data/umami_clicks.meta.json", "label": "Umami-Datenimport"},
+    "umami-views": {"report": "data/umami_views.meta.json",
+                    "label": "Umami-Seitenaufrufe (Trichter-Nenner)"},
+    "awin-fetch": {"report": "data/awin_fetch.meta.json",
+                   "label": "Awin-Transaktions-Abruf (Publisher API)"},
     "clicks":  {"report": "CLICK-REPORT.md",      "label": "Affiliate-Klick-Attribution"},
     "awin":    {"report": "AWIN-REPORT.md",       "label": "Awin-Provisionen"},
+    # Umsatz-Messkette (19.09.2026): der Trichter ist die Antwort auf „0 Klicks,
+    # 0.00 €“ – er meldet beides als Lücke, wenn er NICHTS messen kann. Beide
+    # Reports tragen eine Befundtabelle (codes funnel_gap/chain_gap) statt zu
+    # schweigen – so wird die Datenlücke sichtbar, ohne dass ein Exit-Code sie
+    # erfindet (#206-Policy bleibt).
+    "revenue-funnel": {"report": "REVENUE-FUNNEL-REPORT.md",
+                       "label": "Umsatz-Funnel (Besuch→Klick→Antrag→Provision)"},
+    "click-chain": {"report": "CLICK-CHAIN-REPORT.md",
+                    "label": "Klick-Messkette (CTA→Event→Gateway→SubID)"},
     # Lesbarkeits-Wache: Befundtabelle aus readability_check --gate-bestand
     # --report LESBARKEIT-REPORT.md (read_avg = Ø < 62, read_floor = Artikel
     # < 55). Exit-Code allein wäre „exit_only“ (Info) – deshalb der Report.
@@ -90,6 +103,11 @@ ACTIONABLE_AMBER = {
     "build_thin",                                                # cwv
     "stale_content", "unmatched_subid", "unattributed",          # decay / awin / clicks
     "scorecard_red",                                             # Chefredakteur-Sicht
+    # Umsatz-Messkette (19.09.2026): eine Lücke im Trichter ist KEin
+    # Konflikt-Rauschen, sondern die teuerste Sorte Befund – wer nicht messen
+    # kann, optimiert nach Gefühl. funnel_gap = Quelle fehlt/veraltet,
+    # chain_gap = CTA/Event/Gateway-Vertrag verletzt. Beide sind handlungsbedürftig.
+    "funnel_gap", "chain_gap",
 }
 # Amber-Befunde, die NUR Info sind (Bild-Feinschliff, Stil, Datenlage).
 INFO_AMBER = {
@@ -115,6 +133,12 @@ DATA_GAP_PATTERNS = (
     "kein umami_api_token", "keine websiteid", "umami-klicks nicht geladen",
     "noch keine daten", "keine klick-daten", "keine awin-daten", "keine transaktionen",
     "einträge analysiert: **0**", "noch keine pin-", "kein Datensatz",
+    # Umsatz-Messkette: Secret-/Export-Lücken sind Konfigurationslage, keine
+    # Laufzeit-Panne. Die ESKALATION übernimmt der Funnel selbst (funnel_gap in
+    # seiner Befundtabelle) – der Meta-Schritt bleibt Info, damit nicht zwei
+    # Schritte dieselbe Lücke doppelt ins Issue schreiben.
+    "awin_api_token", "awin-publisher", "umami-views nicht geladen",
+    "awin-transaktionen nicht geladen",
 )
 
 
@@ -609,6 +633,33 @@ def _selftest():
     v2 = legacy.replace("| Secret | Status |", "| Secret | Status | Nachweis |")
     if not classify("secrets", v2, "", 1)["actionable"]:
         failures.append("v2-Secrets-Report mit untracked-Befund wird nicht gemeldet")
+    # 6e) Umsatz-Messkette (19.09.2026): Die Lücke im Trichter MUSS den gebündelten
+    # Alarm auslösen (das ist genau die Klasse „optimieren nach Gefühl“, die der
+    # Auftrag dauerhaft beheben will) – und der Meta-Schritt allein darf die
+    # dieselbe Lücke nicht doppelt melden (Info), sonst bekäme jede Woche drei
+    # Zeilen dasselbe Secret-Thema.
+    funnel_gap = ("# 📈 Umsatz-Funnel\n## 🚦 Gesamt-Ampel: **AMBER**\n\n"
+                  "| Level | Code | Befund |\n|---|---|---|\n"
+                  "| AMBER | funnel_gap | Awin-Transaktionen (Publisher API): "
+                  "noch nie importiert |\n")
+    fv = classify("revenue-funnel", funnel_gap, "", 1)
+    if fv["level"] != "amber" or not fv["actionable"]:
+        failures.append("Umsatz-Funnel: Messlücke alarmiert nicht (Agentur-Standard: Alarm)")
+    funnel_ok = ("## 🚦 Gesamt-Ampel: **GREEN**\n\n_keine Befunde_ – alle Quellen "
+                 "gemessen und frisch.")
+    if classify("revenue-funnel", funnel_ok, "", 0)["level"] != "green":
+        failures.append("Umsatz-Funnel: grüner Trichter meldet trotzdem")
+    chain = ("## 🚦 Gesamt-Ampel: **AMBER**\n\n| AMBER | chain_gap | /go/strom/ "
+             "ohne ?subid= (Awin sieht die Quelle nicht) |\n")
+    cv = classify("click-chain", chain, "", 1)
+    if cv["level"] != "amber" or not cv["actionable"]:
+        failures.append("Klick-Kette: CTA-Vertragsbruch bleibt ohne Alarm")
+    skip_meta = json.dumps({"status": "skipped", "reason": "fehlt: AWIN_API_TOKEN"})
+    if classify("awin-fetch", skip_meta, "", 0)["level"] != "info":
+        failures.append("Awin-Abruf ohne Secret muss Info bleiben (der Funnel eskaliert)")
+    views_meta = json.dumps({"status": "skipped", "reason": "kein UMAMI_API_TOKEN"})
+    if classify("umami-views", views_meta, "", 0)["level"] != "info":
+        failures.append("Umami-Views ohne Token muss Info bleiben (Meta dokumentiert genug)")
     # 7) decide_policy: keine Zombie-Issues, kein Schließen ohne Messung
     if decide_policy({}) != ("GREEN", "none", {"red": 0, "amber": 0, "info": 0, "green": 0}):
         failures.append("leeres Ledger darf nichts schließen (Messung fehlt!)")
@@ -669,9 +720,16 @@ def _render_from(state):
               "- Scorecard: `python3 scripts/editorial_scorecard.py`",
               "- CWV: `python3 scripts/cwv_guard.py --public public/ --strict-build`",
               "- Secrets live: `python3 scripts/secrets_age_guard.py --verify`",
-              "- Klick-Daten füllen: `python3 scripts/umami_clicks.py --fetch`",
-              "- Awin: `python3 scripts/awin_provisions.py --gen-subid-map` + CSV nach "
-              "`data/awin_transactions.csv`",
+              "- Klick-Daten füllen: `python3 scripts/umami_clicks.py --fetch` "
+              "(Secret `UMAMI_API_TOKEN` einmalig setzen – "
+              "docs/UMSATZ-MESSUNG-PREMIUM.md, 2 Minuten)",
+              "- Awin: Secrets `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` setzen, "
+              "`python3 scripts/awin_fetch.py` holt dann regelmäßig; alternativ CSV nach "
+              "`data/awin_transactions.csv` + `awin_provisions.py --gen-subid-map`",
+              "- Umsatz-Funnel: `python3 scripts/revenue_funnel.py --print` "
+              "(alle Kennzahlen + welche Quelle fehlt)",
+              "- Kette prüfen: `python3 scripts/click_chain_guard.py` "
+              "(CTA→Event→Gateway→SubID, inkl. Testklick-SOP)",
               "- Regressionen dieser Klasse: `python3 scripts/governance_contract.py`", "",
               f"---\n*Automatisch vom Premium-Governance-Workflow · Label `{ISSUE_LABEL}` · "
               f"Update statt Duplikat, schließen bei Grün.*"]

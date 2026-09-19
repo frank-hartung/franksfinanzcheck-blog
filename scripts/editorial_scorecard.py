@@ -46,6 +46,7 @@ _SECRETS_S = DATA("secrets_state.json")
 _CLICK_S = DATA("click_stats.json")
 _CLICK_META = DATA("umami_clicks.meta.json")
 _AWIN_P = DATA("awin_provisions.json")
+_FUNNEL = DATA("revenue_funnel.json")
 _HISTORY = DATA("scorecard_history.jsonl")
 _SECRETS_REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
 _CWV_REPORT = os.path.join(BLOG_DIR, "CWV-REPORT.md")
@@ -481,6 +482,31 @@ def _secret_lamp(d):
     return "⚪"
 
 
+def _funnel_datalage():
+    """Umsatz-Funnel-Zeile der Datenlage (19.09.2026, Premium-Messkette).
+
+    „gemessen“ ist nur, was der Funnel mit frischen Quellen rechnen konnte;
+    seine gemeldeten `messluecken` zählen hoch in die Bewertung – damit die
+    Scorecard nie wieder „0,00 €“ als Erfolg verkauft."""
+    f = _read_json(_FUNNEL, {}) or {}
+    if not f:
+        return ("Umsatz-Funnel", "data/revenue_funnel.json", "fehlt",
+                "nie berechnet – `scripts/revenue_funnel.py` läuft im "
+                "revenue-import-Workflow (Secrets siehe docs/UMSATZ-MESSUNG-PREMIUM.md)")
+    gaps = int(f.get("messluecken") or 0)
+    alt = f.get("generated") or ""
+    try:
+        age = (TODAY - datetime.date.fromisoformat(alt)).days
+        stand = f"{age} d"
+    except ValueError:
+        stand = alt or "unbekannt"
+    epc = (f.get("raten") or {}).get("epc")
+    note = (f"{gaps} Messlücke(n) – Datenlage unvollständig, Zahlen = „unbekannt“"
+            if gaps else
+            f"komplett gemessen · EPC {('%.2f €' % epc).replace('.', ',') if isinstance(epc, (int, float)) else 'unbekannt'}")
+    return ("Umsatz-Funnel", "data/revenue_funnel.json", stand, note)
+
+
 def _render_datalage(d):
     """Was ist gemessen, was ist Lücke? (Agentur-Standard: keine Schein-Sicherheit.)"""
     body = [
@@ -512,6 +538,7 @@ def _render_datalage(d):
           "`UMAMI_API_TOKEN`"}.get(d.get("clicks_pipeline"), "Import nie gelaufen")),
         ("Awin-Provision", "data/awin_transactions.csv", "-",
          "CSV-Export fehlt" if int(d.get("awin_articles") or 0) == 0 else "befüllt"),
+        _funnel_datalage(),
     ]
     out = ["| Kennzahl | Quelle | Stand | Bewertung |", "|---|---|---|---|"]
     for name, src, stand, note in body:

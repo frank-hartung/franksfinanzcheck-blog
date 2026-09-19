@@ -95,6 +95,11 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
+          # Umsatz-Messkette (19.09.2026): Views-Nenner, Awin-API-Import,
+          # Wochen-Trichter und Ketten-Guard sind Wachen wie alle anderen –
+          # ohne sie wäre „unbekannt“ wieder eine Fußnote statt ein Befund.
+          "umami_views.py", "awin_fetch.py", "revenue_funnel.py",
+          "click_chain_guard.py",
           "pinterest_perf_feedback.py", "pinterest_token.py", "pinterest_auth.py",
           "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
           "live_policy_guard.py", "draft_triage.py", "check_uniqueness.py",
@@ -172,7 +177,8 @@ TOKEN_WORKFLOW = "pinterest-token.yml"
 
 # Reihenfolge-Vertrag: diese Schritte sind Messungen, die vor der Sicht liegen müssen
 MEASURE_STEPS = ("decay", "cwv", "secrets", "lesbarkeit", "pinperf", "clicks", "awin",
-                 "live-policy")
+                 "live-policy", "umami-views", "awin-fetch", "revenue-funnel",
+                 "click-chain")
 VIEW_STEP = "scorecard"
 
 
@@ -212,8 +218,16 @@ STEP_SIGNATURES = {
     "secrets":   (r"--emit\s+secrets\b", r"secrets_age_guard\.py"),
     "pinperf":   (r"--emit\s+pinperf\b", r"pinterest_perf_feedback\.py"),
     "clicks":    (r"--emit\s+clicks\b", r"click_attribution\.py"),
-    "awin":      (r"--emit\s+awin\b", r"awin_provisions\.py"),
+    # (?!-) : `--emit awin\b` würde sonst auch `--emit awin-fetch` „sehen“ –
+    # zwei Messschritte, eine Signatur = falsche Reihenfolge-Indizes.
+    "awin":      (r"--emit\s+awin\b(?!-)", r"awin_provisions\.py"),
     "live-policy": (r"--emit\s+live-policy\b", r"live_policy_guard\.py"),
+    # Umsatz-Messkette: eigene Signaturen, damit die Reihenfolge (Messung vor
+    # Sicht) auch für Views-Nenner, API-Abruf, Trichter und Ketten-Guard gilt.
+    "umami-views": (r"--emit\s+umami-views\b", r"umami_views\.py"),
+    "awin-fetch":  (r"--emit\s+awin-fetch\b", r"awin_fetch\.py"),
+    "revenue-funnel": (r"--emit\s+revenue-funnel\b", r"revenue_funnel\.py"),
+    "click-chain": (r"--emit\s+click-chain\b", r"click_chain_guard\.py"),
     "scorecard": (r"--emit\s+scorecard\b", r"editorial_scorecard\.py"),
 }
 

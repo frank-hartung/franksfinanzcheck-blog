@@ -35,6 +35,8 @@ EHRLICHE DEGRADATION (das eigentliche Anti-#206-Verhalten):
 Nutzung:
   python3 scripts/umami_clicks.py --fetch              # API → data/umami_clicks.json
   python3 scripts/umami_clicks.py --fetch --days 180
+  python3 scripts/umami_clicks.py --fetch --event cta_click \
+          --out data/umami_ctas.json                   # Start-/Pillar-CTA-Klicks
   python3 scripts/umami_clicks.py --status             # Pipeline-Stand anzeigen
   python3 scripts/umami_clicks.py --selftest
 
@@ -150,8 +152,13 @@ def _prop_value(event_props, key):
     return None
 
 
-def _rows_from_event_data(payload):
-    """`/event-data` (Zeilen mit Eigenschaften) → Klick-Reihen für click_attribution."""
+def _rows_from_event_data(payload, event_name=DEFAULT_EVENT):
+    """`/event-data` (Zeilen mit Eigenschaften) → Klick-Reihen für click_attribution.
+
+    `event_name` wird mitgeführt, damit Importe für andere Events (z. B.
+    `cta_click` von Start-/Pillar-CTAs) ihre Zeilen nicht als Affiliate-Klicks
+    ausgeben – `click_attribution.py` filtert nach Event und würde sonst
+    fremde Zeilen mitzählen."""
     rows = []
     if not isinstance(payload, dict):
         return rows
@@ -171,13 +178,13 @@ def _rows_from_event_data(payload):
             count = int(_prop_value(props, "count") or 1)
         except (TypeError, ValueError):
             count = 1
-        rows.append({"event": DEFAULT_EVENT, "slug": str(slug)[:120],
+        rows.append({"event": event_name, "slug": str(slug)[:120],
                      "article": str(article)[:120], "pillar": str(pillar)[:60],
                      "count": max(1, count)})
     return rows
 
 
-def _rows_from_series(payload):
+def _rows_from_series(payload, event_name=DEFAULT_EVENT):
     """Fallback `/events` (Zeitreihe x/t/y): nur Gesamtzahl je Tag, ohne
     Artikel-Zuordnung. Besser als gar keine Zahl – und als `unknown` markiert."""
     rows = []
@@ -197,19 +204,20 @@ def _rows_from_series(payload):
         except (TypeError, ValueError):
             continue
         if n > 0:
-            rows.append({"event": DEFAULT_EVENT, "slug": "unknown", "article": str(x)[:20],
+            rows.append({"event": event_name, "slug": "unknown", "article": str(x)[:20],
                          "pillar": "", "count": n})
     return rows
 
 
 def aggregate(rows):
-    """Zähler je (slug, article, pillar) bündeln – Identifikator-schonend."""
+    """Zähler je (event, slug, article, pillar) bündeln – Identifikator-schonend."""
     out = {}
     for r in rows:
-        key = (str(r.get("slug") or "unknown")[:80], str(r.get("article") or "")[:80],
+        ev = str(r.get("event") or DEFAULT_EVENT)[:60]
+        key = (ev, str(r.get("slug") or "unknown")[:80], str(r.get("article") or "")[:80],
                str(r.get("pillar") or "")[:60])
-        d = out.setdefault(key, {"event": DEFAULT_EVENT, "slug": key[0], "article": key[1],
-                                 "pillar": key[2], "count": 0})
+        d = out.setdefault(key, {"event": key[0], "slug": key[1], "article": key[2],
+                                 "pillar": key[3], "count": 0})
         d["count"] += int(r.get("count") or 1)
     return sorted(out.values(), key=lambda d: -d["count"])
 
@@ -241,7 +249,7 @@ def fetch(days=90, event_key=DEFAULT_EVENT):
             if rows:
                 break                      # Teilbestand ist besser als nichts
             return None, meta
-        got = _rows_from_event_data(payload)
+        got = _rows_from_event_data(payload, event_name=event_key)
         rows += got
         meta["endpoint"] = "event-data"
         total = payload.get("count") if isinstance(payload, dict) else None
@@ -254,7 +262,7 @@ def fetch(days=90, event_key=DEFAULT_EVENT):
             f"{base}/websites/{wid}/events?{q}&eventType=event&eventKey={event_key}&unit=day",
             headers, token)
         if payload is not None:
-            rows = _rows_from_series(payload)
+            rows = _rows_from_series(payload, event_name=event_key)
             meta["endpoint"] = "events(series)"
             if rows:
                 meta["reason"] = ("nur Aggregat: Umami liefert keine Event-Eigenschaften "
@@ -277,15 +285,24 @@ def _write_atomic(path, text):
     os.replace(tmp, path)
 
 
-def cmd_fetch(days, strict, dry_run):
-    rows, meta = fetch(days=days)
+def _meta_path_for(out_path):
+    """Meta-Pfad aus dem Ausgabepfad abgeleitet – ein Muster für alle Event-Importe
+    (`umami_clicks.json` → `umami_clicks.meta.json`, `umami_ctas.json` → …)."""
+    return os.path.splitext(out_path)[0] + ".meta.json"
+
+
+def cmd_fetch(days, strict, dry_run, event_key=DEFAULT_EVENT, out_path=None):
+    out = out_path or OUT
+    meta_path = _meta_path_for(out)
+    rows, meta = fetch(days=days, event_key=event_key)
     if rows is None:
         why = meta.get("reason") or "unbekannt"
         print(f"ℹ️  Umami-Klicks nicht geladen: {why}")
         print("    Folgen: Dashboard-Export von Hand nach `data/umami_clicks.json` "
               "legen ODER GitHub-Secret `UMAMI_API_TOKEN` setzen "
               "(Website-ID steht bereits in `hugo.toml`).")
-        _write_atomic(META, json.dumps({**meta, "status": "skipped"}, ensure_ascii=False, indent=2) + "\n")
+        _write_atomic(meta_path, json.dumps({**meta, "status": "skipped"},
+                                             ensure_ascii=False, indent=2) + "\n")
         if strict:
             print("::error::--strict gesetzt: Datenlücke gilt als Fehler.")
             return 1
@@ -294,11 +311,12 @@ def cmd_fetch(days, strict, dry_run):
     print(f"📈 {len(agg)} Attributionen, {meta['total']} Affiliate-Klicks "
           f"(Quelle: {meta['endpoint']}, Fenster {days}d)")
     if not dry_run:
-        _write_atomic(OUT, json.dumps(agg, ensure_ascii=False, indent=2) + "\n")
-        _write_atomic(META, json.dumps({**meta, "status": "ok", "written": TODAY.isoformat()},
-                                       ensure_ascii=False, indent=2) + "\n")
-        print(f"→ geschrieben: {os.path.relpath(OUT, BLOG_DIR)} "
-              f"({len(agg)} Zeilen) + {os.path.relpath(META, BLOG_DIR)}")
+        _write_atomic(out, json.dumps(agg, ensure_ascii=False, indent=2) + "\n")
+        _write_atomic(meta_path, json.dumps({**meta, "status": "ok",
+                                             "written": TODAY.isoformat()},
+                                            ensure_ascii=False, indent=2) + "\n")
+        print(f"→ geschrieben: {os.path.relpath(out, BLOG_DIR)} "
+              f"({len(agg)} Zeilen) + {os.path.relpath(meta_path, BLOG_DIR)}")
     try:
         from audit_log import log_event
         log_event(module="umami_clicks", action="fetch", input={"days": days, "endpoint": meta["endpoint"]},
@@ -403,6 +421,25 @@ def _selftest():
     finally:
         os.environ.clear()
         os.environ.update(_env)
+    # --- Event-Trennschärfe (cta_click darf nie als affiliate_click zählen)
+    cta_payload = {"data": [{"eventProperties": [{"dataKey": "slug", "stringValue": "home-strom"}]}]}
+    cta_rows = _rows_from_event_data(cta_payload, event_name="cta_click")
+    if not cta_rows or cta_rows[0]["event"] != "cta_click":
+        failures.append("Event-Name wird in Zeilen nicht getragen")
+    mix = aggregate([{"event": "affiliate_click", "slug": "strom", "article": "",
+                      "pillar": "", "count": 2},
+                     {"event": "cta_click", "slug": "strom", "article": "",
+                      "pillar": "", "count": 3}])
+    if len(mix) != 2 or sum(d["count"] for d in mix if d["event"] == "affiliate_click") != 2:
+        failures.append("aggregate vermischt verschiedene Events (Klickzähler unecht)")
+    # --- CLI-Drähte: --event/--out + Meta-Ableitung (ein Muster für alle Importe)
+    if _flag_value(["--event", "cta_click", "--days", "7"], "--event", DEFAULT_EVENT) != "cta_click":
+        failures.append("--event wird nicht gelesen")
+    if _flag_value(["--event"], "--event", DEFAULT_EVENT) != DEFAULT_EVENT:
+        failures.append("--event ohne Wert muss auf Default fallen")
+    if _meta_path_for(os.path.join(BLOG_DIR, "data", "umami_ctas.json")) != \
+            os.path.join(BLOG_DIR, "data", "umami_ctas.meta.json"):
+        failures.append("Meta-Pfad-Ableitung für Event-Importe falsch")
     if failures:
         print("❌ UMAMI-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
@@ -413,6 +450,15 @@ def _selftest():
     return 0
 
 
+def _flag_value(argv, flag, default=None):
+    """`--flag WERT` robust lesen (fehlender Wert → Default, nie Absturz)."""
+    if flag in argv:
+        i = argv.index(flag) + 1
+        if i < len(argv) and not argv[i].startswith("--"):
+            return argv[i]
+    return default
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if "--selftest" in argv:
@@ -420,12 +466,14 @@ def main(argv=None):
     if "--status" in argv:
         return cmd_status()
     days = 90
-    if "--days" in argv:
-        try:
-            days = max(1, min(365, int(argv[argv.index("--days") + 1])))
-        except (ValueError, IndexError):
-            pass
-    return cmd_fetch(days=days, strict="--strict" in argv, dry_run="--dry-run" in argv)
+    try:
+        days = max(1, min(365, int(_flag_value(argv, "--days", 90))))
+    except (ValueError, TypeError):
+        pass
+    event = str(_flag_value(argv, "--event", DEFAULT_EVENT) or DEFAULT_EVENT)[:60]
+    out = _flag_value(argv, "--out", "") or OUT
+    return cmd_fetch(days=days, strict="--strict" in argv, dry_run="--dry-run" in argv,
+                     event_key=event, out_path=out)
 
 
 if __name__ == "__main__":

@@ -115,6 +115,14 @@ Bei Ausfall bleibt der letzte Bestand stehen (ein Analytics-Problem darf nicht w
 „0 Klicks" aussehen), und der Governance-Lauf meldet die Lücke als Hinweis, nicht
 als Fehler.
 
+**Seit 19.09.2026 – die komplette Umsatzmessung obendrauf:** dasselbe Token speist
+nun auch `scripts/umami_views.py` (Seitenbesuche als Nenner) und den
+`cta_click`-Import (Start-/Pillar-Buttons). Zusammen mit der Awin-Publisher-API
+(`scripts/awin_fetch.py`) rechnet `scripts/revenue_funnel.py` den ganzen Trichter
+(Besuche → Klicks → Antrag → Abschluss → Storno → Provision/EPC); der
+`click_chain_guard` hält die Kette am gebauten Stand dicht. Setup, Testklick-SOP
+und Eskalationswege: **`docs/UMSATZ-MESSUNG-PREMIUM.md`**.
+
 ## Konfigurations-Optionen (hugo.toml)
 
 | Parameter | Bedeutung | Default |

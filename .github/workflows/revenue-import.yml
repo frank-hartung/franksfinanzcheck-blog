@@ -1,0 +1,132 @@
+# ============================================================
+#  REVENUE-IMPORT – die Umsatz-Pipeline abseits des Wochen-Takts
+#
+#  Warum ein eigener Workflow? Die Premium-Governance läuft wöchentlich (Mo).
+#  Klicks und Stornos kommen aber täglich herein – ein Trichter, der vier Tage
+#  alt ist, veraltet genau dort, wo er gebraucht wird (Optimierungs-Ent-
+#  scheidungen, Sponsoring-Nachweise). Dieser Job holt NUR die Daten und
+#  schreibt den Trichter neu; bewertet und gemeldet wird weiterhin zentral
+#  über das Governance-Gate (Issue-Eskalation = eine Stimme, nicht zwei).
+#
+#  Pipeline (alle 6 h): Umami-Views + CTA-Events → Umami-Affiliate-Klicks →
+#  Awin-Transaktionen (Publisher API) → Provisions-Statistik → Umsatz-Funnel.
+#  Der Trichter-Lauf erscheint zusätzlich in der Lauf-Zusammenfassung –
+#  direkt lesbar, ohne Root-Müll (Reports sind gitignored).
+#
+#  Ehrliche Teilbarkeit (dasselbe Gesetz wie in den Skripten):
+#    · Kein Token  → Schritt skipped, Lauf GRÜN, Lücke meldet der Funnel.
+#    · Token tot/API kaputt → Schritt ROT (Import kann nicht so tun, als ob).
+#    · Funnel-Lücken selbst → NIE rot; sie sind AMBER-Finding fürs Wochen-Gate.
+#
+#  Secrets: UMAMI_API_TOKEN, AWIN_API_TOKEN, AWIN_PUBLISHER_ID (Secret oder
+#  Repository-Variable). Setup in zwei Minuten: docs/UMSATZ-MESSUNG-PREMIUM.md
+# ============================================================
+name: Revenue-Import
+on:
+  schedule:
+    - cron: "10 2,8,14,20 * * *"   # ~alle 6 h (04:10, 10:10, 16:10, 22:10 MESZ)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: revenue-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python-Abhängigkeiten
+        run: python3 -m pip install -q pyyaml requests 2>/dev/null || true
+
+      # Selbsttests zuerst: wenn ein Messer kaputt ist, sind alle Dateien
+      # danach wertlos – lieber laut abbrechen als stille Falschdaten.
+      - name: Selbsttests der Import-Skripte (Preflight)
+        run: |
+          fail=0
+          for s in umami_views umami_clicks awin_fetch awin_provisions \
+                   revenue_funnel click_chain_guard; do
+            if ! python3 "scripts/$s.py" --selftest >/tmp/st_$s.log 2>&1; then
+              echo "::error::Selbsttest $s fehlgeschlagen"; cat "/tmp/st_$s.log"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Umami-Views + Start-/Pillar-CTAs laden
+        env:
+          UMAMI_API_TOKEN: ${{ secrets.UMAMI_API_TOKEN }}
+        run: |
+          set +e
+          python3 scripts/umami_views.py --days 90 \
+            | tee /tmp/umami_views.log
+          rc1=${PIPESTATUS[0]}
+          python3 scripts/umami_clicks.py --days 90 --event cta_click \
+            --out data/umami_ctas.json >> /tmp/umami_views.log 2>&1
+          rc=0; [ "$rc1" != 0 ] && rc=$rc1
+          set -e
+          exit $rc
+
+      - name: Umami-Affiliate-Klicks laden
+        env:
+          UMAMI_API_TOKEN: ${{ secrets.UMAMI_API_TOKEN }}
+        run: |
+          set +e
+          python3 scripts/umami_clicks.py --days 90 | tee /tmp/umami.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Awin-Transaktionen per API laden
+        env:
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID || vars.AWIN_PUBLISHER_ID }}
+        run: |
+          set +e
+          python3 scripts/awin_fetch.py --days 62 | tee /tmp/awin_fetch.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Provisions-Statistik neu berechnen
+        run: |
+          set +e
+          python3 scripts/awin_provisions.py | tee /tmp/awin.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Umsatz-Funnel neu berechnen (Lücken = Info, nicht Rot)
+        run: |
+          set +e
+          python3 scripts/revenue_funnel.py | tee /tmp/funnel.log
+          # Trichter meldet Messlücken bewusst als exit 1 – im Wochen-Gate ist
+          # das ein AMBER-Finding, hier darf es den Import-Lauf nicht einfärben.
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 📈 Umsatz-Funnel (Laufzusammenfassung)" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f REVENUE-FUNNEL-REPORT.md ]; then
+            cat REVENUE-FUNNEL-REPORT.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            cat /tmp/funnel.log >> "$GITHUB_STEP_SUMMARY"
+          fi
+          exit 0
+
+      - name: Messstände committen
+        if: always()
+        run: |
+          git config user.name "Revenue-Bot"
+          git config user.email "revenue-bot@users.noreply.github.com"
+          # Nur versionierte Datenpfade; Rohe-CSV ist gitignored (bewusst,
+          # `git add` auf ignorierte Pfade würde das ganze Staging sprengen).
+          git add data/umami_views.json data/umami_views.meta.json \
+                  data/umami_ctas.json data/umami_ctas.meta.json 2>/dev/null || true
+          git add data/umami_clicks.json data/umami_clicks.meta.json 2>/dev/null || true
+          git add data/awin_fetch.meta.json 2>/dev/null || true
+          git add data/awin_provisions.json data/subid_map.yaml 2>/dev/null || true
+          git add data/revenue_funnel.json data/revenue_funnel_history.jsonl 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Revenue-Import: keine Änderungen."
+          else
+            git commit -m "revenue-import: Messstände + Funnel (4× täglich)"
+            scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
+          fi
