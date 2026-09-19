@@ -30,6 +30,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -266,6 +267,122 @@ class Verdrahtung(unittest.TestCase):
         self.assertEqual(0, rc, puffer.getvalue())
         self.assertIn("C1–C18", puffer.getvalue())
 
+
+class BypassWarnung(unittest.TestCase):
+    """Grün UND blind war der Vorfall vom 19.09.2026 (Issue #320).
+
+    Das Ruleset #23695872 verlangte `Integritäts-Siegel` auf `main` ohne
+    Bypass-Akteur; der Check entsteht nur in Pull Requests, Pflicht-Checks gelten
+    aber für jeden Push. Jeder Bot-Push wurde abgelehnt, Deploy #998 starb,
+    „Deploy auf gh-pages" wurde übersprungen – und diese Wache meldete
+    „✅ Vertrag erfüllt". Der Vertrag war erfüllt; die Automation stand trotzdem.
+
+    Diese Tests frieren die Nachprüfung ein: grün bleibt grün (Exit 0, der
+    Melder darf nicht selbst zum Vorfall werden), aber die Lücke wird genannt.
+    """
+
+    NAME = gc.PFLICHT_CHECK_NAME
+    REGELN = [{"type": "required_status_checks", "ruleset_id": 23695872,
+               "ruleset_source_type": "Repository", "ruleset_source": "o/r",
+               "parameters": {"strict_required_status_checks_policy": False,
+                              "required_status_checks": [
+                                  {"context": NAME, "integration_id": 15368}]}}]
+    WORKFLOWS = {
+        "integrity-lock.yml": "on:\n  pull_request:\n    branches: [main]\n"
+                              "  workflow_dispatch: {}\njobs:\n  lock:\n",
+        "deploy.yml": "permissions:\n  contents: write\njobs:\n  d:\n    steps:\n"
+                      "      - run: bash scripts/git_sync.sh --push-only\n",
+        "integrity-lock-nur-lesen.yml": "permissions:\n  contents: read\n",
+    }
+
+    def detail(self, bypass=None, enforcement="active", include=("~DEFAULT_BRANCH",),
+               mit_check=True):
+        regeln = ([{"type": "deletion"}, {"type": "non_fast_forward"}]
+                  + ([{"type": "required_status_checks",
+                       "parameters": {"strict_required_status_checks_policy": False,
+                                      "required_status_checks": [
+                                          {"context": self.NAME, "integration_id": 15368}]}}]
+                     if mit_check else []))
+        return {"id": 23695872, "name": "Integritäts-Lock (PR-Gate)", "target": "branch",
+                "enforcement": enforcement, "bypass_actors": bypass,
+                "conditions": {"ref_name": {"include": list(include), "exclude": []}},
+                "rules": regeln}
+
+    def probe(self, detail, workflows=None, regeln=None, api_fehler=False):
+        regeln = self.REGELN if regeln is None else regeln
+        workflows = self.WORKFLOWS if workflows is None else workflows
+
+        def fake_api(pfad, token="", timeout=20):
+            if api_fehler:
+                return None, "HTTP 500: simulierter Ausfall"
+            if pfad.endswith("/rules/branches/main"):
+                return regeln, ""
+            if pfad.endswith("/rulesets"):
+                return [{"id": 23695872, "name": "Integritäts-Lock (PR-Gate)",
+                         "target": "branch"}], ""
+            if "/rulesets/" in pfad:
+                return detail, ""
+            return None, f"unerwarteter Pfad: {pfad}"
+
+        puffer = io.StringIO()
+        # GITHUB_ACTIONS=1, weil annotate() nur im Lauf ::warning:: schreibt –
+        # genau dieser Weg ist der Beweis im PR-Gate (Annotation am Job).
+        with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "1"}, clear=False), \
+                mock.patch.object(pg, "api_get", side_effect=fake_api), \
+                mock.patch.object(pg, "workflows_laden", return_value=workflows), \
+                mock.patch.object(pg, "erwarteter_check",
+                                  return_value=(self.NAME, "lock", "")), \
+                contextlib.redirect_stdout(puffer):
+            rc = pg.probe(branch="main", repo="o/r")
+        return rc, puffer.getvalue()
+
+    # --- Die Lücke muss gemeldet werden – ohne das Urteil zu kippen --------- #
+    def test_pflicht_check_ohne_bypass_warnt_und_bleibt_gruen(self):
+        rc, out = self.probe(self.detail(bypass=None))
+        self.assertEqual(0, rc, out)                     # Vertrag erfüllt → grün
+        self.assertIn("Vertrag erfüllt", out)
+        self.assertIn("::warning::", out)                # aber nicht blind
+        self.assertIn("Schein-Sicherheit", out)
+        self.assertIn("23695872", out)
+        self.assertIn("KEINEN Bypass-Akteur", out)
+        self.assertIn("nur in Pull Requests", out)       # Trigger-Lage erkannt
+        self.assertIn("deploy.yml", out)                 # der Betroffene wird genannt
+        self.assertIn("1 Workflows", out)                # nur der echte Direkt-Pusher
+        self.assertIn("schutz", out)                     # die neue git_sync-Klasse
+        self.assertIn(pg.RUNBOOK, out)
+        self.assertNotIn("::error::", out)
+
+    def test_leere_bypass_list_zaehlt_wie_null(self):
+        _rc, out = self.probe(self.detail(bypass=[]))
+        self.assertIn("Schein-Sicherheit", out)
+
+    # --- Und sie muss schweigen, wenn sie nicht gilt ------------------------ #
+    def test_mit_bypass_akteur_keine_warnung(self):
+        rc, out = self.probe(self.detail(bypass=[{"actor_id": 3,
+                                                  "actor_type": "RepositoryRole",
+                                                  "bypass_mode": "always"}]))
+        self.assertEqual(0, rc, out)
+        self.assertIn("Vertrag erfüllt", out)
+        self.assertNotIn("Schein-Sicherheit", out)
+        self.assertNotIn("::warning::", out)
+
+    def test_ohne_direkt_pusher_keine_warnung(self):
+        # Niemand committet selbst auf main → der Check bindet nur PRs: gewollt.
+        rc, out = self.probe(self.detail(bypass=None),
+                             workflows={"gate.yml": "permissions:\n  contents: read\n"})
+        self.assertEqual(0, rc, out)
+        self.assertNotIn("Schein-Sicherheit", out)
+
+    def test_deaktiviertes_ruleset_warnt_nicht(self):
+        _rc, out = self.probe(self.detail(bypass=None, enforcement="disabled"),
+                              regeln=[])
+        self.assertNotIn("Schein-Sicherheit", out)
+
+    def test_api_ausfall_ist_best_effort_nicht_rot(self):
+        rc, out = self.probe(self.detail(bypass=None), api_fehler=True)
+        self.assertEqual(0, rc, out)                     # kein Netz → kein Urteil
+        self.assertIn("nicht prüfbar", out)
+        self.assertNotIn("Schein-Sicherheit", out)
 
 if __name__ == "__main__":
     unittest.main()

@@ -429,11 +429,12 @@ sync_und_push() {
       printf '%s\n' "$out" | sed 's/^/  push: /'
       if ist_schutz_fehler "$out"; then
         SYNC_FAIL_URSACHE=schutz
-        echo "::error::git_sync.sh: Push auf origin/$BRANCH von Branch-Schutz/\
-             Ruleset abgelehnt – kein Retry sinnvoll, dieselbe Regel lehnt \
-             wieder ab. Häufigste Ursache: verlangter Status-Check OHNE \
-             Bypass-Akteur (Pflicht-Checks gelten auch für direkte Pushes). \
-             Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, „Direkte Pushes“."
+        echo "::error::git_sync.sh: Push auf origin/$BRANCH von "\
+             "Branch-Schutz/Ruleset abgelehnt (Ursache: schutz) – kein Retry "\
+             "sinnvoll, dieselbe Regel lehnt wieder ab. Häufigste Ursache: "\
+             "verlangter Status-Check OHNE Bypass-Akteur (Pflicht-Checks gelten "\
+             "auch für direkte Pushes). Reparatur: "\
+             "docs/PFLICHT-CHECK-RUNBOOK.md, „Direkte Pushes“."
         return 1
       fi
       if ist_auth_fehler "$out"; then
@@ -461,9 +462,10 @@ sync_und_push() {
           printf '%s\n' "$out" | sed 's/^/  push: /'
           if ist_schutz_fehler "$out"; then
             SYNC_FAIL_URSACHE=schutz
-            echo "::error::git_sync.sh: Auch der Rettungsanker-Push wurde von \
-                 Branch-Schutz/Ruleset abgelehnt – kein Retry sinnvoll. \
-                 Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, „Direkte Pushes“."
+            echo "::error::git_sync.sh: Auch der Rettungsanker-Push wurde von "\
+                 "Branch-Schutz/Ruleset abgelehnt (Ursache: schutz) – kein Retry "\
+                 "sinnvoll. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, "\
+                 "„Direkte Pushes“."
             return 1
           fi
           if ist_auth_fehler "$out"; then

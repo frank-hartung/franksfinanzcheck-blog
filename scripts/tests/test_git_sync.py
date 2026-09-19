@@ -22,6 +22,10 @@ Diese Tests beweisen die gehärteten Verträge gegen synthetische Repos
      sich, sobald GitHub wieder antwortet.
   8. Bleibt der fetch dauerhaft weg, rettet der direkte Push-Versuch den
      Lauf, falls origin nicht weitergelaufen ist (Fast-Forward).
+  9. Eine Ruleset-/Branch-Schutz-Ablehnung (Vorfall 19.09.2026, Issue #320)
+     ist Klasse `schutz`: sofortiger Abbruch OHNE Backoff-Runden, Meldung mit
+     Reparatur-Anleitung – während Netzwerk-Transient und Non-Fast-Forward
+     retrybar bleiben. Eine Regel wartet sich nicht weg.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -45,6 +49,14 @@ GIT_SYNC = REPO_ROOT / "scripts" / "git_sync.sh"
 FAKE_GIT_TEMPLATE = r"""#!/usr/bin/env bash
 real="{REAL_GIT}"
 [ -x "$real" ] || exit 127
+if [ "${1:-}" = "push" ] && [ -n "${SABOTAGE_DIR:-}" ]; then
+  v=$(( $(cat "$SABOTAGE_DIR/push_versuche" 2>/dev/null || echo 0) + 1 ))
+  echo "$v" > "$SABOTAGE_DIR/push_versuche"
+  if [ -f "$SABOTAGE_DIR/push_fehler" ]; then
+    cat "$SABOTAGE_DIR/push_fehler" >&2
+    exit 1
+  fi
+fi
 if [ "${1:-}" = "fetch" ] && [ -n "${SABOTAGE_DIR:-}" ]; then
   if [ -f "$SABOTAGE_DIR/fetch_fails" ]; then
     n=$(cat "$SABOTAGE_DIR/fetch_fails" 2>/dev/null || echo 0)
@@ -397,3 +409,119 @@ class NetzwerkHaertungTests(GitSyncTestBase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --------------------------------------------------------------------------- #
+#  Vorfall 19.09.2026 (Issue #320): Ruleset-Ablehnung ≠ Wackelkontakt
+# --------------------------------------------------------------------------- #
+GH014_PFLICHT_CHECK = """remote: error: GH014: Push cannot be completed as the required status check "Integritäts-Siegel" has not passed.
+To https://github.com/frank-hartung/franksfinanzcheck-blog.git
+ ! [remote rejected] main -> main (update-ref failed)
+error: failed to push some refs to 'https://github.com/frank-hartung/franksfinanzcheck-blog.git'
+"""
+
+GH006_PR_ZWANG = """remote: error: GH006: Protected branch update failed for 'refs/heads/main'.
+remote: error: Changes must be made through a pull request.
+To https://github.com/frank-hartung/franksfinanzcheck-blog.git
+ ! [remote rejected] main -> main (protected branch hook declined)
+error: failed to push some refs
+"""
+
+SIGNATURPFLICHT = """remote: error: GH006: Protected branch update failed for 'refs/heads/main'.
+remote: error: Commits must be signed.
+ ! [remote rejected] main -> main (must be signed)
+error: failed to push some refs
+"""
+
+NETZWERK_TRANSIENT = """fatal: unable to access 'https://github.com/frank-hartung/franksfinanzcheck-blog.git/': Failed to connect to github.com port 443 after 120035 ms: Couldn't connect to server
+"""
+
+NON_FAST_FORWARD = """To https://github.com/frank-hartung/franksfinanzcheck-blog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs
+hint: Updates were rejected because the remote contains work that you do not have locally.
+"""
+
+
+class SchutzKlasseTests(GitSyncTestBase):
+    """Eine Regel, die den Push ablehnt, darf nicht als Netzwerkfehler durchgehen.
+
+    Am 19.09.2026 verlangte Ruleset #23695872 den Pflicht-Check
+    `Integritäts-Siegel` auf `main`, ohne Bypass-Akteur. Der Check entsteht nur
+    in Pull Requests, Pflicht-Checks gelten aber für jeden Push – jeder Bot-Push
+    wurde abgelehnt, `git_sync.sh` meldete „zuletzt: netzwerk" und verbrannte
+    drei Runden Backoff. Deploy #998 starb, „Deploy auf gh-pages" wurde
+    übersprungen, die Website blieb vier Stunden alt.
+    """
+
+    def _push_versuche(self):
+        zaehler = self.sabotage / "push_versuche"
+        return int(zaehler.read_text(encoding="utf-8").strip()) if zaehler.exists() else 0
+
+    def _mit_push_fehler(self, fehler_text, args=("--push-only",), sabotage_fetch=None):
+        (self.sabotage / "push_fehler").write_text(fehler_text, encoding="utf-8")
+        self._commit(self.bot_b, "data/status.jsonl", '{"run": 1}\n', "B: status")
+        return self.run_sync(list(args), sabotage_fetch=sabotage_fetch)
+
+    # --- Schutz: sofortiger Abbruch, klare Meldung, KEINE Runden ------------- #
+    def test_pflicht_check_ohne_bypass_ist_schutz(self):
+        res = self._mit_push_fehler(GH014_PFLICHT_CHECK)
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("::error::", log)
+        self.assertIn("schutz", log)                       # Klasse steht im Log
+        self.assertIn("Branch-Schutz/Ruleset", log)
+        self.assertIn("PFLICHT-CHECK-RUNBOOK.md", log)     # Reparatur, nicht nur Rot
+        self.assertNotIn("3 Runden", log)                  # kein Backoff gegen eine Regel
+        self.assertEqual(self._push_versuche(), 1, "genau EIN Push-Versuch erwartet")
+        self.assertNotIn("B: status", self.origin_log())   # nichts ist durchgerutscht
+
+    def test_pr_zwang_ist_schutz(self):
+        res = self._mit_push_fehler(GH006_PR_ZWANG)
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("Branch-Schutz/Ruleset", log)
+        self.assertNotIn("Auth/Berechtigung", log)         # nicht als auth fehlgedeutet
+        self.assertEqual(self._push_versuche(), 1)
+
+    def test_signaturpflicht_ist_schutz(self):
+        res = self._mit_push_fehler(SIGNATURPFLICHT)
+        self.assertEqual(res.returncode, 1, res.stdout + res.stderr)
+        self.assertIn("Branch-Schutz/Ruleset", res.stdout + res.stderr)
+        self.assertEqual(self._push_versuche(), 1)
+
+    def test_schutz_auch_im_vollmodus(self):
+        # Vollmodus = committen UND pushen (so laufen die Bots im Deploy).
+        (self.sabotage / "push_fehler").write_text(GH014_PFLICHT_CHECK, encoding="utf-8")
+        (self.bot_b / "FOO.md").write_text("# Foo\n", encoding="utf-8")
+        res = self.run_sync(["chore: Testreport", "FOO.md"])
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("Branch-Schutz/Ruleset", log)
+        self.assertIn("Ursache: schutz", log)
+        self.assertEqual(self._push_versuche(), 1)
+        self.assertNotIn("chore: Testreport", self.origin_log())
+
+    def test_rettungsanker_umgeht_schutz_nicht(self):
+        # Selbst wenn der fetch ausfällt (Rettungsanker-Pfad): eine Regel bleibt
+        # eine Regel – der direkte Push-Versuch darf sie nicht „ausprobieren".
+        res = self._mit_push_fehler(GH014_PFLICHT_CHECK, sabotage_fetch=3)
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("Branch-Schutz/Ruleset", log)
+
+    # --- Die Gegenseite: Transientes muss retrybar bleiben ------------------ #
+    def test_netzwerk_transient_bleibt_retrybar(self):
+        res = self._mit_push_fehler(NETZWERK_TRANSIENT)
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("3 Runden", log)                     # Backoff wie gehabt
+        self.assertNotIn("Branch-Schutz/Ruleset", log)     # keine falsche Diagnose
+        self.assertEqual(self._push_versuche(), 3, "drei Versuche bei Transient")
+
+    def test_non_fast_forward_bleibt_retrybar(self):
+        res = self._mit_push_fehler(NON_FAST_FORWARD)
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertNotIn("Branch-Schutz/Ruleset", log)
+        self.assertEqual(self._push_versuche(), 3, "drei Versuche bei Race")
