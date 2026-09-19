@@ -16,9 +16,9 @@
 {{- partial "pillar_box.html" . }}
 {{- $related := .Site.RegularPages.Related . | first 3 -}}
 {{- if gt (len $related) 0 -}}
-<div class="ff-related" style="margin:36px 0 8px; padding-top:24px; border-top:2px solid rgba(14,90,67,.15);">
-  <h3 style="font-family:'Inter',sans-serif; font-weight:700; color:#0E5A43; margin-bottom:16px; font-size:1.25em; line-height:1.35;"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+<section class="ff-related-section" aria-label="Verwandte Ratgeber">
+  <h3 class="ff-related-title"><span aria-hidden="true">📚 </span>Das könnte dich auch interessieren</h3>
+  <div class="ff-related-grid">
     {{- range $related -}}
     {{- $rCover := .Params.cover.image -}}
     {{- $rFile := "" -}}
@@ -31,8 +31,8 @@
     {{- end -}}
     <a href="{{ .Permalink }}"
        aria-label="Weiterlesen: {{ .Title | plainify }}"
-       style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(14,90,67,.18); border-radius:12px; overflow:hidden; text-decoration:none; transition:transform .18s ease, box-shadow .18s ease; box-shadow:0 1px 4px rgba(0,0,0,.06);">
-      <span style="display:block; position:relative;">
+       class="ff-related-card">
+      <span class="ff-related-card__media">
         {{- if $rCover -}}
           <picture>
             {{- $rSizes := "(min-width: 900px) 280px, (min-width: 600px) 45vw, 100vw" -}}
@@ -51,24 +51,24 @@
                  {{- if gt (len $rJpgParts) 0 }} srcset="{{ delimit $rJpgParts ", " }}" sizes="{{ $rSizes }}"{{ end }}
                  alt="{{ .Params.cover.alt | default .Title | plainify }}"
                  width="360" height="540"
-                 style="width:100%; height:auto; display:block;">
+                 class="ff-related-card__img">
           </picture>
         {{- else -}}
-          <span style="display:block; width:100%; padding-top:150%; background:linear-gradient(160deg,#0E5A43,#0B4A36);"></span>
+          <span class="ff-related-card__fallback"></span>
         {{- end -}}
         {{- with .Params.categories -}}
         {{- $cat := index . 0 -}}
-        <span style="position:absolute; top:8px; left:8px; background:rgba(255,179,0,.95); color:#111; font-size:.68em; font-weight:700; padding:3px 8px; border-radius:999px; letter-spacing:.02em;">{{ $cat }}</span>
+        <span class="ff-related-card__category">{{ $cat }}</span>
         {{- end -}}
       </span>
-      <span style="display:block; padding:12px 14px 14px;">
-        <span style="display:block; font-size:.75em; color:#777; margin-bottom:4px;">{{ .Date.Format "02.01.2006" }}</span>
-        <span style="display:block; color:#0E5A43; font-weight:700; font-size:1.02em; line-height:1.4; margin-bottom:6px;">{{ .Title | plainify }}</span>
-        <span style="display:block; color:#555; font-size:.82em; line-height:1.4;">{{ .Description | plainify | truncate 80 }}</span>
+      <span class="ff-related-card__body">
+        <span class="ff-related-card__date">{{ .Date.Format "02.01.2006" }}</span>
+        <strong class="ff-related-card__heading">{{ .Title | plainify }}</strong>
+        <span class="ff-related-card__snippet">{{ .Description | plainify | truncate 80 }}</span>
       </span>
     </a>
     {{- end -}}
   </div>
-</div>
+</section>
 {{- end -}}
 {{- end -}}

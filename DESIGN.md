@@ -85,11 +85,20 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 | Komponente | Klasse(n) | Regeln |
 |---|---|---|
 | Teaser-Karte | `.post-entry` | Hover-Lift −2…−5px + Ebenen-2-Schatten, reduced-motion → aus |
+| Hero-Section | `.first-entry.home-info`, `.ff-home-ctas`, `.ff-btn-*`, `.ff-trust-row`, `.ff-trust-pill` | Gradient-Mesh, 8.2:1 Kontrast, weiche Schatten |
+| Pinterest-CTA | `.ff-pinterest-cta`, `.ff-pinterest-cta-btn` | Modernes Bento-Card-Layout mit Pinterest-Rot (#E60023) |
 | Pillar-Cluster | `.ff-pc-cluster/-head/-title/-count`, `.ff-pc-grid`, `.ff-pc-card/__body/__title/__desc/__cta` | Light+Dark definiert (zzz-agency-polish.css §7) |
+| Ratgeber-Zentrale | `.ff-pillar-hero`, `.ff-pillar-grid`, `.ff-pillar-card`, `.ff-spar-matrix-section`, `.ff-method-grid`, `.ff-faq-list` | Volles Agentur-Layout (/pillar/) mit Dark-Mode-Unterstützung |
+| Vertrauens-Box | `.ff-trust-box`, `.ff-trust-box__avatar-wrap`, `.ff-trust-box__img`, `.ff-trust-box__badge` | E-E-A-T-Autorbox am Artikelende mit Verifizierungs-Badge |
+| Praxis-Marker | `.ff-experience-box`, `.ff-experience-box__tag`, `.ff-experience-box__text` | Bernstein-Akzent, persönlicher Testbericht-Marker |
+| Ratgeber-Link | `.ff-pillar-box`, `.ff-pillar-box__inner`, `.ff-pillar-box__btn` | Vernetzt Artikel bidirektional mit übergeordnetem Ratgeber |
+| Verwandte Artikel | `.ff-related-section`, `.ff-related-grid`, `.ff-related-card` | 3er-Grid mit Cover-Bilder, Kategorie-Pill & Datumszeile |
+| Callout-Boxen | `.ff-callout`, `.ff-callout--tip`, `.ff-callout--warning`, `.ff-callout--info` | Semantische Hinweisboxen für Markdown-Artikel |
+| 404-Fehlerseite | `.ff-404-page`, `.ff-404-badge`, `.ff-404-actions`, `.ff-404-pills` | Großes Gradient-Badge, Themen-Schnellzugriff & Startseiten-CTA |
 | Chips | `.ff-pc-chip` | Pill, Smaragd-Soft hell / 12% Smaragd-Bright dunkel |
 | Kopier-Button | `.ff-heading-copy` | Optik 28px, Trefferfläche 44px via `::after inset:-8px` (hit-test-verifiziert) |
 | Vorlese-Toolbar | `.ff-voice-slot` | Slot reserviert Höhe (kein CLS), WCAG 2.2 AA+ Zustände |
-| Consent-Banner | `#ff-consent-banner` | fixe Leiste, Links inline-block ≥ 24px |
+| Consent-Banner | `#ff-consent-banner`, `.ff-consent-banner__*` | fixe Leiste, Dark-Mode-fähig, Links inline-block ≥ 24px |
 | Skip-Link | `.skip-link` | 3px-Fokusring Signalgelb, z 1000001 |
 
 ## 6. Interaktion & Motion

@@ -42,21 +42,25 @@ export async function resolveLaunchOptions() {
   // ---------- Weg 2: @sparticuz/chromium aus node_modules ----------
   try {
     const mod = await import('@sparticuz/chromium');
+    const { fileURLToPath } = await import('node:url');
+    const { dirname } = await import('node:path');
     const chromium = mod.default;
-    const exe = await chromium.executablePath();
 
     // Kompat-Bibliotheken (libnspr4/libnss3/…): sparticuz entpackt sie
     // nur auf Amazon Linux 2023 automatisch – auf Debian/Ubuntu holen
     // wir sie selbst über die mitgelieferte inflate()-Funktion.
     const libDir = join(tmpdir(), 'al2023', 'lib');
     if (!existsSync(libDir)) {
-      const binDir = join(exe, '..');
+      const entry = fileURLToPath(import.meta.resolve('@sparticuz/chromium'));
+      const binDir = join(dirname(entry), '..', 'bin');
       await mod.inflate(join(binDir, 'al2023.tar.br'));
     }
     process.env.LD_LIBRARY_PATH = [libDir, tmpdir(), process.env.LD_LIBRARY_PATH]
       .filter(Boolean)
       .join(':');
     process.env.FONTCONFIG_PATH ??= join(tmpdir(), 'fonts');
+
+    const exe = await chromium.executablePath();
 
     // stderr statt stdout: design-metrics.mjs gibt JSON auf stdout aus
     console.error(`[E2E] Fallback-Browser aktiv: ${exe} (Chromium aus @sparticuz/chromium)`);
