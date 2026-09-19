@@ -997,9 +997,9 @@ items:
   date: '2026-09-19'
   time: 07:00
   scheduled_at: '2026-09-19T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: bluesky:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:takeaway:2026-09-19
   channel: bluesky
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -1009,9 +1009,9 @@ items:
   date: '2026-09-19'
   time: 08:15
   scheduled_at: '2026-09-19T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:frage:2026-09-19
   channel: x
   slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
@@ -1021,9 +1021,9 @@ items:
   date: '2026-09-19'
   time: 08:45
   scheduled_at: '2026-09-19T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:zahl:2026-09-19
   channel: threads
   slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
@@ -1033,9 +1033,9 @@ items:
   date: '2026-09-19'
   time: 09:15
   scheduled_at: '2026-09-19T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-09-19
   channel: facebook
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
@@ -1045,9 +1045,9 @@ items:
   date: '2026-09-19'
   time: 09:45
   scheduled_at: '2026-09-19T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:karussell:2026-09-19
   channel: instagram
   slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
