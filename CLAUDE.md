@@ -53,6 +53,12 @@ Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
 
 - `.github/workflows/e2e.yml` – Playwright bei PRs auf main + dienstags
   07:00 MESZ; HTML-Report als Artifact.
+- `.github/workflows/integrity-lock.yml` – PR-Gate, Pflicht-Check
+  **`Integritäts-Siegel`**. Der Job-Anzeigename ist ein Vertrag mit dem
+  Ruleset (Governance-Regel C18, Konstante `PFLICHT_CHECK_NAME`): **nie
+  umbenennen, keinen `paths`-Filter, kein `if:` am Job** – sonst friert `main`
+  ein oder das Gate wird Scheingrün. Umbenennen nur nach
+  `docs/PFLICHT-CHECK-RUNBOOK.md`.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
   per Patch/PR mit vollwertigem Token ändern (siehe README, Known Issue).
 

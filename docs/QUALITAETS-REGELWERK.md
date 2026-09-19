@@ -427,6 +427,16 @@ jeder Schreibaktion.
    (Sabotage bleibt eine menschliche Entscheidung). Anlass:
    [Vorfall 19.09.2026](INCIDENT-2026-09-19-integritaets-lock.md) — ein
    vergessener Lock kostete zwei Produktions-Slots (Issue #316).
+8. **Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt.** Das PR-Gate
+   meldet sich als **`Integritäts-Siegel`**; dieser Name ist ein Vertrag zwischen
+   Workflow-Datei und Ruleset (Governance-Regel **C18**: Konstante
+   `PFLICHT_CHECK_NAME` = `jobs.lock.name` = Required status check, kein
+   `paths`-Filter, kein `if:` am Job, kein `continue-on-error`, nur Leserechte).
+   Die Live-Wache `pflichtcheck_guard.py` fragt im Gate selbst, ob `main` den
+   Check wirklich verlangt — ein Ruleset ohne Ziel-Zweig schützt nichts (Befund
+   vom 19.09.2026: Check `lock`, `include: []`). Umbenennen nur nach
+   [Runbook](PFLICHT-CHECK-RUNBOOK.md): Konstante, Workflow und Ruleset im selben
+   Atemzug.
 
 ---
 
@@ -490,6 +500,13 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **19.09.2026 (Nachtrag):** Der Pflicht-Check des PR-Gates hieß `lock` (Job-ID
+  ohne Anzeigename) und war in einem Ruleset ohne Ziel-Zweig eingetragen —
+  `main` war ungeschützt. Jetzt: Job-Anzeigename **`Integritäts-Siegel`** als
+  Vertrag (Governance-Regel **C18** friert Name und Form des Pflicht-Checks ein),
+  Live-Wache `pflichtcheck_guard.py` als letzter Gate-Schritt (verlangt der
+  Branch-Schutz genau diesen Check? — rot mit Diagnose und Reparatur, API-Ausfall
+  nur Warnung), Runbook `docs/PFLICHT-CHECK-RUNBOOK.md`. Regel 8 oben.
 - **19.09.2026:** Der Integritäts-Lock wurde zur Grenze statt zum Betriebsrisiko
   (Issue #316). Anlass: PR #315 hat sechs gesperrte Skripte geheilt und den Lock
   nicht mit-signiert — die Content-Engine starb am 18.09. in zwei Läufen im

@@ -54,6 +54,15 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                      (Beweis im Gate-Selbsttest), ihre Frische wird per Herzschlag
                      ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist
                      deploy-irrelevant (#281)
+  C17 Pinterest-Duplikate – pin_title/pin_description sind über alle Artikel
+                     einzigartig; der Duplicate-Guard läuft in Watchdog und
+                     Content-Engine (#305)
+  C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`)
+                     ist der Vertrag mit dem Branch-Schutz: Konstante = Workflow
+                     = Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
+                     `continue-on-error` am Gate-Schritt, nur Leserechte – und
+                     die Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst,
+                     ob der Branch-Schutz den Check wirklich verlangt (19.09.2026)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -132,7 +141,15 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Signatur-Regel (nur FEST + versioniert + == HEAD) und Konvergenz
           # der Heilung. Als Wache im Minimum läuft dieser Beweis in jedem
           # Gate-Durchgang mit – inklusive Uhr-Proben und C15.
-          "integrity_guard.py"]
+          "integrity_guard.py",
+          # Pflicht-Check-Vertrag (19.09.2026, Nachtrag zu #316): Das PR-Gate
+          # meldete sich als Check „lock" (Job-ID ohne Anzeigename) und wurde
+          # unter diesem Namen in ein Ruleset eingetragen, das keinen
+          # Ziel-Branch hatte – ein Häkchen, das nichts schützt. Die Wache
+          # vergleicht im Gate selbst, ob der Branch-Schutz genau den Check
+          # verlangt, der da gerade läuft; ihr Selbsttest beweist die Logik an
+          # Kunst-Rulesets ohne Netz (C18).
+          "pflichtcheck_guard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -808,6 +825,169 @@ def c17_pinterest_duplicate_guard(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
+# --- C18: Pflicht-Check-Vertrag (der Name im Branch-Schutz ist ein Vertrag) ---
+# Auslöser (19.09.2026, Nachtrag zu #316 / PR #317): Das neue PR-Gate
+# integrity-lock.yml meldete sich bei GitHub als Check „lock" – die Job-ID, weil
+# der Job keinen Anzeigenamen trug. Unter genau diesem Namen wurde es als
+# Pflicht-Check in ein Ruleset eingetragen … das keinen Ziel-Branch hatte
+# (`include: []`): ein aktives Häkchen, das nichts schützte. Ein Pflicht-Check
+# ist ein Vertrag zwischen Workflow-Datei und Repository-Einstellung, den keine
+# Seite allein einhalten kann. Drei Fehlerrichtungen, alle still:
+#   · Job umbenannt, Ruleset nicht: jeder PR wartet auf einen Check, der nie
+#     berichtet („Expected") – main ist eingefroren.
+#   · `paths`/`paths-ignore` am Trigger: für PRs ohne Treffer startet der
+#     Workflow gar nicht – dasselbe Einfrieren, nur seltener und darum schwerer
+#     zu finden (GitHub-Doku „Handling skipped but required checks").
+#   · `if:` am Job oder `continue-on-error` am Gate-Schritt: ein übersprungener
+#     bzw. verschluckter Pflicht-Check gilt GitHub als BESTANDEN – Scheingrün.
+# Der Vertrag friert den Anzeigenamen deshalb als Konstante ein (eine Quelle für
+# Workflow, Doku und die Live-Wache pflichtcheck_guard.py) und verlangt die Form,
+# in der ein Pflicht-Check zuverlässig berichtet. Umbenennen bleibt möglich –
+# aber nur bewusst: Konstante, Workflow und Ruleset im selben Atemzug
+# (Runbook: docs/PFLICHT-CHECK-RUNBOOK.md).
+PFLICHT_CHECK_WORKFLOW = "integrity-lock.yml"
+PFLICHT_CHECK_NAME = "Integritäts-Siegel"
+PFLICHT_CHECK_BRANCH = "main"
+PFLICHT_CHECK_WACHE = "pflichtcheck_guard.py"
+RE_PFLICHT_CHECK_SCHRITT = re.compile(r"integrity_guard\.py\s+--gate\b")
+
+
+def _yaml_bloecke(text, kopf_re, einzug):
+    """[(Kopf-Match, Blocktext)] aller Blöcke, deren Kopfzeile mit genau `einzug`
+    Leerzeichen eingerückt ist und auf `kopf_re` passt. Der Block reicht bis zur
+    nächsten Nicht-Kommentar-Zeile mit Einrückung <= `einzug`.
+
+    Bewusst kein YAML-Parser (Haus-Regel des Vertrags: stdlib, deterministisch,
+    keine Abhängigkeit, die im Gate fehlen könnte). Die Workflows sind
+    bot-geschrieben und einheitlich eingerückt – die Selbsttests halten die Form
+    fest, die hier erkannt wird.
+    """
+    zeilen = text.splitlines()
+    out, i = [], 0
+    while i < len(zeilen):
+        m = re.match(r"^( *)([^\s#].*)$", zeilen[i])
+        if m and len(m.group(1)) == einzug:
+            km = kopf_re.match(m.group(2).rstrip())
+            if km:
+                j = i + 1
+                while j < len(zeilen):
+                    m2 = re.match(r"^( *)(\S.*)$", zeilen[j])
+                    if m2 and len(m2.group(1)) <= einzug and not m2.group(2).startswith("#"):
+                        break
+                    j += 1
+                out.append((km, "\n".join(zeilen[i + 1:j])))
+                i = j
+                continue
+        i += 1
+    return out
+
+
+def pflichtcheck_profil(text):
+    """Was GitHub aus dieser Workflow-Datei macht – die Teile, die für einen
+    Pflicht-Check zählen: PR-Trigger (Zweige, Pfadfilter), Schreibrechte,
+    Jobs mit Anzeigename, `if:` und Schritten."""
+    profil = {"pr_trigger": False, "pr_branches": [], "pr_pfadfilter": False,
+              "schreibrechte": [], "jobs": []}
+    for _m, on_body in _yaml_bloecke(text, re.compile(r"^[\"']?on[\"']?:\s*$"), 0):
+        for _pm, pr_body in _yaml_bloecke(on_body, re.compile(r"^pull_request(_target)?:\s*$"), 2):
+            profil["pr_trigger"] = True
+            for bm, br_body in _yaml_bloecke(pr_body, re.compile(r"^branches:\s*(.*)$"), 4):
+                inline = bm.group(1).strip()
+                if inline.startswith("["):
+                    profil["pr_branches"] += [b.strip().strip("'\"") for b in
+                                              inline.strip("[]").split(",") if b.strip()]
+                profil["pr_branches"] += [lm.group(1).strip("'\"") for lm in
+                                          re.finditer(r"^\s*-\s*(.+?)\s*$", br_body, re.M)]
+            if re.search(r"^ {4}paths(-ignore)?:", pr_body, re.M):
+                profil["pr_pfadfilter"] = True
+        # `on:\n  pull_request:` ohne Unterblock (Kurzform) zählt ebenfalls als Trigger
+        if re.search(r"^ {2}pull_request(_target)?:\s*(\{\}|~|null)?\s*$", on_body, re.M):
+            profil["pr_trigger"] = True
+    for _m, perm_body in _yaml_bloecke(text, re.compile(r"^permissions:\s*$"), 0):
+        profil["schreibrechte"] = re.findall(r"^ {2}([\w-]+):\s*write\s*$", perm_body, re.M)
+    for _m, jobs_body in _yaml_bloecke(text, re.compile(r"^jobs:\s*$"), 0):
+        for jm, job_body in _yaml_bloecke(jobs_body, re.compile(r"^([A-Za-z_][\w-]*):\s*$"), 2):
+            nm = re.search(r"^ {4}name:\s*(.+?)\s*$", job_body, re.M)
+            profil["jobs"].append({
+                "id": jm.group(1),
+                "name": nm.group(1).strip().strip("'\"") if nm else None,
+                "if": bool(re.search(r"^ {4}if:", job_body, re.M)),
+                "steps": step_blocks(job_body),
+            })
+    return profil
+
+
+def pflichtcheck_name_aus_workflow(text):
+    """Der Check-Name, den GitHub für den Gate-Job meldet (Anzeigename, sonst
+    Job-ID) – gelesen aus der Workflow-Datei, nicht aus einer Kopie. Leer, wenn
+    kein Job den Gate-Schritt trägt."""
+    for job in pflichtcheck_profil(text)["jobs"]:
+        if any(RE_PFLICHT_CHECK_SCHRITT.search(body) for _n, body in job["steps"]):
+            return job["name"] or job["id"]
+    return ""
+
+
+def c18_pflicht_check(wflows):
+    """C18: Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt – und er
+    berichtet in jeder Lage (kein Pfadfilter, kein `if:`, kein Verschlucken)."""
+    out = []
+    wf = PFLICHT_CHECK_WORKFLOW
+    path = next((p for p in wflows if os.path.basename(p) == wf), None)
+    if not path:
+        out.append(("C18", f"`.github/workflows/{wf}` fehlt – der Pflicht-Check "
+                           f"`{PFLICHT_CHECK_NAME}` würde nie berichten, jeder PR auf "
+                           f"`{PFLICHT_CHECK_BRANCH}` bliebe auf „Expected“ stehen."))
+        return out
+    text = wflows[path]
+    p = pflichtcheck_profil(text)
+    if not p["pr_trigger"]:
+        out.append(("C18", f"{wf}: kein `pull_request`-Trigger – ein Pflicht-Check, der "
+                           f"bei Pull Requests nicht startet, friert den Merge ein."))
+    elif p["pr_branches"] and PFLICHT_CHECK_BRANCH not in p["pr_branches"]:
+        out.append(("C18", f"{wf}: `pull_request.branches` nennt `{PFLICHT_CHECK_BRANCH}` "
+                           f"nicht ({', '.join(p['pr_branches'])}) – auf dem geschützten "
+                           f"Zweig berichtet der Check nie."))
+    if p["pr_pfadfilter"]:
+        out.append(("C18", f"{wf}: `paths`/`paths-ignore` am PR-Trigger – ein Pflicht-Check "
+                           f"darf nicht vom geänderten Pfad abhängen: für PRs ohne Treffer "
+                           f"startet er nicht, und GitHub wartet ewig auf ihn („Expected“)."))
+    if p["schreibrechte"]:
+        out.append(("C18", f"{wf}: Schreibrechte ({', '.join(p['schreibrechte'])}: write) – "
+                           f"das Gate ist read-only; ein Pflicht-Check mit Schreibrecht "
+                           f"ist eine Angriffsfläche in jedem fremden PR."))
+    traeger = [j for j in p["jobs"] if (j["name"] or j["id"]) == PFLICHT_CHECK_NAME]
+    if not traeger:
+        namen = ", ".join(f"`{j['name'] or j['id']}`" for j in p["jobs"]) or "keine Jobs"
+        out.append(("C18", f"{wf}: kein Job meldet sich als `{PFLICHT_CHECK_NAME}` (gefunden: "
+                           f"{namen}) – das Ruleset verlangt genau diesen Namen. Umbenennen "
+                           f"heißt: PFLICHT_CHECK_NAME, Workflow und Ruleset im selben "
+                           f"Atemzug (docs/PFLICHT-CHECK-RUNBOOK.md)."))
+        return out
+    for job in traeger:
+        if job["if"]:
+            out.append(("C18", f"{wf}: Job `{PFLICHT_CHECK_NAME}` trägt eine `if:`-Bedingung – "
+                               f"ein übersprungener Pflicht-Check gilt GitHub als bestanden "
+                               f"(Scheingrün)."))
+        gate_steps = [(n, b) for n, b in job["steps"] if RE_PFLICHT_CHECK_SCHRITT.search(b)]
+        if not gate_steps:
+            out.append(("C18", f"{wf}: Job `{PFLICHT_CHECK_NAME}` ruft `integrity_guard.py "
+                               f"--gate` nicht auf – ein Pflicht-Check ohne Prüfung ist ein "
+                               f"grünes Häkchen ohne Inhalt."))
+        for name, body in gate_steps:
+            if re.search(r"continue-on-error:\s*true", body):
+                out.append(("C18", f"{wf}: Schritt „{name}“ läuft mit `continue-on-error` – "
+                                   f"ein rotes Gate würde grün gemeldet."))
+        if not any(PFLICHT_CHECK_WACHE in b for _n, b in job["steps"]):
+            out.append(("C18", f"{wf}: Job `{PFLICHT_CHECK_NAME}` ruft `{PFLICHT_CHECK_WACHE}` "
+                               f"nicht auf – ob der Branch-Schutz diesen Check wirklich "
+                               f"verlangt, prüft dann niemand (ein Ruleset ohne Ziel-Branch "
+                               f"schützt nichts; Befund vom 19.09.2026)."))
+    if PFLICHT_CHECK_WACHE not in GUARDS:
+        out.append(("C18", f"scripts/{PFLICHT_CHECK_WACHE} steht nicht in GUARDS – ihr "
+                           f"Selbsttest (C6) läuft in keiner Governance-Prüfung."))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -868,6 +1048,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     deploy_yml = _read(os.path.join(root, ".github", "workflows", "deploy.yml"))
     checks += c16_heartbeat(deploy_yml, script_texts)
     checks += c17_pinterest_duplicate_guard(script_texts, wflows, root=root)
+    checks += c18_pflicht_check(wflows)
     return checks
 
 
@@ -921,6 +1102,14 @@ RULE_TEXT = {
            "über alle Artikel hinweg einzigartig sein – der Duplicate-Guard heilt "
            "deterministisch, läuft in Watchdog und Content-Engine und verhindert "
            "Repeat-Pin-Spam (#305).",
+    "C18": "Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt: Der Anzeigename "
+           "des PR-Gates (`Integritäts-Siegel`) ist als Konstante eingefroren und muss "
+           "Workflow und Ruleset gleichermaßen entsprechen; das Gate läuft bei jedem PR "
+           "auf `main` ohne Pfadfilter, ohne `if:` am Job, ohne `continue-on-error` und "
+           "nur mit Leserechten, und die Live-Wache `pflichtcheck_guard.py` prüft im "
+           "Gate selbst, ob der Branch-Schutz den Check wirklich verlangt – ein "
+           "umbenannter Job friert `main` ein, ein Ruleset ohne Ziel-Branch schützt "
+           "nichts (19.09.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -928,7 +1117,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C7": "Datenkonsistenz", "C8": "Commit-Hygiene", "C9": "Secret-Leak-Schutz",
          "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
          "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing",
-         "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag"}
+         "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag",
+         "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check"}
 
 
 def render_md(checks, ok_notes=()):
@@ -1172,8 +1362,10 @@ def _selftest():
     for code in LABEL:
         if code not in RULE_TEXT or len(RULE_TEXT[code]) < 40:
             failures.append(f"{code} ohne richtigen Regeltext")
-    if "C1" not in LABEL or "C13" not in LABEL:
+    if "C1" not in LABEL or "C13" not in LABEL or "C18" not in LABEL:
         failures.append("Regel-Codes nicht vollständig gelabelt")
+    if set(RULE_TEXT) != set(LABEL):
+        failures.append(f"Regeltext und Label decken sich nicht: {sorted(set(RULE_TEXT) ^ set(LABEL))}")
     # C15: Beweisen ist nicht Heilen (Kunst-Skripte, der reale Bestand bleibt unbeteiligt)
     nacktt = 'import sys\nfor a in sys.argv:\n    pass\nopen("x", "w").write("1")\n'
     fund = c15_proof_not_healing({"fix_spaces.py": nacktt},
@@ -1227,12 +1419,80 @@ def _selftest():
         failures.append("C16: fehlender Watchdog bleibt unentdeckt.")
     if "affiliate_integrity_gate.py" not in GUARDS:
         failures.append("C16: Gate-Selbsttest läuft nicht in der Governance (GUARDS).")
+    # --- C18: Pflicht-Check-Vertrag (Kunst-Workflows; der echte steht in den Unittests)
+    wf_pfad = f".github/workflows/{PFLICHT_CHECK_WORKFLOW}"
+    gutes_gate = (
+        "name: Integritäts-Lock (PR-Gate)\n\non:\n  pull_request:\n    branches: [main]\n"
+        "  workflow_dispatch: {}\n\npermissions:\n  contents: read\n\njobs:\n  lock:\n"
+        f"    name: {PFLICHT_CHECK_NAME}\n    runs-on: ubuntu-latest\n    steps:\n"
+        "      - uses: actions/checkout@v4\n"
+        "      - name: Siegel prüfen\n        run: python3 scripts/integrity_guard.py --gate\n"
+        "      - name: Branch-Schutz prüfen\n"
+        f"        run: python3 scripts/{PFLICHT_CHECK_WACHE}\n")
+    if c18_pflicht_check({wf_pfad: gutes_gate}):
+        failures.append(f"C18: sauberes Gate wird beanstandet: {c18_pflicht_check({wf_pfad: gutes_gate})}")
+    if pflichtcheck_name_aus_workflow(gutes_gate) != PFLICHT_CHECK_NAME:
+        failures.append("C18: Anzeigename wird nicht aus der Workflow-Datei gelesen.")
+    if not c18_pflicht_check({}):
+        failures.append("C18: fehlender Gate-Workflow bleibt unentdeckt.")
+    # (a) der Ausgangsbefund: Job ohne Anzeigename meldet sich als Job-ID „lock"
+    ohne_namen = gutes_gate.replace(f"    name: {PFLICHT_CHECK_NAME}\n", "")
+    fund = c18_pflicht_check({wf_pfad: ohne_namen})
+    if not [f for f in fund if "`lock`" in f[1] and PFLICHT_CHECK_NAME in f[1]]:
+        failures.append("C18: Job ohne Anzeigename (meldet sich als `lock`) bleibt unentdeckt.")
+    if pflichtcheck_name_aus_workflow(ohne_namen) != "lock":
+        failures.append("C18: ohne Anzeigename muss die Job-ID als Check-Name gelten.")
+    # (b) Umbenennung ohne Vertrag
+    umbenannt = gutes_gate.replace(PFLICHT_CHECK_NAME, "Siegel-Check")
+    if not [f for f in c18_pflicht_check({wf_pfad: umbenannt}) if "Siegel-Check" in f[1]]:
+        failures.append("C18: umbenannter Pflicht-Check bleibt unentdeckt (main würde einfrieren).")
+    # (c) Pfadfilter – der Workflow startet nicht, GitHub wartet ewig
+    mit_pfaden = gutes_gate.replace("    branches: [main]\n",
+                                    "    branches: [main]\n    paths:\n      - 'scripts/**'\n")
+    if not [f for f in c18_pflicht_check({wf_pfad: mit_pfaden}) if "paths" in f[1]]:
+        failures.append("C18: paths-Filter am Pflicht-Check bleibt unentdeckt.")
+    # (d) falscher Zweig / kein PR-Trigger
+    anderer_zweig = gutes_gate.replace("branches: [main]", "branches: [release]")
+    if not [f for f in c18_pflicht_check({wf_pfad: anderer_zweig}) if "`main`" in f[1]]:
+        failures.append("C18: PR-Trigger ohne main bleibt unentdeckt.")
+    nur_push = gutes_gate.replace("  pull_request:\n    branches: [main]\n",
+                                  "  push:\n    branches: [main]\n")
+    if not [f for f in c18_pflicht_check({wf_pfad: nur_push}) if "pull_request" in f[1]]:
+        failures.append("C18: fehlender pull_request-Trigger bleibt unentdeckt.")
+    # (e) Scheingrün: if am Job, continue-on-error am Gate-Schritt, Gate-Schritt fehlt
+    mit_if = gutes_gate.replace("    runs-on: ubuntu-latest\n",
+                                "    if: github.actor != 'dependabot[bot]'\n    runs-on: ubuntu-latest\n")
+    if not [f for f in c18_pflicht_check({wf_pfad: mit_if}) if "`if:`" in f[1]]:
+        failures.append("C18: if-Bedingung am Pflicht-Check bleibt unentdeckt (Scheingrün).")
+    verschluckt = gutes_gate.replace("      - name: Siegel prüfen\n",
+                                     "      - name: Siegel prüfen\n        continue-on-error: true\n")
+    if not [f for f in c18_pflicht_check({wf_pfad: verschluckt}) if "continue-on-error" in f[1]]:
+        failures.append("C18: continue-on-error am Gate-Schritt bleibt unentdeckt.")
+    ohne_gate = gutes_gate.replace("python3 scripts/integrity_guard.py --gate",
+                                   "python3 scripts/integrity_guard.py --selftest")
+    if not [f for f in c18_pflicht_check({wf_pfad: ohne_gate}) if "--gate" in f[1]]:
+        failures.append("C18: Pflicht-Check ohne Gate-Aufruf bleibt unentdeckt.")
+    # (f) Schreibrechte, fehlende Live-Wache
+    schreibend = gutes_gate.replace("  contents: read\n", "  contents: write\n")
+    if not [f for f in c18_pflicht_check({wf_pfad: schreibend}) if "Schreibrechte" in f[1]]:
+        failures.append("C18: Schreibrechte am Gate bleiben unentdeckt.")
+    ohne_wache = gutes_gate.replace(f"      - name: Branch-Schutz prüfen\n"
+                                    f"        run: python3 scripts/{PFLICHT_CHECK_WACHE}\n", "")
+    if not [f for f in c18_pflicht_check({wf_pfad: ohne_wache}) if PFLICHT_CHECK_WACHE in f[1]]:
+        failures.append("C18: Gate ohne Live-Wache des Branch-Schutzes bleibt unentdeckt.")
+    # Kommentare mit niedrigerer Einrückung dürfen einen Job-Block nicht beenden
+    kommentiert = gutes_gate.replace("    runs-on: ubuntu-latest\n",
+                                     "# Kommentar am linken Rand\n    runs-on: ubuntu-latest\n")
+    if c18_pflicht_check({wf_pfad: kommentiert}):
+        failures.append("C18: Kommentar am linken Rand zerreißt den Job-Block.")
+    if PFLICHT_CHECK_WACHE not in GUARDS:
+        failures.append("C18: Live-Wache steht nicht im vertraglichen Minimum (GUARDS).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C16 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C18 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

@@ -23,6 +23,34 @@
 #      `main` heilt die Engine belegten Drift selbst (erster Schritt in
 #      content-engine-v2.yml, mit ::warning:: und Akte im Lock); kritische
 #      Abweichungen stoppen dort weiter hart und alarmieren.
+#
+# ------------------------------------------------------------
+#  PFLICHT-CHECK-VERTRAG (Nachtrag 19.09.2026, Governance-Regel C18)
+# ------------------------------------------------------------
+#  Ein Gate hält einen Merge nur auf, wenn GitHub es als PFLICHT-CHECK
+#  (required status check) im Branch-Schutz kennt – und zwar unter dem
+#  Namen, den der Job meldet. Dieser Job trug zunächst keinen Anzeigenamen
+#  und hieß darum „lock“ (seine Job-ID); unter diesem Namen landete er in
+#  einem Ruleset, das keinen Ziel-Zweig hatte – ein Häkchen, das nichts
+#  schützte. Seitdem gilt:
+#
+#    · Der Anzeigename `Integritäts-Siegel` ist der Vertrag mit dem Ruleset.
+#      Er steht als Konstante in scripts/governance_contract.py
+#      (PFLICHT_CHECK_NAME); C18 prüft bei jedem Push/PR, dass diese Datei
+#      ihn trägt. UMBENENNEN heißt: Konstante, dieser `name:` und das
+#      Ruleset im selben Atemzug – sonst wartet jeder PR auf einen Check,
+#      der nie berichtet („Expected“), und `main` ist eingefroren.
+#      Reihenfolge und API-Einzeiler: docs/PFLICHT-CHECK-RUNBOOK.md
+#    · Kein `paths`/`paths-ignore` am Trigger: Ein pfadgefilterter
+#      Pflicht-Check startet für PRs ohne Treffer gar nicht – GitHub wartet
+#      dann ewig auf ihn. Kein `if:` am Job, kein `continue-on-error` am
+#      Gate-Schritt: Ein übersprungener oder verschluckter Pflicht-Check
+#      gilt GitHub als BESTANDEN (Scheingrün).
+#    · Der letzte Schritt (scripts/pflichtcheck_guard.py) fragt GitHub, ob
+#      der Ziel-Zweig genau diesen Check verlangt. Nein → rot mit Diagnose
+#      (welches Ruleset, welcher Name, welches Ziel) und Reparatur in
+#      Klicks. API nicht erreichbar → ::warning::, nicht rot: Der Melder
+#      darf nicht selbst zum Vorfall werden.
 # ============================================================
 name: Integritäts-Lock (PR-Gate)
 
@@ -40,6 +68,9 @@ concurrency:
 
 jobs:
   lock:
+    # Anzeigename = Check-Name im Ruleset = governance_contract.PFLICHT_CHECK_NAME.
+    # Nicht ohne Runbook ändern (docs/PFLICHT-CHECK-RUNBOOK.md).
+    name: Integritäts-Siegel
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -57,3 +88,12 @@ jobs:
 
       - name: Kern-Beweis des Guards (schreibt nie)
         run: python3 scripts/integrity_guard.py --selftest
+
+      # Wächter des Wächters: Verlangt der Branch-Schutz des Ziel-Zweigs
+      # (GITHUB_BASE_REF) genau den Check, der hier gerade läuft? Liest den
+      # Namen aus DIESER Datei, fragt nur lesend (github.token, Metadata-Recht
+      # genügt) und nennt bei Rot Ruleset, Ziel und Reparatur.
+      - name: Pflicht-Check-Vertrag prüfen (verlangt der Branch-Schutz dieses Siegel?)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/pflichtcheck_guard.py
