@@ -35,7 +35,7 @@ mit Diagnose (welches Ruleset, welcher Name, welches Ziel) und der Reparatur
 in Klicks, nicht nur einem roten Kreuz.
 
 Regeln:
-  · read-only: eine GET-Anfrage, keine Secrets außer dem Lese-Token des Laufs,
+  · read-only: nur GET-Anfragen, keine Secrets außer dem Lese-Token des Laufs,
     kein Schreibzugriff (C15).
   · fail-closed für den VERTRAG (Name fehlt / falsche Quelle / kein Schutz →
     Exit 1), aber nicht für das NETZ: Ist die API nicht erreichbar, meldet die
@@ -69,16 +69,22 @@ gh-pages“ wurde übersprungen, die Seite blieb vier Stunden alt.
 Der Vertrag war also erfüllt, nur um den Preis der direkten Pushes. Deshalb
 prüft die Wache im GRÜNEN Fall zusätzlich nach (best effort, ändert nie das
 Urteil): Verlangt ein aktives Ruleset einen Pflicht-Check auf dem Ziel-Zweig,
-ohne dass irgendjemand vorbeikommt, UND committen Workflows selbst auf diesen
+ohne Actions-Integration 15368 im Modus always, UND committen Workflows selbst auf diesen
 Zweig? Dann ::warning:: mit Reparatur-Anleitung statt stiller Schein-Sicherheit.
 Ein Admin-Eingriff bleibt Menschen vorbehalten (C15/Runbook) – die Wache meldet,
 sie repariert nicht.
+
+Betriebswache: --automation misst unabhängig vom PR-Vertrag auf main den letzten
+Bot-Commit gegen abgeschlossene Cron-Läufe schreibender Workflows. >24 h Stille
+mit Cron-Evidenz wird als ROT-Finding ans Governance-Gate geliefert. API-Lücken
+sind INFO, keine erfundene Blockade. --report schreibt nur bei explizitem Auftrag.
 
 Runbook: docs/PFLICHT-CHECK-RUNBOOK.md
 """
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import fnmatch
 import json
 import os
@@ -87,6 +93,7 @@ import subprocess
 import sys
 import urllib.error
 import urllib.request
+import urllib.parse
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -104,6 +111,7 @@ VERLANGT = "VERLANGT"                # Ziel-Zweig verlangt genau diesen Check
 FEHLT = "FEHLT"                      # es gibt Pflicht-Checks, aber nicht diesen
 FALSCHE_QUELLE = "FALSCHE_QUELLE"    # Name stimmt, aber andere App verlangt
 UNGESCHUETZT = "UNGESCHUETZT"        # kein Pflicht-Check auf dem Ziel-Zweig
+PR_SCOPING_FEHLT = "PR_SCOPING_FEHLT"  # PR-Pflicht mit 0 Approvals fehlt
 NICHT_PRUEFBAR = "NICHT_PRUEFBAR"    # API/Antwort unbrauchbar – kein Urteil
 
 
@@ -136,7 +144,7 @@ def verlangte_checks(regeln) -> list[dict] | None:
 
 
 def beurteilen(regeln, erwartet: str, job_id: str = "",
-               app_id: int = GITHUB_ACTIONS_APP_ID) -> dict:
+               app_id: int = GITHUB_ACTIONS_APP_ID, pr_pflicht: bool = False) -> dict:
     """Urteil über die Regeln eines Zweigs: verlangt er den Check `erwartet`?
 
     `job_id` ist der Name, unter dem sich der Job OHNE Anzeigenamen melden
@@ -149,6 +157,12 @@ def beurteilen(regeln, erwartet: str, job_id: str = "",
                 "grund": "Antwort der Regel-API hat nicht die erwartete Form."}
     treffer = [c for c in checks if c["context"] == erwartet]
     if any(c["integration_id"] in (None, app_id) for c in treffer):
+        if pr_pflicht and not any(r.get("type") == "pull_request" and
+                                  (r.get("parameters") or {}).get("required_approving_review_count") == 0
+                                  for r in regeln):
+            return {"urteil": PR_SCOPING_FEHLT, "checks": checks,
+                    "grund": "PR-Scoping fehlt: pull_request-Regel mit 0 Approvals erforderlich. "
+                             "Der Actions-Bypass muss Integration 15368 / always sein (Runbook)."}
         return {"urteil": VERLANGT, "checks": checks, "grund": ""}
     if treffer:
         quellen = ", ".join(str(c["integration_id"]) for c in treffer)
@@ -171,11 +185,10 @@ def beurteilen(regeln, erwartet: str, job_id: str = "",
                      f"niemand.{hinweis}"}
 
 
-def zielt_auf(rs: dict, branch: str) -> bool:
+def zielt_auf(rs: dict, branch: str, default_branch: str = "main") -> bool:
     """Trifft das Ruleset den Zweig? Treffer sind `~DEFAULT_BRANCH`/`~ALL`,
     `refs/heads/<branch>`, `<branch>` und Platzhalter-Muster; `exclude` sticht.
-    (Die Wache prüft praktisch immer den Default-Zweig, deshalb zählt
-    `~DEFAULT_BRANCH` hier als Treffer für `branch`.)"""
+    `~DEFAULT_BRANCH` trifft nur den tatsächlichen Default-Zweig."""
     bed = (rs.get("conditions") or {}).get("ref_name") or {}
     inc, exc = bed.get("include") or [], bed.get("exclude") or []
 
@@ -183,31 +196,47 @@ def zielt_auf(rs: dict, branch: str) -> bool:
         m = str(muster or "")
         if not m:
             return False
-        if m in ("~DEFAULT_BRANCH", "~ALL", branch, f"refs/heads/{branch}"):
+        if m == "~DEFAULT_BRANCH":
+            return branch == default_branch
+        if m in ("~ALL", branch, f"refs/heads/{branch}"):
             return True
         return fnmatch.fnmatch(branch, m.removeprefix("refs/heads/"))
 
     return any(trifft(m) for m in inc) and not any(trifft(m) for m in exc)
 
 
-def blockiert_direkte_pushes(details: list[dict], branch: str = "main") -> list[dict]:
-    """Regelwerke, die `branch` einen Pflicht-Status-Check abverlangen und KEINEN
-    Bypass-Akteur haben (`bypass_actors: null` oder `[]`).
+def actions_bypass(rs: dict) -> bool:
+    """Nur die Actions-Integration mit Always erlaubt direkte GITHUB_TOKEN-Pushes.
 
-    Warum das ein Befund ist: Ein `required status check` gilt für JEDEN Push.
-    Entsteht der verlangte Check aber nur in Pull Requests, kann ein direkter
-    Push ihn nie erfüllen – er wird abgelehnt, und jede Automation, die selbst
-    auf den Zweig committet (Deploy-Heilungen, Content-Engine, Social-Autopilot),
-    steht. Siehe Vorfall 19.09.2026 im Kopf dieser Datei."""
+    Eine menschliche Rolle, fremde App oder pull_request-Bypass genügt NICHT.
+    Der Bypass gilt für das ganze Ruleset, nicht nur für dessen PR-Regel.
+    """
+    return any(isinstance(a, dict) and a.get("actor_id") == GITHUB_ACTIONS_APP_ID
+               and a.get("actor_type") == "Integration" and a.get("bypass_mode") == "always"
+               for a in rs.get("bypass_actors") or [])
+
+
+def blockiert_direkte_pushes(details: list[dict], branch: str = "main") -> list[dict]:
+    """PR-/Check-Regeln auf dem Ziel ohne wirksamen Actions-Bypass.
+
+    PR-Scoping bedeutet PR-Pflicht für Menschen, NICHT dass Status-Checks nur
+    bei PRs gelten. Jede zusätzliche aktive Regel muss separat passiert werden.
+    """
     treffer = []
     for rs in details or []:
-        if not isinstance(rs, dict) or str(rs.get("enforcement", "")).lower() != "active":
+        if (not isinstance(rs, dict) or rs.get("enforcement") != "active"
+                or rs.get("target", "branch") != "branch"):
+            continue
+        # GitHub kann bypass_actors bei fehlender Ruleset-Sichtbarkeit weglassen.
+        # Fehlendes Feld ist unbekannt, nicht dasselbe wie explizit null/[]!
+        if "bypass_actors" not in rs:
             continue
         checks = verlangte_checks(rs.get("rules") or []) or []
-        if not checks or not zielt_auf(rs, branch) or rs.get("bypass_actors"):
+        pr = any(r.get("type") == "pull_request" for r in rs.get("rules") or [])
+        if not (checks or pr) or not zielt_auf(rs, branch) or actions_bypass(rs):
             continue
         treffer.append({"id": rs.get("id"), "name": rs.get("name", "?"),
-                        "checks": [c["context"] for c in checks]})
+                        "checks": [c["context"] for c in checks], "pull_request": pr})
     return treffer
 
 
@@ -255,12 +284,14 @@ def reparatur(erwartet: str, checks: list[dict], ruleset_name: str = "") -> list
     alt = sorted({c["context"] for c in checks if c["context"] != erwartet})
     tausch = (f"`{'`, `'.join(alt)}` entfernen, " if alt else "")
     return [
-        f"Fix (Admin, drei Klicks): Settings → Rules → Rulesets → {rs}",
+        f"Fix (Admin): Settings → Rules → Rulesets → {rs}",
         "  · Target branches → Add target → „Include default branch“",
         f"  · Require status checks to pass → {tausch}`{erwartet}` hinzufügen "
         f"(Quelle: GitHub Actions)",
-        "  · Save changes → diesen Job erneut ausführen (Re-run) → grün.",
-        f"Runbook mit API-Einzeiler und Reihenfolge beim Umbenennen: {RUNBOOK}",
+        "  · Require a pull request before merging → 0 Approvals; Bypass: GitHub Actions "
+        "(Integration 15368), Always allow – keine menschlichen Rollen.",
+        "  · Enforcement Active → Save changes → diesen Job erneut ausführen (Re-run).",
+        f"Runbook mit Admin-Request und Reihenfolge beim Umbenennen: {RUNBOOK}",
     ]
 
 
@@ -335,19 +366,25 @@ def bypass_pruefung(repo: str, token: str, branch: str, rules_file: str = "") ->
             if isinstance(d, dict) and not f2:
                 details.append(d)
     blocker = blockiert_direkte_pushes(details, branch)
+    unbekannt = [f"⚠️  Actions-Bypass für Ruleset #{rs.get('id', '?')} nicht prüfbar: "
+                 "API liefert bypass_actors nicht; Frank muss die Admin-Ansicht prüfen."
+                 for rs in details if rs.get("enforcement") == "active"
+                 and zielt_auf(rs, branch) and "bypass_actors" not in rs
+                 and any(r.get("type") in ("required_status_checks", "pull_request")
+                         for r in rs.get("rules") or [])]
     if not blocker:
-        return []
+        return unbekannt
     workflows = workflows_laden()
     pusher = direkt_pusher(workflows)
     if not pusher:
-        return []   # niemand pusht direkt – dann bindet der Check nur PRs (gewollt)
-    zeilen = []
+        return unbekannt   # niemand pusht direkt – dann bindet der Check nur PRs (gewollt)
+    zeilen = list(unbekannt)
     for b in blocker:
         pfad = gc.PFLICHT_CHECK_WORKFLOW
         nur_pr = workflow_nur_pull_request(workflows.get(os.path.basename(pfad), ""))
-        checks = ", ".join(f"`{c}`" for c in b["checks"])
+        checks = ", ".join(f"`{c}`" for c in b["checks"]) or "Pull Request"
         zeilen.append(f"⚠️  Schein-Sicherheit: Ruleset „{b['name']}“ (#{b['id']}) verlangt "
-                      f"{checks} auf `{branch}`, hat aber KEINEN Bypass-Akteur.")
+                      f"{checks} auf `{branch}`, hat aber KEINEN Bypass-Akteur für GitHub Actions (Integration 15368, always).")
         zeilen.append("Pflicht-Checks gelten auch für DIREKTE Pushes"
                       + (f" – {checks} entsteht jedoch nur in Pull Requests "
                          f"(Trigger in {pfad}: pull_request, kein push)." if nur_pr
@@ -357,13 +394,152 @@ def bypass_pruefung(repo: str, token: str, branch: str, rules_file: str = "") ->
         zeilen.append(f"Betroffene Automation ({len(pusher)} Workflows committen selbst auf "
                       f"`{branch}`): {gezeigt}.")
         zeilen.append("Folge: Push abgelehnt → git_sync.sh bricht sofort mit Klasse „schutz“ ab "
-                      "→ Folge-Schritte (z. B. „Deploy auf gh-pages“) werden übersprungen.")
+                      "→ State wird nicht persistiert; Deploy veröffentlicht trotzdem nach seinen Inhalts-Gates.")
         zeilen.append("Reparatur (Admin, Menschen vorbehalten): Bypass-Akteur für die Automation "
                       "ODER Ruleset-Schichtung – Lösch-/Force-Push-Schutz ohne Bypass, "
-                      "Pflicht-Check mit Bypass (Rolle „Write“, Modus „Always“).")
-        zeilen.append(f"Anleitung + API-Einzeiler: {RUNBOOK}, Abschnitt "
+                      "PR-/Pflicht-Check mit Bypass (Integration 15368, Modus „always“).")
+        zeilen.append(f"Anleitung + Admin-Request: {RUNBOOK}, Abschnitt "
                       "„Direkte Pushes und Automation“.")
     return zeilen
+
+
+# --------------------------------------------------------------------------- #
+#  Automation: Betriebssignal, getrennt vom PR-Merge-Vertrag
+# --------------------------------------------------------------------------- #
+def zeitpunkt(value: str) -> dt.datetime:
+    stamp = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if stamp.tzinfo is None:
+        raise ValueError("Zeitstempel ohne Zeitzone")
+    return stamp
+
+
+def bot_emails(workflows: dict[str, str]) -> set[str]:
+    """Explizite lokale Automation-Identitäten, keine Heuristik auf 'bot' im Namen."""
+    emails = {"41898282+github-actions[bot]@users.noreply.github.com",
+              "github-actions[bot]@users.noreply.github.com"}
+    for name in direkt_pusher(workflows):
+        emails.update(re.findall(r'git config user\.email [\'\"]([^\'\"\s$]+)[\'\"]', workflows[name]))
+    return emails
+
+
+def bot_zeitpunkte(commits: list[dict], emails: set[str]) -> list[dt.datetime]:
+    result = []
+    for c in commits:
+        # commit.committer.date misst den Stand auf dem Branch, nicht das u.U.
+        # Wochen alte Autorendatum. API-Identität ODER explizite Workflow-Mail.
+        details = c["commit"]
+        bot = any((c.get(role) or {}).get("type") == "Bot"
+                  or (c.get(role) or {}).get("login") == "github-actions[bot]"
+                  or (details.get(role) or {}).get("email") in emails
+                  for role in ("author", "committer"))
+        if bot:
+            result.append(zeitpunkt(details["committer"]["date"]))
+    return result
+
+
+def automation_befund(last_bot: dt.datetime | None, runs: list[dict],
+                       pusher: list[str], now: dt.datetime) -> dict:
+    """ROT genau bei >24h Bot-Stille und abgeschlossenem Writer-Cron in 24h.
+
+    Kein kausaler Beweis: auch No-op-Läufe können keine Commits erzeugen.
+    Deshalb nennt die Meldung die Evidenz und fordert die Push-Logs zur Prüfung.
+    Keine/kaputte Messung wird INFO, niemals ein erfundenes Grün oder Rot.
+    """
+    def info(msg):
+        return {"level": "info", "code": "probe_skipped", "message": msg}
+    if last_bot is None:
+        return info("Kein letzter Bot-Commit nachweisbar – Automation nicht prüfbar.")
+    age = (now - last_bot).total_seconds() / 3600
+    if age < 0:
+        return info("Bot-Commit liegt in der Zukunft – Automation nicht prüfbar.")
+    cron = []
+    for r in runs:
+        if (r.get("event") != "schedule" or r.get("head_branch") != "main"
+                or r.get("status") != "completed"
+                or r.get("path", "").removeprefix(".github/workflows/") not in pusher):
+            continue
+        started = zeitpunkt(r.get("run_started_at") or r["created_at"])
+        if now - dt.timedelta(hours=24) <= started <= now and started > last_bot:
+            cron.append(r)
+    if age > 24 and cron:
+        return {"level": "red", "code": "automation_blocked",
+                "message": "Automation durch Branch-Schutz blockiert: "
+                           f"letzter Bot-Commit auf main {last_bot.isoformat()} ({age:.1f} h); "
+                           f"{len(cron)} abgeschlossene Writer-Cron-Läufe in 24 h "
+                           f"(z. B. Run {cron[0]['id']}). "
+                           "Verdacht: Push-Logs/Bypass prüfen, auch No-op möglich. " + RUNBOOK}
+    if age > 24:
+        return info(f"Bot-Commit {age:.1f} h alt, aber kein abgeschlossener Writer-Cron "
+                    "in den letzten 24 h nachgewiesen – kein Blockade-Befund.")
+    return {"level": "green", "code": "ok",
+            "message": f"Letzter Bot-Commit auf main {age:.1f} h alt (höchstens 24 h)."}
+
+
+def automation_messen(repo: str, token: str, now: dt.datetime | None = None) -> dict:
+    """Nur GET, main fest (nie PR-Head). Pagination begrenzt; Lücken sind INFO."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    try:
+        if not repo:
+            raise ValueError("Repository unbekannt")
+        workflows = workflows_laden()
+        pusher, emails = direkt_pusher(workflows), bot_emails(workflows)
+        last_bot = None
+        for page in range(1, 11):
+            commits, err = api_get(f"/repos/{repo}/commits?sha=main&per_page=100&page={page}", token)
+            if err or not isinstance(commits, list):
+                raise ValueError(err or "unbrauchbare Commit-Antwort")
+            times = bot_zeitpunkte(commits, emails)
+            if times:
+                last_bot = max(times)
+                break
+            if len(commits) < 100:
+                break
+        if last_bot is None:
+            return automation_befund(None, [], pusher, now)
+        if now - last_bot <= dt.timedelta(hours=24):
+            return automation_befund(last_bot, [], pusher, now)
+        # GitHub begrenzt gefilterte Run-Abfragen auf 1000 Treffer. Falls diese
+        # Grenze erreicht wird, urteilen wir nur bei tatsächlich belegtem Cron.
+        since = (now - dt.timedelta(hours=24)).isoformat(timespec="seconds")
+        query = urllib.parse.urlencode({"event": "schedule", "branch": "main",
+                                        "created": ">=" + since, "per_page": 100})
+        for page in range(1, 11):
+            payload, err = api_get(f"/repos/{repo}/actions/runs?{query}&page={page}", token)
+            if err or not isinstance(payload, dict) or not isinstance(payload.get("workflow_runs"), list):
+                raise ValueError(err or "unbrauchbare Run-Antwort")
+            runs = payload["workflow_runs"]
+            verdict = automation_befund(last_bot, runs, pusher, now)
+            if verdict["level"] == "red" or len(runs) < 100:
+                return verdict
+        return {"level": "info", "code": "probe_skipped",
+                "message": "Run-Pagination ausgeschöpft – Automation nicht vollständig prüfbar."}
+    except (ValueError, KeyError, TypeError, AttributeError) as exc:
+        return {"level": "info", "code": "probe_skipped",
+                "message": f"Automation nicht prüfbar: {exc}"}
+
+
+def automation_report(befund: dict) -> str:
+    # Bestehendes Governance-Befundformat, INFO als nicht-handlungsbedürftiges
+    # AMBER/probe_skipped. Exit-Code allein erzeugt ausdrücklich keinen Alarm.
+    level = {"red": "RED", "info": "AMBER", "green": "GREEN"}[befund["level"]]
+    msg = befund["message"].replace("|", "/").replace("\n", " ")
+    return (f"# Automations-Wache (main)\n\nAmpel: **{level}**\n\n"
+            "| Level | Code | Meldung |\n|---|---|---|\n"
+            f"| {level} | {befund['code']} | {msg} |\n")
+
+
+def automation_probe(repo: str = "", report: str = "") -> int:
+    befund = automation_messen(repo or repo_aus_umgebung(),
+                              os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or "")
+    text = automation_report(befund)
+    print(text)
+    if report:
+        with open(report, "w", encoding="utf-8") as fh:
+            fh.write(text)
+    step_summary([text])
+    if befund["level"] != "green":
+        annotate("error" if befund["level"] == "red" else "warning", befund["message"])
+    return 1 if befund["level"] == "red" else 0
 
 
 def erwarteter_check() -> tuple[str, str, str]:
@@ -442,7 +618,7 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
         step_summary([f"### ⚠️ Pflicht-Check `{erwartet}`: nicht prüfbar", "", fehler])
         return 0
 
-    urteil = beurteilen(regeln, erwartet, job_id=job_id)
+    urteil = beurteilen(regeln, erwartet, job_id=job_id, pr_pflicht=True)
     verlangt = ", ".join(f"`{c['context']}`" for c in urteil["checks"]) or "– (kein Status-Check)"
     print(f"   verlangt auf `{branch}`: {verlangt}")
     if urteil["urteil"] == NICHT_PRUEFBAR:
@@ -462,9 +638,8 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
         for z in zusatz:
             print(z if z.startswith("⚠️") else f"   {z}")
         if zusatz:
-            annotate("warning", f"Pflicht-Check `{erwartet}` ohne Bypass-Akteur: direkte Pushes "
-                                f"auf `{branch}` werden abgelehnt – Automation steht. "
-                                f"Reparatur: {RUNBOOK}")
+            annotate("warning", f"Actions-Bypass-Nachprüfung für `{branch}`: "
+                                f"{zusatz[0]} Diagnose/Reparatur: {RUNBOOK}")
         step_summary([f"### ✅ Pflicht-Check `{erwartet}` wird auf `{branch}` verlangt", "",
                       f"Ruleset: {', '.join('#' + i for i in ids) or '–'}"]
                      + (["", *[z.strip() for z in zusatz]] if zusatz else []))
@@ -600,7 +775,7 @@ def selftest() -> int:
     if len(blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"], bypass=[])], "main")) != 1:
         f.append("Fall11b: leere Bypass-Liste muss wie „niemand darf vorbei“ gelten.")
     if blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"],
-                                     bypass=[{"actor_id": 5, "actor_type": "RepositoryRole",
+                                     bypass=[{"actor_id": 15368, "actor_type": "Integration",
                                               "bypass_mode": "always"}])], "main"):
         f.append("Fall11c: Ruleset MIT Bypass-Akteur darf nicht gemeldet werden.")
     if blockiert_direkte_pushes([_rs(["~DEFAULT_BRANCH"], enf="disabled")], "main"):
@@ -630,12 +805,40 @@ def selftest() -> int:
     if workflow_nur_pull_request("on:\n  workflow_dispatch:\njobs:\n  x:\n"):
         f.append("Fall13c: Workflow ohne pull_request darf nicht als PR-only gelten.")
 
+    if beurteilen([_regel((name, 15368))], name, pr_pflicht=True)["urteil"] != PR_SCOPING_FEHLT:
+        f.append("Fall14: Check allein ist kein PR-Scoping.")
+    scoped = [_regel((name, 15368)), {"type": "pull_request", "parameters": {"required_approving_review_count": 0}}]
+    if beurteilen(scoped, name, pr_pflicht=True)["urteil"] != VERLANGT:
+        f.append("Fall14: PR-Pflicht mit 0 Approvals wird nicht erkannt.")
+    # 14) PR-Scoping: nur Actions/always reicht; PR-Pflicht ist selbst ein Blocker.
+    for actor in ({"actor_id": 5, "actor_type": "RepositoryRole", "bypass_mode": "always"},
+                  {"actor_id": 15368, "actor_type": "Integration", "bypass_mode": "pull_request"},
+                  {"actor_id": 99, "actor_type": "Integration", "bypass_mode": "always"}):
+        if not blockiert_direkte_pushes([_rs(["main"], bypass=[actor], rules=[{"type": "pull_request"}])]):
+            f.append("Fall14: PR-Regel ohne Actions/always muss direkte Pushes blockieren.")
+    if zielt_auf(_rs(["~DEFAULT_BRANCH"]), "feature"):
+        f.append("Fall14b: Default-Branch-Regel trifft fälschlich einen PR-Head.")
+    # 15) Uhrfester Betriebsnachweis, kein Netz/keine Dateiänderung.
+    now = dt.datetime(2026, 9, 19, 12, tzinfo=dt.timezone.utc)
+    run = {"id": 7, "event": "schedule", "head_branch": "main", "status": "completed",
+           "path": ".github/workflows/engine.yml", "created_at": "2026-09-19T11:00:00Z"}
+    for age, runs, expected in ((25, [run], "red"), (24, [run], "green"),
+                                (23, [run], "green"), (25, [], "info")):
+        got = automation_befund(now - dt.timedelta(hours=age), runs, ["engine.yml"], now)
+        if got["level"] != expected:
+            f.append(f"Fall15: Bot-Stille {age}h/{len(runs)} Cron: {got}")
+    import governance_gate as gate
+    red = automation_befund(now - dt.timedelta(hours=25), [run], ["engine.yml"], now)
+    classified = gate.classify("automation", automation_report(red))
+    if gate.decide_policy({"automation": classified})[:2] != ("RED", "report"):
+        f.append("Fall15b: Automations-Stillstand wird im Governance-Gate nicht ROT.")
+
     if f:
         print("❌ PFLICHTCHECK-SELBSTTEST FEHLGESCHLAGEN:")
         for z in f:
             print("   -", z)
         return 2
-    print(f"✅ Pflichtcheck-Selbsttest bestanden (13 Fälle: Urteile, Diagnose, Reparatur, "
+    print(f"✅ Pflichtcheck-Selbsttest bestanden (15 Fallgruppen: Urteile, Diagnose, Reparatur, "
           f"Namensquelle, Ziel-Treffer, Bypass-Lücke, Direkt-Pusher, Trigger-Lage – "
           f"erwartet `{gc.PFLICHT_CHECK_NAME}`).")
     return 0
@@ -643,6 +846,8 @@ def selftest() -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Verlangt der Branch-Schutz den Check, der hier läuft?")
+    ap.add_argument("--automation", action="store_true", help="Bot-Stille auf main gegen Writer-Crons prüfen")
+    ap.add_argument("--report", default="", help="Automation: Governance-Befunddatei schreiben")
     ap.add_argument("--selftest", action="store_true", help="Logik-Beweis ohne Netz (schreibt nie)")
     ap.add_argument("--branch", default="", help="Ziel-Zweig (Standard: GITHUB_BASE_REF, sonst main)")
     ap.add_argument("--repo", default="", help="owner/repo (Standard: GITHUB_REPOSITORY, sonst origin)")
@@ -650,6 +855,12 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     if args.selftest:
         return selftest()
+    if args.automation:
+        if args.rules_file or args.branch not in ("", "main"):
+            ap.error("--automation misst nur main live (kein --rules-file)")
+        return automation_probe(repo=args.repo, report=args.report)
+    if args.report:
+        ap.error("--report verlangt --automation")
     return probe(branch=args.branch, repo=args.repo, rules_file=args.rules_file)
 
 

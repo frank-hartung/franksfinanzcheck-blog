@@ -41,6 +41,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: read  # Cron-Nachweis für die Automations-Wache
 
 concurrency:
   group: premium-governance
@@ -67,7 +68,7 @@ jobs:
         run: |
           fail=0
           for s in editorial_scorecard cwv_guard secrets_age_guard decay_radar \
-                   governance_gate governance_contract readability_check \
+                   governance_gate governance_contract pflichtcheck_guard readability_check \
                    umami_clicks click_attribution awin_provisions \
                    umami_views awin_fetch revenue_funnel click_chain_guard \
                    pinterest_perf_feedback pinterest_token pinterest_auth; do
@@ -96,6 +97,17 @@ jobs:
 
       - name: Ledger zurücksetzen (nur dieser Lauf zählt)
         run: python3 scripts/governance_gate.py --reset
+
+      - name: Automation durch Branch-Schutz blockiert? (Bot-Commits gegen Cron)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          rc=0
+          python3 scripts/pflichtcheck_guard.py --automation --report /tmp/automation-report.md \
+            > /tmp/automation.log 2>&1 || rc=$?
+          cat /tmp/automation.log
+          python3 scripts/governance_gate.py --emit automation --report /tmp/automation-report.md \
+            --log /tmp/automation.log --exit "$rc" --producer pflichtcheck_guard
 
       - name: Hugo installieren (Messgrundlage Core-Web-Vitals)
         uses: ./.github/actions/install-hugo

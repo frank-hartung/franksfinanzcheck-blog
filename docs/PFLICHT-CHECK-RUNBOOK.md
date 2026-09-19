@@ -1,319 +1,270 @@
-# Runbook: Pflicht-Check `Integritäts-Siegel` (Branch-Schutz für `main`)
+# Runbook: Pflicht-Check `Integritäts-Siegel` (PR-Schutz für `main`)
 
-**Stand:** 19.09.2026 · **Vertrag:** Governance-Regel **C18** (`scripts/governance_contract.py`)
-· **Live-Wache:** `scripts/pflichtcheck_guard.py` (letzter Schritt in
-`.github/workflows/integrity-lock.yml`) · **Anlass:** Nachtrag zu
-[Vorfall 19.09.2026](INCIDENT-2026-09-19-integritaets-lock.md) / PR #317
+**Stand:** 19.09.2026 · **Vertrag:** Governance-Regel **C18**
+(`scripts/governance_contract.py`) · **Wache:** `scripts/pflichtcheck_guard.py`
+· **Anlass:** [Integritäts-Vorfall](INCIDENT-2026-09-19-integritaets-lock.md),
+PR #317 und Deploy-Ausfall #320 / PR #321.
 
-## Worum es geht – in drei Sätzen
+## Aktueller Befund – vor jeder Admin-Reparatur neu prüfen
 
-Das PR-Gate `Integritäts-Lock (PR-Gate)` prüft bei jedem Pull Request auf `main`,
-ob der signierte Kern zum Baum passt. Einen Merge **aufhalten** kann es nur, wenn
-GitHub es als **Pflicht-Check** (required status check) kennt – unter genau dem
-Namen, den der Job meldet: **`Integritäts-Siegel`**. Dieser Name ist deshalb ein
-Vertrag zwischen zwei Orten, die einander nicht sehen: der Workflow-Datei und dem
-Ruleset des Repositories.
+Bei der read-only Abfrage am 19.09.2026:
 
-## Der Vertrag (was wo stehen muss)
+* Die ursprünglich beauftragte ID **#23695872** antwortet mit **HTTP 404**.
+  Damit kann sie mit diesem Zugang nicht reaktiviert oder verifiziert werden.
+  404 allein beweist keine Löschung (auch fehlende Sichtbarkeit ist möglich).
+* Die Ruleset-Liste nennt stattdessen **#23710849**, ebenfalls
+  **„Integritäts-Lock (PR-Gate)“**, Active, Default Branch, derzeit **nur**
+  `deletion` + `non_fast_forward`.
+* Das zusätzliche Ruleset **#23705980**, „main – Unveränderlichkeit (ohne Bypass)“,
+  ist aktiv. Die effektive Antwort `/rules/branches/main` enthält ausschließlich
+  Lösch-/Force-Push-Schutz, **keinen Pflicht-Check und keine PR-Pflicht**.
+* Keine Admin-Änderung durch Arena: Der Token hat kein `administration:write`.
+  Der folgende Zielzustand ist vorbereitet, **nicht live angewendet**.
 
-| Ort | Eintrag | Wer prüft |
+**Frank muss die ID im angemeldeten Browser bestätigen.** Wenn #23695872 dort
+noch existiert, genau diese reparieren; sonst das gleichnamige #23710849.
+Nicht blind einen PUT auf eine alte ID senden und nicht still eine weitere
+Kopie anlegen. Name allein identifiziert kein Ruleset.
+
+## Der Zielvertrag (PR-Scoping, aber Automation bleibt schreibfähig)
+
+| Ort | Eintrag | Prüfung |
 |---|---|---|
-| `scripts/governance_contract.py` | `PFLICHT_CHECK_NAME = "Integritäts-Siegel"` | – (die Konstante ist die Quelle) |
-| `.github/workflows/integrity-lock.yml` | `jobs.lock.name: Integritäts-Siegel`, PR-Trigger auf `main`, **kein** `paths`/`paths-ignore`, **kein** `if:` am Job, **kein** `continue-on-error` am Gate-Schritt, nur `contents: read`, letzter Schritt `pflichtcheck_guard.py` | **C18** im Qualitäts-Gate (jeder Push/PR) |
-| Ruleset (Settings → Rules → Rulesets) | Enforcement **Active**, Target **Include default branch**, Required status check **`Integritäts-Siegel`** (Quelle GitHub Actions, App-ID 15368) | **Live-Wache** im Gate-Lauf jedes PR |
+| `scripts/governance_contract.py` | `PFLICHT_CHECK_NAME = "Integritäts-Siegel"` | Quelle des Namens |
+| `.github/workflows/integrity-lock.yml` | `jobs.lock.name: Integritäts-Siegel`, `pull_request` auf `main`, keine Pfadfilter, kein Job-`if`, kein Gate-`continue-on-error`, `contents: read`, letzte Stufe `pflichtcheck_guard.py` | C18, jedes Qualitäts-Gate |
+| Integritäts-Ruleset | Active, `~DEFAULT_BRANCH`, `deletion`, `non_fast_forward`, Check `Integritäts-Siegel` / App **15368**, `pull_request` mit **0 Approvals** | Live-Wache prüft Pflicht-Check und PR-Scoping |
+| Bypass desselben Rulesets | **nur** `[{"actor_id":15368,"actor_type":"Integration","bypass_mode":"always"}]` | Nachprüfung: fehlender Actions-Bypass wird gewarnt |
+| Governance | letzter Bot-Commit auf `main` **>24 h**, obwohl Writer-Crons liefen | ROT-Finding `automation_blocked` |
 
-Warum jede Zeile: Ein umbenannter Job lässt jeden PR auf einen Check warten, der
-nie berichtet („Expected“) – `main` ist eingefroren. Ein Pfadfilter tut dasselbe,
-nur seltener. Ein `if:` am Job oder `continue-on-error` am Gate-Schritt macht aus
-Rot ein Grün, denn ein übersprungener Pflicht-Check gilt GitHub als bestanden.
-Ein Ruleset ohne Ziel-Zweig, deaktiviert oder mit altem Namen schützt nichts –
-das Gate läuft dann, entscheidet aber nichts.
+**PR-Scoping ist kein API-Schalter für „Status-Checks gelten nur in PRs“.**
+Pflicht-Checks gelten auch für direkte Pushes. Die `pull_request`-Regel bindet
+Menschen an einen PR; **0 Approvals** erlaubt das Ein-Personen-Repository, ohne
+den Pflicht-Check abzuschalten. Nur der **Actions-Integration-Bypass `always`**
+lässt die State-Commits der 31 direkt schreibenden Workflows durch.
+`pull_request` als Bypass-Modus reicht für diese direkten Pushes **nicht**.
 
-## Zustand prüfen (read-only, jeder darf das)
+Keine `RepositoryRole: Write`-/Admin-Bypässe als Ersatz: Sie erweitern den
+menschlichen Zugang und sind kein Nachweis des verlangten Actions-Bypasses.
+Die frühere Rollen-Empfehlung aus PR #321 ist hiermit ersetzt.
 
-```bash
-# Was verlangt main wirklich? (nur AKTIVE Rulesets, Ziel-Bedingungen aufgelöst)
-gh api repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main
+**Wichtig:** Ein Bypass gilt für das **gesamte** Ruleset, also auch dessen
+Lösch-/Force-Push-Regeln und botinitiierte PR-Merges. Ein zusätzliches aktives
+Ruleset „main – Unveränderlichkeit (ohne Bypass)“ mit ausschließlich `deletion`
+und `non_fast_forward` beibehalten: Dann bleiben auch Bots daran gebunden.
+Nicht deaktivieren. Ein weiteres Ruleset mit PR-/Status-Pflichten ohne passenden
+Actions-Bypass kann trotz korrektem Integritäts-Ruleset weiterhin blockieren.
 
-# Dasselbe als Urteil mit Diagnose und Reparatur (Exit 0 = Vertrag erfüllt)
-python3 scripts/pflichtcheck_guard.py
+## Reparatur für Frank – ohne Terminal
 
-# Der statische Teil des Vertrags (Workflow-Datei = Konstante)
-python3 scripts/governance_contract.py --quick
+### Unterstützter GitHub-Klickweg
+
+1. [Repository → Settings → Rules → Rulesets](https://github.com/frank-hartung/franksfinanzcheck-blog/settings/rules)
+   öffnen, **„Integritäts-Lock (PR-Gate)“** wählen und ID in der URL bestätigen
+   (bei der letzten Abfrage: **23710849**, ursprünglicher Auftrag: **23695872**).
+2. Target branches: **Include default branch** (`~DEFAULT_BRANCH`), keine Excludes.
+3. **Restrict deletions** und **Block force pushes** aktivieren/beibehalten.
+4. **Require status checks to pass**: alten Check `lock` entfernen;
+   **`Integritäts-Siegel`**, Quelle **GitHub Actions (App 15368)** hinzufügen.
+   „Require branches to be up to date before merging“ aus lassen.
+5. **Require a pull request before merging** aktivieren, **Required approvals: 0**;
+   Code-Owner-/Last-Push-/Thread-Resolution-Zusatzpflichten aus lassen.
+6. Bypass list: **GitHub Actions** als **Integration** hinzufügen,
+   **Always allow**. Keine Write-/Admin-Rollen. Falls die Integration im Picker
+   nicht angeboten wird, **nicht** durch eine Rolle ersetzen: Admin-API-Zugang
+   klären und den exakten Request unten verwenden.
+7. Enforcement **Active** → **Save changes**. Das separate Unveränderlichkeits-
+   Ruleset unverändert aktiv lassen.
+8. Im offenen PR **Integritäts-Siegel → Re-run**. Dann einen liegengebliebenen
+   Writer-Workflow (z. B. Deploy oder Social-Autopilot) erneut ausführen und
+   **dessen State-Commit auf `main`** prüfen. Ein grüner gh-pages-Deploy allein
+   beweist den Bypass nach der Publish-Prioritäts-Änderung **nicht mehr**.
+
+### Exakter Admin-API-Request (vollständiger Ersatz, keine Teiländerung)
+
+**Zur angefragten „Browser-API-Konsole“:** `https://github.com/settings/api`
+lieferte bei der Prüfung eine 404-Seite. Eine dort verfügbare, authentifizierte
+REST-Konsole ist nicht verifiziert. Daher gibt es hier bewusst **keinen als
+funktionierend ausgegebenen JavaScript-Einfügebefehl**. Ein `fetch` auf
+`api.github.com` wird durch die GitHub-Browser-Anmeldung allein nicht zum
+Admin-Request. Keine Tokens in Chat, Repository oder fremde Browser-Konsole kopieren.
+Der oben beschriebene GitHub-Klickweg ist der terminallose Reparaturweg.
+
+Für einen tatsächlich verfügbaren, bereits authentifizierten Admin-API-Client:
+**Methode PUT**, URL nach ID-Prüfung (aktueller sichtbarer Kandidat):
+
+```text
+https://api.github.com/repos/frank-hartung/franksfinanzcheck-blog/rulesets/23710849
 ```
 
-Antwortet die erste Zeile mit `[]`, verlangt `main` **nichts** – so sah es am
-19.09.2026 aus: Das Ruleset „Integritäts-Lock (PR-Gate)“ (#23695872) war aktiv,
-verlangte `lock` und hatte **keinen Ziel-Zweig** (`include: []`).
+Falls Frank **#23695872** noch sehen kann, stattdessen:
 
-## Ruleset einrichten oder reparieren (Admin)
-
-**Klickweg:** Settings → Rules → Rulesets → „Integritäts-Lock (PR-Gate)“
-
-1. **Target branches** → Add target → **Include default branch** (`~DEFAULT_BRANCH`).
-2. **Require status checks to pass** → alten Eintrag (`lock`) entfernen →
-   **`Integritäts-Siegel`** hinzufügen (Quelle: GitHub Actions). Der Name erscheint
-   in der Suche, sobald der Check einmal gelaufen ist (also nach dem ersten PR
-   mit dem umbenannten Job).
-3. Enforcement **Active** → **Save changes**.
-4. Im offenen PR den Job **Re-run** → der Schritt „Pflicht-Check-Vertrag prüfen“
-   wird grün und nennt die Ruleset-ID.
-
-**API-Einzeiler (gleichwertig, Admin-Token nötig):**
-
-```bash
-gh api --method PUT repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 --input - <<'JSON'
-{
-  "name": "Integritäts-Lock (PR-Gate)",
-  "target": "branch",
-  "enforcement": "active",
-  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
-  "rules": [
-    { "type": "deletion" },
-    { "type": "non_fast_forward" },
-    { "type": "required_status_checks",
-      "parameters": {
-        "strict_required_status_checks_policy": false,
-        "do_not_enforce_on_create": false,
-        "required_status_checks": [ { "context": "Integritäts-Siegel", "integration_id": 15368 } ]
-      } }
-  ]
-}
-JSON
+```text
+https://api.github.com/repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872
 ```
 
-(`strict_required_status_checks_policy: false` = PRs müssen nicht vor jedem Merge
-auf den neuesten `main` gebracht werden – bei einem Ein-Personen-Repo mit
-Squash-Merges bewusst so gewählt; das Siegel prüft ohnehin den Merge-Stand.)
+Header: `Accept: application/vnd.github+json`, `Content-Type: application/json`,
+`X-GitHub-Api-Version: 2022-11-28`. Authentifizierung separat durch den Admin-Client
+mit **Administration: write**, nie durch den Arena-Token. **Body exakt:**
 
-> **Achtung, `PUT` ersetzt das Ruleset als Ganzes.** Ein Einzeiler ohne
-> `bypass_actors` löscht einen vorhandenen Bypass-Akteur still – und damit die
-> Reparatur aus dem Abschnitt
-> [Direkte Pushes und Automation](#direkte-pushes-und-automation-vorfall-19092026)
-> unten. Vor jedem `PUT`: erst `GET` (`gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872`),
-> dann den Zielzustand vollständig hinschreiben, danach erneut `GET` und
-> `bypass_actors` prüfen.
-
-## Umbenennen – nur in dieser Reihenfolge
-
-Ein Pflicht-Check wird nie „mal eben“ umbenannt. Wer es tut, tut es in **einem**
-Vorgang:
-
-1. **PR:** `PFLICHT_CHECK_NAME` in `governance_contract.py` **und** `jobs.lock.name`
-   in `integrity-lock.yml` gemeinsam ändern (C18 und der Selbsttest der Wache –
-   Fall 9 – sind sonst rot; der PR kommt nicht durch das Qualitäts-Gate).
-   Dokumentation nachziehen: README, `docs/QUALITAETS-REGELWERK.md`, dieses Runbook.
-2. **Ruleset:** *Nach* dem Merge dieses PR den neuen Namen im Ruleset eintragen und
-   den alten entfernen (Klickweg oder API-Einzeiler oben).
-   Zwischen 1 und 2 verlangt `main` noch den alten Namen – PRs mit dem neuen
-   Workflow melden ihn nicht mehr und bleiben auf „Expected“ stehen. Deshalb:
-   erst mergen, sofort danach das Ruleset – oder das Ruleset **vor** dem Merge
-   umstellen, wenn der PR selbst schon den neuen Namen meldet (dann ist er der
-   erste, der unter dem neuen Vertrag mergebar ist).
-3. **Beweis:** `gh api …/rules/branches/main` nennt den neuen Namen; der nächste
-   Gate-Lauf ist grün („Vertrag erfüllt … Ruleset #…“).
-
-## Direkte Pushes und Automation (Vorfall 19.09.2026)
-
-### Was passiert ist
-
-Das Ruleset #23695872 verlangte ab 10:00:03 Uhr den Pflicht-Check
-`Integritäts-Siegel` auf `main` – mit `bypass_actors: null`, also ohne dass
-irgendjemand vorbeikommt. Dieser Check entsteht aber ausschließlich in Pull
-Requests (`integrity-lock.yml` hat die Trigger `pull_request` und
-`workflow_dispatch` – und kein `push`). Ergebnis:
-
-* **jeder direkte Push auf `main` wurde abgelehnt** – vorher elf Bot-Commits in
-  90 Minuten, danach kein einziger mehr;
-* Deploy #998 (Run `35437446077`) scheiterte im Schritt **„Gate-Heilungen
-  committen (konvergent)"**, der Schritt **„Deploy auf gh-pages“** wurde
-  übersprungen – die Website blieb ab 10:27 Uhr alt;
-* der Social-Autopilot (Run `35448944197`, 14:30) starb an derselben Stelle;
-* im Log stand nur `git_sync.sh: Synchronisation nach 3 Runden fehlgeschlagen
-  (zuletzt: netzwerk)` – drei Runden Backoff gegen eine Regel, die sich nicht
-  wegwartet, und eine Ursachenangabe, die keine war;
-* diese Wache meldete zeitgleich `✅ Vertrag erfüllt`. Der Vertrag *war* erfüllt
-  – um den Preis der gesamten Automation.
-
-Betroffen war nicht ein Workflow, sondern das ganze Haus: **31 Workflows**
-committen selbst auf `main` (`deploy.yml`, `content-engine-v2.yml`,
-`social-autopilot.yml`, `affiliate-health.yml`, `seo-weekly.yml`, …).
-
-### Warum ein Pflicht-Check direkte Pushes blockiert
-
-Pflicht-Status-Checks gelten für **jeden** Schreibvorgang auf den Zweig, nicht
-nur für Merges. GitHubs eigene Doku sagt es in einem Satz („Troubleshooting
-rules", Abschnitt *Troubleshooting required status checks*):
-
-> Required status checks do not take workflow, matrix, or event trigger types
-> into account.
-
-Das Ruleset weiß also nicht – und will es nicht wissen –, dass der verlangte
-Check bei einem direkten Push nie entstehen *kann*. Es sieht nur: „kein
-bestandener Check" → ablehnen. Ein Pflicht-Check, dessen Workflow keinen
-`push:`-Trigger hat, ist für direkte Pushes damit eine Sackgasse, kein
-Sicherheitsgewinn. Der vorgesehene Ausweg heißt **Bypass-Akteur**.
-
-### Diagnose (read-only, jeder darf das)
-
-```bash
-# 1) Wer verlangt was – und wer darf vorbei? bypass_actors ist der Schlüssel.
-gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 \
-  --jq '{name, enforcement, bypass_actors, conditions, rules: [.rules[].type]}'
-
-# 2) Kann der verlangte Check auf einem direkten Push überhaupt entstehen?
-grep -n -A4 '^on:' .github/workflows/integrity-lock.yml      # nur pull_request → Sackgasse
-
-# 3) Beweis am Verlauf: letzter Bot-Commit gegen Uhrzeit der Ruleset-Änderung
-gh api 'repos/frank-hartung/franksfinanzcheck-blog/commits?sha=main&per_page=15' \
-  --jq '.[] | "\(.commit.author.date)  \(.commit.author.name)  \(.commit.message | split("\n")[0])"'
-gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 --jq '{created_at, updated_at}'
-
-# 4) Urteil samt Bypass-Nachprüfung (zählt die betroffenen Workflows)
-python3 scripts/pflichtcheck_guard.py --branch main
-```
-
-### Reparatur: zwei Rulesets statt einem (Admin)
-
-**Geschichtet** heißt: Der unverhandelbare Teil (nichts verschwindet, nichts wird
-überschrieben) bindet **alle** – auch Admins, auch Bots. Der Teil, der einen
-laufenden Check verlangt, bekommt einen **Bypass für die Automation**, sonst
-steht das Haus. Beide Rulesets wirken gleichzeitig auf `~DEFAULT_BRANCH`; GitHub
-addiert die Regeln.
-
-**A) Neu – „main – Unveränderlichkeit“ (Bypass-Liste leer):**
-
-Klickweg: Settings → Rules → Rulesets → **New ruleset** → **New branch ruleset**
-
-1. Ruleset name: `main – Unveränderlichkeit (ohne Bypass)`
-2. Target branches → **Include default branch**
-3. Rules: **Restrict deletions** + **Block force pushes** – sonst nichts
-4. **Bypass list leer lassen** → Create
-
-```bash
-gh api --method POST repos/frank-hartung/franksfinanzcheck-blog/rulesets --input - <<'JSON'
-{
-  "name": "main – Unveränderlichkeit (ohne Bypass)",
-  "target": "branch",
-  "enforcement": "active",
-  "bypass_actors": [],
-  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
-  "rules": [ { "type": "deletion" }, { "type": "non_fast_forward" } ]
-}
-JSON
-```
-
-**B) Bestehend #23695872 – nur noch Pflicht-Check, mit Bypass für Automation:**
-
-Klickweg: Settings → Rules → Rulesets → „Integritäts-Lock (PR-Gate)“
-
-1. Rules: **Restrict deletions** und **Block force pushes** entfernen (steht jetzt
-   in A und gilt dort für alle), **Require status checks to pass** mit
-   `Integritäts-Siegel` behalten.
-2. **Bypass list** → **Add bypass** → Rolle **Repository role: Write** auswählen →
-   **Add Selected** → Modus **„Always allow“** (nicht „For pull requests only“:
-   die Automation pusht direkt).
-3. Optional, bewusst abwägen: zusätzlich **Repository role: Admin** mit
-   **„For pull requests only“** – dann hat der Eigentümer einen Notausgang über
-   einen PR (mit Spur im Audit-Log), darf aber weiterhin nicht direkt pushen.
-   Modus „Always“ für Admin würde auch Merge-am-Siegel-vorbei erlauben.
-4. **Save changes**.
-
-```bash
-# Rollen-IDs sind GitHub-intern und nicht offiziell dokumentiert. Reihenfolge:
-# erst im UI klicken (die Beschriftungen sind eindeutig), dann die ID ablesen …
-gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 --jq '.bypass_actors'
-# … und genau diese ID im Einzeiler verwenden. Übliche Werte (Praxis, ohne
-# Garantie): 1 Read · 2 Triage · 3 Write · 4 Maintain · 5 Admin.
-gh api --method PUT repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 --input - <<'JSON'
+```json
 {
   "name": "Integritäts-Lock (PR-Gate)",
   "target": "branch",
   "enforcement": "active",
   "bypass_actors": [
-    { "actor_id": 3, "actor_type": "RepositoryRole", "bypass_mode": "always" },
-    { "actor_id": 5, "actor_type": "RepositoryRole", "bypass_mode": "pull_request" }
+    { "actor_id": 15368, "actor_type": "Integration", "bypass_mode": "always" }
   ],
-  "conditions": { "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] } },
+  "conditions": {
+    "ref_name": { "include": ["~DEFAULT_BRANCH"], "exclude": [] }
+  },
   "rules": [
-    { "type": "required_status_checks",
+    { "type": "deletion" },
+    { "type": "non_fast_forward" },
+    {
+      "type": "required_status_checks",
       "parameters": {
         "strict_required_status_checks_policy": false,
         "do_not_enforce_on_create": false,
-        "required_status_checks": [ { "context": "Integritäts-Siegel", "integration_id": 15368 } ]
-      } }
+        "required_status_checks": [
+          { "context": "Integritäts-Siegel", "integration_id": 15368 }
+        ]
+      }
+    },
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 0,
+        "dismiss_stale_reviews_on_push": false,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": false
+      }
+    }
   ]
 }
-JSON
 ```
 
-Der `GITHUB_TOKEN` eines Workflows mit `permissions: contents: write` gilt als
-Akteur mit der Rolle **Write** – Admin-Rechte erbt er nie, auch nicht wenn der
-auslösende Mensch Admin ist. Deshalb ist „Write“ die richtige Bypass-Rolle für
-die Automation und nicht „Admin“.
+Maschinenlesbar derselbe Body: [integritaets-lock-ruleset.json](integritaets-lock-ruleset.json).
+Regressionstests prüfen Identität von Runbook und Datei sowie Regeln, Bypass und PR-Vertrag.
 
-### Verifikation
+**PUT ersetzt den Zielzustand vollständig.** Vorher GET derselben URL, Identität
+und vorhandene Regeln prüfen; danach GET und den ganzen Zielzustand vergleichen,
+insbesondere `bypass_actors`, `rules` und `conditions`. Bei 404/403 nicht als Erfolg
+werten und nicht mit POST eine vermeintliche Reparatur vortäuschen.
 
-```bash
-# a) Bypass steht drin, Pflicht-Check auch, Lösch-/Force-Schutz in A:
-gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets \
-  --jq '.[] | "\(.id)\t\(.name)\t\(.enforcement)"'
-gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23695872 --jq '.bypass_actors'
-gh api repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main \
-  --jq '.[].type'
+`strict_required_status_checks_policy: false` ist bewusst: Ein-Personen-Repo mit
+Squash-Merges; nicht vor jedem Merge manuell auf den neuesten `main` bringen.
+Der Gate-Lauf prüft den Merge-Stand.
 
-# b) Die Wache muss grün bleiben UND die Warnung verlieren:
-python3 scripts/pflichtcheck_guard.py --branch main      # ✅ ohne ⚠️ Schein-Sicherheit
+## Direkte Pushes und Automation (Vorfall 19.09.2026)
 
-# c) Der liegengebliebene Deploy muss wieder durchlaufen:
-gh run rerun 35437446077 --failed
-#    Schritt „Gate-Heilungen committen“ grün → „Deploy auf gh-pages“ läuft.
+Ab 10:00:03 verlangte #23695872 das Siegel auf `main`, ohne Bypass. Der Check
+entsteht nur bei PRs/manuell, nicht auf direkten Pushes. Vorher elf Bot-Commits
+in 90 Minuten, danach Stille. Deploy #998 (Run `35437446077`) scheiterte bei
+„Gate-Heilungen committen“, die Veröffentlichung wurde übersprungen; auch
+Social-Autopilot `35448944197` scheiterte. Betroffen: 31 Workflows, nicht nur Deploy.
+Die damalige Wache meldete gleichzeitig „Vertrag erfüllt“.
 
-# d) Härteprobe (optional): leerer Commit direkt auf main – muss durchgehen.
-git commit --allow-empty -m "chore: Probe direkter Push" && git push origin main
-```
+Heute sind drei getrennte Schutzmechanismen zuständig:
 
-### Was der Code jetzt tut (PR #321)
+* **`git_sync.sh`** erkennt Branch-Schutz (`GH006`/`GH013`/`GH014`, PR-/Check-
+  Pflicht) als `schutz`, bricht ohne sinnlose Netzwerk-Retries ab und nennt
+  dieses Runbook. Außerhalb des Deploy-State-Schritts bleibt sein Fehler hart.
+* **Publish-Priorität in `deploy.yml`:** Nur der fehlgeschlagene Push in
+  „Gate-Heilungen committen (konvergent)“ wird abgefangen, mit **`::error::`**
+  annotiert und ohne falsche Erfolgsmeldung fortgesetzt. Lokaler Commit,
+  Rebuild, Integritäts-/Inhalts-Gates und gh-pages-Deploy bleiben harte Schritte.
+  Kein `if: always()`/pauschales `continue-on-error`: kaputte Inhalte gehen nicht
+  live. Persistenz ist nicht Veröffentlichung; beim nächsten Lauf werden die
+  Heilungen erneut konvergent versucht.
+* **`pflichtcheck_guard.py`:** PR-Vertrag plus exakte Actions-Bypass-Nachprüfung;
+  davon getrennt **`--automation`** als Betriebssignal an das Governance-Gate.
+  Regeln-Änderungen bleiben Admin-Aufgabe (C15); die Wache repariert nie selbst.
 
-* **`scripts/git_sync.sh`** kennt die Fehlerklasse **`schutz`**
-  (`GH006`/`GH013`/`GH014`, `protected branch`, `required status check`,
-  `changes must be made through a pull request`, `update-ref failed`, …).
-  Sie wird **vor** `auth` geprüft, bricht **ohne Retry-Runden** ab und nennt im
-  `::error::` dieses Runbook. Transientes (Netzwerk) und Non-Fast-Forward bleiben
-  retrybar – nur die Regel-Ablehnung hört auf, sich als Wackelkontakt auszugeben.
-* **`scripts/pflichtcheck_guard.py`** prüft im **grünen** Fall nach (best effort,
-  nur GET, ändert nie das Urteil): aktives Ruleset mit Pflicht-Check auf dem
-  Ziel-Zweig **ohne** Bypass-Akteur **und** Workflows, die selbst dorthin
-  committen → `::warning::` „Schein-Sicherheit“ mit betroffener Workflow-Zahl,
-  Folge und Reparaturweg. Genau dieser Fall war am 19.09.2026 blind.
-* Regeln-Änderungen bleiben Menschen mit Admin-Rechten vorbehalten (C15,
-  `docs/INCIDENT-2026-09-19-integritaets-lock.md`): Die Wache meldet, sie
-  repariert nie selbst.
+## Neue Governance-Wache: „Automation durch Branch-Schutz blockiert“
 
-## Was die Live-Wache meldet
+`premium-governance.yml` misst **nach dem Ledger-Reset und vor `--decide`**.
+`actions: read` erlaubt die Cron-Abfrage; die Messung benutzt nur GET.
+
+* Branch immer **`main`**, niemals PR-Head oder `gh-pages`.
+* Letzter Bot-Commit: API-Bot-Identität (Autor/Committer) oder die expliziten
+  `git config user.email`-Identitäten der direkt schreibenden Workflows,
+  einschließlich `Content-Bot`/`Social-Autopilot`. **Committer-Zeit** in UTC,
+  nicht ein möglicherweise altes Autorendatum; menschliche Commits setzen die
+  Uhr nicht zurück. Keine pauschale Suche nach „bot“ im Namen.
+* **ROT** bei Alter **strikt >24 h** **und** mindestens einem abgeschlossenen
+  `schedule`-Lauf eines direkt schreibenden Workflows auf `main`, gestartet in
+  den letzten 24 h und nach dem letzten Bot-Commit. Erfolgreiche wie
+  fehlgeschlagene Crons zählen; queued/laufende, manuelle und reine Lese-Läufe
+  nicht. Exakt 24 h bleibt grün.
+* Code **`automation_blocked`**, Befundtabelle `RED`, Zeit/Alter und Run-ID als
+  Evidenz. Governance erstellt/aktualisiert seinen gebündelten Report; mit
+  `--fail-on red` wird der Lauf rot. Keine neue separate Issue-Schleife.
+* Das ist ein **Blockade-Verdacht**, kein kausaler Beweis: Auch legitime No-op-
+  Crons können ohne Commit enden. Push-Log auf `schutz`/GH013 und Rulesets prüfen.
+* API-/Berechtigungs-/Formatfehler, fehlender Bot-Nachweis, erschöpfte Pagination
+  oder alte Bot-Commits ohne relevante Cron-Evidenz → **INFO** (`probe_skipped`),
+  kein falsches Rot/Grün. Pagination: maximal 10 × 100 Commits bzw. Runs;
+  ein tatsächlich gefundener passender Cron genügt als positive Evidenz.
+* Die Wache läuft mit Premium-Governance **wöchentlich oder manuell**.
+  24 h ist die Befundschwelle, **keine Zusage eines täglichen Alarms**.
+
+Der Report wird in `/tmp/automation-report.md` frisch erzeugt und ins Ledger
+emittiert; auch bei blockiertem späterem Ledger-State-Push existieren Log,
+Job-Summary und Governance-Issue bereits. Kein neuer Root-Report.
+
+## Was die PR-Live-Wache meldet
 
 | Urteil | Bedeutung | Exit |
 |---|---|---|
-| `VERLANGT` | `main` verlangt `Integritäts-Siegel` (von GitHub Actions oder quellenfrei) | 0 |
-| `FEHLT` | `main` verlangt andere Checks (z. B. noch `lock`), nicht diesen – Hinweis, wenn der verlangte Name die Job-ID ist | 1 |
-| `FALSCHE_QUELLE` | Name stimmt, aber das Ruleset bindet ihn an eine andere App – der Actions-Lauf erfüllt ihn nie | 1 |
-| `UNGESCHUETZT` | kein aktives Ruleset verlangt irgendeinen Status-Check auf `main` – das Siegel ist Deko | 1 |
-| `NICHT_PRUEFBAR` | API nicht erreichbar oder Antwort unbrauchbar – **kein Urteil**, `::warning::`, Lauf bleibt grün (der Melder darf nicht selbst zum Vorfall werden) | 0 |
+| `VERLANGT` | Check verlangt; im Live-Aufruf zusätzlich PR-Pflicht mit 0 Approvals | 0 |
+| `FEHLT` | Andere Checks, etwa die alte Job-ID `lock` | 1 |
+| `FALSCHE_QUELLE` | Check an falsche App gebunden | 1 |
+| `UNGESCHUETZT` | Kein Status-Check auf dem Ziel | 1 |
+| `PR_SCOPING_FEHLT` | Check vorhanden, aber keine `pull_request`-Regel mit 0 Approvals | 1 |
+| `NICHT_PRUEFBAR` | API/Antwort unbrauchbar, Warnung statt erfundenem Urteil | 0 |
 
-Bei Rot stehen im Log und in der Step-Summary: die Diagnose je Ruleset (Name,
-Zustand, Ziel-Zweige, verlangte Checks) und die Reparatur in Klicks.
+Die Namensprüfung akzeptiert weiterhin quellenfreie Checks; **der Admin-Zielzustand
+ist strenger** und bindet ausdrücklich App 15368. Bei `VERLANGT` prüft die Wache
+zusätzlich aktive Rulesets: PR-/Status-Regeln ohne **Actions/15368/always** und
+vorhandene Direkt-Pusher → `::warning::` „Schein-Sicherheit“ (Exit bleibt 0).
+Fremde Rollen/Apps und `pull_request`-Bypässe unterdrücken diese Warnung nicht.
+Fehlt das Feld `bypass_actors` in einer API-Antwort (eingeschränkte Sichtbarkeit),
+meldet die Wache „nicht prüfbar“, nicht „kein Bypass“; nur explizites `null`/`[]`
+belegt eine leere Liste. API-Ausfälle dieser Zusatzprüfung sind best effort; die Betriebswache ist
+separat und wird nicht an den PR-Check gekoppelt.
 
-Bei **Grün** kann zusätzlich eine Warnung stehen – das Urteil bleibt dann 0:
-
-| Meldung (trotz `VERLANGT`) | Bedeutung |
-|---|---|
-| `⚠️ Schein-Sicherheit: … ohne Bypass-Akteur` | Der Pflicht-Check gilt auch für direkte Pushes, entsteht aber nur in Pull Requests, und niemand darf vorbei: die Automation steht. Reparatur oben, Abschnitt „Direkte Pushes und Automation“ |
-
-## Selbst prüfen
+## Zustand prüfen und Regression (Entwicklung, optionales Terminal)
 
 ```bash
-python3 scripts/pflichtcheck_guard.py --selftest          # 13 Fälle, kein Netz, schreibt nie
-python3 scripts/governance_contract.py --selftest         # C1–C18 mit Kunstbefunden
-python3 -m unittest scripts/tests/test_pflichtcheck.py -v  # Vertrag am echten Workflow + Mutationen
-python3 scripts/pflichtcheck_guard.py --rules-file r.json # Urteil über eine gespeicherte Antwort
+# Read-only, nach jeder Admin-Reparatur:
+gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets
+gh api repos/frank-hartung/franksfinanzcheck-blog/rulesets/23710849
+gh api repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main
+python3 scripts/pflichtcheck_guard.py --branch main
+python3 scripts/pflichtcheck_guard.py --automation
+
+# Offline und ohne Schreibzugriff am Bestand:
+python3 scripts/pflichtcheck_guard.py --selftest
+python3 scripts/governance_gate.py --selftest
+python3 scripts/governance_contract.py --selftest
+python3 scripts/governance_contract.py --quick
+python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py -v
+python3 -m unittest discover -s scripts/tests -v
+python3 scripts/pflichtcheck_guard.py --rules-file r.json # effektive Branch-Regeln (Liste)
 ```
+
+Kein manueller Probe-Push auf `main`: **Menschen sollen jetzt gerade einen PR
+benutzen**. Automations-Nachweis über einen Writer-Workflow mit wirklichem
+State-Commit, nicht über einen leeren Commit unter Franks Identität.
+
+## Umbenennen – nur zusammen mit dem Ruleset
+
+1. Im PR `PFLICHT_CHECK_NAME` und `jobs.lock.name` gemeinsam ändern (C18),
+   Runbook, Payload und Tests nachziehen. Keine Pfadfilter/Skip-Schalter einbauen.
+2. Ruleset im selben abgestimmten Vorgang umstellen. Ein neuer Workflow-Name
+   erfüllt den alten Pflicht-Check nie („Expected“). Entweder bisherigen PR
+   noch unter altem Namen mergen und sofort Ruleset umstellen, oder Ruleset
+   vorher auf den bereits im PR berichteten neuen Namen wechseln.
+3. Effektive Branch-Regeln nachlesen, Gate erneut ausführen. Bypass und PR-Pflicht
+   dabei unverändert vollständig erhalten. Keine Schreibrechte für den PR-Job.

@@ -207,7 +207,8 @@ class ProbeOffline(unittest.TestCase):
     def test_gruen_wenn_der_zielzweig_das_siegel_verlangt(self):
         rc, out, summary = self.lauf([{"type": "required_status_checks", "ruleset_id": 1,
                                        "parameters": {"required_status_checks": [
-                                           {"context": gc.PFLICHT_CHECK_NAME, "integration_id": 15368}]}}])
+                                           {"context": gc.PFLICHT_CHECK_NAME, "integration_id": 15368}]}},
+                                      {"type": "pull_request", "parameters": {"required_approving_review_count": 0}}])
         self.assertEqual(0, rc, out)
         self.assertIn("Vertrag erfüllt", out)
         self.assertNotIn("::error::", out)
@@ -286,7 +287,8 @@ class BypassWarnung(unittest.TestCase):
                "ruleset_source_type": "Repository", "ruleset_source": "o/r",
                "parameters": {"strict_required_status_checks_policy": False,
                               "required_status_checks": [
-                                  {"context": NAME, "integration_id": 15368}]}}]
+                                  {"context": NAME, "integration_id": 15368}]}},
+              {"type": "pull_request", "parameters": {"required_approving_review_count": 0}}]
     WORKFLOWS = {
         "integrity-lock.yml": "on:\n  pull_request:\n    branches: [main]\n"
                               "  workflow_dispatch: {}\njobs:\n  lock:\n",
@@ -358,8 +360,8 @@ class BypassWarnung(unittest.TestCase):
 
     # --- Und sie muss schweigen, wenn sie nicht gilt ------------------------ #
     def test_mit_bypass_akteur_keine_warnung(self):
-        rc, out = self.probe(self.detail(bypass=[{"actor_id": 3,
-                                                  "actor_type": "RepositoryRole",
+        rc, out = self.probe(self.detail(bypass=[{"actor_id": 15368,
+                                                  "actor_type": "Integration",
                                                   "bypass_mode": "always"}]))
         self.assertEqual(0, rc, out)
         self.assertIn("Vertrag erfüllt", out)
