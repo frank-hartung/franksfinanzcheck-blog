@@ -130,9 +130,9 @@
               {{- if $t.cta_muted -}}
                 <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
               {{- else if $t.cta_url -}}
-                {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite) -}}
+                {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite "placement" "tarifvergleich") -}}
                 {{- with $aff -}}
-                  <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
+                  <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
                 {{- else -}}
                   <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}" title="Weiter zum Anbieter (Partnerlink = Werbung)">{{ $t.cta_text | safeHTML }}</a>
                 {{- end -}}
@@ -172,9 +172,9 @@
             {{- if $t.cta_muted -}}
               <span class="ff-tv-btn ff-tv-btn--muted">{{ $t.cta_text | safeHTML }}</span>
             {{- else if $t.cta_url -}}
-              {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite) -}}
+              {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $t.cta_url "page" $ffSeite "placement" "tarifvergleich") -}}
               {{- with $aff -}}
-                <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
+                <a class="ff-tv-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">{{ $t.cta_text | safeHTML }}</a>
               {{- else -}}
                 <a class="ff-tv-btn" href="{{ $t.cta_url | safeURL }}">{{ $t.cta_text | safeHTML }}</a>
               {{- end -}}

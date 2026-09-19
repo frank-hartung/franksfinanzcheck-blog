@@ -528,13 +528,16 @@ python3 scripts/umami_clicks.py --fetch            # Klick-Daten automatisch lad
 `data/umami_clicks.meta.json`. Details & Belege: `GOVERNANCE-HAERTUNG-2026-09-07.md`,
 Regelwerk maschinenlesbar: `docs/GOVERNANCE-KONTRAKT.md`.
 
-> **Datennachschub für die Monetarisierungs-Schleifen** (einmalig, 5 Min.):
+> **Datennachschub für die Monetarisierungs-Schleifen** (einmalig, 2–4 Min.):
 > `UMAMI_API_TOKEN` als Repository-Secret anlegen (Umami → Avatar → *User Settings* →
-> *API* → *Generate API Key*) — schon füllt der wöchentliche Governance-Lauf
-> `data/umami_clicks.json` selbst, und Scorecard/Klick-Report rechnen mit echten
-> Klicks. Awin bleibt CSV-basiert: Export nach `data/awin_transactions.csv` legen,
-> `python3 scripts/awin_provisions.py` (bzw. `--gen-subid-map` für die SubID-Zuordnung)
-> läuft im gleichen Workflow.
+> *API* → *Generate API Key*) — Klicks, CTA-Events und Seitenbesuche importieren sich
+> damit von selbst. Neu seit 19.09.2026: die **Awin-Publisher-API** holt Transaktionen
+> ebenfalls automatisch (`AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` als Secrets; der
+> manuelle CSV-Export nach `data/awin_transactions.csv` bleibt Notbremse, nicht
+> Normalbetrieb). Der `revenue-import`-Workflow zählt alle 6 h hoch, die Wochen-Governance
+> bewertet den Trichter (`scripts/revenue_funnel.py` → AMBER-Finding `funnel_gap`,
+> solange eine Quelle fehlt – „unbekannt" ≠ „null Klicks"). Komplettes Runbook inkl.
+> Eigen-Testklick-SOP: **`docs/UMSATZ-MESSUNG-PREMIUM.md`**.
 
 ## 🛰️ Social-Autopilot – vollautomatische Social-Media-Redaktion (12.09.2026)
 

@@ -1,0 +1,40 @@
+{{- /* ============================================================
+    FF-AFFILIATE-CTA – gerendertes CTA-<a> auf /go/-Gateway-Basis
+    ------------------------------------------------------------
+    Aufruf:
+      {{- partial "ff_affiliate_cta.html" (dict
+            "url"       "/go/strom/"
+            "text"      "Stromtarife vergleichen"
+            "class"     "ff-pillar-card__cta-btn"
+            "icon"      "⚡"                      # optional, nur Deko
+            "arrow"     true                       # optional: „ →“ ans Ende
+            "placement" "pillar-karte"
+            "page"      .) -}}
+
+    Warum ein eigenes Partial statt HTML an jeder CTA-Stelle (19.09.2026,
+    Auftrag: „Startseiten- und Pillar-CTAs mit Umami-Events und SubIDs“):
+    Layout-CTAs in pillar/list.html & Co. wurden per Hand verlinkt – ohne
+    Event, ohne SubID. Damit waren genau die umsatznächsten Knöpfe der Seite
+    in der Umsatzmessung unsichtbar (Klicks auf /pillar/ = 0 gemessen, obwohl
+    geklickt wurde). Ein Hand-Anker ist eine Datenlücke mit Extrastufen.
+    Dieses Partial ruft denselben Vertrag auf wie der Markdown-Render-Hook
+    (`affiliate_anchor_attrs.html`) – eine Quelle der Wahrheit, und der
+    Klick-Ketten-Guard (scripts/click_chain_guard.py) + die E2E-Wache
+    (e2e/affiliate-guard.spec.mjs) beweisen das Ergebnis im gebauten HTML.
+
+    Kein /go/-Target ⇒ ganz normales <a> (kein Event, kein rel) – der Vertrag
+    gilt nur für Affiliate-Klicks, interne Navigation bleibt unberührt.
+   ============================================================ */ -}}
+{{- $url   := .url | default "" -}}
+{{- $text  := .text | default "" -}}
+{{- $cls   := .class | default "" -}}
+{{- $icon  := default "" .icon -}}
+{{- $inner := $text -}}
+{{- if $icon }}{{ $inner = print $icon " " $text }}{{ end -}}
+{{- if .arrow }}{{ $inner = print $inner " →" }}{{ end -}}
+{{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $url "page" .page "placement" (.placement | default "")) -}}
+{{- with $aff -}}
+<a class="{{ $cls }}" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">{{ $inner | safeHTML }}</a>
+{{- else -}}
+<a class="{{ $cls }}" href="{{ $url | safeURL }}">{{ $inner | safeHTML }}</a>
+{{- end -}}

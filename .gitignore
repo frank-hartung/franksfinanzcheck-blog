@@ -56,6 +56,13 @@ ops-report.json
 /DOKTOR-REPORT.md
 /DRAFT-LINK-REPORT.md
 
+# Rohdaten der Umsatz-Messung (Workflow-Lauf, nicht Git-Geschichte):
+# Awin-Transaktionen enthalten Auftrags-/Umsatzdetails – der dauerhafte
+# Nachweis bleibt die Aggregatstatistik (data/awin_provisions_stats.json,
+# data/revenue_funnel.json), die CSV existiert nur im Arbeitsverzeichnis
+# des Laufs, der sie geholt hat.
+data/awin_transactions.csv
+
 # Einmalige Patches & Archiv (erledigt, nicht mehr benötigt)
 patches/
 scripts/_archiv/

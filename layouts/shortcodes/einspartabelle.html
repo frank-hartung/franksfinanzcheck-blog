@@ -106,9 +106,9 @@
           <td class="ff-es-col ff-es-col--bad ff-es-muted"><small>teuer</small></td>
           <td class="ff-es-col ff-es-col--good ff-es-muted"><small>effizienter</small></td>
           <td class="ff-es-col ff-es-col--win ff-es-cta">
-            {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite) -}}
+            {{- $aff := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite "placement" "einspartabelle") -}}
             {{- with $aff -}}
-            <a class="ff-es-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" title="{{ .title }}">
+            <a class="ff-es-btn" href="{{ .href | safeURL }}" rel="{{ .rel }}" target="{{ .target }}" data-umami-event="{{ .event }}" data-umami-event-slug="{{ .key }}" data-umami-event-subid="{{ .subid }}" data-umami-event-article="{{ .article }}" data-umami-event-pillar="{{ .pillar }}" data-umami-event-placement="{{ .placement }}" title="{{ .title }}">
               {{ $ctaText | safeHTML }}
             </a>
             {{- else -}}
@@ -144,7 +144,7 @@
       <div class="ff-es-card-sum ff-es-card-sum--big">
         {{ .ersparnis | safeHTML }}<br><small>Gesamtersparnis pro Jahr</small>
       </div>
-      {{- $affCard := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite) -}}
+      {{- $affCard := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite "placement" "einspartabelle") -}}
       {{- with $affCard -}}
       <a class="ff-es-btn ff-es-btn--card" href="{{ $affCard.href | safeURL }}" rel="{{ $affCard.rel }}" target="{{ $affCard.target }}" data-umami-event="{{ $affCard.event }}" data-umami-event-slug="{{ $affCard.key }}" data-umami-event-article="{{ $affCard.article }}" data-umami-event-pillar="{{ $affCard.pillar }}" title="{{ $affCard.title }}">{{ $ctaText | safeHTML }}</a>
       {{- else -}}

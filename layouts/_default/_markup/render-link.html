@@ -129,13 +129,31 @@
 {{- if .Page }}{{ $pillar = .Page.Params.pillar | default "" }}{{ end -}}
 {{- /* Artikel-Slug für Awin-SubID (Klicks→Umsatz). Aus dem Quelldatei-Pfad extrahieren.
    Hugo .File.Path ist content-relativ: posts/<slug>/index.md (oder content/posts/<slug>/).
-   Robust: letzte Verzeichnisebene = Slug (bei index.md), sonst Dateiname ohne .md. */ -}}
+   Robust: letzte Verzeichnisebene = Slug (bei index.md), sonst Dateiname ohne .md.
+   _index.md (Sektionen/Start) bekommt Platzierungs-IDs – „_index" als SubID wäre
+   Müll im Partner-Dashboard; „home"/„pillar-index" sind auswertbar (19.09.2026). */ -}}
 {{- $artikelSlug := "" -}}
 {{- $artikelBase := path.Base $artikelPfad -}}
-{{- if eq $artikelBase "index.md" -}}
-  {{- $artikelSlug = path.Base (path.Dir $artikelPfad) -}}
+{{- $artikelDir := path.Dir $artikelPfad -}}
+{{- if eq $artikelBase "_index.md" -}}
+  {{- if or (not $artikelDir) (eq $artikelDir ".") -}}
+    {{- $artikelSlug = "home" -}}
+  {{- else -}}
+    {{- $artikelSlug = print (path.Base $artikelDir) "-index" -}}
+  {{- end -}}
+{{- else if eq $artikelBase "index.md" -}}
+  {{- $artikelSlug = path.Base $artikelDir -}}
 {{- else if $artikelBase -}}
   {{- $artikelSlug = $artikelBase | strings.TrimSuffix ".md" -}}
+{{- end -}}
+{{- /* Platzierung je Seitenkontext (Outbound-CTR pro CTA-Hotspot im Wochen-Funnel) */ -}}
+{{- $platzierung := "" -}}
+{{- if $isGo -}}
+  {{- if eq $artikelSlug "home" }}{{ $platzierung = "start" -}}
+  {{- else if eq $artikelSlug "pillar-index" }}{{ $platzierung = "ratgeber-zentrale" -}}
+  {{- else if strings.HasPrefix $artikelPfad "pillar/" }}{{ $platzierung = "pillar" -}}
+  {{- else if $artikelPfad }}{{ $platzierung = "artikel" -}}
+  {{- else }}{{ $platzierung = "template" -}}{{ end -}}
 {{- end -}}
 
 {{- if $tot -}}
@@ -157,5 +175,5 @@
     {{- $goHref = print $href "?subid=" $artikelSlug -}}
   {{- end -}}
 {{- end -}}
-<a href="{{ $goHref | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" data-umami-event-article="{{ $artikelPfad }}" data-umami-event-pillar="{{ $pillar }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ $goHref | safeURL }}"{{ if $isGo }} rel="sponsored nofollow noopener" target="_blank" data-umami-event="affiliate_click" data-umami-event-slug="{{ $slug }}" data-umami-event-article="{{ $artikelPfad }}" data-umami-event-pillar="{{ $pillar }}" data-umami-event-subid="{{ $artikelSlug }}" data-umami-event-placement="{{ $platzierung }}" title="{{ .Title | default $tooltip }}"{{ end }}{{ if not $isGo }}{{ with .Title }} title="{{ . }}"{{ end }}{{ end }}>{{ .Text | safeHTML }}</a>
 {{- end -}}

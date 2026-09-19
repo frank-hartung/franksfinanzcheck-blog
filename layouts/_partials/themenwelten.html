@@ -4,6 +4,7 @@
 {{- $data := (partialCached "themenwelten_data.html" .) -}}
 {{- $id := .id | default "deine-6-themenwelten" -}}
 {{- $title := .title | default $data.title -}}
+{{- $home := .home -}}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
 {{- if ne (len $data.topics) 6 -}}
   {{- errorf "Themenwelten: genau 6 Einträge in data/themenwelten.json erforderlich" -}}
@@ -34,7 +35,15 @@
         {{- $count := len (where $posts "Params.pillar" .id) -}}
         {{- $cardID := printf "%s-%s" $id .id -}}
     <li>
+      {{- /* cta_click (19.09.2026): Themenkarten sind der wichtigste Weg von der
+             Startseite zu den kaufnahen Ratgebern – ohne Event wäre der erste
+             Trichter-Schritt („Startseite → Ratgeber") unsichtbar. Eigenschaft
+             `slug` = Platzierungs-ID, damit der Import (umami_ctas.json) sie
+             ohne Sonderbehandlung aggregiert. */ -}}
       <a class="ff-topic-card" href="{{ $target.RelPermalink }}" data-topic="{{ .id }}"
+         data-umami-event="cta_click" data-umami-event-cta="thema-{{ .id }}"
+         data-umami-event-slug="thema-{{ .id }}"
+         data-umami-event-placement="{{ if $home }}start-themenwelten{{ else }}posts-themenwelten{{ end }}"
          aria-labelledby="{{ $cardID }}-title" aria-describedby="{{ $cardID }}-description {{ $cardID }}-count">
         <div class="ff-topic-card-head">
           <span class="ff-topic-icon">{{ partial "themenwelt_icon.html" .id }}</span>

@@ -7,10 +7,14 @@
         {{ $opts := dict "display" "block" }}
         {{ (.Content | $.Page.RenderString $opts | partial "nbsp_sicherung.html") | safeHTML }}
     </div>
+    {{- /* cta_click (19.09.2026, Premium-Messkette): die drei Startseiten-Buttons
+           sind der erste Trichter-Schritt. Ohne Event misst die Outbound-Analyse
+           nur „Seite besucht“, nicht „Interesse geweckt“. `slug` ist die
+           Platzierungs-ID für data/umami_ctas.json. */ -}}
     <div class="ff-home-ctas">
-        <a href="/posts/" class="ff-btn ff-btn-primary">Alle Ratgeber entdecken →</a>
-        <a href="/pillar/strom-sparen/" class="ff-btn ff-btn-secondary">⚡ Strom &amp; Gas sparen</a>
-        <a href="/pillar/versicherungen/" class="ff-btn ff-btn-outline">🛡️ Versicherungen verstehen</a>
+        <a href="/posts/" class="ff-btn ff-btn-primary" data-umami-event="cta_click" data-umami-event-cta="home-ratgeber" data-umami-event-slug="home-ratgeber" data-umami-event-placement="start-hero">Alle Ratgeber entdecken →</a>
+        <a href="/pillar/strom-sparen/" class="ff-btn ff-btn-secondary" data-umami-event="cta_click" data-umami-event-cta="home-strom" data-umami-event-slug="home-strom" data-umami-event-placement="start-hero">⚡ Strom &amp; Gas sparen</a>
+        <a href="/pillar/versicherungen/" class="ff-btn ff-btn-outline" data-umami-event="cta_click" data-umami-event-cta="home-versicherung" data-umami-event-slug="home-versicherung" data-umami-event-placement="start-hero">🛡️ Versicherungen verstehen</a>
     </div>
     <div class="ff-trust-row">
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Unabhängig &amp; klar erklärt</span>

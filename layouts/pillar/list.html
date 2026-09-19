@@ -125,11 +125,11 @@
             </a>
           </div>
 
+          {{- /* Messkette 19.09.2026: Card-CTA läuft durch denselben Vertrag wie
+                 Artikel-Links (Umami-Event + SubID `pillar-index`-Auflösung) –
+                 vorher: roher HTML-Anker, in der Umsatzmessung unsichtbar. */ -}}
           {{- if $cta }}
-          <a href="{{ $cta.url }}" rel="sponsored nofollow noopener" target="_blank"
-             class="ff-pillar-card__cta-btn">
-            <span>⚡</span> {{ $cta.text }} →
-          </a>
+          {{- partial "ff_affiliate_cta.html" (dict "url" $cta.url "text" $cta.text "class" "ff-pillar-card__cta-btn" "icon" "<span>⚡</span>" "arrow" true "placement" "pillar-karte" "page" .) -}}
           {{- end }}
         </div>
       </article>
@@ -159,48 +159,27 @@
         </tr>
       </thead>
       <tbody>
+        {{- /* Datengetriebene Zeilen (19.09.2026): der Affiliate-CTA jeder Zeile
+               läuft durch ff_affiliate_cta.html → gleiches Event, gleiche SubID,
+               gleiches sponsored-Rel wie im Rest der Seite. Vorher: sechs per Hand
+               geschriebene Anker – zwei ohne Tooltip, alle ohne Klick-Messung. */ -}}
+        {{- $matrix := slice
+              (dict "p" "strom-sparen"    "label" "⚡ Strom & Gas"        "spar" "300 – 800 € / Jahr"  "aufwand" "ca. 10 Minuten" "hebel" "Bonus-Hopping & 12-Monats-Garantie"      "go" "/go/strom/"       "cta" "Stromvergleich")
+              (dict "p" "internet-dsl"    "label" "🌐 Internet & DSL"    "spar" "120 – 350 € / Jahr"  "aufwand" "ca. 8 Minuten"  "hebel" "Wechselbonus alle 24 Monate mitnehmen"   "go" "/go/dsl/"         "cta" "DSL-Vergleich")
+              (dict "p" "versicherungen"  "label" "🛡️ Versicherungen"     "spar" "200 – 500 € / Jahr"  "aufwand" "ca. 15 Minuten" "hebel" "Haftpflicht-Update & Kfz-Stichtag 30.11." "go" "/go/haftpflicht/" "cta" "Tarifcheck")
+              (dict "p" "konto-karten"    "label" "💳 Konto & Karten"    "spar" "80 – 180 € / Jahr"   "aufwand" "ca. 5 Minuten"  "hebel" "Gebührenfreies C24 Girokonto + Tagesgeld" "go" "/go/girokonto/"   "cta" "C24 Girokonto")
+              (dict "p" "frugalismus"     "label" "🌱 Frugalismus"       "spar" "ab 200 € / Monat"    "aufwand" "Dauerhaft"      "hebel" "50–30–20-Regel & Notgroschen"           "go" "/go/tagesgeld/"   "cta" "C24 Tagesgeld")
+              (dict "p" "mietwagen"       "label" "🚗 Mietwagen & Reisen" "spar" "100 – 400 € / Reise" "aufwand" "ca. 5 Minuten"  "hebel" "Vollkasko ohne SB + faire Tankregelung" "go" "/go/mietwagen/"   "cta" "Mietwagen")
+        -}}
+        {{- range $row := $matrix }}
         <tr>
-          <td><a href="strom-sparen/">⚡ Strom &amp; Gas</a></td>
-          <td class="ff-highlight-cell">300 – 800 € / Jahr</td>
-          <td>ca. 10 Minuten</td>
-          <td>Bonus-Hopping &amp; 12-Monats-Garantie</td>
-          <td><a href="/go/strom/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">Stromvergleich →</a></td>
+          <td><a href="{{ $row.p }}/">{{ $row.label }}</a></td>
+          <td class="ff-highlight-cell">{{ $row.spar }}</td>
+          <td>{{ $row.aufwand }}</td>
+          <td>{{ $row.hebel }}</td>
+          <td>{{- partial "ff_affiliate_cta.html" (dict "url" $row.go "text" $row.cta "class" "ff-table-btn" "arrow" true "placement" "spar-matrix" "page" $) -}}</td>
         </tr>
-        <tr>
-          <td><a href="internet-dsl/">🌐 Internet &amp; DSL</a></td>
-          <td class="ff-highlight-cell">120 – 350 € / Jahr</td>
-          <td>ca. 8 Minuten</td>
-          <td>Wechselbonus alle 24 Monate mitnehmen</td>
-          <td><a href="/go/dsl/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">DSL-Vergleich →</a></td>
-        </tr>
-        <tr>
-          <td><a href="versicherungen/">🛡️ Versicherungen</a></td>
-          <td class="ff-highlight-cell">200 – 500 € / Jahr</td>
-          <td>ca. 15 Minuten</td>
-          <td>Haftpflicht-Update &amp; Kfz-Stichtag 30.11.</td>
-          <td><a href="/go/haftpflicht/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">Tarifcheck →</a></td>
-        </tr>
-        <tr>
-          <td><a href="konto-karten/">💳 Konto &amp; Karten</a></td>
-          <td class="ff-highlight-cell">80 – 180 € / Jahr</td>
-          <td>ca. 5 Minuten</td>
-          <td>Gebührenfreies C24 Girokonto + Tagesgeld</td>
-          <td><a href="/go/girokonto/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn" title="Weiter zu C24 Bank (CHECK24) · Girokonto (Partnerlink = Werbung)">C24 Girokonto →</a></td>
-        </tr>
-        <tr>
-          <td><a href="frugalismus/">🌱 Frugalismus</a></td>
-          <td class="ff-highlight-cell">ab 200 € / Monat</td>
-          <td>Dauerhaft</td>
-          <td>50–30–20-Regel &amp; Notgroschen</td>
-          <td><a href="/go/tagesgeld/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn" title="Weiter zu C24 Bank (CHECK24) · Tagesgeld (Partnerlink = Werbung)">C24 Tagesgeld →</a></td>
-        </tr>
-        <tr>
-          <td><a href="mietwagen/">🚗 Mietwagen &amp; Reisen</a></td>
-          <td class="ff-highlight-cell">100 – 400 € / Reise</td>
-          <td>ca. 5 Minuten</td>
-          <td>Vollkasko ohne SB + faire Tankregelung</td>
-          <td><a href="/go/mietwagen/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">Mietwagen →</a></td>
-        </tr>
+        {{- end }}
       </tbody>
     </table>
   </div>

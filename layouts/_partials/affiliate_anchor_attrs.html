@@ -31,8 +31,14 @@
       href            = /go/<key>/[?subid=<artikel-slug>]   (Awin-Attribution)
       rel             = sponsored nofollow noopener
       target          = _blank
-      data-umami-*    = affiliate_click + slug/article/pillar
+      data-umami-*    = affiliate_click + slug/article/pillar/subid/placement
       title           = "Weiter zu <Partner> (Partnerlink = Werbung)"
+
+    Placement (19.09.2026, Premium-Messkette): „wo wurde geklickt" – artikel,
+    pillar, start, ratgeber-zentrale oder ein Call-eigener Wert (z. B.
+    spar-matrix). zusammen mit `subid` (auch als Event-Eigenschaft, damit der
+    Testklick ohne Awin-Export in Umami verifizierbar ist) schließt sie die
+    Lücke „Start-/Pillar-CTAs waren unsichtbar".
    ============================================================ */ -}}
 {{- $out := dict -}}
 {{- $url := .url | default "" -}}
@@ -79,10 +85,29 @@
   {{- end -}}
   {{- $slug := "" -}}
   {{- $base := path.Base $file -}}
-  {{- if eq $base "index.md" -}}
-    {{- $slug = path.Base (path.Dir $file) -}}
+  {{- $dir  := path.Dir $file -}}
+  {{- if eq $base "_index.md" -}}
+    {{- /* Sektions-/Startseite: nie „_index“ als SubID verschenken –
+           Platzierungs-IDs sind stabil messbar (Awin ClickRef + Umami). */ -}}
+    {{- if or (not $dir) (eq $dir ".") -}}
+      {{- $slug = "home" -}}
+    {{- else -}}
+      {{- $slug = print (path.Base $dir) "-index" -}}
+    {{- end -}}
+  {{- else if eq $base "index.md" -}}
+    {{- $slug = path.Base $dir -}}
   {{- else if and $base (ne $base ".") -}}
     {{- $slug = $base | strings.TrimSuffix ".md" -}}
+  {{- end -}}
+  {{- /* Platzierung: wo auf der Seite geklickt wurde – Pflicht für die
+         Outbound-CTR-Analyse je CTA-Hotspot (Wochen-Funnel). */ -}}
+  {{- $platz := .placement | default "" -}}
+  {{- if not $platz -}}
+    {{- if eq $slug "home" }}{{ $platz = "start" -}}
+    {{- else if eq $slug "pillar-index" }}{{ $platz = "ratgeber-zentrale" -}}
+    {{- else if hasPrefix $file "pillar/" }}{{ $platz = "pillar" -}}
+    {{- else if $file }}{{ $platz = "artikel" -}}
+    {{- else }}{{ $platz = "template" -}}{{ end -}}
   {{- end -}}
   {{- $href := $url -}}
   {{- if and $slug (not (strings.Contains $url "subid=")) -}}
@@ -107,14 +132,16 @@
   {{- end -}}
   {{- if not $ziel }}{{ $ziel = index $names $key | default (print "Partner: " $key) }}{{ end -}}
   {{- $out = dict
-        "href"    $href
-        "key"     $key
-        "rel"     "sponsored nofollow noopener"
-        "target"  "_blank"
-        "event"   "affiliate_click"
-        "article" $file
-        "pillar"  $pillar
-        "title"   (print "Weiter zu " $ziel " (Partnerlink = Werbung)")
+        "href"      $href
+        "key"       $key
+        "rel"       "sponsored nofollow noopener"
+        "target"    "_blank"
+        "event"     "affiliate_click"
+        "article"   $file
+        "pillar"    $pillar
+        "subid"     $slug
+        "placement" $platz
+        "title"     (print "Weiter zu " $ziel " (Partnerlink = Werbung)")
   -}}
 {{- end -}}
 {{- return $out -}}

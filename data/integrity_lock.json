@@ -1,12 +1,12 @@
 {
-  "signed_at": "2026-09-19T17:39:45.107364+00:00",
-  "head": "e888cf8",
+  "signed_at": "2026-09-19T20:44:32.134266+00:00",
+  "head": "fb6120b",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
     "hugo.toml": "3665fcf4e87be3b171b4555387bab693ca8c479392f524153fa05fd7b1d42e4d",
-    "layouts/_default/_markup/render-link.html": "e8d5c45b4c4030e62d6b54471790c2676d6bf491f91fa03c529afc335c7bb325",
-    "layouts/_partials/affiliate_anchor_attrs.html": "257e88054d63679dfcfc3c239c304fb03e1b3a434fdd2a655b10c5d5f2660a0c",
+    "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
+    "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
@@ -16,11 +16,11 @@
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "a48c030852177b846dd04f1e227c47ccd96a4f2be59a8d7d693c1ba1212c295d",
+    "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
     "layouts/pillar/single.html": "10e7ce5a3af2246ec56be397f8e37f74331de5da26c28c95a562979a09327455",
     "layouts/robots.txt": "ed88bb3ffbb57272ed5418d3ac0246c1ca8ac082213549fdf13e09b6a9cd5246",
-    "layouts/shortcodes/einspartabelle.html": "527d9dccebf232ba9876e64df51ca0fc52ead3518575fca613b9048942a70cf7",
-    "layouts/shortcodes/tarifvergleich.html": "2e9027e722fad0cbe33e6ecf736f3fd407c1a2b175b07f4008f651e4733161ca",
+    "layouts/shortcodes/einspartabelle.html": "1069f8b05230f601517b04f6770ab5ce38b8edde85ee9c82546ae08fc5081a03",
+    "layouts/shortcodes/tarifvergleich.html": "6c357637a5329fedace5baf1e15a0b41916cd67aa7bc68f88d033060dbf61a99",
     "scripts/affiliate_integrity_gate.py": "ecd407279ec0cc8d7c79c081efc7a977450a8604f41a3c4c2d5f8a5dd281b3bc",
     "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -239,6 +239,18 @@
       "head": "e888cf8",
       "geaendert": [
         "layouts/_partials/affiliate_ziele_data.html"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "art": "set-current",
+      "head": "fb6120b",
+      "geaendert": [
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/pillar/list.html",
+        "layouts/shortcodes/einspartabelle.html",
+        "layouts/shortcodes/tarifvergleich.html"
       ]
     }
   ]
