@@ -3,14 +3,20 @@ title: "Die 50-30-20-Regel einfach erklärt"
 description: "Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-09-18T09:05:49Z
 draft: true
-tags: ["Die 50-30-20-Regel einfach erklärt"]
+tags: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Die 50-30-20-Regel einfach erklärt"]
+keywords: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
+pin_title: "Die 50-30-20-Regel einfach erklärt"
+pin_description: "*Werbung | Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #503020regel"
+cover:
+  image: "images/covers/2026-09-18-die-50-30-20-regel-einfach-erklaert.jpg"
+  alt: "Die 50-30-20-Regel einfach erklärt"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast am Monatsende wieder das Gefühl, dass das Geld schneller ausgeht, als du es einnehmen kannst. Du willst wissen, wie du deine Einnahmen sinnvoll strukturieren kannst, ohne jedes Mal stundenlang Tabellen zu wälzen. Die 50‑30‑20‑Regel bietet dafür einen klaren Rahmen: Sie teilt dein Nettoeinkommen in drei Bereiche – lebensnotwendige Ausgaben, flexible Wünsche und langfristige Vorsorge. Im Folgenden erkläre ich dir Schritt für Schritt, wie du die Regel in deinem Alltag anwendest, welche Anpassungen sinnvoll sind und welche typischen Stolperfallen du vermeiden solltest.
