@@ -358,8 +358,13 @@ jobs:
             echo "Gate: keine Heilungen nötig."
           else
             git commit -m "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            scripts/git_sync.sh --push-only
-            echo "✅ Gate-Heilungen gepusht – Folge-Deploy prüft erneut (konvergent)."
+            # Publish-Priorität: nur State-Persistenz ist best effort. Build und
+            # Inhalts-Gates bleiben hart; kein always()/continue-on-error am Deploy.
+            if scripts/git_sync.sh --push-only; then
+              echo "✅ Gate-Heilungen gepusht – Folge-Deploy prüft erneut (konvergent)."
+            else
+              echo "::error::Gate-Heilungen: State-Push abgelehnt/fehlgeschlagen; gh-pages-Deploy läuft nach den Inhalts-Gates trotzdem. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md"
+            fi
           fi
 
       - name: Rebuild nach Heilungen (nur wenn sich Content geändert hat)

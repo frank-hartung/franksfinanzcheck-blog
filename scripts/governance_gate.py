@@ -62,6 +62,7 @@ TODAY = NOW.date()
 
 # Schritte in Anzeigereihenfolge + Report, aus dem der Befund zu lesen ist.
 STEPS = {
+    "automation": {"report": "", "label": "Automation durch Branch-Schutz blockiert"},
     "build":   {"report": "",                    "label": "Hugo-Build (Grundlage CWV)"},
     "decay":   {"report": "DECAY-REPORT.md",      "label": "Content-Decay-Radar"},
     "cwv":     {"report": "CWV-REPORT.md",        "label": "Core-Web-Vitals"},
