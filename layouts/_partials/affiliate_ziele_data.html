@@ -17,6 +17,14 @@
        dass kein Layout je wieder hugo.Data/site.Data anfasst. */ -}}
 {{- $daten := dict -}}
 {{- if fileExists "data/affiliate_ziele.yaml" -}}
-  {{- $daten = os.ReadFile "data/affiliate_ziele.yaml" | transform.Unmarshal -}}
+  {{- /* format MUSS explizit sein. Die Datei beginnt mit einem
+         #-Kommentarkopf, und Hugos Format-Ratefunktion hält sie dann für
+         TOML: „error calling Unmarshal: "_stream.toml:16:6": toml: expected
+         '=' after key" – der Build starb am 19.09.2026 beim Rendern von
+         content/pillar/frugalismus/ (zweiter Build-Killer derselben
+         Baustelle, gefunden über den Diagnose-Lauf in PR #321).
+         `format` gibt es seit Hugo v0.149.0, alle Workflows pinnen 0.164.0.
+         Die Intent-Wache (IW0) prüft, dass dieser Pin bleibt. */ -}}
+  {{- $daten = os.ReadFile "data/affiliate_ziele.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
 {{- end -}}
 {{- return $daten -}}

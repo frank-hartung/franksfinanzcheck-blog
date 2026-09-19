@@ -1,13 +1,13 @@
 {
-  "signed_at": "2026-09-19T17:25:50.887630+00:00",
-  "head": "592c432",
+  "signed_at": "2026-09-19T17:39:45.107364+00:00",
+  "head": "e888cf8",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
     "hugo.toml": "3665fcf4e87be3b171b4555387bab693ca8c479392f524153fa05fd7b1d42e4d",
     "layouts/_default/_markup/render-link.html": "e8d5c45b4c4030e62d6b54471790c2676d6bf491f91fa03c529afc335c7bb325",
     "layouts/_partials/affiliate_anchor_attrs.html": "257e88054d63679dfcfc3c239c304fb03e1b3a434fdd2a655b10c5d5f2660a0c",
-    "layouts/_partials/affiliate_ziele_data.html": "a1a547f9a074f728580d2b6c62937d0289615d301a6cc9497e9e6f7354f3d06f",
+    "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
@@ -230,6 +230,14 @@
       "geaendert": [
         "layouts/_default/_markup/render-link.html",
         "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/_partials/affiliate_ziele_data.html"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "art": "set-current",
+      "head": "e888cf8",
+      "geaendert": [
         "layouts/_partials/affiliate_ziele_data.html"
       ]
     }

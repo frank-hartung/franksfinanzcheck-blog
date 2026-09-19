@@ -305,8 +305,13 @@ class EineWahrheit(unittest.TestCase):
                         "affiliate_ziele_data.html fehlt – Templates müssten "
                         "über hugo.Data gehen (Build-Killer)")
         ptext = partial.read_text(encoding="utf-8")
+        self.assertEqual([], aig.datenpfad_fehler(ptext),
+                         "Datenpfad-Partial wäre ein Build-Killer")
         self.assertIn('os.ReadFile "data/affiliate_ziele.yaml"', ptext)
         self.assertIn("transform.Unmarshal", ptext)
+        # Ohne explizites Format rät Hugo bei dem #-Kommentarkopf TOML:
+        # „_stream.toml:16:6: toml: expected '=' after key" (19.09.2026).
+        self.assertIn('"format" "yaml"', ptext)
 
         griffe = []
         for datei in sorted((ROOT / "layouts").rglob("*.html")):

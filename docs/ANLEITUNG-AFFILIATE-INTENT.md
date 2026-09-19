@@ -60,7 +60,12 @@ parsen und der Build stirbt mit `failed to load data: … unmarshal of format
 Playwright + Themenwelten rot. Die Zielnamen kommen deshalb über
 `layouts/_partials/affiliate_ziele_data.html` (`os.ReadFile` +
 `transform.Unmarshal`, `partialCached`), genau wie das Hausmuster
-`themenwelten_data.html`. IW0 prüft jedes Layout auf verbotene Zugriffe und
+`themenwelten_data.html`. Dort muss das Format **explizit** gepinnt sein
+(`transform.Unmarshal (dict "format" "yaml")`, Hugo ≥ 0.149): Ohne Pin rät
+Hugo bei YAML mit `#`-Kommentarkopf TOML und der Build stirbt mit
+`toml: expected '=' after key` – am 19.09.2026 beim Rendern von
+`content/pillar/frugalismus/` genau so passiert. IW0 prüft beides:
+`os.ReadFile` **und** den Format-Pin. IW0 prüft jedes Layout auf verbotene Zugriffe und
 unterscheidet dabei Code von Kommentar; der Selbsttest beweist die Erkennung
 mit einer Sabotage-Probe.
 

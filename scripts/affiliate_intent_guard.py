@@ -1076,6 +1076,30 @@ def datenbaum_griffe(text: str) -> list[tuple[int, str]]:
             for m in DATENBAUM_GRIFF.finditer(code)]
 
 
+def datenpfad_fehler(text: str) -> list[str]:
+    """Was am Daten-Partial falsch wäre – rein funktional.
+
+    Dieselbe Logik für IW0, Selbsttest und Regressionstests, damit kein
+    Prüfer seine eigene Ausnahme ist. Der Format-Pin ist kein Stil: Ohne
+    `format` rät Hugo bei YAML mit #-Kommentarkopf TOML und der Build stirbt
+    mit „toml: expected '=' after key" (19.09.2026, PR #321).
+    """
+    fehler: list[str] = []
+    if 'os.ReadFile "data/affiliate_ziele.yaml"' not in text:
+        fehler.append("liest data/affiliate_ziele.yaml nicht per os.ReadFile "
+                      "(Hausmuster aus themenwelten_data.html)")
+    if "transform.Unmarshal" not in text:
+        fehler.append("entpackt die Datei nicht mit transform.Unmarshal")
+    if '"format" "yaml"' not in text:
+        fehler.append("nennt transform.Unmarshal kein explizites Format – Hugo rät "
+                      "bei dem #-Kommentarkopf TOML und der Build stirbt "
+                      "(„toml: expected '=' after key“)")
+    for zeile, treffer in datenbaum_griffe(text):
+        fehler.append(f"Zeile {zeile}: Zugriff auf {treffer} – Hugo parst dann den "
+                      "ganzen data/-Baum inklusive *.jsonl und der Build stirbt")
+    return fehler
+
+
 def pruefe_datenpfad() -> list[dict]:
     """IW0, Teil Datenpfad: Wie kommt die Angebots-Wahrheit in die Templates?
 
@@ -1107,19 +1131,11 @@ def pruefe_datenpfad() -> list[dict]:
             owner="human"))
     else:
         txt = ZIELE_PARTIAL.read_text(encoding="utf-8")
-        if 'os.ReadFile "data/affiliate_ziele.yaml"' not in txt:
+        for fehler_text in datenpfad_fehler(txt):
             funde.append(befund(
                 "IW0", {**pseudo, "rel": str(ZIELE_PARTIAL.relative_to(ROOT))},
-                0, "", "", "",
-                "affiliate_ziele_data.html liest data/affiliate_ziele.yaml nicht "
-                "per os.ReadFile (Hausmuster aus themenwelten_data.html)",
+                0, "", "", "", f"affiliate_ziele_data.html: {fehler_text}",
                 owner="human"))
-        if "transform.Unmarshal" not in txt:
-            funde.append(befund(
-                "IW0", {**pseudo, "rel": str(ZIELE_PARTIAL.relative_to(ROOT))},
-                0, "", "", "",
-                "affiliate_ziele_data.html entpackt die Datei nicht mit "
-                "transform.Unmarshal", owner="human"))
 
     for pfad in (RENDER_HOOK, ANCHOR_PARTIAL):
         if not pfad.exists():
@@ -2039,6 +2055,15 @@ def run_selftest() -> list[str]:
     muss(not datenbaum_griffe('{{/* site.Data ist verboten – siehe Partial */}}\n'
                               '<!-- hugo.Data ebenso -->'),
          "Datenpfad-Detektor hält einen KOMMENTAR für Code (Dauer-Alarm)")
+    muss(bool(datenpfad_fehler('{{ $d := os.ReadFile "data/affiliate_ziele.yaml" '
+                               '| transform.Unmarshal }}')),
+         "Datenpfad-Prüfer sieht das fehlende YAML-Format nicht (Build-Killer: "
+         "Hugo rät TOML)")
+    muss(not datenpfad_fehler(
+        '{{- if fileExists "data/affiliate_ziele.yaml" -}}'
+        '{{- $d = os.ReadFile "data/affiliate_ziele.yaml" '
+        '| transform.Unmarshal (dict "format" "yaml") -}}{{- end -}}'),
+        "Datenpfad-Prüfer meldet das korrekte Partial als Fehler (Dauer-Alarm)")
     datenpfad = pruefe_datenpfad()
     muss(not datenpfad,
          "Datenpfad der Templates ist nicht build-sauber: "
