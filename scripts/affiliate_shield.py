@@ -82,16 +82,40 @@ def deep_map(reg: dict) -> dict:
 # Ziel-Namen fuer die Gateway-Seiten (Transparenz beim Uebergang –
 # wie Profi-Affiliates: Nutzer SEHEN, wohin es geht; Frank-Regel 11.08.:
 # bei C24-Verlinkung immer die C24 Bank nennen).
-GO_NAMES = {
+#
+# 19.09.2026 (Intent-Wache): Die Namen kommen JETZT aus dem zentralen
+# Intent-Kontrakt (scripts/affiliate_intent_contract.py) – dieselbe Wahrheit,
+# aus der auch Anker, Tooltips und data/affiliate_ziele.yaml entstehen.
+# Fund vom 19.09.: /go/fluege/ sagte nur „Check24", obwohl die Kette im
+# Pauschalreise-Vergleich landet (kein Flugvergleich) – eine unehrliche
+# Übergabe. Die Fallback-Tabelle bleibt als Netz, falls der Kontrakt nicht
+# ladbar ist; affiliate_intent_guard.py IW5 beweist Seite fuer Seite, dass
+# der echte Zielname auf der Gateway-Seite steht.
+_FALLBACK_NAMES = {
     "tagesgeld": "C24 Bank (von Check24)",
     "girokonto": "C24 Bank (von Check24)",
+    "fluege": "Check24 Pauschalreisen (Flug im Paket)",
     "haftpflicht": "Tarifcheck",
     "hausrat": "Tarifcheck",
     "unfallversicherung": "Tarifcheck",
     "zahnzusatzversicherung": "Tarifcheck",
     "reisekrankenversicherung": "Tarifcheck",
     "hunde": "Tarifcheck",
+    "wohngebaeudeversicherung": "Tarifcheck",
+    "allgemein": "Check24 Vergleichsportal",
 }
+
+
+def _kontrakt_names() -> dict:
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import affiliate_intent_contract as vk
+        return {k: z.gateway for k, z in vk.ZIELE.items() if z.gateway}
+    except Exception:
+        return {}
+
+
+GO_NAMES = {**_FALLBACK_NAMES, **_kontrakt_names()}
 
 
 def generate_go_pages(reg: dict) -> int:

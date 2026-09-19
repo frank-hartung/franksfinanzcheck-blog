@@ -90,6 +90,13 @@ CONTRACT = {
     "zahnzusatzversicherung": ("tarifcheck", "partner_id=47086&ad_id=15", ["zahnzusatz"], True, False),
     "reisekrankenversicherung": ("tarifcheck", "partner_id=47086&ad_id=15", ["reisekranken"], True, False),
     "hunde":       ("tarifcheck", "partner_id=47086&ad_id=15&deep=hundekrankenversicherung", ["hundekranken"], True, False),
+    # 19.09.2026 (Intent-Wache): Der Wohngebaeude-Vergleichsartikel bewarb
+    # /go/hausrat/ und /go/haftpflicht/ – fremde Policen fuer Hausbesitzer.
+    # Der Tarifcheck-Deep `wohngebaeudeversicherung` ist E2E verifiziert
+    # (Kette landet auf tarifcheck.de/wohngebaeudeversicherung/), deshalb
+    # eigene Route + eigener Kontrakt-Eintrag statt Umbenennen des CTAs.
+    "wohngebaeudeversicherung": ("tarifcheck", "partner_id=47086&ad_id=15",
+                                 ["wohngebaeude"], True, False),
 }
 
 # Sicherer Hafen pro Netz (PID bleibt vollstaendig erhalten):
@@ -121,6 +128,15 @@ SELFTEST = [
     ("unfallversicherung", "https://www.tarifcheck.de/unfallversicherung/?partner_id=47086&ad_id=15&model=1", 403, "waf"),
     ("hunde", "https://www.tarifcheck.de/hundekrankenversicherung/?partner_id=47086&ad_id=15&model=1", 403, "waf"),
     ("hunde", "https://www.tarifcheck.de/haftpflichtversicherung/", 200, "kategorie"),
+    # 19.09.2026 (Intent-Wache): Wohngebaeude muss auf der Wohngebaeude-Seite
+    # landen – die Hausrat-Seite waere genau der Fund vom 19.09.
+    ("wohngebaeudeversicherung",
+     "https://www.tarifcheck.de/wohngebaeudeversicherung/?partner_id=47086&ad_id=15&model=1",
+     403, "waf"),
+    ("wohngebaeudeversicherung",
+     "https://www.tarifcheck.de/wohngebaeudeversicherung/", 200, "ok"),
+    ("wohngebaeudeversicherung",
+     "https://www.tarifcheck.de/hausratversicherung/", 200, "kategorie"),
 ]
 
 

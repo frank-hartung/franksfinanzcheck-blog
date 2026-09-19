@@ -1,12 +1,12 @@
 {
-  "signed_at": "2026-09-19T10:24:32.029781+00:00",
-  "head": "5493744",
+  "signed_at": "2026-09-19T15:47:25.407031+00:00",
+  "head": "146e9a7",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3d7386ffdca3a48da91a6532982a3982cefecc5bebf47f69cd45b72e3bfbe100",
     "hugo.toml": "3665fcf4e87be3b171b4555387bab693ca8c479392f524153fa05fd7b1d42e4d",
-    "layouts/_default/_markup/render-link.html": "8776bb0e218456f141d4681a8227c374fc7511b7eadb890434fed4423066d677",
-    "layouts/_partials/affiliate_anchor_attrs.html": "7c40d768453393e2b915e819cc0c8922732f9bf43c3c04cab9f7eddf19601cf5",
+    "layouts/_default/_markup/render-link.html": "5618b0078ed7022452e1eda0f664022d1289244493a2cd273b871d6dbc2098b1",
+    "layouts/_partials/affiliate_anchor_attrs.html": "b1c74e96527557bee74beb0b53a090d1f721b8a73d643009929dacd17ad753af",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
@@ -15,18 +15,18 @@
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "73ddd7e6bcdd4b675c9815319955e03efaa76e9cfdd23f2f2416c253b6d1fbf5",
+    "layouts/pillar/list.html": "334d8d7cfa66d31263582a5a4418f3e2ead7aaa8dddde2e8fb0bf2e2d9d4ad78",
     "layouts/pillar/single.html": "10e7ce5a3af2246ec56be397f8e37f74331de5da26c28c95a562979a09327455",
     "layouts/robots.txt": "ed88bb3ffbb57272ed5418d3ac0246c1ca8ac082213549fdf13e09b6a9cd5246",
     "layouts/shortcodes/einspartabelle.html": "527d9dccebf232ba9876e64df51ca0fc52ead3518575fca613b9048942a70cf7",
     "layouts/shortcodes/tarifvergleich.html": "2e9027e722fad0cbe33e6ecf736f3fd407c1a2b175b07f4008f651e4733161ca",
     "scripts/affiliate_integrity_gate.py": "ecd407279ec0cc8d7c79c081efc7a977450a8604f41a3c4c2d5f8a5dd281b3bc",
-    "scripts/affiliate_marketer.py": "417000e8502afbab10a6790c07fa0072c00b39bd1c2a39d684ab736078682390",
+    "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "06db0d1a1fa62b46a7d464bc50d1f206d5708177be8ab6cc3c2b329be63becf6",
     "scripts/brand_guard.py": "e668be495b16d13ee9c13806d6281b08a862cc075888f3abf418a56b6bc92bed",
     "scripts/casing_guard.py": "632b9c92cde0249fe9f6c57ce22a5ef2e1695d049c31532da8ed99fbd6f3d3c6",
-    "scripts/check24_links.yaml": "688db17156e445678c31de4bddb95338516afe21a64bf6ad1e926b2329add53a",
+    "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
     "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
     "scripts/content_audit.py": "99a482e8f6a1bb035e841f905a68da6cbf42a32346682ecb3e339c7d48550689",
     "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
@@ -198,6 +198,18 @@
         "layouts/_partials/extend_post_content.html",
         "layouts/_partials/pillar_box.html",
         "layouts/pillar/list.html"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "art": "set-current",
+      "head": "146e9a7",
+      "geaendert": [
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/pillar/list.html",
+        "scripts/affiliate_marketer.py",
+        "scripts/check24_links.yaml"
       ]
     }
   ]

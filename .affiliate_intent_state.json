@@ -1,0 +1,14 @@
+{
+ "generated_at": "2026-09-19 15:33:01 UTC",
+ "exit_code": 0,
+ "modus": "FIX",
+ "checked_articles": 66,
+ "checked_links": 195,
+ "healed_count": 2,
+ "healed": [
+  "data/affiliate_ziele.yaml aus dem Kontrakt gebacken",
+  "20 Gateway-Seiten mit ehrlichen Zielnamen gebacken"
+ ],
+ "findings": [],
+ "errors": []
+}

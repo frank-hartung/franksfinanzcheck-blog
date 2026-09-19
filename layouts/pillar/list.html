@@ -9,7 +9,12 @@
     optimierten internen Verlinkungen.
 ============================================================ */ -}}
 
-{{- /* Namen und Reihenfolge nicht getrennt von /posts/ pflegen. */ -}}
+{{- /* Namen und Reihenfolge nicht getrennt von /posts/ pflegen.
+   CTA-Texte stehen unter demselben Vertrag wie Artikel-CTAs:
+   scripts/affiliate_intent_contract.py (IW3/IW9 der Intent-Wache prüfen
+   diese Datei bei jedem Lauf). Fund 19.09.2026: „Tagesgeld vergleichen"
+   auf /go/tagesgeld/ versprach einen Marktvergleich, geliefert wird ein
+   Angebot der C24 Bank → Anker nennt jetzt C24. */ -}}
 {{- $pillars := slice -}}
 {{- $labels := dict -}}
 {{- $names := dict -}}
@@ -20,7 +25,7 @@
 {{- end -}}
 {{- $savings := dict "strom-sparen" "Bis zu 800 € / Jahr" "internet-dsl" "Bis zu 350 € / Jahr" "versicherungen" "Bis zu 500 € / Jahr" "konto-karten" "Bis zu 180 € / Jahr" "frugalismus" "Über 200 € / Monat" "mietwagen" "Bis zu 400 € / Reise" }}
 {{- $topics := dict "strom-sparen" (slice "Stromanbieter wechseln" "Gaspreisgarantien" "Stromfresser im Standby" "Heizkosten senken") "internet-dsl" (slice "DSL-Wechselbonus" "WLAN optimieren" "DNS-Tuning" "Günstige Handytarife") "versicherungen" (slice "Privathaftpflicht" "Wohngebäude & Hausrat" "Kfz-Versicherungswechsel" "Zahnzusatz") "konto-karten" (slice "Kostenloses Girokonto" "C24 Bank Vergleich" "Kreditkarten ohne Jahresgebühr" "Tagesgeld-Zinsen") "frugalismus" (slice "50–30–20-Regel" "Notgroschen aufbauen" "Ausgaben-Tracking" "Konsum-Gewohnheiten") "mietwagen" (slice "Mietwagen ohne Kautionsfalle" "Vollkasko ohne Selbstbeteiligung" "Günstige Flüge" "Last-Minute-Buchung") }}
-{{- $ctas := dict "strom-sparen" (dict "url" "/go/strom/" "text" "Stromtarife vergleichen") "internet-dsl" (dict "url" "/go/dsl/" "text" "DSL-Tarife vergleichen") "versicherungen" (dict "url" "/go/haftpflicht/" "text" "Haftpflicht vergleichen") "konto-karten" (dict "url" "/go/girokonto/" "text" "Girokonto vergleichen") "frugalismus" (dict "url" "/go/tagesgeld/" "text" "Tagesgeld vergleichen") "mietwagen" (dict "url" "/go/mietwagen/" "text" "Mietwagen vergleichen") }}
+{{- $ctas := dict "strom-sparen" (dict "url" "/go/strom/" "text" "Stromtarife vergleichen") "internet-dsl" (dict "url" "/go/dsl/" "text" "DSL-Tarife vergleichen") "versicherungen" (dict "url" "/go/haftpflicht/" "text" "Haftpflicht vergleichen") "konto-karten" (dict "url" "/go/girokonto/" "text" "C24 Bank Girokonto ansehen") "frugalismus" (dict "url" "/go/tagesgeld/" "text" "C24 Bank Tagesgeld ansehen") "mietwagen" (dict "url" "/go/mietwagen/" "text" "Mietwagen vergleichen") }}
 
 <header class="ff-pillar-hero">
   <div class="ff-pillar-hero__badge">
@@ -180,14 +185,14 @@
           <td class="ff-highlight-cell">80 – 180 € / Jahr</td>
           <td>ca. 5 Minuten</td>
           <td>Gebührenfreies C24 Girokonto + Tagesgeld</td>
-          <td><a href="/go/girokonto/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">C24 Bank →</a></td>
+          <td><a href="/go/girokonto/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn" title="Weiter zu C24 Bank (Check24) · Girokonto (Partnerlink = Werbung)">C24 Girokonto →</a></td>
         </tr>
         <tr>
           <td><a href="frugalismus/">🌱 Frugalismus</a></td>
           <td class="ff-highlight-cell">ab 200 € / Monat</td>
           <td>Dauerhaft</td>
           <td>50–30–20-Regel &amp; Notgroschen</td>
-          <td><a href="/go/tagesgeld/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn">Tagesgeld →</a></td>
+          <td><a href="/go/tagesgeld/" rel="sponsored nofollow noopener" target="_blank" class="ff-table-btn" title="Weiter zu C24 Bank (Check24) · Tagesgeld (Partnerlink = Werbung)">C24 Tagesgeld →</a></td>
         </tr>
         <tr>
           <td><a href="mietwagen/">🚗 Mietwagen &amp; Reisen</a></td>

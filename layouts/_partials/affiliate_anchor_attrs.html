@@ -37,25 +37,26 @@
 {{- $out := dict -}}
 {{- $url := .url | default "" -}}
 {{- $names := dict
-  "allgemein"            "Check24 Vergleichsportal"
-  "strom"                "Check24 · Stromtarife"
-  "gas"                  "Check24 · Gastarife"
-  "dsl"                  "Check24 · DSL & Internet"
-  "fluege"               "Check24 · Flüge & Pauschalreisen"
-  "handytarife"          "Check24 · Handytarife"
-  "kredit"               "Check24 · Kreditvergleich"
-  "kreditkarte"          "Check24 · Kreditkarten"
-  "kfz-versicherung"     "Check24 · Kfz-Versicherung"
-  "mietwagen"            "Check24 · Mietwagen"
-  "reisen"               "Check24 · Reisen & Urlaub"
-  "girokonto"            "C24 Bank (Check24) · Girokonto"
-  "tagesgeld"            "C24 Bank (Check24) · Tagesgeld"
-  "haftpflicht"          "Tarifcheck · Haftpflicht"
-  "hausrat"              "Tarifcheck · Hausrat"
-  "unfallversicherung"   "Tarifcheck · Unfallversicherung"
-  "reisekrankenversicherung" "Tarifcheck · Reisekranken"
-  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatz"
-  "hunde"                "Tarifcheck · Hunde­krankenversicherung"
+  "allgemein"                "Check24 Vergleichsportal (Startseite)"
+  "dsl"                      "Check24 · DSL & Internet"
+  "fluege"                   "Check24 · Pauschalreisen (Flug im Paket)"
+  "gas"                      "Check24 · Gastarife"
+  "girokonto"                "C24 Bank (Check24) · Girokonto"
+  "haftpflicht"              "Tarifcheck · Privathaftpflicht"
+  "handytarife"              "Check24 · Handytarife"
+  "hausrat"                  "Tarifcheck · Hausratversicherung"
+  "hunde"                    "Tarifcheck · Tierkrankenversicherung"
+  "kfz-versicherung"         "Check24 · Kfz-Versicherung"
+  "kredit"                   "Check24 · Kreditvergleich"
+  "kreditkarte"              "Check24 · Kreditkarten"
+  "mietwagen"                "Check24 · Mietwagen"
+  "reisekrankenversicherung" "Tarifcheck · Reisekrankenversicherung"
+  "reisen"                   "Check24 · Pauschalreisen & Urlaub"
+  "strom"                    "Check24 · Stromtarife"
+  "tagesgeld"                "C24 Bank (Check24) · Tagesgeld"
+  "unfallversicherung"       "Tarifcheck · Unfallversicherung"
+  "wohngebaeudeversicherung" "Tarifcheck · Wohngebäudeversicherung"
+  "zahnzusatzversicherung"   "Tarifcheck · Zahnzusatzversicherung"
 -}}
 {{- if strings.HasPrefix $url "/go/" -}}
   {{- /* Schlüssel robust extrahieren: /go/<key>/, /go/<key> und
@@ -89,7 +90,19 @@
     {{- if strings.Contains $url "?" }}{{ $sep = "&" }}{{ end -}}
     {{- $href = print $url $sep "subid=" $slug -}}
   {{- end -}}
-  {{- $ziel := index $names $key | default (print "Partner: " $key) -}}
+  {{- /* Zielname: ZUERST aus data/affiliate_ziele.yaml (generiert aus dem
+     Intent-Kontrakt scripts/affiliate_intent_contract.py), das Dict darunter
+     ist nur Fallback, falls die Datendatei fehlt. Drift prüft IW0 der
+     Intent-Wache (affiliate_intent_guard.py) bei jedem Lauf. */ -}}
+  {{- $ziel := "" -}}
+  {{- with site.Data.affiliate_ziele -}}
+    {{- with .ziele -}}
+      {{- with index . $key -}}
+        {{- with .anzeige }}{{ $ziel = . }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $ziel }}{{ $ziel = index $names $key | default (print "Partner: " $key) }}{{ end -}}
   {{- $out = dict
         "href"    $href
         "key"     $key
