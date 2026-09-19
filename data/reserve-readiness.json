@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 9,
   "pool_size": 9,
-  "generated_at": "2026-09-18T08:30:40Z",
+  "generated_at": "2026-09-19T08:14:29Z",
   "candidates": [
     {
       "slug": "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
@@ -110,21 +110,6 @@
       }
     },
     {
-      "slug": "2026-09-18-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "ready": true,
-      "sha256": "4a781579a429ebe3cdc76f35f25132030aa2f7d14134bf83ef4790dd341c9731",
-      "score": 0.984,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-09-18-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
       "ready": true,
       "sha256": "503d6d3585512f81710fe09406ef2f54065872edcaf6ba516d89de2af9ab53e9",
@@ -137,6 +122,21 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-09-19-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "ready": true,
+      "sha256": "0137a4810dacabdfa4b67dfcdb86af65923e7b9baaf6940724ec8d52d8d62b8a",
+      "score": 0.988,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
       }
     }
   ]
