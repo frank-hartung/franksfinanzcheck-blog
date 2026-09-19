@@ -1,6 +1,7 @@
 # Vorfall-Bericht: „Content-Engine v2" rot — der Integritäts-Lock stoppte die Produktion
 
-**Datum:** 19.09.2026 · **Status:** behoben (dieser Bericht) · **Schweregrad:** hoch
+**Datum:** 19.09.2026 · **Status:** behoben über [PR #317](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/317)
+(alle Checks grün) · **Schweregrad:** hoch
 (Produktions-Slots fielen aus, **kein** Schaden an Artikeln, Links oder Builds)
 **Vorgänger:** [Vorfall 18.09.2026 — Qualitäts-Gate als Zeitbombe](INCIDENT-2026-09-18-qualitaets-gate-zeitbombe.md)
 
@@ -158,8 +159,14 @@ python3 scripts/selftest_runner.py                 # alle Wachen + Uhr-Proben
 
 ## Produktivbetrieb
 
-* **PR-Gate:** greift ab dem nächsten Pull Request auf `main`; der erste Beleg
-  ist dieser PR selbst (grün, weil die Signatur mitkommt).
+* **PR-Gate:** greift ab dem nächsten Pull Request auf `main`; erster Beleg ist
+  dieser PR selbst — alle Checks grün:
+
+  | Check | Lauf | Ergebnis |
+  |---|---|---|
+  | **Integritäts-Lock (PR-Gate)** (neu) | [35433068144](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35433068144) | ✅ success, **13 s** (Gate + Kern-Beweis) |
+  | Publication reliability regression tests | [35433068121](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35433068121) | ✅ success, 36 s |
+  | Qualitäts-Gate (Build + interne Links) | [35433068093](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35433068093) | ✅ success, 1 m 15 s (inkl. Selbsttest-Runner mit der neuen Wache) |
 * **Engine:** Der nächste planmäßige Lauf (Mo/Mi/Fr; Haupt-Slot 06:10 UTC)
   startet mit frischem Siegel. Tritt wieder Drift auf, signiert er belegten
   FEST-Drift selbst, dokumentiert die Herkunft und **meldet es** (Report +
