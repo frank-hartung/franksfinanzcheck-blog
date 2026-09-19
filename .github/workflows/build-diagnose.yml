@@ -13,6 +13,9 @@
 name: Build-Diagnose (temporär)
 
 on:
+  push:
+    branches:
+      - "arena/01a0ba19-franksfinanzcheck-blog"
   workflow_dispatch:
     inputs:
       pr:
@@ -47,8 +50,8 @@ jobs:
       - name: Build + Bisect
         id: bisect
         run: |
-          BASIS="${{ github.event.inputs.basis }}"
-          PR="${{ github.event.inputs.pr }}"
+          BASIS="${{ github.event.inputs.basis || '146e9a7' }}"
+          PR="${{ github.event.inputs.pr || '321' }}"
           hugo version | tee /tmp/diagnose.txt
           echo "" >> /tmp/diagnose.txt
 
@@ -102,9 +105,10 @@ jobs:
 
       - name: Ergebnis in den PR kommentieren
         run: |
+          PR="${{ github.event.inputs.pr || '321' }}"
           {
             echo "### 🔬 Build-Diagnose (automatisch, Workflow wird wieder entfernt)"
             echo ""
             cat /tmp/diagnose.txt
           } > /tmp/kommentar.md
-          gh pr comment "${{ github.event.inputs.pr }}" --body-file /tmp/kommentar.md
+          gh pr comment "$PR" --body-file /tmp/kommentar.md
