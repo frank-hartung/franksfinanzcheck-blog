@@ -123,7 +123,16 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Live-Seite trug das Prompt-Gerüst „TITEL:/ARTIKEL:". Der Selbsttest
           # der Wache hält Kleber-Erkennung, Naht-Treue, Gerüst-Entfernung und
           # Idempotenz fest; sie heilt über die Naht-SSOT in post_utils.
-          "fm_boundary_guard.py"]
+          "fm_boundary_guard.py",
+          # Folge-Reparatur zu Issue #316 (19.09.2026): Der Integritäts-Lock
+          # stand auf HARD STOP, weil PR #315 sechs gesperrte Dateien ohne
+          # Neu-Signatur gemergt hatte – die Content-Engine starb im ersten
+          # Schritt. Der Guard beweist jetzt in seinem `--selftest` an einem
+          # echten Mini-Repo: Klassifikation (committet vs. Laufzeit-Mutation),
+          # Signatur-Regel (nur FEST + versioniert + == HEAD) und Konvergenz
+          # der Heilung. Als Wache im Minimum läuft dieser Beweis in jedem
+          # Gate-Durchgang mit – inklusive Uhr-Proben und C15.
+          "integrity_guard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

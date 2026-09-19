@@ -49,21 +49,49 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
-      # ================= INTEGRITÄTS-LOCK (HARD STOP) =================
+      # COMMIT-IDENTITÄT FRÜH UND EINMAL (19.09.2026, Issue #316): Bisher setzte
+      # jeder Commit-Schritt die Identität selbst. Läuft ein früher Schritt hart
+      # ab (z. B. der Lock-HARD-STOP), werden die Phasen dazwischen übersprungen –
+      # aber `if: ${{ !cancelled() }}`-Schritte wie „Persist final acceptance
+      # corrections" laufen weiter und committen ohne Identität: Lauf und
+      # Befund wurden dadurch schwerer lesbar als nötig (der echte Fehler war
+      # Schritt 1, nicht der Commit). Eine Identität, einmal gesetzt, gilt für
+      # alle späteren Schritte – der Befund bleibt sauber beim Verursacher.
+      - name: Git-Identität für Bot-Commits setzen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+
+      # ============ INTEGRITÄTS-LOCK (HARD STOP + BELEGTE SIGNATUR) ============
       # Zuerst der Safe, dann die Arbeit: Der Lock (integrity_guard.py)
       # bürgt, dass Kern-Layouts, CTA-Shortcodes und die Dienst-Wachen exakt
-      # dem zuletzt SIGNIERTEN Stand entsprechen. Drift = Exit 3 (kritisch)
-      # bzw. 1 (fest) – und dieser Schritt hat KEIN `|| echo`: Ein
-      # Sabotage-Verdacht, der als „⚠ nicht kritisch" durchrutscht, ist
-      # kein Schutz, sondern Deko. Genau das geschah bis 18.09.2026 im
-      # Oberarzt-Schritt (Folge-Befund 1 des Qualitäts-Gate-Vorfalls: der
-      # Lock stand seit dem 15.09. auf HARD STOP, und der
-      # Doktor-Aufruf verschluckte es mit `|| echo`).
-      # Heilung ist eine Entscheidung, keine Automatik: Abweichung sichten
-      # (INTEGRITY-REPORT.md), dann `python3 scripts/integrity_guard.py
-      # --set-current` signieren oder die Änderung zurücknehmen.
-      - name: Integritäts-Lock prüfen (HARD STOP – Sabotage-Schutz)
-        run: python3 scripts/integrity_guard.py
+      # dem zuletzt SIGNIERTEN Stand entsprechen.
+      #
+      # 18.09.2026: Der Schritt hat KEIN `|| echo` – ein Sabotage-Verdacht,
+      # der als „⚠ nicht kritisch" durchrutscht, ist kein Schutz, sondern
+      # Deko (genau das war bis dahin im Oberarzt-Schritt der Fall).
+      #
+      # 19.09.2026 (Issue #316): Drift, der NUR daraus entsteht, dass eine
+      # regulär gemergte Änderung nicht mit-signiert wurde, hat hier die
+      # Produktion gestoppt (sechs FEST-Dateien aus PR #315). Deshalb heilt
+      # dieser Schritt jetzt BELEGTES, committetes Drift der Klasse FEST
+      # selbst (`--heal`) und committet die Signatur mit ihrer Akte – und
+      # bleibt für alles andere hart:
+      #   · KRITISCH (Sabotage-Schutz)     -> Exit 3, Mensch entscheidet
+      #   · Laufzeit-Mutation (≠ HEAD)     -> Exit 3, Mensch entscheidet
+      #   · neue kritische Datei ohne Sig. -> Exit 3, Mensch entscheidet
+      # Zusätzlich hält das PR-Gate (integrity-lock.yml) den Drift schon
+      # VOR dem Merge auf – hier bleibt er dann die Ausnahme.
+      - name: Integritäts-Lock prüfen & belegten Drift signieren (HARD STOP bei Sabotage)
+        run: |
+          python3 scripts/integrity_guard.py --heal
+          if ! git diff --quiet -- data/integrity_lock.json data/integrity_history.jsonl; then
+            git config user.name "Content-Bot"
+            git config user.email "content-bot@users.noreply.github.com"
+            git add data/integrity_lock.json data/integrity_history.jsonl
+            git commit -m "chore(integrity): Lock nach belegter Kernänderung neu signiert (Herkunft im Lock)"
+            scripts/git_sync.sh --push-only
+          fi
 
       - name: Python-Abhängigkeiten installieren
         run: |

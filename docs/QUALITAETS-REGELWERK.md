@@ -416,6 +416,17 @@ jeder Schreibaktion.
    setzen Content-Dateien über `post_utils.join_article` zusammen, die Wache
    `fm_boundary_guard.py` meldet `---Text` als **F6 baukritisch** und trennt die
    Naht mit `--fix` (Naht-SSOT: `post_utils.heal_glued_close`).
+7. **Der Kern steht unter Siegel.** Wer eine der gesperrten Kerndateien
+   (`data/integrity_lock.json`, Klassen **KRITISCH**/**FEST**) ändert, signiert
+   im **selben Commit** neu (`python3 scripts/integrity_guard.py --set-current`)
+   — die Herkunft landet als Akte im Lock. Das PR-Gate
+   (`.github/workflows/integrity-lock.yml`, `--gate`) prüft das bei jedem Pull
+   Request und nennt Reparaturzeile + Herkunft; auf `main` signiert die Engine
+   belegten, committeten **FEST**-Drift selbst (`--heal`, mit Commit), während
+   **KRITISCH** und nicht committete Laufzeit-Mutationen HARD STOP bleiben
+   (Sabotage bleibt eine menschliche Entscheidung). Anlass:
+   [Vorfall 19.09.2026](INCIDENT-2026-09-19-integritaets-lock.md) — ein
+   vergessener Lock kostete zwei Produktions-Slots (Issue #316).
 
 ---
 
@@ -456,6 +467,7 @@ jeder Schreibaktion.
 | Prüflauf heilt nebenbei (ein Selbsttest schreibt den Bestand um) | `governance_contract.py` C15 Beweis-Trockenlauf – Nacktheiler müssen `--selftest` trocken führen, `--fix` darf im Selbsttest nicht an Kinder weitergereicht werden |
 | Pillar-/Brand-Deckbild als „Phantom“ fehlklassifiziert und von W2 zum `git rm` vorgemerkt | `workspace_guard.py` W2 prueft vor jeder Loeschung `referenzierte_stems()` (content/*.md + hugo.toml) |
 | Marken-Text verändert | brand_guard (Lock-Reset) |
+| Sperrdatei geändert, Lock nicht mit-signiert (am 18.09.2026 stand die Content-Engine dadurch still) | `integrity_guard.py --gate` im PR (nennen + Reparaturzeile) und `--heal` als erster Engine-Schritt: signiert **nur** versionierten, bytegleich committeten **FEST**-Drift, mit Akte im Lock; KRITISCH und Laufzeit-Mutationen bleiben HARD STOP (19.09.2026, #316) |
 | Actions veraltet | Dependabot + Auto-Merge (Patch/Minor auto) |
 
 ## 📁 Reports (werden bei Läufen kommittiert)
@@ -478,6 +490,23 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **19.09.2026:** Der Integritäts-Lock wurde zur Grenze statt zum Betriebsrisiko
+  (Issue #316). Anlass: PR #315 hat sechs gesperrte Skripte geheilt und den Lock
+  nicht mit-signiert — die Content-Engine starb am 18.09. in zwei Läufen im
+  ersten Schritt, vor jeder Artikelarbeit. Neu: (1) **PR-Gate**
+  `.github/workflows/integrity-lock.yml` prüft bei jedem Pull Request auf
+  `main` mit `integrity_guard.py --gate` (fail-closed, Herkunft + Reparaturzeile
+  im Lauf); (2) **belegte Selbst-Signatur** `--heal` als erster Engine-Schritt —
+  signiert ausschließlich versionierten, bytegleich committeten **FEST**-Drift
+  und committet die Signatur, während KRITISCH und Laufzeit-Mutationen
+  HARD STOP (Exit 3) bleiben; (3) **Akte in jeder Signatur** (`audit` im Lock:
+  Commits seit der Vor-Signatur, Klasse, Urteil je Datei) plus `--drift-audit`
+  als read-only-Herkunftssicht; (4) Commit-Identität wird direkt nach dem
+  Checkout gesetzt (der `!cancelled()`-Commit-Schritt scheiterte sonst ohne
+  Identität, wenn frühe Phasen abbrachen). Schutzzone 7 neu. Der Guard steht
+  im `GUARDS`-Minimum (C6) und beweist in `--selftest` an einem echten
+  Mini-Repo Klassifikation, Signatur-Regel und Konvergenz — schreibfrei (C15);
+  18 Regressionstests. Details: `docs/INCIDENT-2026-09-19-integritaets-lock.md`.
 - **18.09.2026:** FM-Klebefugen dauerhaft geschlossen (Folge-Befund 5 des
   Gate-Vorfalls). Die Schlussgrenze klebte in 13 Dateien (9 live) am ersten
   Absatz; zwei Produzenten sind per Git-Blame belegt (`keyword_optimizer`:
