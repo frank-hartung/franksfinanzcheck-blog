@@ -129,6 +129,15 @@ STATE = ROOT / ".affiliate_intent_state.json"
 HISTORY = ROOT / "data" / "affiliate_intent_history.jsonl"
 RENDER_HOOK = ROOT / "layouts" / "_default" / "_markup" / "render-link.html"
 ANCHOR_PARTIAL = ROOT / "layouts" / "_partials" / "affiliate_anchor_attrs.html"
+# Lädt data/affiliate_ziele.yaml für die Templates – über os.ReadFile, NICHT
+# über hugo.Data/site.Data (data/ enthält *.jsonl-Protokolle; ein einziger
+# site.Data-Zugriff lässt Hugo den ganzen Baum parsen und den Build sterben).
+ZIELE_PARTIAL = ROOT / "layouts" / "_partials" / "affiliate_ziele_data.html"
+LAYOUTS = ROOT / "layouts"
+# Verbotener Zugriff auf den data/-Baum in Layouts (Build-Killer, 19.09.2026)
+DATENBAUM_GRIFF = re.compile(r"\b(?:site\.Data|\.Site\.Data|hugo\.Data)\b")
+HUGO_KOMMENTAR = re.compile(r"\{\{-?\s*/\*.*?\*/\s*-?\}\}", re.S)
+HTML_KOMMENTAR = re.compile(r"<!--.*?-->", re.S)
 
 sys.path.insert(0, str(SCRIPTS))
 
@@ -1042,6 +1051,89 @@ def _cta_zeile_neu(zeile: str, route: str, slot: str, slug: str) -> tuple[str, b
 # ------------------------------------------------------------------ #
 #  IW0: Kontrakt, Register, Daten-Datei, Health-Kontrakt
 # ------------------------------------------------------------------ #
+def kommentarfrei(text: str) -> str:
+    """Template-Text ohne Hugo-/HTML-Kommentare.
+
+    Kommentare dürfen den verbotenen Zugriff BENENNEN (sie dokumentieren ihn
+    ja gerade) – nur echter Code zählt. Ohne diese Unterscheidung würde die
+    Wache ihre eigene Warnung im Partial als Sabotage melden.
+    """
+    return HTML_KOMMENTAR.sub("", HUGO_KOMMENTAR.sub("", text))
+
+
+def datenbaum_griffe(text: str) -> list[tuple[int, str]]:
+    """(Zeile, Treffer) für jeden hugo.Data/site.Data-Zugriff im TEMPLATE-CODE.
+
+    Warum das ein harter Fund ist: data/ enthält Bot-Protokolle als *.jsonl
+    (u. a. data/audit/). Hugo parst den kompletten data/-Baum, sobald ein
+    Template hugo.Data oder site.Data anfasst, und bricht den Build ab mit
+    „unmarshal of format "" is not supported" – die Seite baut nicht mehr,
+    kein Deploy, kein Beweis. Am 19.09.2026 genau so passiert, als die
+    ehrlichen Zielnamen in den Render-Hook einzogen.
+    """
+    code = kommentarfrei(text)
+    return [(code[:m.start()].count("\n") + 1, m.group(0))
+            for m in DATENBAUM_GRIFF.finditer(code)]
+
+
+def pruefe_datenpfad() -> list[dict]:
+    """IW0, Teil Datenpfad: Wie kommt die Angebots-Wahrheit in die Templates?
+
+    Drei Regeln, alle build-kritisch:
+      1. kein Layout fasst hugo.Data/site.Data an (Build-Killer),
+      2. das Partial lädt data/affiliate_ziele.yaml per os.ReadFile,
+      3. beide Verbraucher rufen genau dieses Partial auf.
+    """
+    funde: list[dict] = []
+    pseudo = {"slug": "(Datenpfad)", "rel": "layouts/", "title": "", "tags": [],
+              "pillar": "", "body": "", "section": ""}
+
+    for datei in sorted(LAYOUTS.rglob("*.html")):
+        for zeile, treffer in datenbaum_griffe(datei.read_text(encoding="utf-8")):
+            rel = datei.relative_to(ROOT)
+            funde.append(befund(
+                "IW0", {**pseudo, "rel": str(rel)}, zeile, "", "", treffer,
+                f"{rel}:{zeile} greift auf {treffer} zu – Hugo parst dann den "
+                "ganzen data/-Baum inklusive *.jsonl-Protokollen und der Build "
+                "stirbt (unmarshal of format "" is not supported). Zielnamen "
+                "über layouts/_partials/affiliate_ziele_data.html laden "
+                "(os.ReadFile + transform.Unmarshal)", owner="human"))
+
+    if not ZIELE_PARTIAL.exists():
+        funde.append(befund(
+            "IW0", pseudo, 0, "", "", "",
+            "layouts/_partials/affiliate_ziele_data.html fehlt – die Templates "
+            "kämen nur noch über hugo.Data an die Zielnamen (Build-Killer)",
+            owner="human"))
+    else:
+        txt = ZIELE_PARTIAL.read_text(encoding="utf-8")
+        if 'os.ReadFile "data/affiliate_ziele.yaml"' not in txt:
+            funde.append(befund(
+                "IW0", {**pseudo, "rel": str(ZIELE_PARTIAL.relative_to(ROOT))},
+                0, "", "", "",
+                "affiliate_ziele_data.html liest data/affiliate_ziele.yaml nicht "
+                "per os.ReadFile (Hausmuster aus themenwelten_data.html)",
+                owner="human"))
+        if "transform.Unmarshal" not in txt:
+            funde.append(befund(
+                "IW0", {**pseudo, "rel": str(ZIELE_PARTIAL.relative_to(ROOT))},
+                0, "", "", "",
+                "affiliate_ziele_data.html entpackt die Datei nicht mit "
+                "transform.Unmarshal", owner="human"))
+
+    for pfad in (RENDER_HOOK, ANCHOR_PARTIAL):
+        if not pfad.exists():
+            continue
+        txt = pfad.read_text(encoding="utf-8")
+        if 'partialCached "affiliate_ziele_data.html"' not in txt:
+            funde.append(befund(
+                "IW0", {**pseudo, "rel": str(pfad.relative_to(ROOT))}, 0, "", "", "",
+                f"{pfad.relative_to(ROOT)} ruft affiliate_ziele_data.html nicht "
+                "auf – Tooltip-Namen hängen dann nur am Fallback-Dict",
+                owner="human"))
+    return funde
+
+
 def pruefe_iw0(reg: dict) -> list[dict]:
     funde: list[dict] = []
     pseudo = {"slug": "(Kontrakt)", "rel": "scripts/affiliate_intent_contract.py",
@@ -1121,6 +1213,9 @@ def pruefe_iw0(reg: dict) -> list[dict]:
                     f"{pfad.relative_to(ROOT)}: Fallback-Name für /go/{route}/ "
                     f"weicht vom Kontrakt ab (erwartet „{z.anzeige}“)",
                     owner="human"))
+
+    # Datenpfad: kein Layout darf den data/-Baum über hugo.Data/site.Data parsen
+    funde += pruefe_datenpfad()
     return funde
 
 
@@ -1932,6 +2027,23 @@ def run_selftest() -> list[str]:
          "bake_yaml: ehrlicher Flug-Name fehlt")
     for fehler_text in vk.selftest():
         fehler.append(f"Kontrakt-Selftest: {fehler_text}")
+
+    # 6) Datenpfad: hugo.Data/site.Data im Layout killt den Build (19.09.2026).
+    #    Der Detektor muss die Sabotage SEHEN und die Dokumentation derselben
+    #    (Kommentar) schweigen lassen – sonst ist er entweder blind oder ein
+    #    Dauer-Alarm, den jemand abschaltet.
+    muss(bool(datenbaum_griffe('{{- with site.Data.affiliate_ziele -}}x{{- end -}}')),
+         "Datenpfad-Detektor sieht site.Data im Template-Code nicht")
+    muss(bool(datenbaum_griffe('{{ $x := hugo.Data.affiliate_ziele }}')),
+         "Datenpfad-Detektor sieht hugo.Data im Template-Code nicht")
+    muss(not datenbaum_griffe('{{/* site.Data ist verboten – siehe Partial */}}\n'
+                              '<!-- hugo.Data ebenso -->'),
+         "Datenpfad-Detektor hält einen KOMMENTAR für Code (Dauer-Alarm)")
+    datenpfad = pruefe_datenpfad()
+    muss(not datenpfad,
+         "Datenpfad der Templates ist nicht build-sauber: "
+         + "; ".join(f"{f['path']}:{f['line']} {f['problem'][:70]}"
+                     for f in datenpfad[:3]))
     return fehler
 
 

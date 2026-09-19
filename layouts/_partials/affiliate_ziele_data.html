@@ -1,0 +1,22 @@
+{{- /* Angebots-Wahrheit für Affiliate-Tooltips: data/affiliate_ziele.yaml,
+       gebacken aus scripts/affiliate_intent_contract.py. Drift zwischen dieser
+       Datei, dem Kontrakt und den Fallback-Dicts in den Templates prüft IW0
+       der Intent-Wache (affiliate_intent_guard.py) bei jedem Lauf.
+
+       WARUM NICHT hugo.Data / site.Data:
+       data/ enthält auch Bot-Protokolle (*.jsonl, u. a. data/audit/). Schon
+       EIN Zugriff auf hugo.Data/site.Data lässt Hugo den ganzen data/-Baum
+       parsen – der Build stirbt mit
+       „failed to load data: …/*.jsonl:1:1: unmarshal of format "" is not
+       supported". Genau das passierte am 19.09.2026, als die ehrlichen
+       Zielnamen in den Render-Hook wanderten: drei Checks (Qualitäts-Gate,
+       Playwright, Themenwelten) wurden rot, weil die Seite nicht mehr baute.
+
+       Deshalb dieselbe Bauweise wie themenwelten_data.html: genau die eine
+       geprüfte Datei lesen, pro Build cachen, zurückgeben. Die Wache prüft,
+       dass kein Layout je wieder hugo.Data/site.Data anfasst. */ -}}
+{{- $daten := dict -}}
+{{- if fileExists "data/affiliate_ziele.yaml" -}}
+  {{- $daten = os.ReadFile "data/affiliate_ziele.yaml" | transform.Unmarshal -}}
+{{- end -}}
+{{- return $daten -}}

@@ -90,12 +90,15 @@
     {{- if strings.Contains $url "?" }}{{ $sep = "&" }}{{ end -}}
     {{- $href = print $url $sep "subid=" $slug -}}
   {{- end -}}
-  {{- /* Zielname: ZUERST aus data/affiliate_ziele.yaml (generiert aus dem
+  {{- /* Zielname: ZUERST aus data/affiliate_ziele.yaml (gebacken aus dem
      Intent-Kontrakt scripts/affiliate_intent_contract.py), das Dict darunter
      ist nur Fallback, falls die Datendatei fehlt. Drift prüft IW0 der
-     Intent-Wache (affiliate_intent_guard.py) bei jedem Lauf. */ -}}
+     Intent-Wache (affiliate_intent_guard.py) bei jedem Lauf.
+     Geladen über layouts/_partials/affiliate_ziele_data.html – NIEMALS
+     hugo.Data/site.Data: data/ enthält *.jsonl-Protokolle, daran stirbt der
+     Build (Vorfall 19.09.2026). */ -}}
   {{- $ziel := "" -}}
-  {{- with site.Data.affiliate_ziele -}}
+  {{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
     {{- with .ziele -}}
       {{- with index . $key -}}
         {{- with .anzeige }}{{ $ziel = . }}{{ end -}}

@@ -279,18 +279,65 @@ class EineWahrheit(unittest.TestCase):
 
     def test_templates_lesen_die_datendatei(self):
         """Tooltip-Namen dürfen keine zweite Wahrheit sein: Die Templates lesen
-        data/affiliate_ziele.yaml, ihr Fallback-Dict trägt exakt die Kontrakt-
-        Namen (IW0 prüft Zeichen für Zeichen)."""
+        data/affiliate_ziele.yaml über das Hausmuster-Partial, ihr Fallback-Dict
+        trägt exakt die Kontrakt-Namen (IW0 prüft Zeichen für Zeichen)."""
         for template in ("layouts/_default/_markup/render-link.html",
                          "layouts/_partials/affiliate_anchor_attrs.html"):
             with self.subTest(template=template):
                 text = (ROOT / template).read_text(encoding="utf-8")
-                self.assertIn("affiliate_ziele", text,
-                              f"{template} liest die Datendatei nicht")
+                self.assertIn('partialCached "affiliate_ziele_data.html"', text,
+                              f"{template} lädt die Zieldatei nicht über das Partial")
                 for key, z in vk.ZIELE.items():
                     self.assertIn(key, text, f"{template}: Route {key} fehlt im Fallback")
                     self.assertIn(z.anzeige, text,
                                   f"{template}: Anzeigename für {key} driftet")
+
+    def test_datenpfad_ist_build_sicher(self):
+        """Build-Killer 19.09.2026: EIN `site.Data`-Zugriff in einem Layout lässt
+        Hugo den ganzen data/-Baum parsen – inklusive der *.jsonl-Bot-Protokolle
+        (data/audit/ u. a.). Folge: `failed to load data: … unmarshal of format
+        "" is not supported`, die Seite baut nicht, kein Deploy, drei CI-Checks
+        rot. Der Datenpfad muss deshalb über os.ReadFile laufen."""
+        import yaml
+
+        partial = ROOT / "layouts" / "_partials" / "affiliate_ziele_data.html"
+        self.assertTrue(partial.is_file(),
+                        "affiliate_ziele_data.html fehlt – Templates müssten "
+                        "über hugo.Data gehen (Build-Killer)")
+        ptext = partial.read_text(encoding="utf-8")
+        self.assertIn('os.ReadFile "data/affiliate_ziele.yaml"', ptext)
+        self.assertIn("transform.Unmarshal", ptext)
+
+        griffe = []
+        for datei in sorted((ROOT / "layouts").rglob("*.html")):
+            for zeile, treffer in aig.datenbaum_griffe(
+                    datei.read_text(encoding="utf-8")):
+                griffe.append(f"{datei.relative_to(ROOT)}:{zeile} {treffer}")
+        self.assertEqual([], griffe,
+                         "diese Layouts killen den Hugo-Build: " + "; ".join(griffe))
+
+        # Und was das Partial zur Build-Zeit wirklich liest, muss der Kontrakt sein
+        daten = yaml.safe_load((ROOT / "data" / "affiliate_ziele.yaml")
+                               .read_text(encoding="utf-8"))["ziele"]
+        self.assertEqual(set(vk.ZIELE), set(daten), "Datendatei ≠ Kontrakt-Routen")
+        for key, z in vk.ZIELE.items():
+            with self.subTest(route=key):
+                # `anzeige` ist das Feld, das die Templates zur Build-Zeit
+                # wirklich lesen (Tooltip). `weiter_zu` bleibt bewusst im
+                # Kontrakt und wird auf die Gateway-Seiten gebacken – dafür
+                # gibt es test_gateway_seiten_sind_ehrlich_und_dicht.
+                self.assertEqual(z.anzeige, daten[key]["anzeige"])
+                self.assertEqual(z.gateway, daten[key]["gateway"])
+                self.assertEqual(z.partner, daten[key]["partner"])
+
+    def test_datenpfad_detektor_sieht_sabotage_und_keine_kommentare(self):
+        """Der Detektor muss die Tat sehen, nicht ihre Beschreibung – sonst ist
+        er entweder blind oder ein Dauer-Alarm, den jemand abschaltet."""
+        self.assertTrue(aig.datenbaum_griffe('{{- with site.Data.x -}}{{- end -}}'))
+        self.assertTrue(aig.datenbaum_griffe('{{ $a := hugo.Data.x }}'))
+        self.assertEqual([], aig.datenbaum_griffe(
+            '{{/* site.Data und hugo.Data sind hier verboten */}}\n'
+            '<!-- .Site.Data ebenso -->'))
 
     def test_gateway_seiten_sind_ehrlich_und_dicht(self):
         for route, url in aig.load_registry().items():

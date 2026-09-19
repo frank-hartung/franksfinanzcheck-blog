@@ -52,6 +52,18 @@ Diese eine Datei versorgt: `data/affiliate_ziele.yaml` (Hugo-Tooltips),
 IW0 vergleicht alle diese Orte **Zeichen für Zeichen** – eine zweite Wahrheit
 fällt sofort auf.
 
+**Build-Regel (Vorfall 19.09.2026):** Kein Layout darf `hugo.Data` oder
+`site.Data` anfassen. `data/` enthält auch Bot-Protokolle als `*.jsonl`
+(u. a. `data/audit/`); ein einziger Zugriff lässt Hugo den **ganzen** Baum
+parsen und der Build stirbt mit `failed to load data: … unmarshal of format
+"" is not supported` – Seite baut nicht, kein Deploy, Qualitäts-Gate +
+Playwright + Themenwelten rot. Die Zielnamen kommen deshalb über
+`layouts/_partials/affiliate_ziele_data.html` (`os.ReadFile` +
+`transform.Unmarshal`, `partialCached`), genau wie das Hausmuster
+`themenwelten_data.html`. IW0 prüft jedes Layout auf verbotene Zugriffe und
+unterscheidet dabei Code von Kommentar; der Selbsttest beweist die Erkennung
+mit einer Sabotage-Probe.
+
 Vier Ziele weichen bewusst vom naheliegenden Namen ab (`abweichung`):
 `allgemein`, `fluege`, `girokonto`, `tagesgeld`. Grund: Tagesgeld und
 Girokonto sind Angebote der **C24 Bank** (kein Marktvergleich), und „Flüge"
@@ -96,7 +108,7 @@ Sie ist byte-exakt (nur die kranke Zeile) und idempotent (zweiter Lauf
 
 | Code | Was geprüft wird |
 |---|---|
-| IW0 | Kontrakt, Register, Datendatei, Health-Kontrakt, Templates, Gateway-Seiten: eine Wahrheit |
+| IW0 | Kontrakt, Register, Datendatei, Health-Kontrakt, Templates, Gateway-Seiten: eine Wahrheit – plus build-sicherer Datenpfad (kein `hugo.Data`/`site.Data` in Layouts) |
 | IW1 | Nennt der Anker ein Produkt, liefert die Route genau dieses Produkt |
 | IW2 | Top-/Mid-/End-CTA dient dem Artikelthema (oder ist durch den CTA-Kontext gedeckt) |
 | IW2a | Route ist im Register `scripts/check24_links.yaml` eingetragen |
@@ -143,9 +155,11 @@ Reihenfolge ist Pflicht – jeder Schritt hat einen Prüfer:
 4. **Health-Kontrakt** in `scripts/affiliate_health.py` ergänzen (sonst
    meldet IW0 eine Route ohne E2E-Prüfung).
 5. **Templates**: Fallback-Dict in `render-link.html` und
-   `affiliate_anchor_attrs.html` mit dem neuen Anzeigenamen ergänzen.
-   Beide Dateien sind **integritätsgesperrt** → im selben Commit neu
-   signieren: `python3 scripts/integrity_guard.py --set-current`.
+   `affiliate_anchor_attrs.html` mit dem neuen Anzeigenamen ergänzen (die
+   Zielnamen selbst kommen zur Build-Zeit aus
+   `affiliate_ziele_data.html` – niemals `hugo.Data`/`site.Data`, siehe
+   Build-Regel oben). Beide Dateien sind **integritätsgesperrt** → im selben
+   Commit neu signieren: `python3 scripts/integrity_guard.py --set-current`.
 6. **Beweis**: `--selftest` (Kontrakt + Wache), `--dry-run` (Bestand),
    `python3 -m unittest discover -s scripts/tests` (Regressionstests),
    `python3 scripts/affiliate_health.py --no-net`.

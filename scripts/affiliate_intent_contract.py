@@ -1269,6 +1269,19 @@ def selftest() -> list[str]:
 if __name__ == "__main__":
     import sys
 
+    # --selftest ist die ausdrückliche Form; ohne Argument läuft derselbe
+    # Selbsttest, denn der Kontrakt hat keine andere Aktion (er ist eine
+    # Datendatei in Python-Form). Unbekannte Schalter werden abgelehnt: Der
+    # Selftest-Runner führt nur Skripte, die --selftest WIRKLICH
+    # implementieren – eine bloße Erwähnung im Kommentar würde sonst die
+    # Standard-Aktion starten (real passiert: publish_gate stufte einen
+    # LIVE-Artikel auf draft herab).
+    unbekannt = [a for a in sys.argv[1:] if a != "--selftest"]
+    if unbekannt:
+        print("🛑 Unbekannte Schalter: " + ", ".join(unbekannt))
+        print("   Aufruf: python3 scripts/affiliate_intent_contract.py [--selftest]")
+        sys.exit(2)
+
     fehler = selftest()
     if fehler:
         print("🛑 INTENT-CONTRACT-SELFTEST FEHLGESCHLAGEN:")

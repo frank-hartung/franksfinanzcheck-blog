@@ -1,6 +1,6 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-09-19 16:58:48 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-09-19 17:26:23 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
 **Geprüfte Artikel:** 66 · **Gateway-Links:** 194 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
