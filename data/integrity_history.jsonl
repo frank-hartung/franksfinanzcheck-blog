@@ -159,3 +159,6 @@
 {"date": "2026-09-15", "kritisch": 0, "fest": 0}
 {"date": "2026-09-15", "kritisch": 0, "fest": 0}
 {"date": "2026-09-15", "kritisch": 0, "fest": 0}
+{"date": "2026-09-19", "kritisch": 0, "fest": 6}
+{"date": "2026-09-19", "kritisch": 0, "fest": 6, "modus": "heal", "geheilt": ["scripts/affiliate_integrity_gate.py", "scripts/fazit_schmiede.py", "scripts/generate_covers.py", "scripts/hardcases_guard.py", "scripts/plagiat_guard.py", "scripts/redaktions_standard.py"], "head": "e499d6ff"}
+{"date": "2026-09-19", "kritisch": 0, "fest": 0, "modus": "verify"}

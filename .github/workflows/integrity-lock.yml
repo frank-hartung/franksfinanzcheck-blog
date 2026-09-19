@@ -1,0 +1,59 @@
+# ============================================================
+#  INTEGRITÄTS-LOCK (PR-GATE) – Issue #316, 19.09.2026
+#
+#  WARUM DIESER WORKFLOW EXISTIERT:
+#  Am 18.09.2026 hat PR #315 (Commit ff6232e3) sechs gesperrte Skripte
+#  geheilt und den Integritäts-Lock NICHT mit-signiert. Aufgefallen ist das
+#  erst am nächsten Lauf der Content-Engine – die dafür im ersten Schritt
+#  hart starb (kein Artikel, kein Slot, Defizit-Alarm, Issue #316). Der
+#  HARD STOP tat also genau, was er soll, und traf den falschen: Er stoppte
+#  die Produktion statt den Merge.
+#
+#  Dieses Gate zieht die Grenze dorthin, wo sie hingehört: VOR den Merge.
+#  Es prüft bei jedem Pull Request auf `main`, ob der signierte Kern
+#  (data/integrity_lock.json) noch zum Baum passt. Passt er nicht, zeigt
+#  der Lauf die Herkunft (welcher Commit die Datei angefasst hat) und die
+#  Reparaturzeile – nicht nur ein rotes Kreuz.
+#
+#  Regeln dabei:
+#    · fail-closed: Drift in JEDER Klasse lässt das Gate rot werden.
+#    · read-only: kein Schreibzugriff, keine Secrets, keine Abhängigkeiten
+#      (nur stdlib) – der Lauf kostet Sekunden.
+#    · kein push-Trigger: Ein roter Lauf, den niemand liest, ist Deko. Auf
+#      `main` heilt die Engine belegten Drift selbst (erster Schritt in
+#      content-engine-v2.yml, mit ::warning:: und Akte im Lock); kritische
+#      Abweichungen stoppen dort weiter hart und alarmieren.
+# ============================================================
+name: Integritäts-Lock (PR-Gate)
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: integrity-lock-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken (volle Historie für die Herkunft)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Integritäts-Siegel prüfen (HARD STOP – Sabotage-Schutz)
+        run: python3 scripts/integrity_guard.py --gate
+
+      - name: Kern-Beweis des Guards (schreibt nie)
+        run: python3 scripts/integrity_guard.py --selftest

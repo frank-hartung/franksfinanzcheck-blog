@@ -1,0 +1,272 @@
+"""Regressionstests für die dauerhafte Reparatur zu Issue #316 (19.09.2026).
+
+Der Vorfall: PR #315 (Commit ff6232e3) heilte sechs gesperrte Skripte und
+signierte den Integritäts-Lock nicht mit. Zwei Läufe der Content-Engine
+starben danach im ERSTEN Schritt (HARD STOP in `integrity_guard.py`), VOR
+jeder Artikelarbeit – kein Artikel, kein Slot, Defizit-Alarm. Der HARD STOP
+tat also genau, was er soll, und traf den falschen: die Produktion statt den
+Merge.
+
+Diese Tests nageln die drei Antworten darauf fest, jeweils an einem echten
+Mini-Repo (keine Attrappen – eine Attrappe wäre die zweite Wahrheit):
+
+  1. KLASSIFIKATION  „committet" und „zur Laufzeit verändert" sind
+     unterscheidbar. Nur Ersteres ist signierbar; Letzteres ist genau die
+     Klasse, die ein Siegel fangen muss.
+  2. SIGNATUR-REGEL  `--heal` signiert ausschließlich versionierten,
+     bytegleich committeten Drift der Klasse FEST. KRITISCH und
+     Laufzeit-Mutationen bleiben HARD STOP (Exit 3) – Sabotage bleibt eine
+     menschliche Entscheidung.
+  3. KONVERGENZ & SPUR  Heilung ist idempotent, hinterlässt eine Akte im
+     Lock (Herkunft: Commits, Klasse) und eine schema-konforme Zeile in
+     `data/integrity_history.jsonl` (deren Pflichtfelder `history_guard.py`
+     festhält). Und: Beweis-Läufe schreiben nichts (C15).
+"""
+import contextlib
+import io
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+import integrity_guard as ig  # noqa: E402
+
+FEST_REL = "scripts/blog_doctor.py"      # Mitglied der FEST-Klasse
+CRIT_REL = "hugo.toml"                   # Mitglied der KRITISCH-Klasse
+
+
+def _git(root, *args):
+    return subprocess.run(("git",) + args, cwd=str(root), capture_output=True, text=True)
+
+
+def _commit(root, msg):
+    _git(root, "add", "-A")
+    return _git(root, "-c", "user.email=t@example.org", "-c", "user.name=Test",
+                "commit", "-q", "-m", msg)
+
+
+class Fixture(unittest.TestCase):
+    """Mini-Repo mit je einer Datei der beiden Lock-Klassen."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory(prefix="ffc-test-integrity-")
+        self.addCleanup(self._tmp.cleanup)
+        self.root = Path(self._tmp.name)
+        (self.root / "scripts").mkdir(parents=True)
+        (self.root / "layouts" / "_partials").mkdir(parents=True)
+        (self.root / CRIT_REL).write_text("baseURL = '/'\n", encoding="utf-8")
+        (self.root / FEST_REL).write_text("print('visite')\n", encoding="utf-8")
+        _git(self.root, "init", "-q")
+        self.assertEqual(_commit(self.root, "fixture").returncode, 0)
+        self.lock_pfad = self.root / "data" / "integrity_lock.json"
+        self.history_pfad = self.root / "data" / "integrity_history.jsonl"
+
+    # ---- Hilfen -------------------------------------------------
+    def signieren(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            ig.signieren(self.root, grund="test")
+
+    def driften(self):
+        lock = ig.load_lock(self.lock_pfad)
+        return ig.verify_files(self.root, lock.get("files", {}))
+
+    def schreibe(self, rel, inhalt):
+        (self.root / rel).write_text(inhalt, encoding="utf-8")
+
+
+class VerifyTests(Fixture):
+    def test_sauberer_baum_hat_keinen_drift(self):
+        self.signieren()
+        self.assertEqual(self.driften(), ([], []))
+
+    def test_fest_und_kritisch_werden_unterschieden(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('neu')\n")
+        self.schreibe(CRIT_REL, "baseURL = '/neu/'\n")
+        crit, fest = self.driften()
+        self.assertEqual(crit, [CRIT_REL])
+        self.assertEqual(fest, [FEST_REL])
+
+    def test_neue_kritische_datei_ohne_signatur_ist_ein_fund(self):
+        (self.root / "layouts" / "robots.txt").write_text("User-agent: *\n",
+                                                          encoding="utf-8")
+        self.signieren()
+        # Signatur kennt die Datei jetzt – ohne Signatur wäre sie ein Fund.
+        lock = ig.load_lock(self.lock_pfad)
+        del lock["files"]["layouts/robots.txt"]
+        crit, _ = ig.verify_files(self.root, lock["files"])
+        self.assertIn("layouts/robots.txt (neu ohne Signatur)", crit)
+
+
+class KlassifikationTests(Fixture):
+    def test_committete_aenderung_ist_versiegelbar(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('geheilt')\n")
+        self.assertEqual(_commit(self.root, "fix: belegte Änderung").returncode, 0)
+        crit, fest = self.driften()
+        audit = ig.klassifizieren(self.root, crit, fest,
+                                  ig.load_lock(self.lock_pfad).get("head", ""))
+        eintrag = next(e for e in audit if e["pfad"] == FEST_REL)
+        self.assertEqual(eintrag["urteil"], "VERSIEGELBAR")
+        self.assertEqual(eintrag["commits_art"], "seit-signatur")
+        self.assertTrue(any(c["sha"] for c in eintrag["commits"]))
+        self.assertTrue(ig.heilverdict(audit)[0])
+
+    def test_laufzeitmutation_ist_nicht_versiegelbar(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('laufzeit')\n")   # NICHT committet
+        crit, fest = self.driften()
+        audit = ig.klassifizieren(self.root, crit, fest, "")
+        eintrag = next(e for e in audit if e["pfad"] == FEST_REL)
+        self.assertEqual(eintrag["urteil"], "UNERKLÄRT")
+        self.assertFalse(eintrag["stand_gleich_head"])
+        heilbar, blockiert = ig.heilverdict(audit)
+        self.assertFalse(heilbar)
+        self.assertTrue(blockiert)
+
+    def test_rebase_hash_faellt_auf_letzte_commits_zurueck(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('neu')\n")
+        _commit(self.root, "fix: danach")
+        crit, fest = self.driften()
+        audit = ig.klassifizieren(self.root, crit, fest, "0000000")
+        eintrag = next(e for e in audit if e["pfad"] == FEST_REL)
+        self.assertEqual(eintrag["commits_art"], "letzte-commits")
+        self.assertTrue(eintrag["commits"])
+
+
+class HeilungTests(Fixture):
+    def test_heilen_signiert_belegten_fest_drift(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('geheilt')\n")
+        _commit(self.root, "fix: belegte Änderung")
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 0)
+        self.assertEqual(self.driften(), ([], []))
+        lock = ig.load_lock(self.lock_pfad)
+        akte = lock["audit"][-1]
+        self.assertEqual(akte["art"], "heal")
+        self.assertEqual(akte["geaendert"], [FEST_REL])
+        herkunft = akte["herkunft"][0]
+        self.assertEqual(herkunft["pfad"], FEST_REL)
+        self.assertEqual(herkunft["klasse"], "fest")
+        self.assertEqual(herkunft["commits_art"], "seit-signatur")
+
+    def test_heilung_ist_konvergent(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('geheilt')\n")
+        _commit(self.root, "fix: belegte Änderung")
+        with contextlib.redirect_stdout(io.StringIO()):
+            ig.heilen(self.root)
+            vorher = ig.sha256_file(self.lock_pfad)
+            self.assertEqual(ig.heilen(self.root), 0)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher,
+                         "zweite Heilung darf nichts mehr ändern")
+
+    def test_heilen_stoppt_bei_kritischem_drift(self):
+        self.signieren()
+        self.schreibe(CRIT_REL, "baseURL = '/neu/'\n")
+        _commit(self.root, "feat: kritischer Kern")
+        vorher = ig.sha256_file(self.lock_pfad)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 3)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher,
+                         "HARD STOP darf nicht signieren")
+
+    def test_heilen_stoppt_bei_laufzeitmutation(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('laufzeit')\n")
+        vorher = ig.sha256_file(self.lock_pfad)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root), 3)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher)
+
+    def test_dry_run_schreibt_nichts(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('geheilt')\n")
+        _commit(self.root, "fix: belegte Änderung")
+        vorher = ig.sha256_file(self.lock_pfad)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.heilen(self.root, dry_run=True), 0)
+        self.assertEqual(ig.sha256_file(self.lock_pfad), vorher)
+
+    def test_heilung_laesst_schema_konforme_historie(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('geheilt')\n")
+        _commit(self.root, "fix: belegte Änderung")
+        with contextlib.redirect_stdout(io.StringIO()):
+            ig.heilen(self.root)
+        zeilen = [json.loads(z) for z in
+                  self.history_pfad.read_text(encoding="utf-8").splitlines() if z.strip()]
+        self.assertEqual(len(zeilen), 1)
+        self.assertIsInstance(zeilen[0]["date"], str)
+        self.assertIsInstance(zeilen[0]["kritisch"], int)
+        self.assertIsInstance(zeilen[0]["fest"], int)
+        self.assertEqual(zeilen[0]["modus"], "heal")
+        self.assertEqual(zeilen[0]["geheilt"], [FEST_REL])
+
+
+class GateTests(Fixture):
+    def test_gate_ist_fail_closed(self):
+        self.signieren()
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.gate(self.root), 0)
+            self.schreibe(FEST_REL, "print('neu')\n")
+            self.assertEqual(ig.gate(self.root), 3,
+                             "auch FEST-Drift muss im PR-Gate rot sein")
+            self.schreibe(CRIT_REL, "baseURL = '/neu/'\n")
+            self.assertEqual(ig.gate(self.root), 3)
+
+    def test_gate_nennt_die_reparaturzeile(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('neu')\n")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            ig.gate(self.root)
+        text = puffer.getvalue()
+        self.assertIn("--set-current", text)
+        self.assertIn("data/integrity_lock.json", text)
+
+    def test_drift_audit_ist_read_only(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('neu')\n")
+        vorher = {p: ig.sha256_file(p) for p in
+                  (self.lock_pfad, self.history_pfad,
+                   self.root / "INTEGRITY-REPORT.md")}
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.drift_audit(self.root), 1)
+            self.assertEqual(ig.gate(self.root), 3)
+        for pfad, sha in vorher.items():
+            self.assertEqual(ig.sha256_file(pfad), sha,
+                             f"{pfad.name} wurde von einem Lese-Modus angefasst")
+
+    def test_exit_urteil(self):
+        self.assertEqual(ig.exit_fuer([], []), 0)
+        self.assertEqual(ig.exit_fuer([], ["a"]), 1)
+        self.assertEqual(ig.exit_fuer(["a"], []), 3)
+
+
+class BeweisTests(Fixture):
+    def test_selftest_schreibt_nicht_in_den_baum(self):
+        """C15: Der Kern-Beweis baut sein eigenes Repo – und rührt dieses nicht an."""
+        vorher = {p: ig.sha256_file(p) for p in (ig.LOCK, ig.REPORT, ig.HISTORY)}
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.selftest(), 0)
+        for pfad, sha in vorher.items():
+            self.assertEqual(ig.sha256_file(pfad), sha,
+                             f"Selbsttest hat {pfad.name} verändert")
+
+    def test_signieren_schreibt_sortierte_akte(self):
+        self.signieren()
+        lock = ig.load_lock(self.lock_pfad)
+        self.assertEqual(list(lock["files"]), sorted(lock["files"]))
+        self.assertTrue(all(lock["files"].values()), "leere Hashes sind kein Siegel")
+        self.assertEqual(lock["audit"][-1]["art"], "test")
+
+
+if __name__ == "__main__":
+    unittest.main()
