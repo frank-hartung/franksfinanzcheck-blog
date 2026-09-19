@@ -1,0 +1,124 @@
+# As a condition of accessing this website, you agree to abide by the following
+# content signals:
+
+# (a)  If a Content-Signal = yes, you may collect content for the corresponding
+#      use.
+# (b)  If a Content-Signal = no, you may not collect content for the
+#      corresponding use.
+# (c)  If the website operator does not include a Content-Signal for a
+#      corresponding use, the website operator neither grants nor restricts
+#      permission via Content-Signal with respect to the corresponding use.
+
+# The content signals and their meanings are:
+
+# search:   building a search index and providing search results (e.g., returning
+#           hyperlinks and short excerpts from your website's contents). Search does not
+#           include providing AI-generated search summaries.
+# ai-input: inputting content into one or more AI models (e.g., retrieval
+#           augmented generation, grounding, or other real-time taking of content for
+#           generative AI search answers).
+# ai-train: training or fine-tuning AI models.
+# use:      how AI systems may consume the content (immediate, reference, or full).
+
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF
+# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT
+# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# BEGIN Cloudflare Managed content
+
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# END Cloudflare Managed Content
+
+User-agent: *
+Allow: /
+Disallow: /go/
+
+Sitemap: https://franksfinanzcheck.de/sitemap.xml
+
+# Pinterest-Crawler explizit erlauben
+# Offizieller Name laut Pinterest: Pinterestbot
+# "Pinterest" bleibt zusätzlich, falls ältere Clients so anfragen
+User-agent: Pinterest
+Allow: /
+Disallow: /go/
+
+User-agent: Pinterestbot
+Allow: /
+Disallow: /go/
+
+# ============================================================
+#  KI-SICHTBARKEIT – Antwortmaschinen ja, Trainings-Fresser nein
+#  (Premium-Audit 11.09.2026, Frank-Hartung-Policy)
+#  ------------------------------------------------------------
+#  Der Cloudflare-Block oben sperrt pauschal alle KI-Crawler. Für eine
+#  Ratgeber-Seite, deren Traffic zu 100 % aus Suche und Pinterest kommt,
+#  ist das ein Einnahmen-Verzicht: AI Overviews, ChatGPT-Search, Perplexity
+#  und Co. verlinken nur, was sie lesen dürfen – und „verlinkbar sein" ist
+#  2026 der teuerste Hebel im Affiliate-SEO.
+#
+#  Diese Site differenziert deshalb nach ZWECK statt nach Firma:
+#    ERLAUBT  = nutzerseitig ausgelöste Abrufe (Antwort/Verweis, kein Korpus)
+#    GESPERRT = Massen-Sauger für Modell-Training (bleiben zu, siehe oben)
+#  Wer das komplett sperren will: die sieben User-agent-Gruppen unten löschen.
+#  Die Wache (scripts/schema_seo_gate.py, S8) prüft den Zustand und meldet
+#  beides sauber – Freigabe als INFO, Sperre als Hinweis, nie als stiller Defekt.
+#  Die Content-Signale oben (search=yes, ai-train=no, use=reference) bleiben
+#  unverändert gültig: zitieren ja, trainieren nein, nicht horten.
+# ============================================================
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /go/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /go/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /go/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /go/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /go/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /go/
+
+User-agent: meta-externalfetcher
+Allow: /
+Disallow: /go/

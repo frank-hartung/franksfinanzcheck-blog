@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<script>
+// Awin-SubID-Förderung (Klicks→Umsatz per Artikel, 01.09.2026): Der /go/-Link am
+// Artikel trägt ?subid=<artikelslug>. Dieses Script hängt sie vor dem Weiterleiten
+// als &subid= an die Affiliate-URL an. Führt SYNCHRON im head aus (läuft vor dem
+// Meta-Refresh), damit die Attribution zuverlässig greift. Ohne subid: unverändert.
+(function () {
+  try {
+    var m = new URLSearchParams(location.search).get('subid');
+    if (!m) return;
+    var base = "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=tagesgeld";
+    var finalUrl = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'subid=' + encodeURIComponent(m);
+    location.replace(finalUrl);
+  } catch (e) { /* Fallback auf Meta-Refresh unten */ }
+})();
+</script>
+<meta http-equiv="refresh" content="0; url=https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=tagesgeld">
+<title>Weiter zu C24 Bank (von Check24) | FranksFinanzcheck</title>
+</head><body style="font-family:sans-serif;text-align:center;padding:60px 20px;color:#19324c">
+<p>Du wirst zu <strong>C24 Bank (von Check24)</strong> weitergeleitet …</p>
+<h1 style="font-size:20px">FranksFinanzcheck</h1>
+<p><a href="https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14&utm_source=franksfinanzcheck&utm_medium=affiliate&utm_campaign=tagesgeld" style="background:#0f6049;color:#fff;padding:12px 26px;border-radius:8px;text-decoration:none;font-weight:600">Falls nicht automatisch: weiter zu C24 Bank (von Check24)</a></p>
+<p style="color:#798897;font-size:12px;margin-top:40px">Partnerlink (Werbung). Wir erhalten ggf. eine Provision – für dich kostenlos. Es ändert sich nichts am Preis, nur die Seite wechselt.</p>
+</body></html>
