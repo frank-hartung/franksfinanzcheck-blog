@@ -220,3 +220,40 @@ steht im `GUARDS`-Minimum.
 zielen lassen und `lock` gegen `Integritäts-Siegel` tauschen — Klickweg und
 API-Einzeiler im Runbook. Bis dahin ist der letzte Gate-Schritt in jedem PR
 **absichtlich rot** und sagt, warum.
+
+## Nachtrag 20.09.2026 — Stand der Admin-Reparatur (unverändert offen)
+
+**Befund:** Der Pflicht-Check-Vertrag ist weiter verletzt, und zwar ausschließlich
+im Meta-Schritt. Der Hard-Stop selbst ist grün: `scripts/integrity_guard.py --gate`
+antwortet „43 Kerndateien entsprechen exakt dem signierten Stand (HEAD `7556d54`)“,
+und in den PR-Läufen `35517752331` / `35518477966` (20.09.) sind die Schritte 4 und 5
+erfolgreich — rot ist nur Schritt 6, `pflichtcheck_guard.py`.
+
+**Ursache (read-only nachgeprüft, 20.09.2026):** `GET /rules/branches/main` liefert
+vier Einträge, je `deletion` + `non_fast_forward` aus den Rulesets **#23710849** und
+**#23705980** — kein `required_status_checks`, keine `pull_request`-Regel. Das
+ursprünglich beauftragte Ruleset **#23695872** antwortet weiter mit **HTTP 404**.
+Der Arena-Zugang hat laut `GET /repos/…` keinerlei Repository-Rechte
+(`admin/maintain/push/pull/triage: false`), also kein `administration:write`:
+Die Reparatur (Check `Integritäts-Siegel` als Required Status Check, App **15368**,
+Actions-Bypass `always`) kann nur ein Admin ausführen — Klickweg, exakter PUT-Body
+und `gh`-Variante in [`PFLICHT-CHECK-RUNBOOK.md`](PFLICHT-CHECK-RUNBOOK.md).
+
+**Korrektur zur Zeitachse.** Die Notiz „Zustand seit 19.09., ~20:42“ ist ungenau.
+Belegt über die Jobs-API:
+
+| Lauf (UTC) | Roter Schritt |
+|---|---|
+| 19.09. 20:42:36 · `35468218966` | Schritt 4 — `integrity_guard.py --gate` (HARD STOP), Schritte 5/6 übersprungen |
+| 19.09. 20:44:43 · `35468323189` | keiner — alle sechs Schritte grün |
+| 19.09. 23:09:30 · `35475323371` | Schritt 6 — `pflichtcheck_guard.py` (erster roter Pflicht-Check-Vertrag) |
+
+Der Vertrag ist demnach seit **19.09. 23:09:30 UTC** rot, zeitlich passend zum
+Ruleset-Wechsel 22:19/22:37 UTC (#23695872 → #23710849). Die Lauf-Logs selbst waren
+in der Prüfumgebung nicht ladbar (`results-receiver.actions.githubusercontent.com`
+→ `EOF`); die Einordnung beruht auf den Schritt-Abschlüssen der Jobs-API.
+
+**Folgen:** kein Merge-Blocker (kein Ruleset verlangt den Check — das ist zugleich
+die Lücke), aber jeder PR zeigt ein rotes Kreuz, das inhaltlich nichts mit dem PR
+zu tun hat. Alarm-Routing: Besitzer **Mensch** (Frank, Admin-Klick), kein
+Automations-Ticket, Schließpfad = Ruleset-Reparatur + Re-run des Gate-Jobs.

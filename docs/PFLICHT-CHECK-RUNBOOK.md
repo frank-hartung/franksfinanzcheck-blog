@@ -1,25 +1,46 @@
 # Runbook: Pflicht-Check `Integritäts-Siegel` (PR-Schutz für `main`)
 
-**Stand:** 19.09.2026 · **Vertrag:** Governance-Regel **C18**
+**Stand:** 20.09.2026 (Nachprüfung, Befund unverändert offen) · **Vertrag:** Governance-Regel **C18**
 (`scripts/governance_contract.py`) · **Wache:** `scripts/pflichtcheck_guard.py`
 · **Anlass:** [Integritäts-Vorfall](INCIDENT-2026-09-19-integritaets-lock.md),
 PR #317 und Deploy-Ausfall #320 / PR #321.
 
-## Aktueller Befund – vor jeder Admin-Reparatur neu prüfen
+## Aktueller Befund – Nachprüfung 20.09.2026 (read-only, ohne Admin-Recht)
 
-Bei der read-only Abfrage am 19.09.2026:
+Geprüft am **20.09.2026** mit dem Arena-Bot-Token. `GET /repos/…` meldet für
+diesen Zugang `permissions: {"admin": false, "maintain": false, "pull": false,
+"push": false, "triage": false}` – also **kein** `administration:write`.
+Rulesets ändern bleibt damit Admin-Aufgabe (Governance-Regel **C15**: Regeln
+ändert ein Mensch, die Wache repariert nie selbst). Der Zielzustand unten ist
+vorbereitet und **nicht live angewendet**.
 
-* Die ursprünglich beauftragte ID **#23695872** antwortet mit **HTTP 404**.
-  Damit kann sie mit diesem Zugang nicht reaktiviert oder verifiziert werden.
-  404 allein beweist keine Löschung (auch fehlende Sichtbarkeit ist möglich).
-* Die Ruleset-Liste nennt stattdessen **#23710849**, ebenfalls
-  **„Integritäts-Lock (PR-Gate)“**, Active, Default Branch, derzeit **nur**
-  `deletion` + `non_fast_forward`.
-* Das zusätzliche Ruleset **#23705980**, „main – Unveränderlichkeit (ohne Bypass)“,
-  ist aktiv. Die effektive Antwort `/rules/branches/main` enthält ausschließlich
-  Lösch-/Force-Push-Schutz, **keinen Pflicht-Check und keine PR-Pflicht**.
-* Keine Admin-Änderung durch Arena: Der Token hat kein `administration:write`.
-  Der folgende Zielzustand ist vorbereitet, **nicht live angewendet**.
+| Frage | Antwort (API-Beleg, 20.09.2026) |
+|---|---|
+| Verlangt `main` den Check `Integritäts-Siegel`? | **Nein.** `GET /rules/branches/main` liefert **vier** Einträge – je `deletion` + `non_fast_forward` aus #23710849 und #23705980. Kein `required_status_checks`, keine `pull_request`-Regel. |
+| Ruleset **#23710849** „Integritäts-Lock (PR-Gate)“ | `enforcement: active`, Ziel `~DEFAULT_BRANCH` (keine Excludes), Regeln **nur** `deletion` + `non_fast_forward`. Angelegt 19.09. 22:19:24 UTC, zuletzt geändert 22:37:36 UTC. |
+| Ruleset **#23705980** „main – Unveränderlichkeit (ohne Bypass)“ | `active`, ebenfalls nur Lösch-/Force-Push-Schutz – **unverändert beibehalten** (siehe Bypass-Warnung unten). |
+| Ursprünglich beauftragte ID **#23695872** | weiterhin **HTTP 404** auf `GET /rulesets/23695872`. 404 allein beweist keine Löschung (auch fehlende Sichtbarkeit ist möglich). |
+| Urteil der Live-Wache | `python3 scripts/pflichtcheck_guard.py --branch main` → **UNGESCHUETZT**, Exit 1: „Kein aktives Ruleset verlangt einen Status-Check auf dem Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.“ |
+| Harter Stopp selbst | **grün** – Schritt „Integritäts-Siegel prüfen (HARD STOP)“ lief in allen Läufen seit 19.09. 23:09 UTC erfolgreich; lokal: `integrity_guard.py --gate` → „43 Kerndateien entsprechen exakt dem signierten Stand“. |
+
+**Zeitachse – Korrektur der Notiz „Zustand seit 19.09., ~20:42“.** Der
+Meta-Schritt ist nicht seit 20:42 rot; um 20:42 starb ein anderer Schritt.
+Belegt über die Jobs-API (`/actions/runs/<id>/jobs`, Schritt-Abschlüsse):
+
+| Lauf (UTC) | Roter Schritt | Einordnung |
+|---|---|---|
+| 19.09. 20:42:36 · `35468218966` | **Schritt 4** `integrity_guard.py --gate` | HARD STOP (belegter Drift), Schritte 5/6 übersprungen – kein Pflicht-Check-Befund |
+| 19.09. 20:44:43 · `35468323189` | keiner | **alle sechs Schritte grün** – der Branch-Schutz verlangte den Check zu diesem Zeitpunkt noch |
+| 19.09. 23:09:30 · `35475323371` | **Schritt 6** `pflichtcheck_guard.py` | **erster** roter Pflicht-Check-Vertrag |
+| 20.09. 14:51:11 · `35517752331` | Schritt 6 | Schritte 4 + 5 grün |
+| 20.09. 15:05:20 · `35518477966` | Schritt 6 | Schritte 4 + 5 grün |
+
+Der Pflicht-Check-Vertrag ist also seit dem Lauf **19.09. 23:09:30 UTC** rot –
+zeitlich passend zum Ruleset-Wechsel 22:19/22:37 UTC (#23695872 → #23710849).
+Einschränkung der Nachprüfung: Die Log-Texte der Läufe waren in der
+Prüfumgebung nicht ladbar (`results-receiver.actions.githubusercontent.com`
+antwortete mit `EOF`); die Einordnung stützt sich auf die Schritt-Abschlüsse,
+nicht auf Log-Zitate.
 
 **Frank muss die ID im angemeldeten Browser bestätigen.** Wenn #23695872 dort
 noch existiert, genau diese reparieren; sonst das gleichnamige #23710849.
@@ -146,6 +167,28 @@ mit **Administration: write**, nie durch den Arena-Token. **Body exakt:**
 
 Maschinenlesbar derselbe Body: [integritaets-lock-ruleset.json](integritaets-lock-ruleset.json).
 Regressionstests prüfen Identität von Runbook und Datei sowie Regeln, Bypass und PR-Vertrag.
+
+### Optional: derselbe Zielzustand über `gh` (eigener Admin-Zugang)
+
+Wer `gh` mit einem **eigenen** Admin-Token benutzt, sendet exakt die versionierte
+Datei – kein handgetipptes JSON, keine zweite Wahrheit. Niemals mit dem
+Arena-Bot-Token (kein `administration:write`) und niemals mit einem Token, der
+in Chat, Issue oder fremder Konsole stand:
+
+```bash
+ID=23710849   # vorher per GET/Browser bestätigen – falls sichtbar: 23695872
+R=repos/frank-hartung/franksfinanzcheck-blog/rulesets/$ID
+
+gh api "$R" --jq '{id, name, enforcement, conditions, rules: [.rules[].type], bypass_actors}'
+gh api --method PUT "$R" --input docs/integritaets-lock-ruleset.json
+gh api "$R" --jq '{id, name, enforcement, conditions, rules: [.rules[].type], bypass_actors}'
+python3 scripts/pflichtcheck_guard.py --branch main   # muss VERLANGT melden (Exit 0)
+```
+
+`--input` sendet die Datei unverändert; `scripts/tests/test_ruleset_restoration.py`
+prüft, dass sie mit dem JSON-Block dieses Runbooks identisch bleibt. 404/403 ist
+**kein** Erfolg (falsche ID oder fehlendes Recht) – dann nicht mit POST
+„nachbessern“.
 
 **PUT ersetzt den Zielzustand vollständig.** Vorher GET derselben URL, Identität
 und vorhandene Regeln prüfen; danach GET und den ganzen Zielzustand vergleichen,
