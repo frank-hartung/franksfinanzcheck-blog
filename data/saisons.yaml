@@ -1,0 +1,199 @@
+# ============================================================
+#  🍂 SAISONS – Single Source of Truth für die saisonale Startseite
+#  ------------------------------------------------------------
+#  Auftrag (20.09.2026): Die Startseite soll die Jahreszeit
+#  widerspiegeln – Hero-Badge/Saison-Hinweis oben UND ein
+#  saisonal priorisierter Teaser-Block („Saison-Fokus") – ohne
+#  dass dafür jedes Quartal jemand ein Template anfasst.
+#
+#  WARUM EINE EIGENE DATEI (und kein Eingriff in hugo.toml):
+#    hugo.toml ist DOPPELT gesperrt: brand_guard.py schützt
+#    homeInfoParams.Title/Content als Marke, integrity_guard.py
+#    signiert die ganze Datei (KRITISCH-Klasse → jede Abweichung
+#    ist ein HARTER Stop, den nur ein Mensch zeichnen darf). Der
+#    Willkommenstext selbst bleibt deshalb UNANGETASTET und weiter
+#    exklusiv Sache von scripts/willkommenstext_guard.py. Die
+#    Saison-Ebene dockt stattdessen als eigener Baustein an
+#    (layouts/_partials/home_season.html + home_info.html) und hat
+#    mit data/saisons.yaml ihre eigene, frei pflegbare Quelle.
+#
+#  AUSWAHL DER ARTIKEL (deterministisch, zwei Stufen):
+#    1. `keywords` (klein geschrieben, Teilstring-Treffer in Titel,
+#       Beschreibung, Tags und Keywords eines Artikels) ergeben einen
+#       Relevanz-Wert; die drei besten Artikel der Saison gewinnen,
+#       bei Gleichstand entscheidet das neuere Datum.
+#    2. Reicht das nicht für `min_artikel` Treffer, fällt die Auswahl
+#       auf die neuesten Artikel der `saison_pillars` zurück (gleiche
+#       Logik, nur ohne Relevanz-Filter) – die Startseite zeigt also
+#       NIEMALS einen leeren oder halben Saison-Block.
+#    Entwürfe (draft: true) und Artikel mit `hiddenInHomeList` zählen
+#    nicht, genau wie in der normalen Teaser-Liste.
+#
+#  FARBEN (Regel aus PRODUCT.md/DESIGN.md: Gelb ist NIEMALS Text auf
+#  hellem Grund; jede Farbe braucht eine Dark-Variante):
+#    akzent         Text/Akzent auf HELLER Fläche  (Ziel ≥ 4.5:1 auf #FFFFFF)
+#    akzent_dunkel  Text/Akzent auf DUNKLER Fläche (Ziel ≥ 4.5:1 auf #25272A)
+#    hero_text      Text auf dem Smaragd-Hero      (Ziel ≥ 4.5:1 auf #145744)
+#    linie          dekorative Linie/Kante auf HELL (kein Text → ≥ 3:1)
+#    linie_dunkel   dasselbe auf DUNKLER Fläche (≥ 3:1)
+#  Gemessen – nicht geraten – von scripts/saisonale_startseite_gate.py
+#  (WCAG 2.x, gleiche Formel wie e2e/design-metrics.mjs).
+#
+#  FELDER je Eintrag:
+#    id             eindeutiger Schlüssel (herbst|winter|fruehling|sommer)
+#    name           Anzeigename der Saison
+#    emoji          ein Saison-Emoji (Deko, im Markup aria-hidden)
+#    ab / bis       Gültigkeit als MM-DD (inklusive). `bis` >= `ab` =
+#                   Fenster innerhalb eines Jahres; `bis` < `ab` =
+#                   Fenster über den Jahreswechsel (Winter). Die vier
+#                   Fenster MÜSSEN das Jahr lücken- und überlappungsfrei
+#                   abdecken (Gate prüft alle 366 Tage).
+#    zeitraum       Klartext-Zeitraum für die Anzeige (keine Datums-Magie)
+#    badge          Kurztext des Hero-Badges (max. ~46 Zeichen)
+#    headline       H2 des Saison-Fokus-Blocks
+#    hinweis        1–2 Sätze saisonaler Kontext im Hero (Klartext-Verlagston,
+#                   du-Form, keine Angstmache, keine erfundenen Zahlen)
+#    tipp           „Franks Tipp" am Ende des Blocks (vgl. data/themenwelten.json)
+#    saison_pillars Pillar-IDs (müssen unter content/pillar/ live sein);
+#                   die ERSTE ist der Haupt-Ratgeber des Saison-Blocks
+#    pillar_link    Text des Ratgeber-Links im Block-Kopf
+#    keywords       Relevanz-Begriffe für die Artikel-Auswahl (lowercase)
+#    min_artikel    so viele Artikel müssen mindestens zusammenkommen
+#    akzent/akzent_dunkel/hero_text/linie/linie_dunkel  Farbwerte (siehe oben)
+#
+#  Pflege: Werte ändern → `python3 scripts/saisonale_startseite_gate.py`
+#  (prüft Schema, Kalender-Abdeckung, Farben, Pillar-Ziele, Render-Beweis)
+#  → `hugo --destination public` → committen. Keine Template-Änderung nötig.
+# ============================================================
+
+version: 1
+min_artikel_default: 3
+
+saisons:
+  - id: herbst
+    name: "Herbst"
+    emoji: "🍂"
+    ab: "09-01"
+    bis: "11-30"
+    zeitraum: "1. September bis 30. November"
+    badge: "Herbst-Check: Heizkosten & Wechselfenster"
+    headline: "Jetzt zählt die Heizsaison"
+    hinweis: "Die Heizsaison startet und viele Versorger kündigen ihre Preise neu an. Wer jetzt Strom, Gas und die Kfz-Versicherung prüft, entscheidet vor der Rechnung – nicht danach."
+    tipp: "Leg dir die letzte Jahresabrechnung neben den Vergleich. Dein Verbrauch ist die einzige Zahl, die ein Portal nicht kennt."
+    saison_pillars: ["strom-sparen", "versicherungen"]
+    pillar_link: "Zum Ratgeber Strom & Gas sparen"
+    keywords:
+      - "heizkosten"
+      - "heizung"
+      - "gas"
+      - "gasrechnung"
+      - "herbst"
+      - "winter"
+      - "spätsommer"
+      - "preisgarantie"
+      - "stromfresser"
+      - "standby"
+      - "kfz"
+      - "jahresabrechnung"
+    min_artikel: 3
+    akzent: "#9A5B12"
+    akzent_dunkel: "#E9A94C"
+    hero_text: "#FFD15A"
+    linie: "#B26A00"
+    linie_dunkel: "#E9A94C"
+
+  - id: winter
+    name: "Winter"
+    emoji: "❄️"
+    ab: "12-01"
+    bis: "02-29"
+    zeitraum: "1. Dezember bis Ende Februar"
+    badge: "Winter: Nachzahlung prüfen, Wechselfenster nutzen"
+    headline: "Zwischen Jahresabrechnung und Jahreswechsel"
+    hinweis: "Im Winter kommen die Nachzahlungen der Versorger und die Beitragsanpassungen der Versicherer. Rund um den Jahreswechsel ist das Wechselfenster am größten – ein Vergleich lohnt sich jetzt mehr als im Sommer."
+    tipp: "Notier dir den Stichtag deiner Verträge. Wer ihn kennt, kündigt nicht aus Versehen zu spät."
+    saison_pillars: ["strom-sparen", "konto-karten"]
+    pillar_link: "Zum Ratgeber Strom & Gas sparen"
+    keywords:
+      - "heizkosten"
+      - "heizung"
+      - "gas"
+      - "winter"
+      - "jahreswechsel"
+      - "nachzahlung"
+      - "preisgarantie"
+      - "strom"
+      - "standby"
+      - "zinsen"
+      - "tagesgeld"
+      - "gebühren"
+    min_artikel: 3
+    akzent: "#8A6A00"
+    akzent_dunkel: "#FFD15A"
+    hero_text: "#FFD15A"
+    linie: "#8A6A00"
+    linie_dunkel: "#FFB300"
+
+  - id: fruehling
+    name: "Frühling"
+    emoji: "🌱"
+    ab: "03-01"
+    bis: "05-31"
+    zeitraum: "1. März bis 31. Mai"
+    badge: "Frühlings-Check für Verträge & Budget"
+    headline: "Frühlingsputz für deine Fixkosten"
+    hinweis: "Ein Nachmittag reicht: Strom, Internet, Konto und Versicherungen einmal nebeneinanderlegen deckt erfahrungsgemäß mehr Sparpotenzial auf als spontane Einzelwechsel übers Jahr verteilt."
+    tipp: "Fang mit der höchsten monatlichen Abbuchung an – nicht mit der, die am meisten nervt."
+    saison_pillars: ["frugalismus", "konto-karten"]
+    pillar_link: "Zum Ratgeber Frugalismus & Budget"
+    keywords:
+      - "budget"
+      - "haushaltsbuch"
+      - "notgroschen"
+      - "frugalismus"
+      - "fixkosten"
+      - "sparen im alltag"
+      - "girokonto"
+      - "konto"
+      - "50-30-20"
+      - "50 30 20"
+      - "finanzielle freiheit"
+      - "verzicht"
+    min_artikel: 3
+    akzent: "#2C6E52"
+    akzent_dunkel: "#7FD1B4"
+    hero_text: "#7FD1B4"
+    linie: "#3E8E6B"
+    linie_dunkel: "#7FD1B4"
+
+  - id: sommer
+    name: "Sommer"
+    emoji: "☀️"
+    ab: "06-01"
+    bis: "08-31"
+    zeitraum: "1. Juni bis 31. August"
+    badge: "Sommer: Reisekasse, Handy & Vertrag"
+    headline: "Reisezeit ist Vertragszeit"
+    hinweis: "Im Sommer buchen die meisten Mietwagen und Handytarife – und wechseln seltener als nötig. Wer Reisekasse, Tarif und Wechselbonus zusammen denkt, fährt am Ende günstiger."
+    tipp: "Prüf die Kaution und die Tankregelung, bevor du den Mietwagen buchst – nicht am Schalter."
+    saison_pillars: ["mietwagen", "internet-dsl"]
+    pillar_link: "Zum Ratgeber Mietwagen & Reisen"
+    keywords:
+      - "mietwagen"
+      - "reise"
+      - "roadtrip"
+      - "urlaub"
+      - "handytarif"
+      - "handy"
+      - "wechselbonus"
+      - "dsl"
+      - "internet"
+      - "wlan"
+      - "reisekasse"
+      - "kaution"
+    min_artikel: 3
+    akzent: "#8A5A1A"
+    akzent_dunkel: "#F0B45E"
+    hero_text: "#FFD15A"
+    linie: "#B0762A"
+    linie_dunkel: "#F0B45E"

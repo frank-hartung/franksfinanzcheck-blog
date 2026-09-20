@@ -1,0 +1,67 @@
+{{- /* ============================================================
+       SAISON-AUFLÖSUNG – welche Saison gilt an einem Stichtag?
+       ------------------------------------------------------------
+       Eingabe:  dict "datum" (time.Time) "saisons" (slice aus data/saisons.yaml)
+       Ausgabe:  der passende Saison-Eintrag (map) oder "" (keiner)
+
+       WARUM ALS EIGENE FUNKTION (statt inline im Template):
+       Die Fenster-Logik hat einen Sonderfall – Winter läuft über den
+       Jahreswechsel (ab 12-01, bis 02-29). Ein reiner Von/Bis-Vergleich
+       greift dort zu kurz. Gerechnet wird mit Monats-Schlüsseln
+       (Monat*100 + Tag, also 09-01 → 901 und 12-01 → 1201); liegt das
+       Fenster-Ende vor dem Fenster-Anfang, gilt „ab ODER bis" (Überlauf).
+       02-29 ist bewusst als Obergrenze gewählt: in Schaltjahren gehört
+       der 29.02. noch zum Winter, in anderen Jahren existiert er nicht
+       und stört den Vergleich nicht.
+
+       Dieselbe Logik liegt noch einmal in
+       scripts/saisonale_startseite_gate.py, damit sie unit-testbar ist
+       (scripts/tests/test_saisonale_startseite.py): Template und Wache
+       dürfen nie auseinanderlaufen.
+
+       Fail-closed (Konvention aus themenwelten.html): doppelte IDs oder
+       unbrauchbare Fenster brechen den Build ab, statt still eine Saison
+       zu verschlucken – eine Startseite ohne Saison-Block wäre sonst
+       unbemerkt durchgerutscht.
+       ============================================================ */ -}}
+{{- $md := (add (mul (int .datum.Month) 100) .datum.Day) -}}
+{{- $out := "" -}}
+{{- $seen := slice -}}
+{{- range .saisons -}}
+  {{- if not .id -}}
+    {{- errorf "Saisons: Eintrag ohne `id` in data/saisons.yaml" -}}
+  {{- end -}}
+  {{- if in $seen .id -}}
+    {{- errorf "Saisons: doppelte ID %q in data/saisons.yaml" .id -}}
+  {{- end -}}
+  {{- $seen = $seen | append .id -}}
+  {{- $abText := (string .ab) -}}
+  {{- $bisText := (string .bis) -}}
+  {{- if or (ne (len $abText) 5) (ne (len $bisText) 5) -}}
+    {{- errorf "Saisons: %q braucht Fenster im Format MM-DD (gefunden ab=%v bis=%v)" .id .ab .bis -}}
+  {{- end -}}
+  {{- /* Führende Nullen vorher abschneiden: Go parst "09" als Oktalzahl und
+         bricht ab (strconv: invalid syntax) – klassischer MM-DD-Fehler. */ -}}
+  {{- $abMonat := (strings.TrimPrefix "0" (substr $abText 0 2)) | int -}}
+  {{- $abTag := (strings.TrimPrefix "0" (substr $abText 3 2)) | int -}}
+  {{- $bisMonat := (strings.TrimPrefix "0" (substr $bisText 0 2)) | int -}}
+  {{- $bisTag := (strings.TrimPrefix "0" (substr $bisText 3 2)) | int -}}
+  {{- if or (lt $abMonat 1) (gt $abMonat 12) (lt $abTag 1) (gt $abTag 31) -}}
+    {{- errorf "Saisons: %q hat ein unmögliches Fenster-Startdatum ab=%v" .id $abText -}}
+  {{- end -}}
+  {{- if or (lt $bisMonat 1) (gt $bisMonat 12) (lt $bisTag 1) (gt $bisTag 31) -}}
+    {{- errorf "Saisons: %q hat ein unmögliches Fenster-Enddatum bis=%v" .id $bisText -}}
+  {{- end -}}
+  {{- $ab := (add (mul $abMonat 100) $abTag) -}}
+  {{- $bis := (add (mul $bisMonat 100) $bisTag) -}}
+  {{- $treffer := false -}}
+  {{- if ge $bis $ab -}}
+    {{- $treffer = and (ge $md $ab) (le $md $bis) -}}
+  {{- else -}}
+    {{- $treffer = or (ge $md $ab) (le $md $bis) -}}
+  {{- end -}}
+  {{- if and $treffer (not $out) -}}
+    {{- $out = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

@@ -1,0 +1,484 @@
+/* ============================================================
+   SAISONALE STARTSEITE – Hero-Badge, Saison-Hinweis, Saison-Fokus
+   ------------------------------------------------------------
+   Rollout 20.09.2026. Gehört zu:
+     layouts/_partials/home_season.html        (Renderer, 3 Modi)
+     layouts/_partials/_funcs/saison-kontext.html   (Daten + Auswahl)
+     layouts/_partials/_funcs/saison-aufloesung.html (Fenster-Logik)
+     data/saisons.yaml                         (kuratierte Quelle)
+     scripts/saisonale_startseite_gate.py      (Wache + Render-Beweis)
+
+   DATEINAME / LADEPOSITION: assets/css/extended/ lädt alphabetisch.
+   Diese Datei heißt bewusst `zz-…` und liegt damit VOR
+   `zzz-agency-polish.css` – der Politur-Layer muss laut CLAUDE.md
+   zuletzt laden und bleibt unangetastet.
+
+   DESIGN-VERTRAG (PRODUCT.md/DESIGN.md, gemessen nicht geraten):
+   · Farben NUR als Saison-Klassen (`.ff-saison--herbst` …) – keine
+     Inline-Farben im Template. Die Hex-Werte sind 1:1 die aus
+     data/saisons.yaml; die Wache prüft die Deckung beider Quellen
+     (Drift wäre sonst unsichtbar).
+   · Kontrast-Ziele: akzent ≥ 4.5:1 auf Weiß, akzent_dunkel ≥ 4.5:1 auf
+     dunkler Kartenfläche, hero_text ≥ 4.5:1 auf dem Smaragd-Hero,
+     linie/linie_dunkel ≥ 3:1 (Deko, kein Text).
+   · Dark Mode doppelt abgesichert: `:root[data-theme="dark"]` (JS-Pfad,
+     head.html) UND `@media (prefers-color-scheme: dark)` auf
+     `:root[data-theme="auto"]` (noscript-Pfad) – gleiches Muster wie
+     zz-themenwelten.css.
+   · Radius/Schatten aus der bestehenden Skala (12/16px, --ff-shadow-1/2) –
+     var() OHNE Fallback wie im übrigen Repo (die Tokens sind immer
+     definiert; das CSS liegt inline im HTML der Startseite, jedes Byte
+     zählt dort doppelt),
+     Übergänge nur auf transform/Farbe/Kante, reduced-motion → aus.
+   · Hierarchie statt Karten-Einheitsbrei (Anti-Reference „identische
+     Karten-Reihen"): die erste Karte ist als Aufmacher breiter und
+     größer, die beiden anderen stapeln sich daneben.
+   · CWV: keine Bilder im Block (kein CLS, kein zweites LCP-Rennen),
+     mobil `order: 4` in der bestehenden Startseiten-Reihenfolge, damit
+     die Artikel-Karten mit dem LCP-Cover (order: 1) vorne bleiben.
+   ============================================================ */
+
+/* ---------- 1. Saison-Paletten (Werte = data/saisons.yaml) ---------- */
+.ff-saison--herbst {
+  --ff-saison-akzent: #9A5B12;
+  --ff-saison-linie: #B26A00;
+  --ff-saison-hero-text: #FFD15A;
+}
+
+.ff-saison--winter {
+  --ff-saison-akzent: #8A6A00;
+  --ff-saison-linie: #8A6A00;
+  --ff-saison-hero-text: #FFD15A;
+}
+
+.ff-saison--fruehling {
+  --ff-saison-akzent: #2C6E52;
+  --ff-saison-linie: #3E8E6B;
+  --ff-saison-hero-text: #7FD1B4;
+}
+
+.ff-saison--sommer {
+  --ff-saison-akzent: #8A5A1A;
+  --ff-saison-linie: #B0762A;
+  --ff-saison-hero-text: #FFD15A;
+}
+
+/* Dunkel (JS-Pfad: head.html setzt data-theme="dark") */
+:root[data-theme="dark"] .ff-saison--herbst {
+  --ff-saison-akzent: #E9A94C;
+  --ff-saison-linie: #E9A94C;
+}
+
+:root[data-theme="dark"] .ff-saison--winter {
+  --ff-saison-akzent: #FFD15A;
+  --ff-saison-linie: #FFB300;
+}
+
+:root[data-theme="dark"] .ff-saison--fruehling {
+  --ff-saison-akzent: #7FD1B4;
+  --ff-saison-linie: #7FD1B4;
+}
+
+:root[data-theme="dark"] .ff-saison--sommer {
+  --ff-saison-akzent: #F0B45E;
+  --ff-saison-linie: #F0B45E;
+}
+
+/* Dunkel ohne JavaScript (noscript-Pfad: data-theme bleibt "auto") */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .ff-saison--herbst {
+    --ff-saison-akzent: #E9A94C;
+    --ff-saison-linie: #E9A94C;
+  }
+
+  :root[data-theme="auto"] .ff-saison--winter {
+    --ff-saison-akzent: #FFD15A;
+    --ff-saison-linie: #FFB300;
+  }
+
+  :root[data-theme="auto"] .ff-saison--fruehling {
+    --ff-saison-akzent: #7FD1B4;
+    --ff-saison-linie: #7FD1B4;
+  }
+
+  :root[data-theme="auto"] .ff-saison--sommer {
+    --ff-saison-akzent: #F0B45E;
+    --ff-saison-linie: #F0B45E;
+  }
+}
+
+/* hero_text gilt auf dem Smaragd-Hero in BEIDEN Modi (der Hero ist immer
+   dunkelgrün) – deshalb keine Dark-Variante nötig. */
+
+/* ---------- 2. Hero-Badge (Eyebrow über dem H1) ---------- */
+.ff-saison-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  margin: 0 0 14px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--ff-radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ff-saison-hero-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  max-width: 100%;
+}
+
+.ff-saison-badge .ff-saison-emoji {
+  font-size: 0.95rem;
+  line-height: 1;
+  text-transform: none;
+}
+
+.ff-saison-badge-text {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 3. Saison-Hinweis im Hero ---------- */
+.ff-saison-hinweis {
+  position: relative;
+  max-width: 780px;
+  margin: 16px 0 0;
+  padding: 2px 0 2px 16px;
+  border-inline-start: 3px solid var(--ff-saison-hero-text);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+/* ---------- 4. Saison-Fokus-Block ---------- */
+.ff-saison {
+  margin: 34px 0 8px;
+  padding: clamp(18px, 2.6vw, 26px);
+  border: 1px solid var(--ff-border-card);
+  border-radius: var(--ff-radius-lg);
+  background: var(--ff-surface);
+  box-shadow: var(--ff-shadow-1);
+}
+
+.ff-saison-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+
+.ff-saison-head-text {
+  min-width: 0;
+}
+
+.ff-saison-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 6px;
+  color: var(--ff-saison-akzent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.ff-saison-eyebrow .ff-saison-emoji {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+}
+
+.ff-saison-zeitraum {
+  color: var(--ff-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.ff-saison-head h2 {
+  margin: 0;
+  color: var(--ff-emerald);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+:root[data-theme="dark"] .ff-saison-head h2 {
+  color: var(--ff-emerald-bright);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .ff-saison-head h2 {
+    color: var(--ff-emerald-bright);
+  }
+}
+
+/* Ratgeber-Link im Block-Kopf: Tap-Ziel ≥ 44px über die Fläche */
+.ff-saison-pillar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 2px solid var(--ff-saison-linie);
+  border-radius: var(--ff-radius-pill);
+  background: transparent;
+  color: var(--ff-saison-akzent);
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
+              background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.ff-saison-pillar:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--ff-saison-linie) 12%, transparent);
+  border-color: var(--ff-saison-akzent);
+}
+
+/* ---------- 5. Karten: Aufmacher + zwei Nachrücker ---------- */
+.ff-saison-liste {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ff-saison-liste > li {
+  min-width: 0;
+}
+
+.ff-saison-liste > li:first-child {
+  grid-row: 1 / span 2;
+}
+
+.ff-saison-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 44px;
+  padding: 16px 18px;
+  border: 1px solid var(--ff-border-subtle);
+  border-inline-start: 3px solid var(--ff-saison-linie);
+  border-radius: var(--ff-radius-md);
+  background: var(--ff-surface-alt);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.ff-saison-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ff-border-card);
+  border-inline-start-color: var(--ff-saison-akzent);
+  box-shadow: var(--ff-shadow-2);
+}
+
+.ff-saison-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--ff-text-muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
+.ff-saison-card-titel {
+  color: var(--ff-emerald);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+:root[data-theme="dark"] .ff-saison-card-titel {
+  color: var(--ff-emerald-bright);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .ff-saison-card-titel {
+    color: var(--ff-emerald-bright);
+  }
+}
+
+.ff-saison-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  color: var(--ff-saison-akzent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ff-saison-card-cta svg {
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ff-saison-card:hover .ff-saison-card-cta svg {
+  transform: translateX(3px);
+}
+
+/* Aufmacher (erste Karte): sichtbar mehr Gewicht. Die erste Karte spannt
+   über beide Zeilen der Seiten-Spalte – damit der Leerraum nicht zwischen
+   Titel und CTA reißt, wird der Inhalt vertikal mittig gesetzt und der
+   CTA bleibt direkt unter dem Titel (margin-top:auto nur in den
+   Seiten-Karten, dort füllt er höchstens ein paar Pixel). */
+.ff-saison-liste > li:first-child .ff-saison-card {
+  padding: 20px 22px;
+  justify-content: center;
+  border-inline-start-width: 4px;
+  background: var(--ff-surface);
+  box-shadow: var(--ff-shadow-1);
+}
+
+.ff-saison-liste > li:first-child .ff-saison-card-cta {
+  margin-top: 10px;
+}
+
+.ff-saison-liste > li:first-child .ff-saison-card-titel {
+  font-size: clamp(1.12rem, 1.9vw, 1.34rem);
+  line-height: 1.24;
+}
+
+/* ---------- 6. „Franks Tipp" (gleiche Rolle wie .ff-topics-tip) ---------- */
+.ff-saison-tipp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--ff-border-subtle);
+  color: var(--ff-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.ff-saison-tipp-label {
+  flex: none;
+  padding: 3px 10px;
+  border-radius: var(--ff-radius-pill);
+  background: color-mix(in srgb, var(--ff-saison-linie) 16%, transparent);
+  color: var(--ff-saison-akzent);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- 7. Fokus (Repo-Standard: 3px Signalgelb) ---------- */
+.ff-saison-pillar:focus-visible,
+.ff-saison-card:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 3px;
+  border-radius: var(--ff-radius-md);
+}
+
+/* ---------- 8. Mobile ---------- */
+@media (max-width: 900px) {
+  .ff-saison-liste {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ff-saison-liste > li:first-child {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .ff-saison {
+    margin: 20px 0 4px;
+    padding: 16px 14px;
+  }
+
+  .ff-saison-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* Ratgeber-Link volle Breite → eindeutiges, großes Tap-Ziel */
+  .ff-saison-pillar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ff-saison-card {
+    padding: 14px;
+  }
+
+  .ff-saison-liste > li:first-child .ff-saison-card {
+    padding: 16px 14px;
+  }
+
+  /* Reihenfolge in der Startseiten-Flex-Spalte (custom.css setzt
+     Karten order: 1, Hero order: 2, Pinterest-CTA order: 3,
+     footer.order: 4, Cluster order: 5):
+     Der Saison-Block bekommt order: 5 und liegt damit
+       · HINTER den Artikel-Karten → das LCP-Cover bleibt oben
+         (gemessen: e2e/design-metrics.mjs, startseite-layout-mobile-*),
+       · HINTER der Pagination (order: 4) → die Blätter-Navigation bleibt
+         direkt an der Kartenliste und wird nicht von einem 700-px-Block
+         weggeschoben,
+       · VOR den Ratgeber-Clustern (ebenfalls order: 5) – gleicher
+         order-Wert, also entscheidet die DOM-Reihenfolge, und die ist
+         eindeutig: home_info.html rendert den Saison-Block, list.html
+         die Cluster danach. */
+  main.main > section.ff-saison {
+    order: 5;
+  }
+}
+
+@media (max-width: 600px) {
+  .ff-saison-badge {
+    font-size: 0.7rem;
+    padding: 5px 12px 5px 8px;
+  }
+
+  .ff-saison-hinweis {
+    margin-top: 12px;
+    padding-left: 12px;
+  }
+}
+
+/* ---------- 9. reduced-motion: kein Lift, kein Pfeil-Gleiten ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ff-saison-pillar,
+  .ff-saison-card,
+  .ff-saison-card-cta svg {
+    transition: none;
+  }
+
+  .ff-saison-pillar:hover,
+  .ff-saison-card:hover {
+    transform: none;
+  }
+
+  .ff-saison-card:hover .ff-saison-card-cta svg {
+    transform: none;
+  }
+}

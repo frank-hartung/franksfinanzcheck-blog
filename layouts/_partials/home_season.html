@@ -1,0 +1,102 @@
+{{- /* ============================================================
+       SAISONALE STARTSEITE – Renderer (Badge | Hinweis | Block)
+       ------------------------------------------------------------
+       Aufruf (alle drei nur auf der Startseite, Seite 1):
+         partial "home_season.html" (dict "modus" "badge")
+         partial "home_season.html" (dict "modus" "hinweis")
+         partial "home_season.html" (dict "modus" "block")
+
+       Quelle: data/saisons.yaml (kuratiert, frei pflegbar – KEIN
+       Eingriff in hugo.toml: homeInfoParams.Title/Content sind über
+       brand_guard.py + integrity_guard.py gesperrt und bleiben Sache
+       von willkommenstext_guard.py). Auflösung und Artikel-Auswahl in
+       _funcs/saison-kontext.html, Fenster-Logik in
+       _funcs/saison-aufloesung.html.
+
+       Bausteine:
+         badge    `.ff-saison-badge`  – Chip als Eyebrow ÜBER dem H1.
+                                       Der H1 selbst bleibt unangetastet
+                                       (genau ein H1, brand-gelockt).
+         hinweis  `.ff-saison-hinweis` – 1–2 Sätze saisonaler Kontext
+                                       im Hero, unter dem Willkommenstext.
+         block    `section.ff-saison#saison-fokus` – die relevantesten
+                                       LIVE-Artikel der Saison plus
+                                       Ratgeber-Link und „Franks Tipp".
+
+       LCP/CWV-Schutz (PRODUCT.md Gate 1):
+         · keine Cover-Bilder im Block → kein zweites LCP-Rennen, kein CLS
+         · mobil `order: 3` in der bestehenden Flex-Reihenfolge der
+           Startseite (zzzz-saisonale-startseite.css): die Artikel-Karten
+           mit dem LCP-Cover bleiben order: 1
+         · Badge/Hinweis wachsen den Hero nur um wenige Zeilen und liegen
+           auf Mobile ohnehin HINTER den Karten (custom.css order: 2)
+         · kein JS, keine Reveal-Animation → ab Paint 1 sichtbar
+         · Übergänge nur auf transform/Farbe, reduced-motion → aus
+
+       Messung: jeder Link trägt cta_click mit eigener Saison-Property,
+       damit der Revenue-Import (scripts/revenue_funnel.py aggregiert per
+       Slug) Saison-Klicks von den dauerhaften Hero-CTAs trennen kann.
+       ============================================================ */ -}}
+{{- $modus := .modus | default "block" -}}
+{{- $leicht := ne $modus "block" -}}
+{{- $ctx := partial "_funcs/saison-kontext.html" (dict "leicht" $leicht) -}}
+{{- $saison := $ctx.saison -}}
+
+{{- if eq $modus "badge" -}}
+{{- /* Bewusst ein <div> und kein <p>: e2e/design-metrics.mjs misst den
+       Fließtext-Kontrast über `probe('main p, .post-entry p, .home-info p')`
+       – das ERSTE <p> im DOM. Ein Badge-<p> würde diese Messung still auf
+       den Chip umlenken (Metrik-Drift ohne Aussagekraft). */ -}}
+<div class="ff-saison-badge ff-saison--{{ $saison.id }}" data-ff-saison="{{ $saison.id }}" data-ff-saison-woche="{{ $ctx.woche }}">
+  <span class="ff-saison-emoji" aria-hidden="true">{{ $saison.emoji }}</span>
+  <span class="ff-saison-badge-text">{{ $saison.badge }}</span>
+</div>
+
+{{- else if eq $modus "hinweis" -}}
+<p class="ff-saison-hinweis ff-saison--{{ $saison.id }}" data-ff-saison="{{ $saison.id }}">{{ $saison.hinweis }}</p>
+
+{{- else if eq $modus "block" -}}
+{{- $hauptZiel := $ctx.hauptZiel -}}
+<section class="ff-saison ff-saison--{{ $saison.id }}" aria-labelledby="saison-fokus" data-ff-saison="{{ $saison.id }}"
+         data-ff-saison-quelle="{{ $ctx.quelle }}" data-ff-saison-treffer="{{ len $ctx.auswahl }}">
+  <header class="ff-saison-head">
+    <div class="ff-saison-head-text">
+      <p class="ff-saison-eyebrow"><span class="ff-saison-emoji" aria-hidden="true">{{ $saison.emoji }}</span> Saison-Fokus · {{ $saison.name }} <span class="ff-saison-zeitraum">({{ $saison.zeitraum }})</span></p>
+      <h2 id="saison-fokus">{{ $saison.headline }}</h2>
+    </div>
+    <a class="ff-saison-pillar" href="{{ $hauptZiel.RelPermalink }}"
+       data-umami-event="cta_click" data-umami-event-cta="saison-{{ $saison.id }}-ratgeber"
+       data-umami-event-slug="saison-{{ $saison.id }}-ratgeber" data-umami-event-placement="start-saison"
+       data-umami-event-saison="{{ $saison.id }}">{{ $saison.pillar_link }} <span aria-hidden="true">→</span></a>
+  </header>
+  <ul class="ff-saison-liste" role="list">
+    {{- range $ctx.auswahl -}}
+      {{- $seite := .seite | default . -}}
+      {{- $cardSlug := printf "saison-%s-%s" $saison.id $seite.File.ContentBaseName -}}
+    <li>
+      <a class="ff-saison-card" href="{{ $seite.RelPermalink }}"
+         data-umami-event="cta_click" data-umami-event-cta="saison-{{ $saison.id }}-artikel"
+         data-umami-event-slug="{{ $cardSlug }}" data-umami-event-placement="start-saison"
+         data-umami-event-saison="{{ $saison.id }}" aria-labelledby="{{ $cardSlug }}-title">
+        <span class="ff-saison-card-meta">
+          <time datetime="{{ $seite.Date.Format "2006-01-02" }}">{{ $seite.Date | time.Format "02.01.2006" }}</time>
+          {{- with $seite.Params.pillar -}}
+            {{- $themaName := . -}}
+            {{- range $ctx.themen -}}
+              {{- if eq .id $themaName -}}{{- $themaName = .title -}}{{- end -}}
+            {{- end -}}
+          <span class="ff-saison-card-trenner" aria-hidden="true">·</span><span class="ff-saison-card-thema">{{ $themaName }}</span>
+          {{- end -}}
+        </span>
+        <span class="ff-saison-card-titel" id="{{ $cardSlug }}-title">{{ $seite.Title }}</span>
+        <span class="ff-saison-card-cta" aria-hidden="true">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span>
+      </a>
+    </li>
+    {{- end -}}
+  </ul>
+  <p class="ff-saison-tipp"><span class="ff-saison-tipp-label">Franks Tipp</span> {{ $saison.tipp }}</p>
+</section>
+
+{{- else -}}
+  {{- errorf "Saisonale Startseite: unbekannter Modus %q (erlaubt: badge|hinweis|block)" $modus -}}
+{{- end -}}
