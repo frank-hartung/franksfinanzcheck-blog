@@ -75,30 +75,189 @@ und `non_fast_forward` beibehalten: Dann bleiben auch Bots daran gebunden.
 Nicht deaktivieren. Ein weiteres Ruleset mit PR-/Status-Pflichten ohne passenden
 Actions-Bypass kann trotz korrektem Integritäts-Ruleset weiterhin blockieren.
 
+## Dringlichkeit und eine Regel: nur in einem Zug
+
+**Nachprüfung 20.09.2026, 15:52–15:59 UTC. Der Befund oben ist unverändert
+offen – und die Reparatur ist weiterhin nicht von hier ausführbar.** Belege:
+
+* `PUT /repos/…/rulesets/23710849` mit exakt
+  [integritaets-lock-ruleset.json](integritaets-lock-ruleset.json) →
+  **HTTP 403 „Resource not accessible by integration“**. `GET /repos/…` meldet
+  für diesen Zugang `permissions: {"admin": false, …}` – kein
+  `administration:write`. Damit ist belegt, dass die Reparatur nicht mit dem
+  Arena-Bot-Token gelingt (C15: Regeln ändert ein Mensch). Der Versuch war
+  idempotent: ein 403 ändert nichts, nachprüfbar über
+  `GET …/rulesets/23710849` (unverändert `rules: [deletion, non_fast_forward]`,
+  `updated_at: 2026-09-19T22:37:36Z`).
+* **Das rote Kreuz blockiert derzeit keinen Merge.** PR **#327** wurde am
+  **20.09.2026 15:43:18 UTC** gemergt, obwohl `Integritäts-Siegel` um 15:36:37
+  UTC mit `conclusion: FAILURE` abgeschlossen hatte (`GET …/pulls/327`,
+  `statusCheckRollup`; Merge-Commit `4b91938`). Ebenso #323–#325. Ein Pflicht-
+  Check, der nicht im Branch-Schutz steht, hält GitHub nicht auf – die Anzeige
+  ist Lärm, die Schutzwirkung **null**. Genau unter dieser Bedingung sind
+  #316 und #320 entstanden.
+* **Die Reparatur macht das Gate scharf – das ist der eigentliche Termin.**
+  Nach dem PUT entscheiden zwei Dinge gleichzeitig: PRs warten auf das Siegel,
+  **und** die direkt schreibenden Workflows brauchen den Bypass. Ohne Bypass
+  friert `main` sofort ein (Vorfall 19.09.: elf Bot-Commits in 90 Minuten,
+  dann Stille).
+
+**Deshalb: kein Zwischenzustand, in dem der Pflicht-Check ohne Bypass live
+ist.** Diese Automation schreibt im Minutentakt auf `main` – Commits vom
+20.09.2026 (UTC): Content-Bot 15:43, 15:08, 10:32, 10:08 · Social-Autopilot
+14:43 · Bot-Watchdog 13:09 · Willkommenstext-Bot 10:21.
+
+* **API:** der **eine** PUT unten. Er ersetzt den gesamten Zielzustand, Check
+  und Bypass landen im selben Request. Nicht erst den Check setzen und den
+  Bypass „nachziehen“.
+* **Klickweg:** Hier ist „einmal speichern“ **nicht** die richtige Reihenfolge –
+  der Bypass kann abgelehnt werden (HTTP 422, siehe unten). Darum: **zuerst den
+  Bypass allein speichern und nachsehen, ob er drinsteht**, erst danach
+  Pflicht-Check und PR-Pflicht in einem zweiten Speichern. So schlägt ein
+  abgelehnter Bypass fehl, solange `main` noch gar keinen Pflicht-Check hat –
+  statt danach. Reihenfolge im Klickweg unten.
+* Fällt der Bypass im Picker aus (Etappe 1): **STOPP**, kein Pflicht-Check. Dann
+  ist es eine Grundsatzentscheidung – Abschnitt „Wenn der Bypass abgelehnt wird“.
+
+Umgekehrt gilt: Solange der Befund offen ist, ist **nichts eingefroren**. Ein
+bewusstes Aufschieben kostet keine Verfügbarkeit – es kostet die Schutzwirkung
+des Siegels, bis der Pflicht-Check **mit** funktionierendem Bypass live ist.
+
 ## Reparatur für Frank – ohne Terminal
 
 ### Unterstützter GitHub-Klickweg
 
+**Reihenfolge ist Sicherheit: erst der Bypass, dann der Pflicht-Check.** Beide
+in umgekehrter Folge zu speichern erzeugt genau den Ausfall von #320. Und: Der
+Bypass kann abgelehnt werden (siehe Warnung unten) – dann muss er **vor** dem
+Pflicht-Check auffallen, nicht danach.
+
+**Etappe 1 – Bypass allein probehalber speichern (entscheidender Test):**
+
 1. [Repository → Settings → Rules → Rulesets](https://github.com/frank-hartung/franksfinanzcheck-blog/settings/rules)
    öffnen, **„Integritäts-Lock (PR-Gate)“** wählen und ID in der URL bestätigen
    (bei der letzten Abfrage: **23710849**, ursprünglicher Auftrag: **23695872**).
-2. Target branches: **Include default branch** (`~DEFAULT_BRANCH`), keine Excludes.
-3. **Restrict deletions** und **Block force pushes** aktivieren/beibehalten.
-4. **Require status checks to pass**: alten Check `lock` entfernen;
-   **`Integritäts-Siegel`**, Quelle **GitHub Actions (App 15368)** hinzufügen.
-   „Require branches to be up to date before merging“ aus lassen.
-5. **Require a pull request before merging** aktivieren, **Required approvals: 0**;
+2. Target branches: **Include default branch** (`~DEFAULT_BRANCH`), keine
+   Excludes. **Restrict deletions** und **Block force pushes** beibehalten.
+3. Bypass list → **Add bypass** → im Suchfeld **GitHub Actions** suchen,
+   auswählen, **Add Selected**. Modus **Always allow** beibehalten – **nicht**
+   auf „For pull requests only“ umstellen, das reicht für direkte Pushes nicht.
+   Keine Write-/Admin-Rolle als Ersatz.
+4. Enforcement **Active** → **Save changes**.
+
+   Jetzt ist `main` noch **nicht** strenger geschützt als vorher (es kommt nur
+   ein Bypass dazu), der Test ist also risikolos. Ergebnis prüfen:
+   Ruleset erneut öffnen – steht **GitHub Actions** mit **Always** in der
+   Bypass-Liste?
+   * **Ja** → weiter mit Etappe 2.
+   * **Nein** (Eintrag fehlt, Picker bietet es nicht an, Fehlermeldung wie
+     *„Actor GitHub Actions integration must be part of the ruleset source or
+     owner organization“*) → **STOPP.** Etappe 2 nicht ausführen. Der
+     Pflicht-Check ohne funktionierenden Bypass friert `main` ein. Weiter bei
+     „Wenn der Bypass abgelehnt wird“.
+
+**Etappe 2 – Pflicht-Check und PR-Pflicht, ein Speichern:**
+
+5. Dasselbe Ruleset erneut öffnen. **Require status checks to pass** aktivieren
+   und **`Integritäts-Siegel`** hinzufügen, Quelle **GitHub Actions**.
+   „Require branches to be up to date before merging“ **aus** lassen.
+   (Nachprüfung 20.09.: Es gibt keinen alten Check `lock` mehr zum Entfernen –
+   `GET …/rulesets/23710849` meldet nur `deletion` und `non_fast_forward`.)
+6. **Require a pull request before merging** aktivieren, **Required approvals: 0**;
    Code-Owner-/Last-Push-/Thread-Resolution-Zusatzpflichten aus lassen.
-6. Bypass list: **GitHub Actions** als **Integration** hinzufügen,
-   **Always allow**. Keine Write-/Admin-Rollen. Falls die Integration im Picker
-   nicht angeboten wird, **nicht** durch eine Rolle ersetzen: Admin-API-Zugang
-   klären und den exakten Request unten verwenden.
-7. Enforcement **Active** → **Save changes**. Das separate Unveränderlichkeits-
-   Ruleset unverändert aktiv lassen.
-8. Im offenen PR **Integritäts-Siegel → Re-run**. Dann einen liegengebliebenen
+7. Bypass-Liste unverändert lassen (**GitHub Actions**, **Always**).
+   Enforcement **Active** → **einmal** **Save changes**. Das separate
+   Unveränderlichkeits-Ruleset #23705980 unverändert aktiv lassen.
+8. Nachweis: `GET …/rules/branches/main` muss jetzt `required_status_checks`
+   **und** `pull_request` zeigen, `GET …/rulesets/23710849` den Bypass. Dann im
+   PR **Integritäts-Siegel → Re-run** und einen liegengebliebenen
    Writer-Workflow (z. B. Deploy oder Social-Autopilot) erneut ausführen und
    **dessen State-Commit auf `main`** prüfen. Ein grüner gh-pages-Deploy allein
    beweist den Bypass nach der Publish-Prioritäts-Änderung **nicht mehr**.
+
+### Wenn der Bypass abgelehnt wird
+
+**Beobachtet am 20.09.2026 von Frank im angemeldeten Browser: Der
+„Add bypass“-Picker bietet „GitHub Actions“ nicht an.** Das bestätigt die
+Recherche – Etappe 1 ist damit an ihrem Endpunkt, Etappe 2 darf nicht
+ausgeführt werden.
+
+Die GitHub-Doku nennt als bypass-fähig: Repository-/Org-/Enterprise-Admins,
+Maintain-/Write-Rollen, seit 07.05.2026 auch **einzelne User**, Teams,
+**GitHub Apps** und Dependabot. **GitHub Actions steht nicht in dieser Liste** –
+`github-actions[bot]` ist eine Systemidentität, keine installierbare App, und
+steht deshalb im Picker nicht zur Auswahl. Passend dazu dokumentieren mehrere
+unabhängige Berichte (u. a. 14.09.2026) für genau diesen Bypass-Aktor
+**HTTP 422**: *„Actor GitHub Actions integration must be part of the ruleset
+source or owner organization“*; für **User-eigene** Repositories ohne
+Organisation wird er als nicht setzbar beschrieben. Dieses Repository ist
+user-eigen (`frank-hartung/…`).
+
+**Ungeprüft:** Der API-Weg ist von hier nicht testbar – `PUT`/`POST` auf die
+Rulesets antworten mit **403**, `GET /user` ebenfalls, also ist kein
+Wegwerf-Repo möglich. Wer einen Admin-Token hat, kann die Frage mit dem **einen**
+PUT unten endgültig klären: **422** bestätigt den Befund und ändert nichts,
+**200** würde bedeuten, dass der Picker nur weniger kann als die API.
+
+**Folge:** Der Zielzustand dieses Runbooks – Pflicht-Check **plus** Bypass
+`Integration 15368 / always` – ist auf diesem Repository voraussichtlich **nicht
+installierbar**. Der Pflicht-Check darf deshalb **nicht** scharf gestellt
+werden: Ohne Bypass friert er `main` ein (Vorfall 19.09., #320). Das rote Kreuz
+bleibt vorerst bestehen und blockiert weiterhin keinen Merge.
+
+### Entscheidung danach – erst proben, dann umbauen
+
+**Reihenfolge: erst beweisen, dass ein Bypass funktioniert, dann 32 Workflows
+anfassen.** Nicht umgekehrt.
+
+1. **Probe (billig, wenige Minuten):** Eigene GitHub App anlegen
+   (Settings → Developer settings → GitHub Apps), `Contents: read and write`,
+   installieren auf diesem Repository. App in die Bypass-Liste des Rulesets
+   eintragen – **ohne** Pflicht-Check. Dann **ein** Test-Workflow, der sein Token
+   mit `actions/create-github-app-token@v1` erzeugt und damit einen Commit auf
+   `main` pusht. Erst wenn dieser Push durchgeht, ist bewiesen, dass ein
+   Integration-Bypass hier überhaupt wirkt.
+2. **Erst dann der Umbau.** Nachprüfung 20.09.2026: **32 Workflows** pushen
+   direkt auf `main`, und zwar **alle** über `scripts/git_sync.sh --push-only` –
+   kein einziger pusht roh (die beiden `git push`-Fundstellen in
+   `agent-reach-research.yml` und `ki-redaktion.yml` sind Kommentare, beide
+   Workflows rufen `git_sync.sh`). 32 Workflows haben `contents: write`, das
+   Repository hat 48 Workflows. **Kein** einziger der 48
+   Workflows nutzt heute ein App-Token (`grep` nach
+   `create-github-app-token`/`APP_PRIVATE_KEY`/`app-id:` → keine Treffer).
+   **Engpass ist `scripts/git_sync.sh`:** Das Skript nimmt kein Token entgegen –
+   es liest `BRANCH`, `MSG`, `GIT_USER`, `GIT_MAIL`, `DRY_RUN`, `PUSH_ONLY`,
+   `GIT_SYNC_*`, aber weder `GITHUB_TOKEN` noch `GH_TOKEN`; es pusht über das
+   vorkonfigurierte `origin`-Remote, also mit dem eingebauten `GITHUB_TOKEN`.
+   Weil es der einzige Push-Weg ist, ist Token-Unterstützung **dort** die halbe
+   Arbeit; die andere Hälfte bleibt, dass jeder der 32 Workflows sein App-Token
+   selbst erzeugen und übergeben muss.
+3. **Erst wenn alle 32 schreiben können**, Pflicht-Check und PR-Pflicht
+   scharfstellen (Etappe 2).
+
+**Wichtig, und bisher nirgends belegt:** Ein App-Bypass gilt für die
+**App-Identität**, nicht für `github-actions[bot]`. Solange ein Workflow mit
+`GITHUB_TOKEN` pusht, nützt ihm der App-Bypass nichts. Genau deshalb ist die
+Probe in Schritt 1 Pflicht und nicht optional.
+
+Weitere Auswege, alle **nicht verifiziert**: **Deploy-Key** als Bypass-Aktor
+(SSH- statt HTTPS-Push; von Dritten berichtet). **Organisation** als
+Ruleset-Quelle – der 422-Fehlermeldung nach wäre der Actions-Aktor dort
+zulässig, bedeutet aber einen Owner-Wechsel. Ein **PAT mit
+`bypass-pull-request-requirements`** oder eine **Write-/Admin-Rolle** im Bypass
+würde technisch wahrscheinlich genügen, widerspricht aber dem Zielvertrag oben
+(„nur Integration 15368“) und erweitert den menschlichen Zugang – das ist eine
+Governance-Entscheidung (C15), keine Reparatur.
+
+Fällt die Entscheidung auf „kein Umbau“, ist das ein **dokumentierter
+Dauerzustand**, kein offener Mangel: Der Pflicht-Check-Vertrag ist dann auf
+diesem Repository nicht erfüllbar, und `pflichtcheck_guard.py` sollte das als
+bekannt melden statt als roten Vorfall. Bis dahin bleibt er rot – korrekt, aber
+lärmend.
+
+Der `pflichtcheck_guard.py` verlangt in diesem Fall weiter `VERLANGT` und bleibt
+rot. Das ist korrekt: Er soll nicht grün melden, was nicht schützt. Die
+Governance-Wache `automation_blocked` fängt den umgekehrten Fall ab.
 
 ### Exakter Admin-API-Request (vollständiger Ersatz, keine Teiländerung)
 
@@ -188,7 +347,19 @@ python3 scripts/pflichtcheck_guard.py --branch main   # muss VERLANGT melden (Ex
 `--input` sendet die Datei unverändert; `scripts/tests/test_ruleset_restoration.py`
 prüft, dass sie mit dem JSON-Block dieses Runbooks identisch bleibt. 404/403 ist
 **kein** Erfolg (falsche ID oder fehlendes Recht) – dann nicht mit POST
-„nachbessern“.
+„nachbessern“. Mit dem Arena-Bot-Token ist **403 der erwartete Ausgang**
+(„Resource not accessible by integration“, belegt 20.09.2026): Der Aufruf beweist
+dann nur, dass die Reparatur Admin-Sache bleibt. Er ist außerdem unschädlich –
+ein 403 verändert das Ruleset nicht.
+
+**Ein Request, ein Zustand: Check und Bypass gehören zusammen.** Der PUT trägt
+`required_status_checks` **und** `bypass_actors` in einem Aufruf – im Gegensatz
+zum Klickweg, der den Bypass bewusst **zuerst allein** probehalber setzt, weil
+er abgelehnt werden kann. Genau das ist der Grund, die versionierte Datei zu
+senden statt Teiländerungen zu tippen: Ein Zwischenzustand „Pflicht-Check live,
+Bypass fehlt“ friert `main` sofort ein (Vorfall 19.09., #320). Wer die
+Reparatur stückelt – Check vor Bypass –, erzeugt den Ausfall, den das Ruleset
+verhindern soll.
 
 **PUT ersetzt den Zielzustand vollständig.** Vorher GET derselben URL, Identität
 und vorhandene Regeln prüfen; danach GET und den ganzen Zielzustand vergleichen,

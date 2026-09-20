@@ -185,6 +185,78 @@ class Ruleset(unittest.TestCase):
         self.assertIn("23710849", text)
         self.assertIn("404", text)
 
+    def test_runbook_documents_no_intermediate_state_without_bypass(self):
+        """Ein Pflicht-Check ohne Bypass friert main ein – das Runbook muss davor warnen."""
+        text = (ROOT / "docs/PFLICHT-CHECK-RUNBOOK.md").read_text()
+        self.assertIn("Check und Bypass gehören zusammen", text)
+        # Beleg, dass die Reparatur Admin-Sache bleibt (kein administration:write).
+        self.assertIn("403", text)
+        self.assertIn("Resource not accessible by integration", text)
+        # Die rote Anzeige blockiert ohne Branch-Schutz keinen Merge – Beleg PR #327.
+        self.assertIn("#327", text)
+
+    def test_click_path_saves_bypass_before_required_check(self):
+        """Reihenfolge im Klickweg: Bypass zuerst probehalber, dann der Pflicht-Check.
+
+        Der Bypass kann mit HTTP 422 abgelehnt werden. Fiele er erst nach dem
+        Pflicht-Check auf, wäre main bis dahin eingefroren (Vorfall #320).
+        """
+        text = (ROOT / "docs/PFLICHT-CHECK-RUNBOOK.md").read_text()
+        etappe1 = text.index("Etappe 1 – Bypass allein")
+        etappe2 = text.index("Etappe 2 – Pflicht-Check")
+        self.assertLess(etappe1, etappe2)
+        # Etappe 1 darf den Pflicht-Check nicht schon setzen.
+        self.assertNotIn("Require status checks to pass", text[etappe1:etappe2])
+        # Der Abbruchpfad ist benannt, und die 422-Ursache ist belegt statt erfunden.
+        import re
+        norm = re.sub(r"\s+", " ", text)
+        self.assertIn("Wenn der Bypass abgelehnt wird", norm)
+        self.assertIn("must be part of the ruleset source or owner organization", norm)
+        self.assertIn("Ungeprüft", norm)
+
+    def test_runbook_workflow_counts_match_repository(self):
+        """Die Umbau-Kosten im Runbook müssen zum Bestand passen.
+
+        Stehen dort 32 Workflows und es sind 40, plant der Nächste zu klein.
+        Der Text wird normalisiert, weil Zeilenumbrüche sonst jedes Muster brechen.
+        """
+        import re
+        norm = re.sub(r"\s+", " ", (ROOT / "docs/PFLICHT-CHECK-RUNBOOK.md").read_text())
+        workflows = list((ROOT / ".github/workflows").glob("*.yml"))
+        gelesen = {w.name: w.read_text() for w in workflows}
+        sync = [n for n, t in gelesen.items() if "git_sync" in t]
+        # Roh pusht niemand: git push ohne git_sync käme am Skript vorbei.
+        roh = [n for n, t in gelesen.items() if "git push" in t and "git_sync" not in t]
+        self.assertEqual([], roh)
+        self.assertIn(f"**{len(sync)} Workflows** pushen", norm)
+        self.assertIn(f"{len(workflows)} Workflows", norm)
+        # Kein Workflow nutzt ein App-Token – sonst wäre der Umbau teils erledigt.
+        muster = re.compile(r"create-github-app-token|APP_PRIVATE_KEY|app-id:")
+        self.assertEqual([], [n for n, t in gelesen.items() if muster.search(t)])
+
+    def test_git_sync_takes_no_token_so_it_is_the_chokepoint(self):
+        """git_sync.sh pusht mit dem Umgebungs-GITHUB_TOKEN – kein Token-Parameter.
+
+        Deshalb ist ein App-Token-Umbau nicht „ein Skript ändern“: Das Skript
+        muss Token-Unterstützung erst bekommen.
+        """
+        import re
+        text = (ROOT / "scripts/git_sync.sh").read_text()
+        self.assertNotIn("GITHUB_TOKEN", text)
+        self.assertNotIn("GH_TOKEN", text)
+        norm = re.sub(r"\s+", " ", (ROOT / "docs/PFLICHT-CHECK-RUNBOOK.md").read_text())
+        self.assertIn("nimmt kein Token entgegen", norm)
+        # Ein App-Bypass deckt github-actions[bot] nicht ab – das muss drinstehen.
+        self.assertIn("nicht für `github-actions[bot]`", norm)
+
+    def test_payload_carries_check_and_bypass_in_one_document(self):
+        """Atomarität: Beide Teile des Zielzustands liegen im selben PUT-Body."""
+        types = {r["type"] for r in self.payload["rules"]}
+        self.assertIn("required_status_checks", types)
+        self.assertEqual(
+            [{"actor_id": 15368, "actor_type": "Integration", "bypass_mode": "always"}],
+            self.payload["bypass_actors"])
+
     def test_complete_admin_payload(self):
         self.assertEqual("active", self.payload["enforcement"])
         self.assertEqual("branch", self.payload["target"])
