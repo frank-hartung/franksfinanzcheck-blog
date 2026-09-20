@@ -152,9 +152,16 @@ Kein neues JavaScript, keine externen Assets, keine zusätzlichen Requests – d
 
 ## 9. Nebenbefunde & Follow-ups (nicht Teil dieses PRs)
 
-- `data/cwv_manifest.json` ist am Stand von `main` **veraltet**: er zählt `.avif` nicht mit (committed 1028
-  Bilder vs. real 1538 inkl. avif, 41 MB). Frische Messung: Ampel GRÜN, `--strict-build` grün. Der Refresh
-  gehört in einen eigenen Gate-Commit (`python3 scripts/cwv_guard.py --strict-build`), nicht in diesen Feature-PR.
+- ~~`data/cwv_manifest.json` ist am Stand von `main` **veraltet**~~ → **erledigt am 20.09.2026** im
+  Gate-Commit `fix(gate): CWV-Messstand 2026-09-20`. Gemessen mit
+  `python3 scripts/cwv_guard.py --build --strict-build` (Hugo Extended 0.164.0, Bau 1,9 s, danach
+  Messung im selben Prozess): Ampel **GRÜN**, `build_measured: true`, 377 HTML-Seiten,
+  **1538** Bilder (477 jpg + 17 png + 522 webp + **522 avif**) = 41,1 MB, größtes Cover 135 KB,
+  0 Befunde. Alter committed-Stand: 1028 Bilder / 27,4 MB vom 15.09. – die Differenz von 510 Dateien
+  ist der `.avif`-Bestand; der *aktuelle* Wächter zählt `.avif` mit (`ACCEPTED_IMG_EXT`), veraltet war
+  also das Manifest, nicht die Zähllogik. Report und Manifest stammen aus einem Lauf
+  (Governance-Regel **C7**, geprüft mit `governance_contract.py --quick`); der Refresh-Prozess ist
+  jetzt `cwv_guard.py --build` + `scripts/tests/test_cwv_refresh.py`.
 - Sommer-Saison hat die dünnste Keyword-Deckung (genau 3 Treffer) – redaktionell nachschärfen, sobald neue
   Sommer-Beiträge erscheinen; das Gate meldet Fallback-Nutzung laut, sobald `min_artikel` nicht aus Keywords reicht.
 - Optionale Ausbaustufe: saisonales OG-/Pinterest-Hero-Bild je Saison (bräuchte eigene Assets + Brand-Prüfung).
