@@ -59,6 +59,13 @@ Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
   umbenennen, keinen `paths`-Filter, kein `if:` am Job** – sonst friert `main`
   ein oder das Gate wird Scheingrün. Umbenennen nur nach
   `docs/PFLICHT-CHECK-RUNBOOK.md`.
+  Der Meta-Schritt `pflichtcheck_guard.py` meldet den auf diesem Repo **nicht
+  erfüllbaren** Teil (kein Ruleset verlangt den Check; Rulesets ändern ist
+  Admin-Aufgabe, C15) als **bekannten Dauerzustand**: Exit 0 mit `::warning::`,
+  das 🛑 bleibt in Log und Summary – Erklärung `PFLICHT_CHECK_DAUERZUSTAND`,
+  Prüffrist bis 31.12.2026, harter Ausweg `--strict`. Nicht „reparieren“, nicht
+  grün waschen, nicht im Workflow auf `--strict` umstellen; Rückbau und Ablauf
+  stehen im Runbook-Abschnitt „Dauerzustand“.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
   per Patch/PR mit vollwertigem Token ändern (siehe README, Known Issue).
 

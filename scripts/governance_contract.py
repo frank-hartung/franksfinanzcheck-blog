@@ -57,12 +57,18 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C17 Pinterest-Duplikate – pin_title/pin_description sind über alle Artikel
                      einzigartig; der Duplicate-Guard läuft in Watchdog und
                      Content-Engine (#305)
-  C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`)
-                     ist der Vertrag mit dem Branch-Schutz: Konstante = Workflow
-                     = Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
-                     `continue-on-error` am Gate-Schritt, nur Leserechte – und
-                     die Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst,
-                     ob der Branch-Schutz den Check wirklich verlangt (19.09.2026)
+  C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist
+                     der Vertrag mit dem Branch-Schutz: Konstante = Workflow =
+                     Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
+                     `continue-on-error` am Gate-Schritt, nur Leserechte – und die
+                     Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst, ob
+                     der Branch-Schutz den Check wirklich verlangt (19.09.2026).
+                     Ist der Vertrag nachweislich NICHT erfüllbar (Regeländerung
+                     bleibt Admin-Aufgabe), darf er weder verschwiegen noch zum
+                     Dauer-Alarm werden: `PFLICHT_CHECK_DAUERZUSTAND` legt ihn als
+                     festgestellten, befristeten Zustand ab – die Wache meldet ihn
+                     als BEKANNT statt als Vorfall, jeder andere Befund bleibt rot
+                     (20.09.2026)
 
 Exit-Codes: 0 = Vertrag erfüllt · 1 = Verletzung(en) · 2 = Selbsttest/Fehler
 
@@ -875,6 +881,63 @@ PFLICHT_CHECK_BRANCH = "main"
 PFLICHT_CHECK_WACHE = "pflichtcheck_guard.py"
 RE_PFLICHT_CHECK_SCHRITT = re.compile(r"integrity_guard\.py\s+--gate\b")
 
+# --------------------------------------------------------------------------- #
+#  DAUERZUSTAND – der dokumentierte Fall „Vertrag verletzt, aber nicht heilbar"
+# --------------------------------------------------------------------------- #
+# Was hier steht, ist kein Freispruch, sondern ein Protokoll. Der Pflicht-Check
+# `Integritäts-Siegel` ist auf diesem Repo ohne Admin-Eingriff nicht erfüllbar:
+# Rulesets darf nach C15 nur ein Mensch ändern, und kein Bot-Token dieses Hauses
+# hat `administration:write`. Die Wache meldete deshalb seit 19.09. 23:09 UTC in
+# JEDEM PR rot – und dieses Rot war nachweislich folgenlos: PR #327 wurde am
+# 20.09.2026 um 15:43 UTC gemergt, obwohl der Check mit `FAILURE` endete
+# (kein Pflicht-Check ⇒ keine Merge-Blockade). Ein Befund, der jede Woche
+# dasselbe „Problem" meldet, das niemand im Repo heilen kann, ist kein
+# Messinstrument, sondern Lärm (die Lehre aus #206/#272) – und Lärm ist teurer
+# als der Fehler, weil echte rote Kreuze in der Gewohnheit untergehen.
+#
+# Option B statt Option A: Der Befund wird NICHT grün gewaschen. Die Wache läuft
+# weiter, prüft weiter und zeigt das rote Kreuz im Log und in der Step-Summary –
+# nur eingeordnet als BEKANNT (dokumentierter, befristeter Dauerzustand) statt
+# als Vorfall. Die Erklärung gilt exakt für den festgestellten Befund auf dem
+# festgestellten Zweig und nur bis `pruefung_bis`; danach – und bei jeder
+# Abweichung davon – meldet die Wache wieder hart (Exit 1, ::error::). `--strict`
+# stellt den alten Zähler für Admin-Sitzungen und Nachprüfungen wieder her.
+PFLICHT_CHECK_DAUERZUSTAND = {
+    "zweck": "Pflicht-Check `Integritäts-Siegel` wird von `main` nicht verlangt und "
+             "kann im Repo nicht eingetragen werden: Rulesets ändern ist Admin-Aufgabe (C15).",
+    "check": PFLICHT_CHECK_NAME,
+    "branch": PFLICHT_CHECK_BRANCH,
+    "urteil_erwartet": "UNGESCHUETZT",
+    "festgestellt": "2026-09-19",          # erster roter Vertragsschritt (19.09. 23:09:30 UTC)
+    "dokumentiert": "2026-09-20",          # Entscheidung Frank: Zustand ablegen statt Alarm drehen
+    "pruefung_bis": "2026-12-31",          # danach meldet die Wache wieder als Vorfall
+    "belege": {
+        "branch-schutz": "GET /repos/frank-hartung/franksfinanzcheck-blog/rules/branches/main "
+                         "(20.09.2026) → 4 Einträge, je `deletion` + `non_fast_forward` aus den "
+                         "Rulesets #23710849 und #23705980; kein `required_status_checks`, "
+                         "keine `pull_request`-Regel",
+        "keine-admin-rechte": "GET /repos/frank-hartung/franksfinanzcheck-blog → "
+                              "permissions {admin:false, maintain:false, pull:false, push:false, "
+                              "triage:false} – kein administration:write, PUT auf ein Ruleset "
+                              "ist dem Bot verwehrt",
+        "kein-merge-blocker": "PR #327 ist am 20.09.2026 15:43 UTC trotz Check-Konclusion "
+                               "FAILURE gemergt (Merge-Commit 4b91938, Run 35520108131) – das "
+                               "rote Kreuz hält nachweislich keinen Merge auf",
+        "harter-stopp": "Schritte 4 und 5 desselben Laufs sind grün "
+                        "(`integrity_guard.py --gate`: 43 Kerndateien == signierter Stand) – "
+                        "der Sabotage-Schutz läuft und meldet Drift, er blockiert nur nicht",
+    },
+    "runbook": "docs/PFLICHT-CHECK-RUNBOOK.md",
+    "runbook_abschnitt": "Dauerzustand – dokumentiert statt Dauer-Alarm (20.09.2026, Option B)",
+}
+# Schlüssel, die die Erklärung vollständig machen (C18 prüft gegen diese Liste).
+DAUERZUSTAND_SCHLUESSEL = ("zweck", "check", "branch", "urteil_erwartet", "festgestellt",
+                           "dokumentiert", "pruefung_bis", "belege", "runbook",
+                           "runbook_abschnitt")
+# Urteile, die als Dauerzustand dokumentierbar sind. `NICHT_PRUEFBAR` fehlt
+# bewusst: „kann nicht prüfen" ist kein Zustand, den man absegnen könnte.
+DAUERZUSTAND_URTEILE = ("UNGESCHUETZT", "FEHLT", "FALSCHE_QUELLE", "PR_SCOPING_FEHLT")
+
 
 def _yaml_bloecke(text, kopf_re, einzug):
     """[(Kopf-Match, Blocktext)] aller Blöcke, deren Kopfzeile mit genau `einzug`
@@ -1012,6 +1075,93 @@ def c18_pflicht_check(wflows):
     return out
 
 
+def _iso_datum(wert):
+    """Datum aus ISO-Zeichenkette oder None (bewusst kein Vergleich mit der Wanduhr)."""
+    try:
+        return datetime.date.fromisoformat(str(wert or "").strip())
+    except ValueError:
+        return None
+
+
+def c18_dauerzustand(zustand, wache_text="", runbook_text=""):
+    """C18-Zusatz: Eine dokumentierte Dauerzustand-Erklärung ist kohärent, verdrahtet
+    und beweisbar – oder sie ist ein roter Befund.
+
+    Eine Erklärung, die ihren Zweck verfehlt, ist schlimmer als keine: Sie verwandelt
+    ein rotes Kreuz in ein grünes Gewissen. Also wird geprüft, was im Repo steht und
+    was daraus folgt (alles deterministisch, ohne Netz, ohne Blick auf die Wanduhr):
+
+      · vollständig   – alle Schlüssel sind gesetzt, die Belege sind welche (nicht
+                        „war schon immer so")
+      · eine Wahrheit – `check`/`branch`/`urteil_erwartet` stimmen mit den
+                        Vertragskonstanten und den Urteilen der Wache überein
+      · Datengrundlage – festgestellt ≤ dokumentiert ≤ Frist, alle drei als ISO-Datum
+      · nicht tot     – die Wache liest die Erklärung (`PFLICHT_CHECK_DAUERZUSTAND`)
+                        und kennt ihren harten Modus `--strict`
+      · auffindbar    – das Runbook existiert und führt den benannten Abschnitt
+
+    Die FRIST selbst ist hier ausdrücklich kein Befund: Der Vergleich mit der
+    Wanduhr kippte sonst den Selbsttest unter der Uhr-Probe (C6, #310-Klasse) und
+    ein Governance-Lauf würde drei Monate später anders entscheiden als heute.
+    Abgelaufen wird im Live-Pfad gemeldet – dort, wo die echte Uhr steht.
+    """
+    out = []
+    if not isinstance(zustand, dict) or not zustand:
+        return out
+    for feld in DAUERZUSTAND_SCHLUESSEL:
+        wert = zustand.get(feld)
+        if isinstance(wert, dict):
+            if not wert:
+                out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.{feld} ist leer – eine "
+                                   f"Dauerzustand-Erklärung ohne Inhalt entschuldigt nichts."))
+        elif not str(wert or "").strip():
+            out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.{feld} fehlt – die Erklärung "
+                               f"muss zweck, belege und Frist nennen."))
+    if str(zustand.get("check") or "") != PFLICHT_CHECK_NAME:
+        out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.check ist `{zustand.get('check')}`, "
+                           f"Vertrag aber `{PFLICHT_CHECK_NAME}` – die Erklärung würde einen "
+                           f"anderen Check freisprechen."))
+    if str(zustand.get("branch") or "") != PFLICHT_CHECK_BRANCH:
+        out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.branch ist `{zustand.get('branch')}`, "
+                           f"geschützt werden soll `{PFLICHT_CHECK_BRANCH}`."))
+    if str(zustand.get("urteil_erwartet") or "") not in DAUERZUSTAND_URTEILE:
+        out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.urteil_erwartet "
+                           f"`{zustand.get('urteil_erwartet')}` ist kein Urteil der Wache "
+                           f"({', '.join(DAUERZUSTAND_URTEILE)}) – die Erklärung griffe ins Leere."))
+    daten = {f: _iso_datum(zustand.get(f)) for f in ("festgestellt", "dokumentiert", "pruefung_bis")}
+    for feld, wert in daten.items():
+        if wert is None:
+            out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.{feld} ist kein ISO-Datum "
+                               f"(`{zustand.get(feld)}`) – Fristen müssen maschinenlesbar sein."))
+    if all(daten.values()) and not (daten["festgestellt"] <= daten["dokumentiert"] <= daten["pruefung_bis"]):
+        out.append(("C18", "PFLICHT_CHECK_DAUERZUSTAND: festgestellt ≤ dokumentiert ≤ "
+                           "pruefung_bis ist verletzt – eine Erklärung, die vor ihrem eigenen "
+                           "Befund datiert ist, ist keine."))
+    belege = zustand.get("belege") if isinstance(zustand.get("belege"), dict) else {}
+    for titel, text in belege.items():
+        if len(str(text or "").strip()) < 20:
+            out.append(("C18", f"PFLICHT_CHECK_DAUERZUSTAND.belege[„{titel}“] ist keine Evidenz "
+                               f"(zu kurz) – ein Dauerzustand wird belegt, nicht behauptet."))
+    if belege and not re.search(r"#\d+", " ".join(str(t) for t in belege.values())):
+        out.append(("C18", "PFLICHT_CHECK_DAUERZUSTAND.belege nennen kein Issue und keine PR-Nummer "
+                           "– woran soll man die Prüfung in sechs Monaten nachmessen können?"))
+    if wache_text:
+        if "PFLICHT_CHECK_DAUERZUSTAND" not in wache_text:
+            out.append(("C18", f"scripts/{PFLICHT_CHECK_WACHE} liest `PFLICHT_CHECK_DAUERZUSTAND` "
+                               f"nicht – die Erklärung ist totes Konfigurationsstück und der "
+                               f"Befund bliebe ein Dauer-Vorfall."))
+        if "--strict" not in wache_text:
+            out.append(("C18", f"scripts/{PFLICHT_CHECK_WACHE} kennt keinen `--strict`-Modus – ohne "
+                               f"harten Schalter für Admin-Sitzungen wäre das Weichzeichnen "
+                               f"unwiderruflich (Scheingrün auf Dauer)."))
+    runbook = str(zustand.get("runbook") or "")
+    if runbook_text:
+        if str(zustand.get("runbook_abschnitt") or "") not in runbook_text:
+            out.append(("C18", f"{runbook}: Abschnitt „{zustand.get('runbook_abschnitt')}“ fehlt – "
+                               f"die Wache verweist auf eine Anleitung, die es nicht gibt."))
+    return out
+
+
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
@@ -1073,6 +1223,10 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c16_heartbeat(deploy_yml, script_texts)
     checks += c17_pinterest_duplicate_guard(script_texts, wflows, root=root)
     checks += c18_pflicht_check(wflows)
+    dauerz = PFLICHT_CHECK_DAUERZUSTAND or {}
+    runbook_pfad = str(dauerz.get("runbook") or "")
+    checks += c18_dauerzustand(dauerz, script_texts.get(PFLICHT_CHECK_WACHE, ""),
+                               _read(os.path.join(root, runbook_pfad)) if runbook_pfad else "")
     return checks
 
 
@@ -1133,7 +1287,11 @@ RULE_TEXT = {
            "nur mit Leserechten, und die Live-Wache `pflichtcheck_guard.py` prüft im "
            "Gate selbst, ob der Branch-Schutz den Check wirklich verlangt – ein "
            "umbenannter Job friert `main` ein, ein Ruleset ohne Ziel-Branch schützt "
-           "nichts (19.09.2026).",
+           "nichts (19.09.2026). Ist der Vertrag nachweislich nicht erfüllbar, legt "
+           "`PFLICHT_CHECK_DAUERZUSTAND` ihn als befristeten Dauerzustand ab: Die Wache "
+           "meldet genau diesen Befund als BEKANNT statt als Vorfall, jeder andere bleibt "
+           "rot, und `--strict` zieht auch den bekannten Befund wieder auf Exit 1 "
+           "(20.09.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -1511,6 +1669,52 @@ def _selftest():
         failures.append("C18: Kommentar am linken Rand zerreißt den Job-Block.")
     if PFLICHT_CHECK_WACHE not in GUARDS:
         failures.append("C18: Live-Wache steht nicht im vertraglichen Minimum (GUARDS).")
+    # --- C18-Zusatz: dokumentierter Dauerzustand (20.09.2026, Option B) -----------
+    def _dauer(**anderungen):
+        z = dict(PFLICHT_CHECK_DAUERZUSTAND)
+        z.update(anderungen)
+        return z
+    wache_ok = ('if "PFLICHT_CHECK_DAUERZUSTAND" not in zustand: pass\n'
+                'ap.add_argument("--strict", action="store_true")\n')
+    runbook_ok = "## " + str(PFLICHT_CHECK_DAUERZUSTAND.get("runbook_abschnitt")) + "\nText\n"
+    if c18_dauerzustand(None, wache_ok, runbook_ok):
+        failures.append("C18: fehlende Dauerzustand-Erklärung wird beanstandet "
+                        "(ohne Erklärung muss die Wache hart rot melden – das ist kein Befund).")
+    if c18_dauerzustand(_dauer(), wache_ok, runbook_ok):
+        failures.append(f"C18: die hinterlegte Dauerzustand-Erklärung ist unvollständig oder "
+                        f"unerklärt: {c18_dauerzustand(_dauer(), wache_ok, runbook_ok)}")
+    for feld, erwartung in (("check", "Siegel-Anders"), ("branch", "develop"),
+                            ("urteil_erwartet", "NICHT_PRUEFBAR"),
+                            ("pruefung_bis", "31.12.2026"),
+                            ("festgestellt", "2026-13-45")):
+        fund = c18_dauerzustand(_dauer(**{feld: erwartung}), wache_ok, runbook_ok)
+        if not fund:
+            failures.append(f"C18: Dauerzustand mit `{feld}: {erwartung!r}` bleibt unbeanstandet "
+                            f"(Erklärung würde ins Leere greifen).")
+    if not [f for f in c18_dauerzustand(_dauer(pruefung_bis="2026-06-30"), wache_ok, runbook_ok)
+            if "≤" in f[1]]:
+        failures.append("C18: Frist vor dem Feststellungsdatum bleibt unbeanstandet.")
+    if c18_dauerzustand(_dauer(pruefung_bis="2026-09-21"), wache_ok, runbook_ok):
+        failures.append("C18: eine abgelaufene Frist ist im Vertrag KEIN Befund – die Uhr-Probe "
+                        "(C6) würde den Selbsttest sonst je nach Kalendertag kippen.")
+    if c18_dauerzustand(_dauer(), "", ""):
+        failures.append("C18: unbrauchbare Wachen-/Runbook-Texte erfinden Befunde "
+                        "(fehlende Einsicht ist keine Verletzung – C15-Maß).")
+    if not c18_dauerzustand(_dauer(belege={"x": "war schon immer so"}), wache_ok, runbook_ok):
+        failures.append("C18: Dauerzustand ohne brauchbare Belege bleibt unbeanstandet.")
+    if not c18_dauerzustand(_dauer(belege={"x": "Regeln vor Ort geprüft, alle Rulesets lesen"
+                                                  " nichts verlangt"}), wache_ok, runbook_ok):
+        failures.append("C18: Belege ohne Issue-/PR-Nummer bleiben unbeanstandet "
+                        "(Nachprüfbarkeit in sechs Monaten wäre erfunden).")
+    if not c18_dauerzustand(_dauer(), 'ap.add_argument("--strict", action="store_true")\n',
+                            runbook_ok):
+        failures.append("C18: Dauerzustand-Erklärung ohne Verdrahtung in der Wache bleibt "
+                        "unbeanstandet (totes Konfigurationsstück).")
+    if not c18_dauerzustand(_dauer(), 'PFLICHT_CHECK_DAUERZUSTAND\n', runbook_ok):
+        failures.append("C18: Dauerzustand ohne `--strict`-Ausweg bleibt unbeanstandet "
+                        "(das wäre Scheingrün auf Dauer).")
+    if not c18_dauerzustand(_dauer(), wache_ok, "anderer Text"):
+        failures.append("C18: Runbook-Abschnitt der Dauerzustand-Erklärung fehlt, meldet nicht.")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:

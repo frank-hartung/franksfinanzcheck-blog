@@ -1,6 +1,7 @@
 # Runbook: Pflicht-Check `Integritäts-Siegel` (PR-Schutz für `main`)
 
-**Stand:** 20.09.2026 (Nachprüfung, Befund unverändert offen) · **Vertrag:** Governance-Regel **C18**
+**Stand:** 20.09.2026 (Nachprüfung: Befund unverändert offen, als Dauerzustand abgelegt –
+siehe Abschnitt „Dauerzustand – dokumentiert statt Dauer-Alarm“) · **Vertrag:** Governance-Regel **C18**
 (`scripts/governance_contract.py`) · **Wache:** `scripts/pflichtcheck_guard.py`
 · **Anlass:** [Integritäts-Vorfall](INCIDENT-2026-09-19-integritaets-lock.md),
 PR #317 und Deploy-Ausfall #320 / PR #321.
@@ -20,7 +21,8 @@ vorbereitet und **nicht live angewendet**.
 | Ruleset **#23710849** „Integritäts-Lock (PR-Gate)“ | `enforcement: active`, Ziel `~DEFAULT_BRANCH` (keine Excludes), Regeln **nur** `deletion` + `non_fast_forward`. Angelegt 19.09. 22:19:24 UTC, zuletzt geändert 22:37:36 UTC. |
 | Ruleset **#23705980** „main – Unveränderlichkeit (ohne Bypass)“ | `active`, ebenfalls nur Lösch-/Force-Push-Schutz – **unverändert beibehalten** (siehe Bypass-Warnung unten). |
 | Ursprünglich beauftragte ID **#23695872** | weiterhin **HTTP 404** auf `GET /rulesets/23695872`. 404 allein beweist keine Löschung (auch fehlende Sichtbarkeit ist möglich). |
-| Urteil der Live-Wache | `python3 scripts/pflichtcheck_guard.py --branch main` → **UNGESCHUETZT**, Exit 1: „Kein aktives Ruleset verlangt einen Status-Check auf dem Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.“ |
+| Urteil der Live-Wache | `python3 scripts/pflichtcheck_guard.py --branch main` → **UNGESCHUETZT**, Exit 1: „Kein aktives Ruleset verlangt einen Status-Check auf dem Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.“  
+  *(Nachtrag desselben Tages: als Dauerzustand dokumentiert → Exit 0 mit `::warning::`, 🛑 bleibt sichtbar; `--strict` meldet wieder Exit 1 – Abschnitt „Dauerzustand“.)* |
 | Harter Stopp selbst | **grün** – Schritt „Integritäts-Siegel prüfen (HARD STOP)“ lief in allen Läufen seit 19.09. 23:09 UTC erfolgreich; lokal: `integrity_guard.py --gate` → „43 Kerndateien entsprechen exakt dem signierten Stand“. |
 
 **Zeitachse – Korrektur der Notiz „Zustand seit 19.09., ~20:42“.** Der
@@ -46,6 +48,59 @@ nicht auf Log-Zitate.
 noch existiert, genau diese reparieren; sonst das gleichnamige #23710849.
 Nicht blind einen PUT auf eine alte ID senden und nicht still eine weitere
 Kopie anlegen. Name allein identifiziert kein Ruleset.
+
+## Dauerzustand – dokumentiert statt Dauer-Alarm (20.09.2026, Option B)
+
+**Entscheidung (Frank, 20.09.2026):** Der Vertrag ist auf diesem Repo nicht erfüllbar,
+solange die Ruleset-Änderung ausbleibt – und die bleibt Admin-Aufgabe (**C15**; kein Token
+dieses Hauses hat `administration:write`). Der Befund wird deshalb **abgelegt, nicht
+weggeschaltet**: Die Wache prüft weiter vollständig, zeigt das rote Kreuz in Log und
+Step-Summary, meldet es aber als **BEKANNT** statt als Vorfall (Exit 0, `::warning::`).
+
+Was dafür spricht, dass das kein Schutzverlust ist:
+
+| Frage | Antwort (Beleg, 20.09.2026) |
+|---|---|
+| Hat das rote Kreuz je einen Merge aufgehalten? | **Nein.** PR #327 wurde am 20.09. um 15:43:18 UTC gemergt, während `Integritäts-Siegel` auf `FAILURE` stand (Run `35520108131`, Merge-Commit `4b91938`). Ohne `required_status_checks` wartet GitHub auf nichts – das Kreuz hat keine Hand. |
+| Was schützt weiterhin? | Der harte Stopp: `integrity_guard.py --gate` bleibt Schritt 4 desselben Jobs, fail-closed, und stoppt bei Drift in den 43 Kerndateien die Produktion. Er hält nur keinen Merge auf – das ist die Lücke im Ruleset, nicht das Urteil der Wache. |
+| Was bleibt rot? | Alles außer dem einen festgestellten Befund: anderer Urteilstyp (`FEHLT`, `FALSCHE_QUELLE`, `PR_SCOPING_FEHLT`), ein neues aktives Ruleset ohne Actions-Bypass (der Automationsstillstand vom 19.09.), abgelaufene Prüffrist, fehlende oder unbrauchbare Erklärung. |
+
+**Maschinenlesbar** liegt die Erklärung als `PFLICHT_CHECK_DAUERZUSTAND` in
+`scripts/governance_contract.py`: Zweig, Check, erwartetes Urteil, Feststellungsdatum,
+Belege und `pruefung_bis`. Die Wache vergleicht den **Live**-Befund dagegen – nur die
+exakte Übereinstimmung ist weich. **C18** prüft die Erklärung auf Vollständigkeit,
+Verdrahtung in `pflichtcheck_guard.py` (inklusive `--strict`) und Rückverweis auf diesen
+Abschnitt; eine Erklärung, die ins Leere greift, ist selbst ein Befund.
+
+| Modus | Was der Lauf zeigt | Exit | Annotation |
+|---|---|---|---|
+| Standard (`python3 scripts/pflichtcheck_guard.py`) | 🛑 im Log + Step-Summary, Text „BEKANNT (dokumentierter Dauerzustand)“ | 0 | `::warning::` |
+| `--strict` bzw. `PFLICHTCHECK_STRICT=1` | derselbe Text, „strenge Meldung wegen `--strict`“ | 1 | `::error::` |
+| Abweichung vom dokumentierten Stand | 🛑 + Diagnose + Reparatur in Klicks | 1 | `::error::` |
+
+```bash
+# Nachprüfung im alten, harten Zähler (Admin-Sitzung, Vorher/Nachher-Vergleich):
+python3 scripts/pflichtcheck_guard.py --branch main --strict
+python3 scripts/pflichtcheck_guard.py --branch main          # weich: Exit 0, 🛑 bleibt lesbar
+```
+
+Kein `continue-on-error`, kein `if:` am Job, kein Überspringen des Schritts – das alles wäre
+Scheingrün (C18) und würde genau den Fehler wiederherstellen, gegen den das Gate antritt.
+Weich heißt hier ausschließlich: **die Folge ist ein Warnhinweis, nicht die Prüfung.**
+
+**Frist und Rückbau.** Die Freigabe gilt bis einschließlich **31.12.2026**; ab dem
+01.01.2027 meldet die Wache denselben Befund wieder als Vorfall. Verlängern heißt,
+`pruefung_bis` im Vertrag neu zu datieren – eine menschliche Entscheidung, kein Schalter in
+der Pipeline. Repariert ein Admin das Ruleset, meldet der **grüne** Lauf die Erklärung als
+überholt; sie ist im selben PR zu löschen. Rückbau in drei Schritten:
+
+1. `python3 scripts/pflichtcheck_guard.py --branch main` → muss `✅ Vertrag erfüllt` melden.
+2. `PFLICHT_CHECK_DAUERZUSTAND` in `scripts/governance_contract.py` auf `{}` setzen (oder
+   entfernen); diesen Abschnitt als Historie stehen lassen.
+3. `python3 scripts/pflichtcheck_guard.py --selftest`,
+   `python3 scripts/governance_contract.py --quick` und
+   `python3 -m unittest scripts/tests/test_pflichtcheck.py scripts/tests/test_ruleset_restoration.py`
+   müssen grün sein, bevor das Ruleset als repariert gilt.
 
 ## Der Zielvertrag (PR-Scoping, aber Automation bleibt schreibfähig)
 
@@ -263,9 +318,15 @@ Job-Summary und Governance-Issue bereits. Kein neuer Root-Report.
 | `VERLANGT` | Check verlangt; im Live-Aufruf zusätzlich PR-Pflicht mit 0 Approvals | 0 |
 | `FEHLT` | Andere Checks, etwa die alte Job-ID `lock` | 1 |
 | `FALSCHE_QUELLE` | Check an falsche App gebunden | 1 |
-| `UNGESCHUETZT` | Kein Status-Check auf dem Ziel | 1 |
+| `UNGESCHUETZT` | Kein Status-Check auf dem Ziel | 1 – **0**, wenn exakt dieser Befund als Dauerzustand dokumentiert ist (`PFLICHT_CHECK_DAUERZUSTAND`, bis `pruefung_bis`); `--strict` stellt das Rot wieder her |
 | `PR_SCOPING_FEHLT` | Check vorhanden, aber keine `pull_request`-Regel mit 0 Approvals | 1 |
 | `NICHT_PRUEFBAR` | API/Antwort unbrauchbar, Warnung statt erfundenem Urteil | 0 |
+
+Der weiche `UNGESCHUETZT`-Fall ist kein Grün: Das 🛑 steht unverändert im Log und in der
+Step-Summary, nur die Annotation ist eine Warnung statt eines Fehlers und der Exit 0. Jeder
+andere Befund, eine abgelaufene Frist und jede Abweichung von der hinterlegten Erklärung
+melden weiter Exit 1. Ist der Check wieder verlangt, meldet der grüne Lauf die Erklärung als
+überholt und sie muss aus dem Vertrag.
 
 Die Namensprüfung akzeptiert weiterhin quellenfreie Checks; **der Admin-Zielzustand
 ist strenger** und bindet ausdrücklich App 15368. Bei `VERLANGT` prüft die Wache

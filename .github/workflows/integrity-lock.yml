@@ -51,6 +51,21 @@
 #      (welches Ruleset, welcher Name, welches Ziel) und Reparatur in
 #      Klicks. API nicht erreichbar → ::warning::, nicht rot: Der Melder
 #      darf nicht selbst zum Vorfall werden.
+#    · DAUERZUSTAND (Nachtrag 20.09.2026, Entscheidung Frank): Der Vertrag ist
+#      auf diesem Repo nicht erfüllbar – Rulesets ändern ist Admin-Aufgabe (C15),
+#      und dass das rote Kreuz niemanden aufhält, ist belegt: PR #327 wurde am
+#      20.09. bei FAILURE gemergt (Run 35520108131). Der Schritt meldet genau
+#      diesen Befund deshalb als BEKANNT (Exit 0, ::warning::) – 🛑, Diagnose und
+#      Runbook-Verweis bleiben im Log stehen, gewaschen wird nichts. Jeder andere
+#      Befund, ein neues Ruleset ohne Actions-Bypass und eine abgelaufene
+#      Prüffrist (bis 31.12.2026) melden weiter Exit 1 und ::error::.
+#      `--strict` bzw. PFLICHTCHECK_STRICT=1 stellt den harten Zähler für
+#      Admin-Sitzungen wieder her – bewusst NICHT hier: ein Dauer-Rot ist Lärm,
+#      und Lärm war der Befund #206/#272. Erklärung und Rückbau:
+#      docs/PFLICHT-CHECK-RUNBOOK.md, Abschnitt „Dauerzustand“.
+#      Der harte Stopp (Schritt „Integritäts-Siegel prüfen“) bleibt davon
+#      unberührt: er läuft, prüft fail-closed und meldet Drift in den
+#      Kerndateien – er hält nur keinen Merge auf, weil keiner verlangt ist.
 # ============================================================
 name: Integritäts-Lock (PR-Gate)
 

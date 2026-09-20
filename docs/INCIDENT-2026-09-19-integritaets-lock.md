@@ -219,7 +219,9 @@ steht im `GUARDS`-Minimum.
 **Was nur ein Mensch kann (Admin-Recht):** das Ruleset auf den Default-Branch
 zielen lassen und `lock` gegen `Integritäts-Siegel` tauschen — Klickweg und
 API-Einzeiler im Runbook. Bis dahin ist der letzte Gate-Schritt in jedem PR
-**absichtlich rot** und sagt, warum.
+**absichtlich rot** und sagt, warum. (Stand 20.09. abends: derselbe Befund ist als
+Dauerzustand dokumentiert und meldet Exit 0 mit `::warning::` – das 🛑 bleibt im Log,
+die Reparatur bleibt offen. Siehe den Nachtrag „Dauerzustand“ am Ende dieses Berichts.)
 
 ## Nachtrag 20.09.2026 — Stand der Admin-Reparatur (unverändert offen)
 
@@ -257,3 +259,29 @@ in der Prüfumgebung nicht ladbar (`results-receiver.actions.githubusercontent.c
 die Lücke), aber jeder PR zeigt ein rotes Kreuz, das inhaltlich nichts mit dem PR
 zu tun hat. Alarm-Routing: Besitzer **Mensch** (Frank, Admin-Klick), kein
 Automations-Ticket, Schließpfad = Ruleset-Reparatur + Re-run des Gate-Jobs.
+
+## Nachtrag 20.09.2026 (2) — der offene Befund wird dokumentiert, nicht weggedreht
+
+**Entscheidung (Frank, Option B):** Der Pflicht-Check-Vertrag bleibt auf diesem Repo
+offen, solange niemand im Repo das Ruleset ändern darf — und das bleibt so (C15: Regeln
+ändert ein Mensch). Seit 19.09. 23:09 UTC meldete Schritt 6 in **jedem** PR rot, ohne
+etwas zu schützen: PR #327 wurde am 20.09. um 15:43:18 UTC gemergt, während
+`Integritäts-Siegel` auf `FAILURE` stand (Run `35520108131`, Merge-Commit `4b91938`).
+Ein Rot ohne Besitzer im Repo und ohne Wirkung auf den Merge ist der Dauer-Alarm, den
+#206 und #272 beschrieben haben.
+
+**Was jetzt gilt:** `governance_contract.PFLICHT_CHECK_DAUERZUSTAND` legt den Befund als
+festgestellten, befristeten Zustand ab (Zweig `main`, Urteil `UNGESCHUETZT`, Belege,
+Prüffrist bis **31.12.2026**). Die Wache vergleicht den Live-Befund dagegen und meldet
+ihn bei exakter Übereinstimmung als BEKANNT — Exit 0, `::warning::`, das 🛑 samt
+Diagnose und Runbook-Verweis bleibt in Log und Step-Summary. Alles andere bleibt Vorfall
+wie in diesem Bericht beschrieben: anderer Urteilstyp, neues Ruleset ohne
+Actions-Bypass (die Blockade vom 19.09.), abgelaufene Frist, fehlende oder unbrauchbare
+Erklärung. `--strict` (`PFLICHTCHECK_STRICT=1`) meldet auch den bekannten Fall wieder
+hart; ein grüner Lauf meldet die Erklärung als überholt und verlangt ihren Rückbau.
+
+**Ausdrücklich nicht geändert:** Schritt 4, der harte Stopp `integrity_guard.py --gate`.
+Er prüft fail-closed gegen den signierten Kern (43 Kerndateien), meldet Drift und stoppt
+die Produktion — er hält nur keinen Merge auf, weil `main` keinen Pflicht-Check verlangt.
+Das ist und bleibt die Lücke; sie ist jetzt ein dokumentierter Zustand mit Frist und
+Reparaturweg statt eines roten Rauschens.

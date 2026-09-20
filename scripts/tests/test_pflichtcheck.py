@@ -190,7 +190,7 @@ class UrteilDerLiveWache(unittest.TestCase):
 class ProbeOffline(unittest.TestCase):
     """Die Probe über `--rules-file`: Exit-Codes, Annotationen, Step-Summary – ohne Netz."""
 
-    def lauf(self, regeln, env_extra=None):
+    def lauf(self, regeln, env_extra=None, extras=()):
         with tempfile.TemporaryDirectory() as td:
             rules = os.path.join(td, "rules.json")
             summary = os.path.join(td, "summary.md")
@@ -199,10 +199,28 @@ class ProbeOffline(unittest.TestCase):
                    "GITHUB_REPOSITORY": "frank-hartung/franksfinanzcheck-blog",
                    "GITHUB_BASE_REF": "main", **(env_extra or {})}
             r = subprocess.run([sys.executable, str(ROOT / "scripts" / "pflichtcheck_guard.py"),
-                                "--rules-file", rules], cwd=ROOT, capture_output=True,
+                                "--rules-file", rules, *extras], cwd=ROOT, capture_output=True,
                                text=True, env=env, timeout=120)
             zusammenfassung = Path(summary).read_text(encoding="utf-8") if os.path.exists(summary) else ""
             return r.returncode, r.stdout + r.stderr, zusammenfassung
+
+    def lauf_intern(self, regeln, zustand=(), umgebung=None, strict=False):
+        """Dieselbe Probe im Prozess – nur so lässt sich die hinterlegte Erklärung
+        austauschen. Ein Subprozess wüsste von einer austauschten Kopie nichts."""
+        with tempfile.TemporaryDirectory() as td:
+            rules = os.path.join(td, "rules.json")
+            Path(rules).write_text(json.dumps(regeln), encoding="utf-8")
+            puffer = io.StringIO()
+            env = {"GITHUB_ACTIONS": "1", "GITHUB_STEP_SUMMARY": "",
+                   "PFLICHTCHECK_STRICT": "", **(umgebung or {})}
+            with contextlib.ExitStack() as st:
+                st.enter_context(mock.patch.dict(os.environ, env, clear=False))
+                if zustand != ():
+                    st.enter_context(mock.patch.object(gc, "PFLICHT_CHECK_DAUERZUSTAND", dict(zustand)))
+                st.enter_context(contextlib.redirect_stdout(puffer))
+                rc = pg.probe(branch="main", repo="frank-hartung/franksfinanzcheck-blog",
+                              rules_file=rules, strict=strict)
+            return rc, puffer.getvalue()
 
     def test_gruen_wenn_der_zielzweig_das_siegel_verlangt(self):
         rc, out, summary = self.lauf([{"type": "required_status_checks", "ruleset_id": 1,
@@ -223,11 +241,100 @@ class ProbeOffline(unittest.TestCase):
         self.assertIn("`lock` entfernen", out)
         self.assertIn("NICHT verlangt", summary)
 
-    def test_rot_wenn_kein_schutz_und_der_zweig_kommt_aus_dem_pr(self):
-        rc, out, _s = self.lauf([], {"GITHUB_BASE_REF": "main"})
-        self.assertEqual(1, rc, out)
+    def test_dauerzustand_ungeschuetzt_warnt_statt_rot(self):
+        # Der Befund bleibt sichtbar und rot im Text – nur die Folge ist eine Warnung.
+        rc, out, summary = self.lauf([], {"GITHUB_BASE_REF": "main"})
+        self.assertEqual(0, rc, out)
         self.assertIn("Branch-Schutz für `main`", out)
         self.assertIn("Deko", out)
+        self.assertIn("🛑", out)
+        self.assertIn("BEKANNT", out)
+        self.assertIn("::warning::", out)
+        self.assertNotIn("::error::", out)
+        self.assertIn("BEKANNT (dokumentierter Dauerzustand)", summary)
+        self.assertIn("kein Vorfall", out)
+
+    def test_strict_meldet_denselben_befund_wieder_als_vorfall(self):
+        rc, out, _s = self.lauf([], {"GITHUB_BASE_REF": "main"}, extras=["--strict"])
+        self.assertEqual(1, rc, out)
+        self.assertIn("::error::", out)
+        self.assertIn("strenge Meldung", out)
+        rc_env, out_env, _s = self.lauf([], {"GITHUB_BASE_REF": "main", "PFLICHTCHECK_STRICT": "1"})
+        self.assertEqual(1, rc_env, out_env)
+        self.assertIn("::error::", out_env)
+
+    def test_fremder_zweig_fallt_nicht_unter_den_dauerzustand(self):
+        # Die Erklärung gilt für `main`. Ein anderer Ziel-Zweig ist kein Freispruch.
+        rc, out, _s = self.lauf([], {"GITHUB_BASE_REF": "release"})
+        self.assertEqual(1, rc, out)
+        self.assertIn("Gilt nicht als dokumentierter Dauerzustand", out)
+        self.assertIn("::error::", out)
+
+    def test_abgelaufene_frist_ist_wieder_vorfall(self):
+        alt = dict(gc.PFLICHT_CHECK_DAUERZUSTAND, pruefung_bis="2020-01-01")
+        rc, out = self.lauf_intern([], alt)
+        self.assertEqual(1, rc, out)
+        self.assertIn("abgelaufen", out)
+        self.assertIn("::error::", out)
+        self.assertNotIn("· kein Vorfall", out)
+
+    def test_frist_heute_ist_noch_weich(self):
+        # Der Stichtag selbst zählt noch – „bis einschließlich", nicht „bis vor".
+        rc, out = self.lauf_intern([], dict(gc.PFLICHT_CHECK_DAUERZUSTAND,
+                                            pruefung_bis=pg.dt.date.today().isoformat()))
+        self.assertEqual(0, rc, out)
+        self.assertIn("BEKANNT", out)
+
+    def test_erklaerung_loeschen_meldet_hart_wie_frueher(self):
+        rc, out = self.lauf_intern([], {})
+        self.assertEqual(1, rc, out)
+        self.assertIn("Fix (Admin)", out)          # Reparatur bleibt das, was dem Zustand fehlt
+        self.assertIn("::error::", out)
+        self.assertNotIn("BEKANNT", out)
+        # Ohne Erklärung gibt es nichts abzuhaken – also kein „passt nicht“-Vermerk.
+        self.assertNotIn("Gilt nicht als dokumentierter Dauerzustand", out)
+        rc2, out2 = self.lauf_intern([], dict(gc.PFLICHT_CHECK_DAUERZUSTAND, urteil_erwartet="FEHLT"))
+        self.assertEqual(1, rc2, out2)
+        self.assertIn("Gilt nicht als dokumentierter Dauerzustand", out2)
+        self.assertIn("Fix (Admin)", out2)
+
+    def test_neues_ruleset_ohne_bypass_bleibt_vorfall(self):
+        # Ein Ruleset, das direkte Pushes blockt, ist der Vorfall vom 19.09. – die
+        # Dauerzustand-Erklärung darf ihn nicht einschließen.
+        detail = {"id": 123, "name": "Zusatz-Ruleset", "target": "branch", "enforcement": "active",
+                  "bypass_actors": [], "conditions": {"ref_name": {"include": ["~DEFAULT_BRANCH"],
+                                                                    "exclude": []}},
+                  "rules": [{"type": "pull_request"}]}
+        def fake_api(pfad, token="", timeout=20):
+            if pfad.endswith("/rules/branches/main"):
+                return [], ""                     # kein Status-Check verlangt → UNGESCHUETZT
+            if pfad.endswith("/rulesets"):
+                return [{"id": 123, "name": "Zusatz-Ruleset", "target": "branch"}], ""
+            if "/rulesets/" in pfad:
+                return detail, ""
+            return None, f"unerwarteter Pfad: {pfad}"
+        puffer = io.StringIO()
+        with mock.patch.object(pg, "api_get", side_effect=fake_api), \
+                mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "1", "PFLICHTCHECK_STRICT": ""},
+                                clear=False), \
+                contextlib.redirect_stdout(puffer):
+            rc = pg.probe(branch="main", repo="o/r")
+        out = puffer.getvalue()
+        self.assertEqual(1, rc, out)
+        self.assertIn("Zusatz-Ruleset", out)
+        self.assertIn("blockiert direkte Pushes", out)
+        self.assertNotIn("· kein Vorfall", out)
+
+    def test_gruen_mit_liegender_erklaerung_meldet_ueberholt(self):
+        regeln = [{"type": "required_status_checks", "ruleset_id": 1,
+                   "parameters": {"required_status_checks": [
+                       {"context": gc.PFLICHT_CHECK_NAME, "integration_id": 15368}]}},
+                  {"type": "pull_request", "parameters": {"required_approving_review_count": 0}}]
+        rc, out = self.lauf_intern(regeln)
+        self.assertEqual(0, rc, out)
+        self.assertIn("Vertrag erfüllt", out)
+        self.assertIn("überholt", out)
+        self.assertIn("PFLICHT_CHECK_DAUERZUSTAND", out)
 
     def test_unbrauchbare_datei_ist_warnung_nicht_rot(self):
         with tempfile.TemporaryDirectory() as td:
@@ -239,6 +346,58 @@ class ProbeOffline(unittest.TestCase):
         self.assertEqual(0, r.returncode, r.stdout)
         self.assertIn("::warning::", r.stdout)
         self.assertIn("nicht prüfbar", r.stdout)
+
+
+class DauerzustandDokumentation(unittest.TestCase):
+    """Der dokumentierte Dauerzustand (Option B, 20.09.2026) ist eine Wahrheit an
+    drei Orten: Vertrag (Erklärung), Wache (Abgleich) und Runbook (Anleitung).
+
+    Geprüft wird die Kohärenz – nicht, dass der Zustand gut ist. Er ist es nicht:
+    `main` verlangt keinen Pflicht-Check, und kein Lauf dieses Repos darf das
+    ändern. Was geprüft wird, ist, dass die Wache den Befund nur für GENAU diesen
+    Stand weich zeichnet, das Runbook den Beleg nennt und das PR-Gate nicht
+    versehentlich auf starr geschaltet wird.
+    """
+
+    def setUp(self):
+        self.zustand = gc.PFLICHT_CHECK_DAUERZUSTAND
+        self.wache = (ROOT / "scripts" / gc.PFLICHT_CHECK_WACHE).read_text(encoding="utf-8")
+        self.runbuch = (ROOT / self.zustand["runbook"]).read_text(encoding="utf-8")
+
+    def test_erklaerung_erfuellt_c18_gegen_wache_und_runbook(self):
+        self.assertEqual([], gc.c18_dauerzustand(self.zustand, self.wache, self.runbuch))
+
+    def test_erklaerung_entspricht_dem_vertrag(self):
+        self.assertEqual(gc.PFLICHT_CHECK_NAME, self.zustand["check"])
+        self.assertEqual(gc.PFLICHT_CHECK_BRANCH, self.zustand["branch"])
+        self.assertEqual(pg.UNGESCHUETZT, self.zustand["urteil_erwartet"])
+        self.assertIn(self.zustand["runbook_abschnitt"], self.runbuch)
+
+    def test_belege_nennen_die_evidenz_statt_einer_meinung(self):
+        belege = " ".join(self.zustand["belege"].values())
+        for muss in ("rules/branches/main", "#327", "4b91938", "administration:write",
+                     "integrity_guard.py --gate", "required_status_checks"):
+            self.assertIn(muss, belege, f"Beleg fehlt: {muss}")
+
+    def test_runbook_traegt_decision_und_rueckbau(self):
+        for muss in ("Dauerzustand – dokumentiert statt Dauer-Alarm", "PR #327", "--strict",
+                     "31.12.2026", "kein Grün", "Scheingrün"):
+            self.assertIn(muss, self.runbuch, f"Runbook-Aussage fehlt: {muss}")
+        self.assertIn("Rückbau in drei Schritten", self.runbuch)
+
+    def test_pr_gate_bleibt_weich_und_der_harte_stopp_davor(self):
+        text = WF_PFAD.read_text(encoding="utf-8")
+        schritt = [b for n, b in gc.step_blocks(text) if n.startswith("Pflicht-Check-Vertrag prüfen")]
+        self.assertEqual(1, len(schritt), schritt)
+        # Kein --strict im PR-Gate: sonst wäre jeder PR wieder dauerhaft rot.
+        self.assertIn("pflichtcheck_guard.py", schritt[0])
+        self.assertNotIn("--strict", schritt[0])
+        self.assertNotIn("continue-on-error", schritt[0])
+        # Reihenfolge, nicht Textsuche: Der harte Stopp prüft vor der Vertragswache.
+        namen = [n for n, _b in gc.step_blocks(text)]
+        self.assertTrue(namen[-1].startswith("Pflicht-Check-Vertrag prüfen"), namen)
+        self.assertLess(namen.index("Integritäts-Siegel prüfen (HARD STOP – Sabotage-Schutz)"),
+                        len(namen) - 1)
 
 
 class Verdrahtung(unittest.TestCase):
@@ -329,9 +488,13 @@ class BypassWarnung(unittest.TestCase):
         puffer = io.StringIO()
         # GITHUB_ACTIONS=1, weil annotate() nur im Lauf ::warning:: schreibt –
         # genau dieser Weg ist der Beweis im PR-Gate (Annotation am Job).
+        # Die Dauerzustand-Erklärung wird abgeschaltet: Diese Klasse prüft die
+        # Bypass-Nachprüfung, nicht den überholt-Hinweis für einen grünen Lauf
+        # (der eigene Fall: ProbeOffline.test_gruen_mit_liegender_erklaerung…).
         with mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "1"}, clear=False), \
                 mock.patch.object(pg, "api_get", side_effect=fake_api), \
                 mock.patch.object(pg, "workflows_laden", return_value=workflows), \
+                mock.patch.object(gc, "PFLICHT_CHECK_DAUERZUSTAND", {}), \
                 mock.patch.object(pg, "erwarteter_check",
                                   return_value=(self.NAME, "lock", "")), \
                 contextlib.redirect_stdout(puffer):
