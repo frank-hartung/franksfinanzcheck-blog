@@ -1057,9 +1057,9 @@ items:
   date: '2026-09-19'
   time: '11:45'
   scheduled_at: '2026-09-19T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:zitat:2026-09-19
   channel: bluesky
   slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
@@ -1069,9 +1069,9 @@ items:
   date: '2026-09-19'
   time: '12:15'
   scheduled_at: '2026-09-19T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:zahl:2026-09-19
   channel: x
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
@@ -1081,9 +1081,9 @@ items:
   date: '2026-09-19'
   time: '13:15'
   scheduled_at: '2026-09-19T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-09-19
   channel: facebook
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
@@ -1093,9 +1093,9 @@ items:
   date: '2026-09-19'
   time: '15:15'
   scheduled_at: '2026-09-19T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:takeaway:2026-09-19
   channel: threads
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
@@ -1105,9 +1105,9 @@ items:
   date: '2026-09-19'
   time: '16:15'
   scheduled_at: '2026-09-19T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:nutzen:2026-09-19
   channel: telegram
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
@@ -1117,9 +1117,9 @@ items:
   date: '2026-09-19'
   time: '18:00'
   scheduled_at: '2026-09-19T18:00:00+02:00'
-  status: planned
-  attempts: 0
-  reason: ''
+  status: blocked
+  attempts: 1
+  reason: Artikel nicht mehr im Bestand
 - id: x:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-09-19
   channel: x
   slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
@@ -1129,9 +1129,9 @@ items:
   date: '2026-09-19'
   time: '19:15'
   scheduled_at: '2026-09-19T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:nutzen:2026-09-20
   channel: telegram
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -1141,9 +1141,9 @@ items:
   date: '2026-09-20'
   time: 07:00
   scheduled_at: '2026-09-20T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:zahl:2026-09-20
   channel: bluesky
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
@@ -1153,9 +1153,9 @@ items:
   date: '2026-09-20'
   time: 08:15
   scheduled_at: '2026-09-20T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:frage:2026-09-20
   channel: x
   slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
@@ -1165,9 +1165,9 @@ items:
   date: '2026-09-20'
   time: 08:45
   scheduled_at: '2026-09-20T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:zahl:2026-09-20
   channel: threads
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
@@ -1177,9 +1177,9 @@ items:
   date: '2026-09-20'
   time: 09:15
   scheduled_at: '2026-09-20T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:vergleich:2026-09-20
   channel: facebook
   slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
@@ -1189,9 +1189,9 @@ items:
   date: '2026-09-20'
   time: 09:45
   scheduled_at: '2026-09-20T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer:zahl:2026-09-20
   channel: instagram
   slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
@@ -1201,9 +1201,9 @@ items:
   date: '2026-09-20'
   time: '11:45'
   scheduled_at: '2026-09-20T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:vergleich:2026-09-20
   channel: bluesky
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
