@@ -1,0 +1,31 @@
+{"ts": "2026-09-20T08:49:27Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:49:32Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:49:38Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:49:42Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 11}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:49:48Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 6}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:49:53Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:50:02Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:50:15Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 11}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:50:20Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 8}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:50:20Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 2}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:50:21Z", "module": "fix_spaces", "action": "apply", "input": {"files": 65}, "output": {"fixes": 145}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 8}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:20Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:28Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:35Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:41Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:48Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:53:55Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:54:01Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:54:07Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:54:14Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
+{"ts": "2026-09-20T08:54:17Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe"]}, "output": {"gated": ["2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe"], "demoted": []}, "status": "gated", "critical": false, "commit": null}

@@ -1,8 +1,7 @@
 ---
-
 title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
 description: "Finanzieller Puffer: Kaputte Waschmaschine oder Jobverlust? Erfahre, wie du einen Notgroschen aufbaust, der dich ruhig schlafen lässt – ohne unnötig Kapital…"
-date: 2026-09-16T08:43:37Z
+date: 2026-09-20T08:45:21Z
 draft: true
 reserve: true
 tags: ["Finanzieller Puffer", "Finanzieller", "Notgroschen"]
@@ -39,7 +38,7 @@ Ein kaputtes Getriebe kostet schnell 2.500 €. Ohne Ersparnisse droht dir sofo
 
 ## Warum der Notgroschen die Basis jeder Finanzplanung ist
 
-Wer ohne Ersparnis anlegt, geht hohe Risiken ein. Bei Notfällen verkaufst du sonst Aktien mit Verlust. Ein klarer Notgroschen schützt dein Depot vor solchen Fehlgriffen. Er schenkt dir Gelassenheit für deine langfristige Anlage.
+Wer ohne Ersparnis anlegt, geht hohe Risiken ein. Bei Notfällen verkaufst du sonst Aktien mit Verlust. Ein klarer Notgroschen schützt dein Depot vor solchen Fehlgriffen – er schenkt dir Gelassenheit für deine langfristige Anlage.
 
 Erwarte von diesem Geld keine hohen Erträge. Die Summe soll vor allem sicher bereitliegen. Deine wahre Rendite liegt in den gesparten Dispozinsen. Solche Kredite kosten bei Banken oft 8 % bis 14 % Zinsen pro Jahr.
 
