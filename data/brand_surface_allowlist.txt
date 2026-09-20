@@ -1,0 +1,14 @@
+# ============================================================
+#  AUSNAHMEN für die Marken-Oberflächen-Wache
+#  (scripts/brand_surface_guard.py, geprüft auf README + Repo-Kopf)
+# ------------------------------------------------------------
+#  Eine Regex pro Zeile. Reiner Text ohne Kommentar = Ausnahme.
+#  Eine Ausnahme greift NUR, wenn sie die Fundstelle überdeckt
+#  (Beispiel: "Content-Bot" deckt den Fund "Bot" ab).
+#
+#  Regel für Einträge: Jede Ausnahme braucht eine Begründung.
+#  Ohne Begründung ist sie ein stillgelegtes Gate.
+#
+#  Beispiel mit Begründung:
+#    Affiliate-Links   # Transparenzhinweis auf der Markenfläche
+# ============================================================

@@ -1,180 +1,304 @@
 # ============================================================
-#  OFFSITE-BACKUP (kostenlos, GitHub-Releases)
+#  OFFSITE-BACKUP – privat, verschlüsselt, nachweisbar
 #  ------------------------------------------------------------
-#  Täglicher vollständiger Snapshot der QUELLE des Blogs als Release:
-#    - backup.bundle  = komplette Git-History des main-Branches
-#                       (git bundle main – eigenständiges Format,
-#                        per `git clone backup.bundle` wiederherstellbar)
-#    - worktree.zip   = Arbeitskopie (alle getrackten Dateien)
+#  MARKE (20.09.2026, Marken-Oberflächen-Wache):
+#    Backups dieses Repos verlassen das Haus NIE öffentlich.
+#    Bis 20.09.2026 legte dieser Workflow jeden Nachtlauf ein
+#    öffentliches Release mit `backup.bundle` + `worktree.zip` an
+#    (14 Releases, vollständiger Quellstand zum Download). Diese
+#    Release-Seiten wurden von Suchmaschinen indexiert und standen
+#    bei einer Markensuche ("FranksFinanzcheck Frank Hartung") über
+#    der Expertenpositionierung des Blogs. Die 14 Altbestände sind
+#    auf ENTWURF gestuft (privat, Assets erhalten) – Wache:
+#    `scripts/brand_surface_guard.py` (fail-closed, mit Selbsttest).
 #
-#  WARUM NUR `main` UND NICHT `--all`?  (Issue #179, 06.09.2026)
-#    `--all` hat zusätzlich den Build-Branch `gh-pages` gebündelt.
-#    Dessen History war durch unkomprimierte Vorlese-WAVs (~3,5 GB)
-#    aufgebläht. GitHub begrenzt EIN Release-Asset hart auf 2 GiB
-#    (docs.github.com: "Each file included in a release must be
-#    under 2 GiB"). Das 3,58-GB-Bundle konnte deshalb NIE hochgeladen
-#    werden → der Backup-Lauf fiel dauerhaft rot aus.
-#    `gh-pages` ist aber zu 100 % regenerierbar (hugo --minify +
-#    Vorlese-Audio aus deploy.yml) und hat keinerlei Backup-Wert –
-#    es ist ein Build-Artefakt, keine Quelle. Deshalb wird hier nur
-#    die Quelle gesichert. Zusätzlich deployt deploy.yml den
-#    Build-Branch ab sofort mit force_orphan (ein einziger Commit),
-#    damit sich dort nie wieder Multi-GB-History ansammeln kann.
+#  WO DAS BACKUP JETZT HIN GEHT (zwei Wege, nie öffentlich):
+#    1. IMMER  – Workflow-Artefakt dieses Laufs. Artefakte sind nur
+#                für Zugriffsberechtigte sichtbar, nie für das Web.
+#                Das ist das Netz ohne Konfiguration.
+#    2. DAUERHAFT – privates Backup-Repository, wenn konfiguriert:
+#                Repository-Variable `BACKUP_REPO` (z. B.
+#                `frank-hartung/franksfinanzcheck-backup`) plus Secret
+#                `BACKUP_REPO_TOKEN` (PAT mit Schreibrecht auf genau
+#                dieses private Repo). Dort entsteht ein ENTWURF-Release.
+#                Prüfung VOR dem Upload: Ist das Ziel öffentlich, bricht
+#                der Lauf ab (fail-closed) – ein Backup darf keine
+#                zweite Markenfläche werden.
 #
-#  Kosten: 0 € – GitHub Free erlaubt Releases ohne Limit.
-#  Trigger: täglich 03:00 UTC + manuell (workflow_dispatch).
+#  VERSCHLÜSSELUNG:
+#    Gesetztes Secret `BACKUP_PASSPHRASE` → alle Artefakte werden
+#    AES-256 (PBKDF2, 200k Iterationen) verschlüsselt, mit
+#    Entschlüsselungs-Probe gegen SHA-256 vor dem Upload. Ohne
+#    Passphrase bleibt der Upload in ein dauerhaftes Ziel gesperrt,
+#    solange nicht `BACKUP_UNVERSCHLUESSERT_OK=1` als
+#    Repository-Variable bewusst gesetzt wurde.
 #
-#  GEHÄRTET (05.09.2026 + 06.09.2026):
-#    1. Artefakte werden VOR dem Upload verifiziert
-#       (git bundle verify + unzip -t + Mindest-/Höchstgrößen).
-#    2. Uploads laufen einzeln mit Retry (transiente Hickser
-#       fallen nicht mehr direkt auf den Nachtlauf durch).
-#    3. NACH dem Upload wird das Release hart verifiziert: beide
-#       Assets müssen mit exakter Größe vorhanden sein, sonst
-#       wird das Teil-Release gelöscht und der Job schlägt LAUT
-#       fehl (Fehler-Alerting) statt ein Schein-Backup zu melden.
-#    4. Die Retention läuft mit `if: always()` – sie fällt nicht
-#       mehr mit einem fehlgeschlagenen Backup aus.
-#    5. Das Bundle darf die 2-GiB-Grenze nie wieder erreichen:
-#       eine Plausibilitäts-Obergrenze schlägt VOR dem Upload an
-#       (klare Meldung statt stillem Upload-Abbruch).
+#  QUELLE DES BACKUPS:
+#    immer `main`. `gh-pages` ist ein regenerierbares Build-Artefakt
+#    (deploy.yml, force_orphan) und hat keinen Backup-Wert – die
+#    frühere `--all`-Falle (3,58 GB Bundle über der 2-GiB-Release-
+#    Grenze, Issue #179) bleibt damit geschlossen.
+#
+#  WAS DER LAUF BEWEIST (statt es zu behaupten):
+#    · Bundle verifiziert (`git bundle verify`), Archiv geprüft (`unzip -t`)
+#    · Plausibilitätsgrenzen vor dem Upload (zu klein / zu groß = Abbruch)
+#    · Verschlüsselung mit Rückweg-Probe (entschlüsseln + SHA-256-Vergleich)
+#    · Ziel-Release nach dem Upload nachgelesen (Assets + Größen + `draft=true`)
+#    · Regelprüfung am Ende: keine öffentliche Backup-Spur im Quell-Repo
+#
+#  KOSTEN: 0 € (Artefakt-Speicher im Free-Kontingent, private Repos
+#  unbegrenzt). Trigger: täglich 03:00 UTC + manuell.
 # ============================================================
 name: Offsite-Backup
 
 on:
   schedule:
-    # Täglich 03:00 UTC (nach Issue #179 wieder auf den Regelbetrieb gesetzt)
+    # Täglich 03:00 UTC
     - cron: "0 3 * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
+concurrency:
+  group: offsite-backup
+  cancel-in-progress: false
+
 jobs:
   backup:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      # Quelle des Backups. Immer 'main': gh-pages ist ein regenerierbares
-      # Build-Artefakt (deploy.yml) und wird bewusst NICHT gesichert
-      # (Root-Cause von Issue #179, siehe Header-Kommentar).
       SRC_BRANCH: main
+      # Ziel-Repository (privat!) aus der Repository-Variable – leer = nur Artefakt
+      ZIEL_REPO: ${{ vars.BACKUP_REPO }}
+      # Bewusstes Opt-in für unverschlüsselte Ablage in einem privaten Ziel
+      UNVERSCHLUESSELT_OK: ${{ vars.BACKUP_UNVERSCHLUESSERT_OK }}
+      PASSWORT: ${{ secrets.BACKUP_PASSPHRASE }}
+      ZIEL_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Repository auschecken (komplette History)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Git-Bundle (main) + Arbeitskopie erstellen und verifizieren
+      - name: Bundle + Arbeitskopie erstellen, verifizieren, verschlüsseln
         run: |
           set -euo pipefail
 
-          # Lokalen Source-Ref sicherstellen. Beim schedule läuft der Job
-          # zwar auf main, bei manueller Ausführung (workflow_dispatch auf
-          # einem Feature-Branch) existiert 'main' aber nicht als lokaler
-          # Branch – ohne diesen Fetch würde der Bundle-Schritt abbrechen.
+          # Lokalen Source-Ref sicherstellen (workflow_dispatch auf Feature-Branch)
           git fetch --quiet origin "$SRC_BRANCH":refs/heads/"$SRC_BRANCH" 2>/dev/null || true
 
-          # Nur die QUELLE sichern (main). `--all` würde den
-          # regenerierbaren Build-Branch gh-pages mitziehen und das
-          # Bundle über die 2-GiB-Release-Grenze treiben (Issue #179).
           git bundle create backup.bundle "$SRC_BRANCH"
-
-          # Integrität des Bundles prüfen: kaputte Bundles werden gar
-          # nicht erst hochgeladen.
           git bundle verify backup.bundle
-
-          # Arbeitskopie (nur getrackte Dateien, ohne .git)
           git archive --format=zip -o worktree.zip "$SRC_BRANCH"
           unzip -t worktree.zip > /dev/null
 
-          # Plausibilitäts-Checks: verdächtig kleine ODER zu große
-          # Artefakte = Fehler. Obergrenze bewusst deutlich unter der
-          # GitHub-Hartgrenze von 2 GiB je Asset.
           BSIZE=$(stat -c%s backup.bundle)
           ZSIZE=$(stat -c%s worktree.zip)
-          LIMIT=$((2 * 1024 * 1024 * 1024))   # 2 GiB (GitHub-Hartgrenze)
-          WARN=$((1 * 1024 * 1024 * 1024))    # 1 GiB (Frühwarnung)
+          LIMIT=$((2 * 1024 * 1024 * 1024))   # 2 GiB (GitHub-Hartgrenze je Asset)
+          WARN=$((1 * 1024 * 1024 * 1024))
           echo "backup.bundle = ${BSIZE} Bytes · worktree.zip = ${ZSIZE} Bytes"
           if [ "$BSIZE" -lt 100000 ] || [ "$ZSIZE" -lt 50000 ]; then
             echo "::error::Artefakt verdächtig klein (bundle=${BSIZE}, zip=${ZSIZE}) – Abbruch statt Schein-Backup."
             exit 1
           fi
           if [ "$BSIZE" -gt "$LIMIT" ]; then
-            echo "::error::Bundle ${BSIZE} Bytes überschreitet die GitHub-Release-Grenze (2 GiB). Die History von main enthält zu große Binärdateien – bitte aufräumen (z. B. git filter-repo), nicht das Backup umgehen."
+            echo "::error::Bundle ${BSIZE} Bytes überschreitet die GitHub-Grenze (2 GiB). History aufräumen (git filter-repo) statt Backup umgehen."
             exit 1
           fi
           if [ "$BSIZE" -gt "$WARN" ]; then
-            echo "::warning::Bundle ${BSIZE} Bytes ist ungewöhnlich groß (> 1 GiB) – Ursache der Aufblähung prüfen, bevor die 2-GiB-Grenze erreicht wird."
+            echo "::warning::Bundle ungewöhnlich groß (> 1 GiB) – Ursache prüfen."
           fi
 
-      - name: Backup-Release erstellen und Upload verifizieren
-        env:
-          GH_TOKEN: ${{ github.token }}
+          # Verschlüsselung (Standardweg, sobald das Secret gesetzt ist)
+          if [ -n "$PASSWORT" ]; then
+            for DATEI in backup.bundle worktree.zip; do
+              openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt \
+                -in "$DATEI" -out "$DATEI.enc" -pass env:PASSWORT
+            done
+            # Rückweg-Probe: Entschlüsseln und gegen den Klartext prüfen.
+            for DATEI in backup.bundle worktree.zip; do
+              openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 \
+                -in "$DATEI.enc" -out "$DATEI.probe" -pass env:PASSWORT
+              if ! cmp -s "$DATEI" "$DATEI.probe"; then
+                echo "::error::Verschlüsselung von $DATEI ist nicht umkehrbar – Upload gestoppt."
+                exit 1
+              fi
+              rm -f "$DATEI" "$DATEI.probe"
+              echo "🔐 $DATEI.enc verifiziert (Entschlüsselung bytegleich, SHA-256 $(sha256sum "$DATEI.enc" | cut -c1-16)…)"
+            done
+            echo "VERSCHLUESSELT=1" >> "$GITHUB_ENV"
+            echo "::notice::Backup verschlüsselt (AES-256/PBKDF2). Entschlüsseln: openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in backup.bundle.enc -out backup.bundle"
+          else
+            echo "VERSCHLUESSELT=0" >> "$GITHUB_ENV"
+            echo "::warning::Kein BACKUP_PASSPHRASE gesetzt – das Backup liegt unverschlüsselt (privat, aber ohne zweiten Boden)."
+          fi
+
+          # Welche Dateien gehen ins Backup? Genau die, die jetzt existieren –
+          # Liste und Soll-Größen wandern in die Umgebung, damit die Nachprüfung
+          # nach dem Upload gegen dieselbe Quelle vergleicht (kein Wunschdenken).
+          ARTEFAKTE=""
+          ERWARTET=""
+          for DATEI in backup.bundle.enc backup.bundle worktree.zip.enc worktree.zip; do
+            [ -f "$DATEI" ] || continue
+            ARTEFAKTE="${ARTEFAKTE}${ARTEFAKTE:+ }$DATEI"
+            ERWARTET="${ERWARTET}${ERWARTET:+,}$DATEI:$(stat -c%s "$DATEI")"
+          done
+          if [ -z "$ARTEFAKTE" ]; then
+            echo "::error::Keine Backup-Datei erzeugt – Lauf abgebrochen."
+            exit 1
+          fi
+          ERWARTET=$(printf '%s' "$ERWARTET" | tr ',' '\n' | sort | paste -sd, -)
+          {
+            echo "ARTEFAKTE=$ARTEFAKTE"
+            echo "ERWARTET=$ERWARTET"
+          } >> "$GITHUB_ENV"
+          echo "Backup-Dateien: $ARTEFAKTE · Soll: $ERWARTET"
+
+      - name: Backup als Workflow-Artefakt ablegen (immer, privat)
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ github.run_number }}
+          path: |
+            backup.bundle*
+            worktree.zip*
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: "Dauerhaftes Ziel – privates Backup-Repository (nur wenn konfiguriert)"
+        id: offsite
         run: |
           set -euo pipefail
+
+          if [ -z "${ZIEL_REPO:-}" ]; then
+            echo "ZIEL=artefakt" >> "$GITHUB_OUTPUT"
+            echo "::warning::Kein dauerhaftes Offsite-Ziel gesetzt – das Backup lebt 90 Tage als Artefakt. Empfehlung: Repository-Variable BACKUP_REPO (privates Repo) + Secret BACKUP_REPO_TOKEN setzen, siehe Kopf dieser Datei."
+            exit 0
+          fi
+
+          TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"
+          echo "ZIEL=repo" >> "$GITHUB_OUTPUT"
+
+          # 1) Privatheit des Ziels VOR dem Upload beweisen – fail-closed.
+          SICHTBAR=$(curl -sS -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$ZIEL_REPO" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('private') if 'private' in d else 'UNBEKANNT')")
+          if [ "$SICHTBAR" != "True" ]; then
+            echo "::error::Ziel $ZIEL_REPO ist nicht privat (Antwort: $SICHTBAR). Ein Backup wird nicht öffentlich abgelegt – Abbruch."
+            exit 1
+          fi
+          echo "✅ Ziel $ZIEL_REPO ist privat (live geprüft über die API)."
+
+          # 2) Unverschlüsselt in ein dauerhaftes Ziel nur mit bewusstem Opt-in.
+          if [ "${VERSCHLUESSELT}" != "1" ] && [ "${UNVERSCHLUESSELT_OK}" != "1" ]; then
+            echo "::error::Weder BACKUP_PASSPHRASE noch Opt-in BACKUP_UNVERSCHLUESSERT_OK gesetzt – dauerhafte Ablage gestoppt. Entweder Passphrase setzen (empfohlen) oder das Opt-in bewusst eintragen."
+            exit 1
+          fi
+
           TAG="backup-$(date +%Y%m%d-%H%M)"
           SHA=$(git rev-parse --short "$SRC_BRANCH")
-          FILES=$(git ls-tree -r --name-only "$SRC_BRANCH" | wc -l)
-          NOTES="Automatisches Offsite-Backup von franksfinanzcheck-blog | Quelle: main (Commit: $SHA) | Getrackte Dateien: $FILES | backup.bundle = Git-History von main, worktree.zip = Arbeitskopie | Upload verifiziert (Namen + Groessen) | gh-pages ist regenerierbar und wird bewusst nicht gesichert"
+          NOTES="Offsite-Backup (privat) · Quelle: main @ $SHA · $([ "$VERSCHLUESSELT" = "1" ] && echo 'AES-256/PBKDF2 verschlüsselt' || echo 'unverschlüsselt, Opt-in') · Entwurf bleibt privat"
 
-          # 1) Erwartete Asset-Größen merken (für die spätere Verifikation)
-          EXPECT_BUNDLE=$(stat -c%s backup.bundle)
-          EXPECT_ZIP=$(stat -c%s worktree.zip)
-
-          # 2) Release anlegen (noch ohne Assets)
-          gh release create "$TAG" \
+          # 3) ENTWURF anlegen – nie ein öffentliches Release.
+          GH_TOKEN="$TOKEN" gh release create "$TAG" \
+            --repo "$ZIEL_REPO" \
+            --draft \
             --title "Backup $TAG" \
             --notes "$NOTES"
 
-          # 3) Assets einzeln mit Retry hochladen (transiente Upload-Hickser
-          #    des GitHub-Release-Service auffangen)
-          upload_with_retry() {
-            local f="$1" n
+          upload_mit_wiederholung() {
+            local datei="$1" n
             for n in 1 2 3; do
-              if gh release upload "$TAG" "$f" --clobber; then
+              if GH_TOKEN="$TOKEN" gh release upload "$TAG" "$datei" --repo "$ZIEL_REPO" --clobber; then
                 return 0
               fi
-              echo "::warning::Upload von $f fehlgeschlagen (Versuch $n/3) – neuer Versuch in 15 s"
+              echo "::warning::Upload von $datei fehlgeschlagen (Versuch $n/3) – neuer Versuch in 15 s"
               sleep 15
             done
             return 1
           }
 
-          upload_failed=0
-          upload_with_retry backup.bundle || upload_failed=1
-          upload_with_retry worktree.zip || upload_failed=1
+          fehler=0
+          for DATEI in $ARTEFAKTE; do
+            upload_mit_wiederholung "$DATEI" || fehler=1
+          done
 
-          # 4) HARTE VERIFIKATION: Das Release ist nur dann ein Backup, wenn
-          #    beide Assets vollständig angekommen sind. Sonst: Teil-Release
-          #    aufräumen und laut fehlschlagen (Fehler-Alerting greift).
-          REMOTE=$(gh release view "$TAG" --json assets \
-            --jq '[.assets[] | .name + ":" + (.size | tostring)] | sort | join(",")' \
-            2>/dev/null || echo "")
-          WANT=$(printf 'backup.bundle:%s,worktree.zip:%s' "$EXPECT_BUNDLE" "$EXPECT_ZIP")
-          if [ "$upload_failed" -ne 0 ] || [ "$REMOTE" != "$WANT" ]; then
-            echo "::error::Release $TAG ist unvollständig (erwartet: $WANT · erhalten: ${REMOTE:-kein Zugriff})."
-            echo "Räume Teil-Release auf, damit das nächste Backup sauber startet."
-            gh release delete "$TAG" --yes --cleanup-tag || true
+          # 4) Nachprüfung: exakt die erwarteten Assets in exakter Größe UND
+          #    Release weiterhin Entwurf (privat). Beides wird gelesen, nichts behauptet.
+          GEMELDET=$(GH_TOKEN="$TOKEN" gh release view "$TAG" --repo "$ZIEL_REPO" \
+            --json assets \
+            --jq '[.assets[] | .name + ":" + (.size|tostring)] | sort | join(",")' 2>/dev/null || echo "kein-zugriff")
+          ENTWURF=$(GH_TOKEN="$TOKEN" gh release view "$TAG" --repo "$ZIEL_REPO" \
+            --json isDraft --jq '.isDraft' 2>/dev/null || echo "kein-zugriff")
+          echo "Nachprüfung: draft=$ENTWURF · assets=$GEMELDET · soll=$ERWARTET"
+          if [ "$fehler" -ne 0 ] || [ "$ENTWURF" != "true" ] || [ "$GEMELDET" != "$ERWARTET" ]; then
+            echo "::error::Release $TAG ist unvollständig oder NICHT als Entwurf markiert (draft=$ENTWURF · ist=$GEMELDET · soll=$ERWARTET). Teil-Release wird entfernt."
+            GH_TOKEN="$TOKEN" gh release delete "$TAG" --repo "$ZIEL_REPO" --yes --cleanup-tag || true
             exit 1
           fi
-          echo "✅ Release $TAG erstellt und verifiziert: $REMOTE"
+          echo "✅ Offsite-Backup $TAG liegt privat (Entwurf) und ist verifiziert: $GEMELDET"
 
-      - name: Alte Backups aufräumen (nur die letzten 14 behalten)
+      - name: Alte Backups aufräumen (letzte 14 je Ziel, Entwürfe eingeschlossen)
+        if: ${{ always() }}
+        run: |
+          set -euo pipefail
+          KEEP=14
+          if [ -z "${ZIEL_REPO:-}" ]; then
+            echo "Kein dauerhaftes Ziel – Retention übernimmt GitHub (Artefakte, 90 Tage)."
+            exit 0
+          fi
+          TOKEN="${ZIEL_TOKEN:-$GH_TOKEN}"
+          GH_TOKEN="$TOKEN" python3 - "$ZIEL_REPO" "$KEEP" <<'PY'
+          import json, os, subprocess, sys, urllib.request
+
+          repo, keep = sys.argv[1], int(sys.argv[2])
+          token = os.environ["GH_TOKEN"]
+          anfrage = urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/releases?per_page=100",
+              headers={"Authorization": f"Bearer {token}",
+                       "Accept": "application/vnd.github+json"})
+          with urllib.request.urlopen(anfrage, timeout=30) as antwort:
+              releases = json.load(antwort)
+
+          # Entwürfe zählen mit – `gh release list` zeigt sie NICHT, deshalb die API.
+          backups = sorted([r for r in releases if str(r.get("tag_name", "")).startswith("backup-")],
+                           key=lambda r: r.get("created_at", ""))
+          if len(backups) <= keep:
+              print(f"Backup-Anzahl ({len(backups)}) im Rahmen (max. {keep}) – nichts zu löschen.")
+              raise SystemExit(0)
+
+          for alt in backups[: len(backups) - keep]:
+              tag = alt["tag_name"]
+              subprocess.run(["gh", "release", "delete", tag, "--repo", repo, "--yes", "--cleanup-tag"],
+                             check=False)
+              print(f"Altes Backup gelöscht: {tag}")
+          PY
+
+      - name: Regelprüfung – keine öffentliche Backup-Spur im Quell-Repository
         if: ${{ always() }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          KEEP=14
-          TAGS=$(gh release list --limit 100 --json tagName \
-            --jq '.[] | select(.tagName | startswith("backup-")) | .tagName' | sort)
-          COUNT=$(echo "$TAGS" | grep -c . || true)
-          if [ "$COUNT" -gt "$KEEP" ]; then
-            TO_DELETE=$(echo "$TAGS" | head -n $((COUNT - KEEP)))
-            for t in $TO_DELETE; do
-              echo "Lösche altes Backup $t"
-              gh release delete "$t" --yes --cleanup-tag
-            done
-          else
-            echo "Backup-Anzahl ($COUNT) im Rahmen (max. $KEEP)."
-          fi
+          set -euo pipefail
+          # Doppelboden: selbst wenn ein Release-Pfad je wieder öffentlich schreibt,
+          # schlägt dieser Lauf laut fehl (und die Wache heilt in ihrem Tageslauf).
+          python3 scripts/brand_surface_guard.py --only releases --gate
+
+      - name: Laufbericht in die Job-Zusammenfassung
+        if: ${{ always() }}
+        run: |
+          {
+            echo "## Offsite-Backup"
+            echo ""
+            echo "- Quelle: \`$SRC_BRANCH\` @ $(git rev-parse --short "$SRC_BRANCH" 2>/dev/null || echo '?')"
+            echo "- Verschlüsselung: $([ "${VERSCHLUESSELT:-0}" = "1" ] && echo 'AES-256/PBKDF2 (Rückweg geprüft)' || echo 'keine (Passphrase fehlt)')"
+            if [ -n "${ZIEL_REPO:-}" ]; then
+              echo "- Dauerhaftes Ziel: \`$ZIEL_REPO\` (privat, Entwurf, nachgeprüft)"
+            else
+              echo "- Dauerhaftes Ziel: **nicht konfiguriert** – Backup liegt 90 Tage als Artefakt (privat, aber nicht dauerhaft)."
+              echo "- Empfehlung: Variable \`BACKUP_REPO\` (privates Repo) + Secret \`BACKUP_REPO_TOKEN\` + Secret \`BACKUP_PASSPHRASE\`."
+            fi
+            echo "- Öffentliche Spur: keine (Regelprüfung \`brand_surface_guard.py\`)"
+          } >> "$GITHUB_STEP_SUMMARY"
