@@ -1,8 +1,13 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-09-19 17:39:18 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-09-20 08:58:08 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 66 · **Gateway-Links:** 194 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 66 · **Gateway-Links:** 195 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 2
+
+## 🩹 Geheilt (2)
+
+- 2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: IW7 L253: Lesetipp „Ratgeber Strom Sparen“ zurück auf ../../pillar/strom-sparen/ (war /go/gas/)
+- 2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: IW7 L253: Lesetipp „Preisgarantie Gas: So schützt du dich vo“ zurück auf ../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/ (war /go/gas/)
 
 🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
 

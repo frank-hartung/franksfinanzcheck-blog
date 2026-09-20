@@ -276,7 +276,7 @@ Dein zukünftiges Ich wird dir im frostigen Februar sehr dankbar sein.
 Eine warme Wohnung und ein prall gefülltes Konto sind kein Widerspruch.  
 Beginne heute mit dem Sparen und genieße einen entspannten Winter.  
 
-**Weiterlesen:** [Ratgeber Strom Sparen](/go/gas/) **Lesetipp:** [Preisgarantie Gas: So schützt du dich vor Preissprüngen](/go/gas/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Preisgarantie Gas: So schützt du dich vor Preissprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
 **Lesetipp:** [Standby Kosten reduzieren: So entlarvst du Stromfresser](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 
 
