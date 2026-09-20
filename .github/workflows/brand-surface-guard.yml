@@ -1,0 +1,83 @@
+# ============================================================
+#  MARKEN-OBERFLÄCHE – was von außen sichtbar ist, muss die Marke zeigen
+#  ------------------------------------------------------------
+#  WARUM (20.09.2026):
+#    Bei einer Markensuche („FranksFinanzcheck Frank Hartung")
+#    standen GitHub-Seiten dieser Automatik über der Experten-
+#    positionierung des Blogs: 14 öffentliche Backup-Releases mit
+#    dem vollständigen Quellstand, Repo-Beschreibung
+#    „(Affiliate-Blog, Hugo)", dazu ein README, das die
+#    vollautomatische Content-Produktion erklärt.
+#
+#  WAS DIESER LAUF TUT:
+#    · Selbsttest der Wache (ein blinder Detektor wäre schlimmer
+#      als keiner) – ohne Netz, ohne Schreibzugriff.
+#    · Befund über alle öffentlichen Flächen: Releases, README,
+#      Repo-Kopf (Beschreibung/Homepage/Wiki/Themen), offene
+#      Issue-Titel, Repository-Sichtbarkeit.
+#    · Heilung mit Nachprüfung: ein öffentlich lesbares Backup-
+#      Release wird auf ENTWURF gestuft (privat, Assets bleiben
+#      erhalten) und danach nachgelesen – geheilt gilt nur, was
+#      die Nachprüfung bestätigt.
+#    · ROT, wenn danach noch etwas öffentlich ist oder die
+#      Markenfläche (README/Beschreibung) Betriebssprache zeigt.
+#      GELB heißt: Admin-Aufgabe, Befund steht mit Befehl im Log
+#      und in docs/MARKEN-OBERFLAECHE-RUNBOOK.md.
+#
+#  BEWUSST NICHT in der Wacht-Liste von alert-on-failure.yml:
+#    Die Zustellung dieses Kanals ist belegt unzuverlässig (Vorfall
+#    18.09.2026: ~35 % der workflow_run-Ereignisse kamen nie an),
+#    und ein Alarm-Issue zu einem Markenbefund wäre selbst eine
+#    öffentliche Markenfläche. Die Wache heilt sich stattdessen
+#    selbst; ihr roter Lauf steht im Log, in der Job-Zusammenfassung
+#    und am roten Häkchen.
+#
+#  Trigger: täglich 04:20 UTC · bei jedem veröffentlichten Release ·
+#  manuell (dann wahlweise heilen oder nur prüfen).
+# ============================================================
+name: Marken-Oberfläche (öffentliche Sichtbarkeit)
+
+on:
+  schedule:
+    - cron: "20 4 * * *"
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Heilen (öffentliche Backups auf Entwurf) oder nur prüfen"
+        type: choice
+        default: heilen
+        options: [heilen, pruefen]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: brand-surface-guard
+  cancel-in-progress: false
+
+jobs:
+  oberflaeche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Selbsttest der Wache (blind wäre schlimmer als keine)
+        run: python3 scripts/brand_surface_guard.py --selftest
+
+      - name: Befund über alle öffentlichen Flächen (mit Nachprüfung)
+        run: |
+          set -euo pipefail
+          MODUS="${{ inputs.modus }}"
+          if [ "$MODUS" = "pruefen" ]; then
+            echo "Modus: nur prüfen (kein Schreibzugriff)"
+            python3 scripts/brand_surface_guard.py --gate
+          else
+            echo "Modus: heilen (öffentliche Backups → Entwurf, danach Nachprüfung)"
+            python3 scripts/brand_surface_guard.py --fix
+          fi
