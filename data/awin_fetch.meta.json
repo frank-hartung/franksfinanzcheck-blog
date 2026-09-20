@@ -1,0 +1,12 @@
+{
+  "attempted": "2026-09-20",
+  "base": "https://api.awin.com",
+  "publisher_id_set": false,
+  "token_present": false,
+  "days": 62,
+  "timezone": "Europe/Berlin",
+  "rows": 0,
+  "statuses": {},
+  "reason": "fehlt: AWIN_API_TOKEN, AWIN_PUBLISHER_ID",
+  "status": "skipped"
+}

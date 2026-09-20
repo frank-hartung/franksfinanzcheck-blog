@@ -1,0 +1,51 @@
+{
+  "generated": "2026-09-20",
+  "window_days": 90,
+  "kaufnah_seiten": 63,
+  "views": {
+    "total": null,
+    "pageviews": null,
+    "kaufnah": null
+  },
+  "affiliate_klicks": null,
+  "transaktionen": {
+    "antraege": null,
+    "pending": 0,
+    "bestaetigt": 0,
+    "stornos": 0,
+    "quelle": null
+  },
+  "provision": {
+    "gesamt": null,
+    "bezahlt": null
+  },
+  "raten": {
+    "outbound_ctr": null,
+    "klick_antrag": null,
+    "antrag_abschluss": null,
+    "stornoquote": null,
+    "rev_per_100_visits": null,
+    "rev_per_100_kaufnah": null,
+    "epc": null
+  },
+  "platzierungen": {},
+  "seiten": [],
+  "quellen": [
+    {
+      "quelle": "views",
+      "status": "skipped",
+      "alter_tage": 0
+    },
+    {
+      "quelle": "clicks",
+      "status": "skipped",
+      "alter_tage": 0
+    },
+    {
+      "quelle": "awin",
+      "status": "skipped",
+      "alter_tage": 0
+    }
+  ],
+  "messluecken": 3
+}
