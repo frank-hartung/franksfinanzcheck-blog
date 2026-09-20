@@ -29,3 +29,4 @@
 {"ts": "2026-09-20T08:54:07Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-09-20T08:54:14Z", "module": "affiliate_profi_check", "action": "check", "input": {}, "output": {"problems": 4, "fixed": 0}, "status": "issues", "critical": false, "commit": null}
 {"ts": "2026-09-20T08:54:17Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe"]}, "output": {"gated": ["2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
+{"ts": "2026-09-20T09:22:29Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
