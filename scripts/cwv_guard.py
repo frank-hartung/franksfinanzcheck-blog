@@ -26,6 +26,20 @@ NEU (Härtung 07.09.2026, Governance-Report #206):
     ist ein Befund (`build_thin`), keine Entwarnung.
   * `data/cwv_history.jsonl` + `--trend` – Ampel-Verlauf statt Einzelpunkt.
 
+NEU (20.09.2026, Folge-PR „CWV-Stand in einem Lauf"):
+  * `--build` – baut die Seite SELBST (`hugo --minify`) und misst danach im
+    selben Prozess. Damit entstehen `CWV-REPORT.md` und
+    `data/cwv_manifest.json` garantiert aus DEMSELBEN Lauf mit demselben
+    `Stand:`-Datum. Genau das verlangt Governance-Regel **C7**
+    (`governance_contract.py`): Report und Manifest mit unterschiedlichem
+    Datum sind „zwei Wahrheiten an einem Tag" und färben das Gate rot.
+    Der Report ist gitignoreiert (`/*-REPORT.md`), das Manifest versioniert –
+    wer beides getrennt erzeugt, committet also einen Stand, den der
+    (unsichtbare) Report nicht bestätigt. Ein Bau-Fehler bricht fail-closed
+    mit Exit 2 ab und schreibt KEIN Artefakt: „nicht gemessen" ist kein Grün
+    und ein Manifest mit frischem Datum über einem alten Bau wäre die
+    #206-Klasse in neuer Verkleidung.
+
 AUSGABE:
   - `CWV-REPORT.md` – Ampel-Report + Befunde + Empfehlung
   - `data/cwv_manifest.json` – Kennzahlen (für Verlauf/Issues/Scorecard)
@@ -38,12 +52,18 @@ Exit-Codes: 0 = grün, 1 = Amber/Rot (SOLL verletzt), 2 = Selftest/Fehler.
 Nutzung:
   python3 scripts/cwv_guard.py            # scannt public/ sonst static/
   python3 scripts/cwv_guard.py --public public/
+  python3 scripts/cwv_guard.py --build --strict-build   # ein Lauf, ein Stand
   python3 scripts/cwv_guard.py --selftest
+
+Refresh für einen eigenen Gate-Commit (Report + Manifest aus einem Lauf):
+  python3 scripts/cwv_guard.py --build --strict-build
+  git add data/cwv_manifest.json data/cwv_history.jsonl && git commit …
 """
 import glob
 import json
 import os
 import re
+import subprocess
 import sys
 import datetime
 
@@ -53,6 +73,14 @@ MANIFEST = os.path.join(BLOG_DIR, "data", "cwv_manifest.json")
 HISTORY = os.path.join(BLOG_DIR, "data", "cwv_history.jsonl")
 PUBLIC_DEFAULT = os.path.join(BLOG_DIR, "public")
 STATIC_DIR = os.path.join(BLOG_DIR, "static")
+
+# Bau-Kommando für `--build`: identisch zum Premium-Governance-Workflow
+# (`hugo --minify`), mit explizitem Ziel – damit Messung und Deploy denselben
+# Baum meinen. Hugo Extended ist Pflicht (PaperMod/TOCSS), die Installation
+# übernimmt CI-seitig `.github/actions/install-hugo`.
+HUGO_BUILD_CMD = ("hugo", "--minify", "--destination", "public")
+BUILD_TIMEOUT = 900           # Sekunden – ein Hänger ist ein Befund, kein Warten
+BUILD_LOG_TAIL = 25           # Zeilen Bau-Log im Fehlerfall
 
 TODAY = datetime.date.today()
 
@@ -435,12 +463,29 @@ def _selftest():
             failures.append("vollständiger Build erzeugt einen Fehlalarm")
     if _verdict({}, [], {}, [{"level": "info", "code": "build_missing"}]) != "GREEN":
         failures.append("info-Befund färbt die Ampel (erwartet: unverändert)")
+
+    # --- `--build`: ein Lauf, ein Stand (C7) – und fail-closed ohne Artefakt
+    if HUGO_BUILD_CMD[:3] != ("hugo", "--minify", "--destination") \
+            or HUGO_BUILD_CMD[3] != "public":
+        failures.append(f"Bau-Kommando weicht vom Workflow ab: {HUGO_BUILD_CMD}")
+    ok, msg = _run_build(("definitiv-kein-hugo-xyz",))
+    if ok or "nicht installiert" not in msg:
+        failures.append("fehlendes Bau-Kommando wird nicht als Abbruch erkannt")
+    ok, _ = _run_build(("false",))
+    if ok:
+        failures.append("Bau mit Exit ≠ 0 gilt als Erfolg – Scheingrün")
+    ok, _ = _run_build(("true",))
+    if not ok:
+        failures.append("erfolgreicher Bau wird als Abbruch gemeldet")
+    ok, msg = _run_build(("sleep", "5"), timeout=1)
+    if ok or "länger als" not in msg:
+        failures.append("Bau-Hänger läuft nicht in das Zeitlimit")
     if failures:
         print("❌ CWV-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ CWV-SELFTEST bestanden (Budgets, Verdict-Ampel, _human).")
+    print("✅ CWV-SELFTEST bestanden (Budgets, Verdict-Ampel, _human, Bau fail-closed).")
     return 0
 
 
@@ -482,6 +527,36 @@ def _print_trend():
     return 0
 
 
+def _run_build(cmd=HUGO_BUILD_CMD, timeout=BUILD_TIMEOUT):
+    """Hugo-Bau im selben Lauf – fail-closed, ohne Heilung.
+
+    Rückgabe: (ok, nachricht). Drei Fehlerklassen, alle ohne Artefakt:
+      · Kommando fehlt (kein Hugo / kein Extended)  → ok=False
+      · Bau läuft in das Zeitlimit                  → ok=False
+      · Bau bricht ab (Exit ≠ 0)                    → ok=False + Log-Schwanz
+
+    Bewusst KEIN `|| true` und kein Fallback auf einen vorhandenen alten Baum:
+    Wer über einem Bau-Fehler misst, liefert ein Manifest mit frischem Datum
+    und altem Inhalt – dieselbe Scheingrün-Klasse wie #206.
+    """
+    try:
+        r = subprocess.run(list(cmd), cwd=BLOG_DIR, capture_output=True,
+                           text=True, timeout=timeout)
+    except FileNotFoundError:
+        return False, (f"`{cmd[0]}` ist nicht installiert/auf PATH – ohne Bau keine "
+                       "Messung (Hugo Extended nötig, CI: `.github/actions/install-hugo`).")
+    except OSError as exc:
+        return False, f"`{cmd[0]}` nicht ausführbar: {exc.__class__.__name__}"
+    except subprocess.TimeoutExpired:
+        return False, f"`{' '.join(cmd)}` lief länger als {timeout} s – abgebrochen."
+    out = ((r.stdout or "") + (r.stderr or "")).strip()
+    if r.returncode != 0:
+        tail = "\n".join(out.splitlines()[-BUILD_LOG_TAIL:]) or "kein Bau-Log"
+        return False, f"`{' '.join(cmd)}` Exit {r.returncode}:\n{tail}"
+    last = out.splitlines()[-1].strip() if out else "fertig"
+    return True, last
+
+
 def main():
     if "--selftest" in sys.argv:
         return _selftest()
@@ -501,6 +576,20 @@ def main():
                 pass
     if public_dir is None and os.path.isdir(PUBLIC_DEFAULT):
         public_dir = PUBLIC_DEFAULT
+
+    # `--build`: Bau und Messung in EINEM Prozess. Erst bauen, dann messen –
+    # und bei Bau-Fehler ohne Artefakt abbrechen (siehe _run_build).
+    if "--build" in argv:
+        ziel = os.path.relpath(public_dir or PUBLIC_DEFAULT, BLOG_DIR)
+        cmd = (HUGO_BUILD_CMD[0], HUGO_BUILD_CMD[1], HUGO_BUILD_CMD[2], ziel)
+        ok, nachricht = _run_build(cmd)
+        if not ok:
+            print("❌ CWV-Messung abgebrochen – kein Befund ohne Messung "
+                  "(weder Report noch Manifest geschrieben):")
+            print(nachricht)
+            return 2
+        public_dir = public_dir or PUBLIC_DEFAULT
+        print(f"✅ Hugo-Bau im selben Lauf (`{' '.join(cmd)}`): {nachricht}")
 
     s_met, s_find = _scan_static()
     p_met, p_find = ({}, [])

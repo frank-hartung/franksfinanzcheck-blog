@@ -501,9 +501,26 @@ python3 scripts/governance_gate.py --rehearse      # Was würde der Lauf heute e
 python3 scripts/governance_contract.py             # Governance-Vertrag C1–C9 prüfen
 python3 scripts/editorial_scorecard.py             # Scorecard aus dem Bestand
 python3 scripts/cwv_guard.py --public public/ --strict-build   # Performance nach dem Build
+python3 scripts/cwv_guard.py --build --strict-build            # Bau + Messung in EINEM Lauf (Refresh)
 python3 scripts/secrets_age_guard.py --verify      # Live-Probe gegen alle Kanäle
 python3 scripts/umami_clicks.py --fetch            # Klick-Daten automatisch laden
 ```
+
+**CWV-Refresh (eigener Gate-Commit).** `CWV-REPORT.md` ist gitignoreiert
+(`/*-REPORT.md`), `data/cwv_manifest.json` ist versioniert. Beide müssen aus
+**demselben Lauf** stammen, sonst meldet Regel **C7** „zwei Wahrheiten an einem
+Tag“ (`Stand:` im Report ≠ `generated` im Manifest). Deshalb:
+
+```bash
+python3 scripts/cwv_guard.py --build --strict-build          # baut und misst in einem Prozess
+python3 scripts/governance_contract.py --quick               # C7 gegen Report + Manifest
+git add data/cwv_manifest.json data/cwv_history.jsonl        # Report bleibt Lauf-Artefakt
+git commit -m "fix(gate): CWV-Messstand <Datum> (Report + Manifest aus einem Lauf)"
+```
+
+`--build` bricht bei Bau-Fehler mit Exit 2 ab und schreibt **kein** Artefakt —
+ein frisches Datum über einem alten Baum wäre dieselbe Scheingrün-Klasse wie
+#206. Regression: `scripts/tests/test_cwv_refresh.py` (14 Tests).
 
 ### Was der Governance-Report #206 dauerhaft behoben hat
 
