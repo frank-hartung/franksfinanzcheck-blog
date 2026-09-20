@@ -146,7 +146,7 @@ Du senkst deinen Verbrauch dauerhaft und steigerst den Wohnkomfort erheblich.
 ## Warum ist das Heizung prüfen so wichtig für die Effizienz?
 
 Eine ungepflegte Heizung verhält sich wie ein Auto mit Plattfuß.  
-sie funktioniert zwar noch, aber dein Kraftstoffverbrauch steigt unnötig an.  
+Sie funktioniert zwar noch, aber dein Kraftstoffverbrauch steigt unnötig an.  
 Wenn du deine **Heizung prüfen** lässt, steht die Verbrennung im Fokus.  
 Schon dünne Rußschichten im Brennraum wirken wie eine starke Isolierung.  
 
