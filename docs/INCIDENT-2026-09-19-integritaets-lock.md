@@ -219,7 +219,9 @@ steht im `GUARDS`-Minimum.
 **Was nur ein Mensch kann (Admin-Recht):** das Ruleset auf den Default-Branch
 zielen lassen und `lock` gegen `Integritäts-Siegel` tauschen — Klickweg und
 API-Einzeiler im Runbook. Bis dahin ist der letzte Gate-Schritt in jedem PR
-**absichtlich rot** und sagt, warum.
+**absichtlich rot** und sagt, warum. (Stand 20.09. abends: derselbe Befund ist als
+Dauerzustand dokumentiert und meldet Exit 0 mit `::warning::` – das 🛑 bleibt im Log,
+die Reparatur bleibt offen. Siehe den Nachtrag „Dauerzustand“ am Ende dieses Berichts.)
 
 ## Nachtrag 20.09.2026 — Stand der Admin-Reparatur (unverändert offen)
 

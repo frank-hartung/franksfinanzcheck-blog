@@ -21,7 +21,8 @@ vorbereitet und **nicht live angewendet**.
 | Ruleset **#23710849** „Integritäts-Lock (PR-Gate)“ | `enforcement: active`, Ziel `~DEFAULT_BRANCH` (keine Excludes), Regeln **nur** `deletion` + `non_fast_forward`. Angelegt 19.09. 22:19:24 UTC, zuletzt geändert 22:37:36 UTC. |
 | Ruleset **#23705980** „main – Unveränderlichkeit (ohne Bypass)“ | `active`, ebenfalls nur Lösch-/Force-Push-Schutz – **unverändert beibehalten** (siehe Bypass-Warnung unten). |
 | Ursprünglich beauftragte ID **#23695872** | weiterhin **HTTP 404** auf `GET /rulesets/23695872`. 404 allein beweist keine Löschung (auch fehlende Sichtbarkeit ist möglich). |
-| Urteil der Live-Wache | `python3 scripts/pflichtcheck_guard.py --branch main` → **UNGESCHUETZT**, Exit 1: „Kein aktives Ruleset verlangt einen Status-Check auf dem Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.“ |
+| Urteil der Live-Wache | `python3 scripts/pflichtcheck_guard.py --branch main` → **UNGESCHUETZT**, Exit 1: „Kein aktives Ruleset verlangt einen Status-Check auf dem Ziel-Zweig – `Integritäts-Siegel` entscheidet nichts, das Siegel ist Deko.“  
+  *(Nachtrag desselben Tages: als Dauerzustand dokumentiert → Exit 0 mit `::warning::`, 🛑 bleibt sichtbar; `--strict` meldet wieder Exit 1 – Abschnitt „Dauerzustand“.)* |
 | Harter Stopp selbst | **grün** – Schritt „Integritäts-Siegel prüfen (HARD STOP)“ lief in allen Läufen seit 19.09. 23:09 UTC erfolgreich; lokal: `integrity_guard.py --gate` → „43 Kerndateien entsprechen exakt dem signierten Stand“. |
 
 **Zeitachse – Korrektur der Notiz „Zustand seit 19.09., ~20:42“.** Der
