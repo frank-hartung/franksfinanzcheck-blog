@@ -359,8 +359,8 @@ def check_page(path: str, base: str, F: Findings, hugo: bool = True) -> dict:
                       f"(un-genutzter Preload: Bytes + Lighthouse-Abzug)")
 
     # ---------- S6: Hygiene der dünnen Seiten ----------
-    if hugo and (is_archive_url(rel) or rel.endswith("404.html")) and indexable:
-        F.add("S6", rel, "Archiv-/404-Seite ist indexierbar (muss noindex sein)")
+    if hugo and (is_archive_url(rel) or is_pager_url(rel) or rel.endswith("404.html")) and indexable:
+        F.add("S6", rel, "Archiv-/Pager-/404-Seite ist indexierbar (muss noindex sein)")
 
     # ---------- S10: canonical ----------
     if indexable and hugo:

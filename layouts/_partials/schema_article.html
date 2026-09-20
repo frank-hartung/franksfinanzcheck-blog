@@ -52,22 +52,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* ---------- Datums-Integrität (ehrlich, nie Build-Zeitstempel) ---------- */ -}}
-{{- $published := .Date -}}
-{{- $modified := $published -}}
-{{- with .Params.lastmod -}}
-  {{- /* `lastmod` darf Datum oder Datum/Zeit sein – beides parsebar */ -}}
-  {{- $lm := printf "%.10s" (printf "%v" .) -}}
-  {{- if findRE `^\d{4}-\d{2}-\d{2}$` $lm -}}
-    {{- $cand := time.AsTime (printf "%sT00:00:00Z" $lm) -}}
-    {{- if $cand.After $published -}}{{- $modified = $cand -}}{{- end -}}
-  {{- end -}}
-{{- else -}}
-  {{- /* Nur ein ECHTER Redaktions-Lastmod aus dem Frontmatter zählt.
-         .Lastmod (Datei-Mtime) wird bewusst NICHT verwendet. */ -}}
-{{- end -}}
-{{- /* In die Zukunft darf das Update nie zeigen (wäre ein Lügen-Signal). */ -}}
-{{- if $modified.After now -}}{{- $modified = $published -}}{{- end -}}
+{{- $dates := partial "article_dates.html" . -}}
+{{- $published := $dates.published -}}
+{{- $modified := $dates.modified -}}
 
 {{- /* ---------- Keywords + Rubrik ---------- */ -}}
 {{- $kwList := slice -}}
@@ -93,7 +80,7 @@
   "@id" $personID
   "name" (.Params.author | default site.Params.author | default "Frank Hartung")
   "url" (printf "%sueber/" site.BaseURL)
-  "jobTitle" "Finanzexperte & Redaktionsleiter"
+  "jobTitle" "Autor & Betreiber von FranksFinanzcheck"
   "sameAs" $profiles
 -}}
 

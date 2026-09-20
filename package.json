@@ -8,7 +8,12 @@
     "test:e2e": "npm run build && playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "seo:audit": "hugo --minify --cleanDestinationDir && python3 scripts/seo_cockpit.py",
+    "seo:check": "hugo --minify --cleanDestinationDir && python3 scripts/seo_cockpit.py --strict",
+    "seo:serve": "python3 -m http.server 4174 --bind 127.0.0.1 --directory .cache/seo-cockpit",
+    "test:seo": "python3 -m unittest discover -s scripts/tests -p \"test_seo_cockpit.py\" && node --test tools/seo-cockpit/app.test.cjs",
+    "test:seo:browser": "node --test tools/seo-cockpit/browser.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0"

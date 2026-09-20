@@ -1,0 +1,18 @@
+{{- /* .RelPermalink bleibt bei Hugo-Pagination die Basis-URL.
+     Gleiche Seitenauswahl wie list.html, BEVOR der Head gerendert wird. */ -}}
+{{- $number := 1 -}}
+{{- $url := .Permalink -}}
+{{- if or .IsHome (and (eq .Kind "section") (eq .Section "posts")) (eq .Kind "term") (eq .Kind "taxonomy") -}}
+  {{- $pages := union .RegularPages .Sections -}}
+  {{- if .IsHome -}}
+    {{- $pages = where site.RegularPages "Section" "eq" "posts" -}}
+    {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" -}}
+  {{- else if and (eq .Kind "section") (eq .Section "posts") -}}
+    {{- $pages = $pages.ByDate.Reverse -}}
+  {{- end -}}
+  {{- with .Paginate $pages -}}
+    {{- $number = .PageNumber -}}
+    {{- if gt $number 1 -}}{{- $url = .URL | absURL -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "number" $number "isPager" (gt $number 1) "url" $url) -}}
