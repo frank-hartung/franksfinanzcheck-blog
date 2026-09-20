@@ -437,6 +437,17 @@ jeder Schreibaktion.
    vom 19.09.2026: Check `lock`, `include: []`). Umbenennen nur nach
    [Runbook](PFLICHT-CHECK-RUNBOOK.md): Konstante, Workflow und Ruleset im selben
    Atemzug.
+   **Lärm-Regel (20.09.2026):** Ist der Vertrag nachweislich nicht erfüllbar —
+   Ruleset-Änderung ist Admin-Aufgabe (C15), und das rote Kreuz hielt nie einen
+   Merge auf (PR #327 wurde bei `FAILURE` gemergt) — wird er **dokumentiert, nicht
+   verschluckt**: `governance_contract.PFLICHT_CHECK_DAUERZUSTAND` legt Zweig,
+   Urteil, Belege und Prüffrist fest; die Wache meldet genau diesen Befund als
+   BEKANNT (Exit 0, `::warning::`, 🛑 bleibt in Log und Summary) statt als Vorfall.
+   Jeder andere Befund, ein neues Ruleset ohne Actions-Bypass, eine abgelaufene
+   Frist und eine fehlende Erklärung melden weiter Exit 1; `--strict`
+   (`PFLICHTCHECK_STRICT=1`) verschärft auch den bekannten Fall. Das ist die
+   Fortsetzung von #206/#272: Ein Befund ohne Besitzer und ohne Schließpfad ist
+   Lärm — und Lärm begräbt die echten roten Kreuze.
 
 ---
 
@@ -500,6 +511,20 @@ jeder Schreibaktion.
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **20.09.2026 (Nachtrag zu Regel 8):** Pflicht-Check-Vertrag als
+  **Dauerzustand dokumentiert** statt als Dauer-Vorfall (Option B, Frank).
+  Bestand: `GET /rules/branches/main` kennt weiterhin keinen
+  `required_status_checks` (nur `deletion` + `non_fast_forward` aus #23710849 und
+  #23705980), die Reparatur bleibt Admin-Aufgabe, und der Nachweis, dass das Rot
+  folgenlos ist, liegt in der Historie: PR #327 ist bei `FAILURE` gemergt. Neu:
+  `PFLICHT_CHECK_DAUERZUSTAND` im Governance-Vertrag (Zweig, Urteil, Belege,
+  Frist **bis 31.12.2026**), **C18-Zusatzprüfung** auf Vollständigkeit,
+  Verdrahtung und Runbook-Rückverweis, weicher Pfad in `pflichtcheck_guard.py`
+  (Exit 0 + `::warning::`, 🛑 bleibt lesbar) und sein harter Ausweg `--strict` /
+  `PFLICHTCHECK_STRICT=1`. Ein grüner Lauf meldet die Erklärung als überholt und
+  verlangt ihren Rückbau. Nicht geändert: der harte Stopp
+  (`integrity_guard.py --gate`) — er prüft wie vorher fail-closed. Runbook:
+  `docs/PFLICHT-CHECK-RUNBOOK.md`, Abschnitt „Dauerzustand“.
 - **19.09.2026 (Nachtrag):** Der Pflicht-Check des PR-Gates hieß `lock` (Job-ID
   ohne Anzeigename) und war in einem Ruleset ohne Ziel-Zweig eingetragen —
   `main` war ungeschützt. Jetzt: Job-Anzeigename **`Integritäts-Siegel`** als

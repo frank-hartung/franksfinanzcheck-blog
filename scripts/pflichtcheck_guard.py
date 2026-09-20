@@ -41,7 +41,10 @@ Regeln:
     Exit 1), aber nicht für das NETZ: Ist die API nicht erreichbar, meldet die
     Wache „nicht prüfbar“ als ::warning:: und bleibt grün – ein Melder, der
     bei jedem API-Schluckauf den Merge sperrt, wird selbst zum Vorfall
-    (Alarm-Routing-Grundsatz, #272).
+    (Alarm-Routing-Grundsatz, #272). Dritte Ausnahme, gleicher Grund: ein als
+    Dauerzustand dokumentierter Befund meldet ::warning:: statt Exit 1 –
+    ausschließlich bei exakter Übereinstimmung und nur bis zur Prüffrist
+    (Nachtrag 20.09.2026).
   · eine Quelle: der erwartete Name kommt aus der Workflow-Datei; der
     Governance-Vertrag (C18) friert ihn als `PFLICHT_CHECK_NAME` ein und meldet
     im Qualitäts-Gate, wenn Datei und Konstante auseinanderlaufen.
@@ -49,14 +52,19 @@ Regeln:
 Nutzung:
     python3 scripts/pflichtcheck_guard.py                  # Live-Probe (Schritt im PR-Gate)
     python3 scripts/pflichtcheck_guard.py --branch main    # Ziel-Zweig ausdrücklich
+    python3 scripts/pflichtcheck_guard.py --strict         # Dauerzustand wieder hart (Admin/Audit)
     python3 scripts/pflichtcheck_guard.py --rules-file r.json   # Regeln aus Datei (offline)
     python3 scripts/pflichtcheck_guard.py --selftest       # Logik-Beweis: kein Netz, schreibt nie
 
 Umgebung (im Gate gesetzt): GH_TOKEN/GITHUB_TOKEN (Lesen), GITHUB_REPOSITORY,
 GITHUB_BASE_REF (Ziel-Zweig des PR), GITHUB_STEP_SUMMARY (Kurzbericht).
+Zusätzlich: PFLICHTCHECK_STRICT=1 entspricht `--strict` (für Läufe, in denen die
+Kommandozeile nicht erreichbar ist), PFLICHTCHECK_BRANCH als Ziel-Zweig-Ausnahme.
 
-Exit-Codes: 0 = Vertrag erfüllt (oder nicht prüfbar, dann ::warning::)
-            1 = Vertrag verletzt · 2 = Selbsttest defekt / Aufruffehler
+Exit-Codes: 0 = Vertrag erfüllt · dokumentierter Dauerzustand (weicher Modus) ·
+              nicht prüfbar (dann ::warning::)
+            1 = Vertrag verletzt und NICHT der dokumentierte Dauerzustand – oder
+                doch, aber `--strict` · 2 = Selbsttest defekt / Aufruffehler
 NACHTRAG 19.09.2026 (zweiter Vorfall – Deploy-Ausfall, Issue #320)
 -------------------------------------------------------------------
 Dieselbe Wache meldete „✅ Vertrag erfüllt“, während `main` seit Stunden keinen
@@ -78,6 +86,42 @@ Betriebswache: --automation misst unabhängig vom PR-Vertrag auf main den letzte
 Bot-Commit gegen abgeschlossene Cron-Läufe schreibender Workflows. >24 h Stille
 mit Cron-Evidenz wird als ROT-Finding ans Governance-Gate geliefert. API-Lücken
 sind INFO, keine erfundene Blockade. --report schreibt nur bei explizitem Auftrag.
+
+NACHTRAG 20.09.2026 (Dritter Fall – der Vertrag ist hier nicht erfüllbar)
+--------------------------------------------------------------------------
+Seit 19.09. 23:09 UTC meldet diese Wache in JEDEM Pull Request rot: `main`
+verlangt den Check nicht (kein `required_status_checks` in einem aktiven Ruleset).
+Die Reparatur ist eine Admin-Änderung an einem Ruleset – und die ist nach C15 wie
+nach Rechtelage nichts, was ein Lauf dieses Repos tun darf (der Bot-Zugang hat
+kein `administration:write`). Der Vertrag ist auf diesem Repo also nicht
+erfüllbar, sondern ein Dauerzustand. Und das rote Kreuz, das ihn meldet, hat
+nichts in der Hand: PR #327 wurde am 20.09.2026 um 15:43 UTC gemergt, während
+`Integritäts-Siegel` auf `FAILURE` stand (Run 35520108131, Merge-Commit 4b91938).
+
+Ein Rot, das niemand beantworten kann und das nichts aufhält, ist kein Mess-
+instrument, sondern Lärm – die Lehre aus #206/#272. Also: dokumentieren statt
+alarmieren (Option B), ausdrücklich nicht „grün waschen“: Die Wache prüft
+jeden Schritt genauso wie vorher, der Befund steht unverändert da – nur
+eingeordnet:
+
+  · `gc.PFLICHT_CHECK_DAUERZUSTAND` beschreibt den festgestellten Zustand (Zweig,
+    Check, Urteil, Evidenz, Prüffrist). Diese Wache vergleicht den LIVE-Befund
+    damit; nur die Übereinstimmung ist weich.
+  · weicher Fall → Exit 0, `::warning::`, 🛑 bleibt in Log und Step-Summary
+  · jeder andere Fall → wie bisher Exit 1 und `::error::`: anderer Befund
+    (`FEHLT`, `FALSCHE_QUELLE`, `PR_SCOPING_FEHLT`), neues Ruleset ohne
+    Actions-Bypass (der Stillstand vom 19.09.), abgelaufene oder unbrauchbare
+    Frist, fehlende Erklärung
+  · `--strict` (oder PFLICHTCHECK_STRICT=1) meldet auch den bekannten Zustand als
+    Vorfall – für Admin-Sitzungen und Nachprüfungen; die Frist setzt dem
+    Weichzeichnen ohnehin ein Datum
+  · wird der Check doch verlangt, meldet der grüne Lauf die Erklärung als
+    überholt; sie muss im selben PR aus dem Vertrag
+
+Der harte Stopp selbst ist von all dem nicht berührt: `integrity_guard.py --gate`
+läuft im selben Job vorher, prüft fail-closed und stoppt die Produktion bei Drift.
+Er hält nur keinen Merge auf, weil kein Pflicht-Check verlangt ist – das ist die
+Lücke, nicht dieses Urteil.
 
 Runbook: docs/PFLICHT-CHECK-RUNBOOK.md
 """
@@ -293,6 +337,115 @@ def reparatur(erwartet: str, checks: list[dict], ruleset_name: str = "") -> list
         "  · Enforcement Active → Save changes → diesen Job erneut ausführen (Re-run).",
         f"Runbook mit Admin-Request und Reihenfolge beim Umbenennen: {RUNBOOK}",
     ]
+
+
+# --------------------------------------------------------------------------- #
+#  Dauerzustand: dokumentiert statt Dauer-Alarm (Option B, 20.09.2026)
+# --------------------------------------------------------------------------- #
+def _isodatum(wert):
+    try:
+        return dt.date.fromisoformat(str(wert or "").strip())
+    except ValueError:
+        return None
+
+
+def dauerzustand_pruefen(zustand, urteil: str, branch: str, erwartet: str,
+                         now: dt.date, blockierer=None) -> dict:
+    """Gilt die dokumentierte Dauerzustand-Erklärung für GENAU DIESEN Befund?
+
+    Die Erklärung ist keine Ausrede auf Dauer, sondern ein Abgleich: Sie gilt nur,
+    wenn gemessenes Urteil, Zweig und Checkname exakt dem Festgestellten
+    entsprechen, die Prüffrist läuft und das Ruleset-Ensemble keinen neuen Zustand
+    zeigt. Alles andere ist Drift und bleibt ein Vorfall – Exit 1 mit ::error:::
+
+      · anderer Befund (`FEHLT`, `FALSCHE_QUELLE`, `PR_SCOPING_FEHLT`) → der
+        Branch-Schutz verlangt *etwas*, nur nicht dieses Siegel; das ist neu und
+        reparierbar
+      · neues Ruleset ohne Actions-Bypass → die Automation steht still (Vorfall vom
+        19.09.2026); das ist ein zweiter, dringender Fehler
+      · Frist abgelaufen oder unbrauchbar → der Zustand wurde zu lange nicht gesehen
+      · keine Erklärung hinterlegt → melden wie bisher
+
+    `blockierer=None` heißt „nicht prüfbar" (Offline-Modus mit `--rules-file`): die
+    Freigabe gilt dann, aber der Lauf sagt offen, dass er diese eine Seite nicht
+    gesehen hat.
+    """
+    def abgelehnt(grund, hinweise=()):
+        return {"gilt": False, "grund": grund, "hinweise": list(hinweise), "frist": "", "tage": None}
+    if not isinstance(zustand, dict) or not zustand:
+        return abgelehnt("keine Dauerzustand-Erklärung hinterlegt")
+    for feld, gemessen in (("urteil_erwartet", urteil), ("check", erwartet), ("branch", branch)):
+        dokumentiert = str(zustand.get(feld) or "")
+        if dokumentiert != gemessen:
+            return abgelehnt(f"dokumentiert ist `{dokumentiert or '–'}`, gemessen `{gemessen}` "
+                             f"(Feld `{feld}`) – das ist nicht der freigegebene Zustand")
+    frist = _isodatum(zustand.get("pruefung_bis"))
+    if frist is None:
+        return abgelehnt(f"Prüffrist `{zustand.get('pruefung_bis')}` ist kein ISO-Datum – "
+                         f"eine Erklärung ohne belastbare Frist gilt nicht")
+    if now > frist:
+        return abgelehnt(f"Prüffrist am {frist.isoformat()} abgelaufen ({(now - frist).days} Tage her) "
+                         f"– der Zustand muss neu geprüft werden; Verlängern ist eine "
+                         f"Menschen-Entscheidung, kein Schalter")
+    hinweise = []
+    if blockierer is None:
+        hinweise.append("Ruleset-Details offline nicht prüfbar (`--rules-file`): ob ein neues "
+                        "Ruleset direkte Pushes blockiert, ist in diesem Lauf nicht bewiesen.")
+    elif blockierer:
+        namen = ", ".join(f"„{b.get('name')}“ (#{b.get('id')})" for b in blockierer)
+        return abgelehnt(f"ein aktives Ruleset blockiert direkte Pushes auf `{branch}`: {namen} – "
+                         f"das ist der Vorfall vom 19.09.2026, nicht der dokumentierte Zustand")
+    return {"gilt": True, "grund": "Befund entspricht exakt der hinterlegten Erklärung",
+            "hinweise": hinweise, "frist": frist.isoformat(), "tage": (frist - now).days}
+
+
+def dauerzustand_meldung(zustand: dict, urteil: dict, erwartet: str, branch: str,
+                         pruefung: dict, strict: bool = False) -> list[str]:
+    """Der Text zum bekannten Dauerzustand: rotes Kreuz ja, Vorfall nein.
+
+    Bewusst kein ✅ und kein „alles in Ordnung": Die Wache beschreibt denselben
+    Befund wie im harten Modus – nur mit Einordnung, Evidenz und Verfallsdatum.
+    """
+    zeilen = [("🛑 PFLICHT-CHECK-VERTRAG VERLETZT – BEKANNT: dokumentierter Dauerzustand"
+               + (" · strenge Meldung wegen `--strict`" if strict else " · kein Vorfall"))]
+    zeilen.append(f"   Befund: {urteil.get('grund', '')}")
+    zeilen.append(f"   festgestellt {zustand.get('festgestellt', '?')} · dokumentiert "
+                  f"{zustand.get('dokumentiert', '?')} · zu prüfen bis "
+                  f"{pruefung.get('frist') or '?'}"
+                  + (f" (noch {pruefung['tage']} Tage)" if pruefung.get("tage") is not None else ""))
+    zeilen.append(f"   Warum der Vertrag hier nicht erfüllbar ist: {zustand.get('zweck', '')}")
+    for titel, beleg in (zustand.get("belege") or {}).items():
+        zeilen.append(f"     · {titel}: {beleg}")
+    zeilen.append("   Was unverändert schützt: diese Prüfung läuft vollständig weiter und meldet "
+                  "jede Abweichung von diesem Stand als Vorfall – anderer Befund, neues Ruleset, "
+                  "abgelaufene Frist. Der harte Stopp (`integrity_guard.py --gate`) läuft vor ihr "
+                  "und stoppt bei Drift in den Kerndateien weiterhin die Produktion.")
+    if strict:
+        zeilen.append("   Verhalten: `--strict` – dieser Lauf meldet Exit 1 und ::error::, als wäre "
+                      "es ein Vorfall. Ohne den Schalter folgt derselbe Befund als Exit 0 mit "
+                      "::warning::; das 🛑 steht in beiden Modi im Log.")
+    else:
+        zeilen.append("   Verhalten: Exit 0 und ::warning:: im PR-Gate; das 🛑 bleibt in Log und "
+                      "Step-Summary stehen. Kein `continue-on-error`, kein Überspringen – die Folge "
+                      "ist weicher, die Prüfung nicht.")
+        zeilen.append("   Hart schalten: `--strict` (oder PFLICHTCHECK_STRICT=1) meldet genau diesen "
+                      "Befund wieder als Vorfall – für Admin-Sitzungen und Nachprüfungen.")
+    zeilen.append(f"   Reparatur bleibt möglich und unverändert dokumentiert: "
+                  f"{zustand.get('runbook', RUNBOOK)} → Abschnitt „{zustand.get('runbook_abschnitt', '')}“.")
+    for hinweis in pruefung.get("hinweise") or []:
+        zeilen.append(f"   ⚠️  {hinweis}")
+    return zeilen
+
+
+def dauerzustand_ueberholt(zustand, urteil: str, erwartet: str, branch: str) -> list[str]:
+    """Grün, aber die Erklärung liegt noch im Vertrag: sie ist überholt und muss weg."""
+    if not isinstance(zustand, dict) or not zustand or urteil != VERLANGT:
+        return []
+    return [f"ℹ️  Der dokumentierte Dauerzustand ist überholt: `{branch}` verlangt `{erwartet}` "
+            f"wieder – der Vertrag ist erfüllt. "
+            f"`governance_contract.PFLICHT_CHECK_DAUERZUSTAND` im selben PR löschen (und Frist "
+            f"sowie Belege mit), sonst erklärt der Vertrag einen Zustand, den es nicht mehr gibt. "
+            f"Ablauf: {zustand.get('runbook', RUNBOOK)}"]
 
 
 # --------------------------------------------------------------------------- #
@@ -584,8 +737,10 @@ def annotate(art: str, text: str) -> None:
 # --------------------------------------------------------------------------- #
 #  Live-Probe
 # --------------------------------------------------------------------------- #
-def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
+def probe(branch: str = "", repo: str = "", rules_file: str = "", strict: bool = False) -> int:
     erwartet, job_id, warnung = erwarteter_check()
+    strict = bool(strict) or os.environ.get("PFLICHTCHECK_STRICT", "").strip().lower() in \
+        ("1", "true", "ja", "yes")
     branch = (branch or os.environ.get("GITHUB_BASE_REF", "").strip()
               or os.environ.get("PFLICHTCHECK_BRANCH", "").strip() or gc.PFLICHT_CHECK_BRANCH)
     repo = repo or repo_aus_umgebung()
@@ -594,6 +749,9 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
           + (f" ({repo})" if repo else ""))
     print(f"   erwarteter Check: `{erwartet}` (aus {WORKFLOW_PFAD}"
           + (f", Job-ID `{job_id}`" if job_id else "") + ")")
+    if strict:
+        print("   Modus: `--strict` – der dokumentierte Dauerzustand wird wie ein Vorfall "
+              "gemeldet (Exit 1, ::error::).")
     if warnung:
         print(f"   ⚠️  {warnung}")
         annotate("warning", warnung)
@@ -635,24 +793,34 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
         # Grün heißt nicht „alles gut“: Kommt die Automation noch durch?
         # Best effort, nur GET, ändert das Urteil nie (Vorfall 19.09.2026).
         zusatz = bypass_pruefung(repo, token, branch, rules_file)
-        for z in zusatz:
-            print(z if z.startswith("⚠️") else f"   {z}")
+        # Und: gilt die Dauerzustand-Erklärung noch? Ein überholter Freispruch im
+        # Vertrag wäre eine zweite Wahrheit über einen Zustand, den es nicht mehr gibt.
+        ueberh = dauerzustand_ueberholt(getattr(gc, "PFLICHT_CHECK_DAUERZUSTAND", None),
+                                        urteil["urteil"], erwartet, branch)
+        for z in zusatz + ueberh:
+            print(z if z.startswith(("⚠️", "ℹ️")) else f"   {z}")
         if zusatz:
             annotate("warning", f"Actions-Bypass-Nachprüfung für `{branch}`: "
                                 f"{zusatz[0]} Diagnose/Reparatur: {RUNBOOK}")
+        if ueberh:
+            annotate("warning", "Dauerzustand-Erklärung ist überholt – "
+                                f"{ueberh[0].removeprefix('ℹ️  ')}")
         step_summary([f"### ✅ Pflicht-Check `{erwartet}` wird auf `{branch}` verlangt", "",
                       f"Ruleset: {', '.join('#' + i for i in ids) or '–'}"]
-                     + (["", *[z.strip() for z in zusatz]] if zusatz else []))
+                     + (["", *[z.strip() for z in zusatz + ueberh]] if zusatz or ueberh else []))
         return 0
 
-    # Rot – mit Diagnose (best effort, ändert das Urteil nicht) und Reparatur.
-    # Die Diagnose liest die Rulesets des Repositories: Meist existiert das
-    # Häkchen, es zeigt nur ins Leere (kein Ziel-Zweig, deaktiviert, alter Name).
-    print(f"🛑 PFLICHT-CHECK-VERTRAG VERLETZT – {urteil['grund']}")
-    ruleset_name, alte_namen = "", list(urteil["checks"])
+    # ---------------------------------------------------------------------- #
+    #  Rot. Erst ansehen, was der Fall ist (Diagnose), dann entscheiden, WIE er
+    #  gemeldet wird: als Vorfall – oder als das, was er auf diesem Repo ist,
+    #  solange niemand im Repo das Ruleset ändern darf: ein dokumentierter,
+    #  befristeter DAUERZUSTAND (Option B, 20.09.2026). Der Befund bleibt sichtbar
+    #  und rot; nur die Folge (Exit, Annotation, Alarm) weicht aus. Alles, was
+    #  nicht exakt dem Festgestellten entspricht, bleibt hart.
+    # ---------------------------------------------------------------------- #
+    ruleset_name, alte_namen, details, liste = "", list(urteil["checks"]), [], None
     if repo and not rules_file:
         liste, _f = api_get(f"/repos/{repo}/rulesets", token)
-        details = []
         for rs in (liste if isinstance(liste, list) else [])[:10]:
             if isinstance(rs, dict) and rs.get("target", "branch") == "branch" and "id" in rs:
                 d, _f2 = api_get(f"/repos/{repo}/rulesets/{rs['id']}", token)
@@ -663,10 +831,50 @@ def probe(branch: str = "", repo: str = "", rules_file: str = "") -> int:
                     if not ruleset_name and any(c["context"] in (erwartet, job_id)
                                                 for c in im_ruleset):
                         ruleset_name = d.get("name", "")
+    dauer = getattr(gc, "PFLICHT_CHECK_DAUERZUSTAND", None)
+    dauer_pfad = dauerzustand_pruefen(dauer, urteil["urteil"], branch, erwartet,
+                                      dt.datetime.now(dt.timezone.utc).date(),
+                                      blockierer=None if rules_file
+                                      else blockiert_direkte_pushes(details, branch))
+    if dauer_pfad["gilt"] and isinstance(dauer, dict):
+        for zeile in dauerzustand_meldung(dauer, urteil, erwartet, branch, dauer_pfad, strict):
+            print(zeile)
         for zeile in ruleset_diagnose(details):
             print(f"   Diagnose: {zeile}")
         if liste == []:
             print("   Diagnose: Das Repository hat kein Ruleset – der Pflicht-Check wurde nie eingetragen.")
+        kurz = [f"- festgestellt {dauer.get('festgestellt', '?')} · dokumentiert "
+                f"{dauer.get('dokumentiert', '?')} · zu prüfen bis {dauer_pfad['frist'] or '?'}",
+                f"- {dauer.get('zweck', '')}"]
+        kurz += [f"- Beleg `{titel}`: {text}" for titel, text in (dauer.get("belege") or {}).items()]
+        kurz.append("- " + ("Exit 1 (strenge Meldung, `--strict`): der Befund bleibt ein Vorfall."
+                            if strict else
+                            "Exit 0: kein Vorfall, kein Alarm. Eine Merge-Blockade gab es nie "
+                            "(Beleg `kein-merge-blocker`); die Prüfung selbst läuft unverändert."))
+        annotate("error" if strict else "warning",
+                  f"Pflicht-Check `{erwartet}` auf `{branch}` nicht verlangt – BEKANNT: "
+                  f"dokumentierter Dauerzustand ({dauer_pfad['grund']}"
+                  + (f", zu prüfen bis {dauer_pfad['frist']}" if dauer_pfad["frist"] else "")
+                  + ("). Strenge Meldung wegen --strict, bleibt Vorfall." if strict else
+                     "). Hält keinen Merge auf (Beleg: PFLICHT_CHECK_DAUERZUSTAND.belege) und "
+                     "lässt den harten Stopp unverändert laufen; Reparatur und Frist: "
+                     f"{dauer.get('runbook', RUNBOOK)}"))
+        step_summary([f"### 🛑 Pflicht-Check `{erwartet}` auf `{branch}` NICHT verlangt – "
+                      "BEKANNT (dokumentierter Dauerzustand)", "", urteil["grund"], "", *kurz,
+                      "", f"Reparatur bleibt Admin-Aufgabe, unverändert dokumentiert: "
+                      f"{dauer.get('runbook', RUNBOOK)} → Abschnitt „{dauer.get('runbook_abschnitt', '')}“"])
+        return 1 if strict else 0
+
+    # Harter Fall – mit Diagnose (best effort, ändert das Urteil nicht) und Reparatur.
+    # Die Diagnose liest die Rulesets des Repositories: Meist existiert das
+    # Häkchen, es zeigt nur ins Leere (kein Ziel-Zweig, deaktiviert, alter Name).
+    print(f"🛑 PFLICHT-CHECK-VERTRAG VERLETZT – {urteil['grund']}")
+    if isinstance(dauer, dict) and dauer:
+        print(f"   Gilt nicht als dokumentierter Dauerzustand: {dauer_pfad['grund']}")
+    for zeile in ruleset_diagnose(details):
+        print(f"   Diagnose: {zeile}")
+    if liste == []:
+        print("   Diagnose: Das Repository hat kein Ruleset – der Pflicht-Check wurde nie eingetragen.")
     rep = reparatur(erwartet, alte_namen, ruleset_name)
     for zeile in rep:
         print(f"   {zeile}")
@@ -833,14 +1041,106 @@ def selftest() -> int:
     if gate.decide_policy({"automation": classified})[:2] != ("RED", "report"):
         f.append("Fall15b: Automations-Stillstand wird im Governance-Gate nicht ROT.")
 
+    # 16) Dauerzustand: weich NUR für den exakt dokumentierten Befund.
+    heute = dt.date(2026, 10, 1)
+
+    def _dz(**anderungen):
+        z = {"zweck": "Rulesets ändern ist Admin-Aufgabe (C15), kein Token hier hat das Recht",
+             "check": name, "branch": "main", "urteil_erwartet": UNGESCHUETZT,
+             "festgestellt": "2026-09-19", "dokumentiert": "2026-09-20",
+             "pruefung_bis": "2026-12-31",
+             "belege": {"kein-merge-blocker": "PR #327 ist bei FAILURE gemergt (4b91938)"},
+             "runbook": RUNBOOK, "runbook_abschnitt": "Dauerzustand"}
+        z.update(anderungen)
+        return z
+    if dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute)["gilt"] is not True:
+        f.append("Fall16: der dokumentierte Befund wird nicht als Dauerzustand angenommen.")
+    for code in (FEHLT, FALSCHE_QUELLE, PR_SCOPING_FEHLT, VERLANGT, NICHT_PRUEFBAR):
+        if dauerzustand_pruefen(_dz(), code, "main", name, heute)["gilt"]:
+            f.append(f"Fall16b: `{code}` läuft unter der Dauerzustand-Erklärung durch.")
+    for feld, wert in (("check", "Anderes-Siegel"), ("branch", "develop"),
+                       ("urteil_erwartet", FEHLT), ("pruefung_bis", "31.12.2026"),
+                       ("pruefung_bis", "")):
+        if dauerzustand_pruefen(_dz(**{feld: wert}), UNGESCHUETZT, "main", name, heute)["gilt"]:
+            f.append(f"Fall16c: Abweichung im Feld `{feld}` ({wert!r}) wird freigesprochen.")
+    for kaputt in (None, {}, [], "UNGESCHUETZT"):
+        if dauerzustand_pruefen(kaputt, UNGESCHUETZT, "main", name, heute)["gilt"]:
+            f.append(f"Fall16d: unbrauchbare Erklärung {kaputt!r} erteilt einen Freispruch.")
+
+    # 17) Frist: am Stichtag noch weich, am Tag danach wieder Vorfall.
+    if dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, dt.date(2026, 12, 31))["gilt"] is not True:
+        f.append("Fall17: der letzte Tag der Prüffrist muss noch gelten.")
+    spat = dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, dt.date(2027, 1, 1))
+    if spat["gilt"] or "abgelaufen" not in spat["grund"] or "1 Tage" not in spat["grund"]:
+        f.append(f"Fall17b: abgelaufene Frist meldet nicht als Vorfall: {spat}")
+
+    # 18) Blocker und Blindheit: neues Ruleset ohne Bypass ist ein anderer Vorfall,
+    #     die Offline-Lücke ein Hinweis – nie ein stiller Freispruch.
+    blockiert = [{"id": 99, "name": "Zusatz-Ruleset", "checks": [name], "pull_request": True}]
+    zu = dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute, blockierer=blockiert)
+    if zu["gilt"] or "Zusatz-Ruleset" not in zu["grund"]:
+        f.append(f"Fall18: Ruleset ohne Bypass wird unter dem Dauerzustand versteckt: {zu}")
+    blind = dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute, blockierer=None)
+    if not blind["gilt"] or not blind["hinweise"]:
+        f.append(f"Fall18b: offline muss die Freigabe ihre Blindheit nennen: {blind}")
+    if dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute, blockierer=[])["hinweise"]:
+        f.append("Fall18c: geprüfte Ruleset-Liste ohne Blocker erzeugt einen unnötigen Hinweis.")
+
+    # 19) Der weiche Text wäscht nichts grün: Kreuz, Frist, Evidenz, Ausweg bleiben stehen.
+    ur = {"grund": "Kein aktives Ruleset verlangt einen Status-Check – Deko."}
+    mel = "\n".join(dauerzustand_meldung(_dz(), ur, name, "main",
+                                        dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute)))
+    for muss in ("🛑", "BEKANNT", "kein Vorfall", "zu prüfen bis 2026-12-31", "PR #327",
+                 "integrity_guard.py --gate", "--strict", RUNBOOK, "Exit 0"):
+        if muss not in mel:
+            f.append(f"Fall19: weicher Befundtext ohne „{muss}“ – es fehlt die Einordnung.")
+    if "Exit 1" in mel:
+        f.append("Fall19b: der weiche Modus kündigt Exit 1 an.")
+    hart = "\n".join(dauerzustand_meldung(_dz(), ur, name, "main",
+                                         dauerzustand_pruefen(_dz(), UNGESCHUETZT, "main", name, heute),
+                                         strict=True))
+    if "Exit 1" not in hart or "kein Vorfall" in hart:
+        f.append("Fall19c: --strict meldet den bekannten Zustand nicht als Vorfall.")
+    ueb = dauerzustand_ueberholt(_dz(), VERLANGT, name, "main")
+    if not ueb or "überholt" not in ueb[0] or "PFLICHT_CHECK_DAUERZUSTAND" not in ueb[0]:
+        f.append(f"Fall19d: grüner Lauf mit liegender Erklärung meldet nicht: {ueb}")
+    for urteil in (UNGESCHUETZT, FEHLT, NICHT_PRUEFBAR):
+        if dauerzustand_ueberholt(_dz(), urteil, name, "main"):
+            f.append(f"Fall19e: Überholt-Hinweis bei `{urteil}` ist fehl am Platz.")
+    if dauerzustand_ueberholt(None, VERLANGT, name, "main"):
+        f.append("Fall19f: Überholt-Hinweis ohne hinterlegte Erklärung.")
+
+    # 20) Die echte Erklärung im Vertrag ist eine Wahrheit mit Wurzeln.
+    echt = getattr(gc, "PFLICHT_CHECK_DAUERZUSTAND", None)
+    if not isinstance(echt, dict) or not echt:
+        f.append("Fall20: gc.PFLICHT_CHECK_DAUERZUSTAND fehlt – jeder Lauf meldet den "
+                 "Dauerzustand weiter als Vorfall (das ist korrekt, aber hier nicht gemeint).")
+    else:
+        for feld, soll in (("check", name), ("branch", gc.PFLICHT_CHECK_BRANCH),
+                           ("urteil_erwartet", UNGESCHUETZT)):
+            if str(echt.get(feld)) != soll:
+                f.append(f"Fall20: Erklärung sagt {echt.get(feld)!r} für `{feld}`, Vertrag `{soll}`.")
+        for feld in ("festgestellt", "dokumentiert", "pruefung_bis"):
+            if _isodatum(echt.get(feld)) is None:
+                f.append(f"Fall20: Erklärung.{feld} ist kein ISO-Datum ({echt.get(feld)!r}).")
+        if not (echt.get("belege") or {}):
+            f.append("Fall20: Erklärung ohne Belege ist eine Behauptung.")
+        try:
+            with open(os.path.join(BLOG_DIR, echt.get("runbook") or RUNBOOK), encoding="utf-8") as fh:
+                runbuch = fh.read()
+        except OSError:
+            runbuch = ""
+        if runbuch and str(echt.get("runbook_abschnitt")) not in runbuch:
+            f.append(f"Fall20: {echt.get('runbook')} führt den Abschnitt "
+                     f"„{echt.get('runbook_abschnitt')}“ nicht – die Wache verweist ins Leere.")
     if f:
         print("❌ PFLICHTCHECK-SELBSTTEST FEHLGESCHLAGEN:")
         for z in f:
             print("   -", z)
         return 2
-    print(f"✅ Pflichtcheck-Selbsttest bestanden (15 Fallgruppen: Urteile, Diagnose, Reparatur, "
-          f"Namensquelle, Ziel-Treffer, Bypass-Lücke, Direkt-Pusher, Trigger-Lage – "
-          f"erwartet `{gc.PFLICHT_CHECK_NAME}`).")
+    print(f"✅ Pflichtcheck-Selbsttest bestanden (20 Fallgruppen: Urteile, Diagnose, Reparatur, "
+          f"Namensquelle, Ziel-Treffer, Bypass-Lücke, Direkt-Pusher, Trigger-Lage, "
+          f"Dauerzustand-Freigabe – erwartet `{gc.PFLICHT_CHECK_NAME}`).")
     return 0
 
 
@@ -852,16 +1152,22 @@ def main(argv=None) -> int:
     ap.add_argument("--branch", default="", help="Ziel-Zweig (Standard: GITHUB_BASE_REF, sonst main)")
     ap.add_argument("--repo", default="", help="owner/repo (Standard: GITHUB_REPOSITORY, sonst origin)")
     ap.add_argument("--rules-file", default="", help="Regel-JSON statt API (offline/Diagnose)")
+    ap.add_argument("--strict", action="store_true",
+                    help="dokumentierten Dauerzustand wieder als Vorfall melden (Exit 1, ::error::)")
     args = ap.parse_args(argv)
     if args.selftest:
         return selftest()
     if args.automation:
         if args.rules_file or args.branch not in ("", "main"):
             ap.error("--automation misst nur main live (kein --rules-file)")
+        if args.strict:
+            ap.error("--strict betrifft den PR-Vertrag, nicht die Automations-Wache "
+                     "(deren Urteil ist unabhängig von der Dauerzustand-Erklärung)")
         return automation_probe(repo=args.repo, report=args.report)
     if args.report:
         ap.error("--report verlangt --automation")
-    return probe(branch=args.branch, repo=args.repo, rules_file=args.rules_file)
+    return probe(branch=args.branch, repo=args.repo, rules_file=args.rules_file,
+                 strict=args.strict)
 
 
 if __name__ == "__main__":

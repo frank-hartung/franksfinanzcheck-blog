@@ -1,6 +1,6 @@
 # 🔒 Governance-Vertrag (automatisch geprüft)
 
-**Stand:** 2026-09-19 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
+**Stand:** 2026-09-20 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
 
 Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report #206 ermöglicht haben. Jede Verletzung ist ein Build-Fehler.
 
@@ -23,7 +23,7 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C15 Beweis-Trockenlauf** – Beweisen ist nicht Heilen: wer den Site-Bestand bei jedem Aufruf umschreibt, muss einen trockenen Beweispfad haben, und ein Kettenleiter darf `--fix` im eigenen Selbsttest nicht weitergeben – ein Prüflauf, der nebenbei heilt, verändert die Messgröße, die er prüfen will (15.09.2026).
 - **C16 Wache-Herzschlag** – Ein Lebenszeichen ist kein Befund: die Affiliate-Integritäts-Wache erneuert ihren Zeitstempel bei jedem Lauf (Beweis im Gate-Selbsttest), ihre Frische wird per Herzschlag ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist deploy-irrelevant – ein ruhiger Tag darf weder einen Fehlalarm noch eine Veröffentlichung auslösen (#281).
 - **C17 Pinterest-Duplikate** – Pinterest-Duplikate (P4) sind Spam: pin_title und pin_description müssen über alle Artikel hinweg einzigartig sein – der Duplicate-Guard heilt deterministisch, läuft in Watchdog und Content-Engine und verhindert Repeat-Pin-Spam (#305).
-- **C18 Pflicht-Check** – Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt: Der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist als Konstante eingefroren und muss Workflow und Ruleset gleichermaßen entsprechen; das Gate läuft bei jedem PR auf `main` ohne Pfadfilter, ohne `if:` am Job, ohne `continue-on-error` und nur mit Leserechten, und die Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst, ob der Branch-Schutz den Check wirklich verlangt – ein umbenannter Job friert `main` ein, ein Ruleset ohne Ziel-Branch schützt nichts (19.09.2026).
+- **C18 Pflicht-Check** – Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt: Der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist als Konstante eingefroren und muss Workflow und Ruleset gleichermaßen entsprechen; das Gate läuft bei jedem PR auf `main` ohne Pfadfilter, ohne `if:` am Job, ohne `continue-on-error` und nur mit Leserechten, und die Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst, ob der Branch-Schutz den Check wirklich verlangt – ein umbenannter Job friert `main` ein, ein Ruleset ohne Ziel-Branch schützt nichts (19.09.2026). Ist der Vertrag nachweislich nicht erfüllbar, legt `PFLICHT_CHECK_DAUERZUSTAND` ihn als befristeten Dauerzustand ab: Die Wache meldet genau diesen Befund als BEKANNT statt als Vorfall, jeder andere bleibt rot, und `--strict` zieht auch den bekannten Befund wieder auf Exit 1 (20.09.2026).
 
 ## Befund
 
