@@ -124,7 +124,7 @@ default_cta: "Jetzt bei CHECK24 vergleichen"
 canonical:
   description: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
-  home_title: "FranksFinanzcheck: So holst du mit ehrlichen Tipps das Beste aus deinem Geld"
+  home_title: "FranksFinanzcheck – Deine ehrliche Hilfe für Strom, Versicherung und Konto"
 
 frameworks:
   editorial:

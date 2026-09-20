@@ -91,6 +91,20 @@ r.kontraste = {
   homeInfoEm: probe('.home-info .entry-content em'),
   metaSekundaer: probe('.post-entry .entry-footer, .post-meta, footer .terms'),
   teaserSekundaer: probe('.post-entry .entry-content'),
+  // Saisonale Startseite (20.09.2026): Badge/Hinweis liegen auf dem immer
+  // dunkelgrünen Hero, Eyebrow/Titel/CTA/Tipp auf der Kartenfläche. Beide
+  // Modi werden gemessen – die Sollwerte stehen in data/saisons.yaml und
+  // werden analytisch von scripts/saisonale_startseite_guard.py geprüft;
+  // hier folgt der Beweis am gerenderten Pixel.
+  saisonBadge: probe('.ff-saison-badge'),
+  saisonHinweis: probe('.ff-saison-hinweis'),
+  saisonEyebrow: probe('.ff-saison-eyebrow'),
+  saisonKartenTitel: probe('.ff-saison-card-titel'),
+  saisonKartenCta: probe('.ff-saison-card-cta'),
+  saisonKartenMeta: probe('.ff-saison-card-meta'),
+  saisonRatgeberLink: probe('.ff-saison-pillar'),
+  saisonTipp: probe('.ff-saison-tipp'),
+  saisonTippLabel: probe('.ff-saison-tipp-label'),
 };
 r.typo = {};
 ['h1', 'h2', 'h3', 'h4'].forEach(function (h) {
@@ -146,6 +160,35 @@ document.querySelectorAll('a, button, .post-entry, .ff-voice-slot button, nav *'
   }
 });
 r.uebergaenge = { dauer: Object.keys(dauen).sort(), easing: Object.keys(easings) };
+return r;
+`;
+
+// Startseiten-Geometrie: Belegt den LCP-Schutz der saisonalen Startseite.
+// Gemessen werden die Position des LCP-Covers (erste Artikel-Karte) relativ
+// zum Viewport, die Höhe von Hero und Saison-Block sowie die FLEX-ORDER der
+// main-Kinder – auf Mobile müssen die Artikel-Karten (order: 1) VOR dem
+// Saison-Block (order: 4) stehen, sonst wandert das LCP-Bild unter den Fold.
+const LAYOUT_BODY = `
+var r = {};
+var rect = function (el) {
+  if (!el) return null;
+  var b = el.getBoundingClientRect();
+  return { top: Math.round(b.top), hoehe: Math.round(b.height), breite: Math.round(b.width) };
+};
+var lcp = document.querySelector('article.post-entry.lcp-card');
+var lcpBild = lcp ? lcp.querySelector('.entry-cover img, img') : null;
+var saison = document.querySelector('section.ff-saison');
+r.viewport = { breite: window.innerWidth, hoehe: window.innerHeight };
+r.lcpKarte = rect(lcp);
+r.lcpBild = rect(lcpBild);
+r.lcpBildImViewport = !!(lcpBild && lcpBild.getBoundingClientRect().top < window.innerHeight && lcpBild.getBoundingClientRect().height > 0);
+r.saisonBlock = rect(saison);
+r.saisonImViewport = !!(saison && saison.getBoundingClientRect().top < window.innerHeight);
+r.hero = rect(document.querySelector('article.first-entry.home-info'));
+r.badge = rect(document.querySelector('.ff-saison-badge'));
+r.reihenfolge = Array.prototype.slice.call(document.querySelectorAll('main.main > *')).map(function (el) {
+  return el.tagName.toLowerCase() + '.' + String(el.className || '').split(' ')[0] + ' (order ' + getComputedStyle(el).order + ')';
+});
 return r;
 `;
 
@@ -213,6 +256,7 @@ const probes = {
   artikel: new Function(ARTICLE_BODY),
   fokus: new Function(FOCUS_BODY),
   tapziele: new Function(TAP_BODY),
+  layout: new Function(LAYOUT_BODY),
 };
 
 (async () => {
@@ -247,6 +291,7 @@ const probes = {
         .getAttribute('href');
 
       report.seiten['startseite-' + scheme] = await page.evaluate(probes.seite);
+      report.seiten['startseite-layout-' + scheme] = await page.evaluate(probes.layout);
 
       await page.goto(BASE + articlePath);
       report.seiten['artikel-' + scheme] = await page.evaluate(probes.artikel);
@@ -267,6 +312,10 @@ const probes = {
       const mp = await mobi.newPage();
       await mp.goto(BASE + articlePath);
       report.seiten['tapziele-' + scheme] = await mp.evaluate(probes.tapziele);
+
+      // Mobile Startseite: bleibt das LCP-Cover trotz Saison-Block im Viewport?
+      await mp.goto(BASE + '/');
+      report.seiten['startseite-layout-mobile-' + scheme] = await mp.evaluate(probes.layout);
 
       await context.close();
       await mobi.close();

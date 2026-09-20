@@ -1,0 +1,25 @@
+{{- /* ============================================================
+       SAISONS-DATEN – data/saisons.yaml lesen (saisonale Startseite)
+       ------------------------------------------------------------
+       WARUM NICHT hugo.Data / site.Data (dokumentierte Landmine,
+       19.09.2026, siehe affiliate_ziele_data.html):
+       data/ enthält Bot-Protokolle (*.jsonl, u. a. data/audit/). Schon
+       EIN Zugriff auf hugo.Data/site.Data lässt Hugo den ganzen
+       data/-Baum parsen – der Build stirbt mit
+       „failed to load data: …/*.jsonl:1:1: unmarshal of format "" is
+       not supported". Deshalb dieselbe Bauweise wie
+       themenwelten_data.html / affiliate_ziele_data.html: genau die
+       eine geprüfte Datei lesen und zurückgeben.
+
+       `format` MUSS explizit "yaml" sein: Die Datei beginnt mit einem
+       #-Kommentarkopf, und Hugos Format-Ratefunktion hält sie dann für
+       TOML („toml: expected '=' after key") – derselbe Build-Killer wie
+       am 19.09.2026 bei affiliate_ziele.yaml.
+
+       Aufruf: partialCached "saisons_data.html" "saisons" (ein Parse pro Build)
+       ============================================================ */ -}}
+{{- $daten := dict -}}
+{{- if fileExists "data/saisons.yaml" -}}
+  {{- $daten = os.ReadFile "data/saisons.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- end -}}
+{{- return $daten -}}

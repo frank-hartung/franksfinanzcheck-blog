@@ -1,0 +1,147 @@
+{{- /* ============================================================
+       SAISONALE STARTSEITE – Daten-/Kontext-Auflösung
+       ------------------------------------------------------------
+       Eingabe:  dict "leicht" (bool) – true für Badge/Hinweis im Hero
+       Ausgabe:  dict "saison" "hauptZiel" "quelle" "auswahl" "woche" "mindest"
+
+       Getrennt von home_season.html, damit der Hero-Teil (Badge +
+       Hinweis) NICHT die Artikel-Auswahl mitrechnen muss (`leicht`:
+       der Block unten auf der Seite braucht sie, der Hero nicht).
+       Beide Aufrufe teilen sich dieselbe Quelle (data/saisons.yaml,
+       gelesen über saisons_data.html – KEIN site.Data/hugo.Data,
+       siehe dort) und dieselbe Fenster-Logik
+       (_funcs/saison-aufloesung.html).
+
+       Artikel-Auswahl (deterministisch, zwei Stufen):
+         Stufe 1  Relevanz: Treffer der Saison-`keywords` in Titel,
+                  Beschreibung, Tags, Keywords und URL-Slug
+                  (lowercase-Teilstring). Sortierung: Relevanz
+                  absteigend → Datum absteigend.
+         Stufe 2  Fallback: reicht das nicht für `min_artikel`, zählen
+                  2a die neuesten Artikel der `saison_pillars`, und
+                  falls auch die nicht reichen 2b die neuesten Artikel
+                  überhaupt. → Der Block ist NIE leer und nie halb.
+         `quelle` (keywords|pillar|neueste) wird als data-Attribut
+         mitgerendert, damit Wache und Reports sehen, welche Stufe
+         gegriffen hat.
+
+       Spiegelt 1:1 scripts/saisonale_startseite_gate.py
+       (unit-getestet in scripts/tests/test_saisonale_startseite.py):
+       Template und Wache dürfen nie auseinanderlaufen.
+       ============================================================ */ -}}
+{{- /* Konstanter Kontext + Variante → die YAML wird genau EINMAL pro Build
+       geparst (egal wie oft Badge/Hinweis/Block aufgerufen werden). */ -}}
+{{- $daten := partialCached "saisons_data.html" "saisons" "saisons" -}}
+{{- if not $daten -}}
+  {{- errorf "Saisonale Startseite: data/saisons.yaml fehlt, ist leer oder nicht parsebar" -}}
+{{- end -}}
+{{- $saisons := $daten.saisons -}}
+{{- if not $saisons -}}
+  {{- errorf "Saisonale Startseite: data/saisons.yaml hat keine `saisons`-Liste" -}}
+{{- end -}}
+{{- $saison := partial "_funcs/saison-aufloesung.html" (dict "datum" now "saisons" $saisons) -}}
+{{- if not $saison -}}
+  {{- errorf "Saisonale Startseite: kein Saison-Fenster deckt heute (%s) ab – data/saisons.yaml muss das Jahr lückenlos abdecken" (now.Format "2006-01-02") -}}
+{{- end -}}
+
+{{- /* Pflichtfelder, die JEDER Baustein braucht */ -}}
+{{- range $feld := (slice "name" "emoji" "zeitraum" "badge" "headline" "hinweis" "tipp" "pillar_link") -}}
+  {{- if not (index $saison $feld) -}}
+    {{- errorf "Saisonale Startseite: Saison %q braucht das Feld `%s` in data/saisons.yaml" $saison.id $feld -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $saison.saison_pillars -}}
+  {{- errorf "Saisonale Startseite: Saison %q braucht mindestens eine `saison_pillars`-ID" $saison.id -}}
+{{- end -}}
+
+{{- /* Haupt-Ratgeber der Saison: fail-closed wie themenwelten.html */ -}}
+{{- $hauptPillar := index $saison.saison_pillars 0 -}}
+{{- $hauptZiel := site.GetPage (printf "/pillar/%s" $hauptPillar) -}}
+{{- if not $hauptZiel -}}
+  {{- errorf "Saisonale Startseite: Ratgeber /pillar/%s/ fehlt (Saison %q)" $hauptPillar $saison.id -}}
+{{- else if or $hauptZiel.Draft (not $hauptZiel.RelPermalink) -}}
+  {{- errorf "Saisonale Startseite: Ratgeber /pillar/%s/ ist nicht öffentlich erreichbar (Saison %q)" $hauptPillar $saison.id -}}
+{{- end -}}
+
+{{- /* Stichtag auf Wochen gerundet: saisonal korrekt, Cache bleibt gültig */ -}}
+{{- $woche := printf "%d-%02d" now.Year (int (div (sub now.YearDay 1) 7)) -}}
+
+{{- /* Themenwelten-Titel für die Karten-Meta: die rohe Pillar-ID
+       („strom-sparen") ist Maschinen-Sprache und würde per CSS
+       hochgebogen (text-transform) nur „Strom-sparen" ergeben. Die
+       redaktionellen Namen kommen aus derselben Quelle wie die
+       Themenwelten-Navigation (data/themenwelten.json). */ -}}
+{{- $welten := partialCached "themenwelten_data.html" "themenwelten" "themenwelten" -}}
+{{- $themen := $welten.topics | default slice -}}
+
+{{- /* ---------- Artikel-Auswahl ----------
+       `leicht` (Hero-Badge/-Hinweis) braucht nur Saison + Ratgeber-Ziel:
+       die Auswahl bleibt dann leer, damit der Hero-Teil nicht zweimal die
+       Artikel-Liste durchrechnet.
+
+       ACHTUNG HUGO-EIGENHEIT (20.09.2026 selbst getestet, damit es niemand
+       erneut ausprobiert): `return` MIT Wert darf NICHT in einem
+       if/range-Block stehen – Hugo bricht ab mit „wrong number of args for
+       return: want 0 got 1". Deshalb genau EIN return auf oberster Ebene
+       am Dateiende; der `leicht`-Fall wird über eine bedingte Berechnung
+       gelöst, nicht über einen vorzeitigen return. */ -}}
+{{- $auswahl := slice -}}
+{{- $quelle := "" -}}
+{{- $mindest := 0 -}}
+{{- if not .leicht -}}
+
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" "true" -}}
+{{- $mindest = (int ($saison.min_artikel | default $daten.min_artikel_default | default 3)) -}}
+
+{{- $keywords := $saison.keywords | default slice -}}
+{{- $relevant := slice -}}
+{{- range $posts -}}
+  {{- $blob := printf " %s | %s | %s | %s | %s " (.Title | lower) (.Description | lower) ((delimit (.Params.tags | default slice) " ") | lower) ((delimit (.Params.keywords | default slice) " ") | lower) (.RelPermalink | lower) -}}
+  {{- $wert := 0 -}}
+  {{- range $kw := $keywords -}}
+    {{- if and $kw (in $blob ($kw | lower)) -}}
+      {{- $wert = add $wert 1 -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt $wert 0 -}}
+    {{- /* EIN kombinierter Rang-Schlüssel statt zweier sort()-Aufrufe:
+           Hugo sortiert immer die GESAMTE Liste neu, `sort (sort x "wert"
+           "desc") "zeit" "desc" kippt die Relevanz also wieder um und
+           übrig bleibt eine reine Datums-Sortierung (am 20.09.2026 im
+           Build beobachtet: statt der drei relevantesten Artikel kamen
+           die drei neuesten). Rang = Relevanz * 1e12 + Unix-Zeit
+           (Relevanz dominiert, Zeit bricht den Gleichstand; int64 reicht
+           bis Relevanz ~9.000). */ -}}
+    {{- $rang := (add (mul $wert 1000000000000) .Date.Unix) -}}
+    {{- $relevant = $relevant | append (dict "rang" $rang "wert" $wert "zeit" .Date.Unix "seite" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $quelle = "keywords" -}}
+{{- if ge (len $relevant) $mindest -}}
+  {{- $auswahl = first $mindest (sort $relevant "rang" "desc") -}}
+{{- else -}}
+  {{- $pillar := slice -}}
+  {{- range $id := $saison.saison_pillars -}}
+    {{- $ziel := site.GetPage (printf "/pillar/%s" $id) -}}
+    {{- if not $ziel -}}
+      {{- errorf "Saisonale Startseite: Ratgeber /pillar/%s/ fehlt (Saison %q)" $id $saison.id -}}
+    {{- else if or $ziel.Draft (not $ziel.RelPermalink) -}}
+      {{- errorf "Saisonale Startseite: Ratgeber /pillar/%s/ ist nicht öffentlich erreichbar (Saison %q)" $id $saison.id -}}
+    {{- end -}}
+    {{- $pillar = $pillar | append (where $posts "Params.pillar" $id) -}}
+  {{- end -}}
+  {{- $frisch := sort $pillar "Date.Unix" "desc" -}}
+  {{- if ge (len $frisch) $mindest -}}
+    {{- $auswahl = first $mindest $frisch -}}
+    {{- $quelle = "pillar" -}}
+  {{- else -}}
+    {{- $auswahl = first $mindest (sort $posts "Date.Unix" "desc") -}}
+    {{- $quelle = "neueste" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- end -}}{{- /* Ende `if not .leicht` */ -}}
+
+{{- return (dict "saison" $saison "hauptZiel" $hauptZiel "auswahl" $auswahl "quelle" $quelle "woche" $woche "mindest" $mindest "themen" $themen) -}}
