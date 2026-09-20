@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-20T10:21:02.705492+00:00",
-  "head": "4d036a7",
+  "signed_at": "2026-09-20T19:27:14.028065+00:00",
+  "head": "cd2f26a",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -11,7 +11,7 @@
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
-    "layouts/_partials/head.html": "c3fc452f35429f4266548c8736c79f0ce0531328802a60a3d750d50162d5c0e4",
+    "layouts/_partials/head.html": "a3f50eca201431ee9d80c406cd7ec82c88e0ee46a65514f1fb03759217760fca",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
@@ -260,6 +260,14 @@
       "geaendert": [
         "data/brand_lock.yaml",
         "hugo.toml"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "art": "set-current",
+      "head": "cd2f26a",
+      "geaendert": [
+        "layouts/_partials/head.html"
       ]
     }
   ]
