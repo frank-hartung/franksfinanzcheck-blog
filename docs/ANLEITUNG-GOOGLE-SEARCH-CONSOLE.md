@@ -1,74 +1,70 @@
-# 🚀 Google Search Console einrichten – Schritt-für-Schritt
+# Google Search Console für franksfinanzcheck.de
 
-**Ziel:** Google findet und indexiert deinen Blog (frank-hartung.github.io/franksfinanzcheck-blog/)
+Aktualisiert: 20.09.2026. Die frühere github.io-Anleitung ist ersetzt.
+Der tatsächliche Verifikations- und Indexierungsstatus ist ohne Zugriff
+auf dein Google-Konto **nicht bekannt**.
 
-**Vorab geprüft – alles bereit:**
-- ✅ Sitemap erreichbar: 115 URLs (HTTP 200)
-- ✅ robots.txt korrekt (mit Sitemap-Verweis)
-- ✅ Startseite indexierbar (`index, follow`)
+## 1. Richtige Property wählen
 
----
+[Google Search Console](https://search.google.com/search-console) öffnen
+und selbst mit dem berechtigten Google-Konto anmelden. Falls vorhanden,
+die bestehende Property verwenden:
 
-## Schritt 1: Search Console öffnen
+- **Domain-Property:** `franksfinanzcheck.de` (fasst Protokolle/Subdomains
+  zusammen). Besitz über den von Google ausgegebenen DNS-TXT-Eintrag beim
+  DNS-Anbieter bestätigen.
+- **URL-Präfix-Property:** `https://franksfinanzcheck.de/` (nur dieses
+  HTTPS-Präfix). Beispielsweise mit der von Google bereitgestellten
+  HTML-Verifikationsdatei bestätigen. Datei unverändert unter `static/`
+  ablegen, deployen, Erreichbarkeit prüfen, in GSC bestätigen.
 
-1. Gehe auf **https://search.google.com/search-console**
-2. Melde dich mit deinem **Google-Konto** an (das gleiche, mit dem du den Gemini-Key erstellt hast – oder ein beliebiges anderes)
-3. Klicke auf **„Jetzt starten"**
+Keine neue Property anlegen, wenn eine passende bereits existiert.
+Keine Passwörter, OAuth-Tokens oder privaten Schlüssel in Chat/Git ablegen.
 
-## Schritt 2: Eigenschaft hinzufügen (URL-Präfix)
+## 2. Sitemap einreichen
 
-1. Wähle **„URL-Präfix"** (nicht „Domain" – das funktioniert nur mit eigener Domain)
-2. Trage ein: **`https://frank-hartung.github.io/franksfinanzcheck-blog`**
-   ⚠️ Wichtig: OHNE Schrägstrich am Ende
-3. Klicke auf **„Weiter"**
+Unter **Sitemaps** die URL
+`https://franksfinanzcheck.de/sitemap.xml` eintragen. Erst nach Deployment
+der Änderungen den live ausgelieferten Inhalt prüfen. Ein lokaler grüner
+Audit ist keine Aussage über den bereits veröffentlichten Stand.
 
-## Schritt 3: Eigentum bestätigen (Verifikation)
+Die Sitemap enthält Originalseiten, keine Tag-/Kategoriearchive und keine
+Paginierung. Die URL-Anzahl verändert sich mit den Veröffentlichungen.
+Google garantiert weder die Indexierung jeder URL noch eine feste Frist.
 
-Google bietet mehrere Methoden – **nutze die HTML-Datei-Methode** (funktioniert bei GitHub Pages am besten):
+## 3. Indexierungs- und Performance-Basis schaffen
 
-1. Wähle den Tab **„HTML-Datei"**
-2. Google zeigt dir eine Datei zum Herunterladen: z. B. `google1234567890abcdef.html`
-3. **Kopiere den Dateinamen** (die Zeichenfolge `google...html`)
-4. **Schicke mir den Dateinamen hier im Chat** – ich lege die Datei in deinem Blog ab und pushe sie live (dauert 1 Minute)
-5. Sobald deployed, klicke in Google auf **„Bestätigen"**
+- URL-Prüfung für Startseite, `/posts/` und die sechs `/pillar/`-Ratgeber.
+- Gewählte Canonical, Crawling-Status und Ausschlussgründe prüfen.
+- Bei Bedarf einzelne **wesentlich aktualisierte** Seiten zur Indexierung
+  anfragen; nicht täglich unveränderte URLs einreichen.
+- **Leistung → Suchergebnisse:** Suchtyp Web, Zeitraum und Länderfilter
+  konsistent halten. Klicks, Impressionen, CTR und Position vergleichen.
+- Aktualisierungsdatum, Messfenster und Google-seitige Datenverzögerung
+  dokumentieren. Nicht aus einem einzigen Tag einen Trend ableiten.
 
-> **Alternativ (falls du es selbst machen willst):**
-> Lege eine Datei mit diesem exakten Namen im Ordner `check24-blog/static/` an, mit dem Inhalt, den Google dir zeigt. Dann committen & pushen.
+## 4. Kostenlos im SEO-Cockpit auswerten
 
-## Schritt 4: Sitemap einreichen
+**Leistung → Suchergebnisse → Exportieren → CSV**. ZIP entpacken und
+Suchanfragen- oder Seiten-Datei im lokalen Cockpit importieren:
 
-Nach erfolgreicher Verifikation:
+```bash
+npm run seo:audit
+npm run seo:serve
+```
 
-1. Im GSC-Dashboard links auf **„Sitemaps"** klicken
-2. Unter „Neue Sitemap hinzufügen" eingeben: **`sitemap.xml`**
-3. **„Senden"** klicken
-4. Status sollte „Erfolgreich" (oder „Wird verarbeitet") anzeigen
+Anleitung: [SEO-Cockpit](ANLEITUNG-SEO-COCKPIT.md).
+Der Import benötigt keine Search-Console-API, kein Google-Cloud-Projekt,
+keinen OpenSEO-Account und keine Zugangsdaten. Es wird nichts hochgeladen.
 
-## Schritt 5: Erste Checks (optional, aber nützlich)
+## 5. Nächste redaktionelle Entscheidungen
 
-1. **„URL-Prüfung"** oben in der Suchleiste: `https://frank-hartung.github.io/franksfinanzcheck-blog/` eingeben → „Indexierung anfordern" klicken (beschleunigt das Finden der Startseite)
-2. **„Seitenindexierung"** im Menü: Hier siehst du später, wie viele deiner 30+ Artikel Google indexiert hat
-3. **„Leistung"** im Menü: Hier siehst du nach einigen Tagen Klicks, Impressionen und Suchbegriffe
+Seiten mit ausreichend Impressionen und Position 4–20 zuerst ansehen.
+Suchintention prüfen, konkrete Fakten/Quellen aktualisieren, intern passend
+verlinken und erst danach Titles überarbeiten. Eine niedrige CTR kann auch
+an Suchintention, SERP-Features oder Position liegen – nicht pauschal an
+„schlechten Titeln“.
 
----
-
-## Was danach passiert
-
-- Google crawlt den Blog (kann 1–7 Tage dauern, bis alles indexiert ist)
-- Die 115 URLs aus der Sitemap werden nach und nach aufgenommen
-- Der tägliche Bot veröffentlicht weiterhin 2 Artikel/Tag – die werden bei jedem neuen Push über die Sitemap automatisch mitgenommen
-
-## Nützliche Zusatz-Tipps
-
-- **Bing Webmaster Tools** (kostenlos, https://www.bing.com/webmasters): Gleiche Sitemap einreichen – Bing liefert auch Daten an ChatGPT/DuckDuckGo. Alternativ: „Import from Google Search Console" nutzen.
-- **Keine eigene Domain nötig:** Die github.io-Adresse funktioniert für die GSC völlig normal. Solltest du später `franksfinanzcheck.de` kaufen, richtest du dort einfach eine zweite Property ein (oder wechselst um).
-
----
-
-## Kurz-Zusammenfassung
-
-1. search.google.com/search-console → URL-Präfix → deine Blog-URL
-2. Verifikation: HTML-Datei → **Dateinamen mir schicken**, ich lege sie an
-3. Sitemap `sitemap.xml` einreichen
-4. Startseite „Indexierung anfordern"
-5. Fertig – Google findet deinen Blog! 🎉
+Für Bing kann dieselbe Sitemap zusätzlich in den
+[Bing Webmaster Tools](https://www.bing.com/webmasters) hinterlegt werden.
+Auch dort ist eine Indexierung nicht garantiert.

@@ -1,0 +1,8 @@
+{{- $ctx := partial "seo_context.html" . -}}
+{{- $title := .Params.seoTitle | default .Title | default site.Title | plainify | htmlUnescape | replaceRE "\\s+" " " -}}
+{{- if $ctx.isPager -}}
+  {{- $title = printf "%s – Seite %d" $title $ctx.number -}}
+{{- else if and (not .IsHome) (not .Params.seoTitle) (lt (len $title) 40) -}}
+  {{- $title = printf "%s | %s" $title site.Title -}}
+{{- end -}}
+{{- return $title -}}

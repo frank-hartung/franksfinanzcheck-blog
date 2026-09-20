@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>SEO-Cockpit | FranksFinanzcheck</title>
+  <link rel="stylesheet" href="style.css">
+  <script id="audit-data" type="application/json">/*AUDIT_DATA*/</script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt</a>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#ueberblick"><span class="brand-mark" aria-hidden="true">ff.</span><span>FranksFinanzcheck<small>Dein SEO-Cockpit</small></span></a>
+    <p class="workspace">franksfinanzcheck.de<br><span>Lokaler Arbeitsbereich</span></p>
+    <nav aria-label="Arbeitsbereiche">
+      <a href="#ueberblick" data-view="ueberblick" aria-current="page"><span aria-hidden="true">◫</span> Überblick</a>
+      <a href="#massnahmen" data-view="massnahmen"><span aria-hidden="true">☑</span> Maßnahmen <span id="nav-count" class="nav-count"></span></a>
+      <a href="#seiten" data-view="seiten"><span aria-hidden="true">▤</span> Seiten & Struktur</a>
+      <a href="#suchdaten" data-view="suchdaten"><span aria-hidden="true">↗</span> Suchdaten & Chancen</a>
+      <a href="#snippet" data-view="snippet"><span aria-hidden="true">⌕</span> Snippet-Werkstatt</a>
+    </nav>
+    <div class="sidebar-note"><strong>Deine Daten bleiben hier.</strong><p>Keine API. Kein Abo. Keine Übertragung an Dritte.</p><button id="theme" type="button">Darstellung wechseln</button></div>
+  </aside>
+  <div class="workspace-main">
+    <header class="topbar"><span><span class="status-dot" aria-hidden="true"></span> Offline-fähig · ohne externe Dienste</span><a href="audit.json" download>Audit als JSON ↓</a></header>
+    <main id="main" tabindex="-1">
+      <section id="ueberblick" class="view">
+        <div class="heading"><div><p class="eyebrow">Dein Blog. Klarer Blick.</p><h1>Wissen, was deine<br>Seiten weiterbringt.</h1><p class="intro">Technische Fakten statt eines künstlichen SEO-Scores.<br>Prüfen, priorisieren und gezielt verbessern.</p></div><div class="audit-stamp"><span>Letzter lokaler Audit</span><strong id="audit-date">–</strong><small>Kein Live-Crawl</small></div></div>
+        <div id="metrics" class="metrics" aria-label="Audit-Kennzahlen"></div>
+        <div class="overview-grid"><section class="panel next-step"><p class="eyebrow">Als Nächstes</p><h2 id="next-title"></h2><p id="next-description"></p><a id="next-link" class="button primary" href="#massnahmen">Maßnahmen ansehen</a></section><section class="panel"><h2>Was wurde geprüft?</h2><ul class="check-list"><li>Indexierung, Canonicals & Sitemap</li><li>Titel, Beschreibungen & Überschriften</li><li>Interne Links, Anker & Erreichbarkeit im Build</li><li>JSON-LD-Syntax, Social-Tags & Bilder</li></ul><p class="muted">HTTP-Status, Core Web Vitals und echte Google-Indexierung sind nicht Bestandteil des lokalen Audits.</p></section></div>
+        <section class="section-block"><div class="section-heading"><h2>Die nächsten Maßnahmen</h2><a href="#massnahmen">Alle ansehen</a></div><div id="top-findings"></div></section>
+        <div class="notice"><strong>Suchdaten sind noch nicht verbunden.</strong> <span id="connection-note">Importiere einen eigenen Google-Search-Console-Export für echte Klicks, Impressionen und Suchchancen.</span> <a href="#suchdaten">CSV importieren</a></div>
+      </section>
+      <section id="massnahmen" class="view" hidden>
+        <p class="eyebrow">Technischer Site-Audit</p><h1>Vom Befund zur Verbesserung.</h1><p class="intro">P1: technische Fehler zuerst. P2: Struktur prüfen. P3: redaktioneller Feinschliff. Keine automatische Änderung deiner Artikel.</p>
+        <div class="toolbar"><label>Priorität<select id="priority"><option value="">Alle Prioritäten</option><option>P1</option><option>P2</option><option>P3</option></select></label><label class="grow">Befunde durchsuchen<input id="finding-search" type="search" placeholder="URL, Prüfung oder Maßnahme …"></label><a class="button" href="massnahmen.csv" download>CSV exportieren ↓</a></div>
+        <p id="finding-count" class="muted" role="status"></p><div id="findings"></div>
+      </section>
+      <section id="seiten" class="view" hidden>
+        <p class="eyebrow">Inhaltsinventar & interne Verlinkung</p><h1>Jede Seite im Blick.</h1><p class="intro">Klicktiefe = kürzester Linkpfad von der Startseite im Build. Weiterleitungen sind nicht Teil des Linkgraphen.</p>
+        <div class="toolbar"><label class="grow">Seite suchen<input id="page-search" type="search" placeholder="Titel oder URL …"></label><label>Indexierung<select id="index-filter"><option value="indexable">Indexierbare Seiten</option><option value="all">Alle Seiten</option><option value="noindex">Noindex-Seiten</option></select></label></div>
+        <p id="page-count" class="muted" role="status"></p><div class="table-wrap" tabindex="0" role="region" aria-label="Seiteninventar"><table><thead><tr><th scope="col">Seite</th><th scope="col">Status</th><th scope="col">Sitemap</th><th scope="col">Eingehende Seiten</th><th scope="col">Klicktiefe</th><th scope="col">Befunde</th><th scope="col">Vorschau</th></tr></thead><tbody id="pages"></tbody></table></div>
+      </section>
+      <section id="suchdaten" class="view" hidden>
+        <p class="eyebrow">Google Search Console · eigene Messwerte</p><h1>Aus Suchdaten werden Chancen.</h1><p class="intro">Keine erfundenen Suchvolumen. Importiere „Suchanfragen.csv“ oder „Seiten.csv“ aus deinem GSC-Leistungsbericht. Deutsch und Englisch werden unterstützt.</p>
+        <div class="panel import-panel"><div><h2>Deinen CSV-Export öffnen</h2><p>Search Console → Leistung → Suchergebnisse → Zeitraum wählen → Exportieren → CSV. ZIP vorher entpacken.</p><p class="muted">Nur im Arbeitsspeicher dieses Tabs. Beim Neuladen gelöscht. Maximal 5 MB. Kein Upload, auch nicht an diesen Server.</p></div><label class="file-label">CSV-Datei auswählen<input id="gsc-file" type="file" accept=".csv,text/csv"></label></div>
+        <div class="toolbar"><label>Zeitraum von (optional)<input id="gsc-start" type="date"></label><label>bis (optional)<input id="gsc-end" type="date"></label><button id="gsc-clear" type="button">Import löschen</button></div>
+        <p id="gsc-message" role="status" class="notice">Noch keine Suchdaten importiert. Suchvolumen, Backlinks und Wettbewerber-Rankings sind ohne externe Datenquelle nicht verfügbar.</p>
+        <div id="gsc-results" hidden><div id="gsc-metrics" class="metrics"></div><div class="section-heading"><h2>Chancen in deinem Export</h2><label>Ansicht<select id="gsc-filter"><option value="opportunities">Position 4–20, ab 100 Impressionen</option><option value="all">Alle importierten Zeilen</option></select></label></div><p class="muted">Heuristik, keine Erfolgsgarantie. Nach Impressionen sortiert. CTR = Klicks ÷ Impressionen. Ø Position wird nach Impressionen gewichtet; Exportsummen entsprechen nicht zwingend den Property-Gesamtwerten.</p><div class="table-wrap" tabindex="0" role="region" aria-label="Search-Console-Daten"><table><thead><tr><th scope="col">Suchanfrage / Seite</th><th scope="col">Klicks</th><th scope="col">Impressionen</th><th scope="col">CTR</th><th scope="col">Ø Position</th><th scope="col">Nächster Schritt</th></tr></thead><tbody id="gsc-rows"></tbody></table></div><p id="gsc-count" class="muted"></p></div>
+      </section>
+      <section id="snippet" class="view" hidden>
+        <p class="eyebrow">Redaktionelle Werkstatt</p><h1>Ein guter erster Eindruck.</h1><p class="intro">Teste Titel und Beschreibung, bevor du sie ins Frontmatter übernimmst. Die Vorschau ist eine Annäherung – Google kann Snippets umschreiben.</p>
+        <label>Vorhandene Seite<select id="snippet-page"></select></label>
+        <div class="snippet-grid"><div class="panel"><label>SEO-Titel<input id="snippet-title" maxlength="250"></label><p id="title-length" class="muted"></p><label>Meta-Description<textarea id="snippet-description" rows="5" maxlength="600"></textarea></label><p id="description-length" class="muted"></p><button id="copy-snippet" type="button" class="primary">Frontmatter-Felder kopieren</button><p id="copy-message" role="status" class="muted"></p></div><div><h2 class="preview-label">Ungefähre Suchvorschau</h2><div class="serp"><span>FranksFinanzcheck</span><p id="preview-url"></p><h3 id="preview-title"></h3><p id="preview-description"></p></div><p class="muted">Nur Vorschau, kein Speichern im Blog. Aussagekräftige Begriffe, tatsächlicher Nutzen und ehrliche Aussagen sind wichtiger als eine feste Zeichenanzahl.</p></div></div>
+      </section>
+    </main>
+    <footer>Eigenständiges SEO-Werkzeug für FranksFinanzcheck. Von OpenSEO-Funktionen inspiriert, kein OpenSEO-Produkt und keine Verbindung zum Anbieter.</footer>
+  </div>
+</div>
+<noscript><p class="notice">Für das interaktive Cockpit bitte JavaScript aktivieren. Die Dateien audit.json und massnahmen.csv enthalten alle Audit-Ergebnisse.</p></noscript>
+</body>
+</html>

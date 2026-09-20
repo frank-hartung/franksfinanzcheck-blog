@@ -1,0 +1,11 @@
+{{- /* Gemeinsame redaktionelle Daten für Article-JSON-LD und Open Graph.
+     Ohne belegtes lastmod bleibt modified gleich published. */ -}}
+{{- $published := .Date -}}
+{{- $modified := $published -}}
+{{- with .Params.lastmod -}}
+  {{- $candidate := time.AsTime . -}}
+  {{- if and ($candidate.After $published) (not ($candidate.After now)) -}}
+    {{- $modified = $candidate -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "published" $published "modified" $modified) -}}

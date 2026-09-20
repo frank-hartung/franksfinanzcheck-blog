@@ -87,3 +87,23 @@ Rechtstexte. Die Inhalte werden redaktionell gepflegt und regelmäßig geprüft;
 Fehlerhinweise sind willkommen und werden eingearbeitet.
 
 © 2026 FranksFinanzcheck · Frank Hartung – alle Rechte vorbehalten.
+
+## Kostenloses SEO-Cockpit
+
+Eigenständiges, lokales Werkzeug mit technischem Audit, Seiten-/Linkinventar,
+Maßnahmenexport, Snippet-Werkstatt und privatem Search-Console-CSV-Import.
+Keine OpenSEO-Anmeldung, keine APIs, keine laufenden Dienstgebühren.
+
+```bash
+npm run seo:audit  # Hugo-Build + Audit → .cache/seo-cockpit/index.html
+npm run seo:serve  # im eigenen Browser: http://127.0.0.1:4174
+npm run seo:check  # gleicher Audit, Exit 1 bei technischen P1-Befunden
+npm run test:seo   # Python- und CSV-Regressionstests
+```
+
+Voraussetzungen: Hugo Extended 0.164.0, Python ≥ 3.11, Node.js/npm.
+Das Cockpit kann nach dem Audit auch direkt als lokale HTML-Datei geöffnet
+werden. Es wird **nicht** mit dem Blog veröffentlicht.
+
+[Bedienung, Datenschutz und Grenzen](docs/ANLEITUNG-SEO-COCKPIT.md) ·
+[SEO-Audit und Maßnahmenplan vom 20.09.2026](docs/SEO-OPTIMIERUNG-2026-09-20.md)

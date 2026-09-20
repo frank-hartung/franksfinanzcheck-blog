@@ -167,7 +167,7 @@
 {{- end -}}
 
 {{- /* ---------- CollectionPage (/posts/- und /pillar/-Hub, nicht Pagination) ---------- */ -}}
-{{- if and (eq .Kind "section") (or (eq .Section "posts") (eq .Section "pillar")) (not (findRE `/page/\d+/?$` .RelPermalink)) -}}
+{{- if and (eq .Kind "section") (or (eq .Section "posts") (eq .Section "pillar")) (not (partial "seo_context.html" .).isPager) -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "CollectionPage"

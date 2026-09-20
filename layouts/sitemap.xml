@@ -1,41 +1,21 @@
-{{- /* ============================================================
-    sitemap.xml – Premium-Sitemap (Agentur-Standard, Stand 11.09.2026)
-    ------------------------------------------------------------
-    WHY (warum überhaupt ein eigenes Template):
-    Die Hugo-Standard-Sitemap listet ALLES, was einen Output hat – diese Site
-    hatte dadurch 161 URLs, davon 116 Tag-Archive (je ein Artikel = Duplikat
-    des Artikels) und die Paginierungs-Kopien. Eine Sitemap, zu 72 % aus
-    dünnen Duplikaten besteht, verschenkt Crawlbudget, verwässert die
-    Prioritäten und fördert Keyword-Kannibalisierung – und genau diese URLs
-    wurden über IndexNow zusätzlich zur Indexierung eingereicht.
-
-    NEU – Money-Pages-Prinzip:
-      · Home                       (priority 1.0, changefreq daily)
-      · alle /posts/-Artikel live   (0.8)
-      · die 6 Pillar-Ratgeber       (0.9)  – wegen `build: list: never`
-                                             fehlen sie in .Data.Pages und
-                                             werden unten ergänzt
-      · Rechtliches + /ueber/       (0.3)  – E-E-A-T-Seiten, gehören ins Netz
-      · AUSGESCHLOSSEN: Tags, Kategorien, Paginierung, 404, Drafts,
-        Zukünftiges, Abgelaufenes, `sitemap: false` / `robotsNoIndex: true`
-
-    LASTMOD-DETERMINISMUS (2. Fix, kritisch):
-      Hugo fällt ohne `lastmod` im Frontmatter auf .Lastmod = Datei-Mtime
-      zurück – im CI der Checkout-/Build-Zeitstempel. Folge: JEDER Deploy
-      (hier mehrmals täglich) meldete Google „heute aktualisiert" für Seiten,
-      an denen nichts geändert war. Frische-Signale sind damit wertlos bis
-      schädlich. Deshalb: rotes lastmod = Frontmatter-Wert, sonst date.
-      Format date-only (Google normalisiert ohnehin auf Tag).
-      Abgesichert durch scripts/schema_seo_gate.py (S7).
-============================================================ */ -}}
+{{- /* Sitemap der zur Indexierung vorgesehenen Originalseiten.
+     Artikel, sechs Themen-Ratgeber, beide Hubs und Vertrauens-/Rechtsseiten.
+     Keine Archive, Pager oder explizit ausgeschlossenen Seiten.
+     lastmod wird ausschließlich aus belegten Redaktionsdaten abgeleitet;
+     ohne Datum auf Einzel-/Rechtsseiten wird es weggelassen.
+     priority/changefreq sind Hinweise, keine Rankingversprechen.
+     Regressionen: schema_seo_gate.py, seo_cockpit.py, seo-pagination.spec.mjs.
+*/ -}}
 {{- $seen := slice -}}
 {{- $out := slice -}}
 {{- /* ---- Hilfsfunktion: Seite würfeln (URL, lastmod, freq, prio) ---- */ -}}
 {{- $legal := slice "impressum" "datenschutz" "ueber" -}}
 {{- /* ---------- 1) Startseite ---------- */ -}}
 {{- with site.Home -}}
-  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "daily" "prio" 1.0) -}}
-  {{- $seen = $seen | append .Permalink -}}
+  {{- if and (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) -}}
+    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "daily" "prio" 1.0) -}}
+    {{- $seen = $seen | append .Permalink -}}
+  {{- end -}}
 {{- end -}}
 {{- /* ---------- 2) Live-Artikel ---------- */ -}}
 {{- range site.RegularPages -}}
@@ -48,15 +28,15 @@
 {{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" -}}
 {{- range $pillars -}}
   {{- with site.GetPage (printf "pillar/%s" .) -}}
-    {{- if or (.Params.sitemap.disable) (in $seen .Permalink) }}{{ continue }}{{ end -}}
+    {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
     {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.9) -}}
     {{- $seen = $seen | append .Permalink -}}
   {{- end -}}
 {{- end -}}
-{{- /* ---------- 4) Pillar-Übersicht + Rechtliches/Über ---------- */ -}}
-{{- range (slice "pillar") -}}
+{{- /* ---------- 4) Pillar-/Blog-Übersicht + Rechtliches/Über ---------- */ -}}
+{{- range (slice "pillar" "posts") -}}
   {{- with site.GetPage (printf "/%s" .) -}}
-    {{- if and .Permalink (not (in $seen .Permalink)) -}}
+    {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
       {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
       {{- $seen = $seen | append .Permalink -}}
     {{- end -}}
@@ -64,7 +44,7 @@
 {{- end -}}
 {{- range $legal -}}
   {{- with site.GetPage (printf "/%s" .) -}}
-    {{- if and .Permalink (not (in $seen .Permalink)) -}}
+    {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
       {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "monthly" "prio" 0.3) -}}
       {{- $seen = $seen | append .Permalink -}}
     {{- end -}}

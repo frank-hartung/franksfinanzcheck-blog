@@ -1,28 +1,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{- /* ============================================================
-     Indexierungs-Steuerung (Premium-Audit 11.09.2026)
-     ------------------------------------------------------------
-     Der alte Code kannte nur „production → index, follow". Damit waren
-     drei Seitenklassen mit indexiert, die einer kleinen Seite das
-     Ranking kosten:
-       · 115 Tag-Archive + 1 Kategorie-Archiv – jedes mit genau EINEM
-         Artikel. Das sind Duplikate der Artikel-Seite (Thin/Doorway-
-         Signal) und sie standen zusätzlich in der Sitemap.
-       · Paginierungs-Seiten (/page/2/ …) – identische Listen-Ausschnitte.
-       · 404.html – Hugo baut sie als normale Seite, also „index, follow".
-     Neu: Archive bleiben CRAWLBAR und werden auf noindex, follow gestellt
-     (nur so sieht Google das noindex und vererbt Linkkraft an die Artikel),
-     die 404 wird komplett aus der Indexierung genommen.
-     Paginierungs-Kopien (/page/2/ …) sind bereits durch ihr selbst-
-     referenzierendes canonical auf die Basis-Seite konsolidiert; der
-     Regex unten fängt zusätzlich alle Fälle, in denen .RelPermalink den
-     /page/-Pfad trägt.
-     Abgesichert durch scripts/schema_seo_gate.py (S6).
-     ============================================================ */ -}}
+{{- /* Indexierung und Canonical nutzen Hugos echte Pager-URL, nicht .RelPermalink. */ -}}
+{{- $seo := partial "seo_context.html" . -}}
 {{- $prod     := hugo.IsProduction | or (eq site.Params.env "production") -}}
 {{- $archiv   := or (eq .Kind "term") (eq .Kind "taxonomy") -}}
-{{- $pager    := findRE `/page/\d+/?$` .RelPermalink -}}
+{{- $pager    := $seo.isPager -}}
 {{- $notFound := hasPrefix .RelPermalink "/404" -}}
 {{- $explicit := eq .Params.robotsNoIndex true -}}
 {{- if and $prod (not $explicit) (not $notFound) -}}
@@ -31,29 +13,13 @@
   {{- else if $pager -}}
 <meta name="robots" content="noindex, follow">
   {{- else -}}
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
   {{- end -}}
 {{- else -}}
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
-{{- /* Title */}}
-<title>{{ if .IsHome -}}
-{{ site.Title }}
-{{- else -}}
-{{- if .Title -}}
-{{- $t := .Title | plainify | replaceRE "\\s+" " " -}}
-{{- if or (lt (len $t) 40) (eq .Section "posts") -}}
-{{- if and (eq .Section "posts") (gt (len $t) 40) -}}
-{{ $t }}
-{{- else -}}
-{{ $t }} | {{ site.Title }}
-{{- end -}}
-{{- else -}}
-{{ $t }}
-{{- end -}}
-{{- end -}}
-{{- end -}}</title>
+<title>{{ partial "seo_title.html" . }}</title>
 
 {{- /* Meta: Description, Author und Canonical sind die indexierungsrelevanten
        Dokument-Metadaten. Das obsolete keywords-Tag wird bewusst nicht mehr
@@ -63,7 +29,7 @@
     {{- .Summary | default (printf "%s - %s" .Title  site.Title) }}{{- else }}
     {{- with site.Params.description }}{{ . }}{{- end }}{{- end }}{{- end -}}">
 <meta name="author" content="{{ (partial "author.html" . ) }}">
-<link rel="canonical" href="{{ if .Params.canonicalURL -}} {{ trim .Params.canonicalURL " " }} {{- else -}} {{ .Permalink }} {{- end }}">
+<link rel="canonical" href="{{ if and .Params.canonicalURL (not $pager) }}{{ trim .Params.canonicalURL " " }}{{ else }}{{ $seo.url }}{{ end }}">
 {{- if site.Params.analytics.google.SiteVerificationTag }}
 <meta name="google-site-verification" content="{{ site.Params.analytics.google.SiteVerificationTag }}">
 {{- end }}
