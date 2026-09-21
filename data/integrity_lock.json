@@ -1,6 +1,5 @@
 {
-  "signed_at": "2026-09-21T18:13:49.703527+00:00",
-  "head": "d192a90",
+
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -155,29 +154,7 @@
     {
       "date": "2026-09-21",
       "art": "set-current",
-      "head": "d192a90",
-      "geaendert": [
-        "layouts/_partials/head.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ea509c1",
-              "datum": "2026-09-21",
-              "betreff": "fix(layout): #338 Alt-Text & Head-DOM-Kinder dauerhaft beheben (#344)"
-            },
-            {
-              "sha": "3a0d5ab",
-              "datum": "2026-09-21",
-              "betreff": "Merge pull request #341 from frank-hartung/arena/01a0c4bc-franksfinanzcheck-blog"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
+
       ]
     }
   ]
