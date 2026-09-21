@@ -2,18 +2,49 @@
 #  LAYOUT-AI (Layout-Automatisierung, Top-Level)
 #
 #  Prüft die gebaute Website automatisch auf Layout-Integrität:
-#    - Statisches Audit (layout_audit.py): interne Links (404-Finder),
-#      Cover-Varianten, Alt-Texte, Schema-JSON-LD, og:image, Meta, H1
+#    - Statisches Audit (layout_audit.py):
+#        · interne Links (404-Finder)
+#        · Cover-Varianten, Alt-Texte im gerenderten Inhalt
+#        · Schema-JSON-LD, og:image, Meta, H1
+#        · DOM-BUDGET für JEDE Seite (dom_audit.py, browser-treu, ohne
+#          Chrome): Kinder je Element, Kinder im <head>, Tiefe, Elemente
+#        · Chunker-Vertrag (Text-Teilung greift nur auf Blockebene)
 #    - Browser-Audit (layout_browser_check.js, Puppeteer/Chrome):
-#      Startseite + 3 neueste Artikel in Desktop & Mobile –
-#      HTTP-Fehler, JS-Fehler, DOM-Größe, Titel/H1, Ladezeit
+#        Startseite + 3 neueste Artikel + die statisch schwersten Seiten
+#        in Desktop & Mobile – HTTP-Fehler, JS-Fehler, DOM-Budgets,
+#        Titel/H1, Ladezeit. Rechnet die Browser-Messwerte gegen die
+#        statischen Parser-Werte (Parser-Drift wird sichtbar).
 #    - Auto-Heilung: fehlende Cover-Varianten werden nachgezogen
 #      (check_covers.py --fix) und committet
-#    - Report: LAYOUT-REPORT.md im Repo
-#    - Bei kritischen Problemen: GitHub-Issue (mit Dedupe)
+#    - Report: LAYOUT-REPORT.md im Repo (gitignored, Lauf-Artefakt)
+#    - Bei Befunden: Issue mit Marker aktualisieren (nie duplizieren),
+#      bei Grün automatisch schließen – kein Dauer-Issue wie #338.
 #
-#  Läuft: wöchentlich (Mo 09:00 MESZ) + manuell. KEIN push-Trigger,
-#  damit keine Endlosschleife mit dem Deploy-Workflow entsteht.
+#  UMBau 21.09.2026 (Issue #338 – „Layout-Automatisierung meldet
+#  Probleme", dauerhafte Behebung):
+#    1. Der Bau läuft jetzt mit `hugo --minify` – ALSO DER AUSGELIEFERTE
+#       Stand (deploy.yml baut identisch). Vorher maß der Audit einen
+#       unminifizierten Baum, den niemand zu sehen bekommt.
+#    2. Kritische Befunde sind kein stiller Report mehr: der Lauf wird
+#       rot UND das Issue trägt die Zahlen. Frühwarnungen bleiben grün
+#       (sie stehen im Report) – sonst entsteht wieder ein Dauer-Alarm.
+#    3. Grün schließt das offene Issue. Ein Issue, das nach der Heilung
+#       offen bleibt, ist ein Alarm ohne Schließpfad (Regel #272).
+#
+#  Läuft: wöchentlich (Mo 09:00 MESZ), manuell – und bei Pull Requests,
+#  die Layout/Struktur anfassen (layouts/, assets/css/, die Audit-Skripte).
+#  KEIN push-Trigger: sonst würde jeder Deploy-Commit den Audit starten und
+#  die Auto-Heilung könnte sich selbst anstoßen (Endlosschleife).
+#
+#  Die Pfadliste enthält bewusst auch die Wachen selbst (Audit-Skripte, ihre
+#  Tests, Annotationen-Übersetzer): Ändert jemand die Prüfung, prüft die
+#  Prüfung das mit. Sonst wäre ein Commit an `test_dom_audit.py` oder
+#  `layout_annotations.py` der einzige, der nie gegen einen echten Lauf läuft.
+#
+#  Pull-Request-Modus: identischer Bau + identischer Audit (inkl. Browser),
+#  aber OHNE Auto-Heilung und OHNE Issue-Pflege – ein PR darf keine Commits
+#  in den Branch schreiben und keine Alarm-Issues erzeugen. Befunde machen
+#  den Lauf rot (Gate); Befundbericht steht in der Job-Summary.
 # ============================================================
 name: Layout-AI
 
@@ -21,6 +52,20 @@ on:
   schedule:
     - cron: "0 7 * * 1"    # Montag 09:00 MESZ (07:00 UTC)
   workflow_dispatch: {}
+  pull_request:
+    paths:
+      - "layouts/**"
+      - "assets/css/**"
+      - "assets/css/extended/**"
+      - "scripts/dom_audit.py"
+      - "scripts/layout_audit.py"
+      - "scripts/layout_browser_check.js"
+      - "scripts/layout_annotations.py"
+      - "scripts/check_covers.py"
+      - "scripts/tests/test_dom_audit.py"
+      - "scripts/tests/test_layout_annotations.py"
+      - "scripts/tests/test_workflow_yaml.py"
+      - ".github/workflows/layout-ai.yml"
 
 permissions:
   contents: write
@@ -34,6 +79,9 @@ jobs:
   layout-audit:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      ISSUE_MARKER: "<!-- layout-ai-report -->"
+      ISSUE_TITLE: "⚠ Layout-Automatisierung: Probleme gefunden"
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -43,21 +91,32 @@ jobs:
         with:
           version: "0.164.0"
 
-      - name: Website bauen
+      - name: "Website bauen (identisch zur Produktion: hugo --minify)"
         env:
           HUGO_JSDELIVR_SHA: ${{ github.sha }}
-        run: hugo --quiet
+        run: hugo --minify --quiet
 
       # ============ STATISCHES AUDIT ============
-      - name: Statisches Layout-Audit (Links, Covers, Schema, Meta)
+      - name: Statisches Layout-Audit (Links, Covers, Alt-Texte, DOM-Budget)
         id: static
         run: |
-          python3 scripts/layout_audit.py || true
-          echo "REPORT_READY=true" >> "$GITHUB_ENV"
+          set +e
+          python3 scripts/layout_audit.py 2>&1 | tee /tmp/layout-audit.log
+          code=${PIPESTATUS[0]}
+          set -e
+          echo "STATIC_EXIT=$code" >> "$GITHUB_ENV"
+          if [ "$code" -eq 0 ]; then
+            echo "✅ Statisches Audit ohne kritische Befunde."
+          else
+            echo "::error::Statisches Layout-Audit: kritische Befunde (Exit $code)."
+          fi
+          # Der Lauf wird erst im letzten Schritt rot: Report, Issue und
+          # Summary sollen auch bei Befunden noch geschrieben werden.
+          exit 0
 
       # ============ AUTO-HEILUNG: Cover nachziehen ============
       - name: Auto-Heilung – fehlende Cover-Varianten nachziehen
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         continue-on-error: true
         run: |
           pip install -q pillow pillow-avif-plugin
@@ -76,11 +135,11 @@ jobs:
       # ============ BROWSER-AUDIT (Puppeteer) ============
       - name: Browser-Audit (Chrome headless – Performance & Fehler)
         id: browser
-        continue-on-error: true
+        if: ${{ !cancelled() }}
         run: |
           # Robuste Einrichtung: apt-get-Update zuerst, Fehler dürfen den
           # Step NICHT crashen (exit 100 bei fehlendem Paket-Index) – der
-          # Browser-Audit ist weich (continue-on-error + sauberer Skip).
+          # Browser-Audit ist weich (sauberer Skip mit Exit 2).
           sudo apt-get update -qq >/dev/null 2>&1 || true
           sudo apt-get install -y -qq libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 \
             libxdamage1 libxkbcommon0 libasound2 libatspi2.0-0 libxcomposite1 libxrandr2 \
@@ -90,48 +149,198 @@ jobs:
           CHROME_DIR=$(npx -y @puppeteer/browsers install chrome-headless-shell@latest 2>/dev/null | grep -oE '/[^ ]+chrome-headless-shell$' | tail -1) || true
           echo "CHROME: $CHROME_DIR"
           if [ -z "$CHROME_DIR" ]; then
-            echo "⚠ Chrome konnte nicht installiert werden – Browser-Audit übersprungen (kein Fehler)."
+            echo "::warning::Chrome konnte nicht installiert werden – Browser-Audit übersprungen (das statische DOM-Budget hat trotzdem JEDE Seite vermessen)."
+            echo "BROWSER_EXIT=2" >> "$GITHUB_ENV"
             exit 0
           fi
-          LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH="$CHROME_DIR" node scripts/layout_browser_check.js \
-            > /tmp/browser-audit.json || echo "BROWSER_ISSUES=true" >> "$GITHUB_ENV"
+          set +e
+          LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH="$CHROME_DIR" \
+            node scripts/layout_browser_check.js > /tmp/browser-audit.json 2>/tmp/browser-audit.log
+          code=$?
+          set -e
+          cat /tmp/browser-audit.log || true
           cat /tmp/browser-audit.json || true
+          echo "BROWSER_EXIT=$code" >> "$GITHUB_ENV"
+          exit 0
 
-      # REPORT: LAYOUT-REPORT.md ist seit dem Premium-Audit 12.09.2026
-      # gitignored und nicht versioniert (Report bleibt als Lauf-Artefakt
-      # im Log). Der frühere „Report veröffentlichen“-Schritt ist weg –
-      # `git add` auf einen ignorierten Pfad bricht die Staging-Phase hart ab.
+      # ============ BEFUNDE ALS ANNOTATIONEN ============
+      # Befunde gehören dorthin, wo entschieden wird: in die Checks-/PR-Ansicht.
+      # Vorher standen sie nur im Log und im Job-Summary – genau deshalb wurde
+      # #338 zum Dauer-Issue. Kritische Befunde werden ::error:: (rot), Früh-
+      # warnungen ::warning:: (gelb, ohne roten Lauf), plus eine ::notice:: mit
+      # den Kennzahlen des Laufs.
+      - name: Befunde als Annotationen veröffentlichen
+        if: ${{ always() }}
+        run: |
+          python3 scripts/layout_annotations.py --dom .cache/layout/dom-audit.json --browser /tmp/browser-audit.json
 
-      # ============ ISSUE BEI KRITISCHEN PROBLEMEN (Dedupe) ============
-      - name: Issue bei kritischen Layout-Problemen
-        if: ${{ !cancelled() && (env.BROWSER_ISSUES == 'true' || failure()) }}
+      # ============ BERICHT IN DIE JOB-SUMMARY ============
+      - name: Bericht in die Job-Summary übernehmen
+        if: ${{ always() }}
+        run: |
+          if [ -f LAYOUT-REPORT.md ]; then
+            {
+              echo "## 📐 LAYOUT-REPORT (Layout-Automatisierung)"
+              echo ""
+              cat LAYOUT-REPORT.md
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f /tmp/browser-audit.json ]; then
+            {
+              echo ""
+              echo "## 🌐 Browser-Audit (Puppeteer)"
+              echo ""
+              echo '```json'
+              cat /tmp/browser-audit.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # ============ ISSUE: AKTUALISIEREN / SCHLIESSEN ============
+      - name: Issue aktualisieren oder schließen (Dedupe über Marker)
+        if: ${{ always() && github.event_name != 'pull_request' }}
         uses: actions/github-script@v7
         continue-on-error: true
         with:
           script: |
             const fs = require('fs');
-            const report = fs.existsSync('LAYOUT-REPORT.md') ? fs.readFileSync('LAYOUT-REPORT.md', 'utf8') : '';
-            const browserAudit = fs.existsSync('/tmp/browser-audit.json') ? JSON.parse(fs.readFileSync('/tmp/browser-audit.json', 'utf8')) : null;
-            let body = '## ⚠️ Layout-Automatisierung meldet Probleme\n\n';
-            if (report) body += '### Statisches Audit\n```\n' + report.slice(0, 2500) + '\n```\n';
-            if (browserAudit && !browserAudit.allOk) {
-              body += '### Browser-Audit\n';
-              for (const p of browserAudit.criticalPages) {
-                body += `- **${p.url}** (${p.viewport}): ${p.issues.join('; ')}\n`;
-              }
-            }
-            const { data: existing } = await github.rest.issues.listForRepo({
+            const marker = process.env.ISSUE_MARKER;
+            const staticExit = Number(process.env.STATIC_EXIT ?? '1');
+            const browserExit = Number(process.env.BROWSER_EXIT ?? '0');
+            // 0 = grün · 1 = Befunde · 2 = Browser-Audit übersprungen (weich)
+            const browserToolError = !(browserExit === 0 || browserExit === 1 || browserExit === 2);
+            const green = staticExit === 0 && (browserExit === 0 || browserExit === 2);
+
+            const report = fs.existsSync('LAYOUT-REPORT.md')
+              ? fs.readFileSync('LAYOUT-REPORT.md', 'utf8') : '_Kein Report erzeugt._';
+            let browser = null;
+            try { browser = JSON.parse(fs.readFileSync('/tmp/browser-audit.json', 'utf8')); } catch (e) {}
+            let browserLog = '';
+            try { browserLog = fs.readFileSync('/tmp/browser-audit.log', 'utf8').slice(0, 2000); } catch (e) {}
+
+            const { data: open } = await github.rest.issues.listForRepo({
               owner: context.repo.owner, repo: context.repo.repo,
-              state: 'open', per_page: 50,
+              state: 'open', per_page: 100,
             });
-            const dup = existing.find(i => i.title.includes('Layout-Automatisierung') && !i.pull_request);
-            if (dup) {
-              console.log('Issue existiert bereits: #' + dup.number);
+            // Dedupe über Marker ODER unseren festen Titel: So übernimmt die
+            // Automatik auch Issues, die eine ältere Workflow-Version ohne
+            // Marker angelegt hat (genau der Fall #338). Ohne diesen Zweig
+            // bliebe der alte Alarm offen UND der neue Lauf legte einen
+            // zweiten an – zwei Alarme für einen Befund.
+            const title = (process.env.ISSUE_TITLE || '').trim();
+            const existing = open.filter(i => !i.pull_request
+              && ((i.body || '').includes(marker) || (i.title || '').trim() === title));
+
+            if (green) {
+              for (const issue of existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `${marker}\n✅ **Layout-Automatisierung grün** `
+                    + `(${new Date().toISOString()}, Lauf [${context.runId}]`
+                    + `(${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})):\n`
+                    + `keine kaputten Links, keine fehlenden Cover, DOM-Budget und `
+                    + `Chunker-Vertrag auf allen Seiten eingehalten`
+                    + (browserExit === 2 ? ' (Browser-Audit an diesem Lauf übersprungen).' : ' (inkl. Browser-Audit).')
+                    + '\n\nIssue wird automatisch geschlossen.',
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: issue.number, state: 'closed', state_reason: 'completed',
+                });
+                console.log(`✅ Issue #${issue.number} geschlossen (Audit grün).`);
+              }
+              if (!existing.length) console.log('✅ Audit grün, kein offenes Issue vorhanden.');
               return;
             }
+
+            const parts = [
+              marker,
+              '## ⚠️ Layout-Automatisierung meldet Probleme', '',
+              `**Lauf:** [${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
+                + ` · **Commit:** \`${context.sha.slice(0, 8)}\``,
+              `**Statisches Audit:** Exit ${staticExit} · **Browser-Audit:** `
+                + (browserExit === 2 ? 'übersprungen (kein Chrome)' : `Exit ${browserExit}`),
+              '',
+            ];
+            if (staticExit !== 0) {
+              parts.push('### Statisches Audit (vollständiger LAYOUT-REPORT)');
+              parts.push('```');
+              parts.push(report.slice(0, 4000));
+              parts.push('```', '');
+            }
+            if (browser && browser.criticalPages && browser.criticalPages.length) {
+              parts.push('### Browser-Audit');
+              for (const p of browser.criticalPages) {
+                parts.push(`- **${p.url}** (${p.viewport}): ${p.issues.join('; ')}`);
+              }
+              parts.push('');
+            }
+            if (browser && browser.parserCheck && browser.parserCheck.drift.length) {
+              parts.push('### Parser-Drift (statischer Audit stimmt nicht mit dem Browser)');
+              for (const d of browser.parserCheck.drift.slice(0, 5)) {
+                parts.push(`- ${d.url} (${d.viewport}): ${d.drift.join('; ')}`);
+              }
+              parts.push('');
+            }
+            if (browserToolError) {
+              parts.push('### Werkzeugfehler (fail-closed)');
+              parts.push('Der Browser-Audit ist nicht sauber durchgelaufen – '
+                + 'der Lauf ist rot, obwohl oben ggf. keine Befunde stehen:');
+              parts.push('```');
+              parts.push(browserLog || '(kein Log)');
+              parts.push('```', '');
+            }
+            parts.push(`<sub>Report-Artefakt: \`LAYOUT-REPORT.md\` (gitignored) · `
+              + `Zahlen: \`.cache/layout/dom-audit.json\` · `
+              + `Budget-Quelle: \`scripts/dom_audit.py\`</sub>`);
+            const body = parts.join('\n');
+
+            if (existing.length) {
+              const issue = existing[0];
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number, body,
+              });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `${marker}\n🔄 Befund aktualisiert (Lauf [${context.runId}]`
+                  + `(${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})).`,
+              });
+              console.log(`🔄 Issue #${issue.number} aktualisiert.`);
+              for (const dup of existing.slice(1)) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: dup.number, state: 'closed', state_reason: 'duplicate',
+                });
+              }
+              return;
+            }
+
             await github.rest.issues.create({
               owner: context.repo.owner, repo: context.repo.repo,
-              title: '⚠ Layout-Automatisierung: Probleme gefunden',
-              body: body,
+              title: process.env.ISSUE_TITLE,
+              body,
             });
             console.log('✅ Issue erstellt.');
+
+      # ============ FAIL-CLOSED: ROTER LAUF BEI BEFUNDEN ============
+      - name: Lauf rot stellen, wenn Befunde offen sind
+        if: ${{ always() }}
+        run: |
+          static_exit="${STATIC_EXIT:-1}"
+          browser_exit="${BROWSER_EXIT:-0}"
+          fail=0
+          if [ "$static_exit" != "0" ]; then
+            echo "::error::Statisches Layout-Audit: kritische Befunde (Exit $static_exit) – Details in LAYOUT-REPORT.md und im Issue."
+            fail=1
+          fi
+          if [ "$browser_exit" = "1" ]; then
+            echo "::error::Browser-Audit: Befunde auf den geprüften Seiten (Details im Issue)."
+            fail=1
+          elif [ "$browser_exit" != "0" ] && [ "$browser_exit" != "2" ]; then
+            echo "::error::Browser-Audit ist mit Werkzeugfehler abgebrochen (Exit $browser_exit) – fail-closed."
+            fail=1
+          fi
+          exit $fail

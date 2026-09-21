@@ -1,0 +1,93 @@
+{{- /* ============================================================
+    TAXONOMIE-ÜBERSICHT (/tags/, /categories/) – gruppiert
+    ------------------------------------------------------------
+    WARUM (Issue #338, 21.09.2026):
+    Das Theme rendert ALLE Begriffe in EIN `<ul class="terms-tags">`.
+    Beim Stand von 136 Tags hatte dieses eine Element damit 136 direkte
+    Kinder und 681 Elemente im Teilbaum – Lighthouse warnt ab 60 Kindern
+    („Avoid an excessive DOM size"), und für Leser war es eine einzige
+    unstrukturierte Wand. Aufgefallen ist das nie, weil der Browser-Audit
+    nur Startseite + 3 neueste Artikel prüfte (jetzt: scripts/dom_audit.py
+    vermisst jede Seite).
+
+    Die Übersicht ist jetzt nach Anfangsbuchstaben gruppiert:
+      · jede Gruppe ist eine eigene Liste → kein Element reißt das Budget,
+      · jede Gruppe hat eine echte <h2>-Überschrift mit Sprungmarke
+        (Struktur für Screenreader + assistierte Navigation),
+      · Optik unverändert: dieselben Chips (`terms-tags`), dieselbe
+        Zählung als Hochzahl.
+    Die Klassen sind identisch mit denen des Themes – ein Theme-Update
+    bricht hier nichts.
+============================================================ */ -}}
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+{{- end }}
+
+{{- /* Anker: `anchorize` (nicht `urlize`) – es erzeugt die ID, wie Goldmark
+       sie für Überschriften bildet: Umlaute bleiben Buchstaben, nichts wird
+       prozent-kodiert. Mit `urlize` hieße die Gruppe „Ä" `term-%C3%A4`,
+       während der Sprunglink `#term-%C3%A4` beim Browser dekodiert wird und
+       dann nicht mehr passt. Beide Stellen nutzen dieselbe Variable, die
+       Zeichenketten sind also garantiert identisch. */ -}}
+{{- /* Begriffe alphabetisch holen und nach erstem Zeichen gruppieren.
+       `Alphabetical` liefert eine sortierte Map – die Gruppierung erhält
+       damit automatisch die Reihenfolge A → Z (Umlaute sortieren wie im
+       Theme: Ä/Ö/Ü hinter A/O/U, Zahlen und Sonderzeichen zuerst). */ -}}
+{{- $type := .Type -}}
+{{- $terms := .Data.Terms.Alphabetical -}}
+{{- $groups := dict -}}
+{{- $order := slice -}}
+{{- range $terms -}}
+    {{- $name := .Name -}}
+    {{- $letter := substr (upper $name) 0 1 -}}
+    {{- if not (in $order $letter) -}}
+        {{- $order = $order | append $letter -}}
+    {{- end -}}
+    {{- $bucket := index $groups $letter | default slice -}}
+    {{- $bucket = $bucket | append . -}}
+    {{- $groups = merge $groups (dict $letter $bucket) -}}
+{{- end -}}
+
+{{- if gt (len $terms) 0 -}}
+<nav class="terms-index" aria-label="Sprungmarken zu den Anfangsbuchstaben">
+    {{- range $order }}
+    <a href="#term-{{ . | anchorize }}">{{ . }}</a>
+    {{- end }}
+</nav>
+{{- end }}
+
+{{- range $order -}}
+    {{- $letter := . -}}
+    {{- $bucket := index $groups $letter -}}
+    <section class="terms-group">
+        <h2 class="terms-group__letter" id="term-{{ $letter | anchorize }}">
+            <span aria-hidden="true">{{ $letter }}</span>
+            <span class="sr-only">Begriffe mit {{ $letter }}</span>
+        </h2>
+        <ul class="terms-tags">
+            {{- range $bucket -}}
+                {{- $count := .Count -}}
+                {{- with site.GetPage (printf "/%s/%s" $type .Name) }}
+                <li>
+                    <a href="{{ .Permalink }}">{{ .LinkTitle }} <sup><strong><sup>{{ $count }}</sup></strong></sup></a>
+                </li>
+                {{- end }}
+            {{- end }}
+        </ul>
+    </section>
+{{- end }}
+
+{{- if eq (len $terms) 0 }}
+<p class="terms-empty">Noch keine Begriffe vorhanden.</p>
+{{- end }}
+
+{{- end }}{{/* end main */ -}}

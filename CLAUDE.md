@@ -38,7 +38,9 @@ npm run test:e2e                     # Build + 25 Playwright-Tests (Desktop+Mobi
 npx playwright test                  # nur Tests (nutzt vorhandenes public/)
 node e2e/design-metrics.mjs          # messbarer Design-Audit (stdout = JSON)
 node e2e/design-shots.mjs            # Screenshots für Design-Reviews → shots/
-python3 scripts/layout_audit.py      # bestehendes statisches Layout-Gate
+python3 scripts/layout_audit.py      # statisches Layout-Gate (Links, Covers, Alt-Texte, DOM-Budget, Chunker-Vertrag)
+python3 scripts/dom_audit.py --top 15 # DOM-Budget jeder Seite (Kinder/Head/Tiefe/Elemente, browser-treu ohne Chrome)
+node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_PATH) – siehe docs/LAYOUT-AUTOMATISIERUNG.md
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 ```

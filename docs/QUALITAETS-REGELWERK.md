@@ -427,6 +427,17 @@ jeder Schreibaktion.
    (Sabotage bleibt eine menschliche Entscheidung). Anlass:
    [Vorfall 19.09.2026](INCIDENT-2026-09-19-integritaets-lock.md) — ein
    vergessener Lock kostete zwei Produktions-Slots (Issue #316).
+
+   Nachgetragen 21.09.2026 (Issue #338, Lehre in
+   [docs/LAYOUT-AUTOMATISIERUNG.md § 8](LAYOUT-AUTOMATISIERUNG.md)): #344 hat
+   `head.html` geheilt und den Lock nicht mit-signiert — `main` lief aus dem
+   Siegel, und weil der Branch-Schutz das Gate nicht verlangt, blieb es
+   unbemerkt; der nächste Content-Engine-Lauf wäre im ersten Schritt hart
+   gestoppt (kein Artikel, kein Slot, Defizit-Alarm). Deshalb: **`--set-current`
+   sagt jetzt, was es zeichnet** (Klasse, Urteil, belegende Commits in der Akte
+   + Zeile in `data/integrity_history.jsonl`), und **`unittest discover` prüft
+   den ausgelieferten Baum gegen sein Siegel** (`RepoSealTests`) — der Befund
+   steht damit dort, wo er vor dem Push gelesen wird, nicht nur im roten Kreuz.
 8. **Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt.** Das PR-Gate
    meldet sich als **`Integritäts-Siegel`**; dieser Name ist ein Vertrag zwischen
    Workflow-Datei und Ruleset (Governance-Regel **C18**: Konstante

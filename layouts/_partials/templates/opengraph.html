@@ -30,9 +30,17 @@
   {{- with $dates.modified }}
     <meta property="article:modified_time" content="{{ .Format $ISO8601 }}">
   {{- end }}
-  {{- range .GetTerms "tags" | first 6 }}
-    <meta property="article:tag" content="{{ .Page.Title | plainify }}">
-  {{- end }}
+  {{- /* HEAD-DOM-BUDGET (Issue #338, 21.09.2026): Die frühere Schleife
+         `article:tag` (bis zu SECHS Meta-Tags pro Artikel) ist ersatzlos
+         entfallen. Sie war reine Wiederholung: dieselben Begriffe stehen
+         als `keywords` im Article-JSON-LD und sichtbar in der Tag-Navigation;
+         kein Konsument wertet OGP-`article:tag` heute noch aus (Facebook
+         liest published_time/section/author, Pinterest og:*). Sie kostete
+         aber sechs direkte Kinder im `<head>` – und der Head lag damit auf
+         Artikel-Seiten bei exakt 60 Kindern, also GENAU auf der
+         Lighthouse-Warngrenze („Avoid an excessive DOM size"). Wer hier
+         wieder Tags anhängt, muss das Budget in scripts/dom_audit.py
+         anpassen – der Layout-Audit prüft es sonst als Frühwarnung. */ -}}
 {{- else }}
   <meta property="og:type" content="website">
 {{- end }}
@@ -60,6 +68,14 @@
     <meta property="og:image" content="{{ .Params.cover.image | absURL }}">
     <meta property="og:image:width" content="{{ $ogW }}">
     <meta property="og:image:height" content="{{ $ogH }}">
+    {{- /* PRÜFUNG #338: `og:image:type` wurde geprüft und BLEIBT.
+           Der Premium-Audit vom 11.09.2026 hat width/height/type bewusst
+           zusammen eingeführt (docs/PREMIUM-AUDIT-2026-09-11.md, Abschnitt
+           2.10); die Maße sind das, was Pinterest/Google auswerten, der Typ
+           ist Vollständigkeit. Bei einem Head-Budget von 52 Kindern kostet
+           er genau an der Grenze ein Kind – die Verkleinerung wird deshalb
+           an der Stelle geholt, die wirklich niemanden interessiert
+           (`article:tag`, oben), nicht an einer dokumentierten Entscheidung. */ -}}
     <meta property="og:image:type" content="{{ if hasSuffix (lower .Params.cover.image) ".png" }}image/png{{ else }}image/jpeg{{ end }}">
     {{- with .Params.cover.alt }}<meta property="og:image:alt" content="{{ . | plainify }}">{{ end }}
   {{- else}}

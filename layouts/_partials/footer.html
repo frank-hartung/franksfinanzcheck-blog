@@ -208,3 +208,8 @@
     });
 </script>
 {{- end }}
+
+{{- /* ANALYTICS + SERVICE WORKER – ans Body-Ende (`#338`).
+       Vorher im <head>; dort reine DOM-Last ohne Nutzen für den ersten Paint.
+       Inhalt + Begründung: layouts/_partials/deferred_scripts.html */ -}}
+{{- partial "deferred_scripts.html" . }}

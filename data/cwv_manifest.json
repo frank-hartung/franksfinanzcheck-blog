@@ -4,22 +4,22 @@
   "build_measured": true,
   "strict_build": true,
   "static": {
-    "total_img_bytes": 37662894,
+    "total_img_bytes": 37644803,
     "count_img": 1403,
     "count_covers": 1379,
     "worst_cover_bytes": 138530
   },
   "public": {
-    "html_files": 380,
+    "html_files": 371,
     "js_files": 5,
     "css_files": 0,
     "js_bytes": 298641,
     "css_bytes": 0,
-    "html_bytes": 28249293,
+    "html_bytes": 27736318,
     "inline_styles": 0,
     "blocking_js": 0,
-    "inline_js": 284,
-    "structured_data_scripts": 41,
+    "inline_js": 413,
+    "structured_data_scripts": 163,
     "inline_scripts_plain": 0,
     "img_nosize": 0
   },

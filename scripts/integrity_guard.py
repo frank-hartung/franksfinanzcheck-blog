@@ -777,6 +777,50 @@ def drift_audit(root: Path = ROOT) -> int:
     return exit_fuer(crit_bad, fest_bad)
 
 
+def set_current(root: Path = ROOT) -> int:
+    """Die bewusste Betreiber-Signatur – sie NENNT, was sie zeichnet.
+
+    Nachgetragen am 21.09.2026 (#338/#344). Vorher schrieb genau dieser Weg
+    keine Herkunft in die Akte, während `--heal` sie immer mit-schreibt – und
+    `--set-current` ist der Weg, den das Gate selbst in seiner Reparaturzeile
+    empfiehlt. Damit war die kommentarlose Neuzeichnung der bequemste und
+    zugleich der einzige Weg ohne Spur: Wer eine gesperrte Kerndatei ändert
+    (wie #344 den `head.html`), konnte den Lock zeichnen, ohne dass im Lock
+    steht, welcher Commit das ausgelöst hat. Gefunden wurde das erst, als
+    `main` deshalb am Gate rot war und der nächste Content-Engine-Lauf in den
+    Hard Stop gelaufen wäre.
+
+    Die Signatur bleibt eine menschliche Entscheidung – aber keine stumme:
+    Klasse, Urteil und die belegenden Commits stehen danach im Lock, und der
+    Vorgang hinterlässt eine Zeile in `data/integrity_history.jsonl`.
+    """
+    lock_pfad = root / "data" / "integrity_lock.json"
+    lock = load_lock(lock_pfad)
+    crit_bad, fest_bad = verify_files(root, lock.get("files", {}))
+    audit = (klassifizieren(root, crit_bad, fest_bad, lock.get("head", ""))
+             if (crit_bad or fest_bad) else [])
+    ergebnis = signieren(root, grund="set-current", audit=audit or None)
+    print(f"🔒 Signiert: {ergebnis['signiert']} Dateien gegen SHA-256 gelockt "
+          f"(HEAD {git_head(root)}).")
+    if not ergebnis["geaendert"]:
+        print("   Kein Drift – die Signatur war schon aktuell.")
+    else:
+        print(f"   Neu gezeichnet ({len(ergebnis['geaendert'])}): "
+              + ", ".join(ergebnis["geaendert"]))
+        for e in audit:
+            if e["pfad"] not in ergebnis["geaendert"]:
+                continue
+            commits = ", ".join(c["sha"] for c in (e.get("commits") or [])[:3]) \
+                or "keine belegten Commits"
+            print(f"   Herkunft: {e['pfad']} [{e['klasse']}, {e['urteil']}] {commits}")
+    historie_schreiben(root, {
+        "date": date.today().isoformat(),
+        "kritisch": len(crit_bad), "fest": len(fest_bad),
+        "modus": "set-current", "geaendert": ergebnis["geaendert"],
+    })
+    return 0
+
+
 def main():
     if SELFTEST_MODE:
         sys.exit(selftest())
@@ -788,13 +832,7 @@ def main():
     print(f"✅ Integrity-Selbsttest: {len(SELFTEST)} Faelle gruen.")
 
     if SET_CURRENT:
-        ergebnis = signieren(ROOT, grund="set-current")
-        print(f"🔒 Signiert: {ergebnis['signiert']} Dateien gegen SHA-256 gelockt "
-              f"(HEAD {git_head(ROOT)}).")
-        if ergebnis["geaendert"]:
-            print(f"   Neu gezeichnet ({len(ergebnis['geaendert'])}): "
-                  + ", ".join(ergebnis["geaendert"]))
-        return
+        sys.exit(set_current(ROOT))
 
     if ADD_PATH:
         rp = ROOT / ADD_PATH

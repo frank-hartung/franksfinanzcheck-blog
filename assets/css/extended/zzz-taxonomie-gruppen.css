@@ -1,0 +1,71 @@
+/* ============================================================
+   TAXONOMIE-ÜBERSICHT – Gruppierung nach Anfangsbuchstaben
+   (Issue #338, 21.09.2026)
+
+   Die Themestile für `.terms-tags` (Chips, Flex-Wrap, Abstände)
+   bleiben unangetastet; hier kommt nur die Struktur der neuen
+   Gruppen (layouts/taxonomy.html) dazu:
+   · Buchstaben-Überschrift mit Marken-Akzent,
+   · Sprungmarken-Leiste für lange Listen (136 Tags im Bestand),
+   · identische Optik in Hell und Dunkel (nur Variablen, keine
+     festen Farben – Dark-Mode-Regel aus CLAUDE.md).
+   ============================================================ */
+
+/* ---------- Sprungmarken-Leiste (A–Z) ---------- */
+.terms-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em 0.6em;
+    margin: var(--content-gap) 0 0;
+    font-weight: 600;
+}
+
+.terms-index a {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 2px 6px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color 0.1s, border-color 0.1s;
+}
+
+.terms-index a:hover,
+.terms-index a:focus-visible {
+    color: var(--primary);
+    border-color: var(--ff-emerald, var(--border));
+}
+
+/* ---------- Gruppen ---------- */
+.terms-group {
+    margin-top: calc(var(--content-gap) * 1.2);
+}
+
+.terms-group__letter {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+/* Trennlinie hinter dem Buchstaben – dezent, in beiden Themes gültig */
+.terms-group__letter::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.terms-group .terms-tags {
+    margin-top: 0.7em;
+}
+
+/* `.sr-only` ist NICHT hier definiert – die Klasse existiert bereits
+   in assets/css/extended/custom.css (dort gepflegt, eine Wahrheit). */
