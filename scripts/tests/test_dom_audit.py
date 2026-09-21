@@ -263,6 +263,61 @@ class LayoutAuditIntegrationTests(unittest.TestCase):
         layout_audit.check_alts()
         self.assertFalse(layout_audit.WARN)
 
+    # ---------- hreflang-Hygiene (Issue #338) ----------
+
+    def _page_mit_links(self, rel, links):
+        (self.base / rel).parent.mkdir(parents=True, exist_ok=True)
+        (self.base / rel).write_text(
+            PAGE_KOPF.replace("</head>", "".join(links) + "</head>")
+            + "<p>ok</p></body></html>", encoding="utf-8")
+
+    def test_hreflang_doppelt_ist_kritisch(self):
+        self._page_mit_links("posts/a/index.html", [
+            '<link rel="canonical" href="https://example.org/posts/a/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/posts/a/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/posts/a/">',
+        ])
+        layout_audit.check_hreflang()
+        self.assertTrue(any("doppelte" in line for line in layout_audit.CRITICAL),
+                        layout_audit.CRITICAL)
+
+    def test_hreflang_selbstreferenz_muss_canonical_treffen(self):
+        self._page_mit_links("posts/b/index.html", [
+            '<link rel="canonical" href="https://example.org/posts/b/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/posts/">',
+        ])
+        layout_audit.check_hreflang()
+        self.assertTrue(any("Canonical" in line for line in layout_audit.CRITICAL),
+                        layout_audit.CRITICAL)
+
+    def test_hreflang_pager_abweichung_ist_warnung_nicht_kritisch(self):
+        # Geerbt aus dem versiegelten head.html: Abschnitts-Wurzel statt Seite.
+        self._page_mit_links("categories/x/page/2/index.html", [
+            '<link rel="canonical" href="https://example.org/categories/x/page/2/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/categories/x/">',
+            '<link rel="alternate" hreflang="x-default" '
+            'href="https://example.org/categories/x/page/2/">',
+        ])
+        layout_audit.check_hreflang()
+        self.assertFalse(layout_audit.CRITICAL)
+        self.assertTrue(any("Paginierungsseiten" in line for line in layout_audit.WARN),
+                        layout_audit.WARN)
+
+    def test_hreflang_sauber_ist_gruen(self):
+        self._page_mit_links("posts/c/index.html", [
+            '<link rel="canonical" href="https://example.org/posts/c/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/posts/c/">',
+            '<link rel="alternate" hreflang="x-default" href="https://example.org/posts/c/">',
+        ])
+        self._page_mit_links("page/1/index.html", [
+            '<link rel="canonical" href="https://example.org/">',
+            '<link rel="alternate" hreflang="de" href="https://example.org/">',
+        ])
+        layout_audit.check_hreflang()
+        self.assertFalse(layout_audit.CRITICAL)
+        self.assertFalse(layout_audit.WARN)
+        self.assertTrue(any("hreflang" in line for line in layout_audit.OK))
+
     def test_dekoratives_leeres_alt_ist_erlaubt(self):
         (self.base / "posts" / "a" / "index.html").write_text(
             PAGE_KOPF + '<article><img src=x.svg alt="" aria-hidden="true">'

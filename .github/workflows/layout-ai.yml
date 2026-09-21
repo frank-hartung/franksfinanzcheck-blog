@@ -153,6 +153,17 @@ jobs:
           echo "BROWSER_EXIT=$code" >> "$GITHUB_ENV"
           exit 0
 
+      # ============ BEFUNDE ALS ANNOTATIONEN ============
+      # Befunde gehören dorthin, wo entschieden wird: in die Checks-/PR-Ansicht.
+      # Vorher standen sie nur im Log und im Job-Summary – genau deshalb wurde
+      # #338 zum Dauer-Issue. Kritische Befunde werden ::error:: (rot), Früh-
+      # warnungen ::warning:: (gelb, ohne roten Lauf), plus eine ::notice:: mit
+      # den Kennzahlen des Laufs.
+      - name: Befunde als Annotationen veröffentlichen
+        if: ${{ always() }}
+        run: python3 scripts/layout_annotations.py \
+          --dom .cache/layout/dom-audit.json --browser /tmp/browser-audit.json
+
       # ============ BERICHT IN DIE JOB-SUMMARY ============
       - name: Bericht in die Job-Summary übernehmen
         if: ${{ always() }}

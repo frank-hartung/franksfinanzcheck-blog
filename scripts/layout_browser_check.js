@@ -32,13 +32,36 @@
  * Attribute. Unterschiede darüber hinaus sind Parser-Drift und werden als
  * Befund gemeldet.
  *
- * Ausgabe: JSON auf stdout + Exit 0 (ok) / 1 (Fehler oder Budget-Warnung).
+ * SEVERITY (Lehre aus #338): Ein Dauer-Alarm ist kein Alarm. Deshalb sind
+ * die Stufen getrennt:
+ *   - HARTER Befund → Exit 1: Lighthouse-Grenze überschritten, HTTP-/JS-Fehler,
+ *     fehlender Titel/H1, Parser-Drift jenseits der Toleranz.
+ *   - FRÜHWARNUNG → bleibt grün: Schwelle im Report/JSON, als `::warning::`
+ *     sichtbar, aber ohne roten Lauf und ohne Issue. Sonst wäre jede
+ *     ehrliche Vorwarnung ein Fehlalarm – genau das war #338.
+ *
+ * Ausgabe: JSON auf stdout + Exit 0 (ok oder nur Frühwarnungen) / 1 (harte
+ * Befunde) / 2 (kein Chrome bzw. Werkzeugfehler).
  *
  * Aufruf:
  *   LAYOUT_BASE=/pfad/zum/public LAYOUT_PORT=8099 CHROME_PATH=... \
  *     node scripts/layout_browser_check.js
  */
-const puppeteer = require('puppeteer-core');
+const SELFTEST = process.argv.includes('--selftest');
+// Nur im echten Lauf laden: der Selftest (Budget-/Severity-Vertrag) muss ohne
+// installierten Browser und ohne Chrome laufen können – sonst prüft ihn nie
+// jemand, weil die Testumgebung kein Puppeteer hat.
+let puppeteer = null;
+if (!SELFTEST) {
+  try {
+    puppeteer = require('puppeteer-core');
+  } catch (err) {
+    console.error('Werkzeugfehler: puppeteer-core nicht installiert (' + err.message
+      + ') – Browser-Audit übersprungen (Exit 2, das statische DOM-Budget hat '
+      + 'jede Seite vermessen).');
+    process.exit(2);
+  }
+}
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -116,6 +139,83 @@ function describe(el) {
   return parts.join(' > ');
 }
 
+/**
+ * Budget-Bewertung als reine Funktion (testbar ohne Browser).
+ * Rückgabe: { issues, warnings } – nur `issues` machen den Lauf rot.
+ */
+function evaluateBudgets(metrics, budgets) {
+  const issues = [];
+  const warnings = [];
+  const b = budgets.fruehwarnung;
+  const l = budgets.lighthouse;
+  const check = (value, warn, limit, make) => {
+    if (value > limit) issues.push(make(limit, 'Lighthouse-Grenze'));
+    else if (value > warn) warnings.push(make(warn, 'Frühwarnung'));
+  };
+  check(metrics.count, b.elements, l.elements,
+    (g, kind) => `DOM ${metrics.count} > ${g} Elemente (${kind})`);
+  check(metrics.depth, b.depth, l.depth,
+    (g, kind) => `DOM-Tiefe ${metrics.depth} > ${g} (${kind})`);
+  check(metrics.maxKids, b.children, l.children,
+    (g, kind) => `Max. Kinder ${metrics.maxKids} > ${g} (${kind}) – `
+      + `Element: ${metrics.maxKidsElement || 'unbekannt'}`);
+  check(metrics.headKids, b.head_children, l.head_children,
+    (g, kind) => `Head-Kinder ${metrics.headKids} > ${g} (${kind}) – `
+      + 'Element: html > head');
+  return { issues, warnings };
+}
+
+/** Selftest des Severity-Vertrags – läuft ohne Chrome und ohne Netz. */
+function runSelftest() {
+  const budgets = FALLBACK.budgets;
+  // Basis: deutlich unter allen Schwellen – dann wird je Fall genau EINE
+  // Metrik verschoben, und die Erwartung ist eindeutig.
+  const basis = { count: 100, depth: 5, maxKids: 10, headKids: 20,
+                  maxKidsElement: 'html > head' };
+  const fall = (over) => ({ ...basis, ...over });
+  const lighthouse = budgets.lighthouse;
+  const frueh = budgets.fruehwarnung;
+  const faelle = [
+    ['unter allen Schwellen grün', basis, 0, 0],
+    ['exakt an der Lighthouse-Grenze: Frühwarnung, nicht rot',
+      fall({ count: lighthouse.elements }), 0, 1],
+    ['ein Element über der Lighthouse-Grenze ist rot',
+      fall({ count: lighthouse.elements + 1 }), 1, 0],
+    ['Elemente in der Frühwarnung bleiben grün',
+      fall({ count: frueh.elements + 1 }), 0, 1],
+    ['Tiefe über der Lighthouse-Grenze ist rot',
+      fall({ depth: lighthouse.depth + 1 }), 1, 0],
+    ['Tiefe in der Frühwarnung bleibt grün',
+      fall({ depth: frueh.depth + 1 }), 0, 1],
+    ['Kinder über der Lighthouse-Grenze sind rot',
+      fall({ maxKids: lighthouse.children + 1 }), 1, 0],
+    ['Kinder in der Frühwarnung bleiben grün',
+      fall({ maxKids: frueh.children + 1 }), 0, 1],
+    ['Head über der Lighthouse-Grenze ist rot',
+      fall({ headKids: lighthouse.head_children + 1 }), 1, 0],
+    ['Head in der Frühwarnung bleibt grün',
+      fall({ headKids: frueh.head_children + 1 }), 0, 1],
+  ];
+  let fehler = 0;
+  for (const [name, metrics, wantIssues, wantWarnings] of faelle) {
+    const { issues, warnings } = evaluateBudgets(metrics, budgets);
+    if (issues.length !== wantIssues || warnings.length !== wantWarnings) {
+      fehler++;
+      console.error(`✗ ${name}: issues=${issues.length} (erwartet `
+        + `${wantIssues}), warnings=${warnings.length} (erwartet ${wantWarnings})`);
+    }
+  }
+  if (fehler) {
+    console.error(`Selbsttest FEHLGESCHLAGEN (${fehler} von ${faelle.length})`);
+    process.exit(1);
+  }
+  console.log(JSON.stringify({
+    selftest: 'ok', cases: faelle.length,
+    vertrag: 'nur Lighthouse-Grenzen und Fehler sind rot, Frühwarnungen grün',
+  }));
+  process.exit(0);
+}
+
 async function auditPage(browser, url, viewport, ctx) {
   const page = await browser.newPage();
   await page.setViewport(viewport);
@@ -170,35 +270,10 @@ async function auditPage(browser, url, viewport, ctx) {
   });
   await page.close();
 
-  const issues = [];
+  const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets);
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
-
-  const b = ctx.budgets.fruehwarnung;
-  const l = ctx.budgets.lighthouse;
-  if (metrics.count > l.elements) {
-    issues.push(`DOM ${metrics.count} > ${l.elements} Elemente (Lighthouse-Grenze)`);
-  } else if (metrics.count > b.elements) {
-    issues.push(`DOM ${metrics.count} > ${b.elements} Elemente (Frühwarnung)`);
-  }
-  if (metrics.depth > l.depth) {
-    issues.push(`DOM-Tiefe ${metrics.depth} > ${l.depth} (Lighthouse-Grenze)`);
-  } else if (metrics.depth > b.depth) {
-    issues.push(`DOM-Tiefe ${metrics.depth} > ${b.depth} (Frühwarnung)`);
-  }
-  if (metrics.maxKids > l.children) {
-    issues.push(`Max. Kinder ${metrics.maxKids} > ${l.children} (Lighthouse-Grenze) – `
-      + `Element: ${metrics.maxKidsElement || 'unbekannt'}`);
-  } else if (metrics.maxKids > b.children) {
-    issues.push(`Max. Kinder ${metrics.maxKids} > ${b.children} (Frühwarnung) – `
-      + `Element: ${metrics.maxKidsElement || 'unbekannt'}`);
-  }
-  if (metrics.headKids > l.head_children) {
-    issues.push(`Head-Kinder ${metrics.headKids} > ${l.head_children} (Lighthouse-Grenze) – Element: html > head`);
-  } else if (metrics.headKids > b.head_children) {
-    issues.push(`Head-Kinder ${metrics.headKids} > ${b.head_children} (Frühwarnung) – Element: html > head`);
-  }
   if (!title) issues.push('kein <title>');
   if (!h1) issues.push('kein <h1>');
 
@@ -220,6 +295,10 @@ async function auditPage(browser, url, viewport, ctx) {
     }
   }
 
+  if (drift.length) {
+    issues.push(...drift.map(d => `Parser-Drift: ${d}`));
+  }
+
   return {
     url,
     viewport: viewport.width + 'x' + viewport.height,
@@ -237,6 +316,7 @@ async function auditPage(browser, url, viewport, ctx) {
     title: title.slice(0, 60),
     h1,
     issues,
+    warnings,
   };
 }
 
@@ -264,6 +344,10 @@ function buildSampleUrls(domAudit) {
   return { urls, slugs, risk: risk.map(r => r.rel) };
 }
 
+if (SELFTEST) {
+  runSelftest();
+}
+
 (async () => {
   if (!CHROME) { console.error('CHROME_PATH nicht gesetzt'); process.exit(2); }
   const domAudit = loadDomAudit();
@@ -285,6 +369,7 @@ function buildSampleUrls(domAudit) {
   server.close();
 
   const critical = results.filter(r => r.issues.length > 0);
+  const warnPages = results.filter(r => r.warnings.length > 0);
   const drift = results.filter(r => r.parserDrift.length > 0);
   const maxChildrenResult = results.reduce((max, cur) =>
     cur.maxChildren > max.maxChildren ? cur : max, results[0]);
@@ -310,7 +395,11 @@ function buildSampleUrls(domAudit) {
     criticalPages: critical.map(r => ({
       url: r.url, viewport: r.viewport, issues: r.issues,
     })),
+    warningPages: warnPages.map(r => ({
+      url: r.url, viewport: r.viewport, warnings: r.warnings,
+    })),
     allOk: critical.length === 0,
+    greenWithWarnings: critical.length === 0 && warnPages.length > 0,
   };
   console.log(JSON.stringify(summary, null, 2));
   process.exit(critical.length ? 1 : 0);

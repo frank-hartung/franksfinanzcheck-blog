@@ -17,7 +17,9 @@ derselbe Fehlalarm nicht wiederkommt.
 | **Statisch** (kein Browser, ohne Netz) | `scripts/dom_audit.py` | **jede** gebaute Seite | in `layout_audit.py` und damit in jedem Layout-AI-Lauf |
 | **Browser** (Chrome headless) | `scripts/layout_browser_check.js` | Startseite + 3 neueste Artikel + die statisch schwersten Seiten, je Desktop & Mobile | im Layout-AI-Workflow (weich: fehlt Chrome, wird übersprungen) |
 
-`layout_audit.py` vereint beides im Report `LAYOUT-REPORT.md` (gitignored,
+`layout_audit.py` prüft intern: interne Links, Cover-Varianten, Alt-Texte,
+Schema/og/Meta/H1, **hreflang-Hygiene** (siehe § 3.1), DOM-Budget und
+Chunker-Vertrag. Es vereint beides im Report `LAYOUT-REPORT.md` (gitignored,
 Lauf-Artefakt) und legt die Maschinenzahlen unter
 `.cache/layout/dom-audit.json` ab. Genau diese Datei liest der Browser-Audit:
 er vergleicht seine echten Browsermesswerte mit den Parserwerten (Toleranz
@@ -28,8 +30,8 @@ prüft sich der Parser bei jedem Lauf selbst mit – gegen einen echten Browser.
 
 | Metrik | Frühwarnung | Lighthouse-Grenze | Ist (21.09.2026) |
 |---|---|---|---|
-| Kinder eines Elements | 54 | 60 | **51** (`html > head`) |
-| Kinder im `<head>` | 52 | 58 | **51** |
+| Kinder eines Elements | 54 | 60 | **50** (`html > head`) |
+| Kinder im `<head>` | 52 | 58 | **50** |
 | Tiefe | 28 | 32 | **12** |
 | Elemente je Seite | 1100 | 1400 | **969** |
 
@@ -45,7 +47,7 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
 |---|---|---|---|
 | 1 | Audit-Sample: nur Startseite + 3 neueste Artikel | Die Tag-Übersicht `/tags/` mit **136 direkten Kindern** in *einer* Liste war nie im Blick | `dom_audit.py` vermisst **jede** Seite; `/tags/` ist jetzt nach Anfangsbuchstaben gruppiert (max. 21 Kinder je Liste) |
 | 2 | Gemessen wurde `hugo --quiet` (unminifiziert) | Zahlen entsprachen nicht dem ausgelieferten Stand | Bau im Workflow + Vermessung jetzt `hugo --minify` wie in `deploy.yml` |
-| 3 | Budget war unerreichbar („Head 59 > 58") | Dauer-Fehlalarm auf praktisch jeder Artikelseite | Head strukturell verkleinert (60 → 51) **und** Budget begründet (`52`/`58`) – die Zahl ist jetzt template-, nicht redaktionsabhängig |
+| 3 | Budget war unerreichbar („Head 59 > 58") | Dauer-Fehlalarm auf praktisch jeder Artikelseite | Head strukturell verkleinert (60 → 50) **und** Budget begründet (`52`/`58`) – die Zahl ist jetzt template-, nicht redaktionsabhängig |
 | 4 | Alt-Text-Warnung kam aus dem Frontmatter | Der gemeldete Beitrag ist ein **Entwurf ohne Cover** – ein Bild ohne Bild hat keinen Alt-Text | Prüfung läuft am **gebauten Stand** (Artikel-Inhalt); Frontmatter nur für *veröffentlichte* Beiträge; Entwürfe erscheinen als Hinweiszeile, nicht als Warnung |
 | 5 | Statischer Audit konnte kein Issue auslösen (`|| true`) und das Issue wurde nur *erstellt*, nie aktualisiert/geschlossen | Befunde verpufften; ein einmal geöffnetes Issue blieb für immer offen | Workflow wertet `STATIC_EXIT`/`BROWSER_EXIT` aus, wird bei Befunden rot, **aktualisiert** das Issue (Marker) und **schließt** es, sobald der Lauf grün ist |
 
@@ -53,7 +55,7 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
 
 ## 3. Was am Bau geändert wurde
 
-### 3.1 Head-DOM: 60 → 51 Kinder (Artikel-Seiten)
+### 3.1 Head-DOM: 60 → 50 Kinder (Artikel-Seiten)
 
 * **`article:tag` entfernt** (`layouts/_partials/templates/opengraph.html`).
   Bis zu **sechs** Meta-Tags pro Artikel, die nachweislich kein Konsument mehr
@@ -67,8 +69,19 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
   `ffConsentChange`-Horcher bleibt.
 * **`apple-mobile-web-app-status-bar-style` entfernt** – der gesetzte Wert
   `default` *ist* das Plattformverhalten, das Tag änderte nichts.
+* **Doppelte hreflang-Selbstreferenz entfernt** (`extend_head.html`). Das
+  versiegelte `head.html` setzt über `range .AllTranslations` bereits
+  `<link rel=alternate hreflang=de …>`; `extend_head.html` setzte dieselbe
+  Zeile noch einmal – auf **jeder** Seite doppelt, auf 12 Paginierungsseiten
+  sogar mit zwei verschiedenen Zielen (Abschnitts-Wurzel vs. Seiten-URL).
+  Zwei Werte für eine Sprache sind ein Widerspruch und werden ignoriert.
+  Jetzt gilt: genau **eine** Angabe je Sprache, und sie zeigt auf das
+  Canonical – gesetzt wird sie nur, wenn `head.html` sie nicht schon
+  (identisch) setzt. Neue Wache: `check_hreflang()` in `layout_audit.py`
+  (Doppelung = kritisch, fehlende Selbstreferenz = kritisch, Pager-Abweichung
+  = Warnung).
 * **Geprüft und bewusst behalten:** `og:image:type` (dokumentierte Entscheidung
-  aus `docs/PREMIUM-AUDIT-2026-09-11.md` § 2.10), Maße, Alt, hreflang,
+  aus `docs/PREMIUM-AUDIT-2026-09-11.md` § 2.10), Maße, Alt,
   Verification-Tags, Twitter-Cards, Preloads.
 * Nicht angefasst: `layouts/_partials/head.html` ist im Integritäts-Lock
   **KRITISCH-versiegelt** (menschliche Signatur nötig). Die Verkleinerung
@@ -125,15 +138,16 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 | Parser gegen **parse5** (`scriptingEnabled: true` = Browser mit JS), alle 371 gebauten Seiten | **0 Abweichungen** bei Elementen, Tiefe, max. Kindern, Head-Kindern |
 | `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
 | Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json`; Drift = Befund |
-| `python3 -m unittest discover -s scripts/tests` | 521 Tests grün, davon **28 neue** (`test_dom_audit.py`: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, Template-Verträge, optionaler jsdom-Parallelbeweis) |
+| `python3 -m unittest discover -s scripts/tests` | **542 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 47 neue in dieser Runde (`test_dom_audit.py` 32: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 11: Annotationen/Deckel-Escaping; `test_workflow_yaml.py` 4: YAML-/Step-/JS-Wachen) |
+| hreflang-Hygiene (`check_hreflang()`) | 371 Seiten je **genau eine** Angabe pro Sprache, keine Doppelung; auf 12 Paginierungsseiten zeigt das geerbte `de` auf die Abschnitts-Wurzel → **Warnung** mit Quelle (`head.html`, versiegelt) statt stiller Duldung |
 | `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
 
 **Vorher → Nachher (minifizierter Bau, 213 Seiten ohne Paginierung):**
 
 | Kennzahl | vorher | nachher | Budget |
 |---|---|---|---|
-| max. Kinder eines Elements | **136** (`/tags/`, `ul.terms-tags`) | **51** (`html > head`) | 54 / 60 |
-| max. Kinder im `<head>` | **60** (Artikel mit FAQ) | **51** | 52 / 58 |
+| max. Kinder eines Elements | **136** (`/tags/`, `ul.terms-tags`) | **50** (`html > head`) | 54 / 60 |
+| max. Kinder im `<head>` | **60** (Artikel mit FAQ) | **50** | 52 / 58 |
 | `article:tag`-Metas je Artikel | bis **6** | 0 | – |
 | Seiten im Blick der Vermessung | 4 | **213** | – |
 | Skripte im `<head>` | 8 | 6 | – |
@@ -166,8 +180,14 @@ bei Pull Requests mit Layout-Pfaden):
 4. Browser-Audit → `BROWSER_EXIT` (0 grün, 1 Befunde, **2 = übersprungen**, wenn
    kein Chrome installierbar ist – dokumentiert und gewollt, weil das statische
    Budget jede Seite abdeckt),
-5. Job-Summary mit Report und Browser-JSON,
-6. Issue-Lebenszyklus über Marker `<!-- layout-ai-report -->`:
+5. **Annotationen in den Checks** (`layout_annotations.py`): kritische Befunde
+   als `::error::` (rot in der PR-/Checks-Ansicht), Frühwarnungen als
+   `::warning::`, Kennzahlen als `::notice::` – gedeckelt auf 10 je Stufe, mit
+   Nennung der verschwiegenen Anzahl,
+6. Job-Summary mit Report und Browser-JSON,
+7. Issue-Lebenszyklus über Marker `<!-- layout-ai-report -->` **oder** den
+   festen Titel (Alt-Issues aus früheren Workflow-Versionen ohne Marker werden
+   übernommen – sonst bleibt der alte Alarm offen *und* ein zweiter entsteht):
    **anlegen oder aktualisieren** bei Befunden, **kommentieren + schließen**
    bei grün. Ein Issue ohne Schließpfad ist ein Alarm ohne Ende – genau das
    war #338.
@@ -176,6 +196,15 @@ Im **Pull-Request-Modus** läuft derselbe Bau und derselbe Audit, aber ohne
 Auto-Heilung und ohne Issue-Pflege – ein PR darf keine Commits in seinen
 Branch schreiben und keine Alarm-Issues erzeugen. Befunde machen den Lauf rot
 und stehen in der Job-Summary; dieser Lauf ist das Gate vor dem Merge.
+
+**Offener Punkt (versiegelt, menschliche Entscheidung):** Auf 12
+Paginierungsseiten (`/…/page/N/`, N≥2) setzt das **KRITISCH-versiegelte**
+`head.html` die `de`-Selbstreferenz auf die Abschnitts-Wurzel statt auf die
+Seite. Der Audit meldet das als Warnung (kein roter Lauf – sonst entstünde
+wieder ein Dauer-Alarm). Behebbar ist es nur durch eine signierte Änderung an
+`head.html` (`integrity_guard.py --set-current` nach menschlicher Prüfung);
+alles außerhalb des Siegels ist bereits korrekt (`x-default` zeigt überall auf
+das Canonical).
 
 **Grenzen der Automatik:** Der statische Audit misst ohne Browser; gerechnet
 wird mit den Regeln des HTML5-Parsers (siehe Kopf von `dom_audit.py`). Läuft

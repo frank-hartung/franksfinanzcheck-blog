@@ -27,14 +27,39 @@
 <meta name="fediverse:creator" content="{{ . }}">
 {{- end -}}
 
-{{- /* ---------- hreflang: Selbstreferenz (einsprachige Site, Premium-Hygiene)
+{{- /* ---------- hreflang: NUR x-default (Selbstreferenz, Premium-Hygiene)
        Auch ohne Übersetzungen empfehlen Google & Bing die Selbstreferenz:
-       Sie bestätigt die Zielsprache/-region jeder URL (inkl. Paginierung
-       über $seo.url) und verhindert, dass Bing die Seite als „Sprache
-       unklar“ einordnet. x-default fängt sprachlose Treffer ab.
-       (head.html ist KRITISCH-versiegelt – deshalb bewusst hier.) */ -}}
-{{- $hreflangURL := (partial "seo_context.html" .).url -}}
+       Sie bestätigt die Zielsprache/-region jeder URL und verhindert, dass
+       Bing die Seite als „Sprache unklar“ einordnet. x-default fängt
+       sprachlose Treffer ab.
+
+       WARUM HIER NUR NOCH EIN TAG STEHT (21.09.2026, Issue #338):
+       Diese Datei setzte zusätzlich `<link rel=alternate hreflang=de …>`.
+       head.html (KRITISCH-versiegelt) setzt dieselbe Zeile bereits über
+       `range .AllTranslations` – sie stand damit auf JEDER Seite doppelt im
+       Head, auf 12 Paginierungsseiten sogar mit zwei VERSCHIEDENEN Zielen
+       (Abschnitts-Wurzel aus head.html, Seiten-URL aus $seo.url). Zwei Werte
+       für eine Sprache sind für Google ein Widerspruch und werden ignoriert –
+       die Angabe war dort also wirkungslos und kostete überall ein <link>.
+       Deshalb gilt hier: genau EINE Zeile je Sprachangabe, und sie zeigt auf
+       das Canonical (dieselbe Regel wie `rel=canonical` in head.html).
+         - head.html hat `de` schon gesetzt und identisch  → wir schweigen,
+         - head.html hat nichts gesetzt (`/page/1/`-Klone, die Hugo als
+           Dubletten der Wurzel baut)                      → wir setzen `de`,
+         - head.html hat auf Pager-Seiten die Abschnitts-WURZEL gesetzt
+           (nicht das Canonical)                           → wir setzen NICHT
+           drauf: zwei Werte für eine Sprache sind ein Widerspruch und werden
+           ignoriert, ein einzelner falscher Wert ist das kleinere Übel und
+           wird gemeldet (`layout_audit.check_hreflang()` → Warnung). Ihn zu
+           beheben hieße, `head.html` (KRITISCH-versiegelt) zu ändern – das
+           ist die dokumentierte menschliche Entscheidung. */ -}}
+{{- $seo := partial "seo_context.html" . -}}
+{{- $hreflangURL := $seo.url -}}
+{{- $headHreflang := "" -}}
+{{- range .AllTranslations -}}{{- $headHreflang = .Permalink -}}{{- end -}}
+{{- if and (ne $headHreflang $hreflangURL) (not (and $seo.isPager $headHreflang)) -}}
 <link rel="alternate" hreflang="de" href="{{ $hreflangURL }}">
+{{- end -}}
 <link rel="alternate" hreflang="x-default" href="{{ $hreflangURL }}">
 
 {{- /* ---------- Google Fonts: SELBST GEHOSTET (kein Drittanbieter) ---------- */ -}}

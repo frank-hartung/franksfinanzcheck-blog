@@ -287,6 +287,98 @@ def check_schema_and_meta():
         OK.append("H1 überall vorhanden.")
 
 
+def check_hreflang():
+    """hreflang-Hygiene im gebauten <head> (Issue #338, 21.09.2026).
+
+    WARUM: Auf jeder Seite stand `hreflang="de"` DOPPELT – einmal aus dem
+    versiegelten head.html (`range .AllTranslations`), einmal aus
+    extend_head.html. Auf Paginierungsseiten zeigten die beiden Zeilen sogar
+    auf verschiedene URLs (Abschnitts-Wurzel vs. Seiten-URL). Zwei Werte für
+    eine Sprache sind ein Widerspruch; Google ignoriert den Satz dann.
+
+    Geprüft wird deshalb:
+      - CRITICAL: dieselbe Sprachangabe mehrfach auf einer Seite
+        (Regressionswache – darf nie wiederkommen),
+      - CRITICAL: eine Selbstreferenz, die auf eine andere URL als das
+        Canonical zeigt (auf Normal-Seiten ist das immer ein Fehler),
+      - WARNUNG: dasselbe auf Paginierungsseiten. Dort stammt der Wert aus
+        head.html, das KRITISCH-versiegelt ist – die Behebung ist eine
+        menschliche Entscheidung, gemeldet wird sie trotzdem.
+    """
+    pages = [f for f in glob.glob(os.path.join(BASE, "**", "*.html"),
+                                  recursive=True)]
+    link_pat = re.compile(r"<link\b[^>]*>", re.I)
+    hreflang_pat = re.compile(r"""hreflang\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))""", re.I)
+    href_pat = re.compile(r"""href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))""", re.I)
+    canon_pat = re.compile(r"""<link\b[^>]*rel\s*=\s*["']?canonical["']?[^>]*>""", re.I)
+
+    duplicates, wrong_self_pager, wrong_self_other = [], [], []
+    pages_with_selfref = 0
+    for page in pages:
+        with open(page, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
+        head = re.search(r"<head\b.*?</head>", text, re.S | re.I)
+        if not head:
+            continue
+        head = head.group(0)
+        seen = {}
+        for tag in link_pat.findall(head):
+            lang = hreflang_pat.search(tag)
+            if not lang:
+                continue
+            value = next((g for g in lang.groups() if g is not None), "")
+            href = href_pat.search(tag)
+            target = html.unescape(next((g for g in href.groups() if g is not None), "")) \
+                if href else ""
+            seen.setdefault(value.lower(), []).append(target)
+        rel = os.path.relpath(page, BASE)
+        for value, targets in seen.items():
+            if len(targets) > 1:
+                duplicates.append((rel, value, targets[:3]))
+        canon = canon_pat.search(head)
+        if canon:
+            href = href_pat.search(canon.group(0))
+            canonical = html.unescape(next((g for g in href.groups() if g is not None), "")) \
+                if href else ""
+            selfref = seen.get("de", [])
+            if selfref:
+                pages_with_selfref += 1
+            if canonical and selfref and selfref[0] and selfref[0] != canonical:
+                # Paginierungsseiten: geerbt aus head.html (versiegelt)
+                if "/page/" in canonical:
+                    wrong_self_pager.append((rel, selfref[0], canonical))
+                else:
+                    wrong_self_other.append((rel, selfref[0], canonical))
+
+    if duplicates:
+        CRITICAL.append(f"hreflang: {len(duplicates)} Seite(n) mit doppelter "
+                        "Sprachangabe (Widerspruch, wird von Google ignoriert):")
+        for rel, value, targets in duplicates[:8]:
+            CRITICAL.append(f"  - `{rel}`: `hreflang={value}` {len(targets)}× "
+                            f"→ {', '.join(t or '—' for t in targets)}")
+    if wrong_self_other:
+        CRITICAL.append(f"hreflang: {len(wrong_self_other)} Seite(n), auf denen "
+                        "die Selbstreferenz nicht auf das Canonical zeigt:")
+        for rel, target, canonical in wrong_self_other[:8]:
+            CRITICAL.append(f"  - `{rel}`: hreflang={target} ≠ canonical={canonical}")
+    if wrong_self_pager:
+        WARN.append(f"hreflang: auf {len(wrong_self_pager)} Paginierungsseiten "
+                    "zeigt das geerbte `hreflang=de` auf die Abschnitts-Wurzel "
+                    "statt auf die Seite (Quelle: versiegeltes `head.html`, "
+                    "Behebung = menschliche Entscheidung; `x-default` ist korrekt):")
+        for rel, target, canonical in wrong_self_pager[:3]:
+            WARN.append(f"  - `{rel}`: hreflang={target} ≠ canonical={canonical}")
+        if len(wrong_self_pager) > 3:
+            WARN.append(f"  - … und {len(wrong_self_pager) - 3} weitere")
+    if not duplicates and not wrong_self_other and not wrong_self_pager:
+        OK.append(f"hreflang: {len(pages)} Seiten je genau eine Angabe pro "
+                  f"Sprache, Selbstreferenz = Canonical ({pages_with_selfref} "
+                  "Seiten mit `de`).")
+    elif not duplicates and not wrong_self_other:
+        OK.append(f"hreflang: keine doppelten Sprachangaben auf {len(pages)} "
+                  "Seiten; Paginierungs-Abweichung siehe Warnung.")
+
+
 def check_dom_budget():
     """DOM-/Layout-Budget für JEDE gebaute Seite (Issue #338).
 
@@ -497,6 +589,7 @@ def main():
     check_covers()
     check_alts()
     check_schema_and_meta()
+    check_hreflang()
     check_dom_budget()
     check_chunker_contract()
     write_report()
