@@ -30,6 +30,7 @@ GitHub Repo frank-hartung/franksfinanzcheck-blog (main = Quelle)
 |---|---|---|
 | DNS | Cloudflare (Nameserver damian/sloan.ns.cloudflare.com) | Domain-Auflösung |
 | Proxy/CDN | Cloudflare-Proxy (Orange Cloud) | SSL, DDoS-Schutz, Edge-Cache |
+| **E-Mail** | **Cloudflare Email Routing** | Weiterleitung `kontakt@franksfinanzcheck.de` an persönliche Zieladresse (keine eigene Mailbox, keine MX-Konkurrenz zu Website) – Doku: [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md) |
 | **Hosting** | **GitHub Pages** (Branch `gh-pages`) | Statische Auslieferung, global via Fastly |
 | Quellcode | GitHub Repo (`main`) | Build-Quelle, Automatisierung |
 | Backup | Objektspeicher (S3-kompatibel) | **Geplant, noch nicht eingerichtet** |
