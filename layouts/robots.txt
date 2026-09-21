@@ -89,7 +89,7 @@ Disallow: /go/
 #  Diese Site differenziert deshalb nach ZWECK statt nach Firma:
 #    ERLAUBT  = nutzerseitig ausgelöste Abrufe (Antwort/Verweis, kein Korpus)
 #    GESPERRT = Massen-Sauger für Modell-Training (bleiben zu, siehe oben)
-#  Wer das komplett sperren will: die sieben User-agent-Gruppen unten löschen.
+#  Wer das komplett sperren will: die zehn User-agent-Gruppen unten löschen.
 #  Die Wache (scripts/schema_seo_gate.py, S8) prüft den Zustand und meldet
 #  beides sauber – Freigabe als INFO, Sperre als Hinweis, nie als stiller Defekt.
 #  Die Content-Signale oben (search=yes, ai-train=no, use=reference) bleiben
@@ -122,3 +122,24 @@ Disallow: /go/
 User-agent: meta-externalfetcher
 Allow: /
 Disallow: /go/
+
+# GEO-PREMIUM 21.09.2026: Drei weitere Antwortmaschinen nach derselben
+# Zweck-Regel freigegeben (nutzerseitig ausgelöste Abrufe, kein Training):
+#  - Applebot ......... Siri, Spotlight, Apple Intelligence (Suche/Antworten;
+#                        Applebot-Extended = Training bleibt oben gesperrt)
+#  - MistralAI-User ... Le Chat (Mistral) – nutzerseitige Abrufe, stark in DE/EU
+#  - YouBot ............ You.com – nutzerseitige Antwort-Abrufe
+User-agent: Applebot
+Allow: /
+Disallow: /go/
+
+User-agent: MistralAI-User
+Allow: /
+Disallow: /go/
+
+User-agent: YouBot
+Allow: /
+Disallow: /go/
+
+# Maschinenlese-Datei für KI-Antwortmaschinen (GEO):
+# https://franksfinanzcheck.de/llms.txt

@@ -1,0 +1,6 @@
+# RFC 9116 – Kontakt für Sicherheitsmeldungen zu franksfinanzcheck.de
+Contact: mailto:frankhartung@web.de
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: de, en
+Canonical: https://franksfinanzcheck.de/.well-known/security.txt
+Policy: https://franksfinanzcheck.de/methodik/

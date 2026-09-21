@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-20T19:27:14.028065+00:00",
-  "head": "cd2f26a",
+  "signed_at": "2026-09-21T09:22:12.338606+00:00",
+  "head": "2648d59",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -17,8 +17,8 @@
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
     "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
-    "layouts/pillar/single.html": "10e7ce5a3af2246ec56be397f8e37f74331de5da26c28c95a562979a09327455",
-    "layouts/robots.txt": "ed88bb3ffbb57272ed5418d3ac0246c1ca8ac082213549fdf13e09b6a9cd5246",
+    "layouts/pillar/single.html": "e77d471134763a18a0c70de3962ba9c6c5a776cd144a803ecfe95dc4e06c9a32",
+    "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "1069f8b05230f601517b04f6770ab5ce38b8edde85ee9c82546ae08fc5081a03",
     "layouts/shortcodes/tarifvergleich.html": "6c357637a5329fedace5baf1e15a0b41916cd67aa7bc68f88d033060dbf61a99",
     "scripts/affiliate_integrity_gate.py": "ecd407279ec0cc8d7c79c081efc7a977450a8604f41a3c4c2d5f8a5dd281b3bc",
@@ -268,6 +268,15 @@
       "head": "cd2f26a",
       "geaendert": [
         "layouts/_partials/head.html"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "art": "set-current",
+      "head": "2648d59",
+      "geaendert": [
+        "layouts/pillar/single.html",
+        "layouts/robots.txt"
       ]
     }
   ]

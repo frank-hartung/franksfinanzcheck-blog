@@ -35,7 +35,13 @@
         <span>✍️</span> Ratgeber von Frank Hartung
       </span>
       <span>·</span>
-      <span>📅 Stand: {{ .Date.Format "2. Januar 2006" }}</span>
+      {{- /* GEO/SEO-PREMIUM 21.09.2026: `.Date` ist das Erstelldatum
+             (08.08.2026) – die 6 Ratgeber wirkten damit dauerhaft
+             „veraltet“, obwohl sie am 31.08.2026 überarbeitet wurden
+             (lastmod-Frontmatter, auch Schema/Sitemap-Stand). Jetzt das
+             redaktionelle Frische-Datum aus article_dates.html. */ -}}
+      {{- $ffPillarStand := partial "article_dates.html" . -}}
+      <span>📅 Stand: {{ $ffPillarStand.modified.Format "2. Januar 2006" }}</span>
       <span>·</span>
       <span>⏱️ {{ .ReadingTime }} Min. Lesezeit</span>
       <span>·</span>

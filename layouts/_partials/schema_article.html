@@ -89,6 +89,8 @@
   "@id" $orgID
   "name" site.Title
   "url" site.BaseURL
+  "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen."
+  "email" "frankhartung@web.de"
   "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL))
   "sameAs" $profiles
 -}}
@@ -108,6 +110,7 @@
   "dateModified" ($modified.Format "2006-01-02T15:04:05Z07:00")
   "wordCount" (.WordCount | int)
   "isAccessibleForFree" true
+  "speakable" (dict "@type" "SpeakableSpecification" "cssSelector" (slice ".post-title" ".ff-kurzantwort__text" ".post-description"))
 -}}
 {{- if $imgURL -}}
   {{- $image := dict "@type" "ImageObject" "url" $imgURL -}}

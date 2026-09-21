@@ -27,6 +27,16 @@
 <meta name="fediverse:creator" content="{{ . }}">
 {{- end -}}
 
+{{- /* ---------- hreflang: Selbstreferenz (einsprachige Site, Premium-Hygiene)
+       Auch ohne Übersetzungen empfehlen Google & Bing die Selbstreferenz:
+       Sie bestätigt die Zielsprache/-region jeder URL (inkl. Paginierung
+       über $seo.url) und verhindert, dass Bing die Seite als „Sprache
+       unklar“ einordnet. x-default fängt sprachlose Treffer ab.
+       (head.html ist KRITISCH-versiegelt – deshalb bewusst hier.) */ -}}
+{{- $hreflangURL := (partial "seo_context.html" .).url -}}
+<link rel="alternate" hreflang="de" href="{{ $hreflangURL }}">
+<link rel="alternate" hreflang="x-default" href="{{ $hreflangURL }}">
+
 {{- /* ---------- Google Fonts: SELBST GEHOSTET (kein Drittanbieter) ---------- */ -}}
 {{- /* Die Latin-woff2-Dateien liegen in static/fonts/ und werden DIREKT von
        GitHub Pages (eigener Ursprung) ausgeliefert – kein externes CDN,
@@ -154,7 +164,17 @@
 {{- end -}}
 
 {{- /* ---------- Organization/WebSite-Schema (Startseite) ---------- */ -}}
+{{- /* GEO-PREMIUM 21.09.2026: Vollständige Entity-Anbindung für Antwort-
+       maschinen – inLanguage, Autor-Referenz (@id, identisch zum Person-
+       Knoten), sameAs aus den offiziellen Profilen (Parität zum Article-
+       Schema, nicht mehr nur Pinterest) sowie Organisations-Beschreibung
+       und redaktioneller Kontakt (E-Mail steht auch öffentlich im
+       Impressum/Über – kein neues Expositionsrisiko). KEINE SearchAction:
+       Die Site hat keine eigene Suche, ein Fake-Suchschema wäre ein
+       Richtlinien-Verstoß. */ -}}
 {{- if .IsHome -}}
+{{- $wsProfiles := slice -}}
+{{- range site.Params.socialIcons -}}{{- with .url -}}{{- $wsProfiles = $wsProfiles | append . -}}{{- end -}}{{- end -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "WebSite"
@@ -162,7 +182,9 @@
   "name" site.Title
   "url" site.BaseURL
   "description" site.Params.description
-  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" (slice "https://www.pinterest.de/franksfinanzcheck/"))
+  "inLanguage" "de-DE"
+  "author" (dict "@type" "Person" "@id" (printf "%s#frank-hartung" site.BaseURL))
+  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen." "email" "frankhartung@web.de" "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" $wsProfiles)
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 

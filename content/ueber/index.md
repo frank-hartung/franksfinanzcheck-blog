@@ -50,6 +50,8 @@ Damit dieser Blog kostenlos bleibt, nimmt er am **CHECK24-Partnerprogramm** (üb
 
 Du hast eine Frage, einen Themenwunsch oder Anmerkungen? Schreib mir gern eine E-Mail an **frankhartung@web.de** – ich freue mich über Feedback und lese jede Nachricht.
 
+> **Redaktionsstandards im Detail:** Wie recherchiert, getestet, aktualisiert und finanziert wird – und wie wir mit KI-Unterstützung umgehen – steht auf der Seite [So arbeiten wir](/methodik/).
+
 ## Keine Beratung
 
 Die Inhalte dieses Blogs dienen der allgemeinen Information und Weiterbildung und stellen **keine individuelle Finanz-, Steuer- oder Rechtsberatung** dar. Für Entscheidungen, die deine persönliche Situation betreffen, konsultiere bitte einen qualifizierten Berater. Alle Angaben erfolgen ohne Gewähr – Preise und Konditionen können sich jederzeit ändern.
