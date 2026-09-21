@@ -4,12 +4,18 @@
      lastmod wird ausschließlich aus belegten Redaktionsdaten abgeleitet;
      ohne Datum auf Einzel-/Rechtsseiten wird es weggelassen.
      priority/changefreq sind Hinweise, keine Rankingversprechen.
+     GEO/SEO-PREMIUM 21.09.2026: Google-Bild-Sitemap (image:image) für alle
+     Artikel- und Ratgeber-Cover – zweiter Discovery-Pfad für Google Bilder,
+     Discover und Pinterest. Die Bild-Tags stehen ZWINGEND NACH priority:
+     schema_seo_gate S7 parst `<loc>…</loc>\s*(<lastmod>)?` per Regex und
+     meldet jeden Bild-Tag dazwischen als fehlendes lastmod. seo_cockpit.py
+     liest nur direkte url/loc-Kinder (image:loc wird ignoriert).
      Regressionen: schema_seo_gate.py, seo_cockpit.py, seo-pagination.spec.mjs.
 */ -}}
 {{- $seen := slice -}}
 {{- $out := slice -}}
 {{- /* ---- Hilfsfunktion: Seite würfeln (URL, lastmod, freq, prio) ---- */ -}}
-{{- $legal := slice "impressum" "datenschutz" "ueber" -}}
+{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" -}}
 {{- /* ---------- 1) Startseite ---------- */ -}}
 {{- with site.Home -}}
   {{- if and (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) -}}
@@ -21,7 +27,14 @@
 {{- range site.RegularPages -}}
   {{- if ne .Section "posts" }}{{ continue }}{{ end -}}
   {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
-  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.8) -}}
+  {{- $pg := . -}}
+  {{- $img := "" -}}{{- $imgT := "" -}}{{- $imgC := "" -}}
+  {{- with .Params.cover.image -}}
+    {{- $img = . | absURL -}}
+    {{- $imgT = $pg.Title | plainify -}}
+    {{- with $pg.Params.cover.alt -}}{{- $imgC = . | plainify -}}{{- end -}}
+  {{- end -}}
+  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.8 "img" $img "imgtitle" $imgT "imgcap" $imgC) -}}
   {{- $seen = $seen | append .Permalink -}}
 {{- end -}}
 {{- /* ---------- 3) Pillar-Ratgeber (list: never → manuell) ---------- */ -}}
@@ -29,7 +42,14 @@
 {{- range $pillars -}}
   {{- with site.GetPage (printf "pillar/%s" .) -}}
     {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
-    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.9) -}}
+    {{- $pg := . -}}
+    {{- $img := "" -}}{{- $imgT := "" -}}{{- $imgC := "" -}}
+    {{- with .Params.cover.image -}}
+      {{- $img = . | absURL -}}
+      {{- $imgT = $pg.Title | plainify -}}
+      {{- with $pg.Params.cover.alt -}}{{- $imgC = . | plainify -}}{{- end -}}
+    {{- end -}}
+    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.9 "img" $img "imgtitle" $imgT "imgcap" $imgC) -}}
     {{- $seen = $seen | append .Permalink -}}
   {{- end -}}
 {{- end -}}
@@ -51,12 +71,22 @@
   {{- end -}}
 {{- end -}}
 {{ printf `<?xml version="1.0" encoding="utf-8" standalone="yes"?>` | safeHTML }}
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 {{- range $out }}
 <url>
   <loc>{{ .url }}</loc>{{ with .lastmod }}
   <lastmod>{{ . }}</lastmod>{{ end }}
   <changefreq>{{ .freq }}</changefreq>
   <priority>{{ printf "%.1f" .prio }}</priority>
+  {{- $e := . -}}
+  {{- with $e.img }}
+  <image:image>
+    <image:loc>{{ . }}</image:loc>
+    <image:title>{{ printf "%s" $e.imgtitle | html }}</image:title>
+    {{- with $e.imgcap }}
+    <image:caption>{{ printf "%s" . | html }}</image:caption>
+    {{- end }}
+  </image:image>
+  {{- end }}
 </url>{{- end }}
 </urlset>

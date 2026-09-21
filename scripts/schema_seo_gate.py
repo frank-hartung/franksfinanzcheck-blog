@@ -638,7 +638,8 @@ def check_robots(F: Findings) -> None:
         if blocked_home and group.lower() in (
                 "oai-searchbot", "perplexitybot", "perplexity-user",
                 "chatgpt-user", "duckassistbot", "claude-user",
-                "meta-externalfetcher", "pinterestbot", "pinterest", "googlebot",
+                "meta-externalfetcher", "applebot", "mistralai-user",
+                "youbot", "pinterestbot", "pinterest", "googlebot",
                 "bingbot"):
             F.add("S8", "/", f"robots.txt sperrt {group} komplett – "
                              f"Sichtbarkeit in Suche/AI-Antworten/Pinterest kostet Reichweite")
@@ -646,7 +647,8 @@ def check_robots(F: Findings) -> None:
                                             for r in groups[g])]
     ki = [g for g in erlaubt if g.lower() in (
         "oai-searchbot", "perplexitybot", "perplexity-user", "chatgpt-user",
-        "duckassistbot", "claude-user", "meta-externalfetcher")]
+        "duckassistbot", "claude-user", "meta-externalfetcher", "applebot",
+        "mistralai-user", "youbot")]
     if ki:
         F.info.append("KI-Antwortmaschinen erlaubt: " + ", ".join(sorted(set(ki))))
     else:

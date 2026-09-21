@@ -90,6 +90,19 @@ class AuditTests(unittest.TestCase):
         self.write('index.html', page().replace(f'href="{BASE}"', f'href="{BASE}other/"'))
         self.assertTrue({'sitemap-duplicate', 'sitemap-canonical', 'canonical-target'} <= self.codes())
 
+    def test_sitemap_ignores_image_loc_entries(self):
+        # GEO/SEO-PREMIUM 21.09.2026: Google-Bild-Tags (image:loc) sind
+        # Discovery-Hinweise, keine Seiten – sie dürfen weder als
+        # sitemap-target noch als Duplikat gewertet werden.
+        self.write('sitemap.xml',
+                   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+                   'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
+                   '<url><loc>https://example.org/</loc>'
+                   '<image:image><image:loc>https://example.org/images/covers/a.jpg</image:loc>'
+                   '<image:title>Beispiel &amp; Test</image:title></image:image>'
+                   '</url></urlset>')
+        self.assertEqual(self.run_audit()['findings'], [])
+
     def test_relative_links_fragments_and_depth(self):
         self.write('index.html', page(body='<a href="a/">A</a>'))
         self.write('a/index.html', page('/a/', title='Anderer passender Titel für Unterseite', body='<a href="../#fehlt">Defekt</a><a href="../missing/">Fehlt</a><img src="/missing.jpg">'))

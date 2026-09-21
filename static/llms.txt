@@ -1,0 +1,91 @@
+# FranksFinanzcheck
+
+> Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: Geld sparen bei
+> Strom, Gas, Internet, Versicherungen, Konto und im Alltag – praxisnah,
+> verständlich, mit konkreten Euro-Beträgen. Sprache: Deutsch (de-DE).
+
+Diese Datei hilft KI-Antwortmaschinen und Recherche-Werkzeugen, die Inhalte
+von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
+
+## Zitieren erwünscht – bitte so
+
+- Inhalte dürfen in Antworten und Übersichten zusammengefasst und mit
+  Quellenlink zitiert werden (Deep-Link auf den jeweiligen Artikel).
+- Trainingsnutzung des Korpus ist nicht gestattet (siehe robots.txt:
+  Content-Signal `ai-train=no`, Rechtevorbehalt nach Art. 4 DSM-Richtlinie).
+- Affiliate-/Werbe-Links (`/go/`-Weiterleitungen) bitte nicht übernehmen –
+  sie sind für menschliche Leser gedacht und für Crawler gesperrt.
+- Stand und Zahlen: Jeder Artikel nennt sein Publikations- bzw.
+  Aktualisierungsdatum; Konditionen und Preise ändern sich – im Zweifel
+  gilt der verlinkte Anbieter.
+
+## Über diese Website
+
+- Betreiber und Autor: Frank Hartung, über 10 Jahre Praxis in privater
+  Finanzplanung, hunderte selbst durchgeführte Tarifvergleiche.
+- Arbeitsweise und Redaktionsstandards: https://franksfinanzcheck.de/methodik/
+- Über den Autor: https://franksfinanzcheck.de/ueber/ – Kontakt: frankhartung@web.de
+- Finanzierung: Affiliate-Partnerschaften (CHECK24, Tarifcheck),
+  gekennzeichnete Empfehlungslinks (Werbung); Empfehlungen davon unabhängig.
+- Hinweis: Allgemeine Informationen, keine individuelle Finanz-, Steuer-
+  oder Rechtsberatung. Alle Angaben ohne Gewähr.
+
+## Themen-Ratgeber (Pillars)
+
+- [Strom & Gas sparen](https://franksfinanzcheck.de/pillar/strom-sparen/): Strom- und Gaskosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln und die Heizperiode optimal vorbereiten.
+- [Internet, DSL & Mobilfunk](https://franksfinanzcheck.de/pillar/internet-dsl/): Schnelleres Internet & günstigere Tarife: DSL-Wechselbonus sichern, WLAN im ganzen Haus verbessern, DNS-Tuning und die besten Handytarife.
+- [Versicherungen](https://franksfinanzcheck.de/pillar/versicherungen/): Versicherungen im Überblick: Privathaftpflicht, Wohngebäude, Hausrat, Kfz, Zahnzusatz und Unfallversicherung – welcher Schutz wirklich unverzichtbar ist.
+- [Konto & Karten](https://franksfinanzcheck.de/pillar/konto-karten/): Banking ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins.
+- [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Frugalismus im Alltag: Die 50–30–20-Regel, Notgroschen aufbauen, Konsumfallen entlarven und Schritt für Schritt Vermögen aufbauen.
+- [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
+
+## Alle Artikel (neueste zuerst, 37 Beiträge)
+
+- [Heizkosten senken: Mit diesen Strategien sparst du sofort](https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/): Effektiv Heizkosten senken: Vermeide teure Fehler, nutze clevere Heizung Sparen Tipps und bereite deine Wohnung optimal auf den nächsten Winter vor.
+- [So findest du den richtigen: DSL-Tarif für dein Zuhause](https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/): DSL Tarif finden: So findest du den richtigen DSL-Tarif für dein Zuhause: Bandbreiten-Bedarf, DSL vs. Kabel & Glasfaser, Sparpotenziale und die besten Tarife…
+- [Sparen im Herbst: Spartipps für die goldene Jahreszeit](https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/): Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du bis zu 1.250 €.
+- [Finanzielle Freiheit erreichen: Denke dich reich – Geld](https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/): finanzielle freiheit erreichen: Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen.
+- [Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt](https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/): Dns hack: Erfahre, wie der DNS-Hack deine Ladezeiten minimiert und die DNS Privatsphäre stärkt. Optimiere dein System für schnelleres WLAN und mehr Sicherheit.
+- [50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/): Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkosten, 30 % Wünsche, 20 % Sparen. Frank Hartung zeigt, wie du dein Budget beherrschst.
+- [5 einfache Frugalismus-Tricks für den Alltag: Geld sparen](https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/): 5 einfache Frugalismus-Tricks für den Alltag: So senkst du Fixkosten, vermeidest Geldfallen und sparst ohne echten Verzicht Monat für Monat.
+- [Standby Kosten reduzieren: So entlarvst du Stromfresser](https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/): Hohe Standby Kosten belasten dein Budget? Erfahre, wie du heimliche Dauerverbraucher entlarvst und durch gezieltes Abschalten bares Geld sparst.
+- [Günstig durch den Winter: Heizungs-Check im Spätsommer](https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/): Mit Heizungswartung, klugen Einstellungen und einem Tarif-Check senkst du Gaskosten schon vor dem Winter. So machst du deine Wohnung jetzt effizient winterfest.
+- [Notgroschen: Die Wahrheit über das finanzielle Polster](https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/): Wie viel Notgroschen brauchst du wirklich? So berechnest du dein finanzielles Polster, baust es planbar auf und parkst es sicher auf Tagesgeld.
+- [Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/): Tagesgeld-Zinsen 2026 im Vergleich: Höchste Zinsen finden, Einlagensicherung verstehen und den Notgroschen clever statt auf dem Girokonto parken.
+- [Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler](https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/): Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler: 24-Stunden-Regel, No-Spend-Wochenende, Abo-Revision und Meal Prep – plus die Fehler, die das…
+- [Kleine Beträge, große Wirkung: Frugalismus für den Einstieg](https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/): Frugalismus für den Einstieg: Haushaltsbuch führen, Fixkosten senken und kleine Beträge zur Seite legen – das Rechenbeispiel zeigt, was zusammenkommt.
+- [Kreditkarte vergleichen: Kostenlos und sicher zahlen](https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/): Kreditkarte 2026 vergleichen: kostenlose Karten, Fremdwährungsgebühren, Sicherheits-Features und die richtige Abrechnung – mit Checkliste für deinen Alltag.
+- [Hausratversicherung: Was sie kostet und wen sie schützt](https://franksfinanzcheck.de/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/): Hausratversicherung im Check: Kosten, versicherte Gefahren, Unterversicherung und sinnvolle Zusatzbausteine – so findest du den passenden Schutz.
+- [September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen](https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/): Mietwagen-Schnäppchen im September: Bis zu 270 € sparen mit dem richtigen Timing und fairer Tankregelung – so buchst du deinen Roadtrip stressfrei.
+- [Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €](https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/): Handytarif-Vergleichen 2026: Allnet-Flats ab 4,99 €, 5G-Tarife unter 15 € und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste bis zu 360 € im Jahr sparen.
+- [Wohngebäudeversicherung Vergleich: Worauf du achten musst](https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/): Wohngebäudeversicherung Vergleich: Schütze deine Immobilie vor Unwetter, Starkregen & Feuer. Wichtige Klauseln, Elementarschutz & Spartipps bis zu 340 €.
+- [Geld sparen im Alltag: Tipps, die jeder umsetzen kann](https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/): Geld sparen im Alltag: 10 sofort umsetzbare Spartipps für Haushalt, Einkaufen, Verträge & Finanzen. Baue mühelos 3.500 € Notgroschen auf!
+- [Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife](https://franksfinanzcheck.de/posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/): Gas-Anbieter wechseln & im 1. Jahr bis 882 € sparen: die besten Praxis-Tipps zu Preisgarantien, Kündigungsfristen, Fallstricken und dem Online-Wechsel – mit…
+- [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus.
+- [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/): Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis - Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung.
+- [DNS-Server wechseln: Schnelleres und sichereres Internet](https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/): DNS-Server wechseln für mehr Tempo: Beste kostenlose DNS-Server 2026 (Cloudflare, Google, Quad9) + Anleitung für FRITZ!Box, Windows & Android.
+- [Preisgarantie Gas: So schützt du dich vor Preissprüngen](https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): Preisgarantie Gas: So schützt du dich vor extremen Preissprüngen am Energiemarkt. Klauseln, Tarife & Spartipps im Check – spare bis zu 580 € pro Jahr.
+- [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/): Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat.
+- [Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/): Mietwagen ohne Kaution buchen: Kautionsfalle umgehen, Vollkasko ohne Selbstbeteiligung prüfen und so bis zu 40 Prozent am Urlaubsort sparen.
+- [Haushaltsbuch führen: App, Excel oder Stift im Vergleich](https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/): Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel bis zu 430 € im Monat sparen.
+- [Energiediebe stoppen: So kannst du Stromfresser finden](https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/): Energiediebe stoppen: Die größten heimlichen Stromfresser im Haushalt entlarven, Standby-Kosten eliminieren und bis zu 420 € Stromkosten sparen.
+- [DSL-Vergleich: So findest du den günstigsten Internettarif](https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/): DSL-Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €.
+- [Privathaftpflicht: Warum so wichtig und was sie kostet](https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/): Privathaftpflichtversicherung: Warum sie für jeden unverzichtbar ist, welche Schäden sie abdeckt und wie du Top-Schutz ab 3,50 € im Monat findest.
+- [Kostenloses Girokonto: So findest du ein Konto ohne Gebühren](https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/): Kostenloses Girokonto ohne Kontoführungsgebühren: Worauf du bei Karten, Geldautomaten und Dispo achten musst. Jetzt vergleichen & bis zu 180 € sparen!
+- [Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet](https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/): Internet & DSL wechseln: Spare bis zu 380 € im Jahr, sichere dir Neukunden-Boni und vermeide Ausfallzeiten. Schritt-für-Schritt Praxis-Anleitung.
+- [Gasrechnung senken: Fehler im Spätsommer vermeiden](https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/): Gasrechnungen senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten & Tarifen und spare bis zu 720 €.
+- [Preisgarantie Gas: So sicherst du günstige Tarife](https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/): Preisgarantie Gas 2026: Schütze dich vor steigenden Gaspreisen & CO2-Abgaben. Erfahre alles über feste Arbeitspreise, Sonderkündigung & spare bis 650 €.
+- [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/): Dein Haus sicher schützen: das Vorsorge-Update 2026 für Hausrat & Elementarschäden. So schützt du deine Immobilie vor Unwettern und sparst bares Geld.
+- [Sicher heizen: So schützt dich eine Gaspreisgarantie](https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/): Sicher heizen mit Gaspreisgarantie: Schütze dein Haushaltsbudget vor Preissprüngen, sichere dir faire Tarife und spare bis zu 650 € bei den Heizkosten.
+- [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/): DSL-Wechselbonus sichern und bis zu 240 € Prämie mitnehmen: So funktioniert der Anbieterwechsel stressfrei inkl. Cashback und Fristen-Check.
+
+## Weitere Einstiege
+
+- Startseite: https://franksfinanzcheck.de/
+- Blog-Übersicht: https://franksfinanzcheck.de/posts/
+- Ratgeber-Übersicht: https://franksfinanzcheck.de/pillar/
+- Sitemap (maschinenlesbar): https://franksfinanzcheck.de/sitemap.xml
+- RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
+
+*Diese Datei wird automatisch aus den Live-Inhalten erzeugt
+(scripts/generate_llms_txt.py). Stand: 2026-09-21.*

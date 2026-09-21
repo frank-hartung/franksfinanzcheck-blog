@@ -49,8 +49,40 @@ def load_published_urls():
         content = open(path, encoding="utf-8").read()
         if "draft: false" in content:
             urls.append(f"{BASE_URL}/posts/{slug_of(path)}/")
+    # GEO/SEO-PREMIUM 21.09.2026: Die sechs Themen-Ratgeber sind die
+    # umsatzstärksten URLs der Site – sie wurden nie per IndexNow an
+    # Bing/Yandex/Naver/Seznam gemeldet (nur Posts + Home). Gleiches gilt
+    # für die beiden Hubs und die Vertrauensseite Methodik. Bereits
+    # gemeldete URLs filtert der State (.indexnow_submitted.json) heraus,
+    # ein Re-Push kostet also nichts und hält die Money-Pages frisch.
+    for slug in ("strom-sparen", "internet-dsl", "versicherungen",
+                 "konto-karten", "frugalismus", "mietwagen"):
+        urls.append(f"{BASE_URL}/pillar/{slug}/")
+    for hub in ("posts", "pillar", "methodik"):
+        urls.append(f"{BASE_URL}/{hub}/")
     urls.append(f"{BASE_URL}/")
     return urls
+
+
+def refresh_llms_txt():
+    """GEO-Begleitdatei static/llms.txt aus den Live-Inhalten erneuern.
+
+    Läuft bei jedem IndexNow-Lauf mit (wöchentlich + bei jedem neuen
+    Artikel); die Workflows committen das Ergebnis per `git add -A`.
+    Absichtlich feuerfest: Ein Fehler hier darf die Indexierung nie
+    blockieren (Premium-Härtung #233 lässt grüßen).
+    """
+    try:
+        import subprocess
+        gen = os.path.join(BLOG_DIR, "scripts", "generate_llms_txt.py")
+        r = subprocess.run([sys.executable, gen], capture_output=True,
+                           text=True, timeout=120)
+        print((r.stdout or "").strip() or "llms.txt: Generator ohne Ausgabe.")
+        if r.returncode != 0:
+            print(f"⚠️ llms.txt-Generator meldete Exit {r.returncode}: "
+                  f"{(r.stderr or '')[:200]}")
+    except Exception as e:  # noqa: BLE001 – Feuerfest-Prinzip, siehe oben
+        print(f"⚠️ llms.txt-Aktualisierung übersprungen: {e}")
 
 
 def load_state():
@@ -96,6 +128,7 @@ def main():
         new_urls = [u for u in urls if u not in submitted]
 
     print(f"{len(urls)} URLs verfügbar, davon {len(new_urls)} neu für IndexNow.")
+    refresh_llms_txt()
     if not new_urls:
         print("✅ Alles bereits eingereicht – nichts zu tun.")
         return

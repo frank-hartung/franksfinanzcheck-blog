@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-09-21
 title: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"
 description: "Strom- und Gaskosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln und die Heizperiode optimal vorbereiten."
 date: 2026-08-08
@@ -99,7 +99,7 @@ Wie du die Fallstricke bei der Heizkostenabrechnung meidest, erläutere ich ausf
 
 ## Cluster-Lesereihenfolge
 
-1. [Strom sparen im Haushalt](../../posts/2026-08-16-strom-sparen-im-haushalt-die-besten-tipps-fuer-den-herbst/)
+1. [Standby Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 2. [Energiediebe finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 3. [Gasrechnung Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/)
 4. [Gasanbieter wechseln](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)

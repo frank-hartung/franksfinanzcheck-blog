@@ -46,10 +46,19 @@
   </div>
   {{- end }}
   {{- /* Stand-Zeile (Capital/ZEIT-Stil): sichtbares Aktualisierungsdatum,
-         wenn der Beitrag nach der Erstveröffentlichung überarbeitet wurde. */ -}}
-  {{- if and .Lastmod (gt .Lastmod .Date) }}
+         wenn der Beitrag nach der Erstveröffentlichung überarbeitet wurde.
+         GEO/SEO-PREMIUM 21.09.2026 (Frische-Inflation): `.Lastmod` fällt ohne
+         `lastmod`-Frontmatter auf die Datei-Mtime zurück – im CI also auf den
+         DEPLOY-Zeitpunkt. Jeder Deploy stempelte damit alle Artikel ohne
+         explizites lastmod sichtbar auf „Stand: heute · zuletzt
+         aktualisiert“ – für Leser UND Google (sichtbare Datums-Signale)
+         eine erfundene Frische. Jetzt die redaktionelle Wahrheit aus
+         article_dates.html (identisch zu Schema + Sitemap): nur belegte
+         Überarbeitungen bekommen die Zeile. */ -}}
+  {{- $ffStand := partial "article_dates.html" . -}}
+  {{- if $ffStand.modified.After $ffStand.published }}
   <div class="ff-stand" style="margin:2px 0 10px; font-size:.85em; color:#555;">
-    Stand: {{ .Lastmod | time.Format "02.01.2006" }} · zuletzt aktualisiert
+    Stand: {{ $ffStand.modified | time.Format "02.01.2006" }} · zuletzt aktualisiert
   </div>
   {{- end }}
   {{- /* Kurzantwort-Box (Featured Snippet / AI Overview) – nur auf Posts.

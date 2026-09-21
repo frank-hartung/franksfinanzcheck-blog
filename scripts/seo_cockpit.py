@@ -144,7 +144,21 @@ def audit(build: Path, base: str) -> dict:
         docs[rel] = doc
         urls[path] = rel
     sitemap = ET.parse(build / 'sitemap.xml')
-    locations = [node.text or '' for node in sitemap.findall('.//{*}loc')]
+    # GEO/SEO-PREMIUM 21.09.2026: Nur echte Seiten-URLs werten – KEINE
+    # Bild-URLs. Seit die Sitemap Google-Bild-Tags (image:image/image:loc)
+    # trägt, würde './/{*}loc' auch Cover-Bild-URLs als Sitemap-Ziele
+    # einsammeln → falsche P1-Befunde (sitemap-target) für existierende
+    # Bilder. Deshalb: direkte loc-Kinder von url-Elementen (mit und ohne
+    # Sitemap-Namespace, für hermetische Fixtures ohne xmlns).
+    sm_ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+    url_nodes = sitemap.findall(f'.//{sm_ns}url') or sitemap.findall('.//url')
+    locations = []
+    for node in url_nodes:
+        loc = node.find(f'{sm_ns}loc')
+        if loc is None:
+            loc = node.find('loc')
+        if loc is not None:
+            locations.append(loc.text or '')
     findings, pages = [], []
 
     def add(url, code, severity, detail, action, owner='human'):

@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-02
+lastmod: 2026-09-21
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnungen senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten & Tarifen und spare bis zu 720 €."
 date: 2026-08-14T08:35:12Z
@@ -45,7 +45,7 @@ Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-
 
 **Was passiert?** Luft in den Heizkörpern stört den Wasserfluss. Oben bleibt der Heizkörper kalt, die Pumpe läuft länger und verbraucht mehr Energie. Der Verbrauch steigt um 5 % – 10 %.
 
-**Wie du das [vermeidest](../../posts/2026-09-11-gasvergleich-wie-du-teure-fehler-beim-wechsel-vermeidest/):** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
+**Wie du das vermeidest:** 1. **Entlüften:** Nimm einen Vierkantschlüssel (ca. 2 €) und ein Gefäß. Öffne das Entlüftungsventil, bis zischende Luft entweicht und Wasser austritt.
 2. **Druck prüfen:** Das Manometer sollte 1,2–1,8 bar anzeigen (kalt). Bei Bedarf Wasser nachfüllen – am besten destilliertes Wasser, um Kalkablagerungen zu vermeiden.
 
 **Pro & Contra**  
