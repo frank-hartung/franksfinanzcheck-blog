@@ -20,7 +20,7 @@ kurzantwort: "Wer im Spätsommer (August bis Oktober) seine Heizungsanlage warte
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
-pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern! Mit Rechenbeispiel (120 €)."
+pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 

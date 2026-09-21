@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-21T10:05:22+00:00",
+  "generatedAt": "2026-09-21T11:07:16+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
+      "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
+      "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -670,56 +670,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen/": {
-      "image": "images/covers/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/": {
       "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/": {
-      "image": "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/": {
-      "image": "images/covers/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
