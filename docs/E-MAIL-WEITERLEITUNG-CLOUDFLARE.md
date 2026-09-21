@@ -44,11 +44,19 @@ Passwörter, API-Tokens oder private Zieladressen gehören **nicht** ins Reposit
 
 ### DNS-Sicherheitscheck
 
-- Vor dem Aktivieren prüfen, ob bereits ein anderer Maildienst über MX-Einträge
-  eingerichtet ist. Niemals zwei unabhängige Mailanbieter parallel für dieselbe
-  Domain konfigurieren.
-- Die Cloudflare-Einrichtung soll die Routing-MX-Einträge verwalten. Keine
-  zusätzlichen MX-Einträge auf eigene Faust ergänzen.
+- **Aktueller Befund dieser Domain:** Es ist ein sogenannter Null-MX-Eintrag
+  veröffentlicht: `MX @ .` mit Priorität `0`. Der Punkt (`.`) ist kein
+  Mailserver, sondern signalisiert ausdrücklich, dass die Domain keine E-Mails
+  annimmt. Genau dieser Eintrag löst in Cloudflare den Konflikt aus.
+- Vor dem Aktivieren im Cloudflare-DNS den Eintrag **`MX` / Name `@` /
+  Ziel `.` / Priorität `0`** löschen. Nur diesen Null-MX-Eintrag entfernen;
+  A-, CNAME- und TXT-Einträge der Website nicht löschen.
+- Falls stattdessen echte MX-Einträge eines anderen Maildienstes vorhanden sind,
+  diesen Maildienst zuerst identifizieren. Niemals zwei unabhängige Mailanbieter
+  parallel für dieselbe Domain konfigurieren.
+- Danach die Cloudflare-Einrichtung erneut starten. Sie soll die Routing-MX-
+  Einträge selbst verwalten; keine zusätzlichen MX-Einträge auf eigene Faust
+  ergänzen.
 - Falls bereits ein SPF-TXT-Eintrag existiert, darf kein zweiter SPF-Eintrag
   angelegt werden. Die SPF-Angabe muss zusammengeführt werden; im Zweifel die
   von Cloudflare vorgeschlagene DNS-Konfiguration verwenden.
