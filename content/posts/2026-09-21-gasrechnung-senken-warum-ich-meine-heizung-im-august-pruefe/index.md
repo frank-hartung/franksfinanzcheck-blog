@@ -27,6 +27,8 @@ kurzantwort: "Ja, du kannst deine Gasrechnung senken, indem du im August deine H
 
 500 € Ersparnis durch zwei Stunden Arbeit im August? Das schaffen clevere Hausbesitzer.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Wer jetzt handelt, vermeidet Stress beim ersten Frost im Oktober. Stell dir vor, die erste kalte Nacht bricht plötzlich an. Du drehst das Thermostat, aber die Heizung gluckert nur.  
 
 Vor drei Jahren kostete mich das Szenario ein kleines Vermögen. Ich saß mit Wolldecke und schlechter Laune im Wohnzimmer. Der Heizungsnotdienst verlangte saftige Aufschläge für die Anfahrt. Seitdem prüfe ich Technik und Verträge bereits im Spätsommer.  

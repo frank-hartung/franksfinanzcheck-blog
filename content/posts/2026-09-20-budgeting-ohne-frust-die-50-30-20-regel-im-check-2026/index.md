@@ -1,9 +1,9 @@
 ---
 title: "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026"
 description: "Budgeting ohne Frust: Erfahre, wie du mit der 50-30-20-Regel dein Geld 2026 optimal aufteilst. Praxisnah, ehrlich und mit konkreten Tipps für deine Sparquote…"
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-21T09:29:00Z
+draft: false
+reserve_published: 2026-09-21
 tags: ["Budgeting ohne Frust", "Budgeting", "50-30-20-Regel"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
