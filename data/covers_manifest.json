@@ -931,8 +931,8 @@
   }
  },
  "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich": {
-  "title": "Zahnzusatzversicherung Vergleich 2026: Kosten & Leistungen",
-  "ts": "2026-09-21T09:31:24+00:00",
+  "title": "Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich",
+  "ts": "2026-09-21T10:01:41+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -955,6 +955,15 @@
    "v": 3,
    "badge": "VERSICHERUNGEN",
    "savings": "ab ca. 14 € im Monat"
+  }
+ },
+ "2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen": {
+  "title": "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen",
+  "ts": "2026-09-21T09:58:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": "bis zu 2.000 € sparen"
   }
  }
 }

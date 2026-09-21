@@ -1,8 +1,8 @@
 ---
 title: "Tierkrankenversicherung 2026: Hund & Katze richtig versichern"
 description: "Tierkrankenversicherung 2026 im Vergleich: Was OP-Schutz und Vollschutz für Hund und Katze kosten, welche Leistungen zählen und für wen sich was lohnt."
-date: 2026-09-21T12:00:00Z
-draft: true
+date: 2026-09-21T09:59:22Z
+draft: false
 tags: ["Tierkrankenversicherung", "Hundekrankenversicherung", "Katzenkrankenversicherung", "OP-Versicherung Hund"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -138,8 +138,10 @@ Die **Tierkrankenversicherung** ist kein Luxus, sondern Rechenaufgabe. Für rund
 
 Denn eines ist sicher: Die Tierarztrechnung kommt bestimmt. Die einzige Frage ist, ob du sie allein zahlst – oder ob ein guter Tarif **bis zu 100 Prozent** übernimmt.
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
-[Pillar: Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+[Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)
+[Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/)
+[Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen](../../posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

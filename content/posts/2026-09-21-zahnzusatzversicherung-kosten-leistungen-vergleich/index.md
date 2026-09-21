@@ -1,8 +1,8 @@
 ---
-title: "Zahnzusatzversicherung Vergleich 2026: Kosten & Leistungen"
+title: "Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich"
 description: "Zahnzusatzversicherung Vergleich 2026: Was gute Tarife monatlich kosten, welche Leistungen wirklich zählen und wie du die Zahnstaffel-Falle vermeidest."
-date: 2026-09-21T10:00:00Z
-draft: true
+date: 2026-09-21T09:59:22Z
+draft: false
 tags: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnersatz Kosten", "Zahnversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -129,9 +129,9 @@ Die **Zahnzusatzversicherung** gehört zu den wenigen Versicherungen, bei denen 
 
 Rund 30 Minuten Vergleich heute ersparen dir im Ernstfall leicht **2.000 bis 3.000 Euro** Eigenanteil pro Implantat. Das ist eine der besten Stundenrenditen, die es im Versicherungsdschungel gibt.
 
-**Weiterlesen:** [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
+**Weiterlesen:** [Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen](../../posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/)
 [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
-[Hausratversicherung: Kosten, Leistungen und Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
+[Tierkrankenversicherung 2026: Hund & Katze richtig versichern](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

@@ -1,8 +1,8 @@
 ---
 title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen"
 description: "Unfallversicherung Vergleich 2026: Für wen sie sich lohnt, was gute Tarife kosten und welche Leistungen (Progression, Gliedertaxe, Rente) wirklich zählen."
-date: 2026-09-21T11:00:00Z
-draft: true
+date: 2026-09-21T09:59:22Z
+draft: false
 tags: ["Unfallversicherung", "Unfallversicherung Vergleich", "Private Unfallversicherung", "Invalidität absichern"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -132,8 +132,9 @@ Die **Unfallversicherung** ist eine der preiswertesten Policen überhaupt – f�
 
 Für Kinder, Senioren und alle ohne BU-Zugang gehört sie zur Grundausstattung. Rund 30 Minuten Vergleich heute sichern deiner Familie im Ernstfall **100.000 Euro und mehr** – ein starkes Stück Sicherheit für kleines Geld.
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
-[Hausratversicherung: Kosten, Leistungen und Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+[Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/)
+[Tierkrankenversicherung 2026: Hund & Katze richtig versichern](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 
