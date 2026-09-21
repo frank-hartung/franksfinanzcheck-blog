@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-21T15:48:03.762447+00:00",
-  "head": "598acdf",
+  "signed_at": "2026-09-21T18:13:49.703527+00:00",
+  "head": "d192a90",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -11,7 +11,7 @@
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
-    "layouts/_partials/head.html": "a3f50eca201431ee9d80c406cd7ec82c88e0ee46a65514f1fb03759217760fca",
+    "layouts/_partials/head.html": "3e932db02795c195ef77f060712767259356d2132b8a6602b37bce6286c8e78e",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
@@ -47,149 +47,6 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "heal",
-      "head": "e499d6ff",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/fazit_schmiede.py",
-        "scripts/generate_covers.py",
-        "scripts/hardcases_guard.py",
-        "scripts/plagiat_guard.py",
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "b9c1125e",
-              "datum": "2026-09-15",
-              "betreff": "fix(reserve): CTA-Heiler für Entwürfe + Quarantäne für Dauer-Blocker (#295)"
-            },
-            {
-              "sha": "6657eade",
-              "datum": "2026-09-15",
-              "betreff": "fix(wache): Herzschlag statt eingefrorenem Befund-Zeitstempel – Affiliate-Wache beweist ihr Leben (Issue #281)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/fazit_schmiede.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "20248bf0",
-              "datum": "2026-09-15",
-              "betreff": "feat(schmiede): --altlasten meldet und heilt den Altbaustil der ersten Fazit-Generation"
-            },
-            {
-              "sha": "f7a196ae",
-              "datum": "2026-09-15",
-              "betreff": "fix(redaktion): 9 Fazits geschrieben – und die Wurzel gefixt, warum sie thematisch falsch waren"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/generate_covers.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "8ec9d8e2",
-              "datum": "2026-09-12",
-              "betreff": "Premium-Audit umzusetzen: JSON-LD/Hygiene-Grundlagen + alle acht §5-Punkte"
-            },
-            {
-              "sha": "cb29cc1c",
-              "datum": "2026-08-29",
-              "betreff": "fix(preview): Premium-Zeilenumbruch im WLAN-Titel"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/hardcases_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "8c49f1fe",
-              "datum": "2026-08-12",
-              "betreff": "feat(lektorat): Stil- & Hardcases-Wache – weltklassiges Profi-Lektorat"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/plagiat_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "51225f77",
-              "datum": "2026-09-14",
-              "betreff": "fix(cta): gelben CTA-Kasten reparieren, Bestand nachziehen, Wachen härten"
-            },
-            {
-              "sha": "8144be0e",
-              "datum": "2026-08-12",
-              "betreff": "feat(plagiat+audit): Plagiat-Kanzlei + Content-Auditor mit Selbstheilung"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "ff6232e3",
-              "datum": "2026-09-18",
-              "betreff": "fix(quality): FM-Klebefugen dauerhaft schließen – Naht-SSOT, Wache F6, 13 Dateien geheilt (Folge-Befund 5)"
-            },
-            {
-              "sha": "2c8ec3b3",
-              "datum": "2026-09-02",
-              "betreff": "feat(redaktion): Redaktions-Standard Capital/WiWo/ZEIT dauerhaft in Blogautomatik"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ]
-    },
     {
       "date": "2026-09-19",
       "art": "set-current",
@@ -293,6 +150,34 @@
       "head": "598acdf",
       "geaendert": [
         "layouts/shortcodes/einspartabelle.html"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "art": "set-current",
+      "head": "d192a90",
+      "geaendert": [
+        "layouts/_partials/head.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ea509c1",
+              "datum": "2026-09-21",
+              "betreff": "fix(layout): #338 Alt-Text & Head-DOM-Kinder dauerhaft beheben (#344)"
+            },
+            {
+              "sha": "3a0d5ab",
+              "datum": "2026-09-21",
+              "betreff": "Merge pull request #341 from frank-hartung/arena/01a0c4bc-franksfinanzcheck-blog"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
       ]
     }
   ]
