@@ -8,9 +8,38 @@
 #
 #  So funktioniert's: workflow_run-Trigger feuert NACH Abschluss
 #  jedes gelisteten Workflows. Bei conclusion=failure/cancelled
-#  → Issue mit Workflow-Name, Run-Link und Log-Auszug.
+#  → Issue mit Workflow-Name, Run-Link, Event UND den konkret
+#  fehlgeschlagenen Jobs/Schritten (Diagnose statt Raten – Lehre
+#  aus INCIDENT-2026-09-19: „die Meldung riet, das Log hätte es
+#  gewusst").
 #
 #  Kein manuelles Zutun nötig – das System meldet sich selbst.
+#
+#  PRODUKTIONS-SCOPING (Reparatur der Fehlalarm-Klasse #343,
+#  21.09.2026 – docs/INCIDENT-2026-09-21-layout-ai-fehlalarm-343.md):
+#  Gemeldet wird NUR, was die Produktion betrifft:
+#    · Lauf auf dem Default-Branch (main)  → Alarm
+#    · Lauf auf einem Arbeits-/PR-Zweig    → KEIN Alarm
+#  Rote Dev-Läufe sind als Checks am PR bzw. Zweig sichtbar und
+#  gehören zum Handwerk – sie sind kein Vorfall. Drei Folgefehler
+#  der alten Regel „jeder rote Lauf = Issue" verschwinden damit
+#  strukturell:
+#    1) FEHLALARM-LÄRM: #343 meldete „Layout-AI fehlgeschlagen"
+#       für einen pull_request-Lauf eines Zweigs, der mitten in
+#       der Entwicklung rot war und 57 Minuten später aus sich
+#       heraus grün wurde – Produktion war nie betroffen.
+#    2) DEDUPE-VERGIFTUNG: Solange so ein Dev-Issue offen stand,
+#       unterdrückte der Dedupe-Filter ECHTE main-Fehler desselben
+#       Workflows (gleiche Blindstelle wie Issue #218: ein offenes
+#       Fehlalarm-Issue schluckt die echte Meldung).
+#    3) FALSCH-GRÜN-SCHLUSS: Der resolve-Job schloss Alarme, wenn
+#       IRGENDEIN Lauf des Workflows grün wurde – auch ein Zweig-
+#       Lauf. Ein grüner Zweig beweist nichts über main; #343 wurde
+#       genau so geschlossen. Deshalb schließt resolve ebenfalls
+#       nur bei Grün AUF DEM DEFAULT-BRANCH (symmetrische Regel).
+#  Der workflow_run-Vertrag (Wacht-Liste, types: [completed],
+#  Name „Fehler-Alerting") bleibt unangetastet – der Alerting-
+#  Herzschlag (alerting_heartbeat.py) liest ihn aus dieser Datei.
 #
 #  BEWUSST NICHT ÜBERWACHT:
 #    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
@@ -86,9 +115,49 @@ jobs:
             const wfName = run.name || 'Unbekannter Workflow';
             const conclusion = run.conclusion;
             const runUrl = run.html_url;
-            const branch = run.head_branch || 'main';
+            const branch = run.head_branch || '';
+            const event = run.event || '?';
             const created = new Date(run.created_at).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
             const headSha = run.head_sha ? run.head_sha.slice(0, 8) : '?';
+
+            // ================================================================
+            //  PRODUKTIONS-SCOPING (Reparatur Fehlalarm-Klasse #343, 21.09.2026)
+            //  --------------------------------------------------------------
+            //  Ein Alarm ist ein Vorfall in der PRODUKTION. Läufe auf Arbeits-/
+            //  PR-Zweigen (pull_request-Events, push auf arena/*, dependabot/*)
+            //  sind Entwicklung: rot ist dort eine Zwischenstufe, sichtbar als
+            //  Check am PR – kein Grund, den Betreiber zu wecken. Belegt durch
+            //  Issue #343: „Layout-AI fehlgeschlagen" für einen PR-Zweig-Lauf,
+            //  der 57 Minuten später von selbst grün war; während das Issue
+            //  offen stand, hätte der Dedupe-Filter einen ECHTEN main-Fehler
+            //  desselben Workflows verschluckt, und geschlossen wurde es durch
+            //  einen grünen ZWEIG-Lauf ohne jeden Produktionsbeweis.
+            //  Regel: Alarm nur bei head_branch == default_branch UND Event
+            //  != pull_request. (workflow_run läuft immer auf der main-Version
+            //  dieser Datei – die Regel gilt damit für alle Zweige repo-weit.)
+            // ================================================================
+            const defaultBranch = (context.payload.repository && context.payload.repository.default_branch) || 'main';
+            const isProdRun = branch === defaultBranch && event !== 'pull_request';
+            if (!isProdRun) {
+              console.log('Kein Produktions-Lauf: Branch „' + (branch || '(leer)') + '“ ≠ „' + defaultBranch + '“ oder Event „' + event + '“.');
+              console.log('Rote Dev-/PR-Läufe sind als Checks am PR/Zweig sichtbar – kein Owner-Alarm (Regel aus Fehlalarm #343, 21.09.2026).');
+              return;
+            }
+
+            // Jobs EINMAL holen – werden zweimal gebraucht: Phantoms-Filter
+            // (Issue #218) und Diagnose-Abschnitt (INCIDENT-2026-09-19).
+            let jobs = [];
+            let jobsKnown = false;
+            try {
+              jobs = await github.paginate(
+                github.rest.actions.listJobsForWorkflowRun,
+                { owner: context.repo.owner, repo: context.repo.repo, run_id: run.id, per_page: 100 }
+              );
+              jobsKnown = true;
+            } catch (e) {
+              // Im Zweifel lieber melden als eine echte Störung verschlucken.
+              console.log('Job-Abfrage fehlgeschlagen (' + e.message + ') – Diagnose entfällt, Meldung wird sicherheitshalber erstellt.');
+            }
 
             // ================================================================
             //  PHANTOM-FILTER (Reparatur Issue #218, 08.09.2026)
@@ -114,29 +183,39 @@ jobs:
             //  verdraengter Lauf hat keine. Nur `cancelled` wird so geprueft –
             //  `failure` meldet weiterhin immer.
             // ================================================================
-            if (conclusion === 'cancelled') {
-              let ranSomething = false;
-              try {
-                const jobs = await github.paginate(
-                  github.rest.actions.listJobsForWorkflowRun,
-                  { owner: context.repo.owner, repo: context.repo.repo, run_id: run.id, per_page: 100 }
-                );
-                ranSomething = jobs.some(j =>
-                  (j.steps || []).some(s => s.conclusion === 'success')
-                );
-                if (!ranSomething) {
-                  console.log('Verdrängter Wartelauf (' + jobs.length + ' Jobs, kein ausgeführter Schritt) – kein Fehlalarm.');
-                  console.log('Der nachfolgende Lauf veröffentlicht denselben Stand inkl. neuerer Commits.');
-                  return;
-                }
-                console.log('Echter Abbruch: Der Lauf hatte bereits ausgeführte Schritte – Meldung wird erstellt.');
-              } catch (e) {
-                // Im Zweifel lieber melden als eine echte Störung verschlucken.
-                console.log('Job-Abfrage fehlgeschlagen (' + e.message + ') – Meldung wird sicherheitshalber erstellt.');
+            if (conclusion === 'cancelled' && jobsKnown) {
+              const ranSomething = jobs.some(j =>
+                (j.steps || []).some(s => s.conclusion === 'success')
+              );
+              if (!ranSomething) {
+                console.log('Verdrängter Wartelauf (' + jobs.length + ' Jobs, kein ausgeführter Schritt) – kein Fehlalarm.');
+                console.log('Der nachfolgende Lauf veröffentlicht denselben Stand inkl. neuerer Commits.');
+                return;
               }
+              console.log('Echter Abbruch: Der Lauf hatte bereits ausgeführte Schritte – Meldung wird erstellt.');
             }
 
-            const { data: existing } = await github.rest.issues.listForRepo({
+            // ================================================================
+            //  DIAGNOSE: Welche Jobs/Schritte sind wirklich rot?
+            //  (Lehre aus INCIDENT-2026-09-19: Eine Meldung, die nur „API-Key?
+            //  GitHub-Ausfall?" rät, obwohl der Run den toten Schritt kennt,
+            //  schickt den Menschen auf Ratesuche. Deshalb: Namen + Log-Links
+            //  der fehlgeschlagenen Jobs/Schritte direkt ins Issue.)
+            // ================================================================
+            const failedJobs = jobs
+              .filter(j => j.conclusion === 'failure' || j.conclusion === 'cancelled')
+              .map(j => ({
+                name: j.name,
+                url: j.html_url,
+                steps: (j.steps || [])
+                  .filter(s => s.conclusion === 'failure' || s.conclusion === 'cancelled')
+                  .map(s => s.name),
+              }));
+
+            // Dedupe: offenes Alarm-Issue desselben Workflows? Paginiert –
+            // eine einzelne 100er-Seite wäre wieder eine blinde Stelle,
+            // sobald das Repo mehr offene Issues trägt.
+            const existing = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
@@ -153,11 +232,23 @@ jobs:
               '',
               '- **Workflow:** ' + wfName,
               '- **Branch:** ' + branch + ' · **Commit:** `' + headSha + '`',
-              '- **Zeit:** ' + created,
+              '- **Zeit:** ' + created + ' · **Event:** `' + event + '`' + (run.run_attempt > 1 ? ' · **Versuch:** ' + run.run_attempt : ''),
               '- **Run:** [Details ansehen](' + runUrl + ')',
-              '',
+              ''
+            ];
+            if (failedJobs.length > 0) {
+              lines.push('### Fehlgeschlagene Schritte (direkt aus dem Lauf)');
+              for (const j of failedJobs) {
+                const steps = j.steps.length ? ' – ' + j.steps.map(s => '„' + s + '“').join(' → ') : '';
+                lines.push('- Job **„' + j.name + '“** ([Log](' + j.url + '))' + steps);
+              }
+              lines.push('');
+            }
+            lines.push(
               '### Was du tun solltest',
-              '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
+              failedJobs.length > 0
+                ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
+                : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',
               '2. Häufigste Ursachen:',
               '   - **API-Key abgelaufen** (GROQ/GEMINI) → Secrets in den Repo-Einstellungen aktualisieren',
               '   - **GitHub-Ausfall** → auf https://www.githubstatus.com prüfen',
@@ -165,7 +256,7 @@ jobs:
               '',
               '---',
               '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
-            ];
+            );
             const body = lines.join('\n');
 
             // Label "auto-report" sicherstellen (zentrales Fehlermeldungs-Label).
@@ -196,10 +287,21 @@ jobs:
   #  offene Issue (Label auto-report) geschlossen. Die dauerhafte
   #  Löschung übernimmt der Workflow "Erledigte Fehlermeldungen
   #  dauerhaft löschen" nach Ablauf der Schonfrist.
+  #
+  #  PRODUKTIONS-SCOPING (Fehlalarm-Klasse #343, 21.09.2026):
+  #  Geschlossen wird ein Alarm NUR durch einen grünen Lauf AUF DEM
+  #  DEFAULT-BRANCH – symmetrisch zur Erzeugung. Ein grüner Zweig-/
+  #  PR-Lauf beweist nichts über die Produktion; genau so wurde #343
+  #  von einem Lauf des Zweigs arena/01a0c4dc-… geschlossen, ohne
+  #  dass sich am Produktionsstand irgendetwas geändert hätte.
   # ------------------------------------------------------------
   resolve:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 10
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.head_branch == (github.event.repository.default_branch || 'main') &&
+          github.event.workflow_run.event != 'pull_request' }}
     steps:
       - name: Behobene Fehlermeldung schließen
         env:
@@ -207,13 +309,14 @@ jobs:
         run: |
           WF_NAME="${{ github.event.workflow_run.name }}"
           RUN_URL="${{ github.event.workflow_run.html_url }}"
+          RUN_BRANCH="${{ github.event.workflow_run.head_branch }}"
 
           for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
             --label auto-report --json number,title \
             | jq -r --arg w "$WF_NAME" \
             '.[] | select(.title | startswith("⚠️ Workflow fehlgeschlagen: " + $w)) | .number'); do
             gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
-              --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+              --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei auf \`${RUN_BRANCH}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
             echo "→ Issue #$n geschlossen."
           done
           echo "Auto-Close-Prüfung abgeschlossen."
