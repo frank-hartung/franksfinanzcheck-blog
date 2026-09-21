@@ -30,13 +30,26 @@ unten) · ☐ Website: Datenschutz/AVV prüfen (Brevo bietet AVV in den Einstell
 
 ## 2. Absender-Adresse (profi = eigene Domain, ~10 Min.)
 
-**Empfohlen (kostenlos): Zoho Mail Free** für `kontakt@franksfinanzcheck.de`
-(beim Domain-Anbieter MX-Einträge setzen – Wizard führt dich).
-Dann in Brevo: **Senders → Add sender** → `kontakt@franksfinanzcheck.de`
-und die **Authentifizierung** (SPF + DKIM) per DNS-Einträgen abschließen
-(Brevo zeigt exakt die Werte; beim Anbieter in die DNS-Zone eintragen).
-→ bessere Zustellbarkeit + „professioneller Absender".
-*(Notlösung: private Mail bleibt, funktioniert – aber weniger schick.)*
+> **Für den gewünschten Blog-Kontakt: Cloudflare Email Routing** für
+> `kontakt@franksfinanzcheck.de` – siehe
+> [Einrichtungsanleitung](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md). Das nimmt
+> eingehende Antworten an und leitet sie an das persönliche Postfach
+> weiter; es ist bewusst **keine** eigene Mailbox (kein SMTP-Versand).
+
+Für den **Absender-Versand aus Brevo** ist zusätzlich zu der Cloudflare-
+Weiterleitung die Brevo-Sender-Authentifizierung nötig: In Brevo
+**Senders → Add sender** → `kontakt@franksfinanzcheck.de` und die
+**Authentifizierung** (SPF + DKIM) per DNS-Einträgen abschließen.
+
+> (Brevo zeigt exakt die Werte; beim Anbieter in die DNS-Zone eintragen).
+> Beim SPF darf **kein zweiter TXT-Eintrag** entstehen: den vorhandenen
+> SPF-Eintrag gemäß Brevo-/Cloudflare-Vorgaben zusammenführen (z. B.
+> `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all`).
+> Die Cloudflare-Routing-MX-Einträge bleiben dabei bestehen.
+> → bessere Zustellbarkeit + „professioneller Absender".
+
+*(Notlösung: private Mail bleibt als Absender, funktioniert – aber
+weniger schick und ohne `kontakt@franksfinanzcheck.de`-Absenderadresse.)*
 
 ## 3. Empfängerliste + Formular (5 Min.)
 

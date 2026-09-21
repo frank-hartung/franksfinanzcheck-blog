@@ -202,3 +202,14 @@ curl -sS -A "Pinterestbot/1.0 (+https://help.pinterest.com/en/business/article/p
 
 Dann den Appeal stellen, dass die Domain technisch wieder sauber erreichbar
 ist (siehe `PINTEREST-SPAM-SPERRE-AKTIONSPLAN.md`, Phase 2–3).
+
+---
+
+## Verwandte Themen
+
+- **E-Mail:** Die Domain wird zusätzlich für `kontakt@franksfinanzcheck.de`
+  via **Cloudflare Email Routing** verwendet. Das erfordert das Entfernen
+  des Null-MX-Eintrags (`MX @ .`) und das Anlegen der Cloudflare-Routing-MX-
+  Einträge (DNS-only, graues Wölkchen). Die Website-A/CNAME-Records bleiben
+  davon unberührt (weiterhin orange Proxy). Siehe separate Einrichtungs-
+  anleitung: [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md).
