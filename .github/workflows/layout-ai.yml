@@ -161,8 +161,8 @@ jobs:
       # den Kennzahlen des Laufs.
       - name: Befunde als Annotationen veröffentlichen
         if: ${{ always() }}
-        run: python3 scripts/layout_annotations.py \
-          --dom .cache/layout/dom-audit.json --browser /tmp/browser-audit.json
+        run: |
+          python3 scripts/layout_annotations.py --dom .cache/layout/dom-audit.json --browser /tmp/browser-audit.json
 
       # ============ BERICHT IN DIE JOB-SUMMARY ============
       - name: Bericht in die Job-Summary übernehmen

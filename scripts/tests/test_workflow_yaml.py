@@ -25,6 +25,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -135,6 +136,52 @@ class WorkflowYamlTests(unittest.TestCase):
                         f"{path.name}/{job_name} Step {i}: JS-Syntaxfehler in "
                         f"github-script:\n{proc.stderr}")
         self.assertGreater(found, 0, "Kein github-script-Step gefunden?")
+
+    def test_keine_backslash_faltung_in_run_bloecken(self):
+        """Lehre aus dem zweiten CI-Fehlschlag (21.09.2026): In einem *plain*
+        `run:`-Skalar faltet YAML den Zeilenumbruch hinter einem Backslash zu
+        einem Leerzeichen – der Shell bleibt ein literales `\` als Argument
+        übrig (`unrecognized arguments: \`). Genau so ist der Annotations-Step
+        gestorben. In einem Block-Skalar (`run: |`) ist derselbe Backslash
+        korrekt; geprüft wird deshalb nur die Faltung in plain-Skalaren."""
+        pattern = re.compile(r"^\s*run:\s*(?![|>])(.*)$")
+        for path in WORKFLOWS:
+            lines = path.read_text(encoding="utf-8").splitlines()
+            for no, line in enumerate(lines, 1):
+                m = pattern.match(line)
+                if m and m.group(1).rstrip().endswith("\\"):
+                    self.fail(f"{path.name}:{no}: Backslash am Zeilenende in "
+                              "einem plain `run:` – besser `run: |` verwenden")
+
+    def test_run_befehle_nutzen_existierende_skripte(self):
+        """Ein `run:`-Step, der ein Skript aufruft, das es nicht gibt (oder das
+        syntaktisch kaputt ist), stirbt erst in CI. Vorher prüfen."""
+        token = re.compile(r"(scripts/[\w./-]+\.(?:py|js|sh))")
+        geprueft = 0
+        for path in WORKFLOWS:
+            data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
+            for job_name, job in (data.get("jobs") or {}).items():
+                for i, step in enumerate(job.get("steps") or [], 1):
+                    run = step.get("run")
+                    if not run:
+                        continue
+                    for rel in set(token.findall(run)):
+                        geprueft += 1
+                        target = ROOT / rel
+                        with self.subTest(workflow=path.name, step=i, skript=rel):
+                            self.assertTrue(target.is_file(),
+                                            f"{path.name}/{job_name} Step {i}: "
+                                            f"{rel} existiert nicht")
+                            if rel.endswith(".py"):
+                                proc = subprocess.run(
+                                    [sys.executable, "-m", "py_compile", str(target)],
+                                    capture_output=True, text=True)
+                                self.assertEqual(0, proc.returncode, proc.stderr)
+                            elif rel.endswith(".js") and shutil.which("node"):
+                                proc = subprocess.run(["node", "--check", str(target)],
+                                                      capture_output=True, text=True)
+                                self.assertEqual(0, proc.returncode, proc.stderr)
+        self.assertGreater(geprueft, 5, "Zu wenige Skript-Aufrufe gefunden?")
 
     def test_step_namen_sind_yaml_sicher(self):
         """Doppelpunkt + Leerzeichen in einem unquotierten Step-Namen ist ein
