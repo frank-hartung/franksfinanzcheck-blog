@@ -201,7 +201,14 @@ jobs:
               owner: context.repo.owner, repo: context.repo.repo,
               state: 'open', per_page: 100,
             });
-            const existing = open.filter(i => !i.pull_request && (i.body || '').includes(marker));
+            // Dedupe über Marker ODER unseren festen Titel: So übernimmt die
+            // Automatik auch Issues, die eine ältere Workflow-Version ohne
+            // Marker angelegt hat (genau der Fall #338). Ohne diesen Zweig
+            // bliebe der alte Alarm offen UND der neue Lauf legte einen
+            // zweiten an – zwei Alarme für einen Befund.
+            const title = (process.env.ISSUE_TITLE || '').trim();
+            const existing = open.filter(i => !i.pull_request
+              && ((i.body || '').includes(marker) || (i.title || '').trim() === title));
 
             if (green) {
               for (const issue of existing) {

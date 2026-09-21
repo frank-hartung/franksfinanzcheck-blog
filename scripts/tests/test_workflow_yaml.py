@@ -21,7 +21,11 @@ Diese Datei schließt die Lücke. Sie prüft ALLE Workflows auf:
 Läuft ohne Netz und ohne GitHub – Teil von `python3 -m unittest discover
 -s scripts/tests`.
 """
+import os
 import re
+import shutil
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -94,6 +98,43 @@ class WorkflowYamlTests(unittest.TestCase):
                                 unknown,
                                 f"{path.name}/{job_name} Step {i}: "
                                 f"unbekannte Schlüssel {sorted(unknown)}")
+
+    def test_eingebettetes_javascript_ist_syntaktisch_gueltig(self):
+        """`actions/github-script` führt JS aus einem YAML-Block aus. Steht der
+        Step auf `continue-on-error: true` (tut er im Layout-Workflow), bliebe
+        ein Syntaxfehler unsichtbar: der Step wird still übersprungen, das
+        Issue wird nie gepflegt. Also prüfen wir den Block wie Code."""
+        if shutil.which("node") is None:
+            self.skipTest("node nicht installiert")
+        found = 0
+        for path in WORKFLOWS:
+            data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
+            for job_name, job in (data.get("jobs") or {}).items():
+                for i, step in enumerate(job.get("steps") or [], 1):
+                    uses = str(step.get("uses", ""))
+                    script = (step.get("with") or {}).get("script")
+                    if "github-script" not in uses or not script:
+                        continue
+                    found += 1
+                    # github-script führt den Block in einer async-Funktion
+                    # aus – dort ist `await` auf Top-Level erlaubt. `node
+                    # --check` prüft eine Datei aber als Modul/Skript und
+                    # würde jedes `await` anmeckern; deshalb dieselbe Hülle
+                    # wie die Action sie baut.
+                    with tempfile.NamedTemporaryFile(
+                            "w", suffix=".js", encoding="utf-8", delete=False) as fh:
+                        fh.write("(async () => {\n" + script + "\n})();\n")
+                        tmp = fh.name
+                    try:
+                        proc = subprocess.run(["node", "--check", tmp],
+                                              capture_output=True, text=True)
+                    finally:
+                        os.unlink(tmp)
+                    self.assertEqual(
+                        proc.returncode, 0,
+                        f"{path.name}/{job_name} Step {i}: JS-Syntaxfehler in "
+                        f"github-script:\n{proc.stderr}")
+        self.assertGreater(found, 0, "Kein github-script-Step gefunden?")
 
     def test_step_namen_sind_yaml_sicher(self):
         """Doppelpunkt + Leerzeichen in einem unquotierten Step-Namen ist ein

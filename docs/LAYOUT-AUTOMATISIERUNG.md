@@ -208,7 +208,17 @@ Seitdem prüft `scripts/tests/test_workflow_yaml.py` **alle** Workflows:
 4. Step-Namen ohne die YAML-Falle „Doppelpunkt + Leerzeichen" (quotiert ist
    erlaubt).
 
+4b. die JavaScript-Blöcke der `actions/github-script`-Steps syntaktisch
+    gültig sind (in der Hülle, in der die Action sie ausführt). Warum:
+    der Issue-Step steht auf `continue-on-error: true` – ein Syntaxfehler
+    darin würde still übersprungen, und das Issue würde nie gepflegt.
+
 Der Test läuft in `python3 -m unittest discover -s scripts/tests` mit – also
 vor jedem Push, den die Pipeline ernst nimmt. Regel daraus: **jede Datei, die
 einen Lauf steuert, hat einen Test, der sie parst.** Eine Wache ohne Wache ist
 keine Wache.
+
+Und ein zweiter Beschluss aus #338: Die Issue-Pflege dedupliziert über den
+Marker **und** den festen Titel. Issues aus einer älteren Workflow-Version
+(ohne Marker) werden damit übernommen und bei Grün geschlossen – sonst bliebe
+der alte Alarm offen und der nächste Befund erzeugte einen zweiten.
