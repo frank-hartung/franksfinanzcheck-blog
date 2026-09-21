@@ -184,9 +184,10 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 | `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
 | Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json` (Budget-SSOT), misst Laufzeit-DOM **und** HTML-Messung ohne Fremd-Skripte; Drift zwischen Parser und HTML-Messung = Befund |
 | `node scripts/layout_browser_check.js --selftest` | 13 Verträge ohne Chrome (Budget-/Severity-Logik inkl. Laufzeitsatz) (u. a. „Laufzeit 1109 Elemente ist kein Befund", „ausgeliefert wären 1109 eine Frühwarnung", „+1 über der Lighthouse-Grenze ist rot") |
-| `python3 -m unittest discover -s scripts/tests` | **549 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 59 neue in dieser Runde (`test_dom_audit.py` 41: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template- und Browser-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
+| `python3 -m unittest discover -s scripts/tests` | **557 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 62 neue in dieser Runde (`test_dom_audit.py` 38: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template- und Browser-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel/Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen; `test_integrity_guard.py` 24, davon 6 neue: der Betreiber-Weg `--set-current` und der Prüfstein „ausgelieferter Baum gegen Siegel", siehe § 8) |
+| Layout-AI im CI, Stand `3641a09` ([Lauf 35637093358](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/35637093358)) | **grün**: 213 Seiten · max. Kinder 49 statisch / 50 Laufzeit · Head 49/50 · Tiefe 12 · Elemente 967 statisch / 1108 Laufzeit · HTML ohne Fremd-Skripte max. 970 · Erweiterungsschicht +1…+168 · Parser-Gegenrechnung an 14 Messungen, **Drift 0** |
 | hreflang-Hygiene (`check_hreflang()`) | 371 Seiten je **genau eine** Angabe pro Sprache, keine Doppelung; auf 12 Paginierungsseiten zeigt das geerbte `de` auf die Abschnitts-Wurzel → **Warnung** mit Quelle (`head.html`, versiegelt) statt stiller Duldung |
-| `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
+| `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet. Am 21.09. **war das nicht so**: #344 heilte `head.html` (KRITISCH) und signierte den Lock nicht mit; `main` lief aus dem Siegel (Gate Exit 3), der nächste Lauf der Content-Engine wäre im ersten Schritt hart gestoppt. Siehe § 8 |
 
 **Vorher → Nachher (minifizierter Bau, 213 Seiten ohne Paginierung):**
 
@@ -329,3 +330,63 @@ Siehe § 3.1 und die Warnung in `check_hreflang()`.
 **Regel:** Wenn eine Prüfung wiederholt Alarm schlägt, ist zuerst die
 Bezugsgröße falsch – nicht die Schwelle. Schwellen anzupassen, bis es grün
 ist, war die Ursache von #338; Bezugsgrößen zu trennen ist die Heilung.
+
+---
+
+## 8. Dritte Lehre: Wer den Kern anfasst, signiert mit
+
+Diese Runde hat den teuersten Befund nicht im Layout gefunden, sondern im
+Siegel – und zwar erst, als ich den gemergten Stand verifizieren wollte.
+
+**Der Vorfall.** #344 hat `layouts/_partials/head.html` geheilt (genau die
+Heilung, um die es hier geht) und den Integritäts-Lock **nicht mit-signiert**.
+`head.html` gehört zur Klasse KRITISCH (7 Knoten). Ergebnis: `main` war ab
+`ea509c1` aus dem Siegel, `integrity_guard.py --gate` Exit 3, und `--heal`
+läuft dort in den Hard Stop (Exit 3) – die Content-Engine wäre beim nächsten
+Lauf im **ersten** Schritt gestorben: kein Artikel, kein Slot, Defizit-Alarm.
+Genau der Fehlpfad, gegen den `integrity-lock.yml` gebaut wurde (#315), nur
+eine Station weiter.
+
+**Warum es niemand sah.** Der Lauf des PR-Gates zeigte es (rot), aber der
+Branch-Schutz verlangt den Check `Integritäts-Siegel` nicht – dokumentierter
+Dauerzustand, kein Admin-Recht in dieser Runde (`docs/PFLICHT-CHECK-RUNBOOK.md`).
+Ein rotes Kreuz, das nichts aufhält, liest niemand. Dazu kam: die
+Reparaturzeile des Gates lautet `--set-current`, und **genau dieser Weg
+schrieb keine Herkunft in die Akte** (im Gegensatz zu `--heal`). Die stille
+Neuzeichnung war damit der bequemste und zugleich der einzige Weg ohne Spur –
+die Akte im Lock hätte nie gesagt, welcher Commit gezeichnet wurde.
+
+**Nachweis-Routine für einen gemergten Stand (read-only, Sekunden):**
+
+```bash
+git worktree add --detach /tmp/pruefstein origin/main   # fremder Stand, eigener Ordner
+cd /tmp/pruefstein && python3 scripts/integrity_guard.py --gate
+# Exit 0 = Kern wie signiert · Exit 3 = Herkunft + Reparaturzeile im Klartext
+git worktree remove /tmp/pruefstein
+```
+
+**Was dauerhaft geändert wurde:**
+
+1. **`--set-current` nennt, was es zeichnet.** Klasse, Urteil und die
+   belegenden Commits landen in der Akte, und der Vorgang hinterlässt eine
+   Zeile in `data/integrity_history.jsonl` (`modus: set-current`). Die
+   Signatur bleibt eine menschliche Entscheidung – aber keine stumme.
+2. **Der ausgelieferte Baum wird im Testlauf geprüft.** `RepoSealTests` in
+   `scripts/tests/test_integrity_guard.py` vergleicht die 43 Kerndateien
+   dieses Repos mit ihrer Signatur und nennt im Fehlerfall die Reparaturzeile.
+   Bisher war die Mechanik lückenlos getestet und der *echte* Stand trotzdem
+   unsigniert – auf `main` (Stand `ea509c1`) schlägt der neue Test bewiesen
+   fehl und benennt `layouts/_partials/head.html`. Der Weg, den CLAUDE.md vor
+   dem Push nennt (`unittest discover`), schweigt dazu nicht mehr.
+3. **Signiert wurde mit Herkunft**, nicht per stillem `--set-current`: siehe
+   Commit `3641a09`, Akteneintrag `set-current` mit `ea509c1` und Betreff.
+
+**Bewusst nicht getan:** einen zweiten Siegel-Check in `layout-ai.yml` legen
+(zwei Kopien derselben Wahrheit – der Wächter steht in `integrity-lock.yml`
+und im Testlauf), und die 12 Pager-`hreflang`-Zeilen durch ein weiteres
+Anfassen von `head.html` glattziehen (das riss das Siegel erneut auf: eine
+Betreiber-Entscheidung, keine Automatik-Entscheidung).
+
+**Regel:** Ein Layout-Fix, der eine versiegelte Kerndatei berührt, ist erst
+fertig, wenn der Lock **im selben Commit** mit-signiert ist – und die Akte
+sagt, warum.

@@ -21,8 +21,26 @@ Mini-Repo (keine Attrappen – eine Attrappe wäre die zweite Wahrheit):
      Lock (Herkunft: Commits, Klasse) und eine schema-konforme Zeile in
      `data/integrity_history.jsonl` (deren Pflichtfelder `history_guard.py`
      festhält). Und: Beweis-Läufe schreiben nichts (C15).
+
+Nachtrag 21.09.2026 (Layout-Automatisierung, #338/#344) – zwei Lücken, die
+die Mechanik oben nicht fangen konnte, weil sie nur Attrappen prüfte:
+
+  4. BETREIBER-WEG  `--set-current` ist die Signatur, die das Gate selbst
+     empfiehlt – sie schrieb die Herkunft aber nicht mit (im Gegensatz zu
+     `--heal`). Die stille Neuzeichnung war damit der bequemste Weg. Jetzt
+     nennt sie Klasse, Urteil und belegende Commits und hinterlässt eine
+     Zeile in der Historie (`SetCurrentTests`).
+  5. AUSLIEFERUNG  Der Baum DIESES Repos wird gegen sein Siegel geprüft
+     (`RepoSealTests`). Am 21.09. war die Mechanik vollständig grün, während
+     `main` aus dem Siegel lief: #344 hatte `head.html` (KRITISCH) geheilt
+     und den Lock nicht mit-signiert. Der PR-Lauf zeigte es, der Branch-Schutz
+     verlangt den Check aber nicht – der Merge ging durch, und der nächste
+     Content-Engine-Lauf wäre im ersten Schritt hart gestoppt (kein Artikel,
+     kein Slot, Defizit-Alarm). Der Testlauf ist der Weg, den CLAUDE.md vor
+     dem Push nennt: hier steht der Befund jetzt nicht mehr stumm daneben.
 """
 import contextlib
+import datetime
 import io
 import json
 import subprocess
@@ -266,6 +284,85 @@ class BeweisTests(Fixture):
         self.assertEqual(list(lock["files"]), sorted(lock["files"]))
         self.assertTrue(all(lock["files"].values()), "leere Hashes sind kein Siegel")
         self.assertEqual(lock["audit"][-1]["art"], "test")
+
+
+class SetCurrentTests(Fixture):
+    """Der Weg, den das Gate empfiehlt, muss dieselbe Spur legen wie --heal."""
+
+    def test_set_current_nennt_die_herkunft(self):
+        self.signieren()
+        self.schreibe(CRIT_REL, "baseURL = '/neu/'\n")
+        _commit(self.root, "feat: kritischer Kern bewusst geändert")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            self.assertEqual(ig.set_current(self.root), 0)
+        akte = ig.load_lock(self.lock_pfad)["audit"][-1]
+        self.assertEqual(akte["art"], "set-current")
+        self.assertEqual(akte["geaendert"], [CRIT_REL])
+        herkunft = akte["herkunft"][0]
+        self.assertEqual(herkunft["pfad"], CRIT_REL)
+        self.assertEqual(herkunft["klasse"], "kritisch")
+        self.assertEqual(herkunft["urteil"], "VERSIEGELBAR")
+        self.assertTrue(herkunft["commits"], "Herkunft ohne Commit ist keine")
+        self.assertIn("Herkunft:", puffer.getvalue(),
+                      "die Signatur muss im Log sagen, was sie zeichnet")
+        self.assertEqual(self.driften(), ([], []))
+
+    def test_set_current_ohne_drift_traegt_keine_herkunft(self):
+        self.signieren()
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.set_current(self.root), 0)
+        akte = ig.load_lock(self.lock_pfad)["audit"][-1]
+        self.assertEqual(akte["geaendert"], [])
+        self.assertNotIn("herkunft", akte,
+                         "ohne Drift gibt es keine Herkunft zu erfinden")
+        self.assertEqual(self.driften(), ([], []))
+
+    def test_set_current_hinterlaesst_eine_zeile_in_der_historie(self):
+        self.signieren()
+        self.schreibe(FEST_REL, "print('neu')\n")
+        _commit(self.root, "fix: bewusst neu signiert")
+        with contextlib.redirect_stdout(io.StringIO()):
+            ig.set_current(self.root)
+        zeilen = [json.loads(z) for z in
+                  self.history_pfad.read_text(encoding="utf-8").splitlines() if z.strip()]
+        self.assertEqual(zeilen[-1]["modus"], "set-current")
+        self.assertEqual(zeilen[-1]["fest"], 1)
+        self.assertEqual(zeilen[-1]["geaendert"], [FEST_REL])
+        self.assertEqual(zeilen[-1]["date"], datetime.date.today().isoformat())
+
+
+class RepoSealTests(unittest.TestCase):
+    """Nicht die Attrappe: Passt der ausgelieferte Baum zu seinem Siegel?"""
+
+    def test_ausgelieferter_baum_passt_zum_siegel(self):
+        lock = ig.load_lock(ig.LOCK)
+        crit_bad, fest_bad = ig.verify_files(ig.ROOT, lock.get("files", {}))
+        self.assertEqual(
+            (crit_bad, fest_bad), ([], []),
+            "Der gesperrte Kern läuft aus dem Siegel. Reparatur – die Herkunft "
+            "landet dabei in der Akte: python3 scripts/integrity_guard.py "
+            "--set-current, dann data/integrity_lock.json im SELBEN Commit "
+            f"mitnehmen. Abweichungen: kritisch={crit_bad}, fest={fest_bad}")
+
+    def test_siegel_kennt_jeden_kritischen_knoten(self):
+        lock = ig.load_lock(ig.LOCK)
+        unsigniert = sorted(p for p in ig.KRITISCH
+                            if (ig.ROOT / p).exists() and p not in lock.get("files", {}))
+        self.assertEqual(unsigniert, [], "kritische Knoten ohne Signatur")
+
+    def test_akte_bleibt_gebunden_und_bennbar(self):
+        lock = ig.load_lock(ig.LOCK)
+        akte = lock["audit"]
+        self.assertTrue(akte, "das Siegel ohne Akte ist eine Zahl ohne Grund")
+        self.assertLessEqual(len(akte), ig.AUDIT_MAX, "AUDIT_MAX ist die Lesbarkeitsgrenze")
+        letzte = akte[-1]
+        for feld in ("date", "art", "head", "geaendert"):
+            self.assertIn(feld, letzte)
+        if letzte["geaendert"]:
+            herkunft = {e["pfad"] for e in letzte.get("herkunft", [])}
+            self.assertEqual(herkunft, set(letzte["geaendert"]),
+                             "wer zeichnet, nennt die Herkunft JEDER gezeichneten Datei")
 
 
 if __name__ == "__main__":
