@@ -983,5 +983,14 @@
    "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
+ },
+ "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich": {
+  "title": "Zahnzusatzversicherung Vergleich 2026: Kosten & Leistungen",
+  "ts": "2026-09-21T09:31:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": "bis zu 100 % Erstattung"
+  }
  }
 }
