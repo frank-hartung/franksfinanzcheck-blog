@@ -2,7 +2,7 @@
 title: "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen"
 description: "Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst."
 date: 2026-09-23T08:00:00Z
-draft: false
+draft: true
 tags: ["Ratenkredit", "Ratenkredit Vergleich", "Kredit Zinsen", "Umschuldung"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"

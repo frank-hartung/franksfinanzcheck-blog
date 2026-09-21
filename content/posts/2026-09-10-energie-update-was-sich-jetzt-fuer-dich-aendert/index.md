@@ -2,7 +2,7 @@
 title: "Energie-Update: Was sich jetzt für dich ändert"
 description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
 date: 2026-09-23T08:10:00Z
-draft: false
+draft: true
 tags: ["Energie-Update: was sich jetzt für dich ändert", "Energie"]
 categories: ["News"]
 keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
