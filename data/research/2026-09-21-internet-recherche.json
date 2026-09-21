@@ -1,0 +1,229 @@
+{
+  "datum": "2026-09-21",
+  "erzeugt_utc": "2026-09-21 12:53 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Fake-Videos aus Russland sollen Vertrauen in Wahlen erschüttern",
+            "url": "https://www.tagesschau.de/faktenfinder/fakes-wahlen-mecklenburg-vorpommern-berlin-100.html",
+            "datum": "2026-09-21T12:40",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Nach Berlin-Wahl: Enteignungs-Sorgen belasten Immobilienaktien",
+            "url": "https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-vonovia-deutsche-wohnen-100.html",
+            "datum": "2026-09-21T12:35",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Berlin-Wahl: Giffey verpasst Einzug ins Abgeordnetenhaus",
+            "url": "https://www.tagesschau.de/inland/regional/berlin/berlin-wahl-2026-giffey-100.html",
+            "datum": "2026-09-21T12:15",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "IG Metall macht mobil gegen Kahlschlag in der Autoindustrie",
+            "url": "https://www.tagesschau.de/wirtschaft/ig-metall-automobil-102.html",
+            "datum": "2026-09-21T11:42",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Kremlpartei Geeintes Russland gewinnt Duma-Wahl",
+            "url": "https://www.tagesschau.de/ausland/asien/wahlergebnis-duma-russland-100.html",
+            "datum": "2026-09-21T10:48",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "IG Metall ruft Automobilbeschäftigte bundesweit zum Protest",
+            "url": "https://www.spiegel.de/wirtschaft/autoindustrie-gewerkschaft-verstaerkt-druck-auf-deutsche-autohersteller-a-9bec2ef8-cb7b-4148-ba6b-8890f54604aa#ref=rss",
+            "datum": "Mon, 21 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Wirtschaft in Deutschland: Bürokratie ist größtes Standortproblem für Unternehmen",
+            "url": "https://www.spiegel.de/wirtschaft/wirtschaft-in-deutschland-buerokratie-ist-groesstes-standortproblem-fuer-unternehmen-a-d0762441-15ef-4a46-855b-661a3d278c7b#ref=rss",
+            "datum": "Mon, 21 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Berentzen: US-Whiskeyhersteller kauft deutsche Traditionsbrennerei",
+            "url": "https://www.spiegel.de/wirtschaft/berentzen-us-whiskeyhersteller-kauft-deutsche-traditionsbrennerei-a-08a9a1bc-d5c3-4016-a242-1feb839895ac#ref=rss",
+            "datum": "Mon, 21 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Volkswagen: Škoda-Chef Klaus Zellmer wechselt zu Volvo",
+            "url": "https://www.spiegel.de/wirtschaft/volkswagen-skoda-chef-wechselt-zu-volvo-a-9f87e04e-560a-4cc0-8f6a-b976ba8cfd46#ref=rss",
+            "datum": "Mon, 21 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Berlin-Wahl: Mehrheit gegen Enteignungen von Wohnungsfirmen in der Hauptstadt",
+            "url": "https://www.spiegel.de/wirtschaft/berlin-wahl-umfrage-zeigt-mehrheit-gegen-enteignung-von-wohnkonzernen-a-06c70892-619a-4c67-91f8-05d811d6fe55#ref=rss",
+            "datum": "Mon, 21 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Google: 403 Millionen Euro Strafe wegen Standortdaten-Tracking",
+            "url": "https://www.heise.de/news/Google-403-Millionen-Euro-Strafe-wegen-Standortdaten-Tracking-11460206.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-21T14:38",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Lizenzierungstool slmgr.vbs: Microsoft bietet PowerShell-Ersatz wegen VBS-Ende",
+            "url": "https://www.heise.de/news/slmgr-vbs-Microsoft-liefert-Powershell-Alternative-zum-VBS-Ende-11460002.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-21T14:24",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Clicks Communicator: Smartphone mit physischer Tastatur erhält mehr RAM und Akku",
+            "url": "https://www.heise.de/news/Clicks-Communicator-Smartphone-mit-physischer-Tastatur-erhaelt-mehr-RAM-und-Akku-11460172.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-21T14:20",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise+ | Vorsicht, Kunde: Telekom-Bestellstrecke scheitert an fünfstelliger Vorwahl",
+            "url": "https://www.heise.de/ratgeber/Vorsicht-Kunde-Telekom-Bestellstrecke-scheitert-an-fuenfstelliger-Vorwahl-11326756.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+            "datum": "2026-09-21T14:15",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Kritische Lücke bei Claude Code, OpenAI Codex, GitHub Copilot und Gemini CLI",
+            "url": "https://www.heise.de/news/Kritische-Luecke-bei-Claude-Code-OpenAI-Codex-GitHub-Copilot-und-Gemini-CLI-11459862.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-21T14:05",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Drastically reduce electricity costs when growing – online calculator shows your savings potential!",
+            "url": "https://www.youtube.com/watch?v=I0_3kUfiS84",
+            "kanal": "Growtutorials",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Neukundenbonus – Geld zum Stromtarif geschenkt bekommen | Tipps zum Strom- bzw. Wechselbonus",
+            "url": "https://www.youtube.com/watch?v=Nl2FKN948tI",
+            "kanal": "cheapenergy24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich, Test online kostenlos beantragen (unbedingt ansehen!)",
+            "url": "https://www.youtube.com/watch?v=zNxtV6nPw98",
+            "kanal": "GeldWiki",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
