@@ -36,6 +36,11 @@
 #  KEIN push-Trigger: sonst würde jeder Deploy-Commit den Audit starten und
 #  die Auto-Heilung könnte sich selbst anstoßen (Endlosschleife).
 #
+#  Die Pfadliste enthält bewusst auch die Wachen selbst (Audit-Skripte, ihre
+#  Tests, Annotationen-Übersetzer): Ändert jemand die Prüfung, prüft die
+#  Prüfung das mit. Sonst wäre ein Commit an `test_dom_audit.py` oder
+#  `layout_annotations.py` der einzige, der nie gegen einen echten Lauf läuft.
+#
 #  Pull-Request-Modus: identischer Bau + identischer Audit (inkl. Browser),
 #  aber OHNE Auto-Heilung und OHNE Issue-Pflege – ein PR darf keine Commits
 #  in den Branch schreiben und keine Alarm-Issues erzeugen. Befunde machen
@@ -51,10 +56,15 @@ on:
     paths:
       - "layouts/**"
       - "assets/css/**"
+      - "assets/css/extended/**"
       - "scripts/dom_audit.py"
       - "scripts/layout_audit.py"
       - "scripts/layout_browser_check.js"
+      - "scripts/layout_annotations.py"
       - "scripts/check_covers.py"
+      - "scripts/tests/test_dom_audit.py"
+      - "scripts/tests/test_layout_annotations.py"
+      - "scripts/tests/test_workflow_yaml.py"
       - ".github/workflows/layout-ai.yml"
 
 permissions:
