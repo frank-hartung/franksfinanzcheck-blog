@@ -2,7 +2,9 @@
 title: "Tierkrankenversicherung 2026: Hund & Katze richtig versichern"
 description: "Tierkrankenversicherung 2026 im Vergleich: Was OP-Schutz und Vollschutz für Hund und Katze kosten, welche Leistungen zählen und für wen sich was lohnt."
 date: 2026-09-21T09:59:22Z
-draft: false
+draft: true
+cadence_demoted: 2026-09-21T12:44:29Z
+cadence_grund: "quality-score: 0.745 < 0.85; finale Freigabe fehlt"
 tags: ["Tierkrankenversicherung", "Hundekrankenversicherung", "Katzenkrankenversicherung", "OP-Versicherung Hund"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
