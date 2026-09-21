@@ -1,0 +1,77 @@
+{{- /* ============================================================
+    DEFERRED SCRIPTS – was NICHT in den <head> gehört
+    ------------------------------------------------------------
+    HEAD-DOM-BUDGET + KRITISCHER PFAD (Issue #338, 21.09.2026):
+    Beide Blöcke standen bis dahin im <head> (extend_head.html) und
+    kosteten dort direkte Kinder, obwohl sie für den ersten Paint
+    irrelevant sind:
+
+      · Umami-Analytics (cookieless): lädt ein Fremdskript nach.
+        Im Head konkurriert das mit CSS/Fonts um Bandbreite; am
+        Body-Ende nach dem Parsing ist es gratis. Das Consent-Gate
+        bleibt identisch – der Aufruf entscheidet erst zur Laufzeit,
+        ob geladen wird, und registriert den `ffConsentChange`-Horcher,
+        der auch nach der Fußzeile noch greift (der Consent-Banner wird
+        im Footer INCLUDE-davor gerendert und dispatcht erst beim Klick).
+      · Service-Worker-Registrierung: registriert nur, lädt nichts
+        blockierend. Nach dem Parsing ist sie sogar robuster
+        (kein Wettlauf mit dem ersten Rendern).
+
+    Beide werden über footer.html am Ende des <body> ausgegeben –
+    Google/Bing lesen das unverändert, Nutzer und Kennzahlen auch.
+============================================================ */ -}}
+
+{{- /* ---------- Privacy-Analytics (Umami, cookieless) ---------- */ -}}
+{{- with site.Params.umami.websiteId -}}
+{{- $umamiSrc := site.Params.umami.src | default "https://cloud.umami.is/script.js" -}}
+{{- $umamiHost := site.Params.umami.hostUrl | default "" -}}
+{{- $consent := site.Params.umami.consentRequired | default true -}}
+<script>
+(function () {
+  var KEY = 'ff_cookie_consent';
+  function getConsent() {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + KEY + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : null;
+    } catch (e) { return null; }
+  }
+  var consentRequired = {{ $consent }};
+  var c = getConsent();
+  // DSGVO: Bei consentRequired NUR nach explizitem "Alle akzeptieren" laden.
+  // Erstbesucher (c === null) dürfen NICHT getrackt werden.
+  var shouldLoad = consentRequired ? (c === 'all') : (c !== 'necessary');
+  if (!shouldLoad) return;
+
+  var d = document, s = d.createElement('script');
+  s.async = true;
+  s.src = '{{ $umamiSrc }}';
+  s.setAttribute('data-website-id', '{{ . }}');
+  s.setAttribute('data-do-not-track', 'true');
+  s.setAttribute('data-cache', 'false');
+  s.setAttribute('data-host-url', '{{ $umamiHost }}');
+  d.head.appendChild(s);
+  window.__umamiLoaded = true;
+
+  document.addEventListener('ffConsentChange', function (e) {
+    if (e.detail === 'all' && !window.__umamiLoaded) {
+      window.__umamiLoaded = true;
+      var s2 = d.createElement('script');
+      s2.async = true;
+      s2.src = '{{ $umamiSrc }}';
+      s2.setAttribute('data-website-id', '{{ . }}');
+      s2.setAttribute('data-do-not-track', 'true');
+      s2.setAttribute('data-cache', 'false');
+      s2.setAttribute('data-host-url', '{{ $umamiHost }}');
+      d.head.appendChild(s2);
+    }
+  });
+})();
+</script>
+{{- end -}}
+
+{{- /* ---------- Service Worker: Langzeit-Caching auf GitHub Pages ---------- */ -}}
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{{ "sw.js" | relURL }}').catch(function () {});
+  }
+</script>

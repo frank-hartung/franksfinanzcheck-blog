@@ -1,0 +1,178 @@
+# 📐 Layout-Automatisierung – Wächter, Budgets und Reparatur (Issue #338)
+
+**Stand:** 21.09.2026 · **Basis:** `scripts/dom_audit.py`-Vermessung des
+minifizierten Produktionsbaus (`hugo --minify`) · **Anlass:** Issue
+„⚠ Layout-Automatisierung: Probleme gefunden" (#338)
+
+Diese Datei ist das Runbook zur Layout-Wache: was sie prüft, warum die Grenzen
+so liegen, wie man sie ändert – und was am 21.09.2026 repariert wurde, damit
+derselbe Fehlalarm nicht wiederkommt.
+
+---
+
+## 1. Zwei Ebenen, ein Budget
+
+| Ebene | Werkzeug | Umfang | Läuft |
+|---|---|---|---|
+| **Statisch** (kein Browser, ohne Netz) | `scripts/dom_audit.py` | **jede** gebaute Seite | in `layout_audit.py` und damit in jedem Layout-AI-Lauf |
+| **Browser** (Chrome headless) | `scripts/layout_browser_check.js` | Startseite + 3 neueste Artikel + die statisch schwersten Seiten, je Desktop & Mobile | im Layout-AI-Workflow (weich: fehlt Chrome, wird übersprungen) |
+
+`layout_audit.py` vereint beides im Report `LAYOUT-REPORT.md` (gitignored,
+Lauf-Artefakt) und legt die Maschinenzahlen unter
+`.cache/layout/dom-audit.json` ab. Genau diese Datei liest der Browser-Audit:
+er vergleicht seine echten Browsermesswerte mit den Parserwerten (Toleranz
+2 Kinder / 2 Tiefe / 5 Elemente) und meldet **Parser-Drift** als Befund. Damit
+prüft sich der Parser bei jedem Lauf selbst mit – gegen einen echten Browser.
+
+**Budgets (eine Wahrheit: `scripts/dom_audit.py`)**
+
+| Metrik | Frühwarnung | Lighthouse-Grenze | Ist (21.09.2026) |
+|---|---|---|---|
+| Kinder eines Elements | 54 | 60 | **51** (`html > head`) |
+| Kinder im `<head>` | 52 | 58 | **51** |
+| Tiefe | 28 | 32 | **12** |
+| Elemente je Seite | 1100 | 1400 | **969** |
+
+Frühwarnungen stehen nur im Report (Exit 0). Ein Issue und ein roter Lauf
+entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
+(Befund auch bei Frühwarnung).
+
+---
+
+## 2. Wurzelursachen von #338 (alle fünf behoben)
+
+| # | Ursache | Wirkung | Heilung |
+|---|---|---|---|
+| 1 | Audit-Sample: nur Startseite + 3 neueste Artikel | Die Tag-Übersicht `/tags/` mit **136 direkten Kindern** in *einer* Liste war nie im Blick | `dom_audit.py` vermisst **jede** Seite; `/tags/` ist jetzt nach Anfangsbuchstaben gruppiert (max. 21 Kinder je Liste) |
+| 2 | Gemessen wurde `hugo --quiet` (unminifiziert) | Zahlen entsprachen nicht dem ausgelieferten Stand | Bau im Workflow + Vermessung jetzt `hugo --minify` wie in `deploy.yml` |
+| 3 | Budget war unerreichbar („Head 59 > 58") | Dauer-Fehlalarm auf praktisch jeder Artikelseite | Head strukturell verkleinert (60 → 51) **und** Budget begründet (`52`/`58`) – die Zahl ist jetzt template-, nicht redaktionsabhängig |
+| 4 | Alt-Text-Warnung kam aus dem Frontmatter | Der gemeldete Beitrag ist ein **Entwurf ohne Cover** – ein Bild ohne Bild hat keinen Alt-Text | Prüfung läuft am **gebauten Stand** (Artikel-Inhalt); Frontmatter nur für *veröffentlichte* Beiträge; Entwürfe erscheinen als Hinweiszeile, nicht als Warnung |
+| 5 | Statischer Audit konnte kein Issue auslösen (`|| true`) und das Issue wurde nur *erstellt*, nie aktualisiert/geschlossen | Befunde verpufften; ein einmal geöffnetes Issue blieb für immer offen | Workflow wertet `STATIC_EXIT`/`BROWSER_EXIT` aus, wird bei Befunden rot, **aktualisiert** das Issue (Marker) und **schließt** es, sobald der Lauf grün ist |
+
+---
+
+## 3. Was am Bau geändert wurde
+
+### 3.1 Head-DOM: 60 → 51 Kinder (Artikel-Seiten)
+
+* **`article:tag` entfernt** (`layouts/_partials/templates/opengraph.html`).
+  Bis zu **sechs** Meta-Tags pro Artikel, die nachweislich kein Konsument mehr
+  auswertet: dieselben Begriffe stehen als `keywords` im Article-JSON-LD und
+  sichtbar in der Tag-Navigation. Der größte Einzelposten am Budget.
+* **Analytics + Service-Worker ans Body-Ende**
+  (`layouts/_partials/deferred_scripts.html`, eingebunden von `footer.html`).
+  Umami (cookieless) und die SW-Registrierung blockieren nichts und gehören
+  nicht in den kritischen Pfad. Das Consent-Gate ist **unverändert**: geladen
+  wird nur nach „Alle akzeptieren" (`ff_cookie_consent=all`), der
+  `ffConsentChange`-Horcher bleibt.
+* **`apple-mobile-web-app-status-bar-style` entfernt** – der gesetzte Wert
+  `default` *ist* das Plattformverhalten, das Tag änderte nichts.
+* **Geprüft und bewusst behalten:** `og:image:type` (dokumentierte Entscheidung
+  aus `docs/PREMIUM-AUDIT-2026-09-11.md` § 2.10), Maße, Alt, hreflang,
+  Verification-Tags, Twitter-Cards, Preloads.
+* Nicht angefasst: `layouts/_partials/head.html` ist im Integritäts-Lock
+  **KRITISCH-versiegelt** (menschliche Signatur nötig). Die Verkleinerung
+  kommt deshalb vollständig aus freien Partials.
+
+> **Regel für neue Metas:** Der Head ist ab jetzt eine harte Budgetgröße.
+> Wer ein Tag ergänzt, nimmt ein anderes weg – oder `BUDGET.head_children` in
+> `scripts/dom_audit.py` wird bewusst angehoben (und der Test
+> `scripts/tests/test_dom_audit.py` mit). Der Layout-Audit zählt es sonst als
+> Frühwarnung.
+
+### 3.2 Text-Teilung (DOM-Gruppen in langen Ratgebern)
+
+`layouts/_partials/sectioned_content.html` teilte Markdown-Inhalte nur an
+`<h2>` – ein langer H2-Abschnitt blieb damit bei bis zu 58 direkten Kindern.
+Jetzt wird zusätzlich an **jeder `h3`** geteilt (`<h[23] id="…">`), die Gruppen
+folgen der Gliederung. Die Teilung ist eine Textoperation auf dem gerenderten
+Markdown; sie greift nur bei Überschriften **mit `id`** (also nur bei
+Goldmark-Überschriften, nie bei Template-/Shortcode-Überschriften). Den Vertrag
+prüft der Audit nach: **Chunker-Vertrag** – H2/H3 mit `id` im Artikel-Inhalt
+müssen direkt im Inhaltsblock oder in einer Gruppe liegen (sonst „Container
+aufgerissen" = kritisch).
+
+### 3.3 Tag-Übersicht: 136 → max. 21 Kinder je Liste
+
+`layouts/taxonomy.html` (neuer Site-Override, gilt für `/tags/` **und**
+`/categories/`) gruppiert die Begriffe nach Anfangsbuchstaben:
+
+* eine `<ul class="terms-tags">` **je Buchstabe** statt einer Liste mit 136 `<li>`,
+* A–Z-Sprungleiste (`.terms-index`) und echte `<h2>`-Überschriften je Gruppe
+  (Struktur für Screenreader, `id="term-a"`… als Anker),
+* Optik unverändert: dieselben Chips, dieselbe Hochzahl (`.terms-tags` bleibt
+  der Theme-Selektor), neue Zusatzstile nur in
+  `assets/css/extended/zzz-taxonomie-gruppen.css`.
+
+### 3.4 Alt-Texte: geprüft wird, was ankommt
+
+`check_alts()` in `scripts/layout_audit.py` prüft jedes `<img>` im
+**gerenderten Artikel-Inhalt**. Ein leeres `alt` ist erlaubt, wenn das Bild
+ausdrücklich dekorativ ist (`aria-hidden="true"` / `role="presentation"`,
+z. B. das Logo-Lockup im Header, dessen Link den Namen trägt). Gemeldet wird
+außerdem, was wie ein Alt-Text aussieht, aber keiner ist („generisch"):
+Dateinamen (`cover.jpg`), Kürzel (`bild`, `foto`) und Dateistämme mit
+Größen-Suffix (`hero-1200`) – `is_generic_alt()` in derselben Datei.
+Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
+`cover.alt` – Entwürfe ohne Cover werden als Hinweis gezählt.
+
+---
+
+## 4. Verifikation (Beleg statt Behauptung)
+
+| Beweis | Ergebnis |
+|---|---|
+| Parser gegen **parse5** (`scriptingEnabled: true` = Browser mit JS), alle 371 gebauten Seiten | **0 Abweichungen** bei Elementen, Tiefe, max. Kindern, Head-Kindern |
+| `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
+| Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json`; Drift = Befund |
+| `python3 -m unittest discover -s scripts/tests` | 521 Tests grün, davon **28 neue** (`test_dom_audit.py`: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, Template-Verträge, optionaler jsdom-Parallelbeweis) |
+| `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
+
+**Vorher → Nachher (minifizierter Bau, 213 Seiten ohne Paginierung):**
+
+| Kennzahl | vorher | nachher | Budget |
+|---|---|---|---|
+| max. Kinder eines Elements | **136** (`/tags/`, `ul.terms-tags`) | **51** (`html > head`) | 54 / 60 |
+| max. Kinder im `<head>` | **60** (Artikel mit FAQ) | **51** | 52 / 58 |
+| `article:tag`-Metas je Artikel | bis **6** | 0 | – |
+| Seiten im Blick der Vermessung | 4 | **213** | – |
+| Skripte im `<head>` | 8 | 6 | – |
+
+---
+
+## 5. Betrieb
+
+```bash
+# Vollständig (Statisch + DOM-Budget + Chunker-Vertrag)
+python3 scripts/layout_audit.py
+
+# Nur DOM-Budget, mit Zahlen und JSON
+python3 scripts/dom_audit.py --top 15 --json .cache/layout/dom-audit.json
+python3 scripts/dom_audit.py --only /tags/          # eine Seite
+python3 scripts/dom_audit.py --strict               # Frühwarnung = Exit 1
+python3 scripts/dom_audit.py --selftest
+
+# Browser-Audit (lokal, wenn Chrome vorhanden ist)
+LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH=/pfad/chrome \
+  node scripts/layout_browser_check.js
+```
+
+**Workflow `.github/workflows/layout-ai.yml`** (Mo 07:00 UTC + manuell):
+
+1. `hugo --minify` (identisch zur Produktion),
+2. statisches Audit → `STATIC_EXIT`, Report + Zahlen,
+3. Auto-Heilung: `check_covers.py --fix`, Commit + Push (`git_sync.sh --push-only`),
+4. Browser-Audit → `BROWSER_EXIT` (0 grün, 1 Befunde, **2 = übersprungen**, wenn
+   kein Chrome installierbar ist – dokumentiert und gewollt, weil das statische
+   Budget jede Seite abdeckt),
+5. Job-Summary mit Report und Browser-JSON,
+6. Issue-Lebenszyklus über Marker `<!-- layout-ai-report -->`:
+   **anlegen oder aktualisieren** bei Befunden, **kommentieren + schließen**
+   bei grün. Ein Issue ohne Schließpfad ist ein Alarm ohne Ende – genau das
+   war #338.
+
+**Grenzen der Automatik:** Der statische Audit misst ohne Browser; gerechnet
+wird mit den Regeln des HTML5-Parsers (siehe Kopf von `dom_audit.py`). Läuft
+der Browser-Audit, wird diese Annahme bei jedem Lauf gegengeprüft. Läuft er
+nicht, bleibt die Annahme ungeprüft – deshalb ist der Skip sichtbar
+(`::warning::` + Job-Summary), nicht still.

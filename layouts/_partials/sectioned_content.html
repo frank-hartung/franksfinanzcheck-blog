@@ -6,17 +6,40 @@
      Budget von 60 Kindern pro Eltern-Element, obwohl die Gesamtdomgröße
      unkritisch ist.
 
-     Die gerenderten H2-Abschnitte werden deshalb in kleine, neutrale
+     Die gerenderten Abschnitte werden deshalb in kleine, neutrale
      DOM-Gruppen geteilt. display:contents (CSS) hält das bestehende
      Layout pixelgleich; Überschriften-IDs, Sprunglinks, strukturierte
      Daten und Affiliate-Links bleiben unverändert.
 
-     Nur von Goldmark erzeugte H2 mit id werden erkannt. Dadurch bleiben
+     Nur von Goldmark erzeugte H2/H3 mit id werden erkannt. Dadurch bleiben
      manuelle, ggf. bereits verschachtelte HTML-Blöcke unangetastet.
+
+     ------------------------------------------------------------
+     NACHGEZOGEN 21.09.2026 (Issue #338, Layout-Automatisierung):
+     Die Teilung erfolgte nur an H2. Ein einzelner H2-Abschnitt mit vielen
+     Blöcken blieb damit trotzdem bei bis zu 58 direkten Kindern – zwei
+     Artikel lagen so an der Lighthouse-Grenze (60) und über der
+     Frühwarnung des Audits. Jetzt wird zusätzlich an JEDEM H3 geteilt:
+     die Gruppen folgen der Gliederung (H2 → H3), kein Abschnitt sammelt
+     mehr Dutzende Blöcke.
+
+     Sicherheit dieser Regex-Teilung (sie ist eine Text-Operation, keine
+     Baum-Operation): Sie greift nur bei Überschriften MIT id, also nur bei
+     welchen, die Goldmark aus dem Markdown erzeugt hat. Template- und
+     Shortcode-Überschriften (z. B. `.ff-tv-title`, `.ff-es-title`) haben
+     keine id und werden nicht geteilt; eine im Markdown verschachtelte
+     Überschrift mit id (z. B. innerhalb eines Listenpunkts) würde die
+     Teilung an einer falschen Stelle einhängen. Diesen Vertrag prüft
+     scripts/layout_audit.py im gebauten HTML nach („Chunker-Vertrag":
+     H2/H3 im Artikel-Inhalt müssen direkte Blöcke des Inhalts sein).
+
+     BEWEIS statt Zusage: scripts/dom_audit.py vermisst danach jede Seite
+     (Kinder/Tiefe/Elemente) – und genau dieses Budget hing vorher an einer
+     Vier-Seiten-Stichprobe.
      ============================================================ */ -}}
 {{- $content := printf "%s" . -}}
-{{- if findRE `<h2 id="[^"]+"[^>]*>` $content -}}
-  {{- $content = replaceRE `(<h2 id="[^"]+"[^>]*>)` `</div><div class="ff-content-chunk">$1` $content -}}
+{{- if findRE `<h[23] id="[^"]+"[^>]*>` $content -}}
+  {{- $content = replaceRE `(<h[23] id="[^"]+"[^>]*>)` `</div><div class="ff-content-chunk">$1` $content -}}
   {{- printf `<div class="ff-content-chunk">%s</div>` $content | safeHTML -}}
 {{- else -}}
   {{- $content | safeHTML -}}
