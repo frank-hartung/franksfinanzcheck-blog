@@ -1,8 +1,8 @@
 ---
 title: "Energie-Update: Was sich jetzt für dich ändert"
 description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
-date: 2026-09-10T09:02:00Z
-draft: true
+date: 2026-09-23T08:10:00Z
+draft: false
 tags: ["Energie-Update: was sich jetzt für dich ändert", "Energie"]
 categories: ["News"]
 keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
@@ -110,6 +110,21 @@ Jede gesparte Kilowattstunde bringt echten Gewinn. Diese Schritte helfen sofort:
 
 **Lesetipp:** [Günstig durch den Winter: Heizungs-Check im Spätsommer](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/)
 
+## Preiserhöhung bekommen? Dein Sonderkündigungsrecht
+
+Viele Haushalte finden im Herbst Post vom Versorger im Briefkasten. Neue Preise ab Januar. Höherer Grundpreis. Höherer Arbeitspreis. Das klingt nach Zwang. Ist es aber nicht.
+
+Bei fast jeder Preiserhöhung hast du ein **Sonderkündigungsrecht**. Du kannst den Vertrag außerordentlich beenden. Meist gilt eine Frist bis zum Tag der Preisänderung. Das genaue Datum steht in deinem Schreiben. Lies es aufmerksam.
+
+So nutzt du dein Recht in vier Schritten:
+
+1. **Schreiben prüfen** – Ab wann gelten die neuen Preise? Welche Frist nennt der Anbieter?
+2. **Tarife vergleichen** – Nutze die Ankündigung als Anlass für einen [Stromvergleich](/go/strom/). Oft findest du sofort günstigere Angebote.
+3. **Fristgerecht kündigen** – Schriftlich oder per E-Mail. Der neue Anbieter übernimmt meist die Kündigung für dich.
+4. **Zählerstand sichern** – Foto am Wechseltag schützt vor Schätzfehlern.
+
+Achte zusätzlich auf deine **Preisgarantie**. Es gibt drei Stufen. Die volle Garantie friert fast alles ein. Die eingeschränkte nimmt Steuern und Abgaben aus. Die reine Energiepreisgarantie sichert nur den Einkauf. Je schwächer die Garantie, desto wichtiger dein jährlicher Check.
+
 ## Fazit: Energie-Update – Was sich jetzt für dich ändert
 
 Ein veralteter Tarif kostet mehr als nötig. Prüfe deinen Vertrag nach der Abrechnung. Passe deinen Abschlag an und spare fortan monatlich Geld.
@@ -133,6 +148,15 @@ Der Grundversorger springt sofort ein. Du stehst nie ohne Strom oder Gas da.
 
 ### Sind dynamische Tarife für jeden Haushalt sinnvoll?
 Nein, sie lohnen sich vor allem mit E-Auto oder Wärmepumpe. Für kleine Wohnungen reicht ein normaler Tarif.
+
+### Was tun, wenn der Anbieter die Preise erhöht?
+Nutze dein Sonderkündigungsrecht. Kündige fristgerecht zum Änderungstermin. Vergleiche parallel neue Tarife. Der neue Versorger übernimmt meist den Wechsel für dich.
+
+### Lohnt ein Anbieterwechsel mitten im Winter noch?
+Ja, fast immer. Die Ersparnis wirkt ab dem Wechseltag. Auch drei Wintermonate mit günstigerem Tarif sparen spürbar Geld. Warte nicht bis zum Frühjahr.
+
+### Was ist der Unterschied zwischen Grundpreis und Arbeitspreis?
+Der Grundpreis fällt monatlich fix an. Unabhängig vom Verbrauch. Der Arbeitspreis gilt pro Kilowattstunde. Vielverbraucher achten vor allem auf ihn. Wenigverbraucher auf einen niedrigen Grundpreis.
 
 ## Ausblick: So geht es weiter
 

@@ -22,7 +22,7 @@ pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
 pin_description: "*Werbung | Implantat oder Krone geplant? Die Kasse zahlt nur den Festzuschuss – der Rest bleibt an dir hängen. Was gute Zahnzusatz-Tarife kosten, welche Leistungen wirklich zählen und wie du die Zahnstaffel-Falle vermeidest. Jetzt vergleichen! #zahnzusatzversicherung #zahnersatz #geldsparen"
 ---
 
-Die Zahnarztrechnung liegt auf dem Tisch. 3.200 Euro für ein Implantat. Die Krankenkasse überweist knapp 200 Euro. Den Rest zahlst du.
+Die Zahnarztrechnung liegt auf dem Tisch. 3.200 Euro für ein Implantat. Die Krankenkasse überweist knapp 200 Euro. Den Rest zahlst du – ohne Zahnzusatzversicherung.
 
 So oder ähnlich erleben es jedes Jahr hunderttausende Menschen in Deutschland. Die gesetzliche Krankenkasse (GKV) zahlt bei Zahnersatz nämlich nur einen **Festzuschuss** – einen festen Betrag für die Standardlösung, nicht für die Behandlung, die du tatsächlich bekommst. Wer eine Krone, ein Implantat oder ein Inlay in guter Qualität will, trägt den Löwenanteil selbst.
 

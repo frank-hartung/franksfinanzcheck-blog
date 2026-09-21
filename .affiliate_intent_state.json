@@ -1,14 +1,11 @@
 {
- "generated_at": "2026-09-20 08:58:08 UTC",
+ "generated_at": "2026-09-21 10:07:26 UTC",
  "exit_code": 0,
- "modus": "FIX",
+ "modus": "REPORT",
  "checked_articles": 66,
- "checked_links": 195,
- "healed_count": 2,
- "healed": [
-  "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: IW7 L253: Lesetipp „Ratgeber Strom Sparen“ zurück auf ../../pillar/strom-sparen/ (war /go/gas/)",
-  "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: IW7 L253: Lesetipp „Preisgarantie Gas: So schützt du dich vo“ zurück auf ../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/ (war /go/gas/)"
- ],
+ "checked_links": 201,
+ "healed_count": 0,
+ "healed": [],
  "findings": [],
  "errors": []
 }
