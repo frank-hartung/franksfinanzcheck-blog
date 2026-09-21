@@ -1,9 +1,9 @@
 ---
 title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
 description: "Finanzieller Puffer: Kaputte Waschmaschine oder Jobverlust? Erfahre, wie du einen Notgroschen aufbaust, der dich ruhig schlafen lässt – ohne unnötig Kapital…"
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-21T09:29:03Z
+draft: false
+reserve_published: 2026-09-21
 tags: ["Finanzieller Puffer", "Finanzieller", "Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

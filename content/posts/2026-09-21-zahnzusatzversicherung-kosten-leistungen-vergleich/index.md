@@ -1,7 +1,7 @@
 ---
 title: "Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich"
 description: "Zahnzusatzversicherung Vergleich 2026: Was gute Tarife monatlich kosten, welche Leistungen wirklich zählen und wie du die Zahnstaffel-Falle vermeidest."
-date: 2026-09-21T09:59:22Z
+date: 2026-09-25T08:10:00Z
 draft: false
 tags: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnersatz Kosten", "Zahnversicherung"]
 categories: ["Ratgeber"]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-21T10:01:42+00:00",
+  "generatedAt": "2026-09-21T10:05:22+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen.jpg",
+      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen.jpg",
+      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -624,6 +624,38 @@
     },
     "/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/": {
       "image": "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026/": {
+      "image": "images/covers/2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/": {
+      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

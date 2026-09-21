@@ -1,8 +1,8 @@
 {
  "target": 6,
- "ready": 7,
+ "ready": 8,
  "pool_size": 8,
- "generated_at": "2026-09-20T08:54:17Z",
+ "generated_at": "2026-09-21T09:13:26Z",
  "candidates": [
   {
    "slug": "2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
@@ -110,24 +110,18 @@
    }
   },
   {
-   "slug": "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
-   "ready": false,
-   "sha256": "5957377b0cb79aa333971b9171502128ae38227f7c5be0a7e9611ee943e14e54",
-   "reason": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Wer",
-   "details": [
-    "🛑 2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-    "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt; IW7 Zeile 279: Anker ist ein interner Titel („Preisgarantie Gas: So schützt du dich vor Preissprüngen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt",
-    "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-   ],
-   "score": 0.962,
+   "slug": "2026-09-21-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
+   "ready": true,
+   "sha256": "18529483f71eee11e6c47ba073ece274d2f9c18eec0ce2801d47a4e0fce31cff",
+   "score": 0.912,
    "parts": {
     "spelling": 0.86,
     "meta": 1.0,
     "structure": 1.0,
-    "typography": 1.0,
+    "typography": 0.9,
     "uniqueness": 1.0,
     "affiliate": 1.0,
-    "readability": 0.95
+    "readability": 0.75
    }
   }
  ]

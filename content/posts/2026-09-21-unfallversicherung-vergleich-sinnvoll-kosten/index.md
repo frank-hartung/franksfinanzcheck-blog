@@ -1,7 +1,7 @@
 ---
 title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen"
 description: "Unfallversicherung Vergleich 2026: Für wen sie sich lohnt, was gute Tarife kosten und welche Leistungen (Progression, Gliedertaxe, Rente) wirklich zählen."
-date: 2026-09-21T09:59:22Z
+date: 2026-09-23T08:20:00Z
 draft: false
 tags: ["Unfallversicherung", "Unfallversicherung Vergleich", "Private Unfallversicherung", "Invalidität absichern"]
 categories: ["Ratgeber"]
