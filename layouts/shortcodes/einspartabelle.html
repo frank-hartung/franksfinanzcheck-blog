@@ -146,7 +146,7 @@
       </div>
       {{- $affCard := partial "affiliate_anchor_attrs.html" (dict "url" $ctaUrl "page" $ffSeite "placement" "einspartabelle") -}}
       {{- with $affCard -}}
-      <a class="ff-es-btn ff-es-btn--card" href="{{ $affCard.href | safeURL }}" rel="{{ $affCard.rel }}" target="{{ $affCard.target }}" data-umami-event="{{ $affCard.event }}" data-umami-event-slug="{{ $affCard.key }}" data-umami-event-article="{{ $affCard.article }}" data-umami-event-pillar="{{ $affCard.pillar }}" title="{{ $affCard.title }}">{{ $ctaText | safeHTML }}</a>
+      <a class="ff-es-btn ff-es-btn--card" href="{{ $affCard.href | safeURL }}" rel="{{ $affCard.rel }}" target="{{ $affCard.target }}" data-umami-event="{{ $affCard.event }}" data-umami-event-slug="{{ $affCard.key }}" data-umami-event-subid="{{ $affCard.subid }}" data-umami-event-article="{{ $affCard.article }}" data-umami-event-pillar="{{ $affCard.pillar }}" data-umami-event-placement="{{ $affCard.placement }}" title="{{ $affCard.title }}">{{ $ctaText | safeHTML }}</a>
       {{- else -}}
       <a class="ff-es-btn ff-es-btn--card" href="{{ $ctaUrl | safeURL }}">{{ $ctaText | safeHTML }}</a>
       {{- end -}}

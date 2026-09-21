@@ -1,6 +1,6 @@
 {
-  "signed_at": "2026-09-21T14:10:00.508521+00:00",
-  "head": "e918fac",
+  "signed_at": "2026-09-21T15:48:03.762447+00:00",
+  "head": "598acdf",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -19,7 +19,7 @@
     "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
     "layouts/pillar/single.html": "e77d471134763a18a0c70de3962ba9c6c5a776cd144a803ecfe95dc4e06c9a32",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
-    "layouts/shortcodes/einspartabelle.html": "1069f8b05230f601517b04f6770ab5ce38b8edde85ee9c82546ae08fc5081a03",
+    "layouts/shortcodes/einspartabelle.html": "dc708a6403f0964c2efbc4da1155b7c7c86ee1d22b28b2613bd8886e7f177826",
     "layouts/shortcodes/tarifvergleich.html": "6c357637a5329fedace5baf1e15a0b41916cd67aa7bc68f88d033060dbf61a99",
     "scripts/affiliate_integrity_gate.py": "ecd407279ec0cc8d7c79c081efc7a977450a8604f41a3c4c2d5f8a5dd281b3bc",
     "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
@@ -285,6 +285,14 @@
       "head": "e918fac",
       "geaendert": [
         "hugo.toml"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "art": "set-current",
+      "head": "598acdf",
+      "geaendert": [
+        "layouts/shortcodes/einspartabelle.html"
       ]
     }
   ]
