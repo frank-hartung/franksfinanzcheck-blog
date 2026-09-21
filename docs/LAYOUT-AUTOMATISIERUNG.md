@@ -157,7 +157,8 @@ LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH=/pfad/chrome \
   node scripts/layout_browser_check.js
 ```
 
-**Workflow `.github/workflows/layout-ai.yml`** (Mo 07:00 UTC + manuell):
+**Workflow `.github/workflows/layout-ai.yml`** (Mo 07:00 UTC, manuell und
+bei Pull Requests mit Layout-Pfaden):
 
 1. `hugo --minify` (identisch zur Produktion),
 2. statisches Audit → `STATIC_EXIT`, Report + Zahlen,
@@ -171,8 +172,43 @@ LAYOUT_BASE=$PWD/public LAYOUT_PORT=8099 CHROME_PATH=/pfad/chrome \
    bei grün. Ein Issue ohne Schließpfad ist ein Alarm ohne Ende – genau das
    war #338.
 
+Im **Pull-Request-Modus** läuft derselbe Bau und derselbe Audit, aber ohne
+Auto-Heilung und ohne Issue-Pflege – ein PR darf keine Commits in seinen
+Branch schreiben und keine Alarm-Issues erzeugen. Befunde machen den Lauf rot
+und stehen in der Job-Summary; dieser Lauf ist das Gate vor dem Merge.
+
 **Grenzen der Automatik:** Der statische Audit misst ohne Browser; gerechnet
 wird mit den Regeln des HTML5-Parsers (siehe Kopf von `dom_audit.py`). Läuft
 der Browser-Audit, wird diese Annahme bei jedem Lauf gegengeprüft. Läuft er
 nicht, bleibt die Annahme ungeprüft – deshalb ist der Skip sichtbar
 (`::warning::` + Job-Summary), nicht still.
+
+## 6. Selbstschutz: die Automatik darf nicht still sterben
+
+Am 21.09.2026 (beim Umbau genau dieser Dateien) stand in einem Step-Namen ein
+ungeschützter Doppelpunkt:
+
+```yaml
+- name: Website bauen (identisch zur Produktion: `hugo --minify`)   # ✗ YAML-Fehler
+```
+
+Das ist gültiges Aussehen, aber kein gültiges YAML: GitHub legt die Datei
+still („This run likely failed because of a workflow file issue"), der Lauf
+stirbt vor dem ersten Step. Der Fehler war nur zufällig sichtbar, weil für den
+Push ein Fehl-Lauf angelegt wurde – **kein Test und kein Lint im Repo hätte
+ihn gefunden**.
+
+Seitdem prüft `scripts/tests/test_workflow_yaml.py` **alle** Workflows:
+
+1. gültiges YAML (jede Datei),
+2. keine doppelten Schlüssel (PyYAML nimmt sonst still den letzten – so
+   verschwindet ein Step, ohne dass es auffällt),
+3. vorhandenen `on:`-Auslöser, je Job `runs-on`, Steps mit `run` oder `uses`,
+   keine unbekannten Step-Schlüssel,
+4. Step-Namen ohne die YAML-Falle „Doppelpunkt + Leerzeichen" (quotiert ist
+   erlaubt).
+
+Der Test läuft in `python3 -m unittest discover -s scripts/tests` mit – also
+vor jedem Push, den die Pipeline ernst nimmt. Regel daraus: **jede Datei, die
+einen Lauf steuert, hat einen Test, der sie parst.** Eine Wache ohne Wache ist
+keine Wache.

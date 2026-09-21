@@ -31,8 +31,15 @@
 #    3. Grün schließt das offene Issue. Ein Issue, das nach der Heilung
 #       offen bleibt, ist ein Alarm ohne Schließpfad (Regel #272).
 #
-#  Läuft: wöchentlich (Mo 09:00 MESZ) + manuell. KEIN push-Trigger,
-#  damit keine Endlosschleife mit dem Deploy-Workflow entsteht.
+#  Läuft: wöchentlich (Mo 09:00 MESZ), manuell – und bei Pull Requests,
+#  die Layout/Struktur anfassen (layouts/, assets/css/, die Audit-Skripte).
+#  KEIN push-Trigger: sonst würde jeder Deploy-Commit den Audit starten und
+#  die Auto-Heilung könnte sich selbst anstoßen (Endlosschleife).
+#
+#  Pull-Request-Modus: identischer Bau + identischer Audit (inkl. Browser),
+#  aber OHNE Auto-Heilung und OHNE Issue-Pflege – ein PR darf keine Commits
+#  in den Branch schreiben und keine Alarm-Issues erzeugen. Befunde machen
+#  den Lauf rot (Gate); Befundbericht steht in der Job-Summary.
 # ============================================================
 name: Layout-AI
 
@@ -40,6 +47,15 @@ on:
   schedule:
     - cron: "0 7 * * 1"    # Montag 09:00 MESZ (07:00 UTC)
   workflow_dispatch: {}
+  pull_request:
+    paths:
+      - "layouts/**"
+      - "assets/css/**"
+      - "scripts/dom_audit.py"
+      - "scripts/layout_audit.py"
+      - "scripts/layout_browser_check.js"
+      - "scripts/check_covers.py"
+      - ".github/workflows/layout-ai.yml"
 
 permissions:
   contents: write
@@ -65,7 +81,7 @@ jobs:
         with:
           version: "0.164.0"
 
-      - name: Website bauen (identisch zur Produktion: `hugo --minify`)
+      - name: "Website bauen (identisch zur Produktion: hugo --minify)"
         env:
           HUGO_JSDELIVR_SHA: ${{ github.sha }}
         run: hugo --minify --quiet
@@ -90,7 +106,7 @@ jobs:
 
       # ============ AUTO-HEILUNG: Cover nachziehen ============
       - name: Auto-Heilung – fehlende Cover-Varianten nachziehen
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         continue-on-error: true
         run: |
           pip install -q pillow pillow-avif-plugin
@@ -161,7 +177,7 @@ jobs:
 
       # ============ ISSUE: AKTUALISIEREN / SCHLIESSEN ============
       - name: Issue aktualisieren oder schließen (Dedupe über Marker)
-        if: ${{ always() }}
+        if: ${{ always() && github.event_name != 'pull_request' }}
         uses: actions/github-script@v7
         continue-on-error: true
         with:
