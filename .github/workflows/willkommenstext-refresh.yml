@@ -22,6 +22,14 @@
 #       auf einen dieser Pfade heißt "es gibt etwas Neues" → SOFORTIGE
 #       Reaktion mit --force, statt auf den nächsten Wochenlauf zu
 #       warten.
+#       WICHTIG (Reparatur Issue #329, 21.09.2026): Der Push-Trigger
+#       ist auf branches: [main] EINGESCHRÄNKT. Ein Tag-Push (z. B.
+#       kurzlebige Probe-Tags) umgeht den paths-Filter bei GitHub und
+#       hätte den Lauf auf detached HEAD eines gelöschten Refs laufen
+#       lassen – damals Exit 128 ("You must fully qualify the ref"),
+#       roter Lauf + Fehlalarm-Issue (#329). Feature-Branch-Pushes
+#       tragen den Willkommenstext sowieso nirgendwo hin: nur main
+#       ist die Publikations-Branch, nur dort gehört der Text.
 #    3. WORKFLOW_DISPATCH: manuell/on-demand.
 #
 #  SELBSTHEILUNG OHNE KI-ABHÄNGIGKEIT: willkommenstext_guard.py nutzt
@@ -36,6 +44,10 @@ on:
   schedule:
     - cron: "0 6 * * 0"    # wöchentlich Sonntag 08:00 MESZ (06:00 UTC)
   push:
+    # #329 (21.09.2026): NUR main. Tag-Pushes matchen keine branches-
+    # Filter (und würden den paths-Filter sonst aushebeln); Feature-
+    # Branch-Pushes veröffentlichen den Willkommenstext nirgendwo.
+    branches: [ main ]
     paths:
       - "data/aktuelle_entwicklungen.yaml"
       - "SEO-STANDARDS-2026.md"
@@ -122,13 +134,35 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'deploy.yml',
-              ref: 'main',
-            });
-            console.log('✅ Deploy ausgelöst.');
+            // #329-Klasse (14.08./20.08.2026): ein 403/Transient beim
+            // Dispatch hätte den SONST GRÜNEN Lauf rot gemacht (damals
+            // zusätzlich: fehlendes 'actions: write' – inzwischen gesetzt).
+            // Der Content liegt zu diesem Punkt bereits sicher auf main;
+            // der Deploy-Trigger ist ein Komfort-Trigger – SIECHERHEIT
+            // übernimmt der Deploy-Catchup (workflow_run auf genau diesen
+            // Workflow): er vergleicht main mit dem letzten erfolgreichen
+            // Deploy und stößt deploy.yml nach, falls sich main geändert
+            // hat. Deshalb: 3x Retry, dann LAUT Warnung, aber grün.
+            let ok = false;
+            for (let i = 1; i <= 3 && !ok; i++) {
+              try {
+                await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'deploy.yml',
+                  ref: 'main',
+                });
+                ok = true;
+                console.log('✅ Deploy ausgelöst.');
+              } catch (e) {
+                console.log(`⚠️ Deploy-Dispatch Versuch ${i}/3 fehlgeschlagen: ${e.status || '?'} ${e.message}`);
+                if (i < 3) await new Promise((r) => setTimeout(r, 5000 * i));
+              }
+            }
+            if (!ok) {
+              console.log('::warning::Deploy-Dispatch nach 3 Versuchen nicht möglich – Lauf bleibt grün.');
+              console.log('::warning::Nichts geht verloren: Deploy-Catchup (workflow_run) prüft danach, ob main sich seit dem letzten erfolgreichen Deploy geändert hat, und stößt deploy.yml nach.');
+            }
 
       - name: Issue bei Fehlschlag (z. B. Render-Beweis nicht bestanden)
         if: steps.guard.outcome == 'failure'

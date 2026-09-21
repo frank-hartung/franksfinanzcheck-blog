@@ -407,6 +407,112 @@ class NetzwerkHaertungTests(GitSyncTestBase):
         self.assertEqual(status.strip(), "", "Arbeitsbaum von B muss sauber sein")
 
 
+# --------------------------------------------------------------------------- #
+#  Vorfall 20./21.09.2026 (Issue #329): Tag-Push-Trigger + gelöschtes Ref
+# --------------------------------------------------------------------------- #
+#  Ein kurzlebiger Probe-TAG (_arena-perm-probe) triggerte den
+#  Willkommenstext-Refresh (Tag-Pushes unterliegen keinem paths-Filter) und
+#  wurde Sekunden später gelöscht. Der Lauf (detached HEAD, Remote-Ref weg)
+#  starb mit Exit 128: "You must fully qualify the ref" – der ALTE Push
+#  benutzte den KURZEN Refnamen `HEAD:<name>`, den git bei detached HEAD
+#  ohne Remote-Ref nicht auflösen kann. Dieselbe Exit-128-Klasse traf am
+#  28.08./31.08.2026 gelöschte Feature-Branches (Runs 33131763016 /
+#  33408869777).
+class TagTriggerUndGeloeschtesRefTests(GitSyncTestBase):
+    def _delete_remote_main(self):
+        # Das bare Test-Remote verweigert standardmäßig das Löschen seiner
+        # HEAD-Branch – das erlauben wir, damit der gelöschte Probe-Ref
+        # (CI-Situation) simuliert werden kann.
+        subprocess.run(["git", "--git-dir", str(self.origin), "config",
+                        "receive.denyDeleteCurrent", "ignore"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_b), "push", "-q", "origin", ":main"],
+                       check=True)
+
+    def _remote_refs(self):
+        out = subprocess.run(
+            ["git", "ls-remote", "--heads", "--tags", str(self.origin)],
+            capture_output=True, text=True, check=True,
+        ).stdout
+        return {line.split("\t")[1] for line in out.splitlines() if line}
+
+    def test_tag_trigger_publish_nicht_kein_muell_ref(self):
+        # #329-Kern: Tag-Trigger (Probe-Tag, Sekunden später gelöscht)
+        # PUBLIZIERT NICHT – grüner Exit, kein Ref im Remote.
+        self._commit(self.bot_b, "data/status.jsonl", '{"run": 1}\n', "B: status")
+        res = self.run_sync(
+            ["--push-only"],
+            env_extra={"BRANCH": "", "GITHUB_REF_TYPE": "tag",
+                       "GITHUB_REF_NAME": "probe-tag"},
+        )
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 0, log)
+        self.assertIn("TAG ausgelöst", log)
+        self.assertIn("KEIN Push", log)
+        # Nichts ist im Remote angelegt worden (weder Branch noch Tag).
+        refs = self._remote_refs()
+        self.assertNotIn("refs/heads/probe-tag", refs)
+        self.assertNotIn("refs/tags/probe-tag", refs)
+        self.assertNotIn("B: status", self.origin_log())
+        # B behält seinen Commit lokal (nichts verloren, kein Halbzustand).
+        local = subprocess.run(
+            ["git", "-C", str(self.bot_b), "log", "--format=%s", "-1"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        self.assertEqual(local, "B: status")
+
+    def test_tag_trigger_mit_explicit_branch_override_push_trotzdem(self):
+        # Bewusste Ausnahme: BRANCH explizit gesetzt = der Workflow will
+        # auf eine echte Branch syncen – der Schutz greift NICHT.
+        self._commit(self.bot_b, "data/status.jsonl", '{"run": 2}\n', "B: status")
+        res = self.run_sync(
+            ["--push-only"],
+            env_extra={"BRANCH": "main", "GITHUB_REF_TYPE": "tag",
+                       "GITHUB_REF_NAME": "probe-tag"},
+        )
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Push erfolgreich", res.stdout)
+        self.assertIn("B: status", self.origin_log())
+
+    def test_geloeschtes_ref_detached_head_heilt_per_vollqualifiziertem_push(self):
+        # #329 exakt (Branch-Variante): CI-Checkout = detached HEAD,
+        # Ziel-Ref zwischenzeitlich gelöscht. Der ALTE Code starb hier mit
+        # Exit 128 („You must fully qualify the ref"); jetzt legt der
+        # vollqualifizierte Rettungsanker den Ref neu an.
+        self._commit(self.bot_b, "data/status.jsonl", '{"run": 3}\n', "B: status")
+        # CI-Zustand simulieren: detached HEAD …
+        subprocess.run(["git", "-C", str(self.bot_b), "checkout", "-q", "--detach"],
+                       check=True)
+        # … und das Ziel-Ref remote weg (Probe-Ref, der sofort gelöscht wurde).
+        self._delete_remote_main()
+
+        res = self.run_sync(["--push-only"])
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 0, log)
+        self.assertIn("Rettungsanker", log)
+        self.assertNotIn("fully qualify", log)          # der #329-Todespfad ist weg
+        # main ist im Remote neu angelegt und trägt B's Commit.
+        self.assertIn("refs/heads/main", self._remote_refs())
+        self.assertIn("B: status", self.origin_log())
+
+    def test_fehlendes_remote_ref_keine_retry_runden(self):
+        # Ein gelöschtes Ref ist kein Netzwerk-Transient: keine Backoff-
+        # Runden, genau EIN Push-Versuch (der das Ref neu anlegt).
+        self._commit(self.bot_b, "data/status.jsonl", '{"run": 4}\n', "B: status")
+        subprocess.run(["git", "-C", str(self.bot_b), "checkout", "-q", "--detach"],
+                       check=True)
+        self._delete_remote_main()
+
+        res = self.run_sync(["--push-only"], env_extra={"GIT_SYNC_TRIES": "3"})
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 0, log)
+        self.assertIn("existiert remote NICHT", log)
+        self.assertNotIn("erneuter Versuch", log,
+                         "fehlendes Ref darf nicht als Transient retryen")
+        zaehler = self.sabotage / "push_versuche"
+        self.assertEqual(int(zaehler.read_text(encoding="utf-8")), 1,
+                         "genau EIN Push-Versuch erwartet")
+
+
 if __name__ == "__main__":
     unittest.main()
 

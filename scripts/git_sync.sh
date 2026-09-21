@@ -72,6 +72,34 @@
 #    Hand-Entwürfe bleiben unverändert ein HARTER Stopp (kein Blind-Merge
 #    über Content).
 #
+#  HÄRTUNG #329 (Willkommenstext-Refresh, 21.09.2026):
+#    Ein TAG-Push (kurzlebiger Probe-Tag _arena-perm-probe auf a224d072)
+#    triggerte den Workflow – Tag-Pushes unterliegen KEINEM paths-Filter –
+#    und der Tag wurde Sekunden später gelöscht. Der Lauf (detached HEAD,
+#    Remote-Ref weg) starb dann mit Exit 128:
+#        fatal: "You must fully qualify the ref"
+#    Ursache: `git push origin HEAD:<name>` mit KURZEM Ziel-Refnamen kann
+#    <name> nur auflösen, wenn remote ein Ref mit dem Namen existiert ODER
+#    die Quelle selbst in refs/{heads,tags}/ liegt. In CI ist HEAD
+#    GETRENNT (detached) und der Ref war gerade gelöscht → Git gibt auf.
+#    Drei Schichten heilen die Klasse dauerhaft (alle Workflows profitieren,
+#    die git_sync.sh nutzen):
+#      1. VOLLE REFQUALITÄT: Beide Push-Stellen pushen nach
+#         refs/heads/$BRANCH – deterministisch auflösbar, unabhängig von
+#         Remote-Zustand und detached HEAD.
+#      2. TAG-TRIGGER-SCHUTZ: GITHUB_REF_TYPE=tag OHNE expliziten BRANCH-
+#         Override = kein Push (grün, klare Logzeile). Ein Tag-Lauf, der
+#         Content veröffentlichen würde, erzeugte nur einen Müll-Ref (neue
+#         Branch mit fremdem Commit); die Änderung gehört auf main, wo der
+#         nächste reguläre Lauf sie dort verarbeitet.
+#      3. FERN-REF-PRÜFUNG: "couldn't find remote ref" ist KEIN Netzwerk-
+#         Transient (Retries ändern nichts am fehlenden Ref) – wird sofort
+#         klassifiziert und direkt zum Rettungsanker durchgereicht, statt
+#         drei Backoff-Runden zu verbrennen.
+#    Belege: Runs 35529554343/35529670073 (20.09.2026), Issue #329;
+#    dieselbe Exit-128-Klasse bereits 28.08./31.08.2026 (gelöschte
+#    Feature-Branches), siehe scripts/tests/test_git_sync.py.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -96,6 +124,10 @@ set -Eeuo pipefail
 # Auf GitHub Actions immer den tatsächlich ausgecheckten Ref verwenden.
 # So kann ein workflow_dispatch auf einem Prüf-/Feature-Branch niemals
 # versehentlich dessen HEAD nach main pushen.
+#
+# BRANCH_WAR_SETZT merkt, ob der Workflow BRANCH explizit übersteuert hat –
+# der Tag-Trigger-Schutz weiter unten respektiert diese Override.
+BRANCH_WAR_SETZT="${BRANCH:-}"
 BRANCH="${BRANCH:-${GITHUB_HEAD_REF:-${GITHUB_REF_NAME:-main}}}"
 GIT_USER="${GIT_USER:-Automation-Bot}"
 GIT_MAIL="${GIT_MAIL:-automation-bot@users.noreply.github.com}"
@@ -106,10 +138,39 @@ GIT_SYNC_FETCH_TRIES="${GIT_SYNC_FETCH_TRIES:-3}"
 GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
 
 # Warum der letzte Synchronisierungsversuch gescheitert ist:
-#   netzwerk | auth | schutz | konflikt | rebase | autostash | leer
+#   netzwerk | auth | schutz | konflikt | rebase | autostash | leer | ref_fehlt
 #   „schutz“ = Branch-Schutz/Ruleset lehnt den Push ab: Wiederholen bringt
 #   nichts, der Lauf bricht sofort ab und nennt die Reparatur-Anleitung.
+#   „ref_fehlt“ = das Ziel-Ref existiert remote NICHT (gelöschte Branch/Tag,
+#   #329-Klasse): kein Retry bringt es zurück – der (vollqualifizierte)
+#   Rettungsanker-Push erzeugt den Ref neu.
 SYNC_FAIL_URSACHE=""
+
+# ---------------------------------------------------------------------------
+#  TAG-TRIGGER-SCHUTZ (Reparatur Issue #329, 21.09.2026)
+#  ---------------------------------------------------------------------------
+#  Ein Tag-Push ist KEINE Branch: der Lauf liegt auf detached HEAD des
+#  getagten Commits, und es gibt KEIN refs/heads-Ref, das den Lauf trägt.
+#  In der Praxis (Probe-Tags, die Sekunden nach dem Push gelöscht werden,
+#  Beleg: _arena-perm-probe / _arena-visibility-probe, 20.09.2026) führte
+#  das zu zwei Schadensbildern:
+#    1. Der Push scheiterte mit Exit 128 („You must fully qualify the
+#       ref“) – roter Lauf + Fehlalarm-Issue, obwohl nichts zu pushen war.
+#    2. Hätte er durchgekommen, hätte er einen Müll-Ref mit fremdem
+#       Content im Remote erzeugt.
+#  Profi-Vertrag: Ein Tag-Trigger PUBLIZIERT NICHT. Der Lauf endet grün
+#  mit klarer Logzeile; die Content-Änderung gehört auf main, wo der
+#  nächste reguläre Lauf (Schedule/Push) sie dort verarbeitet.
+#  Bewusste Ausnahme: ein EXPLIZITER BRANCH-Override (z. B. BRANCH=main im
+#  Workflow) heißt „ja, hier soll bewusst auf eine echte Branch
+#  gesyncen werden“ – dann greift der Schutz nicht.
+# ---------------------------------------------------------------------------
+if [ "${GITHUB_REF_TYPE:-branch}" = "tag" ] && [ -z "$BRANCH_WAR_SETZT" ]; then
+  echo "git_sync.sh: Lauf wurde von einem TAG ausgelöst (refs/tags/$BRANCH) – es gibt keine syncbare Branch."
+  echo "git_sync.sh: KEIN Push (bewusst grün, kein Müll-Ref): Tag-Läufe veröffentlichen keinen Content;"
+  echo "             der nächste reguläre main-Lauf übernimmt die Änderung dort, wo sie hingehört."
+  exit 0
+fi
 
 PUSH_ONLY=0
 if [ "${1:-}" = "--push-only" ]; then
@@ -152,6 +213,15 @@ ist_auth_fehler() {
     'could not read [Uu]sername|[Aa]uthentication failed|[Aa]uthorization failed|[Pp]ermission denied|[Aa]ccess denied|HTTP 403|403 [Ff]orbidden|remote: Permission to|supported authentication'
 }
 
+# --- Fehlt das Ziel-Ref remote? (#329-Klasse) --------------------------------
+#  "couldn't find remote ref" ist KEIN Netzwerk-Transient: Der Ref wurde
+#  gelöscht (Probe-Branch/Tag, aufgeräumte Feature-Branch) oder existierte
+#  nie. Retries ändern daran nichts – der (vollqualifizierte)
+#  Rettungsanker-Push kann den Ref einfach neu anlegen.
+ist_ref_fehlt() {
+  printf '%s' "$1" | grep -qiE "couldn't find remote ref"
+}
+
 # --- Schutz-Ablehnung (Branch-Schutz / Ruleset) -----------------------------
 #  GH006/GH013/GH014 sind GitHubs Antwort, wenn ein REGELWERK den Push ablehnt:
 #  verlangte Status-Checks, Pflicht-Reviews, Signaturpflicht, Namensregeln,
@@ -190,6 +260,16 @@ fetch_mit_retry() {
       return 0
     fi
     printf '%s\n' "$out" | sed 's/^/  fetch: /'
+    if ist_ref_fehlt "$out"; then
+      # #329: gelöschtes/niemals-existiertes Ziel-Ref ist keine
+      # Wackelnetz-Klasse – sofort durchreichen, statt 3 Backoff-Runden
+      # zu verbrennen. Der vollqualifizierte Rettungsanker legt den
+      # Ref neu an.
+      SYNC_FAIL_URSACHE=ref_fehlt
+      echo "  fetch: origin/$BRANCH existiert remote NICHT (gelöschte Branch/Tag) –"
+      echo "         kein Retry sinnvoll; direkter (vollqualifizierter) Push-Versuch."
+      return 1
+    fi
     if ist_auth_fehler "$out"; then
       SYNC_FAIL_URSACHE=auth
       echo "::error::git_sync.sh: fetch von origin/$BRANCH abgelehnt "\
@@ -422,7 +502,12 @@ sync_und_push() {
     SYNC_FAIL_URSACHE=""
 
     if rebase_gegen_origin; then
-      if out=$(git push origin "HEAD:$BRANCH" 2>&1); then
+      # VOLLQUALIFIZIERTES ZIEL (#329): `HEAD:$BRANCH` als Kurzrefname ist
+      # bei detached HEAD (CI-Standard) und fehlendem Remote-Ref nicht
+      # auflösbar (Exit 128: "You must fully qualify the ref").
+      # refs/heads/$BRANCH ist deterministisch – erzeugt das Ref, falls es
+      # (als gelöscht) nicht mehr existiert.
+      if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
         printf '%s\n' "$out" | sed 's/^/  push: /'
         return 0
       fi
@@ -448,13 +533,47 @@ sync_und_push() {
            "angleichen und erneut versuchen."
     else
       case "$SYNC_FAIL_URSACHE" in
+        ref_fehlt)
+          # #329: Das Ziel-Ref existiert remote nicht (zwischenzeitlich
+          # gelöschte Branch, Probe-Tag, aufgeräumte Feature-Branch).
+          # Kein Retry bringt es zurück – der VOLLQUALIFIZIERTE Push
+          # legt es neu an (Branch-Trigger: erwünschtes Verhalten).
+          # Tag-Triggers sind oben (Tag-Trigger-Schutz) schon abgefangen,
+          # hier kann nur eine echte Branch anstehen.
+          echo "  push: Rettungsanker – Ziel-Ref remote nicht vorhanden,"
+          echo "        neu anlegen per vollqualifiziertem Refname (refs/heads/$BRANCH) …"
+          if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
+            printf '%s\n' "$out" | sed 's/^/  push: /'
+            echo "  push: Rettungsanker erfolgreich (Ziel-Ref neu angelegt)."
+            return 0
+          fi
+          printf '%s\n' "$out" | sed 's/^/  push: /'
+          if ist_schutz_fehler "$out"; then
+            SYNC_FAIL_URSACHE=schutz
+            echo "::error::git_sync.sh: Auch der Rettungsanker-Push (Ref neu"
+            echo "   anlegen) wurde von Branch-Schutz/Ruleset abgelehnt"
+            echo "   (Ursache: schutz) – kein Retry sinnvoll. Reparatur:"
+            echo "   docs/PFLICHT-CHECK-RUNBOOK.md, „Direkte Pushes“."
+            return 1
+          fi
+          if ist_auth_fehler "$out"; then
+            SYNC_FAIL_URSACHE=auth
+            echo "::error::git_sync.sh: Auch der Rettungsanker-Push (Ref neu"
+            echo "   anlegen) wurde abgelehnt (Auth/Berechtigung) – kein"
+            echo "   Retry sinnvoll."
+            return 1
+          fi
+          ;;
         netzwerk)
           # RETTUNGSANKER: Der fetch ist an Netzwerk/Transient gescheitert.
           # Ist origin/$BRANCH gar nicht weitergelaufen (sehr wahrscheinlich
           # bei einem Gesamt-Ausfall), ist ein direkter Push trotzdem ein
           # sauberes Fast-Forward – dann bleibt der Lauf grün.
           echo "  push: Rettungsanker – direkter Push-Versuch ohne fetch …"
-          if out=$(git push origin "HEAD:$BRANCH" 2>&1); then
+          # VOLLQUALIFIZIERT (#329): ohne refs/heads/-Präfix scheitert der
+          # Rettungsanker bei detached HEAD + fehlendem Remote-Ref mit
+          # Exit 128 – das war genau der #329-Todespfad.
+          if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
             printf '%s\n' "$out" | sed 's/^/  push: /'
             echo "  push: Rettungsanker erfolgreich (origin war nicht weitergelaufen)."
             return 0
@@ -499,8 +618,8 @@ sync_und_push() {
        "fehlgeschlagen (zuletzt: $SYNC_FAIL_URSACHE). Mögliche Ursachen: "\
        "GitHub-Transient, fehlende 'contents: write'-Berechtigung, "\
        "Branch-Schutz (Ruleset mit Pflicht-Check ohne Bypass-Akteur – "\
-       "docs/PFLICHT-CHECK-RUNBOOK.md) oder ein anderer Workflow schreibt "\
-       "gleichzeitig."
+       "docs/PFLICHT-CHECK-RUNBOOK.md), ein zwischenzeitlich gelöschtes "\
+       "Ziel-Ref (ref_fehlt) oder ein anderer Workflow schreibt gleichzeitig."
   return 1
 }
 
