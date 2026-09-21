@@ -56,6 +56,29 @@ Dauer-Alarm wie in #338).
   Tiefe             28            32
   Elemente gesamt   1100          1400
 
+Zwei Messbereiche (Lehre aus dem ersten PR-Gate-Lauf, 21.09.2026)
+---------------------------------------------------------------
+Dieses Werkzeug vermisst die AUSGELIEFERTE HTML – jede Seite, ohne Browser.
+Der Browser sieht zur Laufzeit mehr: `static/premium/ff-premium.js` baut eine
+Mini-Inhaltsübersicht, Anker-Buttons und die Lese-Fortschrittsleiste, die
+Lesehilfen kommen dazu. Das ist eine Funktion, kein Fehler – gemessen auf der
+schwersten Artikelseite: 968 Elemente ausgeliefert, 1109 zur Laufzeit (+141,
+und der Zuwachs wächst mit der Artikel-Länge).
+
+Deshalb gibt es zwei Budgets mit klarer Zuständigkeit:
+  · `BUDGET`/`LIMIT` (oben) = ausgelieferte HTML, gilt für JEDE Seite.
+  · `BUDGET_RUNTIME` = Laufzeit-DOM der Site (Frühwarnung 1350 Elemente):
+    Kopf/Tiefe wachsen durch die Erweiterung nachweislich nicht, nur die
+    Elementzahl – und zwar um den nachgemessenen Puffer (1109 + Reserve).
+    Die harte Grenze bleibt die Lighthouse-Grenze (1400); die billigt auch
+    Lighthouse dem Laufzeit-DOM zu. Ein eigener Kopf-/Tiefenwert wäre eine
+    erfundene Zahl – deshalb steht dort derselbe Wert wie statisch.
+
+Der Browser-Audit liest beide Sätze aus dem JSON dieses Werkzeugs (keine
+zweite Zahlenkopie) und vergleicht seinen Parser-Gegenwert mit der
+Skript-freien Messung – nicht mit der Laufzeitmessung. Sonst meldet jede
+Erweiterung „Drift" und die Prüfung wird wertlos.
+
 Exit: 0 = alles im Budget · 1 = Lighthouse-Grenze gerissen (kritisch)
       · 2 = Ausführungsfehler. Frühwarnungen allein sind Exit 0: sie stehen im
       Report, ein Issue entsteht nur an der gerissenen Grenze.
@@ -92,6 +115,17 @@ LIMIT = {
     "head_children": 58,
     "depth": 32,
     "elements": 1400,
+}
+# Laufzeit-DOM (nur der Browser kann das messen): Kopf/Tiefe/Kinder bleiben,
+# die Erweiterungsschicht (Premium-Mini-TOC, Anker, Lesehilfen) wächst mit der
+# Artikel-Länge. Nachgemessen 21.09.2026: ausgeliefert max. 968 → Laufzeit
+# max. 1109 Elemente. Die Frühwarnung liegt darüber, aber weiterhin deutlich
+# unter der Lighthouse-Grenze (1400) – sonst wäre sie ein Dauer-Alarm.
+BUDGET_RUNTIME = {
+    "children": 54,
+    "head_children": 52,
+    "depth": 28,
+    "elements": 1350,
 }
 
 # ---------------------------------------------------------------
@@ -470,7 +504,11 @@ def audit_dir(base: str) -> dict:
     warnings.sort(key=lambda r: (-r["maxchildren"], -r["elements"]))
     return {
         "base": base,
-        "budgets": {"fruehwarnung": BUDGET, "lighthouse": LIMIT},
+        "budgets": {
+            "fruehwarnung": BUDGET,
+            "fruehwarnung_runtime": BUDGET_RUNTIME,
+            "lighthouse": LIMIT,
+        },
         "pages": len(rows),
         "rows": rows,
         "critical": critical,
@@ -486,9 +524,11 @@ def markdown(result: dict, top: int = 3) -> list[str]:
     rows = result["rows"]
     lines = [
         f"DOM-Budget: {result['pages']} Seiten browser-treu vermessen "
-        f"(ohne Chrome). Grenzen – Lighthouse: {l['children']} Kinder/"
-        f"Element, {l['head_children']} im Head, {l['depth']} Tiefe, "
-        f"{l['elements']} Elemente.",
+        f"(ohne Chrome, ausgelieferte HTML). Grenzen – Lighthouse: "
+        f"{l['children']} Kinder/Element, {l['head_children']} im Head, "
+        f"{l['depth']} Tiefe, {l['elements']} Elemente; Laufzeit-DOM "
+        f"(Browser, mit Erweiterungsschicht) wird zusätzlich gegen "
+        f"{BUDGET_RUNTIME['elements']} Elemente geprüft.",
     ]
     if result["critical"]:
         lines.append(f"❌ {len(result['critical'])} Seite(n) über der "
@@ -589,6 +629,16 @@ def _selftest() -> int:
         fails += 1
     m = Metrics()
     m.rel = "/y/"
+    # Zwei Messbereiche, zwei Budgets: der Laufzeit-Satz muss über dem
+    # statischen liegen (die Erweiterungsschicht ist nachgemessen) und unter
+    # der Lighthouse-Grenze bleiben – sonst wäre er kein Frühwarnwert.
+    for key, value in BUDGET_RUNTIME.items():
+        assert BUDGET[key] <= value <= LIMIT[key], (
+            f"BUDGET_RUNTIME.{key}={value} liegt nicht zwischen "
+            f"BUDGET ({BUDGET[key]}) und LIMIT ({LIMIT[key]})")
+    assert BUDGET_RUNTIME["elements"] > BUDGET["elements"], (
+        "Laufzeit-Frühwarnung muss über der statischen liegen "
+        "(Erweiterungsschicht)")
     m.elements = BUDGET["elements"] + 1
     crit, warn = violations(m)
     if crit or not warn:

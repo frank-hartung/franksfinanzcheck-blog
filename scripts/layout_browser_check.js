@@ -32,6 +32,19 @@
  * Attribute. Unterschiede darüber hinaus sind Parser-Drift und werden als
  * Befund gemeldet.
  *
+ * ZWEI MESSUNGEN, ZWEI ZUSTÄNDIGKEITEN (Lehre aus dem ersten PR-Gate-Lauf,
+ * 21.09.2026):
+ *  1. Laufzeit-DOM (Seite normal geladen, inkl. `static/premium/*.js`):
+ *     Das ist die Nutzerrealität – Mini-Inhaltsübersicht, Anker-Buttons,
+ *     Fortschrittsleiste und Lesehilfen wachsen mit der Artikel-Länge
+ *     (nachgemessen: 968 Elemente ausgeliefert → 1109 zur Laufzeit). Sie wird
+ *     gegen die Laufzeit-Budgets geprüft (`fruehwarnung_runtime`, harte Grenze
+ *     bleibt die Lighthouse-Grenze).
+ *  2. HTML-Messung (Fremd-Skripte werden ersetzt, nicht geladen): Nur so sieht
+ *     der Browser, was der statische Parser in `dom_audit.py` vermisst. Der
+ *     Vergleich DIESER Zahlen ist die Parser-Gegenrechnung – sonst meldet jede
+ *     legitime Erweiterung „Drift" und die Prüfung wäre wertlos.
+ *
  * SEVERITY (Lehre aus #338): Ein Dauer-Alarm ist kein Alarm. Deshalb sind
  * die Stufen getrennt:
  *   - HARTER Befund → Exit 1: Lighthouse-Grenze überschritten, HTTP-/JS-Fehler,
@@ -81,6 +94,8 @@ const TOLERANCE = { headchildren: 2, maxChildren: 2, depth: 2, totalElements: 5 
 const FALLBACK = {
   budgets: {
     fruehwarnung: { children: 54, head_children: 52, depth: 28, elements: 1100 },
+    fruehwarnung_runtime: { children: 54, head_children: 52, depth: 28,
+                            elements: 1350 },
     lighthouse: { children: 60, head_children: 58, depth: 32, elements: 1400 },
   },
   rows: [],
@@ -143,10 +158,12 @@ function describe(el) {
  * Budget-Bewertung als reine Funktion (testbar ohne Browser).
  * Rückgabe: { issues, warnings } – nur `issues` machen den Lauf rot.
  */
-function evaluateBudgets(metrics, budgets) {
+function evaluateBudgets(metrics, budgets, runtime = false) {
   const issues = [];
   const warnings = [];
-  const b = budgets.fruehwarnung;
+  const b = (runtime
+    ? (budgets.fruehwarnung_runtime || budgets.fruehwarnung)
+    : budgets.fruehwarnung);
   const l = budgets.lighthouse;
   const check = (value, warn, limit, make) => {
     if (value > limit) issues.push(make(limit, 'Lighthouse-Grenze'));
@@ -177,6 +194,12 @@ function runSelftest() {
   const frueh = budgets.fruehwarnung;
   const faelle = [
     ['unter allen Schwellen grün', basis, 0, 0],
+    // Der Fall, der den ersten PR-Gate-Lauf rot machte: 1109 Elemente sind
+    // zur Laufzeit normal (Erweiterungsschicht), ausgeliefert aber auffällig.
+    ['Laufzeit 1109 Elemente ist kein Befund', fall({ count: 1109 }), 0, 0, true],
+    ['ausgeliefert wären 1109 eine Frühwarnung', fall({ count: 1109 }), 0, 1, false],
+    ['Laufzeit über der Lighthouse-Grenze ist rot',
+      fall({ count: lighthouse.elements + 1 }), 1, 0, true],
     ['exakt an der Lighthouse-Grenze: Frühwarnung, nicht rot',
       fall({ count: lighthouse.elements }), 0, 1],
     ['ein Element über der Lighthouse-Grenze ist rot',
@@ -197,8 +220,8 @@ function runSelftest() {
       fall({ headKids: frueh.head_children + 1 }), 0, 1],
   ];
   let fehler = 0;
-  for (const [name, metrics, wantIssues, wantWarnings] of faelle) {
-    const { issues, warnings } = evaluateBudgets(metrics, budgets);
+  for (const [name, metrics, wantIssues, wantWarnings, runtime] of faelle) {
+    const { issues, warnings } = evaluateBudgets(metrics, budgets, !!runtime);
     if (issues.length !== wantIssues || warnings.length !== wantWarnings) {
       fehler++;
       console.error(`✗ ${name}: issues=${issues.length} (erwartet `
@@ -211,26 +234,15 @@ function runSelftest() {
   }
   console.log(JSON.stringify({
     selftest: 'ok', cases: faelle.length,
-    vertrag: 'nur Lighthouse-Grenzen und Fehler sind rot, Frühwarnungen grün',
+    vertrag: 'nur Lighthouse-Grenzen und Fehler sind rot, Frühwarnungen grün; '
+      + 'Laufzeit-DOM und ausgelieferte HTML haben eigene Frühwarnwerte',
   }));
   process.exit(0);
 }
 
-async function auditPage(browser, url, viewport, ctx) {
-  const page = await browser.newPage();
-  await page.setViewport(viewport);
-  const errors = [];
-  const httpErrors = [];
-  page.on('pageerror', e => errors.push('JS: ' + e.message));
-  page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
-  page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
-
-  const t0 = Date.now();
-  await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
-    .catch(e => errors.push('load: ' + e.message));
-  const loadMs = Date.now() - t0;
-
-  const metrics = await page.evaluate(() => {
+/** DOM-Kennzahlen der aktuell geladenen Seite (im Browserkontext). */
+async function measureDom(page) {
+  return page.evaluate(() => {
     const all = document.querySelectorAll('*');
     let depth = 0, maxKids = 0, maxKidsNode = null;
     for (const el of all) {
@@ -263,14 +275,60 @@ async function auditPage(browser, url, viewport, ctx) {
       headKids: document.head ? document.head.children.length : 0,
     };
   });
+}
+
+/** Eine Seite laden und vermessen. `suppressScripts` ersetzt Fremd-Skripte
+ *  durch leere Antworten (kein Netz, keine Konsolenfehler, keine Erweiterung):
+ *  so sieht der Browser genau das, was der statische Parser vermisst. */
+async function loadAndMeasure(browser, url, viewport, suppressScripts) {
+  const page = await browser.newPage();
+  await page.setViewport(viewport);
+  const errors = [];
+  const httpErrors = [];
+  page.on('pageerror', e => errors.push('JS: ' + e.message));
+  page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
+  page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
+  if (suppressScripts) {
+    await page.setRequestInterception(true);
+    page.on('request', req => {
+      if (req.resourceType() === 'script' && req.url().startsWith('http')) {
+        // Leere Antwort statt Abbruch: kein 404, kein Konsolenfehler – die
+        // Messung soll zeigen, was die HTML hergibt, nicht wie ein Netzfehler
+        // aussieht.
+        req.respond({ status: 200, contentType: 'application/javascript',
+                      body: '/* im Audit ersetzt: Parser-Gegenrechnung */' });
+      } else {
+        req.continue();
+      }
+    });
+  }
+  const t0 = Date.now();
+  await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
+    .catch(e => errors.push('load: ' + e.message));
+  const loadMs = Date.now() - t0;
+  const metrics = await measureDom(page);
   const title = await page.title();
   const h1 = await page.evaluate(() => {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
   await page.close();
+  return { metrics, title, h1, errors, httpErrors, loadMs };
+}
 
-  const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets);
+async function auditPage(browser, url, viewport, ctx) {
+  // 1) Laufzeit: die Seite, wie Leser sie bekommen.
+  const laufzeit = await loadAndMeasure(browser, url, viewport, false);
+  // 2) HTML-Messung: dieselbe Seite ohne Fremd-Skripte (Parser-Referenz).
+  const html = await loadAndMeasure(browser, url, viewport, true);
+  const metrics = laufzeit.metrics;
+  const errors = laufzeit.errors;
+  const httpErrors = laufzeit.httpErrors;
+  const loadMs = laufzeit.loadMs;
+  const title = laufzeit.title;
+  const h1 = laufzeit.h1;
+
+  const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets, true);
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
@@ -280,11 +338,13 @@ async function auditPage(browser, url, viewport, ctx) {
   // ---------- Parser-Gegenrechnung (Issue #338, Lehre 3) ----------
   const stat = staticMetrics(ctx.domAudit, new URL(url).pathname);
   if (stat) {
+    // Referenz ist die HTML-Messung (Fremd-Skripte ersetzt), nicht die
+    // Laufzeitmessung – Begründung im Kopf dieser Datei.
     const pairs = [
-      ['headchildren', metrics.headKids, stat.headchildren],
-      ['maxChildren', metrics.maxKids, stat.maxchildren],
-      ['depth', metrics.depth, stat.depth],
-      ['totalElements', metrics.count, stat.elements],
+      ['headchildren', html.metrics.headKids, stat.headchildren],
+      ['maxChildren', html.metrics.maxKids, stat.maxchildren],
+      ['depth', html.metrics.depth, stat.depth],
+      ['totalElements', html.metrics.count, stat.elements],
     ];
     for (const [key, browserValue, parserValue] of pairs) {
       const delta = Math.abs(browserValue - parserValue);
@@ -302,11 +362,20 @@ async function auditPage(browser, url, viewport, ctx) {
   return {
     url,
     viewport: viewport.width + 'x' + viewport.height,
+    // Laufzeit-DOM (Nutzerrealität, gegen die Laufzeit-Budgets geprüft)
     domCount: metrics.count,
     domDepth: metrics.depth,
     maxChildren: metrics.maxKids,
     maxChildrenElement: metrics.maxKidsElement,
     headChildren: metrics.headKids,
+    // HTML-Messung ohne Fremd-Skripte (Referenz für die Parser-Gegenrechnung)
+    htmlOnly: {
+      count: html.metrics.count,
+      depth: html.metrics.depth,
+      maxKids: html.metrics.maxKids,
+      headKids: html.metrics.headKids,
+      maxKidsElement: html.metrics.maxKidsElement,
+    },
     staticMetrics: stat ? {
       elements: stat.elements, depth: stat.depth,
       maxChildren: stat.maxchildren, headChildren: stat.headchildren,
@@ -381,8 +450,24 @@ if (SELFTEST) {
     maxHeadChildren: Math.max(...results.map(r => r.headChildren)),
     avgLoadMs: Math.round(results.reduce((s, r) => s + r.loadMs, 0) / results.length),
   };
+  const erweiterung = results.map(r => r.domCount - r.htmlOnly.count);
+  const htmlMax = (key) => Math.max(...results.map(r => r.htmlOnly[key]));
   const summary = {
     checked: results.length,
+    domMetricsHtmlOnly: {
+      maxElements: htmlMax('count'),
+      maxDepth: htmlMax('depth'),
+      maxChildren: htmlMax('maxKids'),
+      maxHeadChildren: htmlMax('headKids'),
+    },
+    // Nachgemessene Erweiterungsschicht (Laufzeit − HTML): dokumentiert, damit
+    // die Zahlen im Report nicht als Widerspruch gelesen werden.
+    erweiterungsschicht: {
+      max: Math.max(...erweiterung),
+      min: Math.min(...erweiterung),
+      hinweis: 'Laufzeit-DOM minus HTML-Messung (Premium-Layer: '
+        + 'Mini-Inhaltsübersicht, Anker, Fortschrittsleiste, Lesehilfen)',
+    },
     sample: sample.urls.map(u => new URL(u).pathname),
     riskPages: sample.risk,
     budgets: ctx.budgets,

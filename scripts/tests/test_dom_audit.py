@@ -137,6 +137,13 @@ class BudgetTests(unittest.TestCase):
         for key, value in dom_audit.LIMIT.items():
             self.assertRegex(block, rf"{key}:\s*{value}\b",
                              f"LIMIT.{key} fehlt/abweichend im JS-Fallback")
+        # Der Laufzeit-Satz (Frühwarnung für das DOM MIT Erweiterungsschicht)
+        # muss ebenfalls gespiegelt sein – sonst prüft der Browser-Audit ohne
+        # JSON gegen andere Zahlen als der statische Audit.
+        self.assertRegex(block, r"fruehwarnung_runtime:\s*\{")
+        for key, value in dom_audit.BUDGET_RUNTIME.items():
+            self.assertRegex(block, rf"{key}:\s*{value}\b",
+                             f"BUDGET_RUNTIME.{key} fehlt/abweichend im JS-Fallback")
 
 
 class AuditLaufTests(unittest.TestCase):

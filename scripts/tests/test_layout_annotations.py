@@ -48,6 +48,16 @@ class UebersetzerTests(unittest.TestCase):
         counts = la.report(dom, browser, max_annotations, out=out)
         return counts, out.getvalue()
 
+    def test_notiz_trennt_laufzeit_und_html_messung(self):
+        browser = browser_fixture()
+        browser["domMetricsHtmlOnly"] = {"maxElements": 968, "maxDepth": 12,
+                                         "maxChildren": 50, "maxHeadChildren": 50}
+        browser["erweiterungsschicht"] = {"min": 92, "max": 171}
+        _counts, text = self.run_report(dom_fixture(), browser)
+        self.assertIn("Browser-Laufzeit:", text)
+        self.assertIn("HTML ohne Fremd-Skripte: max. Elemente 968", text)
+        self.assertIn("Erweiterungsschicht der Site (Laufzeit − HTML): +92 bis +171", text)
+
     def test_gruener_lauf_hat_keine_fehler_annotation(self):
         counts, text = self.run_report(dom_fixture(), browser_fixture())
         self.assertEqual(0, counts["errors"])

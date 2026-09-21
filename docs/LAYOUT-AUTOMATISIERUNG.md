@@ -28,12 +28,34 @@ prüft sich der Parser bei jedem Lauf selbst mit – gegen einen echten Browser.
 
 **Budgets (eine Wahrheit: `scripts/dom_audit.py`)**
 
-| Metrik | Frühwarnung | Lighthouse-Grenze | Ist (21.09.2026) |
+| Metrik | Frühwarnung (ausgeliefert) | Lighthouse-Grenze | Ist ausgeliefert (21.09.2026) |
 |---|---|---|---|
 | Kinder eines Elements | 54 | 60 | **50** (`html > head`) |
 | Kinder im `<head>` | 52 | 58 | **50** |
 | Tiefe | 28 | 32 | **12** |
-| Elemente je Seite | 1100 | 1400 | **969** |
+| Elemente je Seite | 1100 | 1400 | **968** |
+
+**Zwei Messbereiche – das war die zweite Ursache der roten Läufe:** Der
+statische Audit vermisst die **ausgelieferte HTML** (jede Seite). Der Browser
+sieht mehr: `static/premium/ff-premium.js` baut zur Laufzeit die
+Mini-Inhaltsübersicht, Anker-Buttons und die Lese-Fortschrittsleiste, die
+Lesehilfen kommen dazu – nachgemessen **968 → 1109 Elemente** auf der
+schwersten Artikelseite (+141, wachsend mit der Artikel-Länge). Das ist eine
+Funktion, kein Fehler. Deshalb:
+
+* **Laufzeit-DOM** wird gegen `fruehwarnung_runtime` geprüft (Kopf/Tiefe
+  unverändert 52/28, Elemente **1350**); harte Grenze bleibt overall die
+  Lighthouse-Grenze 1400 – sie billigt auch Lighthouse dem Laufzeit-DOM zu.
+  Ein eigener Kopf-/Tiefenwert wäre eine erfundene Zahl und steht deshalb auf
+  demselben Wert wie statisch.
+* **Parser-Gegenrechnung** vergleicht den Parser mit einer zweiten
+  Browsermessung, bei der Fremd-Skripte durch leere Antworten **ersetzt**
+  (nicht geladen) werden – nur so sieht der Browser, was der Parser sieht.
+  Vorher verglich er Laufzeit gegen Parser und meldete jede legitime
+  Erweiterung als „Drift" (Δ92–171) – ein Dauer-Fehlalarm der schlimmsten
+  Sorte, weil er nach einem echten Parser-Fehler aussah.
+* Beide Zahlen stehen im Browser-JSON (`domMetrics`, `domMetricsHtmlOnly`,
+  `erweiterungsschicht`) und in der `::notice::`-Annotation.
 
 Frühwarnungen stehen nur im Report (Exit 0). Ein Issue und ein roter Lauf
 entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
@@ -137,8 +159,9 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 |---|---|
 | Parser gegen **parse5** (`scriptingEnabled: true` = Browser mit JS), alle 371 gebauten Seiten | **0 Abweichungen** bei Elementen, Tiefe, max. Kindern, Head-Kindern |
 | `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
-| Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json`; Drift = Befund |
-| `python3 -m unittest discover -s scripts/tests` | **542 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 47 neue in dieser Runde (`test_dom_audit.py` 32: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 11: Annotationen/Deckel-Escaping; `test_workflow_yaml.py` 4: YAML-/Step-/JS-Wachen) |
+| Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json` (Budget-SSOT), misst Laufzeit-DOM **und** HTML-Messung ohne Fremd-Skripte; Drift zwischen Parser und HTML-Messung = Befund |
+| `node scripts/layout_browser_check.js --selftest` | 13 Verträge ohne Chrome (u. a. „Laufzeit 1109 Elemente ist kein Befund", „ausgeliefert wären 1109 eine Frühwarnung", „+1 über der Lighthouse-Grenze ist rot") |
+| `python3 -m unittest discover -s scripts/tests` | **545 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 50 neue in dieser Runde (`test_dom_audit.py` 32: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
 | hreflang-Hygiene (`check_hreflang()`) | 371 Seiten je **genau eine** Angabe pro Sprache, keine Doppelung; auf 12 Paginierungsseiten zeigt das geerbte `de` auf die Abschnitts-Wurzel → **Warnung** mit Quelle (`head.html`, versiegelt) statt stiller Duldung |
 | `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
 
@@ -251,3 +274,32 @@ Und ein zweiter Beschluss aus #338: Die Issue-Pflege dedupliziert über den
 Marker **und** den festen Titel. Issues aus einer älteren Workflow-Version
 (ohne Marker) werden damit übernommen und bei Grün geschlossen – sonst bliebe
 der alte Alarm offen und der nächste Befund erzeugte einen zweiten.
+
+## 7. Zweite Lehre: eine Prüfung, die immer Alarm schlägt, wird abgeschaltet
+
+Der erste PR-Gate-Lauf (21.09.2026) war rot – und zwar an einer Stelle, die
+niemand sehen konnte: Die Befunde standen nur im Log, der Issue-Step ist im
+PR-Modus (richtig) ausgeschaltet. Zwei Fehler steckten darin:
+
+1. **Unsichtbarkeit.** Ein Befund, den man erst nach dem Klick in den Lauf
+   findet, existiert für die Entscheidung nicht. Behoben mit
+   `scripts/layout_annotations.py`: kritische Befunde werden `::error::`,
+   Frühwarnungen `::warning::`, dazu eine `::notice::` mit den Kennzahlen –
+   direkt in der Checks-/PR-Ansicht, gedeckelt auf 10 je Stufe, mit Nennung der
+   verschwiegenen Anzahl.
+2. **Falsche Bezugsgröße.** Der Browser verglich sein Laufzeit-DOM mit dem
+   Parser: Δ92–171 Elemente Unterschied, auf jeder Artikelseite, bei jedem
+   Lauf. Das sah nach „Parser kaputt" aus, war aber die Erweiterungsschicht der
+   Site (Mini-Inhaltsübersicht, Anker, Fortschrittsleiste, Lesehilfen). Zwei
+   Messungen statt einer Meinung: Laufzeit gegen Laufzeit-Budget, HTML-Messung
+   (Fremd-Skripte ersetzt) gegen Parser. Erst dadurch ist „Drift" wieder ein
+   Signal für einen echten Parser-Fehler.
+
+Nebenbei fiel dabei ein echter Fehler auf: jede Seite trug die
+hreflang-Selbstreferenz **doppelt** (versiegeltes `head.html` und
+`extend_head.html`), auf 12 Paginierungsseiten mit widersprüchlichen Zielen.
+Siehe § 3.1 und die Warnung in `check_hreflang()`.
+
+**Regel:** Wenn eine Prüfung wiederholt Alarm schlägt, ist zuerst die
+Bezugsgröße falsch – nicht die Schwelle. Schwellen anzupassen, bis es grün
+ist, war die Ursache von #338; Bezugsgrößen zu trennen ist die Heilung.

@@ -93,9 +93,18 @@ def summary_notice(dom: dict, browser: dict) -> str:
     metrics = (browser or {}).get("domMetrics") or {}
     if metrics:
         parts.append(
-            "Browser: max. Kinder {maxChildren} ({maxChildrenElement}), Head "
-            "{maxHeadChildren}, Tiefe {maxDepth}, Elemente {maxElements}"
+            "Browser-Laufzeit: max. Kinder {maxChildren} ({maxChildrenElement}), "
+            "Head {maxHeadChildren}, Tiefe {maxDepth}, Elemente {maxElements}"
             .format(**metrics))
+    html_metrics = (browser or {}).get("domMetricsHtmlOnly") or {}
+    if html_metrics:
+        parts.append(
+            "HTML ohne Fremd-Skripte: max. Elemente {maxElements}, Head "
+            "{maxHeadChildren}".format(**html_metrics))
+    layer = (browser or {}).get("erweiterungsschicht") or {}
+    if layer:
+        parts.append("Erweiterungsschicht der Site (Laufzeit − HTML): "
+                     f"+{layer.get('min', 0)} bis +{layer.get('max', 0)} Elemente")
     check = (browser or {}).get("parserCheck") or {}
     if check:
         parts.append(f"Parser-Gegenrechnung an {check.get('compared', 0)} Messungen, "
