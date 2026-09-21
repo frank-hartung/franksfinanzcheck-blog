@@ -54,6 +54,13 @@ Funktion, kein Fehler. Deshalb:
   Vorher verglich er Laufzeit gegen Parser und meldete jede legitime
   Erweiterung als „Drift" (Δ92–171) – ein Dauer-Fehlalarm der schlimmsten
   Sorte, weil er nach einem echten Parser-Fehler aussah.
+  Diese Messung schützt sich selbst: Der HTTP-Cache wird abgeschaltet (sonst
+  kommt das zweite Laden aus dem Speicher, es gibt keinen Request – die
+  Ersetzung greift ins Leere, gemessen als „Erweiterungsschicht +0"), und die
+  Zahl der ersetzten Skripte wird gegen die Zahl der ausgelieferten
+  `<script src>` geprüft. Liefert eine Seite Fremd-Skripte aus und es wird
+  keins ersetzt, ist das ein **harter Befund „Messinstrument unbrauchbar"** –
+  eine Referenz, die nicht sagt, ob sie funktioniert hat, ist keine.
 * Beide Zahlen stehen im Browser-JSON (`domMetrics`, `domMetricsHtmlOnly`,
   `erweiterungsschicht`) und in der `::notice::`-Annotation.
 
@@ -160,8 +167,8 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 | Parser gegen **parse5** (`scriptingEnabled: true` = Browser mit JS), alle 371 gebauten Seiten | **0 Abweichungen** bei Elementen, Tiefe, max. Kindern, Head-Kindern |
 | `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
 | Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json` (Budget-SSOT), misst Laufzeit-DOM **und** HTML-Messung ohne Fremd-Skripte; Drift zwischen Parser und HTML-Messung = Befund |
-| `node scripts/layout_browser_check.js --selftest` | 13 Verträge ohne Chrome (u. a. „Laufzeit 1109 Elemente ist kein Befund", „ausgeliefert wären 1109 eine Frühwarnung", „+1 über der Lighthouse-Grenze ist rot") |
-| `python3 -m unittest discover -s scripts/tests` | **545 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 50 neue in dieser Runde (`test_dom_audit.py` 32: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
+| `node scripts/layout_browser_check.js --selftest` | 13 Verträge ohne Chrome (Budget-/Severity-Logik inkl. Laufzeitsatz) (u. a. „Laufzeit 1109 Elemente ist kein Befund", „ausgeliefert wären 1109 eine Frühwarnung", „+1 über der Lighthouse-Grenze ist rot") |
+| `python3 -m unittest discover -s scripts/tests` | **549 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 58 neue in dieser Runde (`test_dom_audit.py` 40: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template- und Browser-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
 | hreflang-Hygiene (`check_hreflang()`) | 371 Seiten je **genau eine** Angabe pro Sprache, keine Doppelung; auf 12 Paginierungsseiten zeigt das geerbte `de` auf die Abschnitts-Wurzel → **Warnung** mit Quelle (`head.html`, versiegelt) statt stiller Duldung |
 | `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
 
@@ -293,7 +300,10 @@ PR-Modus (richtig) ausgeschaltet. Zwei Fehler steckten darin:
    Site (Mini-Inhaltsübersicht, Anker, Fortschrittsleiste, Lesehilfen). Zwei
    Messungen statt einer Meinung: Laufzeit gegen Laufzeit-Budget, HTML-Messung
    (Fremd-Skripte ersetzt) gegen Parser. Erst dadurch ist „Drift" wieder ein
-   Signal für einen echten Parser-Fehler.
+   Signal für einen echten Parser-Fehler. Beim ersten Versuch war auch diese
+   Messung noch falsch (HTTP-Cache lieferte die Skripte aus dem Speicher) – die
+   Differenz war „+0" und damit sichtbar: seitdem prüft sich das Instrument
+   selbst (siehe § 1) und der Fehler kann nicht mehr still auftreten.
 
 Nebenbei fiel dabei ein echter Fehler auf: jede Seite trug die
 hreflang-Selbstreferenz **doppelt** (versiegeltes `head.html` und

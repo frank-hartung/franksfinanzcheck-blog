@@ -45,6 +45,14 @@
  *     Vergleich DIESER Zahlen ist die Parser-Gegenrechnung – sonst meldet jede
  *     legitime Erweiterung „Drift" und die Prüfung wäre wertlos.
  *
+ *     Zwei Fallen sind dabei eingebaut und werden selbst überwacht:
+ *       · Der HTTP-Cache: ohne `setCacheEnabled(false)` kommt das zweite Laden
+ *         aus dem Speicher, es gibt keinen Request – und die Ersetzung greift
+ *         ins Leere (gemessen am 21.09.2026: „Erweiterungsschicht +0").
+ *       · Die Wirksamkeit: liefert eine Seite Fremd-Skripte aus, die Messung
+ *         ersetzt aber keins, dann ist der Messwert unbrauchbar. Das ist ein
+ *         harter Befund („Instrument prüfen"), keine stille Null.
+ *
  * SEVERITY (Lehre aus #338): Ein Dauer-Alarm ist kein Alarm. Deshalb sind
  * die Stufen getrennt:
  *   - HARTER Befund → Exit 1: Lighthouse-Grenze überschritten, HTTP-/JS-Fehler,
@@ -283,6 +291,15 @@ async function measureDom(page) {
 async function loadAndMeasure(browser, url, viewport, suppressScripts) {
   const page = await browser.newPage();
   await page.setViewport(viewport);
+  // Frischer Zustand: sonst kommt das zweite Laden aus dem HTTP-Cache und die
+  // Ersetzung der Fremd-Skripte hätte nichts zu tun (siehe Kopf).
+  try {
+    await page.setCacheEnabled(false);
+  } catch (err) {
+    console.error('Hinweis: Cache ließ sich nicht abschalten (' + err.message +
+                  ') – die HTML-Messung kann unbrauchbar sein.');
+  }
+  let blockedScripts = 0;
   const errors = [];
   const httpErrors = [];
   page.on('pageerror', e => errors.push('JS: ' + e.message));
@@ -295,6 +312,7 @@ async function loadAndMeasure(browser, url, viewport, suppressScripts) {
         // Leere Antwort statt Abbruch: kein 404, kein Konsolenfehler – die
         // Messung soll zeigen, was die HTML hergibt, nicht wie ein Netzfehler
         // aussieht.
+        blockedScripts += 1;
         req.respond({ status: 200, contentType: 'application/javascript',
                       body: '/* im Audit ersetzt: Parser-Gegenrechnung */' });
       } else {
@@ -312,8 +330,13 @@ async function loadAndMeasure(browser, url, viewport, suppressScripts) {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
+  // Wie viele Fremd-Skripte liefert die Seite überhaupt aus? Daran wird die
+  // Wirksamkeit der Ersetzung gemessen (Instrumentenprüfung unten).
+  const externalScripts = await page.evaluate(() =>
+    document.querySelectorAll('script[src]').length);
   await page.close();
-  return { metrics, title, h1, errors, httpErrors, loadMs };
+  return { metrics, title, h1, errors, httpErrors, loadMs, blockedScripts,
+           externalScripts };
 }
 
 async function auditPage(browser, url, viewport, ctx) {
@@ -328,12 +351,22 @@ async function auditPage(browser, url, viewport, ctx) {
   const title = laufzeit.title;
   const h1 = laufzeit.h1;
 
+  // Instrumentenprüfung: Die HTML-Messung darf nur dann als Referenz gelten,
+  // wenn sie die Fremd-Skripte tatsächlich ersetzt hat. Sonst ist sie eine
+  // zweite Laufzeitmessung und würde echte Parser-Fehler verstecken.
+  const instrumentOk = html.externalScripts === 0 || html.blockedScripts > 0;
+
   const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets, true);
   const drift = [];
   if (errors.length) issues.push(...errors.slice(0, 5));
   if (httpErrors.length) issues.push(...httpErrors.slice(0, 5));
   if (!title) issues.push('kein <title>');
   if (!h1) issues.push('kein <h1>');
+  if (!instrumentOk) {
+    issues.push(`Messinstrument unbrauchbar: ${html.externalScripts} Fremd-Skript(e) `
+      + 'ausgeliefert, aber keins ersetzt (Cache? Interception?) – die '
+      + 'Parser-Gegenrechnung wäre wertlos');
+  }
 
   // ---------- Parser-Gegenrechnung (Issue #338, Lehre 3) ----------
   const stat = staticMetrics(ctx.domAudit, new URL(url).pathname);
@@ -375,6 +408,9 @@ async function auditPage(browser, url, viewport, ctx) {
       maxKids: html.metrics.maxKids,
       headKids: html.metrics.headKids,
       maxKidsElement: html.metrics.maxKidsElement,
+      externalScripts: html.externalScripts,
+      replacedScripts: html.blockedScripts,
+      instrumentOk,
     },
     staticMetrics: stat ? {
       elements: stat.elements, depth: stat.depth,
@@ -474,6 +510,8 @@ if (SELFTEST) {
     domMetrics: agg,
     parserCheck: {
       compared: results.filter(r => r.staticMetrics).length,
+      referenceUsable: results.every(r => r.htmlOnly.instrumentOk),
+      replacedScripts: results.reduce((sum, r) => sum + r.htmlOnly.replacedScripts, 0),
       tolerated: TOLERANCE,
       drift: drift.map(r => ({ url: r.url, viewport: r.viewport, drift: r.parserDrift })),
     },

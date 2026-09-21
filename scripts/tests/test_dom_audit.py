@@ -146,6 +146,44 @@ class BudgetTests(unittest.TestCase):
                              f"BUDGET_RUNTIME.{key} fehlt/abweichend im JS-Fallback")
 
 
+class BrowserCheckVertragTests(unittest.TestCase):
+    """Verträge des Browser-Audits, die man ohne Chrome prüfen kann.
+
+    Beide hier geprüften Punkte waren schon einmal echte Fehler (21.09.2026):
+    Die HTML-Messung kam aus dem HTTP-Cache (Ersetzung wirkungslos, Drift auf
+    jeder Seite) – und sie hätte still als Referenz gegolten.
+    """
+
+    def setUp(self):
+        self.text = (ROOT / "scripts" / "layout_browser_check.js").read_text(
+            encoding="utf-8")
+
+    def test_cache_wird_fuer_die_referenzmessung_abgeschaltet(self):
+        self.assertIn("setCacheEnabled(false)", self.text,
+                      "Ohne abgeschalteten Cache kommt die zweite Messung aus "
+                      "dem Speicher – die Ersetzung der Fremd-Skripte greift "
+                      "dann nicht (Drift-Fehlalarm auf jeder Seite)")
+
+    def test_referenz_messung_prueft_sich_selbst(self):
+        # Ein Messinstrument, das nicht sagt, ob es funktioniert hat, ist
+        # keine Referenz.
+        self.assertIn("Messinstrument unbrauchbar", self.text)
+        self.assertIn("referenceUsable", self.text)
+        self.assertIn("externalScripts", self.text)
+        self.assertIn("replacedScripts", self.text)
+
+    def test_drift_vergleicht_die_html_messung_nicht_die_laufzeit(self):
+        # Der Kern der Lehre: verglichen wird die Messung ohne Fremd-Skripte.
+        self.assertIn("['headchildren', html.metrics.headKids,", self.text)
+        self.assertIn("['totalElements', html.metrics.count,", self.text)
+        self.assertNotIn("['totalElements', metrics.count,", self.text)
+
+    def test_laufzeit_budget_kommt_aus_dem_statischen_audit(self):
+        self.assertIn("ctx.budgets, true", self.text,
+                      "Die Laufzeitmessung muss gegen den Laufzeit-Satz "
+                      "geprüft werden, die Budgets kommen aus dem DOM-JSON")
+
+
 class AuditLaufTests(unittest.TestCase):
     """End-to-End über das CLI: Ausgabe, JSON, Exit-Codes."""
 
