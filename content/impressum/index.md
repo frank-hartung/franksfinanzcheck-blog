@@ -15,7 +15,7 @@ Karl-Marx-Str. 13<br>
 Deutschland
 
 **Kontakt:**
-- E-Mail: frankhartung@web.de
+- E-Mail: kontakt@franksfinanzcheck.de
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 

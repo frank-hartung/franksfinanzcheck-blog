@@ -15,7 +15,7 @@ Karl-Marx-Str. 13
 Deutschland
 
 **Kontakt:**
-E-Mail: frankhartung@web.de
+E-Mail: kontakt@franksfinanzcheck.de
 
 Verantwortliche Stelle im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist der oben genannte Betreiber dieser Website.
 
@@ -184,7 +184,7 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 - **Inhalt und Kadenz.** Eine Mail pro Werktag: die Sparechnungen, Tariffristen und Rechner des Tages aus dem Blog.
 - **Rechtsgrundlage.** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 - **Speicherdauer.** Deine Adresse bleibt auf der Liste, bis du dich abmeldest. Nach der Abmeldung löschen wir die Adresse innerhalb von 30 Tagen; Nachweise zur erteilten Einwilligung bewahren wir gemäß Art. 7 Abs. 1 DSGVO für 3 Jahre auf (berechtigtes Interesse zur Abwehr von Ansprüchen).
-- **Widerruf.** Jeder Newsletter enthält am Ende einen Link, mit dem du die Liste sofort verlässt. Du kannst die Einwilligung außerdem jederzeit mit Wirkung für die Zukunft widerrufen, z. B. formlos per Mail an die in der Impressum-Seite genannte Adresse (frankhartung@web.de).
+- **Widerruf.** Jeder Newsletter enthält am Ende einen Link, mit dem du die Liste sofort verlässt. Du kannst die Einwilligung außerdem jederzeit mit Wirkung für die Zukunft widerrufen, z. B. formlos per Mail an die in der Impressum-Seite genannte Adresse (kontakt@franksfinanzcheck.de).
 - **Auftragsverarbeiter.** Versand und Speicherung erfolgen bei BREVO, 131 rue de La Rochefoucauld, 75009 Paris, Frankreich. Der Auftragsverarbeitungsvertrag (DPA) ist in den Brevo-Einstellungen unter *Rechtliches → DPA* als PDF abrufbar und wird mit Abschluss des Kontos geschlossen.
 
 **Kontakt per E-Mail:** Wenn du uns per E-Mail kontaktierst, verarbeiten wir deine angegebenen Daten (E-Mail-Adresse, ggf. Name, Inhalt der Nachricht) zur Bearbeitung deiner Anfrage. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertrag/Vorvertrag) bzw. lit. f DSGVO (berechtigtes Interesse). Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
@@ -215,7 +215,7 @@ Du hast im Rahmen der geltenden Datenschutzgesetze jederzeit das Recht auf:
 7. **Widerruf** erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)
 8. **Beschwerde bei einer Aufsichtsbehörde** (Art. 77 DSGVO)
 
-**Kontakt für deine Rechte:** E-Mail an frankhartung@web.de
+**Kontakt für deine Rechte:** E-Mail an kontakt@franksfinanzcheck.de
 
 **Zuständige Aufsichtsbehörde:** Landesbeauftragte für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern (https://www.datenschutz-mv.de)
 

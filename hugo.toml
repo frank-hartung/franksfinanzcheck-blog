@@ -69,6 +69,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   description = "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
   author = "Frank Hartung"
+  contactEmail = "kontakt@franksfinanzcheck.de"
   # SITE-WEITES Social-Fallback-Bild (Premium-Audit 11.09.2026).
   # Startseite, /ueber/ und die Rechtsseiten haben kein Cover – damit fiel
   # auf der meistgeteilten URL (Home) og:image UND twitter:image komplett weg:

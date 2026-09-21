@@ -6,7 +6,7 @@ author: "Frank Hartung"
 showToc: true
 ---
 
-<p style="font-size:.9em; color:#555;">Stand: September 2026 · Verantwortlich: Frank Hartung (<a href="/ueber/">Über mich</a>) · Kontakt: frankhartung@web.de</p>
+<p style="font-size:.9em; color:#555;">Stand: September 2026 · Verantwortlich: Frank Hartung (<a href="/ueber/">Über mich</a>) · Kontakt: kontakt@franksfinanzcheck.de</p>
 
 Auf FranksFinanzcheck findest du Spar-Ratgeber, die du ohne Finanzstudium umsetzen kannst. Diese Seite erklärt, **wie** die Inhalte entstehen, **womit** sie belegt werden und **wann** sie aktualisiert werden – damit du (und Suchmaschinen wie Google, Bing oder KI-Antwortdienste) einordnen kannst, was du hier liest.
 
@@ -50,4 +50,4 @@ Technisch laufen Empfehlungslinks über interne Weiterleitungen (`/go/`-Adressen
 
 ## Kontakt und Hinweise
 
-Fehler gefunden? Kondition veraltet? Thema gewünscht? Schreib an **frankhartung@web.de** – Hinweise werden geprüft und bei Berechtigung eingearbeitet. Weitere Informationen: [Über mich](/ueber/) · [Impressum](/impressum/) · [Datenschutz](/datenschutz/).
+Fehler gefunden? Kondition veraltet? Thema gewünscht? Schreib an **kontakt@franksfinanzcheck.de** – Hinweise werden geprüft und bei Berechtigung eingearbeitet. Weitere Informationen: [Über mich](/ueber/) · [Impressum](/impressum/) · [Datenschutz](/datenschutz/).

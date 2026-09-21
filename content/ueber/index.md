@@ -11,7 +11,7 @@ showToc: true
     <p style="margin:0 0 4px; font-size:.85em; font-weight:700; letter-spacing:.06em; color:#0E5A43;">AUTOR &AMP; BETREIBER</p>
     <h2 style="margin:0 0 10px; font-family:'Inter',sans-serif; font-weight:800; font-size:1.9em; color:#2E2E33;">Frank Hartung</h2>
     <p style="margin:0 0 12px; font-size:1.02em; line-height:1.6; color:#333;">Mein Name ist Frank Hartung – ich beschäftige mich seit über 10 Jahren intensiv mit privater Finanzplanung, Tarifvergleichen und den Hebeln, die im Alltag wirklich bares Geld sparen. Auf FranksFinanzcheck teile ich erprobte Strategien, verifizierte Rechnungen und echte Praxiserfahrungen.</p>
-    <p style="margin:0; font-size:.9em; color:#555;"><strong>Kontakt:</strong> frankhartung@web.de · <a href="https://www.pinterest.de/franksfinanzcheck/" rel="me" style="color:#0E5A43;">Pinterest</a></p>
+    <p style="margin:0; font-size:.9em; color:#555;"><strong>Kontakt:</strong> kontakt@franksfinanzcheck.de · <a href="https://www.pinterest.de/franksfinanzcheck/" rel="me" style="color:#0E5A43;">Pinterest</a></p>
   </div>
 </div>
 
@@ -48,7 +48,7 @@ Damit dieser Blog kostenlos bleibt, nimmt er am **CHECK24-Partnerprogramm** (üb
 
 ## Kontakt
 
-Du hast eine Frage, einen Themenwunsch oder Anmerkungen? Schreib mir gern eine E-Mail an **frankhartung@web.de** – ich freue mich über Feedback und lese jede Nachricht.
+Du hast eine Frage, einen Themenwunsch oder Anmerkungen? Schreib mir gern eine E-Mail an **kontakt@franksfinanzcheck.de** – ich freue mich über Feedback und lese jede Nachricht.
 
 > **Redaktionsstandards im Detail:** Wie recherchiert, getestet, aktualisiert und finanziert wird – und wie wir mit KI-Unterstützung umgehen – steht auf der Seite [So arbeiten wir](/methodik/).
 

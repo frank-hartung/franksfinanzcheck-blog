@@ -41,7 +41,7 @@ fristen:
     erinnerung_ab_tage: 21
     eskalation_nach_tagen: [0, 14, 30]
     checkliste:
-      - "eRecht24 Basis-Generator (e-recht24.de, kostenlos) mit den echten Profildaten ausfüllen: Frank Hartung, Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz, frankhartung@web.de"
+      - "eRecht24 Basis-Generator (e-recht24.de, kostenlos) mit den echten Profildaten ausfüllen: Frank Hartung, Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz, kontakt@franksfinanzcheck.de"
       - "Alternativ/ergänzend: kostenloser Dr.-Schwenke-Generator (dr-schwenke.de)"
       - "Impressum-Diff gegen content/impressum/index.md (nur Deltas übernehmen, Struktur/Anker erhalten)"
       - "Datenschutz-Diff gegen content/datenschutz/index.md (Hosting/CDN/Fonts/Umami/Consent/Affiliate-Abschnitte sind standortspezifisch!)"
