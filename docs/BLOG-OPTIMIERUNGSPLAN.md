@@ -82,7 +82,7 @@
 | 2 | **Pinterest-API-Token** | App beantragt; Token (`pina_…`) steht aus → dann Secret `PINTEREST_ACCESS_TOKEN` + Variable `PINTEREST_BOARD_ID` anlegen, `repin-weekly.yml` aktivieren | 10 Min (sobald Token da) |
 | 3 | **4 Posts/Tag aktivieren** | Variable `MAX_ARTIKEL_PRO_TAG = "4"` in GitHub-Settings setzen (Zeitfenster stehen bereit) | 1 Min |
 | 4 | **Google Search Console – Domain-Property** | Optional: zusätzlich Domain-Property (DNS-TXT bei Cloudflare) für bessere Abdeckung | 5 Min |
-| 5 | **E-Mail auf eigener Domain** | Optional: `hallo@franksfinanzcheck.de` (dann MX/SPF bei Cloudflare anpassen – aktuell Null-MX) | je nach Anbieter |
+| 5 | **E-Mail auf eigener Domain** | Optional: `kontakt@franksfinanzcheck.de` (dann MX/SPF bei Cloudflare anpassen – aktuell Null-MX) | je nach Anbieter |
 | 6 | **alte `github.io`-Links in Artikeln** | Redirect läuft bereits; ggf. in einigen Monaten direkt auf neue Domain umschreiben | gering |
 
 ## 📈 7. Kennzahlen (aktuell)
@@ -122,7 +122,7 @@
 |---|---|---|---|
 | 6 | **„Beste Angebote“-Infobox je Pillar** | Eine wiederkehrende Vergleichs-Box (aktueller Strom-/DSL-/Versicherungs-Tarif mit Affiliate-Link) erhöht Conversion & Verweildauer | 2 h |
 | 7 | **E-Mail-Newsletter (alternativlos für Wiederkehr)** | Auch ohne eigenen Mailserver: kostenloser Anbieter (z. B. Buttondown/Beehiiv) mit „Neuer Artikel“-Benachrichtigung | 2 h |
-| 8 | **Eigene Domain-E-Mail** | `hallo@franksfinanzcheck.de` (z. B. über Cloudflare Email Routing kostenlos) – seriöser für Backlink-Outreach | 30 Min |
+| 8 | **Eigene Domain-E-Mail** | `kontakt@franksfinanzcheck.de` (z. B. über Cloudflare Email Routing kostenlos) – seriöser für Backlink-Outreach | 30 Min |
 | 9 | **YouTube/Short-Videos je Artikel** | 60-Sek-Video mit Kern-Tipps → Link im Artikel, neue Reichweite | je 1 h |
 | 10 | **Backlink-Aufbau intensivieren** | `backlink_automation.py` liefert Prospects – monatlich 5 Gastbeiträge/Listen-Platzierungen anstreben (Domain-Autorität) | laufend |
 
