@@ -149,34 +149,44 @@ class BudgetTests(unittest.TestCase):
 class BrowserCheckVertragTests(unittest.TestCase):
     """Verträge des Browser-Audits, die man ohne Chrome prüfen kann.
 
-    Beide hier geprüften Punkte waren schon einmal echte Fehler (21.09.2026):
-    Die HTML-Messung kam aus dem HTTP-Cache (Ersetzung wirkungslos, Drift auf
-    jeder Seite) – und sie hätte still als Referenz gegolten.
+    Alle hier geprüften Punkte waren schon einmal echte Fehler (21.09.2026):
+    Die Referenzmessung kam aus dem HTTP-Cache (Ersetzung wirkungslos, „Drift"
+    auf jeder Seite), und die Erweiterungsschicht der Seite wurde als
+    Parser-Fehler gelesen. Zwei Anläufe, zwei Lehren – jetzt als Vertrag.
     """
 
     def setUp(self):
         self.text = (ROOT / "scripts" / "layout_browser_check.js").read_text(
             encoding="utf-8")
 
-    def test_cache_wird_fuer_die_referenzmessung_abgeschaltet(self):
-        self.assertIn("setCacheEnabled(false)", self.text,
-                      "Ohne abgeschalteten Cache kommt die zweite Messung aus "
-                      "dem Speicher – die Ersetzung der Fremd-Skripte greift "
-                      "dann nicht (Drift-Fehlalarm auf jeder Seite)")
+    def test_referenz_ist_die_sandbox_messung_der_datei(self):
+        # Der einzige Messweg, der garantiert nur die HTML sieht: die Datei im
+        # Sandbox-Iframe parsen. Netzfilter scheiterten an Inline-Skripten,
+        # Cache-Abschaltung am Speicher-Cache.
+        for pflicht in ("'sandbox', 'allow-same-origin'", "iframe.srcdoc",
+                        "measureShippedHtml", "fileForUrl",
+                        "fs.readFileSync(quelle"):
+            with self.subTest(pflicht=pflicht):
+                self.assertIn(pflicht, self.text)
+        self.assertNotIn("setRequestInterception", self.text,
+                         "Netzfilter ist als Referenz nachweislich unbrauchbar "
+                         "(Inline-Skripte, Cache) – nicht zurückholen")
 
-    def test_referenz_messung_prueft_sich_selbst(self):
-        # Ein Messinstrument, das nicht sagt, ob es funktioniert hat, ist
-        # keine Referenz.
-        self.assertIn("Messinstrument unbrauchbar", self.text)
+    def test_referenz_prueft_sich_selbst(self):
+        self.assertIn("Referenzmessung unbrauchbar", self.text)
         self.assertIn("referenceUsable", self.text)
-        self.assertIn("externalScripts", self.text)
-        self.assertIn("replacedScripts", self.text)
+        self.assertIn("instrumentOk", self.text)
 
-    def test_drift_vergleicht_die_html_messung_nicht_die_laufzeit(self):
-        # Der Kern der Lehre: verglichen wird die Messung ohne Fremd-Skripte.
-        self.assertIn("['headchildren', html.metrics.headKids,", self.text)
-        self.assertIn("['totalElements', html.metrics.count,", self.text)
+    def test_drift_vergleicht_die_referenz_nicht_die_laufzeit(self):
+        self.assertIn("['headchildren', html.headKids,", self.text)
+        self.assertIn("['totalElements', html.count,", self.text)
         self.assertNotIn("['totalElements', metrics.count,", self.text)
+
+    def test_rohdeltas_werden_mitgeschrieben(self):
+        # Jede Toleranz muss nachmessbar bleiben: ohne die Rohdeltas im JSON
+        # ist die nächste Schwellen-Diskussion wieder geraten.
+        self.assertIn("staticVsHtml: deltas", self.text)
+        self.assertIn("deltas[key] = delta", self.text)
 
     def test_laufzeit_budget_kommt_aus_dem_statischen_audit(self):
         self.assertIn("ctx.budgets, true", self.text,

@@ -40,18 +40,26 @@
  *     (nachgemessen: 968 Elemente ausgeliefert → 1109 zur Laufzeit). Sie wird
  *     gegen die Laufzeit-Budgets geprüft (`fruehwarnung_runtime`, harte Grenze
  *     bleibt die Lighthouse-Grenze).
- *  2. HTML-Messung (Fremd-Skripte werden ersetzt, nicht geladen): Nur so sieht
- *     der Browser, was der statische Parser in `dom_audit.py` vermisst. Der
- *     Vergleich DIESER Zahlen ist die Parser-Gegenrechnung – sonst meldet jede
- *     legitime Erweiterung „Drift" und die Prüfung wäre wertlos.
+ *  2. Referenzmessung der ausgelieferten HTML: Die Datei wird gelesen und in
+ *     einem Iframe mit `sandbox="allow-same-origin"` per `srcdoc` geparst –
+ *     ein echter Parserlauf, aber ohne jede Skriptausführung und ohne Netz.
+ *     Der Vergleich DIESER Zahlen mit `dom_audit.py` ist die
+ *     Parser-Gegenrechnung – sonst meldet jede legitime Erweiterung „Drift"
+ *     und die Prüfung wäre wertlos.
  *
- *     Zwei Fallen sind dabei eingebaut und werden selbst überwacht:
- *       · Der HTTP-Cache: ohne `setCacheEnabled(false)` kommt das zweite Laden
- *         aus dem Speicher, es gibt keinen Request – und die Ersetzung greift
- *         ins Leere (gemessen am 21.09.2026: „Erweiterungsschicht +0").
- *       · Die Wirksamkeit: liefert eine Seite Fremd-Skripte aus, die Messung
- *         ersetzt aber keins, dann ist der Messwert unbrauchbar. Das ist ein
- *         harter Befund („Instrument prüfen"), keine stille Null.
+ *     Warum nicht „Fremd-Skripte per Request-Interception ersetzen"? Zweimal
+ *     am 21.09.2026 gemessen und verworfen: Erst kam das zweite Laden aus dem
+ *     HTTP-Cache (Ersetzung wirkungslos, „Erweiterungsschicht +0"), dann
+ *     zeigte sich, dass die Erweiterung nicht nur aus externen Dateien kommt –
+ *     die Seiten bringen eigene Inline-Skripte mit, die kein Netzfilter
+ *     aufhält. `srcdoc` im Sandbox-Iframe ist die einzige Messung, die
+ *     garantiert nur die HTML sieht.
+ *
+ *     Bewusste Abweichung: Im Sandbox-Iframe ist Scripting aus, deshalb parst
+ *     der Browser `<noscript>`-Inhalte als Markup (der statische Parser
+ *     behandelt sie als Rohtext). Das erklärt einen kleinen, stabilen
+ *     Mehrbetrag in der Referenzmessung – die Toleranz unten ist darauf
+ *     begründet, nicht geraten (`staticVsHtml` im JSON zeigt jeden Delta).
  *
  * SEVERITY (Lehre aus #338): Ein Dauer-Alarm ist kein Alarm. Deshalb sind
  * die Stufen getrennt:
@@ -95,7 +103,15 @@ const DOM_JSON = process.env.LAYOUT_DOM_JSON ||
 const EXTRA_RISK_PAGES = parseInt(process.env.LAYOUT_RISK_PAGES || '3', 10);
 // Laufzeit-Zugaben des Browsers (siehe Kopf): Umami-Loader im <head>, ggf.
 // Sentinel-Div aus dem Top-Link-Skript (Body-Ebene, zählt nur in „elements").
-const TOLERANCE = { headchildren: 2, maxChildren: 2, depth: 2, totalElements: 5 };
+const TOLERANCE = {
+  headchildren: 2,
+  maxChildren: 2,
+  depth: 2,
+  // Elementsumme: der Sandbox-Iframe parst <noscript>-Inhalte als Markup
+  // (Scripting aus) – jede Seite bringt zwei bis drei solche Blöcke mit
+  // (Theme-Umschalter, Consent-Banner). Alles darüber ist Drift.
+  totalElements: 12,
+};
 
 // Eingefrorene Standard-Budgets, falls kein statischer Audit vorliegt.
 // Sie MÜSSEN den Werten in dom_audit.py entsprechen (dort steht die Wahrheit).
@@ -285,41 +301,15 @@ async function measureDom(page) {
   });
 }
 
-/** Eine Seite laden und vermessen. `suppressScripts` ersetzt Fremd-Skripte
- *  durch leere Antworten (kein Netz, keine Konsolenfehler, keine Erweiterung):
- *  so sieht der Browser genau das, was der statische Parser vermisst. */
-async function loadAndMeasure(browser, url, viewport, suppressScripts) {
+/** Die Seite laden und vermessen, wie Leser sie bekommen (Laufzeit-DOM). */
+async function loadRuntime(browser, url, viewport) {
   const page = await browser.newPage();
   await page.setViewport(viewport);
-  // Frischer Zustand: sonst kommt das zweite Laden aus dem HTTP-Cache und die
-  // Ersetzung der Fremd-Skripte hätte nichts zu tun (siehe Kopf).
-  try {
-    await page.setCacheEnabled(false);
-  } catch (err) {
-    console.error('Hinweis: Cache ließ sich nicht abschalten (' + err.message +
-                  ') – die HTML-Messung kann unbrauchbar sein.');
-  }
-  let blockedScripts = 0;
   const errors = [];
   const httpErrors = [];
   page.on('pageerror', e => errors.push('JS: ' + e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
   page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
-  if (suppressScripts) {
-    await page.setRequestInterception(true);
-    page.on('request', req => {
-      if (req.resourceType() === 'script' && req.url().startsWith('http')) {
-        // Leere Antwort statt Abbruch: kein 404, kein Konsolenfehler – die
-        // Messung soll zeigen, was die HTML hergibt, nicht wie ein Netzfehler
-        // aussieht.
-        blockedScripts += 1;
-        req.respond({ status: 200, contentType: 'application/javascript',
-                      body: '/* im Audit ersetzt: Parser-Gegenrechnung */' });
-      } else {
-        req.continue();
-      }
-    });
-  }
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
     .catch(e => errors.push('load: ' + e.message));
@@ -330,20 +320,80 @@ async function loadAndMeasure(browser, url, viewport, suppressScripts) {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
-  // Wie viele Fremd-Skripte liefert die Seite überhaupt aus? Daran wird die
-  // Wirksamkeit der Ersetzung gemessen (Instrumentenprüfung unten).
-  const externalScripts = await page.evaluate(() =>
-    document.querySelectorAll('script[src]').length);
-  await page.close();
-  return { metrics, title, h1, errors, httpErrors, loadMs, blockedScripts,
-           externalScripts };
+  return { page, metrics, title, h1, errors, httpErrors, loadMs };
+}
+
+/** Die ausgelieferte HTML im Sandbox-Iframe parsen: echter Browserparser,
+ *  keine Skriptausführung, kein Netz, kein Cache. */
+async function measureShippedHtml(page, htmlText) {
+  return page.evaluate(async (text) => {
+    const iframe = document.createElement('iframe');
+    // allow-same-origin ohne allow-scripts: Der Parent darf den DOM lesen,
+    // im Iframe läuft nichts.
+    iframe.setAttribute('sandbox', 'allow-same-origin');
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.style.cssText =
+      'position:fixed;left:-9999px;top:0;width:320px;height:240px;border:0';
+    const geladen = new Promise(res => iframe.addEventListener('load', res,
+                                                               { once: true }));
+    iframe.srcdoc = text;
+    document.body.appendChild(iframe);
+    await geladen;
+    const doc = iframe.contentDocument;
+    if (!doc || !doc.documentElement) return { fehler: 'kein Dokument' };
+    const all = doc.querySelectorAll('*');
+    let depth = 0, maxKids = 0, maxKidsNode = null;
+    for (const el of all) {
+      let d = 0, n = el;
+      while (n && n !== doc.documentElement) { d++; n = n.parentElement; }
+      if (d > depth) depth = d;
+      if (el.children.length > maxKids) {
+        maxKids = el.children.length;
+        maxKidsNode = el;
+      }
+    }
+    const chain = (el) => {
+      const parts = [];
+      while (el && el.nodeType === 1 && parts.length < 5) {
+        let part = el.tagName.toLowerCase();
+        if (el.id) part += '#' + el.id;
+        else if (el.classList.length) {
+          part += '.' + Array.from(el.classList).slice(0, 2).join('.');
+        }
+        parts.unshift(part);
+        el = el.parentElement;
+      }
+      return parts.join(' > ');
+    };
+    const result = {
+      count: all.length,
+      depth,
+      maxKids,
+      maxKidsElement: chain(maxKidsNode),
+      headKids: doc.head ? doc.head.children.length : 0,
+      scriptsInHtml: doc.querySelectorAll('script[src]').length,
+      noscriptBloecke: doc.querySelectorAll('noscript').length,
+    };
+    iframe.remove();
+    return result;
+  }, htmlText);
+}
+
+/** Datei zur URL (Pretty-URLs: /pfad/ → public/pfad/index.html). */
+function fileForUrl(urlPath) {
+  const rel = decodeURIComponent(urlPath.replace(/^\//, ''));
+  const kandidaten = [
+    path.join(BASE, rel, 'index.html'),
+    path.join(BASE, rel),
+    path.join(BASE, rel.replace(/\/$/, '') + '.html'),
+  ];
+  return kandidaten.find(p => { try { return fs.statSync(p).isFile(); }
+                                catch (e) { return false; } }) || null;
 }
 
 async function auditPage(browser, url, viewport, ctx) {
   // 1) Laufzeit: die Seite, wie Leser sie bekommen.
-  const laufzeit = await loadAndMeasure(browser, url, viewport, false);
-  // 2) HTML-Messung: dieselbe Seite ohne Fremd-Skripte (Parser-Referenz).
-  const html = await loadAndMeasure(browser, url, viewport, true);
+  const laufzeit = await loadRuntime(browser, url, viewport);
   const metrics = laufzeit.metrics;
   const errors = laufzeit.errors;
   const httpErrors = laufzeit.httpErrors;
@@ -351,10 +401,21 @@ async function auditPage(browser, url, viewport, ctx) {
   const title = laufzeit.title;
   const h1 = laufzeit.h1;
 
-  // Instrumentenprüfung: Die HTML-Messung darf nur dann als Referenz gelten,
-  // wenn sie die Fremd-Skripte tatsächlich ersetzt hat. Sonst ist sie eine
-  // zweite Laufzeitmessung und würde echte Parser-Fehler verstecken.
-  const instrumentOk = html.externalScripts === 0 || html.blockedScripts > 0;
+  // Instrumentenprüfung: Die Referenz ist nur brauchbar, wenn die Datei lesbar
+  // war und der Sandbox-Parser Elemente gesehen hat. Eine stille Null würde
+  // echte Parser-Fehler verstecken.
+  const quelle = fileForUrl(new URL(url).pathname);
+  let html = { fehler: 'Datei nicht gefunden' };
+  if (quelle) {
+    try {
+      html = await measureShippedHtml(laufzeit.page, fs.readFileSync(quelle,
+                                                                    'utf8'));
+    } catch (err) {
+      html = { fehler: 'srcdoc-Messung: ' + err.message };
+    }
+  }
+  const instrumentOk = !html.fehler && html.count > 0;
+  await laufzeit.page.close();
 
   const { issues, warnings } = evaluateBudgets(metrics, ctx.budgets, true);
   const drift = [];
@@ -363,26 +424,28 @@ async function auditPage(browser, url, viewport, ctx) {
   if (!title) issues.push('kein <title>');
   if (!h1) issues.push('kein <h1>');
   if (!instrumentOk) {
-    issues.push(`Messinstrument unbrauchbar: ${html.externalScripts} Fremd-Skript(e) `
-      + 'ausgeliefert, aber keins ersetzt (Cache? Interception?) – die '
-      + 'Parser-Gegenrechnung wäre wertlos');
+    issues.push('Referenzmessung unbrauchbar (' + (html.fehler
+      || 'Sandbox-Parser sah 0 Elemente') + ') – die Parser-Gegenrechnung '
+      + 'wäre wertlos, deshalb ist das ein harter Befund');
   }
 
   // ---------- Parser-Gegenrechnung (Issue #338, Lehre 3) ----------
   const stat = staticMetrics(ctx.domAudit, new URL(url).pathname);
+  const deltas = {};
   if (stat) {
     // Referenz ist die HTML-Messung (Fremd-Skripte ersetzt), nicht die
     // Laufzeitmessung – Begründung im Kopf dieser Datei.
     const pairs = [
-      ['headchildren', html.metrics.headKids, stat.headchildren],
-      ['maxChildren', html.metrics.maxKids, stat.maxchildren],
-      ['depth', html.metrics.depth, stat.depth],
-      ['totalElements', html.metrics.count, stat.elements],
+      ['headchildren', html.headKids, stat.headchildren],
+      ['maxChildren', html.maxKids, stat.maxchildren],
+      ['depth', html.depth, stat.depth],
+      ['totalElements', html.count, stat.elements],
     ];
     for (const [key, browserValue, parserValue] of pairs) {
       const delta = Math.abs(browserValue - parserValue);
+      deltas[key] = delta;
       if (delta > TOLERANCE[key]) {
-        drift.push(`${key}: Browser ${browserValue} vs. Parser ${parserValue} `
+        drift.push(`${key}: Referenz ${browserValue} vs. Parser ${parserValue} `
           + `(Δ${delta} > Toleranz ${TOLERANCE[key]})`);
       }
     }
@@ -401,17 +464,19 @@ async function auditPage(browser, url, viewport, ctx) {
     maxChildren: metrics.maxKids,
     maxChildrenElement: metrics.maxKidsElement,
     headChildren: metrics.headKids,
-    // HTML-Messung ohne Fremd-Skripte (Referenz für die Parser-Gegenrechnung)
-    htmlOnly: {
-      count: html.metrics.count,
-      depth: html.metrics.depth,
-      maxKids: html.metrics.maxKids,
-      headKids: html.metrics.headKids,
-      maxKidsElement: html.metrics.maxKidsElement,
-      externalScripts: html.externalScripts,
-      replacedScripts: html.blockedScripts,
-      instrumentOk,
-    },
+    // Referenzmessung: ausgelieferte HTML im Sandbox-Iframe (Parser-Vergleich)
+    htmlOnly: instrumentOk ? {
+      count: html.count,
+      depth: html.depth,
+      maxKids: html.maxKids,
+      headKids: html.headKids,
+      maxKidsElement: html.maxKidsElement,
+      scriptsInHtml: html.scriptsInHtml,
+      noscriptBloecke: html.noscriptBloecke,
+    } : { count: -1, fehler: html.fehler || 'unbrauchbar' },
+    instrumentOk,
+    // Rohdeltas Referenz↔Parser, damit jede Toleranz nachmessbar ist
+    staticVsHtml: deltas,
     staticMetrics: stat ? {
       elements: stat.elements, depth: stat.depth,
       maxChildren: stat.maxchildren, headChildren: stat.headchildren,
@@ -487,7 +552,8 @@ if (SELFTEST) {
     avgLoadMs: Math.round(results.reduce((s, r) => s + r.loadMs, 0) / results.length),
   };
   const erweiterung = results.map(r => r.domCount - r.htmlOnly.count);
-  const htmlMax = (key) => Math.max(...results.map(r => r.htmlOnly[key]));
+  const htmlMax = (key) => Math.max(...results.filter(r => r.instrumentOk)
+                                           .map(r => r.htmlOnly[key]));
   const summary = {
     checked: results.length,
     domMetricsHtmlOnly: {
@@ -510,8 +576,10 @@ if (SELFTEST) {
     domMetrics: agg,
     parserCheck: {
       compared: results.filter(r => r.staticMetrics).length,
-      referenceUsable: results.every(r => r.htmlOnly.instrumentOk),
-      replacedScripts: results.reduce((sum, r) => sum + r.htmlOnly.replacedScripts, 0),
+      referenceUsable: results.every(r => r.instrumentOk),
+      tolerance: TOLERANCE,
+      maxDelta: results.reduce((max, r) => Math.max(max, ...Object.values(
+        r.staticVsHtml || {}).concat(0)), 0),
       tolerated: TOLERANCE,
       drift: drift.map(r => ({ url: r.url, viewport: r.viewport, drift: r.parserDrift })),
     },

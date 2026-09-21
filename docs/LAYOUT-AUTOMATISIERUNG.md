@@ -48,19 +48,23 @@ Funktion, kein Fehler. Deshalb:
   Lighthouse-Grenze 1400 – sie billigt auch Lighthouse dem Laufzeit-DOM zu.
   Ein eigener Kopf-/Tiefenwert wäre eine erfundene Zahl und steht deshalb auf
   demselben Wert wie statisch.
-* **Parser-Gegenrechnung** vergleicht den Parser mit einer zweiten
-  Browsermessung, bei der Fremd-Skripte durch leere Antworten **ersetzt**
-  (nicht geladen) werden – nur so sieht der Browser, was der Parser sieht.
-  Vorher verglich er Laufzeit gegen Parser und meldete jede legitime
-  Erweiterung als „Drift" (Δ92–171) – ein Dauer-Fehlalarm der schlimmsten
-  Sorte, weil er nach einem echten Parser-Fehler aussah.
-  Diese Messung schützt sich selbst: Der HTTP-Cache wird abgeschaltet (sonst
-  kommt das zweite Laden aus dem Speicher, es gibt keinen Request – die
-  Ersetzung greift ins Leere, gemessen als „Erweiterungsschicht +0"), und die
-  Zahl der ersetzten Skripte wird gegen die Zahl der ausgelieferten
-  `<script src>` geprüft. Liefert eine Seite Fremd-Skripte aus und es wird
-  keins ersetzt, ist das ein **harter Befund „Messinstrument unbrauchbar"** –
-  eine Referenz, die nicht sagt, ob sie funktioniert hat, ist keine.
+* **Parser-Gegenrechnung:** Die ausgelieferte HTML-Datei wird im
+  **Sandbox-Iframe per `srcdoc`** geparst (`sandbox="allow-same-origin"`, also
+  ein echter Browserparser ohne Skriptausführung, ohne Netz, ohne Cache) – nur
+  so sieht der Browser genau das, was `dom_audit.py` sieht. Vorher verglich er
+  Laufzeit gegen Parser und meldete jede legitime Erweiterung als „Drift"
+  (Δ92–171) – ein Dauer-Fehlalarm, der nach einem echten Parser-Fehler aussah.
+  Auch dieser Messweg musste zweimal gelernt werden: Ein Netzfilter für
+  Fremd-Skripte scheiterte erst am HTTP-Cache (zweites Laden kam aus dem
+  Speicher → „Erweiterungsschicht +0") und dann daran, dass die Seiten eigene
+  **Inline-Skripte** mitbringen, die kein Netzfilter aufhält. Der Sandbox-Parser
+  umgeht beides; die Tests `BrowserCheckVertragTests` halten den Weg fest.
+  Die verbleibende, bewusste Abweichung: Im Sandbox-Iframe ist Scripting aus,
+  deshalb parst der Browser `<noscript>`-Inhalte als Markup – die Toleranz
+  davon (Elemente ±12) ist begründet, und `staticVsHtml` im Browser-JSON zeigt
+  jeden Rohdelta, damit jede Schwelle nachmessbar bleibt. Eine Referenz, die
+  nicht sagt, ob sie funktioniert hat, ist keine: Scheitert die Messung
+  (Datei nicht lesbar, 0 Elemente), ist das ein **harter Befund**.
 * Beide Zahlen stehen im Browser-JSON (`domMetrics`, `domMetricsHtmlOnly`,
   `erweiterungsschicht`) und in der `::notice::`-Annotation.
 
@@ -168,7 +172,7 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 | `python3 scripts/dom_audit.py --selftest` | 8 eingefrorene Parser-Fälle (unquotierte Attribute, impliziter `<tbody>`, `<p>`-Autoclose, `<noscript>`-Rohtext, SVG-Selbstschluss, Fremdinhalt, Kommentare/`<script>`-Inhalte, Pfadangaben) |
 | Browser-Audit im CI (Puppeteer) | rechnet jeden Lauf gegen `.cache/layout/dom-audit.json` (Budget-SSOT), misst Laufzeit-DOM **und** HTML-Messung ohne Fremd-Skripte; Drift zwischen Parser und HTML-Messung = Befund |
 | `node scripts/layout_browser_check.js --selftest` | 13 Verträge ohne Chrome (Budget-/Severity-Logik inkl. Laufzeitsatz) (u. a. „Laufzeit 1109 Elemente ist kein Befund", „ausgeliefert wären 1109 eine Frühwarnung", „+1 über der Lighthouse-Grenze ist rot") |
-| `python3 -m unittest discover -s scripts/tests` | **549 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 58 neue in dieser Runde (`test_dom_audit.py` 40: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template- und Browser-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
+| `python3 -m unittest discover -s scripts/tests` | **549 Tests grün** (14 übersprungen: jsdom-Parität ohne `NODE_PATH`), davon 59 neue in dieser Runde (`test_dom_audit.py` 41: Parservertrag, Budget-/Exit-Logik, Chunker-Vertrag, Alt-Prüfung, hreflang-Hygiene, Template- und Browser-Verträge, optionaler jsdom-Parallelbeweis; `test_layout_annotations.py` 12: Annotationen/Deckel-Escaping/Notiz; `test_workflow_yaml.py` 6: YAML-, Step-, JS- und Skriptpfad-Wachen) |
 | hreflang-Hygiene (`check_hreflang()`) | 371 Seiten je **genau eine** Angabe pro Sprache, keine Doppelung; auf 12 Paginierungsseiten zeigt das geerbte `de` auf die Abschnitts-Wurzel → **Warnung** mit Quelle (`head.html`, versiegelt) statt stiller Duldung |
 | `python3 scripts/integrity_guard.py` | grün – 7 KRITISCH-versiegelte Knoten unangetastet |
 
