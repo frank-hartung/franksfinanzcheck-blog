@@ -30,8 +30,8 @@ prüft sich der Parser bei jedem Lauf selbst mit – gegen einen echten Browser.
 
 | Metrik | Frühwarnung (ausgeliefert) | Lighthouse-Grenze | Ist ausgeliefert (21.09.2026) |
 |---|---|---|---|
-| Kinder eines Elements | 54 | 60 | **50** (`html > head`) |
-| Kinder im `<head>` | 52 | 58 | **50** |
+| Kinder eines Elements | 54 | 60 | **49** (`html > head`) |
+| Kinder im `<head>` | 52 | 58 | **49** |
 | Tiefe | 28 | 32 | **12** |
 | Elemente je Seite | 1100 | 1400 | **968** |
 
@@ -80,7 +80,7 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
 |---|---|---|---|
 | 1 | Audit-Sample: nur Startseite + 3 neueste Artikel | Die Tag-Übersicht `/tags/` mit **136 direkten Kindern** in *einer* Liste war nie im Blick | `dom_audit.py` vermisst **jede** Seite; `/tags/` ist jetzt nach Anfangsbuchstaben gruppiert (max. 21 Kinder je Liste) |
 | 2 | Gemessen wurde `hugo --quiet` (unminifiziert) | Zahlen entsprachen nicht dem ausgelieferten Stand | Bau im Workflow + Vermessung jetzt `hugo --minify` wie in `deploy.yml` |
-| 3 | Budget war unerreichbar („Head 59 > 58") | Dauer-Fehlalarm auf praktisch jeder Artikelseite | Head strukturell verkleinert (60 → 50) **und** Budget begründet (`52`/`58`) – die Zahl ist jetzt template-, nicht redaktionsabhängig |
+| 3 | Budget war unerreichbar („Head 59 > 58") | Dauer-Fehlalarm auf praktisch jeder Artikelseite | Head strukturell verkleinert (60 → 49) **und** Budget begründet (`52`/`58`) – die Zahl ist jetzt template-, nicht redaktionsabhängig |
 | 4 | Alt-Text-Warnung kam aus dem Frontmatter | Der gemeldete Beitrag ist ein **Entwurf ohne Cover** – ein Bild ohne Bild hat keinen Alt-Text | Prüfung läuft am **gebauten Stand** (Artikel-Inhalt); Frontmatter nur für *veröffentlichte* Beiträge; Entwürfe erscheinen als Hinweiszeile, nicht als Warnung |
 | 5 | Statischer Audit konnte kein Issue auslösen (`|| true`) und das Issue wurde nur *erstellt*, nie aktualisiert/geschlossen | Befunde verpufften; ein einmal geöffnetes Issue blieb für immer offen | Workflow wertet `STATIC_EXIT`/`BROWSER_EXIT` aus, wird bei Befunden rot, **aktualisiert** das Issue (Marker) und **schließt** es, sobald der Lauf grün ist |
 
@@ -88,7 +88,7 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
 
 ## 3. Was am Bau geändert wurde
 
-### 3.1 Head-DOM: 60 → 50 Kinder (Artikel-Seiten)
+### 3.1 Head-DOM: 60 → 49 Kinder (Artikel-Seiten)
 
 * **`article:tag` entfernt** (`layouts/_partials/templates/opengraph.html`).
   Bis zu **sechs** Meta-Tags pro Artikel, die nachweislich kein Konsument mehr
@@ -113,6 +113,18 @@ entstehen erst an der Lighthouse-Grenze – außer man ruft mit `--strict`
   (identisch) setzt. Neue Wache: `check_hreflang()` in `layout_audit.py`
   (Doppelung = kritisch, fehlende Selbstreferenz = kritisch, Pager-Abweichung
   = Warnung).
+* **Zusammengeführt aus PR #344** (parallel gemergt): die beiden inline
+  `<style>`-Blöcke des Heads sind EIN Block, `@font-face` liegt in
+  `layouts/_partials/ff_fontfaces.html` – ein direktes Head-Kind weniger
+  (dieser Commit hat `head.html` neu signiert, der Integritäts-Lock ist
+  entsprechend aktualisiert).
+* **Bewusst NICHT übernommen:** die in #344 vorgeschlagene Verengung der
+  „Max. Kinder"-Metrik auf `<body>`-Knoten. Der Befund lautete
+  `Max. Kinder 59 > 58 – Element: html > head`; die Heilung ist die
+  Verkleinerung des Heads (60 → 49, siehe oben), nicht das Ausblenden des
+  Messwerts. `dom_audit.py` wendet dieselbe Grenze auf JEDE Seite an – eine
+  verengte Browsermetrik wäre dazu inkonsistent. Der Code hält die
+  Entscheidung mit Begründung fest.
 * **Geprüft und bewusst behalten:** `og:image:type` (dokumentierte Entscheidung
   aus `docs/PREMIUM-AUDIT-2026-09-11.md` § 2.10), Maße, Alt,
   Verification-Tags, Twitter-Cards, Preloads.
@@ -180,8 +192,8 @@ Zusätzlich (warnend) geprüft: veröffentlichte Beiträge mit Cover, aber ohne
 
 | Kennzahl | vorher | nachher | Budget |
 |---|---|---|---|
-| max. Kinder eines Elements | **136** (`/tags/`, `ul.terms-tags`) | **50** (`html > head`) | 54 / 60 |
-| max. Kinder im `<head>` | **60** (Artikel mit FAQ) | **50** | 52 / 58 |
+| max. Kinder eines Elements | **136** (`/tags/`, `ul.terms-tags`) | **49** (`html > head`) | 54 / 60 |
+| max. Kinder im `<head>` | **60** (Artikel mit FAQ) | **49** | 52 / 58 |
 | `article:tag`-Metas je Artikel | bis **6** | 0 | – |
 | Seiten im Blick der Vermessung | 4 | **213** | – |
 | Skripte im `<head>` | 8 | 6 | – |
