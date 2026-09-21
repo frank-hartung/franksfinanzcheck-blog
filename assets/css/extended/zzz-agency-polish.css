@@ -1478,6 +1478,19 @@ footer.footer a:hover {
   color: var(--ff-emerald-bright);
 }
 
+/* GEO-PREMIUM 21.09.2026: 4 Footer-Links (inkl. Methodik/E-E-A-T) – Umbruch
+   zwischen den Links erlauben. PaperMod setzt `white-space: nowrap` auf
+   `.footer span:last-child`; mit 3 Links passte das bei 320px, mit 4 nicht
+   mehr (horizontaler Overflow → Themenwelten-Gate rot). Labels selbst
+   bleiben unzertrennlich, nur an den „·“-Trennern wird umbrochen. */
+footer.footer span:last-child {
+  white-space: normal;
+}
+
+footer.footer span:last-child a {
+  white-space: nowrap;
+}
+
 .pinterest-footer {
   text-align: center;
   margin: 14px 0;
