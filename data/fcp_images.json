@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/fcp_image_optimizer.py",
-  "generatedAt": "2026-09-21T09:31:24+00:00",
+  "generatedAt": "2026-09-21T09:39:29+00:00",
   "strategy": {
     "goal": "Bildrequests dürfen FCP nicht verzögern und nicht mit dem LCP-Cover konkurrieren.",
     "maxHighPriorityImagesPerPage": 1,
@@ -11,7 +11,7 @@
   },
   "inputs": {
     "lcpManifestPages": 39,
-    "imageManifestSources": 55
+    "imageManifestSources": 54
   },
   "policies": [
     {

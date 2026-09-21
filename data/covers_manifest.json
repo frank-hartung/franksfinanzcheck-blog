@@ -489,15 +489,6 @@
    "savings": ""
   }
  },
- "2026-09-11-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-11T08:21:42+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
   "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
   "ts": "2026-09-11T08:21:45+00:00",
@@ -660,15 +651,6 @@
    "savings": ""
   }
  },
- "2026-09-14-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-  "title": "5 einfache Frugalismus-Tricks für den Alltag",
-  "ts": "2026-09-17T10:04:19+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-14-finanzplan-mit-der-50-30-20-regel-wohin-mit-dem-gehalt": {
   "title": "Finanzplan mit der 50-30-20-Regel: Wohin mit dem Gehalt?",
   "ts": "2026-09-14T12:53:22+00:00",
@@ -681,15 +663,6 @@
  "2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
   "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
   "ts": "2026-09-15T12:25:23+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-15-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-15T12:21:26+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -774,15 +747,6 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-16-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-  "title": "5 einfache Frugalismus-Tricks für den Alltag",
-  "ts": "2026-09-16T13:24:23+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  },
@@ -903,15 +867,6 @@
    "savings": ""
   }
  },
- "2026-09-20-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-20T08:52:28+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
   "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
   "ts": "2026-09-20T08:52:31+00:00",
@@ -991,6 +946,15 @@
    "v": 3,
    "badge": "VERSICHERUNGEN",
    "savings": "bis zu 100 % Erstattung"
+  }
+ },
+ "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten": {
+  "title": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen",
+  "ts": "2026-09-21T09:39:29+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": "ab ca. 5 € im Monat"
   }
  }
 }

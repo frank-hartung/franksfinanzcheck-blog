@@ -1,149 +1,134 @@
 {
-  "target": 6,
-  "ready": 8,
-  "pool_size": 9,
-  "generated_at": "2026-09-20T08:54:17Z",
-  "candidates": [
-    {
-      "slug": "2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
-      "ready": true,
-      "sha256": "58a84e7b5ad3e38eee9ffdb9332f0297750ce354fd9083e64ecb950f2fd788fc",
-      "score": 0.938,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
-      "ready": true,
-      "sha256": "5a9af60d7d40e3a02993e91b52487f1dca5e8ad30ab8b6e4bb8e11bc20120804",
-      "score": 0.966,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-09-20-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks",
-      "ready": true,
-      "sha256": "82fddbceeb9615ef12f186b6d7ba9afa49fe13af6bc0953e0062dd47a728f889",
-      "score": 0.928,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
-      "ready": true,
-      "sha256": "b6ac0a2ce91a681df302f8b5283978641c6e9250dc348d5e2afa2e4ff05eb5b1",
-      "score": 0.95,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "d5067d7cf945d63c7d40fc66ad133878cc508dab0e5ddba6879d60b6a9128599",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.78,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
-      "ready": true,
-      "sha256": "a099586c8e5c73296de37b10ccd7d2b639aaa4fed76e1cc9bbb8597ee168ce9b",
-      "score": 0.936,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "ready": true,
-      "sha256": "70a75e11bd9f7a73f8ffb5db4fba138ae0edd3f841e0d4029eba85b9774d1e7e",
-      "score": 0.936,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "ready": true,
-      "sha256": "7f75a6b1edb13d0166587f48acd4380a329c1676e3a117fbe6d5ba7226e84024",
-      "score": 0.988,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
-      "ready": false,
-      "sha256": "5957377b0cb79aa333971b9171502128ae38227f7c5be0a7e9611ee943e14e54",
-      "reason": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Wer",
-      "details": [
-        "🛑 2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt; IW7 Zeile 279: Anker ist ein interner Titel („Preisgarantie Gas: So schützt du dich vor Preissprüngen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    }
-  ]
+ "target": 6,
+ "ready": 7,
+ "pool_size": 8,
+ "generated_at": "2026-09-20T08:54:17Z",
+ "candidates": [
+  {
+   "slug": "2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
+   "ready": true,
+   "sha256": "58a84e7b5ad3e38eee9ffdb9332f0297750ce354fd9083e64ecb950f2fd788fc",
+   "score": 0.938,
+   "parts": {
+    "spelling": 0.7,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 0.98,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 1.0
+   }
+  },
+  {
+   "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+   "ready": true,
+   "sha256": "5a9af60d7d40e3a02993e91b52487f1dca5e8ad30ab8b6e4bb8e11bc20120804",
+   "score": 0.966,
+   "parts": {
+    "spelling": 0.88,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 1.0,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 0.95
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
+   "ready": true,
+   "sha256": "b6ac0a2ce91a681df302f8b5283978641c6e9250dc348d5e2afa2e4ff05eb5b1",
+   "score": 0.95,
+   "parts": {
+    "spelling": 0.96,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 0.98,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 0.8
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+   "ready": true,
+   "sha256": "d5067d7cf945d63c7d40fc66ad133878cc508dab0e5ddba6879d60b6a9128599",
+   "score": 0.946,
+   "parts": {
+    "spelling": 0.84,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 0.78,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 1.0
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
+   "ready": true,
+   "sha256": "a099586c8e5c73296de37b10ccd7d2b639aaa4fed76e1cc9bbb8597ee168ce9b",
+   "score": 0.936,
+   "parts": {
+    "spelling": 0.88,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 1.0,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 0.8
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+   "ready": true,
+   "sha256": "70a75e11bd9f7a73f8ffb5db4fba138ae0edd3f841e0d4029eba85b9774d1e7e",
+   "score": 0.936,
+   "parts": {
+    "spelling": 0.88,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 1.0,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 0.8
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+   "ready": true,
+   "sha256": "7f75a6b1edb13d0166587f48acd4380a329c1676e3a117fbe6d5ba7226e84024",
+   "score": 0.988,
+   "parts": {
+    "spelling": 0.94,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 1.0,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 1.0
+   }
+  },
+  {
+   "slug": "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
+   "ready": false,
+   "sha256": "5957377b0cb79aa333971b9171502128ae38227f7c5be0a7e9611ee943e14e54",
+   "reason": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Wer",
+   "details": [
+    "🛑 2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+    "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW7 Zeile 279: Anker ist ein interner Titel („Ratgeber Strom Sparen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt; IW7 Zeile 279: Anker ist ein interner Titel („Preisgarantie Gas: So schützt du dich vor Preissprüngen“), das Ziel aber ein Affiliate-Gateway /go/gas/ – der Lesetipp wurde zum Werbelink entführt",
+    "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+   ],
+   "score": 0.962,
+   "parts": {
+    "spelling": 0.86,
+    "meta": 1.0,
+    "structure": 1.0,
+    "typography": 1.0,
+    "uniqueness": 1.0,
+    "affiliate": 1.0,
+    "readability": 0.95
+   }
+  }
+ ]
 }
