@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-21T11:07:16+00:00",
+  "generatedAt": "2026-09-21T16:01:51+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -638,8 +638,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026/": {
-      "image": "images/covers/2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026.jpg",
+    "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/": {
+      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -654,8 +654,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/": {
-      "image": "images/covers/2026-09-11-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
+    "/posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/": {
+      "image": "images/covers/2026-09-17-gasrechnung-senken-clevere-herbst-vorbereitung-im-check.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
