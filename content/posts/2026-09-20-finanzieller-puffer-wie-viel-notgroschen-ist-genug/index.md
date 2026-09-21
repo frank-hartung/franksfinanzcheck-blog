@@ -38,6 +38,9 @@ Ein defektes Getriebe oder unvorhersehbare Reparaturen im Haushalt können schne
 
 ## Warum der Notgroschen die Basis jeder Finanzplanung ist
 
+
+Beim Thema Finanzieller Puffer lohnt sich ein genauer Blick auf die Details.
+
 Wer ohne ausreichende Liquidität investiert, geht ein erhebliches Klumpenrisiko ein. In finanziellen Engpässen wärst du gezwungen, Wertpapiere unabhängig von der aktuellen Marktlage zu veräußern – im schlechtesten Fall mit realisierten Verlusten. Ein definierter Notgroschen schützt dein Depot vor solchen Zwangsverkäufen und ermöglicht dir eine langfristige Anlagestrategie ohne emotionale Stressreaktionen.
 
 Betrachte diese Reserve nicht als Renditebringer. Die Funktion dieses Geldes liegt in der sofortigen Verfügbarkeit und Sicherheit. Die indirekte Rendite ergibt sich aus der Vermeidung von Dispozinsen. Solche Überziehungskredite belasten dein Budget in der Regel mit ca. 8 % bis 14 % Zinsen pro Jahr, was deutlich über den üblichen Zinserträgen sicherer Anlagen liegt.
@@ -206,6 +209,9 @@ Das ist bei Paaren durchaus üblich, erfordert jedoch klare Absprachen. Beide Pa
 
 ### Wie wirkt sich die Inflation auf meinen Notgroschen aus?
 Inflation mindert die Kaufkraft deines Geldes. Wenn die Inflationsrate bei ca. 2 % liegt, dein Tagesgeld aber nur 1 % abwirft, verlierst du real an Wert. Dennoch ist dieser Preis für die sofortige Sicherheit und Liquidität in der Regel akzeptabel.
+
+
+Gerade für finanzieller puffer gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Fazit: Finanzieller Puffer – Wie viel Notgroschen ist genug
 
