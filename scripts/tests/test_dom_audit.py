@@ -172,6 +172,14 @@ class BrowserCheckVertragTests(unittest.TestCase):
                          "Netzfilter ist als Referenz nachweislich unbrauchbar "
                          "(Inline-Skripte, Cache) – nicht zurückholen")
 
+    def test_sandbox_artefakte_werden_nicht_zu_befunden(self):
+        """Chrome protokolliert blockierte Skripte im Sandbox-Iframe als
+        Konsolenfehler. Das ist ein Artefakt der eigenen Messung – würde es
+        als Befund gezählt, wäre der Audit rot, sobald er funktioniert."""
+        self.assertIn("sandboxArtefakt", self.text)
+        self.assertIn("about:srcdoc", self.text)
+        self.assertIn("sammlung.aktiv = false", self.text)
+
     def test_referenz_prueft_sich_selbst(self):
         self.assertIn("Referenzmessung unbrauchbar", self.text)
         self.assertIn("referenceUsable", self.text)

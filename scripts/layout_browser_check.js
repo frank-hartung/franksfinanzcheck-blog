@@ -307,8 +307,26 @@ async function loadRuntime(browser, url, viewport) {
   await page.setViewport(viewport);
   const errors = [];
   const httpErrors = [];
-  page.on('pageerror', e => errors.push('JS: ' + e.message));
-  page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
+  // Sammel-Schalter: Nach dem Laden wird die Referenzmessung im Sandbox-Iframe
+  // erzeugt. Chrome protokolliert dabei „Blocked script execution in
+  // 'about:srcdoc' … (sandbox)" als Konsolenfehler – das ist ein Artefakt
+  // MEINES Messinstruments, kein Fehler der Seite. Es darf deshalb weder als
+  // Befund noch als Fehlalarm durchschlagen: erst aufhören zu sammeln, und
+  // ersatzweise nur Botschaften ignorieren, die eindeutig zur iframe-Sandbox
+  // gehören (about:srcdoc UND sandbox/allow-scripts).
+  const sammlung = { aktiv: true };
+  const sandboxArtefakt = (text) => /about:srcdoc/.test(text)
+    && /sandbox|allow-scripts/i.test(text);
+  page.on('pageerror', e => {
+    if (sammlung.aktiv && !sandboxArtefakt(e.message)) {
+      errors.push('JS: ' + e.message);
+    }
+  });
+  page.on('console', m => {
+    if (sammlung.aktiv && m.type() === 'error' && !sandboxArtefakt(m.text())) {
+      errors.push('console: ' + m.text());
+    }
+  });
   page.on('response', r => { if (r.status() >= 400) httpErrors.push(r.status() + ' ' + r.url()); });
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 45000 })
@@ -320,7 +338,7 @@ async function loadRuntime(browser, url, viewport) {
     const el = document.querySelector('h1');
     return el ? el.textContent.trim().slice(0, 60) : null;
   });
-  return { page, metrics, title, h1, errors, httpErrors, loadMs };
+  return { page, metrics, title, h1, errors, httpErrors, loadMs, sammlung };
 }
 
 /** Die ausgelieferte HTML im Sandbox-Iframe parsen: echter Browserparser,
@@ -407,6 +425,9 @@ async function auditPage(browser, url, viewport, ctx) {
   const quelle = fileForUrl(new URL(url).pathname);
   let html = { fehler: 'Datei nicht gefunden' };
   if (quelle) {
+    // Ab hier wird das Sandbox-Iframe gebaut: die Konsole der Seite ist
+    // abgehört genug, Artefakte der eigenen Messung würden sonst zu Befunden.
+    laufzeit.sammlung.aktiv = false;
     try {
       html = await measureShippedHtml(laufzeit.page, fs.readFileSync(quelle,
                                                                     'utf8'));
