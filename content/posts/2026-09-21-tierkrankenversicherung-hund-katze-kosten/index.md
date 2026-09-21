@@ -1,10 +1,8 @@
 ---
-title: "Tierkrankenversicherung 2026: Hund & Katze richtig versichern"
+title: "Tierkrankenversicherung 2026: Hund & Katze versichern"
 description: "Tierkrankenversicherung 2026 im Vergleich: Was OP-Schutz und Vollschutz für Hund und Katze kosten, welche Leistungen zählen und für wen sich was lohnt."
-date: 2026-09-21T09:59:22Z
-draft: true
-cadence_demoted: 2026-09-21T12:44:29Z
-cadence_grund: "quality-score: 0.745 < 0.85; finale Freigabe fehlt"
+date: 2026-09-21T15:14:33Z
+draft: false
 tags: ["Tierkrankenversicherung", "Hundekrankenversicherung", "Katzenkrankenversicherung", "OP-Versicherung Hund"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -67,7 +65,7 @@ Der Beitrag hängt von Tierart, Rasse, Alter und Leistungsumfang ab. Große Hund
 - **Katze, Freigänger:** Vollschutz rund 20 bis 80 Euro im Monat – das höhere Unfall- und Infektrisiko kostet Aufpreis.
 - **Pferd (nur OP):** rund 17 bis 60 Euro im Monat je nach Umfang.
 
-Drei Hebel senken den Beitrag spürbar. **Erstens die Selbstbeteiligung:** Ein Premium-Tarif für rund 109 Euro im Monat kostet mit Selbstbeteiligung oft nur rund 64 Euro. Also rund 45 Euro weniger im Monat für denselben Deckungsumfang. **Zweitens das Eintrittsalter:** Wer seinen Welpen mit 8 bis 12 Wochen versichert, zahlt den Einstiegspreis für junge Tiere und umgeht Vorerkrankungs-Ausschlüsse. **Drittens die Erstattungsquote:** 80 statt 100 Prozent drückt den Beitrag, bei einer 3.000-Euro-OP bleiben dann allerdings rund 600 Euro an dir hängen.
+Drei Hebel senken den Beitrag spürbar. **Erstens die Selbstbeteiligung:** Ein Premium-Tarif für rund 109 Euro im Monat kostet mit Selbstbeteiligung oft nur rund 64 Euro. Also rund 45 Euro weniger im Monat für denselben Deckungsumfang. **Zweitens das Eintrittsalter:** Wer seinen Welpen mit 8 bis 12 Wochen versichert, zahlt den Einstiegspreis für junge Tiere und umgeht Vorerkrankungs-Ausschlüsse. **Drittens die Erstattungsquote:** 80 statt 100 Prozent drückt den Beitrag, bei einer OP für 3.000 Euro bleiben dann allerdings rund 600 Euro an dir hängen.
 
 ## Welche Leistungen zählen wirklich – und wo lauern Lücken?
 
@@ -86,7 +84,7 @@ Zwei Punkte schauen wir uns genauer an. **Erstens der GOT-Satz:** Tierärzte rec
 
 **Zweitens die Wartezeiten:** Bei Unfällen greift fast jeder Tarif ab dem ersten Tag. Bei Krankheits-OPs gelten üblicherweise rund 30 Tage. Die teure Falle sind verlängerte Fristen für chronische und erbliche Leiden (Hüftdysplasie, Kreuzband, Patella). Manche Tarife verlangen 12 bis 18 Monate – gute nur 6 Monate oder gar keine Sonderfrist. Wer einen Labrador mit 8 Monaten versichert und mit 14 Monaten den Kreuzbandriss diagnostiziert bekommt, geht bei 18 Monaten Wartezeit leer aus.
 
-**Faustregel:** Lieber 4-facher GOT-Satz mit hoher Jahreshöchstgrenze als 100 Prozent Quote mit knappem 2.000-Euro-Deckel. So ein Deckel ist häufig der teurere Kompromiss. Die Quote wirkt nur bis zur Grenze – der GOT-Satz entscheidet, wie viel von der echten Rechnung überhaupt erstattungsfähig ist.
+**Faustregel:** Lieber 4-facher GOT-Satz mit hoher Jahreshöchstgrenze als 100 Prozent Quote mit knappem Deckel bei 2.000 Euro. So ein Deckel ist häufig der teurere Kompromiss. Die Quote wirkt nur bis zur Grenze – der GOT-Satz entscheidet, wie viel von der echten Rechnung überhaupt erstattungsfähig ist.
 
 ## Für wen lohnt sich der Vollschutz – und für wen reicht die OP-Versicherung?
 
@@ -123,7 +121,7 @@ Wichtig zu wissen: Die Hundehaftpflicht ist in mehreren Bundesländern Pflicht u
 
 ## Stimmt das? 5 Mythen im Check
 
-- **Mythos:** *„Eine Tierkrankenversicherung lohnt sich nie – man zahlt mehr ein, als man rausbekommt.“*
+- **Mythos:** *„Eine Tierkrankenversicherung lohnt sich nie – man zahlt mehr ein, als man herausbekommt.“*
   **Fakt:** Bei gesunden Tieren stimmt das oft jahrelang – bis die eine OP kommt. Eine einzige Kreuzband-OP für 2.500 Euro übertrifft rund zehn Jahresbeiträge eines OP-Tarifs. Es ist eine Wette gegen den finanziellen Schock, keine Sparanlage.
 - **Mythos:** *„Mein Tier ist jung und gesund, ich kann noch warten.“*
   **Fakt:** Warten ist der teuerste Fehler: Jede diagnostizierte Erkrankung wird zum Ausschluss, jeder Monat erhöht das Aufnahmealter. Der günstigste Zeitpunkt ist immer jetzt.

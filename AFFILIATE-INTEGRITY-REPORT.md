@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-21 09:29:17 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-21 15:18:44 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 37 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 40 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
-**Build:** public/ aktuell (kein Rebuild nötig)
+**Build:** public/ veraltet → Hugo-Rebuild
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -49,6 +49,9 @@
 | 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026 | 3 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer | 3 → 3 ✅ | /go/gas/ |
 | 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser | 3 → 3 ✅ | /go/strom/ |
+| 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug | 2 → 2 ✅ | /go/allgemein/ |
+| 2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check | 2 → 3 ✅ | /go/gas/ |
+| 2026-09-21-tierkrankenversicherung-hund-katze-kosten | 2 → 3 ✅ | /go/hunde/ |
 
 ## Hinweise (nicht blockierend)
 
