@@ -1,10 +1,10 @@
 {
-  "signed_at": "2026-09-21T09:22:12.338606+00:00",
-  "head": "2648d59",
+  "signed_at": "2026-09-21T14:10:00.508521+00:00",
+  "head": "e918fac",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
-    "hugo.toml": "b495b73cef190394a258b037d633dab09aa5f285edf0b65d9fc7b8f1ee2b142e",
+    "hugo.toml": "de27af116cbbfacf609fc079d1eb99e8dd3e8d789ae49e2b8d301f317159c9a4",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -277,6 +277,14 @@
       "geaendert": [
         "layouts/pillar/single.html",
         "layouts/robots.txt"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "art": "set-current",
+      "head": "e918fac",
+      "geaendert": [
+        "hugo.toml"
       ]
     }
   ]

@@ -184,7 +184,7 @@
   "description" site.Params.description
   "inLanguage" "de-DE"
   "author" (dict "@type" "Person" "@id" (printf "%s#frank-hartung" site.BaseURL))
-  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen." "email" "frankhartung@web.de" "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" $wsProfiles)
+  "publisher" (dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen." "email" (site.Params.contactEmail | default "kontakt@franksfinanzcheck.de") "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL)) "sameAs" $wsProfiles)
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 

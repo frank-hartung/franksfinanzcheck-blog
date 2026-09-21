@@ -24,7 +24,7 @@
 ### Persönliche Daten (Verantwortlicher)
 - **Name:** Frank Hartung
 - **Anschrift:** Karl-Marx-Str. 13, 19376 Ruhner Berge OT Marnitz, Deutschland
-- **E-Mail:** frankhartung@web.de
+- **E-Mail:** kontakt@franksfinanzcheck.de
 - **Telefon:** (keine Angabe – optional)
 - **Rechtsform:** Privatperson / Einzelperson (kein Gewerbe angemeldet → prüfen, ob du als „Privatperson" oder „Freiberufler" antwortest)
 

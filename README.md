@@ -72,7 +72,7 @@ Empfehlungslinks (Werbung) sind der einzige Finanzierungsweg.
 - **Impressum:** [franksfinanzcheck.de/impressum/](https://franksfinanzcheck.de/impressum/)
 - **Datenschutz:** [franksfinanzcheck.de/datenschutz/](https://franksfinanzcheck.de/datenschutz/)
 - **Über mich:** [franksfinanzcheck.de/ueber/](https://franksfinanzcheck.de/ueber/)
-- **Kontakt:** frankhartung@web.de – Fragen, Themenwünsche, Presse
+- **Kontakt:** kontakt@franksfinanzcheck.de – Fragen, Themenwünsche, Presse
 - **Pinterest:** [pinterest.de/franksfinanzcheck](https://www.pinterest.de/franksfinanzcheck/)
 - **Mastodon:** [@FranksFinanzcheck@mastodon.social](https://mastodon.social/@FranksFinanzcheck)
 
