@@ -705,15 +705,6 @@
    "savings": ""
   }
  },
- "2026-09-15-energie-update-was-sich-jetzt-fuer-dich-aendert": {
-  "title": "Energie-Update: Was sich jetzt für dich ändert",
-  "ts": "2026-09-15T12:25:35+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-16-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
   "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
   "ts": "2026-09-16T08:48:07+00:00",
@@ -955,6 +946,15 @@
    "v": 3,
    "badge": "VERSICHERUNGEN",
    "savings": "ab ca. 5 € im Monat"
+  }
+ },
+ "2026-09-21-tierkrankenversicherung-hund-katze-kosten": {
+  "title": "Tierkrankenversicherung 2026: Hund & Katze richtig versichern",
+  "ts": "2026-09-21T09:47:27+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": "ab ca. 14 € im Monat"
   }
  }
 }
