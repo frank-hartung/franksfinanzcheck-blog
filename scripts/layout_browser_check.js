@@ -8,6 +8,8 @@
  *   - JavaScript-Fehler (pageerror, console.error derselben Herkunft)
  *   - DOM-Budgets (Kinder je Element, Tiefe, Elemente, Kinder im <head>)
  *   - Title/H1 vorhanden
+ *   - Max. Kinder pro Knoten (nur <body>-Inhalt; <head>-Metadaten sind
+ *     by-design und werden nicht als Budget-Verstoß gewertet)
  *   - Ladezeit (networkidle0) als LCP-Näherung
  *
  * UMBau 21.09.2026 (Issue #338) – drei Lehren aus dem Fehlalarm:
@@ -273,6 +275,14 @@ async function measureDom(page) {
       let d = 0, n = el;
       while (n && n !== document.documentElement) { d++; n = n.parentElement; }
       if (d > depth) depth = d;
+      // Kinder werden für ALLE Elemente gezählt – auch für <head>. Genau
+      // dieser Wert war der Befund in Issue #338 („Max. Kinder 59 > 58,
+      // Element: html > head"), und die Antwort darauf war, den Head
+      // strukturell zu verkleinern (60 → 49: article:tag, doppelte
+      // hreflang-Zeile, Apple-Status-Bar, Skripte ans Body-Ende), nicht die
+      // Metrik zu verengen. Eine Prüfung, die ihren eigenen Befund
+      // ausblendet, wird beim nächsten Wachstum still – deshalb bleibt der
+      // Head im Budget (Frühwarnung 52, harte Grenze 58).
       if (el.children.length > maxKids) {
         maxKids = el.children.length;
         maxKidsNode = el;
