@@ -1285,9 +1285,9 @@ items:
   date: '2026-09-21'
   time: 07:00
   scheduled_at: '2026-09-21T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich:zahl:2026-09-21
   channel: linkedin
   slug: 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
@@ -1297,9 +1297,9 @@ items:
   date: '2026-09-21'
   time: 07:45
   scheduled_at: '2026-09-21T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:vergleich:2026-09-21
   channel: bluesky
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
@@ -1309,9 +1309,9 @@ items:
   date: '2026-09-21'
   time: 08:15
   scheduled_at: '2026-09-21T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:nutzen:2026-09-21
   channel: x
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
@@ -1321,9 +1321,9 @@ items:
   date: '2026-09-21'
   time: 08:45
   scheduled_at: '2026-09-21T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:mythos:2026-09-21
   channel: threads
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
@@ -1333,9 +1333,9 @@ items:
   date: '2026-09-21'
   time: 09:15
   scheduled_at: '2026-09-21T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:frage:2026-09-21
   channel: facebook
   slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
@@ -1345,9 +1345,9 @@ items:
   date: '2026-09-21'
   time: 09:45
   scheduled_at: '2026-09-21T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich:nutzen:2026-09-21
   channel: instagram
   slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
@@ -1357,9 +1357,9 @@ items:
   date: '2026-09-21'
   time: '11:45'
   scheduled_at: '2026-09-21T11:45:00+02:00'
-  status: planned
-  attempts: 0
-  reason: ''
+  status: blocked
+  attempts: 1
+  reason: Artikel nicht mehr im Bestand
 - id: bluesky:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:zahl:2026-09-21
   channel: bluesky
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
@@ -1369,9 +1369,9 @@ items:
   date: '2026-09-21'
   time: '12:15'
   scheduled_at: '2026-09-21T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:takeaway:2026-09-21
   channel: x
   slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
