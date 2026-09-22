@@ -1,5 +1,7 @@
 {
-
+  "schema": 2,
+  "signed_at": "2026-09-22T08:38:25.871165+00:00",
+  "head": "e64cdac",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -45,6 +47,8 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
+  "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198",
+  "audit_start_sha256": "1b0af9caecca65ed4e8e48e54fda3de5d90515e187ed4ff37d904272d8d16195",
   "audit": [
     {
       "date": "2026-09-19",
@@ -55,7 +59,8 @@
         "layouts/_partials/extend_post_content.html",
         "layouts/_partials/pillar_box.html",
         "layouts/pillar/list.html"
-      ]
+      ],
+      "prev_sha256": null
     },
     {
       "date": "2026-09-19",
@@ -67,7 +72,8 @@
         "layouts/pillar/list.html",
         "scripts/affiliate_marketer.py",
         "scripts/check24_links.yaml"
-      ]
+      ],
+      "prev_sha256": "1b0af9caecca65ed4e8e48e54fda3de5d90515e187ed4ff37d904272d8d16195"
     },
     {
       "date": "2026-09-19",
@@ -77,7 +83,8 @@
         "layouts/_default/_markup/render-link.html",
         "layouts/_partials/affiliate_anchor_attrs.html",
         "layouts/pillar/list.html"
-      ]
+      ],
+      "prev_sha256": "d48f6011f0516fc85c1bc97b89ab02427eaea80b1a550c0f64dd8831476cb048"
     },
     {
       "date": "2026-09-19",
@@ -87,7 +94,8 @@
         "layouts/_default/_markup/render-link.html",
         "layouts/_partials/affiliate_anchor_attrs.html",
         "layouts/_partials/affiliate_ziele_data.html"
-      ]
+      ],
+      "prev_sha256": "b6f47f849f0e246f6c328138ef01f7ff1d710f8554a70a3bb785b1deeea10707"
     },
     {
       "date": "2026-09-19",
@@ -95,7 +103,8 @@
       "head": "e888cf8",
       "geaendert": [
         "layouts/_partials/affiliate_ziele_data.html"
-      ]
+      ],
+      "prev_sha256": "6d299532b00c3b6635660e9c3ab453b78d3e4362149a57302cf1aa1e6dab53c7"
     },
     {
       "date": "2026-09-19",
@@ -107,7 +116,8 @@
         "layouts/pillar/list.html",
         "layouts/shortcodes/einspartabelle.html",
         "layouts/shortcodes/tarifvergleich.html"
-      ]
+      ],
+      "prev_sha256": "9e99f69242ce9469d37bdb9be8a1b8173dbe98e606a662b8c67f6e0c6a7be249"
     },
     {
       "date": "2026-09-20",
@@ -116,7 +126,8 @@
       "geaendert": [
         "data/brand_lock.yaml",
         "hugo.toml"
-      ]
+      ],
+      "prev_sha256": "570eb2b3e5a64a983cb24f7c7226fe2b370a9b0e1eb2ae0107950c681ae803f1"
     },
     {
       "date": "2026-09-20",
@@ -124,7 +135,8 @@
       "head": "cd2f26a",
       "geaendert": [
         "layouts/_partials/head.html"
-      ]
+      ],
+      "prev_sha256": "24f21c862e0cd82dfbc8de0366a5c41fda26400cd6a58313fa896b369993f0d1"
     },
     {
       "date": "2026-09-21",
@@ -133,7 +145,8 @@
       "geaendert": [
         "layouts/pillar/single.html",
         "layouts/robots.txt"
-      ]
+      ],
+      "prev_sha256": "0cf44b7bc2420540c7940560aa3dbb36e96327b21040e84b05d7afea13e6a0ab"
     },
     {
       "date": "2026-09-21",
@@ -141,7 +154,8 @@
       "head": "e918fac",
       "geaendert": [
         "hugo.toml"
-      ]
+      ],
+      "prev_sha256": "9fb18b1387a9def43b7b699cd9aacae8837993c72a538bb8742c878efdbed0be"
     },
     {
       "date": "2026-09-21",
@@ -149,13 +163,32 @@
       "head": "598acdf",
       "geaendert": [
         "layouts/shortcodes/einspartabelle.html"
-      ]
+      ],
+      "prev_sha256": "915d57701179c841f2dfdb6e0959be80469200e1d2653902eff12140aa0cc873"
     },
     {
-      "date": "2026-09-21",
-      "art": "set-current",
-
-      ]
+      "date": "2026-09-22",
+      "art": "repair",
+      "head": "e64cdac",
+      "geaendert": [],
+      "quelle": {
+        "art": "bergung",
+        "beschreibung": "Bergung aus dem beschädigten Artefakt (11 lesbare Akteneinträge, Map deckt den Baum exakt)",
+        "geborgene_akteneintraege": 11
+      },
+      "beschaedigung": {
+        "zustand": "beschaedigt",
+        "groesse": 7185,
+        "offset": 7171,
+        "verdacht": "zusammenschnitt",
+        "detail": [
+          "JSON nicht lesbar: Expecting property name enclosed in double quotes: line 158 column 7 (char 7171)",
+          "Bruchstelle: Byte 7171 von 7185 (Zeile 158)",
+          "Hinter der Bruchstelle steht der Rest einer ANDEREN Fassung – Muster: zwei Stände wurden zusammengesetzt (Merge-Konflikt in einer Maschinendatei)."
+        ]
+      },
+      "prev_sha256": "9b8e7cb89355da58a50f376f9ffd9f10903cb11437eba79118a9f8177e70c15f",
+      "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198"
     }
   ]
 }
