@@ -545,7 +545,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-22T09:23:18+00:00",
+  "ts": "2026-09-22T10:21:04+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -941,10 +941,19 @@
  },
  "2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
   "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-22T09:57:20+00:00",
+  "ts": "2026-09-22T10:21:01+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
+  "title": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+  "ts": "2026-09-22T10:20:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

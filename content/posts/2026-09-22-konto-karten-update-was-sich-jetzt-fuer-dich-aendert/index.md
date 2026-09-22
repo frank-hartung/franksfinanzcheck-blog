@@ -3,7 +3,7 @@ title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
 description: "Konto & Karten-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du …"
 date: 2026-09-22T09:23:53Z
 draft: true
-tags: ["Konto & Karten-Update: Was sich jetzt für dich ändert", "Konto & Karten"]
+tags: ["Konto & Karten-Update: was sich jetzt für dich ändert", "Konto & Karten"]
 categories: ["News"]
 keywords: ["Konto & Karten-Update: Was sich jetzt für dich ändert"]
 author: "Frank Hartung"
@@ -11,6 +11,10 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "konto"
+cover:
+  image: "images/covers/2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg"
+  alt: "Konto & Karten-Update: Was sich jetzt für dich ändert"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 **Stand: 22.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

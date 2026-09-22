@@ -3,7 +3,7 @@ title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "7 Gewohnheiten für finanzielle Freiheit – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-09-21T10:05:51Z
 draft: true
-tags: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle"]
+tags: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "Finanzielle"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle"]

@@ -216,7 +216,7 @@ Du entscheidest, wo jeder Euro hinfließt.
 Viele meiner Klienten bauten so innerhalb weniger Jahre Rücklagen auf. 
 Ein solider Notgroschen ermöglicht dir berufliche Veränderungen. 
 Die 50–30–20-Regel ist kein Gefängnis für dich.  
-sie bildet das Fundament für dein freies Leben. 
+Sie bildet das Fundament für dein freies Leben. 
 
 
 
