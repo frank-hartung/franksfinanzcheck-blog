@@ -82,6 +82,71 @@
 Details, Beweise und Runbook:
 `docs/archiv/CONTENT-RESERVE-295-REPARATUR-2026-09-15.md`.
 
+## Befund am 22.09.2026 (Issue #349 – eine Gate-Regel ohne Heiler)
+
+- Der nächtliche Reserve-Lauf `35706157938` (22.09., 08:41 UTC) war nach allen
+  Fachstufen rot: `Stock shortage must not look successful`. Das Zertifikat
+  wies **5/6** aus – ein Kandidat war nicht reif, einer war bereits
+  ausgemustert (`blocked`, 2 Treffer).
+- **Root-Cause 1 – Intent-Gate ohne Heiler.** `publish_gate` erzwingt als
+  Kriterium 5 den Intent-Wächter (`affiliate_intent_guard.py`, IW0–IW9). Die
+  Heiler-Kette der Reserve (`reserve_finisher.HEALER_CHAIN`) fuhr ihn nicht –
+  obwohl der Wächter seinen Heil-Aufruf `--fix --heal --file <pfad>`
+  ausdrücklich für die Reserve mitbringt. Der Konvergenz-Nachschub erzeugte
+  einen Kandidaten (`2026-09-22-stromfresser-…`), der Wächter meldete „IW8 –
+  Anker nennt kein Angebot“, die Zertifizierung läuft im STRICT-DRY-RUN
+  (schreibt nicht) → 5/6. Beweis, dass der Fund heilbar war: Der tägliche
+  Affiliate-Lauf heilte DIESELBE Datei sieben Minuten später mit DEMSELBEN
+  Skript **byte-identisch** (`f7cb1481`, 08:56:35 UTC).
+- **Root-Cause 2 – Quarantäne zählte Zertifizierungen statt Läufe.** Ein
+  Nachtlauf zertifiziert mehrfach (Stufe 3 + jede Konvergenz-Runde); der
+  Zähler `RESERVE_QUARANTINE_HITS` (Vertrag: zwei **Läufe**) war damit schon
+  nach einer Nacht voll. Zusätzlich lag `data/reserve-quarantine.json`
+  ungetrackt – das „Gedächtnis über Läufe hinweg“ begann jeden Lauf bei null.
+- **Root-Cause 3 – ein quarantänisierter Entwurf verschwand spurlos.** Die
+  Staging-Politik kannte nur `reserve: true`; `reserve_quarantine` ersetzt die
+  Fahne aber durch `reserve_blocked:` (Zusage: „nichts wird gelöscht“). Der
+  Entwurf `2026-09-22-50-30-20-im-test-…` wurde damit als fremder Content
+  behandelt, nie committet und starb mit dem Runner (404 auf `main`, keine
+  Commits zu diesem Pfad).
+
+### Dauerhafte Reparatur 22.09.2026
+
+1. `reserve_finisher.py`: `affiliate_intent_guard.py --fix --heal --file`
+   läuft zweimal in der Kette – nach dem Affiliate-Block und als
+   **allerletzter Schritt** (Keyword-Lauf und URL-Hygiene liegen davor; nach
+   dem Wächter wird der Kandidat bis zur Zertifizierung nicht mehr angefasst).
+   Dieselbe Doppelung wie bei der CTA-Hygiene, weil fast jeder Schritt davor
+   Anker, Route oder CTA-Satz umschreibt.
+2. `reserve_finisher.py`: `keyword_optimizer.py --fix --include-drafts` läuft
+   in Phase 2 und 3 (spiegelbildlich zur Live-Engine). Am Gate heilt das
+   Keyword-Gate nur LIVE-Kandidaten (`keyword_self_heal_candidates` überspringt
+   `draft: true`) – für die Reserve fehlte der Heiler komplett.
+3. `reserve_healer_coverage.py` (**neu**): Deckungs-Wache „ablehnende
+   Publish-Gate-Regel ↔ Heiler der Reserve-Kette“. Die Regeln werden aus
+   `publish_gate.py` gelesen (jede `<regel>_failures`-Funktion), nicht
+   abgetippt; jede Regel braucht einen Heiler in der Kette oder eine begründete
+   Ausnahme. Eine Lücke stoppt `reserve_finisher --finish` laut und früh
+   (`::error::`, rc=1) statt als stiller 5/6-Lauf. Der Selbsttest beweist, dass
+   der reale #349-Fall, eine neue Gate-Regel, eine Ausnahme ohne Begründung,
+   eine verschwundene Regel und ein Heiler-Tippfehler erkannt werden.
+4. `reserve_quarantine.py`: Treffer zählen **Läufe** (`GITHUB_RUN_ID`; ohne
+   Actions der Kalendertag) – mehrfache Zertifizierungen einer Nacht zählen
+   zusammen einmal. Der Vertrag „zwei Läufe mit demselben Fund“ gilt wieder.
+5. `reserve_stage_guard.py`: `reserve_blocked`-Entwürfe sind Reserve-Eigentum
+   und werden gestagt; `data/reserve-quarantine.json` gehört zum Commit (nur so
+   überlebt der Zähler den Lauf). Live-Content (`reserve_published`,
+   `draft: false`) bleibt wie bisher unangetastet.
+6. Regressionen: `scripts/tests/test_reserve_pipeline.py` – Intent-Heiler in
+   der Kette + seine Wirkung (ID: IW8) samt Verdrahtungs-Beweis
+   (`--file` erreicht den Wächter), Lauf-Zählung, „nichts geht verloren“,
+   Deckungs-Wache. Selbsttest des Finishers rechnet die Deckung mit.
+
+Runbook-Schnelltest nach dem Deploy:
+`python3 scripts/reserve_healer_coverage.py` (grün = jede Gate-Regel gedeckt),
+`python3 scripts/reserve_finisher.py --selftest`, `python3 scripts/reserve_quarantine.py --selftest`,
+`python3 -m unittest scripts.tests.test_reserve_pipeline -v`.
+
 ## Befund am 08.09.2026
 
 - Issue #217 dokumentiert am 07.09. mehrfach 0 veröffentlichte Artikel und

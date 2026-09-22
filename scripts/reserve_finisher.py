@@ -226,8 +226,32 @@ HEALER_CHAIN = [
     ("affiliate_link_check.py", ["--fix"]),
     ("affiliate_shield.py", ["--fix", "--new-only"]),
     ("affiliate_marketer.py", ["--fix", "--new-only"]),
+    # REPARATUR 22.09.2026 (#349, Run 35706157938): Der Intent-Wächter ist
+    # publish_gate-Kriterium 5 (IW0–IW9) – er war in DIESER Kette der EINZIGE
+    # Gate-Prüfer ohne Heiler, obwohl sein Aufruf `--heal --file <pfad>` genau
+    # für die Reserve gebaut ist (Modul-Kopf: „Reserve-Pfade außerhalb
+    # content/posts“). Reale Folge im Nachtlauf: Die Konvergenz erzeugte einen
+    # Kandidaten (2026-09-22-stromfresser-…), der Wächter meldete IW8 „Anker
+    # nennt kein Angebot“, die Zertifizierung läuft STRICT-DRY (schreibt nicht)
+    # → 5/6, End-Gate „Stock shortage must not look successful“ rot. Sieben
+    # Minuten später heilte der tägliche Affiliate-Lauf DENSELBEN Fund in
+    # DERSELBEN Datei mit DEMSELBEN Skript – byte-identisch (Beweis:
+    # scripts/tests/test_reserve_pipeline.py, IntentHeilerTests).
+    # Ein Gate ohne Heiler macht den Zielbestand strukturell unerreichbar –
+    # also heilt die Kette hier deterministisch, VOR der Zertifizierung.
+    ("affiliate_intent_guard.py", ["--fix", "--heal"], "file"),
     ("link_guard.py", ["--fix", "--new-only"]),
     ("check_titles.py", ["--fix"]),
+    # REPARATUR 22.09.2026 (#349): Das Keyword-Gate ist publish_gate-Regel
+    # `keyword_failures` (Score < 60 = hart). Am Gate heilt es sich nur für
+    # LIVE-Kandidaten selbst – `keyword_self_heal_candidates()` überspringt
+    # Entwürfe (`if "draft: true" in fm: continue`), und die Zertifizierung
+    # läuft im Dry-Run. Ein Pool-Kandidat mit Keyword-Fund war damit ebenso
+    # unerreichbar wie vorher der Intent-Fund. Die Live-Engine fährt den
+    # Heiler in Phase 2 UND 3 (`--fix --new-only`); für die Reserve gilt
+    # dieselbe Kette mit `--include-drafts` (ohne die Flagge sieht der Heiler
+    # die bewusst als Entwurf gehaltenen Kandidaten gar nicht).
+    ("keyword_optimizer.py", ["--fix", "--include-drafts"]),
     # Cover NUR für die Pool-Kandidaten (Scope „slug“). Vorher lief
     # `generate_covers.py` (ohne Scope) plus `check_covers.py --fix` über
     # den ganzen Korpus und hat Live-Cover neu gerendert – Binärdateien, die
@@ -264,7 +288,21 @@ HEALER_CHAIN = [
     # nur geprüft. Ein Fund, den kein Heiler auflösen kann, macht den Step
     # rot (rc=1) und steht damit im Finish-Report statt still im Pool.
     ("affiliate_integrity_gate.py", ["--heal"], "file"),
+    # Keyword-Diagnose am Ende der Kette (zweiter Lauf wie in der Live-Engine):
+    # nach Meta-/Titel-Heilung kann sich die Keyword-Verteilung verschieben.
+    ("keyword_optimizer.py", ["--fix", "--include-drafts"]),
+    # Die deterministische URL-Hygiene schreibt interne Links um (R8) – sie
+    # läuft deshalb VOR dem letzten Wort.
     ("fix_url_hygiene.py", ["--fix"]),
+    # ALLERLETZTES WORT: das Intent-Gate (#349). Es ist ein hartes
+    # Publish-Gate-Kriterium (IW0–IW9) und bewertet genau die Klasse, die
+    # fast jeder Schritt davor umschreibt – Anker, Route, CTA-Satz. Deshalb
+    # der zweite Lauf NACH allen KI- und URL-Schritten, spiegelbildlich zur
+    # zweifachen CTA-Hygiene (die KI erzeugt die Klasse sonst in derselben
+    # Nacht neu; #247 hat das für die CTA bewiesen). Nichts folgt danach:
+    # zwischen diesem Schritt und der Zertifizierung wird der Kandidat nicht
+    # mehr angefasst.
+    ("affiliate_intent_guard.py", ["--fix", "--heal"], "file"),
 ]
 
 
@@ -522,8 +560,30 @@ def quality_snapshot(index: Path) -> dict | None:
         return {"score": None, "fehler": str(exc)}
 
 
+def heiler_deckung() -> dict | None:
+    """Deckungs-Bericht: ablehnende Publish-Gate-Regeln ↔ Heiler der Kette.
+
+    REPARATUR 22.09.2026 (#349): Der Intent-Wächter ist ein hartes Publish-Gate-
+    Kriterium, hatte aber keinen Heiler in dieser Kette – ein Kandidat mit
+    „IW8 – Anker nennt kein Angebot“ konnte darum NIE reif werden, der
+    Zielbestand war strukturell unerreichbar (End-Gate rot, Nacht für Nacht).
+    Die Deckung wird jetzt aus `publish_gate.py` gelesen und gegen diese Kette
+    geprüft; eine Lücke stoppt die Veredelung laut und früh statt leise im
+    Zertifikat. Werkzeugfehler (Modul nicht ladbar) sind kein Struktur-Befund
+    – sie werden gewarnt und blockieren den Lauf nicht.
+    """
+    try:
+        sys.path.insert(0, str(BLOG_DIR / "scripts"))
+        import reserve_healer_coverage as rhc
+        return rhc.deckung(chain=HEALER_CHAIN)
+    except Exception as exc:  # noqa: BLE001 – Heiler-Deckung darf nie werfen
+        print(f"  ⚠ Heiler-Deckungs-Wache nicht auswertbar: {exc}")
+        return None
+
+
 def write_report(results: list, targets: list, started_iso: str,
-                 isolation: list | None = None) -> None:
+                 isolation: list | None = None,
+                 deckung: dict | None = None) -> None:
     today = today_prefix()
     lines = [
         "# 🛟 Reserve-Finish-Report (Veredelung des täglichen Vorrats)",
@@ -539,6 +599,26 @@ def write_report(results: list, targets: list, started_iso: str,
     else:
         lines.append("- *(keine – der Pool ist vollständig zertifiziert, "
                      "keine Heiler-Kette nötig)*")
+    if deckung is not None:
+        lines += ["", "## Heiler-Deckung (jede Gate-Regel ↔ ihr Heiler)",
+                  "",
+                  f"- Ablehnende Publish-Gate-Regeln: "
+                  f"{len(deckung['regeln'])} · gedeckt: "
+                  f"{len(deckung['gedeckt'])} · Ausnahmen: "
+                  f"{len(deckung['ausnahmen'])} · Lücken: "
+                  f"{len(deckung['luecken'])}"]
+        for e in deckung["gedeckt"]:
+            lines.append(f"- ✅ `{e['regel']}` → "
+                         + ", ".join(f"`{h}`" for h in e["heiler"]))
+        for e in deckung["ausnahmen"]:
+            lines.append(f"- 🟠 `{e['regel']}` → Ausnahme: {e['grund']}")
+        for e in deckung["luecken"]:
+            lines.append(f"- 🛑 `{e['regel']}` → {e['art']}"
+                         + (f" ({', '.join(e.get('heiler', []))})"
+                            if e.get("heiler") else ""))
+        for e in deckung["tote_ausnahmen"]:
+            lines.append(f"- 🛑 `{e['regel']}` → {e['art']} "
+                         "(deckt nichts mehr, altert sonst still)")
     lines += ["", "## Heiler-Kette (Phase-2/3-Äquivalent, Live-Kodex)", ""]
     if results:
         for r in results:
@@ -586,6 +666,28 @@ def finish() -> int:
     sys.path.insert(0, str(BLOG_DIR / "scripts"))
     import reserve_pool as rp
     started = now_utc_iso()
+    # REPARATUR 22.09.2026 (#349): Struktur VOR Arbeit – noch vor dem ersten
+    # Schreibzugriff. Fehlt einer ablehnenden Gate-Regel der Heiler, ist der
+    # Zielbestand unerreichbar; dann ist ein stiller 5/6-Lauf die teuerste
+    # Variante. Die Wache nennt die Lücke im Klartext und stoppt mit rc=1
+    # (Step ist continue-on-error, der Lauf endet ohnehin am harten End-Gate –
+    # jetzt aber mit dem ECHTEN Grund).
+    deckung = heiler_deckung()
+    if deckung and (deckung["luecken"] or deckung["tote_ausnahmen"]):
+        print("🛑 RESERVE-HEILER-DECKUNG UNVOLLSTÄNDIG – eine ablehnende "
+              "Publish-Gate-Regel hat keinen Heiler in dieser Kette:")
+        for e in deckung["luecken"]:
+            print(f"   - {e['regel']}: {e['art']}"
+                  + (f" ({', '.join(e.get('heiler', []))})"
+                     if e.get("heiler") else ""))
+        for e in deckung["tote_ausnahmen"]:
+            print(f"   - {e['regel']}: {e['art']} (deckt nichts mehr)")
+        print("   Diagnose: python3 scripts/reserve_healer_coverage.py")
+        print("::error::Reserve-Heiler-Deckung lückenhaft – der Zielbestand "
+              "ist strukturell unerreichbar (Details in "
+              "RESERVE-FINISH-REPORT.md).")
+        write_report([], [], started, None, deckung)
+        return 1
     certified = certified_slugs()
     pool = [p for p in rp.reserve_drafts()
             if not _is_certified(p, certified)]
@@ -609,7 +711,7 @@ def finish() -> int:
     if not targets:
         print("Reserve-Finish: alle Pool-Kandidaten sind bereits zertifiziert "
               "– keine Heiler-Kette nötig.")
-        write_report([], [], started)
+        write_report([], [], started, None, deckung)
         return 0
     results = []
     isolation = []
@@ -637,13 +739,13 @@ def finish() -> int:
             isolation = isolation_enforce(baseline)
         except Exception as exc:  # noqa: BLE001 – Wächter darf nie werfen
             print(f"  ⚠ Isolation-Wächter nicht ausführbar: {exc}")
-        write_report(results, targets, started, isolation)
+        write_report(results, targets, started, isolation, deckung)
         return 1
     try:
         isolation = isolation_enforce(baseline)
     except Exception as exc:  # noqa: BLE001 – Wächter darf nie werfen
         print(f"  ⚠ Isolation-Wächter nicht ausführbar: {exc}")
-    write_report(results, targets, started, isolation)
+    write_report(results, targets, started, isolation, deckung)
     print(f"Reserve-Finish: {len(targets)} Kandidat(en) veredelt – "
           f"{len(results)} Heiler-Läufe, {sum(1 for r in results if not r['ok'])} "
           f"mit Hinweisen. Reife prüft reserve_readiness.py.")
@@ -707,13 +809,34 @@ def selftest() -> int:
         # Idempotenz: erneuter Lauf ändert nichts (0 Funde).
         if _canonical_cta_hygiene(bad) != 0:
             fehler.append("CTA-Hygiene ist nicht idempotent (churnt)")
+    # REPARATUR 22.09.2026 (#349): Der Vertrag „jede ablehnende Publish-Gate-
+    # Regel hat einen Heiler in DIESER Kette“ wird im Selbsttest nachgerechnet –
+    # inklusive des realen Falls: Der Intent-Wächter (publish_gate-Kriterium 5)
+    # MUSS als datei-bezirkelter Heiler verdrahtet sein.
+    deckung = heiler_deckung()
+    if deckung is None:
+        fehler.append("Heiler-Deckung nicht auswertbar (reserve_healer_coverage)")
+    else:
+        if deckung["luecken"] or deckung["tote_ausnahmen"]:
+            fehler.append(f"Gate-Regel ohne Heiler: {deckung['luecken']} "
+                          f"{deckung['tote_ausnahmen']}")
+        if "affiliate_intent_failures" not in {d["regel"]
+                                               for d in deckung["gedeckt"]}:
+            fehler.append("Intent-Gate (publish_gate-Kriterium 5) ist in der "
+                          "Reserve-Kette nicht gedeckt (#349)")
+    intent_schritte = [e for e in HEALER_CHAIN
+                       if e[0] == "affiliate_intent_guard.py"]
+    if not intent_schritte or not all("--fix" in e[1] and e[2] == "file"
+                                      for e in intent_schritte):
+        fehler.append("Intent-Heilung muss datei-bezirkelt laufen "
+                      "(--fix --heal --file), nie korpusweit")
     if fehler:
         print("🛑 RESERVE-FINISHER-SELFTEST FEHLGESCHLAGEN:")
         for e in fehler:
             print(f"   - {e}")
         return 2
     print("✅ Reserve-Finisher-Selbsttest grün (Pool-Filter, Hash-Zertifikat, "
-          "Slug-Tail).")
+          "Slug-Tail, CTA-Hygiene, Heiler-Deckung Gate↔Kette inkl. #349).")
     return 0
 
 
