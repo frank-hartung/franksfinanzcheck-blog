@@ -1,11 +1,13 @@
 {
- "generated_at": "2026-09-21 10:07:26 UTC",
+ "generated_at": "2026-09-22 08:56:35 UTC",
  "exit_code": 0,
- "modus": "REPORT",
- "checked_articles": 66,
- "checked_links": 201,
- "healed_count": 0,
- "healed": [],
+ "modus": "FIX",
+ "checked_articles": 60,
+ "checked_links": 184,
+ "healed_count": 1,
+ "healed": [
+  "2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: IW8 L149: /go/strom/ → /go/strom/ · Anker „→ Jetzt Angebote vergleichen“ → „→ Jetzt Stromtarife vergleichen“"
+ ],
  "findings": [],
  "errors": []
 }

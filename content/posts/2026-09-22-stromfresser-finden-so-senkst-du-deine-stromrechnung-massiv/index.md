@@ -172,6 +172,6 @@ Läuft der Kompressor fast ohne Pause, deutet das auf einen Defekt hin. Auch ein
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/strom/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
