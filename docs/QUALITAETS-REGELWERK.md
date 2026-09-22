@@ -438,10 +438,26 @@ jeder Schreibaktion.
    + Zeile in `data/integrity_history.jsonl`), und **`unittest discover` prüft
    den ausgelieferten Baum gegen sein Siegel** (`RepoSealTests`) — der Befund
    steht damit dort, wo er vor dem Push gelesen wird, nicht nur im roten Kreuz.
-   Widerstandsfähigkeit gegen Merge-Konflikte (22.09.2026, PR #342): Überschneiden
-   sich Zweige in `data/integrity_lock.json`, stellt `--set-current` Baseline
-   und Akte automatisch aus Git wieder her, sodass Konfliktmarker sauber
-   aufgelöst werden und kein Verfall der Signatur-Historie entsteht.
+   Nachgetragen 22.09.2026 (Issue #346, Vorfall in
+   [docs/INCIDENT-2026-09-22-integritaets-lock-merge.md](INCIDENT-2026-09-22-integritaets-lock-merge.md)):
+   Das Siegel ist ein **Maschinen-Artefakt** und wird **niemals gemergt** —
+   `merge=binary` in `.gitattributes` verbietet den Text-Zusammenschnitt, und
+   bei Konflikt gilt: eine Fassung wählen oder neu signieren. Es ist jetzt
+   **selbst prüfbar** (`schema`, `files_sha256`, `prev_sha256`-Kette,
+   `audit_start_sha256`) und wird **atomar + rückgelesen** geschrieben; der
+   Zustand (`ok`/`ok-legacy`/`beschaedigt`/`chimäre`) ist die **erste** Frage
+   jeder Prüfung — ein zerstörtes Siegel heißt nicht „Kerndateien ohne
+   Signatur", sondern „keine Aussage möglich". Belegt heilbar per
+   `--repair-lock` (Quelle: committeter Stand → lokale Historie → Bergung aus
+   dem Artefakt, nur wenn die Map den Baum exakt deckt), automatisch im ersten
+   Engine-Schritt (`--heal`). Anlass: ein Merge hat zwei gültige Fassungen zu
+   einem kaputten Siegel (Bruchstelle Byte 7.171) verschmolzen; der Kern war
+   unversehrt, die Produktion stand trotzdem zweimal — und **beide** Gates
+   (Integritäts-Siegel + unittests) waren rot, ohne den Merge aufzuhalten.
+   Zusätzlich widerstandsfähig gegen Merge-Konflikte (PR #342): Überschneiden
+   sich Zweige dennoch, stellt `--set-current` bzw. `--repair-lock` Baseline
+   und Akte automatisch aus Git wieder her, sodass kein Verlust der Signatur-
+   Historie eintritt.
 8. **Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt.** Das PR-Gate
    meldet sich als **`Integritäts-Siegel`**; dieser Name ist ein Vertrag zwischen
    Workflow-Datei und Ruleset (Governance-Regel **C18**: Konstante

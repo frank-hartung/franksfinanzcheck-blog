@@ -2,6 +2,17 @@
 # Zeilen vereinigen, statt bei wöchentlichen SEO-/Health-Läufen zu kollidieren.
 *.jsonl merge=union
 
+# Das Integritäts-Siegel ist ein MASCHINEN-Artefakt, kein Quelltext: Es wird
+# von scripts/integrity_guard.py geschrieben (SHA-256-Map + verkettete Akte)
+# und niemals von Hand zusammengesetzt. Git hat es am 21.09.2026 trotzdem wie
+# Text gemergt und dabei zwei Fassungen zu einem kaputten Siegel verschmolzen
+# (Bruchstelle Byte 7.171) – die Content-Engine starb daran im ersten Schritt
+# (Issue #346). `merge=binary` verbietet genau diesen Text-Zusammenschnitt:
+# Bei parallelen Änderungen gibt es einen sichtbaren Konflikt, den ein Mensch
+# bewusst auflöst – entweder Fassung wählen oder neu signieren.
+# Kein `merge=union`: Ein Vereinigen der Akten wäre hier eine Fälschung.
+data/integrity_lock.json merge=binary
+
 # Root-Reports sind Maschinenausgaben der Wachen: als CI-Dashboard versioniert,
 # aber nicht als Diff gelesen. Ohne diese Zeilen bläht jeder Lauf jeden PR-Diff
 # (70 Dateien, meiste Zeilen = Zeitstempel). linguist-generated blendet sie zudem

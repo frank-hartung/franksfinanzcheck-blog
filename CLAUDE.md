@@ -99,6 +99,25 @@ Dauer-Alarm ohne Schließpfad, der #272 erzeugt hat.
   (`data/aktuelle_entwicklungen.yaml`, `data/topics.yaml`) übernehmen.
 - Installations- und Betriebsdetails: `docs/ANLEITUNG-AGENT-REACH.md`.
 
+## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)
+
+`data/integrity_lock.json` ist ein **Siegel**, kein Quelltext: SHA-256-Map,
+verkettete Akte, eigene Prüfsummen. Es wird ausschließlich von
+`scripts/integrity_guard.py` geschrieben.
+
+- **Bei Merge-Konflikt: niemals beide Seiten zusammensetzen.** Eine Fassung
+  wählen und neu signieren (`--set-current`) — oder das Siegel belegt heilen
+  lassen: `python3 scripts/integrity_guard.py --repair-lock`.
+- `.gitattributes` setzt `merge=binary`: Ein Text-Merge ist damit gar nicht
+  mehr möglich (am 21.09.2026 hat genau so ein Zusammenschnitt die
+  Content-Engine im ersten Schritt gestoppt, Issue #346).
+- Zustand prüfen statt raten: `python3 scripts/integrity_guard.py --drift-audit`
+  nennt Siegel-Zustand (gesund / Legacy / zerstört / Chimäre), Bruchstelle und
+  Herkunft. Ein zerstörtes Siegel heißt **nicht** „6 Kerndateien ohne
+  Signatur" — es heißt, dass keine Aussage möglich ist.
+- Schreiben ist atomar + rückgelesen: Ein abgebrochener Lauf hinterlässt den
+  vorigen Stand, nie ein halbes Siegel.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
