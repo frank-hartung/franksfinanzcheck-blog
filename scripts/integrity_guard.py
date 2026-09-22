@@ -432,6 +432,8 @@ def _bruch_verdacht(text: str, pos: int) -> str:
     21.09.2026 war es ein Zusammenschnitt (`...art": "set-current",` plus
     Rest `]}`-Ende eines 7.339-Byte-Stands).
     """
+    if re.search(r"^(<<<<<<<|=======|>>>>>>>)", text, re.MULTILINE):
+        return "konfliktmarker"
     if pos < 0:
         return "unbekannt"
     return "abbruch" if _siegel_ende_offen(text) else "zusammenschnitt"
@@ -507,7 +509,9 @@ def _zustand_aus_bytes(roh: bytes) -> tuple:
         detail = [f"JSON nicht lesbar: {exc}",
                   f"Bruchstelle: Byte {pos} von {gross} "
                   f"(Zeile {getattr(exc, 'lineno', '?')})"]
-        if verdacht == "zusammenschnitt":
+        if verdacht == "konfliktmarker":
+            detail.append("Git-Merge-Konfliktmarker (<<<<<<< / ======= / >>>>>>>) im Siegel gefunden.")
+        elif verdacht == "zusammenschnitt":
             detail.append("Hinter der Bruchstelle steht der Rest einer ANDEREN "
                           "Fassung – Muster: zwei Stände wurden zusammen"
                           "gesetzt (Merge-Konflikt in einer Maschinendatei).")
@@ -1472,6 +1476,17 @@ def _selftest_kern() -> list[str]:
                               "verändert (Fall10b)")
             if (tmp / "data" / "integrity_lock.json.tmp").exists():
                 fehler.append("Temp-Rest nach Abbruch (Fall10c)")
+
+            # 11. KONFLIKTMARKER: Git-Merge-Konfliktmarker im Siegel werden
+            # erkannt (Bruchverdacht: konfliktmarker) und von lock_reparatur geheilt.
+            pfad.write_text("<<<<<<< HEAD\n{\"schema\": 2}\n=======\n{\"schema\": 2}\n>>>>>>> branch\n",
+                            encoding="utf-8")
+            befund_km = lock_zustand(pfad)
+            if befund_km["zustand"] != ZUSTAND_BESCHAEDIGT or befund_km.get("verdacht") != "konfliktmarker":
+                fehler.append("Konfliktmarker im Siegel nicht erkannt (Fall11)")
+            rc_km = lock_reparatur(tmp, dry_run=False)
+            if rc_km not in (0, 1) or lock_zustand(pfad)["zustand"] != ZUSTAND_OK:
+                fehler.append("Reparatur bei Konfliktmarkern scheiterte (Fall11b)")
 
         # 7. Der Beweis schreibt nicht in DIESEN Baum (C15).
         if sha256_file(LOCK) != echte_lock_sha:

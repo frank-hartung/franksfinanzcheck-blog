@@ -561,6 +561,21 @@ class ReparaturTests(Fixture):
             self.assertEqual(akte["quelle"]["art"], "bergung")
             self.assertEqual(akte["geaendert"], [])
 
+    def test_konfliktmarker_im_siegel_erkannt_und_repariert(self):
+        """Git-Merge-Konfliktmarker im Siegel werden erkannt und belegt repariert."""
+        self.signieren()
+        _commit(self.root, "chore: gültiges Siegel")
+        self.lock_pfad.write_text("<<<<<<< HEAD\n{\"schema\": 2}\n=======\n{\"schema\": 2}\n>>>>>>> branch\n",
+                                 encoding="utf-8")
+        befund = ig.lock_zustand(self.lock_pfad)
+        self.assertEqual(befund["zustand"], ig.ZUSTAND_BESCHAEDIGT)
+        self.assertEqual(befund.get("verdacht"), "konfliktmarker")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc = ig.lock_reparatur(self.root)
+        self.assertEqual(rc, 0)
+        self.assertIn("SIEGEL REPARIERT", puffer.getvalue())
+
     def test_keine_quelle_ist_ein_hartes_stoppen(self):
         """Kaputtes Siegel ohne jede belegte Quelle: Exit 3, nichts geschrieben."""
         (self.root / "data").mkdir(exist_ok=True)

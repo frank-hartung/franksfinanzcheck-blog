@@ -196,3 +196,22 @@ Richtungen (Unterdrückung echter Alarme, Scheinheilung falscher).
 - Der **Alerting-Herzschlag** zählt weiterhin die `workflow_run`-Zustellung
   (nicht die erstellten Issues) — das PROD-SCOPING ändert an seiner Messgröße
   nichts, die Zustellquote bleibt überwachbar.
+
+---
+
+## Nachtrag 22.09.2026: Merge von PR #342 und dauerhafte Härtung des Integritäts-Locks
+
+**Was beim Merge von PR #342 geschah:**
+PR #342 wurde am 21.09.2026 um 21:15 UTC als Zweitgemergter auf `main` zusammengeführt (Commit `661a878`). Wie in Abschnitt 8 prognostiziert, überschnitt sich der Zweig mit `main` in `data/integrity_lock.json` (PR #345 hatte HEAD `14c1a89` signiert, PR #342 HEAD `d192a90`). Bei der manuellen Auflösung des Merge-Konflikts in Commit `d364e03` wurden jedoch die Root-Schlüssel `signed_at` und `head` versehentlich gelöscht und der 12. Akteneintrag am Dateiende syntaktisch beschädigt (`"art": "set-current", ] }`).
+
+Infolgedessen stand `main` am `integrity_guard.py --gate` (Exit 3) und `integrity_guard.py --heal` (HARD STOP, Exit 3) still.
+
+**Dauerhafte Reparatur auf Profi-Agentur-Niveau (22.09.2026):**
+1. **Lock-Wiederherstellung & Neusignatur:** `data/integrity_lock.json` wurde vollständig wiederhergestellt, die 12 Akteneinträge (inklusive Herkunft von `head.html` aus #344) erhalten und der Lock auf den aktuellen Stand von `main` (`e64cdac`) per `--set-current` neu signiert.
+2. **Resilienz gegen Merge-Konflikte & Syntaxfehler in `integrity_guard.py`:**
+   - `load_lock()` erkennt jetzt explizit Git-Konfliktmarker (`<<<<<<<`, `=======`, `>>>>>>>`) und Syntaxfehler (`_status: "konflikt" | "beschaedigt"`).
+   - Bei Beschädigung/Konfliktmarker greift `--set-current` automatisch auf `_git_letzter_gueltiger_lock` zurück: Baseline (`files`) und Akte (`audit`) werden aus dem letzten intakten Commit in der Git-Historie geladen, sodass `--set-current` Konflikte sauber überschreibt, ohne bestehende Akteneinträge zu verlieren.
+   - `gate()`, `heilen()` und `drift_audit()` melden Syntaxfehler und Konfliktmarker laut und mit klarer Diagnose und Reparaturzeile (`python3 scripts/integrity_guard.py --set-current`), statt irreführend alle KRITISCH-Dateien als „neu ohne Signatur“ zu klassifizieren.
+   - `_selftest()` prüft die reale `data/integrity_lock.json` auf Wohlgeformtheit – kein Scheingrün bei beschädigter Lock-Datei.
+3. **Automatisierte Absicherung:** 6 neue Tests in `ConflictResilienceTests` (`test_integrity_guard.py`) und Fall 6b im Kern-Beweis (`_selftest_kern`) sichern das Konflikt- und Reparaturverhalten regressionsfrei ab.
+
