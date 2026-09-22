@@ -1,0 +1,21 @@
+{{- /* layouts/shortcodes/newsletter_weg.html – ein konfigurierbarer Ausweg.
+
+    Verwendung:
+      {{< newsletter_weg feld="praferenz_url" text="Präferenzen im Konto öffnen"
+                         ersatz="Der Link unten in jeder Mail führt denselben Weg." >}}
+
+    Steht der Wert in data/newsletter_studio.json (`capture.<feld>`), wird daraus
+    ein echter Link. Steht er nicht da, zeigt der Baustein den Ersatztext und
+    keinen toten Knopf – dasselbe Prinzip wie beim Anmeldeformular: beworben wird
+    nur, was auch funktioniert. */ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $feld := .Get "feld" | default "" -}}
+{{- $text := .Get "text" | default "Weiter" -}}
+{{- $ersatz := .Get "ersatz" | default "" -}}
+{{- $wert := trim (string (index $nl.capture $feld | default "")) " " -}}
+{{- if $wert -}}
+<p class="ff-nl-weg"><a href="{{ $wert }}"{{ if not (hasPrefix $wert "/") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $text }}
+  <span aria-hidden="true">→</span></a></p>
+{{- else -}}
+<p class="ff-nl-leer">{{ $ersatz | default "Diese Einstellung ist noch nicht hinterlegt – der beschriebene Weg führt trotzdem ans Ziel." }}</p>
+{{- end -}}

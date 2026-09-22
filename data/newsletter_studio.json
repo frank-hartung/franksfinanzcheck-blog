@@ -1,0 +1,161 @@
+{
+  "_doku": "SSOT des Newsletter-Studios (data/newsletter_studio.json). Bewusst JSON und nicht YAML: der Versand-Workflow (.github/workflows/newsletter-daily.yml) installiert kein PyYAML, und Hugo liest data/*.json ohne Format-Raten (Vorbild: data/themenwelten.json). _doku-Felder erklären den Abschnitt, den sie beschreiben, und werden von jedem Konsumenten entfernt (newsletter_studio._doku_bereinigen).",
+  "_doku_capture": "Anmeldeweg. form_action leer = Capture INERT: die Site zeigt dann den ehrlichen Leerzustand statt eines Formulars, das ins Leere postet (layouts/shortcodes/newsletter_form.html). Ein Wert in hugo.toml `params.newsletterFormAction` überschreibt form_action – dieselbe Präzedenz in Website und Wache, damit beide denselben Zustand melden.",
+  "version": 1,
+  "capture": {
+    "_doku": "feld_email ist der von Brevo gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest.",
+    "form_action": "",
+    "form_url": "",
+    "versprechen": "Eine Mail pro Werktag: die Sparechnungen des Tages, sonst nichts.",
+    "feld_email": "email",
+    "feld_themen": "themen",
+    "bestaetigungs_url": "/newsletter/bestaetigung/",
+    "abmelde_url": "",
+    "praferenz_url": "",
+    "bot_falle": true,
+    "mindest_alter": 0
+  },
+  "_doku_journeys": "Die vier Journey-Seiten der Anmeldung. Sie sind kurz und ehrlich: Der Bestätigungslink selbst führt beim Anbieter (Brevo), die Seiten erklären den Zustand und bieten den Rückweg. Eine Seite, die einen Klick vorgaukelt, den sie nicht ausführen kann, ist teurer als keine Seite.",
+  "journeys": {
+    "anmeldung": "/newsletter/",
+    "bestaetigung": "/newsletter/bestaetigung/",
+    "praeferenzen": "/newsletter/praeferenzen/",
+    "abmelden": "/newsletter/abmelden/"
+  },
+  "_doku_email": "Versandrahmen. `breite` 620 px: breiter wird in der Gmail-Vorschau und in Outlook-Kleinstfenstern beschnitten. `max_artikel` 5: mehr Rechnungen liest abends niemand, und der Puffer zur 102-KB-Grenze von Gmail bleibt (Wache Q1). `marken` sind die Platzhalter der Neuen Template Language von Brevo – {{unsubscribe}}, nicht {unsubscribe}: die Einzelklammer ist Alt-Syntax und bliebe als Wort im Mail stehen (Abmeldelink kaputt).",
+  "email": {
+    "breite": 620,
+    "max_artikel": 5,
+    "vorlagen_sprache": "brevo",
+    "marken": {
+      "unsubscribe": "{{unsubscribe}}",
+      "mirror": "{{mirror}}",
+      "profil": "{{update_profile}}"
+    },
+    "header_bild": "",
+    "absender": {
+      "name": "Frank von FranksFinanzcheck",
+      "email": "news@franksfinanzcheck.de"
+    },
+    "antwort_an": "kontakt@franksfinanzcheck.de",
+    "rechtliches": {
+      "anschrift": "Frank Hartung · FranksFinanzcheck",
+      "impressum_url": "https://franksfinanzcheck.de/impressum/",
+      "datenschutz_url": "https://franksfinanzcheck.de/datenschutz/",
+      "werbung_hinweis": "Dieser Newsletter enthält als Werbung gekennzeichnete Links; die Provision ändert nichts an der Empfehlung (Details im Artikel und im Impressum)."
+    },
+    "ein_klick_abmeldung": true,
+    "tracking_oeffnungen": false
+  },
+  "_doku_design": "Marken-Herleitung statt eigener Farbwerte. `herleitung` verweist jede E-Mail-Rolle auf den CSS-Token, den der Build wirklich benutzt (assets/css/extended/*.css + themes/PaperMod/assets/css/core/theme-vars.css); die Wache `--brand` löst die Tokens auf und verlangt Übereinstimmung. `email_eigene` führt aus, was keinen Site-Token hat – mit Begründung, nicht als Ausrede. Ein Studio mit eigenen Farbvarianten driftet in drei Monaten von der Site ab und versendet ein Mail, das nach einem anderen Unternehmen aussieht.",
+  "design": {
+    "hell": {
+      "seite": "#FAFCFB",
+      "karte": "#FFFFFF",
+      "grenze": "#DCE6E1",
+      "text": "#2E2E33",
+      "sekundaer": "#6C6C6C",
+      "headline": "#0E5A43",
+      "link": "#0E5A43",
+      "marke": "#0E5A43",
+      "marke_dunkel": "#0A4634",
+      "soft": "#EAF4EF",
+      "cta_flaeche": "#0E5A43",
+      "cta_text": "#FFFFFF",
+      "akzent_auf_marke": "#FFD15A",
+      "zahl": "#0A4634"
+    },
+    "dunkel": {
+      "seite": "#1D1E20",
+      "karte": "#2E2E33",
+      "grenze": "#333333",
+      "text": "#DADADB",
+      "sekundaer": "#9B9C9D",
+      "headline": "#7FD1B4",
+      "link": "#7FD1B4",
+      "marke": "#7FD1B4",
+      "marke_dunkel": "#7FD1B4",
+      "soft": "#293432",
+      "cta_flaeche": "#0E5A43",
+      "cta_text": "#FFFFFF",
+      "akzent_auf_marke": "#FFD15A",
+      "zahl": "#7FD1B4"
+    },
+    "herleitung": {
+      "hell.seite": "--theme",
+      "hell.karte": "--entry",
+      "hell.grenze": "--border",
+      "hell.text": "--ff-anthracite",
+      "hell.sekundaer": "--secondary",
+      "hell.headline": "--ff-emerald",
+      "hell.link": "--ff-emerald",
+      "hell.marke": "--ff-emerald",
+      "hell.marke_dunkel": "--ff-emerald-dark",
+      "hell.soft": "--ff-emerald-soft",
+      "hell.cta_flaeche": "--ff-emerald",
+      "hell.cta_text": "--ff-white",
+      "hell.akzent_auf_marke": "--ff-accent-2",
+      "hell.zahl": "--ff-emerald-dark",
+      "dunkel.seite": "--theme",
+      "dunkel.karte": "--entry",
+      "dunkel.grenze": "--border",
+      "dunkel.text": "--primary",
+      "dunkel.sekundaer": "--secondary",
+      "dunkel.headline": "--ff-emerald-bright",
+      "dunkel.link": "--ff-emerald-bright",
+      "dunkel.marke": "--ff-emerald-bright",
+      "dunkel.marke_dunkel": "--ff-emerald-bright",
+      "dunkel.cta_flaeche": "--ff-emerald",
+      "dunkel.cta_text": "--ff-white",
+      "dunkel.akzent_auf_marke": "--ff-accent-2",
+      "dunkel.zahl": "--ff-emerald-bright"
+    },
+    "email_eigene": {
+      "dunkel.soft": "Die Site mischt Soft-Flächen im Dark Mode mit color-mix() – E-Mail-Clients kennen color-mix nicht. Der Wert ist das Ergebnis derselben Mischung (12 % --ff-emerald-bright auf --theme), hier ausgerechnet und festgeschrieben; die Kontrastwache misst ihn nach (Q11)."
+    },
+    "pflicht_rollen": ["seite", "karte", "grenze", "text", "sekundaer", "headline", "link", "marke", "soft", "cta_flaeche", "cta_text"],
+    "schrift": "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
+    "serife": "Georgia,'Times New Roman',serif",
+    "radius": 14,
+    "_doku_kontraste": "Pflichtpaare, die die QA-Wache nachmisst (Format: [Bezeichnung, Hintergrundrolle, Vordergrundrolle, Mindestwert]). Gemessen wird in beiden Modi – DESIGN.md §8: „Kontraste messen, nicht schätzen“.",
+    "kontraste": [
+      ["Fließtext auf Karte", "karte", "text", 4.5],
+      ["Sekundärtext auf Karte", "karte", "sekundaer", 4.5],
+      ["Headline auf Karte", "karte", "headline", 3.0],
+      ["CTA-Text auf Marke", "cta_flaeche", "cta_text", 4.5],
+      ["Fließtext auf Soft-Fläche", "soft", "text", 4.5],
+      ["Akzent auf Marke", "cta_flaeche", "akzent_auf_marke", 4.5],
+      ["Link auf Karte", "karte", "link", 4.5],
+      ["Zahlen-Hero auf Soft-Fläche", "soft", "zahl", 3.0]
+    ]
+  },
+  "_doku_creative": "Deterministische Textfabrik – kein KI-Aufruf, damit die Funktion dauerhaft 0 Euro kostet und jeder Lauf reproduzierbar ist. Die Listen sind harte Gates der QA-Wache, keine Stilempfehlung: `verbotene_woerter` sind Angstmache- und Hype-Wörter, die im Finanzversand zugleich Abmelderate und Spam-Eindruck heben.",
+  "creative": {
+    "marke_kurz": "FranksFinanzcheck",
+    "du_form": true,
+    "betreff": { "min_zeichen": 30, "max_zeichen": 45, "varianten": 3 },
+    "preheader": { "min_zeichen": 40, "max_zeichen": 120 },
+    "block_text_zeichen": 190,
+    "min_woerter": 110,
+    "max_Ausrufezeichen": 2,
+    "verbotene_woerter": [
+      "einmalige chance", "nur heute", "sofort zuschlagen", "letzte chance",
+      "garantiert", "risikofrei", "geld-zurueck-garantie", "dringend handeln",
+      "jetzt handeln", "exklusiv", "geheimtipp", "existenzbedrohend",
+      "du musst", "sofort starten", "act now", "limited time", "free gift",
+      "winner", "congratulations", "betreff", "klicken sie hier"
+    ]
+  },
+  "_doku_themen": "Präferenzen bei der Anmeldung. `id` ist der pillar-Wert im Artikelfrontmatter, `label` der Titel der Themenwelt (data/themenwelten.json) – die Wache `--brand` beweist die Deckungsgleichheit. Ein Mensch, der nur Strom & Gas hören will, bekommt kein Versicherungs-Mail: das ist der Unterschied zwischen Liste und Newsletter. `brevo_interest` ist der Name des HTML-Interesses im Anbieterkonto.",
+  "themen": [
+    { "id": "strom-sparen", "label": "Strom & Gas sparen", "brevo_interest": "Strom & Gas" },
+    { "id": "internet-dsl", "label": "Internet, DSL & Handy", "brevo_interest": "Internet, DSL & Handy" },
+    { "id": "versicherungen", "label": "Versicherungen & Vorsorge", "brevo_interest": "Versicherungen" },
+    { "id": "konto-karten", "label": "Konto, Karten & Zinsen", "brevo_interest": "Konto & Karten" },
+    { "id": "mietwagen", "label": "Mietwagen & Reisen", "brevo_interest": "Reisen" },
+    { "id": "frugalismus", "label": "Frugalismus & Budget", "brevo_interest": "Budget & Frugalismus" }
+  ],
+  "_doku_zustand": "Die Zustandsdatei hält fest, was draußen war: zuletzt versendete Betreffzeilen (Wache Q15: keine Zeile zweimal innerhalb `betreff_historie` Ausgaben) und die Versandhistorie der Artikel (`artikel_historie` Einträge). `datei` ist der Pfad, `*` sind die Längen – `scripts/newsletter_digest.py` liest beides hier, nicht im Code. „Ein Zustand, eine Datei“ gilt also erst, wenn die Datei auch die Quelle ist.",
+  "zustand": { "datei": "data/newsletter_state.json", "betreff_historie": 12,
+               "artikel_historie": 400 }
+}

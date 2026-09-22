@@ -1,0 +1,728 @@
+/* ============================================================
+   NEWSLETTER – Formular, Streifen, Journeys, Muster-Ausgabe
+   ------------------------------------------------------------
+   Eigene Tokens braucht das Formular zwei: die Fehler- und die Erfolgsmeldung.
+   DESIGN.md §1 kennt kein Rot – ein Versandfehler ist aber ohne Rot nicht als
+   solcher lesbar. Die Werte stehen hier (und nur hier) als Scope-Token, damit
+   sie in der Politur-Schicht überschreibbar bleiben, statt als Hex im Template
+   aufzutauchen (DESIGN.md §7 „keine Inline-Farben in Templates"
+   ------------------------------------------------------------
+   Layer: zz-newsletter.css (vor zzz-agency-polish.css, damit die Politur
+   weiterhin zuletzt gewinnt – wo sie dasselbe Element meint, gewinnt sie).
+   Regeln: DESIGN.md §1 (Farben aus Tokens, keine Inline-Farben in Templates),
+   §4 (Radius 8/12/16, Schatten mit Versatz), §6 (Motion 0.16/0.3 s,
+   prefers-reduced-motion), PRODUCT.md §6 (CLS ≈ 0: Slots mit fester Höhe).
+   Dark Mode: jede Farbe hat eine :root[data-theme="dark"]-Variante.
+   ============================================================ */
+.ff-nl,
+.newsletter-footer.ff-nl-strip {
+  --ff-nl-fehler: #A32B2B;
+  --ff-nl-erfolg: var(--ff-emerald);
+}
+
+:root[data-theme="dark"] .ff-nl,
+:root[data-theme="dark"] .newsletter-footer.ff-nl-strip {
+  --ff-nl-fehler: #FF9A9A;
+  --ff-nl-erfolg: var(--ff-emerald-bright);
+}
+
+/* ---------- 1. Kasten auf /newsletter/ (das Formular) ---------- */
+.ff-nl {
+  margin: 22px 0;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--ff-emerald-soft);
+  box-shadow: 0 2px 6px rgba(14, 90, 67, .05);
+}
+
+.ff-nl__lead {
+  margin: 0 0 14px;
+  color: var(--secondary);
+  font-size: .98rem;
+  line-height: 1.55;
+}
+
+.ff-nl__form {
+  display: grid;
+  gap: 12px;
+}
+
+.ff-nl__feld {
+  margin: 0;
+}
+
+.ff-nl__label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.ff-nl__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--entry);
+  color: var(--primary);
+  font: inherit;
+  font-size: 1rem;
+  /* Kein Übergang auf dem Fokus-Ring: eine Verzögerung macht sichtbar, wann
+     jemand per Tastatur navigiert – und genau das muss sofort zu sehen sein. */
+}
+
+.ff-nl__input::placeholder {
+  color: var(--secondary);
+  opacity: 1;
+}
+
+.ff-nl__input:hover {
+  border-color: var(--ff-emerald);
+}
+
+/* ---------- 2. Präferenz-Chips (Themenwelten) ---------- */
+.ff-nl__themen {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ff-nl__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 8px;
+  padding: 0;
+  color: var(--primary);
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.ff-nl__optional {
+  color: var(--secondary);
+  font-size: .82rem;
+  font-weight: 400;
+}
+
+.ff-nl__chip-gruppe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ff-nl__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--entry);
+  color: var(--primary);
+  font-size: .88rem;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform .16s ease-out;   /* DESIGN.md §7: nur transform/opacity/color */
+}
+
+.ff-nl__chip:hover {
+  border-color: var(--ff-emerald);
+  transform: translateY(-1px);
+}
+
+/* Die Checkbox bleibt als fokussierbares Element erhalten, optisch trägt der
+   Chip – :has() markiert den Auswahlzustand, ohne :has() bleibt die echte
+   Checkbox sichtbar (kein Auswahlzustand, der verschwinden kann). */
+.ff-nl__chip:has(input:checked) {
+  border-color: var(--ff-emerald);
+  background: var(--ff-emerald-soft);
+  color: var(--primary);
+}
+
+.ff-nl__chip:has(input:focus-visible) {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 3px;
+}
+
+:root[data-theme="dark"] .ff-nl__chip:has(input:checked) {
+  border-color: var(--ff-emerald-bright);
+}
+.ff-nl__chip input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--ff-emerald);
+}
+
+.ff-nl__legend-hinweis {
+  display: block;
+  margin-top: 8px;
+  color: var(--secondary);
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+/* ---------- 3. Einwilligung + Bot-Falle ---------- */
+.ff-nl__consent {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--entry);
+}
+
+.ff-nl__consent-zeile {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: var(--secondary);
+  font-size: .86rem;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.ff-nl__check {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--ff-emerald);
+  cursor: pointer;
+}
+
+.ff-nl__consent a {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Bot-Falle: außerhalb des Leseflusses, aber im DOM (Crawler finden sie dort,
+   Screenreader überspringen sie, Tastatur-Nutzer springen nicht hinein). */
+.ff-nl__falle {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- 4. CTA + Zustände (kein Layout-Sprung) ---------- */
+.ff-nl__aktionen {
+  margin: 0;
+}
+
+.ff-nl__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ff-emerald);
+  color: #fff;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(14, 90, 67, .18);
+  transition: transform .16s ease-out;   /* DESIGN.md §7 */
+}
+
+.ff-nl__button:hover {
+  background: var(--ff-emerald-dark);
+  transform: translateY(-1px);
+}
+
+.ff-nl__button:active {
+  transform: translateY(0);
+}
+
+.ff-nl__button-lade {
+  display: none;
+}
+
+.ff-nl__button[disabled],
+.ff-nl__form[data-status="sendet"] .ff-nl__button {
+  opacity: .7;
+  cursor: progress;
+  transform: none;
+}
+
+.ff-nl__form[data-status="sendet"] .ff-nl__button-text,
+.ff-nl__form[data-status="ok"] .ff-nl__button-text {
+  display: none;
+}
+
+.ff-nl__form[data-status="sendet"] .ff-nl__button-lade {
+  display: inline;
+}
+
+/* Statuszeile: feste Mindesthöhe, damit Erfolg/Fehler keinen Sprung erzeugen
+   (PRODUCT.md §6: CLS ≈ 0 – Slot reservieren statt nachschieben). */
+.ff-nl__status {
+  min-height: 3.2em;
+  margin: 0;
+  color: var(--secondary);
+  font-size: .86rem;
+  line-height: 1.6;
+}
+
+.ff-nl__status a {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ff-nl__form[data-status="ok"] .ff-nl__status {
+  color: var(--ff-nl-erfolg);
+  font-weight: 600;
+}
+
+.ff-nl__form[data-status="fehler"] .ff-nl__status {
+  color: var(--ff-nl-fehler);
+  font-weight: 600;
+}
+
+.ff-nl__hinweis {
+  margin: 0;
+  color: var(--secondary);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.ff-nl__leer {
+  margin: 0;
+  color: var(--secondary);
+  font-size: .94rem;
+  line-height: 1.6;
+}
+
+.ff-nl__leer strong {
+  color: var(--primary);
+}
+
+.ff-nl__leer a {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- 5. Streifen (Fuß, Artikel-Ende) ---------- */
+.newsletter-footer.ff-nl-strip {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 24px 0 12px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--ff-surface-alt, var(--ff-emerald-soft));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+  text-align: center;
+}
+
+.ff-nl-strip__text {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--primary);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ff-nl-strip__anker {
+  margin-right: 4px;
+}
+
+.ff-nl-strip .ff-nl-strip__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--ff-emerald);
+  color: #fff !important;
+  font-size: .92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(14, 90, 67, .18);
+  transition: transform .16s ease-out;   /* DESIGN.md §7 */
+}
+
+.ff-nl-strip .ff-nl-strip__cta:hover {
+  background: var(--ff-emerald-dark);
+  transform: translateY(-1px);
+}
+
+/* Der Text im Knopf: umbrochen wird der Knopf, nicht die Zeile – „Anmelden“
+   darf nie als „Anmel-de“ enden. */
+.ff-nl-strip__cta-text {
+  white-space: nowrap;
+}
+
+.ff-nl-strip__cta-klammer {
+  transition: transform .16s ease-out;
+}
+
+.ff-nl-strip__cta:hover .ff-nl-strip__cta-klammer {
+  transform: translateX(2px);
+}
+
+.ff-nl-strip__klein {
+  margin: 0;
+  color: var(--secondary);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+/* Am Artikel-Ende sitzt der Streifen zwischen Text und Vertrauensbox:
+   etwas enger, eigene Fläche, damit er nicht wie ein zweiter Footer wirkt. */
+.ff-nl-strip--artikel {
+  justify-items: start;
+  gap: 8px;
+  margin: 26px 0;
+  padding: 20px;
+  text-align: left;
+  border-left: 3px solid var(--ff-emerald);
+}
+
+.ff-nl-strip--artikel .ff-nl-strip__klein {
+  font-size: .78rem;
+}
+
+/* ---------- 5b. Themenliste der Präferenz-Seite ---------- */
+.ff-nl-themen {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.ff-nl-themen__zeile {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--entry);
+}
+
+.ff-nl-themen__name {
+  color: var(--primary);
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+.ff-nl-themen__text {
+  margin: 0;
+  color: var(--secondary);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+/* Lose Zustände: ein Weg, der noch nicht konfiguriert ist (newsletter_weg),
+   bekommt eine gestrichelte Fläche statt eines toten Knopfs. */
+.ff-nl-leer {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--secondary);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+/* ---------- 6. Journey-Seiten (Bestätigung, Präferenzen, Abmeldung) ---------- */
+/* Merker aus ff-newsletter.js: wer schon angemeldet ist, sieht im Streifen
+   keinen Anmelde-Knopf mehr, sondern den Weg zu den Präferenzen. */
+html[data-ff-nl="angemeldet"] .ff-nl-strip__cta,
+html[data-ff-nl="angemeldet"] .ff-nl-strip__klein {
+  display: none;
+}
+
+.ff-nl-strip__schon {
+  display: none;
+  margin: 0;
+  color: var(--ff-nl-erfolg, var(--ff-emerald));
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+html[data-ff-nl="angemeldet"] .ff-nl-strip__schon {
+  display: block;
+}
+
+.ff-nl-schritte {
+  counter-reset: schritt;
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.ff-nl-schritte li {
+  position: relative;
+  padding: 12px 14px 12px 48px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--entry);
+  color: var(--primary);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+.ff-nl-schritte li::before {
+  counter-increment: schritt;
+  content: counter(schritt);
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--ff-emerald);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ff-nl-weg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+}
+
+.ff-nl-weg a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--entry);
+  color: var(--ff-emerald);
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .16s ease-out;       /* DESIGN.md §7 */
+}
+
+.ff-nl-weg a:hover {
+  border-color: var(--ff-emerald);
+  background: var(--ff-emerald-soft);
+}
+
+/* Muster-Ausgabe: die Vorschau einer Mail in einem Rahmen – das stärkste
+   Anmeldeargument, und es kostet keinen Cent, weil es aus dem Bestand gebaut
+   wird (newsletter_studio.py liefert denselben Block). */
+.ff-nl-muster {
+  margin: 20px 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--entry);
+  box-shadow: 0 8px 24px rgba(15, 52, 43, .06);
+}
+
+.ff-nl-muster__kopf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: .8rem;
+}
+
+.ff-nl-muster__liste {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ff-nl-muster__eintrag {
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ff-nl-muster__eintrag:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.ff-nl-muster__thema {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ff-emerald);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.ff-nl-muster__titel {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.ff-nl-muster__titel a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.ff-nl-muster__titel a:hover {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ff-nl-muster__text {
+  margin: 4px 0 0;
+  color: var(--secondary);
+  font-size: .88rem;
+  line-height: 1.6;
+}
+
+.ff-nl-muster__fuss {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+/* ---------- 7. Dark Mode (jede Fläche, jede Linie) ---------- */
+:root[data-theme="dark"] .ff-nl {
+  border-color: var(--border);
+  background: var(--ff-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+:root[data-theme="dark"] .ff-nl__input,
+:root[data-theme="dark"] .ff-nl__consent,
+:root[data-theme="dark"] .ff-nl__chip,
+:root[data-theme="dark"] .ff-nl-schritte li,
+:root[data-theme="dark"] .ff-nl-weg a,
+:root[data-theme="dark"] .ff-nl-muster {
+  border-color: var(--border);
+  background: var(--entry);
+  color: var(--primary);
+}
+
+:root[data-theme="dark"] .ff-nl__input::placeholder {
+  color: var(--secondary);
+}
+
+:root[data-theme="dark"] .ff-nl__button,
+:root[data-theme="dark"] .ff-nl-strip .ff-nl-strip__cta {
+  background: var(--ff-emerald-bright);
+  color: #0E5A43 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+
+:root[data-theme="dark"] .ff-nl__button:hover,
+:root[data-theme="dark"] .ff-nl-strip .ff-nl-strip__cta:hover {
+  background: #6FC7A6;
+}
+
+:root[data-theme="dark"] .ff-nl__consent a,
+:root[data-theme="dark"] .ff-nl__leer a,
+:root[data-theme="dark"] .ff-nl__status a,
+:root[data-theme="dark"] .ff-nl-weg a,
+:root[data-theme="dark"] .ff-nl-muster__thema {
+  color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .newsletter-footer.ff-nl-strip,
+:root[data-theme="dark"] .ff-nl-strip--artikel {
+  border-color: var(--border);
+  background: var(--ff-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+:root[data-theme="dark"] .ff-nl-strip--artikel {
+  border-left-color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-nl-schritte li::before {
+  background: var(--ff-emerald-bright);
+  color: #0E5A43;
+}
+
+:root[data-theme="dark"] .ff-nl-weg a:hover {
+  background: rgba(127, 209, 180, .12);
+}
+
+/* ---------- 8. Fokus, Bewegung, schmale Screens ---------- */
+.ff-nl__input:focus-visible,
+.ff-nl__check:focus-visible,
+.ff-nl__chip input:focus-visible,
+.ff-nl__button:focus-visible,
+.ff-nl-strip__cta:focus-visible,
+.ff-nl-weg a:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 3px;
+}
+
+:root[data-theme="dark"] .ff-nl__input:focus-visible,
+:root[data-theme="dark"] .ff-nl__check:focus-visible,
+:root[data-theme="dark"] .ff-nl__chip input:focus-visible,
+:root[data-theme="dark"] .ff-nl__button:focus-visible,
+:root[data-theme="dark"] .ff-nl-strip__cta:focus-visible,
+:root[data-theme="dark"] .ff-nl-weg a:focus-visible {
+  outline-color: var(--ff-accent-2);
+}
+
+@media (max-width: 520px) {
+  .ff-nl,
+  .newsletter-footer.ff-nl-strip,
+  .ff-nl-strip--artikel {
+    padding: 16px 14px;
+  }
+
+  .ff-nl__button,
+  .ff-nl-strip .ff-nl-strip__cta {
+    width: 100%;
+  }
+
+  .ff-nl-strip--artikel {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-nl__chip,
+  .ff-nl__chip:hover,
+  .ff-nl__button,
+  .ff-nl__button:hover,
+  .ff-nl-strip .ff-nl-strip__cta,
+  .ff-nl-strip .ff-nl-strip__cta:hover,
+  .ff-nl-strip__cta-klammer,
+  .ff-nl-strip__cta:hover .ff-nl-strip__cta-klammer {
+    transform: none;
+    transition: none;
+  }
+}

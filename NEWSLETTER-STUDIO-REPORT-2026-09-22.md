@@ -1,0 +1,323 @@
+# Newsletter-Studio auf Agentur-Niveau – Report 22.09.2026
+
+**Ziel (Frank, wörtlich):** „eine Newsletter-Funktion auf Premium-Level einer
+Profi-Agentur von migma.ai in meinen Blog nachbauen, sodass mir keine Kosten
+entstehen."
+
+**Auftrag, so wie er umgesetzt wurde:** Migma ist kein Design-Tool, sondern eine
+Arbeitsteilung – Creative → Design → QA → Versand, mit Marke aus dem Bestand statt
+aus dem Kopf. Nachgebaut ist diese Kette, nicht ihr Preisschild. Der
+Kosten-Parameter war keine Präferenz, sondern eine harte Kante: **kein KI-API-Key,
+kein Bild-Dienst, kein SaaS-Sitz, kein Cookie-Zuwachs.** Alles hier läuft mit Hugo,
+Python-Standardbibliothek, GitHub Actions – und dem Brevo-Free-Plan, der schon im
+Repo verdrahtet war (300 Mails/Tag, reicht weit über diesen Blog hinaus).
+
+Was am Ende **nicht** gebaut wurde, steht in § 7 – es ist die Liste der Dinge, die
+Geld kosten würden, wenn man sie ehrlich baut.
+
+---
+
+## 1. Geliefert: fünf Schichten statt ein Formular
+
+| Schicht | Neu/Geändert | Kern |
+|---|---|---|
+| Studio (Design-System + Textfabrik) | `scripts/newsletter_studio.py`, `data/newsletter_studio.json` | 28 Farbrollen, je hell/dunkel, **aus dem Build-CSS hergeleitet**; Block-Engine (kopf → hero → artikel → fuss); Betreff-Rotation in 3 Varianten (30–45 Zeichen), Preheader, Textalternative; `--brand`, `--build`, `--vorschau` |
+| Vor-Versand-Wache | `scripts/newsletter_qa.py` | 20 Regeln, Score 100 − 10·Funde − 3·Warnungen; Exit 0/1/2; liest das gebaute Mail, nicht die Absicht |
+| Versand-Gate | `scripts/newsletter_digest.py` | QA läuft **vor** jedem `--send` und blockiert; Betreff-Verlauf und Versandgedächtnis jetzt aus der Konfiguration |
+| Capture + Journeys | `layouts/shortcodes/newsletter_{form,status,weg,themen,muster}.html`, `layouts/_partials/newsletter_{strip,studio_data}.html`, `content/newsletter*/`, `assets/css/extended/zz-newsletter.css`, `static/premium/ff-newsletter.js` | Drei-Zweig-Formular (Inline / Anbieter-Button / ehrlicher Leerzustand), Präferenz-Chips, Einwilligungs-Block, Bot-Falle ohne Drittanbieter, Bestätigungs-/Präferenz-/Abmeldeseite, Marken-Streifen an Artikel-Ende und im Fuß |
+| Beweise | `scripts/tests/test_newsletter_{studio,qa,site}.py`, `e2e/newsletter.spec.mjs`, `docs/ANLEITUNG-NEWSLETTER-STUDIO.md` | 90 Unittests, 101 Selbsttest-Fälle in drei Wachen, Playwright-Spec, Werkstatt-Doku |
+
+## 2. Funde, die dieser Lauf behoben hat
+
+### F1 – Der Abmeldelink war toter Code (KRITISCH, latent)
+
+`newsletter_digest.py` baute den Fuß mit Brevo-Markern der **alten** Vorlagen-Sprache:
+einzelne Klammer, `{unsubscribe}`. Kampagnen aus `htmlContent` laufen bei Brevo seit
+langem über die New Template Language – die ersetzt **`{{unsubscribe}}`** und
+lässt eine Einzelklammer als sichtbaren Text stehen. Der Fehler war unsichtbar, weil
+alles andere stimmt: Der Link ist da, der Satz klingt richtig, kein Tool meckert.
+Verschickt hätte er eine Mail ohne Abmeldung – in DE der schnellste Weg zu einer
+Beschwerde, und die erste Mail, die jemand im Postfach nicht abbestellen kann, wird
+nicht abbestellt, sondern gemeldet.
+
+**Behoben:** Das Studio besitzt jetzt das Markup und schreibt `{{unsubscribe}}`,
+`{{mirror}}`, `{{update_profile}}`; QA **Q3** macht jede Einzelklammer und jeden
+unbekannten Platzhalter zu einem Fund, der den Versand blockiert.
+
+### F2 – Die Prüfung lief, wo sie nicht blockieren konnte
+
+Der Workflow baute und prüfte Digeste, aber zwischen „geprüft" und „gesendet" lag
+nichts. Jetzt ruft `newsletter_digest.versende()` `newsletter_qa.pruefe()` auf,
+**bevor** die Kampagne bei Brevo als draft angelegt wird, und bricht bei einem Fund
+mit Exit 1 ab; `--trotz-qa` existiert als Notausstieg und wird vom Workflow nicht
+gesetzt. Der doppelte Boden: Die Wache prüft das gebaute Mail, nicht die Konfiguration –
+ein Edit im Template kann sie nicht mehr umgehen.
+
+### F3 – Ein Test, der am Tag der Freischaltung rot geworden wäre
+
+`test_landingsseite_ist_gebaut_und_ohne_falsches_versprechen` setzte den *jetzigen*
+Zustand als Invariante („kein `<form>`"). Sobald der Anmeldeweg gesetzt ist, wäre er
+wegen Erfolgs fehlgeschlagen – die gefährlichste Testform, weil sie das Abgewöhnen
+von Grün bedeutet. Jetzt liest der Test zuerst `newsletter_digest.params()` undprüft
+dann in beiden Zweigen: geschaltet → `<form>`, `name="email"`, Double-Opt-In-Hinweis,
+Datenschutz-Link; ungeschaltet → ehrlicher Leerzustand, kein Formular.
+Gemeinsame Pflichten (noindex, kein Sitemap-Eintrag, kein erdachter
+`/datenschutz/#newsletter`-Anker) gelten immer.
+
+### F4 – Konfiguration, der niemand folgte
+
+`data/newsletter_studio.json` hat einen `zustand`-Block mit `datei` und
+`betreff_historie`; der Code hatte beides hardcoded (`STATE_REL`, `verlauf[-12:]`).
+Eine Datei, die beschreibt, was ein Skript tut, ohne dass das Skript sie liest, ist
+der Anfang von zwei Wahrheiten. Jetzt liest `zustand_konfig(root)` Datei **und**
+beide Längen (neu: `artikel_historie: 400`), die Konstanten bleiben Default für
+Checkouts ohne Studio-JSON. Selbsttest-Fall 9c verlagert die State-Datei und fällt
+um, wenn jemand die Verdrahtung wieder löst.
+
+### F5 – Die Zeitfalle hätte echte Anmeldungen gefressen
+
+Der erste Wurf des Anmelde-Skripts blockierte stillschweigend, wenn das Formular in
+unter 1,5 Sekunden abgeschickt wurde – und meldete „Danke". Ein Mensch mit
+Autofill ist nach 1,2 Sekunden fertig. Ergebnis: zahlende Anmeldungen, spurlos
+verschluckt, und niemand weiß es, weil die Meldung freundlich war. Jetzt ist die
+Zeit ein **Merkmal für den Empfänger** (`_zeit` wird mitgeschickt), blockiert wird
+allein durch den Honigtopf – ohne Begründung, denn ein Angreifer lernt aus der
+Rückmeldung mehr als aus dem Schweigen.
+
+### F6 – Drei kleine Lügen im großen Text
+
+* `ANLEITUNG-NEWSLETTER.md` schrieb „Es fehlen ausschließlich die drei Klicks" und
+  „§ 8 behauptet derzeit, es gebe keinen Newsletter" – beides war nach dem Bau von § 8
+  falsch. Der Schritt-5-Text beschreibt jetzt, **warum** der Widerspruch nicht mehr
+  baubar ist (Website, Wache und Rechtstext lesen `data/newsletter_studio.json`),
+  und die Überschrift bleibt, weil die Wache den Abschnitt darüber findet.
+* Die Rechtstext-Kurzform versprach „Versand-Statistik (Öffnungs-/Klickraten)".
+  `email.tracking_oeffnungen` steht auf `false`, und Q19 bricht den Versand, falls die
+  Mail trotzdem ein Pixel enthält. Der Text sagt jetzt die Wahrheit **und** verweist
+  auf die eine Stelle, die beide Seiten gleichzeitig umstellt.
+* `--varante` / `varanten` war auf beiden Seiten gleich falsch getippt – ein
+  Config-Wert, den nur findet, wer den Tippfehler kennt. Umbenannt auf
+  `--variante` / `varianten`.
+
+### F7 – Design-Regeln, die ich selbst gebrochen hatte
+
+Meine Formular-CSS transitionierte `border-color`, `background-color`,
+`box-shadow`. DESIGN.md §7 erlaubt Übergänge nur auf `transform`/`opacity`/`color`.
+Erledigt (Fokus-Ring jetzt bewusst ohne Übergang – eine Verzögerung beim
+Tastaturfokus ist ein Barriere-Problem, kein Schönheitsfehler), und der Test
+`test_dark_mode_und_tokens` hält die Regel jetzt mit einer Regex fest, die jeden
+anderen Eigenschaftsnamen im Layer meldet.
+
+Zwei winzige Dinge, die derselbe Test-Fundstrom gefischt hat: die Klasse
+`.ff-nl-strip__cta-text` wurde gerendert, ohne dass eine Regel existierte
+(Regel ergänzt: `white-space: nowrap`, damit „Anmelden" nie umbrochen wird), und
+der Streifen setzte `ff-nl-strip--footer` für eine Variante, die das CSS nicht kennt
+(Modifier wird nur noch gesetzt, wo er eine Regel hat).
+
+### F8 – Doppelzweige und toter Code
+
+`versende()` hatte zweimal `if not test_adresse:` untereinander (zwei Zustands-Updates
+an einem Ort, eines davon unnötig lesbar); `konfiguration()` warf in beiden Zweigen
+desselben `if not streng:` dasselbe. Zusammengeführt bzw. zu einer klaren Aussage
+gemacht: **kaputtes JSON ist ein Fehler, kein Leerzustand** – wer hier still auf
+Codewerte fiele, verschickt im ungünstigsten Fall ein Mail ohne eigene Marke.
+
+### F9 – Der Streifen hing in einer verdeckten Template-Datei
+
+Der Artikel-Streifen war in `layouts/single.html` verdrahtet – und wurde nie
+gerendert. Das Projekt besitzt **zwei** single-Templates, und Hugo nimmt für Posts
+`layouts/_default/single.html`; die Datei im Layout-Grundverzeichnis wird verdeckt.
+Ein Include dort ist toter Code, der harmlos aussieht: kein Fehler, keine Warnung,
+nur eine Funktion, die nicht da ist. Fund über den echten Build (38 Artikel,
+`ff-nl-strip--artikel` nirgends), Fix: Include in die lebende Datei verschoben,
+direkt nach `extend_post_content.html`.
+Dazu die passende Invariante im Test (`test_newsletter_site.py`): der Include muss
+in der **lebenden** Datei stehen und darf in der verdeckten nicht stehen – sonst
+wandert er beim nächsten Umbau wieder ins Leere. Und weil der Fuß-Streifen auf
+Artikelseiten jetzt überflüssig wird, weicht er dort aus (`$bereitsImText`): genau
+ein Streifen pro Seite, gemessen über alle 363 gebauten Seiten (0 Doppel).
+
+### F10 – Die Wache ließ sich von einer CSS-Zeile überzeugen
+
+`newsletter_digest.py` prüfte den Footer-CTA als Textsuche (`"newsletter-footer" in
+index.html`). Seit die Extended-CSS inline in die Seite eingebettet wird, steht der
+Selektor `.newsletter-footer…` in **jedem** gebauten HTML – die Wache meldete im
+Leerzustand einen Fund, den es nicht gab (N1), und wäre im aktivierten Zustand vor
+einem fehlenden CTA grün geblieben (N6): ein Test, der durch eine Stilregel
+bestochen wird, prüft nichts. Jetzt sucht `_cta_im_footer()` ein gerendertes Element
+(`<div|section|aside|footer … newsletter-footer`) und ignoriert Selektoren; die
+Anmeldeseite und ihre Journeys dürfen den Zustand außerdem *erklären*, ohne dass
+das als „Werbung ohne Weg" zählt. Zwei neue Wachen-Fälle halten beide Richtungen
+fest.
+
+### F11 – `set` gibt es in Hugo nicht
+
+`layouts/shortcodes/newsletter_themen.html:12` baute eine id→Welt-Karte mit
+`set $welten $t.id $t`. Hugo kennt diese Funktion nicht (sie stammt aus anderen
+Template-Sprachen) – der Build bricht mit `function "set" not defined` **komplett**
+ab, nicht nur für diese Seite. Auf `merge` umgestellt (Zuweisung mit `=` ist die
+einzige Mutation, die Hugo erlaubt). Lehre als Test verankert:
+`test_kein_set_in_den_templates` verbietet `set`/`unset` in allen neuen Vorlagen –
+dieselbe Klasse Fehler würde sonst wieder durchrutschen, weil die Python-Tests die
+Template-Ausführung nicht kennen.
+
+### F12 – Der Drittanbieter-Test war gleichzeitig zu brav und zu scharf
+
+Der E2E-Lauf fand als Letztes meinen eigenen Test: `kein Drittanbieter auf dem
+Anmeldepfad` sammelte Anfragen und verglich sie mit `new URL(page.url()).origin` –
+**während** der Navigation, als die Seite noch `about:blank` war. Meldepflicht: der
+eigene Testserver (`127.0.0.1:4173`) galt als Fremdkörper. Und die Forderung „gar
+kein Drittanbieter" kollidiert mit dem Analytics-Skript, das die Site auf jeder
+Seite lädt – der Newsletter ist dafür nicht verantwortlich, er darf es nur nicht
+verschlimmern. Der Test prüft jetzt die Eigenschaft, die zählt: Auf dem Anmeldepfad
+kommt **kein weiterer** Lader dazu (Referenz: Startseite), und keine Anfrage-URL
+trägt eine Adresse (`@`/`%40`). Absenden ist bewusst ausgenommen – der POST geht an
+`capture.form_action`, also an den Anbieter, für den die Seite gemacht ist.
+
+## 3. Belege statt Adjektive
+
+| Was | Wert | Wo nachzuprüfen |
+|---|---|---|
+| Unittests Newsletter | **94 OK, 0 Skip** (Landungsseiten-Test läuft gegen den echten Build) | `python3 -m unittest discover -s scripts/tests -p 'test_newsletter*'` |
+| Unittests im ganzen Repo | **685 OK** (19 Skip, alle vorbestehend) | `python3 -m unittest discover -s scripts/tests` |
+| Selbsttests der Wachen | Studio 41 · QA 35 · Digest 25 = **101 Fälle**; Runner: **91 Wachen grün, 182 Uhr-Proben** | `--selftest` je Skript, `python3 scripts/selftest_runner.py` |
+| Echter Hugo-Build | v0.166.0 extended: **363 Seiten**, 0 Fehler; `check_internal_links.sh`: 2796 Links, **0 defekt**; `layout_audit`/`dom_audit`/`schema_seo_gate`/`themenwelten_guard` (Wurzel **und** Unterverzeichnis `/blog/`) grün | `hugo --gc --minify` + die genannten Skripte |
+| Genau ein CTA pro Seite | 38 Artikel mit Artikel-Streifen, 154 andere Seiten mit Fuß-Streifen, **0 Doppelungen** | Zählung über `public/**/index.html` (Klassen-Split, keine Textsuche) |
+| Playwright, gemessen mit echtem Chromium | **46 bestanden / 0 Fehler** im aktivierten Zustand; 44 + 2 bewusste Skips im Leerzustand | `npx playwright test` (Fallback-Browser via `e2e/browser.mjs`) |
+| Uhrfestigkeit | alle drei bestanden `selftest_runner` inkl. +97 und +1461 Tage | `python3 scripts/selftest_runner.py` |
+| Vor-Versand-Prüfung am Live-Bestand | **100/100 · 20 Regeln · 0 Funde** (301 Wörter, 13 Links, 0 Bilder) | `python3 scripts/newsletter_qa.py --build --days 400` |
+| Marken-Deckung | 28 Farbrollen aus dem Build-CSS hergeleitet, 6 Themenwelten deckungsgleich mit `data/themenwelten.json` | `python3 scripts/newsletter_studio.py --brand` |
+| Kontrast gemessen (WCAG 2.1) | hell min 5.25:1, dunkel min 4.91:1 (Pflichtpaare, 2×8) | `--brand`-Ausgabe, Q11 |
+| Eine gebaute Ausgabe | 5 Artikel-Blöcke, 14 161 Bytes, 63 `style`-Attribute, 2 Media-Queries, 2 VML-Knöpfe, 17 Links | `.cache`-Ausgabe von `--build --out` |
+| Kein totes Versprechen | Formular-Zweig 3 (Leer) zeigt „nicht geschaltet" statt eines Felds; Streifen und CTA ausgeblendet, bis ein Weg konfiguriert ist | `e2e/newsletter.spec.mjs`, `newsletter_digest.py --check` |
+
+## 4. Warum die Zahlen belastbar sind (drei Konstruktionsregeln)
+
+1. **Regeln messen, nicht vergleichen.** Q11 rechnet Kontraste aus den aufgelösten
+   Tokens; Q16 vergleicht Ziffernmengen (`2.800 €` = `2 800 €` = `2800 €`), weil ein
+   Stringvergleich von formatierten Zahlen gegen Quelltext False-Positives produziert
+   hat – der Fix sitzt jetzt in `zahlen_im_text()`.
+2. **Jede Regel wird mit einer gezielten Manipulation geprüft.** QA-Selbsttest manipuliert pro Regel
+   genau eine Eigenschaft (Einzelklammer, `<script>`, `display:flex`, 103 KB,
+   Kontrast `#404040` auf Dunkel, fehlender Viewport, unbelegte `12.450 €`,
+   Tracking-Pixel) und verlangt den **richtigen** Regelcode. Eine Wache, die bei allem
+   Q1 meldet, ist keine.
+3. **Warnung ≠ Blockade.** Nur Funde stoppen den Live-Versand; Warnungen stehen im
+   Report. Sonst wird die Wache am ersten Montag deaktiviert, an dem nichts kaputt war.
+
+## 5. Aktivierung – was dir bleibt, und warum es nicht erfunden wurde
+
+Geschaltet wird über **einen** Eintrag (`capture.form_action` in
+`data/newsletter_studio.json`, oder `params.newsletterFormAction` in `hugo.toml`,
+das gewinnt): Formular, Streifen, Footer-CTA, Journeys und Rechtstext-Satz folgen
+automatisch, weil alle dieselbe Quelle lesen. Dazu die drei Dinge, die ein Konto
+brauchen und die kein Skript für dich erfinden darf: Brevo-Signup, SPF/DKIM für
+`kontakt@franksfinanzcheck.de`, AVV/DPA abschließen. Reihenfolge und Wortlaut:
+`docs/ANLEITUNG-NEWSLETTER.md` (Schritte 1–6) und
+`docs/ANLEITUNG-NEWSLETTER-STUDIO.md` § 7.
+
+## 6. Was im Repo gilt (und hier mitläuft)
+
+`newsletter_studio.py` und `newsletter_qa.py` sind in `governance_contract.GUARDS`
+aufgenommen – ihr `--selftest` läuft damit in jedem Push/PR durch
+`selftest_runner.py` (Entdeckung im Dateibaum, nicht abgetippte Liste) und ist
+uhrgeprüft. `hugo.toml`, `data/integrity_lock.json`, `extend_footer.html`,
+`custom.css` und die Workflow-Dateien sind **unberührt**: `integrity_guard.py
+--check` meldet „Kern entspricht exakt dem letzten signierten Zustand". Der
+QA-Gate sitzt deshalb im Skript, nicht im Workflow – der Agent-Token hat keine
+`workflows`-Berechtigung, und ein Gate, das eine Datei anfassen müsste, um zu
+gelten, wäre keiner.
+
+## 7. Was 0 € hier nicht kann (die ehrliche Liste)
+
+* **Kein KI-Texten.** Betreff, Preheader und Anriss sind deterministisch aus
+  `kurzantwort`/`description` gebaut; Zahlen kommen ausschließlich aus dem
+  Artikeltext, mit Belegstelle (Q16 blockiert sonst). Ein LLM wäre eine zweite
+  Kostenstelle und eine zweite Fehlerquelle – und für einen Blog, dessen Wert in
+  nachrechenbaren Rechnungen liegt, die schlechtere der beiden.
+* **Keine Echtgeräte-Render-Matrix** (Apple Mail/Gmail/Outlook-Screenshots, wie sie
+  bezahlte Tools verkaufen). Ersatz: harte Regeln für genau das, was diese Clients
+  zerlegen – Tabellenlayout, VML-Knopf, `max-width`, kein Flex/Grid/`@import`/Iframe,
+  keine CDN-Schriften. Manuelle Stichprobe: `vorschau.html` in Outlook öffnen.
+* **Keine KI-Bildgenerierung** für Header. `email.header_bild` ist leer gelassen;
+  wenn du Bilder willst, liegen sie wie die Blog-Cover im Repo, und Q5 verlangt
+  `alt`/Breite/Höhe.
+* **Kein „competitor tracking"** (Migma abonniert im Namen des Kunden Newsletter der
+  Konkurrenz). Abgesehen davon, dass es ein Abo-Feature ist: Listen über
+  Proxy-Mails füllen ist der Weg in den Spam-Ordner des eigenen Absenders.
+* **Kein eigenes Backend** für die Präferenzverwaltung. Präferenzen laufen über die
+  Liste/Segmentierung des Anbieters; `capture.praferenz_url`/`abmelde_url` sind
+  bewusst leer und die Shortcodes zeigen dann den Ersatztext statt eines toten Knopfs.
+
+## 8. Verifikation hier vs. in CI
+
+Nachbericht (derselbe Tag, nach dem ersten PR-Gate): der Lauf war rot, und die
+Ursache war **kein CI-Problem**, sondern F9–F11 – alle drei waren echte
+Build-Fehler bzw. blinde Flecken der Wache, die erst ein *ausgeführtes* Hugo zeigt.
+Dieser Sandbox fehlte lange das Binary; über das PyPI-Rad `hugo` (0.166.0 extended)
+läuft es hier jetzt doch. Damit ist die Render-Wahrheit **hier** geprüft: Bau von
+363 Seiten in zwei Zuständen (leer und mit gesetztem `capture.form_action`),
+Formular-Chips, Journeys, Streifen-Positionen, Shortcode-Auflösung, alle vier
+Gate-Skripte (auch gegen den Unterverzeichnis-Build) und 685 Repo-Tests.
+
+Chromium läuft hier inzwischen auch – über den Fallback, den `e2e/browser.mjs` genau
+dafür bereithält (`@sparticuz/chromium` als npm-Rad; der Playwright-Browser-Download
+auf `storage.googleapis.com` ist aus diesem Container blockiert). Damit ist die
+Browser-Schicht **hier** gemessen, in beiden Zuständen:
+
+| Zustand | Suite | Ergebnis |
+|---|---|---|
+| Leerzustand (`form_action` leer) | alle Specs | 44 bestanden, 2 übersprungen – die beiden Formular-Tests, die bewusst keinen Schaltzustand verlangen |
+| aktiviert (`form_action` gesetzt) | alle Specs | **46 bestanden, 0 übersprungen, 0 Fehler**, auch Horizontal-Overflow auf Start- und Artikelseite mit Streifen |
+
+Was CI-Vorbehalt bleibt, sind die Audits, die Chrome-headless-shell selbst laden
+(`layout_browser_check.js`, `themenwelten_browser_test.mjs`) – und der Design-Audit
+der Site (Kontraste, Tap-Ziele) läuft dort als eigener Schritt nach. Die Spec ist so
+gebaut, dass sie im Leerzustand **und** nach der Freischaltung grün ist (der
+Streifen-Zähler prüft die scharfe Invariante „höchstens einer pro Seite", die F9
+vorher nicht erfüllt war – tote Includes fallen nur auf, wenn man sie zählt).
+
+## 9. Stand des PR #352
+
+Sieben Checks grün auf `7e69179`: *Qualitäts-Gate (Build + interne Links)*,
+*Layout-AI*, *Themenwelten – Navigation & Darstellung*, *E2E-Tests (Playwright)*,
+*Lesehilfen-Gate*, *Publication reliability regression tests*,
+*Integritäts-Lock (PR-Gate)* + *Integritäts-Siegel*. Das vom Gate geöffnete Issue #353
+(„Gefallene Schritte: Seite bauen") hat sich mit dem grünen Build selbst geschlossen.
+Die Freischaltung bleibt danach ein Zweizeiler in `data/newsletter_studio.json`
+(§ 7 der Werkstatt-Anleitung) – bis dahin ist die Capture-Schicht bewusst inert, und
+alle Wachen melden das laut, statt es zu übersehen.
+
+## 10. Dateien
+
+```
+scripts/newsletter_studio.py                    (neu)  Design-System, Material, Blöcke, HTML/Text, --brand
+scripts/newsletter_qa.py                        (neu)  20 Regeln, Score, --md/--json, --selftest
+scripts/newsletter_digest.py                    (geän.)  Studio-Delegation, QA-Gate, zustand-Konfig, 25 Fälle
+scripts/governance_contract.py                  (geän.)  zwei Wachen registriert
+scripts/tests/test_newsletter_studio.py         (neu)  28 Tests
+scripts/tests/test_newsletter_qa.py             (neu)  21 Tests
+scripts/tests/test_newsletter_site.py           (neu)  24 Tests (Vorlagen, CSS, JS, Journeys, Datenschutz)
+scripts/tests/test_newsletter_digest.py         (geän.)  Landungsseiten-Test als Invariante
+data/newsletter_studio.json                     (neu)  eine Quelle für Marke, Texte, Felder, Journeys
+data/newsletter_state.json                      (unverändert gelassen – der Workflow schreibt sie)
+layouts/shortcodes/newsletter_form.html         (neu)  3-Zweig-Formular
+layouts/shortcodes/newsletter_status.html       (neu)  Schaltzustand für Rechtstexte
+layouts/shortcodes/newsletter_weg.html            (neu)  konfigurierbarer Ausweg statt toter Knopf
+layouts/shortcodes/newsletter_themen.html       (neu)  Präferenzwelten aus data/themenwelten.json
+layouts/shortcodes/newsletter_muster.html       (neu)  Vorschau aus dem echten Bestand
+layouts/_partials/newsletter_studio_data.html   (neu)  hugo.toml > JSON, ohne site.Data
+layouts/_partials/newsletter_strip.html         (neu)  ein Streifen, drei Orte, Doppel-CTA-Schutz
+layouts/_default/single.html                        (geän.)  Streifen nach dem Artikel – die LEBENDE Datei
+layouts/_partials/footer.html                        (geän.)  Streifen im Fuß für alle anderen Seiten
+layouts/single.html                                  (unverändert – sie wird von _default/single.html verdeckt)
+assets/css/extended/zz-newsletter.css           (neu)  Formular, Chips, Streifen, Journeys, hell/dunkel
+static/premium/ff-newsletter.js                 (neu)  Validierung, Honigtopf, same-tab-POST, Merker
+content/newsletter/index.md                     (neu)  mit Muster-Ausgabe
+content/newsletter-bestaetigung/-praeferenzen/-abmelden/ (neu)  Journeys, alle noindex
+content/datenschutz/index.md                    (geän.)  § 8 liest den Zustand
+docs/ANLEITUNG-NEWSLETTER-STUDIO.md             (neu)  Werkstatt: Befehle, Regeln, Freischalten, Grenzen
+docs/ANLEITUNG-NEWSLETTER.md                    (geän.)  Schichttabelle, Rechtliches, Schritt 5
+docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md           (geän.)  Status statt offener Aufgabe
+e2e/newsletter.spec.mjs                         (neu)  10 Browser-Tests, zustandsneutral
+```

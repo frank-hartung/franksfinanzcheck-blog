@@ -1,64 +1,123 @@
-{{- /* layouts/shortcodes/newsletter_form.html – der einzige Anmeldeweg der Site.
+{{- /* layouts/shortcodes/newsletter_form.html – das Anmelde-Formular der Site.
 
     Provider-neutral nach außen, hart in der Sache:
-      1. `params.newsletterFormAction` gesetzt  -> echtes Inline-Formular (POST zum
-         Anbieter-Endpunkt, Feld `email`). Das ist der schnelle Weg: Anmeldung bleibt
-         auf der Seite, Double-Opt-in-Mail kommt trotzdem.
-      2. nur `params.newsletterFormUrl` gesetzt  -> Button zum gehosteten Formular
-         (Brevo-Formular, der Weg aus docs/ANLEITUNG-NEWSLETTER.md).
-      3. beides leer                            -> ehrlicher Leerzustand. Kein
-         Dummy-Feld, kein Formular, das ins Leere postet. Der Footer-CTA wird von
-         `extend_footer.html` ebenfalls nur gesetzt angezeigt – die Site bewirbt
-         also nichts, was nicht funktioniert.
+      1. `capture.form_action` gesetzt   -> echtes Inline-Formular (POST, Feld `email`).
+         Die Adresse verlässt die Seite nicht; der Double-Opt-In-Brief kommt trotzdem.
+      2. nur `capture.form_url` gesetzt  -> Button zum gehosteten Formular des Anbieters.
+      3. beides leer                     -> ehrlicher Leerzustand. Kein Dummy-Feld, kein
+         Formular, das ins Leere postet (Hartung-Prinzip dieses Repos: keine Funktion,
+         die nur nach Funktion aussieht).
+
+    Der Anmeldeweg kommt aus data/newsletter_studio.json ODER hugo.toml
+    (`params.newsletterFormAction` schlägt `params.newsletterFormUrl` schlägt JSON) –
+    dieselbe Präzedenz wie in scripts/newsletter_studio.capture(), damit Website und
+    Wache nie verschiedene Zustände melden.
+
+    Agency-Bausteine, die hier bewusst NICHT stehen:
+      * kein Exit-Intent-Modal – unterbricht einen Leser, der gerade rechnet;
+      * kein Double-Opt-In-Formular mit „ein Klick"-Falle – § 7 UWG verlangt den
+        Nachweis, den das Verfahren des Anbieters liefert;
+      * keine Bilderstrecke im Formular – CLS-Budget (PRODUCT.md, Grenze 1).
 
     Absender-/Empfangs-Logik gehört nicht hierher: Verschickt wird über
-    `scripts/newsletter_digest.py` (Workflow `newsletter-daily.yml`).
+    `scripts/newsletter_digest.py` (Workflow `newsletter-daily.yml`), gebaut vom
+    `scripts/newsletter_studio.py`, geprüft von `scripts/newsletter_qa.py`.
 */ -}}
-{{- $action := trim (string site.Params.newsletterFormAction) " " -}}
-{{- $url := trim (string site.Params.newsletterFormUrl) " " -}}
-{{- $liste := default "Fundsachen, Rechner und Sparechnungen – eine Mail pro Werktag." site.Params.newsletterPromise -}}
-<div class="ff-newsletter" id="newsletter-anmeldung">
-{{- if $action -}}
-  <p style="margin:0 0 10px;color:var(--secondary);">{{ $liste }}</p>
-  <form action="{{ $action }}" method="post" accept-charset="utf-8"
-        style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-    <label for="ff-ml" style="font-weight:600;color:var(--primary);">E-Mail-Adresse</label>
-    <input id="ff-ml" type="email" name="email" required autocomplete="email"
-           inputmode="email" placeholder="du@beispiel.de"
-           style="flex:1 1 220px;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--entry-bg,var(--theme-bg));color:var(--primary);">
-    <input type="hidden" name="markdown" value="0">
-    <button type="submit"
-            style="padding:10px 18px;border:0;border-radius:8px;background:#0f6049;color:#fff;font-weight:700;cursor:pointer;">
-      Kostenlos anlegen
-    </button>
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $c := $nl.capture -}}
+{{- $liste := $c.versprechen | default "Fundsachen, Rechner und Sparechnungen – eine Mail pro Werktag." -}}
+<div class="ff-nl" id="newsletter-anmeldung">
+{{- if $c.form_action -}}
+  <p class="ff-nl__lead">{{ $liste }}</p>
+  <form class="ff-nl__form" action="{{ $c.form_action }}" method="post"
+        accept-charset="utf-8" data-ff-nl novalidate>
+    <p class="ff-nl__feld">
+      <label class="ff-nl__label" for="ff-nl-mail">E-Mail-Adresse</label>
+      <input class="ff-nl__input" id="ff-nl-mail" type="email" name="{{ $c.feld_email }}" required
+             autocomplete="email" spellcheck="false" inputmode="email" placeholder="du@beispiel.de"
+             aria-describedby="ff-nl-status">
+    </p>
+    {{- if $nl.themen -}}
+    <fieldset class="ff-nl__themen">
+      <legend class="ff-nl__legend">Was soll drinstehen?
+        <span class="ff-nl__optional">optional, in jeder Mail änderbar</span></legend>
+      <span class="ff-nl__chip-gruppe">
+        {{- range $t := $nl.themen -}}
+        <label class="ff-nl__chip">
+          <input type="checkbox" name="{{ $c.feld_themen }}[]" value="{{ $t.id }}">
+          <span>{{ $t.label }}</span>
+        </label>
+        {{- end -}}
+      </span>
+      <span class="ff-nl__legend-hinweis">Ohne Auswahl kommt alles – eine Mail pro Werktag, nie mehr.</span>
+    </fieldset>
+    {{- end -}}
+    {{- if $c.bot_falle -}}
+    {{- /* Bot-Falle: kostenloser Ersatz für einen Captcha-Dienst. Kein Drittanbieter,
+           kein Cookie, keine DSGVO-Angabe nötig. Echte Menschen sehen nichts davon. */ -}}
+    <p class="ff-nl__falle" aria-hidden="true">
+      <label for="ff-nl-website">Bitte dieses Feld freilassen</label>
+      <input id="ff-nl-website" type="text" name="website" tabindex="-1" autocomplete="off"
+             aria-hidden="true" data-ff-nl-falle>
+      <input type="hidden" name="_zeit" value="" data-ff-nl-zeit>
+    </p>
+    {{- end -}}
+    <p class="ff-nl__consent">
+      <label class="ff-nl__consent-zeile">
+        <input class="ff-nl__check" type="checkbox" name="consent" value="1" required>
+        <span>Ja, ich willige ein, dass FranksFinanzcheck meine E-Mail-Adresse zum Versand
+          des Spar-Newsletters nutzt (Art. 6 Abs. 1 lit. a DSGVO). Der Widerruf ist jederzeit
+          möglich – über den Link in jeder Mail oder formlos an
+          <a href="mailto:kontakt@franksfinanzcheck.de">kontakt@franksfinanzcheck.de</a>.
+          Details in den <a href="/datenschutz/">Datenschutzhinweisen</a>.</span>
+      </label>
+    </p>
+    <p class="ff-nl__aktionen">
+      <button class="ff-nl__button" type="submit">
+        <span class="ff-nl__button-text">Bestätigungsmail anfordern</span>
+        <span class="ff-nl__button-lade" aria-hidden="true">Wird gesendet …</span>
+      </button>
+      <input type="hidden" name="markdown" value="0">
+    </p>
+    <p class="ff-nl__status" id="ff-nl-status" role="status" aria-live="polite">
+      Zwei Klicks: Nach dem Absenden schickt {{ site.Title }} eine Bestätigungs-Mail. Erst
+      wenn du den Link darin öffnest (Double-Opt-In), kommst du auf die Liste – niemand kann
+      dich ohne dein Zutun eintragen. Abmeldung über den Link in jeder Mail.
+    </p>
+    <noscript><p class="ff-nl__hinweis">Ohne JavaScript öffnet dein Browser das
+      Anmeldeformular des Anbieters – die Bestätigungs-Mail kommt trotzdem.</p></noscript>
   </form>
-  <p style="margin:10px 0 0;font-size:.9em;color:var(--secondary);">
-    Zwei Klicks: Nach dem Absenden schicken wir dir eine Bestätigungs-Mail. Erst
-    wenn du den Link darin öffnest (Double-Opt-in), kommst du auf die Liste.
-    Abmeldung über den Link in jeder Mail, Details in den
-    <a href="/datenschutz/">Datenschutzhinweisen</a>.
-  </p>
-{{- else if $url -}}
-  <p style="margin:0 0 10px;color:var(--secondary);">{{ $liste }}</p>
-  <p style="margin:0;">
-    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"
-       style="display:inline-flex;padding:10px 18px;border-radius:8px;background:#0f6049;color:#fff;font-weight:700;text-decoration:none;">
-      Newsletter anmelden (öffnet das Anmeldeformular)
+{{- else if $c.form_url -}}
+  <p class="ff-nl__lead">{{ $liste }}</p>
+  <p class="ff-nl__aktionen">
+    <a class="ff-nl__button" href="{{ $c.form_url }}" target="_blank" rel="noopener noreferrer">
+      <span class="ff-nl__button-text">Zum Anmeldeformular</span>
     </a>
   </p>
-  <p style="margin:10px 0 0;font-size:.9em;color:var(--secondary);">
-    Anmeldung über das Formular deines E-Mail-Dienstleisters, Double-Opt-in inklusive.
-    <a href="/datenschutz/">Datenschutzhinweise</a>.
-  </p>
+  <p class="ff-nl__status">Anmeldung über das Formular deines E-Mail-Dienstleisters,
+    Double-Opt-In inklusive. <a href="/datenschutz/">Datenschutzhinweise</a>.</p>
 {{- else -}}
-  <p style="margin:0;color:var(--secondary);">
+  {{- /* Leerzustand: für Leser ein Satz, für den Betreiber die Anleitung.
+         Die Betreiberzeile steht in einem Kommentar, damit die Site nirgends
+         eine Funktion bewirbt, die es nicht gibt (Wache N1 hält dagegen). */ -}}
+  <p class="ff-nl__lead">{{ $liste }}</p>
+  <p class="ff-nl__leer">
     <strong>Der Newsletter ist noch nicht geschaltet.</strong>
-    Diese Seite bleibt bewusst leer, statt ein Formular zu zeigen, das nirgends
-    ankommt. Freigeschaltet wird sie durch einen Eintrag in
-    <code>hugo.toml</code> – <code>params.newsletterFormAction</code> (inline) oder
-    <code>params.newsletterFormUrl</code> (gehostetes Formular). Anleitung,
-    Pfad und Kontrolle: <code>docs/ANLEITUNG-NEWSLETTER.md</code>; die Wache heißt
-    <code>scripts/newsletter_digest.py --check</code>.
+    Diese Seite zeigt absichtlich kein Formular, das nirgends ankommt. Sobald der
+    Versanddienst eingerichtet ist, erscheint hier das Feld – ein Eintrag genügt.
+    Bis dahin: jede neue Rechnung steht auch im
+    <a href="/index.xml" hreflang="de">Feed</a> und auf
+    <a href="{{ site.Params.mastodonUrl | default "https://mastodon.social/@FranksFinanzcheck" }}"
+       target="_blank" rel="noopener noreferrer">Mastodon</a>.
   </p>
+  <!-- Betreiber-Pfad (kein Lesertext): capture.form_action in
+       data/newsletter_studio.json füllen ODER params.newsletterFormAction in
+       hugo.toml (KRITISCH versiegelt -> scripts/integrity_guard.py --set-current).
+       Anleitung: docs/ANLEITUNG-NEWSLETTER.md und
+       docs/ANLEITUNG-NEWSLETTER-STUDIO.md. Wache:
+       python3 scripts/newsletter_digest.py --check -->
 {{- end -}}
 </div>
+{{- if $c.form_action -}}
+<script defer src="{{ partial "asset_url.html" "premium/ff-newsletter.js" }}"></script>
+{{- end -}}

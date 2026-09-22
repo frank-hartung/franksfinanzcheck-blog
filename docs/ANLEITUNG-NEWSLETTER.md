@@ -4,21 +4,35 @@ An Werktagen um 07:05 (MESZ) baut der Blog **eine** Mail mit den Artikeln des
 Tages – Double-Opt-In, Abmeldelink, kein manueller Eingriff. Diese Anleitung:
 einmalig ca. 15 Minuten (danach nie wieder anfassen).
 
-**Stand 12.09.2026 – was im Repo schon liegt und was noch fehlt.** Repo-seitig
-ist alles gebaut: Anmeldeseite `content/newsletter/` (Shortcode
-`layouts/shortcodes/newsletter_form.html`), Bau + Versand + Duplikatsschutz
-`scripts/newsletter_digest.py`, Workflow `.github/workflows/newsletter-daily.yml`
-(Cron Mo–Fr 05:05 UTC), und eine Wache, die den Leerzustand laut meldet, statt
-ihn für grün zu halten. Es fehlen ausschließlich die drei Klicks in deinem
-Brevo-Konto (Schritte 1–4) und der Datenschutz-Block (Schritt 5). Bis dahin ist
-die Anmeldeseite NoIndex, der Footer-Button unsichtbar und der Workflow inert.
+**Was im Repo liegt – und wer es prüft.** (Schicht für Schicht, damit „gebaut“
+nicht heißt „unbelegt“.)
+
+| Schicht | Datei | Wache |
+|---|---|---|
+| baut die Mail: Marke, Blöcke, Betreff, Textalternative | `scripts/newsletter_studio.py` | `--selftest`, `--brand` |
+| prüft vor dem Versand: 20 Regeln, gemessen statt geschätzt | `scripts/newsletter_qa.py` | `--selftest`; läuft vor jedem `--send` |
+| Watchdog, Bau, Versand, Duplikatsschutz | `scripts/newsletter_digest.py` | `--selftest`, `--check` |
+| Anmeldung, Präferenzen, Bestätigung, Abmeldung | `layouts/shortcodes/newsletter_form.html`, `content/newsletter*/` | `--check`, `e2e/newsletter.spec.mjs` |
+| Design-Schicht des Formulars | `assets/css/extended/zz-newsletter.css` | `scripts/tests/test_newsletter_site.py` |
+
+Konfiguration (Marke, Betreff-Ton, Feldnamen, Journeys) steht an einer Stelle:
+`data/newsletter_studio.json`. Das Weitere – Layout-Engine, QA-Regeln,
+Freischalten, ESP-Export – in **`ANLEITUNG-NEWSLETTER-STUDIO.md`**; dieses
+Dokument bleibt der kurze Weg durchs Brevo-Konto. Solange kein Anmeldeweg
+eingetragen ist, bleibt die Anmeldeseite NoIndex, zeigt der Streifen seinen
+Leerzustand, und `.github/workflows/newsletter-daily.yml` baut ohne zu senden.
 
 ## Wichtig vorab (Recht, DE)
 
 ✅ Double-Opt-In (Brevo-Standard, das gehört so) · ✅ Abmeldelink in jeder Mail
-(automatisch `{{ unsubscribe }}`) · ✅ Impressum + Datenschutz-Links in jeder Mail
-(eingebaut) · ☐ Datenschutzerklärung um Newsletter-Punkt erweitern (Textbaustein
-unten) · ☐ Website: Datenschutz/AVV prüfen (Brevo bietet AVV in den Einstellungen).
+(`{{unsubscribe}}` – doppelte Klammer; die Einzelklammer der alten
+Vorlagen-Sprache ersetzt Brevo in `htmlContent`-Kampagnen nie) · ✅ Impressum- und
+Datenschutz-Links in jeder Mail (eingebaut, von `newsletter_qa.py` in Q10
+verlangt) · ✅ § 8 der Datenschutzerklärung ist gesetzt und liest den
+Schaltzustand aus dem Studio (`{{< newsletter_status >}}`) · ☐ AVV/DPA mit Brevo
+abschließen (Einstellungen → Rechtliches) · ☐ nach dem ersten Versand:
+Datenschutzerklärung gegen den tatsächlichen Stand lesen (Wortlaut-Entwurf:
+`NEWSLETTER-RECHTSTEXT-VORLAGE.md`).
 
 ## 1. Brevo-Konto (5 Min.)
 
@@ -85,11 +99,16 @@ gesammelt. Beides leer = nichts sichtbar, kein toter Button.
 
 ## 5. Datenschutz-Block zuerst (Pflicht, bevor das Formular läuft)
 
-`content/datenschutz/index.md`, Abschnitt 8, behauptet derzeit: *„Diese Website
-bietet derzeit keinen Newsletter an."* Das muss weg, sobald Adressen angenommen
-werden – fertiger Text inkl. Doppel-Opt-In-Nachweis, Speicherdauer und Widerruf in
-`docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md`. Die Wache meldet den Widerspruch, solange
-das Formular aus ist (Hinweis), und als harten Fund, sobald es an ist.
+**Erledigt im Repo, und zwar so, dass der Widerspruch nicht wieder entstehen
+kann:** § 8 in `content/datenschutz/index.md` enthält Double-Opt-In-Nachweis,
+Speicherdauer, Widerruf und den Auftragsverarbeiter, und der erste Satz kommt aus
+`{{< newsletter_status >}}`, das `data/newsletter_studio.json` liest. Solange kein
+Anmeldeweg konfiguriert ist, steht dort „Anmeldung noch nicht geschaltet“ – derselbe
+Zustand, den Wache und Website melden; es gibt keine Prosa mehr, die der
+Konfiguration hinterherlaufen müsste. Die Überschrift bleibt unverändert
+(„## 8. Newsletter / Kontaktaufnahme“), weil die Wache den Abschnitt darüber findet.
+Wortlaut-Entwurf für E-Mail-Signatur und Präferenzseite:
+`docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md`.
 
 ## 6. Probelauf
 
@@ -111,9 +130,13 @@ Von Hand: `python3 scripts/newsletter_digest.py --check` /
 
 > **Newsletter:** Bei Anmeldung speichern wir deine E-Mail-Adresse zur Versendung
 > unseres Blogs (Tages-Digest). Rechtsgrundlage Art. 6 Abs. 1 lit. a DSGVO
-> (Einwilligung). Dienstleister: Brevo (Sendinblue SAS, Frankreich; AVV abgeschlossen,
-> EU-Hosting). Anmeldung per Double-Opt-In; Abmeldung jederzeit per Link in jeder
-> E-Mail. Versand-Statistik (Öffnungs-/Klickraten, anonym).
+> (Einwilligung). Dienstleister: Brevo (Sendinblue SAS, Frankreich; AVV vor dem
+> ersten Versand abschließen, EU-Hosting). Anmeldung per Double-Opt-In; Abmeldung
+> jederzeit per Link in jeder E-Mail. **Keine** Öffnungs- oder Klickmessung:
+> `email.tracking_oeffnungen` steht in `data/newsletter_studio.json` auf `false`,
+> und `newsletter_qa.py` (Q19) bricht den Versand ab, falls die Mail trotzdem ein
+> Tracking-Pixel enthält. Wer Statistik will, schaltet sie im Studio und hier
+> gleichzeitig ein – sonst beschreibt der Rechtstext etwas, das nicht passiert.
 
 ## ❓ FAQ
 

@@ -178,7 +178,7 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 
 ## 8. Newsletter / Kontaktaufnahme
 
-**Newsletter (noch nicht aktiv).** Du kannst dich über [die Anmeldeseite](/newsletter/) oder das Formular im Fußbereich für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben. **Die Anmeldung ist noch nicht geschaltet:** Sie wird erst aktiv, wenn der Auftragsverarbeitungsvertrag (AVV, Art. 28 DSGVO) mit dem Anbieter abgeschlossen ist – ohne ihn bleibt sie aus.
+{{< newsletter_status >}} Du kannst dich über [die Anmeldeseite](/newsletter/) oder das Formular im Fußbereich für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben (Themenwahl, Bestätigungszeitpunkt, Anmeldezeitpunkt).
 
 - **Double-Opt-In.** Nach der Anmeldung senden wir eine Bestätigungs-Mail. Der Newsletter wird erst nach deinem Klick auf den Bestätigungslink verschickt. Wir speichern Anmeldezeitpunkt, Bestätigungszeitpunkt und deine IP-Adresse, um nachweisen zu können, dass die Anmeldung von dir stammt (Art. 6 Abs. 1 lit. a, Art. 7 Abs. 1 DSGVO).
 - **Inhalt und Kadenz.** Eine Mail pro Werktag: die Sparechnungen, Tariffristen und Rechner des Tages aus dem Blog.

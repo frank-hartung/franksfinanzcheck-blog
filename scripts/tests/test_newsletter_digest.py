@@ -111,7 +111,7 @@ class CaptureKette(unittest.TestCase):
         self.assertTrue(any(c == "ds-widerspruch-vorstudie" for _, _, c in note), note)
         b = Baum(self.tmp.name, "aktiv-fall",
                  toml='newsletterFormAction = "https://l.brevo.com/x"\n',
-                 datenschutz=ds, footer="newsletter-footer",
+                 datenschutz=ds, footer='<div class="newsletter-footer">anmelden</div>',
                  workflow="BREVO_API_KEY\n--strict-inert\n")
         with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
                   encoding="utf-8") as fh:
@@ -132,11 +132,36 @@ class CaptureKette(unittest.TestCase):
         funde, _, _ = nd.pruefe_capture(b.root)
         self.assertIn("cta-versteckt", {c for _, _, c in funde}, funde)
 
+    def test_css_nennung_ist_kein_cta_und_keine_werbung(self):
+        """Der Streifen heißt `.newsletter-footer`, und die Extended-CSS wird inline in
+        jede Seite eingebettet – ein Selektor ist kein Kasten. Sonst meldet N1 einen
+        Fund, wo nichts beworben wird, und N6 wäre wegen derselben Zeile grün."""
+        b = Baum(self.tmp.name, "css-fall",
+                 toml='newsletterFormAction = "https://l.brevo.com/x"\n',
+                 datenschutz='<h2 id="newsletter">Newsletter</h2><p>Double-Opt-In.</p>',
+                 footer="<style>.newsletter-footer.ff-nl-strip{margin:0}</style>",
+                 workflow="BREVO_API_KEY\n--strict-inert\n")
+        with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
+                  encoding="utf-8") as fh:
+            fh.write('<div>Double-Opt-In <a href="/datenschutz/">DS</a>'
+                     '<form><input name="email"></form></div>')
+        funde, _, _ = nd.pruefe_capture(b.root)
+        self.assertIn("cta-versteckt", {c for _, _, c in funde}, funde)
+
+    def test_anmeldeseite_erklaren_ist_keine_werbung(self):
+        b = Baum(self.tmp.name, "erklaerung", datenschutz="<h2>Newsletter</h2>")
+        with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("<div>Newsletter-Anmeldung ist noch nicht geschaltet.</div>")
+        funde, _, zustand = nd.pruefe_capture(b.root)
+        self.assertEqual("inert", zustand)
+        self.assertEqual([], [f for f in funde if f[2] == "config-widerspruch"], funde)
+
     def test_gesunde_kette_findet_nichts(self):
         b = Baum(self.tmp.name, toml='newsletterFormAction = "https://l.brevo.com/x"\n',
                  datenschutz='<h2 id="newsletter">Newsletter</h2>'
                              '<p>Double-Opt-In, Widerruf formlos, 30 Tage.</p>',
-                 footer="newsletter-footer", workflow="BREVO_API_KEY\n--strict-inert\n")
+                 footer='<div class="newsletter-footer">anmelden</div>', workflow="BREVO_API_KEY\n--strict-inert\n")
         with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
                   encoding="utf-8") as fh:
             fh.write('<div>Double-Opt-In <a href="/datenschutz/">DS</a>'
@@ -291,13 +316,32 @@ class Verdrahtung(unittest.TestCase):
                          "newsletter_digest läuft nicht im Qualitäts-Gate")
 
     def test_landingsseite_ist_gebaut_und_ohne_falsches_versprechen(self):
+        """Was die Anmeldeseite im JEDES Zustand zu liefern hat – und was nur im Leeren.
+
+        Der Test war bis hierher eine Zustands-Behauptung („kein <form>“), kein
+        Invariante: am Tag, an dem Frank den Schalter legt, wäre er rot geworden –
+        und zwar wegen des Erfolgs. Also wird der Konfigurationszustand erst
+        gelesen und dann je Zweig geprüft; die gemeinsamen Sätze (noindex, kein
+        Anker, keine Sitemap) gelten in beiden.
+        """
         seite = os.path.join(ROOT, "public/newsletter/index.html")
         if not os.path.isdir(os.path.join(ROOT, "public")):
             self.skipTest("kein public/-Build (lokal zuerst `hugo` laufen lassen)")
         with open(seite, encoding="utf-8") as fh:
             h = fh.read()
-        self.assertIn("nicht geschaltet", h)          # Leerzustand ist ehrlich
-        self.assertNotIn("<form", h)                  # und postet nirgends hin
+        p = nd.params(ROOT)
+        geschaltet = bool(p.get("newsletterFormAction") or p.get("newsletterFormUrl"))
+        if geschaltet:
+            # Das Contract-Ziel der Wache: ein Formular, das wirklich postet,
+            # und eine Seite, die den Weg danach erklärt.
+            self.assertIn("<form", h)
+            self.assertIn('name="email"', h)
+            self.assertRegex(h, r"Double-Opt|Bestätigungsmail")
+            self.assertIn("/datenschutz/", h)
+            self.assertNotIn("nicht geschaltet", h)
+        else:
+            self.assertIn("nicht geschaltet", h)      # Leerzustand ist ehrlich
+            self.assertNotIn("<form", h)              # und postet nirgends hin
         self.assertIn("noindex", h)                   # wirbt nicht in Suchmaschinen
         self.assertNotIn("/datenschutz/#newsletter", h)  # es gibt keinen solchen Anker
         with open(os.path.join(ROOT, "public/sitemap.xml"), encoding="utf-8") as fh:

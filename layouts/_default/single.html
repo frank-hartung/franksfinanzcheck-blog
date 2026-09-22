@@ -100,6 +100,17 @@
 
   {{- partial "extend_post_content.html" . }}
 
+  {{- /* Newsletter-Streifen nach dem Artikel (22.09.2026): der Leser hat gerade
+         gerechnet – hier wächst eine Liste natürlich. OWNED-Kanal statt geliehener
+         Reichweite (Premium-Audit 12.09.2026, Empfehlung 1). Gerendert nur bei
+         konfiguriertem Anmeldeweg, sonst zeigt sich kein toter Kasten.
+         Warum hier und nicht in layouts/single.html: das Projekt hat beide Dateien,
+         und Hugo nimmt für Posts `layouts/_default/single.html` – ein Include in
+         `layouts/single.html` wird verdeckt und rendert stillschweigend nie. */ -}}
+  {{- if eq .Section "posts" }}
+  {{- partial "newsletter_strip.html" (dict "ort" "artikel" "seite" .) }}
+  {{- end }}
+
   <footer class="post-footer">
     {{- /* Premium Pin-It (Footer-Variante für Mobile/Artikel-Ende) */ -}}
     {{- if and (eq .Section "posts") (not .Draft) .Params.cover.image }}

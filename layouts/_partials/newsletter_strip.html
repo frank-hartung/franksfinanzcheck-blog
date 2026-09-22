@@ -1,0 +1,62 @@
+{{- /* ============================================================
+       NEWSLETTER-STREIFEN – ein Baustein, drei Orte
+       ------------------------------------------------------------
+       Aufruf mit dict:
+         partial "newsletter_strip.html" (dict "ort" "footer")   siteweit im Fuß
+         partial "newsletter_strip.html" (dict "ort" "artikel")  nach dem Artikel
+         partial "newsletter_strip.html" (dict "ort" "start")    Startseite
+       Warum ein Partial statt drei Kopien: der Streifentext ist eine Aussage
+       über den Versand (Kadenz, Double-Opt-In, kündbar). Drei Kopien davon
+       driften; eine Wahrheit trägt alle drei Orte.
+
+       Der Streifen erscheint NUR, wenn ein Anmeldeweg konfiguriert ist
+       (Wache N1 hält dagegen: Werbung ohne Weg ist ein Fund). Die Klassen
+       .newsletter-footer trägt er im Fuß bewusst weiter – extend_footer.html
+       (markenversiegelt) nutzt denselben Namen, und die Wache prüft ihn dort.
+       ============================================================ */ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $ort := .ort | default "footer" -}}
+{{- $seite := .seite -}}
+{{- $pfad := "" -}}
+{{- $titel := "" -}}
+{{- $section := "" -}}
+{{- with $seite -}}{{- $pfad = .RelPermalink -}}{{- $titel = .Title | plainify -}}{{- $section = .Section -}}{{- end -}}
+{{- /* Kein Streifen (a) auf der Anmeldeseite selbst – ein CTA auf sich selbst ist
+       eine Schleife, (b) auf den Rechtsseiten – dort gehört Werbung nicht hin, das
+       handhabt extend_footer.html mit der Pinterest-Box genauso. */ -}}
+{{- $istAnmeldung := hasPrefix $pfad "/newsletter" -}}
+{{- $istRecht := or (hasPrefix $pfad "/impressum") (hasPrefix $pfad "/datenschutz") -}}
+{{- $amPlatz := and (not $istAnmeldung) (not $istRecht) -}}
+{{- /* Doppel-CTA verhindern: extend_footer.html (markenversiegelt, darf hier
+       nicht angefasst werden) zeigt seinen Newsletter-Kasten bereits, wenn einer
+       der hugo.toml-Parameter gesetzt ist. Der Streifen aus dem Studio-JSON
+       rückt deshalb nur im Fuß ein, wenn dort nichts anderes greift. */ -}}
+{{- $paramGedeckt := or (ne (trim (string site.Params.newsletterFormAction) " ") "")
+                         (ne (trim (string site.Params.newsletterFormUrl) " ") "") -}}
+{{- /* Doppel-CTA in die andere Richtung: auf Artikelseiten steht der Streifen schon
+       im Text – single.html ruft dieses Partial mit `ort = "artikel"` für genau die
+       Sektion. Der Fuß rückt dort nicht noch einmal ein. Die Invariante „höchstens
+       ein Streifen pro Seite" misst e2e/newsletter.spec.mjs über das ganze Dokument,
+       damit sie auch nach der Freischaltung gilt (dann erst rendert sie überhaupt). */ -}}
+{{- $bereitsImText := eq $section "posts" -}}
+{{- $zeigen := and $nl.aktiv $amPlatz (not (and (eq $ort "footer") $bereitsImText))
+                 (or (ne $ort "footer") (not $paramGedeckt)) -}}
+{{- if $zeigen -}}
+{{- $zusatz := cond (eq $ort "footer") "" (printf " ff-nl-strip--%s" $ort) -}}
+<div class="newsletter-footer ff-nl-strip{{ $zusatz }}">
+  <p class="ff-nl-strip__text">
+    <span class="ff-nl-strip__anker" aria-hidden="true">📬</span>
+    {{- $nl.capture.versprechen | default "Eine Mail pro Werktag: die Sparechnungen des Tages." -}}
+  </p>
+  <a class="ff-nl-strip__cta" href="/newsletter/"
+     title="Zum kostenlosen Newsletter von FranksFinanzcheck anmelden{{ if and (eq $ort "artikel") $titel }} – weiter nach „{{ $titel }}“{{ end }}">
+    <span class="ff-nl-strip__cta-text">Newsletter abonnieren</span>
+    <span class="ff-nl-strip__cta-klammer" aria-hidden="true">→</span></a>
+  <p class="ff-nl-strip__klein">1&nbsp;Mail pro Werktag · Double-Opt-In · jederzeit kündbar</p>
+  {{- /* Der Merker kommt aus static/premium/ff-newsletter.js (localStorage) und
+         ersetzt den Anmelde-Knopf bei Menschen, die schon auf der Liste stehen –
+         ein zweiter Anmelde-Kasten wäre Lärm, kein Service. */ -}}
+  <p class="ff-nl-strip__schon">Du bist schon dabei –
+    <a href="/newsletter/praeferenzen/">Themen ansehen</a></p>
+</div>
+{{- end -}}

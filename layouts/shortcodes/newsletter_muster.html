@@ -1,0 +1,44 @@
+{{- /* layouts/shortcodes/newsletter_muster.html – so sieht eine Ausgabe aus.
+
+    Die stärkste Anmeldebegründung ist kein Versprechen, sondern ein Beleg: der
+    Leser sieht die echte Struktur der Mail, gebaut aus den tatsächlich
+    letzten Artikeln. Kein Bild, kein Tracking, keine erfundene Ausgabe –
+    dieselbe Blockreihenfolge, die scripts/newsletter_studio.py in die Mail setzt
+    (kopf → hero → artikel → fuss). Drift zwischen Vorschau und Versand wäre
+    ein gebrochenes Versprechen; die Wache `newsletter_studio.py --brand` hält
+    deshalb beide Seiten an denselben Marken- und Themenwerten fest.
+
+    Bausteine ohne Material: der Block verschwindet ganz (leere Vorschau = leeres
+    Versprechen).
+*/ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- /* site.RegularPages enthält bereits nur Gebautes: buildDrafts/buildFuture/
+       buildExpired sind in hugo.toml auf false – ein Entwurf kann hier also nicht
+       als „Ausgabe“ auftauchen, die nie verschickt wird. */ -}}
+{{- $seiten := where site.RegularPages "Section" "posts" -}}
+{{- $belege := first 3 (first 12 $seiten) -}}
+{{- if $belege -}}
+{{- $themen := dict -}}
+{{- range $t := $nl.themen -}}{{- with $t.id -}}{{- $themen = merge $themen (dict (string .) ($t.label | default .)) -}}{{- end -}}{{- end -}}
+<figure class="ff-nl-muster">
+  <div class="ff-nl-muster__kopf">
+    <span>So sieht eine Ausgabe aus · gebaut aus den letzten {{ len $belege }} Ratgebern</span>
+    <span>{{ $nl.capture.versprechen | default "Eine Mail pro Werktag" }}</span>
+  </div>
+  <ul class="ff-nl-muster__liste">
+    {{- range $belege -}}
+    <li class="ff-nl-muster__eintrag">
+      {{- $welt := index $themen (.Params.pillar | default "") -}}
+      {{- with $welt }}<span class="ff-nl-muster__thema">{{ . }}</span>{{ end -}}
+      <h3 class="ff-nl-muster__titel"><a href="{{ .RelPermalink }}">{{ .LinkTitle | plainify }}</a></h3>
+      <p class="ff-nl-muster__text">{{ .Params.kurzantwort | default .Description | plainify | truncate 180 }}</p>
+    </li>
+    {{- end -}}
+  </ul>
+  <figcaption class="ff-nl-muster__fuss">
+    Jede Mail nennt Stand, Zahl und Frist – nachzulesen im Artikel. Abmelden geht über
+    den Link in jeder Mail; die Adresse liegt beim E-Mail-Dienstleister, nicht auf
+    diesem Server.
+  </figcaption>
+</figure>
+{{- end -}}
