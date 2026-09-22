@@ -30,7 +30,8 @@ Vorlagen-Sprache ersetzt Brevo in `htmlContent`-Kampagnen nie) · ✅ Impressum-
 Datenschutz-Links in jeder Mail (eingebaut, von `newsletter_qa.py` in Q10
 verlangt) · ✅ § 8 der Datenschutzerklärung ist gesetzt und liest den
 Schaltzustand aus dem Studio (`{{< newsletter_status >}}`) · ☐ AVV/DPA mit Brevo
-abschließen (Einstellungen → Rechtliches) · ☐ nach dem ersten Versand:
+abschließen (DSV = Anhang 3 der Brevo-Nutzungsbedingungen, mit Konto-Setup
+akzeptiert – PDF mit Datum sichern) · ☐ nach dem ersten Versand:
 Datenschutzerklärung gegen den tatsächlichen Stand lesen (Wortlaut-Entwurf:
 `NEWSLETTER-RECHTSTEXT-VORLAGE.md`).
 

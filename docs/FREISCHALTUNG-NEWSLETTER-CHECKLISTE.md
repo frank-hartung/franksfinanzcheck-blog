@@ -57,9 +57,14 @@ Danach Authentifizierung per DNS (Zone `franksfinanzcheck.de`, Cloudflare):
 | **DKIM** | den Eintrag **wörtlich so**, wie Brevo ihn im Sender-Dialog zeigt (Selector typ. `_brevo._domainkey`) – nicht tippen, kopieren |
 | **DMARC** (empfohlen) | TXT `_dmarc` = `v=DMARC1; p=none;` – Brevo schlägt den Wortlaut im selben Dialog vor |
 
-> **AVV ist kein DNS-Eintrag**, sondern ein Vertrag: Brevo →
-> **Einstellungen → Rechtliches → DPA** → PDF herunterladen und ablegen
-> (Schritt 5). § 8 Datenschutz ist darauf bereits abgestimmt.
+> **AVV ist kein DNS-Eintrag**, sondern ein Vertrag – und in Brevos UI gibt es
+> dafür **kein Menü**: Die DSV ist **Anhang 3 der deutschen
+> [Nutzungsbedingungen](https://www.brevo.com/de/legal/termsofuse/)**
+> (Version 16.10.2025) und mit dem Klick auf „Konto erstellen“ bereits
+> akzeptiert. „Sichern“ heißt deshalb nur: die Seite als PDF speichern
+> (Drucken → Als PDF speichern), mit Datum benennen
+> (z. B. `brevo-dsv_2026-09-22.pdf`) und im Dokumentenordner ablegen.
+> § 8 Datenschutz ist darauf abgestimmt.
 
 Zustellbar wird der Absender, sobald SPF + DKIM auf „verifiziert“ stehen
 (Brevo färbt grün; kann einige Minuten dauern).
