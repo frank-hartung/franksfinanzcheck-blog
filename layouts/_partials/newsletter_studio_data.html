@@ -1,0 +1,46 @@
+{{- /* ============================================================
+       NEWSLETTER-STUDIO – data/newsletter_studio.json lesen
+       ------------------------------------------------------------
+       WARUM NICHT hugo.Data / site.Data (dokumentierte Landmine,
+       19.09.2026, siehe affiliate_ziele_data.html und saisons_data.html):
+       data/ enthält Bot-Protokolle (*.jsonl). Schon EIN Zugriff auf
+       hugo.Data/site.Data lässt Hugo den ganzen data/-Baum parsen – der
+       Build stirbt an „unmarshal of format \"\" is not supported".
+       Deshalb dieselbe Bauweise: genau die eine Datei lesen und zurückgeben.
+       JSON (nicht YAML), weil der Versand-Workflow kein PyYAML installiert
+       und Hugo beim JSON die Format-Ratefunktion nicht braucht.
+
+       Präzedenz: hugo.toml `params.newsletter*` GEWINNT über die JSON –
+       identisch zu scripts/newsletter_studio.capture(), damit Website und
+       Wache denselben Zustand melden (ein Zustand, zwei Orte, eine Regel).
+
+       Aufruf: partialCached "newsletter_studio_data.html" . "nl-studio"
+       ============================================================ */ -}}
+{{- $daten := dict -}}
+{{- if fileExists "data/newsletter_studio.json" -}}
+  {{- $roh := os.ReadFile "data/newsletter_studio.json" | transform.Unmarshal (dict "format" "json") -}}
+  {{- with $roh -}}{{- $daten = . -}}{{- end -}}
+{{- end -}}
+{{- $capture := $daten.capture | default dict -}}
+{{- /* hugo.toml-Überschreibung (Parameter bleiben gültig,siehe docs/ANLEITUNG-NEWSLETTER.md) */ -}}
+{{- $action := trim (string (site.Params.newsletterFormAction | default $capture.form_action | default "")) " " -}}
+{{- $url := trim (string (site.Params.newsletterFormUrl | default $capture.form_url | default "")) " " -}}
+{{- $versprechen := trim (string (site.Params.newsletterPromise | default $capture.versprechen | default "")) " " -}}
+{{- return (dict
+  "capture" (dict
+    "form_action" $action
+    "form_url" $url
+    "versprechen" $versprechen
+    "feld_email" ($capture.feld_email | default "email")
+    "feld_themen" ($capture.feld_themen | default "themen")
+    "bestaetigung" ($capture.bestaetigungs_url | default "/newsletter/bestaetigung/")
+    "abmelde_url" ($capture.abmelde_url | default "")
+    "praferenz_url" ($capture.praferenz_url | default "")
+    "bot_falle" (ne ($capture.bot_falle | default true) false)
+  )
+  "themen" ($daten.themen | default slice)
+  "journeys" ($daten.journeys | default dict)
+  "email" ($daten.email | default dict)
+  "design" ($daten.design | default dict)
+  "aktiv" (or (ne $action "") (ne $url ""))
+) -}}

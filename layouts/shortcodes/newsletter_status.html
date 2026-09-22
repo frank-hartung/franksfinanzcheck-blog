@@ -1,0 +1,32 @@
+{{- /* layouts/shortcodes/newsletter_status.html – der ehrliche Schaltstand.
+
+    Rechtstexte dürfen keinen Zustand behaupten, den die Konfiguration nicht trägt:
+    „Die Anmeldung ist noch nicht geschaltet“ ist korrekt, solange
+    capture.form_action/form_url leer sind – und ein Widerspruch (und damit eine
+    Abmahnungs-Steilvorlage), sobald sie gefüllt sind. Ein Baustein, der den
+    Zustand aus der Konfiguration liest, ist besser als zwei Sätze, deren
+    Wechsel jemand vergisst.
+
+    Quelle: partials/newsletter_studio_data.html (hugo.toml schlägt JSON). Auch die
+    zwei Journey-Links kommen aus `journeys` in data/newsletter_studio.json – die
+    Seiten existieren, sonst meldet `scripts/tests/test_newsletter_site.py` einen
+    Link ins Leere. 
+*/ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $recht := $nl.email.rechtliches | default dict -}}
+{{- $datenschutz := $recht.datenschutz_url | default "/datenschutz/" -}}
+{{- if $nl.aktiv -}}
+<strong>Anmeldung aktiv.</strong> Adressen werden über das Formular gesammelt; die
+Bestätigungsmail (Double-Opt-In) und der Abmeldelink in jeder Mail gehören zum
+Versandverfahren (Details in den <a href="{{ $datenschutz }}">Datenschutzhinweisen</a>).
+{{- with $nl.journeys -}}
+Die Verwaltung ist dieselbe wie unten in jeder Mail:
+<a href="{{ .praeferenzen | default "/newsletter/praeferenzen/" }}">Präferenzen</a> ·
+<a href="{{ .abmelden | default "/newsletter/abmelden/" }}">Abmelden</a>.
+{{- end -}}
+{{- else -}}
+<strong>Anmeldung noch nicht geschaltet.</strong> Sie wird aktiv, sobald der
+Auftragsverarbeitungsvertrag (AVV, Art. 28 DSGVO) mit dem Anbieter abgeschlossen und
+der Anmeldeweg in <code>data/newsletter_studio.json</code> eingetragen ist – ohne
+beides bleibt sie aus.
+{{- end -}}

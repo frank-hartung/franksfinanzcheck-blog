@@ -1,0 +1,24 @@
+{{- /* layouts/shortcodes/newsletter_themen.html – die Themenwelten als Liste.
+
+    Quelle ist data/themenwelten.json – dieselbe Datei, die die Startseite und
+    die Ratgeber-Cluster nutzt. Der Newsletter erfindet also keine eigene
+    Themenwelt, nur damit das Formular mehr Häkchen hat (Wache:
+    scripts/newsletter_studio.py --brand hält die IDs deckungsgleich).
+*/ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $welten := dict -}}
+{{- if fileExists "data/themenwelten.json" -}}
+  {{- $daten := os.ReadFile "data/themenwelten.json" | transform.Unmarshal -}}
+  {{- range $t := $daten.topics -}}{{- $_ := set $welten $t.id $t -}}{{- end -}}
+{{- end -}}
+<dl class="ff-nl-themen">
+  {{- range $t := $nl.themen -}}
+  {{- $welt := index $welten $t.id -}}
+  <div class="ff-nl-themen__zeile">
+    <dt class="ff-nl-themen__name">
+      {{- with $welt }}<span aria-hidden="true">{{ .emoji }}</span> {{ end -}}{{ $t.label }}
+    </dt>
+    <dd class="ff-nl-themen__text">{{ ($welt.description) | default "Rechner, Fristen und Preisänderungen aus diesem Bereich." }}</dd>
+  </div>
+  {{- end -}}
+</dl>
