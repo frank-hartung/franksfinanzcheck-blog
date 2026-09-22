@@ -58,6 +58,11 @@ import urllib.parse
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if os.path.join(BLOG_DIR, "scripts") not in sys.path:
+    sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import newsletter_studio as studio      # noqa: E402  (Marke, Blöcke, Layout – eine Quelle)
+import newsletter_qa as qa             # noqa: E402  (Vor-Versand-Prüfung, blockiert den Live-Versand)
+
 STATE_REL = os.path.join("data", "newsletter_state.json")
 LANDING_REL = os.path.join("content", "newsletter", "index.md")
 SHORTCODE_REL = os.path.join("layouts", "shortcodes", "newsletter_form.html")
@@ -77,17 +82,31 @@ def _read(path: str) -> str:
 
 
 def params(root: str) -> dict:
-    """Die drei Newsletter-Parameter aus hugo.toml, ohne Hugo-Abhängigkeit.
+    """Die drei Newsletter-Parameter – aus hugo.toml ODER data/newsletter_studio.json.
 
     Geparst wird die TOML-Insel, nicht die ganze Datei: Hugo 0.164 würde für
     einen echten Leservorgang einen Build verlangen, und die Wache soll auch
     ohne public/-Ausgabe urteilen können.
+
+    Der Grund für die zweite Quelle: hugo.toml ist durch `data/integrity_lock.json`
+    als KRITISCH versiegelt (Integritäts-Guard) – jede Änderung braucht eine
+    menschliche Signatur. Der Anmeldeweg liegt deshalb zusätzlich im Studio-
+    JSON, das der Betreiber füllen kann, ohne das Siegel zu berühren. Präzedenz
+    hugo.toml > JSON, exakt wie in layouts/shortcodes/newsletter_form.html: ein
+    Zustand, zwei Orte, eine Reihenfolge.
     """
     toml = _read(os.path.join(root, "hugo.toml"))
     out = {}
     for key in ("newsletterFormUrl", "newsletterFormAction", "newsletterPromise"):
         m = re.search(r'(?m)^\s*' + key + r'\s*=\s*"([^"]*)"', toml)
         out[key] = (m.group(1).strip() if m else "")
+    studium = studio.capture(root)
+    if not out["newsletterFormAction"]:
+        out["newsletterFormAction"] = studium["form_action"]
+    if not out["newsletterFormUrl"]:
+        out["newsletterFormUrl"] = studium["form_url"]
+    if not out["newsletterPromise"]:
+        out["newsletterPromise"] = studium["versprechen"]
     return out
 
 
@@ -127,15 +146,38 @@ def live_artikel(root: str, seit: datetime.date | None, bis: datetime.date | Non
     return sorted(out, key=lambda a: a["datum"], reverse=True)
 
 
-def lade_state(root: str) -> dict:
+def zustand_konfig(root: str) -> tuple[str, int, int]:
+    """(Datei, Betreff-Verlauf, Artikel-Verlauf) aus `zustand` im Studio-JSON.
+
+    Der Block war bisher Dekoration: die Länge saß als `-12` im Code, der Pfad als
+    Konstante. Jetzt gilt, was in der Datei steht – „ein Zustand, eine Datei" ist
+    erst dann wahr, wenn beide Seiten dieselbe lesen. Die Konstanten bleiben
+    Default, damit ein Checkout ohne Studio-JSON genau so weiterläuft.
+    """
     try:
-        return json.loads(_read(os.path.join(root, STATE_REL)) or "{}")
+        z = studio.konfiguration(root, streng=False).get("zustand", {}) or {}
+    except SystemExit:                    # kaputtes JSON: Wache meldet das, hier nicht sterben
+        z = {}
+    pfad = (str(z.get("datei") or "") or STATE_REL).strip()
+    def _zahl(schlüssel, default):
+        try:
+            return max(1, int(z.get(schlüssel, default)))
+        except (TypeError, ValueError):
+            return default
+    return pfad, _zahl("betreff_historie", 12), _zahl("artikel_historie", 400)
+
+
+def lade_state(root: str) -> dict:
+    pfad, _, _ = zustand_konfig(root)
+    try:
+        return json.loads(_read(os.path.join(root, pfad)) or "{}")
     except json.JSONDecodeError:
         return {}
 
 
 def speichere_state(root: str, state: dict) -> None:
-    pfad = os.path.join(root, STATE_REL)
+    pfad, _, _ = zustand_konfig(root)
+    pfad = os.path.join(root, pfad)
     os.makedirs(os.path.dirname(pfad), exist_ok=True)
     with open(pfad, "w", encoding="utf-8") as fh:
         json.dump(state, fh, ensure_ascii=False, indent=2, sort_keys=True)
@@ -309,10 +351,18 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
     if not sc:
         funde.append(("N4", f"fehlend: {SHORTCODE_REL} – ohne Shortcode zeigt die "
                             "Landingpage kein Feld", "shortcode-fehlt"))
-    elif action and f'name="{FELDNAME}"' not in sc:
-        funde.append(("N4", f"Inline-Formular POSTet ohne Feld `{FELDNAME}` – "
-                            "Brevo und Konsorten lesen die Adresse aus genau diesem "
-                            "Namen", "feldname"))
+    elif action:
+        # Der Feldname darf auf zwei Weisen feststehen: literal im Shortcode oder
+        # über `capture.feld_email` im Studio-JSON (der Betreiber stellt dort
+        # EMAIL_1 ein, wenn sein Formular so heißt). Beides ist dasselbe
+        # Versprechen – die Wache prüft den Mechanismus, nicht die Kopie eines
+        # Wertes, und erzwingt so keine zweite Stelle, die man pflegen muss.
+        literal = f'name="{FELDNAME}"' in sc
+        aus_konfig = re.search(r'name="\{\{[^}]*feld_email', sc) is not None
+        if not (literal or aus_konfig):
+            funde.append(("N4", f"Inline-Formular POSTet ohne Feld `{FELDNAME}` – "
+                                "Brevo und Konsorten lesen die Adresse aus genau diesem "
+                                "Namen (literal oder via capture.feld_email)", "feldname"))
     if not seite:
         funde.append(("N5", "Landingpage /newsletter/ ist nicht gebaut – Inhalt "
                             "fehlt oder Build veraltet", "landingpage-fehlt"))
@@ -374,41 +424,32 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
 
 
 # -------------------------------------------------------------------------- Digest
-def baue_digest(artikel: list[dict], datum: str, versprechen: str) -> tuple[str, str, int]:
+def baue_ausgabe(artikel: list[dict], datum: str, versprechen: str,
+                 *, root: str = BLOG_DIR) -> dict:
+    """Die Ausgabe einer Ausgabe: Marke, Blöcke, Betreff, Preheader – vom Studio.
+
+    Der Digest ist der Sammler und Entscheider (was ist neu, was schon versandt),
+    das Studio ist die Setzerwerkstatt. Getrennt, weil der Versandpfad das Layout
+    nicht kennt und das Layout den Duplikatsschutz nicht braucht.
+    """
     if not artikel:
-        return "", "", 0
-    betreff = (f"FranksFinanzcheck: {artikel[0]['titel']}" if len(artikel) == 1 else
-               f"FranksFinanzcheck: {len(artikel)} Sparechnungen für {datum}")
-    stuecke_h, stuecke_t = [], []
-    for a in artikel:
-        titel = a["titel"].replace("&", "&amp;").replace("<", "&lt;")
-        text = (a["beschreibung"] or "Rechnung im Artikel öffnen.").replace("<", "&lt;")
-        url = a["url"] if a["url"].startswith("http") else "https://franksfinanzcheck.de" + a["url"]
-        stuecke_h.append(
-            f'<tr><td style="padding:14px 18px;font-family:Georgia,serif;">'
-            f'<h2 style="margin:0 0 6px;font-size:19px;line-height:1.3;">'
-            f'<a href="{url}" style="color:#0f6049;text-decoration:none;">{titel}</a></h2>'
-            f'<p style="margin:0;color:#3c4a56;font-size:15px;line-height:1.5;">{text}</p>'
-            f'<p style="margin:8px 0 0;"><a href="{url}" style="font-weight:700;'
-            f'color:#0f6049;">Rechnung öffnen →</a></p></td></tr>')
-        stuecke_t.append(f"* {a['titel']}\n  {url}\n  {text}")
-    html = ("<!doctype html><html lang=\"de\"><meta charset=\"utf-8\">"
-            f"<body style=\"margin:0;background:#f4f6f8;\"><table role=presentation "
-            f"width=100% cellpadding=0 cellspacing=0 style=\"max-width:620px;"
-            f"margin:0 auto;background:#fff;\">"
-            f"<tr><td style=\"padding:18px;border-bottom:1px solid #e5e9ed;\">"
-            f"<strong style=\"font-size:17px;\">FranksFinanzcheck</strong>"
-            f"<div style=\"color:#5a6a78;font-size:13px;\">{versprechen} · {datum}</div></td></tr>"
-            + "".join(stuecke_h) +
-            "<tr><td style=\"padding:16px 18px;border-top:1px solid #e5e9ed;"
-            "color:#5a6a78;font-size:12px;\">Du erhältst diese Mail, weil du dich auf "
-            "franksfinanzcheck.de mit Double-Opt-In angemeldet hast. "
-            "<a href=\"{unsubscribe}\">Abmelden</a></td></tr></table></body></html>")
-    text = (f"FranksFinanzcheck – {versprechen}\n{datum}\n\n"
-            + "\n\n".join(stuecke_t)
-            + "\n\n---\nAbmelden: {unsubscribe}\n"
-              "Angemeldet über franksfinanzcheck.de/newsletter/ (Double-Opt-In).")
-    return html, text, len(artikel)
+        return {"html": "", "text": "", "betreff": "", "preheader": "", "anzahl": 0,
+                "blocks": [], "material": []}
+    try:
+        tag = datetime.date.fromisoformat(str(datum)[:10])
+    except ValueError:
+        tag = datetime.date.today()
+    material = studio.material_aus_artikel(root, artikel)
+    e = studio.baue_email(material, datum=tag, root=root, versprechen=versprechen)
+    e["anzahl"] = len(artikel)
+    return e
+
+
+def baue_digest(artikel: list[dict], datum: str, versprechen: str,
+                *, root: str = BLOG_DIR) -> tuple[str, str, int]:
+    """Abwärtskompatible Fassade: (html, text, anzahl)."""
+    e = baue_ausgabe(artikel, datum, versprechen, root=root)
+    return e["html"], e["text"], e["anzahl"]
 
 
 # ---------------------------------------------------------------------- Brevo-Transport
@@ -536,6 +577,48 @@ def _selftest() -> int:
         pruefe(not f4, f"saubere Kette meldet Funde: {f4}")
         pruefe(z4 == "aktiv", f"gesunde Kette gilt nicht als aktiv: {z4}")
 
+        # 9c) `zustand` ist keine Dekoration: Datei und Längen kommen aus dem JSON
+        pfad_z, betreff_len, artikel_len = zustand_konfig(r4)
+        pruefe(pfad_z == STATE_REL and betreff_len == 12 and artikel_len == 400,
+               f"Standard-Zustandsblock nicht gelesen: {pfad_z}, {betreff_len}, {artikel_len}")
+        r4c = os.path.join(tmp, "zustand-versetzt")
+        os.makedirs(os.path.join(r4c, ".github", "workflows"), exist_ok=True)
+        os.makedirs(os.path.join(r4c, "data"), exist_ok=True)
+        os.makedirs(os.path.join(r4c, "content"), exist_ok=True)
+        with open(os.path.join(r4c, "hugo.toml"), "w", encoding="utf-8") as fh:
+            fh.write("[params]\n")
+        with open(os.path.join(r4c, "data", "newsletter_studio.json"), "w",
+                  encoding="utf-8") as fh:
+            fh.write(json.dumps({"zustand": {"datei": "data/nl-zustand.json",
+                                             "betreff_historie": 2,
+                                             "artikel_historie": 3}}))
+        speichere_state(r4c, {"zuletzt_betreff": ["a", "b", "c"], "versandene_artikel": []})
+        verschieb = lade_state(r4c)
+        pruefe(os.path.exists(os.path.join(r4c, "data", "nl-zustand.json"))
+               and not os.path.exists(os.path.join(r4c, STATE_REL)),
+               f"State-Datei folgt nicht `zustand.datei`: {verschieb}")
+        _, b_len, a_len = zustand_konfig(r4c)
+        pruefe(b_len == 2 and a_len == 3,
+               f"Historienlängen aus dem JSON ignoriert: {b_len}/{a_len}")
+
+        # 9b) Adressfeld: literal falsch ist ein Fund, aus der Konfiguration gelesen
+        #     ist erlaubt – der Betreiber benennt das Feld beim Anbieter, nicht im
+        #     Template. Die Wache prüft den Mechanismus, nicht eine kopierte Zahl.
+        r4b = os.path.join(tmp, "gut-feld")
+        os.makedirs(os.path.join(r4b, ".github", "workflows"), exist_ok=True)
+        baum(r4b, 'newsletterFormAction = "https://l.brevo.com/landing/x"\n',
+             seite_extra='<form action="https://l.brevo.com/landing/x"><input name="email">',
+             datenschutz='<h2 id="newsletter">Newsletter</h2><p>Double-Opt-In</p>',
+             workflow="BREVO_API_KEY\n--strict-inert\n",
+             footer_extra="newsletter-footer")
+        kopie = os.path.join(r4b, SHORTCODE_REL)
+        vorlage = _read(kopie)                      # erst lesen, dann öffnen (sonst leer)
+        with open(kopie, "w", encoding="utf-8") as fh:
+            fh.write(vorlage.replace('name="{{ $c.feld_email }}"', 'name="EMAIL_1"'))
+        f4b, _, _ = pruefe_capture(r4b)
+        pruefe(any(c == "feldname" for _, _, c in f4b),
+               f"ein literal falsches Adressfeld muss feldname melden: {f4b}")
+
         # 10–11) Quell-Fallback: kein Build (public/-Seite weg), Markdown trägt
         r5 = os.path.join(tmp, "quelle")
         os.makedirs(os.path.join(r5, ".github", "workflows"), exist_ok=True)
@@ -583,9 +666,15 @@ def _selftest() -> int:
         pruefe([a["slug"] for a in artikel] == ["2026-09-11-neu-1"],
                f"Digest-Auswahl falsch: {[a['slug'] for a in artikel]}")
         html, text, anzahl = baue_digest(artikel, heute.isoformat(), "Eine Mail/Tag")
-        pruefe(anzahl == 1 and "neu-1" in html and "{unsubscribe}" in text
-               and "Rechnung öffnen" in html,
+        pruefe(anzahl == 1 and "neu-1" in html and "{{unsubscribe}}" in text
+               and "Weiterlesen" in html and "Double-Opt-In" in text,
                f"Digest-Inhalt unvollständig ({anzahl})")
+        pruefe("{{unsubscribe}}" in html and "{{mirror}}" in html
+               and "{{update_profile}}" in html,
+               "Vorlagen-Marken des Anbieters fehlen im gebauten Digest")
+        pruefe("<script" not in html and "display:flex" not in html
+               and 'role="presentation"' in html,
+               "gebautes E-Mail ignoriert die Layout-Regeln (Q2)")
         leeren = baue_digest([], heute.isoformat(), "x")
         pruefe(leeren[2] == 0 and not leeren[0],
                "Digest ohne Artikel erzeugt leere Mail")
@@ -627,7 +716,7 @@ def _selftest() -> int:
         return 2
     print(f"✅ Newsletter-Selbsttest: {zaehler} Fälle grün (INERT, totes "
           f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
-          f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung).")
+          f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, State-Konfiguration).")
     return 0
 
 
@@ -682,11 +771,18 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
                   .isoformat(timespec="seconds"),
                   "kampagne_id": kennung})
     if not test_adresse:
-        neu = state.get("versandene_artikel", [])
+        # Nur nach echtem Versand: ein Testlauf war keine Ausgabe, und wer ihn
+        # zählte, müsste sich bald über sich selbst wundern (Q15, Duplikatschutz).
+        _, betreff_len, artikel_len = zustand_konfig(root)
+        verlauf = [b for b in state.get("zuletzt_betreff", []) if b]
+        if betreff and betreff not in verlauf:
+            verlauf.append(betreff)
+        state["zuletzt_betreff"] = verlauf[-betreff_len:]
+        schon = state.get("versandene_artikel", [])
         for slug in state.get("pending", []):
-            if slug not in neu:
-                neu.append(slug)
-        state["versandene_artikel"] = sorted(neu)[-400:]
+            if slug not in schon:
+                schon.append(slug)
+        state["versandene_artikel"] = sorted(schon)[-artikel_len:]
         state.pop("pending", None)
     speichere_state(root, state)
     return 0
@@ -702,6 +798,9 @@ def main(argv=None) -> int:
     ap.add_argument("--send", action="store_true")
     ap.add_argument("--live", action="store_true",
                     help="wirklich senden (sonst dry-run, auch mit --send)")
+    ap.add_argument("--trotz-qa", action="store_true",
+                    help="Versand trotz QA-Funden (Betreuer-Ausnahme; Funde werden "
+                         "dennoch protokolliert)")
     ap.add_argument("--test-adresse", default="")
     ap.add_argument("--days", type=int, default=1)
     ap.add_argument("--out", default="")
@@ -742,30 +841,44 @@ def main(argv=None) -> int:
     artikel = [a for a in live_artikel(root, heute - datetime.timedelta(days=max(1, args.days)))
                if a["slug"] not in schon]
     p = params(root)
-    html, text, anzahl = baue_digest(artikel, heute.isoformat(),
-                                    p.get("newsletterPromise") or "Die Sparechnungen des Tages.")
+    ausgabe = baue_ausgabe(artikel, heute.isoformat(),
+                           p.get("newsletterPromise") or "Die Sparechnungen des Tages.",
+                           root=root)
+    html, text, anzahl = ausgabe["html"], ausgabe["text"], ausgabe["anzahl"]
     if anzahl == 0:
         print("📬 Digest: nichts zu senden – seit dem letzten Lauf ist nichts Neues "
               "erschienen (oder alles wurde schon versandt).")
         return rc_gesamt
-    # Bewusst NICHT unter public/: ein gebauter Digest enthält die Brevo-Marke
-    # {unsubscribe}, und die liegt sonst als „Link" im Auslieferungszustand – wo
-    # er einen defekten internen Link markschiert und im schlimmsten Fall als
-    # Newsletter-Ausgabe im Index landete. CI schreibt nach /tmp (siehe Workflow).
+    # Bewusst NICHT unter public/: der gebaute Digest trägt die Vorlagen-Marken
+    # {{unsubscribe}}, {{mirror}}, {{update_profile}} – die lägen sonst als
+    # „Links“ im Auslieferungszustand, wo der Link-Check sie als defekte interne
+    # Ziele zählt und Hugo sie im schlimmsten Fall in den Index schreibt. CI legt
+    # sie nach /tmp (siehe Workflow).
     out_dir = args.out or os.path.join(tempfile.gettempdir(), "ff-newsletter")
     os.makedirs(out_dir, exist_ok=True)
     for ende, inhalt in (("html", html), ("txt", text)):
         with open(os.path.join(out_dir, f"digest-{heute.isoformat()}.{ende}"),
                   "w", encoding="utf-8") as fh:
             fh.write(inhalt)
-    betreff = re.sub(r"^FranksFinanzcheck:\s*", "FranksFinanzcheck: ",
-                     (f"FranksFinanzcheck: {artikel[0]['titel']}" if anzahl == 1 else
-                      f"FranksFinanzcheck: {anzahl} Sparechnungen für {heute.isoformat()}"))
+    betreff = ausgabe["betreff"]
     print(f"📬 Digest gebaut: {anzahl} Artikel → {out_dir}/digest-{heute.isoformat()}.html")
     for a in artikel[:8]:
         print(f"   • {a['titel'][:66]} ({a['datum']})")
     state["pending"] = [a["slug"] for a in artikel]
     speichere_state(root, state)
+    # Vor-Versand-Prüfung: die Wache kennt das gebaute E-Mail, nicht die Absicht.
+    pruef = qa.pruefe(ausgabe, konf=studio.konfiguration(root), materiale=ausgabe["material"],
+                      zustand=state, root=root)
+    for f in pruef["funde"]:
+        print(f"   ❌ QA [{f['regel']}] {f['meldung']}")
+    for w in pruef["warnungen"]:
+        print(f"   ⚠ QA [{w['regel']}] {w['meldung']}")
+    print(f"   Vor-Versand-Prüfung: {pruef['score']}/100 · {pruef['regeln_geprueft']} Regeln · "
+          f"{len(pruef['funde'])} Funde, {len(pruef['warnungen'])} Warnungen")
+    if not pruef["bestanden"] and not args.trotz_qa:
+        print("   ❌ Versand blockiert: die Vor-Versand-Prüfung meldet Funde. Bauen bleibt "
+              "erlaubt, Senden nicht – Ausnahmeschalter: --trotz-qa.")
+        return 1
     if args.send:
         rc_gesamt = max(rc_gesamt, versende(root, html, text, betreff,
                                             dry_run=not args.live,

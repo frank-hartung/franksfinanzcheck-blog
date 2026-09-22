@@ -110,6 +110,11 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "schema_seo_gate.py", "generate_pwa_icons.py", "report_hygiene.py",
           "live_policy_guard.py", "draft_triage.py", "check_uniqueness.py",
           "audio_coverage_check.py", "newsletter_digest.py",
+          # Newsletter-Studio (22.09.2026, 0 €): das Design-System leitet jede
+          # Mail-Farbe aus dem Build-CSS her, die Vor-Versand-Wache misst 20
+          # Regeln nach. Beides sind Wachen wie die andren – ohne sie wäre
+          # „Marke geprüft“ wieder eine Behauptung in einer Anleitung.
+          "newsletter_studio.py", "newsletter_qa.py",
           # Social-Autopilot: der fail-closed Selbsttest der Kanallogik
           "social_studio.py",
           # Alarm-Routing (#272): Besitz, Kadenz, Schließpfad
