@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 6,
-  "generated_at": "2026-09-22T08:49:16Z",
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-09-22T09:58:12Z",
   "candidates": [
     {
       "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
@@ -80,33 +80,40 @@
       }
     },
     {
+      "slug": "2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
+      "ready": true,
+      "sha256": "3857555b03681288eb16d52746e5ff952b59c1818008b67fdd6a4aab565a9c2c",
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
       "slug": "2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
       "ready": false,
-      "sha256": "96f8afeb768c0d8a4df992fb46906bb0728f6a8c29eb4dac7e081b32c00c813c",
-      "reason": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW8 Zeile 175: Anker nennt kein Angebot – der Leser erfährt erst nach dem Klick, dass er zu „Stromtarife“ (CHECK24) kommt",
+      "sha256": "5a0aa7eca93bf67b3bfe9e790ccf5dea6e14ac8cb7054ff90e6bd7f42189648f",
+      "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
       "details": [
         "🛑 2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW8 Zeile 175: Anker nennt kein Angebot – der Leser erfährt erst nach dem Klick, dass er zu „Stromtarife“ (CHECK24) kommt",
         "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.934,
+      "score": 0.916,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.78,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
-    }
-  ],
-  "blocked": [
-    {
-      "slug": "2026-09-22-50-30-20-im-test-warum-dein-budget-2026-ein-update-braucht",
-      "grund": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW1 Zeile 111: Anker verspricht „CHECK24-Vergleichsportal“, der Link führt zu „Stromtarife“ (CHECK24: check24.net/stromanbieter-wechseln/); IW8 ",
-      "hits": 2
     }
   ]
 }

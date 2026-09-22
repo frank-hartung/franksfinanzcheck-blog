@@ -923,7 +923,7 @@
  },
  "2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
   "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-22T08:48:15+00:00",
+  "ts": "2026-09-22T09:57:22+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -933,6 +933,15 @@
  "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "title": "7 Gewohnheiten für finanzielle Freiheit",
   "ts": "2026-09-22T09:23:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
+  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
+  "ts": "2026-09-22T09:57:20+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
