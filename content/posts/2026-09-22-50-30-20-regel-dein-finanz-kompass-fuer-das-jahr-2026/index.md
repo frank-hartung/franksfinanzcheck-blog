@@ -29,6 +29,8 @@ Du willst 50-30-20-regel? Dein Kontostand am Monatsende gleicht einer Nullnummer
 Stell dir einen nebligen Dienstagabend vor. 
 Du sitzt am Küchentisch und starrst auf dein Online-Banking.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Eigentlich war der Monat unauffällig. 
 Trotzdem kratzt dein Saldo verdächtig an der Nulllinie. 
 Plötzlich meldet sich dein Stromanbieter per E-Mail.
