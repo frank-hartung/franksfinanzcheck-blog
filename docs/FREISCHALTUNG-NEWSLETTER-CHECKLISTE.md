@@ -1,6 +1,16 @@
 # 📬 FREISCHALTUNG NEWSLETTER – Agentur-Runbook (Kopier-los)
 
-**Stand:** 22. September 2026 · **Befehlsdokumente:**
+**Stand: 22. September 2026.**
+- ✅ Brevo-Konto, Liste `Blog-Abonnenten`, Formular `Blog-Anmeldung` (URL übernommen)
+- ✅ Repo: `capture.form_action` gefüllt, Footer-CTA/Wache/Doku-Sync, neue
+  *Newsletter-Wache* in der CI — PR
+  [#354](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/354),
+  alle Checks grün (u. a. Wache am frischen Build, Playwright)
+- ☐ Offen: Absender-Authentifizierung (SPF/DKIM „verifiziert“ in Brevo),
+  Secrets `BREVO_API_KEY` + `BREVO_LIST_ID` in GitHub (Schritt 4), AVV/DPA
+  (Schritt 5), Testlauf (6a)
+
+**Befehlsdokumente:**
 `ANLEITUNG-NEWSLETTER.md` (Schritte 1–6, Brevo-Konto) und
 `ANLEITUNG-NEWSLETTER-STUDIO.md` § 7 (Freischalten). Dieses Runbook ist nur
 die Reihenfolge mit den exakten Werten aus der Studio-SSOT
@@ -94,18 +104,13 @@ Optional: Variable `NEWSLETTER_ABSENDER`, falls der Absender sich je von
 `NEWSLETTER_TEST` – das existiert nicht; die Probe ist die Workflow-Eingabe
 `test_adresse` (Schritt 6a).
 
-## 5. Die eine JSON-Zeile (ich übernehme, sobald die URL da ist)
+## 5. Die eine JSON-Zeile — ✅ erledigt (22.09., PR #354)
 
-`data/newsletter_studio.json` → `capture` → `form_action` wird gefüllt
-(`hugo.toml` bleibt versiegelt, das JSON ist der vorgesehene Weg):
-
-```json
-"capture": { "form_action": "https://…sibforms.com/serve/<EURE-FORMULAR-ID>" }
-```
-
-Damit folgen **automatisch**: Inline-Formular auf `/newsletter/`, Streifen- und
-Footer-CTA auf allen Inhaltsseiten, § 8 wechselt auf „Anmeldung aktiv“, die
-Wache meldet `aktiv` statt INERT.
+`data/newsletter_studio.json` → `capture` → `form_action` ist gefüllt
+(`hugo.toml` bleibt versiegelt, das JSON ist der vorgesehene Weg), die URL
+bytegenau aus dem Brevo-Formular. Damit folgen **automatisch**: Inline-Formular
+auf `/newsletter/`, Streifen- und Footer-CTA auf allen Inhaltsseiten, § 8
+wechselt auf „Anmeldung aktiv“, die Wache meldet `aktiv` statt INERT.
 
 ## 6. Verifikation & erster Versand (in dieser Reihenfolge)
 
