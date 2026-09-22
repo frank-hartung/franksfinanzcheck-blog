@@ -20,9 +20,25 @@ werden hier als Verträge festgenagelt:
      einen Heiler (Struktur → check_length, Meta-Satzende → meta_optimizer).
      Ein Gate ohne Heiler macht den Zielbestand unerreichbar.
 
-Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
+Nachzug 22.09.2026 (#349, Run 35706157938): Befund 6 war nur für zwei Gates
+handverdrahtet – der Intent-Wächter (publish_gate-Kriterium 5, IW0–IW9) lief
+in der Reserve-Kette NICHT mit, obwohl sein Heil-Aufruf `--heal --file <pfad>`
+genau dafür gebaut ist. Ein Kandidat mit „IW8 – Anker nennt kein Angebot“ war
+damit strukturell unreif (5/6, End-Gate rot) – der Fund wurde sieben Minuten
+später vom täglichen Affiliate-Lauf byte-identisch geheilt. Dazu zwei Befunde
+aus demselben Lauf, ebenfalls hier festgenagelt:
+
+  7. LAUF-ZÄHLUNG: Quarantäne zählt LÄUFE, nicht Zertifizierungen – ein
+     einziger Nachtlauf zertifiziert mehrfach (Stufe 3 + Konvergenz-Runden).
+     Vorher reichte EINE Nacht, um einen heilbaren Kandidaten auszumustern.
+  8. NICHTS GEHT VERLOREN: Ausgemusterte Entwürfe (`reserve_blocked`) sind
+     Reserve-Eigentum und werden gestagt; der Quarantäne-Zähler ist
+     versioniert. Am 22.09. verschwand ein quarantänisierter Kandidat spurlos,
+     weil die Staging-Politik ihn für fremden Content hielt.
 """
+import contextlib
 import datetime as dt
+import io
 import json
 import subprocess
 import sys
@@ -37,8 +53,12 @@ import meta_optimizer as mo          # noqa: E402
 import reserve_converge as rc        # noqa: E402
 import reserve_finisher as rf        # noqa: E402
 import reserve_gate as rg            # noqa: E402
+import reserve_healer_coverage as rhc  # noqa: E402
+import reserve_quarantine as rq      # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
 
+SCRIPTS = Path(__file__).resolve().parents[1]
+ROOT = SCRIPTS.parent
 LIVE_POST = "content/posts/2026-09-01-live/index.md"
 POOL_POST = "content/posts/2026-09-15-pool/index.md"
 
@@ -498,22 +518,254 @@ class QuarantaeneTests(unittest.TestCase):
 
     def test_pool_verlaesst_den_zaehler_nach_schwelle(self):
         rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
-        self.assertEqual(self.rq.record(rows, self.state, self.posts), [])
+        self.assertEqual(
+            self.rq.record(rows, self.state, self.posts, run_key="run:1"), [])
         self.assertTrue(self.rp.reserve_drafts(self.posts),
                         "nach dem ersten Fund muss der Kandidat im Pool bleiben")
-        blocked = self.rq.record(rows, self.state, self.posts)
+        blocked = self.rq.record(rows, self.state, self.posts,
+                                 run_key="run:2")
         self.assertEqual([b["slug"] for b in blocked], ["2026-09-15-block"])
         self.assertEqual(self.rp.reserve_drafts(self.posts), [],
                          "ausgemusterter Kandidat darf nicht mehr im Pool zählen")
 
-    def test_werkzeugfehler_zaehlen_nicht(self):
-        rows = [{"slug": "2026-09-15-block", "ready": False,
-                 "reason": "Gate-Ausnahme: hugo timeout"}]
-        self.rq.record(rows, self.state, self.posts)
-        self.assertFalse(self.rq.record(rows, self.state, self.posts))
+    def test_mehrere_zertifizierungen_eines_laufs_zaehlen_einmal(self):
+        """#349: Eine Nacht zertifiziert mehrfach (Stufe 3 + Konvergenz)."""
+        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        for _ in range(3):          # derselbe Workflow-Lauf
+            self.assertEqual(
+                self.rq.record(rows, self.state, self.posts, run_key="run:1"),
+                [], "derselbe Lauf darf nicht mehrfach zählen")
+        state = self.rq.load_state(self.state)
+        self.assertEqual(state["2026-09-15-block"]["hits"], 1)
         self.assertIn("reserve: true",
                       (self.posts / "2026-09-15-block" / "index.md")
                       .read_text(encoding="utf-8"))
+        # Zweiter Lauf mit demselben Fund -> Schwelle erreicht, Quarantäne.
+        blocked = self.rq.record(rows, self.state, self.posts, run_key="run:2")
+        self.assertEqual([b["slug"] for b in blocked], ["2026-09-15-block"])
+
+    def test_lauf_kennung_kommt_aus_der_umgebung(self):
+        import os
+        alt = os.environ.get("GITHUB_RUN_ID")
+        try:
+            os.environ["GITHUB_RUN_ID"] = "35706157938"
+            self.assertEqual(self.rq.lauf_kennung(), "run:35706157938")
+            os.environ.pop("GITHUB_RUN_ID", None)
+            self.assertTrue(self.rq.lauf_kennung().startswith("lokal:"))
+        finally:
+            if alt is None:
+                os.environ.pop("GITHUB_RUN_ID", None)
+            else:
+                os.environ["GITHUB_RUN_ID"] = alt
+
+    def test_werkzeugfehler_zaehlen_nicht(self):
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": "Gate-Ausnahme: hugo timeout"}]
+        self.rq.record(rows, self.state, self.posts, run_key="run:1")
+        self.assertFalse(self.rq.record(rows, self.state, self.posts,
+                                        run_key="run:2"))
+        self.assertIn("reserve: true",
+                      (self.posts / "2026-09-15-block" / "index.md")
+                      .read_text(encoding="utf-8"))
+
+    def test_ausgemusterter_entwurf_ist_reserve_eigentum(self):
+        """#349: Der Entwurf bleibt im Bestand – und muss deshalb gestagt werden.
+
+        Am 22.09.2026 verschwand `2026-09-22-50-30-20-im-test-…` spurlos:
+        Quarantäne strich die reserve-Fahne, die Staging-Politik hielt die
+        Datei danach für fremden Content, sie wurde nie committet.
+        """
+        self.assertEqual(
+            self.rq.record([{"slug": "2026-09-15-block", "ready": False,
+                             "reason": self.FUND}], self.state, self.posts,
+                           run_key="run:1"), [])
+        self.assertEqual(
+            [b["slug"] for b in self.rq.record(
+                [{"slug": "2026-09-15-block", "ready": False,
+                  "reason": self.FUND}], self.state, self.posts,
+                run_key="run:2")], ["2026-09-15-block"])
+        index = self.posts / "2026-09-15-block" / "index.md"
+        self.assertIn("reserve_blocked:", index.read_text(encoding="utf-8"))
+        self.assertTrue(rsg.is_reserve_owned(index),
+                        "ausgemusterter Entwurf ist Reserve-Eigentum")
+        self.assertIn("data/reserve-quarantine.json", rsg.STAGE_PATHS,
+                      "der Quarantäne-Zähler muss den Lauf überleben")
+        self.assertIn("data/reserve-quarantine.json", rsg.ALLOWED_FILES)
+
+
+class IntentHeilerTests(unittest.TestCase):
+    """Nachzug 22.09.2026 (#349, Run 35706157938).
+
+    publish_gate-Kriterium 5 (Intent-Wächter, IW0–IW9) hatte in der Reserve-
+    Kette keinen Heiler. Der reale Nachtlauf erzeugte einen Kandidaten, der
+    Wächter meldete „IW8 – Anker nennt kein Angebot“, die Zertifizierung läuft
+    STRICT-DRY (schreibt nichts) → 5/6, End-Gate „Stock shortage must not look
+    successful“ rot. Sieben Minuten später heilte der tägliche Affiliate-Lauf
+    DENSELBEN Fund in DERSELBEN Datei byte-identisch – mit `--fix --heal
+    --file`, also genau dem Aufruf, für den der Wächter gebaut ist.
+    """
+
+    KAPUTT = ("Intro zum Stromsparen im Haushalt.\n\n"
+              "> 💶 **Spar-Tipp zwischendurch:** Vergleiche jetzt und sichere "
+              "dir den besten Tarif: [**Zum Vergleich**](/go/strom/)\n")
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.index = Path(self.tmp.name) / "2026-09-22-strom" / "index.md"
+        self.index.parent.mkdir(parents=True)
+        self.index.write_text(
+            '---\ntitle: "Testartikel Strom"\ndescription: "Test"\n'
+            "date: 2026-09-22T06:00:00Z\ndraft: true\nreserve: true\n"
+            'tags: ["Strom sparen"]\ncategories: ["Ratgeber"]\n'
+            'pillar: "strom-sparen"\nauthor: "Frank Hartung"\n---\n\n'
+            + self.KAPUTT, encoding="utf-8")
+
+    def _guard(self, *args) -> dict:
+        """Wächter datei-bezirkelt, ohne Report-/State-Schreibzugriff."""
+        proc = subprocess.run(
+            [sys.executable, str(SCRIPTS / "affiliate_intent_guard.py"),
+             *args, "--file", str(self.index), "--json"],
+            cwd=str(ROOT), capture_output=True, text=True)
+        self.assertTrue(proc.stdout.strip(),
+                        f"keine Auswertung: rc={proc.returncode} {proc.stderr}")
+        return json.loads(proc.stdout)
+
+    def test_iw8_fund_wird_vor_der_zertifizierung_geheilt(self):
+        vorher = self._guard()
+        self.assertEqual(vorher["exit_code"], 1, "IW8 muss als Fund erkannt werden")
+        self.assertTrue(any(f["code"] == "IW8" for f in vorher["findings"]),
+                        vorher["findings"])
+        geheilt = self._guard("--fix", "--heal")
+        self.assertEqual(geheilt["exit_code"], 0, geheilt["findings"])
+        self.assertTrue(geheilt["healed"], "der Fund muss deterministisch geheilt werden")
+        text = self.index.read_text(encoding="utf-8")
+        self.assertIn("/go/strom/", text, "der Affiliate-Link darf nicht verloren gehen")
+        # IW8 verlangt: Der Anker NENNT das Angebot (Route = Stromtarife) –
+        # die konkrete Formulierung ist Sache des Kontrakts, nicht des Tests.
+        self.assertRegex(text, r"\[\*\*[^*]*Strom[^*]*\*\*\]\(/go/strom/\)",
+                         "der Anker muss das Angebot nennen (IW8)")
+        # Idempotenz: der zweite Heil-Lauf ändert nichts mehr.
+        nachher = text
+        self.assertEqual(self._guard("--fix", "--heal")["exit_code"], 0)
+        self.assertEqual(self.index.read_text(encoding="utf-8"), nachher)
+
+    def test_heiler_ist_dateibezirkelt_in_der_reserve_kette_verdrahtet(self):
+        schritte = [e for e in rf.HEALER_CHAIN
+                    if e[0] == "affiliate_intent_guard.py"]
+        self.assertTrue(schritte,
+                        "affiliate_intent_guard.py fehlt in der Heiler-Kette (#349)")
+        self.assertTrue(all("--fix" in e[1] and "--heal" in e[1] and e[2] == "file"
+                            for e in schritte),
+                        "Intent-Heilung muss datei-bezirkelt laufen (nie korpusweit)")
+        self.assertGreaterEqual(len(schritte), 2,
+                                "nach jedem KI-Schritt und vor der Zertifizierung heilen")
+        self.assertEqual(rf.HEALER_CHAIN[-1][0], "affiliate_intent_guard.py",
+                         "das Intent-Gate ist ein hartes Publish-Gate-Kriterium "
+                         "– nach ihm darf kein Heiler mehr am Kandidaten "
+                         "schreiben (#349)")
+
+    def test_kette_uebergibt_den_kandidatenpfad_an_den_waechter(self):
+        """Beweist die Verdrahtung: Scope „file“ reicht --file durch.
+
+        Der Test fängt den echten Aufruf ab (kein API-Zugriff, kein Schreiben)
+        und prüft, dass genau der Kandidat als `--file` ankommt – eine Kette,
+        die den Wächter korpusweit startet, wäre bei Entwürfen blind.
+        """
+        rufe = []
+
+        class FakeProc:
+            returncode = 0
+            stdout = "ok\n"
+
+        def fake_run(cmd, **kw):
+            if "affiliate_intent_guard.py" in " ".join(cmd):
+                rufe.append(cmd)
+            return FakeProc()
+
+        with patch.object(rf.subprocess, "run", fake_run):
+            rf.run_chain([], [self.index], env={})
+        self.assertTrue(rufe, "der Wächter wurde von der Kette nie aufgerufen")
+        for cmd in rufe:
+            self.assertIn("--file", cmd, cmd)
+            self.assertEqual(cmd[cmd.index("--file") + 1], str(self.index), cmd)
+            self.assertIn("--fix", cmd, cmd)
+
+
+class DeckungsWacheTests(unittest.TestCase):
+    """Nachzug 22.09.2026 (#349): Die Klasse, nicht nur der Einzelfall.
+
+    Der Vertrag „jede ablehnende Publish-Gate-Regel hat einen Heiler in der
+    Reserve-Kette“ war für zwei Gates handverdrahtet. Die Wache liest die Regeln
+    aus publish_gate.py und prüft die Deckung – ein neues Gate ohne Heiler oder
+    ein gelöschter Eintrag fällt sofort auf.
+    """
+
+    def test_alle_gate_regeln_sind_gedeckt(self):
+        b = rhc.deckung()
+        self.assertEqual(b["luecken"], [], "Gate-Regel ohne Heiler")
+        self.assertEqual(b["tote_ausnahmen"], [], "Eintrag deckt nichts mehr")
+        self.assertIn("affiliate_intent_failures",
+                      {e["regel"] for e in b["gedeckt"]},
+                      "der Intent-Wächter muss gedeckt sein (#349)")
+        self.assertGreaterEqual(len(b["gedeckt"]), 9,
+                                "die Regeln werden aus publish_gate.py gelesen")
+
+    def test_fehlender_heiler_wird_erkannt(self):
+        """Der reale #349-Fall: Regel im Gate, Heiler nicht in der Kette."""
+        kette = [e for e in rf.HEALER_CHAIN
+                 if e[0] != "affiliate_intent_guard.py"]
+        b = rhc.deckung(chain=kette)
+        self.assertIn(("affiliate_intent_failures", "nicht-in-der-kette"),
+                      {(e["regel"], e["art"]) for e in b["luecken"]})
+
+    def test_neue_gate_regel_ohne_deckung_wird_erkannt(self):
+        text = (SCRIPTS / "publish_gate.py").read_text(encoding="utf-8")
+        b = rhc.deckung(text + "\ndef branding_failures(candidates):\n    pass\n")
+        self.assertIn(("branding_failures", "keine-deckung"),
+                      {(e["regel"], e["art"]) for e in b["luecken"]})
+
+    def test_luecke_stoppt_vor_jedem_schreibzugriff(self):
+        """Struktur vor Arbeit: eine Lücke beendet `finish()` mit rc=1.
+
+        Ohne diese Sperre liefe die Nacht wieder als stiller 5/6-Lauf aus:
+        die Veredelung hätte den Pool gehoben, die Zertifizierung wäre an einer
+        unheilbaren Gate-Regel gescheitert und der End-Gate hätte nur die
+        Knappheit gemeldet (#349). Der Test verbietet jeden Zugriff auf den
+        Pool, bevor die Deckung steht.
+        """
+        gerufen = {}
+
+        def fake_write_report(results, targets, started, isolation=None,
+                              deckung=None):
+            gerufen["targets"] = targets
+            gerufen["deckung"] = deckung
+
+        luecke = {
+            "gedeckt": [],
+            "luecken": [{"regel": "affiliate_intent_failures",
+                         "art": "nicht-in-der-kette",
+                         "heiler": ["affiliate_intent_guard.py"]}],
+            "tote_ausnahmen": [],
+        }
+
+        def platzt(*a, **kw):
+            raise AssertionError("finish() hat den Pool angefasst, obwohl die "
+                                 "Heiler-Deckung lückenhaft ist")
+
+        with patch.object(rf, "heiler_deckung", lambda: luecke), \
+                patch.object(rf, "write_report", fake_write_report), \
+                patch.object(rf, "certified_slugs", platzt), \
+                patch.object(rf, "now_utc_iso", lambda: "2026-09-22T09:00:00Z"):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                rc = rf.finish()
+        self.assertEqual(rc, 1, "eine Deckungslücke muss den Lauf laut stoppen")
+        self.assertIn("::error::", buf.getvalue(),
+                      "GitHub muss die Lücke als Fehler sehen")
+        self.assertEqual(gerufen["targets"], [],
+                         "kein Kandidat darf vor der Deckungsprüfung gehoben sein")
+        self.assertEqual(gerufen["deckung"], luecke)
 
 
 class GateDiagnoseTests(unittest.TestCase):

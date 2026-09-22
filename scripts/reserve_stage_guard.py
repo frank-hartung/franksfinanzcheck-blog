@@ -16,10 +16,33 @@ WARUM (Root-Cause 15.09.2026, Run 34949097389):
     1. reserve_finisher.py (Isolation-Wächter): stellt jede Änderung außerhalb
        der Pool-Kandidaten bytegenau zurück bzw. legt neue Fremd-Dateien in
        Quarantäne.
-    2. DIESES Skript (Staging-Politik): stagt nur Pool-Pfade, prüft jede
-       gestagte Content-Datei auf die `reserve: true`-Kennzeichnung, nimmt
-       Fremd-Dateien wieder aus dem Index und meldet, was liegen bleibt.
+    2. DIESES Skript (Staging-Politik): stagt nur Reserve-Pfade, prüft jede
+       gestagte Content-Datei auf die Reserve-Zugehörigkeit, nimmt Fremd-
+       Dateien wieder aus dem Index und meldet, was liegen bleibt.
   Beide sind unabhängig voneinander – fällt eine Lage aus, greift die andere.
+
+REPARATUR 22.09.2026 (#349, Run 35706157938) – ZWEI Befunde, eine Wurzel:
+  Die Staging-Politik kannte nur `reserve: true` als Reserve-Eigentum. Zwei
+  Arten von Dateien, die der Reserve-Lauf SELBST erzeugt bzw. verändert, fielen
+  dadurch durch das Raster:
+
+    a) AUSGEMUSTERTE Entwürfe (`reserve_blocked:`, geschrieben von
+       reserve_quarantine.block_candidate). Das Regelwerk sagt ausdrücklich
+       „nichts wird gelöscht – der Entwurf bleibt im Bestand, draft_triage
+       zeigt den Grund“. Real verschwand am 22.09. ein frisch erzeugter
+       Kandidat (`2026-09-22-50-30-20-im-test-…`) SPURLOS: Quarantäne strich
+       die reserve-Fahne, dieses Skript hielt die Datei danach für fremden
+       Content, sie wurde nicht committet und starb mit dem Runner.
+    b) Der QUARANTÄNE-ZÄHLER (`data/reserve-quarantine.json`) war gar nicht
+       versioniert: Das „Gedächtnis über Läufe hinweg“ (Schwellenwert zwei
+       Funde) begann jeden Lauf bei null. Gleichzeitig zählte eine einzige
+       Nacht doppelt, weil jede Zertifizierung (Stufe 3 + Konvergenz-Runden)
+       als eigener Fund gezählt wurde – siehe reserve_quarantine.lauf_kennung.
+
+  Beides ist hier geheilt und im Selbsttest als Vertrag festgehalten:
+  `reserve_blocked`-Entwürfe werden gestagt wie Pool-Kandidaten, und der
+  Zähler-Stand reist im Commit mit. Live-Content (`reserve_published`,
+  `draft: false`) bleibt weiterhin unberührt – das ist der Sinn der Lage.
 
 MODI:
   python3 scripts/reserve_stage_guard.py            # stagen + Kontrolle
@@ -41,14 +64,27 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# Pfade, die der Reserve-Lauf BESITZT (maschinengeneriert bzw. Pool-Inhalt).
+# Pfade, die der Reserve-Lauf BESITZT (maschinengeneriert bzw. Reserve-Inhalt).
+# `data/reserve-quarantine.json` gehört dazu (Reparatur 22.09.2026, #349): Der
+# Zähler „gleicher Fund in wie vielen LÄUFEN“ ist nur dann ein Gedächtnis, wenn
+# er den Lauf überlebt. Vorher war er ungetrackt – jeder Lauf begann bei null
+# (und gleichzeitig zählte eine einzige Nacht durch die Mehrfach-Zertifizierung
+# doppelt, siehe reserve_quarantine.lauf_kennung).
 ALLOWED_PREFIXES = ("content/posts/", "static/images/covers/")
-ALLOWED_FILES = ("data/reserve-readiness.json", "data/covers_manifest.json")
+ALLOWED_FILES = ("data/reserve-readiness.json", "data/covers_manifest.json",
+                 "data/reserve-quarantine.json")
 STAGE_PATHS = ("content/posts", "static/images/covers",
                "data/reserve-readiness.json", "data/covers_manifest.json",
-               "data/audit")
+               "data/reserve-quarantine.json", "data/audit")
 
 RE_RESERVE = re.compile(r"(?m)^reserve:\s*(true|yes|1)\s*$")
+# Ausgemusterte Entwürfe (Quarantäne) bleiben im Bestand – sie sind Reserve-
+# Eigentum wie der Pool selbst. Ohne diese Kennung fielen sie aus der
+# Staging-Politik und wären nach dem Lauf verloren: Am 22.09.2026 verschwand
+# genau so ein frisch erzeugter Kandidat (`2026-09-22-50-30-20-im-test-…`)
+# spurlos – quarantänisiert, nicht als Pool-Datei erkannt, damit nie
+# committet, obwohl das Regelwerk „nichts wird gelöscht“ zusagt (#349).
+RE_BLOCKED = re.compile(r"(?m)^reserve_blocked:")
 
 
 def git(root: Path, *args: str) -> str:
@@ -66,13 +102,19 @@ def frontmatter(path: Path) -> str:
     return parts[1] if len(parts) == 3 and parts[0] == "" else ""
 
 
-def is_pool_file(path: Path) -> bool:
-    """Pool-Content = Reserve-Entwurf (`reserve: true`).
+def is_reserve_owned(path: Path) -> bool:
+    """Reserve-Content = Pool-Kandidat ODER ausgemusterter Entwurf.
+
+    Beide gehören dem Reserve-Lauf: `reserve: true` (Pool) und
+    `reserve_blocked:` (von `reserve_quarantine.py` ausgemustert, „nichts wird
+    gelöscht, der Entwurf bleibt im Bestand“). Ohne den zweiten Fall verlor der
+    Lauf einen quarantänisierten Kandidaten vollständig (#349).
 
     Live gewordene Reserve-Artikel tragen `reserve_published` – sie gehören
     dann der Engine-/Deploy-Kette und werden hier bewusst NICHT mehr gestagt.
     """
-    return bool(RE_RESERVE.search(frontmatter(path)))
+    fm = frontmatter(path)
+    return bool(RE_RESERVE.search(fm)) or bool(RE_BLOCKED.search(fm))
 
 
 def staged_paths(root: Path) -> list:
@@ -98,13 +140,15 @@ def stage(root: Path = ROOT, dry_run: bool = False) -> dict:
     staged = staged_paths(root)
     bericht["gestagt"] = len(staged)
 
-    # Kontrolle: Jede gestagte Content-Datei muss ein Pool-Entwurf sein.
+    # Kontrolle: Jede gestagte Content-Datei muss Reserve-Eigentum sein
+    # (`reserve: true` = Pool-Kandidat, `reserve_blocked:` = ausgemustert und
+    # ausdrücklich aufbewahrt – #349).
     fremd_content = []
     for path in staged:
         if not path.startswith("content/posts/"):
             continue
         full = root / path
-        if full.exists() and not is_pool_file(full):
+        if full.exists() and not is_reserve_owned(full):
             fremd_content.append(path)
     if fremd_content and not dry_run:
         subprocess.run(["git", "restore", "--staged", *fremd_content],
@@ -117,7 +161,7 @@ def stage(root: Path = ROOT, dry_run: bool = False) -> dict:
             subprocess.run(["git", "checkout", "--", *restore],
                            cwd=str(root), capture_output=True, text=True)
         bericht["entfernt"] = fremd_content
-        print("::warning::Nicht-Pool-Content wurde gestagt und wieder "
+        print("::warning::Fremder Content wurde gestagt und wieder "
               "entfernt (Live-Content gehört der Engine-/Deploy-Kette):")
         for p in fremd_content:
             print(f"   - {p}")
@@ -206,6 +250,30 @@ def run_selftest() -> int:
         staged = staged_paths(repo)
         if "content/posts/2026-09-02-frueher-pool/index.md" in staged:
             fehler.append("Veröffentlichter Reserve-Post wurde gestagt")
+
+        # REPARATUR 22.09.2026 (#349): Ein ausgemusterter Kandidat
+        # (`reserve_blocked`) bleibt im Bestand – und muss deshalb gestagt
+        # werden. Am 22.09.2026 verschwand genau so ein Entwurf spurlos: Die
+        # Quarantäne strich die reserve-Fahne, der Stage-Guard hielt die Datei
+        # danach für fremden Content, sie wurde nie committet.
+        write("content/posts/2026-09-22-ausgemustert/index.md",
+              "---\ntitle: Ausgemustert\ndate: 2026-09-22T06:00:00Z\n"
+              "draft: true\nreserve_blocked: \"IW1/IW8 – Anker nennt kein "
+              "Angebot\"\nreserve_blocked_at: 2026-09-22T08:49:16Z\n---\nBody\n")
+        write("data/reserve-quarantine.json",
+              '{"2026-09-22-ausgemustert": {"signatur": "x", "hits": 2}}\n')
+        with mock.patch("sys.stdout"):
+            bericht = stage(root=repo)
+        staged = staged_paths(repo)
+        if "content/posts/2026-09-22-ausgemustert/index.md" not in staged:
+            fehler.append("Ausgemusterter Kandidat wurde nicht gestagt "
+                          "(Verlustgefahr) – #349")
+        if "data/reserve-quarantine.json" not in staged:
+            fehler.append("Quarantäne-Zähler wird nicht versioniert "
+                          "(Gedächtnis stirbt mit dem Lauf) – #349")
+        if bericht["entfernt"]:
+            fehler.append(f"Reserve-Eigentum fälschlich entfernt: "
+                          f"{bericht['entfernt']}")
 
     if fehler:
         print("🛑 RESERVE-STAGE-GUARD-SELFTEST FEHLGESCHLAGEN:")

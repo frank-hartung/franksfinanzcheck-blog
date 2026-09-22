@@ -24,10 +24,16 @@ Run 34967470666):
     * NUR deterministische Content-Funde. Werkzeug-/API-Ausnahmen
       („Gate-Ausnahme: …“) zählen nicht – ein Hugo-Timeout ist kein Urteil
       über den Artikel.
-    * Erst nach RESERVE_QUARANTINE_HITS (Default 2) Zertifizierungen mit
-      DEMSELBEN Fund. Jede Zertifizierung ist von einem vollen Durchlauf der
-      Heiler-Kette gedeckt – zwei gleiche Funde heißen also: reparatur-
-      resistent, nicht Pech.
+    * Erst nach RESERVE_QUARANTINE_HITS (Default 2) LÄUFEN mit DEMSELBEN Fund
+      (Reparatur 22.09.2026, #349: vorher zählte jede ZERTIFIZIERUNG – und ein
+      einziger Nachtlauf zertifiziert mehrfach: Stufe 3, dann jede Runde der
+      Konvergenz. Ein Kandidat konnte damit nach EINER Nacht ausgemustert
+      werden, obwohl der Vertrag „zwei Läufe“ lautet und jeder Lauf von einem
+      vollen Durchgang der Heiler-Kette gedeckt sein soll. Der Zähler trägt
+      jetzt die Lauf-Kennung (`GITHUB_RUN_ID`), die Zertifizierungen desselben
+      Laufs zählen zusammen genau einmal. Jede Zertifizierung ist von einem
+      vollen Durchlauf der Heiler-Kette gedeckt – zwei gleiche Funde in zwei
+      Läufen heißen also: reparatur-resistent, nicht Pech.
     * Nichts wird gelöscht. Der Entwurf bleibt im content/-Baum, verliert die
       `reserve: true`-Fahne und bekommt `reserve_blocked` + `reserve_blocked_at`.
       Damit zählt er nicht mehr in den Pool (reserve_pool.reserve_drafts),
@@ -101,6 +107,20 @@ def is_transient(grund: str) -> bool:
     return any(z.lower() in (grund or "").lower() for z in TRANSIENT)
 
 
+def lauf_kennung() -> str:
+    """Identität des laufenden Reserve-Laufs (eine Nacht = eine Kennung).
+
+    GitHub Actions setzt `GITHUB_RUN_ID` in jedem Step – auch die Zertifizierung
+    der Stufe 3 und jede Konvergenz-Runde gehören zu DEMSELBEN Lauf. Außerhalb
+    von Actions (Handlauf, Selbsttest) zählt der Kalendertag; ein Handlauf
+    erzeugt damit höchstens einen Zähler pro Tag.
+    """
+    run_id = (os.environ.get("GITHUB_RUN_ID") or "").strip()
+    if run_id:
+        return f"run:{run_id}"
+    return "lokal:" + dt.datetime.now(dt.timezone.utc).date().isoformat()
+
+
 def load_state(path: Path = STATE) -> dict:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -157,18 +177,26 @@ def block_candidate(slug: str, grund: str, posts_dir: Path = POSTS_DIR) -> str |
 
 
 def record(rows: list[dict], state_path: Path | None = None,
-           posts_dir: Path | None = None, *, apply: bool = True) -> list[dict]:
-    """Zählt Funde je Kandidat und mustert Reparatur-resistente aus.
+           posts_dir: Path | None = None, *, apply: bool = True,
+           run_key: str | None = None) -> list[dict]:
+    """Zählt Funde je Kandidat und mustert Reparatur-resistenten aus.
 
     `rows` ist die Kandidatenliste der Zertifizierung (data/reserve-readiness
     .json-Format). Rückgabe: Liste der in DIESEM Aufruf blockierten Kandidaten
     [{"slug", "grund", "hits"}].
+
+    `run_key` ist die Identität des LAUFS (Default: `lauf_kennung()`, also
+    `GITHUB_RUN_ID`). Mehrere Zertifizierungen derselben Nacht (Stufe 3 +
+    Konvergenz-Runden) zählen zusammen genau EINEN Zähler – vorher zählte jede
+    Zertifizierung, weshalb ein Kandidat nach einer einzigen Nacht ausgemustert
+    wurde, obwohl der Vertrag zwei Läufe verlangt (#349).
 
     Pfade werden BEIM AUFRUF aufgelöst, nicht als Default-Wert gebunden: Ein
     Default-Argument friert den Wert beim Import ein – Aufrufer (und Tests)
     können STATE/POSTS_DIR dann nicht mehr umlenken, und die Wache schreibt
     still in den echten Bestand. Befund aus dem Integrationstest 15.09.2026.
     """
+    key = run_key if run_key is not None else lauf_kennung()
     state_path = Path(state_path) if state_path else STATE
     posts_dir = Path(posts_dir) if posts_dir else POSTS_DIR
     limit = hits_limit()
@@ -192,7 +220,15 @@ def record(rows: list[dict], state_path: Path | None = None,
         if not eintrag or eintrag.get("signatur") != sig:
             eintrag = {"signatur": sig, "hits": 0, "first": now_iso(),
                        "grund": grund}
-        eintrag["hits"] = int(eintrag.get("hits", 0)) + 1
+        # Ein Lauf zählt genau einmal – auch wenn die Zertifizierung in
+        # derselben Nacht mehrfach läuft (#349). Ein neuer Fund (andere
+        # Signatur) beginnt wieder bei null und zählt in diesem Lauf.
+        if eintrag.get("lauf") != key:
+            eintrag["hits"] = int(eintrag.get("hits", 0)) + 1
+            eintrag["lauf"] = key
+            laeufe = [l for l in (eintrag.get("laeufe") or []) if l != key]
+            laeufe.append(key)
+            eintrag["laeufe"] = laeufe[-5:]      # Nachweis, gedeckelt
         eintrag["last"] = now_iso()
         eintrag["grund"] = grund
         state[slug] = eintrag
@@ -253,18 +289,31 @@ def run_selftest() -> int:
                 {"slug": "2026-09-15-gut", "ready": True}]
 
         # 1) Erster Fund: Zähler steht, aber es wird NICHT eingegriffen.
-        blocked = record(rows, state_path, posts, apply=True)
+        blocked = record(rows, state_path, posts, apply=True,
+                         run_key="run:1")
         if blocked:
             fehler.append(f"erster Fund darf nicht blockieren: {blocked}")
         text = (posts / "2026-09-15-block" / "index.md").read_text("utf-8")
         if "reserve_blocked" in text or "reserve: true" not in text:
             fehler.append("nach dem ersten Fund muss der Kandidat im Pool bleiben")
+        # 1b) REPARATUR 22.09.2026 (#349): Die Zertifizierung läuft in EINER
+        #     Nacht mehrfach (Stufe 3 + jede Konvergenz-Runde). Derselbe Fund
+        #     in DEMSELBEN Lauf ist EIN Zähler – vorher reichte eine Nacht,
+        #     um einen heilbaren Kandidaten auszumustern.
+        blocked = record(rows, state_path, posts, apply=True,
+                         run_key="run:1")
+        if blocked:
+            fehler.append(f"zweite Zertifizierung desselben Laufs darf nicht "
+                          f"blockieren: {blocked}")
+        if int(load_state(state_path)["2026-09-15-block"]["hits"]) != 1:
+            fehler.append("mehrere Zertifizierungen eines Laufs zählen mehrfach")
 
-        # 2) Zweiter Fund derselben Regel (andere Messwerte -> gleiche
+        # 2) Zweiter LAUF mit demselben Fund (andere Messwerte -> gleiche
         #    Signatur) -> Quarantäne greift.
         rows[0]["reason"] = ("quality-score 0.84 < 0.85 (schwach: spelling "
                              "0.52, typography 0.80)")
-        blocked = record(rows, state_path, posts, apply=True)
+        blocked = record(rows, state_path, posts, apply=True,
+                         run_key="run:2")
         if len(blocked) != 1 or blocked[0]["slug"] != "2026-09-15-block":
             fehler.append(f"zweiter gleicher Fund muss blockieren: {blocked}")
         text = (posts / "2026-09-15-block" / "index.md").read_text("utf-8")
@@ -277,12 +326,12 @@ def run_selftest() -> int:
         if text.startswith("---\n") is False or "\n---\n" not in text:
             fehler.append("Frontmatter-Grenzen müssen intakt bleiben")
 
-        # 3) Idempotenz: Derselbe Fund ein drittes Mal – der Kandidat ist
+        # 3) Idempotenz: Derselbe Fund in einem dritten Lauf – der Kandidat ist
         #    bereits ausgemustert, also kein zweiter Eingriff, kein Churn.
         before = text
         blocked2 = record([{"slug": "2026-09-15-block", "ready": False,
                             "reason": rows[0]["reason"]}], state_path, posts,
-                          apply=True)
+                          apply=True, run_key="run:3")
         if blocked2:
             fehler.append(f"bereits blockiert darf nicht erneut melden: {blocked2}")
         if (posts / "2026-09-15-block" / "index.md").read_text("utf-8") != before:
@@ -296,18 +345,38 @@ def run_selftest() -> int:
         if "2026-09-15-gut" in load_state(state_path):
             fehler.append("geheilter Kandidat muss den Zähler verlieren")
 
-        # 5) Werkzeugfehler zählen nicht (kein Content-Urteil).
+        # 5) Werkzeugfehler zählen nicht (kein Content-Urteil) – auch nicht
+        #    über mehrere Läufe hinweg.
         record([{"slug": "2026-09-15-gut", "ready": False,
-                 "reason": "Gate-Ausnahme: hugo timeout"}], state_path, posts)
+                 "reason": "Gate-Ausnahme: hugo timeout"}], state_path, posts,
+               run_key="run:1")
         record([{"slug": "2026-09-15-gut", "ready": False,
-                 "reason": "Gate-Ausnahme: hugo timeout"}], state_path, posts)
+                 "reason": "Gate-Ausnahme: hugo timeout"}], state_path, posts,
+               run_key="run:2")
         if "2026-09-15-gut" in load_state(state_path):
             fehler.append("Werkzeug-/API-Ausnahmen dürfen nicht aufzählen")
         text_gut = (posts / "2026-09-15-gut" / "index.md").read_text("utf-8")
         if "reserve_blocked" in text_gut:
             fehler.append("wegen Werkzeugfehler darf niemand ausgemustert werden")
 
-    # 6) Signatur: Zahlen/Slugs dürfen die Ursache nicht verschleiern.
+    # 6) Lauf-Kennung: GitHub-Actions-Läufe sind über GITHUB_RUN_ID getrennt,
+    #    außerhalb von Actions zählt der Kalendertag (Handlauf).
+    alt = os.environ.get("GITHUB_RUN_ID")
+    try:
+        os.environ["GITHUB_RUN_ID"] = "987654"
+        if lauf_kennung() != "run:987654":
+            fehler.append(f"GITHUB_RUN_ID nicht übernommen: {lauf_kennung()}")
+        os.environ.pop("GITHUB_RUN_ID", None)
+        if not lauf_kennung().startswith("lokal:"):
+            fehler.append(f"Ohne Actions muss der Kalendertag zählen: "
+                          f"{lauf_kennung()}")
+    finally:
+        if alt is None:
+            os.environ.pop("GITHUB_RUN_ID", None)
+        else:
+            os.environ["GITHUB_RUN_ID"] = alt
+
+    # 7) Signatur: Zahlen/Slugs dürfen die Ursache nicht verschleiern.
     a = signatur("Länge 1.134 Wörter < 1.200 (Struktur 0.70)")
     b = signatur("Länge 1.141 Wörter < 1.200 (Struktur 0.70)")
     if a != b:
@@ -319,8 +388,9 @@ def run_selftest() -> int:
         for f in fehler:
             print(f"   ✗ {f}")
         return 2
-    print("✅ Selbsttest reserve_quarantine: Zähler, Schwelle, Idempotenz, "
-          "Heilung, Werkzeugfehler-Ausnahme, Signatur-Bildung.")
+    print("✅ Selbsttest reserve_quarantine: Zähler je LAUF (#349), Schwelle, "
+          "Idempotenz, Heilung, Werkzeugfehler-Ausnahme, Lauf-Kennung, "
+          "Signatur-Bildung.")
     return 0
 
 
