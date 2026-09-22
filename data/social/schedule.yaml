@@ -1513,9 +1513,9 @@ items:
   date: '2026-09-22'
   time: '12:15'
   scheduled_at: '2026-09-22T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann:nutzen:2026-09-22
   channel: x
   slug: 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann
@@ -1525,9 +1525,9 @@ items:
   date: '2026-09-22'
   time: '13:15'
   scheduled_at: '2026-09-22T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-09-22
   channel: facebook
   slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
@@ -1537,9 +1537,9 @@ items:
   date: '2026-09-22'
   time: '15:15'
   scheduled_at: '2026-09-22T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:vergleich:2026-09-22
   channel: threads
   slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
@@ -1549,9 +1549,9 @@ items:
   date: '2026-09-22'
   time: '16:15'
   scheduled_at: '2026-09-22T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-09-22
   channel: x
   slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
