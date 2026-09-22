@@ -154,18 +154,22 @@ kaputtes *Siegel* nicht mehr wie Sabotage am *Kern* aussieht.
   Engine-Lauf, schreibt nichts): 9 eingefrorene Fälle + Kern-Beweis mit
   Siegel-Diagnose, Reparatur aus der Historie und Abbruchsicherheit.
   `python3 scripts/integrity_guard.py --selftest` → Exit 0.
-- **Regressionstests** (`scripts/tests/test_integrity_guard.py`): 23 neue
-  Tests — `SiegelZustandTests` (8: Bruchstelle, Muster, Chimäre, Kettenbruch,
-  Kappung, Legacy, kein stilles Verschlucken), `ReparaturTests` (9:
-  Quellenleiter, Bergung im flachen Klon, Ablehnung bei Drift, keine Quelle =
-  Exit 3, `--heal` heilt das Siegel, Gate bleibt read-only),
-  `SchreibsicherheitTests` (4: Abbruch, ungesundes Siegel, Rückleseprobe,
-  lautes Scheitern) und zwei neue Siegel-Prüfungen im ausgelieferten Baum
-  (`RepoSealTests`), inklusive „das Siegel ist mit seinem Beleg committet".
-  Die Datei läuft von 24 auf 47 Tests; `python3 -m unittest discover -s
-  scripts/tests` ist damit grün (die vier Import-Fehler des Gesamtlaufs sind
-  Umgebungs-Abhängigkeiten — `yaml`/`playwright` — und bestehen unabhängig
-  von diesem Vorfall).
+- **Regressionstests** (`scripts/tests/test_integrity_guard.py`): **27 neue
+  Tests** (Datei 24 → 51) — `SiegelZustandTests` (8: Bruchstelle, Muster,
+  Chimäre, Kettenbruch, Kappung, Legacy, kein stilles Verschlucken),
+  `ReparaturTests` (9: Quellenleiter, Bergung im flachen Klon, Ablehnung bei
+  Drift, keine Quelle = Exit 3, `--heal` heilt das Siegel, Gate bleibt
+  read-only), `SchreibsicherheitTests` (4: Abbruch, ungesundes Siegel,
+  Rückleseprobe, lautes Scheitern), Siegel-Prüfungen im ausgelieferten Baum
+  (`RepoSealTests`, inklusive „das Siegel ist mit seinem Beleg committet")
+  und `CliTests` (5), die den **Aufrufvertrag als Subprozess** fahren — genau
+  so, wie die Workflows den Wächter starten. Diese fünf haben sofort einen
+  echten Defekt gefunden: Der Beweis-Modus legte seine Probe als
+  `data/integrity_probe_tmp.json` **im Baum** ab und starb auf Bäumen ohne
+  `data/`-Verzeichnis; jetzt schreibt `--selftest` nachweislich nichts mehr.
+  `python3 -m unittest discover -s scripts/tests` → **597 Tests grün**
+  (7 übersprungen; Abhängigkeiten `pyyaml`, `pillow`, `cryptography` —
+  die Workflows installieren sie selbst).
 - **Kein Inhalts-Eingriff:** Der Kern steht seit der Reparatur wieder exakt
   auf der Signatur `files_sha256 224bec94…`; die Reparatur hat **null** Dateien
   neu gezeichnet (Akte: `"geaendert": []`, `"art": "repair"`).
@@ -198,3 +202,21 @@ python3 -m unittest discover -s scripts/tests          # Regressionstests
   Signatur-Autorität mit Schlüssel. Wer Push-Rechte hat, kann neu signieren —
   das war vorher so und bleibt so. Was sich ändert: Ein *unbeabsichtigter*
   Schaden ist jetzt laut, benannt und innerhalb eines Schrittes geheilt.
+
+## Ausgerollt und verifiziert (22.09.2026)
+
+- **Ausrollen:** PR #347, Squash-Merge `8da1cf7d` auf `main`; danach der
+  Bot-Commit `7c356c8`. Die Siegel-Kette gilt über beide Commits hinweg —
+  `--gate` meldet auf `7c356c8` weiterhin „43 Kerndateien entsprechen exakt
+  dem signierten Stand".
+- **Verifikation auf `main`** (die Schritte des Engine-Jobs, 1:1 auf
+  `7c356c8` nachgefahren): Schritt 4 `--heal` → Exit 0 und **kein** Diff an
+  `data/integrity_lock.json`/`data/integrity_history.jsonl` (nichts zu
+  committen); `--gate`, `--selftest`, `--drift-audit` → Exit 0;
+  `history_guard.py` 56/56; alle sieben Phase-0.5-Selbsttests → Exit 0; der
+  zweite rote CI-Schritt `unittest discover` → **597 Tests grün**.
+- **Den Lauf selbst bestätigt der nächste Slot** (Mo/Mi/Fr; Mi 23.09.2026,
+  06:10 UTC). Ein manueller Nachstart war hier nicht möglich: Der verwendete
+  Zugang hat keine `workflows`-Berechtigung, `gh workflow run` antwortet mit
+  HTTP 403. Menschen können unter Actions → „Content-Engine v2" →
+  „Run workflow" jederzeit vorziehen.
