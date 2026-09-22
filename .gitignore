@@ -114,3 +114,9 @@ shots/
 # Playwright E2E-Artefakte
 test-results/
 playwright-report/
+
+# Atomares Schreiben des Integritäts-Siegels (22.09.2026, Issue #346):
+# Wird ein Lauf mitten im Schreibvorgang beendet (Kill/Timeout), bleibt die
+# Temp-Fassung neben dem Ziel liegen. Sie ist Müll, kein Artefakt – sie darf
+# nie in einen Commit rutschen (der Guard räumt sie beim nächsten Schreiben weg).
+data/integrity_lock.json.tmp
