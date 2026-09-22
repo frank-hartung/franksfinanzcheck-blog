@@ -545,7 +545,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-21T16:01:51+00:00",
+  "ts": "2026-09-22T09:23:18+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -859,8 +859,8 @@
   }
  },
  "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich": {
-  "title": "Zahnzusatzversicherung 2026: Tarife & Erstattung im Vergleich",
-  "ts": "2026-09-21T10:01:41+00:00",
+  "title": "Zahnzusatzversicherung 2026: Tarife & Erstattung",
+  "ts": "2026-09-22T09:23:16+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -868,8 +868,8 @@
   }
  },
  "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten": {
-  "title": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen",
-  "ts": "2026-09-21T09:39:29+00:00",
+  "title": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten &",
+  "ts": "2026-09-22T09:23:11+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -927,6 +927,15 @@
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
+  "title": "7 Gewohnheiten für finanzielle Freiheit",
+  "ts": "2026-09-22T09:23:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }
