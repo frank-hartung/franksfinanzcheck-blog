@@ -72,16 +72,24 @@ weniger schick und ohne `kontakt@franksfinanzcheck.de`-Absenderadresse.)*
 2. **Contacts → Formulare → Create**: Name „Blog-Anmeldung", **Double-Opt-In**
    AN (Pflicht!), Felder nur „E-Mail", Design schlicht, Captcha gegen Bots an.
    → Beim Speichern bekommst du eine **gehostete Formular-URL**
-   (https://…sendinblue.com/… bzw. …brevo.com/…) 📌 notieren! Das ist der Wert für
+   (heute: `https://…sibforms.com/serve/…` – Brevos Formularhost-Domain;
+   ältere Konten zeigen `…sendinblue.com/…` bzw. `…brevo.com/…`) 📌 notieren! Das ist der Wert für
    `newsletterFormAction` (Inline) bzw. `newsletterFormUrl` (Button) in Schritt 4.
 
 ## 4. GitHub hinterlegen (2 Min.)
 
-Repo → **Settings → Secrets and variables → Actions**:
+Repo → **Settings → Secrets and variables → Actions** (die ersten beiden sind
+**Secrets**, keine Variablen – der Workflow liest `secrets.BREVO_LIST_ID`; eine
+Variable mit dem Namen wäre unsichtbar für ihn und der Lauf würde stumm nur
+bauen, nie senden):
 - Secret: **`BREVO_API_KEY`** (Brevo → oben rechts Name → *SMTP & API → API Keys → Generate*)
-- Variable: **`BREVO_LIST_ID`** = Listen-Zahl aus Schritt 3
-- (optional) `BREVO_TEST_LIST_ID` + `NEWSLETTER_TEST=1` → sendet nur an dich zur Probe
-- (optional) `BREVO_SENDER_EMAIL` = `kontakt@franksfinanzcheck.de`
+- Secret: **`BREVO_LIST_ID`** = Listen-Zahl aus Schritt 3
+- (optional) Variable: **`NEWSLETTER_ABSENDER`** – überschreibt
+  `email.absender.email` aus dem Studio; Standard ist bereits
+  `news@franksfinanzcheck.de`, in der Regel also überflüssig
+- Probe: kein eigenes Test-Secret, sondern die Workflow-Eingabe
+  **`test_adresse`** im Lauf (→ `sendTest` an genau diese Adresse, Liste
+  bleibt unangetastet – s. Schritt 6)
 
 **Anmeldeweg auf der Website sichtbar machen** – zwei Varianten, beide in
 `hugo.toml` unter `[params]`, der Shortcode entscheidet in dieser Reihenfolge:
