@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-22T08:38:25.871165+00:00",
-  "head": "e64cdac",
+  "signed_at": "2026-09-22T20:44:18.207436+00:00",
+  "head": "2207930",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -10,7 +10,7 @@
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "fb48361a7d1010d7fbda6472e2ef6d1a07652d14c14de923c77a5470f09a48ec",
+    "layouts/_partials/extend_footer.html": "da5825a604ae61eb0700d7f96adb9698745133a5f6844bb6b017c61aabb5dad1",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
     "layouts/_partials/head.html": "3e932db02795c195ef77f060712767259356d2132b8a6602b37bce6286c8e78e",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
@@ -47,21 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198",
-  "audit_start_sha256": "1b0af9caecca65ed4e8e48e54fda3de5d90515e187ed4ff37d904272d8d16195",
+  "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf",
+  "audit_start_sha256": "d48f6011f0516fc85c1bc97b89ab02427eaea80b1a550c0f64dd8831476cb048",
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "5493744",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html",
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/pillar_box.html",
-        "layouts/pillar/list.html"
-      ],
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-19",
       "art": "set-current",
@@ -73,7 +61,7 @@
         "scripts/affiliate_marketer.py",
         "scripts/check24_links.yaml"
       ],
-      "prev_sha256": "1b0af9caecca65ed4e8e48e54fda3de5d90515e187ed4ff37d904272d8d16195"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-19",
@@ -187,8 +175,38 @@
           "Hinter der Bruchstelle steht der Rest einer ANDEREN Fassung – Muster: zwei Stände wurden zusammengesetzt (Merge-Konflikt in einer Maschinendatei)."
         ]
       },
-      "prev_sha256": "9b8e7cb89355da58a50f376f9ffd9f10903cb11437eba79118a9f8177e70c15f",
-      "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198"
+      "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198",
+      "prev_sha256": "9b8e7cb89355da58a50f376f9ffd9f10903cb11437eba79118a9f8177e70c15f"
+    },
+    {
+      "date": "2026-09-22",
+      "art": "set-current",
+      "head": "2207930",
+      "geaendert": [
+        "layouts/_partials/extend_footer.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "2207930",
+              "datum": "2026-09-22",
+              "betreff": "newsletter: Freischaltung Capture (Brevo-Formular) + Wache-/Doku-Sync"
+            },
+            {
+              "sha": "ae7d24b",
+              "datum": "2026-09-22",
+              "betreff": "social: Autopilot-Plan aktualisiert + Beiträge versendet"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd",
+      "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf"
     }
   ]
 }

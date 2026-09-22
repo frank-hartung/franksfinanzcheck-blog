@@ -56,6 +56,19 @@ jobs:
       - name: Wachen-Selbsttest (Capture-Logik, Verdopplungsschutz, Verriegelung)
         run: python3 scripts/newsletter_digest.py --selftest
 
+      # Die Capture-Wache prüft N5/N6 am GEBAUTEN Zustand (Landingpage,
+      # Footer-CTA). Ohne Build vor der Wache meldet sie ab Aktivierung
+      # jeden Lauf „Build veraltet“ für eine gesunde Seite – eine Wache,
+      # die prüft, was sie nie sah, ist ein Dauer-Falschalarm. Deshalb
+      # derselbe Hugo-Build wie im Qualitäts-Gate (22.09.2026).
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Seite bauen
+        run: hugo --minify
+
       - name: Capture-Wache – konfiguriert oder laut inert
         # --strict-inert: ein Lauf, der senden will, darf Inaktivität nicht als
         # Erfolg verbuchen. Kein Gate-Fehler (der Leerzustand ist ein Betreiber-

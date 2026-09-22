@@ -141,9 +141,11 @@ Schreibzugriff, uhrfest.
   Double-Opt-In-Falle im Formular (§ 7 UWG will den Nachweis, den das Verfahren des
   Anbieters liefert), ein Bild-Carousel im Kasten (CLS-Budget).
 * Der Streifen wird **nicht** doppelbaut: `layouts/_partials/extend_footer.html`
-  (markenversiegelt) zeigt seinen CTA, sobald ein hugo.toml-Parameter gesetzt ist –
-  `newsletter_strip.html` rückt im Fuß nur ein, wenn dort nichts anderes greift, und
-  gar nicht auf `/newsletter*`, `/impressum/`, `/datenschutz/`.
+  (markenversiegelt) zeigt seinen CTA, sobald ein Anmeldeweg konfiguriert ist
+  (Studio-JSON oder hugo.toml – dieselbe Präzedenz wie der Studio-Partial;
+  22.09.2026: davor las der Footer nur hugo.toml, N6 meldete die Lücke).
+  `newsletter_strip.html` rückt im Fuß nur ein, wenn dort nichts anderes
+  greift, und gar nicht auf `/newsletter*`, `/impressum/`, `/datenschutz/`.
 
 ## 7. Freischalten (der eine Satz, der dir bleibt)
 
@@ -166,8 +168,10 @@ Danach in dieser Reihenfolge:
 1. `python3 scripts/newsletter_digest.py --check` → `aktiv`, keine N-Funde.
 2. `hugo` (bzw. den Deploy-Build) und `npx playwright test e2e/newsletter.spec.mjs`.
 3. `python3 scripts/newsletter_qa.py --build --days 1` → 100/100.
-4. Secrets in den GitHub-Actions-Settings: `BREVO_API_KEY`, `BREVO_LIST_ID`
-   (+ optional `BREVO_TEST_LIST_ID`, `NEWSLETTER_TEST=1`).
+4. Secrets in den GitHub-Actions-Settings: `BREVO_API_KEY` **und**
+   `BREVO_LIST_ID` – beide als *Secret*, nicht als Variable (der Workflow
+   liest `secrets.BREVO_LIST_ID`). Probe geht über die Workflow-Eingabe
+   `test_adresse` (`sendTest`), nicht über eine Test-Variable.
 5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse, `live` aus →
    echter `sendTest` durch Brevo, Liste unangetastet.
 6. `live` an. Ab jetzt liefert der Cron Mo–Fr 05:05 UTC eine geprüfte Mail, und
@@ -224,9 +228,11 @@ hell/dunkel, zum Anschauen statt Raten). Diese drei Dateien sind der Export: in
 `scripts/newsletter_digest.py` stehen in `governance_contract.GUARDS`, ihr
 `--selftest` läuft also in `selftest_runner` (und `--selftest` der Wachen ist der
 einzige Weg, in dem diese Anleitungen „geprüft“ bedeutet). Dazu:
-`.github/workflows/link-check.yml` → Job *Newsletter-Wache* (`--check
---strict-inert`, `newsletter_qa.py --build`) und die E2E-Suite mit
-`e2e/newsletter.spec.mjs`. `data/newsletter_state.json` wird vom Workflow
+`.github/workflows/link-check.yml` → Schritt *Newsletter-Wache* im Job `gate`
+(läuft nach *Seite bauen*: `--check` ohne `--strict-inert` gegen den frischen
+Build – INERT bleibt grün, Drift rot – plus `newsletter_qa.py --build
+--days 1`; ergänzt 22.09.2026, der versprochene Job existierte davor nie) und
+die E2E-Suite mit `e2e/newsletter.spec.mjs`. `data/newsletter_state.json` wird vom Workflow
 zurückgeschrieben; der Arbeitbaum muss frei sein, sonst verweigert der Versand
 (`assert_worktree`).
 

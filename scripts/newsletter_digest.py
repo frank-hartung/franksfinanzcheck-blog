@@ -68,7 +68,7 @@ LANDING_REL = os.path.join("content", "newsletter", "index.md")
 SHORTCODE_REL = os.path.join("layouts", "shortcodes", "newsletter_form.html")
 FOOTER_REL = os.path.join("layouts", "_partials", "extend_footer.html")
 WORKFLOW_REL = os.path.join(".github", "workflows", "newsletter-daily.yml")
-ERLAUBTE_HOSTS = ("brevo.com", "sendinblue.com", "franksfinanzcheck.de")
+ERLAUBTE_HOSTS = ("brevo.com", "sendinblue.com", "sibforms.com", "franksfinanzcheck.de")
 FELDNAME = "email"
 
 
@@ -596,6 +596,24 @@ def _selftest() -> int:
         f4, n4, z4 = pruefe_capture(r4)
         pruefe(not f4, f"saubere Kette meldet Funde: {f4}")
         pruefe(z4 == "aktiv", f"gesunde Kette gilt nicht als aktiv: {z4}")
+
+        # 8b) Echter Brevo-Formular-Endpunkt: *.sibforms.com/serve/… ist die
+        #     Formularhost-Domain von Brevo (Quick Share/Embed – so liefert
+        #     das Konto die URL), ebenso berechtigt wie l.brevo.com.
+        sib = "https://0e12ee47.sibforms.com/serve/MUIFAD_test"
+        r4s = os.path.join(tmp, "sib")
+        os.makedirs(os.path.join(r4s, ".github", "workflows"), exist_ok=True)
+        baum(r4s, f'newsletterFormAction = "{sib}"\\n'
+                 'newsletterPromise = "Eine Mail pro Werktag."\\n',
+             artikel=[("2026-09-11-neu-1", HEUTE_FIX - datetime.timedelta(days=1), "false")],
+             seite_extra=f'<form action="{sib}"><input name="email">',
+             datenschutz='<h2 id="newsletter">Newsletter</h2>'
+                         '<p>Double-Opt-In, Widerruf formlos, Loeschung 30 Tage.</p>',
+             workflow="BREVO_API_KEY\\n--strict-inert\\n",
+             footer_extra='<div class="newsletter-footer">anmelden</div>')
+        f4s, n4s, z4s = pruefe_capture(r4s)
+        pruefe(not f4s, f"sibforms.com-Endpunkt meldet Funde (erlaubte Domain): {f4s}")
+        pruefe(z4s == "aktiv", f"sibforms.com-Kette gilt nicht als aktiv: {z4s}")
 
         # 9c) `zustand` ist keine Dekoration: Datei und Längen kommen aus dem JSON
         pfad_z, betreff_len, artikel_len = zustand_konfig(r4)

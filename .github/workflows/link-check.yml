@@ -109,6 +109,25 @@ jobs:
       - name: Seite bauen
         run: hugo --minify
 
+      # ------------------------------------------------------------
+      #  NEWSLETTER-WACHE (am frischen Build, 22.09.2026)
+      #  Studio-Manual § 11 versprach genau diesen Job – er existierte nie:
+      #  Die Captureregeln N5/N6 prüfen die GEBAUTE Seite (Landingpage,
+      #  Footer-CTA), und der nächtliche newsletter-daily-Lauf baut kein
+      #  Hugo. Ohne einen Build im Lauf bleibt der Live-Zustand unbewiesen
+      #  – exakt die Sorte „gebaut, aber unbelegt“, gegen die die Wachen
+      #  geschrieben sind.
+      #  Semantik bewusst OHNE --strict-inert: INERT → grün (der Leerzustand
+      #  ist ein Betreiber-Entscheid, kein Defekt), aktiv + gesund → grün,
+      #  Drift (z. B. Footer-CTA fehlt, § 8 widerspricht) → rot.
+      #  Die QA prüft denselben Bestand, den der nächtliche Versand bauen
+      #  würde; leerer Zeitraum = „nichts zu prüfen“, rc 0.
+      # ------------------------------------------------------------
+      - name: Newsletter-Wache (Live-Prüfung gegen den Build)
+        run: |
+          python3 scripts/newsletter_digest.py --check
+          python3 scripts/newsletter_qa.py --build --days 1
+
       - name: Interne Links prüfen
         id: links
         continue-on-error: true
