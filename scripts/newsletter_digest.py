@@ -276,6 +276,19 @@ def _platzhalter_meldung(platz: list[str]) -> str:
 
 
 # -------------------------------------------------------------------------- --check
+# Der CTA-Nachweis sucht ein gerendertes Element, nicht den Seitentext. Seit die
+# Extended-CSS inline in die Seite eingebettet wird, steckt in jedem gebauten HTML
+# der Selektor `.newsletter-footer` – eine Zeichenkette, kein Kasten. Auf rohen Text
+# zu prüfen hätte in beide Richtungen falsch ergeben: im Leerzustand ein Fund wegen
+# einer CSS-Zeile, und bei fehlendem Streifen ein grünes N6 wegen desselben.
+CTA_MARKUP_RE = re.compile(
+    "<(?:div|section|aside|footer)\\b[^>]*newsletter-footer")
+
+
+def _cta_im_footer(html: str) -> bool:
+    return bool(CTA_MARKUP_RE.search(html or ""))
+
+
 def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
     """→ (Funde, Hinweise, Zustand: inert|aktiv|kaputt)"""
     funde: list = []
@@ -313,9 +326,16 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
                         "ds-widerspruch-vorstudie"))
         if ds_platz:
             funde.append(("N7", _platzhalter_meldung(ds_platz), "ds-platzhalter"))
-        wirbt = [f for f in glob.glob(os.path.join(pub, "**", "index.html"), recursive=True)
-                 if re.search(r"Newsletter abonnieren|Newsletter-Anmeldung", _read(f))]
-        if wirbt or "newsletter-footer" in footer:
+        # Die Anmeldeseite und ihre Journeys dürfen den Zustand erklären – sie
+        # bewerben nichts, sie beschreiben ihn. Fundwürdig ist Werbung dort,
+        # wo kein Ausweg angeboten wird (deshalb der Pfadabgleich).
+        wirbt = []
+        for f in glob.glob(os.path.join(pub, "**", "index.html"), recursive=True):
+            if os.path.relpath(f, pub).replace(os.sep, "/").startswith("newsletter"):
+                continue
+            if re.search(r"Newsletter abonnieren|Newsletter-Anmeldung", _read(f)):
+                wirbt.append(f)
+        if wirbt or _cta_im_footer(footer):
             funde.append(("N1", "die Site wirbt für einen Newsletter, ohne dass ein "
                                 "Anmeldeweg konfiguriert ist – toter Link für "
                                 "Interessenten", "config-widerspruch"))
@@ -380,7 +400,7 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
         if action and "<form" not in seite:
             funde.append(("N5", "Formular-Endpunkt gesetzt, aber die Seite zeigt "
                                 "kein <form> – Shortcode-Zweig nicht erreicht?", "kein-form"))
-    if "newsletter-footer" not in footer:
+    if not _cta_im_footer(footer):
         funde.append(("N6", "Capture konfiguriert, aber im Footer nirgends verlinkt "
                             "– die Liste wächst nie, weil niemand den Weg sieht",
                       "cta-versteckt"))
@@ -572,7 +592,7 @@ def _selftest() -> int:
              datenschutz='<h2 id="newsletter">Newsletter</h2>'
                          '<p>Double-Opt-In, Widerruf formlos, Loeschung 30 Tage.</p>',
              workflow="BREVO_API_KEY\n--strict-inert\n",
-             footer_extra="newsletter-footer")
+             footer_extra='<div class="newsletter-footer">anmelden</div>')
         f4, n4, z4 = pruefe_capture(r4)
         pruefe(not f4, f"saubere Kette meldet Funde: {f4}")
         pruefe(z4 == "aktiv", f"gesunde Kette gilt nicht als aktiv: {z4}")
@@ -610,7 +630,7 @@ def _selftest() -> int:
              seite_extra='<form action="https://l.brevo.com/landing/x"><input name="email">',
              datenschutz='<h2 id="newsletter">Newsletter</h2><p>Double-Opt-In</p>',
              workflow="BREVO_API_KEY\n--strict-inert\n",
-             footer_extra="newsletter-footer")
+             footer_extra='<div class="newsletter-footer">anmelden</div>')
         kopie = os.path.join(r4b, SHORTCODE_REL)
         vorlage = _read(kopie)                      # erst lesen, dann öffnen (sonst leer)
         with open(kopie, "w", encoding="utf-8") as fh:

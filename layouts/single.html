@@ -89,15 +89,6 @@
   </div>
   {{- end }}
 
-  {{- /* Newsletter-Streifen nach dem Artikel (22.09.2026): der Leser hat gerade
-         gerechnet – hier ist der Ort, an dem eine Liste natürlich wächst. Ein
-         OWNED-Kanal statt Reichweite, die nur von Google und Pinterest geliehen ist
-         (Premium-Audit 12.09.2026, Empfehlung 1). Gerendert NUR bei konfiguriertem
-         Anmeldeweg – sonst zeigt extend_post_content keinen toten Kasten. */ -}}
-  {{- if eq .Section "posts" }}
-  {{- partial "newsletter_strip.html" (dict "ort" "artikel" "seite" .) }}
-  {{- end }}
-
   {{- partial "extend_post_content.html" . }}
 
   <footer class="post-footer">

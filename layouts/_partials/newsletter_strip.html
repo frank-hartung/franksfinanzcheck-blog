@@ -19,7 +19,8 @@
 {{- $seite := .seite -}}
 {{- $pfad := "" -}}
 {{- $titel := "" -}}
-{{- with $seite -}}{{- $pfad = .RelPermalink -}}{{- $titel = .Title | plainify -}}{{- end -}}
+{{- $section := "" -}}
+{{- with $seite -}}{{- $pfad = .RelPermalink -}}{{- $titel = .Title | plainify -}}{{- $section = .Section -}}{{- end -}}
 {{- /* Kein Streifen (a) auf der Anmeldeseite selbst – ein CTA auf sich selbst ist
        eine Schleife, (b) auf den Rechtsseiten – dort gehört Werbung nicht hin, das
        handhabt extend_footer.html mit der Pinterest-Box genauso. */ -}}
@@ -32,7 +33,14 @@
        rückt deshalb nur im Fuß ein, wenn dort nichts anderes greift. */ -}}
 {{- $paramGedeckt := or (ne (trim (string site.Params.newsletterFormAction) " ") "")
                          (ne (trim (string site.Params.newsletterFormUrl) " ") "") -}}
-{{- $zeigen := and $nl.aktiv $amPlatz (or (ne $ort "footer") (not $paramGedeckt)) -}}
+{{- /* Doppel-CTA in die andere Richtung: auf Artikelseiten steht der Streifen schon
+       im Text – single.html ruft dieses Partial mit `ort = "artikel"` für genau die
+       Sektion. Der Fuß rückt dort nicht noch einmal ein. Die Invariante „höchstens
+       ein Streifen pro Seite" misst e2e/newsletter.spec.mjs über das ganze Dokument,
+       damit sie auch nach der Freischaltung gilt (dann erst rendert sie überhaupt). */ -}}
+{{- $bereitsImText := eq $section "posts" -}}
+{{- $zeigen := and $nl.aktiv $amPlatz (not (and (eq $ort "footer") $bereitsImText))
+                 (or (ne $ort "footer") (not $paramGedeckt)) -}}
 {{- if $zeigen -}}
 {{- $zusatz := cond (eq $ort "footer") "" (printf " ff-nl-strip--%s" $ort) -}}
 <div class="newsletter-footer ff-nl-strip{{ $zusatz }}">

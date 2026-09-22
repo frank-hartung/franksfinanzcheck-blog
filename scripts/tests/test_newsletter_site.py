@@ -71,7 +71,8 @@ def _klammern(t: str) -> int:
 
 class Vorlagen(unittest.TestCase):
     def test_alle_bloecke_sind_geschlossen(self):
-        for rel in NEUE + ["layouts/single.html", "layouts/_partials/footer.html"]:
+        for rel in NEUE + ["layouts/single.html", "layouts/_default/single.html",
+                          "layouts/_partials/footer.html"]:
             self.assertEqual(0, _klammern(_text(rel)), f"{rel}: {{ if }} ohne {{ end }}")
 
     def test_kein_site_data_zugriff(self):
@@ -222,12 +223,41 @@ class Streifen(unittest.TestCase):
                           f"extend_footer reactiert auf {parameter} – der Streifen muss das wissen")
 
     def test_artikel_streifen_haengt_an_posts_und_nur_dort(self):
-        single = _text("layouts/single.html")
+        # Das Projekt hat zwei single-Templates, und Hugo nimmt für Posts
+        # `layouts/_default/single.html`; `layouts/single.html` wird verdeckt und
+        # rendert stillschweigend nie. Ein Include im verdeckten Datei-Zweig ist
+        # deshalb kein Include – dieser Test hält die Unterscheidung fest.
+        lebt = "layouts/_default/single.html"
+        single = _text(lebt)
         pos_eins = single.find('if eq .Section "posts"')
         pos_strip = single.find('partial "newsletter_strip.html"')
         self.assertGreater(pos_eins, -1, "single.html hat keine posts-Bedingung")
         self.assertGreater(pos_strip, pos_eins,
                            "der Artikel-Streifen hängt außerhalb der posts-Bedingung")
+        self.assertNotIn('partial "newsletter_strip.html"', _text("layouts/single.html"),
+                         "layouts/single.html ist verdeckt – dort hängt der Streifen ins Leere")
+
+    def test_genau_ein_streifen_pro_artikelseite(self):
+        """Nach dem Artikel steht der Streifen; der Fuß rückt auf derselben Seite
+        nicht noch einmal ein – sonst zählt e2e/newsletter.spec.mjs zwei Kästen und
+        die Seite wirbt doppelt für denselben Weg."""
+        strip = _ohne_kommentare(_text(STRIP))
+        self.assertIn('$section = .Section', _text(STRIP),
+                      "der Streifen muss die Sektion der Seite kennen")
+        self.assertRegex(
+            strip,
+            r'not\s*\(\s*and\s*\(\s*eq \$ort "footer"\)\s*\$bereitsImText\s*\)',
+            "die Fuß-Ausgabe weicht nicht, wenn der Streifen im Artikel schon steht")
+
+    def test_kein_set_in_den_templates(self):
+        """Hugo kennt kein `set`/`unset`: ein einziger Aufruf bricht den Build ab
+        (…function "set" not defined…) und legt die ganze Site lahm. Karten von id
+        auf Eintrag baut man hier mit `merge` – das ist die einzige Zuweisung Hugo."""
+        for rel in NEUE + JOURNEYS + [STRIP, "layouts/_default/single.html"]:
+            t = _ohne_kommentare(_text(rel))
+            for m in re.finditer(r"(?<![\w.$-])(set|unset)\s+\$", t):
+                self.fail(f"{rel}: `{m.group(0).strip()} …` – Hugo hat keine {m.group(1)}-Funktion "
+                          "(Build bricht ab); Bitte `merge`/Zuweisung mit `=`")
 
 
 class Daten(unittest.TestCase):

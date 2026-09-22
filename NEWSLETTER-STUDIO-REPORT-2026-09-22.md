@@ -122,12 +122,54 @@ desselben `if not streng:` dasselbe. Zusammengeführt bzw. zu einer klaren Aussa
 gemacht: **kaputtes JSON ist ein Fehler, kein Leerzustand** – wer hier still auf
 Codewerte fiele, verschickt im ungünstigsten Fall ein Mail ohne eigene Marke.
 
+### F9 – Der Streifen hing in einer verdeckten Template-Datei
+
+Der Artikel-Streifen war in `layouts/single.html` verdrahtet – und wurde nie
+gerendert. Das Projekt besitzt **zwei** single-Templates, und Hugo nimmt für Posts
+`layouts/_default/single.html`; die Datei im Layout-Grundverzeichnis wird verdeckt.
+Ein Include dort ist toter Code, der harmlos aussieht: kein Fehler, keine Warnung,
+nur eine Funktion, die nicht da ist. Fund über den echten Build (38 Artikel,
+`ff-nl-strip--artikel` nirgends), Fix: Include in die lebende Datei verschoben,
+direkt nach `extend_post_content.html`.
+Dazu die passende Invariante im Test (`test_newsletter_site.py`): der Include muss
+in der **lebenden** Datei stehen und darf in der verdeckten nicht stehen – sonst
+wandert er beim nächsten Umbau wieder ins Leere. Und weil der Fuß-Streifen auf
+Artikelseiten jetzt überflüssig wird, weicht er dort aus (`$bereitsImText`): genau
+ein Streifen pro Seite, gemessen über alle 363 gebauten Seiten (0 Doppel).
+
+### F10 – Die Wache ließ sich von einer CSS-Zeile überzeugen
+
+`newsletter_digest.py` prüfte den Footer-CTA als Textsuche (`"newsletter-footer" in
+index.html`). Seit die Extended-CSS inline in die Seite eingebettet wird, steht der
+Selektor `.newsletter-footer…` in **jedem** gebauten HTML – die Wache meldete im
+Leerzustand einen Fund, den es nicht gab (N1), und wäre im aktivierten Zustand vor
+einem fehlenden CTA grün geblieben (N6): ein Test, der durch eine Stilregel
+bestochen wird, prüft nichts. Jetzt sucht `_cta_im_footer()` ein gerendertes Element
+(`<div|section|aside|footer … newsletter-footer`) und ignoriert Selektoren; die
+Anmeldeseite und ihre Journeys dürfen den Zustand außerdem *erklären*, ohne dass
+das als „Werbung ohne Weg" zählt. Zwei neue Wachen-Fälle halten beide Richtungen
+fest.
+
+### F11 – `set` gibt es in Hugo nicht
+
+`layouts/shortcodes/newsletter_themen.html:12` baute eine id→Welt-Karte mit
+`set $welten $t.id $t`. Hugo kennt diese Funktion nicht (sie stammt aus anderen
+Template-Sprachen) – der Build bricht mit `function "set" not defined` **komplett**
+ab, nicht nur für diese Seite. Auf `merge` umgestellt (Zuweisung mit `=` ist die
+einzige Mutation, die Hugo erlaubt). Lehre als Test verankert:
+`test_kein_set_in_den_templates` verbietet `set`/`unset` in allen neuen Vorlagen –
+dieselbe Klasse Fehler würde sonst wieder durchrutschen, weil die Python-Tests die
+Template-Ausführung nicht kennen.
+
 ## 3. Belege statt Adjektive
 
 | Was | Wert | Wo nachzuprüfen |
 |---|---|---|
-| Unittests Newsletter | 90 OK (1 Skip: kein `public/-Build` hier) | `python3 -m unittest scripts.tests.test_newsletter_{studio,qa,site} scripts.tests.test_newsletter_digest` |
-| Selbsttests der Wachen | Studio 41 · QA 35 · Digest 25 = **101 Fälle** | `--selftest` je Skript |
+| Unittests Newsletter | **94 OK, 0 Skip** (Landungsseiten-Test läuft gegen den echten Build) | `python3 -m unittest discover -s scripts/tests -p 'test_newsletter*'` |
+| Unittests im ganzen Repo | **685 OK** (19 Skip, alle vorbestehend) | `python3 -m unittest discover -s scripts/tests` |
+| Selbsttests der Wachen | Studio 41 · QA 35 · Digest 25 = **101 Fälle**; Runner: **91 Wachen grün, 182 Uhr-Proben** | `--selftest` je Skript, `python3 scripts/selftest_runner.py` |
+| Echter Hugo-Build | v0.166.0 extended: **363 Seiten**, 0 Fehler; `check_internal_links.sh`: 2796 Links, **0 defekt**; `layout_audit`/`dom_audit`/`schema_seo_gate`/`themenwelten_guard` (Wurzel **und** Unterverzeichnis `/blog/`) grün | `hugo --gc --minify` + die genannten Skripte |
+| Genau ein CTA pro Seite | 38 Artikel mit Artikel-Streifen, 154 andere Seiten mit Fuß-Streifen, **0 Doppelungen** | Zählung über `public/**/index.html` (Klassen-Split, keine Textsuche) |
 | Uhrfestigkeit | alle drei bestanden `selftest_runner` inkl. +97 und +1461 Tage | `python3 scripts/selftest_runner.py` |
 | Vor-Versand-Prüfung am Live-Bestand | **100/100 · 20 Regeln · 0 Funde** (301 Wörter, 13 Links, 0 Bilder) | `python3 scripts/newsletter_qa.py --build --days 400` |
 | Marken-Deckung | 28 Farbrollen aus dem Build-CSS hergeleitet, 6 Themenwelten deckungsgleich mit `data/themenwelten.json` | `python3 scripts/newsletter_studio.py --brand` |
@@ -195,16 +237,22 @@ gelten, wäre keiner.
 
 ## 8. Verifikation hier vs. in CI
 
-In dieser Arbeitsumgebung ist **kein Hugo-Binary** ladbar (GitHub-Releases und
-Deb-Mirror sind blockiert), deshalb: kein `hugo`-Build, keine Playwright-Ausführung,
-kein `dom_audit`/`layout_audit` gegen `public/`. Der eine Skip in den Unittests
-dieses Laufs ist genau das. Alles andere ist hier gelaufen (101 Selbsttest-Fälle,
-90 Unittests, `--brand`, `--build`, `--check`, QA am Live-Bestand,
-`selftest_runner` gegen die Uhr). Die Render-Wahrheit – Shortcode-Auflösung,
-`public/newsletter/index.html`, Kontrast im Browser, Formular-Interaktion –
-liefert der CI-Lauf: Job *Newsletter-Wache* in `link-check.yml` und
-`e2e/newsletter.spec.mjs` (beides spec- und testseitig so gebaut, dass es im
-Leerzustand **und** nach der Freischaltung grün ist).
+Nachbericht (derselbe Tag, nach dem ersten PR-Gate): der Lauf war rot, und die
+Ursache war **kein CI-Problem**, sondern F9–F11 – alle drei waren echte
+Build-Fehler bzw. blinde Flecken der Wache, die erst ein *ausgeführtes* Hugo zeigt.
+Dieser Sandbox fehlte lange das Binary; über das PyPI-Rad `hugo` (0.166.0 extended)
+läuft es hier jetzt doch. Damit ist die Render-Wahrheit **hier** geprüft: Bau von
+363 Seiten in zwei Zuständen (leer und mit gesetztem `capture.form_action`),
+Formular-Chips, Journeys, Streifen-Positionen, Shortcode-Auflösung, alle vier
+Gate-Skripte (auch gegen den Unterverzeichnis-Build) und 685 Repo-Tests.
+
+Was weiterhin **nur CI** liefert, ist an diesem Lauf die Wahrheit: Chromium-Audits
+(`layout_browser_check.js`, `themenwelten_browser_test.mjs`) und die
+Playwright-Spec `e2e/newsletter.spec.mjs` – Browser-Download ist hier geblockt.
+Die Spec ist so gebaut, dass sie im Leerzustand **und** nach der Freischaltung
+grün ist (der Streifen-Zähler prüft jetzt die scharfe Invariante „höchstens einer
+pro Seite", die F9 vorher nicht erfüllt war – tote Includes fallen nur auf, wenn
+man sie zählt).
 
 ## 9. Dateien
 
@@ -226,7 +274,9 @@ layouts/shortcodes/newsletter_themen.html       (neu)  Präferenzwelten aus data
 layouts/shortcodes/newsletter_muster.html       (neu)  Vorschau aus dem echten Bestand
 layouts/_partials/newsletter_studio_data.html   (neu)  hugo.toml > JSON, ohne site.Data
 layouts/_partials/newsletter_strip.html         (neu)  ein Streifen, drei Orte, Doppel-CTA-Schutz
-layouts/single.html, layouts/_partials/footer.html (geän.)  Streifen-Hooks
+layouts/_default/single.html                        (geän.)  Streifen nach dem Artikel – die LEBENDE Datei
+layouts/_partials/footer.html                        (geän.)  Streifen im Fuß für alle anderen Seiten
+layouts/single.html                                  (unverändert – sie wird von _default/single.html verdeckt)
 assets/css/extended/zz-newsletter.css           (neu)  Formular, Chips, Streifen, Journeys, hell/dunkel
 static/premium/ff-newsletter.js                 (neu)  Validierung, Honigtopf, same-tab-POST, Merker
 content/newsletter/index.md                     (neu)  mit Muster-Ausgabe

@@ -19,7 +19,7 @@
 {{- $belege := first 3 (first 12 $seiten) -}}
 {{- if $belege -}}
 {{- $themen := dict -}}
-{{- range $t := $nl.themen -}}{{- $_ := set $themen $t.id ($t.label | default $t.id) -}}{{- end -}}
+{{- range $t := $nl.themen -}}{{- with $t.id -}}{{- $themen = merge $themen (dict (string .) ($t.label | default .)) -}}{{- end -}}{{- end -}}
 <figure class="ff-nl-muster">
   <div class="ff-nl-muster__kopf">
     <span>So sieht eine Ausgabe aus · gebaut aus den letzten {{ len $belege }} Ratgebern</span>

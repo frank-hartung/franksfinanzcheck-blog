@@ -9,7 +9,7 @@
 {{- $welten := dict -}}
 {{- if fileExists "data/themenwelten.json" -}}
   {{- $daten := os.ReadFile "data/themenwelten.json" | transform.Unmarshal -}}
-  {{- range $t := $daten.topics -}}{{- $_ := set $welten $t.id $t -}}{{- end -}}
+  {{- range $t := $daten.topics -}}{{- with $t.id -}}{{- $welten = merge $welten (dict (string .) $t) -}}{{- end -}}{{- end -}}
 {{- end -}}
 <dl class="ff-nl-themen">
   {{- range $t := $nl.themen -}}

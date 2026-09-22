@@ -210,11 +210,13 @@ hell/dunkel, zum Anschauen statt Raten). Diese drei Dateien sind der Export: in
 | `Q16 … hat keinen Beleg` | Zahl in Betreff/Hero, die im Artikel so nicht steht | Zahl aus dem Betreff nehmen oder Artikel nachziehen – nicht den Beleg nachbauen |
 | `Q3 … Einzelklammer {unsubscribe}` | Alte Vorlagen-Sprache | `{{unsubscribe}}` (die Einzelklammer ersetzt Brevo in `htmlContent`-Kampagnen nicht) |
 | `Q10 … kein Abmeldelink` | Fußblock-editiert | `email.marken` und den Fußblock aus `baue_email` wiederherstellen |
-| `N1 … wirbt ohne Anmeldeweg` | Landingpage-Text, aber kein `form_*` | Weg eintragen **oder** den Werbetext auf den Leerzustand zurückziehen |
+| `N1 … wirbt ohne Anmeldeweg` | Werbesatz auf einer Seite außerhalb von `/newsletter/`, aber kein `form_*` | Weg eintragen **oder** den Werbetext auf den Leerzustand zurückziehen |
+| „Streifen bleibt unsichtbar“, obwohl `form_action` gesetzt ist | Include in `layouts/single.html` gesetzt – die Datei wird von `layouts/_default/single.html` verdeckt und rendert für Posts nie | Include in die lebende Datei, direkt nach `{{ partial "extend_post_content.html" . }}` |
 | `N4 … ohne Feld „email“` | Shortcode umgeschrieben | `capture.feld_email` setzen (erlaubter zweiter Weg) oder literal `name="email"` |
 | `N5 … Seite nicht gebaut` | `public/` fehlt/veraltet | `hugo` laufen lassen; im CI baut der Deploy |
 | `ds-platzhalter` | `[Platzhalter]` im Rechtstext | ausformulieren – die Wache prüft auf eckige Klammern ohne Link |
 | QA-Selbsttest „DATUMABHÄNGIG“ | Test hängt an der echten Uhr | Fixtures relativ zum Testdatum bauen (`scripts/selftest_clock.py`) |
+| Build: `function "set" not defined` | Hugo kennt kein `set`/`unset` (das kommen aus anderen Template-Sprachen) | Karte mit `merge` bauen: `$karten = merge $karten (dict $id $wert)` – Zuweisung per `=` |
 
 ## 11. Was die CI davon hält
 
@@ -227,3 +229,17 @@ einzige Weg, in dem diese Anleitungen „geprüft“ bedeutet). Dazu:
 `e2e/newsletter.spec.mjs`. `data/newsletter_state.json` wird vom Workflow
 zurückgeschrieben; der Arbeitbaum muss frei sein, sonst verweigert der Versand
 (`assert_worktree`).
+
+Reihenfolge für einen Check zu Hause – die Template-Schicht ist nur mit echtem
+Build bewiesen, die Python-Schicht nur mit `--selftest` unter verschobener Uhr:
+
+```bash
+hugo --gc --minify                      # 1. Bau (CI nutzt `--quiet --destination public`)
+python3 scripts/layout_audit.py         # 2. Layout- und DOM-Budgets gegen public/
+bash scripts/check_internal_links.sh    # 3. jeder interne Link, auch /newsletter/
+python3 scripts/newsletter_digest.py --check   # 4. Capture-Kette (inert ist erlaubt)
+python3 -m unittest discover -s scripts/tests -p 'test_newsletter*'
+```
+
+Ohne `hugo` im Container lässt sich das Rad aus PyPI holen: `python3 -m pip install
+--target /tmp/hugopy hugo` → Binary unter `/tmp/hugopy/hugo/binaries/hugo`.

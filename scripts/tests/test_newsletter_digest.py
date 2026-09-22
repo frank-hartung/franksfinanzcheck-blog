@@ -111,7 +111,7 @@ class CaptureKette(unittest.TestCase):
         self.assertTrue(any(c == "ds-widerspruch-vorstudie" for _, _, c in note), note)
         b = Baum(self.tmp.name, "aktiv-fall",
                  toml='newsletterFormAction = "https://l.brevo.com/x"\n',
-                 datenschutz=ds, footer="newsletter-footer",
+                 datenschutz=ds, footer='<div class="newsletter-footer">anmelden</div>',
                  workflow="BREVO_API_KEY\n--strict-inert\n")
         with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
                   encoding="utf-8") as fh:
@@ -132,11 +132,36 @@ class CaptureKette(unittest.TestCase):
         funde, _, _ = nd.pruefe_capture(b.root)
         self.assertIn("cta-versteckt", {c for _, _, c in funde}, funde)
 
+    def test_css_nennung_ist_kein_cta_und_keine_werbung(self):
+        """Der Streifen heißt `.newsletter-footer`, und die Extended-CSS wird inline in
+        jede Seite eingebettet – ein Selektor ist kein Kasten. Sonst meldet N1 einen
+        Fund, wo nichts beworben wird, und N6 wäre wegen derselben Zeile grün."""
+        b = Baum(self.tmp.name, "css-fall",
+                 toml='newsletterFormAction = "https://l.brevo.com/x"\n',
+                 datenschutz='<h2 id="newsletter">Newsletter</h2><p>Double-Opt-In.</p>',
+                 footer="<style>.newsletter-footer.ff-nl-strip{margin:0}</style>",
+                 workflow="BREVO_API_KEY\n--strict-inert\n")
+        with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
+                  encoding="utf-8") as fh:
+            fh.write('<div>Double-Opt-In <a href="/datenschutz/">DS</a>'
+                     '<form><input name="email"></form></div>')
+        funde, _, _ = nd.pruefe_capture(b.root)
+        self.assertIn("cta-versteckt", {c for _, _, c in funde}, funde)
+
+    def test_anmeldeseite_erklaren_ist_keine_werbung(self):
+        b = Baum(self.tmp.name, "erklaerung", datenschutz="<h2>Newsletter</h2>")
+        with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("<div>Newsletter-Anmeldung ist noch nicht geschaltet.</div>")
+        funde, _, zustand = nd.pruefe_capture(b.root)
+        self.assertEqual("inert", zustand)
+        self.assertEqual([], [f for f in funde if f[2] == "config-widerspruch"], funde)
+
     def test_gesunde_kette_findet_nichts(self):
         b = Baum(self.tmp.name, toml='newsletterFormAction = "https://l.brevo.com/x"\n',
                  datenschutz='<h2 id="newsletter">Newsletter</h2>'
                              '<p>Double-Opt-In, Widerruf formlos, 30 Tage.</p>',
-                 footer="newsletter-footer", workflow="BREVO_API_KEY\n--strict-inert\n")
+                 footer='<div class="newsletter-footer">anmelden</div>', workflow="BREVO_API_KEY\n--strict-inert\n")
         with open(os.path.join(b.root, "public/newsletter/index.html"), "w",
                   encoding="utf-8") as fh:
             fh.write('<div>Double-Opt-In <a href="/datenschutz/">DS</a>'
