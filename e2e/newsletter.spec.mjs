@@ -182,15 +182,38 @@ test.describe('Newsletter', () => {
     expect(page.url(), 'Seite verlassen').toBe(vor);
   });
 
-  test('kein Drittanbieter auf dem Anmeldepfad', async ({ page }) => {
-    const geladen = [];
-    page.on('request', (anfrage) => {
-      const url = new URL(anfrage.url());
-      if (url.origin !== new URL(page.url()).origin) geladen.push(url.host);
-    });
-    await page.goto('/newsletter/');
-    await page.waitForTimeout(600);
-    expect(geladen, `fremde Hosts: ${[...new Set(geladen)].join(', ')}`).toEqual([]);
+  test('auf dem Anmeldepfad kommt kein Drittanbieter dazu, und die Adresse bleibt im Haus', async ({
+    page,
+  }) => {
+    // Was hier zählt, ist die Eigenschaft, die der Newsletter wirklich betrifft:
+    // Der Anmeldepfad darf KEINEN weiteren Fremdlader mitbringen als die Seiten
+    // sonst auch haben (das Analytics-Skript der Site läuft überall – es hier zu
+    // verbieten wäre eine Ausgabe über den Newsletter, nicht dafür), und in keiner
+    // Anfrage darf die E-Mail-Adresse landen. Der Absende-Pfad selbst ist bewusst
+    // nicht Teil dieses Tests: der POST geht an `capture.form_action`, also an den
+    // Anbieter, für den die Seite gemacht ist.
+    const heimisch = new URL(
+      test.info().project.use.baseURL || 'http://127.0.0.1:4173',
+    ).host;
+    const dieFremden = async (weg) => {
+      const treffer = [];
+      const lauscher = (anfrage) => {
+        const url = new URL(anfrage.url());
+        if (url.host !== heimisch) treffer.push(url);
+      };
+      page.on('request', lauscher);
+      await page.goto(weg);
+      await page.waitForTimeout(400);
+      page.off('request', lauscher);
+      return treffer;
+    };
+    const basis = await dieFremden('/');
+    const anmeldung = await dieFremden('/newsletter/');
+    const bekannt = new Set(basis.map((u) => u.host));
+    const neu = [...new Set(anmeldung.map((u) => u.host))].filter((h) => !bekannt.has(h));
+    expect(neu, `neue Fremdlader nur auf der Anmeldeseite: ${neu.join(', ')}`).toEqual([]);
+    const personen = anmeldung.filter((u) => /@|%40/i.test(u.search));
+    expect(personen, `Adresse in einer Anfrage-URL: ${personen.map((u) => u.href).join(' ')}`).toEqual([]);
   });
 
   test('Streifen und Kasten sind in Hell und Dunkel lesbar (4.5:1 gemessen)', async ({

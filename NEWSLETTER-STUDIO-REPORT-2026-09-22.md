@@ -161,6 +161,19 @@ einzige Mutation, die Hugo erlaubt). Lehre als Test verankert:
 dieselbe Klasse Fehler würde sonst wieder durchrutschen, weil die Python-Tests die
 Template-Ausführung nicht kennen.
 
+### F12 – Der Drittanbieter-Test war gleichzeitig zu brav und zu scharf
+
+Der E2E-Lauf fand als Letztes meinen eigenen Test: `kein Drittanbieter auf dem
+Anmeldepfad` sammelte Anfragen und verglich sie mit `new URL(page.url()).origin` –
+**während** der Navigation, als die Seite noch `about:blank` war. Meldepflicht: der
+eigene Testserver (`127.0.0.1:4173`) galt als Fremdkörper. Und die Forderung „gar
+kein Drittanbieter" kollidiert mit dem Analytics-Skript, das die Site auf jeder
+Seite lädt – der Newsletter ist dafür nicht verantwortlich, er darf es nur nicht
+verschlimmern. Der Test prüft jetzt die Eigenschaft, die zählt: Auf dem Anmeldepfad
+kommt **kein weiterer** Lader dazu (Referenz: Startseite), und keine Anfrage-URL
+trägt eine Adresse (`@`/`%40`). Absenden ist bewusst ausgenommen – der POST geht an
+`capture.form_action`, also an den Anbieter, für den die Seite gemacht ist.
+
 ## 3. Belege statt Adjektive
 
 | Was | Wert | Wo nachzuprüfen |
@@ -170,6 +183,7 @@ Template-Ausführung nicht kennen.
 | Selbsttests der Wachen | Studio 41 · QA 35 · Digest 25 = **101 Fälle**; Runner: **91 Wachen grün, 182 Uhr-Proben** | `--selftest` je Skript, `python3 scripts/selftest_runner.py` |
 | Echter Hugo-Build | v0.166.0 extended: **363 Seiten**, 0 Fehler; `check_internal_links.sh`: 2796 Links, **0 defekt**; `layout_audit`/`dom_audit`/`schema_seo_gate`/`themenwelten_guard` (Wurzel **und** Unterverzeichnis `/blog/`) grün | `hugo --gc --minify` + die genannten Skripte |
 | Genau ein CTA pro Seite | 38 Artikel mit Artikel-Streifen, 154 andere Seiten mit Fuß-Streifen, **0 Doppelungen** | Zählung über `public/**/index.html` (Klassen-Split, keine Textsuche) |
+| Playwright, gemessen mit echtem Chromium | **46 bestanden / 0 Fehler** im aktivierten Zustand; 44 + 2 bewusste Skips im Leerzustand | `npx playwright test` (Fallback-Browser via `e2e/browser.mjs`) |
 | Uhrfestigkeit | alle drei bestanden `selftest_runner` inkl. +97 und +1461 Tage | `python3 scripts/selftest_runner.py` |
 | Vor-Versand-Prüfung am Live-Bestand | **100/100 · 20 Regeln · 0 Funde** (301 Wörter, 13 Links, 0 Bilder) | `python3 scripts/newsletter_qa.py --build --days 400` |
 | Marken-Deckung | 28 Farbrollen aus dem Build-CSS hergeleitet, 6 Themenwelten deckungsgleich mit `data/themenwelten.json` | `python3 scripts/newsletter_studio.py --brand` |
@@ -246,13 +260,22 @@ läuft es hier jetzt doch. Damit ist die Render-Wahrheit **hier** geprüft: Bau 
 Formular-Chips, Journeys, Streifen-Positionen, Shortcode-Auflösung, alle vier
 Gate-Skripte (auch gegen den Unterverzeichnis-Build) und 685 Repo-Tests.
 
-Was weiterhin **nur CI** liefert, ist an diesem Lauf die Wahrheit: Chromium-Audits
-(`layout_browser_check.js`, `themenwelten_browser_test.mjs`) und die
-Playwright-Spec `e2e/newsletter.spec.mjs` – Browser-Download ist hier geblockt.
-Die Spec ist so gebaut, dass sie im Leerzustand **und** nach der Freischaltung
-grün ist (der Streifen-Zähler prüft jetzt die scharfe Invariante „höchstens einer
-pro Seite", die F9 vorher nicht erfüllt war – tote Includes fallen nur auf, wenn
-man sie zählt).
+Chromium läuft hier inzwischen auch – über den Fallback, den `e2e/browser.mjs` genau
+dafür bereithält (`@sparticuz/chromium` als npm-Rad; der Playwright-Browser-Download
+auf `storage.googleapis.com` ist aus diesem Container blockiert). Damit ist die
+Browser-Schicht **hier** gemessen, in beiden Zuständen:
+
+| Zustand | Suite | Ergebnis |
+|---|---|---|
+| Leerzustand (`form_action` leer) | alle Specs | 44 bestanden, 2 übersprungen – die beiden Formular-Tests, die bewusst keinen Schaltzustand verlangen |
+| aktiviert (`form_action` gesetzt) | alle Specs | **46 bestanden, 0 übersprungen, 0 Fehler**, auch Horizontal-Overflow auf Start- und Artikelseite mit Streifen |
+
+Was CI-Vorbehalt bleibt, sind die Audits, die Chrome-headless-shell selbst laden
+(`layout_browser_check.js`, `themenwelten_browser_test.mjs`) – und der Design-Audit
+der Site (Kontraste, Tap-Ziele) läuft dort als eigener Schritt nach. Die Spec ist so
+gebaut, dass sie im Leerzustand **und** nach der Freischaltung grün ist (der
+Streifen-Zähler prüft die scharfe Invariante „höchstens einer pro Seite", die F9
+vorher nicht erfüllt war – tote Includes fallen nur auf, wenn man sie zählt).
 
 ## 9. Dateien
 
