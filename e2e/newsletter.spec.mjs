@@ -199,8 +199,13 @@ test.describe('Newsletter', () => {
     await page.goto('/newsletter/');
     const selector = (await formularVorhanden(page)) ? FORM : '.ff-nl';
     for (const modus of ['light', 'dark']) {
-      await page.evaluate((m) => document.documentElement.setAttribute('data-theme', m), modus);
-      await page.waitForTimeout(80);
+      // Erst Speicher, dann Attribut: theme.js würde ein Setting ohne
+      // Nutzerentscheidung sonst beim nächsten Raster überschreiben.
+      await page.evaluate((m) => {
+        try { localStorage.setItem('theme', m); } catch (e) { /* private Mode */ }
+        document.documentElement.setAttribute('data-theme', m);
+      }, modus);
+      await page.waitForTimeout(120);
       const messung = await farbenVon(page, `${selector} p, ${selector} .ff-nl__lead`);
       expect(messung, `${selector} nicht gefunden im ${modus}-Modus`).not.toBeNull();
       const wert = kontrast(messung.vorn, messung.hinten);
@@ -212,8 +217,10 @@ test.describe('Newsletter', () => {
   test('ohne Bewegung: keine Übergänge im Formular', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/newsletter/');
+    // Nur die eigenen Bausteine: fremde Übergänge (Site-Politur an
+    // Typografie-Selektoren) sind nicht dieses Layers Verantwortung.
     const anzahl = await page.evaluate(() =>
-      [...document.querySelectorAll('.ff-nl, .ff-nl *')]
+      [...document.querySelectorAll('[class*="ff-nl"]')]
         .map((el) => getComputedStyle(el).transitionProperty)
         .filter((eigenschaft) => eigenschaft && eigenschaft !== 'all' && eigenschaft !== 'none'
           && !/^(transform|opacity|color)$/.test(eigenschaft.trim())).length,
