@@ -71,6 +71,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich inzwischen öfter als nur beim Kontowechsel."
+  ki_news_used: true
 
 - id: internet-tarifdschungel-bandbreite
   kategorie: internet
