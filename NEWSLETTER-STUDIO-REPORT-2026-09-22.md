@@ -277,7 +277,18 @@ gebaut, dass sie im Leerzustand **und** nach der Freischaltung grün ist (der
 Streifen-Zähler prüft die scharfe Invariante „höchstens einer pro Seite", die F9
 vorher nicht erfüllt war – tote Includes fallen nur auf, wenn man sie zählt).
 
-## 9. Dateien
+## 9. Stand des PR #352
+
+Sieben Checks grün auf `7e69179`: *Qualitäts-Gate (Build + interne Links)*,
+*Layout-AI*, *Themenwelten – Navigation & Darstellung*, *E2E-Tests (Playwright)*,
+*Lesehilfen-Gate*, *Publication reliability regression tests*,
+*Integritäts-Lock (PR-Gate)* + *Integritäts-Siegel*. Das vom Gate geöffnete Issue #353
+(„Gefallene Schritte: Seite bauen") hat sich mit dem grünen Build selbst geschlossen.
+Die Freischaltung bleibt danach ein Zweizeiler in `data/newsletter_studio.json`
+(§ 7 der Werkstatt-Anleitung) – bis dahin ist die Capture-Schicht bewusst inert, und
+alle Wachen melden das laut, statt es zu übersehen.
+
+## 10. Dateien
 
 ```
 scripts/newsletter_studio.py                    (neu)  Design-System, Material, Blöcke, HTML/Text, --brand
