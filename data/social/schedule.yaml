@@ -1429,9 +1429,9 @@ items:
   date: '2026-09-22'
   time: 07:00
   scheduled_at: '2026-09-22T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler:frage:2026-09-22
   channel: linkedin
   slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
@@ -1441,9 +1441,9 @@ items:
   date: '2026-09-22'
   time: 07:45
   scheduled_at: '2026-09-22T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:zahl:2026-09-22
   channel: bluesky
   slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
@@ -1453,9 +1453,9 @@ items:
   date: '2026-09-22'
   time: 08:15
   scheduled_at: '2026-09-22T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife:takeaway:2026-09-22
   channel: x
   slug: 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife
@@ -1465,9 +1465,9 @@ items:
   date: '2026-09-22'
   time: 08:45
   scheduled_at: '2026-09-22T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:mythos:2026-09-22
   channel: threads
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
@@ -1477,9 +1477,9 @@ items:
   date: '2026-09-22'
   time: 09:15
   scheduled_at: '2026-09-22T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:frage:2026-09-22
   channel: facebook
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
@@ -1489,9 +1489,9 @@ items:
   date: '2026-09-22'
   time: 09:45
   scheduled_at: '2026-09-22T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:takeaway:2026-09-22
   channel: instagram
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -1501,9 +1501,9 @@ items:
   date: '2026-09-22'
   time: '11:45'
   scheduled_at: '2026-09-22T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-09-22
   channel: bluesky
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
