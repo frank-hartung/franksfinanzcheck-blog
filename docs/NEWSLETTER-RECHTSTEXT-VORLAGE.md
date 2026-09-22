@@ -1,20 +1,30 @@
 # Newsletter: Rechtstext-Vorlage (einsetzen vor dem ersten Versand)
 
-> **Warum diese Datei existiert.** `content/datenschutz/index.md` sagt aktuell
-> wörtlich: *„Diese Website bietet derzeit **keinen Newsletter** an."* (Abschnitt 8).
-> Das ist heute korrekt – und wird mit dem ersten aktiven Anmeldeformular zu einem
-> Widerspruch, also zu dem Fall, wegen dem Formularseiten abgemahnt werden. Der
-> Rechtstext ist damit **Voraussetzung**, nicht Fußnote der Einrichtung.
+> **Status 22.09.2026: § 8 ist gesetzt.** `content/datenschutz/index.md` enthält den
+> Newsletter-Abschnitt (Double-Opt-In-Nachweis, Speicherdauer, Widerruf,
+> Auftragsverarbeiter); der erste Satz kommt aus `{{< newsletter_status >}}` und
+> liest damit `data/newsletter_studio.json`. Der Fall, den diese Datei beschrieben
+> hat – eine Anmeldeseite neben der Behauptung, es gebe keinen Newsletter – ist
+> nicht mehr baubar, weil Website, Wache und Rechtstext dieselbe Quelle lesen.
 >
-> Die Wache meldet das: `python3 scripts/newsletter_digest.py --check` zeigt den
-> Widerspruch als Hinweis, solange alles inert ist, und als **harten Fund**, sobald
-> `params.newsletterFormAction` oder `params.newsletterFormUrl` gesetzt wird.
+> **Warum die Datei bleibt:** sie ist der Wortlaut-Entwurf (auch für
+> E-Mail-Signatur, Impressum und die Präferenzseite) und die Begründung der Fristen.
+> Nach dem ersten Versand hier gegenlesen und anpassen, statt im Template zu raten.
+>
+> **Die Wache meldet jeden Rückfall:** `python3 scripts/newsletter_digest.py --check`
+> zeigt einen Widerspruch zwischen Rechtstext und Anmeldeweg als Hinweis, solange
+> alles inert ist, und als **harten Fund**, sobald `capture.form_action` im Studio-JSON
+> oder `params.newsletterFormAction` in `hugo.toml` gesetzt wird.
 >
 > **Diese Datei ist ein Entwurf, keine Rechtsberatung.** Einsetzen, durchsehen,
 > und – wie immer bei Texten mit Haftungsfragen – für die eigene Konfiguration
 > prüfen. Der Platzhalter in eckigen Klammern ist der einzige Pflicht-Wert.
 
 ## 1. Block für `content/datenschutz/index.md` (ersetzt Abschnitt 8 vollständig)
+
+> **Längst eingesetzt** – der Block unten ist die Referenz, nicht eine offene Aufgabe. Er bleibt
+> abgedruckt, weil er den Wortlaut für E-Mail-Signatur, Impressum und die
+> Präferenzseite liefert und weil die Fristen dort begründet sind.
 
 ```markdown
 ## 8. Newsletter / Kontaktaufnahme

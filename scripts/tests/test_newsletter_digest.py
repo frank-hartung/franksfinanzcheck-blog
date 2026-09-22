@@ -291,13 +291,32 @@ class Verdrahtung(unittest.TestCase):
                          "newsletter_digest läuft nicht im Qualitäts-Gate")
 
     def test_landingsseite_ist_gebaut_und_ohne_falsches_versprechen(self):
+        """Was die Anmeldeseite im JEDES Zustand zu liefern hat – und was nur im Leeren.
+
+        Der Test war bis hierher eine Zustands-Behauptung („kein <form>“), kein
+        Invariante: am Tag, an dem Frank den Schalter legt, wäre er rot geworden –
+        und zwar wegen des Erfolgs. Also wird der Konfigurationszustand erst
+        gelesen und dann je Zweig geprüft; die gemeinsamen Sätze (noindex, kein
+        Anker, keine Sitemap) gelten in beiden.
+        """
         seite = os.path.join(ROOT, "public/newsletter/index.html")
         if not os.path.isdir(os.path.join(ROOT, "public")):
             self.skipTest("kein public/-Build (lokal zuerst `hugo` laufen lassen)")
         with open(seite, encoding="utf-8") as fh:
             h = fh.read()
-        self.assertIn("nicht geschaltet", h)          # Leerzustand ist ehrlich
-        self.assertNotIn("<form", h)                  # und postet nirgends hin
+        p = nd.params(ROOT)
+        geschaltet = bool(p.get("newsletterFormAction") or p.get("newsletterFormUrl"))
+        if geschaltet:
+            # Das Contract-Ziel der Wache: ein Formular, das wirklich postet,
+            # und eine Seite, die den Weg danach erklärt.
+            self.assertIn("<form", h)
+            self.assertIn('name="email"', h)
+            self.assertRegex(h, r"Double-Opt|Bestätigungsmail")
+            self.assertIn("/datenschutz/", h)
+            self.assertNotIn("nicht geschaltet", h)
+        else:
+            self.assertIn("nicht geschaltet", h)      # Leerzustand ist ehrlich
+            self.assertNotIn("<form", h)              # und postet nirgends hin
         self.assertIn("noindex", h)                   # wirbt nicht in Suchmaschinen
         self.assertNotIn("/datenschutz/#newsletter", h)  # es gibt keinen solchen Anker
         with open(os.path.join(ROOT, "public/sitemap.xml"), encoding="utf-8") as fh:
