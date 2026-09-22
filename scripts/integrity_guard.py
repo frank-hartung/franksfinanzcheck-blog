@@ -71,6 +71,7 @@ import contextlib
 import hashlib
 import io
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -288,17 +289,76 @@ def herkunft(root: Path, basis: str, rel: str) -> tuple:
     return [], "unbekannt"
 
 
-def load_lock(lock_pfad: Path = None) -> dict:
+def _git_letzter_gueltiger_lock(root: Path) -> dict | None:
+    """Sucht in Git nach der letzten gültigen Fassung von data/integrity_lock.json.
+
+    Dient als Ausfallsicherung, wenn die Datei im Arbeitsbaum z. B. durch einen
+    Merge-Konflikt (<<<<<<< HEAD) oder Syntaxfehler temporär unlesbar ist.
+    Stellt sicher, dass die bestehende Akte (audit) und Baseline (files) nicht
+    verloren gehen, wenn der Lock neu signiert wird.
+    """
+    for rev in ("HEAD:data/integrity_lock.json", ":data/integrity_lock.json"):
+        r = _git(root, "show", rev)
+        if r is not None and r.returncode == 0:
+            try:
+                d = json.loads(r.stdout)
+                if isinstance(d, dict) and "files" in d and isinstance(d["files"], dict) and d["files"]:
+                    return d
+            except Exception:
+                pass
+    # Durchsuche die Historie der letzten 20 Commits für data/integrity_lock.json
+    r = _git(root, "log", "-n", "20", "--format=%H", "--", "data/integrity_lock.json")
+    if r is not None and r.returncode == 0 and r.stdout.strip():
+        for sha in r.stdout.splitlines():
+            sha = sha.strip()
+            if not sha:
+                continue
+            r_show = _git(root, "show", f"{sha}:data/integrity_lock.json")
+            if r_show is not None and r_show.returncode == 0:
+                try:
+                    d = json.loads(r_show.stdout)
+                    if isinstance(d, dict) and "files" in d and isinstance(d["files"], dict) and d["files"]:
+                        return d
+                except Exception:
+                    continue
+    return None
+
+
+def load_lock(lock_pfad: Path = None, fallback_git: bool = False, root: Path = None) -> dict:
     pfad = lock_pfad or LOCK
     if not pfad.exists():
-        return {"signed_at": "nie", "head": "", "files": {}}
+        return {"signed_at": "nie", "head": "", "files": {}, "audit": [], "_status": "fehlt"}
     try:
-        daten = json.loads(pfad.read_text(encoding="utf-8"))
+        text = pfad.read_text(encoding="utf-8")
     except Exception:
-        return {"signed_at": "beschaedigt", "head": "", "files": {}}
-    if not isinstance(daten, dict):
-        return {"signed_at": "beschaedigt", "head": "", "files": {}}
+        text = ""
+
+    status = "ok"
+    if re.search(r"^(<<<<<<<|=======|>>>>>>>)", text, re.MULTILINE):
+        status = "konflikt"
+    else:
+        try:
+            daten = json.loads(text)
+            if not isinstance(daten, dict):
+                status = "beschaedigt"
+        except Exception:
+            status = "beschaedigt"
+
+    if status != "ok":
+        r = root or (pfad.parent.parent if pfad.parent.name == "data" else ROOT)
+        if fallback_git:
+            git_lock = _git_letzter_gueltiger_lock(r)
+            if git_lock:
+                git_lock["_status_disk"] = status
+                git_lock["_wiederhergestellt_aus_git"] = True
+                git_lock.setdefault("files", {})
+                git_lock.setdefault("audit", [])
+                return git_lock
+        return {"signed_at": "beschaedigt", "head": "", "files": {}, "audit": [], "_status": status}
+
     daten.setdefault("files", {})
+    daten.setdefault("audit", [])
+    daten["_status"] = "ok"
     return daten
 
 
@@ -411,10 +471,10 @@ def audit_tabelle(audit: list) -> list:
 # ------------------------------------------------------------
 # Signieren (mit Akte) und Historie
 # ------------------------------------------------------------
-def signieren(root: Path = ROOT, grund: str = "set-current", audit=None) -> dict:
+def signieren(root: Path = ROOT, grund: str = "set-current", audit=None, alt_lock: dict = None) -> dict:
     """Schreibt den Lock über den Ist-Stand – und die Herkunft dazu."""
     lock_pfad = root / "data" / "integrity_lock.json"
-    alt = load_lock(lock_pfad)
+    alt = alt_lock if alt_lock is not None else load_lock(lock_pfad, fallback_git=True, root=root)
     files = {}
     for pfad in sorted(KRITISCH | FEST):
         if (root / pfad).exists():
@@ -458,12 +518,17 @@ def historie_schreiben(root: Path, eintrag: dict) -> None:
 def report_text(root: Path, crit_bad, fest_bad, audit=None,
                 geheilt=None, blockiert=None) -> str:
     lock = load_lock(root / "data" / "integrity_lock.json")
+    status = lock.get("_status", "ok")
     L = ["# 🔐 INTEGRITY-REPORT", "",
          f"**Stand:** {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC · HEAD: `{git_head(root)}`",
          f"**Lock-Ebene:** {len(lock.get('files', {}))} Dateien gelockt",
          f"**Gesperrte kritische Knoten:** {len(KRITISCH)}",
          f"**Letzte Signatur:** {lock.get('signed_at', 'nie')} · Stand `{lock.get('head', '')}`",
          ""]
+    if status in ("konflikt", "beschaedigt"):
+        L += ["## 🛑 BESCHÄDIGTE LOCK-DATEI", "",
+              f"- `data/integrity_lock.json` ist beschädigt ({'Git-Konfliktmarker gefunden' if status == 'konflikt' else 'ungültiges JSON'}).",
+              "- Bitte mit `python3 scripts/integrity_guard.py --set-current` neu signieren.", ""]
     if crit_bad:
         L += ["## 🛑 KRITISCHE Abweichungen (kein Weg zurück: neu signieren oder rückgängig machen)", ""]
         L += [f"- `{c}`" for c in crit_bad]
@@ -485,7 +550,7 @@ def report_text(root: Path, crit_bad, fest_bad, audit=None,
     if blockiert:
         L += ["", "## 🛑 HARD STOP – nicht selbst-signierbar", ""]
         L += [f"- {b}" for b in blockiert]
-    if not crit_bad and not fest_bad:
+    if not crit_bad and not fest_bad and status not in ("konflikt", "beschaedigt"):
         L += ["🎉 Integritaet: Der Kern entspricht exakt dem letzten "
               "signierten Zustand.", ""]
     L += ["---",
@@ -543,6 +608,10 @@ def _selftest() -> list[str]:
         probe.unlink()
         if not LOCK.exists() and not SET_CURRENT:
             fehler.append("Lock fehlt (Ohne --set-current wurde nie signiert)")
+        elif LOCK.exists() and not SET_CURRENT:
+            probe_lock = load_lock(LOCK)
+            if probe_lock.get("_status") in ("konflikt", "beschaedigt"):
+                fehler.append(f"Lock-Datei {LOCK.name} ist beschädigt oder enthält Git-Konfliktmarker")
     return fehler
 
 
@@ -662,6 +731,18 @@ def _selftest_kern() -> list[str]:
             if not akte[-1].get("geaendert"):
                 fehler.append("Akte ohne geänderte Dateien (Fall6b)")
 
+            # 6b. Merge-Konflikt-Widerstandsfähigkeit: Konfliktmarker im Lock
+            # führen bei gate zu Exit 3 mit klarer Diagnose; set_current heilt sie
+            # auf Basis der Git-Baseline.
+            lock_pfad.write_text("<<<<<<< HEAD\n{\"signed_at\": \"alt\"}\n=======\n{\"signed_at\": \"neu\"}\n>>>>>>>\n", encoding="utf-8")
+            if gate(tmp) != 3:
+                fehler.append("gate muss bei Konfliktmarkern im Lock Exit 3 liefern (Fall6b_gate)")
+            if set_current(tmp) != 0:
+                fehler.append("set_current muss Konfliktmarker im Lock heilen können (Fall6b_set_current)")
+            crit_nach_k, fest_nach_k = verify_files(tmp, load_lock(lock_pfad)["files"])
+            if crit_nach_k or fest_nach_k:
+                fehler.append("Baum nach Konflikt-Heilung nicht sauber (Fall6b_verify)")
+
         # 7. Der Beweis schreibt nicht in DIESEN Baum (C15).
         if sha256_file(LOCK) != echte_lock_sha:
             fehler.append("Selbsttest hat data/integrity_lock.json verändert")
@@ -690,6 +771,19 @@ def selftest() -> int:
 def gate(root: Path = ROOT) -> int:
     """PR-/CI-Gate: fail-closed, mit Herkunft und Reparaturzeile."""
     lock = load_lock(root / "data" / "integrity_lock.json")
+    status = lock.get("_status", "ok")
+    if status in ("konflikt", "beschaedigt"):
+        grund = "Git-Merge-Konfliktmarker gefunden" if status == "konflikt" else "ungültiges JSON"
+        print(f"🛑 INTEGRITÄTS-GATE ROT – `data/integrity_lock.json` ist syntaktisch beschädigt ({grund}).")
+        print("")
+        print("Fix – im SELBEN Pull Request, sonst geht die Änderung ohne Siegel auf main:")
+        print("    python3 scripts/integrity_guard.py --set-current")
+        print("    git add data/integrity_lock.json")
+        print("    git commit -m \"chore(integrity): Lock nach Merge neu signiert\"")
+        print("")
+        print("Oder: die Änderung an den gesperrten Dateien zurücknehmen.")
+        print(GATE_REGEL)
+        return 3
     crit_bad, fest_bad = verify_files(root, lock.get("files", {}))
     if not crit_bad and not fest_bad:
         print(f"✅ Integritäts-Gate grün: {len(lock.get('files', {}))} Kerndateien "
@@ -714,6 +808,14 @@ def heilen(root: Path = ROOT, dry_run: bool = False) -> int:
     """Selbstheilung für belegten Drift – HARD STOP bleibt für alles andere."""
     lock_pfad = root / "data" / "integrity_lock.json"
     lock = load_lock(lock_pfad)
+    status = lock.get("_status", "ok")
+    if status in ("konflikt", "beschaedigt"):
+        grund = "Git-Merge-Konfliktmarker" if status == "konflikt" else "ungültiges JSON"
+        print(f"🛑 INTEGRITÄTS-HARD-STOP – `data/integrity_lock.json` ist beschädigt ({grund}).")
+        print("  → INTEGRITY-REPORT.md sichten, dann bewusst signieren "
+              "(`python3 scripts/integrity_guard.py --set-current`) oder die "
+              "Änderung zurücknehmen.")
+        return 3
     crit_bad, fest_bad = verify_files(root, lock.get("files", {}))
     if not crit_bad and not fest_bad:
         print(f"✅ Integrität: kein Drift – {len(lock.get('files', {}))} Kerndateien "
@@ -756,6 +858,12 @@ def heilen(root: Path = ROOT, dry_run: bool = False) -> int:
 
 def drift_audit(root: Path = ROOT) -> int:
     lock = load_lock(root / "data" / "integrity_lock.json")
+    status = lock.get("_status", "ok")
+    if status in ("konflikt", "beschaedigt"):
+        grund = "Git-Konfliktmarker" if status == "konflikt" else "ungültiges JSON"
+        print(f"🛑 data/integrity_lock.json ist beschädigt ({grund}).")
+        print("Urteil: NICHT selbst-signierbar – HARD STOP")
+        return 3
     crit_bad, fest_bad = verify_files(root, lock.get("files", {}))
     if not crit_bad and not fest_bad:
         print(f"✅ Kein Drift – {len(lock.get('files', {}))} Kerndateien entsprechen "
@@ -793,13 +901,21 @@ def set_current(root: Path = ROOT) -> int:
     Die Signatur bleibt eine menschliche Entscheidung – aber keine stumme:
     Klasse, Urteil und die belegenden Commits stehen danach im Lock, und der
     Vorgang hinterlässt eine Zeile in `data/integrity_history.jsonl`.
+
+    Widerstandsfähigkeit (22.09.2026): Enthält die Lock-Datei im Arbeitsbaum
+    Git-Merge-Konfliktmarker oder Syntaxfehler, wird die Baseline und Akte
+    automatisch aus der Git-Historie wiederhergestellt, sodass kein
+    Verlust der bisherigen Audit-Historie eintritt.
     """
     lock_pfad = root / "data" / "integrity_lock.json"
-    lock = load_lock(lock_pfad)
+    lock = load_lock(lock_pfad, fallback_git=True, root=root)
+    if lock.get("_wiederhergestellt_aus_git"):
+        grund = "Git-Konfliktmarker" if lock.get("_status_disk") == "konflikt" else "beschädigtes JSON"
+        print(f"ℹ️  data/integrity_lock.json enthielt {grund} – Baseline und Akte wurden aus Git wiederhergestellt.")
     crit_bad, fest_bad = verify_files(root, lock.get("files", {}))
     audit = (klassifizieren(root, crit_bad, fest_bad, lock.get("head", ""))
              if (crit_bad or fest_bad) else [])
-    ergebnis = signieren(root, grund="set-current", audit=audit or None)
+    ergebnis = signieren(root, grund="set-current", audit=audit or None, alt_lock=lock)
     print(f"🔒 Signiert: {ergebnis['signiert']} Dateien gegen SHA-256 gelockt "
           f"(HEAD {git_head(root)}).")
     if not ergebnis["geaendert"]:

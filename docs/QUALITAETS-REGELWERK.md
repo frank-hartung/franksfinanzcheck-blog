@@ -438,6 +438,10 @@ jeder Schreibaktion.
    + Zeile in `data/integrity_history.jsonl`), und **`unittest discover` prüft
    den ausgelieferten Baum gegen sein Siegel** (`RepoSealTests`) — der Befund
    steht damit dort, wo er vor dem Push gelesen wird, nicht nur im roten Kreuz.
+   Widerstandsfähigkeit gegen Merge-Konflikte (22.09.2026, PR #342): Überschneiden
+   sich Zweige in `data/integrity_lock.json`, stellt `--set-current` Baseline
+   und Akte automatisch aus Git wieder her, sodass Konfliktmarker sauber
+   aufgelöst werden und kein Verfall der Signatur-Historie entsteht.
 8. **Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt.** Das PR-Gate
    meldet sich als **`Integritäts-Siegel`**; dieser Name ist ein Vertrag zwischen
    Workflow-Datei und Ruleset (Governance-Regel **C18**: Konstante

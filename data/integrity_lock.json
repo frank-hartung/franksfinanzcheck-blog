@@ -1,5 +1,6 @@
 {
-
+  "signed_at": "2026-09-22T08:37:28.063061+00:00",
+  "head": "e64cdac",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
@@ -46,17 +47,6 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "5493744",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html",
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/pillar_box.html",
-        "layouts/pillar/list.html"
-      ]
-    },
     {
       "date": "2026-09-19",
       "art": "set-current",
@@ -154,8 +144,36 @@
     {
       "date": "2026-09-21",
       "art": "set-current",
-
+      "head": "d192a90",
+      "geaendert": [
+        "layouts/_partials/head.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ea509c1",
+              "datum": "2026-09-21",
+              "betreff": "fix(layout): #338 Alt-Text & Head-DOM-Kinder dauerhaft beheben (#344)"
+            },
+            {
+              "sha": "3a0d5ab",
+              "datum": "2026-09-21",
+              "betreff": "Merge pull request #341 from frank-hartung/arena/01a0c4bc-franksfinanzcheck-blog"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
       ]
+    },
+    {
+      "date": "2026-09-22",
+      "art": "set-current",
+      "head": "e64cdac",
+      "geaendert": []
     }
   ]
 }

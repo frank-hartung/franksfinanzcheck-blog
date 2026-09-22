@@ -82,6 +82,7 @@ class Fixture(unittest.TestCase):
         self.assertEqual(_commit(self.root, "fixture").returncode, 0)
         self.lock_pfad = self.root / "data" / "integrity_lock.json"
         self.history_pfad = self.root / "data" / "integrity_history.jsonl"
+        self.lock_pfad.parent.mkdir(parents=True, exist_ok=True)
 
     # ---- Hilfen -------------------------------------------------
     def signieren(self):
@@ -330,6 +331,70 @@ class SetCurrentTests(Fixture):
         self.assertEqual(zeilen[-1]["fest"], 1)
         self.assertEqual(zeilen[-1]["geaendert"], [FEST_REL])
         self.assertEqual(zeilen[-1]["date"], datetime.date.today().isoformat())
+
+
+class ConflictResilienceTests(Fixture):
+    """Widerstandsfähigkeit gegen Merge-Konflikte und Syntax-Fehler in data/integrity_lock.json.
+
+    Anlass 21./22.09.2026: PR #342 überschnitt sich mit main in data/integrity_lock.json.
+    Beim Merge wurden durch unsaubere Konfliktlösung Metadaten gelöscht und ungültiges
+    JSON hinterlassen.
+    """
+
+    def test_load_lock_erkennt_git_konfliktmarker(self):
+        self.lock_pfad.write_text("<<<<<<< HEAD\n{\"signed_at\": \"alt\"}\n=======\n{\"signed_at\": \"neu\"}\n>>>>>>> branch\n", encoding="utf-8")
+        lock = ig.load_lock(self.lock_pfad)
+        self.assertEqual(lock.get("_status"), "konflikt")
+
+    def test_load_lock_erkennt_syntaxfehler(self):
+        self.lock_pfad.write_text("{\n  \"signed_at\": \"alt\",\n  \"files\": {\n", encoding="utf-8")
+        lock = ig.load_lock(self.lock_pfad)
+        self.assertEqual(lock.get("_status"), "beschaedigt")
+
+    def test_gate_meldet_konfliktmarker_eindeutig(self):
+        self.signieren()
+        self.lock_pfad.write_text("<<<<<<< HEAD\n{\"signed_at\": \"alt\"}\n=======\n{\"signed_at\": \"neu\"}\n>>>>>>> branch\n", encoding="utf-8")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc = ig.gate(self.root)
+        self.assertEqual(rc, 3)
+        self.assertIn("Git-Merge-Konfliktmarker", puffer.getvalue())
+        self.assertIn("--set-current", puffer.getvalue())
+
+    def test_gate_meldet_syntaxfehler_eindeutig(self):
+        self.signieren()
+        self.lock_pfad.write_text("{ \"art\": \"set-current\", ] }", encoding="utf-8")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc = ig.gate(self.root)
+        self.assertEqual(rc, 3)
+        self.assertIn("ungültiges JSON", puffer.getvalue())
+        self.assertIn("--set-current", puffer.getvalue())
+
+    def test_set_current_heilt_merge_konflikt_mit_git_baseline(self):
+        self.signieren()
+        self.assertEqual(_commit(self.root, "chore: lock committet").returncode, 0)
+        # Jetzt simuliere einen Merge-Konflikt auf Arbeitsbaum-Ebene
+        self.lock_pfad.write_text("<<<<<<< HEAD\n{\"signed_at\": \"alt\"}\n=======\n{\"signed_at\": \"neu\"}\n>>>>>>> branch\n", encoding="utf-8")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc = ig.set_current(self.root)
+        self.assertEqual(rc, 0)
+        self.assertIn("Git-Konfliktmarker", puffer.getvalue())
+        lock = ig.load_lock(self.lock_pfad)
+        self.assertEqual(lock.get("_status"), "ok")
+        self.assertEqual(self.driften(), ([], []))
+
+    def test_selftest_erkennt_beschaedigten_lock(self):
+        self.signieren()
+        self.lock_pfad.write_text("<<<<<<< HEAD\n{\"signed_at\": \"alt\"}\n=======\n{\"signed_at\": \"neu\"}\n>>>>>>> branch\n", encoding="utf-8")
+        orig_lock = ig.LOCK
+        try:
+            ig.LOCK = self.lock_pfad
+            fehler = ig._selftest()
+            self.assertTrue(any("beschädigt oder enthält Git-Konfliktmarker" in f for f in fehler))
+        finally:
+            ig.LOCK = orig_lock
 
 
 class RepoSealTests(unittest.TestCase):
