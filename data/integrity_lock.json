@@ -1,16 +1,16 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-22T20:44:18.207436+00:00",
-  "head": "2207930",
+  "signed_at": "2026-09-23T15:34:28.041614+00:00",
+  "head": "8c360de",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
-    "hugo.toml": "de27af116cbbfacf609fc079d1eb99e8dd3e8d789ae49e2b8d301f317159c9a4",
+    "hugo.toml": "e8d2daf5a012b3086b716d44572ce644c7b194ae290201dc05ad58105395449a",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
-    "layouts/_partials/extend_footer.html": "da5825a604ae61eb0700d7f96adb9698745133a5f6844bb6b017c61aabb5dad1",
+    "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
     "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
     "layouts/_partials/head.html": "3e932db02795c195ef77f060712767259356d2132b8a6602b37bce6286c8e78e",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
@@ -47,22 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf",
-  "audit_start_sha256": "d48f6011f0516fc85c1bc97b89ab02427eaea80b1a550c0f64dd8831476cb048",
+  "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec",
+  "audit_start_sha256": "b6f47f849f0e246f6c328138ef01f7ff1d710f8554a70a3bb785b1deeea10707",
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "146e9a7",
-      "geaendert": [
-        "layouts/_default/_markup/render-link.html",
-        "layouts/_partials/affiliate_anchor_attrs.html",
-        "layouts/pillar/list.html",
-        "scripts/affiliate_marketer.py",
-        "scripts/check24_links.yaml"
-      ],
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-19",
       "art": "set-current",
@@ -72,7 +59,7 @@
         "layouts/_partials/affiliate_anchor_attrs.html",
         "layouts/pillar/list.html"
       ],
-      "prev_sha256": "d48f6011f0516fc85c1bc97b89ab02427eaea80b1a550c0f64dd8831476cb048"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-19",
@@ -205,8 +192,57 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd",
-      "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf"
+      "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf",
+      "prev_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd"
+    },
+    {
+      "date": "2026-09-23",
+      "art": "set-current",
+      "head": "8c360de",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_partials/extend_footer.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "8c360de",
+              "datum": "2026-09-23",
+              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
+            },
+            {
+              "sha": "178a9ee",
+              "datum": "2026-09-23",
+              "betreff": "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Retrofit Backlog 3)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "8c360de",
+              "datum": "2026-09-23",
+              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
+            },
+            {
+              "sha": "178a9ee",
+              "datum": "2026-09-23",
+              "betreff": "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Retrofit Backlog 3)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2",
+      "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec"
     }
   ]
 }

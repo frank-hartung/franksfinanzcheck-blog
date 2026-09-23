@@ -59,3 +59,14 @@ Das Gate verlangt hierfür eine Betreiberentscheidung. Das Siegel wurde weder ma
 Vor dem ersten produktiven Versand zusätzlich die Brevo-Kampagnenhistorie mit `data/newsletter_state.json` abgleichen. Das hier vorhandene Journal enthält nur `pending`, keine belegte Versandhistorie. Ein eventuell bereits erfolgter Versand dieser Woche muss als `versand_termine` mit zeitzonenbehaftetem ISO-Zeitstempel übernommen werden; sonst kennt der neue Zähler diese alte Ausgabe nicht.
 
 **Betriebsgrenze:** Der Schutz gilt für diesen Repository-Versand und sein gesichertes Journal, nicht für unabhängig im Brevo-Konto eingerichtete Kampagnen oder Automationen. Diese wurden nicht geprüft. Bei abgebrochenem Runner oder fehlgeschlagenem Journal-Push vor einem weiteren Lauf die Brevo-Historie abgleichen; ein nur lokal reservierter Termin ist ohne erfolgreichen Status-Push nicht über Runner hinweg gesichert. Der Schließpfad ist Freigabe, Journalabgleich, Deployment und Prüfung des ersten planmäßigen Laufs – kein automatisches Wiederholen bei unklarem Ergebnis.
+
+### Nachtrag: ausdrücklicher Merge-Auftrag am 23.09.2026
+
+Nach Eröffnung von PR #359 hat der Betreiber ausdrücklich dessen Merge beauftragt.
+Die oben noch offene Freigabe der beiden geschützten Dateien wurde daraufhin über
+`python3 scripts/integrity_guard.py --set-current` umgesetzt. Das Werkzeug hat
+nur diese zwei abweichenden Kerndateien neu gezeichnet und den Ursprung `8c360de`
+in der Integritätsakte dokumentiert. Das Gate selbst bleibt unverändert aktiv.
+Der technische Merge erfolgt erst nach Prüfung des aktualisierten PR-Stands;
+Brevo-Konto-/Historienabgleich und unabhängige Automationen wurden weiterhin
+nicht geprüft, und es wurde kein Newsletter manuell ausgelöst.
