@@ -33,11 +33,11 @@ Du zahlst eventuell mehr, ohne es zu merken. Vielleicht erfüllst du die Bedingu
 
 ## Was du jetzt konkret tun kannst
 
-1. **Checke deine aktuelle Kontoführung** – logge dich in dein Online‑Banking ein und schaue nach, ob Gebühren anfallen.  
-2. **Vergleiche die Konditionen** – nutze unabhängige Vergleichsportale, um die Gebührenstruktur anderer Institute zu prüfen.  
-3. **Prüfe die Gratis‑Kriterien** – lies nach, welche Voraussetzungen für ein kostenfreies Girokonto gelten (z. B. Mindesteingang, monatliche Buchungen).  
-4. **Passe dein Nutzungsverhalten an** – wenn du die Kriterien nicht erfüllst, überlege, ob du dein Zahlungsverhalten ändern kannst (z. B. Daueraufträge, Gehaltseingang).  
-5. **Kontaktiere deine Bank** – frage nach möglichen Ausnahmeregelungen oder Sonderkonditionen, die dir nicht automatisch angezeigt werden.  
+1. **Checke deine aktuelle Kontoführung** – logge dich in dein Online‑Banking ein und schaue nach, ob Gebühren anfallen.
+2. **Vergleiche die Konditionen** – nutze unabhängige Vergleichsportale, um die Gebührenstruktur anderer Institute zu prüfen.
+3. **Prüfe die Gratis‑Kriterien** – lies nach, welche Voraussetzungen für ein kostenfreies Girokonto gelten (z. B. Mindesteingang, monatliche Buchungen).
+4. **Passe dein Nutzungsverhalten an** – wenn du die Kriterien nicht erfüllst, überlege, ob du dein Zahlungsverhalten ändern kannst (z. B. Daueraufträge, Gehaltseingang).
+5. **Kontaktiere deine Bank** – frage nach möglichen Ausnahmeregelungen oder Sonderkonditionen, die dir nicht automatisch angezeigt werden.
 6. **Setze dir ein Erinnerungsintervall** – plane, alle sechs bis zwölf Monate deine Kontokonditionen zu überprüfen, um rechtzeitig reagieren zu können.
 
 ## Hintergrund: So funktioniert der Markt dahinter
@@ -47,8 +47,8 @@ Der Bankensektor ist stark reguliert, aber gleichzeitig von intensivem Wettbewer
 Ein weiterer Treiber ist die Digitalisierung. Online‑Banken und FinTech‑Anbieter können mit geringeren Betriebskosten günstigere Konditionen anbieten. Traditionelle Institute reagieren darauf, indem sie ihre Preisgestaltung flexibler gestalten. Das bedeutet, dass die Schwelle für ein kostenloses Girokonto häufiger neu definiert wird. Für Kunden entsteht dadurch ein dynamisches Umfeld, in dem ein regelmäßiger Vergleich sinnvoll ist.
 
 Faustregeln für den Markt:  
-- **Kosten entstehen immer dort, wo ein Service bereitgestellt wird.** Wenn ein Service günstiger wird, wird er oft mit neuen Bedingungen verknüpft.  
-- **Wettbewerb drückt die Preise, aber erhöht die Komplexität.** Mehr Anbieter bedeuten mehr Optionen, aber auch mehr Bedingungen, die beachtet werden müssen.  
+- **Kosten entstehen immer dort, wo ein Service bereitgestellt wird.** Wenn ein Service günstiger wird, wird er oft mit neuen Bedingungen verknüpft.
+- **Wettbewerb drückt die Preise, aber erhöht die Komplexität.** Mehr Anbieter bedeuten mehr Optionen, aber auch mehr Bedingungen, die beachtet werden müssen.
 - **Transparenz ist ein Verkaufsargument.** Banken zeigen ihre Gebühren offen, erwarten aber, dass Kunden aktiv nachfragen.
 
 ## FAQ – die wichtigsten Fragen zur Meldung

@@ -128,10 +128,10 @@ Eine optimale Luftfeuchtigkeit von etwa 40–60 % sorgt dafür, dass wir uns
 ## Welche Temperaturen sind für welche Räume ideal?
 Nicht jeder Raum muss gleich warm sein. In der Küche entsteht durch das Kochen oft zusätzliche Wärme, im Schlafzimmer bevorzugen wir Kühle. Hier eine Orientierung:
 
-* **Wohnzimmer:** ca. 20–21 °C (Stufe 3)  
-* **Schlafzimmer:** ca. 16–18 °C (Stufe 2)  
-* **Küche:** ca. 18 °C (Stufe 2–2,5)  
-* **Badezimmer:** ca. 22–24 °C (Stufe 3,5–4)  
+* **Wohnzimmer:** ca. 20–21 °C (Stufe 3)
+* **Schlafzimmer:** ca. 16–18 °C (Stufe 2)
+* **Küche:** ca. 18 °C (Stufe 2–2,5)
+* **Badezimmer:** ca. 22–24 °C (Stufe 3,5–4)
 * **Flur:** ca. 15–16 °C (Stufe 1,5–2)
 
 Wenn du dich an diese Richtwerte hältst, legst du die Basis für eine gesunde und kosteneffiziente Heizperiode. Es ist wichtig zu verstehen, dass die Zahlen auf dem Thermostatkopf (1–5) festen Temperaturen zugeordnet sind. Stufe 3 entspricht in der Regel fast immer den magischen 20 Grad.

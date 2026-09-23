@@ -210,7 +210,7 @@ Der Wechsel ist einfach und wirkt. Er kostet **null Euro**. Schnellere Seiten, m
 Mein Tipp: Stelle den Server im Router ein. Dann profitieren alle Geräte. Prüfe danach auch deinen Tarif. So holst du Tempo und Preis optimal heraus.
 
 
-**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
+**Weiterlesen:** [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/) · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/)
 
 ## Häufige Fragen
 

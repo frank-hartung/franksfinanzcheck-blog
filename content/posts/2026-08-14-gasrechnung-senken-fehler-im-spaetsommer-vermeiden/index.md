@@ -24,7 +24,7 @@ pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswech
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.
+Wer seine Gasrechnung senken will, sollte im Spätsommer handeln. Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

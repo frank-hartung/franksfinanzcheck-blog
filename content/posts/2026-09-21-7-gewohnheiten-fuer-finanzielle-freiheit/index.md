@@ -31,7 +31,7 @@ Ein klares Budget ist das Fundament jedes sparsamen Haushalts. Moderne Budget‑
 | Excel‑Tabelle          | Vollständige Kontrolle über Zahlen  | Nutze die 50‑30‑20‑Faustregel        |
 | Papier‑Haushaltsbuch   | Keine Ablenkungen durch Technik      | Schreibe am Monatsende alle Summen   |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du verdienst netto 2.500 € pro Monat. Nach der 50‑30‑20‑Faustregel sollten 50 % (1.250 €) für feste Ausgaben, 30 % (750 €) für variable Kosten und 20 % (500 €) für Sparen und Investieren vorgesehen sein. Wenn du mit deiner App feststellst, dass du monatlich 200 € zu viel im Bereich „Freizeit“ ausgibst, kannst du diesen Betrag direkt in die Sparquote umleiten und so deine Rücklage um 200 € erhöhen.
 
 ## Gewohnheit 2 – Bewusster Konsum statt Verzicht
@@ -44,7 +44,7 @@ Frugalismus ist oft mit Askese gleichgesetzt. Das stimmt so nicht. Es geht um kl
 | Kleidung      | Second‑Hand oder Sale‑Käufe      | bis zu einem halben Preis gegenüber Neukauf |
 | Freizeit      | Kostenlose Stadtangebote, Bibliothek | erhebliche Reduktion von Eintrittsgeldern |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du gibst monatlich 300 € für Lebensmittel aus. Durch einen wöchentlichen Essensplan und den Kauf von saisonalem Gemüse reduzierst du die Ausgaben um etwa ein Drittel. Das entspricht einer Ersparnis von rund 100 € pro Monat, die du sofort in deine Notfallreserve einzahlen kannst.
 
 ## Gewohnheit 3 – Verträge regelmäßig prüfen
@@ -57,7 +57,7 @@ Viele Versicherungen, Handy‑Tarife und DSL‑Verträge laufen automatisch weit
 | Handy‑Tarif      | nach 24 Monaten     | Wechsel zu Prepaid kann Kosten senken |
 | DSL‑Anbieter     | nach 24 Monaten     | Vergleich über CHECK24 lohnt sich regelmäßig |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Dein aktueller Handy‑Tarif kostet 30 € pro Monat. Beim jährlichen Vergleich findest du einen Prepaid‑Tarif für 15 € bei gleichem Datenvolumen. Die Differenz von 15 € pro Monat spart du 180 € im Jahr – das entspricht fast einem vollen Monatsgehalt, das du anderweitig einsetzen kannst.
 
 ## Gewohnheit 4 – Kontoführungsgebühren vermeiden
@@ -70,7 +70,7 @@ Banken erhöhen Gebühren oft schleichend. Wer nicht vergleicht, zahlt für Leis
 | Direktbank      | 0 € / Monat         | Online‑Konto ohne Bedingungen      |
 | Kreditinstitut  | 3 € / Monat         | Gebührenfrei bei Mindestgeldeingang |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du zahlst 5 € monatlich für dein Girokonto. Wechselst du zu einer kostenlosen Direktbank, sparst du 60 € im Jahr. Diese Summe kannst du in deine langfristige Sparrate einfließen lassen und damit deine finanzielle Freiheit beschleunigen.
 
 ## Gewohnheit 5 – Energieverbrauch senken
@@ -83,7 +83,7 @@ Strom und Gas machen einen großen Teil der Fixkosten aus. Kleine Änderungen im
 | Geräte komplett ausschalten   | bis zu 10 % weniger Stromverbrauch |
 | Heizung um 1 °C niedriger einstellen | merkbare Reduktion der Heizkosten |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Dein monatlicher Strompreis liegt bei 80 €. Durch den Umstieg auf LED‑Lampen und das konsequente Ausschalten von Standby‑Geräten reduzierst du den Verbrauch um etwa 15 %. Das spart rund 12 € pro Monat – in einem Jahr sind das 144 €, die du in deine Notfallreserve einlegen kannst.
 
 ## Gewohnheit 6 – Notgroschen aufbauen
@@ -96,7 +96,7 @@ Ein finanzielles Polster fängt plötzliche Ausgaben ab. Es gibt dir Freiheit: D
 | 10 % des Nettoeinkommens | 7.500 €                              | ca. 15 Monate                |
 | 15 % des Nettoeinkommens | 7.500 €                              | ca. 10 Monate                |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du legst 10 % deines Nettoeinkommens (250 € bei 2.500 €) monatlich zurück. Nach 12 Monaten hast du 3.000 € angespart – das entspricht bereits einem Monat deiner Lebenshaltungskosten und bildet den ersten Baustein deines Notgroschens.
 
 ## Gewohnheit 7 – Investieren für langfristige Freiheit
@@ -109,7 +109,7 @@ Sparen allein bringt selten echte finanzielle Freiheit. Mit klugen Anlagen wäch
 | Aktien‑ETF      | moderat bis hoch    | durchschnittliche Marktrendite über Jahre |
 | Immobilienfonds| moderat             | stabile Erträge, aber weniger liquid |
 
-> **Rechenbeispiel:**  
+> **Rechenbeispiel:**
 > Du investierst monatlich 200 € in einen breit gestreuten Aktien‑ETF. Bei einer durchschnittlichen Jahresrendite von etwa 5 % (nach historischer Erfahrung) wächst dein Portfolio nach 10 Jahren auf rund 31.000 € – das ist ein deutliches Plus gegenüber reinem Sparen und kann später als zusätzliche Einnahmequelle dienen.
 
 ## Häufige Fehler und wie du sie vermeidest

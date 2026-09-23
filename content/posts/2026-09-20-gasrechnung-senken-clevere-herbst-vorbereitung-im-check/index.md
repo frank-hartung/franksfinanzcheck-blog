@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Ein frühzeitiger Check der Heizung vor der Heizperiode spart in der Regel 5 %–10 % der jährlichen Gasrechnung. Dabei entdeckst du Lecks, ineffiziente Brenner und verstopfte Heizkörper, die sofort behoben werden können. So senkst du deine Kosten 2026 merklich, ohne teure Nachrüstungen."
 ---
 
-Wer seine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) will, sollte im Spätsommer handeln. Willst du im nächsten Winter 500 € oder mehr behalten?
+Wer seine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) will, sollte im Spätsommer handeln. Willst du im nächsten Winter 500 € oder mehr behalten?
 Viele Hausbesitzer ignorieren den Heizungskeller, solange die Sonne scheint – das wird oft ein teurer Fehler.
 Mängel, die du erst im November bemerkst, kosten dich horrende Notdienst-Preise.
 

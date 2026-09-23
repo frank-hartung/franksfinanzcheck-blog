@@ -62,11 +62,11 @@ Nicht der Beitrag entscheidet, sondern das Kleingedruckte. Diese fünf Bausteine
 
 | Baustein | Schwacher Tarif | Guter Tarif |
 |:---|:---|:---|
-| Zahnersatz (Krone, Brücke, Implantat) | 50–60 % | 80–100 % inkl. Implantate |
+| Zahnersatz (Krone, Brücke, Implantat) | 50–60 % | 80–100 % inkl. Implantate |
 | Erstattungssatz (GOZ) | bis 2,3-fach | bis 3,5-fach (Höchstsatz) |
-| Zahnbehandlung (Füllungen, Wurzel, Parodontose) | 50–80 % | 90–100 % |
-| Prophylaxe (professionelle Zahnreinigung) | kein Budget | 100–200 € pro Jahr |
-| Kieferorthopädie (wichtig bei Kindern) | ausgeschlossen | bis rund 2.000 € |
+| Zahnbehandlung (Füllungen, Wurzel, Parodontose) | 50–80 % | 90–100 % |
+| Prophylaxe (professionelle Zahnreinigung) | kein Budget | 100–200 € pro Jahr |
+| Kieferorthopädie (wichtig bei Kindern) | ausgeschlossen | bis rund 2.000 € |
 
 Zwei Punkte verdienen einen genaueren Blick. **Erstens der GOZ-Satz:** Die Gebührenordnung für Zahnärzte (GOZ) erlaubt Steigerungssätze bis zum 3,5-fachen Satz. Viele Zahnärzte rechnen aufwendige Leistungen mit mehr als dem 2,3-fachen Satz ab. Erstattet dein Tarif nur bis 2,3-fach, zahlst du die Differenz selbst – achte also auf Erstattung bis zum Höchstsatz.
 

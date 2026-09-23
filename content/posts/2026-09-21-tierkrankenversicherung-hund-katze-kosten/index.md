@@ -47,8 +47,8 @@ Beide Varianten versprechen Schutz – aber sie decken völlig unterschiedliche 
 | Operationen (Krankheit + Unfall) | Ja | Ja |
 | Tierarzt ohne OP (Infekt, Allergie, Durchfall) | Nein | Ja, bis zur Jahreshöchstgrenze |
 | Vorsorge (Impfung, Wurmkur, Zahnstein) | Nein | Teilweise, meist mit Vorsorgebudget |
-| Typischer Monatsbeitrag Hund | rund 15 bis 25 € | rund 35 bis 130 € |
-| Typischer Monatsbeitrag Katze | rund 10 bis 20 € | rund 15 bis 80 € |
+| Typischer Monatsbeitrag Hund | rund 15 bis 25 € | rund 35 bis 130 € |
+| Typischer Monatsbeitrag Katze | rund 10 bis 20 € | rund 15 bis 80 € |
 | Für wen? | Junge, gesunde Tiere; Halter mit [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) | Ältere Tiere, Risikorassen, volle Kostenkontrolle |
 
 **Rechenbeispiel OP-Schutz:** Eine TPLO (Kreuzband-OP, großer Hund) kostet rund 2.500 Euro. Der OP-Tarif erstattet je nach Quote 80 bis 100 Prozent – also 2.000 bis 2.500 Euro. Bei rund 20 Euro Monatsbeitrag (240 Euro im Jahr) hat sich der Tarif mit einer einzigen OP für rund zehn Jahre bezahlt gemacht.
@@ -60,7 +60,7 @@ Beide Varianten versprechen Schutz – aber sie decken völlig unterschiedliche 
 Der Beitrag hängt von Tierart, Rasse, Alter und Leistungsumfang ab. Große Hunderassen zahlen deutlich mehr als kleine, Freigänger-Katzen mehr als Wohnungskatzen. Typische Spannen für solide Tarife:
 
 - **Hund, kleine Rasse:** OP-Schutz rund 15 bis 25 Euro, Vollschutz rund 35 bis 90 Euro im Monat.
-- **Hund, große Rasse:** OP-Schutz rund 20 bis 35 Euro, Vollschutz rund 55 bis 130 Euro im Monat. Testsieger-Niveau mit 100 Prozent und ohne Jahreshöchstgrenze liegt bei rund 90 bis 110 Euro..
+- **Hund, große Rasse:** OP-Schutz rund 20 bis 35 Euro, Vollschutz rund 55 bis 130 Euro im Monat. Testsieger-Niveau mit 100 Prozent und ohne Jahreshöchstgrenze liegt bei rund 90 bis 110 Euro.
 - **Katze, Wohnungskatze:** OP-Schutz rund 10 bis 18 Euro, Vollschutz rund 15 bis 70 Euro im Monat.
 - **Katze, Freigänger:** Vollschutz rund 20 bis 80 Euro im Monat – das höhere Unfall- und Infektrisiko kostet Aufpreis.
 - **Pferd (nur OP):** rund 17 bis 60 Euro im Monat je nach Umfang.
@@ -74,8 +74,8 @@ Drei Bausteine entscheiden über den Wert eines Tarifs – alles andere ist Beiw
 | Baustein | Schwacher Tarif | Guter Tarif |
 |:---|:---|:---|
 | GOT-Satz (Abrechnungsfaktor) | 1- bis 2-fach | 3- bis 4-fach, inkl. Notdienst |
-| Jahreshöchstgrenze | 1.000 bis 3.000 € | 8.000 € und mehr, ideal unbegrenzt |
-| Erstattungsquote | 60 bis 80 % | 80 bis 100 % |
+| Jahreshöchstgrenze | 1.000 bis 3.000 € | 8.000 € und mehr, ideal unbegrenzt |
+| Erstattungsquote | 60 bis 80 % | 80 bis 100 % |
 | Wartezeit Krankheit | 3 Monate und mehr | rund 30 Tage (Unfall: ab Tag 1) |
 | Wartezeit chronisch (HD, ED, Kreuzband) | 12 bis 18 Monate | höchstens 6 Monate, ideal keine Sonderfrist |
 | Freie Tierarztwahl | eingeschränkt | freie Wahl inkl. Klinik und Notdienst |
@@ -97,7 +97,7 @@ Der richtige Tarif hängt von Alter, Rasse und deinem finanziellen Puffer ab:
 | Katze als Freigänger | Mindestens OP-Schutz, besser Vollschutz – Unfälle und Bissverletzungen sind häufig |
 | Tier ab etwa 7 oder 8 Jahren | Schnell handeln – viele Tarife nehmen ältere Tiere gar nicht mehr auf |
 | Chronisch krankes Tier | Nur Vollschutz hilft – Vorerkrankungen sind meist ausgeschlossen, Neues ist abgedeckt |
-| Solider Notgroschen (mindestens 3.000 €) vorhanden | OP-Schutz plus Puffer ist oft die günstigste Kombination |
+| Solider Notgroschen (mindestens 3.000 €) vorhanden | OP-Schutz plus Puffer ist oft die günstigste Kombination |
 
 **Rechenbeispiel Eintrittsalter:** Ein Labrador-Welpe kostet im Vollschutz rund 45 Euro im Monat. Derselbe Hund mit 6 Jahren und zwei Vorerkrankungen (Ohren, Allergie) zahlt – wenn überhaupt aufgenommen – leicht 90 bis 110 Euro, und beide Vorerkrankungen bleiben dauerhaft ausgeschlossen. Jeder Monat Warten verteuert den Schutz also doppelt: höherer Beitrag plus mehr Ausschlüsse.
 

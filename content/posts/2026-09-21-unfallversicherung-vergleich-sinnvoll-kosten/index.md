@@ -82,12 +82,12 @@ Stiftung Warentest/Finanztest hat Anfang 2026 rund 120 Tarife geprüft. Mehrfach
 
 | Baustein | Schwacher Tarif | Guter Tarif |
 |:---|:---|:---|
-| Grundsumme (Invalidität) | unter 100.000 € | mindestens 100.000 €, Hauptverdiener das 5- bis 6-fache Bruttoeinkommen |
-| Progression | keine oder ab 50 % Invalidität | 225 bis 350 %, greift ab 25 % Invalidität |
-| Gliedertaxe | GDV-Mindestwerte | deutlich darüber (z. B. Hand 70 %+ statt 55 %) |
-| Mitwirkungsanteil | 25–50 % (Kürzung bei Vorerkrankung) | 100 % (keine Kürzung) |
-| Unfallrente | keine | monatliche Rente ab 50 % Invalidität |
-| Bergungskosten | niedrig oder fehlend | weltweit, bis rund 25.000 bis 50.000 € |
+| Grundsumme (Invalidität) | unter 100.000 € | mindestens 100.000 €, Hauptverdiener das 5- bis 6-fache Bruttoeinkommen |
+| Progression | keine oder ab 50 % Invalidität | 225 bis 350 %, greift ab 25 % Invalidität |
+| Gliedertaxe | GDV-Mindestwerte | deutlich darüber (z. B. Hand 70 %+ statt 55 %) |
+| Mitwirkungsanteil | 25–50 % (Kürzung bei Vorerkrankung) | 100 % (keine Kürzung) |
+| Unfallrente | keine | monatliche Rente ab 50 % Invalidität |
+| Bergungskosten | niedrig oder fehlend | weltweit, bis rund 25.000 bis 50.000 € |
 
 Zwei Stellschrauben schauen wir uns genauer an. **Erstens die Progression:** Sie vervielfacht die Leistung bei schwerer Invalidität. Bei 350 Prozent und voller Invalidität zahlt der Versicherer das 3,5-Fache der Grundsumme. Aus 150.000 Euro werden so 525.000 Euro.
 Achte darauf, ab welchem Grad die Progression greift: Gute Tarife starten bei 25 Prozent, schwache erst bei 50 Prozent.

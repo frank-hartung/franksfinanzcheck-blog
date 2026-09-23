@@ -25,13 +25,13 @@ Du hast das Gefühl, dass am Monatsende immer wieder Geld fehlt, obwohl du eigen
 
 Der erste Schritt zum sparsamen Leben ist, einen klaren Überblick über dein Geld zu bekommen. Ohne Zahlen bleibt das Sparen ein vages Gefühl.
 
-> **Rechenbeispiel:**  
-> Du verdienst netto 2 800 € im Monat. Du nutzt eine Budget‑App und trägst jede Ausgabe ein. Nach einem Monat zeigt dir die App folgende Verteilung:  
-> • Wohnen = 35 % → 980 €  
-> • Lebensmittel = 15 % → 420 €  
-> • Verkehr = 10 % → 280 €  
-> • Freizeit = 12 % → 336 €  
-> • Sonstiges = 28 % → 784 €  
+> **Rechenbeispiel:**
+> Du verdienst netto 2 800 € im Monat. Du nutzt eine Budget‑App und trägst jede Ausgabe ein. Nach einem Monat zeigt dir die App folgende Verteilung:
+> • Wohnen = 35 % → 980 €
+> • Lebensmittel = 15 % → 420 €
+> • Verkehr = 10 % → 280 €
+> • Freizeit = 12 % → 336 €
+> • Sonstiges = 28 % → 784 €
 > Die Gesamtausgaben betragen 2 800 €, also exakt dein Nettoeinkommen. Nun wendest du die **50‑30‑20‑Faustregel** an: 50 % für feste Kosten, 30 % für variable Ausgaben, 20 % für Sparen und Rücklagen. Dein aktuelles Verhältnis liegt bei 35 % + 15 % + 10 % = 60 % für feste und variable Kosten – das ist zu hoch. Reduziere die variablen Posten um 10 % (280 €) und lege die frei werdenden 280 € in ein Sparkonto. So erreichst du das Ziel von 20 % Sparquote, ohne deine Grundbedürfnisse zu gefährden.
 
 Durch das tägliche Eintragen erkennst du sofort, wo du unnötig viel ausgibst – zum Beispiel teure Coffeeshops oder impulsive Online‑Käufe. Das bewusste Tracking ist die Basis für alle weiteren Tricks.
@@ -54,9 +54,9 @@ Einfaches Vorgehen: Notiere dir zu Beginn des Monats, welche Geräte du besonder
 
 Viele Haushalte zahlen für überflüssige oder doppelte Versicherungen. Ein jährlicher Check kann hier schnell mehrere hundert Euro einsparen. Der Trick besteht darin, alle Verträge zu sammeln, zu vergleichen und ggf. zu einem Anbieter zu bündeln.
 
-1. **Bestandsaufnahme** – Schreibe alle bestehenden Policen in eine Tabelle (z. B. Haftpflicht, Hausrat, Kfz, Rechtsschutz).  
-2. **Leistungsumfang prüfen** – Frage dich, ob du wirklich alle Leistungen brauchst (z. B. Auslandsschutz, wenn du selten reist).  
-3. **Preisvergleich** – Nutze CHECK24, um aktuelle Angebote zu vergleichen. Achte darauf, dass die Deckung gleichwertig bleibt.  
+1. **Bestandsaufnahme** – Schreibe alle bestehenden Policen in eine Tabelle (z. B. Haftpflicht, Hausrat, Kfz, Rechtsschutz).
+2. **Leistungsumfang prüfen** – Frage dich, ob du wirklich alle Leistungen brauchst (z. B. Auslandsschutz, wenn du selten reist).
+3. **Preisvergleich** – Nutze CHECK24, um aktuelle Angebote zu vergleichen. Achte darauf, dass die Deckung gleichwertig bleibt.
 4. **Bündelung** – Viele Anbieter gewähren Rabatte, wenn du mehrere Produkte bei ihnen abschließt. Das kann die Verwaltung vereinfachen und Kosten senken.
 
 Ein weiterer Faustregel‑Hinweis: Wenn du deine Versicherungen alle zwei Jahre überprüfst, vermeidest du veraltete Tarife und behältst die Kontrolle über deine Fixkosten.
@@ -65,9 +65,9 @@ Ein weiterer Faustregel‑Hinweis: Wenn du deine Versicherungen alle zwei Jahre 
 
 Der Jahreswechsel ist das klassische Zeitfenster, in dem Grundversorger ihre Preise neu anpassen. Das ist die ideale Gelegenheit, den eigenen Vertrag zu prüfen.
 
-- **Tarifwechsel**: Vergleiche über CHECK24 die aktuellen Angebote für DSL, Kabel und Mobilfunk. Oft gibt es günstigere Tarife mit ähnlicher Geschwindigkeit.  
-- **Vertragslaufzeit**: Achte darauf, dass du nicht länger als nötig an einen teuren Vertrag gebunden bist. Ein Wechsel nach 12 Monaten kann bereits erhebliche Ersparnisse bringen.  
-- **Datenvolumen**: Viele Nutzer benötigen weniger Daten als im Standard‑Tarif enthalten. Ein kleineres Datenpaket reduziert die monatliche Rate.  
+- **Tarifwechsel**: Vergleiche über CHECK24 die aktuellen Angebote für DSL, Kabel und Mobilfunk. Oft gibt es günstigere Tarife mit ähnlicher Geschwindigkeit.
+- **Vertragslaufzeit**: Achte darauf, dass du nicht länger als nötig an einen teuren Vertrag gebunden bist. Ein Wechsel nach 12 Monaten kann bereits erhebliche Ersparnisse bringen.
+- **Datenvolumen**: Viele Nutzer benötigen weniger Daten als im Standard‑Tarif enthalten. Ein kleineres Datenpaket reduziert die monatliche Rate.
 - **Kombination**: Manche Anbieter bieten Kombi‑Pakete (Internet + Mobil) an, die günstiger sind als die Einzelprodukte.
 
 Durch einen gezielten Tarifwechsel kannst du im Jahresvergleich leicht ein bis zwei Euro pro Tag einsparen – das summiert sich schnell zu einem beachtlichen Betrag im Jahresverlauf.
@@ -76,10 +76,10 @@ Durch einen gezielten Tarifwechsel kannst du im Jahresvergleich leicht ein bis z
 
 Kleinere Ausgaben summieren sich häufig zu einem großen Teil des Budgets. Hier ein paar leicht umsetzbare Ideen:
 
-- **Selbst kochen** – Statt täglich auswärts zu essen, plane deine Mahlzeiten und koche in größeren Portionen. Das spart nicht nur Geld, sondern reduziert Lebensmittelverschwendung.  
-- **Second‑Hand** – Kleidung, Möbel und Elektronik lassen sich oft in gutem Zustand gebraucht kaufen. Das senkt die Anschaffungskosten erheblich.  
-- **Abo‑Check**: Prüfe, welche Abonnements du wirklich nutzt (Streaming, Zeitschriften, Fitnessstudio). Kündige alles, was du weniger als einmal im Monat nutzt.  
-- **Cash‑Back‑Programme**: Nutze Bonusprogramme wie PAYBACK, aber achte darauf, dass du nur für Einkäufe Punkte sammelst, die du ohnehin tätigen würdest.  
+- **Selbst kochen** – Statt täglich auswärts zu essen, plane deine Mahlzeiten und koche in größeren Portionen. Das spart nicht nur Geld, sondern reduziert Lebensmittelverschwendung.
+- **Second‑Hand** – Kleidung, Möbel und Elektronik lassen sich oft in gutem Zustand gebraucht kaufen. Das senkt die Anschaffungskosten erheblich.
+- **Abo‑Check**: Prüfe, welche Abonnements du wirklich nutzt (Streaming, Zeitschriften, Fitnessstudio). Kündige alles, was du weniger als einmal im Monat nutzt.
+- **Cash‑Back‑Programme**: Nutze Bonusprogramme wie PAYBACK, aber achte darauf, dass du nur für Einkäufe Punkte sammelst, die du ohnehin tätigen würdest.
 - **Gemeinsame Nutzung**: Bildet mit Nachbarn oder Freunden Car‑Sharing‑Gruppen oder nutzt Gemeinschafts‑Gartengeräte, um Anschaffungskosten zu teilen.
 
 Durch die Kombination dieser kleinen Maßnahmen kannst du im Schnitt mehrere hundert Euro pro Jahr zurücklegen, ohne dass du merklich an Lebensqualität verlierst.

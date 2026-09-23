@@ -28,12 +28,12 @@ Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter f�
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 
-Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir Schritt für Schritt.
+Wer clever vorgeht, spart beim **Sparen im Herbst** in der Regel zwischen **ca. 500 € und 1.300 €** an Haushaltskosten. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir Schritt für Schritt.
 
 **Das Wichtigste in Kürze**
 
-- **Wechselstichtag nutzen:** Durch den Wechsel der Kfz-Versicherung bis zum 30. November lassen sich ca. 150 € bis 400 € jährlich einsparen.
-- **Heizkosten optimieren:** Technische Maßnahmen wie das Entlüften und smarte Thermostate senken den Energieverbrauch um ca. 8 % bis 12 %.
+- **Wechselstichtag nutzen:** Durch den Wechsel der Kfz-Versicherung bis zum 30. November lassen sich ca. 150 € bis 400 € jährlich einsparen.
+- **Heizkosten optimieren:** Technische Maßnahmen wie das Entlüften und smarte Thermostate senken den Energieverbrauch um ca. 8 % bis 12 %.
 - **Antizyklisch handeln:** Der Abschluss von Strom- und Gasverträgen im Herbst sichert oft bessere Konditionen vor der winterlichen Hochphase.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 Der 30. November ist der wichtigste Termin für Autofahrer. Fast alle Kfz‑Verträge enden am 31. Dezember.
 
-Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im Herbst kämpfen die Versicherer um Neukunden. Ein Wechsel bringt deshalb oft **ca. 180 € bis 350 €** im Jahr – bei gleicher Leistung.
+Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im Herbst kämpfen die Versicherer um Neukunden. Ein Wechsel bringt deshalb oft **ca. 180 € bis 350 €** im Jahr – bei gleicher Leistung.
 
 **Wie du vorgehst:**
 
@@ -67,19 +67,19 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 **Nachteile:** – Bei sehr alten Fahrzeugen kann die [Schadenfreiheitsklasse](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (SF‑Klasse) beim Wechsel verloren gehen.
 - Manche Sonderkonditionen (z. B. Jahresendbonus) entfallen.
 
-**Beispielrechnung:** Anna fährt 12 000 km/Jahr, zahlt 820 € für ihre Vollkasko. Nach dem Vergleich findet sie einen Tarif mit 560 € Jahresbeitrag inkl. Telematik‑Rabatt. Sie spart **260 €** und behält die gleiche SF‑Klasse, weil der neue Anbieter die Rückübernahme anbietet.
+**Beispielrechnung:** Anna fährt 12 000 km/Jahr, zahlt 820 € für ihre Vollkasko. Nach dem Vergleich findet sie einen Tarif mit 560 € Jahresbeitrag inkl. Telematik‑Rabatt. Sie spart **260 €** und behält die gleiche SF‑Klasse, weil der neue Anbieter die Rückübernahme anbietet.
 
 ---
 
 ### 2. Heizungs‑Check & Vorlauftemperatur senken
 
-Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen. Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
+Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen. Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
 
 **Konkrete Maßnahmen:**
 
-1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
+1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
 2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
-3. **Witterungsgeführte Thermostate** installieren (Kosten 15-30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
+3. **Witterungsgeführte Thermostate** installieren (Kosten 15-30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
 
 **Pro & Contra:**
@@ -89,35 +89,35 @@ Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Hei
 | Deutlich geringere Heizkosten | Anfangsinvestition für smarte Thermostate |
 | Komfortsteigerung durch gleichmäßigere Raumtemperatur | Bei sehr alten Heizungen kann die Regelung begrenzt sein |
 
-**Praxisbeispiel:** Familie Müller hat ein 150 m² Haus, Jahresverbrauch 18 000 kWh. Nach dem Entlüften und einer Vorlauftemperatur‑Reduktion von 70 °C auf 65 °C sinkt ihr Verbrauch auf 15 800 kWh → **2 200 kWh Ersparnis**, das entspricht ca. **210 €** bei einem Gaspreis von 9,5 ¢/kWh.
+**Praxisbeispiel:** Familie Müller hat ein 150 m² Haus, Jahresverbrauch 18 000 kWh. Nach dem Entlüften und einer Vorlauftemperatur‑Reduktion von 70 °C auf 65 °C sinkt ihr Verbrauch auf 15 800 kWh → **2 200 kWh Ersparnis**, das entspricht ca. **210 €** bei einem Gaspreis von 9,5 ¢/kWh.
 
 ---
 
 ### 3. Sachversicherungen bündeln und Altverträge kündigen
 
-Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat. Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
+Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat. Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
 
 **Checkliste für den Versicherungs‑Check:**
 
 | Versicherung | Prüfpunkte | Sparpotenzial |
 |---|---|---|
-| Haftpflicht | Deckungssumme, Selbstbeteiligung, Kombi‑Rabatt | ca. 30 €‑50 €/Jahr |
-| Hausrat | Wohnfläche, Wertgegenstände, Glas‑/Einbruchschutz | ca. 20 €‑40 €/Jahr |
-| Rechtsschutz | Leistungsumfang (z. B. Arbeitsrecht) | ca. 10 €‑30 €/Jahr |
-| Kfz‑Zusatz (z. B. Schutzbrief) | Notwendigkeit prüfen | ca. 15 €‑25 €/Jahr |
+| Haftpflicht | Deckungssumme, Selbstbeteiligung, Kombi‑Rabatt | ca. 30 €‑50 €/Jahr |
+| Hausrat | Wohnfläche, Wertgegenstände, Glas‑/Einbruchschutz | ca. 20 €‑40 €/Jahr |
+| Rechtsschutz | Leistungsumfang (z. B. Arbeitsrecht) | ca. 10 €‑30 €/Jahr |
+| Kfz‑Zusatz (z. B. Schutzbrief) | Notwendigkeit prüfen | ca. 15 €‑25 €/Jahr |
 
 **Vor‑ und Nachteile einer Bündelung:**
 
-- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt.
+- **Vorteil:** Ein Ansprechpartner, ein Jahresbeitrag, häufig 10 %‑15 % Rabatt.
 - **Nachteil:** Bei einem Schaden kann die gesamte Police gekündigt werden, wenn du mit dem Anbieter unzufrieden bist.
 
-**Rechenbeispiel:** Lena hat drei Einzelverträge: Haftpflicht 6 €/Monat, Hausrat 5 €/Monat, Rechtsschutz 4 €/Monat → 180 €/Jahr. Ein Kombi‑Angebot kostet 12 €/Monat (144 €/Jahr). Sie spart **36 €** und hat nur noch einen Vertrag zu verwalten.
+**Rechenbeispiel:** Lena hat drei Einzelverträge: Haftpflicht 6 €/Monat, Hausrat 5 €/Monat, Rechtsschutz 4 €/Monat → 180 €/Jahr. Ein Kombi‑Angebot kostet 12 €/Monat (144 €/Jahr). Sie spart **36 €** und hat nur noch einen Vertrag zu verwalten.
 
 ---
 
 ### 4. Strom‑ und Gastarife antizyklisch wechseln
 
-Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, sicherst du dir oft bessere Preise. Viele Tarife haben lange Preisgarantien. Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
+Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, sicherst du dir oft bessere Preise. Viele Tarife haben lange Preisgarantien. Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
 
 **Schritte zum Wechsel:**
 
@@ -133,7 +133,7 @@ Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, s
 | In der Regel günstigere Grundpreise | Eventuell höhere Abschlagszahlung zu Beginn |
 | Transparente Vertragslaufzeit | Bei Wechsel kann ein kurzer Sonderkündigungszeitraum entstehen |
 
-**Beispiel:** Markus hat einen Stromtarif mit 30 ct/kWh Grundpreis + 6 ct/kWh Arbeitspreis. Neuer Anbieter bietet 27 ct/kWh Grundpreis + 5,5 ct/kWh Arbeitspreis. Jahresverbrauch 3.500 kWh → Ersparnis: (3 ct + 0,5 ct) × 3.500 kWh = 122,5 € plus geringere Grundgebühr → insgesamt ca. **150 €**.
+**Beispiel:** Markus hat einen Stromtarif mit 30 ct/kWh Grundpreis + 6 ct/kWh Arbeitspreis. Neuer Anbieter bietet 27 ct/kWh Grundpreis + 5,5 ct/kWh Arbeitspreis. Jahresverbrauch 3.500 kWh → Ersparnis: (3 ct + 0,5 ct) × 3.500 kWh = 122,5 € plus geringere Grundgebühr → insgesamt ca. **150 €**.
 
 ---
 
@@ -141,16 +141,16 @@ Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, s
 
 Kürbisse, Äpfel und Kohl haben im Herbst Saison. Regionales Obst und Gemüse ist frisch und deutlich preiswerter.
 
-Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren sparen monatlich etwa **ca. 50 € bis 80 €**. Wer mit Wochenplänen kocht, reduziert Lebensmittelabfälle auf ein Minimum.
+Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren sparen monatlich etwa **ca. 50 € bis 80 €**. Wer mit Wochenplänen kocht, reduziert Lebensmittelabfälle auf ein Minimum.
 
 **Praktische Tipps:**
 
 | Tipp | Umsetzung | Ersparnis (Beispiel) |
 |---|---|---|
-| Wochenplan erstellen | 30 min am Sonntag | Vermeidet Impulskäufe, spart ca. 30 € |
-| Große Mengen einkochen (z. B. Kürbissuppe) | 1-2 h einmal im Monat | 10 €‑15 € pro Portion |
-| Gemüse einfrieren (Brokkoli, Spinat) | Schnell blanchieren, luftdicht verpacken | 5 €‑8 € pro Woche |
-| Preis‑Check: Markt vs. Supermarkt | Direkt beim Bauernmarkt einkaufen | Oft 20 %‑40 % günstiger |
+| Wochenplan erstellen | 30 min am Sonntag | Vermeidet Impulskäufe, spart ca. 30 € |
+| Große Mengen einkochen (z. B. Kürbissuppe) | 1-2 h einmal im Monat | 10 €‑15 € pro Portion |
+| Gemüse einfrieren (Brokkoli, Spinat) | Schnell blanchieren, luftdicht verpacken | 5 €‑8 € pro Woche |
+| Preis‑Check: Markt vs. Supermarkt | Direkt beim Bauernmarkt einkaufen | Oft 20 %‑40 % günstiger |
 
 **Vor‑ und Nachteile von Vorratshaltung:**
 
@@ -161,7 +161,7 @@ Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren spar
 
 ### 6. Energieeffizienz durch Fensterdichtungen und Zugluftstopper
 
-Undichte Fenster lassen kalte Luft herein. Dichtungsbänder aus dem Baumarkt kosten oft nur rund 10 €.
+Undichte Fenster lassen kalte Luft herein. Dichtungsbänder aus dem Baumarkt kosten oft nur rund 10 €.
 
 Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft weniger. Das entlastet deine Strom‑ und Gasrechnung spürbar.
 
@@ -169,23 +169,23 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 
 1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft.
 2. **Dichtungsband anbringen:** Selbstklebend, 2-3 cm Breite, rund um Fensterrahmen.
-3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
+3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
 
-**Rechenbeispiel:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca. 5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren.
+**Rechenbeispiel:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca. 5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren.
 
 ---
 
 ### 7. Freizeitgestaltung auf herbstliche Gratis‑Aktivitäten umstellen
 
-Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig. So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
+Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig. So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
 
 **Ideen für kostenlose Aktivitäten:**
 
 | Aktivität | Aufwand | Spartipp |
 |---|---|---|
 | Pilzsammeln (mit App zur Bestimmung) | 2 h/Wochenende | Keine Kosten, frische Zutaten für Suppe |
-| DIY‑Herbstdeko aus Naturmaterial | 1 h | Spart Dekorationsbudget (statt ca. 20 € pro Saison) |
+| DIY‑Herbstdeko aus Naturmaterial | 1 h | Spart Dekorationsbudget (statt ca. 20 € pro Saison) |
 | Kostenlose Stadtführungen (Touristen‑Info) | 1-2 h | Kultur erleben, kein Eintritt |
 | Bibliotheks‑Lesungen & Workshops | 1-3 h | Weiterbildung [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) |
 
@@ -200,14 +200,14 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 
 | Sparmaßnahme | Zeitaufwand | Typische Ersparnis |
 |:---|:---|:---|
-| [Kfz‑Versicherung wechseln](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (bis 30.11.) | 30 Minuten | **ca. 180–350 €** |
-| [Heizung entlüften im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **ca. 160–240 €** |
-| Strom‑ & Gastarif optimieren | 20 Minuten | **ca. 300–450 €** |
-| [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) & Hausrat anpassen | 25 Minuten | **ca. 80–150 €** |
-| Saisonales Einkaufen & Kochen | fortlaufend | **ca. 150–250 €** |
-| Fensterdichtungen & Zugluftstopper | 15 Minuten | **ca. 8–12 €** |
-| Gratis‑Freizeitaktivitäten | flexibel | **ca. 60–100 €** |
-| **Gesamtes Einsparpotenzial** | **ca. 2 Stunden** | **bis zu 1.440 €** |
+| [Kfz‑Versicherung wechseln](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) (bis 30.11.) | 30 Minuten | **ca. 180–350 €** |
+| [Heizung entlüften im Spätsommer](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) & Thermostate einstellen | 45 Minuten | **ca. 160–240 €** |
+| Strom‑ & Gastarif optimieren | 20 Minuten | **ca. 300–450 €** |
+| [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) & Hausrat anpassen | 25 Minuten | **ca. 80–150 €** |
+| Saisonales Einkaufen & Kochen | fortlaufend | **ca. 150–250 €** |
+| Fensterdichtungen & Zugluftstopper | 15 Minuten | **ca. 8–12 €** |
+| Gratis‑Freizeitaktivitäten | flexibel | **ca. 60–100 €** |
+| **Gesamtes Einsparpotenzial** | **ca. 2 Stunden** | **bis zu 1.440 €** |
 
 > 💶 **Finanz‑Tipp:** Mehr über effektive Sparstrategien und bewusste Konsumentscheidungen findest du in unserem Grundlagen‑Leitfaden zum [Frugalismus & Vermögensaufbau](../../pillar/frugalismus/).
 
@@ -217,7 +217,7 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 
 Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate. Wer im September kein Budget für Dezember hat, zahlt im Januar Dispo. Deshalb ist der Herbst der passende Moment für den Jahres‑Schnitt – nicht der 1. Januar, wenn die Motivation schon verbraucht ist.
 
-**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
+**Fixkosten‑Nachmittag.** Strom, Gas, DSL, Mobilfunk, Haftpflicht, Giro. Alles, was älter als 12 Monate ist, in den Vergleich. Ziel: 30–80 € im Monat, die du in den Weihnachtstopf oder den [Tagesgeld‑Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) schiebst.
 
 **Kleidung und Sport.** Second‑Hand für Herbstjacken, Skischuhe leihen statt kaufen, wenn du nur wenige Tage in den Alpen bist. Kosten pro Nutzung berechnen.
 
@@ -227,9 +227,9 @@ Der Kalender schiebt dir Halloween, Black Friday und Weihnachten in drei Monate.
 
 ## Black Friday ohne Nachzahlung
 
-Liste vor dem Event: nur Dinge, die schon auf der 30‑Tage‑Wunschliste stehen. Preis 30 Tage vorher notieren – viele „‑40 %“ beziehen sich auf den UVP, nicht auf den tatsächlichen Marktpreis von Mitte Oktober. Cashback nur für geplante Käufe nutzen. Bezahlmittel ohne Dispo verwenden.
+Liste vor dem Event: nur Dinge, die schon auf der 30‑Tage‑Wunschliste stehen. Preis 30 Tage vorher notieren – viele „‑40 %“ beziehen sich auf den UVP, nicht auf den tatsächlichen Marktpreis von Mitte Oktober. Cashback nur für geplante Käufe nutzen. Bezahlmittel ohne Dispo verwenden.
 
-Weihnachten: Budget pro Person vorher festlegen, Umschläge oder ein Unterkonto nutzen. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 € – sonst unterschätzt du den Dezember finanziell.
+Weihnachten: Budget pro Person vorher festlegen, Umschläge oder ein Unterkonto nutzen. Selbst gemachte Dinge zählen mit Materialkosten, nicht mit 0 € – sonst unterschätzt du den Dezember finanziell.
 
 Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine Rechnungen, die du im Oktober hättest vermeiden können.
 
@@ -237,7 +237,7 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 ## Weihnachtskonto im September
 
-Ein Unterkonto oder Umschlag „Dezember“ ab 1.9. führen: 4 × ca. 50–150 € je nach Haushalt zurücklegen. Geschenke, Bahnfahrten, Festessen einplanen.
+Ein Unterkonto oder Umschlag „Dezember“ ab 1.9. Führen: 4 × ca. 50–150 € je nach Haushalt zurücklegen. Geschenke, Bahnfahrten, Festessen einplanen.
 
 Was im Umschlag ist, darf raus. Was nicht drin ist, wird nicht per Dispo geholt. Das verhindert den Januar, in dem viele Spartipps bereits zu spät kommen.
 
@@ -277,7 +277,7 @@ Ja. Erhöht die Versicherung deinen Beitrag, hast du in der Regel vier Wochen Ze
 
 ### Wie viel kann ich durch saisonales Kochen sparen?
 
-Saisonales Gemüse ist in der Haupterntezeit oft ca. 40 % – 60 % günstiger als außerhalb der Saison. Treibhausware und Flugimporte verursachen deutlich höhere Kosten.
+Saisonales Gemüse ist in der Haupterntezeit oft ca. 40 % – 60 % günstiger als außerhalb der Saison. Treibhausware und Flugimporte verursachen deutlich höhere Kosten.
 
 ### Lohnen sich Mehrsparten‑Rabatte bei Versicherungen?
 

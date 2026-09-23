@@ -38,11 +38,11 @@ Auch dein Leben kann sich geändert haben: neue Risiken, weniger Bedarf oder meh
 
 ## Was du jetzt konkret tun kannst
 
-1. **Sammle deine Unterlagen** – Öffne das Schreiben, notiere die wichtigsten Punkte und lege deine aktuelle Police bereit.  
-2. **Prüfe den Leistungsumfang** – Vergleiche, welche Risiken abgedeckt sind und ob du Zusatzleistungen brauchst.  
-3. **Hol dir Angebote ein** – Nutze Vergleichsportale oder kontaktiere andere Anbieter, um aktuelle Konditionen zu erhalten.  
-4. **Bewerte das Preis‑Leistungs‑Verhältnis** – Achte nicht nur auf den Beitrag, sondern auch auf Service, Selbstbeteiligung und Vertragsbedingungen.  
-5. **Verhandle mit deinem Anbieter** – Viele Versicherer reagieren positiv, wenn du ein günstigeres Angebot vorlegst.  
+1. **Sammle deine Unterlagen** – Öffne das Schreiben, notiere die wichtigsten Punkte und lege deine aktuelle Police bereit.
+2. **Prüfe den Leistungsumfang** – Vergleiche, welche Risiken abgedeckt sind und ob du Zusatzleistungen brauchst.
+3. **Hol dir Angebote ein** – Nutze Vergleichsportale oder kontaktiere andere Anbieter, um aktuelle Konditionen zu erhalten.
+4. **Bewerte das Preis‑Leistungs‑Verhältnis** – Achte nicht nur auf den Beitrag, sondern auch auf Service, Selbstbeteiligung und Vertragsbedingungen.
+5. **Verhandle mit deinem Anbieter** – Viele Versicherer reagieren positiv, wenn du ein günstigeres Angebot vorlegst.
 6. **Setze dir einen Erinnerungstermin** – Markiere den nächsten Jahresende in deinem Kalender, um den Prozess erneut zu starten.
 
 ## Hintergrund: So funktioniert der Markt dahinter
@@ -54,8 +54,8 @@ Liegen neue Daten vor oder ändert sich das Risiko‑Umfeld, rechnen die Versich
 Der Wettbewerb der Anbieter hält Preise und Leistungen in Bewegung. Wer aktiv vergleicht, kann von günstigeren Tarifen profitieren. Gleichzeitig nutzen Versicherer das Jahresende, um ihre Rechnung zu erneuern und Kunden zu halten. Die automatische Verlängerung ist bequem – doch sie kann dafür sorgen, dass du weiter mehr zahlst als nötig.
 
 **Faustregeln für den Versicherungsmarkt**  
-- **Risiko‑Anpassung**: Beiträge steigen, wenn das Risiko für den Versicherer steigt, und sinken, wenn das Risiko sinkt.  
-- **Markt‑Dynamik**: Mehr Wettbewerb führt häufig zu besseren Konditionen für den Kunden.  
+- **Risiko‑Anpassung**: Beiträge steigen, wenn das Risiko für den Versicherer steigt, und sinken, wenn das Risiko sinkt.
+- **Markt‑Dynamik**: Mehr Wettbewerb führt häufig zu besseren Konditionen für den Kunden.
 - **Kundenbindung**: Automatische Verlängerungen sind üblich, aber nicht verpflichtend – ein aktiver Vergleich lohnt sich fast immer.
 
 ## Der 30. November: Dein wichtigster Stichtag

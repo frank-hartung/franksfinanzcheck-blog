@@ -28,7 +28,7 @@ Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung
 
 Erhöhungen zwischen 10 und 25 % sind keine Seltenheit. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen September und November**.
 
-**30. November 2026, ein Montag:** Bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
+**30. November 2026, ein Montag:** bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 
 **Das Wichtigste in Kürze**
 
@@ -54,15 +54,15 @@ Für 2026 hat der GDV **über 400 der 413 Zulassungsbezirke neu eingestuft**. Be
 
 Wichtig dabei: Eine reine Klassenanpassung löst in der Regel **kein** Sonderkündigungsrecht aus. Steigt dein Beitrag dagegen durch eine echte Tariferhöhung des Versicherers, hast du nach § 40 VVG **einen Monat ab Mitteilung** Zeit für eine Sonderkündigung – unabhängig vom 30.11.
 
-## Gilt der 30.11. auch für deinen Vertrag?
+## Gilt der 30.11. Auch für deinen Vertrag?
 
 Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
 
 1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** (§ 11 VVG) – nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
-2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben – und plane mindestens eine Woche Puffer ein.
-3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
+2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. Ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben – und plane mindestens eine Woche Puffer ein.
+3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. Oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
 
-**Faustregel für den Kalender:** Vergleiche in KW 42 (Mitte Oktober), entscheide in KW 44 und kündige spätestens in KW 46. Wer erst am 29.11. startet, vergleicht unter Druck – und übersieht das Kleingedruckte.
+**Faustregel für den Kalender:** Vergleiche in KW 42 (Mitte Oktober), entscheide in KW 44 und kündige spätestens in KW 46. Wer erst am 29.11. Startet, vergleicht unter Druck – und übersieht das Kleingedruckte.
 
 ## Die drei Bausteine der Kfz-Versicherung
 
@@ -140,7 +140,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. kennen und nutzen
+### 7. Den Stichtag 30.11. Kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
@@ -189,7 +189,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 
 Kfz-Verträge laufen zum Kalenderjahr. Die Kündigung muss meist bis 30.11. raus.
 
-Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
+Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. Startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
 
 
 Übernimm die SF-Klasse aus der Vorversicherung. Schätze sie nicht. Prüfe die Zweitwagenregelung. Halte den Fahrerkreis eng.
@@ -225,9 +225,9 @@ Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten 
 ## Häufige Fragen
 
 ### Wann kann ich meine Kfz-Versicherung kündigen?
-Der reguläre Kündigungstermin ist der 30.11. zum 31.12. des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
+Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
 
-### Was tun, wenn ich den 30.11. verpasst habe?
+### Was tun, wenn ich den 30.11. Verpasst habe?
 Prüfe zuerst deine Beitragsrechnung: Erhöht der Versicherer den Preis, hast du nach § 40 VVG einen Monat ab Mitteilung ein Sonderkündigungsrecht – das rettet viele „zu spät“-Fälle noch im Dezember. Ohne Erhöhung bleibt der Wechsel zum nächsten Stichtag; notiere dir den Oktober 2027 im Kalender und optimiere bis dahin Kilometerstand und Fahrerkreis.
 
 ### Ändert eine neue Regionalklasse automatisch meinen Beitrag?

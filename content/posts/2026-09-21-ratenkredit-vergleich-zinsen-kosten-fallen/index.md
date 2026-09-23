@@ -44,8 +44,8 @@ Fast immer der Ratenkredit. Der Dispo ist für Tage gedacht, nicht für Monate. 
 
 | Merkmal | Dispokredit | Ratenkredit |
 |:---|:---|:---|
-| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab rund 4 %) |
-| Überziehung darüber hinaus | rund 13,10 % (geduldete Überziehung) | entfällt – feste Kreditsumme |
+| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab rund 4 %) |
+| Überziehung darüber hinaus | rund 13,10 % (geduldete Überziehung) | entfällt – feste Kreditsumme |
 | Tilgung | keine Pflicht, kein Plan | feste Monatsrate mit Enddatum |
 | Zinsbindung | variabel, Bank ändert einseitig | fest für die ganze Laufzeit |
 | Kündigung | Bank kann jederzeit kündigen | nur bei Zahlungsverzug |
@@ -88,7 +88,7 @@ Ein Kredit ist ein Werkzeug. Richtig eingesetzt spart er Geld. Falsch eingesetzt
 
 | Deine Situation | Empfehlung |
 |:---|:---|
-| Dauerhaft im Dispo (über 1.000 €) | Ablösen lohnt fast immer – Zins halbiert sich oft, dazu ein Tilgungsplan |
+| Dauerhaft im Dispo (über 1.000 €) | Ablösen lohnt fast immer – Zins halbiert sich oft, dazu ein Tilgungsplan |
 | Mehrere teure Kredite parallel | Bündeln per Umschuldung – eine Rate, ein Zins, volle Übersicht |
 | Auto oder notwendige Anschaffung | Zweckgebundener Kredit prüfen – oft günstiger als der freie Ratenkredit |
 | Ungeplante Reparatur ohne Rücklage | Überbrücken ist okay – danach Rücklage aufbauen, damit es einmalig bleibt |

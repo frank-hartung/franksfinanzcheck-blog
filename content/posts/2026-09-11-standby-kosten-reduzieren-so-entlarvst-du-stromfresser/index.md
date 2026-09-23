@@ -38,7 +38,7 @@ In der Summe macht dieser Leerlauf oft zehn bis zwanzig Prozent deiner gesamten 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Ddiebesten Tarife findest du über unseren Partner-Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** DStiebendenTarife findest du über unseren Partner-Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was genau sind Standby Kosten?

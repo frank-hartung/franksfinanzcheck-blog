@@ -29,7 +29,7 @@ Starkregen, Sturm und Überschwemmungen zeigen: Dein Zuhause kann schnell in Gef
 **Das Wichtigste in Kürze**
 
 - Eine Wohngebäudeversicherung deckt Basisschäden ab, doch für Schutz bei Starkregen und Hochwasser ist in der Regel ein ergänzender Elementarschadenschutz erforderlich.
-- Um eine Unterversicherung zu vermeiden, setzen Versicherer als Richtwert oft ca. 650 € bis 700 € Versicherungssumme pro Quadratmeter Wohnfläche an.
+- Um eine Unterversicherung zu vermeiden, setzen Versicherer als Richtwert oft ca. 650 € bis 700 € Versicherungssumme pro Quadratmeter Wohnfläche an.
 - Achte auf den Verzicht der Einrede bei grober Fahrlässigkeit, damit die Versicherung auch bei kleineren Unachtsamkeiten in der Regel den vollen Schaden übernimmt.
 
 ---
@@ -171,7 +171,7 @@ Machst du das einmal im Jahr, schaffst du Transparenz über deine Absicherung. G
 - [ ] **Zusatz‑Sicherungen**: Prüfen, ob Fahrrad‑Diebstahl, Cyber‑Schutz oder Photovoltaik enthalten sind.
 - [ ] **Kontakt‑Notfallnummer**: Auf dem Telefon gespeichert, um im Ernstfall sofort handlungsfähig zu sein.
 
-**Faustregel:** Wer seine Hausratversicherung alle drei Jahre auf den Prüfstand stellt, sichert sich in der Regel ca. 15–25 % Ersparnis durch den Wechsel in modernere Tarifstrukturen.
+**Faustregel:** Wer seine Hausratversicherung alle drei Jahre auf den Prüfstand stellt, sichert sich in der Regel ca. 15–25 % Ersparnis durch den Wechsel in modernere Tarifstrukturen.
 
 ## Häufige Fragen
 
