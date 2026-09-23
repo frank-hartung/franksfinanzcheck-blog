@@ -35,7 +35,9 @@ THEMEN = "layouts/shortcodes/newsletter_themen.html"
 MUSTER = "layouts/shortcodes/newsletter_muster.html"
 STRIP = "layouts/_partials/newsletter_strip.html"
 DATEN = "layouts/_partials/newsletter_studio_data.html"
-NEUE = [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP, DATEN]
+PLAN = "layouts/_partials/newsletter_versandplan.html"
+KADENZ = "data/newsletter_kadenz.json"
+NEUE = [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP, DATEN, PLAN]
 CSS = "assets/css/extended/zz-newsletter.css"
 JS = "static/premium/ff-newsletter.js"
 JOURNEYS = ["content/newsletter/index.md", "content/newsletter-bestaetigung/index.md",
@@ -111,9 +113,13 @@ class Vorlagen(unittest.TestCase):
 
     def test_js_haenges_sind_im_formular_da(self):
         """Was das Skript liest, muss das Template auch setzen – sonst ist die
-        Bot-Falle ein Kommentar und die Zeitfalle ein leeres Feld."""
+        Bot-Falle ein Kommentar und die Zeitfalle ein leeres Feld.
+
+        Geprüft wird gegen Formular UND Versandplan: Der Baustein steht vor dem
+        <form> und trägt die Haken für die Terminrechnung (`data-ff-nl-plan`,
+        `-tage`, `-uhrzeit`, `-tag`, `-tag-kurz`, `-termin`, `-erster`)."""
         js = _text(JS)
-        template = _text(FORM)
+        template = _text(FORM) + _text(PLAN)
         for hook in set(re.findall(r"data-ff-nl[-a-zäöü]*", js)):
             self.assertIn(hook, template, f"{hook} wird im JS gelesen, ist aber nirgends im Formular")
         self.assertIn('id="ff-nl-status"', template)
@@ -147,7 +153,7 @@ class Vorlagen(unittest.TestCase):
 class Aussehen(unittest.TestCase):
     def test_jede_klasse_hat_eine_regel(self):
         benutzt = set()
-        for rel in [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP]:
+        for rel in [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP, PLAN]:
             benutzt |= set(re.findall(r'class="([^"]+)"', _ohne_kommentare(_text(rel))))
         flach = {k.strip() for gruppe in benutzt for k in gruppe.split()
                  if (k.startswith("ff-nl") or k.startswith("newsletter-footer"))
@@ -378,6 +384,77 @@ class Kadenz(unittest.TestCase):
                 self.assertEqual({int(x) for x in tage.split(",")},
                                  {d + 1 for d in plan.VERSANDTAGE},
                                  f"{name}: Cron {cron} weicht vom Versandvertrag ab")
+
+
+class Versandplan(unittest.TestCase):
+    """Der Takt im Anmeldekasten: zwei Tage, ein Auftrag je Tag, ein Termin.
+
+    Wer sich einträgt, kauft einen Kalender – also steht der Kalender VOR dem
+    Feld, nicht als Kleingedrucktes danach. Die Fakten liest der Baustein aus
+    data/newsletter_kadenz.json (Snapshot des Versandvertrags), die Redaktion
+    aus creative.kadenz. Was hier geprüft wird: dass er sie liest, dass der
+    Snapshot der Vertrag ist, und dass kein Termin im HTML steht, der über
+    Nacht altert.
+    """
+
+    def snapshot(self) -> dict:
+        return json.loads(_text(KADENZ))
+
+    def test_snapshot_ist_der_vertrag(self):
+        self.assertEqual(plan.site_kadenz_text(), _text(KADENZ),
+                         f"{KADENZ} weicht vom Versandvertrag ab – "
+                         "`python3 scripts/newsletter_schedule.py --export-site`")
+
+    def test_baustein_liest_die_fakten_statt_sie_zu_tippen(self):
+        t = _ohne_kommentare(_text(PLAN))
+        for feld in ("versandtage_text", "versandtage_oder", "uhrzeit_zeile",
+                     "max_pro_woche", "tage", "tag_kurz", "schluessel"):
+            self.assertIn(feld, t, f"{PLAN} tippt {feld} ab, statt es zu lesen")
+        for name in plan.WOCHENTAGE:
+            self.assertNotIn(name, t,
+                             f"{PLAN} nennt {name} wörtlich – Wochentage kommen aus dem Snapshot")
+        self.assertNotRegex(t, r"\b\d{2}:\d{2}\b",
+                            f"{PLAN} trägt eine Uhrzeit im Markup – sie kommt aus dem Snapshot")
+
+    def test_fallbacks_im_formular_stimmen_mit_dem_vertrag(self):
+        """Die Defaults des Shortcodes sind ein Sicherheitsnetz, kein zweiter Vertrag."""
+        t = _text(FORM)
+        self.assertIn(f'default "{plan.versandtage_oder_text()}"', t)
+        self.assertIn(f'default "{plan.uhrzeit_zeile()}"', t)
+        self.assertIn(f"default {plan.MAX_PRO_WOCHE}", t)
+
+    def test_redaktion_je_versandtag_ist_hinterlegt(self):
+        kadenz = json.loads(_text("data/newsletter_studio.json"))["creative"]["kadenz"]
+        for eintrag in self.snapshot()["tage"]:
+            for feld in ("ausgabe", "preheader_hinweis"):
+                self.assertIn(eintrag["schluessel"], kadenz[feld],
+                              f"creative.kadenz.{feld} hat keinen Eintrag für "
+                              f"{eintrag['tag']} – die Kachel bliebe stumm")
+
+    def test_kein_termin_im_html(self):
+        """Den nächsten Termin rechnet ff-newsletter.js in Europe/Berlin.
+
+        Ein gedruckter Termin ist am Tag nach dem Bau falsch – und eine
+        Landingpage, die gestern ankündigt, bricht dasselbe Versprechen, das
+        sie verkauft. Ohne Skript bleibt der kadenzrichtige Satz ohne Datum.
+        """
+        t = _ohne_kommentare(_text(PLAN))
+        self.assertNotRegex(t, r"\d{1,2}\.\s*(Januar|Februar|März|April|Mai|Juni|Juli|"
+                               r"August|September|Oktober|November|Dezember)")
+        self.assertIn("der kommende", t, "ohne Skript fehlt der kadenzrichtige Ersatzsatz")
+        js = _text(JS)
+        self.assertIn("Europe/Berlin", js, "gerechnet wird in der Taktzone des Versands")
+        self.assertIn("data-ff-nl-uhrzeit", js,
+                      "die Versanduhrzeit liest das Skript aus dem Baustein, nicht aus dem Code")
+
+    def test_plan_steht_nur_bei_geschaltetem_weg(self):
+        """Kein Versandplan im Leerzustand: ein Takt ohne Anmeldung ist Werbung."""
+        t = _text(FORM)
+        self.assertEqual(2, t.count('partial "newsletter_versandplan.html"'),
+                         "der Plan gehört zum Inline-Formular UND zum Button-Weg")
+        leerzustand = t.split("{{- else -}}")[-1]
+        self.assertNotIn("newsletter_versandplan.html", leerzustand,
+                         "der Leerzustand bewirbt einen Takt, den er nicht hält")
 
 
 class Journeys(unittest.TestCase):
