@@ -145,7 +145,7 @@ Du gewinnst die volle Kontrolle über deine Finanzen zurück. Wenn dein Sparplan
 Es bedeutet, dass du dein Geld klug und zielgerichtet steuerst. Du entscheidest selbst, wo jeder einzelne Euro hinfließt. Viele meiner Klienten bauten so innerhalb weniger Jahre Rücklagen auf.
 
 Ein solider Notgroschen ermöglicht dir sogar berufliche Veränderungen. Die 50–30–20-Regel ist kein Gefängnis für dich.  
-sie bildet das Fundament für dein freies Leben.
+Sie bildet das Fundament für dein freies Leben.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Finanzieller Puffer: Wie viel Notgroschen ist genug?](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)
 

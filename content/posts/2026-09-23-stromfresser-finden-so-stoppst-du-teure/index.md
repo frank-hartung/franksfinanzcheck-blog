@@ -138,15 +138,25 @@ Die Kombination aus technischer Optimierung (Geräte tauschen, Standby vermeiden
 
 ## Häufige Fragen
 
-### Wie erkenne ich einen Stromfresser ohne Messgerät? Ein gutes Zeichen ist Wärmeentwicklung. Wenn ein Gerät im ausgeschalteten Zustand warm wird, zieht es Strom. Auch das Alter ist ein Hinweis: Geräte über 10–15 Jahre entsprechen selten modernen Effizienzstandards.
+### Wie erkenne ich einen Stromfresser ohne Messgerät?
 
-### Lohnt sich der Austausch eines funktionierenden Kühlschranks? In vielen Fällen ja. Ein Gerät, das 15 Jahre oder älter ist, verbraucht oft deutlich mehr als ein modernes A‑Klasse‑Modell. Der Kaufpreis amortisiert sich meist innerhalb von 5 – 8 Jahren durch die Stromersparnis.
+Ein gutes Zeichen ist Wärmeentwicklung. Wenn ein Gerät im ausgeschalteten Zustand warm wird, zieht es Strom. Auch das Alter ist ein Hinweis: Geräte über 10–15 Jahre entsprechen selten modernen Effizienzstandards.
 
-### Bringt das Ausschalten des WLAN‑Routers nachts wirklich etwas? Ein Router verbraucht meist zwischen 5 W und 15 W. Schaltest du ihn für 8 Stunden aus, sparst du bei 10 W Verbrauch rund 10 € pro Jahr. Viele Router bieten dafür eine integrierte Zeitschaltuhr.
+### Lohnt sich der Austausch eines funktionierenden Kühlschranks?
 
-### Was ist der effektivste Tipp, um sofort **Energiekosten zu senken**? Der Wechsel zu einem günstigeren Stromanbieter bringt oft die größte sofortige Ersparnis, ohne Investitionen oder Komfortverlust. Danach folgen die Optimierung von Heizungspumpen und Warmwasserbereitung, sofern du Zugriff hast.
+In vielen Fällen ja. Ein Gerät, das 15 Jahre oder älter ist, verbraucht oft deutlich mehr als ein modernes A‑Klasse‑Modell. Der Kaufpreis amortisiert sich meist innerhalb von 5 – 8 Jahren durch die Stromersparnis.
 
-### Sind Öko‑Programme bei Waschmaschinen wirklich sparsamer? Ja. Sie dauern länger, aber das Wasser wird langsamer und weniger stark erhitzt. Da das Aufheizen den größten Stromanteil ausmacht, sparen diese Programme trotz längerer Laufzeit massiv Energie.
+### Bringt das Ausschalten des WLAN‑Routers nachts wirklich etwas?
+
+Ein Router verbraucht meist zwischen 5 W und 15 W. Schaltest du ihn für 8 Stunden aus, sparst du bei 10 W Verbrauch rund 10 € pro Jahr. Viele Router bieten dafür eine integrierte Zeitschaltuhr.
+
+### Was ist der effektivste Tipp, um sofort
+
+**Energiekosten zu senken**? Der Wechsel zu einem günstigeren Stromanbieter bringt oft die größte sofortige Ersparnis, ohne Investitionen oder Komfortverlust. Danach folgen die Optimierung von Heizungspumpen und Warmwasserbereitung, sofern du Zugriff hast.
+
+### Sind Öko‑Programme bei Waschmaschinen wirklich sparsamer?
+
+Ja. Sie dauern länger, aber das Wasser wird langsamer und weniger stark erhitzt. Da das Aufheizen den größten Stromanteil ausmacht, sparen diese Programme trotz längerer Laufzeit massiv Energie.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
 
