@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 7,
-  "generated_at": "2026-09-22T09:58:12Z",
+  "ready": 7,
+  "pool_size": 8,
+  "generated_at": "2026-09-23T08:49:27Z",
   "candidates": [
     {
       "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
@@ -80,10 +80,10 @@
       }
     },
     {
-      "slug": "2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
+      "slug": "2026-09-23-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
       "ready": true,
-      "sha256": "3857555b03681288eb16d52746e5ff952b59c1818008b67fdd6a4aab565a9c2c",
-      "score": 0.97,
+      "sha256": "134a7cd0dd03b0224808b521448adb1389a3c36c7fc02a8dae74764262434cdf",
+      "score": 0.98,
       "parts": {
         "spelling": 0.92,
         "meta": 1.0,
@@ -91,16 +91,16 @@
         "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
-      "slug": "2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
+      "slug": "2026-09-23-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
       "ready": false,
-      "sha256": "5a0aa7eca93bf67b3bfe9e790ccf5dea6e14ac8cb7054ff90e6bd7f42189648f",
+      "sha256": "a874b26be93977bf9a9581bfd2be2257c269a0e5f534e5c802cdb393aaa32746",
       "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
       "details": [
-        "🛑 2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-09-23-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -113,6 +113,21 @@
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-23-stromfresser-finden-so-stoppst-du-teure",
+      "ready": true,
+      "sha256": "995ad2f1c01e4340c8ad4076aa5fbdfc15812cc1ade9d47bc76d9e57fcc72059",
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.84,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ]
