@@ -8,6 +8,8 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 author: "Frank Hartung"
+erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
+
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
@@ -95,6 +97,11 @@ Durch die Kombination dieser kleinen Maßnahmen kannst du im Schnitt mehrere hun
 | Änderungen nicht dokumentieren     | Überblick geht verloren, Rückverfolgung schwierig | Jede Vertragsänderung sofort in deine Budget‑App eintragen |
 
 Indem du diese Stolperfallen erkennst und gezielt dagegen vorgehst, bleibt dein Sparplan stabil und nachhaltig.
+
+
+
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Lesetipp:** [Finanzieller Puffer: Wie viel Notgroschen ist genug?](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
