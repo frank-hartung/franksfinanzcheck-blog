@@ -123,6 +123,10 @@ wechselt auf „Anmeldung aktiv“, die Wache meldet `aktiv` statt INERT.
 *Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 1.
 Erwartet: `sendTest`-Mail in deinem Postfach (Double-Opt-In-Bestätigung
 inklusive, Abmeldelink funktioniert), Liste unangetastet.
+Kommt keine Mail: Der Lauf meldet es jetzt laut – „Digest ist leer“ (gelbe
+Warnung) heißt, im Zeitraum liegt kein veröffentlichter Artikel (alles
+`draft: true` oder schon versandt): `tage` vergrößern (z. B. 3) und erneut
+laufen lassen; „kein Absender“ heißt, `BREVO_API_KEY`/`BREVO_LIST_ID` fehlen.
 
 **6b. Freigabe** – entweder `live` **an** + `tage` = 1 manuell, oder einfach
 den nächsten Cron laufen lassen (Mo–Fr 05:05 UTC = 07:05 MESZ).

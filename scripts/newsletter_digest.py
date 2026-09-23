@@ -27,9 +27,13 @@ Dieses Skript schließt beide Seiten der Lücke:
   --send    Übergibt den Digest an Brevo (v3: Kampagne anlegen → sendNow, oder
             sendTest an eine Testadresse). Bewusst dreifach verriegelt:
             API-Key + Listen-ID als Secrets, `NEWSLETTER_SEND=ja` als
-            Eingeständnis, dass echte Postfächer getroffen werden, und ohne
-            beides passiert kein Netzwerkzugriff. Kein Testversand ohne
-            `--test-adresse`.
+            Eingeständnis, dass die LISTE getroffen wird, und ohne beides
+            passiert kein Netzwerkzugriff. Kein Testversand ohne
+            `--test-adresse`. Ein Testversand (`--send --test-adresse X`,
+            auch ohne `--live`) ist dagegen sofort real: er ist eine echte
+            Mail an genau eine eingegebene Adresse (sendTest, nie sendNow)
+            und zahlt sich deshalb nicht als Ausgabe in den Duplikatschutz
+            ein. `--send` ALLEIN bleibt eine Vorschau (dry-run).
 
   --selftest Selbsttest, ohne Netzwerk, ohne Schreibzugriff auf den Bestand.
 
@@ -737,6 +741,23 @@ def _selftest() -> int:
         pruefe(bool(aufgerufen) and rc3 == 0
                and state.get("versandene_artikel", [])[-1:] == ["2026-09-11-neu-1"],
                f"verscharfter Versand läuft nicht durch (rc={rc3}): {state}")
+        # 20) Testversand: ohne NEWSLETTER_SEND erlaubt, nutzt ausschließlich
+        #     sendTest (nie sendNow) und verbucht sich NICHT als Ausgabe –
+        #     ein Probe ist keine Ausgabe, sonst würde sich der Duplikatschutz
+        #     (Q15) über eigene Testläufe staunen.
+        os.environ["NEWSLETTER_SEND"] = ""
+        aufgerufen.clear()
+        vor = lade_state(r4)
+        rc4 = versende(r4, html, text, "X", dry_run=False,
+                       test_adresse="test@beispiel.de")
+        pfade = [p for _, p in aufgerufen]
+        nach = lade_state(r4)
+        pruefe(rc4 == 0 and any(p.endswith("/sendTest") for p in pfade)
+               and not any(p.endswith("/sendNow") for p in pfade),
+               f"Testversand nutzt nicht ausschließlich sendTest (rc={rc4}): {pfade}")
+        pruefe(nach.get("versandene_artikel") == vor.get("versandene_artikel")
+               and "kampagne_id" in nach,
+               f"Testlauf verbucht sich als Ausgabe: {nach}")
         TRANSPORT = brevo
     except Exception as exc:  # noqa: BLE001
         import traceback
@@ -833,9 +854,12 @@ def main(argv=None) -> int:
     ap.add_argument("--strict-inert", action="store_true",
                     help="Leerzustand als Fehler (für Läufe, die senden wollen)")
     ap.add_argument("--build", action="store_true")
-    ap.add_argument("--send", action="store_true")
+    ap.add_argument("--send", action="store_true",
+                    help="Digest an Brevo übergeben (allein: nur Vorschau/dry-run)")
     ap.add_argument("--live", action="store_true",
-                    help="wirklich senden (sonst dry-run, auch mit --send)")
+                    help="die LISTE wirklich treffen (sonst dry-run, auch mit --send); "
+                         "ein Testversand via --test-adresse ist unabhängig davon real "
+                         "(sendTest an genau eine Adresse)")
     ap.add_argument("--trotz-qa", action="store_true",
                     help="Versand trotz QA-Funden (Betreuer-Ausnahme; Funde werden "
                          "dennoch protokolliert)")
@@ -918,8 +942,12 @@ def main(argv=None) -> int:
               "erlaubt, Senden nicht – Ausnahmeschalter: --trotz-qa.")
         return 1
     if args.send:
+        # --live = real an die LISTE. Eine Testadresse macht den Versand auch
+        # ohne --live real (sendTest an genau eine Adresse) – sonst wäre der
+        # dokumentierte Probelauf `--send --test-adresse X` eine stille
+        # Vorschau, und genau so lief der 23.09.2026: grün, aber keine Mail.
         rc_gesamt = max(rc_gesamt, versende(root, html, text, betreff,
-                                            dry_run=not args.live,
+                                            dry_run=not (args.live or bool(args.test_adresse)),
                                             test_adresse=args.test_adresse))
     else:
         print("   (kein Versand – --send fehlt; gebaute Digeste bleiben bewusst lokal)")

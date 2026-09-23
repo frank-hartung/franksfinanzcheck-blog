@@ -8,7 +8,8 @@
 #
 # Sicherheitshierarchie (absichtlich dreifach):
 #   1. ohne Secrets (BREVO_API_KEY / BREVO_LIST_ID) wird kein Netzversuch gemacht
-#   2. ohne workflow_dispatch-Eingabe „live" wird nur gebaut, nicht gesendet
+#   2. ohne workflow_dispatch-Eingabe („live" ODER test_adresse) wird nur gebaut,
+#      nicht gesendet – ein Testversand trifft nur die eingegebene Adresse (sendTest)
 #   3. gesendet wird an eine Liste, deren Double-Opt-in bei Brevo liegt –
 #      Adressen berühren diesen Repo-Workflow nie
 name: Newsletter-Daily (Capture-Wache + Digest)
@@ -23,11 +24,11 @@ on:
         type: string
         default: '1'
       live:
-        description: 'WIRKLICH an die Liste senden (sonst nur bauen)'
+        description: 'WIRKLICH an die Liste senden (sonst nur bauen; mit test_adresse bleibt es beim Testversand)'
         type: boolean
         default: false
       test_adresse:
-        description: 'Testversand an diese Adresse (leer = kein Testversand)'
+        description: 'Testversand an diese Adresse (leer = kein Testversand) – trifft NUR diese Adresse, nie die Liste'
         type: string
         default: ''
 
@@ -98,14 +99,32 @@ jobs:
           TAGE="${{ github.event.inputs.tage || '1' }}"
           case "$TAGE" in ''|*[!0-9]*) TAGE=1 ;; esac
           ARGS="--build --days $TAGE --out /tmp/ff-newsletter"
+          # --send war bisher nur für „schedule“ verdrahtet – workflow_dispatch
+          # durfte dadurch nie senden, weder „live“ noch als Testversand (Bug
+          # 23.09.2026: Testlauf lief grün, die Mail kam nie an). Jetzt gilt:
+          # planmäßiger Lauf, „live“ oder eine Testadresse bedeuten jeweils
+          # „ja, es soll etwas raus“.
+          SENDEN=""
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            ARGS="--build --days 1 --out /tmp/ff-newsletter --send"
+            SENDEN="ja"
+          fi
+          if [ "${{ github.event.inputs.live }}" = "true" ]; then
+            SENDEN="ja"
+          fi
+          if [ -n "${{ github.event.inputs.test_adresse }}" ]; then
+            SENDEN="ja"
+          fi
+          if [ -n "$SENDEN" ]; then
+            ARGS="$ARGS --send"
+            # --live = Liste wirklich treffen. Der Testversand braucht es nicht:
+            # er ist über die Testadresse bereits eine real eingegrenzte Aktion
+            # (Brevo sendTest, nie sendNow).
+            if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.live }}" = "true" ]; then
+              ARGS="$ARGS --live"
+            fi
           fi
           if [ -n "${{ github.event.inputs.test_adresse }}" ]; then
             ARGS="$ARGS --test-adresse ${{ github.event.inputs.test_adresse }}"
-          fi
-          if [ "${{ github.event.inputs.live }}" = "true" ] || [ "${{ github.event_name }}" = "schedule" ]; then
-            ARGS="$ARGS --live"
           fi
           # Ohne Absender kein Versand – und kein roter Lauf: der Leerzustand ist
           # eine Betreiber-Entscheidung, kein Defekt. Die Warnung steht im Log,
@@ -114,8 +133,31 @@ jobs:
             echo "⚠ Kein Absender konfiguriert (Secrets BREVO_API_KEY / BREVO_LIST_ID) – Digest wird nur gebaut."
             ARGS="${ARGS/--send/}"
             ARGS="${ARGS/--live/}"
+            OHNE_ABSENDER="ja"
           fi
+          set +e
           python3 scripts/newsletter_digest.py $ARGS | tee /tmp/nl_build.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          # Die Pipeline (| tee) verschluckt den Exit-Code des Skripts – hier
+          # wird er wieder sichtbar. Ein blockierter (QA) oder fehlgeschlagener
+          # (Brevo) Versand darf nicht als grüner Lauf durchgehen.
+          if [ -n "${OHNE_ABSENDER:-}" ]; then
+            echo "::warning::Kein Absender konfiguriert (BREVO_API_KEY / BREVO_LIST_ID) – es wurde nichts versendet."
+          fi
+          if [ "$rc" -ne 0 ]; then
+            if [ -n "${OHNE_ABSENDER:-}" ]; then
+              echo "::warning::Digest-Versand nicht ausgelöst, weil kein Absender konfiguriert ist – nur gebaut."
+            else
+              echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – Details im Lauf-Log; es ist nichts versandt."
+              exit "$rc"
+            fi
+          fi
+          # Nur bei manuellem Lauf laut melden – ein leeres Werktag-Cron ist
+          # normal (keine neuen Artikel), kein Warnfall.
+          if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "nichts zu senden" /tmp/nl_build.log; then
+            echo "::warning::Versand angefordert, aber der Digest ist leer – alles im Zeitraum ist Draft oder bereits versandt. Zeitraum über „tage“ vergrößern oder Artikel veröffentlichen."
+          fi
           {
             echo ""
             echo "**Versandlauf:**"
