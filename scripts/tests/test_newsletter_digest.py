@@ -378,10 +378,17 @@ class DigestUndVersand(unittest.TestCase):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)
 
-    def test_transport_wiederholt_nur_transiente_stoerungen(self):
-        """429/5xx werden bis zu dreimal probiert, ein 400 ist ein Befund und
-        wird genau einmal gemeldet – drei identische 400s ins Log zu schreiben,
-        wäre Müll, kein Anstand."""
+    def test_lesen_wird_wiederholt_schreiben_niemals(self):
+        """Der Kernsatz der Versand-Härtung (23.09.2026, Lauf #21-Audit).
+
+        LESANFRAGEN: 429/5xx/Netz bis zu dreimal – eine Störung ist eine Störung.
+        SCHREIBANFRAGEN: genau einmal. Ein `POST …/sendNow`, das der Anbieter
+        annahm und dessen Antwort verloren ging, ist keine unterbliebene Handlung,
+        sondern eine ausgeführte. Sie zu wiederholen, schickt dieselbe Ausgabe
+        zweimal an die ganze Liste – der Schaden, den der Duplikatsschutz
+        (Q15, `versandene_artikel`) mit allem Aufwand verhindert. Ein 400 ist
+        ohnehin ein Befund, keine Störung.
+        """
         aufgerufen = []
         echt = nd.TRANSPORT
         echt_get = nd.TRANSPORT_GET
@@ -392,27 +399,34 @@ class DigestUndVersand(unittest.TestCase):
 
             def flaky(api_key, pfad, payload, methode):
                 aufgerufen.append(pfad)
-                return (201, '{"id": 3}') if len(aufgerufen) >= 3 else (502, "Bad Gateway")
+                if methode == "GET":
+                    return 502, "Bad Gateway"
+                return 201, '{"id": 3}'
             nd._http_request = flaky
             nd.TRANSPORT = nd.brevo
-            nd.TRANSPORT_GET = lambda a, p: (
-                (200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": true}]}')
-                if p == "senders" else (200, '{"totalSubscribers": 4}'))
+            nd.TRANSPORT_GET = nd.brevo_get
             root = tempfile.mkdtemp()
             os.makedirs(os.path.join(root, "data"), exist_ok=True)
             os.environ["BREVO_API_KEY"] = "key"
             os.environ["BREVO_LIST_ID"] = "7"
-            os.environ["NEWSLETTER_SEND"] = "ja"
-            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False))
-            self.assertEqual(3, aufgerufen.count("emailCampaigns"),
-                             "502 wurde nicht dreimal probiert")
-            self.assertIn("emailCampaigns/3/sendNow", aufgerufen)
+            os.environ["NEWSLETTER_SEND"] = ""      # Testversand, ohne Listen-Freigabe
+            rc = nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
+                             test_adresse="probe@beispiel.de")
+            self.assertEqual(1, rc, "Vorflug-Netzstörung ließ den Versand trotzdem laufen")
+            self.assertEqual(3, aufgerufen.count("senders"),
+                             "LESANfrage bei 502 nicht dreimal probiert")
+            self.assertEqual(0, aufgerufen.count("emailCampaigns"),
+                             "trotz ungeprüfter Vorprüfung wurde geschrieben")
 
             aufgerufen.clear()
+            os.environ["NEWSLETTER_SEND"] = "ja"
 
             def hart(api_key, pfad, payload, methode):
                 aufgerufen.append(pfad)
-                return 400, '{"code": "invalid_parameter", "message": "nope"}'
+                return (200, '{"senders": [{"email": "news@franksfinanzcheck.de",'
+                             ' "active": true}]}') if methode == "GET" and pfad == "senders" \
+                    else (200, '{"totalSubscribers": 4}') if methode == "GET" \
+                    else (400, '{"code": "invalid_parameter", "message": "nope"}')
             nd._http_request = hart
             self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False))
             self.assertEqual(1, aufgerufen.count("emailCampaigns"),
@@ -423,6 +437,133 @@ class DigestUndVersand(unittest.TestCase):
             nd.TRANSPORT_GET = echt_get
             nd.PAUSE_SEKUNDEN = alte_pause
             for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_client_kennung_und_kanten_blockage(self):
+        """Lauf #21 (23.09.2026): „Absender-Vorprüfung nicht möglich (HTTP 403:
+        … Error 1010: Access denied …)". Das war Brevos Kante, nicht Brevos
+        Konto – urllib sandte die Standardkennung der Bibliothek. Drei Zusagen:
+
+          1. Der Client nennt sich selbst (Projekt + URL), nie `Python-urllib`.
+          2. Eine Signaturblockage wird als Kanten-Befund ausgesprochen, nicht
+             als Absender-Befund – und mit zweiter, weiterhin ehrlicher Kennung
+             versucht (kein Browser-Imitat).
+          3. `BREVO_API_HOST` auf einer fremden Domain löst KEINEN Netzversuch
+             aus, denn der api-key reiste dorthin mit.
+        """
+        self.assertTrue(nd.IDENTITÄTEN, "keine Client-Kennung definiert")
+        for kennung in nd.IDENTITÄTEN:
+            self.assertNotIn("Python-urllib", kennung)
+            self.assertTrue(kennung.startswith("franksfinanzcheck")
+                            or kennung.startswith("Mozilla/5.0 (compatible;"),
+                            f"Kennung ist keine Selbstauskunft: {kennung}")
+        self.assertGreaterEqual(len(set(nd.IDENTITÄTEN)), 2,
+                                "zweite Kennung für den Reservefall fehlt")
+        block = ('{"title":"Error 1010: Access denied","status":403,"detail":"The '
+                 'site owner has blocked access based on your browser\'s signature."}')
+        self.assertTrue(nd.kanten_block(403, block), "1010-Blockage nicht erkannt")
+        self.assertFalse(nd.kanten_block(403, '{"code":"invalid_api_key",'
+                                             '"message":"bad key"}'),
+                         "Brevos echte Absage als Kanten-Block fehlgedeutet")
+        for text in (nd.brevo_fehler(403, block),):
+            self.assertIn("Kante blockiert", text)
+            self.assertNotIn("existiert im Brevo-Konto nicht", text)
+        # Host-Guard: unbekannte Domain → Befund, keine Anfrage
+        vorher = os.environ.get("BREVO_API_HOST", "")
+        try:
+            os.environ["BREVO_API_HOST"] = "key-faenger.example"
+            self.assertIn("kein freigegebener Brevo-Host", nd.api_host_fehler())
+            os.environ["BREVO_API_HOST"] = "api.brevo.com"
+            self.assertEqual("", nd.api_host_fehler())
+        finally:
+            if vorher:
+                os.environ["BREVO_API_HOST"] = vorher
+            else:
+                os.environ.pop("BREVO_API_HOST", None)
+
+    def test_unklarer_sendeausgang_wird_nachgelesen_nicht_wiederholt(self):
+        """Geht die Antwort auf `sendNow` verloren, wird die Kampagnen-Akte
+        gelesen – nie erneut gesendet. Belegt sie die Sendung, heißt der Befund
+        „VERSAND ERFOLGT“ (und der Duplikatsschutz schreibt); ist sie unklar,
+        hält eine Sperre den nächsten LISTEN-Versand an (der Testversand bleibt
+        möglich, weil er genau eine Adresse trifft)."""
+        root = tempfile.mkdtemp()
+        os.makedirs(os.path.join(root, "data"), exist_ok=True)
+        nd.speichere_state(root, {"pending": ["2026-09-20-a"]})
+        echt, echt_get, http_echt = nd.TRANSPORT, nd.TRANSPORT_GET, nd._http_request
+        pfade: list = []
+        try:
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+
+            def antwortende_api(api_key, pfad, payload, methode):
+                pfade.append((methode, pfad))
+                if methode == "GET" and pfad == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de",'
+                                 ' "active": true}]}')
+                if methode == "GET" and pfad.startswith("contacts/lists/"):
+                    return 200, '{"totalSubscribers": 4}'
+                if methode == "GET" and pfad.startswith("emailCampaigns/"):
+                    return 200, '{"status": "in_process", "statistics": {"deliveredCount": 4}}'
+                if pfad == "emailCampaigns":
+                    return 201, '{"id": 55}'
+                return 502, "Bad Gateway"          # Antwort auf sendNow verloren
+            nd._http_request = antwortende_api
+            nd.TRANSPORT = nd.brevo
+            nd.TRANSPORT_GET = nd.brevo_get
+            with contextlib.redirect_stdout(io.StringIO()) as puffer:
+                rc = nd.versende(root, "<p>x</p>", "text", "Betreff", dry_run=False)
+            self.assertEqual(1, rc, "belegter Versand nach verlorener Antwort nicht gemeldet")
+            self.assertIn("VERSAND ERFOLGT", puffer.getvalue())
+            self.assertEqual(1, sum(1 for m, p in pfade if p.endswith("/sendNow")),
+                             "sendNow wurde wiederholt – Doppelzustellung!")
+            self.assertEqual(["2026-09-20-a"],
+                             nd.lade_state(root).get("versandene_artikel"),
+                             "belegter Versand nicht im Duplikatsschutz")
+
+            # jetzt dieselbe Lage OHNE Beleg in der Akte → Sperre
+            os.environ.pop("NEWSLETTER_SEND", None)
+            os.environ["NEWSLETTER_SEND"] = "ja"
+            nd.speichere_state(root, {"pending": ["2026-09-20-b"]})
+            pfade.clear()
+
+            def ungeklärte_api(api_key, pfad, payload, methode):
+                pfade.append((methode, pfad))
+                if methode == "GET" and pfad == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de",'
+                                 ' "active": true}]}')
+                if methode == "GET" and pfad.startswith("contacts/lists/"):
+                    return 200, '{"totalSubscribers": 4}'
+                if methode == "GET":
+                    # Die Akte kennt einen Status, den weder „raus“ noch „nicht
+                    # raus“ belegt – genau der Fall, der einen Menschen braucht.
+                    return 200, '{"id": 56, "status": "in_aenderung"}'
+                if pfad == "emailCampaigns":
+                    return 201, '{"id": 56}'
+                if pfad.endswith("/sendTest"):
+                    return 201, "{}"
+                return 0, "URLError: timed out"
+            nd._http_request = ungeklärte_api
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc2 = nd.versende(root, "<p>x</p>", "text", "Betreff 2", dry_run=False)
+            state = nd.lade_state(root)
+            self.assertEqual(1, rc2)
+            self.assertEqual(56, state.get("versand_unklar", {}).get("kampagne_id"),
+                             f"unklarer Ausgang ohne Sperre: {state}")
+            pfade.clear()
+            rc3 = nd.versende(root, "<p>x</p>", "text", "Betreff 3", dry_run=False)
+            self.assertEqual(1, rc3, "Sperre ließ den nächsten Listen-Versand zu")
+            self.assertFalse([p for m, p in pfade if p == "emailCampaigns"],
+                             "trotz Sperre eine Kampagne angelegt")
+            rc4 = nd.versende(root, "<p>x</p>", "text", "Betreff 4", dry_run=False,
+                              test_adresse="probe@beispiel.de")
+            self.assertEqual(0, rc4, "Sperre blockiert zu Unrecht den Testversand")
+        finally:
+            nd.TRANSPORT, nd.TRANSPORT_GET, nd._http_request = echt, echt_get, http_echt
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND",
+                        "BREVO_API_HOST"):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)
 
@@ -596,6 +737,36 @@ class Verdrahtung(unittest.TestCase):
                                           "als Weg angegeben werden")
         self.assertIn("newsletter-daily.yml", doku)
         self.assertIn("NEWSLETTER-RECHTSTEXT-VORLAGE.md", doku)
+
+    def test_doku_und_vorflug_nennen_dieselbe_authentifizierungslehre(self):
+        """SPF ist nicht der Hebel – weder in der Doku noch im Vorflug-Befund.
+
+        Beide Texte schrieben, „SPF/DKIM auf verifiziert bringen“ bzw. das
+        Brevo-Include im SPF sei der nächste Schritt. Gemessen am 23.09.2026
+        trägt nur das Domain-DKIM (`brevo1`/`brevo2._domainkey`); auf Brevos
+        geteiltem Weg alignt die eigene SPF-Zeile nie, und ein zweiter
+        SPF-TXT-Eintrag hätte die ganze Domain auf `permerror` gesetzt. Ein
+        Befund, der an der falschen Schicht arbeiten lässt, kostet einen Tag –
+        und eine Doku-Anweisung, die in eine laufende Zone greifen lässt, mehr.
+        Deshalb hängt diese Erwartung jetzt am Test, nicht am Goodwill.
+        """
+        quell = open(os.path.join(ROOT, "scripts/newsletter_digest.py"),
+                     encoding="utf-8").read()
+        self.assertNotIn("SPF/DKIM auf ", quell,
+                         "der Vorflug-Befund schickt den Betreiber zum SPF")
+        self.assertIn("ist hier nicht der Hebel", quell)
+        anleitung = open(os.path.join(ROOT, "docs/ANLEITUNG-NEWSLETTER.md"),
+                         encoding="utf-8").read()
+        checkliste = open(os.path.join(ROOT, "docs/FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md"),
+                          encoding="utf-8").read()
+        for text, name in ((anleitung, "ANLEITUNG-NEWSLETTER"),
+                           (checkliste, "FREISCHALTUNG-NEWSLETTER-CHECKLISTE")):
+            self.assertIn("korrigiert", text.lower(),
+                          f"{name}: die falsche SPF-Anweisung steht weiter als Anweisung")
+            self.assertIn("newsletter_zustellbarkeit.py", text,
+                          f"{name}: die Wache, die das nachmisst, ist nicht verlinkt")
+            self.assertIn("brevo1._domainkey", text,
+                          f"{name}: DKIM wird weiter als TXT-Schlüssel beschrieben")
 
 
 if __name__ == "__main__":

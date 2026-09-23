@@ -61,11 +61,24 @@ Repository.
 - Danach die Cloudflare-Einrichtung erneut starten. Cloudflare soll die
   Routing-MX-Einträge selbst verwalten; keine zusätzlichen MX-Einträge auf
   eigene Faust ergänzen.
-- Falls bereits ein SPF-TXT-Eintrag existiert (z. B. für Brevo), darf
-  **kein zweiter SPF-Eintrag** angelegt werden. Die SPF-Angabe muss
-  zusammengeführt werden (z. B. `v=spf1 include:_spf.mx.cloudflare.net
-  include:spf.brevo.com ~all`); im Zweifel die von Cloudflare vorgeschlagene
-  DNS-Konfiguration verwenden.
+- Falls bereits ein SPF-TXT-Eintrag existiert, darf **kein zweiter
+  SPF-Eintrag** angelegt werden (zwei Einträge = `permerror`, dann scheitert
+  *jede* Mail der Domain). Im Zweifel die von Cloudflare vorgeschlagene
+  DNS-Konfiguration verwenden – für diese Zone ist das gemessene Ergebnis
+  `v=spf1 include:_spf.mx.cloudflare.net ~all` (Stand 23.09.2026).
+- **Kein** `include:spf.brevo.com` für den Newsletter nötig: Brevo versendet
+  über seinen eigenen Return-Path, das Include in der eigenen Zone erzeugt
+  daher kein SPF-Alignement und authentifiziert nichts. Nötig wird es erst mit
+  Dedicated IP oder eigenem Return-Path – und nur durch Erweitern des
+  **einen** Eintrags, nie durch einen zweiten. (Der Newsletter-Beleg ist das
+  Domain-DKIM: `brevo1`/`brevo2._domainkey`, beide vorhanden. Details:
+  [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).)
+- **Regel für das Newsletter-Postfach anlegen:** der Versand läuft mit
+  Absender `news@franksfinanzcheck.de`. Ohne eigene Regel landen Antworten und
+  Rückläufer dorthin im Leergut → *Email → Routing → Routing Rules → Create
+  rule*: Muster `news` → dasselbe Zielpostfach wie `kontakt`. **Keine**
+  Catch-all-Regel anlegen (die wäre ein Spam-Fänger); `newsletter_zustellbarkeit.py`
+  meldet fehlende `news`-Regel als Hinweis.
 - MX-Einträge sind **nicht** proxied (DNS-only, graues Wölkchen). Die
   Website-A- und CNAME-Einträge bleiben von der Mail-Einrichtung
   unberührt (orangenes Wölkchen für die Web-Cache-Proxy-Funktion).

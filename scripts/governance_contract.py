@@ -158,6 +158,16 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Entscheidungslogik ein (Ruhetag, Fenstergrenze, Vorfall-Erkennung,
           # kein Auto-Retry nach rotem Lauf) und gehört ins Minimum.
           "newsletter_cadence.py",
+          # Zustellbarkeits-Wache (23.09.2026, Lauf #21): Der Versand war
+          # dreifach verriegelt, die Kette davor ungeprüft. Ein Lauf meldete
+          # „Absender-Problem“ für eine Cloudflare-Signaturblockage vor der API,
+          # und die Freischalt-Checkliste schrieb eine SPF-Erweiterung vor, die
+          # auf Brevos geteiltem Weg an der Zustellung nichts ändert (DKIM trägt,
+          # SPF alignt nie). Die Wache misst Zone UND Konto und sagt zu jedem
+          # Befund den exakten Klickweg – ihr --selftest friert die
+          # Unterscheidung ein (Kante vs. Anbieter, Messlücke vs. Fund,
+          # p=reject nur mit belegtem Domain-DKIM) und gehört ins Minimum.
+          "newsletter_zustellbarkeit.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
           # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
           # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber
