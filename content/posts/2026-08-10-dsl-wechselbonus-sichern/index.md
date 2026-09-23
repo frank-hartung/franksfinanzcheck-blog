@@ -19,7 +19,7 @@ cover:
 kurzantwort: "Ein DSL-Wechselbonus ist eine Neukundenprämie zwischen 50 € und 240 €, die Provider bei einem Anbieterwechsel als Einmalgutschrift oder Cashback auszahlen. Zusammen mit reduzierten Grundgebühren im ersten Vertragsjahr sinken die monatlichen Effektivkosten für schnelles Internet um bis zu 40 Prozent."
 
 social_posted: true
-keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern"]
+keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A", "bieter wechsel"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
 pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"

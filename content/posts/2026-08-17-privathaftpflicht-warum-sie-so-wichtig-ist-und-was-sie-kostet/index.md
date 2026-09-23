@@ -18,7 +18,7 @@ cover:
 kurzantwort: "Eine Privathaftpflichtversicherung schützt vor existenziellen Schadenersatzansprüchen bei Personen-, Sach- und Vermögensschäden, für die du nach § 823 BGB unbegrenzt haftest. Ein moderner Top-Tarif mit mindestens 50 Millionen Euro Deckungssumme kostet für Singles ab ca. 3,50 € und für Familien ab ca. 5,50 € im Monat."
 
 social_posted: true
-keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht"]
+keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Koste"]
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
 pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"

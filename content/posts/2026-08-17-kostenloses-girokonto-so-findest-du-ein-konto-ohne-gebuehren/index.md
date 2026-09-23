@@ -18,7 +18,7 @@ cover:
 kurzantwort: "Ein wirklich kostenloses Girokonto verlangt weder monatliche Grundgebühren noch Kosten für Debit- und Girokarten oder Bargeldabhebungen. Durch den Wechsel von einer teuren Filialbank (mit bis zu 12 € monatlichen Gebühren) zu einer modernen Direktbank wie der C24 Bank sparst du jährlich rund 150 € bis 180 €."
 
 social_posted: true
-keywords: ["Kostenloses Girokonto", "Girokonto ohne Gebühren", "C24 Bank", "Girokonto Vergleich", "Kontoführungsgebühren", "Bank wechseln"]
+keywords: ["Kostenloses Girokonto", "Girokonto ohne Gebühren", "C24 Bank", "Girokonto Vergleich", "Kontoführungsgebühren", "Bank wechseln", "Koste", "loses Giroko"]
 pin_title: "Kostenloses Girokonto: Nie wieder Kontoführungsgebühren zahlen"
 pin_description: "*Werbung | 5 €, 8 € oder mehr pro Monat fürs Girokonto? Das muss nicht sein: Dauerhaft kostenlose Konten mit Gratiskarte und Echtzeit-Überweisung warten auf dich. Jetzt vergleichen und bis zu 120 € im Jahr sparen – der Kontowechsel-Service macht den Umzug in 10 Minuten."
 pinwand: "Budget & Haushaltskasse: clever planen"

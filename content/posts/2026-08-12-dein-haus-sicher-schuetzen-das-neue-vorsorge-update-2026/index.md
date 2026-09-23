@@ -18,7 +18,7 @@ cover:
 kurzantwort: "Das Vorsorge-Update 2026 für Hausbesitzer und Mieter umfasst den lückenlosen Schutz vor Elementargefahren (Starkregen, Hochwasser, Schneedruck), den Verzicht auf Einrede der groben Fahrlässigkeit sowie eine pauschale Versicherungssumme von mindestens 650 € pro Quadratmeter, um eine existenzbedrohende Unterversicherung zu verhindern."
 
 social_posted: true
-keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update"]
+keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "bruchschutz Haus Koste", "KfW Förderu"]
 pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
 pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
