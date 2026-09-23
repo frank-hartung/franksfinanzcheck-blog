@@ -16,8 +16,10 @@ genau daran hing – also unsichtbar, folgenlos, grün. Dieser Test hält fest:
 """
 from __future__ import annotations
 
+import contextlib
 import datetime
 import importlib.util
+import io
 import os
 import shutil
 import subprocess
@@ -420,6 +422,77 @@ class DigestUndVersand(unittest.TestCase):
             nd.TRANSPORT = echt
             nd.TRANSPORT_GET = echt_get
             nd.PAUSE_SEKUNDEN = alte_pause
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_testversand_mit_bestaetigung_blockiert_nicht_an_leerer_liste(self):
+        """Verdrahtung (23.09.2026): der Testversand ist der vorgesehene Probe-
+        lauf, BEVOR die Liste Abonnenten hat. Die Leere-Liste-Verriegelung gilt
+        nur dem echten Listen-Versand – auch dann, wenn NEWSLETTER_SEND=ja
+        gesetzt ist (z. B. Kadenz-Wache + Testadresse in einem Lauf)."""
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        try:
+            nd.TRANSPORT = lambda *a, **k: aufgerufen.append(a) or (201, '{"id": 8}')
+
+            def leer_liste_get(api_key, pfad):
+                if pfad == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de",'
+                                 ' "active": true}]}')
+                return 200, '{"id": 7, "totalSubscribers": 0}'
+            nd.TRANSPORT_GET = leer_liste_get
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
+                                            test_adresse="probe@beispiel.de"))
+            pfade = [a[1] for a in aufgerufen]
+            self.assertTrue(any(p.endswith("/sendTest") for p in pfade), pfade)
+            self.assertFalse(any(p.endswith("/sendNow") for p in pfade), pfade)
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_status_schreibfehler_nach_versand_luegt_nicht(self):
+        """Ist die Kampagne RAUS und scheitert erst das Status-Schreiben, bleibt
+        der Lauf rot – aber der Befund trägt VERSAND ERFOLGT. Ein „es ist nichts
+        versandt“ wäre eine Lüge, die der Empfänger widerlegen kann."""
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        speicher_echt = nd.speichere_state
+        try:
+            nd.TRANSPORT = lambda *a, **k: aufgerufen.append(a) or (201, '{"id": 11}')
+            nd.TRANSPORT_GET = lambda a, p: (
+                (200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": true}]}')
+                if p == "senders" else (200, '{"totalSubscribers": 4}'))
+
+            def kaputt(root, state):
+                raise OSError("Permission denied (Test)")
+            nd.speichere_state = kaputt
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rc = nd.versende(root, "<p>x</p>", "x", "B", dry_run=False)
+            self.assertEqual(1, rc, "Status-Fehler nach Versand darf nicht grün sein")
+            self.assertTrue(any(a[1].endswith("/sendNow") for a in aufgerufen),
+                            "der Versand soll in diesem Szenario erfolgt sein")
+            self.assertIn("VERSAND ERFOLGT", puffer.getvalue())
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            nd.speichere_state = speicher_echt
             for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)

@@ -1,0 +1,77 @@
+# ============================================================
+#  NEWSLETTER-KADENZ-WACHE – der planmäßige Lauf wird nachgezählt
+#
+#  WARUM (23.09.2026, Lauf fehlt still):
+#  Der Cron des Newsletter-Daily (05:05 UTC, Mo–Fr) kam an diesem
+#  Werktag GAR NICHT – kein Lauf, kein Rotton, keine Meldung. GitHub
+#  verwirft oder verschiebt schedule-Ereignisse unter Last (am Vortag
+#  kam er erst ~10:05 UTC). Ein Lauf, der nie startet, kann nicht rot
+#  werden: kein Ereignis für das Fehler-Alerting, keine Annotation,
+#  nichts. „Ausgefallen ist nicht bestanden“ – diesmal für Workflows.
+#
+#  DIESE WACHE: zählt jeden Werktag vormittags nach, ob der
+#  Newsletter-Daily ÜBERHAUPT versucht wurde (Fenster ab 04:00 UTC).
+#  Fehlt jeder Versuch, holt sie den Lauf mit `planmaessig=true` nach –
+#  exakt die Freigabestufe des verpassten Crons, nicht mehr (der
+#  Newsletter-Daily bleibt dreifach verriegelt: Secrets, Freigabe,
+#  Double-Opt-in-Liste beim Anbieter). Ein FEHLGESCHLAGENER Lauf ist
+#  kein Fall dieser Wache: er ist laut (Fehler-Alerting) und eine
+#  Wiederholung ist Betreiber-Entscheid, nicht Automatik.
+#
+#  Doppel-Fall ungefährlich: kommt der verschobene Cron doch noch,
+#  findet er einen leeren Digest vor – „nichts zu senden“, keine zweite
+#  Kampagne (Duplikatschutz des Digest-Skripts).
+#
+#  Diese Wache steht in der Wacht-Liste des Fehler-Alertings: kann sie
+#  selbst nicht nachholen (fehlende actions:write, Netz), wird der
+#  Befund laut – ein Wächter, der schweigt, wäre die alte Lücke neu.
+# ============================================================
+name: Newsletter-Kadenz-Wache
+
+on:
+  schedule:
+    - cron: "11 8 * * 1-5"    # 08:11 UTC = 10:11 MESZ – nach dem Soll-Termin,
+                              # weit genug davor/danach für verschobene Crons
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: write    # der Nachhol-Dispatch (gh workflow run)
+
+concurrency:
+  group: newsletter-kadenz
+  cancel-in-progress: false
+
+jobs:
+  kadenz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Wachen-Selbsttest (Fensterlogik, Ruhetag, Vorfall-Erkennung)
+        run: python3 scripts/newsletter_cadence.py --selftest
+
+      - name: Kadenz nachzählen (und verpassten Planlauf nachholen)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -o pipefail
+          python3 scripts/newsletter_cadence.py --pruefen --md | tee /tmp/kadenz.log
+          rc=$?
+          cat /tmp/kadenz.log >> "$GITHUB_STEP_SUMMARY"
+          exit "$rc"
+
+      - name: Befund laut machen (Annotation)
+        if: failure()
+        run: |
+          BEFUND=$(grep -m1 "Kein einziger\|fehlgeschlagen" /tmp/kadenz.log | sed 's/^[[:space:]]*//' | cut -c1-350)
+          echo "::error::Newsletter-Kadenz verletzt – der planmäßige Lauf fehlt und konnte nicht zuverlässig nachgeholt werden. ${BEFUND:-Details im Lauf-Log.}"

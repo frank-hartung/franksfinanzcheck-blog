@@ -94,6 +94,8 @@ on:
       - "Redaktions-Standard Bestand (Capital/WiWo/ZEIT)"
       - "Redaktions-Standard neu (Capital/WiWo/ZEIT)"
       - "Mastodon-Manueller-Post"
+      - "Newsletter-Daily (Capture-Wache + Digest)"   # PREM-AUDIT 23.09.: Lauf #14 rot = Versand-Pfad kaputt – aber kein Issue: die Wache war blind für genau den Workflow, der Emails verschickt
+      - "Newsletter-Kadenz-Wache"   # PREM-AUDIT 23.09.: sie holt still verworfene Crons nach – kann sie das nicht, muss es laut werden
     types:
       - completed
 
