@@ -123,10 +123,16 @@ wechselt auf „Anmeldung aktiv“, die Wache meldet `aktiv` statt INERT.
 *Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 1.
 Erwartet: `sendTest`-Mail in deinem Postfach (Double-Opt-In-Bestätigung
 inklusive, Abmeldelink funktioniert), Liste unangetastet.
-Kommt keine Mail: Der Lauf meldet es jetzt laut – „Digest ist leer“ (gelbe
-Warnung) heißt, im Zeitraum liegt kein veröffentlichter Artikel (alles
-`draft: true` oder schon versandt): `tage` vergrößern (z. B. 3) und erneut
-laufen lassen; „kein Absender“ heißt, `BREVO_API_KEY`/`BREVO_LIST_ID` fehlen.
+Kommt keine Mail, sagt der Lauf seit der Versand-Reparatur (23.09.) selbst,
+warum – die Ursache steht in der roten Annotation und im Step-Summary:
+„Digest ist leer“ (gelbe Warnung) heißt, im Zeitraum liegt kein
+veröffentlichter Artikel (alles `draft: true` oder schon versandt):
+`tage` vergrößern (z. B. 3) und erneut laufen lassen; „kein Absender“ heißt,
+`BREVO_API_KEY`/`BREVO_LIST_ID` fehlen; „Absender … nicht verifiziert“,
+„existiert im Brevo-Konto nicht“, „Liste … existiert nicht“ oder „0
+Abonnenten“ heißt, Schritt 2 bzw. 3 oben ist (noch) nicht abgeschlossen –
+die Vorprüfung bricht dann ab, BEVOR bei Brevo eine Kampagne entsteht
+(Report: `NEWSLETTER-VERSAND-REPARATUR-2026-09-23.md`).
 
 **6b. Freigabe** – entweder `live` **an** + `tage` = 1 manuell, oder einfach
 den nächsten Cron laufen lassen (Mo–Fr 05:05 UTC = 07:05 MESZ).

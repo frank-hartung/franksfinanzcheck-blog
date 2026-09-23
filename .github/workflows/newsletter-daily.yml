@@ -149,7 +149,11 @@ jobs:
             if [ -n "${OHNE_ABSENDER:-}" ]; then
               echo "::warning::Digest-Versand nicht ausgelöst, weil kein Absender konfiguriert ist – nur gebaut."
             else
-              echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – Details im Lauf-Log; es ist nichts versandt."
+              # Der konkrete Befund (Vorflug, QA oder Brevo) steht als ❌-Zeile
+              # im Log – sie wandert in die Annotation, damit die Ursache in der
+              # Actions-Übersicht lesbar ist, bevor jemand Logs aufklappt.
+              BEFUND=$(grep "❌" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
+              echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
               exit "$rc"
             fi
           fi

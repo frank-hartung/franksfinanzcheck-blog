@@ -57,6 +57,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -477,22 +478,88 @@ def baue_digest(artikel: list[dict], datum: str, versprechen: str,
 
 
 # ---------------------------------------------------------------------- Brevo-Transport
-def brevo(api_key: str, pfad: str, payload: dict) -> tuple[int, str]:
+# Reparatur 23.09.2026 (Lauf #14): Der erste Lauf, der den Netz-Call überhaupt
+# ausführte, scheiterte im Transport – und die Fehlerstelle war dreifach:
+#   1. Der Payload nannte das Feld `preheader`. Brevo kennt in CreateEmailCampaign
+#      kein solches Feld – das offizielle heißt `previewText`. Ein Schema-Bruch,
+#      der jede Kampagne mit HTTP 400 ablehnt (oder sie still ohne Preheader
+#      anlegt, je nachdem, wie streng die Validierung gerade ist).
+#   2. Absender und Reply-To waren hart codiert statt aus der Studio-SSOT – und
+#      nichts prüfte VOR dem Anlegen der Kampagne, ob der Absender im Brevo-Konto
+#      verifiziert und die Liste vorhanden ist. Genau das steht (Absender-Auth,
+#      SPF/DKIM) in der Freischalt-Checkliste als Betreiber-Schritt offen; ohne
+#      Vorprüfung lief das Skript erst in Brevos Fehlermeldung hinein, statt den
+#      Befund selbst auszusprechen.
+#   3. Brevo-Fehler wurden auf 200 Zeichen verstümmelt, ohne `code`/`message` zu
+#      trennen, und nichtflüchtige Ausfälle (429/5xx/Netz) wurden nie wiederholt.
+TRANSIENTE_CODES = {429, 500, 502, 503, 504}   # Wiederholung wert
+VERSUCHE = 3                                    # 1 Anfrage + 2 Wiederholungen
+PAUSE_SEKUNDEN = (2.0, 5.0)                     # exponentiell-ish, CI-freundlich knapp
+ANTWORT_LIMIT = 4000                            # Fehlerantworten vollständig, nicht verstümmelt
+
+
+def _http_request(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
+    url = "https://api.brevo.com/v3/" + pfad.lstrip("/")
+    data = None if payload is None else json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
-        "https://api.brevo.com/v3/" + pfad.lstrip("/"),
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"api-key": api_key, "Content-Type": "application/json",
+        url, data=data, method=methode,
+        headers={"api-key": key, "Content-Type": "application/json",
                  "Accept": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=40) as r:
-            return r.status, r.read().decode("utf-8", "replace")[:400]
+            return r.status, r.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
     except urllib.error.HTTPError as exc:
-        return exc.code, exc.read().decode("utf-8", "replace")[:400]
+        return exc.code, exc.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
     except Exception as exc:  # noqa: BLE001
         return 0, f"{exc.__class__.__name__}: {exc}"
 
 
-TRANSPORT = brevo      # für den Selbsttest austauschbar – dann trifft kein Netz
+def _mit_wiederholung(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
+    """Nur transiente Ausfälle wiederholen (429/5xx/Netz) – nie 4xx-Logikfehler.
+
+    Ein 400 von Brevo ist ein Befund, keine Störung: Wiederholen würde die
+    Kampagne drei Mal gegen dieselbe Wand fahren. Ein 502 ist eine Störung:
+    dreimal Versuchen ist Agentur-Anstand, dreimal denselben 400 schicken nicht.
+    """
+    code, antwort = 0, ""
+    for versuch in range(VERSUCHE):
+        code, antwort = _http_request(key, pfad, payload, methode)
+        if code not in TRANSIENTE_CODES and code != 0:
+            return code, antwort
+        if versuch + 1 < VERSUCHE:
+            time.sleep(PAUSE_SEKUNDEN[min(versuch, len(PAUSE_SEKUNDEN) - 1)])
+    return code, antwort
+
+
+def brevo(api_key: str, pfad: str, payload: dict) -> tuple[int, str]:
+    return _mit_wiederholung(api_key, pfad, payload, "POST")
+
+
+def brevo_get(api_key: str, pfad: str) -> tuple[int, str]:
+    return _mit_wiederholung(api_key, pfad, None, "GET")
+
+
+TRANSPORT = brevo        # für den Selbsttest austauschbar – dann trifft kein Netz
+TRANSPORT_GET = brevo_get
+
+
+def brevo_fehler(code: int, antwort: str) -> str:
+    """Brevo-Fehlerantwort strukturieren: code + message, nicht verstümmelt.
+
+    Brevos Fehlerkörper ist `{"code": "...", "message": "..."}`. Die rohe
+    Zeichenkette in ein Log zu kippen verstümmelt genau die Hälfte, die der
+    Mensch braucht. → "HTTP 400: <message> · <code>".
+    """
+    msg = (antwort or "").strip()
+    try:
+        dat = json.loads(msg)
+        if isinstance(dat, dict):
+            teile = [str(dat[k]) for k in ("message", "code", "error") if dat.get(k)]
+            if teile:
+                msg = " · ".join(teile)
+    except json.JSONDecodeError:
+        pass
+    return f"HTTP {code}: {msg[:600] or 'leere Antwort'}"
 
 
 # ---------------------------------------------------------------------- Selbsttest
@@ -511,8 +578,9 @@ def _selftest() -> int:
 
     HEUTE_FIX = datetime.date.today()
     tmp = tempfile.mkdtemp(prefix="newsletter-selftest-")
-    global TRANSPORT
+    global TRANSPORT, TRANSPORT_GET, PAUSE_SEKUNDEN, _http_request
     aufgerufen: list = []
+    get_aufgerufen: list = []
     try:
         def baum(root: str, params_toml: str, *, seite_extra: str = "",
                  footer_extra: str = "newsletter-CTA", datenschutz: str = "",
@@ -723,9 +791,25 @@ def _selftest() -> int:
 
         # 17–19) Versand-Verriegelung: ohne Bestätigung und ohne Key kein Netz
         def spy(api_key, pfad, payload):
-            aufgerufen.append((api_key, pfad))
+            aufgerufen.append((api_key, pfad, payload))
             return 201, '{"id": 42}'
+        def spy_get(api_key, pfad):
+            get_aufgerufen.append(pfad)
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 3})
         TRANSPORT = spy
+        TRANSPORT_GET = spy_get
+        get_aufgerufen.clear()
+        # Die Studio-SSOT in den Testbaum: der Versand-Payload muss aus ihr
+        # lesen (Name/E-Mail/Reply-To), nicht aus hart codierten Defaultwerten.
+        with open(os.path.join(r4, "data", "newsletter_studio.json"), "w",
+                  encoding="utf-8") as fh:
+            fh.write(json.dumps({"email": {"absender": {
+                "name": "Frank von FranksFinanzcheck",
+                "email": "news@franksfinanzcheck.de"},
+                "antwort_an": "kontakt@franksfinanzcheck.de"}}))
         rc = versende(r4, html, text, "FranksFinanzcheck", dry_run=True)
         pruefe(not aufgerufen and rc == 0, f"--dry-run fasst das Netz an (rc={rc})")
         aufgerufen.clear()
@@ -736,11 +820,27 @@ def _selftest() -> int:
         os.environ["BREVO_API_KEY"] = "key"
         os.environ["BREVO_LIST_ID"] = "7"
         os.environ["NEWSLETTER_SEND"] = "ja"
-        rc3 = versende(r4, html, text, "X", dry_run=False)
+        rc3 = versende(r4, html, text, "X", dry_run=False, preheader="Vorschautext")
         state = lade_state(r4)
         pruefe(bool(aufgerufen) and rc3 == 0
                and state.get("versandene_artikel", [])[-1:] == ["2026-09-11-neu-1"],
                f"verscharfter Versand läuft nicht durch (rc={rc3}): {state}")
+        # 20a) Der Payload spricht Brevos Schema, nicht unser Wörterbuch:
+        #      previewText (das Feld, das es gibt) statt preheader (das es
+        #      nicht gibt – genau daran scheiterte Lauf #14), Absender und
+        #      Reply-To aus der Studio-SSOT statt hart codiert.
+        kampagne = aufgerufen[0][2] if aufgerufen else {}
+        pruefe("previewText" in kampagne and "preheader" not in kampagne
+               and kampagne.get("previewText") == "Vorschautext",
+               f"Payload nutzt previewText nicht bzw. preheader noch: {sorted(kampagne)}")
+        pruefe(kampagne.get("sender", {}).get("name") == "Frank von FranksFinanzcheck"
+               and kampagne.get("sender", {}).get("email") == "news@franksfinanzcheck.de"
+               and kampagne.get("replyTo", {}).get("email") == "kontakt@franksfinanzcheck.de",
+               f"Absender/Reply-To nicht aus der Studio-SSOT: {kampagne.get('sender')} "
+               f"/ {kampagne.get('replyTo')}")
+        pruefe("senders" in get_aufgerufen
+               and any(p.startswith("contacts/lists/") for p in get_aufgerufen),
+               f"Vorprüfung (Absender/Liste) lief nicht vor dem Versand: {get_aufgerufen}")
         # 20) Testversand: ohne NEWSLETTER_SEND erlaubt, nutzt ausschließlich
         #     sendTest (nie sendNow) und verbucht sich NICHT als Ausgabe –
         #     ein Probe ist keine Ausgabe, sonst würde sich der Duplikatschutz
@@ -750,7 +850,7 @@ def _selftest() -> int:
         vor = lade_state(r4)
         rc4 = versende(r4, html, text, "X", dry_run=False,
                        test_adresse="test@beispiel.de")
-        pfade = [p for _, p in aufgerufen]
+        pfade = [p for _, p, _ in aufgerufen]
         nach = lade_state(r4)
         pruefe(rc4 == 0 and any(p.endswith("/sendTest") for p in pfade)
                and not any(p.endswith("/sendNow") for p in pfade),
@@ -759,12 +859,77 @@ def _selftest() -> int:
                and "kampagne_id" in nach,
                f"Testlauf verbucht sich als Ausgabe: {nach}")
         TRANSPORT = brevo
+
+        # 21–24) Vorflug verriegelt, BEVOR eine Kampagne entsteht
+        def leer_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 0})
+        TRANSPORT_GET = leer_get
+        rc5, befund5 = vorflug("key", "7", "news@franksfinanzcheck.de", live=True)
+        pruefe(rc5 == 1 and "0 Abonnenten" in befund5,
+               f"leere Liste bei --live geht nicht laut schief: rc={rc5} {befund5!r}")
+        rc6, befund6 = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
+        pruefe(rc6 == 0,
+               f"leere Liste blockiert zu Unrecht den Testversand: rc={rc6} {befund6!r}")
+        def inaktiv_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": False, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 3})
+        TRANSPORT_GET = inaktiv_get
+        rc7, befund7 = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
+        pruefe(rc7 == 1 and "NICHT verifiziert" in befund7,
+               f"unverifizierter Absender rutscht durch: rc={rc7} {befund7!r}")
+        def fehlend_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "andere@woanders.de", "active": True, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 3})
+        TRANSPORT_GET = fehlend_get
+        rc8, befund8 = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
+        pruefe(rc8 == 1 and "existiert im Brevo-Konto nicht" in befund8,
+               f"fehlender Absender rutscht durch: rc={rc8} {befund8!r}")
+        TRANSPORT_GET = spy_get
+
+        # 25–26) Wiederholung: transient (502) ja, Logikfehler (400) nein –
+        #     geprüft an der ECHTEN Kette brevo → _mit_wiederholung →
+        #     _http_request; nur so übt der Test, was der Lauf auch ausführt.
+        alte_pause = PAUSE_SEKUNDEN
+        PAUSE_SEKUNDEN = (0.0, 0.0)
+        http_echt = _http_request
+        def trans_http(api_key, pfad, payload, methode):
+            aufgerufen.append(pfad)
+            return (201, '{"id": 9}') if len(aufgerufen) >= 3 else (502, "Bad Gateway")
+        _http_request = trans_http
+        TRANSPORT = brevo
+        TRANSPORT_GET = spy_get
+        aufgerufen.clear()
+        os.environ["NEWSLETTER_SEND"] = "ja"
+        rc9 = versende(r4, html, text, "X", dry_run=False)
+        pruefe(rc9 == 0 and aufgerufen.count("emailCampaigns") == 3,
+               f"transienter 502 wurde nicht genau dreimal bis zum Erfolg "
+               f"probiert: rc={rc9}, {aufgerufen}")
+        def hart_http(api_key, pfad, payload, methode):
+            aufgerufen.append(pfad)
+            return 400, '{"code":"invalid_parameter","message":"property preheader …"}'
+        _http_request = hart_http
+        aufgerufen.clear()
+        rc10 = versende(r4, html, text, "X", dry_run=False)
+        pruefe(rc10 == 1 and aufgerufen.count("emailCampaigns") == 1,
+               f"400-Logikfehler wurde wiederholt statt gemeldet: rc={rc10}, {aufgerufen}")
+        _http_request = http_echt
+        TRANSPORT = brevo
+        TRANSPORT_GET = brevo_get
+        PAUSE_SEKUNDEN = alte_pause
     except Exception as exc:  # noqa: BLE001
         import traceback
         fehler.append(f"Ausführung: {exc.__class__.__name__}: {exc}\n"
                       + traceback.format_exc()[-500:])
     finally:
         TRANSPORT = brevo
+        TRANSPORT_GET = brevo_get
         for k in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
             os.environ.pop(k, None)
         shutil.rmtree(tmp, ignore_errors=True)
@@ -775,14 +940,98 @@ def _selftest() -> int:
         return 2
     print(f"✅ Newsletter-Selbsttest: {zaehler} Fälle grün (INERT, totes "
           f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
-          f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, State-Konfiguration).")
+          f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, "
+          f"previewText/SSOT-Payload, Vorflug, Wiederholung, State-Konfiguration).")
     return 0
 
 
 # ------------------------------------------------------------------------- Versand
+def absender_konfig(root: str) -> dict:
+    """Absender (Name, E-Mail, Reply-To) aus der Studio-SSOT – eine Quelle.
+
+    Bis zur Reparatur stand hier `"FranksFinanzcheck"` hart im Code und als
+    E-Mail ein Default, den die Konfiguration nie sah. Die SSOT
+    (`data/newsletter_studio.json` → `email`) nennt Name, Adresse und Reply-To;
+    `NEWSLETTER_ABSENDER` (Repository-Variable) bleibt die bewusste Ausnahme
+    oben drauf, falls der Absender je wechseln soll – Vorrang env > SSOT,
+    wie in der Freischalt-Checkliste dokumentiert.
+    """
+    try:
+        e = studio.konfiguration(root, streng=False).get("email", {}) or {}
+    except SystemExit:                    # kaputtes JSON: die Wache meldet es, hier nicht sterben
+        e = {}
+    a = e.get("absender", {}) or {}
+    email = (os.environ.get("NEWSLETTER_ABSENDER", "").strip()
+             or str(a.get("email") or "news@franksfinanzcheck.de")).strip()
+    return {"name": str(a.get("name") or "FranksFinanzcheck").strip() or "FranksFinanzcheck",
+            "email": email,
+            "antwort_an": str(e.get("antwort_an") or "").strip()}
+
+
+def vorflug(key: str, liste: str, absender_email: str, *, live: bool) -> tuple[int, str]:
+    """Den Absender und die Liste beim Anbieter prüfen, BEVOR etwas angelegt wird.
+
+    → (rc, meldung) mit rc 0 = weiter, 1 = Abbruch mit Befund. Der Lauf #14
+    legte blind Kampagnen an und ließ Brevo die Diagnose machen – dabei weiß
+    Brevo nichts von der Checkliste, unser Skript schon: Absender fehlt oder
+    ist nicht verifiziert, Liste fehlt, leere Liste bei --live sind alles
+    Zustände, die hier lautsprachlich mit dem exakten nächsten Schritt für den
+    Betreiber ausgesprochen werden.
+
+    Scheitert die Vorprüfung selbst am Netz, wird abgebrochen (fail-closed):
+    eine Kampagne mit ungeprüftem Empfängerkreis entsteht nicht.
+    """
+    code, antwort = TRANSPORT_GET(key, "senders")
+    if code not in (200, 201):
+        return 1, ("Absender-Vorprüfung nicht möglich (" + brevo_fehler(code, antwort)
+                   + ") – kein Versand: lieber fail-closed, als eine Kampagne mit "
+                   "ungeprüftem Absender anzulegen.")
+    try:
+        sender = json.loads(antwort).get("senders", [])
+    except json.JSONDecodeError:
+        return 1, "Absender-Vorprüfung: unverständliche Antwort des Anbieters – kein Versand."
+    eintrag = next((s for s in sender
+                    if str(s.get("email", "")).lower() == absender_email.lower()), None)
+    if eintrag is None:
+        return 1, (f"Absender {absender_email} existiert im Brevo-Konto nicht – Kampagne "
+                   "nicht angelegt. Brevo → Senders, Domains & Dedicated IPs → Senders & IPs "
+                   "→ Add sender (exakt diese Adresse), dann erneut laufen lassen "
+                   "(Checkliste: docs/FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md, Schritt 2).")
+    if not eintrag.get("active", False):
+        return 1, (f"Absender {absender_email} ist im Brevo-Konto vorhanden, aber NICHT "
+                   "verifiziert – Brevo weist Kampagnen damit ab. Den 6-stelligen "
+                   "Bestätigungscode aus der Absender-Mail eingeben bzw. SPF/DKIM auf "
+                   "„verifiziert“ bringen (Checkliste Schritt 2), dann erneut laufen lassen.")
+    code2, antwort2 = TRANSPORT_GET(key, f"contacts/lists/{liste}")
+    if code2 == 404:
+        return 1, (f"Liste {liste} existiert im Brevo-Konto nicht (HTTP 404) – Kampagne "
+                   "nicht angelegt. Secret BREVO_LIST_ID gegen die Zahl in der "
+                   "Listen-URL prüfen (Checkliste Schritt 3/4).")
+    if code2 not in (200, 201):
+        return 1, ("Listen-Vorprüfung nicht möglich ("
+                   + brevo_fehler(code2, antwort2) + ") – kein Versand.")
+    if live:
+        try:
+            gesamt = int(json.loads(antwort2).get("totalSubscribers", 0))
+        except (json.JSONDecodeError, TypeError, ValueError):
+            gesamt = -1
+        if gesamt == 0:
+            return 1, ("Die Zielliste hat 0 Abonnenten – ein Live-Versand ginge ins Leere, "
+                       "es wäre eine Kampagne auf niemanden. Erst Anmeldungen sammeln "
+                       "(Double-Opt-In), dann --live; für die Probe den Testversand über "
+                       "--test-adresse nutzen (der trifft genau eine Adresse, nie die Liste).")
+    return 0, ""
+
+
 def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
-             test_adresse: str = "") -> int:
-    """Kampagne bei Brevo anlegen und senden. Dreifach verriegelt, s. Dokumentation."""
+             test_adresse: str = "", preheader: str = "") -> int:
+    """Kampagne bei Brevo anlegen und senden. Dreifach verriegelt, s. Dokumentation.
+
+    Seit der Reparatur von Lauf #14 zusätzlich: Absender/Reply-To aus der
+    Studio-SSOT, `previewText` statt des nicht existierenden `preheader`-Felds,
+    Vorprüfung von Absender + Liste vor dem Anlegen, strukturierte Fehler,
+    Wiederholung nur bei transienten Störungen.
+    """
     key = os.environ.get("BREVO_API_KEY", "").strip()
     liste = os.environ.get("BREVO_LIST_ID", "").strip()
     bestaetigt = os.environ.get("NEWSLETTER_SEND", "").strip().lower() in ("ja", "true", "1")
@@ -798,30 +1047,44 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         print("   ❌ kein Versand: NEWSLETTER_SEND=ja fehlt. Echte Listen werden nur "
               "bestätigt getroffen; für Probeläufe --test-adresse nutzen.")
         return 1
+    if not re.fullmatch(r"\d+", liste):
+        print(f"   ❌ kein Versand: BREVO_LIST_ID ist keine Zahl ({liste!r}) – Brevo liest "
+              "die Listen-ID als Ganzzahl (Zahl in der Listen-URL).")
+        return 1
+    absender = absender_konfig(root)
+    rc_vor, befund = vorflug(key, liste, absender["email"], live=bool(bestaetigt))
+    if rc_vor != 0:
+        print(f"   ❌ Vorprüfung fehlgeschlagen: {befund}")
+        return 1
     payload = {"name": f"Digest {datetime.date.today().isoformat()}",
                "subject": betreff, "htmlContent": html, "textContent": text,
-               "sender": {"name": "FranksFinanzcheck",
-                         "email": os.environ.get("NEWSLETTER_ABSENDER",
-                                                 "news@franksfinanzcheck.de")},
+               "sender": {"name": absender["name"], "email": absender["email"]},
                "recipients": {"listIds": [int(liste)]},
-               "status": "draft", "preheader": betreff[:90]}
+               "status": "draft",
+               # Brevo-Schema (CreateEmailCampaign): das Feld heißt previewText,
+               # nicht preheader – Lauf #14 scheiterte genau daran, dass der
+               # Payload ein Feld trug, das es beim Anbieter nie gab.
+               "previewText": (preheader.strip() or betreff)[:300],
+               "mirrorActive": True}
+    if absender["antwort_an"]:
+        payload["replyTo"] = {"email": absender["antwort_an"]}
     code, antwort = TRANSPORT(key, "emailCampaigns", payload)
     if code not in (200, 201):
-        print(f"   ❌ Kampagne nicht angelegt (HTTP {code}): {antwort[:200]}")
+        print(f"   ❌ Kampagne nicht angelegt ({brevo_fehler(code, antwort)})")
         return 1
     try:
         kennung = json.loads(antwort).get("id")
     except json.JSONDecodeError:
         kennung = None
     if not kennung:
-        print(f"   ❌ Antwort ohne Kampagnen-ID: {antwort[:200]}")
+        print(f"   ❌ Antwort ohne Kampagnen-ID: {antwort[:400]}")
         return 1
     pfad = (f"emailCampaigns/{kennung}/sendTest" if test_adresse
             else f"emailCampaigns/{kennung}/sendNow")
     body = {"emailTo": test_adresse} if test_adresse else {}
     code2, antwort2 = TRANSPORT(key, pfad, body)
     if code2 not in (200, 201, 202, 204):
-        print(f"   ❌ Versand fehlgeschlagen (HTTP {code2}): {antwort2[:200]}")
+        print(f"   ❌ Versand fehlgeschlagen ({brevo_fehler(code2, antwort2)})")
         return 1
     print(f"   ✅ {'Testversand an ' + test_adresse if test_adresse else 'Versand angestoßen'}"
           f" (Kampagne {kennung})")
@@ -948,7 +1211,8 @@ def main(argv=None) -> int:
         # Vorschau, und genau so lief der 23.09.2026: grün, aber keine Mail.
         rc_gesamt = max(rc_gesamt, versende(root, html, text, betreff,
                                             dry_run=not (args.live or bool(args.test_adresse)),
-                                            test_adresse=args.test_adresse))
+                                            test_adresse=args.test_adresse,
+                                            preheader=ausgabe.get("preheader", "")))
     else:
         print("   (kein Versand – --send fehlt; gebaute Digeste bleiben bewusst lokal)")
     return rc_gesamt
