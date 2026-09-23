@@ -14,6 +14,7 @@ Alltag übersprungen. Was hier steht, gilt auch ohne Hugo-Binary.
 """
 from __future__ import annotations
 
+import datetime
 import glob
 import importlib.util
 import json
@@ -50,6 +51,12 @@ def _load(name: str, path: str):
 
 
 studio = _load("newsletter_studio", os.path.join(SCRIPTS, "newsletter_studio.py"))
+# Normaler Import: der Versandvertrag muss dieselbe Modulinstanz sein, die auch
+# newsletter_digest hält – sonst laufen Zeit-Patches anderer Tests ins Leere.
+sys.path.insert(0, SCRIPTS)
+import newsletter_schedule as plan                        # noqa: E402
+qa_modul = _load("newsletter_qa", os.path.join(SCRIPTS, "newsletter_qa.py"))
+qa_pruefe = qa_modul.pruefe
 
 
 def _text(rel: str) -> str:
@@ -279,6 +286,98 @@ class Daten(unittest.TestCase):
         for url in sorted(urls):
             self.assertIn(url.rstrip("/") + "/", {u.rstrip("/") + "/" for u in vorhanden},
                           f"{url} wird verlinkt, gehört aber zu keiner Seite")
+
+
+class Kadenz(unittest.TestCase):
+    """Ein Versprechen, mehrere Oberflächen.
+
+    „Zweimal pro Woche, dienstags und freitags“ steht im Anmeldeformular, im
+    Streifen, auf der Landingpage, in der Datenschutzerklärung, im Studio-JSON und
+    in der Betriebsanleitung. Wenn eine dieser Stellen noch den alten werktäglichen
+    Versand verspricht, ist die Kadenz nicht eingerichtet, sondern halb umgezogen –
+    und der Leser erfährt den Widerspruch im Postfach.
+    """
+
+    OBERFLAECHEN = JOURNEYS + [STRIP, FORM, MUSTER, "data/newsletter_studio.json",
+                               "content/datenschutz/index.md",
+                               "docs/ANLEITUNG-NEWSLETTER.md",
+                               "docs/ANLEITUNG-NEWSLETTER-STUDIO.md",
+                               "docs/FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md",
+                               "docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md"]
+    UEBERHOLT = ("pro Werktag", "1 Mail/Tag", "werktäglich", "an jedem Werktag",
+                 "jeden Werktag", "Mo–Fr", "Mo-Fr", "Montag bis Freitag",
+                 "eine Mail pro Tag")
+
+    def test_kein_ueberholtes_versandsversprechen(self):
+        for rel in self.OBERFLAECHEN:
+            text = _ohne_kommentare(_text(rel))
+            for alt in self.UEBERHOLT:
+                self.assertNotIn(alt, text,
+                                 f"{rel} verspricht noch „{alt}“ – der Vertrag ist "
+                                 f"{plan.versandtage_text()}, höchstens "
+                                 f"{plan.MAX_PRO_WOCHE} pro Kalenderwoche")
+
+    def test_leserflaeche_nennt_beide_versandtage(self):
+        for rel in ["content/newsletter/index.md", STRIP,
+                    "content/newsletter-bestaetigung/index.md",
+                    "content/newsletter-praeferenzen/index.md"]:
+            text = _ohne_kommentare(_text(rel)).lower()
+            for tag in plan.VERSANDTAGE:
+                self.assertIn(plan.WOCHENTAGE[tag].lower(), text,
+                              f"{rel} nennt {plan.WOCHENTAGE[tag]} nicht")
+
+    def test_kadenzkonfiguration_deckt_genau_die_versandtage_ab(self):
+        konf = json.loads(_text("data/newsletter_studio.json"))
+        kadenz = konf["creative"]["kadenz"]
+        for feld in ("ausgabe", "aufmacher", "betreff", "preheader_hinweis", "gruss"):
+            self.assertEqual(sorted(int(k) for k in kadenz[feld]), list(plan.VERSANDTAGE),
+                             f"creative.kadenz.{feld} deckt nicht genau die Versandtage ab")
+        marke = konf["creative"]["marke_kurz"]
+        grenze = konf["creative"]["betreff"]
+        for tag, text in kadenz["betreff"].items():
+            laenge = len(f"{marke}: {text}")
+            self.assertGreaterEqual(laenge, grenze["min_zeichen"],
+                                    f"Kadenz-Betreff für Wochentag {tag} ist zu kurz (Q8)")
+            self.assertLessEqual(laenge, grenze["max_zeichen"],
+                                 f"Kadenz-Betreff für Wochentag {tag} sprengt das "
+                                 f"Längen-Gate (Q8): {laenge} > {grenze['max_zeichen']}")
+
+    def test_beide_versandtage_bauen_eine_mail_mit_identitaet(self):
+        """End-to-End durchs Studio: Dienstag und Freitag liefern verschiedene
+        Ausgaben – Name, Kopfzeile, Betreff und nächsten Termin."""
+        material = studio.material_aus_artikel(ROOT, studio._artikel_suchen(ROOT, 50))
+        self.assertTrue(material, "kein Material im Bestand – Prüfkern fehlt")
+        konf = studio.konfiguration(ROOT)
+        dienstag = datetime.date(2026, 9, 22)
+        freitag = datetime.date(2026, 9, 25)
+        ausgaben = {}
+        for tag in (dienstag, freitag):
+            email = studio.baue_email(material, datum=tag, root=ROOT)
+            kopf = next(b for b in email["blocks"] if b["typ"] == "kopf")
+            fuss = next(b for b in email["blocks"] if b["typ"] == "fuss")
+            self.assertIn(plan.wochentag(tag), kopf["zeile"], "Kopf ohne Versandtag")
+            erkannt = plan.datum_lang_erkennen(fuss["naechste"])
+            soll = plan.naechster_termin(tag)
+            self.assertEqual((soll.day, soll.month), (erkannt["tag"], erkannt["monat"]),
+                             "nächste Ausgabe stimmt nicht mit dem Vertrag überein")
+            er = qa_pruefe(email, konf=konf, materiale=material, root=ROOT)
+            self.assertEqual([], er["funde"],
+                             f"QA-Funde am {plan.wochentag(tag)}: "
+                             + json.dumps(er["funde"], ensure_ascii=False))
+            ausgaben[tag] = (kopf.get("ausgabe"), email["betreff"])
+        self.assertNotEqual(ausgaben[dienstag], ausgaben[freitag],
+                            "beide Versandtage bauen dieselbe Ausgabe")
+
+    def test_cron_und_vertrag_sind_dieselbe_kadenz(self):
+        for name in ("newsletter-daily.yml", "newsletter-cadence.yml"):
+            workflow = _text(os.path.join(".github/workflows", name))
+            crons = re.findall(r'cron:\s*"([0-9*,\s-]+)"', workflow)
+            self.assertTrue(crons, f"{name} ohne Cron")
+            for cron in crons:
+                tage = cron.split()[4]
+                self.assertEqual({int(x) for x in tage.split(",")},
+                                 {d + 1 for d in plan.VERSANDTAGE},
+                                 f"{name}: Cron {cron} weicht vom Versandvertrag ab")
 
 
 class Journeys(unittest.TestCase):

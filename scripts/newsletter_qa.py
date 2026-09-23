@@ -11,7 +11,7 @@ Ton, Kompatibilität). Diese Wache ist dasselbe Versprechen – als Code im Repo
 0 Euro, ohne Netz:
 
   * Sie prüft das Gebaute (HTML + Text + Betreff + Preheader), nicht die Absicht.
-  * Jeder Fund trägt eine Regelkennung (Q1…Q20) und den Grund der Regel.
+  * Jeder Fund trägt eine Regelkennung (Q1…Q21) und den Grund der Regel.
   * Sie misst, was messbar ist (Kontrast, Größe, Linkzahl, Wortzahl) statt zu
     schätzen – derselbe Maßstab wie `e2e/design-metrics.mjs`.
 
@@ -42,6 +42,7 @@ import urllib.parse
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import newsletter_studio as studio                       # noqa: E402
+import newsletter_schedule as plan                        # noqa: E402
 
 GMAIL_CLIP_BYTES = 102_400        # darüber clippt Gmail – und schneidet Footer + Abmeldung ab
 FRUEH_BYTES = 90_000
@@ -77,6 +78,8 @@ REGELN = {
     "Q18": "Zeichensatz: kein Mojibake, keine doppelten Entities, keine unbekannte Entity",
     "Q19": "Datenschutz im Versand: kein Tracking, ein Klick zur Abmeldung",
     "Q20": "Absender: Name und Antwortadresse gehören zur eigenen, authentifizierten Domain",
+    "Q21": "Kadenz: Dienstag/Freitag – kein Werktags-Versprechen, Versandtag im Kopf, "
+           "nächste Ausgabe auf einem echten Versandtag",
 }
 
 
@@ -94,7 +97,7 @@ def _sichtbarer_text(html: str) -> str:
 # ------------------------------------------------------------------- Prüfkern
 def pruefe(email: dict, *, konf: dict, materiale: list[dict] | None = None,
            zustand: dict | None = None, root: str = BLOG_DIR) -> dict:
-    """Ein gebautes E-Mail gegen 20 Regeln.
+    """Ein gebautes E-Mail gegen 21 Regeln.
 
     → {"bestanden", "score", "funde", "warnungen", "messwerte", "regeln_geprueft"}
     """
@@ -473,6 +476,68 @@ def pruefe(email: dict, *, konf: dict, materiale: list[dict] | None = None,
     if antwort and "@" not in antwort:
         funde.append(_regel("Q20", f"Antwortadresse {antwort!r} ist keine Adresse"))
 
+    # ---- Q21 Kadenz -------------------------------------------------------
+    # Der Versandvertrag ist ein Versprechen an den Leser: zwei Ausgaben,
+    # Dienstag und Freitag. Zwei Fehlerarten sind teuer, und beide sind mit
+    # einem Blick in den Kalender widerlegbar – eine Mail, die eine Kadenz
+    # behauptet, die es nicht (mehr) gibt, und eine „Nächste Ausgabe“ an einem
+    # Tag, an dem nie versendet wird. Beides kostet genau das, was der
+    # Newsletter aufbaut: Verlässlichkeit.
+    kadenz_texte = " ".join([rein, pre, betreff]).lower()
+    for muster, grund in (("pro werktag", "ein Werktag-Versprechen"),
+                          ("an jedem werktag", "ein Werktag-Versprechen"),
+                          ("werktäglich", "ein Werktag-Versprechen"),
+                          ("jeden werktag", "ein Werktag-Versprechen"),
+                          ("mo–fr", "Versand Montag bis Freitag"),
+                          ("mo-fr", "Versand Montag bis Freitag"),
+                          ("mo. – fr.", "Versand Montag bis Freitag"),
+                          ("montag bis freitag", "Versand Montag bis Freitag"),
+                          ("jede woche fünf", "fünf Ausgaben pro Woche"),
+                          ("1 mail/ tag", "ein Tages-Versprechen"),
+                          ("1 mail/tag", "ein Tages-Versprechen")):
+        if muster in kadenz_texte:
+            funde.append(_regel("Q21", f"„{muster.strip()}“ in der Mail ist {grund} – der "
+                                      f"Vertrag ({plan.versandtage_text()}, höchstens "
+                                      f"{plan.MAX_PRO_WOCHE} pro Kalenderwoche) sagt etwas "
+                                      "anderes; eine überholte Kadenz ist ein gebrochenes "
+                                      "Versprechen im Postfach"))
+    versprechen = str((konf.get("capture", {}) or {}).get("versprechen", ""))
+    if versprechen.strip():
+        fehlend = [plan.WOCHENTAGE[d] for d in plan.VERSANDTAGE
+                   if plan.WOCHENTAGE_ADVERB[d] not in versprechen.lower()
+                   and plan.WOCHENTAGE[d].lower() not in versprechen.lower()]
+        if fehlend:
+            funde.append(_regel("Q21", f"Das Versandversprechen nennt {fehlend} nicht – "
+                                      f"„{versprechen}“ verspricht nicht, was der Kalender "
+                                      "leistet"))
+    datum = email.get("datum")
+    if datum:
+        try:
+            tag = datetime.date.fromisoformat(str(datum)[:10])
+        except ValueError:
+            tag = None
+        if tag:
+            kopf = next((b for b in blöcke if b.get("typ") == "kopf"), {})
+            if plan.ist_versandtag(tag) and \
+                    plan.wochentag(tag).lower() not in str(kopf.get("zeile", "")).lower():
+                funde.append(_regel("Q21", f"Der Kopf nennt den Versandtag "
+                                          f"{plan.wochentag(tag)} nicht – die Mail "
+                                          "beantwortet nicht, warum sie heute kommt"))
+            fuss = next((b for b in blöcke if b.get("typ") == "fuss"), {})
+            zeile = str(fuss.get("naechste", ""))
+            if zeile:
+                erkannt = plan.datum_lang_erkennen(zeile)
+                soll = plan.naechster_termin(tag)
+                if not erkannt:
+                    funde.append(_regel("Q21", f"„{zeile}“ ist keine lesbare Terminzeile – "
+                                              "eine Ansage ohne Datum ist keine Ansage"))
+                elif erkannt["wochentag"] not in [plan.WOCHENTAGE[d] for d in plan.VERSANDTAGE]:
+                    funde.append(_regel("Q21", f"„{zeile}“ kündigt {erkannt['wochentag']} an – "
+                                              f"versendet wird {plan.versandtage_text()}"))
+                elif (erkannt["tag"], erkannt["monat"]) != (soll.day, soll.month):
+                    funde.append(_regel("Q21", f"„{zeile}“ – der Vertrag nennt als nächsten "
+                                              f"Termin {plan.datum_lang(soll, mit_jahr=False)}"))
+
     # Das Minimum pro Modus wandert in die Messwerte: eine Zahl, die nur als
     # Fehlermeldung auftaucht, kann niemand mit der Vorwoche vergleichen – und
     # „grün, seit drei Wochen“ ist ohne Verlauf kein Beweis.
@@ -614,6 +679,32 @@ def _selftest() -> int:
         k20["email"]["absender"]["email"] = "news@fremdversand.example"
         pruefe_es(any(w["regel"] == "Q20" for w in pruefe(gut, konf=k20, materiale=MAT)["warnungen"]),
                   "fremde Absenderdomain bleibt ohne Warnung")
+        # Q21 Kadenz: vier Manipulationen, jede muss den richtigen Code liefern
+        pruefe_es(gefunden("Q21", kaputt(html=gut["html"].replace(
+            "Zweimal pro Woche", "Eine Mail pro Werktag"))),
+                  "überholtes Werktags-Versprechen bleibt unentdeckt")
+        kopf_ohne_tag = [dict(b) for b in gut["blocks"]]
+        for b in kopf_ohne_tag:
+            if b["typ"] == "kopf":
+                b["zeile"] = "17.11.2026 · Ausgabe 47/2026"
+        pruefe_es(gefunden("Q21", kaputt(blocks=kopf_ohne_tag)),
+                  "Kopf ohne Versandtag bleibt unentdeckt")
+        fuss_falsch = [dict(b) for b in gut["blocks"]]
+        for b in fuss_falsch:
+            if b["typ"] == "fuss":
+                b["naechste"] = "Nächste Ausgabe: Mittwoch, 18. November"
+        pruefe_es(gefunden("Q21", kaputt(blocks=fuss_falsch)),
+                  "unmöglicher nächster Versandtag bleibt unentdeckt")
+        fuss_verrutscht = [dict(b) for b in gut["blocks"]]
+        for b in fuss_verrutscht:
+            if b["typ"] == "fuss":
+                b["naechste"] = "Nächste Ausgabe: Freitag, 27. November"
+        pruefe_es(gefunden("Q21", kaputt(blocks=fuss_verrutscht)),
+                  "verschobener nächster Versandtag bleibt unentdeckt")
+        k21 = json.loads(json.dumps(konf))
+        k21["capture"]["versprechen"] = "Jede Woche neue Spartipps."
+        pruefe_es(gefunden("Q21", pruefe(gut, konf=k21, materiale=MAT)),
+                  "Versandversprechen ohne Versandtage bleibt unentdeckt")
         pruefe_es(all(m["wert"] > 0 for m in studio.kontrast_pruefung(konf)),
                   "Kontrastmessung lieferte 0 (Rollenfehler)")
         weiter = pruefe(studio.baue_email(MAT, datum=FIX + datetime.timedelta(days=97 * 3),
@@ -631,13 +722,13 @@ def _selftest() -> int:
         for f in fehler:
             print("  -", f)
         return 2
-    print(f"✅ QA-Selbsttest: {zaehler} Fälle grün (20 Regeln, jede Manipulation gefunden, "
+    print(f"✅ QA-Selbsttest: {zaehler} Fälle grün (21 Regeln, jede Manipulation gefunden, "
           "uhrfest, kein Netz, keine Schreibrechte).")
     return 0
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Vor-Versand-Prüfung des Newsletters (Q1..Q20)")
+    ap = argparse.ArgumentParser(description="Vor-Versand-Prüfung des Newsletters (Q1..Q21)")
     ap.add_argument("--root", default=BLOG_DIR)
     ap.add_argument("--build", action="store_true", help="Ausgabe aus dem Bestand bauen und prüfen")
     ap.add_argument("--days", type=int, default=1)

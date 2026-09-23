@@ -12,9 +12,9 @@
 {{- if $blog -}}
 <aside class="newsletter-footer ff-nl-strip ff-nl-top" aria-label="Kostenloser Spar-Newsletter">
   <div class="ff-nl-top__copy">
-    <p class="ff-nl-top__title">Mehr Überblick. Weniger Ausgaben.</p>
-    <p class="ff-nl-top__description">Dein Spar-Newsletter mit Tipps &amp; Rechnern. <strong>Nur 2× pro Woche.</strong></p>
-    <p class="ff-nl-top__meta">Dienstag &amp; Freitag · kostenlos · jederzeit abmeldbar</p>
+    <p class="ff-nl-top__title">Zwei Mails pro Woche, jede mit Rechnung</p>
+    <p class="ff-nl-top__description">Dienstags die Zahlen der Woche, freitags die Fristen davor. <strong>Keine Rabatt-Post.</strong></p>
+    <p class="ff-nl-top__meta">Dienstag &amp; Freitag · kostenlos · ein Klick zum Abmelden</p>
   </div>
   <a class="ff-nl-top__cta" href="{{ $nl.journeys.anmeldung | default "/newsletter/" }}#newsletter-anmeldung">
     Newsletter abonnieren
@@ -25,7 +25,7 @@
 <div class="newsletter-footer ff-nl-strip">
   <p class="ff-nl-strip__text">{{ $nl.capture.versprechen }}</p>
   <a class="ff-nl-strip__cta" href="/newsletter/#newsletter-anmeldung">Newsletter abonnieren <span aria-hidden="true">→</span></a>
-  <p class="ff-nl-strip__klein">Dienstag &amp; Freitag · kostenlos · jederzeit abmeldbar</p>
+  <p class="ff-nl-strip__klein">Dienstag &amp; Freitag · kostenlos · ein Klick zum Abmelden</p>
 </div>
 {{- end -}}
 {{- end -}}

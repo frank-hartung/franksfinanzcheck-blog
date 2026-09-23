@@ -28,7 +28,7 @@ die Reihenfolge mit den exakten Werten aus der Studio-SSOT
 | Formular `/newsletter/`, Streifen, Footer-CTA, Journey-Seiten | ✅ gebaut, zeigt ehrlichen Leerzustand |
 | § 8 Datenschutz | ✅ liest den Schaltstand aus dem Studio (`{{< newsletter_status >}}`) |
 | Wache / QA / Digest / Export | ✅ `--selftest` grün, CI verriegelt |
-| Nightly-Cron (Mo–Fr 05:05 UTC) | ✅ läuft (heutiger Lauf: `success`, 15 s, baut nur) |
+| Versand-Cron (Di + Fr 05:05 UTC) + Kadenz-Wache (Di + Fr 08:11 UTC) | ✅ laufen; die Wache holt still verworfene Crons nach |
 | **Capture** | ⚠️ **INERT** – `--check`: „kein Anmeldeweg konfiguriert“ |
 
 Fehlt also genau das, was **außerhalb des Repos** liegt: Brevo-Konto +

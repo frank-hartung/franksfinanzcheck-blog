@@ -13,7 +13,7 @@ fünf Klicks im Brevo-Konto). Dieses Dokument ist die Werkstatt dahinter.
 | Schicht | Datei | Was sie entscheidet |
 |---|---|---|
 | Studio | `scripts/newsletter_studio.py` | wie eine Mail aussieht und was drinsteht (Farben, Blöcke, Betreff, Preheader, Textalternative) |
-| QA | `scripts/newsletter_qa.py` | ob sie rausdarf (20 Regeln, gemessen: Kontrast, Größe, Links, Rechtliches, Zahlen-Belege) |
+| QA | `scripts/newsletter_qa.py` | ob sie rausdarf (21 Regeln, gemessen: Kontrast, Größe, Links, Rechtliches, Zahlen-Belege, Kadenz) |
 | Digest | `scripts/newsletter_digest.py` | ob der Anmeldeweg echt ist, welcher Bestand noch nicht versendet ist, und der eigentliche API-Ruf |
 | Website | `layouts/shortcodes/newsletter_*.html`, `layouts/_partials/newsletter_strip.html`, `assets/css/extended/zz-newsletter.css`, `static/premium/ff-newsletter.js` | Anmeldung, Präferenzen, Bestätigung, Abmeldung |
 
@@ -61,6 +61,7 @@ Byte-für-Byte dieselbe Datei (der Test hält genau das fest).
 | `email` | `breite`, `max_artikel`, `vorlagen_sprache`, `marken`, `header_bild`, `absender`, `antwort_an`, `rechtliches`, `ein_klick_abmeldung`, `tracking_oeffnungen` | Layoutbreite, Artikelzahl, Brevo-Marker, Absender, Rechtstext, Tracking aus |
 | `design` | `hell`, `dunkel`, `herleitung`, `email_eigene`, `pflicht_rollen`, `schrift`, `radius`, `kontraste` | Farbrollen, ihre Token-Herleitung, Kontrastpflichtpaare |
 | `creative` | `marke_kurz`, `du_form`, `betreff` (`min_zeichen`, `max_zeichen`, `varianten`), `preheader`, `block_text_zeichen`, `min_woerter`, `max_Ausrufezeichen`, `verbotene_woerter` | Tonalität, Betreff-Rotation (30–45 Zeichen, 3 Varianten), Wort- und Zeichenbudgets |
+| `creative.kadenz` | `ausgabe`, `aufmacher`, `betreff`, `preheader_hinweis`, `gruss` (je `"1"` = Dienstag, `"4"` = Freitag), `naechste_zeile` | Redaktionsrahmen der beiden Versandtage: Ausgabenname im Mail-Kopf, Aufmacher ohne Zahl, Betreff-Variante, zweiter Satz der Inbox-Vorschau, Grußzeile, Nächste-Ausgabe-Zeile an/aus. Fakten (Tage, Uhrzeit, nächster Termin) kommen aus `scripts/newsletter_schedule.py`, nicht von hier |
 | `themen` | 6 Einträge mit `id`, `label`, `brevo_interest` | Präferenz-Chips – `id` muss eine Themenwelt der Site sein |
 | `journeys` | `anmeldung`, `bestaetigung`, `praeferenzen`, `abmelden` | die vier Seiten, auch für Rechtstexte |
 | `zustand` | `datei`, `betreff_historie`, `artikel_historie` | Pfad und Länge des Versandgedächtnisses: Duplikatsschutz (welche Artikel schon draußen waren) und Betreff-Wiederholung (Q15) |
@@ -90,7 +91,7 @@ Konfiguration kann nicht durch eine Editierpause entkommen.
 
 ## 5. Das Vor-Versand-Gate
 
-20 Regeln, Exit-Code statt Bauchgefühl: **0** frei, **1** Fund, **2** Prüfung
+21 Regeln, Exit-Code statt Bauchgefühl: **0** frei, **1** Fund, **2** Prüfung
 ausgefallen (fehlende Datei, kaputte Konfiguration). Fund blockiert den Live-Versand,
 Warnung nicht – sonst wird die Wache am ersten Montag abgeschaltet, an dem nichts
 kaputt war.
@@ -107,12 +108,13 @@ kaputt war.
 | Q8 | Betreff: Länge, Marke, kein „Re:/AW:“, kein Markup | Q18 | Zeichensatz: kein Mojibake, kein `&amp;amp;`, keine unbekannte Entity |
 | Q9 | Preheader als eigener Satz, keine Betreff-Kopie, kein Klischee | Q19 | Datenschutz: kein Tracking-Pixel (Konfiguration `tracking_oeffnungen: false`), Abmeldung mit einem Klick |
 | Q10 | Fußzeile: Anschrift, Impressum, Datenschutz, Double-Opt-In-Hinweis, Werbehinweis | Q20 | Absendername und Antwortadresse auf der eigenen Domain |
+| **Q21** | **Kadenz: kein Werktag-Versprechen, Versandtag im Kopf, „nächste Ausgabe“ auf einem echten Versandtag, Versandversprechen nennt beide Tage** | | |
 
 Das Gate läuft **zweimal**: manuell (`--build`) und hart vor jedem Live-Versand in
 `newsletter_digest.py` (der Versand bricht mit Exit 1 ab; `--trotz-qa` ist der
 Notausstieg und steht im Workflow nicht zur Verfügung). Zusätzlich prüft
 `newsletter_qa.py --selftest` die Wache selbst: pro Regel eine gezielte
-Manipulation, die den passenden Code melden muss – 35 Fälle, kein Netz, kein
+Manipulation, die den passenden Code melden muss – 40 Fälle, kein Netz, kein
 Schreibzugriff, uhrfest.
 
 ## 6. Capture und Journeys (das, was Leser sehen)
@@ -174,7 +176,7 @@ Danach in dieser Reihenfolge:
    `test_adresse` (`sendTest`), nicht über eine Test-Variable.
 5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse, `live` aus →
    echter `sendTest` durch Brevo, Liste unangetastet.
-6. `live` an. Ab jetzt liefert der Cron Mo–Fr 05:05 UTC eine geprüfte Mail, und
+6. `live` an. Ab jetzt liefert der Cron Dienstag/Freitag 05:05 UTC eine geprüfte Mail, und
    `data/newsletter_state.json` (versioniert!) merkt, was schon draußen war.
 
 Der letzte Klick bleibt bei dir, weil er ein Konto braucht: Signup, Domain-Authentifizierung in Brevo (der Beleg ist das Domain-DKIM; `brevo1`/`brevo2._domainkey` und `brevo-code`-TXT liegen bereits in der Zone – gemessen 23.09.2026), AVV. Nachmessen: `python3 scripts/newsletter_zustellbarkeit.py --pruefen`, Runbook: [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
