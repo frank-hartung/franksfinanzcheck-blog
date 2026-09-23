@@ -154,7 +154,7 @@ Ein entscheidender Punkt ist die Stabilität: Ein Tarif, der konstant rund 90 Mb
 
 Der optimale Vertrag ist jener, der deinen tatsächlichen Bedarf deckt, ohne für ungenutzte Kapazitäten zu zahlen. Ein regelmäßiger Wechsel alle 2 Jahre nach Ablauf der Mindestlaufzeit ist der effektivste Weg, um dauerhaft von Neukunden-Konditionen zu profitieren und die Haushaltskasse spürbar zu entlasten.
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · DSL-Wechselbonus sichern · [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
 
 ## Häufige Fragen
 

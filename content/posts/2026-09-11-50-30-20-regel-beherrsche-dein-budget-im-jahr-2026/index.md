@@ -41,7 +41,7 @@ Es geht um Klarheit. Wenn du weißt, wohin dein Geld fließt, gewinnst du die Ko
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der C24 Bank (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der [C24 Bank](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was steckt hinter der 50-30-20-Formel?
@@ -150,7 +150,7 @@ Das nimmt den Stress aus dem Alltag. Es gibt kein Grübeln mehr vor dem Schaufen
 Ein Blick in deinen Budget-Topf für Wünsche genügt. Ist noch Geld da? Dann kauf sie dir und genieße es. Diese Struktur gibt dir eine Freiheit, die zielloses Sparen niemals bieten kann.
 
 
-In der Welt des Frugalismus nutzen wir diese Regel oft als Sprungbrett. Wer einmal gelernt hat, mit 50 % für die Fixkosten auszukommen, kann später versuchen, diesen Anteil weiter zu drücken, um die 20 % Sparrate auf 30 oder 40 % zu heben. So wird aus einem einfachen Budget-Plan ein Turbo für den frühen Ruhestand oder die berufliche Unabhängigkeit.
+In der Welt des [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) nutzen wir diese Regel oft als Sprungbrett. Wer einmal gelernt hat, mit 50 % für die Fixkosten auszukommen, kann später versuchen, diesen Anteil weiter zu drücken, um die 20 % Sparrate auf 30 oder 40 % zu heben. So wird aus einem einfachen Budget-Plan ein Turbo für den frühen Ruhestand oder die berufliche Unabhängigkeit.
 
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
@@ -158,7 +158,7 @@ In der Welt des Frugalismus nutzen wir diese Regel oft als Sprungbrett. Wer einm
 
 ## Fazit: 50-30-20-Regel – Budget aufteilen, Fixkosten senken
 
-Der Hebel bei **50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Aufteilung ist keine Sparübung, sondern eine Reihenfolge: 20 % gehen am Monatsanfang weg, 50 % decken das Leben, 30 % bleiben für Wünsche. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **50–30–20-Regel: Beherrsche dein Budget – [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)** sitzt nicht im Verzicht, sondern im Nachrechnen. Die Aufteilung ist keine Sparübung, sondern eine Reihenfolge: 20 % gehen am Monatsanfang weg, 50 % decken das Leben, 30 % bleiben für Wünsche. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ## Häufige Fragen
 

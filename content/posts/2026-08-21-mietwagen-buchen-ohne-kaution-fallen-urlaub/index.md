@@ -243,7 +243,7 @@ Wer diese sechs Punkte abhakt, spart sich viel Ärger. Bald sitzt du im Auto auf
 
 Ein Mietwagen bringt dich an Orte ohne Bus: eine Küstenstraße in Portugal, ein Weingut in der Toskana, ein Blick über den Fjord. Mit Kindern sparst du Umstiege, Wartezeit und Gepäckstress.
 
-Wichtiger als das Ziel ist die Vorbereitung. Kennst du Kaution, Tank und Versicherung, wird die Reise entspannt. An den Urlaub denkst du noch, wenn die Abrechnung längst weg ist.
+Wichtiger als das Ziel ist die [Vorbereitung](../../posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/). Kennst du Kaution, Tank und Versicherung, wird die Reise entspannt. An den Urlaub denkst du noch, wenn die Abrechnung längst weg ist.
 
 Ein Mietwagen ohne Kaution ist im Ausland selten. Doch eine gute Tarifwahl senkt die Summe auf 100 € bis 300 €. So wird das Risiko klein. Dann steht dem Urlaub nichts im Weg.
 

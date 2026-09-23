@@ -49,7 +49,7 @@ Beide Varianten versprechen Schutz – aber sie decken völlig unterschiedliche 
 | Vorsorge (Impfung, Wurmkur, Zahnstein) | Nein | Teilweise, meist mit Vorsorgebudget |
 | Typischer Monatsbeitrag Hund | rund 15 bis 25 € | rund 35 bis 130 € |
 | Typischer Monatsbeitrag Katze | rund 10 bis 20 € | rund 15 bis 80 € |
-| Für wen? | Junge, gesunde Tiere; Halter mit Notgroschen | Ältere Tiere, Risikorassen, volle Kostenkontrolle |
+| Für wen? | Junge, gesunde Tiere; Halter mit [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) | Ältere Tiere, Risikorassen, volle Kostenkontrolle |
 
 **Rechenbeispiel OP-Schutz:** Eine TPLO (Kreuzband-OP, großer Hund) kostet rund 2.500 Euro. Der OP-Tarif erstattet je nach Quote 80 bis 100 Prozent – also 2.000 bis 2.500 Euro. Bei rund 20 Euro Monatsbeitrag (240 Euro im Jahr) hat sich der Tarif mit einer einzigen OP für rund zehn Jahre bezahlt gemacht.
 

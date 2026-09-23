@@ -42,7 +42,7 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 ## Was ist Frugalismus eigentlich – und was nicht?
 
-Viele verwechseln Frugalismus mit Geiz. Das Gegenteil ist richtig: Frugalisten geben Geld nur nicht für Dinge aus, die ihnen egal sind. Das Ziel ist finanzielle Unabhängigkeit – oft deutlich vor dem Rentenalter. Der Kern liegt in einer hohen Sparquote: Während der Durchschnitt nur rund 10 % des Einkommens spart, erreichen konsequente Frugalisten oft Sparquoten von 50 % und mehr.
+Viele verwechseln [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) mit Geiz. Das Gegenteil ist richtig: Frugalisten geben Geld nur nicht für Dinge aus, die ihnen egal sind. Das Ziel ist finanzielle Unabhängigkeit – oft deutlich vor dem Rentenalter. Der Kern liegt in einer hohen Sparquote: Während der Durchschnitt nur rund 10 % des Einkommens spart, erreichen konsequente Frugalisten oft Sparquoten von 50 % und mehr.
 
 Der entscheidende Gedanke dabei: Frage dich bei jedem größeren Kauf nach dem dauerhaften Mehrwert – ist dir dieser Gegenstand deine investierte Lebenszeit wirklich wert? Ein Auto verursacht inklusive Wertverlust und Wartung schnell 400 bis 600 € im Monat. Wer stattdessen Rad und Deutschlandticket kombiniert, spart mehrere tausend Euro im Jahr und investiert die Differenz für seine Freiheit.
 
@@ -146,7 +146,7 @@ Impulskäufe sind der größte Feind deiner Sparquote. Die Regel: Alles, was meh
 
 ### Meal Prep statt Kantine und Lieferdienst
 
-Essen außer Haus gehört zu den größten Budgetfressern im Alltag. **Rechenbeispiel:** Eine selbst vorgekochte Portion kostet rund 2 bis 3 €, dasselbe Gericht in der Kantine oder vom Lieferdienst oft 10 bis 15 €. Wer fünf Mittagessen pro Woche selbst mitbringt, spart im Monat rund 150 bis 200 € – über 2.000 € im Jahr für deinen Notgroschen.
+Essen außer Haus gehört zu den größten Budgetfressern im Alltag. **Rechenbeispiel:** Eine selbst vorgekochte Portion kostet rund 2 bis 3 €, dasselbe Gericht in der Kantine oder vom Lieferdienst oft 10 bis 15 €. Wer fünf Mittagessen pro Woche selbst mitbringt, spart im Monat rund 150 bis 200 € – über 2.000 € im Jahr für deinen [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/).
 
 ### Die Cash-Only-Woche als Realitätscheck
 
@@ -239,7 +239,7 @@ Nein. Frugalismus bringt deine Ausgaben mit deinen Werten in Einklang: Du sparst
 
 ### Wie fange ich am besten mit Frugalismus an?
 
-Starte mit einer Bestandsaufnahme deiner Fixkosten: Stromtarif, Internet, Versicherungen und Abos prüfen – ein Wechsel ändert deinen Alltag nicht, spart aber sofort Geld. Danach setzt du dir mit der 50-30-20-Regel klare Budgetziele und sicherst jede Ersparnis per Dauerauftrag auf ein separates Konto.
+Starte mit einer Bestandsaufnahme deiner Fixkosten: Stromtarif, Internet, Versicherungen und Abos prüfen – ein Wechsel ändert deinen Alltag nicht, spart aber sofort Geld. Danach setzt du dir mit der [50-30-20-Regel](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) klare Budgetziele und sicherst jede Ersparnis per Dauerauftrag auf ein separates Konto.
 
 ---
 

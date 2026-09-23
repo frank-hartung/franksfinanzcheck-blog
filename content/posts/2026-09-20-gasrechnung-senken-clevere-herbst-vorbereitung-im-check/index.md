@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Ein frühzeitiger Check der Heizung vor der Heizperiode spart in der Regel 5 %–10 % der jährlichen Gasrechnung. Dabei entdeckst du Lecks, ineffiziente Brenner und verstopfte Heizkörper, die sofort behoben werden können. So senkst du deine Kosten 2026 merklich, ohne teure Nachrüstungen."
 ---
 
-Wer seine Gasrechnung senken will, sollte im Spätsommer handeln. Willst du im nächsten Winter 500 € oder mehr behalten?
+Wer seine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) will, sollte im Spätsommer handeln. Willst du im nächsten Winter 500 € oder mehr behalten?
 Viele Hausbesitzer ignorieren den Heizungskeller, solange die Sonne scheint – das wird oft ein teurer Fehler.
 Mängel, die du erst im November bemerkst, kosten dich horrende Notdienst-Preise.
 
@@ -37,7 +37,7 @@ Kluge Sparer sichern sich jetzt niedrige Tarife und freie Wartungstermine.
 Nutze die Ruhephase vor der Heizperiode für deinen Finanz-Check.
 Drei Faktoren entscheiden über deine künftigen Ausgaben.
 Dazu gehören die Technik, dein Vertrag und die neuen Gesetze von 2026.
-Geh diese Punkte Schritt für Schritt durch – so sparst du Heizkosten.
+Geh diese Punkte Schritt für Schritt durch – so sparst du [Heizkosten](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/).
 
 **Das Wichtigste in Kürze**
 * **Timing sichert Termine:** Wartungen im Spätsommer verhindern teure Notdiensteinsätze im Winter.
@@ -168,7 +168,7 @@ So sicherst du dir deinen Sparvorteil:
 1. **Verbrauch ermitteln:** Schau auf deine letzte Jahresabrechnung für den kWh-Wert.
 2. **Portale vergleichen:** Nutze eine seriöse Suchmaske mit deiner aktuellen Postleitzahl.
 
-3. **Filter prüfen:** Wähle Tarife mit einer langfristigen Gaspreisgarantie von 12 Monaten.
+3. **Filter prüfen:** Wähle Tarife mit einer langfristigen [Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) von 12 Monaten.
 4. **Tarifdetails checken:** Vermeide Vorauskasse und setze auf monatliche Abschläge.
 5. **Abschluss tätigen:** Dein neuer Anbieter kündigt meist automatisch beim alten Versorger.
 

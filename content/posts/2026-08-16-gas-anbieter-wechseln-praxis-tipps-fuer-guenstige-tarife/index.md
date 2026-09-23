@@ -183,7 +183,7 @@ Auftrag, Bestätigung, Abschlag nach 6 Wochen gegen Zählerstand. Der Grundverso
 
 | Phase | Was passiert? | Dein To-Do |
 | :--- | :--- | :--- |
-| **Vorbereitung** | Analyse des aktuellen Tarifs | Letzte Rechnung suchen, Kündigungsfrist prüfen. |
+| **[Vorbereitung](../../posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)** | Analyse des aktuellen Tarifs | Letzte Rechnung suchen, Kündigungsfrist prüfen. |
 | **Antrag** | Übermittlung der Daten an den neuen Anbieter | Online-Formular ausfüllen (5 Min). |
 | **Bestätigung** | Neuer Anbieter prüft Daten und kündigt alt | E-Mail-Postfach checken, Vertragsbestätigung abwarten. |
 | **Übergang** | Wechsel zum Stichtag | Zählerstand am Stichtag ablesen und melden. |

@@ -52,7 +52,7 @@ Diese kleinen Schritte senken dein Risiko für teure Pannen im Winter massiv.
 Im Spätsommer ist der Druck bei den Handwerksbetrieben noch gering.
 Du bekommst leichter freie Termine und Ersatzteile kommen schneller an.
 So behebst du Mängel ohne jeden Zeitstress.
-Genau diese Phase macht die Vorbereitung so wertvoll.
+Genau diese Phase macht die [Vorbereitung](../../posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) so wertvoll.
 
 Viele Probleme zeigen sich erst beim ersten echten Betrieb der Anlage.
 Eine Pumpe kann nach dem Sommer fest sitzen.
@@ -120,7 +120,7 @@ Auch Garantiefragen lassen sich leichter klären, wenn du die Wartung regelmäß
 ## So viel sparst du wirklich: ein Rechenbeispiel für 2026
 
 Nehmen wir einen Haushalt mit 100 Quadratmetern Wohnfläche und 15.000 Kilowattstunden Gasverbrauch an.
-Bei einem Beispielpreis von 11 Cent pro Kilowattstunde liegen die jährlichen Heizkosten bei rund 1.650 €.
+Bei einem Beispielpreis von 11 Cent pro Kilowattstunde liegen die jährlichen [Heizkosten](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) bei rund 1.650 €.
 So sparst du mit kleinen Anpassungen bares Geld.
 
 Sinkt der Verbrauch nach Wartung, Thermostat-Optimierung und dichten Fenstern um 12 %, sparst du etwa 1.800 Kilowattstunden.

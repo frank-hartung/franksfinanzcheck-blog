@@ -64,7 +64,7 @@ Ein Festpreistarif hat gegenüber Tarifen ohne Bindung diese Vorteile:
 | **Wechselprämien** | Einmalige Boni reduzieren die effektiven Jahreskosten | Boni werden oft erst nach 12 Monaten ausgezahlt – ein vorzeitiger Kündigungsversuch kann sie verfallen lassen |
 | **Transparenz** | Klare Preisstruktur, leicht zu vergleichen im [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) | Manche AGB verstecken Nachjustierungen bei gesetzlichen Änderungen (z. B. Strom‑Umlage) |
 
-Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **Gaspreisgarantie** meist die sicherere Wahl.
+Die Entscheidung hängt von deiner Risikobereitschaft und deinem Verbrauchsprofil ab. Für Familien mit hohem, planbarem Jahresverbrauch ist die **[Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/)** meist die sicherere Wahl.
 
 ## Kostenanalyse: 20.000 kWh Verbrauch bei Marktschwankungen
 
@@ -157,7 +157,7 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 | **VivaGas** | 12 Monate | 9,10 | 10,50 | 100 € (nach 12 Mon.) | 4,2 |
 | **EcoEnergy** | 18 Monate | 8,60 | 12,50 | 130 € (nach 18 Mon.) | 4,5 |
 
-*Die Werte basieren auf dem Gasvergleich vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
+*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 

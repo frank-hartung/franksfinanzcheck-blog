@@ -34,7 +34,7 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
-* Ein Notgroschen orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
+* Ein [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) orientiert sich an deinen monatlichen Ausgaben, nicht am Einkommen allein.
 * Für Angestellte reichen oft drei bis sechs Monatsausgaben als Sicherheit.
 * Selbstständige planen besser mit sechs bis zwölf Monatsausgaben.
 * Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ist meist der beste Parkplatz für die Reserve.
@@ -85,7 +85,7 @@ Ein Notgroschen muss vor allem schnell verfügbar sein. Rendite ist hier zweitra
 Wenn am Freitagabend die Heizung ausfällt, hilft dir ein ETF nicht, den du erst verkaufen musst. Noch schlechter sind Festgeld, Bausparverträge oder Krypto. Dort fehlt dir im Ernstfall entweder der schnelle Zugriff oder die nötige Stabilität.
 
 
-Für die meisten Haushalte ist ein Tagesgeldkonto die beste Lösung. Es trennt das Geld sauber vom Alltag. Außerdem bleibt die Reserve mit kurzer Verfügbarkeit nutzbar, und du nimmst im besten Fall noch ein paar Zinsen mit.
+Für die meisten Haushalte ist ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) die beste Lösung. Es trennt das Geld sauber vom Alltag. Außerdem bleibt die Reserve mit kurzer Verfügbarkeit nutzbar, und du nimmst im besten Fall noch ein paar Zinsen mit.
 
 | Kriterium | Girokonto | [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) | ETF/Depot | Festgeld |
 | :--- | :--- | :--- | :--- | :--- |
@@ -94,7 +94,7 @@ Für die meisten Haushalte ist ein Tagesgeldkonto die beste Lösung. Es trennt d
 | Trennung vom Alltag | Schwach | Sehr gut | Gut | Gut |
 | Eignung als Notgroschen | Nein | **Sehr gut** | Nein | Nein |
 
-Achte beim Konto auf die Einlagensicherung und darauf, dass du [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) an dein Geld kommst. Das verzinste Tagesgeld der C24 Bank (CHECK24-Tochter) siehst du hier: [**C24 Bank Tagesgeld ansehen**](/go/tagesgeld/).
+Achte beim Konto auf die Einlagensicherung und darauf, dass du [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) an dein Geld kommst. Das verzinste Tagesgeld der [C24 Bank](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) (CHECK24-Tochter) siehst du hier: [**C24 Bank Tagesgeld ansehen**](/go/tagesgeld/).
 
 > 💶 **Spar-Tipp zwischendurch:** Für eine Notfallreserve zählt vor allem Sicherheit und Zugriff – nicht die letzte Nachkommastelle Zins. [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 

@@ -224,7 +224,7 @@ Es gibt mittlerweile einige Anbieter, die eine Buchung ohne Kreditkarte (z. B. v
 ### Sind Kindersitze im Mietpreis enthalten?
 Nein, Kindersitze oder Sitzerhöhungen buchst du fast immer als Extra dazu und zahlst dafür eine tägliche Gebühr. Bei längeren Reisen kann es sich sogar lohnen, einen eigenen Sitz mitzubringen oder vor Ort in einem Supermarkt günstig zu kaufen. Manche Fluggesellschaften transportieren Kindersitze zudem kostenlos als Sperrgepäck.
 
-Wer diese Tipps beherzigt und strategisch plant, erlebt den Spätsommer-Mietwagen als eine der klügsten Investitionen in die Urlaubsqualität. Gute Vorbereitung macht die Fahrt durch malerische Landschaften zum reinen Vergnügen – und das Budget bleibt entspannt. Genieße die Freiheit auf vier Rädern und mach deinen nächsten Trip zu einem unvergesslichen Erlebnis.
+Wer diese Tipps beherzigt und strategisch plant, erlebt den Spätsommer-Mietwagen als eine der klügsten Investitionen in die Urlaubsqualität. Gute [Vorbereitung](../../posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) macht die Fahrt durch malerische Landschaften zum reinen Vergnügen – und das Budget bleibt entspannt. Genieße die Freiheit auf vier Rädern und mach deinen nächsten Trip zu einem unvergesslichen Erlebnis.
 
 ---
 

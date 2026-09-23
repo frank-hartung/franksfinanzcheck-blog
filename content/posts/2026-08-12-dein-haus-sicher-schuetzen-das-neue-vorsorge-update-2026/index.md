@@ -139,7 +139,7 @@ Wer auch die eigene Absicherung prüfen will, liest unsere [Erklärung zur Priva
 
 ## Elementar 2026: Pflichtgefühl gegen Markt
 
-Die Politik diskutiert über eine Pflicht, doch derzeit liegt die Verantwortung bei den Eigentümern. Wer in risikoreichen Gebieten (ZÜRS 3–4) ohne Schutz bleibt, trägt eine erhebliche finanzielle Gefahr.
+Die Politik diskutiert über eine Pflicht, doch derzeit liegt die Verantwortung bei den Eigentümern. Wer in risikoreichen Gebieten (ZÜRS 3–4) ohne Schutz bleibt, trägt eine erhebliche [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Gefahr.
 
 Hol dir Angebote ein. Und stelle wichtige Technik nach Möglichkeit nicht direkt auf den Kellerboden. Prävention senkt zwar nicht in jedem Fall sofort die Prämie, verringert aber das Risiko eines Totalschadens.
 
