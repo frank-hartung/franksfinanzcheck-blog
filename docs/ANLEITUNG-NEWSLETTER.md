@@ -52,16 +52,35 @@ Datenschutzerklärung gegen den tatsächlichen Stand lesen (Wortlaut-Entwurf:
 > weiter; es ist bewusst **keine** eigene Mailbox (kein SMTP-Versand).
 
 Für den **Absender-Versand aus Brevo** ist zusätzlich zu der Cloudflare-
-Weiterleitung die Brevo-Sender-Authentifizierung nötig: In Brevo
-**Senders → Add sender** → `kontakt@franksfinanzcheck.de` und die
-**Authentifizierung** (SPF + DKIM) per DNS-Einträgen abschließen.
+Weiterleitung die Brevo-**Domain-Authentifizierung** nötig: In Brevo
+**Senders, Domains & Dedicated IPs → Domains → Authenticate** die Zone
+`franksfinanzcheck.de` verifizieren. Gemessen wird das über drei Record-Typen –
+und (Stand 23.09.2026, Korrektur) sie sind **nicht** gleichwertig:
 
-> (Brevo zeigt exakt die Werte; beim Anbieter in die DNS-Zone eintragen).
-> Beim SPF darf **kein zweiter TXT-Eintrag** entstehen: den vorhandenen
-> SPF-Eintrag gemäß Brevo-/Cloudflare-Vorgaben zusammenführen (z. B.
-> `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all`).
+| Record | gemessener Stand | Wirkung für den Versand |
+|---|---|---|
+| `brevo-code` (TXT `@`) | ✅ vorhanden | Eigentumsnachweis – ohne ihn verifiziert Brevo die Domain nicht |
+| **DKIM** (`brevo1._domainkey` und `brevo2._domainkey`, zwei CNAMEs → `b1.`/`b2.<domain>.dkim.brevo.com`) | ✅ vorhanden | **der eigentliche Beleg.** Er signiert im Namen der Domain, trägt das DMARC-Alignement und entscheidet, ob Gmail/Yahoo die Mail annehmen |
+| SPF (`v=spf1 include:_spf.mx.cloudflare.net ~all`) | ✅ für E-Mail-Routing | für Brevo **wirkungslos**: der Return-Path bleibt beim Anbieter, die eigene Zone wird bei Kampagnen nicht als SPF-Quelle ausgewertet |
+
+> **Korrigierte Anweisung (23.09.2026):** früher stand hier, `include:spf.brevo.com`
+> sei in den SPF-Eintrag aufzunehmen. Das ist auf Brevos geteiltem Versandweg ein
+> Blindgang – es bringt kein DMARC-Alignement und ändert nichts an der
+> Zustellung. **Nötig wird das Include erst, wenn das Konto eine Dedicated IP
+> oder einen eigenen Return-Path (Bounce-Domain) bekommt.** Wer es trotzdem
+> setzt, muss weiterhin **genau einen** SPF-TXT-Eintrag führen (zwei Einträge
+> sind nach RFC 7208 ein `permerror` – ab dann scheitert *jede* Mail der Domain,
+> auch die bisher grüne).
 > Die Cloudflare-Routing-MX-Einträge bleiben dabei bestehen.
-> → bessere Zustellbarkeit + „professioneller Absender".
+
+Nachmessen lässt sich das jederzeit – ohne Gefühl, ohne Doku-Vergleich:
+
+```bash
+python3 scripts/newsletter_zustellbarkeit.py --pruefen      # Zone + Konto (falls Key da)
+```
+
+Runbook mit allen Soll-Werten, Policy-Stufen und Freigabewegen:
+[NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
 
 *(Notlösung: private Mail bleibt als Absender, funktioniert – aber
 weniger schick und ohne `kontakt@franksfinanzcheck.de`-Absenderadresse.)*
@@ -134,6 +153,18 @@ Actions → **Newsletter-Daily (Capture-Wache + Digest) → Run workflow**:
 Von Hand: `python3 scripts/newsletter_digest.py --check` /
 `--build --days 1` / `--build --send --live`. Status: `data/newsletter_state.json`
 (zuletzt_versandt, kampagne_id, versandene_artikel) und der Lauf selbst.
+
+4. **Zustellbarkeit messen** (vor dem ersten `live`, und nach jeder DNS-Änderung):
+   `python3 scripts/newsletter_zustellbarkeit.py --pruefen --strict`. Die Wache
+   liest die Cloudflare-Zone (SPF, DKIM, DMARC, MX) und – falls ein
+   `BREVO_API_KEY` gesetzt ist – das Brevo-Konto (Absender verifiziert? Liste
+   da? Plan-Grenze gegen Listenstärke?) und nennt zu jedem Befund den exakten
+   Klickweg. Sie prüft auch den **Netzweg**: seit 23.09.2026 meldet sie eine
+   Blockage der Signatur-Kante vor `api.brevo.com` als Kanten-Befund und nicht
+   länger als Absender-Problem (Lauf #21). Im Workflow `newsletter-daily.yml`
+   läuft sie vor jedem Versand; ein bestätigter Fund hält einen
+   Listen-Versand an. Runbook:
+   [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
 
 ## ✂️ Rechtstext – Kurzform (Langfassung: docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md)
 

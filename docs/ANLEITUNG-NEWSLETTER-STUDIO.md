@@ -177,7 +177,7 @@ Danach in dieser Reihenfolge:
 6. `live` an. Ab jetzt liefert der Cron Mo–Fr 05:05 UTC eine geprüfte Mail, und
    `data/newsletter_state.json` (versioniert!) merkt, was schon draußen war.
 
-Der letzte Klick bleibt bei dir, weil er ein Konto braucht: Signup, SPF/DKIM, AVV.
+Der letzte Klick bleibt bei dir, weil er ein Konto braucht: Signup, Domain-Authentifizierung in Brevo (der Beleg ist das Domain-DKIM; `brevo1`/`brevo2._domainkey` und `brevo-code`-TXT liegen bereits in der Zone – gemessen 23.09.2026), AVV. Nachmessen: `python3 scripts/newsletter_zustellbarkeit.py --pruefen`, Runbook: [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
 Das hier zu erfinden – ein Endpunkt, eine Listen-ID, eine Signup-Bestätigung – wäre
 die Sorte Selbstbetrug, gegen die die Wachen in diesem Repo geschrieben sind.
 

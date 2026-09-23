@@ -6,9 +6,14 @@
   *Newsletter-Wache* in der CI — PR
   [#354](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/354),
   alle Checks grün (u. a. Wache am frischen Build, Playwright)
-- ☐ Offen: Absender-Authentifizierung (SPF/DKIM „verifiziert“ in Brevo),
-  Secrets `BREVO_API_KEY` + `BREVO_LIST_ID` in GitHub (Schritt 4), AVV/DPA
-  (Schritt 5), Testlauf (6a)
+- ☐ Offen: Absender in Brevo auf `active` (Zone: SPF/DKIM/DMARC sind gemessen
+  vorhanden, 23.09.2026), Secrets `BREVO_API_KEY` + `BREVO_LIST_ID` in GitHub
+  (Schritt 4), AVV/DPA (Schritt 5), Testlauf (6a), `news@`-Routing-Regel
+- ✅ Erledigt (23.09.2026): Versand-Kante repariert (Signatur-Blockage der
+  Standard-Kennung, Fehldeutung als „Absender-Problem“, Doppelversand-Risiko bei
+  Zeitüberschreitung) und die neue
+  [Zustellbarkeits-Wache](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md) im
+  Versandlauf verankert
 
 **Befehlsdokumente:**
 `ANLEITUNG-NEWSLETTER.md` (Schritte 1–6, Brevo-Konto) und
@@ -49,13 +54,35 @@ Brevo → **Senders → Add sender** → exakt diese Adresse:
 | Absender-E-Mail | **`news@franksfinanzcheck.de`** (Studio-SSOT; der Versand-Code nutzt denselben Standard) |
 | Reply-To | `kontakt@franksfinanzcheck.de` (Cloudflare Email Routing, s. `E-MAIL-WEITERLEITUNG-CLOUDFLARE.md`) |
 
-Danach Authentifizierung per DNS (Zone `franksfinanzcheck.de`, Cloudflare):
+Danach Authentifizierung per DNS (Zone `franksfinanzcheck.de`, Cloudflare) –
+und die wird **nicht getippt, sondern nachgemessen**. Gemessener Stand
+23.09.2026 (abgefragt per DNS-over-HTTPS): **alle vier Records sind gesetzt** –
+wer nach der alten Tabelle sucht (TXT `mail._domainkey`, SPF mit Brevo-Include),
+hält drei von ihnen für fehlend und greift in eine laufende Zone:
 
-| Eintrag | Wert |
-|---|---|
-| **SPF** (TXT `@`) | `v=spf1 include:spf.brevo.com ~all` – **nur ein** SPF-Eintrag. Ist Cloudflare Email Routing für `kontakt@` schon aktiv, zusammenführen: `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all` |
-| **DKIM** | den Eintrag **wörtlich so**, wie Brevo ihn im Sender-Dialog zeigt (Selector typ. `_brevo._domainkey`) – nicht tippen, kopieren |
-| **DMARC** (empfohlen) | TXT `_dmarc` = `v=DMARC1; p=none;` – Brevo schlägt den Wortlaut im selben Dialog vor |
+| Eintrag | Soll | Ist am 23.09.2026 |
+|---|---|---|
+| **Domain-Code** | TXT `@` = `brevo-code:<hash>` aus dem Brevo-Dialog | ✅ vorhanden |
+| **DKIM** | **zwei CNAMEs**, nicht ein TXT: `brevo1._domainkey` → `b1.franksfinanzcheck-de.dkim.brevo.com`, `brevo2._domainkey` → `b2.…`. (Brevo nutzt TXT `mail._domainkey` nur bei manuell eingefügtem Schlüssel – die Delegation ist der Normalfall.) | ✅ vorhanden, beide CNAMEs laufen |
+| **SPF** | **genau ein** TXT. Für E-Mail-Routing: `v=spf1 include:_spf.mx.cloudflare.net ~all` | ✅ `v=spf1 include:_spf.mx.cloudflare.net ~all` |
+| **DMARC** | TXT `_dmarc` mit `rua=` (Berichte) | ⚠️ vorhanden, aber `p=reject; adkim=s; aspf=s` – dazu unten |
+
+> **Korrektur (23.09.2026):** hier stand früher, der SPF-Eintrag sei um
+> `include:spf.brevo.com` zu erweitern, damit der Absender „verifiziert“ werde.
+> Auf Brevos geteiltem Versandweg ist das ein Blindgang: Der Return-Path bleibt
+> beim Anbieter, also entsteht daraus **kein** DMARC-Alignement, und die
+> Signatur der Mail kommt ohnehin aus dem schon vorhandenen Domain-DKIM.
+> Das Include wird **erst** nötig, wenn eine Dedicated IP oder ein eigener
+> Return-Path gebucht wird. Unbedingt bleiben darf die Regel dahinter:
+> **nie zwei SPF-TXT-Einträge** – das ist ein `permerror` und betrifft dann
+> *jede* Mail der Domain, auch die bisher grünen.
+>
+> Und die DMARC-Zeile: `p=none` wäre für den Probelauf richtig, die Zone steht
+> aber auf `p=reject; aspf=s`. `aspf=s` kann auf dieser Strecke niemals alignen;
+> bleibt DKIM als einziger Beleg – fällt der aus, wird **hart abgelehnt** statt
+> „nur“ gefiltert. Für Probeläufe auf `v=DMARC1; p=none; aspf=r; rua=…`
+> zurückstufen, nach dem Beweislauf auf `p=quarantine`. Stufenfolge und Begründung:
+> [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
 
 > **AVV ist kein DNS-Eintrag**, sondern ein Vertrag – und in Brevos UI gibt es
 > dafür **kein Menü**: Die DSV ist **Anhang 3 der deutschen
@@ -66,8 +93,28 @@ Danach Authentifizierung per DNS (Zone `franksfinanzcheck.de`, Cloudflare):
 > (z. B. `brevo-dsv_2026-09-22.pdf`) und im Dokumentenordner ablegen.
 > § 8 Datenschutz ist darauf abgestimmt.
 
-Zustellbar wird der Absender, sobald SPF + DKIM auf „verifiziert“ stehen
-(Brevo färbt grün; kann einige Minuten dauern).
+Zustellbar wird der Absender, sobald die **Domain** in Brevo auf „verifiziert“
+steht (`active: true` in `GET /v3/senders`; Brevo färbt grün, kann einige Minuten
+dauern). DNS-Einträge sind dafür die Voraussetzung, nicht der Beweis – Beweis
+ist der API-Status, und den liest der Zwischenschritt darunter.
+
+**Zwischenschritt: nachmessen statt Gefühl (neu, 23.09.2026):**
+
+```bash
+python3 scripts/newsletter_zustellbarkeit.py --pruefen --strict
+```
+
+Die Wache prüft Zone (SPF-Eindeutigkeit, DKIM als TXT **und** CNAME, DMARC, MX,
+Null-MX, `news@`-Routing), die Status-Datei `data/newsletter_state.json` (Halt,
+wartende Artikel, Versandnachweis) und – sobald `BREVO_API_KEY` gesetzt ist
+(Schritt 4) – das Konto: Absender `active`, Liste vorhanden und befüllt,
+**Plan-Grenze gegen Listenstärke**, Präferenzfeld. Sie
+schreibt zu jedem Befund den Klickweg, ruft **nur GETs** auf und hält bei einem
+bestätigten Fund einen Listen-Versand an. Einzelfund, der sonst unbemerkt bleibt:
+`news@franksfinanzcheck.de` hat **keine** Routing-Regel in Cloudflare (nur
+`kontakt`) → Antworten und Rückläufer an den Absender laufen ins Leere. Abhilfe:
+*Email → Routing → Routing Rules → Create rule*, Muster `news` → dieselbe
+Zieladresse (bewusst keine Catch-all-Regel).
 
 ## 3. Liste + Formular (5 Min.)
 
@@ -119,7 +166,10 @@ wechselt auf „Anmeldung aktiv“, die Wache meldet `aktiv` statt INERT.
 
 ## 6. Verifikation & erster Versand (in dieser Reihenfolge)
 
-**6a. Testlauf** – Actions → *Newsletter-Daily (Capture-Wache + Digest)* →
+**6a. Testlauf** – zuerst die Zustellbarkeits-Wache lokal:
+`python3 scripts/newsletter_zustellbarkeit.py --pruefen` (meldet pro Befund den
+Klickweg; `--strict` ist das Freigabe-Gate, und im Versandlauf läuft sie vor
+jedem Versand). Dann Actions → *Newsletter-Daily (Capture-Wache + Digest)* →
 *Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 1.
 Erwartet: `sendTest`-Mail in deinem Postfach (Double-Opt-In-Bestätigung
 inklusive, Abmeldelink funktioniert), Liste unangetastet.

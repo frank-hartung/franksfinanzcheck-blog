@@ -102,6 +102,49 @@ jobs:
             echo "::warning::Newsletter-Capture inaktiv oder Befund – es gehen keine Adressen ein (siehe Summary)"
           fi
 
+      # Die Zustellbarkeits-Wache: Cloudflare-Zone + Brevo-Konto, GEMESSEN statt
+      # nachgeschlagen. Warum vor dem Versand und nicht nur im Governance-Lauf:
+      # Lauf #21 (23.09.) meldete einen Absender-Befund für ein Problem der Kante
+      # (HTTP 403 / Cloudflare „Error 1010“ – die API-Antwort kam nie von Brevo),
+      # und die Checkliste schrieb als nächsten Schritt eine SPF-Erweiterung vor,
+      # die an der Zustellung nichts ändert. Beides sind Klassen, die nur sichtbar
+      # werden, wenn man Zone und Konto gemeinsam nachmisst.
+      # Der Lauf bleibt bei Messlücken gelb (DoH-Ausfall ist kein Befund); rot –
+      # und damit Versand gestoppt – wird nur ein bestätigter Fund bei einem
+      # wirklichen Listen-Versand. Testversände (eine Adresse) bleiben erlaubt:
+      # sie sind der vorgesehene Probelauf VOR der Freischaltung.
+      - name: Zustellbarkeit (Cloudflare-DNS + Brevo-Konto)
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          # Als ENV, nicht als Interpolation im Skripttext (B3-Regel aus der
+          # Kadenz-Absicherung: Eingaben sind Daten, niemals Code).
+          SEND_AN: ${{ (inputs.live || inputs.planmaessig || github.event_name == 'schedule') && 'ja' || 'nein' }}
+          TEST_ADRESSE_GESETZT: ${{ inputs.test_adresse != '' && 'ja' || 'nein' }}
+        run: |
+          set +e
+          if ! python3 scripts/newsletter_zustellbarkeit.py --selftest > /tmp/zust_selftest.log 2>&1; then
+            set -e
+            echo "::error::Zustellbarkeits-Wache: Selbsttest rot – ihre Aussagen wären wertlos"
+            tail -20 /tmp/zust_selftest.log
+            exit 1
+          fi
+          python3 scripts/newsletter_zustellbarkeit.py --pruefen --md > /tmp/zust.md 2>/tmp/zust.err
+          rc=$?
+          set -e
+          {
+            echo ""
+            cat /tmp/zust.md
+            [ -s /tmp/zust.err ] && echo "_Hinweise:_ \`$(tail -2 /tmp/zust.err | tr '\n' ' ' | cut -c1-200)\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$rc" -ne 0 ]; then
+            if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESE_GESETZT" != "ja" ]; then
+              echo "::error::Zustellbarkeit befundet (rc $rc) – der Listen-Versand wird angehalten, bevor eine Kampagne entsteht. Details im Summary dieses Schritts."
+              exit "$rc"
+            fi
+            echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Details im Summary dieses Schritts."
+          fi
+
       - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
@@ -174,9 +217,15 @@ jobs:
               # Actions-Übersicht lesbar ist, bevor jemand Logs aufklappt.
               BEFUND=$(grep "❌" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
               # Ehrlichkeit nach dem Versand: meldet das Skript VERSAND ERFOLGT,
-              # ist die Mail raus und nur der Status unvollständig – die
-              # Annotation sagt dann genau das, nie das Gegenteil (Fix 23.09.2026).
-              if grep -q "VERSAND ERFOLGT" /tmp/nl_build.log; then
+              # ist die Mail raus und nur der Status unvollständig – meldet die
+              # Annotation genau das, nie das Gegenteil (Fix 23.09.2026). Die
+              # dritte Wahrheit heißt UNKLAR: Antwort verloren, Sendung möglicherweise
+              # trotzdem angenommen. Sie als „nichts versandt“ zu melden, wäre die
+              # gefährlichste Lüge dieses Laufs – sie lädt zum sofortigen erneuten
+              # Run ein, und der trifft die Liste ein zweites Mal.
+              if grep -q "VERSAND-STATUS UNKLAR" /tmp/nl_build.log; then
+                echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – UNKLAR, ob die Mail raus ist. Der Versand wurde NICHT wiederholt; der Lauf hat in data/newsletter_state.json einen Halt hinterlegt, der weitere Listen-Versände blockiert, bis im Brevo-Konto nachgesehen ist. ${BEFUND:-Details im Lauf-Log.}"
+              elif grep -q "VERSAND ERFOLGT" /tmp/nl_build.log; then
                 echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – der VERSAND IST RAUS, der Status ist unvollständig. ${BEFUND:-Details im Lauf-Log.}"
               else
                 echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
@@ -198,6 +247,13 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Versandstatus protokollieren (data/newsletter_state.json)
+        # `always()`, nicht „nur bei Erfolg“: der Status ist der Duplikatsschutz.
+        # Genau in den Läufen, die scheitern (QA-Befund nach dem Versand,
+        # Kantenblock beim Nachlesen, Halt wegen unklaren Ergebnisses), muss die
+        # Datei in main landen – sonst weiß der nächste Lauf nichts von der
+        # vorigen Ausgabe und liefert sie nochmal aus. Ein fehlender Versand
+        # ändert nichts an der Datei, der Schritt bleibt dann leer.
+        if: ${{ always() && !cancelled() }}
         run: |
           git config user.name "Newsletter-Bot"
           git config user.email "newsletter-bot@users.noreply.github.com"

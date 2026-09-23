@@ -25,7 +25,15 @@ Dieses Skript schließt beide Seiten der Lücke:
             (HTML + Text, {unsubscribe}-Marke, ohne bereits versendete Artikel).
 
   --send    Übergibt den Digest an Brevo (v3: Kampagne anlegen → sendNow, oder
-            sendTest an eine Testadresse). Bewusst dreifach verriegelt:
+            sendTest an eine Testadresse). Der Transport meldet sich beim
+            Anbieter mit eigener Kennung (kein „Python-urllib“-Standard – genau
+            der ließ Lauf #21 an der Cloudflare-Kante scheitern), wiederholt nur
+            LESANFRAGEN, liest nach einem zweifelhaften sendNow die
+            Kampagnen-Akte nach statt nochmal zu senden und hält bei bleibendem
+            Zweifel den nächsten Listen-Versand an (`versand_unklar` in data/
+            newsletter_state.json; Release nur von Hand). `BREVO_API_HOST` ist
+            optional und nur für Brevo-eigene Domains erlaubt.
+            Bewusst dreifach verriegelt:
             API-Key + Listen-ID als Secrets, `NEWSLETTER_SEND=ja` als
             Eingeständnis, dass die LISTE getroffen wird, und ohne beides
             passiert kein Netzwerkzugriff. Kein Testversand ohne
@@ -492,38 +500,170 @@ def baue_digest(artikel: list[dict], datum: str, versprechen: str,
 #      Befund selbst auszusprechen.
 #   3. Brevo-Fehler wurden auf 200 Zeichen verstümmelt, ohne `code`/`message` zu
 #      trennen, und nichtflüchtige Ausfälle (429/5xx/Netz) wurden nie wiederholt.
-TRANSIENTE_CODES = {429, 500, 502, 503, 504}   # Wiederholung wert
-VERSUCHE = 3                                    # 1 Anfrage + 2 Wiederholungen
+TRANSIENTE_CODES = {429, 500, 502, 503, 504}   # bei LESAGEN wiederholungswert
+VERSUCHE = 3                                    # 1 Anfrage + 2 Wiederholungen (nur GET)
 PAUSE_SEKUNDEN = (2.0, 5.0)                     # exponentiell-ish, CI-freundlich knapp
 ANTWORT_LIMIT = 4000                            # Fehlerantworten vollständig, nicht verstümmelt
+API_GRUND = "https://api.brevo.com/v3/"
+ERLAUBTE_API_DOMAINS = ("api.brevo.com", "api.us.brevo.com", "api.sendinblue.com",
+                        "api.us.sendinblue.com")
+
+# Heilung Lauf #21 (23.09.2026, 12:16 UTC) – die Kante vor Brevos API, nicht Brevo:
+#   ❌ Vorprüfung fehlgeschlagen: Absender-Vorprüfung nicht möglich (HTTP 403:
+#   …/error-1010/ "Error 1010: Access denied" "The site owner has blocked access
+#   based on your browser's signature.")
+# Cloudflare-Fehler 1010 ist ein Browser-Signatur-Filter: er greift, bevor Brevos
+# Authentifizierung die Anfrage überhaupt sieht. Auslöser war hier die
+# Standardkennung der Python-Standardbibliothek („Python-urllib/3.11“), die
+# urllib mitliefert, wenn kein User-Agent gesetzt wird – dieselbe Falle, an der
+# bereits Lauf #14 scheiterte, nur einen Schritt früher.
+#
+# Die Antwort darauf ist EINE saubere Client-Kennnung, keine Imitation:
+#   * Identität 0 nennt Projekt, Version, Referenz-URL und Laufumgebung – so,
+#     wie ein API-Client sich anmelden gehört (und so, dass Brevo-Support in
+#     seinen Logs exakt diesen Client wiederfindet);
+#   * Identität 1 ist der Reservefall („compatible; …Bot…“ – weiterhin ehrlich,
+#     kein vorgetäuschter Browser), falls die Kante den ersten String in eine
+#     Sammelregel laufen lässt.
+# Bewusst KEIN Mozilla-Chrome-Header: einen Browser vorzuspielen, um einen
+# Botschutz auszuhebeln, wäre Betrug an der Kante statt Reparatur des Clients –
+# und es wäre die nächste Störung, sobald die Signaturprüfung strenger wird.
+CLIENT_KENNNUNG = "franksfinanzcheck-newsletter/1.1 (+https://franksfinanzcheck.de; Brevo-REST-v3; GitHub-Actions)"
+CLIENT_RESERVE = "Mozilla/5.0 (compatible; FranksFinanzcheckBot/1.1; +https://franksfinanzcheck.de/newsletter/)"
+IDENTITÄTEN = (CLIENT_KENNNUNG, CLIENT_RESERVE)
+IDENTITÄTS_INDEX = 0                            # was zuletzt gesendet wurde (Diagnose)
+IDENTITÄTS_WECHSEL_SEKUNDEN = 1.0
+# Woran die Blockage zu erkennen ist. Cloudflare schreibt seinen
+# Signaturfilter in den Leib (`error code: 1010`, HTML-Blockseite,
+# `cf-ray`-Kopfzeile) – Brevos eigene Absagen sind JSON mit `code`/`message`.
+KANTEN_MARKEN = ("error code: 1010", "error 1010", "cloudflare", "cf-mitigated",
+                 "cf-ray", "security compromise", "attention required")
+KANTEN_MUSTER = re.compile(
+    r"cloudflare|cf-mitigated|cf-ray|error\s*code:\s*1010|error\s*1010|"
+    r"security\s+compromise|attention\s+required", re.I)
+
+
+def _kopf_beweis(exc: urllib.error.HTTPError) -> str:
+    """Header-Beweis einer Kanten-Antwort, wenn der Körper kein JSON ist.
+
+    Eine Cloudflare-Blockseite nennt sich selbst (`server: cloudflare`, `cf-ray`);
+    Brevos eigene Fehler antworten als JSON. Wird der Körper verstümmelt oder
+    ist er HTML, sichern diese zwei Felder die Unterscheidung „Kante blockiert“
+    vs. „Anbieter lehnt ab“ – sie entscheidet, ob der Betreiber bei Brevo oder
+    am Netzwerk ansetzen muss.
+    """
+    try:
+        köpfe = exc.headers or {}
+        teile = [f"{n}: {köpfe.get(n)}" for n in ("server", "cf-ray", "cf-mitigated")
+                 if köpfe.get(n)]
+    except Exception:  # noqa: BLE001  (Header-Zugriff darf nie die Diagnose ersetzen)
+        teile = []
+    return (" · " + " · ".join(teile)) if teile else ""
+
+
+def api_host_fehler() -> str:
+    """`BREVO_API_HOST` (optional) ist nur für Brevo-eigene Hosts erlaubt.
+
+    Der Header `api-key` reist im Klartext der Anfrage mit – ein Tippfehler oder
+    eine injizierte Domain würde den Kontoschlüssel an Fremde schicken. Deshalb
+    gilt: gesetzt und nicht auf der Freigabeliste → kein Netzversuch, sondern ein
+    Befund. (Nicht als Störung getarnt, nicht still ignoriert.)
+    """
+    host = os.environ.get("BREVO_API_HOST", "").strip().lower().rstrip("/")
+    if not host:
+        return ""
+    host = host.removeprefix("https://").removeprefix("http://").split("/")[0]
+    if host in ERLAUBTE_API_DOMAINS:
+        return ""
+    return (f"BREVO_API_HOST {host!r} ist kein freigegebener Brevo-Host "
+            f"({', '.join(ERLAUBTE_API_DOMAINS)}) – der API-Schlüssel würde an eine "
+            "fremde Domain geschickt. Kein Netzversuch; Wert korrigieren oder "
+            "die Variable löschen (Standard: api.brevo.com).")
 
 
 def _http_request(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
-    url = "https://api.brevo.com/v3/" + pfad.lstrip("/")
+    grund = API_GRUND
+    host = os.environ.get("BREVO_API_HOST", "").strip().lower().rstrip("/")
+    if host and not api_host_fehler():
+        host = host.removeprefix("https://").removeprefix("http://").split("/")[0]
+        grund = f"https://{host}/v3/"
+    url = grund + pfad.lstrip("/")
     data = None if payload is None else json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
         url, data=data, method=methode,
         headers={"api-key": key, "Content-Type": "application/json",
-                 "Accept": "application/json"})
+                 "Accept": "application/json",
+                 # Die Zeile, an der Lauf #21 scheiterte: ohne User-Agent sendet
+                 # urllib „Python-urllib/3.11“, und genau diese Signatur filtert
+                 # die Kante mit Fehler 1010 aus, bevor Brevo den Key je liest.
+                 "User-Agent": IDENTITÄTEN[IDENTITÄTS_INDEX]})
     try:
         with urllib.request.urlopen(req, timeout=40) as r:
             return r.status, r.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
     except urllib.error.HTTPError as exc:
-        return exc.code, exc.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
+        körper = exc.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
+        if körper.lstrip()[:1] not in ("{", "["):
+            körper = körper[:400] + _kopf_beweis(exc)
+        return exc.code, körper
     except Exception as exc:  # noqa: BLE001
         return 0, f"{exc.__class__.__name__}: {exc}"
 
 
-def _mit_wiederholung(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
-    """Nur transiente Ausfälle wiederholen (429/5xx/Netz) – nie 4xx-Logikfehler.
+def kanten_block(code: int, antwort: str) -> bool:
+    """Ist diese Antwort eine Blockage der Kante (Cloudflare) und keine Absage Brevos?
 
-    Ein 400 von Brevo ist ein Befund, keine Störung: Wiederholen würde die
-    Kampagne drei Mal gegen dieselbe Wand fahren. Ein 502 ist eine Störung:
-    dreimal Versuchen ist Agentur-Anstand, dreimal denselben 400 schicken nicht.
+    Der Unterschied entscheidet, WER repariert: Bei HTTP 403 mit JSON-Leib
+    sagt Brevo „dein Key/dein Absender taugt nicht“ (Betreiber-Aufgabe im Konto).
+    Bei HTTP 403 mit einer Nicht-JSON-Antwort, die nach Cloudflare klingt
+    (`error 1010`, `cf-ray`, `security compromise`), hat Brevo die Anfrage nie
+    gesehen – dann ist der Client schief konfiguriert, und ein zweiter Anlauf
+    mit derselben Signatur wäre Zeitverschwendung. Die Marke sitzt im Leib bzw.
+    (seit dieser Heilung) in den gesicherten Kopfzeilen.
     """
+    if code not in (403, 406, 429, 503, 1010):
+        return False
+    return bool(KANTEN_MUSTER.search(antwort or ""))
+
+
+def _ruf(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
+    """Ein Netzaufruf, bei Bedarf mit zweiter (weiterhin ehrlicher) Kennung.
+
+    Nur die Kanten-Blockage löst den Identitätswechsel aus – ein 400/404 von
+    Brevo hat nichts mit der Signatur zu tun und würde mit anderer Kennung
+    dasselbe Ergebnis liefern.
+    """
+    global IDENTITÄTS_INDEX
+    IDENTITÄTS_INDEX = 0
+    code, antwort = _http_request(key, pfad, payload, methode)
+    if kanten_block(code, antwort) and len(IDENTITÄTEN) > 1:
+        time.sleep(IDENTITÄTS_WECHSEL_SEKUNDEN)
+        IDENTITÄTS_INDEX = 1
+        code, antwort = _http_request(key, pfad, payload, methode)
+    return code, antwort
+
+
+def _mit_wiederholung(key: str, pfad: str, payload: dict | None, methode: str) -> tuple[int, str]:
+    """Lesen wiederholen (429/5xx/Netz), Schreiben NIE blind wiederholen.
+
+    Zwei Getrenntes, das früher in einem Satz steckte:
+
+    1. **Logikfehler wiederholen ist sinnlos.** Ein 400 von Brevo ist ein
+       Befund, keine Störung – dreimal gegen dieselbe Wand fahren hilft nicht.
+    2. **Ein wiederholtes Schreiben ist ein zweiter Versand.** GETs sind
+       idempotent, POSTs bei Brevo sind es nicht: `POST /emailCampaigns` legt
+       eine Kampagne an, `POST /emailCampaigns/{id}/sendNow` schickt sie an
+       ALLE Abonnenten. Antwortete die Kante auf einen sendNow mit 502, obwohl
+       die Sendung schon angenommen war, wiederholte die alte Fassung diesen
+       Aufruf bis zu dreimal – genau die Doppelzustellung, die der ganze
+       Duplikatsschutz des Skripts verhindern soll. Deshalb: schreibtreibende
+       Methoden laufen genau einmal; der Zweifel wird danach NACHGELESEN
+       (`_versand_nachlesen`), nicht nochmal gedrückt.
+    """
+    if (methode or "").upper() != "GET":
+        return _ruf(key, pfad, payload, methode)
     code, antwort = 0, ""
     for versuch in range(VERSUCHE):
-        code, antwort = _http_request(key, pfad, payload, methode)
+        code, antwort = _ruf(key, pfad, payload, methode)
         if code not in TRANSIENTE_CODES and code != 0:
             return code, antwort
         if versuch + 1 < VERSUCHE:
@@ -549,6 +689,14 @@ def brevo_fehler(code: int, antwort: str) -> str:
     Brevos Fehlerkörper ist `{"code": "...", "message": "..."}`. Die rohe
     Zeichenkette in ein Log zu kippen verstümmelt genau die Hälfte, die der
     Mensch braucht. → "HTTP 400: <message> · <code>".
+
+    Seit der Heilung von Lauf #21 steht vor dieser Zeile die Klassifikation,
+    denn die beiden Fälle haben verschiedene Besitzer: „Kante blockiert“
+    (Signaturfilter vor Brevo – die Anfrage wurde dort nie gelesen) ist eine
+    andere Baustelle als „Anbieter lehnt ab“ (Konto, Absender, Schema). Der
+    Netzweg-Nullfall heißt ausdrücklich „Netzweg gestört“, weil er über das
+    Konto nichts aussagt – ihn als Konto-Befund zu melden, war der zweite
+    Irrtum, den Lauf #21 hinterließ.
     """
     msg = (antwort or "").strip()
     try:
@@ -559,7 +707,71 @@ def brevo_fehler(code: int, antwort: str) -> str:
                 msg = " · ".join(teile)
     except json.JSONDecodeError:
         pass
-    return f"HTTP {code}: {msg[:600] or 'leere Antwort'}"
+    vor = ""
+    if kanten_block(code, antwort):
+        vor = ("Kante blockiert (Signaturfilter vor der API, nicht Brevo): HTTP "
+               f"{code}, Antwort ist kein JSON. Probierte Client-Kennungen: "
+               + " → ".join(k[:48] for k in IDENTITÄTEN) +
+               ". Brevo hat die Anfrage nie gesehen – Konto, Absender und Liste "
+               "sind damit NICHT geprüft. Nächster Schritt: diese Kennung beim "
+               "Brevo-Support zur Freigabe nennen, oder den Versandlauf von einem "
+               "Netz ohne Rechenzentrums-Egress starten (die Kante sortiert "
+               "GitHub-Runner-IPs gern vor der Anwendung aus).")
+    elif code == 0:
+        vor = ("Netzweg gestört (DNS/TLS/Zeitlimit) – die Anfrage erreichte die API "
+               "nicht; das ist keine Aussage über Konto, Absender oder Liste.")
+    return f"HTTP {code}: {vor}{' – ' if vor else ''}{msg[:600] or 'leere Antwort'}"
+
+
+def antwort_endgueltig_abgelehnt(code: int, antwort: str) -> bool:
+    """Hat der Anbieter die Anfrage eindeutig abgelehnt (also: nichts passiert)?
+
+    True  → 4xx-Absage aus Brevos Anwendung (außer der Kanten-Blockage): die
+              Ressource wurde nicht angelegt, der Versand nicht angenommen.
+    False → Kanten-Blockage, Netzweg-Nullfall, 429 oder 5xx: der Ausgang ist
+              UNBEKANNT, denn die Antwort kann verloren gegangen sein, nachdem
+              die Anfrage schon wirkte. Unbekannt ist hier kein Detail, sondern
+              der Grund, warum nicht nochmal geschrieben wird.
+    """
+    return 400 <= code < 500 and code != 429 and not kanten_block(code, antwort)
+
+
+# Statuswerte, die belegen, dass Brevo die Sendung angenommen hat (v3:
+# `GET /emailCampaigns/{id}` → `status`). „draft“ und „suspend*“ belegen das
+# Gegenteil, alles andere bleibt Ungewissheit und wird als solche gemeldet.
+STATUS_RAUS = ("in_process", "sent", "finished", "delivered", "test_sent", "in_test",
+               "sent_after_delay", "archive")
+
+
+def versand_nachlesen(key: str, kennung) -> tuple[str, str]:
+    """Nach einem zweifelhaften Sende-Aufruf: ist die Mail tatsächlich raus?
+
+    Ein `sendNow` wird nie wiederholt (Doppelzustellung an die ganze Liste),
+    also bleibt nach 502/Zeitlimit/Kantenblock die Frage offen. Beantwortet sie
+    das Konto selbst: die Kampagnen-Akte nennt Status und Zähler.→
+    ("raus"|"nicht raus"|"unklar", begründung)
+    """
+    code, antwort = TRANSPORT_GET(key, f"emailCampaigns/{kennung}")
+    if code not in (200, 201):
+        return "unklar", (f"Kampagnen-Status nicht ablesbar ({brevo_fehler(code, antwort)})")
+    try:
+        dat = json.loads(antwort)
+    except json.JSONDecodeError:
+        return "unklar", "Kampagnen-Status nicht lesbar (Antwort kein JSON)"
+    status = str(dat.get("status") or "").strip().lower()
+    stats = dat.get("statistics") or {}
+    gesendet = 0
+    for feld in ("deliveredCount", "nbSuccess", "sent", "totalSent"):
+        try:
+            gesendet = max(gesendet, int(stats.get(feld) or 0))
+        except (TypeError, ValueError):
+            continue
+    if status in STATUS_RAUS or gesendet > 0:
+        return "raus", f"Kampagnen-Status {status or '—'}, Zähler {gesendet}"
+    if status in ("draft", "suspendend", "suspended", "suspend", "terminated",
+                  "global_suppression", "error", "error_to_check", "schedule"):
+        return "nicht raus", f"Kampagnen-Status {status}"
+    return "unklar", f"Kampagnen-Status {status or 'leer'} – nicht einordenbar"
 
 
 # ---------------------------------------------------------------------- Selbsttest
@@ -579,6 +791,7 @@ def _selftest() -> int:
     HEUTE_FIX = datetime.date.today()
     tmp = tempfile.mkdtemp(prefix="newsletter-selftest-")
     global TRANSPORT, TRANSPORT_GET, PAUSE_SEKUNDEN, _http_request, speichere_state
+    global IDENTITÄTS_WECHSEL_SEKUNDEN
     aufgerufen: list = []
     get_aufgerufen: list = []
     try:
@@ -918,29 +1131,184 @@ def _selftest() -> int:
                f"fehlender Absender rutscht durch: rc={rc8} {befund8!r}")
         TRANSPORT_GET = spy_get
 
-        # 25–26) Wiederholung: transient (502) ja, Logikfehler (400) nein –
-        #     geprüft an der ECHTEN Kette brevo → _mit_wiederholung →
+        # 25–27) Der Netzweg selbst: Kennung, Wiederholung, Kanten-Blockage.
+        #     Geprüft an der ECHTEN Kette brevo → _mit_wiederholung → _ruf →
         #     _http_request; nur so übt der Test, was der Lauf auch ausführt.
         alte_pause = PAUSE_SEKUNDEN
+        alte_identpause = IDENTITÄTS_WECHSEL_SEKUNDEN
         PAUSE_SEKUNDEN = (0.0, 0.0)
+        IDENTITÄTS_WECHSEL_SEKUNDEN = 0.0
         http_echt = _http_request
+
+        # 25) Die Client-Kennung darf nie die Standardkennung der
+        #     Standardbibliothek sein: genau die ließ Lauf #21 an der Kante
+        #     scheitern (HTTP 403, „error code: 1010“ – Browser-Signatur-Filter,
+        #     bevor Brevos Authentifizierung die Anfrage je las).
+        pruefe(all("Python-urllib" not in k for k in IDENTITÄTEN),
+               f"Kennung nennt die Standardbibliothek (Kanten-Falle): {IDENTITÄTEN}")
+        pruefe(all(k.startswith(("franksfinanzcheck", "Mozilla/5.0 (compatible;"))
+                   for k in IDENTITÄTEN),
+               f"Kennung ist nicht selbstausgesprochen: {IDENTITÄTEN}")
+        pruefe(len(IDENTITÄTEN) >= 2 and IDENTITÄTEN[0] != IDENTITÄTEN[1],
+               f"Reserve-Kennung fehlt oder ist identisch: {IDENTITÄTEN}")
+        pruefe(not any("Chrome/" in k and "compatible;" not in k for k in IDENTITÄTEN),
+               f"Kennung imitiert einen Browser statt sich zu benennen: {IDENTITÄTEN}")
+
+        # 26) LESANFRAGEN werden bei 502 wiederholt, bis es klappt.
         def trans_http(api_key, pfad, payload, methode):
             aufgerufen.append(pfad)
-            return (201, '{"id": 9}') if len(aufgerufen) >= 3 else (502, "Bad Gateway")
+            return (200, '{"senders": []}') if len(aufgerufen) >= 3 else (502, "Bad Gateway")
         _http_request = trans_http
         TRANSPORT = brevo
-        TRANSPORT_GET = spy_get
+        TRANSPORT_GET = brevo_get
         aufgerufen.clear()
+        c, a = TRANSPORT_GET("key", "senders")
+        pruefe(c == 200 and aufgerufen.count("senders") == 3,
+               f"transiente Störung einer LESANfrage nicht wiederholt: {c}, {aufgerufen}")
+
+        # 27) SCHREIBANFRAGEN werden nie wiederholt – ein wiederholtes sendNow
+        #     wäre eine zweite Zustellung an die ganze Liste (Duplikatschutz ad absurdum).
+        def trans_schreib_http(api_key, pfad, payload, methode):
+            aufgerufen.append(pfad)
+            return 502, "Bad Gateway"
+        _http_request = trans_schreib_http
+        aufgerufen.clear()
+        c2, a2 = TRANSPORT("key", "emailCampaigns/9/sendNow", {})
+        pruefe(c2 == 502 and aufgerufen.count("emailCampaigns/9/sendNow") == 1,
+               f"schreibender Aufruf wurde wiederholt (Doppelversand-Risiko): {aufgerufen}")
+
+        # 27b) Kanten-Blockage: zwete, ehrliche Kennung wird probiert, und der
+        #      Befund sagt „Kante blockiert“, nicht „Brevo lehnt ab“ (Lauf #21
+        #      meldete einen Konto-Befund für ein Signatur-Problem).
+        def kanten_http(api_key, pfad, payload, methode):
+            aufgerufen.append(f"{pfad}#{IDENTITÄTS_INDEX}")
+            return 403, ('{"title":"Error 1010: Access denied","status":403,'
+                         '"detail":"The site owner has blocked access based on your '
+                         'browser\'s signature."} · server: cloudflare · cf-ray: 1')
+        _http_request = kanten_http
+        aufgerufen.clear()
+        c3, a3 = TRANSPORT_GET("key", "senders")
+        pruefe(c3 == 403 and "senders#1" in aufgerufen,
+               f"Kanten-Blockage nicht mit zweiter Kennung versucht: {aufgerufen}")
+        pruefe("Kante blockiert" in brevo_fehler(c3, a3),
+               f"Kanten-Blockage heißt im Befund nicht „Kante“: {brevo_fehler(c3, a3)[:120]}")
+        rc_kante, befund_kante = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
+        pruefe(rc_kante == 1 and "Kante blockiert" in befund_kante,
+               f"Vorflug meldet die Blockage nicht als Kanten-Befund: {befund_kante[:160]}")
+
+        # 27c) Falscher/unsicherer API-Host: kein Netzversuch, bevor der
+        #      Schlüssel eine fremde Domain erreichen könnte.
+        def zähler_http(api_key, pfad, payload, methode):
+            aufgerufen.append(pfad)
+            return 200, "{}"
+        _http_request = zähler_http
+        os.environ["BREVO_API_HOST"] = "evil.example"
+        aufgerufen.clear()
+        rc_host = versende(r4, html, text, "X", dry_run=False, test_adresse="t@b.de")
+        pruefe(rc_host == 1 and not aufgerufen,
+               f"BREVO_API_HOST ohne Freigabe löst einen Netzversuch aus: {aufgerufen}")
+        os.environ["BREVO_API_HOST"] = "api.brevo.com"
+        pruefe(api_host_fehler() == "", "freigegebener Host gilt als Fehler")
+        os.environ.pop("BREVO_API_HOST", None)
+
+        # 28) Zweifelhafter Sende-Ausgang: NACHLESE statt Nachdrücken. Belegt die
+        #     Kampagnen-Akte die Sendung, lautet der Befund „VERSAND ERFOLGT“
+        #     (rc 1, damit der Zweifel im Alerting landet) – nie „nichts versandt“.
+        def zweifel_http(api_key, pfad, payload, methode):
+            if methode == "POST" and pfad.endswith("/sendNow"):
+                return 502, "Bad Gateway"
+            if methode == "POST":
+                return 201, '{"id": 9}'
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            if pfad.startswith("contacts/lists/"):
+                return 200, json.dumps({"id": 7, "totalSubscribers": 3})
+            if pfad.startswith("emailCampaigns/"):
+                return 200, json.dumps({"id": 9, "status": "in_process",
+                                         "statistics": {"deliveredCount": 3}})
+            return 200, "{}"
+        _http_request = zweifel_http
+        TRANSPORT = brevo
+        TRANSPORT_GET = brevo_get
         os.environ["NEWSLETTER_SEND"] = "ja"
-        rc9 = versende(r4, html, text, "X", dry_run=False)
-        pruefe(rc9 == 0 and aufgerufen.count("emailCampaigns") == 3,
-               f"transienter 502 wurde nicht genau dreimal bis zum Erfolg "
-               f"probiert: rc={rc9}, {aufgerufen}")
+        speicher_echt = speichere_state
+        geschrieben: list = []
+
+        def speicher_mitzahl(root, state):
+            geschrieben.append(dict(state))
+            speicher_echt(root, state)
+        speichere_state = speicher_mitzahl
+        # Der Duplikatsschutz muss in diesem Fall etwas zu verbuchen haben:
+        # pending tragen (der Digest des Tages), sonst ist „verbucht“ nicht messbar.
+        speicher_echt(r4, {"pending": ["2026-09-11-neu-1"]})
+        vor = lade_state(r4)
+        rc_raus = versende(r4, html, text, "X", dry_run=False)
+        state_raus = lade_state(r4)
+        pruefe(rc_raus == 1 and state_raus.get("kampagne_id") == 9
+               and "versand_unklar" not in state_raus,
+               f"belegter Versand nach zweifelhafter Antwort nicht als VERSAND "
+               f"ERFOLGT verbucht (rc={rc_raus}): {state_raus}")
+        pruefe(state_raus.get("versandene_artikel") != vor.get("versandene_artikel"),
+               f"belegter Versand nicht im Duplikatsschutz: {state_raus}")
+
+        # 29) Kein Beleg, kein Gegenteil → Sperre: der nächste Listen-Versand
+        #     bleibt an, bis ein Mensch nachgesehen hat. Testversände bleiben
+        #     möglich (sie treffen genau eine Adresse, nie die Liste).
+        def unklar_http(api_key, pfad, payload, methode):
+            if methode == "POST" and pfad.endswith("/sendNow"):
+                return 0, "URLError: timed out"
+            if methode == "POST":
+                return 201, '{"id": 12}'
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            if pfad.startswith("contacts/lists/"):
+                return 200, json.dumps({"id": 7, "totalSubscribers": 3})
+            if pfad.startswith("emailCampaigns/"):
+                return 502, "Bad Gateway"
+            return 200, "{}"
+        _http_request = unklar_http
+        rc_unklar = versende(r4, html, text, "X", dry_run=False)
+        state_unklar = lade_state(r4)
+        pruefe(rc_unklar == 1 and state_unklar.get("versand_unklar", {}).get("kampagne_id") == 12,
+               f"unklarer Sende-Ausgang ohne Sperre: rc={rc_unklar} {state_unklar}")
+        aufgerufen.clear()
+        _http_request = zähler_http
+        rc_halten = versende(r4, html, text, "X", dry_run=False)
+        pruefe(rc_halten == 1 and not aufgerufen,
+               f"Sperre hält den Listen-Versand nicht an (Netzversuch trotz Zweifel): "
+               f"{aufgerufen}")
+
+        # … aber der Testversand bleibt möglich: er trifft genau eine Adresse,
+        #   nie die Liste, und ist damit kein Doppelungsrisiko.
+        def probe_http(api_key, pfad, payload, methode):
+            aufgerufen.append(pfad)
+            if methode == "POST" and pfad == "emailCampaigns":
+                return 201, '{"id": 14}'
+            if methode == "POST":
+                return 201, "{}"
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 3})
+        _http_request = probe_http
+        aufgerufen.clear()
+        rc_test = versende(r4, html, text, "X", dry_run=False, test_adresse="t@b.de")
+        pruefe(rc_test == 0 and any(p.endswith("/sendTest") for p in aufgerufen)
+               and not any(p.endswith("/sendNow") for p in aufgerufen),
+               f"Sperre blockiert zu Unrecht den Testversand (rc={rc_test}): {aufgerufen}")
+        speichere_state = speicher_echt
+        speicher_echt(r4, {k: v for k, v in state_unklar.items() if k != "versand_unklar"})
+        os.environ["NEWSLETTER_SEND"] = ""
+
         def hart_http(api_key, pfad, payload, methode):
             aufgerufen.append(pfad)
             return 400, '{"code":"invalid_parameter","message":"property preheader …"}'
         _http_request = hart_http
         aufgerufen.clear()
+        os.environ["NEWSLETTER_SEND"] = "ja"
+        TRANSPORT_GET = spy_get          # Vorprüfung lässig – geprüft wird der POST
         rc10 = versende(r4, html, text, "X", dry_run=False)
         pruefe(rc10 == 1 and aufgerufen.count("emailCampaigns") == 1,
                f"400-Logikfehler wurde wiederholt statt gemeldet: rc={rc10}, {aufgerufen}")
@@ -948,8 +1316,9 @@ def _selftest() -> int:
         TRANSPORT = brevo
         TRANSPORT_GET = brevo_get
         PAUSE_SEKUNDEN = alte_pause
+        IDENTITÄTS_WECHSEL_SEKUNDEN = alte_identpause
 
-        # 27) Ehrlichkeit nach dem Versand: scheitert das Status-Schreiben,
+        # 30) Ehrlichkeit nach dem Versand: scheitert das Status-Schreiben,
         #     NACHDEM die Kampagne unterwegs ist, bleibt der Lauf rot – aber
         #     der Befund sagt „VERSAND ERFOLGT“ und lügt nicht mit „es ist
         #     nichts versandt“ (die Annotation des Workflows liest genau diese
@@ -995,7 +1364,9 @@ def _selftest() -> int:
           f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
           f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, "
           f"previewText/SSOT-Payload, Vorflug, Testversand-Verdrahtung, "
-          f"Wiederholung, Versand-Ehrlichkeit, State-Konfiguration).")
+          f"Client-Kennung und Kantenblockage, Wiederholung nur fürs Lesen, "
+          f"Nachlese bei unklarem Sendegang, Versand-Halt, Versand-Ehrlichkeit, "
+          f"State-Konfiguration, Host-Guard für BREVO_API_HOST).")
     return 0
 
 
@@ -1054,8 +1425,11 @@ def vorflug(key: str, liste: str, absender_email: str, *, live: bool) -> tuple[i
     if not eintrag.get("active", False):
         return 1, (f"Absender {absender_email} ist im Brevo-Konto vorhanden, aber NICHT "
                    "verifiziert – Brevo weist Kampagnen damit ab. Den 6-stelligen "
-                   "Bestätigungscode aus der Absender-Mail eingeben bzw. SPF/DKIM auf "
-                   "„verifiziert“ bringen (Checkliste Schritt 2), dann erneut laufen lassen.")
+                   "Bestätigungscode aus der Absender-Mail eingeben bzw. die "
+                   "Domain-Authentifizierung auf „verifiziert“ bringen (Checkliste "
+                   "Schritt 2: `brevo-code`-TXT und die zwei DKIM-CNAMEs – der "
+                   "SPF-Eintrag ist hier nicht der Hebel, er alignt auf Brevos "
+                   "geteiltem Weg nie), dann erneut laufen lassen.")
     code2, antwort2 = TRANSPORT_GET(key, f"contacts/lists/{liste}")
     if code2 == 404:
         return 1, (f"Liste {liste} existiert im Brevo-Konto nicht (HTTP 404) – Kampagne "
@@ -1086,6 +1460,12 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     Vorprüfung von Absender + Liste vor dem Anlegen, strukturierte Fehler,
     Wiederholung nur bei transienten Störungen.
     """
+    # Der Netzweg gehört vor jede Anfrage: ein falscher Host würde den
+    # API-Schlüssel an eine fremde Domain schicken. Kein Retry, kein Netzversuch.
+    host_fehler = api_host_fehler()
+    if host_fehler:
+        print(f"   ❌ kein Versand: {host_fehler}")
+        return 1
     key = os.environ.get("BREVO_API_KEY", "").strip()
     liste = os.environ.get("BREVO_LIST_ID", "").strip()
     bestaetigt = os.environ.get("NEWSLETTER_SEND", "").strip().lower() in ("ja", "true", "1")
@@ -1105,6 +1485,11 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         print(f"   ❌ kein Versand: BREVO_LIST_ID ist keine Zahl ({liste!r}) – Brevo liest "
               "die Listen-ID als Ganzzahl (Zahl in der Listen-URL).")
         return 1
+    if bestaetigt and not test_adresse:
+        sperre = sperre_pruefen(root)
+        if sperre:
+            print(f"   ❌ kein Listen-Versand: {sperre}")
+            return 1
     absender = absender_konfig(root)
     # live=False bei Testversand: die Prüfung „Liste hat 0 Abonnenten“ gilt nur
     # dem echten Listen-Versand (sendNow). Ein sendTest trifft genau eine
@@ -1134,6 +1519,13 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     code, antwort = TRANSPORT(key, "emailCampaigns", payload)
     if code not in (200, 201):
         print(f"   ❌ Kampagne nicht angelegt ({brevo_fehler(code, antwort)})")
+        if not antwort_endgueltig_abgelehnt(code, antwort):
+            print("   ℹ️  Kein zweiter Anlauf: dieser Aufruf war SCHREIBEND. Ein "
+                  "Wiederholen nach 502/Zeitlimit würde die Kampagne mehrfach "
+                  "anlegen. Falls Brevo die Anlage trotzdem annahm, liegt jetzt "
+                  "ein Entwurf „Digest <Datum>“ im Konto (Kampagnen → Drafts) – "
+                  "vor dem nächsten Lauf löschen oder verwenden, sonst wächst der "
+                  "Stapel nur.")
         return 1
     try:
         kennung = json.loads(antwort).get("id")
@@ -1147,19 +1539,62 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     body = {"emailTo": test_adresse} if test_adresse else {}
     code2, antwort2 = TRANSPORT(key, pfad, body)
     if code2 not in (200, 201, 202, 204):
-        print(f"   ❌ Versand fehlgeschlagen ({brevo_fehler(code2, antwort2)})")
+        # Der seltene, teure Fall: die Antwort auf den Sende-Aufruf ist verloren
+        # gegangen (Kantenblock, 502, Zeitlimit), die Sendung kann aber schon
+        # angenommen sein. Wiederholen hieße: die Liste ein zweites Mal treffen.
+        # Also nachlesen statt nachdrücken – und den Befund so melden, wie die
+        # Wahrheit ist (Lauf #14/#21-Lehre: die Annotation darf nicht lügen).
+        if antwort_endgueltig_abgelehnt(code2, antwort2):
+            print(f"   ❌ Versand fehlgeschlagen ({brevo_fehler(code2, antwort2)}) "
+                  "– die Kampagne existiert als Entwurf, versandt ist nichts.")
+            return 1
+        kunde, grund = versand_nachlesen(key, kennung)
+        if kunde == "raus":
+            print(f"   ✅ VERSAND ERFOLGT (Kampagne {kennung}) – die Antwort auf den "
+                  f"Sende-Aufruf war unleserlich ({brevo_fehler(code2, antwort2)}), "
+                  f"die Kampagnen-Akte belegt die Sendung aber: {grund}.")
+            return _status_schreiben(root, kennung, betreff, test_adresse, vorab_rc=1)
+        if kunde == "nicht raus":
+            print(f"   ❌ Versand nicht angekommen ({brevo_fehler(code2, antwort2)}); "
+                  f"Nachlese: {grund} – es ist nichts versandt, der nächste Lauf darf "
+                  "erneut senden.")
+            return 1
+        # UNKLAR: weder Beleg noch Gegenteil. Hier entscheidet die Richtung des
+        # Schadens: eine verpasste Ausgabe ist ärgerlich, eine Doppelzustellung an
+        # die ganze Liste erzeugt Abmeldungen, Spam-Beschwerden und – bei Gmail –
+        # einen Reputationsschaden, der wochenlang nachwirkt. Also: NICHTS
+        # wiederholen, NICHTS verbuchen, aber den nächsten Listen-Versand
+        # anhalten, bis ein Mensch im Konto nachgesehen hat (Sperre im Status).
+        print(f"   ❌ VERSAND-STATUS UNKLAR ({brevo_fehler(code2, antwort2)}); Nachlese: "
+              f"{grund}. Der Versand wurde NICHT wiederholt (Doppelungsgefahr) und "
+              f"der Duplikatsschutz wurde NICHT verbucht. Kampagne {kennung} in Brevo "
+              "prüfen (Kampagnen → Detail → Sends); ist sie raus, data/"
+              "newsletter_state.json um \"zuletzt_versandt\" und \"kampagne_id\" "
+              "ergänzen. Bis dahin hält eine Sperre jeden weiteren "
+              "Listen-Versand an (Release: Block \"versand_unklar\" in data/"
+              "newsletter_state.json löschen bzw. durch \"versand_unklar_geloest\" "
+              "mit Datum ersetzen – bewusst Mensch, nicht Automatik).")
+        sperre_setzen(root, kennung, betreff)
         return 1
     print(f"   ✅ {'Testversand an ' + test_adresse if test_adresse else 'Versand angestoßen'}"
           f" (Kampagne {kennung})")
-    # Der Versand ist RAUS – ab hier darf kein Fehler mehr so gemeldet werden,
-    # als hätte nichts stattgefunden. Genau das passierte bei einer
-    # mikroskopischen Fehlerklasse: scheiterte das Status-Schreiben NACH dem
-    # erfolgreichen sendNow, meldete der Lauf rot und die Annotation behauptete
-    # „es ist nichts versandt“ – der Empfänger hielt die Mail indes in der Hand.
-    # Jetzt: der Befund nennt die Wahrheit (VERSAND ERFOLGT) und der Workflow
-    # spricht sie entsprechend aus. Risiko bei nicht schreibbarem Status:
-    # der nächste Lauf kennt die Ausgabe nicht und könnte doppelt liefern –
-    # darum rc 1, damit der Befund im Alerting landet.
+    return _status_schreiben(root, kennung, betreff, test_adresse, vorab_rc=0)
+
+
+def _status_schreiben(root: str, kennung, betreff: str, test_adresse: str, *,
+                      vorab_rc: int) -> int:
+    """Versandstatus festschreiben – nachgelesen, nicht vermutet.
+
+    Der Versand ist RAUS – ab hier darf kein Fehler mehr so gemeldet werden,
+    als hätte nichts stattgefunden. Genau das passierte bei einer
+    mikroskopischen Fehlerklasse: scheiterte das Status-Schreiben NACH dem
+    erfolgreichen sendNow, meldete der Lauf rot und die Annotation behauptete
+    „es ist nichts versandt“ – der Empfänger hielt die Mail indes in der Hand.
+    Jetzt: der Befund nennt die Wahrheit (VERSAND ERFOLGT) und der Workflow
+    spricht sie entsprechend aus. Risiko bei nicht schreibbarem Status:
+    der nächste Lauf kennt die Ausgabe nicht und könnte doppelt liefern –
+    darum rc 1, damit der Befund im Alerting landet.
+    """
     try:
         state = lade_state(root)
         state.update({"zuletzt_versandt": datetime.datetime.now(datetime.timezone.utc)
@@ -1191,7 +1626,42 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
               f"(Doppelungsgefahr). data/newsletter_state.json prüfen, Duplikatschutz "
               f"nicht umgehen.")
         return 1
-    return 0
+    return vorab_rc
+
+
+def sperre_pruefen(root: str) -> str:
+    """Steht der Status auf „Versand unklar“? Dann kein weiterer Listen-Versand.
+
+    Der Halt ist absichtlich eine MENSCHENAufgabe: Ein Lauf, der nicht weiß, ob
+    die vorige Ausgabe ankam, darf sie nicht nochmal in die Welt schicken – aber
+    er darf sie auch nicht eigenmächtig „für versandt“ erklären. Der Release
+    steht im Status-JSON, die Prüfung liest ihn.
+    """
+    try:
+        block = lade_state(root).get("versand_unklar") or {}
+    except Exception:  # noqa: BLE001  (kaputtes JSON: das meldet die Wache separat)
+        return ""
+    if not block:
+        return ""
+    return (f"der Status trägt den Block „versand_unklar“ (Kampagne "
+            f"{block.get('kampagne_id', '?')}, notiert {block.get('zeitpunkt', '?')}): "
+            "ein früherer Sende-Aufruf ist ohne belegbares Ergebnis geblieben. "
+            "Erst in Brevo nachsehen (Kampagnen → Detail → Sends) und den Block "
+            "auflösen – sonst droht dieselbe Ausgabe zweimal im Postfach.")
+
+
+def sperre_setzen(root: str, kennung, betreff: str) -> None:
+    """Halt schreiben (best effort): der nächste Lauf muss ihn sehen können."""
+    try:
+        state = lade_state(root)
+        state["versand_unklar"] = {"kampagne_id": kennung,
+                                   "betreff": betreff,
+                                   "zeitpunkt": datetime.datetime.now(datetime.timezone.utc)
+                                   .isoformat(timespec="seconds")}
+        speichere_state(root, state)
+    except OSError as exc:
+        print(f"   ⚠ Sperre konnte nicht geschrieben werden ({exc}) – der nächste Lauf "
+              "kennt den Zweifel nicht und könnte dieselbe Ausgabe erneut senden.")
 
 
 def main(argv=None) -> int:
@@ -1246,6 +1716,11 @@ def main(argv=None) -> int:
 
     heute = datetime.date.today()
     state = lade_state(root)
+    halt = sperre_pruefen(root)
+    if halt:
+        # Nicht nur im Sendeschritt: ein Lauf, der den Halt verschweigt, lässt
+        # den nächsten Betreiber glauben, der Newsletter laufe nur gerade nicht.
+        print(f"🛑 Der Versand ist angehalten: {halt}")
     schon = set(state.get("versandene_artikel", []))
     artikel = [a for a in live_artikel(root, heute - datetime.timedelta(days=max(1, args.days)))
                if a["slug"] not in schon]
