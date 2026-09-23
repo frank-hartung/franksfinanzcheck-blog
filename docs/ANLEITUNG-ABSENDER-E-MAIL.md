@@ -254,3 +254,42 @@ Rechtstexte) · [ANLEITUNG-NEWSLETTER-STUDIO.md](ANLEITUNG-NEWSLETTER-STUDIO.md)
 [FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md](FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md)
 (Runbook in Reihenfolge) ·
 [DNS-CLOUDFLARE-GITHUB-PAGES.md](DNS-CLOUDFLARE-GITHUB-PAGES.md) (Website-DNS).
+
+---
+
+## Anhang A – Brevos SDK-Snippet „Create a campaign" ↔ dem Lauf sein Payload
+
+Der offizielle Beispiel-Code (`sib_api_v3_sdk`, `CreateEmailCampaign`) und
+`versende()` in `scripts/newsletter_digest.py` sprechen **dieselbe** API an –
+das SDK schreibt `snake_case`-Model-Felder, die REST-API `camelCase`-JSON.
+Feld für Feld, mit dem Stand des Projekts:
+
+| Snippet (SDK) | REST-Feld (unser Payload) | Was hier gilt |
+|---|---|---|
+| `configuration.api_key['api-key'] = 'YOUR_API_V3_KEY'` | Header `api-key` | Secret `BREVO_API_KEY` – **niemals** in Code, Snippet oder Issue einkopieren |
+| `name="Campaign sent via the API"` | `name` | `Digest <JJJJ-MM-TT>` – pro Lauf eindeutig, zusammen mit `data/newsletter_state.json` der Duplikatsschutz |
+| `subject` | `subject` | kommt aus dem Studio (`newsletter_studio.py`), nicht aus dem Lauf |
+| `sender={"name": From name, "email": "myfromemail@mycompany.com"}` | `sender.name`, `sender.email` | `Frank von FranksFinanzcheck` / `news@franksfinanzcheck.de` aus der SSOT. Zwei Fallen im Snippet: `From name` ist **ohne Anführungszeichen** (ein Variablenname → `NameError`), und `sender.email` muss **exakt** eine aktive Absenderadresse desselben Kontos sein – sonst lehnt Brevo mit 400 ab. Genau das prüft `vorflug()` vorher – der Lauf fällt nicht mehr in Brevos Fehlermeldung hinein |
+| *(im Snippet nicht gezeigt)* | `replyTo.email` | `kontakt@franksfinanzcheck.de` aus `email.antwort_an` – Antwortpfad, kein Versandrecht |
+| `html_content` · `text_content` | `htmlContent` · `textContent` | beide immer (QA-Regel verlangt die Textalternative) |
+| `preheader` (in älteren Beispielen) | **`previewText`** | das klassische Missverständnis: `preheader` gibt es im Schema nicht – Lauf #14 scheiterte genau daran |
+| `recipients={"listIds": [2, 7]}` | `recipients.listIds` | **eine** Liste: `[int(BREVO_LIST_ID)]`. Kein Zweit-Ziel, keine „Testliste" – die Probe ist `sendTest` |
+| `type="classic"` | `type` | weggelassen = Classic-Standard; `templateId` neben `htmlContent` wäre ein Widerspruch (zwei Content-Quellen) |
+| `scheduled_at="2018-01-01 00:00:01"` | `scheduledAt` | **bewusst nicht gesetzt.** Ein Termin in der Vergangenheit (oder ein Schema, das Brevo ablehnt) legt die Kampagne als „geplant" auf Eis. Der Takt kommt aus GitHub Actions (Cron Mo–Fr 05:05 UTC, nachgezogen von der Kadenz-Wache) – zwei Taktgeber = doppelte Mails |
+| `create_email_campaign(...)` sendet direkt | `status: "draft"` **und dann** `POST emailCampaigns/{id}/sendNow` bzw. `/sendTest` | zweistufig, damit Test und Liste dieselbe Kampagnen-ID teilen und der Status-Schreiber dazwischen prüfen kann |
+| `api_instance = sib_api_v3_sdk.EmailCampaignsApi()` | `POST https://api.brevo.com/v3/emailCampaigns` | der Lauf nutzt **rohes urllib ohne SDK** – kein `pip install` im Runner, der Selbsttest bleibt netzfrei und determinisch |
+
+**Aus dem Snippet nicht übernehmen:** der Key im Code · `scheduled_at` ·
+`templateId` neben `htmlContent` · das Feld `preheader` · mehrere `listIds`.
+
+**Nachbau ohne Netzwerk** (zeigt Betreff, Liste, Größe – keine Anfrage):
+
+```bash
+python3 scripts/newsletter_digest.py --build --send --days 1      # ohne --live = dry-run
+curl -s -H "api-key: $BREVO_API_KEY" https://api.brevo.com/v3/senders   # Absender-Sicht von Brevo
+```
+
+`pip install sib-api-v3-sdk` (bzw. das neuere `getbrevo/brevo-python`) wird für
+diesen Newsletter **nicht** gebraucht – ein POST pro Lauf, und jede Abhängigkeit
+im Runner wäre eine Wartungsstelle mehr in einer Kette, die ohnehin dreifach
+verriegelt ist.
