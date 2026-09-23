@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["50-30-20-Regel", "Finanz-Kompass", "50-30-20-Regel:"]
+keywords: ["50-30-20-Regel", "Finanz-Kompass", "50-30-20-Regel:", "50 30 20 Regel"]
 pin_title: "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026"
 pin_description: "*Werbung | Erfahre, wie du mit der 50-30-20-Regel dein Budget 2026 meisterst. Frank Hartung zeigt dir, wie du Fixkosten senkst und effektiv Vermögen aufbaust. Mehr Spartipps auf FranksFinanzcheck! #503020regel #finanzkompass"
 ai_generated: true
