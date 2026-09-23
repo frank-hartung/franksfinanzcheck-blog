@@ -1645,9 +1645,9 @@ items:
   date: '2026-09-23'
   time: '12:15'
   scheduled_at: '2026-09-23T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: reddit:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:zahl:2026-09-23
   channel: reddit
   slug: 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
@@ -1657,9 +1657,10 @@ items:
   date: '2026-09-23'
   time: '14:15'
   scheduled_at: '2026-09-23T14:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD
+    fehlen
 - id: facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:zahl:2026-09-23
   channel: facebook
   slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
@@ -1669,9 +1670,9 @@ items:
   date: '2026-09-23'
   time: '15:15'
   scheduled_at: '2026-09-23T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-09-23
   channel: threads
   slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
@@ -1681,9 +1682,9 @@ items:
   date: '2026-09-23'
   time: '16:15'
   scheduled_at: '2026-09-23T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:vergleich:2026-09-23
   channel: telegram
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
