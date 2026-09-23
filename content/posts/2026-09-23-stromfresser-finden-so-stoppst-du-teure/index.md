@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Stromfresser"]
+keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Energiefresser"]
 pin_title: "Stromfresser finden: So stoppst du teure"
 pin_description: "*Werbung | Möchtest du heimliche Stromfresser finden und sofort Energiekosten senken? Frank Hartung zeigt dir, wie du Standby Kosten reduzierst und Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
 ai_generated: true
