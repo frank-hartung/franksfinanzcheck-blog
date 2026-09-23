@@ -1,0 +1,71 @@
+{{- /* layouts/_partials/newsletter_versandplan.html – der Versandplan im Anmeldekasten.
+
+    Warum ein eigener Baustein: „zwei Mails pro Woche“ ist ein Versprechen, das
+    der Leser im Postfach nachzählt. Ein Formular, das nur „anmelden“ sagt,
+    verkauft ein Abo ohne Kalender – und genau das ist der Unterschied zwischen
+    einer Liste und einem Newsletter. Hier steht deshalb der Takt VOR dem Feld:
+    welche zwei Tage, welcher Auftrag pro Tag, welche Uhrzeit, wann der nächste
+    Termin fällt.
+
+    Zwei Quellen, eine Teilung (dieselbe wie studio.kadenz_rahmen() im Python):
+      FAKTEN  data/newsletter_kadenz.json  – Snapshot des Versandvertrags
+              scripts/newsletter_schedule.py (Tage, Uhrzeit, Obergrenze pro Woche)
+      REDAKTION data/newsletter_studio.json → creative.kadenz (Ausgabenname und
+              Auftrag je Versandtag)
+    Kein Wert ist hier abgetippt: ändert sich der Vertrag, ändert sich dieser
+    Baustein mit – und `newsletter_schedule.py --pruefen-site` meldet Drift.
+
+    Kein Kalenderdatum im HTML: der nächste Termin ist eine bewegliche Größe.
+    Der Baustein druckt den kadenzrichtigen Satz ohne Datum, ff-newsletter.js
+    rechnet den konkreten Termin in Europe/Berlin nach und ersetzt nur den
+    Platzhalter-Teil – ohne JavaScript bleibt der Satz stehen (ehrlich, wenn
+    auch ungenau), statt einen Termin von gestern zu zeigen.
+
+    Bewusst NICHT hier: kein Countdown, keine „nur noch 3 Plätze“, keine
+    Abonenntenzahl, die niemand prüfen kann (DESIGN.md §7, PRODUCT.md: keine
+    Funktion, die nur nach Funktion aussieht).
+*/ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $kadenz := $nl.kadenz | default dict -}}
+{{- $rahmen := $nl.rahmen | default dict -}}
+{{- $tage := $kadenz.tage | default slice -}}
+{{- if $tage -}}
+{{- $schluessel := slice -}}
+{{- range $tage -}}{{- $schluessel = $schluessel | append (string .schluessel) -}}{{- end -}}
+<div class="ff-nl__plan" data-ff-nl-plan data-ff-nl-tage="{{ delimit $schluessel "," }}"
+     data-ff-nl-uhrzeit="{{ $kadenz.uhrzeit }}">
+  <p class="ff-nl__plan-kicker">Versandplan · {{ $kadenz.versandtage_text }}</p>
+  <p class="ff-nl__plan-erste">Deine erste Ausgabe kommt am
+    <span class="ff-nl__plan-termin" data-ff-nl-erster>nächsten {{ $kadenz.versandtage_oder }}</span>,
+    {{ $kadenz.uhrzeit_zeile }} – nachdem du bestätigt hast.</p>
+  <ul class="ff-nl__plan-liste">
+    {{- range $t := $tage -}}
+    {{- $sch := string $t.schluessel -}}
+    {{- $ausgabe := index ($rahmen.ausgabe | default dict) $sch | default "Spar-Ausgabe" -}}
+    {{- $hinweis := index ($rahmen.preheader_hinweis | default dict) $sch
+          | default "Rechner, Fristen und Tarifwechsel – mit Zahl, Stand und Datum." -}}
+    <li class="ff-nl__plan-tag" data-ff-nl-tag="{{ $sch }}" data-ff-nl-tag-kurz="{{ $t.tag_kurz }}">
+      <span class="ff-nl__plan-heute" aria-hidden="true">heute</span>
+      <span class="ff-nl__plan-kopf">
+        <span class="ff-nl__plan-badge" aria-hidden="true">{{ $t.tag_kurz }}</span>
+        <span class="ff-nl__plan-tagname">{{ $t.tag }}</span>
+        <span class="ff-nl__plan-ausgabe">{{ $ausgabe }}</span>
+      </span>
+      <span class="ff-nl__plan-auftrag">{{ $hinweis }}</span>
+      <span class="ff-nl__plan-naechster">
+        <span class="ff-nl__plan-naechster-label">Nächster Termin</span>
+        <span class="ff-nl__plan-datum" data-ff-nl-termin>der kommende {{ $t.tag }}</span>
+      </span>
+    </li>
+    {{- end -}}
+  </ul>
+  <ul class="ff-nl__plan-sicher">
+    <li>Double-Opt-In – erst dein Klick trägt dich ein</li>
+    <li>Höchstens {{ $kadenz.max_pro_woche }} Mails pro Kalenderwoche</li>
+    <li>Abmeldung mit einem Klick</li>
+    {{- if not ($nl.email.tracking_oeffnungen | default false) }}
+    <li>Kein Öffnungs-Tracking</li>
+    {{- end }}
+  </ul>
+</div>
+{{- end -}}

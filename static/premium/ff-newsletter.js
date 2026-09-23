@@ -17,12 +17,20 @@
    das Ergebnis ist opaque. Deshalb meldet diese Schiebt NIEMALS „erfolgreich
    abonniert“, sondern nur „Bestätigungsmail ausgelöst“ – der zweite Klick
    gehört dem Double-Opt-In, und das kann diese Seite nicht sehen.
+
+     5) Versandplan: den nächsten Termin RECHNEN, statt ihn zu drucken. Ein
+        statisch gebauter Termin ist am Tag nach dem Bau falsch – eine
+        Landingpage, die gestern ankündigt, bricht dasselbe Versprechen, das
+        sie verkauft. Gerechnet wird in Europe/Berlin (Intl), weil der Versand
+        dort getaktet ist und nicht in der Zeitzone des Lesers. Ohne
+        verlässliche Zeitzone bleibt der kadenzrichtige Satz ohne Datum stehen.
    ============================================================ */
 (function () {
   'use strict';
 
   var SCHLUESSEL = 'ff_nl';                 // localStorage: angemeldet | bestaetigt
   var selector = 'form[data-ff-nl]';
+  var ZONE = 'Europe/Berlin';               // Taktzone des Versandvertrags
 
   function bereiten() {
     var form = document.querySelector(selector);
@@ -137,9 +145,135 @@
     if (bereits) document.documentElement.setAttribute('data-ff-nl', 'angemeldet');
   }
 
+  /* ---------- Versandplan: Termine rechnen statt raten ----------
+     Die Kacheln zeigen den Takt (Dienstag / Freitag) als Tatsache und den
+     nächsten Termin als Rechnung. Beide Werte kommen aus dem DOM, das der
+     Versandplan-Baustein aus data/newsletter_kadenz.json gebaut hat – hier
+     steht kein Wochentag und keine Uhrzeit im Code. */
+
+  function zweistellig(wert) {
+    return (wert < 10 ? '0' : '') + wert;
+  }
+
+  /** Wanduhr in Europe/Berlin – oder null, wenn die Zeitzone nicht auflösbar ist. */
+  function berlinJetzt() {
+    if (typeof Intl === 'undefined' || !Intl.DateTimeFormat) return null;
+    try {
+      var fmt = new Intl.DateTimeFormat('de-DE', {
+        timeZone: ZONE,
+        hour12: false,
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      });
+      if (fmt.resolvedOptions().timeZone !== ZONE) return null;
+      var teile = {};
+      fmt.formatToParts(new Date()).forEach(function (teil) {
+        teile[teil.type] = teil.value;
+      });
+      var jahr = Number(teile.year);
+      var monat = Number(teile.month);
+      var tag = Number(teile.day);
+      if (!jahr || !monat || !tag) return null;
+      return {
+        jahr: jahr,
+        monat: monat,
+        tag: tag,
+        stunde: Number(teile.hour) % 24,      // manche Engines liefern „24“ um Mitternacht
+        minute: Number(teile.minute),
+        // Date#getDay(): 0 = Sonntag – der Vertrag zählt Montag = 0 (Python weekday()).
+        wochentag: (new Date(Date.UTC(jahr, monat - 1, tag)).getUTCDay() + 6) % 7
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /**
+   * Der nächste Termin aus `tage` (Wochentagsnummern). Der heutige Tag zählt
+   * nur, solange die Versanduhrzeit noch nicht erreicht ist – „heute“ ist ein
+   * Fakt, kein Versprechen, das der Double-Opt-In noch kippen kann.
+   */
+  function naechster(heute, tage, uhrzeit) {
+    var teile = String(uhrzeit || '07:05').split(':');
+    var stunde = Number(teile[0]) || 0;
+    var minute = Number(teile[1]) || 0;
+    var vorVersand = heute.stunde < stunde ||
+      (heute.stunde === stunde && heute.minute < minute);
+    var schritt = 0;
+    if (!(vorVersand && tage.indexOf(heute.wochentag) >= 0)) {
+      schritt = 1;
+      while (schritt < 8 && tage.indexOf((heute.wochentag + schritt) % 7) < 0) {
+        schritt += 1;
+      }
+    }
+    var datum = new Date(Date.UTC(heute.jahr, heute.monat - 1, heute.tag + schritt));
+    return {
+      jahr: datum.getUTCFullYear(),
+      monat: datum.getUTCMonth() + 1,
+      tag: datum.getUTCDate(),
+      wochentag: (datum.getUTCDay() + 6) % 7
+    };
+  }
+
+  /** „Freitag, 26. September“ – deutsche Namen über die Locale, nicht über den Browser. */
+  function lang(termin) {
+    try {
+      var fmt = new Intl.DateTimeFormat('de-DE', {
+        timeZone: ZONE, weekday: 'long', day: 'numeric', month: 'long'
+      });
+      if (fmt.resolvedOptions().timeZone !== ZONE) return '';
+      return fmt.format(
+        new Date(Date.UTC(termin.jahr, termin.monat - 1, termin.tag, 12))
+      ).trim();
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function versandplan() {
+    var plan = document.querySelector('[data-ff-nl-plan]');
+    if (!plan || plan.getAttribute('data-ff-nl-plan') === 'bereit') return;
+    var heute = berlinJetzt();
+    if (!heute) return;                     // ohne Zeitzone: Satz ohne Datum, aber richtig
+    var tage = String(plan.getAttribute('data-ff-nl-tage') || '')
+      .split(',')
+      .map(function (wert) { return Number(wert); })
+      .filter(function (wert) { return wert >= 0 && wert <= 6; });
+    if (!tage.length) return;
+    plan.setAttribute('data-ff-nl-plan', 'bereit');
+
+    var uhrzeit = plan.getAttribute('data-ff-nl-uhrzeit') || '07:05';
+    var kacheln = plan.querySelectorAll('[data-ff-nl-tag]');
+    Array.prototype.forEach.call(kacheln, function (kachel) {
+      var nummer = Number(kachel.getAttribute('data-ff-nl-tag'));
+      if (!(nummer >= 0 && nummer <= 6)) return;
+      var termin = naechster(heute, [nummer], uhrzeit);
+      var feld = kachel.querySelector('[data-ff-nl-termin]');
+      if (feld) {
+        var kurz = kachel.getAttribute('data-ff-nl-tag-kurz') || '';
+        feld.textContent = (kurz ? kurz + ', ' : '') +
+          zweistellig(termin.tag) + '.' + zweistellig(termin.monat) + '.';
+      }
+      if (termin.tag === heute.tag && termin.monat === heute.monat &&
+          termin.jahr === heute.jahr) {
+        kachel.classList.add('ff-nl__plan-tag--heute');
+      }
+    });
+
+    var erster = plan.querySelector('[data-ff-nl-erster]');
+    if (erster) {
+      var text = lang(naechster(heute, tage, uhrzeit));
+      if (text) erster.textContent = text;
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bereiten, { once: true });
+    document.addEventListener('DOMContentLoaded', function () {
+      bereiten();
+      versandplan();
+    }, { once: true });
   } else {
     bereiten();
+    versandplan();
   }
 })();

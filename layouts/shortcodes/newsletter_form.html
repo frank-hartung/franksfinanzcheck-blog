@@ -26,9 +26,18 @@
 {{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
 {{- $c := $nl.capture -}}
 {{- $liste := $c.versprechen | default "Fundsachen, Rechner und Sparechnungen – zwei Mails pro Woche." -}}
+{{- /* Kadenz-Fakten aus dem Snapshot des Versandvertrags (data/newsletter_kadenz.json,
+       geschrieben von scripts/newsletter_schedule.py --export-site). Fällt der
+       Snapshot weg, greift der Satz im Studio-JSON – nie ein ausgedachter Tag. */ -}}
+{{- $kadenz := $nl.kadenz | default dict -}}
+{{- $oder := $kadenz.versandtage_oder | default "Dienstag oder Freitag" -}}
+{{- $uhrzeit := $kadenz.uhrzeit_zeile | default "morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter)" -}}
 <div class="ff-nl" id="newsletter-anmeldung">
 {{- if $c.form_action -}}
   <p class="ff-nl__lead">{{ $liste }}</p>
+  {{- /* Der Versandplan steht VOR dem Feld: Wer ein Abo eingeht, soll den Takt
+         kennen, bevor er seine Adresse gibt – nicht danach im Postfach. */ -}}
+  {{- partial "newsletter_versandplan.html" . -}}
   <form class="ff-nl__form" action="{{ $c.form_action }}" method="post"
         accept-charset="utf-8" data-ff-nl novalidate>
     <p class="ff-nl__feld">
@@ -78,18 +87,21 @@
         <span class="ff-nl__button-lade" aria-hidden="true">Wird gesendet …</span>
       </button>
       <input type="hidden" name="markdown" value="0">
+      <span class="ff-nl__button-hinweis">Kostenlos · {{ $kadenz.max_pro_woche | default 2 }} Mails
+        pro Woche · Abmeldung mit einem Klick</span>
     </p>
     <p class="ff-nl__status" id="ff-nl-status" role="status" aria-live="polite">
       Zwei Klicks: Nach dem Absenden schickt {{ site.Title }} eine Bestätigungs-Mail. Erst
       wenn du den Link darin öffnest (Double-Opt-In), kommst du auf die Liste – niemand kann
-      dich ohne dein Zutun eintragen. Die erste Ausgabe kommt am nächsten Dienstag oder
-      Freitag, abmelden kannst du mit einem Klick in jeder Mail.
+      dich ohne dein Zutun eintragen. Die erste Ausgabe kommt am nächsten {{ $oder }},
+      {{ $uhrzeit }}; abmelden kannst du mit einem Klick in jeder Mail.
     </p>
     <noscript><p class="ff-nl__hinweis">Ohne JavaScript öffnet dein Browser das
       Anmeldeformular des Anbieters – die Bestätigungs-Mail kommt trotzdem.</p></noscript>
   </form>
 {{- else if $c.form_url -}}
   <p class="ff-nl__lead">{{ $liste }}</p>
+  {{- partial "newsletter_versandplan.html" . -}}
   <p class="ff-nl__aktionen">
     <a class="ff-nl__button" href="{{ $c.form_url }}" target="_blank" rel="noopener noreferrer">
       <span class="ff-nl__button-text">Zum Anmeldeformular</span>
@@ -119,6 +131,8 @@
        python3 scripts/newsletter_digest.py --check -->
 {{- end -}}
 </div>
-{{- if $c.form_action -}}
+{{- /* Das Skript läuft, sobald ein Versandplan steht – auch beim Button-Weg:
+       den nächsten Termin rechnet der Browser, nie der letzte Build. */ -}}
+{{- if or $c.form_action $c.form_url -}}
 <script defer src="{{ partial "asset_url.html" "premium/ff-newsletter.js" }}"></script>
 {{- end -}}

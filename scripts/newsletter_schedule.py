@@ -17,10 +17,15 @@ die eine Entscheidung tragen, stehen deshalb als Tabelle in dieser Datei.
 """
 from __future__ import annotations
 
+import argparse
 import datetime as dt
+import json
+import os
 import re
+import sys
 from zoneinfo import ZoneInfo
 
+BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ZEITZONE = ZoneInfo("Europe/Berlin")
 VERSANDTAGE = (1, 4)  # datetime.weekday(): Dienstag, Freitag
 RUECKBLICK_TAGE = 7    # überlappend; Artikel-Deduplizierung bleibt aktiv
@@ -94,11 +99,39 @@ def versandtage_adverb(und: str = " und ") -> str:
     return und.join(WOCHENTAGE_ADVERB[t] for t in VERSANDTAGE)
 
 
+def send_uhrzeit_utc() -> dt.time:
+    """Der Termin in UTC (05:05) – gerechnet, nicht abgeschrieben.
+
+    Der Cron steht auf 05:05 UTC. Wer die Berliner Uhrzeit daraus ableitet,
+    statt sie zu notieren, hat nach der Zeitumstellung keine zweite Wahrheit.
+    """
+    sommer = dt.datetime.combine(dt.date(2026, 7, 1), SEND_UHRZEIT, ZEITZONE)
+    return sommer.astimezone(dt.timezone.utc).time()
+
+
+def send_uhrzeit_winter() -> dt.time:
+    """Derselbe Termin in MEZ (06:05): UTC-Termin plus Winter-Versatz Berlins."""
+    versatz = dt.datetime(2026, 1, 15, 12, 0, tzinfo=ZEITZONE).utcoffset()
+    utc = dt.datetime.combine(dt.date(2026, 1, 15), send_uhrzeit_utc(),
+                              dt.timezone.utc)
+    return (utc + versatz).time()
+
+
+def uhrzeit_zeile() -> str:
+    """„morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter)“."""
+    return (f"morgens gegen {SEND_UHRZEIT:%H:%M} Uhr deutscher Zeit "
+            f"({send_uhrzeit_winter():%H:%M} Uhr im Winter)")
+
+
+def versandtage_oder_text() -> str:
+    """„Dienstag oder Freitag“ – für Sätze über den NÄCHSTEN Termin."""
+    return versandtage_text(" oder ")
+
+
 def versandfenster_text() -> str:
     """Der vollständige Satz zum Versandversprechen (Site, Mail, Doku)."""
-    return (f"{versandtage_adverb()}, morgens gegen "
-            f"{SEND_UHRZEIT.strftime('%H:%M')} Uhr deutscher Zeit "
-            "(06:05 Uhr im Winter) – höchstens zwei Ausgaben pro Kalenderwoche")
+    return (f"{versandtage_adverb()}, {uhrzeit_zeile()} – höchstens zwei "
+            "Ausgaben pro Kalenderwoche")
 
 
 def naechster_termin(datum=None) -> dt.date:
@@ -170,3 +203,113 @@ def versandpause(state: dict, zeit: dt.datetime | None = None) -> str:
     if sum(t.isocalendar()[:2] == woche for t in termine) >= MAX_PRO_WOCHE:
         return "Versandpause: maximal zwei Newsletter pro Kalenderwoche."
     return ""
+
+
+# ------------------------------------------------------- Website-Snapshot
+# Die Website kann kein Python aufrufen. Damit sie dieselben FAKTEN nennt wie
+# Versand, Wache und Doku (und nicht eine abgetippte vierte Fassung), schreibt
+# dieser Vertrag einen Snapshot nach data/newsletter_kadenz.json:
+#
+#   python3 scripts/newsletter_schedule.py --export-site
+#   python3 scripts/newsletter_schedule.py --pruefen-site   (Drift = Exit 1)
+#
+# Der Snapshot enthält bewusst KEIN Datum: ein „nächster Termin“ wäre am Tag
+# nach dem Bau falsch, und eine Landingpage, die einen Termin von gestern
+# ankündigt, ist ein gebrochenes Versprechen. Den nächsten Termin rechnet
+# static/premium/ff-newsletter.js im Browser (Zeitzone Europe/Berlin); ohne
+# JavaScript bleibt der kadenzrichtige Satz ohne Kalenderdatum stehen.
+# Gelesen wird die Datei über layouts/_partials/newsletter_studio_data.html
+# (os.ReadFile, NICHT site.Data – siehe Landmine im Kopf jener Datei).
+SITE_KADENZ_REL = os.path.join("data", "newsletter_kadenz.json")
+
+
+def kadenz_fuer_site() -> dict:
+    """Die Fakten des Versandvertrags, wie die Website sie braucht."""
+    return {
+        "_doku": ("Snapshot des Versandvertrags für die Website – generiert von "
+                  "`python3 scripts/newsletter_schedule.py --export-site`, nicht "
+                  "handgepflegt. Drift prüft --pruefen-site bzw. "
+                  "scripts/tests/test_newsletter_schedule.py. Enthält keine "
+                  "Kalenderdaten: den nächsten Termin rechnet "
+                  "static/premium/ff-newsletter.js in Europe/Berlin."),
+        "max_pro_woche": MAX_PRO_WOCHE,
+        "uhrzeit": f"{SEND_UHRZEIT:%H:%M}",
+        "uhrzeit_winter": f"{send_uhrzeit_winter():%H:%M}",
+        "uhrzeit_zeile": uhrzeit_zeile(),
+        "versandtage_text": versandtage_text(),
+        "versandtage_oder": versandtage_oder_text(),
+        "versandtage_adverb": versandtage_adverb(),
+        "versandfenster": versandfenster_text(),
+        "tage": [
+            {
+                "schluessel": str(tag),
+                "tag": WOCHENTAGE[tag],
+                "tag_kurz": WOCHENTAGE[tag][:2],
+                "adverb": WOCHENTAGE_ADVERB[tag],
+            }
+            for tag in VERSANDTAGE
+        ],
+    }
+
+
+def site_kadenz_text() -> str:
+    """Der Snapshot als Text – deterministisch, damit ein Diff nur Drift zeigt."""
+    return json.dumps(kadenz_fuer_site(), ensure_ascii=False, indent=2) + "\n"
+
+
+def site_kadenz_lesen(root: str = BLOG_DIR) -> str:
+    pfad = os.path.join(root, SITE_KADENZ_REL)
+    if not os.path.exists(pfad):
+        return ""
+    with open(pfad, encoding="utf-8") as fh:
+        return fh.read()
+
+
+def site_kadenz_schreiben(root: str = BLOG_DIR) -> str:
+    """Schreibt den Snapshot und gibt den geschriebenen Text zurück."""
+    pfad = os.path.join(root, SITE_KADENZ_REL)
+    os.makedirs(os.path.dirname(pfad), exist_ok=True)
+    text = site_kadenz_text()
+    with open(pfad, "w", encoding="utf-8") as fh:
+        fh.write(text)
+    return text
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Versandvertrag: Website-Snapshot schreiben oder prüfen.")
+    parser.add_argument("--root", default=BLOG_DIR,
+                        help="Repository-Wurzel (Default: dieses Repo)")
+    parser.add_argument("--export-site", action="store_true",
+                        help=f"{SITE_KADENZ_REL} aus dem Vertrag schreiben")
+    parser.add_argument("--pruefen-site", action="store_true",
+                        help="Abgleich: Datei == Vertrag (Exit 1 bei Drift)")
+    args = parser.parse_args(argv)
+
+    if args.export_site:
+        site_kadenz_schreiben(args.root)
+        print(f"{SITE_KADENZ_REL} geschrieben "
+              f"({versandtage_text()}, {SEND_UHRZEIT:%H:%M} Uhr, "
+              f"max. {MAX_PRO_WOCHE} pro Kalenderwoche)")
+        return 0
+
+    if args.pruefen_site:
+        ist = site_kadenz_lesen(args.root)
+        if not ist:
+            print(f"Befund: {SITE_KADENZ_REL} fehlt – "
+                  "`python3 scripts/newsletter_schedule.py --export-site`")
+            return 1
+        if ist != site_kadenz_text():
+            print(f"Befund: {SITE_KADENZ_REL} weicht vom Versandvertrag ab – "
+                  "`python3 scripts/newsletter_schedule.py --export-site`")
+            return 1
+        print(f"{SITE_KADENZ_REL} entspricht dem Versandvertrag "
+              f"({versandtage_text()})")
+        return 0
+
+    parser.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -21,6 +21,20 @@
   {{- $roh := os.ReadFile "data/newsletter_studio.json" | transform.Unmarshal (dict "format" "json") -}}
   {{- with $roh -}}{{- $daten = . -}}{{- end -}}
 {{- end -}}
+{{- /* FAKTEN der Kadenz (welche Tage, welche Uhrzeit, wie viele pro Woche)
+       liegen NICHT im Studio, sondern im Versandvertrag
+       scripts/newsletter_schedule.py – weil Website, Mail und Wache denselben
+       Kalender kennen müssen. Der Vertrag kann von Hugo nicht aufgerufen
+       werden, also schreibt er einen Snapshot:
+         python3 scripts/newsletter_schedule.py --export-site
+       Drift meldet --pruefen-site bzw. scripts/tests/test_newsletter_schedule.py.
+       Redaktion (Ausgabenname, Auftrag je Tag) bleibt im Studio – dieselbe
+       Teilung wie studio.kadenz_rahmen() im Python. */ -}}
+{{- $kadenz := dict -}}
+{{- if fileExists "data/newsletter_kadenz.json" -}}
+  {{- $kadenzroh := os.ReadFile "data/newsletter_kadenz.json" | transform.Unmarshal (dict "format" "json") -}}
+  {{- with $kadenzroh -}}{{- $kadenz = . -}}{{- end -}}
+{{- end -}}
 {{- $capture := $daten.capture | default dict -}}
 {{- /* hugo.toml-Überschreibung (Parameter bleiben gültig,siehe docs/ANLEITUNG-NEWSLETTER.md) */ -}}
 {{- $action := trim (string (site.Params.newsletterFormAction | default $capture.form_action | default "")) " " -}}
@@ -42,5 +56,7 @@
   "journeys" ($daten.journeys | default dict)
   "email" ($daten.email | default dict)
   "design" ($daten.design | default dict)
+  "kadenz" $kadenz
+  "rahmen" (($daten.creative | default dict).kadenz | default dict)
   "aktiv" (or (ne $action "") (ne $url ""))
 ) -}}

@@ -1,5 +1,7 @@
 """Versandvertrag unabhängig von Systemzeit/Netz: Kalender, Journal, echter Sendepfad."""
 import datetime as dt
+import json
+import re
 from pathlib import Path
 import sys
 import tempfile
@@ -116,6 +118,63 @@ class Redaktionsrahmen(unittest.TestCase):
         self.assertIn(ns.SEND_UHRZEIT.strftime("%H:%M"), fenster)
         self.assertIn("höchstens zwei Ausgaben", fenster)
         self.assertIn("dienstags und freitags", ns.versandpause({}, zeit("2026-09-23")))
+
+
+class WebsiteSnapshot(unittest.TestCase):
+    """Der Snapshot für die Website ist der Vertrag – keine vierte Fassung.
+
+    `layouts/_partials/newsletter_versandplan.html` druckt die Fakten der
+    Kadenz (Tage, Uhrzeit, Obergrenze) in den Anmeldekasten. Hugo kann den
+    Vertrag nicht aufrufen, also schreibt der Vertrag eine Datei. Zwei Prüfungen
+    halten sie ehrlich: Inhalt == Vertrag, und kein Kalenderdatum darin – ein
+    gedruckter „nächster Termin“ wäre am Tag nach dem Bau falsch.
+    """
+
+    def test_snapshot_ist_der_vertrag(self):
+        self.assertEqual(ns.site_kadenz_text(),
+                         (ROOT / ns.SITE_KADENZ_REL).read_text(encoding="utf-8"),
+                         "data/newsletter_kadenz.json weicht vom Versandvertrag ab – "
+                         "`python3 scripts/newsletter_schedule.py --export-site`")
+
+    def test_snapshot_nennt_genau_die_versandtage(self):
+        roh = json.loads(ns.site_kadenz_text())
+        self.assertEqual([int(t["schluessel"]) for t in roh["tage"]], list(ns.VERSANDTAGE))
+        for eintrag in roh["tage"]:
+            tag = int(eintrag["schluessel"])
+            self.assertEqual(ns.WOCHENTAGE[tag], eintrag["tag"])
+            self.assertEqual(ns.WOCHENTAGE[tag][:2], eintrag["tag_kurz"])
+            self.assertEqual(ns.WOCHENTAGE_ADVERB[tag], eintrag["adverb"])
+        self.assertEqual(ns.MAX_PRO_WOCHE, roh["max_pro_woche"])
+        self.assertEqual(ns.SEND_UHRZEIT.strftime("%H:%M"), roh["uhrzeit"])
+        self.assertEqual(ns.versandfenster_text(), roh["versandfenster"])
+
+    def test_uhrzeiten_sind_gerechnet_nicht_abgeschrieben(self):
+        """05:05 UTC ist 07:05 MESZ und 06:05 MEZ – derselbe Termin, zwei Zonen."""
+        self.assertEqual(dt.time(5, 5), ns.send_uhrzeit_utc())
+        self.assertEqual(dt.time(6, 5), ns.send_uhrzeit_winter())
+        self.assertIn("07:05", ns.uhrzeit_zeile())
+        self.assertIn("06:05", ns.uhrzeit_zeile())
+
+    def test_snapshot_traegt_kein_kalenderdatum(self):
+        roh = json.dumps(json.loads(ns.site_kadenz_text()), ensure_ascii=False)
+        # Selbsttest der Prüfung: ein ISO-Datum MUSS gefunden werden.
+        self.assertRegex('"datum": "2026-09-29"', r"\d{4}-\d{2}-\d{2}")
+        self.assertNotRegex(roh, r"\d{4}-\d{2}-\d{2}",
+                            "ein ISO-Datum im Snapshot altert über Nacht")
+        self.assertNotRegex(roh, r"Nächste Ausgabe|Nächster Termin",
+                            "den nächsten Termin rechnet der Browser, nicht der Build")
+
+    def test_cli_schreibt_und_prueft(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(1, ns.main(["--root", tmp, "--pruefen-site"]),
+                             "fehlender Snapshot muss ein Befund sein")
+            self.assertEqual(0, ns.main(["--root", tmp, "--export-site"]))
+            self.assertEqual(0, ns.main(["--root", tmp, "--pruefen-site"]))
+            pfad = Path(tmp) / ns.SITE_KADENZ_REL
+            self.assertEqual(ns.site_kadenz_text(), pfad.read_text(encoding="utf-8"))
+            pfad.write_text("{kaputt", encoding="utf-8")
+            self.assertEqual(1, ns.main(["--root", tmp, "--pruefen-site"]),
+                             "Drift muss rot werden, sonst sendet die Site einen anderen Takt")
 
 
 class Versandpfad(unittest.TestCase):

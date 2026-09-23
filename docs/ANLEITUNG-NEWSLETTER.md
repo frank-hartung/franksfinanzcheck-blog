@@ -47,6 +47,37 @@ Jede Mail nennt am Ende den nächsten Termin („Nächste Ausgabe: Freitag, 25.
 September“) – Erwartung statt Funkstille. Berechnet wird er aus dem Vertrag, nicht
 eingetragen.
 
+### Der Versandplan im Anmeldeformular (seit 23.09.2026)
+
+Das Formular auf `/newsletter/` zeigt denselben Takt VOR dem Feld: zwei Kacheln
+(Dienstag *Wochen-Check*, Freitag *Wochen-Abschluss*) mit Auftrag, nächstem Termin
+und einer Vertrauenszeile (Double-Opt-In, höchstens 2 Mails pro Kalenderwoche,
+Abmeldung in einem Klick, kein Öffnungs-Tracking).
+
+Hugo kann den Vertrag nicht aufrufen, deshalb schreibt der Vertrag einen Snapshot:
+
+```bash
+python3 scripts/newsletter_schedule.py --export-site   # data/newsletter_kadenz.json
+python3 scripts/newsletter_schedule.py --pruefen-site  # Drift = Exit 1
+```
+
+* **Kein Kalenderdatum im Snapshot und kein Kalenderdatum im HTML.** Ein gedruckter
+  „nächster Termin“ wäre am Tag nach dem Build falsch. Ohne JavaScript steht der
+  kadenzrichtige Satz ohne Datum; mit JavaScript rechnet
+  `static/premium/ff-newsletter.js` den Termin in **Europe/Berlin** nach
+  (`Intl.DateTimeFormat`, `timeZone` geprüft) und ersetzt nur den Platzhalter.
+* **Redaktion bleibt im Studio:** Ausgabenname und Auftrag je Tag liest der
+  Baustein aus `creative.kadenz` – dieselbe Teilung wie `studio.kadenz_rahmen()`.
+* **Wachen:** `scripts/tests/test_newsletter_schedule.py` (Snapshot == Vertrag,
+  kein Datum, CLI) und `scripts/tests/test_newsletter_site.py` → `class
+  Versandplan` (Fakten gelesen statt getippt, Fallbacks == Vertrag, Plan nur bei
+  geschaltetem Weg, kein Termin im Markup). E2E: `e2e/newsletter.spec.mjs`
+  (berechneter Termin in den nächsten 7 Tagen, ohne JS kein falsches Datum,
+  Kontrast hell/dunkel gemessen).
+
+Ändert sich der Vertrag (Tage, Uhrzeit), danach **immer** `--export-site` laufen
+lassen – `--pruefen-site` und die Tests melden jede vergessene Aktualisierung.
+
 ## Wichtig vorab (Recht, DE)
 
 ✅ Double-Opt-In (Brevo-Standard, das gehört so) · ✅ Abmeldelink in jeder Mail

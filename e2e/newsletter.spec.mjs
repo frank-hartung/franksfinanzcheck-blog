@@ -243,6 +243,86 @@ test.describe('Newsletter', () => {
     }
   });
 
+  test('Versandplan: beide Tage, berechneter Termin, ohne JS kein falsches Datum', async ({
+    page,
+    browser,
+    baseURL,
+  }) => {
+    await page.goto('/newsletter/');
+    test.skip(!(await formularVorhanden(page)), 'kein Formular geschaltet');
+    const plan = page.locator('[data-ff-nl-plan]');
+    await expect(plan).toHaveCount(1);
+    // Beide Versandtage stehen als Kachel – die Namen kommen aus dem Vertrag.
+    await expect(plan).toContainText('Dienstag');
+    await expect(plan).toContainText('Freitag');
+    await expect(plan).toContainText('Wochen-Check');
+    await expect(plan).toContainText('Wochen-Abschluss');
+
+    // Der nächste Termin ist gerechnet: kurzes Di/Fr-Datum, in den nächsten 7 Tagen.
+    const termine = await plan.locator('[data-ff-nl-termin]').allInnerTexts();
+    expect(termine.length).toBe(2);
+    const heute = new Date(
+      new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Berlin',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+      }).format(new Date()),
+    );
+    for (const text of termine) {
+      const m = text.match(/^(Di|Fr), (\d{2})\.(\d{2})\.$/);
+      expect(m, `unerwartetes Terminformat: ${text}`).toBeTruthy();
+      const jahr = heute.getUTCFullYear();
+      let datum = new Date(Date.UTC(jahr, Number(m[3]) - 1, Number(m[2])));
+      if (datum < heute) datum = new Date(Date.UTC(jahr + 1, Number(m[3]) - 1, Number(m[2])));
+      const wochentag = (datum.getUTCDay() + 6) % 7;
+      const passtKuerzel = (m[1] === 'Di' && wochentag === 1) || (m[1] === 'Fr' && wochentag === 4);
+      expect(passtKuerzel, `${text} ist kein Versandtag`).toBe(true);
+      const tageBis = (datum - heute) / 86400000;
+      expect(tageBis, `${text} liegt nicht in den nächsten 7 Tagen`).toBeLessThanOrEqual(7);
+    }
+
+    // Ohne JavaScript bleibt der ehrliche Satz ohne Kalenderdatum – kein Termin
+    // von gestern, aber auch keine Lücke.
+    const ohneJs = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 390, height: 844 },
+    });
+    try {
+      const seite = await ohneJs.newPage();
+      await seite.goto(`${baseURL}/newsletter/`);
+      const roh = await seite.locator('[data-ff-nl-termin]').allInnerTexts();
+      for (const text of roh) {
+        expect(text, `ohne JS ein gedruckt aussehendes Datum: ${text}`).toMatch(/der kommende/);
+        expect(text).not.toMatch(/\d{2}\.\d{2}\./);
+      }
+      await expect(seite.locator('[data-ff-nl-erster]')).toContainText(/Dienstag oder Freitag/);
+    } finally {
+      await ohneJs.close();
+    }
+  });
+
+  test('Versandplan bleibt in Hell und Dunkel lesbar (gemessen, nicht geschätzt)', async ({
+    page,
+  }) => {
+    await page.goto('/newsletter/');
+    test.skip(!(await formularVorhanden(page)), 'kein Formular geschaltet');
+    for (const modus of ['light', 'dark']) {
+      await page.evaluate((m) => {
+        try { localStorage.setItem('theme', m); } catch (e) { /* private Mode */ }
+        document.documentElement.setAttribute('data-theme', m);
+      }, modus);
+      await page.waitForTimeout(120);
+      for (const sel of [
+        '.ff-nl__plan-kicker', '.ff-nl__plan-erste', '.ff-nl__plan-auftrag',
+        '.ff-nl__plan-naechster', '.ff-nl__plan-sicher li', '.ff-nl__button-hinweis',
+      ]) {
+        const farben = await farbenVon(page, sel);
+        expect(farben, `${sel} fehlt im ${modus}-Modus`).not.toBeNull();
+        const wert = kontrast(farben.vorn, farben.hinten);
+        expect(wert, `${sel} ${modus} nur ${wert.toFixed(2)}:1`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  });
+
   test('ohne Bewegung: keine Übergänge im Formular', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/newsletter/');
