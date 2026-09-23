@@ -39,12 +39,15 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Frugalismus im Alltag: Die 50–30–20-Regel, Notgroschen aufbauen, Konsumfallen entlarven und Schritt für Schritt Vermögen aufbauen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 37 Beiträge)
+## Alle Artikel (neueste zuerst, 40 Beiträge)
 
+- [Tierkrankenversicherung 2026: Hund & Katze versichern](https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/): Tierkrankenversicherung 2026 im Vergleich: Was OP-Schutz und Vollschutz für Hund und Katze kosten, welche Leistungen zählen und für wen sich was lohnt.
 - [Heizkosten senken: Mit diesen Strategien sparst du sofort](https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/): Effektiv Heizkosten senken: Vermeide teure Fehler, nutze clevere Heizung Sparen Tipps und bereite deine Wohnung optimal auf den nächsten Winter vor.
+- [Gasrechnung senken: Clevere Herbst Vorbereitung im Check](https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/): Wer frühzeitig die Heizung prüfen lässt, kann Heizkosten sparen. Frank zeigt dir, wie du 2026 effizient deine Gasrechnung senken kannst.
+- [Finanzieller Puffer: Wie viel Notgroschen ist genug?](https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/): Finanzieller Puffer: Kaputte Waschmaschine oder Jobverlust? Erfahre, wie du einen Notgroschen aufbaust, der dich ruhig schlafen lässt – ohne unnötig Kapital…
 - [So findest du den richtigen: DSL-Tarif für dein Zuhause](https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/): DSL Tarif finden: So findest du den richtigen DSL-Tarif für dein Zuhause: Bandbreiten-Bedarf, DSL vs. Kabel & Glasfaser, Sparpotenziale und die besten Tarife…
 - [Sparen im Herbst: Spartipps für die goldene Jahreszeit](https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/): Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du bis zu 1.250 €.
-- [Finanzielle Freiheit erreichen: Denke dich reich – Geld](https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/): finanzielle freiheit erreichen: Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen.
+- [Finanzielle Freiheit erreichen: Denke dich reich – Geld](https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/): Finanzielle Freiheit erreichen: Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen.
 - [Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt](https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/): Dns hack: Erfahre, wie der DNS-Hack deine Ladezeiten minimiert und die DNS Privatsphäre stärkt. Optimiere dein System für schnelleres WLAN und mehr Sicherheit.
 - [50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/): Die 50-30-20-Regel bringt Ordnung in deine Finanzen: 50 % Fixkosten, 30 % Wünsche, 20 % Sparen. Frank Hartung zeigt, wie du dein Budget beherrschst.
 - [5 einfache Frugalismus-Tricks für den Alltag: Geld sparen](https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/): 5 einfache Frugalismus-Tricks für den Alltag: So senkst du Fixkosten, vermeidest Geldfallen und sparst ohne echten Verzicht Monat für Monat.
@@ -88,4 +91,4 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-09-21.*
+(scripts/generate_llms_txt.py). Stand: 2026-09-23.*
