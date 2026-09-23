@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-23 11:32 UTC  
+**Stand:** 2026-09-23 18:23 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-09-23): 2 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 2 Tage: Redaktions-Standard: RS1, RS3)
 
