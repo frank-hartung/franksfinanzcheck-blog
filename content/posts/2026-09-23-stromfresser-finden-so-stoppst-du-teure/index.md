@@ -144,7 +144,7 @@ Ein gutes Zeichen ist Wärmeentwicklung. Wenn ein Gerät im ausgeschalteten Zust
 
 ### Lohnt sich der Austausch eines funktionierenden Kühlschranks?
 
-In vielen Fällen ja. Ein Gerät, das 15 Jahre oder älter ist, verbraucht oft deutlich mehr als ein modernes A‑Klasse‑Modell. Der Kaufpreis amortisiert sich meist innerhalb von 5 – 8 Jahren durch die Stromersparnis.
+In vielen Fällen ja. Ein Gerät, das 15 Jahre oder älter ist, verbraucht oft deutlich mehr als ein modernes A‑Klasse‑Modell. Der Kaufpreis amortisiert sich meist innerhalb von 5–8 Jahren durch die Stromersparnis.
 
 ### Bringt das Ausschalten des WLAN‑Routers nachts wirklich etwas?
 

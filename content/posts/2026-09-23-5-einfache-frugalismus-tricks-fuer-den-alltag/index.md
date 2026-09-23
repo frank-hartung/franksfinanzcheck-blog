@@ -3,7 +3,7 @@ title: "5 einfache Frugalismus-Tricks für den Alltag"
 description: "5 einfache Frugalismus-Tricks für den Alltag – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und …"
 date: 2026-09-23T09:24:25Z
 draft: true
-tags: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus"]
+tags: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben"]

@@ -79,7 +79,7 @@ Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Hei
 
 1. **Entlüften** – 5 min pro Heizkörper, spart bis zu 5 % des Verbrauchs.
 2. **Vorlauftemperatur** um 5 °C reduzieren (z. B. von 70 °C auf 65 °C).
-3. **Witterungsgeführte Thermostate** installieren (Kosten 15-30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
+3. **Witterungsgeführte Thermostate** installieren (Kosten 15–30 € pro Stück, amortisieren sich nach ca. 1,5 Jahren).
 4. **Heizkurve anpassen** – flachere Kurve bei milderen Außentemperaturen.
 
 **Pro & Contra:**
@@ -124,7 +124,7 @@ Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, s
 1. **Zählerstände notieren** (letzte Ablesung).
 2. **Verbrauchsprofil analysieren** (z. B. über den Jahresverbrauchs‑Rechner des BDEW).
 3. **Mindertarif vs. Grundversorgung** vergleichen (Achtung: Grundversorgung hat oft höhere Grundgebühr).
-4. **Preisgarantie prüfen** – 12-24 Monate sind üblich.
+4. **Preisgarantie prüfen** – 12–24 Monate sind üblich.
 
 **Pro‑ und Contra‑Liste:**
 
@@ -148,7 +148,7 @@ Importware kostet oft ein Vielfaches. Meal‑Prep, Einkochen und Einfrieren spar
 | Tipp | Umsetzung | Ersparnis (Beispiel) |
 |---|---|---|
 | Wochenplan erstellen | 30 min am Sonntag | Vermeidet Impulskäufe, spart ca. 30 € |
-| Große Mengen einkochen (z. B. Kürbissuppe) | 1-2 h einmal im Monat | 10 €‑15 € pro Portion |
+| Große Mengen einkochen (z. B. Kürbissuppe) | 1–2 h einmal im Monat | 10 €‑15 € pro Portion |
 | Gemüse einfrieren (Brokkoli, Spinat) | Schnell blanchieren, luftdicht verpacken | 5 €‑8 € pro Woche |
 | Preis‑Check: Markt vs. Supermarkt | Direkt beim Bauernmarkt einkaufen | Oft 20 %‑40 % günstiger |
 
@@ -168,7 +168,7 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 **Detaillierte Vorgehensweise:**
 
 1. **Risse lokalisieren:** Mit einer brennenden Kerze – Flackern zeigt Zugluft.
-2. **Dichtungsband anbringen:** Selbstklebend, 2-3 cm Breite, rund um Fensterrahmen.
+2. **Dichtungsband anbringen:** Selbstklebend, 2–3 cm Breite, rund um Fensterrahmen.
 3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
 
@@ -186,8 +186,8 @@ Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen ste
 |---|---|---|
 | Pilzsammeln (mit App zur Bestimmung) | 2 h/Wochenende | Keine Kosten, frische Zutaten für Suppe |
 | DIY‑Herbstdeko aus Naturmaterial | 1 h | Spart Dekorationsbudget (statt ca. 20 € pro Saison) |
-| Kostenlose Stadtführungen (Touristen‑Info) | 1-2 h | Kultur erleben, kein Eintritt |
-| Bibliotheks‑Lesungen & Workshops | 1-3 h | Weiterbildung [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) |
+| Kostenlose Stadtführungen (Touristen‑Info) | 1–2 h | Kultur erleben, kein Eintritt |
+| Bibliotheks‑Lesungen & Workshops | 1–3 h | Weiterbildung [ohne Gebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) |
 
 **Pro‑ und Contra‑Analyse:**
 
@@ -255,7 +255,7 @@ Setz dir 75 Minuten – so teilst du sie ein:
 
 Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie amortisieren sich am schnellsten.
 
-**Faustregel:** Wer seine Fixkosten konsequent alle zwölf Monate prüft, spart in der Regel zwischen 10 und 20 Prozent der jährlichen Haushaltskosten ein.
+**Faustregel:** Wer seine Fixkosten konsequent alle zwölf Monate prüft, spart in der Regel zwischen 10 und 20 % der jährlichen Haushaltskosten ein.
 
 ## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz
 
@@ -289,7 +289,7 @@ Entlüfte alle Heizkörper. Prüfe die Dichtungen an Fenstern und Türen. Säube
 
 ### Was ist der Unterschied zwischen einem Grundtarif und einem Sondertarif beim Stromwechsel?
 
-Ein Grundtarif (Grundversorgung) wird vom lokalen Netzbetreiber angeboten und hat meist höhere Grundgebühren. Sondertarife von Drittanbietern bieten oft niedrigere Arbeitspreise und feste Preisgarantien von 12-24 Monaten. Der Wechsel lohnt sich in der Regel, wenn du bereit bist, den Anbieter aktiv zu vergleichen.
+Ein Grundtarif (Grundversorgung) wird vom lokalen Netzbetreiber angeboten und hat meist höhere Grundgebühren. Sondertarife von Drittanbietern bieten oft niedrigere Arbeitspreise und feste Preisgarantien von 12–24 Monaten. Der Wechsel lohnt sich in der Regel, wenn du bereit bist, den Anbieter aktiv zu vergleichen.
 
 ### Kann ich gleichzeitig mehrere Sparhebel umsetzen, ohne dass sie sich gegenseitig aufheben?
 

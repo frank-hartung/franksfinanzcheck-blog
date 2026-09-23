@@ -26,7 +26,7 @@ pinwand: "Versicherungen clever wechseln & sparen"
 
 Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei.
 
-Erhöhungen zwischen 10 und 25 % sind keine Seltenheit. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen September und November**.
+Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen September und November**.
 
 **30. November 2026, ein Montag:** bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ich habe meine Autoversicherung in zehn Jahren fünfmal gewechselt. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
 
@@ -54,7 +54,7 @@ Für 2026 hat der GDV **über 400 der 413 Zulassungsbezirke neu eingestuft**. Be
 
 Wichtig dabei: Eine reine Klassenanpassung löst in der Regel **kein** Sonderkündigungsrecht aus. Steigt dein Beitrag dagegen durch eine echte Tariferhöhung des Versicherers, hast du nach § 40 VVG **einen Monat ab Mitteilung** Zeit für eine Sonderkündigung – unabhängig vom 30.11.
 
-## Gilt der 30.11. Auch für deinen Vertrag?
+## Gilt der 30.11. auch für deinen Vertrag?
 
 Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
 
@@ -140,7 +140,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. Kennen und nutzen
+### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
