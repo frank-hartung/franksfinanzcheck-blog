@@ -1,5 +1,4 @@
 ---
-
 lastmod: 2026-09-02
 title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
 description: "Sicher heizen mit Gaspreisgarantie: Schütze dein Haushaltsbudget vor Preissprüngen, sichere dir faire Tarife und spare bis zu 650 € bei den Heizkosten."
@@ -19,7 +18,7 @@ cover:
 kurzantwort: "Eine Gaspreisgarantie sichert deinen Arbeitspreis und Grundpreis für 12 bis 24 Monate vertraglich gegen Preiserhöhungen an den Energiebörsen ab. Bei einem Jahresverbrauch von 20.000 kWh spart ein rechtzeitiger Tarifwechsel aus der Grundversorgung in einen Festpreistarif oft zwischen 400 € und 650 € pro Heizperiode."
 
 social_posted: true
-keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkoste", "spare"]
+keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
 pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
