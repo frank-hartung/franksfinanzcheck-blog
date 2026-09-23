@@ -54,9 +54,8 @@
 </a>
 {{- end }}
 
-{{- /* Newsletter-Streifen im Fuß, wenn der Anmeldeweg aus dem Studio-JSON kommt
-       (22.09.2026). extend_footer.html ist markenversiegelt und bedient die
-       hugo.toml-Parameter; das Partial verhindert den Doppel-CTA. */ -}}
+{{- /* Ein zentraler Newsletter-Baustein: im Blog steht er bereits im Kopf,
+       auf anderen Inhaltsseiten hier. Keine doppelten Anmeldehinweise. */ -}}
 {{- partial "newsletter_strip.html" (dict "ort" "footer" "seite" .) }}
 
 {{- partial "extend_footer.html" . }}

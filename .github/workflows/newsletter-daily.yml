@@ -1,4 +1,4 @@
-# Newsletter-Tageslauf: Capture-Wache + Digest, Versand nur mit Absender.
+# Newsletter Di/Fr (Workflow-Name bleibt für das Fehler-Alerting stabil): Capture-Wache + Digest, Versand nur mit Absender.
 #
 # Warum dieser Workflow überhaupt existiert: docs/ANLEITUNG-NEWSLETTER.md
 # beschrieb seit Wochen einen „Newsletter-AI"-Lauf samt NEWSLETTER-STATUS.md.
@@ -15,7 +15,7 @@
 #      Adressen berühren diesen Repo-Workflow nie
 #
 # „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
-# planmäßige Cron (05:05 UTC, Mo–Fr, echter Listen-Versand). Grund: GitHub
+# planmäßige Cron (05:05 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
 # verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
 # der 05:05-Cron blieb komplett aus, am Vortag kam er erst ~10:05 UTC). Die
 # Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
@@ -25,13 +25,13 @@ name: Newsletter-Daily (Capture-Wache + Digest)
 
 on:
   schedule:
-    - cron: "5 5 * * 1-5"     # 05:05 UTC = 07:05 MESZ – vor dem Frühstück
+    - cron: "5 5 * * 2,5"     # Dienstag/Freitag: 07:05 MESZ / 06:05 MEZ
   workflow_dispatch:
     inputs:
       tage:
         description: 'Zeitraum: Artikel der letzten N Tage in den Digest'
         type: string
-        default: '1'
+        default: '7'
       live:
         description: 'WIRKLICH an die Liste senden (sonst nur bauen; mit test_adresse bleibt es beim Testversand)'
         type: boolean
@@ -61,6 +61,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          ref: ${{ github.ref_name }}
+
+      - name: Listenversand nur vom Produktionszweig
+        if: ${{ github.ref_name != github.event.repository.default_branch && (inputs.live || inputs.planmaessig) && inputs.test_adresse == '' }}
+        run: |
+          echo "::error::Listenversand nur vom Standardzweig mit gemeinsamem Versandjournal. Auf anderen Zweigen Vorschau oder Einzeltest verwenden."
+          exit 1
 
       - name: Python bereitstellen
         uses: actions/setup-python@v7
@@ -68,7 +75,9 @@ jobs:
           python-version: "3.11"
 
       - name: Wachen-Selbsttest (Capture-Logik, Verdopplungsschutz, Verriegelung)
-        run: python3 scripts/newsletter_digest.py --selftest
+        run: |
+          python3 scripts/newsletter_digest.py --selftest
+          python3 -m unittest discover -s scripts/tests -p "test_newsletter_schedule.py"
 
       # Die Capture-Wache prüft N5/N6 am GEBAUTEN Zustand (Landingpage,
       # Footer-CTA). Ohne Build vor der Wache meldet sie ab Aktivierung
@@ -158,11 +167,11 @@ jobs:
           # Eingaben als ENV statt als ${{ }}-Interpolation im Skripttext:
           # ein String-Eingabefeld (test_adresse!) gehört nie ungefiltert in
           # eine Shell-Zeile – als env-Wert ist sie Daten, kein Code.
-          EINGABE_TAGE: ${{ inputs.tage || '1' }}
+          EINGABE_TAGE: ${{ inputs.tage || '7' }}
           EINGABE_TEST_ADRESSE: ${{ inputs.test_adresse || '' }}
         run: |
           TAGE="$EINGABE_TAGE"
-          case "$TAGE" in ''|*[!0-9]*) TAGE=1 ;; esac
+          case "$TAGE" in ''|*[!0-9]*) TAGE=7 ;; esac
           ARGS="--build --days $TAGE --out /tmp/ff-newsletter"
           # --send war bisher nur für „schedule“ verdrahtet – workflow_dispatch
           # durfte dadurch nie senden, weder „live“ noch als Testversand (Bug
@@ -233,7 +242,7 @@ jobs:
               exit "$rc"
             fi
           fi
-          # Nur bei manuellem Lauf laut melden – ein leeres Werktag-Cron ist
+          # Nur bei manuellem Lauf laut melden – ein leerer Di/Fr-Cron ist
           # normal (keine neuen Artikel), kein Warnfall.
           if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "nichts zu senden" /tmp/nl_build.log; then
             echo "::warning::Versand angefordert, aber der Digest ist leer – alles im Zeitraum ist Draft oder bereits versandt. Zeitraum über „tage“ vergrößern oder Artikel veröffentlichen."
@@ -262,5 +271,5 @@ jobs:
             echo "Keine Versandänderung – nichts zu committen."
           else
             git commit -m "newsletter: Versandstatus des Laufs festschreiben"
-            scripts/git_sync.sh --push-only || echo "::warning::Push des Versandstatus fehlgeschlagen – Digest bleibt trotzdem korrekt"
+            scripts/git_sync.sh --push-only || { echo "::error::VERSAND-STATUS nicht gesichert – vor einem weiteren Versand Brevo und Journal abgleichen!"; exit 1; }
           fi

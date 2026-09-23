@@ -74,6 +74,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if os.path.join(BLOG_DIR, "scripts") not in sys.path:
     sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 import newsletter_studio as studio      # noqa: E402  (Marke, Blöcke, Layout – eine Quelle)
+import newsletter_schedule as schedule
 import newsletter_qa as qa             # noqa: E402  (Vor-Versand-Prüfung, blockiert den Live-Versand)
 
 STATE_REL = os.path.join("data", "newsletter_state.json")
@@ -192,9 +193,19 @@ def speichere_state(root: str, state: dict) -> None:
     pfad, _, _ = zustand_konfig(root)
     pfad = os.path.join(root, pfad)
     os.makedirs(os.path.dirname(pfad), exist_ok=True)
-    with open(pfad, "w", encoding="utf-8") as fh:
-        json.dump(state, fh, ensure_ascii=False, indent=2, sort_keys=True)
-        fh.write("\n")
+    tmp = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=os.path.dirname(pfad),
+                                         prefix=".newsletter-", delete=False) as fh:
+            tmp = fh.name
+            json.dump(state, fh, ensure_ascii=False, indent=2, sort_keys=True)
+            fh.write("\n")
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, pfad)
+    finally:
+        if tmp and os.path.exists(tmp):
+            os.unlink(tmp)
 
 
 def assert_worktree(root: str) -> None:
@@ -472,6 +483,8 @@ def baue_ausgabe(artikel: list[dict], datum: str, versprechen: str,
         tag = datetime.date.fromisoformat(str(datum)[:10])
     except ValueError:
         tag = datetime.date.today()
+    limit = max(1, int(studio.konfiguration(root)["email"].get("max_artikel", 5)))
+    artikel = artikel[:limit]
     material = studio.material_aus_artikel(root, artikel)
     e = studio.baue_email(material, datum=tag, root=root, versprechen=versprechen)
     e["anzahl"] = len(artikel)
@@ -789,6 +802,11 @@ def _selftest() -> int:
             fehler.append(meldung)
 
     HEUTE_FIX = datetime.date.today()
+    from unittest.mock import patch
+    kadenz_mock = patch(__name__ + ".kadenz_pruefen", return_value="")
+    reservierung_mock = patch(__name__ + ".termin_reservieren")
+    kadenz_mock.start()
+    reservierung_mock.start()
     tmp = tempfile.mkdtemp(prefix="newsletter-selftest-")
     global TRANSPORT, TRANSPORT_GET, PAUSE_SEKUNDEN, _http_request, speichere_state
     global IDENTITÄTS_WECHSEL_SEKUNDEN
@@ -1069,7 +1087,7 @@ def _selftest() -> int:
                and not any(p.endswith("/sendNow") for p in pfade),
                f"Testversand nutzt nicht ausschließlich sendTest (rc={rc4}): {pfade}")
         pruefe(nach.get("versandene_artikel") == vor.get("versandene_artikel")
-               and "kampagne_id" in nach,
+               and "test_kampagne_id" in nach,
                f"Testlauf verbucht sich als Ausgabe: {nach}")
 
         # 20b) Verdrahtung: auch MIT Bestätigung (NEWSLETTER_SEND=ja) bleibt ein
@@ -1350,6 +1368,8 @@ def _selftest() -> int:
         fehler.append(f"Ausführung: {exc.__class__.__name__}: {exc}\n"
                       + traceback.format_exc()[-500:])
     finally:
+        kadenz_mock.stop()
+        reservierung_mock.stop()
         TRANSPORT = brevo
         TRANSPORT_GET = brevo_get
         for k in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
@@ -1451,6 +1471,26 @@ def vorflug(key: str, liste: str, absender_email: str, *, live: bool) -> tuple[i
     return 0, ""
 
 
+def kadenz_pruefen(root: str) -> str:
+    """Status strikt lesen: ein kaputtes Journal darf nie einen Versand erlauben."""
+    pfad, _, _ = zustand_konfig(root)
+    with open(os.path.join(root, pfad), encoding="utf-8") as fh:
+        state = json.load(fh)
+    return schedule.versandpause(state)
+
+
+def termin_reservieren(root: str) -> None:
+    """Vor sendNow schreiben; selbst ein Prozessabbruch verbraucht diesen Termin."""
+    state = lade_state(root)
+    termine = state.get("versand_termine", [])
+    if "versand_termine" not in state and state.get("zuletzt_versandt"):
+        termine = [state["zuletzt_versandt"]]
+    state["versand_termine"] = (termine + [schedule.jetzt().isoformat()])[-60:]
+    speichere_state(root, state)
+    if lade_state(root).get("versand_termine") != state["versand_termine"]:
+        raise OSError("Versandtermin konnte nicht verifiziert werden")
+
+
 def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
              test_adresse: str = "", preheader: str = "") -> int:
     """Kampagne bei Brevo anlegen und senden. Dreifach verriegelt, s. Dokumentation.
@@ -1490,6 +1530,15 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         if sperre:
             print(f"   ❌ kein Listen-Versand: {sperre}")
             return 1
+    if not test_adresse:
+        try:
+            pause = kadenz_pruefen(root)
+        except (OSError, ValueError, TypeError, AttributeError) as exc:
+            print(f"   ❌ kein Listen-Versand: Versandhistorie nicht sicher lesbar: {exc}")
+            return 1
+        if pause:
+            print(f"   ℹ️  {pause}")
+            return 0
     absender = absender_konfig(root)
     # live=False bei Testversand: die Prüfung „Liste hat 0 Abonnenten“ gilt nur
     # dem echten Listen-Versand (sendNow). Ein sendTest trifft genau eine
@@ -1537,6 +1586,12 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     pfad = (f"emailCampaigns/{kennung}/sendTest" if test_adresse
             else f"emailCampaigns/{kennung}/sendNow")
     body = {"emailTo": test_adresse} if test_adresse else {}
+    if not test_adresse:
+        try:
+            termin_reservieren(root)
+        except (OSError, ValueError, TypeError) as exc:
+            print(f"   ❌ kein Versand: Versandtermin nicht sicher gespeichert: {exc}")
+            return 1
     code2, antwort2 = TRANSPORT(key, pfad, body)
     if code2 not in (200, 201, 202, 204):
         # Der seltene, teure Fall: die Antwort auf den Sende-Aufruf ist verloren
@@ -1597,9 +1652,10 @@ def _status_schreiben(root: str, kennung, betreff: str, test_adresse: str, *,
     """
     try:
         state = lade_state(root)
-        state.update({"zuletzt_versandt": datetime.datetime.now(datetime.timezone.utc)
-                      .isoformat(timespec="seconds"),
-                      "kampagne_id": kennung})
+        id_feld = "test_kampagne_id" if test_adresse else "kampagne_id"
+        zeit_feld = "zuletzt_getestet" if test_adresse else "zuletzt_versandt"
+        state.update({zeit_feld: datetime.datetime.now(datetime.timezone.utc)
+                      .isoformat(timespec="seconds"), id_feld: kennung})
         if not test_adresse:
             # Nur nach echtem Versand: ein Testlauf war keine Ausgabe, und wer ihn
             # zählte, müsste sich bald über sich selbst wundern (Q15, Duplikatschutz).
@@ -1617,7 +1673,7 @@ def _status_schreiben(root: str, kennung, betreff: str, test_adresse: str, *,
         speichere_state(root, state)
         # Nachkontrolle: gelesen, was geschrieben wurde. lade_state ist tolerant
         # (kaputtes JSON → {}) – Toleranz ist hier der stille Doppelversand.
-        if lade_state(root).get("kampagne_id") != kennung:
+        if lade_state(root).get(id_feld) != kennung:
             raise OSError("Nachkontrolle: Status trägt die Kampagnen-ID nicht "
                           "(Schreib- oder Lesefehler)")
     except OSError as exc:
@@ -1681,7 +1737,7 @@ def main(argv=None) -> int:
                     help="Versand trotz QA-Funden (Betreuer-Ausnahme; Funde werden "
                          "dennoch protokolliert)")
     ap.add_argument("--test-adresse", default="")
-    ap.add_argument("--days", type=int, default=1)
+    ap.add_argument("--days", type=int, default=schedule.RUECKBLICK_TAGE)
     ap.add_argument("--out", default="")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--selftest", action="store_true")
@@ -1714,8 +1770,28 @@ def main(argv=None) -> int:
     if not args.build:
         return rc_gesamt
 
-    heute = datetime.date.today()
-    state = lade_state(root)
+    # Vor einem Live-Build prüfen, damit eine Pause auch vor Pending/QA greift.
+    if args.send and args.live and not args.test_adresse:
+        try:
+            pause = kadenz_pruefen(root)
+        except (OSError, ValueError, TypeError, AttributeError) as exc:
+            print(f"❌ Versandstatus nicht sicher lesbar: {exc}")
+            return 1
+        if pause:
+            print(f"ℹ️  {pause}")
+            return rc_gesamt
+    heute = schedule.jetzt().date()
+    pfad, _, _ = zustand_konfig(root)
+    try:
+        with open(os.path.join(root, pfad), encoding="utf-8") as fh:
+            state = json.load(fh)
+        if not isinstance(state, dict):
+            raise ValueError("Versandstatus ist kein Objekt")
+    except FileNotFoundError:
+        state = {}  # nur Vorschau/Erstaufbau; Live ohne Status wurde oben gesperrt
+    except (OSError, ValueError) as exc:
+        print(f"❌ Versandstatus defekt, nicht überschrieben: {exc}")
+        return 1
     halt = sperre_pruefen(root)
     if halt:
         # Nicht nur im Sendeschritt: ein Lauf, der den Halt verschweigt, lässt
@@ -1748,7 +1824,7 @@ def main(argv=None) -> int:
     print(f"📬 Digest gebaut: {anzahl} Artikel → {out_dir}/digest-{heute.isoformat()}.html")
     for a in artikel[:8]:
         print(f"   • {a['titel'][:66]} ({a['datum']})")
-    state["pending"] = [a["slug"] for a in artikel]
+    state["pending"] = [a["slug"] for a in ausgabe["material"]]
     speichere_state(root, state)
     # Vor-Versand-Prüfung: die Wache kennt das gebaute E-Mail, nicht die Absicht.
     pruef = qa.pruefe(ausgabe, konf=studio.konfiguration(root), materiale=ausgabe["material"],

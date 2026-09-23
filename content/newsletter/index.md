@@ -1,8 +1,8 @@
 ---
-title: "Newsletter: eine Mail pro Werktag, nur mit Rechner"
+title: "Dein Spar-Newsletter. Zweimal pro Woche."
 description: "Anmeldung zum Newsletter von FranksFinanzcheck: was drinsteht, wie die Anmeldung läuft (Double-Opt-In), wie du Themen wählst und wie du dich wieder abmeldest."
 url: "/newsletter/"
-summary: "Anmeldung zum Newsletter von FranksFinanzcheck: eine Mail pro Werktag mit den Sparechnungen des Tages, Double-Opt-In, Themenauswahl, jederzeit kündbar."
+summary: "Anmeldung zum Newsletter von FranksFinanzcheck: zwei Mails pro Woche mit ausgewählten Spartipps und Rechnern, Double-Opt-In, Themenauswahl, jederzeit kündbar."
 robotsNoIndex: true
 sitemap:
   disable: true
@@ -13,20 +13,26 @@ disableShare: true
 comments: false
 cover:
   image: "images/covers/brand-franksfinanzcheck.jpg"
-  alt: "FranksFinanzcheck Newsletter – eine Mail pro Werktag"
+  alt: "FranksFinanzcheck Newsletter – zwei Mails pro Woche"
   caption: "Tipp von FranksFinanzcheck"
 ---
 
 Der Newsletter ist der schnellste Weg, die Rechnungen von FranksFinanzcheck
-direkt im Postfach zu haben. Keine Rabatt-Post, kein tägliches Rauschen: pro
-Werktag **eine** Mail mit den neuen Vergleichen, Rechnern und Preisänderungen,
+direkt im Postfach zu haben. Keine Rabatt-Post, kein tägliches Rauschen:
+**Dienstag und Freitag** eine Mail mit neuen Vergleichen, Rechnern und Preisänderungen,
 die wirklich Geld bewegen.
+
+## Kostenlos anmelden
+
+{{< newsletter_form >}}
+
+## So sieht eine Ausgabe aus
 
 {{< newsletter_muster >}}
 
 ## Was drin steht – und was nicht
 
-- **Die Bewegungen des Tages** bei Strom, Gas, Internet und Kontobedingungen –
+- **Die wichtigsten Entwicklungen** bei Strom, Gas, Internet und Kontobedingungen –
   mit Zahl, nicht mit Adjektiv.
 - **Rechner und Tabellen** aus dem Blog, wenn sich ein Tarifkorridor geändert hat.
 - **Was sich für dich ändert**: Fristen, Preisgarantien, Kündigungszeiträume,
@@ -37,16 +43,14 @@ nur einen Link enthalten. Der Inhalt ist so gebaut, dass du auch nach zwei
 Wochen Postfach-Pause nichts Wichtiges verpasst hast – jede Mail nennt Stand,
 Zahl und Frist, nicht nur die Schlagzeile.
 
-## Anmeldung: zwei Klicks
-
-{{< newsletter_form >}}
-
 ## Nach der Anmeldung
 
 1. Du bekommst eine Bestätigungs-Mail (Double-Opt-In). Ohne diesen Klick passiert
    nichts – niemand kann dich ohne dein Zutun eintragen.
-2. Ab dann kommt die Mail pro Werktag gegen 07:00 Uhr, mit einem Abmeldelink unten
-   in jeder Ausgabe.
+2. Ab dann erscheint der Newsletter **dienstags und freitags**, höchstens zweimal
+   pro Kalenderwoche. Geplant ist der Versand morgens (07:05 Uhr im Sommer,
+   06:05 Uhr im Winter, deutsche Zeit); die Zustellung kann sich verzögern.
+   Gibt es keine neuen Inhalte, fällt die Ausgabe aus. Jede Ausgabe enthält einen Abmeldelink.
 3. Deine Adresse liegt beim E-Mail-Dienstleister, nicht auf diesem Server. Wie
    damit umgegangen wird, steht in den [Datenschutzhinweisen](/datenschutz/).
 

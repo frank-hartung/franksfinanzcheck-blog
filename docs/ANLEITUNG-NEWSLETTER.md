@@ -1,7 +1,7 @@
 # 📬 ANLEITUNG: Vollautomatisierter Newsletter (Brevo, kostenlos)
 
-An Werktagen um 07:05 (MESZ) baut der Blog **eine** Mail mit den Artikeln des
-Tages – Double-Opt-In, Abmeldelink, kein manueller Eingriff. Diese Anleitung:
+**Dienstag und Freitag um 05:05 UTC** (07:05 MESZ / 06:05 MEZ) baut der Blog
+**eine** Mail mit ausgewählten Artikeln der letzten sieben Tage – Double-Opt-In, Abmeldelink, kein manueller Eingriff. Diese Anleitung:
 einmalig ca. 15 Minuten (danach nie wieder anfassen).
 
 **Was im Repo liegt – und wer es prüft.** (Schicht für Schicht, damit „gebaut“
@@ -118,7 +118,7 @@ bauen, nie senden):
 |---|---|
 | `newsletterFormAction` | echtes Inline-Formular auf `/newsletter/` (POST an die gehostete Brevo-Formular-URL, Feld `email`) – Leser verlässt die Seite nicht |
 | `newsletterFormUrl` | Button, der das gehostete Brevo-Formular in neuem Tab öffnet |
-| `newsletterPromise` | der Satz über dem Feld („eine Mail pro Werktag …") |
+| `newsletterPromise` | der Satz über dem Feld („zwei Mails pro Woche …") |
 
 Sobald eines der beiden Felder gefüllt ist: Footer-CTA auf allen Inhaltsseiten,
 Formular auf `/newsletter/`, und die Wache verlangt zusätzlich den
@@ -146,12 +146,12 @@ Actions → **Newsletter-Daily (Capture-Wache + Digest) → Run workflow**:
    Konfigurationsbefunde) und baut den Digest nach `/tmp`.
 2. `test_adresse` = deine Adresse, `live` **aus** → Testversand über Brevo
    (`sendTest`), die Liste wird nicht angefasst.
-3. `live` **an** + `tage=1` → echter Versand an die Liste; der Digest merkt sich
+3. `live` **an** + `tage=7` → echter Versand an die Liste, nur am erlaubten Versandtag; der Digest merkt sich
    die Artikel in `data/newsletter_state.json` und baute sie nicht noch einmal
    (deshalb ist die Datei versioniert).
 
 Von Hand: `python3 scripts/newsletter_digest.py --check` /
-`--build --days 1` / `--build --send --live`. Status: `data/newsletter_state.json`
+`--build --days 7` / `--build --send --live`. Status: `data/newsletter_state.json`
 (zuletzt_versandt, kampagne_id, versandene_artikel) und der Lauf selbst.
 
 4. **Zustellbarkeit messen** (vor dem ersten `live`, und nach jeder DNS-Änderung):
@@ -180,10 +180,17 @@ Von Hand: `python3 scripts/newsletter_digest.py --check` /
 
 ## ❓ FAQ
 
-- **Zwei Artikel in einem Tag?** Beide landen in EINER Abend-Mail (Digest). Leser-Freundlichkeit > Frequenz.
+- **Zwei Artikel in einem Tag?** Beide landen in EINER geplanten Ausgabe (Digest). Leser-Freundlichkeit > Frequenz.
 - **Anmeldezahlen sehen?** Brevo → Contacts → Listen.
 - **Kostenlos bis?** 300 Mails/Tag. Danach Entscheidung: ab 9 $/Monat oder Sub-Listen.
 - **Kill-Switch:** Workflow deaktivieren oder Secret löschen
   (ohne `BREVO_API_KEY` baut der Lauf nur, er versendet nichts).
-- **Was, wenn ich den Digest nicht täglich will?** Cron im Workflow ändern
-  (`5 5 * * 1-5`) – Versandfrequenz ist eine Datei, kein Umbau.
+- **Versandgrenze:** Dienstag und Freitag, maximal zwei Ausgaben pro Kalenderwoche
+  (Europe/Berlin). `newsletter_schedule.py` sichert auch manuelle Aufrufe ab.
+  Cron und Nachhol-Wache laufen nur an diesen Tagen (`2,5`).
+- **Keine neuen Artikel?** Kein Versand. Bestätigungsmails und bewusst ausgelöste
+  Einzeltests sind keine Newsletter-Ausgaben.
+- **Statusdatei fehlt/ist defekt?** Kein Listenversand. Nicht löschen oder leeren:
+  zuerst anhand der Brevo-Kampagnenhistorie rekonstruieren. `versand_termine`
+  reserviert einen Termin vor dem Sendeaufruf; auch bei einem Fehler bleibt er
+  vorsichtshalber belegt. Ein fehlgeschlagener Status-Push ist ein harter Fehler.

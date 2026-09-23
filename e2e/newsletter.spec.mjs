@@ -43,7 +43,7 @@ const HINTERGRUND = `(el) => {
   while (knoten && knoten !== document.documentElement) {
     const farbe = getComputedStyle(knoten).backgroundColor;
     const teile = (farbe.match(/[\\d.]+/g) || []).map(Number);
-    if (teile.length >= 4 && teile[3] > 0) return teile.slice(0, 3);
+    if (teile.length >= 3 && (teile.length === 3 || teile[3] > 0)) return teile.slice(0, 3);
     knoten = knoten.parentElement;
   }
   const teile = (getComputedStyle(document.body).backgroundColor.match(/[\\d.]+/g) || []).map(Number);
@@ -68,9 +68,11 @@ async function farbenVon(page, selector) {
       const el = document.querySelector(sel);
       if (!el) return null;
       const stil = getComputedStyle(el);
-      const vorn = (stil.color.match(/[\d.]+/g) || []).map(Number).slice(0, 3);
+      const rgba = (stil.color.match(/[\d.]+/g) || []).map(Number);
       // eslint-disable-next-line no-new-func
       const hinten = new Function('el', `return (${quer})(el)`)(el);
+      const alpha = rgba.length > 3 ? rgba[3] : 1;
+      const vorn = rgba.slice(0, 3).map((c, i) => c * alpha + hinten[i] * (1 - alpha));
       return { vorn, hinten, schrift: parseFloat(stil.fontSize) };
     },
     [selector, HINTERGRUND],
@@ -250,4 +252,61 @@ test.describe('Newsletter', () => {
     );
     expect(anzahl, 'Übergang abseits von transform/opacity/color').toBe(0);
   });
+});
+
+// Der sichtbare Einstieg muss auch ohne Script und auf schmalen Displays tragen.
+for (const breite of [320, 390, 768, 1280]) {
+  test(`Blog-Kopf: sichtbarer Anmeldeweg, Kontrast und kein Overflow (${breite}px)`, async ({ page }) => {
+    await page.setViewportSize({ width: breite, height: 900 });
+    for (const modus of ['light', 'dark']) {
+      await page.goto('/');
+      await page.evaluate((m) => {
+        localStorage.setItem('theme', m);
+        document.documentElement.setAttribute('data-theme', m);
+      }, modus);
+      const box = page.locator('.ff-nl-top');
+      await expect(box).toHaveCount(1);
+      await expect(page.locator('.newsletter-footer')).toHaveCount(1);
+      await expect(box).toContainText('Nur 2× pro Woche');
+      await expect(box).toContainText('Dienstag & Freitag');
+      const cta = box.locator('a');
+      const rect = await cta.boundingBox();
+      expect(rect.y + rect.height).toBeLessThan(900);
+      expect(rect.height).toBeGreaterThanOrEqual(44);
+      const position = await page.evaluate(() => ({
+        banner: document.querySelector('.ff-nl-top').getBoundingClientRect().bottom,
+        main: document.querySelector('main').getBoundingClientRect().top,
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      }));
+      expect(position.banner).toBeLessThanOrEqual(position.main);
+      expect(position.overflow).toBe(false);
+      for (const sel of ['.ff-nl-top__title', '.ff-nl-top__description', '.ff-nl-top__meta', '.ff-nl-top__cta']) {
+        const farben = await farbenVon(page, sel);
+        expect(kontrast(farben.vorn, farben.hinten), `${sel} ${modus}`).toBeGreaterThanOrEqual(4.5);
+      }
+      await cta.focus();
+      expect(await cta.evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe('none');
+      await cta.press('Enter');
+      await expect(page).toHaveURL(/\/newsletter\/#newsletter-anmeldung$/);
+      await expect(page.locator('#newsletter-anmeldung')).toBeInViewport();
+      await expect(page.locator('.newsletter-footer')).toHaveCount(0);
+    }
+  });
+}
+
+test('Newsletter-Kopf auf Übersicht und Artikel, ohne JavaScript erreichbar', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  try {
+    await page.goto(`${baseURL}/posts/`);
+    await expect(page.locator('.ff-nl-top')).toHaveCount(1);
+    const href = await page.locator('article.post-entry a[href*="/posts/"]').first().getAttribute('href');
+    await page.goto(`${baseURL}${new URL(href, baseURL).pathname}`);
+    await expect(page.locator('.ff-nl-top')).toHaveCount(1);
+    await expect(page.locator('.newsletter-footer')).toHaveCount(1);
+    await page.locator('.ff-nl-top__cta').click();
+    await expect(page.locator('#newsletter-anmeldung')).toBeInViewport();
+  } finally {
+    await context.close();
+  }
 });

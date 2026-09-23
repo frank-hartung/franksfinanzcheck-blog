@@ -2,14 +2,14 @@
 #  NEWSLETTER-KADENZ-WACHE – der planmäßige Lauf wird nachgezählt
 #
 #  WARUM (23.09.2026, Lauf fehlt still):
-#  Der Cron des Newsletter-Daily (05:05 UTC, Mo–Fr) kam an diesem
+#  Der Cron des Newsletter-Daily (05:05 UTC, Di/Fr) kam an diesem
 #  Werktag GAR NICHT – kein Lauf, kein Rotton, keine Meldung. GitHub
 #  verwirft oder verschiebt schedule-Ereignisse unter Last (am Vortag
 #  kam er erst ~10:05 UTC). Ein Lauf, der nie startet, kann nicht rot
 #  werden: kein Ereignis für das Fehler-Alerting, keine Annotation,
 #  nichts. „Ausgefallen ist nicht bestanden“ – diesmal für Workflows.
 #
-#  DIESE WACHE: zählt jeden Werktag vormittags nach, ob der
+#  DIESE WACHE: zählt dienstags und freitags vormittags nach, ob der
 #  Newsletter-Daily ÜBERHAUPT versucht wurde (Fenster ab 04:00 UTC).
 #  Fehlt jeder Versuch, holt sie den Lauf mit `planmaessig=true` nach –
 #  exakt die Freigabestufe des verpassten Crons, nicht mehr (der
@@ -30,7 +30,7 @@ name: Newsletter-Kadenz-Wache
 
 on:
   schedule:
-    - cron: "11 8 * * 1-5"    # 08:11 UTC = 10:11 MESZ – nach dem Soll-Termin,
+    - cron: "11 8 * * 2,5"    # 08:11 UTC = 10:11 MESZ – nach dem Soll-Termin,
                               # weit genug davor/danach für verschobene Crons
   workflow_dispatch: {}
 

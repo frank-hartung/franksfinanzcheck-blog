@@ -178,10 +178,10 @@ Diese Website enthält Links zu externen Websites Dritter. Auf die Datenverarbei
 
 ## 8. Newsletter / Kontaktaufnahme
 
-{{< newsletter_status >}} Du kannst dich über [die Anmeldeseite](/newsletter/) oder das Formular im Fußbereich für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben (Themenwahl, Bestätigungszeitpunkt, Anmeldezeitpunkt).
+{{< newsletter_status >}} Du kannst dich über [die Anmeldeseite](/newsletter/) oder den Anmeldelink im Kopfbereich des Blogs für den Newsletter von FranksFinanzcheck anmelden. Dafür verarbeiten wir deine E-Mail-Adresse sowie die im Formular zusätzlich angegebenen Angaben (Themenwahl, Bestätigungszeitpunkt, Anmeldezeitpunkt).
 
 - **Double-Opt-In.** Nach der Anmeldung senden wir eine Bestätigungs-Mail. Der Newsletter wird erst nach deinem Klick auf den Bestätigungslink verschickt. Wir speichern Anmeldezeitpunkt, Bestätigungszeitpunkt und deine IP-Adresse, um nachweisen zu können, dass die Anmeldung von dir stammt (Art. 6 Abs. 1 lit. a, Art. 7 Abs. 1 DSGVO).
-- **Inhalt und Kadenz.** Eine Mail pro Werktag: die Sparechnungen, Tariffristen und Rechner des Tages aus dem Blog.
+- **Inhalt und Kadenz.** Höchstens zwei Newsletter pro Kalenderwoche, dienstags und freitags: ausgewählte Spartipps, Tariffristen und Rechner aus dem Blog. Die Bestätigungs-Mail zur Anmeldung (Double-Opt-In) wird zusätzlich ausgelöst.
 - **Rechtsgrundlage.** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 - **Speicherdauer.** Deine Adresse bleibt auf der Liste, bis du dich abmeldest. Nach der Abmeldung löschen wir die Adresse innerhalb von 30 Tagen; Nachweise zur erteilten Einwilligung bewahren wir gemäß Art. 7 Abs. 1 DSGVO für 3 Jahre auf (berechtigtes Interesse zur Abwehr von Ansprüchen).
 - **Widerruf.** Jeder Newsletter enthält am Ende einen Link, mit dem du die Liste sofort verlässt. Du kannst die Einwilligung außerdem jederzeit mit Wirkung für die Zukunft widerrufen, z. B. formlos per Mail an die in der Impressum-Seite genannte Adresse (kontakt@franksfinanzcheck.de).

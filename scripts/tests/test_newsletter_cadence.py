@@ -32,8 +32,8 @@ def _load(name: str, path: str):
 
 nc = _load("newsletter_cadence", os.path.join(ROOT, "scripts", "newsletter_cadence.py"))
 
-# 23.09.2026 = Mittwoch: der Tag des still ausgefallenen 05:05-Crons.
-MITTWOCH = dt.datetime(2026, 9, 23, 8, 11, tzinfo=dt.timezone.utc)
+# 25.09.2026 = Freitag: Ausfall-Szenarien unter der neuen Di/Fr-Kadenz.
+FREITAG = dt.datetime(2026, 9, 25, 8, 11, tzinfo=dt.timezone.utc)
 SAMSTAG = dt.datetime(2026, 9, 26, 8, 11, tzinfo=dt.timezone.utc)
 
 
@@ -46,7 +46,7 @@ def lauf(cid: str, erstellt: str, status: str = "completed",
 
 class Entscheidung(unittest.TestCase):
     def test_vorfall_werktag_ohne_jeden_versuch_wird_nachgeholt(self):
-        erg = nc.entscheide([lauf("alt", "2026-09-22T10:05:00Z")], MITTWOCH)
+        erg = nc.entscheide([lauf("alt", "2026-09-22T10:05:00Z")], FREITAG)
         self.assertEqual("nachholen", erg["handlung"])
         self.assertIn("05:05", erg["befund"], "Befund nennt den Soll-Termin")
         self.assertIsNone(erg["heutiger_lauf"])
@@ -56,22 +56,22 @@ class Entscheidung(unittest.TestCase):
         self.assertEqual("ruhetag", erg["handlung"])
 
     def test_fenstergrenze_04_00_utc(self):
-        zu_frueh = nc.entscheide([lauf("x", "2026-09-23T03:59:00Z")], MITTWOCH)
-        puenktlich = nc.entscheide([lauf("y", "2026-09-23T05:06:00Z")], MITTWOCH)
+        zu_frueh = nc.entscheide([lauf("x", "2026-09-25T03:59:00Z")], FREITAG)
+        puenktlich = nc.entscheide([lauf("y", "2026-09-25T05:06:00Z")], FREITAG)
         self.assertEqual("nachholen", zu_frueh["handlung"])
         self.assertEqual("bedient", puenktlich["handlung"])
 
     def test_gestriger_lauf_zaehlt_nicht_fuer_heute(self):
-        erg = nc.entscheide([lauf("gestern", "2026-09-22T10:05:00Z")], MITTWOCH)
+        erg = nc.entscheide([lauf("gestern", "2026-09-22T10:05:00Z")], FREITAG)
         self.assertEqual("nachholen", erg["handlung"],
                          "der verschobene Cron vom Dienstag ist kein heutiger")
 
     def test_laufender_und_roter_lauf_brauchen_kein_nachholen(self):
         unterwegs = nc.entscheide(
-            [lauf("u", "2026-09-23T06:30:00Z", status="in_progress")], MITTWOCH)
+            [lauf("u", "2026-09-25T06:30:00Z", status="in_progress")], FREITAG)
         self.assertEqual("bedient", unterwegs["handlung"])
         rot = nc.entscheide(
-            [lauf("r", "2026-09-23T05:07:00Z", conclusion="failure")], MITTWOCH)
+            [lauf("r", "2026-09-25T05:07:00Z", conclusion="failure")], FREITAG)
         self.assertEqual("bedient", rot["handlung"])
         self.assertIn("ROT", rot["befund"],
                       "roter Lauf wird laut gemeldet, aber nicht wiederholt")
@@ -79,33 +79,33 @@ class Entscheidung(unittest.TestCase):
     def test_muell_timestamp_bricht_nichts(self):
         erg = nc.entscheide([{"id": "x", "status": "completed",
                               "conclusion": "success", "created_at": "Müll",
-                              "url": "", "event": "schedule"}], MITTWOCH)
+                              "url": "", "event": "schedule"}], FREITAG)
         self.assertEqual("nachholen", erg["handlung"])
 
     def test_fenster_start_faellt_in_den_vortag_vor_vier_uhr(self):
-        frueh = dt.datetime(2026, 9, 23, 2, 0, tzinfo=dt.timezone.utc)
-        self.assertEqual(dt.datetime(2026, 9, 22, 4, 0, tzinfo=dt.timezone.utc),
+        frueh = dt.datetime(2026, 9, 25, 2, 0, tzinfo=dt.timezone.utc)
+        self.assertEqual(dt.datetime(2026, 9, 24, 4, 0, tzinfo=dt.timezone.utc),
                          nc.fenster_start(frueh))
 
 
 class Verdrahtung(unittest.TestCase):
     def test_trockenlauf_meldet_befund_ohne_dispatch(self):
-        erg = nc.pruefen("org/repo", jetzt=MITTWOCH, ohne_dispatch=True,
+        erg = nc.pruefen("org/repo", jetzt=FREITAG, ohne_dispatch=True,
                          laeufe=[lauf("alt", "2026-09-22T10:05:00Z")])
         self.assertEqual(1, erg["rc"])
         self.assertTrue(erg["dispatch"].startswith("uebersprungen"))
         self.assertIn("nachgeholt", erg["befund"])
 
     def test_bedienter_tag_und_ruhetag_sind_gruen(self):
-        erg = nc.pruefen("org/repo", jetzt=MITTWOCH, ohne_dispatch=True,
-                         laeufe=[lauf("heute", "2026-09-23T05:06:00Z")])
+        erg = nc.pruefen("org/repo", jetzt=FREITAG, ohne_dispatch=True,
+                         laeufe=[lauf("heute", "2026-09-25T05:06:00Z")])
         self.assertEqual(0, erg["rc"])
         leer = nc.pruefen("org/repo", jetzt=SAMSTAG, ohne_dispatch=True, laeufe=[])
         self.assertEqual(0, leer["rc"])
 
     def test_md_report_traegt_befund_und_aktion(self):
-        erg = nc.pruefen("org/repo", jetzt=MITTWOCH, ohne_dispatch=True,
-                         laeufe=[lauf("heute", "2026-09-23T05:06:00Z")])
+        erg = nc.pruefen("org/repo", jetzt=FREITAG, ohne_dispatch=True,
+                         laeufe=[lauf("heute", "2026-09-25T05:06:00Z")])
         md = nc.als_md(erg)
         self.assertIn("Newsletter-Kadenz", md)
         self.assertIn("Kadenz gewahrt", md)

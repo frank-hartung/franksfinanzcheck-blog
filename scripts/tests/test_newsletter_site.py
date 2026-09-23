@@ -216,38 +216,20 @@ class Streifen(unittest.TestCase):
         self.assertIn("$nl.aktiv", strip, "ohne Anmeldeweg darf kein Kasten stehen")
 
     def test_doppel_cta_wird_verhindert(self):
-        strip = _text(STRIP)
-        self.assertIn("$paramGedeckt", strip)
-        for parameter in ("newsletterFormAction", "newsletterFormUrl"):
-            self.assertIn(parameter, strip,
-                          f"extend_footer reactiert auf {parameter} – der Streifen muss das wissen")
+        self.assertNotIn('<div class="newsletter-footer">', _text("layouts/_partials/extend_footer.html"))
+        self.assertNotIn('partial "newsletter_strip.html"', _text("layouts/_default/single.html"))
 
-    def test_artikel_streifen_haengt_an_posts_und_nur_dort(self):
-        # Das Projekt hat zwei single-Templates, und Hugo nimmt für Posts
-        # `layouts/_default/single.html`; `layouts/single.html` wird verdeckt und
-        # rendert stillschweigend nie. Ein Include im verdeckten Datei-Zweig ist
-        # deshalb kein Include – dieser Test hält die Unterscheidung fest.
-        lebt = "layouts/_default/single.html"
-        single = _text(lebt)
-        pos_eins = single.find('if eq .Section "posts"')
-        pos_strip = single.find('partial "newsletter_strip.html"')
-        self.assertGreater(pos_eins, -1, "single.html hat keine posts-Bedingung")
-        self.assertGreater(pos_strip, pos_eins,
-                           "der Artikel-Streifen hängt außerhalb der posts-Bedingung")
-        self.assertNotIn('partial "newsletter_strip.html"', _text("layouts/single.html"),
-                         "layouts/single.html ist verdeckt – dort hängt der Streifen ins Leere")
+    def test_blog_streifen_steht_vor_dem_hauptinhalt(self):
+        base = _text("layouts/baseof.html")
+        self.assertLess(base.index('partial "header.html"') if 'partial "header.html"' in base
+                        else base.index('partialCached "header.html"'), base.index('partial "newsletter_strip.html"'))
+        self.assertLess(base.index('partial "newsletter_strip.html"'), base.index('<main'))
 
     def test_genau_ein_streifen_pro_artikelseite(self):
-        """Nach dem Artikel steht der Streifen; der Fuß rückt auf derselben Seite
-        nicht noch einmal ein – sonst zählt e2e/newsletter.spec.mjs zwei Kästen und
-        die Seite wirbt doppelt für denselben Weg."""
         strip = _ohne_kommentare(_text(STRIP))
-        self.assertIn('$section = .Section', _text(STRIP),
-                      "der Streifen muss die Sektion der Seite kennen")
-        self.assertRegex(
-            strip,
-            r'not\s*\(\s*and\s*\(\s*eq \$ort "footer"\)\s*\$bereitsImText\s*\)',
-            "die Fuß-Ausgabe weicht nicht, wenn der Streifen im Artikel schon steht")
+        self.assertIn('eq $seite.Section "posts"', strip)
+        self.assertIn('and $blog (eq $ort "kopf")', strip)
+        self.assertIn('and (not $blog) (eq $ort "footer")', strip)
 
     def test_kein_set_in_den_templates(self):
         """Hugo kennt kein `set`/`unset`: ein einziger Aufruf bricht den Build ab
