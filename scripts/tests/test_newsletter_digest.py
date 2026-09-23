@@ -250,8 +250,15 @@ class DigestUndVersand(unittest.TestCase):
     def test_versand_verriegelt_ohne_key_und_bestaetigung(self):
         aufgerufen = []
         echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+
+        def spy_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": true}]}'
+            return 200, '{"id": 7, "totalSubscribers": 3}'
         try:
             nd.TRANSPORT = lambda *a, **k: aufgerufen.append(a) or (201, '{"id": 9}')
+            nd.TRANSPORT_GET = spy_get
             root = tempfile.mkdtemp()
             os.makedirs(os.path.join(root, "data"), exist_ok=True)
             self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "Betreff",
@@ -269,6 +276,150 @@ class DigestUndVersand(unittest.TestCase):
             self.assertEqual(2, len(aufgerufen), "dry-run berührt das Netz")
         finally:
             nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_versand_payload_spricht_brevos_schema(self):
+        """Lauf #14 (23.09.2026) scheiterte am ersten echten Netz-Call: Der
+        Payload nannte das Feld `preheader`, das in CreateEmailCampaign nicht
+        existiert (offiziell: `previewText`), und der Absender war hart codiert.
+        Dieser Test hält den Schema-Vertrag fest."""
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+
+        def spy(api_key, pfad, payload):
+            aufgerufen.append(payload)
+            return 201, '{"id": 5}'
+
+        def spy_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, '{"senders": [{"email": "ssot@franksfinanzcheck.de", "active": true}]}'
+            return 200, '{"id": 7, "totalSubscribers": 2}'
+        try:
+            nd.TRANSPORT = spy
+            nd.TRANSPORT_GET = spy_get
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            with open(os.path.join(root, "data", "newsletter_studio.json"), "w",
+                      encoding="utf-8") as fh:
+                fh.write('{"email": {"absender": {"name": "Frank SSOT",'
+                         ' "email": "ssot@franksfinanzcheck.de"},'
+                         ' "antwort_an": "reply@franksfinanzcheck.de"}}')
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+            os.environ.pop("NEWSLETTER_ABSENDER", None)
+            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "Betreff",
+                                           dry_run=False, preheader="Vorschau"))
+            payload = aufgerufen[0]
+            self.assertIn("previewText", payload)
+            self.assertNotIn("preheader", payload)
+            self.assertEqual("Vorschau", payload["previewText"])
+            self.assertEqual(("Frank SSOT", "ssot@franksfinanzcheck.de"),
+                             (payload["sender"]["name"], payload["sender"]["email"]))
+            self.assertEqual("reply@franksfinanzcheck.de", payload["replyTo"]["email"])
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_ABSENDER",
+                        "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_vorflug_verriegelt_bevor_kampagne_entsteht(self):
+        """Absender fehlt / nicht verifiziert / Liste leer: der Versand bricht
+        ab, BEVOR bei Brevo etwas angelegt wird – mit lautsprachlichem Befund,
+        nicht erst mit der Fehlermeldung des Anbieters (Lauf #14)."""
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        try:
+            nd.TRANSPORT = lambda *a, **k: aufgerufen.append(a) or (201, '{"id": 1}')
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+
+            nd.TRANSPORT_GET = lambda a, p: (
+                (200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": false}]}')
+                if p == "senders" else (200, '{"totalSubscribers": 5}'))
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False),
+                             "unverifizierter Absender ging durch")
+            self.assertEqual([], aufgerufen, "trotz Befund wurde eine Kampagne angelegt")
+
+            nd.TRANSPORT_GET = lambda a, p: (
+                (200, '{"senders": []}') if p == "senders"
+                else (200, '{"totalSubscribers": 5}'))
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False),
+                             "fehlender Absender ging durch")
+
+            nd.TRANSPORT_GET = lambda a, p: (
+                (200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": true}]}')
+                if p == "senders" else (200, '{"totalSubscribers": 0}'))
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False),
+                             "leere Liste ging bei live durch")
+            # Der Testversand ist von der leeren Liste bewusst NICHT betroffen:
+            # er braucht zwar eine Kampagne (sendTest), trifft aber nie die Liste.
+            os.environ["NEWSLETTER_SEND"] = ""
+            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
+                                            test_adresse="probe@beispiel.de"))
+            self.assertEqual(2, len(aufgerufen),
+                             "Testversand: Kampagne anlegen + sendTest erwartet")
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_transport_wiederholt_nur_transiente_stoerungen(self):
+        """429/5xx werden bis zu dreimal probiert, ein 400 ist ein Befund und
+        wird genau einmal gemeldet – drei identische 400s ins Log zu schreiben,
+        wäre Müll, kein Anstand."""
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        http_echt = nd._http_request
+        alte_pause = nd.PAUSE_SEKUNDEN
+        try:
+            nd.PAUSE_SEKUNDEN = (0.0, 0.0)
+
+            def flaky(api_key, pfad, payload, methode):
+                aufgerufen.append(pfad)
+                return (201, '{"id": 3}') if len(aufgerufen) >= 3 else (502, "Bad Gateway")
+            nd._http_request = flaky
+            nd.TRANSPORT = nd.brevo
+            nd.TRANSPORT_GET = lambda a, p: (
+                (200, '{"senders": [{"email": "news@franksfinanzcheck.de", "active": true}]}')
+                if p == "senders" else (200, '{"totalSubscribers": 4}'))
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = "ja"
+            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False))
+            self.assertEqual(3, aufgerufen.count("emailCampaigns"),
+                             "502 wurde nicht dreimal probiert")
+            self.assertIn("emailCampaigns/3/sendNow", aufgerufen)
+
+            aufgerufen.clear()
+
+            def hart(api_key, pfad, payload, methode):
+                aufgerufen.append(pfad)
+                return 400, '{"code": "invalid_parameter", "message": "nope"}'
+            nd._http_request = hart
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False))
+            self.assertEqual(1, aufgerufen.count("emailCampaigns"),
+                             "400 wurde wiederholt statt gemeldet")
+        finally:
+            nd._http_request = http_echt
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            nd.PAUSE_SEKUNDEN = alte_pause
             for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)
