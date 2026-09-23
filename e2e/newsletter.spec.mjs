@@ -88,7 +88,11 @@ test.describe('Newsletter', () => {
       const antwort = await request.get(weg);
       expect(antwort.ok(), `${weg} nicht gebaut`).toBe(true);
       const text = await antwort.text();
-      expect(text, `${weg} ohne noindex`).toMatch(/name="robots"[^>]*noindex/i);
+      // `hugo --minify` (so deployt deploy.yml) nimmt die Anführungszeichen aus
+      // den Attributen: `<meta name=robots content=noindex, nofollow>`. Die
+      // Prüfung muss beide Formen kennen – sonst prüft sie eine Fassung, die
+      // in Produktion nie ausgeliefert wird.
+      expect(text, `${weg} ohne noindex`).toMatch(/name=["']?robots["']?[^>]*noindex/i);
       expect(text, `${weg} ohne Newsletter-Bezug`).toMatch(/newsletter/i);
     }
     // utility-Seiten gehören nicht in die Sitemap
@@ -267,7 +271,10 @@ for (const breite of [320, 390, 768, 1280]) {
       const box = page.locator('.ff-nl-top');
       await expect(box).toHaveCount(1);
       await expect(page.locator('.newsletter-footer')).toHaveCount(1);
-      await expect(box).toContainText('Nur 2× pro Woche');
+      // Der Streifen trägt das Versandversprechen: die Obergrenze pro Woche und
+      // beide Versandtage. Der Wortlaut ist Redaktion und darf sich ändern, das
+      // Versprechen nicht – deshalb die Prüfung auf den Gehalt, nicht auf den Satz.
+      await expect(box).toContainText(/zwei Mails pro Woche|2× pro Woche/i);
       await expect(box).toContainText('Dienstag & Freitag');
       const cta = box.locator('a');
       const rect = await cta.boundingBox();

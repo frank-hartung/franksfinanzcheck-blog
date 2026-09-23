@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regressionstest: newsletter_qa – die Vor-Versand-Wache (Q1..Q20).
+"""Regressionstest: newsletter_qa – die Vor-Versand-Wache (Q1..Q21).
 
 Der Selbsttest des Moduls (``--selftest``) prüft die Regeln gegeneinander. Dieser
 Test prüft die Wache gegen das, was sie im Ernstfall sieht: ein echt gebautes
@@ -36,6 +36,12 @@ def _load(name: str, path: str):
 
 studio = _load("newsletter_studio", os.path.join(SCRIPTS, "newsletter_studio.py"))
 qa = _load("newsletter_qa", os.path.join(SCRIPTS, "newsletter_qa.py"))
+# Normaler Import statt _load: der Versandvertrag muss dieselbe Modulinstanz
+# sein, die auch newsletter_digest hält – eine zweite Kopie würde
+# patch.object(ns, "jetzt") in test_newsletter_schedule.py ins Leere laufen
+# lassen (beobachtet beim Vollsuite-Lauf am 23.09.2026).
+sys.path.insert(0, SCRIPTS)
+import newsletter_schedule as plan                        # noqa: E402
 
 DATUM = datetime.date(2026, 9, 22)
 MATERIAL = studio.material_aus_artikel(ROOT, studio._artikel_suchen(ROOT, 400))
@@ -61,7 +67,7 @@ class Saubere_Ausgabe(unittest.TestCase):
                                 zustand={}, root=ROOT)
 
     def test_volles_regelwerk_und_hundert_punkte(self):
-        self.assertEqual(20, len(qa.REGELN))
+        self.assertEqual(21, len(qa.REGELN))
         self.assertGreaterEqual(self.ergebnis["regeln_geprueft"], 20)
         self.assertEqual([], self.ergebnis["funde"],
                          "das eigene Studio-Mail darf nicht durchfallen: "
@@ -191,6 +197,50 @@ class Fundrichtigkeit(unittest.TestCase):
         if "Q5" not in funde:
             self.assertTrue(er["bestanden"], "eine reine Warnung darf nicht blockieren")
 
+    def test_kadenz_widerspruch_ist_ein_fund(self):
+        """Q21: Die Kadenz ist ein Versprechen an den Leser. Ein überholtes
+        Werktags-Wort, ein verschwiegener Versandtag im Kopf, eine „nächste
+        Ausgabe“ an einem Ruhetag und ein Versandversprechen ohne Versandtage
+        sind vier Funde derselben Regel – alle vier mit demselben Kalender
+        widerlegbar."""
+        funde, _, _ = self._codes(self.email["html"].replace(
+            "Zweimal pro Woche", "Eine Mail pro Werktag"))
+        self.assertIn("Q21", funde, "überholtes Werktag-Versprechen bleibt durch")
+
+        kopf_ohne_tag = [dict(b) for b in self.email["blocks"]]
+        for b in kopf_ohne_tag:
+            if b["typ"] == "kopf":
+                b["zeile"] = "22.09.2026 · Ausgabe 39/2026"
+        er = qa.pruefe(dict(self.email, blocks=kopf_ohne_tag), konf=self.konf,
+                       materiale=self.material, zustand={}, root=ROOT)
+        self.assertIn("Q21", {f["regel"] for f in er["funde"]},
+                      "ein Kopf ohne Versandtag bleibt unbemerkt")
+
+        fuss_ruhetag = [dict(b) for b in self.email["blocks"]]
+        for b in fuss_ruhetag:
+            if b["typ"] == "fuss":
+                b["naechste"] = "Nächste Ausgabe: Mittwoch, 23. September"
+        er = qa.pruefe(dict(self.email, blocks=fuss_ruhetag), konf=self.konf,
+                       materiale=self.material, zustand={}, root=ROOT)
+        self.assertIn("Q21", {f["regel"] for f in er["funde"]},
+                      "eine nächste Ausgabe an einem Ruhetag bleibt unbemerkt")
+
+        ohne_tage = json.loads(json.dumps(self.konf))
+        ohne_tage["capture"]["versprechen"] = "Jede Woche neue Spartipps."
+        funde, _, _ = self._codes(konf=ohne_tage)
+        self.assertIn("Q21", funde, "ein Versandversprechen ohne Versandtage bleibt durch")
+
+    def test_kadenz_der_wirkliche_versandtag_besteht(self):
+        """Gegenprobe zu Q21: die gebaute Mail nennt den Wochentag und kündigt
+        den nächsten echten Versandtag an – sonst wäre die Regel Selbstzweck."""
+        fuss = next(b for b in self.email["blocks"] if b["typ"] == "fuss")
+        kopf = next(b for b in self.email["blocks"] if b["typ"] == "kopf")
+        self.assertIn("Dienstag", kopf["zeile"], "DATUM ist ein Dienstag")
+        erkannt = plan.datum_lang_erkennen(fuss["naechste"])
+        self.assertEqual("Freitag", erkannt["wochentag"])
+        soll = plan.naechster_termin(DATUM)
+        self.assertEqual((soll.day, soll.month), (erkannt["tag"], erkannt["monat"]))
+
     def test_leere_ausgabe_ist_ein_fund_und_kein_erfolg(self):
         er = qa.pruefe({"html": "", "text": "", "betreff": "", "preheader": "",
                         "blocks": [], "material": []}, konf=self.konf, materiale=[],
@@ -239,7 +289,7 @@ class Kommandozeile(unittest.TestCase):
         out = json.loads(rc.stdout)
         self.assertEqual(100, out["score"])
         self.assertIn("regeln_geprueft", out)
-        self.assertEqual(20, len(qa.REGELN))
+        self.assertEqual(21, len(qa.REGELN))
         rc_md = subprocess.run([sys.executable, os.path.join(SCRIPTS, "newsletter_qa.py"),
                                 "--build", "--days", "400", "--md"], cwd=ROOT,
                                capture_output=True, text=True)

@@ -48,6 +48,11 @@ import re
 import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Der Versandvertrag (Dienstag/Freitag, nächster Termin, deutsche Wochentagsnamen
+# ohne Locale-Falle) liegt in einer eigenen Datei: Website, Wache und Doku lesen
+# dieselbe Stelle. Kein Zirkel – newsletter_schedule importiert nichts von hier.
+import newsletter_schedule as plan                        # noqa: E402
 KONFIG_REL = os.path.join("data", "newsletter_studio.json")
 CUSTOM_CSS_REL = os.path.join("assets", "css", "extended", "custom.css")
 THEMENWELTEN_REL = os.path.join("data", "themenwelten.json")
@@ -447,6 +452,51 @@ def ausgabe_nr(datum: datetime.date) -> str:
     return f"Ausgabe {kw:02d}/{datum.year}"
 
 
+# Neutraltexte: ein Mail wird nie leer oder namenlos, weil ein Rahmen fehlt –
+# die Konfiguration darf dünner sein als der Code, aber der Versand steht.
+NEUTRAL_AUFMACHER = ("Rechne nach, bevor du bezahlst – die Ratgeber der letzten Tage "
+                     "in einer Mail, jede Zahl mit Frist und Beleg.")
+NEUTRAL_GRUSS = ("Wenn eine Rechnung bei dir nicht passt, schreib mir – ich lese "
+                 "jede Antwort.")
+NEUTRAL_VORSCHAU = "Dazu: Fristen und Tarifwechsel im Überblick."
+
+
+def kadenz_rahmen(datum: datetime.date, konf: dict) -> dict:
+    """Der Redaktionsrahmen eines Versandtags – aus `creative.kadenz`.
+
+    Zwei Mails pro Woche sind nur dann ein Abonnement und kein Rauschen, wenn
+    beide einen eigenen Auftrag haben: dienstags der Wochen-Check (was sich
+    bewegt hat), freitags der Wochen-Abschluss (was sich bis Montag erledigen
+    lässt). Die Texte stehen in der Konfiguration, weil sie Redaktion sind; die
+    FAKTEN (welche Tage, welcher Termin als Nächstes) kommen aus
+    `scripts/newsletter_schedule.py`, damit Mail und Website nicht zwei
+    Kalender kennen.
+
+    Schlüssel der Konfiguration sind `str(datum.weekday())` – keine
+    Wochentagsnamen: `strftime("%A")` liefert die Prozess-Locale („Tuesday“ auf
+    dem Runner), und eine Bedingung gegen „Freitag“ läuft dort still ins Leere.
+    """
+    reg = (konf.get("creative", {}) or {}).get("kadenz") or {}
+
+    def _feld(name: str, neutral: str) -> str:
+        wert = (reg.get(name) or {}).get(str(datum.weekday()), "")
+        return str(wert).strip() or neutral
+
+    return {
+        "schluessel": str(datum.weekday()),
+        "versandtag": plan.ist_versandtag(datum),
+        "tag": plan.wochentag(datum),
+        "tag_kurz": plan.tag_kurz(datum),
+        "ausgabe": _feld("ausgabe", "Spar-Ausgabe"),
+        "aufmacher": _feld("aufmacher", NEUTRAL_AUFMACHER),
+        "betreff": _feld("betreff", ""),
+        "vorschau": _feld("preheader_hinweis", NEUTRAL_VORSCHAU),
+        "gruss": _feld("gruss", NEUTRAL_GRUSS),
+        "naechste_zeile": bool(reg.get("naechste_zeile", True)),
+        "naechste": plan.naechste_ausgabe_text(datum),
+    }
+
+
 def spar_zahl(material: list[dict], konf: dict) -> dict:
     """Die Hero-Zahl einer Ausgabe – aus dem Material, mit den Leitplanken der Konfiguration.
 
@@ -476,11 +526,12 @@ def _titelkern(titel: str, laenge: int) -> str:
 
 
 def betreff_varianten(material: list[dict], datum: datetime.date, konf: dict) -> list[dict]:
-    """Drei Betreffzeilen, Länge als Gate – die Varianz entscheidet der Tag.
+    """Drei Betreffzeilen, Länge als Gate – die Varianz entscheidet der Versandtag.
 
-    Rotationsbasis ist der Wochentag: Montag beginnt mit der Wochenrechnung,
-    Freitag mit der Frist. Das ist keine Personalisierung, sondern Kadenz –
-    und reproduzierbar, ohne Nutzerdaten.
+    Rotationsbasis ist der Wochentag, und zwar als Zahl (1 = Dienstag,
+    4 = Freitag): keine Personalisierung, sondern Kadenz – reproduzierbar ohne
+    Nutzerdaten. Die Kadenz-Variante kommt aus `creative.kadenz`, damit die
+    Redaktion sie ändert, ohne Code anzufassen.
     """
     marke = konf.get("creative", {}).get("marke_kurz", "FranksFinanzcheck")
     max_anz = int(konf.get("email", {}).get("max_artikel", 5))
@@ -492,21 +543,25 @@ def betreff_varianten(material: list[dict], datum: datetime.date, konf: dict) ->
     reg = konf.get("creative", {}).get("betreff", {})
     max_l = int(reg.get("max_zeichen", 45))
     kern = _titelkern(erster, max_l - len(marke) - 8)
-    tag = datum.strftime("%A")
+    rahmen = kadenz_rahmen(datum, konf)
     # Jede Variante trägt die Marke: im Postfach entscheidet die Wiedererkennung,
     # ob überhaupt geöffnet wird – ein Betreff ohne Absender-Marke ist verschenktes
     # Vertrauen (QA-Regel Q8 meldet ihn als Warnung, wenn er von Hand ergänzt wird).
     varianten: list[tuple[str, str]] = []
+    # An einem Versandtag führt die Kadenz-Variante die Liste: sie ist der
+    # Auftrag des Tages und gehört in die ersten drei, die wirklich gebaut
+    # werden. Die Mengen-Variante („3 Sparechnungen heute“) ist die schwächste
+    # der vier und bleibt an Versandtagen draußen – eine Ausgabe mit Zahl und
+    # Titel braucht sie nicht. Außerhalb der Versandtage (manuelle Vorschau)
+    # gilt die alte Reihenfolge; dort behauptet die Mail keinen Wochenauftrag.
+    if rahmen["versandtag"] and rahmen["betreff"]:
+        varianten.append((f"{marke}: {rahmen['betreff']}", "kadenz"))
     if zahl["wert"]:
         varianten.append((f"{marke}: {zahl['text']} heute prüfen", "zahl"))
-    if anzahl > 1:
+    if anzahl > 1 and not (rahmen["versandtag"] and rahmen["betreff"]):
         varianten.append((f"{marke}: {anzahl} Sparechnungen heute", "menge"))
     if kern:
         varianten.append((f"{marke}: {kern}", "thema"))
-    if tag in ("Montag", "Dienstag", "Mittwoch"):
-        varianten.append((f"{marke}: Rechnungen diese Woche", "kadenz"))
-    elif tag == "Freitag":
-        varianten.append((f"{marke}: Fristen vor dem Wochenende", "kadenz"))
     if not varianten:
         varianten.append((f"{marke}: {datum.strftime('%d.%m.%Y')}", "datum"))
     reg = konf.get("creative", {}).get("betreff", {})
@@ -532,21 +587,56 @@ def betreff_varianten(material: list[dict], datum: datetime.date, konf: dict) ->
     return out
 
 
-def preheader(material: list[dict], betreff: str, konf: dict) -> str:
+# Welche Betreffvariante ein Versandtag führt. Dienstag rechnet (Zahl), Freitag
+# mahnt an die Frist (Kadenz) – beides mit Rückfall, damit ein Tag ohne Zahl
+# oder ohne Rahmen nie ohne Betreff dasteht. Vorher entschied
+# `datum.weekday() % len(var)`: bei drei Varianten landen Dienstag (1 % 3) und
+# Freitag (4 % 3) beide auf Index 1 – die „Rotation“ hat zwischen den beiden
+# Versandtagen nie unterschieden.
+VORZUG_VARIANTE = {1: ("zahl", "kadenz", "thema"), 4: ("kadenz", "zahl", "thema")}
+
+
+def variante_fuer_tag(datum: datetime.date, varianten: list[dict]) -> int:
+    """Index der Betreffvariante, die der Versandtag führt."""
+    if not varianten:
+        return 0
+    for art in VORZUG_VARIANTE.get(datum.weekday(), ()):
+        for i, v in enumerate(varianten):
+            if v.get("art") == art:
+                return i
+    return 0
+
+
+def preheader(material: list[dict], betreff: str, konf: dict,
+              datum: datetime.date | None = None) -> str:
     """Der zweite Satz in der Inbox-Vorschau – nie eine Wiederholung des Betreffs."""
     reg = konf.get("creative", {}).get("preheader", {})
     min_l, max_l = int(reg.get("min_zeichen", 40)), int(reg.get("max_zeichen", 120))
-    if material:
-        text = _clean(material[0].get("quelle_text") or material[0]["titel"], max_l)
+    rahmen = kadenz_rahmen(datum or datetime.date.today(), konf)
+    vorschau = rahmen["vorschau"].rstrip(".")
+    anriss = _clean(material[0].get("quelle_text") or material[0]["titel"]) if material else ""
+    if anriss and rahmen["versandtag"] and vorschau:
+        # Komponiert statt abgeschnitten: Der zweite Satz der Inbox-Vorschau
+        # beginnt mit dem Auftrag des Tages und reicht dann so weit in den
+        # Aufmacher, wie das Zeichenbudget trägt. Ein Preheader, der mitten im
+        # Satz endet, verschenkt genau die Zeile, die über den Öffner entscheidet.
+        platz = max(20, max_l - len(vorschau) - 3)
+        text = f"{vorschau} – {_clean(anriss, platz).rstrip(' …')}"
+    elif anriss:
+        text = _clean(anriss, max_l)
     else:
-        text = konf.get("capture", {}).get("versprechen", "")
+        text = _clean(rahmen["aufmacher"], max_l) or \
+            konf.get("capture", {}).get("versprechen", "")
     text = re.sub(r"\s+", " ", text).strip()
     if text.lower()[:min_l] == (betreff or "").lower()[:min_l]:
-        text = (text + " – ausserdem: Fristen und Tarifwechsel im Überblick").strip()
+        # Zweiter Satz statt Echo: die Ergänzung kommt aus dem Rahmen des Tages,
+        # nicht aus einer Floskel.
+        text = (text + " – " + vorschau).strip(" -")
     if len(text) < min_l:
-        text = (text + ". " + (konf.get("capture", {}).get("versprechen") or "")).strip(" .")
+        text = (text + ". " + (vorschau or
+                               konf.get("capture", {}).get("versprechen", ""))).strip(" .")
         text = _clean(text, max_l)
-    return text[:max_l].rstrip(" ,;.")
+    return text[:max_l].rstrip(" ,;.…")
 
 
 # ------------------------------------------------------------------- Layout
@@ -560,21 +650,28 @@ def blocks_bauen(material: list[dict], datum: datetime.date, konf: dict) -> list
     max_anz = int(e_mail.get("max_artikel", 5))
     versprechen = (konf.get("capture", {}) or {}).get("versprechen") or \
         "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags."
-    bl: list[dict] = [{"typ": "kopf", "titel": "FranksFinanzcheck",
-                       "zeile": f"{datum.strftime('%d.%m.%Y')} · {ausgabe_nr(datum)}",
-                       "versprechen": versprechen}]
+    rahmen = kadenz_rahmen(datum, konf)
+    bl: list[dict] = [{
+        "typ": "kopf", "titel": "FranksFinanzcheck",
+        # Der Wochentag steht im Kopf, weil die Kadenz das Versprechen ist:
+        # „Dienstag, 23.09.2026 · Ausgabe 39/2026“ beantwortet im Postfach die
+        # Frage, warum diese Mail heute kommt – ohne einen Blick ins Impressum.
+        "zeile": (f"{rahmen['tag']}, {datum.strftime('%d.%m.%Y')} · "
+                  f"{ausgabe_nr(datum)}"),
+        "ausgabe": rahmen["ausgabe"],
+        "versprechen": versprechen}]
     zahl = spar_zahl(material, konf)
     if zahl["wert"]:
         bl.append({"typ": "hero",
                    "zahl": zahl["text"],
                    "beleg": zahl["beleg"],
-                   "text": "Der größte Sparbetrag, den die Artikel dieser Ausgabe "
-                           "nennen – nachrechnen dauert keine Viertelstunde.",
+                   "text": "Der größte Sparbetrag, den diese Ausgabe nennt – die "
+                           "Rechnung dazu steht im Artikel. Nachrechnen dauert "
+                           "keine Viertelstunde.",
                    "ziel": material[0]["url"]})
     else:
         bl.append({"typ": "hero", "zahl": "", "beleg": "",
-                   "text": "Rechne nach, bevor du bezahlst – die Ratgeber der "
-                           "letzten Tage in einer Mail.",
+                   "text": rahmen["aufmacher"],
                    "ziel": "/posts/",
                    "cta": "Alle Ratgeber ansehen"})
     bl[1].setdefault("cta", "Jetzt nachrechnen")
@@ -590,14 +687,20 @@ def blocks_bauen(material: list[dict], datum: datetime.date, konf: dict) -> list
     if gruppen:
         bl.extend(gruppen[:max_anz])
     bl.append({"typ": "gruss",
-               "text": "Wenn eine Rechnung nicht passt, schreib mir – ich lese jede Antwort.",
+               "text": rahmen["gruss"],
                "antwort": e_mail.get("antwort_an", "")})
+    # Die Zeile „Nächste Ausgabe“ ist Erwartungsmanagement, kein Fülltext: wer
+    # weiß, wann die nächste Mail kommt, meldet sich seltener ab, weil eine
+    # Pause nach Plan aussieht statt nach Funkstille.
+    naechste = (rahmen["naechste"] + " – und nur, wenn es etwas zu rechnen gibt.") \
+        if rahmen["naechste_zeile"] else ""
     bl.append({"typ": "fuss",
                "anschrift": e_mail.get("rechtliches", {}).get("anschrift", ""),
                "impressum": e_mail.get("rechtliches", {}).get("impressum_url", ""),
                "datenschutz": e_mail.get("rechtliches", {}).get("datenschutz_url", ""),
                "hinweis": "Du erhältst diese Mail, weil du dich auf franksfinanzcheck.de "
                           "mit Double-Opt-In angemeldet hast.",
+               "naechste": naechste,
                "werbung": e_mail.get("rechtliches", {}).get("werbung_hinweis", "")})
     return bl
 
@@ -655,11 +758,17 @@ def render_html(blocks: list[dict], *, betreff: str, vorlage_text: str, datum: d
     for i, b in enumerate(blocks):
         typ = b["typ"]
         if typ == "kopf":
+            # Der Ausgaben-Name steht als Kicker unter der Marke: zwei Mails pro
+            # Woche brauchen einen erkennbaren Rhythmus, sonst liest sich die
+            # zweite wie eine Wiederholung der ersten.
+            kicker = (f'<div style="font-family:{schrift};font-size:12px;font-weight:700;'
+                      f'letter-spacing:.5px;text-transform:uppercase;color:{h["marke"]};'
+                      f'margin-top:3px;">{_esc(b["ausgabe"])}</div>') if b.get("ausgabe") else ""
             zeilen.append(
                 f'<tr><td class="kachel dk-karte" style="padding:20px 24px 16px;border-bottom:1px solid {h["grenze"]};border-radius:{runden}px {runden}px 0 0;background:{h["karte"]};">'
                 f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
                 f'<td class="spalte" style="font-family:{schrift};font-size:17px;font-weight:700;color:{h["headline"]};letter-spacing:.2px;">'
-                f'{_esc(b["titel"])}</td>'
+                f'{_esc(b["titel"])}{kicker}</td>'
                 f'<td class="spalte" align="right" style="font-family:{schrift};font-size:12.5px;color:{h["sekundaer"]};">'
                 f'{_esc(b["zeile"])}</td></tr></table>'
                 f'<div class="dk-text" style="margin-top:8px;font-family:{schrift};font-size:14px;line-height:1.5;color:{h["sekundaer"]};">'
@@ -714,9 +823,15 @@ def render_html(blocks: list[dict], *, betreff: str, vorlage_text: str, datum: d
             if marken.get("profil"):
                 marken_links.append(f'<a href="{_esc(marken["profil"])}" style="color:{h["link"]};'
                                     f'text-decoration:underline;">Präferenzen</a>')
+            # Die Nächste-Ausgabe-Zeile steht über dem Rechtsteil: sie ist die
+            # einzige Zeile des Fußes, die dem Leser etwas sagt – Erwartung
+            # statt Funkstille. Der Rest ist Pflicht.
+            naechste = (f'<p class="dk-text" style="margin:0 0 10px;font-family:{schrift};'
+                        f'font-size:13px;line-height:1.6;color:{h["sekundaer"]};">'
+                        f'<strong>{_esc(b["naechste"])}</strong></p>') if b.get("naechste") else ""
             zeilen.append(
                 f'<tr><td class="kachel dk-karte" style="padding:18px 24px 22px;border-top:1px solid {h["grenze"]};'
-                f'border-radius:0 0 {runden}px {runden}px;background:{h["karte"]}">'
+                f'border-radius:0 0 {runden}px {runden}px;background:{h["karte"]}">{naechste}'
                 f'<p class="dk-text" style="margin:0 0 8px;font-family:{schrift};font-size:12.5px;'
                 f'line-height:1.6;color:{h["sekundaer"]};">{_esc(b["hinweis"])} '
                 f'<a href="{_esc(marken.get("unsubscribe", "#"))}" style="color:{h["link"]};'
@@ -770,7 +885,8 @@ def render_text(blocks: list[dict], *, betreff: str, konf: dict) -> str:
     zeilen = [betreff, ""]
     for b in blocks:
         if b["typ"] == "kopf":
-            zeilen += [b["titel"] + " – " + b["zeile"], b["versprechen"], ""]
+            kopf = b["titel"] + (" · " + b["ausgabe"] if b.get("ausgabe") else "")
+            zeilen += [kopf + " – " + b["zeile"], b["versprechen"], ""]
         elif b["typ"] == "hero":
             if b.get("zahl"):
                 zeilen.append("HEUTE RECHENBAR: " + b["zahl"])
@@ -787,7 +903,10 @@ def render_text(blocks: list[dict], *, betreff: str, konf: dict) -> str:
         elif b["typ"] == "gruss":
             zeilen += [b["text"], "— Frank · " + b["antwort"], ""]
         elif b["typ"] == "fuss":
-            zeilen += ["--", b["hinweis"], "Abmelden: " + str(_marken(konf)["unsubscribe"]),
+            zeilen += ["--"]
+            if b.get("naechste"):
+                zeilen.append(b["naechste"])
+            zeilen += [b["hinweis"], "Abmelden: " + str(_marken(konf)["unsubscribe"]),
                        "Präferenzen: " + str(_marken(konf)["profil"]),
                        "Im Browser: " + str(_marken(konf)["mirror"]), b["anschrift"],
                        "Impressum: " + b["impressum"], "Datenschutz: " + b["datenschutz"]]
@@ -814,14 +933,15 @@ def baue_email(material: list[dict], *, datum: datetime.date | None = None,
     material = material or []
     var = betreff_varianten(material, datum, konf)
     if variante is None:
-        # Rotation über den Tag: montags die Zahl, mittwochs das Thema, freitags
-        # die Menge – gemessen wird später, welche Variante besser öffnet.
-        index = datum.weekday() % max(1, len(var))
+        # Rotation über den Versandtag (1 = Dienstag, 4 = Freitag): dienstags
+        # führt die Zahl, freitags die Frist – redaktionell gesetzt, nicht
+        # errechnet, und ohne Nutzerdaten (siehe VORZUG_VARIANTE).
+        index = variante_fuer_tag(datum, var)
     else:
         index = variante % max(1, len(var))
     betreff = (var[index]["text"] if var else "FranksFinanzcheck – die Sparechnungen des Tages")
     blöcke = blocks_bauen(material, datum, konf)
-    vor = preheader(material, betreff, konf)
+    vor = preheader(material, betreff, konf, datum=datum)
     return {"datum": datum.isoformat(), "betreff": betreff, "betreff_varianten": var,
             "variante": index, "preheader": vor, "blocks": blöcke,
             "html": render_html(blöcke, betreff=betreff, vorlage_text=vor, datum=datum, konf=konf),

@@ -129,10 +129,34 @@
       ["Zahlen-Hero auf Soft-Fläche", "soft", "zahl", 3.0]
     ]
   },
-  "_doku_creative": "Deterministische Textfabrik – kein KI-Aufruf, damit die Funktion dauerhaft 0 Euro kostet und jeder Lauf reproduzierbar ist. Die Listen sind harte Gates der QA-Wache, keine Stilempfehlung: `verbotene_woerter` sind Angstmache- und Hype-Wörter, die im Finanzversand zugleich Abmelderate und Spam-Eindruck heben.",
+  "_doku_creative": "Deterministische Textfabrik – kein KI-Aufruf, damit die Funktion dauerhaft 0 Euro kostet und jeder Lauf reproduzierbar ist. Die Listen sind harte Gates der QA-Wache, keine Stilempfehlung: `verbotene_woerter` sind Angstmache- und Hype-Wörter, die im Finanzversand zugleich Abmelderate und Spam-Eindruck heben. `kadenz` ist der Redaktionsrahmen der beiden Versandtage: dieselbe Liste bekommt dienstags und freitags einen anderen Auftrag, damit zwei Mails pro Woche nicht zweimal dieselbe Mail sind.",
   "creative": {
     "marke_kurz": "FranksFinanzcheck",
     "du_form": true,
+    "_doku_kadenz": "Redaktionsrahmen Dienstag/Freitag. Die Schlüssel sind datetime.weekday()-Zahlen als String (\"1\" = Dienstag, \"4\" = Freitag) – keine Wochentagsnamen, weil strftime('%A') den Namen der Prozess-Locale liefert und auf dem Runner 'Tuesday' heißt (gemessen 23.09.2026). Fakten des Vertrags (welche Tage, welche Uhrzeit, nächster Termin) stehen NICHT hier, sondern in scripts/newsletter_schedule.py; hier steht nur, was redaktionell formuliert ist. Ein fehlender Eintrag fällt auf den Neutraltext des Studios zurück – ein Mail wird nie leer, weil ein Rahmen fehlt.",
+    "kadenz": {
+      "ausgabe": {
+        "1": "Wochen-Check",
+        "4": "Wochen-Abschluss"
+      },
+      "aufmacher": {
+        "1": "Die Woche beginnt mit Zahlen: was sich bei Strom, Gas, Internet und Konto seit Freitag bewegt hat – und welche Frist in den nächsten 14 Tagen Geld kostet, wenn sie verstreicht.",
+        "4": "Zum Wochenende die Rechnung, die sich noch jetzt auszahlt: eine Frist, ein Tarifkorridor, ein Rechner – nachgerechnet in einer Viertelstunde."
+      },
+      "betreff": {
+        "1": "Dein Wochen-Check",
+        "4": "Fristen vor dem Wochenende"
+      },
+      "preheader_hinweis": {
+        "1": "Preisgarantien, die auslaufen, und Rechner mit neuen Zahlen",
+        "4": "Was sich bis Montag erledigen lässt, mit Zahl und Frist"
+      },
+      "gruss": {
+        "1": "Wenn eine Rechnung bei dir anders aufgeht, schreib mir – ich lese jede Antwort und korrigiere offen, was falsch war.",
+        "4": "Wenn eine Zahl bei dir anders herauskommt, schreib mir – ich rechne nach und korrigiere offen, was falsch war."
+      },
+      "naechste_zeile": true
+    },
     "betreff": { "min_zeichen": 30, "max_zeichen": 45, "varianten": 3 },
     "preheader": { "min_zeichen": 40, "max_zeichen": 120 },
     "block_text_zeichen": 190,

@@ -65,6 +65,59 @@ class Kalender(unittest.TestCase):
             self.assertIn('tage=7', gh.call_args.args[0])
 
 
+class Redaktionsrahmen(unittest.TestCase):
+    """Die Texte und Termine der Kadenz – locale-frei und gegen den Vertrag."""
+
+    def test_wochentagsnamen_haengen_nicht_an_der_locale(self):
+        # strftime("%A") liefert „Tuesday“ auf dem Runner: die Tabelle ist der
+        # Grund, warum die Kadenz-Logik trotzdem funktioniert.
+        self.assertEqual("Dienstag", ns.wochentag(dt.date(2026, 9, 22)))
+        self.assertEqual("Freitag", ns.wochentag(dt.date(2026, 9, 25)))
+        self.assertEqual("Samstag", ns.wochentag(dt.date(2026, 9, 26)))
+        self.assertEqual("Di", ns.tag_kurz(dt.date(2026, 9, 22)))
+        self.assertEqual("Dienstag, 22. September 2026", ns.datum_lang(dt.date(2026, 9, 22)))
+        self.assertEqual("Di, 22.09.", ns.datum_kurz(dt.date(2026, 9, 22)))
+
+    def test_naechster_termin_ist_immer_ein_versandtag(self):
+        start = dt.date(2026, 9, 20)
+        for i in range(60):
+            d = start + dt.timedelta(days=i)
+            n = ns.naechster_termin(d)
+            with self.subTest(datum=d.isoformat()):
+                self.assertIn(n.weekday(), ns.VERSANDTAGE)
+                self.assertGreater(n, d, "eine Ausgabe kündigt nie sich selbst an")
+                # Freitag → Dienstag sind vier Tage: die längste Lücke des Vertrags.
+                self.assertLessEqual((n - d).days, 4)
+                self.assertTrue(ns.ist_versandtag(n))
+
+    def test_dienstag_kuendigt_freitag_an_und_freitag_dienstag(self):
+        self.assertIn("Freitag, 25. September", ns.naechste_ausgabe_text(dt.date(2026, 9, 22)))
+        self.assertIn("Dienstag, 29. September", ns.naechste_ausgabe_text(dt.date(2026, 9, 25)))
+        self.assertNotIn("2026", ns.naechste_ausgabe_text(dt.date(2026, 9, 22)),
+                         "das Jahr ist in der Fußzeile Rauschen")
+
+    def test_terminzeile_ist_ruecklesbar(self):
+        start = dt.date(2026, 12, 25)   # über den Jahreswechsel
+        for i in range(14):
+            d = start + dt.timedelta(days=i)
+            erkannt = ns.datum_lang_erkennen("Nächste Ausgabe: " + ns.datum_lang(d))
+            with self.subTest(datum=d.isoformat()):
+                self.assertEqual((ns.wochentag(d), d.day, d.month, d.year),
+                                 (erkannt["wochentag"], erkannt["tag"],
+                                  erkannt["monat"], erkannt["jahr"]))
+        self.assertIsNone(ns.datum_lang_erkennen("demnächst"))
+        self.assertIsNone(ns.datum_lang_erkennen(""))
+
+    def test_versandtexte_kommen_aus_dem_vertrag(self):
+        self.assertEqual("Dienstag und Freitag", ns.versandtage_text())
+        self.assertEqual("dienstags und freitags", ns.versandtage_adverb())
+        fenster = ns.versandfenster_text()
+        self.assertIn("dienstags und freitags", fenster)
+        self.assertIn(ns.SEND_UHRZEIT.strftime("%H:%M"), fenster)
+        self.assertIn("höchstens zwei Ausgaben", fenster)
+        self.assertIn("dienstags und freitags", ns.versandpause({}, zeit("2026-09-23")))
+
+
 class Versandpfad(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()

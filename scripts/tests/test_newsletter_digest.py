@@ -705,7 +705,11 @@ class Verdrahtung(unittest.TestCase):
             # Das Contract-Ziel der Wache: ein Formular, das wirklich postet,
             # und eine Seite, die den Weg danach erklärt.
             self.assertIn("<form", h)
-            self.assertIn('name="email"', h)
+            # `hugo --minify` (der Build des Versand-Workflows) nimmt die
+            # Anführungszeichen aus den Attributen: `name=email`. Die Prüfung
+            # muss beide Formen kennen, sonst ist sie nur im unminifizierten
+            # Build grün – nachgestellt am Basis-Commit 5eeb90a am 23.09.2026.
+            self.assertRegex(h, r'name=["\']?email')
             self.assertRegex(h, r"Double-Opt|Bestätigungsmail")
             self.assertIn("/datenschutz/", h)
             self.assertNotIn("nicht geschaltet", h)

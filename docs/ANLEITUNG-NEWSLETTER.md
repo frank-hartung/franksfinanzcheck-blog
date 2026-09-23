@@ -10,7 +10,7 @@ nicht heißt „unbelegt“.)
 | Schicht | Datei | Wache |
 |---|---|---|
 | baut die Mail: Marke, Blöcke, Betreff, Textalternative | `scripts/newsletter_studio.py` | `--selftest`, `--brand` |
-| prüft vor dem Versand: 20 Regeln, gemessen statt geschätzt | `scripts/newsletter_qa.py` | `--selftest`; läuft vor jedem `--send` |
+| prüft vor dem Versand: 21 Regeln, gemessen statt geschätzt | `scripts/newsletter_qa.py` | `--selftest`; läuft vor jedem `--send` |
 | Watchdog, Bau, Versand, Duplikatsschutz | `scripts/newsletter_digest.py` | `--selftest`, `--check` |
 | Anmeldung, Präferenzen, Bestätigung, Abmeldung | `layouts/shortcodes/newsletter_form.html`, `content/newsletter*/` | `--check`, `e2e/newsletter.spec.mjs` |
 | Design-Schicht des Formulars | `assets/css/extended/zz-newsletter.css` | `scripts/tests/test_newsletter_site.py` |
@@ -21,6 +21,31 @@ Freischalten, ESP-Export – in **`ANLEITUNG-NEWSLETTER-STUDIO.md`**; dieses
 Dokument bleibt der kurze Weg durchs Brevo-Konto. Solange kein Anmeldeweg
 eingetragen ist, bleibt die Anmeldeseite NoIndex, zeigt der Streifen seinen
 Leerzustand, und `.github/workflows/newsletter-daily.yml` baut ohne zu senden.
+
+## Der Redaktionsrahmen: Dienstag und Freitag
+
+Zwei Termine, zwei Aufträge – damit zwei Mails pro Woche ein Abonnement sind und
+nicht zweimal dieselbe Mail:
+
+| Termin | Ausgabe | Auftrag | Betreff-Variante |
+|---|---|---|---|
+| **Dienstag** 05:05 UTC (07:05 MESZ) | *Wochen-Check* | was sich seit Freitag bewegt hat: Preisänderungen mit Datum, ausgelaufene Preisgarantien, geänderte Rechner | führt die Zahl („… 240 € heute prüfen“), sonst „Dein Wochen-Check“ |
+| **Freitag** 05:05 UTC (07:05 MESZ) | *Wochen-Abschluss* | was sich vor Montag erledigen lässt: Fristen der nächsten 14 Tage, ein Tarifkorridor, ein Rechner | „Fristen vor dem Wochenende“ |
+
+Fakten des Vertrags (welche Tage, welcher Termin als Nächstes, deutsche
+Wochentagsnamen) liegen in **`scripts/newsletter_schedule.py`**; die redaktionellen
+Texte (Ausgabenname, Aufmacher, Betreff, Gruß) in **`data/newsletter_studio.json`
+→ `creative.kadenz`**, geschlüsselt mit `datetime.weekday()` (`"1"`, `"4"`).
+
+**Warum Zahlen und keine Namen:** `strftime("%A")` liefert den Wochentag der
+Prozess-Locale – auf dem GitHub-Runner „Tuesday“. Die frühere Betreff-Rotation
+prüfte gegen `"Freitag"` und hat in CI deshalb nie ausgelöst (gemessen 23.09.2026).
+Die Wache **Q21** meldet außerdem ein überholtes Werktag-Versprechen, einen Kopf
+ohne Versandtag und eine „nächste Ausgabe“ an einem Tag, an dem nie versendet wird.
+
+Jede Mail nennt am Ende den nächsten Termin („Nächste Ausgabe: Freitag, 25.
+September“) – Erwartung statt Funkstille. Berechnet wird er aus dem Vertrag, nicht
+eingetragen.
 
 ## Wichtig vorab (Recht, DE)
 
