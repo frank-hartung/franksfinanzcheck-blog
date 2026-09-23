@@ -916,6 +916,19 @@ def _selftest() -> int:
         rc8, befund8 = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
         pruefe(rc8 == 1 and "existiert im Brevo-Konto nicht" in befund8,
                f"fehlender Absender rutscht durch: rc={rc8} {befund8!r}")
+
+        # 24b) 401/403 = Credential-Befund, nicht DNS-Befund (Läufe #15/#16,
+        #      23.09.2026). Der Hinweis muss INNERHALB der ersten 350 Zeichen
+        #      stehen – der Workflow kürzt die Annotation auf genau diese Länge.
+        def unbefugt_get(api_key, pfad):
+            return 401, json.dumps({"code": "unauthorized",
+                                    "message": "Key not found"})
+        TRANSPORT_GET = unbefugt_get
+        rc24b, befund24b = vorflug("key", "7", "news@franksfinanzcheck.de", live=False)
+        pruefe(rc24b == 1 and "BREVO_API_KEY" in befund24b and "fail-closed" in befund24b
+               and "ANLEITUNG-ABSENDER-E-MAIL.md" in befund24b[:350],
+               f"401 ohne Credential-Hinweis im sichtbaren Teil – Betreiber sucht "
+               f"bei SPF/DKIM: rc={rc24b} {befund24b!r}")
         TRANSPORT_GET = spy_get
 
         # 25–26) Wiederholung: transient (502) ja, Logikfehler (400) nein –
@@ -1037,9 +1050,23 @@ def vorflug(key: str, liste: str, absender_email: str, *, live: bool) -> tuple[i
     """
     code, antwort = TRANSPORT_GET(key, "senders")
     if code not in (200, 201):
+        # 401/403 ist kein DNS-Befund und kein Absender-Befund, sondern ein
+        # Credential-Befund: das Secret erreicht Brevo, wird dort aber nicht
+        # erkannt (SMTP-Schlüssel statt API-v3-Key, anderes Konto, Key
+        # regeneriert – so geschehen in den Läufen #15/#16 am 23.09.2026).
+        # Ohne den Hinweis sucht der Betreiber in Schritt 2 der Checkliste
+        # (SPF/DKIM), wo nichts zu holen ist. Der Hinweis steht VOR dem
+        # Standardsatz, weil der Workflow die Annotation auf 350 Zeichen
+        # kürzt – die Handlungsanweisung darf nicht abgeschnitten werden.
+        hinweis = ""
+        if code in (401, 403):
+            hinweis = (" Secret BREVO_API_KEY prüfen: API-v3-Key aus „SMTP & API → "
+                       "API keys“ (nie der SMTP-Schlüssel), gleiches Brevo-Konto wie "
+                       "die Liste, nicht regeneriert – Anleitung "
+                       "docs/ANLEITUNG-ABSENDER-E-MAIL.md, Abschnitt 1.")
         return 1, ("Absender-Vorprüfung nicht möglich (" + brevo_fehler(code, antwort)
-                   + ") – kein Versand: lieber fail-closed, als eine Kampagne mit "
-                   "ungeprüftem Absender anzulegen.")
+                   + ")." + hinweis + " Kein Versand: lieber fail-closed, als eine "
+                   "Kampagne mit ungeprüftem Absender anzulegen.")
     try:
         sender = json.loads(antwort).get("senders", [])
     except json.JSONDecodeError:

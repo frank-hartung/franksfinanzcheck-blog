@@ -40,7 +40,8 @@ Datenschutzerklärung gegen den tatsächlichen Stand lesen (Wortlaut-Entwurf:
 1. [brevo.com/de](https://www.brevo.com/de/) → **Kostenlos registrieren** (Free-Plan,
    300 Mails/Tag – ausreichend bis ca. 300 Abonnenten täglich)
 2. Absendername eingeben: `Frank von FranksFinanzcheck` · E-Mail (vorläufig):
-   deine private Mail **ODER** `kontakt@franksfinanzcheck.de` (s. Schritt 2)
+   deine private Mail **ODER** `news@franksfinanzcheck.de` (s. Schritt 2 –
+   `news@` ist der endgültige Absender, `kontakt@` die Antwortadresse)
 3. Konto bestätigen (Mail-Link), Fragebogen überspringen/simply fill.
 
 ## 2. Absender-Adresse (profi = eigene Domain, ~10 Min.)
@@ -52,11 +53,20 @@ Datenschutzerklärung gegen den tatsächlichen Stand lesen (Wortlaut-Entwurf:
 > weiter; es ist bewusst **keine** eigene Mailbox (kein SMTP-Versand).
 
 Für den **Absender-Versand aus Brevo** ist zusätzlich zu der Cloudflare-
-Weiterleitung die Brevo-Sender-Authentifizierung nötig: In Brevo
-**Senders → Add sender** → `kontakt@franksfinanzcheck.de` und die
-**Authentifizierung** (SPF + DKIM) per DNS-Einträgen abschließen.
+Weiterleitung die Brevo-Sender-Authentifizierung nötig – und zwar mit der
+**Versandadresse** `news@franksfinanzcheck.de` (die Studio-SSOT
+`data/newsletter_studio.json` → `email.absender.email`, dieselbe Adresse liest
+der Versand-Code), nicht mit `kontakt@`: die ist die Antwortadresse
+(`replyTo`) und hat wegen der Cloudflare-Weiterleitung kein eigenes Postfach.
+In Brevo **Senders, Domains & Dedicated IPs** → erst **Domains → Authenticate**
+(`franksfinanzcheck.de`), dann **Senders & IPs → Add sender** →
+`news@franksfinanzcheck.de`; nach authentifizierter Domain entfällt die
+Bestätigungs-Code-Abfrage, die sonst ins Leere laufen würde. **Authentifizierung**
+(SPF + DKIM) per DNS-Einträgen abschließen.
 
-> (Brevo zeigt exakt die Werte; beim Anbieter in die DNS-Zone eintragen).
+> Exakte Werte, SPF-Zusammenführung, DMARC-Höflichkeit wegen der Weiterleitung,
+> Abnahme und die Befund-Tabelle: **`ANLEITUNG-ABSENDER-E-MAIL.md`**.
+> Grundsätzlich gilt: Brevo zeigt die Werte – die werden kopiert, nicht getippt.
 > Beim SPF darf **kein zweiter TXT-Eintrag** entstehen: den vorhandenen
 > SPF-Eintrag gemäß Brevo-/Cloudflare-Vorgaben zusammenführen (z. B.
 > `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all`).
@@ -64,7 +74,8 @@ Weiterleitung die Brevo-Sender-Authentifizierung nötig: In Brevo
 > → bessere Zustellbarkeit + „professioneller Absender".
 
 *(Notlösung: private Mail bleibt als Absender, funktioniert – aber
-weniger schick und ohne `kontakt@franksfinanzcheck.de`-Absenderadresse.)*
+weniger schick, und ohne `news@franksfinanzcheck.de` weicht der Absender von der
+Studio-SSOT ab, die der Versand-Code liest.)*
 
 ## 3. Empfängerliste + Formular (5 Min.)
 

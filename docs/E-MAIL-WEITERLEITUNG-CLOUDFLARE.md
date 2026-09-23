@@ -18,6 +18,11 @@ Weiterleitung ist damit vollständig vom Hosting bei GitHub Pages getrennt.
 > Unterstützung (z. B. Brevo für den Newsletter-Versand – siehe
 > [ANLEITUNG-NEWSLETTER.md](ANLEITUNG-NEWSLETTER.md)). Das ist in diesem Setup
 > bewusst nicht als eigenes Postfach eingerichtet.
+>
+> Der Newsletter versendet **nicht** von `kontakt@`, sondern von
+> `news@franksfinanzcheck.de`; `kontakt@` ist dort nur Reply-To. Wie beide
+> Adressen zusammen mit den SPF-/DKIM-Einträgen in dieselbe Zone gehören, steht
+> in [ANLEITUNG-ABSENDER-E-MAIL.md](ANLEITUNG-ABSENDER-E-MAIL.md).
 
 ## Einmalige Einrichtung in Cloudflare
 

@@ -6,12 +6,15 @@
   *Newsletter-Wache* in der CI — PR
   [#354](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/354),
   alle Checks grün (u. a. Wache am frischen Build, Playwright)
-- ☐ Offen: Absender-Authentifizierung (SPF/DKIM „verifiziert“ in Brevo),
-  Secrets `BREVO_API_KEY` + `BREVO_LIST_ID` in GitHub (Schritt 4), AVV/DPA
-  (Schritt 5), Testlauf (6a)
+- ☐ Offen: **Credential** (`BREVO_API_KEY` wird von Brevo mit 401 „Key not
+  found“ abgelehnt – die Läufe #15/#16 vom 23.09. sind genau daran gescheitert,
+  *nicht* an DNS), Absender-Authentifizierung (SPF/DKIM „verifiziert“ in Brevo),
+  Secret `BREVO_LIST_ID` in GitHub (Schritt 4), AVV/DPA (Schritt 5), Testlauf (6a)
 
 **Befehlsdokumente:**
-`ANLEITUNG-NEWSLETTER.md` (Schritte 1–6, Brevo-Konto) und
+`ANLEITUNG-NEWSLETTER.md` (Schritte 1–6, Brevo-Konto),
+`ANLEITUNG-ABSENDER-E-MAIL.md` (Schritt 2 im Detail: Absender bei Cloudflare
+**und** Brevo, inkl. 401-Diagnose) und
 `ANLEITUNG-NEWSLETTER-STUDIO.md` § 7 (Freischalten). Dieses Runbook ist nur
 die Reihenfolge mit den exakten Werten aus der Studio-SSOT
 (`data/newsletter_studio.json`) – keine zweite Wahrheit.
@@ -30,8 +33,11 @@ Fehlt also genau das, was **außerhalb des Repos** liegt: Brevo-Konto +
 Sender/DNS, Liste + Formular, zwei Secrets, eine JSON-Zeile. Kein Code-Umbau.
 
 **Reihenfolge (wichtig):** erst 1–3 und 5 (Formular live) **dann** 4 (Secrets).
-Sind die Secrets vor der Formular-Zeile da, schickt der nächste Cron eine Mail
-an eine (leere) Liste – harmlos, aber sinnlos, und der Zustandsstand ändert sich.
+Sind die Secrets vor der Formular-Zeile da, will der nächste Cron senden: die
+Vorprüfung bricht bei 0 Abonnenten ab, **bevor** eine Kampagne entsteht – der
+Lauf wird trotzdem rot und meldet ein Issue. Einzig das Credential
+(`BREVO_API_KEY`) braucht jede Vorprüfung, also früh; es sendet nichts von
+selbst.
 
 ## 1. Brevo-Konto (5 Min.)
 
@@ -42,20 +48,38 @@ an eine (leere) Liste – harmlos, aber sinnlos, und der Zustandsstand ändert s
 
 ## 2. Sender + DNS (≈ 10 Min.)
 
-Brevo → **Senders → Add sender** → exakt diese Adresse:
+> **Vor diesem Schritt: das Credential (Schritt 4).** Ohne gültigen API-v3-Key
+> liest die Vorprüfung die Sender-Liste nicht und meldet 401 „Key not found“ –
+> dann sucht man in DNS-Einträgen, wo nichts zu holen ist (so geschehen in den
+> Läufen #15/#16 am 23.09.2026). Der Schlüssel selbst versendet nichts; die
+> Listen-Freigabe bleibt bei 6a/6b.
+> Detailanleitung (Domain-Authentifizierung statt Bestätigungs-Code, SPF
+> zusammenführen, DMARC-Höflichkeit, Abnahme, Befund-Tabelle):
+> **`ANLEITUNG-ABSENDER-E-MAIL.md`**.
+
+Brevo → **Senders, Domains & Dedicated IPs → Senders & IPs → Add sender** → exakt diese Adresse:
 
 | Feld | Wert |
 |---|---|
 | Absender-E-Mail | **`news@franksfinanzcheck.de`** (Studio-SSOT; der Versand-Code nutzt denselben Standard) |
+| Absendername | `Frank von FranksFinanzcheck` (Studio-SSOT `email.absender.name`) |
 | Reply-To | `kontakt@franksfinanzcheck.de` (Cloudflare Email Routing, s. `E-MAIL-WEITERLEITUNG-CLOUDFLARE.md`) |
+
+> `news@` hat **kein Postfach** – Brevos 6-stelliger Bestätigungscode fände keinen
+> Empfänger. Deshalb erst die **Domain** in Brevo authentifizieren (Domains →
+> Authenticate), dann ist jeder Sender dieser Domain automatisch verifiziert.
+> Alternative: in Cloudflare vorübergehend eine Routing-Regel für `news` anlegen,
+> den Code abholen, die Regel wieder löschen – authentifiziert sein muss die
+> Domain für gute Zustellbarkeit trotzdem.
 
 Danach Authentifizierung per DNS (Zone `franksfinanzcheck.de`, Cloudflare):
 
 | Eintrag | Wert |
 |---|---|
-| **SPF** (TXT `@`) | `v=spf1 include:spf.brevo.com ~all` – **nur ein** SPF-Eintrag. Ist Cloudflare Email Routing für `kontakt@` schon aktiv, zusammenführen: `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all` |
-| **DKIM** | den Eintrag **wörtlich so**, wie Brevo ihn im Sender-Dialog zeigt (Selector typ. `_brevo._domainkey`) – nicht tippen, kopieren |
-| **DMARC** (empfohlen) | TXT `_dmarc` = `v=DMARC1; p=none;` – Brevo schlägt den Wortlaut im selben Dialog vor |
+| **SPF** (TXT `@`) | `v=spf1 include:spf.brevo.com ~all` – **nur ein** SPF-Eintrag. Ist Cloudflare Email Routing für `kontakt@` schon aktiv, zusammenführen: `v=spf1 include:_spf.mx.cloudflare.net include:spf.brevo.com ~all` (bei Altkonten zeigt Brevos Panel `include:spf.sendinblue.com` – das nehmen, was das Panel zeigt) |
+| **DKIM** | die Einträge **wörtlich so**, wie Brevo sie im Auth-Dialog zeigt – nicht tippen, kopieren. Selector ist kontoabhängig: TXT `mail._domainkey` (alt `_brevo._domainkey`) **oder** zwei CNAMEs `brevo1._domainkey` + `brevo2._domainkey` |
+| **DMARC** (empfohlen) | TXT `_dmarc` = `v=DMARC1; p=none;` – Brevo schlägt den Wortlaut im selben Dialog vor; `p=none` bewusst, weil dieselbe Zone `kontakt@` weiterleitet |
+
 
 > **AVV ist kein DNS-Eintrag**, sondern ein Vertrag – und in Brevos UI gibt es
 > dafür **kein Menü**: Die DSV ist **Anhang 3 der deutschen
