@@ -11,7 +11,7 @@ der still nicht läuft, ist die schlimmste Fehlerart, die dieses Repo kennt –
 sie war genau die Lücke, die das Qualitäts-Gate-Vorfall-Dokument (18.09.)
 „ausgefallen ist nicht bestanden“ nennt, nur für Workflows statt Rechtstexte.
 
-Diese Wache zählt daher NACH, jeden Werktag vormittags:
+Diese Wache zählt daher NACH, dienstags und freitags vormittags:
 
   * Existiert seit 04:00 UTC des Tages ÜBERHAUPT EIN Versuch des
     Newsletter-Daily-Laufs (queued, in_progress, success oder failure)?
@@ -50,16 +50,18 @@ import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+from newsletter_schedule import VERSANDTAGE, RUECKBLICK_TAGE
+
 WORKFLOW_DATEI = "newsletter-daily.yml"
 WORKFLOW_NAME = "Newsletter-Daily (Capture-Wache + Digest)"
 
-# Erwartung: cron „5 5 * * 1-5“. Der Tag gilt als bedient, wenn ab 04:00 UTC
+# Erwartung: cron „5 5 * * 2,5“. Der Tag gilt als bedient, wenn ab 04:00 UTC
 # (eine Stunde Gnade vor dem Soll-Termin) irgendein Versuch existiert. Die
 # Wache läuft bewusst SPÄTER am Morgen: ein zu früher Lauf würde den (unter
 # GitHub-Last oft verschobenen) Cron nicht abwarten können; zu spät wäre eine
 # verschenkte Zustell-Morgenzeit. 08:11 UTC = 10:11 MESZ ist der Kompromiss.
 FENSTER_START_UHRZEIT = dt.time(4, 0)
-WERKTAGE = range(0, 5)          # 0 = Montag … 4 = Freitag (UTC-Kalender)
 DISPATCH_VERSUCHE = 3           # der Nachhol-Call selbst ist ein Netz-Call
 DISPATCH_PAUSE = (3.0, 8.0)
 
@@ -98,10 +100,13 @@ def entscheide(laeufe: list[dict], jetzt: dt.datetime) -> dict:
        ...}
     """
     jetzt = jetzt.astimezone(dt.timezone.utc)
-    if jetzt.weekday() not in WERKTAGE:
+    if jetzt.weekday() not in VERSANDTAGE:
         return {"handlung": "ruhetag",
-                "befund": f"{iso(jetzt)} ist kein Werktag (Mo–Fr ist der planmäßige "
+                "befund": f"{iso(jetzt)} ist kein Versandtag (Di/Fr ist der planmäßige "
                           f"Lauf erwartet) – keine Kadenz-Forderung.",
+                "heutiger_lauf": None}
+    if jetzt.time() < dt.time(8, 11):
+        return {"handlung": "ruhetag", "befund": "Der Planlauf ist noch nicht zur Nachkontrolle fällig.",
                 "heutiger_lauf": None}
     start = fenster_start(jetzt)
     versuche = []
@@ -110,7 +115,7 @@ def entscheide(laeufe: list[dict], jetzt: dt.datetime) -> dict:
             erstellt = parse_ts(l["created_at"])
         except (KeyError, ValueError):
             continue
-        if erstellt >= start:
+        if start <= erstellt <= jetzt:
             versuche.append({**l, "_erstellt": erstellt})
     versuche.sort(key=lambda x: x["_erstellt"], reverse=True)
     if versuche:
@@ -172,7 +177,7 @@ def hole_nach(repo: str, ref: str) -> tuple[int, str]:
     letzte_fehler = ""
     for versuch in range(DISPATCH_VERSUCHE):
         r = _gh(["workflow", "run", WORKFLOW_DATEI, "--repo", repo, "--ref", ref,
-                 "-f", "planmaessig=true", "-f", "tage=1"])
+                 "-f", "planmaessig=true", "-f", f"tage={RUECKBLICK_TAGE}"])
         if r.returncode == 0:
             return 0, "Nachhol-Dispatch angenommen."
         letzte_fehler = (r.stderr or r.stdout or "").strip()[:300]
@@ -237,9 +242,9 @@ def _selftest() -> int:
         else:
             fehler.append(meldung)
 
-    # Fixwerte: 23.09.2026 war ein Mittwoch – der Tag, an dem der 05:05-Cron
-    # still ausblieb. 22.09. (Dienstag) kam er erst ~10:05.
-    mittwoch = dt.datetime(2026, 9, 23, 8, 11, tzinfo=dt.timezone.utc)
+    # Der ursprüngliche Ausfall vom Mittwoch wird mit der neuen Di/Fr-Kadenz
+    # an einem Freitag (25.09.2026) nachgestellt.
+    freitag = dt.datetime(2026, 9, 25, 8, 11, tzinfo=dt.timezone.utc)
     dienstag_spaet = dt.datetime(2026, 9, 22, 10, 5, tzinfo=dt.timezone.utc)
     samstag = dt.datetime(2026, 9, 26, 8, 11, tzinfo=dt.timezone.utc)
 
@@ -253,45 +258,45 @@ def _selftest() -> int:
     e = entscheide([], samstag)
     pruefe(e["handlung"] == "ruhetag", f"Samstag ≠ Ruhetag: {e}")
 
-    # 2) Der Vorfall: Mittwoch, kein einziger Versuch → nachholen
-    e = entscheide([lauf("alt", "2026-09-22T10:05:00Z")], mittwoch)
+    # 2) Der Vorfall: Freitag, kein einziger Versuch → nachholen
+    e = entscheide([lauf("alt", "2026-09-22T10:05:00Z")], freitag)
     pruefe(e["handlung"] == "nachholen", f"Vorfall nicht erkannt: {e}")
     pruefe("05:05" in e["befund"], f"Befund nennt den Soll-Termin nicht: {e['befund']}")
 
     # 3) Grenze des Fensters: ein Lauf um 03:59 zählt nicht, 04:00 zählt
-    e = entscheide([lauf("frueh", "2026-09-23T03:59:00Z")], mittwoch)
+    e = entscheide([lauf("frueh", "2026-09-25T03:59:00Z")], freitag)
     pruefe(e["handlung"] == "nachholen", f"03:59-Lauf fälschlich gezählt: {e}")
-    e = entscheide([lauf("puenktlich", "2026-09-23T05:06:00Z")], mittwoch)
+    e = entscheide([lauf("puenktlich", "2026-09-25T05:06:00Z")], freitag)
     pruefe(e["handlung"] == "bedient", f"05:06-Lauf nicht gezählt: {e}")
 
     # 4) Verschobener Cron ist auch bedient (10:05 am Vortag ist KEIN Fall –
     #    gestern zählt nicht, heute zählt nur heute)
-    e = entscheide([lauf("gestern", "2026-09-22T10:05:00Z")], mittwoch)
+    e = entscheide([lauf("gestern", "2026-09-22T10:05:00Z")], freitag)
     pruefe(e["handlung"] == "nachholen", f"gestriger Lauf als heutiger gezählt: {e}")
 
     # 5) Lauf unterwegs (queued/in_progress) = bedient, kein Doppel-Dispatch
-    e = entscheide([lauf("unterwegs", "2026-09-23T06:30:00Z", status="in_progress")],
-                   mittwoch)
+    e = entscheide([lauf("unterwegs", "2026-09-25T06:30:00Z", status="in_progress")],
+                   freitag)
     pruefe(e["handlung"] == "bedient" and "unterwegs" in e["befund"],
            f"laufender Lauf nicht als bedient erkannt: {e}")
 
     # 6) Roter Lauf = bedient (laut!), aber mit Vermerk – kein Auto-Retry
-    e = entscheide([lauf("rot", "2026-09-23T05:07:00Z", conclusion="failure")], mittwoch)
+    e = entscheide([lauf("rot", "2026-09-25T05:07:00Z", conclusion="failure")], freitag)
     pruefe(e["handlung"] == "bedient" and "ROT" in e["befund"],
            f"roter Lauf ohne Vermerk: {e}")
 
     # 7) Unverständliche Zeitstempel werfen den Lauf nicht um
     e = entscheide([{"id": "x", "status": "completed", "conclusion": "success",
-                     "created_at": "Müll", "url": "", "event": "schedule"}], mittwoch)
+                     "created_at": "Müll", "url": "", "event": "schedule"}], freitag)
     pruefe(e["handlung"] == "nachholen", f"ungültiger Timestamp bricht die Zählung: {e}")
 
     # 8) pruefen()-Verdrahtung mit injizierten Läufen + Trockenlauf
-    erg = pruefen("org/repo", jetzt=mittwoch, ohne_dispatch=True,
+    erg = pruefen("org/repo", jetzt=freitag, ohne_dispatch=True,
                   laeufe=[lauf("alt", "2026-09-22T10:05:00Z")])
     pruefe(erg["rc"] == 1 and erg["dispatch"].startswith("uebersprungen"),
            f"Trockenlauf soll Befund rc=1 liefern: {erg}")
-    erg = pruefen("org/repo", jetzt=mittwoch, ohne_dispatch=True,
-                  laeufe=[lauf("heute", "2026-09-23T05:06:00Z")])
+    erg = pruefen("org/repo", jetzt=freitag, ohne_dispatch=True,
+                  laeufe=[lauf("heute", "2026-09-25T05:06:00Z")])
     pruefe(erg["rc"] == 0, f"bedienter Tag soll rc=0 liefern: {erg}")
     erg = pruefen("org/repo", jetzt=samstag, ohne_dispatch=True, laeufe=[])
     pruefe(erg["rc"] == 0, f"Ruhetag soll rc=0 liefern: {erg}")
@@ -300,9 +305,9 @@ def _selftest() -> int:
     #    VOR dem Fensterstart 04:00 – der Start fällt damit auf den Vortag.
     #    Bewusst so: zwischen 00:00 und 04:00 UTC ist der laufende Tag noch
     #    nicht fällig (Soll ist 05:05), die Wache läuft regulär erst 08:11.
-    frueh = dt.datetime(2026, 9, 23, 2, 0, tzinfo=dt.timezone.utc)
+    frueh = dt.datetime(2026, 9, 25, 2, 0, tzinfo=dt.timezone.utc)
     start = fenster_start(frueh)
-    pruefe(start == dt.datetime(2026, 9, 22, 4, 0, tzinfo=dt.timezone.utc),
+    pruefe(start == dt.datetime(2026, 9, 24, 4, 0, tzinfo=dt.timezone.utc),
            f"Fensterstart vor 04:00 falsch: {iso(start)}")
 
     # 10) Dienstag 10:05 mit heutigem (dienstägigem) Lauf = bedient – der

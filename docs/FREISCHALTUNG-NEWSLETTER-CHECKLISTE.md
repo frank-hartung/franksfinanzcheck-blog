@@ -126,8 +126,8 @@ Zieladresse (bewusst keine Catch-all-Regel).
 2. **Contacts → Formulare → Create**: Name **`Blog-Anmeldung`**,
    **Double-Opt-In AN** (Pflicht), Felder **nur „E-Mail“** (Name `email` –
    die Wache N4 verlangt exakt das), Captcha gegen Bots an, Design schlicht.
-   Den Text über dem Feld (optional): *„Eine Mail pro Werktag: die
-   Sparechnungen des Tages, sonst nichts.“*
+   Den Text über dem Feld (optional): *„Zweimal pro Woche: Spartipps und Rechner –
+   dienstags und freitags.“*
 3. 📌 **Formular-URL kopieren** – die Embed-/Action-URL aus dem
    Formular-Editor (heute sieht sie aus wie `https://…sibforms.com/serve/…` –
    Brevos Formularhost-Domain, von der Wache erlaubt).
@@ -170,7 +170,7 @@ wechselt auf „Anmeldung aktiv“, die Wache meldet `aktiv` statt INERT.
 `python3 scripts/newsletter_zustellbarkeit.py --pruefen` (meldet pro Befund den
 Klickweg; `--strict` ist das Freigabe-Gate, und im Versandlauf läuft sie vor
 jedem Versand). Dann Actions → *Newsletter-Daily (Capture-Wache + Digest)* →
-*Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 1.
+*Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 7.
 Erwartet: `sendTest`-Mail in deinem Postfach (Double-Opt-In-Bestätigung
 inklusive, Abmeldelink funktioniert), Liste unangetastet.
 Kommt keine Mail, sagt der Lauf seit der Versand-Reparatur (23.09.) selbst,
@@ -184,12 +184,12 @@ Abonnenten“ heißt, Schritt 2 bzw. 3 oben ist (noch) nicht abgeschlossen –
 die Vorprüfung bricht dann ab, BEVOR bei Brevo eine Kampagne entsteht
 (Report: `NEWSLETTER-VERSAND-REPARATUR-2026-09-23.md`).
 
-**6b. Freigabe** – entweder `live` **an** + `tage` = 1 manuell, oder einfach
-den nächsten Cron laufen lassen (Mo–Fr 05:05 UTC = 07:05 MESZ).
+**6b. Freigabe** – entweder `live` **an** + `tage` = 7 manuell, oder einfach
+den nächsten Cron laufen lassen (Di/Fr 05:05 UTC = 07:05 MESZ / 06:05 MEZ).
 `data/newsletter_state.json` merkt sich, was draußen war – keine Dopplung.
 Fällt der Cron still aus (GitHub verwirft/verschiebt `schedule`-Ereignisse
 unter Last – geschehen am 23.09.), holt die **Newsletter-Kadenz-Wache**
-(`newsletter-cadence.yml`, täglich ~08:11 UTC) den Lauf mit derselben
+(`newsletter-cadence.yml`, Di/Fr ~08:11 UTC) den Lauf mit derselben
 Freigabestufe nach; ein FEHLGESCHLAGENER Lauf wird nicht automatisch
 wiederholt, sondern per Fehler-Alerting gemeldet (Report:
 `NEWSLETTER-KADENZ-ABSICHERUNG-2026-09-23.md`).

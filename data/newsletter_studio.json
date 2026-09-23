@@ -6,7 +6,7 @@
     "_doku": "feld_email ist der von Brevo gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest.",
     "form_action": "https://0e12ee47.sibforms.com/serve/MUIFAD_pHhLsCpok3QtXnwkwXmPNi72IBYFiMBpuaFrkO4v6QlFvQA0_ZHL7gQdCT1mpJ9vRIz0hJGtZKW1DjfWFPUioZ3QcQ9n1CTFZMk-nuEt0kvCa62j6pv3na3IRi4UXCMrFQZ8ZYPlWTPDGdU8oI0hY-E_9zBxYfweOSHjgDNYqBLSUiQNAk8KeAa6mWY1ipaZxAlsNJgS0kQ==",
     "form_url": "",
-    "versprechen": "Eine Mail pro Werktag: die Sparechnungen des Tages, sonst nichts.",
+    "versprechen": "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags.",
     "feld_email": "email",
     "feld_themen": "themen",
     "bestaetigungs_url": "/newsletter/bestaetigung/",

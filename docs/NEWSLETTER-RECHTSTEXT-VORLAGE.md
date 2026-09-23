@@ -39,8 +39,8 @@ angegebenen Angaben.
   Wir speichern Anmeldezeitpunkt, Bestätigungszeitpunkt und deine IP-Adresse,
   um nachweisen zu können, dass die Anmeldung von dir stammt (Art. 6 Abs. 1
   lit. a, Art. 7 Abs. 1 DSGVO).
-- **Inhalt.** [1 Mail pro Werktag: die Sparechnungen, Tariffristen und Rechner
-  des Tages aus dem Blog.]
+- **Inhalt.** [Höchstens 2 Newsletter pro Woche (Dienstag und Freitag): Spartipps, Tariffristen und Rechner
+  aus dem Blog.]
 - **Rechtsgrundlage.** Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
 - **Speicherdauer.** Deine Adresse bleibt auf der Liste, bis du dich abmeldest.
   Nach Abmeldung löschen wir die Adresse innerhalb von [30] Tagen; Nachweise

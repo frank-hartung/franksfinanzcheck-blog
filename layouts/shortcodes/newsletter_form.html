@@ -25,7 +25,7 @@
 */ -}}
 {{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
 {{- $c := $nl.capture -}}
-{{- $liste := $c.versprechen | default "Fundsachen, Rechner und Sparechnungen – eine Mail pro Werktag." -}}
+{{- $liste := $c.versprechen | default "Fundsachen, Rechner und Sparechnungen – zwei Mails pro Woche." -}}
 <div class="ff-nl" id="newsletter-anmeldung">
 {{- if $c.form_action -}}
   <p class="ff-nl__lead">{{ $liste }}</p>
@@ -49,7 +49,7 @@
         </label>
         {{- end -}}
       </span>
-      <span class="ff-nl__legend-hinweis">Ohne Auswahl kommt alles – eine Mail pro Werktag, nie mehr.</span>
+      <span class="ff-nl__legend-hinweis">Ohne Auswahl kommt alles – zwei Mails pro Woche, nie mehr.</span>
     </fieldset>
     {{- end -}}
     {{- if $c.bot_falle -}}

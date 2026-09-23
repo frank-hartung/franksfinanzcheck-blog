@@ -559,7 +559,7 @@ def blocks_bauen(material: list[dict], datum: datetime.date, konf: dict) -> list
     e_mail = konf.get("email", {})
     max_anz = int(e_mail.get("max_artikel", 5))
     versprechen = (konf.get("capture", {}) or {}).get("versprechen") or \
-        "Eine Mail pro Werktag: die Sparechnungen des Tages, sonst nichts."
+        "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags."
     bl: list[dict] = [{"typ": "kopf", "titel": "FranksFinanzcheck",
                        "zeile": f"{datum.strftime('%d.%m.%Y')} · {ausgabe_nr(datum)}",
                        "versprechen": versprechen}]

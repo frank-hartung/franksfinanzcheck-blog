@@ -14,7 +14,7 @@ comments: false
 ---
 
 Der Newsletter richtet sich nach deiner Auswahl. Sechs Themenwelten, ein Häkchen
-pro Welt – und ohne Häkchen kommt alles, weil „alles“ hier eine Mail pro Werktag
+pro Welt – und ohne Häkchen kommt alles, weil „alles“ hier höchstens zwei Mails pro Woche (Dienstag und Freitag)
 ist, nicht sechs.
 
 ## Die Themenwelten

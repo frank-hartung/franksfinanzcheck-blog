@@ -816,7 +816,7 @@ def pruefe_state(root: str) -> list[dict]:
                           f"{len(pending)} Artikel warten auf den Versand",
                           ", ".join(str(p) for p in pending[:3]) +
                           (f" … (+{len(pending) - 3})" if len(pending) > 3 else ""),
-                          "nächster Werktag-Cron 05:05 UTC holt sie ab",
+                          "nächster Di/Fr-Cron 05:05 UTC holt sie ab",
                           "Actions → Newsletter-Daily → Run workflow (`tage` 3 für einen Nachlauf)",
                           ""))
     if state.get("zuletzt_versandt"):

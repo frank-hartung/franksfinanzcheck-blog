@@ -24,32 +24,8 @@
 </div>
 {{- end -}}
 
-{{- /* ---------- Newsletter-Anmeldung (Footer, nur Inhaltsseiten) ---------- */ -}}
-{{- /* News (10.08.2026): Button erscheint, wenn EINER der beiden Wege gesetzt
-       ist: newsletterFormUrl (Button zum gehosteten Brevo-Formular) oder
-       newsletterFormAction (Inline-Formular auf /newsletter/). Ziel:
-       gehostetes Formular, falls gesetzt, sonst die eigene Anmeldeseite.
-       (12.09.2026: reines Inline-Formular liess den Footer leer – N6/
-       cta-versteckt meldete die Lücke, die Doku versprach aber den CTA für
-       beide Varianten.)
-       (22.09.2026: Quelle ist jetzt derselbe Studio-Partial wie Formular,
-       Streifen und § 8 – hugo.toml schlägt data/newsletter_studio.json,
-       dieselbe Präzedenz wie in Website und Wache. Davor las der Footer nur
-       hugo.toml-Parameter, sodass das CTA mit JSON-Konfiguration ausblieb,
-       obwohl N6 es verlangte: ein Zustand, zwei Quellen.) */ -}}
-{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
-{{- $nlUrl := $nl.capture.form_url -}}
-{{- $nlAction := $nl.capture.form_action -}}
-{{- if or $nlUrl $nlAction -}}
-<div class="newsletter-footer">
-  <span>📬 Keinen Spartipp mehr verpassen?</span>
-  <a href="{{ if $nlUrl }}{{ $nlUrl }}{{ else }}/newsletter/{{ end }}"
-     {{- if $nlUrl }} target="_blank" rel="noopener noreferrer"{{ end }}
-     title="Zum kostenlosen Newsletter von FranksFinanzcheck anmelden">
-    Jetzt Newsletter abonnieren – 1 Mail/Tag, jederzeit kündbar
-  </a>
-</div>
-{{- end -}}
+{{- /* Newsletter-Anmeldung: newsletterFormAction / newsletterFormUrl werden
+       zentral in newsletter_strip.html ausgewertet. Kein zweiter CTA hier. */ -}}
 
 <div class="ff-consent-wrap" style="text-align:center; margin: 8px 0;">
   <a href="#" onclick="ffConsentShow(true);return false;" title="Cookie-Einstellungen öffnen"

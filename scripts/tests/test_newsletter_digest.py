@@ -223,6 +223,11 @@ class RechtstextQuelle(unittest.TestCase):
 
 class DigestUndVersand(unittest.TestCase):
     def setUp(self):
+        from unittest.mock import patch
+        for target in ("kadenz_pruefen", "termin_reservieren"):
+            mock = patch.object(nd, target, return_value="")
+            mock.start()
+            self.addCleanup(mock.stop)
         self.tmp = tempfile.TemporaryDirectory(prefix="nl-digest-")
         self.addCleanup(self.tmp.cleanup)
 
