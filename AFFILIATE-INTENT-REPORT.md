@@ -1,12 +1,8 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-09-22 08:56:35 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-09-23 08:58:55 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 60 · **Gateway-Links:** 184 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 1
-
-## 🩹 Geheilt (1)
-
-- 2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: IW8 L149: /go/strom/ → /go/strom/ · Anker „→ Jetzt Angebote vergleichen“ → „→ Jetzt Stromtarife vergleichen“
+**Geprüfte Artikel:** 63 · **Gateway-Links:** 190 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
 🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
 
