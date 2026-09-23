@@ -578,7 +578,7 @@ def _selftest() -> int:
 
     HEUTE_FIX = datetime.date.today()
     tmp = tempfile.mkdtemp(prefix="newsletter-selftest-")
-    global TRANSPORT, TRANSPORT_GET, PAUSE_SEKUNDEN, _http_request
+    global TRANSPORT, TRANSPORT_GET, PAUSE_SEKUNDEN, _http_request, speichere_state
     aufgerufen: list = []
     get_aufgerufen: list = []
     try:
@@ -858,6 +858,31 @@ def _selftest() -> int:
         pruefe(nach.get("versandene_artikel") == vor.get("versandene_artikel")
                and "kampagne_id" in nach,
                f"Testlauf verbucht sich als Ausgabe: {nach}")
+
+        # 20b) Verdrahtung: auch MIT Bestätigung (NEWSLETTER_SEND=ja) bleibt ein
+        #      Testversand ein sendTest an genau eine Adresse – die
+        #      Leere-Liste-Prüfung darf ihn nicht blockieren. Der Probelauf ist
+        #      der vorgesehene Weg, BEVOR die Liste ihre ersten Abonnenten hat
+        #      (Checkliste Schritt 6a); ihn an der leeren Liste scheitern zu
+        #      lassen, machte genau diesen Schritt unmöglich.
+        os.environ["NEWSLETTER_SEND"] = "ja"
+        aufgerufen.clear()
+
+        def leer_liste_get(api_key, pfad):
+            if pfad == "senders":
+                return 200, json.dumps({"senders": [
+                    {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            return 200, json.dumps({"id": 7, "totalSubscribers": 0})
+        TRANSPORT_GET = leer_liste_get
+        rc20 = versende(r4, html, text, "X", dry_run=False,
+                        test_adresse="test@beispiel.de")
+        pfade20 = [p for _, p, _ in aufgerufen]
+        pruefe(rc20 == 0 and any(p.endswith("/sendTest") for p in pfade20)
+               and not any(p.endswith("/sendNow") for p in pfade20),
+               f"Testversand mit Bestätigung von der leeren Liste blockiert oder "
+               f"trifft die Liste (rc={rc20}): {pfade20}")
+        os.environ["NEWSLETTER_SEND"] = ""
+        TRANSPORT_GET = spy_get
         TRANSPORT = brevo
 
         # 21–24) Vorflug verriegelt, BEVOR eine Kampagne entsteht
@@ -923,6 +948,34 @@ def _selftest() -> int:
         TRANSPORT = brevo
         TRANSPORT_GET = brevo_get
         PAUSE_SEKUNDEN = alte_pause
+
+        # 27) Ehrlichkeit nach dem Versand: scheitert das Status-Schreiben,
+        #     NACHDEM die Kampagne unterwegs ist, bleibt der Lauf rot – aber
+        #     der Befund sagt „VERSAND ERFOLGT“ und lügt nicht mit „es ist
+        #     nichts versandt“ (die Annotation des Workflows liest genau diese
+        #     Marke). Außerdem wird gelesen, was geschrieben wurde: ein Status,
+        #     der die Kampagnen-ID nicht trägt, zählt als nicht geschrieben.
+        echter_speicher = speichere_state
+
+        def kaputter_speicher(root, state):
+            raise OSError("Permission denied (Selbsttest)")
+        speichere_state = kaputter_speicher
+        aufgerufen.clear()
+        TRANSPORT = spy
+        TRANSPORT_GET = spy_get
+        os.environ["NEWSLETTER_SEND"] = "ja"
+        import io
+        import contextlib
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc11 = versende(r4, html, text, "X", dry_run=False)
+        pfade11 = [p for _, p, _ in aufgerufen]
+        pruefe(rc11 == 1 and any(p.endswith("/sendNow") for p in pfade11)
+               and "VERSAND ERFOLGT" in puffer.getvalue(),
+               f"Status-Schreibfehler nach Versand nicht laut als „Versand raus, "
+               f"Status kaputt“ gemeldet (rc={rc11}): {pfade11}\n{puffer.getvalue()!r}")
+        speichere_state = echter_speicher
+        os.environ["NEWSLETTER_SEND"] = ""
     except Exception as exc:  # noqa: BLE001
         import traceback
         fehler.append(f"Ausführung: {exc.__class__.__name__}: {exc}\n"
@@ -941,7 +994,8 @@ def _selftest() -> int:
     print(f"✅ Newsletter-Selbsttest: {zaehler} Fälle grün (INERT, totes "
           f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
           f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, "
-          f"previewText/SSOT-Payload, Vorflug, Wiederholung, State-Konfiguration).")
+          f"previewText/SSOT-Payload, Vorflug, Testversand-Verdrahtung, "
+          f"Wiederholung, Versand-Ehrlichkeit, State-Konfiguration).")
     return 0
 
 
@@ -1052,7 +1106,16 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
               "die Listen-ID als Ganzzahl (Zahl in der Listen-URL).")
         return 1
     absender = absender_konfig(root)
-    rc_vor, befund = vorflug(key, liste, absender["email"], live=bool(bestaetigt))
+    # live=False bei Testversand: die Prüfung „Liste hat 0 Abonnenten“ gilt nur
+    # dem echten Listen-Versand (sendNow). Ein sendTest trifft genau eine
+    # Adresse, nie die Liste – genau deshalb ist er laut Checkliste der
+    # vorgesehene Probelauf, BEVOR die Liste Abonnenten hat. Ihn an der leeren
+    # Liste zu blockieren, würde den Probelauf unmöglich machen (Fehlerklasse
+    # des 23.09.2026: dokumentierter Weg, den kein Lauf gehen konnte).
+    # Existenz-Prüfungen (Absender da? verifiziert? Liste vorhanden?) bleiben
+    # auch beim Testversand an – der Payload trägt die listIds trotzdem.
+    rc_vor, befund = vorflug(key, liste, absender["email"],
+                             live=bool(bestaetigt) and not test_adresse)
     if rc_vor != 0:
         print(f"   ❌ Vorprüfung fehlgeschlagen: {befund}")
         return 1
@@ -1088,25 +1151,46 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         return 1
     print(f"   ✅ {'Testversand an ' + test_adresse if test_adresse else 'Versand angestoßen'}"
           f" (Kampagne {kennung})")
-    state = lade_state(root)
-    state.update({"zuletzt_versandt": datetime.datetime.now(datetime.timezone.utc)
-                  .isoformat(timespec="seconds"),
-                  "kampagne_id": kennung})
-    if not test_adresse:
-        # Nur nach echtem Versand: ein Testlauf war keine Ausgabe, und wer ihn
-        # zählte, müsste sich bald über sich selbst wundern (Q15, Duplikatschutz).
-        _, betreff_len, artikel_len = zustand_konfig(root)
-        verlauf = [b for b in state.get("zuletzt_betreff", []) if b]
-        if betreff and betreff not in verlauf:
-            verlauf.append(betreff)
-        state["zuletzt_betreff"] = verlauf[-betreff_len:]
-        schon = state.get("versandene_artikel", [])
-        for slug in state.get("pending", []):
-            if slug not in schon:
-                schon.append(slug)
-        state["versandene_artikel"] = sorted(schon)[-artikel_len:]
-        state.pop("pending", None)
-    speichere_state(root, state)
+    # Der Versand ist RAUS – ab hier darf kein Fehler mehr so gemeldet werden,
+    # als hätte nichts stattgefunden. Genau das passierte bei einer
+    # mikroskopischen Fehlerklasse: scheiterte das Status-Schreiben NACH dem
+    # erfolgreichen sendNow, meldete der Lauf rot und die Annotation behauptete
+    # „es ist nichts versandt“ – der Empfänger hielt die Mail indes in der Hand.
+    # Jetzt: der Befund nennt die Wahrheit (VERSAND ERFOLGT) und der Workflow
+    # spricht sie entsprechend aus. Risiko bei nicht schreibbarem Status:
+    # der nächste Lauf kennt die Ausgabe nicht und könnte doppelt liefern –
+    # darum rc 1, damit der Befund im Alerting landet.
+    try:
+        state = lade_state(root)
+        state.update({"zuletzt_versandt": datetime.datetime.now(datetime.timezone.utc)
+                      .isoformat(timespec="seconds"),
+                      "kampagne_id": kennung})
+        if not test_adresse:
+            # Nur nach echtem Versand: ein Testlauf war keine Ausgabe, und wer ihn
+            # zählte, müsste sich bald über sich selbst wundern (Q15, Duplikatschutz).
+            _, betreff_len, artikel_len = zustand_konfig(root)
+            verlauf = [b for b in state.get("zuletzt_betreff", []) if b]
+            if betreff and betreff not in verlauf:
+                verlauf.append(betreff)
+            state["zuletzt_betreff"] = verlauf[-betreff_len:]
+            schon = state.get("versandene_artikel", [])
+            for slug in state.get("pending", []):
+                if slug not in schon:
+                    schon.append(slug)
+            state["versandene_artikel"] = sorted(schon)[-artikel_len:]
+            state.pop("pending", None)
+        speichere_state(root, state)
+        # Nachkontrolle: gelesen, was geschrieben wurde. lade_state ist tolerant
+        # (kaputtes JSON → {}) – Toleranz ist hier der stille Doppelversand.
+        if lade_state(root).get("kampagne_id") != kennung:
+            raise OSError("Nachkontrolle: Status trägt die Kampagnen-ID nicht "
+                          "(Schreib- oder Lesefehler)")
+    except OSError as exc:
+        print(f"   ❌ VERSAND ERFOLGT (Kampagne {kennung}), aber der Status konnte nicht "
+              f"geschrieben werden: {exc} – der nächste Lauf kennt diese Ausgabe nicht "
+              f"(Doppelungsgefahr). data/newsletter_state.json prüfen, Duplikatschutz "
+              f"nicht umgehen.")
+        return 1
     return 0
 
 

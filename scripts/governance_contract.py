@@ -150,6 +150,14 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # 08.–18.09. nie an). Eine Wache, die Zählung nur dokumentiert,
           # statt sie zu verlangen, ist keine Wache – also ins Minimum.
           "alerting_heartbeat.py",
+          # Newsletter-Kadenz-Wache (23.09.2026): Der planmäßige
+          # Newsletter-Daily-Cron blieb an einem Werktag STILL aus – kein Lauf,
+          # kein Rotton, keine Meldung (GitHub verwirft schedule-Ereignisse
+          # unter Last). Eine Wache, die den verpassten Lauf nicht einmal
+          # verlangen kann, wäre Dekoration: ihr --selftest friert die
+          # Entscheidungslogik ein (Ruhetag, Fenstergrenze, Vorfall-Erkennung,
+          # kein Auto-Retry nach rotem Lauf) und gehört ins Minimum.
+          "newsletter_cadence.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
           # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
           # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber

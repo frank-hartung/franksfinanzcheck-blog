@@ -8,10 +8,19 @@
 #
 # Sicherheitshierarchie (absichtlich dreifach):
 #   1. ohne Secrets (BREVO_API_KEY / BREVO_LIST_ID) wird kein Netzversuch gemacht
-#   2. ohne workflow_dispatch-Eingabe („live" ODER test_adresse) wird nur gebaut,
-#      nicht gesendet – ein Testversand trifft nur die eingegebene Adresse (sendTest)
+#   2. ohne workflow_dispatch-Eingabe („live“, „planmaessig“ ODER test_adresse)
+#      wird nur gebaut, nicht gesendet – ein Testversand trifft nur die
+#      eingegebene Adresse (sendTest)
 #   3. gesendet wird an eine Liste, deren Double-Opt-in bei Brevo liegt –
 #      Adressen berühren diesen Repo-Workflow nie
+#
+# „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
+# planmäßige Cron (05:05 UTC, Mo–Fr, echter Listen-Versand). Grund: GitHub
+# verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
+# der 05:05-Cron blieb komplett aus, am Vortag kam er erst ~10:05 UTC). Die
+# Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
+# nach, wenn sicher kein Lauf des Tages existiert – dieselbe Freigabestufe wie
+# der Cron, nicht mehr.
 name: Newsletter-Daily (Capture-Wache + Digest)
 
 on:
@@ -31,6 +40,10 @@ on:
         description: 'Testversand an diese Adresse (leer = kein Testversand) – trifft NUR diese Adresse, nie die Liste'
         type: string
         default: ''
+      planmaessig:
+        description: 'NUR Kadenz-Wache: verhält sich wie der planmäßige Cron (echter Listen-Versand)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -94,24 +107,30 @@ jobs:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
-          NEWSLETTER_SEND: ${{ (inputs.live || github.event_name == 'schedule') && 'ja' || '' }}
+          # Die Freigabe für den LISTEN-Versand: planmäßiger Cron, „live“ oder
+          # „planmaessig“ (Nachholen der Kadenz-Wache). Eine test_adresse allein
+          # ist ein realer, aber eingegrenzter sendTest – sie braucht diese
+          # Freigabe nicht (Entscheidung 23.09.2026, dokumentiert im Skript).
+          NEWSLETTER_SEND: ${{ (inputs.live || inputs.planmaessig || github.event_name == 'schedule') && 'ja' || '' }}
+          # Eingaben als ENV statt als ${{ }}-Interpolation im Skripttext:
+          # ein String-Eingabefeld (test_adresse!) gehört nie ungefiltert in
+          # eine Shell-Zeile – als env-Wert ist sie Daten, kein Code.
+          EINGABE_TAGE: ${{ inputs.tage || '1' }}
+          EINGABE_TEST_ADRESSE: ${{ inputs.test_adresse || '' }}
         run: |
-          TAGE="${{ github.event.inputs.tage || '1' }}"
+          TAGE="$EINGABE_TAGE"
           case "$TAGE" in ''|*[!0-9]*) TAGE=1 ;; esac
           ARGS="--build --days $TAGE --out /tmp/ff-newsletter"
           # --send war bisher nur für „schedule“ verdrahtet – workflow_dispatch
           # durfte dadurch nie senden, weder „live“ noch als Testversand (Bug
           # 23.09.2026: Testlauf lief grün, die Mail kam nie an). Jetzt gilt:
-          # planmäßiger Lauf, „live“ oder eine Testadresse bedeuten jeweils
-          # „ja, es soll etwas raus“.
+          # planmäßiger Lauf, „live“, „planmaessig“ oder eine Testadresse
+          # bedeuten jeweils „ja, es soll etwas raus“.
           SENDEN=""
-          if [ "${{ github.event_name }}" = "schedule" ]; then
+          if [ "$NEWSLETTER_SEND" = "ja" ]; then
             SENDEN="ja"
           fi
-          if [ "${{ github.event.inputs.live }}" = "true" ]; then
-            SENDEN="ja"
-          fi
-          if [ -n "${{ github.event.inputs.test_adresse }}" ]; then
+          if [ -n "$EINGABE_TEST_ADRESSE" ]; then
             SENDEN="ja"
           fi
           if [ -n "$SENDEN" ]; then
@@ -119,12 +138,9 @@ jobs:
             # --live = Liste wirklich treffen. Der Testversand braucht es nicht:
             # er ist über die Testadresse bereits eine real eingegrenzte Aktion
             # (Brevo sendTest, nie sendNow).
-            if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.live }}" = "true" ]; then
+            if [ "$NEWSLETTER_SEND" = "ja" ]; then
               ARGS="$ARGS --live"
             fi
-          fi
-          if [ -n "${{ github.event.inputs.test_adresse }}" ]; then
-            ARGS="$ARGS --test-adresse ${{ github.event.inputs.test_adresse }}"
           fi
           # Ohne Absender kein Versand – und kein roter Lauf: der Leerzustand ist
           # eine Betreiber-Entscheidung, kein Defekt. Die Warnung steht im Log,
@@ -136,7 +152,11 @@ jobs:
             OHNE_ABSENDER="ja"
           fi
           set +e
-          python3 scripts/newsletter_digest.py $ARGS | tee /tmp/nl_build.log
+          # --test-adresse IMMER übergeben (leer = keiner): der Wert läuft als
+          # env-Variable in Anführungszeichen, nie als Skript-Interpolation –
+          # Leerzeichen in der Adresse splitten nichts, Inhalt kann keine
+          # Shell-Zeile erfinden.
+          python3 scripts/newsletter_digest.py $ARGS --test-adresse "$EINGABE_TEST_ADRESSE" | tee /tmp/nl_build.log
           rc=${PIPESTATUS[0]}
           set -e
           # Die Pipeline (| tee) verschluckt den Exit-Code des Skripts – hier
@@ -153,7 +173,14 @@ jobs:
               # im Log – sie wandert in die Annotation, damit die Ursache in der
               # Actions-Übersicht lesbar ist, bevor jemand Logs aufklappt.
               BEFUND=$(grep "❌" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
-              echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
+              # Ehrlichkeit nach dem Versand: meldet das Skript VERSAND ERFOLGT,
+              # ist die Mail raus und nur der Status unvollständig – die
+              # Annotation sagt dann genau das, nie das Gegenteil (Fix 23.09.2026).
+              if grep -q "VERSAND ERFOLGT" /tmp/nl_build.log; then
+                echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – der VERSAND IST RAUS, der Status ist unvollständig. ${BEFUND:-Details im Lauf-Log.}"
+              else
+                echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
+              fi
               exit "$rc"
             fi
           fi

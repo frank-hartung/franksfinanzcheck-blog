@@ -137,6 +137,12 @@ die Vorprüfung bricht dann ab, BEVOR bei Brevo eine Kampagne entsteht
 **6b. Freigabe** – entweder `live` **an** + `tage` = 1 manuell, oder einfach
 den nächsten Cron laufen lassen (Mo–Fr 05:05 UTC = 07:05 MESZ).
 `data/newsletter_state.json` merkt sich, was draußen war – keine Dopplung.
+Fällt der Cron still aus (GitHub verwirft/verschiebt `schedule`-Ereignisse
+unter Last – geschehen am 23.09.), holt die **Newsletter-Kadenz-Wache**
+(`newsletter-cadence.yml`, täglich ~08:11 UTC) den Lauf mit derselben
+Freigabestufe nach; ein FEHLGESCHLAGENER Lauf wird nicht automatisch
+wiederholt, sondern per Fehler-Alerting gemeldet (Report:
+`NEWSLETTER-KADENZ-ABSICHERUNG-2026-09-23.md`).
 
 **6c. Nach dem ersten Versand** – Datenschutzerklärung gegen den tatsächlichen
 Stand lesen (Wortlaut-Entwurf: `NEWSLETTER-RECHTSTEXT-VORLAGE.md`).
