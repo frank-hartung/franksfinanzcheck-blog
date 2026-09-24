@@ -78,6 +78,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr als der reine Anbieterwechsel."
+  ki_news_used: true
 
 - id: zinsumfeld-tagesgeld
   kategorie: konto
