@@ -164,8 +164,9 @@ bauen, nie senden):
   `email.absender.email` aus dem Studio; Standard ist bereits
   `news@franksfinanzcheck.de`, in der Regel also überflüssig
 - Probe: kein eigenes Test-Secret, sondern die Workflow-Eingabe
-  **`test_adresse`** im Lauf (→ `sendTest` an genau diese Adresse, Liste
-  bleibt unangetastet – s. Schritt 6)
+  **`test_adresse`** im Lauf (→ `sendTest` an genau diese Adresse; die Adresse
+  wird dafür VORAB als Kontakt angelegt und in die Zielliste aufgenommen,
+  s. Schritt 6 – ein Listenversand findet nicht statt)
 
 **Anmeldeweg auf der Website sichtbar machen** – zwei Varianten, beide in
 `hugo.toml` unter `[params]`, der Shortcode entscheidet in dieser Reihenfolge:
@@ -201,9 +202,14 @@ Actions → **Newsletter-Daily (Capture-Wache + Digest) → Run workflow**:
 1. ohne etwas anzukreuzen starten → der Lauf zeigt nur, was die Wache sieht (INERT oder
    Konfigurationsbefunde) und baut den Digest nach `/tmp`.
 2. `test_adresse` = deine Adresse (mehrere mit Komma), `live` **aus** →
-   Testversand über Brevo (`sendTest`, `emailTo` als Liste), die Liste wird
-   nicht angefasst. `replyTo` geht als reine Adresse an Brevo, nicht als
-   Objekt – sonst lehnt der Anbieter die Kampagne ab, bevor irgendetwas rausgeht.
+   Testversand über Brevo (`sendTest`, `emailTo` als Liste). Die Adresse wird
+   dafür VORAB als Kontakt angelegt und in die Zielliste aufgenommen (Brevo
+   nimmt Testmails nur an Kontakte mit Liste an; Schalter `test_kontakt`, Default
+   an – aus = Abbruch mit Klickweg statt Nachtrag); ein Listenversand findet
+   nicht statt. Erreicht der Lauf nur einen Teil der Adressen, meldet er
+   TEILVERSAND mit beiden Namen. `replyTo` geht als reine Adresse an Brevo,
+   nicht als Objekt – sonst lehnt der Anbieter die Kampagne ab, bevor
+   irgendetwas rausgeht.
 3. `live` **an** + `tage=7` → echter Versand an die Liste, nur am erlaubten Versandtag; der Digest merkt sich
    die Artikel in `data/newsletter_state.json` und baute sie nicht noch einmal
    (deshalb ist die Datei versioniert).

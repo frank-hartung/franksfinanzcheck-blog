@@ -57,10 +57,20 @@ Dieses Skript schließt beide Seiten der Lücke:
             Testadressen werden vor der Kampagne im Konto GEMESSEN: Brevo
             nimmt Testmails nur an existierende, nicht gesperrte Kontakte mit
             Listen-Zugehörigkeit an. Ein fehlender Kontakt wird – wenn nicht
-            per `--test-kontakt-nicht-anlegen` untersagt – ohne Listen-Eintrag
-            angelegt; eine Listen-Aufnahme passiert nur, wenn Brevo genau das
-            verlangt (und wird ausgewiesen). Eine Sperrliste löst nie ein
-            Skript – das bleibt ein Mensch (Kontakt anlegen: `POST /v3/contacts`,
+            per `--test-kontakt-nicht-anlegen` untersagt – angelegt und VORAB
+            in die Zielliste aufgenommen (Lauf 36024129599, 24.09.2026: Brevo
+            wies den ersten sendTest an Kontakte ohne Liste mit der
+            generischen Absage „Test emails cannot be sent to
+            non-existent/blacklisted/without-contact-list users“ ab – ohne
+            Adressliste, also ohne Ansatz für den Nachtrag. Der Vorab-Eintrag
+            macht genau diesen Fehler unmöglich, statt ihn zu reparieren).
+            Schlägt sendTest trotzdem fehl, wird die Absage in beiden Brevo-
+            Formaten gelesen – mit Adressliste (blackListedEmails u. a.) wie
+            ohne – und genau einmal an die reparierten Adressen wiederholt.
+            Erreicht der Retry nur einen Teil, meldet der Lauf TEILVERSAND
+            (welche Adresse ankam, welche nicht, je mit Grund) statt „nichts
+            versandt“. Eine Sperrliste löst nie ein Skript – das bleibt ein
+            Mensch (Kontakt anlegen: `POST /v3/contacts`,
             Liste: `POST /v3/contacts/lists/{id}/contacts/add`).
 
   --selftest Selbsttest, ohne Netzwerk, ohne Schreibzugriff auf den Bestand.
@@ -1052,6 +1062,13 @@ def _selftest() -> int:
             if pfad == "senders":
                 return 200, json.dumps({"senders": [
                     {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            if pfad.startswith("contacts/") and not pfad.startswith("contacts/lists/"):
+                # Die Testadresse ist sauberer Kontakt in der Zielliste – die
+                # Vorprüfung (Kontakt? Sperre? Liste?) läuft durch, ohne zu
+                # schreiben; geprüft wird der Versand, nicht der Nachtrag.
+                adr = urllib.parse.unquote(pfad.split("contacts/", 1)[1])
+                return 200, json.dumps({"email": adr, "id": 99,
+                                        "emailBlacklisted": False, "listIds": [7]})
             return 200, json.dumps({"id": 7, "totalSubscribers": 3})
         TRANSPORT = spy
         TRANSPORT_GET = spy_get
@@ -1149,6 +1166,10 @@ def _selftest() -> int:
             if pfad == "senders":
                 return 200, json.dumps({"senders": [
                     {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            if pfad.startswith("contacts/") and not pfad.startswith("contacts/lists/"):
+                adr = urllib.parse.unquote(pfad.split("contacts/", 1)[1])
+                return 200, json.dumps({"email": adr, "id": 99,
+                                        "emailBlacklisted": False, "listIds": [7]})
             return 200, json.dumps({"id": 7, "totalSubscribers": 0})
         TRANSPORT_GET = leer_liste_get
         rc20 = versende(r4, html, text, "X", dry_run=False,
@@ -1404,6 +1425,10 @@ def _selftest() -> int:
             if pfad == "senders":
                 return 200, json.dumps({"senders": [
                     {"email": "news@franksfinanzcheck.de", "active": True, "id": 1}]})
+            if pfad.startswith("contacts/") and not pfad.startswith("contacts/lists/"):
+                adr = urllib.parse.unquote(pfad.split("contacts/", 1)[1])
+                return 200, json.dumps({"email": adr, "id": 99,
+                                        "emailBlacklisted": False, "listIds": [7]})
             return 200, json.dumps({"id": 7, "totalSubscribers": 3})
         _http_request = probe_http
         aufgerufen.clear()
@@ -1467,13 +1492,15 @@ def _selftest() -> int:
         #     genau diesen Payload ab und nimmt einen ohne Empfänger an. Dazu
         #     die zweite, gemessene Absage (sendTest an eine Adresse, die kein
         #     Kontakt ist bzw. in keiner Liste steht): der Lauf legt den
-        #     Kontakt an (OHNE Listen-Eintrag – kein Abo nebenbei), trägt ihn
-        #     auf Brevos Verlangen in die Zielliste nach und wiederholt GENAU
-        #     EINMAL.
+        #     Kontakt VORAB an und nimmt ihn VORAB in die Zielliste auf – der
+        #     erste sendTest gelingt dadurch sofort (Lauf 36024129599 bewies,
+        #     dass „erst auf Verlangen“ zu spät ist: die generische Absage
+        #     trägt keine Adressliste und lässt keinen Nachtrag zu).
         kontakte: dict = {}
         listenmitglieder: set = set()
         gesperrt: set = set()
         anrufe: list = []
+        sonder: dict = {"generisch_einmal": False, "arrays_einmal": None}
         PROBE = "frank@beispiel.de"
 
         def brevo_nachbau(api_key, pfad, payload, methode):
@@ -1510,6 +1537,22 @@ def _selftest() -> int:
                                  'contacts associated with the given recipients info"}')
                 return 201, '{"id": 21}'
             if pfad.endswith("/sendTest"):
+                if sonder.get("generisch_einmal"):
+                    sonder["generisch_einmal"] = False
+                    # Die echte Brevo-Absage aus Lauf 36024129599, wortgleich:
+                    # kein Adressfeld, keine Liste – nur die Nachricht.
+                    return 400, ('{"code":"invalid_parameter","message":"Test emails cannot '
+                                 'be sent to non-existent/blacklisted/without-contact-list users"}')
+                if sonder.get("arrays_einmal"):
+                    arrays = sonder["arrays_einmal"]
+                    sonder["arrays_einmal"] = None
+                    return 400, json.dumps(
+                        {"code": "invalid_parameter",
+                         "message": "Test email could not be sent to the following "
+                                    "email addresses",
+                         "blackListedEmails": arrays.get("blacklist", []),
+                         "unexistingEmails": arrays.get("unbekannt", []),
+                         "withoutListEmails": arrays.get("ohne_liste", [])})
                 adressen = list((payload or {}).get("emailTo") or [])
                 fehlend = [a for a in adressen if a not in kontakte]
                 ohne_liste = [a for a in adressen
@@ -1540,14 +1583,18 @@ def _selftest() -> int:
                and str(kampagnen31[0].get("name") or "").startswith("TESTLAUF"),
                f"TEST-Kampagne trägt Empfänger oder heißt nicht TESTLAUF "
                f"(rc={rc31}): {kampagnen31}")
-        pruefe(sendtests31 == [{"emailTo": [PROBE]}, {"emailTo": [PROBE]}],
-               f"Nachtrag wurde nicht genau einmal wiederholt: {sendtests31}")
-        pruefe(any(m == "POST" and pfad == "contacts" for m, pfad, _ in anrufe)
-               and any(str(pfad).endswith("/contacts/add") for _, pfad, _ in anrufe),
-               f"Kontakt bzw. Listen-Eintrag nicht nachgetragen: "
-               f"{[(m, p) for m, p, _ in anrufe]}")
-        pruefe("no contacts associated" not in puffer.getvalue(),
-               f"der Fehler aus Lauf 36015927654 steht noch im Protokoll: "
+        pruefe(sendtests31 == [{"emailTo": [PROBE]}],
+               f"Vorab-Eintrag fehlt: der erste sendTest hätte gelingen müssen, "
+               f"stattdessen: {sendtests31}")
+        pfade31 = [(m, p) for m, p, _ in anrufe]
+        pruefe(("POST", "contacts") in pfade31
+               and any(str(p).endswith("/contacts/add") for _, p in pfade31)
+               and pfade31.index(("POST", "contacts"))
+               < pfade31.index(("POST", "emailCampaigns")),
+               f"Kontakt bzw. Listen-Eintrag nicht VOR der Kampagne angelegt: {pfade31}")
+        pruefe("no contacts associated" not in puffer.getvalue()
+               and "without-contact-list" not in puffer.getvalue(),
+               f"ein Fehler aus Lauf 36015927654/36024129599 steht noch im Protokoll: "
                f"{puffer.getvalue()[-240:]}")
         pruefe(lade_state(r4).get("test_kampagne_id") == 21
                and bool(lade_state(r4).get("zuletzt_getestet")),
@@ -1557,6 +1604,7 @@ def _selftest() -> int:
         #     endet mit Klickweg, BEVOR eine Kampagne oder ein Kontakt entsteht.
         kontakte.clear()
         listenmitglieder.clear()
+        gesperrt.clear()
         anrufe.clear()
         puffer = io.StringIO()
         with contextlib.redirect_stdout(puffer):
@@ -1567,6 +1615,24 @@ def _selftest() -> int:
         pruefe("kein Kontakt im Brevo-Konto" in puffer.getvalue()
                and "test_kontakt" in puffer.getvalue(),
                f"Abbruch nennt Zustand und Weg nicht: {puffer.getvalue()[-260:]}")
+
+        # 32b) Dasselbe für den Kontakt ohne Liste: auch er bricht ohne Freigabe
+        #     mit Klickweg ab, bevor irgendetwas entsteht. (Vor Lauf 36024129599
+        #     lief genau dieser Zustand bis zum sendTest durch – und starb dort
+        #     an der generischen Absage, die keinen Nachtrag zulässt.)
+        kontakte[PROBE] = True
+        listenmitglieder.clear()
+        gesperrt.clear()
+        anrufe.clear()
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc32b = versende(r4, html, text, "X", dry_run=False, test_adresse=PROBE,
+                             test_kontakt_anlegen=False)
+        pruefe(rc32b == 1 and not any(m == "POST" for m, _, _ in anrufe),
+               f"Kontakt ohne Liste schrieb ohne Freigabe (rc={rc32b}): {anrufe}")
+        pruefe("keiner Liste" in puffer.getvalue()
+               and "test_kontakt" in puffer.getvalue(),
+               f"Abbruch nennt Listenstand und Weg nicht: {puffer.getvalue()[-260:]}")
 
         # 33) Eine gesperrte Testadresse wird NICHT automatisch entsperrt:
         #     eine Sperre ist das Ergebnis einer Beschwerde/eines Bounces –
@@ -1594,6 +1660,65 @@ def _selftest() -> int:
         pruefe(kampagnen_absage_hinweis(
             '{"code":"invalid_parameter","message":"ReplyTo email should be valid"}') == "",
             "unbekannte Absage wurde gedeutet")
+        generisch34 = ('{"code":"invalid_parameter","message":"Test emails cannot be sent to '
+                       'non-existent/blacklisted/without-contact-list users"}')
+        pruefe(testmail_generisch(generisch34),
+               "generische sendTest-Absage (Lauf 36024129599) nicht erkannt")
+        pruefe(not testmail_generisch(
+            '{"code":"invalid_parameter","message":"Test email could not be sent to the '
+            'following email addresses","withoutListEmails":["a@b.de"]}'),
+               "dokumentierte Absage gilt fälschlich als generisch")
+        pruefe("Blog-Abonnenten" in testmail_hinweis(generisch34, [PROBE]),
+               f"generische Absage ohne Klickweg: {testmail_hinweis(generisch34, [PROBE])!r}")
+        pruefe(testmail_hinweis(
+            '{"code":"invalid_parameter","message":"something completely new"}', [PROBE]) == "",
+            "unbekannte Testmail-Absage wurde gedeutet")
+
+        # 35) Die generische Absage trotz Vorprüfung (Konsistenzlücke zwischen
+        #     Messen und Senden): der Lauf misst jede Adresse einzeln nach,
+        #     trägt nach und wiederholt GENAU EINMAL – danach liegt die Mail an.
+        kontakte.clear()
+        listenmitglieder.clear()
+        gesperrt.clear()
+        anrufe.clear()
+        sonder["generisch_einmal"] = True
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc35 = versende(r4, html, text, "X", dry_run=False, test_adresse=PROBE)
+        sendtests35 = [p for m, pfad, p in anrufe
+                       if m == "POST" and str(pfad).endswith("/sendTest")]
+        pruefe(rc35 == 0 and sendtests35 == [{"emailTo": [PROBE]}, {"emailTo": [PROBE]}],
+               f"generische Absage nicht genau einmal wiederholt (rc={rc35}): {sendtests35}")
+        pruefe("OHNE Adressliste" in puffer.getvalue(),
+               f"Protokoll benennt das generische Format nicht: {puffer.getvalue()[-260:]}")
+
+        # 36) TEILVERSAND: zwei Adressen, eine wird zwischen Vorprüfung und
+        #     Senden gesperrt (schwarze Liste kennt nur Brevo selbst). Der Retry
+        #     erreicht die reparierte Adresse – der Lauf meldet rot, nennt aber
+        #     Erreichte UND Unerreichte beim Namen, statt „nichts versandt“.
+        PROBE_A = "anna@beispiel.de"
+        PROBE_B = "berta@beispiel.de"
+        kontakte.clear()
+        listenmitglieder.clear()
+        gesperrt.clear()
+        for adr in (PROBE_A, PROBE_B):
+            kontakte[adr] = True
+            listenmitglieder.add(adr)
+        anrufe.clear()
+        sonder["arrays_einmal"] = {"blacklist": [PROBE_A], "ohne_liste": [PROBE_B]}
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc36 = versende(r4, html, text, "X", dry_run=False,
+                            test_adresse=f"{PROBE_A}, {PROBE_B}")
+        sendtests36 = [p for m, pfad, p in anrufe
+                       if m == "POST" and str(pfad).endswith("/sendTest")]
+        pruefe(rc36 == 1 and sendtests36 == [{"emailTo": [PROBE_A, PROBE_B]},
+                                             {"emailTo": [PROBE_B]}],
+               f"Teilerfolg nicht als Retry an die Teilmenge (rc={rc36}): {sendtests36}")
+        pruefe("TEILVERSAND" in puffer.getvalue()
+               and PROBE_B in puffer.getvalue() and PROBE_A in puffer.getvalue()
+               and "nichts versandt" not in puffer.getvalue(),
+               f"TEILVERSAND nennt Adressen nicht ehrlich: {puffer.getvalue()[-320:]}")
 
         _http_request = http_echt
         TRANSPORT = brevo
@@ -1622,7 +1747,9 @@ def _selftest() -> int:
           f"previewText/SSOT-Payload, Kampagnen-Schema (replyTo-String, emailTo-Liste), "
           f"Vorflug, Testversand-Verdrahtung, "
           f"Probelauf an leerer Liste (TEST-Kampagne ohne Empfänger, "
-          f"Kontakt-/Listen-Nachtrag genau einmal, Sperre ohne Auto-Entsperren), "
+          f"Vorab-Eintrag in die Zielliste, generische Absage mit Nachtrag genau "
+          f"einmal, TEILVERSAND nennt Erreichte/Unerreichte, Sperre ohne "
+          f"Auto-Entsperren), "
           f"Client-Kennung und Kantenblockage, Wiederholung nur fürs Lesen, "
           f"Nachlese bei unklarem Sendegang, Versand-Halt, Versand-Ehrlichkeit, "
           f"State-Konfiguration, Host-Guard für BREVO_API_HOST).")
@@ -1913,21 +2040,63 @@ def sendeaufruf_body(adressen: list[str]) -> dict | None:
 #       trägt eine TEST-Kampagne seit dieser Reparatur keine Empfänger mehr.
 #   (2) Beim SENDEN der Testmail: „Test emails cannot be sent to non-existent/
 #       blacklisted/without-contact-list users“ (Brevo, sendTest; belegt u. a.
-#       in vjpixel/diaria-studio#8436, 19.09.2026). Eine Testadresse muss also
-#       als Kontakt im Konto existieren, darf nicht gesperrt sein und braucht
-#       eine Listen-Zugehörigkeit (Brevo-Hilfe „Create a test list“: „To add an
+#       in vjpixel/diaria-studio#8436, 19.09.2026, und im eigenen Lauf
+#       36024129599, 24.09.2026). Eine Testadresse muss also als Kontakt im
+#       Konto existieren, darf nicht gesperrt sein und braucht eine
+#       Listen-Zugehörigkeit (Brevo-Hilfe „Create a test list“: „To add an
 #       email address to your test list, you first have to add it to your
 #       contacts.“).
 # Der Probelauf aus Checkliste 6a fällt damit nicht mehr an Zuständen des
 # Kontos um, die er selbst erzeugen kann: Er MISST die Testadresse vor der
-# Kampagne, legt einen fehlenden Kontakt an (ohne Listen-Eintrag – kein
-# Newsletter an jemanden, der nie zugestimmt hat) und trägt ihn nur dann in die
-# Zielliste nach, wenn Brevo genau das verlangt (und die Freigabe es erlaubt).
+# Kampagne, legt einen fehlenden Kontakt an und nimmt ihn VORAB in die
+# Zielliste auf – Lauf 36024129599 bewies, dass „erst auf Verlangen“ zu spät
+# ist: Brevo weist den ersten sendTest an Kontakte ohne Liste mit der
+# GENERISCHEN Absage (2) ab, die keine Adressliste trägt und damit keinen
+# Ansatz für den Nachtrag lässt. Der Vorab-Eintrag verhindert den Fehler,
+# statt ihn zu reparieren; der Nachtrag bleibt für den Rest (Konsistenzlücke
+# zwischen Vorprüfung und Senden) und liest beide Absage-Formate.
 TESTMAIL_CLASSES = {
     "blackListedEmails": "blacklist",
     "unexistingEmails": "unbekannt",
     "withoutListEmails": "ohne_liste",
 }
+
+
+def kontakt_in_liste(dat: dict, liste: str | int) -> bool:
+    """Steht dieser Kontakt-Datensatz (`GET /contacts/{id}`) in der Zielliste?
+
+    Brevos `listIds` sind Ganzzahlen; `BREVO_LIST_ID` kommt als String aus dem
+    Secret. Der Vergleich läuft normalisiert (int gegen int), damit „7“ in
+    [7] liegt und ein kaputter Datensatz („listIds“: null) als „nein“ zählt,
+    nicht als Absturz.
+    """
+    try:
+        ziel = int(str(liste).strip())
+    except (TypeError, ValueError):
+        return False
+    ids = (dat or {}).get("listIds") or []
+    return any(isinstance(i, int) and not isinstance(i, bool) and i == ziel
+               for i in ids)
+
+
+def testmail_generisch(antwort: str) -> bool:
+    """Trägt diese sendTest-Absage KEINE Adressliste (generisches Format)?
+
+    Brevo kennt zwei 400-Formen für sendTest: die dokumentierte („Test email
+    could not be sent to the following email addresses“ + blackListedEmails u.
+    a.) und die generische („Test emails cannot be sent to
+    non-existent/blacklisted/without-contact-list users“, ohne jede Liste –
+    Lauf 36024129599). Gelesen wird das `message`-Feld, nicht der rohe Leib:
+    der Feldname `withoutListEmails` der dokumentierten Form dürfte sonst als
+    generisch gelten. Unlesbares ist nicht generisch, sondern unbekannt.
+    """
+    try:
+        dat = json.loads(antwort or "")
+        text = str(dat.get("message") or "") if isinstance(dat, dict) else (antwort or "")
+    except json.JSONDecodeError:
+        text = antwort or ""
+    kompakt = re.sub(r"[^a-z]", "", text.lower())
+    return "withoutcontactlist" in kompakt
 
 
 def kontakt_lesen(key: str, adresse: str) -> tuple[str, dict, str]:
@@ -1990,15 +2159,19 @@ def liste_aufnehmen(key: str, liste: str, adressen: list[str]) -> tuple[int, lis
     return 0, erfolg, ""
 
 
-def testadressen_pruefen(key: str, adressen: list[str], *,
+def testadressen_pruefen(key: str, liste: str, adressen: list[str], *,
                          anlegen: bool) -> tuple[int, str, dict]:
     """Vorflug der Testadressen. → (rc, befund, zustand je Adresse)
 
     Gemessen wird, was Brevo für `sendTest` verlangt: Kontakt ja/nein,
     E-Mail-Sperre ja/nein, Listen-Zugehörigkeit. Ein fehlender Kontakt wird –
-    sofern freigegeben – angelegt; eine Sperre wird NIE automatisch gelöst
-    (eine Sperrliste ist eine Aussage eines Menschen oder eines Bounces, kein
-    Tippfehler). Ohne Freigabe bricht der Lauf mit dem exakten Klickweg ab.
+    sofern freigegeben – angelegt; steht er danach in keiner Liste, wird er
+    VORAB in die Zielliste aufgenommen (seit Lauf 36024129599: Brevo weist
+    den ersten sendTest an Kontakte ohne Liste generisch ab – ohne
+    Adressliste, also ohne Ansatz für den Nachtrag). Eine Sperre wird NIE
+    automatisch gelöst (eine Sperrliste ist eine Aussage eines Menschen oder
+    eines Bounces, kein Tippfehler). Ohne Freigabe bricht der Lauf mit dem
+    exakten Klickweg ab – bevor eine Kampagne oder ein Kontakt entsteht.
     """
     zustand: dict = {}
     for adresse in adressen:
@@ -2020,8 +2193,7 @@ def testadressen_pruefen(key: str, adressen: list[str], *,
                 return 1, (f"Testadresse {adresse} konnte nicht als Kontakt "
                            f"angelegt werden ({brevo_fehler(code, antwort)})."), zustand
             print(f"   ℹ️  Testadresse {adresse} war kein Kontakt im Konto und "
-                  "wurde als Kontakt angelegt (ohne Listen-Eintrag – kein "
-                  "Newsletter-Abo).")
+                  "wurde als Kontakt angelegt.")
             art, dat, meldung = kontakt_lesen(key, adresse)
             if art != "kontakt":
                 return 1, (f"Testadresse {adresse} nach dem Anlegen nicht "
@@ -2034,6 +2206,36 @@ def testadressen_pruefen(key: str, adressen: list[str], *,
                 "without-contact-list users“). Nächster Schritt: Brevo → "
                 "Contacts → Kontakt öffnen → „Unblock“ (bewusst ein Mensch: "
                 "eine Sperre kann das Ergebnis einer Beschwerde sein)."), zustand
+        if not kontakt_in_liste(dat, liste):
+            if not anlegen:
+                return 1, (
+                    f"Testadresse {adresse} ist zwar Kontakt im Brevo-Konto, steht "
+                    "aber in keiner Liste – Brevo weist Testmails an solche Kontakte ab "
+                    "(„without-contact-list users“). Nächster Schritt: Brevo → Contacts → "
+                    "Listen → Blog-Abonnenten → Add contacts (exakt diese Adresse), oder "
+                    "den Lauf mit angelegtem Kontakt starten (Workflow-Eingabe `test_kontakt` "
+                    "= anlegen)."), zustand
+            rc_a, aufgenommen, meldung_a = liste_aufnehmen(key, liste, [adresse])
+            if rc_a != 0:
+                return 1, (f"Testadresse {adresse} konnte nicht in die Zielliste {liste} "
+                           f"aufgenommen werden ({meldung_a}) – Brevo verlangt für Testmails "
+                           "eine Listen-Zugehörigkeit."), zustand
+            print(f"   ℹ️  Testadresse {adresse} stand in keiner Liste und wurde VORAB in die "
+                  f"Zielliste {liste} aufgenommen (Brevo verlangt für Testmails eine "
+                  "Listen-Zugehörigkeit; Zustimmung des Betreibers über die "
+                  "Testadress-Eingabe – jede Mail trägt den Ein-Klick-Abmeldelink).")
+            # Der Nachtrag ist quittiert (`success`); ein Nachlesen wäre eine
+            # zweite Meinung über dieselbe Tatsache – bei Brevos Konsistenzlücke
+            # die flackernde. Der lokale Stand trägt den Eintrag nach.
+            dat = dict(dat)
+            ids = list(dat.get("listIds") or [])
+            try:
+                ziel = int(str(liste).strip())
+            except (TypeError, ValueError):
+                ziel = None
+            if ziel is not None and ziel not in ids:
+                ids.append(ziel)
+            dat["listIds"] = ids
         zustand[adresse] = dat
     return 0, "", zustand
 
@@ -2067,14 +2269,19 @@ def testmail_nachtragen(key: str, liste: str, adressen: list[str], antwort: str,
                         anlegen: bool) -> tuple[int, list[str], str]:
     """Reparatur einer sendTest-Absage: Kontakt nachtragen, Liste nachtragen.
 
-    Nur für die beiden Klassen, die eine Reparatur überhaupt kennen
-    (unbekannte Adresse → Kontakt anlegen; ohne Listen-Eintrag → in die
-    Zielliste aufnehmen). Gesperrte Adressen bleiben gesperrt – das ist eine
+    Liest beide Absage-Formate: mit Adressliste (unbekannte Adresse → Kontakt
+    anlegen; ohne Listen-Eintrag → in die Zielliste aufnehmen) wie ohne
+    (generisch – dann wird jede Adresse einzeln nachgemessen, statt alle über
+    einen Kamm zu scheren). Gesperrte Adressen bleiben gesperrt – das ist eine
     Betreiber-Entscheidung, kein Automatismus.
     → (rc, wiederholbare_adressen, meldung)
     """
     klasse = testmail_abweisung(antwort)
     kandidaten = [a for a in klasse["unbekannt"] + klasse["ohne_liste"] if a in adressen]
+    generisch = (not kandidaten and not klasse["blacklist"]
+                 and testmail_generisch(antwort))
+    if generisch:
+        kandidaten = list(adressen)
     if not kandidaten:
         return 1, [], ""
     if not anlegen:
@@ -2085,9 +2292,27 @@ def testmail_nachtragen(key: str, liste: str, adressen: list[str], antwort: str,
             "Blog-Abonnenten → Add contacts. Ohne diesen Eintrag bleibt der "
             "Testversand gesperrt (Workflow-Eingabe `test_kontakt` = anlegen "
             "macht das automatisch).")
+    if generisch:
+        # Die Absage nennt keine Adressen – also wird jede einzeln nachgemessen:
+        # eine gesperrte Adresse darf nie in den Listen-Nachtrag rutschen, und
+        # das Protokoll nennt sie beim Namen statt „irgendeine“.
+        vermessen: list[str] = []
+        for adresse in kandidaten:
+            art, dat, _ = kontakt_lesen(key, adresse)
+            if art == "kontakt" and dat.get("emailBlacklisted") is True:
+                print(f"   ⚠️  Testadresse {adresse} steht auf der E-Mail-Sperrliste – "
+                      "kein Nachtrag, kein Entsperren (Brevo → Contacts → Kontakt → "
+                      "Unblock; bewusst ein Mensch).")
+                continue
+            vermessen.append(adresse)
+        kandidaten = vermessen
+        if not kandidaten:
+            return 1, [], ""
     offen = list(kandidaten)
     for adresse in list(offen):
-        if adresse in klasse["unbekannt"]:
+        # Generisch ist der Kontaktstand unbekannt – `kontakt_anlegen` ist mit
+        # `updateEnabled` idempotent (201 neu, 204 schon da), also gefahrlos.
+        if adresse in klasse["unbekannt"] or generisch:
             code, ant = kontakt_anlegen(key, adresse)
             if code not in (200, 201, 204):
                 offen.remove(adresse)
@@ -2105,6 +2330,32 @@ def testmail_nachtragen(key: str, liste: str, adressen: list[str], antwort: str,
           "Testadress-Eingabe; jede Mail trägt den Ein-Klick-Abmeldelink) – "
           "genau das verlangt Brevo für Testmails an Kontakte ohne Liste.")
     return 0, list(aufgenommen), ""
+
+
+def testmail_hinweis(antwort: str, adressen: list[str]) -> str:
+    """Nicht-reparierbare sendTest-Absagen in den nächsten Schritt übersetzen.
+
+    Reparierbares (fehlender Kontakt, fehlende Liste) löst `testmail_nachtragen`;
+    was hier steht, braucht einen Menschen oder Geduld: Sperrliste, Tageslimit,
+    oder die generische Absage nach einem gescheiterten Nachtrag. Unbekanntes
+    bleibt leer – lieber keine Deutung als eine falsche.
+    """
+    text = (antwort or "").lower()
+    if "50" in text and any(w in text for w in ("test", "limit", "day", "daily", "quota")):
+        return ("Brevo begrenzt Testmails auf 50 pro Tag – das Tageslimit ist erreicht. "
+                "Nächster Schritt: morgen erneut laufen lassen, oder weniger Adressen pro Lauf.")
+    klasse = testmail_abweisung(antwort)
+    if klasse["blacklist"] and not klasse["unbekannt"] and not klasse["ohne_liste"]:
+        return (f"Brevo lehnt die Testmail an {', '.join(klasse['blacklist'])} ab: Kontakt auf der "
+                "E-Mail-Sperrliste. Nächster Schritt: Brevo → Contacts → Kontakt öffnen → „Unblock“ "
+                "(bewusst ein Mensch: eine Sperre kann das Ergebnis einer Beschwerde sein).")
+    if testmail_generisch(antwort):
+        return (f"Brevo weist die Testmail an {', '.join(adressen)} ab, ohne die Adresse zu nennen "
+                "(„non-existent/blacklisted/without-contact-list users“). Nächster Schritt: Brevo → "
+                "Contacts → jede Adresse suchen – fehlt sie, als Kontakt anlegen; steht sie auf der "
+                "Sperrliste, per „Unblock“ lösen; steht sie in keiner Liste, in „Blog-Abonnenten“ "
+                "aufnehmen. Danach erneut laufen lassen.")
+    return ""
 
 
 # ------------------------------------------------------------------------- Versand
@@ -2287,7 +2538,7 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     # Adresse scheitert – und damit „kein Kontakt“ nie als „Brevo kaputt“
     # missverstanden wird.
     if adressen:
-        rc_t, befund_t, _ = testadressen_pruefen(key, adressen,
+        rc_t, befund_t, _ = testadressen_pruefen(key, liste, adressen,
                                                  anlegen=test_kontakt_anlegen)
         if rc_t != 0:
             print(f"   ❌ kein Testversand: {befund_t}")
@@ -2354,12 +2605,15 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
             print(f"   ❌ kein Versand: Versandtermin nicht sicher gespeichert: {exc}")
             return 1
     code2, antwort2 = TRANSPORT(key, pfad, body)
-    # Testmail-Absage mit Adressklassen (Kontakt fehlt / ohne Listen-Eintrag):
+    # Testmail-Absage (Kontakt fehlt / ohne Listen-Eintrag / generisch):
     # reparieren und GENAU EINMAL wiederholen. Der 400er ist hier ein Beleg
-    # dafür, dass nichts rausging (Brevo nennt die abgewiesenen Adressen
-    # einzeln) – ein Wiederholen ist also kein Doppelversand, sondern der
-    # vorgesehene zweite Schritt. Gesperrte Adressen werden nicht angefasst.
+    # dafür, dass nichts rausging – ein Wiederholen ist also kein
+    # Doppelversand, sondern der vorgesehene zweite Schritt. Gesperrte
+    # Adressen werden nicht angefasst. `versandt_an` trägt, an wen der
+    # erfolgreiche Aufruf wirklich ging: nach einem Retry an eine Teilmenge
+    # wäre „Testversand an A, B“ eine Lüge (Lauf 36024129599-Lehre).
     SEND_OK = (200, 201, 202, 204)
+    versandt_an = list(adressen)
     if code2 not in SEND_OK and adressen and antwort_endgueltig_abgelehnt(code2, antwort2):
         klassen = testmail_abweisung(antwort2)
         if klassen["unbekannt"] or klassen["ohne_liste"] or klassen["blacklist"]:
@@ -2367,6 +2621,10 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
                   f"unbekannt: {klassen['unbekannt'] or '—'}, ohne Liste: "
                   f"{klassen['ohne_liste'] or '—'}, gesperrt: "
                   f"{klassen['blacklist'] or '—'}.")
+        elif testmail_generisch(antwort2):
+            print("   ℹ️  Brevo weist die Testmail OHNE Adressliste ab "
+                  f"({brevo_fehler(code2, antwort2)}) – jede Adresse wird einzeln "
+                  "nachgemessen und, soweit freigegeben, repariert.")
         _, nachgetragen, meldung_n = testmail_nachtragen(
             key, liste, adressen, antwort2, anlegen=test_kontakt_anlegen)
         if meldung_n:
@@ -2381,6 +2639,12 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
                   f"({brevo_fehler(code2, antwort2)}) – nach dem Nachtrag genau "
                   "ein Wiederholungsversuch an die reparierten Adressen.")
             code2, antwort2 = TRANSPORT(key, pfad, sendeaufruf_body(nachgetragen))
+            versandt_an = list(nachgetragen)
+        else:
+            versandt_an = []
+            hinweis = testmail_hinweis(antwort2, adressen)
+            if hinweis:
+                print(f"   ℹ️  {hinweis}")
     if code2 not in SEND_OK:
         # Der seltene, teure Fall: die Antwort auf den Sende-Aufruf ist verloren
         # gegangen (Kantenblock, 502, Zeitlimit), die Sendung kann aber schon
@@ -2390,6 +2654,12 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         if antwort_endgueltig_abgelehnt(code2, antwort2):
             print(f"   ❌ Versand fehlgeschlagen ({brevo_fehler(code2, antwort2)}) "
                   "– die Kampagne existiert als Entwurf, versandt ist nichts.")
+            if adressen:
+                # Der Retry schlug mit einer neuen Absage fehl (oder es gab nie
+                # einen Ansatz): der nächste Schritt gehört zum LETZTEN Fehler.
+                hinweis = testmail_hinweis(antwort2, adressen)
+                if hinweis:
+                    print(f"   ℹ️  {hinweis}")
             return 1
         kunde, grund = versand_nachlesen(key, kennung)
         if kunde == "raus":
@@ -2403,12 +2673,25 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
                   f"Nachlese: {grund} – es ist nichts versandt, der nächste Lauf darf "
                   "erneut senden.")
             return 1
-        # UNKLAR: weder Beleg noch Gegenteil. Hier entscheidet die Richtung des
-        # Schadens: eine verpasste Ausgabe ist ärgerlich, eine Doppelzustellung an
-        # die ganze Liste erzeugt Abmeldungen, Spam-Beschwerden und – bei Gmail –
-        # einen Reputationsschaden, der wochenlang nachwirkt. Also: NICHTS
-        # wiederholen, NICHTS verbuchen, aber den nächsten Listen-Versand
-        # anhalten, bis ein Mensch im Konto nachgesehen hat (Sperre im Status).
+        if adressen:
+            # UNKLAR beim TEST: weder Beleg noch Gegenteil – aber der Schaden ist
+            # hier klein (eine zweite Testmail ist harmlos, keine Liste ist
+            # betroffen). Deshalb KEIN Halt für den Listen-Versand: ein
+            # Test-Glitch darf den echten Versand nicht blockieren. Erneut
+            # laufen lassen ist gefahrlos.
+            print(f"   ❌ TESTVERSAND-STATUS UNKLAR ({brevo_fehler(code2, antwort2)}); "
+                  f"Nachlese: {grund}. Der Test wurde NICHT wiederholt und NICHT "
+                  f"verbucht – Kampagne {kennung} in Brevo prüfen (Kampagnen → Detail). "
+                  "Erneut laufen lassen ist gefahrlos (Test-Dopplung schadet niemandem); "
+                  "der Listen-Versand bleibt davon unberührt (kein Halt gesetzt).")
+            return 1
+        # UNKLAR beim LIVE-Versand: weder Beleg noch Gegenteil. Hier entscheidet
+        # die Richtung des Schadens: eine verpasste Ausgabe ist ärgerlich, eine
+        # Doppelzustellung an die ganze Liste erzeugt Abmeldungen,
+        # Spam-Beschwerden und – bei Gmail – einen Reputationsschaden, der
+        # wochenlang nachwirkt. Also: NICHTS wiederholen, NICHTS verbuchen,
+        # aber den nächsten Listen-Versand anhalten, bis ein Mensch im Konto
+        # nachgesehen hat (Sperre im Status).
         print(f"   ❌ VERSAND-STATUS UNKLAR ({brevo_fehler(code2, antwort2)}); Nachlese: "
               f"{grund}. Der Versand wurde NICHT wiederholt (Doppelungsgefahr) und "
               f"der Duplikatsschutz wurde NICHT verbucht. Kampagne {kennung} in Brevo "
@@ -2420,10 +2703,27 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
               "mit Datum ersetzen – bewusst Mensch, nicht Automatik).")
         sperre_setzen(root, kennung, betreff)
         return 1
-    ziel = ", ".join(adressen)
-    print(f"   ✅ {'Testversand an ' + ziel if adressen else 'Versand angestoßen'}"
-          f" (Kampagne {kennung})")
-    return _status_schreiben(root, kennung, betreff, ziel, vorab_rc=0)
+    if adressen:
+        # Erfolg – aber an wen genau? Nach einem Retry an eine Teilmenge nennt
+        # das Protokoll die erreichten UND die unerreichten Adressen: „✅
+        # Testversand an A, B“ nach einem Retry an nur B wäre die Lüge, die
+        # Lauf 36024129599 hinterlassen hätte. TEILVERSAND ist rot (rc 1),
+        # damit der Befund im Alerting landet – der Workflow spricht ihn als
+        # Teilerfolg aus, nie als „nichts versandt“.
+        unerreicht = [a for a in adressen if a not in versandt_an]
+        if unerreicht:
+            print(f"   ⚠️  TEILVERSAND (Kampagne {kennung}): zugestellt an "
+                  f"{', '.join(versandt_an) or '—'} – NICHT erreicht: {', '.join(unerreicht)} "
+                  "(Grund steht oben). Erneut laufen lassen, sobald der Kontakt im Konto "
+                  "sauber ist.")
+            return 1
+        ziel = ", ".join(versandt_an)
+        print(f"   ✅ Testversand an {ziel} (Kampagne {kennung}) – bitte Postfach UND "
+              "Spam-Ordner prüfen (ein angenommenes sendTest heißt „Brevo hat es“, "
+              "nicht „es liegt im Posteingang“).")
+        return _status_schreiben(root, kennung, betreff, ziel, vorab_rc=0)
+    print(f"   ✅ Versand angestoßen (Kampagne {kennung})")
+    return _status_schreiben(root, kennung, betreff, "", vorab_rc=0)
 
 
 def _status_schreiben(root: str, kennung, betreff: str, test_adresse: str, *,

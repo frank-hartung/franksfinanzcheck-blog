@@ -155,8 +155,9 @@ Optional: Variable `NEWSLETTER_ABSENDER`, falls der Absender sich je von
 `news@franksfinanzcheck.de` unterscheiden soll. Kein `BREVO_TEST_LIST_ID` /
 `NEWSLETTER_TEST` – das existiert nicht; die Probe ist die Workflow-Eingabe
 `test_adresse` (Schritt 6a). Der Schalter **`test_kontakt`** (dort, Default
-**an**) entscheidet, ob der Lauf eine im Konto fehlende Testadresse als Kontakt
-nachtragen darf – er schreibt nur, wenn Brevo es verlangt, und weist es aus.
+**an**) entscheidet, ob der Lauf eine im Konto fehlende Testadresse VORAB als
+Kontakt anlegen und in die Zielliste aufnehmen darf – er schreibt nur, was
+Brevo für Testmails verlangt (Kontakt + Liste), und weist es aus.
 
 ## 5. Die eine JSON-Zeile — ✅ erledigt (22.09., PR #354)
 
@@ -195,15 +196,30 @@ Seit der Probelauf-Reparatur (24.09., Report
 #23 starb an `HTTP 400: There are no contacts associated with the given
 recipients info`, weil die Kampagne auf die Liste mit 0 Abonnenten zeigte.
 Brevo nimmt Testmails außerdem nur an **bestehende, nicht gesperrte Kontakte mit
-Listen-Zugehörigkeit** an (`blackListedEmails` / `unexistingEmails` /
-`withoutListEmails`); der Lauf misst die Adresse deshalb **vorher** im Konto.
-Fehlt sie als Kontakt, legt er sie standardmäßig an (Eingabe `test_kontakt` =
-**an**, ohne Listen-Eintrag – kein Abo nebenbei) und nimmt sie nur dann in
-„Blog-Abonnenten“ auf, wenn Brevo genau das verlangt. Beides steht im Protokoll
-(`ℹ️ Testadresse … wurde als Kontakt angelegt`). `test_kontakt` = **aus** macht
-daraus einen Abbruch mit Klickweg, ohne jeden Schreibzugriff; eine gesperrte
-Adresse wird NIE automatisch entsperrt (Brevo → Contacts → Kontakt → *Unblock*,
-bewusst ein Mensch).
+Listen-Zugehörigkeit** an; der Lauf misst die Adresse deshalb **vorher** im Konto
+und legt sie standardmäßig **VORAB** an – als Kontakt UND in „Blog-Abonnenten“
+(Eingabe `test_kontakt` = **an**). „Erst auf Verlangen“ ist seit Lauf #26
+bewiesen zu spät: Brevo wies den ersten `sendTest` an Kontakte ohne Liste
+GENERISCH ab (`Test emails cannot be sent to non-existent/blacklisted/
+without-contact-list users` – ohne Adressliste, also ohne Ansatz für den
+Nachtrag). Beides steht im Protokoll (`ℹ️ Testadresse … wurde als Kontakt
+angelegt` / `… VORAB in die Zielliste … aufgenommen`). Schlägt `sendTest`
+trotzdem fehl (Konsistenzlücke zwischen Messen und Senden), liest der Nachtrag
+beide Brevo-Formate – mit Adressliste (`blackListedEmails` / `unexistingEmails` /
+`withoutListEmails`) wie ohne – und wiederholt genau einmal. Erreicht der Retry
+nur einen Teil der Adressen, meldet der Lauf **TEILVERSAND** (welche Adresse
+ankam, welche nicht, je mit Grund) statt „nichts versandt“. `test_kontakt` =
+**aus** macht aus jedem fehlenden Kontakt- oder Listenstand einen Abbruch mit
+Klickweg, ohne jeden Schreibzugriff; eine gesperrte Adresse wird NIE automatisch
+entsperrt (Brevo → Contacts → Kontakt → *Unblock*, bewusst ein Mensch).
+Details: Report `NEWSLETTER-TESTLAUF-PREMIUM-2026-09-24.md`.
+> **Zwei Adressen, zwei Postfächer:** `kontakt@franksfinanzcheck.de` ist eine
+> **Weiterleitung** (Cloudflare Email Routing), kein Postfach – die Testmail
+> landet im dahinterliegenden **Zielpostfach** (dort auch den Spam-Ordner
+> prüfen) und erscheint im Cloudflare-Routing-Log. Kommt sie dort nicht an,
+> die private Adresse (`frankhartung@web.de`) zuerst prüfen: Geht die eine und
+> die andere nicht, ist es kein Versandfehler, sondern die Weiterleitung
+> (Regel aktiv? Zieladresse verifiziert? DMARC-Stufe, s. Schritt 2).
 Kommt keine Mail, sagt der Lauf seit der Versand-Reparatur (23.09.) selbst,
 warum – die Ursache steht in der roten Annotation und im Step-Summary:
 „Digest ist leer“ (gelbe Warnung) heißt, im Zeitraum liegt kein
