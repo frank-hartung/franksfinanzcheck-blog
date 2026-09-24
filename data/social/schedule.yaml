@@ -1706,9 +1706,9 @@ items:
   date: '2026-09-24'
   time: 07:00
   scheduled_at: '2026-09-24T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster:zahl:2026-09-24
   channel: linkedin
   slug: 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster
@@ -1718,9 +1718,9 @@ items:
   date: '2026-09-24'
   time: 07:45
   scheduled_at: '2026-09-24T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:nutzen:2026-09-24
   channel: bluesky
   slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
@@ -1730,9 +1730,9 @@ items:
   date: '2026-09-24'
   time: 08:15
   scheduled_at: '2026-09-24T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:frage:2026-09-24
   channel: threads
   slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
@@ -1742,9 +1742,9 @@ items:
   date: '2026-09-24'
   time: 09:15
   scheduled_at: '2026-09-24T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:vergleich:2026-09-24
   channel: facebook
   slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
@@ -1754,9 +1754,9 @@ items:
   date: '2026-09-24'
   time: 09:45
   scheduled_at: '2026-09-24T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:mythos:2026-09-24
   channel: instagram
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -1766,9 +1766,9 @@ items:
   date: '2026-09-24'
   time: '11:45'
   scheduled_at: '2026-09-24T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:zahl:2026-09-24
   channel: bluesky
   slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
