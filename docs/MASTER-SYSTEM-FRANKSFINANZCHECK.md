@@ -696,7 +696,7 @@ Body:
 ## 6.4 Newsletter-Funnel (Ausbaustufe 2 – noch nicht gebaut)
 
 ```
-Stufe 1  Opt-in: Lead-Magnet (s. o.) – Double-Opt-in, DSGVO-konform (Anbieter: Brevo oder MailerLite, kostenlos bis 2.000/5.000 Kontakte)
+Stufe 1  Opt-in: Lead-Magnet (s. o.) – Double-Opt-in, DSGVO-konform, Eigenbetrieb: eigener Worker (abos.franksfinanzcheck.de) + Resend Free (gebaut 24.09.2026 – siehe ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md)
 Stufe 2  Willkommens-Serie (3 Mails): Über Frank → 3 Sofort-Spartipps → Top-3-Artikel mit CTA
 Stufe 3  Wöchentlicher „Spar-Ticker" (Fr 08:00): 3 Artikel der Woche + 1 Sparzahl + 1 Affiliate-CTA
 Stufe 4  Quartals-„Wechsel-Erinnerung": Kfz-Stichtag (Nov), Strom/Gas (Sep–Nov), Versicherungs-Check (Jan)
@@ -802,7 +802,7 @@ Automatisierung: Newsletter-Aufbau-Workflow ergänzt daily-content.yml (Liste de
 | 3 | FAQPage- + Breadcrumb-Schema implementieren (nächster SEO-Commit) | 1 h |
 | 4 | „Über Frank"-Seite (E-E-A-T) + GSC-Domain-Property | 30 min |
 | 5 | Artikel 1–10 aus den 30 Blueprints durch die Pipeline jagen | automatisch |
-| 6 | Newsletter-Funnel aufbauen (Brevo, 3 Willkommens-Mails, Spar-Ticker) | 2–3 h |
+| 6 | Newsletter-Funnel aufbauen (3 Willkommens-Mails, Spar-Ticker) auf der Eigenbetrieb-Infrastruktur | 2–3 h |
 | 7 | E-Book „Der 30-Tage-Sparplan" schreiben (aus Artikeln destillieren) | 1–2 Tage |
 
 ---

@@ -2,11 +2,13 @@
 
 Nachgebaut ist die *Arbeitsteilung* eines Agentur-Newsletters – Creative → Design →
 QA → Versand –, nicht sein Preisschild. Alles hier läuft mit den Werkzeugen, die im
-Repo schon sind: Hugo, Python-Standardbibliothek, GitHub Actions, Brevo Free.
+Repo schon sind: Hugo, Python-Standardbibliothek, GitHub Actions, ein
+Cloudflare-Worker (Free) und Resend Free (3000 Mails/Monat).
 **Kein Abo, kein API-Key einer KI, kein Bild-Dienst, kein Cookie-Banner-Zuwachs.**
 
-Falls du nur einrichten willst, dass Mails laufen: `ANLEITUNG-NEWSLETTER.md` (die
-fünf Klicks im Brevo-Konto). Dieses Dokument ist die Werkstatt dahinter.
+Falls du nur einrichten willst, dass Mails laufen:
+`ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md` (Worker, CNAME, Resend-Domain, Secrets).
+Dieses Dokument ist die Werkstatt dahinter.
 
 ## 1. Die vier Schichten
 
@@ -58,11 +60,11 @@ Byte-für-Byte dieselbe Datei (der Test hält genau das fest).
 | Block | Schlüssel | Wirkung |
 |---|---|---|
 | `capture` | `form_action`, `form_url`, `versprechen`, `feld_email`, `feld_themen`, `bestaetigungs_url`, `abmelde_url`, `praferenz_url`, `bot_falle`, `mindest_alter` | Anmeldeweg, Feldnamen, Journeys, Bot-Falle an/aus |
-| `email` | `breite`, `max_artikel`, `vorlagen_sprache`, `marken`, `header_bild`, `absender`, `antwort_an`, `rechtliches`, `ein_klick_abmeldung`, `tracking_oeffnungen` | Layoutbreite, Artikelzahl, Brevo-Marker, Absender, Rechtstext, Tracking aus |
+| `email` | `breite`, `max_artikel`, `vorlagen_sprache`, `marken`, `header_bild`, `absender`, `antwort_an`, `rechtliches`, `ein_klick_abmeldung`, `tracking_oeffnungen` | Layoutbreite, Artikelzahl, Marken-Platzhalter, Absender, Rechtstext, Tracking aus |
 | `design` | `hell`, `dunkel`, `herleitung`, `email_eigene`, `pflicht_rollen`, `schrift`, `radius`, `kontraste` | Farbrollen, ihre Token-Herleitung, Kontrastpflichtpaare |
 | `creative` | `marke_kurz`, `du_form`, `betreff` (`min_zeichen`, `max_zeichen`, `varianten`), `preheader`, `block_text_zeichen`, `min_woerter`, `max_Ausrufezeichen`, `verbotene_woerter` | Tonalität, Betreff-Rotation (30–45 Zeichen, 3 Varianten), Wort- und Zeichenbudgets |
 | `creative.kadenz` | `ausgabe`, `aufmacher`, `betreff`, `preheader_hinweis`, `gruss` (je `"1"` = Dienstag, `"4"` = Freitag), `naechste_zeile` | Redaktionsrahmen der beiden Versandtage: Ausgabenname im Mail-Kopf, Aufmacher ohne Zahl, Betreff-Variante, zweiter Satz der Inbox-Vorschau, Grußzeile, Nächste-Ausgabe-Zeile an/aus. Fakten (Tage, Uhrzeit, nächster Termin) kommen aus `scripts/newsletter_schedule.py`, nicht von hier |
-| `themen` | 6 Einträge mit `id`, `label`, `brevo_interest` | Präferenz-Chips – `id` muss eine Themenwelt der Site sein |
+| `themen` | 6 Einträge mit `id`, `label` | Präferenz-Chips – `id` muss eine Themenwelt der Site sein; dieselben IDs gelten im Worker (`THEMEN_IDS`/`THEMEN_LABELS` in `newsletter-worker/wrangler.toml`), Studio-Wache `--brand` beweist die Deckung |
 | `journeys` | `anmeldung`, `bestaetigung`, `praeferenzen`, `abmelden` | die vier Seiten, auch für Rechtstexte |
 | `zustand` | `datei`, `betreff_historie`, `artikel_historie` | Pfad und Länge des Versandgedächtnisses: Duplikatsschutz (welche Artikel schon draußen waren) und Betreff-Wiederholung (Q15) |
 
@@ -154,40 +156,48 @@ Schreibzugriff, uhrfest.
 Der Zustand „geschaltet“ ist eine Konfigurationszeile, kein Code-Umbau:
 
 ```toml
-# hugo.toml – versiegelt, also nur mit Absicht anfassen
+# hugo.toml – KRITISCH versiegelt, also nur mit Absicht anfassen
 [params]
-  newsletterFormAction = "https://l.brevo.com/landing/DEINE-FORMULAR-ID"
+  newsletterFormAction = "https://abos.franksfinanzcheck.de/anmeldung"
 ```
 
-oder, ohne Siegel zu berühren, im Studio-JSON:
+oder, ohne das Siegel zu berühren, im Studio-JSON:
 
 ```json
-{ "capture": { "form_action": "https://l.brevo.com/landing/DEINE-FORMULAR-ID" } }
+{ "capture": { "form_action": "https://abos.franksfinanzcheck.de/anmeldung" } }
 ```
+
+Nach der Änderung: `python3 scripts/integrity_guard.py --set-current`
+(nur wenn `hugo.toml` der Ort ist, der wandern soll).
 
 Danach in dieser Reihenfolge:
 
 1. `python3 scripts/newsletter_digest.py --check` → `aktiv`, keine N-Funde.
 2. `hugo` (bzw. den Deploy-Build) und `npx playwright test e2e/newsletter.spec.mjs`.
 3. `python3 scripts/newsletter_qa.py --build --days 1` → 100/100.
-4. Secrets in den GitHub-Actions-Settings: `BREVO_API_KEY` **und**
-   `BREVO_LIST_ID` – beide als *Secret*, nicht als Variable (der Workflow
-   liest `secrets.BREVO_LIST_ID`). Probe geht über die Workflow-Eingabe
-   `test_adresse` (`sendTest`), nicht über eine Test-Variable.
-5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse, `live` aus →
-   echter `sendTest` durch Brevo, Liste unangetastet.
-6. `live` an. Ab jetzt liefert der Cron Dienstag/Freitag 05:05 UTC eine geprüfte Mail, und
-   `data/newsletter_state.json` (versioniert!) merkt, was schon draußen war.
+4. Secrets in den GitHub-Actions-Settings: `RESEND_API_KEY` und
+   `NEWSLETTER_WORKER_EXPORT_KEY` (beide *Secrets*), dazu die Variable
+   `NEWSLETTER_WORKER_BASE` – Details in
+   [ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md](ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md) § 3.
+5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse → echter
+   Probeversand direkt an die Adresse, die Liste bleibt unangetastet.
+6. Ab jetzt liefert der Cron Dienstag/Freitag 05:05 UTC eine geprüfte Mail,
+   und `data/newsletter_state.json` (versioniert!) merkt, was schon draußen war.
 
-Der letzte Klick bleibt bei dir, weil er ein Konto braucht: Signup, Domain-Authentifizierung in Brevo (der Beleg ist das Domain-DKIM; `brevo1`/`brevo2._domainkey` und `brevo-code`-TXT liegen bereits in der Zone – gemessen 23.09.2026), AVV. Nachmessen: `python3 scripts/newsletter_zustellbarkeit.py --pruefen`, Runbook: [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).
-Das hier zu erfinden – ein Endpunkt, eine Listen-ID, eine Signup-Bestätigung – wäre
-die Sorte Selbstbetrug, gegen die die Wachen in diesem Repo geschrieben sind.
+Der letzte Klick bleibt bei dir, weil er Konten braucht: Cloudflare-Worker
+deployen, CNAME `abos` setzen, Resend-Domain authentifizieren (der Beleg sind
+SPF `include:resend.net` + beide Resend-DKIM-TXTs + DMARC in der Zone).
+Nachmessen: `python3 scripts/newsletter_zustellbarkeit.py --pruefen`.
+Das hier zu erfinden – ein Endpunkt, einen Absender, eine
+Bestätigungsmaschinerie – wäre die Sorte Selbstbetrug, gegen die die Wachen
+in diesem Repo geschrieben sind.
 
 ## 8. Export statt API (wenn du mal wechselt)
 
-`--build --out DIR` schreibt `ausgabe-<datum>.html` (Mail-HTML mit Brevo-Markern),
-`ausgabe-<datum>.txt` (Textalternative) und auf Wunsch `vorschau.html` (drei Breiten,
-hell/dunkel, zum Anschauen statt Raten). Diese drei Dateien sind der Export: in
+`--build --out DIR` schreibt `ausgabe-<datum>.html` (Mail-HTML mit
+Marken-Platzhaltern), `ausgabe-<datum>.txt` (Textalternative) und auf Wunsch
+`vorschau.html` (drei Breiten, hell/dunkel, zum Anschauen statt Raten).
+Diese drei Dateien sind der Export: in
 **jedem** Tool, das HTML-Mails kennt, Einfügen → Senden. Der API-Weg
 (`newsletter_digest.py --send`) tut dasselbe automatisch und legt die Kampagne als
 `draft` an, bevor er `sendNow` aufruft – abbrechen kann man also jederzeit.
@@ -214,7 +224,7 @@ hell/dunkel, zum Anschauen statt Raten). Diese drei Dateien sind der Export: in
 |---|---|---|
 | `--brand`: „Rolle ohne Herleitung“ | Farbe im JSON, die kein Site-Token ist | `design.hell/dunkel` auf den Token-Wert setzen oder in `email_eigene` begründen |
 | `Q16 … hat keinen Beleg` | Zahl in Betreff/Hero, die im Artikel so nicht steht | Zahl aus dem Betreff nehmen oder Artikel nachziehen – nicht den Beleg nachbauen |
-| `Q3 … Einzelklammer {unsubscribe}` | Alte Vorlagen-Sprache | `{{unsubscribe}}` (die Einzelklammer ersetzt Brevo in `htmlContent`-Kampagnen nicht) |
+| `Q3 … Einzelklammer {unsubscribe}` | Alte Vorlagen-Sprache | `{{unsubscribe}}` (der Mailer ersetzt nur die Doppelklammer-Marken aus `email.marken`) |
 | `Q10 … kein Abmeldelink` | Fußblock-editiert | `email.marken` und den Fußblock aus `baue_email` wiederherstellen |
 | `N1 … wirbt ohne Anmeldeweg` | Werbesatz auf einer Seite außerhalb von `/newsletter/`, aber kein `form_*` | Weg eintragen **oder** den Werbetext auf den Leerzustand zurückziehen |
 | „Streifen bleibt unsichtbar“, obwohl `form_action` gesetzt ist | Include in `layouts/single.html` gesetzt – die Datei wird von `layouts/_default/single.html` verdeckt und rendert für Posts nie | Include in die lebende Datei, direkt nach `{{ partial "extend_post_content.html" . }}` |

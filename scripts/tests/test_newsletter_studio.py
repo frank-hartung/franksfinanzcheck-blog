@@ -187,7 +187,7 @@ class Bau(unittest.TestCase):
     def test_pflichten_eines_agentur_mails(self):
         h = studio.baue_email(MATERIAL, datum=DATUM, root=ROOT)["html"]
         self.assertIn("<!DOCTYPE html", h)
-        self.assertIn("{{unsubscribe}}", h, "Einzelklammer {unsubscribe} ersetzt Brevo nie")
+        self.assertIn("{{unsubscribe}}", h, "Einzelklammer {unsubscribe} ersetzt der Mailer nie")
         self.assertNotIn("{unsubscribe}", h.replace("{{unsubscribe}}", ""))
         breite = studio.konfiguration(ROOT, streng=False)["email"]["breite"]
         self.assertIn(f"max-width:{breite}px", h,

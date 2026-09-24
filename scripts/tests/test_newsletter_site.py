@@ -306,9 +306,8 @@ class Kadenz(unittest.TestCase):
 
     OBERFLAECHEN = JOURNEYS + [STRIP, FORM, MUSTER, "data/newsletter_studio.json",
                                "content/datenschutz/index.md",
-                               "docs/ANLEITUNG-NEWSLETTER.md",
+                               "docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md",
                                "docs/ANLEITUNG-NEWSLETTER-STUDIO.md",
-                               "docs/FREISCHALTUNG-NEWSLETTER-CHECKLISTE.md",
                                "docs/NEWSLETTER-RECHTSTEXT-VORLAGE.md"]
     UEBERHOLT = ("pro Werktag", "1 Mail/Tag", "werktäglich", "an jedem Werktag",
                  "jeden Werktag", "Mo–Fr", "Mo-Fr", "Montag bis Freitag",

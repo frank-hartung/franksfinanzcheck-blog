@@ -15,9 +15,9 @@ Weiterleitung ist damit vollständig vom Hosting bei GitHub Pages getrennt.
 > Postfach. Antworten werden weiterhin aus dem persönlichen Postfach gesendet.
 > Wer beim Antworten sichtbar von `kontakt@franksfinanzcheck.de` senden möchte,
 > braucht zusätzlich einen Mailanbieter mit eigener Domain-Mailbox oder SMTP-
-> Unterstützung (z. B. Brevo für den Newsletter-Versand – siehe
-> [ANLEITUNG-NEWSLETTER.md](ANLEITUNG-NEWSLETTER.md)). Das ist in diesem Setup
-> bewusst nicht als eigenes Postfach eingerichtet.
+> Unterstützung (z. B. Resend für den Newsletter-Versand – siehe
+> [ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md](ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md)).
+> Das ist in diesem Setup bewusst nicht als eigenes Postfach eingerichtet.
 
 ## Einmalige Einrichtung in Cloudflare
 
@@ -66,13 +66,13 @@ Repository.
   *jede* Mail der Domain). Im Zweifel die von Cloudflare vorgeschlagene
   DNS-Konfiguration verwenden – für diese Zone ist das gemessene Ergebnis
   `v=spf1 include:_spf.mx.cloudflare.net ~all` (Stand 23.09.2026).
-- **Kein** `include:spf.brevo.com` für den Newsletter nötig: Brevo versendet
-  über seinen eigenen Return-Path, das Include in der eigenen Zone erzeugt
-  daher kein SPF-Alignement und authentifiziert nichts. Nötig wird es erst mit
-  Dedicated IP oder eigenem Return-Path – und nur durch Erweitern des
-  **einen** Eintrags, nie durch einen zweiten. (Der Newsletter-Beleg ist das
-  Domain-DKIM: `brevo1`/`brevo2._domainkey`, beide vorhanden. Details:
-  [NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md](NEWSLETTER-ZUSTELLBARKEIT-CLOUDFLARE-BREVO.md).)
+- **Newsletter-SPF:** der Eigenbetrieb-Versand (Resend) verlangt, dass der
+  **einzige** SPF-Eintrag der Zone `include:resend.net` enthält – die
+  Zustellbarkeits-Wache (C1) misst genau das. Resend versendet im
+  Free-Tier über eigene Server; das Include ist der SPF-Beleg. Dazu kommen
+  die beiden DKIM-TXTs `_resend._domainkey` und `_resend2._domainkey`
+  (C2) und der DMARC-Eintrag (C3/C4). Details und Befund-Formate:
+  `scripts/newsletter_zustellbarkeit.py --pruefen`.
 - **Regel für das Newsletter-Postfach anlegen:** der Versand läuft mit
   Absender `news@franksfinanzcheck.de`. Ohne eigene Regel landen Antworten und
   Rückläufer dorthin im Leergut → *Email → Routing → Routing Rules → Create

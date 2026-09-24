@@ -16,7 +16,7 @@
 //    5. Jeder Weg, den die Site bewirbt, führt irgendwo hin
 //       (Bestätigung, Präferenzen, Abmeldung – alle noindex).
 //  Bewusst zustandsneutral geschrieben: die Tests greifen weder auf
-//  `BREVO_API_KEY` zu noch verlangen sie einen Schaltzustand – sie
+//  Mail-API-Keys zu noch verlangen sie einen Schaltzustand – sie
 //  prüfen, was zur gebauten Konfiguration passt. Sonst wäre die
 //  Suite am Tag der Freischaltung rot, statt sie zu bestätigen.
 // ============================================================
