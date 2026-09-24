@@ -3,7 +3,7 @@ title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
 description: "Internet & DSL-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du …"
 date: 2026-09-24T09:24:26Z
 draft: true
-tags: ["Internet & DSL-Update: Was sich jetzt für dich ändert", "Internet & DSL"]
+tags: ["Internet & DSL-Update: was sich jetzt für dich ändert", "Internet & DSL"]
 categories: ["News"]
 keywords: ["Internet & DSL-Update: Was sich jetzt für dich ändert"]
 author: "Frank Hartung"
