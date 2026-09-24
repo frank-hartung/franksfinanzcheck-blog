@@ -225,7 +225,16 @@ class Versandpfad(unittest.TestCase):
             post.assert_not_called()
 
     def test_einzeltest_verbraucht_keinen_termin(self):
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), patch.object(nd, 'vorflug', return_value=(0, 'ok')), patch.object(nd, 'TRANSPORT', side_effect=[(201, '{"id": 123}'), (204, '')]) as post:
+        # Seit der Reparatur von Lauf 36015927654 misst der Testversand seine
+        # Adresse vorher im Konto (Brevo nimmt Testmails nur an bestehende,
+        # nicht gesperrte Kontakte an) – der Fake muss sie also kennen, sonst
+        # bricht der Lauf vor der Kampagne ab, und der Test prüfte etwas anderes
+        # als seinen Namen.
+        def kontakt_get(key, pfad):
+            if pfad.startswith('contacts/'):
+                return 200, '{"email": "probe@example.test", "emailBlacklisted": false, "listIds": [1]}'
+            return 200, '{"id": 1, "totalSubscribers": 2}'
+        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), patch.object(nd, 'vorflug', return_value=(0, 'ok')), patch.object(nd, 'TRANSPORT_GET', side_effect=kontakt_get), patch.object(nd, 'TRANSPORT', side_effect=[(201, '{"id": 123}'), (204, '')]) as post:
             self.assertEqual(0, self.senden(test_adresse='probe@example.test'))
             self.assertTrue(post.call_args.args[1].endswith('/sendTest'))
             state = nd.lade_state(self.root)
