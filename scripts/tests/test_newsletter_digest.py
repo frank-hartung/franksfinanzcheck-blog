@@ -374,6 +374,9 @@ class DigestUndVersand(unittest.TestCase):
             if pfad == "senders":
                 return 200, ('{"senders": [{"email": "ssot@franksfinanzcheck.de",'
                              ' "active": true}]}')
+            if pfad.startswith("contacts/") and not pfad.startswith("contacts/lists/"):
+                return 200, ('{"email": "probe@beispiel.de", "emailBlacklisted": false,'
+                             ' "listIds": [7]}')
             return 200, '{"id": 7, "totalSubscribers": 2}'
 
         try:
@@ -452,6 +455,17 @@ class DigestUndVersand(unittest.TestCase):
                              "leere Liste ging bei live durch")
             # Der Testversand ist von der leeren Liste bewusst NICHT betroffen:
             # er braucht zwar eine Kampagne (sendTest), trifft aber nie die Liste.
+            # (Die Testadresse selbst ist sauberer Kontakt in der Zielliste –
+            # geprüft wird hier die Listen-Leere, nicht der Kontakt-Nachtrag.)
+            def test_kontakt_get(a, p):
+                if p == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de", '
+                                 '"active": true}]}')
+                if p.startswith("contacts/") and not p.startswith("contacts/lists/"):
+                    return 200, ('{"email": "probe@beispiel.de", "emailBlacklisted": false,'
+                                 ' "listIds": [7]}')
+                return 200, '{"totalSubscribers": 0}'
+            nd.TRANSPORT_GET = test_kontakt_get
             os.environ["NEWSLETTER_SEND"] = ""
             self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
                                             test_adresse="probe@beispiel.de"))
@@ -622,6 +636,10 @@ class DigestUndVersand(unittest.TestCase):
                                  ' "active": true}]}')
                 if methode == "GET" and pfad.startswith("contacts/lists/"):
                     return 200, '{"totalSubscribers": 4}'
+                if (methode == "GET" and pfad.startswith("contacts/")
+                        and not pfad.startswith("contacts/lists/")):
+                    return 200, ('{"email": "probe@beispiel.de", "emailBlacklisted": false,'
+                                 ' "listIds": [7]}')
                 if methode == "GET":
                     # Die Akte kennt einen Status, den weder „raus“ noch „nicht
                     # raus“ belegt – genau der Fall, der einen Menschen braucht.
@@ -720,8 +738,10 @@ class DigestUndVersand(unittest.TestCase):
     def test_testadresse_muss_kontakt_sein_und_wird_nur_mit_freigabe_angelegt(self):
         """Brevo nimmt Testmails nur an existierende, nicht gesperrte Kontakte mit
         Listen-Zugehörigkeit an („Test emails cannot be sent to non-existent/
-        blacklisted/without-contact-list users“, Messung 19.09.2026). Der Lauf
-        MISST die Adresse vorher – und schreibt ohne Freigabe nichts."""
+        blacklisted/without-contact-list users“, Messung 19.09.2026, eigener Lauf
+        36024129599 am 24.09.2026). Der Lauf MISST die Adresse vorher, legt sie
+        mit Freigabe VORAB an (Kontakt + Zielliste) – und schreibt ohne Freigabe
+        nichts."""
         echt = nd.TRANSPORT
         echt_get = nd.TRANSPORT_GET
         anrufe = []
@@ -729,36 +749,59 @@ class DigestUndVersand(unittest.TestCase):
         try:
             def lege_an(key, pfad, payload):
                 anrufe.append((pfad, payload))
+                if pfad.endswith("/contacts/add"):
+                    neu = list((payload or {}).get("emails") or [])
+                    kontakte.update("liste:" + a for a in neu)
+                    return 201, json.dumps({"contacts": {}, "success": neu,
+                                            "failure": []})
                 kontakte.add((payload or {}).get("email"))
                 return 201, '{"id": 1}'
 
             def lese(key, pfad):
                 adresse = nd.urllib.parse.unquote(pfad.split("contacts/", 1)[1])
                 if adresse in kontakte:
-                    return 200, '{"email": "%s", "emailBlacklisted": false, "listIds": []}' % adresse
+                    drin = ("liste:" + adresse) in kontakte
+                    return 200, ('{"email": "%s", "emailBlacklisted": false, '
+                                 '"listIds": %s}' % (adresse, "[7]" if drin else "[]"))
                 return 404, '{"code":"document_not_found","message":"Contact not found"}'
             nd.TRANSPORT = lege_an
             nd.TRANSPORT_GET = lese
             with contextlib.redirect_stdout(io.StringIO()):
                 # Vorprüfung selbst: schreibt nichts, nennt den Klickweg.
-                rc, befund, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
+                rc, befund, _ = nd.testadressen_pruefen("key", "7", ["probe@beispiel.de"],
                                                         anlegen=False)
                 self.assertEqual(1, rc)
                 self.assertIn("kein Kontakt im Brevo-Konto", befund)
                 self.assertIn("test_kontakt", befund)
                 self.assertEqual([], anrufe)
-                # Mit Freigabe: Kontakt anlegen – OHNE Listen-Eintrag (kein Abo nebenbei).
-                rc2, befund2, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
-                                                          anlegen=True)
+                # Mit Freigabe: Kontakt anlegen UND vorab in die Zielliste –
+                # der erste sendTest gelingt dadurch sofort (Lauf 36024129599).
+                rc2, befund2, zustand2 = nd.testadressen_pruefen(
+                    "key", "7", ["probe@beispiel.de"], anlegen=True)
                 self.assertEqual(0, rc2, befund2)
                 self.assertEqual([("contacts", {"email": "probe@beispiel.de",
-                                                "updateEnabled": True})], anrufe)
+                                                "updateEnabled": True}),
+                                  ("contacts/lists/7/contacts/add",
+                                   {"emails": ["probe@beispiel.de"]})], anrufe)
+                self.assertEqual([7], zustand2["probe@beispiel.de"]["listIds"])
+                # Kontakt ohne Liste, ohne Freigabe: Abbruch mit Klickweg,
+                # KEIN Schreibzugriff (vorher lief das bis zum sendTest durch
+                # und starb dort an der generischen Absage).
+                kontakte.clear()
+                kontakte.add("probe@beispiel.de")
+                anrufe.clear()
+                rc2b, befund2b, _ = nd.testadressen_pruefen(
+                    "key", "7", ["probe@beispiel.de"], anlegen=False)
+                self.assertEqual(1, rc2b)
+                self.assertIn("keiner Liste", befund2b)
+                self.assertIn("test_kontakt", befund2b)
+                self.assertEqual([], anrufe)
                 # Gesperrte Kontakte: Befund mit Klickweg, KEIN Schreibzugriff.
                 nd.TRANSPORT_GET = lambda key, pfad: (
                     200, '{"email": "probe@beispiel.de", "emailBlacklisted": true,'
                          ' "listIds": [7]}')
                 anrufe.clear()
-                rc3, befund3, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
+                rc3, befund3, _ = nd.testadressen_pruefen("key", "7", ["probe@beispiel.de"],
                                                           anlegen=True)
                 self.assertEqual(1, rc3)
                 self.assertIn("Sperrliste", befund3)
@@ -804,6 +847,184 @@ class DigestUndVersand(unittest.TestCase):
         finally:
             nd.TRANSPORT = echt
             nd.TRANSPORT_GET = echt_get
+
+    def test_generische_absage_wird_erkannt_einzeln_vermessen_und_repariert(self):
+        """Lauf 36024129599: Brevo wies sendTest GENERISCH ab („…/without-
+        contact-list users“) – ohne Adressliste, also ohne Ansatz für den alten
+        Nachtrag. Der neue misst jede Adresse einzeln nach, trägt Kontakt und
+        Liste nach und lässt Gesperrte liegen (Mensch, nicht Automatik)."""
+        generisch = json.dumps({
+            "code": "invalid_parameter",
+            "message": "Test emails cannot be sent to non-existent/blacklisted/"
+                       "without-contact-list users"})
+        self.assertTrue(nd.testmail_generisch(generisch))
+        self.assertFalse(nd.testmail_generisch(json.dumps({
+            "code": "invalid_parameter",
+            "message": "Test email could not be sent to the following email addresses",
+            "withoutListEmails": ["ohne@beispiel.de"]})))
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        anrufe = []
+        try:
+            nd.TRANSPORT = lambda key, pfad, payload: anrufe.append((pfad, payload)) or (
+                201, json.dumps({"contacts": {}, "success": list(
+                    (payload or {}).get("emails") or []), "failure": []}))
+            # „gesperrt“ ist auf der Sperrliste, „neu“ fehlt ganz, „ohne“
+            # steht in keiner Liste – die Nachmessung trennt die drei.
+            def lese(key, pfad):
+                if "gesperrt@" in pfad:
+                    return 200, '{"emailBlacklisted": true, "listIds": [7]}'
+                if "neu@" in pfad:
+                    return 404, '{"code":"document_not_found","message":"Contact not found"}'
+                return 200, '{"emailBlacklisted": false, "listIds": []}'
+            nd.TRANSPORT_GET = lese
+            adressen = ["gesperrt@beispiel.de", "neu@beispiel.de", "ohne@beispiel.de"]
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc, wieder, meldung = nd.testmail_nachtragen(
+                    "key", "7", adressen, generisch, anlegen=True)
+            self.assertEqual(0, rc, meldung)
+            self.assertEqual(["neu@beispiel.de", "ohne@beispiel.de"], wieder)
+            self.assertNotIn("gesperrt@beispiel.de", wieder)
+            pfade = [p for p, _ in anrufe]
+            self.assertIn("contacts", pfade)
+            self.assertIn("contacts/lists/7/contacts/add", pfade)
+            # Ohne Freigabe: kein Schreibzugriff, aber ein Klickweg.
+            anrufe.clear()
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc2, wieder2, meldung2 = nd.testmail_nachtragen(
+                    "key", "7", adressen, generisch, anlegen=False)
+            self.assertEqual(1, rc2)
+            self.assertEqual([], wieder2)
+            self.assertIn("test_kontakt", meldung2)
+            self.assertEqual([], anrufe)
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+
+    def test_testmail_hinweis_nennt_naechsten_schritt_aber_deutet_nicht(self):
+        """Sperrliste, Tageslimit und die generische Absage bekommen je ihren
+        Klickweg – Unbekanntes bleibt ohne Deutung (kein Befund ohne Beleg)."""
+        self.assertIn("Unblock", nd.testmail_hinweis(json.dumps({
+            "code": "invalid_parameter",
+            "message": "Test email could not be sent to the following email addresses",
+            "blackListedEmails": ["gesperrt@beispiel.de"]}), ["gesperrt@beispiel.de"]))
+        self.assertIn("50 pro Tag", nd.testmail_hinweis(json.dumps({
+            "code": "invalid_parameter",
+            "message": "You have reached the limit of 50 test emails per day"}),
+            ["probe@beispiel.de"]))
+        self.assertIn("Blog-Abonnenten", nd.testmail_hinweis(json.dumps({
+            "code": "invalid_parameter",
+            "message": "Test emails cannot be sent to non-existent/blacklisted/"
+                       "without-contact-list users"}), ["probe@beispiel.de"]))
+        self.assertEqual("", nd.testmail_hinweis(json.dumps({
+            "code": "invalid_parameter", "message": "something completely new"}),
+            ["probe@beispiel.de"]))
+
+    def test_teilversand_nennt_erreicht_und_unerreicht_statt_zu_luegen(self):
+        """Eine Adresse wird zwischen Vorprüfung und Senden unzustellbar (nur
+        Brevo kennt die schwarze Liste tagesaktuell): der Retry erreicht die
+        reparierte Adresse – der Lauf meldet TEILVERSAND mit beiden Namen,
+        nie „nichts versandt“ und nie „Testversand an alle“."""
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        try:
+            sendeaufrufe = []
+
+            def lese(key, pfad):
+                if pfad == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de", '
+                                 '"active": true}]}')
+                if pfad.startswith("contacts/lists/"):
+                    return 200, '{"id": 7, "totalSubscribers": 0}'
+                return 200, '{"emailBlacklisted": false, "listIds": [7]}'
+
+            def sende(key, pfad, payload):
+                if pfad == "emailCampaigns":
+                    return 201, '{"id": 55}'
+                if pfad.endswith("/sendTest"):
+                    sendeaufrufe.append(list((payload or {}).get("emailTo") or []))
+                    if len(sendeaufrufe) == 1:
+                        return 400, json.dumps({
+                            "code": "invalid_parameter",
+                            "message": "Test email could not be sent to the following "
+                                       "email addresses",
+                            "blackListedEmails": ["anna@beispiel.de"],
+                            "withoutListEmails": ["berta@beispiel.de"]})
+                    return 204, ""
+                if pfad.endswith("/contacts/add"):
+                    neu = list((payload or {}).get("emails") or [])
+                    return 201, json.dumps({"contacts": {}, "success": neu,
+                                            "failure": []})
+                return 201, '{"id": 99}'
+
+            nd.TRANSPORT = sende
+            nd.TRANSPORT_GET = lese
+            root = tempfile.mkdtemp()
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = ""
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rc = nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
+                                 test_adresse="anna@beispiel.de, berta@beispiel.de")
+            protokoll = puffer.getvalue()
+            self.assertEqual(1, rc)
+            self.assertEqual([["anna@beispiel.de", "berta@beispiel.de"],
+                              ["berta@beispiel.de"]], sendeaufrufe)
+            self.assertIn("TEILVERSAND", protokoll)
+            self.assertIn("berta@beispiel.de", protokoll)
+            self.assertIn("anna@beispiel.de", protokoll)
+            self.assertNotIn("nichts versandt", protokoll)
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_test_unklar_setzt_keinen_listen_halt(self):
+        """Ein zweifelhafter TEST-Ausgang (Antwort verloren) darf den echten
+        Listen-Versand nicht blockieren: kein `versand_unklar`-Halt, dafür der
+        Hinweis, dass ein erneuter Testlauf gefahrlos ist."""
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        try:
+            def lese(key, pfad):
+                if pfad == "senders":
+                    return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de", '
+                                 '"active": true}]}')
+                if pfad.startswith("contacts/lists/"):
+                    return 200, '{"id": 7, "totalSubscribers": 0}'
+                if pfad.startswith("emailCampaigns/"):
+                    return 502, "Bad Gateway"
+                return 200, '{"emailBlacklisted": false, "listIds": [7]}'
+
+            def sende(key, pfad, payload):
+                if pfad == "emailCampaigns":
+                    return 201, '{"id": 56}'
+                return 0, "URLError: timed out"
+
+            nd.TRANSPORT = sende
+            nd.TRANSPORT_GET = lese
+            root = tempfile.mkdtemp()
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = ""
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rc = nd.versende(root, "<p>x</p>", "x", "B", dry_run=False,
+                                 test_adresse="probe@beispiel.de")
+            protokoll = puffer.getvalue()
+            self.assertEqual(1, rc)
+            self.assertIn("TESTVERSAND-STATUS UNKLAR", protokoll)
+            self.assertNotIn("versand_unklar\" in data", protokoll)
+            self.assertNotIn("versand_unklar", nd.lade_state(root))
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
 
     def test_brevo_absage_wird_zum_klickweg_nicht_zur_deutung(self):
         """Bekannte Brevo-Absagen bekommen den nächsten Betreiberschritt,
