@@ -37,7 +37,7 @@ on:
         type: boolean
         default: false
       test_adresse:
-        description: 'Testversand an diese Adresse (leer = kein Testversand) – trifft NUR diese Adresse, nie die Liste'
+        description: 'Testversand an diese Adresse(n), Komma-getrennt (leer = kein Testversand) – trifft NUR diese Adressen, nie die Liste'
         type: string
         default: ''
       planmaessig:
@@ -147,7 +147,11 @@ jobs:
             [ -s /tmp/zust.err ] && echo "_Hinweise:_ \`$(tail -2 /tmp/zust.err | tr '\n' ' ' | cut -c1-200)\`"
           } >> "$GITHUB_STEP_SUMMARY"
           if [ "$rc" -ne 0 ]; then
-            if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESE_GESETZT" != "ja" ]; then
+            # Name exakt wie oben gesetzt (TEST_ADRESSE_GESETZT). Ein Buchstabe
+            # weniger macht die Ausnahme tot: jeder Zustellbarkeits-Befund
+            # stoppt dann auch den Testversand, sobald live oder planmaessig
+            # gesetzt ist.
+            if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESSE_GESETZT" != "ja" ]; then
               echo "::error::Zustellbarkeit befundet (rc $rc) – der Listen-Versand wird angehalten, bevor eine Kampagne entsteht. Details im Summary dieses Schritts."
               exit "$rc"
             fi
@@ -246,6 +250,12 @@ jobs:
           # normal (keine neuen Artikel), kein Warnfall.
           if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "nichts zu senden" /tmp/nl_build.log; then
             echo "::warning::Versand angefordert, aber der Digest ist leer – alles im Zeitraum ist Draft oder bereits versandt. Zeitraum über „tage“ vergrößern oder Artikel veröffentlichen."
+          fi
+          # Ein grüner Lauf, der wegen des Di/Fr-Vertrags nichts schickt, darf
+          # nicht wie ein erfolgreicher Versand aussehen. Der Cron trifft die
+          # Tage von selbst; ein manueller Live-Lauf außerhalb schon nicht.
+          if [ -n "$SENDEN" ] && [ "${{ github.event_name }}" != "schedule" ] && grep -q "Versandpause" /tmp/nl_build.log; then
+            echo "::warning::Listen-Versand angefordert, aber der Vertrag hält ihn an (kein Dienstag/Freitag, Termin belegt oder Wochenlimit). Es ist nichts an die Liste gegangen. Ein Testversand über test_adresse ist davon unabhängig und trifft nur die eingegebene Adresse."
           fi
           {
             echo ""

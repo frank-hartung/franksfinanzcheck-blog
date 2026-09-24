@@ -173,6 +173,19 @@ jedem Versand). Dann Actions → *Newsletter-Daily (Capture-Wache + Digest)* →
 *Run workflow*: `test_adresse` = deine Adresse, `live` **aus**, `tage` = 7.
 Erwartet: `sendTest`-Mail in deinem Postfach (Double-Opt-In-Bestätigung
 inklusive, Abmeldelink funktioniert), Liste unangetastet.
+Mehrere Proben: Adressen im Feld mit Komma trennen. Der Lauf schickt sie
+als `emailTo`-Liste, nie als einzelnen String und nie leer (leer träfe die
+ganze Testliste des Kontos).
+Der Kampagnen-Payload spricht CreateEmailCampaign: `replyTo` ist die Adresse
+als String (`kontakt@franksfinanzcheck.de`), nicht `{"email": "…"}`. Genau
+dieses Objekt hat Lauf 35904226864 (23.09.2026) mit
+`HTTP 400: ReplyTo email should be valid` abgelehnt – Test und Live, denn
+beide legen zuerst die Kampagne an. Lehnt Brevo die Antwortadresse trotzdem
+ab, fällt der Lauf laut auf den verifizierten Absender zurück und sendet
+dennoch; Antworten landen dann bei `news@…`, bis `kontakt@…` unter
+Senders & IPs als Absender steht. Ein Live-Lauf außerhalb Dienstag/Freitag
+endet mit der Warnung „Versandpause“ und schickt nichts – das ist der
+Vertrag, kein stiller Erfolg.
 Kommt keine Mail, sagt der Lauf seit der Versand-Reparatur (23.09.) selbst,
 warum – die Ursache steht in der roten Annotation und im Step-Summary:
 „Digest ist leer“ (gelbe Warnung) heißt, im Zeitraum liegt kein

@@ -324,15 +324,95 @@ class DigestUndVersand(unittest.TestCase):
             payload = aufgerufen[0]
             self.assertIn("previewText", payload)
             self.assertNotIn("preheader", payload)
+            self.assertNotIn("textContent", payload)
+            self.assertNotIn("status", payload)
             self.assertEqual("Vorschau", payload["previewText"])
             self.assertEqual(("Frank SSOT", "ssot@franksfinanzcheck.de"),
                              (payload["sender"]["name"], payload["sender"]["email"]))
-            self.assertEqual("reply@franksfinanzcheck.de", payload["replyTo"]["email"])
+            # CreateEmailCampaign: replyTo ist ein String, kein Transaktions-Objekt.
+            # Lauf 35904226864 starb an genau diesem Objekt (HTTP 400).
+            self.assertIsInstance(payload["replyTo"], str)
+            self.assertEqual("reply@franksfinanzcheck.de", payload["replyTo"])
+            self.assertEqual([], nd.kampagnen_schema_verstoesse(payload))
+            self.assertIsNone(aufgerufen[1], "sendNow trägt im Schema keinen Body")
+            historisch = dict(payload, replyTo={"email": payload["replyTo"]},
+                              textContent="x", status="draft", preheader="x")
+            self.assertTrue(any("replyTo" in v for v in nd.kampagnen_schema_verstoesse(historisch)))
         finally:
             nd.TRANSPORT = echt
             nd.TRANSPORT_GET = echt_get
             for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_ABSENDER",
                         "NEWSLETTER_SEND"):
+                os.environ.pop(var, None)
+            shutil.rmtree(root, ignore_errors=True)
+
+    def test_replyto_absage_faellt_zurueck_test_und_live_teilen_die_kampagne(self):
+        """Lauf 35904226864: Objekt-replyTo stirbt vor sendTest und vor sendNow.
+
+        Nach der Heilung ist replyTo ein String. Lehnt Brevo die konfigurierte
+        Antwortadresse trotzdem ab, gibt es genau einen zweiten Anlauf mit dem
+        verifizierten Absender – die Kampagne war beim 400 noch nicht angelegt.
+        Ein anderer 400 wird nicht wiederholt. Eine kaputte Testadresse legt
+        nichts an und fällt nicht auf den Listenversand zurück.
+        """
+        aufgerufen = []
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+
+        def post(api_key, pfad, payload):
+            aufgerufen.append((pfad, payload))
+            if (pfad == "emailCampaigns" and isinstance(payload, dict)
+                    and payload.get("replyTo") == "reply@franksfinanzcheck.de"):
+                return 400, ('{"code":"invalid_parameter",'
+                             '"message":"ReplyTo email should be valid"}')
+            if pfad == "emailCampaigns":
+                return 201, '{"id": 9}'
+            return 204, ""
+
+        def get(api_key, pfad):
+            if pfad == "senders":
+                return 200, ('{"senders": [{"email": "ssot@franksfinanzcheck.de",'
+                             ' "active": true}]}')
+            return 200, '{"id": 7, "totalSubscribers": 2}'
+
+        try:
+            nd.TRANSPORT = post
+            nd.TRANSPORT_GET = get
+            root = tempfile.mkdtemp()
+            os.makedirs(os.path.join(root, "data"), exist_ok=True)
+            with open(os.path.join(root, "data", "newsletter_studio.json"), "w",
+                      encoding="utf-8") as fh:
+                fh.write('{"email": {"absender": {"name": "Frank SSOT",'
+                         ' "email": "ssot@franksfinanzcheck.de"},'
+                         ' "antwort_an": "reply@franksfinanzcheck.de"}}')
+            os.environ["BREVO_API_KEY"] = "key"
+            os.environ["BREVO_LIST_ID"] = "7"
+            os.environ["NEWSLETTER_SEND"] = ""
+            self.assertEqual(0, nd.versende(root, "<p>x</p>", "x", "Betreff",
+                                            dry_run=False,
+                                            test_adresse="Frank <Probe@Beispiel.de>, probe@beispiel.de"))
+            kampagnen = [p for pfad, p in aufgerufen if pfad == "emailCampaigns"]
+            self.assertEqual(2, len(kampagnen))
+            self.assertEqual("reply@franksfinanzcheck.de", kampagnen[0]["replyTo"])
+            self.assertEqual("ssot@franksfinanzcheck.de", kampagnen[1]["replyTo"])
+            self.assertEqual([{"emailTo": ["probe@beispiel.de"]}],
+                             [p for pfad, p in aufgerufen if str(pfad).endswith("/sendTest")])
+            self.assertFalse(any(str(pfad).endswith("/sendNow") for pfad, _ in aufgerufen))
+
+            aufgerufen.clear()
+            nd.TRANSPORT = lambda *a: aufgerufen.append(a[1]) or (400, '{"message":"htmlContent is too short"}')
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "Betreff",
+                                            dry_run=False, test_adresse="probe@beispiel.de"))
+            self.assertEqual(["emailCampaigns"], aufgerufen)
+
+            aufgerufen.clear()
+            self.assertEqual(1, nd.versende(root, "<p>x</p>", "x", "Betreff",
+                                            dry_run=False, test_adresse="keine-adresse"))
+            self.assertEqual([], aufgerufen, "ungültige Testadresse darf nicht live senden")
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+            for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)
 
@@ -673,8 +753,11 @@ class Verdrahtung(unittest.TestCase):
         wf = open(os.path.join(ROOT, ".github/workflows/newsletter-daily.yml"),
                   encoding="utf-8").read()
         for marke in ("newsletter_digest.py --selftest", "--check --strict-inert",
-                      "BREVO_API_KEY", "BREVO_LIST_ID", "git add data/newsletter_state.json"):
+                      "BREVO_API_KEY", "BREVO_LIST_ID", "git add data/newsletter_state.json",
+                      "TEST_ADRESSE_GESETZT"):
             self.assertIn(marke, wf, f"Workflow enthält nicht: {marke}")
+        self.assertNotIn("TEST_ADRESE_GESETZT", wf,
+                         "Tippfehler macht die Testversand-Ausnahme der Zustellbarkeits-Wache tot")
         # Kein Weg, ohne Absender zu senden – und kein roter Lauf ohne ihn
         self.assertIn("ARGS=\"${ARGS/--send/}\"", wf)
         # Qualitäts-Gate: `assertIn("newsletter_digest", link-check.yml)` war bis

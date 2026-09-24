@@ -39,9 +39,14 @@ Dieses Skript schließt beide Seiten der Lücke:
             passiert kein Netzwerkzugriff. Kein Testversand ohne
             `--test-adresse`. Ein Testversand (`--send --test-adresse X`,
             auch ohne `--live`) ist dagegen sofort real: er ist eine echte
-            Mail an genau eine eingegebene Adresse (sendTest, nie sendNow)
+            Mail an genau die eingegebenen Adressen (sendTest, nie sendNow)
             und zahlt sich deshalb nicht als Ausgabe in den Duplikatschutz
             ein. `--send` ALLEIN bleibt eine Vorschau (dry-run).
+            Der Kampagnen-Payload spricht CreateEmailCampaign: `replyTo` ist
+            eine Adresse (String), `emailTo` beim Test eine Liste. Das
+            Transaktions-Objekt `{"email": "…"}` lehnt Brevo mit HTTP 400
+            „ReplyTo email should be valid“ ab – Test und Live, weil beide
+            zuerst die Kampagne anlegen (Lauf 35904226864, 23.09.2026).
 
   --selftest Selbsttest, ohne Netzwerk, ohne Schreibzugriff auf den Bestand.
 
@@ -602,14 +607,17 @@ def _http_request(key: str, pfad: str, payload: dict | None, methode: str) -> tu
         grund = f"https://{host}/v3/"
     url = grund + pfad.lstrip("/")
     data = None if payload is None else json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        url, data=data, method=methode,
-        headers={"api-key": key, "Content-Type": "application/json",
-                 "Accept": "application/json",
-                 # Die Zeile, an der Lauf #21 scheiterte: ohne User-Agent sendet
-                 # urllib „Python-urllib/3.11“, und genau diese Signatur filtert
-                 # die Kante mit Fehler 1010 aus, bevor Brevo den Key je liest.
-                 "User-Agent": IDENTITÄTEN[IDENTITÄTS_INDEX]})
+    # sendNow hat im Schema keinen Body. Content-Type ohne Körper ist eine
+    # zweite, unnötige Abweichung vom dokumentierten Aufruf – GET und sendNow
+    # senden deshalb keinen JSON-Kopf.
+    headers = {"api-key": key, "Accept": "application/json",
+               # Die Zeile, an der Lauf #21 scheiterte: ohne User-Agent sendet
+               # urllib „Python-urllib/3.11“, und genau diese Signatur filtert
+               # die Kante mit Fehler 1010 aus, bevor Brevo den Key je liest.
+               "User-Agent": IDENTITÄTEN[IDENTITÄTS_INDEX]}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, method=methode, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=40) as r:
             return r.status, r.read().decode("utf-8", "replace")[:ANTWORT_LIMIT]
@@ -1056,19 +1064,39 @@ def _selftest() -> int:
         pruefe(bool(aufgerufen) and rc3 == 0
                and state.get("versandene_artikel", [])[-1:] == ["2026-09-11-neu-1"],
                f"verscharfter Versand läuft nicht durch (rc={rc3}): {state}")
-        # 20a) Der Payload spricht Brevos Schema, nicht unser Wörterbuch:
-        #      previewText (das Feld, das es gibt) statt preheader (das es
-        #      nicht gibt – genau daran scheiterte Lauf #14), Absender und
-        #      Reply-To aus der Studio-SSOT statt hart codiert.
+        # 20a) Der Payload spricht Brevos Kampagnen-Schema, nicht unser Wörterbuch
+        #      und nicht das Transaktions-Schema:
+        #      previewText statt preheader (Lauf #14), replyTo als STRING statt
+        #      {"email": "…"} (Lauf 35904226864 – HTTP 400 „ReplyTo email should
+        #      be valid“, Test und Live), kein textContent, kein status.
+        #      sendNow trägt keinen Body.
         kampagne = aufgerufen[0][2] if aufgerufen else {}
+        sende_body = [body for _, pfad, body in aufgerufen if str(pfad).endswith("/sendNow")]
         pruefe("previewText" in kampagne and "preheader" not in kampagne
                and kampagne.get("previewText") == "Vorschautext",
                f"Payload nutzt previewText nicht bzw. preheader noch: {sorted(kampagne)}")
         pruefe(kampagne.get("sender", {}).get("name") == "Frank von FranksFinanzcheck"
                and kampagne.get("sender", {}).get("email") == "news@franksfinanzcheck.de"
-               and kampagne.get("replyTo", {}).get("email") == "kontakt@franksfinanzcheck.de",
-               f"Absender/Reply-To nicht aus der Studio-SSOT: {kampagne.get('sender')} "
-               f"/ {kampagne.get('replyTo')}")
+               and kampagne.get("replyTo") == "kontakt@franksfinanzcheck.de"
+               and isinstance(kampagne.get("replyTo"), str),
+               f"Absender/Reply-To nicht aus der Studio-SSOT oder replyTo kein String: "
+               f"{kampagne.get('sender')} / {kampagne.get('replyTo')!r}")
+        pruefe("textContent" not in kampagne and "status" not in kampagne
+               and not kampagnen_schema_verstoesse(kampagne),
+               f"Kampagnen-Payload verletzt CreateEmailCampaign: "
+               f"{kampagnen_schema_verstoesse(kampagne) or sorted(kampagne)}")
+        pruefe(sende_body == [None],
+               f"sendNow darf keinen Body tragen (Schema hat keinen): {sende_body}")
+        historisch = {"replyTo": {"email": "kontakt@franksfinanzcheck.de"},
+                      "textContent": "x", "status": "draft", "preheader": "x",
+                      "name": "n", "subject": "s", "htmlContent": "<p>x</p>",
+                      "sender": {"name": "A", "email": "news@franksfinanzcheck.de"},
+                      "recipients": {"listIds": [7]}, "previewText": "p",
+                      "mirrorActive": True}
+        hist_verstoss = kampagnen_schema_verstoesse(historisch)
+        pruefe(any("replyTo" in v for v in hist_verstoss)
+               and any("textContent" in v or "Transaktionsfelder" in v for v in hist_verstoss),
+               f"der Payload von Lauf 35904226864 gilt als schema-gültig: {hist_verstoss}")
         pruefe("senders" in get_aufgerufen
                and any(p.startswith("contacts/lists/") for p in get_aufgerufen),
                f"Vorprüfung (Absender/Liste) lief nicht vor dem Versand: {get_aufgerufen}")
@@ -1083,9 +1111,12 @@ def _selftest() -> int:
                        test_adresse="test@beispiel.de")
         pfade = [p for _, p, _ in aufgerufen]
         nach = lade_state(r4)
+        test_bodies = [body for _, p, body in aufgerufen if str(p).endswith("/sendTest")]
         pruefe(rc4 == 0 and any(p.endswith("/sendTest") for p in pfade)
-               and not any(p.endswith("/sendNow") for p in pfade),
-               f"Testversand nutzt nicht ausschließlich sendTest (rc={rc4}): {pfade}")
+               and not any(p.endswith("/sendNow") for p in pfade)
+               and test_bodies == [{"emailTo": ["test@beispiel.de"]}],
+               f"Testversand nutzt nicht ausschließlich sendTest mit emailTo-Liste "
+               f"(rc={rc4}): {pfade} {test_bodies}")
         pruefe(nach.get("versandene_artikel") == vor.get("versandene_artikel")
                and "test_kampagne_id" in nach,
                f"Testlauf verbucht sich als Ausgabe: {nach}")
@@ -1114,6 +1145,55 @@ def _selftest() -> int:
                f"trifft die Liste (rc={rc20}): {pfade20}")
         os.environ["NEWSLETTER_SEND"] = ""
         TRANSPORT_GET = spy_get
+
+        # 20c) Lauf 35904226864: Reply-To-Absage fällt genau einmal auf den
+        #      verifizierten Absender zurück und sendet dann. Ein anderer 400
+        #      wird nicht wiederholt. Eine ungültige Testadresse berührt das
+        #      Netz nicht (kein leeres emailTo, kein stiller Listenversand).
+        anlege: list = []
+
+        def reply_ablehnung(api_key, pfad, payload):
+            anlege.append((pfad, payload))
+            if (pfad == "emailCampaigns" and isinstance(payload, dict)
+                    and payload.get("replyTo") == "kontakt@franksfinanzcheck.de"):
+                return 400, ('{"code":"invalid_parameter",'
+                             '"message":"ReplyTo email should be valid"}')
+            if pfad == "emailCampaigns":
+                return 201, '{"id": 77}'
+            return 204, ""
+
+        TRANSPORT = reply_ablehnung
+        rc_reply = versende(r4, html, text, "X", dry_run=False,
+                            test_adresse="Frank <Probe@Beispiel.de>")
+        kampagnen = [p for pfad, p in anlege if pfad == "emailCampaigns"]
+        pruefe(rc_reply == 0 and len(kampagnen) == 2
+               and kampagnen[0].get("replyTo") == "kontakt@franksfinanzcheck.de"
+               and kampagnen[1].get("replyTo") == "news@franksfinanzcheck.de"
+               and any(pfad.endswith("/sendTest") and body == {"emailTo": ["probe@beispiel.de"]}
+                       for pfad, body in anlege),
+               f"Reply-To-Absage fällt nicht auf den Absender zurück "
+               f"(rc={rc_reply}): {anlege}")
+        anlege.clear()
+
+        def anderer_400(api_key, pfad, payload):
+            anlege.append(pfad)
+            return 400, '{"code":"invalid_parameter","message":"htmlContent is too short"}'
+
+        TRANSPORT = anderer_400
+        rc_ander = versende(r4, html, text, "X", dry_run=False,
+                            test_adresse="probe@beispiel.de")
+        pruefe(rc_ander == 1 and anlege.count("emailCampaigns") == 1,
+               f"fremder 400 wurde wiederholt: {anlege}")
+        anlege.clear()
+        TRANSPORT = reply_ablehnung
+        rc_bad = versende(r4, html, text, "X", dry_run=False,
+                          test_adresse="keine-adresse")
+        pruefe(rc_bad == 1 and not anlege,
+               f"ungültige Testadresse hat das Netz berührt: {anlege}")
+        gelesen, norm_fehler = test_adressen_lesen(
+            "Frank <Probe@Beispiel.de>, probe@beispiel.de")
+        pruefe(norm_fehler == "" and gelesen == ["probe@beispiel.de"],
+               f"Testadressen nicht normalisiert: {gelesen!r} {norm_fehler!r}")
         TRANSPORT = brevo
 
         # 21–24) Vorflug verriegelt, BEVOR eine Kampagne entsteht
@@ -1383,11 +1463,223 @@ def _selftest() -> int:
     print(f"✅ Newsletter-Selbsttest: {zaehler} Fälle grün (INERT, totes "
           f"Versprechen, http + ds-fehlt, saubere Kette, Quell-Fallback, "
           f"Platzhalter, halbfertiger Abschnitt, Digest, Versand-Verriegelung, "
-          f"previewText/SSOT-Payload, Vorflug, Testversand-Verdrahtung, "
+          f"previewText/SSOT-Payload, Kampagnen-Schema (replyTo-String, emailTo-Liste), "
+          f"Vorflug, Testversand-Verdrahtung, "
           f"Client-Kennung und Kantenblockage, Wiederholung nur fürs Lesen, "
           f"Nachlese bei unklarem Sendegang, Versand-Halt, Versand-Ehrlichkeit, "
           f"State-Konfiguration, Host-Guard für BREVO_API_HOST).")
     return 0
+
+
+# ---------------------------------------------------------------- Kampagnen-Schema
+# Lauf 35904226864 (23.09.2026, 18:41 UTC, workflow_dispatch):
+#   ❌ Kampagne nicht angelegt (HTTP 400: ReplyTo email should be valid ·
+#      invalid_parameter)
+# Test und Live sterben an derselben Stelle. Beide legen zuerst eine Kampagne
+# an (`POST /emailCampaigns`) und senden erst danach (`sendTest` bzw. `sendNow`).
+# Der Payload trug `replyTo` als Objekt `{"email": "…"}`. Das ist das Schema
+# von SendSmtpEmail (Transaktion). CreateEmailCampaign will einen String
+# (format: email). Quellen: developers.brevo.com/reference/create-email-campaign
+# und getbrevo/brevo-go `lib/model_create_email_campaign.go` (`ReplyTo string`).
+# Dieselbe Verwechslung hätte den Testversand einen Schritt später noch einmal
+# getötet: `sendTest` erwartet `emailTo` als Liste von Strings, nicht als String
+# (developers.brevo.com/reference/send-test-email). Ein leeres `emailTo` schickt
+# die Probe an die gesamte Testliste des Kontos – eine ungültige Testadresse
+# ist deshalb ein Abbruch, kein stiller Fallback.
+#
+# `textContent` und `status` stehen nicht im Kampagnen-Schema. Sie gehören zum
+# Transaktions-Endpunkt. Mitzuschicken ist der nächste HTTP 400, sobald Brevo
+# unbekannte Felder ablehnt; der Reply-To-Fehler kam zuerst und hat die Klasse
+# verdeckt. Der Klartext bleibt lokal (QA, Archiv). Die Kampagne trägt HTML.
+KAMPAGNEN_SCHEMA = frozenset({
+    "name", "tag", "sender", "htmlContent", "htmlUrl", "templateId",
+    "scheduledAt", "subject", "previewText", "replyTo", "toField",
+    "recipients", "attachmentUrl", "inlineImageActivation", "mirrorActive",
+    "footer", "header", "utmCampaign", "utmContent", "utmTerm", "params",
+    "sendAtBestTime", "abTesting", "subjectA", "subjectB", "splitRule",
+    "winnerCriteria", "winnerDelay", "ipWarmupEnable", "initialQuota",
+    "increaseRate", "unsubscriptionPageId", "updateFormId",
+    "emailExpirationDate",
+})
+# Felder, die schon einmal aus dem falschen Schema hierher gerutscht sind.
+KAMPAGNEN_FREMDE = frozenset({"preheader", "textContent", "status", "to", "html"})
+EMAIL_MUSTER = re.compile(r"^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,63}$")
+TEST_ADRESSEN_MAX = 10
+
+
+def email_aus_text(roh: str) -> str:
+    """Eine Adresse aus Freitext, oder leer wenn keine gültige drinsteht.
+
+    Akzeptiert `name@domain.tld` und `Name <name@domain.tld>`. Brevo prüft
+    `format: email` streng – ein Anzeigename, ein Leerzeichen oder ein Objekt
+    ist genau der 400er, an dem Lauf 35904226864 starb.
+    """
+    text = (roh or "").replace("\u00a0", " ").strip()
+    if not text:
+        return ""
+    klammer = re.search(r"<([^<>]+)>", text)
+    if klammer:
+        text = klammer.group(1).strip()
+    text = text.strip().strip("\"'").lower()
+    if (len(text) > 254 or ".." in text or text.startswith(".")
+            or text.endswith(".") or text.startswith("@")):
+        return ""
+    lokal, trenn, domain = text.partition("@")
+    if (not trenn or not lokal or not domain or lokal.startswith(".")
+            or lokal.endswith(".") or domain.startswith(".")
+            or domain.endswith(".") or domain.startswith("-")):
+        return ""
+    if not EMAIL_MUSTER.fullmatch(text):
+        return ""
+    return text
+
+
+def test_adressen_lesen(roh: str) -> tuple[list[str], str]:
+    """Testadressen für sendTest. → (liste, fehler).
+
+    Komma, Semikolon oder Zeilenumbruch trennen mehrere Adressen. Ungültiges
+    bricht ab: ein String statt Liste ist HTTP 400, eine leere Liste schickt
+    die Probe an die ganze Testliste des Kontos.
+    """
+    text = (roh or "").strip()
+    if not text:
+        return [], ""
+    adressen: list[str] = []
+    for teil in re.split(r"[,;\n]+", text):
+        teil = teil.strip()
+        if not teil:
+            continue
+        norm = email_aus_text(teil)
+        if not norm:
+            return [], (
+                f"Testadresse {teil!r} ist keine gültige E-Mail. Kein Versand: "
+                "ein falsches emailTo scheitert bei Brevo, ein leeres träfe die "
+                "gesamte Testliste des Kontos.")
+        if norm not in adressen:
+            adressen.append(norm)
+    if len(adressen) > TEST_ADRESSEN_MAX:
+        return [], (f"Höchstens {TEST_ADRESSEN_MAX} Testadressen pro Lauf "
+                    "(Brevo: 50 Testmails pro Tag).")
+    return adressen, ""
+
+
+def kampagnen_schema_verstoesse(payload: dict) -> list[str]:
+    """Menschenlesbare Verstöße gegen CreateEmailCampaign. Leer = senden darf."""
+    if not isinstance(payload, dict):
+        return ["Payload ist kein Objekt"]
+    funde: list[str] = []
+    fremd = sorted(set(payload) - KAMPAGNEN_SCHEMA)
+    if fremd:
+        funde.append("Felder außerhalb CreateEmailCampaign: " + ", ".join(fremd))
+    bekannt_fremd = sorted(set(payload) & KAMPAGNEN_FREMDE)
+    if bekannt_fremd:
+        funde.append("Transaktionsfelder in der Kampagne: " + ", ".join(bekannt_fremd))
+    if "replyTo" in payload:
+        reply = payload.get("replyTo")
+        if not isinstance(reply, str):
+            funde.append(
+                "replyTo muss ein String sein, nicht "
+                f"{type(reply).__name__} (Lauf 35904226864: Objekt → HTTP 400 "
+                "ReplyTo email should be valid)")
+        elif not email_aus_text(reply):
+            funde.append(f"replyTo ist keine E-Mail: {reply!r}")
+    sender = payload.get("sender")
+    if not isinstance(sender, dict):
+        funde.append("sender fehlt oder ist kein Objekt")
+    else:
+        if "id" in sender and "email" in sender:
+            funde.append("sender darf nicht email und id gleichzeitig tragen")
+        if "email" in sender and not email_aus_text(str(sender.get("email") or "")):
+            funde.append(f"sender.email ist keine E-Mail: {sender.get('email')!r}")
+        if not str(sender.get("name") or "").strip() and "id" not in sender:
+            funde.append("sender.name fehlt")
+    empfaenger = payload.get("recipients")
+    ids = empfaenger.get("listIds") if isinstance(empfaenger, dict) else None
+    if (not isinstance(ids, list) or not ids
+            or not all(isinstance(i, int) and not isinstance(i, bool) for i in ids)):
+        funde.append("recipients.listIds muss eine nichtleere Liste von Ganzzahlen sein")
+    if (not str(payload.get("htmlContent") or "").strip()
+            and not payload.get("htmlUrl") and not payload.get("templateId")):
+        funde.append("htmlContent fehlt")
+    if not str(payload.get("subject") or "").strip():
+        funde.append("subject fehlt")
+    if not str(payload.get("name") or "").strip():
+        funde.append("name fehlt")
+    return funde
+
+
+def reply_to_abgelehnt(code: int, antwort: str) -> bool:
+    """Hat Brevo genau die Antwortadresse abgelehnt – die Kampagne also nicht angelegt?"""
+    if not antwort_endgueltig_abgelehnt(code, antwort):
+        return False
+    text = (antwort or "").lower().replace("_", "").replace("-", "").replace(" ", "")
+    return "replyto" in text
+
+
+def kampagnen_payload(name: str, betreff: str, html: str, absender: dict,
+                      liste: str, preheader: str, reply_to: str) -> dict:
+    """Der Body von POST /emailCampaigns – nur Felder, die das Schema kennt."""
+    sender_email = email_aus_text(str(absender.get("email") or ""))
+    payload = {
+        "name": (name or "Digest")[:255],
+        "subject": (betreff or "Newsletter")[:255],
+        "htmlContent": html,
+        "sender": {
+            "name": (str(absender.get("name") or "FranksFinanzcheck").strip()
+                     or "FranksFinanzcheck")[:70],
+            "email": sender_email,
+        },
+        "recipients": {"listIds": [int(liste)]},
+        "previewText": ((preheader or "").strip() or betreff or "Newsletter")[:300],
+        "mirrorActive": True,
+    }
+    reply = email_aus_text(reply_to)
+    if reply:
+        payload["replyTo"] = reply
+    return payload
+
+
+def kampagne_anlegen(key: str, payload: dict) -> tuple[int, str, dict]:
+    """Kampagne anlegen. Bei Reply-To-Absage genau ein zweiter Anlauf.
+
+    Der zweite Anlauf ist nur legitim, weil ein endgültiges HTTP 4xx bedeutet:
+    nichts wurde angelegt. Er setzt die Antwortadresse auf den bereits
+    verifizierten Absender – oder lässt sie weg, wenn genau die abgelehnt
+    wurde. Andere 400er werden nicht wiederholt: das wäre derselbe Fehler
+    zweimal und würde die Ursache verdecken.
+    """
+    verstoesse = kampagnen_schema_verstoesse(payload)
+    if verstoesse:
+        return 0, "Schema: " + "; ".join(verstoesse), payload
+    code, antwort = TRANSPORT(key, "emailCampaigns", payload)
+    if code in (200, 201) or not reply_to_abgelehnt(code, antwort):
+        return code, antwort, payload
+    sender_email = email_aus_text(str((payload.get("sender") or {}).get("email") or ""))
+    aktuell = payload.get("replyTo")
+    if not aktuell:
+        return code, antwort, payload
+    ersatz = dict(payload)
+    if sender_email and aktuell != sender_email:
+        ersatz["replyTo"] = sender_email
+        grund = f"der verifizierten Absenderadresse {sender_email}"
+    else:
+        ersatz.pop("replyTo", None)
+        grund = "ohne Reply-To (Brevo setzt dann den Absender)"
+    print(f"   ⚠️  Reply-To {aktuell!r} von Brevo abgelehnt "
+          f"({brevo_fehler(code, antwort)}). Zweiter Anlauf mit {grund}. "
+          f"Antworten landen dort, bis {aktuell} in Brevo als Absender "
+          "verifiziert ist (Senders & IPs → Add sender).")
+    code2, antwort2 = TRANSPORT(key, "emailCampaigns", ersatz)
+    return code2, antwort2, ersatz
+
+
+def sendeaufruf_body(adressen: list[str]) -> dict | None:
+    """sendTest: emailTo als Liste. sendNow: kein Body (das Schema hat keinen)."""
+    if not adressen:
+        return None
+    if not all(isinstance(a, str) and email_aus_text(a) == a for a in adressen):
+        raise ValueError("emailTo muss eine Liste gültiger, normalisierter Adressen sein")
+    return {"emailTo": list(adressen)}
 
 
 # ------------------------------------------------------------------------- Versand
@@ -1517,7 +1809,16 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         print("   ❌ kein Versand: Secrets BREVO_API_KEY / BREVO_LIST_ID fehlen. "
               "Der Digest bleibt lokal – lieber nichts senden als ins Leere.")
         return 1
-    if not bestaetigt and not test_adresse:
+    # Testadressen VOR jedem Netzaufruf. Eine ungültige Adresse darf nicht zur
+    # Liste durchfallen, auch nicht wenn zusätzlich NEWSLETTER_SEND=ja steht:
+    # der Probelauf, der scheitert, ist kein Live-Versand.
+    adressen: list[str] = []
+    if (test_adresse or "").strip():
+        adressen, adress_fehler = test_adressen_lesen(test_adresse)
+        if adress_fehler or not adressen:
+            print(f"   ❌ kein Versand: {adress_fehler or 'Testadresse fehlt'}")
+            return 1
+    if not bestaetigt and not adressen:
         print("   ❌ kein Versand: NEWSLETTER_SEND=ja fehlt. Echte Listen werden nur "
               "bestätigt getroffen; für Probeläufe --test-adresse nutzen.")
         return 1
@@ -1525,12 +1826,12 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
         print(f"   ❌ kein Versand: BREVO_LIST_ID ist keine Zahl ({liste!r}) – Brevo liest "
               "die Listen-ID als Ganzzahl (Zahl in der Listen-URL).")
         return 1
-    if bestaetigt and not test_adresse:
+    if bestaetigt and not adressen:
         sperre = sperre_pruefen(root)
         if sperre:
             print(f"   ❌ kein Listen-Versand: {sperre}")
             return 1
-    if not test_adresse:
+    if not adressen:
         try:
             pause = kadenz_pruefen(root)
         except (OSError, ValueError, TypeError, AttributeError) as exc:
@@ -1541,32 +1842,35 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
             return 0
     absender = absender_konfig(root)
     # live=False bei Testversand: die Prüfung „Liste hat 0 Abonnenten“ gilt nur
-    # dem echten Listen-Versand (sendNow). Ein sendTest trifft genau eine
-    # Adresse, nie die Liste – genau deshalb ist er laut Checkliste der
-    # vorgesehene Probelauf, BEVOR die Liste Abonnenten hat. Ihn an der leeren
-    # Liste zu blockieren, würde den Probelauf unmöglich machen (Fehlerklasse
-    # des 23.09.2026: dokumentierter Weg, den kein Lauf gehen konnte).
-    # Existenz-Prüfungen (Absender da? verifiziert? Liste vorhanden?) bleiben
-    # auch beim Testversand an – der Payload trägt die listIds trotzdem.
+    # dem echten Listen-Versand (sendNow). Ein sendTest trifft genau die
+    # eingegebenen Adressen, nie die Liste – genau deshalb ist er laut
+    # Checkliste der vorgesehene Probelauf, BEVOR die Liste Abonnenten hat.
+    # Ihn an der leeren Liste zu blockieren, würde den Probelauf unmöglich
+    # machen (Fehlerklasse des 23.09.2026: dokumentierter Weg, den kein Lauf
+    # gehen konnte). Existenz-Prüfungen (Absender da? verifiziert? Liste
+    # vorhanden?) bleiben auch beim Testversand an – der Payload trägt die
+    # listIds trotzdem.
     rc_vor, befund = vorflug(key, liste, absender["email"],
-                             live=bool(bestaetigt) and not test_adresse)
+                             live=bool(bestaetigt) and not adressen)
     if rc_vor != 0:
         print(f"   ❌ Vorprüfung fehlgeschlagen: {befund}")
         return 1
-    payload = {"name": f"Digest {datetime.date.today().isoformat()}",
-               "subject": betreff, "htmlContent": html, "textContent": text,
-               "sender": {"name": absender["name"], "email": absender["email"]},
-               "recipients": {"listIds": [int(liste)]},
-               "status": "draft",
-               # Brevo-Schema (CreateEmailCampaign): das Feld heißt previewText,
-               # nicht preheader – Lauf #14 scheiterte genau daran, dass der
-               # Payload ein Feld trug, das es beim Anbieter nie gab.
-               "previewText": (preheader.strip() or betreff)[:300],
-               "mirrorActive": True}
-    if absender["antwort_an"]:
-        payload["replyTo"] = {"email": absender["antwort_an"]}
-    code, antwort = TRANSPORT(key, "emailCampaigns", payload)
+    roh_reply = absender["antwort_an"]
+    reply = email_aus_text(roh_reply)
+    if roh_reply and not reply:
+        print(f"   ⚠️  Antwortadresse {roh_reply!r} ist keine gültige E-Mail – "
+              f"Versand nutzt die Absenderadresse {absender['email']}.")
+        reply = email_aus_text(absender["email"])
+    # CreateEmailCampaign: replyTo ist ein String, nicht {"email": "…"}.
+    # textContent und status gehören nicht in dieses Schema (Lauf 35904226864).
+    payload = kampagnen_payload(
+        f"Digest {datetime.date.today().isoformat()}", betreff, html, absender,
+        liste, preheader, reply)
+    code, antwort, payload = kampagne_anlegen(key, payload)
     if code not in (200, 201):
+        if str(antwort).startswith("Schema:"):
+            print(f"   ❌ Kampagne nicht angelegt ({antwort}) – nichts an Brevo geschickt.")
+            return 1
         print(f"   ❌ Kampagne nicht angelegt ({brevo_fehler(code, antwort)})")
         if not antwort_endgueltig_abgelehnt(code, antwort):
             print("   ℹ️  Kein zweiter Anlauf: dieser Aufruf war SCHREIBEND. Ein "
@@ -1583,10 +1887,17 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
     if not kennung:
         print(f"   ❌ Antwort ohne Kampagnen-ID: {antwort[:400]}")
         return 1
-    pfad = (f"emailCampaigns/{kennung}/sendTest" if test_adresse
+    # sendTest: emailTo ist eine LISTE von Strings. Ein einzelner String ist
+    # HTTP 400; ein leeres emailTo trifft die ganze Testliste des Kontos.
+    # sendNow hat keinen Body – `{}` wäre eine zweite, unbelegte Abweichung.
+    try:
+        body = sendeaufruf_body(adressen)
+    except ValueError as exc:
+        print(f"   ❌ kein Versand: {exc} – die Kampagne {kennung} bleibt Entwurf.")
+        return 1
+    pfad = (f"emailCampaigns/{kennung}/sendTest" if adressen
             else f"emailCampaigns/{kennung}/sendNow")
-    body = {"emailTo": test_adresse} if test_adresse else {}
-    if not test_adresse:
+    if not adressen:
         try:
             termin_reservieren(root)
         except (OSError, ValueError, TypeError) as exc:
@@ -1608,7 +1919,8 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
             print(f"   ✅ VERSAND ERFOLGT (Kampagne {kennung}) – die Antwort auf den "
                   f"Sende-Aufruf war unleserlich ({brevo_fehler(code2, antwort2)}), "
                   f"die Kampagnen-Akte belegt die Sendung aber: {grund}.")
-            return _status_schreiben(root, kennung, betreff, test_adresse, vorab_rc=1)
+            return _status_schreiben(root, kennung, betreff,
+                                     ", ".join(adressen), vorab_rc=1)
         if kunde == "nicht raus":
             print(f"   ❌ Versand nicht angekommen ({brevo_fehler(code2, antwort2)}); "
                   f"Nachlese: {grund} – es ist nichts versandt, der nächste Lauf darf "
@@ -1631,9 +1943,10 @@ def versende(root: str, html: str, text: str, betreff: str, *, dry_run: bool,
               "mit Datum ersetzen – bewusst Mensch, nicht Automatik).")
         sperre_setzen(root, kennung, betreff)
         return 1
-    print(f"   ✅ {'Testversand an ' + test_adresse if test_adresse else 'Versand angestoßen'}"
+    ziel = ", ".join(adressen)
+    print(f"   ✅ {'Testversand an ' + ziel if adressen else 'Versand angestoßen'}"
           f" (Kampagne {kennung})")
-    return _status_schreiben(root, kennung, betreff, test_adresse, vorab_rc=0)
+    return _status_schreiben(root, kennung, betreff, ziel, vorab_rc=0)
 
 
 def _status_schreiben(root: str, kennung, betreff: str, test_adresse: str, *,
