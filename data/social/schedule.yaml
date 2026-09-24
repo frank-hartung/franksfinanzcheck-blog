@@ -1827,9 +1827,9 @@ items:
   date: '2026-09-24'
   time: '18:00'
   scheduled_at: '2026-09-24T18:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-09-24
   channel: pinterest
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -1839,9 +1839,9 @@ items:
   date: '2026-09-24'
   time: '21:15'
   scheduled_at: '2026-09-24T21:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: kein lebender Pinterest-Token (pinterest_token.py)
 - id: telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:zahl:2026-09-25
   channel: telegram
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
