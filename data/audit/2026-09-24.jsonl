@@ -1,0 +1,13 @@
+{"ts": "2026-09-24T08:41:00Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 10}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:06Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 5}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:16Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:16Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 2}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:16Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 1}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:41:17Z", "module": "fix_spaces", "action": "apply", "input": {"files": 64}, "output": {"fixes": 60}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:43:09Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:43:09Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:43:09Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:43:09Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:43:09Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-24T08:44:09Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv"]}, "output": {"gated": ["2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv"], "demoted": []}, "status": "gated", "critical": false, "commit": null}

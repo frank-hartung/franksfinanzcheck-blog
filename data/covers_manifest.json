@@ -992,5 +992,41 @@
    "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
+ },
+ "2026-09-24-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
+  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
+  "ts": "2026-09-24T08:42:53+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
+  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
+  "ts": "2026-09-24T08:42:56+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-24-stromfresser-finden-so-stoppst-du-teure": {
+  "title": "Stromfresser finden: So stoppst du teure Energiefresser",
+  "ts": "2026-09-24T08:43:00+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-24-stromfresser-finden-so-stoppst-du-die-energie-lecks": {
+  "title": "Stromfresser finden: So stoppst du die Energie-Lecks",
+  "ts": "2026-09-24T08:43:03+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
  }
 }
