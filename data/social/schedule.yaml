@@ -1778,9 +1778,9 @@ items:
   date: '2026-09-24'
   time: '12:15'
   scheduled_at: '2026-09-24T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: reddit:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen:nutzen:2026-09-24
   channel: reddit
   slug: 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen
@@ -1790,9 +1790,10 @@ items:
   date: '2026-09-24'
   time: '14:15'
   scheduled_at: '2026-09-24T14:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD
+    fehlen
 - id: facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:frage:2026-09-24
   channel: facebook
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
@@ -1802,9 +1803,9 @@ items:
   date: '2026-09-24'
   time: '15:15'
   scheduled_at: '2026-09-24T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:takeaway:2026-09-24
   channel: threads
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
@@ -1814,9 +1815,9 @@ items:
   date: '2026-09-24'
   time: '16:15'
   scheduled_at: '2026-09-24T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:vergleich:2026-09-24
   channel: telegram
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
