@@ -20,6 +20,7 @@ import contextlib
 import datetime
 import importlib.util
 import io
+import json
 import os
 import shutil
 import subprocess
@@ -667,6 +668,9 @@ class DigestUndVersand(unittest.TestCase):
                 if pfad == "senders":
                     return 200, ('{"senders": [{"email": "news@franksfinanzcheck.de",'
                                  ' "active": true}]}')
+                if pfad.startswith("contacts/"):
+                    return 200, ('{"email": "probe@beispiel.de", "emailBlacklisted": false,'
+                                 ' "listIds": [7]}')
                 return 200, '{"id": 7, "totalSubscribers": 0}'
             nd.TRANSPORT_GET = leer_liste_get
             root = tempfile.mkdtemp()
@@ -679,12 +683,139 @@ class DigestUndVersand(unittest.TestCase):
             pfade = [a[1] for a in aufgerufen]
             self.assertTrue(any(p.endswith("/sendTest") for p in pfade), pfade)
             self.assertFalse(any(p.endswith("/sendNow") for p in pfade), pfade)
+            # Und der Grund, warum er an der leeren Liste nicht mehr stirbt:
+            # die TEST-Kampagne trägt keine Empfänger (Lauf 36015927654).
+            kampagne = [a[2] for a in aufgerufen if a[1] == "emailCampaigns"][0]
+            self.assertNotIn("recipients", kampagne)
+            self.assertIn("TESTLAUF", kampagne["name"])
         finally:
             nd.TRANSPORT = echt
             nd.TRANSPORT_GET = echt_get
             for var in ("BREVO_API_KEY", "BREVO_LIST_ID", "NEWSLETTER_SEND"):
                 os.environ.pop(var, None)
             shutil.rmtree(root, ignore_errors=True)
+
+    def test_probelauf_an_leerer_liste_scheitert_nicht_mehr_am_payload(self):
+        """Lauf 36015927654 (24.09.2026): „There are no contacts associated with
+        the given recipients info“ beim Anlegen der Kampagne – die TEST-Kampagne
+        trug `recipients.listIds` auf eine Liste mit 0 Abonnenten. Brevo löst die
+        Empfänger beim Anlegen auf; `recipients` ist im Schema optional (Pflicht
+        wird `listIds` erst mit `scheduledAt`). Der Probelauf vor den ersten
+        Abonnenten darf daran nicht mehr sterben."""
+        payload = nd.kampagnen_payload("TESTLAUF", "B", "<p>x</p>",
+                                       {"name": "F", "email": "news@franksfinanzcheck.de"},
+                                       "7", "Vorschau", "", mit_empfaengern=False)
+        self.assertNotIn("recipients", payload)
+        self.assertEqual([], nd.kampagnen_schema_verstoesse(payload, mit_empfaengern=False))
+        self.assertTrue(any("recipients" in v for v in
+                            nd.kampagnen_schema_verstoesse(dict(payload, recipients={"listIds": [7]}),
+                                                           mit_empfaengern=False)))
+        # Der Listen-Versand bleibt beim alten, strengen Vertrag.
+        live = nd.kampagnen_payload("Digest", "B", "<p>x</p>",
+                                    {"name": "F", "email": "news@franksfinanzcheck.de"},
+                                    "7", "", "")
+        self.assertEqual({"listIds": [7]}, live["recipients"])
+        self.assertEqual([], nd.kampagnen_schema_verstoesse(live))
+
+    def test_testadresse_muss_kontakt_sein_und_wird_nur_mit_freigabe_angelegt(self):
+        """Brevo nimmt Testmails nur an existierende, nicht gesperrte Kontakte mit
+        Listen-Zugehörigkeit an („Test emails cannot be sent to non-existent/
+        blacklisted/without-contact-list users“, Messung 19.09.2026). Der Lauf
+        MISST die Adresse vorher – und schreibt ohne Freigabe nichts."""
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        anrufe = []
+        kontakte = set()
+        try:
+            def lege_an(key, pfad, payload):
+                anrufe.append((pfad, payload))
+                kontakte.add((payload or {}).get("email"))
+                return 201, '{"id": 1}'
+
+            def lese(key, pfad):
+                adresse = nd.urllib.parse.unquote(pfad.split("contacts/", 1)[1])
+                if adresse in kontakte:
+                    return 200, '{"email": "%s", "emailBlacklisted": false, "listIds": []}' % adresse
+                return 404, '{"code":"document_not_found","message":"Contact not found"}'
+            nd.TRANSPORT = lege_an
+            nd.TRANSPORT_GET = lese
+            with contextlib.redirect_stdout(io.StringIO()):
+                # Vorprüfung selbst: schreibt nichts, nennt den Klickweg.
+                rc, befund, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
+                                                        anlegen=False)
+                self.assertEqual(1, rc)
+                self.assertIn("kein Kontakt im Brevo-Konto", befund)
+                self.assertIn("test_kontakt", befund)
+                self.assertEqual([], anrufe)
+                # Mit Freigabe: Kontakt anlegen – OHNE Listen-Eintrag (kein Abo nebenbei).
+                rc2, befund2, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
+                                                          anlegen=True)
+                self.assertEqual(0, rc2, befund2)
+                self.assertEqual([("contacts", {"email": "probe@beispiel.de",
+                                                "updateEnabled": True})], anrufe)
+                # Gesperrte Kontakte: Befund mit Klickweg, KEIN Schreibzugriff.
+                nd.TRANSPORT_GET = lambda key, pfad: (
+                    200, '{"email": "probe@beispiel.de", "emailBlacklisted": true,'
+                         ' "listIds": [7]}')
+                anrufe.clear()
+                rc3, befund3, _ = nd.testadressen_pruefen("key", ["probe@beispiel.de"],
+                                                          anlegen=True)
+                self.assertEqual(1, rc3)
+                self.assertIn("Sperrliste", befund3)
+                self.assertEqual([], anrufe)
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+
+    def test_testmail_abweisung_zerlegt_klassen_und_sperrt_sich_nicht_aus(self):
+        """sendTest lehnt einzelne Adressen ab und nennt sie beim Namen
+        (blackListedEmails/unexistingEmails/withoutListEmails). Der Lauf trägt
+        fehlende Kontakte und Listen-Einträge genau einmal nach – eine Sperre
+        aber bleibt eine Sperre (Mensch, nicht Automatik)."""
+        kl = nd.testmail_abweisung(json.dumps({
+            "code": "invalid_parameter",
+            "message": "Test email could not be sent to the following email addresses",
+            "blackListedEmails": ["gesperrt@beispiel.de"],
+            "unexistingEmails": ["neu@beispiel.de"],
+            "withoutListEmails": ["ohne@beispiel.de"]}))
+        self.assertEqual(["gesperrt@beispiel.de"], kl["blacklist"])
+        self.assertEqual(["neu@beispiel.de"], kl["unbekannt"])
+        self.assertEqual(["ohne@beispiel.de"], kl["ohne_liste"])
+        echt = nd.TRANSPORT
+        echt_get = nd.TRANSPORT_GET
+        anrufe = []
+        try:
+            nd.TRANSPORT = lambda key, pfad, payload: anrufe.append((pfad, payload)) or (
+                201, json.dumps({"contacts": {}, "success": list(
+                    (payload or {}).get("emails") or []), "failure": []}))
+            nd.TRANSPORT_GET = lambda key, pfad: (200, '{"emailBlacklisted": false}')
+            rc, wieder, meldung = nd.testmail_nachtragen(
+                "key", "7", ["gesperrt@beispiel.de", "neu@beispiel.de", "ohne@beispiel.de"],
+                json.dumps({"blackListedEmails": ["gesperrt@beispiel.de"],
+                            "unexistingEmails": ["neu@beispiel.de"],
+                            "withoutListEmails": ["ohne@beispiel.de"]}), anlegen=True)
+            self.assertEqual(0, rc, meldung)
+            self.assertEqual(["neu@beispiel.de", "ohne@beispiel.de"], wieder)
+            self.assertNotIn("gesperrt@beispiel.de", wieder)
+            self.assertEqual(("contacts", {"email": "neu@beispiel.de", "updateEnabled": True}),
+                             anrufe[0])
+            self.assertEqual(("contacts/lists/7/contacts/add",
+                              {"emails": ["neu@beispiel.de", "ohne@beispiel.de"]}), anrufe[1])
+        finally:
+            nd.TRANSPORT = echt
+            nd.TRANSPORT_GET = echt_get
+
+    def test_brevo_absage_wird_zum_klickweg_nicht_zur_deutung(self):
+        """Bekannte Brevo-Absagen bekommen den nächsten Betreiberschritt,
+        unbekannte bleiben ohne Deutung (kein Befund ohne Beleg)."""
+        self.assertIn("Double-Opt-In", nd.kampagnen_absage_hinweis(
+            '{"code":"invalid_parameter","message":"There are no contacts associated '
+            'with the given recipients info"}'))
+        self.assertIn("Domain", nd.kampagnen_absage_hinweis(
+            '{"code":"invalid_parameter","message":"DMARC policy requires domain '
+            'authentication"}'))
+        self.assertEqual("", nd.kampagnen_absage_hinweis(
+            '{"code":"invalid_parameter","message":"something completely new"}'))
 
     def test_status_schreibfehler_nach_versand_luegt_nicht(self):
         """Ist die Kampagne RAUS und scheitert erst das Status-Schreiben, bleibt

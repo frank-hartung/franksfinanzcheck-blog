@@ -14,6 +14,18 @@
 #   3. gesendet wird an eine Liste, deren Double-Opt-in bei Brevo liegt –
 #      Adressen berühren diesen Repo-Workflow nie
 #
+# Lauf #23 (36015927654, 24.09.2026, test_adresse gesetzt) machte den Probeweg
+# aus Checkliste 6a zum zweiten Mal unmöglich: „HTTP 400: There are no contacts
+# associated with the given recipients info“. Ursache war nicht die Adresse,
+# sondern die TEST-Kampagne selbst – sie trug `recipients.listIds` auf eine
+# Liste mit 0 Abonnenten, und Brevo löst die Empfänger beim Anlegen auf. Seit
+# der Reparatur legt eine TEST-Kampagne OHNE Empfänger an (`recipients` ist im
+# Schema optional; `sendTest` braucht nur `emailTo`) und misst die Testadresse
+# vorher im Konto – Brevo nimmt Testmails nur an bestehende, nicht gesperrte
+# Kontakte mit Listen-Zugehörigkeit an. Eine fehlende Adresse trägt der Lauf
+# als Kontakt nach (`test_kontakt`, Default an; ohne Listen-Eintrag – kein Abo
+# nebenbei), die Listen-Aufnahme passiert nur, wenn Brevo genau das verlangt.
+#
 # „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
 # planmäßige Cron (05:05 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
 # verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
@@ -40,6 +52,10 @@ on:
         description: 'Testversand an diese Adresse(n), Komma-getrennt (leer = kein Testversand) – trifft NUR diese Adressen, nie die Liste'
         type: string
         default: ''
+      test_kontakt:
+        description: 'Testadresse im Brevo-Konto nachtragen, falls sie dort fehlt/ohne Liste steht (Brevo nimmt Testmails nur an bestehende Kontakte an)'
+        type: boolean
+        default: true
       planmaessig:
         description: 'NUR Kadenz-Wache: verhält sich wie der planmäßige Cron (echter Listen-Versand)'
         type: boolean
@@ -173,6 +189,13 @@ jobs:
           # eine Shell-Zeile – als env-Wert ist sie Daten, kein Code.
           EINGABE_TAGE: ${{ inputs.tage || '7' }}
           EINGABE_TEST_ADRESSE: ${{ inputs.test_adresse || '' }}
+          # `test_kontakt` (Default: an): Brevo nimmt Testmails nur an Kontakte
+          # an, die im Konto bestehen und nicht gesperrt sind. Ist der Schalter
+          # gesetzt, trägt der Lauf eine fehlende Testadresse als Kontakt nach
+          # (ohne Listen-Eintrag) und nur dann in die Zielliste, wenn Brevo
+          # genau das verlangt – und weist das im Protokoll aus. `false` macht
+          # daraus einen Abbruch mit Klickweg, ohne jeden Schreibzugriff.
+          EINGABE_TEST_KONTAKT: ${{ inputs.test_kontakt && 'anlegen' || 'nicht-anlegen' }}
         run: |
           TAGE="$EINGABE_TAGE"
           case "$TAGE" in ''|*[!0-9]*) TAGE=7 ;; esac
@@ -197,6 +220,13 @@ jobs:
             if [ "$NEWSLETTER_SEND" = "ja" ]; then
               ARGS="$ARGS --live"
             fi
+          fi
+          # Testadressen: Brevo nimmt Testmails nur an bestehende, nicht
+          # gesperrte Kontakte an. Ohne Freigabe bleibt der Lauf lesend und
+          # bricht mit dem Klickweg ab (kein stiller Schreibzugriff auf das
+          # Konto); mit Freigabe trägt er den fehlenden Kontakt nach.
+          if [ -n "$EINGABE_TEST_ADRESSE" ] && [ "$EINGABE_TEST_KONTAKT" != "anlegen" ]; then
+            ARGS="$ARGS --test-kontakt-nicht-anlegen"
           fi
           # Ohne Absender kein Versand – und kein roter Lauf: der Leerzustand ist
           # eine Betreiber-Entscheidung, kein Defekt. Die Warnung steht im Log,

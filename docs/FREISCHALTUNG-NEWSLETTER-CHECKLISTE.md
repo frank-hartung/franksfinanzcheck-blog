@@ -154,7 +154,9 @@ ein Fehler, am 22.09. korrigiert.)
 Optional: Variable `NEWSLETTER_ABSENDER`, falls der Absender sich je von
 `news@franksfinanzcheck.de` unterscheiden soll. Kein `BREVO_TEST_LIST_ID` /
 `NEWSLETTER_TEST` – das existiert nicht; die Probe ist die Workflow-Eingabe
-`test_adresse` (Schritt 6a).
+`test_adresse` (Schritt 6a). Der Schalter **`test_kontakt`** (dort, Default
+**an**) entscheidet, ob der Lauf eine im Konto fehlende Testadresse als Kontakt
+nachtragen darf – er schreibt nur, wenn Brevo es verlangt, und weist es aus.
 
 ## 5. Die eine JSON-Zeile — ✅ erledigt (22.09., PR #354)
 
@@ -186,6 +188,22 @@ dennoch; Antworten landen dann bei `news@…`, bis `kontakt@…` unter
 Senders & IPs als Absender steht. Ein Live-Lauf außerhalb Dienstag/Freitag
 endet mit der Warnung „Versandpause“ und schickt nichts – das ist der
 Vertrag, kein stiller Erfolg.
+Seit der Probelauf-Reparatur (24.09., Report
+`NEWSLETTER-PROBELAUF-REPARATUR-2026-09-24.md`) geht der Probelauf auch bei
+**leerer Liste**: Die TEST-Kampagne trägt bewusst **keine Empfängerliste**
+(`recipients` ist im Schema optional; `sendTest` braucht nur `emailTo`) – Lauf
+#23 starb an `HTTP 400: There are no contacts associated with the given
+recipients info`, weil die Kampagne auf die Liste mit 0 Abonnenten zeigte.
+Brevo nimmt Testmails außerdem nur an **bestehende, nicht gesperrte Kontakte mit
+Listen-Zugehörigkeit** an (`blackListedEmails` / `unexistingEmails` /
+`withoutListEmails`); der Lauf misst die Adresse deshalb **vorher** im Konto.
+Fehlt sie als Kontakt, legt er sie standardmäßig an (Eingabe `test_kontakt` =
+**an**, ohne Listen-Eintrag – kein Abo nebenbei) und nimmt sie nur dann in
+„Blog-Abonnenten“ auf, wenn Brevo genau das verlangt. Beides steht im Protokoll
+(`ℹ️ Testadresse … wurde als Kontakt angelegt`). `test_kontakt` = **aus** macht
+daraus einen Abbruch mit Klickweg, ohne jeden Schreibzugriff; eine gesperrte
+Adresse wird NIE automatisch entsperrt (Brevo → Contacts → Kontakt → *Unblock*,
+bewusst ein Mensch).
 Kommt keine Mail, sagt der Lauf seit der Versand-Reparatur (23.09.) selbst,
 warum – die Ursache steht in der roten Annotation und im Step-Summary:
 „Digest ist leer“ (gelbe Warnung) heißt, im Zeitraum liegt kein
