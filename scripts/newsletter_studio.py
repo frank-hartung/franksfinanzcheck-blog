@@ -310,6 +310,71 @@ def themen_abgleich(root: str = BLOG_DIR) -> list:
     return funde
 
 
+WORKER_BASIS = "https://abos.franksfinanzcheck.de"
+WRANGLER_REL = "newsletter-worker/wrangler.toml"
+
+
+def worker_basis_abgleich(root: str = BLOG_DIR) -> list:
+    """hugo.toml: der Capture-Endpunkt muss die FESTE Worker-Subdomain sein.
+
+    Die drei Info-Seiten (/newsletter/bestaetigung/, /newsletter/abmelden/,
+    /newsletter/praeferenzen/) und die Journey-Links in den Mails referenzieren
+    genau diese Domäne als Text. Zeigt der Endpunkt woanders hin, lügen die
+    Seiten – das meldet diese Wache, statt der Widerspruch im Build
+    unterzugehen.
+    """
+    toml = _read(os.path.join(root, "hugo.toml"))
+    m = re.search(r'(?m)^\s*newsletterFormAction\s*=\s*"([^"]*)"', toml)
+    basis = (m.group(1).strip() if m else "")
+    if basis == WORKER_BASIS + "/anmeldung":
+        return []
+    if not basis:
+        return ["hugo.toml: newsletterFormAction leer – der Capture-Endpunkt ist nicht "
+                "die Worker-Subdomain, die die Info-Seiten benennen (" + WORKER_BASIS + ")"]
+    return [f"hugo.toml: newsletterFormAction = {basis!r} – muss {WORKER_BASIS}/anmeldung "
+            f"sein (die Journey-Infoseiten sind an diese Domäne gebunden)"]
+
+
+def wrangler_themen_abgleich(root: str = BLOG_DIR) -> list:
+    """newsletter-worker/wrangler.toml: THEMEN_IDS + Labels deckungsgleich mit Studio.
+
+    Der Worker validiert Anmelde-Themen gegen THEMEN_IDS und rendert die
+    Präferenzseite-Labels aus THEMEN_LABELS. Beide werden von Hand gepflegt
+    (Watch steht im Wrangler-Kommentar) – driften sie vom Studio ab, verschluckt
+    das Formular Themen still.
+    """
+    pfad = os.path.join(root, WRANGLER_REL)
+    roh = _read(pfad)
+    if not roh:
+        return [f"{WRANGLER_REL} nicht lesbar – Worker-Themenabgleich ausgefallen"]
+    funde = []
+    m = re.search(r'(?m)^\s*THEMEN_IDS\s*=\s*"([^"]*)"', roh)
+    if not m:
+        return ["wrangler.toml: THEMEN_IDS fehlt – der Worker akzeptiert kein Thema"]
+    wrangler_ids = {t.strip() for t in m.group(1).split(",") if t.strip()}
+    studio_ids = {t.get("id") for t in konfiguration(root).get("themen", []) if t.get("id")}
+    if wrangler_ids != studio_ids:
+        funde.append("wrangler.toml: THEMEN_IDS weicht vom Studio ab "
+                     f"(nur Worker: {', '.join(sorted(wrangler_ids - studio_ids)) or '–'}; "
+                     f"nur Studio: {', '.join(sorted(studio_ids - wrangler_ids)) or '–'})")
+    m2 = re.search(r'(?m)^\s*THEMEN_LABELS\s*=\s*"((?:[^"\\]|\\.)*)"', roh)
+    if not m2:
+        funde.append("wrangler.toml: THEMEN_LABELS fehlt – die Präferenzseite fällt auf IDs zurück")
+        return funde
+    try:
+        labels = json.loads(re.sub(r'\\(.)', r'\1', m2.group(1)))
+    except json.JSONDecodeError as exc:
+        return funde + [f"wrangler.toml: THEMEN_LABELS ist kein gültiges JSON: {exc}"]
+    if set(labels) != wrangler_ids:
+        funde.append("wrangler.toml: THEMEN_LABELS-Keys != THEMEN_IDS "
+                     f"(fehlt: {', '.join(sorted(wrangler_ids - set(labels))) or '–'}; "
+                     f"übrig: {', '.join(sorted(set(labels) - wrangler_ids)) or '–'})")
+    for id_, text in labels.items():
+        if not (isinstance(text, str) and text.strip()):
+            funde.append(f"wrangler.toml: THEMEN_LABELS[{id_!r}] leer")
+    return funde
+
+
 def kontrast_pruefung(konf: dict) -> list[dict]:
     """Die Pflichtpaare aus design.kontraste in BEIDEN Modi nachmessen.
 
@@ -1018,6 +1083,8 @@ def main(argv=None) -> int:
     if args.brand:
         funde, gepruefte = marken_abgleich(root)
         funde += themen_abgleich(root)
+        funde += worker_basis_abgleich(root)
+        funde += wrangler_themen_abgleich(root)
         messung = kontrast_pruefung(konfiguration(root))
         for m in messung:
             if not m["ok"]:
@@ -1038,7 +1105,8 @@ def main(argv=None) -> int:
             if not funde:
                 print(f"✅ Marke + Themen: {len(gepruefte)} Farbrollen aus dem Build-CSS "
                       f"hergeleitet, {len(konfiguration(root).get('themen', []))} Themenwelten "
-                      "deckungsgleich mit data/themenwelten.json.")
+                      "deckungsgleich mit data/themenwelten.json, Capture-Endpunkt und "
+                      "Worker-Themen (THEMEN_IDS/Labels) stimmen überein.")
         return 1 if funde else 0
     datum = datetime.date.fromisoformat(args.datum) if args.datum else datetime.date.today()
     material = material_aus_artikel(root, _artikel_suchen(root, args.days))
@@ -1100,6 +1168,36 @@ def _selftest() -> int:
         pruefe(funde == [], f"Markenabgleich der Live-Konfiguration meldet: {funde}")
         pruefe(len(_rollen) >= 20, f"zu wenige Farbrollen geprüft: {len(_rollen)}")
         pruefe(themen_abgleich(BLOG_DIR) == [], "Themen weichen von data/themenwelten.json ab")
+        # 1b) Worker-Wachen: Live-Konfiguration grün, abweichende Wurzeln rot
+        pruefe(worker_basis_abgleich(BLOG_DIR) == [],
+               f"Worker-Basis-Wache meldet an Live-Repo: {worker_basis_abgleich(BLOG_DIR)}")
+        pruefe(wrangler_themen_abgleich(BLOG_DIR) == [],
+               f"Wrangler-Themen-Wache meldet an Live-Repo: {wrangler_themen_abgleich(BLOG_DIR)}")
+        with tempfile.TemporaryDirectory(prefix="studio-worker-") as tw:
+            os.makedirs(os.path.join(tw, "data"), exist_ok=True)
+            open(os.path.join(tw, "hugo.toml"), "w", encoding="utf-8").write(
+                "newsletterFormAction = \"https://fremd.example/anmeldung\"\n")
+            open(os.path.join(tw, "data", "newsletter_studio.json"), "w", encoding="utf-8").write(
+                json.dumps({"themen": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}]}))
+            funde = worker_basis_abgleich(tw)
+            pruefe(any("muss " + WORKER_BASIS + "/anmeldung" in f for f in funde),
+                   f"fremde Basis nicht erkannt: {funde}")
+            open(os.path.join(tw, "hugo.toml"), "w", encoding="utf-8").write(
+                "newsletterFormAction = \"\"\n")
+            pruefe(any("leer" in f for f in worker_basis_abgleich(tw)),
+                   "leere Basis nicht erkannt")
+            pruefe(any("nicht lesbar" in f for f in wrangler_themen_abgleich(tw)),
+                   "fehlende wrangler.toml nicht erkannt")
+            os.makedirs(os.path.join(tw, "newsletter-worker"), exist_ok=True)
+            open(os.path.join(tw, "newsletter-worker", "wrangler.toml"), "w",
+                 encoding="utf-8").write(
+                'THEMEN_IDS = "a,c"\n'
+                'THEMEN_LABELS = "' + json.dumps({"a": "A"}, separators=(",", ":")).replace('"', '\\"') + '"\n')
+            funde = wrangler_themen_abgleich(tw)
+            pruefe(any("THEMEN_IDS weicht" in f for f in funde),
+                   f"ID-Drift nicht erkannt: {funde}")
+            pruefe(any("THEMEN_LABELS-Keys" in f for f in funde),
+                   f"Label-Drift nicht erkannt: {funde}")
         with tempfile.TemporaryDirectory(prefix="studio-brand-") as td:
             os.makedirs(os.path.join(td, "data"), exist_ok=True)
             os.makedirs(os.path.join(td, "assets", "css", "extended"), exist_ok=True)
@@ -1151,7 +1249,7 @@ def _selftest() -> int:
         # 5) Blöcke → HTML + Text, alle Marken present, kein Flex/Grid
         html_a, text_a = a["html"], a["text"]
         pruefe("{{unsubscribe}}" in html_a and "{{unsubscribe}}" in text_a,
-               "Abmelde-Marke fehlt (Brevo braucht {{unsubscribe}})")
+               "Abmelde-Marke {{unsubscribe}} fehlt im Template")
         pruefe("{{mirror}}" in html_a and "{{update_profile}}" in html_a,
                "Browser-/Präferenz-Marke fehlt")
         pruefe('role="presentation"' in html_a and "display:flex" not in html_a
@@ -1196,7 +1294,7 @@ def _selftest() -> int:
             pruefe(capture(td)["aktiv"] is False, "Leerzustand meldet sich als aktiv")
             with open(os.path.join(td, "data", "newsletter_studio.json"), "w",
                       encoding="utf-8") as fh:
-                fh.write(json.dumps({"capture": {"form_action": "https://forms.brevo.com/x"}}))
+                fh.write(json.dumps({"capture": {"form_action": "https://forms.beispiel.de/x"}}))
             pruefe(capture(td)["form_action"].startswith("https://"),
                    "konfigurierte Anmeldung wird nicht erkannt")
     except Exception as exc:                                   # noqa: BLE001

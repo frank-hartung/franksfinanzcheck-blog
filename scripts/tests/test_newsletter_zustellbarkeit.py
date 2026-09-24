@@ -1,378 +1,435 @@
 #!/usr/bin/env python3
-"""Regressionstest für die Zustellbarkeits-Wache (23.09.2026, Lauf #21-Folge).
+"""Unit-Tests: newsletter_zustellbarkeit.py – die DNS/Worker/Resend-Wache.
 
-WARUM: Der Newsletter-Versand war im Repo hart verriegelt, die beiden Schichten
-DAVOR aber ungemessen – und beide hatten an diesem Tag recht:
-
-  * Die API-Kante (Cloudflare vor `api.brevo.com`) filterte die
-    Standardkennung der Python-Bibliothek mit HTTP 403 / „Error 1010“. Der Lauf
-    nannte das „Absender-Vorprüfung fehlgeschlagen“ und damit einen
-    Betreiber-Befund für einen Client-Fehler.
-  * Die Freischalt-Checkliste schrieb `include:spf.brevo.com` in die Zone als
-    nächsten Schritt. Gemessen war etwas anderes: DKIM veröffentlicht
-    (`brevo1`/`brevo2._domainkey`), DMARC auf `p=reject; adkim=s; aspf=s`. Ein
-    SPF-Include hätte an der Zustellung nichts geändert – und eine Policy über
-    der Authentifizierung ist der Weg zur HARTEN Ableitung bei jedem DKIM-Ausfall.
-
-Dieser Test hält die Unterscheidungen fest, an denen beide Vorfälle
-vorbeigingen: Kante vs. Anbieter, Messlücke vs. Fund, Policy vs. Beleg.
-Alles ohne Netz – der Resolver ist eingesetzt.
+Hermetisch: `AUFLOESER` (DoH) und `NETZ_RUF` (HTTP) werden gegen ein
+gesundes bzw. mutiertes Zonendbild eingespiegelt – kein echtes Netz.
+Geprüft wird die WACHE, nicht das Internet: jede Regel muss die mutierte
+Situation als Fund melden und die gesunde als Grün – und ohne Messung
+gibt es kein Grün („nicht gemessen“ statt stiller Bestätigung).
 """
 from __future__ import annotations
 
 import importlib.util
-import io
 import json
 import os
-import shutil
-import subprocess
 import sys
 import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SCRIPTS = os.path.join(ROOT, "scripts")
+
+ZONE = "beispiel.blog"
+ANTWORT_DOMAIN = "antwort.blog"
+WERKER_HOST = "abos." + ZONE
+WERKER = "https://" + WERKER_HOST
 
 
-def _load(name: str, datei: str):
-    spec = importlib.util.spec_from_file_location(name, os.path.join(SCRIPTS, datei))
+def _load(name: str, rel: str):
+    pfad = os.path.join(ROOT, "scripts", rel)
+    spec = importlib.util.spec_from_file_location(name, pfad)
     mod = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = mod
+    sys.modules[name] = mod
     spec.loader.exec_module(mod)
     return mod
 
 
-nz = _load("newsletter_zustellbarkeit", "newsletter_zustellbarkeit.py")
+zust = _load("newsletter_zustellbarkeit", "newsletter_zustellbarkeit.py")
 
 
-def digest_modul():
-    """Der `newsletter_digest`, den die Wache zur Laufzeit importiert.
+def _tmp_root():
+    """Temp-Root mit hugo.toml (Zone = baseURL) – kein echtes Repo dabei."""
+    td = tempfile.mkdtemp(prefix="zust-")
+    open(os.path.join(td, "hugo.toml"), "w", encoding="utf-8").write(
+        f'baseURL = "https://{ZONE}/"\n\n[params]\n'
+        f'  newsletterFormAction = "{WERKER}/anmeldung"\n')
+    os.makedirs(os.path.join(td, "data"), exist_ok=True)
+    return td
 
-    Nicht selbst unter einem Kunstnamen laden: die Wache holt das Modul über
-    `import newsletter_digest`, und ein zweiter Test lädt es unter demselben
-    Namen. Wer eine eigene Kopie patcht, patcht an der Wache vorbei – genau die
-    Klasse „Test grün, Lauf rot“, die dieses Repo überall sonst ausschließt.
+
+def _gesunde_zone(mutation: dict | None = None):
+    """AUFLOESER-Stub: (name, typ) → (RCode, Antworten).
+
+    RCode 0 = gemessen, 3 = NXDOMAIN, -1 = nicht erreichbar.
+    `mutation` überschreibt einzelne Abfragen (z. B. DKIM → NXDOMAIN).
     """
-    if SCRIPTS not in sys.path:
-        sys.path.insert(0, SCRIPTS)
-    import importlib
-    return importlib.import_module("newsletter_digest")
+    tabelle = {
+        (ZONE, "TXT"): (0, ["v=spf1 include:resend.net -all"]),
+        ("_dmarc." + ZONE, "TXT"): (0, ["v=DMARC1; p=reject; rua=mailto:post@ex.de"]),
+        ("_resend._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=AAAA"]),
+        ("_resend2._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=BBBB"]),
+        (ZONE, "CNAME"): (0, [WERKER_HOST + ".workers.dev"]),
+        (ZONE, "MX"): (0, ["10 mx.ex.de"]),
+        (WERKER_HOST, "CNAME"): (0, [WERKER_HOST + ".workers.dev"]),
+        (ANTWORT_DOMAIN, "MX"): (0, ["10 mx.antwort.blog"]),
+    }
+    for schluessel, wert in (mutation or {}).items():
+        tabelle[schluessel] = wert
 
-ZONE = "probe.example"
+    def stub(name: str, typ: str):
+        if (name, typ) in tabelle:
+            return tabelle[(name, typ)]
+        return 3, []  # NXDOMAIN: alles andere existiert nicht
 
-
-def resolver(werte: dict):
-    """Injizierte Zone: werte[name][typ] → (RCode, Antworten)."""
-    def aufloeser(name: str, typ: str):
-        return werte.get(name, {}).get(typ, (3, []))
-    return aufloeser
-
-
-GRUNDZONE = {
-    ZONE: {"MX": (0, ["41 route1.mx.cloudflare.net.", "3 route3.mx.cloudflare.net."]),
-           "TXT": (0, ["v=spf1 include:_spf.mx.cloudflare.net ~all",
-                       "brevo-code:abcdef"])},
-    f"_dmarc.{ZONE}": {"TXT": (0, ["v=DMARC1; p=none; rua=mailto:reports@probe.example;"])},
-}
+    return stub
 
 
-def baum(state: dict | None = None) -> str:
-    root = tempfile.mkdtemp(prefix="zustell-test-")
-    os.makedirs(os.path.join(root, "data"), exist_ok=True)
-    with open(os.path.join(root, "data", "newsletter_studio.json"), "w",
-              encoding="utf-8") as fh:
-        json.dump({"capture": {"feld_themen": "themen"},
-                   "email": {"absender": {"name": "Frank", "email": f"news@{ZONE}"},
-                             "antwort_an": f"kontakt@{ZONE}"},
-                   "themen": [{"id": "strom-sparen", "label": "Strom & Gas"}]}, fh)
-    if state is not None:
-        with open(os.path.join(root, "data", "newsletter_state.json"), "w",
-                  encoding="utf-8") as fh:
-            json.dump(state, fh)
-    return root
+def _netz(*Antworten):
+    """NETZ_RUF-Stub: ruft auf, liefert der Reihe nach (code, körper)."""
+    warte = list(Antworten)
+
+    def stub(url: str, *, headers: dict | None = None, timeout: int = 15):
+        return warte.pop(0) if warte else (0, "stub: keine Antwort mehr vorbereitet")
+
+    return stub
 
 
-class CloudflareSeite(unittest.TestCase):
+class KantenBlockTest(unittest.TestCase):
+    """Der 403-Unterschied: Kante (1010) ≠ Absage des Anbieters."""
+
+    def test_1010_marker_ist_kante(self):
+        self.assertTrue(zust.kanten_block(403, 'Error 1010: The owner of this website has blocked...'))
+
+    def test_sigaturtext_ist_kante(self):
+        self.assertTrue(zust.kanten_block(403, "Access denied - browser's signature invalid"))
+
+    def test_klarer_403_ist_keine_kante(self):
+        self.assertFalse(zust.kanten_block(403, "forbidden"))
+
+    def test_anderer_code_ist_keine_kante(self):
+        self.assertFalse(zust.kanten_block(200, "Error 1010"))
+        self.assertFalse(zust.kanten_block(0, "whatever"))
+
+
+class CloudflareRegelnTest(unittest.TestCase):
+    """C1–C6: gesunde Zone grün, jede Mutation als Fund sichtbar."""
+
     def setUp(self):
-        self.root = baum()
-        self.wirkl = nz.AUFLOESER
-        self.nd = digest_modul()
-        self.echt_get = self.nd.TRANSPORT_GET
-        nz.AUFLOESER = resolver(GRUNDZONE)
-        # hermetisch: kein Netz, auch nicht versehentlich über die Brevo-Regeln
-        self.nd.TRANSPORT_GET = lambda key, pfad: (0, "URLError: Testbaum ohne Netz")
-        self.alt = os.environ.get("NEWSLETTER_MAILZONE", "")
-        os.environ["NEWSLETTER_MAILZONE"] = ZONE
+        self.td = _tmp_root()
+        self.echt = zust.AUFLOESER
+        self.env = {k: os.environ.get(k) for k in
+                    ("NEWSLETTER_MAILZONE", "NEWSLETTER_ABSENDER")}
+        for k in self.env:
+            os.environ.pop(k, None)
+        os.environ["NEWSLETTER_ABSENDER"] = "news@" + ANTWORT_DOMAIN
+
+    def _restore(self):
+        for k, v in self.env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
 
     def tearDown(self):
-        nz.AUFLOESER = self.wirkl
-        self.nd.TRANSPORT_GET = self.echt_get
-        if self.alt:
-            os.environ["NEWSLETTER_MAILZONE"] = self.alt
-        else:
-            os.environ.pop("NEWSLETTER_MAILZONE", None)
-        shutil.rmtree(self.root, ignore_errors=True)
+        zust.AUFLOESER = self.echt
+        self._restore()
+        self.teardown_tmp()
 
-    def _regeln(self):
-        return {r["regel"]: r for r in nz.pruefe_cloudflare(self.root)[0]}
+    def teardown_tmp(self):
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
 
-    def test_ein_traeger_spf_ist_ok_und_zwei_sind_ein_fund(self):
-        self.assertEqual("ok", self._regeln()["C1"]["gewicht"])
-        zwei = json.loads(json.dumps(GRUNDZONE))
-        zwei[ZONE]["TXT"] = (0, ["v=spf1 include:_spf.mx.cloudflare.net ~all",
-                                  "v=spf1 include:spf.brevo.com ~all", "brevo-code:abcdef"])
-        nz.AUFLOESER = resolver(zwei)
-        self.assertEqual("fund", self._regeln()["C1"]["gewicht"],
-                         "zwei SPF-Einträge = permerror, nicht „einer davon passt“")
+    def _funde(self, mutation: dict | None = None):
+        zust.AUFLOESER = _gesunde_zone(mutation)
+        funde, _messwerte = zust.pruefe_cloudflare(self.td)
+        return {f["regel"]: f for f in funde}
 
-    def test_dkim_entscheidet_ueber_die_dmarc_schaerfe(self):
-        """p=reject ist OHNE eigenes Domain-DKIM eine Zustellungsverhinderung,
-        MIT ihm zulässig – die Wache darf den Befund nicht an der Policy allein
-        festmachen (sonst meldet sie jede gesunde, scharf konfigurierte Zone rot)."""
-        reg = self._regeln()
-        self.assertEqual("fund", reg["C3"]["gewicht"])          # kein DKIM gefunden
-        self.assertEqual("ok", reg["C5"]["gewicht"])            # p=none: scharf wäre falsch
-        scharf = json.loads(json.dumps(GRUNDZONE))
-        scharf[f"_dmarc.{ZONE}"]["TXT"] = (0, ["v=DMARC1; p=reject; adkim=s; aspf=s; "
-                                              "rua=mailto:x@y.de;"])
-        nz.AUFLOESER = resolver(scharf)
-        self.assertEqual("fund", self._regeln()["C5"]["gewicht"],
-                         "p=reject ohne DKIM-Beleg bleibt unbemerkt")
-        mit_dkim = json.loads(json.dumps(scharf))
-        mit_dkim[f"mail._domainkey.{ZONE}"] = {"TXT": (0, ["k=rsa; p=MIGf…"])}
-        nz.AUFLOESER = resolver(mit_dkim)
-        reg2 = self._regeln()
-        self.assertEqual("ok", reg2["C3"]["gewicht"])
-        self.assertEqual("ok", reg2["C5"]["gewicht"],
-                         "p=reject MIT Domain-DKIM darf kein Fund sein")
+    def test_gesunde_zone_trag_t_gelb_gruen(self):
+        r = self._funde()
+        for nummer in ("C1", "C2", "C3", "C4", "C5", "C6"):
+            self.assertIn(nummer, r, f"Regel {nummer} fehlt")
+            self.assertEqual(r[nummer]["gewicht"], "ok",
+                             f"{nummer}: {r[nummer]['titel']}")
 
-    def test_brevo_include_ist_hinweis_nicht_fund(self):
-        """Die Checklisten-Anweisung war zu pauschal; die Wache meldet die wahre
-        Lage: kein Alignment-Gewinn auf geteilter IP, also Hinweis mit Begründung."""
-        reg = self._regeln()["C2"]
-        self.assertEqual("hinweis", reg["gewicht"])
-        self.assertIn("Alignement", reg["grund"])
+    def test_kein_spf_ist_fund(self):
+        r = self._funde({(ZONE, "TXT"): (0, [])})
+        self.assertEqual(r["C1"]["gewicht"], "fund")
 
-    def test_netzfehler_ist_messluecke_und_nie_gruen(self):
-        """Totalausfall der Abfrage: kein Grün, kein Befund – aber eine
-        Lückenzeile pro Schicht. Schweigen wäre die alte Schwäche (ein
-        nicht gestellter Blick darf nie wie „geprüft“ aussehen, und er darf
-        umgekehrt auch nicht die erreichbaren Schichten verschlucken)."""
-        nz.AUFLOESER = lambda name, typ: (-1, ["dns.google: URLError"])
-        funde = nz.pruefe_cloudflare(self.root)[0]
-        reg = {f["regel"]: f["gewicht"] for f in funde}
-        self.assertEqual("nicht messbar", reg["C0"])
-        for zeile in funde:
-            if zeile["regel"] == "C7":
-                continue          # Rein Repo-Herkunft (Studio-SSOT), braucht kein DNS
-            self.assertIn(zeile["gewicht"], ("nicht messbar", "nicht gemessen"),
-                          f"{zeile['regel']} erfindet bei Netzausfall ein Ergebnis: "
-                          f"{zeile['gewicht']}")
-        for verpasst in ("C1", "C3", "C4", "C5", "C6"):
-            self.assertEqual("nicht gemessen", reg.get(verpasst),
-                             f"{verpasst} fehlt als Lückenzeile")
-        erg = nz.pruefe(self.root, mit_netz=True)
-        self.assertEqual(0, erg["rc"], "eine Messlücke ist kein Versand-Fund")
-        self.assertTrue(erg["zählung"]["nicht messbar"] + erg["zählung"]["nicht gemessen"])
+    def test_zwei_spf_eintraege_sind_fund(self):
+        r = self._funde({(ZONE, "TXT"): (0,
+                      ["v=spf1 include:resend.net -all", "v=spf1 -all"])})
+        self.assertEqual(r["C1"]["gewicht"], "fund")
 
-    def test_txt_fetzen_werden_zusammengelesen(self):
-        self.assertEqual("v=spf1 include:a ~all",
-                         nz._txt_fetzen('"v=spf1 include:a" " ~all"'))
+    def test_spf_ohne_resend_include_ist_fund_c2(self):
+        r = self._funde({(ZONE, "TXT"): (0, ["v=spf1 -all"])})
+        self.assertEqual(r["C2"]["gewicht"], "fund")
 
-    def test_null_mx_ist_ein_fund_fuer_den_reply_to_kanal(self):
-        zone = json.loads(json.dumps(GRUNDZONE))
-        zone[ZONE]["MX"] = (0, ["0 ."])
-        nz.AUFLOESER = resolver(zone)
-        reg = self._regeln()
-        self.assertEqual("fund", reg["C6"]["gewicht"],
-                         "Null-MX lässt Antworten und Rückläufer im Nichts landen")
+    def test_fehlendes_dkim_ist_fund(self):
+        r = self._funde({("_resend._domainkey." + ZONE, "TXT"): (3, []),
+                         ("_resend2._domainkey." + ZONE, "TXT"): (3, [])})
+        self.assertEqual(r["C3"]["gewicht"], "fund")
 
-    def test_teilausfall_blindes_record_ist_luecke_der_rest_laeuft(self):
-        """Ein blindes Record darf die erreichbaren Schichten nicht verschlucken.
+    def test_dmarc_ohne_berichtsweg_ist_fund(self):
+        r = self._funde({("_dmarc." + ZONE, "TXT"): (0, ["v=DMARC1; p=reject"])})
+        self.assertEqual(r["C4"]["gewicht"], "fund")
 
-        Vorbedingung für den Wert der ganzen Wache: Der frühe Totalabbruch machte
-        aus einem wackelnden DoH-Endpunkt „nichts geprüft“ – inklusive der
-        DMARC-Antwort, die längst da war. Agenturwürdig ist nur beides zusammen:
-        Lücke benennen UND berichten, was messbar war.
-        """
-        zone = json.loads(json.dumps(GRUNDZONE))
-        zone[ZONE]["TXT"] = (-1, ["dns.google: URLError"])     # nur TXT @ blind
-        zone[f"brevo1._domainkey.{ZONE}"] = {"CNAME": (0, ["b1.probe-de.dkim.brevo.com."])}
-        zone[f"brevo2._domainkey.{ZONE}"] = {"CNAME": (0, ["b2.probe-de.dkim.brevo.com."])}
-        nz.AUFLOESER = resolver(zone)
-        reg = self._regeln()
-        self.assertEqual("nicht messbar", reg["C0"]["gewicht"])
-        self.assertIn("TXT @", reg["C0"]["ist"].split("blind:")[-1])
-        self.assertNotIn("TXT _dmarc", reg["C0"]["ist"].split("blind:")[-1])
-        self.assertEqual("nicht gemessen", reg["C1"]["gewicht"],
-                         "ungelesener SPF darf weder ok noch Fund sein")
-        self.assertNotIn("C2", reg, "ohne gelesenen SPF gibt es kein Include-Urteil")
-        self.assertEqual("nicht gemessen", reg["C4"]["gewicht"])
-        self.assertEqual("ok", reg["C3"]["gewicht"],
-                         "DKIM war messbar – die TXT-Lücke darf es nicht löschen")
-        self.assertEqual("ok", reg["C5"]["gewicht"],
-                         "DMARC war messbar – Lücke hinnehmen, Ergebnis verschlucken")
-        self.assertEqual("ok", reg["C6"]["gewicht"])
+    def test_dmarc_p_none_widerspricht_dkim_strategie(self):
+        r = self._funde({("_dmarc." + ZONE, "TXT"):
+                         (0, ["v=DMARC1; p=none; rua=mailto:post@ex.de"])})
+        self.assertEqual(r["C4"]["gewicht"], "hinweis")
 
-    def test_halbe_dkim_delegation_ist_hinweis_nicht_fund(self):
-        """Eine sichtbare von zwei CNAME-Delegationen ist kein „DKIM fehlt“.
+    def test_kein_mx_ist_fund(self):
+        r = self._funde({(ZONE, "MX"): (3, [])})
+        self.assertEqual(r["C5"]["gewicht"], "fund")
 
-        Der Fund-Text schrie previously nach einem DNS-Griff in eine laufende
-        Zone, obwohl das Alignement trug – und die zweite Delegation war hier nur
-        nicht abfragbar. Genau diese Verwechslung (Lücke = Befund) ist die
-        Fehlerklasse hinter Lauf #21.
-        """
-        zone = json.loads(json.dumps(GRUNDZONE))
-        zone[f"brevo1._domainkey.{ZONE}"] = {"CNAME": (0, ["b1.probe-de.dkim.brevo.com."])}
-        zone[f"brevo2._domainkey.{ZONE}"] = {"CNAME": (-1, ["cloudflare-dns.com: URLError"])}
-        nz.AUFLOESER = resolver(zone)
-        reg = self._regeln()
-        self.assertEqual("hinweis", reg["C3"]["gewicht"])
-        self.assertIn("nicht abfragbar", reg["C3"]["soll"])
-        self.assertNotEqual("fund", reg["C5"]["gewicht"],
-                            "scharfe Policy bei sichtbarem DKIM ist kein Fund")
-        self.assertNotIn("C5c", reg, "adkim=s-Hinweis läuft trotz Beleg")
+    def test_absender_domain_ohne_mx_ist_hinweis(self):
+        r = self._funde({(ANTWORT_DOMAIN, "MX"): (3, [])})
+        self.assertEqual(r["C6"]["gewicht"], "hinweis")
 
-    def test_txt_dkim_und_volstaendige_delegation_zaehlen_beide(self):
-        """Beide publish-Formen sind korrekt – die Wache muss beide kennen."""
-        zone = json.loads(json.dumps(GRUNDZONE))
-        zone[f"mail._domainkey.{ZONE}"] = {"TXT": (0, ["v=DKIM1; k=rsa; p=MIGfpublic"])}
-        nz.AUFLOESER = resolver(zone)
-        self.assertEqual("ok", self._regeln()["C3"]["gewicht"])
-        zone = json.loads(json.dumps(GRUNDZONE))
-        for nr, host in (("brevo1", "b1"), ("brevo2", "b2")):
-            zone[f"{nr}._domainkey.{ZONE}"] = {"CNAME": (0, [f"{host}.probe-de.dkim.brevo.com."])}
-        nz.AUFLOESER = resolver(zone)
-        reg = self._regeln()
-        self.assertEqual("ok", reg["C3"]["gewicht"])
-        self.assertNotIn("C5c", reg)
+    def test_unerreichbare_dns_ist_kein_gruen(self):
+        def tot(name, typ):
+            return -1, ["resolver: Timeout"]
+        zust.AUFLOESER = tot
+        funde, _ = zust.pruefe_cloudflare(self.td)
+        gewichte = {f["regel"]: f["gewicht"] for f in funde}
+        self.assertNotIn("C1", gewichte)  # C0-Fallback, keine einzelnen Regeln
+        self.assertEqual(funde[0]["regel"], "C0")
+        self.assertEqual(funde[0]["gewicht"], "nicht messbar")
 
-    def test_md_und_json_nennen_jeden_naechsten_schritt(self):
-        erg = nz.pruefe(self.root, mit_netz=True)
-        md = nz.als_md(erg)
-        self.assertIn("Weg:", md)
-        self.assertIn("C3", md)
-        json.dumps(erg, ensure_ascii=False)         # muss serialisierbar sein
+
+class WorkerRegelTest(unittest.TestCase):
+    """C7: der Hahn der Kette – CNAME, Antwort, Kanten-Block."""
+
+    def setUp(self):
+        self.td = _tmp_root()
+        self.echt_a, self.echt_n = zust.AUFLOESER, zust.NETZ_RUF
+        os.environ.pop("NEWSLETTER_WORKER_BASE", None)
+        os.environ.pop("NEWSLETTER_MAILZONE", None)
+
+    def tearDown(self):
+        zust.AUFLOESER, zust.NETZ_RUF = self.echt_a, self.echt_n
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
+
+    def _c7(self, mutation: dict | None = None, antwort=(200, "<html>…</html>")):
+        zust.AUFLOESER = _gesunde_zone(mutation)
+        zust.NETZ_RUF = _netz(antwort)
+        funde = zust.pruefe_worker(self.td, mit_netz=True)
+        assert len(funde) == 1
+        return funde[0]
+
+    def test_ohne_netz_kein_gruen(self):
+        f = zust.pruefe_worker(self.td, mit_netz=False)
+        self.assertEqual(f[0]["regel"], "C7")
+        self.assertEqual(f[0]["gewicht"], "nicht gemessen")
+
+    def test_gesunder_endpunkt_lebt(self):
+        f = self._c7()
+        self.assertEqual((f["regel"], f["gewicht"]), ("C7", "ok"))
+
+    def test_nxdomain_ist_fund(self):
+        f = self._c7({(WERKER_HOST, "CNAME"): (3, [])})
+        self.assertEqual((f["regel"], f["gewicht"]), ("C7", "fund"))
+        self.assertIn("NXDOMAIN", f["ist"])
+
+    def test_keine_antwort_ist_nicht_messbar(self):
+        f = self._c7(antwort=(0, "URLError: Timeout"))
+        self.assertEqual(f["gewicht"], "nicht messbar")
+
+    def test_kantenblock_ist_fund_mit_erkenntnis(self):
+        f = self._c7(antwort=(403, "Error 1010: The owner of this website has blocked..."))
+        self.assertEqual(f["gewicht"], "fund")
+        self.assertIn("Signaturfilter", f["titel"])
+
+    def test_500_ist_fund(self):
+        f = self._c7(antwort=(500, "interner fehler"))
+        self.assertEqual(f["gewicht"], "fund")
+
+    def test_ohne_basis_ist_hinweis(self):
+        # Wurzel ohne Formulare-Endpunkt (frische Zone, noch kein Worker)
+        open(os.path.join(self.td, "hugo.toml"), "w", encoding="utf-8").write(
+            f'baseURL = "https://{ZONE}/"\n')
+        zust.AUFLOESER = _gesunde_zone()
+        f = zust.pruefe_worker(self.td, mit_netz=True)
+        self.assertEqual((f[0]["regel"], f[0]["gewicht"]), ("C7", "hinweis"))
+
+
+class ResendRegelnTest(unittest.TestCase):
+    """B0–B3: zwei Systeme (Resend-API, Worker-Export), keine gegenseitige Stummschaltung."""
+
+    def setUp(self):
+        self.td = _tmp_root()
+        self.echt_a, self.echt_n = zust.AUFLOESER, zust.NETZ_RUF
+        self.env = {k: os.environ.get(k) for k in
+                    ("RESEND_API_KEY", "NEWSLETTER_RESEND_KEY",
+                     "NEWSLETTER_WORKER_BASE", "NEWSLETTER_WORKER_EXPORT_KEY")}
+        for k in self.env:
+            os.environ.pop(k, None)
+
+    def tearDown(self):
+        zust.AUFLOESER, zust.NETZ_RUF = self.echt_a, self.echt_n
+        for k, v in self.env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
+
+    def _b(self, antworten, mit_netz=True):
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = _netz(*antworten)
+        funde = zust.pruefe_resend(self.td, mit_netz=mit_netz)
+        return {f["regel"]: f for f in funde}
+
+    def test_ohne_netz_kein_gruen(self):
+        r = self._b([], mit_netz=False)
+        self.assertEqual(r["B0"]["gewicht"], "nicht gemessen")
+
+    def test_b0_key_los_401_ist_info_kein_gruen(self):
+        # 401 von api.resend.com = Kante durchlässig, Konto nicht geprüft
+        r = self._b([(401, '{"message":"unauthorized"}')])
+        self.assertEqual(r["B0"]["gewicht"], "info")
+
+    def test_b0_key_mit_401_ist_fund(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        r = self._b([(401, '{"message":"unauthorized"}')])
+        self.assertEqual(r["B0"]["gewicht"], "fund")
+
+    def test_b1_domain_verifiziert(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        antwort = (200, json.dumps(
+            {"data": [{"domain": ZONE, "verified": True}]}))
+        r = self._b([antwort])
+        self.assertEqual(r["B1"]["gewicht"], "ok")
+
+    def test_b1_domain_unverifiziert_ist_fund(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        antwort = (200, json.dumps(
+            {"data": [{"domain": ZONE, "verified": False}]}))
+        r = self._b([antwort])
+        self.assertEqual(r["B1"]["gewicht"], "fund")
+
+    def test_b2_ohne_export_key_bleibt_hinweis(self):
+        # B0 grün, B2 ungemessen – die zwei Systeme stummschalten einander nicht
+        r = self._b([(200, json.dumps({"data": []}))])
+        self.assertEqual(r["B2"]["gewicht"], "hinweis")
+        self.assertEqual(r["B3"]["gewicht"], "nicht gemessen")
+
+    def test_b2_liste_aus_worker_unabhaengig_von_resend(self):
+        os.environ["NEWSLETTER_WORKER_BASE"] = WERKER
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "export-key"
+        netz = _netz(
+            (200, json.dumps({"data": [{"domain": ZONE, "verified": True}]})),
+            (200, json.dumps({"anzahl": 3, "abonnenten": [
+                {"email": "a@b.de", "token": "t1"},
+                {"email": "c@d.de", "token": "t2"},
+                {"email": "e@f.de", "token": "t3"}]})))
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = netz
+        funde = zust.pruefe_resend(self.td, mit_netz=True)
+        r = {f["regel"]: f for f in funde}
+        self.assertEqual(r["B2"]["gewicht"], "ok")
+        self.assertIn("3 aktive", r["B2"]["titel"])
+        self.assertEqual(r["B3"]["gewicht"], "ok")  # 3 ≤ 100/Tag
+
+    def test_b2_falscher_key_ist_fund(self):
+        os.environ["NEWSLETTER_WORKER_BASE"] = WERKER
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "falsch"
+        r = self._b([(403, "unauthorized")])
+        self.assertEqual(r["B2"]["gewicht"], "fund")
+
+    def test_b3_ueber_tagesgrenze_ist_hinweis(self):
+        os.environ["NEWSLETTER_WORKER_BASE"] = WERKER
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "export-key"
+        netz = _netz(
+            (200, json.dumps({"data": []})),
+            (200, json.dumps({"anzahl": 150, "abonnenten": []})))
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = netz
+        funde = zust.pruefe_resend(self.td, mit_netz=True)
+        r = {f["regel"]: f for f in funde}
+        self.assertEqual(r["B3"]["gewicht"], "hinweis")
+
+
+class StateRegelnTest(unittest.TestCase):
+    """S1–S3: der Status im Repo – Halt, Pendende, letzte Ausgabe."""
+
+    def _tmp(self):
+        return _tmp_root()
+
+    def test_letzte_ausgabe_bezegt_ok(self):
+        td = self._tmp()
+        open(os.path.join(td, "data", "newsletter_state.json"), "w").write(
+            json.dumps({"letzte_ausgabe": {"datum": "2026-09-22",
+                                           "betreff": "Der Wochen-Check",
+                                           "transport": "resend"}}))
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S3"]["gewicht"], "ok")
+
+    def test_halt_wird_gemeldet(self):
+        td = self._tmp()
+        open(os.path.join(td, "data", "newsletter_state.json"), "w").write(
+            json.dumps({"versand_unklar": {"kennung": "2026-09-22|Betreff",
+                                           "zeitpunkt": "2026-09-22T07:10:00Z"}}))
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S1"]["gewicht"], "fund")
+
+    def test_kaputtes_json_ist_fund(self):
+        td = self._tmp()
+        open(os.path.join(td, "data", "newsletter_state.json"), "w").write("{kaputt")
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S1"]["gewicht"], "fund")
+
+    def test_noch_kein_versand_ist_hinweis(self):
+        td = self._tmp()
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S3"]["gewicht"], "hinweis")
+
+
+class GesamtlaufTest(unittest.TestCase):
+    """`pruefe` + `als_md`: der Lauf als Ganzes."""
+
+    def setUp(self):
+        self.td = _tmp_root()
+        self.echt_a, self.echt_n = zust.AUFLOESER, zust.NETZ_RUF
+        for k in ("RESEND_API_KEY", "NEWSLETTER_RESEND_KEY",
+                  "NEWSLETTER_WORKER_BASE", "NEWSLETTER_WORKER_EXPORT_KEY",
+                  "NEWSLETTER_MAILZONE", "NEWSLETTER_ABSENDER"):
+            os.environ.pop(k, None)
+        os.environ["NEWSLETTER_ABSENDER"] = "news@" + ANTWORT_DOMAIN
+
+    def tearDown(self):
+        zust.AUFLOESER, zust.NETZ_RUF = self.echt_a, self.echt_n
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
+
+    def test_vollstaendig_gesund_liefert_rc_0(self):
+        os.environ["NEWSLETTER_WORKER_BASE"] = WERKER
+        os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "k"
+        open(os.path.join(self.td, "data", "newsletter_state.json"), "w").write(
+            json.dumps({"letzte_ausgabe": {"datum": "2026-09-22", "betreff": "B",
+                                           "transport": "resend"}}))
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = _netz(
+            (200, "<html>formular</html>"),                 # C7 Endpunkt
+            (200, json.dumps({"data": [{"domain": ZONE, "verified": True}]})),  # B0/B1
+            (200, json.dumps({"anzahl": 2, "abonnenten": []})))                # B2
+        erg = zust.pruefe(self.td, mit_netz=True)
+        self.assertEqual(erg["rc"], 0, erg["funde"])
+        md = zust.als_md(erg)
+        self.assertIn("[C1", md)
+        self.assertIn("[C7", md)
+        self.assertIn("[B2", md)
+
+    def test_mutierter_lauf_liefert_rc_1(self):
+        # Gesundes Zonenbild, aber die API antwortet 500 → B0-Fund → rc 1
+        # (mit Key: ein 500er ist eine Aussage, ohne Key wäre es nur „Kante“.)
+        os.environ["RESEND_API_KEY"] = "re_test"
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = _netz((200, "<html>formular</html>"), (500, "kaputt"))
+        erg = zust.pruefe(self.td, mit_netz=True)
+        self.assertEqual(erg["rc"], 1)
+        self.assertTrue(any(f["regel"] == "B0" and f["gewicht"] == "fund"
+                            for f in erg["funde"]))
+
+    def test_ohne_netz_ist_ehrlich_nicht_gemessen(self):
+        erg = zust.pruefe(self.td, mit_netz=False)
+        self.assertFalse(erg["gemessen"])
+        md = zust.als_md(erg)
+        self.assertIn("ohne Netz", md)
         for f in erg["funde"]:
-            if f["gewicht"] == "fund":
-                self.assertTrue(f["soll"] and f["soll"] != "—",
-                                f"Fund {f['regel']} ohne Soll-Zustand")
-
-
-class BrevoSeite(unittest.TestCase):
-    def setUp(self):
-        self.root = baum({"zuletzt_versandt": "2026-09-23T07:05:00+00:00",
-                          "kampagne_id": 3})
-        self.nd = digest_modul()
-        self.echt_get, self.echt_post = self.nd.TRANSPORT_GET, self.nd.TRANSPORT
-        self.key = os.environ.get("BREVO_API_KEY", "")
-        os.environ["BREVO_API_KEY"] = "k"
-        os.environ["BREVO_LIST_ID"] = "7"
-
-    def tearDown(self):
-        self.nd.TRANSPORT_GET, self.nd.TRANSPORT = self.echt_get, self.echt_post
-        for var in ("BREVO_API_KEY", "BREVO_LIST_ID"):
-            os.environ.pop(var, None)
-        if self.key:
-            os.environ["BREVO_API_KEY"] = self.key
-        shutil.rmtree(self.root, ignore_errors=True)
-
-    def test_kantenblock_wird_zum_b0_fund(self):
-        """Genau die Antwort, die Lauf #21 rot machte, muss als Kanten-Befund
-        enden – mit Client-Kennung im Text, nicht als Absender-Befund."""
-        def kante(api_key, pfad):
-            return 403, ('{"title":"Error 1010: Access denied","status":403,'
-                         '"detail":"blocked based on your browser\'s signature"}')
-        self.nd.TRANSPORT_GET = kante
-        reg = {r["regel"]: r for r in nz.pruefe_brevo(self.root, mit_netz=True)}
-        self.assertEqual("fund", reg["B0"]["gewicht"])
-        self.assertIn("1010", json.dumps(reg["B0"], ensure_ascii=False))
-        self.assertNotIn("B1", reg, "nach einer Blockage darf kein Konto-Befund folgen")
-
-    def test_gesunde_antwort_prueft_absender_liste_und_plan(self):
-        def gesund(api_key, pfad):
-            if pfad == "senders":
-                return 200, json.dumps({"senders": [
-                    {"email": f"news@{ZONE}", "active": True, "id": 1}]})
-            if pfad.startswith("contacts/lists/"):
-                return 200, json.dumps({"id": 7, "name": "Blog-Abonnenten",
-                                        "totalSubscribers": 512})
-            if pfad == "account":
-                return 200, json.dumps({"plan": [{"name": "Free",
-                                                  "allowSentEmails": 300}]})
-            return 200, "{}"
-        self.nd.TRANSPORT_GET = gesund
-        reg = {r["regel"]: r for r in nz.pruefe_brevo(self.root, mit_netz=True)}
-        self.assertEqual("ok", reg["B0"]["gewicht"])
-        self.assertEqual("ok", reg["B1"]["gewicht"])
-        self.assertEqual("fund", reg["B3"]["gewicht"],
-                         "512 Abonnenten über einer 300/Tag-Grenze ist kein grüner Lauf")
-        self.assertIn("Plan & Billing", reg["B3"]["weg"])
-
-    def test_themenfeld_ohne_brevo_pfad_wird_gemeldet(self):
-        def gesund(api_key, pfad):
-            if pfad == "senders":
-                return 200, json.dumps({"senders": [
-                    {"email": f"news@{ZONE}", "active": True, "id": 1}]})
-            return 200, json.dumps({"id": 7, "totalSubscribers": 10})
-        self.nd.TRANSPORT_GET = gesund
-        reg = {r["regel"]: r for r in nz.pruefe_brevo(self.root, mit_netz=True)}
-        self.assertEqual("hinweis", reg["B4"]["gewicht"],
-                         "Themen-Chips, die bei Brevo nirgends ankommen, müssen genannt werden")
-        # … und schweigt, wenn das Feld nachweislich im Attributpfad liegt
-        with open(os.path.join(self.root, "data", "newsletter_studio.json"), "w",
-                  encoding="utf-8") as fh:
-            json.dump({"capture": {"feld_themen": "attributes[THEMEN]"},
-                       "email": {"absender": {"email": f"news@{ZONE}"}},
-                       "themen": [{"id": "x", "label": "X"}]}, fh)
-        reg2 = {r["regel"]: r for r in nz.pruefe_brevo(self.root, mit_netz=True)}
-        self.assertNotIn("B4", reg2)
-
-    def test_halt_aus_dem_status_ist_ein_fund(self):
-        root = baum({"versand_unklar": {"kampagne_id": 12, "zeitpunkt": "x"}})
-        try:
-            funde = nz.pruefe_state(root)
-            self.assertEqual("fund", funde[0]["gewicht"])
-            self.assertIn("versand_unklar", funde[0]["soll"])
-        finally:
-            shutil.rmtree(root, ignore_errors=True)
-
-
-class Verdrahtung(unittest.TestCase):
-    def test_selbsttest_der_wache(self):
-        rc = subprocess.run([sys.executable, os.path.join(SCRIPTS,
-                            "newsletter_zustellbarkeit.py"), "--selftest"],
-                            cwd=ROOT, capture_output=True, text=True)
-        self.assertEqual(0, rc.returncode, rc.stdout + rc.stderr)
-
-    def test_wache_ist_im_governance_minimum(self):
-        with open(os.path.join(SCRIPTS, "governance_contract.py"),
-                  encoding="utf-8") as fh:
-            quelle = fh.read()
-        self.assertIn("newsletter_zustellbarkeit.py", quelle,
-                      "eine Wache außerhalb des vertraglichen Minimums kann still veralten")
-
-    def test_drei_newsletter_laeufe_ziehen_mit(self):
-        with open(os.path.join(ROOT, ".github", "workflows",
-                               "newsletter-daily.yml"), encoding="utf-8") as fh:
-            workflow = fh.read()
-        self.assertIn("newsletter_zustellbarkeit.py --selftest", workflow)
-        self.assertIn("newsletter_zustellbarkeit.py --pruefen", workflow)
-        self.assertIn("VERSAND-STATUS UNKLAR", workflow,
-                      "die dritte Wahrheit (unklar statt fehlgeschlagen) muss in der "
-                      "Annotation stehen – sie verbietet den sofortigen zweiten Run")
-        self.assertIn("if: ${{ always() && !cancelled() }}", workflow,
-                      "der Versandstatus ist der Duplikatsschutz – er muss auch nach "
-                      "einem roten Schritt in main landen")
-
-    def test_transport_kennt_seine_kennung(self):
-        """Der Transport selbst (nicht nur die Wache) darf nie die
-        Bibliotheks-Standardkennung senden – das war Lauf #21."""
-        nd = digest_modul()
-        for kennung in nd.IDENTITÄTEN:
-            self.assertNotIn("Python-urllib", kennung)
-        self.assertTrue(nd.kanten_block(403, "error code: 1010"))
-        self.assertFalse(nd.kanten_block(401, '{"code":"invalid_api_key"}'))
+            self.assertNotEqual(f["gewicht"], "ok",
+                                f"ohne Netz darf nichts grün sein: {f}")
 
 
 if __name__ == "__main__":

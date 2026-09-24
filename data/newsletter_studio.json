@@ -3,8 +3,8 @@
   "_doku_capture": "Anmeldeweg. form_action leer = Capture INERT: die Site zeigt dann den ehrlichen Leerzustand statt eines Formulars, das ins Leere postet (layouts/shortcodes/newsletter_form.html). Ein Wert in hugo.toml `params.newsletterFormAction` überschreibt form_action – dieselbe Präzedenz in Website und Wache, damit beide denselben Zustand melden.",
   "version": 1,
   "capture": {
-    "_doku": "feld_email ist der von Brevo gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest.",
-    "form_action": "https://0e12ee47.sibforms.com/serve/MUIFAD_pHhLsCpok3QtXnwkwXmPNi72IBYFiMBpuaFrkO4v6QlFvQA0_ZHL7gQdCT1mpJ9vRIz0hJGtZKW1DjfWFPUioZ3QcQ9n1CTFZMk-nuEt0kvCa62j6pv3na3IRi4UXCMrFQZ8ZYPlWTPDGdU8oI0hY-E_9zBxYfweOSHjgDNYqBLSUiQNAk8KeAa6mWY1ipaZxAlsNJgS0kQ==",
+    "_doku": "feld_email ist der vom Worker gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest. Journey-Aktionen (Bestätigen, Abmelden, Präferenzen) laufen auf dem Worker über die Links in den Mails – die Blog-Seiten /newsletter/bestaetigung/, /newsletter/abmelden/, /newsletter/praeferenzen/ sind reine Info-Seiten. bestaetigungs_url/abmelde_url/praferenz_url bleiben für Ausweich-Links im Shortcode newsletter_weg reserviert (leer = ehrlicher Leerzustand).",
+    "form_action": "https://abos.franksfinanzcheck.de/anmeldung",
     "form_url": "",
     "versprechen": "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags.",
     "feld_email": "email",
@@ -15,18 +15,18 @@
     "bot_falle": true,
     "mindest_alter": 0
   },
-  "_doku_journeys": "Die vier Journey-Seiten der Anmeldung. Sie sind kurz und ehrlich: Der Bestätigungslink selbst führt beim Anbieter (Brevo), die Seiten erklären den Zustand und bieten den Rückweg. Eine Seite, die einen Klick vorgaukelt, den sie nicht ausführen kann, ist teurer als keine Seite.",
+  "_doku_journeys": "Die Journey-Seiten der Anmeldung (/newsletter/bestaetigung/, /newsletter/abmelden/, /newsletter/praeferenzen/). Sie sind ehrliche INFO-Seiten: die eigentlichen Aktionen laufen auf dem Worker unter abos.franksfinanzcheck.de über die Links in den Mails – eine statische Seite kann Query-Strings beim Build nie sehen, und ein Klick-Vorgaukeln wäre teurer als keine Seite. Die Seiten erklären Zustand, Daten und Wege.",
   "journeys": {
     "anmeldung": "/newsletter/",
     "bestaetigung": "/newsletter/bestaetigung/",
     "praeferenzen": "/newsletter/praeferenzen/",
     "abmelden": "/newsletter/abmelden/"
   },
-  "_doku_email": "Versandrahmen. `breite` 620 px: breiter wird in der Gmail-Vorschau und in Outlook-Kleinstfenstern beschnitten. `max_artikel` 5: mehr Rechnungen liest abends niemand, und der Puffer zur 102-KB-Grenze von Gmail bleibt (Wache Q1). `marken` sind die Platzhalter der Neuen Template Language von Brevo – {{unsubscribe}}, nicht {unsubscribe}: die Einzelklammer ist Alt-Syntax und bliebe als Wort im Mail stehen (Abmeldelink kaputt).",
+  "_doku_email": "Versandrahmen. `breite` 620 px: breiter wird in der Gmail-Vorschau und in Outlook-Kleinstfenstern beschnitten. `max_artikel` 5: mehr Rechnungen liest abends niemand, und der Puffer zur 102-KB-Grenze von Gmail bleibt (Wache Q1). `marken` sind EIGENE Platzhalter des Templates: {{unsubscribe}} (Abmeldung), {{update_profile}} (Präferenzen), {{mirror}} (Newsletter-Übersicht). Der Versand ersetzt sie pro Empfänger durch gültige Worker-Links (mit Token) oder Infoseiten (ohne Token) – sie dürfen niemals unbearbeitet in einer Mail stehen.",
   "email": {
     "breite": 620,
     "max_artikel": 5,
-    "vorlagen_sprache": "brevo",
+    "vorlagen_sprache": "eigen",
     "marken": {
       "unsubscribe": "{{unsubscribe}}",
       "mirror": "{{mirror}}",
@@ -113,20 +113,72 @@
     "email_eigene": {
       "dunkel.soft": "Die Site mischt Soft-Flächen im Dark Mode mit color-mix() – E-Mail-Clients kennen color-mix nicht. Der Wert ist das Ergebnis derselben Mischung (12 % --ff-emerald-bright auf --theme), hier ausgerechnet und festgeschrieben; die Kontrastwache misst ihn nach (Q11)."
     },
-    "pflicht_rollen": ["seite", "karte", "grenze", "text", "sekundaer", "headline", "link", "marke", "soft", "cta_flaeche", "cta_text"],
+    "pflicht_rollen": [
+      "seite",
+      "karte",
+      "grenze",
+      "text",
+      "sekundaer",
+      "headline",
+      "link",
+      "marke",
+      "soft",
+      "cta_flaeche",
+      "cta_text"
+    ],
     "schrift": "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
     "serife": "Georgia,'Times New Roman',serif",
     "radius": 14,
     "_doku_kontraste": "Pflichtpaare, die die QA-Wache nachmisst (Format: [Bezeichnung, Hintergrundrolle, Vordergrundrolle, Mindestwert]). Gemessen wird in beiden Modi – DESIGN.md §8: „Kontraste messen, nicht schätzen“.",
     "kontraste": [
-      ["Fließtext auf Karte", "karte", "text", 4.5],
-      ["Sekundärtext auf Karte", "karte", "sekundaer", 4.5],
-      ["Headline auf Karte", "karte", "headline", 3.0],
-      ["CTA-Text auf Marke", "cta_flaeche", "cta_text", 4.5],
-      ["Fließtext auf Soft-Fläche", "soft", "text", 4.5],
-      ["Akzent auf Marke", "cta_flaeche", "akzent_auf_marke", 4.5],
-      ["Link auf Karte", "karte", "link", 4.5],
-      ["Zahlen-Hero auf Soft-Fläche", "soft", "zahl", 3.0]
+      [
+        "Fließtext auf Karte",
+        "karte",
+        "text",
+        4.5
+      ],
+      [
+        "Sekundärtext auf Karte",
+        "karte",
+        "sekundaer",
+        4.5
+      ],
+      [
+        "Headline auf Karte",
+        "karte",
+        "headline",
+        3.0
+      ],
+      [
+        "CTA-Text auf Marke",
+        "cta_flaeche",
+        "cta_text",
+        4.5
+      ],
+      [
+        "Fließtext auf Soft-Fläche",
+        "soft",
+        "text",
+        4.5
+      ],
+      [
+        "Akzent auf Marke",
+        "cta_flaeche",
+        "akzent_auf_marke",
+        4.5
+      ],
+      [
+        "Link auf Karte",
+        "karte",
+        "link",
+        4.5
+      ],
+      [
+        "Zahlen-Hero auf Soft-Fläche",
+        "soft",
+        "zahl",
+        3.0
+      ]
     ]
   },
   "_doku_creative": "Deterministische Textfabrik – kein KI-Aufruf, damit die Funktion dauerhaft 0 Euro kostet und jeder Lauf reproduzierbar ist. Die Listen sind harte Gates der QA-Wache, keine Stilempfehlung: `verbotene_woerter` sind Angstmache- und Hype-Wörter, die im Finanzversand zugleich Abmelderate und Spam-Eindruck heben. `kadenz` ist der Redaktionsrahmen der beiden Versandtage: dieselbe Liste bekommt dienstags und freitags einen anderen Auftrag, damit zwei Mails pro Woche nicht zweimal dieselbe Mail sind.",
@@ -157,29 +209,73 @@
       },
       "naechste_zeile": true
     },
-    "betreff": { "min_zeichen": 30, "max_zeichen": 45, "varianten": 3 },
-    "preheader": { "min_zeichen": 40, "max_zeichen": 120 },
+    "betreff": {
+      "min_zeichen": 30,
+      "max_zeichen": 45,
+      "varianten": 3
+    },
+    "preheader": {
+      "min_zeichen": 40,
+      "max_zeichen": 120
+    },
     "block_text_zeichen": 190,
     "min_woerter": 110,
     "max_Ausrufezeichen": 2,
     "verbotene_woerter": [
-      "einmalige chance", "nur heute", "sofort zuschlagen", "letzte chance",
-      "garantiert", "risikofrei", "geld-zurueck-garantie", "dringend handeln",
-      "jetzt handeln", "exklusiv", "geheimtipp", "existenzbedrohend",
-      "du musst", "sofort starten", "act now", "limited time", "free gift",
-      "winner", "congratulations", "betreff", "klicken sie hier"
+      "einmalige chance",
+      "nur heute",
+      "sofort zuschlagen",
+      "letzte chance",
+      "garantiert",
+      "risikofrei",
+      "geld-zurueck-garantie",
+      "dringend handeln",
+      "jetzt handeln",
+      "exklusiv",
+      "geheimtipp",
+      "existenzbedrohend",
+      "du musst",
+      "sofort starten",
+      "act now",
+      "limited time",
+      "free gift",
+      "winner",
+      "congratulations",
+      "betreff",
+      "klicken sie hier"
     ]
   },
-  "_doku_themen": "Präferenzen bei der Anmeldung. `id` ist der pillar-Wert im Artikelfrontmatter, `label` der Titel der Themenwelt (data/themenwelten.json) – die Wache `--brand` beweist die Deckungsgleichheit. Ein Mensch, der nur Strom & Gas hören will, bekommt kein Versicherungs-Mail: das ist der Unterschied zwischen Liste und Newsletter. `brevo_interest` ist der Name des HTML-Interesses im Anbieterkonto.",
+  "_doku_themen": "Präferenzen bei der Anmeldung. `id` ist der pillar-Wert im Artikelfrontmatter, `label` der Titel der Themenwelt (data/themenwelten.json) – die Wache `--brand` beweist die Deckungsgleichheit. Ein Mensch, der nur Strom & Gas hören will, bekommt kein Versicherungs-Mail: das ist der Unterschied zwischen Liste und Newsletter. Die `id` ist zugleich die erlaubte Themen-ID des Workers – Wache `--brand` hält Studio, themes.json und wrangler.toml deckungsgleich.",
   "themen": [
-    { "id": "strom-sparen", "label": "Strom & Gas sparen", "brevo_interest": "Strom & Gas" },
-    { "id": "internet-dsl", "label": "Internet, DSL & Handy", "brevo_interest": "Internet, DSL & Handy" },
-    { "id": "versicherungen", "label": "Versicherungen & Vorsorge", "brevo_interest": "Versicherungen" },
-    { "id": "konto-karten", "label": "Konto, Karten & Zinsen", "brevo_interest": "Konto & Karten" },
-    { "id": "mietwagen", "label": "Mietwagen & Reisen", "brevo_interest": "Reisen" },
-    { "id": "frugalismus", "label": "Frugalismus & Budget", "brevo_interest": "Budget & Frugalismus" }
+    {
+      "id": "strom-sparen",
+      "label": "Strom & Gas sparen"
+    },
+    {
+      "id": "internet-dsl",
+      "label": "Internet, DSL & Handy"
+    },
+    {
+      "id": "versicherungen",
+      "label": "Versicherungen & Vorsorge"
+    },
+    {
+      "id": "konto-karten",
+      "label": "Konto, Karten & Zinsen"
+    },
+    {
+      "id": "mietwagen",
+      "label": "Mietwagen & Reisen"
+    },
+    {
+      "id": "frugalismus",
+      "label": "Frugalismus & Budget"
+    }
   ],
   "_doku_zustand": "Die Zustandsdatei hält fest, was draußen war: zuletzt versendete Betreffzeilen (Wache Q15: keine Zeile zweimal innerhalb `betreff_historie` Ausgaben) und die Versandhistorie der Artikel (`artikel_historie` Einträge). `datei` ist der Pfad, `*` sind die Längen – `scripts/newsletter_digest.py` liest beides hier, nicht im Code. „Ein Zustand, eine Datei“ gilt also erst, wenn die Datei auch die Quelle ist.",
-  "zustand": { "datei": "data/newsletter_state.json", "betreff_historie": 12,
-               "artikel_historie": 400 }
+  "zustand": {
+    "datei": "data/newsletter_state.json",
+    "betreff_historie": 12,
+    "artikel_historie": 400
+  }
 }
