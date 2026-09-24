@@ -1,0 +1,56 @@
+# ============================================================
+# ff-newsletter – Cloudflare Worker (Newsletter-Backend)
+# ------------------------------------------------------------
+# Einmaliges Setup (Details: docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md):
+#
+#   1) cd newsletter-worker
+#   2) npx wrangler login
+#   3) npx wrangler kv:namespace create ABO
+#        -> wrangler ergänzt id + placement automatisch unten
+#   4) npx wrangler secret put GITHUB_PAT    (Fine-Grained-PAT, nur
+#      "workflows: write" auf diesem Repo)
+#   5) npx wrangler secret put EXPORT_KEY    (beliebiger 32+ Zeichen
+#      Zufallsstring; GLEICHER Wert als GitHub-Secret
+#      NEWSLETTER_WORKER_EXPORT_KEY)
+#   6) npx wrangler deploy
+#   7) Zone: hostname abos.franksfinanzcheck.de (custom_domain unten
+#      aktivieren ODER über Dashboard -> Workers -> Custom Domain)
+# ============================================================
+name = "ff-newsletter"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+# Urspruenge, denen der Worker CORS antwortet (Komma getrennt).
+SITE_ORIGIN = "https://franksfinanzcheck.de"
+# Repo + Workflow, die die Bestaetigungs-Mail senden (workflow_dispatch).
+GITHUB_REPO = "frank-hartung/franksfinanzcheck-blog"
+GITHUB_WORKFLOW = "newsletter-lifecycle.yml"
+GITHUB_REF = "main"
+# Erlaubte Themen-IDs – exakt data/themenwelten.json (Wache:
+# scripts/newsletter_studio.py --brand haelt beide deckungsgleich).
+THEMEN_IDS = "strom-sparen,internet-dsl,versicherungen,konto-karten,frugalismus,mietwagen"
+
+# Labels fuer die Praeferenzsseite (JSON id -> Label); Fallback ohne diesen Eintrag = die ID selbst.
+THEMEN_LABELS = "{\"strom-sparen\":\"Strom & Gas sparen\",\"internet-dsl\":\"Internet & DSL\",\"versicherungen\":\"Versicherungen\",\"konto-karten\":\"Konto & Karten\",\"frugalismus\":\"Frugalismus & Minimalismus\",\"mietwagen\":\"Mietwagen & Co.\"}"
+# Tage, bis eine offene Anmeldung ablaeuft (Double-Opt-In-Frist).
+BESTAETIGUNG_TAGE = "14"
+
+# Secrets (NICHT hier eintragen): GITHUB_PAT, EXPORT_KEY
+
+# KV-Speicher: nach `npx wrangler kv:namespace create ABO` automatisch
+# ergaenzt. PLACEMENT: "eu" halten, damit die Adressen in der EU liegen.
+[[kv_namespaces]]
+binding = "ABO"
+id = "HIER-DIE-ID-NACH-ERSTELLUNG"
+placement = "eu"
+
+# Eigene Subdomain (TLS wird von Cloudflare automatisch gestellt).
+# zone_id: Dashboard -> Your Sites -> franksfinanzcheck.de -> API ID.
+# Alternativ ohne diesen Block: Custom Domain im Dashboard zuordnen,
+# dann bleibt die Adresse abos.franksfinanzcheck.de unveraendert.
+[custom_domain]
+zone_name = "franksfinanzcheck.de"
+zone_id = "HIER-DIE-ZONE-ID"
+hostname = "abos.franksfinanzcheck.de"

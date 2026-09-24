@@ -1,0 +1,622 @@
+/**
+ * ff-newsletter – der Newsletter-Hinterhof von franksfinanzcheck.de
+ * ================================================================
+ * Ein Cloudflare Worker (Free Plan) als EIGENER Endpunkt für den
+ * Newsletter – ersetzt den Brevo-Server, an den das Formular bisher
+ * POSTete. Alles, was hier passiert:
+ *
+ *   POST /anmeldung      Formular-Abgabe (Honeypot, Zeitfalle, Consent,
+ *                        E-Mail-Prüfung, Deduplizierung, Rate-Limit)
+ *   POST /bestaetigung   Double-Opt-In: Token bestaetigt die Adresse
+ *   POST /abmeldung      Abmeldung per Token (POST aus der Seite,
+ *   GET  /abmeldung      GET fuer den One-Klick-Abmelde-Link in Mails)
+ *   POST /praferenzen    Themenwahl pro Abo (Token + themen[])
+ *   GET  /status         Token -> {status, themen} (ohne Adresse!)
+ *   GET  /healthz        Lebendigkeits-Pruefung fuer die Wache
+ *   GET  /export/…       NUR mit Secret (X-FF-Key / ?sluessel=):
+ *                        Abonnenten-Liste, Pending-Liste, Eintrag nach
+ *                        Token, Versand-Versuche melden (Catch-up).
+ *
+ * DATEN (Workers KV, Binding `ABO`, EU-Region in deinem CF-Account):
+ *   abo:{email-norm}     Abo-Status, Token, Themen, Zeitstempel
+ *   token:{token}        Rueckweg Token -> email-norm
+ *   nachweis:{sha256}    Einwilligungsnachweis (IP, UA, Zeitpunkt), TTL 3 Jahre
+ *   rat:{sha256(ip)}     Rate-Limit-Zaehler (15 Min)
+ *   metrik:falle        Bot-Fallen-Treffer (1 Tag)
+ *
+ * BESTAETIGUNGS-MAIL: der Worker selbst versendet KEINE Mails (er hat
+ * kein SMTP und soll keine Mail-Provider-Keys traegen). Er loest den
+ * GitHub-Actions-Workflow `newsletter-lifecycle.yml` aus (workflow_dispatch,
+ * Input = Token NUR – keine Adresse im Event). Der Workflow holt die
+ * Adresse ueber /export/token und versendet ueber scripts/newsletter_versand.py.
+ * Schlägt der Dispatch aus (Rate-Limit, GitHub-Wartung), geht nichts
+ * verloren: der staendliche Nachgang (schedule) des Workflows versendet
+ * offene Bestätigungen nach (max. 3 Versuche, dann abgelaufen).
+ *
+ * KEINE Abhaengigkeiten, KEIN Build-Schritt: purer ES-Module-Worker.
+ * Tests: `node --test test/` (mockt env, kein Cloudflare-Login benoetigt).
+ */
+
+// ---------------------------------------------------------------- Konstanten
+const TTL_NACHWEIS_SEK = 1095 * 24 * 60 * 60; // 3 Jahre (Art. 7 DSGVO)
+const TTL_RATE_SEK = 15 * 60;
+const MAX_ANMELDUNGEN_PRO_IP = 5;
+const BESTAETIGUNG_TAGE_DEFAULT = 14;
+const MAX_VERSEND_VERSUCHE = 3;
+const TOKEN_LAENGE = 24; // 192 Bit, base64url
+const STAND_ORIGIN = 'https://franksfinanzcheck.de';
+const HTML_KOPF = '<!doctype html><html lang="de"><head><meta charset="utf-8">' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<title>FranksFinanzcheck – Newsletter</title><style>' +
+  'body{margin:0;background:#FAFCFB;color:#2E2E33;font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif}' +
+  '.k{max-width:520px;margin:10vh auto 0;padding:0 20px}' +
+  'h1{color:#0E5A43;font-size:22px;line-height:1.3}' +
+  'a{color:#0E5A43}' +
+  'form{margin:14px 0}' +
+  '.btn{display:inline-block;background:#0E5A43;color:#fff;border:0;border-radius:8px;padding:12px 24px;font:600 15px/1.3 system-ui,Segoe UI,Roboto,sans-serif;cursor:pointer}' +
+  'fieldset{border:1px solid #DCE6E1;border-radius:8px;margin:12px 0;padding:12px 14px}' +
+  'legend{color:#0E5A43;font-weight:600;font-size:14px;padding:0 6px}' +
+  '.chip{display:block;margin:8px 0;font-size:15px}' +
+  '.chip input{margin-right:8px}' +
+  '.hinweis{color:#6C6C6C;font-size:13px;margin:10px 0}' +
+  '.ok{color:#0E5A43;font-weight:600}' +
+  '.fehler{color:#8C2F39}' +
+  '</style></head><body><div class="k">';
+const HTML_FUSS = '</div></body></html>';
+
+// ---------------------------------------------------------------- Helfer
+/** CORS: nur die Site-Origin(s) dürfen mit dem Worker sprechen. */
+function cors(umgebung) {
+  const herkunft = String((umgebung && umgebung.SITE_ORIGIN) || STAND_ORIGIN).split(',')[0].trim();
+  return {
+    'Access-Control-Allow-Origin': herkunft,
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Accept, X-FF-Key',
+    'Access-Control-Max-Age': '86400',
+    'Cache-Control': 'no-store',
+  };
+}
+
+function json(ereignis, kod = 200, env = null, extra = {}) {
+  return new Response(JSON.stringify(ereignis), {
+    status: kod,
+    headers: { 'Content-Type': 'application/json; charset=utf-8', ...cors(env), ...extra },
+  });
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+/** Themen-Labels fuer die Praeferenzsseite (Env als JSON id->Label;
+ *  Fallback = die ID selbst – lesbar, aber nicht hübsch). */
+function themen_label(env, id) {
+  try {
+    const roh = String((env && env.THEMEN_LABELS) || '').trim();
+    if (roh) {
+      const m = JSON.parse(roh);
+      if (m && typeof m === 'object' && typeof m[id] === 'string' && m[id].trim()) {
+        return m[id].trim();
+      }
+    }
+  } catch (e) { /* Fallback unten */ }
+  return String(id);
+}
+
+function themen_liste(env) {
+  return String((env && env.THEMEN_IDS) || '').split(',').map((t) => t.trim()).filter(Boolean);
+}
+
+function htmlSeite(titel, text, url, env, kod = 200) {
+  const e = (s) => String(s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const seite = HTML_KOPF +
+    `<h1>${e(titel)}</h1><p>${e(text)}</p>` +
+    `<p><a href="${e(url)}">Zur&uuml;ck zu FranksFinanzcheck</a></p>` +
+    HTML_FUSS;
+  return new Response(seite, {
+    status: kod, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) },
+  });
+}
+
+function antwort_mit(status, text, env, request, kod = 200) {
+  if (wantHtml(request)) {
+    let titel = 'Deine Anmeldung';
+    if (status === 'fehler') titel = 'Etwas ist schiefgelaufen';
+    if (status === 'angemeldet' || status === 'wieder-angemeldet') titel = 'Fast geschafft';
+    if (status === 'bestaetigt') titel = 'Bestätigt!';
+    if (status === 'abgemeldet') titel = 'Abgemeldet';
+    return htmlSeite(titel, text, STAND_ORIGIN + '/newsletter/', env, kod);
+  }
+  return json({ status, text }, kod, env);
+}
+
+function fehler(kod, text, env, request) {
+  if (wantHtml(request)) {
+    return htmlSeite('Etwas ist schiefgelaufen', text, STAND_ORIGIN + '/newsletter/', env, kod);
+  }
+  return json({ status: 'fehler', text }, kod, env);
+}
+
+/** Browser ohne JS senden Accept: text/html – dafür die HTML-Antwort. */
+function wantHtml(request) {
+  const accept = String(request.headers.get('accept') || '');
+  if (accept.includes('application/json')) return false;
+  return accept.includes('text/html') || accept === '' || accept === '*/*';
+}
+
+function vorabfrage(env) {
+  return new Response(null, { status: 204, headers: cors(env) });
+}
+
+function token_neu() {
+  const bytes = new Uint8Array(TOKEN_LAENGE);
+  crypto.getRandomValues(bytes);
+  return btoa(String.fromCharCode(...bytes))
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+async function sha256_kurz(text) {
+  const daten = new TextEncoder().encode(String(text));
+  const digest = await crypto.subtle.digest('SHA-256', daten);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('').slice(0, 32);
+}
+
+/** Konstantzeit-Vergleich fuer das Export-Secret (kein Zeitaugriff). */
+async function schluessel_pruefen(env, angebot) {
+  const sollen = String((env && env.EXPORT_KEY) || '');
+  const ist = String(angebot || '');
+  if (!sollen || !ist || sollen.length !== ist.length) return false;
+  const a = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(sollen));
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ist));
+  const ua = new Uint8Array(a);
+  const ub = new Uint8Array(b);
+  let unterschied = ua.length ^ ub.length;
+  for (let i = 0; i < Math.max(ua.length, ub.length); i += 1) {
+    unterschied |= (ua[i % ua.length] || 0) ^ (ub[i % ub.length] || 0);
+  }
+  return unterschied === 0;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function email_norm(adresse) {
+  return String(adresse || '').trim().toLowerCase();
+}
+
+/**
+ * Formular-Koerper lesen: x-www-form-urlencoded (JS-Fetch UND der
+ * klassische POST ohne JS) oder JSON (Tests/Dev). Wiederholte Felder
+ * (themen[]) werden gesammelt.
+ */
+async function koerper_lesen(request) {
+  const ct = String(request.headers.get('content-type') || '');
+  const roh = await request.text();
+  if (ct.includes('application/json') || roh.trimStart().startsWith('{')) {
+    try {
+      const daten = JSON.parse(roh);
+      const aus = {};
+      for (const [k, v] of Object.entries(daten || {})) {
+        aus[k] = Array.isArray(v) ? v : [v];
+      }
+      return aus;
+    } catch (e) {
+      return null;
+    }
+  }
+  const aus = {};
+  for (const [k, v] of new URLSearchParams(roh)) {
+    (aus[k] = aus[k] || []).push(v);
+  }
+  return aus;
+}
+
+const erstein = (dat, schl) => String((dat[schl] || [''])[0] || '').trim();
+
+// ---------------------------------------------------------------- KV-Zugriff
+async function abo_lesen(kv, norm) {
+  return (await kv.get(`abo:${norm}`, 'json')) || null;
+}
+
+async function abo_schreiben(kv, eintrag) {
+  await kv.put(`abo:${eintrag.norm}`, JSON.stringify(eintrag));
+  await kv.put(`token:${eintrag.token}`, eintrag.norm);
+}
+
+async function nachweis_schreiben(kv, eintrag) {
+  const haetti = await sha256_kurz(`ff-nl|${eintrag.norm}|v1`);
+  await kv.put(`nachweis:${haetti}`, JSON.stringify({
+    email: eintrag.email,
+    ip: eintrag.ip || null,
+    user_agent: eintrag.user_agent || null,
+    seite: eintrag.seite || null,
+    eingewilligt: eintrag.seit,
+    bestaetigt: eintrag.bestaetigt || null,
+    version: 1,
+  }), { expirationTtl: TTL_NACHWEIS_SEK });
+}
+
+async function liste_mit_prefix(kv, prefix) {
+  const alle = [];
+  let cursor;
+  do {
+    const seite = await kv.list({ prefix, cursor });
+    for (const key of seite.keys) alle.push(key.name);
+    cursor = seite.list_complete ? undefined : seite.cursor;
+  } while (cursor);
+  return alle;
+}
+
+// ---------------------------------------------------------------- Trigger
+async function dispatch_bestuerung(env, token) {
+  if (!env.GITHUB_PAT || !env.GITHUB_REPO) return { ok: false, status: 0, warum: 'kein-token' };
+  const ziel = `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/${env.GITHUB_WORKFLOW || 'newsletter-lifecycle.yml'}/dispatches`;
+  try {
+    const antwort = await fetch(ziel, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.GITHUB_PAT}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: env.GITHUB_REF || 'main',
+        inputs: { aktion: 'bestaetigung', token }, // NUR der Token – keine Adresse im Event
+      }),
+    });
+    return { ok: antwort.status === 204, status: antwort.status };
+  } catch (e) {
+    return { ok: false, status: 0, warum: String((e && e.message) || e) };
+  }
+}
+
+async function falle_zahlen(env) {
+  try {
+    const roh = await env.ABO.get('metrik:falle', 'json');
+    const z = (roh && Number(roh.z)) || 0;
+    await env.ABO.put('metrik:falle', JSON.stringify({ z: z + 1, ts: Date.now() }), { expirationTtl: 86400 });
+  } catch (e) { /* Zählen darf die Anmeldung nie brechen */ }
+}
+
+// ---------------------------------------------------------------- Routen
+async function health(env) {
+  let kv_ok = false;
+  try {
+    await env.ABO.get('healthz');
+    kv_ok = true;
+  } catch (e) { kv_ok = false; }
+  return json({ ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler' }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
+}
+
+async function anmeldung(request, env, url) {
+  const daten = await koerper_lesen(request);
+  if (!daten) return fehler(400, 'Der Formularinhalt war nicht lesbar – bitte erneut versuchen.', env, request);
+
+  const email = email_norm(erstein(daten, 'email'));
+  const consent = erstein(daten, 'consent') === '1' || erstein(daten, 'consent') === 'true';
+  const felle = erstein(daten, 'website');
+  const zeitfalle = Number(erstein(daten, '_zeit') || 0);
+  const themen_r = (daten.themen || []).map((t) => String(t).trim()).filter(Boolean);
+  const seite = url.searchParams.get('quelle') || String(env.SITE_ORIGIN || STAND_ORIGIN).split(',')[0].trim();
+  const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+  const ua = String(request.headers.get('user-agent') || '').slice(0, 300);
+
+  // Bot-Falle und Zeitfalle: still „ok“, aber nichts speichern – ein
+  // Angreifer soll aus der Rueckmeldung nicht mehr lernen als ein Mensch.
+  if (felle || (zeitfalle > 0 && Date.now() - zeitfalle < 1500)) {
+    await falle_zahlen(env);
+    return antwort_mit('ok', 'Danke – bitte sieh in dein Postfach.', env, request);
+  }
+  if (!EMAIL_RE.test(email) || email.length > 254) {
+    return antwort_mit('fehler', 'Die E-Mail-Adresse sieht nicht gültig aus – bitte Adresse prüfen (z. B. du@beispiel.de).', env, request, 400);
+  }
+  if (!consent) {
+    return antwort_mit('fehler', 'Ohne das Einverstaendnis-Haekchen duerfen wir keine Mail schicken – bitte haekchen setzen und erneut absenden.', env, request, 400);
+  }
+
+  // Rate-Limit pro IP (KV, 15-Min-Fenster): mehr als 5 = Botmuster.
+  const ip_key = `rat:${await sha256_kurz(ip || 'unbekannt')}`;
+  const rate = (await env.ABO.get(ip_key, 'json')) || { z: 0 };
+  if (rate.z >= MAX_ANMELDUNGEN_PRO_IP) {
+    return antwort_mit('fehler', 'Zu viele Anmelde-Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen – oder schreib eine Mail an kontakt@franksfinanzcheck.de.', env, request, 429);
+  }
+  await env.ABO.put(ip_key, JSON.stringify({ z: rate.z + 1, ts: Date.now() }), { expirationTtl: TTL_RATE_SEK });
+
+  const jetzt = new Date().toISOString();
+  const bestehend = await abo_lesen(env.ABO, email);
+  let eintrag;
+  let status;
+  let text;
+
+  if (!bestehend) {
+    eintrag = {
+      email, norm: email, status: 'pending', token: token_neu(), themen: themen_r,
+      seit: jetzt, ip, user_agent: ua, seite, bestaetigt: null,
+      bestaetigung_gesendet: null, versuche: 0, abbestellt: null, grund: null,
+    };
+    status = 'angemeldet';
+    text = 'Fast geschafft – die Bestätigungsmail ist in den nächsten Minuten bei dir. Öffne den Link darin, um die Anmeldung abzuschließen (Double-Opt-In).';
+  } else if (bestehend.status === 'active') {
+    return antwort_mit('bereits-aktiv', 'Diese Adresse ist schon angemeldet und bestätigt – es kommt keine weitere Bestätigungsmail. Jede Ausgabe kommt wie vereinbart dienstags und freitags.', env, request);
+  } else if (bestehend.status === 'unsubscribed' || bestehend.status === 'abgelaufen') {
+    // Neu- oder Wiederanmeldung: neuer Token, frischer Nachweis, frische Themen.
+    eintrag = { ...bestehend, status: 'pending', token: token_neu(), themen: themen_r,
+      seit: jetzt, ip, user_agent: ua, seite, bestaetigt: null,
+      bestaetigung_gesendet: null, versuche: 0, abbestellt: null, grund: null };
+    status = 'wieder-angemeldet';
+    text = 'Willkommen zurück – die neue Bestätigungsmail ist in den nächsten Minuten bei dir. Öffne den Link darin, um die Anmeldung abzuschließen.';
+  } else if (bestehend.status === 'pending') {
+    // Bereits offen: nicht neu triggern (kein Spam) – der Nachgang deckt ab.
+    return antwort_mit('bereits-pending', 'Für diese Adresse ist eine Bestätigungsmail bereits unterwegs. Bitte Postfach und Spam-Ordner prüfen – ein erneutes Absenden ist nicht nötig.', env, request);
+  } else {
+    // Unbekannter Status (defekte Daten): fail-closed, laut melden.
+    console.warn(`ff-newsletter: unbekannter Abo-Status "${bestehend.status}" für ${email}`);
+    return fehler(500, 'Unbekannter Zustand – bitte erneut versuchen oder kontakt@franksfinanzcheck.de schreiben.', env, request);
+  }
+
+  eintrag.themen = filtere_themen(themen_r, env);
+  await abo_schreiben(env.ABO, eintrag);
+  await nachweis_schreiben(env.ABO, eintrag);
+
+  // Bestätigung auslösen. Scheitert der Dispatch, geht nichts verloren:
+  // der Nachgang (schedule) sendet offene Bestätigungen nach.
+  const trigg = await dispatch_bestuerung(env, eintrag.token);
+  if (!trigg.ok) {
+    console.warn(`ff-newsletter: Dispatch fehlgeschlagen (Status ${trigg.status || trigg.warum}) – Nachgang holt die Bestätigung nach.`);
+  }
+  return antwort_mit(status, text, env, request);
+}
+
+function filtere_themen(themen, env) {
+  const erlaubt = String((env && env.THEMEN_IDS) || '').split(',').map((t) => t.trim()).filter(Boolean);
+  return themen.filter((t) => erlaubt.includes(t));
+}
+
+function bestaetigung_tage(env) {
+  const n = Number((env && env.BESTAETIGUNG_TAGE) || BESTAETIGUNG_TAGE_DEFAULT);
+  return Number.isFinite(n) && n > 0 ? n : BESTAETIGUNG_TAGE_DEFAULT;
+}
+
+async function token_eintrag(env, token) {
+  const norm = await env.ABO.get(`token:${String(token || '').trim()}`);
+  if (!norm) return null;
+  return abo_lesen(env.ABO, norm);
+}
+
+async function bestaetigung(request, env) {
+  const daten = await koerper_lesen(request);
+  const token = String((daten && daten.token && daten.token[0]) || '').trim();
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) {
+    return antwort_mit('unbekannt', 'Dieser Link ist unbekannt oder wurde bereits verbraucht. Melde dich einfach neu an – das dauert einen Moment.', env, request, 404);
+  }
+  const ablauf_millis = bestaetigung_tage(env) * 24 * 60 * 60 * 1000;
+  const ist_abgelaufen = eintrag.status === 'pending' && (Date.now() - new Date(eintrag.seit).getTime() > ablauf_millis);
+  if (ist_abgelaufen) {
+    eintrag.status = 'abgelaufen';
+    await abo_schreiben(env.ABO, eintrag);
+    return antwort_mit('abgelaufen', `Die Bestätigung ist abgelaufen (${bestaetigung_tage(env)} Tage). Melde dich bitte erneut an – das dauert einen Moment.`, env, request, 410);
+  }
+  if (eintrag.status === 'pending') {
+    eintrag.status = 'active';
+    eintrag.bestaetigt = new Date().toISOString();
+    await abo_schreiben(env.ABO, eintrag);
+    await nachweis_schreiben(env.ABO, eintrag);
+    return antwort_mit('bestaetigt', 'Bestätigt! Ab jetzt bekommst du den Newsletter dienstags und freitags – die erste Ausgabe kommt am nächsten Versandtermin. Abmelden geht jederzeit mit einem Klick in jeder Mail.', env, request);
+  }
+  if (eintrag.status === 'active') {
+    return antwort_mit('bereits-bestaetigt', 'Diese Adresse ist bereits bestätigt – du bist auf der Liste. Danke!', env, request);
+  }
+  return antwort_mit('unbekannt', 'Dieser Link passt nicht zum aktuellen Zustand der Anmeldung (z. B. bereits abgemeldet). Wenn du den Newsletter wieder möchtest: neu anmelden unter franksfinanzcheck.de/newsletter/', env, request, 410);
+}
+
+async function abmeldung(request, env, url) {
+  let token = '';
+  if (request.method === 'GET') {
+    token = String(url.searchParams.get('token') || '').trim();
+  } else {
+    const daten = await koerper_lesen(request);
+    token = String((daten && daten.token && daten.token[0]) || '').trim();
+  }
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) {
+    return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: „Abmelden" in der letzten Mail, oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
+  }
+  if (eintrag.status === 'unsubscribed') {
+    return antwort_mit('bereits-abgemeldet', 'Diese Adresse ist bereits abgemeldet – du bekommst keine Ausgabe mehr. Weitere Schritte sind nicht nötig.', env, request);
+  }
+  eintrag.status = 'unsubscribed';
+  eintrag.abbestellt = new Date().toISOString();
+  eintrag.grund = 'link';
+  await abo_schreiben(env.ABO, eintrag);
+  const text = eintrag.bestaetigt
+    ? 'Abgemeldet – ab sofort kommt keine Ausgabe mehr. Der Link in jeder Mail bleibt derselbe Weg; formlos geht es auch an kontakt@franksfinanzcheck.de.'
+    : 'Deine (noch nicht bestätigte) Anmeldung wurde zurückgenommen – es kommt keine Bestätigungsmail und keine Ausgabe mehr.';
+  return antwort_mit('abgemeldet', text, env, request);
+}
+
+async function praferenzen(request, env) {
+  const daten = await koerper_lesen(request);
+  const token = String((daten && daten.token && daten.token[0]) || '').trim();
+  const roh = (daten && daten.themen || []).flatMap((t) => String(t).split(',')).map((t) => t.trim()).filter(Boolean);
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) {
+    return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – bitte den Link aus der Mail verwenden.', env, request, 404);
+  }
+  if (eintrag.status !== 'active' && eintrag.status !== 'pending') {
+    return antwort_mit('unbekannt', 'Diese Anmeldung ist nicht (mehr) aktiv – eine Praeferenz-Änderung ist nicht moeglich.', env, request, 410);
+  }
+  eintrag.themen = filtere_themen(roh, env);
+  await abo_schreiben(env.ABO, eintrag);
+  const text = eintrag.themen.length
+    ? `Gespeichert: ${eintrag.themen.length} Thema(n) – die Auswahl gilt ab der nächsten Ausgabe.`
+    : 'Gespeichert: ohne Auswahl kommen alle Themen – aber nie mehr als zwei Mails pro Woche.';
+  return antwort_mit('gespeichert', text, env, request);
+}
+
+async function status_sehen(env, url) {
+  const token = String(url.searchParams.get('token') || '').trim();
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+  // bewusst OHNE E-Mail-Adresse: der Token ist die Legitimation, die
+  // Adresse ist kein Informationsbedarf der Praeferenzsseite.
+  return json({ status: eintrag.status, themen: eintrag.themen || [], seit: eintrag.seit }, 200, env);
+}
+
+// ------------------------------------------------- Journey-Seiten (GET)
+// GET rendert PRO ANFRAGE: das Token darf in das HTML, weil der Worker
+// serverseitig rendert – das Formular ist ein normales POST und braucht
+// kein JavaScript. Das ist der Grund, warum die Journey-HOME hier steht
+// und nicht im statischen Hugo-Build (der sieht Query-Strings nie):
+// ohne JS muss der Weg trotzdem funktionieren.
+async function bestaetigung_seite(env, url) {
+  const token = String(url.searchParams.get('token') || '').trim();
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) {
+    return htmlSeite('Link unbekannt', 'Dieser Link ist unbekannt oder wurde bereits verbraucht. Melde dich einfach neu an – das dauert einen Moment.', STAND_ORIGIN + '/newsletter/', env, 404);
+  }
+  const ablauf_millis = bestaetigung_tage(env) * 24 * 60 * 60 * 1000;
+  const ist_abgelaufen = eintrag.status === 'pending' && (Date.now() - new Date(eintrag.seit).getTime() > ablauf_millis);
+  if (ist_abgelaufen) {
+    eintrag.status = 'abgelaufen';
+    await abo_schreiben(env.ABO, eintrag);
+    return htmlSeite('Bestätigung abgelaufen', `Die Bestätigung ist abgelaufen (${bestaetigung_tage(env)} Tage). Melde dich bitte erneut an – das dauert einen Moment.`, STAND_ORIGIN + '/newsletter/', env, 410);
+  }
+  if (eintrag.status === 'active') {
+    return htmlSeite('Bereits bestätigt', 'Diese Adresse ist bereits bestätigt – du bist auf der Liste. Danke! Abmelden geht jederzeit mit einem Klick in jeder Mail.', STAND_ORIGIN + '/newsletter/', env);
+  }
+  if (eintrag.status !== 'pending') {
+    return htmlSeite('Link passt nicht', 'Dieser Link passt nicht zum aktuellen Zustand der Anmeldung (z. B. bereits abgemeldet). Wenn du den Newsletter wieder möchtest: neu anmelden unter franksfinanzcheck.de/newsletter/.', STAND_ORIGIN + '/newsletter/', env, 410);
+  }
+  const html = HTML_KOPF +
+    '<h1>Noch ein Klick: Newsletter bestätigen</h1>' +
+    '<p>Du hast dich für den Spar-Newsletter von FranksFinanzcheck angemeldet – dienstags die Zahlen der Woche, freitags die Fristen davor, nie mehr als zwei Mails pro Woche. Klicke jetzt, damit deine Adresse auf die Liste kommt (Double-Opt-In):</p>' +
+    '<form method="post" action="/bestaetigung">' +
+    '<input type="hidden" name="token" value="' + esc(token) + '">' +
+    '<button class="btn" type="submit">Ja, ich möchte den Newsletter</button>' +
+    '</form>' +
+    '<p class="hinweis">Der Link ist ' + bestaetigung_tage(env) + ' Tage gültig. Wenn du dich nicht angemeldet hast: keine Aktion nötig – diese Seite bleibt ohne Wirkung.</p>' +
+    '<p><a href="/abmeldung?token=' + esc(token) + '">Jetzt abmelden</a> · <a href="' + STAND_ORIGIN + '/datenschutz/">Datenschutz</a> · <a href="' + STAND_ORIGIN + '/impressum/">Impressum</a></p>' +
+    HTML_FUSS;
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) } });
+}
+
+async function praferenzen_seite(env, url) {
+  const token = String(url.searchParams.get('token') || '').trim();
+  const eintrag = await token_eintrag(env, token);
+  if (!eintrag) {
+    return htmlSeite('Link unbekannt', 'Dieser Link ist unbekannt – bitte den Link aus der Mail verwenden.', STAND_ORIGIN + '/newsletter/', env, 404);
+  }
+  if (eintrag.status !== 'active' && eintrag.status !== 'pending') {
+    return htmlSeite('Nicht (mehr) aktiv', 'Diese Anmeldung ist nicht (mehr) aktiv – eine Präferenz-Änderung ist nicht möglich. Wenn du den Newsletter wieder möchtest: neu anmelden unter franksfinanzcheck.de/newsletter/.', STAND_ORIGIN + '/newsletter/', env, 410);
+  }
+  const aktiv_themen = Array.isArray(eintrag.themen) ? eintrag.themen : [];
+  const chips = themen_liste(env).map((id) =>
+    '<label class="chip"><input type="checkbox" name="themen" value="' + esc(id) + '"' +
+    (aktiv_themen.includes(id) ? ' checked' : '') + '> ' + esc(themen_label(env, id)) + '</label>'
+  ).join('');
+  const html = HTML_KOPF +
+    '<h1>Themenauswahl ändern</h1>' +
+    '<p>Wähle, welche Themen in deine Ausgabe reinkommen – die Änderung gilt ab der <strong>nächsten</strong> Ausgabe und kannst du jederzeit hier (oder mit dem Link in jeder Mail) ändern.</p>' +
+    '<form method="post" action="/praferenzen">' +
+    '<input type="hidden" name="token" value="' + esc(token) + '">' +
+    '<fieldset><legend>Was soll drinstehen?</legend>' +
+    chips +
+    '<p class="hinweis">Ohne Auswahl kommen alle Themen – aber nie mehr als zwei Mails pro Woche. Wer keine Artikel seiner gewählten Welten vorfindet, wird nicht mit einer leeren Mail bedient.</p>' +
+    '</fieldset>' +
+    '<button class="btn" type="submit">Auswahl speichern</button>' +
+    '</form>' +
+    '<p class="hinweis"><a href="/abmeldung?token=' + esc(token) + '">Abmelden</a> · <a href="' + STAND_ORIGIN + '/newsletter/praeferenzen/">Details zur Auswahl</a></p>' +
+    HTML_FUSS;
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) } });
+}
+
+// ---------------------------------------------------------------- Export (geschuetzt)
+async function exportiert(request, env, p, url) {
+  const angebot = request.headers.get('x-ff-key') || url.searchParams.get('sluessel') || '';
+  if (!await schluessel_pruefen(env, angebot)) {
+    return new Response(JSON.stringify({ status: 'verboten' }), {
+      status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    });
+  }
+  if (p === '/export/abonnenten') {
+    const keys = await liste_mit_prefix(env.ABO, 'abo:');
+    const aktiv = [];
+    for (const key of keys) {
+      const eintrag = await env.ABO.get(key, 'json');
+      if (eintrag && eintrag.status === 'active') {
+        aktiv.push({ email: eintrag.email, token: eintrag.token, themen: eintrag.themen || [], bestaetigt: eintrag.bestaetigt });
+      }
+    }
+    return json({ ts: new Date().toISOString(), anzahl: aktiv.length, abonnenten: aktiv }, 200, env);
+  }
+  if (p === '/export/pending') {
+    const keys = await liste_mit_prefix(env.ABO, 'abo:');
+    const offen = [];
+    for (const key of keys) {
+      const eintrag = await env.ABO.get(key, 'json');
+      if (eintrag && eintrag.status === 'pending') {
+        offen.push({ email: eintrag.email, token: eintrag.token, seit: eintrag.seit, bestaetigung_gesendet: eintrag.bestaetigung_gesendet, versuche: eintrag.versuche || 0 });
+      }
+    }
+    return json({ ts: new Date().toISOString(), anzahl: offen.length, offen }, 200, env);
+  }
+  if (p === '/export/token') {
+    const eintrag = await token_eintrag(env, url.searchParams.get('token') || '');
+    if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+    return json({
+      status: eintrag.status, email: eintrag.email, token: eintrag.token,
+      themen: eintrag.themen || [], seit: eintrag.seit, bestaetigt: eintrag.bestaetigt,
+      abbestellt: eintrag.abbestellt, grund: eintrag.grund || null,
+    }, 200, env);
+  }
+  if (p === '/export/versuch' && request.method === 'POST') {
+    const daten = await koerper_lesen(request);
+    const token = String((daten && daten.token && daten.token[0]) || '').trim();
+    const ergebnis = String((daten && daten.ergebnis && daten.ergebnis[0]) || 'gesendet');
+    const eintrag = await token_eintrag(env, token);
+    if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+    const jetzt = new Date().toISOString();
+    if (ergebnis === 'gesendet' && eintrag.status === 'pending') {
+      eintrag.versuche = (eintrag.versuche || 0) + 1;
+      eintrag.bestaetigung_gesendet = jetzt;
+      if (eintrag.versuche >= MAX_VERSEND_VERSUCHE) eintrag.status = 'abgelaufen';
+    } else if (ergebnis === 'abgelaufen') {
+      eintrag.status = 'abgelaufen';
+    } else if (ergebnis === 'bounce') {
+      // Harte Bounce: Unterdruckung, keine Weiterleitung, kein Retry.
+      eintrag.status = 'unsubscribed';
+      eintrag.abbestellt = jetzt;
+      eintrag.grund = 'bounce';
+    }
+    await abo_schreiben(env.ABO, eintrag);
+    return json({ status: 'ok', abo_status: eintrag.status, versuche: eintrag.versuche || 0 }, 200, env);
+  }
+  return new Response(JSON.stringify({ status: 'unbekannt' }), { status: 404, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+}
+
+// ---------------------------------------------------------------- Einstieg
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const p = url.pathname;
+    if (request.method === 'OPTIONS') return vorabfrage(env);
+    try {
+      if (p === '/' || p === '/healthz') return await health(env);
+      if (p === '/anmeldung' && request.method === 'POST') return await anmeldung(request, env, url);
+      if (p === '/bestaetigung' && request.method === 'GET') return await bestaetigung_seite(env, url);
+      if (p === '/bestaetigung' && request.method === 'POST') return await bestaetigung(request, env);
+      if (p === '/abmeldung') return await abmeldung(request, env, url);
+      if (p === '/praferenzen' && request.method === 'GET') return await praferenzen_seite(env, url);
+      if (p === '/praferenzen' && request.method === 'POST') return await praferenzen(request, env);
+      if (p === '/status' && request.method === 'GET') return await status_sehen(env, url);
+      if (p.startsWith('/export/')) return await exportiert(request, env, p, url);
+      return fehler(404, 'Unbekannter Pfad.', env, request);
+    } catch (e) {
+      console.warn(`ff-newsletter: ${(e && e.message) || e}`);
+      return fehler(500, 'Interner Fehler – bitte erneut versuchen.', env, request);
+    }
+  },
+};
