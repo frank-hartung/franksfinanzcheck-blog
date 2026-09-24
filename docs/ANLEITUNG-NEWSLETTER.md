@@ -200,8 +200,10 @@ Actions → **Newsletter-Daily (Capture-Wache + Digest) → Run workflow**:
 
 1. ohne etwas anzukreuzen starten → der Lauf zeigt nur, was die Wache sieht (INERT oder
    Konfigurationsbefunde) und baut den Digest nach `/tmp`.
-2. `test_adresse` = deine Adresse, `live` **aus** → Testversand über Brevo
-   (`sendTest`), die Liste wird nicht angefasst.
+2. `test_adresse` = deine Adresse (mehrere mit Komma), `live` **aus** →
+   Testversand über Brevo (`sendTest`, `emailTo` als Liste), die Liste wird
+   nicht angefasst. `replyTo` geht als reine Adresse an Brevo, nicht als
+   Objekt – sonst lehnt der Anbieter die Kampagne ab, bevor irgendetwas rausgeht.
 3. `live` **an** + `tage=7` → echter Versand an die Liste, nur am erlaubten Versandtag; der Digest merkt sich
    die Artikel in `data/newsletter_state.json` und baute sie nicht noch einmal
    (deshalb ist die Datei versioniert).
