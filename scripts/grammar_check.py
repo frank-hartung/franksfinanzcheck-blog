@@ -1,58 +1,62 @@
 #!/usr/bin/env python3
 """
-TOP-LEVEL-GRAMMATIKPRÜFUNG für FranksFinanzcheck (LanguageTool API).
+TOP-LEVEL-GRAMMATIKPRÜFUNG für FranksFinanzcheck (LanguageTool-Nachbau, OFFLINE).
 
-Nutzt die kostenlose LanguageTool-Public-API (api.languagetool.org) – den
-Goldstandard für deutsche Grammatik- und Stilprüfung (Open Source,
-DSGVO-freundlich, keine Cookies).
+UMBAU 25.09.2026 (Frank-Auftrag): „grammar_check soll auch komplett offline,
+ohne API funktionieren." Die öffentliche LanguageTool-API (api.languagetool.org)
+ist damit AUSGEWICKELT – dieser Check läuft ab sofort 100 % lokal, kostenlos,
+ohne Netz, ohne Schlüssel, ohne externe Dienste (DSGVO: null Datenabfluss).
+Was LanguageTool online lieferte, wird hier als deterministischer Regelsatz
+NACHGEBAUT (Rechtschreibung, Zeichensetzung, Kontext-Fälle, Fehlschreibungen).
 
-GEPRÜFT WERDEN:
-  - Rechtschreibung (über Hunspell hinaus: Kontext-Fehler wie "das/dass")
-  - Grammatik (Kongruenz, Tempus, Satzstruktur)
-  - Groß-/Kleinschreibung in Wendungen ("nach hause" → "nach Hause")
-  - Zeichensetzung (Kommas, Anführungszeichen)
-  - Typische deutsche Fehler (sie/ Sie, wieder/wider, seid/seit …)
+GEPRÜFT WERDEN (Regel-Ebenen, offline):
+  LT1  Partikel-Fallen      „wo mit" → „womit", „an Hand" → „anhand" …
+  LT2  Kollokations-Kanon   „im gegensatz" → „im Gegensatz", „zu hause" → „zu Hause" …
+  LT3  Kontext-Fälle        „seid drei Jahren" → „seit drei Jahren" (NEGATIV:
+                            „ihr seid bereit" bleibt!), „wieder Erwarten" →
+                            „wider Erwarten", „vorallem", „im Groben und Ganzen",
+                            „wahr nehmen", „kennen lernen" …
+  LT4  Fehlschreib-Kanon    „ansonten" → „ansonsten", „übbrigens" → „übrigens" …
 
-SICHERHEIT:
-  - Links/URLs/Code-Blöcke werden maskiert und NIE verändert
+SICHERHEIT (Verträge aus sprachkern.py):
+  - Links/URLs/Code/Shortcodes/Link-TEXTE werden maskiert und NIE verändert
   - Whitelist (data/grammar_whitelist.txt) schützt Eigennamen/Fachbegriffe
-  - Nur EINDEUTIGE Korrekturen (genau 1 Vorschlag) werden automatisch
-    angewendet (--fix); unsichere landen im Report
-  - Frontmatter (title/description) wird mitgeprüft, tags/keywords nicht
+  - NUR 100 %-sichere Kanon-Ersetzungen; Grauzonen gehen in den Report
+  - Frontmatter: description wird mitgeheilt, title NUR gemeldet (Cover-Lock),
+    tags/keywords bleiben unangetastet (SEO-Kleinschreibung ist gewollt)
+  - Selbsttest (eingefrorene Fälle inkl. Negativ-Fallen) vor JEDEM Schreib-
+    vorgang – Abweichung = Exit 2, keine Datei wird angefasst
 
 NUTZUNG:
   python3 scripts/grammar_check.py               # Prüfung + Report
   python3 scripts/grammar_check.py --fix         # eindeutige Fehler korrigieren
   python3 scripts/grammar_check.py --file X.md   # einzelner Artikel
   python3 scripts/grammar_check.py --file X.md --include-drafts
-                                               # auch Entwürfe prüfen/heilen
   python3 scripts/grammar_check.py --new-only    # nur Artikel von heute
+  python3 scripts/grammar_check.py --json        # maschinenlesbar
+  python3 scripts/grammar_check.py --selftest    # nur Sabotage-Schutz
+  python3 scripts/grammar_check.py --strict      # Exit 1 bei offenen Funden
+
+AUSGABE: GRAMMATIK-REPORT.md + .grammar_report.json
+Exit 0 = sauber/gelaufen · Exit 1 = offene Funde (nur --strict) · Exit 2 = Selbsttest rot
 """
+import json
 import os
 import re
 import sys
-import json
-import glob
-import time
-import urllib.request
-import urllib.parse
+from datetime import datetime, timezone
 
-BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-WHITELIST_FILE = os.path.join(BLOG_DIR, "data", "grammar_whitelist.txt")
-REPORT_FILE = os.path.join(BLOG_DIR, "GRAMMATIK-REPORT.md")
-JSON_FILE = os.path.join(BLOG_DIR, ".grammar_report.json")
-API_URL = "https://api.languagetool.org/v2/check"
-MAX_CHUNK = 3500  # LanguageTool-Limit pro Request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sprachkern import (  # noqa: E402
+    ROOT, case_match, scan_rules, apply_rules, load_articles,
+    words, rebuild, write_verified, now_utc, heading_count,
+)
 
-# Nur diese Fehlerkategorien automatisch fixen (kein Stil-Gefrickel)
-FIX_CATEGORIES = {"TYPOS", "GRAMMAR", "CASING", "PUNCTUATION", "GERMAN_SPELLING",
-                  "COMMA_PARENTHESIS_WHITESPACE", "REDUNDANCY", "DAS_DASS",
-                  "DOUBLE_NEGATION", "CONFUSED_WORDS"}
-# Kategorien, die NIE automatisch geändert werden (Stil/Geschmack)
-SKIP_CATEGORIES = {"WORDINESS", "STYLE", "CREATIVE_WRITING", "TYPOS_DE"}
+WHITELIST_FILE = os.path.join(ROOT, "data", "grammar_whitelist.txt")
+REPORT_FILE = os.path.join(ROOT, "GRAMMATIK-REPORT.md")
+JSON_FILE = os.path.join(ROOT, ".grammar_report.json")
 
-# Wörter, die LanguageTool fälschlich anmeckert (Dialekt/Marken)
+# Wörter, die nie angefasst werden (Dialekt/Marken/Fachbegriffe)
 DEFAULT_WHITELIST = {
     "frugalismus", "frugalismus-tipps", "fritzbox", "check24", "tarifcheck",
     "cloudflare", "schufa", "cashback", "etf", "etfs", "mesh", "repeater",
@@ -71,391 +75,359 @@ def load_whitelist():
     return wl
 
 
-def mask_protected(text):
-    """Maskiert Links/URLs/Code durch gleich lange Platzhalter (Offset-sicher)."""
-    code_re = re.compile(r"```.*?```", re.S)
-    url_re = re.compile(r"https?://[^\s)\"']+|www\.[^\s)\"']+")
-    link_re = re.compile(r"\[([^\]]*)\]\([^)]*\)")
-    text = code_re.sub(lambda m: " " * (m.end() - m.start()), text)
-    text = url_re.sub(lambda m: " " * (m.end() - m.start()), text)
-    text = link_re.sub(lambda m: m.group(1), text)
-    # &nbsp; → gleich viele Leerzeichen (Offsets bleiben gültig, kein "nbsp"-Wort)
-    text = text.replace("&nbsp;", " " * 6)
-    return text
+# ============================================================ LT-Regeln
+# Regel = (ID, Regex, Fixer, Label). Fixer None = nur Report.
+RULES = []
+
+# ---- LT1 Partikel-Fallen (Zerlegungen, die immer ein Wort sind) -----------
+# NUR unzweideutige Fälle. Bewusst NICHT dabei (Falsch-Positiv-Fallen):
+# „da für" („Ich bin da für dich"), „da mit", „da zu", „da vor/rans/raus"
+# (Verb-Präfixe: „da vorstellen"), „an Stelle" (echtes Nomen).
+PARTIKEL = [
+    ("an Hand", "anhand"), ("in Folge", "infolge"),
+    ("zu mindest", "zumindest"), ("bei spielsweise", "beispielsweise"),
+    ("viel leicht", "vielleicht"), ("mit hin", "mithin"),
+    ("über dies", "überdies"), ("hin gegen", "hingegen"),
+    ("dessen trotz", "trotzdem"), ("da von", "davon"),
+    ("da zwischen", "dazwischen"),
+    ("wo rüber", "worüber"), ("wo durch", "wodurch"), ("wo bei", "wobei"),
+    ("wo für", "wofür"), ("wo gegen", "wogegen"), ("wo mit", "womit"),
+    ("wo von", "wovon"), ("wo zu", "wozu"), ("wo raus", "woraus"),
+    ("wo ran", "woran"), ("wo rin", "worin"), ("wo hin", "wohin"),
+    ("wo her", "woher"),
+]
+for _i, (split, kanon) in enumerate(PARTIKEL):
+    RULES.append((
+        "LT1", re.compile(r"\b" + r"\s+".join(split.split()) + r"\b", re.I),
+        (lambda m, k=kanon: case_match(m.group(0), k)),
+        f"{split} → {kanon}",
+    ))
+
+# ---- LT2 Kollokations-Kanon (feststehende Wendungen, Nomen groß) ----------
+KOLLOKATIONEN = [
+    ("im", "gegensatz", "Gegensatz"), ("im", "zusammenhang", "Zusammenhang"),
+    ("im", "allgemeinen", "Allgemeinen"), ("im", "besonderen", "Besonderen"),
+    ("im", "endeffekt", "Endeffekt"), ("im", "grunde", "Grunde"),
+    ("im", "schnitt", "Schnitt"), ("im", "vergleich", "Vergleich"),
+    ("im", "übrigen", "Übrigen"), ("im", "vorfeld", "Vorfeld"),
+    ("im", "hinblick", "Hinblick"), ("im", "notfall", "Notfall"),
+    ("im", "zweifel", "Zweifel"), ("im", "gegenteil", "Gegenteil"),
+    ("im", "klartext", "Klartext"), ("im", "handumdrehen", "Handumdrehen"),
+    ("im", "falle", "Falle"), ("im", "ernst", "Ernst"),
+    ("im", "prinzip", "Prinzip"), ("im", "wesentlichen", "Wesentlichen"),
+    ("zu", "hause", "Hause"), ("nach", "hause", "Hause"),
+    ("zu", "guter", "guter"), ("von", "anfang", "Anfang"),
+]
+for _i, (prep, low, upp) in enumerate(KOLLOKATIONEN):
+    if (prep, low, upp) == ("zu", "guter", "guter"):
+        # Sonderfall „zu guter Letzt“ – NUR die Kleinschreibung ist der Fehler
+        RULES.append((
+            "LT2", re.compile(r"\b[Zz]u guter letzt\b"),
+            (lambda m: case_match(m.group(0), "zu guter Letzt")),
+            "zu guter letzt → zu guter Letzt",
+        ))
+        continue
+    if (prep, low, upp) == ("von", "anfang", "Anfang"):
+        RULES.append((
+            "LT2", re.compile(r"\b[Vv]on anfang an\b"),
+            (lambda m: case_match(m.group(0), "von Anfang an")),
+            "von anfang an → von Anfang an",
+        ))
+        continue
+    # Ohne re.I: gematcht wird NUR die fehlerhafte Kleinschreibung des Nomens
+    # („im gegensatz“), die korrekte Form („im Gegensatz“) bleibt draußen.
+    RULES.append((
+        "LT2",
+        re.compile(rf"\b[{prep[0].upper()}{prep[0]}]{prep[1:]}\s+{low}\b"),
+        (lambda m, p=prep, u=upp: case_match(m.group(0), f"{p} {u}")),
+        f"{prep} {low} → {prep} {upp}",
+    ))
+
+# ---- LT3 Kontext-Fälle ----------------------------------------------------
+# LT3a seid/seit + Zeitangabe, auch mit Zahl davor („seid drei Jahren“).
+# NEGATIV (Selbsttest): „ihr seid bereit“ = Verb, „seid dem Kurs gefolgt“ =
+# Hilfsverb – beide bleiben, weil „bereit“/„dem“ nicht in der Zeitliste stehen.
+RULES.append((
+    "LT3", re.compile(
+        r"\b(seid)\s+(?:(?:\d{1,4}|zwei|drei|vier|fünf|sechs|sieben|acht|"
+        r"neun|zehn|elf|zwölf|einigen|einigen|vielen|wenigen|mehreren|paar)"
+        r"\s+)?"
+        r"(gestern|vorgestern|damals|kurzem|langem|Anfang|Mitte|Ende|Jahren|"
+        r"Jahrzehnten|Jahrhunderten|Monaten|Tagen|Wochen|Stunden|Minuten|"
+        r"wann|Neujahr|(?:19|20)\d{2})\b", re.I),
+    (lambda m: case_match(m.group(1), "seit") + m.group(0)[len(m.group(1)):]),
+    "seid + Zeitangabe → seit",
+))
+
+# LT3b wieder/wider Erwarten & besseres Wissen (H5 in hardcases_guard deckt
+# nur „wieder Willen“ – diese zwei Fälle sind der offline Rest).
+# Groß „Erwarten/Wissen“ ist Pflicht: „ihn wieder erwarten“ = Verb (bleibt!).
+RULES.append((
+    "LT3", re.compile(r"\b[wW]ieder\s+Erwarten\b"),
+    (lambda m: case_match(m.group(0), "wider") + " Erwarten"),
+    "wieder Erwarten → wider Erwarten",
+))
+RULES.append((
+    "LT3", re.compile(r"\b[wW]ieder\s+besseres\s+Wissen\b"),
+    (lambda m: case_match(m.group(0), "wider") + " besseres Wissen"),
+    "wieder besseres Wissen → wider besseres Wissen",
+))
+
+# LT3c feste Formen
+RULES.append((
+    "LT3", re.compile(r"\b([Ii]m )Groben und Ganzen\b"),
+    (lambda m: m.group(1) + "Großen und Ganzen"),
+    "im Groben und Ganzen → im Großen und Ganzen",
+))
+RULES.append((
+    "LT3", re.compile(r"\bvorallem\b", re.I),
+    (lambda m: case_match(m.group(0), "vor") + " allem"),
+    "vorallem → vor allem",
+))
+RULES.append((
+    "LT3", re.compile(r"\baufjeden\s?fall\b", re.I),
+    (lambda m: case_match(m.group(0), "auf") + " jeden Fall"),
+    "aufjedenfall → auf jeden Fall",
+))
+RULES.append((
+    "LT3", re.compile(r"\b[Dd]es\s+öfteren\b"),
+    (lambda m: case_match(m.group(0), "des") + " Öfteren"),
+    "des öfteren → des Öfteren",
+))
+RULES.append((
+    "LT3", re.compile(
+        r"\bum so (mehr|weniger|besser|schlechter|schneller|langsamer|"
+        r"einfacher|teurer|günstiger|höher|niedriger|größer|kleiner)\b", re.I),
+    (lambda m: "umso " + m.group(1)),
+    "um so … → umso …",
+))
+RULES.append((
+    "LT3", re.compile(r"\bvor aus gesetzt\b", re.I),
+    (lambda m: case_match(m.group(0), "vorausgesetzt")),
+    "vor aus gesetzt → vorausgesetzt",
+))
+
+# LT3d Verb-Zusammensetzungen: wahrnehmen, kennenlernen (Duden 2024)
+WAHR = {"nehmen": "wahrnehmen", "nimmt": "wahrnimmt", "nahm": "wahrnahm",
+        "genommen": "wahrgenommen", "zu nehmen": "wahrzunehmen"}
+RULES.append((
+    "LT3", re.compile(r"\bwahr (nehmen|nimmt|nahm|genommen|zu nehmen)\b", re.I),
+    (lambda m: case_match(m.group(0), WAHR.get(m.group(1).lower(), "wahrnehmen"))),
+    "wahr nehmen → wahrnehmen",
+))
+KENNEN = {"lernen": "kennenlernen", "lernt": "kennenlernt", "lernte": "kennenlernte",
+          "gelernt": "kennengelernt", "zu lernen": "kennenzulernen"}
+RULES.append((
+    "LT3", re.compile(r"\bkennen (lernen|lernt|lernte|gelernt|zu lernen)\b", re.I),
+    (lambda m: case_match(m.group(0), KENNEN.get(m.group(1).lower(), "kennenlernen"))),
+    "kennen lernen → kennenlernen",
+))
+
+# ---- LT4 Fehlschreib-Kanon (case-preserving) ------------------------------
+TYPOS = {
+    "ansonten": "ansonsten", "wiederrum": "wiederum", "übbrigens": "übrigens",
+    "mittlerweil": "mittlerweile", "zusamen": "zusammen",
+    "interesant": "interessant", "konktret": "konkret", "außdem": "außerdem",
+    "möchlicherweise": "möglicherweise", "trozdem": "trotzdem",
+    "vielleich": "vielleicht", "wirtschafftlich": "wirtschaftlich",
+    "bezeihungsweise": "beziehungsweise", "vorraus": "voraus",
+    "anscheind": "anscheinend", "überhaut": "überhaupt",
+    "überhaubt": "überhaupt", "tätsächlich": "tatsächlich",
+    "tatsälich": "tatsächlich", "vohin": "wohin",
+}
+TYPO_RX = re.compile(
+    r"\b(" + "|".join(sorted((re.escape(t) for t in TYPOS),
+                             key=len, reverse=True)) + r")\b",
+    re.I | re.UNICODE)
+RULES.append((
+    "LT4", TYPO_RX,
+    (lambda m: case_match(m.group(0), TYPOS[m.group(0).lower()])),
+    "Fehlschreib-Kanon (LT4)",
+))
 
 
-def chunk_text(text, size=MAX_CHUNK):
-    """Teilt Text in Chunks an Satzgrenzen."""
-    if len(text) <= size:
-        return [text]
-    chunks = []
-    while len(text) > size:
-        cut = text.rfind(". ", 0, size)
-        if cut < size * 0.5:
-            cut = size
-        chunks.append(text[:cut + 1])
-        text = text[cut + 1:]
-    if text:
-        chunks.append(text)
-    return chunks
+def apply_whitelist_gate(fund, whitelist):
+    """Wirft Funde gegen Whitelist-Wörter raus (Eigennamen/Fachbegriffe)."""
+    w = fund["found"].lower().strip(".,;:!?\"'“”„")
+    return w not in whitelist
 
 
-SHY = "\u00ad"   # weiche Trennstelle aus scripts/umbruch_guard.py
-
-
-def strip_shy(text):
-    """Entfernt weiche Trennstellen (U+00AD) für den LanguageTool-Check.
-
-    LanguageTool würde „Verbraucher\u00adschlichtungsstelle“ sonst als zwei
-    Wörter lesen („schlichtungs“ = unbekannt) und falsch „korrigieren“.
-    Rückgabe: (sauberer Text, Offset-Tabelle zurück in den Originaltext).
-    Ist keine Trennstelle enthalten, bleibt der Text unverändert (table=None).
-    """
-    if SHY not in text:
-        return text, None
-    chars, table = [], []
-    for i, ch in enumerate(text):
-        if ch == SHY:
-            continue
-        chars.append(ch)
-        table.append(i)
-    table.append(len(text))
-    return "".join(chars), table
-
-
-# FALSCH-POSITIV-SCHUTZ (02.09.2026, Wöchentliche SEO-Optimierung #20):
-# LanguageTools Satzanfangs-Regel (Kategorie CASING) hält kompakte Datums-/
-# Ordnungspunkte („Kündigung bis 30.11. bei …“, „30.11. in den Kalender“) für
-# Satzenden und „korrigiert“ das Folgewort groß: „Bei manchen“, „Anfängt“,
-# „Kennen und nutzen“, „Zum 31.12. Des Jahres“ – 6 echte Schäden, eingespielt
-# am 01.09. (e230ada2) via Auto-Apply und heute live repariert.
-# Dauerhafte Regel: CASING-Korrekturen direkt NACH einem Datumspunkt-Muster
-# werden NIE automatisch übernommen (auch nicht gemeldet) – ein verpasster
-# True-Positive ist billiger als ein falsch kapitalisiertes Verb.
-DATE_DOT_TRAP = re.compile(r"(?:\d{1,2}\.){1,3}\s*$")
-
-
-def accept_lt_match(m, chunk_lt, table, whitelist):
-    """Filtert ein einzelnes LanguageTool-Match (alle deterministischen
-    Regeln, offline testbar). Liefert Ergebnis-Dict oder None (= verworfen).
-    `table` ist die Offset-Tabelle aus strip_shy() (oder None)."""
-    cat = m.get("rule", {}).get("category", {}).get("id", "")
-    if cat in SKIP_CATEGORIES:
-        return None
-    if cat not in FIX_CATEGORIES and cat != "UNKNOWN_WORD":
-        return None
-    offset = m.get("offset", 0)
-    length = m.get("length", 0)
-    word = chunk_lt[offset:offset + length]
-    # Whitelist: Wort ignorieren
-    wl_key = word.lower().strip(".,;:!?")
-    if wl_key in whitelist:
-        return None
-    # Nur Vorschläge mit genau 1 Replacement = eindeutig
-    repls = m.get("replacements", [])
-    if len(repls) != 1:
-        return None
-    repl = repls[0].get("value", "")
-    if not repl or repl == word:
-        return None
-    # "Du"→"du" Einheitlichkeits-Vorschläge NICHT fixen (Stil-Entscheidung
-    # des Blogs: "Du" am Satzanfang groß, "du" im Satz klein ist üblich)
-    if word in ("Du", "Dein", "Deine", "Deinem", "Deiner", "Sie", "Ihr", "Ihre") \
-       and repl.lower() == word.lower() and cat != "CASING":
-        return None
-    # Komma-Fixes: nur annehmen, wenn nicht zu invasiv
-    if cat == "PUNCTUATION" and len(repl) > len(word) + 5:
-        return None
-    # Großschreib-Falle NACH Datums-/Ordnungspunkt („30.11. bei“ ≠ Satzende)
-    if cat == "CASING" and word[:1].islower() and repl[:1].isupper() \
-            and DATE_DOT_TRAP.search(chunk_lt[max(0, offset - 14):offset]):
-        return None
-    off, ln = offset, length
-    if table:  # Offsets zurück in den Originaltext rechnen
-        end = min(off + ln, len(chunk_lt))
-        off, ln = table[off], max(table[end] - table[off], ln)
-    return {
-        "offset": off, "length": ln, "word": word, "fix": repl,
-        "message": m.get("message", ""), "category": cat,
-        "conf": 0.9,
-    }
-
-
-API_FAILURES = 0   # hochgezählt bei nicht erreichbarer LanguageTool-API
-
-
-def lt_check(text, whitelist):
-    """LanguageTool-Check eines Texts. Liefert Liste von Matches (gefiltert)."""
-    global API_FAILURES
-    if not text.strip():
-        return []
-    results = []
-    for chunk in chunk_text(text):
-        chunk_lt, table = strip_shy(chunk)   # U+00AD raus, Offsets gerettet
-        data = urllib.parse.urlencode({
-            "language": "de-DE",
-            "text": chunk_lt,
-            "enabledOnly": "false",
-        }).encode()
-        req = urllib.request.Request(API_URL, data=data,
-                                     headers={"User-Agent": "Mozilla/5.0 (FranksFinanzcheck-Bot)",
-                                              "Content-Type": "application/x-www-form-urlencoded"})
-        try:
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-        except Exception as e:
-            # Toter-Gate-Schutz (01.09.2026, Audit): API-Fehler wurden bisher
-            # still geschluckt -> Report meldete dauerhaft „0 Funde“.
-            API_FAILURES += 1
-            print(f"  ⚠️ LanguageTool-Fehler: {e}")
-            time.sleep(5)
-            continue
-        for m in resp.get("matches", []):
-            accepted = accept_lt_match(m, chunk_lt, table, whitelist)
-            if accepted:
-                results.append(accepted)
-        time.sleep(0.6)  # Rate-Limit der Public-API (~20 chars/s)
-    return results
-
-
-def load_articles(files=None, new_only=False, include_drafts=False):
-    import datetime
-    today = datetime.date.today().isoformat()
-    arts = []
-    paths = files or sorted(
-        glob.glob(os.path.join(POSTS_DIR, "*.md"))
-        + glob.glob(os.path.join(POSTS_DIR, "*", "index.md"))
-    )
-    for path in paths:
-        with open(path, encoding="utf-8") as fh:
-            content = fh.read()
-        parts = content.split("---", 2)
-        if len(parts) < 3:
-            continue
-        fm, body = parts[1], parts[2]
-        if not include_drafts and "draft: true" in fm:
-            continue
-
-        def get(key):
-            m = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
-            return m.group(1).strip() if m else ""
-
-        date = get("date")
-        if new_only and not date.startswith(today):
-            continue
-        arts.append({
-            "file": os.path.relpath(path, POSTS_DIR), "path": path,
-            "title": get("title"), "description": get("description"),
-            "fm": fm, "body": body, "content": content,
-        })
-    return arts
-
-
-def analyze_article(a, whitelist):
-    """Prüft Body (maskiert) auf Grammatik-Fehler."""
-    problems = []
-    # Body
-    body_masked = mask_protected(a["body"])
-    matches = lt_check(body_masked, whitelist)
-    for m in matches:
-        problems.append({
-            "type": "grammar", "word": m["word"], "fix": m["fix"],
-            "start": m["offset"], "end": m["offset"] + m["length"],
-            "conf": m["conf"], "reason": f"{m['message']} ({m['category']})",
-        })
-    # Description (Frontmatter)
-    desc = a.get("description", "")
-    if desc:
-        desc_idx = a["content"].find('description: "')
-        if desc_idx >= 0:
-            dstart = desc_idx + len('description: "')
-            dm = lt_check(desc, whitelist)
-            for m in dm:
-                problems.append({
-                    "type": "grammar", "word": m["word"], "fix": m["fix"],
-                    "abs_start": dstart + m["offset"],
-                    "abs_end": dstart + m["offset"] + m["length"],
-                    "conf": m["conf"], "reason": f"Description: {m['message']} ({m['category']})",
-                })
-    return problems
-
-
-def apply_fix(a, problem):
-    content = a["content"]
-    parts = content.split("---", 2)
-    body_start = content.index(parts[2]) if len(parts) == 3 else 0
-    if "abs_start" in problem:
-        abs_start, abs_end = problem["abs_start"], problem["abs_end"]
-    else:
-        abs_start, abs_end = body_start + problem["start"], body_start + problem["end"]
-    old = content[abs_start:abs_end]
-    if old != problem["word"]:
-        return False
-    content = content[:abs_start] + problem["fix"] + content[abs_end:]
-    a["content"] = content
-    return True
-
-
+# ============================================================ Selbsttest
 def run_selftest():
-    """Offline-Selbsttest der Match-Filter (keine API nötig), eingefrorene
-    Schadensfälle vom 01./02.09.2026. Exit 2 bei Versagen."""
-    wl = set(w.lower() for w in DEFAULT_WHITELIST)
+    """Offline-Selbsttest der Regeln (eingefrorene Fälle, 25.09.2026).
+    Negativ-Fallen sind PFLICHT (Falsch-Positiv = Sabotage). Exit 2 bei Rot."""
+    fehler = []
 
-    def m(rule_cat, off, ln, repl, msg="LT-Meldung"):
-        return {"rule": {"category": {"id": rule_cat}}, "offset": off,
-                "length": ln, "message": msg,
-                "replacements": ([{"value": repl}] if repl is not None else [])}
+    def fix(t):
+        out, _, _ = apply_rules(t, RULES)
+        return out
 
-    cases = []
+    # 1) seid + Zeitangabe → seit
+    if "seit drei Jahren" not in fix("Du sparst seid drei Jahren."):
+        fehler.append("LT3: „seid drei Jahren“ wird nicht geheilt")
+    # 2) NEGATIV: Verb „seid“ bleibt
+    if fix("Ihr seid bereit.") != "Ihr seid bereit.":
+        fehler.append("LT3 FALSCH-POSITIV: „Ihr seid bereit.“ wurde verändert")
+    # 3) NEGATIV: „seid dem Kurs gefolgt“ = Hilfsverb, bleibt
+    if fix("Ihr seid dem Kurs gefolgt.") != "Ihr seid dem Kurs gefolgt.":
+        fehler.append("LT3 FALSCH-POSITIV: „seid dem Kurs gefolgt.“ wurde verändert")
+    # 4) Kollokation
+    if "im Gegensatz dazu" not in fix("im gegensatz dazu spart du."):
+        fehler.append("LT2: „im gegensatz“ wird nicht geheilt")
+    # 5) NEGATIV: „da für“ („Ich bin da für dich“) bleibt
+    if fix("Ich bin da für dich.") != "Ich bin da für dich.":
+        fehler.append("LT1 FALSCH-POSITIV: „da für“ wurde verändert")
+    # 6) Partikel
+    if "womit" not in fix("Das ist das Werkzeug, wo mit du sparst."):
+        fehler.append("LT1: „wo mit“ wird nicht geheilt")
+    # 7) Schutzzonen
+    geschuetzt = "`vorallem` und [aufjedenfall](https://x.de) bleiben."
+    if fix(geschuetzt) != geschuetzt:
+        fehler.append("Schutzzonen verletzt (Code/Link-Text angefasst)")
+    # 8) Case-Erhalt
+    if "Anhand der Daten" not in fix("An Hand der Daten spart jeder."):
+        fehler.append("LT1 Case-Erhalt: „An Hand“ → „Anhand“ fehlt")
+    # 9) wider Erwarten (kleingeschrieben im Satzfluss)
+    if "wider Erwarten" not in fix("Er kam wieder Erwarten zu früh."):
+        fehler.append("LT3: „wieder Erwarten“ wird nicht geheilt")
+    # 9b) NEGATIV: Verb „wieder erwarten“ bleibt
+    if fix("Ich hoffe, ihn wieder erwarten zu können.") != \
+            "Ich hoffe, ihn wieder erwarten zu können.":
+        fehler.append("LT3 FALSCH-POSITIV: Verb „wieder erwarten“ verändert")
+    # 10) Idempotenz
+    einmal = fix("Vorallem wo mit wir seid drei Jahren rechnen.")
+    if fix(einmal) != einmal:
+        fehler.append("Idempotenz verletzt: zweiter Lauf ändert nochmal")
+    return fehler
 
-    # 1) Datumspunkt-Falle: „…bis 30.09. bei…“ → CASING „Bei“ wird verworfen
-    text = "Kündigung meist bis 30.11., 30.09. bei manchen. Wer im Oktober vergleicht."
-    pos = text.index("bei")
-    res = accept_lt_match(m("CASING", pos, 3, "Bei"), text, None, wl)
-    cases.append(("FALSCH-POSITIV gehärtet: CASING nach Datumspunkt verworfen", res is None))
 
-    # 2) Kompaktdatum „…am 29.11. anfängt…“ → „Anfängt“ wird verworfen
-    text2 = "stichtag. Wer am 29.11. anfängt, unterschreibt Fehler."
-    pos2 = text2.index("anfängt")
-    res2 = accept_lt_match(m("CASING", pos2, len("anfängt"), "Anfängt"), text2, None, wl)
-    cases.append(("Kompaktdatum X.Y. geschützt („anfängt“ bleibt klein)", res2 is None))
+# ============================================================ Lauf
+def analyze(a, whitelist):
+    """Prüft Body + description; title nur Report."""
+    funde = []
+    body = a["body"]
+    for f in scan_rules(body, RULES):
+        if apply_whitelist_gate(f, whitelist):
+            funde.append(f)
+    # Description separat (Frontmatter, Auto-Fix erlaubt)
+    if a.get("description"):
+        for f in scan_rules(a["description"], RULES):
+            if apply_whitelist_gate(f, whitelist):
+                f["zone"] = "description"
+                funde.append(f)
+    # Title: nur melden, nie fixen (Cover-Marken-Lock)
+    if a.get("title"):
+        for f in scan_rules(a["title"], RULES):
+            if apply_whitelist_gate(f, whitelist):
+                f["zone"] = "title"
+                f["fix"] = None  # Titel nie schreiben
+                funde.append(f)
+    return funde
 
-    # 3) Ordinalpunkt „…der 30. zum…“ → „Zum“ wird verworfen
-    text3 = "Der reguläre Kündigungstermin ist der 30.11. zum 31.12. des Jahres."
-    pos3 = text3.index("zum")
-    res3 = accept_lt_match(m("CASING", pos3, 3, "Zum"), text3, None, wl)
-    pos3b = text3.index("des Jahres")
-    cases.append(("Ordinal-&Folgedatum geschützt („zum“/„des“)", res3 is None
-                  and accept_lt_match(m("CASING", pos3b, 3, "Des"), text3, None, wl) is None))
 
-    # 4) ECHTER Satzanfang bleibt heilbar: „Fehler gemacht. dann …“ → „Dann“
-    text4 = "Viele machen Fehler. dann ärgern sie sich."
-    pos4 = text4.index("dann")
-    res4 = accept_lt_match(m("CASING", pos4, 4, "Dann"), text4, None, wl)
-    cases.append(("True-Positive bleibt: CASING am echten Satzanfang",
-                  res4 is not None and res4["fix"] == "Dann"))
+def main(argv=None):
+    argv = list(argv if argv is not None else sys.argv[1:])
+    do_fix = "--fix" in argv
+    strict = "--strict" in argv
+    as_json = "--json" in argv
+    include_drafts = "--include-drafts" in argv
+    new_only = "--new-only" in argv
+    only_file = None
+    for i, a in enumerate(argv):
+        if a == "--file" and i + 1 < len(argv):
+            only_file = argv[i + 1]
+        elif a.startswith("--file="):
+            only_file = a.split("=", 1)[1]
 
-    # 5) TYPOS eindeutig → angenommen
-    text5 = "Der Ferstärker ist kaputt."
-    res5 = accept_lt_match(m("TYPOS", text5.index("Ferstärker"), 10, "Verstärker"), text5, None, wl)
-    cases.append(("TYPOS-Fix wird angenommen", res5 is not None))
+    if "--selftest" in argv:
+        stf = run_selftest()
+        if stf:
+            print("🛑 GRAMMATIK-SELBSTTEST ROT (offline LanguageTool-Nachbau):")
+            print("\n".join("  " + f for f in stf))
+            return 2
+        print("✅ Grammatik-Selbsttest: 11 Fälle grün (offline, ohne API).")
+        return 0
 
-    # 6) STYLE → nie automatisiert
-    res6 = accept_lt_match(m("STYLE", 0, 4, "egal"), "Irgendein Satz.", None, wl)
-    cases.append(("STYLE-Kategorie verworfen", res6 is None))
-
-    # 7) Whitelist geschützt (Marken/Fachbegriffe)
-    text7 = "Bei check24 vergleichen lohnt sich."
-    res7 = accept_lt_match(m("TYPOS", text7.index("check24"), 7, "Check24"), text7, None, wl)
-    cases.append(("Whitelist-Wort verworfen", res7 is None))
-
-    # 8) „Du“→„du“ Stil-Vorschlag (nicht CASING) → verworfen
-    text8 = "Hier kannst Du sparen."
-    res8 = accept_lt_match(m("TYPOS", text8.index("Du"), 2, "du"), text8, None, wl)
-    cases.append(("Du→du Stil-Vorschlag verworfen", res8 is None))
-
-    # 9) Zu invasive PUNCTUATION-Veränderung → verworfen
-    text9 = "Das ist ein Test."
-    res9 = accept_lt_match(m("PUNCTUATION", 0, 3, "Dasssssssss"), text9, None, wl)
-    cases.append(("Invasiver PUNCTUATION-Fix verworfen", res9 is None))
-
-    # 10) PUNCTUATION moderat → angenommen
-    res10 = accept_lt_match(m("PUNCTUATION", 0, 3, "Das,"), text9, None, wl)
-    cases.append(("Moderater PUNCTUATION-Fix angenommen", res10 is not None))
-
-    # 11) SHY-Offsets: Trennstelle vor dem Fund verschiebt nichts
-    lyric = "Verbraucher\u00adstreitbeilegung ist 30.11. fällig"
-    plain, tbl = strip_shy(lyric)
-    cases.append(("strip_shy entfernt U+00AD", "\u00ad" not in plain))
-    ok_off = tbl is not None and tbl[plain.index("streit")] == lyric.index("streit")
-    cases.append(("Offset-Tabelle rechnet korrekt zurück", ok_off))
-
-    fails = [name for name, ok in cases if not ok]
-    for name, ok in cases:
-        print(("\u2705 " if ok else "\u274c ") + name)
-    if fails:
-        print(f"\n\U0001f6d1 GRAMMAR-SELFTEST FEHLGESCHLAGEN: {len(fails)} Fall/Fälle")
+    stf = run_selftest()
+    if stf:
+        print("🛑 SELBSTTEST ROT – Sabotage verhindert, kein Schreiben:")
+        print("\n".join("  " + f for f in stf))
         return 2
-    print(f"\n\u2705 GRAMMAR-SELFTEST bestanden ({len(cases)} Fälle, offline, 0 API).")
-    return 0
-
-
-def main():
-    if "--selftest" in sys.argv:
-        sys.exit(run_selftest())
-    fix = "--fix" in sys.argv
-    as_json = "--json" in sys.argv
-    new_only = "--new-only" in sys.argv
-    include_drafts = "--include-drafts" in sys.argv
-    files = None
-    if "--file" in sys.argv:
-        files = [sys.argv[sys.argv.index("--file") + 1]]
 
     whitelist = load_whitelist()
-    articles = load_articles(files, new_only, include_drafts=include_drafts)
-    print(f"Grammatik-Prüfung (LanguageTool): {len(articles)} Artikel\n")
+    files = None
+    if only_file:
+        p = only_file if os.path.isabs(only_file) \
+            else os.path.join(ROOT, only_file)
+        if not os.path.exists(p):
+            p = os.path.join(ROOT, "content", "posts", only_file)
+        files = [p]
+    arts = load_articles(files, new_only=new_only, include_drafts=include_drafts)
 
-    all_problems = []
-    for a in articles:
-        problems = analyze_article(a, whitelist)
-        if problems:
-            all_problems.append({"file": a["file"], "title": a["title"], "problems": problems})
-            print(f"  {a['file']}: {len(problems)} Funde")
-        if API_FAILURES > 3:
-            print("🛑 Circuit-Breaker: LanguageTool-API mehrfach nicht erreichbar – "
-                  "Abbruch, der Report markiert den Gate als nicht auswertbar.")
-            break
+    total = fixed = 0
+    rows = []
+    for a in arts:
+        funde = analyze(a, whitelist)
+        if not funde:
+            continue
+        total += len(funde)
+        neu_body, n, _ = apply_rules(a["body"], RULES)
+        neu_desc = None
+        if a.get("description"):
+            d2, n2, _ = apply_rules(a["description"], RULES)
+            if n2:
+                neu_desc, n = d2, n + n2
+        if do_fix and n:
+            ok, grund = write_verified(a, rebuild(a, neu_body, neu_desc),
+                                       "grammar_check")
+            if ok:
+                fixed += n
+            else:
+                rows.append({"slug": a["slug"], "rule": "SCHREIBSPERRE",
+                             "found": grund, "fix": None, "ctx": "",
+                             "label": "Verifikation fehlgeschlagen"})
+        for f in funde:
+            rows.append({"slug": a["slug"], **f})
 
-    # Anwenden (rückwärts)
-    fixed_count = 0
-    for entry in all_problems:
-        a = next(x for x in articles if x["file"] == entry["file"])
-        entry["problems"].sort(key=lambda p: p.get("abs_start", p.get("start")), reverse=True)
-        for p in entry["problems"]:
-            if fix and p["conf"] >= 0.8:
-                if apply_fix(a, p):
-                    fixed_count += 1
-                    p["applied"] = True
-            elif p["conf"] >= 0.8:
-                p["applied"] = False
+    offen = max(0, total - fixed)
+    if as_json:
+        print(json.dumps({
+            "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "engine": "grammar_check (LanguageTool-Nachbau, offline)",
+            "posts": len(arts), "findings": total, "fixed": fixed,
+            "open": offen, "items": rows[:200],
+        }, ensure_ascii=False, indent=2))
+        return 1 if (strict and offen) else 0
 
-    if fix:
-        for a in articles:
-            orig = open(a["path"], encoding="utf-8").read()
-            if a["content"] != orig:
-                open(a["path"], "w", encoding="utf-8").write(a["content"])
-
-    # Report
-    total = sum(len(e["problems"]) for e in all_problems)
-    still = [p for e in all_problems for p in e["problems"] if not p.get("applied")]
-    api_down = API_FAILURES > 0 and total == 0
-    lines = [
-        "# 🔤 Grammatik-Report", "",
-        f"> **Automatisch** – {len(articles)} Artikel geprüft (LanguageTool de-DE), "
-        f"{total} Funde, {fixed_count} korrigiert, {len(still)} offen.", "",
-    ]
-    if api_down:
-        lines += [f"🛑 **LanguageTool-API NICHT erreichbar** ({API_FAILURES} fehlgeschlagene "
-                  "Requests) – dieser Gate ist aktuell NICHT auswertbar. Bitte API-Erreichbarkeit "
-                  "prüfen (api.languagetool.org); sonst liefert der Report dauerhaft 0 Funde.",
-                  "",
-                  "## Funde", "", "_(keine – API down)_"]
+    L = ["# 📝 GRAMMATIK-REPORT (grammar_check.py – offline, ohne API)", "",
+         f"**Stand:** {now_utc()} UTC",
+         f"**Modus:** {'FIX' if do_fix else 'REPORT'} · LanguageTool-Nachbau (LT1–LT4)",
+         f"**Artikel:** {len(arts)} · **Funde:** {total} "
+         f"(geheilt: {fixed} · offen: {offen})", ""]
+    if rows:
+        L.append("| Regel | Artikel | Fund | Fix/Vorschlag |")
+        L.append("|---|---|---|---|")
+        for r in rows[:60]:
+            fix_info = f"→ `{r['fix']}`" if r.get("fix") else "*(Report)*"
+            L.append(f"| {r['rule']} | `{r['slug']}` | „{r['found']}“ | {fix_info} |")
     else:
-        lines.append("## Funde")
-        for e in all_problems:
-            lines.append(f"### {e['file']}")
-            for p in e["problems"]:
-                mark = "✅" if p.get("applied") else "⚠️"
-                lines.append(f"- {mark} „{p['word']}“ → „{p['fix']}“ – {p['reason'][:80]}")
-    lines += ["", "---", "*Erzeugt von scripts/grammar_check.py (LanguageTool Public API)*"]
-    open(REPORT_FILE, "w", encoding="utf-8").write("\n".join(lines))
-    json.dump({"articles": len(articles), "total": total, "fixed": fixed_count,
-               "open": len(still), "api_failures": API_FAILURES},
-              open(JSON_FILE, "w", encoding="utf-8"))
+        L.append("🎉 Keine Grammatik-Funde – Bestand sauber.")
+    L += ["", "---",
+          "_Offline-Nachbau der LanguageTool-Prüfung (Auftrag 25.09.2026: ohne API). "
+          "Stil/Glättung macht scripts/sprachglatt.py (DeepL-Write-Nachbau). "
+          "Harte Fest-Fehler (einzigste, daß, seid/seit-Pleonasmen …) liegen in "
+          "scripts/hardcases_guard.py._"]
+    with open(REPORT_FILE, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(L) + "\n")
+    with open(JSON_FILE, "w", encoding="utf-8") as fh:
+        json.dump({"generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                   "posts": len(arts), "findings": total, "fixed": fixed,
+                   "open": offen, "items": rows[:200]},
+                  fh, ensure_ascii=False, indent=2)
 
-    print(f"\nFertig: {total} Funde, {fixed_count} korrigiert, {len(still)} offen "
-          f"(API-Fehler: {API_FAILURES}).")
-    sys.exit(2 if api_down else (1 if still else 0))
+    print("\n".join(L[:8]))
+    return 1 if (strict and offen) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

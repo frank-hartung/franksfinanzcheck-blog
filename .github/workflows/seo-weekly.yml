@@ -224,6 +224,8 @@ jobs:
         # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
         # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
         # automatisch angewendet (Stil-Fälle nur im Report).
+        # OFFLINE-UMBAU 25.09.2026: grammar_check läuft komplett offline
+        # (LanguageTool-Nachbau LT1–LT4, ohne API, ohne Netz).
         # BUGFIX 13.08.: fehlendes continue-on-error ließ diesen (rein
         # informativen) Schritt bei verbleibenden Stil-Funden den GESAMTEN
         # Workflow abbrechen – alle nachfolgenden Schritte (Cover-Check,
@@ -231,6 +233,15 @@ jobs:
         continue-on-error: true
         run: |
           python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Sprachglatt-Politur aller Artikel (DeepL-Write-Nachbau, offline)
+        # Wöchentliche Komplett-Glättung (DW1–DW9): Behörden-/Nominalstil
+        # → knackig, 100 % offline, kostenlos, ohne API (25.09.2026).
+        # V1-Vorschläge nur im Report, nie Auto-Fix.
+        continue-on-error: true
+        run: |
+          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_log.txt
           exit ${PIPESTATUS[0]}
 
       - name: Lesbarkeits-Audit aller Artikel
