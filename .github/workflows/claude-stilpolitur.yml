@@ -1,19 +1,29 @@
 name: Claude-Stilpolitur (täglich)
 
 # ============================================================
-#  CLAUDE-STILPOLITUR – Claude 3.5 Sonnet, personalisiert
+#  CLAUDE-STILPOLITUR – Claude, KOSTENLOS OHNE API, personalisiert
 #  ------------------------------------------------------------
 #  AUFTRAG (Frank, 25.09.2026), wörtlich:
 #    „Nutze für jeden bestehenden und zukünftigen Blogartikel nach
-#    der Offline-Optimierung zusätzlich automatisch täglich
-#    Claude 3.5 Sonnet mit einem personalisierten Prompt für
-#    meinen eigenen Schreibstil auf Premium-Level einer Profi-Agentur."
+#    der Offline-Optimierung zusätzlich automatisch täglich Claude
+#    mit einem personalisierten Prompt für meinen eigenen
+#    Schreibstil auf Premium-Level einer Profi-Agentur."
+#  Nachtrag selben Tages:
+#    „Claude sollte nur ohne API genutzt werden. Dafür sollte das
+#    aktuell beste kostenlose Claude-Modell gewählt werden."
+#
+#  ZUGANG: Puter.js „Free, Unlimited Claude API" (User-Pays-Modell)
+#    – KEINE Anthropic-API, keine Abrechnung. Auth nur über
+#    PUTER_AUTH_TOKEN (kostenloser Puter-Account, monatliches
+#    Gratis-Kontingent). Modell: bestes kostenloses Claude-Modell
+#    (data/ki_redaktion.yaml → stilpolitur.modell, Stand 25.09.2026:
+#    claude-fable-5-1, Fallbacks: claude-opus-5-5 → claude-sonnet-5).
 #
 #  REIHENFOLGE IN JEDEM LAUF („nach der Offline-Optimierung"):
 #    1. Offline-Optimierung (ohne API): grammar_check (LT1–LT4)
 #       + sprachglatt (DW1–DW9) – Fix über ALLE Artikel
-#    2. Claude 3.5 Sonnet (Paid-Lane): claude_stilpolitur.py --fix
-#       mit personalisiertem Prompt (data/schreibstil.yaml +
+#    2. Claude (kostenlos, personalisiert): claude_stilpolitur.py
+#       --fix mit Franks Schreibstil (data/schreibstil.yaml +
 #       data/brand_brain.yaml) – Premium-Level einer Profi-Agentur
 #    3. Commit als Redaktions-Bot (wie redaktions-politur.yml)
 #
@@ -28,9 +38,6 @@ name: Claude-Stilpolitur (täglich)
 #      content-engine-v2.yml Phase 2 im Geburtslauf mit --new-only)
 #    - Manuell: Actions → „Claude-Stilpolitur (täglich)" → Run workflow
 #      (Inputs: force = alle neu polieren, limit = Budget-Lauf)
-#
-#  Kosten: Paid (ANTHROPIC_API_KEY). Ausdrückliche Dauervorgabe –
-#  die Gratis-Regel der Artikel-GENERIERUNG bleibt unangetastet.
 #
 #  Reports (gitignored, bleiben im Lauf-Log):
 #    - CLAUDE-STILPOLITUR-REPORT.md + .claude_stilpolitur_report.json
@@ -68,28 +75,38 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Node 24 (Puter-Brücke)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       - name: Voraussetzungen prüfen
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
           for f in scripts/sprachkern.py scripts/grammar_check.py scripts/sprachglatt.py \
-                   scripts/claude_stilpolitur.py data/schreibstil.yaml scripts/git_sync.sh; do
+                   scripts/claude_stilpolitur.py scripts/puter_chat.mjs \
+                   data/schreibstil.yaml scripts/git_sync.sh; do
             if [ ! -f "$f" ]; then
               echo "🛑 $f fehlt auf main – PR nicht gemergt?"
               exit 1
             fi
           done
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "🛑 ANTHROPIC_API_KEY fehlt in den Repo-Secrets – die beauftragte"
-            echo "   Paid-Lane (Claude 3.5 Sonnet, personalisiert) kann nicht laufen."
-            echo "   Einrichten: Settings → Secrets and variables → Actions →"
-            echo "   New repository secret → Name: ANTHROPIC_API_KEY"
+          if [ -z "$PUTER_AUTH_TOKEN" ]; then
+            echo "🛑 PUTER_AUTH_TOKEN fehlt in den Repo-Secrets – der"
+            echo "   KOSTENLOSE Claude-Zugang (Puter.js, ohne API) kann nicht laufen."
+            echo "   Einrichten: puter.com → kostenloses Konto → Auth-Token erzeugen"
+            echo "   (docs.puter.com) → Settings → Secrets and variables → Actions →"
+            echo "   New repository secret → Name: PUTER_AUTH_TOKEN"
+            echo "   Hinweis: KEIN Anthropic-Key und KEINE Kosten nötig (User-Pays)."
             exit 1
           fi
-          echo "✅ Voraussetzungen vorhanden (Engines + Stilprofil + API-Key)."
+          echo "✅ Voraussetzungen vorhanden (Engines + Stilprofil + Gratis-Token)."
 
-      - name: Python-Abhängigkeiten
-        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+      - name: Abhängigkeiten (Python + Puter-Brücke, transient)
+        run: |
+          python3 -m pip install -q pyyaml 2>/dev/null || true
+          npm install --no-save @heyputer/puter.js
 
       - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
         run: |
@@ -105,14 +122,14 @@ jobs:
           echo "== Sprachglatt (DW1–DW9 + V1, offline DeepL-Write-Nachbau) =="
           python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
 
-      - name: Claude 3.5 Sonnet – Stil-Politur (personalisiert, Premium)
+      - name: Claude (kostenlos ohne API) – Stil-Politur (personalisiert, Premium)
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
           if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
-          echo "== Claude 3.5 Sonnet (personalisiert: data/schreibstil.yaml) =="
+          echo "== Claude (kostenlos, bestes freies Modell, personalisiert: data/schreibstil.yaml) =="
           python3 scripts/claude_stilpolitur.py --fix $ARGS | tee /tmp/stilpolitur.txt
           cat /tmp/stilpolitur.txt
 
@@ -130,6 +147,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "✅ Bestand bereits auf Premium-Level – nichts zu heilen."
           else
-            git commit -m "redaktion: Claude-Stilpolitur (Claude 3.5 Sonnet, personalisiert) – Premium-Level einer Profi-Agentur"
+            git commit -m "redaktion: Claude-Stilpolitur (kostenlos ohne API, personalisiert) – Premium-Level einer Profi-Agentur"
             scripts/git_sync.sh --push-only
           fi

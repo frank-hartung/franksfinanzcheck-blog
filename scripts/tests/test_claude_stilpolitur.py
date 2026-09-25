@@ -3,14 +3,17 @@
 
 Auftrag (Frank, 25.09.2026): „Nutze für jeden bestehenden und zukünftigen
 Blogartikel nach der Offline-Optimierung zusätzlich automatisch täglich
-Claude 3.5 Sonnet mit einem personalisierten Prompt für meinen eigenen
-Schreibstil auf Premium-Level einer Profi-Agentur."
+Claude mit einem personalisierten Prompt für meinen eigenen Schreibstil
+auf Premium-Level einer Profi-Agentur." Nachtrag selben Tages:
+„Claude sollte nur ohne API genutzt werden. Dafür sollte das aktuell
+beste kostenlose Claude-Modell gewählt werden."
 
 Diese Tests nageln die Verträge der Lane fest (alles offline, ohne API):
 
   1. Personalisierung: Der System-Prompt enthält Franks Stilprofil
      (data/schreibstil.yaml) UND die Marken-Stimme (brand_brain.yaml).
-  2. Modell-Bindung: ausdrücklich Claude 3.5 Sonnet – nie der 4.5-Default.
+  2. Kostenlos-ohne-API: nur Modelle der Frei-Liste (Puter-Katalog),
+     kein Anthropic-Key in Lane/Workflows, Puter-Brücke vorhanden.
   3. Fakten-Schutz: Zahlen/Links/Überschriften byte-identisch, sonst
      wird die KI-Antwort verworfen (nie geschrieben).
   4. Rotation: Fingerprint-Dedupe (neu · geändert · auffrischen).
@@ -54,10 +57,20 @@ class TestPersonalisierung(unittest.TestCase):
             self.assertIn(key, stil, f"schreibstil.yaml: {key} fehlt")
         self.assertTrue((brand.get("voice") or {}).get("tone"))
 
-    def test_modell_ist_claude_35_sonnet(self):
+    def test_modell_ist_bestes_kostenloses_claude(self):
         cfg = cs.load_config()
-        self.assertTrue(str(cfg["modell"]).startswith("claude-3-5-sonnet"))
-        self.assertNotIn("4-5", str(cfg["modell"]))
+        # Auftrag: bestes KOSTENLOSES Claude-Modell – nie ein bezahlter Pfad.
+        self.assertEqual(cfg["modell"], "claude-fable-5-1")  # Fable 5.1 = Spitze
+        kette = [cfg["modell"]] + list(cfg.get("modell_fallback") or [])
+        for m in kette:
+            self.assertIn(m, cs.FREIE_CLAUDE_MODELLE, f"{m} nicht in der Frei-Liste")
+        self.assertIn("claude-sonnet-5", kette)  # Free-Tier-Fallback gesetzt
+
+    def test_lane_ist_kostenlos_ohne_api(self):
+        self.assertEqual(cs._st_ohne_anthropic_api(), True)
+
+    def test_puter_bruecke_vereinbart(self):
+        self.assertEqual(cs._st_bruecke(), True)
 
 
 class TestVerifikation(unittest.TestCase):

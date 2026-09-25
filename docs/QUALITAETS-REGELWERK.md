@@ -53,10 +53,11 @@ KI-Artikel (engine_generate.py)
    ├─► 📖 absorb_whitelist.py     Rechtschreib-Rauschen (Komposita → Whitelist)
  ├─► 🧴 sprachglatt.py          Glätt-Gate (DW1–DW9, offline DeepL-Write-Nachbau, V1 Vorschläge)
  ├─► 🩺 grammar_check.py        Grammatik-Gate (LT1–LT4, offline, Exit 2 bei Selbsttest-Rot)
- └─► ✍️ claude_stilpolitur.py   Stil-Politur (Claude 3.5 Sonnet, personalisiert: Franks
-                                Schreibstil aus data/schreibstil.yaml – Paid-Lane,
-                                ausdrücklicher Auftrag 25.09.2026, läuft NACH der
-                                Offline-Optimierung; täglich + bei jedem neuen Artikel)
+ └─► ✍️ claude_stilpolitur.py   Stil-Politur (Claude, KOSTENLOS ohne API via Puter.js,
+                                bestes freies Modell + personalisiert: Franks
+                                Schreibstil aus data/schreibstil.yaml – Auftrag
+                                25.09.2026, läuft NACH der Offline-Optimierung;
+                                täglich + bei jedem neuen Artikel)
 ```
 
 Ausführung aller Regeln: **niemals blockierend** (`|| echo "nicht kritisch"`).

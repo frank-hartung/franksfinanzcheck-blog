@@ -62,6 +62,14 @@ jobs:
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
 
+      # Node 24 für die Puter-Brücke der Claude-Stilpolitur (kostenlos ohne API,
+      # Auftrag 25.09.2026). @heyputer/puter.js braucht Node 24+; installiert
+      # wird es transient im Phase-2-Schritt (--no-save).
+      - name: Node 24 (Puter-Brücke der Claude-Stilpolitur)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       # ============ INTEGRITÄTS-LOCK (HARD STOP + BELEGTE SIGNATUR) ============
       # Zuerst der Safe, dann die Arbeit: Der Lock (integrity_guard.py)
       # bürgt, dass Kern-Layouts, CTA-Shortcodes und die Dienst-Wachen exakt
@@ -216,7 +224,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
           echo "== Profi-Polish (KI) =="
           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
@@ -239,11 +247,13 @@ jobs:
           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
           echo "== Sprachglatt (DW1–DW9, offline DeepL-Write-Nachbau, ohne API, 25.09.2026) =="
           python3 scripts/sprachglatt.py --fix --new-only || echo "⚠ Sprachglatt (nicht kritisch)"
-          echo "== Claude 3.5 Sonnet Stil-Politur (personalisiert, Premium-Agentur-Level, Auftrag 25.09.2026) =="
-          # Beauftragte Paid-Lane (Dauervorgabe Frank 25.09.2026): läuft NACH der
-          # Offline-Optimierung (LT+DW) über jeden neuen Artikel mit Franks
-          # persönlichem Schreibstil (data/schreibstil.yaml). Der tägliche
-          # Bestandslauf deckt die Alt-Artikel ab (claude-stilpolitur.yml).
+          echo "== Claude Stil-Politur (KOSTENLOS ohne API: Puter.js, personalisiert, Premium-Agentur-Level, 25.09.2026) =="
+          # Beauftragte Gratis-Lane (Dauervorgabe Frank 25.09.2026, Nachtrag „nur ohne
+          # API"): läuft NACH der Offline-Optimierung (LT+DW) über jeden neuen Artikel
+          # mit Franks persönlichem Schreibstil (data/schreibstil.yaml) und dem besten
+          # kostenlosen Claude-Modell (ki_redaktion.yaml → stilpolitur.modell). Der
+          # tägliche Bestandslauf deckt die Alt-Artikel ab (claude-stilpolitur.yml).
+          npm install --no-save @heyputer/puter.js >/dev/null 2>&1 || echo "⚠ puter.js nicht installiert"
           python3 scripts/claude_stilpolitur.py --fix --new-only || echo "⚠ Stil-Politur (nicht kritisch)"
           echo "== Akronym-/Marken-/Tagschreibung (casing_guard: C1–C17 + T1, Selbsttest vor jedem Schreibvorgang) =="
           python3 scripts/casing_guard.py --fix --new-only || echo "⚠ Casing-Guard (nicht kritisch)"

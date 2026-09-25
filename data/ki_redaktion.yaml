@@ -34,31 +34,36 @@ auto_veroeffentlichen: false
 max_artikel_pro_lauf: 1
 
 # ------------------------------------------------------------
-#  STILPOLITUR – separater PAID-LANE (ausdrücklicher Auftrag Frank,
-#  25.09.2026): „Nutze für jeden bestehenden und zukünftigen
-#  Blogartikel nach der Offline-Optimierung zusätzlich automatisch
-#  täglich Claude 3.5 Sonnet mit einem personalisierten Prompt
+#  STILPOLITUR – KOSTENLOSE Claude-Lane (ausdrücklicher Auftrag
+#  Frank, 25.09.2026): „Nutze für jeden bestehenden und
+#  zukünftigen Blogartikel nach der Offline-Optimierung zusätzlich
+#  automatisch täglich Claude mit einem personalisierten Prompt
 #  für meinen eigenen Schreibstil auf Premium-Level einer
-#  Profi-Agentur."
+#  Profi-Agentur." Nachtrag selben Tages: „Claude sollte nur ohne
+#  API genutzt werden. Dafür sollte das aktuell beste
+#  kostenlose Claude-Modell gewählt werden."
 #
-#  KOSTEN-REGEL-ABGRENZUNG: Diese Lane ist bewusst KEIN Teil der
-#  Anbieter-Ketten oben. Die Gratis-Regel für die ARTIKEL-
-#  GENERIERUNG (anbieter_kette_lang/news) bleibt unangetastet –
-#  Claude 3.5 Sonnet läuft ausschließlich für die Stil-Politur
-#  nach der Offline-Optimierung (grammar_check + sprachglatt) und
-#  nur mit gesetztem ANTHROPIC_API_KEY.
+#  ZUGANG: Puter.js „Free, Unlimited Claude API" (User-Pays) –
+#  KEINE Anthropic-API, KEIN Modell-Key, KEINE Kosten. Auth nur
+#  PUTER_AUTH_TOKEN (kostenloser Puter-Account mit monatlichem
+#  Gratis-Kontingent), Brücke: scripts/puter_chat.mjs. Die Lane
+#  bleibt damit IMMER innerhalb der Kosten-Regel des Repos.
 #
-#  Modell-Bindung: Ausdrücklich Claude 3.5 SONNET (Auftrag),
-#  NICHT der Sonnet-4.5-Default aus llm_client.py. Override:
-#  STILPOLITUR_MODEL (z. B. claude-3-5-sonnet-20241022 als
-#  fixe Datums-Version, falls das -latest-Alias entfällt).
+#  MODELL-AUSWAHL (Auftrag: „aktuell beste kostenlose Claude-
+#  Modell", Stand 25.09.2026): claude-fable-5-1 (Fable 5.1,
+#  Spitze der kostenlosen Modellkarte) → Fallbacks:
+#  claude-opus-5-5 → claude-sonnet-5 (Free-Tier-Workhorse,
+#  sparsamstes Kontingent). Override: STILPOLITUR_MODEL.
+#  Der Selbsttest (claude_stilpolitur.py ST3) weist alles ab,
+#  was nicht in der Frei-Liste des Puter-Katalogs steht.
 #
 #  Verbrauch (Cost-Guard): Jeder Lauf prüft jeden Artikel, schreibt
 #  aber nur bei Bedarf (Fingerprint in data/claude_stil_state.json:
 #  neu · geändert · älter als auffrischung_tage).
 # ------------------------------------------------------------
 stilpolitur:
-  modell: "claude-3-5-sonnet-latest"
+  modell: "claude-fable-5-1"
+  modell_fallback: ["claude-opus-5-5", "claude-sonnet-5"]
   temperatur: 0.5
   max_tokens: 8192
   timeout: 300

@@ -3,9 +3,10 @@
 #  ------------------------------------------------------------
 #  AUFTRAG (Frank, 25.09.2026): „Nutze für jeden bestehenden und
 #  zukünftigen Blogartikel nach der Offline-Optimierung zusätzlich
-#  automatisch täglich Claude 3.5 Sonnet mit einem personalisierten
-#  Prompt für meinen eigenen Schreibstil auf Premium-Level einer
-#  Profi-Agentur."
+#  automatisch täglich Claude mit einem personalisierten Prompt
+#  für meinen eigenen Schreibstil auf Premium-Level einer
+#  Profi-Agentur." (Nachtrag: Claude nur OHNE API – bestes
+#  kostenloses Modell, siehe data/ki_redaktion.yaml → stilpolitur.)
 #
 #  Diese Datei beschreibt FRANKS EIGENE STIMME – sie wird von
 #  scripts/claude_stilpolitur.py in den System-Prompt gerendert.

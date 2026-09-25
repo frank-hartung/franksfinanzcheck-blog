@@ -4,35 +4,37 @@
 #  ------------------------------------------------------------
 #  AUFTRAG (Frank, 25.09.2026), wörtlich:
 #    „Nutze für jeden bestehenden und zukünftigen Blogartikel nach
-#    der Offline-Optimierung zusätzlich automatisch täglich
-#    Claude 3.5 Sonnet mit einem personalisierten Prompt für
-#    meinen eigenen Schreibstil auf Premium-Level einer Profi-Agentur."
+#    der Offline-Optimierung zusätzlich automatisch täglich Claude
+#    mit einem personalisierten Prompt für meinen eigenen
+#    Schreibstil auf Premium-Level einer Profi-Agentur."
+#    Nachtrag selben Tages: „Claude sollte nur OHNE API genutzt
+#    werden. Dafür sollte das aktuell beste kostenlose
+#    Claude-Modell gewählt werden."
 #
 #  EINORDNUNG (Regelwerk-Prinzip „jede Regel genau einmal“):
 #    1. Offline-Optimierung (läuft IMMER zuerst, ohne API, 25.09.2026):
 #       grammar_check.py (LT1–LT4) + sprachglatt.py (DW1–DW9)
-#    2. DIESE Datei (beauftragte Paid-Lane): Claude 3.5 Sonnet mit
+#    2. DIESE Datei (kostenlose Claude-Lane): Claude via Puter.js
+#       (User-Pays, OHNE Anthropic-API, OHNE Kosten) mit
 #       PERSONALISIERTEM Prompt aus data/schreibstil.yaml (Franks
 #       eigener Schreibstil) + data/brand_brain.yaml (Marken-Stimme)
 #       – Stil-Politur auf Premium-Level einer Profi-Agentur.
 #
-#  MODELL: Claude 3.5 Sonnet (data/ki_redaktion.yaml →
-#    stilpolitur.modell = „claude-3-5-sonnet-latest“). Bewusst NICHT
-#    der Sonnet-4.5-Default aus llm_client.py – Frank hat ausdrücklich
-#    3.5 Sonnet beauftragt. Override: STILPOLITUR_MODEL.
+#  MODELL: das aktuell beste KOSTENLOSE Claude-Modell (Auftrag):
+#    data/ki_redaktion.yaml → stilpolitur.modell, Stand 25.09.2026:
+#    „claude-fable-5-1“ (Fable 5.1 – Spitze der Modellkarte).
+#    Fallbacks: claude-opus-5-5 → claude-sonnet-5. Override:
+#    STILPOLITUR_MODEL. Der Selbsttest (ST3) prüft die Frei-Liste –
+#    ein bezahlter Modell-/API-Pfad wird damit abgewiesen.
 #
-#  KOSTEN: Paid (ANTHROPIC_API_KEY). Die Gratis-Regel der Artikel-
-#    GENERIERUNG (ki_redaktion.yaml → anbieter_kette_*) bleibt
-#    unangetastet – dies ist ein separater, ausdrücklich beauftragter
-#    Lane (Dauervorgabe Frank, 25.09.2026).
-#
-#  TAKTUNG (täglich, nach der Offline-Optimierung):
-#    - .github/workflows/claude-stilpolitur.yml (04:50 UTC, Bestand)
-#    - content-engine-v2.yml Phase 2 (--new-only, neue Artikel)
-#    Jeder Artikel wird JEDEM Lauf geprüft; geschrieben wird nur bei
-#    Bedarf (Fingerprint-Vertrag): neu, geändert oder älter als
-#    stilpolitur.auffrischung_tage (Rotation). Budget:
-#    stilpolitur.max_artikel_pro_tag (Cost-Guard). --force hebt beides.
+#  ZUGANG (Puter.js, „Free, Unlimited Claude API“, User-Pays):
+#    - KEINE Anthropic-Abrechnung, kein Modell-Key – nur ein
+#      PUTER_AUTH_TOKEN (kostenloser Puter-Account mit monatlichem
+#      Gratis-Kontingent; Brücke: scripts/puter_chat.mjs).
+#    - Die Gratis-Regel der Artikel-GENERIERUNG (ki_redaktion.yaml →
+#      anbieter_kette_*) bleibt unangetastet – die Lane ist nun
+#      ebenfalls kostenfrei.
+#  Budget: max_artikel_pro_tag (Rotation) + auffrischung_tage.
 #
 #  SICHERHEIT (Repo-Vertrag, wie sprachkern/redaktions_standard):
 #    - Schutzzonen (Markdown-Links inkl. ANKERTEXT, Shortcodes, Code,
@@ -56,7 +58,7 @@
 #    python3 scripts/claude_stilpolitur.py --selftest      # Sabotage-Schutz
 #
 #  EXIT: 0 sauber/gelaufen · 1 offene Kandidaten (nur --strict)
-#        2 Selbsttest rot · 3 --fix ohne ANTHROPIC_API_KEY
+#        2 Selbsttest rot · 3 --fix ohne PUTER_AUTH_TOKEN
 #  REPORT: CLAUDE-STILPOLITUR-REPORT.md + .claude_stilpolitur_report.json
 #  HISTORIE: data/claude_stil_history.jsonl (versioniert)
 #  STATE: data/claude_stil_state.json (versioniert, Fingerprint-Dedupe)
@@ -69,6 +71,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,7 +79,6 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import sprachkern as sk  # noqa: E402  (Schutzzonen, load_articles, write_verified)
 import post_utils  # noqa: E402
-import llm_client  # noqa: E402
 
 try:
     import yaml  # noqa: E402
@@ -91,11 +93,24 @@ STIL_FILE = os.path.join(BLOG_DIR, "data", "schreibstil.yaml")
 BRAND_FILE = os.path.join(BLOG_DIR, "data", "brand_brain.yaml")
 CONFIG_FILE = os.path.join(BLOG_DIR, "data", "ki_redaktion.yaml")
 
-ENGINE = "claude-stilpolitur (Claude 3.5 Sonnet, personalisiert)"
+ENGINE = "claude-stilpolitur (Claude, kostenlos ohne API, personalisiert)"
+BRUECKE = os.path.join(BLOG_DIR, "scripts", "puter_chat.mjs")
 
-# Modell-SSOT: ausdrücklich Claude 3.5 Sonnet (Auftrag 25.09.2026).
+# Modell-SSOT: bestes KOSTENLOSES Claude-Modell (Auftrag 25.09.2026).
+# Frei-Liste = Puter-Katalog „Free, Unlimited Claude API“ – alles ohne
+# Anthropic-Abrechnung erreichbar (User-Pays-Gratis-Kontingent).
+FREIE_CLAUDE_MODELLE = (
+    "claude-fable-5-1", "claude-fable-5",
+    "claude-opus-5-5", "claude-opus-5", "claude-opus-5-fast",
+    "claude-opus-4.8-fast", "claude-opus-4-8", "claude-opus-4-7",
+    "claude-opus-4-6", "claude-opus-4-5",
+    "claude-sonnet-5", "claude-sonnet-4-6", "claude-sonnet-4-5", "claude-sonnet-4",
+    "claude-haiku-4-5",
+)
+
 DEFAULT_CONFIG = {
-    "modell": "claude-3-5-sonnet-latest",
+    "modell": "claude-fable-5-1",           # bestes kostenloses Modell
+    "modell_fallback": ["claude-opus-5-5", "claude-sonnet-5"],
     "temperatur": 0.5,
     "max_tokens": 8192,
     "timeout": 300,
@@ -348,18 +363,44 @@ def auswahl(slug: str, body: str, state: dict, auffrischung_tage: int,
 
 
 # ----------------------------------------------------------- KI-Politur
+def puter_chat(system: str, user: str, modell: str, cfg: dict) -> str | None:
+    """Ein Aufruf über die Puter-Brücke (kostenlos, ohne API). None = Fehler."""
+    payload = json.dumps({
+        "system": system, "user": user, "model": modell,
+        "temperature": float(cfg["temperatur"]),
+        "max_tokens": int(cfg["max_tokens"]),
+    })
+    try:
+        r = subprocess.run(["node", BRUECKE], input=payload,
+                           capture_output=True, text=True,
+                           timeout=int(cfg["timeout"]))
+    except FileNotFoundError:
+        print("  🛑 node nicht gefunden – Node.js 24+ nötig (Brücke "
+              "scripts/puter_chat.mjs).", file=sys.stderr)
+        return None
+    except subprocess.TimeoutExpired:
+        print(f"  ⚠ puter_chat[{modell}]: Zeitüberschreitung", file=sys.stderr)
+        return None
+    if r.returncode != 0:
+        err = (r.stderr or "").strip().splitlines()
+        print(f"  ⚠ puter_chat[{modell}]: {err[-1][:200] if err else 'Exit ' + str(r.returncode)}",
+              file=sys.stderr)
+        return None
+    return (r.stdout or "").strip() or None
+
+
 def call_claude(system: str, user: str, cfg: dict) -> str | None:
-    """Claude 3.5 Sonnet über den Repo-llm_client. None = nicht möglich."""
-    return llm_client.chat(
-        "claude",
-        messages=[{"role": "user", "content": user}],
-        system=system,
-        model=cfg["modell"],
-        temperature=float(cfg["temperatur"]),
-        max_tokens=int(cfg["max_tokens"]),
-        timeout=int(cfg["timeout"]),
-        attempts=2,
-    )
+    """Claude KOSTENLOS über Puter.js (User-Pays, ohne Anthropic-API).
+
+    Modell-Kette: bestes kostenloses Modell zuerst (Auftrag), dann die
+    Fallbacks aus data/ki_redaktion.yaml. None = keine Antwort möglich.
+    """
+    kette = [cfg.get("modell")] + list(cfg.get("modell_fallback") or [])
+    for modell in [m for m in kette if m]:
+        text = puter_chat(system, user, str(modell), cfg)
+        if text:
+            return text
+    return None
 
 
 def clean_answer(text: str) -> tuple[str, list]:
@@ -378,7 +419,7 @@ def polish_body(system: str, user: str, orig_body: str, cfg: dict,
     caller = caller or call_claude
     answer = caller(system, user, cfg)
     if not answer:
-        return None, "KI-Antwort leer (Key/Netz/Modell – siehe llm_client-Meldung)"
+        return None, "KI-Antwort leer (Token/Netz/Modell – siehe puter_chat-Meldung)"
     neu, geruest = clean_answer(answer)
     if geruest:
         print(f"  ⚠ Prompt-Gerüst der KI-Antwort entfernt ({len(geruest)} Zeile(n))")
@@ -421,7 +462,40 @@ def _st_stilprofil() -> bool:
 
 def _st_modell() -> bool:
     cfg = load_config()
-    return str(cfg.get("modell", "")).startswith("claude-3-5-sonnet")
+    kette = [str(cfg.get("modell", ""))] + [str(m) for m in
+                                            (cfg.get("modell_fallback") or [])]
+    kette = [m for m in kette if m]
+    return bool(kette) and all(m in FREIE_CLAUDE_MODELLE for m in kette)
+
+
+def _st_ohne_anthropic_api() -> bool:
+    """Auftrag: Claude NUR ohne API – kein Anthropic-Key in Lane/Workflows.
+
+    Die Verbots-Strings werden bewusst dynamisch zusammengesetzt: ein
+    Klartext-Literal hier würde den Check selbst immer rot machen.
+    """
+    verboten = ("ANTH" + "ROPIC_API" + "_KEY", "api." + "anthropic" + ".com")
+    pfade = [os.path.abspath(__file__),
+             os.path.join(BLOG_DIR, ".github", "workflows", "claude-stilpolitur.yml"),
+             os.path.join(BLOG_DIR, ".github", "workflows", "content-engine-v2.yml")]
+    blob = []
+    for p in pfade:
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as fh:
+                blob.append(fh.read())
+    text = "\n".join(blob)
+    return (all(v not in text for v in verboten)
+            and "PUTER_AUTH_TOKEN" in text)
+
+
+def _st_bruecke() -> bool:
+    """Die Puter-Brücke existiert und spricht das vereinbarte Protokoll."""
+    if not os.path.exists(BRUECKE):
+        return False
+    with open(BRUECKE, encoding="utf-8") as fh:
+        src = fh.read()
+    return ("@heyputer/puter.js" in src and "PUTER_AUTH_TOKEN" in src
+            and "readFileSync(0" in src and "claude-fable-5-1" in src)
 
 
 def _st_schutzzonen() -> bool:
@@ -504,7 +578,7 @@ def _st_fake_caller() -> bool:
 SELFTEST = [
     ("ST1 Prompt-Kanon (Stil + Marke + Premium + Tabu)", _st_prompt, True),
     ("ST2 Stilprofil vollständig (schreibstil.yaml + brand_brain.yaml)", _st_stilprofil, True),
-    ("ST3 Modell ist Claude 3.5 Sonnet", _st_modell, True),
+    ("ST3 Modell-Kette nur kostenlose Claude-Modelle", _st_modell, True),
     ("ST4 Schutzzonen-Roundtrip (sprachkern)", _st_schutzzonen, True),
     ("ST5 Link-ZIEL-Änderung wird verworfen", _st_link_ziel, True),
     ("ST6 Anker-TEXT-Änderung wird verworfen", _st_anker_text, True),
@@ -515,6 +589,8 @@ SELFTEST = [
     ("ST11 Legitime Stil-Änderung wird akzeptiert", _st_legitim, True),
     ("ST12 Fingerprint stabil/empfindlich", _st_fingerprint, True),
     ("ST13 KI-Antwort-Gate (fake caller: heilt/schützt)", _st_fake_caller, True),
+    ("ST14 Ohne Anthropic-API (Auftrag: Claude nur ohne API)", _st_ohne_anthropic_api, True),
+    ("ST15 Puter-Brücke vorhanden (Protokoll + Gratis-Zugang)", _st_bruecke, True),
 ]
 
 
@@ -547,7 +623,7 @@ def selftest() -> int:
 # ----------------------------------------------------------- Report/Historie
 def write_report(rows: list, meta: dict, offen: int) -> None:
     L = [
-        "# ✍️ CLAUDE-STILPOLITUR-REPORT (Claude 3.5 Sonnet, personalisiert)",
+        "# ✍️ CLAUDE-STILPOLITUR-REPORT (Claude, kostenlos ohne API, personalisiert)",
         "",
         f"**Stand:** {sk.now_utc()} UTC",
         f"**Modus:** {meta['mode']} · **Modell:** `{meta['modell']}`",
@@ -565,7 +641,8 @@ def write_report(rows: list, meta: dict, offen: int) -> None:
     L += [
         "",
         "---",
-        "_Claude 3.5 Sonnet mit personalisiertem Prompt aus data/schreibstil.yaml "
+        "_Claude (kostenlos, ohne API: Puter.js User-Pays) mit personalisiertem "
+        "Prompt aus data/schreibstil.yaml "
         "+ data/brand_brain.yaml (Auftrag 25.09.2026). Läuft NACH der "
         "Offline-Optimierung (grammar_check + sprachglatt). Verifikation: "
         "Schutzzonen/Überschriften/Zahlen byte-identisch, Wortzahl ≥ 90 %. "
@@ -625,14 +702,16 @@ def main(argv: list | None = None) -> int:
     now = datetime.datetime.now(datetime.timezone.utc)
     do_fix = args.fix and not args.dry_run
 
-    if args.fix and not args.dry_run and not llm_client.available("claude"):
-        print("🛑 ANTHROPIC_API_KEY fehlt – die beauftragte Paid-Lane "
-              "(Claude 3.5 Sonnet) kann nicht laufen.")
-        print("   Einrichten: GitHub → Settings → Secrets → Actions → "
-              "ANTHROPIC_API_KEY")
+    if args.fix and not args.dry_run and not (os.environ.get("PUTER_AUTH_TOKEN") or "").strip():
+        print("🛑 PUTER_AUTH_TOKEN fehlt – der KOSTENLOSE Claude-Zugang "
+              "(Puter.js, ohne API) ist nicht eingerichtet.")
+        print("   Einrichten: puter.com → kostenloses Konto → Auth-Token erzeugen "
+              "(docs.puter.com) → GitHub → Settings → Secrets → Actions → "
+              "PUTER_AUTH_TOKEN")
         if os.environ.get("GITHUB_ACTIONS"):
-            print("::error title=Claude-Stilpolitur::ANTHROPIC_API_KEY fehlt – "
-                  "tägliche Stil-Politur (Claude 3.5 Sonnet) blockiert.")
+            print("::error title=Claude-Stilpolitur::PUTER_AUTH_TOKEN fehlt – "
+                  "kostenlose Claude-Stil-Politur blockiert (kein Anthropic-Key "
+                  "nötig, siehe docs/ANLEITUNG-CLAUDE-STILPOLITUR.md).")
         return 3
 
     only_file = None
