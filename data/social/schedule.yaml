@@ -1851,9 +1851,9 @@ items:
   date: '2026-09-25'
   time: 07:00
   scheduled_at: '2026-09-25T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: linkedin:2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser:takeaway:2026-09-25
   channel: linkedin
   slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
@@ -1863,9 +1863,9 @@ items:
   date: '2026-09-25'
   time: 07:45
   scheduled_at: '2026-09-25T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:vergleich:2026-09-25
   channel: bluesky
   slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
@@ -1875,9 +1875,9 @@ items:
   date: '2026-09-25'
   time: 08:15
   scheduled_at: '2026-09-25T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: threads:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:frage:2026-09-25
   channel: threads
   slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
@@ -1887,9 +1887,9 @@ items:
   date: '2026-09-25'
   time: 09:15
   scheduled_at: '2026-09-25T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife:nutzen:2026-09-25
   channel: facebook
   slug: 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife
@@ -1899,9 +1899,9 @@ items:
   date: '2026-09-25'
   time: 09:45
   scheduled_at: '2026-09-25T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:vergleich:2026-09-25
   channel: pinterest
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -1911,9 +1911,9 @@ items:
   date: '2026-09-25'
   time: '10:15'
   scheduled_at: '2026-09-25T10:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: kein lebender Pinterest-Token (pinterest_token.py)
 - id: instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:frage:2026-09-25
   channel: instagram
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -1923,9 +1923,9 @@ items:
   date: '2026-09-25'
   time: '11:45'
   scheduled_at: '2026-09-25T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:zahl:2026-09-25
   channel: bluesky
   slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
@@ -1935,9 +1935,9 @@ items:
   date: '2026-09-25'
   time: '12:15'
   scheduled_at: '2026-09-25T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: reddit:2026-09-03-hausratversicherung-kosten-leistungen-vergleich:nutzen:2026-09-25
   channel: reddit
   slug: 2026-09-03-hausratversicherung-kosten-leistungen-vergleich
