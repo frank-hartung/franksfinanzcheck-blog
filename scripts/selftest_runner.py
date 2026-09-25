@@ -357,11 +357,18 @@ def pruefen(python: str = "python3", uhr_probe: bool = True,
         datei = os.path.basename(pfad)
         if datei in AUSNAHMEN:
             continue
+        lauf_vorher = arbeitsbaum(baum_wurzel)
         code, tail, sek = _laufen([python, pfad, "--selftest"], deckel)
         laeufe.append({"wache": datei, "exit": code, "sekunden": sek, "tail": tail})
         if code != 0:
             befunde.append(f"scripts/{datei} --selftest Exit {code}: "
                             f"{tail[-1][:170] if tail else 'keine Ausgabe'}")
+        lauf_nachher = arbeitsbaum(baum_wurzel)
+        if lauf_vorher is not None and lauf_nachher is not None:
+            for zeile in sorted(lauf_nachher - lauf_vorher):
+                befunde.append(
+                    f"scripts/{datei} --selftest schrieb in den Arbeitsbaum "
+                    f"(C15): {zeile}")
         if not uhr_probe:
             continue
         if not os.path.isfile(clock):
