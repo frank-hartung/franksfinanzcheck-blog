@@ -102,6 +102,23 @@ test.describe('Newsletter', () => {
     }
   });
 
+  test('Abmeldeseite: Formular oder formloser Weg, kein toter Hinweis', async ({ page }) => {
+    await page.goto('/newsletter/abmelden/');
+    const text = await page.locator('body').innerText();
+    expect(text, 'Seite behauptet, sie könne nicht abmelden').not.toMatch(
+      /kann den Klick nicht ausführen/i,
+    );
+    const form = page.locator('form[action*="abmeldung"]');
+    if ((await form.count()) > 0) {
+      await expect(form.locator('input[type="email"]')).toHaveCount(1);
+      await expect(form.locator('button[type="submit"]')).toBeVisible();
+      const aktion = await form.getAttribute('action');
+      expect(aktion.startsWith('https://'), `Abmelde-action über http: ${aktion}`).toBe(true);
+    } else {
+      await expect(page.locator('a[href^="mailto:kontakt@franksfinanzcheck.de"]')).toBeVisible();
+    }
+  });
+
   test('Anmeldeseite: Formular mit Weg, oder ein Satz ohne Behauptung', async ({ page }) => {
     const fehler = watchErrors(page);
     await page.goto('/newsletter/');

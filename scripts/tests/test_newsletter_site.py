@@ -33,11 +33,12 @@ STATUS = "layouts/shortcodes/newsletter_status.html"
 WEG = "layouts/shortcodes/newsletter_weg.html"
 THEMEN = "layouts/shortcodes/newsletter_themen.html"
 MUSTER = "layouts/shortcodes/newsletter_muster.html"
+ABMELDEN = "layouts/shortcodes/newsletter_abmelde_form.html"
 STRIP = "layouts/_partials/newsletter_strip.html"
 DATEN = "layouts/_partials/newsletter_studio_data.html"
 PLAN = "layouts/_partials/newsletter_versandplan.html"
 KADENZ = "data/newsletter_kadenz.json"
-NEUE = [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP, DATEN, PLAN]
+NEUE = [FORM, STATUS, WEG, THEMEN, MUSTER, ABMELDEN, STRIP, DATEN, PLAN]
 CSS = "assets/css/extended/zz-newsletter.css"
 JS = "static/premium/ff-newsletter.js"
 JOURNEYS = ["content/newsletter/index.md", "content/newsletter-bestaetigung/index.md",
@@ -142,6 +143,28 @@ class Vorlagen(unittest.TestCase):
         self.assertIn("consent", template)
         self.assertRegex(template, r'name="consent"[^>]*required|required[^>]*name="consent"')
 
+    def test_einwilligung_ist_informiert_und_abhakbar(self):
+        """UWG § 7 + Art. 6/7/13 DSGVO: Wer, Wofür (inkl. Werbung), Widerruf, DS, Impressum."""
+        t = _ohne_kommentare(_text(FORM))
+        self.assertIn("Frank Hartung", t, "Verantwortlicher fehlt im Consent")
+        self.assertRegex(t, r"(?i)werbung|partnerlink",
+                         "Consent deckt die Partnerlinks in der Mail nicht ab")
+        self.assertIn("/datenschutz/", t)
+        self.assertIn("/impressum/", t)
+        self.assertIn("/newsletter/abmelden/", t)
+        self.assertIn("Art. 6 Abs. 1 lit. a", t)
+        self.assertNotRegex(t, r'name="consent"[^>]*checked|checked[^>]*name="consent"',
+                            "vorangekreuzte Einwilligung ist unwirksam")
+
+    def test_abmeldeformular_postet_ohne_js_und_ohne_anmeldeskript(self):
+        t = _ohne_kommentare(_text(ABMELDEN))
+        self.assertIn('method="post"', t)
+        self.assertNotIn("data-ff-nl", t,
+                         "das Anmelde-Skript darf den Widerruf nicht kapern")
+        self.assertIn("abmelde_action", t)
+        self.assertIn('name="email"', t)
+        self.assertIn("mailto:", t)
+
     def test_status_kurz_und_ohne_erfindnis(self):
         t = _text(STATUS)
         self.assertIn("nicht geschaltet", t)
@@ -153,7 +176,7 @@ class Vorlagen(unittest.TestCase):
 class Aussehen(unittest.TestCase):
     def test_jede_klasse_hat_eine_regel(self):
         benutzt = set()
-        for rel in [FORM, STATUS, WEG, THEMEN, MUSTER, STRIP, PLAN]:
+        for rel in [FORM, STATUS, WEG, THEMEN, MUSTER, ABMELDEN, STRIP, PLAN]:
             benutzt |= set(re.findall(r'class="([^"]+)"', _ohne_kommentare(_text(rel))))
         flach = {k.strip() for gruppe in benutzt for k in gruppe.split()
                  if (k.startswith("ff-nl") or k.startswith("newsletter-footer"))
@@ -328,7 +351,7 @@ class Daten(unittest.TestCase):
         daten = _text(DATEN).split("return")[-1]
         zurueck = set(re.findall(r'"([a-z_äöü]+)"', daten))
         gebr = set()
-        for rel in [FORM, STATUS, STRIP, WEG, THEMEN, MUSTER]:
+        for rel in [FORM, STATUS, STRIP, WEG, THEMEN, MUSTER, ABMELDEN]:
             gebr |= {t.split(".")[0] for t in re.findall(r"\$nl\.([a-z_äöü]+)",
                                                           _ohne_kommentare(_text(rel)))}
         self.assertEqual(set(), gebr - zurueck,

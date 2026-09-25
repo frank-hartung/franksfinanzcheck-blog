@@ -168,7 +168,8 @@ def pruefe(email: dict, *, konf: dict, materiale: list[dict] | None = None,
         if href.startswith("{{"):
             continue
         if href.startswith("mailto:"):
-            if not re.fullmatch(r"mailto:[^@\s]+@[^@\s]+\.[A-Za-z]{2,}", href):
+            adresse = href[7:].split("?", 1)[0].split("&", 1)[0]
+            if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[A-Za-z]{2,}", adresse):
                 funde.append(_regel("Q4", f"Antwortadresse {href!r} ist keine gültige Mail-Adresse"))
             continue
         if not href.strip() or href == "#":
@@ -299,9 +300,17 @@ def pruefe(email: dict, *, konf: dict, materiale: list[dict] | None = None,
     # ---- Q10 Rechtliches --------------------------------------------------
     fuss = next((b for b in blöcke if b.get("typ") == "fuss"), {})
     recht = e_mail.get("rechtliches", {})
-    if not str(recht.get("anschrift", "")).strip():
+    anschrift = str(recht.get("anschrift", "")).strip()
+    if not anschrift:
         funde.append(_regel("Q10", "keine ladungsfähige Anschrift in der Fußzeile – "
                                   "geschäftsmäßiger Versand braucht sie (§ 5 DDG)"))
+    elif not re.search(r"\b\d{5}\b", anschrift):
+        funde.append(_regel("Q10", "Anschrift ohne Postleitzahl – geschäftsmäßiger Versand "
+                                  "braucht Straße, PLZ und Ort in der Mail selbst "
+                                  "(§ 5 DDG, UWG § 5a), ein bloßer Name reicht nicht"))
+    if anschrift and not re.search(r"\b\d{5}\b", html):
+        funde.append(_regel("Q10", "keine PLZ in der gerenderten Fußzeile – die Anschrift "
+                                  "steht in der Konfiguration, aber nicht in der Mail"))
     if not str(recht.get("impressum_url", "")).startswith("https://"):
         funde.append(_regel("Q10", "Impressumslink fehlt oder ist kein https-Ziel"))
     if not str(recht.get("datenschutz_url", "")).startswith("https://"):
@@ -314,9 +323,12 @@ def pruefe(email: dict, *, konf: dict, materiale: list[dict] | None = None,
         funde.append(_regel("Q10", "Affiliate-/Partnerlinks in der Mail ohne Werbehinweis – "
                                   "Kennzeichnungspflicht (§ 5 Abs. 2 UWG, Rundfunk-Jugend-/"
                                   "Werberichtlinien)"))
-    if "abmelden" not in html.lower():
-        funde.append(_regel("Q10", "kein Wort „Abmelden“ am Link – eine eindeutige Beschriftung "
-                                  "verlangt RFC 8058"))
+    if not re.search(r'<a[^>]+href="[^"#]+"[^>]*>[^<]*[Aa]bmelden', html):
+        funde.append(_regel("Q10", "kein klickbarer Abmeldelink – das Wort allein reicht nicht "
+                                  "(§ 7 UWG, RFC 8058)"))
+    if not re.search(r"mailto:[^\"\s>]*abmeld", html, re.I):
+        funde.append(_regel("Q10", "kein formloser mailto-Widerruf im Fuß – der One-Click "
+                                  "darf nicht der einzige Weg sein (Art. 7 Abs. 3 DSGVO)"))
 
     # ---- Q11 Kontrast -----------------------------------------------------
     kontrast_messung = studio.kontrast_pruefung(konf)
@@ -645,6 +657,13 @@ def _selftest() -> int:
         pruefe_es(gefunden("Q10", kaputt(blocks=ohne_fuss,
                                         html=re.sub(r"Double-Opt-In", "", gut["html"]))),
                   "fehlender Rechtsfuß bleibt unentdeckt")
+        k10 = json.loads(json.dumps(konf))
+        k10["email"]["rechtliches"]["anschrift"] = "Frank Hartung"
+        pruefe_es(gefunden("Q10", pruefe(gut, konf=k10, materiale=MAT)),
+                  "Anschrift ohne PLZ bleibt unentdeckt")
+        pruefe_es(gefunden("Q10", kaputt(html=re.sub(
+            r"<a href=\"\{\{unsubscribe\}\}\"[^>]*>[^<]*[Aa]bmelden</a>", "", gut["html"]))),
+                  "klickbarer Abmeldelink fehlt als Fund")
         k11 = json.loads(json.dumps(konf))
         k11["design"]["dunkel"]["text"] = "#404040"
         pruefe_es(gefunden("Q11", pruefe(gut, konf=k11, materiale=MAT)),

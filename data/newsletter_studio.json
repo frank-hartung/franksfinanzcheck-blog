@@ -22,7 +22,7 @@
     "praeferenzen": "/newsletter/praeferenzen/",
     "abmelden": "/newsletter/abmelden/"
   },
-  "_doku_email": "Versandrahmen. `breite` 620 px: breiter wird in der Gmail-Vorschau und in Outlook-Kleinstfenstern beschnitten. `max_artikel` 5: mehr Rechnungen liest abends niemand, und der Puffer zur 102-KB-Grenze von Gmail bleibt (Wache Q1). `marken` sind EIGENE Platzhalter des Templates: {{unsubscribe}} (Abmeldung), {{update_profile}} (Präferenzen), {{mirror}} (Newsletter-Übersicht). Der Versand ersetzt sie pro Empfänger durch gültige Worker-Links (mit Token) oder Infoseiten (ohne Token) – sie dürfen niemals unbearbeitet in einer Mail stehen.",
+  "_doku_email": "Versandrahmen. `breite` 620 px: breiter wird in der Gmail-Vorschau und in Outlook-Kleinstfenstern beschnitten. `max_artikel` 5: mehr Rechnungen liest abends niemand, und der Puffer zur 102-KB-Grenze von Gmail bleibt (Wache Q1). `marken` sind EIGENE Platzhalter des Templates: {{unsubscribe}} (Abmeldung), {{update_profile}} (Präferenzen), {{mirror}} (Newsletter-Übersicht). Der Versand ersetzt sie pro Empfänger durch gültige Worker-Links (mit Token) oder das Abmelde-Formular der Site plus mailto (ohne Token) – niemals unbearbeitet, niemals als `?token=` ohne Wert. `rechtliches.anschrift` ist die ladungsfähige Anschrift (Straße, PLZ, Ort) und steht in jeder Mail.",
   "email": {
     "breite": 620,
     "max_artikel": 5,
@@ -39,7 +39,7 @@
     },
     "antwort_an": "kontakt@franksfinanzcheck.de",
     "rechtliches": {
-      "anschrift": "Frank Hartung · FranksFinanzcheck",
+      "anschrift": "Frank Hartung · Karl-Marx-Str. 13 · 19376 Ruhner Berge OT Marnitz",
       "impressum_url": "https://franksfinanzcheck.de/impressum/",
       "datenschutz_url": "https://franksfinanzcheck.de/datenschutz/",
       "werbung_hinweis": "Dieser Newsletter enthält als Werbung gekennzeichnete Links; die Provision ändert nichts an der Empfehlung (Details im Artikel und im Impressum)."

@@ -202,30 +202,83 @@ def transport_waehle(root: str, konf: dict, env: dict | None = None) -> tuple[st
     }
 
 
-def one_klick_abmeldung(token: str, env: dict | None = None) -> str:
-    """Die URL für den List-Unsubscribe-Header (One-Click-GET).
+def mailto_abmeldung(konf: dict | None = None) -> str:
+    """Der formlose Widerruf per Mail – gilt ohne Token, ohne Worker, ohne JS.
 
-    Sie muss auf den WORKER zeigen (GET /abmelden meldet direkt ab) –
-    der Mail-Client feuert einen headless GET ab, und dort darf das
-    Ergebnis stehen, ohne dass ein Mensch noch klickt. Die Hugo-Seite
-    /newsletter/abmelden/ ist die Bestätigungsseite für echte Browser-
-    Klicks im Mail-Body; beim headless GET bliebe dort beim Rendern
-    des Formulars nichts weiter passieren.
+    § 7 UWG / Art. 7 Abs. 3 DSGVO: der Widerruf darf kein Sonderwissen
+    verlangen. `mailto:` mit Betreff ist der Weg, der in jedem Client
+    funktioniert, auch wenn der One-Click-Header fehlt oder der Empfänger
+    (Testversand) kein Abo-Token hat.
     """
+    adresse = "kontakt@franksfinanzcheck.de"
+    if konf:
+        adresse = str((konf.get("email") or {}).get("antwort_an") or adresse).strip()
+    if "<" in adresse and ">" in adresse:
+        adresse = adresse[adresse.find("<") + 1:adresse.find(">")].strip()
+    subj = urllib.parse.quote("Newsletter abmelden")
+    body = urllib.parse.quote("Bitte diese Adresse vom Spar-Newsletter abmelden.")
+    return f"mailto:{adresse}?subject={subj}&body={body}"
+
+
+def one_klick_https(token: str, env: dict | None = None) -> str:
+    """HTTPS-One-Click (RFC 8058) – NUR mit echtem Token UND Worker.
+
+    Leerer Token erzeugt bewusst keinen `?token=`-Link: das wäre ein toter
+    Anker, Gmail blendet den Abmelde-Knopf dafür aus, und die Infoseite
+    kann den Klick nicht ausführen. Ohne Token bleibt der mailto-Weg.
+    """
+    token = (token or "").strip()
+    if not token:
+        return ""
     env = env or os.environ
     base = (env.get("NEWSLETTER_WORKER_BASE") or "").rstrip("/")
-    if base:
-        return f"{base}/abmeldung?token={token}"
-    return f"{GRUND_URL}/newsletter/abmelden/?token={token}"
+    if not base:
+        return ""
+    return f"{base}/abmeldung?token={urllib.parse.quote(token, safe='')}"
+
+
+def one_klick_abmeldung(token: str, env: dict | None = None) -> str:
+    """Kompatible Fassade: HTTPS wenn möglich, sonst mailto – nie leerer Token."""
+    return one_klick_https(token, env) or mailto_abmeldung()
+
+
+def abmelde_koepfe(token: str, env: dict | None = None,
+                   konf: dict | None = None) -> dict:
+    """List-Unsubscribe immer, One-Click-POST nur wenn HTTPS wirklich geht.
+
+    RFC 2369 erlaubt mehrere Ziele. RFC 8058 (`List-Unsubscribe-Post`)
+    darf NUR stehen, wenn die HTTPS-URL einen headless POST/GET sofort
+    abmeldet – sonst schickt Gmail einen POST an einen mailto-URI oder
+    eine statische Seite, und der Knopf ist Schauspiel.
+    """
+    https = one_klick_https(token, env)
+    teile = []
+    if https:
+        teile.append(f"<{https}>")
+    teile.append(f"<{mailto_abmeldung(konf)}>")
+    kopf = {"List-Unsubscribe": ", ".join(teile)}
+    if https:
+        kopf["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+    return kopf
+
+
+def kopfzeilen_liste(token: str, env: dict | None = None, konf: dict | None = None,
+                     *, transaktional: bool = False) -> dict:
+    """Alle listenrelevanten Kopfzeilen an einer Stelle (Resend + SMTP)."""
+    kopf = abmelde_koepfe(token, env, konf)
+    kopf["List-Id"] = "FranksFinanzcheck Spar-Newsletter <news.franksfinanzcheck.de>"
+    if not transaktional:
+        kopf["Precedence"] = "bulk"
+    return kopf
 
 
 def resend_payload(empfaenger: dict, konf: dict, env: dict | None = None) -> dict:
     """Reines Payload-Modell (für Tests OHNE Netz). Der Abmeldelink ist
-    pro Empfänger real (Token) – kein Platzhalter, kein Provider-Routing."""
+    pro Empfänger real (Token) – kein Platzhalter, kein Provider-Routing,
+    und ohne Token trotzdem ein gültiger mailto-Widerruf."""
     e_mail = (konf.get("email") or {})
     absender = e_mail.get("absender") or {}
-    token = empfaenger.get("token", "")
-    unsubscribe = one_klick_abmeldung(token, env)
+    token = empfaenger.get("token") or ""
     return {
         "from": formataddr((str(absender.get("name") or "FranksFinanzcheck"),
                             str(absender.get("email") or "news@franksfinanzcheck.de"))),
@@ -234,10 +287,8 @@ def resend_payload(empfaenger: dict, konf: dict, env: dict | None = None) -> dic
         "html": empfaenger["html"],
         "text": empfaenger.get("text") or "",
         "reply_to": e_mail.get("antwort_an") or "",
-        "headers": {
-            "List-Unsubscribe": f"<{unsubscribe}>",
-            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-        },
+        "headers": kopfzeilen_liste(token, env, konf,
+                                    transaktional=bool(empfaenger.get("transaktional"))),
         # Tracking aus – EIGENES Versprechen (Studio: tracking_oeffnungen=false,
         # Datenschutz-§8), unabhängig vom Konto-Default von Resend: ohne diese
         # Felder würde der Resend-Konto-Default (open_tracking=true) gelten.
@@ -328,9 +379,9 @@ def smtp_mime_bauen(empfaenger: dict, konf: dict, env: dict | None = None) -> Em
     if reply:
         msg["Reply-To"] = reply
     token = empfaenger.get("token") or ""
-    if token:
-        msg["List-Unsubscribe"] = f"<{one_klick_abmeldung(token, env)}>"
-        msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+    for name, wert in kopfzeilen_liste(
+            token, env, konf, transaktional=bool(empfaenger.get("transaktional"))).items():
+        msg[name] = wert
     if empfaenger.get("preheader"):
         msg["X-Preheader"] = str(empfaenger["preheader"])[:300]
     msg["Message-ID"] = make_msgid(domain="franksfinanzcheck.de")
@@ -476,6 +527,7 @@ def sende_datei(datei: str, root: str = BLOG_DIR, env: dict | None = None,
             "text": person.get("text") or "",
             "betreff": person.get("betreff") or betreff,
             "preheader": person.get("preheader") or preheader,
+            "transaktional": bool(person.get("transaktional")),
         }
         if transport == "dryrun":
             status, meldung = "dryrun", "nicht gesendet (dry-run)"
@@ -627,7 +679,8 @@ def sende_bestaetigung(token: str, root: str = BLOG_DIR, env: dict | None = None
             "ausgabe": f"bestaetigung-{token[:8]}",
             "betreff": betreff,
             "empfaenger": [{"email": email, "token": token,
-                            "html": html_seite, "text": text_alt}],
+                            "html": html_seite, "text": text_alt,
+                            "transaktional": True}],
         }, fh, ensure_ascii=False)
     try:
         rc = sende_datei(datei, root=root, env=env, konf=konf, schlafen=schlafen)
@@ -694,7 +747,8 @@ def sende_nachgang(root: str = BLOG_DIR, env: dict | None = None, schlafen=None)
                 "ausgabe": f"bestaetigung-nachgang-{token[:8]}",
                 "betreff": betreff,
                 "empfaenger": [{"email": person["email"], "token": token,
-                                "html": html_seite, "text": text_alt}],
+                                "html": html_seite, "text": text_alt,
+                                "transaktional": True}],
             }, fh, ensure_ascii=False)
         try:
             rc = sende_datei(datei, root=root, env=env, konf=konf, schlafen=schlafen)
@@ -805,9 +859,10 @@ def _selftest() -> int:
 
     # 1) Resend-Payload: pro Empfänger, echter Abmeldelink, One-Click-Header.
     #    Der One-Click muss auf den WORKER zeigen: der Mail-Client feuert einen
-    #    headless GET ab, der direkt abmeldet. Die Hugo-Seite ist nur für echte
-    #    Browser-Klicks (Bestätigungsseite) gedacht und würde im headless GET
-    #    nichts abmelden – genau der Bug, den dieser Selftest einklemmt.
+    #    headless GET/POST ab, der direkt abmeldet. Die Hugo-Seite ist das
+    #    Formular für den Browser – im headless GET würde sie nichts
+    #    abmelden. Ohne Token darf deshalb KEIN `?token=`-HTTPS stehen
+    #    (Gmail blendet den Knopf sonst aus) – der mailto-Widerruf bleibt.
     worker_env = {"NEWSLETTER_WORKER_BASE": "https://abos.beispiel.de"}
     payload = resend_payload({"email": "A@Beispiel.de", "token": "t-123",
                               "html": "<p>hi</p>", "text": "hi",
@@ -815,35 +870,68 @@ def _selftest() -> int:
                              konf, env=worker_env)
     pruefe(payload["to"] == ["A@Beispiel.de"], "Resend: Empfänger fehlt")
     pruefe(payload["from"].endswith("news@franksfinanzcheck.de>"), "Resend: Absender falsch")
-    pruefe(payload["headers"]["List-Unsubscribe"]
-           == "<https://abos.beispiel.de/abmeldung?token=t-123>",
-           f"Resend: One-Click zeigt nicht auf den Worker: "
-           f"{payload['headers']['List-Unsubscribe']}")
+    lu = payload["headers"]["List-Unsubscribe"]
+    pruefe("<https://abos.beispiel.de/abmeldung?token=t-123>" in lu,
+           f"Resend: One-Click zeigt nicht auf den Worker: {lu}")
+    pruefe("mailto:kontakt@franksfinanzcheck.de" in lu,
+           f"Resend: formloser mailto-Widerruf fehlt im Header: {lu}")
     pruefe(payload["headers"]["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click",
            "Resend: One-Click-Header fehlt")
+    pruefe(payload["headers"].get("List-Id", "").startswith("FranksFinanzcheck"),
+           "Resend: List-Id fehlt")
+    pruefe(payload["headers"].get("Precedence") == "bulk", "Resend: Precedence bulk fehlt")
     pruefe(payload["subject"] == "Betreff der Woche", "Resend: Betreff fehlt")
     pruefe(payload.get("open_tracking") is False and payload.get("click_tracking") is False,
            "Resend: Tracking nicht explizit aus (Konto-Default würde sonst greifen)")
-    # Ohne Worker-Basis: ehrlicher Fallback auf die Hugo-Seite (menschlich
-    # klickbar), nicht ein erfundener Endpunkt.
+    # Ohne Worker-Basis: mailto, KEIN toter `?token=`-HTTPS auf die
+    # statische Seite (die den Token nicht lesen kann).
     payload_fallback = resend_payload({"email": "A@Beispiel.de", "token": "t-123",
                                        "html": "<p>hi</p>", "text": "hi"}, konf,
                                       env={})
-    pruefe(payload_fallback["headers"]["List-Unsubscribe"]
-           == f"<{GRUND_URL}/newsletter/abmelden/?token=t-123>",
-           f"Resend: Fallback ohne Worker-Basis falsch: "
-           f"{payload_fallback['headers']['List-Unsubscribe']}")
+    lu_fb = payload_fallback["headers"]["List-Unsubscribe"]
+    pruefe("mailto:kontakt@franksfinanzcheck.de" in lu_fb,
+           f"Resend: Fallback ohne Worker ist kein mailto: {lu_fb}")
+    pruefe("?token=" not in lu_fb,
+           f"Resend: Fallback setzt leeren/wirkungslosen Token-HTTPS: {lu_fb}")
+    pruefe("List-Unsubscribe-Post" not in payload_fallback["headers"],
+           "Resend: One-Click-POST ohne HTTPS-Ziel wäre Schauspiel")
+    # Testversand ohne Token: Header trotzdem da, mailto only.
+    payload_test = resend_payload({"email": "A@Beispiel.de", "token": "",
+                                   "html": "<p>hi</p>", "text": "hi"}, konf,
+                                  env=worker_env)
+    lu_t = payload_test["headers"]["List-Unsubscribe"]
+    pruefe("mailto:kontakt@franksfinanzcheck.de" in lu_t,
+           f"Resend/Test: ohne Token kein mailto: {lu_t}")
+    pruefe("?token=" not in lu_t, f"Resend/Test: leerer Token im Header: {lu_t}")
+    pruefe("List-Unsubscribe-Post" not in payload_test["headers"],
+           "Resend/Test: One-Click-POST ohne Token")
+    # Bestätigung ist transaktional – kein Precedence: bulk.
+    payload_doi = resend_payload({"email": "A@Beispiel.de", "token": "t-123",
+                                  "html": "<p>hi</p>", "transaktional": True},
+                                 konf, env=worker_env)
+    pruefe(payload_doi["headers"].get("Precedence") != "bulk",
+           "Resend: Bestätigung darf nicht als Bulk markiert sein")
 
     # 2) SMTP-MIME: Envelop 1:1, alternative Teils, List-Unsubscribe (Worker).
     msg = smtp_mime_bauen({"email": "b@beispiel.de", "token": "t-456",
                            "html": "<html><body>hi</body></html>", "text": "hi"},
                           konf, env=worker_env)
     pruefe(msg["To"] == "b@beispiel.de", "SMTP: To fehlt")
-    pruefe(str(msg["List-Unsubscribe"])
-           == "<https://abos.beispiel.de/abmeldung?token=t-456>",
+    pruefe("<https://abos.beispiel.de/abmeldung?token=t-456>" in str(msg["List-Unsubscribe"]),
            f"SMTP: One-Click zeigt nicht auf den Worker: {msg['List-Unsubscribe']}")
+    pruefe("mailto:kontakt@franksfinanzcheck.de" in str(msg["List-Unsubscribe"]),
+           f"SMTP: formloser mailto fehlt: {msg['List-Unsubscribe']}")
     pruefe(msg["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click",
            "SMTP: One-Click-Header fehlt")
+    msg_ohne = smtp_mime_bauen({"email": "c@beispiel.de", "token": "",
+                                "html": "<p>hi</p>", "text": "hi"},
+                               konf, env=worker_env)
+    pruefe(msg_ohne["List-Unsubscribe"] is not None,
+           "SMTP/Test: List-Unsubscribe ohne Token darf nicht entfallen")
+    pruefe("?token=" not in str(msg_ohne["List-Unsubscribe"]),
+           f"SMTP/Test: leerer Token im Header: {msg_ohne['List-Unsubscribe']}")
+    pruefe(msg_ohne["List-Unsubscribe-Post"] is None,
+           "SMTP/Test: One-Click-POST ohne HTTPS-Ziel")
     teile = [t.get_content_type() for t in msg.get_payload()]
     pruefe("text/plain" in teile and "text/html" in teile, "SMTP: Alternative fehlt")
 

@@ -125,7 +125,7 @@ class Fundrichtigkeit(unittest.TestCase):
 
     def test_fehtender_abmeldelink_ist_rechtspflicht(self):
         """Nur der Text „Abmelden“ reicht nicht: weg ist die Pflichtangabe."""
-        kaputt = re.sub(r"<a href=\"\{\{unsubscribe\}\}\"[^>]*>Abmelden</a>", "",
+        kaputt = re.sub(r"<a href=\"\{\{unsubscribe\}\}\"[^>]*>[^<]*[Aa]bmelden</a>", "",
                         self.email["html"])
         self.assertNotEqual(kaputt, self.email["html"], "die Mutation muss etwas ändern")
         funde, _, er = self._codes(kaputt)

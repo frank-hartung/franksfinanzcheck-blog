@@ -8,15 +8,18 @@
  *   POST /anmeldung      Formular-Abgabe (Honeypot, Zeitfalle, Consent,
  *                        E-Mail-Prüfung, Deduplizierung, Rate-Limit)
  *   POST /bestaetigung   Double-Opt-In: Token bestaetigt die Adresse
- *   POST /abmeldung      Abmeldung per Token (POST aus der Seite,
- *   GET  /abmeldung      GET fuer den One-Klick-Abmelde-Link in Mails)
+ *   POST /abmeldung      Abmeldung per Token (Body ODER Query – RFC 8058
+ *                        One-Click-POST traegt den Token in der URL) ODER
+ *                        per E-Mail-Feld (Formular ohne Token, immer 200)
+ *   GET  /abmeldung      One-Klick mit Token; ohne Token das Formular
  *   POST /praferenzen    Themenwahl pro Abo (Token + themen[])
  *   GET  /status         Token -> {status, themen} (ohne Adresse!)
  *   GET  /healthz        Lebendigkeits-Pruefung fuer die Wache (+ `takt`:
  *                        letzter Dispatch je Cron-Takt, ohne Adressen)
  *   GET  /export/…       NUR mit Secret (X-FF-Key / ?sluessel=):
  *                        Abonnenten-Liste, Pending-Liste, Eintrag nach
- *                        Token, Versand-Versuche melden (Catch-up).
+ *                        Token, Eintrag nach E-Mail (/export/kontakt),
+ *                        Versand-Versuche melden (Catch-up).
  *   scheduled()          TAKTGEBER (seit 25.09.2026): Cloudflare Cron
  *                        Triggers starten den Digest (Di/Fr 04:30 UTC),
  *                        die Kadenz-Wache (05:05 UTC) und den Nachgang
@@ -556,29 +559,91 @@ async function bestaetigung(request, env) {
   return antwort_mit('unbekannt', 'Dieser Link passt nicht zum aktuellen Zustand der Anmeldung (z. B. bereits abgemeldet). Wenn du den Newsletter wieder möchtest: neu anmelden unter franksfinanzcheck.de/newsletter/', env, request, 410);
 }
 
+const ABMELDE_OK = 'Abgemeldet – ab sofort kommt keine Ausgabe mehr. Formlos geht es auch an kontakt@franksfinanzcheck.de.';
+
+function abmelde_formular(env) {
+  const html = HTML_KOPF
+    + '<h1>Newsletter abmelden</h1>'
+    + '<p>Ein Klick, keine Verhandlung. Adresse eintragen – du bist von der Liste. Wir fragen nicht nach dem Grund.</p>'
+    + '<form method="post" action="/abmeldung">'
+    + '<p><label for="mail">E-Mail-Adresse</label><br>'
+    + '<input id="mail" type="email" name="email" required autocomplete="email" '
+    + 'style="width:100%;padding:10px;margin:8px 0;font:inherit;border:1px solid #DCE6E1;border-radius:8px"></p>'
+    + '<p aria-hidden="true" style="position:absolute;left:-9999px">'
+    + '<label>Bitte dieses Feld freilassen</label>'
+    + '<input type="text" name="website" tabindex="-1" autocomplete="off"></p>'
+    + '<button class="btn" type="submit">Newsletter abmelden</button>'
+    + '</form>'
+    + '<p class="hinweis">Formlos geht es auch an '
+    + '<a href="mailto:kontakt@franksfinanzcheck.de?subject=Newsletter%20abmelden">kontakt@franksfinanzcheck.de</a>.</p>'
+    + HTML_FUSS;
+  return new Response(html, {
+    status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) },
+  });
+}
+
 async function abmeldung(request, env, url) {
-  let token = '';
-  if (request.method === 'GET') {
-    token = String(url.searchParams.get('token') || '').trim();
-  } else {
+  // Token aus der URL ZUERST: RFC 8058 (Gmail/Yahoo) POSTet an die
+  // List-Unsubscribe-URL, der Token steht in der Query, der Body ist
+  // "List-Unsubscribe=One-Click". Wer nur den Body liest, sieht keinen
+  // Token – und der One-Click-Knopf im Postfach ist tot.
+  let token = String(url.searchParams.get('token') || '').trim();
+  let email = '';
+  let falle = '';
+  if (request.method !== 'GET') {
     const daten = await koerper_lesen(request);
-    token = String((daten && daten.token && daten.token[0]) || '').trim();
+    if (!token) token = String((daten && daten.token && daten.token[0]) || '').trim();
+    email = email_norm(erstein(daten || {}, 'email'));
+    falle = erstein(daten || {}, 'website');
   }
-  const eintrag = await token_eintrag(env, token);
-  if (!eintrag) {
-    return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: „Abmelden" in der letzten Mail, oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
+
+  if (token) {
+    const eintrag = await token_eintrag(env, token);
+    if (!eintrag) {
+      return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – es wurde nichts geändert. Kürzester Weg: das Formular unter franksfinanzcheck.de/newsletter/abmelden/ oder formlos per Mail an kontakt@franksfinanzcheck.de.', env, request, 404);
+    }
+    if (eintrag.status === 'unsubscribed') {
+      return antwort_mit('bereits-abgemeldet', 'Diese Adresse ist bereits abgemeldet – du bekommst keine Ausgabe mehr. Weitere Schritte sind nicht nötig.', env, request);
+    }
+    eintrag.status = 'unsubscribed';
+    eintrag.abbestellt = new Date().toISOString();
+    eintrag.grund = 'link';
+    await abo_schreiben(env.ABO, eintrag);
+    const text = eintrag.bestaetigt
+      ? ABMELDE_OK
+      : 'Deine (noch nicht bestätigte) Anmeldung wurde zurückgenommen – es kommt keine Bestätigungsmail und keine Ausgabe mehr.';
+    return antwort_mit('abgemeldet', text, env, request);
   }
-  if (eintrag.status === 'unsubscribed') {
-    return antwort_mit('bereits-abgemeldet', 'Diese Adresse ist bereits abgemeldet – du bekommst keine Ausgabe mehr. Weitere Schritte sind nicht nötig.', env, request);
+
+  if (request.method === 'GET') {
+    if (wantHtml(request)) return abmelde_formular(env);
+    return json({ status: 'formular', text: 'Bitte E-Mail-Adresse per POST senden oder den Link aus der Mail verwenden.' }, 200, env);
   }
-  eintrag.status = 'unsubscribed';
-  eintrag.abbestellt = new Date().toISOString();
-  eintrag.grund = 'link';
-  await abo_schreiben(env.ABO, eintrag);
-  const text = eintrag.bestaetigt
-    ? 'Abgemeldet – ab sofort kommt keine Ausgabe mehr. Der Link in jeder Mail bleibt derselbe Weg; formlos geht es auch an kontakt@franksfinanzcheck.de.'
-    : 'Deine (noch nicht bestätigte) Anmeldung wurde zurückgenommen – es kommt keine Bestätigungsmail und keine Ausgabe mehr.';
-  return antwort_mit('abgemeldet', text, env, request);
+
+  // Formular ohne Token. Honeypot und unbekannte Adressen liefern
+  // dieselbe Erfolgsmeldung – kein Enumerationsleck, kein Captcha.
+  if (falle) {
+    await falle_zahlen(env);
+    return antwort_mit('abgemeldet', ABMELDE_OK, env, request);
+  }
+  const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+  const ip_key = `rat:${await sha256_kurz(ip || 'unbekannt')}`;
+  const rate = (await env.ABO.get(ip_key, 'json')) || { z: 0 };
+  if (rate.z >= MAX_ANMELDUNGEN_PRO_IP) {
+    return antwort_mit('fehler', 'Zu viele Versuche in kurzer Zeit. Bitte in ein paar Minuten erneut versuchen – oder schreib eine Mail an kontakt@franksfinanzcheck.de.', env, request, 429);
+  }
+  await env.ABO.put(ip_key, JSON.stringify({ z: rate.z + 1, ts: Date.now() }), { expirationTtl: TTL_RATE_SEK });
+  if (!EMAIL_RE.test(email) || email.length > 254) {
+    return antwort_mit('fehler', 'Die E-Mail-Adresse sieht nicht gültig aus – bitte Adresse prüfen (z. B. du@beispiel.de).', env, request, 400);
+  }
+  const eintrag = await abo_lesen(env.ABO, email);
+  if (eintrag && eintrag.status !== 'unsubscribed') {
+    eintrag.status = 'unsubscribed';
+    eintrag.abbestellt = new Date().toISOString();
+    eintrag.grund = 'formular';
+    await abo_schreiben(env.ABO, eintrag);
+  }
+  return antwort_mit('abgemeldet', ABMELDE_OK, env, request);
 }
 
 async function praferenzen(request, env) {
@@ -718,6 +783,15 @@ async function exportiert(request, env, p, url) {
       status: eintrag.status, email: eintrag.email, token: eintrag.token,
       themen: eintrag.themen || [], seit: eintrag.seit, bestaetigt: eintrag.bestaetigt,
       abbestellt: eintrag.abbestellt, grund: eintrag.grund || null,
+    }, 200, env);
+  }
+  if (p === '/export/kontakt') {
+    const email = email_norm(url.searchParams.get('email') || '');
+    const eintrag = email ? await abo_lesen(env.ABO, email) : null;
+    if (!eintrag) return json({ status: 'unbekannt' }, 404, env);
+    return json({
+      status: eintrag.status, email: eintrag.email, token: eintrag.token,
+      themen: eintrag.themen || [],
     }, 200, env);
   }
   if (p === '/export/versuch' && request.method === 'POST') {

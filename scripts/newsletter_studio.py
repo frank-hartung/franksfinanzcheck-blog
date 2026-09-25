@@ -759,6 +759,10 @@ def blocks_bauen(material: list[dict], datum: datetime.date, konf: dict) -> list
     # Pause nach Plan aussieht statt nach Funkstille.
     naechste = (rahmen["naechste"] + " – und nur, wenn es etwas zu rechnen gibt.") \
         if rahmen["naechste_zeile"] else ""
+    antwort = e_mail.get("antwort_an") or "kontakt@franksfinanzcheck.de"
+    formlos = ("mailto:" + str(antwort).strip()
+               + "?subject=Newsletter%20abmelden"
+               + "&body=Bitte%20diese%20Adresse%20vom%20Spar-Newsletter%20abmelden.")
     bl.append({"typ": "fuss",
                "anschrift": e_mail.get("rechtliches", {}).get("anschrift", ""),
                "impressum": e_mail.get("rechtliches", {}).get("impressum_url", ""),
@@ -766,7 +770,9 @@ def blocks_bauen(material: list[dict], datum: datetime.date, konf: dict) -> list
                "hinweis": "Du erhältst diese Mail, weil du dich auf franksfinanzcheck.de "
                           "mit Double-Opt-In angemeldet hast.",
                "naechste": naechste,
-               "werbung": e_mail.get("rechtliches", {}).get("werbung_hinweis", "")})
+               "werbung": e_mail.get("rechtliches", {}).get("werbung_hinweis", ""),
+               "antwort": antwort,
+               "formlos": formlos})
     return bl
 
 
@@ -894,13 +900,19 @@ def render_html(blocks: list[dict], *, betreff: str, vorlage_text: str, datum: d
             naechste = (f'<p class="dk-text" style="margin:0 0 10px;font-family:{schrift};'
                         f'font-size:13px;line-height:1.6;color:{h["sekundaer"]};">'
                         f'<strong>{_esc(b["naechste"])}</strong></p>') if b.get("naechste") else ""
+            formlos = str(b.get("formlos") or "mailto:kontakt@franksfinanzcheck.de?subject=Newsletter%20abmelden")
             zeilen.append(
                 f'<tr><td class="kachel dk-karte" style="padding:18px 24px 22px;border-top:1px solid {h["grenze"]};'
                 f'border-radius:0 0 {runden}px {runden}px;background:{h["karte"]}">{naechste}'
                 f'<p class="dk-text" style="margin:0 0 8px;font-family:{schrift};font-size:12.5px;'
-                f'line-height:1.6;color:{h["sekundaer"]};">{_esc(b["hinweis"])} '
+                f'line-height:1.6;color:{h["sekundaer"]};">{_esc(b["hinweis"])}</p>'
+                f'<p class="dk-text" style="margin:0 0 12px;font-family:{schrift};font-size:15px;'
+                f'line-height:1.6;color:{h["text"]};">'
                 f'<a href="{_esc(marken.get("unsubscribe", "#"))}" style="color:{h["link"]};'
-                f'font-weight:700;text-decoration:underline;">Abmelden</a></p>'
+                f'font-weight:700;text-decoration:underline;">Newsletter abmelden</a>'
+                f' · oder formlos an '
+                f'<a href="{_esc(formlos)}" style="color:{h["link"]};text-decoration:underline;">'
+                f'{_esc((b.get("antwort") or "kontakt@franksfinanzcheck.de"))}</a></p>'
                 f'<p style="margin:0 0 8px;font-family:{schrift};font-size:12.5px;line-height:1.6;'
                 f'color:{h["sekundaer"]};">{" · ".join(marken_links) if marken_links else ""}</p>'
                 f'<p class="dk-text" style="margin:0;font-family:{schrift};font-size:12.5px;line-height:1.6;'
@@ -971,7 +983,9 @@ def render_text(blocks: list[dict], *, betreff: str, konf: dict) -> str:
             zeilen += ["--"]
             if b.get("naechste"):
                 zeilen.append(b["naechste"])
-            zeilen += [b["hinweis"], "Abmelden: " + str(_marken(konf)["unsubscribe"]),
+            zeilen += [b["hinweis"],
+                       "Newsletter abmelden: " + str(_marken(konf)["unsubscribe"]),
+                       "Formlos abmelden: " + str(b.get("formlos") or b.get("antwort") or ""),
                        "Präferenzen: " + str(_marken(konf)["profil"]),
                        "Im Browser: " + str(_marken(konf)["mirror"]), b["anschrift"],
                        "Impressum: " + b["impressum"], "Datenschutz: " + b["datenschutz"]]

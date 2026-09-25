@@ -388,7 +388,10 @@ def pruefe_capture(root: str, offentlich: str = "") -> tuple[list, list, str]:
                  "Anmeldung nach DSGVO unzulässig beworben", "doi-fehlt"),
                 ("/datenschutz/", "kein Link zu den Datenschutzhinweisen an der "
                  "Anmeldestelle – ohne den Verweis ist die Einwilligung nicht "
-                 "informiert", "datenschutz-link")):
+                 "informiert", "datenschutz-link"),
+                ("/impressum/", "kein Link zum Impressum an der Anmeldestelle – "
+                 "Art. 13 DSGVO verlangt die Identität des Verantwortlichen "
+                 "bei der Erhebung", "impressum-link")):
             if marke not in seite:
                 funde.append(("N5", grund, code))
         if action and "<form" not in seite:
@@ -484,22 +487,21 @@ def marken_einsetzen(html: str, text: str, token: str,
     """Die Studio-Marken in echte, PRO EMPFÄNGER gültige Links auflösen.
 
     Mit Token zeigen die Links auf die Journey-ENDPUNKTE des Workers
-    (eigene Subdomain, selbe Domain): GET /abmelden meldet direkt ab
-    (derselbe One-Click-Weg wie der List-Unsubscribe-Header), /praferenzen
-    rendert die Auswahl mit der aktuellen Häkchen-Stellung. Der Worker
-    rendert pro Anfrage – das Token darf in das HTML, und ohne JavaScript
-    funktioniert das Formular, weil es ein normales POST-Formular ist.
-    Die Blog-Seiten /newsletter/abmelden/ & /newsletter/praeferenzen/
-    bleiben die INFO-Seiten (Daten, Wege, Rechtliches) ohne Token.
-    Ohne Token (Testversand an fremde Adressen) zeigen die Links auf
-    diese Info-Seiten; dort steht der ehrliche Weg (formlos per Mail).
+    (eigene Subdomain, selbe Domain): GET /abmeldung?token=… meldet direkt
+    ab (derselbe One-Click-Weg wie der List-Unsubscribe-Header),
+    /praferenzen rendert die Auswahl. Ohne Token (Testversand an Adressen
+    ohne Abo) zeigen die Links auf die Abmelde-Seite – dort steht seit
+    25.09.2026 ein funktionierendes Formular plus formloser mailto, nie
+    ein `?token=` ohne Wert (das blendet Gmail den Abmelde-Knopf aus).
     {{mirror}} zeigt auf die Anmeldeseite – es gibt keinen Webbasis-Mirror
     dieser Ausgabe, und ein erfundener Link wäre ein toter Anker.
     """
     basis = (worker_basis or "").rstrip("/")
+    token = (token or "").strip()
     if token and basis:
-        abmelden = f"{basis}/abmeldung?token={token}"
-        profil = f"{basis}/praferenzen?token={token}"
+        q = urllib.parse.quote(token, safe="")
+        abmelden = f"{basis}/abmeldung?token={q}"
+        profil = f"{basis}/praferenzen?token={q}"
     else:
         abmelden = f"{GRUND_URL}/newsletter/abmelden/"
         profil = f"{GRUND_URL}/newsletter/praeferenzen/"
@@ -511,6 +513,47 @@ def marken_einsetzen(html: str, text: str, token: str,
         html = html.replace(marke, ziel)
         text = text.replace(marke, ziel)
     return html, text
+
+
+_LEERER_TOKEN = re.compile(r"[?&]token=(?:&|\"|'|\s|$)")
+
+
+def marken_pflicht(html: str, text: str) -> str:
+    """Fail-closed: eine Mail mit unersetzten Marken oder leerem Token
+    darf das Haus nicht verlassen. → Fehlertext oder \"\"."""
+    gebündelt = f"{html}\n{text}"
+    reste = [m for m in ("{{unsubscribe}}", "{{update_profile}}", "{{mirror}}")
+             if m in gebündelt]
+    if reste:
+        return ("Platzhalter unersetzt: " + ", ".join(reste)
+                + " – der Abmeldelink wäre tot")
+    if _LEERER_TOKEN.search(gebündelt):
+        return "leerer Abmelde-Token im Link – Gmail blendet den Knopf aus"
+    if "abmelden" not in html.lower() and "abmelden" not in text.lower():
+        return "kein Wort „Abmelden“ in der fertigen Mail"
+    return ""
+
+
+def test_token_fuer(adresse: str, base: str, key: str) -> str:
+    """Token eines bestehenden Abos für den Testversand – ohne neues Abo.
+
+    Ein Testversand darf keine Adresse in die Liste schreiben (kein
+    Consent). Wenn die Testadresse schon aktiv oder pending ist, bekommt
+    sie denselben One-Click wie die Live-Ausgabe. Sonst bleibt der Token
+    leer und marken_einsetzen fällt auf das Abmelde-Formular + mailto.
+    """
+    if not (adresse and base and key):
+        return ""
+    try:
+        antwort = versand.worker_abfrage("/export/kontakt", {"email": adresse},
+                                         base=base, key=key)
+    except (RuntimeError, OSError):
+        return ""
+    if not isinstance(antwort, dict):
+        return ""
+    if antwort.get("status") not in ("active", "pending"):
+        return ""
+    return str(antwort.get("token") or "").strip()
 
 
 def themen_filter(artikel: list[dict], themen: list[str]) -> list[dict]:
@@ -723,8 +766,10 @@ def _versand_test(root: str, html: str, text: str, betreff: str,
 
     Kein fremdes Konto, kein Listen-Bezug, kein „Kontakt anlegen“-Tanz:
     die Envelope ist so ehrlich wie eine einzelne Mail an eine Person.
-    Die Marken zeigen ohne Token auf die Journey-Seiten (dort steht der
-    ehrliche Weg, formlos per Mail).
+    Hat die Testadresse bereits ein Abo (active/pending), bekommt sie
+    denselben One-Click-Abmeldelink wie die Live-Ausgabe. Sonst zeigen
+    Body und Header auf das Abmelde-Formular plus mailto – nie auf einen
+    leeren Token, nie ohne Widerrufsweg.
     """
     adressen, fehler = test_adressen_lesen(test_adresse)
     if fehler or not adressen:
@@ -735,11 +780,26 @@ def _versand_test(root: str, html: str, text: str, betreff: str,
     if roh_reply and not email_aus_text(roh_reply):
         print(f"   ⚠️  Antwortadresse {roh_reply!r} ist keine gültige E-Mail – "
               f"Versand nutzt die Absenderadresse {absender['email']}.")
-    html_t, text_t = marken_einsetzen(html, text, "", worker_basis="")
+    base, key = versand.worker_konfig()
+    empfaenger = []
+    for adresse in adressen:
+        token = test_token_fuer(adresse, base, key)
+        html_t, text_t = marken_einsetzen(html, text, token,
+                                          worker_basis=base if token else "")
+        pflicht = marken_pflicht(html_t, text_t)
+        if pflicht:
+            print(f"   ❌ kein Testversand: {pflicht}")
+            return 1
+        empfaenger.append({"email": adresse, "token": token,
+                           "html": html_t, "text": text_t})
+        if token:
+            print(f"   ℹ️  Testadresse {versand.hash16(adresse)}: One-Click über "
+                  "bestehendes Abo-Token.")
+        else:
+            print(f"   ℹ️  Testadresse {versand.hash16(adresse)}: kein Abo-Token – "
+                  "Abmelde-Formular + mailto (kein leerer Token).")
     datei = os.path.join(tempfile.gettempdir(), "ff-nl-testversand.json")
-    _sende_datei_schreiben(datei, f"test-{datum_iso}", betreff,
-                           [{"email": a, "token": "", "html": html_t, "text": text_t}
-                            for a in adressen])
+    _sende_datei_schreiben(datei, f"test-{datum_iso}", betreff, empfaenger)
     try:
         rc = versand.sende_datei(datei, root=root, konf=konf)
     finally:
@@ -846,6 +906,12 @@ def _versand_liste(root: str, artikel: list[dict], html: str, text: str, betreff
         html_v, text_v = marken_einsetzen(html_v, text_v,
                                           person.get("token") or "",
                                           worker_basis=base)
+        pflicht = marken_pflicht(html_v, text_v)
+        if pflicht:
+            print(f"   ⚠ Empfänger {versand.hash16(person.get('email', ''))} "
+                  f"verschont: {pflicht}")
+            verschont += 1
+            continue
         empfaenger.append({"email": person["email"],
                            "token": person.get("token") or "",
                            "html": html_v, "text": text_v,
@@ -1163,6 +1229,7 @@ def _selftest() -> int:
               "Löschung innerhalb von 30 Tagen, Widerruf jederzeit.")
     SEITE_GUT = ("<html><body>Double-Opt-In vorhanden. "
                  "<a href=\"/datenschutz/\">Datenschutz</a> "
+                 "<a href=\"/impressum/\">Impressum</a> "
                  "<form><input name=\"email\"></form></body></html>")
     FOOTER_GUT = '<div class="newsletter-footer">Abonniere</div>'
     WF_GUT = ("name: newsletter-daily\nenv:\n  NEWSLETTER_WORKER_EXPORT_KEY: secret\n"
@@ -1233,11 +1300,19 @@ def _selftest() -> int:
     pruefe("https://abos.beispiel.de/abmeldung?token=tok-123" in t,
            "Marken: Textvariante ohne Worker-Abmeldelink")
     pruefe("{{unsubscribe}}" not in h and "{{unsubscribe}}" not in t, "Marken: Platzhalter geblieben")
-    # Ohne Token (Testversand) und ohne Worker-Basis: die INFO-Seiten der
-    # Site, kein Token, kein toter Endpunkt.
+    # Ohne Token (Testversand) und ohne Worker-Basis: die Abmelde-Seite
+    # (Formular + mailto), kein `?token=`, kein toter Endpunkt.
     h2, t2 = marken_einsetzen(html_m, text_m, "")
     pruefe("abmelden/" in h2 and "?token=" not in h2, "Marken: Testmodus ohne Token")
     pruefe("/newsletter/" in h2, "Marken: Mirror zeigt auf die Site")
+    pruefe(not marken_pflicht(h2, t2), f"Marken: Pflicht nach Ersatz: {marken_pflicht(h2, t2)}")
+    pruefe(marken_pflicht(html_m, text_m), "Marken: unersetzte Platzhalter nicht erkannt")
+    pruefe(marken_pflicht('<a href="https://abos.x/abmeldung?token=">A</a>', "Abmelden"),
+           "Marken: leerer Token nicht erkannt")
+    # Token ohne Worker-Basis darf KEINEN `?token=`-Link auf die statische
+    # Seite setzen – die kann ihn nicht lesen.
+    h3, _ = marken_einsetzen(html_m, text_m, "tok-abc", worker_basis="")
+    pruefe("?token=" not in h3, "Marken: Token ohne Worker landet als Query")
 
     # C1: Testadressen.
     a, e = test_adressen_lesen("a@b.de, c@d.de")
@@ -1305,9 +1380,9 @@ def _selftest() -> int:
 
     def fake_bau(artikel_g, datum_g, versprechen_g, *, root=None):
         kaputt = any(a.get("pillar") == "kaputt" for a in artikel_g)
-        html_g = ('<html><body>Variante <a href="{{unsubscribe}}">A</a> '
+        html_g = ('<html><body>Variante <a href="{{unsubscribe}}">Abmelden</a> '
                   '<a href="{{update_profile}}">P</a> <a href="{{mirror}}">M</a></body></html>')
-        return {"html": html_g, "text": "Variante {{unsubscribe}}",
+        return {"html": html_g, "text": "Variante Abmelden: {{unsubscribe}}",
                 "betreff": ("QA-FALLEN " if kaputt else "Variante ") + datum_g,
                 "preheader": "V", "anzahl": len(artikel_g), "blocks": [],
                 "material": [{"slug": a["slug"], "titel": a["titel"]} for a in artikel_g]}
