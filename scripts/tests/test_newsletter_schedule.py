@@ -224,7 +224,8 @@ class Versandpfad(unittest.TestCase):
         artikel = [{'slug': 's1', 'titel': 'T', 'beschreibung': 'B',
                     'url': '/posts/s1/', 'path': '', 'datum': '2026-09-22',
                     'pillar': 'strom-sparen', 'quelle_text': 'Q'}]
-        ausgabe = {'html': '<p>x</p>', 'text': 'x', 'anzahl': 1,
+        ausgabe = {'html': '<p><a href="{{unsubscribe}}">Abmelden</a></p>',
+                   'text': 'Abmelden: {{unsubscribe}}', 'anzahl': 1,
                    'betreff': 'Betreff', 'preheader': '', 'material': artikel}
         konf = {'email': {}, 'capture': {'form_action': 'https://abos.test'},
                 'design': {'hell': {}, 'dunkel': {}}}

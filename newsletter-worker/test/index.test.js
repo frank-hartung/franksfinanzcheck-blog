@@ -360,6 +360,75 @@ test('abmeldung: unbekannter Token -> 404, nichts geaendert', async () => {
   assert.equal(antwort.status, 404);
 });
 
+test('abmeldung: RFC 8058 POST liest Token aus der Query, nicht nur aus dem Body', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'rfc@beispiel.de', consent: '1' });
+  const eintrag = await kv.get('abo:rfc@beispiel.de', 'json');
+  await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
+  const antwort = await worker.fetch(new Request(
+    `http://abos.test/abmeldung?token=${eintrag.token}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        accept: 'application/json',
+        'cf-connecting-ip': '1.2.3.4',
+      },
+      body: 'List-Unsubscribe=One-Click',
+    },
+  ), env_mit(kv));
+  assert.equal((await antwort.json()).status, 'abgemeldet');
+  assert.equal((await kv.get('abo:rfc@beispiel.de', 'json')).status, 'unsubscribed');
+});
+
+test('abmeldung: POST mit E-Mail ohne Token meldet ab – unbekannte Adresse gleicher Erfolg', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'form@beispiel.de', consent: '1' });
+  const eintrag = await kv.get('abo:form@beispiel.de', 'json');
+  await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
+  const ok = await worker.fetch(form_request('/abmeldung', { email: 'form@beispiel.de' }), env_mit(kv));
+  assert.equal((await ok.json()).status, 'abgemeldet');
+  assert.equal((await kv.get('abo:form@beispiel.de', 'json')).status, 'unsubscribed');
+  const fremd = await worker.fetch(form_request('/abmeldung', { email: 'nie@beispiel.de' }), env_mit(kv));
+  assert.equal(fremd.status, 200);
+  assert.equal((await fremd.json()).status, 'abgemeldet');
+});
+
+test('abmeldung: GET ohne Token liefert das Formular, kein 404', async () => {
+  const kv = kvLeeren();
+  const html = await worker.fetch(get_request('/abmeldung'), env_mit(kv));
+  assert.equal(html.status, 200);
+  const text = await html.text();
+  assert.ok(text.includes('method="post"'));
+  assert.ok(text.includes('name="email"'));
+  const jsonAntwort = await worker.fetch(
+    new Request('http://abos.test/abmeldung', { headers: { accept: 'application/json' } }),
+    env_mit(kv),
+  );
+  assert.equal(jsonAntwort.status, 200);
+  assert.equal((await jsonAntwort.json()).status, 'formular');
+});
+
+test('export/kontakt: Secret-Pflicht und Lookup nach E-Mail', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'look@beispiel.de', consent: '1' });
+  const eintrag = await kv.get('abo:look@beispiel.de', 'json');
+  const env = env_mit(kv);
+  const ohne = await worker.fetch(new Request('http://abos.test/export/kontakt?email=look@beispiel.de'), env);
+  assert.equal(ohne.status, 403);
+  const mit = await worker.fetch(new Request('http://abos.test/export/kontakt?email=look@beispiel.de', {
+    headers: { 'x-ff-key': EXPORT_KEY },
+  }), env);
+  assert.equal(mit.status, 200);
+  const daten = await mit.json();
+  assert.equal(daten.status, 'pending');
+  assert.equal(daten.token, eintrag.token);
+  const unbekannt = await worker.fetch(new Request('http://abos.test/export/kontakt?email=nie@beispiel.de', {
+    headers: { 'x-ff-key': EXPORT_KEY },
+  }), env);
+  assert.equal(unbekannt.status, 404);
+});
+
 // ------------------------------------------------------------------ praferenzen
 test('praferenzen: Themen speichert, unbekannte IDs fallen weg', async () => {
   const kv = kvLeeren();

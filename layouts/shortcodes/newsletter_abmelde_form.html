@@ -1,0 +1,43 @@
+{{- /* layouts/shortcodes/newsletter_abmelde_form.html – Widerruf ohne Token.
+
+    Die Mail trägt den One-Click (Worker, mit Token). Wer die Infoseite
+    /newsletter/abmelden/ öffnet – Testmail, weitergeleitete Mail, Lesezeichen –
+    muss trotzdem abmelden können. Ein Satz „nimm den Link aus der Mail“ ist
+    kein Widerruf (Art. 7 Abs. 3 DSGVO, § 7 UWG). Deshalb ein echtes POST-
+    Formular an denselben Worker, plus der formlose mailto.
+
+    Bewusst OHNE data-ff-nl: das Anmelde-Skript würde Consent und Zeitfalle
+    verlangen, die hier nicht hingehören. Ohne JavaScript POSTet der Browser
+    direkt; der Worker antwortet mit einer Bestätigungsseite.
+*/ -}}
+{{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
+{{- $action := $nl.capture.abmelde_action | default "" -}}
+{{- $antwort := ($nl.email.antwort_an | default "kontakt@franksfinanzcheck.de") -}}
+<div class="ff-nl" id="newsletter-abmeldung">
+{{- if $action -}}
+  <p class="ff-nl__lead">Adresse eintragen – du bist von der Liste. Wir fragen nicht
+    nach dem Grund.</p>
+  <form class="ff-nl__form" action="{{ $action }}" method="post" accept-charset="utf-8">
+    <p class="ff-nl__feld">
+      <label class="ff-nl__label" for="ff-nl-ab-mail">E-Mail-Adresse</label>
+      <input class="ff-nl__input" id="ff-nl-ab-mail" type="email" name="email" required
+             autocomplete="email" spellcheck="false" inputmode="email" placeholder="du@beispiel.de">
+    </p>
+    <p class="ff-nl__falle" aria-hidden="true">
+      <label for="ff-nl-ab-website">Bitte dieses Feld freilassen</label>
+      <input id="ff-nl-ab-website" type="text" name="website" tabindex="-1" autocomplete="off">
+    </p>
+    <p class="ff-nl__aktionen">
+      <button class="ff-nl__button" type="submit">
+        <span class="ff-nl__button-text">Newsletter abmelden</span>
+      </button>
+    </p>
+    <p class="ff-nl__status">Formlos geht es auch an
+      <a href="mailto:{{ $antwort }}?subject=Newsletter%20abmelden">{{ $antwort }}</a>.</p>
+  </form>
+{{- else -}}
+  <p class="ff-nl__leer">Formlos abmelden: eine Zeile an
+    <a href="mailto:{{ $antwort }}?subject=Newsletter%20abmelden">{{ $antwort }}</a>.
+    Ein Grund ist nicht nötig.</p>
+{{- end -}}
+</div>

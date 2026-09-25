@@ -40,6 +40,15 @@
 {{- $action := trim (string (site.Params.newsletterFormAction | default $capture.form_action | default "")) " " -}}
 {{- $url := trim (string (site.Params.newsletterFormUrl | default $capture.form_url | default "")) " " -}}
 {{- $versprechen := trim (string (site.Params.newsletterPromise | default $capture.versprechen | default "")) " " -}}
+{{- /* Abmelde-Endpunkt: dieselbe Origin wie die Anmeldung, anderer Pfad.
+       urls.Parse, nicht replace("/anmeldung"), damit ein anderer Capture-Pfad
+       den Widerruf nicht ins Leere schickt. */ -}}
+{{- $abmelde_action := "" -}}
+{{- if $action -}}
+  {{- with urls.Parse $action -}}
+    {{- $abmelde_action = printf "%s://%s/abmeldung" .Scheme .Host -}}
+  {{- end -}}
+{{- end -}}
 {{- return (dict
   "capture" (dict
     "form_action" $action
@@ -49,6 +58,7 @@
     "feld_themen" ($capture.feld_themen | default "themen")
     "bestaetigung" ($capture.bestaetigungs_url | default "/newsletter/bestaetigung/")
     "abmelde_url" ($capture.abmelde_url | default "")
+    "abmelde_action" $abmelde_action
     "praferenz_url" ($capture.praferenz_url | default "")
     "bot_falle" (ne ($capture.bot_falle | default true) false)
   )

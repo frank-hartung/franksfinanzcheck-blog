@@ -75,9 +75,10 @@ class MarkenTest(unittest.TestCase):
         self.assertIn("/newsletter/abmelden/", html)
         self.assertIn("/newsletter/praeferenzen/", html)
         self.assertIn("/newsletter/abmelden/", text)
-        # ein Testempfaenger muss keine scheinbare Abmeldung klickbar kriegen
+        # ohne Token: Abmelde-Formular der Site, nie ein leerer ?token=
         self.assertNotIn("?token=", html)
         self.assertNotIn("?token=", text)
+        self.assertEqual(digest.marken_pflicht(html, text), "")
 
     def test_basis_mit_schliessendem_schlash_keine_doppelten_schlaeche(self):
         html, _ = digest.marken_einsetzen("{{unsubscribe}}", "", "t",
@@ -95,6 +96,19 @@ class MarkenTest(unittest.TestCase):
         html, _ = digest.marken_einsetzen("{{unsubscribe}}", "", "t", worker_basis="")
         self.assertIn("/newsletter/abmelden/", html)
         self.assertNotIn("?token=", html)
+
+    def test_leerer_token_wird_kein_query(self):
+        html, text = digest.marken_einsetzen("{{unsubscribe}}", "{{unsubscribe}}",
+                                             "   ", worker_basis=WERKER)
+        self.assertNotIn("?token=", html + text)
+        self.assertIn("/newsletter/abmelden/", html)
+
+    def test_marken_pflicht_faengt_toten_abmeldelink(self):
+        self.assertTrue(digest.marken_pflicht("{{unsubscribe}} Abmelden", "Abmelden"))
+        self.assertTrue(digest.marken_pflicht(
+            '<a href="https://abos.x/abmeldung?token=">Abmelden</a>', "Abmelden"))
+        ok_html = f'<a href="{WERKER}/abmeldung?token=t">Abmelden</a>'
+        self.assertEqual(digest.marken_pflicht(ok_html, "Abmelden: link"), "")
 
 
 class ThemenFilterTest(unittest.TestCase):
@@ -262,8 +276,11 @@ class FehlerzeileTraegtDieUrsacheTest(unittest.TestCase):
         buf = _io.StringIO()
         try:
             with contextlib.redirect_stdout(buf):
-                rc = digest._versand_test(self.td, "<p>x</p>", "x", "Betreff", "",
-                                          "test@beispiel.de", self.konf, "2026-09-25")
+                rc = digest._versand_test(
+                    self.td,
+                    '<p><a href="{{unsubscribe}}">Abmelden</a></p>',
+                    "Abmelden: {{unsubscribe}}", "Betreff", "",
+                    "test@beispiel.de", self.konf, "2026-09-25")
         finally:
             versand.sende_datei = echt
         self.assertEqual(rc, 2)

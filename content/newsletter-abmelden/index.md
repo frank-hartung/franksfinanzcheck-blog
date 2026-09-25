@@ -1,8 +1,8 @@
 ---
 title: "Newsletter abmelden – ein Klick, keine Verhandlung"
 url: "/newsletter/abmelden/"
-description: "Abmeldung vom Newsletter von FranksFinanzcheck: der Link in jeder Mail, der Weg per E-Mail, und was mit deinen Daten danach passiert."
-summary: "Abmelden vom Newsletter: Ein Klick im Mail-Fuß (oder auf dieser Seite), alternativ formlos per E-Mail; Löschung der Adresse innerhalb von 30 Tagen, der Einwilligungsnachweis bleibt bis zu drei Jahre."
+description: "Abmeldung vom Newsletter von FranksFinanzcheck: Formular auf dieser Seite, der Link in jeder Mail, oder formlos per E-Mail. Was mit den Daten danach passiert."
+summary: "Abmelden vom Newsletter: Formular auf dieser Seite, Ein-Klick-Link in jeder Mail oder formlos per E-Mail; Löschung der Adresse innerhalb von 30 Tagen, der Einwilligungsnachweis bleibt bis zu drei Jahre."
 robotsNoIndex: true
 sitemap:
   disable: true
@@ -13,28 +13,22 @@ disableShare: true
 comments: false
 ---
 
-Abmelden ist ein Klick und keine Verhandlung. Der kürzeste Weg ist immer
-derselbe: **die letzte Mail öffnen, ganz unten „Abmelden“ anklicken.** Der
-Link meldet sofort ab – ohne Passwort, ohne „Bist du sicher?“, ohne
-Umfrage und ohne Angebot, es sich anders zu überlegen. Diese Info-Seite
-kann den Klick nicht ausführen: der Abmelde-Link trägt ein Zeichen (Token),
-das nur deine Mail kennt, und der Build einer statischen Seite sieht ihn
-beim Bauen nicht. Es gibt daher genau einen Abmelde-Weg pro Mail – und der
-funktioniert, auch ohne JavaScript.
+Abmelden ist ein Klick und keine Verhandlung. Drei Wege, alle ohne Passwort,
+ohne „Bist du sicher?“, ohne Umfrage:
 
-Der Abmelde-Link zeigt auf `abos.franksfinanzcheck.de` (eigene Subdomain)
-und enthält dein persönliches Zeichen (Token) – deshalb führt er auf
-**deine** Abmeldung, nicht auf eine allgemeine Seite. Und: Jeder Klick auf
-einen **älteren** Abmelde-Link aus einer früheren Mail führt dieselbe
-Wirkung aus – die Abmeldung gilt unabhängig davon, aus welcher Mail der
-Link stammt.
+1. **Der Link in der letzten Mail** („Newsletter abmelden“) – der kürzeste Weg,
+   mit persönlichem Zeichen (Token). Er funktioniert auch ohne JavaScript.
+2. **Das Formular auf dieser Seite** – falls die Mail nicht mehr da ist oder
+   der Testversand keinen Token trug.
+3. **Formlos** eine Zeile an
+   [kontakt@franksfinanzcheck.de](mailto:kontakt@franksfinanzcheck.de?subject=Newsletter%20abmelden).
 
-## Ohne Mail im Postfach
+{{< newsletter_abmelde_form >}}
 
-Schreib eine Zeile („bitte abmelden“) an
-[kontakt@franksfinanzcheck.de](mailto:kontakt@franksfinanzcheck.de). Das ist
-formlos wirksam; du brauchst keinen Grund, keine Begründung und keine
-Bestätigung in zwei Schritten.
+Der Abmelde-Link in der Mail zeigt auf `abos.franksfinanzcheck.de` (eigene
+Subdomain) und enthält dein persönliches Zeichen (Token) – deshalb führt er auf
+**deine** Abmeldung. Jeder Klick auf einen **älteren** Abmelde-Link aus einer
+früheren Mail hat dieselbe Wirkung.
 
 ## Was danach mit den Daten passiert
 
@@ -48,6 +42,6 @@ Bestätigung in zwei Schritten.
   einfach verschwindet.
 
 Details in den [Datenschutzhinweisen](/datenschutz/), Widerruf mit Wirkung
-für die Zukunft ebenso dort.
+für die Zukunft ebenso dort. Verantwortlicher: siehe [Impressum](/impressum/).
 
 <p class="ff-nl-weg"><a href="/newsletter/">Zur Newsletter-Übersicht <span aria-hidden="true">→</span></a></p>

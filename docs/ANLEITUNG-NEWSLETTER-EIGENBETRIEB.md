@@ -1,6 +1,6 @@
 # 📬 Anleitung: Newsletter-Eigenbetrieb (Worker + Actions + Resend)
 
-**Stand: 24. September 2026.** Dies ist die Quelle der Wahrheit für den
+**Stand: 25. September 2026.** Dies ist die Quelle der Wahrheit für den
 Betrieb des Newsletters: Was es gibt, wer was ausführt, wie es freigeschaltet
 wird, wie es betrieben wird und was man tut, wenn etwas rot wird.
 Die übrigen Newsletter-Dokumente hängen daran:
@@ -9,6 +9,7 @@ Die übrigen Newsletter-Dokumente hängen daran:
 |---|---|
 | Marke, Blöcke, QA, Betreff, Themen | [ANLEITUNG-NEWSLETTER-STUDIO.md](ANLEITUNG-NEWSLETTER-STUDIO.md) |
 | Rechtstexte (Datenschutz-Abschnitt) | [NEWSLETTER-RECHTSTEXT-VORLAGE.md](NEWSLETTER-RECHTSTEXT-VORLAGE.md) |
+| Abmeldelink + Formular (UWG/DSGVO, Testversand) | [NEWSLETTER-ABMELDE-RECHT-2026-09-25.md](../NEWSLETTER-ABMELDE-RECHT-2026-09-25.md) |
 | Mail-Weiterleitung `news@` (Cloudflare Email Routing) | [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md) |
 | Zustellbarkeits-Wache (Regeln C/B/S) | `scripts/newsletter_zustellbarkeit.py` (Regeltexte in den Befunden) |
 
@@ -24,7 +25,10 @@ Besucher ──> /newsletter/ (Hugo, Shortcode) ──POST──> Worker abos.fr
                                                                         ▼
 Besucher <──Resend API──  GitHub Actions (daily 04:30 UTC)  <──Export── Worker (x-ff-Key)
    └── Mail-Links zeigen auf den Worker:
-        abmelden:  abos…/abmeldung?token=T   (One-Klick, = List-Unsubscribe)
+        abmelden:  abos…/abmeldung?token=T   (One-Klick = List-Unsubscribe;
+                   RFC 8058 POST liest den Token aus der Query. Ohne Token
+                   – Testversand an Nicht-Abonnenten – mailto + Formular
+                   auf /newsletter/abmelden/, nie ein leerer `?token=`)
         Themen:    abos…/praferenzen?token=T (Formular, pre-checked, ohne JS)
         Status:    abos…/status?token=T
 ```
@@ -79,6 +83,9 @@ Eigener Cloudflare-Account (kostenlos; der Worker ist Teil des Free-Plans).
 cd newsletter-worker
 wrangler login
 wrangler kv namespace create ABO     # Bindung: ABO (schon in wrangler.toml)
+                                     # OHNE --jurisdiction=eu = globales KV.
+                                     # EU-only erst nach Beta-Zusage, siehe Schritt 9c.
+                                     # Einmal global angelegt, nicht nachträglich auf EU umstellbar.
 wrangler secret put GITHUB_PAT       # Fine-Grained-PAT, NUR dieses Repo, Berechtigung
                                      # „Actions: Read and write“ (löst workflow_dispatch aus;
                                      # „Workflows“ wäre das Recht, Workflow-DATEIEN zu ändern –
@@ -200,6 +207,165 @@ Derselbe Workflow ohne `test_adresse` (oder am nächsten regulären
 Versandtag, Di/Fr 04:30 UTC). Bei 0 Abonnenten sendet der Listen-Versand
 ehrlich nichts und sagt es (`B2 … 0 aktive Abonnenten (leer –
 Normalzustand vor der Freischaltung)`).
+
+### Schritt 9 – AVV (DPA) und Speicherort, einmalig, Mensch
+
+Code kann das nicht. Ohne diese Schritte bleiben Resend und Cloudflare
+technisch im Betrieb, aber ohne nachweisbaren Auftragsverarbeitungsvertrag
+und ohne klare Entscheidung zum Speicherort der Abo-Liste. Die
+Datenschutzerklärung (`content/datenschutz/index.md`, § 8) behauptet
+genau diese Verträge – sie müssen in deinem Ablageordner stehen, nicht
+nur als Link.
+
+**Was du dabei *nicht* erwartest:** Resend speichert Kundendaten **in den
+USA** (Stand der Resend-GDPR-Seite). Die Domain-Region (`eu-west-1`)
+steuert nur den Versandweg, nicht den Speicherort. Cloudflare KV ist
+standardmäßig **global repliziert**. Ein Feld `placement = "eu"` in
+`newsletter-worker/wrangler.toml` erzeugt **kein** EU-only-KV – das
+Feld ist kein Ersatz für eine Jurisdiction. EU-KV (`jurisdiction=eu`)
+ist bei Cloudflare **private Beta**, nur bei der *Erstellung* des
+Namespaces setzbar, danach nicht mehr umstellbar.
+
+#### 9a. Resend – DPA herunterladen (kein Gegenzeichnen)
+
+1. Im Browser einloggen: [resend.com](https://resend.com).
+2. Öffnen: [resend.com/settings/documents](https://resend.com/settings/documents)
+   („Documents“ im Account).
+3. **Data Processing Addendum** als PDF herunterladen. Resend stellt das
+   Dokument als bereits ausgeführtes Art.-28-DPA bereit – mit dem
+   Account-Abschluss gilt es, ein zweites Unterschriftenfeld gibt es
+   nicht.
+4. Öffentliche Fassung zum Nachlesen:
+   [resend.com/legal/dpa](https://resend.com/legal/dpa)
+   (SCC Modul 2 + EU-US Data Privacy Framework).
+5. PDF **lokal** ablegen, nicht ins Git:
+   `AVV-Resend-<JJJJ-MM-TT>.pdf`. Im selben Ordner eine Zeile notieren:
+   Account-E-Mail, Datum des Downloads, dass Speicherort USA ist
+   (SCC + DPF, nicht EU-Hosting).
+6. Unterauftragsverarbeiter:
+   [resend.com/legal/subprocessors](https://resend.com/legal/subprocessors)
+   – Resend kündigt Änderungen mit 14 Tagen an. Die Datenschutzerklärung
+   muss bei einem Wechsel angepasst werden.
+
+Kontrolle: Die Datei öffnet sich, trägt Resend als Auftragsverarbeiter
+und Standardvertragsklauseln. Fehlt sie, ist § 8 der Datenschutzerklärung
+eine Behauptung ohne Beleg.
+
+#### 9b. Cloudflare – Customer DPA sichern
+
+Aktuelle Fassung (Stand Prüfung 2026-09-25): **Version 6.4, wirksam
+3. April 2026**,
+[cloudflare.com/cloudflare-customer-dpa](https://www.cloudflare.com/cloudflare-customer-dpa/).
+Sie ist Zusatz zur Self-Serve Subscription Agreement. Cloudflare, Inc.
+(USA) ist Vertragspartner, nicht die Cloudflare Germany GmbH.
+
+**Weg A – Dashboard (Self-Serve, üblich):**
+
+1. [dash.cloudflare.com](https://dash.cloudflare.com) → oben rechts
+   Profil → **My Profile** bzw. Account-Auswahl → **Manage Account**.
+2. **Configurations** (manchmal **Preferences** / Kontoeinstellungen).
+3. Abschnitt **Data Processing Addendum** / **GDPR**: DPA **downloaden**.
+   Ein extra „Signieren“-Button fehlt oft – Cloudflare betrachtet das
+   DPA bei Self-Serve-Accounts als mit den Nutzungsbedingungen
+   angenommen. Der Download *ist* der Nachweis.
+4. PDF lokal ablegen: `AVV-Cloudflare-v6.4-<JJJJ-MM-TT>.pdf`.
+   Darauf Version und Datum notieren, nicht nur die URL
+   (URLs bleiben, der Vertragstext ändert sich).
+
+**Weg B – Gegengezeichnetes Exemplar (wenn ein Anwalt oder die
+Aufsicht einen unterschriebenen Satz will):**
+
+1. Dieselbe aktuelle DPA als PDF speichern.
+2. Kundenblock ausfüllen: Name **Frank Hartung**, Anschrift wie im
+   Impressum, E-Mail der Domain, Cloudflare-Account-E-Mail, Datum.
+3. Unterschreiben (Scan oder qualifizierte Signatur).
+4. An **eu.dpa@cloudflare.com** senden, im Betreff den **exakten
+   Kundennamen wie auf der Cloudflare-Rechnung/Account** nennen.
+   Cloudflare hat das DPA vorunterschrieben; mit Eingang der
+   vollständig ausgefüllten Kundenseite soll es bindend werden.
+5. Antwort + Versandbeleg zum PDF legen. Wenn nach zwei Wochen nichts
+   kommt: [legal@cloudflare.com](mailto:legal@cloudflare.com) und das
+   Support-Ticket im Dashboard
+   ([dash.cloudflare.com/?to=/:account/support](https://dash.cloudflare.com/?to=/:account/support)).
+
+Zusätzlich sichern (kein Vertrag, aber Beleg der Garantien):
+
+- Unterauftragsverarbeiter: [cloudflare.com/gdpr/subprocessors](https://www.cloudflare.com/gdpr/subprocessors/)
+- DPF-Status: [cloudflare.com/trust-hub/gdpr](https://www.cloudflare.com/trust-hub/gdpr/)
+
+#### 9c. Cloudflare KV – EU-Speicherort, ehrlich
+
+**Ist-Zustand im Repo:** `newsletter-worker/wrangler.toml` hat
+`id = "HIER-DIE-ID-NACH-ERSTELLUNG"` und ein Kommentarfeld
+`placement = "eu"`. Das ist **kein** erstelltes EU-Namespace.
+Wrangler-KV-Bindings kennen `binding` + `id` (+ `preview_id`).
+Jurisdiction wird **nur beim Anlegen** gesetzt.
+
+**Was Cloudflare offiziell sagt**
+([KV data location](https://developers.cloudflare.com/kv/reference/data-location/)):
+
+| | Standard-KV | Jurisdiction `eu` |
+|---|---|---|
+| Verfügbarkeit | jeder Account | **private Beta** (Account-Team / Support) |
+| Dauerhafter Speicher | global repliziert | nur in der EU |
+| Nachträglich umstellen | – | **unmöglich** |
+| Worker / Cache | kann außerhalb der EU laufen | ebenfalls; Cache kann Kopien außerhalb lassen |
+| Request-Verarbeitung in der EU | nein | dafür extra **Regional Services** (Data Localization Suite, kostenpflichtig) |
+
+**Ablauf, wenn noch kein Namespace existiert** (ID steht noch auf dem
+Platzhalter – das ist der günstige Fall):
+
+1. Dashboard → Support → Ticket, Betreff etwa
+   `Workers KV jurisdiction eu – private beta access`.
+   Text: Account-ID, Vorhaben „Newsletter-Abo-Liste, personenbezogene
+   E-Mail-Adressen, Speicherung nur in der EU“, Bitte um Freischaltung
+   von `jurisdiction=eu`.
+2. Antwort abwarten. **Ohne Freischaltung schlägt
+   `--jurisdiction=eu` fehl** oder erzeugt ein ganz normales globales
+   KV – das merkst du erst später.
+3. Erst nach Zusage, **bevor die erste Adresse geschrieben wird:**
+
+   ```bash
+   cd newsletter-worker
+   npx wrangler kv namespace create ABO --jurisdiction=eu
+   ```
+
+   Die ausgegebene ID nach `newsletter-worker/wrangler.toml` unter
+   `id = "…"` (das Binding bleibt `ABO`). Worker neu deployen
+   (`npx wrangler deploy`).
+4. Kontrolle im Dashboard: Workers & Pages → KV → der Namespace muss
+   eine Jurisdiction **EU** zeigen, nicht „None/Global“.
+5. Erst danach Secrets, Custom Domain, Live-Anmeldungen.
+
+**Ablauf, wenn schon ein globales KV mit Daten existiert:**
+
+Nicht umbenennen, nicht „EU drüberschreiben“. Neues EU-Namespace
+anlegen (nach Beta-Zusage), Daten kontrolliert umziehen, Binding auf
+die neue ID, altes Namespace leeren und löschen. Jede Adresse, die
+einmal global lag, war global.
+
+**Was du tun kannst, wenn die Beta nicht kommt** (wahrscheinlich auf
+Free/Pro):
+
+- AVV Cloudflare (9b) liegt vor.
+- Datenschutzerklärung bleibt bei **SCC + Data Privacy Framework**
+  für Cloudflare (steht schon in § 8) – das ist die
+  Drittland-Rechtsgrundlage, kein EU-Hosting.
+- `placement = "eu"` **nicht** als erledigte EU-Speicherung verkaufen,
+  weder intern noch gegenüber Lesern.
+- Optional später: Data Localization Suite / Regional Services, wenn
+  du wirklich Verarbeitung *und* Speicher in der EU brauchst – das ist
+  ein anderes, kostenpflichtiges Produkt, nicht Wrangler-Einzeiler.
+
+#### 9d. Mini-Checkliste, bevor du „AVV erledigt“ hakst
+
+- [ ] Resend-DPA-PDF vom Documents-Tab, Datum notiert
+- [ ] Cloudflare-DPA-PDF (v6.4 oder neuer), Version + Datum notiert
+- [ ] optional: gegengezeichnetes Cloudflare-DPA an eu.dpa@cloudflare.com
+- [ ] KV: entweder Jurisdiction EU im Dashboard sichtbar **oder**
+      bewusste Entscheidung „global + SCC/DPF“, Datenschutzerklärung
+      unangetastet wahr
+- [ ] nichts davon im öffentlichen Git (nur Verträge lokal)
 
 ## 4. Betrieb – was läuft wann
 
