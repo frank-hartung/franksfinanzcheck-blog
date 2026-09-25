@@ -181,7 +181,7 @@ Danach in dieser Reihenfolge:
    [ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md](ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md) § 3.
 5. Actions → *Newsletter-Daily* → `test_adresse` = deine Adresse → echter
    Probeversand direkt an die Adresse, die Liste bleibt unangetastet.
-6. Ab jetzt liefert der Cron Dienstag/Freitag 05:05 UTC eine geprüfte Mail,
+6. Ab jetzt liefert der Cron Dienstag/Freitag 04:30 UTC eine geprüfte Mail,
    und `data/newsletter_state.json` (versioniert!) merkt, was schon draußen war.
 
 Der letzte Klick bleibt bei dir, weil er Konten braucht: Cloudflare-Worker

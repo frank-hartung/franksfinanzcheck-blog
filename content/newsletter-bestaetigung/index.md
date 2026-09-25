@@ -32,7 +32,7 @@ der Bestätigung kommt überhaupt eine Ausgabe.
 ## Wann kommt die erste Ausgabe?
 
 Die erste Ausgabe kommt am nächsten **Dienstag oder Freitag**, morgens gegen
-07:05 Uhr (im Winter 06:05 Uhr) deutscher Zeit – je nachdem, wann der
+06:30 Uhr (im Winter 05:30 Uhr) deutscher Zeit – je nachdem, wann der
 nächste Versandtag liegt.
 
 ## Der Link in der Mail

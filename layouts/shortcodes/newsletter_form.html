@@ -31,7 +31,7 @@
        Snapshot weg, greift der Satz im Studio-JSON – nie ein ausgedachter Tag. */ -}}
 {{- $kadenz := $nl.kadenz | default dict -}}
 {{- $oder := $kadenz.versandtage_oder | default "Dienstag oder Freitag" -}}
-{{- $uhrzeit := $kadenz.uhrzeit_zeile | default "morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter)" -}}
+{{- $uhrzeit := $kadenz.uhrzeit_zeile | default "morgens gegen 06:30 Uhr deutscher Zeit (05:30 Uhr im Winter)" -}}
 <div class="ff-nl" id="newsletter-anmeldung">
 {{- if $c.form_action -}}
   <p class="ff-nl__lead">{{ $liste }}</p>
