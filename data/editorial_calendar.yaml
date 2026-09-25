@@ -1,11 +1,113 @@
-generated_at: '2026-09-24T08:44:49Z'
-start_date: '2026-09-25'
+generated_at: '2026-09-25T09:05:21Z'
+start_date: '2026-09-26'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
-- date: '2026-09-25'
-  weekday: Fri
+- date: '2026-09-28'
+  weekday: Mon
   slot: 1
-  topic: Versicherungen für dein Fahrzeug und dich
+  topic: 'Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?'
+  pillar: strom-sparen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe
+
+    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-09-30'
+  weekday: Wed
+  slot: 2
+  topic: Internet-Speed optimieren mit dem richtigen Router
+  pillar: internet-dsl
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
+
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+
+    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
+    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.'
+- date: '2026-10-02'
+  weekday: Fri
+  slot: 3
+  topic: 'Internettarif kündigen: Fristen und Fallstricke im Überblick'
+  pillar: internet-dsl
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+
+    - [evergreen] DSL-Tarife im Vergleich: Die günstigsten Anbieter
+
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
+
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
+- date: '2026-10-05'
+  weekday: Mon
+  slot: 4
+  topic: Kreditkarten mit guten Leistungen
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren
+
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.'
+- date: '2026-10-07'
+  weekday: Wed
+  slot: 5
+  topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+  pillar: versicherungen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [evergreen] Hausratversicherung: Wer sie braucht und was sie leistet
+
+    - [viral_outlier] Privathaftpflicht: Warum sie unverzichtbar ist
+
+    - [viral_outlier] Wohngebäudeversicherung: Worauf du wirklich achten musst'
+- date: '2026-10-09'
+  weekday: Fri
+  slot: 6
+  topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
   pillar: versicherungen
   source: topics
   campaign: null
@@ -20,12 +122,11 @@ slots:
 
     - [viral_outlier] Dein Haus sicher schützen: Das Vorsorge-Update 2026
 
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.'
-- date: '2026-09-28'
+    - [viral_outlier] Privathaftpflicht: Warum sie unverzichtbar ist'
+- date: '2026-10-12'
   weekday: Mon
-  slot: 2
-  topic: 'Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt'
+  slot: 7
+  topic: Stromanbieter wechseln und bis zu 300 Euro sparen
   pillar: strom-sparen
   source: topics
   campaign: null
@@ -33,62 +134,44 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [trending] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.
 
     - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
     ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
 
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-09-30'
+    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-10-14'
   weekday: Wed
-  slot: 3
-  topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
-  pillar: internet-dsl
+  slot: 8
+  topic: Jahreskosten fürs Auto minimieren
+  pillar: frugalismus
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] DSL-Tarife im Vergleich: Die günstigsten Anbieter
+    - [evergreen] Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
 
-    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
-    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
 
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.
 
-    - [niche_hook] Schnellstes Internet für Zuhause finden'
-- date: '2026-10-02'
+    - [niche_hook] Günstige Tarife fürs Handy'
+- date: '2026-10-16'
   weekday: Fri
-  slot: 4
-  topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
-
-    - [evergreen] DSL-Tarife im Vergleich: Die günstigsten Anbieter
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
-
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.'
-- date: '2026-10-05'
-  weekday: Mon
-  slot: 5
-  topic: 'Altersvorsorge: Die besten Wege für deine Rente'
+  slot: 9
+  topic: Kontoeröffnung mit günstigen Gebühren
   pillar: konto-karten
   source: topics
   campaign: null
@@ -96,19 +179,40 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
 
     - [evergreen] Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren
 
-    - [niche_hook] Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
 
-    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
-    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
-    inzwischen öfter als nur beim Kontowechsel.'
-- date: '2026-10-07'
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
+- date: '2026-10-19'
+  weekday: Mon
+  slot: 10
+  topic: 'Elementarschadenversicherung: Warum sie zunehmend wichtiger wird'
+  pillar: versicherungen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [viral_outlier] Privathaftpflicht: Warum sie unverzichtbar ist
+
+    - [evergreen] Hausratversicherung: Wer sie braucht und was sie leistet
+
+    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [niche_hook] Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
+- date: '2026-10-21'
   weekday: Wed
-  slot: 6
+  slot: 11
   topic: Günstige Angebote für Internet und TV
   pillar: internet-dsl
   source: topics
@@ -126,52 +230,11 @@ slots:
     sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
     als der reine Anbieterwechsel.
 
-    - [niche_hook] Schnellstes Internet für Zuhause finden'
-- date: '2026-10-09'
+    - [niche_hook] Günstige Tarife fürs Handy'
+- date: '2026-10-23'
   weekday: Fri
-  slot: 7
-  topic: DSL- und Internet-Flat günstig sichern
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
-
-    - [evergreen] DSL-Tarife im Vergleich: Die günstigsten Anbieter
-
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
-- date: '2026-10-12'
-  weekday: Mon
-  slot: 8
-  topic: Günstige Kreditkarten für den Online-Einkauf
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
-
-    - [evergreen] Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren
-
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
-
-    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
-    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
-    inzwischen öfter als nur beim Kontowechsel.'
-- date: '2026-10-14'
-  weekday: Wed
-  slot: 9
-  topic: Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst
+  slot: 12
+  topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
   pillar: frugalismus
   source: topics
   campaign: null
@@ -188,71 +251,4 @@ slots:
     an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
     spontane Wechsel übers Jahr verteilt.
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.'
-- date: '2026-10-16'
-  weekday: Fri
-  slot: 10
-  topic: 'Energieausweis fürs Haus: Pflicht, Kosten und Nutzen im Überblick'
-  pillar: strom-sparen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
-    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
-    auf den eigenen Verbrauch an.'
-- date: '2026-10-19'
-  weekday: Mon
-  slot: 11
-  topic: Heizperiode vorbereiten im Spätsommer
-  pillar: strom-sparen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] Zweite Welle Gaspreis-Anpassung: Jetzt sichern
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-10-21'
-  weekday: Wed
-  slot: 12
-  topic: 'E-Auto laden: So senkst du deine Stromkosten'
-  pillar: strom-sparen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
+    - [evergreen] Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
