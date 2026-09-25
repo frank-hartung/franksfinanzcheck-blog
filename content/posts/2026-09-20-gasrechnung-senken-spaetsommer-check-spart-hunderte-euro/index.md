@@ -1,6 +1,6 @@
 ---
 title: "Gasrechnung senken: Der Spätsommer-Check für Heizung und Tarif"
-description: "Gasrechnung senken: Mit einem sachlichen Spätsommer-Check bereitest du Heizung, Wohnung und Gastarif auf die Heizperiode vor. Praktische Schritte…"
+description: "Gasrechnung senken: Mit dem Spätsommer-Check prüfst du Heizung, Wohnung und Gastarif vor der Heizperiode. Praktische Schritte, klare Grenzen und realistische Erwartungen."
 date: 2026-09-25T12:15:40Z
 draft: true
 cadence_demoted: 2026-09-25T14:10:43Z
@@ -70,9 +70,9 @@ Hier kannst du deinen Ausgangspunkt prüfen: [**Gastarife vergleichen**](/go/gas
 
 Eine Preisgarantie kann einzelne Preisbestandteile absichern, muss aber nicht jede Änderung des Gesamtpreises ausschließen. Lies deshalb genau, worauf sich die Garantie bezieht und welche Abgaben, Umlagen oder Steuern ausgenommen sind. Auch die Dauer ist wichtig: Läuft die Garantie früher aus als dein Vertrag, kann sich der Preis anschließend ändern.
 
-Vergleiche nicht nur den ersten Abschlag. Notiere den voraussichtlichen Gesamtpreis für die vereinbarte Laufzeit und prüfe, wie sich der Tarif ohne Bonus oder nach Ende der Garantie entwickelt. Bei einem Wechsel sollten Lieferbeginn, Zählernummer und Anschrift korrekt übernommen werden. Bewahre die Bestätigung des neuen Anbieters auf, bis die erste Abrechnung vollständig geprüft ist.
+Vergleiche nicht nur den ersten Abschlag. Notiere den voraussichtlichen Gesamtpreis für die vereinbarte Laufzeit und prüfe, wie sich der Tarif ohne Bonus oder nach Ende der Garantie entwickelt. Bei einem Wechsel müssen Lieferbeginn, Zählernummer und Anschrift korrekt übernommen werden. Bewahre die Bestätigung des neuen Anbieters auf, bis die erste Abrechnung vollständig geprüft ist.
 
-Wenn sich Vertragsbedingungen oder Preise ändern, solltest du die Mitteilung des Anbieters zeitnah lesen und die Fristen notieren.
+Wenn sich Vertragsbedingungen oder Preise ändern, lies die Mitteilung des Anbieters zeitnah und notiere die Fristen.
 
 ## Heizung prüfen: Was du selbst kontrollieren kannst
 
@@ -84,7 +84,7 @@ Einige Basischecks sind ohne Werkzeug möglich. Sie ersetzen keine Wartung und k
 * **Leitungen:** Ungedämmte Heizungsrohre in Keller- oder Nebenräumen können unnötig Wärme abgeben. Ob eine Dämmung zulässig und sinnvoll ist, hängt von der Situation ab.
 * **Geräusche und Gerüche:** Ungewöhnliche Geräusche und austretendes Wasser müssen fachlich geprüft werden. Abgasgeruch ist ein Warnsignal: Lüfte, verlasse den Gefahrenbereich und befolge die Hinweise des Herstellers.
 
-Für Wartung, Brennereinstellung, Abgasanlage, Wassernachfüllung und Reparaturen solltest du einen qualifizierten Fachbetrieb beauftragen. Gerade bei älteren Anlagen ist eine individuelle Prüfung wichtiger als eine pauschale Einstellung, etwa einer bestimmten Vorlauftemperatur.
+Für Wartung, Brennereinstellung, Abgasanlage, Wassernachfüllung und Reparaturen beauftragst du einen qualifizierten Fachbetrieb. Gerade bei älteren Anlagen ist eine individuelle Prüfung wichtiger als eine pauschale Einstellung, etwa einer bestimmten Vorlauftemperatur.
 
 ## Wärmeverluste in Wohnung und Haus reduzieren
 
