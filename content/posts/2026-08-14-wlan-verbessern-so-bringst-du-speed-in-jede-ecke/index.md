@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-02
+lastmod: 2026-09-25
 title: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
 description: "WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus."
 date: 2026-08-28T01:05:14Z
@@ -28,7 +28,7 @@ WLAN verbessern im Check: Du zahlst jeden Monat rund 45 € für einen schnelle
 
 In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
 
-Die folgenden Schritte zeigen dir, wie du dein **WLAN verbessern** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz.
+Die folgenden Schritte zeigen dir, wie du dein **WLAN verbessern** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
 
 ---
 
@@ -126,6 +126,34 @@ Dein Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverka
 LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
 
 Hast du Glasfaser mit 300 Mbit/s oder mehr? Dann binde den zweiten Knoten per LAN-Kabel an. So bleibt das Funkband den Geräten. Im Homeoffice kommt an, wofür du zahlst.
+
+## Wann eher der Tarif als das WLAN das Problem ist
+
+Nicht jedes langsame Internet ist ein WLAN-Problem. Genau das wird im Alltag oft verwechselt.
+
+Ein einfacher Test hilft:
+
+1. Miss per LAN-Kabel direkt am Router.
+2. Miss danach im selben Raum per WLAN.
+3. Miss anschließend an deinem Problemort.
+
+Wenn schon per Kabel deutlich zu wenig ankommt, liegt das Problem eher beim Anschluss oder beim Tarif. Dann bringt dir das beste Mesh-System nur begrenzt etwas. Zahlst du zum Beispiel **39 € bis 49 € im Monat** für einen 100-Mbit- oder 250-Mbit-Tarif und per LAN kommen dauerhaft nur **40 % bis 50 %** davon an, solltest du zuerst den Anbieter oder Router prüfen.
+
+Wenn per Kabel fast alles ankommt, per WLAN aber nur ein Bruchteil, ist das Funknetz der eigentliche Hebel. Dann helfen Standort, Kanalwahl, Bandtrennung und gegebenenfalls Mesh deutlich mehr als ein neuer Vertrag.
+
+## So misst du dein WLAN sinnvoll
+
+Viele testen einmal neben dem Router und wundern sich später über das Funkloch im Schlafzimmer. Aussagekräftig wird der Check erst, wenn du an mehreren Punkten misst.
+
+Sinnvoll sind zum Beispiel diese drei Orte:
+
+- direkt am Router
+- am Schreibtisch im Homeoffice
+- im Raum mit dem schlechtesten Empfang
+
+Notiere jeweils Download, Upload und Ping. Wiederhole das zu zwei Tageszeiten, etwa am Nachmittag und abends. So erkennst du, ob dein Problem eher durch Wände, Nachbarn oder allgemeine Auslastung entsteht.
+
+Gerade in Mehrfamilienhäusern zeigt dieser Vergleich oft sehr klar, ob ein freierer Funkkanal schon reicht oder ob du wirklich ein Mesh-System brauchst. Ohne diese Messung kaufst du schnell Hardware auf Verdacht.
 
 ## Fazit: Mit wenigen Handgriffen zum Highspeed-WLAN
 

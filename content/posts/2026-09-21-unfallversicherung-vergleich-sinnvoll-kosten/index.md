@@ -1,6 +1,7 @@
 ---
-title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten &"
-description: "Unfallversicherung Vergleich 2026: Für wen sie sich lohnt, was gute Tarife kosten und welche Leistungen (Progression, Gliedertaxe, Rente) wirklich zählen."
+lastmod: 2026-09-25
+title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten & Leistungen"
+description: "Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen."
 date: 2026-09-23T08:20:00Z
 draft: true
 tags: ["Unfallversicherung", "Unfallversicherung Vergleich", "Private Unfallversicherung", "Invalidität absichern"]
@@ -8,157 +9,359 @@ categories: ["Ratgeber"]
 pillar: "versicherungen"
 keywords: ["Unfallversicherung", "Unfallversicherung Vergleich", "Unfallversicherung sinnvoll", "Unfallversicherung Kosten", "Gliedertaxe", "Progression Unfallversicherung", "Invaliditätsleistung", "Kinder Unfallversicherung"]
 author: "Frank Hartung"
-erfahrung: "Ich habe für diesen Artikel aktuelle Unfall-Tarife, Bedingungswerke und Testergebnisse (u. a. Stiftung Warentest/Finanztest 2026) verglichen und jedes Rechenbeispiel an echten Tarif- und Leistungsdaten ausgerichtet – was hier steht, ist nachgerechnet, nicht abgeschrieben."
-kurzantwort: "Eine private Unfallversicherung zahlt bei bleibenden Unfallfolgen eine Einmalzahlung und optional eine lebenslange Rente – sie ersetzt aber keine Berufsunfähigkeitsversicherung, denn Krankheiten sind die deutlich häufigere Ursache für Invalidität. Sinnvoll ist sie vor allem für Kinder, Senioren und alle, die keine BU bekommen. Gute Tarife bieten mindestens 100.000 Euro Grundsumme, 225 bis 350 Prozent Progression, eine starke Gliedertaxe und kosten für Erwachsene grob zwischen 60 und 150 Euro im Jahr."
-ai_generated: true
-ki_redaktion: "arena"
-ki_redaktion_status: "review"
+erfahrung: "Ich habe für diesen Artikel aktuelle Unfall-Tarife, Bedingungswerke und Testergebnisse 2026 verglichen und die Beispiele an realen Leistungsdaten ausgerichtet. Der Fokus liegt auf Praxis, nicht auf Werbesprache."
+kurzantwort: "Eine private Unfallversicherung zahlt bei dauerhaften Folgen nach einem Unfall. Meist gibt es eine Einmalzahlung, teils auch eine Unfallrente. Sie ersetzt aber keine BU, weil Krankheiten viel häufiger die Arbeitskraft bedrohen als Unfälle. Sinnvoll ist sie oft für Kinder, Senioren und Menschen ohne bezahlbare BU. Wichtig sind Grundsumme, Progression, Gliedertaxe und faire Fristen."
+ai_generated: false
 cover:
   image: "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg"
   alt: "Unfallversicherung Vergleich 2026: Sinn, Kosten und Leistungen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
 savings: "ab ca. 5 € im Monat"
 pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
-pin_description: "*Werbung | Sturz vom Rad, Glatteis, Sportunfall: Wer zahlt, wenn bleibende Schäden bleiben? Für wen sich eine Unfallversicherung lohnt, was gute Tarife kosten und welche Leistungen wirklich zählen. Jetzt vergleichen! #unfallversicherung #absicherung #geldsparen"
+pin_description: "*Werbung | Für wen sich eine Unfallversicherung lohnt, was gute Tarife kosten und welche Leistungen wirklich zählen."
 ---
 
-Sturz beim Skifahren, Glatteis auf der Treppe, ein Sprung ins Wasser: Rund 70 % aller Unfälle passieren in der Freizeit. Genau dort greift die gesetzliche Unfallversicherung nicht – sie gilt nur für Arbeit und Arbeitsweg.
 
-Für bleibende Folgen zahlt sonst niemand. Bleibst du nach einem Freizeitunfall dauerhaft eingeschränkt, wächst schnell eine Lücke von mehreren hunderttausend Euro. Für Umbau, behindertengerechtes Auto und Verdienstausfall.
 
-Die **private Unfallversicherung** schließt einen Teil dieser Lücke. Sie zahlt bei dauerhaften Unfallfolgen eine Einmalleistung. Auf Wunsch kommt eine lebenslange Rente dazu – oft schon für rund 5 bis 12 € im Monat.
+Ein Sturz auf der Treppe. Ein Radunfall.
 
-Aber sie ist auch eine der meist missverstandenen Policen überhaupt: Sie zahlt nur bei Unfall – nicht bei Krankheit. Und Krankheiten sind die deutlich häufigere Ursache für Invalidität.
-Dieser Vergleich zeigt dir ehrlich, für wen sich der Schutz lohnt. Was gute Tarife kosten und welche Leistungen im Ernstfall wirklich zählen.
+Eine Verletzung beim Sport. Solche Dinge passieren oft in der Freizeit. Genau dort zahlt die gesetzliche Unfallversicherung meist nicht.
 
-**Das Wichtigste in Kürze**
+Viele fragen sich deshalb: **Brauche ich eine private Unfallversicherung?**
 
-- Die Unfallversicherung zahlt nur bei **bleibenden Unfallfolgen** – für Berufstätige steht die Berufsunfähigkeitsversicherung an erster Stelle.
-- Gute Tarife bieten mindestens 100.000 € Grundsumme, 225 bis 350 % Progression, eine überdurchschnittliche Gliedertaxe und einen Mitwirkungsanteil von 100 %.
-- Die Kosten liegen für Erwachsene typischerweise bei 60 bis 150 € im Jahr, für Kinder bei rund 40 bis 80 €. Entscheidend sind Summe, Progression, Beruf und Bausteine.
-- Besonders sinnvoll ist der Schutz für Kinder, Senioren sowie alle, die keine Berufsunfähigkeitsversicherung bekommen oder brauchen.
+Die kurze Antwort lautet: **Manchmal ja. Aber nicht für alle gleich.**
+
+Für manche Menschen ist sie sehr sinnvoll. Für andere ist sie eher ein Zusatz, aber nicht der erste wichtige Schutz. Entscheidend ist, was die Police wirklich leistet. Und ebenso wichtig ist, was sie nicht leistet.
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Rechne Tarife mit deinen Daten durch – Beruf und gewünschte Grundsumme entscheiden über Preis und Leistung: [**Unfallversicherung vergleichen**](/go/unfallversicherung/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche Tarife nie nur über den Preis. Wichtiger sind Grundsumme, Progression, Gliedertaxe und klare Regeln im Kleingedruckten: [**Unfallversicherung vergleichen**](/go/unfallversicherung/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was zahlt eine Unfallversicherung – und was nicht?
+## Das Wichtigste in Kürze
 
-Die private Unfallversicherung kennt im Kern nur einen Leistungsfall: **dauernde Beeinträchtigung durch einen Unfall**. Dafür zahlt sie je nach Tarif eine Einmalzahlung – die Invaliditätsleistung – oder eine lebenslange Unfallrente, oder beides.
-Was sie ausdrücklich nicht ist, zeigt diese Übersicht:
+- Die private Unfallversicherung zahlt bei **Unfällen**, nicht bei normalen Krankheiten.
+- Für viele Berufstätige ist zuerst die **BU** wichtiger.
+- Sinnvoll ist der Schutz oft für **Kinder, Senioren und Menschen ohne gute BU**.
+- Gute Tarife brauchen **solide Grundsumme, starke Progression und gute Gliedertaxe**.
+- Viele Tarife kosten nur **wenige Euro im Monat**.
+- Der billigste Vertrag ist oft nicht der beste Vertrag.
 
-| Situation | Zahlt die Unfallversicherung? |
-|:---|:---|
-| Bleibende Schäden nach Freizeitunfall (z. B. steifes Knie, verlorener Finger) | Ja – Einmalzahlung nach Gliedertaxe und Progression |
-| Volle Invalidität nach Unfall | Ja – Grundsumme mal Progression, optional plus Rente |
-| Unfall mit vollständiger Heilung | Nein (außer vereinbartem Krankenhaustagegeld) |
-| Berufsunfähigkeit durch Krankheit (z. B. Rücken, Psyche, Krebs) | Nein – dafür ist die BU zuständig |
-| Krankentagegeld bei Arbeitsunfähigkeit | Nein – nur Unfall-Tagegeld-Bausteine helfen hier |
-| Bergung nach Wander- oder Skiunfall | Ja, bis zur vereinbarten Summe (oft bis rund 50.000 €) |
+## Kurz gesagt: Wann eher ja, wann eher nein?
 
-**Rechenbeispiel Einmalzahlung:** Bei 200.000 € Grundsumme und Verlust einer Hand setzt ein Durchschnittstarif rund 55 % Invalidität an. Das ergibt 110.000 €. Ein starker Tarif mit besserer Gliedertaxe bewertet dieselbe Hand mit rund 72 % – also 144.000 €. Wenige Prozentpunkte bedeuten hier schnell Zehntausende Euro.
+### Eher ja
 
-Merke dir außerdem die **Fristen**: Die Invalidität muss üblicherweise binnen 15 Monaten nach dem Unfall eintreten. Ärztlich festgestellt muss sie auch sein. Je nach Tarif gelten 12 bis 24 Monate. Versäumst du die Fristen, verlierst du den Anspruch – trotz berechtigtem Fall.
+- du suchst Schutz für ein Kind
+- du bist älter und willst Sturzfolgen absichern
+- du bekommst keine gute BU
+- du willst eine günstige Ergänzung für schwere Unfallfolgen
 
-## Für wen lohnt sich eine Unfallversicherung wirklich?
+### Eher nein als Hauptlösung
 
-Die ehrliche Reihenfolge lautet: **Erst die Berufsunfähigkeitsversicherung (BU), dann die Unfallversicherung als Ergänzung.** Nur wenige Fälle gehen auf Unfälle zurück. Krankheiten wie Rückenleiden, Psyche-Leiden oder Krebs sind die häufigeren Ursachen. Wer berufstätig ist, sichert zuerst die Arbeitskraft per BU ab. In diesen Fällen gehört die Unfallversicherung trotzdem dazu:
+- du brauchst vor allem Schutz für deine Arbeitskraft
+- du hast noch gar keine BU und könntest eine gute BU bekommen
+- du verwechselst die Unfallversicherung mit einem Einkommensschutz
 
-| Deine Situation | Empfehlung |
-|:---|:---|
-| Kinder (Kita, Schule, Verein, Freizeit) | Sehr sinnvoll – Kinder bekommen keine BU, Unfälle sind hier das Hauptrisiko; mindestens 100.000 € Grundsumme wählen |
-| Hausfrauen, Hausmänner, Studierende | Sinnvoll – oft keine oder nur teure BU möglich, Unfallschutz schließt die Lücke günstig |
-| Senioren ab etwa 65 | Sinnvoll – Sturzrisiko steigt, BU läuft meist aus oder ist unbezahlbar; auf Unfallrente achten |
-| Selbstständige ohne (bezahlbare) BU | Sinnvolle Ergänzung – ersetzt die BU nicht, federt aber Unfallfolgen ab |
-| Büro-Berufstätige mit guter BU | Optional – als günstige Ergänzung für hohe Einmalzahlungen bei schwerer Invalidität |
-| Extremsportler, Motorradfahrer | Unbedingt Bedingungswerk prüfen – manche Risiko-Sportarten sind ausgeschlossen oder nur gegen Zuschlag versichert |
+Ein Merksatz hilft: **Die Unfallversicherung schützt vor Unfallfolgen. Die BU schützt dein Einkommen bei Krankheit und Unfall.**
 
-**Rechenbeispiel Familie:** Zwei Erwachsene im Büro zahlen je rund 90 € im Jahr. Zwei Kinder kosten je rund 60 €. Zusammen sind das rund 300 € im Jahr – 25 € im Monat. Verletzt sich ein Kind beim Fußball so schwer, dass 30 % Invalidität bleiben, fließen rund 30.000 €. (Rechnung: 100.000 € Grundsumme.) Geld für Umbauten, Therapien – und alles, was die Kasse nicht zahlt.
+## Was die Unfallversicherung leistet
 
-## Welche Leistungen sollte ein guter Tarif enthalten?
+Im Kern zahlt sie, wenn nach einem Unfall **dauerhafte Schäden** bleiben.
 
-Stiftung Warentest/Finanztest hat Anfang 2026 rund 120 Tarife geprüft. Mehrfach gab es die Bestnote „sehr gut“ (bis 1,0). Die Tests zeigen: Die Spreu trennt sich vom Weizen bei fünf Stellschrauben:
+Typische Leistungen sind:
 
-| Baustein | Schwacher Tarif | Guter Tarif |
-|:---|:---|:---|
-| Grundsumme (Invalidität) | unter 100.000 € | mindestens 100.000 €, Hauptverdiener das 5- bis 6-fache Bruttoeinkommen |
-| Progression | keine oder ab 50 % Invalidität | 225 bis 350 %, greift ab 25 % Invalidität |
-| Gliedertaxe | GDV-Mindestwerte | deutlich darüber (z. B. Hand 70 %+ statt 55 %) |
-| Mitwirkungsanteil | 25–50 % (Kürzung bei Vorerkrankung) | 100 % (keine Kürzung) |
-| Unfallrente | keine | monatliche Rente ab 50 % Invalidität |
-| Bergungskosten | niedrig oder fehlend | weltweit, bis rund 25.000 bis 50.000 € |
+- eine Einmalzahlung
+- auf Wunsch eine Unfallrente
+- Bergungskosten
+- Hilfen für Reha oder Umbauten, je nach Tarif
 
-Zwei Stellschrauben schauen wir uns genauer an. **Erstens die Progression:** Sie vervielfacht die Leistung bei schwerer Invalidität. Bei 350 % und voller Invalidität zahlt der Versicherer das 3,5-Fache der Grundsumme. Aus 150.000 € werden so 525.000 €.
-Achte darauf, ab welchem Grad die Progression greift: Gute Tarife starten bei 25 %, schwache erst bei 50 %.
+Wichtig ist: Nicht jeder Unfall führt zu Geld. Ein kleiner Unfall mit kompletter Heilung bringt oft keine große Leistung.
 
-**Zweitens die Gliedertaxe:** Sie legt fest, wie viel Prozent Invalidität pro Körperteil gelten. GDV-Standard sind zum Beispiel 20 % für einen Daumen, 55 für eine Hand und 70 für einen Arm. Starke Tarife (in Tests oft „Gliedertaxe Plus“) setzen deutlich höhere Werte an. Finanztip zeigte Anfang 2026: Bei einer Hand leisten starke Tarife im Schnitt rund 72 statt 55 %.
+## Was sie nicht leistet
 
-**Faustregel:** Lieber eine hohe Grundsumme mit 350 % Progression als viele kleine Bausteine. Krankenhaustagegeld und Genesungsgeld sind nette Extras – über sechsstellige Beträge entscheiden Summe, Progression und Gliedertaxe.
+Hier liegt der größte Denkfehler.
 
-## Was kostet eine gute Unfallversicherung?
+### Keine normale Krankheitsabsicherung
 
-Weniger als die meisten denken. Der Beitrag hängt von Grundsumme, Progression, Beruf (Büro vs. körperlich tätig) und Bausteinen ab. Typische Spannen für solide Tarife:
+Rücken, Psyche, Krebs oder andere Krankheiten gehören in der Regel nicht zum Schutzkern dieser Police.
 
-- **Kind:** rund 40 bis 80 € im Jahr – der günstigste Einstieg mit der längsten Laufzeit des Schutzes.
-- **Erwachsener, Bürotätigkeit:** rund 60 bis 120 € im Jahr für 100.000 bis 200.000 € Grundsumme mit Progression.
-- **Erwachsener mit Unfallrente:** rund 100 bis 180 € im Jahr – die Rente kostet Aufpreis, sichert aber lebenslanges Einkommen.
-- **Körperlich Tätige und Risikoberufe:** spürbar teurer, je nach Gefahrenklasse – hier lohnt der Vergleich besonders.
+### Kein Ersatz für eine BU
 
-**Rechenbeispiel Preis-Leistung:** Ein „sehr gut“ bewerteter Top-Tarif sichert 500.000 € bei Vollinvalidität. Er kostet laut Finanztest rund 350 € im Jahr – keine 30 € im Monat. Ein solider Midrange-Tarif mit 200.000 € Grundsumme kostet oft rund 100 € im Jahr. Auch mit 350 % Progression. Zum Vergleich: Eine BU mit 1.000 € Monatsrente kostet oft das Drei- bis Fünffache. Unfallschutz ist spottbillig – deckt aber eben nur Unfälle ab.
+Wenn du wegen Krankheit nicht mehr arbeiten kannst, hilft meist nur eine BU. Genau darum ist die BU für viele Menschen der wichtigere Schutz.
 
-## Die 5 größten Fehler beim Abschluss
+### Kein Geld für jeden kurzen Ausfall
 
-1. **Zu niedrige Grundsumme wählen.** 50.000 € klingen oft nach viel. Bei rund 30 % Invalidität sind es rund 15.000 € – ein Tropfen auf den heißen Stein bei Umbau und Verdienstausfall. Mindestens 100.000 € sollten es sein.
-2. **Progression ab 50 % akzeptieren.** Viele Billigtarife starten die Vervielfachung erst bei halber Invalidität – genau die mittelschweren Fälle (20 bis 40 %) gehen dann fast leer aus. Auf Start ab 25 % achten.
-3. **Mitwirkungsanteil übersehen.** Haben Vorerkrankungen zum Schaden beigetragen, kürzen manche Tarife um 50 % und mehr. Gute Tarife verzichten bis 100 % Mitwirkung auf Kürzungen.
-4. **Fristen und Obliegenheiten ignorieren.** Invalidität muss fristgerecht (meist 15 Monate) ärztlich festgestellt und gemeldet sein; der Unfall selbst oft innerhalb weniger Tage. Kalender-Termine und Vorlagen vom Versicherer nutzen.
-5. **Risiko-Hobbys und Beruf falsch angeben.** Motorrad, Reiten, Kampfsport, Handwerk auf dem Dach – wer Gefahrerhöhungen verschweigt, riskiert Leistungskürzungen. Ehrlich angeben und Tarife ohne Hobby-Ausschlüsse wählen.
+Wer zwei Wochen krankgeschrieben ist und dann wieder fit wird, bekommt aus der Unfallversicherung oft nichts Relevantes.
 
-## In sechs Schritten zum passenden Tarif
+## Für wen sie besonders sinnvoll ist
 
-1. **BU-Status klären:** Hast du eine BU? Dann ergänzt die Unfallversicherung. Keine BU (Kind, Studium, Haushalt, Rente)? Dann ist sie dein wichtigster Invaliditätsschutz.
-2. **Grundsumme festlegen:** Kinder mindestens 100.000 €; Erwachsene grob das 3- bis 6-fache Bruttojahreseinkommen, Hauptverdiener eher 5- bis 6-fach.
-3. **Vergleichsrechner starten:** [Jetzt Unfallversicherung vergleichen](/go/unfallversicherung/) – mit echtem Beruf und ehrlichen Hobbys, nicht mit Wunschangaben.
-4. **Die 3 bis 5 Favoriten im Bedingungswerk prüfen:** Progressions-Start, Gliedertaxe-Werte, Mitwirkungsanteil, Unfallrente ab 50 %, Bergungskosten weltweit.
-5. **Testergebnisse gegenprüfen:** Finanztest-Bewertungen („sehr gut“ bis 1,0 in 2026) sind ein starkes Kaufsignal – trotzdem zählt am Ende deine persönliche Situation und dein Beruf.
-6. **Antrag stellen und Fristen notieren:** Nach Abschluss die Meldefristen (Unfallmeldung, Invaliditätsfeststellung) notieren und die Police so ablegen, dass Angehörige sie im Ernstfall finden.
+Nicht jede Person braucht diese Police gleich dringend. Für einige Gruppen ist sie aber sehr plausibel.
 
-## Häufige Irrtümer
+### Kinder
 
-- ❌ *„Die Unfallversicherung ersetzt die Berufsunfähigkeit.“* Nein – sie zahlt nur bei Unfall, Krankheiten bleiben außen vor. Für Berufstätige ist die BU die wichtigere Police, der Unfallschutz die günstige Ergänzung.
-- ❌ *„Gesetzlich bin ich doch schon unfallversichert.“* Nur auf der Arbeit und dem Arbeitsweg. Rund 70 % aller Unfälle passieren in der Freizeit – dort greift nur der private Schutz.
-- ❌ *„Ich bekomme Geld für jeden Unfall.“* Nur bei bleibenden Schäden (plus Tagegeld-Bausteine). Wer vollständig heilt, erhält keine Einmalzahlung – so will es das Versicherungsprinzip.
-- ❌ *„Je mehr Bausteine, desto besser.“* Falsch priorisiert: Entscheidend sind Grundsumme, Progression und Gliedertaxe. Tagegelder und Reha-Beihilfen sind Extras, kein Ersatz für eine hohe Invaliditätssumme.
+Kinder haben meist noch keine BU. Gleichzeitig passieren Unfälle im Alltag, beim Spiel und beim Sport. Eine Unfallversicherung kann hier eine sinnvolle Lösung sein.
 
-## Fazit: Günstiger Schutz mit klarer Grenze
+### Senioren
 
-Die **Unfallversicherung** ist eine der billigsten Policen überhaupt. Für wenige Euro im Monat sicherst du sechsstellige Einmalzahlungen ab. Auf Wunsch gibt es eine lebenslange Rente bei schwerer Invalidität.
-Ihre Grenze ist ebenso klar: Sie zahlt nur bei Unfall. Wer das verstanden hat, trifft die richtige Reihenfolge: **BU zuerst, Unfallschutz als Ergänzung**. Der Tarif braucht eine hohe Grundsumme, starke Progression und eine gute Gliedertaxe.
+Mit dem Alter steigt oft das Risiko für Stürze. Dann kann eine Police helfen, wenn nach einem Unfall Umbauten, Hilfen oder Pflegekosten anfallen.
 
-Für Kinder, Senioren und alle ohne BU-Zugang gehört sie zur Grundausstattung. Rund 30 Minuten Vergleich heute sichern deiner Familie im Ernstfall **100.000 € und mehr**. Ein starkes Stück Sicherheit für kleines Geld.
+### Hausfrauen, Hausmänner und Studierende
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Zahnzusatzversicherung 2026](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/) · [Tierkrankenversicherung 2026](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
+Hier fehlt oft ein klassischer Schutz der Arbeitskraft. Die Unfallversicherung kann darum eine sinnvolle Ergänzung sein.
+
+### Menschen ohne bezahlbare BU
+
+Manche bekommen wegen Vorerkrankungen keine gute BU. Andere finden die BU zu teuer. Dann kann eine Unfallversicherung wenigstens einen Teil des Risikos abfangen.
+
+## Für wen sie eher nur Ergänzung ist
+
+Viele Berufstätige sollten zuerst an die BU denken. Der Grund ist simpel: Krankheiten sind viel öfter der Auslöser für längere Ausfälle als Unfälle.
+
+Darum gilt oft diese Reihenfolge:
+
+1. erst BU prüfen
+2. dann Unfallversicherung als Zusatz prüfen
+
+Die Police ist also nicht schlecht. Sie ist nur oft **nicht der erste Baustein**.
+
+## Die drei wichtigsten Punkte im Tarif
+
+Wenn du Angebote vergleichst, schau vor allem auf diese drei Dinge.
+
+### 1. Grundsumme
+
+Sie ist die Basis für die spätere Auszahlung.
+
+### 2. Progression
+
+Sie sorgt dafür, dass bei schweren Schäden deutlich mehr Geld fließt.
+
+### 3. Gliedertaxe
+
+Sie legt fest, wie hoch der Verlust oder die Einschränkung eines Körperteils bewertet wird.
+
+Diese drei Punkte sind viel wichtiger als bunte Extras im Prospekt.
+
+## Was eine gute Grundsumme ausmacht
+
+Eine zu kleine Summe ist ein häufiger Fehler. Denn ein schwerer Unfall kann hohe Kosten auslösen.
+
+Dazu zählen zum Beispiel:
+
+- Umbauten zu Hause
+- Hilfsmittel
+- Reha-Kosten
+- Hilfe im Alltag
+- Einkommenslücken im Haushalt
+
+### Grobe Orientierung
+
+- Kinder: oft mindestens **100.000 €**
+- Erwachsene: oft **100.000 € bis 200.000 €**
+- bei höherem Risiko oder mehr Verantwortung: teils mehr
+
+Das sind keine starren Regeln. Aber 50.000 € sind in vielen Fällen einfach zu knapp.
+
+## Warum die Progression so wichtig ist
+
+Die Progression ist ein Turbo für schwere Fälle. Sie hebt die Leistung stark an, wenn der Schaden groß ist.
+
+### Einfaches Beispiel
+
+- Grundsumme: **150.000 €**
+- Progression: **350 %**
+- mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**
+
+Ohne gute Progression bleibt die Leistung oft gerade dort zu klein, wo der Schaden am größten ist.
+
+## Was die Gliedertaxe im Alltag bedeutet
+
+Die Gliedertaxe wirkt trocken. In Wahrheit entscheidet sie oft über viele Tausend Euro.
+
+Sie legt fest, welcher Anteil der Grundsumme für bestimmte Verletzungen gilt.
+
+### Beispiel
+
+| Verletzung | schwächerer Tarif | stärkerer Tarif |
+|---|---:|---:|
+| Hand | 55 % | 70 % |
+| Daumen | 20 % | teils mehr |
+| Arm | 70 % | teils höher |
+
+### Rechenbeispiel
+
+- Grundsumme: **200.000 €**
+- Hand bei 55 %: **110.000 €**
+- Hand bei 70 %: **140.000 €**
+
+Das macht **30.000 € Unterschied**. Genau deshalb darfst du die Gliedertaxe nie überblättern.
+
+## Was gute Tarife kosten
+
+Die Beiträge sind oft überschaubar.
+
+### Grobe Spannen 2026
+
+| Person | Beitrag pro Jahr |
+|---|---:|
+| Kind | 40 € bis 80 € |
+| Erwachsener, Bürojob | 60 € bis 120 € |
+| mit Unfallrente oder Extras | 100 € bis 180 € |
+| riskanter Beruf | oft höher |
+
+Der Preis hängt unter anderem ab von:
+
+- Alter
+- Beruf
+- Hobbys
+- Grundsumme
+- Progression
+- Extras im Vertrag
+
+## Lohnt sich das für den Preis?
+
+Diese Frage ist fair. Und sie lässt sich gut beantworten.
+
+Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige Summe leisten kann, ist das vom Hebel her stark. Natürlich nur dann, wenn der Tarif auch wirklich gut gebaut ist.
+
+Die bessere Frage lautet darum oft: **Könnte dein Haushalt die Folgen eines schweren Freizeitunfalls allein tragen?**
+
+Wenn die Antwort klar nein ist, wird die Police interessanter.
+
+## Welche Extras oft überschätzt werden
+
+Viele Verträge werben mit vielen Bausteinen. Doch nicht alles ist gleich wichtig.
+
+### Wichtiger Kern
+
+- gute Grundsumme
+- starke Progression
+- gute Gliedertaxe
+- faire Fristen
+- ordentliche Bergungskosten
+
+### Eher nett als zentral
+
+- kleines Tagegeld
+- kleine Bonuszahlungen
+- hübsche Zusatznamen ohne große Wirkung
+
+Erst die Kernleistung. Dann die Extras.
+
+## Vorerkrankungen und Fristen nicht vergessen
+
+Zwei Punkte werden oft zu spät gelesen.
+
+### Vorerkrankungen
+
+Manche Tarife kürzen stärker, wenn frühere Leiden an den Folgen mitwirken. Gerade im Alter ist das wichtig.
+
+### Fristen
+
+Nach einem Unfall musst du Meldungen und Nachweise rechtzeitig einreichen. Sonst kann es Ärger geben.
+
+Prüfe deshalb immer:
+
+- wie schnell du melden musst
+- bis wann ein Dauerschaden festgestellt sein muss
+- welche Unterlagen verlangt werden
+
+## Die häufigsten Fehler beim Abschluss
+
+### Fehler 1: Nur auf den Preis schauen
+
+Billig klingt gut, hilft aber wenig bei schwacher Leistung.
+
+### Fehler 2: Grundsumme zu klein wählen
+
+Dann ist der Vertrag im Ernstfall zu dünn.
+
+### Fehler 3: Progression unterschätzen
+
+Gerade schwere Fälle brauchen hohe Leistungen.
+
+### Fehler 4: Gliedertaxe ignorieren
+
+Hier stecken oft große Unterschiede.
+
+### Fehler 5: BU und Unfallversicherung verwechseln
+
+Beides hat einen anderen Job.
+
+## So vergleichst du Tarife sinnvoll
+
+Ein klarer Ablauf hilft.
+
+### Schritt 1
+Prüfe zuerst, ob du eine gute BU hast oder bekommen kannst.
+
+### Schritt 2
+Lege eine passende Grundsumme fest.
+
+### Schritt 3
+Achte auf starke Progression.
+
+### Schritt 4
+Vergleiche die Gliedertaxe genau.
+
+### Schritt 5
+Lies Regeln zu Vorerkrankungen und Fristen.
+
+### Schritt 6
+Erst jetzt vergleichst du den Preis.
+
+## Beispiel für Familien
+
+Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen.
+
+Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann schon eine Grundsumme von **100.000 €** zeigen, wie stark der Hebel ist. Genau deshalb ist dieser Schutz für Kinder oft besonders gut nachvollziehbar.
+
+## Wann du eher verzichten kannst
+
+Zurückhaltender prüfen kannst du, wenn:
+
+- du sehr guten Schutz für deine Arbeitskraft hast
+- du hohe Folgen notfalls selbst tragen könntest
+- dir das Risiko im Verhältnis zu anderen Themen weniger wichtig ist
+
+Dann ist die Unfallversicherung eher ein Zusatz als ein Muss.
+
+## So passt die Police ins Gesamtbudget
+
+Wie jede Versicherung sollte auch diese Police in dein ganzes Geldsystem passen. Wenn du erst noch teure Basics ordnen musst, gehören manche Themen vorher auf die Liste.
+
+Dazu passen auch diese Artikel:
+
+- [Privathaftpflicht: Warum sie so wichtig ist](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+- [Zahnzusatzversicherung 2026](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/)
+- [Versicherung-Update: Was sich jetzt für dich ändert](../../posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/)
+
+> 🛡️ **Spar-Tipp:** Günstig ist nicht automatisch gut. Prüfe immer erst Leistung und Bedingungen. Dann erst den Beitrag. Den direkten Vergleich findest du hier: [**Jetzt Unfallversicherung vergleichen**](/go/unfallversicherung/)
+
+## Fazit: Sinnvoll, aber nicht für jeden der erste Schutz
+
+Die private Unfallversicherung kann sehr sinnvoll sein. Vor allem für Kinder, Senioren und Menschen ohne gute BU. Sie hilft, wenn ein Unfall im Alltag oder in der Freizeit schwere und dauerhafte Folgen hat.
+
+Sie ersetzt aber keine BU. Genau das ist der wichtigste Punkt. Wer das sauber trennt und auf Grundsumme, Progression, Gliedertaxe und Fristen achtet, kann mit einer guten Police einen nützlichen und oft günstigen Baustein für den eigenen Schutz aufbauen.
+
+**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · [Zahnzusatzversicherung 2026](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/) · [Tierkrankenversicherung 2026](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/)
 
 ## Häufige Fragen
 
 ### Zahlt die Unfallversicherung auch bei Krankheit?
-Nein. Sie leistet nur bei Unfällen mit bleibenden Folgen. Wirst du durch Krankheit berufsunfähig – etwa durch Rücken, Psyche oder Krebs – , brauchst du eine BU. Beide Policen ergänzen sich. Ersetzen aber nicht.
+Nein. Sie zahlt in der Regel nur bei Unfallfolgen, nicht bei normalen Krankheiten.
 
-### Was bedeutet Progression bei der Unfallversicherung?
-Die Progression vervielfacht die Leistung bei schwerer Beeinträchtigung. Bei 350 % und voller Invalidität zahlt der Versicherer das 3,5-Fache der Grundsumme. Wichtig ist, ab welchem Grad sie greift: Gute Tarife starten bei 25 %. Schwache erst bei 50 % Invalidität.
+### Was ist wichtiger: BU oder Unfallversicherung?
+Für viele Berufstätige zuerst die BU. Die Unfallversicherung ist oft eher Zusatzschutz.
 
 ### Wie hoch sollte die Grundsumme sein?
-Für Kinder mindestens 100.000 €. Für Erwachsene grob das 3- bis 6-Fache deines Jahreseinkommens – Hauptverdiener eher das 5- bis 6-Fache. Lieber eine Stufe höher wählen: 50.000 € mehr Grundsumme kosten oft nur wenige Euro im Jahr.
+Oft mindestens 100.000 €. Je nach Lage kann mehr sinnvoll sein.
 
-### Was ist die Gliedertaxe?
-Die Gliedertaxe legt fest, wie viel Prozent Invalidität pro Körperteil gelten – zum Beispiel 55 % für eine Hand nach GDV-Standard. Starke Tarife setzen deutlich höhere Werte an. Bei der Hand sind das im Schnitt rund 72 % – im Ernstfall Zehntausende Euro.
+### Warum ist die Progression so wichtig?
+Weil sie bei schweren Schäden viel mehr Geld freisetzen kann.
 
-### Brauchen Rentner noch eine Unfallversicherung?
-Oft ja: Das Sturzrisiko steigt mit dem Alter. Eine BU läuft meist aus oder wird unbezahlbar. Wichtig sind eine Unfallrente ab 50 % Invalidität. Auch weltweite Bergungskosten zählen – etwa für Wanderer und Radfahrer im Ruhestand.
-
-### Was muss ich nach einem Unfall beachten?
-Melde den Unfall schnell beim Versicherer. Die Fristen stehen im Bedingungswerk – oft nur wenige Tage. Lass eine mögliche Invalidität fristgerecht ärztlich feststellen, üblicherweise binnen 15 Monaten. Sammle alle Arztberichte. Und lege die Police so ab, dass Angehörige sie finden.
+### Für wen lohnt sich die Police besonders?
+Vor allem für Kinder, Senioren und Menschen ohne gute BU.
 
 ---
 

@@ -24,7 +24,11 @@ pin_description: "*Werbung | 100 €, 150 €, 200 € mehr am Monatsende – oh
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 
-Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter färben sich bunt. Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) stellen. Der Wechsel der Kfz‑Versicherung läuft zum **30. November**.
+
+
+Wenn die Tage kürzer werden, beginnt die beste Zeit zum Sparen. Die Blätter färben sich bunt.
+
+Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) stellen. Der Wechsel der Kfz‑Versicherung läuft zum **30. November**.
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 
@@ -73,7 +77,9 @@ Du kannst sie bis Ende November mit einer Frist von einem Monat kündigen. Im He
 
 ### 2. Heizungs‑Check & Vorlauftemperatur senken
 
-Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen. Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
+Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen.
+
+Wer die Vorlauftemperatur um ein paar Grad senkt und alte Thermostate tauscht, spart in der Regel 8 % bis 12 % Energie. Bei einem Einfamilienhaus entspricht dies einer Spanne von **ca. 160 € bis 240 €**.
 
 **Konkrete Maßnahmen:**
 
@@ -95,7 +101,9 @@ Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Hei
 
 ### 3. Sachversicherungen bündeln und Altverträge kündigen
 
-Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat. Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
+Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)-, Hausrat‑ oder Rechtsschutzverträge deutlich mehr als Neukunden. Moderne Tarife mit 50 Mio. € Deckung kosten oft unter 5 € im Monat.
+
+Ein Vergleich bringt schnell **ca. 100 € bis 200 €** pro Jahr – bei oft besseren Leistungen. Streiche Bausteine wie Glasbruch, wenn du keine teuren Ceranfelder oder Wintergärten hast.
 
 **Checkliste für den Versicherungs‑Check:**
 
@@ -117,7 +125,9 @@ Viele zahlen für alte [Privathaftpflicht](../../posts/2026-08-17-privathaftpfli
 
 ### 4. Strom‑ und Gastarife antizyklisch wechseln
 
-Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, sicherst du dir oft bessere Preise. Viele Tarife haben lange Preisgarantien. Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
+Wechselst du den Strom‑ oder Gasanbieter im Spätsommer oder frühen Herbst, sicherst du dir oft bessere Preise. Viele Tarife haben lange Preisgarantien.
+
+Meide die teure Grundversorgung. Bei einem Durchschnittsverbrauch (3.500 kWh Strom und 20.000 kWh Gas) liegt das Sparpotenzial bei bis zu **ca. 450 €**.
 
 **Schritte zum Wechsel:**
 
@@ -172,13 +182,17 @@ Sie schließen die Ritzen schnell. Die Räume bleiben warm. Die Heizung läuft w
 3. **Tür‑Zugluftstopper:** Schaumstoff‑ oder Silikon‑Stopper (ca. 8 €).
 4. **Kontrolle nach 2 Wochen:** Noch einmal prüfen, ob neue Undichtigkeiten entstanden sind.
 
-**Rechenbeispiel:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca. 5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren.
+**Rechenbeispiel:** Kosten für Dichtungsband (10 m Rolle) = 9,90 €. Einsparung bei einem 100 m² Haus: ca.
+
+5 % weniger Heizenergie → bei 1.800 kWh Jahresverbrauch ≈ 90 kWh → **≈ 8,5 €** Jahresersparnis. Der Pay‑back liegt nach ca. 1,5 Jahren.
 
 ---
 
 ### 7. Freizeitgestaltung auf herbstliche Gratis‑Aktivitäten umstellen
 
-Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig. So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
+Der Herbst hat viel zu bieten: Waldspaziergänge, Pilze sammeln oder Drachen steigen lassen. Auch Heim‑Kino mit selbstgemachtem Popcorn ist günstig.
+
+So sparst du monatlich ca. **60 € bis 100 €**. Auf Lebensfreude musst du nicht verzichten.
 
 **Ideen für kostenlose Aktivitäten:**
 
@@ -261,7 +275,9 @@ Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie amortisieren sic
 
 Der Herbst ist keine trübe Zeit. Er ist die perfekte Gelegenheit, deine Finanzen in Ordnung zu bringen.
 
-Prüfe deine Verträge. Nutze den **Kfz‑Stichtag 30. November**. Mach dein Zuhause energieeffizient. So gehst du mit einem dicken Plus auf dem Konto ins neue Jahr.
+Prüfe deine Verträge. Nutze den **Kfz‑Stichtag 30.
+
+November**. Mach dein Zuhause energieeffizient. So gehst du mit einem dicken Plus auf dem Konto ins neue Jahr.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · DSL‑Wechselbonus sichern · [Versicherungen optimieren](../../pillar/versicherungen/)
 
@@ -269,7 +285,9 @@ Prüfe deine Verträge. Nutze den **Kfz‑Stichtag 30. November**. Mach dein Zuh
 
 ### Warum ist der 30. November bei Versicherungen so wichtig?
 
-Die meisten Kfz‑Verträge laufen vom 1. Januar bis 31. Dezember. Die Kündigungsfrist beträgt in der Regel einen Monat. Deine Kündigung muss darum spätestens am 30. November beim Versicherer vorliegen.
+Die meisten Kfz‑Verträge laufen vom 1. Januar bis 31. Dezember.
+
+Die Kündigungsfrist beträgt in der Regel einen Monat. Deine Kündigung muss darum spätestens am 30. November beim Versicherer vorliegen.
 
 ### Habe ich ein Sonderkündigungsrecht bei Beitragserhöhungen?
 
