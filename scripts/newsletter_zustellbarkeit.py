@@ -1015,6 +1015,29 @@ def _pruefe_plan(anzahl: int | None) -> list[dict]:
 
 
 # ------------------------------------------------------------------------ Regeln S*
+def _letzter_journal_eintrag(root: str, praefix: str = "") -> dict | None:
+    """Die letzte Journal-Zeile (optional nur Ausgaben mit Präfix).
+
+    Das Journal trägt nur Adress-Hashes und die Anbieter-Meldung – es ist
+    zitierfähig, auch im Summary eines öffentlichen Repos.
+    """
+    pfad = os.path.join(root, "data", "newsletter_journal.jsonl")
+    try:
+        with open(pfad, encoding="utf-8") as fh:
+            zeilen = fh.readlines()
+    except OSError:
+        return None
+    for zeile in reversed(zeilen):
+        try:
+            eintrag = json.loads(zeile)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if praefix and not str(eintrag.get("ausgabe") or "").startswith(praefix):
+            continue
+        return eintrag
+    return None
+
+
 def pruefe_state(root: str) -> list[dict]:
     out: list[dict] = []
     pfad = os.path.join(root, "data", "newsletter_state.json")
@@ -1058,9 +1081,20 @@ def pruefe_state(root: str) -> list[dict]:
                           f"{letzte.get('datum')} · „{letzte.get('betreff', '—')}"[:120] +
                           f"“ · {letzte.get('transport', '—')}", "—", "—", ""))
     else:
+        # Der Status kennt nur den LISTEN-Versand. Ein Testversand steht im
+        # Journal – ihn zu nennen macht aus „nichts passiert“ ein „das ist
+        # passiert“ (am 25.09.2026 scheiterte der Testversand, und der Lauf
+        # zeigte an dieser Stelle nichts davon).
+        j = _letzter_journal_eintrag(root)
+        ist = "data/newsletter_state.json trägt keine letzte_ausgabe"
+        if j:
+            ist += (f"; letzte Journal-Zeile: {j.get('ausgabe', '?')} · "
+                    f"{j.get('status', '?')}"
+                    + (f" · {str(j.get('detail') or '')[:80]}"
+                       if j.get("detail") else ""))
         out.append(_regel("S3", "repo", "hinweis",
-                          "noch kein Versand protokolliert",
-                          "data/newsletter_state.json trägt keine letzte_ausgabe",
+                          "noch kein Listen-Versand protokolliert",
+                          ist,
                           "erste Ausgabe = Testversand, dann Freigabe (Doku: "
                           "docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md)",
                           "Actions → Newsletter-Daily (Capture-Wache + Digest) → "

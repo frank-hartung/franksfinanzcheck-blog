@@ -121,7 +121,8 @@ geht als `x-ff-key` mit, der Selftest misst die Kopfzeilen am echten Request.
 |---|---|
 | `python3 scripts/newsletter_versand.py --selftest` | ✅ 47 Fälle (neu: Kopfzeilen/UA, Kanten-Block ohne Wiederholung, `x-ff-key`, `letzter_fehler`) |
 | `python3 scripts/newsletter_zustellbarkeit.py --selftest` | ✅ 49 Fälle (neu: DoH-URL, 4xx-Messlücke, B1 in API-Form, B0 mit Sendesignatur) |
-| `python3 -m unittest discover -s scripts/tests` | 744 Tests, 4 Fehler – **alle 4 vorbestehend** (fremde Module: affiliate_intent_guard, markdown_link_safety, saisonale_startseite, social_autopilot; im unveränderten Stand dieselben) |
+| Live-Lauf `--pruefen` (Summary) | S3 nennt jetzt die letzte Journal-Zeile: `test-2026-09-25 · fehler · HTTP 403 … error-1010` – der gescheiterte Testversand steht im Befund statt eines „nichts passiert“ |
+|  `python3 -m unittest discover -s scripts/tests` | 744 Tests, 4 Fehler – **alle 4 vorbestehend** (fremde Module: affiliate_intent_guard, markdown_link_safety, saisonale_startseite, social_autopilot; im unveränderten Stand dieselben) |
 | Live-Lauf `--pruefen` dieser Umgebung | C1–C4 gemessen ✅; C7/B0 „nicht messbar“ nur wegen der Netzsperre **dieser** Sandbox (TLS-Eof), nicht wegen des Repos |
 
 Offener Rest: ein Kanten-Filter kann auch die neue Signatur abweisen. Dann ist

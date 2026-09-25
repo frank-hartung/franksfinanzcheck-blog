@@ -618,6 +618,24 @@ class StateRegelnTest(unittest.TestCase):
         r = {f["regel"]: f for f in zust.pruefe_state(td)}
         self.assertEqual(r["S3"]["gewicht"], "hinweis")
 
+    def test_s3_zitiert_die_letzte_journal_zeile(self):
+        """Ein gescheiterter Testversand ist ein Beleg, kein Nichts: die
+        Zeile nennt Journal-Ausgabe, Status und Grund (kein grüner S3)."""
+        td = self._tmp()
+        with open(os.path.join(td, "data", "newsletter_journal.jsonl"), "a",
+                  encoding="utf-8") as fh:
+            fh.write(json.dumps({"ts": "2026-09-25T10:16:56+00:00",
+                                 "ausgabe": "test-2026-09-25",
+                                 "empfaenger": "5ebc8f38444904a8",
+                                 "transport": "resend", "status": "fehler",
+                                 "detail": "HTTP 403 · KANTE (Error 1010)"},
+                                ensure_ascii=False) + "\n")
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S3"]["gewicht"], "hinweis")
+        self.assertIn("test-2026-09-25", r["S3"]["ist"])
+        self.assertIn("1010", r["S3"]["ist"])
+        self.assertNotIn("5ebc8f38444904a8", r["S3"]["ist"])
+
 
 class GesamtlaufTest(unittest.TestCase):
     """`pruefe` + `als_md`: der Lauf als Ganzes."""
