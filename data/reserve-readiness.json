@@ -1,39 +1,9 @@
 {
   "target": 6,
-  "ready": 8,
-  "pool_size": 9,
-  "generated_at": "2026-09-24T08:44:24Z",
+  "ready": 7,
+  "pool_size": 8,
+  "generated_at": "2026-09-25T09:07:05Z",
   "candidates": [
-    {
-      "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
-      "ready": true,
-      "sha256": "d5067d7cf945d63c7d40fc66ad133878cc508dab0e5ddba6879d60b6a9128599",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.78,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
-      "ready": true,
-      "sha256": "a099586c8e5c73296de37b10ccd7d2b639aaa4fed76e1cc9bbb8597ee168ce9b",
-      "score": 0.936,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
     {
       "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
       "ready": true,
@@ -80,27 +50,42 @@
       }
     },
     {
-      "slug": "2026-09-24-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
+      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
       "ready": true,
-      "sha256": "50aa19bed2d7f28f3d1d658c218f595e07f82337415f38b9751d4e2672aa1e40",
-      "score": 0.98,
+      "sha256": "c533577c384efee56090facd098c4622d0db882974a30be7245e572292b086a6",
+      "score": 0.944,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.96,
+        "typography": 0.84,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
       }
     },
     {
-      "slug": "2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
+      "slug": "2026-09-25-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
+      "ready": true,
+      "sha256": "64557ff5d03c52a0a5dff3002227493c886ec4520d110a186c3cf9997c801d30",
+      "score": 0.956,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
       "ready": false,
-      "sha256": "b0d32ba0f6e561e9bfb585ca04f39c375a4b49af0e45b10366e73d7652f1d18d",
+      "sha256": "e54cf30f283a525af9ce1a68c46c5221ea1a4c92694a2ffa71a04253ad35738d",
       "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
       "details": [
-        "🛑 2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -116,9 +101,9 @@
       }
     },
     {
-      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-die-energie-lecks",
+      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-die-energie-lecks",
       "ready": true,
-      "sha256": "9396083cec4d844f4dfcedfce9d0209ae33d6e34cdfa7e599b6179bd813f9085",
+      "sha256": "23d9e58cc691309a98bf99dbd05872bca7d9fdfc7ecd25b384f31f3ef850ed44",
       "score": 0.922,
       "parts": {
         "spelling": 0.86,
@@ -131,18 +116,18 @@
       }
     },
     {
-      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
+      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
       "ready": true,
-      "sha256": "c533577c384efee56090facd098c4622d0db882974a30be7245e572292b086a6",
-      "score": 0.944,
+      "sha256": "b908527ad7c01c4a68aff38e455041d97497f93bf364b59d3559eaf3e3f79ed7",
+      "score": 0.928,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.72,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.84,
+        "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     }
   ]

@@ -1,7 +1,7 @@
 ---
 title: "Stromfresser finden: So senkst du deine Stromrechnung massiv"
 description: Möchtest du Stromfresser finden und deine Kosten senken? Entdecke Praxistipps, wie du Energiediebe entlarvst und jährlich bares Geld sparst.
-date: 2026-09-24T08:38:17Z
+date: 2026-09-25T09:01:21Z
 draft: true
 reserve: true
 tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
