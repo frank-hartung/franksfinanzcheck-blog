@@ -1,9 +1,9 @@
 ---
 title: "Gasrechnung senken: Warum ich meine Heizung im August prüfe"
 description: Willst du deine Gasrechnung senken? Mit der richtigen Strategie im Spätsommer sparst du im Winter hunderte Euro. Frank zeigt dir, wie es geht.
-date: 2026-09-22T08:42:41Z
-draft: true
-reserve: true
+date: 2026-09-25T14:10:43Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Ja, du kannst deine Gasrechnung senken, indem du im August deine Heizung checkst, Lecks schließt und den Brennwert optimierst. So sparst du im Winter meist zwischen 200 € – 500 € – je nach Verbrauch und Vertragskonditionen. Die Maßnahme kostet meist nur ein paar Euro für den Fachmann."
 ---
 
-500 € Ersparnis durch zwei Stunden Arbeit im August?  
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. 500 € Ersparnis durch zwei Stunden Arbeit im August?  
 Clevere Hausbesitzer schaffen das problemlos.
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

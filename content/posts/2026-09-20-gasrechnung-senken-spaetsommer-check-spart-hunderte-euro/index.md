@@ -1,8 +1,10 @@
 ---
 title: "Gasrechnung senken: Der Spätsommer-Check für Heizung und Tarif"
-description: "Mit einem sachlichen Spätsommer-Check bereitest du Heizung, Wohnung und Gastarif auf die Heizperiode vor. Praktische Schritte, Kostenfallen und ein realistischer Tarifvergleich."
+description: "Gasrechnung senken: Mit einem sachlichen Spätsommer-Check bereitest du Heizung, Wohnung und Gastarif auf die Heizperiode vor. Praktische Schritte…"
 date: 2026-09-25T12:15:40Z
-draft: false
+draft: true
+cadence_demoted: 2026-09-25T14:10:43Z
+cadence_grund: "publish-gate: Zeichenlänge (check_length.py) nicht bestanden"
 reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
