@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-21
+lastmod: 2026-09-25
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnungen senken vor der Heizperiode: Vermeide die 5 teuersten Spätsommer-Fehler bei Heizung, Thermostaten & Tarifen und spare bis zu 720 €."
 date: 2026-08-14T08:35:12Z
@@ -174,6 +174,22 @@ Wer im August Kessel, Thermostate und Tarif prüft, kauft Gas 10 % ‑ 20�
 **Fehler 4:** Keller‑ und Dachluke den ganzen Sommer offen, im Oktober zu spät schließen. Dämmung an der Luke, Bürstendichtung an der Tür zum unbeheizten Flur.
 
 **Fehler 5:** Zählerstand nicht dokumentieren. Ohne Foto am 1. September weißt du im Februar nicht, ob die Nachzahlung Verbrauch oder Preis ist.
+
+## Wann sich Profi-Hilfe besonders lohnt
+
+Nicht jede Maßnahme musst du allein machen. Vieles wie Entlüften, Dichtungen prüfen oder den Tarif vergleichen klappt problemlos selbst. Es gibt aber Situationen, in denen fachliche Hilfe sinnvoll ist.
+
+Das gilt vor allem dann, wenn:
+
+- einzelne Heizkörper trotz Entlüften kalt bleiben,
+- der Druck immer wieder stark absackt,
+- die Therme unruhig läuft oder Fehlercodes zeigt,
+- Vorlauf und Rücklauf völlig unausgeglichen wirken,
+- dein Verbrauch trotz aller Sparschritte kaum sinkt.
+
+Gerade bei älteren Anlagen lohnt sich ein nüchterner Blick von außen. Eine einmal sauber eingestellte Heizkurve spart oft mehr als drei kleine Behelfslösungen. Wenn dich der Termin zum Beispiel **120 €** kostet, die Anlage danach aber jedes Jahr **8 % bis 12 %** weniger Gas verbraucht, rechnet sich das oft schneller als gedacht.
+
+Wichtig ist nur: Erst die einfachen Hausmittel erledigen, dann den Profi gezielt für die Punkte holen, die du selbst nicht sinnvoll lösen kannst.
 
 ## Mini‑Checkliste zum Ausdrucken
 
