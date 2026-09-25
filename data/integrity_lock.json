@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-23T15:34:28.041614+00:00",
-  "head": "8c360de",
+  "signed_at": "2026-09-25T03:13:42.801644+00:00",
+  "head": "1cd5804",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
-    "hugo.toml": "e8d2daf5a012b3086b716d44572ce644c7b194ae290201dc05ad58105395449a",
+    "hugo.toml": "9cddd5a6fa1bd858ebb325900e9554f69ee595ace81a556432952bfa702b7c86",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,20 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec",
-  "audit_start_sha256": "b6f47f849f0e246f6c328138ef01f7ff1d710f8554a70a3bb785b1deeea10707",
+  "files_sha256": "ff7c0f7d0922a519267212baca79348c4819a2885e409f76f42f37d24b4f18b7",
+  "audit_start_sha256": "6d299532b00c3b6635660e9c3ab453b78d3e4362149a57302cf1aa1e6dab53c7",
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "70879da",
-      "geaendert": [
-        "layouts/_default/_markup/render-link.html",
-        "layouts/_partials/affiliate_anchor_attrs.html",
-        "layouts/pillar/list.html"
-      ],
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-19",
       "art": "set-current",
@@ -70,7 +59,7 @@
         "layouts/_partials/affiliate_anchor_attrs.html",
         "layouts/_partials/affiliate_ziele_data.html"
       ],
-      "prev_sha256": "b6f47f849f0e246f6c328138ef01f7ff1d710f8554a70a3bb785b1deeea10707"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-19",
@@ -241,8 +230,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2",
-      "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec"
+      "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec",
+      "prev_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2"
+    },
+    {
+      "date": "2026-09-25",
+      "art": "set-current",
+      "head": "1cd5804",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "c259916",
+              "datum": "2026-09-24",
+              "betreff": "feat(newsletter): Journey-Architektur (Worker rendert, Blog informiert) + Brevo-Auslese"
+            },
+            {
+              "sha": "f11c9b5",
+              "datum": "2026-09-24",
+              "betreff": "fix(newsletter): Testlauf dauerhaft auf Premium-Level (#26) (#364)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "b9e347d739450db824d0d710f9505c3cff614eb693b317f9e663d08382e5bc43",
+      "files_sha256": "ff7c0f7d0922a519267212baca79348c4819a2885e409f76f42f37d24b4f18b7"
     }
   ]
 }

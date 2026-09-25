@@ -178,93 +178,124 @@ class WebsiteSnapshot(unittest.TestCase):
 
 
 class Versandpfad(unittest.TestCase):
+    """Die Fail-Closed-Tore des neuen Versands (Worker + Actions):
+
+    * Halt („versand_unklar“) blockiert den Listen-Versand – nicht die Suche
+      nach dem Beleg (Testversand),
+    * Terminreservierung verbräucht den Tag, doppelte Ausführung bleibt aus,
+    * ein unlesbarer Versandstatus sperrt statt zu raten,
+    * Ruhtage senden nichts und rühren keinen Zustand an.
+    """
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = self.tmp.name
         nd.speichere_state(self.root, {})
-        self.env = patch.dict('os.environ', {'BREVO_API_KEY': 'test-key', 'BREVO_LIST_ID': '1', 'NEWSLETTER_SEND': 'ja'})
+        self.env = patch.dict('os.environ', {'RESEND_API_KEY': 'test-key',
+                                             'NEWSLETTER_TRANSPORT': 'dryrun'})
         self.env.start()
         self.addCleanup(self.env.stop)
+        # Temp-Root ist kein Git-Worktree – der Schutz gilt im echten Lauf,
+        # hier wird er ausgesetzt, damit die TORE (Halt/Kadenz/Status) gemessen
+        # werden können.
+        self.aw = patch.object(nd, 'assert_worktree')
+        self.aw.start()
+        self.addCleanup(self.aw.stop)
 
-    def senden(self, **kw):
-        return nd.versende(self.root, '<p>Test</p>', 'Test', 'Test', dry_run=False, **kw)
+    def test_halt_blokt_den_listenversand(self):
+        """Ein unbelegbarer Sende-Aufruf darf keine zweite Liste auslösen."""
+        nd.sperre_setzen(self.root, "2026-09-22|Betreff", "Betreff")
+        self.assertIn("versand_unklar", nd.sperre_pruefen(self.root))
+        mit_zu = patch.object(ns, 'jetzt', return_value=zeit('2026-09-22', 12))
+        with mit_zu, patch.object(nd.versand, 'sende_datei') as sende, \
+             patch.object(nd.versand, 'worker_abfrage') as abfrage:
+            self.assertEqual(1, nd.main(['--root', self.root, '--build', '--send',
+                                         '--live', '--trotz-qa']))
+            sende.assert_not_called()
+            abfrage.assert_not_called()
 
-    def test_ruhetag_hat_keinen_netzaufruf(self):
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), patch.object(nd, 'TRANSPORT') as post, patch.object(nd, 'TRANSPORT_GET') as get:
-            self.assertEqual(0, self.senden())
-            post.assert_not_called()
-            get.assert_not_called()
+    def test_halt_blokt_keinen_testversand(self):
+        """Die Suche nach dem Beleg darf der Halt nicht verbieten."""
+        nd.sperre_setzen(self.root, "2026-09-22|Betreff", "Betreff")
+        artikel = [{'slug': 's1', 'titel': 'T', 'beschreibung': 'B',
+                    'url': '/posts/s1/', 'path': '', 'datum': '2026-09-22',
+                    'pillar': 'strom-sparen', 'quelle_text': 'Q'}]
+        ausgabe = {'html': '<p>x</p>', 'text': 'x', 'anzahl': 1,
+                   'betreff': 'Betreff', 'preheader': '', 'material': artikel}
+        konf = {'email': {}, 'capture': {'form_action': 'https://abos.test'},
+                'design': {'hell': {}, 'dunkel': {}}}
+        pruef = {'bestanden': True, 'score': 100, 'regeln_geprueft': 21,
+                 'funde': [], 'warnungen': []}
+        with patch.object(nd, 'live_artikel', return_value=artikel), \
+             patch.object(nd, 'baue_ausgabe', return_value=ausgabe), \
+             patch.object(nd.studio, 'konfiguration', side_effect=lambda *a, **k: konf), \
+             patch.object(nd.qa, 'pruefe', return_value=pruef), \
+             patch.object(nd.versand, 'sende_datei', return_value=0) as sende:
+            self.assertEqual(0, nd.main(['--root', self.root, '--build', '--send',
+                                         '--test-adresse', 'probe@example.test',
+                                         '--trotz-qa']))
+            sende.assert_called_once()
+        # und nach dem Testversand ist der Halt nach wie vor gesetzt –
+        # auflösen ist eine MENSCHENAufgabe, kein Seiteneffekt.
+        self.assertIn("versand_unklar", nd.sperre_pruefen(self.root))
 
-    def test_reservierung_vor_sendnow_und_doppelaufruf(self):
-        def transport(key, pfad, body):
-            if pfad.endswith('/sendNow'):
-                self.assertEqual(1, len(nd.lade_state(self.root)['versand_termine']))
-                return 204, ''
-            return 201, '{"id": 123}'
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-22')), patch.object(nd, 'vorflug', return_value=(0, 'ok')), patch.object(nd, 'TRANSPORT', side_effect=transport) as post:
-            self.assertEqual(0, self.senden())
-            self.assertEqual(0, self.senden())
-            self.assertEqual(2, post.call_count)  # create + sendNow, keine zweite Kampagne
+    def test_reservierung_verbraucht_den_termin(self):
+        """Selbst ein abgebrochener Lauf darf den Tag nicht zurückgeben."""
+        mit_zu = patch.object(ns, 'jetzt', return_value=zeit('2026-09-22'))
+        mit_zu.start()
+        self.addCleanup(mit_zu.stop)
+        nd.termin_reservieren(self.root)
+        nd.termin_reservieren(self.root)
+        state = nd.lade_state(self.root)
+        self.assertEqual(2, len(state['versand_termine']))
+        self.assertIn("bereits", ns.versandpause(state, zeit('2026-09-22', 12)))
 
-    def test_schreibfehler_verhindert_sendnow(self):
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-22')), patch.object(nd, 'vorflug', return_value=(0, 'ok')), patch.object(nd, 'TRANSPORT', return_value=(201, '{"id": 123}')) as post, patch.object(nd, 'speichere_state', side_effect=OSError('voll')):
-            self.assertEqual(1, self.senden())
-            self.assertEqual(['emailCampaigns'], [c.args[1] for c in post.call_args_list])
-
-    def test_defekter_oder_fehlender_status_sperrt(self):
-        pfad = Path(self.root) / nd.STATE_REL
-        for text in ('{kaputt', 'null', '[]'):
-            pfad.write_text(text)
-            with patch.object(nd, 'TRANSPORT') as post:
-                self.assertEqual(1, self.senden())
-                post.assert_not_called()
-        pfad.unlink()
-        with patch.object(nd, 'TRANSPORT') as post:
-            self.assertEqual(1, self.senden())
-            post.assert_not_called()
-
-    def test_einzeltest_verbraucht_keinen_termin(self):
-        # Seit der Reparatur von Lauf 36015927654 misst der Testversand seine
-        # Adresse vorher im Konto (Brevo nimmt Testmails nur an bestehende,
-        # nicht gesperrte Kontakte an) – der Fake muss sie also kennen, sonst
-        # bricht der Lauf vor der Kampagne ab, und der Test prüfte etwas anderes
-        # als seinen Namen.
-        def kontakt_get(key, pfad):
-            if pfad.startswith('contacts/'):
-                return 200, '{"email": "probe@example.test", "emailBlacklisted": false, "listIds": [1]}'
-            return 200, '{"id": 1, "totalSubscribers": 2}'
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), patch.object(nd, 'vorflug', return_value=(0, 'ok')), patch.object(nd, 'TRANSPORT_GET', side_effect=kontakt_get), patch.object(nd, 'TRANSPORT', side_effect=[(201, '{"id": 123}'), (204, '')]) as post:
-            self.assertEqual(0, self.senden(test_adresse='probe@example.test'))
-            self.assertTrue(post.call_args.args[1].endswith('/sendTest'))
-            state = nd.lade_state(self.root)
-            self.assertNotIn('versand_termine', state)
-            self.assertNotIn('zuletzt_versandt', state)
-            self.assertIn('zuletzt_getestet', state)
-            self.assertEqual('', ns.versandpause(state, zeit('2026-09-25')))
-
-    def test_ausgabe_enthaelt_nur_die_verbuchten_artikel(self):
-        artikel = [{'slug': f'artikel-{i}'} for i in range(8)]
-        with patch.object(nd.studio, 'konfiguration', return_value={'email': {'max_artikel': 5}}), patch.object(nd.studio, 'material_aus_artikel', side_effect=lambda root, a: a), patch.object(nd.studio, 'baue_email', side_effect=lambda a, **kw: {'material': a}):
-            ausgabe = nd.baue_ausgabe(artikel, '2026-09-25', 'Zweimal pro Woche', root=self.root)
-            self.assertEqual(5, ausgabe['anzahl'])
-            self.assertEqual(artikel[:5], ausgabe['material'])
-            self.assertNotIn(artikel[5], ausgabe['material'])
-
-    def test_cli_pause_schreibt_keinen_pending_status(self):
+    def test_ruhetag_sendet_nichts_und_ruhrt_keinen_zustand_an(self):
         vorher = (Path(self.root) / nd.STATE_REL).read_text()
-        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), patch.object(nd, 'assert_worktree'), patch.object(nd, 'TRANSPORT') as post:
-            self.assertEqual(0, nd.main(['--root', self.root, '--build', '--send', '--live', '--trotz-qa']))
-            post.assert_not_called()
-            self.assertEqual(vorher, (Path(self.root) / nd.STATE_REL).read_text())
+        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-23')), \
+             patch.object(nd.versand, 'sende_datei') as sende, \
+             patch.object(nd.versand, 'worker_abfrage') as abfrage:
+            self.assertEqual(0, nd.main(['--root', self.root, '--build', '--send',
+                                         '--live', '--trotz-qa']))
+            sende.assert_not_called()
+            abfrage.assert_not_called()
+        self.assertEqual(vorher, (Path(self.root) / nd.STATE_REL).read_text())
 
-    def test_vorschau_repariert_keinen_kaputten_status_stillschweigend(self):
+    def test_defekter_status_sperrt_den_liveversand(self):
         pfad = Path(self.root) / nd.STATE_REL
-        pfad.write_text('{kaputt')
-        with patch.object(nd, 'assert_worktree'):
-            self.assertEqual(1, nd.main(['--root', self.root, '--build']))
-        self.assertEqual('{kaputt', pfad.read_text())
+        pfad.write_text('{kaputt', encoding='utf-8')
+        with patch.object(nd.versand, 'sende_datei') as sende:
+            self.assertEqual(1, nd.main(['--root', self.root, '--build', '--send',
+                                         '--live', '--trotz-qa']))
+            sende.assert_not_called()
+        # und der defekte Status bleibt defekt – still reparieren wäre ein
+        # Versteck, in dem der Duplikatsschutz stirbt.
+        self.assertEqual('{kaputt', pfad.read_text(encoding='utf-8'))
 
+    def test_fehlender_status_sperrt_den_liveversand(self):
+        (Path(self.root) / nd.STATE_REL).unlink()
+        with patch.object(nd.versand, 'sende_datei') as sende:
+            self.assertEqual(1, nd.main(['--root', self.root, '--build', '--send',
+                                         '--live', '--trotz-qa']))
+            sende.assert_not_called()
+
+    def test_kadenz_pruefen_liest_strikt(self):
+        nd.speichere_state(self.root, {'versand_termine': [zeit('2026-09-22').isoformat()]})
+        with patch.object(ns, 'jetzt', return_value=zeit('2026-09-22', 12)):
+            self.assertIn("bereits", nd.kadenz_pruefen(self.root) or "")
+        (Path(self.root) / nd.STATE_REL).write_text('[]', encoding='utf-8')
+        with self.assertRaises(ValueError):
+            nd.kadenz_pruefen(self.root)
+
+    def test_sperre_setzen_und_aeufern(self):
+        nd.sperre_setzen(self.root, "kennung-x", "Betreff X")
+        meldung = nd.sperre_pruefen(self.root)
+        self.assertIn("kennung-x", meldung)
+        state = nd.lade_state(self.root)
+        del state['versand_unklar']
+        nd.speichere_state(self.root, state)
+        self.assertEqual('', nd.sperre_pruefen(self.root))
 
 if __name__ == '__main__':
     unittest.main()

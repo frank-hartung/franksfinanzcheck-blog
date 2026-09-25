@@ -1,0 +1,11 @@
+{
+  "name": "ff-newsletter-worker",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Newsletter-Backend (Anmeldung, Double-Opt-In, Abmeldung, Praeferenzen) als Cloudflare Worker – ersetzt den Brevo-Endpunkt.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "UNLICENSED"
+}

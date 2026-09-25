@@ -47,7 +47,7 @@ import newsletter_schedule as plan                        # noqa: E402
 GMAIL_CLIP_BYTES = 102_400        # darüber clippt Gmail – und schneidet Footer + Abmeldung ab
 FRUEH_BYTES = 90_000
 MIN_TXT_BYTES = 240
-ERLAUBTE_HOSTS = ("franksfinanzcheck.de", "brevo.com", "sendinblue.com")
+ERLAUBTE_HOSTS = ("franksfinanzcheck.de",)
 EIGENE_ABSENDER_DOMAIN = ("franksfinanzcheck.de",)
 MOJIBAKE = ("Ã¼", "Ã¶", "Ã¤", "ÃŸ", "â€™", "â€œ", "â€“", "Ã¢â‚¬", "Âµ")
 GROSS_WEISS = {"DSL", "WLAN", "TV", "LED", "USB", "HD", "5G", "EU", "BGH", "ADAC", "GmbH",

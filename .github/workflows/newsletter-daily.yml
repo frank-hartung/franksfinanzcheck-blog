@@ -1,40 +1,21 @@
 # Newsletter Di/Fr (Workflow-Name bleibt für das Fehler-Alerting stabil): Capture-Wache + Digest, Versand nur mit Absender.
 #
-# Warum dieser Workflow überhaupt existiert: docs/ANLEITUNG-NEWSLETTER.md
-# beschrieb seit Wochen einen „Newsletter-AI"-Lauf samt NEWSLETTER-STATUS.md.
-# Beides gab es nie – der Newsletter war eine Dokumentation, keine Funktion.
-# Dieser Lauf ist die Funktion (bzw. der ehrliche Nachweis, dass sie noch
-# inert ist), und die Wache meldet beides laut.
+# SEIT 24.09.2026: BREVO IST RAUS. Der Versand läuft im Eigenbetrieb:
+#   Adressen   Cloudflare Worker (KV) – nie in diesem (öffentlichen) Repo.
+#   Versand    scripts/newsletter_versand.py (nur Standardbibliothek):
+#              Resend (Default) oder SMTP, pro Empfänger eine Mail.
+#   Test       --test-adresse ist eine direkte Einzelmail an genau die
+#              eingegebene Adresse – kein fremdes Konto, kein „Kontakt muss
+#              existieren“-Zustand (die ganze Brevo-Baustelle ist weg).
 #
-# Sicherheitshierarchie (absichtlich dreifach):
-#   1. ohne Secrets (BREVO_API_KEY / BREVO_LIST_ID) wird kein Netzversuch gemacht
+# Sicherheitshierarchie (bleibt dreifach, nur der Transport unter dem Boden):
+#   1. ohne Secrets (RESEND_API_KEY + NEWSLETTER_WORKER_EXPORT_KEY) wird
+#      kein Listen-Versand gemacht – der Digest meldet es fail-closed
 #   2. ohne workflow_dispatch-Eingabe („live“, „planmaessig“ ODER test_adresse)
-#      wird nur gebaut, nicht gesendet – ein Testversand trifft nur die
-#      eingegebene Adresse (sendTest)
-#   3. gesendet wird an eine Liste, deren Double-Opt-in bei Brevo liegt –
-#      Adressen berühren diesen Repo-Workflow nie
-#
-# Lauf #23 (36015927654, 24.09.2026, test_adresse gesetzt) machte den Probeweg
-# aus Checkliste 6a zum zweiten Mal unmöglich: „HTTP 400: There are no contacts
-# associated with the given recipients info“. Ursache war nicht die Adresse,
-# sondern die TEST-Kampagne selbst – sie trug `recipients.listIds` auf eine
-# Liste mit 0 Abonnenten, und Brevo löst die Empfänger beim Anlegen auf. Seit
-# der Reparatur legt eine TEST-Kampagne OHNE Empfänger an (`recipients` ist im
-# Schema optional; `sendTest` braucht nur `emailTo`) und misst die Testadresse
-# vorher im Konto – Brevo nimmt Testmails nur an bestehende, nicht gesperrte
-# Kontakte mit Listen-Zugehörigkeit an.
-#
-# Lauf #26 (36024129599, 24.09.2026, zwei Testadressen) bewies, dass „erst auf
-# Verlangen“ zu spät ist: Brevo wies den ersten sendTest an Kontakte ohne Liste
-# GENERISCH ab („Test emails cannot be sent to non-existent/blacklisted/
-# without-contact-list users“) – ohne Adressliste, also ohne Ansatz für den
-# Nachtrag. Seit der Premium-Reparatur trägt der Lauf eine fehlende Adresse
-# VORAB als Kontakt nach UND nimmt sie VORAB in die Zielliste auf (`test_kontakt`,
-# Default an) – der erste sendTest gelingt dadurch sofort. Schlägt sendTest
-# trotzdem fehl, liest der Nachtrag beide Brevo-Formate (mit/ohne Adressliste)
-# und wiederholt genau einmal; erreicht der Retry nur einen Teil, meldet der
-# Lauf TEILVERSAND (erreichte + unerreichte Adressen, je mit Grund) statt
-# „nichts versandt“ – die Annotation unten spricht ihn als Teilerfolg aus.
+#      wird nur gebaut, nicht gesendet – ein Testversand trifft NUR die
+#      eingegebenen Adressen, nie die Liste
+#   3. gesendet wird an eine Liste, deren Double-Opt-In im Worker liegt –
+#      Adressen berühren diesen Repo-Workflow nie (nur Hashes im Journal)
 #
 # „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
 # planmäßige Cron (05:05 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
@@ -43,6 +24,12 @@
 # Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
 # nach, wenn sicher kein Lauf des Tages existiert – dieselbe Freigabestufe wie
 # der Cron, nicht mehr.
+#
+# Duplikatsschutz über die Statusdatei: ein TEILVERSAND markiert nur die
+# zugestellten Empfänger (Hashes aus dem Journal) als gesendet – der nächste
+# Lauf derselben Ausgabe trifft nur die Restadressen. Ein UNKLARER Sendeausgang
+# setzt einen HARTEN HALT (state.versand_unklar), bis ein Mensch nachgesehen
+# hat. Details: scripts/newsletter_digest.py (Kopfkommantar).
 name: Newsletter-Daily (Capture-Wache + Digest)
 
 on:
@@ -62,10 +49,6 @@ on:
         description: 'Testversand an diese Adresse(n), Komma-getrennt (leer = kein Testversand) – trifft NUR diese Adressen, nie die Liste'
         type: string
         default: ''
-      test_kontakt:
-        description: 'Testadresse VORAB im Brevo-Konto anlegen + in die Zielliste aufnehmen, falls sie dort fehlt (Brevo nimmt Testmails nur an bestehende Kontakte mit Liste an)'
-        type: boolean
-        default: true
       planmaessig:
         description: 'NUR Kadenz-Wache: verhält sich wie der planmäßige Cron (echter Listen-Versand)'
         type: boolean
@@ -100,9 +83,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Wachen-Selbsttest (Capture-Logik, Verdopplungsschutz, Verriegelung)
+      - name: Wachen-Selbsttest (Capture-Logik, Verdopplungsschutz, Mailer, Verriegelung)
         run: |
           python3 scripts/newsletter_digest.py --selftest
+          python3 scripts/newsletter_versand.py --selftest
           python3 -m unittest discover -s scripts/tests -p "test_newsletter_schedule.py"
 
       # Die Capture-Wache prüft N5/N6 am GEBAUTEN Zustand (Landingpage,
@@ -137,21 +121,23 @@ jobs:
             echo "::warning::Newsletter-Capture inaktiv oder Befund – es gehen keine Adressen ein (siehe Summary)"
           fi
 
-      # Die Zustellbarkeits-Wache: Cloudflare-Zone + Brevo-Konto, GEMESSEN statt
-      # nachgeschlagen. Warum vor dem Versand und nicht nur im Governance-Lauf:
-      # Lauf #21 (23.09.) meldete einen Absender-Befund für ein Problem der Kante
-      # (HTTP 403 / Cloudflare „Error 1010“ – die API-Antwort kam nie von Brevo),
-      # und die Checkliste schrieb als nächsten Schritt eine SPF-Erweiterung vor,
-      # die an der Zustellung nichts ändert. Beides sind Klassen, die nur sichtbar
-      # werden, wenn man Zone und Konto gemeinsam nachmisst.
+      # Die Zustellbarkeits-Wache: Cloudflare-Zone + Resend-Konto + Worker,
+      # GEMESSEN statt nachgeschlagen. Warum vor dem Versand und nicht nur im
+      # Governance-Lauf: Lauf #21 (23.09.) meldete einen Absender-Befund für ein
+      # Problem der KANTE (HTTP 403 / Cloudflare „Error 1010“ – die Antwort kam
+      # nie von Brevo), und die Checkliste schrieb als nächsten Schritt eine
+      # SPF-Erweiterung vor, die an der Zustellung nichts änderte. Beides sind
+      # Klassen, die nur sichtbar werden, wenn Zone, Konto und Kante gemeinsam
+      # nachgemessen werden.
       # Der Lauf bleibt bei Messlücken gelb (DoH-Ausfall ist kein Befund); rot –
       # und damit Versand gestoppt – wird nur ein bestätigter Fund bei einem
       # wirklichen Listen-Versand. Testversände (eine Adresse) bleiben erlaubt:
       # sie sind der vorgesehene Probelauf VOR der Freischaltung.
-      - name: Zustellbarkeit (Cloudflare-DNS + Brevo-Konto)
+      - name: Zustellbarkeit (Cloudflare-DNS + Resend + Worker)
         env:
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
+          NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           # Als ENV, nicht als Interpolation im Skripttext (B3-Regel aus der
           # Kadenz-Absicherung: Eingaben sind Daten, niemals Code).
           SEND_AN: ${{ (inputs.live || inputs.planmaessig || github.event_name == 'schedule') && 'ja' || 'nein' }}
@@ -177,8 +163,8 @@ jobs:
             # weniger macht die Ausnahme tot: jeder Zustellbarkeits-Befund
             # stoppt dann auch den Testversand, sobald live oder planmaessig
             # gesetzt ist.
-            if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESSE_GESETZT" != "ja" ]; then
-              echo "::error::Zustellbarkeit befundet (rc $rc) – der Listen-Versand wird angehalten, bevor eine Kampagne entsteht. Details im Summary dieses Schritts."
+            if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESSE_GESETZT" = "nein" ]; then
+              echo "::error::Zustellbarkeit befundet UND Listen-Versand angefordert – der Versand wird angehalten, bevor eine Mail entsteht. Details im Summary dieses Schritts."
               exit "$rc"
             fi
             echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Details im Summary dieses Schritts."
@@ -186,12 +172,24 @@ jobs:
 
       - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)
         env:
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          BREVO_LIST_ID: ${{ secrets.BREVO_LIST_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
+          NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
           NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
+          # SMTP-Alternative (nur wenn Resend NICHT der Transport sein soll):
+          # NEWSLETTER_TRANSPORT=smtp (Var) + diese vier Secrets setzen –
+          # sonst bleibt Resend der Default (transport_waehle im Mailer).
+          NEWSLETTER_TRANSPORT: ${{ vars.NEWSLETTER_TRANSPORT || '' }}
+          NEWSLETTER_SMTP_HOST: ${{ secrets.NEWSLETTER_SMTP_HOST }}
+          NEWSLETTER_SMTP_PORT: ${{ secrets.NEWSLETTER_SMTP_PORT }}
+          NEWSLETTER_SMTP_USER: ${{ secrets.NEWSLETTER_SMTP_USER }}
+          NEWSLETTER_SMTP_PASS: ${{ secrets.NEWSLETTER_SMTP_PASS }}
+          # Der Resend-Transport ist der Default (scripts/newsletter_versand.py
+          # transport_waehle). SMTP-Alternative via NEWSLETTER_SMTP_HOST/PORT/
+          # USER/PASS, falls gewünscht – sonst nichts setzen.
           # Die Freigabe für den LISTEN-Versand: planmäßiger Cron, „live“ oder
           # „planmaessig“ (Nachholen der Kadenz-Wache). Eine test_adresse allein
-          # ist ein realer, aber eingegrenzter sendTest – sie braucht diese
+          # ist ein realer, aber eingegrenzter Einzelversand – sie braucht diese
           # Freigabe nicht (Entscheidung 23.09.2026, dokumentiert im Skript).
           NEWSLETTER_SEND: ${{ (inputs.live || inputs.planmaessig || github.event_name == 'schedule') && 'ja' || '' }}
           # Eingaben als ENV statt als ${{ }}-Interpolation im Skripttext:
@@ -199,15 +197,6 @@ jobs:
           # eine Shell-Zeile – als env-Wert ist sie Daten, kein Code.
           EINGABE_TAGE: ${{ inputs.tage || '7' }}
           EINGABE_TEST_ADRESSE: ${{ inputs.test_adresse || '' }}
-          # `test_kontakt` (Default: an): Brevo nimmt Testmails nur an Kontakte
-          # an, die im Konto bestehen, nicht gesperrt sind und in einer Liste
-          # stehen. Ist der Schalter gesetzt, legt der Lauf eine fehlende
-          # Testadresse VORAB als Kontakt an und nimmt sie VORAB in die
-          # Zielliste auf (seit Lauf #26: „erst auf Verlangen“ ist zu spät –
-          # die generische Absage trägt keine Adressliste) – und weist beides
-          # im Protokoll aus. `false` macht daraus einen Abbruch mit Klickweg,
-          # ohne jeden Schreibzugriff.
-          EINGABE_TEST_KONTAKT: ${{ inputs.test_kontakt && 'anlegen' || 'nicht-anlegen' }}
         run: |
           TAGE="$EINGABE_TAGE"
           case "$TAGE" in ''|*[!0-9]*) TAGE=7 ;; esac
@@ -228,26 +217,17 @@ jobs:
             ARGS="$ARGS --send"
             # --live = Liste wirklich treffen. Der Testversand braucht es nicht:
             # er ist über die Testadresse bereits eine real eingegrenzte Aktion
-            # (Brevo sendTest, nie sendNow).
+            # (direkte Einzelmail, nie die Liste).
             if [ "$NEWSLETTER_SEND" = "ja" ]; then
               ARGS="$ARGS --live"
             fi
           fi
-          # Testadressen: Brevo nimmt Testmails nur an bestehende, nicht
-          # gesperrte Kontakte an. Ohne Freigabe bleibt der Lauf lesend und
-          # bricht mit dem Klickweg ab (kein stiller Schreibzugriff auf das
-          # Konto); mit Freigabe trägt er den fehlenden Kontakt nach.
-          if [ -n "$EINGABE_TEST_ADRESSE" ] && [ "$EINGABE_TEST_KONTAKT" != "anlegen" ]; then
-            ARGS="$ARGS --test-kontakt-nicht-anlegen"
-          fi
           # Ohne Absender kein Versand – und kein roter Lauf: der Leerzustand ist
           # eine Betreiber-Entscheidung, kein Defekt. Die Warnung steht im Log,
-          # die Capture-Wache oben meldet denselben Zustand zusätzlich laut.
-          if [ -z "$BREVO_API_KEY" ] || [ -z "$BREVO_LIST_ID" ]; then
-            echo "⚠ Kein Absender konfiguriert (Secrets BREVO_API_KEY / BREVO_LIST_ID) – Digest wird nur gebaut."
-            ARGS="${ARGS/--send/}"
-            ARGS="${ARGS/--live/}"
-            OHNE_ABSENDER="ja"
+          # der Fail-Closed bleibt im Skript, die Capture-Wache oben meldet
+          # denselben Zustand zusätzlich laut.
+          if [ "$NEWSLETTER_SEND" = "ja" ] && [ -z "$RESEND_API_KEY" ] && [ -z "${NEWSLETTER_SMTP_HOST:-}" ]; then
+            echo "⚠ Kein Absender konfiguriert (Secret RESEND_API_KEY oder SMTP-Variable) – der Listen-Versand bleibt fail-closed im Skript."
           fi
           set +e
           # --test-adresse IMMER übergeben (leer = keiner): der Wert läuft als
@@ -259,39 +239,31 @@ jobs:
           set -e
           # Die Pipeline (| tee) verschluckt den Exit-Code des Skripts – hier
           # wird er wieder sichtbar. Ein blockierter (QA) oder fehlgeschlagener
-          # (Brevo) Versand darf nicht als grüner Lauf durchgehen.
-          if [ -n "${OHNE_ABSENDER:-}" ]; then
-            echo "::warning::Kein Absender konfiguriert (BREVO_API_KEY / BREVO_LIST_ID) – es wurde nichts versendet."
-          fi
+          # (Transport) Versand darf nicht als grüner Lauf durchgehen.
           if [ "$rc" -ne 0 ]; then
-            if [ -n "${OHNE_ABSENDER:-}" ]; then
-              echo "::warning::Digest-Versand nicht ausgelöst, weil kein Absender konfiguriert ist – nur gebaut."
+            # Der konkrete Befund steht als ❌-Zeile im Log – sie wandert in die
+            # Annotation, damit die Ursache in der Actions-Übersicht lesbar ist,
+            # bevor jemand Logs aufklappt.
+            BEFUND=$(grep "❌" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
+            # Ehrlichkeit nach dem Versand: meldet das Skript VERSAND ERFOLGT,
+            # ist die Mail raus und nur der Status unvollständig – meldet die
+            # Annotation genau das, nie das Gegenteil (Fix 23.09.2026). Die
+            # dritte Wahrheit heißt UNKLAR: Antwort verloren, Sendung
+            # möglicherweise trotzdem angenommen. Sie als „nichts versandt“ zu
+            # melden, wäre die gefährlichste Lüge dieses Laufs – sie lädt zum
+            # sofortigen erneuten Run ein, und der trifft die Liste ein zweites
+            # Mal.
+            if grep -q "VERSAND-STATUS UNKLAR" /tmp/nl_build.log; then
+              echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – UNKLAR, ob die Mail raus ist. Der Versand wurde NICHT wiederholt; der Lauf hat in data/newsletter_state.json einen Halt hinterlegt, der weitere Listen-Versände blockiert, bis im Resend-Postfach/Journal nachgesehen ist. ${BEFUND:-Details im Lauf-Log.}"
+            elif grep -q "TEILVERSAND" /tmp/nl_build.log; then
+              TEIL=$(grep "TEILVERSAND" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
+              echo "::error::TEILWEISE zugestellt (Exit $rc) – ein Teil der Empfänger hat die Mail, ein Teil nicht. Die Ausgabe bleibt offen; der nächste Lauf schickt nur die Restadressen nach. ${TEIL:-Details im Lauf-Log.}"
+            elif grep -q "VERSAND ERFOLGT" /tmp/nl_build.log; then
+              echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – der VERSAND IST RAUS, der Status ist unvollständig. ${BEFUND:-Details im Lauf-Log.}"
             else
-              # Der konkrete Befund (Vorflug, QA oder Brevo) steht als ❌-Zeile
-              # im Log – sie wandert in die Annotation, damit die Ursache in der
-              # Actions-Übersicht lesbar ist, bevor jemand Logs aufklappt.
-              BEFUND=$(grep "❌" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
-              # Ehrlichkeit nach dem Versand: meldet das Skript VERSAND ERFOLGT,
-              # ist die Mail raus und nur der Status unvollständig – meldet die
-              # Annotation genau das, nie das Gegenteil (Fix 23.09.2026). Die
-              # dritte Wahrheit heißt UNKLAR: Antwort verloren, Sendung möglicherweise
-              # trotzdem angenommen. Sie als „nichts versandt“ zu melden, wäre die
-              # gefährlichste Lüge dieses Laufs – sie lädt zum sofortigen erneuten
-              # Run ein, und der trifft die Liste ein zweites Mal.
-              if grep -q "VERSAND-STATUS UNKLAR" /tmp/nl_build.log; then
-                echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – UNKLAR, ob die Mail raus ist. Der Versand wurde NICHT wiederholt; der Lauf hat in data/newsletter_state.json einen Halt hinterlegt, der weitere Listen-Versände blockiert, bis im Brevo-Konto nachgesehen ist. ${BEFUND:-Details im Lauf-Log.}"
-              elif grep -q "TEILVERSAND" /tmp/nl_build.log; then
-                TEIL=$(grep "TEILVERSAND" /tmp/nl_build.log | tail -1 | sed 's/^[[:space:]]*//' | cut -c1-350)
-                echo "::error::Testversand TEILWEISE zugestellt (Exit $rc) – ein Teil der Testadressen hat die Mail, ein Teil nicht. ${TEIL:-Details im Lauf-Log.}"
-              elif grep -q "TESTVERSAND-STATUS UNKLAR" /tmp/nl_build.log; then
-                echo "::error::Testversand UNKLAR (Exit $rc) – ob die Testmail raus ist, ist nicht belegbar. Erneut laufen lassen ist gefahrlos; der Listen-Versand ist NICHT blockiert (kein Halt gesetzt). ${BEFUND:-Details im Lauf-Log.}"
-              elif grep -q "VERSAND ERFOLGT" /tmp/nl_build.log; then
-                echo "::error::Digest-Lauf fehlgeschlagen (Exit $rc) – der VERSAND IST RAUS, der Status ist unvollständig. ${BEFUND:-Details im Lauf-Log.}"
-              else
-                echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
-              fi
-              exit "$rc"
+              echo "::error::Digest-Versand fehlgeschlagen (Exit $rc) – es ist nichts versandt. ${BEFUND:-Details im Lauf-Log.}"
             fi
+            exit "$rc"
           fi
           # Nur bei manuellem Lauf laut melden – ein leerer Di/Fr-Cron ist
           # normal (keine neuen Artikel), kein Warnfall.
@@ -312,21 +284,23 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Versandstatus protokollieren (data/newsletter_state.json)
-        # `always()`, nicht „nur bei Erfolg“: der Status ist der Duplikatsschutz.
-        # Genau in den Läufen, die scheitern (QA-Befund nach dem Versand,
-        # Kantenblock beim Nachlesen, Halt wegen unklaren Ergebnisses), muss die
-        # Datei in main landen – sonst weiß der nächste Lauf nichts von der
-        # vorigen Ausgabe und liefert sie nochmal aus. Ein fehlender Versand
-        # ändert nichts an der Datei, der Schritt bleibt dann leer.
+      - name: Versandstatus protokollieren (data/newsletter_state.json + Journal)
+        # `always()`, nicht „nur bei Erfolg“: der Status ist der Duplikatsschutz
+        # und das Journal der Nachgang-Beleg. Genau in den Läufen, die
+        # scheitern (QA-Befund nach dem Versand, Teilverband, Halt wegen
+        # unklarem Ergebnis), müssen die Dateien in main landen – sonst weiß
+        # der nächste Lauf nichts von der vorigen Ausgabe und liefert sie
+        # nochmal aus. Ein fehlender Versand ändert nichts an den Dateien, der
+        # Schritt bleibt dann leer. Das Journal trägt NUR Adress-Hashes
+        # (keine PII im Repo).
         if: ${{ always() && !cancelled() }}
         run: |
           git config user.name "Newsletter-Bot"
           git config user.email "newsletter-bot@users.noreply.github.com"
-          git add data/newsletter_state.json 2>/dev/null || true
+          git add data/newsletter_state.json data/newsletter_journal.jsonl 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Keine Versandänderung – nichts zu committen."
           else
             git commit -m "newsletter: Versandstatus des Laufs festschreiben"
-            scripts/git_sync.sh --push-only || { echo "::error::VERSAND-STATUS nicht gesichert – vor einem weiteren Versand Brevo und Journal abgleichen!"; exit 1; }
+            scripts/git_sync.sh --push-only || { echo "::error::VERSAND-STATUS nicht gesichert – vor einem weiteren Versand Resend/Journal abgleichen!"; exit 1; }
           fi

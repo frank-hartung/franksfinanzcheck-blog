@@ -36,7 +36,7 @@
   {{- with $kadenzroh -}}{{- $kadenz = . -}}{{- end -}}
 {{- end -}}
 {{- $capture := $daten.capture | default dict -}}
-{{- /* hugo.toml-Überschreibung (Parameter bleiben gültig,siehe docs/ANLEITUNG-NEWSLETTER.md) */ -}}
+{{- /* hugo.toml-Überschreibung (Parameter bleiben gültig,siehe docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md) */ -}}
 {{- $action := trim (string (site.Params.newsletterFormAction | default $capture.form_action | default "")) " " -}}
 {{- $url := trim (string (site.Params.newsletterFormUrl | default $capture.form_url | default "")) " " -}}
 {{- $versprechen := trim (string (site.Params.newsletterPromise | default $capture.versprechen | default "")) " " -}}

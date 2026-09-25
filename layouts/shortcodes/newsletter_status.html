@@ -26,7 +26,7 @@ Die Verwaltung ist dieselbe wie unten in jeder Mail:
 {{- end -}}
 {{- else -}}
 <strong>Anmeldung noch nicht geschaltet.</strong> Sie wird aktiv, sobald der
-Auftragsverarbeitungsvertrag (AVV, Art. 28 DSGVO) mit dem Anbieter abgeschlossen und
-der Anmeldeweg in <code>data/newsletter_studio.json</code> eingetragen ist – ohne
-beides bleibt sie aus.
+Anmeldeweg (Worker-Endpunkt) in <code>hugo.toml</code> unter
+<code>newsletterFormAction</code> eingetragen ist – bis dahin sammelt das
+Formular keine Adressen (die Wache meldet den Leerzustand).
 {{- end -}}

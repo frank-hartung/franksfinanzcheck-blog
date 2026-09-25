@@ -1,0 +1,136 @@
+# Newsletter-Lifecycle: Bestätigungsmails (Double-Opt-In) und Nachgang.
+#
+# WIE DER WORKFLOW TRIGGERT WIRD
+# ------------------------------
+# Der Cloudflare-Worker (abos.franksfinanzcheck.de) nimmt eine Anmeldung an
+# und speichert sie im KV als pending (mit Token). Damit die Adresse ihre
+# Bestätigungsmail bekommt, startet der Worker DIESEN Workflow:
+#
+#   POST /repos/frank-hartung/franksfinanzcheck-blog/actions/workflows/
+#        newsletter-lifecycle.yml/dispatches
+#   Body: { "ref": "main", "inputs": { "aktion": "bestaetigung", "token": "…" } }
+#
+# Der Worker braucht dafür ein Secret GITHUB_PAT (feingranular,
+# workflows:write) und GITHUB_REPO=frank-hartung/franksfinanzcheck-blog.
+# Im Workflow geht der Token als INPUTS-WERT (Daten, kein Code) in eine
+# env-Variable – nie als Interpolation in eine Shell-Zeile.
+#
+# Der stündliche NACHGANG (schedule) ist das Netz unter dem Dispatch:
+# erreicht der Dispatch den Workflow nicht (Rate-Limit, GitHub-Wartung) oder
+# kam die Mail nicht an, holt der Nachgang offene Bestätigungen aus dem
+# Worker-Export (/export/pending) – erst nach NEWSLETTER_NACHGANG_MIN_MINUTEN,
+# max. 3 Versuche, danach „abgelaufen“ im Worker (die Seite zeigt dann den
+# ehrlichen Weg). Details: scripts/newsletter_versand.py (sende_nachgang).
+name: Newsletter-Lifecycle (Bestätigung + Nachgang)
+
+on:
+  schedule:
+    - cron: "17 * * * *"      # stündlich, offset vom :05-Digest-Lauf
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: 'Aktion: bestaetigung (eine Bestätigungsmail) oder nachgang (offene Bestätigungen nachholen)'
+        type: choice
+        options:
+          - bestaetigung
+          - nachgang
+        default: 'bestaetigung'
+      token:
+        description: 'Token der Anmeldung (kommt vom Worker im Dispatch; leer bei nachgang)'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: newsletter-lifecycle
+  cancel-in-progress: false
+
+jobs:
+  lifecycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.repository.default_branch }}
+        # Der Nachgang und die Bestätigung lesen/durchlaufen IMMER main:
+        # das Versandjournal (data/newsletter_journal.jsonl) und der Worker-
+        # Stand gehören zusammen, und ein Dispatch kommt nie mit Zweig.
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Mailer-Selbsttest (Transport, Bestätigung, Journal)
+        run: python3 scripts/newsletter_versand.py --selftest
+
+      - name: Bestätigung senden oder Nachgang fahren
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_WORKER_BASE: ${{ vars.NEWSLETTER_WORKER_BASE }}
+          NEWSLETTER_WORKER_EXPORT_KEY: ${{ secrets.NEWSLETTER_WORKER_EXPORT_KEY }}
+          NEWSLETTER_ABSENDER: ${{ vars.NEWSLETTER_ABSENDER }}
+          NEWSLETTER_TRANSPORT: ${{ vars.NEWSLETTER_TRANSPORT || '' }}
+          NEWSLETTER_SMTP_HOST: ${{ secrets.NEWSLETTER_SMTP_HOST }}
+          NEWSLETTER_SMTP_PORT: ${{ secrets.NEWSLETTER_SMTP_PORT }}
+          NEWSLETTER_SMTP_USER: ${{ secrets.NEWSLETTER_SMTP_USER }}
+          NEWSLETTER_SMTP_PASS: ${{ secrets.NEWSLETTER_SMTP_PASS }}
+          # Eingaben als ENV statt als Interpolation im Skripttext: der Token
+          # ist Daten (wie eine Adresse) und darf keine Shell-Zeile erfinden.
+          EINGABE_AKTION: ${{ github.event_name == 'workflow_dispatch' && inputs.aktion || 'nachgang' }}
+          EINGABE_TOKEN: ${{ github.event_name == 'workflow_dispatch' && inputs.token || '' }}
+        run: |
+          AKTION="$EINGABE_AKTION"
+          case "$AKTION" in
+            bestaetigung)
+              if [ -z "$EINGABE_TOKEN" ]; then
+                echo "⚠ Aktion bestaetigung ohne Token – nichts zu senden. (Der Worker dispatcht immer mit Token; ein manueller Lauf ohne Token ist ein Leerlauf.)"
+                exit 0
+              fi
+              set +e
+              python3 scripts/newsletter_versand.py --bestaetigung "$EINGABE_TOKEN" | tee /tmp/nl_lc.log
+              rc=${PIPESTATUS[0]}
+              set -e
+              if [ "$rc" -eq 1 ]; then
+                echo "::warning::Bestätigung nur TEILWEISE raus – der Nachgang (stündlich) holt nach."
+              elif [ "$rc" -ne 0 ]; then
+                echo "::error::Bestätigung fehlgeschlagen (Exit $rc). Der Nachgang wiederholt; max. 3 Versuche, dann „abgelaufen“ im Worker."
+                exit "$rc"
+              fi
+              ;;
+            nachgang)
+              set +e
+              python3 scripts/newsletter_versand.py --nachgang | tee /tmp/nl_lc.log
+              rc=${PIPESTATUS[0]}
+              set -e
+              if [ "$rc" -ne 0 ]; then
+                echo "::warning::Nachgang unvollständig (Exit $rc) – nächster Durchgang wiederholt."
+              fi
+              ;;
+            *)
+              echo "⚠ Unbekannte Aktion $AKTION – erlaubt: bestaetigung, nachgang."
+              exit 2
+              ;;
+          esac
+
+      - name: Versandstatus protokollieren (Journal mit Adress-HASHES)
+        # Der Nachgang bucht Zustellungen ins Journal (Hash statt Adresse) –
+        # der nächste Lauf muss sie sehen, damit nichts doppelt nachgeschickt
+        # wird. Deshalb `always()`: auch ein abgebrochener Lauf, der Mails
+        # rausgebracht hat, darf seinen Beleg nicht verlieren.
+        if: ${{ always() && !cancelled() }}
+        run: |
+          git config user.name "Newsletter-Bot"
+          git config user.email "newsletter-bot@users.noreply.github.com"
+          git add data/newsletter_journal.jsonl data/newsletter_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Versandänderung – nichts zu committen."
+          else
+            git commit -m "newsletter: Lifecycle-Zustand (Bestätigung/Nachgang) festschreiben"
+            scripts/git_sync.sh --push-only || { echo "::error::LIFECYCLE-ZUSTAND nicht gesichert – Nachgang-Resume ist unvollständig."; exit 1; }
+          fi

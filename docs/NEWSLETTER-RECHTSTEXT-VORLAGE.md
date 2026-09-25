@@ -59,28 +59,38 @@ angegebenen Angaben.
 > keine Klammer darf im Live-Text übrig bleiben (`.github`-Wache:
 > `newsletter_digest.py --check`, Regel N7).
 
-## 2. Was der Anbieter-Block braucht, wenn Brevo genutzt wird
+## 2. Was der Anbieter-Block im Eigenbetrieb braucht
 
-Für Brevo (CNIL-/DSGVO-Standard, Server in der EU) lautet der Anbieter-Satz:
+Zwei Auftragsverarbeiter, ein Satz für jeden (beide USA-Unternehmen →
+DSGVO-Grundlage beachten):
 
-> Versand und Speicherung erfolgen bei BREVO, 131 rue de La Rochefoucauld,
-> 75009 Paris, Frankreich. Auftragsverarbeitungsvertrag: in den
-> Brevo-Einstellungen unter *Rechtliches → DPA* als PDF abrufbar und mit
-> Abschluss des Kontos wirksam.
+> Versand erfolgt über **Resend** (Resend, Inc., 548 Market St, San
+> Francisco, CA 94104, USA) – Auftragsverarbeitungsvertrag (DPA) unter
+> resend.com/legal/dpa, Übermittlung in die USA auf Grundlage der
+> Standardvertragsklauseln der EU-Kommission.
+> Die Adresse, Themenwahl und Bestätigungsnachweise werden in einem
+> dedizierten Speicher von **Cloudflare** (Cloudflare, Inc., 101 Townsend
+> St., San Francisco, CA 94107, USA) gehalten – Auftragsverarbeitungsvertrag
+> unter cloudflare.com/de/privacy; Cloudflare ist unter dem EU-US Data
+> Privacy Framework (DPF) zertifiziert, die Übermittlung ist damit auf den
+> Angemessenheitsbeschluss (**Art. 45 DSGVO**) gestützt (wie der CDN-Abschnitt
+> dieser Datenschutzerklärung).
 
-Falls du das Konto auf US-Server stellst, brauchst du zusätzlich die
-Standardvertragsklauseln – oder du lässt den Serverstandort auf EU.
+Die Wache verlangt den Begriff „Auftragsverarbeitungsvertrag“ im Text –
+der Satz darf ihn nicht auslassen, auch wenn die Begründung (DPF vs.
+Klauseln) je nach Anbieter anders klingt.
 
 ## 3. Impressum prüfen
 
 Der Newsletter-Versand ist ein geschäftsmäßiges Handeln: die im Impressum
 angegebene ladungsfähige Anschrift und die verantwortliche Person müssen zum
-Absender passen (`Absender` im Brevo-Konto = dieselbe Person/Anschrift wie im
-Impressum, sonst ist die Mail formal angreifbar).
+Absender passen (`email.absender` im Studio-JSON = dieselbe Person/Anschrift
+wie im Impressum, sonst ist die Mail formal angreifbar).
 
 ## 4. Reihenfolge beim Freischalten
 
 1. Diesen Text in `content/datenschutz/index.md` einsetzen, Klammern füllen.
-2. `docs/ANLEITUNG-NEWSLETTER.md` befolgen (Formular-URL, Secrets).
+2. `docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md` befolgen (Worker, CNAME,
+   Resend-Domain, Secrets, `newsletterFormAction`).
 3. `python3 scripts/newsletter_digest.py --check` – muss ohne Fund enden.
 4. Erster Versand über den Testpfad des Workflows (eine Adresse, keine Liste).

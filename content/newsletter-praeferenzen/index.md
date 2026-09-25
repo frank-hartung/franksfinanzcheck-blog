@@ -1,7 +1,7 @@
 ---
 title: "Newsletter-Themen wählen: Strom, DSL, Versicherungen, Konto"
-description: "Präferenzen für den Newsletter von FranksFinanzcheck: welche Themenwelten dich interessieren, wie du die Auswahl änderst und was ohne Auswahl passiert."
 url: "/newsletter/praeferenzen/"
+description: "Präferenzen für den Newsletter von FranksFinanzcheck: welche Themenwelten dich interessieren, wie du die Auswahl änderst und was ohne Auswahl passiert."
 summary: "Präferenzverwaltung des Newsletters: Themenwelten wählen, Auswahl jederzeit ändern – bei höchstens zwei Mails pro Woche (Dienstag und Freitag)."
 robotsNoIndex: true
 sitemap:
@@ -13,29 +13,42 @@ disableShare: true
 comments: false
 ---
 
-Der Newsletter richtet sich nach deiner Auswahl. Sechs Themenwelten, ein Häkchen
-pro Welt – und ohne Häkchen kommt alles, weil „alles“ hier höchstens zwei Mails pro
-Woche sind: **Dienstag** der Wochen-Check, **Freitag** der Wochen-Abschluss.
+Der Newsletter richtet sich nach deiner Auswahl. Sechs Themenwelten, ein
+Häkchen pro Welt – und ohne Häkchen kommt alles, weil „alles“ hier höchstens
+zwei Mails pro Woche sind: **Dienstag** der Wochen-Check, **Freitag** der
+Wochen-Abschluss.
+
+## So änderst du deine Auswahl
+
+Der kürzeste Weg ist immer derselbe: **unten in jeder Mail auf
+„Themen ändern“ klicken.** Die Seite öffnet sich mit deiner aktuellen
+Auswahl bereits angehakt; du setzt die Häkchen, speicherst – und die
+Änderung gilt ab der **nächsten** Ausgabe. Ohne JavaScript, ohne Passwort,
+auch auf dem Handy; die Auswahl kannst du jederzeit mit dem nächsten Link
+erneut anpassen.
+
+Der Link zeigt auf `abos.franksfinanzcheck.de` (eigene Subdomain) und
+trägt dein persönliches Zeichen (Token) – deshalb führt er auf **deine**
+Auswahl, nicht auf eine allgemeine Seite.
+
+Ohne Mail im Postfach: eine Zeile („Themen ändern: …“) an
+[kontakt@franksfinanzcheck.de](mailto:kontakt@franksfinanzcheck.de) wird
+durchgeführt.
 
 ## Die Themenwelten
 
 {{< newsletter_themen >}}
 
-## Ändern, wann du willst
-
-- Unten in **jeder** Mail sitzt ein Link auf deine Kontaktdaten – dort ist die
-  Auswahl dieselbe Liste an Häkchen, und die Änderung gilt ab der nächsten Ausgabe.
-- Oder über das Konto beim Dienstleister, falls dein Anmeldeweg dorthin zeigt:
-
-{{< newsletter_weg feld="praferenz_url" text="Präferenzen im Anbieterkonto öffnen"
-                   ersatz="Ein gesonderter Präferenz-Link ist noch nicht hinterlegt. Die Themen lassen sich über die Anmeldung setzen, und der Link in jeder Mail führt zur selben Verwaltung." >}}
-
 ## Was die Auswahl ist – und was nicht
 
 Sie steuert, welche Artikel des Blogs in deiner Mail landen. Sie ist kein
-Werbefilter nach Preis, keine Segmentierung nach Verhalten und keine Datenweitergabe
-an Dritte: Ein Häkchen ändert den Inhalt, nicht die Menge. Ohne Auswahl kommen alle
-sechs Welten vor, aber nie mehr als zwei Mails pro Kalenderwoche.
+Werbefilter nach Preis, keine Segmentierung nach Verhalten und keine
+Datenweitergabe an Dritte: Ein Häkchen ändert den Inhalt, nicht die Menge.
+Ohne Auswahl kommen alle sechs Welten vor, aber nie mehr als zwei Mails pro
+Kalenderwoche. Und wer keine Artikel seiner gewählten Welten vorfindet, wird
+nicht mit einer leeren Mail bedient.
 
-Details stehen in den [Datenschutzhinweisen](/datenschutz/), Widerruf mit Wirkung
-für die Zukunft ebenso dort.
+Details stehen in den [Datenschutzhinweisen](/datenschutz/), Widerruf mit
+Wirkung für die Zukunft ebenso dort.
+
+<p class="ff-nl-weg"><a href="/newsletter/">Zur Newsletter-Übersicht <span aria-hidden="true">→</span></a></p>
