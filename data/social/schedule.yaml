@@ -1947,9 +1947,10 @@ items:
   date: '2026-09-25'
   time: '14:15'
   scheduled_at: '2026-09-25T14:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD
+    fehlen
 - id: facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:takeaway:2026-09-25
   channel: facebook
   slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
@@ -1959,9 +1960,9 @@ items:
   date: '2026-09-25'
   time: '15:15'
   scheduled_at: '2026-09-25T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:takeaway:2026-09-25
   channel: threads
   slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
@@ -1971,9 +1972,9 @@ items:
   date: '2026-09-25'
   time: '16:15'
   scheduled_at: '2026-09-25T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: telegram:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:zahl:2026-09-25
   channel: telegram
   slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
