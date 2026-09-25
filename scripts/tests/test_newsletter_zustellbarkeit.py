@@ -102,6 +102,69 @@ class KantenBlockTest(unittest.TestCase):
         self.assertFalse(zust.kanten_block(200, "Error 1010"))
         self.assertFalse(zust.kanten_block(0, "whatever"))
 
+    def test_wache_und_mailer_lesen_die_kante_gleich(self):
+        """Eine Quelle: die Wache importiert die Erkennung aus dem Mailer.
+
+        Zwei Kopien hießen zwei Wahrheiten – genau so blieb der 1010-Block
+        vom 25.09.2026 im einen Teil des Laufs sichtbar und im anderen grün.
+        """
+        self.assertIsNotNone(zust._mailer, "Mailer muss importierbar sein")
+        self.assertIs(zust.kanten_block, zust._mailer.kanten_block)
+        self.assertTrue(zust.KANTEN_AUS_MAILER)
+
+    def test_reservekopie_liest_dieselben_marker(self):
+        # Nur relevant, wenn der Mailer nicht importierbar ist – die Kopie
+        # muss dann dieselben Marker kennen (kein stiller Blindfleck).
+        self.assertTrue(zust._kanten_block_reserve(
+            403, '{"title":"Error 1010: Access denied"}'))
+        self.assertTrue(zust._kanten_block_reserve(
+            403, "Just a moment... challeng"))
+        self.assertFalse(zust._kanten_block_reserve(403, '{"message":"nope"}'))
+
+
+class DohAbfrageTest(unittest.TestCase):
+    """Die Abfrage-URL der Zone: genau EIN Fragezeichen, kodierte Parameter.
+
+    Regression zum 25.09.2026: Basis endete auf „?“, Frage begann mit „?“ –
+    beide Resolver antworteten HTTP 400, und die Wache meldete daraus „DNS
+    nicht erreichbar“ (C0/C7 gelb), obwohl das Netz frei war.
+    """
+
+    def test_parameter_haengen_genau_einmal_an(self):
+        url = zust.doh_url("https://dns.google/resolve", "beispiel.blog", "TXT",
+                           {"dnssec": "false"})
+        self.assertEqual(url, "https://dns.google/resolve"
+                              "?name=beispiel.blog&type=TXT&dnssec=false")
+        self.assertEqual(url.count("?"), 1)
+        self.assertNotIn("?name", url.split("?", 1)[1])
+
+    def test_alle_endpunkte_sind_basen_ohne_fragezeichen(self):
+        for eintrag in zust.DOH_ENDPUNKTE:
+            basis, extra = eintrag
+            self.assertNotIn("?", basis, f"Basis trägt schon eine Abfrage: {basis}")
+            self.assertIsInstance(extra, dict)
+            self.assertTrue(basis.startswith("https://"), basis)
+
+    def test_sonderzeichen_werden_kodiert(self):
+        url = zust.doh_url("https://cloudflare-dns.com/dns-query", "a b.de", "TXT")
+        self.assertNotIn(" ", url)
+        self.assertIn("a+b.de", url)
+        self.assertEqual(url.count("?"), 1)
+
+    def test_4xx_wird_als_abfragefehler_benannt(self):
+        text = zust.messluecke(["dns.google: HTTP 400",
+                                "cloudflare-dns.com: HTTP 400"])
+        self.assertIn("4xx", text)
+        self.assertIn("kein Netzausfall", text)
+
+    def test_netzfehler_bleibt_messluecke_ohne_abfrageverdacht(self):
+        text = zust.messluecke(["dns.google: URLError", "cloudflare-dns.com: Timeout"])
+        self.assertNotIn("4xx", text)
+        self.assertIn("URLError", text)
+
+    def test_leere_messluecke_bleibt_lesbar(self):
+        self.assertIn("keine Antwort", zust.messluecke([]))
+
 
 class CloudflareRegelnTest(unittest.TestCase):
     """C1–C6: gesunde Zone grün, jede Mutation als Fund sichtbar."""
@@ -380,6 +443,7 @@ class ResendRegelnTest(unittest.TestCase):
         self.assertEqual(r["B0"]["gewicht"], "fund")
 
     def test_b1_domain_verifiziert(self):
+        # Altform (verified) bleibt lesbar – die API-Form von 2026 steht unten.
         os.environ["RESEND_API_KEY"] = "re_test"
         antwort = (200, json.dumps(
             {"data": [{"domain": ZONE, "verified": True}]}))
@@ -392,6 +456,54 @@ class ResendRegelnTest(unittest.TestCase):
             {"data": [{"domain": ZONE, "verified": False}]}))
         r = self._b([antwort])
         self.assertEqual(r["B1"]["gewicht"], "fund")
+
+    # ---- B1 in der API-Form von 2026: `name` + `status` -----------------
+    def test_b1_api_form_name_und_status_verified_ist_ok(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        recs = [{"record": "SPF", "name": "send", "type": "TXT",
+                 "status": "verified"},
+                {"record": "DKIM", "name": "resend._domainkey", "type": "TXT",
+                 "status": "verified"}]
+        r = self._b([(200, json.dumps({"object": "list", "has_more": False,
+                                       "data": [{"id": "dom_1", "name": ZONE,
+                                                 "status": "verified"}]})),
+                     (200, json.dumps({"records": recs}))])
+        self.assertEqual(r["B1"]["gewicht"], "ok", r["B1"])
+        self.assertIn("verified", r["B1"]["ist"])
+
+    def test_b1_api_form_not_started_ist_fund_mit_status(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        antwort = (200, json.dumps({"data": [{"id": "dom_1", "name": ZONE,
+                                              "status": "not_started"}]}))
+        r = self._b([antwort])
+        self.assertEqual(r["B1"]["gewicht"], "fund")
+        self.assertIn("not_started", r["B1"]["ist"])
+
+    def test_b1_fremde_domaene_nennt_den_namen_statt_none(self):
+        """Regression 25.09.2026: die Wache las `domain` statt `name`, sah
+        überall `None` und meldete daraus einen Falsch-Fund."""
+        os.environ["RESEND_API_KEY"] = "re_test"
+        antwort = (200, json.dumps({"data": [{"name": "andere.example",
+                                              "status": "verified"}]}))
+        r = self._b([antwort])
+        self.assertEqual(r["B1"]["gewicht"], "fund")
+        self.assertIn("andere.example", r["B1"]["ist"])
+        self.assertNotIn("None", r["B1"]["ist"])
+
+    def test_b1_leere_kontoliste_sagt_keine(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        r = self._b([(200, json.dumps({"data": []}))])
+        self.assertEqual(r["B1"]["gewicht"], "fund")
+        self.assertIn("keine", r["B1"]["ist"])
+        self.assertNotIn("None", r["B1"]["ist"])
+
+    def test_b1_unlesbare_liste_ist_nicht_messbar(self):
+        # 200, aber `data` ist keine Liste: kein Fund und kein Grün.
+        os.environ["RESEND_API_KEY"] = "re_test"
+        r = self._b([(200, json.dumps({"data": "quatsch"}))])
+        self.assertEqual(r["B1"]["gewicht"], "nicht messbar")
+        self.assertEqual(r["B0"]["gewicht"], "ok")
+
 
     @staticmethod
     def _b1_records(recs):
@@ -506,6 +618,24 @@ class StateRegelnTest(unittest.TestCase):
         r = {f["regel"]: f for f in zust.pruefe_state(td)}
         self.assertEqual(r["S3"]["gewicht"], "hinweis")
 
+    def test_s3_zitiert_die_letzte_journal_zeile(self):
+        """Ein gescheiterter Testversand ist ein Beleg, kein Nichts: die
+        Zeile nennt Journal-Ausgabe, Status und Grund (kein grüner S3)."""
+        td = self._tmp()
+        with open(os.path.join(td, "data", "newsletter_journal.jsonl"), "a",
+                  encoding="utf-8") as fh:
+            fh.write(json.dumps({"ts": "2026-09-25T10:16:56+00:00",
+                                 "ausgabe": "test-2026-09-25",
+                                 "empfaenger": "5ebc8f38444904a8",
+                                 "transport": "resend", "status": "fehler",
+                                 "detail": "HTTP 403 · KANTE (Error 1010)"},
+                                ensure_ascii=False) + "\n")
+        r = {f["regel"]: f for f in zust.pruefe_state(td)}
+        self.assertEqual(r["S3"]["gewicht"], "hinweis")
+        self.assertIn("test-2026-09-25", r["S3"]["ist"])
+        self.assertIn("1010", r["S3"]["ist"])
+        self.assertNotIn("5ebc8f38444904a8", r["S3"]["ist"])
+
 
 class GesamtlaufTest(unittest.TestCase):
     """`pruefe` + `als_md`: der Lauf als Ganzes."""
@@ -565,3 +695,77 @@ class GesamtlaufTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class SendesignaturTest(unittest.TestCase):
+    """B0 muss mit DERSELBEN Signatur fragen wie der Versand (User-Agent).
+
+    Vorfall 25.09.2026: die Wache fragte mit eigenem User-Agent (HTTP 200),
+    der Versand mit `Python-urllib/3.x` – und bekam von der Cloudflare-Kante
+    HTTP 403 · Error 1010. Ergebnis: B0 grün, Testversand tot.
+    """
+
+    def setUp(self):
+        self.td = _tmp_root()
+        self.echt_a, self.echt_n = zust.AUFLOESER, zust.NETZ_RUF
+        self.key = os.environ.pop("RESEND_API_KEY", None)
+        os.environ.pop("NEWSLETTER_RESEND_KEY", None)
+        os.environ.pop("NEWSLETTER_WORKER_BASE", None)
+        os.environ.pop("NEWSLETTER_WORKER_EXPORT_KEY", None)
+
+    def tearDown(self):
+        zust.AUFLOESER, zust.NETZ_RUF = self.echt_a, self.echt_n
+        if self.key is not None:
+            os.environ["RESEND_API_KEY"] = self.key
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
+
+    def test_sendesignatur_ist_die_des_mailers(self):
+        self.assertNotIn("urllib", zust._sendesignatur("k")["User-Agent"])
+        self.assertEqual(zust._sendesignatur("k"),
+                         zust._mailer.api_headers("k"))
+
+    def test_b0_fragt_mit_den_kopfzeilen_des_versands(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        gesehen: dict = {}
+
+        def netz(url, *, headers=None, timeout=15):
+            if url.startswith("https://api.resend.com"):
+                gesehen.update(headers or {})
+                return 200, json.dumps({"data": [{"name": ZONE,
+                                                  "status": "verified"}]})
+            return 200, "{}"
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = netz
+        zust.pruefe_resend(self.td, mit_netz=True)
+        self.assertEqual(gesehen, zust._mailer.api_headers("re_test"))
+        self.assertNotIn("urllib", gesehen.get("User-Agent", ""))
+
+    def test_b0_ohne_key_fragt_ohne_bearer_aber_mit_ua(self):
+        os.environ.pop("RESEND_API_KEY", None)
+        gesehen: dict = {}
+
+        def netz(url, *, headers=None, timeout=15):
+            if url.startswith("https://api.resend.com"):
+                gesehen.update(headers or {})
+                return 401, '{"message":"unauthorized"}'
+            return 200, "{}"
+        zust.AUFLOESER = _gesunde_zone()
+        zust.NETZ_RUF = netz
+        r = {f["regel"]: f for f in zust.pruefe_resend(self.td, mit_netz=True)}
+        self.assertNotIn("Authorization", gesehen)
+        self.assertIn("User-Agent", gesehen)
+        self.assertEqual(r["B0"]["gewicht"], "info")
+
+    def test_mailer_fehlt_ist_nicht_messbar_kein_gruen(self):
+        # Ohne Signaturquelle (kaputter Mailer) wird B0 nicht gemessen.
+        echt = zust._mailer
+        zust._mailer = None
+        try:
+            os.environ["RESEND_API_KEY"] = "re_test"
+            zust.AUFLOESER = _gesunde_zone()
+            zust.NETZ_RUF = _netz((200, json.dumps({"data": []})))
+            r = {f["regel"]: f for f in zust.pruefe_resend(self.td, mit_netz=True)}
+        finally:
+            zust._mailer = echt
+        self.assertEqual(r["B0"]["gewicht"], "nicht messbar")

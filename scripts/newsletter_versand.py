@@ -68,6 +68,24 @@ HAERT_BOUNCE_MUSTER = re.compile(
     r"user unknown|no such user|undeliverable|invalid recipient|does not exist|"
     r"unknown user|mailbox unavailable|5\.1\.[12]|account is deactivated", re.I)
 
+# ---------------------------------------------------- Kante vs. Anbieter
+# Der User-Agent ist Teil der Zustellung, nicht Kosmetik: ohne ihn schickt
+# urllib `Python-urllib/3.x`, und Cloudflares Signaturfilter (Error 1010)
+# weist GENAU DAS ab, bevor die Anfrage den Anbieter erreicht. Vorfall
+# 25.09.2026: der erste Testversand der Zone starb an der KANTE (HTTP 403 ·
+# Error 1010 im Journal: data/newsletter_journal.jsonl), während die
+# Zustellbarkeits-Wache – mit eigenem User-Agent – B0 grün meldete. Zwei
+# Signaturen, zwei Wahrheiten im selben Lauf. Deshalb ist `api_headers`
+# jetzt EINE Quelle für den Versandweg UND die Vorprüfung (B0 der Wache).
+UA_KENNUNG = ("FranksFinanzcheck-Newsletter/1.0 "
+              "(+https://franksfinanzcheck.de; mailto:kontakt@franksfinanzcheck.de)")
+# Marker der Cloudflare-KANTE in der Antwort – nicht des Anbieters. Die
+# 1010-Seite nennt „browser's signature“; „Just a moment“ ist die
+# Bot-Falle derselben Kante. Ein 403 OHNE diese Marker ist eine echte
+# Absage des Anbieters (Key, Domain, Rate-Limit) und ein anderer Befund.
+KANTEN_MUSTER = re.compile(
+    r"(1010|browser.?s signature|Access denied[^\"]*signature|Just a moment)", re.I)
+
 DEFAULT_RAT_PRO_MINUTE = 40
 MAX_RETRY_PAUSE_SEK = 20
 NACHGANG_MIN_MINUTEN_DEFAULT = 15
@@ -101,18 +119,50 @@ def journal_zeile(root: str, zeile: dict) -> None:
         fh.write(json.dumps(zeile, ensure_ascii=False) + "\n")
 
 
+def api_headers(key: str = "", *, json_body: bool = False) -> dict:
+    """DIE Kopfzeilen des Anbieter-Wegs – Versand UND Vorprüfung.
+
+    Eine Quelle für beide Seiten: die Zustellbarkeits-Wache fragt die
+    Resend-API mit exakt dieser Signatur ab (B0). Vorher baute jede Seite
+    ihre eigenen Kopfzeilen – die Wache fragte mit `FranksFinanzcheck-
+    Zustellbarkeitswaechter/1.0`, der Versand mit urllib-Default, und
+    genau dazwischen lag der 403/1010-Block vom 25.09.2026.
+
+    `key` = Bearer der Resend-API. Der Worker-Export nutzt stattdessen
+    `x-ff-key` (siehe `worker_abfrage`).
+    """
+    kopf = {"Accept": "application/json", "User-Agent": UA_KENNUNG}
+    if json_body:
+        kopf["Content-Type"] = "application/json"
+    if key:
+        kopf["Authorization"] = f"Bearer {key}"
+    return kopf
+
+
+def kanten_block(status: int, koerper: str) -> bool:
+    """True = die Antwort kam von der Cloudflare-KANTE, nicht vom Anbieter.
+
+    403 mit 1010-Marke heißt: die Anfrage hat den Anbieter nie erreicht.
+    Das ist kein „Absender-Problem“ – wer das verwechselt, sucht tagelang
+    in der Domain-Konfiguration (Lauf #21 vom 23.09.2026). Deshalb liegt
+    die Erkennung hier an EINER Stelle; die Wache importiert sie.
+    """
+    if status != 403:
+        return False
+    return bool(KANTEN_MUSTER.search(koerper or ""))
+
+
 def _http_json(url: str, payload: dict | None = None, key: str | None = None,
-               methode: str | None = None, zeit_limited: int = 30) -> tuple[int, dict | str]:
-    """POST/GET als JSON. key = Bearer/Secret-Header je Zweck.
+               methode: str | None = None, zeit_limited: int = 30,
+               headers: dict | None = None) -> tuple[int, dict | str]:
+    """POST/GET als JSON. key = Bearer; `headers` ergänzt (z. B. `x-ff-key`).
     → (HTTP-Status, geparst-JSON-oder-Rohstring)."""
-    headers = {"Accept": "application/json"}
+    kopf = api_headers(key or "", json_body=payload is not None)
+    kopf.update(headers or {})
     daten = None
     if payload is not None:
         daten = json.dumps(payload).encode("utf-8")
-        headers["Content-Type"] = "application/json"
-    if key:
-        headers["Authorization"] = f"Bearer {key}"
-    anfrage = urllib.request.Request(url, data=daten, headers=headers,
+    anfrage = urllib.request.Request(url, data=daten, headers=kopf,
                                      method=methode or ("POST" if daten else "GET"))
     try:
         with urllib.request.urlopen(anfrage, timeout=zeit_limited) as antwort:
@@ -197,7 +247,13 @@ def resend_payload(empfaenger: dict, konf: dict, env: dict | None = None) -> dic
 
 
 def resend_senden(payload: dict, key: str) -> tuple[bool, str]:
-    """→ (ok, meldung). 429 wird genau einmal nach 20 s wiederholt."""
+    """→ (ok, meldung). 429 wird genau einmal nach 20 s wiederholt.
+
+    Ein Kanten-Block (403 mit 1010-Marke) wird NICHT wiederholt: dieselbe
+    Signatur trifft dieselbe Regel, und ein zweiter Versuch kostet nur
+    Zeit. Er wird auch nicht als Anbieter-Absage gemeldet – die Meldung
+    sagt, wo das Problem sitzt (Kante) und was hilft (User-Agent/Filter).
+    """
     for versuch in (1, 2):
         try:
             status, antwort = _http_json(RESEND_URL, payload, key=key)
@@ -208,6 +264,13 @@ def resend_senden(payload: dict, key: str) -> tuple[bool, str]:
             return False, f"netzwerk: {exc}"
         if status in (200, 202):
             return True, "annimmt"
+        roh = antwort if isinstance(antwort, str) else json.dumps(antwort, ensure_ascii=False)
+        if kanten_block(status, roh):
+            return False, (f"HTTP {status} · KANTE (Error 1010, Signaturfilter): "
+                           "die Anfrage hat Resend nie erreicht – sie wurde am "
+                           "Cloudflare-Rand abgewiesen. Kein Wiederholen "
+                           "(dieselbe Signatur, dieselbe Regel); der User-Agent "
+                           f"dieses Aufrufs ist „{UA_KENNUNG.split(' ')[0]}…“.")
         meldung = f"HTTP {status}"
         if isinstance(antwort, dict):
             meldung += f": {json.dumps(antwort, ensure_ascii=False)[:200]}"
@@ -218,6 +281,37 @@ def resend_senden(payload: dict, key: str) -> tuple[bool, str]:
             continue
         return False, meldung
     return False, "unklar nach Retry"
+
+
+def letzter_fehler(root: str, ausgabe: str = "") -> str:
+    """Der jüngste Fehler-Eintrag des Journals – für die ❌-Zeile des Digests
+    (und damit für die Annotation im Lauf).
+
+    Das Journal trägt nur Adress-Hashes und die Anbieter-Meldung, also
+    nichts, was nicht zitiert werden dürfte. Genau diese Meldung fehlte am
+    25.09.2026 im Lauf-Protokoll: die Annotation sagte „nichts versendet“,
+    die Ursache (Kante/1010) stand nur im Journal.
+    """
+    pfad = os.path.join(root, JOURNAL_REL)
+    try:
+        with open(pfad, encoding="utf-8") as fh:
+            zeilen = fh.readlines()
+    except OSError:
+        return ""
+    for zeile in reversed(zeilen):
+        try:
+            eintrag = json.loads(zeile)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if str(eintrag.get("status")) not in ("fehler", "bounce", "weich"):
+            continue
+        # Ausgabe-Filter nur, wenn sie greift: ein Testversand schreibt
+        # `test-<datum>` – ohne Filter bliebe die Meldung sonst an einem
+        # Nachgang-Lauf hängen, der später im selben Journal landete.
+        if ausgabe and eintrag.get("ausgabe") != ausgabe:
+            continue
+        return f"{eintrag.get('status')}: {str(eintrag.get('detail') or '').strip()}"[:220]
+    return ""
 
 
 def smtp_mime_bauen(empfaenger: dict, konf: dict, env: dict | None = None) -> EmailMessage:
@@ -296,10 +390,21 @@ def worker_konfig(env: dict | None = None) -> tuple[str, str]:
 
 
 def worker_abfrage(pfad: str, param: dict | None = None, *, base: str, key: str) -> dict:
+    """Geschützte Export-Abfrage am Worker – der Schlüssel geht MIT.
+
+    Der Worker prüft `x-ff-key` (oder `?sluessel=`), vergleicht in
+    Konstantzeit und antwortet sonst 403 `{"status":"verboten"}`. Bis
+    25.09.2026 nahm diese Funktion `key` entgegen und sendete ihn nie:
+    jede Bestätigung und jeder Nachgang endete in „Worker-Antwort 403“
+    (Lauf `Nachgang unvollständig (Exit 1)`), und der Listen-Export wäre
+    beim ersten echten Versand am selben Punkt gestorben. Ein Parameter,
+    der nicht ankommt, sieht wie Konfiguration aus und ist Code.
+    """
     url = base + pfad
     if param:
         url += "?" + urllib.parse.urlencode(param)
-    status, antwort = _http_json(url, None, methode="GET")
+    status, antwort = _http_json(url, None, methode="GET",
+                                 headers={"x-ff-key": key} if key else None)
     if status == 200 and isinstance(antwort, dict):
         return antwort
     if status == 404 and isinstance(antwort, dict):
@@ -316,7 +421,8 @@ def worker_melden(base: str, key: str, token: str, ergebnis: str) -> None:
             base + "/export/versuch",
             data=urllib.parse.urlencode({"token": token, "ergebnis": ergebnis}).encode("utf-8"),
             method="POST",
-            headers={"Content-Type": "application/x-www-form-urlencoded", "X-FF-Key": key})
+            headers={"Content-Type": "application/x-www-form-urlencoded",
+                     "X-FF-Key": key, "User-Agent": UA_KENNUNG})
         with urllib.request.urlopen(anfrage, timeout=20) as antwort:
             if antwort.status not in (200, 204):
                 print(f"   ⚠ Worker-Statusnachtrag unbeantwortet (HTTP {antwort.status}) – "
@@ -836,8 +942,108 @@ def _selftest() -> int:
     except AssertionError:
         raise
 
+    # 8) Kopfzeilen des Anbieter-Wegs: der User-Agent ist Teil der
+    #    Zustellung. Cloudflare (Error 1010) weist `Python-urllib/3.x` ab –
+    #    Vorfall 25.09.2026: der Testversand starb mit HTTP 403 an der
+    #    Kante, während die Wache (eigener UA) B0 grün meldete.
+    kopf = api_headers("re_test", json_body=True)
+    pruefe(kopf["User-Agent"] == UA_KENNUNG and "urllib" not in kopf["User-Agent"],
+           f"User-Agent: urllib-Default statt Repo-Kennung ({kopf['User-Agent']})")
+    pruefe(kopf["Authorization"] == "Bearer re_test" and kopf["Content-Type"] == "application/json"
+           and kopf["Accept"] == "application/json",
+           "Kopfzeilen: Auth/JSON/Accept fehlen")
+    pruefe(kanten_block(403, '{"type":"…/error-1010/","title":"Error 1010: Access denied"}'),
+           "Kante: 1010-Antwort nicht als Kante erkannt")
+    pruefe(not kanten_block(403, '{"message":"The domain is not verified"}'),
+           "Kante: echte Anbieter-Absage als Kanten-Block gelesen")
+    pruefe(not kanten_block(401, "Error 1010"), "Kante: anderer Status als 403 gilt als Kante")
+
+    # 9) Kanten-Block: EINE Anfrage, klare Meldung – kein Retry (dieselbe
+    #    Signatur trifft dieselbe Regel; ein zweiter Versuch wäre Theater).
+    #    Gemessen wird über `urlopen` (das echte `_http_json`), damit auch
+    #    die KOPFZEILEN geprüft sind, die wirklich rausgehen.
+    import io as _io
+    import urllib.error as _uerr
+    echt_open = urllib.request.urlopen
+
+    class _Antwort:
+        status = 200
+        def __init__(self, koerper: bytes = b"{}"):
+            self._koerper = koerper
+        def read(self):
+            return self._koerper
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+
+    gesehen: dict = {}
+    aufrufe: list = []
+
+    def open_kante(anfrage, timeout=None):
+        aufrufe.append(anfrage.full_url)
+        gesehen.update({"url": anfrage.full_url, "methode": anfrage.get_method(),
+                        "headers": {k.lower(): v for k, v in anfrage.headers.items()}})
+        raise _uerr.HTTPError(anfrage.full_url, 403, "Forbidden", {},
+                              _io.BytesIO(b'{"title":"Error 1010: Access denied"}'))
+    urllib.request.urlopen = open_kante
+    try:
+        ok, meldung = resend_senden({"to": ["a@b.de"], "subject": "x", "html": "y"}, "re_test")
+    finally:
+        urllib.request.urlopen = echt_open
+    pruefe(not ok and "KANTE" in meldung,
+           f"Kanten-Block nicht als Kante gemeldet: {meldung}")
+    pruefe("1010" in meldung, f"Kanten-Meldung ohne 1010-Marke: {meldung}")
+    pruefe(len(aufrufe) == 1, f"Kanten-Block wurde wiederholt ({len(aufrufe)} Anfragen)")
+    pruefe(gesehen["methode"] == "POST" and gesehen["url"] == RESEND_URL,
+           f"Versandweg: {gesehen['methode']} {gesehen['url']}")
+    pruefe(gesehen["headers"].get("user-agent") == UA_KENNUNG,
+           f"Versandweg: User-Agent fehlt/falsch ({gesehen['headers'].get('user-agent')})")
+    pruefe(gesehen["headers"].get("authorization") == "Bearer re_test",
+           "Versandweg: Bearer fehlt")
+
+    # 10) Worker-Export: der Schlüssel geht MIT (`x-ff-key`). Vorfall
+    #     25.09.2026: `key` wurde entgegengenommen und nie gesendet – jede
+    #     Bestätigung und jeder Nachgang endete in „Worker-Antwort 403“
+    #     (Lauf: „Nachgang unvollständig (Exit 1)“).
+    def open_export(anfrage, timeout=None):
+        gesehen.clear()
+        gesehen.update({"url": anfrage.full_url, "methode": anfrage.get_method(),
+                        "headers": {k.lower(): v for k, v in anfrage.headers.items()}})
+        return _Antwort(b'{"ts":"2026-09-25T10:00:00Z","anzahl":0,"abonnenten":[]}')
+    urllib.request.urlopen = open_export
+    try:
+        antwort = worker_abfrage("/export/abonnenten", None,
+                                 base="https://abos.beispiel.de", key="geheim")
+    finally:
+        urllib.request.urlopen = echt_open
+    pruefe(antwort.get("anzahl") == 0, "Worker-Export: Antwort nicht durchgereicht")
+    pruefe(gesehen["headers"].get("x-ff-key") == "geheim",
+           "Worker-Export: x-ff-key fehlt – der Export antwortet darauf 403")
+    pruefe(gesehen["headers"].get("user-agent") == UA_KENNUNG,
+           "Worker-Export: User-Agent fehlt (Cloudflare-Kante)")
+    pruefe(gesehen["url"] == "https://abos.beispiel.de/export/abonnenten"
+           and gesehen["methode"] == "GET",
+           f"Worker-Export: falscher Aufruf {gesehen['methode']} {gesehen['url']}")
+
+    # 11) letzter_fehler: die Ursache für die ❌-Zeile des Digests – aus dem
+    #     Journal, in dem nur Hashes und die Anbieter-Meldung stehen.
+    tmp_j = tempfile.mkdtemp(prefix="ff-versand-fehler-")
+    journal_zeile(tmp_j, {"ts": "2026-09-25T10:16:56+00:00", "modus": "sendefile",
+                          "ausgabe": "test-2026-09-25", "empfaenger": "5ebc8f38444904a8",
+                          "transport": "resend", "status": "fehler",
+                          "detail": "HTTP 403 · KANTE (Error 1010, Signaturfilter)"})
+    pruefe("KANTE" in letzter_fehler(tmp_j, ausgabe="test-2026-09-25"),
+           "letzter_fehler: Ursache der falschen Ausgabe gefunden")
+    pruefe(letzter_fehler(tmp_j, ausgabe="liste-2026-09-25") == "",
+           "letzter_fehler: Ausgabe-Filter greift nicht")
+    pruefe(letzter_fehler(os.path.join(tmp_j, "gibts-nicht")) == "",
+           "letzter_fehler: fehlendes Journal muss leer melden, nicht werfen")
+    _shutil.rmtree(tmp_j, ignore_errors=True)
+
     print(f"✅ newsletter_versand Selftest: {pruefungen} Fälle grün "
-          "(Resend-Payload, MIME, SMTP-Sink mit Bounce, Bestätigung, Transports, Journal).")
+          "(Resend-Payload, MIME, SMTP-Sink mit Bounce, Bestätigung, Transports, "
+          "Journal, Kopfzeilen/Kante, Worker-Schlüssel).")
     return 0
 
 

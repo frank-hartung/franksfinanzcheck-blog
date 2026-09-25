@@ -755,8 +755,14 @@ def _versand_test(root: str, html: str, text: str, betreff: str,
               "Journal (data/newsletter_journal.jsonl). Der Listen-Versand ist NICHT "
               "dafür blockiert.")
     else:
-        print("❌ TESTVERSAND FEHLGESCHLAGEN: nichts versendet – Details im Journal "
-              "und oben. Der Listen-Versand ist NICHT dafür blockiert.")
+        # Die Ursache gehört in DIESE Zeile: sie ist die letzte ❌-Zeile im
+        # Log und damit das, was als Annotation im Lauf steht. Ohne sie
+        # stand dort am 25.09.2026 nur „nichts versendet“, während der
+        # Grund (HTTP 403 an der Kante, Error 1010) im Journal lag.
+        grund = versand.letzter_fehler(root, ausgabe=f"test-{datum_iso}")
+        print("❌ TESTVERSAND FEHLGESCHLAGEN: nichts versendet – "
+              f"{grund or 'Details im Journal (data/newsletter_journal.jsonl)'}. "
+              "Der Listen-Versand ist NICHT dafür blockiert.")
     return rc
 
 
@@ -941,8 +947,13 @@ def _status_nach_versand(root: str, betreff: str, datum_iso: str,
     # rc 2: nichts oder unbelegbar – Halt setzen.
     kennung = f"liste:{datum_iso}:{betreff[:40]}"
     sperre_setzen(root, kennung, betreff)
+    # Auch hier die Ursache in die Zeile schreiben: sie ist die letzte
+    # sichtbare ❌-Zeile (Annotation im Lauf, `gh run view --log`).
+    grund = versand.letzter_fehler(root, ausgabe=f"liste-{datum_iso}")
     print(f"🛑 VERSAND-STATUS UNKLAR: nichts (oder nicht belegbar) versendet – "
-          f"Halt gesetzt ({kennung}). Der nächste Listen-Versand bleibt stehen, "
+          f"Halt gesetzt ({kennung})."
+          + (f" Erste Ursache: {grund}." if grund else "")
+          + " Der nächste Listen-Versand bleibt stehen, "
           "bis im Transport-Log nachgesehen und der Block aufgelöst ist.")
     return 2
 
