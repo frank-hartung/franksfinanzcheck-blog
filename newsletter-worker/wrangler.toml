@@ -7,14 +7,22 @@
 #   2) npx wrangler login
 #   3) npx wrangler kv:namespace create ABO
 #        -> wrangler ergänzt id + placement automatisch unten
-#   4) npx wrangler secret put GITHUB_PAT    (Fine-Grained-PAT, nur
-#      "workflows: write" auf diesem Repo)
+#   4) npx wrangler secret put GITHUB_PAT    (Fine-Grained-PAT, nur dieses
+#      Repo, Berechtigung "Actions: Read and write" – das ist das Recht,
+#      workflow_dispatch auszuloesen. "Workflows: write" reicht NICHT: das
+#      ist das Recht, Workflow-DATEIEN zu aendern. Quelle:
+#      docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event)
 #   5) npx wrangler secret put EXPORT_KEY    (beliebiger 32+ Zeichen
 #      Zufallsstring; GLEICHER Wert als GitHub-Secret
 #      NEWSLETTER_WORKER_EXPORT_KEY)
-#   6) npx wrangler deploy
+#   6) npx wrangler deploy      (aktiviert auch die Cron-Triggers unten;
+#      Free-Plan: max. 5 Cron-Triggers pro ACCOUNT – hier 3)
 #   7) Zone: hostname abos.franksfinanzcheck.de (custom_domain unten
 #      aktivieren ODER über Dashboard -> Workers -> Custom Domain)
+#   8) Takt pruefen: https://abos.franksfinanzcheck.de/healthz zeigt
+#      unter `takt.letzte` den letzten Dispatch je Takt (digest/kadenz/
+#      nachgang); Cloudflare -> Worker -> Settings -> Trigger Events
+#      listet die Cron-Ausfuehrungen.
 # ============================================================
 name = "ff-newsletter"
 main = "src/index.js"
@@ -38,6 +46,20 @@ THEMEN_LABELS = "{\"strom-sparen\":\"Strom & Gas sparen\",\"internet-dsl\":\"Int
 BESTAETIGUNG_TAGE = "14"
 
 # Secrets (NICHT hier eintragen): GITHUB_PAT, EXPORT_KEY
+
+# TAKTGEBER (25.09.2026): GitHubs `schedule`-Ereignisse kamen an diesem
+# Repo 5-5,5 h zu spaet oder gar nicht (Fr 25.09.: kein Digest-Lauf, keine
+# Kadenz-Wache). Cloudflare Cron Triggers feuern minutengenau (UTC). Der
+# Worker startet die Workflows per workflow_dispatch (src/index.js,
+# Tabelle TAKT) - mit derselben Freigabestufe wie der GitHub-Cron.
+#   30 4 * * TUE,FRI  -> newsletter-daily.yml   (planmaessig=true)  06:30 MESZ / 05:30 MEZ
+#    5 5 * * TUE,FRI  -> newsletter-cadence.yml (zaehlt nach, holt nach, wird laut)
+#   17 * * * *        -> newsletter-lifecycle.yml (aktion=nachgang)
+# ACHTUNG Wochentage: Cloudflare zaehlt 1=SO..7=SA (Quartz). "2,5" waere
+# Mo/Do. Deshalb Namen (TUE,FRI). Die Schluessel muessen EXAKT der
+# TAKT-Tabelle in src/index.js entsprechen (Test haelt beides deckungsgleich).
+[triggers]
+crons = ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI", "17 * * * *"]
 
 # KV-Speicher: nach `npx wrangler kv:namespace create ABO` automatisch
 # ergaenzt. PLACEMENT: "eu" halten, damit die Adressen in der EU liegen.

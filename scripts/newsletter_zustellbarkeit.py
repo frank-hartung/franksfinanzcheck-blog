@@ -35,6 +35,14 @@ Architektur Zustellung entscheidet:
     C7  Capture-Endpunkt lebt: die Domain löst sich auf, der Worker
         antwortet (sonst gehen keine Adressen ein – und der Versand
         läuft gegen eine leere Liste)
+    C8  Taktgeber (seit 25.09.2026): der Worker startet den Digest per
+        Cron Trigger (Di/Fr 04:30 UTC), weil GitHubs Scheduler an
+        diesem Repo Stunden zu spät oder gar nicht feuert. Gemessen wird
+        aus /healthz → `takt.letzte.digest`: fehlt der Takt ganz (alte
+        Worker-Version), ist der letzte Dispatch gescheitert (HTTP 403 =
+        PAT ohne „Actions: write“) oder wurde der letzte fällige
+        Versandtag verpasst → Fund. „Nie gefeuert“ vor dem ersten
+        fälligen Termin ist ein Hinweis, kein Fund.
   RESEND (API, nur wenn ein Key da ist – sonst „nicht gemessen“):
     B0  Netzweg: erreicht der Client api.resend.com? (401 ohne Key =
         Kante durchlässig; 403 mit Signaturfilter-Marke = Blockage;
@@ -69,6 +77,10 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import datetime as _dt
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import newsletter_schedule as _schedule  # noqa: E402  (Di/Fr + Soll-Uhrzeit, eine Quelle)
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ZONE_Standard = "franksfinanzcheck.de"
@@ -450,6 +462,114 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
     return funde, messwerte
 
 
+# ------------------------------------------------------------------------ Regel C8
+def letzter_faelliger_takt(jetzt: "_dt.datetime | None" = None) -> "_dt.datetime | None":
+    """Der jüngste Di/Fr-Termin (SOLL_UTC) der bereits ≥ 10 Minuten zurückliegt.
+
+    Vor dem allerersten fälligen Termin nach einem Deploy kann niemand einen
+    Takt erwarten – deshalb liefert die Funktion den Termin, gegen den ein
+    „letzter Dispatch“ gemessen werden DARF, nicht den nächsten.
+    """
+    jetzt = (jetzt or _dt.datetime.now(_dt.timezone.utc)).astimezone(_dt.timezone.utc)
+    soll = _schedule.send_uhrzeit_utc()
+    for zurueck in range(0, 8):
+        tag = (jetzt - _dt.timedelta(days=zurueck)).date()
+        if tag.weekday() not in _schedule.VERSANDTAGE:
+            continue
+        termin = _dt.datetime.combine(tag, soll, _dt.timezone.utc)
+        if termin + _dt.timedelta(minutes=10) <= jetzt:
+            return termin
+    return None
+
+
+def pruefe_taktgeber(health_roh: str, jetzt: "_dt.datetime | None" = None) -> dict:
+    """C8 – hat der Worker-Taktgeber den letzten fälligen Digest gestartet?
+
+    Liest die /healthz-Antwort des Workers (`takt.letzte.digest`). Kein Netz
+    hier – der Aufrufer (C7) hat die Antwort schon. Ohne Messung kein Grün:
+    eine unlesbare Antwort ist „nicht messbar“, kein ok.
+    """
+    weg_deploy = ("cd newsletter-worker && npx wrangler deploy (aktiviert [triggers].crons); "
+                  "danach Cloudflare → Worker → Settings → Trigger Events")
+    try:
+        daten = json.loads(health_roh or "")
+    except (ValueError, TypeError):
+        daten = None
+    if not isinstance(daten, dict):
+        return _regel("C8", "worker", "nicht messbar",
+                      "Taktgeber nicht prüfbar – /healthz liefert kein JSON",
+                      (health_roh or "")[:120] or "leer",
+                      "Worker-Version mit `takt` in /healthz deployen", weg_deploy,
+                      "Ohne lesbare Antwort keine Aussage über den Takt.")
+    takt = daten.get("takt")
+    if not isinstance(takt, dict):
+        return _regel("C8", "worker", "fund",
+                      "Taktgeber fehlt – laufende Worker-Version kennt keine Cron-Triggers",
+                      "/healthz ohne Feld `takt`",
+                      "newsletter-worker deployen (src/index.js scheduled() + "
+                      "wrangler.toml [triggers])", weg_deploy,
+                      "Ohne Taktgeber hängt der Versand allein an GitHubs Scheduler – "
+                      "der am 23.09. und 25.09.2026 den Versandtag still ausließ.")
+    crons = takt.get("crons") or []
+    digest_cron = next((c for c in crons if str(c).startswith("30 4 ")), None)
+    if not digest_cron:
+        return _regel("C8", "worker", "fund",
+                      "Taktgeber ohne Digest-Takt (04:30 UTC Di/Fr)",
+                      f"crons: {', '.join(map(str, crons))[:120] or 'leer'}",
+                      "wrangler.toml [triggers].crons muss „30 4 * * TUE,FRI“ tragen",
+                      weg_deploy, "")
+    letzte = (takt.get("letzte") or {}).get("digest")
+    faellig = letzter_faelliger_takt(jetzt)
+    if not isinstance(letzte, dict):
+        return _regel("C8", "worker", "hinweis",
+                      "Taktgeber aktiv, aber noch nie gefeuert",
+                      f"crons: {', '.join(map(str, crons))[:120]}; kein Eintrag takt.letzte.digest",
+                      ("aussagekräftig ab dem nächsten Di/Fr 04:30 UTC" if faellig is None
+                       else f"spätestens am fälligen Termin {faellig:%Y-%m-%d %H:%M} UTC "
+                            "hätte ein Dispatch stehen müssen – Cloudflare → Worker → "
+                            "Trigger Events prüfen (wurde der Worker nach dem Termin deployt, "
+                            "ist das normal)"),
+                      "Cloudflare → Workers & Pages → ff-newsletter → Settings → Trigger Events",
+                      "Ein Takt, der noch nie tickte, ist kein Beweis – aber vor dem ersten "
+                      "Termin auch kein Fund.")
+    status = str(letzte.get("status") or "")
+    ts_roh = str(letzte.get("ts") or "")
+    try:
+        ts = _dt.datetime.fromisoformat(ts_roh.replace("Z", "+00:00"))
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=_dt.timezone.utc)
+    except ValueError:
+        ts = None
+    if status != "dispatched":
+        warum = str(letzte.get("warum") or letzte.get("http") or "unbekannt")
+        soll = ("Fine-Grained-PAT mit „Actions: Read and write“ auf dieses Repo als "
+                "Worker-Secret GITHUB_PAT setzen (`npx wrangler secret put GITHUB_PAT`)"
+                if "403" in warum or "401" in warum else
+                "Worker-Logs prüfen; GitHub-API-Status; danach Takt am nächsten Termin "
+                "erneut messen")
+        return _regel("C8", "worker", "fund",
+                      "Taktgeber: letzter Digest-Dispatch fehlgeschlagen",
+                      f"{ts_roh or '?'} · {status or '?'} · {warum} · "
+                      f"{letzte.get('versuche', '?')} Versuch(e)",
+                      soll, "github.com → Settings → Developer settings → Fine-grained tokens",
+                      "Ein Takt, der ins Leere schlägt, ist so still wie gar keiner – "
+                      "genau der Zustand vom 25.09.2026.")
+    if faellig is not None and (ts is None or ts < faellig - _dt.timedelta(minutes=5)):
+        return _regel("C8", "worker", "fund",
+                      "Taktgeber hat den letzten fälligen Versandtag verpasst",
+                      f"letzter Dispatch {ts_roh or '?'}, fällig war {faellig:%Y-%m-%d %H:%M} UTC",
+                      "Cloudflare → Worker → Trigger Events: wurde der Cron ausgeführt? "
+                      "Worker-Logs auf Fehler im scheduled()-Handler prüfen",
+                      "Cloudflare → Workers & Pages → ff-newsletter → Settings",
+                      "Ein verpasster Takt ohne Fehlereintrag heißt: der Cron feuerte nicht "
+                      "– oder eine ältere Version ohne Taktgeber lief.")
+    return _regel("C8", "worker", "ok", "Taktgeber tickt",
+                  f"letzter Digest-Dispatch {ts_roh} (HTTP {letzte.get('http', '?')}, "
+                  f"{letzte.get('versuche', '?')} Versuch(e)); crons: "
+                  f"{', '.join(map(str, crons))[:100]}",
+                  "—", "—", "")
+
+
 # ------------------------------------------------------------------------ Regeln C7
 def pruefe_worker(root: str, *, mit_netz: bool) -> list[dict]:
     """Der Capture-Endpunkt ist der Hahn für die ganze Kette: geht kein
@@ -513,7 +633,8 @@ def pruefe_worker(root: str, *, mit_netz: bool) -> list[dict]:
     if 200 <= code < 300:
         return [_regel("C7", "worker", "ok", "Capture-Endpunkt lebt",
                        f"{host} → HTTP {code} (CNAME: {', '.join(antworten)[:120] or '—'})",
-                       "—", "—", "")]
+                       "—", "—", ""),
+                pruefe_taktgeber(antwort)]
     return [_regel("C7", "worker", "fund",
                    f"Capture-Endpunkt antwortet HTTP {code}",
                    antwort[:200],
@@ -904,7 +1025,19 @@ def _selftest() -> int:
                                                    "token": "t", "themen": [],
                                                    "bestaetigt": "2026-01-01T00:00:00Z"}
                                                   for i in range(12)]})
-        return 200, "<html>Formular</html>"
+        # / und /healthz liefern dieselbe Health-Antwort (Worker-Routing)
+        return 200, json.dumps(health_gesund())
+
+    def health_gesund(**letzte_digest):
+        letzter = letzter_faelliger_takt()
+        eintrag = {"ts": ((letzter + _dt.timedelta(seconds=8)).isoformat()
+                          if letzter else "2026-09-25T04:30:08+00:00"),
+                   "cron": "30 4 * * TUE,FRI", "workflow": "newsletter-daily.yml",
+                   "status": "dispatched", "http": 204, "versuche": 1, "warum": None}
+        eintrag.update(letzte_digest)
+        return {"ok": True, "kv": "ok",
+                "takt": {"crons": ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI", "17 * * * *"],
+                         "letzte": {"digest": eintrag}}}
 
     global AUFLOESER, NETZ_RUF
     echt_aufloeser, echt_netz = AUFLOESER, NETZ_RUF
@@ -1070,6 +1203,45 @@ def _selftest() -> int:
         rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
         pruefe_es("Signaturfilter" in rg.get("C7", {}).get("titel", ""),
                   f"1010-Marker erkannt als Kanten-Block: {rg.get('C7')}")
+
+        # 9b. Taktgeber (C8): frisch = ok · alte Version ohne takt = Fund ·
+        #     403 = Fund mit PAT-Klickweg · verpasster Termin = Fund ·
+        #     nie gefeuert = Hinweis · kein JSON = nicht messbar
+        NETZ_RUF = netz_gesund
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("C8", {}).get("gewicht") == "ok",
+                  f"frischer Takt erwartet ok: {rg.get('C8')}")
+        alt = pruefe_taktgeber(json.dumps({"ok": True, "kv": "ok"}))
+        pruefe_es(alt["gewicht"] == "fund" and "fehlt" in alt["titel"],
+                  f"Worker ohne takt erwartet Fund: {alt}")
+        kaputt = pruefe_taktgeber(json.dumps(health_gesund(status="fehlgeschlagen",
+                                                           http=403, warum="HTTP 403")))
+        pruefe_es(kaputt["gewicht"] == "fund" and "Actions: Read and write" in kaputt["soll"],
+                  f"403 erwartet Fund mit PAT-Weg: {kaputt}")
+        spaeter = _dt.datetime(2026, 9, 25, 9, 0, tzinfo=_dt.timezone.utc)
+        verpasst = pruefe_taktgeber(json.dumps(health_gesund(ts="2026-09-22T04:30:05+00:00")),
+                                    spaeter)
+        pruefe_es(verpasst["gewicht"] == "fund" and "verpasst" in verpasst["titel"],
+                  f"Dispatch vom Dienstag am Freitag 09:00 erwartet Fund: {verpasst}")
+        rechtzeitig = pruefe_taktgeber(json.dumps(health_gesund(ts="2026-09-25T04:30:05+00:00")),
+                                       spaeter)
+        pruefe_es(rechtzeitig["gewicht"] == "ok", f"Takt von heute erwartet ok: {rechtzeitig}")
+        vor_termin = pruefe_taktgeber(json.dumps(health_gesund(ts="2026-09-22T04:30:05+00:00")),
+                                      _dt.datetime(2026, 9, 25, 4, 35, tzinfo=_dt.timezone.utc))
+        pruefe_es(vor_termin["gewicht"] == "ok",
+                  f"5 min nach dem Termin ist noch der Vortermin maßgeblich: {vor_termin}")
+        nie = health_gesund()
+        nie["takt"]["letzte"] = {}
+        nie_r = pruefe_taktgeber(json.dumps(nie))
+        pruefe_es(nie_r["gewicht"] == "hinweis", f"nie gefeuert erwartet Hinweis: {nie_r}")
+        pruefe_es(pruefe_taktgeber("<html>")["gewicht"] == "nicht messbar",
+                  "kein JSON erwartet nicht messbar")
+        pruefe_es(letzter_faelliger_takt(_dt.datetime(2026, 9, 25, 4, 35, tzinfo=_dt.timezone.utc))
+                  == _dt.datetime(2026, 9, 22, 4, 30, tzinfo=_dt.timezone.utc),
+                  "fälliger Takt: 04:35 Fr → noch Dienstag (10 min Gnade)")
+        pruefe_es(letzter_faelliger_takt(_dt.datetime(2026, 9, 25, 4, 41, tzinfo=_dt.timezone.utc))
+                  == _dt.datetime(2026, 9, 25, 4, 30, tzinfo=_dt.timezone.utc),
+                  "fälliger Takt: 04:41 Fr → Freitag")
 
         # 10. Resend mit Key: Domain unverifiziert → B1 Fund; Liste 150 → B3 Hinweis
         os.environ["RESEND_API_KEY"] = "re_test"

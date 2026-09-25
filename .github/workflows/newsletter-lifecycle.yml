@@ -10,8 +10,14 @@
 #        newsletter-lifecycle.yml/dispatches
 #   Body: { "ref": "main", "inputs": { "aktion": "bestaetigung", "token": "…" } }
 #
-# Der Worker braucht dafür ein Secret GITHUB_PAT (feingranular,
-# workflows:write) und GITHUB_REPO=frank-hartung/franksfinanzcheck-blog.
+# Der Worker braucht dafür ein Secret GITHUB_PAT (feingranular, nur dieses
+# Repo, Berechtigung „Actions: Read and write“ – NICHT „Workflows“, das ist
+# das Recht, Workflow-Dateien zu ändern, und löst keinen Dispatch aus;
+# Quelle: docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event)
+# und GITHUB_REPO=frank-hartung/franksfinanzcheck-blog.
+# Seit 25.09.2026 ruft der Worker per Cron Trigger auch den stündlichen
+# NACHGANG (aktion=nachgang) – der schedule unten kommt an diesem Repo
+# Stunden zu spät oder gar nicht (Taktgeber, s. newsletter-worker/).
 # Im Workflow geht der Token als INPUTS-WERT (Daten, kein Code) in eine
 # env-Variable – nie als Interpolation in eine Shell-Zeile.
 #

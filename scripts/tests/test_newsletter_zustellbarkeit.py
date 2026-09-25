@@ -9,6 +9,7 @@ gibt es kein Grün („nicht gemessen“ statt stiller Bestätigung).
 """
 from __future__ import annotations
 
+import datetime as dt
 import importlib.util
 import json
 import os
@@ -235,8 +236,14 @@ class WorkerRegelTest(unittest.TestCase):
         zust.AUFLOESER = _gesunde_zone(mutation)
         zust.NETZ_RUF = _netz(antwort)
         funde = zust.pruefe_worker(self.td, mit_netz=True)
-        assert len(funde) == 1
+        # Ein lebender Endpunkt bringt seit 25.09.2026 die Takt-Messung (C8)
+        # mit; jeder andere Ausgang bleibt ein einzelner C7-Befund.
+        assert funde[0]["regel"] == "C7"
+        assert len(funde) == (2 if funde[0]["gewicht"] == "ok" else 1)
         return funde[0]
+
+    def _c8(self, koerper: str, jetzt=None):
+        return zust.pruefe_taktgeber(koerper, jetzt)
 
     def test_ohne_netz_kein_gruen(self):
         f = zust.pruefe_worker(self.td, mit_netz=False)
@@ -246,6 +253,62 @@ class WorkerRegelTest(unittest.TestCase):
     def test_gesunder_endpunkt_lebt(self):
         f = self._c7()
         self.assertEqual((f["regel"], f["gewicht"]), ("C7", "ok"))
+
+    # ---- C8: der Taktgeber (Worker-Cron startet den Digest) ------------
+    def _health(self, **digest):
+        eintrag = {"ts": "2026-09-25T04:30:06+00:00", "cron": "30 4 * * TUE,FRI",
+                   "workflow": "newsletter-daily.yml", "status": "dispatched",
+                   "http": 204, "versuche": 1, "warum": None}
+        eintrag.update(digest)
+        return json.dumps({"ok": True, "kv": "ok",
+                           "takt": {"crons": ["30 4 * * TUE,FRI", "5 5 * * TUE,FRI",
+                                              "17 * * * *"],
+                                    "letzte": {"digest": eintrag}}})
+
+    def test_alter_worker_ohne_takt_ist_fund(self):
+        f = self._c8('{"ok": true, "kv": "ok"}')
+        self.assertEqual((f["regel"], f["gewicht"]), ("C8", "fund"))
+        self.assertIn("wrangler deploy", f["weg"])
+
+    def test_lebender_endpunkt_alter_version_meldet_c7_ok_und_c8_fund(self):
+        zust.AUFLOESER = _gesunde_zone(None)
+        zust.NETZ_RUF = _netz((200, '{"ok": true, "kv": "ok"}'))
+        funde = zust.pruefe_worker(self.td, mit_netz=True)
+        self.assertEqual([(f["regel"], f["gewicht"]) for f in funde],
+                         [("C7", "ok"), ("C8", "fund")])
+
+    def test_frischer_takt_am_versandtag_ist_ok(self):
+        freitag_spaeter = dt.datetime(2026, 9, 25, 9, 0, tzinfo=dt.timezone.utc)
+        f = self._c8(self._health(), freitag_spaeter)
+        self.assertEqual((f["regel"], f["gewicht"]), ("C8", "ok"))
+
+    def test_verpasster_versandtag_ist_fund(self):
+        freitag_spaeter = dt.datetime(2026, 9, 25, 9, 0, tzinfo=dt.timezone.utc)
+        f = self._c8(self._health(ts="2026-09-22T04:30:06+00:00"), freitag_spaeter)
+        self.assertEqual(f["gewicht"], "fund")
+        self.assertIn("verpasst", f["titel"])
+
+    def test_403_nennt_die_pat_berechtigung(self):
+        f = self._c8(self._health(status="fehlgeschlagen", http=403, warum="HTTP 403"))
+        self.assertEqual(f["gewicht"], "fund")
+        self.assertIn("Actions: Read and write", f["soll"])
+
+    def test_nie_gefeuert_vor_dem_ersten_termin_ist_hinweis(self):
+        roh = json.loads(self._health())
+        roh["takt"]["letzte"] = {}
+        f = self._c8(json.dumps(roh))
+        self.assertEqual(f["gewicht"], "hinweis")
+
+    def test_kein_json_ist_nicht_messbar(self):
+        self.assertEqual(self._c8("<html>Formular</html>")["gewicht"], "nicht messbar")
+
+    def test_faelliger_takt_rechnet_di_fr_mit_zehn_minuten_gnade(self):
+        fr_0435 = dt.datetime(2026, 9, 25, 4, 35, tzinfo=dt.timezone.utc)
+        fr_0441 = dt.datetime(2026, 9, 25, 4, 41, tzinfo=dt.timezone.utc)
+        so = dt.datetime(2026, 9, 27, 12, 0, tzinfo=dt.timezone.utc)
+        self.assertEqual(zust.letzter_faelliger_takt(fr_0435).date(), dt.date(2026, 9, 22))
+        self.assertEqual(zust.letzter_faelliger_takt(fr_0441).date(), dt.date(2026, 9, 25))
+        self.assertEqual(zust.letzter_faelliger_takt(so).date(), dt.date(2026, 9, 25))
 
     def test_nxdomain_ist_fund(self):
         f = self._c7({(WERKER_HOST, "CNAME"): (3, [])})

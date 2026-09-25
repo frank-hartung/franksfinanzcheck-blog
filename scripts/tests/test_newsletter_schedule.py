@@ -55,7 +55,10 @@ class Kalender(unittest.TestCase):
     def test_wache_nur_an_versandtagen_und_nach_faelligkeit(self):
         for tag in ("2026-09-21", "2026-09-23", "2026-09-24", "2026-09-26", "2026-09-27"):
             self.assertEqual("ruhetag", nc.entscheide([], zeit(tag, 12))["handlung"])
-        self.assertEqual("ruhetag", nc.entscheide([], zeit("2026-09-22"))["handlung"])
+        # Fällig ab SOLL+30 min (05:00 UTC = 07:00 MESZ): 06:05 MESZ ist Ruhe,
+        # 07:05 MESZ (der Ruf des Worker-Taktgebers) entscheidet bereits.
+        self.assertEqual("ruhetag", nc.entscheide([], zeit("2026-09-22", 6))["handlung"])
+        self.assertEqual("nachholen", nc.entscheide([], zeit("2026-09-22"))["handlung"])
         self.assertEqual("nachholen", nc.entscheide([], zeit("2026-09-22", 12))["handlung"])
 
     def test_workflows_und_nachholen_haben_dieselbe_kadenz(self):

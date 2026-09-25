@@ -25,14 +25,39 @@
 #  Diese Wache steht in der Wacht-Liste des Fehler-Alertings: kann sie
 #  selbst nicht nachholen (fehlende actions:write, Netz), wird der
 #  Befund laut – ein Wächter, der schweigt, wäre die alte Lücke neu.
+#
+#  ZWEITER VORFALL (Freitag, 25.09.2026): Der 04:30-Cron blieb erneut aus
+#  – und DIESE Wache gleich mit: ihr 08:11-Cron kam nie (null Läufe seit
+#  ihrer Erstellung am 23.09.). Gemessen über alle Workflows des Repos
+#  lieferte GitHubs Scheduler an diesem Tag jedes Ereignis 5–5,5 h zu spät
+#  oder gar nicht (Backup 03:00 → 08:24, Affiliate 04:00 → 09:15, Uptime
+#  */15 → 6 statt 96 Läufe). Ein Netz am selben Haken wie die Last ist
+#  kein Netz. Seitdem gilt:
+#    · Der Cloudflare-Worker (newsletter-worker/, Cron Trigger, minuten-
+#      genau) ist der TAKTGEBER: 04:30 UTC startet er den Newsletter-Daily
+#      (planmaessig=true), 05:05 UTC ruft er DIESE Wache per
+#      workflow_dispatch. Fällig ist der Tag ab SOLL+30 min (05:00 UTC),
+#      gerechnet in scripts/newsletter_cadence.py (FAELLIG_AB).
+#    · Der GitHub-Cron 08:11 bleibt als drittes Netz stehen.
+#    · push (nur bei Änderung dieser Wache selbst): Eine Wache, die sich
+#      ändert, beweist sich sofort auf main – und holt, wenn sie an einem
+#      Di/Fr nach 05:00 UTC merged wird und der Tag leer ist, den Planlauf
+#      nach. Genau das ist am 25.09. der Heilungsweg für die ausgefallene
+#      Ausgabe: Merge = Nachholen, ohne dass jemand die Actions-Seite
+#      aufsuchen muss. Auf allen anderen Tagen ist es ein grüner Ruhetag.
 # ============================================================
 name: Newsletter-Kadenz-Wache
 
 on:
   schedule:
-    - cron: "11 8 * * 2,5"    # 08:11 UTC = 10:11 MESZ – nach dem Soll-Termin,
-                              # weit genug davor/danach für verschobene Crons
-  workflow_dispatch: {}
+    - cron: "11 8 * * 2,5"    # 08:11 UTC = 10:11 MESZ – drittes Netz hinter
+                              # dem Worker-Taktgeber (05:05 UTC, s. o.)
+  workflow_dispatch: {}       # Ruf des Worker-Taktgebers (und manuell)
+  push:
+    branches: [main]
+    paths:                    # NUR die Wache selbst – kein Lauf pro Commit
+      - ".github/workflows/newsletter-cadence.yml"
+      - "scripts/newsletter_cadence.py"
 
 permissions:
   contents: read

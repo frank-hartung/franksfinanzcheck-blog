@@ -17,13 +17,18 @@
 #   3. gesendet wird an eine Liste, deren Double-Opt-In im Worker liegt –
 #      Adressen berühren diesen Repo-Workflow nie (nur Hashes im Journal)
 #
-# „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
-# planmäßige Cron (04:30 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
-# verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
-# der 05:05-Cron blieb komplett aus, am Vortag kam er erst ~10:05 UTC). Die
-# Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
-# nach, wenn sicher kein Lauf des Tages existiert – dieselbe Freigabestufe wie
-# der Cron, nicht mehr.
+# „planmaessig“ (für Taktgeber und Kadenz-Wache, nicht für Menschen gedacht):
+# verhält sich exakt wie der planmäßige Cron (04:30 UTC, Di/Fr, echter
+# Listen-Versand). Grund: GitHub verwirft oder verschiebt schedule-Ereignisse
+# STILL – 23.09.2026 blieb der Cron ganz aus, 25.09.2026 erneut (und mit ihm
+# die Kadenz-Wache; gemessen kamen an dem Tag ALLE Crons des Repos 5–5,5 h zu
+# spät oder nie). Seit 25.09. ist deshalb der Cloudflare-Worker
+# (newsletter-worker/, Cron Trigger, minutengenau) der TAKTGEBER: er startet
+# diesen Workflow um 04:30 UTC mit planmaessig=true. Die Kadenz-Wache
+# (newsletter-cadence.yml, vom Worker um 05:05 UTC gerufen, GitHub-Cron 08:11)
+# zählt nach und holt nach, wenn kein Lauf des Tages existiert. Der Cron unten
+# bleibt als drittes Netz: kommt er verspätet, findet er den Termin belegt
+# („Versandpause“) – dieselbe Freigabestufe, kein zweiter Versand.
 #
 # Duplikatsschutz über die Statusdatei: ein TEILVERSAND markiert nur die
 # zugestellten Empfänger (Hashes aus dem Journal) als gesendet – der nächste
