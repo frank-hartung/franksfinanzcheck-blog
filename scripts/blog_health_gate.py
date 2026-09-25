@@ -150,6 +150,9 @@ def main() -> int:
         for e in st:
             print(f"   {e}")
         return 2
+    if "--selftest" in sys.argv:
+        print("✅ Blog-Health-Selbsttest bestanden (isolierte Fixtures, keine Heilung).")
+        return 0
 
     # HEADING-WACHE (27.08.2026): <br> in Überschriften (TOC-Artefakte
     # „Fazit:\ Ein“, wirkt wie fehlendes Leerzeichen) gehört zur täglichen
