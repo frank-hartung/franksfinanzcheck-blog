@@ -1984,9 +1984,9 @@ items:
   date: '2026-09-25'
   time: '18:00'
   scheduled_at: '2026-09-25T18:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: telegram:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:zahl:2026-09-26
   channel: telegram
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
