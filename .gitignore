@@ -34,6 +34,7 @@ __pycache__/
 .indexnow_submitted.json
 .keyword_suggestions.json
 .grammar_report.json
+.sprachglatt_report.json
 .spellcheck_report.json
 ops-report.json
 

@@ -66,7 +66,7 @@ Der **Mietwagen-Tagespreis** ist ein wichtiger Faktor. Er schwankt oft täglich 
 Meine Erfahrung: Unter der Woche buchst du günstiger. Dienstag und Mittwoch sind meist am besten. Dahinter stecken Algorithmen. Sie reagieren auf das Suchverhalten der Masse.
 
 
-Nutze für deine Suche Vergleichsportale, die eine Vielzahl von Anbietern bündeln. Dort setzt du Filter, die deine Bedürfnisse abbilden. Möchtest du ein Automatikgetriebe? Brauchst du einen Kindersitz?
+Nutze für deine Suche Vergleichsportale, die viele Anbieter bündeln. Dort setzt du Filter, die deine Bedürfnisse abbilden. Möchtest du ein Automatikgetriebe? Brauchst du einen Kindersitz?
 
 Filterst du diese Dinge vorab, vermeidest du böse Überraschungen bei der Endsumme. Vorsicht: Ein vermeintlich günstiges Angebot kann durch teure Extras schnell zur Kostenfalle werden.
 

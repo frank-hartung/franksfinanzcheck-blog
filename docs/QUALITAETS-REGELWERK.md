@@ -24,7 +24,8 @@ KI-Artikel (engine_generate.py)
    ├─► ↔️ umbruch_guard.py      Premium-Zeilenumbruch (Komposita, U+00AD)
    ├─► fix_spaces.py            Leerzeichen-Hygiene
    ├─► spellcheck.py            Rechtschreibung (Hunspell, de-DE)
-   ├─► grammar_check.py         Grammatik (LanguageTool)
+   ├─► grammar_check.py         Grammatik (LT1–LT4, offline LanguageTool-Nachbau, ohne API, 25.09.2026)
+   ├─► sprachglatt.py           Glättung (DW1–DW9 + V1, offline DeepL-Write-Nachbau, ohne API, 25.09.2026)
    │
    ├─► 🔠 casing_guard.py       Groß-/Kleinschreibung + Überschriften-Kanon (C1–C17, T1)
    ├─► 📏 dash_guard.py         Strich-Typografie (R1–R8) + KI-Stil (S1/S3)
@@ -50,7 +51,8 @@ KI-Artikel (engine_generate.py)
    ├─► 🧠 textverstaendnis_guard.py R2-R5/R7/R8 Verständnis (parkt neue Artikel)
    ├─► 🔗 link_guard.py           Links (Slugs, Ziele, UTM)
    ├─► 📖 absorb_whitelist.py     Rechtschreib-Rauschen (Komposita → Whitelist)
-   └─► 🩺 grammar_check.py        Grammatik-Gate (ehrlich: Exit 2 bei API-Ausfall)
+   ├─► 🧴 sprachglatt.py          Glätt-Gate (DW1–DW9, offline DeepL-Write-Nachbau, V1 Vorschläge)
+   └─► 🩺 grammar_check.py        Grammatik-Gate (LT1–LT4, offline, Exit 2 bei Selbsttest-Rot)
 ```
 
 Ausführung aller Regeln: **niemals blockierend** (`|| echo "nicht kritisch"`).
@@ -399,6 +401,60 @@ sicheren Homepage-Fallback (PID bleibt!) umgebaut, Gateways neu generiert,
 Issue an Frank (Label `affiliate-health`). **Sabotage-Schutz:** 14 eingefrorene
 Urteils-Faelle testen die `verdict()`-Logik selbst – Abbruch mit Exit 2 vor
 jeder Schreibaktion.
+
+---
+
+### sprachkern.py + grammar_check.py + sprachglatt.py – 🧴 Sprach-Politur (offline, ohne API, neu 25.09.2026)
+
+Dauerauftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft automatisch mit DeepL Write (kostenlos ohne API nachbauen) oder LanguageTool glätten (kostenlos ohne API nachbauen) und auf Premium-Level einer Profi-Agentur beheben."
+
+**Architektur:**
+- `sprachkern.py` – gemeinsamer Kern: Schutzzonen-Maskierung (Code, Links, Shortcodes, HTML, URLs), Case-Erhalt, Regel-Executor mit Identity-Sperre (fix == found = kein Fund), Verifikation vor Schreiben (Link-/Shortcode-/Heading-Zahl konstant, Wortzahl ≥90 %), FM-sicheres Schreiben via `post_utils.join_article`.
+- `grammar_check.py` – LanguageTool-Nachbau (Korrektur-Ebene, **komplett offline**, kein `urllib`, kein Netz, kein `api.languagetool.org` mehr). Früher: Online-API mit Exit 2 bei API-Ausfall; jetzt: deterministischer Regelsatz LT1–LT4, Selbsttest hart (Exit 2 = Sabotage).
+- `sprachglatt.py` – DeepL-Write-Nachbau (Glätt-Ebene, **komplett offline**, kein `api.deepl.com`). DW1–DW9 Auto-Fix (100 % sicher), V1 Report-only (Sinnrisiko).
+
+**Regeln – jede Regel genau einmal (keine Doppelung mit anderen Guards):**
+
+| ID | Ebene | Beispiel Fehler → Fix | Schutz / Negativ-Falle |
+|---|---|---|---|
+| LT1 | Grammatik | „wo mit“ → „womit“, „an Hand“ → „anhand“ | „Ich bin da für dich“ bleibt (da für ≠ dafür) |
+| LT2 | Grammatik | „im gegensatz“ → „im Gegensatz“, „zu hause“ → „zu Hause“ | Nur Fehler-Kleinschreibung gematcht, korrekte Form kein Fund (Identity-Sperre) |
+| LT3 | Grammatik | „seid drei Jahren“ → „seit drei Jahren“, „wieder Erwarten“ → „wider Erwarten“, „vorallem“ → „vor allem“, „wahr nehmen“ → „wahrnehmen“ | „Ihr seid bereit“, „seid dem Kurs gefolgt“, Verb „wieder erwarten“ bleiben |
+| LT4 | Grammatik | „ansonten“ → „ansonsten“, „bezeihungsweise“ → „beziehungsweise“ | Whitelist schützt Marken |
+| DW1 | Glättung | „ist der Meinung, dass“ → „meint, dass“ | „der Meinung des Chefs“ bleibt |
+| DW2 | Glättung | „bist in der Lage, Geld zu sparen“ → „kannst Geld sparen“ | Konjugations-Tabelle bin/bist/ist/sind/seid/war/waren → kann/kannst/kann… |
+| DW3 | Glättung | „hast die Möglichkeit, zu sparen“ → „kannst sparen“ | „Möglichkeit zum Sparen“ (kein zu-Verb) bleibt |
+| DW4 | Glättung | „des Weiteren“ → „Außerdem“ | – |
+| DW5 | Glättung | „in Betracht ziehen“ → „erwägen“ | „in Betracht kommen“ bleibt |
+| DW6 | Glättung | „eine Entscheidung treffen“ → „entscheiden“ | Mit Pronomen dazwischen nur Vorschlag |
+| DW7 | Glättung | „eine Überprüfung vornehmen“ → „überprüfen“ | Kanon (Überprüfung, Anpassung…) |
+| DW8 | Glättung | „mit der Folge, dass“ → „sodass“ | – |
+| DW9 | Glättung | „findet Anwendung“ → „wird genutzt“ | – |
+| V1 | Vorschlag | „im Hinblick auf“, „hinsichtlich“, „eine Vielzahl von“ (Kasus-Falle!), „wegen dem“, „zur Verfügung stellen“, „von Bedeutung sein“, „Es ist möglich, zu“, „trotzdem + Subjekt“, „Es gilt zu beachten, dass“ | **Nur Report**, nie Auto-Fix |
+
+**Bewusst anderswo (keine Doppel-Regeln):**
+- Füllphrasen/Intensiv/Pleonasmus/Zahlen = `lektor_guard.py` (L2/L10/L11)
+- Fest-Fehler einzigste/daß/seid-Pronomen/Pleonasmen = `hardcases_guard.py` (H1–H9)
+- Stil-Messung Passiv/LIX = `stil_guard.py` (S1–S8)
+- Rechtschreibung = `spellcheck.py` (Hunspell)
+
+**Verdrahtung:**
+- Content-Engine v2 Phase 2: `--selftest` implizit + `--fix --new-only` (nach Spellcheck, vor Casing)
+- `redaktions-politur.yml`: Mo 03:45 UTC Bestandslauf `--fix` über alle Artikel, Commit als `Redaktions-Bot` via `git_sync.sh --push-only`
+- `seo-weekly.yml`: wöchentlicher Bestands-Audit + `--fix` (zusätzliche Absicherung)
+
+**Aufruf:**
+```bash
+python3 scripts/grammar_check.py --selftest   # 11 Fälle grün
+python3 scripts/sprachglatt.py --selftest     # 12 Fälle grün
+python3 scripts/grammar_check.py --fix
+python3 scripts/sprachglatt.py --fix
+```
+
+**Reports (gitignored):** `GRAMMATIK-REPORT.md`, `.grammar_report.json`, `SPRACHGLATT-REPORT.md`, `.sprachglatt_report.json`
+**History (versioniert):** `data/sprachglatt_history.jsonl`
+
+**Tests:** `scripts/tests/test_sprach_politur.py` (23 Fälle: Offline-Vertrag, Schutzzonen, Identity-Falle, Idempotenz, Negativ-Fallen)
 
 ---
 
@@ -1062,7 +1118,8 @@ jeder Schreibaktion.
   → Frank Hartung, Beispiel.com→eigene Domain; TODO/lorem report-only,
   C4 Zahl ohne €/% fehlt, C5 Jahres-Drift, C6 Titel-Versprechen).
   Fund heute: 🚨 C2-Systemluecke: kein Artikel hat eine Fazit-Rubrik
-  (echter Auditfund); Roadmap: redaktions-politur-Workflow ergaenzt.
+  (echter Auditfund); Roadmap: redaktions-politur-Workflow → erledigt 25.09.2026
+  (offline LT+DW, Mo 03:45 UTC, Hook in content-engine-v2 + seo-weekly).
   Integrity-FEST: 32 -> 35 Dateien (inkl. data/content_fingerprints.jsonl).
   Lektion: Audit-Messung sah zuerst 77/77 ohne Fazit – Messung korrekt:
   C2 deckt echte Strukturlücke auf; Auto-Plattencheck wirkt wie beworben.

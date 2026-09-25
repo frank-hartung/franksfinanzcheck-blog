@@ -1,0 +1,95 @@
+name: Redaktions-Politur (Sprachglatt + Grammatik, offline)
+
+# ============================================================
+#  REDAKTIONS-POLITUR – DeepL-Write- & LanguageTool-Nachbau
+#  (100 % offline, kostenlos, ohne API, ohne Netz)
+#
+#  Auftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft
+#  automatisch mit DeepL Write oder LanguageTool glätten (kostenlos
+#  ohne API nachbauen) und auf Premium-Level einer Profi-Agentur
+#  beheben."
+#
+#  Was macht dieser Workflow:
+#    1. Selbsttest HART (Sabotage-Schutz, Exit 2 = rot, kein Schreiben)
+#       - scripts/grammar_check.py --selftest (LT1–LT4)
+#       - scripts/sprachglatt.py --selftest (DW1–DW9 + V1)
+#       - scripts/sprachkern.py implizit via Import
+#    2. Bestandslauf über ALLE Artikel (Fix-Modus)
+#       - grammar_check --fix  (Kollokationen, Partikel, Kontext-Fälle)
+#       - sprachglatt --fix    (Meinung, Können-Hebel, Entscheidung …)
+#    3. Report + History-Commit als Redaktions-Bot
+#
+#  Laufzeiten:
+#    - Jeden Montag 03:45 UTC (05:45 MESZ) automatisch
+#    - Manuell: Actions → „Redaktions-Politur“ → Run workflow
+#
+#  Reports (gitignored, bleiben im Lauf-Log):
+#    - GRAMMATIK-REPORT.md + .grammar_report.json
+#    - SPRACHGLATT-REPORT.md + .sprachglatt_report.json
+#  History (versioniert, Dedupe über Läufe):
+#    - data/sprachglatt_history.jsonl
+# ============================================================
+
+on:
+  schedule:
+    - cron: "45 3 * * 1"  # Montag 03:45 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: redaktions-politur
+  cancel-in-progress: false
+
+jobs:
+  politur:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Voraussetzungen prüfen
+        run: |
+          for f in scripts/sprachkern.py scripts/grammar_check.py scripts/sprachglatt.py scripts/git_sync.sh; do
+            if [ ! -f "$f" ]; then
+              echo "🛑 $f fehlt auf main – PR nicht gemergt?"
+              exit 1
+            fi
+          done
+          echo "✅ Sprach-Engines vorhanden (offline, ohne API)."
+
+      - name: Python-Abhängigkeiten
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
+        run: |
+          python3 scripts/grammar_check.py --selftest
+          python3 scripts/sprachglatt.py --selftest
+          echo "✅ Beide Selbsttests grün (offline)."
+
+      - name: Bestands-Politur (Fix über alle Artikel)
+        run: |
+          echo "== Grammatik (LT1–LT4, offline LanguageTool-Nachbau) =="
+          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_politur.txt || echo "⚠ Grammatik: Restfunde im Report"
+          echo "== Sprachglatt (DW1–DW9 + V1, offline DeepL-Write-Nachbau) =="
+          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
+          cat /tmp/grammar_politur.txt /tmp/sprachglatt_politur.txt
+
+      - name: Änderungen committen & pushen (Redaktions-Bot)
+        run: |
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          # Reports sind gitignored (bleiben im Lauf-Log) – nur Content + History stagen
+          git add content/ 2>/dev/null || true
+          git add data/sprachglatt_history.jsonl 2>/dev/null || true
+          git add data/grammar_whitelist.txt 2>/dev/null || true
+          git add data/korrekturen.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Bestand bereits auf Premium-Level – nichts zu heilen."
+          else
+            git commit -m "redaktion: Sprach-Politur (offline LT+DW) – Bestand auf Premium-Level gehoben"
+            scripts/git_sync.sh --push-only
+          fi
