@@ -29,6 +29,7 @@
   'use strict';
 
   var SCHLUESSEL = 'ff_nl';                 // localStorage: angemeldet | bestaetigt
+  var AUSWAHL = 'ff_nl_themen';             // Auswahl der Präferenz-Seite (ff-nl-praef.js)
   var selector = 'form[data-ff-nl]';
   var ZONE = 'Europe/Berlin';               // Taktzone des Versandvertrags
 
@@ -48,6 +49,18 @@
     var button = form.querySelector('button[type="submit"]');
     var bereits = false;
     try { bereits = localStorage.getItem(SCHLUESSEL) === 'angemeldet'; } catch (e) { bereits = false; }
+
+    /* Auswahl von der Präferenz-Seite: Wer dort Welten anhakt und auf
+       „zum Anmeldeformular“ geht, sieht die Häkchen hier VORgesetzt –
+       die Anmeldung übernimmt sie als Startwert. Alles bleibt frei
+       änderbar; das ist eine Vorgabe, kein Schloss. */
+    var vorgabe = [];
+    try { vorgabe = JSON.parse(localStorage.getItem(AUSWAHL) || '[]') || []; } catch (e) { vorgabe = []; }
+    if (vorgabe.length) {
+      Array.prototype.forEach.call(
+        form.querySelectorAll('input[type="checkbox"][name^="themen"]'),
+        function (k) { if (vorgabe.indexOf(k.value) >= 0) k.checked = true; });
+    }
 
     function setzen(zustand, tekst) {
       form.dataset.status = zustand;
@@ -131,6 +144,9 @@
         Array.prototype.forEach.call(
           form.querySelectorAll('input[type="checkbox"][name^="themen"]'),
           function (k) { k.checked = false; });
+        /* Die Auswahl hat ihren Zweck erfüllt – sonst klebte sie als
+           stiller Startwert an jeder späteren Wiederanmeldung. */
+        try { localStorage.removeItem(AUSWAHL); } catch (e) { /* Privat-Modus */ }
       }).catch(function () {
         if (button) button.disabled = false;
         form.dataset.status = 'fehler';

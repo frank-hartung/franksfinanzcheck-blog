@@ -221,6 +221,65 @@ class Skript(unittest.TestCase):
         self.assertEqual(0, rc.returncode, rc.stdout + rc.stderr)
 
 
+JS_PRAEF = "static/premium/ff-nl-praef.js"
+
+
+class PraeferenzenPicker(unittest.TestCase):
+    """Der Themen-Picker der Präferenz-Seite: echte Auswahlkästchen,
+    drei ehrliche Zustände (Vorschau / Direkt-mit-Token / ohne JS),
+    first-party wie das Anmelde-Skript."""
+
+    def test_hooks_lesen_must_im_picker_stehen(self):
+        js = _text(JS_PRAEF)
+        template = _text(THEMEN)
+        for hook in set(re.findall(r"data-ff-nl-praef[-a-z]*", js)):
+            self.assertIn(hook, template,
+                          f"{hook} wird im JS gelesen, ist aber nicht im Picker")
+        self.assertIn("data-basis", template,
+                      "ohne Worker-Basis im DOM bleibt der Speichern-Knopf tot")
+
+    def test_first_party_keine_urls_kein_tracking(self):
+        js = _text(JS_PRAEF)
+        self.assertEqual([], re.findall(r"https?://", js),
+                         "das Picker-Skript lädt keine Domain – die Basis "
+                         "kommt aus capture.form_action (data-basis)")
+        for gefahr in ("eval(", "document.write", "innerHTML"):
+            self.assertNotIn(gefahr, js,
+                             f"{gefahr} gehört nicht in ein Präferenz-Skript")
+
+    def test_picker_tragt_echte_checkboxes(self):
+        template = _ohne_kommentare(_text(THEMEN))
+        self.assertRegex(template, r'<input[^>]+type="checkbox"[^>]+name="themen"')
+        self.assertIn("data-ff-nl-praef", template)
+        self.assertIn('role="status"', template,
+                      "die Statuszeile muss einem Screenreader gemeldet werden")
+        self.assertIn("<noscript>", template,
+                      "ohne JavaScript braucht die Seite einen ehrlichen Weg")
+
+    def test_formular_empfaengt_die_auswahl(self):
+        """Picker -> Anmeldung: das Hand-off-Feld muss in BEIDEN Skripten
+        heißen – sonst klebt die Auswahl nirgends an."""
+        self.assertIn("ff_nl_themen", _text(JS))
+        self.assertIn("ff_nl_themen", _text(JS_PRAEF))
+        self.assertIn("removeItem", _text(JS),
+                      "nach dem Versand darf die Auswahl nicht kleben bleiben")
+
+    def test_worker_kent_beide_feldnamen(self):
+        """Das HTML-Formular sendet `themen[]`, der reine POST-Weg `themen` –
+        der Worker muss beides lesen, sonst verliert die Anmeldung die
+        Themenwahl still."""
+        worker = _text(os.path.join("newsletter-worker", "src", "index.js"))
+        self.assertIn("daten['themen[]']", worker)
+
+    def test_syntax_wenn_node_da_ist(self):
+        node = shutil.which("node")
+        if not node:
+            self.skipTest("kein node im Prüf-Container")
+        rc = subprocess.run([node, "--check", os.path.join(ROOT, JS_PRAEF)],
+                            capture_output=True, text=True)
+        self.assertEqual(0, rc.returncode, rc.stdout + rc.stderr)
+
+
 class Streifen(unittest.TestCase):
     def test_nur_bei_konfiguriertem_weg_und_nicht_auf_sich_selbst(self):
         strip = _text(STRIP)

@@ -1,9 +1,26 @@
-{{- /* layouts/shortcodes/newsletter_themen.html – die Themenwelten als Liste.
+{{- /* layouts/shortcodes/newsletter_themen.html – die Themenwelten als Auswahl.
 
     Quelle ist data/themenwelten.json – dieselbe Datei, die die Startseite und
     die Ratgeber-Cluster nutzt. Der Newsletter erfindet also keine eigene
     Themenwelt, nur damit das Formular mehr Häkchen hat (Wache:
     scripts/newsletter_studio.py --brand hält die IDs deckungsgleich).
+
+    Premium-Upgrade 25.09.2026: keine statische Liste mehr, sondern echte
+    Auswahlkästchen – jede Karte ist ein <label> um ein echtes
+    <input type="checkbox"> (klickbar, fokussierbar, screenreader-fest).
+    Drei ehrliche Zustände, kein Klick-Vorgaukeln:
+      * ?token= in der Adresse (Vollversions-Link der Auswahl-Seite):
+        static/premium/ff-nl-praef.js lädt die aktuelle Auswahl vom Worker
+        (GET /status) und speichert die neue (POST /praferenzen).
+      * ohne Token: Vorschau – die Häkchen werden mit dem Klick auf den
+        Anmelde-Link in die Anmeldung auf /newsletter/ übernommen
+        (localStorage, ff-newsletter.js setzt die Chips vor).
+      * ohne JavaScript: die <noscript>-Zeile weist auf den „Präferenzen“-
+        Link im Fuß jeder Mail – der funktioniert überall, ohne JavaScript.
+    Die Worker-Basis leitet sich aus capture.form_action ab (dieselbe
+    SSOT wie das Anmelde-Formular – keine zweite Konfiguration, keine
+    harte Domäne im Template). Ohne Capture-Endpunkt bleibt die Karte
+    eine saubere Liste: kein Script, das nirgends anklopfen kann.
 */ -}}
 {{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
 {{- $welten := dict -}}
@@ -11,14 +28,42 @@
   {{- $daten := os.ReadFile "data/themenwelten.json" | transform.Unmarshal -}}
   {{- range $t := $daten.topics -}}{{- with $t.id -}}{{- $welten = merge $welten (dict (string .) $t) -}}{{- end -}}{{- end -}}
 {{- end -}}
-<dl class="ff-nl-themen">
-  {{- range $t := $nl.themen -}}
-  {{- $welt := index $welten $t.id -}}
-  <div class="ff-nl-themen__zeile">
-    <dt class="ff-nl-themen__name">
-      {{- with $welt }}<span aria-hidden="true">{{ .emoji }}</span> {{ end -}}{{ $t.label }}
-    </dt>
-    <dd class="ff-nl-themen__text">{{ ($welt.description) | default "Rechner, Fristen und Preisänderungen aus diesem Bereich." }}</dd>
+{{- $aktion := trim ($nl.capture.form_action | default "") " " -}}
+{{- $basis := strings.TrimSuffix "/anmeldung" (strings.TrimSuffix "/" $aktion) -}}
+<fieldset class="ff-nl-themen" data-ff-nl-praef
+  {{- if $basis }} data-basis="{{ $basis }}"{{ end -}}>
+  <legend class="ff-nl-themen__legend">
+    Welche Welten kommen in deine Mail?
+    <span class="ff-nl-themen__optional">optional – ohne Häkchen kommt alles, höchstens zwei Mails pro Woche</span>
+  </legend>
+  <div class="ff-nl-themen__raster">
+    {{- range $t := $nl.themen -}}
+    {{- $welt := index $welten $t.id -}}
+    <label class="ff-nl-themen__karte">
+      <input class="ff-nl-themen__check" type="checkbox" name="themen" value="{{ $t.id }}">
+      <span class="ff-nl-themen__kopf">
+        <span class="ff-nl-themen__emoji" aria-hidden="true">{{- if $welt }} {{ $welt.emoji }}{{ end -}}</span>
+        <span class="ff-nl-themen__name">{{ $t.label }}</span>
+      </span>
+      <span class="ff-nl-themen__text">{{ ($welt.description) | default "Rechner, Fristen und Preisänderungen aus diesem Bereich." }}</span>
+    </label>
+    {{- end -}}
   </div>
-  {{- end -}}
-</dl>
+  <p class="ff-nl-themen__status">
+    <span class="ff-nl-themen__status-text" data-ff-nl-praef-status role="status" aria-live="polite">Ohne Häkchen kommen alle {{ len $nl.themen }} Welten – aber nie mehr als zwei Mails pro Woche.</span>
+  </p>
+  <div class="ff-nl-themen__aktion" data-ff-nl-praef-aktion>
+    <a class="ff-nl-themen__link" data-ff-nl-praef-preview href="/newsletter/#newsletter-anmeldung">
+      <span class="ff-nl-themen__link-text">Mit deiner Auswahl zum Anmeldeformular</span>
+    </a>
+    <button class="ff-nl-themen__button" type="button" data-ff-nl-praef-speichern hidden>
+      <span class="ff-nl-themen__button-text">Auswahl speichern</span>
+    </button>
+  </div>
+</fieldset>
+<p class="ff-nl-themen__noscript"><noscript>Dein Browser zeigt hier kein JavaScript – deine aktuelle Auswahl
+änderst du über den Link <strong>„Präferenzen“</strong> im Fuß jeder Mail: Er funktioniert ohne
+JavaScript, ohne Passwort, auch auf dem Handy.</noscript></p>
+{{- if $basis }}
+<script defer src="{{ partial "asset_url.html" "premium/ff-nl-praef.js" }}"></script>
+{{- end -}}

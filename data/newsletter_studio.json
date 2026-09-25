@@ -3,7 +3,7 @@
   "_doku_capture": "Anmeldeweg. form_action leer = Capture INERT: die Site zeigt dann den ehrlichen Leerzustand statt eines Formulars, das ins Leere postet (layouts/shortcodes/newsletter_form.html). Ein Wert in hugo.toml `params.newsletterFormAction` überschreibt form_action – dieselbe Präzedenz in Website und Wache, damit beide denselben Zustand melden.",
   "version": 1,
   "capture": {
-    "_doku": "feld_email ist der vom Worker gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest. Journey-Aktionen (Bestätigen, Abmelden, Präferenzen) laufen auf dem Worker über die Links in den Mails – die Blog-Seiten /newsletter/bestaetigung/, /newsletter/abmelden/, /newsletter/praeferenzen/ sind reine Info-Seiten. bestaetigungs_url/abmelde_url/praferenz_url bleiben für Ausweich-Links im Shortcode newsletter_weg reserviert (leer = ehrlicher Leerzustand).",
+    "_doku": "feld_email ist der vom Worker gelesene Name (Wache N4 verlangt ihn im Shortcode). bot_falle = Honigtopf + Zeitfalle: kostenlos, ohne Captcha-Dienst, ohne Drittanbieter-Cookie. mindest_alter 0 = keine Abfrage; auf 18 stellen, wenn du Altershinweise versendest. Journey-Aktionen (Bestätigen, Abmelden, Präferenzen) laufen auf dem Worker über die Links in den Mails – die Blog-Seiten /newsletter/bestaetigung/ und /newsletter/abmelden/ sind reine Info-Seiten; /newsletter/praeferenzen/ ist seit 25.09.2026 interaktiv (Picker mit echten Checkboxen; mit Token in der Adresse lädt/speichert er die Auswahl über den Worker – siehe _doku_journeys). bestaetigungs_url/abmelde_url/praferenz_url bleiben für Ausweich-Links im Shortcode newsletter_weg reserviert (leer = ehrlicher Leerzustand).",
     "form_action": "https://abos.franksfinanzcheck.de/anmeldung",
     "form_url": "",
     "versprechen": "Zweimal pro Woche: Spartipps und Rechner – dienstags und freitags.",
@@ -15,7 +15,7 @@
     "bot_falle": true,
     "mindest_alter": 0
   },
-  "_doku_journeys": "Die Journey-Seiten der Anmeldung (/newsletter/bestaetigung/, /newsletter/abmelden/, /newsletter/praeferenzen/). Sie sind ehrliche INFO-Seiten: die eigentlichen Aktionen laufen auf dem Worker unter abos.franksfinanzcheck.de über die Links in den Mails – eine statische Seite kann Query-Strings beim Build nie sehen, und ein Klick-Vorgaukeln wäre teurer als keine Seite. Die Seiten erklären Zustand, Daten und Wege.",
+  "_doku_journeys": "Die Journey-Seiten der Anmeldung (/newsletter/bestaetigung/, /newsletter/abmelden/, /newsletter/praeferenzen/). Anmeldung und Abmeldung sind ehrliche INFO-Seiten: die eigentlichen Aktionen laufen auf dem Worker unter abos.franksfinanzcheck.de über die Links in den Mails – eine statische Seite kann Query-Strings beim Build nie sehen. /newsletter/praeferenzen/ ist seit 25.09.2026 INTERAKTIV: mit Token in der Adresse (Vollversions-Link der Worker-Auswahlseite) lädt static/premium/ff-nl-praef.js die aktuelle Auswahl vom Worker (GET /status) und speichert die neue (POST /praferenzen); ohne Token ist sie die Info-Seite mit Auswahl-Vorschau (Hand-off in die Anmeldung per localStorage). Die Mail-Links zeigen weiter auf den Worker – der funktioniert ohne JavaScript – und verlinkt die Vollversion.",
   "journeys": {
     "anmeldung": "/newsletter/",
     "bestaetigung": "/newsletter/bestaetigung/",
