@@ -338,7 +338,7 @@ Sparen nur mit dem Rest machen. Wenn du nicht zuerst planst, bleibt am Ende oft 
 
 ---
 
-👉 **Jetzt Budget sauber aufstellen:** [**→ Tagesgeldkonto eröffnen**](/go/tagesgeld/)
+👉 **Jetzt Budget sauber aufstellen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

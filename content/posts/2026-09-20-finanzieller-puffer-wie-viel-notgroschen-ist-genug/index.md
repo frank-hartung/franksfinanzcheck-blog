@@ -1,6 +1,6 @@
 ---
 title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
-description: "Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis sechs Monatsausgaben."
+description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis…"
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-09-25
 draft: false
@@ -26,13 +26,13 @@ cover:
 kurzantwort: "Ein Notgroschen sollte meist drei bis sechs Monate deiner festen Lebenshaltungskosten abdecken. Bei 1.500 € monatlichen Fixkosten sind das grob 4.500 € bis 9.000 €. So fängst du Reparaturen, kaputte Geräte oder kurze Einkommenslücken ab, ohne sofort den Dispo zu nutzen."
 ---
 
-Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
+Du willst finanzieller puffer? Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
 Die gute Nachricht: Du brauchst dafür kein Vermögen. In vielen Haushalten reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €. Das ist viel Geld, aber kein Fantasiewert.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision. Für dich entstehen dabei keine Mehrkosten.
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – Finanzieller Puffer
 
 - **Faustregel:** Plane meist mit 3 bis 6 Monatsausgaben, nicht mit 3 bis 6 Nettogehältern.
 - **Singles:** Oft reichen 3 bis 4 Monatsausgaben als Startziel.

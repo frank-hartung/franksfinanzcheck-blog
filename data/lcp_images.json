@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-25T14:49:48+00:00",
+  "generatedAt": "2026-09-25T22:35:35+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe.jpg",
+      "image": "images/covers/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe.jpg",
+      "image": "images/covers/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -704,22 +704,6 @@
     },
     "/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/": {
       "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/": {
-      "image": "images/covers/2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

@@ -24,9 +24,7 @@ pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: 
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
-
-
-Wenn die erste kalte Woche kommt, denken viele Haushalte plötzlich wieder an ihren Gastarif. Dann ist der Abschlag schon hoch, die Sorge vor der Jahresabrechnung groß und die Lust auf komplizierte Vertragsdetails gering. Genau in diesem Moment wirkt eine **Gaspreisgarantie** attraktiv.
+Du willst sicher heizen? Wenn die erste kalte Woche kommt, denken viele Haushalte plötzlich wieder an ihren Gastarif. Dann ist der Abschlag schon hoch, die Sorge vor der Jahresabrechnung groß und die Lust auf komplizierte Vertragsdetails gering. Genau in diesem Moment wirkt eine **Gaspreisgarantie** attraktiv.
 
 Und das zu Recht. Wer mit Gas heizt, will vor allem eins: Ruhe. Keine böse Überraschung nach dem Winter.
 

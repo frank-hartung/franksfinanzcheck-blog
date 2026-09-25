@@ -303,9 +303,9 @@ Das ist realistischer und hält länger.
 
 Wenn du nicht nur Strom, sondern alle Haushaltskosten im Blick haben willst, schau auch hier rein:
 
-- [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
-- [Gasrechnung senken: clevere Herbst-Vorbereitung im Check](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)
-- [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+- Heizkosten sparen im Alltag
+- Gasrechnung senken: clevere Herbst-Vorbereitung im Check
+- Wechselservice für Strom und Gas im Check
 
 > ⚡ **Spar-Tipp:** Oft reicht ein Abend für den ersten großen Effekt. Miss die Hauptgeräte, stoppe Standby und prüfe dann deinen Tarif. Den Preisvergleich findest du hier: [**Stromanbieter jetzt vergleichen**](/go/strom/)
 
@@ -315,7 +315,7 @@ Hohe Stromkosten sind oft kein Rätsel. Meist steckt ein Mix aus alten Geräten,
 
 Wenn du erst misst und dann die größten Stromfresser angehst, sparst du oft schneller als gedacht. Danach macht ein Tarifvergleich das Paket komplett. So wird aus einem allgemeinen Spartipp ein echter Vorteil für dein Konto.
 
-**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · [Gasrechnung senken](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) · [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Wechselservice für Strom und Gas im Check
 
 ## Häufige Fragen
 
@@ -351,9 +351,9 @@ Das ist realistischer und hält länger.
 
 Wenn du nicht nur Strom, sondern alle Haushaltskosten im Blick haben willst, schau auch hier rein:
 
-- [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
-- [Gasrechnung senken: clevere Herbst-Vorbereitung im Check](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)
-- [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+- Heizkosten sparen im Alltag
+- Gasrechnung senken: clevere Herbst-Vorbereitung im Check
+- Wechselservice für Strom und Gas im Check
 
 > ⚡ **Spar-Tipp:** Oft reicht ein Abend für den ersten großen Effekt. Miss die Hauptgeräte, stoppe Standby und prüfe dann deinen Tarif. Den Preisvergleich findest du hier: [**Stromanbieter jetzt vergleichen**](/go/strom/)
 
@@ -363,7 +363,7 @@ Hohe Stromkosten sind oft kein Rätsel. Meist steckt ein Mix aus alten Geräten,
 
 Wenn du erst misst und dann die größten Stromfresser angehst, sparst du oft schneller als gedacht. Danach macht ein Tarifvergleich das Paket komplett. So wird aus einem allgemeinen Spartipp ein echter Vorteil für dein Konto.
 
-**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · [Gasrechnung senken](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) · [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Wechselservice für Strom und Gas im Check
 
 ## Häufige Fragen
 

@@ -232,8 +232,8 @@ Allein diese Fragen verhindern viele Schnellschüsse.
 Versicherungen sind nie isoliert sinnvoll. Sie müssen zu deiner Haushaltslage passen. Wenn du gerade generell Fixkosten sortierst, helfen dir auch diese Ratgeber:
 
 - [Versicherungen, die du wirklich brauchst](../../pillar/versicherungen/)
-- [Hausratversicherung prüfen](../../posts/2026-08-13-hausratversicherung-tipps/)
-- [Notgroschen aufbauen](../../posts/2026-08-12-notgroschen-aufbauen-so-viel-brauchst-du-wirklich/)
+- Hausratversicherung prüfen
+- Notgroschen aufbauen
 
 Gerade beim Haustier zeigt sich klar: Rücklagen und Versicherung sind keine Gegensätze. Oft ist die Mischung sinnvoll.
 

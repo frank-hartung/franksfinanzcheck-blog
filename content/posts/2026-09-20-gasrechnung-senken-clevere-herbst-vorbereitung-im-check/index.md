@@ -30,7 +30,7 @@ Der Winter wird nicht erst teuer, wenn es draußen kalt ist. Oft steigen die Kos
 
 Genau deshalb lohnt sich die **Herbst Vorbereitung**. Wer seine **Gasrechnung senken** will, braucht keinen Aktionismus im Dezember. Er braucht einen ruhigen Check im September oder Oktober: Zahlen prüfen, Heizung vorbereiten, Wärmeverluste finden und den Tarif ehrlich durchrechnen.
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – Gasrechnung senken
 
 - Die beste Zeit für einen Heizkosten-Check liegt **vor** der vollen Heizperiode.
 - Ein alter Tarif kann bei **20.000 kWh Verbrauch** schnell mehrere hundert Euro zu teuer sein.

@@ -291,9 +291,9 @@ Hilfreich ist außerdem eine kleine Regel für Neuanschaffungen: **Jedes Zusatzg
 
 Wenn du deine Haushaltskosten insgesamt drücken willst, helfen auch diese Beiträge:
 
-- [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
-- [Gasrechnung senken: clevere Herbst-Vorbereitung im Check](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)
-- [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+- Heizkosten sparen im Alltag
+- Gasrechnung senken: clevere Herbst-Vorbereitung im Check
+- Wechselservice für Strom und Gas im Check
 
 > ⚡ **Spar-Hinweis:** Die größte Wirkung entsteht meist aus zwei Schritten: erst die größten Stromfresser stoppen, dann den Preis pro Kilowattstunde senken. Genau dafür lohnt sich der Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 
@@ -303,7 +303,7 @@ Hohe Stromkosten kommen selten aus dem Nichts. Meist stecken alte Geräte, Dauer
 
 Wenn du misst statt nur zu raten, findest du die größten Kostentreiber schnell. Mit ein paar klaren Maßnahmen kannst du oft schon spürbar sparen. Und wenn du danach noch den Tarif prüfst, entsteht aus kleinen Änderungen ein echter Haushaltsvorteil.
 
-**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · [Gasrechnung senken](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) · [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
+**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Heizkosten sparen im Alltag
 
 ## Häufige Fragen
 
@@ -339,9 +339,9 @@ Darum gilt:
 
 Wenn du deine Haushaltskosten insgesamt drücken willst, helfen auch diese Beiträge:
 
-- [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
-- [Gasrechnung senken: clevere Herbst-Vorbereitung im Check](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)
-- [Wechselservice für Strom und Gas im Check](../../posts/2026-09-16-wechselservice-fuer-strom-und-gas-im-check/)
+- Heizkosten sparen im Alltag
+- Gasrechnung senken: clevere Herbst-Vorbereitung im Check
+- Wechselservice für Strom und Gas im Check
 
 > ⚡ **Spar-Hinweis:** Die größte Wirkung entsteht meist aus zwei Schritten: erst die größten Stromfresser stoppen, dann den Preis pro Kilowattstunde senken. Genau dafür lohnt sich der Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 
@@ -351,7 +351,7 @@ Hohe Stromkosten kommen selten aus dem Nichts. Meist stecken alte Geräte, Dauer
 
 Wenn du misst statt nur zu raten, findest du die größten Kostentreiber schnell. Mit ein paar klaren Maßnahmen kannst du oft schon spürbar sparen. Und wenn du danach noch den Tarif prüfst, wird aus kleinen Änderungen ein echter Haushaltsvorteil.
 
-**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · [Gasrechnung senken](../../posts/2026-09-12-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/) · [Heizkosten sparen im Alltag](../../posts/2026-08-17-heizkosten-sparen-im-alltag-die-besten-tipps-fuer-dich/)
+**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Heizkosten sparen im Alltag
 
 ## Häufige Fragen
 
