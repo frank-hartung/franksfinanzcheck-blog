@@ -21,6 +21,7 @@ Nutzung:
     python3 scripts/check_uniqueness.py --sameday --fix  # Geburts-Modus (Engine)
     python3 scripts/check_uniqueness.py --selftest       # nur Sabotage-Schutz (Selbsttest-Runner)
 """
+import datetime
 import os
 import re
 import sys
@@ -207,7 +208,83 @@ def run_selftest() -> list:
     fremd = ngrams("völlig andere Formulierung ohne Bezug", PHRASE_LEN) & ngrams(a, PHRASE_LEN)
     if fremd:
         fehler.append(f"  fremde Texte werden als überlappend gemeldet: {sorted(fremd)[:1]}")
+    # Twin-Schutz (25.09.2026): etablierte/geteilte Zweitlinge nie auto-draften.
+    heute = datetime.date.today().isoformat()
+    schutz_faelle = [
+        # (pfad, datum, geteilt, heilung_erlaubt?)
+        ("content/posts/2026-09-25-neu/index.md", heute + "T08:00:00Z",
+         set(), True),
+        ("content/posts/2026-09-20-alt/index.md", "2026-09-20T08:00:00Z",
+         set(), False),
+        ("content/posts/2026-09-25-neu/index.md", heute + "T08:00:00Z",
+         {"2026-09-25-neu"}, False),
+        ("content/posts/2026-09-20-ohne-datum/index.md", "", set(), False),
+    ]
+    for pfad, dat, get, erlaubt in schutz_faelle:
+        grund = twin_schutz_grund(pfad, dat, geteilt=get)
+        if bool(grund) == erlaubt:
+            fehler.append(f"  Twin-Schutz {pfad} [{dat[:10] or '?'}]: erwartet "
+                          f"erlaubt={erlaubt}, Grund={grund!r}")
     return fehler
+
+
+def _geteilte_slugs():
+    """Slugs, deren URL bereits Leser erreicht hat (Newsletter/Pinterest).
+
+    Quellen (alle lesend, best-effort):
+      data/newsletter_state.json  pending + versandene_artikel (direkte Slugs)
+      data/pinterest_plan.yaml    /posts/<slug>/-URLs in url/blog_url
+      data/pins_upload.csv        /posts/<slug>/-URLs in der Link-Spalte
+    Lesefehler liefern eine leere Menge (Warnung im Log): Die Geburts-Tags-
+    Regel in twin_schutz_grund() schützt unabhängig davon; diese Liste ist
+    die zweite Hürde für Grenzfälle am Geburts-Tag selbst.
+    """
+    gefunden = set()
+    try:
+        import json
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        st = os.path.join(root, "data", "newsletter_state.json")
+        if os.path.exists(st):
+            d = json.load(open(st, encoding="utf-8"))
+            for k in ("pending", "versandene_artikel"):
+                gefunden.update(str(x) for x in (d.get(k) or []))
+        for datei in ("data/pinterest_plan.yaml", "data/pins_upload.csv"):
+            pfad = os.path.join(root, datei)
+            if os.path.exists(pfad):
+                txt = open(pfad, encoding="utf-8-sig").read()
+                gefunden.update(
+                    re.findall(r"/posts/([A-Za-z0-9][A-Za-z0-9\-]*)/", txt))
+    except Exception as exc:  # noqa: BLE001 – best-effort, nie blockieren
+        print(f"  ⚠ geteilte Slugs nicht lesbar ({exc}) – nur Geburts-Tags-Regel aktiv")
+    return gefunden
+
+
+def twin_schutz_grund(path: str, datum: str, geteilt=None) -> str:
+    """Schutz vor Auto-Draft: "" = Heilung erlaubt, sonst der Grund.
+
+    WARUM (Premium-Fix „404 nach Twin-Heilung“, 25.09.2026): Die Geburts-Wache
+    draftete jeden jüngeren Zweitling – auch etablierte Live-Artikel, deren URL
+    längst geteilt war (Newsletter, Pinterest, Google-Index). Jeder Auto-Draft
+    eines etablierten Artikels ist ein 404 für echte Leser – schlimmer als der
+    Twin selbst. Regeln:
+      1. Geteilte URL (Newsletter/Pinterest) → NIEMALS Auto-Draft.
+      2. Zweitling älter als heute (etabliert) → NIEMALS Auto-Draft.
+    Erlaubt bleibt der Geburts-Fall: Zweitling mit Frontmatter-Datum = heute
+    und (noch) nicht geteilt – dort ist die URL frisch und unverlinkt.
+    Etablierte/geteilte Twins werden nur GEMELDET (Report, Exit 1 bei
+    --sameday); die Zusammenführung ist redaktionell (Canonical/Redirect),
+    kein Automatismus. `geteilt` ersetzt nur im Selbsttest die Dateisuche.
+    """
+    slug = os.path.basename(os.path.dirname(path))
+    menge = _geteilte_slugs() if geteilt is None else set(geteilt)
+    if slug in menge:
+        return ("URL bereits geteilt (Newsletter/Pinterest) – redaktionell "
+                "zusammenführen statt auto-draften")
+    tag = (datum or "")[:10]
+    if tag != datetime.date.today().isoformat():
+        return (f"etabliert (Frontmatter-Datum {tag or 'unbekannt'}) – "
+                "kein Auto-Draft nach dem Geburts-Tag")
+    return ""
 
 
 def heal_twin(path_younger: str) -> bool:
@@ -294,7 +371,11 @@ def main():
                 print(f"               ({titles[a][:44]!r} ↔ {titles[b][:44]!r})")
                 if do_fix:
                     loser = max(a, b, key=lambda p: (dates.get(p, ""), p))
-                    if heal_twin(loser):
+                    schutz = twin_schutz_grund(loser, dates.get(loser, ""))
+                    if schutz:
+                        print(f"               ⏸️ kein Auto-Draft für "
+                              f"{os.path.basename(os.path.dirname(loser))}: {schutz}")
+                    elif heal_twin(loser):
                         drafts.add(loser)
                         healed.append(os.path.basename(os.path.dirname(loser)))
                         print(f"               🛠️ geheilt: Zweitling {os.path.basename(os.path.dirname(loser))} → draft:true")

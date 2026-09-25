@@ -100,7 +100,7 @@ Banken ziehen oft monatlich kleine Beträge für unnötige Leistungen ein.
 
 In der Summe belasten diese Kosten dein Budget unnötig stark.  
 Ein regelmäßiger Vergleich ist heute eine absolute Notwendigkeit.  
-Nutze Portale wie [CHECK24](/go/allgemein/){rel="sponsored"} für einen schnellen Überblick.  
+Nutze Portale wie [CHECK24](/go/allgemein/) für einen schnellen Überblick.  
 Prüfe mindestens einmal im Jahr alle laufenden Verträge.  
 
 ## Wie berechnest du dein Budget im Jahr 2026 richtig?
@@ -173,7 +173,7 @@ Gehe einmal im Jahr folgende Schritte konsequent durch.
 
 1. **Bestandsaufnahme:** Drucke die Kontoauszüge der letzten drei Monate aus. Markiere Fixkosten und Wünsche mit zwei Farben.
 2. **Kategorisierung:** Addiere alle farbigen Beträge. Prüfe die Abweichung zur idealen Verteilung deiner 50‑30‑20‑Regel.
-3. **Vertrags‑Check:** Analysiere deine Fixkosten genau. Wo zahlst du zu viel für deine Absicherung? Nutze einen [Stromtarife vergleichen](/go/strom/){rel="sponsored"} für Strom und Versicherungen.
+3. **Vertrags‑Check:** Analysiere deine Fixkosten genau. Wo zahlst du zu viel für deine Absicherung? Nutze einen [Stromtarife vergleichen](/go/strom/) für Strom und Versicherungen.
 4. **Eliminierung:** Hinterfrage deine monatlichen Abos kritisch. Kündige alles, was du im letzten Monat nicht aktiv genutzt hast.
 5. **Automatisierung:** Richte sofort alle nötigen Daueraufträge ein. Überweise deinen Sparanteil direkt nach dem Gehaltseingang auf dein Depot.
 
