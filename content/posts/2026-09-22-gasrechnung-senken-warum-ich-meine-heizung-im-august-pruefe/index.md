@@ -2,7 +2,10 @@
 title: "Gasrechnung senken: Warum ich meine Heizung im August prüfe"
 description: "Willst du deine Gasrechnung senken? Mit der richtigen Strategie im Spätsommer sparst du im Winter hunderte Euro. Frank zeigt dir, wie es geht."
 date: 2026-09-25T14:10:43Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-09-25T15:30:40Z
+cadence_grund: "kadenz: über Tages-Max"
 reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbstvorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
