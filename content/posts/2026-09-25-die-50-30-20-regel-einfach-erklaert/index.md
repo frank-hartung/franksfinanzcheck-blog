@@ -65,7 +65,7 @@ Ein gutes Werkzeug erleichtert das Einhalten der Regel erheblich. Hier ein Über
 |---------------------|-----------------------------------|-----------------------|
 | Budget‑App (z. B. Finanzguru) | Automatisches Kategorisieren von Buchungen | Spart Zeit beim manuellen Eintragen |
 | Excel‑Vorlage       | Flexible Anpassung, eigene Grafiken | Ideal, wenn du volle Kontrolle willst |
-| CHECK24 Vergleich   | Preisvergleich für Strom, DSL, Versicherungen | Schnell günstige Tarife finden |
+| CHECK24-Vergleich   | Preisvergleich für Strom, DSL, Versicherungen | Schnell günstige Tarife finden |
 | Notgroschen‑Kalkulator | Berechnet notwendige Rücklage (3‑6 Monatsgehälter) | Sicherheitspuffer aufbauen |
 
 Die meisten Apps bieten die Möglichkeit, monatliche Limits für jede Kategorie zu setzen. Sobald das Limit erreicht ist, bekommst du eine Benachrichtigung – das verhindert, dass du unbewusst über dein Budget hinausgehst.

@@ -33,8 +33,6 @@ Stell dir einen ruhigen Abend am Küchentisch vor.
 Du öffnest deine Banking‑App und suchst verzweifelt nach dem fehlenden Geld.  
 Wo ist es hin?  
 
-**Transparenz:** dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
-
 Dein Monat verlief ohne große Überraschungen, doch dein Saldo kratzt an der Nulllinie.  
 Plötzlich fordert dein Stromanbieter per E‑Mail eine Nachzahlung.  
 Solche Fälle sehe ich täglich in meiner Beratung.  
@@ -222,19 +220,29 @@ Starte noch heute mit deinem ersten Kassensturz.
 
 ## Häufige Fragen
 
-### Was mache ich, wenn mein Einkommen stark schwankt? Berechne deinen Finanz‑Kompass auf Basis deines Durchschnittsverdienstes. Nutze dafür die Zahlen aus dem gesamten letzten Jahr.
+### Was mache ich, wenn mein Einkommen stark schwankt?
+
+Berechne deinen Finanz‑Kompass auf Basis deines Durchschnittsverdienstes. Nutze dafür die Zahlen aus dem gesamten letzten Jahr.
 Zahle dir von einem Pufferkonto selbst ein festes Gehalt aus. Teile diesen Betrag dann nach der bekannten Regel auf.
 
-### Zählen Kredite zu den 50 % oder zu den 20 %? Das hängt von der Art des Kredits ab. Die Rate für dein Eigenheim zählt zu den Grundbedürfnissen.
+### Zählen Kredite zu den 50 % oder zu den 20 %?
+
+Das hängt von der Art des Kredits ab. Die Rate für dein Eigenheim zählt zu den Grundbedürfnissen.
 Konsumkredite für Autos oder Möbel solltest du schnell tilgen. Diese Raten gehören in den 20‑Prozent‑Block für den Vermögensaufbau.
 
-### Ist die Regel auch für Geringverdiener geeignet? Die Regel dient dir primär als Zielbild. Für Geringverdiener sind 50 % für Fixkosten oft schwer erreichbar.
+### Ist die Regel auch für Geringverdiener geeignet?
+
+Die Regel dient dir primär als Zielbild. Für Geringverdiener sind 50 % für Fixkosten oft schwer erreichbar.
 Drücke deine Fixkosten dennoch so weit wie möglich nach unten. Beginne mit einer kleinen Sparquote von 5 %.
 
-### Sollte ich erst Schulden abzahlen oder erst sparen? Teure Schulden wie Dispo oder Kreditkarten haben immer Vorrang. Nutze dafür den kompletten 20‑Prozent‑Block deiner Kalkulation.
+### Sollte ich erst Schulden abzahlen oder erst sparen?
+
+Teure Schulden wie Dispo oder Kreditkarten haben immer Vorrang. Nutze dafür den kompletten 20‑Prozent‑Block deiner Kalkulation.
 Investiere erst in ETFs, wenn die teuren Schulden weg sind. Baue parallel nur einen kleinen Notgroschen auf.
 
-### Wie oft sollte ich meine Budget‑Verteilung prüfen? Ein kurzer Check pro Monat dauert nur 15 Minuten. Dabei prüfst du, ob du im geplanten Rahmen bleibst.
+### Wie oft sollte ich meine Budget‑Verteilung prüfen?
+
+Ein kurzer Check pro Monat dauert nur 15 Minuten. Dabei prüfst du, ob du im geplanten Rahmen bleibst.
 Analysiere deine Verträge einmal im Jahr ganz genau. Der ideale Zeitpunkt ist der herbstliche Oktober vor den neuen Preisrunden.
 
 ---
