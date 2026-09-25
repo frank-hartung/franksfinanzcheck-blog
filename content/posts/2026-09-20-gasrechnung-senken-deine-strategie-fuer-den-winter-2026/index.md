@@ -2,7 +2,9 @@
 title: "Gasrechnung senken: Deine Strategie für den Winter 2026"
 description: Willst du effektiv deine Gasrechnung senken? Nutze den Spätsommer für die Herbstvorbereitung. Frank Hartung zeigt dir, wie du deine Heizkosten sparst.
 date: 2026-09-25T02:49:28Z
-draft: false
+draft: true
+cadence_demoted: 2026-09-25T12:15:37Z
+cadence_grund: "publish-gate: Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 50 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 14 Passiv-Formulierungen"
 reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]

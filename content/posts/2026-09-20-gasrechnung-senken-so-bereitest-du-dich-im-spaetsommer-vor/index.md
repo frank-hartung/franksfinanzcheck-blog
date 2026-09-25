@@ -1,9 +1,9 @@
 ---
 title: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
 description: Wer rechtzeitig handelt, kann massiv seine Gasrechnung senken. Erfahre, wie du mit der Herbst Vorbereitung Heizkosten sparst und die Heizung prüfst.
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-25T12:15:37Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Eine Herbstwartung spart – entlüfte Heizkörper, stelle Thermostatventile auf 20 °C Raumtemperatur und prüfe den Brennwertkessel auf Fehlfunktionen. So senkst du den Jahresverbrauch um bis zu 15 % und vermeidest unnötige Spitzenabrechnungen. Gleichzeitig lässt du den Energieversorger einen Abschlag für den kommenden Winter festlegen."
 ---
 
-Verschenkst du jedes Jahr 800 € an deinen Gasanbieter? Viele Haushalte zahlen diesen Betrag völlig unnötig. Nutze den Spätsommer für eine kluge Finanz-Strategie. Mit der richtigen **Herbst Vorbereitung** sicherst du dir niedrige Preise, bevor die Heizperiode startet.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Verschenkst du jedes Jahr 800 € an deinen Gasanbieter? Viele Haushalte zahlen diesen Betrag völlig unnötig. Nutze den Spätsommer für eine kluge Finanz-Strategie. Mit der richtigen **Herbst Vorbereitung** sicherst du dir niedrige Preise, bevor die Heizperiode startet.
 
 Im Keller lauert oft ein unterschätzter Kostenfresser. Sobald die Temperaturen sinken, springt deine Anlage wieder an.
 

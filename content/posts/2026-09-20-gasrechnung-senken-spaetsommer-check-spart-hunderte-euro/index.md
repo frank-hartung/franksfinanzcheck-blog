@@ -1,9 +1,9 @@
 ---
 title: "Gasrechnung senken: Spätsommer-Check spart hunderte Euro"
 description: "Jetzt die Gasrechnung senken: Bereite dein Zuhause im Spätsommer optimal vor. Tipps zum Heizkosten sparen und Heizung prüfen für einen günstigen Winter."
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-25T12:15:40Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Entlüfte die Heizung, dichte Fenster und Leitungen ab und stelle die Vorlauftemperatur im Spätsommer auf etwa 55 °C. Eine fachgerechte Wartung senkt den Gasverbrauch in der Regel um 5–10 % – das entspricht bei einem durchschnittlichen Haushalt ca. 200 € pro Jahr. Faustregel: Jede gesenkte Vorlauftemperatur um 1 °C spart rund 2 % Energie."
 ---
 
-900 € Ersparnis durch einen simplen Check im August?  
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. 900 € Ersparnis durch einen simplen Check im August?  
 Das klingt nach einem fernen Traum, während du noch die Abendsonne genießt.  
 Doch genau jetzt legst du das Fundament für einen günstigen Winter.  
 Wer wartet, bis der erste Frost kommt, zahlt am Ende oft unnötig drauf.
