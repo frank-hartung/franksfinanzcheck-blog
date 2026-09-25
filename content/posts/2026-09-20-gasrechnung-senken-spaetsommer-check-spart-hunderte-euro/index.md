@@ -31,13 +31,13 @@ Eine konkrete Ersparnis lässt sich seriös nicht pauschal versprechen. Verbrauc
 
 ## Das Wichtigste in Kürze
 
-* **Heizung prüfen:** Entlüften, Heizkörper reinigen und sichtbare Leitungen kontrollieren. Arbeiten an der Anlage gehören in Fachhände.
-* **Wärmeverluste suchen:** Fenster- und Türdichtungen sowie Leitungen in unbeheizten Bereichen ansehen.
+* **Heizung prüfen:** Entlüften, Heizkörper reinigen und sichtbare Leitungen kontrollieren. Arbeiten an der Anlage gehören in die Hände eines Fachbetriebs.
+* **Wärmeverluste suchen:** Fenster- und Türdichtungen sowie Leitungen in unbeheizten Bereichen kontrollieren.
 * **Tarif prüfen:** Arbeitspreis, Grundpreis, Laufzeit, Kündigungsfrist und Preisgarantie gemeinsam bewerten.
 * **Verbrauch dokumentieren:** Zählerstand und Jahresverbrauch bilden die Grundlage für jeden Vergleich.
 * **Kosten realistisch einordnen:** Eine mögliche Ersparnis hängt von deinen Daten ab und ist nicht garantiert.
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Vertrag nicht mehr zu deinem Verbrauch oder deinen Ansprüchen passt, kannst du Angebote über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen**](/go/gas/){rel="sponsored"}
+💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Vertrag nicht mehr zu deinem Verbrauch oder deinen Ansprüchen passt, kannst du Angebote über unseren Partnervergleich prüfen: [**Gas-Anbieter vergleichen**](/go/gas/){rel="sponsored"}
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum der Spätsommer ein sinnvoller Prüfzeitpunkt ist
@@ -46,7 +46,7 @@ Bei milden Temperaturen kannst du die Heizung kontrollieren, ohne dass ein Ausfa
 
 Der Zeitpunkt ist aber kein Versprechen für bestimmte Preise. Gastarife ändern sich abhängig von Beschaffung, Region, Vertragsbedingungen und Marktlage. Prüfe daher die Angebote, die für deine Postleitzahl und deinen voraussichtlichen Verbrauch tatsächlich gelten.
 
-Auch ein Wechsel muss nicht im Spätsommer stattfinden. Entscheidend sind deine Kündigungsfrist, der gewünschte Lieferbeginn und die Bedingungen des neuen Vertrags. Ein Blick in die Unterlagen verhindert, dass du aus einem laufenden Vertrag zu früh oder zu spät heraus willst.
+Auch ein Wechsel muss nicht im Spätsommer stattfinden. Entscheidend sind deine Kündigungsfrist, der gewünschte Lieferbeginn und die Bedingungen des neuen Vertrags. Ein Blick in die Unterlagen zeigt dir, wann du kündigen kannst und ab wann der neue Tarif gelten würde.
 
 ## Gasrechnung senken: So prüfst du deinen Gastarif
 
@@ -64,15 +64,23 @@ Ein niedriger Einstiegspreis ist nicht automatisch das beste Angebot. Rechne den
 
 Hier kannst du deinen Ausgangspunkt prüfen: [**Gastarife vergleichen**](/go/gas/){rel="sponsored"}. Nutze dabei deinen tatsächlichen Verbrauch und kontrolliere die Ergebnisse anschließend mit den Vertragsunterlagen des Anbieters.
 
+### Preisgarantie nicht mit einem Festpreis verwechseln
+
+Eine Preisgarantie kann einzelne Preisbestandteile absichern, muss aber nicht jede Änderung des Gesamtpreises ausschließen. Lies deshalb genau, worauf sich die Garantie bezieht und welche Abgaben, Umlagen oder Steuern ausgenommen sind. Auch die Dauer ist wichtig: Läuft die Garantie früher aus als dein Vertrag, kann sich der Preis anschließend ändern.
+
+Vergleiche nicht nur den ersten Abschlag. Notiere den voraussichtlichen Gesamtpreis für die vereinbarte Laufzeit und prüfe, wie sich der Tarif ohne Bonus oder nach Ende der Garantie entwickelt. Bei einem Wechsel sollten Lieferbeginn, Zählernummer und Anschrift korrekt übernommen werden. Bewahre die Bestätigung des neuen Anbieters auf, bis die erste Abrechnung vollständig geprüft ist.
+
+Wenn sich Vertragsbedingungen oder Preise ändern, solltest du die Mitteilung des Anbieters zeitnah lesen und die Fristen notieren.
+
 ## Heizung prüfen: Was du selbst kontrollieren kannst
 
 Einige Basischecks sind ohne Werkzeug möglich. Sie ersetzen keine Wartung und keine Reparatur.
 
 * **Heizkörper:** Werden sie ungleichmäßig warm oder gluckern sie, kann Entlüften sinnvoll sein. Halte dich an die Anleitung deiner Anlage und prüfe danach den Wasserdruck.
 * **Oberflächen:** Staub und Gegenstände vor dem Heizkörper behindern die Wärmeabgabe. Reinige die erreichbaren Flächen und halte sie frei.
-* **Thermostate:** Die Stufen stehen für eine Zieltemperatur, nicht für eine höhere Aufheizgeschwindigkeit. Ein höheres Drehen macht den Raum nicht schneller warm.
+* **Thermostate:** Die Stufen stehen für eine Zieltemperatur, nicht für eine höhere Aufheizgeschwindigkeit. Eine höhere Einstellung macht den Raum nicht schneller warm.
 * **Leitungen:** Ungedämmte Heizungsrohre in Keller- oder Nebenräumen können unnötig Wärme abgeben. Ob eine Dämmung zulässig und sinnvoll ist, hängt von der Situation ab.
-* **Geräusche und Gerüche:** Ungewöhnliche Geräusche, austretendes Wasser oder Abgasgeruch gehören sofort fachlich geprüft. Schalte die Anlage bei akuter Gefahr ab und beachte die Hinweise des Herstellers.
+* **Geräusche und Gerüche:** Ungewöhnliche Geräusche und austretendes Wasser müssen fachlich geprüft werden. Abgasgeruch ist ein Warnsignal: Lüfte, verlasse den Gefahrenbereich und befolge die Hinweise des Herstellers.
 
 Für Wartung, Brennereinstellung, Abgasanlage, Wassernachfüllung und Reparaturen solltest du einen qualifizierten Fachbetrieb beauftragen. Gerade bei älteren Anlagen ist eine individuelle Prüfung wichtiger als eine pauschale Einstellung, etwa einer bestimmten Vorlauftemperatur.
 
@@ -84,7 +92,7 @@ Stoßlüften ist im Winter meist sinnvoller als dauerhaft gekippte Fenster. Wäh
 
 Vorhänge, Möbel und Verkleidungen sollten Heizkörper nicht verdecken. Rollläden oder Vorhänge können nachts den Wärmeverlust am Fenster begrenzen, dürfen aber nicht die Luftzirkulation oder Lüftungsschlitze der Heizung blockieren.
 
-## Typische Fehler beim Heizkosten-Sparen
+## Typische Fehler beim Heizkostensparen
 
 | Fehler | Warum er problematisch sein kann | Besser machen |
 | :--- | :--- | :--- |
@@ -95,6 +103,14 @@ Vorhänge, Möbel und Verkleidungen sollten Heizkörper nicht verdecken. Rolllä
 | Tarif nur nach Bonus auswählen | Der Gesamtpreis nach der Bonusphase kann höher liegen | Laufzeit, Bedingungen und Folgekosten vergleichen |
 
 Wie stark einzelne Maßnahmen wirken, hängt von Gebäude, Wetter, Raumtemperatur und Heizsystem ab. Kontrolliere deshalb deinen Verbrauch über mehrere Abrechnungszeiträume, statt eine einzelne Änderung sofort als sichere Ersparnis zu bewerten.
+
+## Verbrauch, Abschlag und Jahresabrechnung richtig einordnen
+
+Ein niedriger Monatsabschlag ist kein Beweis für einen günstigen Tarif. Der Abschlag wird häufig aus einem früheren Verbrauch und einem angenommenen Preis berechnet. Prüfe deshalb, ob der Betrag zu deinem aktuellen Arbeitspreis, Grundpreis und Verbrauch passt. Bei einer deutlichen Änderung solltest du den Anbieter um eine nachvollziehbare Anpassung bitten.
+
+Für deinen eigenen Vergleich brauchst du möglichst vergleichbare Zeiträume. Notiere den Zählerstand zum Beginn und zum Ende der Heizperiode und bewahre die Jahresabrechnung auf. Weichen Verbrauch oder Abrechnung stark vom Vorjahr ab, können Wetter, Leerstand, eine Änderung der Wohnfläche oder ein technisches Problem die Ursache sein. Ein einzelner hoher Wert reicht nicht aus, um eine Einsparmaßnahme zu bewerten.
+
+Lies die Abrechnung außerdem auf Korrekturen, Schätzungen und den Abrechnungszeitraum. Ein geschätzter Zählerstand sollte als solcher erkennbar sein. Bei Unklarheiten kannst du zunächst schriftlich eine Erläuterung vom Versorger verlangen. So vergleichst du später nicht versehentlich einen geschätzten Verbrauch mit einem abgelesenen Wert.
 
 ## Wann ein Fachbetrieb sinnvoll ist
 
