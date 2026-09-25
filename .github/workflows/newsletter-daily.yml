@@ -163,16 +163,26 @@ jobs:
             cat /tmp/zust.md
             [ -s /tmp/zust.err ] && echo "_Hinweise:_ \`$(tail -2 /tmp/zust.err | tr '\n' ' ' | cut -c1-200)\`"
           } >> "$GITHUB_STEP_SUMMARY"
+          # Der Report steht AUCH im Log – nicht nur im Summary. Das Summary
+          # ist nur im Browser sichtbar; Log und Annotationen liest auch die
+          # API (Fehler-Alerting, Agenten, `gh run view --log`). Vorfall
+          # 25.09.: ein ❌ hielt den Versand an und niemand konnte per API
+          # nachlesen, welches.
+          cat /tmp/zust.md
           if [ "$rc" -ne 0 ]; then
+            # Die Befund-Titel wandern in die Annotation (ohne Ist-Werte –
+            # die könnten Kontodaten tragen), damit der Grund im Check-Run
+            # steht und nicht erst im Summary gesucht werden muss.
+            BEFUNDE=$(grep -E '^❌' /tmp/zust.md | sed -E 's/^❌ \*\*(.*)\*\*.*/\1/' | head -4 | tr '\n' ';' | sed 's/;$//; s/;/; /g')
             # Name exakt wie oben gesetzt (TEST_ADRESSE_GESETZT). Ein Buchstabe
             # weniger macht die Ausnahme tot: jeder Zustellbarkeits-Befund
             # stoppt dann auch den Testversand, sobald live oder planmaessig
             # gesetzt ist.
             if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESSE_GESETZT" = "nein" ]; then
-              echo "::error::Zustellbarkeit befundet UND Listen-Versand angefordert – der Versand wird angehalten, bevor eine Mail entsteht. Details im Summary dieses Schritts."
+              echo "::error::Zustellbarkeit befundet UND Listen-Versand angefordert – der Versand wird angehalten, bevor eine Mail entsteht. Befund: ${BEFUNDE:-siehe Log}. Details im Summary dieses Schritts."
               exit "$rc"
             fi
-            echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Details im Summary dieses Schritts."
+            echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Befund: ${BEFUNDE:-siehe Log}. Details im Summary dieses Schritts."
           fi
 
       - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)
