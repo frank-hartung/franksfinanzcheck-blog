@@ -21,3 +21,4 @@
 {"ts": "2026-09-25T13:03:18+00:00", "modus": "sendefile", "ausgabe": "bestaetigung-iVqnSD2Y", "empfaenger": "b80850b769aedc4c", "bytes": 2133, "transport": "resend", "status": "zugestellt", "detail": "annimmt"}
 {"ts": "2026-09-25T15:18:53+00:00", "modus": "sendefile", "ausgabe": "bestaetigung-nachgang-VbfJSrAe", "empfaenger": "5ebc8f38444904a8", "bytes": 2133, "transport": "resend", "status": "zugestellt", "detail": "annimmt"}
 {"ts": "2026-09-25T20:02:48+00:00", "modus": "sendefile", "ausgabe": "bestaetigung-nachgang-VbfJSrAe", "empfaenger": "5ebc8f38444904a8", "bytes": 2133, "transport": "resend", "status": "zugestellt", "detail": "annimmt"}
+{"ts": "2026-09-25T23:20:01+00:00", "modus": "sendefile", "ausgabe": "bestaetigung-nachgang-VbfJSrAe", "empfaenger": "5ebc8f38444904a8", "bytes": 2133, "transport": "resend", "status": "zugestellt", "detail": "annimmt"}
