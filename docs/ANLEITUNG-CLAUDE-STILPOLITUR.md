@@ -2,7 +2,7 @@
 
 **Stand:** 2026-09-25 · **Skripte:** `scripts/claude_stilpolitur.py` + `scripts/puter_chat.mjs`
 **Stilprofil:** `data/schreibstil.yaml` (Franks eigener Schreibstil) + `data/brand_brain.yaml` (Marken-Stimme)
-**Workflows:** `claude-stilpolitur.yml` (täglich 04:50 UTC), `content-engine-v2.yml` Phase 2 (bei jedem neuen Artikel)
+**Workflows:** `claude-stilpolitur.yml` (Mo/Mi/Fr 04:50 UTC), `content-engine-v2.yml` Phase 2 (bei jedem neuen Artikel)
 
 ---
 
@@ -37,23 +37,38 @@ Claude läuft **nicht** über die bezahlte Anthropic-API, sondern über **Puter.
 2. Auth-Token erzeugen (Anleitung: [docs.puter.com](https://docs.puter.com) → Node.js/Auth-Token)
 3. GitHub → Settings → Secrets and variables → Actions → **`PUTER_AUTH_TOKEN`**
 
-Ohne Token bricht der Tageslauf bewusst **laut** ab (Exit 3) – `alert-on-failure.yml` meldet es als Issue („Claude-Stilpolitur (täglich)“ ist im Watch-List). Nie ein stiller Ausfall.
+Ohne Token bricht der Tageslauf bewusst **laut** ab (Exit 3) – `alert-on-failure.yml` meldet es als Issue („Claude-Stilpolitur (Mo/Mi/Fr)“ ist im Watch-List). Nie ein stiller Ausfall.
 
 ---
 
-## Modell: das aktuell beste kostenlose Claude-Modell
+## Modell: AUSCHLIESSLICH `claude-sonnet-5`
 
-**Auswahl 25.09.2026 (Auftrag „aktuell beste kostenlose Claude-Modell“):**
+**Nachtrag 25.09.2026 (verbindlich): „Nur das Claude-Modell `claude-sonnet-5` verwenden."**
 
-| Stufe | Modell | Warum |
-|---|---|---|
-| **Default** | **`claude-fable-5-1`** (Claude Fable 5.1) | Spitze der kostenlosen Modellkarte (Puter-Katalog „Free, Unlimited Claude API“) |
-| Fallback 1 | `claude-opus-5-5` | nächststärkeres Gratis-Modell |
-| Fallback 2 | `claude-sonnet-5` | Free-Tier-Workhorse, sparsamstes Kontingent |
+| | |
+|---|---|
+| **Modell** | **`claude-sonnet-5`** – und nur dieses |
+| Fallback | **keiner** (`modell_fallback: []`) – kein anderes Modell wird angesprochen |
+| SSOT | `data/ki_redaktion.yaml → stilpolitur.modell` |
+| Verankerung | Selbsttest **ST3** pinnt die Kette exakt auf `["claude-sonnet-5"]` (fail-closed) – wer umstellt, ändert bewusst auch den Selbsttest |
 
-SSOT: `data/ki_redaktion.yaml → stilpolitur.modell` (+ `modell_fallback`). Override: `STILPOLITUR_MODEL`. Der Selbsttest (ST3) hält die Kette in der **Frei-Liste** des Puter-Katalogs – ein versehentlicher Griff in ein bezahltes Modell oder in die Anthropic-API wird damit abgewiesen.
+Es gibt bewusst **keinen** Env-Override mehr: Ein stiller Gegenweg (z. B. `STILPOLITUR_MODEL`) darf das Modell-Mandat nicht aushebeln.
 
-> **Kontingent-Tipp:** Läuft das monatliche Gratis-Kontingent des Puter-Accounts regelmäßig leer, in `stilpolitur.modell` auf `claude-sonnet-5` wechseln (sparsamer, weiterhin Premium-tauglich).
+> **Kontingent-Tipp:** `claude-sonnet-5` ist zugleich das sparsamste Gratis-Modell des Puter-Katalogs. Sollte das Kontingent dennoch knapp werden: `auffrischung_alter_tage` strecken (z. B. `14`) oder `max_artikel_pro_tag` senken.
+
+## Taktung: Auffrischung NUR Mo/Mi/Fr
+
+**Nachtrag 25.09.2026 (verbindlich): „… und die `auffrischung_tage` nur Montag, Mittwoch und Freitag."**
+
+```yaml
+# data/ki_redaktion.yaml → stilpolitur
+auffrischung_tage: [mo, mi, fr]   # Wochentage der Auffrischung (UTC)
+auffrischung_alter_tage: 7        # Rotation: ab N Tagen seit letztem Lauf
+```
+
+- **`auffrischung_tage`** = die Wochentage, an denen die Lane poliert (Mo/Mi/Fr – gleiche Wochentage wie der Publikationsrhythmus). Der Wochentag-Gate steckt **zusätzlich im Skript** (ST16): an anderen Tagen schreibt `--fix` nichts, selbst wenn der Workflow von Hand ausgelöst wird – außer mit `--force`.
+- **`auffrischung_alter_tage`** = Mindestalter seit dem letzten Claude-Lauf, bis ein unveränderter Artikel wieder an die Reihe kommt (Anti-Churn).
+- Tokens: `mo/di/mi/do/fr/sa/so` oder Langform (`montag` …), UTC-Wochentag.
 
 ---
 
@@ -84,7 +99,7 @@ Eine KI-Antwort wird **nie** blind übernommen. Verworfen wird jede Antwort, die
 - unter **90 % Wortzahl** fällt
 - **Frontmatter** mitliefert (title = Cover-Marken-Lock – wird nie geschrieben)
 
-Zusätzlich greift die Repo-weite Zweite-Verifikation `sprachkern.write_verified` vor jedem Schreibvorgang, und der **Selbsttest (15 eingefrorene Fälle)** läuft vor jedem Lauf – Abweichung = Exit 2, kein Schreiben.
+Zusätzlich greift die Repo-weite Zweite-Verifikation `sprachkern.write_verified` vor jedem Schreibvorgang, und der **Selbsttest (16 eingefrorene Fälle)** läuft vor jedem Lauf – Abweichung = Exit 2, kein Schreiben.
 
 ---
 
@@ -96,10 +111,10 @@ Jeder Lauf **prüft** jeden Artikel, **schreibt** aber nur bei Bedarf (Fingerpri
 |---|---|
 | `neu` | Artikel noch nie poliert |
 | `geändert` | Body hat sich seit dem letzten Lauf verändert |
-| `auffrischen (Nd)` | letzter Claude-Lauf älter als `auffrischung_tage` (Default **7**) |
+| `auffrischen (Nd)` | letzter Claude-Lauf älter als `auffrischung_alter_tage` (Default **7**) |
 | `offen (verworfen)` | letzte Antwort fiel durch die Verifikation – nächster Lauf versucht es erneut |
 
-Budget: `max_artikel_pro_tag` (Default **12**) – der Rest wartet auf die Rotation, jeder Artikel ist spätestens nach `auffrischung_tage` wieder dran. `--force` (oder Workflow-Input `force`) poliert alles unabhängig vom Fingerprint.
+Budget: `max_artikel_pro_tag` (Default **12**) – der Rest wartet auf die Rotation. `--force` (oder Workflow-Input `force`) poliert alles unabhängig vom Fingerprint **und** hebt die Mo/Mi/Fr-Sperre auf.
 
 ---
 
@@ -112,14 +127,14 @@ python3 scripts/claude_stilpolitur.py
 # Polieren (braucht PUTER_AUTH_TOKEN – kostenlos, KEIN Anthropic-Key)
 export PUTER_AUTH_TOKEN=…
 npm install --no-save @heyputer/puter.js    # einmalig lokal (Node 24+)
-python3 scripts/claude_stilpolitur.py --fix              # Rotation + Budget
+python3 scripts/claude_stilpolitur.py --fix              # nur Mo/Mi/Fr (auffrischung_tage)
 python3 scripts/claude_stilpolitur.py --fix --new-only   # nur heutige Artikel
-python3 scripts/claude_stilpolitur.py --fix --force      # alles, egal Fingerprint
+python3 scripts/claude_stilpolitur.py --fix --force      # alles, egal Fingerprint/Wochentag
 python3 scripts/claude_stilpolitur.py --fix --file content/posts/2026-09-25-…/index.md
 python3 scripts/claude_stilpolitur.py --fix --dry-run    # Trockenlauf (prüft, schreibt nie)
 
 # Sabotage-Schutz (offline)
-python3 scripts/claude_stilpolitur.py --selftest         # 15 eingefrorene Fälle
+python3 scripts/claude_stilpolitur.py --selftest         # 16 eingefrorene Fälle
 ```
 
 **Ausgabe:**
@@ -135,8 +150,8 @@ Exit-Codes: `0` = sauber/gelaufen · `1` = offene Kandidaten (nur `--strict`) ·
 
 | Workflow | Wann | Was |
 |---|---|---|
-| `content-engine-v2.yml` Phase 2 | Bei jedem neuen Artikel | `--fix --new-only` direkt **nach** grammar_check + sprachglatt (Geburts-Politur) |
-| `claude-stilpolitur.yml` | **Täglich** 04:50 UTC (06:50 MESZ) + manuell | Offline-Optimierung über alle Artikel, **danach** Claude (`--fix`), Commit als `Redaktions-Bot` |
-| `claude-stilpolitur.yml` (Dispatch) | Nach Bedarf | Inputs `force` (alle neu) + `limit` (Budget) |
+| `content-engine-v2.yml` Phase 2 | Bei jedem neuen Artikel (Publikationstage Mo/Mi/Fr) | `--fix --new-only` direkt **nach** grammar_check + sprachglatt (Geburts-Politur) |
+| `claude-stilpolitur.yml` | **Mo/Mi/Fr** 04:50 UTC (06:50 MESZ) + manuell | Offline-Optimierung über alle Artikel, **danach** Claude (`--fix`), Commit als `Redaktions-Bot` |
+| `claude-stilpolitur.yml` (Dispatch) | Nach Bedarf | Inputs `force` (alle neu + Wochentag-Sperre aufheben) + `limit` (Budget) |
 
-Beide Workflows stellen Node 24 (`actions/setup-node`) und `@heyputer/puter.js` (transient, `--no-save`) bereit.
+Beide Workflows stellen Node 24 (`actions/setup-node`) und `@heyputer/puter.js` (transient, `--no-save`) bereit. Der Workflow-Name „Claude-Stilpolitur (Mo/Mi/Fr)“ ist exakt der Watch-List-Eintrag in `alert-on-failure.yml` – nie umbenennen, ohne beide zu ändern.

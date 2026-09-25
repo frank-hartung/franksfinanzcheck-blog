@@ -20,12 +20,12 @@
 #       eigener Schreibstil) + data/brand_brain.yaml (Marken-Stimme)
 #       – Stil-Politur auf Premium-Level einer Profi-Agentur.
 #
-#  MODELL: das aktuell beste KOSTENLOSE Claude-Modell (Auftrag):
-#    data/ki_redaktion.yaml → stilpolitur.modell, Stand 25.09.2026:
-#    „claude-fable-5-1“ (Fable 5.1 – Spitze der Modellkarte).
-#    Fallbacks: claude-opus-5-5 → claude-sonnet-5. Override:
-#    STILPOLITUR_MODEL. Der Selbsttest (ST3) prüft die Frei-Liste –
-#    ein bezahlter Modell-/API-Pfad wird damit abgewiesen.
+#  MODELL (Nachtrag Frank, 25.09.2026): AUSCHLIESSLICH
+#    „claude-sonnet-5“ – „nur das Claude-Modell claude-sonnet-5“.
+#    Kein Fallback, kein anderes Modell. SSOT: data/ki_redaktion.yaml
+#    → stilpolitur.modell (+ modell_fallback: []). Der Selbsttest
+#    (ST3) pinnt das Mandat exakt – wer umstellt, ändert bewusst
+#    auch den Selbsttest (fail-closed, Sabotage-Schutz).
 #
 #  ZUGANG (Puter.js, „Free, Unlimited Claude API“, User-Pays):
 #    - KEINE Anthropic-Abrechnung, kein Modell-Key – nur ein
@@ -34,7 +34,12 @@
 #    - Die Gratis-Regel der Artikel-GENERIERUNG (ki_redaktion.yaml →
 #      anbieter_kette_*) bleibt unangetastet – die Lane ist nun
 #      ebenfalls kostenfrei.
-#  Budget: max_artikel_pro_tag (Rotation) + auffrischung_tage.
+#  TAKTUNG (Nachtrag Frank, 25.09.2026): Auffrischung NUR
+#    Montag, Mittwoch, Freitag (auffrischung_tage: [mo, mi, fr] –
+#    gleiche Wochentage wie der Publikationsrhythmus Mo/Mi/Fr).
+#    an diesen Tagen Rotation nach Alter (auffrischung_alter_tage,
+#    Default 7) mit Budget max_artikel_pro_tag. --force hebt die
+#    Wochentag-Sperre mit auf.
 #
 #  SICHERHEIT (Repo-Vertrag, wie sprachkern/redaktions_standard):
 #    - Schutzzonen (Markdown-Links inkl. ANKERTEXT, Shortcodes, Code,
@@ -109,14 +114,59 @@ FREIE_CLAUDE_MODELLE = (
 )
 
 DEFAULT_CONFIG = {
-    "modell": "claude-fable-5-1",           # bestes kostenloses Modell
-    "modell_fallback": ["claude-opus-5-5", "claude-sonnet-5"],
+    "modell": "claude-sonnet-5",             # NUR dieses Modell (Mandat)
+    "modell_fallback": [],                   # kein Ersatz-Modell erlaubt
     "temperatur": 0.5,
     "max_tokens": 8192,
     "timeout": 300,
     "max_artikel_pro_tag": 12,
-    "auffrischung_tage": 7,
+    "auffrischung_tage": ["mo", "mi", "fr"],  # Wochentage: NUR Mo/Mi/Fr
+    "auffrischung_alter_tage": 7,             # Rotation: ab N Tagen seit Lauf
 }
+
+# Wochentagstokens (UTC) für auffrischung_tage – Kurz + Lang, deutsch.
+WOCHENTAGE = {
+    "mo": 0, "montag": 0,
+    "di": 1, "dienstag": 1,
+    "mi": 2, "mittwoch": 2,
+    "do": 3, "donnerstag": 3,
+    "fr": 4, "freitag": 4,
+    "sa": 5, "samstag": 5,
+    "so": 6, "sonntag": 6,
+}
+# Kanon: jede Schreibweise („mi“/„mittwoch“) wird auf die Kurzform gezogen.
+TAG_KANON = {idx: kurz for kurz, idx in WOCHENTAGE.items() if len(kurz) == 2}
+
+
+def norm_stageliste(wert) -> list:
+    """Normalisiert auffrischung_tage zu Wochentagstokens (Kanon: mo/mi/fr …)."""
+    if wert is None:
+        return []
+    if isinstance(wert, (int, float)):
+        return []  # Legacy-Zahl (Alter) ist kein Wochentag – Mandat bleibt leer
+    out = []
+    for t in ([wert] if isinstance(wert, str) else list(wert)):
+        key = str(t).strip().lower()
+        if key in WOCHENTAGE:
+            kanon = TAG_KANON[WOCHENTAGE[key]]
+            if kanon not in out:
+                out.append(kanon)
+    return out
+
+
+def tag_erlaubt(stage, jetzt: datetime.datetime | None = None,
+                force: bool = False) -> bool:
+    """Auffrischung nur an den Wochentagen aus auffrischung_tage (Mo/Mi/Fr).
+
+    --force hebt die Wochentag-Sperre auf (manueller Dispatch). Ohne
+    gültige Konfiguration gilt fail-closed: kein Tag erlaubt."""
+    if force:
+        return True
+    tokens = norm_stageliste(stage)
+    if not tokens:
+        return False
+    jetzt = jetzt or datetime.datetime.now(datetime.timezone.utc)
+    return jetzt.weekday() in {WOCHENTAGE[t] for t in tokens}
 
 NUM_RX = re.compile(r"\d[\d.,]*")
 PLACEHOLDER_RX = re.compile(r"\x00Z\d+\x00")
@@ -127,9 +177,12 @@ FM_START_RX = re.compile(r"^\s*---\s*\n")
 
 # ----------------------------------------------------------- Konfiguration
 def load_config() -> dict:
-    """stilpolitur-Sektion aus data/ki_redaktion.yaml (Defaults nie crashen)."""
-    cfg = dict(DEFAULT_CONFIG)
-    cfg["modell"] = (os.environ.get("STILPOLITUR_MODEL") or cfg["modell"]).strip()
+    """stilpolitur-Sektion aus data/ki_redaktion.yaml (Defaults nie crashen).
+
+    Bewusst OHNE Env-Override: Das Modell-Mandat („nur claude-sonnet-5“)
+    hängt an ST3 – ein stiller Env-Gegenweg darf das nicht aushebeln."""
+    cfg = {k: (list(v) if isinstance(v, list) else v)
+           for k, v in DEFAULT_CONFIG.items()}
     if yaml is not None and os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, encoding="utf-8") as fh:
@@ -137,11 +190,12 @@ def load_config() -> dict:
             section = (data.get("stilpolitur") or {}) if isinstance(data, dict) else {}
             for k, v in section.items():
                 if k in DEFAULT_CONFIG and v is not None:
-                    cfg[k] = v
+                    cfg[k] = list(v) if isinstance(v, list) else v
         except Exception:  # noqa: BLE001
             pass
-    if os.environ.get("STILPOLITUR_MODEL"):
-        cfg["modell"] = os.environ["STILPOLITUR_MODEL"].strip()
+    cfg["auffrischung_tage"] = norm_stageliste(cfg.get("auffrischung_tage"))
+    cfg["modell_fallback"] = [str(m).strip() for m in
+                              (cfg.get("modell_fallback") or []) if str(m).strip()]
     return cfg
 
 
@@ -339,7 +393,7 @@ def save_state(state: dict) -> None:
     os.replace(tmp, STATE_FILE)
 
 
-def auswahl(slug: str, body: str, state: dict, auffrischung_tage: int,
+def auswahl(slug: str, body: str, state: dict, auffrischung_alter_tage: int,
             now: datetime.datetime):
     """Braucht dieser Artikel Claude? → (fp, prio, grund) · prio None = nein."""
     fp = fingerprint(body)
@@ -350,14 +404,14 @@ def auswahl(slug: str, body: str, state: dict, auffrischung_tage: int,
         return fp, 0, f"offen ({e.get('status', '?')})"
     if e.get("fp") != fp:
         return fp, 1, "geändert"
-    if auffrischung_tage:
-        age = auffrischung_tage
+    if auffrischung_alter_tage:
+        age = auffrischung_alter_tage
         try:
             last = datetime.datetime.fromisoformat(str(e.get("last", "")).replace("Z", "+00:00"))
             age = max(0, (now - last).days)
         except Exception:  # noqa: BLE001
             pass
-        if age >= auffrischung_tage:
+        if age >= auffrischung_alter_tage:
             return fp, 2, f"auffrischen ({age}d)"
     return fp, None, None
 
@@ -392,8 +446,8 @@ def puter_chat(system: str, user: str, modell: str, cfg: dict) -> str | None:
 def call_claude(system: str, user: str, cfg: dict) -> str | None:
     """Claude KOSTENLOS über Puter.js (User-Pays, ohne Anthropic-API).
 
-    Modell-Kette: bestes kostenloses Modell zuerst (Auftrag), dann die
-    Fallbacks aus data/ki_redaktion.yaml. None = keine Antwort möglich.
+    Modell: exakt claude-sonnet-5 (Nachtrag 2, ohne Fallback) aus
+    data/ki_redaktion.yaml. None = keine Antwort möglich.
     """
     kette = [cfg.get("modell")] + list(cfg.get("modell_fallback") or [])
     for modell in [m for m in kette if m]:
@@ -460,12 +514,13 @@ def _st_stilprofil() -> bool:
     return bool((brand.get("voice") or {}).get("tone"))
 
 
-def _st_modell() -> bool:
+def _st_modell_mandat() -> bool:
+    """Nachtrag Frank: AUSCHLIESSLICH claude-sonnet-5 – exakt gepinnt."""
     cfg = load_config()
     kette = [str(cfg.get("modell", ""))] + [str(m) for m in
                                             (cfg.get("modell_fallback") or [])]
     kette = [m for m in kette if m]
-    return bool(kette) and all(m in FREIE_CLAUDE_MODELLE for m in kette)
+    return kette == ["claude-sonnet-5"] and kette[0] in FREIE_CLAUDE_MODELLE
 
 
 def _st_ohne_anthropic_api() -> bool:
@@ -495,7 +550,20 @@ def _st_bruecke() -> bool:
     with open(BRUECKE, encoding="utf-8") as fh:
         src = fh.read()
     return ("@heyputer/puter.js" in src and "PUTER_AUTH_TOKEN" in src
-            and "readFileSync(0" in src and "claude-fable-5-1" in src)
+            and "readFileSync(0" in src and "claude-sonnet-5" in src)
+
+
+def _st_wochentag() -> bool:
+    """Nachtrag Frank: Auffrischung NUR Montag, Mittwoch, Freitag."""
+    mo = datetime.datetime(2026, 9, 28, 12, 0, tzinfo=datetime.timezone.utc)
+    di = datetime.datetime(2026, 9, 29, 12, 0, tzinfo=datetime.timezone.utc)
+    mi = datetime.datetime(2026, 9, 30, 12, 0, tzinfo=datetime.timezone.utc)
+    stage = ["mo", "mi", "fr"]
+    return (tag_erlaubt(stage, mo) and tag_erlaubt(stage, mi)
+            and not tag_erlaubt(stage, di)
+            and tag_erlaubt(stage, di, force=True)
+            and not tag_erlaubt([], mo)
+            and norm_stageliste(7) == [] and norm_stageliste(["Mi", "fr"]) == ["mi", "fr"])
 
 
 def _st_schutzzonen() -> bool:
@@ -578,7 +646,7 @@ def _st_fake_caller() -> bool:
 SELFTEST = [
     ("ST1 Prompt-Kanon (Stil + Marke + Premium + Tabu)", _st_prompt, True),
     ("ST2 Stilprofil vollständig (schreibstil.yaml + brand_brain.yaml)", _st_stilprofil, True),
-    ("ST3 Modell-Kette nur kostenlose Claude-Modelle", _st_modell, True),
+    ("ST3 Modell-Mandat: NUR claude-sonnet-5", _st_modell_mandat, True),
     ("ST4 Schutzzonen-Roundtrip (sprachkern)", _st_schutzzonen, True),
     ("ST5 Link-ZIEL-Änderung wird verworfen", _st_link_ziel, True),
     ("ST6 Anker-TEXT-Änderung wird verworfen", _st_anker_text, True),
@@ -591,6 +659,7 @@ SELFTEST = [
     ("ST13 KI-Antwort-Gate (fake caller: heilt/schützt)", _st_fake_caller, True),
     ("ST14 Ohne Anthropic-API (Auftrag: Claude nur ohne API)", _st_ohne_anthropic_api, True),
     ("ST15 Puter-Brücke vorhanden (Protokoll + Gratis-Zugang)", _st_bruecke, True),
+    ("ST16 Auffrischung NUR Mo/Mi/Fr (Wochentag-Gate)", _st_wochentag, True),
 ]
 
 
@@ -666,16 +735,18 @@ def log_history(entry: dict) -> None:
 
 # ----------------------------------------------------------- Main
 def main(argv: list | None = None) -> int:
-    ap = argparse.ArgumentParser(description="Claude-Stilpolitur (Claude 3.5 "
-                                             "Sonnet, personalisiert)")
-    ap.add_argument("--fix", action="store_true", help="polieren (Paid-API)")
+    ap = argparse.ArgumentParser(description="Claude-Stilpolitur (Claude, "
+                                             "kostenlos ohne API, personalisiert)")
+    ap.add_argument("--fix", action="store_true",
+                    help="polieren (kostenloser Puter-Zugang, ohne API)")
     ap.add_argument("--dry-run", action="store_true",
                     help="KI-Antwort prüfen, nichts schreiben (C15-Trockenlauf)")
     ap.add_argument("--new-only", action="store_true", help="nur heutige Artikel")
     ap.add_argument("--include-drafts", action="store_true",
                     help="auch Entwürfe (draft: true) polieren")
     ap.add_argument("--force", action="store_true",
-                    help="ignoriert Fingerprint/Rotations-Status")
+                    help="ignoriert Fingerprint/Rotations-Status UND hebt die "
+                         "Wochentag-Sperre (auffrischung_tage: Mo/Mi/Fr) auf")
     ap.add_argument("--limit", type=int, default=None,
                     help="max. Artikel pro Lauf (0 = unbegrenzt; Default "
                          "max_artikel_pro_tag aus ki_redaktion.yaml)")
@@ -702,6 +773,22 @@ def main(argv: list | None = None) -> int:
     now = datetime.datetime.now(datetime.timezone.utc)
     do_fix = args.fix and not args.dry_run
 
+    # WOCHENTAG-GATE (Nachtrag Frank, 25.09.2026): Auffrischung NUR
+    # Montag, Mittwoch, Freitag – gleiche Wochentage wie der
+    # Publikationsrhythmus. --force hebt die Sperre auf (Dispatch).
+    if do_fix and not tag_erlaubt(cfg["auffrischung_tage"], now,
+                                  force=args.force):
+        tage = ", ".join(cfg["auffrischung_tage"]) or "–"
+        print(f"⏸ Wochentag pausiert: Auffrischung nur [{tage}] "
+              f"(auffrischung_tage, Nachtrag 25.09.2026) – nichts geschrieben.")
+        print("   Zum Überbrücken: --force (hebt die Wochentag-Sperre auf).")
+        log_history({"date": now.strftime("%Y-%m-%d"), "mode": "PAUSIERT",
+                     "modell": cfg["modell"], "grund": "Wochentag nicht Mo/Mi/Fr"})
+        write_report([], {"mode": "PAUSIERT", "modell": cfg["modell"],
+                          "posts": 0, "kandidaten": 0, "poliert": 0,
+                          "verworfen": 0}, 0)
+        return 0
+
     if args.fix and not args.dry_run and not (os.environ.get("PUTER_AUTH_TOKEN") or "").strip():
         print("🛑 PUTER_AUTH_TOKEN fehlt – der KOSTENLOSE Claude-Zugang "
               "(Puter.js, ohne API) ist nicht eingerichtet.")
@@ -724,7 +811,7 @@ def main(argv: list | None = None) -> int:
     arts = sk.load_articles(files=only_file, new_only=args.new_only,
                             include_drafts=args.include_drafts)
     state = load_state()
-    auffrischung = int(cfg["auffrischung_tage"] or 0)
+    auffrischung = int(cfg.get("auffrischung_alter_tage") or 0)
 
     kandidaten = []
     for a in arts:

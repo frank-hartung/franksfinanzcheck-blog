@@ -12,10 +12,10 @@
 //      monatliches Gratis-Kontingent – siehe docs.puter.com)
 //    · Node-fähig & CI-fähig (GitHub Actions dokumentiert)
 //
-//  MODELL: Default ist das aktuell beste kostenlose Claude-Modell
-//  (data/ki_redaktion.yaml → stilpolitur.modell, Stand 25.09.2026:
-//  claude-fable-5-1 – Fable 5.1 sitzt an der Spitze der Modellkarte;
-//  Fallbacks: claude-opus-5-5 → claude-sonnet-5).
+//  MODELL (Nachtrag Frank, 25.09.2026): AUSCHLIESSLICH
+//  claude-sonnet-5 – „nur das Claude-Modell claude-sonnet-5".
+//  Kein Fallback, kein anderes Modell (der Aufrufer pinnt das
+//  ebenfalls; Selbsttest ST3 in claude_stilpolitur.py).
 //
 //  PROTOKOLL (Aufruf aus scripts/claude_stilpolitur.py):
 //    stdin  = JSON: { "system": "…", "user": "…", "model": "…",
@@ -40,7 +40,7 @@ const messages = [];
 if (req.system) messages.push({ role: "system", content: String(req.system) });
 messages.push({ role: "user", content: String(req.user) });
 
-const options = { model: req.model || "claude-fable-5-1", stream: true };
+const options = { model: req.model || "claude-sonnet-5", stream: true };
 if (typeof req.temperature === "number") options.temperature = req.temperature;
 if (typeof req.max_tokens === "number") options.max_tokens = req.max_tokens;
 

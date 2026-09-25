@@ -1,4 +1,4 @@
-name: Claude-Stilpolitur (täglich)
+name: Claude-Stilpolitur (Mo/Mi/Fr)
 
 # ============================================================
 #  CLAUDE-STILPOLITUR – Claude, KOSTENLOS OHNE API, personalisiert
@@ -8,16 +8,24 @@ name: Claude-Stilpolitur (täglich)
 #    der Offline-Optimierung zusätzlich automatisch täglich Claude
 #    mit einem personalisierten Prompt für meinen eigenen
 #    Schreibstil auf Premium-Level einer Profi-Agentur."
-#  Nachtrag selben Tages:
+#  Nachträge selben Tages (verbindlich):
 #    „Claude sollte nur ohne API genutzt werden. Dafür sollte das
 #    aktuell beste kostenlose Claude-Modell gewählt werden."
+#    „Nur das Claude-Modell claude-sonnet-5 verwenden und die
+#    auffrischung_tage nur Montag, Mittwoch und Freitag."
 #
 #  ZUGANG: Puter.js „Free, Unlimited Claude API" (User-Pays-Modell)
 #    – KEINE Anthropic-API, keine Abrechnung. Auth nur über
 #    PUTER_AUTH_TOKEN (kostenloser Puter-Account, monatliches
-#    Gratis-Kontingent). Modell: bestes kostenloses Claude-Modell
-#    (data/ki_redaktion.yaml → stilpolitur.modell, Stand 25.09.2026:
-#    claude-fable-5-1, Fallbacks: claude-opus-5-5 → claude-sonnet-5).
+#    Gratis-Kontingent). Modell: AUSCHLIESSLICH claude-sonnet-5
+#    (ki_redaktion.yaml → stilpolitur.modell; Selbsttest ST3 pinnt
+#    das exakt – kein Fallback, kein anderes Modell).
+#
+#  TAKTUNG (Nachtrag 25.09.2026): Auffrischung NUR Montag, Mittwoch
+#    und Freitag (auffrischung_tage: [mo, mi, fr] – gleiche
+#    Wochentage wie der Publikationsrhythmus Mo/Mi/Fr). Der
+#    Wochentag-Gate steckt zusätzlich im Skript (fail-closed);
+#    --force hebt ihn auf (manueller Dispatch).
 #
 #  REIHENFOLGE IN JEDEM LAUF („nach der Offline-Optimierung"):
 #    1. Offline-Optimierung (ohne API): grammar_check (LT1–LT4)
@@ -28,16 +36,17 @@ name: Claude-Stilpolitur (täglich)
 #    3. Commit als Redaktions-Bot (wie redaktions-politur.yml)
 #
 #  ABDECKUNG: jeder Lauf prüft JEDEN Artikel (bestehende + neue).
-#  Geschrieben wird nach Bedarf (Fingerprint): neu · geändert · älter
-#  als auffrischung_tage (Rotation, Default 7 Tage). Budget:
+#  Geschrieben wird nach Bedarf (Fingerprint): neu · geändert ·
+#  auffrischen ab auffrischung_alter_tage (Default 7). Budget:
 #  max_artikel_pro_tag (Default 12) – der Rest wartet auf Rotation.
 #
 #  Laufzeiten:
-#    - Täglich 04:50 UTC (06:50 MESZ) – NACH redaktions-politur (Mo)
+#    - Mo/Mi/Fr 04:50 UTC (06:50 MESZ) – NACH redaktions-politur (Mo)
 #      und VOR der Content-Engine (neue Artikel holt zusätzlich
 #      content-engine-v2.yml Phase 2 im Geburtslauf mit --new-only)
-#    - Manuell: Actions → „Claude-Stilpolitur (täglich)" → Run workflow
-#      (Inputs: force = alle neu polieren, limit = Budget-Lauf)
+#    - Manuell: Actions → „Claude-Stilpolitur (Mo/Mi/Fr)" → Run workflow
+#      (Inputs: force = alle neu polieren + Wochentag-Sperre aufheben,
+#      limit = Budget-Lauf)
 #
 #  Reports (gitignored, bleiben im Lauf-Log):
 #    - CLAUDE-STILPOLITUR-REPORT.md + .claude_stilpolitur_report.json
@@ -47,11 +56,11 @@ name: Claude-Stilpolitur (täglich)
 
 on:
   schedule:
-    - cron: "50 4 * * *"   # täglich 04:50 UTC (06:50 MESZ)
+    - cron: "50 4 * * 1,3,5"   # Mo/Mi/Fr 04:50 UTC (06:50 MESZ)
   workflow_dispatch:
     inputs:
       force:
-        description: "Alle Artikel neu polieren (ignoriert Fingerprint/Rotation)"
+        description: "Alle Artikel neu polieren (ignoriert Fingerprint/Rotation und hebt die Mo/Mi/Fr-Sperre auf)"
         type: boolean
         default: false
       limit:
@@ -129,7 +138,7 @@ jobs:
           ARGS=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
           if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
-          echo "== Claude (kostenlos, bestes freies Modell, personalisiert: data/schreibstil.yaml) =="
+          echo "== Claude (kostenlos, NUR claude-sonnet-5, personalisiert: data/schreibstil.yaml) =="
           python3 scripts/claude_stilpolitur.py --fix $ARGS | tee /tmp/stilpolitur.txt
           cat /tmp/stilpolitur.txt
 

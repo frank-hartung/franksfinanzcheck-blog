@@ -4,19 +4,24 @@
 Auftrag (Frank, 25.09.2026): „Nutze für jeden bestehenden und zukünftigen
 Blogartikel nach der Offline-Optimierung zusätzlich automatisch täglich
 Claude mit einem personalisierten Prompt für meinen eigenen Schreibstil
-auf Premium-Level einer Profi-Agentur." Nachtrag selben Tages:
+auf Premium-Level einer Profi-Agentur." Nachträge selben Tages:
 „Claude sollte nur ohne API genutzt werden. Dafür sollte das aktuell
-beste kostenlose Claude-Modell gewählt werden."
+beste kostenlose Claude-Modell gewählt werden." – „Nur das Claude-Modell
+claude-sonnet-5 verwenden und die auffrischung_tage nur Montag, Mittwoch
+und Freitag."
 
 Diese Tests nageln die Verträge der Lane fest (alles offline, ohne API):
 
   1. Personalisierung: Der System-Prompt enthält Franks Stilprofil
      (data/schreibstil.yaml) UND die Marken-Stimme (brand_brain.yaml).
-  2. Kostenlos-ohne-API: nur Modelle der Frei-Liste (Puter-Katalog),
-     kein Anthropic-Key in Lane/Workflows, Puter-Brücke vorhanden.
+  2. Kostenlos-ohne-API: AUSCHLIESSLICH claude-sonnet-5 (Nachtrag
+     25.09.2026: „nur das Claude-Modell claude-sonnet-5"), kein
+     Anthropic-Key in Lane/Workflows, Puter-Brücke vorhanden.
   3. Fakten-Schutz: Zahlen/Links/Überschriften byte-identisch, sonst
      wird die KI-Antwort verworfen (nie geschrieben).
-  4. Rotation: Fingerprint-Dedupe (neu · geändert · auffrischen).
+  4. Taktung: Auffrischung NUR Mo/Mi/Fr (auffrischung_tage) –
+     Wochentag-Gate mit --force-Bypass.
+  5. Rotation: Fingerprint-Dedupe (neu · geändert · auffrischen).
 
 Läuft deterministisch ohne Netz (`python3 -m unittest discover -s scripts/tests`).
 """
@@ -57,20 +62,54 @@ class TestPersonalisierung(unittest.TestCase):
             self.assertIn(key, stil, f"schreibstil.yaml: {key} fehlt")
         self.assertTrue((brand.get("voice") or {}).get("tone"))
 
-    def test_modell_ist_bestes_kostenloses_claude(self):
+    def test_modell_ist_nur_claude_sonnet_5(self):
         cfg = cs.load_config()
-        # Auftrag: bestes KOSTENLOSES Claude-Modell – nie ein bezahlter Pfad.
-        self.assertEqual(cfg["modell"], "claude-fable-5-1")  # Fable 5.1 = Spitze
+        # Nachtrag Frank (25.09.2026): NUR claude-sonnet-5 – kein Fallback,
+        # kein anderes Modell. ST3 pinnt dasselbe Mandat (fail-closed).
         kette = [cfg["modell"]] + list(cfg.get("modell_fallback") or [])
-        for m in kette:
-            self.assertIn(m, cs.FREIE_CLAUDE_MODELLE, f"{m} nicht in der Frei-Liste")
-        self.assertIn("claude-sonnet-5", kette)  # Free-Tier-Fallback gesetzt
+        self.assertEqual(kette, ["claude-sonnet-5"])
+        self.assertIn("claude-sonnet-5", cs.FREIE_CLAUDE_MODELLE)
+        self.assertEqual(cs._st_modell_mandat(), True)
 
     def test_lane_ist_kostenlos_ohne_api(self):
         self.assertEqual(cs._st_ohne_anthropic_api(), True)
 
     def test_puter_bruecke_vereinbart(self):
         self.assertEqual(cs._st_bruecke(), True)
+
+
+class TestWochentagGate(unittest.TestCase):
+    """Nachtrag Frank (25.09.2026): auffrischung_tage NUR Mo/Mi/Fr."""
+
+    def test_nur_montag_mittwoch_freitag(self):
+        mo = datetime.datetime(2026, 9, 28, 12, 0, tzinfo=datetime.timezone.utc)
+        di = datetime.datetime(2026, 9, 29, 12, 0, tzinfo=datetime.timezone.utc)
+        mi = datetime.datetime(2026, 9, 30, 12, 0, tzinfo=datetime.timezone.utc)
+        fr = datetime.datetime(2026, 10, 2, 12, 0, tzinfo=datetime.timezone.utc)
+        stage = ["mo", "mi", "fr"]
+        self.assertTrue(cs.tag_erlaubt(stage, mo))
+        self.assertFalse(cs.tag_erlaubt(stage, di))
+        self.assertTrue(cs.tag_erlaubt(stage, mi))
+        self.assertTrue(cs.tag_erlaubt(stage, fr))
+
+    def test_force_hebt_sperre_auf(self):
+        di = datetime.datetime(2026, 9, 29, 12, 0, tzinfo=datetime.timezone.utc)
+        self.assertTrue(cs.tag_erlaubt(["mo", "mi", "fr"], di, force=True))
+
+    def test_leere_konfiguration_fail_closed(self):
+        mo = datetime.datetime(2026, 9, 28, 12, 0, tzinfo=datetime.timezone.utc)
+        self.assertFalse(cs.tag_erlaubt([], mo))
+        self.assertFalse(cs.tag_erlaubt(7, mo))  # Legacy-Zahl ist kein Wochentag
+
+    def test_config_traegt_mo_mi_fr(self):
+        cfg = cs.load_config()
+        self.assertEqual(cs.norm_stageliste(cfg["auffrischung_tage"]),
+                         ["mo", "mi", "fr"])
+
+    def test_token_normalisierung(self):
+        self.assertEqual(cs.norm_stageliste(["Mi", "Fr", "Mittwoch"]), ["mi", "fr"])
+        self.assertEqual(cs.norm_stageliste("mo"), ["mo"])
+        self.assertEqual(cs.norm_stageliste(["xx"]), [])
 
 
 class TestVerifikation(unittest.TestCase):

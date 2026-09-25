@@ -49,23 +49,27 @@ max_artikel_pro_lauf: 1
 #  Gratis-Kontingent), Brücke: scripts/puter_chat.mjs. Die Lane
 #  bleibt damit IMMER innerhalb der Kosten-Regel des Repos.
 #
-#  MODELL-AUSWAHL (Auftrag: „aktuell beste kostenlose Claude-
-#  Modell", Stand 25.09.2026): claude-fable-5-1 (Fable 5.1,
-#  Spitze der kostenlosen Modellkarte) → Fallbacks:
-#  claude-opus-5-5 → claude-sonnet-5 (Free-Tier-Workhorse,
-#  sparsamstes Kontingent). Override: STILPOLITUR_MODEL.
-#  Der Selbsttest (claude_stilpolitur.py ST3) weist alles ab,
-#  was nicht in der Frei-Liste des Puter-Katalogs steht.
+#  MODELL (Nachtrag Frank, 25.09.2026): AUSCHLIESSLICH
+#  claude-sonnet-5 – „nur das Claude-Modell claude-sonnet-5".
+#  Kein Fallback, kein anderes Modell (Selbsttest ST3 pinnt das
+#  exakt; fail-closed: Umstellung = bewusster Eingriff in ST3).
+#
+#  TAKTUNG (Nachtrag Frank, 25.09.2026): Auffrischung NUR
+#  Montag, Mittwoch, Freitag (auffrischung_tage: [mo, mi, fr] –
+#  gleiche Wochentage wie der Publikationsrhythmus Mo/Mi/Fr).
+#  Dazu Mindestalter seit letztem Lauf (auffrischung_alter_tage,
+#  Anti-Churn) und Budget max_artikel_pro_tag.
 #
 #  Verbrauch (Cost-Guard): Jeder Lauf prüft jeden Artikel, schreibt
 #  aber nur bei Bedarf (Fingerprint in data/claude_stil_state.json:
-#  neu · geändert · älter als auffrischung_tage).
+#  neu · geändert · älter als auffrischung_alter_tage).
 # ------------------------------------------------------------
 stilpolitur:
-  modell: "claude-fable-5-1"
-  modell_fallback: ["claude-opus-5-5", "claude-sonnet-5"]
+  modell: "claude-sonnet-5"
+  modell_fallback: []
   temperatur: 0.5
   max_tokens: 8192
   timeout: 300
   max_artikel_pro_tag: 12
-  auffrischung_tage: 7
+  auffrischung_tage: [mo, mi, fr]
+  auffrischung_alter_tage: 7
