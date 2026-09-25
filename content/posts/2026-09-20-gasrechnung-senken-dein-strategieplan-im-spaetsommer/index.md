@@ -1,9 +1,9 @@
 ---
 title: "Gasrechnung senken: Dein Strategieplan im Spätsommer"
 description: "Erfahre, wie du im Spätsommer deine Gasrechnung senken kannst. Mit diesen Tipps startest du vorbereitet in den Herbst und sparst bei der Heizung bares Geld."
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-25T02:49:27Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

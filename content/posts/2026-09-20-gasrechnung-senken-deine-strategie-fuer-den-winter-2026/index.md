@@ -1,9 +1,9 @@
 ---
 title: "Gasrechnung senken: Deine Strategie für den Winter 2026"
 description: Willst du effektiv deine Gasrechnung senken? Nutze den Spätsommer für die Herbst Vorbereitung. Frank Hartung zeigt dir, wie du deine Heizkosten sparst.
-date: 2026-09-20T08:45:21Z
-draft: true
-reserve: true
+date: 2026-09-25T02:49:28Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Ja, du kannst deine Gasrechnung um bis zu 15 % reduzieren, wenn du im Spätsommer die Heizanlage warten lässt. Dazu optimierst du die Thermostatventile, dämmst Wärmebrücken und stellst die Vorlauftemperatur auf 55 °C ein."
 ---
 
-Möchtest du diesen Winter bis zu 870 € an Heizkosten sparen?
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Möchtest du diesen Winter bis zu 870 € an Heizkosten sparen?
 Wer im Spätsommer die Sonne genießt, denkt selten an die kommende Kälte.
 Doch genau jetzt legst du die Basis für niedrige Kosten im Winter.
 Nutze das saisonale Tief der Gaspreise für deine persönliche Strategie.
