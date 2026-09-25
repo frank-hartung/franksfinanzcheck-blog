@@ -545,7 +545,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-24T08:55:53+00:00",
+  "ts": "2026-09-25T09:16:44+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -1058,10 +1058,19 @@
  },
  "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe": {
   "title": "Stromfresser finden: So stoppst du teure Energiediebe",
-  "ts": "2026-09-25T09:06:04+00:00",
+  "ts": "2026-09-25T09:16:41+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
+  "title": "Internet & DSL-Update: Was sich jetzt für dich ändert",
+  "ts": "2026-09-25T09:16:29+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
    "savings": ""
   }
  }

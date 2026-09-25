@@ -11,6 +11,10 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "internet"
+cover:
+  image: "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg"
+  alt: "Internet & DSL-Update: Was sich jetzt für dich ändert"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 **Stand: 24.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

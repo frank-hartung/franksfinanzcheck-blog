@@ -27,6 +27,8 @@ kurzantwort: "Teile dein monatliches Nettoeinkommen in 50 % für Fixkosten, 30�
 
 Du willst die 50‑30‑20‑Regel anwenden? Dann fragst du dich, warum dein Konto am Monatsende leer ist, obwohl das Gehalt reicht.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Stell dir einen ruhigen Abend am Küchentisch vor.  
 Du öffnest deine Banking‑App und suchst verzweifelt nach dem fehlenden Geld.  
 Wo ist es hin?  
