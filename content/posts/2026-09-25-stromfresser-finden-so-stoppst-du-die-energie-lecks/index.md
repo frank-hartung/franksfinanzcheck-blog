@@ -1,9 +1,9 @@
 ---
 title: "Stromfresser finden: So stoppst du die Energie-Lecks"
 description: Du willst effektiv Stromfresser finden und deine Rechnung senken? Ich zeige dir, wie du Standby Kosten eliminierst und 2026 richtig Strom sparst.
-date: 2026-09-25T09:01:21Z
-draft: true
-reserve: true
+date: 2026-09-25T20:06:10Z
+draft: false
+reserve_published: 2026-09-25
 tags: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
