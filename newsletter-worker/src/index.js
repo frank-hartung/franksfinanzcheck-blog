@@ -438,7 +438,11 @@ async function anmeldung(request, env, url) {
   const consent = erstein(daten, 'consent') === '1' || erstein(daten, 'consent') === 'true';
   const felle = erstein(daten, 'website');
   const zeitfalle = Number(erstein(daten, '_zeit') || 0);
-  const themen_r = (daten.themen || []).map((t) => String(t).trim()).filter(Boolean);
+  // `themen[]` ist der Feldname im HTML des Anmelde-Formulars (Hugo rendert
+  // `name="{{ feld_themen }}[]"`), `themen` der reine POST-Weg. Beides muss
+  // ankommen – sonst verliert die Anmeldung die Themenwahl still.
+  const themen_r = (daten.themen || daten['themen[]'] || [])
+    .map((t) => String(t).trim()).filter(Boolean);
   const seite = url.searchParams.get('quelle') || String(env.SITE_ORIGIN || STAND_ORIGIN).split(',')[0].trim();
   const ip = String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
   const ua = String(request.headers.get('user-agent') || '').slice(0, 300);
@@ -580,7 +584,8 @@ async function abmeldung(request, env, url) {
 async function praferenzen(request, env) {
   const daten = await koerper_lesen(request);
   const token = String((daten && daten.token && daten.token[0]) || '').trim();
-  const roh = (daten && daten.themen || []).flatMap((t) => String(t).split(',')).map((t) => t.trim()).filter(Boolean);
+  const roh = (daten && (daten.themen || daten['themen[]']) || [])
+    .flatMap((t) => String(t).split(',')).map((t) => t.trim()).filter(Boolean);
   const eintrag = await token_eintrag(env, token);
   if (!eintrag) {
     return antwort_mit('unbekannt', 'Dieser Link ist unbekannt – bitte den Link aus der Mail verwenden.', env, request, 404);
@@ -668,6 +673,9 @@ async function praferenzen_seite(env, url) {
     '</fieldset>' +
     '<button class="btn" type="submit">Auswahl speichern</button>' +
     '</form>' +
+    '<p class="hinweis">Bequemer im Browser: dieselbe Auswahl in der Vollversion auf der Website – ' +
+    'sie lädt deine Häkchen und speichert sie ohne Seitenwechsel. ' +
+    '<a href="' + STAND_ORIGIN + '/newsletter/praeferenzen/?token=' + esc(token) + '">Vollversion öffnen</a></p>' +
     '<p class="hinweis"><a href="/abmeldung?token=' + esc(token) + '">Abmelden</a> · <a href="' + STAND_ORIGIN + '/newsletter/praeferenzen/">Details zur Auswahl</a></p>' +
     HTML_FUSS;
   return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8', ...cors(env) } });

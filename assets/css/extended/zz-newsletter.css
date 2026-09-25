@@ -15,13 +15,15 @@
    Dark Mode: jede Farbe hat eine :root[data-theme="dark"]-Variante.
    ============================================================ */
 .ff-nl,
-.newsletter-footer.ff-nl-strip {
+.newsletter-footer.ff-nl-strip,
+.ff-nl-themen {
   --ff-nl-fehler: #A32B2B;
   --ff-nl-erfolg: var(--ff-emerald);
 }
 
 :root[data-theme="dark"] .ff-nl,
-:root[data-theme="dark"] .newsletter-footer.ff-nl-strip {
+:root[data-theme="dark"] .newsletter-footer.ff-nl-strip,
+:root[data-theme="dark"] .ff-nl-themen {
   --ff-nl-fehler: #FF9A9A;
   --ff-nl-erfolg: var(--ff-emerald-bright);
 }
@@ -595,33 +597,262 @@
   font-size: .78rem;
 }
 
-/* ---------- 5b. Themenliste der Präferenz-Seite ---------- */
+/* ---------- 5b. Themen-Picker der Präferenz-Seite (echte Auswahlkästchen) ----------
+   Die Liste ist Interface, nicht Dekoration: jede Karte ist ein <label> um
+   ein echtes <input type="checkbox"> – klickbar, fokussierbar, und ein
+   Screenreader liest Name UND Beschreibung mit. :has() malt den
+   Auswahlzustand auf die Karte; ohne :has() trägt die native Checkbox den
+   Zustand (kein Auswahlzustand, der verschwinden kann).
+   Umbruch-Regel (Premium-Befund 25.09.2026): Namen brechen nie mitten im
+   Wort (balance), Beschreibungen bekommen keine Halbwaisen (pretty) –
+   und Name + Beschreibung stehen in einer Karte, nicht als lose Zeile. */
 .ff-nl-themen {
-  display: grid;
-  gap: 10px;
-  margin: 18px 0;
+  display: block;
+  min-width: 0;
+  margin: 20px 0 4px;
+  padding: 0;
+  border: 0;
 }
 
-.ff-nl-themen__zeile {
+.ff-nl-themen__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0 0 12px;
+  padding: 0;
+  color: var(--primary);
+  font-size: .98rem;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.ff-nl-themen__optional {
+  color: var(--secondary);
+  font-size: .82rem;
+  font-weight: 400;
+}
+
+.ff-nl-themen__raster {
   display: grid;
-  gap: 2px;
-  padding: 12px 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 520px) {
+  .ff-nl-themen__raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ff-nl-themen__karte {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "check kopf"
+    ". text";
+  grid-template-columns: 20px 1fr;
+  column-gap: 10px;
+  row-gap: 3px;
+  padding: 14px 16px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--entry);
+  box-shadow: 0 2px 6px rgba(14, 90, 67, .05);
+  cursor: pointer;
+  transition: transform .16s ease-out;   /* DESIGN.md §7: nur transform/opacity/color */
+}
+
+.ff-nl-themen__karte:hover {
+  border-color: var(--ff-emerald);
+  transform: translateY(-1px);
+}
+
+.ff-nl-themen__karte:has(input:checked) {
+  border-color: var(--ff-emerald);
+  background: var(--ff-emerald-soft);
+}
+
+/* Fokusring (3px Signalgelb, §8) liegt an der KARTEN-Regel; trägt :has()
+   nicht, bleibt die Tastaturnavigation trotzdem sichtbar: */
+@supports not selector(:has(*)) {
+  .ff-nl-themen__check:focus-visible {
+    outline: 3px solid var(--ff-yellow);
+    outline-offset: 2px;
+  }
+}
+
+.ff-nl-themen__check {
+  grid-area: check;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--ff-emerald);
+  cursor: pointer;
+}
+
+.ff-nl-themen__kopf {
+  grid-area: kopf;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ff-nl-themen__emoji {
+  flex-shrink: 0;
+  font-size: 1.05em;
+  line-height: 1;
 }
 
 .ff-nl-themen__name {
   color: var(--primary);
   font-size: .95rem;
   font-weight: 700;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 
 .ff-nl-themen__text {
+  grid-area: text;
+  min-width: 0;
   margin: 0;
   color: var(--secondary);
   font-size: .88rem;
   line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Statuszeile: reservierter Slot (2 Zeilen) – der Zähler ersetzt den Text,
+   ohne die Seite zu schieben (PRODUCT.md §6: CLS ≈ 0). */
+.ff-nl-themen__status {
+  min-height: 2.7em;
+  margin: 12px 0 0;
+  padding: 0 2px;
+}
+
+.ff-nl-themen__status-text {
+  color: var(--secondary);
+  font-size: .85rem;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.ff-nl-themen__status-text a {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ff-nl-themen[data-status="ok"] .ff-nl-themen__status-text {
+  color: var(--ff-nl-erfolg);
+  font-weight: 600;
+}
+
+.ff-nl-themen[data-status="fehler"] .ff-nl-themen__status-text {
+  color: var(--ff-nl-fehler);
+  font-weight: 600;
+}
+
+/* Aktionszeile: feste Höhe, Link UND Knopf teilen sich denselben Slot –
+   der Wechsel (Vorschau -> Speichern) erzeugt keinen Sprung. */
+.ff-nl-themen__aktion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 10px 0 4px;
+}
+
+.ff-nl-themen [hidden] {
+  display: none !important;
+}
+
+.ff-nl-themen__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--entry);
+  color: var(--ff-emerald);
+  font-size: .92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .16s ease-out;       /* DESIGN.md §7 */
+}
+
+.ff-nl-themen__link:hover {
+  border-color: var(--ff-emerald);
+  background: var(--ff-emerald-soft);
+}
+
+.ff-nl-themen__link:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 3px;
+}
+
+/* Der Text im Knopf: umbrochen wird der Knopf, nicht das Wort. */
+.ff-nl-themen__link-text {
+  white-space: nowrap;
+}
+
+.ff-nl-themen__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ff-emerald);
+  color: #fff;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(14, 90, 67, .18);
+  transition: transform .16s ease-out;   /* DESIGN.md §7 */
+}
+
+.ff-nl-themen__button:hover {
+  background: var(--ff-emerald-dark);
+  transform: translateY(-1px);
+}
+
+.ff-nl-themen__button:active {
+  transform: translateY(0);
+}
+
+.ff-nl-themen__button:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 3px;
+}
+
+.ff-nl-themen__button[disabled] {
+  opacity: .7;
+  cursor: progress;
+  transform: none;
+}
+
+.ff-nl-themen__button-text {
+  white-space: nowrap;
+}
+
+/* Ohne-JavaScript-Hinweis: leer mit JS (verschwindet ganz), voll ohne. */
+.ff-nl-themen__noscript {
+  margin: 10px 0 0;
+  color: var(--secondary);
+  font-size: .85rem;
+  line-height: 1.6;
+}
+
+.ff-nl-themen__noscript:empty {
+  display: none;
 }
 
 /* Lose Zustände: ein Weg, der noch nicht konfiguriert ist (newsletter_weg),
@@ -905,13 +1136,66 @@ html[data-ff-nl="angemeldet"] .ff-nl-strip__schon {
   background: rgba(127, 209, 180, .12);
 }
 
+/* Themen-Picker im Dunkel-Modus: Karte auf Kartenfläche, Auswahl in der
+   Dark-Variante der Marke (12 % Smaragd-Bright – wie .ff-pc-chip),
+   Fokus bleibt Signalgelb auf Anthrazit (Akzent-2). */
+:root[data-theme="dark"] .ff-nl-themen__karte {
+  border-color: var(--border);
+  background: var(--entry);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__karte:hover {
+  border-color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__karte:has(input:checked) {
+  border-color: var(--ff-emerald-bright);
+  background: rgba(127, 209, 180, .12);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__check {
+  accent-color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__check:focus-visible {
+  outline-color: var(--ff-accent-2);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__status-text a {
+  color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__link {
+  border-color: var(--border);
+  background: var(--entry);
+  color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__link:hover {
+  background: rgba(127, 209, 180, .12);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__button {
+  background: var(--ff-emerald-bright);
+  color: #0E5A43;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+
+:root[data-theme="dark"] .ff-nl-themen__button:hover {
+  background: #6FC7A6;
+}
+
 /* ---------- 8. Fokus, Bewegung, schmale Screens ---------- */
 .ff-nl__input:focus-visible,
 .ff-nl__check:focus-visible,
 .ff-nl__chip input:focus-visible,
 .ff-nl__button:focus-visible,
 .ff-nl-strip__cta:focus-visible,
-.ff-nl-weg a:focus-visible {
+.ff-nl-weg a:focus-visible,
+.ff-nl-themen__karte:has(input:focus-visible),
+.ff-nl-themen__link:focus-visible,
+.ff-nl-themen__button:focus-visible {
   outline: 3px solid var(--ff-yellow);
   outline-offset: 3px;
 }
@@ -921,7 +1205,10 @@ html[data-ff-nl="angemeldet"] .ff-nl-strip__schon {
 :root[data-theme="dark"] .ff-nl__chip input:focus-visible,
 :root[data-theme="dark"] .ff-nl__button:focus-visible,
 :root[data-theme="dark"] .ff-nl-strip__cta:focus-visible,
-:root[data-theme="dark"] .ff-nl-weg a:focus-visible {
+:root[data-theme="dark"] .ff-nl-weg a:focus-visible,
+:root[data-theme="dark"] .ff-nl-themen__karte:has(input:focus-visible),
+:root[data-theme="dark"] .ff-nl-themen__link:focus-visible,
+:root[data-theme="dark"] .ff-nl-themen__button:focus-visible {
   outline-color: var(--ff-accent-2);
 }
 
@@ -958,7 +1245,11 @@ html[data-ff-nl="angemeldet"] .ff-nl-strip__schon {
   .ff-nl-strip .ff-nl-strip__cta,
   .ff-nl-strip .ff-nl-strip__cta:hover,
   .ff-nl-strip__cta-klammer,
-  .ff-nl-strip__cta:hover .ff-nl-strip__cta-klammer {
+  .ff-nl-strip__cta:hover .ff-nl-strip__cta-klammer,
+  .ff-nl-themen__karte,
+  .ff-nl-themen__karte:hover,
+  .ff-nl-themen__button,
+  .ff-nl-themen__button:hover {
     transform: none;
     transition: none;
   }

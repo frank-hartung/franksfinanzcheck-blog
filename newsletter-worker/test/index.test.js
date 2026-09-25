@@ -152,6 +152,13 @@ test('anmeldung: Themen ausserhalb der erlaubten IDs werden gefiltert', async ()
   assert.deepEqual(eintrag.themen, ['strom-sparen', 'mietwagen']);
 });
 
+test('anmeldung: Feldname themen[] aus dem HTML-Formular wird gespeichert (kein stiller Datenverlust)', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'y@beispiel.de', consent: '1', 'themen[]': ['versicherungen', 'falsch-id'] });
+  const eintrag = await kv.get('abo:y@beispiel.de', 'json');
+  assert.deepEqual(eintrag.themen, ['versicherungen']);
+});
+
 test('anmeldung: Honeypot gefuellt -> still "ok", nichts gespeichert', async () => {
   const kv = kvLeeren();
   dispatche = [];
@@ -376,6 +383,19 @@ test('praferenzen: abgemeldete Adresse -> 410', async () => {
   assert.equal(antwort.status, 410);
 });
 
+test('praferenzen: themen[] (HTML-Feldname) wird wie themen akzeptiert', async () => {
+  const kv = kvLeeren();
+  await anmelden(kv, { email: 'th2@beispiel.de', consent: '1' });
+  const eintrag = await kv.get('abo:th2@beispiel.de', 'json');
+  await worker.fetch(form_request('/bestaetigung', { token: eintrag.token }), env_mit(kv));
+  const antwort = await worker.fetch(
+    form_request('/praferenzen', { token: eintrag.token, 'themen[]': ['mietwagen'] }),
+    env_mit(kv),
+  );
+  assert.equal((await antwort.json()).status, 'gespeichert');
+  assert.deepEqual((await kv.get('abo:th2@beispiel.de', 'json')).themen, ['mietwagen']);
+});
+
 
 function get_request(pfad) {
   return new Request(`http://abos.test${pfad}`, {
@@ -469,6 +489,10 @@ test('GET /praferenzen: active -> Formular, Checkboxen pre-checked, Labels aus T
   assert.ok(html.includes('Internet &amp; DSL'), 'Label aus THEMEN_LABELS fehlt (2)');
   assert.ok(html.includes('name="token" value="tok-PRÄF"'), 'Token muss im Formular stehen');
   assert.ok(html.includes('method="post" action="/praferenzen"'), 'Formular muss POSTen');
+  assert.ok(
+    html.includes('/newsletter/praeferenzen/?token=tok-PRÄF'),
+    'Vollversions-Link auf die Website muss das Token tragen',
+  );
 });
 
 test('GET /praferenzen: ohne THEMEN_LABELS -> Fallback auf die ID', async (t) => {
