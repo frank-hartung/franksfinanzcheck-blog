@@ -228,5 +228,69 @@ class CaptureWacheTest(unittest.TestCase):
             self.assertEqual(zustand, "inert", f"Funde: {funde}")
 
 
+class FehlerzeileTraegtDieUrsacheTest(unittest.TestCase):
+    """Die letzte ❌-Zeile ist die Annotation im Lauf – sie muss den Grund
+    nennen. Am 25.09.2026 stand dort nur „nichts versendet“, während die
+    Ursache (HTTP 403 · Error 1010 an der Kante) im Journal lag."""
+
+    def setUp(self):
+        self.td = tempfile.mkdtemp(prefix="ff-digest-fehler-")
+        os.makedirs(os.path.join(self.td, "data"), exist_ok=True)
+        konf = {"email": {"absender": {"name": "F", "email": "news@beispiel.de"},
+                          "versand": {"transport": "resend"}},
+                "design": {"hell": {}}}
+        self.konf = konf
+
+    def tearDown(self):
+        import shutil
+        shutil.rmtree(self.td, ignore_errors=True)
+
+    def _journal(self, ausgabe: str, detail: str) -> None:
+        with open(os.path.join(self.td, "data", "newsletter_journal.jsonl"),
+                  "a", encoding="utf-8") as fh:
+            fh.write(json.dumps({"ts": "2026-09-25T10:16:56+00:00", "modus": "sendefile",
+                                 "ausgabe": ausgabe, "empfaenger": "5ebc8f38444904a8",
+                                 "transport": "resend", "status": "fehler",
+                                 "detail": detail}, ensure_ascii=False) + "\n")
+
+    def test_testversand_zeile_nennt_die_kante(self):
+        import contextlib
+        import io as _io
+        self._journal("test-2026-09-25", "HTTP 403 · KANTE (Error 1010, Signaturfilter)")
+        echt = versand.sende_datei
+        versand.sende_datei = lambda *a, **k: 2
+        buf = _io.StringIO()
+        try:
+            with contextlib.redirect_stdout(buf):
+                rc = digest._versand_test(self.td, "<p>x</p>", "x", "Betreff", "",
+                                          "test@beispiel.de", self.konf, "2026-09-25")
+        finally:
+            versand.sende_datei = echt
+        self.assertEqual(rc, 2)
+        zeile = [z for z in buf.getvalue().splitlines() if "TESTVERSAND FEHLGESCHLAGEN" in z]
+        self.assertTrue(zeile, buf.getvalue())
+        self.assertIn("KANTE", zeile[-1])
+        self.assertIn("1010", zeile[-1])
+
+    def test_listen_halt_zeile_nennt_die_ursache(self):
+        self._journal("liste-2026-09-25", "HTTP 403 · KANTE (Error 1010)")
+        state_pfad = os.path.join(self.td, "data", "newsletter_state.json")
+        with open(state_pfad, "w", encoding="utf-8") as fh:
+            json.dump({}, fh)
+        import contextlib
+        import io as _io
+        buf = _io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = digest._status_nach_versand(self.td, "Betreff", "2026-09-25",
+                                             [{"email": "a@b.de", "token": "t"}], 2)
+        self.assertEqual(rc, 2)
+        zeile = [z for z in buf.getvalue().splitlines() if "VERSAND-STATUS UNKLAR" in z]
+        self.assertTrue(zeile, buf.getvalue())
+        self.assertIn("1010", zeile[-1])
+        # Der Halt ist gesetzt (Duplikatschutz bleibt scharf).
+        with open(state_pfad, encoding="utf-8") as fh:
+            self.assertIn("versand_unklar", json.load(fh))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
