@@ -42,7 +42,7 @@ class Kalender(unittest.TestCase):
     def test_sommer_und_winterzeit_berlin(self):
         for tag in ("2026-03-31", "2026-10-27"):
             with self.subTest(tag=tag):
-                self.assertEqual("", ns.versandpause({}, dt.datetime.fromisoformat(tag + "T05:05:00+00:00")))
+                self.assertEqual("", ns.versandpause({}, dt.datetime.fromisoformat(tag + "T04:30:00+00:00")))
         # UTC-Montag, in Berlin bereits Dienstag: lokaler Kalendertag entscheidet.
         self.assertEqual("", ns.versandpause({}, dt.datetime.fromisoformat("2026-09-21T22:05:00+00:00")))
 
@@ -59,7 +59,7 @@ class Kalender(unittest.TestCase):
         self.assertEqual("nachholen", nc.entscheide([], zeit("2026-09-22", 12))["handlung"])
 
     def test_workflows_und_nachholen_haben_dieselbe_kadenz(self):
-        for name, cron in (("newsletter-daily.yml", '5 5 * * 2,5'), ("newsletter-cadence.yml", '11 8 * * 2,5')):
+        for name, cron in (("newsletter-daily.yml", '30 4 * * 2,5'), ("newsletter-cadence.yml", '11 8 * * 2,5')):
             self.assertIn(f'cron: "{cron}"', (ROOT / '.github/workflows' / name).read_text())
         with patch.object(nc, '_gh') as gh:
             gh.return_value.returncode = 0
@@ -149,11 +149,11 @@ class WebsiteSnapshot(unittest.TestCase):
         self.assertEqual(ns.versandfenster_text(), roh["versandfenster"])
 
     def test_uhrzeiten_sind_gerechnet_nicht_abgeschrieben(self):
-        """05:05 UTC ist 07:05 MESZ und 06:05 MEZ – derselbe Termin, zwei Zonen."""
-        self.assertEqual(dt.time(5, 5), ns.send_uhrzeit_utc())
-        self.assertEqual(dt.time(6, 5), ns.send_uhrzeit_winter())
-        self.assertIn("07:05", ns.uhrzeit_zeile())
-        self.assertIn("06:05", ns.uhrzeit_zeile())
+        """04:30 UTC ist 06:30 MESZ und 05:30 MEZ – derselbe Termin, zwei Zonen."""
+        self.assertEqual(dt.time(4, 30), ns.send_uhrzeit_utc())
+        self.assertEqual(dt.time(5, 30), ns.send_uhrzeit_winter())
+        self.assertIn("06:30", ns.uhrzeit_zeile())
+        self.assertIn("05:30", ns.uhrzeit_zeile())
 
     def test_snapshot_traegt_kein_kalenderdatum(self):
         roh = json.dumps(json.loads(ns.site_kadenz_text()), ensure_ascii=False)

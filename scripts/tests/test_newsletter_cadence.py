@@ -8,7 +8,7 @@ Diese Datei friert die Entscheidungslogik der Kadenz-Wache ein:
 
   * Werktag ohne jeden Laufversuch (der Vorfall) → nachholen;
   * Ruhetag, bedienter Tag, laufender oder roter Lauf → keine Aktion;
-  * die Fenstergrenze 04:00 UTC und die Vortags-Abgrenzung;
+  * die Fenstergrenze 03:30 UTC und die Vortags-Abgrenzung;
   * Trockenlauf: Befund ohne Dispatch ist rc 1, kein Netz-Call.
 """
 from __future__ import annotations
@@ -48,16 +48,16 @@ class Entscheidung(unittest.TestCase):
     def test_vorfall_werktag_ohne_jeden_versuch_wird_nachgeholt(self):
         erg = nc.entscheide([lauf("alt", "2026-09-22T10:05:00Z")], FREITAG)
         self.assertEqual("nachholen", erg["handlung"])
-        self.assertIn("05:05", erg["befund"], "Befund nennt den Soll-Termin")
+        self.assertIn("04:30", erg["befund"], "Befund nennt den Soll-Termin")
         self.assertIsNone(erg["heutiger_lauf"])
 
     def test_ruhetag_fordert_nichts(self):
         erg = nc.entscheide([], SAMSTAG)
         self.assertEqual("ruhetag", erg["handlung"])
 
-    def test_fenstergrenze_04_00_utc(self):
-        zu_frueh = nc.entscheide([lauf("x", "2026-09-25T03:59:00Z")], FREITAG)
-        puenktlich = nc.entscheide([lauf("y", "2026-09-25T05:06:00Z")], FREITAG)
+    def test_fenstergrenze_03_30_utc(self):
+        zu_frueh = nc.entscheide([lauf("x", "2026-09-25T03:29:00Z")], FREITAG)
+        puenktlich = nc.entscheide([lauf("y", "2026-09-25T03:31:00Z")], FREITAG)
         self.assertEqual("nachholen", zu_frueh["handlung"])
         self.assertEqual("bedient", puenktlich["handlung"])
 
@@ -82,9 +82,9 @@ class Entscheidung(unittest.TestCase):
                               "url": "", "event": "schedule"}], FREITAG)
         self.assertEqual("nachholen", erg["handlung"])
 
-    def test_fenster_start_faellt_in_den_vortag_vor_vier_uhr(self):
+    def test_fenster_start_faellt_in_den_vortag_vor_dem_fenster(self):
         frueh = dt.datetime(2026, 9, 25, 2, 0, tzinfo=dt.timezone.utc)
-        self.assertEqual(dt.datetime(2026, 9, 24, 4, 0, tzinfo=dt.timezone.utc),
+        self.assertEqual(dt.datetime(2026, 9, 24, 3, 30, tzinfo=dt.timezone.utc),
                          nc.fenster_start(frueh))
 
 

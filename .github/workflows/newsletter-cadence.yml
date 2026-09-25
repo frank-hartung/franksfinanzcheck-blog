@@ -10,7 +10,7 @@
 #  nichts. „Ausgefallen ist nicht bestanden“ – diesmal für Workflows.
 #
 #  DIESE WACHE: zählt dienstags und freitags vormittags nach, ob der
-#  Newsletter-Daily ÜBERHAUPT versucht wurde (Fenster ab 04:00 UTC).
+#  Newsletter-Daily ÜBERHAUPT versucht wurde (Fenster ab 03:30 UTC).
 #  Fehlt jeder Versuch, holt sie den Lauf mit `planmaessig=true` nach –
 #  exakt die Freigabestufe des verpassten Crons, nicht mehr (der
 #  Newsletter-Daily bleibt dreifach verriegelt: Secrets, Freigabe,

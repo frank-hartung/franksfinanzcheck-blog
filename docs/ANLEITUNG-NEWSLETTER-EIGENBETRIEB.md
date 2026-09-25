@@ -22,7 +22,7 @@ Besucher ──> /newsletter/ (Hugo, Shortcode) ──POST──> Worker abos.fr
                                                          └─Dispatch─> GitHub Actions (Lifecycle)
                                                                         │  Bestätigungs-Mail (14 Tage)
                                                                         ▼
-Besucher <──Resend API──  GitHub Actions (daily 05:05 UTC)  <──Export── Worker (x-ff-Key)
+Besucher <──Resend API──  GitHub Actions (daily 04:30 UTC)  <──Export── Worker (x-ff-Key)
    └── Mail-Links zeigen auf den Worker:
         abmelden:  abos…/abmeldung?token=T   (One-Klick, = List-Unsubscribe)
         Themen:    abos…/praferenzen?token=T (Formular, pre-checked, ohne JS)
@@ -187,7 +187,7 @@ Themen-Links führen auf die Infoseiten (ohne Token), `--check` bleibt grün.
 ### Schritt 8 – Freigabe (erste Live-Ausgabe)
 
 Derselbe Workflow ohne `test_adresse` (oder am nächsten regulären
-Versandtag, Di/Fr 05:05 UTC). Bei 0 Abonnenten sendet der Listen-Versand
+Versandtag, Di/Fr 04:30 UTC). Bei 0 Abonnenten sendet der Listen-Versand
 ehrlich nichts und sagt es (`B2 … 0 aktive Abonnenten (leer –
 Normalzustand vor der Freischaltung)`).
 
@@ -195,7 +195,7 @@ Normalzustand vor der Freischaltung)`).
 
 | Uhr (UTC) | Workflow | Was passiert |
 |---|---|---|
-| Di & Fr 05:05 | `newsletter-daily.yml` | Wachen (Zustellbarkeit mit Netz, Selftests, Capture) → Digest-Bau → QA → **nur an die Liste**, wenn Versandtag + kein Halt; Status-Commit (State + Journal, nur Hashes) |
+| Di & Fr 04:30 | `newsletter-daily.yml` | Wachen (Zustellbarkeit mit Netz, Selftests, Capture) → Digest-Bau → QA → **nur an die Liste**, wenn Versandtag + kein Halt; Status-Commit (State + Journal, nur Hashes) |
 | Di & Fr 08:11 | `newsletter-cadence.yml` | Vorfall-Erkennung: lief der tägliche Versand nicht / rot? → Nachhol-Trigger (08:11 UTC = 10:11 MESZ, nach dem Soll-Termin; `planmaessig` = Ruhe am Ruhtag) |
 | stündlich :17 | `newsletter-lifecycle.yml` | Nachgang: Bestätigungs-Mails, deren Worker-Dispatch fehlgeschlagen ist (idempotent über Token) |
 | manuell | `newsletter-lifecycle.yml` | `aktion=bestaetigung` + `token` (einzelne Bestätigung neu) bzw. `aktion=nachgang` |

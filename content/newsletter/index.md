@@ -72,7 +72,7 @@ Schlagzeile.
 1. **Bestätigen.** Du bekommst eine Bestätigungs-Mail (Double-Opt-In). Erst dein
    Klick trägt dich ein – niemand kann deine Adresse ohne dich anmelden.
 2. **Lesen.** Die erste Ausgabe kommt am nächsten Dienstag oder Freitag, morgens
-   gegen 07:05 Uhr (im Winter 06:05 Uhr) deutscher Zeit; die Zustellung kann sich
+   gegen 06:30 Uhr (im Winter 05:30 Uhr) deutscher Zeit; die Zustellung kann sich
    verzögern. Am Ende jeder Mail steht, wann die nächste kommt.
 3. **Steuern oder gehen.** Themen ändern in den
    [Präferenzen](/newsletter/praeferenzen/), abmelden mit einem Klick unten in

@@ -31,11 +31,13 @@ VERSANDTAGE = (1, 4)  # datetime.weekday(): Dienstag, Freitag
 RUECKBLICK_TAGE = 7    # überlappend; Artikel-Deduplizierung bleibt aktiv
 MAX_PRO_WOCHE = 2
 
-# Der planmäßige Termin in Berliner Zeit. Der Cron steht auf 05:05 UTC; das ist
-# 07:05 MESZ und 06:05 MEZ – beide Angaben sind dasselbe Versprechen in zwei
+# Der planmäßige Termin in Berliner Zeit. Der Cron steht auf 04:30 UTC; das ist
+# 06:30 MESZ und 05:30 MEZ – beide Angaben sind dasselbe Versprechen in zwei
 # Zeitzonen-Schreibweisen. Gerechnet wird in Berliner Zeit, damit die Umstellung
 # im März und im Oktober keine zweite Wahrheit erzeugt.
-SEND_UHRZEIT = dt.time(7, 5)
+# 25.09.2026: 07:05 → 06:30 MESZ (Versandzeitpunkt-Optimierung, B2C-Frühpeak,
+# siehe NEWSLETTER-VERSANDZEIT-0630-2026-09-25.md).
+SEND_UHRZEIT = dt.time(6, 30)
 
 WOCHENTAGE = ("Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag",
               "Samstag", "Sonntag")
@@ -100,9 +102,9 @@ def versandtage_adverb(und: str = " und ") -> str:
 
 
 def send_uhrzeit_utc() -> dt.time:
-    """Der Termin in UTC (05:05) – gerechnet, nicht abgeschrieben.
+    """Der Termin in UTC (04:30) – gerechnet, nicht abgeschrieben.
 
-    Der Cron steht auf 05:05 UTC. Wer die Berliner Uhrzeit daraus ableitet,
+    Der Cron steht auf 04:30 UTC. Wer die Berliner Uhrzeit daraus ableitet,
     statt sie zu notieren, hat nach der Zeitumstellung keine zweite Wahrheit.
     """
     sommer = dt.datetime.combine(dt.date(2026, 7, 1), SEND_UHRZEIT, ZEITZONE)
@@ -110,7 +112,7 @@ def send_uhrzeit_utc() -> dt.time:
 
 
 def send_uhrzeit_winter() -> dt.time:
-    """Derselbe Termin in MEZ (06:05): UTC-Termin plus Winter-Versatz Berlins."""
+    """Derselbe Termin in MEZ (05:30): UTC-Termin plus Winter-Versatz Berlins."""
     versatz = dt.datetime(2026, 1, 15, 12, 0, tzinfo=ZEITZONE).utcoffset()
     utc = dt.datetime.combine(dt.date(2026, 1, 15), send_uhrzeit_utc(),
                               dt.timezone.utc)
@@ -118,7 +120,7 @@ def send_uhrzeit_winter() -> dt.time:
 
 
 def uhrzeit_zeile() -> str:
-    """„morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter)“."""
+    """„morgens gegen 06:30 Uhr deutscher Zeit (05:30 Uhr im Winter)“."""
     return (f"morgens gegen {SEND_UHRZEIT:%H:%M} Uhr deutscher Zeit "
             f"({send_uhrzeit_winter():%H:%M} Uhr im Winter)")
 

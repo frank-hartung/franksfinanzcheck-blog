@@ -1,13 +1,13 @@
 {
   "_doku": "Snapshot des Versandvertrags für die Website – generiert von `python3 scripts/newsletter_schedule.py --export-site`, nicht handgepflegt. Drift prüft --pruefen-site bzw. scripts/tests/test_newsletter_schedule.py. Enthält keine Kalenderdaten: den nächsten Termin rechnet static/premium/ff-newsletter.js in Europe/Berlin.",
   "max_pro_woche": 2,
-  "uhrzeit": "07:05",
-  "uhrzeit_winter": "06:05",
-  "uhrzeit_zeile": "morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter)",
+  "uhrzeit": "06:30",
+  "uhrzeit_winter": "05:30",
+  "uhrzeit_zeile": "morgens gegen 06:30 Uhr deutscher Zeit (05:30 Uhr im Winter)",
   "versandtage_text": "Dienstag und Freitag",
   "versandtage_oder": "Dienstag oder Freitag",
   "versandtage_adverb": "dienstags und freitags",
-  "versandfenster": "dienstags und freitags, morgens gegen 07:05 Uhr deutscher Zeit (06:05 Uhr im Winter) – höchstens zwei Ausgaben pro Kalenderwoche",
+  "versandfenster": "dienstags und freitags, morgens gegen 06:30 Uhr deutscher Zeit (05:30 Uhr im Winter) – höchstens zwei Ausgaben pro Kalenderwoche",
   "tage": [
     {
       "schluessel": "1",

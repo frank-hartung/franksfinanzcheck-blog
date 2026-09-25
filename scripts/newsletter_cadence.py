@@ -13,7 +13,7 @@ sie war genau die Lücke, die das Qualitäts-Gate-Vorfall-Dokument (18.09.)
 
 Diese Wache zählt daher NACH, dienstags und freitags vormittags:
 
-  * Existiert seit 04:00 UTC des Tages ÜBERHAUPT EIN Versuch des
+  * Existiert seit 03:30 UTC des Tages ÜBERHAUPT EIN Versuch des
     Newsletter-Daily-Laufs (queued, in_progress, success oder failure)?
   * NEIN → der planmäßige Digest ist still ausgefallen. Die Wache holt ihn
     nach: `gh workflow run newsletter-daily.yml -f planmaessig=true` – der
@@ -56,12 +56,12 @@ from newsletter_schedule import VERSANDTAGE, RUECKBLICK_TAGE
 WORKFLOW_DATEI = "newsletter-daily.yml"
 WORKFLOW_NAME = "Newsletter-Daily (Capture-Wache + Digest)"
 
-# Erwartung: cron „5 5 * * 2,5“. Der Tag gilt als bedient, wenn ab 04:00 UTC
-# (eine Stunde Gnade vor dem Soll-Termin) irgendein Versuch existiert. Die
-# Wache läuft bewusst SPÄTER am Morgen: ein zu früher Lauf würde den (unter
+# Erwartung: cron „30 4 * * 2,5“. Der Tag gilt als bedient, wenn ab 03:30 UTC
+# (eine Stunde Gnade vor dem Soll-Termin 04:30) irgendein Versuch existiert.
+# Die Wache läuft bewusst SPÄTER am Morgen: ein zu früher Lauf würde den (unter
 # GitHub-Last oft verschobenen) Cron nicht abwarten können; zu spät wäre eine
 # verschenkte Zustell-Morgenzeit. 08:11 UTC = 10:11 MESZ ist der Kompromiss.
-FENSTER_START_UHRZEIT = dt.time(4, 0)
+FENSTER_START_UHRZEIT = dt.time(3, 30)
 DISPATCH_VERSUCHE = 3           # der Nachhol-Call selbst ist ein Netz-Call
 DISPATCH_PAUSE = (3.0, 8.0)
 
@@ -78,14 +78,14 @@ def iso(ts: dt.datetime) -> str:
 
 
 def fenster_start(jetzt: dt.datetime) -> dt.datetime:
-    """04:00 UTC des Tages, an dem der Cron erwartet wurde."""
+    """03:30 UTC des Tages, an dem der Cron erwartet wurde."""
     start = jetzt.astimezone(dt.timezone.utc).replace(hour=FENSTER_START_UHRZEIT.hour,
                                                       minute=FENSTER_START_UHRZEIT.minute,
                                                       second=0, microsecond=0)
     if jetzt < start:
-        # Die Wache läuft nie vor 04:00 UTC; für Tests und manuelle Aufrufe
+        # Die Wache läuft nie vor 03:30 UTC; für Tests und manuelle Aufrufe
         # vor dem Soll-Fenster zählt der VORTAG als erwarteter Tag nicht –
-        # ein Aufruf um 02:00 UTC prüft den KOMMENDEN Tag (der Cron um 05:05
+        # ein Aufruf um 02:00 UTC prüft den KOMMENDEN Tag (der Cron um 04:30
         # ist noch gar nicht fällig → Ruhetag-Logik greift ohnehin).
         start -= dt.timedelta(days=1)
     return start
@@ -140,7 +140,7 @@ def entscheide(laeufe: list[dict], jetzt: dt.datetime) -> dict:
                                   "url": frisch.get("url")}}
     return {"handlung": "nachholen",
             "befund": (f"Kein einziger Laufversuch von „{WORKFLOW_NAME}“ seit "
-                       f"{iso(start)} (Soll: 05:05 UTC) – der planmäßige Cron wurde "
+                       f"{iso(start)} (Soll: 04:30 UTC) – der planmäßige Cron wurde "
                        f"von GitHub still verworfen oder ist nie angekommen. "
                        f"Der Digest wird planmäßig nachgeholt."),
             "heutiger_lauf": None}
@@ -261,13 +261,13 @@ def _selftest() -> int:
     # 2) Der Vorfall: Freitag, kein einziger Versuch → nachholen
     e = entscheide([lauf("alt", "2026-09-22T10:05:00Z")], freitag)
     pruefe(e["handlung"] == "nachholen", f"Vorfall nicht erkannt: {e}")
-    pruefe("05:05" in e["befund"], f"Befund nennt den Soll-Termin nicht: {e['befund']}")
+    pruefe("04:30" in e["befund"], f"Befund nennt den Soll-Termin nicht: {e['befund']}")
 
-    # 3) Grenze des Fensters: ein Lauf um 03:59 zählt nicht, 04:00 zählt
-    e = entscheide([lauf("frueh", "2026-09-25T03:59:00Z")], freitag)
-    pruefe(e["handlung"] == "nachholen", f"03:59-Lauf fälschlich gezählt: {e}")
-    e = entscheide([lauf("puenktlich", "2026-09-25T05:06:00Z")], freitag)
-    pruefe(e["handlung"] == "bedient", f"05:06-Lauf nicht gezählt: {e}")
+    # 3) Grenze des Fensters: ein Lauf um 03:29 zählt nicht, 03:30 zählt
+    e = entscheide([lauf("frueh", "2026-09-25T03:29:00Z")], freitag)
+    pruefe(e["handlung"] == "nachholen", f"03:29-Lauf fälschlich gezählt: {e}")
+    e = entscheide([lauf("puenktlich", "2026-09-25T03:30:00Z")], freitag)
+    pruefe(e["handlung"] == "bedient", f"03:30-Lauf nicht gezählt: {e}")
 
     # 4) Verschobener Cron ist auch bedient (10:05 am Vortag ist KEIN Fall –
     #    gestern zählt nicht, heute zählt nur heute)
@@ -302,13 +302,13 @@ def _selftest() -> int:
     pruefe(erg["rc"] == 0, f"Ruhetag soll rc=0 liefern: {erg}")
 
     # 9) Fensterlogik in den Morgenstunden: ein Aufruf um 02:00 UTC liegt
-    #    VOR dem Fensterstart 04:00 – der Start fällt damit auf den Vortag.
-    #    Bewusst so: zwischen 00:00 und 04:00 UTC ist der laufende Tag noch
-    #    nicht fällig (Soll ist 05:05), die Wache läuft regulär erst 08:11.
+    #    VOR dem Fensterstart 03:30 – der Start fällt damit auf den Vortag.
+    #    Bewusst so: zwischen 00:00 und 03:30 UTC ist der laufende Tag noch
+    #    nicht fällig (Soll ist 04:30), die Wache läuft regulär erst 08:11.
     frueh = dt.datetime(2026, 9, 25, 2, 0, tzinfo=dt.timezone.utc)
     start = fenster_start(frueh)
-    pruefe(start == dt.datetime(2026, 9, 24, 4, 0, tzinfo=dt.timezone.utc),
-           f"Fensterstart vor 04:00 falsch: {iso(start)}")
+    pruefe(start == dt.datetime(2026, 9, 24, 3, 30, tzinfo=dt.timezone.utc),
+           f"Fensterstart vor 03:30 falsch: {iso(start)}")
 
     # 10) Dienstag 10:05 mit heutigem (dienstägigem) Lauf = bedient – der
     #     verspätet gekommene Cron zählt als heutiger Lauf

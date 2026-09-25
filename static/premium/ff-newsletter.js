@@ -194,7 +194,7 @@
    * Fakt, kein Versprechen, das der Double-Opt-In noch kippen kann.
    */
   function naechster(heute, tage, uhrzeit) {
-    var teile = String(uhrzeit || '07:05').split(':');
+    var teile = String(uhrzeit || '06:30').split(':');
     var stunde = Number(teile[0]) || 0;
     var minute = Number(teile[1]) || 0;
     var vorVersand = heute.stunde < stunde ||
@@ -242,7 +242,7 @@
     if (!tage.length) return;
     plan.setAttribute('data-ff-nl-plan', 'bereit');
 
-    var uhrzeit = plan.getAttribute('data-ff-nl-uhrzeit') || '07:05';
+    var uhrzeit = plan.getAttribute('data-ff-nl-uhrzeit') || '06:30';
     var kacheln = plan.querySelectorAll('[data-ff-nl-tag]');
     Array.prototype.forEach.call(kacheln, function (kachel) {
       var nummer = Number(kachel.getAttribute('data-ff-nl-tag'));

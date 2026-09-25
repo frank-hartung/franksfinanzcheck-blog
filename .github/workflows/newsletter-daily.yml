@@ -18,7 +18,7 @@
 #      Adressen berühren diesen Repo-Workflow nie (nur Hashes im Journal)
 #
 # „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
-# planmäßige Cron (05:05 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
+# planmäßige Cron (04:30 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
 # verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
 # der 05:05-Cron blieb komplett aus, am Vortag kam er erst ~10:05 UTC). Die
 # Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
@@ -34,7 +34,7 @@ name: Newsletter-Daily (Capture-Wache + Digest)
 
 on:
   schedule:
-    - cron: "5 5 * * 2,5"     # Dienstag/Freitag: 07:05 MESZ / 06:05 MEZ
+    - cron: "30 4 * * 2,5"    # Dienstag/Freitag: 06:30 MESZ / 05:30 MEZ
   workflow_dispatch:
     inputs:
       tage:
