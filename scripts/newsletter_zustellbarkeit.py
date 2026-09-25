@@ -85,8 +85,16 @@ import newsletter_schedule as _schedule  # noqa: E402  (Di/Fr + Soll-Uhrzeit, ei
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ZONE_Standard = "franksfinanzcheck.de"
 PRÜFER_KENNUNG = "FranksFinanzcheck-Zustellbarkeitswaechter/1.0"
-DOH_ENDPUNKTE = ("https://dns.google/resolve?dnssec=false&",
-                 "https://cloudflare-dns.com/dns-query?")
+# Zwei Resolver, EINE Abfrage je Resolver. Der Parameter wird genau einmal
+# angehängt – mit `urllib.parse.urlencode`, nicht per Zeichenkette. Bis
+# 25.09.2026 endeten die Basen auf „?“ UND die Frage begann mit „?“:
+# dns.google antwortete HTTP 400, cloudflare-dns.com ebenso, und die Wache
+# meldete daraus „DNS nicht erreichbar“ (C0/C7 gelb), obwohl das Netz frei
+# war – `curl 'https://dns.google/resolve?name=…&type=TXT'` bewies es. Ein
+# Messfehler, der wie ein Netzausfall aussieht, ist der teuerste Fehler
+# einer Wache: er entschuldigt jeden echten Befund gleich mit.
+DOH_ENDPUNKTE = (("https://dns.google/resolve", {"dnssec": "false"}),
+                 ("https://cloudflare-dns.com/dns-query", {}))
 DOH_ZEITLIMIT = 8
 RESEND_API = "https://api.resend.com"
 RESEND_FREE_TAGESGRENZE = 100   # Resend Free: 3000/Monat, davon 100/Tag
@@ -122,19 +130,29 @@ def _txt_fetzen(antwort: str) -> str:
     return "".join(teile) if teile else antwort.strip().strip('"')
 
 
+def doh_url(basis: str, name: str, typ: str, extra: dict | None = None) -> str:
+    """Die vollständige DoH-Abfrage-URL – Parameter nur EINMAL, kodiert."""
+    parameter = {"name": name, "type": typ}
+    parameter.update(extra or {})
+    return basis + "?" + urllib.parse.urlencode(parameter)
+
+
 def _doh(name: str, typ: str) -> tuple[int, list[str]]:
     """Eine DNS-Frage, mehrere Resolver. → (RCode, Antworten).
 
     RCode 3 (NXDOMAIN) ist eine AUSSAGE („den Eintrag gibt es nicht"), ein
     Netzwerkfehler ist das nicht – die Wache darf eine Blockade nicht als
-    fehlenden Eintrag melden und umgekehrt.
+    fehlenden Eintrag melden und umgekehrt. Und ein HTTP-Fehler der
+    Resolver ist ein dritter Fall: dann war die ABFRAGE falsch (4xx) oder
+    die Kante hat sie abgewiesen (403) – beides wird mit Status gemeldet,
+    nicht als „Netz weg“ verkleidet.
     """
-    frage = f"?name={urllib.parse.quote(name)}&type={typ}"
     letzte_fehler: list[str] = []
-    for grund in DOH_ENDPUNKTE:
+    for basis, extra in DOH_ENDPUNKTE:
+        knoten = urllib.parse.urlsplit(basis).netloc
         try:
             anfrage = urllib.request.Request(
-                grund + frage, method="GET",
+                doh_url(basis, name, typ, extra), method="GET",
                 headers={"accept": "application/dns-json",
                          "User-Agent": PRÜFER_KENNUNG})
             with urllib.request.urlopen(anfrage, timeout=DOH_ZEITLIMIT) as antwort:
@@ -144,10 +162,27 @@ def _doh(name: str, typ: str) -> tuple[int, list[str]]:
             if typ == "TXT":
                 zeilen = [_txt_fetzen(z) for z in zeilen]
             return code, [z.strip() for z in zeilen if z and z.strip()]
+        except urllib.error.HTTPError as exc:  # 4xx = Abfrage falsch gebaut
+            letzte_fehler.append(f"{knoten}: HTTP {exc.code}")
         except Exception as exc:  # noqa: BLE001  (DNS, TLS, Timeout, Sperre …)
-            letzte_fehler.append(f"{urllib.parse.urlsplit(grund).netloc}: "
-                                 f"{exc.__class__.__name__}")
+            letzte_fehler.append(f"{knoten}: {exc.__class__.__name__}")
     return -1, ["; ".join(letzte_fehler)]
+
+
+def messluecke(fehler: list[str]) -> str:
+    """Der Ist-Text einer Messlücke – mit der Unterscheidung, die zählt.
+
+    Antworten BEIDE Resolver mit 4xx, ist die Abfrage falsch gebaut (Fehler
+    der Wache); alles andere ist ein Ausgangsproblem (Netz, TLS, Blockade).
+    Ohne diese Unterscheidung stand am 25.09.2026 „DNS nicht erreichbar“
+    über einem HTTP 400, das die Wache sich selbst gebaut hatte.
+    """
+    roh = "; ".join(fehler)[:200] or "keine Antwort der Resolver"
+    if fehler and all("HTTP 4" in f for f in fehler):
+        return (roh + " – alle Resolver haben die ABFRAGE abgewiesen (4xx): "
+                "das ist ein Fehler dieser Wache (URL/Parameter), kein "
+                "Netzausfall.")
+    return roh
 
 
 AUFLOESER = _doh          # im Selbsttest austauschbar – dann trifft kein Netz
@@ -190,17 +225,32 @@ def _api_ruf(url: str, *, headers: dict | None = None, timeout: int = 15) -> tup
 NETZ_RUF = _api_ruf       # im Selbsttest austauschbar
 
 
-def kanten_block(code: int, antwort: str) -> bool:
+_KANTEN_MUSTER = re.compile(
+    r'(1010|browser.?s signature|Access denied[^"]*signature|Just a moment)', re.I)
+
+
+def _kanten_block_reserve(code: int, antwort: str) -> bool:
     """403 der Cloudflare-KANTE (nicht des Anbieters): Signaturfilter-Marke.
 
-    Genau diese Antwort trägt `Error 1010` / „browser's signature" – der
-    Anbieter hat die Anfrage nie gesehen.
+    Reserve-Kopie – im Normalfall gilt `kanten_block` aus dem MAILER, denn
+    Wache und Versand müssen dieselbe Antwort gleich lesen. Diese Kopie
+    greift nur, wenn der Mailer nicht importierbar ist (dann ist der
+    Versand ohnehin kaputt, und C7 soll trotzdem messen können).
     """
     if code != 403:
         return False
-    m = re.search(r'(1010|browser.?s signature|Access denied[^"]*signature|Just a moment)',
-                  antwort or "", re.I)
-    return bool(m)
+    return bool(_KANTEN_MUSTER.search(antwort or ""))
+
+
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import newsletter_versand as _mailer          # noqa: E402  (Signatur-Quelle)
+    kanten_block = _mailer.kanten_block           # eine Quelle, eine Wahrheit
+    KANTEN_AUS_MAILER = True
+except Exception:  # noqa: BLE001  (kaputter Mailer darf die Wache nicht töten)
+    _mailer = None
+    kanten_block = _kanten_block_reserve
+    KANTEN_AUS_MAILER = False
 
 
 # --------------------------------------------------------------------- Einstellungen
@@ -269,7 +319,7 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
     if status == "nicht messbar":
         return ([_regel("C0", "cloudflare", "nicht messbar",
                         "DNS nicht erreichbar – keine Zone geprüft",
-                        "; ".join(txts)[:200] or "keine Antwort der Resolver",
+                        messluecke(txts),
                         "DoH-Ausfall ist keine Messlücke der Zone: beim nächsten Lauf "
                         "erneut messen; `curl 'https://dns.google/resolve?name=" + z + "&type=TXT'`",
                         "—",
@@ -382,9 +432,14 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
     # C4 – DMARC (Berichtsweg + Policy gegenüber den Echtheitsnachweisen)
     ms, dm = dns("_dmarc." + z, "TXT")
     if ms != "gemessen" or not dm:
-        gewicht = "fund" if dkim_da else "hinweis"
-        funde.append(_regel("C4", "cloudflare", gewicht, "kein DMARC-Eintrag",
-                            f"_dmarc.{z}: {ms}",
+        # Unmessbar ist kein Befund: ein Resolver-Ausfall darf nicht als
+        # „kein DMARC“ durchgehen (dieselbe Klasse Fehler wie C0 am 25.09.).
+        gewicht = ("nicht messbar" if ms == "nicht messbar"
+                   else ("fund" if dkim_da else "hinweis"))
+        funde.append(_regel("C4", "cloudflare", gewicht,
+                            "kein DMARC-Eintrag" if ms != "nicht messbar"
+                            else "DMARC nicht messbar",
+                            f"_dmarc.{z}: {messluecke(dm) if ms == 'nicht messbar' else ms}",
                             "v=DMARC1; p=none; rua=mailto:dmarc@" + z + "; adkim=s; aspf=s",
                             "Cloudflare → DNS → TXT anlegen (Name `_dmarc`) – oder bei "
                             "Cloudflare: Email → DMARC",
@@ -427,11 +482,20 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
                                 + ("mit" if has_ru else "ohne") + " rua)",
                                 text[:200], "—", "—", ""))
 
-    # C5 – MX auf der Zone (Reply-to muss ankommen)
+    # C5 – MX auf der Zone (Reply-to muss ankommen). Unmessbar ist auch hier
+    # kein Fund: „MX-Abfrage gescheitert“ ≠ „die Zone nimmt keine Mail an“.
     mst, mx = dns(z, "MX")
     if mst == "gemessen" and mx:
         funde.append(_regel("C5", "cloudflare", "ok", "MX vorhanden",
                             ", ".join(mx)[:120], "—", "—", ""))
+    elif mst == "nicht messbar":
+        funde.append(_regel("C5", "cloudflare", "nicht messbar",
+                            "MX nicht messbar – Zone nicht beurteilt",
+                            f"MX {z}: {messluecke(mx)}",
+                            "beim nächsten Lauf erneut messen; `curl "
+                            f"'https://dns.google/resolve?name={z}&type=MX'`", "—",
+                            "Ohne Messung kein Grün – und kein „kein MX“: der "
+                            "Resolver-Ausfall ist keine Aussage der Zone."))
     else:
         funde.append(_regel("C5", "cloudflare", "fund", "kein MX auf der Zone",
                             f"MX {z}: {mst}",
@@ -448,9 +512,13 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
                                 f"Absender-Domain {abs_domain} nimmt Mail an",
                                 ", ".join(amx)[:120], "—", "—", ""))
         else:
-            funde.append(_regel("C6", "cloudflare", "hinweis",
-                                f"Absender-Domain {abs_domain} ohne MX",
-                                f"MX {abs_domain}: {ast}",
+            funde.append(_regel("C6", "cloudflare",
+                                "nicht messbar" if ast == "nicht messbar" else "hinweis",
+                                f"Absender-Domain {abs_domain} ohne MX"
+                                if ast != "nicht messbar" else
+                                f"Absender-Domain {abs_domain} nicht beurteilt",
+                                f"MX {abs_domain}: "
+                                + (messluecke(amx) if ast == "nicht messbar" else ast),
                                 "Reply-To auf eine Domain mit MX zeigen, oder Routing "
                                 "einrichten",
                                 "Zone-Interface der Absender-Domain (hier: "
@@ -601,7 +669,7 @@ def pruefe_worker(root: str, *, mit_netz: bool) -> list[dict]:
     if status == "nicht messbar":
         return [_regel("C7", "worker", "nicht messbar",
                        "DNS nicht erreichbar – Endpunkt nicht geprüft",
-                       "; ".join(antworten)[:200] or "keine Antwort",
+                       messluecke(antworten),
                        "beim nächsten Lauf erneut messen", "—",
                        "Ohne Messung kein Grün.")]
     if status == "NXDOMAIN":
@@ -662,13 +730,66 @@ def pruefe_resend(root: str, *, mit_netz: bool) -> list[dict]:
     return out
 
 
+def _resend_name(domäne: dict) -> str:
+    """Der Domainname aus einer Resend-Antwort.
+
+    Die API (GET /domains, Stand 2026) liefert `name`; ältere Fassungen und
+    manche Kunden-Beispiele `domain`. Gelesen wird beides – am 25.09.2026
+    las die Wache nur `domain`, bekam für jede Domäne `None` und meldete
+    daraus einen Falsch-Fund („Sende-Domain fehlt im Resend-Konto ·
+    Konto-Domänen: None“), obwohl die API mit `name` antwortet.
+    """
+    return str(domäne.get("name") or domäne.get("domain") or "").strip().lower()
+
+
+def _resend_verifiziert(domäne: dict) -> tuple[bool, str]:
+    """→ (verifiziert, Statuswort). Resend liefert `status`
+    (`verified`, `pending`, `not_started`, `failed`, `temporary_failure`,
+    `partially_verified`), ältere Antworten `verified: true/false`.
+    Beides wird gelesen; ein unbekanntes Statuswort ist NICHT verifiziert
+    (kein Grün aus Nichtwissen)."""
+    st = str(domäne.get("status") or "").strip().lower()
+    if domäne.get("verified") is True or st == "verified":
+        return True, st or "verified"
+    if st == "partially_verified":
+        # Teilzustand: nur die Sende-Berechtigung zählt für diesen Versand.
+        faehig = str((domäne.get("capabilities") or {}).get("sending") or "").lower()
+        return faehig == "enabled", st
+    return False, st or ("unverified" if domäne.get("verified") is False else "unbekannt")
+
+
+def _sendesignatur(key: str) -> dict:
+    """Die Kopfzeilen des VERSANDWEGS – aus dem Mailer, nicht nachgebaut.
+
+    B0 misst nur dann den Weg, den der Versand geht, wenn die Signatur
+    dieselbe ist (User-Agent!). Am 25.09.2026 fragte die Wache mit ihrem
+    eigenen User-Agent, der Versand mit `Python-urllib/3.x`: B0 grün, der
+    Testversand an derselben Kante HTTP 403 · Error 1010. Ist der Mailer
+    nicht importierbar, bleibt die Wache ehrlich ungemessen (siehe unten)
+    statt mit einer eigenen Signatur „ok“ zu melden.
+    """
+    if _mailer is None:              # Import oben gescheitert → keine Signatur
+        return {}
+    return _mailer.api_headers(key)
+
+
 def _pruefe_resend_api(root: str) -> list[dict]:
     """B0 (Netzweg, OHNE Key prüfbar: 401 = Kante durchlässig) + B1 (Domain
     verifiziert, nur mit Key)."""
     out: list[dict] = []
     key = os.environ.get("RESEND_API_KEY", "").strip() or \
         os.environ.get("NEWSLETTER_RESEND_KEY", "").strip()
-    headers = {"Authorization": f"Bearer {key}"} if key else {}
+    headers = _sendesignatur(key)
+    if not headers:
+        out.append(_regel("B0", "resend", "nicht messbar",
+                          "Sendesignatur nicht verfügbar – Netzweg nicht gemessen",
+                          "newsletter_versand.py nicht importierbar",
+                          "Mailer prüfen (`python3 scripts/newsletter_versand.py "
+                          "--selftest`); B0 erst dann wieder messen",
+                          "—",
+                          "Die Vorprüfung muss mit DERSELBEN Signatur fragen wie der "
+                          "Versand – sonst misst sie einen Weg, den niemand geht."))
+        return out
     code, antwort = NETZ_RUF(RESEND_API + "/domains", headers=headers)
     if code == 0:
         out.append(_regel("B0", "resend", "fund" if key else "nicht messbar",
@@ -709,30 +830,49 @@ def _pruefe_resend_api(root: str) -> list[dict]:
                           "Key gültig? Scope des Keys = Sending-Domains?",
                           "Resend → API Keys → Schlüssel prüfen", ""))
         return out
-    out.append(_regel("B0", "resend", "ok", "Netzweg zur Resend-API frei",
-                      f"HTTP {code} von api.resend.com", "—", "—", ""))
+    out.append(_regel("B0", "resend", "ok",
+                      "Netzweg zur Resend-API frei (mit der Signatur des Versands)",
+                      f"HTTP {code} von api.resend.com · User-Agent "
+                      f"„{headers.get('User-Agent', '').split(' ')[0]}“", "—", "—", ""))
     z = zone(root)
     try:
         daten = json.loads(antwort)
     except json.JSONDecodeError:
         daten = {}
-    domänen = daten.get("data") or []
-    own = next((d for d in domänen if str(d.get("domain", "")).lower() == z), None)
+    domänen = daten.get("data")
+    if not isinstance(domänen, list):
+        # 200, aber keine Liste: kein Fund und kein Grün – die Antwort ist
+        # nicht deutbar. (Ein `{}` als [] zu lesen hat am 25.09.2026
+        # „Konto-Domänen: None“ ergeben.)
+        out.append(_regel("B1", "resend", "nicht messbar",
+                          "Kontostand nicht deutbar – Domänenliste fehlt",
+                          f"Antwort ohne `data`-Liste: {str(antwort)[:160]}",
+                          "Antwort im Resend-Dashboard gegenprüfen (Sending Domains); "
+                          "Key-Scope prüfen (Domains: Read)",
+                          "Resend → API Keys / Sending Domains",
+                          "Kein Grün ohne Messung: eine unlesbare Antwort ist keine "
+                          "leere Kontoliste."))
+        return out
+    domänen = [d for d in domänen if isinstance(d, dict)]
+    own = next((d for d in domänen if _resend_name(d) == z), None)
     if own is None:
         out.append(_regel("B1", "resend", "fund",
                           f"Sende-Domain {z} fehlt im Resend-Konto",
                           "Konto-Domänen: "
-                          + (", ".join(str(d.get("domain")) for d in domänen) or "keine"),
+                          + (", ".join(_resend_name(d) for d in domänen
+                                       if _resend_name(d)) or "keine")
+                          + ("  (Antwort gekürzt: has_more=true)"
+                             if daten.get("has_more") else ""),
                           "Domain in Resend hinzufügen (Sending Domains → Add Domain) "
                           "und die DNS-Einträge (C2/C3) abschliessen",
                           "Resend → Sending Domains → Add Domain",
                           "Ohne registrierte Domain nimmt Resend keine Mail der Zone an "
                           "– der Versand bricht in derselben Vorprüfung ab, die hier "
                           "gemessen wurde."))
-    elif not own.get("verified"):
+    elif not _resend_verifiziert(own)[0]:
         out.append(_regel("B1", "resend", "fund",
                           f"Sende-Domain {z} nicht verifiziert",
-                          "Domain vorhanden, `verified: false`",
+                          f"Domain vorhanden, Status `{_resend_verifiziert(own)[1]}`",
                           "DNS-Einträge aus dem Resend-Dashboard vollständig anlegen "
                           "(SPF-TXT + MX auf `send.`, DKIM `resend._domainkey`)",
                           "Resend → Sending Domains → die Checkliste der Domain",
@@ -740,7 +880,7 @@ def _pruefe_resend_api(root: str) -> list[dict]:
                           "Resend nicht."))
     else:
         out.append(_regel("B1", "resend", "ok", f"Domain {z} verifiziert",
-                          "verified: true", "—", "—", ""))
+                          f"Status `{_resend_verifiziert(own)[1]}`", "—", "—", ""))
         # Zusatzbeleg: Resends eigener Record-Status (welcher Eintrag ist
         # verifiziert, welcher verendet). Die List-Antwort traegt die Aussage
         # (verified = Resend hat die Eintraege geprueft); das Nachlesen faengt
@@ -1304,6 +1444,76 @@ def _selftest() -> int:
         rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
         pruefe_es(rg.get("B1", {}).get("gewicht") == "hinweis",
                   f"offener Tracking-Record erwartet Hinweis: {rg.get('B1')}")
+
+        # 10e. B1 in der API-Form von 2026: `name` + `status` (die alte
+        #      Form `domain`/`verified` bleibt lesbar). Ohne das las die
+        #      Wache überall `None` und meldete am 25.09.2026 einen
+        #      Falsch-Fund („Sende-Domain fehlt · Konto-Domänen: None“).
+        def netz_resend_api_form(url: str, *, headers=None, timeout=15,
+                                 daten=None, status=200):
+            if url.startswith("https://api.resend.com/domains/"):
+                return 200, json.dumps({"records": [
+                    {"record": "SPF", "name": "send", "type": "CNAME",
+                     "status": "verified"},
+                    {"record": "DKIM", "name": "resend._domainkey",
+                     "type": "TXT", "status": "verified"}]})
+            if url.startswith("https://api.resend.com"):
+                return status, json.dumps(daten if daten is not None else {})
+            if url.rstrip("/").endswith("/export/abonnenten"):
+                return 200, json.dumps({"anzahl": 0, "abonnenten": []})
+            return 200, "<html>Formular</html>"
+
+        class _netzApiForm:
+            def __init__(self, daten, status=200):
+                self.daten, self.status = daten, status
+                self.headers: dict = {}
+            def __call__(self, url, *, headers=None, timeout=15):
+                if url.startswith("https://api.resend.com"):
+                    self.headers = dict(headers or {})
+                return netz_resend_api_form(url, headers=headers,
+                                            timeout=timeout,
+                                            daten=self.daten, status=self.status)
+
+        stub_api = _netzApiForm({"object": "list", "has_more": False,
+                                 "data": [{"id": "dom_1", "name": ZONE,
+                                           "status": "verified"}]})
+        NETZ_RUF = stub_api
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "ok",
+                  f"API-Form name/status=verified erwartet ok: {rg.get('B1')}")
+        # B0 fragt mit der Signatur des Versands (User-Agent aus dem Mailer):
+        # die Wache und der Versand müssen denselben Weg messen.
+        pruefe_es(stub_api.headers.get("User-Agent")
+                  == _mailer.UA_KENNUNG if _mailer else False,
+                  f"B0 fragt nicht mit der Sendesignatur: {stub_api.headers}")
+        NETZ_RUF = _netzApiForm({"data": [{"name": "andere.example",
+                                           "status": "verified"}]})
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "fund"
+                  and "andere.example" in rg["B1"]["ist"]
+                  and "None" not in rg["B1"]["ist"],
+                  f"fremde Domain erwartet Fund mit Namen: {rg.get('B1')}")
+        NETZ_RUF = _netzApiForm({"data": "quatsch"})
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "nicht messbar",
+                  f"unlesbare Domänenliste erwartet nicht messbar: {rg.get('B1')}")
+        NETZ_RUF = _netzApiForm({"data": [{"name": ZONE, "status": "not_started"}]})
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "fund"
+                  and "not_started" in rg["B1"]["ist"],
+                  f"not_started erwartet Fund mit Status: {rg.get('B1')}")
+
+        # 10f. Die Abfrage-URL: genau EIN „?“ – der 400er, der am
+        #      25.09.2026 als „DNS nicht erreichbar“ gelesen wurde.
+        probe_url = doh_url("https://dns.google/resolve", ZONE, "TXT",
+                            {"dnssec": "false"})
+        pruefe_es(probe_url.count("?") == 1 and ZONE in probe_url,
+                  f"DoH-URL falsch gebaut: {probe_url}")
+        pruefe_es(all("?" not in basis for basis, _x in DOH_ENDPUNKTE),
+                  f"DoH-Basis trägt eine Abfrage: {DOH_ENDPUNKTE}")
+        pruefe_es("4xx" in messluecke(["dns.google: HTTP 400",
+                                       "cloudflare-dns.com: HTTP 400"]),
+                  "HTTP-400-Messlücke wird nicht als Abfragefehler benannt")
 
         # 11. Worker-Export mit falschem Key → B2 Fund
         os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "falsch"

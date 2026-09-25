@@ -56,11 +56,11 @@ Die drei Entscheide, die diese Form festlegen:
 | Capture-Worker | `newsletter-worker/` (deploy: `wrangler deploy`) | `GITHUB_PAT`, `EXPORT_KEY` | Wache `--brand` (Themen), C7 (Endpunkt) |
 | Adressliste + Tokens | Cloudflare KV (`ABO`) | – | B2 (Export, unabhängig vom Resend-Key) |
 | Digest (Bau + Versand) | `scripts/newsletter_digest.py` | – | Selftest 50, Capture-Wache `--check` |
-| Mailer (Resend/SMTP) | `scripts/newsletter_versand.py` | – | Selftest 28 |
+| Mailer (Resend/SMTP) | `scripts/newsletter_versand.py` | – | Selftest 47 (inkl. Kopfzeilen/Kante, Worker-Schlüssel) |
 | QA der Ausgabe | `scripts/newsletter_qa.py` | – | Selftest 40 (21 Regeln) |
 | Kadenz (Di/Fr-Vertrag) | `scripts/newsletter_schedule.py`, `scripts/newsletter_cadence.py` | – | Selftests 14 + site-Test |
 | Studio (Marke/Themen) | `scripts/newsletter_studio.py` + `data/newsletter_studio.json` | – | Selftest 48, `--brand` |
-| Zustellbarkeit | `scripts/newsletter_zustellbarkeit.py` | `RESEND_API_KEY` (optional) | Selftest 25 |
+| Zustellbarkeit | `scripts/newsletter_zustellbarkeit.py` | `RESEND_API_KEY` (optional) | Selftest 49 (B0 fragt mit der Signatur des Versands) |
 | Daily-Versand | `.github/workflows/newsletter-daily.yml` | `RESEND_API_KEY`, `NEWSLETTER_WORKER_EXPORT_KEY` | Wachen-Schritt im Lauf |
 | Lifecycle (Bestätigung/Nachgang) | `.github/workflows/newsletter-lifecycle.yml` | – | – |
 | Cadence-Nachholung | `.github/workflows/newsletter-cadence.yml` | – | Cadence-Selftest |
@@ -289,10 +289,13 @@ nach dem Beleg, keine zweite Liste.
 | Befund / Symptom | Regel | Was es heißt | Weg |
 |---|---|---|---|
 | `403 … Error 1010` (Kanten-Block) | C7 / B0 | Cloudflare **Kante** blockiert den Worker bzw. die Resend-API – der Anbieter hat die Anfrage nie gesehen. Nicht als „Absender-Problem“ verallgemeinern. | Cloudflare → Security → Bots/WAF: Pfade freigeben; Wache erneut ausführen |
+| `❌ TESTVERSAND FEHLGESCHLAGEN: … HTTP 403 · KANTE (Error 1010 …)` | – | Der **Versand-Client** selbst wurde an der Kante abgewiesen (25.09.2026: urllib-Default-User-Agent). Seit dem Fix sendet der Mailer `FranksFinanzcheck-Newsletter/1.0`; die Zeile nennt die Ursache aus dem Journal. | Tritt es erneut auf: `NEWSLETTER_TRANSPORT=smtp` als Zweitweg nutzen und den 1010-Block bei Resend melden – es ist kein Konto-/DNS-Befund. Kein zweiter `--live`-Lauf zur „Wiederholung“ |
 | `B0: Kante durchlässig, Key fehlt` | B0 | Netzweg ok, aber `RESEND_API_KEY` fehlt – Konto bewusst ungemessen (kein Grün, kein Fund) | Secret setzen, Wache erneut |
+| `C0/C7: DNS nicht erreichbar` mit `HTTP 4xx` im Ist | C0 / C7 | Die DoH-**Abfrage** wurde abgewiesen (4xx) – Fehler der Wache (URL/Parameter), kein Netzausfall. Am 25.09.2026 sorgte ein doppeltes `?` für HTTP 400 bei beiden Resolvern. | Wache aktualisieren (`doh_url`), dann erneut messen; Gegenprobe: `curl 'https://dns.google/resolve?name=franksfinanzcheck.de&type=TXT'` |
+| `B1: Kontostand nicht deutbar` | B1 | Resend antwortete 200, aber ohne `data`-Liste (Zusatzbeleg fehlt, Key-Scope) | Resend → Sending Domains gegenprüfen; API-Key-Scope „Domains: Read“ |
 | `B0: API-Aufruf fehlgeschlagen (401/403)` | B0 | Key ungültig oder Domain nicht dem Key zugeordnet | Resend → API Keys prüfen |
 | `B1: Sende-Domain nicht verifiziert` | B1 | SPF/DKIM nicht komplett live | Resend-Dashboard → Domain → Einträge vervollständigen (C1/C2/C3 nachmessen) |
-| `B2: Worker-Export abgelehnt (401/403)` | B2 | `NEWSLETTER_WORKER_EXPORT_KEY` ≠ Worker-Secret `EXPORT_KEY` | Beide Schlüssel exakt abgleichen (derselbe, beide Seiten) |
+| `B2: Worker-Export abgelehnt (401/403)` | B2 | `NEWSLETTER_WORKER_EXPORT_KEY` ≠ Worker-Secret `EXPORT_KEY`. Seit 25.09.2026 sendet der Mailer den Schlüssel als `x-ff-key` (vorher wurde der Parameter entgegengenommen und nie gesendet – jede Bestätigung/jeder Nachgang endete in „Worker-Antwort 403“). | Beide Schlüssel exakt abgleichen (derselbe, beide Seiten) |
 | `C7: Worker-Domain löst sich nicht auf` | C7 | CNAME `abos` fehlt oder falsch | Cloudflare → DNS: CNAME auf Worker-Domain, orange cloud |
 | `C7: keine Antwort / 5xx` | C7 | CNAME steht, Worker antwortet nicht / ist kaputt | Cloudflare → Workers → Logs; Stand neu deployen |
 | Halt aktiv (`versand_unklar`) | S1 | Ein Sende-Aufruf ist ohne Beleg geblieben – kein zweiter Listen-Versand, bis ein Mensch nachgesehen hat | § 4 (Halt): Beleg suchen, Block auflösen, committen |
