@@ -109,21 +109,34 @@ Authentifizierung über eine **Send-Subdomain** (Default `send.`) – die
 zwei SPF-Records wären ein permanenter Fehler):
 
 1. Konto anlegen, **Sending Domain** `franksfinanzcheck.de` hinzufügen.
-   Resend zeigt danach die exakten DNS-Einträge für DEINE Domain.
-2. Die Einträge anlegen (Resend → Domains → Domain → „DNS Setup“):
-   - **TXT** `send` → SPF-Record, z. B.
-     `"v=spf1 include:amazonses.com ~all"` (WERT so wie Resend ihn zeigt).
-   - **MX** `send` → Bounce-Host, z. B.
-     `feedback-smtp.us-east-1.amazonses.com` (Priorität 10 – die Region im
-     Namen hängt von der Konto-Region ab; WERT so wie Resend ihn zeigt).
-   - **TXT** `resend._domainkey` → DKIM-Key (Wert beginnt mit `p=`;
-     als EIN Stück kopieren – UI-Trunkatur ist die häufige Fehlstelle).
-   - **CNAME** `links` → `links1.resend-dns.com` (Tracking-Subdomain;
-     nur wenn Tracking an ist – bei uns aus, da der Mailer Tracking
-     explizit ausschaltet).
-3. DMARC: bereits in der Zone (`_dmarc`, `p=reject` mit `rua`) – bleibt.
-4. Verifizierung abwarten, bis Resend `verified` meldet. Die Wache
-   misst alle drei Einträge (C2: send.-TXT + send.-MX, C3: DKIM, C4: DMARC).
+2. **Empfohlen: One-Click-Cloudflare-Autorisierung** (Resend → Domains →
+   Domain → „DNS Setup“ → Cloudflare/„Authorize“ wählen). Resend fragt
+   einmalig ein Cloudflare-API-Token mit Zone-DNS-Rechten ab und legt
+   die Einträge SELBST in der Zone an – kein Abtippen, keine
+   UI-Trunkatur. Resend legt an (2026, CNAME-Modell):
+   - **CNAME** `send` → `send.forge.rmta.net` – die Send-Subdomain;
+     SPF und Bounce-Host sitzen auf dem Ziel und werden per CNAME
+     mitgeliefert.
+   - **CNAME** `rsend` → `rsend.forge.rmta.net` – Resends
+     Tracking-Subdomain. Bei uns **harmlos**: der Mailer schaltet
+     `click_tracking`/`open_tracking` explizit aus, der Eintrag wird
+     nie bedient.
+   - **TXT** `resend._domainkey` → DKIM-Key (ein Eintrag, Wert beginnt
+     mit `p=`).
+3. **Alternativ manuell** (gleiche drei Einträge über Cloudflare →
+   DNS → Records → hinzufügen; Werte 1:1 aus der Resend-Checkliste,
+   DKIM als EIN Stück kopieren): CNAME `send`, CNAME `rsend`,
+   TXT `resend._domainkey`. Ältere Konten können statt der CNAMEs noch
+   das SES-Direktmodell verlangen (TXT `send` mit
+   `v=spf1 include:amazonses.com ~all` + MX `send` mit
+   `feedback-smtp.<region>.amazonses.com`) – die Wache akzeptiert
+   beide Formen.
+4. DMARC: bereits in der Zone (`_dmarc`, `p=reject` mit `rua`) – bleibt.
+5. Verifizierung abwarten, bis Resend `verified` meldet. Die Wache
+   prüft die Send-Subdomain (C2: CNAME-Ziel ODER SPF-TXT+MX), den
+   DKIM-Eintrag (C3) und – mit `RESEND_API_KEY` – Resends eigenen
+   Record-Status pro Eintrag (B1; offener Tracking-Record ist nur
+   Hinweis, weil Tracking bewusst aus ist).
 
 ### Schritt 4 – GitHub Secrets und Variablen
 

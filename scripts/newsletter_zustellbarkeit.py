@@ -86,6 +86,11 @@ RESEND_FREE_TAGESGRENZE = 100   # Resend Free: 3000/Monat, davon 100/Tag
 RESEND_SEND_SUBDOMAINE = "send"
 RESEND_SES_MX = re.compile(r"feedback-smtp\.[a-z0-9-]+\.amazonses\.com",
                            re.IGNORECASE)
+# CNAME-Ziele der Send-Subdomain (aktuelles Resend-Modell: forge-Delegation;
+# davor: direkte SES-Eintraege). Was zaehLT: ein Resend-eigener Zielwert.
+RESEND_SEND_ZIEL = re.compile(
+    r"forge\.rmta\.net|rmta\.net|resend-dns\.com|amazonses\.com",
+    re.IGNORECASE)
 CLOUDFLARE_MX_MARKEN = ("mx.cloudflare.net", "route1.mx.cloudflare.net",
                         "route2.mx.cloudflare.net", "route3.mx.cloudflare.net")
 
@@ -297,39 +302,49 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
                                 "Ein SPF wie `v=spf1 ~all` nimmt niemanden auf – "
                                 "auch die eigene Mail-Weiterleitung nicht."))
 
-    # C2 – Resend-Send-Subdomain (SES-Modell: SPF-TXT + Bounce-MX auf `send.`;
-    # an der Apex-SPF ändert sich NICHTS). Der MX-Wert ist Region-spezifisch
-    # (Konto-Region) → Existenz + Form messen, nicht einen festen Host.
+    # C2 – Resend-Send-Subdomain. Beide Formen der Resend-Infrastruktur sind
+    # gültig: (a) AKTUELL: CNAME `send.` → Resend-Forge-Domain (SPF + Bounce-
+    # Host sitzen auf dem Ziel, SPF- und MX-Lookup folgen die CNAME-Kette);
+    # (b) ALT: SPF-TXT + Bounce-MX direkt auf `send.`. Die Apex-SPF ändert
+    # sich in beiden Fällen NICHT. Die maßgebliche Prüfung ist B1
+    # (Resend-Status „verified“) – hier wird die Zone selbst gemessen.
+    send_c_s, send_c = dns(RESEND_SEND_SUBDOMAINE + "." + z, "CNAME")
     send_txt_s, send_txt = dns(RESEND_SEND_SUBDOMAINE + "." + z, "TXT")
     send_mx_s, send_mx = dns(RESEND_SEND_SUBDOMAINE + "." + z, "MX")
+    cname_ok = (send_c_s == "gemessen"
+                and any(RESEND_SEND_ZIEL.search(c) for c in send_c))
     send_spf = [t for t in send_txt if t.strip().lower().startswith("v=spf1")]
-    send_mx_ok = [m for m in send_mx if RESEND_SES_MX.search(m)]
-    if send_spf and send_mx_ok:
+    send_mx_ok = [m for m in send_mx
+                  if RESEND_SES_MX.search(m) or RESEND_SEND_ZIEL.search(m)]
+    if cname_ok:
         funde.append(_regel("C2", "cloudflare", "ok",
-                            "Resend-Send-Subdomain-Einträge vorhanden",
+                            "Resend-Send-Subdomain per CNAME (Forge-Modell)",
+                            "CNAME send → " + send_c[0][:60], "—", "—", ""))
+    elif send_spf and send_mx_ok:
+        funde.append(_regel("C2", "cloudflare", "ok",
+                            "Resend-Send-Subdomain direkt (SES-Modell)",
                             "TXT send: " + send_spf[0][:80] + " · MX send: "
                             + send_mx_ok[0][:60], "—", "—", ""))
     else:
-        fehlt = []
-        if not send_spf:
-            fehlt.append("TXT `send` (SPF, so wie Resend zeigt: "
-                         "`v=spf1 include:amazonses.com ~all`)")
-        if not send_mx_ok:
-            fehlt.append("MX `send` (Bounce, so wie Resend zeigt: "
-                         "`feedback-smtp.<region>.amazonses.com`, Priorität 10)")
+        teile = [f"CNAME send: {send_c[0][:50]}" if send_c else
+                 f"CNAME send: {send_c_s}",
+                 "TXT send: " + (", ".join(send_txt)[:60] or "leer"),
+                 "MX send: " + (", ".join(send_mx)[:60] or "leer")]
         gewicht = ("nicht messbar"
-                   if "nicht messbar" in (send_txt_s, send_mx_s) else "fund")
+                   if "nicht messbar" in (send_c_s, send_txt_s, send_mx_s)
+                   else "fund")
         funde.append(_regel("C2", "cloudflare", gewicht,
-                            "Resend-Send-Subdomain-Einträge fehlen oder unvollständig",
-                            "TXT send: " + (", ".join(send_txt)[:80] or send_txt_s)
-                            + " · MX send: " + (", ".join(send_mx)[:60] or send_mx_s),
-                            "anlegen: " + " und ".join(fehlt),
-                            "Resend → Domains → " + z + " → die beiden SPF-Records "
-                            "(TXT + MX, Name `send`) exakt kopieren; Cloudflare → DNS "
-                            "→ Records → hinzufügen",
-                            "Resend authentifiziert über die send.-Subdomain (AWS SES): "
-                            "ohne TXT ist die Mail SPF-ungeprüft, ohne MX landen "
-                            "Rückläufer nirgends. Apex-SPF: bewusst unverändert."))
+                            "Resend-Send-Subdomain fehlt oder unvollständig",
+                            " · ".join(teile),
+                            "CNAME `send` → `send.forge.rmta.net` (Resend-Setup) "
+                            "ODER SPF-TXT + Bounce-MX auf `send.`",
+                            "Resend → Domains → " + z + " → DNS-Setup → "
+                            "„Cloudflare autorisieren“ (One-Klick, Resend legt die "
+                            "Einträge selbst an) – oder die Einträge manuell "
+                            "nach Cloudflare → DNS kopieren",
+                            "Ohne die Send-Subdomain ist die Mail SPF-ungeprüft "
+                            "und Rückläufer landen nirgends. Apex-SPF: bewusst "
+                            "unverändert."))
 
     # C3 – Resend-DKIM: EIN Datensatz, TXT `resend._domainkey` (p=-Key).
     ds, d = dns("resend._domainkey." + z, "TXT")
@@ -605,6 +620,46 @@ def _pruefe_resend_api(root: str) -> list[dict]:
     else:
         out.append(_regel("B1", "resend", "ok", f"Domain {z} verifiziert",
                           "verified: true", "—", "—", ""))
+        # Zusatzbeleg: Resends eigener Record-Status (welcher Eintrag ist
+        # verifiziert, welcher verendet). Die List-Antwort traegt die Aussage
+        # (verified = Resend hat die Eintraege geprueft); das Nachlesen faengt
+        # spaetere Verfaelle – und faellt ehrlich ab, wenn es nicht gelingt.
+        did = str(own.get("id") or "")
+        if did:
+            d_code, d_antwort = NETZ_RUF(RESEND_API + "/domains/" + did,
+                                         headers=headers)
+            if d_code in (200, 201):
+                try:
+                    recs = (json.loads(d_antwort) or {}).get("records") or []
+                except json.JSONDecodeError:
+                    recs = []
+                for rec in recs:
+                    st = str(rec.get("status") or "")
+                    if st == "verified":
+                        continue
+                    optional = str(rec.get("record") or "").lower() == "tracking"
+                    out.append(_regel(
+                        "B1", "resend", "hinweis" if optional else "fund",
+                        f"Resend-Record nicht verifiziert "
+                        f"({rec.get('type') or '?'} {rec.get('name') or '?'})",
+                        f"status: {st or 'unbekannt'}",
+                        "Resend → Domains → " + z + " → die Checkliste "
+                        "abschließen",
+                        "Resend → Domains → " + z,
+                        "Tracking ist bei uns ausgeschaltet (Mailer sendet "
+                        "click_tracking=false) – der CNAME ist dann harmlos."
+                        if optional else
+                        "Solange der Eintrag nicht verifiziert ist, kann die "
+                        "Authentifizierung lückenhaft sein."))
+            else:
+                out.append(_regel("B1", "resend", "info",
+                                  "Domain verifiziert; Record-Status nicht "
+                                  "nachgelesen",
+                                  f"GET /domains/<id>: "
+                                  f"HTTP {d_code if d_code else 'keine Antwort'}",
+                                  "beim nächsten Lauf erneut versuchen", "—",
+                                  "Die List-Antwort trägt die Aussage; das "
+                                  "Nachlesen ist Zusatzbeleg, kein Ersatz."))
     return out
 
 
@@ -824,8 +879,8 @@ def _selftest() -> int:
             ZONE: {"MX": [0, ["17 route2.mx.cloudflare.net.",
                              "41 route1.mx.cloudflare.net."]],
                    "TXT": [0, ["v=spf1 include:_spf.mx.cloudflare.net ~all"]]},
-            f"send.{ZONE}": {"TXT": [0, ["v=spf1 include:amazonses.com ~all"]],
-                             "MX": [0, ["10 feedback-smtp.us-east-1.amazonses.com"]]},
+            f"send.{ZONE}": {"CNAME": [0, ["send.forge.rmta.net"]],
+                             "TXT": [3, []], "MX": [3, []]},
             f"_dmarc.{ZONE}": {"TXT": [0, ["v=DMARC1; p=reject; adkim=s; aspf=s; "
                                            "rua=mailto:dmarc@beispiel.de;"]]},
             f"resend._domainkey.{ZONE}": {"TXT": [0, ["k=rsa;p=MII…resend"]]},
@@ -900,15 +955,32 @@ def _selftest() -> int:
         pruefe_es(rg.get("C1", {}).get("gewicht") == "ok",
                   f"Apex-SPF ohne Resend-Include muss ok sein: {rg.get('C1')}")
 
-        # 2b. Bounce-MX auf send. fehlt (SPF-TXT vorhanden) → C2 Fund
+        # 2b. SES-Form unvollständig (keine CNAME, SPF-TXT vorhanden,
+        #      Bounce-MX fehlt) → C2 Fund
         def zone_ohne_bounce(name: str, typ: str) -> tuple[int, list[str]]:
-            if name == f"send.{ZONE}" and typ == "MX":
+            if name == f"send.{ZONE}" and typ in ("MX", "CNAME"):
                 return 3, []
             return zone_gesund(name, typ)
         AUFLOESER = zone_ohne_bounce
         rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
         pruefe_es(rg.get("C2", {}).get("gewicht") == "fund",
                   f"fehlendes Bounce-MX meldet nicht Fund: {rg.get('C2')}")
+
+        # 2c. Altes SES-Modell (keine CNAME, SPF-TXT + Bounce-MX direkt auf
+        #      send.) bleibt als zweite gültige Form ok
+        def zone_ses_form(name: str, typ: str) -> tuple[int, list[str]]:
+            if name == f"send.{ZONE}":
+                if typ == "CNAME":
+                    return 3, []
+                if typ == "TXT":
+                    return 0, ["v=spf1 include:amazonses.com ~all"]
+                return 0, ["10 feedback-smtp.us-east-1.amazonses.com"]
+            return zone_gesund(name, typ)
+        AUFLOESER = zone_ses_form
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("C2", {}).get("gewicht") == "ok",
+                  f"SES-Form (TXT+MX direkt) erwartet ok: {rg.get('C2')}")
+        AUFLOESER = zone_gesund
 
         # 3. Kein DKIM + p=reject → C3 Fund UND C4 Fund (Selbstabsage)
         def zone_ohne_dkim(name: str, typ: str) -> tuple[int, list[str]]:
@@ -1015,6 +1087,51 @@ def _selftest() -> int:
                   f"unverifizierte Domain erwartet Fund: {rg.get('B1')}")
         pruefe_es(rg.get("B3", {}).get("gewicht") == "hinweis",
                   f"150 > 100 erwartet Hinweis: {rg.get('B3')}")
+
+        # 10b. Verifiziert + alle Records verifiziert → B1 ok (Zusatzbeleg haelt)
+        def netz_resend_records(url: str, *, headers=None, timeout=15,
+                                unverified: str = ""):
+            if url.startswith("https://api.resend.com/domains/"):
+                recs = [
+                    {"record": "SPF", "name": "send", "type": "CNAME",
+                     "status": "verified"},
+                    {"record": "DKIM", "name": "resend._domainkey", "type": "TXT",
+                     "status": "verified"},
+                    {"record": "Tracking", "name": "rsend", "type": "CNAME",
+                     "status": "verified"},
+                ]
+                for r in recs:
+                    if r["record"] == unverified:
+                        r["status"] = "pending"
+                return 200, json.dumps({"records": recs})
+            if url.startswith("https://api.resend.com"):
+                return 200, json.dumps(
+                    {"data": [{"domain": ZONE, "id": "dom_selftest",
+                               "verified": True}]})
+            if url.rstrip("/").endswith("/export/abonnenten"):
+                return 200, json.dumps({"anzahl": 1, "abonnenten": []})
+            return 200, "<html>Formular</html>"
+
+        class _netz10b:
+            def __init__(self, unverified=""):
+                self.unverified = unverified
+            def __call__(self, url, *, headers=None, timeout=15):
+                return netz_resend_records(url, headers=headers,
+                                           timeout=timeout,
+                                           unverified=self.unverified)
+        NETZ_RUF = _netz10b()
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "ok",
+                  f"verifiziert + alle Records ok erwartet ok: {rg.get('B1')}")
+        NETZ_RUF = _netz10b(unverified="SPF")
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "fund",
+                  f"nicht verifizierter SPF-Record erwartet Fund: {rg.get('B1')}")
+        # 10d. Nur der Tracking-Record offen → Hinweis (Tracking ist bewusst aus)
+        NETZ_RUF = _netz10b(unverified="Tracking")
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("B1", {}).get("gewicht") == "hinweis",
+                  f"offener Tracking-Record erwartet Hinweis: {rg.get('B1')}")
 
         # 11. Worker-Export mit falschem Key → B2 Fund
         os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "falsch"

@@ -180,3 +180,15 @@ sind entsprechend zu lesen. Außerdem: der Mailer schaltet
 `open_tracking`/`click_tracking` jetzt explizit **aus** (sonst würde der
 Resend-Konto-Default greifen und das „kein Tracking"-Versprechen brechen).
 Alles Weitere in diesem Report gilt.
+
+**Zusatzkorrektur (25.09, nach Resend-UI):** Die Einrichtung geht am
+einfachsten über Resends **One-Click-Cloudflare-Autorisierung** – Resend
+legt die Einträge selbst in der Zone an. Das aktuelle Resend-Modell ist
+das **CNAME-Modell**: CNAME `send` → `send.forge.rmta.net` (SPF +
+Bounce-Host auf dem Ziel), CNAME `rsend` → `rsend.forge.rmta.net`
+(Tracking, bei uns aus → der Eintrag ist harmlos) und EIN
+DKIM-TXT `resend._domainkey`. Die Wache akzeptiert CNAME- und
+SES-Direktform (C2) und liest mit API-Key zusätzlich Resends eigenen
+Record-Status pro Eintrag (B1; offener Tracking-Record = nur Hinweis).
+Die manuelle Alternative lautet: dieselben drei Einträge über
+Cloudflare → DNS anlegen, Werte 1:1 aus der Resend-Checkliste.

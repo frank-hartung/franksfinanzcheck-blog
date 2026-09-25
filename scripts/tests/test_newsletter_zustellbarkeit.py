@@ -54,8 +54,9 @@ def _gesunde_zone(mutation: dict | None = None):
     """
     tabelle = {
         (ZONE, "TXT"): (0, ["v=spf1 include:_spf.mx.cloudflare.net -all"]),
-        ("send." + ZONE, "TXT"): (0, ["v=spf1 include:amazonses.com ~all"]),
-        ("send." + ZONE, "MX"): (0, ["10 feedback-smtp.us-east-1.amazonses.com"]),
+        ("send." + ZONE, "CNAME"): (0, ["send.forge.rmta.net"]),
+        ("send." + ZONE, "TXT"): (3, []),
+        ("send." + ZONE, "MX"): (3, []),
         ("_dmarc." + ZONE, "TXT"): (0, ["v=DMARC1; p=reject; rua=mailto:post@ex.de"]),
         ("resend._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=AAAA"]),
         (ZONE, "CNAME"): (0, [WERKER_HOST + ".workers.dev"]),
@@ -159,13 +160,30 @@ class CloudflareRegelnTest(unittest.TestCase):
         self.assertEqual(r["C1"]["gewicht"], "ok")
         self.assertEqual(r["C2"]["gewicht"], "ok")
 
-    def test_send_spf_fehlt_ist_fund_c2(self):
-        r = self._funde({("send." + ZONE, "TXT"): (3, [])})
+    def test_send_cname_fehlt_ist_fund_c2(self):
+        r = self._funde({("send." + ZONE, "CNAME"): (3, [])})
         self.assertEqual(r["C2"]["gewicht"], "fund")
 
-    def test_send_bounce_mx_fehlt_ist_fund_c2(self):
-        r = self._funde({("send." + ZONE, "MX"): (3, [])})
+    def test_send_cname_fremdes_ziel_ist_fund_c2(self):
+        r = self._funde({("send." + ZONE, "CNAME"):
+                         (0, ["anderes.example.net"])})
         self.assertEqual(r["C2"]["gewicht"], "fund")
+
+    def test_send_ses_ohne_mx_ist_fund_c2(self):
+        # SES-Form unvollstaendig: keine CNAME, SPF-TXT da, Bounce-MX fehlt
+        r = self._funde({("send." + ZONE, "CNAME"): (3, []),
+                         ("send." + ZONE, "TXT"): (0,
+                          ["v=spf1 include:amazonses.com ~all"])})
+        self.assertEqual(r["C2"]["gewicht"], "fund")
+
+    def test_send_ses_form_ist_ok_c2(self):
+        # Altes Modell (SPF-TXT + Bounce-MX direkt auf send.) bleibt gueltig
+        r = self._funde({("send." + ZONE, "CNAME"): (3, []),
+                         ("send." + ZONE, "TXT"): (0,
+                          ["v=spf1 include:amazonses.com ~all"]),
+                         ("send." + ZONE, "MX"): (0,
+                          ["10 feedback-smtp.us-east-1.amazonses.com"])})
+        self.assertEqual(r["C2"]["gewicht"], "ok")
 
     def test_fehlendes_dkim_ist_fund(self):
         r = self._funde({("resend._domainkey." + ZONE, "TXT"): (3, [])})
@@ -311,6 +329,43 @@ class ResendRegelnTest(unittest.TestCase):
             {"data": [{"domain": ZONE, "verified": False}]}))
         r = self._b([antwort])
         self.assertEqual(r["B1"]["gewicht"], "fund")
+
+    @staticmethod
+    def _b1_records(recs):
+        return (
+            (200, json.dumps({"data": [
+                {"domain": ZONE, "id": "dom_test", "verified": True}]})),
+            (200, json.dumps({"records": recs})),
+        )
+
+    def _b1_rec(self, record, status):
+        return {"record": record, "name": "send", "type": "CNAME",
+                "status": status}
+
+    def test_b1_records_verifiziert_ist_ok(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        recs = [self._b1_rec("SPF", "verified"),
+                self._b1_rec("DKIM", "verified"),
+                self._b1_rec("Tracking", "verified")]
+        r = self._b(self._b1_records(recs))
+        self.assertEqual(r["B1"]["gewicht"], "ok")
+
+    def test_b1_spf_record_offen_ist_fund(self):
+        os.environ["RESEND_API_KEY"] = "re_test"
+        recs = [self._b1_rec("SPF", "pending"),
+                self._b1_rec("DKIM", "verified"),
+                self._b1_rec("Tracking", "verified")]
+        r = self._b(self._b1_records(recs))
+        self.assertEqual(r["B1"]["gewicht"], "fund")
+
+    def test_b1_tracking_offen_ist_nur_hinweis(self):
+        # Tracking ist bei uns ausgeschaltet (click_tracking=false)
+        os.environ["RESEND_API_KEY"] = "re_test"
+        recs = [self._b1_rec("SPF", "verified"),
+                self._b1_rec("DKIM", "verified"),
+                self._b1_rec("Tracking", "pending")]
+        r = self._b(self._b1_records(recs))
+        self.assertEqual(r["B1"]["gewicht"], "hinweis")
 
     def test_b2_ohne_export_key_bleibt_hinweis(self):
         # B0 grün, B2 ungemessen – die zwei Systeme stummschalten einander nicht
