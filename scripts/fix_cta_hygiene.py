@@ -24,6 +24,15 @@ WARUM (Reserve-Reparatur #5, 11.09.2026, „Stock shortage“ #247):
   Gedankenstrich in „Partner-Vergleich“/„Partner‑Vergleich“ bleibt bytegenau
   erhalten (kein Streit mit dem Dash-Guard).
 
+ZWEITE KLASSE (25.09.2026, „sichtbares {rel=}“, Premium-Fix): Die Engine
+hängte an /go/-Markdown-Links teils `{rel="sponsored"}` (Goldmark-Attribut-
+Syntax). Hugo/Goldmark parst das hier NICHT – es rendert als sichtbarer
+Text „{rel="sponsored"}“ hinter jedem CTA-Button (bewiesen im gebauten
+HTML). `rel="sponsored nofollow noopener"` setzt kanonisch der Render-Hook
+(layouts/_default/_markup/render-link.html) – das Suffix ist redundant UND
+sichtbar. Es wird ersatzlos gestrippt (nur direkt nach /go/-Links, nur
+rel-Attribute; sonstiger Text mit {Klammern} bleibt unangetastet).
+
 MODI:
   python3 scripts/fix_cta_hygiene.py                     # Korpus (ohne Entwürfe)
   python3 scripts/fix_cta_hygiene.py --include-drafts    # inkl. Entwürfe
@@ -54,11 +63,19 @@ CANONICAL_CTA_RE = re.compile(
 )
 
 
+# `{rel="..."}` direkt nach einem /go/-Markdown-Link (s. Docstring, Klasse 2).
+REL_ATTR_RE = re.compile(
+    r"(\]\(/go/[A-Za-z0-9\-]+(?:/[^)\s]*)?\))"
+    r'''\{\s*rel\s*=\s*(?:"[^"]*"|'[^']*')\s*\}'''
+)
+
+
 def hygiene_text(text: str) -> tuple[str, int]:
     """Liefert (ggf. geheilten Text, Anzahl Korrekturen). Idempotent."""
     new, n = CANONICAL_CTA_RE.subn(
         lambda m: m.group("prefix") + "Die besten" + m.group("rest"), text)
-    return new, n
+    new, n2 = REL_ATTR_RE.subn(r"\1", new)
+    return new, n + n2
 
 
 def hygiene_file(path: Path) -> int:
@@ -114,6 +131,20 @@ def run_selftest() -> list:
         out, n4 = hygiene_text(clean)
         if n4 != 0 or out != clean:
             fehler.append("Die Hygiene greift außerhalb der markierten CTA-Zeile")
+        # Klasse 2 (25.09.2026): {rel=} nach /go/-Link wird gestrippt
+        rel = ("[CTA](/go/gas/){rel=\"sponsored\"} und "
+               "[Anderer](/go/strom/){rel='sponsored'}!\n")
+        out, n5 = hygiene_text(rel)
+        if n5 != 2 or "{rel" in out or "(/go/gas/)" not in out:
+            fehler.append(f"{{rel=}}-Suffix nicht gestrippt (n={n5}): {out!r}")
+        out2, n6 = hygiene_text(out)
+        if n6 != 0 or out2 != out:
+            fehler.append("rel-Strip ist nicht idempotent (churnt)")
+        # {Klammern} anderswo bleiben (kein /go/-Link davor)
+        klammer = "Ein {Beispiel} im Text und [intern](../../posts/a/).\n"
+        out, n7 = hygiene_text(klammer)
+        if n7 != 0 or out != klammer:
+            fehler.append("rel-Strip greift außerhalb von /go/-Links")
         # Entwurfs-Filter
         draft = d / "d.md"
         live = d / "l.md"

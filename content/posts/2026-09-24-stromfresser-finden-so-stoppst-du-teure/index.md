@@ -106,7 +106,7 @@ Nehmen wir einen Haushalt mit einem Verbrauch von 3 500 kWh an. Das ist typisc
 - **Maßnahme 2:** Nutzung von Steckdosenleisten für Standby-Geräte (Ersparnis ca. 150 kWh/Jahr).
 - **Maßnahme 3:** Umstellung auf Eco-Programme und LED-Leuchtmittel (Ersparnis ca. 100 kWh/Jahr).
 
-**Ergebnis:** Du sparst insgesamt 500 kWh pro Jahr. Das entspricht einer Kostenreduktion von rund 175 € jährlich. Führst du zusätzlich einen Anbieterwechsel über [CHECK24](/go/allgemein/){rel="sponsored"} durch, gewinnst du oft weitere 200 €–400 €. Dein gesamtes Potenzial liegt somit bei über 500 € pro Jahr.
+**Ergebnis:** Du sparst insgesamt 500 kWh pro Jahr. Das entspricht einer Kostenreduktion von rund 175 € jährlich. Führst du zusätzlich einen Anbieterwechsel über [CHECK24](/go/allgemein/) durch, gewinnst du oft weitere 200 €–400 €. Dein gesamtes Potenzial liegt somit bei über 500 € pro Jahr.
 
 ## Warum der Tarifwechsel der ultimative Spar-Hebel ist
 

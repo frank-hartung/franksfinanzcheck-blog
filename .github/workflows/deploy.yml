@@ -254,6 +254,22 @@ jobs:
       - name: URL-Hygiene – deterministisch heilbare holds entblocken
         run: python3 scripts/fix_url_hygiene.py --heal-holds
 
+      # HOLD-SELBSTHEILUNG (PREMIUM-FIX 25.09.2026, „stale Hold → 404“): Die
+      # Gates in diesem Deploy heilen Content (Titel, Cover, Länge …), aber ein
+      # früher gesetzter Hold (z. B. „publish-gate: Zeichenlänge nicht
+      # bestanden“) blieb danach als draft:true liegen – die URL lieferte 404,
+      # obwohl der Artikel längst alle Gates bestand. Niemand rearmte den Hold:
+      # publish_gate prüft nur Kandidaten des HEUTIGEN Datums, check_length
+      # überspringt Entwürfe. Dieser Schritt bewertet heilbare Holds neu und
+      # legt reife Artikel in die Re-Queue (die Promotion entscheidet weiter
+      # allein cadence_guard beim nächsten Slot – kein Direkt-Publish aus dem
+      # Deploy).
+      - name: Hold-Selbsttest (reife Holds erkennen, sonst kein Build)
+        run: python3 scripts/requeue_quality_holds.py --selftest
+
+      - name: Hold-Requeue (geheilte Holds → Re-Queue, kein Direkt-Publish)
+        run: python3 scripts/requeue_quality_holds.py --fix || echo "⚠ Hold-Requeue – Funde im Log"
+
       - name: Kadenz-Selbsttest (Gate muss lauffähig sein, sonst kein Build)
         run: python3 scripts/cadence_guard.py --selftest
 

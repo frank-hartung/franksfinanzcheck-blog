@@ -437,6 +437,8 @@ jobs:
           python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
           echo "== Finale CTA-Hygiene nach allen Rewrite-Heilern (FIX #247) =="
           python3 scripts/fix_cta_hygiene.py --include-drafts || echo "⚠ CTA-Hygiene – Restfunde siehe Log"
+          echo "== Hold-Requeue nach Heilung (PREMIUM-FIX 25.09.2026: Phase 0.5 rearmt VOR der Heilung – was Phase 2/3 heilt, würde sonst nie rearmt (stale Hold → 404)) =="
+          python3 scripts/requeue_quality_holds.py --fix || echo "⚠ Hold-Requeue – Funde im Log"
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
           git add -A

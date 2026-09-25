@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import bot_status
+import check_uniqueness as twin
 import grammar_check
 import profi_polish
 import publication_check as pc
@@ -428,6 +429,42 @@ class ReserveCertFreshnessTests(unittest.TestCase):
         rows = [{'slug': 'a', 'ready': True}, {'slug': '', 'ready': True}, {}]
         cleaned = rr.prune_stale_rows(rows)
         self.assertEqual(cleaned, [{'slug': 'a', 'ready': True}])
+
+
+class TwinSchutzTests(unittest.TestCase):
+    """Same-Day-Twin-Heilung darf nie etablierte/geteilte URLs draften.
+
+    Regressionsschutz für den Premium-Fix vom 25.09.2026 („404 nach
+    Twin-Heilung“): heal_twin() setzte jeden jüngeren Zweitling auf
+    draft:true – auch Live-Artikel, deren URL längst geteilt war. Jeder
+    Auto-Draft eines etablierten Artikels ist ein 404 für echte Leser.
+    """
+
+    def test_geburtstag_ungeteilt_darf_heilen(self):
+        heute = dt.date.today().isoformat()
+        grund = twin.twin_schutz_grund(
+            "content/posts/2026-09-25-frisch/index.md",
+            heute + "T08:00:00Z", geteilt=set())
+        self.assertEqual(grund, "")
+
+    def test_etablierter_zweitling_ist_geschuetzt(self):
+        alt = (dt.date.today() - dt.timedelta(days=5)).isoformat()
+        grund = twin.twin_schutz_grund(
+            "content/posts/2026-09-20-etabliert/index.md",
+            alt + "T08:00:00Z", geteilt=set())
+        self.assertIn("etabliert", grund)
+
+    def test_geteilter_zweitling_ist_geschuetzt_auch_am_geburtstag(self):
+        heute = dt.date.today().isoformat()
+        grund = twin.twin_schutz_grund(
+            "content/posts/2026-09-25-geteilt/index.md",
+            heute + "T08:00:00Z", geteilt={"2026-09-25-geteilt"})
+        self.assertIn("geteilt", grund)
+
+    def test_zweitling_ohne_datum_ist_geschuetzt(self):
+        grund = twin.twin_schutz_grund(
+            "content/posts/2026-09-20-ohne-datum/index.md", "", geteilt=set())
+        self.assertNotEqual(grund, "")
 
 
 if __name__ == '__main__':
