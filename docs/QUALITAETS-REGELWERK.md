@@ -51,8 +51,13 @@ KI-Artikel (engine_generate.py)
    ├─► 🧠 textverstaendnis_guard.py R2-R5/R7/R8 Verständnis (parkt neue Artikel)
    ├─► 🔗 link_guard.py           Links (Slugs, Ziele, UTM)
    ├─► 📖 absorb_whitelist.py     Rechtschreib-Rauschen (Komposita → Whitelist)
-   ├─► 🧴 sprachglatt.py          Glätt-Gate (DW1–DW9, offline DeepL-Write-Nachbau, V1 Vorschläge)
-   └─► 🩺 grammar_check.py        Grammatik-Gate (LT1–LT4, offline, Exit 2 bei Selbsttest-Rot)
+ ├─► 🧴 sprachglatt.py          Glätt-Gate (DW1–DW9, offline DeepL-Write-Nachbau, V1 Vorschläge)
+ ├─► 🩺 grammar_check.py        Grammatik-Gate (LT1–LT4, offline, Exit 2 bei Selbsttest-Rot)
+ └─► ✍️ claude_stilpolitur.py   Stil-Politur (Claude, KOSTENLOS ohne API via Puter.js,
+                                NUR claude-sonnet-5 + personalisiert: Franks
+                                Schreibstil aus data/schreibstil.yaml – Auftrag
+                                25.09.2026, läuft NACH der Offline-Optimierung;
+                                Auffrischung Mo/Mi/Fr + bei jedem neuen Artikel)
 ```
 
 Ausführung aller Regeln: **niemals blockierend** (`|| echo "nicht kritisch"`).

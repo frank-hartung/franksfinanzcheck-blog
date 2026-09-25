@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "hinweis": "Fingerprint-State der Claude-Stilpolitur (Claude, kostenlos ohne API, nur claude-sonnet-5). Wird ausschliesslich von scripts/claude_stilpolitur.py geschrieben – pro Artikel: fp (Body-SHA-256), status (ok/verworfen), modell, grund, last. Auffrischung NUR Mo/Mi/Fr (auffrischung_tage), Rotation ab auffrischung_alter_tage Tagen (data/ki_redaktion.yaml).",
+  "artikel": {}
+}
