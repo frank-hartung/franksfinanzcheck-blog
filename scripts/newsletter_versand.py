@@ -794,6 +794,10 @@ def _selftest() -> int:
     pruefe(name == "resend", "Transport: Studio-Default ignoriert")
 
     # 6) sende_datei: dry-run ohne Netz, Journal-Hash statt Adresse.
+    #    Temp-Root statt BLOG_DIR: C15-Vertrag – ein Prüf-Aufruf schreibt
+    #    niemals in den Arbeitsbaum; das Repo-Journal gehört echten Läufen.
+    import shutil as _shutil
+    tmp_root = tempfile.mkdtemp(prefix="ff-versand-selftest-")
     tmp = os.path.join(tempfile.gettempdir(), "ff-vertest.json")
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump({
@@ -801,11 +805,11 @@ def _selftest() -> int:
             "empfaenger": [{"email": "dry@beispiel.de", "token": "t-d",
                             "html": "<p>hi</p>", "text": "hi"}],
         }, fh)
-    journal_pfad = os.path.join(BLOG_DIR, JOURNAL_REL)
+    journal_pfad = os.path.join(tmp_root, JOURNAL_REL)
     vorher = 0
     if os.path.exists(journal_pfad):
         vorher = sum(1 for _ in open(journal_pfad, encoding="utf-8"))
-    rc = sende_datei(tmp, root=BLOG_DIR, env={"NEWSLETTER_TRANSPORT": "dryrun"}, konf=konf)
+    rc = sende_datei(tmp, root=tmp_root, env={"NEWSLETTER_TRANSPORT": "dryrun"}, konf=konf)
     pruefe(rc == 0, f"dry-run: Exit {rc} statt 0")
     with open(journal_pfad, encoding="utf-8") as fh:
         zeilen = fh.readlines()
@@ -822,12 +826,13 @@ def _selftest() -> int:
         with open(tmp2, "w", encoding="utf-8") as fh:
             json.dump({"empfaenger": [{"email": "x@y.de", "html": "<p>hi</p>"}]}, fh)
         try:
-            sende_datei(tmp2, root=BLOG_DIR, env={"NEWSLETTER_TRANSPORT": "resend"}, konf=konf)
+            sende_datei(tmp2, root=tmp_root, env={"NEWSLETTER_TRANSPORT": "resend"}, konf=konf)
             pruefe(False, "Resend: fehlender Key nicht abgefangen")
         except SystemExit as exc:
             pruefe("RESEND_API_KEY" in str(exc), "Resend: Abbruchmeldung ohne Klickweg")
         finally:
             os.remove(tmp2)
+            _shutil.rmtree(tmp_root, ignore_errors=True)
     except AssertionError:
         raise
 

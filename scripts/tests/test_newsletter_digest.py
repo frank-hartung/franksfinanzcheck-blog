@@ -214,6 +214,11 @@ class CaptureWacheTest(unittest.TestCase):
     """`pruefe_capture`: der Live-Repo ist aktiv; ein leerer Root ist INERT, nicht rot."""
 
     def test_live_repo_ist_aktiv(self):
+        # Die Live-Prüfung braucht den gebauten Bestand (public/). Ein
+        # CI-Checkout ohne Build ist keine Fundlage: Der Qualitäts-Gate
+        # (link-check.yml) läuft dieselbe Wache am frischen Hugo-Build.
+        if not os.path.isdir(os.path.join(ROOT, "public")):
+            self.skipTest("kein public/-Build – vom Qualitäts-Gate abgedeckt")
         funde, note, zustand = digest.pruefe_capture(ROOT)
         self.assertEqual(zustand, "aktiv", f"Funde: {funde}")
 
