@@ -216,6 +216,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           echo "== Profi-Polish (KI) =="
           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
@@ -238,6 +239,12 @@ jobs:
           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
           echo "== Sprachglatt (DW1–DW9, offline DeepL-Write-Nachbau, ohne API, 25.09.2026) =="
           python3 scripts/sprachglatt.py --fix --new-only || echo "⚠ Sprachglatt (nicht kritisch)"
+          echo "== Claude 3.5 Sonnet Stil-Politur (personalisiert, Premium-Agentur-Level, Auftrag 25.09.2026) =="
+          # Beauftragte Paid-Lane (Dauervorgabe Frank 25.09.2026): läuft NACH der
+          # Offline-Optimierung (LT+DW) über jeden neuen Artikel mit Franks
+          # persönlichem Schreibstil (data/schreibstil.yaml). Der tägliche
+          # Bestandslauf deckt die Alt-Artikel ab (claude-stilpolitur.yml).
+          python3 scripts/claude_stilpolitur.py --fix --new-only || echo "⚠ Stil-Politur (nicht kritisch)"
           echo "== Akronym-/Marken-/Tagschreibung (casing_guard: C1–C17 + T1, Selbsttest vor jedem Schreibvorgang) =="
           python3 scripts/casing_guard.py --fix --new-only || echo "⚠ Casing-Guard (nicht kritisch)"
           # CASING-VERBUND (PREMIUM 09.09.2026): Pin-Texte werden IMMER aus

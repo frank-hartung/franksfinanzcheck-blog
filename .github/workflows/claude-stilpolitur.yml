@@ -1,0 +1,135 @@
+name: Claude-Stilpolitur (täglich)
+
+# ============================================================
+#  CLAUDE-STILPOLITUR – Claude 3.5 Sonnet, personalisiert
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 25.09.2026), wörtlich:
+#    „Nutze für jeden bestehenden und zukünftigen Blogartikel nach
+#    der Offline-Optimierung zusätzlich automatisch täglich
+#    Claude 3.5 Sonnet mit einem personalisierten Prompt für
+#    meinen eigenen Schreibstil auf Premium-Level einer Profi-Agentur."
+#
+#  REIHENFOLGE IN JEDEM LAUF („nach der Offline-Optimierung"):
+#    1. Offline-Optimierung (ohne API): grammar_check (LT1–LT4)
+#       + sprachglatt (DW1–DW9) – Fix über ALLE Artikel
+#    2. Claude 3.5 Sonnet (Paid-Lane): claude_stilpolitur.py --fix
+#       mit personalisiertem Prompt (data/schreibstil.yaml +
+#       data/brand_brain.yaml) – Premium-Level einer Profi-Agentur
+#    3. Commit als Redaktions-Bot (wie redaktions-politur.yml)
+#
+#  ABDECKUNG: jeder Lauf prüft JEDEN Artikel (bestehende + neue).
+#  Geschrieben wird nach Bedarf (Fingerprint): neu · geändert · älter
+#  als auffrischung_tage (Rotation, Default 7 Tage). Budget:
+#  max_artikel_pro_tag (Default 12) – der Rest wartet auf Rotation.
+#
+#  Laufzeiten:
+#    - Täglich 04:50 UTC (06:50 MESZ) – NACH redaktions-politur (Mo)
+#      und VOR der Content-Engine (neue Artikel holt zusätzlich
+#      content-engine-v2.yml Phase 2 im Geburtslauf mit --new-only)
+#    - Manuell: Actions → „Claude-Stilpolitur (täglich)" → Run workflow
+#      (Inputs: force = alle neu polieren, limit = Budget-Lauf)
+#
+#  Kosten: Paid (ANTHROPIC_API_KEY). Ausdrückliche Dauervorgabe –
+#  die Gratis-Regel der Artikel-GENERIERUNG bleibt unangetastet.
+#
+#  Reports (gitignored, bleiben im Lauf-Log):
+#    - CLAUDE-STILPOLITUR-REPORT.md + .claude_stilpolitur_report.json
+#  State/Historie (versioniert):
+#    - data/claude_stil_state.json · data/claude_stil_history.jsonl
+# ============================================================
+
+on:
+  schedule:
+    - cron: "50 4 * * *"   # täglich 04:50 UTC (06:50 MESZ)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Alle Artikel neu polieren (ignoriert Fingerprint/Rotation)"
+        type: boolean
+        default: false
+      limit:
+        description: "Max. Artikel in diesem Lauf (leer = Konfiguration)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: claude-stilpolitur
+  cancel-in-progress: false
+
+jobs:
+  stilpolitur:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Voraussetzungen prüfen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          for f in scripts/sprachkern.py scripts/grammar_check.py scripts/sprachglatt.py \
+                   scripts/claude_stilpolitur.py data/schreibstil.yaml scripts/git_sync.sh; do
+            if [ ! -f "$f" ]; then
+              echo "🛑 $f fehlt auf main – PR nicht gemergt?"
+              exit 1
+            fi
+          done
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "🛑 ANTHROPIC_API_KEY fehlt in den Repo-Secrets – die beauftragte"
+            echo "   Paid-Lane (Claude 3.5 Sonnet, personalisiert) kann nicht laufen."
+            echo "   Einrichten: Settings → Secrets and variables → Actions →"
+            echo "   New repository secret → Name: ANTHROPIC_API_KEY"
+            exit 1
+          fi
+          echo "✅ Voraussetzungen vorhanden (Engines + Stilprofil + API-Key)."
+
+      - name: Python-Abhängigkeiten
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
+        run: |
+          python3 scripts/grammar_check.py --selftest
+          python3 scripts/sprachglatt.py --selftest
+          python3 scripts/claude_stilpolitur.py --selftest
+          echo "✅ Selbsttests grün (offline)."
+
+      - name: Offline-Optimierung (LT + DW, ohne API – IMMER zuerst)
+        run: |
+          echo "== Grammatik (LT1–LT4, offline LanguageTool-Nachbau) =="
+          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_politur.txt || echo "⚠ Grammatik: Restfunde im Report"
+          echo "== Sprachglatt (DW1–DW9 + V1, offline DeepL-Write-Nachbau) =="
+          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
+
+      - name: Claude 3.5 Sonnet – Stil-Politur (personalisiert, Premium)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
+          echo "== Claude 3.5 Sonnet (personalisiert: data/schreibstil.yaml) =="
+          python3 scripts/claude_stilpolitur.py --fix $ARGS | tee /tmp/stilpolitur.txt
+          cat /tmp/stilpolitur.txt
+
+      - name: Änderungen committen & pushen (Redaktions-Bot)
+        run: |
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          # Reports sind gitignored (bleiben im Lauf-Log) – nur Content + State stagen
+          git add content/ 2>/dev/null || true
+          git add data/claude_stil_state.json 2>/dev/null || true
+          git add data/claude_stil_history.jsonl 2>/dev/null || true
+          git add data/sprachglatt_history.jsonl 2>/dev/null || true
+          git add data/grammar_whitelist.txt 2>/dev/null || true
+          git add data/korrekturen.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Bestand bereits auf Premium-Level – nichts zu heilen."
+          else
+            git commit -m "redaktion: Claude-Stilpolitur (Claude 3.5 Sonnet, personalisiert) – Premium-Level einer Profi-Agentur"
+            scripts/git_sync.sh --push-only
+          fi

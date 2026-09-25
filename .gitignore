@@ -35,6 +35,7 @@ __pycache__/
 .keyword_suggestions.json
 .grammar_report.json
 .sprachglatt_report.json
+.claude_stilpolitur_report.json
 .spellcheck_report.json
 ops-report.json
 

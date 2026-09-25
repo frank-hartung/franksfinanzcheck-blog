@@ -43,6 +43,7 @@ Bewusst **anderswo** (keine Doppel-Regeln, Regelwerk-Prinzip „jede Regel genau
 - Füllphrasen/Intensiv/Pleonasmus/Zahlen = `lektor_guard.py` (L2/L10/L11)
 - Fest-Fehler `einzigste/daß/seid-Pronomen` = `hardcases_guard.py` (H1–H9)
 - Stil-Messung (Passiv, LIX) = `stil_guard.py` (S1–S8)
+- Stil-Politur auf Premium-Level (Claude 3.5 Sonnet, personalisiert, Paid-Lane 25.09.2026) = `claude_stilpolitur.py` – läuft NACH dieser Offline-Optimierung, Details in `docs/ANLEITUNG-CLAUDE-STILPOLITUR.md`
 
 ---
 

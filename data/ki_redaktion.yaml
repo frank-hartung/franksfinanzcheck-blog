@@ -32,3 +32,35 @@ zeichenvorgabe_news:
 auto_veroeffentlichen: false
 
 max_artikel_pro_lauf: 1
+
+# ------------------------------------------------------------
+#  STILPOLITUR – separater PAID-LANE (ausdrücklicher Auftrag Frank,
+#  25.09.2026): „Nutze für jeden bestehenden und zukünftigen
+#  Blogartikel nach der Offline-Optimierung zusätzlich automatisch
+#  täglich Claude 3.5 Sonnet mit einem personalisierten Prompt
+#  für meinen eigenen Schreibstil auf Premium-Level einer
+#  Profi-Agentur."
+#
+#  KOSTEN-REGEL-ABGRENZUNG: Diese Lane ist bewusst KEIN Teil der
+#  Anbieter-Ketten oben. Die Gratis-Regel für die ARTIKEL-
+#  GENERIERUNG (anbieter_kette_lang/news) bleibt unangetastet –
+#  Claude 3.5 Sonnet läuft ausschließlich für die Stil-Politur
+#  nach der Offline-Optimierung (grammar_check + sprachglatt) und
+#  nur mit gesetztem ANTHROPIC_API_KEY.
+#
+#  Modell-Bindung: Ausdrücklich Claude 3.5 SONNET (Auftrag),
+#  NICHT der Sonnet-4.5-Default aus llm_client.py. Override:
+#  STILPOLITUR_MODEL (z. B. claude-3-5-sonnet-20241022 als
+#  fixe Datums-Version, falls das -latest-Alias entfällt).
+#
+#  Verbrauch (Cost-Guard): Jeder Lauf prüft jeden Artikel, schreibt
+#  aber nur bei Bedarf (Fingerprint in data/claude_stil_state.json:
+#  neu · geändert · älter als auffrischung_tage).
+# ------------------------------------------------------------
+stilpolitur:
+  modell: "claude-3-5-sonnet-latest"
+  temperatur: 0.5
+  max_tokens: 8192
+  timeout: 300
+  max_artikel_pro_tag: 12
+  auffrischung_tage: 7
