@@ -163,3 +163,20 @@ RAUS“) in Modul-Köpfen. Gelöscht: `ANLEITUNG-NEWSLETTER.md`,
 9. Secrets, die Brevo je betraut haben, in GitHub löschen
    (Rotation ist kostenlos; ein toter Key in den Settings ist ein
    Einladungsschreiben).
+
+---
+
+## Korrektur (25.09.2026): Resend-DNS-Modell
+
+Dieser Report ging für Schritt 5/6 vom SPF/DKIM-Bild aus, das bei der
+Programmierung galt (`include:resend.net` in der Apex-SPF + zwei DKIM-
+Selektoren). Die aktuelle offizielle Resend-Dokumentation (SES-Modell)
+verlangt stattdessen: **SPF-TXT + Bounce-MX auf der `send.`-Subdomain**,
+**ein** DKIM-TXT (`resend._domainkey`), **Apex-SPF unverändert**, DMARC
+unverändert (steht bereits in der Zone). Zustellbarkeits-Wache (C2/C3)
+und `docs/ANLEITUNG-NEWSLETTER-EIGENBETRIEB.md` § 3 sind darauf
+umgestellt; die Zeilen in § 4 (F4) und § 5 (Schritt 3) dieses Reports
+sind entsprechend zu lesen. Außerdem: der Mailer schaltet
+`open_tracking`/`click_tracking` jetzt explizit **aus** (sonst würde der
+Resend-Konto-Default greifen und das „kein Tracking"-Versprechen brechen).
+Alles Weitere in diesem Report gilt.

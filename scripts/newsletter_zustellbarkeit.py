@@ -17,12 +17,14 @@ Die Brevo-Schicht ist raus. Geprüft wird jetzt, was in dieser
 Architektur Zustellung entscheidet:
 
   CLOUDFLARE (DNS-Zone, per DNS-über-HTTPS gemessen, nie geraten):
-    C1  SPF: genau ein Eintrag (zwei = permanenter Fehler), Cloudflare-
-        Routing enthalten (Reply-to muss ankommen), mit Mechanik
-    C2  SPF nimmt Resend auf: `include:resend.net` – ohne es sendet
-        Resend, aber die Empfänger-Zone sieht keinen Sender-Nachweis
-    C3  Resend-DKIM: TXT `_resend._domainkey` (Resend erwartet beide
-        Datensätze; einer allein = Hinweis, keiner = Fund)
+    C1  SPF: genau ein Eintrag (zwei = permanenter Fehler), mit Mechanik.
+        Die Apex-SPF bleibt die eigene der Zone (hier: Cloudflare-Routing)
+        – Resend verlangt seit seinem SES-Modell KEIN Include an der Spitze
+    C2  Resend-Send-Subdomain: TXT-SPF auf `send.` (z. B.
+        `v=spf1 include:amazonses.com ~all`) + MX für Bounces
+        (`feedback-smtp.<region>.amazonses.com`) – exakte Werte aus
+        Resend → Domains; gemessen wird Existenz + Form
+    C3  Resend-DKIM: TXT `resend._domainkey` (ein Datensatz mit `p=`-Key)
     C4  DMARC: vorhanden? `rua`-Berichtsweg? Policy nicht strenger als
         die Echtheitsnachweise (p=reject OHNE DKIM = Fund: alles ohne
         Alignment wird hart abgewiesen)?
@@ -76,7 +78,14 @@ DOH_ENDPUNKTE = ("https://dns.google/resolve?dnssec=false&",
 DOH_ZEITLIMIT = 8
 RESEND_API = "https://api.resend.com"
 RESEND_FREE_TAGESGRENZE = 100   # Resend Free: 3000/Monat, davon 100/Tag
-RESEND_SPF_INCLUDE = "include:resend.net"
+# Resend (AWS-SES-Modell, seit 2025): Authentifizierung läuft über die
+# SEND-SUBDOMAIN (Default `send.`) – SPF-TXT + Bounce-MX dort, DKIM auf
+# `resend._domainkey`, DMARC an der Spitze. An der Apex-SPF ändert sich
+# nichts. Der MX-Wert ist Region-spezifisch (Konto-Region), deshalb
+# Muster statt fester Domain.
+RESEND_SEND_SUBDOMAINE = "send"
+RESEND_SES_MX = re.compile(r"feedback-smtp\.[a-z0-9-]+\.amazonses\.com",
+                           re.IGNORECASE)
 CLOUDFLARE_MX_MARKEN = ("mx.cloudflare.net", "route1.mx.cloudflare.net",
                         "route2.mx.cloudflare.net", "route3.mx.cloudflare.net")
 
@@ -257,7 +266,8 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
     if not spf:
         funde.append(_regel("C1", "cloudflare", "fund", "kein SPF-Eintrag in der Zone",
                             f"TXT {z}: " + (", ".join(txts)[:120] or "leer"),
-                            "v=spf1 include:resend.net ~all",
+                            "v=spf1 include:_spf.mx.cloudflare.net ~all "
+                            "(die eigene SPF der Zone)",
                             "Cloudflare → DNS → Records → TXT anlegen (Name @)",
                             "Ohne SPF kann jede fremde IP im Zone-Namen mailen – "
                             "Empfänger-Server senken die Anlieferungsbewertung dafür "
@@ -266,7 +276,8 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
         funde.append(_regel("C1", "cloudflare", "fund",
                             "mehrere SPF-Einträge (permanenter Fehler)",
                             " · ".join(spf)[:200],
-                            "exakt EINER: v=spf1 include:resend.net ~all",
+                            "exakt EINER (die eigene der Zone, z. B. "
+                            "v=spf1 include:_spf.mx.cloudflare.net ~all)",
                             "Cloudflare → DNS → TXT-Records: alle `v=spf1`-Einträge "
                             "auf einen zusammenführen",
                             "Mehrere SPF-Records machen die Zone per RFC dauerhaft "
@@ -281,63 +292,70 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
             funde.append(_regel("C1", "cloudflare", "fund",
                                 "SPF ohne Mechanik (niemand darf mailen)",
                                 wert[:200],
-                                "v=spf1 include:resend.net ~all",
+                                "v=spf1 include:_spf.mx.cloudflare.net ~all",
                                 "Cloudflare → DNS → TXT-Record @ bearbeiten",
                                 "Ein SPF wie `v=spf1 ~all` nimmt niemanden auf – "
-                                "Resend inklusive."))
+                                "auch die eigene Mail-Weiterleitung nicht."))
 
-    # C2 – Resend in der SPF (Resend-Checkliste; ansonsten sendet Resend ohne
-    # SPF-Nachweis → Empfänger-Server bestraft das)
-    if spf:
-        if RESEND_SPF_INCLUDE in spf[0].lower():
-            funde.append(_regel("C2", "cloudflare", "ok", "SPF nimmt Resend auf",
-                                RESEND_SPF_INCLUDE + " vorhanden", "—", "—", ""))
-        else:
-            funde.append(_regel("C2", "cloudflare", "fund",
-                                "SPF ohne `include:resend.net`",
-                                spf[0][:200],
-                                "im SPF-Record ergänzen: " + RESEND_SPF_INCLUDE,
-                                "Resend → Sending Domains → die DNS-Einträge für "
-                                "resend.net ablesen; Cloudflare → DNS → TXT @",
-                                "Resend sendet von resenden.net-IPs – ohne das Include "
-                                "ist die Mail für den Empfänger SPF-ungeprüft, auch wenn "
-                                "DKIM passt."))
-
-    # C3 – Resend-DKIM (beide Datensätze sind die Resend-Praxis; einer = Teillösung)
-    d1s, d1 = dns("_resend._domainkey." + z, "TXT")
-    d2s, d2 = dns("_resend2._domainkey." + z, "TXT")
-    c1, cn1 = dns("_resend._domainkey." + z, "CNAME")
-    c2, cn2 = dns("_resend2._domainkey." + z, "CNAME")
-    da1 = d1s == "gemessen" and (d1 or (cn1 == "gemessen" and cn1))
-    da2 = d2s == "gemessen" and (d2 or (cn2 == "gemessen" and cn2))
-    if da1 and da2:
-        funde.append(_regel("C3", "cloudflare", "ok", "Resend-DKIM vollständig",
-                            "_resend._domainkey + _resend2._domainkey gemessen",
-                            "—", "—", ""))
-    elif da1 or da2:
-        funde.append(_regel("C3", "cloudflare", "hinweis",
-                            "Resend-DKIM nur teilweise",
-                            "vorhanden: " + (", ".join(
-                                n for n, da in (("_resend", da1), ("_resend2", da2)) if da)),
-                            "beide TXT-Datensätze aus Resend → Sending Domains anlegen",
-                            "Cloudflare → DNS → TXT anlegen (Name `_resend._domainkey` "
-                            "bzw. `_resend2._domainkey`)",
-                            "Ein Datensatz deckt nur einen Teil der Signaturlinks – "
-                            "Resend selbst erwartet beide."))
+    # C2 – Resend-Send-Subdomain (SES-Modell: SPF-TXT + Bounce-MX auf `send.`;
+    # an der Apex-SPF ändert sich NICHTS). Der MX-Wert ist Region-spezifisch
+    # (Konto-Region) → Existenz + Form messen, nicht einen festen Host.
+    send_txt_s, send_txt = dns(RESEND_SEND_SUBDOMAINE + "." + z, "TXT")
+    send_mx_s, send_mx = dns(RESEND_SEND_SUBDOMAINE + "." + z, "MX")
+    send_spf = [t for t in send_txt if t.strip().lower().startswith("v=spf1")]
+    send_mx_ok = [m for m in send_mx if RESEND_SES_MX.search(m)]
+    if send_spf and send_mx_ok:
+        funde.append(_regel("C2", "cloudflare", "ok",
+                            "Resend-Send-Subdomain-Einträge vorhanden",
+                            "TXT send: " + send_spf[0][:80] + " · MX send: "
+                            + send_mx_ok[0][:60], "—", "—", ""))
     else:
-        funde.append(_regel("C3", "cloudflare", "fund", "Resend-DKIM fehlt",
-                            f"_resend._domainkey.{z}: {d1s}",
-                            "beide TXT-Datensätze aus dem Resend-Dashboard kopieren "
-                            "(Sending Domains → Domain wählen)",
-                            "Resend → Sending Domains → franksfinanzcheck.de → die "
-                            "DKIM-TXTs kopieren; Cloudflare → DNS → TXT anlegen",
+        fehlt = []
+        if not send_spf:
+            fehlt.append("TXT `send` (SPF, so wie Resend zeigt: "
+                         "`v=spf1 include:amazonses.com ~all`)")
+        if not send_mx_ok:
+            fehlt.append("MX `send` (Bounce, so wie Resend zeigt: "
+                         "`feedback-smtp.<region>.amazonses.com`, Priorität 10)")
+        gewicht = ("nicht messbar"
+                   if "nicht messbar" in (send_txt_s, send_mx_s) else "fund")
+        funde.append(_regel("C2", "cloudflare", gewicht,
+                            "Resend-Send-Subdomain-Einträge fehlen oder unvollständig",
+                            "TXT send: " + (", ".join(send_txt)[:80] or send_txt_s)
+                            + " · MX send: " + (", ".join(send_mx)[:60] or send_mx_s),
+                            "anlegen: " + " und ".join(fehlt),
+                            "Resend → Domains → " + z + " → die beiden SPF-Records "
+                            "(TXT + MX, Name `send`) exakt kopieren; Cloudflare → DNS "
+                            "→ Records → hinzufügen",
+                            "Resend authentifiziert über die send.-Subdomain (AWS SES): "
+                            "ohne TXT ist die Mail SPF-ungeprüft, ohne MX landen "
+                            "Rückläufer nirgends. Apex-SPF: bewusst unverändert."))
+
+    # C3 – Resend-DKIM: EIN Datensatz, TXT `resend._domainkey` (p=-Key).
+    ds, d = dns("resend._domainkey." + z, "TXT")
+    dkim_da = ds == "gemessen" and bool(d)
+    if dkim_da:
+        funde.append(_regel("C3", "cloudflare", "ok", "Resend-DKIM vorhanden",
+                            "resend._domainkey gemessen (" + d[0][:40] + "…)",
+                            "—", "—", ""))
+    else:
+        funde.append(_regel("C3", "cloudflare",
+                            "fund" if ds != "nicht messbar" else "nicht messbar",
+                            "Resend-DKIM fehlt",
+                            f"resend._domainkey.{z}: {ds}",
+                            "TXT `resend._domainkey` aus Resend (Wert beginnt mit "
+                            "`p=` – im Stück kopieren; UI-Trunkatur ist die häufige "
+                            "Fehlstelle)",
+                            "Resend → Domains → " + z + " → DKIM-Record kopieren; "
+                            "Cloudflare → DNS → TXT anlegen (Name "
+                            "`resend._domainkey`, TTL auto)",
                             "DKIM trägt die Zustellung, wenn SPF auf geteilten IPs nie "
                             "alignt – ohne DKIM ist p=reject oben eine Selbstabsage."))
 
     # C4 – DMARC (Berichtsweg + Policy gegenüber den Echtheitsnachweisen)
     ms, dm = dns("_dmarc." + z, "TXT")
     if ms != "gemessen" or not dm:
-        gewicht = "fund" if (da1 or da2) else "hinweis"
+        gewicht = "fund" if dkim_da else "hinweis"
         funde.append(_regel("C4", "cloudflare", gewicht, "kein DMARC-Eintrag",
                             f"_dmarc.{z}: {ms}",
                             "v=DMARC1; p=none; rua=mailto:dmarc@" + z + "; adkim=s; aspf=s",
@@ -356,18 +374,18 @@ def pruefe_cloudflare(root: str) -> tuple[list[dict], dict]:
                                 "Cloudflare → DNS → TXT `_dmarc` bearbeiten",
                                 "p=reject ohne rua ist eine Entscheidung ohne Kontrolle: "
                                 "was abgewiesen wird, erfährt niemand."))
-        elif policy in ("reject", "quarantine") and not (da1 or da2):
+        elif policy in ("reject", "quarantine") and not dkim_da:
             funde.append(_regel("C4", "cloudflare", "fund",
                                 f"DMARC p={policy} ohne DKIM-Nachweis",
                                 text[:200],
-                                "erst Resend-DKIM (C3) vollständig machen, dann Policy "
+                                "erst Resend-DKIM (C3) abschließen, dann Policy "
                                 "behalten – sonst p=none",
                                 "C3 schliessen, dann hier nichts ändern",
                                 "reject/quarantine sagt dem Empfänger: alles ohne "
                                 "Alignment hart abzulehnen. Ohne DKIM ist ALLES ohne "
                                 "Alignment – die eigene Mail wäre die erste Spende an "
                                 "den Spamordner."))
-        elif policy == "none" and (da1 or da2):
+        elif policy == "none" and dkim_da:
             funde.append(_regel("C4", "cloudflare", "hinweis",
                                 "DMARC nur im Berichtmodus (p=none)",
                                 text[:200],
@@ -580,7 +598,7 @@ def _pruefe_resend_api(root: str) -> list[dict]:
                           f"Sende-Domain {z} nicht verifiziert",
                           "Domain vorhanden, `verified: false`",
                           "DNS-Einträge aus dem Resend-Dashboard vollständig anlegen "
-                          "(SPF-Include, beide DKIM-TXTs, DMARC optional)",
+                          "(SPF-TXT + MX auf `send.`, DKIM `resend._domainkey`)",
                           "Resend → Sending Domains → die Checkliste der Domain",
                           "Verifizierung = SPF+DKIM live. Solange sie fehlt, sendet "
                           "Resend nicht."))
@@ -805,12 +823,12 @@ def _selftest() -> int:
         werte = {
             ZONE: {"MX": [0, ["17 route2.mx.cloudflare.net.",
                              "41 route1.mx.cloudflare.net."]],
-                   "TXT": [0, ["v=spf1 include:_spf.mx.cloudflare.net "
-                               "include:resend.net ~all"]]},
+                   "TXT": [0, ["v=spf1 include:_spf.mx.cloudflare.net ~all"]]},
+            f"send.{ZONE}": {"TXT": [0, ["v=spf1 include:amazonses.com ~all"]],
+                             "MX": [0, ["10 feedback-smtp.us-east-1.amazonses.com"]]},
             f"_dmarc.{ZONE}": {"TXT": [0, ["v=DMARC1; p=reject; adkim=s; aspf=s; "
                                            "rua=mailto:dmarc@beispiel.de;"]]},
-            f"_resend._domainkey.{ZONE}": {"TXT": [0, ["k=rsa;p=MII…resend"]]},
-            f"_resend2._domainkey.{ZONE}": {"TXT": [0, ["k=rsa;p=MII…resend2"]]},
+            f"resend._domainkey.{ZONE}": {"TXT": [0, ["k=rsa;p=MII…resend"]]},
         }
         for sel in ("mail", "default", "s1", "k1", "dkim"):
             werte.setdefault(f"{sel}._domainkey.{ZONE}", {"TXT": [3, []], "CNAME": [3, []]})
@@ -856,9 +874,9 @@ def _selftest() -> int:
         pruefe_es(rg.get("C1", {}).get("gewicht") == "ok",
                   f"SPF ok erwartet: {rg.get('C1')}")
         pruefe_es(rg.get("C2", {}).get("gewicht") == "ok",
-                  f"Resend-Include in SPF erwartet ok: {rg.get('C2')}")
+                  f"send.-Einträge (C2) erwartet ok: {rg.get('C2')}")
         pruefe_es(rg.get("C3", {}).get("gewicht") == "ok",
-                  f"beide DKIM erwartet ok: {rg.get('C3')}")
+                  f"DKIM resend._domainkey (C3) erwartet ok: {rg.get('C3')}")
         pruefe_es(rg.get("C4", {}).get("gewicht") == "ok",
                   f"DMARC p=reject+rua+DKIM erwartet ok: {rg.get('C4')}")
         pruefe_es(rg.get("C5", {}).get("gewicht") == "ok", f"MX erwartet ok: {rg.get('C5')}")
@@ -869,19 +887,32 @@ def _selftest() -> int:
         pruefe_es(rg.get("S2", {}).get("gewicht") == "info",
                   f"pending erwartet info: {rg.get('S2')}")
 
-        # 2. Fehlendes Resend-Include → C2 Fund (SPF existiert, trägt nur CF)
-        def zone_ohne_resend(name: str, typ: str) -> tuple[int, list[str]]:
-            if name == ZONE and typ == "TXT":
-                return 0, ["v=spf1 include:_spf.mx.cloudflare.net ~all"]
+        # 2. Resend-Send-Subdomain fehlt → C2 Fund – und die Apex-SPF bleibt
+        #    trotzdem OK (sie braucht KEIN Resend-Include mehr)
+        def zone_ohne_send(name: str, typ: str) -> tuple[int, list[str]]:
+            if name == f"send.{ZONE}":
+                return 3, []
             return zone_gesund(name, typ)
-        AUFLOESER = zone_ohne_resend
+        AUFLOESER = zone_ohne_send
         rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
         pruefe_es(rg.get("C2", {}).get("gewicht") == "fund",
-                  f"fehlendes include:resend.net meldet nicht Fund: {rg.get('C2')}")
+                  f"fehlende send.-Einträge melden nicht Fund: {rg.get('C2')}")
+        pruefe_es(rg.get("C1", {}).get("gewicht") == "ok",
+                  f"Apex-SPF ohne Resend-Include muss ok sein: {rg.get('C1')}")
+
+        # 2b. Bounce-MX auf send. fehlt (SPF-TXT vorhanden) → C2 Fund
+        def zone_ohne_bounce(name: str, typ: str) -> tuple[int, list[str]]:
+            if name == f"send.{ZONE}" and typ == "MX":
+                return 3, []
+            return zone_gesund(name, typ)
+        AUFLOESER = zone_ohne_bounce
+        rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}
+        pruefe_es(rg.get("C2", {}).get("gewicht") == "fund",
+                  f"fehlendes Bounce-MX meldet nicht Fund: {rg.get('C2')}")
 
         # 3. Kein DKIM + p=reject → C3 Fund UND C4 Fund (Selbstabsage)
         def zone_ohne_dkim(name: str, typ: str) -> tuple[int, list[str]]:
-            if name.startswith("_resend") and name.endswith("._domainkey." + ZONE):
+            if name == f"resend._domainkey.{ZONE}":
                 return 3, []
             return zone_gesund(name, typ)
         AUFLOESER = zone_ohne_dkim
@@ -905,7 +936,7 @@ def _selftest() -> int:
         def zone_doppelt(name: str, typ: str) -> tuple[int, list[str]]:
             if name == ZONE and typ == "TXT":
                 return 0, ["v=spf1 include:_spf.mx.cloudflare.net ~all",
-                           "v=spf1 include:resend.net ~all"]
+                           "v=spf1 ip4:198.51.100.7 ~all"]
             return zone_gesund(name, typ)
         AUFLOESER = zone_doppelt
         rg = {r["regel"]: r for r in pruefe(tmp, mit_netz=True)["funde"]}

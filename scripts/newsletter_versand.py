@@ -188,6 +188,11 @@ def resend_payload(empfaenger: dict, konf: dict, env: dict | None = None) -> dic
             "List-Unsubscribe": f"<{unsubscribe}>",
             "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
         },
+        # Tracking aus – EIGENES Versprechen (Studio: tracking_oeffnungen=false,
+        # Datenschutz-§8), unabhängig vom Konto-Default von Resend: ohne diese
+        # Felder würde der Resend-Konto-Default (open_tracking=true) gelten.
+        "open_tracking": False,
+        "click_tracking": False,
     }
 
 
@@ -711,6 +716,8 @@ def _selftest() -> int:
     pruefe(payload["headers"]["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click",
            "Resend: One-Click-Header fehlt")
     pruefe(payload["subject"] == "Betreff der Woche", "Resend: Betreff fehlt")
+    pruefe(payload.get("open_tracking") is False and payload.get("click_tracking") is False,
+           "Resend: Tracking nicht explizit aus (Konto-Default würde sonst greifen)")
     # Ohne Worker-Basis: ehrlicher Fallback auf die Hugo-Seite (menschlich
     # klickbar), nicht ein erfundener Endpunkt.
     payload_fallback = resend_payload({"email": "A@Beispiel.de", "token": "t-123",

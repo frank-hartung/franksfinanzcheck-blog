@@ -186,7 +186,9 @@ Danach in dieser Reihenfolge:
 
 Der letzte Klick bleibt bei dir, weil er Konten braucht: Cloudflare-Worker
 deployen, CNAME `abos` setzen, Resend-Domain authentifizieren (der Beleg sind
-SPF `include:resend.net` + beide Resend-DKIM-TXTs + DMARC in der Zone).
+die Send-Subdomain-Einträge auf `send.` (SPF-TXT + Bounce-MX) + das DKIM-TXT
+`resend._domainkey` + der bestehende DMARC-Eintrag in der Zone – die
+Apex-SPF bleibt unverändert).
 Nachmessen: `python3 scripts/newsletter_zustellbarkeit.py --pruefen`.
 Das hier zu erfinden – ein Endpunkt, einen Absender, eine
 Bestätigungsmaschinerie – wäre die Sorte Selbstbetrug, gegen die die Wachen

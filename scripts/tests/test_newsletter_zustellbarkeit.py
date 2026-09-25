@@ -53,10 +53,11 @@ def _gesunde_zone(mutation: dict | None = None):
     `mutation` überschreibt einzelne Abfragen (z. B. DKIM → NXDOMAIN).
     """
     tabelle = {
-        (ZONE, "TXT"): (0, ["v=spf1 include:resend.net -all"]),
+        (ZONE, "TXT"): (0, ["v=spf1 include:_spf.mx.cloudflare.net -all"]),
+        ("send." + ZONE, "TXT"): (0, ["v=spf1 include:amazonses.com ~all"]),
+        ("send." + ZONE, "MX"): (0, ["10 feedback-smtp.us-east-1.amazonses.com"]),
         ("_dmarc." + ZONE, "TXT"): (0, ["v=DMARC1; p=reject; rua=mailto:post@ex.de"]),
-        ("_resend._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=AAAA"]),
-        ("_resend2._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=BBBB"]),
+        ("resend._domainkey." + ZONE, "TXT"): (0, ["k=rsa; p=AAAA"]),
         (ZONE, "CNAME"): (0, [WERKER_HOST + ".workers.dev"]),
         (ZONE, "MX"): (0, ["10 mx.ex.de"]),
         (WERKER_HOST, "CNAME"): (0, [WERKER_HOST + ".workers.dev"]),
@@ -146,16 +147,28 @@ class CloudflareRegelnTest(unittest.TestCase):
 
     def test_zwei_spf_eintraege_sind_fund(self):
         r = self._funde({(ZONE, "TXT"): (0,
-                      ["v=spf1 include:resend.net -all", "v=spf1 -all"])})
+                      ["v=spf1 include:_spf.mx.cloudflare.net -all",
+                       "v=spf1 -all"])})
         self.assertEqual(r["C1"]["gewicht"], "fund")
 
-    def test_spf_ohne_resend_include_ist_fund_c2(self):
-        r = self._funde({(ZONE, "TXT"): (0, ["v=spf1 -all"])})
+    def test_apex_spf_braucht_kein_resend_include(self):
+        # Regression: das alte Modell verlangte include:resend.net an der
+        # Spitze – das SES-Modell berührt die Apex-SPF nicht.
+        r = self._funde({(ZONE, "TXT"): (0,
+                      ["v=spf1 include:_spf.mx.cloudflare.net -all"])})
+        self.assertEqual(r["C1"]["gewicht"], "ok")
+        self.assertEqual(r["C2"]["gewicht"], "ok")
+
+    def test_send_spf_fehlt_ist_fund_c2(self):
+        r = self._funde({("send." + ZONE, "TXT"): (3, [])})
+        self.assertEqual(r["C2"]["gewicht"], "fund")
+
+    def test_send_bounce_mx_fehlt_ist_fund_c2(self):
+        r = self._funde({("send." + ZONE, "MX"): (3, [])})
         self.assertEqual(r["C2"]["gewicht"], "fund")
 
     def test_fehlendes_dkim_ist_fund(self):
-        r = self._funde({("_resend._domainkey." + ZONE, "TXT"): (3, []),
-                         ("_resend2._domainkey." + ZONE, "TXT"): (3, [])})
+        r = self._funde({("resend._domainkey." + ZONE, "TXT"): (3, [])})
         self.assertEqual(r["C3"]["gewicht"], "fund")
 
     def test_dmarc_ohne_berichtsweg_ist_fund(self):

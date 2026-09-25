@@ -66,12 +66,14 @@ Repository.
   *jede* Mail der Domain). Im Zweifel die von Cloudflare vorgeschlagene
   DNS-Konfiguration verwenden – für diese Zone ist das gemessene Ergebnis
   `v=spf1 include:_spf.mx.cloudflare.net ~all` (Stand 23.09.2026).
-- **Newsletter-SPF:** der Eigenbetrieb-Versand (Resend) verlangt, dass der
-  **einzige** SPF-Eintrag der Zone `include:resend.net` enthält – die
-  Zustellbarkeits-Wache (C1) misst genau das. Resend versendet im
-  Free-Tier über eigene Server; das Include ist der SPF-Beleg. Dazu kommen
-  die beiden DKIM-TXTs `_resend._domainkey` und `_resend2._domainkey`
-  (C2) und der DMARC-Eintrag (C3/C4). Details und Befund-Formate:
+- **Newsletter-SPF (Resend, SES-Modell):** der Eigenbetrieb-Versand
+  authentifiziert über die **`send.`-Subdomain** – dort sitzen der SPF-TXT
+  (`"v=spf1 include:amazonses.com ~all"`, Wert aus Resend) und der Bounce-MX
+  (`feedback-smtp.<region>.amazonses.com`), dazu das DKIM-TXT
+  `resend._domainkey`. Die **Apex-SPF bleibt unverändert** (kein Include an
+  der Spitze nötig; zwei SPF-Records wären ein permanenter Fehler). DMARC
+  ist in der Zone vorhanden. Die Zustellbarkeits-Wache misst C2 (send.-
+  Einträge), C3 (DKIM), C4 (DMARC). Details und Befund-Formate:
   `scripts/newsletter_zustellbarkeit.py --pruefen`.
 - **Regel für das Newsletter-Postfach anlegen:** der Versand läuft mit
   Absender `news@franksfinanzcheck.de`. Ohne eigene Regel landen Antworten und

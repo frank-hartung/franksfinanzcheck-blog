@@ -103,17 +103,27 @@ Verifizieren: `https://abos.franksfinanzcheck.de/healthz` muss
 
 ### Schritt 3 – Resend-Konto und Domain-Authentifizierung
 
-Resend (Free: 3000 Mails/Monat, 100/Tag):
+Resend (Free: 3000 Mails/Monat, 100/Tag). Seit dem SES-Modell läuft die
+Authentifizierung über eine **Send-Subdomain** (Default `send.`) – die
+**Apex-SPF der Zone bleibt unverändert** (kein Include an der Spitze, und
+zwei SPF-Records wären ein permanenter Fehler):
 
 1. Konto anlegen, **Sending Domain** `franksfinanzcheck.de` hinzufügen.
-2. Die DNS-Einträge anlegen, die Resend verlangt:
-   - **SPF:** der *einzige* SPF-Eintrag der Zone erhält `include:resend.net`
-     (eine Zone darf genau einen SPF-Record haben – zusammenführen, nicht
-     zweiten anlegen).
-   - **DKIM:** beide TXTs `_resend._domainkey` und `_resend2._domainkey`.
-   - **DMARC:** `_dmarc` mit `v=DMARC1; p=reject; rua=mailto:…` (Berichtsweg
-     muss funktionieren, sonst kein Grün – Regel C4).
-3. Verifizierung abwarten, bis Resend `verified` meldet.
+   Resend zeigt danach die exakten DNS-Einträge für DEINE Domain.
+2. Die Einträge anlegen (Resend → Domains → Domain → „DNS Setup“):
+   - **TXT** `send` → SPF-Record, z. B.
+     `"v=spf1 include:amazonses.com ~all"` (WERT so wie Resend ihn zeigt).
+   - **MX** `send` → Bounce-Host, z. B.
+     `feedback-smtp.us-east-1.amazonses.com` (Priorität 10 – die Region im
+     Namen hängt von der Konto-Region ab; WERT so wie Resend ihn zeigt).
+   - **TXT** `resend._domainkey` → DKIM-Key (Wert beginnt mit `p=`;
+     als EIN Stück kopieren – UI-Trunkatur ist die häufige Fehlstelle).
+   - **CNAME** `links` → `links1.resend-dns.com` (Tracking-Subdomain;
+     nur wenn Tracking an ist – bei uns aus, da der Mailer Tracking
+     explizit ausschaltet).
+3. DMARC: bereits in der Zone (`_dmarc`, `p=reject` mit `rua`) – bleibt.
+4. Verifizierung abwarten, bis Resend `verified` meldet. Die Wache
+   misst alle drei Einträge (C2: send.-TXT + send.-MX, C3: DKIM, C4: DMARC).
 
 ### Schritt 4 – GitHub Secrets und Variablen
 
