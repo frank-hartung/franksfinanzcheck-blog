@@ -79,10 +79,20 @@ Eigener Cloudflare-Account (kostenlos; der Worker ist Teil des Free-Plans).
 cd newsletter-worker
 wrangler login
 wrangler kv namespace create ABO     # Bindung: ABO (schon in wrangler.toml)
-wrangler secret put GITHUB_PAT       # mit Repository-Scopes workflow+contents
+wrangler secret put GITHUB_PAT       # Fine-Grained-PAT, NUR dieses Repo, Berechtigung
+                                     # „Actions: Read and write“ (löst workflow_dispatch aus;
+                                     # „Workflows“ wäre das Recht, Workflow-DATEIEN zu ändern –
+                                     # damit antwortet der Dispatch 403 und der Takt schlägt
+                                     # ins Leere)
 wrangler secret put EXPORT_KEY       # 32+ Zeichen, zufällig (z. B. openssl rand -hex 24)
 wrangler deploy
 ```
+
+`wrangler deploy` aktiviert auch die **Cron-Triggers** (`[triggers]` in
+`wrangler.toml`, Free-Plan: max. 5 pro Account, hier 3) – der Worker ist
+seit 25.09.2026 der **Taktgeber** des Versands (§ 4a). Ob der Takt läuft:
+`https://abos.franksfinanzcheck.de/healthz` → Feld `takt` (Cloudflare →
+Worker → Settings → Trigger Events zeigt die Ausführungen).
 
 Die Worker-Domain (z. B. `ff-newsletter.<account>.workers.dev`) wird im
 nächsten Schritt zugeordnet. `SITE_ORIGIN`, `GITHUB_REPO`,
@@ -193,13 +203,56 @@ Normalzustand vor der Freischaltung)`).
 
 ## 4. Betrieb – was läuft wann
 
-| Uhr (UTC) | Workflow | Was passiert |
-|---|---|---|
-| Di & Fr 04:30 | `newsletter-daily.yml` | Wachen (Zustellbarkeit mit Netz, Selftests, Capture) → Digest-Bau → QA → **nur an die Liste**, wenn Versandtag + kein Halt; Status-Commit (State + Journal, nur Hashes) |
-| Di & Fr 08:11 | `newsletter-cadence.yml` | Vorfall-Erkennung: lief der tägliche Versand nicht / rot? → Nachhol-Trigger (08:11 UTC = 10:11 MESZ, nach dem Soll-Termin; `planmaessig` = Ruhe am Ruhtag) |
-| stündlich :17 | `newsletter-lifecycle.yml` | Nachgang: Bestätigungs-Mails, deren Worker-Dispatch fehlgeschlagen ist (idempotent über Token) |
-| manuell | `newsletter-lifecycle.yml` | `aktion=bestaetigung` + `token` (einzelne Bestätigung neu) bzw. `aktion=nachgang` |
-| manuell | `newsletter-daily.yml` | `test_adresse` für jeden Probelauf |
+| Uhr (UTC) | Wer startet | Workflow | Was passiert |
+|---|---|---|---|
+| Di & Fr 04:30 | **Worker-Taktgeber** (Cron Trigger, minutengenau) → `workflow_dispatch planmaessig=true` | `newsletter-daily.yml` | Wachen (Zustellbarkeit mit Netz, Selftests, Capture) → Digest-Bau → QA → **nur an die Liste**, wenn Versandtag + kein Halt; Status-Commit (State + Journal, nur Hashes) |
+| Di & Fr 05:05 | **Worker-Taktgeber** → `workflow_dispatch` | `newsletter-cadence.yml` | Nachzählen: existiert ein Lauf des Tages? Nein → Nachhol-Dispatch (`planmaessig`); geht das nicht → rot + Fehler-Alerting |
+| Di & Fr 04:30 / 08:11 | GitHub-`schedule` (drittes Netz; kommt an diesem Repo oft Stunden zu spät oder gar nicht) | `newsletter-daily.yml` / `newsletter-cadence.yml` | Wie oben; ein verspäteter Cron findet den Termin belegt („Versandpause“) – kein zweiter Versand |
+| stündlich :17 | Worker-Taktgeber (und GitHub-`schedule`) | `newsletter-lifecycle.yml` | Nachgang: Bestätigungs-Mails, deren Worker-Dispatch fehlgeschlagen ist (idempotent über Token) |
+| bei Merge, der die Wache selbst ändert | `push` auf main (nur `newsletter-cadence.yml` / `newsletter_cadence.py`) | `newsletter-cadence.yml` | Selbstbeweis: die geänderte Wache läuft sofort; an einem leeren Di/Fr nach 05:00 UTC holt sie den Planlauf nach |
+| manuell | Actions → Run workflow | `newsletter-lifecycle.yml` | `aktion=bestaetigung` + `token` (einzelne Bestätigung neu) bzw. `aktion=nachgang` |
+| manuell | Actions → Run workflow | `newsletter-daily.yml` | `test_adresse` für jeden Probelauf |
+
+### 4a. Der Taktgeber – warum der Worker die Uhr hält
+
+**Vorfall:** Am Di 23.09. und Fr 25.09.2026 blieb der 04:30-Cron des
+Newsletter-Daily still aus; am 25.09. kam auch die Kadenz-Wache (08:11)
+nicht – sie hing am selben Scheduler und hatte seit ihrer Erstellung null
+Läufe. Gemessen über alle Workflows des Repos lieferte GitHub an diesem
+Tag **jedes** `schedule`-Ereignis 5–5,5 h zu spät oder gar nicht
+(Belege: `NEWSLETTER-TAKTGEBER-2026-09-25.md`). Ein Versand um 06:30
+deutscher Zeit ist mit GitHub-Crons allein nicht zu halten.
+
+**Lösung:** Cloudflare Cron Triggers feuern auf die Minute (UTC). Der
+Worker (`newsletter-worker/src/index.js`, Tabelle `TAKT`, Handler
+`scheduled()`) startet die Workflows per `workflow_dispatch` – mit
+**exakt der Freigabestufe des GitHub-Crons** (`planmaessig=true`), nie
+`live`, nie `test_adresse`. Er versendet weiterhin keine Mail, kennt im
+Dispatch keine Adresse und keinen Mail-Key. Drei Netze übereinander,
+alle idempotent (Termin belegt → „Versandpause“):
+
+1. 04:30 UTC Worker → Daily (der Versand)
+2. 05:05 UTC Worker → Kadenz-Wache (zählt nach, holt nach, wird laut)
+3. GitHubs eigene Crons (kommen sie, finden sie den Termin belegt)
+
+**Wochentags-Falle:** Cloudflare zählt Wochentage 1 = Sonntag … 7 = Samstag
+(Quartz). Der Unix-Ausdruck `2,5` hieße dort **Mo/Do**. Deshalb stehen die
+Tage in `wrangler.toml` als Namen (`TUE,FRI`); der Worker-Test
+`taktgeber: wrangler.toml und TAKT decken sich` lässt keine Ziffern zu.
+
+**Beweis statt Hoffnung:** `/healthz` → `takt.letzte.digest` trägt den
+letzten Dispatch (Zeit, HTTP-Code, Versuche, Grund). Die
+Zustellbarkeits-Wache misst das als **C8**: Worker ohne `takt` (alte
+Version) = Fund; letzter Dispatch gescheitert (403 = PAT ohne „Actions:
+write“) = Fund mit Klickweg; letzter fälliger Di/Fr-Termin verpasst =
+Fund; noch nie gefeuert vor dem ersten Termin = Hinweis. Cloudflare →
+Worker → Settings → **Trigger Events** listet die letzten 100
+Cron-Ausführungen.
+
+**Was der Taktgeber NICHT tut:** keine zweite Freigabestufe, kein Versand
+außerhalb Di/Fr, kein Umgehen des Halts (`versand_unklar`), der QA oder
+der 0-Abonnenten-Sperre – alles davon entscheidet weiterhin allein
+`newsletter_digest.py` im Workflow.
 
 Der **Halt** (`versand_unklar` im `data/newsletter_state.json`) blockiert
 jeden Listen-Versand, wenn ein Sende-Aufruf ohne belegbares Ergebnis

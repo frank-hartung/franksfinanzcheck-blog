@@ -17,13 +17,18 @@
 #   3. gesendet wird an eine Liste, deren Double-Opt-In im Worker liegt –
 #      Adressen berühren diesen Repo-Workflow nie (nur Hashes im Journal)
 #
-# „planmaessig“ (nur für die Kadenz-Wache gedacht): verhält sich exakt wie der
-# planmäßige Cron (04:30 UTC, Di/Fr, echter Listen-Versand). Grund: GitHub
-# verwirft oder verschiebt schedule-Ereignisse gelegentlich STILL (23.09.2026:
-# der 05:05-Cron blieb komplett aus, am Vortag kam er erst ~10:05 UTC). Die
-# Kadenz-Wache (newsletter-cadence.yml) zählt nach und holt den Lauf genau dann
-# nach, wenn sicher kein Lauf des Tages existiert – dieselbe Freigabestufe wie
-# der Cron, nicht mehr.
+# „planmaessig“ (für Taktgeber und Kadenz-Wache, nicht für Menschen gedacht):
+# verhält sich exakt wie der planmäßige Cron (04:30 UTC, Di/Fr, echter
+# Listen-Versand). Grund: GitHub verwirft oder verschiebt schedule-Ereignisse
+# STILL – 23.09.2026 blieb der Cron ganz aus, 25.09.2026 erneut (und mit ihm
+# die Kadenz-Wache; gemessen kamen an dem Tag ALLE Crons des Repos 5–5,5 h zu
+# spät oder nie). Seit 25.09. ist deshalb der Cloudflare-Worker
+# (newsletter-worker/, Cron Trigger, minutengenau) der TAKTGEBER: er startet
+# diesen Workflow um 04:30 UTC mit planmaessig=true. Die Kadenz-Wache
+# (newsletter-cadence.yml, vom Worker um 05:05 UTC gerufen, GitHub-Cron 08:11)
+# zählt nach und holt nach, wenn kein Lauf des Tages existiert. Der Cron unten
+# bleibt als drittes Netz: kommt er verspätet, findet er den Termin belegt
+# („Versandpause“) – dieselbe Freigabestufe, kein zweiter Versand.
 #
 # Duplikatsschutz über die Statusdatei: ein TEILVERSAND markiert nur die
 # zugestellten Empfänger (Hashes aus dem Journal) als gesendet – der nächste
@@ -158,16 +163,26 @@ jobs:
             cat /tmp/zust.md
             [ -s /tmp/zust.err ] && echo "_Hinweise:_ \`$(tail -2 /tmp/zust.err | tr '\n' ' ' | cut -c1-200)\`"
           } >> "$GITHUB_STEP_SUMMARY"
+          # Der Report steht AUCH im Log – nicht nur im Summary. Das Summary
+          # ist nur im Browser sichtbar; Log und Annotationen liest auch die
+          # API (Fehler-Alerting, Agenten, `gh run view --log`). Vorfall
+          # 25.09.: ein ❌ hielt den Versand an und niemand konnte per API
+          # nachlesen, welches.
+          cat /tmp/zust.md
           if [ "$rc" -ne 0 ]; then
+            # Die Befund-Titel wandern in die Annotation (ohne Ist-Werte –
+            # die könnten Kontodaten tragen), damit der Grund im Check-Run
+            # steht und nicht erst im Summary gesucht werden muss.
+            BEFUNDE=$(grep -E '^❌' /tmp/zust.md | sed -E 's/^❌ \*\*(.*)\*\*.*/\1/' | head -4 | tr '\n' ';' | sed 's/;$//; s/;/; /g')
             # Name exakt wie oben gesetzt (TEST_ADRESSE_GESETZT). Ein Buchstabe
             # weniger macht die Ausnahme tot: jeder Zustellbarkeits-Befund
             # stoppt dann auch den Testversand, sobald live oder planmaessig
             # gesetzt ist.
             if [ "$SEND_AN" = "ja" ] && [ "$TEST_ADRESSE_GESETZT" = "nein" ]; then
-              echo "::error::Zustellbarkeit befundet UND Listen-Versand angefordert – der Versand wird angehalten, bevor eine Mail entsteht. Details im Summary dieses Schritts."
+              echo "::error::Zustellbarkeit befundet UND Listen-Versand angefordert – der Versand wird angehalten, bevor eine Mail entsteht. Befund: ${BEFUNDE:-siehe Log}. Details im Summary dieses Schritts."
               exit "$rc"
             fi
-            echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Details im Summary dieses Schritts."
+            echo "::warning::Zustellbarkeit befundet – gebaut, aber nicht an die Liste gesendet. Befund: ${BEFUNDE:-siehe Log}. Details im Summary dieses Schritts."
           fi
 
       - name: Digest bauen (und senden, wenn Absender + Freigabe da sind)

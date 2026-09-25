@@ -12,10 +12,17 @@
  *   GET  /abmeldung      GET fuer den One-Klick-Abmelde-Link in Mails)
  *   POST /praferenzen    Themenwahl pro Abo (Token + themen[])
  *   GET  /status         Token -> {status, themen} (ohne Adresse!)
- *   GET  /healthz        Lebendigkeits-Pruefung fuer die Wache
+ *   GET  /healthz        Lebendigkeits-Pruefung fuer die Wache (+ `takt`:
+ *                        letzter Dispatch je Cron-Takt, ohne Adressen)
  *   GET  /export/…       NUR mit Secret (X-FF-Key / ?sluessel=):
  *                        Abonnenten-Liste, Pending-Liste, Eintrag nach
  *                        Token, Versand-Versuche melden (Catch-up).
+ *   scheduled()          TAKTGEBER (seit 25.09.2026): Cloudflare Cron
+ *                        Triggers starten den Digest (Di/Fr 04:30 UTC),
+ *                        die Kadenz-Wache (05:05 UTC) und den Nachgang
+ *                        (stuendlich) per workflow_dispatch – weil GitHubs
+ *                        eigener Scheduler an diesem Repo Stunden zu spaet
+ *                        oder gar nicht feuert. Details: Abschnitt „Taktgeber“.
  *
  * DATEN (Workers KV, Binding `ABO`, EU-Region in deinem CF-Account):
  *   abo:{email-norm}     Abo-Status, Token, Themen, Zeitstempel
@@ -249,9 +256,19 @@ async function liste_mit_prefix(kv, prefix) {
 }
 
 // ---------------------------------------------------------------- Trigger
-async function dispatch_bestuerung(env, token) {
+/**
+ * Ein GitHub-Actions-Workflow per `workflow_dispatch` starten. Der PAT
+ * braucht dafuer die feingranulare Berechtigung **Actions: Read and
+ * write** (NICHT „Workflows“ – das ist das Recht, Workflow-DATEIEN zu
+ * aendern, und reicht fuer den Dispatch nicht; Quelle:
+ * docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event).
+ * Antwort 204 = angenommen. Alles andere wird als {ok:false, status}
+ * zurueckgegeben – nie geworfen: der Aufrufer entscheidet, was ein
+ * Ausfall bedeutet (Anmeldung: Nachgang deckt ab; Takt: Retry + Protokoll).
+ */
+async function github_dispatch(env, workflow, inputs) {
   if (!env.GITHUB_PAT || !env.GITHUB_REPO) return { ok: false, status: 0, warum: 'kein-token' };
-  const ziel = `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/${env.GITHUB_WORKFLOW || 'newsletter-lifecycle.yml'}/dispatches`;
+  const ziel = `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/${workflow}/dispatches`;
   try {
     const antwort = await fetch(ziel, {
       method: 'POST',
@@ -260,16 +277,131 @@ async function dispatch_bestuerung(env, token) {
         Accept: 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
+        'User-Agent': 'ff-newsletter-worker',
       },
-      body: JSON.stringify({
-        ref: env.GITHUB_REF || 'main',
-        inputs: { aktion: 'bestaetigung', token }, // NUR der Token – keine Adresse im Event
-      }),
+      body: JSON.stringify({ ref: env.GITHUB_REF || 'main', inputs }),
     });
     return { ok: antwort.status === 204, status: antwort.status };
   } catch (e) {
     return { ok: false, status: 0, warum: String((e && e.message) || e) };
   }
+}
+
+async function dispatch_bestuerung(env, token) {
+  // NUR der Token – keine Adresse im Event
+  return github_dispatch(env, env.GITHUB_WORKFLOW || 'newsletter-lifecycle.yml',
+    { aktion: 'bestaetigung', token });
+}
+
+// ---------------------------------------------------------------- Taktgeber
+// WARUM (Freitag, 25.09.2026 – gemessen, nicht vermutet): GitHubs
+// `schedule`-Ereignisse kamen an diesem Repo 5–5,5 Stunden zu spaet oder
+// GAR NICHT. Der 04:30-Cron des Newsletter-Daily blieb aus; die Kadenz-
+// Wache (08:11 UTC), die genau das auffangen sollte, hatte seit ihrer
+// Erstellung NULL Laeufe – sie hing am selben Scheduler. Dienstag 23.09.
+// dasselbe Bild. Ein Netz, das am selben Haken haengt wie die Last, ist
+// kein Netz.
+//
+// Cloudflare Cron Triggers feuern auf die Minute (UTC). Der Worker ist
+// deshalb der TAKTGEBER des Newsletters: er startet die Workflows per
+// workflow_dispatch – mit EXAKT der Freigabestufe des GitHub-Crons
+// (`planmaessig=true`), nicht mehr. Er versendet weiterhin keine Mail,
+// kennt keine Adressen im Dispatch und keinen Mail-Key.
+//
+// Drei Netze uebereinander, alle idempotent (der Digest bucht den Termin
+// und meldet „Termin belegt“, kommt ein zweiter Lauf):
+//   1. 04:30 UTC Di/Fr  → newsletter-daily.yml (planmaessig)  – der Versand
+//   2. 05:05 UTC Di/Fr  → newsletter-cadence.yml              – zaehlt nach,
+//      holt nach, wird laut (Fehler-Alerting), wenn Nachholen unmoeglich ist
+//   3. GitHubs eigene Crons bleiben stehen (kommen sie verspaetet, finden
+//      sie einen belegten Termin vor)
+// Dazu stuendlich :17 der Nachgang offener Bestaetigungen (Lifecycle) –
+// derselbe Takt, den der GitHub-Cron verspricht und selten haelt.
+//
+// Cloudflare-Wochentage sind 1=SO..7=SA (Quartz), NICHT Unix (0/7=SO).
+// „2,5“ waere hier Mo/Do. Deshalb stehen die Tage als Namen: TUE,FRI.
+// wrangler.toml [triggers].crons muss EXAKT diese Schluessel tragen – der
+// Test `taktgeber: wrangler.toml und TAKT decken sich` haelt beides
+// deckungsgleich. Ein Cron, der feuert, aber hier keinen Eintrag hat,
+// wird protokolliert und ignoriert (kein blinder Dispatch).
+const TAKT = {
+  '30 4 * * TUE,FRI': {
+    name: 'digest', workflow: 'newsletter-daily.yml',
+    inputs: { planmaessig: 'true', tage: '7' },
+  },
+  '5 5 * * TUE,FRI': {
+    name: 'kadenz', workflow: 'newsletter-cadence.yml',
+    inputs: {},
+  },
+  '17 * * * *': {
+    name: 'nachgang', workflow: 'newsletter-lifecycle.yml',
+    inputs: { aktion: 'nachgang', token: '' },
+  },
+};
+const TAKT_VERSUCHE = 3;
+const TAKT_PAUSEN_MS = [5000, 20000]; // Wartezeit zaehlt nicht als CPU-Zeit
+const TAKT_TTL_SEK = 45 * 24 * 60 * 60; // 45 Tage: die Wache liest den letzten Takt
+
+function takt_fuer(cron) {
+  return TAKT[String(cron || '').trim()] || null;
+}
+
+async function takt_protokoll(env, name, eintrag) {
+  try {
+    await env.ABO.put(`takt:${name}`, JSON.stringify(eintrag), { expirationTtl: TAKT_TTL_SEK });
+  } catch (e) { /* Protokoll darf den Takt nicht brechen */ }
+}
+
+async function takt_lesen(env) {
+  const aus = {};
+  for (const t of Object.values(TAKT)) {
+    try {
+      const roh = await env.ABO.get(`takt:${t.name}`, 'json');
+      if (roh) aus[t.name] = roh;
+    } catch (e) { /* fehlender Eintrag = nie gefeuert */ }
+  }
+  return aus;
+}
+
+/**
+ * Ein Takt-Ereignis ausfuehren: Workflow dispatchen, bis zu 3 Versuche
+ * (GitHub-API-Hänger, 5xx, Rate-Limit), Ergebnis im KV protokollieren.
+ * `schlafen` ist injizierbar (Tests warten nicht wirklich).
+ */
+async function takt_ausfuehren(env, cron, geplant, schlafen = (ms) => new Promise((r) => setTimeout(r, ms))) {
+  const takt = takt_fuer(cron);
+  const jetzt = new Date().toISOString();
+  if (!takt) {
+    console.warn(`ff-newsletter takt: unbekannter Cron „${cron}“ – kein Dispatch`);
+    await takt_protokoll(env, 'unbekannt', { ts: jetzt, cron: String(cron || ''), status: 'ignoriert' });
+    return { ok: false, status: 0, name: 'unbekannt', warum: 'unbekannter-cron' };
+  }
+  let ergebnis = { ok: false, status: 0 };
+  let versuche = 0;
+  for (let i = 0; i < TAKT_VERSUCHE; i += 1) {
+    versuche = i + 1;
+    ergebnis = await github_dispatch(env, takt.workflow, takt.inputs);
+    if (ergebnis.ok) break;
+    // 401/403/404 wiederholen sich nicht von allein (PAT, Rechte, Pfad) –
+    // sofort protokollieren statt sinnlos warten.
+    if ([401, 403, 404].includes(ergebnis.status)) break;
+    if (i + 1 < TAKT_VERSUCHE) await schlafen(TAKT_PAUSEN_MS[Math.min(i, TAKT_PAUSEN_MS.length - 1)]);
+  }
+  const eintrag = {
+    ts: jetzt,
+    geplant: geplant ? new Date(geplant).toISOString() : null,
+    cron,
+    workflow: takt.workflow,
+    status: ergebnis.ok ? 'dispatched' : 'fehlgeschlagen',
+    http: ergebnis.status,
+    versuche,
+    warum: ergebnis.ok ? null : (ergebnis.warum || `HTTP ${ergebnis.status}`),
+  };
+  await takt_protokoll(env, takt.name, eintrag);
+  if (!ergebnis.ok) {
+    console.warn(`ff-newsletter takt ${takt.name}: Dispatch fehlgeschlagen (${eintrag.warum}, ${versuche} Versuche)`);
+  }
+  return { ...ergebnis, name: takt.name, versuche };
 }
 
 async function falle_zahlen(env) {
@@ -287,7 +419,15 @@ async function health(env) {
     await env.ABO.get('healthz');
     kv_ok = true;
   } catch (e) { kv_ok = false; }
-  return json({ ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler' }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
+  // `takt`: der letzte Dispatch je Takt (digest/kadenz/nachgang) – ohne
+  // Adressen, ohne Secrets. Die Zustellbarkeits-Wache (C8) liest hier, ob
+  // der Taktgeber am letzten Versandtag wirklich gefeuert hat. Fehlt der
+  // Schluessel ganz, laeuft eine Worker-Version ohne Cron-Triggers.
+  const takt = kv_ok ? await takt_lesen(env) : {};
+  return json({
+    ok: kv_ok, ts: new Date().toISOString(), kv: kv_ok ? 'ok' : 'fehler',
+    takt: { crons: Object.keys(TAKT), letzte: takt },
+  }, kv_ok ? 200 : 503, env, { 'Cache-Control': 'no-store' });
 }
 
 async function anmeldung(request, env, url) {
@@ -619,4 +759,19 @@ export default {
       return fehler(500, 'Interner Fehler – bitte erneut versuchen.', env, request);
     }
   },
+
+  /**
+   * Cron Trigger (wrangler.toml [triggers].crons). `controller.cron` ist
+   * der Ausdruck, der gefeuert hat – er waehlt den Takt aus TAKT.
+   * Lokal testen: `wrangler dev` → curl
+   * "http://localhost:8787/cdn-cgi/local/scheduled?cron=30+4+*+*+TUE,FRI".
+   */
+  async scheduled(controller, env, ctx) {
+    const arbeit = takt_ausfuehren(env, controller && controller.cron, controller && controller.scheduledTime);
+    if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(arbeit);
+    return arbeit;
+  },
 };
+
+// Fuer Tests (node --test): die Takt-Tabelle und der Ausfuehrer ohne Cloudflare.
+export { TAKT, takt_ausfuehren, takt_fuer };

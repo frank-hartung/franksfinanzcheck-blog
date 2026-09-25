@@ -32,6 +32,18 @@ Sicherheitshierarchie (unverändert gegenüber dem Cron):
     planmäßige Lauf – nicht mehr. Ohne Secrets wird weiterhin nur gebaut.
   * Die Wache selbst sendet nichts, kennt keine Adressen und keinen API-Key.
 
+WER DIE WACHE RUFT (seit 25.09.2026 – der zweite Vorfall):
+  Am Freitag, 25.09.2026 fiel der 04:30-Cron erneut aus – und die Wache
+  gleich mit: ihr eigener 08:11-Cron kam ebenfalls nie (null Läufe seit
+  ihrer Erstellung). Gemessen über alle Workflows des Repos lieferte GitHubs
+  Scheduler an diesem Tag jedes Ereignis 5–5,5 h zu spät oder gar nicht. Ein
+  Netz, das am selben Haken hängt wie die Last, ist kein Netz. Deshalb ruft
+  jetzt der Cloudflare-Worker (newsletter-worker/, Cron Trigger, minuten-
+  genau) diese Wache um 05:05 UTC per workflow_dispatch – 35 Minuten nach
+  dem Soll-Termin. Der GitHub-Cron 08:11 bleibt als drittes Netz stehen.
+  Folge für die Logik: „fällig“ ist der Tag ab SOLL + 30 Minuten
+  (FAELLIG_AB, aus dem Versandvertrag gerechnet), nicht erst ab 08:11.
+
 Nutzung:
     python3 scripts/newsletter_cadence.py --pruefen                 # zählt + holt ggf. nach
     python3 scripts/newsletter_cadence.py --pruefen --ohne-dispatch # nur zählen (Trockenlauf)
@@ -51,17 +63,23 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
-from newsletter_schedule import VERSANDTAGE, RUECKBLICK_TAGE
+from newsletter_schedule import VERSANDTAGE, RUECKBLICK_TAGE, send_uhrzeit_utc
 
 WORKFLOW_DATEI = "newsletter-daily.yml"
 WORKFLOW_NAME = "Newsletter-Daily (Capture-Wache + Digest)"
 
-# Erwartung: cron „30 4 * * 2,5“. Der Tag gilt als bedient, wenn ab 03:30 UTC
-# (eine Stunde Gnade vor dem Soll-Termin 04:30) irgendein Versuch existiert.
-# Die Wache läuft bewusst SPÄTER am Morgen: ein zu früher Lauf würde den (unter
-# GitHub-Last oft verschobenen) Cron nicht abwarten können; zu spät wäre eine
-# verschenkte Zustell-Morgenzeit. 08:11 UTC = 10:11 MESZ ist der Kompromiss.
-FENSTER_START_UHRZEIT = dt.time(3, 30)
+# Erwartung: cron „30 4 * * 2,5“ (SOLL_UTC aus dem Versandvertrag gerechnet,
+# nicht abgeschrieben). Der Tag gilt als bedient, wenn ab 03:30 UTC (eine
+# Stunde Gnade vor dem Soll-Termin) irgendein Versuch existiert.
+# Fällig zur Nachkontrolle ist der Tag ab SOLL + 30 Minuten (05:00 UTC): der
+# Worker-Taktgeber ruft die Wache um 05:05 UTC, GitHubs eigener Cron um 08:11
+# UTC – beide dürfen entscheiden. Vor 05:00 ist ein Aufruf ein Ruhetag: der
+# Digest ist noch gar nicht überfällig.
+SOLL_UTC = send_uhrzeit_utc()
+FENSTER_START_UHRZEIT = (dt.datetime.combine(dt.date(2026, 1, 1), SOLL_UTC)
+                         - dt.timedelta(hours=1)).time()
+FAELLIG_AB = (dt.datetime.combine(dt.date(2026, 1, 1), SOLL_UTC)
+              + dt.timedelta(minutes=30)).time()
 DISPATCH_VERSUCHE = 3           # der Nachhol-Call selbst ist ein Netz-Call
 DISPATCH_PAUSE = (3.0, 8.0)
 
@@ -105,8 +123,10 @@ def entscheide(laeufe: list[dict], jetzt: dt.datetime) -> dict:
                 "befund": f"{iso(jetzt)} ist kein Versandtag (Di/Fr ist der planmäßige "
                           f"Lauf erwartet) – keine Kadenz-Forderung.",
                 "heutiger_lauf": None}
-    if jetzt.time() < dt.time(8, 11):
-        return {"handlung": "ruhetag", "befund": "Der Planlauf ist noch nicht zur Nachkontrolle fällig.",
+    if jetzt.time() < FAELLIG_AB:
+        return {"handlung": "ruhetag",
+                "befund": (f"Der Planlauf ist noch nicht zur Nachkontrolle fällig "
+                           f"(Soll {SOLL_UTC:%H:%M} UTC, fällig ab {FAELLIG_AB:%H:%M} UTC)."),
                 "heutiger_lauf": None}
     start = fenster_start(jetzt)
     versuche = []
@@ -140,8 +160,8 @@ def entscheide(laeufe: list[dict], jetzt: dt.datetime) -> dict:
                                   "url": frisch.get("url")}}
     return {"handlung": "nachholen",
             "befund": (f"Kein einziger Laufversuch von „{WORKFLOW_NAME}“ seit "
-                       f"{iso(start)} (Soll: 04:30 UTC) – der planmäßige Cron wurde "
-                       f"von GitHub still verworfen oder ist nie angekommen. "
+                       f"{iso(start)} (Soll: {SOLL_UTC:%H:%M} UTC) – der planmäßige "
+                       f"Cron wurde von GitHub still verworfen oder ist nie angekommen. "
                        f"Der Digest wird planmäßig nachgeholt."),
             "heutiger_lauf": None}
 
@@ -315,6 +335,22 @@ def _selftest() -> int:
     e = entscheide([lauf("spaet", "2026-09-22T10:05:00Z")], dienstag_spaet)
     pruefe(e["handlung"] == "bedient", f"verspäteter Cron nicht als bedient: {e}")
 
+    # 11) Der Taktgeber-Ruf (Worker, 05:05 UTC): fällig ab SOLL+30 min –
+    #     ein leerer Freitag um 05:05 ist ein Fall, um 04:45 noch keiner.
+    pruefe(SOLL_UTC == dt.time(4, 30), f"SOLL_UTC aus dem Vertrag: {SOLL_UTC}")
+    pruefe(FAELLIG_AB == dt.time(5, 0), f"FAELLIG_AB = SOLL+30min: {FAELLIG_AB}")
+    pruefe(FENSTER_START_UHRZEIT == dt.time(3, 30),
+           f"Fensterstart = SOLL-1h: {FENSTER_START_UHRZEIT}")
+    takt = dt.datetime(2026, 9, 25, 5, 5, tzinfo=dt.timezone.utc)
+    e = entscheide([], takt)
+    pruefe(e["handlung"] == "nachholen", f"Taktgeber-Ruf 05:05 ohne Lauf muss nachholen: {e}")
+    e = entscheide([lauf("takt", "2026-09-25T04:30:20Z")], takt)
+    pruefe(e["handlung"] == "bedient", f"vom Taktgeber gestarteter Lauf nicht gezählt: {e}")
+    zu_frueh = dt.datetime(2026, 9, 25, 4, 45, tzinfo=dt.timezone.utc)
+    e = entscheide([], zu_frueh)
+    pruefe(e["handlung"] == "ruhetag" and "fällig" in e["befund"],
+           f"04:45 ist noch nicht fällig: {e}")
+
     if fehler:
         print("🛑 newsletter_cadence-Selbsttest FEHLGESCHLAGEN:")
         for f in fehler:
@@ -323,7 +359,7 @@ def _selftest() -> int:
     print(f"✅ newsletter_cadence-Selbsttest: {zaehler} Fälle grün (Ruhetag, "
           f"Vorfall-Erkennung, Fenstergrenze, Vortags-Abgrenzung, laufender/"
           f"roter Lauf, Müll-Timestamp, Trockenlauf-Verdrahtung, "
-          f"Fensterlogik).")
+          f"Fensterlogik, Taktgeber-Ruf ab SOLL+30min).")
     return 0
 
 

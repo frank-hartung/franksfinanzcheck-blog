@@ -12,10 +12,17 @@
  *     Token im HTML, Formular ohne JavaScript
  *   – Export: Secret-Pflicht (403), aktive List, Pending-List, Token-Lookup,
  *     Versuchszählung (3× gesendet → abgelaufen), Bounce → Unterdrückung
+ *   – Taktgeber (scheduled): Cron → richtiger Workflow + richtige Inputs
+ *     (planmaessig, nie live/test), Retry bei 5xx, kein Retry bei 401/403,
+ *     unbekannter Cron dispatcht nichts, Protokoll im KV, healthz zeigt es,
+ *     wrangler.toml und TAKT decken sich (Wochentags-Falle TUE,FRI)
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker from '../src/index.js';
+import worker, { TAKT, takt_ausfuehren, takt_fuer } from '../src/index.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
 const EXPORT_KEY = 'export-key-32-z------------';
 
@@ -588,4 +595,144 @@ test('unbekannter Pfad -> 404', async () => {
   const kv = kvLeeren();
   const antwort = await worker.fetch(new Request('http://abos.test/sonstiges', { headers: { accept: 'application/json' } }), env_mit(kv));
   assert.equal(antwort.status, 404);
+});
+
+// ------------------------------------------------------------------ Taktgeber
+const HIER = dirname(fileURLToPath(import.meta.url));
+
+function wrangler_crons() {
+  const toml = readFileSync(join(HIER, '..', 'wrangler.toml'), 'utf-8');
+  const m = toml.match(/^\s*crons\s*=\s*\[([^\]]*)\]/m);
+  assert.ok(m, 'wrangler.toml: [triggers] crons fehlt');
+  return [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]);
+}
+
+test('taktgeber: wrangler.toml und TAKT decken sich (Wochentage als Namen, nicht 2,5)', () => {
+  const crons = wrangler_crons();
+  assert.deepEqual([...crons].sort(), Object.keys(TAKT).sort());
+  for (const c of crons) {
+    const wochentag = c.trim().split(/\s+/)[4];
+    assert.ok(!/^\d/.test(wochentag) || wochentag === '*',
+      `Cron „${c}“: Cloudflare zählt Wochentage 1=SO..7=SA – Namen (TUE,FRI) statt Ziffern verwenden`);
+  }
+  assert.ok(crons.length <= 5, 'Free-Plan: höchstens 5 Cron-Triggers pro Account');
+});
+
+test('taktgeber: 04:30 Di/Fr -> Newsletter-Daily mit planmaessig (nie live, nie test_adresse)', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  const erg = await worker.scheduled({ cron: '30 4 * * TUE,FRI', scheduledTime: Date.UTC(2026, 8, 25, 4, 30) }, env_mit(kv), { waitUntil() {} });
+  freilass();
+  assert.equal(erg.ok, true);
+  assert.equal(erg.name, 'digest');
+  assert.equal(dispatche.length, 1);
+  assert.match(dispatche[0].ziel, /\/actions\/workflows\/newsletter-daily\.yml\/dispatches$/);
+  const body = JSON.parse(dispatche[0].opt.body);
+  assert.equal(body.ref, 'main');
+  assert.equal(body.inputs.planmaessig, 'true');
+  assert.equal(body.inputs.tage, '7');
+  assert.equal(body.inputs.live, undefined, 'der Takt darf nie „live“ setzen – nur die Cron-Freigabestufe');
+  assert.equal(body.inputs.test_adresse, undefined);
+  assert.equal(dispatche[0].opt.headers.Authorization, 'Bearer test-pat');
+  const protokoll = await kv.get('takt:digest', 'json');
+  assert.equal(protokoll.status, 'dispatched');
+  assert.equal(protokoll.http, 204);
+  assert.equal(protokoll.versuche, 1);
+  assert.equal(protokoll.geplant, '2026-09-25T04:30:00.000Z');
+});
+
+test('taktgeber: 05:05 -> Kadenz-Wache ohne Inputs; :17 -> Lifecycle nachgang', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  await worker.scheduled({ cron: '5 5 * * TUE,FRI' }, env_mit(kv), { waitUntil() {} });
+  await worker.scheduled({ cron: '17 * * * *' }, env_mit(kv), { waitUntil() {} });
+  freilass();
+  assert.equal(dispatche.length, 2);
+  assert.match(dispatche[0].ziel, /newsletter-cadence\.yml\/dispatches$/);
+  assert.deepEqual(JSON.parse(dispatche[0].opt.body).inputs, {});
+  assert.match(dispatche[1].ziel, /newsletter-lifecycle\.yml\/dispatches$/);
+  assert.equal(JSON.parse(dispatche[1].opt.body).inputs.aktion, 'nachgang');
+  assert.ok((await kv.get('takt:kadenz', 'json')).status === 'dispatched');
+  assert.ok((await kv.get('takt:nachgang', 'json')).status === 'dispatched');
+});
+
+test('taktgeber: 5xx -> bis zu 3 Versuche, dann protokolliert fehlgeschlagen', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr(() => new Response('unavailable', { status: 503 }));
+  const pausen = [];
+  const erg = await takt_ausfuehren(env_mit(kv), '30 4 * * TUE,FRI', null, async (ms) => { pausen.push(ms); });
+  freilass();
+  assert.equal(erg.ok, false);
+  assert.equal(erg.versuche, 3);
+  assert.equal(dispatche.length, 3);
+  assert.deepEqual(pausen, [5000, 20000]);
+  const protokoll = await kv.get('takt:digest', 'json');
+  assert.equal(protokoll.status, 'fehlgeschlagen');
+  assert.equal(protokoll.http, 503);
+});
+
+test('taktgeber: 5xx dann 204 -> zweiter Versuch gewinnt', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  let n = 0;
+  const freilass = fetch_sperr(() => new Response(null, { status: (n += 1) === 1 ? 502 : 204 }));
+  const erg = await takt_ausfuehren(env_mit(kv), '30 4 * * TUE,FRI', null, async () => {});
+  freilass();
+  assert.equal(erg.ok, true);
+  assert.equal(erg.versuche, 2);
+  assert.equal((await kv.get('takt:digest', 'json')).status, 'dispatched');
+});
+
+test('taktgeber: 403 (PAT ohne Actions:write) -> kein Retry, Grund im Protokoll', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr(() => new Response('Resource not accessible', { status: 403 }));
+  const erg = await takt_ausfuehren(env_mit(kv), '5 5 * * TUE,FRI', null, async () => { assert.fail('bei 403 wird nicht gewartet'); });
+  freilass();
+  assert.equal(erg.ok, false);
+  assert.equal(dispatche.length, 1);
+  const protokoll = await kv.get('takt:kadenz', 'json');
+  assert.equal(protokoll.status, 'fehlgeschlagen');
+  assert.equal(protokoll.warum, 'HTTP 403');
+});
+
+test('taktgeber: ohne PAT -> kein Netzaufruf, protokolliert kein-token', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  const erg = await takt_ausfuehren(env_mit(kv, { GITHUB_PAT: '' }), '30 4 * * TUE,FRI', null, async () => {});
+  freilass();
+  assert.equal(erg.ok, false);
+  assert.equal(dispatche.length, 0);
+  assert.equal((await kv.get('takt:digest', 'json')).warum, 'kein-token');
+});
+
+test('taktgeber: unbekannter Cron -> kein Dispatch (kein blinder Versand)', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  const erg = await worker.scheduled({ cron: '0 0 * * *' }, env_mit(kv), { waitUntil() {} });
+  freilass();
+  assert.equal(erg.ok, false);
+  assert.equal(erg.name, 'unbekannt');
+  assert.equal(dispatche.length, 0);
+  assert.equal(takt_fuer('0 0 * * *'), null);
+  assert.equal((await kv.get('takt:unbekannt', 'json')).status, 'ignoriert');
+});
+
+test('healthz: zeigt Cron-Takte und letzten Dispatch (ohne Adressen/Secrets)', async () => {
+  const kv = kvLeeren();
+  dispatche = [];
+  const freilass = fetch_sperr();
+  await worker.scheduled({ cron: '30 4 * * TUE,FRI', scheduledTime: Date.UTC(2026, 8, 25, 4, 30) }, env_mit(kv), { waitUntil() {} });
+  freilass();
+  const antwort = await worker.fetch(new Request('http://abos.test/healthz'), env_mit(kv));
+  const daten = await antwort.json();
+  assert.deepEqual([...daten.takt.crons].sort(), Object.keys(TAKT).sort());
+  assert.equal(daten.takt.letzte.digest.status, 'dispatched');
+  assert.equal(daten.takt.letzte.digest.workflow, 'newsletter-daily.yml');
+  assert.ok(!JSON.stringify(daten).includes('test-pat'), 'kein Secret im healthz');
 });

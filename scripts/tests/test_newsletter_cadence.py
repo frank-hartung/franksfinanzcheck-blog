@@ -10,6 +10,11 @@ Diese Datei friert die Entscheidungslogik der Kadenz-Wache ein:
   * Ruhetag, bedienter Tag, laufender oder roter Lauf → keine Aktion;
   * die Fenstergrenze 03:30 UTC und die Vortags-Abgrenzung;
   * Trockenlauf: Befund ohne Dispatch ist rc 1, kein Netz-Call.
+
+Ergänzt 25.09.2026 (zweiter Vorfall – Cron UND Wache blieben aus): der
+Cloudflare-Worker ruft die Wache um 05:05 UTC (Taktgeber). Deshalb ist der
+Tag ab SOLL+30 min (05:00 UTC) fällig, nicht erst ab 08:11 – und der
+Zeitpunkt ist aus dem Versandvertrag gerechnet, nicht abgeschrieben.
 """
 from __future__ import annotations
 
@@ -42,6 +47,36 @@ def lauf(cid: str, erstellt: str, status: str = "completed",
     return {"id": cid, "status": status, "conclusion": conclusion,
             "created_at": erstellt, "url": f"https://example.invalid/{cid}",
             "event": "schedule"}
+
+
+class Taktgeber(unittest.TestCase):
+    """Der Worker ruft um 05:05 UTC – die Wache muss dann schon entscheiden."""
+
+    def test_faelligkeit_aus_dem_versandvertrag_gerechnet(self):
+        self.assertEqual(dt.time(4, 30), nc.SOLL_UTC)
+        self.assertEqual(dt.time(5, 0), nc.FAELLIG_AB)
+        self.assertEqual(dt.time(3, 30), nc.FENSTER_START_UHRZEIT)
+
+    def test_taktgeber_ruf_05_05_ohne_lauf_holt_nach(self):
+        takt = dt.datetime(2026, 9, 25, 5, 5, tzinfo=dt.timezone.utc)
+        erg = nc.entscheide([], takt)
+        self.assertEqual("nachholen", erg["handlung"])
+
+    def test_taktgeber_ruf_mit_taktgeber_gestartetem_lauf_ist_bedient(self):
+        takt = dt.datetime(2026, 9, 25, 5, 5, tzinfo=dt.timezone.utc)
+        erg = nc.entscheide([lauf("digest", "2026-09-25T04:30:12Z", status="in_progress",
+                                  conclusion=None)], takt)
+        self.assertEqual("bedient", erg["handlung"])
+
+    def test_vor_der_faelligkeit_ist_ruhe(self):
+        frueh = dt.datetime(2026, 9, 25, 4, 59, tzinfo=dt.timezone.utc)
+        erg = nc.entscheide([], frueh)
+        self.assertEqual("ruhetag", erg["handlung"])
+        self.assertIn("05:00", erg["befund"])
+
+    def test_verspaeteter_github_cron_08_11_entscheidet_weiterhin(self):
+        erg = nc.entscheide([], FREITAG)
+        self.assertEqual("nachholen", erg["handlung"])
 
 
 class Entscheidung(unittest.TestCase):
