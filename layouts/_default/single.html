@@ -92,6 +92,10 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- /* Themen-Signet statt Glühbirne in allen redaktionellen Schnell-Tipps.
+           Zentraler Renderer: gilt für bestehende und neue Posts. */ -}}
+    {{- $tipIcon := printf `<span class="ff-article-tip-icon" aria-hidden="true">%s</span>` (partial "kurzantwort_icon.html" .) -}}
+    {{- $articleContent = replace $articleContent "💡" $tipIcon -}}
     {{- if not (.Param "disableAnchoredHeadings") -}}
       {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
     {{- end -}}
