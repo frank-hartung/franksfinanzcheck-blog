@@ -33,6 +33,7 @@ MODI:
   python3 scripts/reserve_pool.py --selftest        # Sabotage-Schutz
 """
 
+import contextlib
 import datetime
 import os
 import re
@@ -122,14 +123,33 @@ def _prefer_certified(drafts: list) -> list:
     return head + tail
 
 
-# REPARATUR 26.09.2026 (#387): Wie lange ein Thema nach der
-# Veröffentlichung für die Reserve gesperrt bleibt. Grund: Am 20.09.
-# gingen VIER Gasrechnungs-Varianten am selben Tag live; der
-# Dubletten-Schutz stufte drei davon danach wieder zu Entwürfen zurück
-# („Rückläufer") – fertiger Content ohne Zuhause, verbrannte Arbeit und
-# ein Pool, der sich selbst leerte. Die Reserve ist eine Notfall-Kasse:
-# Sie darf die Lücke füllen, aber nicht das Archiv kannibalisieren.
+# REPARATUR 26.09.2026 (#387) – Themen-Sperre in ZWEI Stufen.
+#
+# Befund: Am 20.09. gingen VIER Gasrechnungs-Varianten am selben Tag live;
+# der Dubletten-Schutz stufte drei davon danach wieder zu Entwürfen zurück
+# („Rückläufer") – fertiger Content ohne Zuhause, verbrannte Arbeit, und
+# ein Pool, der sich selbst leerte.
+#
+# Warum nicht einfach 14 Tage hart sperren? Weil der Pool heute zu 4/5 aus
+# Varianten EINES Themas besteht. Eine harte Sperre würde an einem
+# Ausfalltag drei fertige Artikel blockieren und die Dauervorgabe „2–3 LIVE
+# an Mo/Mi/Fr" reißen – die Reserve wäre genau dann wertlos, wofür sie da
+# ist. Deshalb:
+#
+#   WEICH (14 Tage): Erste Wahl sind Kandidaten mit frischem Thema. Solange
+#     das Tagesziel damit erreichbar ist, bleibt eine thematische
+#     Wiederholung im Pool liegen.
+#   HART (0 Tage = derselbe Tag): Was nachweislich Schaden anrichtet, wird
+#     NIE veröffentlicht – zwei Artikel zum selben Thema am SELBEN Tag.
+#     Genau diese Konstellation (vier Gasrechnungs-Varianten am 20.09.)
+#     erzeugte die fünf Rückläufer; der Dubletten-Schutz stuft die
+#     Zweitplatzierten verlässlich wieder zurück. Ein Thema am
+#     übernächsten Publikationstag zu wiederholen ist dagegen normales
+#     redaktionelles Arbeiten – das darf die Kadenz nicht kosten.
+#
+# Ergebnis: kein Kannibalismus, aber auch keine selbstverschuldete Lücke.
 DUBLETTEN_SPERRE_TAGE = 14
+DUBLETTEN_HARTSPERRE_TAGE = 0
 
 
 def frische_live_titel(posts_dir: Path = POSTS,
@@ -213,7 +233,13 @@ def publish_to_min(min_per_day: int | None = None,
 
     Nur an Publikationstagen (Mo/Mi/Fr). Rückgabe: Liste veröffentlichter
     Slugs. Ist der Pool leer, bleibt die Lücke – die Endkontrolle meldet
-    das Defizit dann als Issue (engine_issue --deficit)."""
+    das Defizit dann als Issue (engine_issue --deficit).
+
+    ZWEI DURCHGÄNGE (26.09.2026, #387): Erst Kandidaten mit frischem Thema
+    (Vielfalt), danach – nur falls das Tagesziel sonst nicht erreicht wird –
+    auch thematische Wiederholungen. Was nachweislich zurückgestuft würde
+    (gleiches Thema am SELBEN Tag), bleibt in beiden Durchgängen gesperrt.
+    """
     today = datetime.date.today()
     if today.weekday() not in cadence_guard.PUBLICATION_DAYS:
         print(f"Kein Publikationstag ({cadence_guard.DAYS_DE[today.weekday()]}) "
@@ -224,52 +250,78 @@ def publish_to_min(min_per_day: int | None = None,
     if validator is None:
         from publication_release import accept_candidate
         validator = accept_candidate
-    published = []
-    # Themen-Sperre aufbauen: alles, was zuletzt live ging, plus alles, was
-    # dieser Lauf gerade veröffentlicht hat. Fail-open – wenn die
-    # Disposition nicht lädt, veröffentlicht der Pool wie bisher.
+
+    # Fail-open: Lädt die Disposition nicht, publiziert der Pool wie früher.
     try:
         import reserve_topics as rt
-        gesperrt = frische_live_titel(posts_dir, heute=today)
+        sperren = {
+            1: frische_live_titel(posts_dir, heute=today),
+            2: frische_live_titel(posts_dir, tage=DUBLETTEN_HARTSPERRE_TAGE,
+                                  heute=today),
+        }
     except Exception as exc:  # noqa: BLE001
         print(f"  ⚠ Themen-Sperre inaktiv ({exc}) – Reserve publiziert "
               f"ohne Vielfalts-Prüfung.")
-        rt, gesperrt = None, {}
-    for index in reserve_drafts(posts_dir):
-        # Never carry a delayed slot across midnight into a non-publication day.
-        if datetime.date.today() != today:
-            break
+        rt, sperren = None, {1: {}, 2: {}}
+
+    published: list = []
+    zurueckgestellt: list = []
+
+    for durchgang in (1, 2):
         if live_count_today(posts_dir) >= min_per_day:
             break
-        original = index.read_text(encoding="utf-8")
-        if rt is not None:
-            titel = _titel(original)
-            treffer = sperr_treffer(titel, gesperrt, rt)
+        if durchgang == 2:
+            if not zurueckgestellt:
+                break
+            print("  ↻ Tagesziel noch nicht erreicht – zweiter Durchgang "
+                  "lässt thematische Wiederholungen zu (die Kadenz-Zusage "
+                  "wiegt schwerer als die Vielfalt; zwei Artikel zum selben "
+                  "Thema am selben Tag bleiben ausgeschlossen).")
+        gesperrt = sperren[durchgang]
+        for index in reserve_drafts(posts_dir):
+            # Never carry a delayed slot across midnight into a
+            # non-publication day.
+            if datetime.date.today() != today:
+                break
+            if live_count_today(posts_dir) >= min_per_day:
+                break
+            if index.parent.name in published:
+                continue
+            original = index.read_text(encoding="utf-8")
+            titel = _titel(original) if rt is not None else ""
+            treffer = sperr_treffer(titel, gesperrt, rt) if titel else None
             if treffer:
                 # NICHT verbrauchen: Der Kandidat bleibt im Pool und ist
                 # nach Ablauf der Sperre wieder ein vollwertiger Notnagel.
-                print(f"  ↩ Reserve zurückgestellt (Themen-Dublette zu "
-                      f"„{treffer[0]}“, Leitbegriff „{treffer[1]}“): "
+                if index.parent.name not in zurueckgestellt:
+                    zurueckgestellt.append(index.parent.name)
+                    print(f"  ↩ Reserve zurückgestellt (Themen-Dublette zu "
+                          f"„{treffer[0]}“, Leitbegriff „{treffer[1]}“): "
+                          f"{index.parent.name}")
+                continue
+            accepted = False
+            try:
+                iso = now_utc_iso()
+                if iso[:10] != today.isoformat():
+                    break
+                iso = publish_one(index, when=iso)
+                accepted = validator(index)
+            finally:
+                if not accepted:
+                    index.write_text(original, encoding="utf-8")
+            if not accepted:
+                print(f"  Reserve abgelehnt, bleibt Entwurf: "
                       f"{index.parent.name}")
                 continue
-        accepted = False
-        try:
-            iso = now_utc_iso()
-            if iso[:10] != today.isoformat():
-                break
-            iso = publish_one(index, when=iso)
-            accepted = validator(index)
-        finally:
-            if not accepted:
-                index.write_text(original, encoding="utf-8")
-        if not accepted:
-            print(f"  Reserve abgelehnt, bleibt Entwurf: {index.parent.name}")
-            continue
-        published.append(index.parent.name)
-        if rt is not None and _titel(original):
-            gesperrt[index.parent.name] = _titel(original)
-        print(f"  🆘 RESERVE live geschaltet: {index.parent.name} "
-              f"(datiert {iso[:10]})")
+            published.append(index.parent.name)
+            if titel:
+                # Innerhalb desselben Laufs zählt jede Veröffentlichung
+                # sofort als belegtes Thema – in BEIDEN Sperrlisten.
+                for liste in sperren.values():
+                    liste[index.parent.name] = titel
+            print(f"  🆘 RESERVE live geschaltet: {index.parent.name} "
+                  f"(datiert {iso[:10]})")
+
     if published:
         print(f"Reserve-Pool: {len(published)} Artikel veröffentlicht – "
               f"jetzt {live_count_today(posts_dir)} live heute "
@@ -279,11 +331,29 @@ def publish_to_min(min_per_day: int | None = None,
         pool = len(reserve_drafts(posts_dir))
         print(f"Reserve-Pool: keine Veröffentlichung nötig/möglich – "
               f"{live} live heute, Ziel ≥ {min_per_day}, Pool: {pool}.")
-        if pool and live < min_per_day:
-            print("  Hinweis: Der Vorrat deckt nur Themen ab, die gerade "
-                  "erst live waren. Eine echte Lücke ist ehrlicher als eine "
-                  "Dublette – die Endkontrolle meldet sie als Defizit.")
+        if zurueckgestellt and live < min_per_day:
+            print(f"  Hinweis: {len(zurueckgestellt)} Kandidat(en) blieben "
+                  f"liegen, weil ihr Thema gerade erst live war. Eine echte "
+                  f"Lücke ist ehrlicher als eine Dublette, die morgen wieder "
+                  f"Entwurf ist – die Endkontrolle meldet sie als Defizit.")
     return published
+
+
+@contextlib.contextmanager
+def _als_publikationstag():
+    """Selbsttest-Helfer: erklärt den HEUTIGEN Tag zum Publikationstag.
+
+    Bewusst wird der Wochentags-Kanon geliehen und NICHT die Uhr verstellt:
+    `publish_one` datiert auf die echte UTC-Zeit und vergleicht sie mit
+    `today` – eine gefälschte Uhr ließe den Test still ins Leere laufen.
+    So prüft er an jedem Kalendertag dieselbe Logik (Uhr-Zwang, C15).
+    """
+    original = cadence_guard.PUBLICATION_DAYS
+    cadence_guard.PUBLICATION_DAYS = tuple(range(7))
+    try:
+        yield
+    finally:
+        cadence_guard.PUBLICATION_DAYS = original
 
 
 def run_selftest() -> list:
@@ -308,6 +378,69 @@ def run_selftest() -> list:
 
     if sperr_treffer("Gasrechnung senken", frisch, _Kaputt) is not None:
         fehler.append("Sperre ist nicht fail-open (blockiert bei Defekt)")
+
+    # --- Zwei Durchgänge: Vielfalt zuerst, Kadenz notfalls trotzdem ------
+    #  Der reale Pool bestand am 26.09. zu 4/5 aus Varianten EINES Themas.
+    #  Eine harte Sperre hätte an einem Ausfalltag drei fertige Artikel
+    #  blockiert und die Zusage „2–3 LIVE an Mo/Mi/Fr" gerissen.
+    with tempfile.TemporaryDirectory() as tmp:
+        fx = Path(tmp) / "content" / "posts"
+        fx.mkdir(parents=True)
+        # Gestern live: Thema Stromfresser. Pool: zwei Stromfresser-Varianten.
+        gestern = (datetime.date.today()
+                   - datetime.timedelta(days=1)).isoformat()
+        d = fx / "live-stromfresser"
+        d.mkdir()
+        (d / "index.md").write_text(
+            f'---\ntitle: "Stromfresser finden: Die teuersten Energiediebe"\n'
+            f"date: {gestern}T06:00:00Z\ndraft: false\n---\n\nBody.\n",
+            encoding="utf-8")
+        for name in ("pool-stromfresser-a", "pool-stromfresser-b"):
+            d = fx / name
+            d.mkdir()
+            (d / "index.md").write_text(
+                f'---\ntitle: "Stromfresser finden: So senkst du die '
+                f'Stromrechnung ({name[-1]})"\n'
+                f"date: {gestern}T06:00:00Z\ndraft: true\nreserve: true\n"
+                f"---\n\nBody.\n", encoding="utf-8")
+
+        veroeffentlicht = []
+
+        def validator(index):
+            veroeffentlicht.append(index.parent.name)
+            return True
+
+        with _als_publikationstag():
+            raus = publish_to_min(2, posts_dir=fx, validator=validator)
+        # Ein Pool aus EINEM Thema trägt genau einen Artikel pro Tag: Der
+        # erste geht raus (sonst wäre der Tag leer, obwohl fertige Arbeit
+        # bereitliegt), der zweite wäre die Dublette, die der
+        # Dubletten-Schutz noch am selben Tag zurückstuft.
+        if len(raus) != 1:
+            fehler.append(f"Ein-Thema-Pool: {len(raus)} Artikel statt genau "
+                          "1 – entweder verschenkte Kadenz oder Dublette")
+
+        # Harte Sperre: dasselbe Thema HEUTE live -> nie ein zweiter Artikel.
+        fx2 = Path(tmp) / "posts2"
+        fx2.mkdir(parents=True)
+        heute_iso = datetime.date.today().isoformat()
+        d = fx2 / "live-heute"
+        d.mkdir()
+        (d / "index.md").write_text(
+            f'---\ntitle: "Gasrechnung senken: Dein Strategieplan"\n'
+            f"date: {heute_iso}T06:00:00Z\ndraft: false\n---\n\nBody.\n",
+            encoding="utf-8")
+        d = fx2 / "pool-gas"
+        d.mkdir()
+        (d / "index.md").write_text(
+            f'---\ntitle: "Gasrechnung senken: Clevere Herbst-Vorbereitung"\n'
+            f"date: {heute_iso}T06:00:00Z\ndraft: true\nreserve: true\n"
+            f"---\n\nBody.\n", encoding="utf-8")
+        with _als_publikationstag():
+            raus2 = publish_to_min(2, posts_dir=fx2, validator=lambda i: True)
+        if raus2:
+            fehler.append("Dublette am SELBEN Tag wurde veröffentlicht – "
+                          "genau das erzeugte die fünf Rückläufer (#387)")
 
     with tempfile.TemporaryDirectory() as tmp:
         fx = Path(tmp) / "content" / "posts"

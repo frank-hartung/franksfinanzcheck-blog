@@ -329,6 +329,9 @@ Eine **Tierkrankenversicherung für Hund oder Katze** lohnt sich vor allem dann,
 
 Wenn du Leistung, Eigenanteil, Ausschlüsse und deine eigene Finanzlage zusammen betrachtest, triffst du deutlich bessere Entscheidungen. Genau so wird aus einer emotionalen Frage eine kluge Geldentscheidung.
 
+
+
+**Lesetipp:** [Hausratversicherung: Was sie kostet und wen sie schützt](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/)
 ## Häufige Fragen
 
 ### Lohnt sich eine Tierkrankenversicherung für jede Katze und jeden Hund?

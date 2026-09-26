@@ -1,31 +1,16 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 3,
-  "generated_at": "2026-09-26T08:49:31Z",
+  "ready": 5,
+  "pool_size": 5,
+  "generated_at": "2026-09-26T16:05:02Z",
   "candidates": [
-    {
-      "slug": "2026-09-26-stromfresser-finden-so-stoppst-du-die-energie-lecks",
-      "ready": true,
-      "sha256": "b1e55fb0a8174be77d591f5567143f1bbdf3161771cffe88b9a9aa32d3f561f8",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.78,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
       "ready": true,
-      "sha256": "a8abe6d579a46f992139e761e11c356d3c7687d28b3066cfab98e881fb2cbd5c",
-      "score": 0.936,
+      "sha256": "49ae982b86cbc5a278b4b95f433b4f79f92509db3f470ca5550f45edf3ad07ad",
+      "score": 0.86,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -36,21 +21,60 @@
     },
     {
       "slug": "2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
-      "ready": false,
-      "sha256": "150a2cbffd641ac12285ccd2999c2f338276a9027c8489eaf5bc3d3a8eb95b19",
-      "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
-      "details": [
-        "🛑 2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.968,
+      "ready": true,
+      "sha256": "a0b8c17a1d3118e4ae7c9b43274cb694be84c5abca7349454bc523fec054c478",
+      "score": 0.888,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
         "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-26-stromfresser-finden-so-stoppst-du-die-energie-lecks",
+      "ready": true,
+      "sha256": "92248cbc371e38ae2302ae10b580d7368fdc697223284bee8ac85c0ff9a98812",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
+      "ready": true,
+      "sha256": "fb554c6d8a86190c26ccdf0d157294e912c347698f3f64a89d62fa5d49a427a0",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
+      "ready": true,
+      "sha256": "964b8e3707a716a2112a2650bd3b74cf7cdf2f56ec9b00d6b2ee6b236cc03d00",
+      "score": 0.88,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.8,
         "affiliate": 1.0,
         "readability": 1.0
       }
