@@ -247,3 +247,85 @@ Das Labor sagt „darf ausgeliefert werden", nicht „ist besser". Die
 Hypothese wird nach dem Scharfschalten 14 Tage an Umami (`cta_click` je
 `slug`) geprüft; Abbruch und Rückbau, wenn die Summe aller drei CTAs
 sinkt.
+
+---
+
+## Nachtrag 26.09.2026 – `v-hero-conversion` scharf geschaltet
+
+Auf Anweisung von Frank Hartung live geschaltet (Runbook Schritt 6).
+
+**Zwei Stellen, die übereinstimmen müssen:**
+
+```yaml
+# data/design/varianten.yaml
+aktiv: "v-hero-conversion"        # + status: live beim Eintrag
+```
+```toml
+# hugo.toml [params]
+designVariante = "v-hero-conversion"
+```
+
+**Produktionswache:** `hugo.toml aktiviert: v-hero-conversion` · keine
+Befunde · BESTANDEN. Sie läuft im Deploy vor dem Build und hätte
+verweigert bei: Statusabweichung, fehlender Unterschrift, unbekannter ID
+oder Drift zwischen beiden Stellen. Gegenprobe im Speicher gefahren:
+
+| Manipulation | Befund |
+|---|---|
+| Register auf `aktiv: ""` | P1 `produktionswache.drift` – zwei Wahrheiten über den Produktionsstand |
+| Status zurück auf `entwurf` | P1 `produktionswache.status` – nur freigegeben/live darf auf den Server |
+| Unterschrift entfernt | P1 `produktionswache.freigabe` |
+
+### Das Integritäts-Siegel
+
+`hugo.toml` ist **KRITISCH-versiegelt**. Die Änderung löste
+erwartungsgemäß einen harten Stopp aus (`integrity_guard.py` Exit 3,
+„KRITISCHE Abweichungen: hugo.toml"). Neu signiert wurde erst danach und
+gezielt:
+
+```
+🔒 Signiert: 43 Dateien gegen SHA-256 gelockt (HEAD 619c68c).
+   Neu gezeichnet (1): hugo.toml
+```
+
+Genau eine Datei, die 7 kritischen Knoten unverändert. Siegel und Beleg
+liegen im selben Commit – so verlangt es
+`test_integrity_guard.test_ausgeliefertes_siegel_ist_committet`.
+
+### Verifikation nach der Schaltung
+
+```
+Produktionsbau (ohne Env-Variable, wie im Deploy):
+  data-ff-variante="v-hero-conversion" data-ff-variante-status="live"
+  .ff-home-ctas .ff-btn-primary{padding:14px 28px;…}   ← Variante wirksam
+  Artikelseiten: Marke vorhanden
+
+DOM-Budget:  Kinder 50 · Head 50 · Tiefe 13 · Elemente 1047   (alle grün)
+             (+1 Head-Kind = das <style> der Variante, so budgetiert)
+Chunker-Vertrag: 1456 Überschriften geprüft
+Playwright:  5/5 Design-Varianten-Specs grün
+```
+
+**Zwei Tests mussten mitziehen** – sie beschrieben bis dahin einen
+*Zustand* statt einer *Regel*:
+
+* `e2e/design-variante.spec.mjs`: aus „der Bau trägt **keine**
+  Variantenmarke" wurde „der Bau trägt **genau die** Variante, die das
+  Register scharf schaltet – mit Status `live`". Die schärfere Zusage:
+  nicht keine, nicht eine andere, nicht zwei.
+* `test_design_varianten.py`: aus „hugo.toml aktiviert keine Variante"
+  wurde „hugo.toml und Register sind deckungsgleich" (= die
+  Produktionswache meldet nichts).
+
+### Beobachtungsfenster bis 10.10.2026
+
+Umami `cta_click` je `slug` für `home-ratgeber`, `home-strom`,
+`home-versicherung`. Erwartung: `home-ratgeber` steigt, die Summe aller
+drei bleibt mindestens gleich. **Abbruchkriterium:** sinkt die Summe,
+Rückbau.
+
+Rückbau ist eine Minute Arbeit: in `hugo.toml`
+`designVariante = ""`, im Register `aktiv: ""` und Status auf `gemessen`
+bzw. `verworfen` – danach `integrity_guard.py --set-current` und beides
+im selben Commit. Das Varianten-CSS liegt additiv über der Basis; es
+verschwindet durch Weglassen, nicht durch Rückrechnen.

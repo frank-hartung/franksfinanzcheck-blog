@@ -442,10 +442,21 @@ class RepositoryZustand(unittest.TestCase):
                         protokoll["tiers"][tier]["status"], "ok",
                         f"{tier} im Protokoll nicht grün.")
 
-    def test_produktion_aktiviert_keine_variante(self):
-        self.assertEqual(gate.hugo_param_variante(), "",
-                         "hugo.toml aktiviert eine Design-Variante – nur nach "
-                         "Freigabe zulässig (siehe Runbook).")
+    def test_produktion_und_register_sind_deckungsgleich(self):
+        """Was hugo.toml ausliefert, muss das Register decken.
+
+        Bis 26.09.2026 stand hier „hugo.toml aktiviert keine Variante" –
+        das war eine Zusage über den Zustand, nicht über die Regel. Seit
+        v-hero-conversion live ist, zählt die Regel: Der Parameter darf
+        gesetzt sein, aber nur deckungsgleich mit `aktiv:` und nur für
+        eine freigegebene Variante. Genau das prüft die Produktionswache –
+        und genau die läuft im Deploy vor dem Build.
+        """
+        reg = gate.lade_yaml(gate.REGISTER, "Register")
+        b = gate.Bericht()
+        gate.produktionswache(reg, b)
+        befunde = [x.zeile() for x in b.befunde]
+        self.assertEqual(befunde, [], "\n".join(befunde))
 
     def test_selbsttests_der_werkzeuge_laufen(self):
         for skript in ("design_variant_gate.py", "design_variant_lab.py",

@@ -38,20 +38,53 @@ function variantenDateien() {
   return readdirSync(VARIANTEN_DIR).filter((f) => f.endsWith('.css'));
 }
 
-test.describe('Design-Varianten: Produktions-Sicherung', () => {
-  test('der ausgelieferte Bau trägt keine Variantenmarke', async ({ page }) => {
-    for (const pfad of ['/', '/posts/']) {
-      await page.goto(pfad);
-      const marken = await page.locator('style[data-ff-variante]').count();
-      expect(marken, `Variantenmarke auf ${pfad}`).toBe(0);
-    }
+/**
+ * Welche Variante ist laut Register scharf geschaltet? '' = Basis.
+ * Bewusst als Rohtext-Prüfung: Ein YAML-Parser als Test-Abhängigkeit wäre
+ * für eine Zeile nicht zu rechtfertigen. Die vollständige Registerprüfung
+ * macht scripts/design_variant_gate.py.
+ */
+function aktiveVariante() {
+  if (!existsSync(REGISTER)) return '';
+  const zeile = readFileSync(REGISTER, 'utf8').match(/^aktiv:\s*(.*)$/m);
+  return zeile ? (zeile[1] || '').trim().replace(/^["']|["']$/g, '') : '';
+}
 
+test.describe('Design-Varianten: Produktions-Sicherung', () => {
+  test('der Bau trägt genau die Variante, die das Register scharf schaltet', async ({ page }) => {
+    // Bis 26.09.2026 hieß dieser Test „trägt KEINE Variantenmarke" – das war
+    // richtig, solange keine Variante live war. Jetzt ist v-hero-conversion
+    // freigegeben und geschaltet, und die Zusage muss schärfer werden:
+    // Der ausgelieferte Bau trägt GENAU die Variante, die das Register nennt –
+    // nicht keine, nicht eine andere, nicht zwei.
+    const erwartet = aktiveVariante();
+
+    const pfade = ['/', '/posts/'];
     const artikel = await newestArticlePath(page);
-    await page.goto(artikel);
-    expect(
-      await page.locator('style[data-ff-variante]').count(),
-      `Variantenmarke auf ${artikel}`
-    ).toBe(0);
+    pfade.push(artikel);
+
+    for (const pfad of pfade) {
+      await page.goto(pfad);
+      const marken = page.locator('style[data-ff-variante]');
+      const anzahl = await marken.count();
+
+      if (!erwartet) {
+        expect(anzahl, `keine Variante erwartet auf ${pfad}`).toBe(0);
+        continue;
+      }
+
+      expect(anzahl, `genau eine Variantenmarke auf ${pfad}`).toBe(1);
+      expect(
+        await marken.getAttribute('data-ff-variante'),
+        `ausgelieferte Variante auf ${pfad}`
+      ).toBe(erwartet);
+      // Ein Bau darf nur tragen, was auch freigegeben ist. `entwurf` im
+      // Markup hieße: ein Werkbank-Bau ist auf den Server gelangt.
+      expect(
+        await marken.getAttribute('data-ff-variante-status'),
+        `Status der ausgelieferten Variante auf ${pfad}`
+      ).toBe('live');
+    }
   });
 
   test('kein Varianten-Stylesheet liegt im immer gebündelten extended/', () => {
@@ -68,9 +101,11 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
     }
   });
 
-  test('CSS-Regeln der Varianten tauchen nicht im Produktions-CSS auf', async ({ page }) => {
+  test('CSS nicht geschalteter Varianten taucht nicht im Produktions-CSS auf', async ({ page }) => {
     // Gegenprobe zum Dateitest: Selbst wenn der Inhalt auf anderem Weg
     // (Copy&Paste in custom.css) in die Basis wandert, fällt es hier auf.
+    // Die aktive Variante ist ausgenommen – ihre Regeln GEHÖREN dorthin.
+    const aktiv = aktiveVariante();
     await page.goto('/');
     const ausgeliefert = await page.evaluate(() =>
       Array.from(document.querySelectorAll('style'))
@@ -79,6 +114,7 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
     );
 
     for (const datei of variantenDateien()) {
+      if (aktiv && datei === `${aktiv}.css`) continue;
       const quelle = readFileSync(join(VARIANTEN_DIR, datei), 'utf8');
       // Eine markante Deklaration aus der Datei suchen: die erste
       // Regel mit einem Wert, die nicht in einem Kommentar steht.

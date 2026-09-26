@@ -36,7 +36,9 @@ version: 1
 stand: "2026-09-26"
 
 # Welche Variante läuft laut Register in Produktion? "" = Basis.
-aktiv: ""
+# Scharf geschaltet am 26.09.2026 – muss mit params.designVariante in
+# hugo.toml übereinstimmen, sonst meldet die Produktionswache P1-Drift.
+aktiv: "v-hero-conversion"
 
 varianten:
 
@@ -84,16 +86,18 @@ varianten:
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Relume-Muster „Hero mit Primär-/Sekundärhandlung“), von Hand auf die Marken-Tokens zurückgeschnitten"
-    status: freigegeben
+    status: live
     css: "css/varianten/v-hero-conversion.css"
     notizen: >
       Bewusst nur Hierarchie (Gewicht, Fläche, Ruhe) – keine neuen
       Farben, keine neuen Radien, kein zusätzliches Element. Damit ist
       sie rückabwickelbar, indem man eine Datei löscht.
-      Freigegeben am 26.09.2026, aber NOCH NICHT scharf geschaltet:
-      `aktiv:` steht weiterhin auf "" und hugo.toml setzt keinen
-      designVariante-Parameter. Das Live-Schalten ist ein eigener,
-      bewusster Schritt (Runbook Schritt 6).
+      Freigegeben und am 26.09.2026 scharf geschaltet (Runbook
+      Schritt 6): `aktiv: "v-hero-conversion"` hier, dazu
+      `designVariante = "v-hero-conversion"` in hugo.toml. Beide
+      Stellen müssen übereinstimmen – die Produktionswache prüft das.
+      BEOBACHTUNGSFENSTER bis 10.10.2026: cta_click je slug in Umami.
+      Rückbau, wenn die Summe aller drei Hero-CTAs sinkt.
     freigabe:
       mensch: true
       name: "Frank Hartung"
