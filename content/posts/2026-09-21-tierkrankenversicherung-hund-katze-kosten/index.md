@@ -72,17 +72,67 @@ Das kann gut funktionieren, wenn du genug Puffer hast und hohe Rechnungen deine 
 
 Die richtige Lösung hängt daher weniger von Werbung ab und stärker von deiner Liquidität.
 
-## Wann sich eine Tierkrankenversicherung eher lohnt
+## Wann sich eine Tierkrankenversicherung lohnt
 
-Ein Schutz ist oft sinnvoll, wenn mehrere dieser Punkte auf dich zutreffen:
+Die Frage „lohnt sich das?“ lässt sich nicht mit einem Bauchgefühl beantworten, sondern mit drei nüchternen Prüfungen: **Trägt dein Konto den Ernstfall? Trägt der Tarif den Ernstfall? Und trägt der Beitrag dein Monatsbudget – auch in zehn Jahren?** Wer diese drei Fragen sauber beantwortet, braucht keine Tariflisten mehr, sondern nur noch eine Entscheidung.
 
-- du willst hohe Tierarztkosten planbar machen,
-- größere Rücklagen fehlen oder sind für andere Ziele reserviert,
-- du willst im Ernstfall nicht aus Kostendruck entscheiden,
-- dein Tier ist noch jung und gut versicherbar,
-- du magst klare Monatskosten statt möglicher Einmal-Kosten.
+### Der Ernstfall hat seit 2022 eine neue Preisklasse
 
-Kurz gesagt: Eine Versicherung ist nicht automatisch billiger. Sie kann aber finanziell deutlich stressfreier sein.
+Seit der Novelle der Gebührenordnung für Tierärzte (GOT) im November 2022 sind tierärztliche Leistungen spürbar teurer geworden; Berichte nennen Steigerungen von rund 15 bis 20 Prozent gegenüber der alten Ordnung. Tierärzte dürfen je nach Aufwand den ein- bis dreifachen Satz abrechnen, im Notdienst ist auch der vierfache Satz möglich, dazu kommt eine pauschale Notdienstgebühr von 59,50 Euro.
+
+In Zahlen heißt das für die typischen Kostentreiber:
+
+| Ernstfall | Realistische Spanne | Warum es teuer wird |
+|---|---:|---|
+| Kreuzbandriss-OP (TPLO/TTA) | ca. 1.800–4.500 € | Implantate, Bildgebung, mehrwöchige Nachsorge |
+| Magendrehung (Notfall, Hund) | ca. 2.000–5.000 € | Nacht-/Wochenendsatz, Intensivüberwachung |
+| Bandscheibenvorfall | ca. 2.000–5.000 € | MRT, Neurochirurgie, Reha |
+| Diagnostik + Behandlung Katze | ca. 400–1.200 € | Labor, Bildgebung, Kontrollen |
+
+Das ist die Zahl, gegen die du rechnen musst. Nicht die 20 Euro Monatsbeitrag.
+
+### Die Faustregel: der 3.000-Euro-Test
+
+Stell dir eine Rechnung über **3.000 Euro** vor, fällig innerhalb von 14 Tagen.
+
+- **Du zahlst sie aus einer Reserve, die danach noch steht?** Dann ist Versicherung Komfort, kein Muss. OP-Schutz reicht oft.
+- **Du zahlst sie, aber deine Reserve ist danach leer?** Dann kaufst du mit dem Beitrag vor allem Handlungsfreiheit. OP-Schutz plus Rücklage ist meist die saubere Lösung.
+- **Du müsstest Dispo, Ratenzahlung oder Familie bemühen?** Dann lohnt sich Absicherung fast immer – weil sonst die medizinische Entscheidung zur Geldentscheidung wird.
+
+Genau dieser letzte Punkt ist der eigentliche Wert der Police: Sie verhindert, dass du am Behandlungstisch rechnen musst.
+
+### Diese Signale sprechen klar für einen Abschluss
+
+Je mehr Punkte zutreffen, desto deutlicher fällt die Antwort aus:
+
+- **Reserve unter 3.000 Euro** oder bereits für Auto, Haushalt und Notgroschen verplant.
+- **Junges Tier** (Welpe, Kitten bis etwa drei Jahre): bester Beitrag, volle Tarifauswahl, keine Vorerkrankungs-Ausschlüsse.
+- **Rasse mit bekanntem Risiko** – etwa große Hunde mit Gelenk- und Magendrehungsrisiko oder Rassekatzen mit Herz- und Nierenthemen.
+- **Ein Einkommen, ein Haushalt, wenig Puffer**: Hier trifft ein vierstelliger Ausreißer das Budget doppelt hart.
+- **Du willst planbare Fixkosten** statt eines offenen Risikos in unbekannter Höhe.
+- **Emotionale Klarheit**: Du weißt, dass du im Zweifel behandeln lässt – dann sichere die Rechnung ab, nicht die Entscheidung.
+
+### Und diese Signale sprechen dagegen
+
+- Liquide Reserve von **5.000 Euro und mehr**, die ausschließlich für Notfälle reserviert ist.
+- Tier bereits **acht Jahre oder älter** mit Vorerkrankungen: Dann sind Annahme, Ausschlüsse und Beitrag oft so ungünstig, dass ein eigenes Tierkonto ehrlicher rechnet.
+- Du trägst mittlere Rechnungen ohnehin selbst und willst nur das Extremrisiko abdecken: reiner OP-Schutz statt Vollschutz.
+
+### Die Gegenprobe: Beitrag gegen Risiko
+
+Rechne nicht „Beitrag gegen Durchschnittskosten“, sondern **Beitrag gegen den schlechtesten realistischen Fall**. Ein OP-Schutz für rund 20 Euro im Monat kostet über zehn Jahre etwa 2.400 Euro. Eine einzige Kreuzband-OP mit Nachsorge liegt in derselben Größenordnung – nur eben an einem einzigen Dienstagnachmittag fällig.
+
+Versicherung ist deshalb kein Sparmodell. Sie ist ein Tausch: **ein kalkulierbarer kleiner Betrag gegen einen unkalkulierbaren großen.** Wer diesen Tausch braucht, sollte ihn früh machen; wer ihn nicht braucht, sollte die Differenz konsequent auf ein separates Tierkonto legen – nicht ins Alltagskonto.
+
+### Worauf du beim „Ja“ dann achten musst
+
+Ein Abschluss ist nur so gut wie seine Bedingungen. Stiftung Warentest hat in Finanztest 05/2025 insgesamt 121 Hunde-OP-Tarife geprüft und dabei vor allem die Versicherungsbedingungen gewichtet – Beitragsspannen von rund 8 bis über 60 Euro monatlich zeigen, wie weit der Markt auseinanderliegt. Entscheidend waren dort drei Punkte, die du in jedem Angebot nachlesen solltest:
+
+1. **Erstattung bis zum vierfachen GOT-Satz** – sonst zahlst du bei jedem Notdienst kräftig zu.
+2. **Selbstbeteiligung**: 20 Prozent auf 3.500 Euro sind 700 Euro Eigenanteil. Das muss zur Reserve passen, sonst ist der günstige Beitrag nur verschobenes Risiko.
+3. **Wartezeiten** (üblich sind 30 Tage für Krankheiten, oft 0 Tage bei Unfällen) und **Jahreshöchstgrenzen**, die häufig bei 2.000 oder 5.000 Euro liegen.
+
+Kurz gesagt: Eine Versicherung ist nicht automatisch billiger. Sie ist der Preis dafür, dass die Rechnung nie über die Behandlung entscheidet.
 
 ## Wann Rücklage oder OP-Schutz reichen können
 
