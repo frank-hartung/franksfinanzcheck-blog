@@ -3,7 +3,10 @@ lastmod: 2026-09-25
 title: "Gasrechnung senken: Clevere Herbst Vorbereitung im Check"
 description: "Mit diesem Herbst-Check senkst du deine Gasrechnung planbarer: Heizung prüfen, Tarif rechnen, Wärmeverluste finden und teure Winterfehler vermeiden."
 date: 2026-09-21T13:49:55Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-09-26T00:07:09Z
+cadence_grund: "kadenz: über Tages-Max"
 reserve_published: 2026-09-21
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
 categories: ["Ratgeber"]

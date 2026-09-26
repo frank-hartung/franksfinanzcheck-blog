@@ -3,7 +3,10 @@ lastmod: 2026-09-25
 title: "Gasanbieter wechseln: Praxis-Tipps für günstige Tarife"
 description: "So wechselst du deinen Gasanbieter clever: Effektivpreis rechnen, Preisgarantie prüfen und Tarife ohne Kostenfalle auswählen."
 date: 2026-09-25T22:33:29Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-09-26T00:07:09Z
+cadence_grund: "kadenz: über Tages-Max"
 tags: ["Gasanbieter wechseln", "Gasvergleich", "Preisgarantie", "Energiekosten senken", "Gastarif"]
 categories: ["Energie"]
 pillar: "energie"
