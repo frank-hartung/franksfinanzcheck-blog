@@ -123,6 +123,35 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     expect(probleme, 'Artikelbilder: geladen, alt + dimensioniert').toEqual([]);
   });
 
+  test('Desktop-Inhaltsnavigation schneidet lange Abschnittstitel nicht ab', async ({ page }) => {
+    // Regression 26.09.2026: Der zweizeilige Line-Clamp kappte das deutsche
+    // Kompositum sichtbar zu „Tierkrankenversicherun…“. Der Eintrag darf
+    // höher werden; die komplette Navigation besitzt ohnehin einen eigenen
+    // Scrollbereich.
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+
+    const label = 'Wann sich eine Tierkrankenversicherung lohnt';
+    const entry = page.locator(`.ff-mini-toc a[aria-label="${label}"]`);
+    await expect(entry).toBeVisible();
+    await expect(entry).toHaveText(label);
+
+    const rendering = await entry.evaluate((el) => {
+      const style = getComputedStyle(el);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const textBottom = Math.max(...Array.from(range.getClientRects(), (rect) => rect.bottom));
+      return {
+        lineClamp: style.getPropertyValue('-webkit-line-clamp'),
+        textBottom,
+        boxBottom: el.getBoundingClientRect().bottom,
+      };
+    });
+
+    expect(rendering.lineClamp, 'kein CSS-Line-Clamp auf dem Navigationseintrag').toBe('none');
+    expect(rendering.textBottom, 'vollständiger Text liegt innerhalb des Eintrags').toBeLessThanOrEqual(rendering.boxBottom + 1);
+  });
+
   test('Vorlese-Toolbar (FF Voice Studio): vorhanden & bedienbar', async ({ page }) => {
     const articlePath = await newestArticlePath(page);
     await page.goto(articlePath);
