@@ -312,5 +312,26 @@ history:
     #WLAN #Internet #MeshWLANTest #HomeofficeInternet'
   ref: '117258986614384406'
   ai: true
+- posted_at: '2026-09-26T11:56:42.120896+02:00'
+  channel: mastodon
+  slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
+  title: 'Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117336743450810591
+  ok: true
+  text: '💶 Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt
+
+
+    Ein DNS‑Hack, bei dem du deine Anfragen über einen schnellen, verschlüsselten
+    Resolver leitest, verkürzt die Auflösung um etwa 10 – 20 ms – das entspricht bis
+    zu 30 % kürzeren Ladezeiten.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #WLAN #Internet #DNSHack #DNSPrivatsphaere'
+  ref: '117336743450810591'
+  ai: false
 failures: []
-updated_at: '2026-09-25T22:32:20.192463+02:00'
+updated_at: '2026-09-26T11:56:57.914495+02:00'
