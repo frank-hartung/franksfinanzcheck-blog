@@ -60,7 +60,7 @@ Das betrifft besonders Haushalte mit höherem Verbrauch, also Familien oder Häu
 
 ### Typische Wechselvorteile
 
-- niedrigerer Arbeitspreis
+- Niedrigerer Arbeitspreis
 - geringerer Grundpreis
 - Bonus für Neukunden
 - bessere Preisgarantie
@@ -121,7 +121,7 @@ Gerade bei hohem Verbrauch ist der Hebel enorm. Schon wenige Cent Unterschied ma
 
 Ein Wechsel ist besonders interessant, wenn …
 
-- dein Vertrag nach dem ersten Jahr teurer geworden ist,
+- Dein Vertrag nach dem ersten Jahr teurer geworden ist,
 - du länger nicht verglichen hast,
 - deine Abschläge deutlich gestiegen sind,
 - dein Tarif nur schwache Preisgarantien bietet,
@@ -167,7 +167,7 @@ Ein guter Tarif bleibt auch ohne Werbeglanz ordentlich. Ein schlechter Tarif kip
 
 Einige Punkte wirken klein, können aber teuer werden:
 
-- sehr lange Laufzeiten
+- Sehr lange Laufzeiten
 - unübersichtliche Preisgarantien
 - schwer erkennbare Folgekosten
 - zu optimistische Verbrauchsannahmen
@@ -181,7 +181,7 @@ Ein guter Gasvergleich steht und fällt mit einem realistischen Jahresverbrauch.
 
 Am besten nimmst du dafür:
 
-- die letzte Jahresabrechnung,
+- Die letzte Jahresabrechnung,
 - den Verbrauch aus zwei Jahren als grobe Orientierung,
 - oder bei verändertem Haushalt einen bewusst angepassten Wert.
 
@@ -201,7 +201,7 @@ Der monatliche Abschlag fühlt sich oft wie der eigentliche Preis an. Er ist abe
 
 Deshalb gilt:
 
-- nicht nur auf niedrige Abschläge schauen,
+- Nicht nur auf niedrige Abschläge schauen,
 - Verbrauch realistisch angeben,
 - Jahreskosten statt Monatsgefühl vergleichen.
 
@@ -217,7 +217,7 @@ Das ist eine Ersparnis von **546 € in nur einem Jahr**. Selbst wenn die tats�
 
 Nicht jeder günstige Tarif ist automatisch die beste Wahl. Extra vorsichtig solltest du sein, wenn …
 
-- die Preisstruktur schwer verständlich ist,
+- Die Preisstruktur schwer verständlich ist,
 - der Bonus ungewöhnlich hoch ausfällt,
 - die Laufzeit zu lang ist,
 - die Preisgarantie schwammig formuliert wird,

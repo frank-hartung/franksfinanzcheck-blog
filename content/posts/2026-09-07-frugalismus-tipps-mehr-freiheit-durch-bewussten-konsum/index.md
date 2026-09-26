@@ -148,7 +148,7 @@ Lebensmittel und Verpflegung sind ein riesiger Alltagsposten. Nicht, weil Essen 
 
 Typische Kostentreiber:
 
-- hungrig einkaufen
+- Hungrig einkaufen
 - ohne Liste einkaufen
 - ständig kleine Zwischenkäufe
 - Lieferdienst statt Vorrat
@@ -180,7 +180,7 @@ Darum gilt: Jede Ersparnis braucht einen festen Parkplatz.
 
 ### Was praktisch gut funktioniert
 
-- separates Tagesgeldkonto
+- Separates Tagesgeldkonto
 - Unterkonto für Rücklagen
 - Dauerauftrag direkt nach Gehaltseingang
 - gesparte Beträge aus Tarifwechseln sofort umleiten
@@ -224,7 +224,7 @@ Auch im Haushalt stecken gute Einstiegshebel. Nicht, weil jede Kleinigkeit ein V
 
 Sinnvolle Maßnahmen sind zum Beispiel:
 
-- ein Grad weniger Raumtemperatur
+- Ein Grad weniger Raumtemperatur
 - Stoßlüften statt Kippfenster
 - Standby-Geräte konsequent trennen
 - LED statt alter Beleuchtung
@@ -252,7 +252,7 @@ Das ist keine Revolution. Genau deshalb funktioniert es.
 
 ## Fazit: Kleine Beträge sind nicht klein, wenn sie ständig wiederkommen
 
-Der Hebel bei **Kleine Beträge, große Wirkung: Frugalismus für den Einstieg** sitzt nicht im harten Verzicht, sondern im klaren Blick. Ausgaben sichtbar machen, Impulse bremsen, Fixkosten optimieren und Ersparnisse sofort sichern – genau daraus entsteht finanzieller Spielraum.
+Der Hebel bei **Kleine Beträge, große Wirkung: Frugalismus für den Einstieg** sitzt nicht im harten Verzicht, sondern im Klaren Blick. Ausgaben sichtbar machen, Impulse bremsen, Fixkosten optimieren und Ersparnisse sofort sichern – genau daraus entsteht finanzieller Spielraum.
 
 Wenn du heute nur einen Schritt machst, dann diesen: Schreib deine wiederkehrenden Kosten auf und streich einen unnötigen Posten. Das ist oft der Moment, in dem Frugalismus vom netten Gedanken zur echten Entlastung wird.
 

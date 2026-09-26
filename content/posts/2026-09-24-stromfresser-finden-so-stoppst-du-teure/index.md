@@ -62,7 +62,7 @@ Diese Geräte laufen das ganze Jahr. Darum machen schon kleine Schwächen viel a
 
 Teuer wird es oft, wenn:
 
-- das Gerät sehr alt ist
+- Das Gerät sehr alt ist
 - die Tür nicht gut schließt
 - die Temperatur zu kalt eingestellt ist
 - das Gerät nahe an Herd oder Heizung steht
@@ -91,7 +91,7 @@ Große Bildschirme, Receiver und Konsolen sind oft nicht einzeln extrem teuer. Z
 
 Diese Geräte sind nicht automatisch Stromfresser. Teuer werden sie vor allem durch falsche Nutzung:
 
-- halbleer starten
+- Halbleer starten
 - oft sehr heiß waschen
 - Kurzprogramme übertreiben
 - viel per Hand vorspülen
@@ -211,7 +211,7 @@ Erst jetzt ergänzt du den Preishebel und prüfst, ob dein Kilowattstundenpreis 
 
 Nicht nur die bekannten Großgeräte sind interessant. Gerade diese Kandidaten rutschen oft durchs Raster:
 
-- alter Router im Dauerbetrieb
+- Alter Router im Dauerbetrieb
 - zweiter Monitor im Homeoffice
 - Drucker mit dauerhafter Bereitschaft
 - Getränke-Kühlschrank für Gäste
@@ -225,7 +225,7 @@ Nicht jedes Altgerät muss sofort raus. Aber manche Geräte rechnen sich im Taus
 
 Besonders kritisch sind oft:
 
-- alter Kühlschrank
+- Alter Kühlschrank
 - alte Gefriertruhe
 - alter Trockner
 - Geräte mit sehr langen Laufzeiten
@@ -253,11 +253,11 @@ Viele Maßnahmen wirken nicht spektakulär von heute auf morgen. Nach ein paar W
 
 Frage dich dann:
 
-- sind die Steckdosenleisten wirklich in Nutzung?
-- läuft der Trockner seltener als vorher?
-- ist der Zweitkühlschrank noch an?
-- hast du bei Warmwasser oder Kühltemperatur etwas geändert?
-- kennst du inzwischen deinen Tarifpreis pro Kilowattstunde?
+- Sind die Steckdosenleisten wirklich in Nutzung?
+- Läuft der Trockner seltener als vorher?
+- Ist der Zweitkühlschrank noch an?
+- Hast du bei Warmwasser oder Kühltemperatur etwas geändert?
+- Kennst du inzwischen deinen Tarifpreis pro Kilowattstunde?
 
 Genau dieser Rückblick ist wichtig. Strom sparen scheitert oft nicht am Wissen, sondern an der fehlenden Wiederholung. Wenn du nach vier Wochen merkst, dass zwei Maßnahmen schon wieder eingeschlafen sind, kannst du einfach nachjustieren. Dann entsteht aus einem kurzen Sparversuch eine Gewohnheit.
 
@@ -267,7 +267,7 @@ Ein Stromfresser weniger ist gut. Ein zu teurer Tarif bleibt trotzdem teuer.
 
 Ein Wechsel lohnt sich oft, wenn:
 
-- du lange nicht geprüft hast
+- Du lange nicht geprüft hast
 - du in einem teuren Basistarif bist
 - dein Preis stark gestiegen ist
 - du nur aus Bequemlichkeit geblieben bist
@@ -280,7 +280,7 @@ Der beste Plan ist nicht der perfekte Plan. Er ist der Plan, den du wirklich ums
 
 Darum gilt:
 
-- erst die großen Geräte prüfen
+- Erst die großen Geräte prüfen
 - dann zwei oder drei Maßnahmen fest einbauen
 - nicht an Mini-Verbrauchern festbeißen
 - Ergebnisse auf der nächsten Abrechnung prüfen
@@ -330,48 +330,12 @@ Am besten wirkt beides zusammen.
 
 Darum gilt:
 
-- erst die großen Geräte prüfen
-- dann zwei oder drei Maßnahmen fest einbauen
-- nicht an Mini-Verbrauchern festbeißen
-- Ergebnisse auf der nächsten Abrechnung prüfen
-
 ## Diese Artikel passen dazu
-
-Wenn du deine Haushaltskosten insgesamt drücken willst, helfen auch diese Beiträge:
-
-- Heizkosten sparen im Alltag
-- Gasrechnung senken: clevere Herbst-Vorbereitung im Check
-- Wechselservice für Strom und Gas im Check
-
-> ⚡ **Spar-Hinweis:** Die größte Wirkung entsteht meist aus zwei Schritten: erst die größten Stromfresser stoppen, dann den Preis pro Kilowattstunde senken. Genau dafür lohnt sich der Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 
 ## Fazit: Stromfresser finden lohnt sich fast immer
 
-Hohe Stromkosten kommen selten aus dem Nichts. Meist stecken alte Geräte, Dauerbetrieb, Standby und ungünstige Gewohnheiten dahinter. Genau das macht die Lage auch lösbar.
-
-Wenn du misst statt nur zu raten, findest du die größten Kostentreiber schnell. Mit ein paar klaren Maßnahmen kannst du oft schon spürbar sparen. Und wenn du danach noch den Tarif prüfst, wird aus kleinen Änderungen ein echter Haushaltsvorteil.
-
-**Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Heizkosten sparen im Alltag
-
 ## Häufige Fragen
-
-### Was sind die größten Stromfresser im Haushalt?
-Oft sind es Kühlgeräte, Trockner, Warmwasser per Strom, TV-Geräte und Standby.
-
-### Lohnt sich ein Strommessgerät?
-Ja. Du siehst damit schnell, welche Geräte wirklich teuer sind.
-
-### Wie viel spart Standby-Vermeidung?
-Das hängt vom Haushalt ab. Über viele Geräte und viele Monate kann der Effekt aber spürbar sein.
-
-### Soll ich alte Geräte sofort austauschen?
-Nicht pauschal. Bei alten Dauerläufern lohnt sich die Prüfung aber oft sehr.
-
-### Was bringt mehr: weniger Verbrauch oder Tarifwechsel?
-Am besten wirkt beides zusammen.
 
 ---
 
 👉 **Jetzt Stromkosten prüfen:** [**→ Stromtarife vergleichen**](/go/strom/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

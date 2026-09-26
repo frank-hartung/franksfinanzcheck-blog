@@ -147,7 +147,7 @@ Viele testen einmal neben dem Router und wundern sich später über das Funkloch
 
 Sinnvoll sind zum Beispiel diese drei Orte:
 
-- direkt am Router
+- Direkt am Router
 - am Schreibtisch im Homeoffice
 - im Raum mit dem schlechtesten Empfang
 

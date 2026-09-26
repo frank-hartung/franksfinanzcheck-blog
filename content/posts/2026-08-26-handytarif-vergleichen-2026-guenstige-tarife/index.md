@@ -201,7 +201,7 @@ Der günstigste Vertrag ist nicht automatisch der beste Vertrag. Gerade im Mobil
 
 Monatlich kündbare Tarife passen besonders gut, wenn:
 
-- du bald umziehst,
+- Du bald umziehst,
 - du ein anderes Netz testen willst,
 - dein Datenverbrauch stark schwankt,
 - du nicht auf einen langen Rabatt-Trick hereinfallen willst.
@@ -214,7 +214,7 @@ Der klassische 24-Monats-Tarif lohnt sich eher, wenn der Effektivpreis klar bess
 
 Typische Vorteile:
 
-- private und berufliche Nummer auf einem Gerät,
+- Private und berufliche Nummer auf einem Gerät,
 - günstige Datenkarte zusätzlich zum Haupttarif,
 - Auslandsreise mit lokaler eSIM,
 - Test eines zweiten Netzes ohne großes Risiko.

@@ -163,7 +163,7 @@ Prüfe deine Kontoauszüge oder Banking-App. Ohne diese Bestandsaufnahme bleibt 
 ### 2. Alles in drei Töpfe sortieren
 Ordne jede Ausgabe zu:
 
-- notwendig
+- Notwendig
 - Wunsch
 - Sparen oder Tilgung
 
@@ -236,7 +236,7 @@ Darum wirkt die 50-30-20-Regel viel realistischer, wenn du solche Kosten auf den
 
 Die Methode ist stark, wenn du …
 
-- endlich Ordnung in dein Budget bringen willst,
+- Endlich Ordnung in dein Budget bringen willst,
 - zu Monatsende oft nicht weißt, wo das Geld geblieben ist,
 - sparen willst, ohne jeden Cent zu tracken,
 - Fixkosten bewusst drücken möchtest,
@@ -258,7 +258,7 @@ Wenn du durch Vertragschecks und Kündigungen **100 € pro Monat** einsparst un
 
 - **1.200 € pro Jahr**
 - **6.000 € in fünf Jahren**
-- plus mögliche Zinsen oder Rendite
+- Plus mögliche Zinsen oder Rendite
 
 Darum fühlt sich die 50-30-20-Regel so wirksam an: Sie verbindet Alltag und Vermögensaufbau.
 

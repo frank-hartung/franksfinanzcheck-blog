@@ -20,7 +20,7 @@ kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwa
 social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln"]
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
-pin_description: "*Werbung | So wechselst du Internet und DSL ohne Stress: Effektivpreis sauber rechnen, Ausfallzeiten vermeiden und Bonus, Router sowie Laufzeit richtig prüfen. Mehr Spartipps auf FranksFinanzcheck! #dslwechseln #internetanbieterwechsel #dsltarifvergleich"
+pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
@@ -52,7 +52,7 @@ Genau deshalb ist ein **DSL Tarifvergleich** alle ein bis zwei Jahre sinnvoll. N
 
 ### Typische Vorteile eines Wechsels
 
-- niedrigere Grundgebühr in den ersten Monaten
+- Niedrigere Grundgebühr in den ersten Monaten
 - Cashback oder Wechselbonus
 - moderne Router oder bessere Hardware-Angebote
 - manchmal höhere Geschwindigkeit zum ähnlichen Preis
@@ -179,13 +179,13 @@ Damit wird schnell klar: Routermiete ist kein Nebenthema. Sie kann den schönen 
 
 ### Miete ist okay, wenn …
 
-- du maximalen Komfort willst,
+- Du maximalen Komfort willst,
 - Support und Austausch für dich wichtig sind,
 - du dich nicht mit Technik beschäftigen willst.
 
 ### Kauf ist oft sinnvoll, wenn …
 
-- du längerfristig planst,
+- Du längerfristig planst,
 - du die Box über Anbieterwechsel hinweg nutzen willst,
 - du Mietkosten vermeiden möchtest.
 
@@ -222,7 +222,7 @@ Gerade Zusatzpakete flutschen schnell mit durch. Schau deshalb vor Abschluss kur
 
 Ein Umzug ist oft der perfekte Zeitpunkt, Internet sauber neu zu denken. Prüfe früh genug:
 
-- welche Technik am neuen Wohnort liegt,
+- Welche Technik am neuen Wohnort liegt,
 - ob dein aktueller Vertrag dort überhaupt sinnvoll weiterläuft,
 - ob ein neuer Tarif als Neukunde attraktiver wäre.
 
@@ -232,7 +232,7 @@ Manchmal ist der Mitnahme-Service bequem. Manchmal lohnt sich ein echter Neubegi
 
 Ein Wechsel ist vor allem dann attraktiv, wenn mehrere Punkte zusammenkommen:
 
-- alter Vertrag mit hohem Bestandskundenpreis
+- Alter Vertrag mit hohem Bestandskundenpreis
 - Tarif seit Jahren nicht geprüft
 - zu hohe oder unpassende Bandbreite
 - attraktive Bonusaktionen am Markt
@@ -252,12 +252,12 @@ Genau daran siehst du: Ein sauberer Anbieterwechsel ist kein Mini-Hack, sondern 
 
 Bevor du buchst, geh einmal diese Punkte durch:
 
-- passt die Geschwindigkeit wirklich?
-- ist der Effektivpreis gerechnet?
-- ist Routermiete enthalten?
-- wann wird Cashback ausgezahlt?
-- wie lang läuft der Vertrag?
-- sind unnötige Zusatzoptionen aktiviert?
+- Passt die Geschwindigkeit wirklich?
+- Ist der Effektivpreis gerechnet?
+- Ist Routermiete enthalten?
+- Wann wird Cashback ausgezahlt?
+- Wie lang läuft der Vertrag?
+- Sind unnötige Zusatzoptionen aktiviert?
 
 Diese Minute Aufmerksamkeit spart dir oft die ärgerlichsten Fehlentscheidungen.
 

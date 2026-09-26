@@ -174,7 +174,7 @@ Die größte Hürde ist nicht die Technik. Es ist die Routine.
 
 Was in der Praxis gut funktioniert:
 
-- ein fester Wochenzeitpunkt, zum Beispiel Sonntagabend,
+- Ein fester Wochenzeitpunkt, zum Beispiel Sonntagabend,
 - maximal zehn Minuten für den Check,
 - nur drei Fragen: Wo lag ich drüber? Wo drunter? Was ändere ich kommende Woche?
 
@@ -186,7 +186,7 @@ Sobald zwei Erwachsene oder eine Familie beteiligt sind, braucht das System etwa
 
 Wichtig sind dann vor allem:
 
-- gemeinsame Kategorien,
+- Gemeinsame Kategorien,
 - ein klares Verständnis für Fixkosten und Freizeitbudgets,
 - ein fester Ort für gemeinsame Ausgaben,
 - kein stilles Nebeneinander mit zwei Wahrheiten.

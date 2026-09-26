@@ -18,7 +18,7 @@ kurzantwort: "Eine gute Wohngebäudeversicherung schützt nicht nur gegen Feuer,
 social_posted: true
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]
 pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
-pin_description: "*Werbung | Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und… Mehr Spartipps auf FranksFinanzcheck! #wohngebaeudetarifcheck #wohngebaeudeversicherung"
+pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
@@ -187,7 +187,7 @@ Jede dieser Veränderungen kann Einfluss auf den passenden Schutz haben.
 
 Wenn du deinen Tarif sauber prüfen willst, lege dir am besten vorher diese Dinge bereit:
 
-- letzte Beitragsrechnung
+- Letzte Beitragsrechnung
 - Wohnfläche und Baujahr
 - Liste größerer Umbauten
 - Angaben zu Nebengebäuden
@@ -233,7 +233,7 @@ Keine Lücke riskieren. Erst wenn der neue Schutz bestätigt ist, sollte der alt
 
 Ein neuer Vergleich ist besonders sinnvoll, wenn …
 
-- dein Vertrag mehrere Jahre alt ist,
+- Dein Vertrag mehrere Jahre alt ist,
 - du modernisiert hast,
 - du PV, Wärmepumpe oder Nebengebäude ergänzt hast,
 - Elementarschutz fehlt,
@@ -248,7 +248,7 @@ Gerade bei alten Verträgen ist die Chance hoch, dass du heute besseren Schutz o
 
 Die häufigsten Fehler im Alltag:
 
-- nur auf den Beitrag schauen
+- Nur auf den Beitrag schauen
 - Elementarschutz weglassen, obwohl Rückstau realistisch ist
 - Modernisierungen nicht melden
 - PV oder Wärmepumpe voraussetzen statt prüfen
@@ -278,7 +278,7 @@ Schon mit diesen drei Prüfpunkten erkennst du oft, ob dein Vertrag nur alt oder
 
 Spätestens jetzt solltest du nicht länger warten:
 
-- nach einer deutlichen Beitragserhöhung,
+- Nach einer deutlichen Beitragserhöhung,
 - nach Sanierung, Anbau oder Dachausbau,
 - bei neuer PV, Wärmepumpe oder Wallbox,
 - wenn Starkregen oder Rückstau in deiner Region zuletzt häufiger Thema waren.
@@ -299,7 +299,7 @@ Schon diese drei Fragen zeigen dir oft sehr schnell, ob du nur beobachten oder w
 
 Für einen ersten Vertrags-Check brauchst du oft noch nicht den ganzen Ordner. Häufig genügen schon:
 
-- die letzte Beitragsrechnung,
+- Die letzte Beitragsrechnung,
 - ein Blick auf die versicherten Bausteine,
 - und die Frage, ob seit Abschluss etwas am Haus dazugekommen ist.
 
@@ -327,7 +327,7 @@ Eine kurze Mitteilung zu neuer Technik, Anbau oder Nebengebäude reicht oft scho
 
 Halte nach Änderungen am Haus am besten drei Dinge kurz fest:
 
-- was neu dazugekommen ist
+- Was neu dazugekommen ist
 - wann es passiert ist
 - ob der Versicherer davon schon weiß
 

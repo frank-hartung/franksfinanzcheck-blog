@@ -93,7 +93,7 @@ Viele denken bei langsamem Internet sofort: „Ich brauche einen schnelleren Tar
 
 Oft liegen die Probleme hier:
 
-- alter Router
+- Alter Router
 - schlechtes WLAN
 - ungünstige Router-Position
 - dicke Wände
@@ -149,11 +149,11 @@ Ein schöner Rabatt vorn hilft wenig, wenn die Routermiete leise alles wieder ve
 ### Beispiel
 
 - Routermiete: **5,99 € pro Monat**
-- auf 24 Monate: **143,76 €**
+- Auf 24 Monate: **143,76 €**
 
 Oder bei **8,99 € pro Monat**:
 
-- auf 24 Monate: **215,76 €**
+- Auf 24 Monate: **215,76 €**
 
 Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
@@ -178,7 +178,7 @@ Nicht nur auf die ersten Rabattmonate schauen.
 
 Ein Wechsel lohnt sich oft besonders, wenn …
 
-- dein Vertrag schon länger läuft,
+- Dein Vertrag schon länger läuft,
 - du den hohen Standardpreis zahlst,
 - die Routermiete teuer ist,
 - du längst weniger oder anders nutzt,
@@ -195,7 +195,7 @@ Das macht etwa:
 
 - **12 € bis 14 € pro Monat** Unterschied
 - **144 € bis 168 € pro Jahr**
-- über 24 Monate also **288 € bis 336 €**
+- Über 24 Monate also **288 € bis 336 €**
 
 Dazu kommen mögliche Einsparungen durch geringere Routerkosten.
 
@@ -242,7 +242,7 @@ Nicht immer musst du den Anbieter sofort komplett wechseln. Manchmal reicht scho
 
 Das lohnt sich vor allem, wenn:
 
-- du grundsätzlich zufrieden bist,
+- Du grundsätzlich zufrieden bist,
 - nur der Preis nicht mehr passt,
 - ein kleinerer Tarif innerhalb des Anbieters reicht,
 - du die Technik nicht anfassen willst.
@@ -278,7 +278,7 @@ Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate. Genau 
 
 ## Meine Kurz-Checkliste für heute
 
-- aktuellen Monatspreis notieren
+- Aktuellen Monatspreis notieren
 - Vertragslaufzeit prüfen
 - Routerkosten prüfen
 - Haushaltsbedarf ehrlich einschätzen

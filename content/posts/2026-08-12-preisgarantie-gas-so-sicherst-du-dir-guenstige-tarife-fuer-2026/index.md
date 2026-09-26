@@ -20,7 +20,7 @@ kurzantwort: "Eine Preisgarantie für Gas kann deinen Arbeitspreis und oft auch 
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas", "Gaspreise Prognose 2026"]
 pin_title: "Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern"
-pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten sicherst du dir klare Konditionen und vermeidest böse Überraschungen. Jetzt Gastarife mit Preisbindung prüfen."
+pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
@@ -72,7 +72,7 @@ Eine Preisgarantie lohnt sich nicht, weil das Wort gut klingt. Sie lohnt sich, w
 
 Typische Fälle:
 
-- du sitzt noch in der **Grundversorgung**,
+- Du sitzt noch in der **Grundversorgung**,
 - dein alter Vertrag läuft aus,
 - dein Anbieter hat den Preis schon einmal deutlich erhöht,
 - du willst deine Heizkosten für die nächste Saison planbarer machen,
@@ -86,7 +86,7 @@ Angenommen, dein bisheriger Tarif liegt bei **12,5 Cent pro kWh** und ein neuer
 
 Bei **20.000 kWh** ergibt das:
 
-- alter Tarif: 2.500 € reiner Arbeitspreis
+- Alter Tarif: 2.500 € reiner Arbeitspreis
 - neuer Tarif: 1.940 € reiner Arbeitspreis
 - Unterschied: **560 €**
 
@@ -133,14 +133,14 @@ Das ist eine der häufigsten Fragen. Die Antwort hängt davon ab, was dir wichti
 
 ### 12 Monate passen oft besser, wenn …
 
-- du gerne jährlich neu vergleichst,
+- Du gerne jährlich neu vergleichst,
 - du Wechselboni mitnehmen willst,
 - du flexibel bleiben möchtest,
 - du glaubst, dass sich der Markt auch wieder entspannen kann.
 
 ### 24 Monate passen eher, wenn …
 
-- du zwei Heizperioden Ruhe willst,
+- Du zwei Heizperioden Ruhe willst,
 - du keine Lust auf jährliches Nachrechnen hast,
 - der Preis trotz längerer Laufzeit noch fair ist,
 - du heute schon einen Tarif findest, der sauber kalkuliert wirkt.
@@ -224,7 +224,7 @@ Kurz vor der nächsten Preisanpassung steigt oft der Druck. Mit etwas Luft vergl
 
 Auch ein guter Tarif bleibt nicht ewig gut. Spätestens in diesen Situationen lohnt ein neuer Blick:
 
-- kurz vor Ende der Erstlaufzeit,
+- Kurz vor Ende der Erstlaufzeit,
 - nach Ende eines Bonusjahres,
 - wenn dein Verbrauch stark steigt oder fällt,
 - bei Umzug,

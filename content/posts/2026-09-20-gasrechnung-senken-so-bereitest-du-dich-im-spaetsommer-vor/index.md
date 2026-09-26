@@ -26,7 +26,7 @@ cover:
 kurzantwort: "Wer seine Gasrechnung senken will, sollte den Spätsommer nutzen: letzte Abrechnung prüfen, Tarif neu rechnen, Dichtungen testen und die Heizung vor der Saison sauber vorbereiten. Schon kleine Verbesserungen bei Tarif und Verbrauch können schnell einige hundert Euro Unterschied pro Jahr machen."
 ---
 
-Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Im November reagieren fast alle. Im Spätsommer sparen die Klugen. Denn solange die Heizung noch nicht unter Volllast läuft, kannst du Verbrauch, Vertrag und kleine Schwachstellen ohne Druck prüfen.
+Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im November reagieren fast alle. Im Spätsommer sparen die Klugen. Denn solange die Heizung noch nicht unter Volllast läuft, kannst du Verbrauch, Vertrag und kleine Schwachstellen ohne Druck prüfen.
 
 Genau das ist der Vorteil. Wer jetzt handelt, bekommt eher Termine, vergleicht ruhiger und entdeckt Wärmeverluste, bevor sie den ganzen Winter lang Geld kosten. Wenn du deine **Gasrechnung senken** willst, ist das oft der beste Zeitpunkt im Jahr.
 

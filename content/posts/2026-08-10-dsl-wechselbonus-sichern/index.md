@@ -20,7 +20,7 @@ kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn 
 social_posted: true
 keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
-pin_description: "*Werbung | Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist. Mehr Spartipps auf FranksFinanzcheck! #dslwechselbonussichern #dslwechselbonus #internetvertragwechseln"
+pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
@@ -120,7 +120,7 @@ Kann gut sein, wenn du den Router wirklich brauchst. Manchmal ist ein nackter Pr
 
 Ein Wechsel ist fast immer dann spannend, wenn du: 
 
-- seit Jahren denselben Tarif zahlst,
+- Seit Jahren denselben Tarif zahlst,
 - deutlich über **35 € bis 45 €** für normalen DSL bezahlst,
 - noch einen alten Bestandskundentarif ohne Rabatte hast,
 - ohnehin ein Vertragsende vor dir hast,
@@ -140,7 +140,7 @@ Viele fangen viel zu spät an. Dann läuft alles hektisch, und man klickt schnel
 
 Besser ist ein Vorlauf von einigen Wochen oder wenigen Monaten. Das gibt dir Zeit für:
 
-- saubere Preisvergleiche,
+- Saubere Preisvergleiche,
 - die Prüfung von Hardwarefragen,
 - einen möglichen Anbieterwechsel mit Rufnummernmitnahme,
 - einen entspannten Schalttermin.
@@ -160,13 +160,13 @@ Dafür bekommst du kein Eigentum. Ein eigenes Gerät kann sich also lohnen, wenn
 
 ### Miete ist okay, wenn …
 
-- du maximalen Komfort willst,
+- Du maximalen Komfort willst,
 - Austausch bei Defekt wichtig ist,
 - du dich nicht mit Technik beschäftigen willst.
 
 ### Kauf ist oft sinnvoll, wenn …
 
-- du längerfristig planst,
+- Du längerfristig planst,
 - du Routerkosten nicht dauerhaft mitschleppen willst,
 - du ein vernünftiges Gerät schon kennst oder weiterverwenden kannst.
 
@@ -209,7 +209,7 @@ Viele Anbieter kümmern sich dabei um die Kommunikation mit dem Altanbieter. Gen
 
 Ein gutes Angebot hat meist mehrere dieser Eigenschaften:
 
-- fairer Preis auch ohne Riesencashback
+- Fairer Preis auch ohne Riesencashback
 - überschaubare Anschlusskosten
 - keine versteckte teure Routermiete
 - solide Geschwindigkeit für deinen Bedarf

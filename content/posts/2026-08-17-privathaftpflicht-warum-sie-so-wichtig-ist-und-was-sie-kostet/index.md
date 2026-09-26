@@ -20,7 +20,7 @@ kurzantwort: "Die Privathaftpflicht schützt dich vor Schadenersatzforderungen, 
 social_posted: true
 keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Koste"]
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
-pin_description: "*Werbung | Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute Pflicht sind und was guter Schutz für Singles und Familien kostet. Mehr Spartipps auf FranksFinanzcheck! #privathaftpflicht #haftpflichtvergleich #deckungssummehaftpflicht"
+pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
@@ -175,7 +175,7 @@ Nicht jede alte Police ist schlecht. Aber viele ältere Verträge haben heute Sc
 
 Typische Probleme alter Policen:
 
-- niedrige Deckungssummen
+- Niedrige Deckungssummen
 - schwacher oder fehlender Schlüsselverlust
 - keine oder eingeschränkte Forderungsausfalldeckung
 - schwächere Regeln bei grober Fahrlässigkeit

@@ -47,7 +47,7 @@ Der wichtige Punkt ist simpel: Heizkosten bestehen immer aus **Verbrauch** und *
 
 Die hohe Gasrechnung entsteht selten an einem einzigen Tag. Sie wächst über Wochen aus vielen kleinen Faktoren:
 
-- ein zu teurer Tarif,
+- Ein zu teurer Tarif,
 - schlecht verteilte Wärme,
 - etwas Zugluft,
 - zu warme Räume,
@@ -97,11 +97,11 @@ Die beste Heizsaison ist oft die, die unspektakulär startet. Genau darum lohnt 
 
 ### Was du selbst prüfen kannst
 
-- gluckern Heizkörper?
-- werden sie gleichmäßig warm?
-- reagieren Thermostate sauber?
-- ist der Druck der Anlage plausibel, falls du Zugriff hast?
-- gibt es ungewöhnliche Geräusche?
+- Gluckern Heizkörper?
+- Werden sie gleichmäßig warm?
+- Reagieren Thermostate sauber?
+- Ist der Druck der Anlage plausibel, falls du Zugriff hast?
+- Gibt es ungewöhnliche Geräusche?
 
 ### Warum das so wichtig ist
 
@@ -226,7 +226,7 @@ Gerade bei Gas ist Planbarkeit oft viel wert.
 Nehmen wir einen Haushalt mit:
 
 - **18.000 kWh Jahresverbrauch**
-- altem teurem Tarif
+- Altem teurem Tarif
 - leicht zu warmen Räumen
 - etwas Zugluft
 - nicht entlüfteten Heizkörpern
@@ -235,7 +235,7 @@ Nehmen wir einen Haushalt mit:
 
 - Tarifwechsel: **300 € bis 500 €**
 - 1 °C weniger Temperatur: **80 € bis 120 €**
-- bessere Wärmeverteilung: **50 € bis 90 €**
+- Bessere Wärmeverteilung: **50 € bis 90 €**
 - Dichtungen und Alltagsoptimierung: **40 € bis 80 €**
 
 Selbst vorsichtig gerechnet sind damit **470 € bis 790 €** im Jahr denkbar.
@@ -273,7 +273,7 @@ Hier liegen oft größere technische Effekte, die Mieter nicht direkt beeinfluss
 
 Wenn du direkt starten willst, geh diese Punkte durch:
 
-- letzte Abrechnung holen
+- Letzte Abrechnung holen
 - Jahresverbrauch notieren
 - Arbeitspreis und Grundpreis aufschreiben
 - Heizkörper auf Gluckern oder schlechte Wärme prüfen
@@ -287,7 +287,7 @@ Das dauert keine halbe Ewigkeit. Es bringt aber sofort Übersicht.
 
 Nicht alles musst du allein lösen. Hilfe ist sinnvoll, wenn:
 
-- die Heizung laut oder unzuverlässig ist,
+- Die Heizung laut oder unzuverlässig ist,
 - Räume trotz Entlüften kühl bleiben,
 - Druck oder Anlage auffällig wirken,
 - du an hydraulischen Abgleich oder Wartung denkst,
@@ -301,7 +301,7 @@ Wichtig ist nur: lieber früh als mitten in einer Frostphase.
 
 Für deinen Winter-Check reichen oft schon drei Zahlen:
 
-- aktueller Arbeitspreis pro kWh
+- Aktueller Arbeitspreis pro kWh
 - monatlicher Abschlag
 - Jahresverbrauch der letzten Abrechnung
 

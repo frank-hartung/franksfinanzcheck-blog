@@ -45,7 +45,7 @@ Schon mit einem kurzen Check findest du oft Wärmeverluste, schwache Regelung un
 
 Sobald es draußen kalt wird, reagieren viele erst dann, wenn etwas nicht mehr klappt. Genau das ist teuer und unpraktisch. Im September oder frühen Herbst hast du drei Vorteile:
 
-- genug Zeit für kleine Korrekturen,
+- Genug Zeit für kleine Korrekturen,
 - bessere Planung für mögliche Handwerkertermine,
 - weniger Risiko, mitten in der Kälte improvisieren zu müssen.
 
@@ -89,10 +89,10 @@ Viele übersehen Thermostate. Dabei entscheiden sie jeden Tag darüber, ob ein R
 
 ### Prüfe vor der Saison
 
-- lässt sich das Thermostat sauber drehen?
-- reagiert es spürbar?
-- klemmt das Ventil?
-- passen deine üblichen Einstellungen noch zu deinem Alltag?
+- Lässt sich das Thermostat sauber drehen?
+- Reagiert es spürbar?
+- Klemmt das Ventil?
+- Passen deine üblichen Einstellungen noch zu deinem Alltag?
 
 Schon eine kleine Verhaltenskorrektur bringt etwas: Schlafzimmer, Flur oder selten genutzte Räume müssen meist nicht genauso warm sein wie das Wohnzimmer.
 
@@ -102,9 +102,9 @@ Vorhänge, Möbel oder Verkleidungen vor dem Heizkörper stören die Wärmeabgab
 
 ### Prüfe deshalb kurz
 
-- stehen große Möbel direkt davor?
-- hängen dicke Vorhänge über dem Heizkörper?
-- ist die Wärmeabgabe sichtbar blockiert?
+- Stehen große Möbel direkt davor?
+- Hängen dicke Vorhänge über dem Heizkörper?
+- Ist die Wärmeabgabe sichtbar blockiert?
 
 Nicht spektakulär, aber oft sofort umsetzbar.
 
@@ -137,7 +137,7 @@ Der Spätsommer ist ideal, um Ungewöhnliches zu bemerken, bevor es ernst wird.
 
 Achte zum Beispiel auf:
 
-- ungewohnte Geräusche
+- Ungewohnte Geräusche
 - ungleichmäßige Wärmeverteilung
 - träge oder defekte Thermostate
 - sichtbare Undichtigkeiten oder Problemstellen im Heizungsbereich
@@ -160,7 +160,7 @@ Das ist keine Garantie, aber eine realistische Größenordnung, die zeigt: Klein
 
 Diese Punkte kosten unnötig Geld oder Komfort:
 
-- erst reagieren, wenn es schon kalt ist
+- Erst reagieren, wenn es schon kalt ist
 - Heizkörper nicht entlüften, obwohl sie gluckern
 - Thermostate nie prüfen
 - Möbel vor Heizkörpern ignorieren
@@ -267,7 +267,7 @@ Genau dort merkst du meist am ehesten, ob Entlüften, freie Heizkörper oder bes
 
 Sobald die Heizung wieder regelmäßig läuft, achte kurz auf drei Dinge:
 
-- wird der Raum gleichmäßig warm,
+- Wird der Raum gleichmäßig warm,
 - reagiert das Thermostat sauber,
 - bleiben Geräusche oder kalte Zonen aus.
 
@@ -283,7 +283,7 @@ Dann prüfst du nicht erst dann wieder, wenn ein Raum kalt bleibt oder etwas ner
 
 Notiere dir zum Schluss nur drei Dinge:
 
-- was dir aufgefallen ist,
+- Was dir aufgefallen ist,
 - was du direkt erledigt hast,
 - was du später noch beobachten oder weitergeben musst.
 

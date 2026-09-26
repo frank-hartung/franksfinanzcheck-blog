@@ -18,7 +18,7 @@ kurzantwort: "Ein sauberes Vorsorge-Update für Haus oder Wohnung besteht aus dr
 social_posted: true
 keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten"]
 pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
-pin_description: "*Werbung | Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die… Mehr Spartipps auf FranksFinanzcheck! #deinhaussicherschuetzen #hausversicherung #hausratversicherung"
+pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
@@ -130,7 +130,7 @@ Ist dein Hausrat oder dein Gebäude zu niedrig versichert, kann die Versicherung
 
 - Wohnfläche: **90 m²**
 - Richtwert: **650 € pro m²**
-- sinnvolle Summe: **58.500 €**
+- Sinnvolle Summe: **58.500 €**
 
 Liegt deine Summe deutlich darunter, kann das später teuer werden. Gerade nach Umzug, Renovierung oder größeren Anschaffungen ist ein Update wichtig.
 
@@ -217,9 +217,9 @@ Diese Fragen prüfen:
 Eigene Situation abgleichen:
 
 - Wohnfläche noch korrekt?
-- neue Möbel oder Technik?
+- Neue Möbel oder Technik?
 - Keller ausgebaut?
-- wertvolle Extras hinzugekommen?
+- Wertvolle Extras hinzugekommen?
 
 ### Minute 46 bis 60
 Wenn Lücken sichtbar werden:
@@ -277,7 +277,7 @@ Laptop, Fernseher, Möbel, Kleidung, Fahrrad und Kleinteile summieren sich schne
 
 Ein Vertragscheck ist besonders sinnvoll, wenn …
 
-- dein Vertrag älter als drei bis fünf Jahre ist,
+- Dein Vertrag älter als drei bis fünf Jahre ist,
 - du saniert, umgezogen oder angebaut hast,
 - du teure Technik angeschafft hast,
 - Starkregen oder Rückstau in deiner Gegend relevanter geworden sind,

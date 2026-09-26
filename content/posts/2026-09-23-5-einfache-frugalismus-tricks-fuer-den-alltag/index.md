@@ -4,7 +4,7 @@ title: "5 einfache Frugalismus-Tricks für den Alltag"
 description: "Frugalismus im Alltag ohne Verzichtsdrama: Diese 5 einfachen Tricks helfen dir, Ausgaben klarer zu steuern und Monat für Monat spürbar Geld zu sparen."
 date: 2026-09-23T09:24:25Z
 draft: true
-tags: ["Frugalismus", "Alltag sparen", "bewusster Konsum", "Geld sparen"]
+tags: ["Frugalismus", "Alltag sparen", "Bewusster Konsum", "Geld sparen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben", "5 einfache Frugalismus Tricks für den Alltag"]
@@ -73,7 +73,7 @@ Nehmen wir an, du findest in einem Monat:
 - Lieferdienste: **92 €**
 - Coffee-to-go: **48 €**
 - Impulskäufe online: **76 €**
-- doppelte Abos oder kaum genutzte Dienste: **34 €**
+- Doppelte Abos oder kaum genutzte Dienste: **34 €**
 
 Das sind zusammen **250 € in einem Monat**.
 
@@ -124,9 +124,9 @@ Frugalismus wird viel leichter, wenn du diese Zeit künstlich wieder einbaust.
 
 Nutze eine kleine Kaufpause:
 
-- bei Kleinkram: **24 Stunden**
-- bei mittleren Käufen: **72 Stunden**
-- bei größeren Käufen: **7 Tage**
+- Bei Kleinkram: **24 Stunden**
+- Bei mittleren Käufen: **72 Stunden**
+- Bei größeren Käufen: **7 Tage**
 
 ### Warum das so gut funktioniert
 
@@ -137,8 +137,8 @@ Weil viele Wünsche nicht stabil sind. Nach einem Tag verlieren sie schon an Kra
 Du willst spontan:
 
 - Kopfhörer für **89 €**
-- neue Deko für **34 €**
-- ein Gadget für **59 €**
+- Neue Deko für **34 €**
+- Ein Gadget für **59 €**
 
 Zusammen sind das **182 €**.
 
@@ -154,7 +154,7 @@ Ein unterschätzter Frugalismus-Hebel ist Struktur im Alltag. Viele geben nicht 
 
 Typische Beispiele:
 
-- kein Essensplan → mehr Lieferdienste
+- Kein Essensplan → mehr Lieferdienste
 - kein Einkaufsrhythmus → mehr Kleinkäufe
 - kein Überblick über Termine → teure Last-Minute-Entscheidungen
 - kein Vorrat → häufiger teurer Convenience-Kauf
@@ -224,7 +224,7 @@ Das ist einer der größten Denkfehler.
 
 Frugalismus heißt nicht:
 
-- nie essen gehen
+- Nie essen gehen
 - keine Hobbys mehr
 - keine Reisen
 - keine kleinen Freuden

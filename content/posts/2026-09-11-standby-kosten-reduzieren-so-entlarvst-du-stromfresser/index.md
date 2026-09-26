@@ -135,7 +135,7 @@ Beim Energiesparen bringt Härte selten mehr als Verstand. Nicht jedes Gerät mu
 
 ### Sinnvoll ganz auszuschalten
 
-- selten genutzte Drucker
+- Selten genutzte Drucker
 - Zweitfernseher
 - alte Receiver oder Verstärker
 - Spielkonsolen außerhalb der Nutzungszeiten
@@ -179,7 +179,7 @@ Miss oder prüfe die größten Verdächtigen: Konsole, Drucker, Soundbar, Receiv
 ### Minute 21 bis 30
 Ordne nach Priorität:
 
-- sofort ganz abschalten,
+- Sofort ganz abschalten,
 - über Steckdosenleiste bündeln,
 - bewusst weiterlaufen lassen.
 
@@ -219,7 +219,7 @@ Mit genau diesen drei Checks findest du oft schneller echtes Sparpotenzial als m
 
 Dann achte zuerst auf genau diese Signale:
 
-- mehrere Geräte an einer TV-Leiste,
+- Mehrere Geräte an einer TV-Leiste,
 - warme Netzteile trotz Pause,
 - Geräte mit Uhr, LED oder Schnellstart-Modus.
 
@@ -328,7 +328,7 @@ Nehmen wir an, in deinem Haushalt laufen diese Werte dauerhaft mit:
 Zusammen sind das **30 Watt**. Hochgerechnet auf ein Jahr ergibt das:
 
 - 30 Watt × 24 Stunden × 365 Tage = **262,8 kWh**
-- bei 0,40 € pro kWh also rund **105 € im Jahr**
+- Bei 0,40 € pro kWh also rund **105 € im Jahr**
 
 Das ist kein Weltuntergang. Aber eben auch kein Trinkgeld. Vor allem, weil sich ein Teil davon oft mit einer Leiste und zehn Minuten Gewohnheitsänderung reduzieren lässt.
 

@@ -24,7 +24,7 @@ pin_description: "*Werbung | DSL, Kabel oder Glasfaser? Der richtige Tarif häng
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-DSL Tarif finden im Check: Viele Haushalte kaufen beim Internet zu groß ein. Dann steht auf dem Vertrag 1.000 Mbit/s, im Alltag laufen aber nur zwei Laptops, ein Fernseher und ein Handy. Das Ergebnis: viel Werbezahl, wenig Mehrwert.
+DSL-Tarif finden im Check: Viele Haushalte kaufen beim Internet zu groß ein. Dann steht auf dem Vertrag 1.000 Mbit/s, im Alltag laufen aber nur zwei Laptops, ein Fernseher und ein Handy. Das Ergebnis: viel Werbezahl, wenig Mehrwert.
 
 Genau hier setzt dieser Ratgeber an. Du bekommst keine Technik-Show, sondern einen klaren Plan: Wie viel Tempo du wirklich brauchst, wann DSL reicht, wann Kabel oder Glasfaser besser sind und wie du beim Preis nicht in die Bonusfalle tappst.
 
@@ -125,13 +125,13 @@ Wenn du länger an einem Anschluss bleibst oder später erneut wechselst, lohnt 
 
 ### Kauf lohnt sich oft, wenn …
 
-- du den Router länger als 24 Monate nutzen willst,
+- Du den Router länger als 24 Monate nutzen willst,
 - du mehr Kontrolle über WLAN und Einstellungen willst,
 - du nicht bei jedem Wechsel neue Mietkosten zahlen möchtest.
 
 ### Miete kann okay sein, wenn …
 
-- du Technik komplett auslagern willst,
+- Du Technik komplett auslagern willst,
 - du ein sehr spezielles Gerät brauchst,
 - ein Defekttausch für dich wichtiger ist als der Gesamtpreis.
 

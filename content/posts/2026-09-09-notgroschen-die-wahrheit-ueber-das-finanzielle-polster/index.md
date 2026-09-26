@@ -136,7 +136,7 @@ Gerade bei höherer Miete, Auto, Kindern oder schwankendem Einkommen ist diese S
 
 Praktisch ist deshalb ein Stufenmodell:
 
-- zuerst **1.000 €** als Sofortpuffer,
+- Zuerst **1.000 €** als Sofortpuffer,
 - dann **ein Monatsbedarf**,
 - danach schrittweise auf **drei bis sechs Monatsausgaben** erhöhen.
 

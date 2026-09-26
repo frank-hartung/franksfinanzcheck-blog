@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Ein kurzer Check lohnt sich besonders, wenn mindestens einer dieser Punkte auf dich zutrifft:
 
-- du zahlst schon Kontogebühren,
+- Du zahlst schon Kontogebühren,
 - deine Karte kostet extra,
 - du kennst die Gratis-Bedingungen nicht mehr genau,
 - du nutzt das Konto heute anders als vor einem Jahr,
@@ -63,7 +63,7 @@ Das große Muster ist nicht kompliziert: Banken drehen seltener an einer einzige
 
 Typische Änderungen sind:
 
-- neue Bedingungen für ein kostenloses Girokonto
+- Neue Bedingungen für ein kostenloses Girokonto
 - Banken knüpfen Gratis-Modelle stärker an den Mindestgeldeingang
 - nur noch eine bestimmte Kartenart ist gratis
 - Zusatzkarten kosten extra
@@ -80,7 +80,7 @@ Viele unterschätzen, wie stark kleine Bankkosten auf ein Jahr wirken.
 
 - Kontoführung: **4,90 € pro Monat**
 - Girocard: **12 € pro Jahr**
-- zwei kostenpflichtige Zusatzleistungen: **18 € pro Jahr**
+- Zwei kostenpflichtige Zusatzleistungen: **18 € pro Jahr**
 
 Das sind zusammen **88,80 € pro Jahr**.
 
@@ -88,7 +88,7 @@ Das sind zusammen **88,80 € pro Jahr**.
 
 - Kontoführung: **6,90 € pro Monat**
 - Kreditkarte: **39 € pro Jahr**
-- drei Fremdwährungs-Einsätze: **9 €**
+- Drei Fremdwährungs-Einsätze: **9 €**
 
 Hier liegst du schon bei **130,80 € pro Jahr**.
 
@@ -100,7 +100,7 @@ Viele Konten sind nicht grundsätzlich gratis. Sie sind **unter Bedingungen** ko
 
 Häufige Kriterien sind:
 
-- monatlicher Geldeingang, zum Beispiel **700 € oder 1.000 €**
+- Monatlicher Geldeingang, zum Beispiel **700 € oder 1.000 €**
 - Mindestanzahl digitaler Transaktionen
 - bestimmtes Alter oder Ausbildungsstatus
 - nur App-Nutzung statt Filiale
@@ -114,11 +114,11 @@ Beim **Konto & Karten-Update** vergessen viele einen Punkt: Selbst ein günstige
 
 ### Darauf solltest du achten
 
-- kostet die Girocard extra?
-- ist nur eine Debitkarte gratis, aber die Kreditkarte kostenpflichtig?
-- gibt es Gebühren für Bargeld im Ausland?
-- fallen Fremdwährungsgebühren an?
-- ist die Karte im Alltag überall sinnvoll nutzbar?
+- Kostet die Girocard extra?
+- Ist nur eine Debitkarte gratis, aber die Kreditkarte kostenpflichtig?
+- Gibt es Gebühren für Bargeld im Ausland?
+- Fallen Fremdwährungsgebühren an?
+- Ist die Karte im Alltag überall sinnvoll nutzbar?
 
 Gerade bei Reisen oder Online-Zahlungen kann eine vermeintlich kleine Kartengebühr schnell durch schlechte Konditionen überholt werden.
 
@@ -176,7 +176,7 @@ Genau dort steckt meist die sicherste Ersparnis, weil diese Kosten Monat für Mo
 
 Für viele Alltage braucht es gar kein kompliziertes Bank-Setup:
 
-- ein günstiges oder kostenloses Girokonto,
+- Ein günstiges oder kostenloses Girokonto,
 - eine solide Debitkarte für den Alltag,
 - eine Kreditkarte nur dann, wenn Reisen, Hotels oder Mietwagen sie wirklich nötig machen.
 
@@ -195,7 +195,7 @@ Mit diesen zwei Prüffeldern erkennst du oft schon, ob dein Konto nur bequem ode
 
 Besonders oft zahlst du zu viel, wenn drei Dinge zusammenlaufen:
 
-- ein Filial- oder Komfortmodell bleibt aus Gewohnheit bestehen,
+- Ein Filial- oder Komfortmodell bleibt aus Gewohnheit bestehen,
 - die teurere Karte wird kaum genutzt,
 - Gratis-Bedingungen passen längst nicht mehr zu deinem Alltag.
 
@@ -251,7 +251,7 @@ Achte darauf, einmalige Aktionen sauber von laufenden Kosten zu trennen.
 
 Ein Ersatzkartenpreis oder eine seltene Sondergebühr ist ärgerlich, aber etwas anderes als ein Modell, das jeden Monat still Geld zieht. Genau diese Trennung macht den Kontocheck fairer und die Wechselentscheidung klarer.
 
-## Welche Zahl am Ende über Bleiben oder Wechseln spricht
+## Welche Zahl am Ende über Bleiben oder wechseln spricht
 
 Wenn du alle laufenden Kosten addiert hast, schau nur noch auf die Jahressumme.
 
@@ -286,14 +286,14 @@ Nicht jeder Kontocheck endet mit einem Wechsel. Manchmal passt dein Konto völli
 
 ### Eher bleiben, wenn …
 
-- das Konto wirklich kostenlos bleibt,
+- Das Konto wirklich kostenlos bleibt,
 - die Karte zu deinem Alltag passt,
 - Bargeld und Online-Zahlungen sauber funktionieren,
 - keine relevanten Zusatzkosten auftauchen.
 
 ### Eher wechseln, wenn …
 
-- du regelmäßig Gebühren zahlst,
+- Du regelmäßig Gebühren zahlst,
 - Gratis-Kriterien kaum noch erfüllt werden,
 - die Kreditkarte zu teuer ist,
 - Auslandsnutzung unnötig teuer wird,
@@ -338,11 +338,11 @@ Das beste Girokonto ist nicht nur billig. Es muss in deinen Alltag passen.
 
 Fragen, die wichtiger sind, als viele denken:
 
-- brauchst du mehrere Unterkonten?
-- willst du gutes App-Banking?
-- nutzt du oft Bargeld?
-- brauchst du eine echte Kreditkarte?
-- willst du ein Konto, das gut mit deinem Sparsystem zusammenspielt?
+- Brauchst du mehrere Unterkonten?
+- Willst du gutes App-Banking?
+- Nutzt du oft Bargeld?
+- Brauchst du eine echte Kreditkarte?
+- Willst du ein Konto, das gut mit deinem Sparsystem zusammenspielt?
 
 Gerade wenn du an deiner Budgetstruktur arbeitest, ist ein gutes Kontosystem ein echter Hebel. Dazu passt auch dieser Ratgeber: [50-30-20-Regel: Beherrsche dein Budget](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
@@ -350,7 +350,7 @@ Gerade wenn du an deiner Budgetstruktur arbeitest, ist ein gutes Kontosystem ein
 
 Ich würde immer in dieser Reihenfolge vorgehen:
 
-1. aktuelle Kosten aufschreiben
+1. Aktuelle Kosten aufschreiben
 2. echte Nutzung ansehen
 3. Gratis-Bedingungen prüfen
 4. Vergleichskonto danebenlegen

@@ -215,7 +215,7 @@ Oft stellen wir fest, dass uns weniger Besitz freier macht. Weniger Dinge bedeut
 
 Dann starte genau hier:
 
-1. einen Kauf 24 Stunden verschieben,
+1. Einen Kauf 24 Stunden verschieben,
 2. ein unnötiges Abo prüfen,
 3. den nächsten Wocheneinkauf mit Liste planen.
 
@@ -235,7 +235,7 @@ So wird Frugalismus nicht zum Verzichtsprojekt, sondern zu einer klaren Routine.
 
 Wenn du mit dieser Reihenfolge startest, verschwinden oft zuerst genau diese Kosten:
 
-- kleine Spontankäufe unterwegs,
+- Kleine Spontankäufe unterwegs,
 - Abo- oder Komfortausgaben, die längst keinen echten Nutzen mehr bringen.
 
 Gerade diese unscheinbaren Posten verändern das Monatsgefühl oft schneller als große Sparpläne.

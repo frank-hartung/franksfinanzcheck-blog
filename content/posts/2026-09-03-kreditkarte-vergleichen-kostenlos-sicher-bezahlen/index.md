@@ -137,7 +137,7 @@ Viele kommen mit einer Karte gut aus. Eine zweite Karte ist aber oft sinnvoll, w
 
 Praktisch ist eine Reservekarte vor allem dann, wenn:
 
-- ein Anbieter oder Automat deine Hauptkarte ablehnt,
+- Ein Anbieter oder Automat deine Hauptkarte ablehnt,
 - du im Ausland eine echte Kreditkarte für Kautionen brauchst,
 - du private und berufliche Zahlungen sauber trennen willst,
 - du bei Verlust oder Sperrung sofort eine Alternative haben möchtest.

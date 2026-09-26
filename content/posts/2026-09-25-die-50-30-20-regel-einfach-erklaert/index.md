@@ -87,7 +87,7 @@ Dadurch wirken alle Ausgaben gleich dringend. Und genau da beginnt das Chaos.
 
 Die 50-30-20-Regel schafft Ordnung, weil sie Rollen verteilt. Sie sagt nicht nur „spar mehr“, sondern auch:
 
-- das ist notwendig,
+- Das ist notwendig,
 - das ist Wunsch,
 - das ist Zukunft.
 
@@ -138,7 +138,7 @@ Viele sagen: „Klingt gut, ich mach das mal im Kopf.“ Genau dort hakt es oft.
 
 Die Regel wird erst nützlich, wenn du:
 
-- dein echtes Netto kennst,
+- Dein echtes Netto kennst,
 - deine echten Ausgaben aufschreibst,
 - und die drei Bereiche konkret in Euro siehst.
 
@@ -152,7 +152,7 @@ Schau in deine Banking-App oder auf deine Kontoauszüge. Nicht schätzen – pr�
 ### 2. Jede Ausgabe grob zuordnen
 Stelle dir bei jeder Ausgabe die Frage:
 
-- notwendig?
+- Notwendig?
 - Wunsch?
 - Sparen oder Tilgung?
 
@@ -241,7 +241,7 @@ Wichtig ist nicht, dass du mathematisch perfekt triffst. Wichtig ist, dass du be
 
 Die Methode passt besonders gut, wenn du …
 
-- endlich Ordnung in dein Budget bringen willst,
+- Endlich Ordnung in dein Budget bringen willst,
 - am Monatsende oft überrascht bist,
 - Sparen einfacher strukturieren willst,
 - nicht jede einzelne Ausgabe obsessiv tracken möchtest,
@@ -251,7 +251,7 @@ Die Methode passt besonders gut, wenn du …
 
 Etwas schwieriger ist sie, wenn …
 
-- dein Einkommen stark schwankt,
+- Dein Einkommen stark schwankt,
 - deine Wohnkosten extrem hoch sind,
 - du gerade Schulden aufarbeiten musst,
 - du sehr unregelmäßige Jahreskosten hast.
@@ -266,7 +266,7 @@ In den meisten Fällen ist ein Notgroschen zuerst sinnvoll. Denn ein ETF hilft d
 
 ### Einfaches Ziel
 
-- erst kleine Sicherheitsreserve aufbauen
+- Erst kleine Sicherheitsreserve aufbauen
 - dann mittelfristig auf **3 bis 6 Monatsausgaben** hinarbeiten
 
 Wenn du den Puffer getrennt parkst, bleibt die 20-%-Kategorie viel stabiler.

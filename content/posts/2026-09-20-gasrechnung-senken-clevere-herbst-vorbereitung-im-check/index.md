@@ -53,7 +53,7 @@ Viele Haushalte schauen erst dann aufs Thema Heizen, wenn die Räume schon kalt 
 
 Im frühen Herbst ist die Lage besser:
 
-- du findest Mängel vor dem Ernstfall,
+- Du findest Mängel vor dem Ernstfall,
 - du kannst einen Tarif noch ohne Panik vergleichen,
 - du erkennst Zugluft und Wärmeverluste früh,
 - du gehst mit sauberem Plan in die Saison.
@@ -184,7 +184,7 @@ Ein Fachbetrieb ist dann sinnvoll, wenn du mehr als nur Alltagsfehler vermutest.
 
 Zum Beispiel bei:
 
-- auffälligem Wasseraustritt,
+- Auffälligem Wasseraustritt,
 - wiederkehrenden Störungen,
 - ungewöhnlichem Geruch,
 - sehr ungleichmäßig warmen Räumen,

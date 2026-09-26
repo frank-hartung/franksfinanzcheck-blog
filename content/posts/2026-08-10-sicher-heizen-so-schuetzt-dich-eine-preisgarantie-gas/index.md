@@ -20,7 +20,7 @@ kurzantwort: "Eine Gaspreisgarantie macht deine Heizkosten besser planbar, weil 
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
-pin_description: "*Werbung | Wie eine Gaspreisgarantie dein Heizbudget planbarer macht, worauf du bei Laufzeit und Bonus achten musst und wann sich ein Wechsel wirklich lohnt. Mehr Spartipps auf FranksFinanzcheck! #sicherheizen #gaspreisgarantie #gastarifwechseln"
+pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 
@@ -54,7 +54,7 @@ Genau hier setzt die Gaspreisgarantie an. Sie sorgt dafür, dass du für eine be
 
 ### Das ist der eigentliche Vorteil
 
-- dein Abschlag bleibt besser kalkulierbar,
+- Dein Abschlag bleibt besser kalkulierbar,
 - dein Winterbudget wird planbarer,
 - du musst nicht auf jede Energie-Meldung reagieren,
 - du reduzierst das Risiko einer teuren Überraschung im nächsten Abrechnungsjahr.
@@ -129,14 +129,14 @@ Das hängt mehr von deinem Stil ab als von einer einzigen richtigen Antwort.
 
 ### 12 Monate passen gut, wenn du …
 
-- flexibel bleiben willst,
+- Flexibel bleiben willst,
 - gerne jährlich neu vergleichst,
 - Wechselboni mitnehmen möchtest,
 - sinkende Preise nicht verpassen willst.
 
 ### 24 Monate passen gut, wenn du …
 
-- zwei Heizperioden Ruhe willst,
+- Zwei Heizperioden Ruhe willst,
 - dich ungern jedes Jahr neu kümmerst,
 - heute schon einen fairen Preis bekommst,
 - Planungssicherheit höher gewichtest als maximale Wechselchancen.
@@ -149,7 +149,7 @@ Der technische Teil ist viel unspektakulärer, als viele denken. Es wird kein Ro
 
 ### Was du vor dem Start bereitlegst
 
-- deine letzte Jahresabrechnung,
+- Deine letzte Jahresabrechnung,
 - deinen Jahresverbrauch in kWh,
 - deine Kundennummer,
 - die Zählernummer,
@@ -216,7 +216,7 @@ Das ist keine Garantie, sondern ein Beispiel. Es zeigt aber gut, warum Tarif und
 
 Auch ein guter Vertrag bleibt nicht ewig der beste. Spätestens an diesen Punkten lohnt ein neuer Blick:
 
-- sechs bis acht Wochen vor Vertragsende,
+- Sechs bis acht Wochen vor Vertragsende,
 - wenn der Bonuszeitraum endet,
 - bei stark verändertem Verbrauch,
 - nach einem Umzug,

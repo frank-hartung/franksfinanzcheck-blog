@@ -140,7 +140,7 @@ Nicht jeder braucht die große Vollversicherung. Wenn du finanziell robust aufge
 
 Das passt eher, wenn …
 
-- du mehrere tausend Euro kurzfristig aufbringen könntest,
+- Du mehrere tausend Euro kurzfristig aufbringen könntest,
 - du kleinere und mittlere Tierarztkosten selbst zahlst,
 - du bewusst nur das große Risiko absichern willst.
 
@@ -194,7 +194,7 @@ Es geht nicht darum, Angst zu machen. Es geht um Realität: Tierarztkosten könn
 
 Wer früh abschließt, bekommt meist bessere Bedingungen als später. Das liegt auf der Hand:
 
-- jüngeres Eintrittsalter
+- Jüngeres Eintrittsalter
 - weniger Vorerkrankungen
 - breitere Tarifwahl
 - oft günstigere Beiträge
@@ -255,7 +255,7 @@ Manche Halter sagen: „Ich spare lieber selbst.“ Das kann vernünftig sein. E
 
 Genau hier liegt oft das Problem. Viele Haushalte haben zwar ein kleines Polster, aber dieses Geld ist in Gedanken schon mehrfach verplant:
 
-- für die Autoreparatur,
+- Für die Autoreparatur,
 - für die Waschmaschine,
 - für den normalen Notgroschen,
 - und zusätzlich noch für das Haustier.
@@ -343,7 +343,7 @@ Nur auf den Monatsbeitrag zu schauen und Ausschlüsse, Selbstbeteiligung oder Le
 ### Sollte ich lieber sparen statt versichern?
 Das kann sinnvoll sein, wenn du genug Rücklagen hast. Fehlt dieser Puffer, ist Versicherung oft die stressärmere Lösung.
 
-### Warum ist frühes Abschließen oft besser?
+### Warum ist frühes abschließen oft besser?
 Weil junge Tiere meist günstiger versicherbar sind und Vorerkrankungen noch keine Rolle spielen.
 
 ### Was ist wichtiger: niedriger Beitrag oder starke Leistung?

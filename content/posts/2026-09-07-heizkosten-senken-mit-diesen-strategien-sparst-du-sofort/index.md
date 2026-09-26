@@ -10,8 +10,8 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["heizkosten senken", "heizung sparen tipps", "gas abschlag anpassen", "winter vorbereitung wohnung", "Heizkosten", "Strategien", "Gaspreisgarantie", "Gastarif wechseln"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
-pin_title: "Heizkosten senken: Diese 6 To-dos erledigst du am besten jetzt"
-pin_description: "*Werbung | Heizkosten senken ohne Frieren: Mit einfachen Maßnahmen bei Temperatur, Lüften, Heizkörpern und Tarif senkst du deinen Verbrauch oft schon in der laufenden… Mehr Spartipps auf FranksFinanzcheck! #heizkostensenken #heizungsparentipps #gasabschlaganpassen"
+pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
+pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
 ai_generated: false
 inspiration: "Heizkosten senken: Diese 6 To-dos erledigst du am besten JETZT"
 cover:
@@ -111,7 +111,7 @@ Ein Thermostat ist kein Gaspedal. Auf Stufe 5 heizt der Raum nicht schneller auf
 
 ### Sinnvoller ist:
 
-- eine Zieltemperatur festlegen,
+- Eine Zieltemperatur festlegen,
 - Räume nach Nutzung unterscheiden,
 - nachts oder bei Abwesenheit etwas absenken,
 - nicht komplett auskühlen lassen.
@@ -227,7 +227,7 @@ Diese Reihenfolge ist deshalb so stark, weil sie Technik, Alltag und Vertrag zus
 
 Wenn du sofort starten willst, reicht schon diese kleine Reihenfolge:
 
-- heute Heizkörper prüfen und freistellen
+- Heute Heizkörper prüfen und freistellen
 - morgen Thermostate bewusst einstellen
 - übermorgen Dichtungen und Zugluft checken
 - am Wochenende Zählerstand und Tarif ansehen
@@ -293,7 +293,7 @@ Das ist oft ein Hinweis auf Luft im System. Dann lohnt sich Entlüften.
 ### Bringen smarte Thermostate etwas?
 Oft ja, weil sie Regelmäßigkeit schaffen und unnötiges Überheizen verhindern helfen.
 
-### Reicht sparsameres Heizen allein?
+### Reicht sparsameres heizen allein?
 Nicht immer. Ein alter oder teurer Tarif kann einen Teil des Spareffekts wieder auffressen.
 
 ---

@@ -49,14 +49,14 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ### Eher ja
 
-- du suchst Schutz für ein Kind
+- Du suchst Schutz für ein Kind
 - du bist älter und willst Sturzfolgen absichern
 - du bekommst keine gute BU
 - du willst eine günstige Ergänzung für schwere Unfallfolgen
 
 ### Eher nein als Hauptlösung
 
-- du brauchst vor allem Schutz für deine Arbeitskraft
+- Du brauchst vor allem Schutz für deine Arbeitskraft
 - du hast noch gar keine BU und könntest eine gute BU bekommen
 - du verwechselst die Unfallversicherung mit einem Einkommensschutz
 
@@ -68,7 +68,7 @@ Im Kern zahlt sie, wenn nach einem Unfall **dauerhafte Schäden** bleiben.
 
 Typische Leistungen sind:
 
-- eine Einmalzahlung
+- Eine Einmalzahlung
 - auf Wunsch eine Unfallrente
 - Bergungskosten
 - Hilfen für Reha oder Umbauten, je nach Tarif
@@ -117,7 +117,7 @@ Viele Berufstätige sollten zuerst an die BU denken. Der Grund ist simpel: Krank
 
 Darum gilt oft diese Reihenfolge:
 
-1. erst BU prüfen
+1. Erst BU prüfen
 2. dann Unfallversicherung als Zusatz prüfen
 
 Die Police ist also nicht schlecht. Sie ist nur oft **nicht der erste Baustein**.
@@ -156,7 +156,7 @@ Dazu zählen zum Beispiel:
 
 - Kinder: oft mindestens **100.000 €**
 - Erwachsene: oft **100.000 € bis 200.000 €**
-- bei höherem Risiko oder mehr Verantwortung: teils mehr
+- Bei höherem Risiko oder mehr Verantwortung: teils mehr
 
 Das sind keine starren Regeln. Aber 50.000 € sind in vielen Fällen einfach zu knapp.
 
@@ -168,7 +168,7 @@ Die Progression ist ein Turbo für schwere Fälle. Sie hebt die Leistung stark a
 
 - Grundsumme: **150.000 €**
 - Progression: **350 %**
-- mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**
+- Mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**
 
 Ohne gute Progression bleibt die Leistung oft gerade dort zu klein, wo der Schaden am größten ist.
 
@@ -232,7 +232,7 @@ Viele Verträge werben mit vielen Bausteinen. Doch nicht alles ist gleich wichti
 
 ### Wichtiger Kern
 
-- gute Grundsumme
+- Gute Grundsumme
 - starke Progression
 - gute Gliedertaxe
 - faire Fristen
@@ -240,7 +240,7 @@ Viele Verträge werben mit vielen Bausteinen. Doch nicht alles ist gleich wichti
 
 ### Eher nett als zentral
 
-- kleines Tagegeld
+- Kleines Tagegeld
 - kleine Bonuszahlungen
 - hübsche Zusatznamen ohne große Wirkung
 
@@ -260,7 +260,7 @@ Nach einem Unfall musst du Meldungen und Nachweise rechtzeitig einreichen. Sonst
 
 Prüfe deshalb immer:
 
-- wie schnell du melden musst
+- Wie schnell du melden musst
 - bis wann ein Dauerschaden festgestellt sein muss
 - welche Unterlagen verlangt werden
 
@@ -318,7 +318,7 @@ Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann s
 
 Zurückhaltender prüfen kannst du, wenn:
 
-- du sehr guten Schutz für deine Arbeitskraft hast
+- Du sehr guten Schutz für deine Arbeitskraft hast
 - du hohe Folgen notfalls selbst tragen könntest
 - dir das Risiko im Verhältnis zu anderen Themen weniger wichtig ist
 

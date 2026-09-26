@@ -190,7 +190,7 @@ Für viele ist ein einziges Konto genug. Praktisch kann aber auch eine kleine Au
 
 Ein einfaches Modell ist:
 
-- ein Tagesgeldkonto für den Notgroschen
+- Ein Tagesgeldkonto für den Notgroschen
 - ein zweites Tagesgeld- oder Unterkonto für planbare Jahreskosten
 - das Girokonto nur für den laufenden Zahlungsverkehr
 
@@ -202,7 +202,7 @@ Tagesgeld ist stark bei Flexibilität. Es ist aber nicht automatisch für jede S
 
 Festgeld kann sinnvoller sein, wenn:
 
-- du das Geld sicher ein Jahr oder länger nicht brauchst,
+- Du das Geld sicher ein Jahr oder länger nicht brauchst,
 - der Festgeldzins klar über dem Tagesgeldzins liegt,
 - du nicht ständig Zinsen vergleichen willst,
 - dein Notgroschen bereits komplett gefüllt ist.

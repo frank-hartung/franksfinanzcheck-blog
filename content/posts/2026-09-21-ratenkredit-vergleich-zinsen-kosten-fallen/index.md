@@ -128,7 +128,7 @@ Ein Ratenkredit kann sinnvoll sein. Es gibt aber auch Momente, in denen ein Absc
 
 Warte lieber noch, wenn:
 
-- deine Monatsrate nur mit Optimismus statt mit Puffer passt,
+- Deine Monatsrate nur mit Optimismus statt mit Puffer passt,
 - du den Kredit für reinen Frustkonsum brauchst,
 - du deine echten Ausgaben noch gar nicht sauber kennst,
 - du parallel schon andere Raten kaum stabil trägst,

@@ -162,7 +162,7 @@ Viele Haushalte buchen aus Vorsicht zu viel Bandbreite. Das ist verständlich, a
 
 Ein kleinerer Tarif ist meist sinnvoll, wenn:
 
-- du überwiegend streamst, surfst und im Homeoffice arbeitest,
+- Du überwiegend streamst, surfst und im Homeoffice arbeitest,
 - selten mehrere große Downloads parallel laufen,
 - dein WLAN aktuell eher der Flaschenhals ist,
 - du vor allem einen guten Effektivpreis suchst.

@@ -19,8 +19,8 @@ cover:
   image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "5 Frugalismus-Tricks, die im Alltag sofort Geld sparen"
-pin_description: "*Werbung | 5 einfache Frugalismus-Tricks für den Alltag: Frugalismus ohne Askese: fünf alltagstaugliche Tricks, mit denen du Fixkosten senkst, Impulskäufe bremst und… Mehr Spartipps auf FranksFinanzcheck! #frugalismustricks #frugalismus #geldsparen"
+pin_title: "Ratenkredit clever: Umschulden & Bestzins sichern"
+pin_description: "*Werbung | Dein Dispo oder alter Kredit frisst Zinsen ohne Ende? Mit einem günstigen Ratenkredit schuldest du um und sparst oft mehrere hundert Euro. Jetzt Konditionen vergleichen – kostenlos, SCHUFA-neutral, mit schneller Auszahlung möglich. Jetzt Zinsen checken!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 ---
 
@@ -129,7 +129,7 @@ Lebensmittel sind ein Bereich, in dem viele ohne böse Absicht Geld verlieren. N
 
 Typische Geldfresser sind:
 
-- ohne Liste einkaufen
+- Ohne Liste einkaufen
 - hungrig einkaufen
 - spontan bestellen statt vorkochen
 - zu viel kaufen und später wegwerfen
@@ -163,7 +163,7 @@ Darum gilt: Jede Ersparnis braucht sofort einen festen Platz.
 
 ### Das funktioniert in der Praxis gut
 
-- eigenes Unterkonto für Rücklagen
+- Eigenes Unterkonto für Rücklagen
 - Dauerauftrag direkt nach Geldeingang
 - Extra-Konto für Urlaub, Reparaturen und [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)
 - Ersparnisse aus Tarifwechseln direkt umleiten
@@ -190,7 +190,7 @@ Das klingt banal, spart aber oft überraschend viel Geld. Vor allem dann, wenn d
 ### 3. Eine Kündigung oder Optimierung pro Monat
 Nicht alles auf einmal. Jeden Monat genau eine kleine Baustelle:
 
-- ein Abo kündigen
+- Ein Abo kündigen
 - einen Tarif prüfen
 - eine Versicherung vergleichen
 - eine Bankgebühr abschaffen

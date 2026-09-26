@@ -112,7 +112,7 @@ Viele Haushalte sprechen einfach von „Energiekosten“. Für gute Entscheidung
 
 Warum? Weil sich die Logik unterscheidet:
 
-- beim **Strom** spielen Haushalt, Geräte und Tarif eine große Rolle,
+- Beim **Strom** spielen Haushalt, Geräte und Tarif eine große Rolle,
 - beim **Gas** wirken vor allem Heizung, Gebäudesituation und Arbeitspreis,
 - beim **Abschlag** wird beides oft emotional, aber selten sauber gerechnet.
 
@@ -124,7 +124,7 @@ Ein kleiner Check muss kein Wochenendprojekt sein. Schon 20 Minuten reichen oft 
 
 Prüfe dabei:
 
-- letzte Abrechnung,
+- Letzte Abrechnung,
 - aktuellen Arbeitspreis,
 - Grundpreis,
 - Abschlag,

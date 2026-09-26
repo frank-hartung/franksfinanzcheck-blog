@@ -48,7 +48,7 @@ Im Winter ist jede Störung nervig. Im Spätsommer ist sie planbar. Das ist der 
 
 Wenn du früher prüfst, hast du Vorteile:
 
-- du kannst Unterlagen ohne Hektik sichten,
+- Du kannst Unterlagen ohne Hektik sichten,
 - du bekommst eher einen Termin beim Fachbetrieb,
 - du findest undichte Stellen vor der Heizlast,
 - du gehst mit realistischen Zahlen in die Saison.
@@ -206,7 +206,7 @@ Ein Fachbetrieb wird dann wichtig, wenn aus dem normalen Check echte Technikfrag
 
 Das gilt besonders bei:
 
-- wiederkehrenden Störungen,
+- Wiederkehrenden Störungen,
 - Wasseraustritt,
 - Abgas- oder Brandgeruch,
 - stark ungleichmäßig warmen Heizkörpern,

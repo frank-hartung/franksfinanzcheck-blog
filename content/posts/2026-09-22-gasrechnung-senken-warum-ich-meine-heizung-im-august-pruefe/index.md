@@ -48,7 +48,7 @@ Im Winter handeln viele nur noch reaktiv. Der Heizkörper gluckert, die Wohnung 
 
 Im August oder frühen September ist die Lage entspannter:
 
-- du kannst Fehler ohne Kältepanik suchen,
+- Du kannst Fehler ohne Kältepanik suchen,
 - Termine sind oft leichter zu bekommen,
 - Tarifentscheidungen triffst du nüchterner,
 - kleine Reparaturen kosten meist weniger Nerven.
@@ -100,7 +100,7 @@ Das dauert keine Ewigkeit. Es schafft aber Struktur.
 
 Heizkosten steigen selten durch einen einzigen großen Fehler. Meist sind es mehrere kleine Schwächen gleichzeitig:
 
-- ein zu warmer Raum,
+- Ein zu warmer Raum,
 - etwas Zugluft,
 - schlecht verteilte Wärme,
 - ein alter Tarif,
@@ -155,7 +155,7 @@ Gerade der letzte Punkt ist teuer. Denn im Winter triffst du Entscheidungen oft 
 
 Nicht alles musst oder solltest du allein machen. Hilfe ist sinnvoll, wenn:
 
-- die Heizung auffällig laut ist,
+- Die Heizung auffällig laut ist,
 - Räume trotz Entlüften nicht richtig warm werden,
 - der Druck dauerhaft nicht stimmt,
 - Einstellungen an der Anlage unklar sind,
@@ -212,7 +212,7 @@ Wenn dich ein besserer Tarif zum Beispiel **180 €** im Jahr spart und bessere 
 
 Der Check wird deutlich einfacher, wenn du nicht alles aus dem Kopf machen willst. Ich lege mir dafür kurz drei Dinge bereit:
 
-- letzte Jahresabrechnung,
+- Letzte Jahresabrechnung,
 - aktuellen Vertrag oder Preisübersicht,
 - einen frischen Zählerstand.
 
@@ -224,7 +224,7 @@ Ein früher Check ist vor allem stark, wenn …
 
 Er lohnt sich übrigens nicht nur für Einfamilienhäuser. Auch viele Mieter können Heizkörper, Thermostate, Dichtungen und Vertragsthemen selbst sinnvoll prüfen. Gerade dort bringt schon ein kleiner Überblick oft überraschend viel. Und genau dieser frühe Überblick verhindert später hektische und teure Winterentscheidungen.
 
-- du mit Gas heizt,
+- Du mit Gas heizt,
 - dein Tarif älter ist,
 - du im letzten Winter viel gezahlt hast,
 - Heizkörper gluckern oder ungleichmäßig warm wurden,
@@ -253,7 +253,7 @@ Oft ja, vor allem nach Ablauf von Bonus oder Preisgarantie. Ein kurzer Vergleich
 ### Wie viel bringt 1 °C weniger Raumtemperatur?
 Als grobe Faustregel oft rund 6 % weniger Heizkosten. Die tatsächliche Wirkung hängt natürlich vom Gebäude ab.
 
-### Ist Entlüften wirklich so wichtig?
+### Ist entlüften wirklich so wichtig?
 Ja, wenn Luft im System ist. Heizkörper arbeiten dann schlechter und die Wärme verteilt sich ungleichmäßig.
 
 ### Was ist wichtiger: Technik oder Tarif?

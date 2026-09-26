@@ -84,7 +84,7 @@ Viele Menschen wissen grob, dass sie sparen sollten. Das Problem liegt meist nic
 
 Typische Ursachen:
 
-- alles läuft über denselben Geldtopf,
+- Alles läuft über denselben Geldtopf,
 - Wünsche und Notwendigkeiten vermischen sich,
 - Sparen bleibt der Restposten,
 - Fixkosten werden zu selten geprüft,
@@ -98,7 +98,7 @@ Genau hier hilft die 50-30-20-Regel. Sie trennt diese Rollen sichtbar. Das allei
 
 Besonders typisch sind:
 
-- teurere Konto- und Kartenmodelle,
+- Teurere Konto- und Kartenmodelle,
 - hohe Energiekosten,
 - alte Internet- oder Mobilfunktarife,
 - zu viele kleine Abos,
@@ -132,7 +132,7 @@ Schau in deine Banking-App oder auf deine Kontoauszüge. Nicht schätzen – pr�
 ### Schritt 2: Nur grob in drei Blöcke sortieren
 Statt 20 Kategorien reichen am Anfang oft diese drei Fragen:
 
-- notwendig?
+- Notwendig?
 - Wunsch?
 - Sparen oder Tilgung?
 
@@ -200,7 +200,7 @@ Budgeting wird oft nicht durch bösen Willen ungenau, sondern durch Selbsttäusc
 
 ### Wird oft als notwendig verkauft, ist aber eher Wunsch
 
-- mehrere Streaming-Abos
+- Mehrere Streaming-Abos
 - täglicher Coffee-to-go
 - zu teure Handy-Tarife
 - Shopping aus Langeweile
@@ -229,7 +229,7 @@ Budgeting ohne Frust funktioniert gerade deshalb so gut, weil du nicht alles ver
 - Welche Wünsche sind mir wichtig genug?
 - Wo reichen günstigere Alternativen völlig aus?
 
-Das Ziel ist nicht asketisch zu leben. Das Ziel ist, Wünsche bewusst statt automatisch zu bezahlen.
+Das Ziel ist nicht asketisch zu Leben. Das Ziel ist, Wünsche bewusst statt automatisch zu bezahlen.
 
 ## Die 20 % sind dein Sicherheits- und Freiheitsblock
 
@@ -237,7 +237,7 @@ Dieser Bereich entscheidet langfristig stärker als viele denken. Denn genau hie
 
 ### Ein einfacher Aufbau
 
-1. erst kleiner Puffer,
+1. Erst kleiner Puffer,
 2. dann Notgroschen,
 3. danach stärkerer Vermögensaufbau.
 
@@ -294,7 +294,7 @@ So wird aus einem abstrakten Vorsatz ein echter Start.
 
 Die Methode passt besonders gut, wenn du …
 
-- endlich Ordnung ins Geld bringen willst,
+- Endlich Ordnung ins Geld bringen willst,
 - dich von komplizierten Budgetmethoden eher abschrecken lässt,
 - ohne Frust sparen willst,
 - Fixkosten bewusster steuern möchtest,
@@ -304,7 +304,7 @@ Die Methode passt besonders gut, wenn du …
 
 Etwas schwieriger wird es, wenn:
 
-- dein Einkommen stark schwankt,
+- Dein Einkommen stark schwankt,
 - deine Wohnkosten extrem hoch sind,
 - du gerade Schulden bereinigst,
 - viele Jahreskosten ungeplant kommen.

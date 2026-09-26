@@ -74,7 +74,7 @@ Bis dahin kannst du die Kfz-Versicherung in vielen Fällen regulär zum Jahresen
 
 Warum das wichtig ist:
 
-- die Preisunterschiede sind oft groß,
+- Die Preisunterschiede sind oft groß,
 - der Markt ist stark umkämpft,
 - mehrere hundert Euro Differenz pro Jahr sind realistisch.
 
@@ -93,9 +93,9 @@ Natürlich hängt das stark von Region, Fahrzeug, Schadenfreiheitsklasse und Fah
 ### 1. Privathaftpflicht
 Sie gehört zu den wichtigsten Policen überhaupt. Hier solltest du prüfen:
 
-- ist die Deckungssumme noch zeitgemäß?
-- passt der Tarif zu deiner Lebenssituation?
-- zahlst du für Bausteine, die du nicht brauchst?
+- Ist die Deckungssumme noch zeitgemäß?
+- Passt der Tarif zu deiner Lebenssituation?
+- Zahlst du für Bausteine, die du nicht brauchst?
 
 Mehr dazu hier: [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/).
 
@@ -104,9 +104,9 @@ Hier lassen viele Versicherungssumme, Unterversicherung und Zusatzbausteine jahr
 
 Wichtige Fragen:
 
-- ist die Summe noch realistisch?
-- hast du neue, wertvolle Dinge angeschafft?
-- ist Elementarschutz relevant?
+- Ist die Summe noch realistisch?
+- Hast du neue, wertvolle Dinge angeschafft?
+- Ist Elementarschutz relevant?
 
 Mehr dazu hier: [Hausratversicherung: Kosten, Leistungen, Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/).
 
@@ -121,9 +121,9 @@ Hier liegt oft der größte klassische Sparhebel. Prüfe:
 ### 4. Unfallversicherung oder andere Zusatzpolicen
 Nicht jeder braucht jede Zusatzversicherung. Gerade hier lohnt sich Ehrlichkeit:
 
-- schützt die Police etwas, das dir wirklich wichtig ist?
-- überschneidet sie sich mit anderem Schutz?
-- ist der Beitrag gemessen am Nutzen vernünftig?
+- Schützt die Police etwas, das dir wirklich wichtig ist?
+- Überschneidet sie sich mit anderem Schutz?
+- Ist der Beitrag gemessen am Nutzen vernünftig?
 
 ## Was eine Beitragserhöhung für dich bedeutet
 
@@ -154,7 +154,7 @@ Gerade bei Sachversicherungen kann genau dieses Recht der Auslöser für einen s
 
 Dann geh in dieser Reihenfolge vor:
 
-1. letzte Beitragsmitteilung öffnen
+1. Letzte Beitragsmitteilung öffnen
 2. prüfen, ob Beitrag oder Bedingungen verändert wurden
 3. bei Kfz sofort an den **30. November** denken
 4. erst danach Vergleich und Kündigungslogik prüfen
@@ -248,7 +248,7 @@ Gerade bei kleinen Zusatzpolicen steckt oft Geld, das über Jahre einfach mitlä
 
 Wenn du nicht lange suchen willst, genügen oft diese drei Dinge:
 
-- letzte Beitragsmitteilung,
+- Letzte Beitragsmitteilung,
 - aktueller Versicherungsschein,
 - kurzer Blick auf Selbstbeteiligung und Leistung.
 
@@ -267,7 +267,7 @@ Mit genau dieser kleinen Reihenfolge vermeidest du, dass der Jahresend-Check wie
 
 Meist solltest du schneller genauer hinschauen, wenn drei Dinge zusammenkommen:
 
-- der Beitrag steigt,
+- Der Beitrag steigt,
 - die Leistung kaum besser wird,
 - eine Frist schon sichtbar näher rückt.
 
@@ -311,12 +311,12 @@ Bleiben kann sinnvoll sein, wenn:
 
 Wechseln lohnt eher, wenn:
 
-- der Beitrag deutlich steigt,
+- Der Beitrag deutlich steigt,
 - die Leistung im Markt klar besser zu bekommen ist,
 - dein Leben sich spürbar verändert hat,
 - du alte Lücken oder unnötige Bausteine entdeckst.
 
-## Welche eine Frage dir altes Behalten leichter einordnet
+## Welche eine Frage dir altes behalten leichter einordnet
 
 Frag dich kurz: **Würde ich genau diesen Vertrag heute noch einmal so abschließen?**
 

@@ -181,7 +181,7 @@ Nicht jede Maßnahme musst du allein machen. Vieles wie Entlüften, Dichtungen p
 
 Das gilt vor allem dann, wenn:
 
-- einzelne Heizkörper trotz Entlüften kalt bleiben,
+- Einzelne Heizkörper trotz Entlüften kalt bleiben,
 - der Druck immer wieder stark absackt,
 - die Therme unruhig läuft oder Fehlercodes zeigt,
 - Vorlauf und Rücklauf völlig unausgeglichen wirken,
