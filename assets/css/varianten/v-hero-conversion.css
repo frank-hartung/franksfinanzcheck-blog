@@ -14,9 +14,30 @@
    · kein !important – die Basis bleibt jederzeit obenauf,
      wenn diese Datei nicht geladen wird
 
+   ERGÄNZUNG 26.09.2026: Die klare Primärhandlung bekommt auf Desktop
+   zusätzlich eine ruhige, zweispaltige Bühne. Mobil bleibt die
+   bewährte Reihenfolge erhalten: aktueller Ratgeber → Hero → Newsletter.
+   Das dimensionierte LCP-Cover bleibt im ersten Viewport; die ausführliche
+   Orientierung folgt direkt danach und die CTA-Hierarchie bleibt sichtbar.
+
    GELADEN NUR BEI: HUGO_PARAMS_DESIGNVARIANTE=v-hero-conversion
-   Status: entwurf – nicht freigegeben, nicht live.
+   Status: live – Beobachtungsfenster bis 10.10.2026.
    ============================================================ */
+
+/* ---------- 0. Bühnenbreite: Hero und Themenführung atmen ------------ */
+
+/* Der Header und die Newsletter-Leiste arbeiten bereits mit 1024px.
+   Der Startseiten-Hero darf dieselbe ruhige Kante aufnehmen; die
+   eigentliche Artikelliste bleibt bewusst schmaler (Zeilenlänge). */
+main.main:has(.home-info) {
+  max-width: 1024px;
+}
+
+main.main:has(.home-info) > article.post-entry,
+main.main:has(.home-info) > footer.page-footer {
+  max-width: 720px;
+  margin-inline: auto;
+}
 
 /* ---------- 1. Anordnung: Primärhandlung bekommt eine eigene Zeile ---- */
 
@@ -68,7 +89,59 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- 3. Dark Mode (Pflicht bei jeder Farbentscheidung) -------- */
+/* ---------- 3. Editorial-Grid: Inhalt links, Belege rechts ----------- */
+
+@media (min-width: 769px) {
+  .first-entry.home-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1.72fr) minmax(235px, 0.78fr);
+    grid-template-areas:
+      "badge badge"
+      "header trust"
+      "content trust"
+      "season trust"
+      "ctas trust";
+    column-gap: clamp(28px, 4vw, 56px);
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .first-entry.home-info > .ff-saison-badge { grid-area: badge; }
+  .first-entry.home-info > .entry-header { grid-area: header; }
+  .first-entry.home-info > .entry-content { grid-area: content; }
+  .first-entry.home-info > .ff-saison-hinweis { grid-area: season; }
+  .first-entry.home-info > .ff-home-ctas { grid-area: ctas; }
+
+  .first-entry.home-info > .ff-trust-row {
+    grid-area: trust;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: center;
+    gap: 10px;
+    margin: 4px 0 0;
+    padding: 14px 0 14px 24px;
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill {
+    min-height: 44px;
+    justify-content: flex-start;
+    padding-inline: 12px;
+  }
+
+  .first-entry.home-info .entry-content {
+    max-width: 62ch;
+  }
+
+  .first-entry.home-info .entry-header h1 {
+    max-width: 16ch;
+  }
+}
+
+/* ---------- 4. Dark Mode: dieselbe Hierarchie, andere Kante --------- */
 
 :root[data-theme="dark"] .ff-home-ctas .ff-btn-secondary {
   /* Auf dunklem Grund trägt der weiße Sekundärbutton zu viel Helligkeit
@@ -86,7 +159,57 @@
   background: rgba(127, 209, 180, 0.12);
 }
 
-/* ---------- 4. Mobil: der Primär-CTA über dem Falz ------------------- */
+:root[data-theme="dark"] .first-entry.home-info > .ff-trust-row {
+  border-left-color: rgba(127, 209, 180, 0.25);
+}
+
+/* ---------- 5. Mobil: Artikel-LCP bleibt geschützt ------------------- */
+
+@media (max-width: 768px) {
+  /* Der erste hilfreiche Inhalt ist auf dem Telefon der aktuellste
+     Ratgeber. Das dimensionierte Cover bleibt im ersten Viewport; der
+     ausführliche Hero folgt direkt danach. So bleibt die Startseite
+     schnell und trotzdem klar geführt, statt den Nutzer mit einem langen
+     Intro vor seinem eigentlichen Suchziel zu halten. */
+  main.main:has(.home-info) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main.main:has(.home-info) > article.post-entry { order: 1; }
+  main.main:has(.home-info) > article.first-entry.home-info { order: 2; }
+  main.main:has(.home-info) > div.ff-pinterest-cta { order: 3; }
+  main.main:has(.home-info) > footer.page-footer { order: 4; }
+  main.main:has(.home-info) > section.ff-saison { order: 5; }
+  main.main:has(.home-info) > section.ff-topics { order: 6; }
+
+  .first-entry.home-info {
+    min-height: 0;
+    padding: 22px 18px 24px;
+  }
+
+  .first-entry.home-info .entry-header h1 {
+    max-width: 100%;
+    font-size: clamp(1.85rem, 8.2vw, 2.45rem);
+    line-height: 1.06;
+  }
+
+  .first-entry.home-info .entry-content {
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+
+  .first-entry.home-info > .ff-trust-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill {
+    min-height: 40px;
+  }
+}
 
 @media (max-width: 480px) {
   .ff-home-ctas .ff-btn-primary {
@@ -105,7 +228,7 @@
   }
 }
 
-/* ---------- 5. Reduzierte Bewegung (Pflicht bei Bewegung) ------------ */
+/* ---------- 6. Reduzierte Bewegung (Pflicht bei Bewegung) ------------ */
 
 @media (prefers-reduced-motion: reduce) {
   /* Die Basis schaltet Lifts bereits global ab; diese Variante fügt

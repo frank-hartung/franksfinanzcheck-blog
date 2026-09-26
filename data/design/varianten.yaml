@@ -90,8 +90,13 @@ varianten:
     css: "css/varianten/v-hero-conversion.css"
     notizen: >
       Bewusst nur Hierarchie (Gewicht, Fläche, Ruhe) – keine neuen
-      Farben, keine neuen Radien, kein zusätzliches Element. Damit ist
-      sie rückabwickelbar, indem man eine Datei löscht.
+      Farben, keine neuen Radien, kein zusätzliches Element. Die
+      Desktop-Bühne nimmt die vorhandene Header-Breite auf; die rechte
+      Spalte ordnet die bereits vorhandenen Vertrauenssignale. Mobil
+      bleibt die bestehende LCP-Reihenfolge bewusst erhalten: das Cover
+      des aktuellsten Ratgebers kommt zuerst, der ausführliche Hero folgt
+      direkt danach. Damit bleibt die Variante rückabwickelbar, indem
+      man eine Datei weglässt.
       Freigegeben und am 26.09.2026 scharf geschaltet (Runbook
       Schritt 6): `aktiv: "v-hero-conversion"` hier, dazu
       `designVariante = "v-hero-conversion"` in hugo.toml. Beide
@@ -106,11 +111,11 @@ varianten:
       kommentar: >
         Freigegeben auf Basis des Messprotokolls vom 26.09.2026. Alle
         Budgets gehalten: Kontrast 7,53 (min. 4,5), kleinstes Tap-Ziel
-        26,4 px (min. 24), CLS 0, Lighthouse mobil Performance 0,99 /
-        LCP 1774 ms (Budget 2500), desktop 1,00 / 545 ms,
+        26,4 px (min. 24), CLS 0,006, Lighthouse mobil Performance
+        0,99 / LCP 1828 ms (Budget 2500), desktop 1,00 / 614 ms,
         Accessibility 0,96, SEO 1,00. Die Messkette bleibt vollständig:
         3 von 3 CTAs mit data-umami-event, Affiliate-rel intakt,
-        Pflicht-Bausteine vorhanden. CSS-Zuwachs +1292 Bytes
+        Pflicht-Bausteine vorhanden. CSS-Zuwachs +3404 Bytes
         (erlaubt +6144), ein zusätzliches head-Kind.
         WAS DAMIT NICHT BELEGT IST: dass die Variante mehr Klicks
         bringt. Das Labor sagt „darf ausgeliefert werden", nicht „ist
