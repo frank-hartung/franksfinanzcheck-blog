@@ -1,9 +1,39 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 5,
-  "generated_at": "2026-09-26T16:05:02Z",
+  "ready": 6,
+  "pool_size": 6,
+  "generated_at": "2026-09-26T16:55:09Z",
   "candidates": [
+    {
+      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
+      "ready": true,
+      "sha256": "fb554c6d8a86190c26ccdf0d157294e912c347698f3f64a89d62fa5d49a427a0",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
+      "ready": true,
+      "sha256": "964b8e3707a716a2112a2650bd3b74cf7cdf2f56ec9b00d6b2ee6b236cc03d00",
+      "score": 0.88,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 0.8,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
     {
       "slug": "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
       "ready": true,
@@ -50,31 +80,16 @@
       }
     },
     {
-      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
+      "slug": "2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich",
       "ready": true,
-      "sha256": "fb554c6d8a86190c26ccdf0d157294e912c347698f3f64a89d62fa5d49a427a0",
-      "score": 0.89,
+      "sha256": "5562a0df30047e6fe80bd5ed70db232fb6aa80d00fc1241cdfeb9b00bcbfb1d1",
+      "score": 0.9,
       "parts": {
         "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
-      "ready": true,
-      "sha256": "964b8e3707a716a2112a2650bd3b74cf7cdf2f56ec9b00d6b2ee6b236cc03d00",
-      "score": 0.88,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 0.8,
+        "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
       }

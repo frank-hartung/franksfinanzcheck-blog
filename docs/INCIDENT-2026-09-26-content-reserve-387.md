@@ -1,6 +1,7 @@
 # Vorfall #387 – „Content-Reserve (täglicher Vorrat)" rot
 
 **Datum:** 26.09.2026 · **Lauf:** 36230666076 (03:25 UTC) · **Status:** behoben
+**Nachtrag 26.09.2026 (Abend):** Pool auf 6/6 geschlossen – siehe Abschnitt 8.
 **Symptom im Ticket:** `Stock shortage must not look successful` → Exit 1,
 `2/6 Kandidaten gate-fertig`.
 
@@ -191,3 +192,39 @@ API-Schlüssel scheiterte, wäre drei Tage gesperrt gewesen.
    gut zwei Wochen Nachschub – danach braucht die Reserve neue Themen.
 3. Dauerbefund ohne Bezug zu #387: `secrets_age_guard` meldet
    `PINTEREST_ACCESS_TOKEN` als „dead" (critical).
+
+---
+
+## 8. Nachtrag: Pool geschlossen – Übernahme in neuer Session (26.09., Abend)
+
+Nach dem Merge von #400 und #401 stand der Pool bei **5/6** zertifizierten
+Kandidaten. Der sechste sollte per Definition der nächtliche
+Produktionslauf (Stufe 1/4, mit API-Schlüsseln) liefern. Eine zwischen
+Session-Ende und Merge verloren gegangene lokale Nacharbeitskopie
+(nie gepusht, Commit nur in der geschlossenen Sandbox vorhanden) wurde
+in einer neuen Session (`arena/01a0de94-franksfinanzcheck-blog`) sachlich
+nachgebaut – nicht als Skript-Änderung, sondern als das, was fehlte:
+**der sechste Kandidat selbst.**
+
+* **Thema:** exakt der Vorschlag des Disponenten aus Abschnitt 3.2 –
+  „WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?“ (fachlich
+  frei, Pillar `internet-dsl`, kein weiterer Stromfresser).
+* **Entstehung:** manuell im Sessions-Kontext verfasst (die KI-Pipeline
+  hätte das Thema in der Nacht ohnehin bedient) und anschließend durch
+  **dieselben echten Produktions-Gates** gejagt wie jeder
+  Pipeline-Kandidat: quality_score + publish_gate (STRICT) +
+  echter Hugo-Rendernachweis (extended 0.164.0).
+* **Ergebnis:** Score **0,90** (uniqueness 1,00 – neues Thema, keine
+  Kollision), alle Teilnoten grün; Zertifikat-Stand danach **6/6**.
+* **Vorrat-Vielfalt** (Kennzahl aus #401): von 2 auf **3 Themen**
+  (stromfresser 4×, 50-30-20 1×, wlan-mesh 1×).
+* **Bestands-Wächter:** hat den Neuzugang gelernt (`reserve_custody
+  --heal`: 6 im Pool, 0 ohne Fahne).
+* **End-Gate:** `reserve_gate.py` → **✅ 6/6, Exit 0** (Zertifikat frisch).
+* **Nachweis wie gewohnt:** selftest_runner 103 Wachen grün, komplette
+  Unit-Testsuite OK.
+
+Damit ist morgen früh nicht das Gate der Engpass-Faktor, sondern nur
+noch die Tagesfrage der Redaktion: welcher Kandidat wann live geht.
+Unverändert **menschliche** Baustellen (Abschnitt 7): die 5 Rückläufer
+und die Themen-Klumpen im Pool.
