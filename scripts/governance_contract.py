@@ -203,7 +203,20 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # mit Gedächtnis und Cooldown). Beide sind Wachen mit
           # Entscheidungslogik – ohne Selbsttest im Minimum wäre die
           # Reparatur wieder nur eine Zusage.
-          "reserve_custody.py", "reserve_topics.py"]
+          "reserve_custody.py", "reserve_topics.py",
+          # Messlatte der Reserve (26.09.2026, #393 – „Bot-Watchdog:
+          # Automatisierung braucht Eingriff\"): Zielbestand und Alarmschwelle
+          # standen an drei Orten, und die entscheidende Kopie lag IM
+          # geprüften Zertifikat. Ein magerer Lauf schrieb `target: 4`, der
+          # harte End-Gate bestätigte „✅ 4/4" und die Konvergenz reichte die
+          # abgesenkte Latte an ihre Kindprozesse weiter, die sie
+          # zurückschrieben – eine Ratsche, die das Produktionsziel dauerhaft
+          # aussperrte. Weil zugleich Alarmschwelle == Ziel war, öffnete sich
+          # das Ticket nach jeder Veröffentlichung neu. Der SSOT rechnet die
+          # Schwelle jetzt aus dem Ziel (Invariante 1 ≤ Alarm < Ziel); ohne
+          # Selbsttest im Minimum wäre genau diese Invariante wieder nur eine
+          # Behauptung.
+          "reserve_economy.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

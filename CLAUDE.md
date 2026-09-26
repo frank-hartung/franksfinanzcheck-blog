@@ -138,6 +138,29 @@ verkettete Akte, eigene Prüfsummen. Es wird ausschließlich von
 - Schreiben ist atomar + rückgelesen: Ein abgebrochener Lauf hinterlässt den
   vorigen Stand, nie ein halbes Siegel.
 
+## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
+
+Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:
+`scripts/reserve_economy.py`.
+
+- `ziel()` kommt aus `RESERVE_TARGET` (Default 6), `alarmschwelle()` wird
+  daraus **abgeleitet** (Ziel − Puffer, Default 2). Die Invariante
+  `1 ≤ Alarm < Ziel` ist gerechnet, nicht konfiguriert – ohne diesen Abstand
+  füllt die Linie exakt bis zur Alarmgrenze und das Ticket öffnet sich nach
+  jeder Veröffentlichung neu (genau so entstand #393).
+- **Nie wieder ein Ziel aus `data/reserve-readiness.json` lesen.** Das
+  Zertifikat ist das geprüfte Artefakt; sein Feld `target` ist Protokoll
+  („gegen diese Latte wurde gemessen“), nie Vorgabe. Vorher las der End-Gate
+  es als Vorgabe – ein magerer Lauf schrieb `target: 4` und bekam dafür ein
+  grünes „4/4“, die Konvergenz reichte die 4 an ihre Kindprozesse weiter und
+  schrieb sie zurück: eine Ratsche, die das Produktionsziel aussperrte.
+- Abweichung Zertifikat ↔ Produktionsziel ist ein benannter Befund
+  (`MESSLATTE`), kein Schweigen.
+- Keine zweite Kopie der Zahl anlegen – kein `minimum = 4` irgendwo.
+  Verträge: `MesslattenBesitzTests` / `PufferInvarianteTests` in
+  `scripts/tests/test_reserve_pipeline.py`.
+- Vorfallbericht: `docs/INCIDENT-2026-09-26-bot-watchdog-393.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

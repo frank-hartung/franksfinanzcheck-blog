@@ -39,6 +39,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CERT = ROOT / "data" / "reserve-readiness.json"
 CERT_MAX_AGE_H = 36  # Notbremse gegen veraltete Zertifikate (env-übersteuerbar)
 
+sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
+
 
 def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
     """Liefert (ready, target, candidates). Fehlt das Zertifikat,
@@ -49,11 +52,25 @@ def evaluate(cert_path: Path) -> tuple[int, int, list[dict]]:
     candidates-Liste neu gezählt – nie dem gespeicherten `ready`-Feld
     blind vertraut (das konnte nach publish_to_min veraltete LIVE-Slugs
     mitzählen und 6/6 vortäuschen).
+
+    Premium-Fix 26.09.2026 (#393): Das ZIEL kommt jetzt ausschließlich aus
+    `reserve_economy.ziel()` – nie mehr aus dem Zertifikat. Vorher stand hier
+    `data.get("target", …)`, und damit bestimmte das geprüfte Artefakt seine
+    eigene Note: Ein Lauf, der nur 4 Kandidaten schaffte, schrieb `target: 4`
+    und bekam dafür ein grünes „4/4". Das Zertifikatsziel ist ab jetzt reines
+    Beweismittel und wird in `diagnose()` als MESSLATTE-Befund gemeldet.
     """
+    target = reserve_economy.ziel()
     if not cert_path.exists():
-        return 0, int(os.environ.get("RESERVE_TARGET", "6")), []
-    data = json.loads(cert_path.read_text(encoding="utf-8"))
-    target = int(data.get("target", os.environ.get("RESERVE_TARGET", "6")))
+        return 0, target, []
+    try:
+        data = json.loads(cert_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        # Ein unlesbares Zertifikat ist kein Nachweis – leerer Pool statt
+        # Absturz (C2: eine nicht ausgeführte Messung ist kein Grün).
+        return 0, target, []
+    if not isinstance(data, dict):
+        return 0, target, []
     candidates = list(data.get("candidates", []) or [])
     # Nur ready=true-Einträge; leere/kaputte Zeilen zählen nicht.
     ready = sum(1 for r in candidates if r.get("ready") is True)
@@ -173,6 +190,18 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
     """
     zeilen: list[str] = []
 
+    # 0. MESSLATTE: Wurde überhaupt gegen das Produktionsziel gemessen?
+    #    Neu am 26.09.2026 (#393). Diese Klasse steht bewusst VOR allen
+    #    anderen: Wenn die Latte selbst verschoben ist, sind alle folgenden
+    #    Zahlen gegen den falschen Maßstab gerechnet.
+    try:
+        drift = reserve_economy.messlatten_drift(
+            reserve_economy.zertifikat_ziel(CERT), target)
+        if drift:
+            zeilen.append(drift)
+    except Exception as exc:  # noqa: BLE001 – Diagnose darf nie blockieren
+        zeilen.append(f"(Messlatte nicht prüfbar: {exc})")
+
     # 1. LECK: Kandidaten, die ihre Fahne verloren haben (fremde Umschreibung)
     try:
         sys.path.insert(0, str(ROOT / "scripts"))
@@ -245,6 +274,16 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
 def report(ready: int, target: int, candidates: list[dict]) -> None:
     if ready >= target:
         print(f"\u2705 Reserve-Pool gate-fertig: {ready}/{target} Kandidaten zertifiziert.")
+        # Auch ein grüner Lauf sagt, gegen WELCHE Latte er grün ist (#393):
+        # Ein „✅ 4/4" ohne diese Zeile war am 26.09.2026 nicht von einem
+        # echten Vollbestand zu unterscheiden.
+        try:
+            drift = reserve_economy.messlatten_drift(
+                reserve_economy.zertifikat_ziel(CERT), target)
+            if drift:
+                print(f"   \u26a0 {drift}")
+        except Exception:  # noqa: BLE001 – Auskunft darf nie blockieren
+            pass
         return
     print(f"\U0001f6d1 RESERVE-ENGPA\u00df: nur {ready}/{target} Kandidaten gate-fertig.")
     for r in candidates:
