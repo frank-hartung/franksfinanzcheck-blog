@@ -155,7 +155,7 @@
   </div>
 
   {{- with $footnote }}
-  <div class="ff-es-footnote"><strong>💡 Hinweis:</strong> {{ . | safeHTML }}</div>
+  <div class="ff-es-footnote">{{ partial "ff-icon-tipp.html" . }}<strong>Hinweis:</strong> {{ . | safeHTML }}</div>
   {{- end -}}
 </div>
 

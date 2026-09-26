@@ -6,16 +6,18 @@
 {{- $body := cond (gt (len (trim $inner " \t\r\n")) 0) $inner $text -}}
 {{- $cls := "ff-callout--info" -}}
 {{- $label := "ℹ Hinweis" -}}
+{{- $icon := false -}}
 {{- if eq $type "warning" -}}
   {{- $cls = "ff-callout--warning" -}}
   {{- $label = "⚠ Wichtiger Hinweis" -}}
 {{- else if eq $type "tip" -}}
   {{- $cls = "ff-callout--tip" -}}
-  {{- $label = "💡 Tipp" -}}
+  {{- $label = "Tipp" -}}
+  {{- $icon = true -}}
 {{- end -}}
 <div class="ff-callout {{ $cls }}" role="note">
   <div class="ff-callout__head">
-    <strong>{{ $label }}:</strong>
+    {{ if $icon }}{{ partial "ff-icon-tipp.html" . }}{{ end }}<strong>{{ $label }}:</strong>
   </div>
   <div class="ff-callout__body">
     {{- if gt (len (trim $inner " \t\r\n")) 0 }}

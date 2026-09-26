@@ -1641,3 +1641,90 @@ details.toc a {
     transform: none !important;
   }
 }
+
+/* ============================================================
+   SPAR-SIGNET statt Glühbirne (Frank-Befund 26.09.2026)
+   ------------------------------------------------------------
+   Die 💡-Emoji war themenfremd („Idee“) und in jedem Betriebs-
+   system anders gezeichnet. Ersatz: ein hauseigenes, animiertes
+   Signet aus drei wachsenden Sparbalken und einer aufsteigenden
+   Euro-Münze. Reines CSS/SVG (kein JS, kein Netzwerk-Asset),
+   feste Kastengröße (kein Layout-Shift), und bei
+   prefers-reduced-motion steht es still.
+   Markup: layouts/_partials/ff-icon-tipp.html
+   ============================================================ */
+.ff-icon-tipp {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: .42em;
+  vertical-align: -.22em;
+  flex: 0 0 auto;
+}
+
+.ff-icon-tipp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ff-icon-tipp__bar {
+  fill: currentColor;
+  opacity: .55;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: ff-tipp-grow 3.2s cubic-bezier(.2, .7, .2, 1) infinite;
+}
+
+.ff-icon-tipp__bar--1 { animation-delay: 0s; }
+.ff-icon-tipp__bar--2 { animation-delay: .16s; opacity: .72; }
+.ff-icon-tipp__bar--3 { animation-delay: .32s; opacity: .9; }
+
+.ff-icon-tipp__coin circle {
+  fill: var(--ff-yellow, #FFB300);
+  stroke: currentColor;
+  stroke-width: .9;
+  stroke-opacity: .35;
+}
+
+.ff-icon-tipp__coin text {
+  fill: #2E2E33;
+  font-size: 5.4px;
+  font-weight: 800;
+  font-family: inherit;
+}
+
+.ff-icon-tipp__coin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ff-tipp-coin 3.2s cubic-bezier(.2, .7, .2, 1) infinite;
+}
+
+@keyframes ff-tipp-grow {
+  0%, 12% { transform: scaleY(.35); }
+  38%, 72% { transform: scaleY(1); }
+  100% { transform: scaleY(.35); }
+}
+
+@keyframes ff-tipp-coin {
+  0%, 10% { transform: translateY(3px) scale(.6); opacity: 0; }
+  34% { transform: translateY(0) scale(1); opacity: 1; }
+  78% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-2px) scale(.8); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-icon-tipp__bar,
+  .ff-icon-tipp__coin {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1;
+  }
+}
+
+/* Das Signet läuft inline mit dem Label mit – keine Flex-Umbauten an den
+   Kopfzeilen, damit Fließtext hinter „Hinweis:“ in derselben Zeile bleibt. */
+.ff-callout__head strong,
+.ff-es-footnote strong,
+.ff-tv-footnote strong { white-space: nowrap; }
