@@ -35,6 +35,11 @@ Python-Gates in `scripts/`, ausführliche Zustands-Reports im Root.
    `node e2e/design-metrics.mjs` (liefert hell+dunkel als JSON).
 4. **Keine Inline-Farben in Templates** – Klassen + CSS-Dateien
    (Vorbild: `.ff-pc-*` in `layouts/pillar/single.html`).
+5. **Figma/Relume nur über den Handoff-Vertrag** – externe Entwürfe müssen
+   `data/design/handoff.yaml` und die generierten Artefakte unter
+   `design/handoff/` verwenden. Generierte Dateien nie von Hand ändern;
+   `python3 scripts/design_handoff.py --check` prüft Marken- und Exportdrift.
+   Runbook: `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`.
 
 ## Test- und Verifikations-Pipeline
 
@@ -56,6 +61,8 @@ python3 scripts/design_variant_gate.py --produktionswache   # läuft im Deploy V
 python3 scripts/design_variant_lab.py --lauf <id>    # baut Basis+Variante, misst statisch
 node e2e/variant-metrics.mjs --variante <id>         # Browser-Messung + Lighthouse
 python3 scripts/design_reach_briefing.py             # Agent-Reach-Signale → Hypothesen
+python3 scripts/design_handoff.py                     # Figma-/Relume-Artefakte erzeugen
+python3 scripts/design_handoff.py --check             # SSOT-/Exportdrift blockieren
 ```
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency

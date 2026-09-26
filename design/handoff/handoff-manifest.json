@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "stand": "2026-09-26",
+  "generator": "scripts/design_handoff.py",
+  "generator_version": 1,
+  "sources": {
+    "data/design/handoff.yaml": "2c6b86864fdbf40aaae7994547294727dc444ff0122710ff6afc1afcceb79daa",
+    "data/design/regelwerk.yaml": "dd8220f62cce4a610bceddd10d193125d427456c6f8b9a89c08ee32d84fe8359",
+    "DESIGN.md": "c7dd78a1b8841e3fb2009ce424491c15dffd44471abb26735d0f607a6f71822c",
+    "PRODUCT.md": "8487bc761ca891535fabddabb5c8091c35c2e599ee4991ce7d7e0b87576a8e91",
+    "scripts/design_handoff.py": "1d810d17db7d0855432bbb8479e9ed914ac5c2d8330657a91577b2b1073d444f"
+  },
+  "artifacts": {
+    "component-inventory.md": "7a66aa5716a57f01b0c3a8af38621ca7c0293230834bab4b74eb9d530ea19b22",
+    "figma-tokens.tokens.json": "ef1cb0da1d60e2c866d2d633adf65e08ea4ba4d098c74d8a388020ce2dfc726b",
+    "relume-project-brief.md": "014a5ee92efdfb440c406515f7dcb9743be14f0f3cd6c3b43810fa9e0e318c1f"
+  }
+}

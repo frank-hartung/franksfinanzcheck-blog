@@ -1,0 +1,171 @@
+# SSOT für den externen Design-Handoff. Aus dieser Datei erzeugt
+# scripts/design_handoff.py reproduzierbare Figma-/Relume-Artefakte.
+version: 1
+stand: "2026-09-26"
+projekt:
+  name: "FranksFinanzcheck"
+  sprache: "de-DE"
+  produkt: "Unabhängiger Finanz-Ratgeber für private Haushalte"
+  ziel: "Fixkosten verständlich senken – ohne Verkaufsdruck"
+  ton: "klar, ruhig, vertrauenswürdig, konkret"
+
+figma:
+  dateiname: "FranksFinanzcheck – Design System"
+  page_order:
+    - "00 Cover"
+    - "01 Foundations"
+    - "02 Components"
+    - "03 Patterns"
+    - "04 Desktop"
+    - "05 Mobile"
+    - "90 Archive"
+  breakpoints:
+    mobile: 390
+    tablet: 768
+    desktop: 1280
+  primitives:
+    colors:
+      emerald: "#0E5A43"
+      emerald-dark: "#0A4634"
+      emerald-soft: "#EAF4EF"
+      emerald-bright: "#7FD1B4"
+      anthracite: "#2E2E33"
+      yellow: "#FFB300"
+      yellow-dark: "#E6A100"
+      accent-2: "#FFD15A"
+      ink: "#17211D"
+      white: "#FFFFFF"
+      page-light: "#FAFCFB"
+      page-dark: "#1D1E20"
+      border-light: "#DCE6E1"
+      border-dark: "#333"
+    spacing_px: [8, 10, 12, 14, 16, 18, 20, 22, 24, 32, 44, 64]
+    radius_px:
+      none: 0
+      sm: 8
+      md: 12
+      lg: 16
+      pill: 999
+  semantic:
+    light:
+      background: "page-light"
+      surface: "white"
+      text: "anthracite"
+      heading: "emerald"
+      action: "yellow"
+      action-hover: "yellow-dark"
+      border: "border-light"
+      focus: "yellow"
+    dark:
+      background: "page-dark"
+      surface: "anthracite"
+      text: "white"
+      heading: "emerald-bright"
+      action: "yellow"
+      action-hover: "yellow-dark"
+      border: "border-dark"
+      focus: "yellow"
+  typography:
+    body:
+      family: "system-ui"
+      size_px: 18
+      line_height: 1.65
+      weight: 400
+    h1_home:
+      family: "Inter"
+      size_px: 56
+      line_height: 1.08
+      weight: 700
+    h1_article:
+      family: "Inter"
+      size_px: 36
+      line_height: 1.15
+      weight: 700
+    h2:
+      family: "Inter"
+      size_px: 24
+      line_height: 1.25
+      weight: 700
+    meta:
+      family: "system-ui"
+      size_px: 14
+      line_height: 1.5
+      weight: 500
+
+components:
+  - id: button-primary
+    figma: "Action/Button/Primary"
+    code: ".ff-btn-primary"
+    states: [default, hover, focus-visible, disabled, dark]
+    accessibility: "44 px Soll-Trefferfläche; sichtbarer 3-px-Fokusring"
+  - id: button-secondary
+    figma: "Action/Button/Secondary"
+    code: ".ff-btn-secondary"
+    states: [default, hover, focus-visible, disabled, dark]
+    accessibility: "44 px Soll-Trefferfläche; kein Gelb als Text auf heller Fläche"
+  - id: article-card
+    figma: "Content/Article card"
+    code: ".post-entry"
+    states: [default, hover, focus-within, dark]
+    accessibility: "Überschrift bleibt semantisch; Bild immer mit Alt-Text und Maßen"
+  - id: trust-pill
+    figma: "Trust/Proof pill"
+    code: ".ff-trust-pill"
+    states: [default, dark]
+    accessibility: "Aussage nicht nur über Farbe vermitteln"
+  - id: callout
+    figma: "Content/Callout"
+    code: ".ff-callout"
+    states: [tip, warning, info, dark]
+    accessibility: "Typ und Überschrift als Text; Kontrast mindestens 4,5:1"
+  - id: newsletter-form
+    figma: "Conversion/Newsletter form"
+    code: ".ff-newsletter-form"
+    states: [default, focus, error, success, disabled, dark]
+    accessibility: "Persistente Labels; verständliche Fehlertexte; Tastaturbedienung"
+  - id: header
+    figma: "Navigation/Header"
+    code: ".header"
+    states: [desktop, mobile, keyboard, dark]
+    accessibility: "Skip-Link, Landmark und sichtbarer aktueller Navigationspunkt"
+  - id: author-trust-box
+    figma: "Trust/Author box"
+    code: ".ff-trust-box"
+    states: [default, dark]
+    accessibility: "Autor und Prüfhinweis als echter Text"
+
+relume:
+  global_rules:
+    - "Keine erfundenen Testimonials, Siegel, Bewertungen oder Sparbeträge."
+    - "Keine Preis-/Tarifdaten in statische UI schreiben."
+    - "Pro Seite exakt eine H1; Überschriftenhierarchie nicht überspringen."
+    - "Primäre Handlung klar, aber ohne künstliche Dringlichkeit oder Dark Patterns."
+    - "Bestehende deutsche Texte sind verbindlich; Relume liefert Struktur, keine Fakten."
+    - "Mobile-first; 390 px ist der Abnahme-Viewport."
+  pages:
+    - path: "/"
+      name: "Startseite"
+      intent: "Orientierung schaffen und passend in die Ratgeber führen"
+      sections:
+        - {id: hero, component: "hero", goal: "Nutzenversprechen plus eine Primärhandlung"}
+        - {id: trust, component: "trust-pill", goal: "Unabhängigkeit und Praxisbezug belegen"}
+        - {id: topics, component: "article-card", goal: "Themenwelten scannbar machen"}
+        - {id: latest, component: "article-card", goal: "Aktuelle Ratgeber zeigen"}
+        - {id: newsletter, component: "newsletter-form", goal: "Freiwilligen Wiedereinstieg anbieten"}
+    - path: "/pillar/"
+      name: "Ratgeber-Zentrale"
+      intent: "Alle Themenwelten und Sparpfade verständlich ordnen"
+      sections:
+        - {id: intro, component: "hero", goal: "Aufgabe und Auswahl erklären"}
+        - {id: clusters, component: "article-card", goal: "Ratgeber nach Bedarf gruppieren"}
+        - {id: method, component: "callout", goal: "Vorgehen transparent machen"}
+        - {id: faq, component: "faq", goal: "Häufige Orientierungsfragen beantworten"}
+    - path: "artikel"
+      name: "Artikel-Template"
+      intent: "Eine konkrete Finanzfrage nachvollziehbar und handlungsnah lösen"
+      sections:
+        - {id: article-head, component: "article-header", goal: "Thema, Aktualität und Autor klären"}
+        - {id: article-body, component: "prose", goal: "Schritte mit ruhigem Lesefluss vermitteln"}
+        - {id: contextual-cta, component: "button-primary", goal: "Nur passende nächste Handlung anbieten"}
+        - {id: author, component: "author-trust-box", goal: "Erfahrung und Verantwortung transparent machen"}
+        - {id: related, component: "article-card", goal: "Sinnvoll weiterlesen"}

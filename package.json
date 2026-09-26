@@ -19,11 +19,15 @@
     "design:wache": "python3 scripts/design_variant_gate.py --produktionswache",
     "design:lauf": "python3 scripts/design_variant_lab.py --lauf",
     "design:messen": "node e2e/variant-metrics.mjs --variante",
-    "design:lighthouse": "python3 scripts/design_variant_gate.py --lighthouse-export && lhci autorun",
+    "design:lighthouse": "python3 scripts/design_variant_gate.py --lighthouse-export && node e2e/variant-metrics.mjs --variante ${LHCI_VARIANTE:-basis}",
     "design:briefing": "python3 scripts/design_reach_briefing.py",
+    "design:handoff": "python3 scripts/design_handoff.py",
+    "design:handoff:check": "python3 scripts/design_handoff.py --check",
+    "design:quality": "npm run design:handoff:check && npm run design:gate && npm run test:design",
     "test:design": "python3 -m unittest scripts.tests.test_design_varianten"
   },
   "devDependencies": {
-    "@playwright/test": "^1.63.0"
+    "@playwright/test": "1.63.0",
+    "lighthouse": "13.5.0"
   }
 }
