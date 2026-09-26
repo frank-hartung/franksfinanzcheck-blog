@@ -27,11 +27,15 @@ on:
     paths:
       - "assets/css/**"
       - "data/design/**"
+      - "design/handoff/**"
       - "layouts/**"
       - "lighthouse/**"
       - "lighthouserc.cjs"
+      - "package.json"
+      - "package-lock.json"
       - "scripts/design_variant_*.py"
       - "scripts/design_reach_briefing.py"
+      - "scripts/design_handoff.py"
       - "e2e/variant-metrics.mjs"
       - "e2e/design-variante.spec.mjs"
   schedule:
@@ -77,6 +81,10 @@ jobs:
           python3 scripts/design_variant_gate.py --selftest
           python3 scripts/design_variant_lab.py --selftest
           python3 scripts/design_reach_briefing.py --selftest
+          python3 scripts/design_handoff.py --selftest
+
+      - name: Figma-/Relume-Handoff gegen Design-SSOT prüfen
+        run: python3 scripts/design_handoff.py --check
 
       - name: Regressionstests der Werkbank
         run: python3 -m unittest scripts.tests.test_design_varianten
@@ -132,7 +140,6 @@ jobs:
         run: |
           python3 -m pip install -q pyyaml
           npm ci
-          npm i -D --no-save lighthouse
           npx playwright install --with-deps chromium
 
       - name: Tier A – bauen & statisch messen

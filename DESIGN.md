@@ -174,3 +174,23 @@ Gate sie als „nicht in den Marken-Tokens" zurück.
 
 Runbook mit dem vollständigen Ablauf:
 [`docs/ANLEITUNG-DESIGN-VARIANTEN.md`](docs/ANLEITUNG-DESIGN-VARIANTEN.md)
+
+## 10. Figma-/Relume-Handoff
+
+Figma und Relume sind Entwurfswerkzeuge, keine zweite Produktionswahrheit.
+Der versionierte Vertrag liegt in `data/design/handoff.yaml`; daraus erzeugt
+`scripts/design_handoff.py` reproduzierbar:
+
+- Tokens-Studio-JSON mit Light-/Dark-Collections,
+- Relume-Projektprompt, Sitemap und Section-Vertrag,
+- Figma↔Hugo-Komponenten-Inventar mit Zuständen und A11y-Abnahme,
+- SHA-256-Manifest für Quellen und Exporte.
+
+Die Farben und Radien werden gegen `data/design/regelwerk.yaml` validiert.
+Generierte Dateien unter `design/handoff/` werden nicht von Hand bearbeitet;
+`python3 scripts/design_handoff.py --check` stoppt Drift im CI-Gate. Ein
+externer Entwurf gelangt ausschließlich als registrierte Variante durch
+Playwright, Lighthouse, Messprotokoll und menschliche Freigabe in Produktion.
+
+Runbook:
+[`docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`](docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md)
