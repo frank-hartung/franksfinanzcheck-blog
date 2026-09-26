@@ -14,12 +14,12 @@ Weiterleitungskette) als verdächtig einstuft. Wichtige Einordnung:
 |---|---|---|
 | Domain nach früheren Massen-Pin-Versuchen auf Pinterest-Blocklist | **hoch** | Pinterest-Support/Business-Konto, siehe §4 |
 | Die gepinnte URL leitet selbst weiter (Meta-Refresh) | niedrig | ausgeschlossen – Artikel liefern direkt aus (Check P10) |
-| Zu viele Affiliate-Links / unmarkierte Affiliate-Links | niedrig | im Griff: max. 4/Artikel, `rel="sponsored nofollow"` (P11/P12) |
+| Zu viele Affiliate-Links / unmarkierte Affiliate-Links | niedrig | höchstens 5 je Artikel; sparsame Platzierung bevorzugt, `rel="sponsored nofollow"` (P11/P12) |
 | Blockierte Affiliate-Domain als Pin-Ziel | niedrig | Pins zeigen auf Artikel, nicht auf /go/ |
 
 **Unsere technischen Checks (automatisiert, `pinterest_check.py`):**
 - P10: Artikel-Seiten haben KEINEN eigenen Redirect ✅
-- P11: max. 5 Affiliate-Links pro Artikel ✅
+- P11: höchstens 5 Affiliate-Links pro Artikel; Überschreitungen werden gemeldet, nicht automatisch aus dem redaktionellen Text entfernt ✅
 - P12: /go/-Links mit `rel="sponsored nofollow"` ✅
 - P13: /go/-Seiten sind noindex (keine dünnen Seiten) ✅
 - P1: robots.txt erlaubt Pinterest, blockt /go/ ✅

@@ -53,6 +53,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -60,6 +61,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 LEDGER = ROOT / "data" / "reserve-custody.json"
+
+
+def ledger_pfad(pfad: Path | None = None) -> Path:
+    """Wo das Bestands-Gedächtnis liegt – zur LAUFZEIT aufgelöst
+    (RESERVE_CUSTODY_LEDGER lenkt es um, damit Test- und Trockenläufe nicht
+    ins echte Gedächtnis schreiben)."""
+    if pfad is not None:
+        return Path(pfad)
+    ziel = (os.environ.get("RESERVE_CUSTODY_LEDGER") or "").strip()
+    return Path(ziel) if ziel else LEDGER
 
 RE_DRAFT_TRUE = re.compile(r"(?m)^draft:\s*true\s*$")
 RE_DRAFT_ZEILE = re.compile(r"(?m)^draft:\s*\S+\s*$")
@@ -99,7 +110,8 @@ def heute(jetzt: dt.date | None = None) -> str:
     return (jetzt or dt.date.today()).isoformat()
 
 
-def ledger_laden(pfad: Path = LEDGER) -> dict:
+def ledger_laden(pfad: Path | None = None) -> dict:
+    pfad = ledger_pfad(pfad)
     try:
         data = json.loads(pfad.read_text(encoding="utf-8"))
         return data if isinstance(data, dict) else {}
@@ -107,7 +119,8 @@ def ledger_laden(pfad: Path = LEDGER) -> dict:
         return {}
 
 
-def ledger_speichern(data: dict, pfad: Path = LEDGER) -> None:
+def ledger_speichern(data: dict, pfad: Path | None = None) -> None:
+    pfad = ledger_pfad(pfad)
     pfad.parent.mkdir(parents=True, exist_ok=True)
     pfad.write_text(json.dumps(data, ensure_ascii=False, indent=2,
                                sort_keys=True) + "\n", encoding="utf-8")
@@ -139,8 +152,9 @@ def fahne_setzen(text: str) -> str | None:
     return text[:ende] + "\nreserve: true" + text[ende:]
 
 
-def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path = LEDGER) -> dict:
+def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> dict:
     """Aktueller Zustand aller je bekannten Kandidaten + Befunde."""
+    pfad = ledger_pfad(pfad)
     ledger = ledger_laden(pfad)
     pool, verloren, ruecklaeufer, blockiert, zurueckgezogen = [], [], [], [], []
     gesehen = set()
@@ -179,9 +193,10 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path = LEDGER) -> dict:
             "verwaist": sorted(verwaist)}
 
 
-def heilen(posts_dir: Path = POSTS, *, pfad: Path = LEDGER,
+def heilen(posts_dir: Path = POSTS, *, pfad: Path | None = None,
            dry_run: bool = False, jetzt: dt.date | None = None) -> dict:
     """Verlorene Fahnen wiederherstellen und das Ledger fortschreiben."""
+    pfad = ledger_pfad(pfad)
     lage = bestandsaufnahme(posts_dir, pfad=pfad)
     ledger = ledger_laden(pfad)
     geheilt = []
@@ -257,7 +272,7 @@ def markdown(lage: dict) -> str:
     return "\n".join(zeilen) + "\n"
 
 
-def heal_quiet(posts_dir: Path = POSTS, *, pfad: Path = LEDGER) -> int:
+def heal_quiet(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> int:
     """Best-effort-Heilung für Aufrufer in der Produktionslinie.
 
     Darf NIE eine Ausnahme nach oben geben: Der Bestands-Wächter ist eine

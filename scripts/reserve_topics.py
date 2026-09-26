@@ -60,6 +60,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -67,6 +68,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 LEDGER = ROOT / "data" / "reserve-topic-ledger.json"
+
+
+def ledger_pfad(pfad: Path | None = None) -> Path:
+    """Wo das Themen-Gedächtnis liegt – zur LAUFZEIT aufgelöst.
+
+    Die Umgebungsvariable RESERVE_TOPIC_LEDGER lenkt es um. Das ist kein
+    Luxus: Test- und Trockenläufe dürfen dem Repository keine echten
+    Cooldowns unterschieben (ein Thema, das nur mangels API-Schlüssel
+    scheiterte, wäre sonst drei Tage gesperrt).
+    """
+    if pfad is not None:
+        return Path(pfad)
+    ziel = (os.environ.get("RESERVE_TOPIC_LEDGER") or "").strip()
+    return Path(ziel) if ziel else LEDGER
 
 # Cooldowns (Tage). Bewusst konservativ: Der Themenpool hat >170 Einträge,
 # ein gesperrtes Thema kostet also nie die Nacht.
@@ -217,7 +232,8 @@ def klumpen(posts_dir: Path = POSTS, ab: int = 2) -> dict[str, list[str]]:
 # ---------------------------------------------------------------------------
 #  Gedächtnis (Ledger)
 # ---------------------------------------------------------------------------
-def ledger_laden(pfad: Path = LEDGER) -> dict:
+def ledger_laden(pfad: Path | None = None) -> dict:
+    pfad = ledger_pfad(pfad)
     try:
         data = json.loads(pfad.read_text(encoding="utf-8"))
         return data if isinstance(data, dict) else {}
@@ -225,7 +241,8 @@ def ledger_laden(pfad: Path = LEDGER) -> dict:
         return {}
 
 
-def ledger_speichern(data: dict, pfad: Path = LEDGER) -> None:
+def ledger_speichern(data: dict, pfad: Path | None = None) -> None:
+    pfad = ledger_pfad(pfad)
     pfad.parent.mkdir(parents=True, exist_ok=True)
     pfad.write_text(json.dumps(data, ensure_ascii=False, indent=2,
                                sort_keys=True) + "\n", encoding="utf-8")
@@ -245,9 +262,10 @@ def gesperrt(eintrag: dict, jetzt: dt.date | None = None) -> bool:
         return False
 
 
-def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path = LEDGER,
+def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path | None = None,
           jetzt: dt.date | None = None) -> dict:
     """Erfolg/Misserfolg eines Themas festhalten und Cooldown setzen."""
+    pfad = ledger_pfad(pfad)
     heute = _heute(jetzt)
     data = ledger_laden(pfad)
     eintrag = dict(data.get(titel) or {})
@@ -272,7 +290,7 @@ def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path = LEDGER,
 #  Disposition
 # ---------------------------------------------------------------------------
 def disponieren(topics: list, used_titles=None, *, posts_dir: Path = POSTS,
-                pfad: Path = LEDGER, limit: int = 5,
+                pfad: Path | None = None, limit: int = 5,
                 jetzt: dt.date | None = None,
                 bestand: dict[str, str] | None = None) -> list[dict]:
     """Beste Themen für die Reserve-Produktion – begründet und rotierend.
@@ -301,7 +319,7 @@ def disponieren(topics: list, used_titles=None, *, posts_dir: Path = POSTS,
 
 
 def bericht(topics: list | None = None, *, posts_dir: Path = POSTS,
-            pfad: Path = LEDGER) -> dict:
+            pfad: Path | None = None) -> dict:
     if topics is None:
         sys.path.insert(0, str(ROOT / "scripts"))
         import generate_drafts as g  # noqa: PLC0415 – optional

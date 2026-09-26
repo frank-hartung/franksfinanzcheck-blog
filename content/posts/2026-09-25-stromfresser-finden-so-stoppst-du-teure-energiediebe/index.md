@@ -285,8 +285,6 @@ Ein Vergleich lohnt sich oft, wenn:
 - dein Preis stark gestiegen ist
 - du nie aktiv verglichen hast
 
-👉 [**Jetzt Stromtarife vergleichen**](/go/strom/)
-
 ## So bleibt der Plan alltagstauglich
 
 Du musst nicht alles auf einmal perfekt machen. Besser ist:
@@ -340,15 +338,3 @@ Er hilft. Noch besser wirkt er zusammen mit geringerem Verbrauch.
 👉 **Jetzt Stromkosten senken:** [**→ Stromanbieter vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-Das ist realistischer und hält länger.
-
-## Diese Inhalte helfen beim Weiterdenken
-
-## Fazit: Stromfresser finden ist einer der schnellsten Sparhebel
-
-## Häufige Fragen
-
----
-
-👉 **Jetzt Stromkosten senken:** [**→ Stromanbieter vergleichen**](/go/strom/)

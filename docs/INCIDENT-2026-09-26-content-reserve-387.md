@@ -154,7 +154,35 @@ nie · Diagnose stürzt nie ab · Stufe 0 läuft **vor** der Produktion.
 
 ---
 
-## 6. Was ein Mensch noch entscheiden muss
+## 6. Zusammenführung mit dem parallelen Fix (`5202480`)
+
+Während dieser Arbeit landete auf `main` ein zweiter Fix zu #387
+(`fix(watchdog): reserve readiness and retry topic generation`,
+Copilot-unterstützt). Er löste dieselbe Stelle leichter:
+`_weighted_choose` statt `freie[0]`, jedes versuchte Thema sofort
+verbraucht, und ein `_reserve_topup_batch`, das nicht am ersten Ausfall
+anhält. **Beides wurde übernommen, nichts überschrieben:**
+
+* Die **Pinterest-Gewichte** bestimmen jetzt die *Reihenfolge* innerhalb
+  der Themen, die der Disponent als fachlich frei erkannt hat – Datenlage
+  UND Vielfalt statt eines von beidem.
+* `_reserve_topup_batch` bleibt die Batch-Schnittstelle (samt seinem
+  Vertrag „kein neues Thema angefasst → sofort Schluss") und bekommt
+  zusätzlich die Unterscheidung **strukturell vs. flüchtig**: Ziel
+  erreicht, Kapazität, In-Flight oder kein freies Thema beenden den Lauf
+  mit Begründung; ein reiner KI-Fehlschlag tut das nicht.
+* Jedes **versuchte** Thema wird verbraucht (sein Vertrag), zusätzlich
+  bekommt es einen Cooldown im Gedächtnis (diese Reparatur).
+* Seine beiden Tests laufen unverändert mit; die Testsuite steht bei
+  **947 Tests, OK**.
+
+Nebenbefund aus der Zusammenführung, ebenfalls behoben: Die beiden
+Gedächtnisse lassen sich über `RESERVE_TOPIC_LEDGER` bzw.
+`RESERVE_CUSTODY_LEDGER` umlenken. Ohne diese Naht hätte jeder Testlauf
+echte Cooldowns ins Repository geschrieben – ein Thema, das nur mangels
+API-Schlüssel scheiterte, wäre drei Tage gesperrt gewesen.
+
+## 7. Was ein Mensch noch entscheiden muss
 
 1. **5 Rückläufer** (`reserve_published` + `draft: true`), davon vier
    Gasrechnungs-Varianten: veröffentlichen, zusammenführen oder
