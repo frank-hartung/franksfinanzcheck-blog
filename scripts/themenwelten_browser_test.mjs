@@ -24,6 +24,13 @@ const PUBLIC = path.resolve(arg('--public', path.join(ROOT, 'public')));
 const prefix = arg('--base-path', '/').replace(/^\/+|\/+$/g, '');
 const BASE_PATH = prefix ? `/${prefix}/` : '/';
 const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/themenwelten.json'), 'utf8'));
+// Der Startseiten-Vertrag ist variantenabhängig: Die Kontrollgruppe bleibt
+// bei 800 px, die freigegebene v-hero-conversion-Bühne darf 1024 px nutzen.
+// Unbekannte Varianten bekommen bewusst keinen impliziten Freifahrtschein.
+const HOME_MAIN_WIDTH_LIMITS = Object.freeze({
+  basis: 800,
+  'v-hero-conversion': 1024,
+});
 assert.ok(fs.existsSync(path.join(PUBLIC, 'posts/index.html')), 'Hugo-Build fehlt.');
 const require = createRequire(path.join(ROOT, 'tools/ff-voice-browser/package.json'));
 const { chromium } = require('playwright-core');
@@ -228,7 +235,16 @@ try {
 
   await page.goto(url(''), { waitUntil: 'networkidle' });
   check(await page.locator('.ff-topics .ff-topic-card').count() === 6, 'Startseite nutzt dieselben sechs Themen');
-  check((await page.locator('main').boundingBox()).width <= 800, 'Startseite nicht versehentlich verbreitert');
+  const aktiveVariante = await page.locator('style[data-ff-variante]').first().getAttribute('data-ff-variante') || 'basis';
+  const breiteMax = Object.hasOwn(HOME_MAIN_WIDTH_LIMITS, aktiveVariante)
+    ? HOME_MAIN_WIDTH_LIMITS[aktiveVariante]
+    : undefined;
+  check(breiteMax !== undefined, `Startseite: kein Breitenvertrag für Variante „${aktiveVariante}“`);
+  if (breiteMax !== undefined) {
+    const mainBox = await page.locator('main').boundingBox();
+    check(mainBox !== null && mainBox.width <= breiteMax,
+      `Startseite: ${aktiveVariante} bleibt innerhalb der ${breiteMax}-px-Bühne`);
+  }
   await page.goto(new URL(firstArticle, origin).href, { waitUntil: 'networkidle' });
   check(await page.locator('.ff-mini-toc').count() === 1, 'Artikel behalten ihre Mini-Navigation');
   check(await page.locator('.ff-posts-index').count() === 0, 'Einzelartikel behalten ihr Layout');
