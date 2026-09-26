@@ -49,7 +49,9 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import check_length as cl            # noqa: E402
-import meta_optimizer as mo          # noqa: E402
+import engine_generate as eg         # noqa: E402
+import meta_optimizer as mo           # noqa: E402
+import reserve_pool as rp             # noqa: E402
 import reserve_converge as rc        # noqa: E402
 import reserve_finisher as rf        # noqa: E402
 import reserve_gate as rg            # noqa: E402
@@ -237,6 +239,46 @@ class KonvergenzTests(unittest.TestCase):
         self.assertEqual([e["RESERVE_FORCE_TOPUP"] for e in envs],
                          ["1", "1", "1"],
                          "Der In-Flight-Schutz muss im Nachschub aufgehoben sein")
+
+    def test_reserve_topup_wechselt_nach_gescheiterter_ki_generierung_thema(self):
+        topics = [{"title": "Thema A"}, {"title": "Thema B"}]
+        used_topics = set()
+        versuchte_themen = []
+
+        def fail(topic, *_args, **_kwargs):
+            versuchte_themen.append(topic["title"])
+            return None, "Profi-Gate abgelehnt"
+
+        with patch.object(rp, "reserve_drafts", return_value=[]), \
+                patch.object(eg.g, "topic_already_covered", return_value=False), \
+                patch.object(eg, "_pool_conflicts", return_value=False), \
+                patch.object(eg, "_weighted_choose", side_effect=lambda free, _weights: free[0]), \
+                patch.object(eg, "try_generate", side_effect=fail), \
+                patch.object(Path, "read_text", side_effect=OSError("kein Zertifikat")), \
+                patch("builtins.print"):
+            for _ in range(2):
+                self.assertEqual(
+                    eg._reserve_topup(topics, "test", set(), used_topics), 0)
+
+        self.assertCountEqual(versuchte_themen, ["Thema A", "Thema B"])
+        self.assertEqual(used_topics, {id(topics[0]), id(topics[1])})
+
+    def test_reserve_batch_faehrt_nach_einem_themenfehler_fort(self):
+        used_topics = set()
+        calls = []
+
+        def fake_topup(_topics, _quelle, _titles, attempted, **_kwargs):
+            calls.append(len(calls))
+            if len(calls) > 4:
+                return 0
+            attempted.add(len(calls))
+            return 0 if len(calls) == 1 else 1
+
+        with patch.object(eg, "_reserve_topup", side_effect=fake_topup):
+            produced = eg._reserve_topup_batch([], "test", set(), used_topics, 4)
+
+        self.assertEqual(produced, 3)
+        self.assertEqual(len(calls), 4)
 
     def test_zeitbudget_stoppt_vor_dem_job_timeout(self):
         """#295: Eine langsame Nacht darf den 90-Minuten-Job nicht sprengen –

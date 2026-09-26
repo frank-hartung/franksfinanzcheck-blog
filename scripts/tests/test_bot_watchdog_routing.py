@@ -14,6 +14,7 @@ Läuft deterministisch ohne Netz: der Prüfpfad wird auf ein temporäres
 from __future__ import annotations
 
 import datetime
+import hashlib
 import json
 import os
 import shutil
@@ -59,6 +60,21 @@ class WatchdogKanalTestCase(unittest.TestCase):
 
     def _write(self, name, data):
         (self.tmp / "data" / name).write_text(json.dumps(data), encoding="utf-8")
+
+    def _write_reserve_certificate(self, candidates, generated_at=FRISCH):
+        self._write("reserve-readiness.json", {
+            "target": 6,
+            "ready": sum(c.get("ready") is True for c in candidates),
+            "generated_at": generated_at,
+            "candidates": candidates,
+        })
+
+    def _write_reserve_draft(self, slug):
+        path = self.tmp / "content" / "posts" / slug / "index.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        content = f"---\ntitle: {slug}\ndraft: true\nreserve: true\n---\nBody\n"
+        path.write_text(content, encoding="utf-8")
+        return hashlib.sha256(path.read_bytes()).hexdigest()
 
     # --- Reihenfolge: erst die Domain, dann der Token ------------------- #
     def test_token_rot_bei_domainsperre_ist_ein_hinweis(self):
@@ -138,6 +154,77 @@ class WatchdogKanalTestCase(unittest.TestCase):
         self.assertIsNone(bw.pinterest_domain_block())
         self._write("pinterest_domain_block.json", {"since": "2026-08-27T13:58:16Z"})
         self.assertIsNotNone(bw.pinterest_domain_block())
+
+    def test_content_reserve_zaehlt_nur_hashgesicherte_reife_kandidaten(self):
+        candidates = []
+        for i in range(4):
+            slug = f"reserve-{i}"
+            candidates.append({
+                "slug": slug, "ready": True,
+                "sha256": self._write_reserve_draft(slug),
+            })
+        self._write_reserve_certificate(candidates)
+
+        ok, text = bw.check_content_reserve()
+
+        self.assertTrue(ok)
+        self.assertIn("4/4 gate-fertige", text)
+
+    def test_content_reserve_meldet_konkrete_gate_blocker(self):
+        candidates = []
+        for i in range(2):
+            slug = f"reserve-{i}"
+            candidates.append({
+                "slug": slug, "ready": True,
+                "sha256": self._write_reserve_draft(slug),
+            })
+        candidates.append({
+            "slug": "blockiert", "ready": False,
+            "reason": "Cover-Text unvollständig",
+        })
+        self._write_reserve_draft("blockiert")
+        self._write_reserve_certificate(candidates)
+
+        ok, text = bw.check_content_reserve()
+
+        self.assertFalse(ok)
+        self.assertIn("2/4 gate-fertige", text)
+        self.assertIn("Cover-Text unvollständig", text)
+
+    def test_content_reserve_verwirft_nachtraeglich_geaenderte_kandidaten(self):
+        candidates = []
+        paths = []
+        for i in range(4):
+            slug = f"reserve-{i}"
+            candidates.append({
+                "slug": slug, "ready": True,
+                "sha256": self._write_reserve_draft(slug),
+            })
+            paths.append(self.tmp / "content" / "posts" / slug / "index.md")
+        self._write_reserve_certificate(candidates)
+        paths[0].write_text(paths[0].read_text(encoding="utf-8") + "Changed\n",
+                            encoding="utf-8")
+
+        ok, text = bw.check_content_reserve()
+
+        self.assertFalse(ok)
+        self.assertIn("3/4 gate-fertige", text)
+        self.assertIn("Zertifikat passt nicht mehr", text)
+
+    def test_content_reserve_ignoriert_veraltetes_zertifikat(self):
+        slug = "alter-nachweis"
+        candidates = [{
+            "slug": slug, "ready": True,
+            "sha256": self._write_reserve_draft(slug),
+        }]
+        alt = (NOW - datetime.timedelta(hours=48)).isoformat()
+        self._write_reserve_certificate(candidates, generated_at=alt)
+
+        ok, text = bw.check_content_reserve()
+
+        self.assertFalse(ok)
+        self.assertIn("Zertifikat ungültig", text)
+        self.assertIn("veraltet", text)
 
 
 if __name__ == "__main__":

@@ -713,9 +713,9 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         Themen-Duplikat-Kaskade vom 08.09.2026 (3× 50-30-20-Regel).
       * Themen-Diversität: `_pool_conflicts` verhindert, dass ein Thema als
         KI-Titelvariante ein zweites Mal in den Pool wandert.
-      * Ein erfolgreich gespeicherter Kandidat wird sofort auf used_topics
-        gesetzt, damit der zweite Top-up-Aufruf desselben Laufs ein ANDERES
-        Thema wählt (vorher: gleiches Topic, zweite Titelvariante)."""
+      * Jedes versuchte Thema wird sofort auf used_topics gesetzt. So wählt
+        der nächste begrenzte Versuch ein anderes Thema, auch wenn die drei
+        KI-Antworten am Profi-Gate scheitern."""
     if reserve_target is None:
         try:
             reserve_target = int(os.environ.get("RESERVE_TARGET") or "6")
@@ -783,7 +783,10 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         if not freie:
             print("  ⚠ Reserve-Top-up: Themenpool ohne freie Themen.")
             return 0
-        topic = freie[0]
+        topic = _weighted_choose(freie, _topic_weights)
+        # Auch ein Thema, dessen KI-Antworten alle am Profi-Gate scheitern,
+        # darf in diesem Lauf nicht erneut dieselben Versuche verbrauchen.
+        used_topics.add(id(topic))
         keywords = topic.get("keywords")
         pin = None
         result, info = try_generate(topic, keywords, pin, used_titles,
@@ -812,15 +815,30 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             fh.writelines(lines)
         _hygiene_neuer_artikel(filename)
         used_titles.add(title.lower())
-        # Thema sofort verbrauchen: der zweite Top-up-Aufruf desselben Laufs
-        # muss ein ANDERES Thema wählen (Reparatur 08.09.2026).
-        used_topics.add(id(topic))
         print(f"  🛟 Reserve-Pool aufgefüllt: {slug} (draft, {info}) – "
               f"READY {ready}/{reserve_target}, Kandidat wartet auf Veredelung")
         return 1
     except Exception as exc:  # noqa: BLE001 – Top-up darf nie die Engine brechen
         print(f"  ⚠ Reserve-Top-up fehlgeschlagen (nicht kritisch): {exc}")
         return 0
+
+
+def _reserve_topup_batch(topics, quelle, used_titles, used_topics, batch,
+                         force=None):
+    """Versucht begrenzt mehrere Themen statt am ersten KI-Ausfall anzuhalten.
+
+    Jeder Versuch markiert sein Thema bereits in `_reserve_topup`. So führen
+    weitere Versuche zu anderen Themen; ohne neues Thema wird sofort beendet.
+    """
+    produced = 0
+    for _ in range(max(1, min(batch, 4))):
+        attempted_before = len(used_topics)
+        got = _reserve_topup(topics, quelle, used_titles, used_topics,
+                             force=force)
+        produced += got
+        if got == 0 and len(used_topics) == attempted_before:
+            break
+    return produced
 
 
 def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics,
@@ -1089,7 +1107,6 @@ def main():
         used_titles = g.existing_titles()
         topics = g.load_topics()
         used_topics = set()
-        produced = 0
         # REPARATUR 15.09.2026 (#295): Die Zahl der Produktionsversuche pro
         # Aufruf ist jetzt steuerbar. Die Konvergenz-Stufe
         # (scripts/reserve_converge.py) überschreibt sie mit dem exakten
@@ -1103,14 +1120,8 @@ def main():
             batch = 2
         batch = max(1, min(batch, 4))
         force = os.environ.get("RESERVE_FORCE_TOPUP") == "1"
-        for _ in range(batch):  # bounded API cost; subsequent daily runs continue
-            got = _reserve_topup(topics, "Themenpool", used_titles,
-                                 used_topics, force=force)
-            produced += got
-            if got == 0:
-                # Kein Fortschritt möglich (kein freies Thema, API-Ausfall
-                # oder Schutz aktiv) – kein weiterer API-Aufwand.
-                break
+        produced = _reserve_topup_batch(topics, "Themenpool", used_titles,
+                                        used_topics, batch, force=force)
         import reserve_pool
         count = len(reserve_pool.reserve_drafts())
         write_status(f"Reserve-Produktion: {count} Kandidaten "
