@@ -205,8 +205,8 @@ items:
   date: '2026-09-26'
   time: '17:30'
   scheduled_at: '2026-09-26T17:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: telegram:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:frage:2026-09-26
   channel: telegram
@@ -217,9 +217,9 @@ items:
   date: '2026-09-26'
   time: '18:00'
   scheduled_at: '2026-09-26T18:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: x:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:frage:2026-09-26
   channel: x
   slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
@@ -229,9 +229,9 @@ items:
   date: '2026-09-26'
   time: '19:15'
   scheduled_at: '2026-09-26T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: mastodon:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:vergleich:2026-09-27
   channel: mastodon
   slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
