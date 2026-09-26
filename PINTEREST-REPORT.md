@@ -1,10 +1,10 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-09-26 09:26 UTC · Modus: FIX
+**Stand:** 2026-09-26 18:55 UTC · Modus: FIX
 
-Probleme: 2 · Geheilt: 0
+**Report-Schema:** 2 · **Geprüfte Artikel:** 54
+**Quellfingerabdruck:** `53083b0134e051d6cb1fb3a33787aec973c0c8d160c7884b6802065a384abbbc`
 
-| Code | Artikel | Problem |
-|---|---|---|
-| P11 | 2026-09-24-stromfresser-finden-so-stoppst-du-teure | 6 Affiliate-Links (> 5 – Profi-Limit) |
-| P11 | 2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe | 6 Affiliate-Links (> 5 – Profi-Limit) |
+Probleme: 0 · Geheilt: 0
+
+✅ Alle Pinterest-Signale im Profi-Bereich.

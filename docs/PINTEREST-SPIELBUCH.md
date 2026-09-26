@@ -84,6 +84,10 @@ Nach 48 h Pause + URL-Debugger ohne Klärung:
   05:30 UTC – baut die Site, läuft `pinterest_check.py --fix` (13 Checks),
   committet PINTEREST-REPORT.md, öffnet bei Problemen ein Issue (Label `pinterest`).
 - **Lokal:** `python3 scripts/pinterest_check.py` (Check) / `--fix` (Selbstheilung)
+- **Report-Provenienz:** `PINTEREST-REPORT.md` enthält ab Schema 2 einen
+  Quellfingerabdruck. Der Bot-Watchdog verwirft alte oder ohne Nachweis
+  übernommene Reports, statt daraus einen Phantom-Alarm zu erzeugen (Fix für
+  Issue #390).
 
 ---
 
