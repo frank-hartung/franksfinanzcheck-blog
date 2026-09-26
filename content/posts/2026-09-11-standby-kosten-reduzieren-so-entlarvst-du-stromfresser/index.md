@@ -357,7 +357,7 @@ Wenn du **Standby Kosten reduzieren** willst, brauchst du keine Energiespar-Hyst
 
 Die beste Strategie ist simpel: erst messen, dann bündeln, dann gezielt abschalten. TV-Ecke, Drucker, Konsole, alte Audio-Geräte und Nebenräume sind fast immer die ersten Kandidaten. So sparst du mit wenig Aufwand dort, wo es wirklich zählt.
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stromfresser finden: So stoppst du die Energie-Lecks](../../posts/2026-09-25-stromfresser-finden-so-stoppst-du-die-energie-lecks/) · [Preisgarantie Gas: So schützt du dich vor Preissprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · Stromfresser finden: So stoppst du die Energie-Lecks · [Preisgarantie Gas: So schützt du dich vor Preissprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
 
 ## Häufige Fragen
 
