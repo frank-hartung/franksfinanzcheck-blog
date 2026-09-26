@@ -301,11 +301,13 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
       visible.every((v) => !v.includes('…')), visible.filter((v) => v.includes('…')).join(' | '));
     t.eq('Mini-TOC: sichtbarer Text ≡ voller Überschriftentext',
       JSON.stringify(visible), JSON.stringify(expected));
-    // Beweglich: Kopfzeile ist Griff (Zeiger + Tastatur), Zurücksetzen vorhanden.
+    // Beweglich und privacy-schonend: der Kopf ist der fokussierbare Griff;
+    // Pos1 dockt zurück, ein speichernder Reset-Knopf existiert bewusst nicht.
     const handle = miniToc.querySelector('.ff-mini-toc__head');
     t.ok('Griff der beweglichen Navigation fokussierbar',
       !!handle && handle.getAttribute('tabindex') === '0');
-    t.ok('Zurücksetzen-Knopf vorhanden', !!miniToc.querySelector('.ff-mini-toc__reset'));
+    t.ok('Griff-Affordanz vorhanden', !!miniToc.querySelector('.ff-mini-toc__grip'));
+    t.ok('Kein lokaler Persistenz-Reset im Markup', !miniToc.querySelector('.ff-mini-toc__reset'));
   }
 
   // Regressionsfall 26.09.2026: Der Link wurde durch ein Zwei-Zeilen-Clamp

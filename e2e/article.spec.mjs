@@ -316,6 +316,147 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
       'prefers-reduced-motion: keine spürbare Übergangsdauer auf der Navigation').toBe(true);
   });
 
+  test('Inhaltsverzeichnis oben im Artikel: steht offen und listet JEDEN Abschnitt', async ({ page }) => {
+    // Regression 26.09.2026 (Frank: „das Inhaltsverzeichnis vollständig
+    // anzeigen“): <details class="toc"> rendert seit TocOpen dauerhaft
+    // GEÖFFNET, und es gibt keinen stillen Deckel – jeder H2-/H3-Anker
+    // des Artikels hat einen eigenen Link im Verzeichnis.
+    // (Umlaut-Anker kommen URL-kodiert im href – Browser lösen Fragmente
+    // nach Dekodierung auf, der Vertrag tut es ihnen gleich.)
+    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+    const toc = page.locator('details.toc');
+    await expect(toc).toBeVisible();
+    expect(await toc.evaluate((el) => el.open === true), 'Inhaltsverzeichnis steht offen').toBe(true);
+
+    const vertrag = await page.evaluate(() => {
+      const decode = (wert) => { try { return decodeURIComponent(wert); } catch { return wert; } };
+      const tocEl = document.querySelector('details.toc');
+      const links = new Set(
+        [...tocEl.querySelectorAll('.inner a[href^="#"]')]
+          .map((a) => decode(a.getAttribute('href')))
+      );
+      const koepfe = [...document.querySelectorAll('.post-content h2[id], .post-content h3[id]')];
+      const fehlend = koepfe
+        .filter((h) => !links.has('#' + h.id))
+        .map((h) => '#' + h.id);
+      return { anzahlLinks: links.size, anzahlKoepfe: koepfe.length, fehlend };
+    });
+    expect(vertrag.fehlend, 'jede Artikel-Überschrift hat einen Eintrag im Inhaltsverzeichnis').toEqual([]);
+    expect(vertrag.anzahlLinks, 'kein doppelter oder verwaister Verzeichnis-Link').toBe(vertrag.anzahlKoepfe);
+    expect(vertrag.anzahlKoepfe, 'das Verzeichnis ist nennenswert gefüllt').toBeGreaterThan(3);
+  });
+
+  test('Schwebende Artikel-Navigation ist beweglich: Drag, Tastatur, Pos1-Dock, Fenster-Clamp', async ({ page }) => {
+    // Regression/Premium 26.09.2026 (Frank: „nicht fest stehen, sondern
+    // beweglich“): Die „Im Artikel“-Navigation lässt sich am Griff
+    // verschieben (Maus/Pointer), per Pfeiltasten nudeln (Shift = 64 px),
+    // mit Pos1 an die Standardposition zurückholen – und sie bleibt
+    // dabei IMMER komplett im Fenster.
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+    await page.waitForSelector('.ff-mini-toc', { state: 'attached' });
+    await page.evaluate(() => {
+      const content = document.querySelector('.post-content');
+      window.scrollTo(0, (content ? content.getBoundingClientRect().top + window.scrollY : 400) + 700);
+    });
+    const nav = page.locator('.ff-mini-toc');
+    await expect(nav).toBeVisible();
+    // Erst warten, bis die Einblend-Animation (translateY −10 → 0, 0,3 s)
+    // abgeschlossen ist – sonst schwanken Rect-Messungen um den Restweg
+    // (die Kinematik selbst liest Y transform-frei, s. ff-premium.js).
+    await page.waitForFunction(() => {
+      const b = document.querySelector('.ff-mini-toc');
+      return b && !b.classList.contains('ff-mini-toc--idle') &&
+        /^(none|matrix\(1, 0, 0, 1, 0, 0\))$/.test(getComputedStyle(b).transform);
+    }, { timeout: 4000 });
+
+    const rechtWinkel = () => page.evaluate(() => {
+      const r = document.querySelector('.ff-mini-toc').getBoundingClientRect();
+      return { x: r.x, y: r.y, rechts: r.right, unten: r.bottom, b: innerWidth, h: innerHeight };
+    });
+    const dock = await rechtWinkel();
+
+    // 1) Drag um (-200, +120) – landet millimetergenau dort
+    const kopf = await page.locator('.ff-mini-toc__head').boundingBox();
+    await page.mouse.move(kopf.x + 24, kopf.y + kopf.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(kopf.x + 24 - 200, kopf.y + kopf.height / 2 + 120, { steps: 10 });
+    await page.mouse.up();
+    await page.waitForTimeout(120);
+    const gezogen = await rechtWinkel();
+    expect(Math.abs(gezogen.x - (dock.x - 200)), 'Drag-Versatz X folgt dem Pointer').toBeLessThanOrEqual(4);
+    expect(Math.abs(gezogen.y - (dock.y + 120)), 'Drag-Versatz Y folgt dem Pointer').toBeLessThanOrEqual(4);
+    expect(await nav.evaluate((el) => el.classList.contains('ff-mini-toc--dragging')), 'Drag-Ende räumt Klasse ab').toBe(false);
+
+    // 2) Clamp: weit über den Rand hinaus ziehen – die Box bleibt komplett im Fenster
+    const kopf2 = await page.locator('.ff-mini-toc__head').boundingBox();
+    await page.mouse.move(kopf2.x + 24, kopf2.y + kopf2.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(-600, 4000, { steps: 12 });
+    await page.mouse.up();
+    await page.waitForTimeout(120);
+    const geklemmt = await rechtWinkel();
+    expect(geklemmt.x, 'Box bleibt im linken Fensterrand').toBeGreaterThanOrEqual(7);
+    expect(geklemmt.unten, 'Box bleibt im unteren Fensterrand').toBeLessThanOrEqual(geklemmt.h - 7);
+
+    // 3) Tastatur: Pfeiltaste = 16 px, Shift+Pfeil = 64 px
+    //    (Die Box klemmt unten links – Richtungen mit Reserve wählen,
+    //     denn am Fensterrand bleibt die Box korrekt stehen.)
+    await page.focus('.ff-mini-toc__head');
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(80);
+    const nudge = await rechtWinkel();
+    expect(Math.abs(nudge.x - (geklemmt.x + 16)), 'Pfeiltaste verschiebt um 16 px').toBeLessThanOrEqual(2);
+    await page.keyboard.press('Shift+ArrowUp');
+    await page.waitForTimeout(80);
+    const nudgeShift = await rechtWinkel();
+    expect(Math.abs(nudgeShift.y - (nudge.y - 64)), 'Shift+Pfeil verschiebt um 64 px').toBeLessThanOrEqual(2);
+
+    // 4) Pos1 dockt wieder an der freigegebenen Standardposition an
+    await page.keyboard.press('Home');
+    await page.waitForTimeout(120);
+    const wiederDa = await rechtWinkel();
+    expect(Math.abs(wiederDa.x - dock.x), 'Pos1: Box dockt wieder an der Standardposition an').toBeLessThanOrEqual(2);
+    expect(Math.abs(wiederDa.y - dock.y), 'Pos1: Höhe wieder wie im Stylesheet').toBeLessThanOrEqual(2);
+  });
+
+  test('„Kurz & knapp“ trägt ein animiertes Themen-Signet statt der Glühbirne', async ({ page }) => {
+    // Premium 26.09.2026 (Frank: „Glühbirnen-Symbol gegen eine sinnvolle
+    // themenbezogene Animation austauschen“): Die Antwort-Box zeigt das
+    // per CSS animierte Signet der Themenwelt des Artikels (aria-hidden,
+    // dekorativ). Die alte Lightbulb-Glyphe darf nirgends mehr auftauchen.
+    const articlePath = await newestArticlePath(page);
+    await page.goto(articlePath, { waitUntil: 'domcontentloaded' });
+    const signet = page.locator('.ff-kurzantwort__icon');
+    await expect(signet).toBeVisible();
+    await expect(signet).toHaveClass(/ff-kurzantwort__icon--(strom|wlan|schutz|muenze|spross|auto|antwort)/);
+    await expect(signet).toHaveAttribute('aria-hidden', 'true');
+
+    // Kein Rest der alten Glühbirne im gerenderten Dokument
+    const html = await page.content();
+    expect(html.includes('M12 2a7 7 0 0 0-4 12.7'), 'Glühbirnen-Pfad ist aus dem Markup verschwunden').toBe(false);
+
+    // Animation läuft im normalen Bewegungsprofil wirklich
+    const anim = await page.evaluate(() =>
+      [...document.querySelectorAll('.ff-kurzantwort__icon [class*="ff-kz-"]')]
+        .map((el) => getComputedStyle(el).animationName)
+    );
+    expect(anim.length, 'Signet besitzt animierte Komponenten').toBeGreaterThan(0);
+    expect(anim.every((name) => name !== 'none'), 'jede Signet-Komponente animiert').toBe(true);
+  });
+
+  test('Signet-Animation: bei reduzierter Bewegung steht das Signet ruhig', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const articlePath = await newestArticlePath(page);
+    await page.goto(articlePath, { waitUntil: 'domcontentloaded' });
+    const anim = await page.evaluate(() =>
+      [...document.querySelectorAll('.ff-kurzantwort__icon [class*="ff-kz-"]')]
+        .map((el) => getComputedStyle(el).animationName)
+    );
+    expect(anim.length, 'Signet-Komponenten vorhanden').toBeGreaterThan(0);
+    expect(anim.every((name) => name === 'none'), 'prefers-reduced-motion: Signet ruht').toBe(true);
+  });
+
   test('Vorlese-Toolbar (FF Voice Studio): vorhanden & bedienbar', async ({ page }) => {
     const articlePath = await newestArticlePath(page);
     await page.goto(articlePath);

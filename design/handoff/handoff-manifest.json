@@ -6,7 +6,7 @@
   "sources": {
     "data/design/handoff.yaml": "2c6b86864fdbf40aaae7994547294727dc444ff0122710ff6afc1afcceb79daa",
     "data/design/regelwerk.yaml": "dd8220f62cce4a610bceddd10d193125d427456c6f8b9a89c08ee32d84fe8359",
-    "DESIGN.md": "c7dd78a1b8841e3fb2009ce424491c15dffd44471abb26735d0f607a6f71822c",
+    "DESIGN.md": "7ebfe21623dcfbddf7da6535f1276e497d13e41281163343feed675c052e601e",
     "PRODUCT.md": "8487bc761ca891535fabddabb5c8091c35c2e599ee4991ce7d7e0b87576a8e91",
     "scripts/design_handoff.py": "1d810d17db7d0855432bbb8479e9ed914ac5c2d8330657a91577b2b1073d444f"
   },
