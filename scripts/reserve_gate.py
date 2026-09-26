@@ -105,6 +105,57 @@ def freshness(cert_path: Path) -> tuple[bool, str]:
     return True, f"Zertifikat {alter:.1f} h alt (Grenze {grenze:.0f} h)."
 
 
+def themen_vielfalt(candidates: list[dict]) -> tuple[int, dict]:
+    """Wie viele VERSCHIEDENE Themen stecken in den fertigen Kandidaten?
+
+    Neu am 26.09.2026 (#387): Der Gate zählte Kandidaten, nicht Vorrat. Am
+    Abend des Vorfalls waren 4 von 5 fertigen Kandidaten Varianten von
+    „Stromfresser finden" – rechnerisch fast volles Lager, praktisch drei
+    Artikel. Weil pro Tag nur EINER pro Thema live gehen kann (sonst stuft
+    der Dubletten-Schutz ihn wieder zurück – die fünf Rückläufer), trägt so
+    ein Lager an einem Ausfalltag nicht das, was die Zahl verspricht.
+    Rückgabe: (Anzahl Themen, {Leitbegriff: [slugs]}).
+    """
+    familien: dict[str, list] = {}
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import reserve_topics as rt
+        import reserve_pool as rp
+    except Exception:  # noqa: BLE001 – Kennzahl darf nie blockieren
+        return len(candidates), {}
+    # Gruppiert wird wie im Disponenten: über KOLLISION, nicht über den
+    # alphabetisch ersten Leitbegriff. „Stromfresser finden: … Energiediebe“
+    # und „Stromfresser finden: … Stromrechnung“ teilen sich nur EIN Wort –
+    # eine naive Schlüsselbildung hielte sie für zwei Themen.
+    vertreter: dict[str, str] = {}   # Familienname -> Titel des Ersten
+    bindung: dict[str, list] = {}    # Familienname -> verbindende Begriffe
+    for row in candidates:
+        if not row.get("ready"):
+            continue
+        slug = row.get("slug") or ""
+        index = ROOT / "content" / "posts" / slug / "index.md"
+        try:
+            titel = rp._titel(index.read_text(encoding="utf-8"))
+        except OSError:
+            titel = ""
+        titel = titel or slug
+        treffer = rt.thema_kollision(titel, vertreter)
+        if treffer:
+            familien[treffer[0]].append(slug)
+            # Der Name der Familie ist das Wort, das sie verbindet – nicht
+            # der Zufallsbegriff des zuerst gesehenen Titels („massiv“).
+            bindung.setdefault(treffer[0], []).append(treffer[1])
+        else:
+            name = (sorted(rt.leitbegriffe(titel)) or [slug])[0]
+            vertreter[name] = titel
+            familien[name] = [slug]
+    for name, begriffe in bindung.items():
+        haeufigster = max(set(begriffe), key=begriffe.count)
+        if haeufigster != name and haeufigster not in familien:
+            familien[haeufigster] = familien.pop(name)
+    return len(familien), familien
+
+
 def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
     """Warum ist der Vorrat unter dem Ziel? Ursachenklassen statt Rätselraten.
 
@@ -177,6 +228,7 @@ def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
         "ready": ready, "target": target, "pool": len(candidates),
         "lauf": os.environ.get("GITHUB_RUN_ID", "lokal"),
         "blocker": [c.get("slug") for c in candidates if not c.get("ready")],
+        "themen": themen_vielfalt(candidates)[0],
     }
     try:
         pfad.parent.mkdir(parents=True, exist_ok=True)
@@ -199,6 +251,18 @@ def report(ready: int, target: int, candidates: list[dict]) -> None:
     if ready > 0 and not candidates:
         print("   (Zertifikat ohne Kandidatenliste)")
     print("   Diagnose: RESERVE-FINISH-REPORT.md (Score-Teile je Kandidat/Heiler).")
+    themen, familien = themen_vielfalt(candidates)
+    klumpen = {k: v for k, v in familien.items() if len(v) > 1}
+    if klumpen:
+        print(f"\n   VORRAT-VIELFALT: {ready} fertige Kandidaten, aber nur "
+              f"{themen} verschiedene Themen.")
+        for begriff, slugs in sorted(klumpen.items(),
+                                     key=lambda kv: -len(kv[1])):
+            print(f"   • „{begriff}“: {len(slugs)}× "
+                  f"({', '.join(s[:48] for s in slugs[:3])}…)")
+        print("     Pro Tag kann nur EIN Artikel je Thema live gehen – sonst "
+              "stuft der Dubletten-Schutz ihn zurück. Der Vorrat trägt an "
+              f"einem Ausfalltag also {themen}, nicht {ready} Artikel.")
     ursachen = diagnose(ready, target, candidates)
     if ursachen:
         print("\n   URSACHEN DIESES ENGPASSES:")

@@ -303,6 +303,8 @@ Hohe Stromkosten kommen selten aus dem Nichts. Meist stecken alte Geräte, Dauer
 Wenn du misst statt nur zu raten, findest du die größten Kostentreiber schnell. Mit ein paar klaren Maßnahmen kannst du oft schon spürbar sparen. Und wenn du danach noch den Tarif prüfst, entsteht aus kleinen Änderungen ein echter Haushaltsvorteil.
 
 **Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Heizkosten sparen im Alltag
+**Lesetipp:** [Tierkrankenversicherung für Hund & Katze: Kosten realistisch](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/)
+
 
 ## Häufige Fragen
 

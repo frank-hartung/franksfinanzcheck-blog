@@ -315,6 +315,8 @@ Hohe Stromkosten sind oft kein Rätsel. Meist steckt ein Mix aus alten Geräten,
 Wenn du erst misst und dann die größten Stromfresser angehst, sparst du oft schneller als gedacht. Danach macht ein Tarifvergleich das Paket komplett. So wird aus einem allgemeinen Spartipp ein echter Vorteil für dein Konto.
 
 **Weiterlesen:** [Pillar Sparen](../../pillar/sparen/) · Gasrechnung senken · Wechselservice für Strom und Gas im Check
+**Lesetipp:** [Tierkrankenversicherung für Hund & Katze: Kosten realistisch](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/)
+
 
 ## Häufige Fragen
 

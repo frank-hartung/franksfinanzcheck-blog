@@ -1007,8 +1007,10 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
 
     def setUp(self):
         sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_gate as rg
         import reserve_pool as rp
         self.rp = rp
+        self.rg = rg
 
     def test_dublette_wird_zurueckgestellt(self):
         frisch = {"2026-09-20-gas":
@@ -1021,6 +1023,69 @@ class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
                   "Gasrechnung senken: Dein Strategieplan im Spätsommer"}
         self.assertIsNone(self.rp.sperr_treffer(
             "Reisekrankenversicherung: Worauf du 2026 achten musst", frisch))
+
+    def test_kadenz_schlaegt_vielfalt_wenn_sonst_luecke(self):
+        """Ein Pool aus EINEM Thema muss den Tag trotzdem tragen: lieber ein
+        thematischer Nachbar als eine leere Kadenz – aber nie zwei am
+        selben Tag (das erzeugte die fünf Rückläufer)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            gestern = (dt.date.today() - dt.timedelta(days=1)).isoformat()
+            for name, draft, titel in (
+                    ("live-a", "false", "Stromfresser finden: Die "
+                                        "teuersten Energiediebe"),
+                    ("pool-a", "true", "Stromfresser finden: So senkst du "
+                                       "die Stromrechnung"),
+                    ("pool-b", "true", "Stromfresser finden: So stoppst du "
+                                       "die Energie-Lecks")):
+                d = posts / name
+                d.mkdir(parents=True)
+                extra = "reserve: true\n" if draft == "true" else ""
+                (d / "index.md").write_text(
+                    f'---\ntitle: "{titel}"\ndate: {gestern}T06:00:00Z\n'
+                    f"draft: {draft}\n{extra}---\n\nBody.\n",
+                    encoding="utf-8")
+            with self.rp._als_publikationstag():
+                raus = self.rp.publish_to_min(2, posts_dir=posts,
+                                              validator=lambda i: True)
+        self.assertEqual(len(raus), 1,
+                         "genau ein Artikel: Kadenz gerettet, Dublette "
+                         "am selben Tag vermieden")
+
+    def test_gleiche_thema_am_selben_tag_bleibt_ausgeschlossen(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            heute = dt.date.today().isoformat()
+            for name, draft, titel in (
+                    ("live-gas", "false", "Gasrechnung senken: Dein "
+                                          "Strategieplan"),
+                    ("pool-gas", "true", "Gasrechnung senken: Clevere "
+                                         "Herbst-Vorbereitung")):
+                d = posts / name
+                d.mkdir(parents=True)
+                extra = "reserve: true\n" if draft == "true" else ""
+                (d / "index.md").write_text(
+                    f'---\ntitle: "{titel}"\ndate: {heute}T06:00:00Z\n'
+                    f"draft: {draft}\n{extra}---\n\nBody.\n",
+                    encoding="utf-8")
+            with self.rp._als_publikationstag():
+                raus = self.rp.publish_to_min(2, posts_dir=posts,
+                                              validator=lambda i: True)
+        self.assertEqual(raus, [], "Dublette am selben Tag = Rückläufer "
+                                   "von morgen (#387)")
+
+    def test_vorrat_vielfalt_wird_benannt(self):
+        """6 Varianten EINES Themas sind kein Vorrat von 6."""
+        themen, familien = self.rg.themen_vielfalt([
+            {"slug": "2026-09-26-stromfresser-finden-so-senkst-du-deine-"
+                     "stromrechnung-massiv", "ready": True},
+            {"slug": "2026-09-26-stromfresser-finden-so-stoppst-du-die-"
+                     "energie-lecks", "ready": True},
+            {"slug": "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-"
+                     "das-jahr-2026", "ready": True},
+            {"slug": "egal", "ready": False}])
+        self.assertEqual(themen, 2, familien)
+        self.assertTrue(any(len(v) == 2 for v in familien.values()), familien)
 
     def test_sperre_ist_fail_open(self):
         """Der Notnagel darf nie an seiner eigenen Zusatzprüfung scheitern."""
