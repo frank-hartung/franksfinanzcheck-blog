@@ -1,0 +1,56 @@
+{
+  "_hinweis": "ERZEUGT aus data/design/regelwerk.yaml – nicht von Hand ändern. Neu erzeugen: python3 scripts/design_variant_gate.py --lighthouse-export",
+  "assertions": {
+    "categories:performance": [
+      "error",
+      {
+        "minScore": 0.9
+      }
+    ],
+    "categories:accessibility": [
+      "error",
+      {
+        "minScore": 0.95
+      }
+    ],
+    "categories:seo": [
+      "error",
+      {
+        "minScore": 1.0
+      }
+    ],
+    "categories:best-practices": [
+      "error",
+      {
+        "minScore": 0.95
+      }
+    ],
+    "largest-contentful-paint": [
+      "error",
+      {
+        "maxNumericValue": 2500,
+        "aggregationMethod": "median"
+      }
+    ],
+    "cumulative-layout-shift": [
+      "error",
+      {
+        "maxNumericValue": 0.1,
+        "aggregationMethod": "pessimistic"
+      }
+    ],
+    "total-blocking-time": [
+      "error",
+      {
+        "maxNumericValue": 200,
+        "aggregationMethod": "median"
+      }
+    ],
+    "dom-size": [
+      "error",
+      {
+        "maxNumericValue": 1350
+      }
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+/* ============================================================
+   VARIANTE v-hero-conversion
+   ------------------------------------------------------------
+   Hypothese (data/design/varianten.yaml):
+   Drei optisch gleichwertige Hero-Buttons sind keine Führung,
+   sondern eine Abfrage. Diese Variante gibt „Alle Ratgeber
+   entdecken" sichtbar den Vortritt und stellt die beiden
+   Themen-Einstiege als ruhigere Sekundärwege daneben.
+
+   WAS SIE BEWUSST NICHT TUT
+   · keine neue Farbe (nur vorhandene Tokens)
+   · kein neues Element, kein Markup-Eingriff
+   · keine Größenänderung unter die Tap-Ziel-Grenze (44px)
+   · kein !important – die Basis bleibt jederzeit obenauf,
+     wenn diese Datei nicht geladen wird
+
+   GELADEN NUR BEI: HUGO_PARAMS_DESIGNVARIANTE=v-hero-conversion
+   Status: entwurf – nicht freigegeben, nicht live.
+   ============================================================ */
+
+/* ---------- 1. Anordnung: Primärhandlung bekommt eine eigene Zeile ---- */
+
+.ff-home-ctas {
+  /* row-gap etwas größer als column-gap: die beiden Sekundärwege
+     rücken zusammen und lesen sich als Paar, nicht als Reihe zu dritt. */
+  column-gap: 12px;
+  row-gap: 14px;
+  margin-top: 22px;
+}
+
+.ff-home-ctas .ff-btn-primary {
+  /* Bleibt in der Flex-Zeile, beansprucht aber sichtbar mehr Fläche.
+     11px 22px (Basis) -> 14px 28px: Tap-Fläche wächst auf ca. 48px Höhe. */
+  padding: 14px 28px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 20px rgba(255, 179, 0, 0.44);
+}
+
+.ff-home-ctas .ff-btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(255, 179, 0, 0.5);
+}
+
+/* ---------- 2. Sekundärwege: leiser, aber nicht kleiner als AA ------- */
+
+.ff-home-ctas .ff-btn-secondary,
+.ff-home-ctas .ff-btn-outline {
+  /* 10px 20px hält die Trefferfläche bei ~44px Höhe (DESIGN.md §5),
+     nimmt dem Button aber optisches Gewicht gegenüber dem Primär-CTA. */
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.ff-home-ctas .ff-btn-secondary {
+  /* Weniger Eigenschatten – die Karte soll nicht mit dem CTA konkurrieren. */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ff-home-ctas .ff-btn-outline {
+  /* 2px -> 1px Kontur: ruhiger, Kontrast der Schrift bleibt unberührt. */
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.ff-home-ctas .ff-btn-outline:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- 3. Dark Mode (Pflicht bei jeder Farbentscheidung) -------- */
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-secondary {
+  /* Auf dunklem Grund trägt der weiße Sekundärbutton zu viel Helligkeit
+     in den Hero. Der Schatten wird tiefer, die Fläche bleibt (Kontrast
+     der Schrift ist in der Basis gesetzt und wird nicht angefasst). */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+}
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-outline {
+  border-color: rgba(127, 209, 180, 0.55);
+}
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-outline:hover {
+  border-color: rgba(127, 209, 180, 0.85);
+  background: rgba(127, 209, 180, 0.12);
+}
+
+/* ---------- 4. Mobil: der Primär-CTA über dem Falz ------------------- */
+
+@media (max-width: 480px) {
+  .ff-home-ctas .ff-btn-primary {
+    /* Volle Breite auf dem Telefon: eine Handlung, ein Ziel, kein
+       Zielen mit dem Daumen. */
+    flex: 1 0 100%;
+    padding: 14px 20px;
+  }
+
+  .ff-home-ctas .ff-btn-secondary,
+  .ff-home-ctas .ff-btn-outline {
+    /* Die beiden Sekundärwege teilen sich die zweite Zeile. */
+    flex: 1 1 calc(50% - 6px);
+    padding: 10px 12px;
+    font-size: 0.84rem;
+  }
+}
+
+/* ---------- 5. Reduzierte Bewegung (Pflicht bei Bewegung) ------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Die Basis schaltet Lifts bereits global ab; diese Variante fügt
+     keine neue Bewegung hinzu, erklärt sich aber ausdrücklich – damit
+     die Regel auch dann gilt, wenn jemand hier später eine Animation
+     ergänzt. */
+  .ff-home-ctas .ff-btn-primary,
+  .ff-home-ctas .ff-btn-secondary,
+  .ff-home-ctas .ff-btn-outline {
+    transition: none;
+  }
+}

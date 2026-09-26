@@ -1,0 +1,171 @@
+{
+  "_hinweis": "Messprotokoll der Design-Varianten-Werkbank. Beleg für eine Freigabe in data/design/varianten.yaml. Erzeugt von scripts/design_variant_lab.py --protokoll – nicht von Hand ändern.",
+  "variante": "v-hero-conversion",
+  "erstellt": "2026-09-26T11:41:20Z",
+  "werkzeuge": {
+    "hugo": "v0.164.0-ce2470e7012b5ab5fc4e10ebe4027e9f8d9e00dc+extended+withdeploy",
+    "lighthouse": "13.5.0"
+  },
+  "tiers": {
+    "statisch": {
+      "status": "ok",
+      "gemessen": "2026-09-26T11:40:26Z",
+      "stichprobe": [
+        {
+          "seite": "/",
+          "h1": 1,
+          "bytes": 191698
+        },
+        {
+          "seite": "/posts/",
+          "h1": 1,
+          "bytes": 186237
+        },
+        {
+          "seite": "/pillar/",
+          "h1": 1,
+          "bytes": 175527
+        },
+        {
+          "seite": "/2026-09-21-tierkrankenversicherung-hund-katze-kosten/",
+          "h1": 1,
+          "bytes": 215084
+        },
+        {
+          "seite": "/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/",
+          "h1": 1,
+          "bytes": 211855
+        },
+        {
+          "seite": "/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/",
+          "h1": 1,
+          "bytes": 214226
+        }
+      ],
+      "werte": {
+        "seiten_gesamt": 221,
+        "dom_kinder_max": 50,
+        "dom_head_kinder_max": 50,
+        "dom_tiefe_max": 13,
+        "dom_elemente_max": 1047,
+        "h1_abweichungen": 0,
+        "canonical_fehlt": 0,
+        "schema_typen": [
+          "Answer",
+          "Article",
+          "BreadcrumbList",
+          "CollectionPage",
+          "FAQPage",
+          "ImageObject",
+          "ItemList",
+          "ListItem",
+          "Organization",
+          "Person",
+          "Question",
+          "SpeakableSpecification",
+          "WebPage",
+          "WebSite"
+        ],
+        "interne_links": 67,
+        "bilder_ohne_masse": 0,
+        "alt_luecken": 0,
+        "affiliate_rel_fehler": 0,
+        "seiten_gewicht_bytes_max": 215084,
+        "stylesheet_bytes": 131193,
+        "cta_anzahl": 3,
+        "cta_ohne_umami": 0,
+        "pflicht_bausteine_fehlen": [],
+        "newsletter_einstieg": true,
+        "variante_im_markup": true,
+        "schema_typen_fehlen": []
+      }
+    },
+    "gerendert": {
+      "status": "ok",
+      "gemessen": "2026-09-26T11:40:54Z",
+      "werte": {
+        "kontrast_min": 7.53,
+        "kontraste_hell": {
+          "fliesstext": 8.2,
+          "cta_primaer": 7.53,
+          "cta_sekundaer": 8.2,
+          "cta_outline": 8.2,
+          "trust": 8.2
+        },
+        "kontraste_dunkel": {
+          "fliesstext": 8.2,
+          "cta_primaer": 7.53,
+          "cta_sekundaer": 8.2,
+          "cta_outline": 8.2,
+          "trust": 8.2
+        },
+        "tap_min_px": 26.4,
+        "tap_unter_24": 0,
+        "tap_unter_44": 15,
+        "tap_kleinstes": "A.ff-consent-banner__link",
+        "fokusring_sichtbar": true,
+        "fokus_outline": "3px solid rgb(255, 179, 0)",
+        "cls": 0,
+        "lcp_ms": 476
+      }
+    },
+    "lighthouse": {
+      "status": "ok",
+      "gemessen": "2026-09-26T11:41:14Z",
+      "werte": {
+        "profile": {
+          "mobil": {
+            "formFactor": "mobile",
+            "cpu_faktor": 4,
+            "netz_kbps": 1638.4,
+            "benchmark_index": 2286,
+            "lighthouse": {
+              "performance": 0.99,
+              "accessibility": 0.96,
+              "seo": 1,
+              "best-practices": 0.96
+            },
+            "tbt_ms": 105,
+            "lcp_ms": 1774,
+            "fcp_ms": 982,
+            "cls": 0,
+            "ungenutztes_css_kb": 15
+          },
+          "desktop": {
+            "formFactor": "desktop",
+            "cpu_faktor": 1,
+            "netz_kbps": 10240,
+            "benchmark_index": 2242,
+            "lighthouse": {
+              "performance": 1,
+              "accessibility": 0.96,
+              "seo": 1,
+              "best-practices": 0.96
+            },
+            "tbt_ms": 0,
+            "lcp_ms": 545,
+            "fcp_ms": 338,
+            "cls": 0,
+            "ungenutztes_css_kb": 16
+          }
+        },
+        "formFactor": "mobile",
+        "cpu_faktor": 4,
+        "netz_kbps": 1638.4,
+        "benchmark_index": 2286,
+        "lighthouse": {
+          "performance": 0.99,
+          "accessibility": 0.96,
+          "seo": 1,
+          "best-practices": 0.96
+        },
+        "tbt_ms": 105,
+        "lcp_ms": 1774,
+        "fcp_ms": 982,
+        "cls": 0,
+        "ungenutztes_css_kb": 15,
+        "profil_massgeblich": "mobil"
+      }
+    }
+  }
+}

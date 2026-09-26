@@ -230,6 +230,20 @@ jobs:
       - name: Py-Abhängigkeiten für Gate-Chain
         run: python3 -m pip install -q pyyaml pillow pillow-avif-plugin 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml pillow pillow-avif-plugin
 
+      # ---------------------------------------------------------------
+      # PRODUKTIONSWACHE DESIGN-VARIANTEN (26.09.2026)
+      # Muss VOR dem Build stehen: Sie beantwortet die Frage, ob die in
+      # hugo.toml aktivierte Design-Variante überhaupt ausgeliefert
+      # werden darf – freigegeben, unterschrieben, deckungsgleich mit
+      # dem Register (data/design/varianten.yaml).
+      # Ohne Variante (Normalfall) ist der Schritt eine Nulloperation.
+      # Fail-closed: Ein Verstoß bricht den Deploy ab, statt ein
+      # unfreigegebenes Design live zu stellen.
+      # Runbook: docs/ANLEITUNG-DESIGN-VARIANTEN.md
+      # ---------------------------------------------------------------
+      - name: Design-Varianten – Produktionswache (fail-closed)
+        run: python3 scripts/design_variant_gate.py --produktionswache
+
       # Die alte R9-Bestandsprüfung war nur ein Report (Exit 0), neue
       # Artikel-Gates übersprangen _index.md. Navigation immer hart prüfen.
       - name: Themenwelten – Quellvertrag (sechs Themen, saubere Texte)

@@ -13,7 +13,15 @@
     "seo:check": "hugo --minify --cleanDestinationDir && python3 scripts/seo_cockpit.py --strict",
     "seo:serve": "python3 -m http.server 4174 --bind 127.0.0.1 --directory .cache/seo-cockpit",
     "test:seo": "python3 -m unittest discover -s scripts/tests -p \"test_seo_cockpit.py\" && node --test tools/seo-cockpit/app.test.cjs",
-    "test:seo:browser": "node --test tools/seo-cockpit/browser.test.mjs"
+    "test:seo:browser": "node --test tools/seo-cockpit/browser.test.mjs",
+    "design:liste": "python3 scripts/design_variant_lab.py --liste",
+    "design:gate": "python3 scripts/design_variant_gate.py",
+    "design:wache": "python3 scripts/design_variant_gate.py --produktionswache",
+    "design:lauf": "python3 scripts/design_variant_lab.py --lauf",
+    "design:messen": "node e2e/variant-metrics.mjs --variante",
+    "design:lighthouse": "python3 scripts/design_variant_gate.py --lighthouse-export && lhci autorun",
+    "design:briefing": "python3 scripts/design_reach_briefing.py",
+    "test:design": "python3 -m unittest scripts.tests.test_design_varianten"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0"

@@ -139,3 +139,38 @@ node e2e/design-shots.mjs   # Screenshots Desktop+Mobile für Reviews
 
 CI: `.github/workflows/e2e.yml` (PRs + dienstags 07:00 MESZ), Report als
 Artifact.
+
+## 9. Varianten-Governance (seit 26.09.2026)
+
+Dieses Design-System wird **nicht** durch Varianten ersetzt – es wird
+durch sie erprobt. Eine KI darf Layoutvarianten entwerfen und Messdaten
+auswerten; austauschen darf sie nichts. Der Rahmen dafür ist die
+Design-Varianten-Werkbank.
+
+**Die Regeln dieser Datei sind dort maschinenlesbar gespiegelt:**
+`data/design/regelwerk.yaml` enthält die Token-Listen aus §1, die
+Radius-/Schatten-/Easing-Skalen aus §4/§6, die Kontrast- und
+Tap-Schwellen aus §1/§5 sowie die Verbote aus §7 als geprüfte Muster.
+Ändert sich hier eine Farbe, gehört sie dort hinein – sonst weist das
+Gate sie als „nicht in den Marken-Tokens" zurück.
+
+| Was | Wo |
+|---|---|
+| Varianten-Stylesheet | `assets/css/varianten/<id>.css` (**nicht** in `extended/` – das wird immer ausgeliefert) |
+| Register mit Hypothese & Freigabe | `data/design/varianten.yaml` |
+| Schalter | `HUGO_PARAMS_DESIGNVARIANTE=<id>` → `layouts/_partials/design_variante.html` |
+| Bewertung | `python3 scripts/design_variant_gate.py` |
+
+**Harte Zusagen (getestet in `scripts/tests/test_design_varianten.py`):**
+
+- Ohne Parameter erzeugt der Produktionsbau **kein Byte** aus
+  `assets/css/varianten/` – geprüft von `e2e/design-variante.spec.mjs`.
+- Eine Variante geht nur live mit **menschlicher Unterschrift** plus
+  **drei** vorliegenden Messebenen (statisch, gerendert, Lighthouse).
+- Was schon die Basis reißt, wird der Variante **nicht** angelastet
+  (Bestandsbefunde sind P3 auf `basis`).
+- Varianten-CSS ohne `!important`: Es liegt ohnehin nach der Basis im
+  `<head>` und bleibt so durch Weglassen rückabwickelbar.
+
+Runbook mit dem vollständigen Ablauf:
+[`docs/ANLEITUNG-DESIGN-VARIANTEN.md`](docs/ANLEITUNG-DESIGN-VARIANTEN.md)

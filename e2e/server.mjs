@@ -21,10 +21,16 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const BASE = path.resolve(__dirname, '..', 'public');
+// E2E_ROOT (26.09.2026, Design-Varianten-Werkbank): Die Werkbank baut jede
+// Variante nach .cache/design-varianten/<id>/public und muss GENAU diesen
+// Baum ausliefern. Ein zweiter, weniger gehärteter Server dafür wäre die
+// schlechtere Lösung – Pfad-Traversal-Schutz, 404-Verhalten und /healthz
+// gibt es hier schon. Ohne die Variable bleibt alles wie bisher.
+const BASE = path.resolve(process.env.E2E_ROOT || path.join(__dirname, '..', 'public'));
 const PORT = Number(process.env.E2E_PORT || 4173);
 
 if (!fs.existsSync(path.join(BASE, 'index.html'))) {
@@ -58,22 +64,77 @@ const MIME = {
   '.webmanifest': 'application/manifest+json',
 };
 
+// ------------------------------------------------------------
+//  TEXT-KOMPRESSION – wie GitHub Pages, sonst misst niemand die
+//  Produktion (26.09.2026, Design-Varianten-Werkbank)
+//
+//  Dieser Server lieferte Text unkomprimiert aus. GitHub Pages tut das
+//  nicht: Dort gehen HTML/CSS/JS/SVG/XML mit gzip bzw. brotli über die
+//  Leitung. Der Unterschied ist bei diesem Blog nicht akademisch – die
+//  Startseite ist ausgeliefert 190 KB groß, komprimiert ein Bruchteil
+//  davon. Auf Lighthouses simuliertem Mobilfunk (1638 kbps ≈ 205 KB/s)
+//  entstanden dadurch rund 0,7 s Ladezeit, die es in Produktion nie
+//  gab – und genau diese Sekunde tauchte als „LCP-Budget gerissen" im
+//  Gate auf.
+//
+//  Eine Messumgebung, die pessimistischer ist als die Wirklichkeit,
+//  erzeugt Befunde, die niemand beheben kann. Deshalb komprimiert der
+//  Test-Server jetzt dieselben Typen wie Pages – weiterhin ohne jede
+//  Abhängigkeit (node:zlib ist eingebaut).
+// ------------------------------------------------------------
+const KOMPRIMIERBAR = /\.(html|css|js|mjs|json|xml|txt|svg|webmanifest)$/i;
+
+function kodierungWaehlen(acceptEncoding = '') {
+  const a = String(acceptEncoding).toLowerCase();
+  if (a.includes('br')) return 'br';
+  if (a.includes('gzip')) return 'gzip';
+  return null;
+}
+
 const server = http.createServer((req, res) => {
   const send = (status, file, extraHeaders = {}) => {
     const type = MIME[path.extname(file)] || 'application/octet-stream';
     // HTML/Feed nie cachen (Rebuilds sofort sichtbar), Assets 1 h.
     const cacheable = /\.(avif|webp|jpe?g|png|svg|woff2?|ico|mp3)$/i.test(file);
-    res.writeHead(status, {
+    const kopf = {
       'Content-Type': type,
       'Cache-Control': cacheable ? 'public, max-age=3600' : 'no-store',
       ...extraHeaders,
-    });
-    fs.createReadStream(file)
-      .on('error', () => {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('Serverfehler beim Lesen der Datei');
-      })
-      .pipe(res);
+    };
+
+    const kodierung = KOMPRIMIERBAR.test(file)
+      ? kodierungWaehlen(req.headers['accept-encoding'])
+      : null;
+
+    if (!kodierung) {
+      res.writeHead(status, kopf);
+      fs.createReadStream(file)
+        .on('error', () => {
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('Serverfehler beim Lesen der Datei');
+        })
+        .pipe(res);
+      return;
+    }
+
+    // Synchron ist hier richtig: Es sind Testdateien im KB-Bereich, und
+    // ein Stream-Pipeline-Fehler wäre schwerer zu diagnostizieren als
+    // ein paar Millisekunden Blockade.
+    try {
+      const roh = fs.readFileSync(file);
+      const gepackt = kodierung === 'br' ? zlib.brotliCompressSync(roh)
+                                         : zlib.gzipSync(roh);
+      res.writeHead(status, {
+        ...kopf,
+        'Content-Encoding': kodierung,
+        'Content-Length': gepackt.length,
+        Vary: 'Accept-Encoding',
+      });
+      res.end(gepackt);
+    } catch {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Serverfehler beim Komprimieren der Datei');
+    }
   };
 
   const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);

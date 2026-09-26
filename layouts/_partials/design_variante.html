@@ -1,0 +1,94 @@
+{{- /* ============================================================
+    DESIGN-VARIANTE – der einzige Schalter, der eine Layoutvariante
+    scharf schaltet. (Rollout 26.09.2026)
+    Runbook: docs/ANLEITUNG-DESIGN-VARIANTEN.md
+
+    WAS DIESES PARTIAL TUT
+    ----------------------
+    Es lädt genau dann ein zusätzliches Stylesheet, wenn der Parameter
+    `designVariante` gesetzt ist UND die ID im kuratierten Register
+    data/design/varianten.yaml steht. Ohne Parameter erzeugt es
+    KEIN EINZIGES BYTE – der Produktionsbau ist damit bitgleich zu
+    einem Bau ohne diese Datei.
+
+        HUGO_PARAMS_DESIGNVARIANTE=v-hero-conversion hugo
+
+    WARUM INLINE UND NICHT <link>
+    -----------------------------
+    head.html bettet das Haupt-Stylesheet bewusst inline ein (CLS-Fix,
+    kein FOUC). Ein nachgeladenes <link> für die Variante käme NACH dem
+    ersten Paint an und würde genau den Body-Shift erzeugen, den der
+    Blog dort abgestellt hat – die Messung würde dann die Ladeart
+    bewerten statt das Layout. Deshalb: derselbe Weg wie die Basis,
+    ein <style>-Element, exakt ein zusätzliches <head>-Kind.
+
+    WARUM ES HART ABBRICHT
+    ----------------------
+    Ein Tippfehler in der ID darf nicht zu einem Build führen, der
+    „irgendwie normal aussieht“ – dann würde man eine Basis vermessen
+    und sie für eine Variante halten. Unbekannte ID, fehlende
+    CSS-Datei oder ein Register ohne Eintrag sind deshalb Build-Fehler.
+
+    DIE data/-LANDMINE (gilt auch hier)
+    -----------------------------------
+    Das Register wird über `design_varianten_data.html` gelesen, NICHT
+    über site.Data/hugo.Data. Die erste Fassung tat Letzteres und hat
+    den Varianten-Build am 26.09.2026 zum Stillstand gebracht: Hugo
+    parst dann den ganzen data/-Baum, stolpert über die *.jsonl-
+    Protokolle, und der Build lief 300 s bei 0 % CPU ins Nichts,
+    während die errorf-Zweige gleichzeitig feuerten. Die Nachbarn
+    (saisons_data.html, affiliate_ziele_data.html) haben denselben
+    Weg schon 2026 dokumentiert – hier steht er zum dritten Mal, weil
+    genau diese Abkürzung so verführerisch aussieht.
+
+    DER SCHALTER IST NICHT DIE FREIGABE
+    -----------------------------------
+    Dieses Partial prüft NICHT, ob ein Mensch die Variante freigegeben
+    hat – das kann ein Template nicht seriös (kein Zugriff auf Fristen,
+    Messungen, Signaturen). Die Freigabe erzwingt
+    `scripts/design_variant_gate.py --produktionswache`, das im Deploy
+    läuft, bevor gebaut wird.
+============================================================ */ -}}
+
+{{- $id := trim (site.Params.designVariante | default "") " " -}}
+
+{{- with $id -}}
+  {{- $register := partialCached "design_varianten_data.html" "design-varianten" -}}
+  {{- $eintraege := $register.varianten | default slice -}}
+
+  {{- if not $eintraege -}}
+    {{- errorf "Design-Variante %q angefordert, aber data/design/varianten.yaml fehlt, ist leer oder hat keinen `varianten:`-Block. Ohne Register gibt es keine gültige Variante." $id -}}
+  {{- end -}}
+
+  {{- $treffer := where $eintraege "id" $id -}}
+
+  {{- if not $treffer -}}
+    {{- errorf "Design-Variante %q steht nicht in data/design/varianten.yaml. Bekannte IDs: %s" $id (delimit (apply $eintraege "index" "." "id") ", ") -}}
+  {{- end -}}
+
+  {{- $variante := index $treffer 0 -}}
+  {{- $cssPfad := trim ($variante.css | default "") " " -}}
+
+  {{- if not $cssPfad -}}
+    {{- errorf "Design-Variante %q hat kein `css:` im Register – das ist die Kontrollgruppe (Basis) und kann nicht als Variante gebaut werden." $id -}}
+  {{- end -}}
+
+  {{- $quelle := resources.Get $cssPfad -}}
+
+  {{- if not $quelle -}}
+    {{- errorf "Design-Variante %q verweist auf assets/%s – die Datei existiert nicht." $id $cssPfad -}}
+  {{- end -}}
+
+  {{- $status := $variante.status | default "unbekannt" -}}
+
+  {{- /* Ein Bau außerhalb von `freigegeben`/`live` ist der Normalfall in der
+         Werkbank – aber er gehört ins Log, damit niemand einen Entwurfsbau
+         versehentlich deployt. Dank partialCached genau EINE Zeile pro Bau,
+         nicht eine pro Seite. */ -}}
+  {{- if not (in (slice "freigegeben" "live") $status) -}}
+    {{- warnf "Design-Variante %q wird gebaut, Status ist aber %q (nicht freigegeben). Dieser Bau gehört in die Werkbank, nicht auf den Server." $id $status -}}
+  {{- end -}}
+
+  {{- $css := $quelle | resources.Minify -}}
+<style data-ff-variante="{{ $id }}" data-ff-variante-status="{{ $status }}">{{ $css.Content | safeCSS }}</style>
+{{- end -}}

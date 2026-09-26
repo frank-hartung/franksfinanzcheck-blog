@@ -24,6 +24,12 @@ Python-Gates in `scripts/`, ausführliche Zustands-Reports im Root.
    Aktualisierung: `npx skills update` (Quellen in `skills-lock.json`).
 2. **PRODUCT.md und DESIGN.md lesen, bevor eine Farbe geändert wird.**
    Sie enthalten die Marken-Tokens, Anti-References und harten Gates.
+   **Layout-Umbauten gehören in eine Variante, nicht in die Basis**
+   (seit 26.09.2026): `assets/css/varianten/<id>.css` + Eintrag in
+   `data/design/varianten.yaml`, dann messen und einem Menschen zur
+   Freigabe vorlegen. Direkt in `assets/css/extended/` zu schreiben,
+   heißt: ohne Messung und ohne Unterschrift deployen.
+   Runbook: `docs/ANLEITUNG-DESIGN-VARIANTEN.md`.
 3. **Dark Mode mitdenken**: `defaultTheme: auto` → jede Farbe braucht eine
    `:root[data-theme="dark"]`-Variante. Kontraste messen:
    `node e2e/design-metrics.mjs` (liefert hell+dunkel als JSON).
@@ -43,6 +49,13 @@ python3 scripts/dom_audit.py --top 15 # DOM-Budget jeder Seite (Kinder/Head/Tief
 node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_PATH) – siehe docs/LAYOUT-AUTOMATISIERUNG.md
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
+
+# Design-Varianten-Werkbank (26.09.2026) – Details: docs/ANLEITUNG-DESIGN-VARIANTEN.md
+python3 scripts/design_variant_gate.py               # Marke + Messvertrag + Freigabe
+python3 scripts/design_variant_gate.py --produktionswache   # läuft im Deploy VOR dem Build
+python3 scripts/design_variant_lab.py --lauf <id>    # baut Basis+Variante, misst statisch
+node e2e/variant-metrics.mjs --variante <id>         # Browser-Messung + Lighthouse
+python3 scripts/design_reach_briefing.py             # Agent-Reach-Signale → Hypothesen
 ```
 
 E2E-Architektur (Details in `e2e/`-Datei-Köpfen): zero-dependency

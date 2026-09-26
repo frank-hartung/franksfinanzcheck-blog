@@ -257,3 +257,19 @@
 {{- if and (or (eq .Section "posts") (eq .Section "pillar")) (eq .Kind "page") -}}
 {{- partial "schema_article.html" . -}}
 {{- end -}}
+
+{{- /* ---------- Design-Variante (Werkbank, 26.09.2026) ----------
+       MUSS der letzte Block im <head> sein: Das Varianten-Stylesheet
+       gewinnt gegen die Basis nur, wenn es NACH ihr steht (gleiche
+       Spezifität, kein !important – so bleibt die Variante jederzeit
+       durch Weglassen rückabwickelbar).
+       Ohne site.Params.designVariante erzeugt das Partial nichts.
+
+       partialCached (nicht partial!): Die Ausgabe hängt ausschließlich
+       von site.Params und site.Data ab, nie von der einzelnen Seite.
+       Ohne Cache lief der Registerabgleich samt Minify auf JEDER der
+       ~400 Seiten – gemessen 1,6 s → 90 s Bauzeit. Das ist kein
+       Schönheitsfehler: Ein Werkzeug, dessen Messlauf eine Minute
+       kostet, wird nicht benutzt.
+       Runbook: docs/ANLEITUNG-DESIGN-VARIANTEN.md */ -}}
+{{- partialCached "design_variante.html" "design-variante" -}}
