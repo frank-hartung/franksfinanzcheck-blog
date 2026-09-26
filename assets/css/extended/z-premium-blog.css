@@ -1136,6 +1136,24 @@ details:not(.toc)[open] > summary::before {
   height: 21px;
 }
 
+/* Inline-Signet für redaktionelle Schnell-Tipps: gleiche Themenanimation,
+   dezenter gesetzt als die Kurzantwort-Medaille. */
+.ff-article-tip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.42em;
+  height: 1.42em;
+  margin-right: .18em;
+  color: var(--ff-emerald);
+  vertical-align: -.28em;
+}
+
+.ff-article-tip-icon .ff-kurzantwort__icon {
+  width: 1.25em;
+  height: 1.25em;
+}
+
 .ff-kurzantwort__eyebrow {
   color: var(--ff-emerald);
   font-size: .74rem;
