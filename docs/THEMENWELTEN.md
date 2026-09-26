@@ -1,6 +1,6 @@
 # Themenwelten: Umsetzung, Pflege und Schutz vor Rückfällen
 
-Stand: 11.09.2026 · betrifft `/posts/` und die gemeinsame Themen-Navigation.
+Stand: 26.09.2026 · betrifft `/posts/` und die gemeinsame Themen-Navigation.
 
 ## Befund und Ursache
 
@@ -97,6 +97,16 @@ Unterverzeichnis-Builds. Sie verwendet das vorhandene Browser-Lockfile unter
 `tools/ff-voice-browser/`. Die Tests sperren externe Netzwerkdienste und
 überspringen einen fehlenden Browser nicht still. Browserabhängigkeiten sind
 nur Testwerkzeuge, kein Bestandteil der ausgelieferten Website.
+
+### Startseiten-Breitenvertrag
+
+Der Chromium-Test prüft die Breite von `main` gegen die tatsächlich
+markierte Design-Variante: Die Basis bleibt bei höchstens **800 px**; die
+freigegebene und live geschaltete Variante `v-hero-conversion` darf die
+bewusste **1024-px-Bühne** der Startseite nutzen. Eine unbekannte Variante
+hat keinen impliziten Grenzwert und lässt den Test fehlschlagen. So schützt
+der Guardrail weiterhin vor unbeabsichtigter Verbreiterung, ohne das
+freigegebene Hero-Layout zurückzunehmen.
 
 ## Lokal prüfen
 
