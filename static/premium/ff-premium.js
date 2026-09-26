@@ -357,7 +357,13 @@
     if (headings.length < 3) return;
 
     var nav = doc.createElement('nav');
-    nav.className = 'ff-mini-toc';
+    // Start im Ruhzustand (ff-mini-toc--idle): Die Navigation blendet sich
+    // erst ein, wenn der Lesende im Artikelkörper angekommen ist – der
+    // Newsletter-Kopf über dem Artikel bleibt vollständig frei (Befund
+    // 26.09.2026: die schwebende Box überlappte den 1024 px breiten Kopf-
+    // Streifen samt „Newsletter abonnieren“-Knopf um 104 px). Ohne JS wird
+    // die Navigation gar nicht erst erzeugt → kein no-JS-Sonderfall.
+    nav.className = 'ff-mini-toc ff-mini-toc--idle';
     nav.setAttribute('aria-label', 'Artikel-Navigation');
     if (headings.length > 9) nav.classList.add('ff-mini-toc--long');
 
@@ -424,14 +430,79 @@
     });
 
     doc.body.appendChild(nav);
-    setupMiniTocSpy(nav, list, headings, links, posEl);
+    setupMiniTocSpy(nav, list, headings, links, posEl, content);
   }
 
   /** Lesemarke, Zähler, Fortschritt und Selbstnachführung der Liste. */
-  function setupMiniTocSpy(nav, list, headings, links, posEl) {
+  function setupMiniTocSpy(nav, list, headings, links, posEl, content) {
     var offsets = [];
     var activeIndex = -1;
     var ticking = false;
+
+    /* ------------------------------------------------------------
+       LESEFENSTER (Reparatur 26.09.2026, „verdeckt“-Meldung)
+       Die schwebende Navigation darf NIE etwas überdecken:
+       · Sie erscheint erst, wenn der Artikelkörper die obere Zone
+         erreicht hat (Newsletter-Kopf, Titel, Cover bleiben frei).
+       · Sie zieht sich zurück, bevor der Seitenfuß (Footer,
+         Pinterest-/Newsletter-Block) die Zone betritt.
+       · Sie weicht dem Consent-Banner aus (kurze Viewports).
+       Geometrie wird NUR in measure() gelesen (kein Layout-Thrashing
+       im Scroll-Pfad); im Scroll-Frame ist alles reine Arithmetik.
+       ------------------------------------------------------------ */
+    var IDLE_CLASS = 'ff-mini-toc--idle';
+    var EDGE_CUSHION = 24;
+    var zoneTop = 0;          // Viewport-Oberkante der Box (fix)
+    var zoneHeight = 0;       // Höhe ohne Transform (offsetHeight)
+    var contentTop = Infinity;   // Dokument-Kante Artikelkörper
+    var exitTop = Infinity;      // Dokument-Kante Seitenfuß
+    var consentBanner = doc.getElementById('ff-consent-banner');
+    var consentTop = Infinity;   // Viewport-Kante des Banners (fix, gecacht)
+    var idle = true;
+
+    function measureWindow() {
+      // Position:fixed → top aus dem Stylesheet ist die Viewport-Kante.
+      // offsetHeight bleibt von transform:translateY unberührt.
+      zoneTop = parseFloat(win.getComputedStyle(nav).top) || 0;
+      zoneHeight = nav.offsetHeight || 0;
+      var pageY = win.pageYOffset || root.scrollTop || 0;
+      if (content) {
+        contentTop = content.getBoundingClientRect().top + pageY;
+      }
+      // Erster Vollbreiten-Block am Seitenende, der die Zone von unten
+      // betreten könnte. Alles Spalteninnere (max 768 px) kann die Box
+      // geometrisch nicht erreichen – der Fuß-Zone reicht die erste Kante.
+      exitTop = Infinity;
+      qsa('footer.footer, .newsletter-footer.ff-nl-strip:not(.ff-nl-top), .pinterest-footer, .ff-consent-wrap').forEach(function (el) {
+        var top = el.getBoundingClientRect().top + pageY;
+        if (top && top < exitTop) exitTop = top;
+      });
+      // Consent-Banner: fixed → Kante nur in der Messphase lesen, im
+      // Scroll-Pfad zählt reine Arithmetik (kein Forced Reflow).
+      consentTop = Infinity;
+      if (consentBanner && consentBanner.getBoundingClientRect().height > 0) {
+        consentTop = consentBanner.getBoundingClientRect().top;
+      }
+    }
+
+    /** Consent-Banner sichtbar UND ragt in die Box-Zone? (kurze Viewports) */
+    function consentBlocks() {
+      if (!consentBanner || consentTop === Infinity) return false;
+      if (root.classList.contains('ff-consent-set')) return false;
+      if (consentBanner.style.display === 'none') return false;
+      return consentTop < zoneTop + zoneHeight + 8;
+    }
+
+    /** Sichtbarkeit aus reiner Arithmetik (kein Geometrie-Lesen). */
+    function updateWindow() {
+      var pageY = win.pageYOffset || root.scrollTop || 0;
+      var inArticle = pageY + zoneTop + EDGE_CUSHION >= contentTop;
+      var beforeExit = pageY + zoneTop + zoneHeight + EDGE_CUSHION <= exitTop;
+      var show = inArticle && beforeExit && !consentBlocks();
+      if (show === !idle) return;
+      idle = !show;
+      nav.classList.toggle(IDLE_CLASS, idle);
+    }
 
     function measure() {
       var pageY = win.pageYOffset || root.scrollTop || 0;
@@ -469,6 +540,7 @@
       }
       // Am Seitenende gehört die Marke auf den letzten Abschnitt.
       if (pageY + win.innerHeight >= root.scrollHeight - 8) index = offsets.length - 1;
+      updateWindow();
       if (index === activeIndex) return;
       activeIndex = index;
       for (var j = 0; j < links.length; j++) {
@@ -478,7 +550,9 @@
       }
       posEl.textContent = String(index + 1);
       nav.style.setProperty('--ff-toc-progress', ((index + 1) / links.length).toFixed(4));
-      keepVisible(links[index]);
+      // Selbstnachführung nur im sichtbaren Zustand – im Ruhzustand würde
+      // smooth-scroll im verborgenen Listen-Container nur Rechenzeit kosten.
+      if (!idle) keepVisible(links[index]);
     }
 
     function onScroll() {
@@ -492,11 +566,13 @@
 
     function remeasure() {
       measure();
+      measureWindow();
       activeIndex = -1;
       update();
     }
 
     measure();
+    measureWindow();
     update();
     win.addEventListener('scroll', onScroll, { passive: true });
     win.addEventListener('resize', remeasure, { passive: true });

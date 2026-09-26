@@ -424,6 +424,19 @@ h3:hover .ff-heading-copy,
    Geometrie: Inhaltsspalte = var(--main-width) + 2·var(--gap)
    = 768 px, zentriert. Die Navigation sitzt IMMER 24 px rechts
    neben der Textspalte und wandert nicht ins Layout hinein.
+
+   Reparatur 26.09.2026 (2. Befund, „verdeckt“-Meldung): Der
+   Newsletter-Kopf über dem Artikel ist 1024 px breit – 128 px
+   breiter als die Textspalte. Die schwebende Box saß deshalb auf
+   jedem Desktop ab 1280 px mit 104 px AUF dem Streifenende und
+   verdeckte rund ein Drittel des gelben „Newsletter abonnieren“-
+   Knopfs. Die Navigation gehört zur LESEPHASE, nicht zur
+   Landung: Sie startet im Ruhzustand (ff-mini-toc--idle, nur per
+   JS gesetzt) und blendet sich erst ein, wenn der Artikelkörper
+   die obere Zone erreicht – und zieht sich zurück, bevor der
+   Seitenfuß oder das Consent-Banner die Zone betritt. Der
+   Newsletter-Kopf (und jede künftige Vollbreiten-Leiste) bleibt
+   dadurch geometrisch frei; ohne JS existiert die Box gar nicht.
    ============================================================ */
 .ff-mini-toc {
   --ff-toc-width: 216px;
@@ -443,6 +456,28 @@ h3:hover .ff-heading-copy,
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow: 0 16px 44px rgba(15, 52, 43, .08);
+  /* Lese-Phase: Fläche nach DESIGN.md §6 – 0.3 s, Haus-Easing.
+     visibility ohne Verzögerung beim Einblenden (kein toter Fokus-Ring). */
+  transition:
+    opacity .3s cubic-bezier(.2, .7, .2, 1),
+    transform .3s cubic-bezier(.2, .7, .2, 1),
+    visibility 0s linear 0s;
+}
+
+/* Ruhzustand (nur JS): außerhalb der Lesephase. visibility:hidden
+   nimmt die Links auch aus der Tab-Reihenfolge; pointer-events
+   blockiert keine Klicks mehr auf den Inhalt darunter. */
+.ff-mini-toc--idle {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+  /* Zurückziehen ist Micro-Interaktion: 0.16 s, ease-out;
+     visibility verzögert, damit das Ausblenden sichtbar bleibt. */
+  transition:
+    opacity .16s ease-out,
+    transform .16s ease-out,
+    visibility 0s linear .16s;
 }
 
 /* Kopfzeile: Titel + Position + Fortschrittsbalken. Sie scrollt NICHT mit,
@@ -625,6 +660,9 @@ h3:hover .ff-heading-copy,
 
 @media (prefers-reduced-motion: reduce) {
   .ff-mini-toc__railfill { transition: none; }
+  /* Ruhzustand/Einblenden ohne Bewegung: sofort da oder sofort weg. */
+  .ff-mini-toc,
+  .ff-mini-toc--idle { transition: none; }
 }
 
 /* Reveal state: added by JS only, so no broken no-JS rendering */
