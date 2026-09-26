@@ -90,6 +90,14 @@ except ImportError:
     ar = None
 import reserve_gate
 
+# Pinterest-Report-Provenienz als SSOT importieren. Der Watchdog darf einen
+# alten, von einem anderen Bot mitgeschleppten Report nicht als aktuellen
+# Grün-Nachweis werten (Root-Cause von Issue #390).
+try:
+    import pinterest_check as pinterest_audit
+except ImportError:
+    pinterest_audit = None
+
 REPORT_PATH = BLOG_DIR / "BOT-WATCHDOG-REPORT.md"
 FINDINGS_PATH = Path("/tmp/bot_watchdog_findings.json")
 
@@ -524,6 +532,34 @@ def check_pinterest_duplicate():
         return None, "Report nicht lesbar"
     return True, "keine Duplikate"
 
+
+def check_pinterest_report_freshness():
+    """Beweist, dass PINTEREST-REPORT zum Quellenstand gehört.
+
+    Vor dem Provenienz-Fix konnte ein Reserve-/SEO-Commit einen alten Report
+    mitnehmen. Dann eröffnete der nächste Alarm-Lauf ein Issue anhand eines
+    Befunds, den der Report zwar zeigte, der im aktuellen Korpus aber längst
+    nicht mehr existierte. Fehlende oder nicht passende Provenienz ist deshalb
+    kein Grün, sondern ein maschinell behebbarer Frische-Befund.
+    """
+    report = BLOG_DIR / "PINTEREST-REPORT.md"
+    if pinterest_audit is None:
+        return None, "Pinterest-Report-Prüfer nicht importierbar"
+    if not report.is_file():
+        return False, "Pinterest-Report fehlt"
+    try:
+        text = report.read_text(encoding="utf-8")
+        actual = pinterest_audit.report_source_fingerprint(text)
+        if actual is None:
+            return False, "Pinterest-Report ohne Quellfingerabdruck (altes Format)"
+        expected = pinterest_audit.source_fingerprint()
+    except (OSError, ValueError) as exc:
+        return None, f"Report-Provenienz nicht prüfbar: {exc}"
+    if actual != expected:
+        return False, "Pinterest-Report veraltet (Quellfingerabdruck passt nicht)"
+    return True, "Report aktuell zum Quellenstand"
+
+
 def build_bilanz():
     """Publikationstag-Bilanz wie im alten Watchdog, aber als Funktion."""
     if cg is None:
@@ -890,6 +926,22 @@ def run_all():
     else:
         env["CHECK9"] = "OK"
 
+    # 9b Provenienz des Pinterest-Reports. Ein alter Report darf weder als
+    # aktueller Grün-Nachweis noch als Grundlage für ein neues Issue dienen.
+    ok_report, msg_report = check_pinterest_report_freshness()
+    if ok_report is False:
+        env["CHECK9B"] = f"FAIL ({msg_report})"
+        findings.append(_f(
+            "pinterest-report", "Pinterest-Report veraltet oder ohne Nachweis", "P2", "auto",
+            detail=str(msg_report),
+            next_step="Pinterest-Watchdog manuell starten: `python3 scripts/pinterest_check.py --fix`; "
+                      "anschließend PINTEREST-REPORT.md committen.",
+            evidence=[f"CHECK9B={msg_report}"]))
+    elif ok_report is None:
+        env["CHECK9B"] = f"WARN ({msg_report})"
+    else:
+        env["CHECK9B"] = "OK"
+
     return env, findings, slug
 
 
@@ -927,6 +979,7 @@ def write_report(env, findings):
         f"- **Check 7 (Pinterest-Kanal):** {env.get('CHECK7','?')}",
         f"- **Check 8 (Content-Reserve):** {env.get('CHECK8','?')}",
         f"- **Check 9 (Pinterest-Duplikate):** {env.get('CHECK9','?')}",
+        f"- **Check 9b (Pinterest-Report-Provenienz):** {env.get('CHECK9B','?')}",
         f"- **Check 10 (Pinterest-Kanal geparkt?):** {env.get('CHECK10','?')}",
         "",
         "## Alarm-Routing",
@@ -1118,6 +1171,20 @@ def selftest():
                 errors.append(f"Pinterest-Befund ohne Kanal: {f.id}")
     except Exception as e:
         errors.append(f"check_pinterest_channel Exception: {e}")
+
+    # Provenienz-Guard: nur die PARSER-Kernlogik selbst testen. Der aktuelle
+    # Report darf hier bewusst veraltet sein – genau das soll der anschließende
+    # Betriebscheck als maschinell heilbaren Befund melden, nicht der Selftest
+    # als Werkzeugfehler fehlklassifizieren (Issue #390).
+    try:
+        if pinterest_audit is None:
+            errors.append("pinterest_check.py nicht importierbar")
+        else:
+            probe = "**Quellfingerabdruck:** `" + ("a" * 64) + "`"
+            if pinterest_audit.report_source_fingerprint(probe) != "a" * 64:
+                errors.append("Pinterest-Report-Fingerabdruck-Parser defekt")
+    except Exception as e:
+        errors.append(f"Pinterest-Report-Provenienz-Selftest Exception: {e}")
 
     # Test reserve
     try:

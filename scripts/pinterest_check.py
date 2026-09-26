@@ -42,12 +42,13 @@ Nutzung:
 
 Ausgabe: PINTEREST-REPORT.md · Audit-Log (data/audit/*.jsonl)
 """
+import datetime
 import glob
+import hashlib
 import json
 import os
 import re
 import sys
-import datetime
 import unicodedata
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +68,69 @@ PROFILE_URL = "https://www.pinterest.de/franksfinanzcheck/"
 
 PROBLEMS = []   # (code, artikel, msg)
 FIXED = []
+
+# Der Report ist ein versioniertes Betriebsartefakt. Ein bloßes Zeitstempel-
+# Datum reicht nicht: Ein anderer Bot kann einen alten Report in einen neuen
+# Commit mitnehmen (genau die Ursache der Phantom-Meldung #390). Der
+# Fingerabdruck umfasst deshalb alle Quellen, die die lokalen Pinterest-Checks
+# beeinflussen. Er enthält bewusst keine flüchtige `public/`-Ausgabe; die wird
+# im Watchdog-Lauf direkt vor dem Check frisch gebaut.
+REPORT_SCHEMA_VERSION = 2
+_REPORT_SOURCE_DIRS = ("content/posts", "layouts")
+_REPORT_SOURCE_FILES = (
+    "hugo.toml",
+    ".github/workflows/pinterest-watchdog.yml",
+    "scripts/pinterest_check.py",
+    "scripts/pinterest_duplicate_guard.py",
+    "scripts/pinterest_pin_text_sync.py",
+    "scripts/pinterest_seo_healer.py",
+)
+_REPORT_SOURCE_ASSETS = ("static/images/pins",)
+
+
+def source_fingerprint() -> str:
+    """Erzeugt einen stabilen Fingerabdruck des geprüften Quellenstands.
+
+    Pfad und Bytes werden gemeinsam gehasht, damit auch Umbenennungen,
+    Löschungen und identische Dateien an unterschiedlichen Stellen sichtbar
+    bleiben. Die Funktion ist absichtlich ohne Git-Abhängigkeit lauffähig und
+    lässt sich so auch in Tests mit einem temporären `BLOG_DIR` verwenden.
+    """
+    paths = []
+    root = os.path.abspath(BLOG_DIR)
+    for rel in (*_REPORT_SOURCE_DIRS, *_REPORT_SOURCE_ASSETS):
+        directory = os.path.join(root, rel)
+        if not os.path.isdir(directory):
+            continue
+        for current, _dirs, files in os.walk(directory):
+            for name in files:
+                path = os.path.join(current, name)
+                if os.path.isfile(path):
+                    paths.append(path)
+    for rel in _REPORT_SOURCE_FILES:
+        path = os.path.join(root, rel)
+        if os.path.isfile(path):
+            paths.append(path)
+
+    digest = hashlib.sha256()
+    for path in sorted(set(paths)):
+        rel = os.path.relpath(path, root).replace(os.sep, "/")
+        digest.update(rel.encode("utf-8"))
+        digest.update(b"\\0")
+        with open(path, "rb") as fh:
+            digest.update(fh.read())
+        digest.update(b"\\0")
+    return digest.hexdigest()
+
+
+def report_source_fingerprint(report_text: str) -> str | None:
+    """Liest den Quellfingerabdruck aus einem Pinterest-Report.
+
+    `None` bedeutet bewusst „nicht nachweisbar“ (altes Reportformat oder
+    beschädigte Zeile) und darf nie als aktueller Report gewertet werden.
+    """
+    match = re.search(r"Quellfingerabdruck:\*{0,2}\s*`([0-9a-f]{64})`", report_text or "")
+    return match.group(1) if match else None
 
 
 # ------------------------------------------------------------ Helfer
@@ -428,7 +492,8 @@ def _check_affiliate_density():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         if not os.path.exists(p):
             continue
-        c = open(p, encoding="utf-8").read()
+        with open(p, encoding="utf-8") as fh:
+            c = fh.read()
         total = _affiliate_link_count(c)
         if total > MAX_AFFILIATE_LINKS:
             PROBLEMS.append((
@@ -571,6 +636,8 @@ def main():
     lines = ["# 📌 PINTEREST-REPORT", "",
              f"**Stand:** {datetime.datetime.now(datetime.timezone.utc):%Y-%m-%d %H:%M} UTC · "
              f"Modus: {'FIX' if DO_FIX else 'CHECK'}", "",
+             f"**Report-Schema:** {REPORT_SCHEMA_VERSION} · **Geprüfte Artikel:** {len(_post_slugs())}",
+             f"**Quellfingerabdruck:** `{source_fingerprint()}`", "",
              f"Probleme: {len(PROBLEMS)} · Geheilt: {len(FIXED)}", ""]
     if PROBLEMS:
         lines.append("| Code | Artikel | Problem |")
