@@ -533,9 +533,36 @@ def pruefe_register(reg: dict, rw: dict, bericht: Bericht,
                              "seitdem verändert – neu messen und neu "
                              "unterschreiben.")
 
+            # Verweist die Freigabe auf einen Beleg, der auch existiert?
+            verweis = str(akte.get("messprotokoll") or "").strip()
+            if verweis:
+                if not (PROTOKOLLE / verweis).exists():
+                    bericht.melde(
+                        regel="freigabe.messprotokoll", variante=vid, schwere="P1",
+                        besitzer="human",
+                        text=f"Freigabe nennt das Messprotokoll data/{verweis} – "
+                             "die Datei fehlt. Eine Unterschrift auf einen "
+                             "Beleg, den es nicht gibt, ist keine Unterschrift.")
+                else:
+                    protokoll = lade_protokoll(akte) or {}
+                    if str(protokoll.get("variante")) != vid:
+                        bericht.melde(
+                            regel="freigabe.messprotokoll", variante=vid,
+                            schwere="P1", besitzer="human",
+                            text=f"Das Messprotokoll data/{verweis} gehört zu "
+                                 f"{protokoll.get('variante')!r}, nicht zu {vid!r}.")
+                    gemessen = _datum((protokoll.get("erstellt") or "")[:10])
+                    if gemessen and datum and gemessen > datum:
+                        bericht.melde(
+                            regel="freigabe.messprotokoll", variante=vid,
+                            schwere="P2", besitzer="human",
+                            text=f"Das Protokoll ist vom {gemessen}, die Freigabe "
+                                 f"vom {datum} – unterschrieben wurde also auf "
+                                 "einer älteren Messung als der hinterlegten.")
+
             # Messvertrag
             for tier in messung_pflicht:
-                if not messung_vorhanden(vid, tier):
+                if not messung_vorhanden(vid, tier, akte):
                     bericht.melde(
                         regel="freigabe.messung", variante=vid, schwere="P1",
                         besitzer="human",
@@ -595,7 +622,48 @@ def pruefe_register(reg: dict, rw: dict, bericht: Bericht,
                  "Wahrheiten über denselben Zustand.")
 
 
-def messung_vorhanden(vid: str, tier: str) -> bool:
+PROTOKOLLE = ROOT / "data"
+
+
+def lade_protokoll(akte: dict | None) -> dict | None:
+    """Das committete Messprotokoll einer Freigabe – oder None.
+
+    Eine Freigabe muss auf einen DAUERHAFTEN Beleg zeigen. Messungen
+    entstehen in .cache/ (gitignored, flüchtig): Läge der Beleg nur
+    dort, wäre jede unterschriebene Variante nach einem frischen
+    Checkout „freigegeben ohne Messung" – ein P1 in jedem CI-Lauf, den
+    niemand verursacht hat. Deshalb friert
+    `design_variant_lab.py --protokoll` die Messung nach
+    data/design/messungen/ ein, und die Freigabe nennt sie unter
+    `messprotokoll:`.
+    """
+    if not akte:
+        return None
+    pfad = str(akte.get("messprotokoll") or "").strip()
+    if not pfad:
+        return None
+    datei = PROTOKOLLE / pfad
+    if not datei.exists():
+        return None
+    try:
+        return json.loads(datei.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def messung_vorhanden(vid: str, tier: str, akte: dict | None = None) -> bool:
+    """Liegt `tier` als grüne Messung vor? Protokoll schlägt Cache.
+
+    Reihenfolge ist Absicht: Der committete Beleg ist die Wahrheit, der
+    Cache nur die bequeme Abkürzung für den laufenden Arbeitstag.
+    """
+    protokoll = lade_protokoll(akte)
+    if protokoll is not None:
+        if str(protokoll.get("variante")) != vid:
+            return False  # Beleg gehört zu einer anderen Variante
+        block = (protokoll.get("tiers") or {}).get(tier) or {}
+        return block.get("status") == "ok"
+
     datei = MESSUNGEN / vid / "messung.json"
     if not datei.exists():
         return False

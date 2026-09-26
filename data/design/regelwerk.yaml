@@ -251,6 +251,11 @@ freigabe:
     - "name"
     - "datum"
     - "kommentar"
+    # Der Beleg, auf den hin unterschrieben wurde. Muss ein committetes
+    # Protokoll unter data/design/messungen/ sein – Messungen in .cache/
+    # sind flüchtig, und eine Freigabe, deren Beleg beim nächsten
+    # Checkout verschwindet, ist keine.
+    - "messprotokoll"
   messung_pflicht:
     - "statisch"      # Tier A: scripts/design_variant_lab.py (HTML, DOM, Bytes)
     - "gerendert"     # Tier B: e2e/variant-metrics.mjs (Playwright: Kontrast, Tap, Fokus, CLS/LCP)

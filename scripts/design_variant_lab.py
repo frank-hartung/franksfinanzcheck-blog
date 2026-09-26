@@ -347,6 +347,81 @@ def lies_messung(vid: str) -> dict:
 
 
 # ======================================================================
+# Messprotokoll – die dauerhafte Fassung einer Messung
+# ======================================================================
+
+PROTOKOLLE = ROOT / "data" / "design" / "messungen"
+
+
+def protokoll_schreiben(vid: str) -> Path:
+    """Friert die aktuelle Messung als committetes Protokoll ein.
+
+    WARUM DAS NÖTIG IST
+    -------------------
+    Messungen entstehen in .cache/design-varianten/ – gitignored und
+    flüchtig. Eine Freigabe verweist aber auf „vermessen": Läge der
+    Beleg nur im Cache, wäre eine unterschriebene Variante nach dem
+    nächsten frischen Checkout (also in JEDEM CI-Lauf) plötzlich
+    „freigegeben ohne Messung" – ein P1, den niemand verursacht hat und
+    niemand beheben kann.
+
+    Das Protokoll ist deshalb Teil des Repos: Es trägt die Zahlen, die
+    Messbedingungen und das Datum, auf die hin unterschrieben wurde.
+    Wer später fragt „worauf gründet diese Freigabe?", bekommt eine
+    Antwort statt einer Vermutung.
+    """
+    messung = lies_messung(vid)
+    if not messung:
+        raise SystemExit(
+            f"Keine Messung für {vid} im Cache. Zuerst:\n"
+            f"  python3 scripts/design_variant_lab.py --lauf {vid}\n"
+            f"  node e2e/variant-metrics.mjs --variante {vid}")
+
+    tiers = messung.get("tiers") or {}
+    fehlend = [t for t in ("statisch", "gerendert", "lighthouse")
+               if (tiers.get(t) or {}).get("status") != "ok"]
+    if fehlend:
+        raise SystemExit(
+            f"Unvollständige Messung für {vid}: {', '.join(fehlend)} nicht ok. "
+            "Ein Protokoll über eine halbe Messung wäre ein Beleg über nichts.")
+
+    PROTOKOLLE.mkdir(parents=True, exist_ok=True)
+    ziel = PROTOKOLLE / f"{vid}-{dt.date.today().isoformat()}.json"
+    inhalt = {
+        "_hinweis": ("Messprotokoll der Design-Varianten-Werkbank. Beleg für "
+                     "eine Freigabe in data/design/varianten.yaml. Erzeugt von "
+                     "scripts/design_variant_lab.py --protokoll – nicht von Hand ändern."),
+        "variante": vid,
+        "erstellt": jetzt(),
+        "werkzeuge": werkzeug_versionen(),
+        "tiers": tiers,
+    }
+    ziel.write_text(json.dumps(inhalt, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+    return ziel
+
+
+def werkzeug_versionen() -> dict:
+    """Womit wurde gemessen? Ohne das ist ein Protokoll nicht nachstellbar."""
+    versionen = {}
+    binaer = hugo_bin()
+    if binaer:
+        try:
+            proc = subprocess.run([binaer, "version"], capture_output=True,
+                                  text=True, timeout=30)
+            versionen["hugo"] = proc.stdout.strip().split(" ")[1] if proc.stdout else "?"
+        except (subprocess.SubprocessError, OSError, IndexError):
+            versionen["hugo"] = "?"
+    paket = ROOT / "node_modules" / "lighthouse" / "package.json"
+    if paket.exists():
+        try:
+            versionen["lighthouse"] = json.loads(paket.read_text(encoding="utf-8")).get("version")
+        except json.JSONDecodeError:
+            pass
+    return versionen
+
+
+# ======================================================================
 # Lauf
 # ======================================================================
 
@@ -668,6 +743,8 @@ def main() -> int:
                     help="bauen + statisch messen (Basis läuft immer mit)")
     ap.add_argument("--vergleich", action="store_true",
                     help=f"Report schreiben ({REPORT.name})")
+    ap.add_argument("--protokoll", metavar="ID",
+                    help="Messung als dauerhaften Freigabe-Beleg einfrieren")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
@@ -693,6 +770,14 @@ def main() -> int:
         REPORT.write_text(vergleich(register), encoding="utf-8")
         print(f"\nReport: {REPORT.relative_to(ROOT)}")
         return code
+
+    if args.protokoll:
+        ziel = protokoll_schreiben(args.protokoll)
+        rel = ziel.relative_to(ROOT / "data")
+        print(f"Messprotokoll: {ziel.relative_to(ROOT)}")
+        print("Im Register eintragen:")
+        print(f'      messprotokoll: "{rel.as_posix()}"')
+        return 0
 
     if args.vergleich:
         REPORT.write_text(vergleich(register), encoding="utf-8")

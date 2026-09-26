@@ -128,7 +128,15 @@ Das Gate meldet je Befund `[Schwere/Besitzer]`:
 
 ### Schritt 5: Freigabe (nur Mensch)
 
-Erst wenn Gate grün ist **und** alle drei Messebenen `ok` melden:
+Erst wenn Gate grün ist **und** alle drei Messebenen `ok` melden.
+Zuerst die Messung als dauerhaften Beleg einfrieren:
+
+```bash
+python3 scripts/design_variant_lab.py --protokoll v-lesbarkeit-messweite
+# → data/design/messungen/v-lesbarkeit-messweite-2026-10-04.json
+```
+
+Dann unterschreiben:
 
 ```yaml
     status: freigegeben
@@ -136,12 +144,22 @@ Erst wenn Gate grün ist **und** alle drei Messebenen `ok` melden:
       mensch: true
       name: "Frank Hartung"
       datum: "2026-10-04"
+      messprotokoll: "design/messungen/v-lesbarkeit-messweite-2026-10-04.json"
       kommentar: "Messweite 68ch, Kontrast unverändert, LCP -40ms. Freigabe für 30 Tage."
 ```
 
 Das Gate prüft: Name steht in `freigabe.berechtigte`, Datum ist gültig und
 nicht in der Zukunft, alle drei Messungen liegen vor, die Freigabe ist
-nicht älter als `gueltigkeit_tage` (30).
+nicht älter als `gueltigkeit_tage` (30) – und das Protokoll existiert,
+gehört zu dieser Variante und ist nicht jünger als die Unterschrift.
+
+> **Warum ein Protokoll und nicht einfach der Cache?**
+> Messungen entstehen in `.cache/design-varianten/` – gitignored und
+> flüchtig. Läge der Beleg nur dort, wäre jede unterschriebene Variante
+> nach dem nächsten frischen Checkout „freigegeben ohne Messung": ein P1
+> in jedem CI-Lauf, den niemand verursacht hat und niemand beheben kann.
+> Das Protokoll ist Teil des Repos und beantwortet die Frage „worauf
+> gründet diese Freigabe?" mit Zahlen statt mit Erinnerung.
 
 > **Warum verfällt eine Freigabe?** Weil der Blog weiterläuft. Eine
 > Messung von vor acht Monaten beweist nichts über die Seite von heute.
@@ -251,6 +269,7 @@ npm run design:gate         # bewerten (Marke, Messung, Freigabe)
 npm run design:wache        # Produktionswache (läuft im Deploy)
 npm run design:lauf <id>    # bauen + Tier A messen
 npm run design:messen <id>  # Tier B: Playwright + Lighthouse
+python3 scripts/design_variant_lab.py --protokoll <id>   # Beleg für die Freigabe einfrieren
 npm run design:briefing     # Agent-Reach-Signale → Hypothesen
 npm run test:design         # 35 Regressionstests der Werkbank
 

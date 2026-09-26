@@ -201,3 +201,49 @@ geprüft.
   Agentenroutine. Nach der Kompressionskorrektur ist der Druck gering
   (LCP mobil 1760 ms bei Budget 2500 ms) – der Punkt gehört auf die Liste,
   nicht in diesen Commit.
+
+---
+
+## Nachtrag 26.09.2026 – Freigabe `v-hero-conversion`
+
+Auf Anweisung von Frank Hartung freigegeben. Damit die Unterschrift
+belastbar ist, wurde zuvor eine Lücke geschlossen:
+
+**Messungen lagen nur im flüchtigen Cache.** `.cache/design-varianten/`
+ist gitignored – im Arbeitsumfeld dieser Sitzung zweimal zwischen zwei
+Läufen verschwunden. Eine Freigabe, die darauf verweist, wäre nach jedem
+frischen Checkout „freigegeben ohne Messung" gewesen: ein P1 in jedem
+CI-Lauf, den niemand verursacht hat und niemand beheben kann.
+
+**Neu:** `scripts/design_variant_lab.py --protokoll <id>` friert die
+Messung als committeten Beleg ein
+(`data/design/messungen/<id>-<datum>.json`, mit Werkzeugversionen). Die
+Freigabe nennt ihn unter `messprotokoll:`; das Gate liest den Beleg
+bevorzugt und prüft, dass er existiert, zur Variante gehört und nicht
+jünger ist als die Unterschrift. Ohne Beleg: P1.
+
+**Belegte Messwerte der Freigabe** (Protokoll vom 26.09.2026,
+Hugo 0.164.0 extended, Lighthouse 13.5.0):
+
+| Kennzahl | Basis | Variante | Budget |
+|---|---:|---:|---:|
+| Kontrast (min, hell + dunkel) | 7,53 | 7,53 | ≥ 4,5 ✅ |
+| Kleinstes Tap-Ziel | 26,4 px | 26,4 px | ≥ 24 px ✅ |
+| CLS | 0 | 0 | ≤ 0,1 ✅ |
+| Lighthouse mobil – Performance | 0,99 | 0,99 | ≥ 0,90 ✅ |
+| Lighthouse mobil – LCP | 1753 ms | 1774 ms | ≤ 2500 ms ✅ |
+| Lighthouse desktop – LCP | 592 ms | 545 ms | ≤ 2500 ms ✅ |
+| Accessibility / SEO | 0,96 / 1,00 | 0,96 / 1,00 | ≥ 0,95 / = 1,00 ✅ |
+| CTAs mit Umami-Event | 3/3 | 3/3 | vollständig ✅ |
+| Inline-CSS | 129 901 B | +1 292 B | ≤ +6 144 B ✅ |
+
+**Status: `freigegeben`, nicht `live`.** `aktiv:` steht weiterhin auf `""`,
+`hugo.toml` setzt keinen `designVariante`-Parameter. Das Scharfschalten
+ist ein eigener Schritt (Runbook Schritt 6) – die Freigabe erlaubt ihn,
+sie vollzieht ihn nicht.
+
+**Was die Freigabe NICHT belegt:** dass die Variante mehr Klicks bringt.
+Das Labor sagt „darf ausgeliefert werden", nicht „ist besser". Die
+Hypothese wird nach dem Scharfschalten 14 Tage an Umami (`cta_click` je
+`slug`) geprüft; Abbruch und Rückbau, wenn die Summe aller drei CTAs
+sinkt.

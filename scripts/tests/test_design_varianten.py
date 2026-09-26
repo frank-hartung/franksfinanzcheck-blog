@@ -176,6 +176,81 @@ class FreigabeKontrakt(unittest.TestCase):
                             for x in b.befunde))
 
 
+class Messprotokoll(unittest.TestCase):
+    """Eine Freigabe muss auf einen DAUERHAFTEN Beleg zeigen.
+
+    Messungen entstehen in .cache/ – gitignored und flüchtig (im
+    Arbeitsumfeld am 26.09.2026 zweimal zwischen zwei Sitzungen
+    verschwunden). Läge der Beleg nur dort, wäre jede unterschriebene
+    Variante nach einem frischen Checkout „freigegeben ohne Messung":
+    ein P1 in jedem CI-Lauf, den niemand verursacht hat und niemand
+    beheben kann.
+    """
+
+    AKTE = {"mensch": True, "name": "Frank Hartung", "datum": "2026-09-26",
+            "kommentar": "ok",
+            "messprotokoll": "design/messungen/v-test-2026-09-26.json"}
+
+    def _protokoll(self, tmp: str, variante: str = "v-test", tiers=None):
+        ziel = Path(tmp) / "design" / "messungen"
+        ziel.mkdir(parents=True)
+        (ziel / "v-test-2026-09-26.json").write_text(json.dumps({
+            "variante": variante,
+            "erstellt": "2026-09-26T10:00:00Z",
+            "tiers": tiers or {t: {"status": "ok", "werte": {}}
+                               for t in ("statisch", "gerendert", "lighthouse")},
+        }), encoding="utf-8")
+        return Path(tmp)
+
+    def test_protokoll_ersetzt_den_fluechtigen_cache(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            orig_p, orig_m = gate.PROTOKOLLE, gate.MESSUNGEN
+            gate.PROTOKOLLE = self._protokoll(tmp)
+            gate.MESSUNGEN = Path(tmp) / "kein-cache"
+            try:
+                for tier in ("statisch", "gerendert", "lighthouse"):
+                    self.assertTrue(
+                        gate.messung_vorhanden("v-test", tier, self.AKTE),
+                        f"{tier} müsste aus dem Protokoll kommen")
+            finally:
+                gate.PROTOKOLLE, gate.MESSUNGEN = orig_p, orig_m
+
+    def test_protokoll_einer_anderen_variante_zaehlt_nicht(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            orig_p, orig_m = gate.PROTOKOLLE, gate.MESSUNGEN
+            gate.PROTOKOLLE = self._protokoll(tmp, variante="v-andere")
+            gate.MESSUNGEN = Path(tmp) / "kein-cache"
+            try:
+                self.assertFalse(
+                    gate.messung_vorhanden("v-test", "statisch", self.AKTE))
+            finally:
+                gate.PROTOKOLLE, gate.MESSUNGEN = orig_p, orig_m
+
+    def test_halbes_protokoll_reicht_nicht(self):
+        tiers = {"statisch": {"status": "ok"},
+                 "gerendert": {"status": "nicht_verfuegbar"},
+                 "lighthouse": {"status": "nicht_verfuegbar"}}
+        with tempfile.TemporaryDirectory() as tmp:
+            orig_p, orig_m = gate.PROTOKOLLE, gate.MESSUNGEN
+            gate.PROTOKOLLE = self._protokoll(tmp, tiers=tiers)
+            gate.MESSUNGEN = Path(tmp) / "kein-cache"
+            try:
+                self.assertTrue(gate.messung_vorhanden("v-test", "statisch", self.AKTE))
+                self.assertFalse(gate.messung_vorhanden("v-test", "gerendert", self.AKTE))
+            finally:
+                gate.PROTOKOLLE, gate.MESSUNGEN = orig_p, orig_m
+
+    def test_verwaister_verweis_ist_P1(self):
+        reg = register(status="freigegeben",
+                       freigabe=dict(self.AKTE,
+                                     messprotokoll="design/messungen/gibt-es-nicht.json"))
+        b = gate.Bericht()
+        gate.pruefe_register(reg, REGELWERK, b, HEUTE, None)
+        treffer = [x for x in b.befunde if x.regel == "freigabe.messprotokoll"]
+        self.assertTrue(treffer)
+        self.assertEqual(treffer[0].schwere, "P1")
+
+
 class BestandGegenRegression(unittest.TestCase):
     """Zusage 3: Vorfall #343 darf sich nicht wiederholen."""
 
@@ -345,6 +420,27 @@ class RepositoryZustand(unittest.TestCase):
             encoding="utf-8")
         self.assertNotIn("site.Data", partial.replace("site.Data/", ""))
         self.assertIn("design_varianten_data.html", partial)
+
+    def test_jede_freigabe_hat_ein_vorhandenes_protokoll(self):
+        """Der Beleg jeder unterschriebenen Variante liegt im Repo."""
+        reg = gate.lade_yaml(gate.REGISTER, "Register")
+        for eintrag in reg["varianten"]:
+            if eintrag["id"] == "basis":
+                continue
+            akte = eintrag.get("freigabe") or {}
+            if str(eintrag.get("status")) not in ("freigegeben", "live"):
+                continue
+            with self.subTest(variante=eintrag["id"]):
+                verweis = str(akte.get("messprotokoll") or "").strip()
+                self.assertTrue(verweis, "Freigabe ohne Messprotokoll.")
+                datei = ROOT / "data" / verweis
+                self.assertTrue(datei.exists(), f"data/{verweis} fehlt.")
+                protokoll = json.loads(datei.read_text(encoding="utf-8"))
+                self.assertEqual(protokoll["variante"], eintrag["id"])
+                for tier in ("statisch", "gerendert", "lighthouse"):
+                    self.assertEqual(
+                        protokoll["tiers"][tier]["status"], "ok",
+                        f"{tier} im Protokoll nicht grün.")
 
     def test_produktion_aktiviert_keine_variante(self):
         self.assertEqual(gate.hugo_param_variante(), "",
