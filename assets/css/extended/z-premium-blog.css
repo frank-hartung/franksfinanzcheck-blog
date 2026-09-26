@@ -536,12 +536,23 @@ h3:hover .ff-heading-copy,
      moderater Zeichenanzahl eine dritte Zeile benötigen. Ein Clamp schnitt
      z. B. „Tierkrankenversicherung“ mitten im Wort ab. Die JS-Kurzform hält
      sehr lange Labels bereits an einer Wortgrenze kompakt; der Scrollbereich
-     fängt die variable Eintragshöhe kontrolliert auf. */
+     fängt die variable Eintragshöhe kontrolliert auf.
+
+     Die expliziten Resets sind absichtlich defensiv: Sie verhindern, dass
+     globale Karten-/Link-Regeln später wieder -webkit-line-clamp oder eine
+     feste Blockhöhe auf die Navigation übertragen. */
   display: block;
+  max-height: none;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
   overflow-wrap: break-word;
   word-break: normal;
   hyphens: manual;
   -webkit-hyphens: manual;
+  text-wrap: pretty;
   transition: color .18s ease, border-color .18s ease, background-color .18s ease, opacity .18s ease;
 }
 
@@ -582,11 +593,18 @@ h3:hover .ff-heading-copy,
 }
 
 .ff-mini-toc__txt {
+  display: block;
   min-width: 0;
+  max-height: none;
+  overflow: visible;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
   overflow-wrap: break-word;
   word-break: normal;
   hyphens: manual;
   -webkit-hyphens: manual;
+  text-wrap: pretty;
 }
 
 /* Unter 1280 px reicht der Seitenrand nicht mehr für eine Spalte neben dem
