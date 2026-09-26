@@ -112,7 +112,7 @@ Passend dazu helfen dir diese Artikel:
 
 - [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 - [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
-- [Gas-Anbieter wechseln: Praxis-Tipps](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
+- Gas-Anbieter wechseln: Praxis-Tipps
 
 ## Trick 3: Verlangsame Kaufentscheidungen
 

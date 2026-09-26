@@ -82,8 +82,14 @@ ALLOWED_FILES = ("data/reserve-readiness.json", "data/covers_manifest.json",
                  "data/reserve-quarantine.json",
                  "data/reserve-topic-ledger.json",
                  "data/reserve-custody.json",
-                 "data/reserve-history.jsonl")
+                 "data/reserve-history.jsonl",
+                 # Workflow #24: Der Reserve-Janitor löscht Rückläufer/
+                 # Blocker und entfernt deren öffentliche llms.txt-Zeilen im
+                 # selben Commit, sonst bliebe eine 404-Empfehlung für KI-
+                 # Antwortmaschinen stehen.
+                 "static/llms.txt")
 STAGE_PATHS = ("content/posts", "static/images/covers",
+               "static/llms.txt",
                "data/reserve-readiness.json", "data/covers_manifest.json",
                "data/reserve-quarantine.json",
                "data/reserve-topic-ledger.json",
@@ -91,6 +97,7 @@ STAGE_PATHS = ("content/posts", "static/images/covers",
                "data/reserve-history.jsonl", "data/audit")
 
 RE_RESERVE = re.compile(r"(?m)^reserve:\s*(true|yes|1)\s*$")
+RE_DRAFT_TRUE = re.compile(r"(?m)^draft:\s*(true|yes|1)\s*$")
 # Ausgemusterte Entwürfe (Quarantäne) bleiben im Bestand – sie sind Reserve-
 # Eigentum wie der Pool selbst. Ohne diese Kennung fielen sie aus der
 # Staging-Politik und wären nach dem Lauf verloren: Am 22.09.2026 verschwand
@@ -115,6 +122,20 @@ def frontmatter(path: Path) -> str:
     return parts[1] if len(parts) == 3 and parts[0] == "" else ""
 
 
+def _reserve_owned_frontmatter(fm: str) -> bool:
+    return bool(RE_RESERVE.search(fm)) or bool(RE_BLOCKED.search(fm))
+
+
+def _head_frontmatter(root: Path, path: str) -> str:
+    """Frontmatter aus HEAD lesen, auch wenn die Datei gelöscht wurde."""
+    proc = subprocess.run(["git", "show", f"HEAD:{path}"], cwd=str(root),
+                          timeout=30, capture_output=True, text=True)
+    if proc.returncode != 0:
+        return ""
+    parts = proc.stdout.split("---", 2)
+    return parts[1] if len(parts) == 3 and parts[0] == "" else ""
+
+
 def is_reserve_owned(path: Path) -> bool:
     """Reserve-Content = Pool-Kandidat ODER ausgemusterter Entwurf.
 
@@ -126,8 +147,7 @@ def is_reserve_owned(path: Path) -> bool:
     Live gewordene Reserve-Artikel tragen `reserve_published` – sie gehören
     dann der Engine-/Deploy-Kette und werden hier bewusst NICHT mehr gestagt.
     """
-    fm = frontmatter(path)
-    return bool(RE_RESERVE.search(fm)) or bool(RE_BLOCKED.search(fm))
+    return _reserve_owned_frontmatter(frontmatter(path))
 
 
 def staged_paths(root: Path) -> list:
@@ -161,7 +181,15 @@ def stage(root: Path = ROOT, dry_run: bool = False) -> dict:
         if not path.startswith("content/posts/"):
             continue
         full = root / path
-        if full.exists() and not is_reserve_owned(full):
+        if full.exists():
+            if not is_reserve_owned(full):
+                fremd_content.append(path)
+            continue
+        # Löschungen sind für den Janitor erlaubt – aber nur für Entwürfe
+        # bzw. Reserve-eigenen Content aus HEAD. Damit kann ein fehlerhafter
+        # Reserve-Lauf keinen Live-Artikel wegstagen.
+        head_fm = _head_frontmatter(root, path)
+        if not (_reserve_owned_frontmatter(head_fm) or RE_DRAFT_TRUE.search(head_fm)):
             fremd_content.append(path)
     if fremd_content and not dry_run:
         subprocess.run(["git", "restore", "--staged", *fremd_content],
@@ -220,23 +248,29 @@ def run_selftest() -> int:
               "---\ntitle: Pool\ndate: 2026-09-15T06:00:00Z\ndraft: true\n"
               "reserve: true\n---\nBody\n")
         write("data/reserve-readiness.json", '{"target": 1, "candidates": []}')
+        write("static/llms.txt", "- [Alt](https://example.org/posts/alt/)\n")
         env(["git", "add", "-A"], cwd=repo)
         env(["git", "commit", "-qm", "init"], cwd=repo)
 
-        # Sabotage: ein korpusweiter Heiler „heilt“ den LIVE-Post,
-        # der Reserve-Finisher veredelt den Pool-Kandidaten.
+        # Sabotage: ein korpusweiter Heiler „heilt“ bzw. löscht den LIVE-Post,
+        # der Reserve-Finisher veredelt den Pool-Kandidaten. Löschungen müssen
+        # genauso wie Änderungen aus dem Reserve-Commit herausfallen.
         write("content/posts/2026-09-01-live/index.md",
               "---\ntitle: Live\ndate: 2026-09-01T06:00:00Z\ndraft: false\n---\nHeilung\n")
+        (repo / "content/posts/2026-09-01-live/index.md").unlink()
         write("content/posts/2026-09-15-pool/index.md",
               "---\ntitle: Pool\ndate: 2026-09-15T06:00:00Z\ndraft: true\n"
               "reserve: true\n---\nVeredelt\n")
         write("data/reserve-readiness.json", '{"target": 1, "candidates": []}')
+        write("static/llms.txt", "- [Neu](https://example.org/posts/pool/)\n")
 
         with mock.patch("sys.stdout"):
             bericht = stage(root=repo)
         staged = staged_paths(repo)
         if "content/posts/2026-09-15-pool/index.md" not in staged:
             fehler.append(f"Pool-Kandidat wurde nicht gestagt: {staged}")
+        if "static/llms.txt" not in staged:
+            fehler.append("llms.txt-Bereinigung des Reserve-Janitors wird nicht gestagt")
         if "content/posts/2026-09-01-live/index.md" in staged:
             fehler.append(f"LIVE-Post wurde gestagt (Vertragsbruch): {staged}")
         if bericht["entfernt"] != ["content/posts/2026-09-01-live/index.md"]:
@@ -293,8 +327,8 @@ def run_selftest() -> int:
         for f in fehler:
             print(f"   - {f}")
         return 2
-    print("✅ Reserve-Stage-Guard-Selbsttest grün (Pool gestagt, Live-Content "
-          "nicht gestagt und bytegenau zurückgesetzt).")
+    print("✅ Reserve-Stage-Guard-Selbsttest grün (Pool und llms.txt gestagt, "
+          "Live-Content nicht gestagt und bytegenau zurückgesetzt).")
     return 0
 
 

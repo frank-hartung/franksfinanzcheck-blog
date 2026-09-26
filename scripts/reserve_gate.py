@@ -137,8 +137,12 @@ def themen_vielfalt(candidates: list[dict]) -> tuple[int, dict]:
         try:
             titel = rp._titel(index.read_text(encoding="utf-8"))
         except OSError:
-            titel = ""
-        titel = titel or slug
+            # Nach dem Reserve-Janitor können alte Zertifikatszeilen noch kurz
+            # auf bereits gelöschte Kandidaten zeigen. Die Diagnose darf dann
+            # nicht alle Slugs über ihr Datum zu EINEM Thema verklumpen
+            # (Workflow #24); als Fallback dient der Slug ohne Datumspräfix.
+            titel = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", slug)
+        titel = titel or re.sub(r"^\d{4}-\d{2}-\d{2}-", "", slug) or slug
         treffer = rt.thema_kollision(titel, vertreter)
         if treffer:
             familien[treffer[0]].append(slug)
@@ -282,76 +286,105 @@ def report(ready: int, target: int, candidates: list[dict]) -> None:
 
 def run_selftest() -> int:
     cert_cases = []
-    with tempfile.TemporaryDirectory() as tmp:
-        cert = Path(tmp) / "reserve-readiness.json"
+    # Content-Reserve-Workflows dürfen RESERVE_TARGET frei setzen. Der
+    # Selbsttest prüft aber die Logik dieses Skripts, nicht die aktuelle
+    # Repository-Variable: Frühere Fassung erwartete hart 6 und wurde in
+    # Workflow #24 rot, sobald die Umgebung einen anderen Zielbestand setzte.
+    alt_target = os.environ.get("RESERVE_TARGET")
+    alt_age = os.environ.get("RESERVE_CERT_MAX_AGE_H")
+    try:
+        os.environ["RESERVE_TARGET"] = "6"
+        os.environ["RESERVE_CERT_MAX_AGE_H"] = str(CERT_MAX_AGE_H)
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = Path(tmp) / "reserve-readiness.json"
 
-        # Fall 1: kein Zertifikat -> wie leerer Pool behandeln
-        ready, target, candidates = evaluate(cert)
-        assert (ready, target, candidates) == (0, 6, []), "fehlendes Zertifikat muss leer zählen"
+            # Fall 1: kein Zertifikat -> wie leerer Pool behandeln
+            ready, target, candidates = evaluate(cert)
+            assert (ready, target, candidates) == (0, 6, []), \
+                "fehlendes Zertifikat muss leer zählen"
 
-        # Fall 2: 5/6 -> Engpass
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 5,
-            "candidates": [{"slug": f"k{i}", "ready": i < 5,
-                            "score": 0.9 if i < 5 else None,
-                            "reason": None if i < 5 else "R5"} for i in range(6)],
-        }, ensure_ascii=False), encoding="utf-8")
-        ready, target, candidates = evaluate(cert)
-        assert (ready, target) == (5, 6), f"5/6 erwartet, {ready}/{target}"
-        assert len(candidates) == 6
+            # Zusatz: Der produktive Env-Override bleibt absichtlich wirksam,
+            # ist aber im Test explizit kontrolliert statt ein versteckter
+            # Seiteneffekt des CI-Jobs zu sein.
+            os.environ["RESERVE_TARGET"] = "8"
+            ready_env, target_env, candidates_env = evaluate(cert)
+            assert (ready_env, target_env, candidates_env) == (0, 8, []), \
+                "RESERVE_TARGET-Override muss respektiert werden"
+            os.environ["RESERVE_TARGET"] = "6"
 
-        # Fall 3: 6/6 -> voll
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 6,
-            "candidates": [{"slug": f"k{i}", "ready": True, "score": 0.95} for i in range(6)],
-        }, ensure_ascii=False), encoding="utf-8")
-        ready, target, _ = evaluate(cert)
-        assert (ready, target) == (6, 6), f"6/6 erwartet, {ready}/{target}"
+            # Fall 2: 5/6 -> Engpass
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 5,
+                "candidates": [{"slug": f"k{i}", "ready": i < 5,
+                                "score": 0.9 if i < 5 else None,
+                                "reason": None if i < 5 else "R5"} for i in range(6)],
+            }, ensure_ascii=False), encoding="utf-8")
+            ready, target, candidates = evaluate(cert)
+            assert (ready, target) == (5, 6), f"5/6 erwartet, {ready}/{target}"
+            assert len(candidates) == 6
 
-        # Fall 4: überfüllt 7/6 -> ebenfalls grün
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 7,
-            "candidates": [{"slug": f"k{i}", "ready": True} for i in range(7)],
-        }, ensure_ascii=False), encoding="utf-8")
-        ready, target, _ = evaluate(cert)
-        assert ready >= target, "7/6 muss grün sein"
+            # Fall 3: 6/6 -> voll
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 6,
+                "candidates": [{"slug": f"k{i}", "ready": True, "score": 0.95} for i in range(6)],
+            }, ensure_ascii=False), encoding="utf-8")
+            ready, target, _ = evaluate(cert)
+            assert (ready, target) == (6, 6), f"6/6 erwartet, {ready}/{target}"
 
-        cert_cases.append("ok")
+            # Fall 4: überfüllt 7/6 -> ebenfalls grün
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 7,
+                "candidates": [{"slug": f"k{i}", "ready": True} for i in range(7)],
+            }, ensure_ascii=False), encoding="utf-8")
+            ready, target, _ = evaluate(cert)
+            assert ready >= target, "7/6 muss grün sein"
 
-        # ---- Frische-Prüfung (#295): veraltetes Zertifikat ist kein Nachweis
-        now = dt.datetime.now(dt.timezone.utc)
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 1,
-            "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "candidates": [{"slug": "k", "ready": True}],
-        }, ensure_ascii=False), encoding="utf-8")
-        frisch, meldung = freshness(cert)
-        assert frisch, f"frisches Zertifikat muss frisch sein: {meldung}"
-        assert "0.0 h" in meldung or "0.1 h" in meldung, meldung
+            cert_cases.append("ok")
 
-        alt = (now - dt.timedelta(hours=max_age_hours() + 2)).strftime(
-            "%Y-%m-%dT%H:%M:%SZ")
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 6, "generated_at": alt,
-            "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
-        }, ensure_ascii=False), encoding="utf-8")
-        frisch, meldung = freshness(cert)
-        assert not frisch, "veraltetes Zertifikat darf nicht als frisch gelten"
-        assert "veraltet" in meldung, meldung
-        # … und der End-Gate-Entscheid muss dann rot sein, obwohl 6/6 ready
-        ready, target, _ = evaluate(cert)
-        assert ready >= target and not frisch, "Alters-Regel greift nicht"
+            # ---- Frische-Prüfung (#295): veraltetes Zertifikat ist kein Nachweis
+            now = dt.datetime.now(dt.timezone.utc)
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 1,
+                "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "candidates": [{"slug": "k", "ready": True}],
+            }, ensure_ascii=False), encoding="utf-8")
+            frisch, meldung = freshness(cert)
+            assert frisch, f"frisches Zertifikat muss frisch sein: {meldung}"
+            assert "0.0 h" in meldung or "0.1 h" in meldung, meldung
 
-        cert.write_text(json.dumps({
-            "target": 6, "ready": 6,
-            "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
-        }, ensure_ascii=False), encoding="utf-8")
-        frisch, meldung = freshness(cert)
-        assert frisch and "Zeitstempel" in meldung, meldung
-        cert_cases.append("frische")
+            alt = (now - dt.timedelta(hours=max_age_hours() + 2)).strftime(
+                "%Y-%m-%dT%H:%M:%SZ")
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 6, "generated_at": alt,
+                "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
+            }, ensure_ascii=False), encoding="utf-8")
+            frisch, meldung = freshness(cert)
+            assert not frisch, "veraltetes Zertifikat darf nicht als frisch gelten"
+            assert "veraltet" in meldung, meldung
+            # … und der End-Gate-Entscheid muss dann rot sein, obwohl 6/6 ready
+            ready, target, _ = evaluate(cert)
+            assert ready >= target and not frisch, "Alters-Regel greift nicht"
+
+            cert.write_text(json.dumps({
+                "target": 6, "ready": 6,
+                "candidates": [{"slug": f"k{i}", "ready": True} for i in range(6)],
+            }, ensure_ascii=False), encoding="utf-8")
+            frisch, meldung = freshness(cert)
+            assert frisch and "Zeitstempel" in meldung, meldung
+            cert_cases.append("frische")
+    finally:
+        if alt_target is None:
+            os.environ.pop("RESERVE_TARGET", None)
+        else:
+            os.environ["RESERVE_TARGET"] = alt_target
+        if alt_age is None:
+            os.environ.pop("RESERVE_CERT_MAX_AGE_H", None)
+        else:
+            os.environ["RESERVE_CERT_MAX_AGE_H"] = alt_age
+
     print(f"\u2705 Selbsttest reserve_gate: {len(cert_cases)} Fälle bestanden "
           f"(Zählung aus der Liste, Frische-Grenze "
-          f"{max_age_hours():.0f} h).")
+          f"{max_age_hours():.0f} h, Env-Override isoliert).")
     return 0
 
 

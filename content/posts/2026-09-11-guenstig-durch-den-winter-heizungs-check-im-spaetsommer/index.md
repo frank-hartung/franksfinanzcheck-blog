@@ -178,8 +178,8 @@ Heizkosten bestehen immer aus zwei Hebeln:
 
 Darum ist der Heizungs-Check so sinnvoll – noch besser wirkt er, wenn du parallel deinen Gastarif oder deine Energiekosten prüfst. Dazu passen auch diese Artikel:
 
-- [Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
-- [Gasrechnung senken: Clevere Herbst-Vorbereitung im Check](../../posts/2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/)
+- Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife
+- Gasrechnung senken: Clevere Herbst-Vorbereitung im Check
 - [Energie-Ratgeber](../../pillar/energie/)
 
 So holst du nicht nur an einer Stelle etwas heraus, sondern gleich doppelt.

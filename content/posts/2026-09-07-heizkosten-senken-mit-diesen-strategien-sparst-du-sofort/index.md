@@ -151,7 +151,7 @@ Weniger Verbrauch bringt dir wenig, wenn du pro Kilowattstunde zu viel zahlst. G
 
 Ein Wechsel kann – je nach Haushalt – schnell **100 € bis 400 € pro Jahr** bringen. Mehr dazu hier:
 
-- [Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
+- Gas-Anbieter wechseln: Praxis-Tipps für günstige Tarife
 - [Günstig durch den Winter: Heizungs-Check im Spätsommer](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/)
 
 ## Rechenbeispiel: Was mehrere kleine Maßnahmen zusammen bringen
@@ -274,7 +274,7 @@ Wichtig ist vor allem die Kombination. Nur kühler zu heizen, aber den Vertrag n
 
 Der größte Fehler ist, nur auf Verzicht zu setzen. Klüger ist es, das System zu verstehen. Dann sparst du nicht nur heute, sondern oft jede Heizsaison wieder.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Preisgarantie Gas](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Gasrechnung senken im Spätsommer](../../posts/2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Preisgarantie Gas](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · Gasrechnung senken im Spätsommer
 
 ## Häufige Fragen
 

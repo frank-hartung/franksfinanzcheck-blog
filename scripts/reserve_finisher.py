@@ -107,6 +107,27 @@ def _slug_tail(slug: str) -> str:
     return m.group(1) if m else slug
 
 
+def sync_lastmod_to_date(text: str) -> str:
+    """`lastmod` darf bei Reserve-Lift nie vor `date` liegen.
+
+    Der Finisher hebt alte Entwürfe auf HEUTE. Einige Heiler hatten vorher
+    bereits `lastmod` gesetzt; nach dem Lift war `date: 2026-09-26…`, aber
+    `lastmod: 2026-09-25`. Die Triage meldete diese Kandidaten dann als
+    BLOCKIERT, obwohl das Reife-Zertifikat grün war (Workflow #24). Wenn
+    `lastmod` vorhanden und älter ist, wird es verlustfrei auf das
+    Publikationsdatum angehoben; fehlt `lastmod`, bleibt es beim bisherigen
+    Projekt-Fallback (Sitemap nutzt dann `date`).
+    """
+    date_m = re.search(r"(?m)^date:\s*(\d{4}-\d{2}-\d{2})", text)
+    lm_m = re.search(r"(?m)^lastmod:\s*(\d{4}-\d{2}-\d{2})", text)
+    if not (date_m and lm_m):
+        return text
+    if lm_m.group(1) < date_m.group(1):
+        return re.sub(r"(?m)^lastmod:\s*.*$",
+                      f"lastmod: {date_m.group(1)}", text, count=1)
+    return text
+
+
 # REPARATUR 09.09.2026 (Reserve #4) + 11.09.2026 (Reserve #5):
 # Die kanonische CTA-Reparatur wohnt jetzt als gemeinsamer, selbsttestender
 # Heiler in scripts/fix_cta_hygiene.py und wird MEHRFACH in der Kette
@@ -139,7 +160,8 @@ def lift_to_today(index: Path) -> Path:
         if not m or m.group(1) != today:
             text = re.sub(r"(?m)^date:\s*.*$", f"date: {now_utc_iso()}",
                           text, count=1)
-            index.write_text(text, encoding="utf-8")
+        text = sync_lastmod_to_date(text)
+        index.write_text(text, encoding="utf-8")
         return index
     new_dir = POSTS_DIR / f"{today}-{_slug_tail(slug)}"
     if new_dir.exists():
@@ -150,6 +172,7 @@ def lift_to_today(index: Path) -> Path:
     text = new_index.read_text(encoding="utf-8")
     text = re.sub(r"(?m)^date:\s*.*$", f"date: {now_utc_iso()}",
                   text, count=1)
+    text = sync_lastmod_to_date(text)
     new_index.write_text(text, encoding="utf-8")
     return new_index
 
@@ -795,6 +818,13 @@ def selftest() -> int:
         digest = hashlib.sha256(idx.read_bytes()).hexdigest()
         if not _is_certified(idx, {"2026-09-01-reserve-a": digest}):
             fehler.append("Kandidat mit passendem Hash gilt nicht als ready")
+        lm_probe = ("---\ndate: 2026-09-26T08:45:06Z\nlastmod: 2026-09-25\n"
+                    "draft: true\nreserve: true\n---\nBody.")
+        if "lastmod: 2026-09-26" not in sync_lastmod_to_date(lm_probe):
+            fehler.append("lastmod wird beim Reserve-Lift nicht auf date angehoben")
+        lm_ok = lm_probe.replace("lastmod: 2026-09-25", "lastmod: 2026-09-27")
+        if sync_lastmod_to_date(lm_ok) != lm_ok:
+            fehler.append("neueres lastmod darf nicht zurückdatiert werden")
         # CTA-Hygiene (Reserve #4): „Ddiebesten“-Korruption muss deterministisch
         # zurück auf die kanonische Form, sonst kostet sie den Spelling-Score.
         bad = idx.parent / "bad.md"
@@ -836,7 +866,8 @@ def selftest() -> int:
             print(f"   - {e}")
         return 2
     print("✅ Reserve-Finisher-Selbsttest grün (Pool-Filter, Hash-Zertifikat, "
-          "Slug-Tail, CTA-Hygiene, Heiler-Deckung Gate↔Kette inkl. #349).")
+          "Slug-Tail, lastmod/date-Sync, CTA-Hygiene, Heiler-Deckung "
+          "Gate↔Kette inkl. #349).")
     return 0
 
 
