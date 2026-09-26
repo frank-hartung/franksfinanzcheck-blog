@@ -63,7 +63,13 @@ module.exports = {
       url: ['http://localhost/index.html'],
       numberOfRuns: 3, // Median von 3 – ein einzelner Lauf ist Rauschen
       settings: {
-        preset: 'desktop',
+        // KEIN preset: 'desktop' mehr (26.09.2026).
+        // Google bewertet Core Web Vitals überwiegend am mobilen Feld, und
+        // der Unterschied ist bei diesem Blog nicht kosmetisch: LCP 622 ms
+        // (desktop) gegen 3158 ms (mobil). Wer desktop misst, misst die
+        // Zahl, die ohnehin grün ist. Der Lighthouse-Standard IST mobil –
+        // deshalb steht hier bewusst nichts. e2e/variant-metrics.mjs misst
+        // dasselbe Profil als maßgeblich und zusätzlich desktop zum Vergleich.
         skipAudits: ['uses-http2', 'canonical'],
       },
     },

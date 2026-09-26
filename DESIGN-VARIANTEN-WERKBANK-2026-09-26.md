@@ -115,12 +115,13 @@ Bauzeit beider Varianten zusammen inkl. Messung: **6,7 s**.
 | Kontrast (Minimum, hell + dunkel) | 7,53 | 7,53 | ≥ 4,5 ✅ |
 | Kleinstes Tap-Ziel | 26,4 px | 26,4 px | ≥ 24 px ✅ |
 | CLS | 0 | 0 | ≤ 0,1 ✅ |
-| Lighthouse Performance | 0,93 | 0,94 | ≥ 0,90 ✅ |
+| Lighthouse Performance (mobil) | 0,99 | 0,99 | ≥ 0,90 ✅ |
 | Lighthouse Accessibility | 0,96 | 0,96 | ≥ 0,95 ✅ |
 | Lighthouse SEO | 1,00 | 1,00 | = 1,00 ✅ |
 | Lighthouse Best Practices | 0,96 | 0,96 | ≥ 0,95 ✅ |
 | Total Blocking Time | 39 ms | 63 ms | ≤ 200 ms ✅ |
-| Lighthouse LCP | 3110 ms | 3085 ms | ≤ 2500 ms ⚠️ |
+| Lighthouse LCP (mobil, nach Korrektur) | 1760 ms | 1809 ms | ≤ 2500 ms ✅ |
+| Lighthouse LCP (desktop) | 573 ms | 558 ms | ≤ 2500 ms ✅ |
 
 Damit sind für beide Seiten alle drei Messebenen vollständig – die
 Variante ist **freigabefähig**, aber weiterhin `entwurf` und
@@ -175,26 +176,32 @@ Vier echte Funde, alle behoben oder sauber zugeordnet:
    Basis hätte damit *niemanden* erreicht. Jetzt laufen alle drei Ebenen
    plus die Lighthouse-Kategorien durch die Bestandsprüfung.
 
-**Zwei offene Bestandsbefunde (nicht von dieser Arbeit verursacht):**
+**Zwei Bestandsbefunde – inzwischen behoben.**
+Vollständige Ursachenanalyse, Belege und Nachmessung:
+[`BESTANDSBEFUNDE-2026-09-26.md`](BESTANDSBEFUNDE-2026-09-26.md)
 
-* `/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/`
-  hat 58 direkte Kinder in `div.post-content` (Frühwarnung 54, harte
-  Grenze 60). Ein langer Artikel, kein Layoutfehler.
-* **Lighthouse-LCP 3110 ms auf der Startseite**, Budget 2500 ms.
-  **Wichtige Einordnung:** gemessen in einer gedrosselten Sandbox-VM mit
-  dem Fallback-Chromium – die absolute Zahl ist damit *kein* belastbares
-  Produktionsurteil. Sie gehört auf einem normalen CI-Runner nachgemessen
-  (`.github/workflows/design-varianten.yml`, Job `werkbank`), bevor
-  daraus eine Maßnahme wird. Beide Befunde laufen als P3 auf `basis` und
-  blockieren keine Variante.
-
----
+* **DOM-Kinder 58 → 49.** Die 58 Kinder waren 58 leere
+  `div.ff-content-chunk`-Hüllen. Die flache Teilung an H2 *und* H3 hatte
+  „ein Chunk mit vielen Kindern" gegen „viele Chunks" getauscht – die Zahl
+  der Chunks war selbst die neue Obergrenze. Jetzt zweistufig
+  (`ff-content-section` je H2, `ff-content-chunk` je H2/H3-Block), beide
+  Ebenen `display: contents`. Pixelgleichheit belegt: 4832 verglichene
+  Element-Geometrien, 0 Abweichungen > 1 px.
+* **Lighthouse-LCP mobil 3179 → 1760 ms** (Performance 0,93 → 0,99).
+  Ursache war weder die Seite noch die Sandbox: `e2e/server.mjs` lieferte
+  Text unkomprimiert aus, GitHub Pages liefert gzip/brotli (190 KB statt
+  31 KB). Auf simuliertem Mobilfunk waren das ~0,7 s Phantom-Ladezeit.
+  Nebenbei aufgedeckt: Die Lighthouse-Node-API ignoriert
+  `settings: { preset: 'desktop' }` stillschweigend – gemessen wurde mobil,
+  während `lighthouserc.cjs` desktop deklarierte. Beides behoben, beide
+  Profile werden jetzt gemessen und schreiben ihre Bedingungen mit.
 
 ## 6. Was noch zu tun ist
 
 | Was | Warum | Wie |
 |---|---|---|
-| **Chromium + Lighthouse in CI** | Tier B ist Freigabe-Pflicht und läuft nur mit Browser | Im Workflow `design-varianten.yml` bereits verdrahtet (`npx playwright install --with-deps chromium`, `npm i -D lighthouse`) – beim ersten Lauf verifizieren |
+| **Chromium + Lighthouse in CI** | Tier B ist Freigabe-Pflicht und läuft nur mit Browser | Im Workflow verdrahtet; lokal über den Repo-Fallback verifiziert (`npm i --no-save @sparticuz/chromium lighthouse` – beide in EINEM Befehl) |
+| **Inline-CSS nach Seitentyp trennen** | ~94 KiB der 129 KB sind auf der Startseite ungenutzt (Artikel-CSS) | Sitzt in `layouts/_partials/head.html` – **KRITISCH-versiegelt**, also menschliche Entscheidung mit Neusignatur. Nach der Kompressionskorrektur kein Druck (LCP mobil 1760 ms bei Budget 2500 ms) |
 | **Erste echte Freigabe** | `v-hero-conversion` ist Entwurf und soll es bleiben, bis gemessen wurde | `npm run design:lauf v-hero-conversion` → `npm run design:messen …` → Zahlen lesen → unterschreiben oder verwerfen |
 | **Umami-Auswertung nach 14 Tagen** | Das Labor sagt „darf ausgeliefert werden", nicht „ist besser" | `cta_click` je `slug` vergleichen; Abbruch, wenn die CTA-Summe sinkt |
 | **Figma/Relume-Anbindung** | Entwürfe kommen heute als Text-Hypothese herein | Feld `herkunft` im Register nimmt die Quelle auf; ein Figma-Export ändert am Ablauf nichts – er ersetzt nur Schritt 2 |

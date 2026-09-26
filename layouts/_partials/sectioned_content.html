@@ -15,13 +15,32 @@
      manuelle, ggf. bereits verschachtelte HTML-Blöcke unangetastet.
 
      ------------------------------------------------------------
-     NACHGEZOGEN 21.09.2026 (Issue #338, Layout-Automatisierung):
-     Die Teilung erfolgte nur an H2. Ein einzelner H2-Abschnitt mit vielen
-     Blöcken blieb damit trotzdem bei bis zu 58 direkten Kindern – zwei
-     Artikel lagen so an der Lighthouse-Grenze (60) und über der
-     Frühwarnung des Audits. Jetzt wird zusätzlich an JEDEM H3 geteilt:
-     die Gruppen folgen der Gliederung (H2 → H3), kein Abschnitt sammelt
-     mehr Dutzende Blöcke.
+     STAND 21.09.2026 (Issue #338): Die Teilung erfolgte zuerst nur an H2.
+     Ein einzelner H2-Abschnitt mit vielen Blöcken blieb damit bei bis zu
+     58 direkten Kindern. Daraufhin wurde zusätzlich an JEDEM H3 geteilt.
+
+     KORREKTUR 26.09.2026 (Design-Varianten-Werkbank, Bestandsbefund):
+     Die flache Teilung an H2 UND H3 hat das Problem nur verschoben. Sie
+     tauscht „ein Chunk mit vielen Kindern" gegen „viele Chunks" – und die
+     ANZAHL DER CHUNKS ist dann selbst die Obergrenze, denn alle hängen
+     nebeneinander unter .post-content. Gemessen am längsten Ratgeber
+     (standby-kosten-reduzieren, 32 H2 + 25 H3):
+
+         flach   → 59 Chunks nebeneinander → 58 Kinder (Frühwarnung 54)
+         zweistufig → 33 Kinder, größte Gruppe 7
+
+     Deshalb jetzt ZWEISTUFIG, der Gliederung folgend:
+
+         .post-content
+           └── div.ff-content-section        (eine je H2-Abschnitt)
+                 └── div.ff-content-chunk    (H2-Block, dann je H3 einer)
+
+     Beide Ebenen sind `display: contents` – es entsteht keine einzige
+     zusätzliche Layout-Box, die Darstellung bleibt pixelgleich. Der
+     Preis ist ein DOM-Knoten je H2-Abschnitt; das ist genau der Tausch,
+     den das Budget belohnt (Kinder/Tiefe sind die knappen Größen, die
+     Gesamtzahl der Elemente hat Luft – nachgemessen mit
+     scripts/dom_audit.py).
 
      Sicherheit dieser Regex-Teilung (sie ist eine Text-Operation, keine
      Baum-Operation): Sie greift nur bei Überschriften MIT id, also nur bei
@@ -39,8 +58,27 @@
      ============================================================ */ -}}
 {{- $content := printf "%s" . -}}
 {{- if findRE `<h[23] id="[^"]+"[^>]*>` $content -}}
-  {{- $content = replaceRE `(<h[23] id="[^"]+"[^>]*>)` `</div><div class="ff-content-chunk">$1` $content -}}
-  {{- printf `<div class="ff-content-chunk">%s</div>` $content | safeHTML -}}
+
+  {{- /* 1) Innere Ebene: an jedem H3 einen neuen Chunk beginnen. */ -}}
+  {{- $content = replaceRE `(<h3 id="[^"]+"[^>]*>)` `</div><div class="ff-content-chunk">$1` $content -}}
+
+  {{- /* 2) Äußere Ebene: an jedem H2 den offenen Chunk UND die offene
+         Gruppe schließen, dann beide neu öffnen. Die Reihenfolge der
+         schließenden Tags (erst Chunk, dann Gruppe) ist zwingend – sie
+         hält die Verschachtelung ausgeglichen, egal ob zuvor ein H3
+         geteilt hat oder nicht. */ -}}
+  {{- $content = replaceRE `(<h2 id="[^"]+"[^>]*>)` `</div></div><div class="ff-content-section"><div class="ff-content-chunk">$1` $content -}}
+
+  {{- /* 3) Das Ganze in die erste Gruppe einfassen. */ -}}
+  {{- $content = printf `<div class="ff-content-section"><div class="ff-content-chunk">%s</div></div>` $content -}}
+
+  {{- /* 4) Beginnt der Artikel direkt mit einer Überschrift, entsteht oben
+         eine leere Gruppe. Leere Hüllen kosten DOM-Knoten ohne Nutzen –
+         und genau die zu sparen ist der Zweck dieses Partials. */ -}}
+  {{- $content = replaceRE `<div class="ff-content-chunk">\s*</div>` "" $content -}}
+  {{- $content = replaceRE `<div class="ff-content-section">\s*</div>` "" $content -}}
+
+  {{- $content | safeHTML -}}
 {{- else -}}
   {{- $content | safeHTML -}}
 {{- end -}}

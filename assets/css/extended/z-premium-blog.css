@@ -294,7 +294,13 @@ body.ff-scrolled .header {
 /* DOM-Budget: sectioned_content.html teilt lange Markdown-Inhalte in
    kleine Gruppen. display:contents erzeugt keine zusätzliche Layout-Box,
    sodass Typografie, Abstände, Tabellen und Affiliate-CTAs pixelgleich
-   bleiben. Die Gruppierung wirkt ausschließlich auf die DOM-Struktur. */
+   bleiben. Die Gruppierung wirkt ausschließlich auf die DOM-Struktur.
+
+   Zwei Ebenen seit 26.09.2026: .ff-content-section je H2-Abschnitt,
+   darin .ff-content-chunk je H2-/H3-Block. Beide MÜSSEN display:contents
+   behalten – bekäme eine der beiden eine eigene Box, änderten sich
+   schlagartig alle Abstände im Artikel. */
+.ff-content-section,
 .ff-content-chunk {
   display: contents;
 }

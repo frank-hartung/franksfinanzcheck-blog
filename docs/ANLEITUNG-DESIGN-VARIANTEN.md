@@ -238,6 +238,8 @@ Bausteine P1 – vor allen Geschmacksfragen.
 | `npx playwright install chromium` scheitert (ECONNRESET, `cdn.playwright.dev`) | Netz sperrt das Playwright-CDN | Repo-Fallback nutzen: `npm i --no-save @sparticuz/chromium lighthouse` – **beide in EINEM Befehl**, sonst räumt der zweite `--no-save`-Aufruf das Paket des ersten wieder weg |
 | Basis-Budget gerissen, aber niemand meldet es | Die Variante wird (zu Recht) nicht angeklagt – und sonst prüfte niemand die Basis | behoben: `pruefe_bestand()` läuft über **alle drei** Messebenen, Befunde als P3 auf `basis` |
 | Playwright meldet LCP 184 ms, Lighthouse 3110 ms | Ungedrosselt auf localhost vs. simulierte Drosselung – zwei verschiedene Messungen mit gleichem Namen | Die 2500-ms-Schwelle gilt nur für Lighthouse; der Playwright-Wert dient als Basis/Variante-Delta |
+| Lighthouse misst mobil, obwohl `preset: 'desktop'` im Aufruf steht | Die Lighthouse-**Node-API** kennt `preset` nicht (CLI-Begriff) und ignoriert es stillschweigend | Echte Config-Objekte übergeben (`lighthouse/core/config/desktop-config.js`) und `formFactor` in die Messdatei schreiben |
+| Lighthouse-LCP mobil weit über Budget, Bild aber optimal konfiguriert | `e2e/server.mjs` lieferte Text unkomprimiert, GitHub Pages liefert gzip/brotli – 190 KB statt 31 KB | behoben: Der Test-Server komprimiert jetzt wie Pages. LCP mobil 3179 → 1760 ms |
 
 ---
 
@@ -261,6 +263,14 @@ python3 scripts/design_variant_gate.py --selftest
 
 ## 7. Grenzen – was diese Werkbank NICHT kann
 
+* **Sie misst zwei Profile, und das ist Absicht.** Lighthouse läuft mobil
+  (maßgeblich – Google bewertet Core Web Vitals überwiegend am mobilen
+  Feld) und zusätzlich desktop. Der Unterschied ist bei diesem Blog nicht
+  kosmetisch: LCP 1760 ms mobil gegen 573 ms desktop. Wer nur desktop
+  misst, misst die Zahl, die ohnehin grün ist. Welches Profil eine Zahl
+  erzeugt hat, steht in `messung.json` (`formFactor`, `cpu_faktor`,
+  `netz_kbps`, `benchmark_index`) – eine Messung ohne Selbstauskunft ist
+  deutbar und damit wertlos.
 * **Sie misst keine echten Nutzer.** Tier B ist Labor. Ob die Hypothese
   stimmt, zeigt erst Umami über 14 Tage (`cta_click` je `slug`). Die
   Werkbank stellt nur sicher, dass eine Variante ausgeliefert werden

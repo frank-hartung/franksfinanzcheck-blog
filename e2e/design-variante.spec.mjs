@@ -94,6 +94,17 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
     }
   });
 
+  test('der Test-Server komprimiert Text wie GitHub Pages', async ({ page }) => {
+    // 26.09.2026: e2e/server.mjs lieferte Text unkomprimiert aus, Pages tut
+    // das nicht. Auf Lighthouses simuliertem Mobilfunk kostete das rund
+    // 0,7 s – und erschien als „LCP-Budget gerissen" (3179 ms). Mit
+    // Kompression: 1760 ms. Eine Messumgebung, die pessimistischer ist als
+    // die Wirklichkeit, erzeugt Befunde, die niemand beheben kann.
+    const antwort = await page.goto('/');
+    const kodierung = antwort.headers()['content-encoding'];
+    expect(kodierung, 'HTML wird komprimiert ausgeliefert').toMatch(/br|gzip/);
+  });
+
   test('das Register aktiviert keine Variante ohne Unterschrift', () => {
     // Bewusst als Rohtext-Prüfung: Ein YAML-Parser als Test-Abhängigkeit
     // wäre für eine einzige Zeile nicht zu rechtfertigen. Die

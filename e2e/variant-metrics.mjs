@@ -263,10 +263,32 @@ async function messeSeite(browser, url, farbschema) {
 // ---------------------------------------------------------------
 // Lighthouse (optional – niemals stillschweigend übersprungen)
 // ---------------------------------------------------------------
+// Messprofile. Die Reihenfolge ist die Reihenfolge der Läufe.
+//
+// WARUM ZWEI PROFILE – UND WARUM DAS HIER SO AUSFÜHRLICH STEHT
+// Am 26.09.2026 lief diese Messung wochenlang falsch: Der Aufruf
+// übergab `settings: { preset: 'desktop' }` an die Lighthouse-NODE-API.
+// Die kennt `preset` nicht (das ist ein CLI-Begriff) und ignoriert es
+// stillschweigend – gemessen wurde also MOBIL, während lighthouserc.cjs
+// „desktop" deklarierte. Ergebnis: zwei Wahrheiten über dieselbe Zahl,
+// LCP 3158 ms (mobil) gegen 622 ms (desktop).
+// Profile werden deshalb nur noch über echte Config-Objekte gesetzt und
+// das gemessene `formFactor` wird in die Messdatei geschrieben. Eine
+// Messung, die nicht sagt, unter welchen Bedingungen sie entstand, ist
+// keine Messung.
+const PROFILE = [
+  // Maßgeblich: Google bewertet Core Web Vitals am Feld – und das ist
+  // bei einem Ratgeber-Blog überwiegend mobil.
+  { name: 'mobil', config: undefined, massgeblich: true },
+  { name: 'desktop', config: 'desktop', massgeblich: false },
+];
+
 async function messeLighthouse(url, launchOptions) {
   let lighthouse;
+  let desktopConfig;
   try {
     ({ default: lighthouse } = await import('lighthouse'));
+    ({ default: desktopConfig } = await import('lighthouse/core/config/desktop-config.js'));
   } catch (e) {
     return {
       status: 'nicht_verfuegbar',
@@ -277,24 +299,31 @@ async function messeLighthouse(url, launchOptions) {
     };
   }
 
-  let browser;
-  try {
-    browser = await chromium.launch({
-      ...launchOptions,
-      args: [...(launchOptions.args || []), '--remote-debugging-port=9222'],
-    });
-    const ergebnis = await lighthouse(url, {
-      port: 9222,
-      output: 'json',
-      logLevel: 'error',
-      onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
-    });
-    const lhr = ergebnis.lhr;
-    const score = (k) => (lhr.categories[k] ? Math.round(lhr.categories[k].score * 100) / 100 : null);
-    return {
-      status: 'ok',
-      gemessen: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
-      werte: {
+  const werte = { profile: {} };
+  let port = 9222;
+
+  for (const profil of PROFILE) {
+    let browser;
+    try {
+      browser = await chromium.launch({
+        ...launchOptions,
+        args: [...(launchOptions.args || []), `--remote-debugging-port=${port}`],
+      });
+      const { lhr } = await lighthouse(
+        url,
+        { port, output: 'json', logLevel: 'error',
+          onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] },
+        profil.config === 'desktop' ? desktopConfig : undefined
+      );
+      const score = (k) =>
+        lhr.categories[k] ? Math.round(lhr.categories[k].score * 100) / 100 : null;
+      const t = lhr.configSettings.throttling || {};
+      const messung = {
+        // Selbstauskunft der Messung – ohne sie ist jede Zahl deutbar.
+        formFactor: lhr.configSettings.formFactor,
+        cpu_faktor: t.cpuSlowdownMultiplier ?? null,
+        netz_kbps: t.throughputKbps ?? null,
+        benchmark_index: Math.round(lhr.environment?.benchmarkIndex ?? 0),
         lighthouse: {
           performance: score('performance'),
           accessibility: score('accessibility'),
@@ -303,14 +332,35 @@ async function messeLighthouse(url, launchOptions) {
         },
         tbt_ms: Math.round(lhr.audits['total-blocking-time']?.numericValue ?? 0),
         lcp_ms: Math.round(lhr.audits['largest-contentful-paint']?.numericValue ?? 0),
+        fcp_ms: Math.round(lhr.audits['first-contentful-paint']?.numericValue ?? 0),
         cls: Math.round((lhr.audits['cumulative-layout-shift']?.numericValue ?? 0) * 1000) / 1000,
-      },
-    };
-  } catch (e) {
-    return { status: 'fehler', grund: String(e.message).slice(0, 300) };
-  } finally {
-    await browser?.close();
+        ungenutztes_css_kb: Math.round(
+          (lhr.audits['unused-css-rules']?.details?.overallSavingsBytes ?? 0) / 1024),
+      };
+      werte.profile[profil.name] = messung;
+      if (profil.massgeblich) {
+        // Die maßgebliche Messung steht zusätzlich flach da – das Gate
+        // bewertet sie, und `profil_massgeblich` sagt, welche es ist.
+        Object.assign(werte, messung, { profil_massgeblich: profil.name });
+      }
+      console.log(
+        `  ✓ ${profil.name.padEnd(7)} ${messung.formFactor} · cpu×${messung.cpu_faktor} · ` +
+        `LCP ${messung.lcp_ms}ms · TBT ${messung.tbt_ms}ms · ` +
+        `perf ${messung.lighthouse.performance} · a11y ${messung.lighthouse.accessibility}`
+      );
+    } catch (e) {
+      return { status: 'fehler', grund: `Profil ${profil.name}: ${String(e.message).slice(0, 260)}` };
+    } finally {
+      await browser?.close();
+      port += 1;
+    }
   }
+
+  return {
+    status: 'ok',
+    gemessen: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
+    werte,
+  };
 }
 
 // ---------------------------------------------------------------
@@ -379,15 +429,10 @@ async function messeVariante(id, launchOptions, browserVerfuegbar) {
       await browser.close();
     }
 
+    console.log(`  Lighthouse (${id}):`);
     const lh = await messeLighthouse(url, launchOptions);
     schreibeTier(id, 'lighthouse', lh);
-    if (lh.status === 'ok') {
-      const s = lh.werte.lighthouse;
-      console.log(
-        `  ✓ ${id}: Lighthouse perf ${s.performance} · a11y ${s.accessibility} ` +
-          `· seo ${s.seo} · bp ${s['best-practices']}`
-      );
-    } else {
+    if (lh.status !== 'ok') {
       console.warn(`  ⚠ ${id}: Lighthouse ${lh.status} – ${lh.grund}`);
     }
   } catch (e) {
