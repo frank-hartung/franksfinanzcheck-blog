@@ -299,6 +299,51 @@
     });
   }
 
+  /* ============================================================
+     SCHWEBENDE ARTIKEL-NAVIGATION „Im Artikel“ (Desktop)
+     ------------------------------------------------------------
+     Befund 26.09.2026 (Frank, Tierkrankenversicherungs-Artikel):
+     Das Verzeichnis listete hart nur die ERSTEN 9 H2-Abschnitte.
+     Lange Ratgeber (hier 24 Abschnitte) brachen dadurch mitten im
+     Text ab – „Fazit“ und „Häufige Fragen“ tauchten nie auf, und
+     der Leser sah beim Scrollen keinen aktiven Eintrag mehr, weil
+     die markierte Überschrift längst unterhalb der Liste lag.
+     Zusätzlich lief das Kästchen auf mittleren Desktops (1241 px
+     bis ~1600 px) in den Textkörper hinein.
+
+     Premium-Reparatur (Profi-Agentur-Niveau):
+       1. VOLLSTÄNDIG: alle H2-Abschnitte, kein stilles Abschneiden.
+       2. Kopfzeile bleibt stehen, die Liste darunter scrollt
+          (eigener Scroll-Container, Fade-Kanten per CSS).
+       3. Fortschritt: „7 / 24“ + feiner Fortschrittsbalken.
+       4. Ehrliche Lesemarke: scrollbasierte Positionsbestimmung
+          (die letzte Überschrift oberhalb der Lesezone) statt
+          IntersectionObserver – bei sehr langen Abschnitten blieb
+          dort sonst gar kein Eintrag markiert.
+       5. Selbstnachführung: der aktive Eintrag wird innerhalb der
+          Liste sichtbar gehalten, ohne die Seite zu bewegen.
+       6. Ruhige Zeilen: lange Überschriften werden am Doppelpunkt
+          bzw. an der Wortgrenze gekürzt; `aria-label` und `title`
+          tragen IMMER den vollen Überschriftentext (Label-Vertrag
+          der „§“-Wache, scripts/ff_heading_glyph_guard_test.mjs).
+     ============================================================ */
+
+  /** Ruhiges Kurz-Etikett für die schmale Spalte.
+      Der volle Text bleibt in aria-label/title erhalten. */
+  function miniTocLabel(label) {
+    var text = String(label || '').replace(/\s+/g, ' ').trim();
+    if (text.length <= 34) return text;
+    // „Fazit: Gute Tierabsicherung ist eine Budgetentscheidung“ → „Fazit“
+    var colon = text.indexOf(': ');
+    if (colon >= 4 && colon <= 30) return text.slice(0, colon);
+    if (text.length <= 52) return text;
+    // Sauber an der Wortgrenze kürzen statt mitten im Wort abschneiden
+    var cut = text.slice(0, 50);
+    var space = cut.lastIndexOf(' ');
+    if (space > 28) cut = cut.slice(0, space);
+    return cut.replace(/[\s,;:–-]+$/, '') + '…';
+  }
+
   function createMiniToc() {
     // /posts/ ist eine Übersicht, kein Artikel. Der schwebende Artikel-ToC
     // würde die Themenkarten überdecken und nur die nachgelagerte FAQ zeigen.
@@ -314,51 +359,150 @@
     var nav = doc.createElement('nav');
     nav.className = 'ff-mini-toc';
     nav.setAttribute('aria-label', 'Artikel-Navigation');
-    nav.innerHTML = '<strong class="ff-mini-toc__title">Im Artikel</strong>';
+    if (headings.length > 9) nav.classList.add('ff-mini-toc--long');
 
-    var links = headings.slice(0, 9).map(function (heading) {
+    var head = doc.createElement('div');
+    head.className = 'ff-mini-toc__head';
+
+    var title = doc.createElement('strong');
+    title.className = 'ff-mini-toc__title';
+    title.textContent = 'Im Artikel';
+    head.appendChild(title);
+
+    var counter = doc.createElement('span');
+    counter.className = 'ff-mini-toc__count';
+    counter.setAttribute('aria-hidden', 'true');
+    var posEl = doc.createElement('span');
+    posEl.className = 'ff-mini-toc__pos';
+    posEl.textContent = '1';
+    counter.appendChild(posEl);
+    counter.appendChild(doc.createTextNode(' / ' + headings.length));
+    head.appendChild(counter);
+
+    var rail = doc.createElement('span');
+    rail.className = 'ff-mini-toc__rail';
+    rail.setAttribute('aria-hidden', 'true');
+    rail.innerHTML = '<span class="ff-mini-toc__railfill"></span>';
+    head.appendChild(rail);
+
+    nav.appendChild(head);
+
+    var list = doc.createElement('div');
+    list.className = 'ff-mini-toc__list';
+    nav.appendChild(list);
+
+    var links = headings.map(function (heading) {
       var a = doc.createElement('a');
       a.href = '#' + heading.id;
       // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
       // draußen (Befund 10.09.2026 – das „§“ stand hier früher im Text).
       var label = headingText(heading);
+      // Der volle Text ist der Label-Vertrag (Screenreader + Wächter-Test),
+      // sichtbar ist die ruhige Kurzform.
+      a.setAttribute('aria-label', label);
+      a.setAttribute('title', label);
       // Premium hanging indent: split the leading "N." off the label so the
       // wrapped lines of the title align with the first word after the number
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
       var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
       if (m) {
         a.className = 'ff-mini-toc--num';
-        a.setAttribute('aria-label', label);
         var num = doc.createElement('span');
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
         num.setAttribute('aria-hidden', 'true');
         var txt = doc.createElement('span');
         txt.className = 'ff-mini-toc__txt';
-        txt.textContent = m[2];
+        txt.textContent = miniTocLabel(m[2]);
         a.appendChild(num);
         a.appendChild(txt);
       } else {
-        a.textContent = label;
+        a.textContent = miniTocLabel(label);
       }
-      nav.appendChild(a);
+      list.appendChild(a);
       return a;
     });
 
     doc.body.appendChild(nav);
+    setupMiniTocSpy(nav, list, headings, links, posEl);
+  }
 
-    if ('IntersectionObserver' in win) {
-      var activeId = null;
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          activeId = entry.target.id;
-          links.forEach(function (link) {
-            link.setAttribute('aria-current', link.getAttribute('href') === '#' + activeId ? 'true' : 'false');
-          });
-        });
-      }, { rootMargin: '-18% 0px -72% 0px', threshold: 0.01 });
-      headings.forEach(function (h) { observer.observe(h); });
+  /** Lesemarke, Zähler, Fortschritt und Selbstnachführung der Liste. */
+  function setupMiniTocSpy(nav, list, headings, links, posEl) {
+    var offsets = [];
+    var activeIndex = -1;
+    var ticking = false;
+
+    function measure() {
+      var pageY = win.pageYOffset || root.scrollTop || 0;
+      offsets = headings.map(function (h) {
+        return h.getBoundingClientRect().top + pageY;
+      });
+    }
+
+    /** Hält den aktiven Eintrag im sichtbaren Teil der Liste – ohne die
+        Seite selbst zu scrollen (kein scrollIntoView). */
+    function keepVisible(link) {
+      if (!link || typeof list.scrollTop !== 'number') return;
+      var viewTop = list.scrollTop;
+      var viewBottom = viewTop + list.clientHeight;
+      var top = link.offsetTop;
+      var bottom = top + link.offsetHeight;
+      var pad = 24;
+      var target = null;
+      if (top - pad < viewTop) target = Math.max(0, top - pad);
+      else if (bottom + pad > viewBottom) target = bottom + pad - list.clientHeight;
+      if (target === null) return;
+      if (!prefersReducedMotion && typeof list.scrollTo === 'function') {
+        try { list.scrollTo({ top: target, behavior: 'smooth' }); return; } catch (e) { /* ältere Engines */ }
+      }
+      list.scrollTop = target;
+    }
+
+    function update() {
+      if (!offsets.length) return;
+      var pageY = win.pageYOffset || root.scrollTop || 0;
+      var readLine = pageY + Math.min(180, win.innerHeight * 0.28);
+      var index = 0;
+      for (var i = 0; i < offsets.length; i++) {
+        if (offsets[i] <= readLine) index = i;
+      }
+      // Am Seitenende gehört die Marke auf den letzten Abschnitt.
+      if (pageY + win.innerHeight >= root.scrollHeight - 8) index = offsets.length - 1;
+      if (index === activeIndex) return;
+      activeIndex = index;
+      for (var j = 0; j < links.length; j++) {
+        links[j].setAttribute('aria-current', j === index ? 'true' : 'false');
+        if (j < index) links[j].classList.add('ff-mini-toc--past');
+        else links[j].classList.remove('ff-mini-toc--past');
+      }
+      posEl.textContent = String(index + 1);
+      nav.style.setProperty('--ff-toc-progress', ((index + 1) / links.length).toFixed(4));
+      keepVisible(links[index]);
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      win.requestAnimationFrame(function () {
+        ticking = false;
+        update();
+      });
+    }
+
+    function remeasure() {
+      measure();
+      activeIndex = -1;
+      update();
+    }
+
+    measure();
+    update();
+    win.addEventListener('scroll', onScroll, { passive: true });
+    win.addEventListener('resize', remeasure, { passive: true });
+    win.addEventListener('load', remeasure, { once: true, passive: true });
+    if (doc.fonts && doc.fonts.ready && typeof doc.fonts.ready.then === 'function') {
+      doc.fonts.ready.then(remeasure).catch(function () { /* egal */ });
     }
   }
 
