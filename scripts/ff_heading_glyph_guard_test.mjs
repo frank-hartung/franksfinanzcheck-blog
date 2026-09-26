@@ -275,7 +275,8 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
     t.ok('Mini-TOC-Links vorhanden', links.length >= 3, 'Links: ' + links.length);
     t.ok('Kein Mini-TOC-Label enthält „§“ oder „#“',
       links.every((a) => !/[§#]/.test(a.getAttribute('aria-label') || a.textContent)));
-    // Mini-TOC listet bewusst nur H2-Abschnitte (Design-Vertrag)
+    // Mini-TOC listet bewusst nur H2-Abschnitte – aber seit 26.09.2026 ALLE
+    // (vorher hart auf 9 gedeckelt: lange Ratgeber verloren Fazit + FAQ).
     const expected = [...doc.querySelectorAll('.post-content h2[id]')]
       .map((h) => {
         const clone = h.cloneNode(true);
@@ -287,8 +288,7 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
           .replace(/[\s#§]+$/g, '')
           .trim();
       })
-      .filter((label) => label.length > 2)
-      .slice(0, 9);
+      .filter((label) => label.length > 2);
     const actual = links.map((a) => (a.getAttribute('aria-label') || a.textContent)
       .replace(/\s+/g, ' ').trim());
     t.ok('Mini-TOC ≡ sichtbarem Überschriftentext (Label-Vertrag)',
