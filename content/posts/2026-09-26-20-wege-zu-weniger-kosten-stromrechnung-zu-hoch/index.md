@@ -27,6 +27,8 @@ kurzantwort: "Durch einfache Maßnahmen wie LED‑Beleuchtung, Geräte mit Zeits
 
 Wenn im Herbst der Brief des Energieversorgers im Briefkasten liegt, folgt oft der Schreck: Eine saftige Nachzahlung droht, und der monatliche Abschlag klettert nach oben. Viele Haushalte nehmen diese Kosten als unveränderliche Fixkosten hin, doch das ist ein Trugschluss. Tatsächlich lassen sich durch gezielte **Strom sparen Tipps** oft dreistellige Beträge pro Jahr einsparen, ohne dass der Lebenskomfort spürbar sinkt. Es geht nicht darum, im Dunkeln zu sitzen, sondern die unsichtbaren Verschwender im eigenen Heim zu entlarven und systematisch auszuschalten.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**
 * **Standby-Modus eliminieren:** Vernetzte Geräte und Unterhaltungselektronik verursachen im Ruhemodus oft vermeidbare Kosten von rund 50 bis 100 € jährlich.
 * **Effizienz bei Großgeräten:** Der Austausch alter Kühlgefrierkombinationen oder Waschmaschinen rechnet sich meist schneller als gedacht.
