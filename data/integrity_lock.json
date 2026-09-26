@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-26T11:51:14.343020+00:00",
-  "head": "619c68c",
+  "signed_at": "2026-09-26T22:05:17.633910+00:00",
+  "head": "f61001a1",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
-    "hugo.toml": "dbdcc3a6d563707b40480e9380a6b8b0756c2a3ac720727fec83e710deb784c1",
+    "hugo.toml": "da64f31a29d3d7c3e6e849b6c21cf47f04b48fdb64a746eb600a25c6574fdc93",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -20,8 +20,8 @@
     "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
     "layouts/pillar/single.html": "e77d471134763a18a0c70de3962ba9c6c5a776cd144a803ecfe95dc4e06c9a32",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
-    "layouts/shortcodes/einspartabelle.html": "dc708a6403f0964c2efbc4da1155b7c7c86ee1d22b28b2613bd8886e7f177826",
-    "layouts/shortcodes/tarifvergleich.html": "6c357637a5329fedace5baf1e15a0b41916cd67aa7bc68f88d033060dbf61a99",
+    "layouts/shortcodes/einspartabelle.html": "7124bea70e1ad32fd2ec84ffd24383bc54c5596fe56242dceb15f066c31ec3f0",
+    "layouts/shortcodes/tarifvergleich.html": "c32e6d5be2b3a025cbdeeab850321fae84225768cc68f959332419afc55d9d6f",
     "scripts/affiliate_integrity_gate.py": "ecd407279ec0cc8d7c79c081efc7a977450a8604f41a3c4c2d5f8a5dd281b3bc",
     "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
@@ -47,41 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "c2ac980ad9db5d2b006e74393ad615ba669479cea1a95e71fd0cd6841c55e51b",
-  "audit_start_sha256": "9e99f69242ce9469d37bdb9be8a1b8173dbe98e606a662b8c67f6e0c6a7be249",
+  "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac",
+  "audit_start_sha256": "0cf44b7bc2420540c7940560aa3dbb36e96327b21040e84b05d7afea13e6a0ab",
   "audit": [
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "e888cf8",
-      "geaendert": [
-        "layouts/_partials/affiliate_ziele_data.html"
-      ],
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-09-19",
-      "art": "set-current",
-      "head": "fb6120b",
-      "geaendert": [
-        "layouts/_default/_markup/render-link.html",
-        "layouts/_partials/affiliate_anchor_attrs.html",
-        "layouts/pillar/list.html",
-        "layouts/shortcodes/einspartabelle.html",
-        "layouts/shortcodes/tarifvergleich.html"
-      ],
-      "prev_sha256": "9e99f69242ce9469d37bdb9be8a1b8173dbe98e606a662b8c67f6e0c6a7be249"
-    },
-    {
-      "date": "2026-09-20",
-      "art": "set-current",
-      "head": "4d036a7",
-      "geaendert": [
-        "data/brand_lock.yaml",
-        "hugo.toml"
-      ],
-      "prev_sha256": "570eb2b3e5a64a983cb24f7c7226fe2b370a9b0e1eb2ae0107950c681ae803f1"
-    },
     {
       "date": "2026-09-20",
       "art": "set-current",
@@ -89,7 +57,7 @@
       "geaendert": [
         "layouts/_partials/head.html"
       ],
-      "prev_sha256": "24f21c862e0cd82dfbc8de0366a5c41fda26400cd6a58313fa896b369993f0d1"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-21",
@@ -274,8 +242,94 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "0c877bc1ad5262e53238aacfeae9a9ee874e20a806d34592278f380313279353",
-      "files_sha256": "c2ac980ad9db5d2b006e74393ad615ba669479cea1a95e71fd0cd6841c55e51b"
+      "files_sha256": "c2ac980ad9db5d2b006e74393ad615ba669479cea1a95e71fd0cd6841c55e51b",
+      "prev_sha256": "0c877bc1ad5262e53238aacfeae9a9ee874e20a806d34592278f380313279353"
+    },
+    {
+      "date": "2026-09-26",
+      "art": "set-current",
+      "head": "0bd3c3e",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "0bd3c3e",
+              "datum": "2026-09-26",
+              "betreff": "Merge pull request #406 from frank-hartung/arena/01a0df1a-franksfinanzcheck-blog"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "files_sha256": "b7c67bad0361c66e5b75edc1dbbde3be948c8be86b4166ca4469b6d611030e3f",
+      "prev_sha256": "becbf47bc206e4457757d8cdd0c66a57a961444cd3648aa386bca440610360c1"
+    },
+    {
+      "date": "2026-09-26",
+      "art": "set-current",
+      "head": "0bd3c3e",
+      "geaendert": [],
+      "files_sha256": "b7c67bad0361c66e5b75edc1dbbde3be948c8be86b4166ca4469b6d611030e3f",
+      "prev_sha256": "3e7e68bb5ea5eed04ff006f07b0c8ad11d1603170779b991d9a925fca83f157b"
+    },
+    {
+      "date": "2026-09-26",
+      "art": "set-current",
+      "head": "f61001a1",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/shortcodes/einspartabelle.html",
+        "layouts/shortcodes/tarifvergleich.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "c7dc2db1",
+              "datum": "2026-09-26",
+              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "layouts/shortcodes/einspartabelle.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "c7dc2db1",
+              "datum": "2026-09-26",
+              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "layouts/shortcodes/tarifvergleich.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "c7dc2db1",
+              "datum": "2026-09-26",
+              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "dd3718e3dbea710da874edf6a2be5a6db29eeb27cf40e37f105c5d7c69140e0e",
+      "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac"
     }
   ]
 }

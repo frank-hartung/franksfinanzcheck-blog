@@ -329,166 +329,10 @@
      ============================================================ */
 
   /** Vollständiges Etikett für die Navigationsspalte.
-      Stand 26.09.2026: KEINE Kürzung mehr. Frank-Befund – „das
-      Inhaltsverzeichnis soll vollständig angezeigt werden“: Kurzformen
-      wie „Fazit…“ verschwiegen den eigentlichen Abschnittstitel. Die
-      Spalte bricht stattdessen sauber um (CSS: text-wrap:pretty,
-      kein line-clamp), der Scrollbereich fängt die Höhe auf. */
+      „Vollständig anzeigen“ gilt auch für die schwebende Navigation:
+      lange Titel brechen sauber um; der Listenbereich übernimmt die Höhe. */
   function miniTocLabel(label) {
     return String(label || '').replace(/\s+/g, ' ').trim();
-  }
-
-  /* ------------------------------------------------------------
-     BEWEGLICHE NAVIGATION (Frank-Befund 26.09.2026)
-     „Das Inhaltsverzeichnis soll nicht fest stehen, sondern
-     beweglich sein.“ → Die Box lässt sich an ihrer Kopfzeile
-     frei im Fenster verschieben (Maus, Finger, Stift über
-     Pointer-Events; Tastatur über Pfeiltasten auf dem Griff).
-     Die Position wird pro Gerät gemerkt (localStorage) und bei
-     jedem Fensterwechsel in den sichtbaren Bereich zurückgeholt.
-     Ein Doppelklick bzw. „Home“ stellt den Standardplatz wieder
-     her – man kann sich also nicht aussperren.
-     ------------------------------------------------------------ */
-  var TOC_POS_KEY = 'ff:toc:pos:v1';
-
-  function readTocPos() {
-    try {
-      var raw = win.localStorage.getItem(TOC_POS_KEY);
-      if (!raw) return null;
-      var val = JSON.parse(raw);
-      if (!val || typeof val.left !== 'number' || typeof val.top !== 'number') return null;
-      return val;
-    } catch (e) { return null; }
-  }
-
-  function writeTocPos(pos) {
-    try {
-      if (pos) win.localStorage.setItem(TOC_POS_KEY, JSON.stringify(pos));
-      else win.localStorage.removeItem(TOC_POS_KEY);
-    } catch (e) { /* privater Modus: dann eben nur für diese Seite */ }
-  }
-
-  function setupMiniTocDrag(nav, handle, onMoved) {
-    var MARGIN = 12;
-    var dragging = false;
-    var pointerId = null;
-    var grabX = 0;
-    var grabY = 0;
-
-    function size() {
-      return { w: nav.offsetWidth || 0, h: nav.offsetHeight || 0 };
-    }
-
-    function clamp(left, top) {
-      var s = size();
-      var maxLeft = Math.max(MARGIN, win.innerWidth - s.w - MARGIN);
-      var maxTop = Math.max(MARGIN, win.innerHeight - s.h - MARGIN);
-      return {
-        left: Math.min(Math.max(MARGIN, left), maxLeft),
-        top: Math.min(Math.max(MARGIN, top), maxTop)
-      };
-    }
-
-    function place(pos, persist) {
-      var c = clamp(pos.left, pos.top);
-      nav.style.left = c.left + 'px';
-      nav.style.top = c.top + 'px';
-      nav.style.right = 'auto';
-      nav.classList.add('ff-mini-toc--moved');
-      if (persist !== false) writeTocPos(c);
-      if (onMoved) onMoved();
-      return c;
-    }
-
-    function reset() {
-      nav.style.left = '';
-      nav.style.top = '';
-      nav.style.right = '';
-      nav.classList.remove('ff-mini-toc--moved');
-      writeTocPos(null);
-      if (onMoved) onMoved();
-    }
-
-    function restore() {
-      var pos = readTocPos();
-      if (pos) place(pos, false);
-    }
-
-    function onPointerDown(ev) {
-      // Nur Hauptzeiger, und nicht auf dem Zurücksetzen-Knopf.
-      if (ev.button != null && ev.button !== 0) return;
-      if (ev.target && ev.target.closest && ev.target.closest('.ff-mini-toc__reset')) return;
-      var rect = nav.getBoundingClientRect();
-      grabX = ev.clientX - rect.left;
-      grabY = ev.clientY - rect.top;
-      dragging = true;
-      pointerId = ev.pointerId;
-      nav.classList.add('ff-mini-toc--dragging');
-      if (handle.setPointerCapture && pointerId != null) {
-        try { handle.setPointerCapture(pointerId); } catch (e) { /* egal */ }
-      }
-      ev.preventDefault();
-    }
-
-    function onPointerMove(ev) {
-      if (!dragging || (pointerId != null && ev.pointerId !== pointerId)) return;
-      place({ left: ev.clientX - grabX, top: ev.clientY - grabY }, false);
-      ev.preventDefault();
-    }
-
-    function onPointerUp(ev) {
-      if (!dragging) return;
-      dragging = false;
-      nav.classList.remove('ff-mini-toc--dragging');
-      if (handle.releasePointerCapture && pointerId != null) {
-        try { handle.releasePointerCapture(pointerId); } catch (e) { /* egal */ }
-      }
-      pointerId = null;
-      var rect = currentPos();
-      place({ left: rect.left, top: rect.top });
-      if (ev && ev.preventDefault) ev.preventDefault();
-    }
-
-    /** Aktuelle Viewport-Position: die gesetzte Inline-Position hat Vorrang
-        (sie ist die Wahrheit nach einem Zug), sonst die gemessene Kante. */
-    function currentPos() {
-      if (nav.classList.contains('ff-mini-toc--moved')) {
-        var l = parseFloat(nav.style.left);
-        var tp = parseFloat(nav.style.top);
-        if (!isNaN(l) && !isNaN(tp)) return { left: l, top: tp };
-      }
-      var r = nav.getBoundingClientRect();
-      return { left: r.left, top: r.top };
-    }
-
-    function onKeyDown(ev) {
-      var step = ev.shiftKey ? 32 : 8;
-      var rect = currentPos();
-      var next = null;
-      if (ev.key === 'ArrowLeft') next = { left: rect.left - step, top: rect.top };
-      else if (ev.key === 'ArrowRight') next = { left: rect.left + step, top: rect.top };
-      else if (ev.key === 'ArrowUp') next = { left: rect.left, top: rect.top - step };
-      else if (ev.key === 'ArrowDown') next = { left: rect.left, top: rect.top + step };
-      else if (ev.key === 'Home' || ev.key === 'Escape') { reset(); ev.preventDefault(); return; }
-      if (!next) return;
-      place(next);
-      ev.preventDefault();
-    }
-
-    handle.addEventListener('pointerdown', onPointerDown);
-    handle.addEventListener('pointermove', onPointerMove);
-    handle.addEventListener('pointerup', onPointerUp);
-    handle.addEventListener('pointercancel', onPointerUp);
-    handle.addEventListener('keydown', onKeyDown);
-    handle.addEventListener('dblclick', function (ev) { reset(); ev.preventDefault(); });
-    win.addEventListener('resize', function () {
-      if (!nav.classList.contains('ff-mini-toc--moved')) return;
-      var rect = currentPos();
-      place({ left: rect.left, top: rect.top });
-    }, { passive: true });
-
-    restore();
-    return { reset: reset };
   }
 
   function createMiniToc() {
@@ -498,9 +342,7 @@
     var content = doc.querySelector('.post-content');
     if (!content || doc.querySelector('.ff-mini-toc')) return;
 
-    // VOLLSTÄNDIG (26.09.2026): Haupt- UND Unterabschnitte. Vorher fehlten
-    // alle H3 – in gegliederten Ratgebern war damit die Hälfte der
-    // Sprungziele unsichtbar.
+    // Haupt- UND Unterabschnitte bleiben vollständig erreichbar.
     var headings = qsa('h2[id], h3[id]', content).filter(function (h) {
       return headingText(h).length > 0;
     });
@@ -519,16 +361,6 @@
 
     var head = doc.createElement('div');
     head.className = 'ff-mini-toc__head';
-    head.setAttribute('tabindex', '0');
-    head.setAttribute('role', 'group');
-    head.setAttribute('aria-label',
-      'Inhaltsverzeichnis verschieben – ziehen oder Pfeiltasten, Home stellt die Standardposition wieder her');
-    head.setAttribute('title', 'Verschieben: ziehen oder Pfeiltasten · Doppelklick = Standardposition');
-
-    var grip = doc.createElement('span');
-    grip.className = 'ff-mini-toc__grip';
-    grip.setAttribute('aria-hidden', 'true');
-    head.appendChild(grip);
 
     var title = doc.createElement('strong');
     title.className = 'ff-mini-toc__title';
@@ -544,14 +376,6 @@
     counter.appendChild(posEl);
     counter.appendChild(doc.createTextNode(' / ' + headings.length));
     head.appendChild(counter);
-
-    var resetBtn = doc.createElement('button');
-    resetBtn.type = 'button';
-    resetBtn.className = 'ff-mini-toc__reset';
-    resetBtn.setAttribute('aria-label', 'Inhaltsverzeichnis an die Standardposition zurücksetzen');
-    resetBtn.setAttribute('title', 'Standardposition');
-    resetBtn.textContent = '⤺';
-    head.appendChild(resetBtn);
 
     var rail = doc.createElement('span');
     rail.className = 'ff-mini-toc__rail';
@@ -571,7 +395,8 @@
       // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
       // draußen (Befund 10.09.2026 – das „§“ stand hier früher im Text).
       var label = headingText(heading);
-      // Sichtbarer Text = voller Text = Label-Vertrag (Screenreader + Wächter).
+      // Der volle Text ist der Label-Vertrag (Screenreader + Wächter-Test),
+      // sichtbar ist die ruhige Kurzform.
       a.setAttribute('aria-label', label);
       a.setAttribute('title', label);
       if (heading.tagName === 'H3') a.classList.add('ff-mini-toc--sub');
@@ -580,7 +405,7 @@
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
       var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
       if (m) {
-        a.classList.add('ff-mini-toc--num');
+        a.className = 'ff-mini-toc--num';
         var num = doc.createElement('span');
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
@@ -598,12 +423,178 @@
     });
 
     doc.body.appendChild(nav);
-    var spy = setupMiniTocSpy(nav, list, headings, links, posEl, content);
-    var drag = setupMiniTocDrag(nav, head, spy && spy.remeasure);
-    resetBtn.addEventListener('click', function (ev) {
-      ev.preventDefault();
-      drag.reset();
+    makeMiniTocMovable(nav, head);
+    setupMiniTocSpy(nav, list, headings, links, posEl, content);
+  }
+
+  /* ============================================================
+     BEWEGLICHE ARTIKEL-NAVIGATION (26.09.2026, Frank-Befund)
+     „Das Inhaltsverzeichnis soll nicht fest stehen, sondern
+     beweglich sein.“ Die Kopfzeile wird zur Greiffäche:
+       · Drag per Maus/Stift/Touch (Pointer Events, Pan sperrt
+         den Seiten-Scroll nur auf dem Griff – touch-action: none
+         im CSS).
+       · Tastatur: Pfeiltasten verschieben (Shift = größerer
+         Schritt), Pos1 dockt wieder an der Standardposition an.
+       · Die Box bleibt immer komplett im Fenster (Clamp beim
+         Ziehen UND bei Resize).
+       · Keine Speicherung irgendwo (Privacy-Hausregel): geparkte
+         Position gilt für diese Seitensitzung, nicht darüber hinaus.
+       · Das Lesefenster aus setupMiniTocSpy bleibt unberührt:
+         die Sichtbarkeitslogik liest die Position aus dem
+         Stylesheet bzw. den Inline-Werten – beides ist stets
+         konsistent.
+     ============================================================ */
+  function makeMiniTocMovable(nav, head) {
+    var DRAG_CLASS = 'ff-mini-toc--dragging';
+    var EDGE = 8;          // Mindestabstand zum Fensterrand (px)
+    var STEP = 16;         // Pfeiltasten-Schritt (px)
+    var STEP_FAST = 64;    // mit Shift gedrückt
+    var UNDOCK_THRESHOLD = 3; // px Bewegung, bevor ein Drag „echt“ wird
+    var custom = false;    // Leser hat die Box eigenhändig geparkt
+    var dragState = null;  // aktiver Pointer-Drag
+    var rafPending = false;
+    var pendingX = 0;
+    var pendingY = 0;
+
+    // Griff-Affordanz (rein dekorativ, verweigert sich Screenreadern)
+    var grip = doc.createElement('span');
+    grip.className = 'ff-mini-toc__grip';
+    grip.setAttribute('aria-hidden', 'true');
+    grip.innerHTML = '<svg viewBox="0 0 9 16" width="9" height="16" fill="currentColor" aria-hidden="true" focusable="false">'
+      + '<circle cx="2.2" cy="2.4" r="1.15"/><circle cx="6.8" cy="2.4" r="1.15"/>'
+      + '<circle cx="2.2" cy="8" r="1.15"/><circle cx="6.8" cy="8" r="1.15"/>'
+      + '<circle cx="2.2" cy="13.6" r="1.15"/><circle cx="6.8" cy="13.6" r="1.15"/>'
+      + '</svg>';
+    head.insertBefore(grip, head.firstChild);
+
+    // Tastatur-Zugang auf die Greiffläche (kein role="button": die Fläche
+    // IST keine Schaltfläche, das aria-label erklärt das Verhalten ehrlich).
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('aria-label', 'Artikel-Navigation verschieben: ziehen oder Pfeiltasten. Pos1 dockt wieder an der Standardposition an.');
+    head.setAttribute('title', 'Ziehen zum Verschieben – Pfeiltasten bei Fokus, Pos1 dockt wieder an');
+
+    /** Hält (x, y) als Box-OBERKANTE komplett im Fenster. */
+    function clampToViewport(x, y) {
+      var w = nav.offsetWidth || 0;
+      var h = nav.offsetHeight || 0;
+      var maxX = Math.max(EDGE, win.innerWidth - w - EDGE);
+      var maxY = Math.max(EDGE, win.innerHeight - h - EDGE);
+      return [clamp(x, EDGE, maxX), clamp(y, EDGE, maxY)];
+    }
+
+    function applyLeft(x, y) {
+      nav.style.left = x + 'px';
+      nav.style.top = y + 'px';
+    }
+
+    /** Transform-freie Oberkante: Stylesheet-/Inline-Wert statt Rect,
+        damit ein flüchtiger Idle-Übergang (translateY) den Drag nicht
+        vererbt (gleiche Leseart wie measureWindow in setupMiniTocSpy). */
+    function baseTop() {
+      var t = parseFloat(win.getComputedStyle(nav).top);
+      return isNaN(t) ? nav.getBoundingClientRect().top : t;
+    }
+
+    /** Vom Stylesheet-Dock lösen und auf die aktuelle Pixelposition stellen. */
+    function undock() {
+      if (custom) return;
+      var rect = nav.getBoundingClientRect();
+      nav.style.right = 'auto';
+      var p = clampToViewport(rect.left, baseTop());
+      applyLeft(p[0], p[1]);
+      custom = true;
+    }
+
+    /** Zurück an die freigegebene Standardposition (Stylesheet-Werte). */
+    function resetToDock() {
+      custom = false;
+      nav.style.left = '';
+      nav.style.right = '';
+      nav.style.top = '';
+    }
+
+    function scheduleApply() {
+      if (rafPending) return;
+      rafPending = true;
+      win.requestAnimationFrame(function () {
+        rafPending = false;
+        applyLeft(pendingX, pendingY);
+      });
+    }
+
+    head.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      var rect = nav.getBoundingClientRect();
+      dragState = {
+        id: event.pointerId,
+        startClientX: event.clientX,
+        startClientY: event.clientY,
+        grabX: event.clientX - rect.left,
+        grabY: event.clientY - rect.top,
+        moved: false
+      };
+      try { head.setPointerCapture(event.pointerId); } catch (e) { /* ältere Engines */ }
+      nav.classList.add(DRAG_CLASS);
+      // Klick-Textselektion beim Ziehen verhindern (user-select ist im CSS
+      // aus; dies deckt Engines ab, die -webkit-user-select ignorieren).
+      event.preventDefault();
     });
+
+    head.addEventListener('pointermove', function (event) {
+      if (!dragState || event.pointerId !== dragState.id) return;
+      var dx = event.clientX - dragState.startClientX;
+      var dy = event.clientY - dragState.startClientY;
+      if (!dragState.moved) {
+        if (Math.abs(dx) < UNDOCK_THRESHOLD && Math.abs(dy) < UNDOCK_THRESHOLD) return;
+        dragState.moved = true;
+        undock();
+      }
+      var p = clampToViewport(event.clientX - dragState.grabX, event.clientY - dragState.grabY);
+      pendingX = p[0];
+      pendingY = p[1];
+      scheduleApply();
+    });
+
+    function endDrag(event) {
+      if (!dragState || (event && event.pointerId !== dragState.id)) return;
+      try { head.releasePointerCapture(dragState.id); } catch (e) { /* egal */ }
+      dragState = null;
+      nav.classList.remove(DRAG_CLASS);
+    }
+
+    head.addEventListener('pointerup', endDrag);
+    head.addEventListener('pointercancel', endDrag);
+
+    head.addEventListener('keydown', function (event) {
+      var step = event.shiftKey ? STEP_FAST : STEP;
+      var dx = 0;
+      var dy = 0;
+      if (event.key === 'ArrowLeft') dx = -step;
+      else if (event.key === 'ArrowRight') dx = step;
+      else if (event.key === 'ArrowUp') dy = -step;
+      else if (event.key === 'ArrowDown') dy = step;
+      else if (event.key === 'Home') {
+        event.preventDefault();
+        resetToDock();
+        return;
+      } else {
+        return;
+      }
+      event.preventDefault();
+      var rect = nav.getBoundingClientRect();
+      undock();
+      var p = clampToViewport(rect.left + dx, baseTop() + dy);
+      applyLeft(p[0], p[1]);
+    });
+
+    // Fensteränderung: geparkte Box bleibt vollständig sichtbar.
+    win.addEventListener('resize', function () {
+      if (!custom) return;
+      var rect = nav.getBoundingClientRect();
+      var p = clampToViewport(rect.left, rect.top);
+      applyLeft(p[0], p[1]);
+    }, { passive: true });
   }
 
   /** Lesemarke, Zähler, Fortschritt und Selbstnachführung der Liste. */
@@ -753,11 +744,6 @@
     if (doc.fonts && doc.fonts.ready && typeof doc.fonts.ready.then === 'function') {
       doc.fonts.ready.then(remeasure).catch(function () { /* egal */ });
     }
-
-    // Die bewegliche Navigation meldet jede neue Position zurück: zoneTop
-    // (Viewport-Kante) ändert sich beim Verschieben, sonst würde das
-    // Lesefenster mit der alten Geometrie rechnen.
-    return { remeasure: remeasure };
   }
 
   function setupIntentPrefetch() {

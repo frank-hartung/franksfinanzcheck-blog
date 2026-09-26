@@ -94,6 +94,7 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 | Ratgeber-Link | `.ff-pillar-box`, `.ff-pillar-box__inner`, `.ff-pillar-box__btn` | Vernetzt Artikel bidirektional mit übergeordnetem Ratgeber |
 | Verwandte Artikel | `.ff-related-section`, `.ff-related-grid`, `.ff-related-card` | 3er-Grid mit Cover-Bilder, Kategorie-Pill & Datumszeile |
 | Callout-Boxen | `.ff-callout`, `.ff-callout--tip`, `.ff-callout--warning`, `.ff-callout--info` | Semantische Hinweisboxen für Markdown-Artikel |
+| Antwort-Box („Kurz & knapp – die Antwort“) | `.ff-kurzantwort`, `__head`, `__medallion`, `__icon`, `__eyebrow`, `__text` | Antwort-Karte oben im Artikel (Light+Dark+Print); Signet-Medaillon mit themenbezogener CSS-Animation je `pillar` (Klassen `.ff-kz-*`; reduced-motion → ruhig) |
 | 404-Fehlerseite | `.ff-404-page`, `.ff-404-badge`, `.ff-404-actions`, `.ff-404-pills` | Großes Gradient-Badge, Themen-Schnellzugriff & Startseiten-CTA |
 | Chips | `.ff-pc-chip` | Pill, Smaragd-Soft hell / 12% Smaragd-Bright dunkel |
 | Kopier-Button | `.ff-heading-copy` | Optik 28px, Trefferfläche 44px via `::after inset:-8px` (hit-test-verifiziert) |
