@@ -1,4 +1,18 @@
 {
+  "20-wege-zu-weniger-kosten-stromrechnung-zu-hoch": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-26-20-wege-zu-weniger-kosten-stromrechnung-zu-hoch",
+    "titel": "Strom sparen Tipps: 20 Wege gegen eine hohe Stromrechnung",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
+  "2026-stromkosten-senken-einfach-stromanbieter-wechseln": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-26-2026-stromkosten-senken-einfach-stromanbieter-wechseln",
+    "titel": "2026 Stromkosten senken: Einfach Stromanbieter wechseln",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
   "gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",
@@ -9,6 +23,13 @@
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+    "zustand": "pool"
+  },
+  "photovoltaik-2026-wann-rechnet-sich-die-sonne-wirklich": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-26-photovoltaik-2026-wann-rechnet-sich-die-sonne-wirklich",
+    "titel": "Photovoltaik 2026: Wann rechnet sich die Sonne wirklich?",
+    "zuletzt_im_pool": "2026-09-26",
     "zustand": "pool"
   },
   "wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {

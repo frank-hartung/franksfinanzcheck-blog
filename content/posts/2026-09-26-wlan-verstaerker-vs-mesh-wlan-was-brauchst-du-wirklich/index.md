@@ -29,7 +29,7 @@ Dieser Artikel hilft dir, die richtige Entscheidung für deine Wohnung oder dein
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Bevor du Geld in Zusatztechnik steckst, prüfe, was dein Anschluss überhaupt liefert. Viele Haushalte zahlen für Tempo, das sie nie bekommen – ein Wechsel wirkt oft Wunder: [**Internet & DSL vergleichen**](/go/dsl/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Bevor du Geld in Zusatztechnik steckst, prüfe, was dein Anschluss überhaupt liefert. Viele Haushalte zahlen für Tempo, das sie nie bekommen – ein Wechsel wirkt oft Wunder: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
@@ -37,16 +37,16 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Ein **WLAN-Verstärker (Repeater)** ist die günstige Lösung für **ein einzelnes** Funkloch.
 - **Mesh-WLAN** ist die Komfortlösung für **mehrere Räume, Etagen oder viele Geräte**.
 - Ein Repeater halbiert oft das verfügbare Tempo, Mesh-Systeme mit eigenem Rückkanal tun das kaum.
-- **Vor jedem Kauf:** Miss, ob das Problem wirklich das WLAN ist – oder der Vertrag.
+- **Vor jedem Kauf:** Miss, ob das Problem wirklich das WLAN ist, oder der Vertrag.
 - Der teuerste Fehler ist, ein Mesh-System gegen ein Problem zu kaufen, das nur ein neuer Tarif lösen kann.
 
 ## Warum dein WLAN überhaupt schwächelt
 
-WLAN ist Funk – und Funk hat physikalische Feinde. Der Router strahlt von seinem Standpunkt aus, und alles, was dazwischenliegt, frisst Reichweite.
+WLAN ist Funk, und Funk hat physikalische Feinde. Der Router strahlt von seinem Standpunkt aus, und alles, was dazwischenliegt, frisst Reichweite.
 
 Die größten Schwachstellen in deutschen Wohnungen und Häusern:
 
-- **Stahlbetondecken und -wände** (der Klassiker im Neubau und Altbau mit Kernsanierung)
+- **Stahlbetondecken und -Wände** (der Klassiker im Neubau und Altbau mit Kernsanierung)
 - **Metall**: Heizkörper, Fußbodenheizung im Estrich, metallene Türrahmen
 - **Spiegel und Fliesen** im Bad, die das Signal reflektieren
 - **Nachbar-WLANs**, die auf demselben Kanal funken (typisch in Mehrfamilienhäusern)
@@ -56,17 +56,17 @@ Bevor du irgendetwas kaufst: Trage den Router, wenn möglich, an eine halbwegs z
 
 ## Was ein WLAN-Verstärker wirklich kann
 
-Ein WLAN-Verstärker – im Handel meist **Repeater** genannt – ist eine kleine Box für die Steckdose. Sie empfängt das bestehende WLAN-Signal und strahlt es erneut ab.
+Ein WLAN-Verstärker – im Handel meist **Repeater** genannt – ist eine kleine Box für die Steckdose. Du empfängst das bestehende WLAN‑Signal und strahlst es erneut ab.
 
 ### Die Vorteile
 
-- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 Euro.
+- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 €.
 - **Schnell eingerichtet**: Steckdose, WPS-Knopf drücken, fertig.
 - **Unauffällig**: Kein Kabel, keine Montage, kein neues Netz.
 
-### Die Nachteile – und die sind wichtig
+Die Nachteile, und die sind wichtig
 
-- **Tempoverlust**: Ein klassischer Repeater muss jedes Datenpaket erst empfangen und dann weiterfunkt. Im schlechtesten Fall halbiert das das Tempo.
+- **Tempoverlust**: Ein klassischer Repeater muss jedes Datenpaket erst empfangen und dann weiterfunkt. Im schlechtesten Fall halbiert das Tempo.
 - **Empfindliche Position**: Steht der Repeater schon am Rand des Funklochs, verstärkt er ein schwaches Signal – Müll rein, Müll raus. Er gehört ungefähr auf **halber Strecke** zwischen Router und Problemraum.
 - **Handover-Lücke**: Viele günstige Repeater bauen ein eigenes Netz mit eigener SSID. Dein Handy wechselt dann nicht automatisch, sondern klammert sich an das schwächere Netz, bis gar nichts mehr geht.
 
@@ -80,12 +80,12 @@ Ein Mesh-System besteht aus mehreren Stationen (meist zwei oder drei), die zusam
 
 - **Ein Netz, ein Name**: Du läufst vom Keller in den ersten Stock, und der Video-Call merkt davon nichts.
 - **Volles Tempo**: Gute Systeme nutzen ein eigenes Frequenzband als Rückkanal (Backhaul), sodass das Weiterfunken dein Surftempo kaum bremst.
-- **Selbstheilend**: Fällt eine Station aus, routen die übrigen den Verkehr um.
+- **Selbstheilend**: Fällt eine Station aus, Routen die übrigen den Verkehr um.
 - **Erweiterbar**: Brauchst du später eine Station mehr, steckst du sie einfach dazu.
 
 ### Die Nachteile
 
-- **Preis**: Solide Sets starten bei etwa 150 Euro, leistungsstarke mit Wi-Fi 6E oder Wi-Fi 7 liegen bei 250 bis 400 Euro.
+- **Preis**: Solide Sets starten bei etwa 150 €, leistungsstarke mit Wi-Fi 6E oder Wi-Fi 7 liegen bei 250 bis 400 €.
 - **Standorte nötig**: Jede Station braucht eine Steckdose an einer sinnvollen Stelle – nicht im Schrank versteckt.
 - **Overkill-Gefahr**: In einer 55-Quadratmeter-Wohnung ist Mesh meist überdimensioniert.
 
@@ -93,9 +93,9 @@ Ein Mesh-System besteht aus mehreren Stationen (meist zwei oder drei), die zusam
 
 | Kriterium | WLAN-Verstärker (Repeater) | Mesh-WLAN |
 |---|---|---|
-| Anschaffung | ca. 20–60 € | ca. 150–400 € |
+| Anschaffung | ca. 20–60 € | ca. 150–400 € |
 | Löst | einzelnes Funkloch | mehrere Räume / Etagen |
-| Tempoverlust | oft deutlich (bis −50 %) | gering (mit Backhaul) |
+| Tempoverlust | oft deutlich (bis −50 %) | gering (mit Backhaul) |
 | Netzwechsel für Geräte | oft manuell | automatisch (Roaming) |
 | Einrichtung | sehr einfach | einfach, aber je Station 10 Min. |
 | Erweiterbarkeit | kaum | sehr gut |
@@ -131,30 +131,30 @@ Nach allem, was ich an Messungen gemacht habe, lässt sich die Wahl erstaunlich 
 
 ### WLAN-Verstärker, wenn …
 
-- … genau **ein Raum** schlecht versorgt ist,
-- … dein Grundtempo am Router stimmt,
-- … du weniger als 70 Euro ausgeben willst,
-- … du im betroffenen Raum keine Anwendungen hast, die maximales Tempo brauchen (Surfen, Mail, Musik reichen meist völlig).
+- … Genau **ein Raum** schlecht versorgt ist,
+- … Dein Grundtempo am Router stimmt,
+- … Du weniger als 70 € ausgeben willst,
+- … Du im betroffenen Raum keine Anwendungen hast, die maximales Tempo brauchen (Surfen, Mail, Musik reichen meist völlig).
 
 ### Mesh-WLAN, wenn …
 
 - … **mehrere Räume oder Etagen** betroffen sind,
-- … viele Geräte gleichzeitig online sind (Familie, Streaming, Home-Office, Smart-Home),
-- … du dich durch das Haus bewegst und das Netz nicht wechseln willst,
-- … du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 Euro oder mehr zu investieren.
+- … Viele Geräte gleichzeitig online sind (Familie, Streaming, Home-Office, Smart-Home),
+- … Du dich durch das Haus bewegst und das Netz nicht wechseln willst,
+- … Du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 € oder mehr zu investieren.
 
 ### Übrigens: die dritte Option
 
-Es gibt noch **Powerline-Adapter** (Netzwerk über die Stromleitung). Die können in Häusern mit sehr dicken Wänden sinnvoll sein – etwa für den fest verkabelten PC im Dachgeschoss. Für Handys und Tablets helfen sie aber nur in Kombination mit einem WLAN-Access-Point. Sie sind ein Spezialwerkzeug, keine Universalantwort.
+Es gibt noch **Powerline-Adapter** (Netzwerk über die Stromleitung). Die können in Häusern mit sehr dicken Wänden sinnvoll sein – etwa für den fest verkabelten PC im Dachgeschoss. Für Handys und Tablets helfen sie aber nur in Kombination mit einem WLAN-Access-Point. Du bist ein Spezialwerkzeug, keine Universalantwort.
 
 ## Was die Lösungen real kosten
 
 | Lösung | einmalige Kosten | laufende Kosten |
 |---|---:|---:|
-| Router umstellen, Kanal prüfen | 0 € | 0 € |
-| WLAN-Verstärker | 20–60 € | ca. 2–5 € Strom im Jahr |
-| Mesh-System (2er-Set) | 150–250 € | ca. 8–15 € Strom im Jahr |
-| Mesh-System (3er-Set, Wi-Fi 6/7) | 250–400 € | ca. 12–20 € Strom im Jahr |
+| Router umstellen, Kanal prüfen | 0 € | 0 € |
+| WLAN-Verstärker | 20–60 € | ca. 2–5 € Strom im Jahr |
+| Mesh-System (2er-Set) | 150–250 € | ca. 8–15 € Strom im Jahr |
+| Mesh-System (3er-Set, Wi-Fi 6/7) | 250–400 € | ca. 12–20 € Strom im Jahr |
 
 Die laufenden Kosten sind klein, aber sie existieren – drei zusätzliche Steckdosen-Dauerläufer summieren sich über Jahre. Wer ehrlich rechnet, zieht diese Beträge bei der Entscheidung mit ein. Mehr dazu, wie du solche versteckten Verbraucher aufspürst, steht hier: Stromfresser finden: So stoppen Sie teure Energiediebe.
 
@@ -170,11 +170,11 @@ Egal ob Repeater oder Mesh – ein paar Handgriffe entscheiden über das Ergebni
 
 Und falls du beim Messen feststellst, dass dein Grundtempo selbst am Router weit unter dem liegt, was du zahlst, dann ist Zusatztechnik das falsche Werkzeug. Dann steht ein Blick auf den Vertrag an: [Internet & DSL wechseln: Praxis-Tipps für den Anbieterwechsel](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/).
 
-## Fazit: Erst messen, dann kaufen – und nicht umgekehrt
+## Fazit: Erst messen, dann kaufen, und nicht umgekehrt
 
 Die Frage „WLAN-Verstärker oder Mesh-WLAN?“ beantwortet sich fast von selbst, sobald du drei Dinge kennst: die Zahl der Problemräume, dein Grundtempo am Router und dein Budget.
 
-**Ein Funkloch, kleines Budget, sonst alles gut:** Ein Repeater für unter 60 Euro ist die ehrliche, unkomplizierte Lösung. **Mehrere Räume oder Etagen, viele Geräte, Lösung für Jahre:** Dann ist Mesh das Geld wert und der Repeater nur eine Hängebrücke. **Grundtempo stimmt nicht:** Dann bringt die beste Funktechnik nichts – erst der Anschluss muss liefern, danach darf man ihn verteilen.
+**Ein Funkloch, kleines Budget, sonst alles gut:** Ein Repeater für unter 60 € ist die ehrliche, unkomplizierte Lösung. **Mehrere Räume oder Etagen, viele Geräte, Lösung für Jahre:** Dann ist Mesh das Geld wert und der Repeater nur eine Hängebrücke. **Grundtempo stimmt nicht:** Dann bringt die beste Funktechnik nichts – erst der Anschluss muss liefern, danach darf man ihn verteilen.
 
 Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Miss zweimal, kauf einmal.**
 
@@ -183,7 +183,7 @@ Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart ha
 ## Häufige Fragen
 
 ### Bringt ein WLAN-Verstärker mehr Internetgeschwindigkeit?
-Nein. Er verteilt nur das weiter, was der Router hergibt – und bremst das im ungünstigen Fall sogar. Er löst Reichweitenprobleme, keine Tempoprobleme am Anschluss.
+Nein. Er verteilt nur das weiter, was der Router hergibt, und bremst das im ungünstigen Fall sogar. Er löst Reichweitenprobleme, keine Tempoprobleme am Anschluss.
 
 ### Was ist besser: Repeater oder Mesh?
 Für ein einzelnes Funkloch reicht meist ein Repeater. Sobald mehrere Räume, Etagen oder viele Geräte im Spiel sind, ist Mesh die deutlich bessere und dauerhaft ruhigere Lösung.
