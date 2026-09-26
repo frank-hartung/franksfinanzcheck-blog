@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-25 09:15:42 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-09-26 08:58:21 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 42 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 40 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -14,13 +14,12 @@
 |:---|:---:|:---|
 | 2026-08-10-dsl-wechselbonus-sichern | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas | 3 → 3 ✅ | /go/gas/ |
-| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 4 ✅ | /go/hausrat/, /go/wohngebaeudeversicherung/ |
+| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | 3 → 3 ✅ | /go/gas/ |
 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | 3 → 3 ✅ | /go/gas/ |
 | 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit | 3 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | 3 → 3 ✅ | /go/dsl/ |
-| 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife | 3 → 7 ✅ | /go/gas/ |
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/ |
 | 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet | 3 → 3 ✅ | /go/haftpflicht/ |
 | 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann | 2 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
@@ -45,20 +44,17 @@
 | 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort | 3 → 3 ✅ | /go/gas/ |
 | 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster | 3 → 4 ✅ | /go/tagesgeld/ |
-| 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag | 2 → 3 ✅ | /go/allgemein/, /go/strom/ |
-| 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026 | 3 → 3 ✅ | /go/tagesgeld/ |
-| 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer | 3 → 3 ✅ | /go/gas/ |
+| 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag | 3 → 3 ✅ | /go/allgemein/ |
+| 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026 | 2 → 3 ✅ | /go/tagesgeld/ |
+| 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer | 1 → 3 ✅ | /go/gas/ |
 | 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser | 3 → 3 ✅ | /go/strom/ |
 | 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug | 2 → 2 ✅ | /go/allgemein/ |
-| 2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check | 2 → 3 ✅ | /go/gas/ |
-| 2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer | 3 → 3 ✅ | /go/gas/ |
-| 2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026 | 2 → 3 ✅ | /go/gas/ |
-| 2026-09-21-tierkrankenversicherung-hund-katze-kosten | 2 → 3 ✅ | /go/hunde/ |
+| 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor | 3 → 3 ✅ | /go/gas/ |
+| 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro | 1 → 2 ✅ | /go/gas/ |
+| 2026-09-21-tierkrankenversicherung-hund-katze-kosten | 1 → 3 ✅ | /go/hunde/ |
 
 ## Hinweise (nicht blockierend)
 
-- 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
-- 2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife: 7 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
