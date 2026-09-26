@@ -235,6 +235,9 @@ Bausteine P1 – vor allen Geschmacksfragen.
 | Gate klagt die Variante für einen Wert an, den die Basis auch hat | Budget ohne Basis-Vergleich | behoben: `_budget(..., basis_wert=…)`, Bestand → P3 auf `basis` |
 | Briefing belegt eine A11y-Variante mit einem Token-Repository | Substring-Treffer: „aria" in „Vari**ables**" | behoben: Wortgrenzen in `_trifft()` |
 | Gate meldet Verstöße, die nur im Kommentar stehen | CSS-Kommentare wurden mitgeprüft | behoben: `ohne_kommentare()` vor jeder Musterprüfung |
+| `npx playwright install chromium` scheitert (ECONNRESET, `cdn.playwright.dev`) | Netz sperrt das Playwright-CDN | Repo-Fallback nutzen: `npm i --no-save @sparticuz/chromium lighthouse` – **beide in EINEM Befehl**, sonst räumt der zweite `--no-save`-Aufruf das Paket des ersten wieder weg |
+| Basis-Budget gerissen, aber niemand meldet es | Die Variante wird (zu Recht) nicht angeklagt – und sonst prüfte niemand die Basis | behoben: `pruefe_bestand()` läuft über **alle drei** Messebenen, Befunde als P3 auf `basis` |
+| Playwright meldet LCP 184 ms, Lighthouse 3110 ms | Ungedrosselt auf localhost vs. simulierte Drosselung – zwei verschiedene Messungen mit gleichem Namen | Die 2500-ms-Schwelle gilt nur für Lighthouse; der Playwright-Wert dient als Basis/Variante-Delta |
 
 ---
 

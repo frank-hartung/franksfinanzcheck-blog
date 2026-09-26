@@ -417,6 +417,50 @@ VERGLEICHSFELDER = [
 ]
 
 
+TIERB_FELDER = [
+    ("kontrast_min", "Kontrast (Minimum, hell+dunkel)", "groesser"),
+    ("tap_min_px", "Kleinstes Tap-Ziel (px)", "groesser"),
+    ("tap_unter_24", "Tap-Ziele unter 24px", "kleiner"),
+    ("tap_unter_44", "Tap-Ziele unter 44px", "kleiner"),
+    ("cls", "CLS", "kleiner"),
+    ("lcp_ms", "LCP (ms)", "kleiner"),
+]
+
+LIGHTHOUSE_FELDER = [
+    ("lh_performance", "Performance", "groesser"),
+    ("lh_accessibility", "Accessibility", "groesser"),
+    ("lh_seo", "SEO", "groesser"),
+    ("lh_best-practices", "Best Practices", "groesser"),
+    ("tbt_ms", "Total Blocking Time (ms)", "kleiner"),
+    ("lcp_ms", "LCP (ms)", "kleiner"),
+    ("cls", "CLS", "kleiner"),
+]
+
+
+def _tabelle(titel: str, felder: list, basis: dict, variante: dict) -> list[str]:
+    """Vergleichstabelle Basis vs. Variante – nur Felder, die beide haben."""
+    zeilen = [f"**{titel}**", "", "| Kennzahl | Basis | Variante | Δ | Richtung |",
+              "|---|---:|---:|---:|---|"]
+    gefuellt = False
+    for schluessel, name, gut in felder:
+        bv, vv = basis.get(schluessel), variante.get(schluessel)
+        if bv is None or vv is None:
+            continue
+        gefuellt = True
+        delta = round(vv - bv, 4)
+        if delta == 0:
+            zeilen.append(f"| {name} | {bv} | {vv} | ±0 — | neutral |")
+            continue
+        besser = (delta < 0) if gut == "kleiner" else (delta > 0)
+        pfeil = "↑" if delta > 0 else "↓"
+        zeilen.append(f"| {name} | {bv} | {vv} | {delta:+g} {pfeil} | "
+                      f"{'besser' if besser else 'schlechter'} |")
+    if not gefuellt:
+        return [f"**{titel}:** keine vergleichbaren Werte.", ""]
+    zeilen.append("")
+    return zeilen
+
+
 def vergleich(register: dict) -> str:
     basis = (lies_messung("basis").get("tiers") or {}).get("statisch") or {}
     basis_werte = basis.get("werte") or {}
@@ -477,18 +521,39 @@ def vergleich(register: dict) -> str:
             zeilen.append(f"| {name} | {bv} | {vv} | {delta:+d} {pfeil} | {bewertung} |")
         zeilen.append("")
 
+        # ---- Tier B: gerendert ---------------------------------------
+        basis_b = ((lies_messung("basis").get("tiers") or {}).get("gerendert") or {})
         if b.get("status") == "ok":
-            bw = b.get("werte") or {}
-            zeilen.append("**Tier B (Browser):** "
-                          f"Kontrast min {bw.get('kontrast_min', '?')} · "
-                          f"Tap min {bw.get('tap_min_px', '?')}px · "
-                          f"CLS {bw.get('cls', '?')} · "
-                          f"LCP {bw.get('lcp_ms', '?')}ms")
+            zeilen += _tabelle("Tier B (Browser)", TIERB_FELDER,
+                               (basis_b.get("werte") or {}), b.get("werte") or {})
         else:
-            zeilen.append("**Tier B (Browser): nicht gemessen** – ohne sie sieht "
-                          "niemand Kontraste, Fokus oder CLS. "
-                          "`node e2e/variant-metrics.mjs --variante " + vid + "`")
-        zeilen.append("")
+            zeilen += [
+                f"**Tier B (Browser): {b.get('status', 'nicht gemessen')}** – ohne "
+                "sie sieht niemand Kontraste, Fokus oder CLS.  ",
+                f"`node e2e/variant-metrics.mjs --variante {vid}`", "",
+            ]
+
+        # ---- Lighthouse ----------------------------------------------
+        lh = tiers.get("lighthouse") or {}
+        basis_lh = ((lies_messung("basis").get("tiers") or {}).get("lighthouse") or {})
+        if lh.get("status") == "ok":
+            bw = dict((basis_lh.get("werte") or {}))
+            vw = dict(lh.get("werte") or {})
+            bw.update({f"lh_{k}": v for k, v in (bw.pop("lighthouse", {}) or {}).items()})
+            vw.update({f"lh_{k}": v for k, v in (vw.pop("lighthouse", {}) or {}).items()})
+            zeilen += _tabelle("Lighthouse (Median aus dem Messlauf)",
+                               LIGHTHOUSE_FELDER, bw, vw)
+            zeilen += [
+                "> Einzelmessungen streuen. Eine Abweichung von ±0,02 im Score oder",
+                "> ±100 ms beim LCP ist Rauschen, keine Wirkung – für eine Freigabe",
+                "> zählt, ob die Budgets gehalten sind, nicht die dritte Nachkommastelle.",
+                "",
+            ]
+        else:
+            zeilen += [
+                f"**Lighthouse: {lh.get('status', 'nicht gemessen')}** – "
+                f"{lh.get('grund', '')}", "",
+            ]
 
     zeilen.append("---")
     zeilen.append("")

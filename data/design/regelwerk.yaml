@@ -199,6 +199,11 @@ performance:
   stylesheet_zuwachs_bytes_max: 6144     # Variante darf das gelieferte CSS um max. 6 KB vergrößern
   seiten_gewicht_zuwachs_bytes_max: 16384
   zusaetzliche_anfragen_max: 1           # genau das eine Varianten-Stylesheet
+  # lcp_ms_max gilt für die LIGHTHOUSE-Messung (simulierte Drosselung).
+  # Der Playwright-Wert entsteht ungedrosselt auf localhost und wird
+  # bewusst NICHT dagegen geprüft: Am 26.09.2026 meldete Playwright
+  # 184 ms und Lighthouse 3110 ms für dieselbe Seite. Ein Budget gegen
+  # den ungedrosselten Wert wäre immer grün – also wertlos.
   lcp_ms_max: 2500
   cls_max: 0.1
   tbt_ms_max: 200

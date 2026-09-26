@@ -653,7 +653,15 @@ BUDGETS_GERENDERT = [
     ("barrierefreiheit.tap_ziel_min_px", "tap_min_px",
      ("barrierefreiheit", "tap_ziel_min_px"), "min"),
     ("performance.cls_max", "cls", ("performance", "cls_max"), "max"),
-    ("performance.lcp_ms_max", "lcp_ms", ("performance", "lcp_ms_max"), "max"),
+    # KEIN lcp_ms hier – bewusst.
+    # Playwright misst auf localhost ohne Drosselung; der Wert lag im
+    # Messlauf vom 26.09.2026 bei 184 ms, während Lighthouse mit
+    # simulierter Drosselung 3110 ms für dieselbe Seite meldete. Die
+    # Google-Schwelle von 2500 ms gehört zur gedrosselten Messung.
+    # Prüfte man den ungedrosselten Wert dagegen, wäre das Ergebnis
+    # immer grün – ein Budget, das nie anschlägt, ist Dekoration.
+    # Der Playwright-LCP bleibt im Report als Basis/Variante-Delta
+    # (dafür taugt er: gleiche Bedingungen auf beiden Seiten).
 ]
 
 # Lighthouse liefert als Einziges eine belastbare Total Blocking Time –
@@ -697,20 +705,43 @@ def pruefe_bestand(rw: dict, bericht: Bericht) -> None:
     Befunde sind deshalb P3 (sichtbar, nicht blockierend) und tragen die
     Basis als Besitzer.
     """
-    werte = _werte(lade_messung("basis"), "statisch")
-    if werte is None:
-        return
-    for regel, schluessel, pfad, richtung in BUDGETS_STATISCH:
-        ist, soll = werte.get(schluessel), _soll(rw, pfad)
-        if ist is None or soll is None or not _verletzt(ist, soll, richtung):
+    basis = lade_messung("basis")
+
+    # Alle drei Ebenen, nicht nur die statische: Ein gerissenes
+    # LCP-Budget der Basis blieb sonst unsichtbar, weil die Variante
+    # dafür (zu Recht) nicht angeklagt wird – und damit NIEMAND.
+    ebenen = [
+        ("statisch", BUDGETS_STATISCH),
+        ("gerendert", BUDGETS_GERENDERT),
+        ("lighthouse", BUDGETS_LIGHTHOUSE),
+    ]
+    for tier, tabelle in ebenen:
+        werte = _werte(basis, tier)
+        if werte is None:
+            continue
+        for regel, schluessel, pfad, richtung in tabelle:
+            ist, soll = werte.get(schluessel), _soll(rw, pfad)
+            if ist is None or soll is None or not _verletzt(ist, soll, richtung):
+                continue
+            bericht.melde(
+                regel=f"bestand.{regel}", variante="basis", schwere="P3",
+                besitzer="human",
+                text=f"Bestand ({tier}): Die ausgelieferte Basis liegt mit {ist} "
+                     f"bereits {'über' if richtung == 'max' else 'unter'} dem "
+                     f"Budget {soll}. Das ist kein Varianten-Befund – es gehört "
+                     "in einen eigenen Vorgang.")
+
+    # Lighthouse-Kategorien der Basis ebenfalls prüfen
+    lh_werte = (_werte(basis, "lighthouse") or {}).get("lighthouse") or {}
+    for regel, kategorie, pfad in LIGHTHOUSE_BUDGETS:
+        ist, soll = lh_werte.get(kategorie), _soll(rw, pfad)
+        if ist is None or soll is None or not _verletzt(ist, soll, "min"):
             continue
         bericht.melde(
             regel=f"bestand.{regel}", variante="basis", schwere="P3",
             besitzer="human",
-            text=f"Bestand: Die ausgelieferte Basis liegt mit {ist} bereits "
-                 f"{'über' if richtung == 'max' else 'unter'} dem Budget {soll}. "
-                 "Das ist kein Varianten-Befund – es gehört in einen eigenen "
-                 "Vorgang.")
+            text=f"Bestand (lighthouse): Die Basis erreicht {kategorie} nur mit "
+                 f"{ist} (Budget {soll}).")
 
 
 def pruefe_messwerte(reg: dict, rw: dict, bericht: Bericht, nur: str | None) -> None:

@@ -106,9 +106,26 @@ gleichlauter CTAs, Status **entwurf**, bewusst nicht freigegeben):
 | Affiliate-Links ohne `rel` | 0 | 0 | — |
 
 Bauzeit beider Varianten zusammen inkl. Messung: **6,7 s**.
-Tier B meldete in dieser Umgebung ehrlich `nicht_verfuegbar` (kein Chromium,
-`cdn.playwright.dev` gesperrt) – und das Gate verweigert damit jede
-Freigabe. Genau so soll es sich verhalten.
+
+**Tier B nachgeholt** (26.09.2026, über den Repo-Fallback
+`@sparticuz/chromium`, weil `cdn.playwright.dev` gesperrt ist):
+
+| Kennzahl | Basis | Variante | Budget |
+|---|---:|---:|---:|
+| Kontrast (Minimum, hell + dunkel) | 7,53 | 7,53 | ≥ 4,5 ✅ |
+| Kleinstes Tap-Ziel | 26,4 px | 26,4 px | ≥ 24 px ✅ |
+| CLS | 0 | 0 | ≤ 0,1 ✅ |
+| Lighthouse Performance | 0,93 | 0,94 | ≥ 0,90 ✅ |
+| Lighthouse Accessibility | 0,96 | 0,96 | ≥ 0,95 ✅ |
+| Lighthouse SEO | 1,00 | 1,00 | = 1,00 ✅ |
+| Lighthouse Best Practices | 0,96 | 0,96 | ≥ 0,95 ✅ |
+| Total Blocking Time | 39 ms | 63 ms | ≤ 200 ms ✅ |
+| Lighthouse LCP | 3110 ms | 3085 ms | ≤ 2500 ms ⚠️ |
+
+Damit sind für beide Seiten alle drei Messebenen vollständig – die
+Variante ist **freigabefähig**, aber weiterhin `entwurf` und
+**nicht unterschrieben**. Das ist der vorgesehene Zustand: Die Maschine
+hat geliefert, die Entscheidung steht aus.
 
 **Testabdeckung:** 35 neue Regressionstests
 (`scripts/tests/test_design_varianten.py`), 4 neue Playwright-Specs
@@ -145,11 +162,31 @@ Vier echte Funde, alle behoben oder sauber zugeordnet:
    Behoben durch Wortgrenzen; Testfall festgehalten. Falsche Belege sind
    schlimmer als keine – sie sehen aus wie Evidenz.
 
-**Offener Bestandsbefund (nicht von dieser Arbeit verursacht):**
-`/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/`
-hat 58 direkte Kinder in `div.post-content` (Frühwarnung 54, harte Grenze
-60). Ein langer Artikel, kein Layoutfehler – gehört in einen eigenen
-Vorgang, nicht in diesen.
+5. **Playwright-LCP und Lighthouse-LCP sind nicht dieselbe Zahl.**
+   Playwright misst ungedrosselt auf localhost (184 ms), Lighthouse mit
+   simulierter Drosselung (3110 ms) – für dieselbe Seite. Beide gegen die
+   Google-Schwelle von 2500 ms zu prüfen, hätte garantiertes Falsch-Grün
+   erzeugt. Die Schwelle gilt jetzt nur für Lighthouse; der
+   Playwright-Wert bleibt als Basis/Variante-Delta im Report.
+
+6. **Ein gerissenes Basis-Budget wäre unsichtbar geblieben.**
+   Die Variante wird für Bestandszustände nicht angeklagt (Fund 3) – aber
+   `pruefe_bestand()` sah nur die statische Ebene. Der LCP-Befund der
+   Basis hätte damit *niemanden* erreicht. Jetzt laufen alle drei Ebenen
+   plus die Lighthouse-Kategorien durch die Bestandsprüfung.
+
+**Zwei offene Bestandsbefunde (nicht von dieser Arbeit verursacht):**
+
+* `/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/`
+  hat 58 direkte Kinder in `div.post-content` (Frühwarnung 54, harte
+  Grenze 60). Ein langer Artikel, kein Layoutfehler.
+* **Lighthouse-LCP 3110 ms auf der Startseite**, Budget 2500 ms.
+  **Wichtige Einordnung:** gemessen in einer gedrosselten Sandbox-VM mit
+  dem Fallback-Chromium – die absolute Zahl ist damit *kein* belastbares
+  Produktionsurteil. Sie gehört auf einem normalen CI-Runner nachgemessen
+  (`.github/workflows/design-varianten.yml`, Job `werkbank`), bevor
+  daraus eine Maßnahme wird. Beide Befunde laufen als P3 auf `basis` und
+  blockieren keine Variante.
 
 ---
 
