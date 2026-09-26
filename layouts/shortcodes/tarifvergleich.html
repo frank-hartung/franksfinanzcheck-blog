@@ -188,7 +188,7 @@
   </div>
 
   {{- with $footnote }}
-  <div class="ff-tv-footnote"><strong>💡 Hinweis:</strong> {{ . | markdownify }}</div>
+  <div class="ff-tv-footnote">{{ partial "ff-icon-tipp.html" . }}<strong>Hinweis:</strong> {{ . | markdownify }}</div>
   {{- end -}}
 </div>
 

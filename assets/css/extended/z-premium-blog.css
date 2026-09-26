@@ -447,7 +447,7 @@ h3:hover .ff-heading-copy,
   display: flex;
   flex-direction: column;
   width: var(--ff-toc-width);
-  max-height: min(66vh, calc(100vh - 168px));
+  max-height: min(74vh, calc(100vh - 148px));
   z-index: 50;
   padding: 12px 6px 10px 12px;
   border-radius: 16px;
@@ -485,12 +485,70 @@ h3:hover .ff-heading-copy,
 .ff-mini-toc__head {
   position: relative;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: .5rem;
+  align-items: center;
+  gap: .4rem;
   flex: 0 0 auto;
-  padding: 0 6px .5rem 0;
+  padding: 0 4px .5rem 0;
+  /* BEWEGLICH (26.09.2026): Die Kopfzeile ist der Griff. */
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: 10px;
 }
+
+.ff-mini-toc__head:focus-visible {
+  outline: 2px solid var(--ff-accent);
+  outline-offset: 2px;
+}
+
+.ff-mini-toc--dragging .ff-mini-toc__head { cursor: grabbing; }
+
+/* Griffpunkte: zeigen ohne Worte „dieses Feld lässt sich ziehen“. */
+.ff-mini-toc__grip {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 14px;
+  opacity: .5;
+  background-image: radial-gradient(currentColor 1px, transparent 1.2px);
+  background-size: 4px 4px;
+  color: var(--secondary);
+  transition: opacity .18s ease;
+}
+
+.ff-mini-toc__head:hover .ff-mini-toc__grip,
+.ff-mini-toc--dragging .ff-mini-toc__grip { opacity: .9; }
+
+.ff-mini-toc__title { margin-right: auto; }
+
+/* Zurück auf den Standardplatz – erscheint erst, wenn verschoben wurde. */
+.ff-mini-toc__reset {
+  display: none;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ff-accent) 16%, transparent);
+  color: var(--primary);
+  font-size: .8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .18s ease, transform .18s ease;
+}
+
+.ff-mini-toc--moved .ff-mini-toc__reset { display: inline-flex; align-items: center; justify-content: center; }
+.ff-mini-toc__reset:hover { background: color-mix(in srgb, var(--ff-accent) 30%, transparent); transform: rotate(-20deg); }
+
+/* Im Zug: keine Übergänge auf der Position – sonst „schwimmt“ die Box
+   hinter dem Zeiger her. Ein leichter Schatten zeigt das Anheben. */
+.ff-mini-toc--dragging {
+  transition: none !important;
+  box-shadow: 0 26px 60px rgba(15, 52, 43, .18);
+}
+
+.ff-mini-toc--moved { right: auto; }
 
 .ff-mini-toc__title {
   display: block;
@@ -613,6 +671,16 @@ h3:hover .ff-heading-copy,
 
 .ff-mini-toc a[aria-current="true"] {
   font-weight: 700;
+}
+
+/* Unterabschnitte (H3): eingerückt, eine Spur kleiner – das Verzeichnis
+   ist damit vollständig, bleibt aber hierarchisch lesbar. */
+.ff-mini-toc a.ff-mini-toc--sub {
+  margin-left: .62rem;
+  padding-top: .24rem;
+  padding-bottom: .24rem;
+  font-size: .73rem;
+  opacity: .92;
 }
 
 /* Premium hanging indent for the mini TOC: the JS splits each entry into a

@@ -328,20 +328,167 @@
           der „§“-Wache, scripts/ff_heading_glyph_guard_test.mjs).
      ============================================================ */
 
-  /** Ruhiges Kurz-Etikett für die schmale Spalte.
-      Der volle Text bleibt in aria-label/title erhalten. */
+  /** Vollständiges Etikett für die Navigationsspalte.
+      Stand 26.09.2026: KEINE Kürzung mehr. Frank-Befund – „das
+      Inhaltsverzeichnis soll vollständig angezeigt werden“: Kurzformen
+      wie „Fazit…“ verschwiegen den eigentlichen Abschnittstitel. Die
+      Spalte bricht stattdessen sauber um (CSS: text-wrap:pretty,
+      kein line-clamp), der Scrollbereich fängt die Höhe auf. */
   function miniTocLabel(label) {
-    var text = String(label || '').replace(/\s+/g, ' ').trim();
-    if (text.length <= 34) return text;
-    // „Fazit: Gute Tierabsicherung ist eine Budgetentscheidung“ → „Fazit“
-    var colon = text.indexOf(': ');
-    if (colon >= 4 && colon <= 30) return text.slice(0, colon);
-    if (text.length <= 52) return text;
-    // Sauber an der Wortgrenze kürzen statt mitten im Wort abschneiden
-    var cut = text.slice(0, 50);
-    var space = cut.lastIndexOf(' ');
-    if (space > 28) cut = cut.slice(0, space);
-    return cut.replace(/[\s,;:–-]+$/, '') + '…';
+    return String(label || '').replace(/\s+/g, ' ').trim();
+  }
+
+  /* ------------------------------------------------------------
+     BEWEGLICHE NAVIGATION (Frank-Befund 26.09.2026)
+     „Das Inhaltsverzeichnis soll nicht fest stehen, sondern
+     beweglich sein.“ → Die Box lässt sich an ihrer Kopfzeile
+     frei im Fenster verschieben (Maus, Finger, Stift über
+     Pointer-Events; Tastatur über Pfeiltasten auf dem Griff).
+     Die Position wird pro Gerät gemerkt (localStorage) und bei
+     jedem Fensterwechsel in den sichtbaren Bereich zurückgeholt.
+     Ein Doppelklick bzw. „Home“ stellt den Standardplatz wieder
+     her – man kann sich also nicht aussperren.
+     ------------------------------------------------------------ */
+  var TOC_POS_KEY = 'ff:toc:pos:v1';
+
+  function readTocPos() {
+    try {
+      var raw = win.localStorage.getItem(TOC_POS_KEY);
+      if (!raw) return null;
+      var val = JSON.parse(raw);
+      if (!val || typeof val.left !== 'number' || typeof val.top !== 'number') return null;
+      return val;
+    } catch (e) { return null; }
+  }
+
+  function writeTocPos(pos) {
+    try {
+      if (pos) win.localStorage.setItem(TOC_POS_KEY, JSON.stringify(pos));
+      else win.localStorage.removeItem(TOC_POS_KEY);
+    } catch (e) { /* privater Modus: dann eben nur für diese Seite */ }
+  }
+
+  function setupMiniTocDrag(nav, handle, onMoved) {
+    var MARGIN = 12;
+    var dragging = false;
+    var pointerId = null;
+    var grabX = 0;
+    var grabY = 0;
+
+    function size() {
+      return { w: nav.offsetWidth || 0, h: nav.offsetHeight || 0 };
+    }
+
+    function clamp(left, top) {
+      var s = size();
+      var maxLeft = Math.max(MARGIN, win.innerWidth - s.w - MARGIN);
+      var maxTop = Math.max(MARGIN, win.innerHeight - s.h - MARGIN);
+      return {
+        left: Math.min(Math.max(MARGIN, left), maxLeft),
+        top: Math.min(Math.max(MARGIN, top), maxTop)
+      };
+    }
+
+    function place(pos, persist) {
+      var c = clamp(pos.left, pos.top);
+      nav.style.left = c.left + 'px';
+      nav.style.top = c.top + 'px';
+      nav.style.right = 'auto';
+      nav.classList.add('ff-mini-toc--moved');
+      if (persist !== false) writeTocPos(c);
+      if (onMoved) onMoved();
+      return c;
+    }
+
+    function reset() {
+      nav.style.left = '';
+      nav.style.top = '';
+      nav.style.right = '';
+      nav.classList.remove('ff-mini-toc--moved');
+      writeTocPos(null);
+      if (onMoved) onMoved();
+    }
+
+    function restore() {
+      var pos = readTocPos();
+      if (pos) place(pos, false);
+    }
+
+    function onPointerDown(ev) {
+      // Nur Hauptzeiger, und nicht auf dem Zurücksetzen-Knopf.
+      if (ev.button != null && ev.button !== 0) return;
+      if (ev.target && ev.target.closest && ev.target.closest('.ff-mini-toc__reset')) return;
+      var rect = nav.getBoundingClientRect();
+      grabX = ev.clientX - rect.left;
+      grabY = ev.clientY - rect.top;
+      dragging = true;
+      pointerId = ev.pointerId;
+      nav.classList.add('ff-mini-toc--dragging');
+      if (handle.setPointerCapture && pointerId != null) {
+        try { handle.setPointerCapture(pointerId); } catch (e) { /* egal */ }
+      }
+      ev.preventDefault();
+    }
+
+    function onPointerMove(ev) {
+      if (!dragging || (pointerId != null && ev.pointerId !== pointerId)) return;
+      place({ left: ev.clientX - grabX, top: ev.clientY - grabY }, false);
+      ev.preventDefault();
+    }
+
+    function onPointerUp(ev) {
+      if (!dragging) return;
+      dragging = false;
+      nav.classList.remove('ff-mini-toc--dragging');
+      if (handle.releasePointerCapture && pointerId != null) {
+        try { handle.releasePointerCapture(pointerId); } catch (e) { /* egal */ }
+      }
+      pointerId = null;
+      var rect = currentPos();
+      place({ left: rect.left, top: rect.top });
+      if (ev && ev.preventDefault) ev.preventDefault();
+    }
+
+    /** Aktuelle Viewport-Position: die gesetzte Inline-Position hat Vorrang
+        (sie ist die Wahrheit nach einem Zug), sonst die gemessene Kante. */
+    function currentPos() {
+      if (nav.classList.contains('ff-mini-toc--moved')) {
+        var l = parseFloat(nav.style.left);
+        var tp = parseFloat(nav.style.top);
+        if (!isNaN(l) && !isNaN(tp)) return { left: l, top: tp };
+      }
+      var r = nav.getBoundingClientRect();
+      return { left: r.left, top: r.top };
+    }
+
+    function onKeyDown(ev) {
+      var step = ev.shiftKey ? 32 : 8;
+      var rect = currentPos();
+      var next = null;
+      if (ev.key === 'ArrowLeft') next = { left: rect.left - step, top: rect.top };
+      else if (ev.key === 'ArrowRight') next = { left: rect.left + step, top: rect.top };
+      else if (ev.key === 'ArrowUp') next = { left: rect.left, top: rect.top - step };
+      else if (ev.key === 'ArrowDown') next = { left: rect.left, top: rect.top + step };
+      else if (ev.key === 'Home' || ev.key === 'Escape') { reset(); ev.preventDefault(); return; }
+      if (!next) return;
+      place(next);
+      ev.preventDefault();
+    }
+
+    handle.addEventListener('pointerdown', onPointerDown);
+    handle.addEventListener('pointermove', onPointerMove);
+    handle.addEventListener('pointerup', onPointerUp);
+    handle.addEventListener('pointercancel', onPointerUp);
+    handle.addEventListener('keydown', onKeyDown);
+    handle.addEventListener('dblclick', function (ev) { reset(); ev.preventDefault(); });
+    win.addEventListener('resize', function () {
+      if (!nav.classList.contains('ff-mini-toc--moved')) return;
+      var rect = currentPos();
+      place({ left: rect.left, top: rect.top });
+    }, { passive: true });
+
+    restore();
+    return { reset: reset };
   }
 
   function createMiniToc() {
@@ -351,7 +498,10 @@
     var content = doc.querySelector('.post-content');
     if (!content || doc.querySelector('.ff-mini-toc')) return;
 
-    var headings = qsa('h2[id]', content).filter(function (h) {
+    // VOLLSTÄNDIG (26.09.2026): Haupt- UND Unterabschnitte. Vorher fehlten
+    // alle H3 – in gegliederten Ratgebern war damit die Hälfte der
+    // Sprungziele unsichtbar.
+    var headings = qsa('h2[id], h3[id]', content).filter(function (h) {
       return headingText(h).length > 0;
     });
     if (headings.length < 3) return;
@@ -369,6 +519,16 @@
 
     var head = doc.createElement('div');
     head.className = 'ff-mini-toc__head';
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('role', 'group');
+    head.setAttribute('aria-label',
+      'Inhaltsverzeichnis verschieben – ziehen oder Pfeiltasten, Home stellt die Standardposition wieder her');
+    head.setAttribute('title', 'Verschieben: ziehen oder Pfeiltasten · Doppelklick = Standardposition');
+
+    var grip = doc.createElement('span');
+    grip.className = 'ff-mini-toc__grip';
+    grip.setAttribute('aria-hidden', 'true');
+    head.appendChild(grip);
 
     var title = doc.createElement('strong');
     title.className = 'ff-mini-toc__title';
@@ -384,6 +544,14 @@
     counter.appendChild(posEl);
     counter.appendChild(doc.createTextNode(' / ' + headings.length));
     head.appendChild(counter);
+
+    var resetBtn = doc.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'ff-mini-toc__reset';
+    resetBtn.setAttribute('aria-label', 'Inhaltsverzeichnis an die Standardposition zurücksetzen');
+    resetBtn.setAttribute('title', 'Standardposition');
+    resetBtn.textContent = '⤺';
+    head.appendChild(resetBtn);
 
     var rail = doc.createElement('span');
     rail.className = 'ff-mini-toc__rail';
@@ -403,16 +571,16 @@
       // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
       // draußen (Befund 10.09.2026 – das „§“ stand hier früher im Text).
       var label = headingText(heading);
-      // Der volle Text ist der Label-Vertrag (Screenreader + Wächter-Test),
-      // sichtbar ist die ruhige Kurzform.
+      // Sichtbarer Text = voller Text = Label-Vertrag (Screenreader + Wächter).
       a.setAttribute('aria-label', label);
       a.setAttribute('title', label);
+      if (heading.tagName === 'H3') a.classList.add('ff-mini-toc--sub');
       // Premium hanging indent: split the leading "N." off the label so the
       // wrapped lines of the title align with the first word after the number
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
       var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
       if (m) {
-        a.className = 'ff-mini-toc--num';
+        a.classList.add('ff-mini-toc--num');
         var num = doc.createElement('span');
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
@@ -430,7 +598,12 @@
     });
 
     doc.body.appendChild(nav);
-    setupMiniTocSpy(nav, list, headings, links, posEl, content);
+    var spy = setupMiniTocSpy(nav, list, headings, links, posEl, content);
+    var drag = setupMiniTocDrag(nav, head, spy && spy.remeasure);
+    resetBtn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      drag.reset();
+    });
   }
 
   /** Lesemarke, Zähler, Fortschritt und Selbstnachführung der Liste. */
@@ -580,6 +753,11 @@
     if (doc.fonts && doc.fonts.ready && typeof doc.fonts.ready.then === 'function') {
       doc.fonts.ready.then(remeasure).catch(function () { /* egal */ });
     }
+
+    // Die bewegliche Navigation meldet jede neue Position zurück: zoneTop
+    // (Viewport-Kante) ändert sich beim Verschieben, sonst würde das
+    // Lesefenster mit der alten Geometrie rechnen.
+    return { remeasure: remeasure };
   }
 
   function setupIntentPrefetch() {

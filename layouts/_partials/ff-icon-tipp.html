@@ -1,0 +1,21 @@
+{{- /* Spar-Signet statt Glühbirne (Befund Frank, 26.09.2026).
+       Die 💡-Glühbirne war ein themenfremdes Emoji: Sie sagt „Idee“,
+       nicht „Geld sparen“. Hier steht stattdessen ein hauseigenes,
+       animiertes Signet: drei wachsende Sparbalken und eine
+       aufsteigende Euro-Münze – genau das Versprechen des Blogs.
+       · rein dekorativ (aria-hidden), der Text trägt die Bedeutung
+       · CSS-Animation, kein JS, kein Netzwerk-Asset, kein Layout-Shift
+       · prefers-reduced-motion hält das Signet still (DESIGN.md §6) */ -}}
+<span class="ff-icon-tipp" aria-hidden="true">
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+    <g class="ff-icon-tipp__bars">
+      <rect class="ff-icon-tipp__bar ff-icon-tipp__bar--1" x="2.5" y="13" width="4" height="8" rx="1.4"/>
+      <rect class="ff-icon-tipp__bar ff-icon-tipp__bar--2" x="8.6" y="9.5" width="4" height="11.5" rx="1.4"/>
+      <rect class="ff-icon-tipp__bar ff-icon-tipp__bar--3" x="14.7" y="6" width="4" height="15" rx="1.4"/>
+    </g>
+    <g class="ff-icon-tipp__coin">
+      <circle cx="19" cy="5.2" r="4.1"/>
+      <text x="19" y="7.1" text-anchor="middle">€</text>
+    </g>
+  </svg>
+</span>

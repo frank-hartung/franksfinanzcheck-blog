@@ -275,9 +275,10 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
     t.ok('Mini-TOC-Links vorhanden', links.length >= 3, 'Links: ' + links.length);
     t.ok('Kein Mini-TOC-Label enthält „§“ oder „#“',
       links.every((a) => !/[§#]/.test(a.getAttribute('aria-label') || a.textContent)));
-    // Mini-TOC listet bewusst nur H2-Abschnitte – aber seit 26.09.2026 ALLE
-    // (vorher hart auf 9 gedeckelt: lange Ratgeber verloren Fazit + FAQ).
-    const expected = [...doc.querySelectorAll('.post-content h2[id]')]
+    // Mini-TOC ist seit 26.09.2026 VOLLSTÄNDIG: alle H2 UND alle H3 in
+    // Dokumentreihenfolge, jeweils mit dem vollen Überschriftentext
+    // (vorher: Deckel bei 9 Einträgen, danach gekürzte Etiketten).
+    const expected = [...doc.querySelectorAll('.post-content h2[id], .post-content h3[id]')]
       .map((h) => {
         const clone = h.cloneNode(true);
         clone.querySelectorAll('button, .anchor, [data-ff-skip-read], [aria-hidden="true"], [hidden]')
@@ -294,6 +295,17 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
     t.ok('Mini-TOC ≡ sichtbarem Überschriftentext (Label-Vertrag)',
       JSON.stringify(actual) === JSON.stringify(expected),
       `erwartet ${JSON.stringify(expected)}, erhalten ${JSON.stringify(actual)}`);
+    // Vollständigkeit: der SICHTBARE Text ist der volle Text – keine „…“.
+    const visible = links.map((a) => a.textContent.replace(/\s+/g, ' ').trim());
+    t.ok('Mini-TOC zeigt vollständige Titel (keine Kürzung mit „…“)',
+      visible.every((v) => !v.includes('…')), visible.filter((v) => v.includes('…')).join(' | '));
+    t.eq('Mini-TOC: sichtbarer Text ≡ voller Überschriftentext',
+      JSON.stringify(visible), JSON.stringify(expected));
+    // Beweglich: Kopfzeile ist Griff (Zeiger + Tastatur), Zurücksetzen vorhanden.
+    const handle = miniToc.querySelector('.ff-mini-toc__head');
+    t.ok('Griff der beweglichen Navigation fokussierbar',
+      !!handle && handle.getAttribute('tabindex') === '0');
+    t.ok('Zurücksetzen-Knopf vorhanden', !!miniToc.querySelector('.ff-mini-toc__reset'));
   }
 
   // Regressionsfall 26.09.2026: Der Link wurde durch ein Zwei-Zeilen-Clamp
