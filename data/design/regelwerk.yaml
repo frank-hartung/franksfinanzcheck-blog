@@ -1,0 +1,265 @@
+# ============================================================
+#  DESIGN-REGELWERK – die Leitplanken der Varianten-Werkbank
+#  (Rollout 26.09.2026, siehe docs/ANLEITUNG-DESIGN-VARIANTEN.md)
+#
+#  WOZU DIESE DATEI EXISTIERT
+#  --------------------------
+#  Eine KI darf für diesen Blog Layoutvarianten ENTWERFEN und Daten
+#  AUSWERTEN – sie darf das Design aber niemals eigenmächtig
+#  austauschen. Diese Datei ist der Vertrag, der beides trennt:
+#  Sie schreibt in Zahlen und Mustern auf, was eine Variante
+#  einhalten MUSS, damit sie überhaupt zur Freigabe vorgelegt
+#  werden darf. Geprüft wird sie von scripts/design_variant_gate.py.
+#
+#  EINE REGEL, DIE NIEMAND PRÜFT, IST KEINE REGEL
+#  ----------------------------------------------
+#  Das Gate kennt jeden hier definierten Schlüssel namentlich. Ein
+#  unbekannter Schlüssel ist ein FEHLER (nicht etwa „wird ignoriert“) –
+#  sonst entstünden Regeln, die nur wie Regeln aussehen. Wer eine neue
+#  Regel will, ergänzt sie hier UND im Gate UND in dessen Tests.
+#
+#  QUELLEN DER WAHRHEIT (hier nur gespiegelt, nicht neu erfunden)
+#  -------------------------------------------------------------
+#    Marke/Tokens .... DESIGN.md §1–§7, data/brand_lock.yaml
+#    DOM-Budget ...... scripts/dom_audit.py (BUDGET / LIMIT)
+#    Kontraste ....... e2e/design-metrics.mjs (misst dieselben Werte)
+#    Lighthouse ...... lighthouserc.cjs + lighthouse/budgets.json
+#
+#  PFLEGE: Änderungen an Schwellen sind Chefsache (Mensch), gehören in
+#  einen eigenen Commit mit Begründung und brechen bewusst laufende
+#  Vergleiche – deshalb `stand`-Datum immer mitziehen.
+# ============================================================
+
+version: 1
+stand: "2026-09-26"
+
+# ------------------------------------------------------------------
+# 1) MARKE – was eine Variante an Gestaltungsmitteln benutzen darf
+#    Geprüft statisch gegen assets/css/varianten/<id>.css
+# ------------------------------------------------------------------
+marke:
+  # Hex-Farben, die in Varianten-CSS wörtlich vorkommen dürfen.
+  # Alles andere muss über var(--token) laufen (DESIGN.md §1).
+  farben_erlaubt:
+    - "#0E5A43"   # --ff-emerald
+    - "#0A4634"   # --ff-emerald-dark
+    - "#EAF4EF"   # --ff-emerald-soft
+    - "#7FD1B4"   # --ff-emerald-bright
+    - "#2E2E33"   # --ff-anthracite / --entry (dunkel)
+    - "#FFB300"   # --ff-yellow
+    - "#E6A100"   # --ff-yellow-dark
+    - "#FFD15A"   # --ff-accent-2
+    - "#17211D"   # --ff-ink
+    - "#FAFCFB"   # --theme hell
+    - "#1D1E20"   # --theme dunkel
+    - "#FFFFFF"   # --entry hell
+    - "#DCE6E1"   # --border hell
+    - "#333"      # --border dunkel (PaperMod)
+    - "#E60023"   # Pinterest-Rot (Fremdmarke, DESIGN.md §5)
+
+  # Variablen-Präfixe, die eine Variante lesen darf.
+  variablen_praefixe_erlaubt:
+    - "--ff-"
+    - "--theme"
+    - "--entry"
+    - "--border"
+    - "--primary"
+    - "--secondary"
+    - "--content"
+    - "--code-bg"
+    - "--selection"
+
+  # rgb()/rgba()-Tripel, die zulässig sind (Schatten + Flächen-Tönungen,
+  # DESIGN.md §4). Andere Tripel sind erfundene Farben.
+  rgba_basen_erlaubt:
+    - [0, 0, 0]         # neutrale Schatten
+    - [255, 255, 255]   # Aufhellungen
+    - [14, 90, 67]      # Smaragd-Schatten
+    - [15, 52, 43]      # Schwebe-Schatten
+    - [255, 179, 0]     # CTA-Glow / ::selection
+    - [127, 209, 180]   # Smaragd-Bright-Tönung (Dark Mode)
+    - [230, 0, 35]      # Pinterest-Rot
+
+  # Radius-Skala (DESIGN.md §4). Werte in px; 999 = Pille.
+  radien_px_erlaubt: [0, 8, 12, 16, 999]
+
+  # Übergangsdauern (DESIGN.md §6). Sekunden.
+  uebergang_dauer_s_erlaubt: [0.16, 0.18, 0.3]
+
+  # Easing-Kurven (DESIGN.md §6).
+  easing_erlaubt:
+    - "ease-out"
+    - "linear"
+    - "cubic-bezier(.2,.7,.2,1)"
+    - "cubic-bezier(0.2,0.7,0.2,1)"
+
+  # Benannte Verbote. Jeder Schlüssel wird vom Gate einzeln geprüft;
+  # `muster` ist ein Python-Regex auf den CSS-Quelltext (Kleinschreibung).
+  verbote:
+    webfont_im_body:
+      muster: "@font-face"
+      begruendung: >
+        DESIGN.md §2: Der Fließtext läuft bewusst ohne Webfont (LCP).
+        Eine Variante, die eine Schrift nachlädt, verschiebt das
+        Performance-Budget an der teuersten Stelle.
+    externe_ressource:
+      muster: "url\\(\\s*['\\\"]?https?://"
+      begruendung: >
+        DESIGN.md §7 („keine externen CDNs\"): Fremd-Hosts bringen
+        DSGVO-Fragen, einen zweiten Verbindungsaufbau und eine
+        Abhängigkeit, die niemand überwacht.
+    fokus_entfernt:
+      muster: "outline\\s*:\\s*none"
+      begruendung: >
+        DESIGN.md §6: Der 3px-Fokusring ist die Tastatur-Navigation.
+        `outline: none` ohne Ersatz ist ein Barrierefreiheits-Rückschritt.
+    wichtig_holzhammer:
+      muster: "!important"
+      begruendung: >
+        Varianten liegen ohnehin NACH dem Haupt-Stylesheet im <head> und
+        gewinnen bei gleicher Spezifität. `!important` macht die spätere
+        Rückabwicklung unmöglich und vererbt sich in die Basis.
+    layout_animation:
+      muster: "transition\\s*:[^;]*\\b(width|height|top|left|right|bottom|margin|padding)\\b"
+      begruendung: >
+        DESIGN.md §6: Layout-Properties animieren erzwingt Reflow –
+        das ist die klassische Quelle für CLS und ruckelnde Scrolls.
+    gelb_als_textfarbe:
+      # Anker `(?:^|[;{\s])` verhindert den Treffer in `background-color:`
+      muster: "(?:^|[;{\\s])color\\s*:\\s*(#ffb300|#e6a100|var\\(--ff-yellow[^)]*\\))"
+      begruendung: >
+        DESIGN.md §1/§7: Signalgelb ist Fläche, nie Text auf hell
+        (Kontrast < 2:1). Text auf Smaragd nutzt --ff-accent-2.
+
+  # Pflichtteile: Was eine Variante mitliefern MUSS, sobald sie das
+  # jeweilige Gestaltungsmittel überhaupt anfasst.
+  pflichten:
+    dark_mode_variante:
+      ausloeser: "farbe_gesetzt"
+      erwartet: "[data-theme=\"dark\"]"
+      begruendung: >
+        defaultTheme=auto: Jede Farbentscheidung braucht ihre dunkle
+        Entsprechung, sonst entsteht ein halb umgestellter Blog.
+    reduzierte_bewegung:
+      ausloeser: "bewegung_gesetzt"
+      erwartet: "prefers-reduced-motion"
+      begruendung: >
+        DESIGN.md §6: Wer Bewegung hinzufügt, schaltet sie für
+        `prefers-reduced-motion: reduce` wieder ab.
+
+  # Größenbudget je Varianten-Stylesheet (roh, unminifiziert).
+  css_budget_bytes: 8192
+
+# ------------------------------------------------------------------
+# 2) BARRIEREFREIHEIT – gemessen im gerenderten Zustand (Tier B)
+# ------------------------------------------------------------------
+barrierefreiheit:
+  kontrast_fliesstext_min: 4.5      # WCAG AA
+  kontrast_grosse_typo_min: 3.0     # ab 24px/19px+bold
+  kontrast_meta_min: 4.5
+  tap_ziel_min_px: 24               # WCAG 2.2 AA (Pseudo-Fläche zählt)
+  tap_ziel_soll_px: 44              # Hausstandard
+  fokusring_sichtbar: true
+  lighthouse_accessibility_min: 0.95
+  begruendung: >
+    Zahlen gespiegelt aus DESIGN.md §1/§5 und e2e/design-metrics.mjs.
+    Gemessen wird beide Modi (hell + dunkel) – eine Variante, die nur
+    hell geprüft wurde, gilt als ungeprüft.
+
+# ------------------------------------------------------------------
+# 3) SEO – Invarianten. Eine Variante ist Gestaltung, kein Umbau der
+#    Indexierbarkeit. Geprüft statisch am gebauten HTML (Tier A).
+# ------------------------------------------------------------------
+seo:
+  h1_anzahl_exakt: 1
+  canonical_pflicht: true
+  titel_identisch_zur_basis: true
+  description_identisch_zur_basis: true
+  robots_identisch_zur_basis: true
+  schema_typen_pflicht:
+    - "BreadcrumbList"
+  interne_links_min_anteil_basis: 0.95   # Variante darf max. 5 % weniger interne Links haben
+  bilder_ohne_masse_erlaubt: 0           # width/height-Pflicht (CLS-Gate)
+  alt_texte_luecken_erlaubt: 0
+  lighthouse_seo_min: 1.0
+  begruendung: >
+    Eine Layoutvariante, die Titel, Canonical, Schema oder die interne
+    Verlinkung verändert, ist keine Layoutvariante mehr – sie ist ein
+    SEO-Eingriff und gehört in einen eigenen, begründeten Vorgang.
+
+# ------------------------------------------------------------------
+# 4) PERFORMANCE – Budgets. Quelle: scripts/dom_audit.py + Lighthouse.
+# ------------------------------------------------------------------
+performance:
+  dom_kinder_max: 54
+  dom_head_kinder_max: 52
+  dom_tiefe_max: 28
+  dom_elemente_max: 1100
+  dom_elemente_laufzeit_max: 1350
+  stylesheet_zuwachs_bytes_max: 6144     # Variante darf das gelieferte CSS um max. 6 KB vergrößern
+  seiten_gewicht_zuwachs_bytes_max: 16384
+  zusaetzliche_anfragen_max: 1           # genau das eine Varianten-Stylesheet
+  lcp_ms_max: 2500
+  cls_max: 0.1
+  tbt_ms_max: 200
+  lighthouse_performance_min: 0.90
+  lighthouse_best_practices_min: 0.95
+  begruendung: >
+    DOM-Zahlen sind identisch mit scripts/dom_audit.py (eine Wahrheit,
+    kein zweiter Satz Budgets). CWV-Schwellen sind die Google-Grenzen
+    für „gut\". Der CSS-Zuwachs ist bewusst knapp: Varianten sind
+    Feinschliff, keine zweite Designschicht.
+
+# ------------------------------------------------------------------
+# 5) CONVERSION – die Ziele, gegen die eine Variante antritt.
+#    Die Erhaltungsregeln (erhalten:) sind hart: Wer die Messkette
+#    kappt, gewinnt jeden A/B-Test – auf dem Papier.
+# ------------------------------------------------------------------
+conversion:
+  erhalten:
+    cta_anzahl_min_anteil_basis: 1.0        # kein CTA darf verschwinden
+    umami_events_vollstaendig: true         # data-umami-event bleibt an JEDEM CTA
+    affiliate_rel_attribute_intakt: true    # rel="sponsored nofollow noopener"
+    newsletter_einstieg_vorhanden: true
+    pflicht_bausteine:
+      - ".ff-home-ctas"
+      - ".ff-trust-row"
+  ziele:
+    cta_ueber_dem_falz_mobil: true          # primärer CTA sichtbar ohne Scrollen (390x844)
+    primaerer_cta_flaeche_min_px2: 5808     # 44px × 132px – Daumenfläche
+    hero_lesbar_ohne_scroll: true
+  begruendung: >
+    „Conversion-Ziel“ heißt hier nicht „mehr Klicks um jeden Preis“,
+    sondern: Der Weg zum Ratgeber ist auf dem Telefon ohne Scrollen
+    sichtbar, messbar (Umami) und rechtlich sauber (rel-Attribute).
+
+# ------------------------------------------------------------------
+# 6) FREIGABE – der menschliche Vorbehalt. Ohne diesen Abschnitt wäre
+#    die ganze Werkbank nur eine schnellere Art, Fehler auszurollen.
+# ------------------------------------------------------------------
+freigabe:
+  mensch_pflicht: true
+  berechtigte:
+    - "Frank Hartung"
+  pflichtfelder:
+    - "mensch"
+    - "name"
+    - "datum"
+    - "kommentar"
+  messung_pflicht:
+    - "statisch"      # Tier A: scripts/design_variant_lab.py (HTML, DOM, Bytes)
+    - "gerendert"     # Tier B: e2e/variant-metrics.mjs (Playwright: Kontrast, Tap, Fokus, CLS/LCP)
+    - "lighthouse"    # Tier B: e2e/variant-metrics.mjs (Kategorie-Scores + TBT)
+  gueltigkeit_tage: 30
+  erlaubte_status:
+    - "entwurf"       # existiert, noch nicht vermessen
+    - "gemessen"      # Tier A+B liegen vor
+    - "freigegeben"   # Mensch hat unterschrieben
+    - "live"          # in hugo.toml aktiv geschaltet
+    - "verworfen"     # bewusst beerdigt, bleibt als Lernstück stehen
+  begruendung: >
+    Eine Freigabe ohne Messung ist ein Bauchgefühl mit Unterschrift,
+    eine Messung ohne Freigabe ist ein Autopilot. Beides zusammen –
+    und nur beides – schaltet eine Variante scharf. Nach
+    `gueltigkeit_tage` verfällt die Freigabe: Der Blog ändert sich
+    unter der Variante weiter, eine 8 Monate alte Messung beweist nichts.

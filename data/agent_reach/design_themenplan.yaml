@@ -1,0 +1,168 @@
+# ============================================================
+#  AGENT-REACH-THEMENPLAN: DESIGN & OBERFLÄCHE
+#  (Design-Varianten-Werkbank, 26.09.2026)
+#
+#  Schwesterdatei zu themenplan.yaml – gleicher Aufbau, gelesen vom
+#  selben Skript (scripts/agent_reach_research.py --plan …), aber mit
+#  einem anderen Zweck:
+#
+#    themenplan.yaml         → Signale für die REDAKTION (worüber schreiben?)
+#    design_themenplan.yaml  → Signale für die OBERFLÄCHE (was verbessern?)
+#
+#  MENSCHLICH KURATIERT. Eine KI darf daraus Hypothesen ABLEITEN
+#  (scripts/design_reach_briefing.py), aber niemals CSS ändern.
+#
+#  LEITPLANKEN (wie beim Redaktionsplan):
+#    · nur LESEN, nie posten
+#    · nur Zero-Config-Kanäle (RSS/Web/GitHub) – keine Logins in CI
+#    · kein Signal wird zur Wahrheit: Der Brief ist ein Vorschlag,
+#      die Entscheidung trifft ein Mensch.
+#
+#  Feeds verifiziert am 26.09.2026 über den Agent-Reach-Kanal `web`
+#  (alle vier lieferten aktuelle Einträge). Nächste Prüfung: 26.12.2026.
+# ============================================================
+
+version: 1
+
+# --- Fachquellen für Oberfläche, Performance, Barrierefreiheit ----
+rss:
+  - name: web.dev – Blog (Core Web Vitals, Baseline)
+    url: "https://web.dev/static/blog/feed.xml"
+    kategorie: performance
+  - name: Chrome Developers – Blog (Lighthouse, DevTools)
+    url: "https://developer.chrome.com/static/blog/feed.xml"
+    kategorie: performance
+  - name: Smashing Magazine (UI/UX-Handwerk)
+    url: "https://www.smashingmagazine.com/feed/"
+    kategorie: gestaltung
+  - name: Nielsen Norman Group (Usability-Forschung)
+    url: "https://www.nngroup.com/feed/rss/"
+    kategorie: conversion
+
+# --- Werkzeuge, die den eigenen Betrieb betreffen -----------------
+github:
+  - query: "lighthouse-ci performance budget"
+  - query: "design tokens css variables"
+
+# --- Einzelne Referenzseiten (Jina Reader, Klartext) --------------
+web:
+  - url: "https://web.dev/articles/vitals"
+
+# --- Brief-Einstellungen (Felder des Basis-Skripts) ---------------
+einstellungen:
+  rss_max_je_feed: 6
+  youtube_max: 0
+  github_max: 4
+  web_max_zeichen: 1500
+
+# ==================================================================
+#  HYPOTHESEN-RASTER
+#  ------------------------------------------------------------------
+#  Hier wird aus „interessanter Artikel" ein „prüfbarer Vorschlag".
+#  scripts/design_reach_briefing.py ordnet jedes gefundene Signal
+#  über `signale` (Stichwörter, klein geschrieben) einem Thema zu und
+#  schlägt daraus eine Varianten-Skizze vor – inklusive der Regeln,
+#  an denen sie später gemessen wird.
+#
+#  Ohne dieses Raster wäre der Brief eine Linksammlung. Mit ihm ist er
+#  eine Vorlage, die ein Mensch annehmen oder verwerfen kann.
+#
+#  Felder:
+#    thema        Klartext-Überschrift im Brief
+#    oberflaeche  welche Seite betroffen wäre
+#    id_vorschlag Vorschlag für die Varianten-ID (Mensch entscheidet)
+#    signale      Stichwörter (Titel/Beschreibung, case-insensitive)
+#    pruefen_mit  Regeln aus data/design/regelwerk.yaml, die greifen
+# ==================================================================
+hypothesen_raster:
+  - thema: "Hero & Primärhandlung"
+    oberflaeche: "/"
+    id_vorschlag: "v-hero-*"
+    signale:
+      - "above the fold"
+      - "hero"
+      - "call to action"
+      - "cta"
+      - "primary action"
+      - "visual hierarchy"
+      - "landing page"
+    pruefen_mit:
+      - "conversion.ziele.cta_ueber_dem_falz_mobil"
+      - "conversion.erhalten.cta_anzahl_min_anteil_basis"
+      - "barrierefreiheit.tap_ziel_min_px"
+
+  - thema: "Lesbarkeit & Typografie im Artikel"
+    oberflaeche: "artikel"
+    id_vorschlag: "v-lesbarkeit-*"
+    signale:
+      - "typography"
+      - "readability"
+      - "line length"
+      - "font size"
+      - "reading experience"
+      - "text-wrap"
+    pruefen_mit:
+      - "barrierefreiheit.kontrast_fliesstext_min"
+      - "performance.dom_elemente_max"
+
+  - thema: "Core Web Vitals & Ladeverhalten"
+    oberflaeche: "alle"
+    id_vorschlag: "v-cwv-*"
+    signale:
+      - "core web vitals"
+      - "largest contentful paint"
+      - "lcp"
+      - "cumulative layout shift"
+      - "cls"
+      - "inp"
+      - "interaction to next paint"
+      - "lighthouse"
+      - "performance"
+    pruefen_mit:
+      - "performance.lcp_ms_max"
+      - "performance.cls_max"
+      - "performance.lighthouse_performance_min"
+
+  - thema: "Barrierefreiheit"
+    oberflaeche: "alle"
+    id_vorschlag: "v-a11y-*"
+    signale:
+      - "accessibility"
+      - "wcag"
+      - "screen reader"
+      - "keyboard"
+      - "focus"
+      - "contrast"
+      - "aria"
+    pruefen_mit:
+      - "barrierefreiheit.kontrast_fliesstext_min"
+      - "barrierefreiheit.fokusring_sichtbar"
+      - "barrierefreiheit.lighthouse_accessibility_min"
+
+  - thema: "Navigation & Orientierung"
+    oberflaeche: "alle"
+    id_vorschlag: "v-navigation-*"
+    signale:
+      - "navigation"
+      - "information architecture"
+      - "breadcrumb"
+      - "menu"
+      - "search"
+      - "wayfinding"
+    pruefen_mit:
+      - "seo.interne_links_min_anteil_basis"
+      - "performance.dom_head_kinder_max"
+
+  - thema: "Vertrauen & Conversion"
+    oberflaeche: "/"
+    id_vorschlag: "v-vertrauen-*"
+    signale:
+      - "trust"
+      - "conversion"
+      - "social proof"
+      - "form design"
+      - "newsletter"
+      - "signup"
+    pruefen_mit:
+      - "conversion.erhalten.pflicht_bausteine"
+      - "conversion.erhalten.newsletter_einstieg_vorhanden"

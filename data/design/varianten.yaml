@@ -1,0 +1,97 @@
+# ============================================================
+#  VARIANTEN-REGISTER – jede Layoutvariante mit Herkunft, Hypothese
+#  und Freigabe-Akte. (Rollout 26.09.2026)
+#
+#  Diese Datei ist MENSCHLICH KURATIERT – wie data/topics.yaml.
+#  Eine KI darf Einträge VORSCHLAGEN (scripts/design_reach_briefing.py
+#  schreibt Hypothesen nach data/design/briefings/), aber der Eintrag
+#  hier und vor allem der Block `freigabe:` entstehen von Hand.
+#
+#  LEBENSLAUF EINER VARIANTE
+#  -------------------------
+#    entwurf  →  gemessen  →  freigegeben  →  live
+#                    ↓
+#                verworfen  (bleibt stehen: ein beerdigter Versuch ist
+#                            Wissen, kein Müll)
+#
+#  Pflichtfelder je Variante:
+#    id          Kleinbuchstaben/Ziffern/Bindestrich; = Dateiname des CSS
+#    titel       ein Satz, den ein Mensch versteht
+#    hypothese   WAS soll besser werden und WORAN erkennt man es
+#    oberflaeche welche Seiten die Variante berührt
+#    herkunft    woher der Entwurf stammt (Figma / Relume / KI / Hand)
+#    status      siehe regelwerk.yaml → freigabe.erlaubte_status
+#    css         Pfad relativ zu assets/ (leer bei der Basis)
+#    freigabe    Akte; bei status=freigegeben/live vollständig Pflicht
+#
+#  WICHTIG: `aktiv` unten ist DOKUMENTATION, kein Schalter. Scharf
+#  geschaltet wird ausschließlich über den Hugo-Parameter
+#  `designVariante` (Umgebungsvariable HUGO_PARAMS_DESIGNVARIANTE oder
+#  ein bewusster Eintrag in hugo.toml). Das Gate prüft, dass beides
+#  zusammenpasst – auseinanderlaufende Wahrheiten sind der Anfang jeder
+#  Design-Havarie.
+# ============================================================
+
+version: 1
+stand: "2026-09-26"
+
+# Welche Variante läuft laut Register in Produktion? "" = Basis.
+aktiv: ""
+
+varianten:
+
+  # ----------------------------------------------------------------
+  # Die Kontrollgruppe. Existiert als echter Eintrag, damit jede
+  # Messung einen Gegner hat und kein Vergleich gegen „gefühlt früher“
+  # läuft.
+  # ----------------------------------------------------------------
+  - id: basis
+    titel: "Basis – das ausgelieferte Design (Kontrollgruppe)"
+    hypothese: >
+      Keine. Die Basis ist der Referenzwert: Jede Variante wird gegen
+      ihre Messwerte verglichen, nicht gegen eine Wunschzahl.
+    oberflaeche:
+      - "/"
+      - "/posts/"
+      - "artikel"
+    herkunft: "Bestand (PaperMod + assets/css/extended/)"
+    status: live
+    css: ""
+    freigabe:
+      mensch: true
+      name: "Frank Hartung"
+      datum: "2026-09-26"
+      kommentar: >
+        Der Bestand ist per Definition freigegeben – er ist das, was
+        seit Monaten ausgeliefert wird und alle Gates besteht.
+
+  # ----------------------------------------------------------------
+  # Beispielvariante: beweist die Kette End-zu-Ende und bleibt bewusst
+  # klein. Sie ist NICHT freigegeben – genau das ist der Punkt.
+  # ----------------------------------------------------------------
+  - id: v-hero-conversion
+    titel: "Hero-Fokus: eine klare Primärhandlung statt drei gleichlauter CTAs"
+    hypothese: >
+      Die Startseite bietet im Hero drei optisch fast gleichwertige
+      Buttons an (Ratgeber / Strom & Gas / Versicherungen). Drei
+      gleichrangige Angebote sind keine Führung, sondern eine Abfrage.
+      Erwartung: Wenn „Alle Ratgeber entdecken“ sichtbar die
+      Primärhandlung ist und die beiden Themen-Einstiege als ruhigere
+      Sekundärwege danebenstehen, steigt die Klickrate auf
+      cta_click/home-ratgeber, ohne dass die Themen-CTAs einbrechen.
+      Messbar an Umami (cta_click je slug) über 14 Tage; Abbruch, wenn
+      die Summe aller drei CTAs sinkt.
+    oberflaeche:
+      - "/"
+    herkunft: "KI-Entwurf (Relume-Muster „Hero mit Primär-/Sekundärhandlung“), von Hand auf die Marken-Tokens zurückgeschnitten"
+    status: entwurf
+    css: "css/varianten/v-hero-conversion.css"
+    notizen: >
+      Bewusst nur Hierarchie (Gewicht, Fläche, Ruhe) – keine neuen
+      Farben, keine neuen Radien, kein zusätzliches Element. Damit ist
+      sie rückabwickelbar, indem man eine Datei löscht.
+    freigabe:
+      mensch: false
+      name: ""
+      datum: ""
+      kommentar: ""

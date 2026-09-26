@@ -24,7 +24,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const BASE = path.resolve(__dirname, '..', 'public');
+// E2E_ROOT (26.09.2026, Design-Varianten-Werkbank): Die Werkbank baut jede
+// Variante nach .cache/design-varianten/<id>/public und muss GENAU diesen
+// Baum ausliefern. Ein zweiter, weniger gehärteter Server dafür wäre die
+// schlechtere Lösung – Pfad-Traversal-Schutz, 404-Verhalten und /healthz
+// gibt es hier schon. Ohne die Variable bleibt alles wie bisher.
+const BASE = path.resolve(process.env.E2E_ROOT || path.join(__dirname, '..', 'public'));
 const PORT = Number(process.env.E2E_PORT || 4173);
 
 if (!fs.existsSync(path.join(BASE, 'index.html'))) {

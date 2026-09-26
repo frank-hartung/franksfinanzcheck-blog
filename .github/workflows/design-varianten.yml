@@ -1,0 +1,231 @@
+# ============================================================
+#  DESIGN-VARIANTEN-WERKBANK
+#  Rollout 26.09.2026 – Runbook: docs/ANLEITUNG-DESIGN-VARIANTEN.md
+#
+#  DREI AUFGABEN, BEWUSST GETRENNT
+#  1. gate       Bei JEDEM PR, der Design berührt: Marke, Register,
+#                Freigabe-Kontrakt, Produktionswache. Kein Browser,
+#                keine Netzabhängigkeit – Sekunden.
+#  2. werkbank   Baut Basis + Variante, misst Tier A (HTML/DOM) und
+#                Tier B (Playwright + Lighthouse), lädt den Vergleich
+#                als Artifact hoch. Manuell und wöchentlich.
+#  3. briefing   Agent-Reach-Signale → Hypothesen-Vorschläge, committet
+#                nach data/design/briefings/. Nur lesend im Netz.
+#
+#  WAS DIESER WORKFLOW NICHT TUT
+#  Er schaltet nichts scharf. Keine Variante wird durch einen grünen
+#  Lauf freigegeben – die Freigabe ist eine menschliche Unterschrift in
+#  data/design/varianten.yaml. Der Workflow liefert nur die Grundlage
+#  dafür und verweigert, was den Regeln widerspricht.
+#
+#  Manuell starten: GitHub → Actions → „Design-Varianten"
+# ============================================================
+name: Design-Varianten
+
+on:
+  pull_request:
+    paths:
+      - "assets/css/**"
+      - "data/design/**"
+      - "layouts/**"
+      - "lighthouse/**"
+      - "lighthouserc.cjs"
+      - "scripts/design_variant_*.py"
+      - "scripts/design_reach_briefing.py"
+      - "e2e/variant-metrics.mjs"
+      - "e2e/design-variante.spec.mjs"
+  schedule:
+    # Montag 08:45 MESZ – nach der Redaktions-Recherche (08:15), damit
+    # beide Läufe nicht um dieselben Quellen konkurrieren.
+    - cron: "45 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      variante:
+        description: "Varianten-ID (leer = nur Basis messen)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: design-varianten-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ================================================================
+  #  1. GATE – schnell, deterministisch, ohne Browser
+  # ================================================================
+  gate:
+    name: Regelwerk, Register & Produktionswache
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: PyYAML
+        run: python3 -m pip install -q pyyaml
+
+      - name: Selbsttests der Werkzeuge (ein Gate, das nicht läuft, ist keins)
+        run: |
+          python3 scripts/design_variant_gate.py --selftest
+          python3 scripts/design_variant_lab.py --selftest
+          python3 scripts/design_reach_briefing.py --selftest
+
+      - name: Regressionstests der Werkbank
+        run: python3 -m unittest scripts.tests.test_design_varianten
+
+      - name: Lighthouse-Assertions gegen Regelwerk prüfen
+        # Erzeugen und vergleichen: Weicht die committete Datei ab,
+        # würde Lighthouse gegen andere Schwellen prüfen als das Gate.
+        run: |
+          python3 scripts/design_variant_gate.py --lighthouse-export
+          if ! git diff --quiet -- lighthouse/assertions.json; then
+            echo "::error::lighthouse/assertions.json ist nicht aus dem aktuellen Regelwerk erzeugt."
+            echo "Lokal beheben: python3 scripts/design_variant_gate.py --lighthouse-export"
+            git --no-pager diff -- lighthouse/assertions.json
+            exit 1
+          fi
+          echo "✅ Lighthouse-Schwellen deckungsgleich mit dem Regelwerk."
+
+      - name: Gate (Marke, Register, Freigabe-Kontrakt)
+        run: python3 scripts/design_variant_gate.py
+
+      - name: Produktionswache (darf hugo.toml das überhaupt?)
+        run: python3 scripts/design_variant_gate.py --produktionswache
+
+  # ================================================================
+  #  2. WERKBANK – bauen und messen (Tier A + Tier B)
+  # ================================================================
+  werkbank:
+    name: Bauen & messen
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: gate
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Hugo installieren (Extended, verifiziert)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Abhängigkeiten
+        run: |
+          python3 -m pip install -q pyyaml
+          npm ci
+          npm i -D --no-save lighthouse
+          npx playwright install --with-deps chromium
+
+      - name: Tier A – bauen & statisch messen
+        id: tier_a
+        run: |
+          ZIEL="${{ github.event.inputs.variante }}"
+          if [ -z "$ZIEL" ]; then ZIEL="alle"; fi
+          echo "ziel=$ZIEL" >> "$GITHUB_OUTPUT"
+          python3 scripts/design_variant_lab.py --lauf "$ZIEL"
+
+      - name: Tier B – Browser & Lighthouse
+        # Weich: Fehlt der Browser, vermerkt die Messung das ehrlich
+        # (status nicht_verfuegbar) und das Gate verweigert später die
+        # Freigabe. Den Lauf abzubrechen würde nur die Artefakte kosten.
+        continue-on-error: true
+        run: node e2e/variant-metrics.mjs --variante "${{ steps.tier_a.outputs.ziel }}"
+
+      - name: Bewertung gegen die Budgets
+        run: |
+          python3 scripts/design_variant_lab.py --vergleich
+          python3 scripts/design_variant_gate.py --json > .cache/design-varianten/gate.json || true
+          python3 scripts/design_variant_gate.py
+
+      - name: Zusammenfassung in den Lauf schreiben
+        if: always()
+        run: |
+          {
+            echo "## Design-Varianten – Messlauf"
+            echo
+            if [ -f DESIGN-VARIANTEN-REPORT.md ]; then
+              cat DESIGN-VARIANTEN-REPORT.md
+            else
+              echo "_Kein Report erzeugt._"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Messdaten als Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-varianten-messung
+          path: |
+            DESIGN-VARIANTEN-REPORT.md
+            .cache/design-varianten/**/messung.json
+            .cache/design-varianten/**/lhci/**
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ================================================================
+  #  3. BRIEFING – Agent-Reach-Signale (nur lesend)
+  # ================================================================
+  briefing:
+    name: Agent-Reach Design-Briefing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: write
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Agent Reach installieren (gepinnt)
+        # NIEMALS `pip install agent-reach` – das gleichnamige PyPI-Paket
+        # ist ein anderes Projekt (Supply-Chain-Schutz, siehe
+        # requirements-agent-reach.txt).
+        run: |
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-agent-reach.txt
+          python3 -m pip install -q pyyaml
+
+      - name: Kanal-Gesundheit (weich – die Kanalmatrix darf sich ändern)
+        continue-on-error: true
+        run: python3 scripts/agent_reach_gate.py
+
+      - name: Briefing erzeugen
+        id: brief
+        continue-on-error: true
+        run: python3 scripts/design_reach_briefing.py
+
+      - name: Briefing committen
+        run: |
+          if [ -z "$(git status --porcelain data/design/briefings/)" ]; then
+            echo "Keine neuen Briefings – nichts zu committen."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/design/briefings/
+          git commit -m "chore(design): Agent-Reach-Briefing $(date +%F) (Vorschlag, keine Freigabe)"
+          git push
