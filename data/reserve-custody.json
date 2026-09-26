@@ -1,0 +1,89 @@
+{
+  "50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
+    "titel": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
+  "budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026",
+    "titel": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
+    "zustand": "ruecklaeufer"
+  },
+  "gasrechnung-senken-clevere-herbst-vorbereitung-im-check": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check",
+    "titel": "Gasrechnung senken: Clevere Herbst Vorbereitung im Check",
+    "zustand": "ruecklaeufer"
+  },
+  "gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer",
+    "titel": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
+    "zustand": "ruecklaeufer"
+  },
+  "gasrechnung-senken-deine-strategie-fuer-den-winter-2026": {
+    "seit": "2026-09-26",
+    "slug": "2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026",
+    "titel": "Gasrechnung senken: Deine Strategie für den Winter 2026",
+    "zustand": "ruecklaeufer"
+  },
+  "gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+    "zustand": "pool"
+  },
+  "gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+    "zustand": "pool"
+  },
+  "gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
+    "titel": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
+    "zustand": "ruecklaeufer"
+  },
+  "stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=False",
+    "seit": "2026-09-25",
+    "slug": "2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
+    "titel": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
+  "stromfresser-finden-so-stoppst-du-die-energie-lecks": {
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-26-stromfresser-finden-so-stoppst-du-die-energie-lecks",
+    "titel": "Stromfresser finden: So stoppst du die Energie-Lecks",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
+  "stromfresser-finden-so-stoppst-du-teure": {
+    "geheilt": 1,
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
+    "titel": "Stromfresser finden: So stoppst du teure Energiediebe",
+    "zuletzt_geheilt": "2026-09-26",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  },
+  "stromfresser-finden-so-stoppst-du-teure-energiediebe": {
+    "geheilt": 1,
+    "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
+    "seit": "2026-09-25",
+    "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
+    "titel": "Stromfresser finden: So stoppst du teure Energiediebe 2026",
+    "zuletzt_geheilt": "2026-09-26",
+    "zuletzt_im_pool": "2026-09-26",
+    "zustand": "pool"
+  }
+}

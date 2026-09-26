@@ -4,6 +4,7 @@ title: "Stromfresser finden: So stoppst du teure Energiediebe 2026"
 description: "So erkennst du teure Stromfresser im Haushalt, misst den Verbrauch richtig und senkst mit einfachen Schritten deine Stromkosten dauerhaft."
 date: 2026-09-25T06:10:00Z
 draft: true
+reserve: true
 tags: ["Strom sparen", "Energiekosten", "Stromfresser", "Haushalt", "Vergleich"]
 categories: ["Sparen"]
 pillar: "sparen"

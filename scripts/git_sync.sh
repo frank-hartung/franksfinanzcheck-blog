@@ -356,6 +356,44 @@ PY
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
+        data/reserve-topic-ledger.json|data/reserve-custody.json)
+          # NEU 26.09.2026 (#387): Diese beiden Dateien sind GEDÄCHTNISSE,
+          # keine Momentaufnahmen – „letzter Schreiber gewinnt" wäre hier
+          # falsch, weil jede verworfene Seite echtes Wissen löscht
+          # (welches Thema schon gescheitert ist, wer im Pool war). Sie
+          # sind aber schlüssel-basiert und damit sauber vereinbar:
+          # Vereinigung über alle Schlüssel, bei Dopplung gewinnt der
+          # JÜNGERE Eintrag (spätestes Datum). Scheitert der Merge,
+          # bleibt der Konflikt hart stehen.
+          python3 - "$f" <<'PY'
+import json, pathlib, subprocess, sys
+path = pathlib.Path(sys.argv[1])
+def seite(stage):
+    r = subprocess.run(["git", "show", f":{stage}:{path.as_posix()}"],
+                       text=True, capture_output=True)
+    if r.returncode != 0:
+        return {}
+    try:
+        data = json.loads(r.stdout)
+        return data if isinstance(data, dict) else {}
+    except ValueError:
+        return {}
+def alter(eintrag):
+    if not isinstance(eintrag, dict):
+        return ""
+    return max([str(v) for k, v in eintrag.items()
+                if isinstance(v, str) and k.startswith(
+                    ("letzter", "zuletzt", "last", "seit", "first"))] or [""])
+ours, theirs = seite(2), seite(3)
+merged = dict(ours)
+for schluessel, eintrag in theirs.items():
+    if schluessel not in merged or alter(eintrag) >= alter(merged[schluessel]):
+        merged[schluessel] = eintrag
+path.write_text(json.dumps(merged, ensure_ascii=False, indent=2,
+                           sort_keys=True) + "\n", encoding="utf-8")
+PY
+          git add -- "$f"
+          ;;
         data/reserve-readiness.json|data/covers_manifest.json)
           # REPARATUR 15.09.2026 (Issue #295 – „Content-Reserve rot trotz
           # gesundem Inhalt“):

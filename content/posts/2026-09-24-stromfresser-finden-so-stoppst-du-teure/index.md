@@ -4,6 +4,7 @@ title: "Stromfresser finden: So stoppst du teure Energiediebe"
 description: "Welche Geräte am meisten Strom ziehen, wie du versteckte Stromfresser erkennst und mit welchen Sofortmaßnahmen du deine Stromkosten schnell senken kannst."
 date: 2026-09-24T07:00:00Z
 draft: true
+reserve: true
 tags: ["Strom sparen", "Stromfresser", "Energiekosten", "Haushalt", "Stromverbrauch"]
 categories: ["Sparen"]
 pillar: "sparen"

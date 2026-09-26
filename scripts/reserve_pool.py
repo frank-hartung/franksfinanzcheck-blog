@@ -122,6 +122,72 @@ def _prefer_certified(drafts: list) -> list:
     return head + tail
 
 
+# REPARATUR 26.09.2026 (#387): Wie lange ein Thema nach der
+# Veröffentlichung für die Reserve gesperrt bleibt. Grund: Am 20.09.
+# gingen VIER Gasrechnungs-Varianten am selben Tag live; der
+# Dubletten-Schutz stufte drei davon danach wieder zu Entwürfen zurück
+# („Rückläufer") – fertiger Content ohne Zuhause, verbrannte Arbeit und
+# ein Pool, der sich selbst leerte. Die Reserve ist eine Notfall-Kasse:
+# Sie darf die Lücke füllen, aber nicht das Archiv kannibalisieren.
+DUBLETTEN_SPERRE_TAGE = 14
+
+
+def frische_live_titel(posts_dir: Path = POSTS,
+                       tage: int = DUBLETTEN_SPERRE_TAGE,
+                       heute: datetime.date | None = None) -> dict:
+    """slug -> Titel der zuletzt veröffentlichten Artikel.
+
+    Grundlage der Themen-Sperre. `cadence_guard.load_posts` ist die SSOT
+    für Datum und Entwurfs-Status (Datums-FELD, nicht Ordnerpräfix); den
+    Titel liest diese Funktion selbst aus dem Frontmatter.
+    """
+    heute = heute or datetime.date.today()
+    grenze = heute - datetime.timedelta(days=tage)
+    treffer = {}
+    for post in cadence_guard.load_posts(str(posts_dir)):
+        if post.get("draft"):
+            continue
+        datum = post.get("date")
+        if isinstance(datum, str):
+            try:
+                datum = datetime.date.fromisoformat(datum[:10])
+            except ValueError:
+                datum = None
+        if not datum or datum < grenze:
+            continue
+        try:
+            titel = _titel(Path(post["path"]).read_text(encoding="utf-8"))
+        except OSError:
+            continue
+        if titel:
+            treffer[post.get("slug") or Path(post["path"]).parent.name] = titel
+    return treffer
+
+
+def sperr_treffer(titel: str, gesperrt: dict, rt=None):
+    """Kollidiert `titel` thematisch mit einem kürzlich live gegangenen?
+
+    Als eigene Funktion, damit die Entscheidung im Selbsttest ohne
+    Kalender, Dateisystem und Wochentag geprüft werden kann.
+    """
+    if not titel or not gesperrt:
+        return None
+    if rt is None:
+        try:
+            import reserve_topics as rt  # noqa: PLC0415 – fail-open
+        except Exception:  # noqa: BLE001
+            return None
+    try:
+        return rt.thema_kollision(titel, gesperrt)
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _titel(text: str) -> str:
+    m = re.search(r'(?m)^title:\s*["\']?(.+?)["\']?\s*$', _frontmatter(text))
+    return m.group(1).strip() if m else ""
+
+
 def live_count_today(posts_dir: Path = POSTS) -> int:
     today = datetime.date.today()
     posts = cadence_guard.load_posts(posts_dir)
@@ -159,6 +225,16 @@ def publish_to_min(min_per_day: int | None = None,
         from publication_release import accept_candidate
         validator = accept_candidate
     published = []
+    # Themen-Sperre aufbauen: alles, was zuletzt live ging, plus alles, was
+    # dieser Lauf gerade veröffentlicht hat. Fail-open – wenn die
+    # Disposition nicht lädt, veröffentlicht der Pool wie bisher.
+    try:
+        import reserve_topics as rt
+        gesperrt = frische_live_titel(posts_dir, heute=today)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ⚠ Themen-Sperre inaktiv ({exc}) – Reserve publiziert "
+              f"ohne Vielfalts-Prüfung.")
+        rt, gesperrt = None, {}
     for index in reserve_drafts(posts_dir):
         # Never carry a delayed slot across midnight into a non-publication day.
         if datetime.date.today() != today:
@@ -166,6 +242,16 @@ def publish_to_min(min_per_day: int | None = None,
         if live_count_today(posts_dir) >= min_per_day:
             break
         original = index.read_text(encoding="utf-8")
+        if rt is not None:
+            titel = _titel(original)
+            treffer = sperr_treffer(titel, gesperrt, rt)
+            if treffer:
+                # NICHT verbrauchen: Der Kandidat bleibt im Pool und ist
+                # nach Ablauf der Sperre wieder ein vollwertiger Notnagel.
+                print(f"  ↩ Reserve zurückgestellt (Themen-Dublette zu "
+                      f"„{treffer[0]}“, Leitbegriff „{treffer[1]}“): "
+                      f"{index.parent.name}")
+                continue
         accepted = False
         try:
             iso = now_utc_iso()
@@ -180,6 +266,8 @@ def publish_to_min(min_per_day: int | None = None,
             print(f"  Reserve abgelehnt, bleibt Entwurf: {index.parent.name}")
             continue
         published.append(index.parent.name)
+        if rt is not None and _titel(original):
+            gesperrt[index.parent.name] = _titel(original)
         print(f"  🆘 RESERVE live geschaltet: {index.parent.name} "
               f"(datiert {iso[:10]})")
     if published:
@@ -191,11 +279,53 @@ def publish_to_min(min_per_day: int | None = None,
         pool = len(reserve_drafts(posts_dir))
         print(f"Reserve-Pool: keine Veröffentlichung nötig/möglich – "
               f"{live} live heute, Ziel ≥ {min_per_day}, Pool: {pool}.")
+        if pool and live < min_per_day:
+            print("  Hinweis: Der Vorrat deckt nur Themen ab, die gerade "
+                  "erst live waren. Eine echte Lücke ist ehrlicher als eine "
+                  "Dublette – die Endkontrolle meldet sie als Defizit.")
     return published
 
 
 def run_selftest() -> list:
     fehler = []
+    # --- Vielfalts-Sperre (#387) --------------------------------------
+    frisch = {"2026-09-20-gas": "Gasrechnung senken: Dein Strategieplan "
+                                   "im Spätsommer"}
+    if not sperr_treffer("Gasrechnung senken: Clevere Herbst-Vorbereitung "
+                         "im Check", frisch):
+        fehler.append("Themen-Dublette wird trotz frischer Veröffentlichung "
+                      "publiziert (Rückläufer-Ursache #387)")
+    if sperr_treffer("Reisekrankenversicherung: Worauf du 2026 achten musst",
+                     frisch):
+        fehler.append("Fremdes Thema wird fälschlich zurückgestellt")
+    if sperr_treffer("", frisch) or sperr_treffer("Irgendwas", {}):
+        fehler.append("Sperre urteilt ohne Datengrundlage")
+
+    class _Kaputt:
+        @staticmethod
+        def thema_kollision(*_a, **_k):
+            raise RuntimeError("Modul defekt")
+
+    if sperr_treffer("Gasrechnung senken", frisch, _Kaputt) is not None:
+        fehler.append("Sperre ist nicht fail-open (blockiert bei Defekt)")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        fx = Path(tmp) / "content" / "posts"
+        fx.mkdir(parents=True)
+        for slug, datum, draft, titel in (
+                ("2026-09-25-frisch", "2026-09-25", "false", "Frisch live"),
+                ("2026-08-01-alt", "2026-08-01", "false", "Lange her"),
+                ("2026-09-25-entwurf", "2026-09-25", "true", "Nur Entwurf")):
+            d = fx / slug
+            d.mkdir()
+            (d / "index.md").write_text(
+                f'---\ntitle: "{titel}"\ndate: {datum}T06:00:00Z\n'
+                f"draft: {draft}\n---\n\nBody.\n", encoding="utf-8")
+        titel = frische_live_titel(fx, heute=datetime.date(2026, 9, 26))
+        if list(titel.values()) != ["Frisch live"]:
+            fehler.append(f"Sperrliste falsch aufgebaut: {titel} "
+                          "(erwartet: nur frische LIVE-Artikel)")
+
     with tempfile.TemporaryDirectory() as tmp:
         fx = Path(tmp) / "content" / "posts"
         fx.mkdir(parents=True)
@@ -245,7 +375,7 @@ def main() -> int:
                 print(f"   - {e}")
             return 2
         print("✅ Reserve-Pool-Selbsttest grün (Filter, Publish, "
-              "Draft-Schutz, Audit-Zeile).")
+              "Draft-Schutz, Audit-Zeile, Themen-Sperre gegen Dubletten).")
         return 0
 
     if "--status" in args or not args:

@@ -193,7 +193,17 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # vergleicht im Gate selbst, ob der Branch-Schutz genau den Check
           # verlangt, der da gerade läuft; ihr Selbsttest beweist die Logik an
           # Kunst-Rulesets ohne Netz (C18).
-          "pflichtcheck_guard.py"]
+          "pflichtcheck_guard.py",
+          # Reserve-Linie (26.09.2026, #387 – „Content-Reserve rot, obwohl
+          # der Content da war"): Drei stille Lecks leerten den Vorrat
+          # gleichzeitig. Ein fremder Commit nahm zwei zertifizierten
+          # Kandidaten die `reserve`-Fahne (Bestands-Wächter heilt das und
+          # führt Buch), und der Nachschub griff sechsmal dasselbe Thema,
+          # weil er immer das ERSTE freie nahm (Disposition rotiert jetzt
+          # mit Gedächtnis und Cooldown). Beide sind Wachen mit
+          # Entscheidungslogik – ohne Selbsttest im Minimum wäre die
+          # Reparatur wieder nur eine Zusage.
+          "reserve_custody.py", "reserve_topics.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

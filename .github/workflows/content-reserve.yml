@@ -160,6 +160,23 @@ jobs:
       - name: Affiliate-Marketer Routing-Nachweis (read-only)
         run: python3 scripts/affiliate_marketer.py
 
+      # ================= RUNDE 0 (BESTAND) =================
+      # NEU 26.09.2026 (#387): Bevor eine einzige KI-Anfrage Geld kostet,
+      # bekommt der Pool zurück, was ihm gehört. Am 25.09. verlor er zwei
+      # zertifizierte Kandidaten allein dadurch, dass ein fremder Commit
+      # ihr Frontmatter neu schrieb und die `reserve`-Fahne wegließ – der
+      # Lauf produzierte danach Ersatz für Artikel, die noch im Repo lagen,
+      # und wurde trotzdem rot. Der Wächter ist kein Gate (kein
+      # Abbruch-Recht), er stellt nur die Fahne wieder her und legt
+      # Rückläufer der Redaktion vor.
+      - name: Stufe 0 – Bestands-Wächter (verlorene Reserve-Fahnen heilen)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          python3 scripts/reserve_custody.py --heal
+          python3 scripts/reserve_custody.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null \
+            || echo "::warning::Bestands-Bericht nicht schreibbar – Details im Log"
+
       # ================= RUNDE 1 =================
       # Stufe 1 – PRODUKTION
       - name: Stufe 1 – Kandidaten erzeugen (nur bei echtem Bedarf)

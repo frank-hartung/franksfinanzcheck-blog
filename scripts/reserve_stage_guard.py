@@ -71,11 +71,24 @@ ROOT = Path(__file__).resolve().parent.parent
 # (und gleichzeitig zählte eine einzige Nacht durch die Mehrfach-Zertifizierung
 # doppelt, siehe reserve_quarantine.lauf_kennung).
 ALLOWED_PREFIXES = ("content/posts/", "static/images/covers/")
+# REPARATUR 26.09.2026 (#387): Zwei weitere Gedächtnisse gehören dem
+# Reserve-Lauf – und ein Gedächtnis, das den Runner nicht überlebt, ist
+# keines (dieselbe Klasse wie der ungetrackte Quarantäne-Zähler, #349):
+#   * data/reserve-topic-ledger.json  – welches Thema wann produziert bzw.
+#     gescheitert ist (Rotation + Cooldown gegen Dubletten-Kaskaden),
+#   * data/reserve-custody.json       – wer nachweislich im Pool war
+#     (Grundlage der Fahnen-Heilung des Bestands-Wächters).
 ALLOWED_FILES = ("data/reserve-readiness.json", "data/covers_manifest.json",
-                 "data/reserve-quarantine.json")
+                 "data/reserve-quarantine.json",
+                 "data/reserve-topic-ledger.json",
+                 "data/reserve-custody.json",
+                 "data/reserve-history.jsonl")
 STAGE_PATHS = ("content/posts", "static/images/covers",
                "data/reserve-readiness.json", "data/covers_manifest.json",
-               "data/reserve-quarantine.json", "data/audit")
+               "data/reserve-quarantine.json",
+               "data/reserve-topic-ledger.json",
+               "data/reserve-custody.json",
+               "data/reserve-history.jsonl", "data/audit")
 
 RE_RESERVE = re.compile(r"(?m)^reserve:\s*(true|yes|1)\s*$")
 # Ausgemusterte Entwürfe (Quarantäne) bleiben im Bestand – sie sind Reserve-
