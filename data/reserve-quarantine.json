@@ -1,13 +1,13 @@
 {
-  "2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-    "first": "2026-09-25T09:07:05Z",
+  "2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
+    "first": "2026-09-26T08:48:09Z",
     "grund": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
     "hits": 1,
     "laeufe": [
-      "run:36115789510"
+      "run:36230666076"
     ],
-    "last": "2026-09-25T09:07:05Z",
-    "lauf": "run:36115789510",
+    "last": "2026-09-26T08:49:31Z",
+    "lauf": "run:36230666076",
     "signatur": "cover-text-komplettheit (check_titles r<n>) nicht bestanden – titel vermutlich unvollständig"
   }
 }

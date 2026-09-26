@@ -1,133 +1,58 @@
 {
   "target": 6,
-  "ready": 7,
-  "pool_size": 8,
-  "generated_at": "2026-09-25T09:07:05Z",
+  "ready": 2,
+  "pool_size": 3,
+  "generated_at": "2026-09-26T08:49:31Z",
   "candidates": [
     {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "slug": "2026-09-26-stromfresser-finden-so-stoppst-du-die-energie-lecks",
       "ready": true,
-      "sha256": "70a75e11bd9f7a73f8ffb5db4fba138ae0edd3f841e0d4029eba85b9774d1e7e",
-      "score": 0.94,
+      "sha256": "b1e55fb0a8174be77d591f5567143f1bbdf3161771cffe88b9a9aa32d3f561f8",
+      "score": 0.946,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.78,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "ready": true,
-      "sha256": "7f75a6b1edb13d0166587f48acd4380a329c1676e3a117fbe6d5ba7226e84024",
-      "score": 0.988,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
+        "uniqueness": 0.9,
         "affiliate": 1.0,
         "readability": 1.0
       }
     },
     {
-      "slug": "2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe",
+      "slug": "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
       "ready": true,
-      "sha256": "8c80cc5ecde35fae49b77f1c5e0c2ead61106686a55d1a23aeba00c4383db3c6",
-      "score": 0.922,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-09-24-stromfresser-finden-so-stoppst-du-teure",
-      "ready": true,
-      "sha256": "c533577c384efee56090facd098c4622d0db882974a30be7245e572292b086a6",
-      "score": 0.944,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.84,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-25-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026",
-      "ready": true,
-      "sha256": "64557ff5d03c52a0a5dff3002227493c886ec4520d110a186c3cf9997c801d30",
-      "score": 0.956,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
-      "ready": false,
-      "sha256": "e54cf30f283a525af9ce1a68c46c5221ea1a4c92694a2ffa71a04253ad35738d",
-      "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
-      "details": [
-        "🛑 2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
+      "sha256": "a8abe6d579a46f992139e761e11c356d3c7687d28b3066cfab98e881fb2cbd5c",
       "score": 0.936,
       "parts": {
         "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
-        "uniqueness": 1.0,
+        "uniqueness": 0.6,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 1.0
       }
     },
     {
-      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-die-energie-lecks",
-      "ready": true,
-      "sha256": "23d9e58cc691309a98bf99dbd05872bca7d9fdfc7ecd25b384f31f3ef850ed44",
-      "score": 0.922,
+      "slug": "2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv",
+      "ready": false,
+      "sha256": "150a2cbffd641ac12285ccd2999c2f338276a9027c8489eaf5bc3d3a8eb95b19",
+      "reason": "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
+      "details": [
+        "🛑 2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Cover-Text-Komplettheit (check_titles R5) nicht bestanden – Titel vermutlich unvollständig",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.968,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
+        "typography": 0.98,
+        "uniqueness": 0.9,
         "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe",
-      "ready": true,
-      "sha256": "b908527ad7c01c4a68aff38e455041d97497f93bf364b59d3559eaf3e3f79ed7",
-      "score": 0.928,
-      "parts": {
-        "spelling": 0.72,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     }
   ]
