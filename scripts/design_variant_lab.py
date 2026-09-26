@@ -58,6 +58,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+try:
+    import dom_audit  # gemeinsamer HTML-Parser (browser-treu, minify-fest)
+except ImportError as _exc:  # pragma: no cover
+    raise SystemExit(f"scripts/dom_audit.py nicht importierbar: {_exc}")
+
 REGISTER = ROOT / "data" / "design" / "varianten.yaml"
 REGELWERK = ROOT / "data" / "design" / "regelwerk.yaml"
 CACHE = ROOT / ".cache" / "design-varianten"
@@ -138,15 +143,30 @@ def bauen(vid: str, ist_basis: bool) -> tuple[bool, str, Path]:
 
     umgebung = dict(os.environ)
     if ist_basis:
-        # Ausdrücklich leeren: Eine geerbte Variable aus der Shell würde
-        # sonst die Kontrollgruppe heimlich zur Variante machen – der
-        # Vergleich wäre wertlos und niemand würde es merken.
-        umgebung.pop("HUGO_PARAMS_DESIGNVARIANTE", None)
+        # Ausdrücklich auf LEER setzen, nicht bloß löschen.
+        #
+        # Die erste Fassung entfernte nur die Umgebungsvariable. Das
+        # reichte, solange keine Variante live war. Seit hugo.toml
+        # `designVariante = "v-hero-conversion"` setzt, baute die
+        # Kontrollgruppe die Variante gleich mit: Beide Läufe meldeten
+        # dieselben Zahlen und „Variantenmarke im Markup: ja". Ein
+        # Vergleich Variante-gegen-Variante sieht aus wie ein Ergebnis
+        # und ist keins.
+        #
+        # Eine leere Env-Variable überschreibt den Konfigurationswert
+        # (nachgemessen 26.09.2026) – nur so ist die Basis wirklich die
+        # Basis, egal was in hugo.toml steht.
+        umgebung["HUGO_PARAMS_DESIGNVARIANTE"] = ""
     else:
         umgebung["HUGO_PARAMS_DESIGNVARIANTE"] = vid
 
+    # `--minify` wie der Deploy (deploy.yml: `hugo --minify`). Ohne das
+    # vermisst die Werkbank ein Artefakt, das so nie ausgeliefert wird:
+    # andere Byte-Zahlen und – schlimmer – anders geschriebene Attribute
+    # (`class=ff-btn` statt `class="ff-btn"`). Messen soll, was der
+    # Besucher bekommt.
     proc = subprocess.run(
-        [binaer, "--destination", str(ziel), "--logLevel", "warn"],
+        [binaer, "--minify", "--destination", str(ziel), "--logLevel", "warn"],
         cwd=str(ROOT), env=umgebung, capture_output=True, text=True,
         timeout=BAU_TIMEOUT,
     )
@@ -164,16 +184,37 @@ def bauen(vid: str, ist_basis: bool) -> tuple[bool, str, Path]:
 # zählen (rel, data-umami-event, width/height, alt), hängt der Parser in
 # dom_audit.py nicht an die Knoten – er misst Struktur, nicht Inhalt.
 RE_H1 = re.compile(r"<h1[\s>]", re.I)
-RE_CANONICAL = re.compile(r'<link[^>]+rel=["\']canonical["\']', re.I)
+# `rel=canonical` OHNE Anführungszeichen ist gültig und entsteht durch
+# `hugo --minify` – genau so wird ausgeliefert.
+RE_CANONICAL = re.compile(r'<link[^>]+rel=\s*["\']?canonical\b', re.I)
 RE_STYLE = re.compile(r"<style\b[^>]*>(.*?)</style>", re.I | re.S)
 RE_IMG = re.compile(r"<img\b[^>]*>", re.I)
 RE_ANKER = re.compile(r"<a\b[^>]*>", re.I)
-RE_ATTR = re.compile(r'([a-zA-Z0-9_:-]+)\s*=\s*"([^"]*)"')
 RE_SCHEMA_TYP = re.compile(r'"@type"\s*:\s*"([^"]+)"')
+RE_VARIANTE = re.compile(r'data-ff-variante\s*=', re.I)
 
 
 def attrs_von(tag: str) -> dict[str, str]:
-    return {m.group(1).lower(): m.group(2) for m in RE_ATTR.finditer(tag)}
+    """Attribute eines Start-Tags – mit UND ohne Anführungszeichen.
+
+    Warum nicht ein eigener Regex: Der Deploy baut mit `hugo --minify`,
+    und minifiziertes HTML schreibt `class=ff-btn` statt `class="ff-btn"`.
+    Die erste Fassung hier verlangte Anführungszeichen und sah auf einem
+    Produktionsbau schlicht NICHTS – CTA-Zählung, Umami-Vollständigkeit,
+    Affiliate-rel und width/height hätten alle 0 gemeldet, also
+    „alles in Ordnung". Ein blindes Gate ist schlimmer als gar keins.
+
+    dom_audit.parse_attrs kann beides und ist dafür getestet
+    (scripts/tests/test_dom_audit.py) – eine Wahrheit statt zwei Parser.
+    """
+    inner = tag.strip()
+    if inner.startswith("<"):
+        inner = inner[1:]
+    if inner.endswith(">"):
+        inner = inner[:-1]
+    inner = inner.rstrip("/")
+    teile = inner.split(None, 1)
+    return dom_audit.parse_attrs(teile[1]) if len(teile) > 1 else {}
 
 
 def stichprobe(public: Path) -> list[tuple[str, Path]]:
@@ -200,11 +241,6 @@ def stichprobe(public: Path) -> list[tuple[str, Path]]:
 
 def messen_statisch(vid: str, public: Path, regelwerk: dict) -> dict:
     """Tier A: alles, was man dem ausgelieferten HTML ansehen kann."""
-    try:
-        import dom_audit
-    except ImportError as exc:  # pragma: no cover
-        return {"status": "fehler", "grund": f"dom_audit nicht importierbar: {exc}"}
-
     if not (public / "index.html").exists():
         return {"status": "fehler", "grund": f"Kein Build unter {public}"}
 
@@ -242,7 +278,7 @@ def messen_statisch(vid: str, public: Path, regelwerk: dict) -> dict:
         if not RE_CANONICAL.search(html):
             canonical_fehlt += 1
         schema_typen.update(RE_SCHEMA_TYP.findall(html))
-        if 'data-ff-variante="' in html:
+        if RE_VARIANTE.search(html):
             variante_markiert = True
 
         for tag in RE_IMG.findall(html):
@@ -464,11 +500,18 @@ def lauf(ids: list[str], register: dict, regelwerk: dict) -> int:
               f"Elemente · CSS {w['stylesheet_bytes']} B · CTA {w['cta_anzahl']} "
               f"· Variantenmarke im Markup: {marker}")
 
-        # Ein Varianten-Bau OHNE Marke ist ein stiller Fehlschlag: Man
-        # vermisst die Basis und hält sie für die Variante.
+        # BEIDE Richtungen prüfen. Die erste Fassung prüfte nur die eine
+        # und übersah deshalb am 26.09.2026, dass die Kontrollgruppe
+        # selbst zur Variante geworden war (hugo.toml setzte den
+        # Parameter). Ein halber Wächter ist ein blinder Wächter.
         if not ist_basis and not w["variante_im_markup"]:
             print(f"✗ {vid}: Der Bau trägt keine Variantenmarke – es wurde die "
                   "Basis vermessen.", file=sys.stderr)
+            fehler += 1
+        if ist_basis and w["variante_im_markup"]:
+            print("✗ basis: Die Kontrollgruppe trägt eine Variantenmarke. Damit "
+                  "vergleicht jede Messung eine Variante mit sich selbst.",
+                  file=sys.stderr)
             fehler += 1
 
     return 1 if fehler else 0
@@ -663,10 +706,19 @@ def liste(register: dict) -> None:
 def _selftest() -> int:
     import tempfile
 
-    # 1) Attribut-Parser
+    # 1) Attribut-Parser – zitiert UND minifiziert (hugo --minify)
     a = attrs_von('<a href="/go/dsl/" rel="sponsored nofollow noopener" '
                   'data-umami-event="affiliate_click">')
     assert a["href"] == "/go/dsl/" and "sponsored" in a["rel"]
+    # Produktion liefert `class=ff-btn` ohne Anführungszeichen. Die erste
+    # Fassung sah davon NICHTS und hätte jede Conversion-Prüfung still auf
+    # 0 gesetzt – also „alles in Ordnung" gemeldet.
+    m = attrs_von('<a href=/go/dsl/ rel="sponsored nofollow noopener" '
+                  'data-umami-event=affiliate_click class=ff-btn>')
+    assert m["href"] == "/go/dsl/", m
+    assert m["data-umami-event"] == "affiliate_click", m
+    assert m["class"] == "ff-btn", m
+    assert attrs_von("<br>") == {}
 
     # 2) Statische Messung an einem Mini-Build
     with tempfile.TemporaryDirectory() as tmp:
@@ -709,6 +761,38 @@ def _selftest() -> int:
         # /go/ zählt NICHT als interner Link (sonst belohnt man Affiliate-Spam)
         assert w["interne_links"] == 3, w["interne_links"]
 
+    # 2b) Dieselbe Seite MINIFIZIERT muss dieselben Zahlen liefern
+    with tempfile.TemporaryDirectory() as tmp:
+        public = Path(tmp) / "public"
+        public.mkdir()
+        (public / "index.html").write_text(
+            '<!doctype html><html><head><link rel=canonical href=https://x/>'
+            '<style data-ff-variante=v-x>.a{}</style>'
+            '<script type=application/ld+json>{"@type":"BreadcrumbList"}</script>'
+            '</head><body><h1>T</h1><div class=ff-home-ctas>'
+            '<a class="ff-btn ff-btn-primary" href=/posts/ data-umami-event=cta_click>A</a>'
+            '<a class="ff-btn ff-btn-secondary" href=/pillar/>B</a></div>'
+            '<div class=ff-trust-row>x</div>'
+            '<a href=/go/dsl/ rel="sponsored nofollow">P</a>'
+            '<img src=a.jpg width=10 height=10 alt=x><img src=b.jpg>'
+            '<a href=/newsletter-anmeldung/>N</a></body></html>',
+            encoding="utf-8")
+        regelwerk = {
+            "seo": {"h1_anzahl_exakt": 1, "schema_typen_pflicht": ["BreadcrumbList"]},
+            "conversion": {"erhalten": {"pflicht_bausteine": [".ff-home-ctas",
+                                                              ".ff-trust-row"]}},
+        }
+        m = messen_statisch("v-x", public, regelwerk)
+        w = m["werte"]
+        assert w["cta_anzahl"] == 2, w["cta_anzahl"]
+        assert w["cta_ohne_umami"] == 1, w["cta_ohne_umami"]
+        assert w["affiliate_rel_fehler"] == 1, w["affiliate_rel_fehler"]
+        assert w["bilder_ohne_masse"] == 1 and w["alt_luecken"] == 1
+        assert w["variante_im_markup"] is True, "Marke ohne Anführungszeichen übersehen"
+        assert w["canonical_fehlt"] == 0, "rel=canonical ohne Quotes übersehen"
+        assert w["pflicht_bausteine_fehlen"] == []
+        assert w["interne_links"] == 3, w["interne_links"]
+
     # 3) Messdatei-Merge: Tier B darf Tier A nicht löschen
     global CACHE
     original = CACHE
@@ -728,7 +812,7 @@ def _selftest() -> int:
         assert "Keine Basis-Messung" in text
     CACHE = original
 
-    print("selftest: OK (4 Gruppen)")
+    print("selftest: OK (5 Gruppen)")
     return 0
 
 

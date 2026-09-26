@@ -283,6 +283,23 @@ const PROFILE = [
   { name: 'desktop', config: 'desktop', massgeblich: false },
 ];
 
+// Wie oft je Profil gemessen wird. Der Median aus mehreren Läufen ist
+// nicht Feinschliff, sondern Voraussetzung:
+// Ein Einzellauf meldete am 26.09.2026 für die Basis TBT 1462 ms und
+// Performance 0,73 – gegen 1, 46, 78 und 89 ms in allen anderen Läufen
+// derselben Seite. Daraus wurde prompt ein Befund, den niemand hätte
+// beheben können, weil es ihn nicht gab. lighthouserc.cjs nutzt aus
+// demselben Grund numberOfRuns: 3; beide Werkzeuge messen jetzt gleich.
+const LAEUFE = Math.max(1, Number(process.env.LH_LAEUFE || 3));
+
+function median(werte) {
+  const sauber = werte.filter((v) => typeof v === 'number' && Number.isFinite(v));
+  if (!sauber.length) return null;
+  const s = [...sauber].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
 async function messeLighthouse(url, launchOptions) {
   let lighthouse;
   let desktopConfig;
@@ -303,39 +320,63 @@ async function messeLighthouse(url, launchOptions) {
   let port = 9222;
 
   for (const profil of PROFILE) {
+    const laeufe = [];
     let browser;
     try {
-      browser = await chromium.launch({
-        ...launchOptions,
-        args: [...(launchOptions.args || []), `--remote-debugging-port=${port}`],
-      });
-      const { lhr } = await lighthouse(
-        url,
-        { port, output: 'json', logLevel: 'error',
-          onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] },
-        profil.config === 'desktop' ? desktopConfig : undefined
-      );
+      for (let n = 0; n < LAEUFE; n += 1) {
+        browser = await chromium.launch({
+          ...launchOptions,
+          args: [...(launchOptions.args || []), `--remote-debugging-port=${port}`],
+        });
+        const { lhr } = await lighthouse(
+          url,
+          { port, output: 'json', logLevel: 'error',
+            onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'] },
+          profil.config === 'desktop' ? desktopConfig : undefined
+        );
+        laeufe.push(lhr);
+        await browser.close();
+        browser = undefined;
+        port += 1;
+      }
+
+      const lhr = laeufe[laeufe.length - 1];
       const score = (k) =>
-        lhr.categories[k] ? Math.round(lhr.categories[k].score * 100) / 100 : null;
+        median(laeufe.map((l) => (l.categories[k] ? l.categories[k].score : null)));
+      const auditWert = (k) =>
+        median(laeufe.map((l) => l.audits[k]?.numericValue ?? null));
+      const runden = (v, n = 0) =>
+        v === null ? null : Math.round(v * 10 ** n) / 10 ** n;
       const t = lhr.configSettings.throttling || {};
       const messung = {
         // Selbstauskunft der Messung – ohne sie ist jede Zahl deutbar.
         formFactor: lhr.configSettings.formFactor,
         cpu_faktor: t.cpuSlowdownMultiplier ?? null,
         netz_kbps: t.throughputKbps ?? null,
-        benchmark_index: Math.round(lhr.environment?.benchmarkIndex ?? 0),
+        laeufe: LAEUFE,
+        verfahren: 'median',
+        benchmark_index: runden(median(
+          laeufe.map((l) => l.environment?.benchmarkIndex ?? null))),
         lighthouse: {
-          performance: score('performance'),
-          accessibility: score('accessibility'),
-          seo: score('seo'),
-          'best-practices': score('best-practices'),
+          performance: runden(score('performance'), 2),
+          accessibility: runden(score('accessibility'), 2),
+          seo: runden(score('seo'), 2),
+          'best-practices': runden(score('best-practices'), 2),
         },
-        tbt_ms: Math.round(lhr.audits['total-blocking-time']?.numericValue ?? 0),
-        lcp_ms: Math.round(lhr.audits['largest-contentful-paint']?.numericValue ?? 0),
-        fcp_ms: Math.round(lhr.audits['first-contentful-paint']?.numericValue ?? 0),
-        cls: Math.round((lhr.audits['cumulative-layout-shift']?.numericValue ?? 0) * 1000) / 1000,
+        tbt_ms: runden(auditWert('total-blocking-time')),
+        lcp_ms: runden(auditWert('largest-contentful-paint')),
+        fcp_ms: runden(auditWert('first-contentful-paint')),
+        cls: runden(auditWert('cumulative-layout-shift'), 3),
         ungenutztes_css_kb: Math.round(
           (lhr.audits['unused-css-rules']?.details?.overallSavingsBytes ?? 0) / 1024),
+        // Streuung sichtbar machen: Wer den Median liest, soll erkennen,
+        // wie verlässlich er ist.
+        streuung: {
+          lcp_ms: laeufe.map((l) =>
+            Math.round(l.audits['largest-contentful-paint']?.numericValue ?? 0)),
+          tbt_ms: laeufe.map((l) =>
+            Math.round(l.audits['total-blocking-time']?.numericValue ?? 0)),
+        },
       };
       werte.profile[profil.name] = messung;
       if (profil.massgeblich) {
@@ -343,16 +384,17 @@ async function messeLighthouse(url, launchOptions) {
         // bewertet sie, und `profil_massgeblich` sagt, welche es ist.
         Object.assign(werte, messung, { profil_massgeblich: profil.name });
       }
+      const sp = (a) => `${Math.min(...a)}–${Math.max(...a)}`;
       console.log(
         `  ✓ ${profil.name.padEnd(7)} ${messung.formFactor} · cpu×${messung.cpu_faktor} · ` +
-        `LCP ${messung.lcp_ms}ms · TBT ${messung.tbt_ms}ms · ` +
+        `Median aus ${LAEUFE}: LCP ${messung.lcp_ms}ms (${sp(messung.streuung.lcp_ms)}) · ` +
+        `TBT ${messung.tbt_ms}ms (${sp(messung.streuung.tbt_ms)}) · ` +
         `perf ${messung.lighthouse.performance} · a11y ${messung.lighthouse.accessibility}`
       );
     } catch (e) {
       return { status: 'fehler', grund: `Profil ${profil.name}: ${String(e.message).slice(0, 260)}` };
     } finally {
       await browser?.close();
-      port += 1;
     }
   }
 

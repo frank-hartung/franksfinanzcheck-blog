@@ -329,3 +329,96 @@ Rückbau ist eine Minute Arbeit: in `hugo.toml`
 bzw. `verworfen` – danach `integrity_guard.py --set-current` und beides
 im selben Commit. Das Varianten-CSS liegt additiv über der Basis; es
 verschwindet durch Weglassen, nicht durch Rückrechnen.
+
+---
+
+## Nachtrag 26.09.2026 – drei Messfehler nach dem Merge gefunden
+
+Die Kontrolle des deployten Artefakts auf `gh-pages` hat drei Fehler in
+der Werkbank aufgedeckt. Alle drei waren **still**: Sie hätten keinen
+Alarm ausgelöst, sondern falsche Sicherheit erzeugt.
+
+### 1. Die Werkbank maß ein Artefakt, das nie ausgeliefert wird
+
+Der Deploy baut mit `hugo --minify`, die Werkbank baute ohne. Minifiziertes
+HTML schreibt `class=ff-btn` statt `class="ff-btn"` – und mein
+Attribut-Parser verlangte Anführungszeichen:
+
+```
+Minifiziertes Tag:  <a href=/go/dsl/ rel="sponsored nofollow noopener"
+                       data-umami-event=affiliate_click class=ff-btn>
+Parser sah:         {'rel': 'sponsored nofollow noopener'}
+```
+
+Auf einem Produktionsbau hätten CTA-Zählung, Umami-Vollständigkeit,
+Affiliate-`rel` und `width`/`height` alle **0** gemeldet – also
+„alles in Ordnung". Ein blindes Gate ist schlimmer als gar keins.
+
+**Behoben:** Die Werkbank baut mit `--minify` wie der Deploy, und der
+Attribut-Parser ist jetzt `dom_audit.parse_attrs` – der Parser, den das
+Repo für genau diesen Fall schon hatte und getestet hat. Eine Wahrheit
+statt zwei. Ebenso minify-fest: `rel=canonical` ohne Anführungszeichen
+und die Variantenmarke.
+
+### 2. Die Kontrollgruppe war keine mehr
+
+Seit `hugo.toml` `designVariante = "v-hero-conversion"` setzt, baute auch
+die Basis die Variante mit – `bauen()` entfernte nur die
+*Umgebungsvariable*, nicht den *Konfigurationswert*:
+
+```
+✓ basis              … CSS 130727 B … Variantenmarke im Markup: ja   ← falsch
+✓ v-hero-conversion  … CSS 130727 B … Variantenmarke im Markup: ja
+```
+
+Beide Läufe identisch. Jeder Vergleich hätte eine Variante mit sich selbst
+verglichen – das sieht aus wie ein Ergebnis und ist keins.
+
+**Behoben:** Für die Basis wird die Variable explizit auf **leer** gesetzt
+(überschreibt den Konfigurationswert, nachgemessen). Und der Wächter prüft
+jetzt **beide** Richtungen: Ein Varianten-Bau ohne Marke ist ein Fehler –
+ein Basis-Bau **mit** Marke ebenso. Vorher war nur die eine Richtung
+bewacht; deshalb fiel es nicht auf.
+
+### 3. Ein Einzellauf erzeugte einen Befund, den es nicht gab
+
+```
+basis mobil: TBT 1462 ms · perf 0,73      ← Einzellauf
+             (alle anderen Läufe: 1, 46, 78, 89 ms · perf 0,93–1,00)
+```
+
+Daraus wurde prompt ein P3-Bestandsbefund. `lighthouserc.cjs` nutzt aus
+gutem Grund `numberOfRuns: 3`; mein Skript maß **einmal** – wieder zwei
+Werkzeuge, zwei Verfahren.
+
+**Behoben:** Median aus drei Läufen je Profil, und die Streuung steht in
+der Ausgabe und der Messdatei:
+
+```
+basis   mobil   Median aus 3: LCP 1760ms (1740–1798) · TBT 69ms (56–77) · perf 0.99
+variante mobil  Median aus 3: LCP 1752ms (1749–1764) · TBT 90ms (75–157) · perf 0.99
+```
+
+Wer einen Median liest, soll erkennen können, wie verlässlich er ist.
+
+### Freigabe-Protokoll erneuert
+
+`data/design/messungen/v-hero-conversion-2026-09-26.json` wurde mit den
+produktionsgleichen Zahlen neu erzeugt. Die Freigabe selbst (Datum,
+Unterschrift) bleibt unverändert – alle Budgets sind weiterhin gehalten,
+Gate und Produktionswache melden **keine Befunde**.
+
+| Kennzahl (Median aus 3) | Basis | Variante | Budget |
+|---|---:|---:|---:|
+| LH mobil – Performance | 0,99 | 0,99 | ≥ 0,90 ✅ |
+| LH mobil – LCP | 1760 ms | 1752 ms | ≤ 2500 ms ✅ |
+| LH mobil – TBT | 69 ms | 90 ms | ≤ 200 ms ✅ |
+| LH desktop – LCP | 567 ms | 594 ms | ≤ 2500 ms ✅ |
+| Kontrast / Tap / CLS | 7,53 / 26,4 px / 0 | 7,53 / 26,4 px / 0 | ✅ |
+
+**Gemeinsamer Nenner aller drei Fehler:** Die Messung wich von der
+Wirklichkeit ab – einmal im Artefakt, einmal in der Kontrollgruppe, einmal
+im Verfahren. Das ist dasselbe Muster wie bei der fehlenden Kompression
+weiter oben. Eine Messumgebung, die nicht die Produktion abbildet,
+produziert Befunde, die niemand beheben kann – oder, schlimmer, Schweigen,
+wo ein Befund hingehört.
