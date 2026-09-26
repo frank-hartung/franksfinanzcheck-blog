@@ -19,9 +19,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Wechsel des Gasanbieters lohnt sich oft, wenn dein aktueller Tarif teuer geworden ist oder keine saubere Preisgarantie mehr bietet. Wichtig ist, nicht nur auf den Arbeitspreis zu schauen, sondern Grundpreis, Bonus, Laufzeit und Vertragsbedingungen als Gesamtpaket zu prüfen. Wer so vergleicht, spart häufig mehrere hundert Euro pro Jahr."
 social_posted: true
-keywords: ["Gasanbieter wechseln", "Gasvergleich", "günstige Gastarife", "Preisgarantie Gas", "Gasvertrag kündigen"]
+keywords: ["Gasanbieter wechseln", "Gasvergleich", "günstige Gastarife", "Preisgarantie Gas", "Gasvertrag kündigen", "Gasanbieter", "Praxis-Tipps"]
 pin_title: "Gasanbieter wechseln: So sparst du bei Gas wirklich"
-pin_description: "*Werbung | Gas clever wechseln: Arbeitspreis, Grundpreis, Bonus und Preisgarantie richtig prüfen. So vermeidest du Kostenfallen und senkst deine Heizkosten spürbar."
+pin_description: "*Werbung | So wechselst du deinen Gasanbieter clever: Effektivpreis rechnen, Preisgarantie prüfen und Tarife ohne Kostenfalle auswählen. Mehr Spartipps auf FranksFinanzcheck! #gasanbieterwechseln #gasvergleich #guenstigegastarife"
 pinwand: "Energie | Gas & Strom sparen"
 ---
 

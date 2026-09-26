@@ -14,7 +14,7 @@ author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 keywords: ["Budgeting ohne Frust", "50-30-20-Regel", "Geld sparen", "Budget planen", "Fixkosten senken"]
 pin_title: "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026"
-pin_description: "*Werbung | Budgeting ohne Frust: So nutzt du die 50-30-20-Regel 2026 alltagstauglich, ordnest Fixkosten sauber ein und schaffst endlich mehr Sparspielraum."
+pin_description: "*Werbung | So funktioniert Budgeting ohne Frust: Mit der 50-30-20-Regel ordnest du Fixkosten, Wünsche und Sparen klarer und machst dein Geld 2026 alltagstauglich planbar. Mehr Spartipps auf FranksFinanzcheck! #budgetingohnefrust #503020regel #geldsparen"
 ai_generated: false
 cover:
   image: "images/covers/2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026.jpg"

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
-title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch einschätzen"
-description: "Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif, Selbstbeteiligung und Leistungen achten solltest."
+title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch"
+description: "Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif…"
 date: 2026-09-21T09:05:00Z
 draft: false
 tags: ["Tierkrankenversicherung", "Hund versichern", "Katze versichern", "Tierarztkosten", "Haustierkosten"]
@@ -16,9 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Tierkrankenversicherung kann sich lohnen, wenn du hohe Tierarztkosten finanziell nicht gut abfedern kannst oder maximale Planbarkeit möchtest. Entscheidend ist nicht der billigste Monatsbeitrag, sondern das Zusammenspiel aus Leistungsumfang, Selbstbeteiligung, Erstattung und Ausschlüssen. Wer Hund oder Katze nur nach dem Beitrag absichert, vergleicht zu kurz."
 social_posted: true
-keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier"]
+keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier", "Tierkrankenversicherung für Hund & Katze", "Tierkrankenversicherung", "realistisch"]
 pin_title: "Tierkrankenversicherung: Hund & Katze richtig einschätzen"
-pin_description: "*Werbung | Tierarztkosten können schnell hoch werden. So prüfst du Tierkrankenversicherung, OP-Schutz, Selbstbeteiligung und Monatsbeitrag sinnvoll – ohne am falschen Ende zu sparen."
+pin_description: "*Werbung | Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif… Mehr Spartipps auf FranksFinanzcheck! #tierarztkostenabsichern #haustierversicherung #opversicherungtier"
 pinwand: "Versicherung | Haustier & Finanzen"
 ---
 

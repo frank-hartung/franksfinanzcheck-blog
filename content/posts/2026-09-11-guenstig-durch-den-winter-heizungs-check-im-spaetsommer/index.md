@@ -16,9 +16,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Heizungs-Check im Spätsommer ist eine einfache Vorbereitung mit großem Hebel. Wer Heizkörper entlüftet, Thermostate prüft, Vorlauftemperatur im Blick behält und kleine Probleme vor dem ersten Kälteeinbruch löst, spart im Winter oft spürbar Energie und vermeidet Stress."
 social_posted: true
-keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen"]
+keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen", "Günstig durch den Winter", "Gaspreisgarantie"]
 pin_title: "Heizungs-Check im Spätsommer: Günstiger durch den Winter"
-pin_description: "*Werbung | Mit einem einfachen Heizungs-Check im Spätsommer startest du effizienter in die Heizsaison. So senkst du Kosten, vermeidest Ärger und sparst Energie."
+pin_description: "*Werbung | Mit einem einfachen Heizungs-Check im Spätsommer startest du effizienter in die Heizsaison. So vermeidest du unnötige Kosten und erkennst kleine Probleme früh. Mehr Spartipps auf FranksFinanzcheck! #heizungscheck #heizkostensenken #heizungvorbereiten"
 pinwand: "Energie | Heizen & Sparen"
 ---
 

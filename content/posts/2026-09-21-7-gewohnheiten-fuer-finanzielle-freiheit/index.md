@@ -7,7 +7,7 @@ draft: true
 tags: ["finanzielle Freiheit", "Gewohnheiten", "Frugalismus", "Budget"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle Freiheit", "Geld sparen", "Notgroschen"]
+keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle Freiheit", "Geld sparen", "Notgroschen", "finanzielle"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
@@ -19,7 +19,7 @@ cover:
   alt: "7 Gewohnheiten für finanzielle Freiheit: Vom Budget bis zum Vermögensaufbau"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "7 Gewohnheiten für finanzielle Freiheit"
-pin_description: "*Werbung | Finanzielle Freiheit beginnt selten mit Reichtum, aber oft mit den richtigen Gewohnheiten. Diese 7 Routinen bringen mehr Klarheit, Rücklagen und Spielraum."
+pin_description: "*Werbung | Diese 7 Gewohnheiten helfen dir, Fixkosten zu senken, Rücklagen aufzubauen und finanzielle Freiheit Schritt für Schritt realistischer zu machen. Mehr Spartipps auf FranksFinanzcheck! #gewohnheiten #finanziellefreiheit #geldsparen"
 ---
 
 Finanzielle Freiheit klingt für viele nach einer fernen Welt. Nach sehr hohem Einkommen, perfekt laufenden ETFs oder einem Leben ohne Rechnungen. In Wirklichkeit beginnt sie oft viel unspektakulärer. Nicht mit einem Gehaltssprung, sondern mit Gewohnheiten.

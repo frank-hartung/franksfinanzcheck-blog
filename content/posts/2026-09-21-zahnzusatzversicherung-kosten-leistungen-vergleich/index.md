@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
-description: "Zahnzusatzversicherung 2026 im klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig einordnest."
+description: "Zahnzusatzversicherung 2026 im klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig…"
 date: 2026-09-25T08:10:00Z
 draft: true
 tags: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnersatz Kosten", "Zahnversicherung"]
@@ -18,7 +18,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 savings: "bis zu 100 % Erstattung"
 pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
-pin_description: "*Werbung | Implantat, Krone, Inlay: So vergleichst du Zahnzusatz-Tarife richtig, vermeidest Zahnstaffel-Fallen und erkennst, wann sich der Schutz wirklich lohnt."
+pin_description: "*Werbung | Zahnzusatzversicherung 2026 im klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig… Mehr Spartipps auf FranksFinanzcheck! #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"
 ---
 
 Sobald Zahnersatz plötzlich Thema wird, steigen die Kosten oft schnell. Nicht ein bisschen teuer, sondern richtig teuer. Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen.

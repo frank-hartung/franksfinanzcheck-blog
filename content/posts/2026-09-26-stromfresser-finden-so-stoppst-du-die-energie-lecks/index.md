@@ -12,7 +12,7 @@ author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 keywords: ["Stromfresser finden", "Strom sparen Tipps", "Energiekosten senken", "Standby Kosten", "Energie-Lecks"]
 pin_title: "Stromfresser finden: So stoppst du die Energie-Lecks"
-pin_description: "*Werbung | Energie-Lecks im Haushalt kosten oft Jahr für Jahr Geld. So findest du Grundlast, Standby-Verbrauch und versteckte Dauerläufer Schritt für Schritt."
+pin_description: "*Werbung | Stromfresser finden: Versteckte Energie-Lecks treiben die Stromrechnung oft still nach oben. So findest du Grundlast, Standby-Verbrauch und ineffiziente… Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
 ai_generated: false
 cover:
   image: "images/covers/2026-09-24-stromfresser-finden-so-stoppst-du-die-energie-lecks.jpg"

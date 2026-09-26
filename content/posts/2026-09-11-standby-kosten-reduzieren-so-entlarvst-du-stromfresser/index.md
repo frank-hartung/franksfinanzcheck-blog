@@ -11,7 +11,7 @@ author: "Frank Hartung"
 keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Diese 5 Geräte treiben deine Stromrechnung in die Höhe"
-pin_description: "*Werbung | Trockner, Heizlüfter, alte Kühltruhe: Die größten Stromfresser stehen oft unauffällig in der Ecke – und kosten im Jahr spürbar Geld. Wir zeigen dir, wo sich Nachrechnen wirklich lohnt."
+pin_description: "*Werbung | Wie du Standby-Verbrauch sauber misst, welche Geräte besonders oft Geld ziehen und mit welchen einfachen Schritten du unnötige Stromkosten senkst. Mehr Spartipps auf FranksFinanzcheck! #standbykosten #stromfresserentlarven #geraeteabschaltensparen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"

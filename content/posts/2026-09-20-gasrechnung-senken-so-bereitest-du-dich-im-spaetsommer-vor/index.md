@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
-description: "Mit diesem Spätsommer-Check senkst du deine Gasrechnung vor der Heizperiode: Verbrauch prüfen, Tarif vergleichen, Dichtungen testen und Heizung sinnvoll vorbereiten."
+description: "Gasrechnung senken: Mit diesem Spätsommer-Check senkst du deine Gasrechnung vor der Heizperiode: Verbrauch prüfen, Tarif vergleichen, Dichtungen testen und…"
 date: 2026-09-25T12:15:37Z
 draft: false
 reserve_published: 2026-09-25
@@ -13,7 +13,7 @@ erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft
 
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Gaspreisgarantie"]
 pin_title: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
-pin_description: "*Werbung | Wer rechtzeitig handelt, kann seine Gasrechnung deutlich besser in den Griff bekommen. Dieser Spätsommer-Check zeigt dir, wie du Tarif, Heizung und Wärmeverluste vor der Heizperiode sauber prüfst."
+pin_description: "*Werbung | Gasrechnung senken: Mit diesem Spätsommer-Check senkst du deine Gasrechnung vor der Heizperiode: Verbrauch prüfen, Tarif vergleichen, Dichtungen testen und… Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

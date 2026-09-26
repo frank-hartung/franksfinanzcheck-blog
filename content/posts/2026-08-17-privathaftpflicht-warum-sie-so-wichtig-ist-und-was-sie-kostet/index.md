@@ -20,7 +20,7 @@ kurzantwort: "Die Privathaftpflicht schützt dich vor Schadenersatzforderungen, 
 social_posted: true
 keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Koste"]
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
-pin_description: "*Werbung | Ein unachtsamer Moment kann teuer werden. Hier siehst du, warum eine gute Privathaftpflicht so wichtig ist, welche Klauseln heute Pflicht sind und wie viel guter Schutz wirklich kostet."
+pin_description: "*Werbung | Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute Pflicht sind und was guter Schutz für Singles und Familien kostet. Mehr Spartipps auf FranksFinanzcheck! #privathaftpflicht #haftpflichtvergleich #deckungssummehaftpflicht"
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 

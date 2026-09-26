@@ -20,7 +20,7 @@ kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn 
 social_posted: true
 keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
-pin_description: "*Werbung | Beim DSL-Wechsel winken oft hohe Boni – aber nur der Effektivpreis zeigt, ob sich der Tarif wirklich lohnt. Wir zeigen dir, wie du Bonus, Rabatt und Laufzeit sauber zusammenrechnest."
+pin_description: "*Werbung | Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist. Mehr Spartipps auf FranksFinanzcheck! #dslwechselbonussichern #dslwechselbonus #internetvertragwechseln"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 

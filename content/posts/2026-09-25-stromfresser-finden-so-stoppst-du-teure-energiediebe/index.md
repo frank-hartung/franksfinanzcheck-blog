@@ -18,7 +18,7 @@ cover:
   caption: "Spar-Check von FranksFinanzcheck"
 savings: "oft 120 € bis 450 € pro Jahr"
 pin_title: "Stromfresser 2026: Diese Energiediebe kosten dich bares Geld"
-pin_description: "*Werbung | Finde die größten Stromfresser in deinem Haushalt und senke deine Stromrechnung mit einfachen, realistischen Maßnahmen."
+pin_description: "*Werbung | So erkennst du teure Stromfresser im Haushalt, misst den Verbrauch richtig und senkst mit einfachen Schritten deine Stromkosten dauerhaft. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #energiediebehaushalt #stromsparen2026"
 ---
 
 Viele sparen beim Einkauf und achten auf Abos. Beim Strom bleibt vieles aber einfach laufen. Genau dort versteckt sich oft eine stille Dauerbelastung.

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
-description: "So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und wichtige Klauseln verständlich erklärt."
+description: "Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und…"
 date: 2026-08-31T13:47:31Z
 draft: false
 tags: ["Wohngebäudeversicherung", "Elementarschadenversicherung", "Gebäudeversicherung Vergleich", "Hausratversicherung", "Immobilien absichern"]
@@ -18,7 +18,7 @@ kurzantwort: "Eine gute Wohngebäudeversicherung schützt nicht nur gegen Feuer,
 social_posted: true
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]
 pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
-pin_description: "*Werbung | Feuer, Leitungswasser, Starkregen: So vergleichst du Wohngebäudeversicherungen richtig und achtest auf Elementarschutz, grobe Fahrlässigkeit und faire Klauseln."
+pin_description: "*Werbung | Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und… Mehr Spartipps auf FranksFinanzcheck! #wohngebaeudetarifcheck #wohngebaeudeversicherung"
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 

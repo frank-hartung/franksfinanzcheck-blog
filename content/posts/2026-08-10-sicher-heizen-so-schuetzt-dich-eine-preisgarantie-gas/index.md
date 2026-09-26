@@ -20,7 +20,7 @@ kurzantwort: "Eine Gaspreisgarantie macht deine Heizkosten besser planbar, weil 
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
-pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bei den Heizkosten."
+pin_description: "*Werbung | Wie eine Gaspreisgarantie dein Heizbudget planbarer macht, worauf du bei Laufzeit und Bonus achten musst und wann sich ein Wechsel wirklich lohnt. Mehr Spartipps auf FranksFinanzcheck! #sicherheizen #gaspreisgarantie #gastarifwechseln"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 ---
 

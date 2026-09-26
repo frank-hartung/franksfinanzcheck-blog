@@ -16,7 +16,7 @@ erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft
 
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Vorbereitung", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Gasrechnung senken: Clevere Herbst Vorbereitung im Check"
-pin_description: "*Werbung | Wer seine Heizung vor der Saison prüft und den Tarif sauber durchrechnet, spart oft deutlich entspannter. Dieser Herbst-Check zeigt dir die wichtigsten Schritte vor dem Winter."
+pin_description: "*Werbung | Mit diesem Herbst-Check senkst du deine Gasrechnung planbarer: Heizung prüfen, Tarif rechnen, Wärmeverluste finden und teure Winterfehler vermeiden. Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

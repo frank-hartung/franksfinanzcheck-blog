@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "Heizkosten senken: Mit diesen Strategien sparst du sofort"
-description: "Heizkosten senken ohne Frieren: Mit einfachen Maßnahmen bei Temperatur, Lüften, Heizkörpern und Tarif senkst du deinen Verbrauch oft schon in der laufenden Saison."
+description: "Heizkosten senken ohne Frieren: Mit einfachen Maßnahmen bei Temperatur, Lüften, Heizkörpern und Tarif senkst du deinen Verbrauch oft schon in der laufenden…"
 date: 2026-09-23T08:59:05Z
 draft: false
 tags: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung"]
@@ -11,7 +11,7 @@ author: "Frank Hartung"
 keywords: ["heizkosten senken", "heizung sparen tipps", "gas abschlag anpassen", "winter vorbereitung wohnung", "Heizkosten", "Strategien", "Gaspreisgarantie", "Gastarif wechseln"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Heizkosten senken: Diese 6 To-dos erledigst du am besten jetzt"
-pin_description: "*Werbung | Heizkosten senken ohne Frieren: Mit 6 einfachen To-dos drückst du Verbrauch und Tarifkosten spürbar. So sparst du sofort in der laufenden Heizsaison."
+pin_description: "*Werbung | Heizkosten senken ohne Frieren: Mit einfachen Maßnahmen bei Temperatur, Lüften, Heizkörpern und Tarif senkst du deinen Verbrauch oft schon in der laufenden… Mehr Spartipps auf FranksFinanzcheck! #heizkostensenken #heizungsparentipps #gasabschlaganpassen"
 ai_generated: false
 inspiration: "Heizkosten senken: Diese 6 To-dos erledigst du am besten JETZT"
 cover:

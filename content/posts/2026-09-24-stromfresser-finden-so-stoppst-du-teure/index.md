@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-25
-title: "Stromfresser finden: So stoppst du teure Energiediebe im Haushalt"
+title: "Stromfresser finden: So stoppst du teure Energiediebe"
 description: "Welche Geräte am meisten Strom ziehen, wie du versteckte Stromfresser erkennst und mit welchen Sofortmaßnahmen du deine Stromkosten schnell senken kannst."
 date: 2026-09-24T07:00:00Z
 draft: true
@@ -18,7 +18,7 @@ cover:
   caption: "Spar-Tipp von FranksFinanzcheck"
 savings: "oft 100 € bis 400 € pro Jahr"
 pin_title: "Stromfresser finden: Diese Geräte treiben deine Rechnung hoch"
-pin_description: "*Werbung | Strom sparen ohne Frust: So entlarvst du teure Energiediebe im Haushalt und senkst deine Kosten mit einfachen Maßnahmen."
+pin_description: "*Werbung | Welche Geräte am meisten Strom ziehen, wie du versteckte Stromfresser erkennst und mit welchen Sofortmaßnahmen du deine Stromkosten schnell senken kannst. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparenhaushalt #stromverbrauchsenken"
 ---
 
 Die Stromrechnung kommt oft nur einmal im Jahr mit Wucht zurück. Dann zeigt sich, was im Alltag lange kaum auffällt: Viele kleine und große Geräte ziehen Monat für Monat Geld aus dem Haushalt.

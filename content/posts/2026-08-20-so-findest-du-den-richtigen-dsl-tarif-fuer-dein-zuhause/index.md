@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-25
 title: "So findest du den richtigen: DSL-Tarif für dein Zuhause"
-description: "Welcher DSL-Tarif passt wirklich? Dieser Ratgeber zeigt dir, wie viel Bandbreite du brauchst, wie du den 24-Monats-Preis rechnest und welche Technik zu deinem Haushalt passt."
+description: "DSL Tarif finden: Welcher DSL-Tarif passt wirklich? Dieser Ratgeber zeigt dir, wie viel Bandbreite du brauchst, wie du den 24-Monats-Preis rechnest und welche…"
 date: 2026-09-18T19:09:52Z
 draft: false
 tags: ["DSL Tarif finden", "Internet Bandbreite", "DSL-Vergleich", "Glasfaser vs DSL", "Kabel Internet"]

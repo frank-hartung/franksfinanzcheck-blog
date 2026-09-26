@@ -12,7 +12,7 @@ author: "Frank Hartung"
 erfahrung: "Ich habe die Zahlen und Beispiele in diesem Artikel selbst geprüft und nutze die Grundlogik der 50-30-20-Regel seit Jahren in meiner eigenen Finanzplanung. Entscheidend ist dabei nicht Perfektion, sondern ein System, das im echten Alltag durchhält."
 keywords: ["50-30-20-Regel", "Finanz-Kompass", "50 30 20 Regel", "Budget planen", "Fixkosten senken"]
 pin_title: "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026"
-pin_description: "*Werbung | Mit der 50-30-20-Regel ordnest du Fixkosten, Wünsche und Sparen klarer. So wird dein Budget 2026 endlich alltagstauglich."
+pin_description: "*Werbung | So nutzt du die 50-30-20-Regel 2026 alltagstauglich: Fixkosten sortieren, Wünsche bewusst steuern und mit klaren Geldtöpfen einfacher sparen. Mehr Spartipps auf FranksFinanzcheck! #503020regel #finanzkompass #budgetplanen"
 ai_generated: false
 cover:
   image: "images/covers/2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026.jpg"

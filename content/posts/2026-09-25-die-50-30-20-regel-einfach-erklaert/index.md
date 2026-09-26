@@ -7,7 +7,7 @@ draft: true
 tags: ["50-30-20-Regel", "Budget planen", "Finanzen ordnen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Die 50-30-20-Regel einfach erklärt", "50-30-20-Regel", "Budgetregel", "Geld einteilen", "Sparquote"]
+keywords: ["Die 50-30-20-Regel einfach erklärt", "50-30-20-Regel", "Budgetregel", "Geld einteilen", "Die 50 30 20 Regel einfach erklärt"]
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
@@ -19,7 +19,7 @@ cover:
   alt: "Die 50-30-20-Regel einfach erklärt"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Die 50-30-20-Regel einfach erklärt"
-pin_description: "*Werbung | So funktioniert die 50-30-20-Regel wirklich: Einkommen sinnvoll aufteilen, Fixkosten einordnen und Sparen endlich alltagstauglich machen."
+pin_description: "*Werbung | Die 50-30-20-Regel erklärt in klaren Schritten: So teilst du dein Einkommen in Fixkosten, Wünsche und Sparen auf und setzt die Methode alltagstauglich um. Mehr Spartipps auf FranksFinanzcheck! #503020regel #budgetregel #geldeinteilen"
 ---
 
 Die meisten Menschen scheitern beim Sparen nicht daran, dass sie nie davon gehört hätten. Sie scheitern daran, dass ihr Geld keinen klaren Plan hat. Das Gehalt kommt rein, Miete und Lastschriften gehen raus, zwischendurch wird eingekauft, bestellt und spontan bezahlt – und am Ende bleibt oft weniger übrig als gedacht.

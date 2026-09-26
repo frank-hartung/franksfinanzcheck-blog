@@ -18,7 +18,7 @@ kurzantwort: "Ein sauberes Vorsorge-Update für Haus oder Wohnung besteht aus dr
 social_posted: true
 keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten"]
 pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
-pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deinem Zuhause gefährliche Lücken vermeidest."
+pin_description: "*Werbung | Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die… Mehr Spartipps auf FranksFinanzcheck! #deinhaussicherschuetzen #hausversicherung #hausratversicherung"
 pinwand: "Versicherungen clever wechseln & sparen"
 ---
 
