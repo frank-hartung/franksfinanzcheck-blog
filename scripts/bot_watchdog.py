@@ -21,7 +21,7 @@ Checks:
       ODER fehlerfreiem Lauf (Reparatur #281 – siehe unten)
   6)  Pinterest-Watchdog aktiv? (30h)
   7)  Pinterest-Kanal (Token + Domain-Sperre + Frische) – MIT BESITZER
-  8)  Content-Reserve Gesundheit (Pool-Größe, Drafts)
+  8)  Content-Reserve Gesundheit (frisches Zertifikat + Hash der READY-Drafts)
   9)  Affiliate-Health Report Frische
   10) Pinterest-Kanal geparkt? (aktive Domain-Sperre)
 
@@ -65,6 +65,7 @@ Nutzung:
 
 import datetime
 import glob
+import hashlib
 import json
 import os
 import re
@@ -87,6 +88,7 @@ try:
     import alert_router as ar
 except ImportError:
     ar = None
+import reserve_gate
 
 REPORT_PATH = BLOG_DIR / "BOT-WATCHDOG-REPORT.md"
 FINDINGS_PATH = Path("/tmp/bot_watchdog_findings.json")
@@ -192,14 +194,18 @@ def newest_slug():
 
 def check_syntax():
     """Check all scripts/*.py syntaktisch."""
-    err_file = Path("/tmp/syntax_err.txt")
-    rc, out, err = run_cmd("python3 -m py_compile scripts/*.py 2>/tmp/syntax_err.txt", timeout=15)
-    if rc != 0:
-        try:
-            txt = err_file.read_text(encoding="utf-8")[:500]
-        except OSError:
-            txt = err
-        return False, txt.strip()
+    scripts = sorted((BLOG_DIR / "scripts").glob("*.py"))
+    if not scripts:
+        return False, "scripts-Verzeichnis enthält keine Python-Dateien"
+    try:
+        result = subprocess.run(
+            [sys.executable, "-m", "py_compile", *(str(path) for path in scripts)],
+            capture_output=True, text=True, timeout=15,
+        )
+    except subprocess.TimeoutExpired:
+        return False, "py_compile timeout after 15 seconds"
+    if result.returncode != 0:
+        return False, (result.stderr or result.stdout).strip()[:500]
     return True, ""
 
 def check_live_site(slug, timeout=20):
@@ -442,21 +448,66 @@ def check_affiliate_integrity():
 
 
 def check_content_reserve():
-    """Prüft ob Reserve-Pool genug Artikel hat."""
-    # Zähle draft:true + reserve:true
-    reserve_count = 0
-    for p in glob.glob(str(BLOG_DIR / "content/posts/*/index.md")):
+    """Prüft den belegten, frischen Reife-Nachweis der Reserve."""
+    minimum = 4
+    draft_paths = {}
+    for raw_path in glob.glob(str(BLOG_DIR / "content/posts/*/index.md")):
+        path = Path(raw_path)
         try:
-            c = Path(p).read_text(encoding="utf-8")
-            if re.search(r"(?m)^draft:\s*true", c) and re.search(r"(?m)^reserve:\s*true", c):
-                reserve_count += 1
+            content = path.read_text(encoding="utf-8")
         except OSError:
             continue
-    # Mindestreserve: 4 Artikel für 2 Publikationstage à 2 Artikel
-    min_reserve = 4
-    if reserve_count < min_reserve:
-        return False, f"Nur {reserve_count} Reserve-Artikel (<{min_reserve}) – Nachschub nötig"
-    return True, f"{reserve_count} Reserve-Artikel"
+        if (re.search(r"(?m)^draft:\s*true\s*$", content)
+                and re.search(r"(?m)^reserve:\s*true\s*$", content)):
+            draft_paths[path.parent.name] = path
+
+    cert_path = BLOG_DIR / "data" / "reserve-readiness.json"
+    try:
+        cert = json.loads(cert_path.read_text(encoding="utf-8"))
+        if not isinstance(cert, dict) or not isinstance(cert.get("candidates"), list):
+            raise ValueError("Kandidatenliste fehlt oder ist ungültig")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return False, (f"Reife-Zertifikat nicht verfügbar ({exc}); "
+                       f"{len(draft_paths)} Reserve-Entwürfe, Nachweis fehlt")
+
+    fresh, freshness_text = reserve_gate.freshness(cert_path)
+    if not fresh:
+        return False, (f"Reife-Zertifikat ungültig: {freshness_text}; "
+                       f"{len(draft_paths)} Reserve-Entwürfe")
+
+    certified = 0
+    blocked = []
+    for candidate in cert["candidates"]:
+        if not isinstance(candidate, dict):
+            continue
+        if candidate.get("ready") is not True:
+            if candidate.get("reason"):
+                blocked.append(str(candidate["reason"]))
+            continue
+        slug = candidate.get("slug")
+        path = draft_paths.get(slug) if isinstance(slug, str) else None
+        expected_hash = candidate.get("sha256")
+        if path is None or not isinstance(expected_hash, str):
+            blocked.append(f"{slug or 'Kandidat'}: Entwurf oder Hash fehlt")
+            continue
+        try:
+            content = path.read_bytes()
+        except OSError as exc:
+            blocked.append(f"{slug}: Entwurf nicht lesbar ({exc})")
+            continue
+        if hashlib.sha256(content).hexdigest() != expected_hash:
+            blocked.append(f"{slug}: Zertifikat passt nicht mehr zum Entwurf")
+            continue
+        certified += 1
+
+    diagnosis = f"{certified}/{minimum} gate-fertige Artikel, {len(draft_paths)} Reserve-Entwürfe"
+    if freshness_text.startswith("⚠"):
+        diagnosis += f"; {freshness_text}"
+    if certified < minimum:
+        if blocked:
+            diagnosis += "; Blocker: " + " | ".join(blocked[:2])
+        return False, f"Reserve unter Mindestbestand ({diagnosis})"
+    return True, f"Reserve ausreichend ({diagnosis})"
 
 def check_pinterest_duplicate():
     """Prüft PINTEREST-REPORT auf Duplikat-Befunde."""
@@ -823,7 +874,9 @@ def run_all():
         env["CHECK8"] = f"WARN ({msg_res})"
         findings.append(_f(
             "content-reserve", "Content-Reserve niedrig", "P2", "auto", detail=str(msg_res),
-            next_step="`content-reserve.yml` füllt täglich 3 Kandidaten nach – Lauf prüfen."))
+            next_step=("`data/reserve-readiness.json` auf konkrete Gate-Blocker prüfen; "
+                       "anschließend den letzten Lauf von `content-reserve.yml` "
+                       "kontrollieren und mindestens 4 zertifizierte Kandidaten herstellen.")))
     else:
         env["CHECK8"] = f"OK ({msg_res})"
 
