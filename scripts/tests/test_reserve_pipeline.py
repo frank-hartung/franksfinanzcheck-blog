@@ -38,6 +38,7 @@ aus demselben Lauf, ebenfalls hier festgenagelt:
 """
 import contextlib
 import datetime as dt
+import os
 import io
 import json
 import subprocess
@@ -58,6 +59,28 @@ import reserve_gate as rg            # noqa: E402
 import reserve_healer_coverage as rhc  # noqa: E402
 import reserve_quarantine as rq      # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
+
+
+# Die Reserve-Linie führt zwei GEDÄCHTNISSE (Themen-Cooldowns, Pool-Besitz).
+# Kein Test darf sie ins echte Repository schreiben: Ein Thema, das hier
+# „scheitert", wäre sonst für die nächste echte Nacht drei Tage gesperrt.
+_LEDGER_TMP = None
+
+
+def setUpModule():  # noqa: N802 – unittest-API
+    global _LEDGER_TMP
+    _LEDGER_TMP = tempfile.TemporaryDirectory()
+    os.environ["RESERVE_TOPIC_LEDGER"] = str(
+        Path(_LEDGER_TMP.name) / "topics.json")
+    os.environ["RESERVE_CUSTODY_LEDGER"] = str(
+        Path(_LEDGER_TMP.name) / "custody.json")
+
+
+def tearDownModule():  # noqa: N802 – unittest-API
+    for key in ("RESERVE_TOPIC_LEDGER", "RESERVE_CUSTODY_LEDGER"):
+        os.environ.pop(key, None)
+    if _LEDGER_TMP is not None:
+        _LEDGER_TMP.cleanup()
 
 SCRIPTS = Path(__file__).resolve().parents[1]
 ROOT = SCRIPTS.parent
@@ -844,3 +867,248 @@ class GateDiagnoseTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ===========================================================================
+#  Nachzug 26.09.2026 (#387) – „Content-Reserve rot, obwohl Content da war"
+#  ---------------------------------------------------------------------
+#  Der Lauf vom 26.09. war rot mit 2/6, und der Grund stand in keinem Log:
+#  Der Pool hatte in 18 Stunden fünf Kandidaten verloren, von denen ZWEI
+#  physisch noch im Repo lagen – ihnen fehlte nur die `reserve`-Fahne, weil
+#  ein fremder Commit ihr Frontmatter neu geschrieben hatte. Gleichzeitig
+#  produzierte der Nachschub sechsmal dasselbe Thema (er nahm immer das
+#  erste freie), und eine zu scharfe Titelregel sperrte einen vollständigen
+#  Titel aus. Jede dieser Ursachen bekommt hier ihren Vertrag.
+# ===========================================================================
+class BestandsWaechterTests(unittest.TestCase):
+    """Leck 1: Ein Kandidat darf nicht durch eine fremde Umschreibung
+    aus dem Pool fallen (Flag-Verlust = lautloser Vorrats-Verlust)."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_custody as rc
+        self.rc = rc
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / "posts"
+        self.ledger = Path(self.tmp.name) / "custody.json"
+
+    def _post(self, slug, fm):
+        d = self.posts / slug
+        d.mkdir(parents=True)
+        (d / "index.md").write_text(f"---\n{fm}\n---\n\nBody.\n",
+                                    encoding="utf-8")
+        return d / "index.md"
+
+    def test_verlorene_fahne_wird_zurueckgeholt(self):
+        datei = self._post("2026-09-24-x",
+                           'title: "X"\ndate: 2026-09-24\ndraft: true')
+        self.rc.ledger_speichern({"x": {"zustand": "pool",
+                                        "seit": "2026-09-24"}}, self.ledger)
+        lage = self.rc.heilen(self.posts, pfad=self.ledger)
+        self.assertEqual([e["slug"] for e in lage["geheilt"]], ["2026-09-24-x"])
+        self.assertIn("reserve: true", datei.read_text(encoding="utf-8"))
+
+    def test_fremder_entwurf_bleibt_fremd(self):
+        """Nur wer NACHWEISLICH im Pool war, wird geheilt – sonst würde die
+        Wache Franks Hand-Entwürfe einsammeln."""
+        datei = self._post("2026-09-24-hand",
+                           'title: "Hand"\ndate: 2026-09-24\ndraft: true')
+        lage = self.rc.heilen(self.posts, pfad=self.ledger)
+        self.assertEqual(lage["geheilt"], [])
+        self.assertNotIn("reserve: true", datei.read_text(encoding="utf-8"))
+
+    def test_redating_verliert_das_gedaechtnis_nicht(self):
+        """Die Veredelung datiert Kandidaten auf heute um (Ordner-Umbenennung).
+        Ein Gedächtnis mit Datumspräfix als Schlüssel wäre nach einer Nacht
+        wertlos und würde Phantome melden."""
+        self._post("2026-09-25-y",
+                   'title: "Y"\ndate: 2026-09-25\ndraft: true\nreserve: true')
+        self.rc.heilen(self.posts, pfad=self.ledger)
+        (self.posts / "2026-09-25-y").rename(self.posts / "2026-09-26-y")
+        lage = self.rc.bestandsaufnahme(self.posts, pfad=self.ledger)
+        self.assertEqual(lage["verwaist"], [],
+                         "Re-Dating darf keine Phantome erzeugen")
+        self.assertIn("2026-09-26-y", [e["slug"] for e in lage["pool"]])
+
+    def test_waechter_haengt_in_der_produktionslinie(self):
+        """Eine Wache, die niemand ruft, ist Dekoration."""
+        root = Path(__file__).resolve().parents[2]
+        for datei in ("scripts/reserve_readiness.py",
+                      "scripts/reserve_finisher.py",
+                      "scripts/engine_generate.py"):
+            text = (root / datei).read_text(encoding="utf-8")
+            self.assertIn("reserve_custody", text,
+                          f"{datei} ruft den Bestands-Wächter nicht")
+
+    def test_gedaechtnis_ueberlebt_den_runner(self):
+        """Ein Gedächtnis, das nicht committet wird, ist keines (#349-Klasse)."""
+        root = Path(__file__).resolve().parents[2]
+        guard = (root / "scripts" / "reserve_stage_guard.py").read_text(
+            encoding="utf-8")
+        for pfad in ("data/reserve-custody.json",
+                     "data/reserve-topic-ledger.json"):
+            self.assertIn(pfad, guard,
+                          f"{pfad} wird nie gestagt – das Gedächtnis "
+                          "verfällt mit dem Runner")
+
+
+class ThemenDispositionTests(unittest.TestCase):
+    """Leck 2: Der Nachschub nahm immer das ERSTE freie Thema – sechs
+    Varianten desselben Themas, die der Dubletten-Schutz später wieder
+    kassierte (verbrannte Arbeit, Pool bleibt leer)."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_topics as rt
+        self.rt = rt
+
+    def test_belegtes_thema_wird_nicht_erneut_vorgeschlagen(self):
+        topics = [{"title": "Stromfresser finden: Die größten Energiediebe"},
+                  {"title": "Reisekrankenversicherung: Das musst du wissen"}]
+        bestand = {"2026-09-25-a":
+                   "Stromfresser finden: So stoppst du teure Energiediebe"}
+        with tempfile.TemporaryDirectory() as tmp:
+            vorschlaege = self.rt.disponieren(
+                topics, bestand=bestand, limit=5,
+                pfad=Path(tmp) / "ledger.json")
+        self.assertEqual([t["title"] for t in vorschlaege],
+                         ["Reisekrankenversicherung: Das musst du wissen"])
+
+    def test_engine_nutzt_die_disposition_statt_des_ersten_freien(self):
+        root = Path(__file__).resolve().parents[2]
+        text = (root / "scripts" / "engine_generate.py").read_text(
+            encoding="utf-8")
+        self.assertIn("reserve_topics", text)
+        self.assertIn("disponieren(", text)
+        topup = text[text.index("def _reserve_topup"):]
+        topup = topup[:topup.index("\ndef ")]
+        # Nur CODE zählt – der Kommentarkopf erklärt die Reparatur und darf
+        # das alte Muster zitieren.
+        code = "\n".join(z for z in topup.splitlines()
+                         if not z.lstrip().startswith("#"))
+        self.assertNotIn("freie[0]", code,
+                         "das erste freie Thema zu nehmen war die Ursache "
+                         "der Themen-Monokultur (#387)")
+
+    def test_batch_gibt_nicht_beim_ersten_fehlschlag_auf(self):
+        """Eine zickige KI-Antwort darf nicht die ganze Nachtproduktion
+        kosten: Der Batch läuft weiter, solange es freie Themen gibt."""
+        root = Path(__file__).resolve().parents[2]
+        text = (root / "scripts" / "engine_generate.py").read_text(
+            encoding="utf-8")
+        self.assertIn("RESERVE_LEERLAUF_MAX", text)
+        self.assertIn('stop.get("stop")', text)
+
+
+class VielfaltBeimVeroeffentlichenTests(unittest.TestCase):
+    """Leck 3: Am 20.09. gingen vier Gasrechnungs-Varianten am selben Tag
+    live; drei wurden danach zu Entwürfen zurückgestuft („Rückläufer")."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_pool as rp
+        self.rp = rp
+
+    def test_dublette_wird_zurueckgestellt(self):
+        frisch = {"2026-09-20-gas":
+                  "Gasrechnung senken: Dein Strategieplan im Spätsommer"}
+        self.assertTrue(self.rp.sperr_treffer(
+            "Gasrechnung senken: Clevere Herbst-Vorbereitung im Check", frisch))
+
+    def test_fremdes_thema_darf_raus(self):
+        frisch = {"2026-09-20-gas":
+                  "Gasrechnung senken: Dein Strategieplan im Spätsommer"}
+        self.assertIsNone(self.rp.sperr_treffer(
+            "Reisekrankenversicherung: Worauf du 2026 achten musst", frisch))
+
+    def test_sperre_ist_fail_open(self):
+        """Der Notnagel darf nie an seiner eigenen Zusatzprüfung scheitern."""
+        class Kaputt:
+            @staticmethod
+            def thema_kollision(*a, **k):
+                raise RuntimeError("Modul defekt")
+        self.assertIsNone(self.rp.sperr_treffer("Irgendein Titel",
+                                                {"s": "Anderer Titel"},
+                                                Kaputt))
+
+
+class TitelIntegritaetTests(unittest.TestCase):
+    """Leck 4: Die R5-Regel hielt vollständige Titel für abgeschnitten
+    (Whitelist als Pflaster) – und es gab keinen Heiler für ihren Fund."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import check_titles as ct
+        self.ct = ct
+
+    def test_vollstaendiger_titel_ist_kein_abbruch(self):
+        for titel in ("Stromfresser finden: So senkst du deine Stromrechnung "
+                      "massiv",
+                      "Nebenkosten-Abrechnung: Was 2026 wirklich zählt",
+                      "Haushaltsbudget: Wie viel Puffer ist realistisch"):
+            self.assertIsNone(self.ct.r5_truncation(titel), titel)
+
+    def test_echter_abbruch_bleibt_ein_fund(self):
+        for titel in ("Unfallversicherung im Vergleich: Sinnvoll? Kosten &",
+                      "Stromkosten senken: Der beste Tarif für die",
+                      "Tagesgeld-Vergleich 2026: Die besten Angebote und"):
+            self.assertIsNotNone(self.ct.r5_truncation(titel), titel)
+
+    def test_heiler_ist_verlustfrei_und_idempotent(self):
+        roh = "Haushaltskasse: Diese Posten und was sie"
+        geheilt = self.ct.heal_r5(roh)
+        self.assertNotEqual(geheilt, roh, "der Fund wurde nicht geheilt")
+        self.assertIsNone(self.ct.r5_truncation(geheilt),
+                          "der geheilte Titel ist immer noch ein Fund")
+        self.assertTrue(roh.startswith(geheilt),
+                        "Heilung darf nur kürzen, nie dichten")
+        self.assertEqual(self.ct.heal_r5(geheilt), geheilt,
+                         "ein geheilter Titel darf nicht erneut wandern")
+
+    def test_kein_raten_bei_zu_wenig_rest(self):
+        """Lieber ein ehrlicher Fund als ein erfundener Titel: Bleibt nach
+        dem Kürzen kein tragfähiger Titel übrig, bleibt der Text, wie er
+        ist – der Fund geht an einen Menschen."""
+        self.assertEqual(self.ct.heal_r5("Der Tarif für"), "Der Tarif für")
+
+
+class GateDiagnoseUrsachenTests(unittest.TestCase):
+    """Leck 5: Der End-Gate meldete „N/6" – aber nie, WARUM."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_gate as rg
+        self.rg = rg
+
+    def test_blocker_wird_benannt(self):
+        zeilen = self.rg.diagnose(2, 6, [
+            {"slug": "a", "ready": True},
+            {"slug": "b", "ready": False, "reason": "Cover-Text-Komplettheit"}])
+        self.assertTrue(any("BLOCKER" in z and "Cover-Text" in z
+                            for z in zeilen), zeilen)
+
+    def test_diagnose_faellt_nie_um(self):
+        """Eine Diagnose, die selbst abstürzt, macht aus einem Engpass
+        einen zweiten Vorfall."""
+        self.assertIsInstance(self.rg.diagnose(0, 6, []), list)
+
+
+class WorkflowVertragTests(unittest.TestCase):
+    """Die Reparatur muss im Workflow verdrahtet sein, nicht nur im Repo."""
+
+    def test_bestands_waechter_laeuft_vor_der_produktion(self):
+        root = Path(__file__).resolve().parents[2]
+        wf = (root / ".github" / "workflows" / "content-reserve.yml").read_text(
+            encoding="utf-8")
+        self.assertIn("reserve_custody.py --heal", wf)
+        self.assertLess(
+            wf.index("reserve_custody.py --heal"),
+            wf.index("run: python3 scripts/engine_generate.py --reserve-only"),
+            "erst den Bestand sichern, dann neu produzieren")
+
+    def test_gedaechtnisse_ueberleben_den_rebase(self):
+        root = Path(__file__).resolve().parents[2]
+        sync = (root / "scripts" / "git_sync.sh").read_text(encoding="utf-8")
+        self.assertIn("data/reserve-topic-ledger.json", sync)
+        self.assertIn("data/reserve-custody.json", sync)

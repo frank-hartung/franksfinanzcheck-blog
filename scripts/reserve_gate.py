@@ -105,6 +105,87 @@ def freshness(cert_path: Path) -> tuple[bool, str]:
     return True, f"Zertifikat {alter:.1f} h alt (Grenze {grenze:.0f} h)."
 
 
+def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
+    """Warum ist der Vorrat unter dem Ziel? Ursachenklassen statt Rätselraten.
+
+    Neu am 26.09.2026 (#387): Der Gate meldete bisher nur „N/6 gate-fertig"
+    plus die Gründe der EINZELNEN Kandidaten. Die eigentliche Frage – warum
+    kein Nachschub kam – beantwortete er nicht, und die Lauf-Logs verfallen.
+    Am 26.09. standen drei verschiedene Ursachen gleichzeitig im Raum
+    (Fahnen-Verlust, Themen-Stillstand, R5-Falsch-Positiv); das Ticket nannte
+    keine einzige davon. Diese Funktion liest die beteiligten Gedächtnisse
+    und schreibt die Ursache in den Lauf.
+    """
+    zeilen: list[str] = []
+
+    # 1. LECK: Kandidaten, die ihre Fahne verloren haben (fremde Umschreibung)
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import reserve_custody as cust
+        lage = cust.bestandsaufnahme()
+        if lage["verloren"]:
+            zeilen.append(
+                f"LECK: {len(lage['verloren'])} Entwurf/Entwürfe waren im Pool, "
+                f"haben aber die `reserve`-Fahne verloren "
+                f"({', '.join(e['slug'] for e in lage['verloren'][:3])}). "
+                f"Heilung: `python3 scripts/reserve_custody.py --heal`.")
+        if lage["ruecklaeufer"]:
+            zeilen.append(
+                f"RÜCKLÄUFER: {len(lage['ruecklaeufer'])} veröffentlichte "
+                f"Artikel stehen wieder auf `draft` – fertiger Content ohne "
+                f"Zuhause. Redaktion entscheidet (draft_triage).")
+    except Exception as exc:  # noqa: BLE001 – Diagnose darf nie blockieren
+        zeilen.append(f"(Bestands-Wächter nicht lesbar: {exc})")
+
+    # 2. BLOCKER: Kandidaten im Pool, die ein Gate ablehnt
+    blocker = [c for c in candidates if not c.get("ready")]
+    if blocker:
+        zeilen.append(
+            f"BLOCKER: {len(blocker)} Kandidat(en) im Pool scheitern an einem "
+            f"Gate – erster Fund: "
+            f"„{(blocker[0].get('reason') or 'ohne Angabe')[:120]}“.")
+
+    # 3. NACHSCHUB: Gibt es überhaupt freie Themen?
+    try:
+        import generate_drafts as g
+        import reserve_topics as rt
+        frei = rt.disponieren(g.load_topics(), limit=3)
+        if not frei:
+            zeilen.append(
+                "THEMENMANGEL: Die Disposition findet kein freies Thema "
+                "(alles thematisch belegt oder im Cooldown). Nachschub in "
+                "data/topics.yaml eintragen – `python3 "
+                "scripts/reserve_topics.py --status` zeigt die Lage.")
+        elif len(candidates) < target:
+            zeilen.append(
+                f"PRODUKTION: {target - len(candidates)} Kandidat(en) fehlen "
+                f"im Pool, obwohl freie Themen bereitstehen (nächstes: "
+                f"„{frei[0].get('title')}“). Ursache liegt bei der "
+                f"KI-Generierung (API-Schlüssel, Profi-Gate) – siehe die "
+                f"Meldungen der Stufen 1/4 weiter oben im Log.")
+    except Exception as exc:  # noqa: BLE001
+        zeilen.append(f"(Themen-Disposition nicht lesbar: {exc})")
+
+    return zeilen
+
+
+def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
+    """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag."""
+    pfad = ROOT / "data" / "reserve-history.jsonl"
+    zeile = {
+        "ts": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "ready": ready, "target": target, "pool": len(candidates),
+        "lauf": os.environ.get("GITHUB_RUN_ID", "lokal"),
+        "blocker": [c.get("slug") for c in candidates if not c.get("ready")],
+    }
+    try:
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        with pfad.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(zeile, ensure_ascii=False) + "\n")
+    except OSError:
+        pass
+
+
 def report(ready: int, target: int, candidates: list[dict]) -> None:
     if ready >= target:
         print(f"\u2705 Reserve-Pool gate-fertig: {ready}/{target} Kandidaten zertifiziert.")
@@ -118,6 +199,21 @@ def report(ready: int, target: int, candidates: list[dict]) -> None:
     if ready > 0 and not candidates:
         print("   (Zertifikat ohne Kandidatenliste)")
     print("   Diagnose: RESERVE-FINISH-REPORT.md (Score-Teile je Kandidat/Heiler).")
+    ursachen = diagnose(ready, target, candidates)
+    if ursachen:
+        print("\n   URSACHEN DIESES ENGPASSES:")
+        for zeile in ursachen:
+            print(f"   • {zeile}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write(f"\n## 🛑 Content-Reserve: {ready}/{target} "
+                         f"gate-fertig\n\n")
+                for zeile in ursachen:
+                    fh.write(f"- {zeile}\n")
+        except OSError:
+            pass
 
 
 def run_selftest() -> int:
@@ -205,6 +301,7 @@ def main() -> int:
     cert = Path(args.cert)
     ready, target, candidates = evaluate(cert)
     report(ready, target, candidates)
+    chronik_schreiben(ready, target, candidates)
     frisch, meldung = freshness(cert)
     print(f"   {meldung}")
     if ready >= target and frisch:

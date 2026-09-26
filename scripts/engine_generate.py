@@ -687,8 +687,16 @@ def _frontmatter(text: str) -> str:
     return parts[1] if len(parts) == 3 and parts[0] == "" else ""
 
 
+# Wie viele VERSCHIEDENE Themen ein einzelner Top-up-Aufruf probieren darf,
+# bevor er aufgibt. Deckelt die API-Kosten (je Thema bis zu 3 Versuche) und
+# verhindert zugleich, dass ein einziges zickiges Thema die Nacht kostet.
+RESERVE_THEMEN_VERSUCHE = 3
+# Wie viele Top-up-Aufrufe ohne Ergebnis der Batch aushält, bevor er aufgibt.
+RESERVE_LEERLAUF_MAX = 2
+
+
 def _reserve_topup(topics, quelle, used_titles, used_topics,
-                   reserve_target=None, force=None):
+                   reserve_target=None, force=None, stop=None):
     """RESERVE-POOL-Top-up (Premium-Fix 03.09.2026, „zwingend 2–3 LIVE“):
     Nach einem GESUNDEN Produktionstag wird der Redaktions-Reserve-Pool
     (fertige Premium-Entwürfe, `reserve: true`) wieder aufgefüllt, falls er
@@ -743,11 +751,17 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         except (OSError, ValueError, KeyError):
             pass
         if ready >= reserve_target:
+            if stop is not None:
+                stop["stop"] = True
+                stop["grund"] = "ziel-erreicht"
             return 0
         # Kapazitäts-Deckel (Notbremse gegen unendliches Stapeln).
         if len(pool) >= 12:
             print("  ⚠ Reserve-Pool-Kapazität erreicht (12) – keine neuen "
                   "Roh-Kandidaten, bis die Veredelung/Zertifizierung greift.")
+            if stop is not None:
+                stop["stop"] = True
+                stop["grund"] = "kapazitaet"
             return 0
         # In-Flight-Schutz: Heutige, noch nicht zertifizierte Kandidaten
         # gehören zum heutigen Veredelungs-Schub – nicht stapeln.
@@ -757,6 +771,9 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         inflight = [p for p in pool if p.parent.name.startswith(today)
                     and p.parent.name not in certified]
         if inflight and not force:
+            if stop is not None:
+                stop["stop"] = True
+                stop["grund"] = "in-flight"
             print(f"  ⏳ {len(inflight)} Kandidat(en) von heute warten auf die "
                   f"Veredelungs-Stufe (reserve_finisher) – kein weiterer "
                   f"Top-up, um Themen-Duplikate zu vermeiden.")
@@ -776,24 +793,77 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
                   f"im heutigen Schub durch die Gates gegangen, der Pool liegt "
                   f"aber bei READY {ready}/{reserve_target} – ein Ersatz-Thema "
                   f"wird zusätzlich produziert (Themen-Dedup aktiv).")
-        freie = [t for t in topics
-                 if not g.topic_already_covered(t["title"], used_titles)
-                 and id(t) not in used_topics
-                 and not _pool_conflicts(pool, t.get("title", ""))]
-        if not freie:
-            print("  ⚠ Reserve-Top-up: Themenpool ohne freie Themen.")
+        # ==================================================================
+        #  THEMENWAHL (Premium-Fix 26.09.2026, Issue #387)
+        #
+        #  Vorher stand hier `freie[0]` – also IMMER das erste Thema der
+        #  Datei, das die 60-%-Titelregel passierte. Weil diese Regel
+        #  „Stromfresser im Haushalt entlarven" nicht mit „Stromfresser
+        #  finden: So stoppst du teure Energiediebe" zusammenbringt, blieb
+        #  dasselbe Thema Nacht für Nacht an erster Stelle: erst sechs
+        #  Varianten desselben Artikels (Kannibalisierung), dann gar keine
+        #  Produktion mehr – der Lauf war rot, obwohl 145 Themen frei waren.
+        #
+        #  Jetzt entscheidet scripts/reserve_topics.py: Leitbegriff-Abgleich
+        #  gegen den GESAMTEN Bestand (live + Entwürfe + Pool), Rotation über
+        #  ein Gedächtnis (Cooldown je Thema) und eine LISTE statt eines
+        #  einzigen Versuchs – scheitert die KI an einem Thema, läuft die
+        #  Nacht mit dem nächsten weiter.
+        # ==================================================================
+        import reserve_topics as rt
+        vorschlaege = [t for t in rt.disponieren(topics, used_titles,
+                                                 limit=RESERVE_THEMEN_VERSUCHE * 2)
+                       if id(t) not in used_topics
+                       and not _pool_conflicts(pool, t.get("title", ""))]
+        if not vorschlaege:
+            print("  ⚠ Reserve-Top-up: kein freies Thema (alle Themen "
+                  "thematisch belegt oder im Cooldown) – "
+                  "`python3 scripts/reserve_topics.py --status` zeigt warum.")
+            if stop is not None:
+                stop["stop"] = True
+                stop["grund"] = "keine-freien-themen"
             return 0
-        topic = _weighted_choose(freie, _topic_weights)
-        # Auch ein Thema, dessen KI-Antworten alle am Profi-Gate scheitern,
-        # darf in diesem Lauf nicht erneut dieselben Versuche verbrauchen.
-        used_topics.add(id(topic))
-        keywords = topic.get("keywords")
-        pin = None
-        result, info = try_generate(topic, keywords, pin, used_titles,
-                                    relaxed=False, max_attempts=3)
+
+        # Reihenfolge der Versuche: Die Disposition sagt, WELCHE Themen
+        # fachlich frei sind; die Pinterest-Gewichte sagen, welches davon
+        # sich erfahrungsgemäß lohnt (_weighted_choose, seit 01.09.2026).
+        # Beides zusammen – Vielfalt UND Datenlage – statt eines von beidem.
+        rest = list(vorschlaege)
+        reihenfolge = []
+        while rest and len(reihenfolge) < RESERVE_THEMEN_VERSUCHE:
+            gewaehlt = _weighted_choose(rest, _topic_weights)
+            reihenfolge.append(gewaehlt)
+            rest = [t for t in rest if t is not gewaehlt]
+
+        topic = None
+        result = info = None
+        for versuch, kandidat in enumerate(reihenfolge, 1):
+            # Jedes VERSUCHTE Thema ist verbraucht – auch das gescheiterte.
+            # Sonst verbrennt der nächste Aufruf dieselben drei KI-Versuche
+            # am selben Thema (Vertrag aus 5202480, Copilot-Fix zu #387).
+            used_topics.add(id(kandidat))
+            keywords = kandidat.get("keywords")
+            ergebnis, meldung = try_generate(kandidat, keywords, None,
+                                             used_titles, relaxed=False,
+                                             max_attempts=3)
+            if ergebnis:
+                topic, result, info = kandidat, ergebnis, meldung
+                break
+            print(f"  ⚠ Reserve-Top-up: „{kandidat.get('title')}“ ohne "
+                  f"Profi-Generierung ({meldung}) – Thema bekommt Cooldown, "
+                  f"Versuch {versuch}/{len(reihenfolge)}")
+            # Gedächtnis: dasselbe Thema darf die nächste Nacht nicht erneut
+            # blockieren (genau dieser Dauer-Stillstand machte #387 rot).
+            try:
+                rt.merke(kandidat.get("title", ""), False, meldung)
+            except Exception as exc:  # noqa: BLE001 – Gedächtnis ist optional
+                print(f"    ⚠ Themen-Gedächtnis nicht schreibbar: {exc}")
         if not result:
-            print(f"  ⚠ Reserve-Top-up: keine Profi-Generierung ({info})")
+            print("  ⚠ Reserve-Top-up: keine Profi-Generierung in "
+                  f"{min(RESERVE_THEMEN_VERSUCHE, len(vorschlaege))} Themen "
+                  f"({info}) – nächste Runde/Nacht versucht andere Themen.")
             return 0
+        keywords = topic.get("keywords")
         title, desc, body = result
         filename, slug = save_article(
             title, desc, body, draft=True,
@@ -815,6 +885,10 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             fh.writelines(lines)
         _hygiene_neuer_artikel(filename)
         used_titles.add(title.lower())
+        try:
+            rt.merke(topic.get("title", ""), True, f"produziert: {slug}")
+        except Exception as exc:  # noqa: BLE001 – Gedächtnis ist optional
+            print(f"    ⚠ Themen-Gedächtnis nicht schreibbar: {exc}")
         print(f"  🛟 Reserve-Pool aufgefüllt: {slug} (draft, {info}) – "
               f"READY {ready}/{reserve_target}, Kandidat wartet auf Veredelung")
         return 1
@@ -829,15 +903,45 @@ def _reserve_topup_batch(topics, quelle, used_titles, used_topics, batch,
 
     Jeder Versuch markiert sein Thema bereits in `_reserve_topup`. So führen
     weitere Versuche zu anderen Themen; ohne neues Thema wird sofort beendet.
+
+    ERGÄNZUNG 26.09.2026 (#387, zusammengeführt mit dem Disponenten):
+    Es gibt zwei GRUNDVERSCHIEDENE Arten von Null-Ergebnis, und nur eine
+    davon rechtfertigt den Abbruch der Nacht:
+
+      * STRUKTURELL – Ziel erreicht, Kapazitätsdeckel, In-Flight-Schutz,
+        kein freies Thema: Weitermachen kann nichts ändern, jeder weitere
+        API-Aufruf wäre verbranntes Geld. `_reserve_topup` meldet das über
+        das `stop`-Signal, der Batch hört auf und sagt WARUM.
+      * FLÜCHTIG – die KI hat an diesem Thema nicht geliefert: Genau hier
+        brach der alte Batch ab und verlor die ganze Nachproduktion. Jetzt
+        läuft er mit dem nächsten Thema weiter – begrenzt auf
+        RESERVE_LEERLAUF_MAX Leerrunden in Folge, damit ein echter
+        Provider-Ausfall nicht das ganze Budget auffrisst.
     """
     produced = 0
+    leerlauf = 0
     for _ in range(max(1, min(batch, 4))):
         attempted_before = len(used_topics)
+        stop = {}
         got = _reserve_topup(topics, quelle, used_titles, used_topics,
-                             force=force)
+                             force=force, stop=stop)
         produced += got
-        if got == 0 and len(used_topics) == attempted_before:
+        if stop.get("stop"):
+            print(f"  ⏹ Reserve-Produktion beendet: {stop.get('grund')}")
             break
+        if got == 0:
+            # Kein Thema angefasst = nichts mehr zu holen (Vertrag 5202480).
+            if len(used_topics) == attempted_before:
+                break
+            leerlauf += 1
+            if leerlauf >= RESERVE_LEERLAUF_MAX:
+                print(f"  ⏹ Reserve-Produktion beendet: "
+                      f"{RESERVE_LEERLAUF_MAX} Themen-Runden ohne Ergebnis "
+                      f"(KI-Ausfall?) – kein weiterer API-Aufwand in diesem "
+                      f"Aufruf.")
+                break
+        else:
+            leerlauf = 0
     return produced
 
 
@@ -1104,6 +1208,14 @@ def main():
 
     # Independent stock production, including non-publication days. Never publishes.
     if "--reserve-only" in sys.argv:
+        # Erst den Bestand zurückholen, dann über Nachschub entscheiden:
+        # sonst produziert die Engine Ersatz für Kandidaten, die noch da
+        # sind und nur ihre Fahne verloren haben (#387).
+        try:
+            import reserve_custody
+            reserve_custody.heal_quiet()
+        except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
+            print(f"⚠ Bestands-Wächter übersprungen: {exc}")
         used_titles = g.existing_titles()
         topics = g.load_topics()
         used_topics = set()

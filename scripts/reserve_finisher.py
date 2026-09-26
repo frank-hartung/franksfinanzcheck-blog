@@ -847,6 +847,16 @@ def main() -> int:
     if "--status" in args:
         return status()
     if "--finish" in args:
+        # Bestands-Wächter VOR der Kette: Ein Kandidat, dem eine fremde
+        # Umschreibung die `reserve`-Fahne genommen hat, wäre für die
+        # Veredelung unsichtbar (#387). Der Wächter läuft vor dem
+        # Isolations-Schnappschuss, damit der geheilte Entwurf als
+        # Pool-Eigentum in die Kette geht.
+        try:
+            import reserve_custody
+            reserve_custody.heal_quiet()
+        except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
+            print(f"⚠ Bestands-Wächter übersprungen: {exc}")
         return finish()
     print(__doc__)
     return 1

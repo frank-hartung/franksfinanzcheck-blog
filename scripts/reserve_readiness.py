@@ -123,6 +123,18 @@ def prune_stale_rows(rows: list[dict]) -> list[dict]:
 
 
 def main():
+    # BESTANDS-WÄCHTER (26.09.2026, #387): Bevor irgendetwas über den Pool
+    # geurteilt wird, bekommt er zurück, was ihm gehört. Fremde Umschreibungen
+    # (Agenten, KI-Redaktion, Heiler) hatten am 25.09. zwei zertifizierte
+    # Kandidaten die `reserve`-Fahne gekostet – der Vorrat schrumpfte lautlos
+    # von 8 auf 3 und der End-Gate wurde rot, obwohl beide Entwürfe im Repo
+    # lagen. Best-effort, nie blockierend.
+    try:
+        import reserve_custody
+        reserve_custody.heal_quiet()
+    except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
+        print(f"⚠ Bestands-Wächter übersprungen: {exc}")
+
     rows = []
     # Nur aktuelle Reserve-Entwürfe (draft+reserve). Bereits veröffentlichte
     # Kandidaten (reserve_published) erscheinen hier bewusst nicht mehr.
