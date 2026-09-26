@@ -34,15 +34,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 import reserve_pool as rp  # noqa: E402
 from publication_release import accept_candidate  # noqa: E402
 
 
 def target() -> int:
-    try:
-        return int(os.environ.get("RESERVE_TARGET") or "6")
-    except ValueError:
-        return 6
+    """Zielbestand – ausschließlich aus dem SSOT (#393).
+
+    Das hier geschriebene Feld `target` im Zertifikat ist ab sofort ein
+    PROTOKOLL („gegen diese Latte wurde gemessen"), keine Vorgabe mehr:
+    reserve_gate und reserve_converge lesen ihr Ziel nicht mehr von hier
+    zurück. Damit kann ein magerer Lauf die Messlatte nicht länger absenken.
+    """
+    return reserve_economy.ziel()
 
 
 def capture_gate(index: Path) -> tuple[bool, str]:

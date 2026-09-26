@@ -88,6 +88,7 @@ try:
     import alert_router as ar
 except ImportError:
     ar = None
+import reserve_economy  # SSOT für Ziel und Alarmschwelle der Reserve (#393)
 import reserve_gate
 
 # Pinterest-Report-Provenienz als SSOT importieren. Der Watchdog darf einen
@@ -456,8 +457,20 @@ def check_affiliate_integrity():
 
 
 def check_content_reserve():
-    """Prüft den belegten, frischen Reife-Nachweis der Reserve."""
-    minimum = 4
+    """Prüft den belegten, frischen Reife-Nachweis der Reserve.
+
+    Premium-Fix 26.09.2026 (#393): `minimum` war hart die Zahl 4 – eine dritte
+    Wahrheit neben dem Workflow-Ziel und dem Feld im Zertifikat. Als der
+    Zielbestand auf 4 sank, war die Alarmschwelle identisch mit dem Ziel: Die
+    Linie füllte exakt bis zur Alarmgrenze auf, die nächste Veröffentlichung
+    löste sofort wieder Alarm aus – dieses Ticket kam per Konstruktion jeden
+    Tag zurück. Die Schwelle wird jetzt aus dem Ziel abgeleitet
+    (`reserve_economy.alarmschwelle()`, Ziel − Puffer) und ist strukturell
+    IMMER echt kleiner als das Ziel. Beim dokumentierten Ziel 6 ergibt das
+    weiterhin 4 – die Alarm-Semantik bleibt, die Zahl hat nur einen Besitzer.
+    """
+    minimum = reserve_economy.alarmschwelle()
+    ziel = reserve_economy.ziel()
     draft_paths = {}
     for raw_path in glob.glob(str(BLOG_DIR / "content/posts/*/index.md")):
         path = Path(raw_path)
@@ -508,9 +521,18 @@ def check_content_reserve():
             continue
         certified += 1
 
-    diagnosis = f"{certified}/{minimum} gate-fertige Artikel, {len(draft_paths)} Reserve-Entwürfe"
+    # Beide Zahlen stehen im Befund: Wogegen aufgefüllt wird (Ziel) UND ab
+    # wann gemeldet wird (Alarmschwelle). Vorher las sich „4/4 gate-fertig"
+    # wie ein Vollbestand, obwohl 4 nur die Alarmgrenze war.
+    diagnosis = (f"{certified} gate-fertige Artikel "
+                 f"(Ziel {ziel}, Alarm unter {minimum}), "
+                 f"{len(draft_paths)} Reserve-Entwürfe")
     if freshness_text.startswith("⚠"):
         diagnosis += f"; {freshness_text}"
+    drift = reserve_economy.messlatten_drift(
+        reserve_economy.zertifikat_ziel(cert_path), ziel)
+    if drift:
+        diagnosis += f"; {drift}"
     if certified < minimum:
         if blocked:
             diagnosis += "; Blocker: " + " | ".join(blocked[:2])

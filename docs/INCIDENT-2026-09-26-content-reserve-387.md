@@ -1,5 +1,14 @@
 # Vorfall #387 – „Content-Reserve (täglicher Vorrat)" rot
 
+> **Folgevorfall #393 (26.09.2026, Abend):**
+> `docs/INCIDENT-2026-09-26-bot-watchdog-393.md`. Dieselbe Fehlerklasse aus
+> Abschnitt 2 („ein Zustand, der nur in einer Datei steht, aber niemandem
+> gehört“) traf danach den **Zielbestand selbst**: Das Ziel wurde aus dem
+> geprüften Zertifikat gelesen, sank dadurch selbsthaltend auf 4, und weil die
+> Alarmschwelle des Watchdogs ebenfalls 4 war, meldete sich das Ticket nach
+> jeder Veröffentlichung neu. Besitzer der Zahlen ist jetzt
+> `scripts/reserve_economy.py`.
+
 **Datum:** 26.09.2026 · **Lauf:** 36230666076 (03:25 UTC) · **Status:** behoben
 **Nachtrag 26.09.2026 (Abend):** Pool auf 6/6 geschlossen – siehe Abschnitt 8.
 **Symptom im Ticket:** `Stock shortage must not look successful` → Exit 1,

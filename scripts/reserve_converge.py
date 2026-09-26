@@ -71,12 +71,13 @@ ROOT = Path(__file__).resolve().parent.parent
 CERT = ROOT / "data" / "reserve-readiness.json"
 PY = sys.executable
 
+sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
+
 
 def target() -> int:
-    try:
-        return int(os.environ.get("RESERVE_TARGET") or "6")
-    except ValueError:
-        return 6
+    """Zielbestand – ausschließlich aus dem SSOT (#393)."""
+    return reserve_economy.ziel()
 
 
 def cert_state(cert_path: Path = CERT) -> dict:
@@ -84,16 +85,29 @@ def cert_state(cert_path: Path = CERT) -> dict:
 
     `ready` wird – wie im harten End-Gate – aus der Kandidatenliste gezählt,
     nie dem gespeicherten Feld vertraut (#287-Klasse: veraltete Zählung).
+
+    Premium-Fix 26.09.2026 (#393): `target` kommt aus `reserve_economy.ziel()`,
+    NICHT mehr aus dem Zertifikat. Die alte Zeile
+    `state["target"] = int(data.get("target", goal))` war der Motor einer
+    selbsthaltenden Absenkung: Die Konvergenz las das Ziel aus dem Zertifikat,
+    reichte es unten als `RESERVE_TARGET` an `engine_generate` weiter, und
+    `reserve_readiness` schrieb es von dort wieder ins Zertifikat. Stand dort
+    einmal eine 4, war `brauche = 4 − 4 = 0` – die Linie produzierte nie wieder
+    nach, und eine Erhöhung von `vars.RESERVE_TARGET` blieb wirkungslos.
     """
     goal = target()
-    state = {"target": goal, "ready": 0, "pool_size": 0, "exists": False}
+    state = {"target": goal, "ready": 0, "pool_size": 0, "exists": False,
+             "zertifikat_ziel": None}
     try:
         data = json.loads(cert_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return state
+    if not isinstance(data, dict):
+        return state
     cands = list(data.get("candidates") or [])
     state["exists"] = True
-    state["target"] = int(data.get("target", goal))
+    # Beweismittel, nicht Vorgabe: Womit wurde zuletzt gemessen?
+    state["zertifikat_ziel"] = reserve_economy.zertifikat_ziel(data)
     state["ready"] = sum(1 for r in cands if r.get("ready") is True)
     state["pool_size"] = len(cands)
     return state
@@ -151,6 +165,9 @@ def converge(*, runner=_run, state_reader=cert_state, max_runden: int = 3,
         # Batch = exakter Fehlbestand (Deckel im Generator: 4) – so kostet die
         # Konvergenz nur so viele KI-Aufrufe wie wirklich fehlen.
         batch = max(1, min(brauche, 4))
+        # `vorher["target"]` stammt seit #393 aus reserve_economy.ziel() und
+        # NICHT mehr aus dem Zertifikat – die Weitergabe nach unten ist damit
+        # eine Festschreibung des Produktionsziels, keine Rückkopplung mehr.
         env = {"RESERVE_FORCE_TOPUP": "1", "RESERVE_TOPUP_BATCH": str(batch),
                "RESERVE_TARGET": str(vorher["target"])}
         log(f"    → {brauche} zertifizierte(r) Kandidat(en) fehlen – "

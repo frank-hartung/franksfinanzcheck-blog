@@ -53,9 +53,24 @@ class WatchdogKanalTestCase(unittest.TestCase):
         (self.tmp / "data").mkdir()
         self.alt = bw.BLOG_DIR
         bw.BLOG_DIR = self.tmp
+        # Zielbestand für die Dauer des Tests festnageln (#393): Die
+        # Alarmschwelle wird aus dem Ziel abgeleitet, also darf eine gesetzte
+        # Repository-Variable die Erwartungen hier nicht verschieben. Genau
+        # diese Abhängigkeit hat den reserve_gate-Selbsttest in Workflow #24
+        # rot gemacht, als die Umgebung ein anderes Ziel setzte.
+        self.alt_target = os.environ.get("RESERVE_TARGET")
+        self.alt_puffer = os.environ.get("RESERVE_PUFFER")
+        os.environ["RESERVE_TARGET"] = "6"    # → Alarmschwelle 4
+        os.environ.pop("RESERVE_PUFFER", None)
 
     def tearDown(self):
         bw.BLOG_DIR = self.alt
+        for name, wert in (("RESERVE_TARGET", self.alt_target),
+                           ("RESERVE_PUFFER", self.alt_puffer)):
+            if wert is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = wert
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def _write(self, name, data):
@@ -168,7 +183,13 @@ class WatchdogKanalTestCase(unittest.TestCase):
         ok, text = bw.check_content_reserve()
 
         self.assertTrue(ok)
-        self.assertIn("4/4 gate-fertige", text)
+        # #393: Der Befund nennt beide Zahlen getrennt. Das frühere „4/4
+        # gate-fertige" las sich wie ein Vollbestand, obwohl die 4 im Nenner
+        # nur die Alarmschwelle war – der Vorrat lag damit auf der Alarmgrenze.
+        self.assertIn("4 gate-fertige Artikel", text)
+        self.assertIn("Ziel 6", text)
+        self.assertIn("Alarm unter 4", text)
+        self.assertNotIn("4/4 gate-fertige", text)
 
     def test_content_reserve_meldet_konkrete_gate_blocker(self):
         candidates = []
@@ -188,7 +209,8 @@ class WatchdogKanalTestCase(unittest.TestCase):
         ok, text = bw.check_content_reserve()
 
         self.assertFalse(ok)
-        self.assertIn("2/4 gate-fertige", text)
+        self.assertIn("2 gate-fertige Artikel", text)
+        self.assertIn("Alarm unter 4", text)
         self.assertIn("Cover-Text unvollständig", text)
 
     def test_content_reserve_verwirft_nachtraeglich_geaenderte_kandidaten(self):
@@ -208,7 +230,7 @@ class WatchdogKanalTestCase(unittest.TestCase):
         ok, text = bw.check_content_reserve()
 
         self.assertFalse(ok)
-        self.assertIn("3/4 gate-fertige", text)
+        self.assertIn("3 gate-fertige Artikel", text)
         self.assertIn("Zertifikat passt nicht mehr", text)
 
     def test_content_reserve_ignoriert_veraltetes_zertifikat(self):

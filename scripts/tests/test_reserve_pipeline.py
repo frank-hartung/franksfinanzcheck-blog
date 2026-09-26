@@ -56,8 +56,10 @@ import reserve_pool as rp             # noqa: E402
 import reserve_converge as rc        # noqa: E402
 import reserve_finisher as rf        # noqa: E402
 import reserve_gate as rg            # noqa: E402
+import reserve_economy as re_        # noqa: E402
 import reserve_healer_coverage as rhc  # noqa: E402
 import reserve_quarantine as rq      # noqa: E402
+import reserve_readiness as rr       # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
 
 
@@ -1177,3 +1179,173 @@ class WorkflowVertragTests(unittest.TestCase):
         sync = (root / "scripts" / "git_sync.sh").read_text(encoding="utf-8")
         self.assertIn("data/reserve-topic-ledger.json", sync)
         self.assertIn("data/reserve-custody.json", sync)
+
+
+# ===========================================================================
+#  #393 – DIE MESSLATTE GEHÖRT NICHT DEM GEMESSENEN
+# ---------------------------------------------------------------------------
+#  Am 26.09.2026 meldete der harte End-Gate „✅ Reserve-Pool gate-fertig:
+#  4/4 Kandidaten zertifiziert" – bei einem Produktionsziel von 6. Möglich war
+#  das, weil drei Stellen dieselbe Zahl unabhängig voneinander kannten und die
+#  entscheidende davon IM GEPRÜFTEN ARTEFAKT stand:
+#
+#    * reserve_gate.evaluate()     las `target` aus dem Zertifikat
+#    * reserve_converge.cert_state() ebenso – und reichte es als
+#      RESERVE_TARGET an die Kindprozesse weiter, die es zurückschrieben
+#    * bot_watchdog                hatte `minimum = 4` hart im Code
+#
+#  Ergebnis: eine einmal abgesenkte Latte hielt sich selbst fest (Ratsche),
+#  und weil Alarmschwelle == Zielbestand war, öffnete sich Ticket #393 nach
+#  JEDER Veröffentlichung neu. Die folgenden Verträge frieren beides ein.
+# ===========================================================================
+class MesslattenBesitzTests(unittest.TestCase):
+    """Das Zertifikat ist Beweismittel, nicht Gesetzgeber."""
+
+    def setUp(self):
+        self._alt = {k: os.environ.get(k)
+                     for k in ("RESERVE_TARGET", "RESERVE_PUFFER")}
+
+    def tearDown(self):
+        for k, v in self._alt.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+    def _cert(self, tmp, payload):
+        path = Path(tmp) / "reserve-readiness.json"
+        path.write_text(json.dumps(payload, ensure_ascii=False),
+                        encoding="utf-8")
+        return path
+
+    # --- Der Kern: ein magerer Lauf senkt die Latte nicht ------------------
+    def test_zertifikat_setzt_sein_ziel_nicht_selbst(self):
+        os.environ["RESERVE_TARGET"] = "6"
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = self._cert(tmp, {
+                "target": 4, "ready": 4,
+                "generated_at": dt.datetime.now(dt.timezone.utc).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"),
+                "candidates": [{"slug": f"k{i}", "ready": True}
+                               for i in range(4)],
+            })
+            ready, target, _ = rg.evaluate(cert)
+        self.assertEqual(target, 6,
+                         "Das Ziel muss aus der Produktionsumgebung kommen, "
+                         "nicht aus dem geprüften Zertifikat")
+        self.assertEqual(ready, 4)
+        self.assertLess(ready, target,
+                        "4 von 6 ist ein Engpass – und muss einer bleiben")
+
+    def test_engpass_sieht_nicht_erfolgreich_aus(self):
+        """„Stock shortage must not look successful" – jetzt auch, wenn das
+        Zertifikat selbst behauptet, das Ziel sei erreicht."""
+        os.environ["RESERVE_TARGET"] = "6"
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = self._cert(tmp, {
+                "target": 4, "ready": 4,
+                "generated_at": dt.datetime.now(dt.timezone.utc).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"),
+                "candidates": [{"slug": f"k{i}", "ready": True}
+                               for i in range(4)],
+            })
+            ready, target, cands = rg.evaluate(cert)
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                rg.report(ready, target, cands)
+            text = puffer.getvalue()
+        self.assertIn("ENGPA", text.upper(),
+                      f"Ein 4/6 muss als Engpass gemeldet werden: {text}")
+        self.assertNotIn("gate-fertig: 4/4", text)
+
+    def test_ratsche_ist_tot_konvergenz_liest_produktionsziel(self):
+        """Die Rückkopplung Zertifikat → RESERVE_TARGET → Zertifikat.
+
+        Vorher: cert_state() meldete target 4, `brauche` war 0, die Nacht
+        produzierte nichts nach – und schrieb die 4 erneut fest.
+        """
+        os.environ["RESERVE_TARGET"] = "6"
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = self._cert(tmp, {
+                "target": 4, "ready": 4,
+                "candidates": [{"slug": f"k{i}", "ready": True}
+                               for i in range(4)],
+            })
+            st = rc.cert_state(cert)
+        self.assertEqual(st["target"], 6,
+                         "Konvergenz muss auf das Produktionsziel hinarbeiten")
+        self.assertEqual(st["zertifikat_ziel"], 4,
+                         "…das Zertifikatsziel bleibt als Beweismittel lesbar")
+        self.assertGreater(st["target"] - st["ready"], 0,
+                           "Bei 4/6 muss echter Nachschub-Bedarf entstehen")
+
+    def test_readiness_stempelt_das_produktionsziel(self):
+        """Wer das Zertifikat schreibt, schreibt die Latte der Produktion."""
+        os.environ["RESERVE_TARGET"] = "7"
+        self.assertEqual(rr.target(), 7)
+        self.assertEqual(rr.target(), re_.ziel(),
+                         "reserve_readiness und SSOT dürfen nie auseinanderlaufen")
+
+    def test_drift_wird_gemeldet_statt_verschwiegen(self):
+        os.environ["RESERVE_TARGET"] = "6"
+        self.assertIn("MESSLATTE", re_.messlatten_drift(4, 6) or "")
+        self.assertIsNone(re_.messlatten_drift(6, 6))
+        self.assertIsNone(re_.messlatten_drift(9, 6))
+        self.assertIsNone(re_.messlatten_drift(None, 6))
+
+
+class PufferInvarianteTests(unittest.TestCase):
+    """Alarmschwelle < Ziel – die Hysterese, die #393 täglich neu öffnete."""
+
+    def setUp(self):
+        self._alt = {k: os.environ.get(k)
+                     for k in ("RESERVE_TARGET", "RESERVE_PUFFER")}
+
+    def tearDown(self):
+        for k, v in self._alt.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+    def test_alarmschwelle_liegt_immer_echt_unter_dem_ziel(self):
+        for z in range(re_.ZIEL_MIN, 21):
+            for p in (1, 2, 3, 5, 50):
+                os.environ["RESERVE_TARGET"] = str(z)
+                os.environ["RESERVE_PUFFER"] = str(p)
+                a = re_.alarmschwelle()
+                self.assertGreaterEqual(a, 1, f"Ziel {z}, Puffer {p}")
+                self.assertLess(
+                    a, z,
+                    f"Ziel {z}, Puffer {p}: Alarmschwelle {a} ist nicht "
+                    f"kleiner als das Ziel – genau dieser Null-Puffer hat "
+                    f"#393 jeden Tag neu geöffnet")
+
+    def test_dokumentiertes_ziel_behaelt_die_alte_alarmsemantik(self):
+        """Ziel 6 → Alarm unter 4: exakt der früher hart codierte Wert."""
+        os.environ["RESERVE_TARGET"] = "6"
+        os.environ.pop("RESERVE_PUFFER", None)
+        self.assertEqual(re_.alarmschwelle(), 4)
+
+    def test_watchdog_nutzt_die_abgeleitete_schwelle(self):
+        """Kein hart codiertes 4 mehr – die Schwelle wandert mit dem Ziel."""
+        quelle = (Path(__file__).resolve().parents[1]
+                  / "bot_watchdog.py").read_text(encoding="utf-8")
+        self.assertNotIn("minimum = 4", quelle,
+                         "Die Alarmschwelle darf nicht wieder hart im "
+                         "Watchdog stehen")
+        self.assertIn("reserve_economy.alarmschwelle()", quelle)
+        os.environ["RESERVE_TARGET"] = "10"
+        os.environ.pop("RESERVE_PUFFER", None)
+        self.assertEqual(re_.alarmschwelle(), 8,
+                         "Ziel 10 muss die Schwelle auf 8 mitziehen")
+
+    def test_kaputte_konfiguration_senkt_das_ziel_nicht_still(self):
+        for murks in ("", "   ", "vier", "4,5"):
+            os.environ["RESERVE_TARGET"] = murks
+            self.assertEqual(re_.ziel(), re_.ZIEL_DEFAULT,
+                             f"{murks!r} darf nicht als Ziel durchgehen")
+        warnungen = []
+        os.environ["RESERVE_TARGET"] = "1"
+        self.assertEqual(re_.ziel(warnungen), re_.ZIEL_MIN)
+        self.assertTrue(warnungen, "Eine Klemmung muss sich melden")
