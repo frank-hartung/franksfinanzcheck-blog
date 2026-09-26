@@ -441,11 +441,17 @@ input, textarea {
 }
 
 .ff-trust-box__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 4px;
+  margin-left: 0;
+  margin-right: 0;
+  vertical-align: middle;
   color: var(--ff-emerald);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
-  margin-left: 4px;
 }
 
 :root[data-theme="dark"] .ff-trust-box__link {
