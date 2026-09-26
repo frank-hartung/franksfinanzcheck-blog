@@ -17,6 +17,10 @@ automatisch (deterministisch, mit Sabotage-Schutz).
   P7  RICH-PIN-MASSE    og:image:width + og:image:height (1000x1500)
   P8  HASHTAGS          nur [a-z0-9], keine Umlaute, max. 3
   P9  PROFIL-LINK       Pinterest-Profil im Footer/Startseite verlinkt
+  P10 ARTIKEL-REDIRECT  Artikel-URLs sind keine Redirect-Aliase
+  P11 AFFILIATE-DICHTE  max. 5 Affiliate-Links pro Artikel
+  P12 LINK-ATTRIBUTE   /go/-Links tragen sponsored/nofollow
+  P13 GATEWAY-NOINDEX  /go/-Ziele sind noindex
 
 SELBSTHEILUNG (--fix):
   - P1: robots.txt anlegen/reparieren
@@ -57,6 +61,7 @@ AS_JSON = "--json" in sys.argv
 DESC_MAX = 500
 MEDIA_MIN = 10 * 1024
 MEDIA_MAX = 5 * 1024 * 1024
+MAX_AFFILIATE_LINKS = 5
 SITE = "https://franksfinanzcheck.de"
 PROFILE_URL = "https://www.pinterest.de/franksfinanzcheck/"
 
@@ -418,17 +423,27 @@ def _check_no_redirect_on_article():
 
 
 def _check_affiliate_density():
-    """P11: Affiliate-Link-Dichte pro Artikel (Profi-Standard: max. 5)."""
+    """P11: Affiliate-Link-Dichte pro Artikel; redaktionelle Korrektur bleibt manuell."""
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         if not os.path.exists(p):
             continue
         c = open(p, encoding="utf-8").read()
-        go = len(re.findall(r"\]\(/go/[\w-]+/\)", c))
-        direct = len(re.findall(r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", c))
-        total = go + direct
-        if total > 5:
-            PROBLEMS.append(("P11", slug, f"{total} Affiliate-Links (> 5 – Profi-Limit)"))
+        total = _affiliate_link_count(c)
+        if total > MAX_AFFILIATE_LINKS:
+            PROBLEMS.append((
+                "P11", slug,
+                f"{total} Affiliate-Links (> {MAX_AFFILIATE_LINKS} – Profi-Limit)"
+            ))
+
+
+def _affiliate_link_count(content):
+    """Zählt interne Affiliate-Gateways und unterstützte direkte Partner-Links."""
+    go = len(re.findall(r"\]\(/go/[\w-]+/\)", content))
+    direct = len(re.findall(
+        r"\]\(https://a\.(?:check24|partner-versicherung)[^)]*\)", content
+    ))
+    return go + direct
 
 
 def _check_go_links_rel():
@@ -505,6 +520,13 @@ def _selftest():
         fehler.append("SITE verändert")
     if PROFILE_URL != "https://www.pinterest.de/franksfinanzcheck/":
         fehler.append("PROFILE_URL verändert")
+    if _affiliate_link_count(
+        "[Strom](/go/strom/) [Tarif](https://a.check24.net/click) "
+        "[Versicherung](https://a.partner-versicherung.de/click)"
+    ) != 3:
+        fehler.append("P11-Affiliate-Link-Zähler defekt")
+    if MAX_AFFILIATE_LINKS != 5:
+        fehler.append("P11-Profi-Limit verändert")
     test_existing = {"*Werbung | Test"}
     gen = _build_unique_pin_description("test-slug", "Test Titel", "Test Beschreibung", ["kw"], test_existing)
     if gen in test_existing or len(gen) > DESC_MAX or "&" in gen:
