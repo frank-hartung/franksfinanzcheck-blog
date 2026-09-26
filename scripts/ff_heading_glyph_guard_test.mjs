@@ -295,6 +295,28 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
       JSON.stringify(actual) === JSON.stringify(expected),
       `erwartet ${JSON.stringify(expected)}, erhalten ${JSON.stringify(actual)}`);
   }
+
+  // Regressionsfall 26.09.2026: Der Link wurde durch ein Zwei-Zeilen-Clamp
+  // sichtbar als „Tierkrankenversicherun-g“ abgeschnitten. Der vollständige
+  // Text muss im Link stehen; CSS darf die benötigte dritte Zeile zeigen.
+  const regression = loadPage(skeleton({
+    title: 'Tierkrankenversicherung für Hund und Katze',
+    kurzantwort: 'Schutz und Rücklage werden passend zum Risiko verglichen.',
+    bodyHtml: mdToHtml([
+      '## Das Wichtigste in Kürze', '', 'Die wichtigsten Punkte.', '',
+      '## Wann sich eine Tierkrankenversicherung lohnt', '', 'Die Entscheidungshilfe.', '',
+      '## Fazit', '', 'Die passende Absicherung hängt vom Budget ab.',
+    ].join('\n')),
+  }));
+  await loadPremium(regression.win);
+  const riskLink = [...regression.doc.querySelectorAll('.ff-mini-toc a')]
+    .find((a) => (a.getAttribute('aria-label') || '').includes('Tierkrankenversicherung'));
+  t.ok('Regressionsfall Tierkrankenversicherung: Link vorhanden', !!riskLink);
+  t.eq('Regressionsfall Tierkrankenversicherung: sichtbarer Text vollständig',
+    riskLink ? riskLink.textContent.replace(/\s+/g, ' ').trim() : '',
+    'Wann sich eine Tierkrankenversicherung lohnt');
+  t.ok('Regressionsfall Tierkrankenversicherung: kein künstliches Trennzeichen',
+    !!riskLink && !/Tierkrankenversicherun[-‐‑–]\s*g/.test(riskLink.textContent));
 }
 
 /* ============================================================
