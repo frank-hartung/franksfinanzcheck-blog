@@ -324,7 +324,10 @@ export function skeleton({ title, description, kurzantwort, lang, readingTime, w
     ? `<div class="ff-korrektur" role="note">${korrektur}</div>`
     : '';
   const kurzBlock = kurzantwort
-    ? `<div class="ff-kurzantwort"><div class="ff-kurzantwort__head"><span class="ff-kurzantwort__icon">💡</span><span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span></div><p class="ff-kurzantwort__text">${kurzantwort}</p></div>`
+    // Spiegelt layouts/_default/single.html + kurzantwort_icon.html (26.09.2026):
+    // Signet als aria-hidden SVG-Medaillon im Kopf (statt 💡-Glühbirne); die
+    // Lesereihenfolge entfernt den Kopf komplett, das Markup bleibt read-safe.
+    ? `<div class="ff-kurzantwort"><div class="ff-kurzantwort__head"><span class="ff-kurzantwort__medallion" aria-hidden="true"><svg class="ff-kurzantwort__icon ff-kurzantwort__icon--antwort" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="ff-kz-ring" cx="12" cy="12" r="9"/><path class="ff-kz-check" d="m8.2 12.4 2.6 2.6 5.2-5.8"/></svg></span><span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span></div><p class="ff-kurzantwort__text">${kurzantwort}</p></div>`
     : '';
 
   return `<!doctype html>

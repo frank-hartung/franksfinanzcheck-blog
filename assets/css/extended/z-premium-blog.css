@@ -1073,3 +1073,362 @@ details:not(.toc)[open] > summary::before {
     background-attachment: scroll, local;
   }
 }
+
+/* ============================================================
+   PREMIUM-SICHERUNGSBLOCK 26.09.2026 (Frank-Befund, drei Teile)
+   ------------------------------------------------------------
+   1. „Kurz & knapp – die Antwort“: Die Box trug eine statische
+      Glühbirne und hatte KEIN eigenes CSS – sie stand als
+      unformatierter Kasten mit Default-Abständen im Artikel.
+      Jetzt: Antwort-Karte mit Themen-Signet (Medaillon),
+      Eyebrow-Zeile, Haarlinie und Lese-Rhythmus nach DESIGN.md.
+   2. Inhaltsverzeichnis oben im Artikel: steht nun dauerhaft
+      offen (TocOpen) und bekommt die Premium-Politur.
+   3. Schwebende „Im Artikel“-Navigation: wird BEWEGLICH –
+      Griff in der Kopfzeile, Drag + Tastatur (ff-premium.js).
+   Alle Neuheiten: Light + Dark + Print + prefers-reduced-motion,
+   Tokens ausschließlich aus DESIGN.md §1/§4.
+   ============================================================ */
+
+/* ---------- 1. Kurzantwort-Box („Kurz & knapp – die Antwort“) ---------- */
+.ff-kurzantwort {
+  position: relative;
+  margin: 6px 0 22px;
+  padding: 16px 20px 15px;
+  border: 1px solid color-mix(in srgb, var(--ff-emerald) 16%, var(--border));
+  border-left: 4px solid var(--ff-emerald);
+  border-radius: var(--ff-radius-lg);
+  background:
+    linear-gradient(162deg,
+      color-mix(in srgb, var(--ff-emerald-soft) 82%, var(--entry)) 0%,
+      var(--entry) 62%);
+  /* Stufe-1-Elevation (weich), unsichtbare Härte entsteht nicht –
+     Die Karte steht damit EINE Stufe über den Callouts (nur Border). */
+  box-shadow: var(--ff-shadow-1);
+  overflow: clip;
+}
+
+.ff-kurzantwort__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ff-emerald) 10%, var(--border));
+}
+
+/* Signet-Medaillon: Themen-Signet auf ruhiger Smaragd-Plakette */
+.ff-kurzantwort__medallion {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  color: var(--ff-emerald);
+  background: color-mix(in srgb, var(--ff-emerald) 9%, var(--entry));
+  border: 1px solid color-mix(in srgb, var(--ff-emerald) 20%, transparent);
+}
+
+.ff-kurzantwort__icon {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+.ff-kurzantwort__eyebrow {
+  color: var(--ff-emerald);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.ff-kurzantwort__text {
+  margin: 0;
+  max-width: 65ch;
+  font-size: 1.03rem;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+/* ---------- 1a. Signet-Animationen (nur transform/opacity/offset) ----------
+   Grundzustand jedes Motivs ist VOLLSTÄNDIG sichtbar – die Keyframes
+   modulieren nur. Ohne CSS bleibt das Signet statisch, aber komplett
+   (kein geschuldeter „Endzustand“). Kreisfrequenzen 1,8–4,2 s, alle
+   ruhig und ohne bounce/elastic (DESIGN.md §6). */
+.ff-kz-strom-bolt {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ff-kz-bolt-pulse 3.2s cubic-bezier(.2,.7,.2,1) infinite;
+}
+@keyframes ff-kz-bolt-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .72; transform: scale(1.05); }
+}
+.ff-kz-spark { animation: ff-kz-spark-twinkle 3.2s ease-in-out infinite; }
+.ff-kz-spark--2 { animation-delay: 1.6s; }
+@keyframes ff-kz-spark-twinkle {
+  0%, 12%, 52%, 100% { opacity: 0; }
+  24%, 40%           { opacity: 1; }
+}
+
+.ff-kz-wlan { animation: ff-kz-wlan-wave 3s ease-in-out infinite; }
+.ff-kz-wlan--2 { animation-delay: .3s; }
+.ff-kz-wlan--3 { animation-delay: .6s; }
+@keyframes ff-kz-wlan-wave {
+  0%, 100% { opacity: .3; }
+  30%, 60% { opacity: 1; }
+}
+.ff-kz-wlan-dot { animation: ff-kz-dot-breathe 3s ease-in-out infinite; }
+@keyframes ff-kz-dot-breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .55; }
+}
+
+/* Häkchen zeichnet sich nach (vorherige/persistente Position sichtbar) */
+.ff-kz-check {
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 0;
+  animation: ff-kz-draw 3.8s cubic-bezier(.2,.7,.2,1) infinite;
+}
+@keyframes ff-kz-draw {
+  0%        { stroke-dashoffset: 100; }
+  40%, 100% { stroke-dashoffset: 0; }
+}
+
+.ff-kz-coin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ff-kz-coin-flip 3.8s cubic-bezier(.2,.7,.2,1) infinite;
+}
+@keyframes ff-kz-coin-flip {
+  0%        { transform: scaleX(1); }
+  14%       { transform: scaleX(.08); }
+  28%, 100% { transform: scaleX(1); }
+}
+
+.ff-kz-leaves {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: ff-kz-sway 4.2s ease-in-out infinite;
+}
+@keyframes ff-kz-sway {
+  0%, 100% { transform: rotate(-2.6deg); }
+  50%      { transform: rotate(2.6deg); }
+}
+
+.ff-kz-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ff-kz-wheel-spin 2.6s linear infinite;
+}
+@keyframes ff-kz-wheel-spin {
+  to { transform: rotate(360deg); }
+}
+.ff-kz-road {
+  stroke-dasharray: 6 6;
+  animation: ff-kz-road-flow 2.4s linear infinite;
+}
+@keyframes ff-kz-road-flow {
+  to { stroke-dashoffset: -12; } /* -1 volle Dash-Periode: nahtloser Loop */
+}
+
+.ff-kz-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ff-kz-ring-breathe 3.6s cubic-bezier(.2,.7,.2,1) infinite;
+}
+@keyframes ff-kz-ring-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .78; transform: scale(1.02); }
+}
+
+/* ---------- 1b. Dark Mode: Kurzantwort ---------- */
+:root[data-theme="dark"] .ff-kurzantwort {
+  background:
+    linear-gradient(162deg,
+      color-mix(in srgb, var(--ff-emerald-bright) 9%, var(--entry)) 0%,
+      var(--entry) 62%);
+  border-color: color-mix(in srgb, var(--ff-emerald-bright) 26%, transparent);
+  border-left-color: var(--ff-emerald-bright);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .32);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__head {
+  border-bottom-color: color-mix(in srgb, var(--ff-emerald-bright) 16%, transparent);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__medallion {
+  color: var(--ff-emerald-bright);
+  background: rgba(127, 209, 180, .1);
+  border-color: rgba(127, 209, 180, .3);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__eyebrow {
+  color: var(--ff-emerald-bright);
+}
+
+/* ---------- 2. Inhaltsverzeichnis oben im Artikel (steht offen) ---------- */
+/* Seit 26.09.2026 rendert TocOpen das <details> geöffnet – die Liste ist
+   beim Ankommen VOLLSTÄNDIG sichtbar. Das <details> bleibt zuklappbar,
+   damit Leser die Kontrolle behalten; Print zeigt sie ausgeklappt. */
+details.toc {
+  border-color: color-mix(in srgb, var(--ff-emerald) 15%, var(--border));
+  background:
+    linear-gradient(172deg,
+      color-mix(in srgb, var(--ff-emerald-soft) 64%, var(--entry)) 0%,
+      var(--code-bg) 58%);
+  overflow: clip; /* Radius umschließt auch die Summary-Fläche */
+}
+
+details.toc summary {
+  padding: .62rem 1.15rem;
+  transition: background-color .18s ease;
+}
+
+details.toc summary:hover {
+  background: color-mix(in srgb, var(--ff-emerald-soft) 55%, transparent);
+}
+
+details.toc summary .title {
+  color: var(--ff-emerald);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+details.toc .inner {
+  padding-bottom: .9rem;
+}
+
+/* Ruhige, gut lesbare Einträge: Akzent-Marker, volle Zeilenhöhe,
+   keine Begrenzung – „vollständig“ heißt auch im Markup sichtbar. */
+details.toc .inner ul {
+  margin: .34rem 0;
+}
+
+details.toc .inner li {
+  margin: .14rem 0;
+  line-height: 1.5;
+}
+
+details.toc ::marker {
+  color: color-mix(in srgb, var(--ff-accent) 72%, var(--secondary));
+}
+
+details.toc .inner a {
+  color: var(--secondary);
+  text-decoration: none;
+  text-underline-offset: .3rem;
+  transition: color .18s ease;
+}
+
+details.toc .inner a:hover,
+details.toc .inner a:focus-visible {
+  color: var(--ff-emerald);
+  text-decoration: underline;
+}
+
+:root[data-theme="dark"] details.toc {
+  background: var(--entry);
+  border-color: color-mix(in srgb, var(--ff-emerald-bright) 22%, transparent);
+}
+
+:root[data-theme="dark"] details.toc summary:hover {
+  background: rgba(127, 209, 180, .08);
+}
+
+:root[data-theme="dark"] details.toc summary .title,
+:root[data-theme="dark"] details.toc .inner a:hover,
+:root[data-theme="dark"] details.toc .inner a:focus-visible {
+  color: var(--ff-emerald-bright);
+}
+
+/* ---------- 3. Bewegliche „Im Artikel“-Navigation ---------- */
+/* Die Kopfzeile ist Griff UND Tastatur-Schalter (ff-premium.js):
+   Drag per Maus/Pointer/Touch, Pfeiltasten bei Fokus, Pos1 dockt
+   wieder an der freigegebenen Standardposition rechts neben dem Text. */
+.ff-mini-toc__grip {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 9px;
+  height: 16px;
+  color: var(--secondary);
+  opacity: .55;
+}
+
+.ff-mini-toc__title {
+  flex: 1 1 auto;
+}
+
+.ff-mini-toc__head {
+  align-items: center;
+  gap: .45rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Vertical-Pan auf dem Griff sperren, damit Touch-Drag die Seite
+     nicht mitschiebt (die Liste darunter bleibt normal scrollbar). */
+  touch-action: none;
+}
+
+.ff-mini-toc__head:focus-visible {
+  /* DESIGN.md §6: Signalgelb-Ring, sichtbar in beiden Modi */
+  outline: 3px solid var(--ff-accent);
+  outline-offset: 1px;
+  border-radius: 10px;
+}
+
+.ff-mini-toc--dragging {
+  /* Kein Layout-Nachlauf beim Ziehen + gehobene Elevation (Stufe 3) */
+  transition: none;
+  box-shadow: 0 22px 54px rgba(15, 52, 43, .16);
+}
+
+.ff-mini-toc--dragging .ff-mini-toc__head {
+  cursor: grabbing;
+}
+
+.ff-mini-toc--dragging .ff-mini-toc__grip {
+  color: var(--primary);
+  opacity: .95;
+}
+
+:root[data-theme="dark"] .ff-mini-toc--dragging {
+  box-shadow: 0 22px 54px rgba(0, 0, 0, .55);
+}
+
+/* ---------- Sicherungen: reduced motion & print ---------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Signet-Animationen komplett aus (Kreise stehen ruhig, vollständig
+     sichtbar) – ergänzt den globalen §8-Reset aus zzz-agency-polish.css
+     um einen lokalen, selbstdokumentierenden Wall. */
+  .ff-kz-strom-bolt,
+  .ff-kz-spark,
+  .ff-kz-wlan,
+  .ff-kz-wlan-dot,
+  .ff-kz-check,
+  .ff-kz-coin,
+  .ff-kz-leaves,
+  .ff-kz-wheel,
+  .ff-kz-road,
+  .ff-kz-ring {
+    animation: none !important;
+  }
+}
+
+@media print {
+  .ff-kurzantwort {
+    background: none;
+    box-shadow: none;
+    border: 1pt solid #999;
+    border-left: 3pt solid #000;
+    break-inside: avoid;
+  }
+
+  details.toc {
+    background: none;
+    border: 1pt solid #999;
+  }
+}
