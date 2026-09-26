@@ -165,15 +165,6 @@
    "savings": ""
   }
  },
- "2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife": {
-  "title": "Gasanbieter wechseln: Praxis-Tipps für günstige Tarife",
-  "ts": "2026-09-26T00:08:16+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
   "title": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
   "ts": "2026-09-25T22:34:47+00:00",
@@ -444,15 +435,6 @@
    "savings": ""
   }
  },
- "2026-09-11-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-11T08:21:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
   "title": "Günstig durch den Winter: Heizungs-Check im Spätsommer",
   "ts": "2026-09-11T08:21:48+00:00",
@@ -552,15 +534,6 @@
    "savings": ""
   }
  },
- "2026-09-12-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-12T08:03:16+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-13-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
   "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
   "ts": "2026-09-13T08:29:10+00:00",
@@ -633,15 +606,6 @@
    "savings": ""
   }
  },
- "2026-09-15-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
-  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
-  "ts": "2026-09-15T17:22:58+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-16-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
   "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
   "ts": "2026-09-16T08:48:07+00:00",
@@ -669,15 +633,6 @@
    "savings": ""
   }
  },
- "2026-09-16-gasrechnung-senken-deine-strategie-fuer-den-winter-2026": {
-  "title": "Gasrechnung senken: Deine Strategie für den Winter 2026",
-  "ts": "2026-09-16T08:59:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-17-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
   "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
   "ts": "2026-09-17T08:51:38+00:00",
@@ -699,15 +654,6 @@
  "2026-09-17-gasrechnung-senken-deine-strategie-fuer-den-winter-2026": {
   "title": "Gasrechnung senken: Deine Strategie für den Winter 2026",
   "ts": "2026-09-17T08:51:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-17-gasrechnung-senken-clevere-herbst-vorbereitung-im-check": {
-  "title": "Gasrechnung senken: Clevere Herbst Vorbereitung im Check",
-  "ts": "2026-09-17T09:05:44+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -774,42 +720,6 @@
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-20-gasrechnung-senken-deine-strategie-fuer-den-winter-2026": {
-  "title": "Gasrechnung senken: Deine Strategie für den Winter 2026",
-  "ts": "2026-09-20T08:52:35+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-20-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
-  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
-  "ts": "2026-09-20T08:52:38+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check": {
-  "title": "Gasrechnung senken: Clevere Herbst Vorbereitung im Check",
-  "ts": "2026-09-20T08:52:42+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-20-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-20T08:52:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
@@ -885,15 +795,6 @@
    "savings": ""
   }
  },
- "2026-09-22-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-22T08:45:21+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-22-50-30-20-im-test-warum-dein-budget-2026-ein-update-braucht": {
   "title": "50-30-20 im Test: Warum dein Budget 2026 ein Update braucht",
   "ts": "2026-09-22T08:48:12+00:00",
@@ -903,27 +804,9 @@
    "savings": ""
   }
  },
- "2026-09-22-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-22T09:57:22+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "title": "7 Gewohnheiten für finanzielle Freiheit",
   "ts": "2026-09-22T09:23:24+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-22-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
-  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-22T10:21:01+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -993,24 +876,6 @@
    "savings": ""
   }
  },
- "2026-09-24-stromfresser-finden-so-stoppst-du-teure": {
-  "title": "Stromfresser finden: So stoppst du teure Energiediebe",
-  "ts": "2026-09-26T09:26:36+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": "oft 100 € bis 400 € pro Jahr"
-  }
- },
- "2026-09-24-stromfresser-finden-so-stoppst-du-die-energie-lecks": {
-  "title": "Stromfresser finden: So stoppst du die Energie-Lecks",
-  "ts": "2026-09-24T08:55:50+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-25-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
   "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
   "ts": "2026-09-25T09:05:56+00:00",
@@ -1038,15 +903,6 @@
    "savings": ""
   }
  },
- "2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe": {
-  "title": "Stromfresser finden: So stoppst du teure Energiediebe 2026",
-  "ts": "2026-09-25T22:35:20+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": "oft 120 € bis 450 € pro Jahr"
-  }
- },
  "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Internet & DSL-Update: Was sich jetzt für dich ändert",
   "ts": "2026-09-25T09:16:29+00:00",
@@ -1062,33 +918,6 @@
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-26-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
-  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-26T08:47:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-26-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-26T08:49:14+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-26-stromfresser-finden-so-stoppst-du-die-energie-lecks": {
-  "title": "Stromfresser finden: So stoppst du die Energie-Lecks",
-  "ts": "2026-09-26T08:47:49+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },

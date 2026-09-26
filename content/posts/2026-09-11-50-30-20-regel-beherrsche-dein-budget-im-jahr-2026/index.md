@@ -150,7 +150,7 @@ Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50-30-20
 Passend dazu helfen dir auch diese Ratgeber:
 
 - [Internet & DSL wechseln: Praxis-Tipps](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
-- [Gas-Anbieter wechseln: Praxis-Tipps](../../posts/2026-08-16-gas-anbieter-wechseln-praxis-tipps-fuer-guenstige-tarife/)
+- Gas-Anbieter wechseln: Praxis-Tipps
 - [Frugalismus-Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)
 
 ## So setzt du die Regel praktisch um

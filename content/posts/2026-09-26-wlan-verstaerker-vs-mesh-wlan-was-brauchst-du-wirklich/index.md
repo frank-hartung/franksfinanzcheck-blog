@@ -156,7 +156,7 @@ Es gibt noch **Powerline-Adapter** (Netzwerk über die Stromleitung). Die könne
 | Mesh-System (2er-Set) | 150–250 € | ca. 8–15 € Strom im Jahr |
 | Mesh-System (3er-Set, Wi-Fi 6/7) | 250–400 € | ca. 12–20 € Strom im Jahr |
 
-Die laufenden Kosten sind klein, aber sie existieren – drei zusätzliche Steckdosen-Dauerläufer summieren sich über Jahre. Wer ehrlich rechnet, zieht diese Beträge bei der Entscheidung mit ein. Mehr dazu, wie du solche versteckten Verbraucher aufspürst, steht hier: [Stromfresser finden: So stoppen Sie teure Energiediebe](../../posts/2026-09-25-stromfresser-finden-so-stoppst-du-teure-energiediebe/).
+Die laufenden Kosten sind klein, aber sie existieren – drei zusätzliche Steckdosen-Dauerläufer summieren sich über Jahre. Wer ehrlich rechnet, zieht diese Beträge bei der Entscheidung mit ein. Mehr dazu, wie du solche versteckten Verbraucher aufspürst, steht hier: Stromfresser finden: So stoppen Sie teure Energiediebe.
 
 ## So holst du das Maximum aus der neuen Technik heraus
 
