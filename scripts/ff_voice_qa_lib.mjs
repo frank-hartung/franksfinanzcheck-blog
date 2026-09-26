@@ -323,8 +323,11 @@ export function skeleton({ title, description, kurzantwort, lang, readingTime, w
   const korrekturBlock = korrektur
     ? `<div class="ff-korrektur" role="note">${korrektur}</div>`
     : '';
+  // Häkchen-Badge statt Glühbirne (Befund 26.09.2026, siehe layouts/single.html):
+  // die Fixture spiegelt die echte Markup-Form, damit dieser Test-Harness nicht
+  // an einer veralteten Vorlage vorbeiläuft.
   const kurzBlock = kurzantwort
-    ? `<div class="ff-kurzantwort"><div class="ff-kurzantwort__head"><span class="ff-kurzantwort__icon">💡</span><span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span></div><p class="ff-kurzantwort__text">${kurzantwort}</p></div>`
+    ? `<div class="ff-kurzantwort"><div class="ff-kurzantwort__head"><span class="ff-kurzantwort__icon-wrap" aria-hidden="true"><svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" aria-hidden="true"><circle class="ff-kurzantwort__icon-ring" cx="12" cy="12" r="9.4"></circle><path class="ff-kurzantwort__icon-check" d="M7.4 12.4l3 3 6.2-6.6"></path></svg></span><span class="ff-kurzantwort__eyebrow">Kurz &amp; knapp – die Antwort</span></div><p class="ff-kurzantwort__text">${kurzantwort}</p></div>`
     : '';
 
   return `<!doctype html>

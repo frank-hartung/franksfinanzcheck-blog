@@ -351,10 +351,16 @@
     var content = doc.querySelector('.post-content');
     if (!content || doc.querySelector('.ff-mini-toc')) return;
 
-    var headings = qsa('h2[id]', content).filter(function (h) {
+    // Vollständige Gliederung (Befund 26.09.2026, „vollständig anzeigen“):
+    // H2 sind die Kapitel, H3 ihre Unterpunkte. Vorher fehlten alle H3
+    // komplett – „Im Artikel“ zeigte nur die grobe, nie die ganze Struktur
+    // eines Ratgebers. Die H2-Zahl entscheidet weiterhin, ob die Navigation
+    // überhaupt erscheint (kurze Artikel brauchen sie nicht).
+    var headings = qsa('h2[id], h3[id]', content).filter(function (h) {
       return headingText(h).length > 0;
     });
-    if (headings.length < 3) return;
+    var chapterCount = headings.filter(function (h) { return h.tagName === 'H2'; }).length;
+    if (chapterCount < 3) return;
 
     var nav = doc.createElement('nav');
     // Start im Ruhzustand (ff-mini-toc--idle): Die Navigation blendet sich
@@ -397,7 +403,17 @@
     list.className = 'ff-mini-toc__list';
     nav.appendChild(list);
 
+    // Beweglicher Lesemarker (Befund 26.09.2026, „nicht fest stehen, sondern
+    // beweglich sein“): statt nur die Textfarbe der aktiven Zeile zu tauschen,
+    // gleitet dieser schmale Balken tatsächlich zur aktiven Zeile - ein
+    // sichtbar bewegtes Element statt einer starr stehenden Liste.
+    var cursor = doc.createElement('span');
+    cursor.className = 'ff-mini-toc__cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    list.appendChild(cursor);
+
     var links = headings.map(function (heading) {
+      var isSub = heading.tagName === 'H3';
       var a = doc.createElement('a');
       a.href = '#' + heading.id;
       // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
@@ -412,7 +428,7 @@
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
       var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
       if (m) {
-        a.className = 'ff-mini-toc--num';
+        a.classList.add('ff-mini-toc--num');
         var num = doc.createElement('span');
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
@@ -425,16 +441,21 @@
       } else {
         a.textContent = miniTocLabel(label);
       }
+      // H3-Unterpunkte erscheinen eingerückt unter ihrem H2-Kapitel - so
+      // bleibt die VOLLSTÄNDIGE Gliederung sichtbar, ohne die Kapitelebene
+      // im Fließtext-Rauschen zu verlieren.
+      a.classList.add(isSub ? 'ff-mini-toc--sub' : 'ff-mini-toc--top');
       list.appendChild(a);
       return a;
     });
 
     doc.body.appendChild(nav);
-    setupMiniTocSpy(nav, list, headings, links, posEl, content);
+    setupMiniTocSpy(nav, list, headings, links, posEl, content, cursor);
   }
 
-  /** Lesemarke, Zähler, Fortschritt und Selbstnachführung der Liste. */
-  function setupMiniTocSpy(nav, list, headings, links, posEl, content) {
+  /** Lesemarke, Zähler, Fortschritt, gleitender Cursor und
+      Selbstnachführung der Liste. */
+  function setupMiniTocSpy(nav, list, headings, links, posEl, content, cursor) {
     var offsets = [];
     var activeIndex = -1;
     var ticking = false;
@@ -530,6 +551,17 @@
       list.scrollTop = target;
     }
 
+    /** Bewegt den Lesemarker zur aktiven Zeile (`--ff-toc-cursor-y/-h`
+        werden per CSS-transition animiert, siehe z-premium-blog.css). Das
+        ist die sichtbare Antwort auf „nicht fest stehen, sondern beweglich
+        sein“: die Auszeichnung der Position gleitet statt zu springen. */
+    function moveCursor(link) {
+      if (!cursor || !link) return;
+      nav.style.setProperty('--ff-toc-cursor-y', link.offsetTop + 'px');
+      nav.style.setProperty('--ff-toc-cursor-h', link.offsetHeight + 'px');
+      cursor.classList.add('ff-mini-toc__cursor--visible');
+    }
+
     function update() {
       if (!offsets.length) return;
       var pageY = win.pageYOffset || root.scrollTop || 0;
@@ -550,6 +582,7 @@
       }
       posEl.textContent = String(index + 1);
       nav.style.setProperty('--ff-toc-progress', ((index + 1) / links.length).toFixed(4));
+      moveCursor(links[index]);
       // Selbstnachführung nur im sichtbaren Zustand – im Ruhzustand würde
       // smooth-scroll im verborgenen Listen-Container nur Rechenzeit kosten.
       if (!idle) keepVisible(links[index]);

@@ -275,25 +275,34 @@ t.group('5) ff-premium.js Mini-TOC zeigt keine „§“-Labels');
     t.ok('Mini-TOC-Links vorhanden', links.length >= 3, 'Links: ' + links.length);
     t.ok('Kein Mini-TOC-Label enthält „§“ oder „#“',
       links.every((a) => !/[§#]/.test(a.getAttribute('aria-label') || a.textContent)));
-    // Mini-TOC listet bewusst nur H2-Abschnitte – aber seit 26.09.2026 ALLE
-    // (vorher hart auf 9 gedeckelt: lange Ratgeber verloren Fazit + FAQ).
-    const expected = [...doc.querySelectorAll('.post-content h2[id]')]
-      .map((h) => {
-        const clone = h.cloneNode(true);
-        clone.querySelectorAll('button, .anchor, [data-ff-skip-read], [aria-hidden="true"], [hidden]')
-          .forEach((n) => n.remove());
-        return String(clone.textContent || '')
-          .replace(/[\u00a0]+/g, ' ')
-          .replace(/\s+/g, ' ')
-          .replace(/[\s#§]+$/g, '')
-          .trim();
-      })
-      .filter((label) => label.length > 2);
-    const actual = links.map((a) => (a.getAttribute('aria-label') || a.textContent)
-      .replace(/\s+/g, ' ').trim());
-    t.ok('Mini-TOC ≡ sichtbarem Überschriftentext (Label-Vertrag)',
-      JSON.stringify(actual) === JSON.stringify(expected),
-      `erwartet ${JSON.stringify(expected)}, erhalten ${JSON.stringify(actual)}`);
+    // Mini-TOC zeigt seit 26.09.2026 die VOLLSTÄNDIGE Gliederung: alle
+    // H2-Kapitel (vorher hart auf 9 gedeckelt: lange Ratgeber verloren
+    // Fazit + FAQ) UND alle H3-Unterpunkte (vorher komplett unsichtbar).
+    // H2 und H3 werden getrennt geprüft, weil sie im DOM unterschiedliche
+    // Rollen tragen (.ff-mini-toc--top vs. .ff-mini-toc--sub).
+    const cleanHeadingText = (h) => {
+      const clone = h.cloneNode(true);
+      clone.querySelectorAll('button, .anchor, [data-ff-skip-read], [aria-hidden="true"], [hidden]')
+        .forEach((n) => n.remove());
+      return String(clone.textContent || '')
+        .replace(/[\u00a0]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/[\s#§]+$/g, '')
+        .trim();
+    };
+    const labelOf = (a) => (a.getAttribute('aria-label') || a.textContent).replace(/\s+/g, ' ').trim();
+    const expectedTop = [...doc.querySelectorAll('.post-content h2[id]')]
+      .map(cleanHeadingText).filter((label) => label.length > 2);
+    const expectedSub = [...doc.querySelectorAll('.post-content h3[id]')]
+      .map(cleanHeadingText).filter((label) => label.length > 2);
+    const actualTop = links.filter((a) => !a.classList.contains('ff-mini-toc--sub')).map(labelOf);
+    const actualSub = links.filter((a) => a.classList.contains('ff-mini-toc--sub')).map(labelOf);
+    t.ok('Mini-TOC ≡ sichtbarem Überschriftentext für alle H2-Kapitel (Label-Vertrag)',
+      JSON.stringify(actualTop) === JSON.stringify(expectedTop),
+      `erwartet ${JSON.stringify(expectedTop)}, erhalten ${JSON.stringify(actualTop)}`);
+    t.ok('Mini-TOC ≡ sichtbarem Überschriftentext für alle H3-Unterpunkte (vollständig, Befund 26.09.2026)',
+      JSON.stringify(actualSub) === JSON.stringify(expectedSub),
+      `erwartet ${JSON.stringify(expectedSub)}, erhalten ${JSON.stringify(actualSub)}`);
   }
 
   // Regressionsfall 26.09.2026: Der Link wurde durch ein Zwei-Zeilen-Clamp

@@ -60,11 +60,17 @@
   {{- if and (eq .Section "posts") $readerShort }}
   <div class="ff-kurzantwort" role="note" aria-labelledby="ff-kurzantwort-label-{{ .File.UniqueID }}">
     <div class="ff-kurzantwort__head">
-      <svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-        <path d="M9 18h6"></path>
-        <path d="M10 22h4"></path>
-        <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
-      </svg>
+      {{- /* Häkchen-Badge statt Glühbirne (Befund 26.09.2026): die Box zeigt
+             eine GEPRÜFTE Kurzantwort, keine "Idee" - das passt zum
+             Markennamen FranksFinanzCHECK. Die Bewegung liegt in den zwei
+             CSS-Sonarringen (z-premium-blog.css), das Häkchen selbst bleibt
+             immer scharf lesbar. */ -}}
+      <span class="ff-kurzantwort__icon-wrap" aria-hidden="true">
+        <svg class="ff-kurzantwort__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle class="ff-kurzantwort__icon-ring" cx="12" cy="12" r="9.4"></circle>
+          <path class="ff-kurzantwort__icon-check" d="M7.4 12.4l3 3 6.2-6.6" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
       <span class="ff-kurzantwort__eyebrow" id="ff-kurzantwort-label-{{ .File.UniqueID }}">Kurz &amp; knapp – die Antwort</span>
     </div>
     <p class="ff-kurzantwort__text">{{ $readerShort | partial "nbsp_sicherung.html" }}</p>

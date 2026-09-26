@@ -414,6 +414,142 @@ h3:hover .ff-heading-copy,
 }
 
 /* ============================================================
+   KURZ & KNAPP – DIE ANTWORT (Kurzantwort-Box, .ff-kurzantwort)
+   ------------------------------------------------------------
+   Befund 26.09.2026: Diese Box (Featured-Snippet-Kandidat direkt
+   unter der H1, layouts/single.html + layouts/_default/single.html)
+   hatte KEINE einzige CSS-Regel - sie fiel als unformatiertes
+   <div>/<svg>/<p> auf die Browser-Grundschrift zurück ("die Antwort
+   sollte optimaler dargestellt werden"). Das Icon war zudem eine
+   klassische Glühbirne (Symbol für "Idee"), obwohl die Box gar keine
+   Idee, sondern eine GEPRÜFTE Kurzantwort zeigt - passend wäre ein
+   Symbol, das mit "Check" arbeitet (Markenname FranksFinanzCHECK).
+
+   Reparatur: eigenständige Karte im Marken-Grün, mit einem
+   Häkchen-Badge statt der Glühbirne. Das Badge trägt eine ruhige,
+   fortlaufende "Sonar"-Animation (zwei auslaufende Ringe) statt
+   eines Icon-Tauschs ohne Bewegung - das eigentliche Häkchen bleibt
+   jederzeit scharf und lesbar (kein Geflacker um die Kernaussage).
+   ============================================================ */
+.ff-kurzantwort {
+  --ff-ka-surface: color-mix(in srgb, var(--ff-green) 6%, var(--entry));
+  --ff-ka-line: color-mix(in srgb, var(--ff-green) 24%, var(--border));
+  display: block;
+  margin: 18px 0 22px;
+  padding: 16px 20px 18px;
+  border: 1px solid var(--ff-ka-line);
+  border-left: 4px solid var(--ff-green);
+  border-radius: var(--ff-radius-md);
+  background: var(--ff-ka-surface);
+  box-shadow: 0 10px 28px rgba(15, 52, 43, .07);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort {
+  --ff-ka-surface: color-mix(in srgb, var(--ff-green) 16%, var(--entry));
+  --ff-ka-line: color-mix(in srgb, var(--ff-green) 38%, var(--border));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .28);
+}
+
+.ff-kurzantwort__head {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .5rem;
+}
+
+/* Icon-Bühne: das Häkchen bleibt fix, zwei Ringe laufen langsam nach außen
+   aus (Sonar-Effekt) - "themenbezogene Animation" statt Glühbirne. */
+.ff-kurzantwort__icon-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ff-kurzantwort__icon-wrap::before,
+.ff-kurzantwort__icon-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--ff-green);
+  opacity: 0;
+  animation: ff-kurzantwort-sonar 2.8s cubic-bezier(.2, .7, .2, 1) infinite;
+}
+
+.ff-kurzantwort__icon-wrap::after {
+  animation-delay: 1.4s;
+}
+
+@keyframes ff-kurzantwort-sonar {
+  0% { transform: scale(.7); opacity: .55; }
+  70% { opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.ff-kurzantwort__icon {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  color: var(--ff-green);
+  flex: 0 0 auto;
+}
+
+.ff-kurzantwort__icon-ring {
+  fill: color-mix(in srgb, var(--ff-green) 12%, transparent);
+  stroke: var(--ff-green);
+  stroke-width: 1.4;
+}
+
+.ff-kurzantwort__icon-check {
+  stroke: var(--ff-green);
+}
+
+.ff-kurzantwort__eyebrow {
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ff-green);
+}
+
+.ff-kurzantwort__text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+@media (max-width: 560px) {
+  .ff-kurzantwort {
+    padding: 14px 16px 16px;
+  }
+  .ff-kurzantwort__text {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-kurzantwort__icon-wrap::before,
+  .ff-kurzantwort__icon-wrap::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@media print {
+  .ff-kurzantwort__icon-wrap::before,
+  .ff-kurzantwort__icon-wrap::after {
+    display: none;
+  }
+}
+
+/* ============================================================
    SCHWEBENDE ARTIKEL-NAVIGATION „Im Artikel“ (Desktop)
    ------------------------------------------------------------
    Reparatur 26.09.2026: Das Kästchen war auf 9 Einträge gedeckelt
@@ -537,8 +673,11 @@ h3:hover .ff-heading-copy,
   transition: transform .28s ease;
 }
 
-/* Scrollbereich: nur die Einträge scrollen, nicht die Kopfzeile. */
+/* Scrollbereich: nur die Einträge scrollen, nicht die Kopfzeile.
+   position:relative ist der Anker für den gleitenden Lesemarker
+   (.ff-mini-toc__cursor) - seine Koordinaten sind relativ zu dieser Liste. */
 .ff-mini-toc__list {
+  position: relative;
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
@@ -546,6 +685,37 @@ h3:hover .ff-heading-copy,
   padding: .3rem 6px .2rem 0;
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--border) 90%, transparent) transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Beweglicher Lesemarker (Befund 26.09.2026: „sollte nicht fest stehen,
+   sondern beweglich sein“). Vorher änderte die aktive Zeile nur ihre Farbe -
+   ein statisches Umschalten ohne jede Bewegung. Dieser schmale Balken
+   gleitet stattdessen sichtbar von Zeile zu Zeile: die Position und Höhe
+   werden von setupMiniTocSpy() in --ff-toc-cursor-y/-h geschrieben, die
+   Bewegung selbst übernimmt ausschließlich die CSS-transition (kein
+   Layout-Thrashing, keine Animation über JS-Ticks).
+   -------------------------------------------------------------------------- */
+.ff-mini-toc__cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  min-height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--ff-accent), var(--ff-accent-2));
+  opacity: 0;
+  transform: translateY(var(--ff-toc-cursor-y, 0px));
+  height: var(--ff-toc-cursor-h, 0px);
+  transition:
+    transform .32s cubic-bezier(.2, .7, .2, 1),
+    height .32s cubic-bezier(.2, .7, .2, 1),
+    opacity .2s ease;
+  pointer-events: none;
+}
+
+.ff-mini-toc__cursor--visible {
+  opacity: 1;
 }
 
 .ff-mini-toc__list::-webkit-scrollbar {
@@ -648,6 +818,33 @@ h3:hover .ff-heading-copy,
   text-wrap: pretty;
 }
 
+/* --------------------------------------------------------------------------
+   Vollständige Gliederung (Befund 26.09.2026: „vollständig anzeigen“).
+   H3-Unterpunkte erscheinen eingerückt und etwas leiser unter ihrem
+   H2-Kapitel - die gesamte Struktur des Artikels bleibt sichtbar, das Auge
+   unterscheidet Kapitel und Unterpunkt aber auf den ersten Blick.
+   -------------------------------------------------------------------------- */
+.ff-mini-toc a.ff-mini-toc--top {
+  font-weight: 600;
+}
+
+.ff-mini-toc a.ff-mini-toc--sub {
+  margin-left: 14px;
+  padding-top: .22rem;
+  padding-bottom: .22rem;
+  padding-left: .55rem;
+  border-left-width: 1px;
+  font-size: .72rem;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--secondary) 86%, transparent);
+}
+
+.ff-mini-toc a.ff-mini-toc--sub:hover,
+.ff-mini-toc a.ff-mini-toc--sub:focus-visible,
+.ff-mini-toc a.ff-mini-toc--sub[aria-current="true"] {
+  color: var(--primary);
+}
+
 /* Unter 1280 px reicht der Seitenrand nicht mehr für eine Spalte neben dem
    Text – dort führt das Inhaltsverzeichnis oben im Artikel (details.toc). */
 @media (max-width: 1279px) {
@@ -663,6 +860,9 @@ h3:hover .ff-heading-copy,
   /* Ruhzustand/Einblenden ohne Bewegung: sofort da oder sofort weg. */
   .ff-mini-toc,
   .ff-mini-toc--idle { transition: none; }
+  /* Der gleitende Lesemarker springt statt zu gleiten - Bewegung ist hier
+     ausschließlich Dekoration, keine Funktion. */
+  .ff-mini-toc__cursor { transition: opacity .2s ease; }
 }
 
 /* Reveal state: added by JS only, so no broken no-JS rendering */

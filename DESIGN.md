@@ -98,6 +98,8 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 | Chips | `.ff-pc-chip` | Pill, Smaragd-Soft hell / 12% Smaragd-Bright dunkel |
 | Kopier-Button | `.ff-heading-copy` | Optik 28px, Trefferfläche 44px via `::after inset:-8px` (hit-test-verifiziert) |
 | Vorlese-Toolbar | `.ff-voice-slot` | Slot reserviert Höhe (kein CLS), WCAG 2.2 AA+ Zustände |
+| Kurzantwort-Box | `.ff-kurzantwort`, `.ff-kurzantwort__icon-wrap` | Featured-Snippet-Kandidat unter der H1; Häkchen-Badge mit Sonar-Puls statt Glühbirne (26.09.2026), reduced-motion aus |
+| Artikel-Navigation | `.ff-mini-toc`, `.ff-mini-toc--top`, `.ff-mini-toc--sub`, `.ff-mini-toc__cursor` | Schwebend ab 1280 px; zeigt H2 UND H3 vollständig, gleitender Lesemarker statt starrer Farbwechsel (26.09.2026) |
 | Consent-Banner | `#ff-consent-banner`, `.ff-consent-banner__*` | fixe Leiste, Dark-Mode-fähig, Links inline-block ≥ 24px |
 | Skip-Link | `.skip-link` | 3px-Fokusring Signalgelb, z 1000001 |
 
