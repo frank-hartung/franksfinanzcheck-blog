@@ -21,6 +21,20 @@ cover:
 savings: "bis zu 2.000 € sparen"
 pin_title: "Ratenkredit 2026: Zinsen vergleichen & bis zu 2.000 € sparen"
 pin_description: "*Werbung | Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst. Mehr Spartipps auf FranksFinanzcheck! #ratenkredit #ratenkreditvergleich #ratenkreditzinsen"
+quellen:
+  - titel: "Gesetzliche Einlagensicherung in Deutschland"
+    url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
+    herausgeber: "Deutsche Bundesbank"
+    datum: "2026-04-12"
+  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-02-14"
+  - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
+    url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-11-08"
+faktencheck: "2026-09-27"
 ---
 
 

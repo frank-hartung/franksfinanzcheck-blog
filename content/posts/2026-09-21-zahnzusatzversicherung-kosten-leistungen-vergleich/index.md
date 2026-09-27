@@ -19,6 +19,20 @@ cover:
 savings: "bis zu 100 % Erstattung"
 pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
 pin_description: "*Werbung | Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig… Mehr Spartipps auf FranksFinanzcheck! #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Sobald Zahnersatz plötzlich Thema wird, steigen die Kosten oft schnell. Nicht ein bisschen teuer, sondern richtig teuer. Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen.

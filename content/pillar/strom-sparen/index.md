@@ -30,7 +30,8 @@ quellen:
   - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-09-27
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt, zahlt hunderte Euro zu viel. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten.

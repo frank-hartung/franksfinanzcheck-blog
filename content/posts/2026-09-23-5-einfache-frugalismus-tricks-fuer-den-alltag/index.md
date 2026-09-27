@@ -20,6 +20,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "5 einfache Frugalismus-Tricks für den Alltag"
 pin_description: "*Werbung | Frugalismus im Alltag ohne Verzichtsdrama: Diese 5 einfachen Tricks helfen dir, Ausgaben klarer zu steuern und Monat für Monat spürbar Geld zu sparen. Mehr Spartipps auf FranksFinanzcheck! #frugalismustricks #frugalismus #geldsparen"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Frugalismus klingt für viele nach Verzicht, Selbstkasteiung und dauerhaftem „Nein“. Genau deshalb schrecken viele davor zurück.

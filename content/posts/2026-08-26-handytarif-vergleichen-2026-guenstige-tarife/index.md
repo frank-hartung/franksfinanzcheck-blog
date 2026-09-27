@@ -22,6 +22,20 @@ keywords: ["Handytarif-Vergleichen", "Handytarif-Vergleich", "Günstiger Handyta
 pin_title: "Handytarif 2026 vergleichen: Allnet-Flats ab 4,99 Euro"
 pin_description: "*Werbung | Handytarife vergleichen 2026: Allnet-Flats ab 4,99 Euro, 5G unter 15 Euro und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste entscheidest du in Minuten und sparst bis zu 360 Euro im Jahr. Jetzt die Vergleichsanleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 

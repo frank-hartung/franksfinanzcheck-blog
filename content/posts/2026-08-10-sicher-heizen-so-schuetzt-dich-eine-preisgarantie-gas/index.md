@@ -22,6 +22,20 @@ keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
 pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 Du willst sicher heizen? Wenn die erste kalte Woche kommt, denken viele Haushalte plötzlich wieder an ihren Gastarif. Dann ist der Abschlag schon hoch, die Sorge vor der Jahresabrechnung groß und die Lust auf komplizierte Vertragsdetails gering. Genau in diesem Moment wirkt eine **Gaspreisgarantie** attraktiv.

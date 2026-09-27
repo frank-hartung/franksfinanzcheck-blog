@@ -20,6 +20,20 @@ keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tie
 pin_title: "Tierkrankenversicherung: Hund & Katze richtig einschätzen"
 pin_description: "*Werbung | Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif… Mehr Spartipps auf FranksFinanzcheck! #tierarztkostenabsichern #haustierversicherung #opversicherungtier"
 pinwand: "Versicherung | Haustier & Finanzen"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Ein Haustier kostet nicht nur Futter, Streu oder Zubehör. Teuer wird es oft dann, wenn gesundheitlich etwas passiert. Und das oft plötzlich. Eine OP, Diagnostik, Nachsorge oder längere Behandlung kann aus einer kleinen Rechnung schnell einen Budgetschock machen.

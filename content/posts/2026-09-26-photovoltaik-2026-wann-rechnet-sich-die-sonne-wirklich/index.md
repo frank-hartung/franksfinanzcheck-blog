@@ -23,6 +23,20 @@ cover:
   alt: "Photovoltaik 2026: Wann rechnet sich die Sonne wirklich?"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ja, Photovoltaik rechnet sich 2026 noch – bei durchschnittlichen Installationskosten von 1 300 €/kW und einem Eigenverbrauch von 30 % liegt die Amortisationszeit meist bei 7–9 Jahren. Steigende Strompreise von etwa 3 % pro Jahr erhöhen die Wirtschaftlichkeit zusätzlich."
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 3.000 € Stromkosten im Jahr – muss das sein? Viele Haushalte erschrecken beim Blick auf die Abrechnung ihres Energieversorgers.

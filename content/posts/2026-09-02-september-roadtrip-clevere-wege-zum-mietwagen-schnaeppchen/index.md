@@ -26,6 +26,16 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Buche deinen Mietwagen 3‑4 Wochen vor Reisebeginn und nutze Vergleichsportale, um die günstigsten Angebote zu finden. Im September senken viele Anbieter ihre Preise um 20 %–30 %, weil die Nachfrage niedriger ist. Wähle Abholung und Rückgabe außerhalb von Flughäfen, um zusätzliche Gebühren zu vermeiden."
 social_posted: true
+quellen:
+  - titel: "Mietwagen im Urlaub: So vermeiden Sie Ärger und Kostenfallen"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/mietwagen-im-urlaub-so-vermeiden-sie-aerger-und-kostenfallen-10874"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-07-22"
+  - titel: "Mietwagen im Urlaub: Tipps für günstige Buchung und Versicherung"
+    url: "https://www.test.de/Mietwagen-im-Urlaub-Tipps-fuer-guenstige-Buchung-und-Versicherung-5764024-0/"
+    herausgeber: "Stiftung Warentest"
+    datum: "2026-05-18"
+faktencheck: "2026-09-27"
 ---
 
 

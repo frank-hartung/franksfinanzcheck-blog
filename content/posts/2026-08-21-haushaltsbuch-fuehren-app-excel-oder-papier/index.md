@@ -22,6 +22,20 @@ keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vo
 pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
 pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
 pinwand: "Budget & Haushaltskasse: clever planen"
+quellen:
+  - titel: "Gesetzliche Einlagensicherung in Deutschland"
+    url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
+    herausgeber: "Deutsche Bundesbank"
+    datum: "2026-04-12"
+  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-02-14"
+  - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
+    url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-11-08"
+faktencheck: "2026-09-27"
 ---
 
 

@@ -20,6 +20,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Die 50-30-20-Regel einfach erklärt"
 pin_description: "*Werbung | Die 50-30-20-Regel erklärt in klaren Schritten: So teilst du dein Einkommen in Fixkosten, Wünsche und Sparen auf und setzt die Methode alltagstauglich um. Mehr Spartipps auf FranksFinanzcheck! #503020regel #budgetregel #geldeinteilen"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Die meisten Menschen scheitern beim Sparen nicht daran, dass sie nie davon gehört hätten. Sie scheitern daran, dass ihr Geld keinen klaren Plan hat. Das Gehalt kommt rein, Miete und Lastschriften gehen raus, zwischendurch wird eingekauft, bestellt und spontan bezahlt – und am Ende bleibt oft weniger übrig als gedacht.

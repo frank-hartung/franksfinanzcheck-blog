@@ -20,6 +20,20 @@ keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementar
 pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
 pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Die Wohngebäudeversicherung gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.

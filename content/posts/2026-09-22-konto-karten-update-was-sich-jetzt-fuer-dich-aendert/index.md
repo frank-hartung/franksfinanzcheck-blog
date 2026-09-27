@@ -21,6 +21,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
 pin_description: "*Werbung | Gebühren, Gratis-Kriterien und Kartenkosten ändern sich laufend. So prüfst du dein Girokonto, vermeidest stille Mehrkosten und vergleichst klug. Mehr Spartipps auf FranksFinanzcheck! #kontokartenupdate #kartenupdate #girokontovergleichen"
+quellen:
+  - titel: "Gesetzliche Einlagensicherung in Deutschland"
+    url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
+    herausgeber: "Deutsche Bundesbank"
+    datum: "2026-04-12"
+  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-02-14"
+  - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
+    url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-11-08"
+faktencheck: "2026-09-27"
 ---
 
 **Stand: 22.09.2026.** Dieses **Konto & Karten-Update** zeigt, warum ein kurzer Blick auf Girokonto, Debitkarte und Kreditkarte heute fast genauso wichtig ist wie ein kompletter Anbieterwechsel.

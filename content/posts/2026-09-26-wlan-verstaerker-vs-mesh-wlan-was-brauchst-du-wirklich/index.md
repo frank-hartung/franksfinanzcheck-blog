@@ -19,6 +19,20 @@ cover:
   image: "images/covers/2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg"
   alt: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 Du kennst das: Im Wohnzimmer läuft der Stream flüssig, im Schlafzimmer bricht das WLAN zusammen, und im Home-Office wird die Videokonferenz zum Zufallsspiel. Die erste Vermutung ist fast immer dieselbe: „Der Vertrag ist zu langsam.“

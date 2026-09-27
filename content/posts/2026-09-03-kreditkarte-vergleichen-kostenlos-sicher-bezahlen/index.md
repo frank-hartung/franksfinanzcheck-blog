@@ -22,6 +22,20 @@ cover:
   image: "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg"
   alt: "Kreditkarte vergleichen: Kostenlos und sicher zahlen"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - titel: "Gesetzliche Einlagensicherung in Deutschland"
+    url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
+    herausgeber: "Deutsche Bundesbank"
+    datum: "2026-04-12"
+  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-02-14"
+  - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
+    url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-11-08"
+faktencheck: "2026-09-27"
 ---
 
 Vor der Buchung zeigt die Hotel-Webseite drei Zahlungsoptionen. Kreditkarte, Lastschrift, Überweisung. Wer mit Kreditkarte bucht, bekommt oft den besten Preis und zahlt nichts im Voraus. Doch welche Karte steckt in deinem Portemonnaie?
