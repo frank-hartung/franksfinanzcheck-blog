@@ -298,10 +298,15 @@ jobs:
             # git_sync pusht mit Retries, Auto-Rebase und Auto-Heilung für
             # maschinengenerierte Artefakte (u. a. das Zertifikat selbst –
             # genau der Konflikt, der diesen Lauf am 15.09. rot machte).
-            scripts/git_sync.sh --push-only || {
+            # Scheduled/workflow_dispatch runs are checked out detached.  Do not let
+            # GITHUB_REF_NAME (or an empty ref in a re-run) select an accidental
+            # branch: reserve state belongs on main.  git_sync already retries
+            # transient failures; the explicit branch also makes this contract
+            # auditable and prevents a successful push to the wrong ref.
+            if ! BRANCH=main scripts/git_sync.sh --push-only; then
               echo "::error::Push der Reserve nach main fehlgeschlagen. Der Lauf bleibt rot, WEIL der zertifizierte Pool sonst nicht in main ankommt (nächster Lauf könnte sonst erneut 0/6 lesen). Ursache im git_sync-Log oben."
               exit 1
-            }
+            fi
           else
             echo "Keine Änderungen am Pool – nichts zu committen."
           fi
