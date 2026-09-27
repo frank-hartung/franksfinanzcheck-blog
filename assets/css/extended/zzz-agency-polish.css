@@ -280,12 +280,22 @@ input, textarea {
 
 /* Editoriale Autorenzeile: Der Herausgeber-Hinweis erhält bewusst eine
    zweite Zeile. So bleibt die Verantwortungsangabe auch in engen Hero-
-   Layouts ruhig lesbar, ohne die übrigen Trust-Signale zu verbreitern. */
+   Layouts ruhig lesbar. Der Inhalt darf in der Pill selbst umbrechen –
+   besonders wichtig für schmale Viewports und die mobile Trust-Spalte. */
 .ff-trust-pill--editorial {
   align-items: center;
   line-height: 1.25;
   min-height: 44px;
-  white-space: nowrap;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.ff-trust-pill--editorial .ff-trust-author {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .ff-trust-pill--editorial strong {
