@@ -134,11 +134,7 @@
 {{- end -}}
 
 {{- /* ---------- FAQPage-Schema (Featured Snippets & AI Overviews) ---------- */ -}}
-{{- /* Nicht nur Artikel: Die öffentliche Newsletter-Landingpage beantwortet
-       echte Nutzerfragen und ist seit 27.09.2026 indexierbarer redaktioneller
-       Content. Transaktionale Newsletter-Seiten bleiben ausgeschlossen. */ -}}
-{{- $isEditorialFaq := and .IsPage (or (eq .Section "posts") (eq .Section "pillar") (eq .RelPermalink "/newsletter/")) -}}
-{{- if $isEditorialFaq -}}
+{{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
 {{- $faq := slice -}}
 {{- $raw := .RawContent -}}
 {{- $faqSection := "" -}}
@@ -192,13 +188,9 @@
 <script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faq) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- end -}}{{- /* $isEditorialFaq */ -}}
-
 {{- /* ---------- OpenGraph article-Autor ---------- */ -}}
 {{- /* published_time, modified_time und section kommen bereits aus
-       templates/opengraph.html. article:author ist laut OGP eine Profil-URL.
-       Nur Article-Seiten – eine Newsletter-Landingpage ist kein Artikel. */ -}}
-{{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
+       templates/opengraph.html. article:author ist laut OGP eine Profil-URL. */ -}}
 <meta property="article:author" content="{{ "ueber/" | absURL }}">
 {{- end -}}
 

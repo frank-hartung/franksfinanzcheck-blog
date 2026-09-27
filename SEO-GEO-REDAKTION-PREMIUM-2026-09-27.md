@@ -61,13 +61,15 @@ Der Agent-Reach-Workflow läuft nun Montag, Mittwoch und Freitag. Die
 Content-Engine recherchiert zusätzlich jeden neuen Inhalt direkt nach seiner
 Erstellung.
 
-### 4. SEO/GEO der Newsletter-Landingpage
+### 4. SEO/GEO und Newsletter
 
-Die inhaltlich umfangreiche öffentliche Seite `/newsletter/` ist jetzt
-indexierbar und wieder Teil der Sitemap. Nur die transaktionalen Folgeseiten
-bleiben `noindex`. Ihre vorhandenen häufigen Fragen werden nun wie bei Artikeln
-als valides `FAQPage`-JSON-LD ausgegeben. `article:author` bleibt korrekt auf
-echte Artikel/Ratgeber begrenzt.
+Die Newsletter-Landingpage gehört zum redaktionellen Claude-/Agent-Reach-Scope:
+Text, Nutzerintention und Aktualität werden wie bei Ratgeberseiten gepflegt. Ihr
+bestehender Journey-Vertrag bleibt jedoch unangetastet: Anmeldung, Bestätigung,
+Präferenzen und Abmeldung bleiben `noindex` und außerhalb der Sitemap. Damit
+wird eine transaktionale E-Mail-Strecke nicht künstlich zur Such-Landingpage;
+die SEO-/GEO-Sichtbarkeit entsteht weiterhin über indexierbare Artikel und
+Ratgeber, die sauber auf die Anmeldung führen.
 
 ### 5. „Im Artikel“-Navigation
 
@@ -87,10 +89,12 @@ Nummernlayout bleiben nun gleichzeitig erhalten.
 - `python3 -m unittest scripts.tests.test_editorial_scope` – 4/4 grün
 - `node scripts/ff_toc_beweglich_test.mjs` – 18/18 grün
 - `node scripts/ff_heading_glyph_guard_test.mjs` – 48/48 grün
+- vollständige Python-Regressionssuite – 967 Tests grün, 5 erwartete lokale Skips
+- Hugo Extended 0.164.0 Produktions-Build – 205 Seiten, fehlerfrei
+- Themenwelten-Browserprüfung – 309 Prüfungen grün
 - `git diff --check` – sauber
 
 Die eigentlichen Claude-Schreibläufe benötigen weiterhin das bereits vorgesehene
-`PUTER_AUTH_TOKEN`; der Lauf verwendet keine Anthropic-API. Ein produktiver Hugo-
-Build war in dieser Sandbox zunächst nicht möglich, weil Hugo nicht vorinstalliert
-war; Template-/Workflow-Checks und die vorhandenen DOM-Wachen wurden deshalb
-separat ausgeführt.
+`PUTER_AUTH_TOKEN`; der Lauf verwendet keine Anthropic-API. Hugo Extended wurde
+über die im Repository vorgesehene PyPI-Ausweichquelle installiert und der
+Produktions-Build damit vollständig gegengeprüft.

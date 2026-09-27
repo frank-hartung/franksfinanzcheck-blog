@@ -30,6 +30,11 @@ const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/themenwelten.json'
 const HOME_MAIN_WIDTH_LIMITS = Object.freeze({
   basis: 800,
   'v-hero-conversion': 1024,
+  // Die freigegebene Premium-Variante beerbt laut Variantenregister die
+  // Conversion-Bühne vollständig. Der Browservertrag muss die aktive
+  // Produktionsvariante kennen, sonst fällt er trotz korrekter 1024-px-
+  // Geometrie bereits bei der Namensauflösung aus.
+  'v-hero-premium': 1024,
 });
 assert.ok(fs.existsSync(path.join(PUBLIC, 'posts/index.html')), 'Hugo-Build fehlt.');
 const require = createRequire(path.join(ROOT, 'tools/ff-voice-browser/package.json'));
