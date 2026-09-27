@@ -1,0 +1,40 @@
+# ============================================================
+#  AGENT-REACH-PLAN – saisonaler Startseiten-Hero
+#  ------------------------------------------------------------
+#  Dieser kleine, separate Plan ist die Recherche-Vorleistung für
+#  scripts/saisonaler_hero_refresh.py. Agent Reach liest nur öffentliche
+#  Signale; keine Aussage aus diesem Brief darf ohne Kuratierung als Fakt
+#  in den Hero gelangen. Claude sieht daraus ausschließlich bereits in
+#  data/saisons.yaml erlaubte Themenwörter.
+#
+#  Das trennt Recherche und Veröffentlichung sauber:
+#    Agent Reach → frischer, prüfbarer Signal-Brief
+#    Claude      → Stil, Klarheit, GEO-Struktur ohne Faktenneuerfindung
+#    Guard       → Schema, Markenstimme, SEO/GEO-Kontrakt, Render-Beweis
+# ============================================================
+
+version: 1
+
+rss:
+  - name: Verbraucherzentrale – Energie
+    url: "https://www.verbraucherzentrale.de/rss/energie"
+    kategorie: saisonal
+  - name: Verbraucherzentrale – Geld & Versicherungen
+    url: "https://www.verbraucherzentrale.de/rss/geld-versicherungen"
+    kategorie: saisonal
+  - name: Bundesnetzagentur – Presse
+    url: "https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/RSSFeed.xml"
+    kategorie: energie
+
+youtube: []
+github: []
+
+web:
+  - url: "https://www.verbraucherzentrale.de/wissen/energie"
+  - url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen"
+
+einstellungen:
+  rss_max_je_feed: 4
+  youtube_max: 0
+  github_max: 0
+  web_max_zeichen: 900

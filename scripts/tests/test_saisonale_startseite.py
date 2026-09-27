@@ -367,7 +367,8 @@ class TestDatenpfadUndBuild(unittest.TestCase):
             (public / "pillar" / "strom-sparen" / "index.html").write_text("x", encoding="utf-8")
             gut = (
                 "<html><body><main class=main>"
-                "<article class='first-entry home-info'><h1>Start</h1>"
+                "<article class='first-entry home-info' data-ff-seasonal-hero=herbst><h1>Herbst-Check: Strom vergleichen</h1>"
+                "<div class=entry-content>FranksFinanzcheck hilft dir im Herbst bei Strom, Gas und Versicherungen.</div>"
                 "<div class='ff-saison-badge ff-saison--herbst' data-ff-saison=herbst>Herbst-Check</div>"
                 "<p class='ff-saison-hinweis' data-ff-saison=herbst>Die Heizsaison startet.</p></article>"
                 "<div class=ff-pinterest-cta></div>"
@@ -383,6 +384,8 @@ class TestDatenpfadUndBuild(unittest.TestCase):
                 "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
             )
             saison = {"id": "herbst", "badge": "Herbst-Check",
+                      "hero_title": "Herbst-Check: Strom vergleichen",
+                      "hero_lead": "FranksFinanzcheck hilft dir im Herbst bei Strom, Gas und Versicherungen.",
                       "hinweis": "Die Heizsaison startet."}
             (public / "index.html").write_text(gut, encoding="utf-8")
             self.assertEqual(wache.validate_build(public, saison, [{"href": "/posts/a/"}],
@@ -390,7 +393,7 @@ class TestDatenpfadUndBuild(unittest.TestCase):
             for name, variante, erwartung in [
                 ("toter Link", gut.replace("/posts/a/", "/posts/fehlt/"), "ins Leere"),
                 ("falsche Saison", gut.replace("data-ff-saison=herbst", "data-ff-saison=sommer"), "B2"),
-                ("zwei H1", gut.replace("<h1>Start</h1>", "<h1>Start</h1><h1>zwei</h1>"), "B1"),
+                ("zwei H1", gut.replace("<h1>Herbst-Check: Strom vergleichen</h1>", "<h1>Herbst-Check: Strom vergleichen</h1><h1>zwei</h1>"), "B1"),
                 ("ohne Messkette", gut.replace("data-umami-event-placement=start-saison", ""), "B4"),
                 ("Karte ohne Titel", gut.replace(">Artikel A</span>", "></span>"), "B3"),
                 ("Block ohne Auswahl-Quelle", gut.replace("data-ff-saison-quelle=keywords",

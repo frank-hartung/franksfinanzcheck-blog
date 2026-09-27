@@ -411,7 +411,7 @@ class NetzwerkHaertungTests(GitSyncTestBase):
 #  Vorfall 20./21.09.2026 (Issue #329): Tag-Push-Trigger + gelöschtes Ref
 # --------------------------------------------------------------------------- #
 #  Ein kurzlebiger Probe-TAG (_arena-perm-probe) triggerte den
-#  Willkommenstext-Refresh (Tag-Pushes unterliegen keinem paths-Filter) und
+#  damalige Startseiten-Refresh (Tag-Pushes unterliegen keinem paths-Filter) und
 #  wurde Sekunden später gelöscht. Der Lauf (detached HEAD, Remote-Ref weg)
 #  starb mit Exit 128: "You must fully qualify the ref" – der ALTE Push
 #  benutzte den KURZEN Refnamen `HEAD:<name>`, den git bei detached HEAD

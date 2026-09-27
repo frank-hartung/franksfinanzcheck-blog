@@ -7,15 +7,13 @@
 #  dass dafür jedes Quartal jemand ein Template anfasst.
 #
 #  WARUM EINE EIGENE DATEI (und kein Eingriff in hugo.toml):
-#    hugo.toml ist DOPPELT gesperrt: brand_guard.py schützt
-#    homeInfoParams.Title/Content als Marke, integrity_guard.py
-#    signiert die ganze Datei (KRITISCH-Klasse → jede Abweichung
-#    ist ein HARTER Stop, den nur ein Mensch zeichnen darf). Der
-#    Willkommenstext selbst bleibt deshalb UNANGETASTET und weiter
-#    exklusiv Sache von scripts/willkommenstext_guard.py. Die
-#    Saison-Ebene dockt stattdessen als eigener Baustein an
-#    (layouts/_partials/home_season.html + home_info.html) und hat
-#    mit data/saisons.yaml ihre eigene, frei pflegbare Quelle.
+#    hugo.toml ist als KRITISCH signiert. Der frühere statische
+#    Willkommenstext wurde vollständig entfernt; H1 und GEO-Lead der
+#    Startseite leben jetzt ebenso in dieser saisonalen Quelle. So kann
+#    der Saisonwechsel automatisch erfolgen, ohne eine kritische Datei,
+#    Templates oder das freigegebene Premium-Layout umzuschreiben.
+#    Die Saison-Ebene wird von layouts/_partials/home_info.html und
+#    home_season.html gerendert; ihre Quelle bleibt data/saisons.yaml.
 #
 #  AUSWAHL DER ARTIKEL (deterministisch, zwei Stufen):
 #    1. `keywords` (klein geschrieben, Teilstring-Treffer in Titel,
@@ -50,6 +48,9 @@
 #                   abdecken (Gate prüft alle 366 Tage).
 #    zeitraum       Klartext-Zeitraum für die Anzeige (keine Datums-Magie)
 #    badge          Kurztext des Hero-Badges (max. ~46 Zeichen)
+#    hero_title     einziges H1 der Startseite: Suchintention + Saison (SEO)
+#    hero_lead      zitierfähige Antwort zuerst: beginnt mit FranksFinanzcheck,
+#                   nennt mindestens drei Kernthemen und bleibt faktenfrei (GEO)
 #    headline       H2 des Saison-Fokus-Blocks
 #    hinweis        1–2 Sätze saisonaler Kontext im Hero (Klartext-Verlagston,
 #                   du-Form, keine Angstmache, keine erfundenen Zahlen)
@@ -61,9 +62,15 @@
 #    min_artikel    so viele Artikel müssen mindestens zusammenkommen
 #    akzent/akzent_dunkel/hero_text/linie/linie_dunkel  Farbwerte (siehe oben)
 #
-#  Pflege: Werte ändern → `python3 scripts/saisonale_startseite_gate.py`
-#  (prüft Schema, Kalender-Abdeckung, Farben, Pillar-Ziele, Render-Beweis)
-#  → `hugo --destination public` → committen. Keine Template-Änderung nötig.
+#  ZUSATZ: Der bisherige statische Willkommenstext ist gelöscht. Die
+#  Startseitenbühne bezieht `hero_title` + `hero_lead` nun ebenfalls aus
+#  dieser Saison. Der Lead ist die SEO-/GEO-Antwort zuerst: Entity,
+#  Anlass, Themen und Nutzen sind ohne Seitenkontext verständlich.
+#
+#  Pflege: Werte ändern → `python3 scripts/saisonale_startseite_guard.py`
+#  (prüft Schema, Kalender-Abdeckung, Markenstimme, Farben, Pillar-Ziele,
+#  Render-Beweis) → `hugo --destination public` → committen. Keine
+#  Template-Änderung nötig.
 # ============================================================
 
 version: 1
@@ -77,6 +84,8 @@ saisons:
     bis: "11-30"
     zeitraum: "1. September bis 30. November"
     badge: "Herbst-Check: Heizkosten & Wechselfenster"
+    hero_title: "Herbst-Check: Bei Strom, Gas & Versicherung Geld sparen"
+    hero_lead: "FranksFinanzcheck hilft dir im Herbst, Strom, Gas, Internet und Versicherungen vor der Heizsaison strukturiert zu vergleichen – unabhängig, verständlich und ohne Verkaufsdruck. Du prüfst zuerst die teuerste Rechnung, erkennst relevante Tarifangaben und findest den passenden nächsten Schritt."
     headline: "Jetzt zählt die Heizsaison"
     hinweis: "Die Heizsaison startet und viele Versorger kündigen ihre Preise neu an. Wer jetzt Strom, Gas und die Kfz-Versicherung prüft, entscheidet vor der Rechnung – nicht danach."
     tipp: "Leg dir die letzte Jahresabrechnung neben den Vergleich. Dein Verbrauch ist die einzige Zahl, die ein Portal nicht kennt."
@@ -109,6 +118,8 @@ saisons:
     bis: "02-29"
     zeitraum: "1. Dezember bis Ende Februar"
     badge: "Winter: Nachzahlung prüfen, Wechselfenster nutzen"
+    hero_title: "Winter-Check: Strom, Gas & Versicherungen neu vergleichen"
+    hero_lead: "FranksFinanzcheck hilft dir im Winter, Strom, Gas, Konto und Versicherungen rund um Jahresabrechnung und Jahreswechsel nachvollziehbar zu prüfen – unabhängig, klar und ohne Verkaufsdruck. Du ordnest Vertragsdaten, Fristen und Kosten so, dass du den nächsten Vergleich in Ruhe vorbereiten kannst."
     headline: "Zwischen Jahresabrechnung und Jahreswechsel"
     hinweis: "Im Winter kommen die Nachzahlungen der Versorger und die Beitragsanpassungen der Versicherer. Rund um den Jahreswechsel ist das Wechselfenster am größten – ein Vergleich lohnt sich jetzt mehr als im Sommer."
     tipp: "Notier dir den Stichtag deiner Verträge. Wer ihn kennt, kündigt nicht aus Versehen zu spät."
@@ -141,6 +152,8 @@ saisons:
     bis: "05-31"
     zeitraum: "1. März bis 31. Mai"
     badge: "Frühlings-Check für Verträge & Budget"
+    hero_title: "Frühlings-Check: Fixkosten bei Konto, Internet & Versicherung senken"
+    hero_lead: "FranksFinanzcheck hilft dir im Frühling, Konto, Internet, Strom und Versicherungen in einem klaren Fixkosten-Check zusammenzubringen – unabhängig, verständlich und ohne Verkaufsdruck. Du setzt bei der höchsten Abbuchung an, vergleichst die entscheidenden Konditionen und machst dein Budget wieder übersichtlich."
     headline: "Frühlingsputz für deine Fixkosten"
     hinweis: "Ein Nachmittag reicht: Strom, Internet, Konto und Versicherungen einmal nebeneinanderlegen deckt erfahrungsgemäß mehr Sparpotenzial auf als spontane Einzelwechsel übers Jahr verteilt."
     tipp: "Fang mit der höchsten monatlichen Abbuchung an – nicht mit der, die am meisten nervt."
@@ -173,6 +186,8 @@ saisons:
     bis: "08-31"
     zeitraum: "1. Juni bis 31. August"
     badge: "Sommer: Reisekasse, Handy & Vertrag"
+    hero_title: "Sommer-Check: Reisekasse, Internet & Mietwagen günstiger planen"
+    hero_lead: "FranksFinanzcheck hilft dir im Sommer, Mietwagen, Internet, Handytarif, Konto und Versicherungen für Reise und Alltag nachvollziehbar zu vergleichen – unabhängig, verständlich und ohne Verkaufsdruck. Du klärst Kosten, Konditionen und Wechseloptionen vor der Buchung und behältst deine Reisekasse im Blick."
     headline: "Reisezeit ist Vertragszeit"
     hinweis: "Im Sommer buchen die meisten Mietwagen und Handytarife – und wechseln seltener als nötig. Wer Reisekasse, Tarif und Wechselbonus zusammen denkt, fährt am Ende günstiger."
     tipp: "Prüf die Kaution und die Tankregelung, bevor du den Mietwagen buchst – nicht am Schalter."

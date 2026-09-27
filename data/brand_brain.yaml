@@ -15,8 +15,9 @@
 #    - scripts/autopilot.py            (Cockpit)
 #
 #  ABGRENZUNG (WICHTIG – kein Konflikt mit bestehenden Wächtern):
-#    - Die KANONISCHEN Marken-Artefakte (Logo, Favicon, Willkommenstext,
-#      description, disclaimer) bleiben in data/brand_lock.yaml + hugo.toml.
+#    - Die KANONISCHEN Marken-Artefakte (Logo, Favicon, description,
+#      disclaimer) bleiben in data/brand_lock.yaml + hugo.toml. Der frühere
+#      statische Willkommenstext wurde durch den saisonalen Hero ersetzt.
 #      brand_brain.py --selftest prüft, dass die hier gespiegelten Werte
 #      EXAKT mit brand_lock.yaml übereinstimmen (Drift → Selbstheilung via
 #      --fix, nie gegen den Brand-Guard).
@@ -124,7 +125,6 @@ default_cta: "Jetzt bei CHECK24 vergleichen"
 canonical:
   description: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
-  home_title: "FranksFinanzcheck – Geld sparen bei Strom, Gas, Versicherung & Konto"
 
 frameworks:
   editorial:

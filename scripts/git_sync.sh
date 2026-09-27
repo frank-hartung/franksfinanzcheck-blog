@@ -72,7 +72,7 @@
 #    Hand-Entwürfe bleiben unverändert ein HARTER Stopp (kein Blind-Merge
 #    über Content).
 #
-#  HÄRTUNG #329 (Willkommenstext-Refresh, 21.09.2026):
+#  HÄRTUNG #329 (Startseiten-Refresh, 21.09.2026):
 #    Ein TAG-Push (kurzlebiger Probe-Tag _arena-perm-probe auf a224d072)
 #    triggerte den Workflow – Tag-Pushes unterliegen KEINEM paths-Filter –
 #    und der Tag wurde Sekunden später gelöscht. Der Lauf (detached HEAD,

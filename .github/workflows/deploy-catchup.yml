@@ -43,7 +43,7 @@ on:
       - "Pinterest-Watchdog"
       - "FrankAutoOps-Report"
       - "Affiliate-Integritäts-Wache (täglich)"
-      - "Willkommenstext-Refresh"
+      - "Saisonaler Hero-Refresh (Agent Reach + Claude)"
       - "Blog-Gesundheits-Check (täglich)"
       - "Mastodon-SEO"
       - "Premium-Governance"

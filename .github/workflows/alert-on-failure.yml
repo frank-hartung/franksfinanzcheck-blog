@@ -77,7 +77,7 @@ on:
       - "FrankAutoOps-Report"
       - "Affiliate-Health (Wochenwache)"
       - "Affiliate-Integritäts-Wache (täglich)"    # CTA-Link-Selbstheilung (14.08.)
-      - "Willkommenstext-Refresh"     # SEO-Unique-Content-Automatik Startseite (14.08.)
+      - "Saisonaler Hero-Refresh (Agent Reach + Claude)"  # SEO/GEO-Startseite, saisonal + fail-closed
       - "Blog-Gesundheits-Check (täglich)"   # tägliche Selbstheilung – hatte kein eigenes Alerting
       - "Uptime-Monitor"         # PREM-AUDIT: Site-Ausfall nur per Zufall bemerkt
       - "Mastodon-Profil-Sync"   # PREM-AUDIT: Social-Kanal still

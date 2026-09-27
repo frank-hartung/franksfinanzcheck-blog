@@ -26,9 +26,8 @@ Prüfungen Quelle (S1–S8):
      (366) genau einmal ab – lückenlos UND überlappungsfrei. Ein Tag ohne
      Saison würde den Hugo-Build hart abbrechen (errorf), ein Tag mit zwei
      Saisons wäre Willkür.
-  S3 Textqualität: Marken-Stimme (du, nie „Sie“), keine KI-Floskeln
-     (Liste bewusst aus scripts/willkommenstext_guard.py dupliziert –
-     gleiche Konvention wie dort), keine Markup-Reste, dazu die
+  S3 Textqualität: Marken-Stimme (du, nie „Sie“), keine KI-Floskeln,
+     GEO-Vertrag für saisonale H1 + Lead, keine Markup-Reste, dazu die
      bestehenden Repo-Regeln R8 (verschachtelte Links) und R9
      (Klebewörter) aus textverstaendnis_guard.py
   S4 Farben: WCAG-2.x-Kontrast, gemessen nicht geraten –
@@ -111,7 +110,8 @@ LAYOUTS = (
 THEMENWELTEN = ROOT / "data" / "themenwelten.json"
 
 PFLICHTFELDER_TEXT = (
-    "name", "emoji", "zeitraum", "badge", "headline", "hinweis", "tipp", "pillar_link",
+    "name", "emoji", "zeitraum", "badge", "hero_title", "hero_lead", "headline", "hinweis",
+    "tipp", "pillar_link",
 )
 PFLICHTFELDER_FARBEN = ("akzent", "akzent_dunkel", "hero_text", "linie", "linie_dunkel")
 SAISON_IDS = ("herbst", "winter", "fruehling", "sommer")
@@ -129,9 +129,17 @@ TEXT_MIN = 4.5
 DEKO_MIN = 3.0
 DOM_NODES_SOFT = 2500                # gleiches Softlimit wie scripts/cwv_guard.py
 
-# Marken-Stimme: Der Blog spricht Leser konsequent mit „du“ an. Die Liste ist
-# bewusst aus scripts/willkommenstext_guard.py dupliziert (dortige Konvention:
-# duplizieren statt Cross-Import, damit jede Wache allein lauffähig bleibt).
+# Der saisonale Hero ersetzt seit 27.09.2026 den statischen
+# homeInfoParams-Willkommenstext. Diese Invarianten sichern die inhaltliche
+# SEO-/GEO-Rolle, ohne Fakten oder Rankings zu versprechen: H1 benennt eine
+# Suchintention; der Lead beginnt mit der Entity und ist als Passage allein
+# verständlich. Die Claude-Automation muss dieselben Regeln passieren.
+GEO_KERNKATEGORIEN = ("strom", "gas", "internet", "versicherung", "konto")
+GEO_ENTITY = "franksfinanzcheck"
+
+# Marken-Stimme: Der Blog spricht Leser konsequent mit „du“ an. Die Liste
+# bleibt bewusst lokal statt eines Cross-Imports, damit diese Wache allein
+# lauffähig und der saisonale Content-Vertrag eindeutig bleibt.
 FORMAL_ANREDE_RX = re.compile(r"\b(Sie|Ihnen|Ihrem|Ihrer|Ihren|Ihres|Ihr|Ihre)\b")
 BANNED_PHRASES = (
     "in der heutigen schnelllebigen welt", "in der heutigen zeit",
@@ -269,6 +277,26 @@ def validate_schema(daten: object) -> tuple[list[dict], list[str]]:
         if isinstance(badges, str) and len(badges) > 52:
             fehler.append(f"{label}: `badge` ist {len(badges)} Zeichen lang – im Hero-Chip "
                           "brechen lange Badges um (Limit 52).")
+
+        # SEO-/GEO-Vertrag des saisonalen Hero: nicht „Willkommen" sagen,
+        # sondern Anlass + Nutzerintention. Der Lead ist eine kurze,
+        # kontextfreie Antwortpassage für Suche und Antwortsysteme.
+        hero_title = str(eintrag.get("hero_title") or "").strip()
+        hero_lead = str(eintrag.get("hero_lead") or "").strip()
+        if hero_title and not (42 <= len(hero_title) <= 100):
+            fehler.append(f"{label}: `hero_title` braucht 42–100 Zeichen (hat {len(hero_title)}).")
+        if hero_title and not any(token in hero_title.lower() for token in
+                                  ("sparen", "vergleich", "fixkosten", "günstiger")):
+            fehler.append(f"{label}: `hero_title` nennt keine klare Spar-/Vergleichsintention.")
+        if hero_lead and not hero_lead.lower().startswith(GEO_ENTITY):
+            fehler.append(f"{label}: `hero_lead` muss mit der Entity „FranksFinanzcheck“ beginnen.")
+        if hero_lead and not (220 <= len(hero_lead) <= 560):
+            fehler.append(f"{label}: `hero_lead` braucht 220–560 Zeichen (hat {len(hero_lead)}).")
+        if hero_lead:
+            kategorien = [wort for wort in GEO_KERNKATEGORIEN if wort in hero_lead.lower()]
+            if len(kategorien) < 3:
+                fehler.append(f"{label}: `hero_lead` nennt zu wenige Kernkategorien ({kategorien}; mindestens 3).")
+
         emoji = eintrag.get("emoji")
         if not isinstance(emoji, str) or not (1 <= len(emoji.strip()) <= 3):
             fehler.append(f"{label}: `emoji` muss genau ein Emoji sein (gefunden: {emoji!r}).")
@@ -306,7 +334,7 @@ def validate_stimme(saisons: list[dict]) -> list[str]:
     fehler = []
     for saison in saisons:
         sid = saison.get("id")
-        for feld in ("badge", "headline", "hinweis", "tipp", "pillar_link"):
+        for feld in ("badge", "hero_title", "hero_lead", "headline", "hinweis", "tipp", "pillar_link"):
             text = str(saison.get(feld) or "")
             if not text:
                 continue
@@ -680,7 +708,20 @@ def validate_build(public: Path, saison: dict, erwartet: list[dict], quelle: str
         return fehler
     block = blocks[0]
 
-    # B2 – Saison-Kohärenz
+    # B2 – Saison-Kohärenz (inkl. saisonaler H1 + GEO-Lead).
+    heroes = [k for k in seite.flat if k.attrs.get("data-ff-seasonal-hero")]
+    if len(heroes) != 1:
+        fehler.append(f"B2: {len(heroes)} × saisonaler Hero im Build, erwartet genau 1.")
+    else:
+        hero = heroes[0]
+        if hero.attrs.get("data-ff-seasonal-hero") != sid:
+            fehler.append(f"B2: Hero trägt data-ff-seasonal-hero="
+                          f"{hero.attrs.get('data-ff-seasonal-hero')!r}, erwartet {sid!r}.")
+        if h1 and h1[0].volltext() != str(saison.get("hero_title", "")):
+            fehler.append("B2: Saison-H1 weicht von data/saisons.yaml `hero_title` ab.")
+        if str(saison.get("hero_lead", "")) not in hero.volltext():
+            fehler.append("B2: GEO-Lead weicht von data/saisons.yaml `hero_lead` ab.")
+
     for knoten, name in ((seite.nach_klasse("ff-saison-badge"), "Badge"),
                          (seite.nach_klasse("ff-saison-hinweis"), "Hinweis"),
                          ([block], "Block")):
@@ -989,7 +1030,8 @@ def selbsttest() -> int:
         (public / "pillar" / "strom-sparen" / "index.html").write_text("x", encoding="utf-8")
         gut = (
             "<html><body><main class=main>"
-            "<article class='first-entry home-info'><h1>Start</h1>"
+            "<article class='first-entry home-info' data-ff-seasonal-hero=herbst><h1>Herbst-Check: Strom vergleichen</h1>"
+            "<div class=entry-content>FranksFinanzcheck hilft dir im Herbst bei Strom, Gas und Versicherungen.</div>"
             "<div class='ff-saison-badge ff-saison--herbst' data-ff-saison=herbst>Herbst-Check</div>"
             "<p class='ff-saison-hinweis' data-ff-saison=herbst>Die Heizsaison startet.</p></article>"
             "<div class=ff-pinterest-cta></div>"
@@ -1004,7 +1046,10 @@ def selbsttest() -> int:
             "<style>.ff-saison-card{}.ff-saison--herbst{}</style></body></html>"
         )
         (public / "index.html").write_text(gut, encoding="utf-8")
-        saison = {"id": "herbst", "badge": "Herbst-Check", "hinweis": "Die Heizsaison startet."}
+        saison = {"id": "herbst", "badge": "Herbst-Check",
+                  "hero_title": "Herbst-Check: Strom vergleichen",
+                  "hero_lead": "FranksFinanzcheck hilft dir im Herbst bei Strom, Gas und Versicherungen.",
+                  "hinweis": "Die Heizsaison startet."}
         erwartet = [{"href": "/posts/a/"}]
         ok &= muss(validate_build(public, saison, erwartet, "keywords", 1) == [],
                    f"sauberer Build meldet Fehler: {validate_build(public, saison, erwartet, 'keywords', 1)}")
@@ -1017,7 +1062,8 @@ def selbsttest() -> int:
                                            encoding="utf-8")
         ok &= muss(bool(validate_build(public, saison, erwartet, "keywords", 1)),
                    "falsche Saison im Build muss auffallen")
-        (public / "index.html").write_text(gut.replace("<h1>Start</h1>", "<h1>Start</h1><h1>zwei</h1>"),
+        (public / "index.html").write_text(gut.replace("<h1>Herbst-Check: Strom vergleichen</h1>",
+                                                     "<h1>Herbst-Check: Strom vergleichen</h1><h1>zwei</h1>"),
                                            encoding="utf-8")
         ok &= muss(any(f.startswith("B1") for f in
                        validate_build(public, saison, erwartet, "keywords", 1)),
