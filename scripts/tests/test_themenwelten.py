@@ -183,6 +183,26 @@ class ThemenweltenTests(unittest.TestCase):
         self.write("public/posts/page/2/index.html", '<section class=ff-topics></section>')
         self.assertTrue(any("Folgeseiten" in error for error in self.findings()))
 
+    def test_active_home_variant_has_browser_width_contract(self):
+        """Regression: aktive Hero-Variante darf den Browsertest nicht rot machen.
+
+        Der echte Browsertest prüft die Startseiten-Bühnenbreite bewusst
+        fail-closed. Wird eine neue Design-Variante live geschaltet, muss sie
+        hier einen expliziten Breitenvertrag bekommen statt durchzurutschen.
+        """
+        hugo = (ROOT / "hugo.toml").read_text(encoding="utf-8")
+        active_match = re.search(r'^\s*designVariante\s*=\s*"([^"]*)"', hugo, re.M)
+        self.assertIsNotNone(active_match, "hugo.toml muss designVariante explizit führen")
+        active = active_match[1]
+        if not active:
+            return
+        browser_test = (ROOT / "scripts/themenwelten_browser_test.mjs").read_text(encoding="utf-8")
+        self.assertRegex(
+            browser_test,
+            rf"['\"]{re.escape(active)}['\"]\s*:\s*\d+",
+            f"Aktive Variante {active!r} fehlt im HOME_MAIN_WIDTH_LIMITS-Vertrag",
+        )
+
     def test_deploy_checks_sources_and_final_artifact_without_soft_failure(self):
         workflow = (ROOT / ".github/workflows/deploy.yml").read_text(encoding="utf-8")
         source = re.search(r"- name: Themenwelten – Quellvertrag[^\n]*\n\s+run: ([^\n]+)", workflow)
