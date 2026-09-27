@@ -144,19 +144,25 @@ Das Wochenende kostet **max. 80 €** (Dichtungsbänder) und verhindert den 
 
 ## Abschlag neu kalibrieren, bevor der erste Frost kommt
 
-So rechnest du den Abschlag:  
+Ein niedrigerer Abschlag senkt nicht die tatsächlichen Kosten – er verschiebt sie nur in die Jahresabrechnung. Entscheidend ist deshalb eine nachvollziehbare Prognose auf Basis deines Verbrauchs und der **aktuellen** Vertragskonditionen. Rechne den Abschlag neu, wenn sich Arbeitspreis, Grundpreis, Wohnsituation oder Heizverhalten verändert haben.
+
+**Formel für einen monatlichen Abschlag:**
 
 \[
-\Text{Abschlag} = \frac{\Text{Durchschnittsverbrauch der letzten 2 Jahre} \times \Text{Arbeitspreis} + \Text{Grundpreis} \times 12}{12}
+\text{Monatsabschlag} = \frac{\text{prognostizierter Jahresverbrauch (kWh)} \times \text{Arbeitspreis (€/kWh)} + \text{jährlicher Grundpreis (€/Jahr)} - \text{sichere Gutschriften}}{12}
 \]
 
-*Beispiel:* 20.000 kWh Jahresverbrauch, Arbeitspreis 9,0 ct/kWh, Grundpreis 5,90 €/Monat  
+Nimm als Verbrauchsprognose möglichst den Durchschnitt der letzten zwei **vergleichbaren** Jahresabrechnungen. Bei energetischen Veränderungen oder einem besonders milden Winter passe sie begründet an. Den Arbeitspreis rechnest du in Euro pro kWh um: 9,0 Cent entsprechen **0,09 €/kWh**. Den monatlichen Grundpreis multiplizierst du mit zwölf.
+
+*Beispiel:* 20.000 kWh Jahresverbrauch, 9,0 ct/kWh Arbeitspreis und 5,90 € Grundpreis pro Monat:
 
 \[
-\frac{20.000 \times 0,09 + 5,90 \times 12}{12} = \frac{1.800 + 70,80}{12} = 156,73 €/Monat
+\frac{20.000 \times 0,09 + (5,90 \times 12)}{12}
+= \frac{1.800 + 70,80}{12}
+= \mathbf{155,90\ €/Monat}
 \]
 
-Addiere einen **5 %‑Puffer**, wenn der letzte Winter milder war. Der so berechnete Abschlag verhindert sowohl **Überzahlung** (Zins‑loser Kredit an den Versorger) als auch **Nachzahlungen** im März.
+Die zuvor oft genannte Summe von 156,73 € wäre rechnerisch falsch: 1.870,80 € geteilt durch zwölf ergibt 155,90 €. Wenn der letzte Winter ungewöhnlich mild war, kann ein **vorsichtiger Puffer von 5 %** sinnvoll sein: 155,90 € × 1,05 = **163,70 € pro Monat**. Prüfe den Wert nach dem ersten Zählerstand im Herbst erneut. So vermeidest du sowohl unnötige Überzahlungen (ein zinsloser Kredit an den Versorger) als auch eine überraschende Nachzahlung – ohne den Abschlag künstlich zu niedrig anzusetzen.
 
 ## Warum der Spätsommer über die Winterrechnung entscheidet
 
