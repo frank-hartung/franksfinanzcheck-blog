@@ -66,6 +66,27 @@ optimieren, Layout optimieren auf Premium-Level einer Profi-Agentur."
 
 ## 3. Layout: Design-Variante `v-hero-premium` (Premium-Politur)
 
+**Design-Pass 2 (27.09.2026, zweite Auftragsrunde „Layout und Design“):** Nach
+Agent-Reach-/Websuche zum Design-Stand 2026 (editorial serif revival, „one
+italic accent word“, Standfirst-Muster für Premium-Editorial-Heros) wurde die
+Variante designseitig vervollständigt:
+
+- **Playfair-Standfirst:** Die erste Zeile des Lead-Definitionsatzes läuft als
+  editorialer Standfirst in **Playfair Display Kursiv auf Gold** (`--ff-accent-2`)
+  — exakt die freigegebene Subline-Rolle aus DESIGN.md §2 („nur auf Smaragd“).
+  Kein neuer Webfont: Playfair ist bereits Teil der Marken-Identität.
+- **PaperMod-Rest entfernt (echter Fund):** PaperMods
+  `.first-entry .entry-header` clamp't den Hero-Titel auf **3 Zeilen mit
+  Ellipsis** — der neue, längere Guard-Titel wurde in Produktion als
+  „FranksFinanzcheck – Geld sparen bei Strom, Gas,…“ gekappt. Die Variante
+  hebt den Clamp defensiv auf (alle betroffenen Properties); der H1 steht
+  jetzt vollständig über 4 Zeilen. Latenter Basis-Defekt, der erst durch
+  den längeren SEO-Titel sichtbar wurde.
+- **Saison-Elemente strukturiert:** Hinweis mit Gold-Hairline (2px, `--ff-accent-2`)
+  und zurückgenommener Deckkraft; Badge mit feinerer Kante + ruhigem Glas-Blur.
+- **CTA-Feinschliff:** `text-wrap: pretty` am Lead, Press-State (`:active`),
+  H1-Maximum 20ch („FranksFinanzcheck –“ bleibt in einer Zeile).
+
 **Weg über die Werkbank** (Runbook `docs/ANLEITUNG-DESIGN-VARIANTEN.md`), nicht in
 die Basis: `assets/css/varianten/v-hero-premium.css` + Eintrag in
 `data/design/varianten.yaml` (Status `entwurf`, Hypothese + Rückbau notiert).
@@ -87,17 +108,19 @@ die Basis: `assets/css/varianten/v-hero-premium.css` + Eintrag in
   Dark-Mode-Pflichten und `prefers-reduced-motion` erfüllt; H1 mit `hyphens: auto`
   für lange deutsche Komposita.
 
-**Messung (27.09.2026, Textfinalstand):**
+**Messung (27.09.2026, Stand Design-Pass 2):**
 
 | Ebene | Ergebnis | Budget |
 |---|---|---|
 | Tier A statisch | DOM max 1062 (+1: Varianten-`<style>`), H1 1× auf allen Seiten, Canonical/Schema/Alt/rel intakt, 3 CTAs mit Umami, Newsletter da | DOM-Head ≤ 52, CSS-Δ ≤ 6144 B |
-| CSS-Zuwachs | **+4317 B** | ≤ 6144 B ✅ |
-| Tier B Browser | Kontrast **7.53:1**, kleinstes Tap-Ziel **26.4 px**, **CLS 0**, LCP 560 ms | ≥ 4.5 · ≥ 24 · ≤ 0.1 · Playwright-Wert ohne Budget |
-| Lighthouse mobil | LCP **1818 ms**, TBT 111 ms, Perf **0.99**, A11y **0.96** | LCP ≤ 2500 · Perf ≥ 0.90 · A11y ≥ 0.95 ✅ |
-| Lighthouse desktop | LCP 588 ms, Perf **1.0** | ✅ |
+| CSS-Zuwachs (inline) | **+4938 B** | ≤ 6144 B ✅ |
+| Varianten-Datei (roh) | 8180 B | ≤ 8192 B ✅ |
+| Tier B Browser | Kontrast **7.53:1**, kleinstes Tap-Ziel **26.4 px**, **CLS 0**, LCP 688 ms | ≥ 4.5 · ≥ 24 · ≤ 0.1 · Playwright-Wert ohne Budget |
+| Lighthouse mobil | LCP **1845 ms**, TBT 137 ms, Perf **0.98**, A11y **0.96** | LCP ≤ 2500 · Perf ≥ 0.90 · A11y ≥ 0.95 ✅ |
+| Lighthouse desktop | LCP 768 ms, Perf **1.0** | ✅ |
 | Gate | `design_variant_gate.py`: **BESTANDEN, keine Befunde** | — |
-| Protokoll | `data/design/messungen/v-hero-premium-2026-09-27.json` (eingefroren) | Freigabe-Beleg |
+| E2E | design-variante-Spec + home-Spec **8/8 grün**; Gesamtsuite 67/68 (1 Bestandsbefund des Sandbox-Fallback-Chromiums, am Basis-Tree belegt) | — |
+| Protokoll | `data/design/messungen/v-hero-premium-2026-09-27.json` (eingefroren, Pass 2) | Freigabe-Beleg |
 
 Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 `home--mobile.png` (gitignored Review-Artefakt).

@@ -1,63 +1,77 @@
 /* ============================================================
-   VARIANTE v-hero-premium
+   VARIANTE v-hero-premium (Design-Pass 2, 27.09.2026)
    ------------------------------------------------------------
-   Hypothese (data/design/varianten.yaml, Status: entwurf):
-   Der Startseiten-Hero gewinnt Ruhe und Kompetenz-Signale,
-   ohne ein einziges neues Element:
-   · Der Definitionssatz (GEO-optimierter Willkommenstext,
-     Antwort zuerst) tritt als Lead-Absatz hervor.
-   · Die Vertrauenssignale werden im Desktop-Grid zu einem
-     ruhigen Fakten-Panel gebündelt statt als Pillar-Wolke.
-   · Der Primär-CTA bekommt einen sauberen Press-State.
+   Hypothese: data/design/varianten.yaml (Status: entwurf).
+   Lead-Definition mit Playfair-Standfirst (DESIGN.md §2),
+   Fakten-Panel statt Pillar-Wolke, Press-State am CTA,
+   Saison-Elemente strukturiert – ohne neues Element.
 
-   ERBE (bewusst übernommen aus der freigegebenen Variante
-   v-hero-conversion, 26.09.2026): Bühnenbreite 1024px,
-   CTA-Gewichtung (eine Primär-, zwei Sekundärwege),
-   editoriales Grid mit Vertrauens-Spalte und die mobile
-   LCP-Reihenfolge (Artikel-Cover zuerst). Nichts davon wird
-   zurückgebaut – dieser Entwurf baut darauf aus. Geerbte
-   Deklarationen stehen deshalb absichtlich HINTER den
-   eigenen: So ist der erste Regelblock eindeutig dieser
-   Variante zuzuordnen (Prüfnadel des E2E-Leak-Tests).
-
-   REGELN: nur Marken-Tokens (DESIGN.md §1), Radius-Skala
-   (8/12/16/999), Easing/Dauern laut Regelwerk, kein
-   !important, keine externen Quellen, keine Layout-Animation.
-
-   GELADEN NUR BEI: HUGO_PARAMS_DESIGNVARIANTE=v-hero-premium
+   ERBE aus v-hero-conversion (freigegeben 26.09.2026): Bühne
+   1024px, CTA-Gewichtung, Grid, mobile LCP-Reihenfolge. Eigene
+   Deklarationen zuerst (Prüfnadel des Leak-Tests). Rückbau =
+   eine Datei weglassen. Nur Marken-Tokens/Skalen, kein
+   !important. LÄUFT NUR BEI HUGO_PARAMS_DESIGNVARIANTE=v-hero-premium.
    ============================================================ */
 
-/* ---------- 1. Lead-Definition: der erste Satz trägt (NEU, GEO) ---------- */
+/* ---------- 1. Lead-Definition + Standfirst (NEU, GEO) ---------- */
 
-/* Der Willkommenstext ist Antwort-zuerst strukturiert. Der
-   Definitions-Absatz bekommt Lead-Größe und fast volle Deckkraft,
-   die Folgeabsätze bleiben ruhig. Kein neues Element, reine
-   Typografie aus der vorhandenen Skala. */
+/* Erste Zeile in Playfair-Kursiv (Subline-Rolle, nur auf Smaragd). */
 .first-entry.home-info .entry-content > p:first-of-type {
   font-size: clamp(1.02rem, 1.5vw, 1.17rem);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.97);
   margin-bottom: 14px;
+  text-wrap: pretty;
 }
 
-/* Rhythmus-Regel (DESIGN.md §3): mehr Luft ÜBER der H1 als darunter. */
+.first-entry.home-info .entry-content > p:first-of-type::first-line {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--ff-accent-2);
+}
+
+/* Rhythmus-Regel (DESIGN.md §3): mehr Luft ÜBER der H1. */
+/* PaperMod-Rest: 3-Zeilen-Clamp am Hero-Header knipst lange Titel
+   mit Ellipsis – hier bewusst aufgehoben (alle betroffenen Props). */
 .first-entry.home-info .entry-header {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
   padding-top: 4px;
 }
 
-/* Lange deutsche Komposita im H1 dürfen umbrechen, statt zu quetschen. */
+/* Lange deutsche Komposita im H1 umbrechen statt quetschen. */
 .first-entry.home-info .entry-header h1 {
   hyphens: auto;
 }
 
-/* ---------- 2. Press-State: der Daumen spürt die Bestätigung (NEU) ---------- */
+/* ---------- 2. Saison-Elemente: Struktur statt Streudeko (NEU) ---------- */
+
+/* Hinweis mit Gold-Hairline, tritt hinter den Lead zurück. */
+.first-entry.home-info .ff-saison-hinweis {
+  margin-top: 16px;
+  padding-left: 12px;
+  border-left: 2px solid var(--ff-accent-2);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.92em;
+}
+
+/* Badge: feinere Kante, ruhige Glasfläche. */
+.first-entry.home-info .ff-saison-badge {
+  border-color: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---------- 3. Press-State (NEU) ---------- */
 
 .ff-home-ctas .ff-btn:active {
   transform: translateY(0);
   transition-duration: 0.16s;
 }
 
-/* ---------- 3. CTA-Hierarchie: eine Primär-, zwei Sekundärwege (ererbt) ---------- */
+/* ---------- 4. CTA-Hierarchie (ererbt) ---------- */
 
 .ff-home-ctas {
   column-gap: 12px;
@@ -97,7 +111,7 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* ---------- 4. Editoriales Grid + Fakten-Panel (Desktop) ---------- */
+/* ---------- 5. Editoriales Grid + Fakten-Panel (Desktop) ---------- */
 
 @media (min-width: 769px) {
   .first-entry.home-info {
@@ -120,8 +134,7 @@
   .first-entry.home-info > .ff-saison-hinweis { grid-area: season; }
   .first-entry.home-info > .ff-home-ctas { grid-area: ctas; }
 
-  /* Fakten-Panel: eine ruhige Fläche mit Trennlinien statt vier
-     einzelner Glas-Pills – Fakten lesen sich als Checkliste. */
+  /* Fakten-Panel: Checkliste mit Trennlinien statt Glas-Pill-Wolke. */
   .first-entry.home-info > .ff-trust-row {
     grid-area: trust;
     display: flex;
@@ -150,7 +163,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
 
-  /* Herausgeber-Zeile: Goldkante als Autoren-Anker (E-E-A-T sichtbar). */
+  /* Herausgeber-Zeile: Goldkante als Autoren-Anker (E-E-A-T). */
   .first-entry.home-info > .ff-trust-row .ff-trust-pill--editorial {
     box-shadow: inset 3px 0 0 var(--ff-accent-2);
   }
@@ -170,12 +183,13 @@
     max-width: 62ch;
   }
 
+  /* 20ch statt 16ch: „FranksFinanzcheck –" bleibt in einer Zeile. */
   .first-entry.home-info .entry-header h1 {
-    max-width: 16ch;
+    max-width: 20ch;
   }
 }
 
-/* ---------- 5. Bühne: Hero und Themenführung atmen (ererbt) ---------- */
+/* ---------- 6. Bühne (ererbt) ---------- */
 
 main.main:has(.home-info) {
   max-width: 1024px;
@@ -187,7 +201,7 @@ main.main:has(.home-info) > footer.page-footer {
   margin-inline: auto;
 }
 
-/* ---------- 6. Dark Mode: dieselbe Hierarchie, ruhigere Flächen ---------- */
+/* ---------- 7. Dark Mode: ruhigere Flächen, gleiche Hierarchie ---------- */
 
 :root[data-theme="dark"] .ff-home-ctas .ff-btn-secondary {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
@@ -207,7 +221,7 @@ main.main:has(.home-info) > footer.page-footer {
   border-color: rgba(255, 255, 255, 0.16);
 }
 
-/* ---------- 7. Mobil: Artikel-LCP bleibt geschützt (ererbt) ---------- */
+/* ---------- 8. Mobil: Artikel-LCP bleibt geschützt (ererbt) ---------- */
 
 @media (max-width: 768px) {
   main.main:has(.home-info) {
@@ -242,6 +256,12 @@ main.main:has(.home-info) > footer.page-footer {
     font-size: 1rem;
   }
 
+  /* Gold-Hairline mobil dezenter. */
+  .first-entry.home-info .ff-saison-hinweis {
+    margin-top: 14px;
+    padding-left: 10px;
+  }
+
   .first-entry.home-info > .ff-trust-row {
     display: flex;
     gap: 8px;
@@ -268,7 +288,7 @@ main.main:has(.home-info) > footer.page-footer {
   }
 }
 
-/* ---------- 8. Reduzierte Bewegung (Pflicht) ---------- */
+/* ---------- 9. Reduzierte Bewegung (Pflicht) ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .ff-home-ctas .ff-btn-primary,

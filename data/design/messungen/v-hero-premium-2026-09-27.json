@@ -1,7 +1,7 @@
 {
   "_hinweis": "Messprotokoll der Design-Varianten-Werkbank. Beleg für eine Freigabe in data/design/varianten.yaml. Erzeugt von scripts/design_variant_lab.py --protokoll – nicht von Hand ändern.",
   "variante": "v-hero-premium",
-  "erstellt": "2026-09-27T09:11:40Z",
+  "erstellt": "2026-09-27T09:30:57Z",
   "werkzeuge": {
     "hugo": "v0.166.0-78400b4de8adc99273d3e674ed6c4d14c3bdf669+extended+withdeploy",
     "lighthouse": "13.5.0"
@@ -9,37 +9,37 @@
   "tiers": {
     "statisch": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:10:38Z",
+      "gemessen": "2026-09-27T09:29:52Z",
       "stichprobe": [
         {
           "seite": "/",
           "h1": 1,
-          "bytes": 196506
+          "bytes": 197127
         },
         {
           "seite": "/posts/",
           "h1": 1,
-          "bytes": 191403
+          "bytes": 192024
         },
         {
           "seite": "/pillar/",
           "h1": 1,
-          "bytes": 178581
+          "bytes": 179202
         },
         {
           "seite": "/2026-09-21-tierkrankenversicherung-hund-katze-kosten/",
           "h1": 1,
-          "bytes": 217869
+          "bytes": 218490
         },
         {
           "seite": "/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/",
           "h1": 1,
-          "bytes": 214225
+          "bytes": 214846
         },
         {
           "seite": "/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/",
           "h1": 1,
-          "bytes": 216496
+          "bytes": 217117
         }
       ],
       "werte": {
@@ -70,8 +70,8 @@
         "bilder_ohne_masse": 0,
         "alt_luecken": 0,
         "affiliate_rel_fehler": 0,
-        "seiten_gewicht_bytes_max": 217869,
-        "stylesheet_bytes": 142186,
+        "seiten_gewicht_bytes_max": 218490,
+        "stylesheet_bytes": 142807,
         "cta_anzahl": 3,
         "cta_ohne_umami": 0,
         "pflicht_bausteine_fehlen": [],
@@ -82,7 +82,7 @@
     },
     "gerendert": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:10:42Z",
+      "gemessen": "2026-09-27T09:29:57Z",
       "werte": {
         "kontrast_min": 7.53,
         "kontraste_hell": {
@@ -106,12 +106,12 @@
         "fokusring_sichtbar": true,
         "fokus_outline": "3px solid rgb(255, 179, 0)",
         "cls": 0,
-        "lcp_ms": 560
+        "lcp_ms": 688
       }
     },
     "lighthouse": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:11:40Z",
+      "gemessen": "2026-09-27T09:30:57Z",
       "werte": {
         "profile": {
           "mobil": {
@@ -120,28 +120,28 @@
             "netz_kbps": 1638.4,
             "laeufe": 3,
             "verfahren": "median",
-            "benchmark_index": 1964,
+            "benchmark_index": 1713,
             "lighthouse": {
-              "performance": 0.99,
+              "performance": 0.98,
               "accessibility": 0.96,
               "seo": 1,
               "best-practices": 0.96
             },
-            "tbt_ms": 111,
-            "lcp_ms": 1818,
-            "fcp_ms": 966,
+            "tbt_ms": 137,
+            "lcp_ms": 1845,
+            "fcp_ms": 1008,
             "cls": 0,
             "ungenutztes_css_kb": 17,
             "streuung": {
               "lcp_ms": [
-                1778,
-                1818,
-                1833
+                1839,
+                1845,
+                1911
               ],
               "tbt_ms": [
-                111,
-                142,
-                76
+                158,
+                81,
+                137
               ]
             }
           },
@@ -151,7 +151,7 @@
             "netz_kbps": 10240,
             "laeufe": 3,
             "verfahren": "median",
-            "benchmark_index": 1862,
+            "benchmark_index": 1795,
             "lighthouse": {
               "performance": 1,
               "accessibility": 0.96,
@@ -159,20 +159,20 @@
               "best-practices": 0.96
             },
             "tbt_ms": 0,
-            "lcp_ms": 588,
-            "fcp_ms": 350,
-            "cls": 0,
+            "lcp_ms": 768,
+            "fcp_ms": 423,
+            "cls": 0.004,
             "ungenutztes_css_kb": 17,
             "streuung": {
               "lcp_ms": [
-                648,
-                588,
-                566
+                774,
+                768,
+                713
               ],
               "tbt_ms": [
                 0,
-                1,
-                0
+                0,
+                5
               ]
             }
           }
@@ -182,28 +182,28 @@
         "netz_kbps": 1638.4,
         "laeufe": 3,
         "verfahren": "median",
-        "benchmark_index": 1964,
+        "benchmark_index": 1713,
         "lighthouse": {
-          "performance": 0.99,
+          "performance": 0.98,
           "accessibility": 0.96,
           "seo": 1,
           "best-practices": 0.96
         },
-        "tbt_ms": 111,
-        "lcp_ms": 1818,
-        "fcp_ms": 966,
+        "tbt_ms": 137,
+        "lcp_ms": 1845,
+        "fcp_ms": 1008,
         "cls": 0,
         "ungenutztes_css_kb": 17,
         "streuung": {
           "lcp_ms": [
-            1778,
-            1818,
-            1833
+            1839,
+            1845,
+            1911
           ],
           "tbt_ms": [
-            111,
-            142,
-            76
+            158,
+            81,
+            137
           ]
         },
         "profil_massgeblich": "mobil"
