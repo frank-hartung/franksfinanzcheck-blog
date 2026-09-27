@@ -14,7 +14,25 @@ cover:
   alt: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-09-27
 ---
+
 Strom und Gas machen in deutschen Haushalten oft den größten Block der variablen Nebenkosten aus. Wer jahrelang im teuren Grundversorgungstarif bleibt, zahlt hunderte Euro zu viel. Mit der richtigen Kombination aus verbrauchsreduzierenden Maßnahmen im Alltag und einem regelmäßigen Tarifwechsel holst du dir deine finanzielle Kontrolle zurück. In diesem umfassenden Ratgeber bündele ich alle Strategien für spürbar niedrigere Energiekosten.
 
 ### Das Wichtigste auf einen Blick

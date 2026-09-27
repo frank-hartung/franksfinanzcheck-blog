@@ -22,6 +22,23 @@ keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise a
 pin_title: "Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern"
 pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
+quellen:
+  - titel: "BDEW-Gaspreisanalyse: 11,93 ct/kWh im Einfamilienhaus (2026)"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-24"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-09-27
 ---
 
 Wenn dein alter Gastarif plötzlich **3 Cent pro Kilowattstunde** teurer wird, klingt das erst einmal klein. Bei **20.000 kWh Jahresverbrauch** sind das aber schon **600 € Mehrkosten**. Genau deshalb schauen viele Haushalte vor der Heizperiode nach Tarifen mit Preisgarantie.

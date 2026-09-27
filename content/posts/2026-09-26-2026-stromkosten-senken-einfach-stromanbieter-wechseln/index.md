@@ -23,6 +23,23 @@ cover:
   alt: "2026 Stromkosten senken: Einfach Stromanbieter wechseln"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Anbieterwechsel spart meist 200 – 400 € jährlich, weil die Preise zwischen den Tarifen stark variieren. Nutze Vergleichsportale, gib deinen Jahresverbrauch und deine Postleitzahl ein und achte auf Grundgebühr, Arbeitspreis (ct/kWh) und mögliche Vertragslaufzeiten. Vergleiche ausschließlich die Gesamtkosten pro Jahr, nicht nur den Arbeitspreis."
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-09-27
 ---
 
 Hast du heute schon 400 € verdient?

@@ -1,5 +1,4 @@
 ---
-
 lastmod: 2026-09-21
 title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 description: "Preisgarantie Gas: So schützt du dich vor extremen Preissprüngen am Energiemarkt. Klauseln, Tarife & Spartipps im Check – spare bis zu 580 € pro Jahr."
@@ -23,11 +22,24 @@ keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizko
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
+quellen:
+  - titel: "BDEW-Gaspreisanalyse: 11,93 ct/kWh im Einfamilienhaus (2026)"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-24"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-09-27
 ---
-
-
-
-
 
 Wer die Energiepreise verfolgt, weiß: Die Zeit der stabilen Niedrigpreise ist vorbei. Krisen, kalte Winter und der CO₂‑Preis lassen die Preise an der Börse immer wieder springen.
 

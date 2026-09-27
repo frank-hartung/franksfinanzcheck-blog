@@ -24,6 +24,23 @@ cover:
   alt: "Gasrechnung senken: Spätsommer-Check für Heizung und Gastarif"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Wer seine Gasrechnung senken will, sollte nicht erst auf den ersten Frost warten. Der bessere Zeitpunkt ist vorher: Verbrauch prüfen, Tarif neu rechnen, Dichtungen testen und die Heizung sauber vorbereiten. Schon kleine Verbesserungen von 5 % bis 10 % können bei 1.500 € Jahreskosten grob 75 € bis 150 € Unterschied machen."
+quellen:
+  - titel: "BDEW-Gaspreisanalyse: 11,93 ct/kWh im Einfamilienhaus (2026)"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-24"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+faktencheck: 2026-09-27
 ---
 
 Wenn die Heizung im Oktober zum ersten Mal wieder durchläuft, ist es für einen sauberen Kostencheck oft schon spät. Dann reagieren viele nur noch. Genau deshalb ist der Spätsommer so wertvoll. Du hast noch Ruhe, Termine sind leichter zu bekommen und du kannst Zahlen, Technik und kleine Schwachstellen ohne Winterstress prüfen.

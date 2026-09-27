@@ -1,5 +1,4 @@
 ---
-
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
 description: "Energiediebe stoppen: Die größten heimlichen Stromfresser im Haushalt entlarven, Standby-Kosten eliminieren und bis zu 420 € Stromkosten sparen."
 date: 2026-08-19T08:35:12Z
@@ -23,9 +22,21 @@ keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt
 pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
 pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+faktencheck: 2026-09-27
 ---
-
-
 
 Steigt deine Stromrechnung, obwohl du sparsam lebst? In fast jedem Haushalt verstecken sich heimliche **Energiediebe**.
 
