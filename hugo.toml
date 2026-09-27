@@ -136,8 +136,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "FranksFinanzcheck – Deine ehrliche Hilfe für Strom, Versicherung und Konto"
-    Content = "Hi! Schön, dass du da bist. Ich bin Frank Hartung und helfe dir mit meiner Erfahrung aus über 10 Jahren dabei, deine Fixkosten ohne Fachchinesisch zu senken. Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.\n\nHier bekommst du echte Vor- und Nachteile zu Strom, Internet oder deinem Konto. Ganz ohne Verkaufsdruck zeige ich dir, wie du in nur zehn Minuten deine Verträge optimierst. So sicherst du dir oft **mehrere hundert Euro** Ersparnis im Jahr. 📈"
+    Title = "Einmal im Jahr vergleichen: dein Spar-Check für Strom, Gas & Versicherung"
+    Content = "🧾 Ein Nachmittag Vertrags-Check deckt oft bis zu 2.000 € Sparpotenzial im Jahr auf. FranksFinanzcheck zerlegt **Strom, Gas, Internet, Versicherungen und Konto** in konkrete Euro-Beträge, ehrliche Vor- und Nachteile und klare Anleitungen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\nEin kompletter Check an einem Tag bringt erfahrungsgemäß mehr als viele kleine spontane Wechsel übers Jahr verteilt. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit Schritt-für-Schritt-Anleitungen zum direkten Umsetzen. Kein Fachchinesisch, kein Verkaufsdruck.\n\nStöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 
   [[params.socialIcons]]
     name = "pinterest"

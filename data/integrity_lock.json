@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-26T22:05:17.633910+00:00",
-  "head": "f61001a1",
+  "signed_at": "2026-09-27T11:05:38.118087+00:00",
+  "head": "6086a77",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
-    "data/brand_lock.yaml": "08a79d69797820d7709ee74606b1b357e135155467f333da554386a55adee6dc",
-    "hugo.toml": "da64f31a29d3d7c3e6e849b6c21cf47f04b48fdb64a746eb600a25c6574fdc93",
+    "data/brand_lock.yaml": "4f8343c93963f8c6bc05c6e2bed1afbd103eaf56172ffed8239654aca9832bfc",
+    "hugo.toml": "aad995f91dec1a897bb8db5d79cdbd735cfd51f6ffec1aa1d7f20e7e613b3dff",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,18 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac",
-  "audit_start_sha256": "0cf44b7bc2420540c7940560aa3dbb36e96327b21040e84b05d7afea13e6a0ab",
+  "files_sha256": "448fe71dec34dc7b0f0fa62066ec8767a4698ea7b608cac62979dd81f40b6fe2",
+  "audit_start_sha256": "9fb18b1387a9def43b7b699cd9aacae8837993c72a538bb8742c878efdbed0be",
   "audit": [
-    {
-      "date": "2026-09-20",
-      "art": "set-current",
-      "head": "cd2f26a",
-      "geaendert": [
-        "layouts/_partials/head.html"
-      ],
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-21",
       "art": "set-current",
@@ -67,7 +58,7 @@
         "layouts/pillar/single.html",
         "layouts/robots.txt"
       ],
-      "prev_sha256": "0cf44b7bc2420540c7940560aa3dbb36e96327b21040e84b05d7afea13e6a0ab"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-21",
@@ -328,8 +319,47 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "dd3718e3dbea710da874edf6a2be5a6db29eeb27cf40e37f105c5d7c69140e0e",
-      "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac"
+      "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac",
+      "prev_sha256": "dd3718e3dbea710da874edf6a2be5a6db29eeb27cf40e37f105c5d7c69140e0e"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "6086a77",
+      "geaendert": [
+        "data/brand_lock.yaml",
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "6086a77",
+              "datum": "2026-09-27",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/brand_lock.yaml",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "6086a77",
+              "datum": "2026-09-27",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "2dc5ccfb75731c1747c1784d530c3284f1f719cb9a516a81f5051eaab0b4dab9",
+      "files_sha256": "448fe71dec34dc7b0f0fa62066ec8767a4698ea7b608cac62979dd81f40b6fe2"
     }
   ]
 }

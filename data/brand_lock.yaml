@@ -4,9 +4,9 @@
 # Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
-  expected: "FranksFinanzcheck – Deine ehrliche Hilfe für Strom, Versicherung und Konto"
+  expected: "Einmal im Jahr vergleichen: dein Spar-Check für Strom, Gas & Versicherung"
 - key: homeInfoParams.Content
-  expected: "Hi! Schön, dass du da bist. Ich bin Frank Hartung und helfe dir mit meiner Erfahrung aus über 10 Jahren dabei, deine Fixkosten ohne Fachchinesisch zu senken. Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.\\n\\nHier bekommst du echte Vor- und Nachteile zu Strom, Internet oder deinem Konto. Ganz ohne Verkaufsdruck zeige ich dir, wie du in nur zehn Minuten deine Verträge optimierst. So sicherst du dir oft **mehrere hundert Euro** Ersparnis im Jahr. 📈"
+  expected: "🧾 Ein Nachmittag Vertrags-Check deckt oft bis zu 2.000 € Sparpotenzial im Jahr auf. FranksFinanzcheck zerlegt **Strom, Gas, Internet, Versicherungen und Konto** in konkrete Euro-Beträge, ehrliche Vor- und Nachteile und klare Anleitungen, geprüft aus über 10 Jahren eigener Finanzpraxis.\\n\\nEin kompletter Check an einem Tag bringt erfahrungsgemäß mehr als viele kleine spontane Wechsel übers Jahr verteilt. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit Schritt-für-Schritt-Anleitungen zum direkten Umsetzen. Kein Fachchinesisch, kein Verkaufsdruck.\\n\\nStöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
 - key: params.description
   expected: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
 - key: params.disclaimer
