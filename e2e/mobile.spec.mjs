@@ -75,4 +75,63 @@ test.describe('Mobile (iPhone 14)', () => {
       }
     }
   });
+
+  // ============================================================
+  //  HERAUSGEBER-PILL (mobil) – Regressionswächter (27.09.2026)
+  //  ------------------------------------------------------------
+  //  Mobile-Schwester des Desktop-Tests in home.spec.mjs: Auf dem
+  //  Handy bricht die Trust-Reihe horizontal um (kein Fakten-Panel),
+  //  die zweizeilige Herausgeber-Angabe muss hier trotzdem strikt
+  //  Struktur bleiben (Label ÜBER Autor) und vollständig in der
+  //  Hero-Box liegen. Die tote-<br>-Bugklasse (Live-Befund 27.09.)
+  //  wäre mobil genauso unauffällig kaputt gegangen.
+  //  ============================================================
+  test('Startseite: Herausgeber-Pill zweizeilig und innerhalb der Hero-Box', async ({ page }) => {
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+
+    const geo = await page.evaluate(() => {
+      const pill = document.querySelector('.ff-trust-pill--editorial');
+      const box = document.querySelector('.first-entry.home-info');
+      const row = document.querySelector('.ff-trust-row');
+      const label = pill?.querySelector('.ff-trust-editorial-label');
+      const author = pill?.querySelector('.ff-trust-author');
+      if (!pill || !box || !row || !label || !author) return { fehlt: true };
+
+      const p = pill.getBoundingClientRect();
+      const b = box.getBoundingClientRect();
+      const l = label.getBoundingClientRect();
+      const a = author.getBoundingClientRect();
+
+      const pills = [...document.querySelectorAll('.ff-trust-row .ff-trust-pill')].map((el) => {
+        const q = el.getBoundingClientRect();
+        return {
+          txt: el.textContent.replace(/\s+/g, ' ').trim(),
+          inBox: q.right <= b.right + 1 && q.left >= b.left - 1,
+          innerlichSauber: el.scrollWidth <= el.clientWidth + 1,
+        };
+      });
+
+      return {
+        fehlt: false,
+        zweiZeilen: a.top >= l.bottom - 2,
+        abstand: +(a.top - l.bottom).toFixed(1),
+        pillInBox: p.right <= b.right + 1 && p.left >= b.left - 1,
+        autorVerlinkt: author instanceof HTMLAnchorElement && /\/ueber\/?$/.test(author.pathname),
+        pillHoehe: +p.height.toFixed(1),
+        pills,
+      };
+    });
+
+    expect(geo.fehlt, 'Editorial-Struktur (Label + Autor) im Markup').toBe(false);
+    expect(geo.zweiZeilen, `Autoren-Name muss UNTER dem Label stehen (2. Zeile), Abstand war ${geo.abstand}px`).toBe(true);
+    expect(geo.autorVerlinkt, 'Autoren-Entity bleibt auf /ueber/ verlinkt (E-E-A-T)').toBe(true);
+    expect(geo.pillInBox, 'Herausgeber-Pill muss innerhalb der Hero-Box liegen').toBe(true);
+    // Zweizeilige Pill darf die Thumb-freundliche Mindesthöhe nicht
+    // unterlaufen (Basis-Mindesthöhe der Pills: 40px mobil).
+    expect(geo.pillHoehe, 'Herausgeber-Pill bleibt Thumb-gerecht hoch').toBeGreaterThanOrEqual(40);
+
+    const verletzt = (geo.pills || []).filter((q) => !q.inBox || !q.innerlichSauber);
+    expect(verletzt, 'Keine Trust-Pill ragt aus der Hero-Box oder überläuft intern').toEqual([]);
+  });
 });
