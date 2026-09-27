@@ -145,6 +145,27 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 5 (27.09.2026, fünfte Runde: E-E-A-T-Verlinkung + Robustheit):**
+
+- **Personen-Entity verlinkt:** Die Herausgeber-Zeile im Hero nannte Frank
+  Hartung als reinen Text — die Person war von der Startseite aus nicht
+  erreichbar (E-E-A-T-Lücke auf der meistgesehenen Seite). Jetzt verlinkt
+  auf `/ueber/` (`a.ff-trust-author`), Optik unverändert plus dezente
+  Unterstreichung, Hover in `--ff-accent-2`, globaler Fokus-Ring greift.
+  **Messkette bewährte sich:** Der erste Lauf meldete Tap-Ziel 15,4 px
+  (Budget 24) → Trefferfläche per `::after inset:-8px` vergrößert
+  (Hausstandard wie `.ff-heading-copy`) → wieder 26,4 px.
+- **Font-unabhängiges Häkchen (Robustheits-Fund):** Das „✓" (U+2713) der
+  Trust-Pills hängt an der Symbolfont-Abdeckung des Geräts — ohne
+  Symbolfont bleibt das Medaillon leer (im Sandbox-Browser nachweisbar,
+  pixelgeprüft). Das Häkchen wird jetzt **CSS-gezeichnet** (2px-Chevron
+  via Pseudo-Element, gold `--ff-accent-2`); das Zeichen bleibt im DOM.
+  Pixel-Verifikation: Chevron rendert im Medaillon-Zentrum, auf jedem
+  Gerät identisch.
+- **Pinterest-CTA-Review (aus Pass 4 versprochen):** Bento-Karte besteht
+  den Agentur-Blick — Logo-Badge, Text-Balance, roter Primär-Button mit
+  sauberem Kontrast; der „Pin-Board"-Umbruch ist korrekte Silbentrennung.
+
 **Design-Pass 4 (27.09.2026, vierte Runde: Meta-Ebene + Below-the-Fold-Audit):**
 
 - **Meta-Description der Startseite (SEO/GEO):** Bislang ohne Entity und ohne
