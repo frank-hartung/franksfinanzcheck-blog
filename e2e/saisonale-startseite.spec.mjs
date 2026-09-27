@@ -138,7 +138,7 @@ test.describe('Saisonale Startseite', () => {
     const hinweis = page.locator('article.first-entry.home-info .ff-saison-hinweis');
     await expect(hinweis, 'Saison-Hinweis fehlt im Hero').toHaveCount(1);
 
-    // Badge VOR dem H1 (Eyebrow-Position), Hinweis NACH dem Willkommenstext
+    // Badge VOR dem H1 (Eyebrow-Position), Hinweis NACH dem GEO-Lead
     const reihenfolge = await page.evaluate(() => {
       const hero = document.querySelector('article.first-entry.home-info');
       return [...hero.querySelectorAll('.ff-saison-badge, h1, .entry-content, .ff-saison-hinweis')]
@@ -146,7 +146,7 @@ test.describe('Saisonale Startseite', () => {
           : el.tagName === 'H1' ? 'h1'
           : el.classList.contains('entry-content') ? 'text' : 'hinweis'));
     });
-    expect(reihenfolge, 'Hero-Reihenfolge: Badge → H1 → Willkommenstext → Hinweis')
+    expect(reihenfolge, 'Hero-Reihenfolge: Badge → H1 → GEO-Lead → Hinweis')
       .toEqual(['badge', 'h1', 'text', 'hinweis']);
 
     const badgeSaison = await badge.getAttribute('data-ff-saison');

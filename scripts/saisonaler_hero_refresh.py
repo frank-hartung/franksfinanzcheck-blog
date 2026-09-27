@@ -30,6 +30,7 @@ Aufruf:
   python3 scripts/saisonaler_hero_refresh.py --check
   python3 scripts/saisonaler_hero_refresh.py --fix
   python3 scripts/saisonaler_hero_refresh.py --fix --force
+  python3 scripts/saisonaler_hero_refresh.py --set-current --reason "Merge-Entscheid bestätigt"
   python3 scripts/saisonaler_hero_refresh.py --selftest
 """
 from __future__ import annotations
@@ -388,6 +389,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--fix", action="store_true", help="bei Fälligkeit Claude-Politur schreiben")
     parser.add_argument("--force", action="store_true", help="Rotation/Fingerprint übergehen")
     parser.add_argument("--check", action="store_true", help="nur Fälligkeit berichten")
+    parser.add_argument("--set-current", action="store_true", help="aktuellen Saison-Hero als freigegebenen Basisstand markieren (keine KI-Änderung)")
+    parser.add_argument("--reason", default="", help="Begründung für --set-current (Merge/Freigabe-Akte)")
     parser.add_argument("--date", help="Stichtag YYYY-MM-DD (Tests/Review)")
     parser.add_argument("--selftest", action="store_true", help="offline Selbsttest")
     parser.add_argument("--json", action="store_true", help="maschinenlesbare Ausgabe")
@@ -397,6 +400,8 @@ def main(argv: list[str] | None = None) -> int:
         return selftest()
     if args.fix and args.check:
         parser.error("--fix und --check schließen sich aus")
+    if args.set_current and (args.fix or args.check):
+        parser.error("--set-current darf nicht mit --fix oder --check kombiniert werden")
 
     day = parse_date(args.date)
     now = now_utc()
@@ -410,6 +415,50 @@ def main(argv: list[str] | None = None) -> int:
         print(f"🛑 Keine Saison deckt {day.isoformat()} ab", file=sys.stderr)
         return 2
     state = load_json(STATE, {"version": 1, "saisons": {}})
+
+    if args.set_current:
+        title = str(season.get("hero_title") or "").strip()
+        lead = str(season.get("hero_lead") or "").strip()
+        errors = validate_candidate(title, lead, season, [])
+        if errors:
+            print("🛑 Aktueller Saison-Hero verletzt den SEO/GEO-Vertrag: "
+                  + "; ".join(errors), file=sys.stderr)
+            return 2
+        healthy, gate_message = guard_source()
+        if not healthy:
+            print("🛑 Saison-Wache verwirft den aktuellen Basisstand.\n" + gate_message,
+                  file=sys.stderr)
+            return 2
+        grund = (args.reason or "aktueller Saison-Hero als freigegebene Basis bestätigt").strip()
+        record = {
+            "updated": iso_now(), "fingerprint": fingerprint(season),
+            "model": "approved-seasonal-baseline",
+            "research_brief": "", "research_sha256": "",
+            "set_current": True, "reason": grund,
+        }
+        state.setdefault("version", 1)
+        state.setdefault("saisons", {})[str(season["id"])] = record
+        save_json(STATE, state)
+        append_history({
+            "ts": record["updated"], "season": season["id"],
+            "hero_title": title, "hero_lead": lead,
+            "model": record["model"], "research_brief": "",
+            "research_sha256": "", "topics": [],
+            "set_current": True, "reason": grund,
+        })
+        write_report([
+            "# Saisonaler Hero – Basisstand bestätigt", "",
+            f"**Saison:** `{season['id']}` · **Stand:** {record['updated']}",
+            f"**Grund:** {grund}", "",
+            "## Bestätigte H1", title, "", "## Bestätigter GEO-Lead", lead, "",
+            "---",
+            "_Es wurde kein Text neu generiert. Der vorhandene, freigegebene "
+            "Saison-Hero wurde als aktueller Basisstand markiert, damit keine "
+            "alte Willkommenstext-/Fallback-Rotation den Live-Stand überschreibt._",
+        ])
+        print(f"✅ Saisonaler Hero als Basisstand markiert: {season['id']}.")
+        return 0
+
     due, reason = is_due(season, state, args.force, now)
     base = {"season": season.get("id"), "date": day.isoformat(), "due": due, "reason": reason}
 

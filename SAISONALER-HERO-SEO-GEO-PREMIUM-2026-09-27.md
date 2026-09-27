@@ -36,6 +36,13 @@ Der Workflow **„Saisonaler Hero-Refresh (Agent Reach + Claude)“** läuft tä
 
 Der Lauf ändert weder CSS noch Templates noch die Design-Freigabe. Automatischer Textwechsel und automatischer Designwechsel sind bewusst getrennt: Layoutänderungen bleiben menschen- und messpflichtig.
 
+
+## Merge-/Wochen-Guard-Korrektur vom 27.09.2026
+
+Nach der Ablösung des statischen Willkommenstexts darf die alte Wochen-Rotation nicht mehr als Fallback-Pool zurückschreiben. Der freigegebene Herbst-Hero ist deshalb als Basisstand in `data/saisonaler_hero_state.json` und `data/saisonaler_hero_history.jsonl` markiert; `scripts/saisonaler_hero_refresh.py --check` meldet damit „aktuell“ statt sofort neu zu rotieren.
+
+Zusätzlich endet `data/willkommenstext_history.jsonl` jetzt auf einem Decommission-/Saison-Hero-Merge-Eintrag. Die Startseiten-Wache prüft diese Stilllegung: `homeInfoParams`, `scripts/willkommenstext_guard.py`, `.github/workflows/willkommenstext-refresh.yml` und neue `fallback`/`ai:*`-Einträge am Ende der Legacy-Historie sind wieder harte Funde.
+
 ## Fail-closed statt Schein-Automation
 
 Fehlt der Agent-Reach-Brief, `PUTER_AUTH_TOKEN`, die Puter-Brücke oder besteht ein Kandidat die Verifikation nicht, schreibt die Automation **nichts**. Die geprüfte saisonale Basis bleibt sichtbar; der Workflow erstellt eine deduplizierte Issue. Damit wird kein unbestätigter KI-Text als Premium-Optimierung ausgegeben.
@@ -45,6 +52,8 @@ Fehlt der Agent-Reach-Brief, `PUTER_AUTH_TOKEN`, die Puter-Brücke oder besteht 
 ```bash
 python3 scripts/saisonaler_hero_refresh.py --selftest
 python3 scripts/saisonaler_hero_refresh.py --check
+# Bei Merge-/Konfliktentscheid den aktuellen Saison-Hero als Basis bestätigen:
+python3 scripts/saisonaler_hero_refresh.py --set-current --reason "Merge-Entscheid bestätigt"
 python3 scripts/saisonale_startseite_guard.py --source-only
 hugo --minify
 python3 scripts/saisonale_startseite_guard.py --public public
