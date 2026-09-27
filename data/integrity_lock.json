@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-27T12:27:37.050093+00:00",
-  "head": "059850d",
+  "signed_at": "2026-09-27T13:12:20.763300+00:00",
+  "head": "e53bc74",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
-    "data/brand_lock.yaml": "a7ba347ddc2d4e1ca6cb061a8ab33a8bbfaf0f5b2725094e027966d3f1aebeca",
-    "hugo.toml": "99e9bb85eafefe480f9160423fa314808619389e252b9f3641be5b8ad0e0f809",
+    "data/brand_lock.yaml": "00a6e08f5f17a4b71accb34fd4a85fbc0c5d50b6af2fa707730e8a7e807b2c91",
+    "hugo.toml": "f13c4b9a7da4b2d89a4144a34d2bdfa0c18e2b22ab4b5812d24d607b6fb023a8",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,39 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6",
-  "audit_start_sha256": "0c877bc1ad5262e53238aacfeae9a9ee874e20a806d34592278f380313279353",
+  "files_sha256": "8b6d661de08f2a4cc582b8cd018ad01638151c201de1fc2bc7d69be3de4b26d6",
+  "audit_start_sha256": "becbf47bc206e4457757d8cdd0c66a57a961444cd3648aa386bca440610360c1",
   "audit": [
-    {
-      "date": "2026-09-25",
-      "art": "set-current",
-      "head": "1cd5804",
-      "geaendert": [
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c259916",
-              "datum": "2026-09-24",
-              "betreff": "feat(newsletter): Journey-Architektur (Worker rendert, Blog informiert) + Brevo-Auslese"
-            },
-            {
-              "sha": "f11c9b5",
-              "datum": "2026-09-24",
-              "betreff": "fix(newsletter): Testlauf dauerhaft auf Premium-Level (#26) (#364)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "ff7c0f7d0922a519267212baca79348c4819a2885e409f76f42f37d24b4f18b7",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-26",
       "art": "set-current",
@@ -103,7 +73,7 @@
         }
       ],
       "files_sha256": "c2ac980ad9db5d2b006e74393ad615ba669479cea1a95e71fd0cd6841c55e51b",
-      "prev_sha256": "0c877bc1ad5262e53238aacfeae9a9ee874e20a806d34592278f380313279353"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-26",
@@ -365,8 +335,57 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "a722d2a8286815026cd1648d15b4e13481e2c985e5be07c74b4b65269a2c9077",
-      "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6"
+      "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6",
+      "prev_sha256": "a722d2a8286815026cd1648d15b4e13481e2c985e5be07c74b4b65269a2c9077"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "e53bc74",
+      "geaendert": [
+        "data/brand_lock.yaml",
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "e53bc74",
+              "datum": "2026-09-27",
+              "betreff": "fix(brand): canonicalize new home title"
+            },
+            {
+              "sha": "05af6cd",
+              "datum": "2026-09-27",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/brand_lock.yaml",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "e53bc74",
+              "datum": "2026-09-27",
+              "betreff": "fix(brand): canonicalize new home title"
+            },
+            {
+              "sha": "05af6cd",
+              "datum": "2026-09-27",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "e22611b429ac186010bc9b3857e488c31b71d99428379a84d154b1d17dd5d775",
+      "files_sha256": "8b6d661de08f2a4cc582b8cd018ad01638151c201de1fc2bc7d69be3de4b26d6"
     }
   ]
 }
