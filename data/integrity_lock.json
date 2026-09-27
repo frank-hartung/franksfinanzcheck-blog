@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-27T11:43:39.839136+00:00",
-  "head": "40118334",
+  "signed_at": "2026-09-27T11:46:56.321813+00:00",
+  "head": "130b860",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
-    "data/brand_lock.yaml": "48412d47a79ee83f188e39e4e192e834adfc37de6a286096ea91f1a9a5a30e8a",
-    "hugo.toml": "7a95bfac2b2b30f36686ea38101afed3c60ed17fd1bd1123d0ff0abaf6dbfa86",
+    "data/brand_lock.yaml": "a7ba347ddc2d4e1ca6cb061a8ab33a8bbfaf0f5b2725094e027966d3f1aebeca",
+    "hugo.toml": "99e9bb85eafefe480f9160423fa314808619389e252b9f3641be5b8ad0e0f809",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,39 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0",
-  "audit_start_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2",
+  "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96",
+  "audit_start_sha256": "b9e347d739450db824d0d710f9505c3cff614eb693b317f9e663d08382e5bc43",
   "audit": [
-    {
-      "date": "2026-09-22",
-      "art": "set-current",
-      "head": "2207930",
-      "geaendert": [
-        "layouts/_partials/extend_footer.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "2207930",
-              "datum": "2026-09-22",
-              "betreff": "newsletter: Freischaltung Capture (Brevo-Formular) + Wache-/Doku-Sync"
-            },
-            {
-              "sha": "ae7d24b",
-              "datum": "2026-09-22",
-              "betreff": "social: Autopilot-Plan aktualisiert + Beiträge versendet"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-23",
       "art": "set-current",
@@ -127,7 +97,7 @@
         }
       ],
       "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec",
-      "prev_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-25",
@@ -366,8 +336,47 @@
       "art": "set-current",
       "head": "40118334",
       "geaendert": [],
-      "prev_sha256": "4478a9d40921f3f831a9313b88e96ef6a5552812d629dd9ee695dfeed77c8fe0",
-      "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0"
+      "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0",
+      "prev_sha256": "4478a9d40921f3f831a9313b88e96ef6a5552812d629dd9ee695dfeed77c8fe0"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "130b860",
+      "geaendert": [
+        "data/brand_lock.yaml",
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "130b860",
+              "datum": "2026-09-27",
+              "betreff": "feat(startseite): Willkommenstext SEO/GEO-Premium + Hero-Design v-hero-premium (freigegeben & live)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/brand_lock.yaml",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "130b860",
+              "datum": "2026-09-27",
+              "betreff": "feat(startseite): Willkommenstext SEO/GEO-Premium + Hero-Design v-hero-premium (freigegeben & live)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "e2d3825604be2cbfd31f72a5b492e533d6aeaf09fe66725db0976f87668de742",
+      "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96"
     }
   ]
 }

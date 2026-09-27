@@ -4,9 +4,9 @@
 # Sektion asset:<pfad> = SHA-256 der kanonischen Marken-Artefakte (bake_brand.py)
 
 - key: homeInfoParams.Title
-  expected: "FranksFinanzcheck – Geld sparen bei Strom, Gas, Versicherung & Konto"
+  expected: "FranksFinanzcheck: Geld sparen mit echten Experten-Tipps"
 - key: homeInfoParams.Content
-  expected: "FranksFinanzcheck ist dein unabhängiger Ratgeber für Geld sparen im Alltag: Klare Anleitungen zu Strom, Gas, Internet, Versicherungen und Konto – ohne Fachchinesisch, ohne Verkaufsdruck. Dahinter steht Frank Hartung mit Erfahrung aus über 10 Jahren eigener Finanzpraxis.\\n\\nStatt Werbung bekommst du echte Vor- und Nachteile: Ein Tarifcheck von zehn Minuten holt oft **mehrere hundert Euro** im Jahr zurück – gerade jetzt im Herbst, wenn die Jahresabrechnungen für Strom und Gas ins Haus flattern.\\n\\nMontags, mittwochs und freitags erscheint hier ein neuer Ratgeber mit konkreten Euro-Beträgen zum sofortigen Umsetzen. Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich. 📈"
+  expected: "FranksFinanzcheck ist dein unabhängiger Ratgeber für private Fixkosten, der dir hilft, beim **Geld sparen** die richtigen Entscheidungen zu treffen. Gründer Frank Hartung nutzt dafür über 10 Jahre Erfahrung aus der Finanzwelt. Google bewertet Ratgeberseiten zunehmend danach, ob echte Erfahrung und nachvollziehbare Quellen hinter den Tipps stehen statt nur oberflächlicher Zusammenfassungen.\\n\\nHier gibt es kein Fachchinesisch oder Verkaufsdruck. Wir vergleichen Strom, Gas und Versicherungen mit klaren Vor- und Nachteilen. So holst du ohne Stress **bis zu 1.500 € pro Jahr** für dich raus. Ein Kontowechsel dauert oft weniger als zehn Minuten 💡."
 - key: params.description
   expected: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
 - key: params.disclaimer
