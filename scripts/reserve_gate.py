@@ -250,6 +250,30 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
     except Exception as exc:  # noqa: BLE001
         zeilen.append(f"(Themen-Disposition nicht lesbar: {exc})")
 
+    # 4. JÜNGSTE PRODUKTIONSFEHLSCHLÄGE (27.09.2026, #412): Die Diagnose oben
+    #    verwies bisher auf den Lauf-Log – und Logs verfallen. Seit heute
+    #    trägt das Themen-Gedächtnis die FehlerKLASSE je Versuch ([infra] =
+    #    Provider-/Key-Ausfall, [inhalt] = Gate-Regel). Die letzten
+    #    Fehlschläge stehen damit hier, direkt im rot gewordenen Lauf.
+    try:
+        import reserve_topics as rt
+        data = rt.ledger_laden()
+        fehlschlaege = []
+        for titel, eintrag in data.items():
+            grund = str((eintrag or {}).get("grund") or "")
+            wenn = str((eintrag or {}).get("letzter_versuch") or "")
+            if "produziert" in grund or not wenn:
+                continue
+            klasse = "infra" if rt.INFRA_TAG in grund else "inhalt"
+            fehlschlaege.append(
+                (wenn, f"„{titel}“ ({klasse}, seit {wenn}, Pause bis "
+                       f"{(eintrag or {}).get('sperre_bis', '?')}): "
+                       f"{grund[:110]}"))
+        for _, zeile in sorted(fehlschlaege, reverse=True)[:4]:
+            zeilen.append(f"PRODUKTIONS-FEHLSCHLAG: {zeile}")
+    except Exception as exc:  # noqa: BLE001 – Diagnose darf nie blockieren
+        zeilen.append(f"(Themen-Gedächtnis nicht lesbar: {exc})")
+
     return zeilen
 
 

@@ -1545,3 +1545,35 @@ umwälzpumpe
 unfallversichert
 vorerkrankungs-ausschlüsse
 vvg
+
+# --- Fach-/Domänenvokabular 27.09.2026 (Content-Reserve #412: Altersvorsorge/Rente) ---
+# Korrekte Fachkomposita, Kuerzel und Zahlformen des Vorsorge-Clusters,
+# die Hunspell nicht kennt. Ohne diese Eintraege scheitert JEDER
+# Altersvorsorge-Kandidat deterministisch am Rechtschreib-Score
+# (je Wörterbuch-Luecke −0,02, je Fantasie-Tippfehler −0,10): der
+# Kandidat faellt unter die Publish-Schwelle, wird nach zwei Laeufern
+# quarantäne-geloest und schliesslich vom Janitor geloescht – der Pool
+# leert sich strukturell. Lektorat geprueft: alles korrekte Woerter.
+2030er
+40-jährigen
+abgeltungsteuer
+besparst
+dazubuchen
+fondsgebundene
+fondsguthaben
+fondspolice
+generationenkapital
+grv
+halbeinkünfteverfahren
+kapitalgedeckte
+kk
+kürzerzutreten
+nachgelagerte
+renditekiller
+rürup-rente
+umlagefinanzierung
+umlageprinzip
+umlageverfahren
+weckruf
+zillmerung
+zinseszinseffekt

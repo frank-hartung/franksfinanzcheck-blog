@@ -1,6 +1,44 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 27.09.2026 (Content-Reserve #27, Issue #412, Run 36338925820 –
+#  „dauerhaft auf Premium-Level“, zweiter roter Lauf am selben Tag):
+#  VIER Befunde, zwei davon strukturelle Dauerbrenner:
+#    1. STRANDED KANDIDAT. Der Altersvorsorge-Entwurf scheiterte mit
+#       quality-score 0.838 < 0.85 an der Rechtschreibung (0.52): 23 korrekte
+#       Fachbegriffe des Vorsorge-Clusters (Rürup-Rente, Umlageprinzip,
+#       Generationenkapital, Halbeinkünfteverfahren …) sind dem CI-Wörterbuch
+#       unbekannt – je −0,02 bis −0,10 Hart-Abzug. absorb_whitelist.py greift
+#       erst ab 3 Artikeln, also scheiterte JEDER Kandidat dieses neuen
+#       Themenfelds deterministisch – nach 2 Läufen Quarantäne, danach löscht
+#       der Janitor, der Pool leert sich strukturell. Fix: Domänenvokabular
+#       lektoriert in data/spellcheck_whitelist.txt (23 Begriffe), Artikel
+#       komplett neu lektoriert (Rechtschreibung 1.0, Flesch 61,2 ≥ 60,
+#       Typografie 1.0, quality-score 1.0, Keyword-Gate 100, readability 100),
+#       CTA-Themenroutung korrigiert (/go/strom/ → /go/tagesgeld/ – Rente-
+#       Artikel warb für Stromtarife!), Grammatik-Fixes („Du funktionierst
+#       nach dem Umlageprinzip“, „die Halbeinkünfteverfahren“), Tag-Artefakt
+#       „Geld sparen 3“ entfernt. Quarantäne-Zähler mit Begründung zurück-
+#       gesetzt (neuer Inhalt, neuer Hash, alter Fund erledigt).
+#    2. PLATZHALTER-DIAGNOSE BEI PRODUKTIONSAUSFALL. Sechs Themen fielen am
+#       27.09. durch („3 Versuche ohne Erfolg“ – mehr stand nirgendwo; Lauf-
+#       Logs verfallen). engine_generate.try_generate sammelt jetzt pro
+#       Versuch die FehlerKLASSE: [infra] (Provider-/Key-Ausfall) vs.
+#       [inhalt] (Titel-/Profi-Gate) – versuch_bilanz() schreibt sie in die
+#       Meldung, reserve_gate diagnose() druckt die letzten Fehlschläge mit
+#       Klasse und Cooldown direkt in den roten Lauf.
+#    3. UNGERECHTER CONTENT-COOLDOWN FÜR INFRA-AUSFÄLLE. Ein Provider-Ausfall
+#       sperrte Themen 3 Tage wie ein Qualitätsurteil – jede Störungsnacht
+#       verkleinerte so den verfügbaren Themenbestand (Teufelskreis).
+#       reserve_topics.merke zählt „[infra]“-Fehlschläge jetzt separat
+#       (infra_fehler), Sperre nur 1 Nacht; erst nach 3 Infra-Nächten in
+#       Serie greift die Budget-Notbremse (7 Tage). Selbsttest erweitert.
+#    4. NOTAUS NACH 2 LEERLÄUFEN. _reserve_topup_batch beendete die Nacht
+#       nach zwei ergebnislosen Themen-Runden – bei 43 freien Themen, zwei
+#       gelungenen Kandidaten und restlichem Zeitbudget. Die Bremse ist jetzt
+#       klassenscharf: reine Infra-Leerrunde → SOFORT stopp (Budget), Content-
+#       Leerrunde → bis zu 3 in Folge (RESERVE_LEERLAUF_INHALT_MAX).
+#
 #  REPARATUR 15.09.2026, NACHZUG (Fehler #295, Run 34967470666 – der Lauf
 #  war NACH der ersten Reparatur erneut rot, 5/6 statt 6/6):
 #    5. EINE CTA ÜBER ZWEI ZEILEN machte einen Kandidaten dauerhaft unreif.
