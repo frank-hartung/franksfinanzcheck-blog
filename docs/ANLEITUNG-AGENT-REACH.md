@@ -24,10 +24,12 @@ Kosten: 0 € (nur Zero-Config-Kanäle).
 | Skill (verdrahtet über `skills-lock.json`) | `.claude/skills/agent-reach/` | Routing-Wissen für alle Agenten (Claude Code u. a.): welche Plattform über welches Backend |
 | Python-Paket v1.5.0 (Tag-Pin) | via `requirements-agent-reach.txt` | CLI `agent-reach` (doctor/setup/skill/…) |
 | Gate | `scripts/agent_reach_gate.py` | Beantwortet: „Kann das Repo gerade im Internet lesen?" |
-| Recherche-Läufer | `scripts/agent_reach_research.py` | Erzeugt den wöchentlichen Recherche-Brief |
+| Recherche-Läufer | `scripts/agent_reach_research.py` | Erzeugt den allgemeinen Recherche-Brief |
+| Seitenrecherche | `scripts/agent_reach_editorial_research.py` | Recherchiert neue/geänderte Inhalte sofort und den Bestand im fachlich sinnvollen Turnus |
 | Kuratierter Themenplan | `data/agent_reach/themenplan.yaml` | RSS-Feeds, YouTube-/GitHub-Suchen, Referenzseiten |
 | Ergebnisablage | `data/research/` | Briefs (`JJJJ-MM-TT-internet-recherche.md` + JSON) |
-| Workflow | `.github/workflows/agent-reach-research.yml` | Montags 08:15 MESZ + manuell (`workflow_dispatch`) |
+| Workflow | `.github/workflows/agent-reach-research.yml` | Mo/Mi/Fr 08:15 MESZ + manuell (`workflow_dispatch`) |
+| Recherche-State | `data/agent_reach/content_research_state.json` | Fingerprint, letzter Quellenlauf und Quellenzahl je redaktioneller Seite |
 
 ## 2. Lokal installieren (Einmalig, ~2 Minuten)
 
@@ -56,6 +58,12 @@ python3 scripts/agent_reach_gate.py            # --json für Maschinen
 python3 scripts/agent_reach_research.py        # schreibt data/research/<heute>-internet-recherche.md
 python3 scripts/agent_reach_research.py --dry-run
 python3 scripts/agent_reach_research.py --selftest   # offline
+
+# Seitenbezogene Recherche (Blog + Ratgeber + Newsletter/Unterseiten)
+python3 scripts/agent_reach_editorial_research.py --dry-run
+python3 scripts/agent_reach_editorial_research.py --scope editorial --limit 8
+python3 scripts/agent_reach_editorial_research.py --new-only --force --limit 3
+python3 scripts/agent_reach_editorial_research.py --selftest
 
 # Agent-Reach-Originalkommandos (Aktivierung: source .venv/bin/activate)
 agent-reach doctor                 # Kanalmatrix (Menschen-Version)
@@ -100,6 +108,33 @@ themenplan.yaml    ───►  Mo 08:15 MESZ (CI) + manuell ───►  data
 Für Agenten gilt zusätzlich (steht in `CLAUDE.md`): Ad-hoc-Recherchen zu
 einzelnen Themen/URLs laufen über den Skill `.claude/skills/agent-reach/`
 (Routing-Tabelle + `references/` beachten, vorher `agent-reach doctor`).
+
+### 5.1 Recherche bei Erstellung und im Bestand
+
+Die Seitenrecherche führt ein kollisionsfreies Inventar über repo-relative
+Content-Pfade. Sie läuft nach vier Regeln:
+
+1. **Bei Geburt:** Die Content-Engine startet direkt nach der Generierung
+   `--new-only --force`; damit existiert vor der Qualitätskette ein Dossier zum
+   neuen Thema.
+2. **Bei Strukturdrift:** Ändern sich Titel, Description, Keywords oder H2/H3,
+   wird unabhängig vom Alter erneut recherchiert. Reine Claude-Stiländerungen
+   erzeugen dagegen keinen unnötigen Netzlauf.
+3. **Im Turnus:** Pillar-Ratgeber 21 Tage, Blogartikel 30 Tage,
+   Newsletter-Landingpage 45 Tage, Methodik/Über 90 Tage. Pro Lauf gelten acht
+   Seiten als Netzbudget; neue/geänderte und jüngste Inhalte kommen zuerst.
+4. **Fail honest:** Nur ein Dossier mit mindestens einer Quelle setzt den
+   Frische-State. Bei Netzausfall bleibt die Seite fällig.
+
+Je Thema werden eine auf offizielle/Verbraucher-Domains eingeschränkte
+Google-News-RSS-Suche und ein offenes Marktsignal gesammelt. Jeder Treffer trägt
+URL, Herausgeber, Datum und Quellenklasse. Ablage:
+`data/research/editorial/<datum>-seitenrecherche.{md,json}`.
+
+Das ist absichtlich ein **Prüfdossier**, keine automatische Faktenübernahme.
+Claude erhält weiterhin keine Erlaubnis, Zahlen oder Quellen zu erfinden oder
+ungeprüft zu ändern. So ist die Recherche automatisch, die Veröffentlichung
+aber fachlich kontrolliert.
 
 ## 6. Sicherheit & Compliance
 

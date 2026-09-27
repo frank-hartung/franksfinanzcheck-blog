@@ -32,7 +32,7 @@ from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-from post_utils import list_post_paths, join_article  # noqa: E402
+from post_utils import list_content_paths, list_post_paths, content_key, join_article  # noqa: E402
 
 # ---------------------------------------------------------------- Schutzzonen
 PROTECT_RX = re.compile(
@@ -122,11 +122,18 @@ def apply_rules(text: str, rules):
 
 
 # ------------------------------------------------------------ Artikel-Lauf
-def load_articles(files=None, new_only=False, include_drafts=False):
-    """Lädt Posts (Bundle + Legacy). new_only: Frontmatter-Datum ODER Slug = heute."""
+def load_articles(files=None, new_only=False, include_drafts=False, scope="posts"):
+    """Lädt redaktionellen Content frontmatter-sicher.
+
+    Der historische Funktionsname bleibt für alle bestehenden Wächter stabil.
+    Ohne ``scope`` werden wie bisher nur Posts geladen. ``scope=editorial``
+    erweitert den Lauf auf Blogartikel, Pillar-Ratgeber, Newsletter-Landingpage
+    sowie Methodik/Über-Seite. Rechtstexte und transaktionale Newsletter-Seiten
+    sind im zentralen Inventar ausdrücklich ausgeschlossen.
+    """
     today = datetime.now(timezone.utc).date().isoformat()
     arts = []
-    paths = files or list_post_paths()
+    paths = files or list_content_paths(scope)
     for path in paths:
         with open(path, encoding="utf-8") as fh:
             content = fh.read()
@@ -146,8 +153,21 @@ def load_articles(files=None, new_only=False, include_drafts=False):
                 or today in os.path.basename(path)
             if not (in_slug or get("date").startswith(today)):
                 continue
+        rel = content_key(path)
+        if rel.startswith("content/posts/"):
+            kind = "Blogartikel"
+        elif rel.startswith("content/pillar/"):
+            kind = "Ratgeberseite"
+        elif rel == "content/newsletter/index.md":
+            kind = "Newsletter-Landingpage"
+        elif rel == "content/_index.md":
+            kind = "Startseite"
+        else:
+            kind = "redaktionelle Unterseite"
         arts.append({
             "path": path,
+            "key": rel,
+            "kind": kind,
             "slug": (os.path.basename(os.path.dirname(path))
                      if os.path.basename(path) == "index.md"
                      else os.path.basename(path)[:-3]),

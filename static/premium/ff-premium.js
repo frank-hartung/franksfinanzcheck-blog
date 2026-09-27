@@ -385,11 +385,18 @@
 
     nav.appendChild(head);
 
-    var list = doc.createElement('div');
+    // Echte Listen-Semantik statt einer Link-Sammlung in einem div:
+    // Screenreader können Anzahl und Position damit ohne JS-Sonderwissen
+    // ankündigen. Visuell bleibt ausschließlich dieser Container scrollbar.
+    var list = doc.createElement('ol');
     list.className = 'ff-mini-toc__list';
     nav.appendChild(list);
 
     var links = headings.map(function (heading) {
+      var item = doc.createElement('li');
+      item.className = heading.tagName === 'H3'
+        ? 'ff-mini-toc__item ff-mini-toc__item--sub'
+        : 'ff-mini-toc__item';
       var a = doc.createElement('a');
       a.href = '#' + heading.id;
       // Sauberer Überschriften-Text: Ankersymbol und Kopierknopf bleiben
@@ -405,7 +412,8 @@
       // (grid columns in .ff-mini-toc a.ff-mini-toc--num, see z-premium-blog.css).
       var m = /^(\d{1,3}\.)\s+(.+)$/.exec(label);
       if (m) {
-        a.className = 'ff-mini-toc--num';
+        // classList bewahrt bei nummerierten H3 die Hierarchieklasse.
+        a.classList.add('ff-mini-toc--num');
         var num = doc.createElement('span');
         num.className = 'ff-mini-toc__num';
         num.textContent = m[1];
@@ -418,7 +426,8 @@
       } else {
         a.textContent = miniTocLabel(label);
       }
-      list.appendChild(a);
+      item.appendChild(a);
+      list.appendChild(item);
       return a;
     });
 
@@ -681,8 +690,10 @@
       if (!link || typeof list.scrollTop !== 'number') return;
       var viewTop = list.scrollTop;
       var viewBottom = viewTop + list.clientHeight;
-      var top = link.offsetTop;
-      var bottom = top + link.offsetHeight;
+      var row = link.parentElement && link.parentElement.tagName === 'LI'
+        ? link.parentElement : link;
+      var top = row.offsetTop;
+      var bottom = top + row.offsetHeight;
       var pad = 24;
       var target = null;
       if (top - pad < viewTop) target = Math.max(0, top - pad);

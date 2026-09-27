@@ -20,6 +20,52 @@ def list_post_paths():
     return sorted(set(p for p in paths if not p.endswith("_index.md")))
 
 
+# Redaktioneller Gesamtbestand. Rechtstexte und transaktionale Systemseiten
+# werden absichtlich nie von einer Sprach-KI umgeschrieben: Bei ihnen ist
+# juristische/technische Worttreue wichtiger als Stil. Die Newsletter-
+# Landingpage dagegen ist redaktioneller Conversion-Content und gehört dazu.
+EDITORIAL_SINGLE_PAGES = (
+    "content/_index.md",
+    "content/methodik/index.md",
+    "content/newsletter/index.md",
+    "content/ueber/index.md",
+)
+
+
+def list_content_paths(scope="posts"):
+    """Content-Dateien für einen klar benannten Redaktions-Scope.
+
+    ``posts``      Blogartikel (abwärtskompatibler Altstandard)
+    ``guides``     Ratgeber-/Pillar-Seiten
+    ``pages``      redaktionelle Unterseiten inkl. Newsletter-Landingpage
+    ``editorial``  alle drei Gruppen
+
+    Impressum, Datenschutz, Bestätigung, Präferenzen und Abmeldung sind
+    bewusst ausgeschlossen. So kann eine Automatik den gesamten *redaktionellen*
+    Bestand pflegen, ohne Rechts- oder Prozesscopy zu verändern.
+    """
+    scope = (scope or "posts").strip().lower()
+    valid = {"posts", "guides", "pages", "editorial"}
+    if scope not in valid:
+        raise ValueError(f"Unbekannter Content-Scope: {scope} (erlaubt: {', '.join(sorted(valid))})")
+
+    paths = []
+    if scope in ("posts", "editorial"):
+        paths.extend(list_post_paths())
+    if scope in ("guides", "editorial"):
+        paths.extend(glob.glob(os.path.join(BLOG_DIR, "content", "pillar", "*", "index.md")))
+    if scope in ("pages", "editorial"):
+        paths.extend(os.path.join(BLOG_DIR, rel) for rel in EDITORIAL_SINGLE_PAGES)
+    return sorted({p for p in paths if os.path.isfile(p) and
+                   (os.path.abspath(p) == os.path.join(BLOG_DIR, "content", "_index.md")
+                    or not p.endswith("_index.md"))})
+
+
+def content_key(path):
+    """Kollisionsfreier, repo-relativer Schlüssel für State-Dateien."""
+    return os.path.relpath(os.path.abspath(path), BLOG_DIR).replace(os.sep, "/")
+
+
 def slug_of(path):
     """Slug aus einem Post-Pfad (Bundle- oder Legacy-Format)."""
     if os.path.basename(path) == "index.md":

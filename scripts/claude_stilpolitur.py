@@ -97,6 +97,7 @@ STATE_FILE = os.path.join(BLOG_DIR, "data", "claude_stil_state.json")
 STIL_FILE = os.path.join(BLOG_DIR, "data", "schreibstil.yaml")
 BRAND_FILE = os.path.join(BLOG_DIR, "data", "brand_brain.yaml")
 CONFIG_FILE = os.path.join(BLOG_DIR, "data", "ki_redaktion.yaml")
+RESEARCH_DIR = os.path.join(BLOG_DIR, "data", "research", "editorial")
 
 ENGINE = "claude-stilpolitur (Claude, kostenlos ohne API, personalisiert)"
 BRUECKE = os.path.join(BLOG_DIR, "scripts", "puter_chat.mjs")
@@ -317,19 +318,56 @@ def render_system_prompt(stil: dict, brand: dict) -> str:
     return "\n".join(p for p in teile if p is not None)
 
 
+def research_context(key: str, limit: int = 6) -> str:
+    """Jüngstes Agent-Reach-Dossier der Seite als konservativer Prompt-Kontext.
+
+    Die Quellen werden NICHT zum Publikationsfutter: Der System-Prompt verbietet
+    neue Fakten/Zahlen/Links, und das nachgelagerte Byte-Gate würde sie ohnehin
+    verwerfen. Sie geben Claude aber Aktualitäts-/Intent-Kontext und verbinden
+    Recherche und Politur nachvollziehbar, ohne YMYL-Fakten blind zu schreiben.
+    """
+    if not os.path.isdir(RESEARCH_DIR):
+        return "Keine aktuelle Agent-Reach-Seitenrecherche vorhanden."
+    for path in sorted((os.path.join(RESEARCH_DIR, name)
+                        for name in os.listdir(RESEARCH_DIR)
+                        if name.endswith("-seitenrecherche.json")), reverse=True):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                pages = (json.load(fh) or {}).get("pages", [])
+        except (OSError, json.JSONDecodeError, AttributeError):
+            continue
+        for page in pages:
+            if page.get("page") != key:
+                continue
+            rows = []
+            for src in (page.get("sources") or [])[:limit]:
+                rows.append(f"- {src.get('title', '')} | {src.get('source', '')} | "
+                            f"{src.get('published', '')} | {src.get('url', '')}")
+            return "\n".join(rows) if rows else "Dossier vorhanden, aber ohne erreichbare Quelle."
+    return "Keine aktuelle Agent-Reach-Seitenrecherche vorhanden."
+
+
 def build_user_prompt(a: dict) -> str:
-    """Artikel-Auftrag für das Modell (Body zwischen festen Markern)."""
+    """Auftrag für Artikel, Ratgeber und redaktionelle Unterseiten."""
     anrede = "Du-Form (durchgehend)"
     m = re.search(r"(?m)^anrede:\s*[\"']?(.+?)[\"']?\s*$", a.get("fm", ""))
     if m and m.group(1).strip().lower().strip('"\'') in ("sie", "sie-form", "höflich"):
         anrede = "Sie-Form (durchgehend, höflich)"
     return (
-        f"ARTIKEL-TITEL: {a.get('title', '')}\n"
+        f"CONTENT-TYP: {a.get('kind', 'Blogartikel')}\n"
+        f"SEITEN-TITEL: {a.get('title', '')}\n"
         f"ANREDE: {anrede}\n"
         f"SEO-BESCHREIBUNG (Kontext, nicht Teil des Textes): "
         f"{a.get('description', '')}\n\n"
-        "Poliere den folgenden Artikel in Franks persönlichem Schreibstil auf\n"
-        "Premium-Level einer Profi-Agentur. Gib AUSSCHLIESSLICH den fertigen\n"
+        "AGENT-REACH-PRÜFKONTEXT (nur Aktualitäts-/Intent-Signal):\n"
+        f"{research_context(a.get('key', ''))}\n"
+        "WICHTIG: Übernimm daraus KEINE neue Behauptung, Zahl, Frist oder URL.\n"
+        "Die Treffer zeigen nur, welche Aspekte aktuell geprüft werden müssen;\n"
+        "Faktenpflege bleibt der verifizierten Redaktion vorbehalten.\n\n"
+        "Poliere den folgenden redaktionellen Inhalt in Franks persönlichem Schreibstil auf\n"
+        "Premium-Level einer Profi-Agentur. Beachte die Nutzerabsicht des Content-Typs;\n"
+        "eine Newsletter-Seite bleibt präzise Conversion-Copy, eine Methodik-Seite\n"
+        "bleibt sachlich und ein Ratgeber handlungsorientiert. Gib AUSSCHLIESSLICH den fertigen\n"
         "Markdown-Fließtext zurück.\n\n"
         "<<<ARTIKEL-START\n"
         f"{a['body']}\n"
@@ -393,11 +431,16 @@ def save_state(state: dict) -> None:
     os.replace(tmp, STATE_FILE)
 
 
-def auswahl(slug: str, body: str, state: dict, auffrischung_alter_tage: int,
-            now: datetime.datetime):
-    """Braucht dieser Artikel Claude? → (fp, prio, grund) · prio None = nein."""
+def auswahl(key: str, body: str, state: dict, auffrischung_alter_tage: int,
+            now: datetime.datetime, legacy_slug: str | None = None):
+    """Braucht dieser Inhalt Claude? Der repo-relative Key vermeidet Kollisionen.
+
+    Alte Post-States waren nur nach Slug indiziert; sie werden lesend weiter
+    akzeptiert und beim nächsten erfolgreichen Lauf auf den Pfad-Key migriert.
+    """
     fp = fingerprint(body)
-    e = (state.get("artikel") or {}).get(slug)
+    pool = state.get("artikel") or {}
+    e = pool.get(key) or (pool.get(legacy_slug) if legacy_slug else None)
     if not e:
         return fp, 0, "neu"
     if e.get("status") != "ok":
@@ -741,7 +784,10 @@ def main(argv: list | None = None) -> int:
                     help="polieren (kostenloser Puter-Zugang, ohne API)")
     ap.add_argument("--dry-run", action="store_true",
                     help="KI-Antwort prüfen, nichts schreiben (C15-Trockenlauf)")
-    ap.add_argument("--new-only", action="store_true", help="nur heutige Artikel")
+    ap.add_argument("--new-only", action="store_true", help="nur heute datierter Content")
+    ap.add_argument("--scope", choices=("posts", "guides", "pages", "editorial"),
+                    default="editorial",
+                    help="Redaktionsbestand: Standard editorial = Blogartikel + Ratgeber + Newsletter/Unterseiten")
     ap.add_argument("--include-drafts", action="store_true",
                     help="auch Entwürfe (draft: true) polieren")
     ap.add_argument("--force", action="store_true",
@@ -809,17 +855,21 @@ def main(argv: list | None = None) -> int:
         only_file = [p]
 
     arts = sk.load_articles(files=only_file, new_only=args.new_only,
-                            include_drafts=args.include_drafts)
+                            include_drafts=args.include_drafts, scope=args.scope)
+    # Leere Landingpage-Frontmatter (z. B. Startseite ohne Markdown-Body) ist
+    # kein sinnvoller Modellauftrag und verbraucht kein Gratis-Kontingent.
+    arts = [a for a in arts if sk.words(a["body"]) >= 20]
     state = load_state()
     auffrischung = int(cfg.get("auffrischung_alter_tage") or 0)
 
     kandidaten = []
     for a in arts:
-        fp, prio, grund = auswahl(a["slug"], a["body"], state, auffrischung, now)
+        fp, prio, grund = auswahl(a["key"], a["body"], state, auffrischung, now,
+                                  legacy_slug=a["slug"] if a["kind"] == "Blogartikel" else None)
         if prio is not None or args.force:
             kandidaten.append((prio if prio is not None else 0, grund or "force",
                                fp, a))
-    kandidaten.sort(key=lambda t: (t[0], t[3]["slug"]))
+    kandidaten.sort(key=lambda t: (t[0], t[3]["key"]))
 
     limit = cfg["max_artikel_pro_tag"] if args.limit is None else args.limit
     if args.force and args.limit is None:
@@ -830,7 +880,7 @@ def main(argv: list | None = None) -> int:
     rows, polished, verworfen = [], 0, 0
     for prio, grund, fp, a in ziel:
         if args.dry_run or not args.fix:
-            rows.append({"slug": a["slug"], "grund": grund,
+            rows.append({"slug": a["key"], "grund": grund,
                          "ergebnis": "Kandidat (kein --fix)" if not args.dry_run
                          else "Kandidat (Trockenlauf)", "delta": ""})
             continue
@@ -838,9 +888,9 @@ def main(argv: list | None = None) -> int:
                                    a["body"], cfg)
         if neu is None:
             verworfen += 1
-            rows.append({"slug": a["slug"], "grund": grund,
+            rows.append({"slug": a["key"], "grund": grund,
                          "ergebnis": f"verworfen – {meldung}", "delta": ""})
-            state.setdefault("artikel", {})[a["slug"]] = {
+            state.setdefault("artikel", {})[a["key"]] = {
                 "fp": fp, "status": "verworfen", "grund": meldung[:120],
                 "modell": cfg["modell"],
                 "last": now.isoformat(timespec="seconds"),
@@ -850,18 +900,18 @@ def main(argv: list | None = None) -> int:
         ok, grund_s = sk.write_verified(a, new_content, ENGINE)
         if not ok:
             verworfen += 1
-            rows.append({"slug": a["slug"], "grund": grund,
+            rows.append({"slug": a["key"], "grund": grund,
                          "ergebnis": f"Schreibsperre – {grund_s}", "delta": ""})
             continue
         polished += 1
-        state.setdefault("artikel", {})[a["slug"]] = {
+        state.setdefault("artikel", {})[a["key"]] = {
             "fp": fingerprint(neu), "status": "ok",
             "modell": cfg["modell"], "grund": grund,
             "last": now.isoformat(timespec="seconds"),
         }
-        rows.append({"slug": a["slug"], "grund": grund, "ergebnis": "poliert",
+        rows.append({"slug": a["key"], "grund": grund, "ergebnis": "poliert",
                      "delta": f"{len(neu) - len(a['body']):+d}"})
-        print(f"  ✍️ {a['slug']}: poliert ({grund}, "
+        print(f"  ✍️ {a['key']}: poliert ({grund}, "
               f"{len(neu) - len(a['body']):+d} Zeichen)")
 
     meta = {"mode": "FIX" if do_fix else ("TROCKENLAUF" if args.dry_run else "REPORT"),

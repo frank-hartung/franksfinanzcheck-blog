@@ -127,9 +127,9 @@ jobs:
       - name: Offline-Optimierung (LT + DW, ohne API – IMMER zuerst)
         run: |
           echo "== Grammatik (LT1–LT4, offline LanguageTool-Nachbau) =="
-          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_politur.txt || echo "⚠ Grammatik: Restfunde im Report"
+          python3 scripts/grammar_check.py --fix --scope editorial --include-drafts | tee /tmp/grammar_politur.txt || echo "⚠ Grammatik: Restfunde im Report"
           echo "== Sprachglatt (DW1–DW9 + V1, offline DeepL-Write-Nachbau) =="
-          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
+          python3 scripts/sprachglatt.py --fix --scope editorial --include-drafts | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
 
       - name: Claude (kostenlos ohne API) – Stil-Politur (personalisiert, Premium)
         env:
@@ -139,7 +139,7 @@ jobs:
           if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
           if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
           echo "== Claude (kostenlos, NUR claude-sonnet-5, personalisiert: data/schreibstil.yaml) =="
-          python3 scripts/claude_stilpolitur.py --fix $ARGS | tee /tmp/stilpolitur.txt
+          python3 scripts/claude_stilpolitur.py --fix --scope editorial --include-drafts $ARGS | tee /tmp/stilpolitur.txt
           cat /tmp/stilpolitur.txt
 
       - name: Änderungen committen & pushen (Redaktions-Bot)

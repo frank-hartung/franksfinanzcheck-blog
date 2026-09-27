@@ -3,9 +3,9 @@ title: "Spar-Newsletter: zwei Mails pro Woche, jede mit Rechnung"
 description: "Anmeldung zum Newsletter von FranksFinanzcheck: dienstags die Zahlen der Woche, freitags die Fristen davor – mit Double-Opt-In, Themenauswahl und Abmeldung in einem Klick."
 url: "/newsletter/"
 summary: "Anmeldung zum Newsletter von FranksFinanzcheck: zwei Mails pro Woche (Dienstag und Freitag) mit ausgewählten Spartipps, Rechnern und Fristen, Double-Opt-In, Themenauswahl, jederzeit kündbar."
-robotsNoIndex: true
-sitemap:
-  disable: true
+# Öffentliche redaktionelle Landingpage: indexierbar für Marken-/Newsletter-
+# Suchen und als zitierfähige GEO-Quelle. Transaktionale Folgeseiten
+# (Bestätigung, Präferenzen, Abmeldung) bleiben weiterhin noindex.
 hiddenInHomeList: true
 showtoc: false
 hidemeta: true

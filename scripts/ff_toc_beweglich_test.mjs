@@ -51,6 +51,9 @@ const headings = [...doc.querySelectorAll('.post-content h2[id], .post-content h
 t.group('1) Vollständigkeit');
 t.ok('Navigation erzeugt', !!nav);
 t.eq('Ein Eintrag je Überschrift (H2 + H3)', links.length, headings.length);
+t.ok('Semantische, nummerierte Liste (ol/li)',
+  doc.querySelector('.ff-mini-toc__list')?.tagName === 'OL'
+  && doc.querySelectorAll('.ff-mini-toc__list > li').length === headings.length);
 t.eq('Unterabschnitte hierarchisch markiert',
   links.filter((a) => a.classList.contains('ff-mini-toc--sub')).length, 2);
 t.ok('Keine gekürzten Titel („…“)', links.every((a) => !a.textContent.includes('…')));

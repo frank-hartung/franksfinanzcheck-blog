@@ -543,7 +543,9 @@ h3:hover .ff-heading-copy,
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
+  margin: 0;
   padding: .3rem 6px .2rem 0;
+  list-style: none;
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--border) 90%, transparent) transparent;
 }
@@ -562,6 +564,11 @@ h3:hover .ff-heading-copy,
 .ff-mini-toc--long .ff-mini-toc__list {
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 18px), transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 18px), transparent 100%);
+}
+
+.ff-mini-toc__item {
+  margin: 0;
+  padding: 0;
 }
 
 .ff-mini-toc a {

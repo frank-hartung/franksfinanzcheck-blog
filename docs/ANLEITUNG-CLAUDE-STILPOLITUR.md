@@ -4,6 +4,15 @@
 **Stilprofil:** `data/schreibstil.yaml` (Franks eigener Schreibstil) + `data/brand_brain.yaml` (Marken-Stimme)
 **Workflows:** `claude-stilpolitur.yml` (Mo/Mi/Fr 04:50 UTC), `content-engine-v2.yml` Phase 2 (bei jedem neuen Artikel)
 
+**Abdeckung seit 27.09.2026:** `--scope editorial --include-drafts` umfasst
+Live- und Entwurfs-Blogartikel, Pillar-/Ratgeberseiten, die
+Newsletter-Landingpage sowie Methodik und Über-Seite. Damit wird auch künftiger
+Content vor seiner Veröffentlichung poliert.
+Impressum, Datenschutz und transaktionale Newsletter-Seiten (Bestätigung,
+Präferenzen, Abmeldung) bleiben bewusst ausgeschlossen: Dort gilt juristische
+bzw. prozessuale Worttreue vor Stil. Der Scope ist zentral in
+`scripts/post_utils.py` definiert und regressionsgetestet.
+
 ---
 
 ## Auftrag
@@ -81,6 +90,7 @@ auffrischung_alter_tage: 7        # Rotation: ab N Tagen seit letztem Lauf
 | Franks Schreibstil | `data/schreibstil.yaml` | Haltung, Satzrhythmus, Tonfall, Wortwahl, Stil-Hebel, Qualitätsziele |
 | Marken-Stimme | `data/brand_brain.yaml` | Ton, Leseniveau, Autor-Avatar, Verbotsphrasen |
 | Premium-Auftrag | eingebaut | Verlagsniveau (Capital/WiWo/ZEIT), Profi-Agentur-Politur |
+| Agent-Reach-Prüfkontext | `data/research/editorial/*-seitenrecherche.json` | jüngstes Dossier derselben Seite als Aktualitäts-/Intent-Signal; keine automatische Faktenübernahme |
 | Harte Regeln | eingebaut | Fakten/Schutzzonen/Überschriften byte-identisch, Tabu-Formulierungen |
 
 **Fein-Tuning des Stils:** einfach `data/schreibstil.yaml` editieren (Lieblingswörter, Ersatzformulierungen, Hebel) – der Prompt liest live mit. Kein Neubau nötig.
@@ -127,7 +137,7 @@ python3 scripts/claude_stilpolitur.py
 # Polieren (braucht PUTER_AUTH_TOKEN – kostenlos, KEIN Anthropic-Key)
 export PUTER_AUTH_TOKEN=…
 npm install --no-save @heyputer/puter.js    # einmalig lokal (Node 24+)
-python3 scripts/claude_stilpolitur.py --fix              # nur Mo/Mi/Fr (auffrischung_tage)
+python3 scripts/claude_stilpolitur.py --fix --scope editorial # gesamter Redaktionsbestand, nur Mo/Mi/Fr
 python3 scripts/claude_stilpolitur.py --fix --new-only   # nur heutige Artikel
 python3 scripts/claude_stilpolitur.py --fix --force      # alles, egal Fingerprint/Wochentag
 python3 scripts/claude_stilpolitur.py --fix --file content/posts/2026-09-25-…/index.md

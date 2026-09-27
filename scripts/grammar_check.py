@@ -332,12 +332,17 @@ def main(argv=None):
     as_json = "--json" in argv
     include_drafts = "--include-drafts" in argv
     new_only = "--new-only" in argv
+    scope = "posts"
     only_file = None
     for i, a in enumerate(argv):
         if a == "--file" and i + 1 < len(argv):
             only_file = argv[i + 1]
         elif a.startswith("--file="):
             only_file = a.split("=", 1)[1]
+        elif a == "--scope" and i + 1 < len(argv):
+            scope = argv[i + 1]
+        elif a.startswith("--scope="):
+            scope = a.split("=", 1)[1]
 
     if "--selftest" in argv:
         stf = run_selftest()
@@ -362,7 +367,8 @@ def main(argv=None):
         if not os.path.exists(p):
             p = os.path.join(ROOT, "content", "posts", only_file)
         files = [p]
-    arts = load_articles(files, new_only=new_only, include_drafts=include_drafts)
+    arts = load_articles(files, new_only=new_only, include_drafts=include_drafts,
+                         scope=scope)
 
     total = fixed = 0
     rows = []
