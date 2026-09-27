@@ -1,32 +1,57 @@
-{{- with site.Params.homeInfoParams -}}
-<article class="first-entry home-info">
-    {{- /* Saison-Badge (20.09.2026): Eyebrow ÜBER dem H1. Der H1 selbst ist
-           brand-gelockt (brand_guard.py) und bleibt unangetastet – die Saison
-           dockt als eigener Baustein an, Quelle data/saisons.yaml. */ -}}
+{{- /* ============================================================
+       SAISONALER STARTSEITEN-HERO
+       ------------------------------------------------------------
+       Der bisherige statische Willkommenstext aus `hugo.toml` wurde
+       bewusst entfernt. Diese Bühne bezieht Überschrift und Lead aus
+       der aktiven Saison in `data/saisons.yaml`.
+
+       Dadurch bleibt genau ein H1 erhalten, die jahreszeitliche
+       Relevanz ist im ersten sichtbaren Inhalt angelegt und ein
+       ausgelieferter Text kann ohne Template- oder Layout-Umbau
+       wechseln. Die Daten werden über saisons_data.html geladen –
+       niemals über site.Data/hugo.Data (data/ enthält JSONL-Logs).
+
+       SEO/GEO-Vertrag für `hero_title` + `hero_lead`:
+       - H1 benennt saisonalen Anlass und Spar-/Vergleichsintention.
+       - Der Lead beginnt mit der Entity FranksFinanzcheck und ist als
+         eigenständige, zitierfähige Antwort lesbar.
+       - Die saisonale Automation darf nur diese beiden Datenfelder
+         ändern; Struktur, CTAs, Messung und Premium-Layout sind
+         versionierte Produktentscheidungen.
+       ============================================================ */ -}}
+{{- $ctx := partial "_funcs/saison-kontext.html" (dict "leicht" true) -}}
+{{- $saison := $ctx.saison -}}
+{{- $titel := $saison.hero_title | default "" -}}
+{{- $lead := $saison.hero_lead | default "" -}}
+{{- if not $titel -}}
+  {{- errorf "Saisonale Startseite: Saison %q braucht `hero_title` in data/saisons.yaml" $saison.id -}}
+{{- end -}}
+{{- if not $lead -}}
+  {{- errorf "Saisonale Startseite: Saison %q braucht `hero_lead` in data/saisons.yaml" $saison.id -}}
+{{- end -}}
+<article class="first-entry home-info ff-saison--{{ $saison.id }}" data-ff-seasonal-hero="{{ $saison.id }}">
+    {{- /* Saison-Badge als klare Einordnung ÜBER der H1. */ -}}
     {{- partial "home_season.html" (dict "modus" "badge") }}
     <header class="entry-header">
-        <h1>{{ .Title | markdownify }}</h1>
+        <h1>{{ $titel | markdownify }}</h1>
     </header>
     <div class="entry-content md-content">
-        {{ $opts := dict "display" "block" }}
-        {{ (.Content | $.Page.RenderString $opts | partial "nbsp_sicherung.html") | safeHTML }}
+        {{- $opts := dict "display" "block" -}}
+        {{- ($lead | $.Page.RenderString $opts | partial "nbsp_sicherung.html") | safeHTML -}}
     </div>
-    {{- /* Saison-Hinweis: 1–2 Sätze Jahreszeit-Kontext unter dem Willkommens-
-           text (der Text selbst bleibt exklusiv Sache von
-           scripts/willkommenstext_guard.py). */ -}}
+    {{- /* Der Hinweis ergänzt den Lead, ohne dessen Antwort-zuerst-Satz zu
+           verwässern. Quelle und Saison sind mit Badge/Block identisch. */ -}}
     {{- partial "home_season.html" (dict "modus" "hinweis") }}
-    {{- /* cta_click (19.09.2026, Premium-Messkette): die drei Startseiten-Buttons
-           sind der erste Trichter-Schritt. Ohne Event misst die Outbound-Analyse
-           nur „Seite besucht“, nicht „Interesse geweckt“. `slug` ist die
-           Platzierungs-ID für data/umami_ctas.json. */ -}}
+    {{- /* cta_click: die drei Startseitenwege bleiben der messbare erste
+           Trichter-Schritt. `slug` trennt sie vom Saison-Fokus darunter. */ -}}
     <div class="ff-home-ctas">
-        <a href="/posts/" class="ff-btn ff-btn-primary" data-umami-event="cta_click" data-umami-event-cta="home-ratgeber" data-umami-event-slug="home-ratgeber" data-umami-event-placement="start-hero">Alle Ratgeber entdecken →</a>
+        <a href="/posts/" class="ff-btn ff-btn-primary" data-umami-event="cta_click" data-umami-event-cta="home-ratgeber" data-umami-event-slug="home-ratgeber" data-umami-event-placement="start-hero">Alle Ratgeber entdecken <span aria-hidden="true">→</span></a>
         <a href="/pillar/strom-sparen/" class="ff-btn ff-btn-secondary" data-umami-event="cta_click" data-umami-event-cta="home-strom" data-umami-event-slug="home-strom" data-umami-event-placement="start-hero">⚡ Strom &amp; Gas sparen</a>
-        <a href="/pillar/versicherungen/" class="ff-btn ff-btn-outline" data-umami-event="cta_click" data-umami-event-cta="home-versicherung" data-umami-event-slug="home-versicherung" data-umami-event-placement="start-hero">🛡️ Versicherungen verstehen</a>
+        <a href="/pillar/versicherungen/" class="ff-btn ff-btn-outline" data-umami-event="cta_click" data-umami-event-cta="home-versicherung" data-umami-event-slug="home-versicherung" data-umami-event-placement="start-hero">🛡️ Versicherungen prüfen</a>
     </div>
     <div class="ff-trust-row">
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Unabhängig &amp; klar erklärt</span>
-        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Mit konkreten Euro-Beträgen</span>
+        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Mit nachvollziehbaren Quellen</span>
         <span class="ff-trust-pill ff-trust-pill--editorial"><span class="ff-trust-check" aria-hidden="true">✓</span> Herausgegeben von<br><a class="ff-trust-author" href="/ueber/">Frank Hartung</a></span>
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> 2–3× pro Woche neu</span>
     </div>
@@ -47,9 +72,6 @@
   </a>
 </div>
 
-{{- /* Saison-Fokus (20.09.2026): saisonal priorisierte Teaser. Bewusst als
-       direktes Kind von <main> hinter dem Pinterest-CTA – nur so greift die
-       Mobile-Reihenfolge aus custom.css/zz-saisonale-startseite.css
-       (Artikel-Karten mit dem LCP-Cover bleiben order: 1). */ -}}
+{{- /* Saison-Fokus: direktes Kind von <main>, damit die mobile LCP-Reihenfolge
+       der Premium-Variante die Artikelkarte vor dem langen Hero hält. */ -}}
 {{- partial "home_season.html" (dict "modus" "block") }}
-{{- end -}}

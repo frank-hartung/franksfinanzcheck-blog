@@ -62,7 +62,11 @@
 </div>
 {{- end }}
 
-{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
+{{- /* Der Startseiten-Hero wird aus data/saisons.yaml gespeist. Er hängt
+      bewusst NICHT mehr an `params.homeInfoParams`: Der alte statische
+      Willkommenstext ist gelöscht, die saisonale Bühne existiert auf jeder
+      ersten Startseiten-Seite verlässlich (genau ein H1). */ -}}
+{{- if and .IsHome (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
 {{- end }}
 
@@ -79,7 +83,13 @@
 
 {{- $class := "post-entry" }}
 
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+{{- /* Der saisonale Hero ersetzt homeInfoParams. Damit die erste
+      Artikelkarte nicht zusätzlich PaperMods `first-entry`-Sonderrolle
+      übernimmt, gilt die Startseite selbst als bewusst bevorzugtes Hero-Layout. */ -}}
+{{- /* Im range ist `.` der Artikel; für das Seitenmerkmal muss deshalb
+      die äußere Seite `$` verwendet werden. Sonst würde die erste Karte
+      trotz saisonalem Hero noch einmal PaperMods `first-entry` erhalten. */ -}}
+{{- $user_preferred := or site.Params.disableSpecial1stPost $.IsHome }}
 {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
 {{- $class = "first-entry" }}
 {{- else if $term }}
