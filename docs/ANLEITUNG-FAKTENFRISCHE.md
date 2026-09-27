@@ -32,6 +32,11 @@ Fälligkeit (SSOT `data/agent_reach/faktenfrische.yaml → intervalle`):
 | YMYL | Versicherung, Kredit, Zins, Tarif, Frist, Energie … | 45 Tage |
 | standard | alles andere | 90 Tage |
 
+**Bereiche:** `content/posts` (Blogartikel) und `content/pillar`
+(Ratgeberseiten) laufen gemeinsam (`--scope alle`, Default). Bei gleicher
+Dringlichkeit wird die Ratgeberseite zuerst bearbeitet – sie trägt die interne
+Verlinkung ihrer ganzen Themenwelt.
+
 Priorität 0 hat immer die **Erstrecherche**. Danach zählt das Alter der letzten
 Prüfung. Pro Lauf werden `budget.max_artikel_pro_lauf` Artikel bearbeitet
 (Default 3) – Rotation statt Rundumschlag, damit kein Lauf die Feeds
@@ -94,6 +99,8 @@ Ohne `quellen:` rendert nichts. Kein leerer Kasten, kein Platzhalter.
 python3 scripts/faktenfrische.py                 # Trockenlauf + Report
 python3 scripts/faktenfrische.py --apply         # Belege schreiben
 python3 scripts/faktenfrische.py --neu --apply   # nur neue Artikel
+python3 scripts/faktenfrische.py --scope pillar --apply   # nur Ratgeberseiten
+python3 scripts/faktenfrische.py --scope posts --apply    # nur Blogartikel
 python3 scripts/faktenfrische.py --file content/posts/<slug>/index.md
 python3 scripts/faktenfrische.py --offline       # ohne Netz: nur GEO-Reife
 python3 scripts/faktenfrische.py --selftest      # 20 eingefrorene Fälle

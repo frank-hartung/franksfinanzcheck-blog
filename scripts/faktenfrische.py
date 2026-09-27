@@ -236,24 +236,36 @@ def lade_artikel(pfad: str) -> dict | None:
     }
 
 
-def alle_artikel() -> list[dict]:
-    basis = os.path.join(BLOG_DIR, "content", "posts")
+def alle_artikel(scope: str = "alle") -> list[dict]:
+    """Bestand nach Bereich.
+
+    `posts`  – Blogartikel (content/posts)
+    `pillar` – RATGEBERSEITEN (content/pillar): die Silo-Seiten sind die
+               langlebigsten YMYL-Texte des Blogs und altern am teuersten,
+               weil jede interne Verlinkung auf sie zeigt.
+    `alle`   – beides (Default; Auftrag 27.09.2026 nennt ausdrücklich
+               „Blogartikel UND Ratgeberseiten").
+    """
     treffer = []
-    for eintrag in sorted(os.listdir(basis)) if os.path.isdir(basis) else []:
-        pfad = os.path.join(basis, eintrag, "index.md")
-        if os.path.exists(pfad):
-            art = lade_artikel(pfad)
-            if art:
-                treffer.append(art)
-    # Pillar-/Ratgeberseiten gehören fachlich dazu (Silo-Seiten, YMYL).
-    pillar = os.path.join(BLOG_DIR, "content", "pillar")
-    for eintrag in sorted(os.listdir(pillar)) if os.path.isdir(pillar) else []:
-        pfad = os.path.join(pillar, eintrag, "index.md")
-        if os.path.exists(pfad):
-            art = lade_artikel(pfad)
-            if art:
-                art["pillar"] = art["pillar"] or eintrag
-                treffer.append(art)
+    if scope in ("alle", "posts"):
+        basis = os.path.join(BLOG_DIR, "content", "posts")
+        for eintrag in sorted(os.listdir(basis)) if os.path.isdir(basis) else []:
+            pfad = os.path.join(basis, eintrag, "index.md")
+            if os.path.exists(pfad):
+                art = lade_artikel(pfad)
+                if art:
+                    art["bereich"] = "artikel"
+                    treffer.append(art)
+    if scope in ("alle", "pillar"):
+        pillar = os.path.join(BLOG_DIR, "content", "pillar")
+        for eintrag in sorted(os.listdir(pillar)) if os.path.isdir(pillar) else []:
+            pfad = os.path.join(pillar, eintrag, "index.md")
+            if os.path.exists(pfad):
+                art = lade_artikel(pfad)
+                if art:
+                    art["pillar"] = art["pillar"] or eintrag
+                    art["bereich"] = "ratgeber"
+                    treffer.append(art)
     return treffer
 
 
@@ -761,7 +773,8 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
         "",
         "## Überblick",
         "",
-        f"- Geprüfte Artikel im Bestand: **{uebersicht['gesamt']}**",
+        f"- Geprüfte Seiten im Bestand: **{uebersicht['gesamt']}** "
+        f"(davon Ratgeberseiten: {uebersicht.get('ratgeber', 0)})",
         f"- Recherche-fällig: **{uebersicht['faellig']}**",
         f"- In diesem Lauf bearbeitet: **{uebersicht['bearbeitet']}**",
         f"- Durchschnittliche GEO-Reife: **{uebersicht['geo_schnitt']} %**",
@@ -769,11 +782,12 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
         "",
         "## Läufe",
         "",
-        "| Artikel | Fälligkeit | Fundstellen | Belege | Befunde | GEO |",
-        "|---|---|---|---|---|---|",
+        "| Seite | Bereich | Fälligkeit | Fundstellen | Belege | Befunde | GEO |",
+        "|---|---|---|---|---|---|---|",
     ]
     for l in laeufe:
-        z.append(f"| {l['titel'][:52]} | {l['grund'][:40]} | {l['treffer']} | "
+        z.append(f"| {l['titel'][:52]} | {l.get('bereich', 'artikel')} | "
+                 f"{l['grund'][:40]} | {l['treffer']} | "
                  f"{l['quellen']} | {len(l['befunde'])} | {l['geo']} % |")
     z += ["", "## Fachliche Befunde (redaktionelle Entscheidung)", ""]
     offen = [(l, b) for l in laeufe for b in l["befunde"]]
@@ -875,12 +889,20 @@ def selftest() -> int:
     pruefe("ST6b", datum_aus_feed("2026-09-26T08:00"), "2026-09-26")
     pruefe("ST6c", datum_aus_feed(""), "")
 
+    # ST7 – Bereiche: Ratgeberseiten sind Teil des Bestands und als solche
+    # erkennbar (Auftrag 27.09.2026: Blogartikel UND Ratgeberseiten).
+    nur_pillar = alle_artikel("pillar")
+    nur_posts = alle_artikel("posts")
+    pruefe("ST7a", bool(nur_pillar) and all(a["bereich"] == "ratgeber" for a in nur_pillar), True)
+    pruefe("ST7b", bool(nur_posts) and all(a["bereich"] == "artikel" for a in nur_posts), True)
+    pruefe("ST7c", len(alle_artikel("alle")), len(nur_pillar) + len(nur_posts))
+
     if fehler:
         print("🛑 Selbsttest FAKTENFRISCHE rot:")
         for f in fehler:
             print("   -", f)
         return 2
-    print("✅ Selbsttest Faktenfrische: 20/20 Fälle grün.")
+    print("✅ Selbsttest Faktenfrische: 23/23 Fälle grün.")
     return 0
 
 
@@ -896,6 +918,9 @@ def main() -> int:
                    help="nur Artikel ohne `faktencheck` (Content-Erstellung)")
     p.add_argument("--file", help="genau diesen Artikel prüfen (Pfad zur index.md)")
     p.add_argument("--max", type=int, help="Budget je Lauf überschreiben")
+    p.add_argument("--scope", choices=("alle", "posts", "pillar"), default="alle",
+                   help="Bereich: posts = Blogartikel, pillar = Ratgeberseiten, "
+                        "alle = beides (Default)")
     p.add_argument("--offline", action="store_true", help="ohne Netzabruf (nur GEO-Reife)")
     p.add_argument("--strict", action="store_true", help="Exit 1 bei offenen Befunden")
     p.add_argument("--selftest", action="store_true")
@@ -918,7 +943,7 @@ def main() -> int:
             return 2
         bestand = [art]
     else:
-        bestand = alle_artikel()
+        bestand = alle_artikel(args.scope)
 
     # Reserve-/Entwurfsartikel zählen als „neu“ – sie sollen VOR der
     # Veröffentlichung ihre Erstrecherche bekommen.
@@ -937,7 +962,10 @@ def main() -> int:
         if f["faellig"]:
             kandidaten.append(art)
 
+    # Reihenfolge: Dringlichkeit → Ratgeber-Silo vor Einzelartikel (eine
+    # Silo-Seite trägt die interne Verlinkung vieler Artikel) → Alter.
     kandidaten.sort(key=lambda a: (a["_faellig"]["prio"],
+                                   0 if a.get("bereich") == "ratgeber" else 1,
                                    -(a["_faellig"]["alter_tage"] or 9999)))
     auswahl = kandidaten[:budget]
 
@@ -972,6 +1000,7 @@ def main() -> int:
         befunde_gesamt += len(befunde)
         laeufe.append({
             "slug": art["slug"], "titel": art["titel"],
+            "bereich": art.get("bereich", "artikel"),
             "grund": art["_faellig"]["grund"], "treffer": len(dossier["treffer"]),
             "quellen": len(quellen), "befunde": befunde,
             "geo": art["_geo"]["prozent"], "fehler": dossier["fehler"],
@@ -980,6 +1009,7 @@ def main() -> int:
 
     uebersicht = {
         "gesamt": len(bestand),
+        "ratgeber": sum(1 for a in bestand if a.get("bereich") == "ratgeber"),
         "faellig": len(kandidaten),
         "bearbeitet": len(auswahl),
         "geo_schnitt": round(sum(geo_werte) / len(geo_werte)) if geo_werte else 0,

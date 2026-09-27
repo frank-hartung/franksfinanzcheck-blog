@@ -1,22 +1,47 @@
 {
-  "erzeugt": "2026-09-27 12:30 UTC",
+  "erzeugt": "2026-09-27 12:33 UTC",
   "uebersicht": {
     "gesamt": 60,
-    "faellig": 57,
+    "ratgeber": 6,
+    "faellig": 51,
     "bearbeitet": 3,
-    "geo_schnitt": 67,
+    "geo_schnitt": 70,
     "befunde": 0,
     "geo_luecken": {
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 57,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 57,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 51,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 51,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 1,
       "Kurzantwort-Box (direkte Antwort für AI Overviews)": 6
     }
   },
   "offen": [
     {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "slug": "mietwagen",
+      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 50
+    },
+    {
+      "slug": "versicherungen",
+      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 50
+    },
+    {
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "titel": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+      "titel": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "geo": 67
     },
@@ -75,12 +100,6 @@
       "geo": 67
     },
     {
-      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
-      "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
       "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
       "titel": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -101,12 +120,6 @@
     {
       "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
       "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "geo": 67
     },
@@ -177,12 +190,6 @@
       "geo": 67
     },
     {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
       "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
       "titel": "Notgroschen: Die Wahrheit über das finanzielle Polster",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -213,12 +220,6 @@
       "geo": 50
     },
     {
-      "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
-      "titel": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
       "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
       "titel": "Versicherung-Update: Was sich jetzt für dich ändert",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -233,12 +234,6 @@
     {
       "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
       "titel": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung senken: Spätsommer-Check für Tarif und Heizung",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "geo": 67
     },
@@ -307,73 +302,46 @@
       "titel": "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "geo": 67
-    },
-    {
-      "slug": "frugalismus",
-      "titel": "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    },
-    {
-      "slug": "internet-dsl",
-      "titel": "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    },
-    {
-      "slug": "konto-karten",
-      "titel": "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    },
-    {
-      "slug": "mietwagen",
-      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    },
-    {
-      "slug": "versicherungen",
-      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
     }
   ],
   "laeufe": [
     {
-      "slug": "2026-08-10-dsl-wechselbonus-sichern",
-      "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+      "slug": "frugalismus",
+      "titel": "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit",
+      "bereich": "ratgeber",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
       "quellen": 0,
       "befunde": [],
-      "geo": 67,
+      "geo": 50,
       "fehler": [
         "offline: keine Abrufe"
       ],
       "aenderungen": []
     },
     {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
+      "slug": "internet-dsl",
+      "titel": "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz",
+      "bereich": "ratgeber",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
       "quellen": 0,
       "befunde": [],
-      "geo": 67,
+      "geo": 50,
       "fehler": [
         "offline: keine Abrufe"
       ],
       "aenderungen": []
     },
     {
-      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
-      "titel": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
+      "slug": "konto-karten",
+      "titel": "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen",
+      "bereich": "ratgeber",
       "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 0,
       "quellen": 0,
       "befunde": [],
-      "geo": 67,
+      "geo": 50,
       "fehler": [
         "offline: keine Abrufe"
       ],

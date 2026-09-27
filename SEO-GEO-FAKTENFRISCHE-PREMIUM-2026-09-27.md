@@ -44,13 +44,19 @@ Genau diese Brücke ist jetzt gebaut.
 
 | Takt | Auslöser | Umsetzung |
 |---|---|---|
-| **bei Content-Erstellung** | neuer Artikel ohne `faktencheck` (Priorität 0) | `content-engine-v2.yml`, Phase 3: `faktenfrische.py --neu --apply` |
+| **bei Content-Erstellung** | neuer Artikel/neue Ratgeberseite ohne `faktencheck` (Priorität 0) | `content-engine-v2.yml`, Phase 3: `faktenfrische.py --neu --apply` |
 | **in sinnvollen Abständen** | Fälligkeit nach Risikoklasse | `.github/workflows/faktenfrische.yml`, Di + Do 06:40 MESZ |
 
 „Sinnvolle Abstände“ heißt nicht Gießkanne, sondern Halbwertszeit:
 **saisonal 30 Tage** (Heizung, Stichtag 30.11., Jahreswechsel), **YMYL 45 Tage**
 (Versicherung, Kredit, Zins, Tarif, Frist, Energie), **Standard 90 Tage**.
-Budget: 3 Artikel je Lauf – Rotation statt Rundumschlag.
+Budget: 3 Seiten je Lauf – Rotation statt Rundumschlag.
+
+**Blogartikel und Ratgeberseiten gleichermaßen:** `content/posts` **und**
+`content/pillar` sind im Bestand (`--scope alle`, Default; einzeln adressierbar
+über `--scope posts` / `--scope pillar`). Bei gleicher Dringlichkeit läuft die
+**Ratgeberseite zuerst** – ein Silo trägt die interne Verlinkung vieler
+Artikel, ein veralteter Wert dort vergiftet die ganze Themenwelt.
 
 ### Der doppelte Deckel gegen Halluzination
 
@@ -94,15 +100,16 @@ CSS-Block „Quellen & Faktenstand“ in `z-premium-blog.css`,
 Jeder Lauf misst zusätzlich die **GEO-Reife** jedes Artikels an sechs
 Merkmalen (Kurzantwort, FAQ, Belege, Zahlen, Tabelle, Prüfdatum) und schreibt
 Durchschnitt und häufigste Lücken in `FAKTENFRISCHE-REPORT.md`.
-Ausgangsstand des Bestands: **65 %** über 60 Artikel und Ratgeber-Silos – die
-größte Einzel-Lücke war die fehlende Belegkette (60 von 60 Seiten ohne
-Quellenangabe). Nach den ersten drei belegten Seiten: **67 %**; der Rest folgt
-über die Rotation.
+Ausgangsstand des Bestands: **65 %** über 60 Seiten (54 Blogartikel +
+6 Ratgeberseiten) – die größte Einzel-Lücke war die fehlende Belegkette
+(60 von 60 Seiten ohne Quellenangabe). Nach den in dieser Runde belegten
+Seiten: **70 %**; der Rest folgt über die Rotation der beiden Workflows.
 
-**Belegt in dieser Runde (per Hand recherchiert und verifiziert):** die drei
-Strom-Seiten mit BDEW-Strompreisanalyse (37,0 ct/kWh, Stand 08/2026),
-Verbraucherzentrale (Anbieterwechsel, Grundversorgung mit 2-Wochen-Frist) und
-Bundesnetzagentur. Der Rest des Bestands läuft über die Rotation der beiden
+**Belegt in dieser Runde (per Hand recherchiert und verifiziert):** neun
+Seiten – der Ratgeber „Strom & Gas sparen“ und acht Energie-Artikel – mit
+BDEW-Strompreisanalyse (37,0 ct/kWh, Stand 08/2026), BDEW-Gaspreisanalyse
+(11,93 ct/kWh im Einfamilienhaus, Stand 08/2026), Verbraucherzentrale
+(Anbieterwechsel; Grundversorgung mit 2-Wochen-Frist) und Bundesnetzagentur. Der Rest des Bestands läuft über die Rotation der beiden
 Workflows – im CI sind die Feeds erreichbar, in der Sandbox dieser Session
 waren sie es nicht (das Skript meldet das sauber mit Exit 3, statt still zu
 schweigen).

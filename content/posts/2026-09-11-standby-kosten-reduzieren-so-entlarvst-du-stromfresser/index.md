@@ -24,6 +24,20 @@ cover:
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 kurzantwort: "Standby kostet meist weniger pro Gerät, als viele denken, aber in der Summe oft deutlich mehr. Schon 20 Watt Dauerlast entsprechen bei 0,40 € pro kWh rund 70 € im Jahr. Mit Strommessgerät, schaltbaren Steckdosenleisten und einem systematischen Raum-Check findest du die größten Dauerverbraucher schnell heraus."
 social_posted: true
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+faktencheck: 2026-09-27
 ---
 
 Ein Gerät mit **2 Watt** im Standby wirkt harmlos. Zehn solcher Geräte nicht mehr. Dann laufen plötzlich **20 Watt** rund um die Uhr – und das sind bei **0,40 € pro kWh** grob **70 € im Jahr**. Genau deshalb lohnt es sich, bei den kleinen Dauerverbrauchern genauer hinzusehen.
