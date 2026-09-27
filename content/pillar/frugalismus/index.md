@@ -14,6 +14,16 @@ cover:
   alt: "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+faktencheck: "2026-09-27"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
 ---
 Frugalismus bedeutet für mich nicht knauseriger Verzicht oder extremes Knausern an Lebensqualität – sondern die bewusste Entscheidung, Geld nicht für Dinge zu verschwenden, die dir keinen echten Mehrwert bringen. Wenn du deine Fixkosten drückst und unnötige Konsumfallen meidest, entsteht jeden Monat ein finanzieller Überschuss. Dieses Geld arbeitet für dich, bringt dir mentale Ruhe und schafft echte Freiheit. Konkret heißt das: Fixkosten senken, die 50–30–20-Methode anwenden und deinen Notgroschen krisensicher aufbauen – Schritt für Schritt, ohne auf Lebensqualität zu verzichten.
 

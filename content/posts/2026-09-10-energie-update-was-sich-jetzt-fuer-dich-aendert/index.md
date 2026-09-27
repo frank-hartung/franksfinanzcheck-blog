@@ -21,6 +21,20 @@ cover:
 pin_title: "Energie-Update September: Was sich jetzt für dich ändert"
 pin_description: "*Werbung | Energie-Update September: Was sich bei Strom- und Gastarifen jetzt ändert, welche Fristen gelten und wie du mit einem kurzen Tarif-Check bis zu 300 € im Jahr sparst. Jetzt einordnen und handeln! #energieupdate #stromsparen #gaswechsel"
 kurzantwort: "Zum Herbst prüfen viele Haushalte ihre Energieverträge: Netzkosten und CO₂-Abgabe verteuern Strom und Gas, Grundversorger passen ihre Preise zum Jahreswechsel an. Bei rund 3.500 kWh Strom und 15.000 kWh Gas spart schon 1 Cent pro kWh über 180 Euro im Jahr. Prüfe jetzt deine Jahresabrechnung, vergleiche Tarife mit kurzer Laufzeit und passe deinen Abschlag an den echten Verbrauch an."
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 

@@ -24,6 +24,20 @@ cover:
   alt: "Gasrechnung senken: So bereitest du dich im Spätsommer vor"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Wer seine Gasrechnung senken will, sollte den Spätsommer nutzen: letzte Abrechnung prüfen, Tarif neu rechnen, Dichtungen testen und die Heizung vor der Saison sauber vorbereiten. Schon kleine Verbesserungen bei Tarif und Verbrauch können schnell einige hundert Euro Unterschied pro Jahr machen."
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im November reagieren fast alle. Im Spätsommer sparen die Klugen. Denn solange die Heizung noch nicht unter Volllast läuft, kannst du Verbrauch, Vertrag und kleine Schwachstellen ohne Druck prüfen.

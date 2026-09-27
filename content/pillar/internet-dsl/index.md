@@ -14,6 +14,20 @@ cover:
   alt: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+faktencheck: "2026-09-27"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
 ---
 Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundversorgung in jedem Haushalt – egal ob für Homeoffice, 4K-Streaming oder Online-Gaming. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten oder unzureichende WLAN-Abdeckung. Drei Stellschrauben zählen: das Heimnetzwerk optimieren, teure DSL-Altverträge durch lukrative Wechselprämien ersetzen und beim Smartphone-Tarif massiv sparen – in genau dieser Reihenfolge sinkt deine monatliche Rechnung am schnellsten.
 

@@ -22,6 +22,20 @@ keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wech
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
 pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 Viele Haushalte zahlen für Internet einfach weiter denselben Preis wie vor zwei oder drei Jahren. Nicht, weil der Tarif gut wäre, sondern weil ein Wechsel im Kopf anstrengender klingt, als er in Wirklichkeit ist. Genau dort setzen die Anbieter an – mit Rabatten, Startguthaben und dem bekannten **DSL-Wechselbonus**.

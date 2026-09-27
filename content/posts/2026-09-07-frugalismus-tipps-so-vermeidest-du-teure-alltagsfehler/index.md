@@ -26,6 +26,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Setze automatische Überweisungen ein, um monatlich mindestens 20 % deines Nettoeinkommens zu sparen, und nutze die 30‑Tage‑Regel, bevor du größere Anschaffungen tätigst. Vergleiche Preise online und kaufe nur, wenn du den Bedarf nach 24 Stunden immer noch hast. So vermeidest du Impulskäufe, senkst laufende Kosten und baust nachhaltig Vermögen auf."
 social_posted: true
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Frugalismus im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.

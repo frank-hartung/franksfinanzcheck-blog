@@ -22,6 +22,16 @@ keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen-Kaution Kred
 pin_title: "Mietwagen-Fallen im Urlaub: 7 Kostenfallen & wie du sie umgehst"
 pin_description: "*Werbung | Versteckte Kosten beim Mietwagen? Nicht mit uns: Diese 7 Fallen – von der Vollkasko-Masche bis zur Tankregelung – kosten Urlauber jedes Jahr Hunderte Euro. So schützt du dich vor bösen Überraschungen am Schalter. Jetzt lesen!"
 pinwand: "Günstig reisen | Reisebudget & Mietwagen"
+quellen:
+  - titel: "Mietwagen im Urlaub: So vermeiden Sie Ärger und Kostenfallen"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/mietwagen-im-urlaub-so-vermeiden-sie-aerger-und-kostenfallen-10874"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-07-22"
+  - titel: "Mietwagen im Urlaub: Tipps für günstige Buchung und Versicherung"
+    url: "https://www.test.de/Mietwagen-im-Urlaub-Tipps-fuer-guenstige-Buchung-und-Versicherung-5764024-0/"
+    herausgeber: "Stiftung Warentest"
+    datum: "2026-05-18"
+faktencheck: "2026-09-27"
 ---
 
 Du willst mietwagen buchen? Die Vorfreude ist groß. Doch am Schalter kommt oft das böse Erwachen.

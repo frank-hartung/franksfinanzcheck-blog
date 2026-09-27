@@ -14,6 +14,20 @@ cover:
   alt: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+faktencheck: "2026-09-27"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
 ---
 Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen Fehlern: Entweder sind sie für viel Geld gegen Bagatellschäden überversichert, oder es fehlen elementare Policen gegen existenzbedrohende Risiken. Aus meiner langjährigen Praxis als kritischer Verbraucher gilt der eiserne Grundsatz: **Versichere nur Schäden, die deinen finanziellen Ruin bedeuten würden.** Die gute Nachricht: Wer die wenigen Pflicht-Policen richtig wählt, spart gegenüber dem üblichen Rundum-Sorglos-Paket oft hunderte Euro pro Jahr – und schläft trotzdem besser.
 

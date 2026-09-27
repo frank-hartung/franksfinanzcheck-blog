@@ -23,6 +23,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein Notgroschen sollte mindestens drei‑ bis sechs‑mal deine monatlichen Fixkosten betragen – bei 1 000 € Fixausgaben also etwa 3 000 € bis 6 000 €. Wenn du ein geringes Einkommen hast, reicht ein Startpolster von rund 1 000 €. Passe die Summe an deine persönliche Ausgaben‑ und Risikosituation an."
 social_posted: true
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 

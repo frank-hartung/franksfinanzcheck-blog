@@ -26,6 +26,20 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Frugalismus beginnt nicht mit Verzicht, sondern mit Überblick. Wer kleine Alltagsausgaben sichtbar macht, Fixkosten regelmäßig prüft und Impulskäufe bremst, schafft oft 50 € bis 200 € mehr Spielraum im Monat. Entscheidend ist nicht Perfektion, sondern ein System, das du dauerhaft im Alltag durchhältst."
 social_posted: true
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Ein Coffee-to-go hier, ein spontaner Lieferdienst dort, dazu zwei Streaming-Abos, die kaum noch jemand nutzt. Nichts davon wirkt für sich dramatisch. Zusammen wird daraus aber oft genau der Betrag, der am Monatsende auf dem Konto fehlt.

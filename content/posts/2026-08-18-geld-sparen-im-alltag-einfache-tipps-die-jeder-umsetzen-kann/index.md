@@ -22,6 +22,20 @@ keywords: ["Geld sparen im Alltag", "Alltagsspartipps", "Sparen ohne Verzicht", 
 pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
 pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Fragst du dich am Monatsende auch manchmal, wohin dein hart verdientes Geld eigentlich geflossen ist? Oft sind es nicht die großen Einzelausgaben wie Urlaubsreisen oder Elektronikkäufe, die das Budget belasten, sondern unzählige [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/), die unbemerkt durch die Finger rinnen: der tägliche Coffee-to-go, vergessene Streaming‑Abos, Spontankäufe im Supermarkt oder überteuerte Bankgebühren. Mit der richtigen Struktur, klugen Alltagsroutinen und festen Gewohnheiten sind das **[Sparen im Alltag mit Frugalismus‑Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erstaunlich leicht und befreit dich von finanziellem Stress. Zehn sofort anwendbare Strategien zeigen dir, wie du monatlich **200 € bis 450 €** mehr auf der hohen Kante behältst und Schritt für Schritt ein solides [Finanzpolster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) aufbaust.

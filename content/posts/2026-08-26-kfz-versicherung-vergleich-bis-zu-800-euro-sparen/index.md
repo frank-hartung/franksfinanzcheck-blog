@@ -22,6 +22,20 @@ keywords: ["Kfz-Versicherung Vergleich", "Kfz-Versicherung wechseln", "Autoversi
 pin_title: "Kfz-Versicherung wechseln bis 30.11.: Jetzt vergleichen & sparen"
 pin_description: "*Werbung | Stichtag 30.11. nicht verpassen: Bis dahin kannst du deine Kfz-Versicherung für das neue Jahr wechseln – Vergleiche zeigen immer wieder mehrere hundert Euro Sparpotenzial. Jetzt Tarife mit deinen Fahrzeugdaten durchrechnen und günstig ins neue Jahr starten!"
 pinwand: "Versicherungen clever wechseln & sparen"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei.

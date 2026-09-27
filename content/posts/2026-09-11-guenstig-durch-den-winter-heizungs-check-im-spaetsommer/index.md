@@ -20,6 +20,20 @@ keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energi
 pin_title: "Heizungs-Check im Spätsommer: Günstiger durch den Winter"
 pin_description: "*Werbung | Mit einem einfachen Heizungs-Check im Spätsommer startest du effizienter in die Heizsaison. So vermeidest du unnötige Kosten und erkennst kleine Probleme früh. Mehr Spartipps auf FranksFinanzcheck! #heizungscheck #heizkostensenken #heizungvorbereiten"
 pinwand: "Energie | Heizen & Sparen"
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 Du willst heizungs-check? Die teuerste Heizsaison ist oft nicht die kälteste. Am teuersten ist meist der Winter, in den man unvorbereitet startet. Wenn Heizkörper gluckern, Thermostate klemmen oder Einstellungen nicht mehr passen, steigt der Verbrauch oft schleichend. Genau diese kleinen Fehler kosten über Monate Geld.

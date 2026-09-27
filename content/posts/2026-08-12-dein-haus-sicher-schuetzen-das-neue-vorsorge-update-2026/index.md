@@ -20,6 +20,20 @@ keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherun
 pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
 pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Versicherung wirkt oft langweilig – bis ein Keller vollläuft, nach einem Einbruch teure Dinge fehlen oder ein Sturm das Dach beschädigt. Genau dann zeigt sich, ob dein Vertrag wirklich schützt oder nur gut klingt.

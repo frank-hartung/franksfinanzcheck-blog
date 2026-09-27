@@ -14,6 +14,16 @@ cover:
   alt: "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+faktencheck: "2026-09-27"
+quellen:
+  - titel: "Mietwagen im Urlaub: So vermeiden Sie Ärger und Kostenfallen"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/mietwagen-im-urlaub-so-vermeiden-sie-aerger-und-kostenfallen-10874"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-07-22"
+  - titel: "Mietwagen im Urlaub: Tipps für günstige Buchung und Versicherung"
+    url: "https://www.test.de/Mietwagen-im-Urlaub-Tipps-fuer-guenstige-Buchung-und-Versicherung-5764024-0/"
+    herausgeber: "Stiftung Warentest"
+    datum: "2026-05-18"
 ---
 Ein Urlaub soll Erholung und unvergessliche Erlebnisse bringen – doch bei der Buchung von Mietwagen, Flügen und Pauschalreisen lauern zahlreiche Kostenfallen. Vor allem an den Schaltern der Autovermieter am Urlaubsflughafen versuchen viele Anbieter, teure Zusatzversicherungen zu verkaufen oder mit unfairen Tankregelungen abzukassieren. Wer am Schalter die Zusatzversicherung des Vermieters kauft, zahlt schnell das Doppelte des Buchungspreises. Mit der richtigen Vorbereitung bleibt dein Mietwagen ein Schnäppchen statt einer Kostenfalle.
 

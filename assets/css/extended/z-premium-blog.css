@@ -1737,6 +1737,21 @@ details.toc .inner a:focus-visible {
   color: var(--secondary);
 }
 
+.ff-quellen__note a {
+  display: inline-block;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  color: var(--ff-emerald);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .18s ease;
+}
+
+:root[data-theme="dark"] .ff-quellen__note a {
+  color: var(--ff-emerald-bright);
+}
+
 @media (max-width: 640px) {
   .ff-quellen {
     padding: 18px 16px 14px;

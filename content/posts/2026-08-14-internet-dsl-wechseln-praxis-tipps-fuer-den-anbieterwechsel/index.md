@@ -22,6 +22,20 @@ keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Hi
 pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
 pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.

@@ -22,6 +22,20 @@ keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heiz
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
 pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis und Preiskomponenten"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Elektrizität und Gas: Verbraucherinformationen der Bundesnetzagentur"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-15"
+faktencheck: "2026-09-27"
 ---
 
 Wer seine Gasrechnung senken will, sollte im Spätsommer handeln. Im Spätsommer denkt kaum jemand an die Heizung. Genau das ist ein teurer Fehler.

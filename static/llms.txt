@@ -91,4 +91,4 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-09-26.*
+(scripts/generate_llms_txt.py). Stand: 2026-09-27.*

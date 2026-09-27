@@ -22,6 +22,20 @@ keywords: ["DSL-Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "
 pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
 pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und FRITZ!Box-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 

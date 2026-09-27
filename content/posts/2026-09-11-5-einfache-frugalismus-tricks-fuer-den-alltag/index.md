@@ -22,6 +22,20 @@ cover:
 pin_title: "Ratenkredit clever: Umschulden & Bestzins sichern"
 pin_description: "*Werbung | Dein Dispo oder alter Kredit frisst Zinsen ohne Ende? Mit einem günstigen Ratenkredit schuldest du um und sparst oft mehrere hundert Euro. Jetzt Konditionen vergleichen – kostenlos, SCHUFA-neutral, mit schneller Auszahlung möglich. Jetzt Zinsen checken!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 5 einfache Frugalismus-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. Frugalismus klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.

@@ -20,6 +20,20 @@ cover:
   image: "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg"
   alt: "50-30-20-Regel: Beherrsche dein Budget"
   caption: "Tipp von FranksFinanzcheck"
+quellen:
+  - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
+    url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-06-15"
+  - titel: "Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-11-20"
+  - titel: "Verbraucherpreisindex und Inflationsrate in Deutschland"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-08-14"
+faktencheck: "2026-09-27"
 ---
 
 Viele glauben, sie müssten mehr verdienen, um endlich Geld übrig zu haben. In der Praxis fehlt aber oft nicht nur Einkommen. Es fehlt vor allem Struktur. Das Gehalt kommt, Rechnungen gehen ab, zwischendurch kaufst, bestellst und buchst du – und am Monatsende ist wieder unklar, wo das Geld geblieben ist.

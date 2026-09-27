@@ -22,6 +22,20 @@ keywords: ["Tagesgeldkonto", "Tagesgeldzinsen", "Zinsen vergleichen", "Geld sich
 pin_title: "Wohin mit dem Notgroschen? Tagesgeld & Co. clever nutzen"
 pin_description: "*Werbung | Dein Notfall-Polster auf dem Girokonto verliert jeden Tag an Wert: Wir vergleichen die smarten Parkplätze – Tagesgeld, Geldmarkt, verzinste Unterkonten – und zeigen, was wirklich sicher UND schnell verfügbar ist. Jetzt Zinsen mitnehmen!"
 pinwand: "Budget & Haushaltskasse: clever planen"
+quellen:
+  - titel: "Gesetzliche Einlagensicherung in Deutschland"
+    url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
+    herausgeber: "Deutsche Bundesbank"
+    datum: "2026-04-12"
+  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-02-14"
+  - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
+    url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-11-08"
+faktencheck: "2026-09-27"
 ---
 
 

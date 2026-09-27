@@ -22,6 +22,20 @@ keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtver
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
 pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
+quellen:
+  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-03-10"
+  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
+    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
+    herausgeber: "BaFin"
+    datum: "2025-10-04"
+  - titel: "Leitfaden privater Versicherungsschutz"
+    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-01-20"
+faktencheck: "2026-09-27"
 ---
 
 Ein Moment reicht. Du rempelst jemanden an, ein teures Gerät geht kaputt oder ein Mensch verletzt sich durch deine Unachtsamkeit. Dann geht es nicht um 50 € oder 200 €, sondern im schlimmsten Fall um Forderungen, die dein Vermögen über Jahre belasten können.

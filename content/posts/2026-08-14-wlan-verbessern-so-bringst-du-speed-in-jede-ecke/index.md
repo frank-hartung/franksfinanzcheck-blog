@@ -22,6 +22,20 @@ keywords: ["WLAN verbessern", "WLAN-Empfang", "Mesh WLAN", "WLAN Repeater", "Int
 pin_title: "WLAN-Verstärker vs. Mesh-WLAN: Was lohnt sich wirklich?"
 pin_description: "*Werbung | Funklöcher im Schlafzimmer, Ruckeln im Homeoffice? Wir erklären verständlich den Unterschied zwischen WLAN-Repeater und Mesh-System – mit Kostenvergleich und klarer Empfehlung für jede Wohnungsgröße. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
+quellen:
+  - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-07-10"
+  - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-09-18"
+  - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
+    url: "https://www.heise.de/thema/WLAN"
+    herausgeber: "heise online"
+    datum: "2026-08-05"
+faktencheck: "2026-09-27"
 ---
 
 WLAN verbessern im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
