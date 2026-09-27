@@ -112,6 +112,22 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
         .map((s) => s.textContent || '')
         .join('\n')
     );
+    // Nachfolge-Ausnahme (27.09.2026, Scharfschaltung v-hero-premium):
+    // Bei einer dokumentierten Ablöse absorbiert die aktive Variante
+    // den Vorgänger vollständig – dessen Regeln GEHÖREN dann zum
+    // Produktions-CSS, solange sie 1:1 aus der AKTIVEN Varianten-Datei
+    // stammen. Nadeln, die exakt so in der aktiven Datei stehen, sind
+    // deshalb kein Leak; ein echter Basis-Kopierer (Regel in extended/
+    // ohne aktive Entsprechung) fällt weiterhin auf.
+    let aktivQuelleNormalisiert = '';
+    if (aktiv) {
+      const aktivPfad = join(VARIANTEN_DIR, `${aktiv}.css`);
+      if (existsSync(aktivPfad)) {
+        aktivQuelleNormalisiert = readFileSync(aktivPfad, 'utf8')
+          .replace(/\/\*[\s\S]*?\*\//g, ' ')
+          .replace(/\s+/g, '');
+      }
+    }
 
     for (const datei of variantenDateien()) {
       if (aktiv && datei === `${aktiv}.css`) continue;
@@ -122,6 +138,7 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
       const treffer = ohneKommentare.match(/([a-z-]+)\s*:\s*([^;{}]+);/);
       if (!treffer) continue;
       const nadel = `${treffer[1]}:${treffer[2].trim()}`.replace(/\s+/g, '');
+      if (aktivQuelleNormalisiert && aktivQuelleNormalisiert.includes(nadel)) continue;
       const heuHaufen = ausgeliefert.replace(/\s+/g, '');
       expect(
         heuHaufen.includes(nadel),

@@ -38,7 +38,7 @@ stand: "2026-09-26"
 # Welche Variante läuft laut Register in Produktion? "" = Basis.
 # Scharf geschaltet am 26.09.2026 – muss mit params.designVariante in
 # hugo.toml übereinstimmen, sonst meldet die Produktionswache P1-Drift.
-aktiv: "v-hero-conversion"
+aktiv: "v-hero-premium"
 
 varianten:
 
@@ -86,7 +86,7 @@ varianten:
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Relume-Muster „Hero mit Primär-/Sekundärhandlung“), von Hand auf die Marken-Tokens zurückgeschnitten"
-    status: live
+    status: gemessen
     css: "css/varianten/v-hero-conversion.css"
     notizen: >
       Bewusst nur Hierarchie (Gewicht, Fläche, Ruhe) – keine neuen
@@ -104,25 +104,18 @@ varianten:
       BEOBACHTUNGSFENSTER bis 10.10.2026: cta_click je slug in Umami.
       Rückbau, wenn die Summe aller drei Hero-CTAs sinkt.
     freigabe:
-      mensch: true
-      name: "Frank Hartung"
-      datum: "2026-09-26"
-      messprotokoll: "design/messungen/v-hero-conversion-2026-09-26.json"
-      kommentar: >
-        Freigegeben auf Basis des Messprotokolls vom 26.09.2026. Alle
-        Budgets gehalten: Kontrast 7,53 (min. 4,5), kleinstes Tap-Ziel
-        26,4 px (min. 24), CLS 0,006, Lighthouse mobil Performance
-        0,99 / LCP 1828 ms (Budget 2500), desktop 1,00 / 614 ms,
-        Accessibility 0,96, SEO 1,00. Die Messkette bleibt vollständig:
-        3 von 3 CTAs mit data-umami-event, Affiliate-rel intakt,
-        Pflicht-Bausteine vorhanden. CSS-Zuwachs +3404 Bytes
-        (erlaubt +6144), ein zusätzliches head-Kind.
-        WAS DAMIT NICHT BELEGT IST: dass die Variante mehr Klicks
-        bringt. Das Labor sagt „darf ausgeliefert werden", nicht „ist
-        besser". Die Hypothese wird nach dem Scharfschalten 14 Tage an
-        Umami (cta_click je slug) geprüft; Abbruch und Rückbau, wenn
-        die Summe aller drei CTAs sinkt.
-
+      mensch: false
+      name: ""
+      datum: ""
+      kommentar: >-
+        Ablösung am 27.09.2026: Diese Variante wurde von
+        v-hero-premium beerbt (gleiche Hierarchie, vollständig
+        geerbt) und steht seitdem auf `gemessen`. Die ursprüngliche
+        Freigabe vom 26.09.2026 (Frank Hartung, Protokoll
+        design/messungen/v-hero-conversion-2026-09-26.json, Messwerte
+        u. a. Kontrast 7,53 · Tap 26,4 px · Lighthouse mobil 0,99 /
+        LCP 1828 ms) ist damit beendet – Historie vollständig in Git
+        und Protokoll. Kein aktiver Freigabe-Status.
   # ----------------------------------------------------------------
   # Nachfolge-Entwurf (27.09.2026, KI-Vorschlag nach Agent-Reach-
   # Recherche zu SEO/GEO-Stand 2026): führt die freigegebene
@@ -151,7 +144,7 @@ varianten:
     oberflaeche:
       - "/"
     herkunft: "KI-Entwurf (Agent-Reach-Recherche GEO/SEO 2026 + Design-System DESIGN.md/PRODUCT.md), auf den Marken-Tokens geschnitten"
-    status: entwurf
+    status: live
     css: "css/varianten/v-hero-premium.css"
     notizen: >-
       Erbt die freigegebene v-hero-conversion-Hierarchie vollständig
@@ -164,5 +157,30 @@ varianten:
       Fakten-Panel kompakt vertikal zentriert statt gestreckt,
       H1-Umbruch über text-wrap: pretty (Gedankenstrich nie am
       Zeilenanfang, 22ch), Dark-Shots geprüft.
+      Scharf geschaltet am 27.09.2026 (Runbook Schritt 5+6) als
+      Nachfolgerin von v-hero-conversion (seitdem auf `gemessen`;
+      deren Hierarchie ist hier vollständig geerbt). Beobachtungs-
+      fenster bis 11.10.2026: cta_click je slug in Umami; Abbruch
+      und Rückbau, wenn die Summe aller drei Hero-CTAs sinkt.
       Rückabwicklung = eine Datei weglassen.
-    freigabe: { mensch: false, name: "", datum: "", kommentar: "" }
+    freigabe:
+      mensch: true
+      name: "Frank Hartung"
+      datum: "2026-09-27"
+      messprotokoll: "design/messungen/v-hero-premium-2026-09-27.json"
+      kommentar: >-
+        Freigabe am 27.09.2026 durch Frank Hartung (Auftrag im
+        Arbeitsprotokoll dieser Session: „Bitte freigeben auf
+        Premium-Level einer Profi-Agentur") auf Basis des heute
+        frisch eingefrorenen Messprotokolls. Alle Budgets gehalten:
+        Kontrast 7,53 (min. 4,5), kleinstes Tap-Ziel 26,4 px (min. 24),
+        CLS 0,006, Lighthouse mobil Performance 1,00 / LCP 1736 ms
+        (Budget 2500), desktop 1,00 / 601 ms, Accessibility 0,96.
+        Messkette vollständig: 3 von 3 CTAs mit data-umami-event,
+        Affiliate-rel intakt, Pflicht-Bausteine vorhanden, DOM
+        +1 head-Kind (Varianten-Style). WAS DAMIT NICHT BELEGT IST:
+        dass die Variante mehr Klicks bringt. Das Labor sagt „darf
+        ausgeliefert werden", nicht „ist besser". Hypothese wird 14
+        Tage ab 27.09.2026 an Umami geprüft (cta_click je slug);
+        Abbruch und Rückbau, wenn die Summe aller drei Hero-CTAs
+        gegenüber der Vorperiode sinkt.

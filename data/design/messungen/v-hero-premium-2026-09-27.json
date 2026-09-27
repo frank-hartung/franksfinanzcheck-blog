@@ -1,7 +1,7 @@
 {
   "_hinweis": "Messprotokoll der Design-Varianten-Werkbank. Beleg für eine Freigabe in data/design/varianten.yaml. Erzeugt von scripts/design_variant_lab.py --protokoll – nicht von Hand ändern.",
   "variante": "v-hero-premium",
-  "erstellt": "2026-09-27T09:55:41Z",
+  "erstellt": "2026-09-27T10:41:01Z",
   "werkzeuge": {
     "hugo": "v0.166.0-78400b4de8adc99273d3e674ed6c4d14c3bdf669+extended+withdeploy",
     "lighthouse": "13.5.0"
@@ -9,22 +9,22 @@
   "tiers": {
     "statisch": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:54:38Z",
+      "gemessen": "2026-09-27T10:40:07Z",
       "stichprobe": [
         {
           "seite": "/",
           "h1": 1,
-          "bytes": 197895
+          "bytes": 198409
         },
         {
           "seite": "/posts/",
           "h1": 1,
-          "bytes": 192690
+          "bytes": 192681
         },
         {
           "seite": "/pillar/",
           "h1": 1,
-          "bytes": 179867
+          "bytes": 179858
         },
         {
           "seite": "/2026-09-21-tierkrankenversicherung-hund-katze-kosten/",
@@ -82,7 +82,7 @@
     },
     "gerendert": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:54:42Z",
+      "gemessen": "2026-09-27T10:40:11Z",
       "werte": {
         "kontrast_min": 7.53,
         "kontraste_hell": {
@@ -105,13 +105,13 @@
         "tap_kleinstes": "A.ff-consent-banner__link",
         "fokusring_sichtbar": true,
         "fokus_outline": "3px solid rgb(255, 179, 0)",
-        "cls": 0,
-        "lcp_ms": 568
+        "cls": 0.006,
+        "lcp_ms": 456
       }
     },
     "lighthouse": {
       "status": "ok",
-      "gemessen": "2026-09-27T09:55:41Z",
+      "gemessen": "2026-09-27T10:41:01Z",
       "werte": {
         "profile": {
           "mobil": {
@@ -120,28 +120,28 @@
             "netz_kbps": 1638.4,
             "laeufe": 3,
             "verfahren": "median",
-            "benchmark_index": 1881,
+            "benchmark_index": 2647,
             "lighthouse": {
-              "performance": 0.98,
+              "performance": 1,
               "accessibility": 0.96,
               "seo": 1,
               "best-practices": 0.96
             },
-            "tbt_ms": 126,
-            "lcp_ms": 1858,
-            "fcp_ms": 999,
+            "tbt_ms": 56,
+            "lcp_ms": 1736,
+            "fcp_ms": 912,
             "cls": 0,
             "ungenutztes_css_kb": 17,
             "streuung": {
               "lcp_ms": [
-                1943,
-                1858,
-                1811
+                1765,
+                1736,
+                1678
               ],
               "tbt_ms": [
-                243,
-                119,
-                126
+                47,
+                56,
+                117
               ]
             }
           },
@@ -151,7 +151,7 @@
             "netz_kbps": 10240,
             "laeufe": 3,
             "verfahren": "median",
-            "benchmark_index": 1901,
+            "benchmark_index": 2788,
             "lighthouse": {
               "performance": 1,
               "accessibility": 0.96,
@@ -159,15 +159,15 @@
               "best-practices": 0.96
             },
             "tbt_ms": 0,
-            "lcp_ms": 700,
-            "fcp_ms": 540,
+            "lcp_ms": 601,
+            "fcp_ms": 354,
             "cls": 0,
             "ungenutztes_css_kb": 17,
             "streuung": {
               "lcp_ms": [
-                734,
-                700,
-                648
+                598,
+                620,
+                601
               ],
               "tbt_ms": [
                 0,
@@ -182,28 +182,28 @@
         "netz_kbps": 1638.4,
         "laeufe": 3,
         "verfahren": "median",
-        "benchmark_index": 1881,
+        "benchmark_index": 2647,
         "lighthouse": {
-          "performance": 0.98,
+          "performance": 1,
           "accessibility": 0.96,
           "seo": 1,
           "best-practices": 0.96
         },
-        "tbt_ms": 126,
-        "lcp_ms": 1858,
-        "fcp_ms": 999,
+        "tbt_ms": 56,
+        "lcp_ms": 1736,
+        "fcp_ms": 912,
         "cls": 0,
         "ungenutztes_css_kb": 17,
         "streuung": {
           "lcp_ms": [
-            1943,
-            1858,
-            1811
+            1765,
+            1736,
+            1678
           ],
           "tbt_ms": [
-            243,
-            119,
-            126
+            47,
+            56,
+            117
           ]
         },
         "profil_massgeblich": "mobil"

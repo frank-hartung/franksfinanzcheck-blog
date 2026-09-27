@@ -145,6 +145,38 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 10 (27.09.2026, zehnte Runde: Freigabe + Scharfschaltung):**
+
+- **Freigabe erteilt (Frank Hartung, 27.09.2026):** Auftragswortlaut im
+  Arbeitsprotokoll („Bitte freigeben auf Premium-Level einer
+  Profi-Agentur"). Runbook Schritt 5+6 vollständig ausgeführt:
+  1. Messkette frisch (Caches waren dem Sandbox-Reclone zum Opfer
+     gefallen): Tier A + Tier B + Lighthouse, alle drei Ebenen im
+     `.cache`-Vertrag; Protokoll neu eingefroren
+     (`v-hero-premium-2026-09-27.json`). Messwerte: Kontrast 7,53 ·
+     Tap 26,4 px · CLS 0,006 · Lighthouse mobil **Perf 1,00 / LCP
+     1736 ms**, desktop 1,00 / 601 ms · A11y 0,96.
+  2. Register: `v-hero-premium` → `status: live` + unterschriebener
+     Freigabe-Block (Name, Datum, Protokoll-Verweis, ehrlicher
+     „Nicht-Belegt"-Vorbehalt). `v-hero-conversion` → `status:
+     gemessen` (geerbt, Historie im Kommentar + Git; aktives
+     Freigabe-Flag zurückgenommen — der Gate-Widerspruch P3 ist damit
+     sauber aufgelöst, ein beerdigter Versuch bleibt Wissen).
+  3. Schalter: `aktiv: "v-hero-premium"` (Register) +
+     `designVariante = "v-hero-premium"` (hugo.toml).
+  4. **Produktionswache: BESTANDEN, keine Befunde** — Markup trägt
+     `data-ff-variante="v-hero-premium" status="live"`.
+- **Leak-Test vertraglich geschärft (E2E):** Der Produktions-CSS-Test
+  kannte den Nachfolge-Fall nicht — die geerbten Regeln der
+  Vorgängerin schlugen als „Leak" an. Neue Regel: Eine Nadel aus einer
+  inaktiven Varianten-Datei ist kein Leak, wenn sie exakt so in der
+  AKTIVEN Varianten-Datei steht (dort ist sie autorisiert); ein echter
+  Basis-Kopierer fällt weiterhin auf. **Danach: 68/68 E2E grün — mit
+  v-hero-premium als Produktion.**
+- **Beobachtungsfenster bis 11.10.2026:** cta_click je slug in Umami;
+  Abbruch + Rückbau, wenn die Summe aller drei Hero-CTAs gegenüber
+  der Vorperiode sinkt. Rückbau bleibt eine Datei.
+
 **Design-Pass 9 (27.09.2026, neunte Runde: Abschluss-Sweep + Geometrie-Audit komplett):**
 
 - **Artikel-og-Geometrie geprüft und bewusst bestätigt:** Nachdem die

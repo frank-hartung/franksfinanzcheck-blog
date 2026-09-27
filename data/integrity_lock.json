@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-27T10:30:26.484680+00:00",
-  "head": "00160bb",
+  "signed_at": "2026-09-27T10:44:12.293211+00:00",
+  "head": "5d10826",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "48412d47a79ee83f188e39e4e192e834adfc37de6a286096ea91f1a9a5a30e8a",
-    "hugo.toml": "c98c95f3b0bb551a9470852e65da9faaab15ac84be49c8787371b728060637cc",
+    "hugo.toml": "7a95bfac2b2b30f36686ea38101afed3c60ed17fd1bd1123d0ff0abaf6dbfa86",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,18 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "b971159fbdd525ae46a6df79fe17c4964b47fd7e6fe697240800d86efddc7143",
-  "audit_start_sha256": "9b8e7cb89355da58a50f376f9ffd9f10903cb11437eba79118a9f8177e70c15f",
+  "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0",
+  "audit_start_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd",
   "audit": [
-    {
-      "date": "2026-09-21",
-      "art": "set-current",
-      "head": "598acdf",
-      "geaendert": [
-        "layouts/shortcodes/einspartabelle.html"
-      ],
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-22",
       "art": "repair",
@@ -81,7 +72,7 @@
         ]
       },
       "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198",
-      "prev_sha256": "9b8e7cb89355da58a50f376f9ffd9f10903cb11437eba79118a9f8177e70c15f"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-22",
@@ -366,8 +357,33 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "bc8c84582b2ba008ad96ea061c2773b7b733372b09ee53c1ec05c7d8955e0942",
-      "files_sha256": "b971159fbdd525ae46a6df79fe17c4964b47fd7e6fe697240800d86efddc7143"
+      "files_sha256": "b971159fbdd525ae46a6df79fe17c4964b47fd7e6fe697240800d86efddc7143",
+      "prev_sha256": "bc8c84582b2ba008ad96ea061c2773b7b733372b09ee53c1ec05c7d8955e0942"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "5d10826",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "59a348b",
+              "datum": "2026-09-27",
+              "betreff": "feat(og): Social-Preview 1200x630 Marken-Karte für die Startseite (Design-Pass 8)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "51386f18c1d4fc242edd3fd2bfd384396646ade1d4372136b3aad587a33f5e74",
+      "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0"
     }
   ]
 }

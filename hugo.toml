@@ -84,7 +84,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # Rückbau: diesen Wert auf "" setzen, im Register `aktiv: ""` und
   # den Status auf `gemessen` bzw. `verworfen`.
   # ---------------------------------------------------------------
-  designVariante = "v-hero-conversion"
+  designVariante = "v-hero-premium"
   title = "FranksFinanzcheck"
   description = "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
