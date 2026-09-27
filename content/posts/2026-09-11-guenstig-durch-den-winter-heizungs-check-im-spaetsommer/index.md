@@ -6,7 +6,7 @@ date: 2026-09-11T08:45:00Z
 draft: false
 tags: ["Heizkosten senken", "Heizungscheck", "Energie sparen", "Winter vorbereiten", "Nebenkosten"]
 categories: ["Energie"]
-pillar: "energie"
+pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich prüfe saisonale Sparthemen immer unter einem einfachen Maßstab: wenig Aufwand, klarer Nutzen, messbare Wirkung. Genau darum geht es auch bei diesem Heizungs-Check."
 ai_generated: false

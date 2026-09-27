@@ -84,7 +84,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # Rückbau: diesen Wert auf "" setzen, im Register `aktiv: ""` und
   # den Status auf `gemessen` bzw. `verworfen`.
   # ---------------------------------------------------------------
-  designVariante = "v-hero-conversion"
+  designVariante = "v-hero-premium"
   title = "FranksFinanzcheck"
   description = "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
   keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
@@ -97,7 +97,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # site.Params.images automatisch als Fallback in _funcs/get-page-images; das
   # Bild entsteht wie die Artikelfcover durch scripts/generate_covers.py
   # (2:3, 1000x1500, gleiche Marke) und wird von der Wache eingefordert (S5).
-  images = ["images/covers/brand-franksfinanzcheck.jpg"]
+  images = ["images/covers/og-default-1200x630.jpg", "images/covers/brand-franksfinanzcheck.jpg"]
   # Alt-Text des Site-Fallback-Bildes (og:image:alt) – konkret, nicht generisch.
   ogImageAlt = "FranksFinanzcheck: unabhängige Spar-Ratgeber mit echten Euro-Beträgen"
   DateFormat = "02.01.2006"
@@ -136,8 +136,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
   [params.homeInfoParams]
-    Title = "Einmal im Jahr vergleichen: dein Spar-Check für Strom, Gas & Versicherung"
-    Content = "🧾 Ein Nachmittag Vertrags-Check deckt oft bis zu 2.000 € Sparpotenzial im Jahr auf. FranksFinanzcheck zerlegt **Strom, Gas, Internet, Versicherungen und Konto** in konkrete Euro-Beträge, ehrliche Vor- und Nachteile und klare Anleitungen, geprüft aus über 10 Jahren eigener Finanzpraxis.\n\nEin kompletter Check an einem Tag bringt erfahrungsgemäß mehr als viele kleine spontane Wechsel übers Jahr verteilt. Montags, mittwochs und freitags gibt es einen neuen Ratgeber mit Schritt-für-Schritt-Anleitungen zum direkten Umsetzen. Kein Fachchinesisch, kein Verkaufsdruck.\n\nStöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
+    Title = "FranksFinanzcheck – Geld sparen bei Strom, Gas, Versicherung & Konto"
+    Content = "FranksFinanzcheck ist dein unabhängiger Ratgeber für Geld sparen im Alltag: Klare Anleitungen zu Strom, Gas, Internet, Versicherungen und Konto – ohne Fachchinesisch, ohne Verkaufsdruck. Dahinter steht Frank Hartung mit Erfahrung aus über 10 Jahren eigener Finanzpraxis.\n\nStatt Werbung bekommst du echte Vor- und Nachteile: Ein Tarifcheck von zehn Minuten holt oft **mehrere hundert Euro** im Jahr zurück – gerade jetzt im Herbst, wenn die Jahresabrechnungen für Strom und Gas ins Haus flattern.\n\nMontags, mittwochs und freitags erscheint hier ein neuer Ratgeber mit konkreten Euro-Beträgen zum sofortigen Umsetzen. Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich. 📈"
 
   [[params.socialIcons]]
     name = "pinterest"

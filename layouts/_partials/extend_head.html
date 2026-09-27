@@ -99,8 +99,12 @@
 <noscript><style>#ff-consent-banner{display:none}</style></noscript>
 
 {{- /* ---------- E-E-A-T: Person-Schema (Autor mit Foto) ---------- */ -}}
+{{- /* GEO-PREMIUM 27.09.2026: Auch auf der Startseite emittiert – der
+       WebSite-Knoten referenziert den Autor per @id; ohne Knoten hier
+       wäre die Referenz ausgerechnet auf der meistgesehenen Seite
+       unaufgelöst (Entity-Graph-Bruch für KI-Antwortmaschinen). */ -}}
 {{- $authorPhoto := "images/frank-hartung.jpg" | absURL -}}
-{{- if .IsPage -}}
+{{- if or .IsPage .IsHome -}}
 <script type="application/ld+json">{{ (dict
   "@context" "https://schema.org"
   "@type" "Person"

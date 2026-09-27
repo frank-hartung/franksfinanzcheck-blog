@@ -425,9 +425,14 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     // themenbezogene Animation austauschen“): Die Antwort-Box zeigt das
     // per CSS animierte Signet der Themenwelt des Artikels (aria-hidden,
     // dekorativ). Die alte Lightbulb-Glyphe darf nirgends mehr auftauchen.
+    // Locator bewusst AUF DIE BOX gescoped (Fix 27.09.2026): Die Artikel-
+    // Tipp-Box wiederverwendet .ff-kurzantwort__icon als kleines Inline-
+    // Zeichen (CSS-Vertrag .ff-article-tip-icon .ff-kurzantwort__icon) –
+    // ein seitenweiter Locator läuft in Playwrights Strict-Mode-Falle
+    // („resolved to 2 elements“), sobald ein Artikel beide Bausteine trägt.
     const articlePath = await newestArticlePath(page);
     await page.goto(articlePath, { waitUntil: 'domcontentloaded' });
-    const signet = page.locator('.ff-kurzantwort__icon');
+    const signet = page.locator('.ff-kurzantwort .ff-kurzantwort__icon');
     await expect(signet).toBeVisible();
     await expect(signet).toHaveClass(/ff-kurzantwort__icon--(strom|wlan|schutz|muenze|spross|auto|antwort)/);
     await expect(signet).toHaveAttribute('aria-hidden', 'true');
@@ -436,9 +441,10 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     const html = await page.content();
     expect(html.includes('M12 2a7 7 0 0 0-4 12.7'), 'Glühbirnen-Pfad ist aus dem Markup verschwunden').toBe(false);
 
-    // Animation läuft im normalen Bewegungsprofil wirklich
+    // Animation läuft im normalen Bewegungsprofil wirklich (gleiche
+    // Box-Scoping-Begründung wie oben – nicht die Tipp-Box einschließen).
     const anim = await page.evaluate(() =>
-      [...document.querySelectorAll('.ff-kurzantwort__icon [class*="ff-kz-"]')]
+      [...document.querySelectorAll('.ff-kurzantwort .ff-kurzantwort__icon [class*="ff-kz-"]')]
         .map((el) => getComputedStyle(el).animationName)
     );
     expect(anim.length, 'Signet besitzt animierte Komponenten').toBeGreaterThan(0);
@@ -450,7 +456,7 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     const articlePath = await newestArticlePath(page);
     await page.goto(articlePath, { waitUntil: 'domcontentloaded' });
     const anim = await page.evaluate(() =>
-      [...document.querySelectorAll('.ff-kurzantwort__icon [class*="ff-kz-"]')]
+      [...document.querySelectorAll('.ff-kurzantwort .ff-kurzantwort__icon [class*="ff-kz-"]')]
         .map((el) => getComputedStyle(el).animationName)
     );
     expect(anim.length, 'Signet-Komponenten vorhanden').toBeGreaterThan(0);

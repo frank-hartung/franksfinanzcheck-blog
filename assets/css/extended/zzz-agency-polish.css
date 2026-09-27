@@ -260,6 +260,24 @@ input, textarea {
   color: var(--ff-accent-2);
 }
 
+/* Font-unabhängiges Häkchen (27.09.2026): Das ✓-Zeichen (U+2713) hängt
+   an der Symbolabdeckung des Geräts – ohne Symbolfont bleibt die Pill
+   leer (im Sandbox-Browser nachweisbar). Gezeichnetes Häkchen via
+   Pseudo-Element, das Zeichen bleibt im DOM (aria-hidden). */
+.ff-trust-check {
+  font-size: 0;
+}
+
+.ff-trust-check::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--ff-accent-2);
+  border-bottom: 2px solid var(--ff-accent-2);
+  transform: rotate(-45deg) translateY(-1px);
+}
+
 /* Editoriale Autorenzeile: Der Herausgeber-Hinweis erhält bewusst eine
    zweite Zeile. So bleibt die Verantwortungsangabe auch in engen Hero-
    Layouts ruhig lesbar, ohne die übrigen Trust-Signale zu verbreitern. */
@@ -275,6 +293,37 @@ input, textarea {
   margin-top: 2px;
   font-size: 1.02em;
   line-height: 1.15;
+}
+
+/* Herausgeber-Link (27.09.2026, E-E-A-T): Die Personen-Entity ist von
+   der Startseite aus erreichbar (/ueber/). Optik wie zuvor, plus
+   dezente Unterstreichung als Link-Affordanz; Hover in --ff-accent-2
+   (freigegebener Textton auf Smaragd, 5.8:1). Fokus: globaler
+   3px-Signalgelb-Ring greift unverändert. */
+.ff-trust-pill--editorial .ff-trust-author {
+  position: relative;
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 1.02em;
+  line-height: 1.15;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+  text-underline-offset: 3px;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+/* Trefferfläche (Hausstandard, vgl. .ff-heading-copy): Optik bleibt,
+   die klickbare Fläche wächst über inset auf > 24px – Tap-AA. */
+.ff-trust-pill--editorial .ff-trust-author::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.ff-trust-pill--editorial .ff-trust-author:hover {
+  color: var(--ff-accent-2);
+  text-decoration-color: currentColor;
 }
 
 /* Pinterest CTA Banner */

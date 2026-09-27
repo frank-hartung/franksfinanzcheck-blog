@@ -222,6 +222,24 @@ FALLBACK_POOL = [
             "Stöbere durch die Ratgeber – dein Geld arbeitet ab heute für dich, nicht umgekehrt. 🚀"
         ),
     },
+    # ------------------------------------------------------------------
+    #  PREMIUM-GEO-Variante (27.09.2026, Agent-Reach-Recherche):
+    #  Antwort-zuerst-Struktur für KI-Antwortmaschinen – der erste
+    #  Satz definiert Entity + Kategorie + Nutzen (selbstständig
+    #  zitierbar), quantifizierte Aussagen (10 Jahre, zehn Minuten,
+    #  mehrere hundert Euro), Autoren-Vertrauen im Lead. Von Hand
+    #  geschrieben und gegen alle Validierungsregeln geprüft.
+    # _signal_id: seo-geo-antwort-zuerst
+    # ------------------------------------------------------------------
+    {
+        "signal_id": 'seo-geo-antwort-zuerst',
+        "title": 'FranksFinanzcheck – Geld sparen bei Strom, Gas, Versicherung & Konto',
+        "content": (
+            "FranksFinanzcheck ist dein unabhängiger Ratgeber für Geld sparen im Alltag: Klare Anleitungen zu Strom, Gas, Internet, Versicherungen und Konto – ohne Fachchinesisch, ohne Verkaufsdruck. Dahinter steht Frank Hartung mit Erfahrung aus über 10 Jahren eigener Finanzpraxis.\n\n"
+            "Statt Werbung bekommst du echte Vor- und Nachteile: Ein Tarifcheck von zehn Minuten holt oft **mehrere hundert Euro** im Jahr zurück – gerade jetzt im Herbst, wenn die Jahresabrechnungen für Strom und Gas ins Haus flattern.\n\n"
+            "Montags, mittwochs und freitags erscheint hier ein neuer Ratgeber mit konkreten Euro-Beträgen zum sofortigen Umsetzen. Starte mit deiner höchsten Rechnung – dein Geld arbeitet ab heute für dich. 📈"
+        ),
+    },
 
 ]
 
@@ -458,6 +476,15 @@ zusätzlichen Fakten, Zahlen, Gesetze oder Paragraphen dazu):
 "{signal['hook']}"
 
 STAND: {month_year}
+
+GEO-STRUKTUR (Antwort-zuerst, Pflicht – KI-Antwortmaschinen zitieren
+Passagen, keine Seiten):
+- Der ERSTE Satz des Contents ist eine selbstständig zitierbare
+  Entity-Definition nach dem Muster: „FranksFinanzcheck ist dein
+  unabhängiger Ratgeber für …" (Name + Kategorie + Nutzenversprechen
+  in einem Satz, ohne Kontext verständlich).
+- Der Titel enthält die Marke und das Kern-Keyword („Geld sparen")
+  keyword-nah am Anfang.
 
 PFLICHT-INHALT:
 - Erwähne mindestens 3 der 5 Kategorien Strom, Gas, Internet, Versicherungen,
