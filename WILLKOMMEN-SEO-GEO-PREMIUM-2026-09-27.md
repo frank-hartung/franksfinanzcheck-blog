@@ -87,6 +87,24 @@ Variante designseitig vervollständigt:
 - **CTA-Feinschliff:** `text-wrap: pretty` am Lead, Press-State (`:active`),
   H1-Maximum 20ch („FranksFinanzcheck –“ bleibt in einer Zeile).
 
+**Design-Pass 3 (27.09.2026, dritte Runde: Dark-Mode-Artdirection + Typo-Feinschliff):**
+Erstmals wurde der Dark Mode der Variante **visuell** geprüft (Shots mit
+emuliertem `prefers-color-scheme: dark`, `data-theme="dark"` verifiziert) —
+Funde und fixes:
+
+- **Fakten-Panel kompakt:** Das Desktop-Panel war bislang auf die volle
+  Hero-Höhe gestreckt (`align-self: stretch`) — oben blieb eine unruhige
+  Leerfläche. Jetzt `align-self: center`: die Karte umschließt ihre vier
+  Zeilen und sitzt zur Inhalt-Mitte (wirkt in hell **und** dunkel).
+- **H1-Umbruch-Typografie:** Der Gedankenstrich von „FranksFinanzcheck –"
+  führte Zeile 2 an — verursacht durch `text-wrap: balance` der Basis
+  (ausgleichen verschiebt den Strich gezielt runter). Fix: `text-wrap: pretty`
+  + 22ch auf den Startseiten-H1 → der Strich steht am **Zeilenende**
+  (klassische Satzregel: kein Strich am Zeilenanfang).
+- Review-Artefakte: `shots/v-hero-premium/hero-desktop-DARK.png`,
+  `hero-mobile-DARK.png` (Dark Mode), `hero-desktop-zoom.png`,
+  `hero-mobile-zoom.png` (Hell, final).
+
 **Weg über die Werkbank** (Runbook `docs/ANLEITUNG-DESIGN-VARIANTEN.md`), nicht in
 die Basis: `assets/css/varianten/v-hero-premium.css` + Eintrag in
 `data/design/varianten.yaml` (Status `entwurf`, Hypothese + Rückbau notiert).
@@ -108,19 +126,19 @@ die Basis: `assets/css/varianten/v-hero-premium.css` + Eintrag in
   Dark-Mode-Pflichten und `prefers-reduced-motion` erfüllt; H1 mit `hyphens: auto`
   für lange deutsche Komposita.
 
-**Messung (27.09.2026, Stand Design-Pass 2):**
+**Messung (27.09.2026, Stand Design-Pass 3):**
 
 | Ebene | Ergebnis | Budget |
 |---|---|---|
 | Tier A statisch | DOM max 1062 (+1: Varianten-`<style>`), H1 1× auf allen Seiten, Canonical/Schema/Alt/rel intakt, 3 CTAs mit Umami, Newsletter da | DOM-Head ≤ 52, CSS-Δ ≤ 6144 B |
-| CSS-Zuwachs (inline) | **+4938 B** | ≤ 6144 B ✅ |
-| Varianten-Datei (roh) | 8180 B | ≤ 8192 B ✅ |
-| Tier B Browser | Kontrast **7.53:1**, kleinstes Tap-Ziel **26.4 px**, **CLS 0**, LCP 688 ms | ≥ 4.5 · ≥ 24 · ≤ 0.1 · Playwright-Wert ohne Budget |
-| Lighthouse mobil | LCP **1845 ms**, TBT 137 ms, Perf **0.98**, A11y **0.96** | LCP ≤ 2500 · Perf ≥ 0.90 · A11y ≥ 0.95 ✅ |
-| Lighthouse desktop | LCP 768 ms, Perf **1.0** | ✅ |
+| CSS-Zuwachs (inline) | **+4878 B** | ≤ 6144 B ✅ |
+| Varianten-Datei (roh) | 8110 B | ≤ 8192 B ✅ |
+| Tier B Browser | Kontrast **7.53:1**, kleinstes Tap-Ziel **26.4 px**, **CLS 0**, LCP 680 ms | ≥ 4.5 · ≥ 24 · ≤ 0.1 · Playwright-Wert ohne Budget |
+| Lighthouse mobil | LCP **1826 ms**, TBT 143 ms, Perf **0.98**, A11y **0.96** | LCP ≤ 2500 · Perf ≥ 0.90 · A11y ≥ 0.95 ✅ |
+| Lighthouse desktop | LCP 766 ms, Perf **0.99–1.0** | ✅ |
 | Gate | `design_variant_gate.py`: **BESTANDEN, keine Befunde** | — |
-| E2E | design-variante-Spec + home-Spec **8/8 grün**; Gesamtsuite 67/68 (1 Bestandsbefund des Sandbox-Fallback-Chromiums, am Basis-Tree belegt) | — |
-| Protokoll | `data/design/messungen/v-hero-premium-2026-09-27.json` (eingefroren, Pass 2) | Freigabe-Beleg |
+| E2E | design-variante- + home-Specs **6/6 grün** (Desktop+Mobile); Gesamtsuite 67/68 (1 Bestandsbefund des Sandbox-Fallback-Chromiums, am Basis-Tree belegt) | — |
+| Protokoll | `data/design/messungen/v-hero-premium-2026-09-27.json` (eingefroren, Pass 3) | Freigabe-Beleg |
 
 Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 `home--mobile.png` (gitignored Review-Artefakt).

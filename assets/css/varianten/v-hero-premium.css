@@ -48,7 +48,7 @@
 
 /* ---------- 2. Saison-Elemente: Struktur statt Streudeko (NEU) ---------- */
 
-/* Hinweis mit Gold-Hairline, tritt hinter den Lead zurück. */
+/* Gold-Hairline, zurückhaltend. */
 .first-entry.home-info .ff-saison-hinweis {
   margin-top: 16px;
   padding-left: 12px;
@@ -57,7 +57,7 @@
   font-size: 0.92em;
 }
 
-/* Badge: feinere Kante, ruhige Glasfläche. */
+/* Badge: ruhige Glasfläche. */
 .first-entry.home-info .ff-saison-badge {
   border-color: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(8px);
@@ -134,13 +134,14 @@
   .first-entry.home-info > .ff-saison-hinweis { grid-area: season; }
   .first-entry.home-info > .ff-home-ctas { grid-area: ctas; }
 
-  /* Fakten-Panel: Checkliste mit Trennlinien statt Glas-Pill-Wolke. */
+  /* Fakten-Panel: kompakte Checkliste, vertikal zur Mitte des
+     Inhalts ausgerichtet – kein gestreckter Kasten mit Leerfläche. */
   .first-entry.home-info > .ff-trust-row {
     grid-area: trust;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    align-self: stretch;
+    align-self: center;
     justify-content: center;
     gap: 0;
     margin: 4px 0 0;
@@ -163,7 +164,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
 
-  /* Herausgeber-Zeile: Goldkante als Autoren-Anker (E-E-A-T). */
+  /* Goldkante = Autoren-Anker (E-E-A-T). */
   .first-entry.home-info > .ff-trust-row .ff-trust-pill--editorial {
     box-shadow: inset 3px 0 0 var(--ff-accent-2);
   }
@@ -183,9 +184,11 @@
     max-width: 62ch;
   }
 
-  /* 20ch statt 16ch: „FranksFinanzcheck –" bleibt in einer Zeile. */
+  /* 22ch + pretty statt balance: „FranksFinanzcheck –" trägt den
+     Gedankenstrich ans Zeilenende (kein Strich am Zeilenanfang). */
   .first-entry.home-info .entry-header h1 {
-    max-width: 20ch;
+    max-width: 22ch;
+    text-wrap: pretty;
   }
 }
 
@@ -201,7 +204,7 @@ main.main:has(.home-info) > footer.page-footer {
   margin-inline: auto;
 }
 
-/* ---------- 7. Dark Mode: ruhigere Flächen, gleiche Hierarchie ---------- */
+/* ---------- 7. Dark Mode: ruhigere Flächen ---------- */
 
 :root[data-theme="dark"] .ff-home-ctas .ff-btn-secondary {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
@@ -221,7 +224,7 @@ main.main:has(.home-info) > footer.page-footer {
   border-color: rgba(255, 255, 255, 0.16);
 }
 
-/* ---------- 8. Mobil: Artikel-LCP bleibt geschützt (ererbt) ---------- */
+/* ---------- 8. Mobil: Artikel-LCP geschützt (ererbt) ---------- */
 
 @media (max-width: 768px) {
   main.main:has(.home-info) {
@@ -256,13 +259,7 @@ main.main:has(.home-info) > footer.page-footer {
     font-size: 1rem;
   }
 
-  /* Gold-Hairline mobil dezenter. */
-  .first-entry.home-info .ff-saison-hinweis {
-    margin-top: 14px;
-    padding-left: 10px;
-  }
-
-  .first-entry.home-info > .ff-trust-row {
+    .first-entry.home-info > .ff-trust-row {
     display: flex;
     gap: 8px;
     margin-top: 18px;

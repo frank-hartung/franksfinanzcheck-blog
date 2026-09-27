@@ -157,8 +157,12 @@ varianten:
       Erbt die freigegebene v-hero-conversion-Hierarchie vollständig
       (Bühnenbreite, CTA-Gewichtung, editoriales Grid, mobile
       LCP-Reihenfolge), damit eine spätere Ablöse verlustfrei ist.
-      Neu sind ausschließlich: Lead-Typografie für den ersten
-      Absatz, Fakten-Panel (rgba-Aufhellung, Radius 16, Trennlinien,
-      Goldkante an der Herausgeber-Zeile), Press-State, hyphens auf
-      dem H1. Rückabwicklung = eine Datei weglassen.
+      Design-Pass 2 (27.09.2026): Playfair-Standfirst auf die erste
+      Lead-Zeile (Subline-Rolle, DESIGN.md §2), PaperMod-H1-Clamp
+      (3 Zeilen Ellipsis) aufgehoben, Saison-Hinweis mit Gold-Hairline.
+      Design-Pass 3 (27.09.2026, Dark-Mode-Artdirection + Typo-Feinschliff):
+      Fakten-Panel kompakt vertikal zentriert statt gestreckt,
+      H1-Umbruch über text-wrap: pretty (Gedankenstrich nie am
+      Zeilenanfang, 22ch), Dark-Shots geprüft.
+      Rückabwicklung = eine Datei weglassen.
     freigabe: { mensch: false, name: "", datum: "", kommentar: "" }
