@@ -334,13 +334,53 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
 # Ebene 1 + 2: Generieren mit Qualitäts-Schleife (hart / relaxed)
 # ---------------------------------------------------------------------------
 
+def versuch_bilanz(anzahl: int, ursachen: list) -> str:
+    """Verdichtet die Fehlversuche eines Themas zu EINER lesbaren Zeile.
+
+    REPARATUR 27.09.2026 (Content-Reserve #27, Issue #412): Bisher hieß es
+    pauschal „3 Versuche ohne Erfolg“ – ein Platzhalter, der die zwei
+    grundverschiedenen Fehlerklassen nicht unterscheidbar machte:
+
+      * INFRA   – Provider-Ausnahme, leere Antwort, fehlender API-Key:
+                  ein AUSFALL, keine Thema-Qualität. Behandlung: früh
+                  stoppen (Budget schonen) und das Thema NICHT in den
+                  mehrtägigen Content-Cooldown schicken.
+      * INHALT  – Titel-Dublette, Titel-Gate R2, Profi-/Relaxed-Gate: die
+                  KI hat geliefert, das Ergebnis genügt der Latte nicht.
+                  Behandlung: Content-Cooldown (reserve_topics.merke).
+
+    Rückgabe: „N Versuche ohne Erfolg [infra|inhalt] (Detail; Detail; …)“.
+    Die Marke „[infra]“ setzt es NUR, wenn JEDER Versuch ein Infra-Fund
+    war – ein einziger Content-Fund genügt für die harte Klasse.
+    """
+    klasse = ("infra" if ursachen and all(k == "infra" for k, _ in ursachen)
+              else "inhalt")
+    details = []
+    for _, detail in ursachen:
+        kurz = (detail or "").strip()
+        if kurz and kurz not in details:
+            details.append(kurz)
+    suffix = "; ".join(details[:4])
+    zeile = f"{anzahl} Versuche ohne Erfolg [{klasse}]"
+    if suffix:
+        zeile += f" ({suffix})"
+    return zeile[:380]
+
+
 def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3):
-    """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info)."""
+    """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info).
+
+    Sammelt seit 27.09.2026 (#412) pro Versuch die Fehlerklasse mit
+    („infra“ vs. „inhalt“, siehe versuch_bilanz), damit Gedächtnis und
+    Konvergenz-Steuerung Ausfälle von Qualitätsmängeln unterscheiden
+    können. Die bisherigen Print-Zeilen bleiben unverändert.
+    """
     providers = [p for p in ("GEMINI", "GROQ") if os.environ.get(f"{p}_API_KEY")]
     if not providers:
-        return None, "kein API-Key"
+        return None, "kein API-Key [infra]"
     random.shuffle(providers)  # Modell-Rotation gegen Provider-Schwäche
 
+    ursachen = []
     for attempt in range(1, max_attempts + 1):
         provider = providers[(attempt - 1) % len(providers)]
         os.environ["AI_PROVIDER"] = provider
@@ -353,26 +393,32 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             )
         except Exception as exc:  # noqa: BLE001 – kein Abbruch bei Provider-Fehler
             print(f"  ✗ Provider-Fehler ({provider}): {exc}")
+            ursachen.append(("infra", f"Provider-Fehler ({provider}): {exc}"))
             continue
         if not raw:
+            ursachen.append(("infra", f"leere Antwort ({provider})"))
             continue
         title, desc, body = g.parse_article(raw, topic, angle[0])
         if not title or not body:
+            ursachen.append(("inhalt", f"Antwort nicht zerlegbar ({provider})"))
             continue
         title = normalize_title(title)  # FrankAutoOps R3: Komposita-Fixes
         if title.lower() in used_titles:
             print(f"  ✗ Titel existiert bereits: {title[:50]}…")
+            ursachen.append(("inhalt", f"Titel-Dublette: {title[:60]}"))
             continue
         # FrankAutoOps R2: lose Anhängsel ("… dieses Jahr") ohne Doppelpunkt
         # sind harte Titel-Verstöße -> Versuch verwerfen, neu generieren
         if ":" not in title and RE_ANHAENGSEL.search(title):
             print(f"  ✗ Titel-Gate R2: Anhängsel-Muster ohne ':' – Versuch {attempt} verworfen: {title[:60]}")
+            ursachen.append(("inhalt", f"Titel-Gate R2 (Anhängsel): {title[:60]}"))
             continue
 
         if not relaxed:
             ok_profi, prob = g.profi_quality_ok(body, keywords)
             if not ok_profi:
                 print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} (Versuch {attempt}/{max_attempts}, {provider})")
+                ursachen.append(("inhalt", f"Profi-Gate: {'; '.join(prob[:2])}"))
                 continue
         else:
             # Relaxed: nur HARTE Kriterien (Text darf trotzdem nicht mager sein)
@@ -382,11 +428,12 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             floskeln = [f for f in g.PROFI_FLOSKELN if f in text.lower()]
             if words < 1400 or h2 < 5 or floskeln:
                 print(f"  ⚠ Relaxed-Gate: {words} Wörter / {h2} H2 / Floskeln {floskeln[:2]} (Versuch {attempt})")
+                ursachen.append(("inhalt", f"Relaxed-Gate: {words} Wörter / {h2} H2"))
                 continue
 
         used_titles.add(title.lower())
         return (title, desc, body), f"OK via {provider_name} ({'relaxed' if relaxed else 'profi'})"
-    return None, f"{max_attempts} Versuche ohne Erfolg"
+    return None, versuch_bilanz(max_attempts, ursachen)
 
 
 # ---------------------------------------------------------------------------
@@ -693,6 +740,10 @@ def _frontmatter(text: str) -> str:
 RESERVE_THEMEN_VERSUCHE = 3
 # Wie viele Top-up-Aufrufe ohne Ergebnis der Batch aushält, bevor er aufgibt.
 RESERVE_LEERLAUF_MAX = 2
+# Klassenscharf (27.09.2026, #412): Content-Leerrunden (Gates) dürfen die
+# Nacht nicht mehr nach zwei Themen abräumen; reine Infra-Ausfälle stoppen
+# SOFORT (Budget-Schutz, die Themen wandern nicht in den Content-Cooldown).
+RESERVE_LEERLAUF_INHALT_MAX = 3
 
 
 def _reserve_topup(topics, quelle, used_titles, used_topics,
@@ -837,6 +888,7 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
 
         topic = None
         result = info = None
+        fehl_meldungen = []
         for versuch, kandidat in enumerate(reihenfolge, 1):
             # Jedes VERSUCHTE Thema ist verbraucht – auch das gescheiterte.
             # Sonst verbrennt der nächste Aufruf dieselben drei KI-Versuche
@@ -849,16 +901,29 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             if ergebnis:
                 topic, result, info = kandidat, ergebnis, meldung
                 break
+            fehl_meldungen.append(meldung)
             print(f"  ⚠ Reserve-Top-up: „{kandidat.get('title')}“ ohne "
                   f"Profi-Generierung ({meldung}) – Thema bekommt Cooldown, "
                   f"Versuch {versuch}/{len(reihenfolge)}")
             # Gedächtnis: dasselbe Thema darf die nächste Nacht nicht erneut
             # blockieren (genau dieser Dauer-Stillstand machte #387 rot).
+            # Seit 27.09.2026 (#412) unterscheidet merke() die Klassen:
+            # reine Infra-Ausfälle („[infra]“) zählen NICHT als Thema-Fehler.
             try:
                 rt.merke(kandidat.get("title", ""), False, meldung)
             except Exception as exc:  # noqa: BLE001 – Gedächtnis ist optional
                 print(f"    ⚠ Themen-Gedächtnis nicht schreibbar: {exc}")
         if not result:
+            # Fehlerklasse der Leerrunde an den Batch melden (#412): Nur
+            # reine Infra-Fehler rechtfertigen das sofortige Budget-Stop;
+            # Content-Fehlschläge dürfen die Nacht nicht mehr nach nur zwei
+            # Themen beenden (27.09.: 6 Themen fielen, 43 waren frei, der
+            # frühe Notausgang ließ den Pool bei 2/6 stehen).
+            if stop is not None:
+                stop["leerlauf"] = (
+                    "infra" if fehl_meldungen and
+                    all("[infra]" in m for m in fehl_meldungen)
+                    else "content")
             print("  ⚠ Reserve-Top-up: keine Profi-Generierung in "
                   f"{min(RESERVE_THEMEN_VERSUCHE, len(vorschlaege))} Themen "
                   f"({info}) – nächste Runde/Nacht versucht andere Themen.")
@@ -917,6 +982,20 @@ def _reserve_topup_batch(topics, quelle, used_titles, used_topics, batch,
         läuft er mit dem nächsten Thema weiter – begrenzt auf
         RESERVE_LEERLAUF_MAX Leerrunden in Folge, damit ein echter
         Provider-Ausfall nicht das ganze Budget auffrisst.
+
+    KLASSENSCHARFE NOTBREMSE (27.09.2026, Content-Reserve #27 / Issue #412):
+    Die Leer-Bremse kannte nur „kein Ergebnis“. Folge am 27.09.: Sechs
+    Themen fielen nacheinander durch, die zweite Leerrunde beendete die
+    Nachproduktion – obwohl 43 Themen frei waren und kurz darauf zwei
+    Kandidaten problemlos gelangen. Jetzt trennt die Bremse:
+      * leerlauf == "infra"  → SOFORT stoppen: ein Provider-Ausfall wird
+        nicht mit weiteren API-Aufrufen bezahlt (Budget-Schutz bleibt
+        hart; die Themen bekommen dank merke()-Klassifizierung keinen
+        Content-Cooldown und sind morgen wieder wählbar).
+      * leerlauf == "content" → längere Leine: bis zu
+        RESERVE_LEERLAUF_INHALT_MAX Leerrunden, denn einzelne Themen
+        scheitern regelmäßig an Gate-Regeln – das ist normal und kein
+        Grund, die Nacht vorzeitig abzuräumen.
     """
     produced = 0
     leerlauf = 0
@@ -934,10 +1013,16 @@ def _reserve_topup_batch(topics, quelle, used_titles, used_topics, batch,
             if len(used_topics) == attempted_before:
                 break
             leerlauf += 1
-            if leerlauf >= RESERVE_LEERLAUF_MAX:
+            if stop.get("leerlauf") == "infra":
+                print("  ⏹ Reserve-Produktion unterbrochen: reine "
+                      "Infrastruktur-Fehlschläge (Provider-Ausfall?) – "
+                      "Budget bleibt geschont, Themen ohne Content-Cooldown "
+                      "morgen erneut wählbar.")
+                break
+            if leerlauf >= RESERVE_LEERLAUF_INHALT_MAX:
                 print(f"  ⏹ Reserve-Produktion beendet: "
-                      f"{RESERVE_LEERLAUF_MAX} Themen-Runden ohne Ergebnis "
-                      f"(KI-Ausfall?) – kein weiterer API-Aufwand in diesem "
+                      f"{RESERVE_LEERLAUF_INHALT_MAX} Themen-Runden ohne "
+                      f"Ergebnis – kein weiterer API-Aufwand in diesem "
                       f"Aufruf.")
                 break
         else:

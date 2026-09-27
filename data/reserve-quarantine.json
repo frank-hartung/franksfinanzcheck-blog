@@ -1,13 +1,12 @@
 {
   "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge": {
     "first": "2026-09-27T18:03:43Z",
-    "grund": "quality-score 0.838 < 0.85 (schwach: spelling 0.52, readability 0.75, typography 0.84)",
-    "hits": 1,
-    "laeufe": [
-      "run:36338925820"
-    ],
+    "grund": "zurückgesetzt 2026-09-27 (Content-Reserve #27 / Issue #412): Artikel inhaltlich komplett neu lektoriert – Rechtschreib-Domänenvokabular in Whitelist, Lesbarkeit (Flesch 61,2), Typografie (deutsche Anführungszeichen), CTA-Themenroutung (/go/strom/ → /go/tagesgeld/), Grammatik-Fixes. Neuer Inhalt, neuer Hash – der alte Fund gilt nicht mehr.",
+    "hits": 0,
+    "laeufe": [],
     "last": "2026-09-27T18:18:07Z",
     "lauf": "run:36338925820",
-    "signatur": "quality-score <score> < <score> (schwach: spelling <score>, readability <score>, typography <score>)"
+    "signatur": "quality-score <score> < <score> (schwach: spelling <score>, readability <score>, typography <score>)",
+    "zurueckgesetzt_am": "2026-09-27"
   }
 }

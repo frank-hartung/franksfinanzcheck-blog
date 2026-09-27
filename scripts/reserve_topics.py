@@ -88,6 +88,15 @@ def ledger_pfad(pfad: Path | None = None) -> Path:
 SPERRE_ERFOLG = 180      # Thema produziert -> es steht jetzt im Bestand
 SPERRE_FEHLER = 3        # einmal gescheitert -> ein paar Nächte Pause
 SPERRE_DAUERFEHLER = 30  # ab DAUERFEHLER_AB Fehlversuchen: lange Pause
+# 27.09.2026 (Content-Reserve #27, Issue #412): Infrastruktur-Ausfälle sind
+# KEIN Thema-Urteil. try_generate kennzeichnet reine Provider-/Key-Ausfälle
+# mit „[infra]“ in der Meldung; solche Themen bekommen nur eine Nacht Pause
+# und zählen NICHT auf den Content-Fehlerzähler. Hält ein Ausfall über
+# INFRA_DAUER_AB Nächte an, greift die Notbremse (Budget-Schutz).
+SPERRE_INFRA = 1           # Provider-Ausfall -> morgen erneut versuchen
+SPERRE_INFRA_DAUER = 7     # anhaltender Ausfall -> eine Woche Ruhe
+INFRA_DAUER_AB = 3         # ab so vielen Infra-Nächten in Folge: Notbremse
+INFRA_TAG = "[infra]"
 DAUERFEHLER_AB = 3
 
 # Füllwörter, die KEIN Thema unterscheiden. Bewusst klein gehalten: Der
@@ -264,7 +273,15 @@ def gesperrt(eintrag: dict, jetzt: dt.date | None = None) -> bool:
 
 def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path | None = None,
           jetzt: dt.date | None = None) -> dict:
-    """Erfolg/Misserfolg eines Themas festhalten und Cooldown setzen."""
+    """Erfolg/Misserfolg eines Themas festhalten und Cooldown setzen.
+
+    Klassenscharf seit 27.09.2026 (#412): Eine Meldung mit „[infra]“
+    (trägt try_generate ein, wenn ALLE Versuche an Provider/Key/Ausfall
+    hingen) ist ein System-Ausfall und kein Content-Urteil. Solche Themen
+    zählen nicht auf `fehler` (kein Dauerfehler-Pfad), bekommen nur eine
+    Nacht Pause; erst ab INFRA_DAUER_AB Infra-Nächten in Serie greift die
+    Notbremse, damit ein dauerhaft toter Schlüssel das Budget schont.
+    """
     pfad = ledger_pfad(pfad)
     heute = _heute(jetzt)
     data = ledger_laden(pfad)
@@ -273,9 +290,17 @@ def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path | None = None,
     if ok:
         eintrag["letzter_erfolg"] = heute.isoformat()
         eintrag["fehler"] = 0
+        eintrag["infra_fehler"] = 0
         eintrag["sperre_bis"] = (heute + dt.timedelta(days=SPERRE_ERFOLG)).isoformat()
         eintrag["grund"] = grund or "produziert"
+    elif INFRA_TAG in (grund or ""):
+        eintrag["infra_fehler"] = int(eintrag.get("infra_fehler") or 0) + 1
+        tage = (SPERRE_INFRA_DAUER if eintrag["infra_fehler"] >= INFRA_DAUER_AB
+                else SPERRE_INFRA)
+        eintrag["sperre_bis"] = (heute + dt.timedelta(days=tage)).isoformat()
+        eintrag["grund"] = (grund or "Infrastruktur-Ausfall")[:200]
     else:
+        eintrag["infra_fehler"] = 0
         eintrag["fehler"] = int(eintrag.get("fehler") or 0) + 1
         tage = (SPERRE_DAUERFEHLER if eintrag["fehler"] >= DAUERFEHLER_AB
                 else SPERRE_FEHLER)
@@ -421,6 +446,40 @@ def run_selftest() -> int:
                            bestand={}):
             fehler.append("ohne Ledger muss jedes Thema wählbar sein")
 
+        # 8. Infra-Klasse (27.09.2026, #412): Ein reiner Provider-Ausfall
+        #    („[infra]“) darf KEINEN Content-Cooldown auslösen – nur eine
+        #    Nacht Pause, Fehlerzähler unberührt. Erst nach INFRA_DAUER_AB
+        #    Infra-Nächten in Serie greift die Budget-Notbremse, und ein
+        #    Erfolg räumt beide Zähler ab.
+        t = topics[0]["title"]
+        e = merke(t, False, "3 Versuche ohne Erfolg [infra] "
+                            "(Provider-Fehler (GROQ): 429)", pfad=pfad,
+                  jetzt=heute)
+        if e.get("fehler"):
+            fehler.append("Infra-Ausfall zählt auf den Content-Fehlerzähler")
+        if e.get("infra_fehler") != 1:
+            fehler.append("Infra-Zähler zählt nicht mit")
+        if gesperrt(e, heute + dt.timedelta(days=1)) or \
+           not gesperrt(e, heute):
+            fehler.append("Infra-Pause muss genau eine Nacht sein")
+        if gesperrt(e, heute + dt.timedelta(days=2)):
+            fehler.append("Infra-Ausfall sperrt wie ein Content-Fehler")
+        #    Content-Fehler danach: läuft weiter auf dem alten Zähler.
+        e = merke(t, False, "3 Versuche ohne Erfolg [inhalt] (Profi-Gate)",
+                  pfad=pfad, jetzt=heute)
+        if e.get("fehler") != 1 or e.get("infra_fehler") != 0:
+            fehler.append("Content-Fehler nach Infra setzt die Zähler falsch")
+        #    Anhaltender Ausfall -> Notbremse.
+        for _ in range(INFRA_DAUER_AB):
+            e = merke(t, False, "3 Versuche ohne Erfolg [infra] "
+                                "(Provider-Fehler: 503)", pfad=pfad,
+                      jetzt=heute)
+        if not gesperrt(e, heute + dt.timedelta(days=5)):
+            fehler.append("Infra-Dauerbremse greift nicht")
+        e = merke(t, True, "produziert: test", pfad=pfad, jetzt=heute)
+        if e.get("fehler") != 0 or e.get("infra_fehler") != 0:
+            fehler.append("Erfolg setzt die Infra-/Fehlerzähler nicht zurück")
+
     # 7. Klumpen-Erkennung (Bericht an die Redaktion)
     import tempfile as _tf
     with _tf.TemporaryDirectory() as tmp:
@@ -442,7 +501,7 @@ def run_selftest() -> int:
         return 2
     print("✅ Reserve-Themen-Selbsttest grün (Leitbegriff-Kollision, "
           "Rotation, Cooldown, Erfolgs-/Dauerfehler-Sperre, fail-open, "
-          "Klumpen-Bericht).")
+          "Infra-Klasse ohne Content-Cooldown, Klumpen-Bericht).")
     return 0
 
 
