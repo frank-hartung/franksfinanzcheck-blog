@@ -1,0 +1,279 @@
+/* ============================================================
+   VARIANTE v-hero-premium
+   ------------------------------------------------------------
+   Hypothese (data/design/varianten.yaml, Status: entwurf):
+   Der Startseiten-Hero gewinnt Ruhe und Kompetenz-Signale,
+   ohne ein einziges neues Element:
+   · Der Definitionssatz (GEO-optimierter Willkommenstext,
+     Antwort zuerst) tritt als Lead-Absatz hervor.
+   · Die Vertrauenssignale werden im Desktop-Grid zu einem
+     ruhigen Fakten-Panel gebündelt statt als Pillar-Wolke.
+   · Der Primär-CTA bekommt einen sauberen Press-State.
+
+   ERBE (bewusst übernommen aus der freigegebenen Variante
+   v-hero-conversion, 26.09.2026): Bühnenbreite 1024px,
+   CTA-Gewichtung (eine Primär-, zwei Sekundärwege),
+   editoriales Grid mit Vertrauens-Spalte und die mobile
+   LCP-Reihenfolge (Artikel-Cover zuerst). Nichts davon wird
+   zurückgebaut – dieser Entwurf baut darauf aus. Geerbte
+   Deklarationen stehen deshalb absichtlich HINTER den
+   eigenen: So ist der erste Regelblock eindeutig dieser
+   Variante zuzuordnen (Prüfnadel des E2E-Leak-Tests).
+
+   REGELN: nur Marken-Tokens (DESIGN.md §1), Radius-Skala
+   (8/12/16/999), Easing/Dauern laut Regelwerk, kein
+   !important, keine externen Quellen, keine Layout-Animation.
+
+   GELADEN NUR BEI: HUGO_PARAMS_DESIGNVARIANTE=v-hero-premium
+   ============================================================ */
+
+/* ---------- 1. Lead-Definition: der erste Satz trägt (NEU, GEO) ---------- */
+
+/* Der Willkommenstext ist Antwort-zuerst strukturiert. Der
+   Definitions-Absatz bekommt Lead-Größe und fast volle Deckkraft,
+   die Folgeabsätze bleiben ruhig. Kein neues Element, reine
+   Typografie aus der vorhandenen Skala. */
+.first-entry.home-info .entry-content > p:first-of-type {
+  font-size: clamp(1.02rem, 1.5vw, 1.17rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.97);
+  margin-bottom: 14px;
+}
+
+/* Rhythmus-Regel (DESIGN.md §3): mehr Luft ÜBER der H1 als darunter. */
+.first-entry.home-info .entry-header {
+  padding-top: 4px;
+}
+
+/* Lange deutsche Komposita im H1 dürfen umbrechen, statt zu quetschen. */
+.first-entry.home-info .entry-header h1 {
+  hyphens: auto;
+}
+
+/* ---------- 2. Press-State: der Daumen spürt die Bestätigung (NEU) ---------- */
+
+.ff-home-ctas .ff-btn:active {
+  transform: translateY(0);
+  transition-duration: 0.16s;
+}
+
+/* ---------- 3. CTA-Hierarchie: eine Primär-, zwei Sekundärwege (ererbt) ---------- */
+
+.ff-home-ctas {
+  column-gap: 12px;
+  row-gap: 14px;
+  margin-top: 22px;
+}
+
+.ff-home-ctas .ff-btn-primary {
+  padding: 14px 28px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 20px rgba(255, 179, 0, 0.44);
+}
+
+.ff-home-ctas .ff-btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(255, 179, 0, 0.5);
+}
+
+.ff-home-ctas .ff-btn-secondary,
+.ff-home-ctas .ff-btn-outline {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.ff-home-ctas .ff-btn-secondary {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ff-home-ctas .ff-btn-outline {
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.ff-home-ctas .ff-btn-outline:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- 4. Editoriales Grid + Fakten-Panel (Desktop) ---------- */
+
+@media (min-width: 769px) {
+  .first-entry.home-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1.72fr) minmax(235px, 0.78fr);
+    grid-template-areas:
+      "badge badge"
+      "header trust"
+      "content trust"
+      "season trust"
+      "ctas trust";
+    column-gap: clamp(28px, 4vw, 56px);
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .first-entry.home-info > .ff-saison-badge { grid-area: badge; }
+  .first-entry.home-info > .entry-header { grid-area: header; }
+  .first-entry.home-info > .entry-content { grid-area: content; }
+  .first-entry.home-info > .ff-saison-hinweis { grid-area: season; }
+  .first-entry.home-info > .ff-home-ctas { grid-area: ctas; }
+
+  /* Fakten-Panel: eine ruhige Fläche mit Trennlinien statt vier
+     einzelner Glas-Pills – Fakten lesen sich als Checkliste. */
+  .first-entry.home-info > .ff-trust-row {
+    grid-area: trust;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: center;
+    gap: 0;
+    margin: 4px 0 0;
+    padding: 10px 8px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--ff-radius-lg);
+  }
+
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill {
+    min-height: 44px;
+    justify-content: flex-start;
+    padding: 8px 10px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill + .ff-trust-pill {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  /* Herausgeber-Zeile: Goldkante als Autoren-Anker (E-E-A-T sichtbar). */
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill--editorial {
+    box-shadow: inset 3px 0 0 var(--ff-accent-2);
+  }
+
+  .first-entry.home-info .ff-trust-check {
+    background: rgba(127, 209, 180, 0.16);
+    border-radius: 999px;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .first-entry.home-info .entry-content {
+    max-width: 62ch;
+  }
+
+  .first-entry.home-info .entry-header h1 {
+    max-width: 16ch;
+  }
+}
+
+/* ---------- 5. Bühne: Hero und Themenführung atmen (ererbt) ---------- */
+
+main.main:has(.home-info) {
+  max-width: 1024px;
+}
+
+main.main:has(.home-info) > article.post-entry,
+main.main:has(.home-info) > footer.page-footer {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* ---------- 6. Dark Mode: dieselbe Hierarchie, ruhigere Flächen ---------- */
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-secondary {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+}
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-outline {
+  border-color: rgba(127, 209, 180, 0.55);
+}
+
+:root[data-theme="dark"] .ff-home-ctas .ff-btn-outline:hover {
+  border-color: rgba(127, 209, 180, 0.85);
+  background: rgba(127, 209, 180, 0.12);
+}
+
+:root[data-theme="dark"] .first-entry.home-info > .ff-trust-row {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- 7. Mobil: Artikel-LCP bleibt geschützt (ererbt) ---------- */
+
+@media (max-width: 768px) {
+  main.main:has(.home-info) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main.main:has(.home-info) > article.post-entry { order: 1; }
+  main.main:has(.home-info) > article.first-entry.home-info { order: 2; }
+  main.main:has(.home-info) > div.ff-pinterest-cta { order: 3; }
+  main.main:has(.home-info) > footer.page-footer { order: 4; }
+  main.main:has(.home-info) > section.ff-saison { order: 5; }
+  main.main:has(.home-info) > section.ff-topics { order: 6; }
+
+  .first-entry.home-info {
+    min-height: 0;
+    padding: 22px 18px 24px;
+  }
+
+  .first-entry.home-info .entry-header h1 {
+    max-width: 100%;
+    font-size: clamp(1.85rem, 8.2vw, 2.45rem);
+    line-height: 1.06;
+  }
+
+  .first-entry.home-info .entry-content {
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+
+  .first-entry.home-info .entry-content > p:first-of-type {
+    font-size: 1rem;
+  }
+
+  .first-entry.home-info > .ff-trust-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+
+  .first-entry.home-info > .ff-trust-row .ff-trust-pill {
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ff-home-ctas .ff-btn-primary {
+    flex: 1 0 100%;
+    padding: 14px 20px;
+  }
+
+  .ff-home-ctas .ff-btn-secondary,
+  .ff-home-ctas .ff-btn-outline {
+    flex: 1 1 calc(50% - 6px);
+    padding: 10px 12px;
+    font-size: 0.84rem;
+  }
+}
+
+/* ---------- 8. Reduzierte Bewegung (Pflicht) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-home-ctas .ff-btn-primary,
+  .ff-home-ctas .ff-btn-secondary,
+  .ff-home-ctas .ff-btn-outline {
+    transition: none;
+  }
+}

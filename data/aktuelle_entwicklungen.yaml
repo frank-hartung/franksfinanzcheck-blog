@@ -109,3 +109,17 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne spontane Wechsel übers Jahr verteilt."
+
+# 27.09.2026, Agent-Reach-Recherche (SEO/GEO-Stand 2026): KI-Antwortmaschinen
+# (ChatGPT, Perplexity, Google AI Overviews, Copilot) zerlegen Seiten in
+# Passagen und zitieren Einzelsätze – der Princeton-GE0-Befund und die
+# Praxisberichte 2026 sind sich einig: Seiten, deren erster Absatz die
+# Kernantwort selbstständig, quantifiziert und mit klarer Entity-Benennung
+# liefert, werden häufiger und korrekter zitiert. Sichere, allgemeine
+# Beobachtung ohne Einzelfakten – deshalb hier kuratiert eingetragen.
+- id: seo-geo-antwort-zuerst
+  kategorie: seo_qualitaet
+  ab: "2026-09-27"
+  bis: ""
+  hook: "Immer mehr Menschen lassen sich Finanzfragen zuerst von KI-Assistenten wie ChatGPT, Perplexity oder den Google AI Overviews beantworten – Seiten, die ihre Kernantwort schon im ersten Absatz klar, quantifiziert und mit vollem Namen benennen, werden dabei häufiger korrekt zitiert."
+  ki_news_used: true

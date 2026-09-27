@@ -122,3 +122,43 @@ varianten:
         besser". Die Hypothese wird nach dem Scharfschalten 14 Tage an
         Umami (cta_click je slug) geprüft; Abbruch und Rückbau, wenn
         die Summe aller drei CTAs sinkt.
+
+  # ----------------------------------------------------------------
+  # Nachfolge-Entwurf (27.09.2026, KI-Vorschlag nach Agent-Reach-
+  # Recherche zu SEO/GEO-Stand 2026): führt die freigegebene
+  # v-hero-conversion-Hierarchie fort und poliert den Hero auf
+  # editoriales Premium-Niveau – Definitionssatz als Lead (der neue
+  # Willkommenstext ist Antwort-zuerst strukturiert), Fakten-Panel
+  # statt Pillar-Wolke, Press-State am Primär-CTA. Kein neues
+  # Element, keine neue Farbe, nur Tokens. Status bewusst
+  # `entwurf`: die Messung läuft, die Freigabe bleibt Menschen-Sache.
+  # ----------------------------------------------------------------
+  - id: v-hero-premium
+    titel: "Hero-Premium: Definitionssatz als Lead, Fakten-Panel, Press-State am Primär-CTA"
+    hypothese: >-
+      Der Hero gewinnt Ruhe und Kompetenz-Signale, ohne ein neues
+      Element: Der erste Absatz (Definitionssatz, Antwort-zuerst)
+      tritt als Lead hervor, die vier Vertrauenssignale lesen sich im
+      Desktop-Grid als ruhiges Fakten-Panel mit Trennlinien, der
+      Primär-CTA bestätigt den Druck sauber. Erwartung: Die Klickrate
+      auf cta_click/home-ratgeber bleibt stabil oder steigt, die
+      Summe aller drei Hero-CTAs sinkt nicht (Umami, 14 Tage nach
+      einer Scharfschaltung; Abbruch und Rückbau bei sinkender
+      Gesamt-Rate). Technisch bleiben alle Regelwerks-Budgets grün
+      (Kontrast hell+dunkel ≥ 4,5, Tap ≥ 24 px, CLS ≤ 0,1,
+      Lighthouse LCP ≤ 2500 ms, DOM unverändert, CSS-Zuwachs
+      ≤ 6144 Bytes inline).
+    oberflaeche:
+      - "/"
+    herkunft: "KI-Entwurf (Agent-Reach-Recherche GEO/SEO 2026 + Design-System DESIGN.md/PRODUCT.md), auf den Marken-Tokens geschnitten"
+    status: entwurf
+    css: "css/varianten/v-hero-premium.css"
+    notizen: >-
+      Erbt die freigegebene v-hero-conversion-Hierarchie vollständig
+      (Bühnenbreite, CTA-Gewichtung, editoriales Grid, mobile
+      LCP-Reihenfolge), damit eine spätere Ablöse verlustfrei ist.
+      Neu sind ausschließlich: Lead-Typografie für den ersten
+      Absatz, Fakten-Panel (rgba-Aufhellung, Radius 16, Trennlinien,
+      Goldkante an der Herausgeber-Zeile), Press-State, hyphens auf
+      dem H1. Rückabwicklung = eine Datei weglassen.
+    freigabe: { mensch: false, name: "", datum: "", kommentar: "" }
