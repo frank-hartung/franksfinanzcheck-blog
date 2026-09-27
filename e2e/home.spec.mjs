@@ -86,4 +86,81 @@ test.describe('Startseite', () => {
     }
     expect(probleme, 'Startseite: Bilder geladen & barrierefrei').toEqual([]);
   });
+
+  // ============================================================
+  //  HERAUSGEBER-PILL – Regressionswächter (27.09.2026)
+  //  ------------------------------------------------------------
+  //  Anlass: „Herausgegeben von Frank Hartung ragte über die innere
+  //  Box im Willkommenstext“ (Live-Befund 27.09.2026). Zwei Ursachen:
+  //  ein <br> erzeugt in einem Flex-Item KEINEN Umbruch (wird selbst
+  //  nullbreites Flex-Item), und white-space:nowrap verbot jeden
+  //  Textumbruch → eine unumbrechbare Zeile, breiter als das Fakten-
+  //  Panel der Hero-Variante. Repariert durch Struktur: Label und
+  //  Autoren-Link als Flex-Spalte (.ff-trust-editorial).
+  //  Dieser Test hält BEIDE Eigenschaften fest – die zweizeilige
+  //  Verantwortungsangabe (fängt die tote-<br>-Bugklasse) und die
+  //  geometrische Enthaltsamkeit in Panel und Hero (fängt die
+  //  Overflow-Bugklasse). Läuft in beiden Projekten (Desktop-Panel
+  //  und Mobile-Wrap-Reihe).
+  //  ============================================================
+  test('Herausgeber-Pill: zweizeilig und vollständig innerhalb der inneren Box', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'load' });
+    // Fonts einbeziehen, damit Zeilen-/Breitenmessung nicht am
+    // Fallback-Font vorbeigeht (font-display:optional → ready abwarten).
+    await page.evaluate(() => document.fonts.ready);
+
+    const pill = page.locator('.ff-trust-pill--editorial');
+    await expect(pill, 'Herausgeber-Pill existiert').toHaveCount(1);
+
+    const geo = await page.evaluate(() => {
+      const pill = document.querySelector('.ff-trust-pill--editorial');
+      const row = document.querySelector('.ff-trust-row');
+      const box = document.querySelector('.first-entry.home-info');
+      const label = pill?.querySelector('.ff-trust-editorial-label');
+      const author = pill?.querySelector('.ff-trust-author');
+      if (!pill || !row || !box || !label || !author) return { fehlt: true };
+
+      const p = pill.getBoundingClientRect();
+      const r = row.getBoundingClientRect();
+      const b = box.getBoundingClientRect();
+      const l = label.getBoundingClientRect();
+      const a = author.getBoundingClientRect();
+
+      // Jede einzelne Pill muss in Reihe UND Hero-Box enthalten sein und
+      // darf intern nichts überlaufen lassen (scrollWidth-Schuld).
+      const pills = [...document.querySelectorAll('.ff-trust-row .ff-trust-pill')].map((el) => {
+        const q = el.getBoundingClientRect();
+        return {
+          txt: el.textContent.replace(/\s+/g, ' ').trim(),
+          inRow: q.right <= r.right + 1 && q.left >= r.left - 1,
+          inBox: q.right <= b.right + 1 && q.left >= b.left - 1,
+          innerlichSauber: el.scrollWidth <= el.clientWidth + 1,
+        };
+      });
+
+      return {
+        fehlt: false,
+        // Kern-Struktur: Autor-Link liegt UNTER dem Label (2. Zeile),
+        // nicht daneben. Toleranz 2px deckt Subpixel/Zeilenhöhen-Rundung.
+        zweiZeilen: a.top >= l.bottom - 2,
+        abstand: +(a.top - l.bottom).toFixed(1),
+        pillInRow: p.right <= r.right + 1 && p.left >= r.left - 1,
+        pillInBox: p.right <= b.right + 1 && p.left >= b.left - 1,
+        pillUeberPanel: +(p.right - r.right).toFixed(1),
+        autorVerlinkt: author instanceof HTMLAnchorElement && /\/ueber\/?$/.test(author.pathname),
+        docOverflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        pills,
+      };
+    });
+
+    expect(geo.fehlt, 'Editorial-Struktur (Label + Autor) im Markup').toBe(false);
+    expect(geo.zweiZeilen, `Autoren-Name muss UNTER dem Label stehen (2. Zeile), Abstand war ${geo.abstand}px`).toBe(true);
+    expect(geo.autorVerlinkt, 'Autoren-Entity bleibt auf /ueber/ verlinkt (E-E-A-T)').toBe(true);
+    expect(geo.pillInRow, `Herausgeber-Pill muss innerhalb der Trust-Reihe enden (Übertretung: ${geo.pillUeberPanel}px)`).toBe(true);
+    expect(geo.pillInBox, 'Herausgeber-Pill muss innerhalb des Hero-Willkommenstextes liegen').toBe(true);
+    expect(geo.docOverflowX, 'Startseite darf keinen horizontalen Dokument-Overflow haben').toBeLessThanOrEqual(1);
+
+    const verletzt = (geo.pills || []).filter((q) => !q.inRow || !q.inBox || !q.innerlichSauber);
+    expect(verletzt, 'Keine Trust-Pill ragt aus Reihe/Hero oder überläuft intern').toEqual([]);
+  });
 });

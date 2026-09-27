@@ -278,42 +278,92 @@ input, textarea {
   transform: rotate(-45deg) translateY(-1px);
 }
 
-/* Editoriale Autorenzeile: Der Herausgeber-Hinweis erhält bewusst eine
-   zweite Zeile. So bleibt die Verantwortungsangabe auch in engen Hero-
-   Layouts ruhig lesbar. Der Inhalt darf in der Pill selbst umbrechen –
-   besonders wichtig für schmale Viewports und die mobile Trust-Spalte. */
+/* Editoriale Autorenzeile (Reparatur „Pill ragt über die innere Box“,
+   27.09.2026): Der Live-Befund hatte zwei Ursachen, die sich gegenseitig
+   verstärkten –
+   1. Ein <br> erzeugt in einem Flex-Item KEINEN Zeilenumbruch: Er wird
+      selbst zu einem nullbreiten Flex-Item (Blink, WebKit und Gecko
+      verhalten sich hier identisch). Die gedachte zweite Zeile blieb aus.
+   2. white-space:nowrap (Live-Stand 27.09.) verbot zusätzlich jeden
+      Textumbruch.
+   Ergebnis war eine einzige, unumbrechbare Zeile „✓ Herausgegeben von
+   Frank Hartung“ (~276px in Inter, im Fallback-Font breiter) – breiter
+   als das Fakten-Panel der Hero-Variante (235–266px): Die Pill ragte
+   messbar bis zu 22px über die innere Box hinaus (Desktop 1280px,
+   nachgestellt im lokalen Build des Live-Stands).
+   Die Reparatur ist STRUKTURELL, kein CSS-Flick: Label (.ff-trust-
+   editorial-label) und Autoren-Link (.ff-trust-author) stehen als echte
+   Flex-Spalte (.ff-trust-editorial) neben dem Häkchen. Der Zeilenwechsel
+   kommt aus der Box-Struktur und greift damit in jeder Engine –
+   unabhängig von Font-Metrik, Zoom, Fallback-Fonts und text-wrap-
+   Unterstützung. Zusätzlich bleibt ein Sicherheitsnetz, damit die Pill
+   ihre Box auch bei künftigem Inhalt nie verlassen kann. */
 .ff-trust-pill--editorial {
   align-items: center;
-  line-height: 1.25;
   min-height: 44px;
-  max-width: 100%;
   min-width: 0;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: normal;
-}
-
-.ff-trust-pill--editorial .ff-trust-author {
   max-width: 100%;
   overflow-wrap: anywhere;
 }
 
-.ff-trust-pill--editorial strong {
-  display: inline-block;
-  margin-top: 2px;
-  font-size: 1.02em;
-  line-height: 1.15;
+/* Sicherheitsnetz-Teil 2 + tragende Zeile: Der Autoren-Name führt in
+   kräftigem Schnitt (E-E-A-T: die Personen-Entity soll visuell führen)
+   und darf selbst bei extremen Viewports innerhalb der Pill umbrechen,
+   statt sie zu sprengen. */
+.ff-trust-pill--editorial .ff-trust-author {
+  font-weight: 700;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
-/* Herausgeber-Link (27.09.2026, E-E-A-T): Die Personen-Entity ist von
-   der Startseite aus erreichbar (/ueber/). Optik wie zuvor, plus
-   dezente Unterstreichung als Link-Affordanz; Hover in --ff-accent-2
-   (freigegebener Textton auf Smaragd, 5.8:1). Fokus: globaler
-   3px-Signalgelb-Ring greift unverändert. */
+/* Struktur-Spans der Autorenzeile sind keine eigene Pill-Fläche: Der
+   Sammel-Selektor „.ff-trust-row span“ (z-premium-blog.css, Specificität
+   0,1,1) vergibt an JEDES Span der Reihe Border + Backdrop-Filter. Die
+   Inneren überschreiben das bewusst mit gleicher oder höherer
+   Specificität (0,2,0) – ein Klassenname allein (0,1,0) würde trotz
+   späterer Datei verlieren. */
+.ff-trust-pill--editorial .ff-trust-editorial,
+.ff-trust-pill--editorial .ff-trust-editorial-label {
+  border: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Die zweizeilige Verantwortungsangabe: Spalte neben dem Häkchen,
+   vertikal zentriert. min-width:0 lässt die Spalte unter ihre
+   min-content-Breite schrumpfen (Flex-Default wäre auto) – die
+   Umbruch-Verantwortung liegt damit im Text, nicht in der Box. */
+.ff-trust-pill--editorial .ff-trust-editorial {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+/* Label leicht zurückgenommen (0.92em + Sperrung): Der Name trägt die
+   Verantwortungsangabe, der Zusatz ordnet nur ein – klassische
+   Editorial-Byline-Hierarchie. Bewusst KEINE Kontrastreduktion über
+   Transparenz: 82% Weiß läge auf dem hellsten Hero-Gradientwert
+   (#1f6f5c) nur bei 3.6–3.9:1 und damit unter WCAG AA. Hierarchie
+   entsteht über Größe und Schriftschnitt, nicht über schwächeren
+   Kontrast – das Label bleibt damit so gut lesbar wie jeder andere
+   Pill-Text (100% Weiß). */
+.ff-trust-pill--editorial .ff-trust-editorial-label {
+  display: block;
+  font-size: 0.92em;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+/* Autoren-Link (27.09.2026, E-E-A-T): Die Personen-Entity ist von
+   der Startseite aus erreichbar (/ueber/). Dezente Unterstreichung als
+   Link-Affordanz; Hover in --ff-accent-2 (freigegebener Textton auf
+   Smaragd, 5.8:1). Fokus: globaler 3px-Signalgelb-Ring greift unverändert. */
 .ff-trust-pill--editorial .ff-trust-author {
   position: relative;
   display: inline-block;
-  margin-top: 2px;
   font-size: 1.02em;
   line-height: 1.15;
   color: inherit;

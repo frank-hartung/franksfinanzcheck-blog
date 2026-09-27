@@ -52,7 +52,17 @@
     <div class="ff-trust-row">
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Unabhängig &amp; klar erklärt</span>
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Mit nachvollziehbaren Quellen</span>
-        <span class="ff-trust-pill ff-trust-pill--editorial"><span class="ff-trust-check" aria-hidden="true">✓</span> Herausgegeben von<br><a class="ff-trust-author" href="/ueber/">Frank Hartung</a></span>
+        {{- /* Herausgeber-Pill (Reparatur 27.09.2026, „ragt über die innere
+               Box“): Ein <br> ist in einem Flex-Item KEIN Zeilenumbruch –
+               er wird selbst zum nullbreiten Flex-Item. Zusammen mit
+               white-space:nowrap (Live-Stand) entstand eine einzige,
+               unumbrechbare Zeile, die breiter war als das Fakten-Panel
+               der Hero-Variante. Die zweite Zeile kommt darum jetzt aus
+               der Struktur: Label und Autoren-Entity als Flex-Spalte
+               (.ff-trust-editorial) – robust in jeder Engine, jeder
+               Font-Metrik und jedem Zoom. E-E-A-T unverändert: Name
+               bleibt verlinkt auf /ueber/. */ -}}
+        <span class="ff-trust-pill ff-trust-pill--editorial"><span class="ff-trust-check" aria-hidden="true">✓</span><span class="ff-trust-editorial"><span class="ff-trust-editorial-label">Herausgegeben von</span><a class="ff-trust-author" href="/ueber/">Frank Hartung</a></span></span>
         <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> 2–3× pro Woche neu</span>
     </div>
 </article>
