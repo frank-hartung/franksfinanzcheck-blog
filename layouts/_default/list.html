@@ -86,7 +86,10 @@
 {{- /* Der saisonale Hero ersetzt homeInfoParams. Damit die erste
       Artikelkarte nicht zusätzlich PaperMods `first-entry`-Sonderrolle
       übernimmt, gilt die Startseite selbst als bewusst bevorzugtes Hero-Layout. */ -}}
-{{- $user_preferred := or site.Params.disableSpecial1stPost .IsHome }}
+{{- /* Im range ist `.` der Artikel; für das Seitenmerkmal muss deshalb
+      die äußere Seite `$` verwendet werden. Sonst würde die erste Karte
+      trotz saisonalem Hero noch einmal PaperMods `first-entry` erhalten. */ -}}
+{{- $user_preferred := or site.Params.disableSpecial1stPost $.IsHome }}
 {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
 {{- $class = "first-entry" }}
 {{- else if $term }}
