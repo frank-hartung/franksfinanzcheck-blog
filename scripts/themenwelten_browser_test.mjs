@@ -25,11 +25,12 @@ const prefix = arg('--base-path', '/').replace(/^\/+|\/+$/g, '');
 const BASE_PATH = prefix ? `/${prefix}/` : '/';
 const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/themenwelten.json'), 'utf8'));
 // Der Startseiten-Vertrag ist variantenabhängig: Die Kontrollgruppe bleibt
-// bei 800 px, die freigegebene v-hero-conversion-Bühne darf 1024 px nutzen.
+// bei 800 px, die freigegebenen Hero-Bühnen dürfen 1024 px nutzen.
 // Unbekannte Varianten bekommen bewusst keinen impliziten Freifahrtschein.
 const HOME_MAIN_WIDTH_LIMITS = Object.freeze({
   basis: 800,
   'v-hero-conversion': 1024,
+  'v-hero-premium': 1024,
 });
 assert.ok(fs.existsSync(path.join(PUBLIC, 'posts/index.html')), 'Hugo-Build fehlt.');
 const require = createRequire(path.join(ROOT, 'tools/ff-voice-browser/package.json'));
