@@ -145,6 +145,32 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 4 (27.09.2026, vierte Runde: Meta-Ebene + Below-the-Fold-Audit):**
+
+- **Meta-Description der Startseite (SEO/GEO):** Bislang ohne Entity und ohne
+  Konkretisierung („… so sparst du monatlich bares Geld."). Neu (155 Zeichen,
+  Gate-Fenster 70–165): **„Geld sparen bei Strom, Gas, Internet und
+  Versicherungen: FranksFinanzcheck zeigt ehrliche Tarifvergleiche mit
+  konkreten Euro-Beträgen – ohne Verkaufsdruck."** — Entity + Quantifizierung,
+  konsistent zur H1-Definition und zu `llms.txt`. Gilt für
+  `meta name=description` UND `og:description` (SERP + Social-Karte).
+- **Redaktioneller Fund im Saison-Block geheilt:** Die Karte „Günstig durch
+  den Winter" zeigte die rohe Kategorie **„energie"** als Themen-Label —
+  der Artikel trug `pillar: "energie"`, eine ID, die es nicht gibt (kanonisch:
+  `strom-sparen`). Folge neben dem Label: kein Ratgeber-Link, falsches
+  Kurzantwort-Signet. Geheilt auf `strom-sparen` → Label „Strom & Gas
+  sparen", Link in den Ratgeber, Bolt-Signet. Interne Links: 3117 geprüft,
+  0 defekte.
+- **Below-the-Fold-Beweisaudit:** Saison-Block und Pinterest-CTA visuell
+  geprüft (Viewport-Shots über HTTP) — Karten-Hierarchie, „Franks Tipp"-
+  Zeile und Pinterest-Bento bestehen den Agentur-Blick; die scheinbar
+  „leeren" Cover-Boxen im Full-Page-Capture sind Lazy-Loading (erstes
+  LCP-Cover: eager, geladen, sichtbar — messbar via CWV-Grün).
+- **`llms.txt` geprüft:** Entity-Block, Zitierregeln und alle Pillars sind
+  aktuell und konsistent zum neuen Text (wird bei jedem IndexNow-Lauf
+  regeneriert) — kein Eingriff nötig.
+- **SEO-Cockpit:** 213 Seiten, **0 Befunde (P1/P2/P3)**.
+
 - **E2E:** 67/68 Playwright-Tests grün (Desktop+Mobile). Der eine Fehler
   („Kurz-&-knapp-Signet animiert") ist ein **Bestandsbefund der Sandbox**: Das
   Fallback-Chromium (`@sparticuz/chromium`, nötig, weil das Playwright-CDN hier
