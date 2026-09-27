@@ -145,6 +145,33 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 8 (27.09.2026, achte Runde: Social-Preview-Geometrie):**
+
+- **Echter Befund:** Das `og:image` der Startseite war das 2:3-Pinterest-
+  Hochkant-Cover (1000×1500, Verhältnis 0,667). Facebook, LinkedIn,
+  WhatsApp, X und Co. erwarten **1,91:1** — Link-Vorschauen der
+  meistgeteilten URL wurden zwangsläufig beschnitten/umgebrochen.
+- **Fix auf Agentur-Niveau, deterministisch statt generiert:** Eine
+  **1200×630-Markenkarte** (`og-default-1200x630.jpg`), gebaut aus den
+  Repos-eigenen Markenmitteln — Smaragd-Verlauf wie der Hero (#0E5A43 →
+  #0A4634), dezenter Gold-Glow, Inter-Wortmarke, Gold-Hairline,
+  Playfair-Kursiv-Subline mit Gold-Akzent, Autorenzeile mit
+  E-E-A-T-Angabe. Fonts aus `static/fonts/` (self-hosted-Pakt gewahrt),
+  Pixel-QA per Messung (Verhältnis 1,905, Textbereiche verifiziert).
+- **Verkabelung ohne neues Head-Gewicht:** `site.Params.images` führt die
+  Karte jetzt als erstes Bild — `get-page-images`/`opengraph.html`
+  nehmen `index 0` und lesen die **echten Pixelmaße** via `imageConfig`;
+  `og:image:width/height/type/alt` stimmen automatisch. Das 2:3-Cover
+  bleibt als Fallback hinter der Karte (und für Pinterest-Kontexte).
+- **Betriebsvorfall dokumentiert:** Die Sandbox wurde zwischendurch neu
+  geklont (lokal git-Historie + node_modules + /usr/local/bin/hugo
+  verloren). Alle sieben früheren Pässe überlebten auf dem Remote-Branch;
+  Recovery per `git reset --hard` auf den Remote-Stand, Pass 8 wurde
+  sauber erneut angewendet. Kein Datahlverlust.
+- **Verifikation:** og:image 1200×630 korrekt emittiert · Schema-/SEO-
+  Gate ✅ · SEO-Cockpit 0 Befunde · home- + design-variante-Specs 8/8 ·
+  Brand-/Integrity-Locks neu signiert (Siegel-Beleg = dieser Commit).
+
 **Design-Pass 7 (27.09.2026, siebte Runde: Entity-Graph + GEO-Dauerhaftigkeit):**
 
 - **Person-Knoten auf der Startseite (GEO):** Der WebSite-Knoten

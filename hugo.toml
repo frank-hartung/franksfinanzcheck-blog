@@ -97,7 +97,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # site.Params.images automatisch als Fallback in _funcs/get-page-images; das
   # Bild entsteht wie die Artikelfcover durch scripts/generate_covers.py
   # (2:3, 1000x1500, gleiche Marke) und wird von der Wache eingefordert (S5).
-  images = ["images/covers/brand-franksfinanzcheck.jpg"]
+  images = ["images/covers/og-default-1200x630.jpg", "images/covers/brand-franksfinanzcheck.jpg"]
   # Alt-Text des Site-Fallback-Bildes (og:image:alt) – konkret, nicht generisch.
   ogImageAlt = "FranksFinanzcheck: unabhängige Spar-Ratgeber mit echten Euro-Beträgen"
   DateFormat = "02.01.2006"
