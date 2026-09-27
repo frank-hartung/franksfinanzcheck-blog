@@ -7,11 +7,11 @@
          partial "home_season.html" (dict "modus" "block")
 
        Quelle: data/saisons.yaml (kuratiert, frei pflegbar – KEIN
-       Eingriff in hugo.toml: homeInfoParams.Title/Content sind über
-       brand_guard.py + integrity_guard.py gesperrt und bleiben Sache
-       von willkommenstext_guard.py). Auflösung und Artikel-Auswahl in
-       _funcs/saison-kontext.html, Fenster-Logik in
-       _funcs/saison-aufloesung.html.
+       Eingriff in das kritisch signierte hugo.toml). Der frühere
+       statische Willkommenstext wurde gelöscht; home_info.html nimmt
+       seine H1 + seinen GEO-Lead aus derselben aktiven Saison. Auflösung
+       und Artikel-Auswahl in _funcs/saison-kontext.html, Fenster-Logik
+       in _funcs/saison-aufloesung.html.
 
        Bausteine:
          badge    `.ff-saison-badge`  – Chip als Eyebrow ÜBER dem H1.

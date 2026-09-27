@@ -1,0 +1,351 @@
+{
+  "erzeugt": "2026-09-27 12:33 UTC",
+  "uebersicht": {
+    "gesamt": 60,
+    "ratgeber": 6,
+    "faellig": 51,
+    "bearbeitet": 3,
+    "geo_schnitt": 70,
+    "befunde": 0,
+    "geo_luecken": {
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 51,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 51,
+      "Mindestens eine Tabelle (extrahierbare Struktur)": 1,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 6
+    }
+  },
+  "offen": [
+    {
+      "slug": "mietwagen",
+      "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 50
+    },
+    {
+      "slug": "versicherungen",
+      "titel": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 50
+    },
+    {
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "titel": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+      "titel": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
+      "titel": "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+      "titel": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "titel": "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+      "titel": "Privathaftpflicht: Warum so wichtig und was sie kostet",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann",
+      "titel": "Geld sparen im Alltag: Tipps, die jeder umsetzen kann",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+      "titel": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+      "titel": "DSL-Vergleich: So findest du den günstigsten Internettarif",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "titel": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "titel": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+      "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+      "titel": "DNS-Server wechseln: Schnelleres und sichereres Internet",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+      "titel": "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "titel": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+      "titel": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen",
+      "titel": "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-03-hausratversicherung-kosten-leistungen-vergleich",
+      "titel": "Hausratversicherung: Was sie kostet und wen sie schützt",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "titel": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt",
+      "titel": "Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "titel": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "titel": "Kleine Beträge, große Wirkung: Frugalismus für den Einstieg",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+      "titel": "Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+      "titel": "Notgroschen: Die Wahrheit über das finanzielle Polster",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Energie-Update: Was sich jetzt für dich ändert",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+      "titel": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "titel": "Günstig durch den Winter: Heizungs-Check im Spätsommer",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 50
+    },
+    {
+      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Versicherung-Update: Was sich jetzt für dich ändert",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+      "titel": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "titel": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "titel": "7 Gewohnheiten für finanzielle Freiheit",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen",
+      "titel": "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-21-tierkrankenversicherung-hund-katze-kosten",
+      "titel": "Tierkrankenversicherung für Hund & Katze: Kosten realistisch",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten",
+      "titel": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich",
+      "titel": "Zahnzusatzversicherung 2026: Tarife & Erstattung",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag",
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Internet & DSL-Update: Was sich jetzt für dich ändert",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-25-die-50-30-20-regel-einfach-erklaert",
+      "titel": "Die 50-30-20-Regel einfach erklärt",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-26-photovoltaik-2026-wann-rechnet-sich-die-sonne-wirklich",
+      "titel": "Photovoltaik 2026: Wann rechnet sich die Sonne wirklich?",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich",
+      "titel": "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "geo": 67
+    }
+  ],
+  "laeufe": [
+    {
+      "slug": "frugalismus",
+      "titel": "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit",
+      "bereich": "ratgeber",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    },
+    {
+      "slug": "internet-dsl",
+      "titel": "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz",
+      "bereich": "ratgeber",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    },
+    {
+      "slug": "konto-karten",
+      "titel": "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen",
+      "bereich": "ratgeber",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 0,
+      "quellen": 0,
+      "befunde": [],
+      "geo": 50,
+      "fehler": [
+        "offline: keine Abrufe"
+      ],
+      "aenderungen": []
+    }
+  ]
+}

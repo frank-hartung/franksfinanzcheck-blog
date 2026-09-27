@@ -2,10 +2,15 @@
 # ============================================================
 #  BRAND-GUARD – Marken-Konfiguration unter Verschluss (mit Selbstheilung)
 #
-#  AUFTRAG (10.08.2026): Willkommenstext und Emojis dürfen sich NIEMALS
-#  ungewollt ändern – egal wer/schwas (Content-Bot, KI-Polish, menschlicher
-#  Klick-Fehler). brand_guard prüft die geschützten Werte in hugo.toml
-#  und STELLT sie bei Abweichung automatisch WIEDER HER.
+#  AUFTRAG (10.08.2026): Markenwerte dürfen sich NIEMALS ungewollt ändern –
+#  egal wer/schwas (Content-Bot, KI-Polish, menschlicher Klick-Fehler).
+#  brand_guard prüft die geschützten Werte in hugo.toml und STELLT sie bei
+#  Abweichung automatisch WIEDER HER.
+#
+#  Der frühere statische Willkommenstext ist bewusst NICHT mehr Teil dieses
+#  Locks: Er wurde durch den saisonalen Hero in data/saisons.yaml ersetzt.
+#  Dort schützt saisonale_startseite_guard.py Struktur, Markenstimme und den
+#  Render-Beweis; der Claude-Job darf nur dessen zwei Textfelder ändern.
 #
 #  SINGLE SOURCE OF TRUTH: data/brand_lock.yaml
 #    - Dort steht der „kanonische" Ist-Zustand pro geschütztem Eintrag.
@@ -43,10 +48,10 @@ SET_CURRENT = "--set-current" in sys.argv
 # Geschützte Schlüssel (Regex auf „Key = \"…\""-Zeilen in hugo.toml):
 #   name = Anzeigename · pattern = Option zur Adressierung
 PROTECTED = [
-    ("homeInfoParams.Title",   re.compile(r'^(    Title\s*=\s*)"(.*)"\s*$', re.M), "Willkommens-Titel"),
-    ("homeInfoParams.Content", re.compile(r'^(    Content\s*=\s*)"(.*)"\s*$', re.M), "Startseiten-Tagline"),
-    ("params.description",     re.compile(r'^(  description\s*=\s*)"(.*)"\s*$', re.M), "Meta-Description"),
-    ("params.disclaimer",      re.compile(r'^(  disclaimer\s*=\s*)"(.*)"\s*$', re.M), "Affiliate-Disclaimer"),
+    ("params.description", re.compile(r'^(  description\s*=\s*)"(.*)"\s*$', re.M),
+     "Meta-Description"),
+    ("params.disclaimer", re.compile(r'^(  disclaimer\s*=\s*)"(.*)"\s*$', re.M),
+     "Affiliate-Disclaimer"),
 ]
 
 # ------------------------------------------------------------ Marken-ASSETS (12.08. Runde 2)
@@ -237,8 +242,8 @@ def main() -> None:
         lines += ["## ⚠️ Marken-Asset-Befunde" + (" – Assets SELBST GEHEILT ✅" if healed_assets else ""), ""]
         lines += [f"- {f}" for f in asset_findings]
     if not differ and not asset_findings:
-        lines.append("🎉 Alle geschützten Marken-Bausteine unverändert (Willkommenstext, Tagline, "
-                     "Meta-Description, Disclaimer) – Logo-Lockup & Artefakte bytegleich kanonisch.")
+        lines.append("🎉 Alle geschützten Marken-Bausteine unverändert (Meta-Description, Disclaimer) "
+                     "– Logo-Lockup & Artefakte bytegleich kanonisch.")
     lines += ["", "---",
               "_Absichtlich ändern: hugo.toml editieren bzw. `bake_brand.py` anpassen + "
               "`python3 scripts/brand_guard.py --set-current` → Lock übernimmt den neuen Stand._"]

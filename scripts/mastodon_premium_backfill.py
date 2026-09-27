@@ -166,7 +166,7 @@ def main():
         "### 1. Mastodon-Profil-Sync überarbeitet",
         "- Display-Name: `FranksFinanzcheck 💰 1.800€ sparen` (33/40 Zeichen, benefit-driven)",
         "- Bio 451/500 Zeichen, 5 Absätze:",
-        "  - 1.800€ Nutzen (aus homeInfoParams)",
+        "  - 1.800€ Nutzen (eigenständiges Profilversprechen)",
         "  - 25+ Guides Social Proof",
         "  - 6 Welten vollständig",
         "  - Mo/Mi/Fr Kadenz + Zahlen/Checklisten/redaktionell geprüft",

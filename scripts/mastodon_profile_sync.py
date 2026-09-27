@@ -43,7 +43,7 @@ DRY_RUN = "--dry-run" in sys.argv
 DISPLAY_NAME = "FranksFinanzcheck 💰 1.800€ sparen"
 
 # Bio auf Premium-Agentur-Niveau (2026-08-27 Update):
-# - Nutzen zuerst (bis zu 1.800€, belegt via homeInfoParams)
+# - Nutzen zuerst (bis zu 1.800€ als eigenständiges redaktionelles Profilversprechen)
 # - Social Proof (25+ Guides)
 # - 6 Ratgeber-Welten vollständig
 # - Rhythmus Mo/Mi/Fr + Qualitätsversprechen (Zahlen, Checklisten, redaktionell geprüft)

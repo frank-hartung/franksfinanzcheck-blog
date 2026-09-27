@@ -7,7 +7,7 @@
 #      nie ein Crash der Pipeline),
 #    - validiert Struktur/Pflichtfelder,
 #    - prüft die kanonischen Marken-Texte GEGEN data/brand_lock.yaml
-#      (Drift-Wächter: description, disclaimer, home_title),
+#      (Drift-Wächter: description, disclaimer),
 #    - liefert den kompakten "Marken-Hirn"-Block für Prompt-Injektion.
 #
 #  Aufruf:
@@ -32,7 +32,6 @@ LOCK_FILE = os.path.join(BLOG_DIR, "data", "brand_lock.yaml")
 LOCK_KEY_MAP = {
     "params.description": "canonical.description",
     "params.disclaimer": "canonical.disclaimer",
-    "homeInfoParams.Title": "canonical.home_title",
 }
 
 # Minimal-Struktur: bei beschädigter/fehlender Datei wird mit diesen Defaults

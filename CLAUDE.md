@@ -119,6 +119,39 @@ Dauer-Alarm ohne Schließpfad, der #272 erzeugt hat.
   (`data/aktuelle_entwicklungen.yaml`, `data/topics.yaml`) übernehmen.
 - Installations- und Betriebsdetails: `docs/ANLEITUNG-AGENT-REACH.md`.
 
+## Faktenfrische: Recherche pro Artikel (seit 27.09.2026)
+
+`scripts/faktenfrische.py` ist die **artikelgenaue** Schwester der breiten
+Signalsammlung: Agent-Reach-Recherche + Claude-Fachprüfung (Puter-Brücke, ohne
+Anthropic-API) für jeden bestehenden und jeden neuen Artikel.
+
+- Zwei Takte: **Erstellung** (`--neu --apply` in `content-engine-v2.yml`,
+  Phase 3) und **Bestand** (`faktenfrische.yml`, Di + Do). Fälligkeit nach
+  Risikoklasse: saisonal 30, YMYL 45, Standard 90 Tage
+  (SSOT `data/agent_reach/faktenfrische.yaml`).
+- **Schreibrecht ist eng:** nur die Frontmatter-Felder `faktencheck` und
+  `quellen`. Artikeltext **nie** automatisch, `lastmod` **nie** (Frische-
+  Inflation). Fachliche Befunde → Report/Queue/Issue, Mensch entscheidet.
+- **Anti-Halluzination (doppelter Deckel):** Eine Quelle darf nur in einen
+  Artikel, wenn ihre URL wörtlich im Recherche-Dossier steht **und** ihre
+  Domain auf der Allowlist liegt. Affiliate-Partner sind nicht belegfähig.
+  Eingefroren in `--selftest` (ST3) – nicht aufweichen.
+- Sichtbar wird das über `layouts/_partials/ff_quellen_box.html` („Quellen &
+  Faktenstand“) und als `citation`/`sdDatePublished` im Article-JSON-LD.
+  **Eine Quelle, zwei Ausspielwege** – nie einen der beiden separat pflegen.
+- Runbook: `docs/ANLEITUNG-FAKTENFRISCHE.md`.
+
+## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
+
+Die schwebende Artikel-Navigation ist zweimal (26.09.2026) an einem
+harmlos aussehenden Refactoring zerbrochen. Deshalb ist ihr Premium-Zustand
+jetzt ein **geprüfter Vertrag**, nicht eine Absicht:
+`python3 scripts/mini_toc_premium_guard.py` (V1–V14: Vollständigkeit,
+feste Kopfzeile, Geometrie an `--main-width`, Ruhzustand, Breakpoint,
+Druck, Reduced Motion, Dark Mode, Materialtiefe, Fokus-Ring, keine
+Inline-Farben, kein Line-Clamp). Der Selbsttest sabotiert die Wache selbst
+und verlangt, dass sie es merkt. Läuft in `npm run test:toc`.
+
 ## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)
 
 `data/integrity_lock.json` ist ein **Siegel**, kein Quelltext: SHA-256-Map,

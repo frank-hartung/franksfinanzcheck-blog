@@ -23,6 +23,20 @@ cover:
   alt: "20 Wege zu weniger Kosten: Stromrechnung zu hoch?"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Durch einfache Maßnahmen wie LED‑Beleuchtung, Geräte mit Zeitschaltuhren zu steuern und Stand‑by‑Verbrauch zu vermeiden, kannst du deine Stromrechnung um etwa 10 %‑15 % senken. Zudem spart das konsequente Ausschalten von nicht genutzten Geräten jährlich rund 50 € bis 100 € bei einem durchschnittlichen Haushalt. Ein bewusster Umgang mit Energie reduziert die Kosten nachhaltig."
+quellen:
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-08-21"
+  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2025-05-28"
+  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-08-24"
+faktencheck: 2026-09-27
 ---
 
 Wenn im Herbst der Brief des Energieversorgers im Briefkasten liegt, folgt oft der Schreck: Eine saftige Nachzahlung droht, und der monatliche Abschlag klettert nach oben. Viele Haushalte nehmen diese Kosten als unveränderliche Fixkosten hin, doch das ist ein Trugschluss. Tatsächlich lassen sich durch gezielte **Strom sparen Tipps** oft dreistellige Beträge pro Jahr einsparen, ohne dass der Lebenskomfort spürbar sinkt. Es geht nicht darum, im Dunkeln zu sitzen, sondern die unsichtbaren Verschwender im eigenen Heim zu entlarven und systematisch auszuschalten.

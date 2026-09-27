@@ -129,4 +129,32 @@
   {{- $out = merge $out (dict "keywords" (delimit $kwList ", ")) -}}
 {{- end -}}
 
+{{- /* ---------- Belegkette → schema.org/citation (GEO, 27.09.2026) ----------
+     Antwortmaschinen (AI Overviews, Perplexity, ChatGPT Search) bewerten
+     Quellenangaben als Vertrauenssignal und zitieren belegte Seiten häufiger.
+     Datenherkunft: Frontmatter `quellen` (Allowlist-geprüft, gepflegt von
+     scripts/faktenfrische.py) – identisch zu der für Leser sichtbaren Box
+     layouts/_partials/ff_quellen_box.html. Eine Quelle, zwei Ausspielwege:
+     kein zweiter Pflegeort, keine Drift zwischen Sichtbarem und Schema.
+     `sdDatePublished` trägt das Prüfdatum (`faktencheck`) – das ist die
+     Aussage „so alt ist die Faktenprüfung", getrennt von dateModified. */ -}}
+{{- $citList := slice -}}
+{{- range .Params.quellen -}}
+  {{- if .url -}}
+    {{- $c := dict "@type" "CreativeWork" "url" .url -}}
+    {{- with .titel -}}{{- $c = merge $c (dict "name" (. | plainify | htmlUnescape | chomp)) -}}{{- end -}}
+    {{- with .herausgeber -}}
+      {{- $c = merge $c (dict "publisher" (dict "@type" "Organization" "name" .)) -}}
+    {{- end -}}
+    {{- with .datum -}}{{- $c = merge $c (dict "datePublished" .) -}}{{- end -}}
+    {{- $citList = $citList | append $c -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $citList) 0 -}}
+  {{- $out = merge $out (dict "citation" $citList) -}}
+{{- end -}}
+{{- with .Params.faktencheck -}}
+  {{- $out = merge $out (dict "sdDatePublished" (printf "%v" .)) -}}
+{{- end -}}
+
 <script type="application/ld+json">{{ $out | jsonify | safeJS }}</script>

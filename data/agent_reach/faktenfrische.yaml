@@ -1,0 +1,177 @@
+# ============================================================
+#  FAKTENFRISCHE – Recherche-Vertrag für Blogartikel
+#  (Auftrag Frank, 27.09.2026: „Bestehende und zukünftige
+#   Blogartikel automatisch mit Agent Reach und Claude fachlich
+#   und inhaltlich auf Premium-Level einer Profi-Agentur
+#   optimieren – bei Content-Erstellung und in sinnvollen
+#   Abständen mit Internet-Recherche.“)
+#
+#  SSOT für scripts/faktenfrische.py. Diese Datei ist – wie
+#  data/agent_reach/themenplan.yaml – MENSCHLICH KURATIERT.
+#  Die Maschine liest sie, schreibt sie aber nie.
+#
+#  Leitplanken (KI-Redaktions-Statut, CLAUDE.md):
+#    * Recherche NUR LESEND über Agent-Reach-Kanäle.
+#    * Claude darf ausschließlich BELEGTE Quellen nennen: Jede
+#      URL im Vorschlag muss im Recherche-Dossier stehen
+#      (Anti-Halluzinations-Vertrag, siehe scripts/faktenfrische.py).
+#    * Artikeltext wird NIE automatisch umgeschrieben. Automatisch
+#      gepflegt werden nur Frontmatter-Felder `faktencheck` und
+#      `quellen` (Belegkette) – Textänderungen sind eine
+#      redaktionelle Entscheidung und landen in der Queue.
+#    * `lastmod` wird NIE von diesem Skript gesetzt (Frische-
+#      Inflation, siehe layouts/_partials/article_dates.html).
+# ============================================================
+
+version: 1
+
+# --- Wann ist ein Artikel wieder recherche-fällig? -----------------
+# „Sinnvolle Abstände“ = nach Risikoklasse, nicht nach Gießkanne.
+intervalle:
+  # YMYL-Themen (Geld, Versicherung, Verträge, Fristen, Zinsen):
+  # kurze Halbwertszeit, weil Preise/Gesetze/Stichtage kippen.
+  ymyl_tage: 45
+  # Alles andere (Haushalt, Gewohnheiten, Mindset).
+  standard_tage: 90
+  # Saisonale Artikel (Heizung, Kfz-Stichtag 30.11., Jahreswechsel)
+  # werden im Saisonfenster zusätzlich vorgezogen.
+  saison_tage: 30
+  # Erstrecherche bei Content-Erstellung: Ein neuer Artikel ohne
+  # `faktencheck` ist IMMER fällig (Priorität 0).
+  erstrecherche_bei_erstellung: true
+
+budget:
+  max_artikel_pro_lauf: 3       # Rotation statt Rundumschlag
+  max_treffer_je_artikel: 6     # so viele Fundstellen ins Dossier
+  max_quellen_frontmatter: 4    # so viele Belege in den Artikel
+  web_max_zeichen: 1800         # Klartext-Auszug je Webseite
+
+# --- Vertrauenswürdige Belegquellen --------------------------------
+# Rang 1 = amtlich/normsetzend, Rang 2 = etablierte Verbraucher-/
+# Fachinstanz, Rang 3 = seriöse Wirtschaftsredaktion.
+# NUR Domains aus dieser Liste dürfen als Beleg in einen Artikel.
+# Affiliate-Partner (CHECK24, Tarifcheck …) sind bewusst NICHT
+# belegfähig – Provisionsquelle ≠ Faktenquelle.
+quellen_allowlist:
+  - domain: bundesnetzagentur.de
+    herausgeber: "Bundesnetzagentur"
+    rang: 1
+  - domain: destatis.de
+    herausgeber: "Statistisches Bundesamt"
+    rang: 1
+  - domain: gesetze-im-internet.de
+    herausgeber: "Bundesministerium der Justiz"
+    rang: 1
+  - domain: bafin.de
+    herausgeber: "BaFin"
+    rang: 1
+  - domain: bundesbank.de
+    herausgeber: "Deutsche Bundesbank"
+    rang: 1
+  - domain: bmwk.de
+    herausgeber: "Bundesministerium für Wirtschaft und Klimaschutz"
+    rang: 1
+  - domain: bundesfinanzministerium.de
+    herausgeber: "Bundesministerium der Finanzen"
+    rang: 1
+  - domain: verbraucherzentrale.de
+    herausgeber: "Verbraucherzentrale"
+    rang: 2
+  - domain: test.de
+    herausgeber: "Stiftung Warentest"
+    rang: 2
+  - domain: bdew.de
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    rang: 2
+  - domain: gdv.de
+    herausgeber: "Gesamtverband der Deutschen Versicherungswirtschaft"
+    rang: 2
+  - domain: co2online.de
+    herausgeber: "co2online"
+    rang: 2
+  - domain: dena.de
+    herausgeber: "Deutsche Energie-Agentur"
+    rang: 2
+  - domain: tagesschau.de
+    herausgeber: "tagesschau"
+    rang: 3
+  - domain: heise.de
+    herausgeber: "heise online"
+    rang: 3
+  - domain: spiegel.de
+    herausgeber: "DER SPIEGEL"
+    rang: 3
+
+# --- Kanäle je Themenwelt (Agent-Reach-Routing) --------------------
+# rss: Signalstrom (schnell, datiert) · web: Referenzseite (Jina Reader)
+themenwelten:
+  strom-sparen:
+    schlagworte: ["Strompreis", "Gaspreis", "Energie", "Heizkosten", "Photovoltaik", "Grundversorgung"]
+    rss:
+      - name: "Bundesnetzagentur – Pressemitteilungen"
+        url: "https://www.bundesnetzagentur.de/SiteGlobals/Functions/RSSFeed/DE/RSSNewsfeed/RSSNewsfeed_Presse.xml"
+      - name: "Verbraucherzentrale – Energie"
+        url: "https://www.verbraucherzentrale.de/rss/energie"
+    web:
+      - "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+  versicherungen:
+    schlagworte: ["Versicherung", "Beitrag", "Police", "Schaden", "Kfz-Versicherung", "Haftpflicht"]
+    rss:
+      - name: "Verbraucherzentrale – Versicherungen"
+        url: "https://www.verbraucherzentrale.de/rss/versicherung"
+    web:
+      - "https://www.gdv.de/gdv/medien/medieninformationen"
+  konto-karten:
+    schlagworte: ["Girokonto", "Kreditkarte", "Zinsen", "Tagesgeld", "Gebühren", "Bank"]
+    rss:
+      - name: "Deutsche Bundesbank – Pressenotizen"
+        url: "https://www.bundesbank.de/service/rss/de/633286/feed.xml"
+    web:
+      - "https://www.bundesbank.de/de/presse/pressenotizen"
+  internet-dsl:
+    schlagworte: ["DSL", "Glasfaser", "Router", "Mobilfunk", "Breitband", "Tarif"]
+    rss:
+      - name: "heise online"
+        url: "https://www.heise.de/rss/heise-atom.xml"
+    web:
+      - "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+  frugalismus:
+    schlagworte: ["Inflation", "Verbraucherpreise", "Sparquote", "Haushaltsbudget"]
+    rss:
+      - name: "Statistisches Bundesamt – Pressemitteilungen"
+        url: "https://www.destatis.de/DE/Service/RSS/rss-pressemitteilungen.xml"
+    web:
+      - "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+  mietwagen:
+    schlagworte: ["Mietwagen", "Kaution", "Selbstbeteiligung", "Reise"]
+    rss:
+      - name: "Verbraucherzentrale – Reise"
+        url: "https://www.verbraucherzentrale.de/rss/reise-mobilitaet"
+    web:
+      - "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+
+# --- Fallback für Artikel ohne Themenwelt ---------------------------
+standard:
+  rss:
+    - name: "Verbraucherzentrale – Aktuelle Meldungen"
+      url: "https://www.verbraucherzentrale.de/rss/aktuelle-meldungen"
+    - name: "tagesschau – Wirtschaft"
+      url: "https://www.tagesschau.de/wirtschaft/index~rss2.xml"
+  web:
+    - "https://www.verbraucherzentrale.de/aktuelle-meldungen"
+
+# --- Claude-Fachprüfung (kostenlos über die Puter-Brücke) ----------
+# Gleiche Lane wie scripts/claude_stilpolitur.py: KEINE Anthropic-API,
+# nur PUTER_AUTH_TOKEN. Ohne Token läuft alles außer der Fachprüfung.
+claude:
+  modell: "claude-sonnet-5"
+  modell_fallback: []
+  temperatur: 0.2          # Faktenarbeit, keine Kreativität
+  max_tokens: 4096
+  timeout: 300
+
+# --- Meldewesen -----------------------------------------------------
+melden:
+  # Ab so vielen offenen fachlichen Befunden meldet der Workflow.
+  issue_ab_befunden: 3
+  label: "faktenfrische"

@@ -135,9 +135,11 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   bingVerify = "5079875E367065FE09E09FC61BC077C6"
   disclaimer = "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
-  [params.homeInfoParams]
-    Title = "FranksFinanzcheck: Geld sparen mit echten Experten-Tipps"
-    Content = "FranksFinanzcheck ist dein unabhängiger Ratgeber für private Fixkosten, der dir hilft, beim **Geld sparen** die richtigen Entscheidungen zu treffen. Gründer Frank Hartung nutzt dafür über 10 Jahre Erfahrung aus der Finanzwelt. Google bewertet Ratgeberseiten zunehmend danach, ob echte Erfahrung und nachvollziehbare Quellen hinter den Tipps stehen statt nur oberflächlicher Zusammenfassungen.\n\nHier gibt es kein Fachchinesisch oder Verkaufsdruck. Wir vergleichen Strom, Gas und Versicherungen mit klaren Vor- und Nachteilen. So holst du ohne Stress **bis zu 1.500 € pro Jahr** für dich raus. Ein Kontowechsel dauert oft weniger als zehn Minuten 💡."
+  # Der statische Willkommenstext (`homeInfoParams`) wurde am 27.09.2026
+  # vollständig entfernt. Die einzige Startseiten-H1 und ihr GEO-Lead kommen
+  # saisonal aus data/saisons.yaml; Rendering: layouts/_partials/home_info.html.
+  # Dadurch ersetzt der Saisonwechsel Inhalt, ohne diese kritische Konfiguration
+  # oder das Premium-Layout anzufassen.
 
   [[params.socialIcons]]
     name = "pinterest"

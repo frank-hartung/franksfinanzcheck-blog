@@ -187,3 +187,7 @@
 {"date": "2026-09-27", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml"]}
 {"date": "2026-09-27", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-09-27", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["data/brand_lock.yaml", "hugo.toml"]}
+{"date": "2026-09-27", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html", "layouts/pillar/single.html"]}
+{"date": "2026-09-27", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["data/brand_lock.yaml", "hugo.toml"]}
+{"date": "2026-09-27", "kritisch": 1, "fest": 2, "modus": "set-current", "geaendert": ["data/brand_lock.yaml", "hugo.toml", "scripts/brand_guard.py"]}
+{"date": "2026-09-27", "kritisch": 0, "fest": 0, "modus": "verify"}

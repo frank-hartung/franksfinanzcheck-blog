@@ -1,34 +1,21 @@
 # ============================================================
-#  AKTUELLE-ENTWICKLUNGEN – kuratierter Signal-Pool für den
-#  Willkommenstext (scripts/willkommenstext_guard.py)
+#  AKTUELLE-ENTWICKLUNGEN – kuratierter Signal-Pool für die
+#  Recherche- und Themenplanung (scripts/research_engine.py)
 #  ------------------------------------------------------------
-#  Auftrag (Frank, 14.08.2026): Der Willkommenstext soll "aktuelle
-#  Entwicklungen, neue Regelungen, frische Erkenntnisse,
-#  Marktveränderungen" widerspiegeln – ohne dass eine KI dafür
-#  konkrete Gesetze/Paragraphen/Preise HALLUZINIERT (Haftungsrisiko:
-#  ein falsch zitiertes Gesetz oder ein erfundener Preis wäre
-#  schlimmer als ein etwas generischerer Text).
+#  Der frühere statische Willkommenstext und seine eigene Automation
+#  wurden am 27.09.2026 vollständig entfernt. Diese Datei bleibt
+#  unabhängig davon die von Menschen kuratierte Faktenbasis für die
+#  Recherche-Engine und ihre historischen Recherchearchive.
 #
-#  DESHALB: Dieser Pool ist die SINGLE SOURCE OF TRUTH für "harte"
-#  Aufhänger – von einem Menschen (oder einem Agenten mit Web-
-#  Recherche-Zugriff, siehe SEO-STANDARDS-2026.md als Vorbild für
-#  diese Arbeitsweise) geprüft und eingetragen. Die KI-Generierung
-#  in willkommenstext_guard.py DARF NUR aus diesem Pool zitieren/
-#  paraphrasieren, NICHT eigene Fakten erfinden (siehe Prompt-Regeln
-#  im Skript).
+#  Jeder Eintrag ist ein geprüfter, vorsichtig formulierter Aufhänger.
+#  Recherche- und KI-Werkzeuge dürfen daraus keine neuen Zahlen,
+#  Gesetze, Preise oder Einzelfakten ableiten. Für den saisonalen Hero
+#  ist diese Datei KEINE Quelle: dessen Agent-Reach-Workflow gibt nur
+#  kuratierte Saison-Themen an Claude weiter und bleibt faktenfrei.
 #
-#  ROTATION: willkommenstext_guard.py wählt pro Lauf EINEN Eintrag
-#  aus (nach Kalenderwoche, deterministisch – siehe SIGNAL_INDEX in
-#  data/willkommenstext_history.jsonl), damit der Aufhänger nicht
-#  jede Woche der gleiche ist, aber reproduzierbar bleibt.
-#
-#  FRISCHHALTUNG (analog SEO-STANDARDS-2026.md Kapitel 5): Wenn ein
-#  Eintrag durch `bis` abgelaufen ist, wird er von der Rotation
-#  automatisch übersprungen (siehe skip_expired() im Skript) – die
-#  Datei braucht deshalb regelmäßigen Nachschub, sonst schrumpft der
-#  Pool über die Zeit. Frank/Agent sollte bei jeder größeren Zins-,
-#  Energiepreis- oder Gesetzesänderung einen neuen Eintrag ergänzen
-#  ("Aktualisiere data/aktuelle_entwicklungen.yaml um <Thema>").
+#  FRISCHHALTUNG: Ist ein Eintrag durch `bis` abgelaufen, überspringt
+#  research_engine.py ihn. Bei belegten Veränderungen kann Frank oder
+#  ein Recherche-Agent einen neuen Eintrag ergänzen.
 #
 #  Felder je Eintrag:
 #    id        eindeutiger Schlüssel (nie wiederverwenden, auch nach

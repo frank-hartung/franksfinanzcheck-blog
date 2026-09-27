@@ -1,3 +1,4 @@
+
 brand:
   name: FranksFinanzcheck
   author: Frank Hartung
@@ -39,69 +40,7 @@ avatar:
   - empfiehlt nur, was er selbst nachvollziehen kann
 default_cta: Jetzt bei CHECK24 vergleichen
 products:
-- family: strom
-  label: Stromtarif-Vergleich
-  cta: Jetzt Stromtarif vergleichen
-  pillars:
-  - strom-sparen
-  route: strom
-- family: gas
-  label: Gastarif-Vergleich
-  cta: Jetzt Gastarif vergleichen
-  pillars:
-  - strom-sparen
-  route: gas
-- family: internet
-  label: DSL-/Internet-Vergleich
-  cta: Jetzt DSL-Tarif vergleichen
-  pillars:
-  - internet-dsl
-  route: dsl
-- family: versicherung
-  label: Versicherungs-Vergleich
-  cta: Jetzt Versicherung vergleichen
-  pillars:
-  - versicherungen
-  route: hausrat
-- family: konto
-  label: Konto- & Karten-Vergleich
-  cta: Jetzt kostenloses Konto vergleichen
-  pillars:
-  - konto-karten
-  route: girokonto
-- family: mietwagen
-  label: Mietwagen-Vergleich
-  cta: Jetzt Mietwagen vergleichen
-  pillars:
-  - mietwagen
-  route: mietwagen
-- family: reisen
-  label: Reise-Vergleich
-  cta: Jetzt Reise vergleichen
-  pillars:
-  - mietwagen
-  route: reisen
-audience:
-  primary: Privathaushalte in Deutschland, die ihre Fixkosten senken wollen – ohne
-    Fachchinesisch und ohne Verkaufsdruck.
-  secondary: Wechsel-Interessierte (Strom, Gas, DSL, Konto, Versicherung), Frugalismus-Einsteiger,
-    Vielbeschäftigte mit wenig Zeit.
-  pain_points:
-  - Nachzahlungen von Strom-/Gasrechnung (vor allem im Herbst/Winter)
-  - Versteckte Gebühren und Preiserhöhungen bei Konto, Handy und Versicherungen
-  - Überforderung im Tarifdschungel (zu viele Angebote, unklare Bedingungen)
-  - Angst vor Wechselfallen (Kündigungsfristen, Preisgarantie-Kleingedrucktes)
-  - Kein Überblick über die eigenen laufenden Kosten
-  reading_level: verständliche Alltagssprache, kurze Sätze, ein Gedanke pro Absatz
-hard_rules:
-- KEINE erfundenen Studien, Umfragen, Experten, Gesetze/Paragraphen oder exakten Preise
-  (Haftungsrisiko).
-- 'E-E-A-T: eigene Erfahrung als Formulierung erlaubt, Fakten nur als Allgemeinwissen
-  oder aus kuratierten Quellen.'
-- Affiliate-Links NUR über das /go/-Gateway, mit rel="sponsored" (Werbekennzeichnung).
-- Recherche-Hooks (data/research) sind Anregungen, keine zitierten Fakten – Quellenkennzeichnung
-  im Report.
-- 'Kadenz DAUERVORGABE: Publikation nur Mo/Mi/Fr, 2–3 Artikel pro Tag (cadence_guard).'
+
 frameworks:
   editorial:
   - Das Wichtigste in Kürze (fettes Label + 3–4 Bullets) direkt nach der Einleitung
