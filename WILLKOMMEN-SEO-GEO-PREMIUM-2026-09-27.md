@@ -145,6 +145,34 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 9 (27.09.2026, neunte Runde: Abschluss-Sweep + Geometrie-Audit komplett):**
+
+- **Artikel-og-Geometrie geprüft und bewusst bestätigt:** Nachdem die
+  Startseite seit Pass 8 das 1,91:1-Format trägt, wurde auch die
+  Artikel-Ebene auditgericht: Artikel-`og:image` bleibt absichtlich das
+  2:3-Pinterest-Cover (1000×1500) — laut Git des
+  `generate_covers.py`-Kopfs **Pinterest-Masterplan, explizite Entscheidung**
+  (PRODUCT.md: Pinterest ist Reichweiten-Säule; Pinterest-Pins speisen
+  sich aus og:image). Falsch wäre es, das heimlich umzubauen; richtig
+  ist es, es als dokumentierte Absicht zu führen. Falls X/LinkedIn-
+  Anteile der Artikel künftig wachsen, ist der saubere Weg ein zweites,
+  querformatiges `twitter:image` je Cover — bewusst NICHT in diesem
+  Lauf umgesetzt (Pipeline-Änderung am gesiegelten Cover-Generator =
+  Chefsache mit eigener Messung).
+- **IndexNow:** Endpoint aus der Sandbox nicht erreichbar
+  (Allowlist); der bestehende Wochen-Workflow meldet Startseite,
+  Artikel, Pillars und Hubs ohnehin automatisch — inklusive der
+  neuen Meta-/OG-Signale beim nächsten Lauf.
+- **Abschluss-Verifikation am finalen HEAD (59a348b), alles grün:**
+  - **E2E-Suite: 68/68** (Playwright, Desktop + Mobile)
+  - **Design-Metrics hell+dunkel:** Startseite min 5,25 (hell) /
+    4,91 (dunkel), Artikel 5,1 / 6,07 — alle ≥ 4,5-AA; 12 Messektionen
+    (Home, Layout, Artikel, Fokus, Tap-Ziele, Mobile — je hell+dunkel)
+  - Design-Varianten-Gate BESTANDEN · Schema-/SEO-Gate 383 Seiten,
+    0 harte Funde · SEO-Cockpit 0 Befunde · layout/dom_audit im Budget
+  - willkommenstext „kein Auffrischungsbedarf“ · brand_guard „alle
+    Bausteine unverändert“ · integrity „kein Drift, 43 Kerndateien“
+
 **Design-Pass 8 (27.09.2026, achte Runde: Social-Preview-Geometrie):**
 
 - **Echter Befund:** Das `og:image` der Startseite war das 2:3-Pinterest-
