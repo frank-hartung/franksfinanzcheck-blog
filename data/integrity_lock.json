@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-27T10:44:12.293211+00:00",
-  "head": "5d10826",
+  "signed_at": "2026-09-27T11:43:39.839136+00:00",
+  "head": "40118334",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "48412d47a79ee83f188e39e4e192e834adfc37de6a286096ea91f1a9a5a30e8a",
@@ -48,32 +48,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0",
-  "audit_start_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd",
+  "audit_start_sha256": "7c7ea10d31bc7cfa5cf8ace70153330cafd2222e1cf5baae92ee219bb1a644f2",
   "audit": [
-    {
-      "date": "2026-09-22",
-      "art": "repair",
-      "head": "e64cdac",
-      "geaendert": [],
-      "quelle": {
-        "art": "bergung",
-        "beschreibung": "Bergung aus dem beschädigten Artefakt (11 lesbare Akteneinträge, Map deckt den Baum exakt)",
-        "geborgene_akteneintraege": 11
-      },
-      "beschaedigung": {
-        "zustand": "beschaedigt",
-        "groesse": 7185,
-        "offset": 7171,
-        "verdacht": "zusammenschnitt",
-        "detail": [
-          "JSON nicht lesbar: Expecting property name enclosed in double quotes: line 158 column 7 (char 7171)",
-          "Bruchstelle: Byte 7171 von 7185 (Zeile 158)",
-          "Hinter der Bruchstelle steht der Rest einer ANDEREN Fassung – Muster: zwei Stände wurden zusammengesetzt (Merge-Konflikt in einer Maschinendatei)."
-        ]
-      },
-      "files_sha256": "224bec94359f16b7d518c1e5721bfe110e2d3efbcf883b96f63755d37aac3198",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-22",
       "art": "set-current",
@@ -102,7 +78,7 @@
         }
       ],
       "files_sha256": "26b0af9dbcd2c1944b78e01af237ca18ff0ef40268f15b8f5cfaabce9c1284cf",
-      "prev_sha256": "7a8c61ac13c4ca680ba4ebb8632da63254728a6321675873ec0c33e20a3f2abd"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-23",
@@ -382,7 +358,15 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "51386f18c1d4fc242edd3fd2bfd384396646ade1d4372136b3aad587a33f5e74",
+      "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0",
+      "prev_sha256": "51386f18c1d4fc242edd3fd2bfd384396646ade1d4372136b3aad587a33f5e74"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "40118334",
+      "geaendert": [],
+      "prev_sha256": "4478a9d40921f3f831a9313b88e96ef6a5552812d629dd9ee695dfeed77c8fe0",
       "files_sha256": "c734b6720cffaaf6a0adb5aab42cae3afaf77fe36ac159c94d4313e7af9e0ff0"
     }
   ]
