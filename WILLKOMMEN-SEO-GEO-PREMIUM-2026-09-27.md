@@ -137,13 +137,35 @@ die Basis: `assets/css/varianten/v-hero-premium.css` + Eintrag in
 | Lighthouse mobil | LCP **1826 ms**, TBT 143 ms, Perf **0.98**, A11y **0.96** | LCP ≤ 2500 · Perf ≥ 0.90 · A11y ≥ 0.95 ✅ |
 | Lighthouse desktop | LCP 766 ms, Perf **0.99–1.0** | ✅ |
 | Gate | `design_variant_gate.py`: **BESTANDEN, keine Befunde** | — |
-| E2E | design-variante- + home-Specs **6/6 grün** (Desktop+Mobile); Gesamtsuite 67/68 (1 Bestandsbefund des Sandbox-Fallback-Chromiums, am Basis-Tree belegt) | — |
+| E2E | design-variante- + home-Specs **6/6 grün** (Desktop+Mobile); Gesamtsuite seit Pass 6 **68/68 grün** (siehe Root-Cause-Berichtigung unten) | — |
 | Protokoll | `data/design/messungen/v-hero-premium-2026-09-27.json` (eingefroren, Pass 3) | Freigabe-Beleg |
 
 Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 `home--mobile.png` (gitignored Review-Artefakt).
 
 ## 4. Verifikation (kompletter Bestand)
+
+**Design-Pass 6 (27.09.2026, sechste Runde: Root-Cause-Jagd — der dauerrote Test):**
+
+- **Der „Sandbox-Befund" war ein Test-Bug — und ist geheilt.** Die seit
+  Beginn rote Spec „Kurz-&-knapp-Signet" (67/68 in allen bisherigen Läufen)
+  hatte einen anderen, echten Grund: Die **Artikel-Tipp-Box wiederverwendet
+  die Klasse `.ff-kurzantwort__icon`** als kleines Inline-Zeichen (bewusst,
+  CSS-Vertrag `.ff-article-tip-icon .ff-kurzantwort__icon`). Der Test-
+  Locator war nicht strict-sicher → Playwright brach mit „resolved to 2
+  elements" ab. Manuelle Probes mit `querySelector` (erstes Element)
+  hatten das bislang maskiert. **Fix:** Locatoren auf die Box gescoped
+  (`.ff-kurzantwort .ff-kurzantwort__icon`, auch in der Reduced-Motion-
+  Spec). Ergebnis: **68/68 E2E-Tests grün — erstmals vollständig, im
+  Sandbox-Browser wie in CI.** Die frühere Attribution „Umgebungs-Befund
+  des Fallback-Chromiums" (Pass 1–5) war falsch und ist hiermit berichtigt.
+- **Sitemap-Frische geprüft (verdächtigt, entlastet):** Die Startseite
+  trägt `lastmod 2026-09-25` aus dem Partial `sitemap_lastmod` — ein
+  **belegtes Redaktionsdatum**, kein Build-Zeitstempel. Die Befundklasse
+  „Frische-Inflation" (SEO-Report F1) bleibt geschlossen; kein Eingriff.
+- **Verifikation:** E2E **68/68** · Interne Links 3118/0 defekt ·
+  Design-Gate BESTANDEN (Variante unverändert 8110/8192 B) ·
+  Integrity-Drift-Audit grün (E2E ist nicht sigilpflichtig).
 
 **Design-Pass 5 (27.09.2026, fünfte Runde: E-E-A-T-Verlinkung + Robustheit):**
 
@@ -192,11 +214,10 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
   regeneriert) — kein Eingriff nötig.
 - **SEO-Cockpit:** 213 Seiten, **0 Befunde (P1/P2/P3)**.
 
-- **E2E:** 67/68 Playwright-Tests grün (Desktop+Mobile). Der eine Fehler
-  („Kurz-&-knapp-Signet animiert") ist ein **Bestandsbefund der Sandbox**: Das
-  Fallback-Chromium (`@sparticuz/chromium`, nötig, weil das Playwright-CDN hier
-  blockiert ist) liefert die Signet-Animation nicht — **nachweisbar auch am
-  unveraenderten Basis-Tree fehlgeschlagen**, in CI mit vollem Chromium grün.
+- **E2E:** Ursprünglich 67/68 Playwright-Tests. **Berichtigung (Pass 6,
+  unten):** Der eine Fehler („Kurz-&-knapp-Signet animiert") war **kein**
+  Umgebungs-Befund, sondern ein nicht strict-sicherer Test-Locator — die
+  Artikel-Tipp-Box nutzt dieselbe Icon-Klasse. Seit Pass 6 **68/68 grün**.
   Der Varianten-Leak-Test (Prüfnadel im Produktions-CSS) wurde nach einer
   bewussten Reihenfolge-Korrektur (eigene Deklarationen zuerst) **grün**.
 - **Unit-Tests:** 962/963 grün. Der eine Fehler war der Siegel-Vertrag
