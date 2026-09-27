@@ -145,6 +145,30 @@ Screenshots für das Review: `shots/v-hero-premium/home--desktop.png` +
 
 ## 4. Verifikation (kompletter Bestand)
 
+**Design-Pass 7 (27.09.2026, siebte Runde: Entity-Graph + GEO-Dauerhaftigkeit):**
+
+- **Person-Knoten auf der Startseite (GEO):** Der WebSite-Knoten
+  referenziert den Autor per `@id: …#frank-hartung` — der Knoten selbst
+  wurde aber nur auf Artikelseiten emittiert. Auf der meistgesehenen
+  Seite war die Referenz damit **unaufgelöst** (Entity-Graph-Bruch
+  ausgerechnet dort, wo KI-Antwortmaschinen zuerst ansetzen). Jetzt
+  wird der Person-Knoten auch auf der Startseite emittiert (`extend_head`,
+  außerhalb der Siegel-Dateien — Drift-Audit grün ohne Neusignatur).
+  Startseite: 2 JSON-LD-Blöcke (Person + WebSite), beide
+  JSON-valide geparst.
+- **GEO-Prompt dauerhaft verankert:** Der Prompt des
+  `willkommenstext_guard.py` (wöchentliche Neugenerierung des
+  Willkommenstexts) kannte die Antwort-zuerst-Struktur nicht — jede
+  künftige KI-Rotation hätte strukturell wieder bei null anfangen
+  können. Der Prompt schreibt jetzt die GEO-Struktur verbindlich vor:
+  erster Satz = selbstständig zitierbare Entity-Definition
+  („FranksFinanzcheck ist dein unabhängiger Ratgeber für …"),
+  Titel keyword-nah mit Marke + „Geld sparen". Die Premium-Struktur
+  überlebt damit alle künftigen automatischen Auffrischungen.
+- **Verifikation:** Schema-/SEO-Gate 383 Seiten, 0 harte Funde ·
+  SEO-Cockpit 0 Befunde · Guard „kein Auffrischungsbedarf" ·
+  home- + design-variante-Specs 8/8 · robots.txt Sitemap-Zeile ✓.
+
 **Design-Pass 6 (27.09.2026, sechste Runde: Root-Cause-Jagd — der dauerrote Test):**
 
 - **Der „Sandbox-Befund" war ein Test-Bug — und ist geheilt.** Die seit

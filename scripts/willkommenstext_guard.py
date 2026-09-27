@@ -477,6 +477,15 @@ zusätzlichen Fakten, Zahlen, Gesetze oder Paragraphen dazu):
 
 STAND: {month_year}
 
+GEO-STRUKTUR (Antwort-zuerst, Pflicht – KI-Antwortmaschinen zitieren
+Passagen, keine Seiten):
+- Der ERSTE Satz des Contents ist eine selbstständig zitierbare
+  Entity-Definition nach dem Muster: „FranksFinanzcheck ist dein
+  unabhängiger Ratgeber für …" (Name + Kategorie + Nutzenversprechen
+  in einem Satz, ohne Kontext verständlich).
+- Der Titel enthält die Marke und das Kern-Keyword („Geld sparen")
+  keyword-nah am Anfang.
+
 PFLICHT-INHALT:
 - Erwähne mindestens 3 der 5 Kategorien Strom, Gas, Internet, Versicherungen,
   Konto (natürlich im Fließtext, kein Aufzählungs-Stakkato).
