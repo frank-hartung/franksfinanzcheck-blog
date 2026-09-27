@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026", "2026 Stromkosten senken", "Stromkosten"]
+keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026", "2026 Stromkosten senken", "Stromkosten", "Stromanbieter"]
 pin_title: "2026 Stromkosten senken: Einfach Stromanbieter wechseln"
 pin_description: "*Werbung | Werde zum Sparfuchs: Stromanbieter wechseln bringt oft hunderte Euro Ersparnis. Erfahre hier, wie der Stromvergleich 2026 funktioniert und worauf du achtes Mehr Spartipps auf FranksFinanzcheck! #stromanbieterwechseln #stromvergleich #stromkostensparen2026"
 ai_generated: true

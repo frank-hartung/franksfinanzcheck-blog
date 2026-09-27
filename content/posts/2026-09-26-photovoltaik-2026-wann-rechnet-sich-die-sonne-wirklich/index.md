@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Photovoltaik", "Solaranlage Kosten", "Strom selbst erzeugen", "Photovoltaik 2026", "Wirklich"]
+keywords: ["Photovoltaik", "Solaranlage Kosten", "Strom selbst erzeugen", "Photovoltaik 2026"]
 pin_title: "Photovoltaik 2026: Wann rechnet sich die Sonne wirklich?"
 pin_description: "*Werbung | Lohnt sich Photovoltaik 2026 noch? Erfahre alles über Solaranlage Kosten, Eigenverbrauch und wie du effizient Strom selbst erzeugen kannst. Jetzt lesen! Mehr Spartipps auf FranksFinanzcheck! #photovoltaik #solaranlagekosten #stromselbsterzeugen"
 ai_generated: true

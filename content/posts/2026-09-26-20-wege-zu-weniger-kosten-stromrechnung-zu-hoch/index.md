@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "20 Wege zu weniger Kosten", "Stromrechnung"]
+keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "20 Wege zu weniger Kosten", "Stromrechnung", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "20 Wege zu weniger Kosten: Stromrechnung zu hoch?"
 pin_description: "*Werbung | Deine Stromrechnung explodiert? Mit diesen Strom sparen Tipps kannst du effektiv deine Energiekosten senken und den Stromverbrauch reduzieren. Mehr Spartipps auf FranksFinanzcheck! #stromsparentipps #energiekostensenken #stromverbrauchreduzieren"
 ai_generated: true
