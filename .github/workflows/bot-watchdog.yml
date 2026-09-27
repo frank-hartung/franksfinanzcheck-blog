@@ -63,7 +63,7 @@ on:
 permissions:
   contents: write    # für den Routing-Zustand (data/alert_router_state.json)
   issues: write
-  actions: read      # für gh run list (Meta-Check)
+  actions: write     # Status lesen UND die zuständige Reparatur-Workflow dispatchen
 
 concurrency:
   group: bot-watchdog
@@ -96,6 +96,7 @@ jobs:
       - name: Selftest (Wache muss sehen können)
         run: |
           python3 scripts/bot_watchdog.py --selftest
+          python3 scripts/watchdog_recovery.py --selftest
           python3 scripts/cadence_guard.py --selftest
           python3 scripts/watchdog_check4_tls.py --help 2>&1 | head -n 5 || true
 
@@ -113,6 +114,16 @@ jobs:
           cat /tmp/problems.txt || echo "(keine)"
           # Zusätzlich klassische Checks für Rückwärtskompatibilität in GITHUB_ENV laden
           # bot_watchdog.py schreibt bereits ins GITHUB_ENV via emit-env
+
+      # Ein Alarm ohne Reparatur ist kein Profi-Betrieb: Der Watchdog stößt
+      # die zuständige Reserve-Linie sofort an. Der Broker ist idempotent und
+      # dispatcht nicht doppelt, falls der nächtliche Lauf noch aktiv ist.
+      - name: Content-Reserve bei Engpass selbst heilen
+        if: ${{ contains(env.CHECK8, 'WARN') }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/watchdog_recovery.py --reserve
 
       - name: Zusammenfassung
         if: always()

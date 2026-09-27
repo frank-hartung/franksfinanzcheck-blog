@@ -227,7 +227,33 @@ vom eingestellten Wert beendet.
 
 ---
 
-## 7. Was ein Mensch noch entscheiden kann (optional)
+## 7. Nachtrag: Der Watchdog bleibt kein Ticket-Generator (27.09.2026)
+
+Der offene Alarm zeigte eine weitere Betriebslücke: Die Reserve-Prüfung war
+zwar ehrlich, aber ein ehrlicher Befund wartete noch auf den nächsten
+planmäßigen Reserve-Lauf. Das ist kein dauerhafter Schließpfad.
+
+`bot-watchdog.yml` besitzt deshalb jetzt `actions: write` und ruft bei
+`CHECK8=WARN` den kleinen Broker `scripts/watchdog_recovery.py` auf. Dieser
+fragt zuerst nach einem bereits laufenden `content-reserve.yml`-Lauf und
+startet die Produktionslinie andernfalls sofort per `workflow_dispatch` auf
+`main`. Ein Doppel-Dispatch ist ausgeschlossen; Fehler werden als Warnung
+sichtbar und der Alarm-Router bleibt unabhängig funktionsfähig. Der Broker
+hat einen eigenen Selbsttest und arbeitet ausschließlich auf der festgelegten
+Produktionslinie – kein beliebiger Workflow und kein beliebiger Branch.
+
+Damit lautet der belastbare Regelkreis jetzt:
+
+```
+prüfen → konkreten Befund schreiben → zuständige Reparatur dispatchen
+→ Reserve zertifizieren → nächster Watchdog-Lauf schließt das Ticket
+```
+
+Der Pinterest-Report bleibt bewusst im Besitz von `pinterest-watchdog.yml`,
+das bereits `pinterest_check.py --fix` ausführt und die Reparatur committet.
+Der Bot-Watchdog übernimmt diesen Kanal nicht doppelt.
+
+## 8. Was ein Mensch noch entscheiden kann (optional)
 
 1. **Puffertiefe.** `vars.RESERVE_TARGET` ist eine Actions-Variable und nur
    mit Admin-Rechten les-/schreibbar (Agenten-Token: HTTP 403). Steht sie auf
