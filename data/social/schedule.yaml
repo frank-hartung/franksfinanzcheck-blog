@@ -373,9 +373,9 @@ items:
   date: '2026-09-27'
   time: '19:15'
   scheduled_at: '2026-09-27T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: mastodon:2026-09-21-tierkrankenversicherung-hund-katze-kosten:vergleich:2026-09-28
   channel: mastodon
   slug: 2026-09-21-tierkrankenversicherung-hund-katze-kosten
