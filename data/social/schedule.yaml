@@ -241,8 +241,8 @@ items:
   date: '2026-09-27'
   time: 07:30
   scheduled_at: '2026-09-27T07:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: bluesky:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich:zahl:2026-09-27
   channel: bluesky
@@ -253,9 +253,9 @@ items:
   date: '2026-09-27'
   time: 08:15
   scheduled_at: '2026-09-27T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit:frage:2026-09-27
   channel: x
   slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -265,9 +265,9 @@ items:
   date: '2026-09-27'
   time: 08:45
   scheduled_at: '2026-09-27T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:nutzen:2026-09-27
   channel: threads
   slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
@@ -277,9 +277,9 @@ items:
   date: '2026-09-27'
   time: 09:15
   scheduled_at: '2026-09-27T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug:vergleich:2026-09-27
   channel: facebook
   slug: 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug
@@ -289,9 +289,9 @@ items:
   date: '2026-09-27'
   time: 09:45
   scheduled_at: '2026-09-27T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: mastodon:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit:zahl:2026-09-27
   channel: mastodon
   slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -313,9 +313,9 @@ items:
   date: '2026-09-27'
   time: '11:45'
   scheduled_at: '2026-09-27T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:takeaway:2026-09-27
   channel: bluesky
   slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
@@ -325,9 +325,9 @@ items:
   date: '2026-09-27'
   time: '12:15'
   scheduled_at: '2026-09-27T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:thread:2026-09-27
   channel: x
   slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
