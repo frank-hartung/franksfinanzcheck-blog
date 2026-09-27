@@ -1,0 +1,125 @@
+# ============================================================
+#  FAKTENFRISCHE – Bestands-Recherche (Agent Reach + Claude)
+#  Auftrag Frank, 27.09.2026: „Bestehende und zukünftige
+#  Blogartikel automatisch … bei Content-Erstellung UND in
+#  sinnvollen Abständen im Internet recherchieren."
+#
+#  ZWEI TAKTE, EIN SKRIPT:
+#    Erstellung → .github/workflows/content-engine-v2.yml
+#                 (Phase 3, `--neu --apply`)
+#    Bestand    → DIESER Workflow, Di + Do 06:40 MESZ.
+#                 Rotation nach Fälligkeit aus
+#                 data/agent_reach/faktenfrische.yaml
+#                 (YMYL 45 Tage, saisonal 30, Standard 90).
+#
+#  Der Lauf schreibt NUR Frontmatter (`quellen`, `faktencheck`)
+#  und Dossiers unter data/research/artikel/. Artikeltexte
+#  ändert er nie – fachliche Befunde gehen als Issue an einen
+#  Menschen (KI-Redaktions-Statut).
+#
+#  Manuell starten: GitHub → Actions → „Faktenfrische (Bestand)"
+# ============================================================
+name: Faktenfrische (Bestand)
+
+on:
+  schedule:
+    # Di + Do 06:40 MESZ – freier Slot zwischen Newsletter (06:30)
+    # und Content-Engine; entzerrt gegenüber agent-reach-research (Mo).
+    - cron: "40 4 * * 2,4"
+  workflow_dispatch:
+    inputs:
+      max:
+        description: "Wie viele Artikel in diesem Lauf?"
+        required: false
+        default: "3"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: faktenfrische
+  cancel-in-progress: false
+
+jobs:
+  recherche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Node einrichten (Puter-Brücke für Claude, ohne Anthropic-API)
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Abhängigkeiten
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml feedparser
+          npm install --no-save @heyputer/puter.js >/dev/null 2>&1 || echo "⚠ puter.js nicht installiert"
+
+      - name: Selbsttest (Sabotage-Schutz – kein Schreiben ohne grünen Lauf)
+        run: python3 scripts/faktenfrische.py --selftest
+
+      - name: Recherche + Fachprüfung
+        id: lauf
+        continue-on-error: true   # Exit 3 = Kanäle tot → melden, nicht abbrechen
+        env:
+          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
+        run: |
+          python3 scripts/faktenfrische.py --apply \
+            --max "${{ github.event.inputs.max || '3' }}"
+
+      - name: Belege & Dossiers committen
+        run: |
+          if git status --porcelain content/ data/research/artikel/ \
+               data/faktenfrische_queue.json data/faktenfrische_history.jsonl \
+               FAKTENFRISCHE-REPORT.md | grep -q .; then
+            git config user.name "Faktenfrische-Bot"
+            git config user.email "faktenfrische-bot@users.noreply.github.com"
+            git add content/ data/research/artikel/ data/faktenfrische_queue.json \
+                    data/faktenfrische_history.jsonl FAKTENFRISCHE-REPORT.md
+            git commit -m "content(fakten): Belegkette aufgefrischt (Agent Reach + Claude)"
+            scripts/git_sync.sh --push-only
+          else
+            echo "Keine Änderungen."
+          fi
+
+      - name: Report als Artefakt sichern
+        uses: actions/upload-artifact@v7
+        with:
+          name: faktenfrische-report
+          path: |
+            FAKTENFRISCHE-REPORT.md
+            data/research/artikel/*.md
+          if-no-files-found: ignore
+
+      - name: Fachliche Befunde melden (nur Menschen entscheiden über Text)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Governance C12: Label VOR der Issue-Erzeugung anlegen (HTTP 422).
+          gh label create faktenfrische --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" \
+            --description "Faktenfrische: fachliche Befunde aus der Recherche" --force || true
+          ANZAHL=$(python3 -c "import json;d=json.load(open('data/faktenfrische_queue.json'));print(sum(len(l['befunde']) for l in d['laeufe']))" 2>/dev/null || echo 0)
+          SCHWELLE=$(python3 -c "import yaml;print((yaml.safe_load(open('data/agent_reach/faktenfrische.yaml')).get('melden') or {}).get('issue_ab_befunden',3))" 2>/dev/null || echo 3)
+          if [ "$ANZAHL" -ge "$SCHWELLE" ]; then
+            TITEL="Faktenfrische: $ANZAHL fachliche Befunde ($(date +%F))"
+            if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+                 --search "in:title \"Faktenfrische:\"" | grep -q .; then
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "$TITEL" --label faktenfrische \
+                --body-file FAKTENFRISCHE-REPORT.md
+            else
+              echo "Offenes Faktenfrische-Ticket existiert – kein Duplikat."
+            fi
+          else
+            echo "$ANZAHL Befunde (< $SCHWELLE) – kein Ticket."
+          fi

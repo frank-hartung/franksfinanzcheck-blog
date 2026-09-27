@@ -1,0 +1,69 @@
+{{- /* ============================================================
+     ff_quellen_box.html – BELEGKETTE („Quellen & Faktenstand")
+     ------------------------------------------------------------
+     SEO/GEO-PREMIUM 27.09.2026 (Auftrag Frank: Blogartikel und
+     Ratgeberseiten fachlich auf Premium-Level einer Profi-Agentur).
+
+     WARUM: Antwortmaschinen (AI Overviews, ChatGPT, Perplexity)
+     und Googles E-E-A-T-Bewertung zitieren bevorzugt Seiten, die
+     ihre Zahlen NACHWEISEN. Ein Ratgeber ohne sichtbare Quellen
+     ist für eine generative Suche eine Behauptung, kein Beleg.
+
+     WOHER: Frontmatter-Feld `quellen:` (Liste aus titel/url/
+     herausgeber/datum) plus `faktencheck:` (Prüfdatum). Beides
+     pflegt scripts/faktenfrische.py automatisch – aus einer
+     Agent-Reach-Recherche, gefiltert auf die Allowlist amtlicher
+     und etablierter Herausgeber (data/agent_reach/faktenfrische.yaml).
+     Affiliate-Partner sind dort bewusst NICHT belegfähig.
+
+     VERTRAG:
+       * Ohne `quellen` rendert NICHTS (kein leerer Kasten).
+       * Externe Belege: rel="noopener nofollow ugc"-frei halten –
+         es sind redaktionelle Belege, also `noopener` + `external`.
+       * Keine Inline-Farben (CLAUDE.md §4): Klassen `.ff-quellen*`
+         in assets/css/extended/z-premium-blog.css, Dark Mode dort.
+     ============================================================ */ -}}
+{{- $quellen := .Params.quellen -}}
+{{- if $quellen }}
+{{- $geprueft := .Params.faktencheck -}}
+<section class="ff-quellen" aria-labelledby="ff-quellen-{{ .File.UniqueID }}">
+  <header class="ff-quellen__head">
+    <span class="ff-quellen__sigil" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <path d="M5 4.5h9.5L19 9v10.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z"/>
+        <path d="M14 4.5V9h4.5"/><path d="M8.5 13.5l2.2 2.2 4.3-4.6"/>
+      </svg>
+    </span>
+    <h2 class="ff-quellen__title" id="ff-quellen-{{ .File.UniqueID }}">Quellen &amp; Faktenstand</h2>
+    {{- with $geprueft }}
+    <span class="ff-quellen__stamp">
+      Fakten geprüft am <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time>
+    </span>
+    {{- end }}
+  </header>
+  <ol class="ff-quellen__list">
+    {{- range $quellen }}
+    <li class="ff-quellen__item">
+      <a class="ff-quellen__link" href="{{ .url }}" rel="noopener external" target="_blank">
+        {{ .titel | default .herausgeber | default .url }}
+        <span class="ff-quellen__ext" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+            <path d="M7 17 17 7"/><path d="M9 7h8v8"/>
+          </svg>
+        </span>
+      </a>
+      <span class="ff-quellen__meta">
+        {{- with .herausgeber }}<span class="ff-quellen__publisher">{{ . }}</span>{{ end -}}
+        {{- with .datum }}<span class="ff-quellen__date">{{ dateFormat "02.01.2006" . }}</span>{{ end -}}
+      </span>
+    </li>
+    {{- end }}
+  </ol>
+  <p class="ff-quellen__note">
+    Belege werden regelmäßig nachrecherchiert – amtliche und etablierte Herausgeber,
+    keine Partnerseiten. <a href="{{ "methodik/" | absURL }}">So arbeiten wir →</a>
+  </p>
+</section>
+{{- end -}}

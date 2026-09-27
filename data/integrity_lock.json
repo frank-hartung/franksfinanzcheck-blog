@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-27T11:46:56.321813+00:00",
-  "head": "130b860",
+  "signed_at": "2026-09-27T12:27:37.050093+00:00",
+  "head": "059850d",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "a7ba347ddc2d4e1ca6cb061a8ab33a8bbfaf0f5b2725094e027966d3f1aebeca",
@@ -11,14 +11,14 @@
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
-    "layouts/_partials/extend_post_content.html": "1d4bd7c1f23d543fc7c8012fc659afd33ab7d77f03ecf4bea101c51278c33097",
+    "layouts/_partials/extend_post_content.html": "3ab0c0ce1e919dcd62c6f82a782b648f01d9d30e4ec60a5e4a9e454567557489",
     "layouts/_partials/head.html": "3e932db02795c195ef77f060712767259356d2132b8a6602b37bce6286c8e78e",
     "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
     "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
-    "layouts/pillar/single.html": "e77d471134763a18a0c70de3962ba9c6c5a776cd144a803ecfe95dc4e06c9a32",
+    "layouts/pillar/single.html": "b64df10b0c0e12ee8a97b35518e232632064f0237b51fb2b9695a7040882c669",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "7124bea70e1ad32fd2ec84ffd24383bc54c5596fe56242dceb15f066c31ec3f0",
     "layouts/shortcodes/tarifvergleich.html": "c32e6d5be2b3a025cbdeeab850321fae84225768cc68f959332419afc55d9d6f",
@@ -47,58 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96",
-  "audit_start_sha256": "b9e347d739450db824d0d710f9505c3cff614eb693b317f9e663d08382e5bc43",
+  "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6",
+  "audit_start_sha256": "0c877bc1ad5262e53238aacfeae9a9ee874e20a806d34592278f380313279353",
   "audit": [
-    {
-      "date": "2026-09-23",
-      "art": "set-current",
-      "head": "8c360de",
-      "geaendert": [
-        "hugo.toml",
-        "layouts/_partials/extend_footer.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "8c360de",
-              "datum": "2026-09-23",
-              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
-            },
-            {
-              "sha": "178a9ee",
-              "datum": "2026-09-23",
-              "betreff": "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Retrofit Backlog 3)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "8c360de",
-              "datum": "2026-09-23",
-              "betreff": "feat(newsletter): Versand auf zweimal pro Woche begrenzen und Anmeldung hervorheben"
-            },
-            {
-              "sha": "178a9ee",
-              "datum": "2026-09-23",
-              "betreff": "redaktion: Bestand auf Capital/WiWo/ZEIT-Standard gehoben (Retrofit Backlog 3)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "ab206d3b180b7070b837f753186d49a4519478d688d5cade817ad404ba907aec",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-25",
       "art": "set-current",
@@ -127,7 +78,7 @@
         }
       ],
       "files_sha256": "ff7c0f7d0922a519267212baca79348c4819a2885e409f76f42f37d24b4f18b7",
-      "prev_sha256": "b9e347d739450db824d0d710f9505c3cff614eb693b317f9e663d08382e5bc43"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-26",
@@ -375,8 +326,47 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "e2d3825604be2cbfd31f72a5b492e533d6aeaf09fe66725db0976f87668de742",
-      "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96"
+      "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96",
+      "prev_sha256": "e2d3825604be2cbfd31f72a5b492e533d6aeaf09fe66725db0976f87668de742"
+    },
+    {
+      "date": "2026-09-27",
+      "art": "set-current",
+      "head": "059850d",
+      "geaendert": [
+        "layouts/_partials/extend_post_content.html",
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/_partials/extend_post_content.html",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "059850d",
+              "datum": "2026-09-27",
+              "betreff": "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "059850d",
+              "datum": "2026-09-27",
+              "betreff": "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "a722d2a8286815026cd1648d15b4e13481e2c985e5be07c74b4b65269a2c9077",
+      "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6"
     }
   ]
 }

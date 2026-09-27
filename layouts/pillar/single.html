@@ -144,6 +144,11 @@
   </div>
   {{- end }}
 
+  {{- /* GEO/E-E-A-T 27.09.2026: Belegkette auch auf den Ratgeber-Silos.
+         extend_post_content.html rendert nur in der posts-Sektion, deshalb
+         steht die Quellenbox hier eigenständig (gleicher Renderer). */ -}}
+  {{ partial "ff_quellen_box.html" . }}
+
   {{ partial "extend_post_content.html" . }}
 
   <footer class="post-footer">

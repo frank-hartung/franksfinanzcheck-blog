@@ -1459,3 +1459,299 @@ details.toc .inner a:focus-visible {
   font-size: .73rem;
   opacity: .92;
 }
+
+/* ============================================================
+   „IM ARTIKEL" – PREMIUM-POLITUR (27.09.2026)
+   ------------------------------------------------------------
+   Auftrag Frank: Die Box dauerhaft auf Agentur-Niveau halten.
+   Die Geometrie (Verankerung an der Textspalte, Ruhzustand,
+   scrollende Liste) stammt aus der Reparatur vom 26.09.2026 und
+   bleibt unangetastet – hier kommt ausschließlich die FLÄCHE
+   dazu, die eine Agentur von einem Bootstrap-Kasten trennt:
+
+   1. Materialtiefe statt flacher Fläche: zweistufiger Schatten
+      (nahe Kontaktschattierung + weiche Raumtiefe) plus ein
+      1px-Innenlicht an der Oberkante (inset), wie es Glas mit
+      Hinterleuchtung zeigt. Kein zusätzliches DOM-Element.
+   2. Getönter Verlauf im Papier (2 Prozent Akzent oben) – die
+      Box hebt sich auch auf weißem Grund messbar ab, ohne dass
+      der Text an Kontrast verliert.
+   3. Kopfzeile mit echter Hierarchie: Zähler als Ziffernpille
+      (tabular-nums, gleiche Breite bei 1/9 wie bei 12/24).
+   4. Aktiver Eintrag: Akzentkante mit runder Kappe + sanfter
+      Flächenton + 1px Versatz nach rechts – die Leseposition
+      ist auf einen Blick erfassbar, ohne Farbschrei.
+   5. Fortschrittsbalken mit Farbverlauf und runden Enden.
+   6. Sichtbare Tastatur-Führung (:focus-visible) – Pflicht nach
+      DESIGN.md, in der alten Fassung nur geerbt.
+   Dark Mode ist für jede neue Farbe mitgeführt (CLAUDE.md §3).
+   Dauerhaft abgesichert: scripts/mini_toc_premium_guard.py
+   (Vertrag V1–V14, läuft in npm run test:toc).
+   ============================================================ */
+.ff-mini-toc {
+  padding: 13px 6px 11px 13px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ff-accent) 4%, transparent) 0,
+      transparent 96px),
+    color-mix(in srgb, var(--theme) 88%, transparent);
+  box-shadow:
+    0 1px 2px rgba(15, 52, 43, .06),
+    0 18px 48px -18px rgba(15, 52, 43, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .55);
+}
+
+:root[data-theme="dark"] .ff-mini-toc {
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ff-accent) 7%, transparent) 0,
+      transparent 96px),
+    color-mix(in srgb, var(--theme) 92%, transparent);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, .34),
+    0 18px 48px -18px rgba(0, 0, 0, .58),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+/* Kopfzeile: Titel führt, Zähler folgt als ruhige Ziffernpille. */
+.ff-mini-toc__title {
+  font-size: .7rem;
+  letter-spacing: .1em;
+  color: color-mix(in srgb, var(--primary) 62%, var(--secondary));
+}
+
+.ff-mini-toc__count {
+  padding: .1rem .42rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--border) 34%, transparent);
+  font-size: .66rem;
+  opacity: 1;
+  color: color-mix(in srgb, var(--secondary) 88%, var(--primary));
+}
+
+.ff-mini-toc__pos {
+  font-weight: 800;
+}
+
+.ff-mini-toc__railfill {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ff-accent) 72%, var(--ff-green)) 0%,
+    var(--ff-accent) 100%);
+}
+
+/* Einträge: ruhiger Grundzustand, klare Leseposition. */
+.ff-mini-toc a {
+  border-radius: 0 10px 10px 0;
+  transition:
+    color .18s ease,
+    border-color .18s ease,
+    background-color .18s ease,
+    opacity .18s ease,
+    transform .18s cubic-bezier(.2, .7, .2, 1);
+}
+
+.ff-mini-toc a:hover {
+  transform: translateX(1px);
+}
+
+.ff-mini-toc a[aria-current="true"] {
+  border-left-width: 3px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ff-accent) 17%, transparent) 0%,
+    color-mix(in srgb, var(--ff-accent) 5%, transparent) 100%);
+  transform: translateX(1px);
+}
+
+:root[data-theme="dark"] .ff-mini-toc a[aria-current="true"] {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ff-accent) 24%, transparent) 0%,
+    color-mix(in srgb, var(--ff-accent) 7%, transparent) 100%);
+}
+
+/* Tastatur-Führung: eigener Ring, nicht der geerbte Browser-Rahmen. */
+.ff-mini-toc a:focus-visible {
+  outline: 2px solid var(--ff-accent);
+  outline-offset: 1px;
+  border-radius: 6px 10px 10px 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-mini-toc a,
+  .ff-mini-toc a:hover,
+  .ff-mini-toc a[aria-current="true"] {
+    transform: none;
+    transition: color .18s ease, background-color .18s ease;
+  }
+}
+
+/* ============================================================
+   QUELLEN & FAKTENSTAND – Belegkette am Artikelende (27.09.2026)
+   ------------------------------------------------------------
+   Renderer: layouts/_partials/ff_quellen_box.html
+   Datenherkunft: Frontmatter `quellen` + `faktencheck`, gepflegt
+   von scripts/faktenfrische.py (Agent Reach + Claude).
+   Gestaltprinzip: Dokument-Anmutung (nummerierte Belegliste,
+   Prüfstempel), nicht Marketing-Kasten. Sie steht VOR der
+   Vertrauens-Box und wiederholt deren Sprache nicht.
+   ============================================================ */
+.ff-quellen {
+  margin: 34px 0 8px;
+  padding: 22px 24px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--ff-radius-md);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ff-green) 4%, transparent) 0,
+      transparent 120px),
+    var(--entry);
+  box-shadow: 0 1px 2px rgba(15, 52, 43, .05), 0 16px 40px -22px rgba(15, 52, 43, .3);
+}
+
+:root[data-theme="dark"] .ff-quellen {
+  border-color: var(--ff-border-card, var(--border));
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ff-green) 12%, transparent) 0,
+      transparent 120px),
+    var(--ff-surface, var(--entry));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px -22px rgba(0, 0, 0, .55);
+}
+
+.ff-quellen__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-bottom: 14px;
+}
+
+.ff-quellen__sigil {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: var(--ff-green-2);
+  background: color-mix(in srgb, var(--ff-green) 12%, transparent);
+}
+
+:root[data-theme="dark"] .ff-quellen__sigil {
+  color: var(--ff-accent-2);
+  background: color-mix(in srgb, var(--ff-accent) 16%, transparent);
+}
+
+.ff-quellen__title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--primary);
+}
+
+.ff-quellen__stamp {
+  margin-left: auto;
+  padding: .22rem .6rem;
+  border: 1px solid color-mix(in srgb, var(--ff-green) 26%, var(--border));
+  border-radius: 999px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--primary) 78%, var(--ff-green));
+  background: color-mix(in srgb, var(--ff-green) 7%, transparent);
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .ff-quellen__stamp {
+  color: var(--secondary);
+  border-color: color-mix(in srgb, var(--ff-accent) 24%, var(--border));
+  background: color-mix(in srgb, var(--ff-accent) 10%, transparent);
+}
+
+.ff-quellen__list {
+  margin: 0;
+  padding: 0 0 0 1.35rem;
+  list-style: decimal;
+  font-size: .94rem;
+}
+
+.ff-quellen__item {
+  margin: 0 0 .7rem;
+  padding: 0;
+  line-height: 1.45;
+}
+
+.ff-quellen__item::marker {
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.ff-quellen__link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .22s cubic-bezier(.2, .7, .2, 1), color .18s ease;
+}
+
+.ff-quellen__link:hover,
+.ff-quellen__link:focus-visible {
+  color: var(--ff-green-2);
+  background-size: 100% 1px;
+}
+
+:root[data-theme="dark"] .ff-quellen__link:hover,
+:root[data-theme="dark"] .ff-quellen__link:focus-visible {
+  color: var(--ff-accent-2);
+}
+
+.ff-quellen__ext {
+  display: inline-block;
+  margin-left: .25rem;
+  vertical-align: -1px;
+  opacity: .55;
+}
+
+.ff-quellen__meta {
+  display: block;
+  margin-top: .12rem;
+  font-size: .8rem;
+  color: var(--secondary);
+}
+
+.ff-quellen__publisher + .ff-quellen__date::before {
+  content: " · ";
+}
+
+.ff-quellen__note {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  font-size: .82rem;
+  color: var(--secondary);
+}
+
+@media (max-width: 640px) {
+  .ff-quellen {
+    padding: 18px 16px 14px;
+  }
+
+  .ff-quellen__stamp {
+    margin-left: 0;
+  }
+}
+
+@media print {
+  .ff-quellen {
+    box-shadow: none;
+    background: none;
+    border: 1pt solid #999;
+    break-inside: avoid;
+  }
+}

@@ -25,7 +25,12 @@
     "design:handoff:check": "python3 scripts/design_handoff.py --check",
     "design:quality": "npm run design:handoff:check && npm run design:gate && npm run test:design",
     "test:design": "python3 -m unittest scripts.tests.test_design_varianten",
-    "test:toc": "node scripts/ff_toc_beweglich_test.mjs && node scripts/ff_heading_glyph_guard_test.mjs"
+    "test:toc": "node scripts/ff_toc_beweglich_test.mjs && node scripts/ff_heading_glyph_guard_test.mjs && python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
+    "test:imartikel": "python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
+    "faktenfrische": "python3 scripts/faktenfrische.py",
+    "faktenfrische:neu": "python3 scripts/faktenfrische.py --neu --apply",
+    "faktenfrische:bestand": "python3 scripts/faktenfrische.py --apply",
+    "test:faktenfrische": "python3 scripts/faktenfrische.py --selftest"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
