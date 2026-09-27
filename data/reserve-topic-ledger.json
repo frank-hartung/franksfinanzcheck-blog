@@ -1,10 +1,41 @@
 {
+  "Altersvorsorge: Die besten Wege für deine Rente": {
+    "fehler": 0,
+    "grund": "produziert: rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge",
+    "letzter_erfolg": "2026-09-27",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2027-03-26"
+  },
+  "E-Auto laden: So senkst du deine Stromkosten": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
+  },
+  "Heizöl kaufen: Wann ist der beste Zeitpunkt?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
+  },
+  "Last-Minute Urlaubsangebote sichern": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
+  },
   "Photovoltaik: Lohnt sich eine Solaranlage 2026?": {
     "fehler": 0,
     "grund": "produziert: photovoltaik-2026-wann-rechnet-sich-die-sonne-wirklich",
     "letzter_erfolg": "2026-09-26",
     "letzter_versuch": "2026-09-26",
     "sperre_bis": "2027-03-25"
+  },
+  "Reisekrankenversicherung: Wann sie sich wirklich lohnt": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
   },
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
     "fehler": 0,
@@ -19,5 +50,17 @@
     "letzter_erfolg": "2026-09-26",
     "letzter_versuch": "2026-09-26",
     "sperre_bis": "2027-03-25"
+  },
+  "Urlaubskasse clever aufbessern": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
+  },
+  "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg",
+    "letzter_versuch": "2026-09-27",
+    "sperre_bis": "2026-09-30"
   }
 }
