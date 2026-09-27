@@ -16,22 +16,26 @@
 version: 1
 
 rss:
-  - name: Verbraucherzentrale – Energie
-    url: "https://www.verbraucherzentrale.de/rss/energie"
-    kategorie: saisonal
-  - name: Verbraucherzentrale – Geld & Versicherungen
-    url: "https://www.verbraucherzentrale.de/rss/geld-versicherungen"
-    kategorie: saisonal
+  - name: vzbv – Energie
+    url: "https://www.vzbv.de/taxonomy/term/11/rss.xml"
+    kategorie: energie
+  - name: vzbv – Finanzen
+    url: "https://www.vzbv.de/taxonomy/term/2/rss.xml"
+    kategorie: finanzen
   - name: Bundesnetzagentur – Presse
-    url: "https://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/RSSFeed.xml"
+    url: "https://www.bundesnetzagentur.de/SiteGlobals/Functions/RSSFeed/DE/RSSNewsfeed/RSSNewsfeed_Pressemitteilungen.xml?nn=693926"
+    kategorie: energie
+  - name: Bundesnetzagentur – Gasversorgung
+    url: "https://www.bundesnetzagentur.de/SiteGlobals/Functions/RSSFeed/DE/RSSNewsfeed/RSSNewsfeed_GAS.xml?nn=693926"
     kategorie: energie
 
 youtube: []
 github: []
 
 web:
+  - url: "https://www.vzbv.de/themen/energie"
+  - url: "https://www.vzbv.de/themen/finanzen"
   - url: "https://www.verbraucherzentrale.de/wissen/energie"
-  - url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen"
 
 einstellungen:
   rss_max_je_feed: 4

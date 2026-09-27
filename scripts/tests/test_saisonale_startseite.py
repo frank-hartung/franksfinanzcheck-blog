@@ -162,6 +162,42 @@ class TestSchemaUndTon(unittest.TestCase):
         self.assertTrue(any("badge" in f and "52" in f for f in funde), funde)
 
 
+class TestLegacyWillkommenStilllegung(unittest.TestCase):
+    """S9 – alte Willkommenstext-Rotation darf den Saison-Hero nicht zurückholen."""
+
+    def _root(self, history_line: str):
+        tmp = tempfile.TemporaryDirectory()
+        root = Path(tmp.name)
+        (root / "data").mkdir(parents=True)
+        (root / "scripts").mkdir()
+        (root / ".github" / "workflows").mkdir(parents=True)
+        (root / "hugo.toml").write_text('[params]\n  title = "FranksFinanzcheck"\n', encoding="utf-8")
+        (root / "data" / "willkommenstext_history.jsonl").write_text(history_line + "\n", encoding="utf-8")
+        return tmp, root
+
+    def test_decommissionierter_letzter_eintrag_ist_ok(self):
+        tmp, root = self._root('{"source": "decommissioned-static-welcome:saisonaler-hero", '
+                               '"decommissioned": true, "title": "Herbst"}')
+        with tmp:
+            self.assertEqual(wache.validate_legacy_willkommen_decommissioned(root), [])
+
+    def test_alte_fallback_rotation_am_ende_wird_blockiert(self):
+        tmp, root = self._root('{"source": "fallback", "signal_id": "alter-pool"}')
+        with tmp:
+            funde = wache.validate_legacy_willkommen_decommissioned(root)
+            self.assertTrue(any("alten Rotation" in f for f in funde), funde)
+
+    def test_home_info_params_und_alter_workflow_werden_blockiert(self):
+        tmp, root = self._root('{"source": "decommissioned-static-welcome:saisonaler-hero", '
+                               '"decommissioned": true}')
+        with tmp:
+            (root / "hugo.toml").write_text('[params.homeInfoParams]\nTitle = "alt"\n', encoding="utf-8")
+            (root / ".github" / "workflows" / "willkommenstext-refresh.yml").write_text('name: alt\n', encoding="utf-8")
+            funde = wache.validate_legacy_willkommen_decommissioned(root)
+            self.assertTrue(any("homeInfoParams" in f for f in funde), funde)
+            self.assertTrue(any("alte Willkommenstext-Automation" in f for f in funde), funde)
+
+
 class TestFarben(unittest.TestCase):
     """S4 – WCAG gemessen, nicht geraten."""
 

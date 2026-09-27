@@ -20,7 +20,7 @@ Dieses Gate ist die Wache dahinter und prüft – wie
   python3 scripts/saisonale_startseite_guard.py --selftest
   python3 scripts/saisonale_startseite_guard.py --json
 
-Prüfungen Quelle (S1–S8):
+Prüfungen Quelle (S1–S9):
   S1 Schema/Pflichtfelder, Fenster im Format MM-DD, eindeutige IDs
   S2 Kalender: die vier Fenster decken ALLE Tage eines Schaltjahres
      (366) genau einmal ab – lückenlos UND überlappungsfrei. Ein Tag ohne
@@ -57,6 +57,10 @@ Prüfungen Quelle (S1–S8):
      { order: N }` existiert, und N hält die Artikel-Karten mit dem
      LCP-Cover (order: 1) vorne, liegt hinter der Pagination (order: 4)
      und nicht hinter den Clustern (order: 5).
+  S9 Stilllegung: `homeInfoParams`, alter Wochen-Workflow und
+     `scripts/willkommenstext_guard.py` bleiben entfernt; die Legacy-
+     Historie endet auf einem Decommission-/Saison-Hero-Merge-Eintrag,
+     nicht auf `fallback` oder `ai:*`.
 
 Prüfungen Build (B1–B7) gegen public/index.html:
   B1 genau EIN H1 (Bestands-Test e2e/home.spec.mjs) und genau EIN
@@ -476,6 +480,78 @@ def validate_datenpfad(layouts=LAYOUTS) -> list[str]:
     return fehler
 
 
+
+
+def validate_legacy_willkommen_decommissioned(root: Path) -> list[str]:
+    """S9: Der alte homeInfoParams-Willkommenstext darf nicht zurückrotieren.
+
+    Die frühere Wochen-Automation schrieb in `hugo.toml` und nutzte eine
+    eigene History plus Fallback-Pool. Seit dem saisonalen Hero ist genau das
+    gefährlich: ein späterer Bot-Lauf könnte den freigegebenen GEO-Hero wieder
+    durch einen alten, nicht saisonalen Text ersetzen. Diese Wache macht die
+    Stilllegung prüfbar: alte Schreibwege müssen fehlen, `homeInfoParams` darf
+    im Projekt-Hugo nicht mehr existieren und die Legacy-Historie muss mit
+    einem finalen Decommission-/Merge-Eintrag enden. Schreibt ein alter
+    Wochen-Guard danach noch `fallback` oder `ai:*`, wird die Produktion rot.
+    """
+    fehler: list[str] = []
+    alte_pfade = (
+        root / "scripts" / "willkommenstext_guard.py",
+        root / ".github" / "workflows" / "willkommenstext-refresh.yml",
+    )
+    for pfad in alte_pfade:
+        if pfad.exists():
+            fehler.append(f"S9: alte Willkommenstext-Automation ist wieder da ({pfad.relative_to(root)}) – "
+                          "sie würde den saisonalen Hero über `homeInfoParams` rotieren.")
+
+    hugo = root / "hugo.toml"
+    if hugo.is_file():
+        text = hugo.read_text(encoding="utf-8")
+        code = "\n".join(zeile for zeile in text.splitlines()
+                          if not zeile.lstrip().startswith("#"))
+        if re.search(r"(?m)^\s*\[params\.homeInfoParams\]\s*$", code):
+            fehler.append("S9: `[params.homeInfoParams]` steht wieder in hugo.toml – "
+                          "der statische Willkommenstext muss gelöscht bleiben.")
+        if re.search(r"(?m)^\s*homeInfoParams\s*=", code):
+            fehler.append("S9: `homeInfoParams` steht wieder als Parameter in hugo.toml – "
+                          "Startseiten-H1 und GEO-Lead gehören nach data/saisons.yaml.")
+    else:
+        fehler.append("S9: hugo.toml fehlt – statischer Willkommenstext kann nicht geprüft werden.")
+
+    history = root / "data" / "willkommenstext_history.jsonl"
+    if not history.exists():
+        return fehler
+    rows: list[dict] = []
+    for nr, line in enumerate(history.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as exc:
+            fehler.append(f"S9: data/willkommenstext_history.jsonl Zeile {nr} ist kein JSON ({exc.msg}).")
+            continue
+        if isinstance(row, dict):
+            rows.append(row)
+        else:
+            fehler.append(f"S9: data/willkommenstext_history.jsonl Zeile {nr} ist kein Objekt.")
+    if not rows:
+        return fehler
+    last = rows[-1]
+    source = str(last.get("source") or "").lower()
+    if source == "fallback" or source.startswith("ai:") or "fallback-pool" in source:
+        fehler.append("S9: Willkommens-Historie endet auf einer alten Rotation "
+                      f"({last.get('source')!r}, Signal {last.get('signal_id')!r}). "
+                      "Nach der Löschung des statischen Willkommenstexts muss der letzte "
+                      "Eintrag ein Decommission-/Saison-Hero-Merge-Entscheid sein.")
+    marker_ok = bool(last.get("decommissioned") is True or last.get("static_welcome_disabled") is True
+                     or "decommission" in source or "saisonaler-hero" in source
+                     or "merge-resolution" in source)
+    if not marker_ok:
+        fehler.append("S9: Willkommens-Historie hat keinen finalen Decommission-/Merge-Eintrag. "
+                      "Bitte einen letzten Eintrag setzen, der den saisonalen Hero als einzige "
+                      "Startseiten-Quelle bestätigt.")
+    return fehler
+
 def validate_lcp_schutz(css: str) -> list[str]:
     """S8: Mobile-Reihenfolge hält das LCP-Cover vorne."""
     fehler = []
@@ -829,6 +905,7 @@ def pruefe_quelle(root: Path, datum: datetime.date, json_modus: bool = False) ->
     fehler += validate_farben(saisons)
     fehler += validate_pillars(saisons, root)
     fehler += validate_datenpfad()
+    fehler += validate_legacy_willkommen_decommissioned(root)
 
     css_pfad = root / "assets" / "css" / "extended" / "zz-saisonale-startseite.css"
     css = css_pfad.read_text(encoding="utf-8") if css_pfad.is_file() else ""
@@ -992,6 +1069,23 @@ def selbsttest() -> int:
         ok &= muss(not validate_datenpfad([pfad]),
                    "Datenpfad-Detektor darf Kommentare nicht als Fund zählen")
 
+        # Legacy-Willkommenstilllegung: der letzte Eintrag muss ein
+        # Decommission-/Saison-Hero-Entscheid sein, kein alter Fallback.
+        legacy = Path(tmp) / "legacy"
+        (legacy / "data").mkdir(parents=True)
+        (legacy / "scripts").mkdir()
+        (legacy / ".github" / "workflows").mkdir(parents=True)
+        (legacy / "hugo.toml").write_text('[params]\n  title = "x"\n', encoding="utf-8")
+        (legacy / "data" / "willkommenstext_history.jsonl").write_text(
+            '{"source":"fallback","signal_id":"alt"}\n', encoding="utf-8")
+        ok &= muss(any("alten Rotation" in f for f in validate_legacy_willkommen_decommissioned(legacy)),
+                   "alter Willkommenstext-Fallback am History-Ende muss auffallen")
+        (legacy / "data" / "willkommenstext_history.jsonl").write_text(
+            '{"source":"decommissioned-static-welcome:saisonaler-hero","decommissioned":true}\n',
+            encoding="utf-8")
+        ok &= muss(not validate_legacy_willkommen_decommissioned(legacy),
+                   "Decommission-Eintrag am History-Ende muss akzeptiert werden")
+
         # CSS-Drift-Detektor
         css = (".ff-saison--herbst { --ff-saison-akzent: #9A5B12; --ff-saison-linie: #000000; "
                "--ff-saison-hero-text: #FFD15A; }\n"
@@ -1070,7 +1164,7 @@ def selbsttest() -> int:
                    "zwei H1 müssen auffallen")
 
     print("✅ Selbsttest bestanden (Saison-Fenster, Kalender, Kontrast, Auswahl-Spiegel, "
-          "Datenpfad, CSS-Drift, LCP-Schutz, Build-Prüfung)" if ok
+          "Datenpfad, CSS-Drift, LCP-Schutz, Legacy-Stilllegung, Build-Prüfung)" if ok
           else "❌ Selbsttest FEHLGESCHLAGEN")
     return 0 if ok else 2
 
@@ -1136,7 +1230,8 @@ def main(argv=None) -> int:
         else:
             print("## ✅ Keine Funde\n"
                   "Schema, Kalender-Abdeckung (366 Tage), Marken-Stimme, WCAG-Kontraste, "
-                  "CSS-/YAML-Deckung, Ratgeber-Ziele, Auswahl-Spiegel, Datenpfad und "
+                  "CSS-/YAML-Deckung, Ratgeber-Ziele, Auswahl-Spiegel, Datenpfad, "
+                  "Legacy-Willkommens-Stilllegung und "
                   "(falls gebaut) der fertige Build sind sauber.")
     return max(exit_quelle, exit_build)
 

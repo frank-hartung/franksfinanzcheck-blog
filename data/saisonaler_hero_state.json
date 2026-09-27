@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "saisons": {
+    "herbst": {
+      "updated": "2026-09-27T14:15:31Z",
+      "fingerprint": "1cee2b623565be751d3175f521f89c341566844837373cf365f0eb4a6237e57f",
+      "model": "approved-seasonal-baseline",
+      "research_brief": "",
+      "research_sha256": "",
+      "set_current": true,
+      "reason": "Premium-Fix 2026-09-27: Herbst-Hero SEO/GEO-poliert, statischer Willkommenstext gelöscht, alte Fallback-Rotation blockiert"
+    }
+  }
+}
