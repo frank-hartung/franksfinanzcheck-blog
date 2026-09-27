@@ -260,23 +260,6 @@ input, textarea {
   color: var(--ff-accent-2);
 }
 
-/* Editoriale Autorenzeile: Der Herausgeber-Hinweis erhält bewusst eine
-   zweite Zeile. So bleibt die Verantwortungsangabe auch in engen Hero-
-   Layouts ruhig lesbar, ohne die übrigen Trust-Signale zu verbreitern. */
-.ff-trust-pill--editorial {
-  align-items: center;
-  line-height: 1.25;
-  min-height: 44px;
-  white-space: nowrap;
-}
-
-.ff-trust-pill--editorial strong {
-  display: inline-block;
-  margin-top: 2px;
-  font-size: 1.02em;
-  line-height: 1.15;
-}
-
 /* Pinterest CTA Banner */
 .ff-pinterest-cta {
   display: flex;
