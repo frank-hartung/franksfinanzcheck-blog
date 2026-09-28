@@ -216,7 +216,11 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Schwelle jetzt aus dem Ziel (Invariante 1 ≤ Alarm < Ziel); ohne
           # Selbsttest im Minimum wäre genau diese Invariante wieder nur eine
           # Behauptung.
-          "reserve_economy.py"]
+          "reserve_economy.py",
+          # Deploy-Drift-Wache (28.09.2026, #433 – „Deploy-Drift: #431 auf main,
+          # aber nicht live“): Prüft Parität zwischen main und gh-pages.
+          # Schützt vor Queue-Verdrängung und Skip-Deploy-Täuschung.
+          "deploy_drift_guard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
