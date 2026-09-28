@@ -1163,6 +1163,79 @@ details:not(.toc)[open] > summary::before {
   line-height: 1.25;
 }
 
+/* Badge & Live-Status der Kurzantwort */
+.ff-kurzantwort__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ff-emerald) 8%, var(--entry));
+  border: 1px solid color-mix(in srgb, var(--ff-emerald) 18%, transparent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--ff-emerald);
+  transition: all .2s ease;
+}
+
+.ff-kurzantwort__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ff-emerald);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.ff-kurzantwort.ff-voice-active .ff-kurzantwort__badge {
+  background: linear-gradient(135deg, var(--ff-emerald) 0%, #1f6f5c 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(20, 87, 68, .28);
+}
+
+.ff-kurzantwort.ff-voice-active .ff-kurzantwort__badge-dot {
+  background: #ffe08a;
+  animation: ff-pulse 1.4s infinite ease-in-out;
+}
+
+/* Fortschrittsanzeige in der Kurzantwort */
+.ff-kurzantwort__progress-shell {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 5px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ff-emerald) 12%, var(--entry));
+  overflow: hidden;
+  opacity: 0.9;
+  transition: opacity .2s ease;
+}
+
+.ff-kurzantwort__progress {
+  position: relative;
+  display: block;
+  width: var(--ff-kurzantwort-progress, 0%);
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ff-emerald, #145744) 0%, #1f6f5c 42%, var(--ff-accent, #ffb300) 100%);
+  box-shadow: 0 0 10px rgba(20, 87, 68, .4);
+  transition: width .18s linear;
+}
+
+.ff-kurzantwort.ff-voice-active {
+  border-left-color: var(--ff-accent, #ffb300);
+  box-shadow: 0 6px 24px rgba(20, 87, 68, .14), inset 0 0 0 1px color-mix(in srgb, var(--ff-emerald) 32%, transparent);
+  transition: all .25s ease;
+}
+
+@keyframes ff-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: .7; }
+}
+
 .ff-kurzantwort__text {
   margin: 0;
   max-width: 65ch;
@@ -1286,6 +1359,35 @@ details:not(.toc)[open] > summary::before {
 
 :root[data-theme="dark"] .ff-kurzantwort__eyebrow {
   color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__badge {
+  background: rgba(255, 217, 112, .12);
+  border-color: rgba(255, 217, 112, .24);
+  color: #ffd970;
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__badge-dot {
+  background: #ffd970;
+}
+
+:root[data-theme="dark"] .ff-kurzantwort.ff-voice-active {
+  border-left-color: #ffd970;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 217, 112, .28);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort.ff-voice-active .ff-kurzantwort__badge {
+  background: linear-gradient(135deg, #1f6f5c 0%, #145744 100%);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__progress-shell {
+  background: rgba(255, 217, 112, .14);
+}
+
+:root[data-theme="dark"] .ff-kurzantwort__progress {
+  background: linear-gradient(90deg, #1f6f5c 0%, var(--ff-emerald-bright, #7fd1b4) 40%, #ffd970 100%);
+  box-shadow: 0 0 12px rgba(255, 217, 112, .35);
 }
 
 /* ---------- 2. Inhaltsverzeichnis oben im Artikel (steht offen) ---------- */
