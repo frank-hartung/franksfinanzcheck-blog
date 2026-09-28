@@ -1,6 +1,27 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 28.09.2026 (Content-Reserve #28, Issue #436, Run 36407111494 –
+#  1/6 READY nach 43 Minuten, obwohl alle Prozessschritte „grün“ waren):
+#    1. GEBURTS-GATE WARF HEILBARE ROHTEXTE VOR DER WERKBANK WEG. 15 Themen
+#       lieferten 629–1.245 Wörter, meist als einziger Fund „unter 1.400“;
+#       der bereits dateibezirkelte Längenheiler sah sie nie. Die Reserve darf
+#       jetzt substanzielle Rohtexte (≥550 Wörter, ≥4 H2) ausschließlich bei
+#       den belegten Heilerklassen Länge/Keyword in Stufe 2 geben. Live bleibt
+#       streng; READY erteilt weiterhin nur das unveränderte Publish-Gate.
+#    2. GEMINI-VERTRAG WAR IMPLIZIT. Explizite 8.192 Output-Tokens,
+#       Temperatur und Mehr-Part-Auswertung; doppelter Promptblock entfernt.
+#    3. WÖRTERBUCH-LÜCKEN WAREN UNGEDECKELT. 27 korrekte Camping-/Reise-
+#       Komposita ergaben spelling 0,46 und quality 0,826. Unknowns (Konfidenz
+#       0, keine belegten Fehler) haben jetzt max. −0,20 Unsicherheitsabzug;
+#       echte Tipp-/Großschreib-/Phrasenfehler bleiben ungekappt hart.
+#    4. IW3 WAR FÜR KI-RESERVE UNHEILBAR. Ein ETF-Entwurf versprach einen
+#       Broker-Vergleich, verlinkte aber das C24-Einzelangebot. Human-Prosa
+#       bleibt fail-closed; nur maschinenverwaltete Reserve entkommerzialisiert
+#       den vollständigen unehrlichen Werbesatz deterministisch. Ehrliche
+#       kanonische CTAs bleiben erhalten, die letzte Intent-Wache beweist 0.
+#    5. checkout v4 (Node-20-Warnung im Lauf) auf v5 gehoben.
+#
 #  REPARATUR 27.09.2026 (Content-Reserve #27, Issue #412, Run 36338925820 –
 #  „dauerhaft auf Premium-Level“, zweiter roter Lauf am selben Tag):
 #  VIER Befunde, zwei davon strukturelle Dauerbrenner:
@@ -156,7 +177,7 @@ jobs:
     env:
       RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
       - uses: actions/setup-python@v7

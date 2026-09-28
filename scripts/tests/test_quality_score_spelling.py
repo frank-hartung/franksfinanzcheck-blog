@@ -7,8 +7,10 @@ drückten den Rechtschreib-Score auf 0.00 → Gesamt-Score < 0.80 → Massen-Par
 → Tagesdefizit → Content-Engine rot → Bot-Watchdog #251.
 
 Verträge des Fixes:
-  1) „unknown“-Befunde zählen nur schwach (je −0.02), nie hart (−0.1).
-  2) Echte Fehler (typo/phrase/noun_case) zählen weiterhin hart.
+  1) „unknown“-Befunde zählen nur schwach (je verschiedenem Wort −0.02), nie
+     hart (−0.1), und insgesamt höchstens −0.20 – ein Wörterbuch-Loch ist kein
+     Qualitätsurteil.
+  2) Echte Fehler (typo/phrase/noun_case) zählen weiterhin ungekappt hart.
   3) Stil-Befunde (Satzanfang, Zeichensetzung, Anrede, „zuhause“) gehören
      nicht zur Rechtschreibung und fließen gar nicht ein.
 
@@ -28,6 +30,16 @@ class SpellingScoreTests(unittest.TestCase):
         # 10 Wörterbuch-Lücken: vor #251 = 0.0, jetzt 0.8 (nie Nullpunkt).
         self.assertEqual(
             qs._spelling_score([{"type": "unknown"}] * 10), 0.8)
+
+    def test_dictionary_gaps_have_a_risk_cap(self):
+        # Reales #436-Muster: 27 korrekte Camping-/Reise-Komposita dürfen den
+        # Artikel nicht wie 5+ echte Rechtschreibfehler behandeln.
+        self.assertEqual(
+            qs._spelling_score([{"type": "unknown"}] * 27), 0.8)
+
+    def test_repeated_domain_word_counts_once(self):
+        self.assertEqual(qs._spelling_score(
+            [{"type": "unknown", "word": "Campingplatz-App"}] * 27), 0.98)
 
     def test_genuine_errors_still_hard(self):
         self.assertEqual(qs._spelling_score([{"type": "typo"}] * 3), 0.7)

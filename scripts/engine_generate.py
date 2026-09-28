@@ -367,13 +367,61 @@ def versuch_bilanz(anzahl: int, ursachen: list) -> str:
     return zeile[:380]
 
 
-def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3):
+# Die Reserve hat im Gegensatz zur Live-Geburt eine eigene, belegte
+# Veredelungsstufe.  `check_length.py` und `keyword_optimizer.py` sind dort
+# dateibezirkelt verdrahtet und werden von reserve_healer_coverage überwacht.
+# Ein Rohtext, dem NUR diese beiden heilbaren Eigenschaften fehlen, darf daher
+# in die Werkbank – nicht ins Schaufenster.  Genau diese Trennung fehlte in
+# Run 36407111494 (#436): 15 Themen lieferten brauchbare Texte mit 629–1.245
+# Wörtern; das Geburts-Gate warf sie alle VOR dem Längenheiler weg. Nach 43
+# Minuten blieben 3 Kandidaten und nur 1/6 READY.
+RESERVE_VORSTUFE_MIN_WORDS = 550
+RESERVE_VORSTUFE_MIN_H2 = 4
+
+
+def _reserve_vorstufe_ok(body: str, probleme: list[str]) -> tuple[bool, list[str]]:
+    """Darf ein noch nicht fertiger KI-Text in die Reserve-Werkbank?
+
+    Das ist ausdrücklich KEINE weichere Veröffentlichungsschwelle:
+    `reserve_readiness.py` zertifiziert später weiterhin mit den echten
+    Publish-Gates. Zulässig sind nur Befunde, für die die unmittelbar folgende
+    Reserve-Kette einen überwachten Heiler besitzt: Länge und Keyword-Platz.
+    Struktur-/FAQ-/Floskel-/Modulfehler bleiben bereits an der Geburt hart.
+    Ein absoluter Substanz-Floor verhindert, dass ein Gerüst teure Heilerzeit
+    bindet.
+    """
+    text = re.sub(r"[#*_>`|~\[\]()-]", " ", body or "")
+    words = len(re.findall(r"\w+", text))
+    h2 = len(re.findall(r"^##\s", body or "", re.M))
+    floskeln = [f for f in g.PROFI_FLOSKELN if f in text.lower()]
+    if words < RESERVE_VORSTUFE_MIN_WORDS or h2 < RESERVE_VORSTUFE_MIN_H2 \
+            or floskeln:
+        return False, []
+
+    heilbar = []
+    for problem in probleme or []:
+        if re.match(r"^nur \d+ Wörter / \d+ Zeichen \(Premium:", problem):
+            heilbar.append("Länge")
+            continue
+        if problem.startswith("Keyword „") and (" fehlt" in problem):
+            heilbar.append("Keyword")
+            continue
+        return False, []
+    return bool(heilbar), sorted(set(heilbar))
+
+
+def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=3,
+                 reserve_vorstufe=False):
     """Ein Generierungs-Versuch über beide Provider. Liefert (filename|None, info).
 
     Sammelt seit 27.09.2026 (#412) pro Versuch die Fehlerklasse mit
     („infra“ vs. „inhalt“, siehe versuch_bilanz), damit Gedächtnis und
     Konvergenz-Steuerung Ausfälle von Qualitätsmängeln unterscheiden
-    können. Die bisherigen Print-Zeilen bleiben unverändert.
+    können.
+
+    `reserve_vorstufe=True` lässt ausschließlich substanziellen Rohtext mit
+    den belegten, nachgelagert heilbaren Befunden Länge/Keyword in die
+    Reserve-Werkbank. Live-Generierung bleibt unverändert fail-closed.
     """
     providers = [p for p in ("GEMINI", "GROQ") if os.environ.get(f"{p}_API_KEY")]
     if not providers:
@@ -414,12 +462,22 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
             ursachen.append(("inhalt", f"Titel-Gate R2 (Anhängsel): {title[:60]}"))
             continue
 
+        vorstufe_heiler = []
         if not relaxed:
             ok_profi, prob = g.profi_quality_ok(body, keywords)
             if not ok_profi:
-                print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} (Versuch {attempt}/{max_attempts}, {provider})")
-                ursachen.append(("inhalt", f"Profi-Gate: {'; '.join(prob[:2])}"))
-                continue
+                if reserve_vorstufe:
+                    vorstufe_ok, vorstufe_heiler = _reserve_vorstufe_ok(body, prob)
+                else:
+                    vorstufe_ok = False
+                if not vorstufe_ok:
+                    print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} "
+                          f"(Versuch {attempt}/{max_attempts}, {provider})")
+                    ursachen.append(("inhalt", f"Profi-Gate: {'; '.join(prob[:2])}"))
+                    continue
+                print("  🧰 Reserve-Vorstufe angenommen: substanzieller Rohtext, "
+                      f"belegte Heiler folgen für {', '.join(vorstufe_heiler)} "
+                      f"(Versuch {attempt}/{max_attempts}, {provider})")
         else:
             # Relaxed: nur HARTE Kriterien (Text darf trotzdem nicht mager sein)
             text = re.sub(r"[#*_>`|~\[\]()-]", " ", body)
@@ -432,6 +490,10 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
                 continue
 
         used_titles.add(title.lower())
+        if vorstufe_heiler:
+            return ((title, desc, body),
+                    f"VORSTUFE via {provider_name} "
+                    f"(Heiler: {', '.join(vorstufe_heiler)})")
         return (title, desc, body), f"OK via {provider_name} ({'relaxed' if relaxed else 'profi'})"
     return None, versuch_bilanz(max_attempts, ursachen)
 
@@ -895,9 +957,9 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
             # am selben Thema (Vertrag aus 5202480, Copilot-Fix zu #387).
             used_topics.add(id(kandidat))
             keywords = kandidat.get("keywords")
-            ergebnis, meldung = try_generate(kandidat, keywords, None,
-                                             used_titles, relaxed=False,
-                                             max_attempts=3)
+            ergebnis, meldung = try_generate(
+                kandidat, keywords, None, used_titles, relaxed=False,
+                max_attempts=3, reserve_vorstufe=True)
             if ergebnis:
                 topic, result, info = kandidat, ergebnis, meldung
                 break

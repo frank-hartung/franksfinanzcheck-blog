@@ -269,9 +269,11 @@ class KonvergenzTests(unittest.TestCase):
         topics = [{"title": "Thema A"}, {"title": "Thema B"}]
         used_topics = set()
         versuchte_themen = []
+        vorstufen_flags = []
 
-        def fail(topic, *_args, **_kwargs):
+        def fail(topic, *_args, **kwargs):
             versuchte_themen.append(topic["title"])
+            vorstufen_flags.append(kwargs.get("reserve_vorstufe"))
             return None, "Profi-Gate abgelehnt"
 
         with patch.object(rp, "reserve_drafts", return_value=[]), \
@@ -287,6 +289,52 @@ class KonvergenzTests(unittest.TestCase):
 
         self.assertCountEqual(versuchte_themen, ["Thema A", "Thema B"])
         self.assertEqual(used_topics, {id(topics[0]), id(topics[1])})
+        self.assertTrue(vorstufen_flags and all(vorstufen_flags),
+                        "nur die Reserve muss die belegte Werkbank-Vorstufe nutzen")
+
+    def test_reserve_vorstufe_nimmt_nur_belegt_heilbare_befunde_an(self):
+        """#436: Kurze, substanzielle Antworten gehen zum Längenheiler.
+
+        Live bleibt streng; hier wird lediglich der Vertrag der nachfolgenden
+        Reserve-Werkbank geprüft.
+        """
+        body = ("## Abschnitt eins\n" + "Wort " * 150 +
+                "\n## Abschnitt zwei\n" + "Wort " * 150 +
+                "\n## Abschnitt drei\n" + "Wort " * 150 +
+                "\n## Häufige Fragen\n" + "Wort " * 120)
+        ok, heiler = eg._reserve_vorstufe_ok(body, [
+            "nur 574 Wörter / 4200 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen)",
+            "Keyword „ETF-Sparplan“ fehlt in H2/H3 (Premium #303)",
+        ])
+        self.assertTrue(ok)
+        self.assertEqual(heiler, ["Keyword", "Länge"])
+        # Fehlendes Pflichtmodul hat keinen zugesagten Geburts-Heiler.
+        self.assertFalse(eg._reserve_vorstufe_ok(
+            body, ["kein „Das Wichtigste in Kürze“-Modul (RS1)"])[0])
+        # Ein nahezu leerer Text darf auch mit reinem Längenbefund nicht rein.
+        self.assertFalse(eg._reserve_vorstufe_ok(
+            "## A\nKurz.\n## B\nKurz.\n## C\nKurz.\n## D\nKurz.",
+            ["nur 12 Wörter / 50 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen)"])[0])
+
+    def test_live_generierung_bleibt_ohne_vorstufe_streng(self):
+        """Die Werkbank-Ausnahme darf nicht in publish_one_article lecken."""
+        body = ("## A\n" + "Wort " * 150 + "\n## B\n" + "Wort " * 150 +
+                "\n## C\n" + "Wort " * 150 + "\n## D\n" + "Wort " * 120)
+        raw = "TITLE: Test: Solider Rohtext\nDESCRIPTION: Test.\n" + body
+        problems = ["nur 574 Wörter / 4200 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen)"]
+        with patch.dict(os.environ, {"GROQ_API_KEY": "test", "GEMINI_API_KEY": ""}), \
+                patch.object(eg.random, "shuffle", lambda _x: None), \
+                patch.object(eg.g, "generate_article_text", return_value=(raw, "Groq")), \
+                patch.object(eg.g, "profi_quality_ok", return_value=(False, problems)), \
+                patch("builtins.print"):
+            streng, _ = eg.try_generate({"title": "Test"}, [], None, set(),
+                                        max_attempts=1)
+            vorstufe, info = eg.try_generate(
+                {"title": "Test"}, [], None, set(), max_attempts=1,
+                reserve_vorstufe=True)
+        self.assertIsNone(streng)
+        self.assertIsNotNone(vorstufe)
+        self.assertIn("VORSTUFE", info)
 
     def test_reserve_batch_faehrt_nach_einem_themenfehler_fort(self):
         used_topics = set()
@@ -331,6 +379,33 @@ class KonvergenzTests(unittest.TestCase):
         self.assertEqual(len(rufe), 3, "drei Schritte, dann kein weiterer")
         self.assertTrue(all(0 < t <= 900 for t in rufe),
                         f"Restbudget muss als Schritt-Timeout gelten: {rufe}")
+
+
+class ProviderVertragTests(unittest.TestCase):
+    """#436: Lange Artikel brauchen einen expliziten Gemini-Ausgabevertrag."""
+
+    def test_gemini_hat_output_budget_und_verliert_keine_text_parts(self):
+        gesehen = {}
+
+        def fake_http(_url, data=None, headers=None, **_kwargs):
+            gesehen["body"] = json.loads(data.decode("utf-8"))
+            gesehen["headers"] = headers
+            return {"candidates": [{"content": {"parts": [
+                {"text": "Teil A"}, {"text": " + Teil B"},
+            ]}}]}
+
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), \
+                patch.object(eg.g, "http_json", side_effect=fake_http):
+            text = eg.g.call_gemini("Langer Premium-Artikel")
+        self.assertEqual(text, "Teil A + Teil B")
+        cfg = gesehen["body"]["generationConfig"]
+        self.assertEqual(cfg["maxOutputTokens"], 8192)
+        self.assertGreater(cfg["temperature"], 0)
+
+    def test_gemini_ohne_candidate_ist_ehrlich_leer(self):
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), \
+                patch.object(eg.g, "http_json", return_value={"candidates": []}):
+            self.assertIsNone(eg.g.call_gemini("Test"))
 
 
 class GateFrischeTests(unittest.TestCase):
@@ -716,6 +791,58 @@ class IntentHeilerTests(unittest.TestCase):
         nachher = text
         self.assertEqual(self._guard("--fix", "--heal")["exit_code"], 0)
         self.assertEqual(self.index.read_text(encoding="utf-8"), nachher)
+
+    def test_iw3_ki_reserve_entfernt_unehrlichen_werbesatz(self):
+        """#436: Ein KI-Entwurf darf nicht ewig an human-owned IW3 hängen.
+
+        Das reale ETF-Muster versprach einen Broker-Vergleich, verlinkte aber
+        das Einzelangebot der C24 Bank. Sicher ist weder Umrouten noch
+        Umschreiben, sondern das Entkommerzialisieren genau dieses Satzes.
+        """
+        self.index.write_text(
+            '---\ntitle: "ETF-Sparplan 2026: Vermögen aufbauen"\n'
+            'description: "ETF-Sparplan verständlich erklärt."\n'
+            "date: 2026-09-28T06:00:00Z\ndraft: true\nreserve: true\n"
+            "ai_generated: true\n"
+            'tags: ["ETF-Sparplan"]\ncategories: ["Ratgeber"]\n'
+            'pillar: "frugalismus"\nauthor: "Frank Hartung"\n---\n\n'
+            "💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere Rücklagen "
+            "verzinst parken: [**Jetzt C24 Bank Tagesgeld ansehen**]"
+            "(/go/tagesgeld/)\n\n"
+            "Nutze für den Vergleich der Broker unabhängige Portale. Ein "
+            "Depotwechsel ist meist kostenlos. Ein passender Einstiegspunkt "
+            "für den Vergleich findet sich hier: [/go/tagesgeld/ der C24 "
+            "Bank](/go/tagesgeld/).\n\n"
+            "👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank "
+            "Tagesgeld ansehen**](/go/tagesgeld/)\n",
+            encoding="utf-8")
+        vorher = self._guard()
+        iw3 = [f for f in vorher["findings"] if f["code"] == "IW3"]
+        self.assertTrue(iw3 and iw3[0]["owner"] == "human", vorher)
+        geheilt = self._guard("--fix", "--heal")
+        self.assertEqual(geheilt["exit_code"], 0, geheilt)
+        text = self.index.read_text(encoding="utf-8")
+        self.assertNotIn("Ein passender Einstiegspunkt", text)
+        self.assertIn("Nutze für den Vergleich der Broker unabhängige Portale.",
+                      text, "redaktioneller Nachbarsatz muss erhalten bleiben")
+        self.assertEqual(text.count("/go/tagesgeld/"), 2,
+                         "nur der unehrliche Prosa-Link fällt; CTAs bleiben")
+        self.assertEqual(self._guard("--fix", "--heal")["exit_code"], 0)
+
+    def test_iw3_menschliche_prosa_bleibt_menschenverantwortung(self):
+        """Die #436-Ausnahme darf nie auf Live-/Menschenprosa ausgreifen."""
+        self.index.write_text(
+            '---\ntitle: "ETF-Sparplan 2026: Vermögen aufbauen"\n'
+            'description: "ETF-Sparplan verständlich erklärt."\n'
+            "date: 2026-09-28T06:00:00Z\ndraft: true\nreserve: true\n"
+            'tags: ["ETF-Sparplan"]\npillar: "frugalismus"\n---\n\n'
+            "Ein passender Einstiegspunkt für den Vergleich findet sich "
+            "hier: [Tagesgeld der C24 Bank](/go/tagesgeld/).\n",
+            encoding="utf-8")
+        vorher = self.index.read_text(encoding="utf-8")
+        res = self._guard("--fix", "--heal")
+        self.assertEqual(res["exit_code"], 1, res)
+        self.assertEqual(self.index.read_text(encoding="utf-8"), vorher)
 
     def test_heiler_ist_dateibezirkelt_in_der_reserve_kette_verdrahtet(self):
         schritte = [e for e in rf.HEALER_CHAIN

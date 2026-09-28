@@ -569,7 +569,18 @@ def call_gemini(prompt):
     if not key:
         return None
     model = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
-    body = {"contents": [{"parts": [{"text": prompt}]}]}
+    # Run 36407111494 (#436): Gemini lieferte in fast jeder Themenrunde eine
+    # leere/zu kurze Antwort. Anders als Groq hatte dieser Pfad weder ein
+    # explizites Ausgabelimit noch eine Temperatur und las nur den ersten
+    # Content-Part. Für einen 1.500–2.200-Wörter-Auftrag ist ein impliziter
+    # Provider-Default kein belastbarer Produktionsvertrag.
+    body = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 0.8,
+            "maxOutputTokens": 8192,
+        },
+    }
     data = json.dumps(body).encode("utf-8")
 
     def _call():
@@ -578,7 +589,13 @@ def call_gemini(prompt):
             data=data,
             headers={"Content-Type": "application/json"},
         )
-        return resp["candidates"][0]["content"]["parts"][0]["text"]
+        candidates = resp.get("candidates") or []
+        if not candidates:
+            return None
+        parts = (candidates[0].get("content") or {}).get("parts") or []
+        # Gemini kann Text in mehrere Parts teilen (u. a. bei Thinking-
+        # Modellen). Kein valider Part darf still verloren gehen.
+        return "".join(str(p.get("text") or "") for p in parts).strip() or None
 
     return _retry(_call)
 
@@ -710,9 +727,6 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
 "{topic}"
 
 {pillar_hint}{inspiration}{keyword_hint}Stil des Artikels: {angle_desc}.
-
-{inspiration}{keyword_hint}
-Stil des Artikels: {angle_desc}.
 Erzählperspektive: {persp_desc}.
 
 {agc_block}

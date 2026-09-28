@@ -45,19 +45,35 @@ SPELLING_HARD_TYPES = ("typo", "phrase", "noun_case")
 # haftes Wörterbuch nicht den ganzen Artikel sperrt (Issue #251: „spelling
 # 0.00“ → Score < 0.80 → Massen-Parking → Tagesdefizit).
 SPELLING_SOFT_TYPES = ("unknown",)
+# Ein Unknown ist laut spellcheck.py ausdrücklich ein Wörterbuch-Loch mit
+# Konfidenz 0, kein belegter Schreibfehler. Sein Malus darf daher auf einen
+# kleinen Unsicherheitsanteil begrenzt sein. Sonst sperrt jedes neue Fachgebiet
+# den ersten Artikel: Run 36407111494 (#436) gab dem Camping-Kandidaten wegen
+# 27 korrekter, aber unbekannter Fach-/Kompositawörter 0,46; allein das drückte
+# den Gesamt-Score auf 0,826. Echte Fehler bleiben ungekappt hart.
+SPELLING_SOFT_MAX_FINDINGS = 10
 
 
 def _spelling_score(problems):
     """Rechtschreib-Score 0–1 aus den Spellcheck-Befunden.
 
     Nur echte Fehler (typo/phrase/noun_case) zählen hart (je −0.1);
-    Wörterbuch-Lücken (unknown) zählen schwach (je −0.02). Stil-Befunde
+    Wörterbuch-Lücken (unknown) zählen schwach (je verschiedenem Wort −0.02),
+    aber höchstens bis 0,20 Unsicherheitsabzug pro Artikel. Stil-Befunde
     (Satzanfang, Zeichensetzung, Anrede, „zuhause“ …) gehören zur Typografie/
     Grammatik und fließen hier bewusst NICHT ein.
     """
     hard = [p for p in problems if p.get("type") in SPELLING_HARD_TYPES]
     soft = [p for p in problems if p.get("type") in SPELLING_SOFT_TYPES]
-    return max(0.0, 1.0 - len(hard) * 0.1 - len(soft) * 0.02)
+    # Ein fehlender Lexikoneintrag bleibt derselbe, egal ob der Fachbegriff
+    # einmal oder zwölfmal im Artikel vorkommt. Befunde ohne Wort (synthetische
+    # Tests/alte Reports) bleiben einzeln zählbar statt still zu verschwinden.
+    soft_keys = set()
+    for nr, problem in enumerate(soft):
+        wort = str(problem.get("word") or "").strip().casefold()
+        soft_keys.add(("wort", wort) if wort else ("befund", nr))
+    soft_count = min(len(soft_keys), SPELLING_SOFT_MAX_FINDINGS)
+    return max(0.0, 1.0 - len(hard) * 0.1 - soft_count * 0.02)
 
 # Typografische Fehler (Detect-Komponente)
 RE_DBL_SPACE = re.compile(r"[^ \t]  +[^ \t]")
