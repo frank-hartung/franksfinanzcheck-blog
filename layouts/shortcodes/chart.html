@@ -1,0 +1,123 @@
+{{- /*
+  Accessible, build-time chart renderer.
+  Source of truth: data/datasets/<dataset>.yaml
+  Supported in v1: bar, line; one non-negative series.
+*/ -}}
+{{- $key := .Get "dataset" -}}
+{{- if not $key }}{{ errorf "chart: Parameter dataset fehlt in %s" .Page.File.Path }}{{ end -}}
+{{- /* Kein site.Data/hugo.Data: Der Repo-Datenbaum enthält absichtlich JSONL-
+      Auditspuren. Ein globaler Data-Zugriff würde Hugo zwingen, diese als
+      Konfiguration zu parsen. Deshalb genau die freigegebene YAML-Datei lesen. */ -}}
+{{- $dataPath := printf "data/datasets/%s.yaml" $key -}}
+{{- if not (os.FileExists $dataPath) }}{{ errorf "chart: Datensatz %q nicht gefunden (Seite %s)" $key .Page.File.Path }}{{ end -}}
+{{- $dataset := os.ReadFile $dataPath | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $kind := $dataset.chart_type -}}
+{{- if not (in (slice "bar" "line") $kind) }}{{ errorf "chart: %s hat unbekannten chart_type %q" $key $kind }}{{ end -}}
+{{- $values := $dataset.values -}}
+{{- $count := len $values -}}
+{{- if lt $count 2 }}{{ errorf "chart: %s braucht mindestens zwei Werte" $key }}{{ end -}}
+{{- $max := 0.0 -}}
+{{- range $values }}{{ if gt (float .value) $max }}{{ $max = float .value }}{{ end }}{{ end -}}
+{{- if le $max 0.0 }}{{ $max = 1.0 }}{{ end -}}
+{{- $title := (.Get "title") | default $dataset.title -}}
+{{- $summary := (.Get "summary") | default $dataset.description -}}
+{{- $uid := printf "ff-chart-%s-%d" $dataset.id .Ordinal -}}
+{{- $plotX := 82.0 -}}{{- $plotY := 34.0 -}}{{- $plotW := 626.0 -}}{{- $plotH := 262.0 -}}
+{{- $baseY := add $plotY $plotH -}}
+
+<figure class="ff-chart" data-ff-chart data-dataset="{{ $dataset.id }}" data-chart-type="{{ $kind }}">
+  <div class="ff-chart__head">
+    <div id="{{ $uid }}-title" class="ff-chart__title" role="heading" aria-level="3">{{ $title }}</div>
+    <p id="{{ $uid }}-desc" class="ff-chart__summary">{{ $summary }}</p>
+  </div>
+
+  {{- if eq $dataset.status "prognose" }}
+  <p class="ff-chart__warning"><strong>Prognose:</strong> Diese Werte sind keine beobachteten Ergebnisse. Annahmen stehen in der Methodik.</p>
+  {{- else if eq $dataset.status "modellrechnung" }}
+  <p class="ff-chart__status"><strong>Modellrechnung:</strong> Die Werte gelten nur für die genannten Annahmen.</p>
+  {{- end }}
+
+  <div class="ff-chart__canvas">
+    <svg class="ff-chart__svg" viewBox="0 0 760 380" role="img"
+         aria-labelledby="{{ $uid }}-title {{ $uid }}-desc" preserveAspectRatio="xMidYMid meet">
+      <g class="ff-chart__grid" aria-hidden="true">
+        {{- range seq 0 4 }}
+          {{- $ratio := div (float .) 4.0 -}}
+          {{- $y := sub $baseY (mul $plotH $ratio) -}}
+          {{- $axisValue := mul $max $ratio -}}
+          <line x1="{{ $plotX }}" y1="{{ $y }}" x2="{{ add $plotX $plotW }}" y2="{{ $y }}" />
+          <text x="{{ sub $plotX 10 }}" y="{{ add $y 4 }}" text-anchor="end">{{ lang.FormatNumber 1 $axisValue }}</text>
+        {{- end }}
+        <line class="ff-chart__axis" x1="{{ $plotX }}" y1="{{ $baseY }}" x2="{{ add $plotX $plotW }}" y2="{{ $baseY }}" />
+        <text class="ff-chart__axis-title" x="18" y="{{ add $plotY (div $plotH 2) }}" transform="rotate(-90 18 {{ add $plotY (div $plotH 2) }})" text-anchor="middle">{{ $dataset.y_label }}</text>
+      </g>
+
+      {{- if eq $kind "bar" }}
+        {{- $slot := div $plotW (float $count) -}}
+        {{- $barW := mul $slot 0.58 -}}
+        {{- range $i, $point := $values }}
+          {{- $height := mul (div (float $point.value) $max) $plotH -}}
+          {{- $x := add $plotX (add (mul (float $i) $slot) (mul $slot 0.21)) -}}
+          {{- $y := sub $baseY $height -}}
+          <g class="ff-chart__mark" tabindex="0" role="img"
+             aria-label="{{ $point.label }}: {{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}">
+            <title>{{ $point.label }}: {{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}</title>
+            <rect class="ff-chart__bar" x="{{ $x }}" y="{{ $y }}" width="{{ $barW }}" height="{{ $height }}" rx="5" />
+            <text class="ff-chart__value" x="{{ add $x (div $barW 2) }}" y="{{ sub $y 8 }}" text-anchor="middle">{{ lang.FormatNumber 2 $point.value }}</text>
+            <text class="ff-chart__label" x="{{ add $x (div $barW 2) }}" y="{{ add $baseY 22 }}" text-anchor="middle">{{ truncate 21 $point.label }}</text>
+            <text class="ff-chart__focus-label" x="{{ add $x (div $barW 2) }}" y="{{ add $baseY 48 }}" text-anchor="middle">Enter/Tab: {{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}</text>
+          </g>
+        {{- end }}
+      {{- else }}
+        {{- $denom := sub $count 1 -}}
+        {{- $path := "" -}}
+        {{- range $i, $point := $values }}
+          {{- $x := add $plotX (mul (div (float $i) (float $denom)) $plotW) -}}
+          {{- $y := sub $baseY (mul (div (float $point.value) $max) $plotH) -}}
+          {{- if eq $i 0 }}{{ $path = printf "M %.2f %.2f" $x $y }}{{ else }}{{ $path = printf "%s L %.2f %.2f" $path $x $y }}{{ end -}}
+        {{- end }}
+        <path class="ff-chart__line" d="{{ $path }}" aria-hidden="true" />
+        {{- range $i, $point := $values }}
+          {{- $x := add $plotX (mul (div (float $i) (float $denom)) $plotW) -}}
+          {{- $y := sub $baseY (mul (div (float $point.value) $max) $plotH) -}}
+          <g class="ff-chart__mark" tabindex="0" role="img"
+             aria-label="{{ $point.label }}: {{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}">
+            <title>{{ $point.label }}: {{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}</title>
+            <circle class="ff-chart__point" cx="{{ $x }}" cy="{{ $y }}" r="7" />
+            <text class="ff-chart__value" x="{{ $x }}" y="{{ sub $y 13 }}" text-anchor="middle">{{ lang.FormatNumber 2 $point.value }}</text>
+            <text class="ff-chart__label" x="{{ $x }}" y="{{ add $baseY 22 }}" text-anchor="middle">{{ truncate 18 $point.label }}</text>
+            <text class="ff-chart__focus-label" x="{{ $x }}" y="{{ add $baseY 48 }}" text-anchor="middle">{{ lang.FormatNumber 2 $point.value }} {{ $dataset.unit }}</text>
+          </g>
+        {{- end }}
+      {{- end }}
+      <text class="ff-chart__x-title" x="{{ add $plotX (div $plotW 2) }}" y="370" text-anchor="middle">{{ $dataset.x_label }}</text>
+    </svg>
+  </div>
+
+  <details class="ff-chart__table-wrap">
+    <summary>Alle Daten als Tabelle anzeigen</summary>
+    <div class="ff-chart__table-scroll" tabindex="0" role="region" aria-label="Datentabelle: {{ $title }}">
+      <table class="ff-chart__table">
+        <caption>{{ $title }} – Datenstand {{ time.Format "02.01.2006" $dataset.updated }}</caption>
+        <thead><tr><th scope="col">{{ $dataset.x_label }}</th><th scope="col">{{ $dataset.y_label }}</th><th scope="col">Hinweis</th></tr></thead>
+        <tbody>
+          {{- range $values }}
+          <tr><th scope="row">{{ .label }}</th><td>{{ lang.FormatNumber 2 .value }} {{ $dataset.unit }}</td><td>{{ .note | default "–" }}</td></tr>
+          {{- end }}
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <figcaption class="ff-chart__meta">
+    <span><strong>Datenstand:</strong> {{ time.Format "02.01.2006" $dataset.updated }}</span>
+    <span><strong>Status:</strong> {{ $dataset.status }}</span>
+    <span><strong>Einheit:</strong> {{ $dataset.unit }}</span>
+    <span><strong>Methodik {{ $dataset.methodology.version }}:</strong> <a href="{{ $dataset.methodology.url }}">Annahmen und Rechenweg</a></span>
+    <span><strong>Quelle{{ if gt (len $dataset.sources) 1 }}n{{ end }}:</strong>
+      {{- range $i, $source := $dataset.sources }}{{ if $i }}, {{ end }}<a href="{{ $source.url }}">{{ $source.publisher }}: {{ $source.title }}</a> (abgerufen {{ time.Format "02.01.2006" $source.accessed }}){{ end }}
+    </span>
+    <span><strong>Lizenz:</strong> {{ $dataset.license }}</span>
+  </figcaption>
+  <p class="ff-chart__keyboard">Tastatur: Mit Tab lassen sich alle Balken beziehungsweise Punkte einzeln fokussieren. Sämtliche Werte stehen zusätzlich in der Datentabelle.</p>
+</figure>

@@ -1,0 +1,34 @@
+# Normativer, menschenlesbarer Vertrag. Die ausführbare Prüfung liegt in
+# scripts/visual_data_gate.py; dieses Dokument erklärt Felder und Werte.
+schema_version: "1.0"
+required:
+  - schema_version
+  - id
+  - title
+  - description
+  - owner
+  - status
+  - chart_type
+  - unit
+  - x_label
+  - y_label
+  - updated
+  - update_frequency
+  - sources
+  - methodology
+  - changelog
+  - license
+  - values
+allowed:
+  status: [beobachtung, modellrechnung, prognose]
+  chart_type: [bar, line]
+  update_frequency: [ereignisbasiert, woechentlich, monatlich, quartalsweise, jaehrlich, statisch]
+source_required: [title, url, publisher, accessed]
+methodology_required: [summary, version, url]
+value_required: [label, value]
+constraints:
+  minimum_values: 2
+  non_negative_values: true
+  iso_date_fields: [updated, sources.accessed, changelog.date]
+  unique_ids: true
+  unique_value_labels: true

@@ -154,6 +154,8 @@ Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinsen 
 
 Angenommen, du hast einen **Notgroschen von 15.000 €**:
 
+{{< chart dataset="tagesgeld_modell" >}}
+
 | Anlageform | Zinssatz | Zinsertrag pro Jahr |
 |:---|---:|---:|
 | Girokonto | 0,00 % | 0,00 € |

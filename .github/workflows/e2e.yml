@@ -30,6 +30,7 @@ on:
       - "layouts/**"
       - "assets/**"
       - "content/**"
+      - "data/datasets/**"
       - "hugo.toml"
       - "e2e/**"
       - "playwright.config.mjs"

@@ -33,6 +33,21 @@ test.describe('Mobile (iPhone 14)', () => {
     expect(overflow.body, `body um ${overflow.body}px zu breit`).toBeLessThanOrEqual(1);
   });
 
+  test('Datenvisualisierung: mobil lesbar, Tabelle erreichbar, kein Seitenüberlauf', async ({ page }) => {
+    await page.goto('/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/');
+    const chart = page.locator('[data-ff-chart]').first();
+    await expect(chart).toBeVisible();
+    const overflow = await page.evaluate(() => ({
+      doc: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      body: document.body.scrollWidth - document.body.clientWidth,
+    }));
+    expect(overflow.doc).toBeLessThanOrEqual(1);
+    expect(overflow.body).toBeLessThanOrEqual(1);
+    await chart.locator('details summary').click();
+    await expect(chart.locator('table')).toBeVisible();
+    await expect(chart.locator('.ff-chart__table-scroll')).toHaveCSS('overflow-x', 'auto');
+  });
+
   test('Header: Logo sichtbar, Navigation nutzbar', async ({ page }) => {
     await page.goto('/');
     const logo = page.locator('header.header a.ff-brand img');
