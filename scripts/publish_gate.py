@@ -30,6 +30,16 @@ Prüfungen bestehen:
                                   Kaufabsicht darf niemals auf einem anderen
                                   Produkt landen." Deterministische Heilung
                                   läuft mit; was bleibt, blockiert.)
+  6. offenlegung_gate.py        – O1-O7: trägt die gebaute Seite ihre
+                                  artikelgenaue Werbekennzeichnung VOR dem
+                                  ersten Partnerlink, mit gezählter Zahl,
+                                  richtigen Partnern, Pflichtangaben und Weg
+                                  zur Offenlegung? (Auftrag Frank 28.09.2026
+                                  aus dem ZEIT-Vergleich: „artikelgenau und
+                                  noch sichtbarer – dauerhaft". Vorher konnte
+                                  ein Artikel mit falscher oder fehlender
+                                  Kennzeichnung live gehen, weil niemand die
+                                  Kennzeichnung gegen das Ergebnis prüfte.)
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -250,6 +260,41 @@ def affiliate_integrity_failures(candidates=None):
         per_slug.setdefault(slug, []).append(msg)
     if candidates is not None:
         per_slug = {slug: problems for slug, problems in per_slug.items()
+                    if slug in set(candidates)}
+    return per_slug, None, False
+
+
+def offenlegung_failures(candidates=None):
+    """Gate #6 (28.09.2026): Artikelgenaue Werbekennzeichnung im BUILD.
+
+    Auftrag Frank (ZEIT-Wettbewerbsvergleich „Unabhängigkeit/Kommerz"):
+    „Offenlegung artikelgenau und noch sichtbarer – dauerhaft."
+    „Dauerhaft" heißt an dieser Stelle: Ein Artikel darf nicht live gehen,
+    wenn seine Kennzeichnung fehlt, hinter dem ersten Werbelink steht oder
+    etwas anderes behauptet, als gebaut wurde (falsche Zahl, falscher
+    Partner). Geprüft wird das gebaute HTML – dieselbe Beweislogik wie
+    beim Render-Beweis AI4, gleiche Fail-closed-Regel:
+
+      Werkzeugfehler (kein public/, Detektor veraltet, Register unlesbar)
+      → (leer, Grund, True). main() stoppt dann OHNE Verwurf: Ein nicht
+      geführter Beweis ist kein Qualitätsmangel des Artikels.
+
+    Rückgabe: ({slug: [befunde]}, warnung|None, werkzeugfehler_bool)
+    """
+    data = _run_json(["scripts/offenlegung_gate.py", "--json", "--no-report"])
+    if not data:
+        return {}, ("Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein "
+                    "Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)"), True
+
+    per_slug = {}
+    for b in data.get("befunde", []):
+        seite = (b.get("seite") or "").strip("/")
+        if not seite.startswith("posts/"):
+            continue  # Ratgeber-/Registerbefunde betreffen keinen Kandidaten
+        slug = seite.split("/", 1)[1]
+        per_slug.setdefault(slug, []).append(f"[{b.get('vertrag')}] {b.get('detail')}")
+    if candidates is not None:
+        per_slug = {slug: probleme for slug, probleme in per_slug.items()
                     if slug in set(candidates)}
     return per_slug, None, False
 
@@ -611,6 +656,7 @@ def main():
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)
+    offen_fail, offen_warn, offen_tool_error = offenlegung_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
     keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
@@ -622,6 +668,8 @@ def main():
         print(f"⚠ {aff_warn}")
     if integ_warn:
         print(f"⚠ {integ_warn}")
+    if offen_warn:
+        print(f"⚠ {offen_warn}")
     if keyword_warn:
         print(f"⚠ {keyword_warn}")
     if readability_warn:
@@ -647,6 +695,22 @@ def main():
             log_event(module="publish_gate", action="intent_tool_error",
                       input={"candidates": candidates},
                       output={"reason": intent_warn}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
+    if offen_tool_error:
+        print("\n🛑 OFFENLEGUNG NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
+        print(f"   {offen_warn}")
+        print("   Diagnose: python3 scripts/offenlegung_gate.py --selftest")
+        print("             hugo --minify  (die Kennzeichnung wird im Build bewiesen)")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="offenlegung_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": offen_warn}, status="fail_closed")
         except Exception:
             pass
         return 1
@@ -680,6 +744,10 @@ def main():
         if slug in integ_fail:
             reasons.append("Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): "
                             + "; ".join(integ_fail[slug]))
+        if slug in offen_fail:
+            reasons.append("Werbekennzeichnung nicht bestanden (fehlt, steht hinter dem "
+                           "ersten Partnerlink oder nennt falsche Zahl/Partner): "
+                           + "; ".join(offen_fail[slug]))
         if slug in intent_fail:
             reasons.append("Affiliate-Intent nicht bestanden (Link liefert ein anderes "
                            "Produkt als Anker/Satz versprechen): "

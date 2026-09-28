@@ -1,0 +1,114 @@
+{{- /* ============================================================
+     ff_offenlegung.html – SICHTBARE WERBE-OFFENLEGUNG IM ARTIKELKOPF
+     ------------------------------------------------------------
+     AUFTRAG (Frank, 28.09.2026): „Offenlegung artikelgenau und noch
+     sichtbarer – dauerhaft auf Premium-Level einer Profi-Agentur.“
+     Herleitung, Messung und Datenvertrag stehen im SSOT-Partial
+     layouts/_partials/_funcs/affiliate_offenlegung.html.
+
+     DREI ENTSCHEIDUNGEN, DIE DIESES BAUTEIL AUSMACHEN:
+
+     1. ORT: direkt unter der Prüfzeile im Artikelkopf – also VOR der
+        Kurzantwort, vor dem Aufmacherbild und damit garantiert vor
+        dem ersten Partnerlink. Eine Offenlegung, die der Leser erst
+        nach dem Klick findet, ist Dokumentation, keine Offenlegung.
+        Das Gate O2 (scripts/offenlegung_gate.py) prüft diese
+        Reihenfolge im gebauten HTML – Dokumentposition des Bauteils
+        < Position des ersten /go/-Ankers.
+
+     2. AUSSAGE: gezählt statt gemutmaßt. „3 Partnerlinks in diesem
+        Artikel: CHECK24 (Stromtarife, Gastarife) und C24 Bank
+        (Tagesgeld)“ statt „kann Affiliate-Links enthalten“. Bei null
+        Partnerlinks steht die Gegenprobe – „Keine Partnerlinks“ –
+        sichtbar an derselben Stelle. Erst dieser Unterschied macht
+        die Kennzeichnung glaubwürdig: Wer immer dasselbe schreibt,
+        sagt nichts.
+
+     3. TIEFE OHNE LÄRM: Die Kernaussage ist immer sichtbar (summary),
+        die vollständige Erklärung – Vergütungsmodell, was die
+        Provision nicht beeinflusst, Belegwege – liegt eine Ebene
+        darunter im selben Dokument (details). Kein Seitenwechsel,
+        kein Overlay, für Suchmaschinen und Antwortmaschinen
+        vollständig im DOM.
+
+     A11Y: <details>/<summary> ist nativ tastaturbedienbar; der
+     Zustand steuert nur die Erklärtiefe, nie die Kennzeichnung.
+     Keine Inline-Farben (CLAUDE.md §4) – Klassen .ff-offenlegung*
+     liegen in assets/css/extended/z-premium-blog.css inkl. Dark Mode.
+
+     AUFRUF:
+       {{ partial "ff_offenlegung.html" . }}
+       {{ partial "ff_offenlegung.html" (dict "page" . "extraKeys" $keys) }}
+   ============================================================ */ -}}
+
+{{- $seite := . -}}
+{{- if reflect.IsMap . }}{{ with .page }}{{ $seite = . }}{{ end }}{{ end -}}
+{{- $off := partial "_funcs/affiliate_offenlegung.html" . -}}
+{{- /* Ratgeber-Zentrale & Übersichten sind kein „Artikel“ – die
+       Kennzeichnung benennt die Fläche, auf der sie steht. */ -}}
+{{- $wo := "auf dieser Seite" -}}
+{{- with $seite }}{{ if eq .Kind "page" }}{{ $wo = "in diesem Artikel" }}{{ end }}{{ end -}}
+{{- $transparenz := "transparenz/" | relURL -}}
+{{- $methodik := "methodik/" | relURL -}}
+
+{{- if $off.hat -}}
+<details class="ff-offenlegung"
+         data-ff-offenlegung="mit-partnerlinks"
+         data-ff-offenlegung-anzahl="{{ $off.anzahl }}"
+         data-ff-offenlegung-keys="{{ delimit $off.keys "," }}"
+         data-ff-offenlegung-partner="{{ delimit $off.partner "|" }}">
+  <summary class="ff-offenlegung__kopf">
+    <span class="ff-offenlegung__chip">Werbung</span>
+    <span class="ff-offenlegung__satz">
+      <strong>{{ $off.anzahl }} {{ cond (eq $off.anzahl 1) "Partnerlink" "Partnerlinks" }}</strong> {{ $wo }}:
+      {{ $off.partnerText }}. Provision nur bei Abschluss, für dich ohne Aufpreis.
+    </span>
+    <span class="ff-offenlegung__mehr">
+      <span class="ff-offenlegung__mehr-auf">Was das bedeutet</span>
+      <span class="ff-offenlegung__mehr-zu">Weniger anzeigen</span>
+      <svg class="ff-offenlegung__pfeil" viewBox="0 0 24 24" width="13" height="13" fill="none"
+           stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+    </span>
+  </summary>
+  <div class="ff-offenlegung__text">
+    <ul class="ff-offenlegung__liste">
+      {{- range $off.partner }}
+      {{- $liste := index $off.produkte . -}}
+      {{- $n := int (index $off.jePartner . | default 0) }}
+      <li>
+        <strong>{{ . }}</strong>
+        {{- with $liste }} – {{ delimit . ", " }}{{ end }}
+        <span class="ff-offenlegung__zahl">{{ $n }} {{ cond (eq $n 1) "Link" "Links" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+    <p>
+      Schließt du über einen dieser Links einen Vertrag ab, zahlt der Partner eine Provision
+      (Awin-Netzwerk). Dein Preis bleibt identisch – es gibt keinen Aufschlag für Leser dieser Seite.
+    </p>
+    <p>
+      <strong>Was die Provision nicht beeinflusst:</strong> welche Themen erscheinen, welche Tarife
+      empfohlen werden, in welcher Reihenfolge sie stehen und welche Zahlen im Text auftauchen.
+      Fällt ein Angebot im Vergleich durch, wird es nicht empfohlen – auch dann nicht, wenn es
+      vergütet würde. Alle Ratgeber sind ohne einen einzigen Klick auf einen Partnerlink vollständig nutzbar.
+    </p>
+    <p class="ff-offenlegung__wege">
+      <a href="{{ $transparenz }}">Wie sich FranksFinanzcheck finanziert</a>
+      <a href="{{ $methodik }}">So arbeiten wir</a>
+    </p>
+  </div>
+</details>
+{{- else -}}
+<p class="ff-offenlegung ff-offenlegung--frei"
+   data-ff-offenlegung="ohne-partnerlinks"
+   data-ff-offenlegung-anzahl="0"
+   data-ff-offenlegung-keys=""
+   data-ff-offenlegung-partner="">
+  <span class="ff-offenlegung__chip ff-offenlegung__chip--frei">Werbefrei</span>
+  <span class="ff-offenlegung__satz">
+    <strong>Keine Partnerlinks</strong> {{ $wo }} – an diesem Text verdient FranksFinanzcheck nichts.
+  </span>
+  <a class="ff-offenlegung__link" href="{{ $transparenz }}">Wie wir uns finanzieren</a>
+</p>
+{{- end -}}

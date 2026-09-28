@@ -53,6 +53,12 @@
       <span>·</span>
       <span class="ff-pc-badge">Geprüfter Praxis-Leitfaden</span>
     </div>
+    {{- /* ARTIKELGENAUE WERBE-OFFENLEGUNG (28.09.2026): gilt für die
+           Ratgeber-Ringe genauso wie für Artikel – sie tragen die
+           umsatznächsten CTAs der Site. Vertrag:
+           layouts/_partials/ff_offenlegung.html, Wache:
+           scripts/offenlegung_gate.py (O1–O7). */ -}}
+    {{- partial "ff_offenlegung.html" . }}
   </header>
 
   {{- /* Premium Lesehilfen: Vorlesen + Kurzfassung (03.09.2026) */ -}}

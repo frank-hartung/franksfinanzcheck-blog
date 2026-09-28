@@ -27,6 +27,32 @@
 {{- $topics := dict "strom-sparen" (slice "Stromanbieter wechseln" "Gaspreisgarantien" "Stromfresser im Standby" "Heizkosten senken") "internet-dsl" (slice "DSL-Wechselbonus" "WLAN optimieren" "DNS-Tuning" "Günstige Handytarife") "versicherungen" (slice "Privathaftpflicht" "Wohngebäude & Hausrat" "Kfz-Versicherungswechsel" "Zahnzusatz") "konto-karten" (slice "Kostenloses Girokonto" "C24 Bank Vergleich" "Kreditkarten ohne Jahresgebühr" "Tagesgeld-Zinsen") "frugalismus" (slice "50–30–20-Regel" "Notgroschen aufbauen" "Ausgaben-Tracking" "Konsum-Gewohnheiten") "mietwagen" (slice "Mietwagen ohne Kautionsfalle" "Vollkasko ohne Selbstbeteiligung" "Günstige Flüge" "Last-Minute-Buchung") }}
 {{- $ctas := dict "strom-sparen" (dict "url" "/go/strom/" "text" "Stromtarife vergleichen") "internet-dsl" (dict "url" "/go/dsl/" "text" "DSL-Tarife vergleichen") "versicherungen" (dict "url" "/go/haftpflicht/" "text" "Haftpflicht vergleichen") "konto-karten" (dict "url" "/go/girokonto/" "text" "C24 Bank Girokonto ansehen") "frugalismus" (dict "url" "/go/tagesgeld/" "text" "C24 Bank Tagesgeld ansehen") "mietwagen" (dict "url" "/go/mietwagen/" "text" "Mietwagen vergleichen") }}
 
+{{- /* ---------- ARTIKELGENAUE WERBE-OFFENLEGUNG (28.09.2026) ----------
+       Die Ratgeber-Zentrale trägt die umsatznächsten Knöpfe der Site
+       (6 Karten-CTAs + 6 Zeilen der Spar-Matrix). Ihre Affiliate-Links
+       stehen im LAYOUT, nicht im Markdown – `.Content` kann sie also
+       nicht zählen. Deshalb baut diese Liste exakt die Ziele nach, die
+       unten auch wirklich gerendert werden; `extraKeys` übergibt sie an
+       den Offenlegungs-SSOT (ein Eintrag je Knopf).
+       Drift zwischen dieser Liste und dem tatsächlich gebauten HTML
+       meldet O3 der Wache scripts/offenlegung_gate.py – die Zahl in der
+       Offenlegung kann also nie leise falsch werden. */ -}}
+{{- $ffGoKeys := slice -}}
+{{- range $pillars -}}
+  {{- $k := . -}}
+  {{- with site.GetPage (printf "pillar/%s" $k) -}}
+    {{- with index $ctas $k -}}
+      {{- $ffGoKeys = $ffGoKeys | append (strings.TrimSuffix "/" (strings.TrimPrefix "/go/" .url)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Spar-Matrix: sechs feste Zeilen, identische Ziele wie die Karten. */ -}}
+{{- range (slice "strom-sparen" "internet-dsl" "versicherungen" "konto-karten" "frugalismus" "mietwagen") -}}
+  {{- with index $ctas . -}}
+    {{- $ffGoKeys = $ffGoKeys | append (strings.TrimSuffix "/" (strings.TrimPrefix "/go/" .url)) -}}
+  {{- end -}}
+{{- end -}}
+
 <header class="ff-pillar-hero">
   <div class="ff-pillar-hero__badge">
     <span aria-hidden="true">🧭</span> DIE GROSSEN THEMENWELTEN · FRANKSFINANZCHECK
@@ -52,6 +78,7 @@
       <span aria-hidden="true">🔄</span> <strong>Stand: August 2026 geprüft</strong>
     </div>
   </div>
+  {{- partial "ff_offenlegung.html" (dict "page" . "extraKeys" $ffGoKeys) }}
 </header>
 
 {{- /* ---------- Schnellnavigation / Filter-Leiste ---------- */ -}}

@@ -157,4 +157,70 @@ test.describe('Affiliate-Integrität', () => {
 
     expect(probleme, 'Jeder gemessene CTA trägt eine vollständige Messsignatur').toEqual([]);
   });
+  // ============================================================
+  //  WERBE-OFFENLEGUNG (28.09.2026, Auftrag „artikelgenau und noch
+  //  sichtbarer – dauerhaft"): Das statische Gate
+  //  scripts/offenlegung_gate.py beweist Inhalt und Reihenfolge im
+  //  HTML. Was es NICHT sehen kann, ist der Browser: ob die
+  //  Kennzeichnung nach dem CSS-Lauf tatsächlich sichtbar im
+  //  Viewport-Fluss steht, oberhalb des ersten Werbelinks liegt und
+  //  eine lesbare Schriftgröße hat. Genau dieser Teil verschwindet
+  //  bei einem CSS-Refactoring lautlos – deshalb hier als
+  //  Browser-Wahrheit.
+  // ============================================================
+  test('Werbe-Offenlegung: sichtbar, lesbar und oberhalb des ersten Partnerlinks', async ({ page, request, baseURL }) => {
+    const articlePath = await newestAffiliateArticle(page, request, baseURL);
+    test.skip(!articlePath, 'Kein aktueller Artikel mit Affiliate-Links auf der Startseite');
+    await page.goto(articlePath);
+
+    const box = page.locator('[data-ff-offenlegung]').first();
+    await expect(box, 'Artikel trägt eine Werbekennzeichnung').toHaveCount(1);
+    await expect(box, 'Kennzeichnung ist sichtbar (nicht ausgeblendet)').toBeVisible();
+
+    // Artikelgenau: die genannte Zahl ist die gezählte Zahl.
+    const angegeben = Number(await box.getAttribute('data-ff-offenlegung-anzahl'));
+    const gezaehlt = await page.locator('a[href*="/go/"]').count();
+    expect(angegeben, 'Kennzeichnung nennt die tatsächliche Zahl der Partnerlinks').toBe(gezaehlt);
+
+    // Sichtbarer Text statt Datenattribut: Partner, Werbung, Provision, kein Aufpreis.
+    const text = (await box.innerText()).toLowerCase();
+    for (const pflicht of ['werbung', 'partnerlink', 'provision']) {
+      expect(text, `Kennzeichnung nennt „${pflicht}"`).toContain(pflicht);
+    }
+    expect(text, 'Kennzeichnung sagt, dass kein Aufpreis entsteht')
+      .toMatch(/ohne aufpreis|keine mehrkosten/);
+    for (const partner of (await box.getAttribute('data-ff-offenlegung-partner') || '').split('|').filter(Boolean)) {
+      expect(text, `Partner „${partner}" steht im sichtbaren Text`).toContain(partner.toLowerCase());
+    }
+
+    // Lesbarkeit: keine Mini-Schrift, kein Kontrast-Trick über opacity.
+    const stil = await box.evaluate((el) => {
+      const cs = getComputedStyle(el.querySelector('.ff-offenlegung__satz') || el);
+      return { size: parseFloat(cs.fontSize), opacity: parseFloat(getComputedStyle(el).opacity) };
+    });
+    expect(stil.size, 'Kennzeichnung ist mindestens 12px groß').toBeGreaterThanOrEqual(12);
+    expect(stil.opacity, 'Kennzeichnung ist nicht transparent gestellt').toBeGreaterThan(0.9);
+
+    // Reihenfolge im Layout: Kennzeichnung steht ÜBER dem ersten Partnerlink.
+    const oben = await box.boundingBox();
+    const ersterLink = await page.locator('a[href*="/go/"]').first().boundingBox();
+    expect(oben, 'Kennzeichnung hat eine Fläche im Layout').not.toBeNull();
+    expect(ersterLink, 'Partnerlink hat eine Fläche im Layout').not.toBeNull();
+    expect(oben.y, 'Kennzeichnung liegt über dem ersten Partnerlink').toBeLessThan(ersterLink.y);
+
+    // Der Weg zur vollständigen Offenlegung funktioniert wirklich.
+    const ziel = box.locator('a[href*="/transparenz/"]').first();
+    await expect(ziel, 'Kennzeichnung verlinkt /transparenz/').toHaveCount(1);
+    const res = await request.get(toLocal(await ziel.getAttribute('href'), baseURL));
+    expect(res.status(), '/transparenz/ ist erreichbar').toBe(200);
+  });
+
+  test('Ratgeber-Zentrale /pillar/ ist ebenso gekennzeichnet', async ({ page }) => {
+    await page.goto('/pillar/');
+    const box = page.locator('[data-ff-offenlegung]').first();
+    await expect(box, 'Ratgeber-Zentrale trägt eine Werbekennzeichnung').toBeVisible();
+    const angegeben = Number(await box.getAttribute('data-ff-offenlegung-anzahl'));
+    const gezaehlt = await page.locator('a[href*="/go/"]').count();
+    expect(angegeben, 'Zahl der Kennzeichnung = Zahl der Partner-Knöpfe').toBe(gezaehlt);
+  });
 });

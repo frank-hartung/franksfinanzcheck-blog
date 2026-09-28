@@ -1,0 +1,169 @@
+{{- /* ============================================================
+     _funcs/affiliate_offenlegung.html – ARTIKELGENAUE OFFENLEGUNG (SSOT)
+     ------------------------------------------------------------
+     AUFTRAG (Frank, 28.09.2026, aus dem ZEIT-Wettbewerbsvergleich
+     „Unabhängigkeit/Kommerz | ZEIT 5 | FF 4“):
+       „FF hat Affiliate-Governance; Offenlegung sollte artikelgenau
+        und noch sichtbarer sein. Bitte dauerhaft auf Premium-Level
+        einer Profi-Agentur heben.“
+
+     BEFUND VOR DIESEM PARTIAL:
+       * Die einzige dauerhafte Offenlegung stand in der Trust-Box am
+         ARTIKELENDE und war eine Möglichkeitsform: „Dieser Artikel
+         KANN Affiliate-Links enthalten (CHECK24, Tarifcheck)“ – auf
+         jeder Seite derselbe Satz, unabhängig davon, ob der Text null,
+         einen oder fünf Partnerlinks führt, und mit Partnernamen, die
+         im Artikel gar nicht vorkommen mussten.
+       * Der einzige artikelnahe Hinweis war ein kursiver Satz im
+         Fließtext neben den CTA-Boxen. Messung im gebauten HTML
+         (28.09.2026): in nur 21 von 48 Artikeln stand er VOR dem
+         ersten Partnerlink – in 27 Artikeln las der Leser zuerst den
+         Werbelink und danach die Offenlegung.
+       * „Kann enthalten“ ist keine Offenlegung, sondern eine
+         Absicherung. ZEIT-Niveau heißt: Wer bezahlt, wofür, in
+         welchem Umfang – vor dem ersten kommerziellen Kontakt.
+
+     WAS DIESES PARTIAL LIEFERT (eine Wahrheit, drei Ausspielwege):
+       1. layouts/_partials/ff_offenlegung.html – sichtbare Zeile im
+          Artikelkopf, VOR dem ersten Partnerlink.
+       2. layouts/_partials/trust_box.html      – Abbinder am Artikelende,
+          jetzt mit derselben artikelgenauen Zahl statt „kann enthalten“.
+       3. layouts/_partials/schema_article.html – maschinenlesbares
+          Signal für Antwortmaschinen (GEO).
+     Ein Pflegeort, keine Drift zwischen sichtbarer und maschineller
+     Aussage – dieselbe Bauweise wie article_dates.html (Datums-SSOT).
+
+     DATENHERKUNFT – nichts wird behauptet, alles wird gezählt:
+       * Partnerlinks: die GERENDERTEN /go/<key>/-Anker der Seite
+         (`.Content`). Damit zählen auch Shortcode-CTAs
+         (tarifvergleich, einspartabelle) mit, die nie durch die
+         Markdown-Pipeline laufen – und Links, die der Publikations-
+         Guard zu Klartext degradiert hat, zählen korrekt NICHT mit.
+       * Partnername/Produkt je Schlüssel: data/affiliate_ziele.yaml
+         (gebacken aus scripts/affiliate_intent_contract.py, Drift
+         prüft IW0 der Intent-Wache). Kein zweites Namensregister.
+
+     AUFRUF:
+       {{ $off := partial "_funcs/affiliate_offenlegung.html" . }}
+       {{ $off := partial "_funcs/affiliate_offenlegung.html"
+            (dict "page" . "extraKeys" (slice "strom" "dsl")) }}
+       `extraKeys` ist für Template-CTAs außerhalb von `.Content`
+       gedacht (Ratgeber-Zentrale /pillar/: die Karten- und
+       Spar-Matrix-Buttons stehen im Layout, nicht im Markdown) –
+       ein Eintrag je gerendertem Button, damit die Zahl stimmt.
+
+     RÜCKGABE (dict):
+       hat          bool    – mindestens ein Partnerlink auf der Seite
+       anzahl       int     – Anzahl der Partnerlinks (Vorkommen, nicht Ziele)
+       keys         slice   – /go/-Schlüssel, Reihenfolge des Auftretens
+       partner      slice   – Partnernamen in Reihenfolge des Auftretens
+       produkte     dict    – Partnername → Produktliste
+       jePartner    dict    – Partnername → Anzahl Links auf dieser Seite
+       partnerText  string  – „CHECK24 (Stromtarife, Gastarife) und C24 Bank (Tagesgeld)“
+       satz         string  – „3 Partnerlinks in diesem Artikel: … .“
+       kurz         string  – Kurzform für enge Flächen (Trust-Box)
+   ============================================================ */ -}}
+
+{{- $seite := . -}}
+{{- $extra := slice -}}
+{{- if reflect.IsMap . -}}
+  {{- with .page }}{{ $seite = . }}{{ end -}}
+  {{- with .extraKeys }}{{ $extra = . }}{{ end -}}
+{{- end -}}
+
+{{- /* ---------- 1. Partnerlinks der Seite zählen ---------- */ -}}
+{{- $html := "" -}}
+{{- with $seite -}}
+  {{- with .Content }}{{ $html = printf "%s" . }}{{ end -}}
+{{- end -}}
+{{- $roh := slice -}}
+{{- range findRESubmatch `href="/go/([a-z0-9][a-z0-9-]*)` $html -}}
+  {{- $roh = $roh | append (index . 1) -}}
+{{- end -}}
+{{- range $extra -}}
+  {{- $roh = $roh | append . -}}
+{{- end -}}
+{{- $anzahl := len $roh -}}
+
+{{- /* ---------- 2. Ziele entdoppeln (Reihenfolge = Lesereihenfolge) ---------- */ -}}
+{{- $keys := slice -}}
+{{- range $roh -}}
+  {{- if not (in $keys .) }}{{ $keys = $keys | append . }}{{ end -}}
+{{- end -}}
+
+{{- /* ---------- 3. Partner/Produkt aus der Angebots-Wahrheit ---------- */ -}}
+{{- $ziele := dict -}}
+{{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
+  {{- with .ziele }}{{ $ziele = . }}{{ end -}}
+{{- end -}}
+{{- $partner := slice -}}
+{{- $produkte := dict -}}
+{{- $zuordnung := dict -}}
+{{- range $keys -}}
+  {{- $name := "" -}}
+  {{- $produkt := "" -}}
+  {{- with index $ziele . -}}
+    {{- with .partner }}{{ $name = . }}{{ end -}}
+    {{- with .produkt }}{{ $produkt = . }}{{ end -}}
+  {{- end -}}
+  {{- /* Unbekannter Schlüssel: nie erfinden. Der Schlüssel selbst ist die
+         ehrlichste Aussage – und das Offenlegungs-Gate (O3) meldet ihn. */ -}}
+  {{- if not $name }}{{ $name = printf "Partner (%s)" . }}{{ end -}}
+  {{- /* Produktname kürzen, wo er den Partner wiederholt: aus
+         „C24 Bank (Tagesgeld der C24 Bank)“ wird „C24 Bank (Tagesgeld)“.
+         Reine Lesbarkeit – die Zuordnung bleibt unverändert. */ -}}
+  {{- $produkt = strings.TrimSuffix (printf " der %s" $name) $produkt -}}
+  {{- $produkt = strings.TrimPrefix (printf "%s-" $name) $produkt -}}
+  {{- if not (in $partner $name) }}{{ $partner = $partner | append $name }}{{ end -}}
+  {{- $liste := index $produkte $name | default slice -}}
+  {{- if and $produkt (not (in $liste $produkt)) }}{{ $liste = $liste | append $produkt }}{{ end -}}
+  {{- $produkte = merge $produkte (dict $name $liste) -}}
+  {{- $zuordnung = merge $zuordnung (dict . $name) -}}
+{{- end -}}
+
+{{- /* Links JE PARTNER – „CHECK24 · 2 Links“ ist die Aussage, die ein
+       Leser prüfen kann; eine Gesamtzahl allein ist sie nicht. */ -}}
+{{- $jePartner := dict -}}
+{{- range $roh -}}
+  {{- $name := index $zuordnung . -}}
+  {{- with $name -}}
+    {{- $jePartner = merge $jePartner (dict . (add (int (index $jePartner . | default 0)) 1)) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* ---------- 4. Lesbare Aufzählung („A (x, y) und B (z)“) ---------- */ -}}
+{{- $teile := slice -}}
+{{- range $partner -}}
+  {{- $liste := index $produkte . -}}
+  {{- if gt (len $liste) 0 -}}
+    {{- $teile = $teile | append (printf "%s (%s)" . (delimit $liste ", ")) -}}
+  {{- else -}}
+    {{- $teile = $teile | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $partnerText := delimit $teile ", " " und " -}}
+{{- $partnerKurz := delimit $partner ", " " und " -}}
+
+{{- $wort := cond (eq $anzahl 1) "Partnerlink" "Partnerlinks" -}}
+{{- $satz := "" -}}
+{{- $kurz := "" -}}
+{{- if gt $anzahl 0 -}}
+  {{- $satz = printf "%d %s in diesem Artikel: %s." $anzahl $wort $partnerText -}}
+  {{- $kurz = printf "%d %s zu %s." $anzahl $wort $partnerKurz -}}
+{{- else -}}
+  {{- $satz = "Keine Partnerlinks in diesem Artikel." -}}
+  {{- $kurz = $satz -}}
+{{- end -}}
+
+{{- return dict
+      "hat"         (gt $anzahl 0)
+      "anzahl"      $anzahl
+      "keys"        $keys
+      "partner"     $partner
+      "produkte"    $produkte
+      "jePartner"   $jePartner
+      "partnerText" $partnerText
+      "partnerKurz" $partnerKurz
+      "satz"        $satz
+      "kurz"        $kurz
+-}}

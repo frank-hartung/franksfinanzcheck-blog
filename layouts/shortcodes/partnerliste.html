@@ -1,0 +1,71 @@
+{{- /* ============================================================
+     partnerliste – VOLLSTÄNDIGES PARTNERREGISTER (Transparenzseite)
+     ------------------------------------------------------------
+     Aufruf im Markdown (ohne Parameter): Shortcode `partnerliste`
+
+     WARUM GENERIERT STATT GETIPPT (28.09.2026):
+     Eine Transparenzseite, die Partner von Hand aufzählt, ist genau
+     so lange wahr, bis jemand eine neue /go/-Route freischaltet und
+     das Nachtragen vergisst. Genau dieser Verzug ist der typische
+     Offenlegungs-Verstoß – nicht die böse Absicht. Deshalb liest
+     diese Liste dieselbe Datei, aus der die Links ihre Ziele
+     beziehen: data/affiliate_ziele.yaml (gebacken aus dem Intent-
+     Kontrakt scripts/affiliate_intent_contract.py).
+
+     Folge: Eine neue Route erscheint automatisch auf /transparenz/.
+     O7 der Wache scripts/offenlegung_gate.py prüft zusätzlich im
+     gebauten HTML, dass JEDER Partner und JEDER Produktbereich des
+     Registers hier auch wirklich steht – eine stille Lücke zwischen
+     beworbenem Ziel und offengelegtem Partner ist damit unmöglich.
+
+     Netzwerk-Zuordnung: `netz` benennt das Partnerprogramm
+     (check24 = CHECK24-Partnerprogramm inkl. C24 Bank,
+     tarifcheck = Tarifcheck-Partnerprogramm); die Abrechnung beider
+     Programme läuft über das Awin-Netzwerk (siehe /impressum/).
+   ============================================================ */ -}}
+{{- $ziele := dict -}}
+{{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
+  {{- with .ziele }}{{ $ziele = . }}{{ end -}}
+{{- end -}}
+{{- $programme := dict "check24" "CHECK24-Partnerprogramm (Awin)" "tarifcheck" "Tarifcheck-Partnerprogramm (Awin)" -}}
+{{- $partner := slice -}}
+{{- $produkte := dict -}}
+{{- $netze := dict -}}
+{{- range $key, $z := $ziele -}}
+  {{- $name := $z.partner | default (printf "Partner (%s)" $key) -}}
+  {{- if not (in $partner $name) }}{{ $partner = $partner | append $name }}{{ end -}}
+  {{- $liste := index $produkte $name | default slice -}}
+  {{- with $z.produkt -}}
+    {{- if not (in $liste .) }}{{ $liste = $liste | append . }}{{ end -}}
+  {{- end -}}
+  {{- $produkte = merge $produkte (dict $name $liste) -}}
+  {{- $netze = merge $netze (dict $name (index $programme ($z.netz | default "") | default "Awin-Netzwerk")) -}}
+{{- end -}}
+<div class="ff-partnerliste">
+  <table class="ff-partnerliste__tabelle">
+    <thead>
+      <tr>
+        <th scope="col">Partner</th>
+        <th scope="col">Vermittelte Bereiche</th>
+        <th scope="col">Programm / Netzwerk</th>
+        <th scope="col">Vergütung</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range (sort $partner) }}
+      <tr>
+        <th scope="row">{{ . }}</th>
+        <td>{{ delimit (sort (index $produkte .)) ", " }}</td>
+        <td>{{ index $netze . }}</td>
+        <td>Provision erst bei Abschluss · kein Aufpreis für dich</td>
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+  <p class="ff-partnerliste__stand">
+    Stand dieser Liste: automatisch erzeugt aus dem geprüften Zielregister
+    (<code>data/affiliate_ziele.yaml</code>) beim letzten Seitenbau am
+    {{ now.Format "02.01.2006" }} · {{ len $ziele }} freigeschaltete Weiterleitungen,
+    {{ len $partner }} Partner.
+  </p>
+</div>
