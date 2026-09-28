@@ -794,7 +794,9 @@ def main():
             if m.get(slug, {}).get("title") != title or design_drift:
                 manifest_set(slug, title, design=design)
     bc = bv = 0
-    if not nur_pillars:
+    # Ein gezielter Artikel-Lauf darf nicht nebenbei das globale Brand-Cover
+    # neu rendern. Das machte `check_covers --fix` unnötig nicht-idempotent.
+    if not nur_pillars and (not only_slug or only_slug == BRAND_COVER_SLUG):
         bc, bv = ensure_brand_cover(force=force)
         covers += bc
         variants += bv

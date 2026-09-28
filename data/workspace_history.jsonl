@@ -36,3 +36,8 @@
 {"date": "2026-09-15", "mode": "FIX", "junk": 0, "orphans": 0, "dups": 71, "heavy": 5, "git_mb": 36.0}
 {"date": "2026-09-15", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 71, "heavy": 5, "git_mb": 41.0}
 {"date": "2026-09-15", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 71, "heavy": 5, "git_mb": 41.0}
+{"date": "2026-09-28", "mode": "FIX", "junk": 0, "orphans": 189, "dups": 162, "heavy": 6, "git_mb": 39.0}
+{"date": "2026-09-28", "mode": "FIX", "junk": 0, "orphans": 7, "dups": 108, "heavy": 5, "git_mb": 38.0}
+{"date": "2026-09-28", "mode": "FIX", "junk": 0, "orphans": 328, "dups": 108, "heavy": 5, "git_mb": 38.0}
+{"date": "2026-09-28", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 4, "heavy": 5, "git_mb": 38.0}
+{"date": "2026-09-28", "mode": "REPORT", "junk": 0, "orphans": 0, "dups": 4, "heavy": 5, "git_mb": 38.0}

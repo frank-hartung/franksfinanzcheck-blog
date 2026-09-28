@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-09-28T12:00:17+00:00",
+  "generatedAt": "2026-09-28T23:16:10+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -639,7 +639,7 @@
       "decoding": "async"
     },
     "/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/": {
-      "image": "images/covers/2026-09-13-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor.jpg",
+      "image": "images/covers/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

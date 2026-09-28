@@ -71,10 +71,6 @@
    "savings": ""
   }
  },
- "_index": {
-  "title": "Blog",
-  "ts": "2026-08-19T15:21:06+00:00"
- },
  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
   "title": "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren",
   "ts": "2026-09-25T22:34:44+00:00",
@@ -282,120 +278,12 @@
    "savings": ""
   }
  },
- "2026-09-08-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-  "title": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-  "ts": "2026-09-08T11:44:10+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-08-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-08T11:21:09+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
   "title": "Notgroschen: Die Wahrheit über das finanzielle Polster",
   "ts": "2026-09-09T08:19:31+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-09-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-  "title": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
-  "ts": "2026-09-09T16:43:34+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-09-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-  "title": "Günstig durch den Winter: Heizungs-Check im Spätsommer",
-  "ts": "2026-09-09T11:29:48+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-09-mietwagen-abzocke-vermeiden-profi-tricks-fuer": {
-  "title": "Mietwagen-Abzocke vermeiden: 7 Profi-Tricks im Urlaub",
-  "ts": "2026-09-09T15:19:30+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
- "2026-09-09-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-  "title": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-  "ts": "2026-09-09T16:42:39+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-09-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-09T16:42:42+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-10-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-  "title": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
-  "ts": "2026-09-10T08:27:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-10-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-  "title": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-  "ts": "2026-09-10T08:27:48+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-10-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-  "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
-  "ts": "2026-09-10T08:27:51+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-10-frugalismus-im-alltag-mehr-freiheit-durch-5-einfache-tricks": {
-  "title": "Frugalismus im Alltag: Mehr Freiheit durch 5 einfache Tricks",
-  "ts": "2026-09-10T08:27:54+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-10-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-  "title": "Günstig durch den Winter: Heizungs-Check im Spätsommer",
-  "ts": "2026-09-10T08:27:57+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
@@ -444,30 +332,12 @@
    "savings": ""
   }
  },
- "2026-09-11-reisekasse-fuellen-praxistipps-fuer-dein-urlaubsbudget": {
-  "title": "Reisekasse füllen: Praxistipps für dein Urlaubsbudget",
-  "ts": "2026-09-11T11:30:06+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
  "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
   "title": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
   "ts": "2026-09-11T11:30:09+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-11-so-nutzt-du-die-50-30-20-regel-wohin-mit-dem-gehalt": {
-  "title": "So nutzt du die 50-30-20-Regel: Wohin mit dem Gehalt?",
-  "ts": "2026-09-11T17:56:15+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  },
@@ -527,181 +397,10 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-28T10:43:39+00:00",
+  "ts": "2026-09-28T23:14:54+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
-   "savings": ""
-  }
- },
- "2026-09-13-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-13T08:29:10+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-13-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-  "ts": "2026-09-13T08:29:13+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-14-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-  "ts": "2026-09-14T09:08:54+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-14-finanzplan-mit-der-50-30-20-regel-wohin-mit-dem-gehalt": {
-  "title": "Finanzplan mit der 50-30-20-Regel: Wohin mit dem Gehalt?",
-  "ts": "2026-09-14T12:53:22+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-09-15-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-  "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
-  "ts": "2026-09-15T12:25:23+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-15-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-15T12:21:30+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-15-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-15T12:21:33+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-15-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-  "ts": "2026-09-15T12:21:36+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-16-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
-  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
-  "ts": "2026-09-16T08:48:07+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-16-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-  "title": "Finanzieller Puffer: Wie viel Notgroschen ist genug?",
-  "ts": "2026-09-16T08:48:10+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-16-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-16T08:48:13+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-17-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
-  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
-  "ts": "2026-09-17T08:51:38+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-17-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-17T08:51:41+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-17-gasrechnung-senken-deine-strategie-fuer-den-winter-2026": {
-  "title": "Gasrechnung senken: Deine Strategie für den Winter 2026",
-  "ts": "2026-09-17T08:51:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-18-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-  "ts": "2026-09-18T08:29:09+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-18-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-18T08:29:12+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-18-budgeting-ohne-frust-die-50-30-20-regel-im-check-2026": {
-  "title": "Budgeting ohne Frust: Die 50-30-20-Regel im Check 2026",
-  "ts": "2026-09-18T08:29:16+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-18-gasrechnung-senken-clevere-herbst-vorbereitung-im-check": {
-  "title": "Gasrechnung senken: Clevere Herbst Vorbereitung im Check",
-  "ts": "2026-09-18T08:29:19+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-18-gasrechnung-senken-dein-strategieplan-im-spaetsommer": {
-  "title": "Gasrechnung senken: Dein Strategieplan im Spätsommer",
-  "ts": "2026-09-18T08:29:23+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
@@ -724,17 +423,8 @@
   }
  },
  "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-  "title": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
-  "ts": "2026-09-20T08:52:49+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-20-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-20T08:52:52+00:00",
+  "title": "Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden",
+  "ts": "2026-09-28T23:16:10+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -786,24 +476,6 @@
    "savings": "bis zu 2.000 € sparen"
   }
  },
- "2026-09-21-gasrechnung-senken-warum-ich-meine-heizung-im-august-pruefe": {
-  "title": "Gasrechnung senken: Warum ich meine Heizung im August prüfe",
-  "ts": "2026-09-21T09:12:21+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-22-50-30-20-im-test-warum-dein-budget-2026-ein-update-braucht": {
-  "title": "50-30-20 im Test: Warum dein Budget 2026 ein Update braucht",
-  "ts": "2026-09-22T08:48:12+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "title": "7 Gewohnheiten für finanzielle Freiheit",
   "ts": "2026-09-22T09:23:24+00:00",
@@ -822,84 +494,12 @@
    "savings": ""
   }
  },
- "2026-09-23-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
-  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-23T08:47:38+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-23-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-23T08:47:41+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-23-stromfresser-finden-so-stoppst-du-teure": {
-  "title": "Stromfresser finden: So stoppst du teure Energiefresser",
-  "ts": "2026-09-23T09:00:23+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag": {
   "title": "5 einfache Frugalismus-Tricks für den Alltag",
   "ts": "2026-09-23T13:31:11+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-24-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
-  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-24T08:42:53+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-24-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-24T08:42:56+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-25-50-30-20-regel-dein-finanz-kompass-fuer-das-jahr-2026": {
-  "title": "50-30-20-Regel: Dein Finanz-Kompass für das Jahr 2026",
-  "ts": "2026-09-25T09:05:56+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-25-stromfresser-finden-so-senkst-du-deine-stromrechnung-massiv": {
-  "title": "Stromfresser finden: So senkst du deine Stromrechnung massiv",
-  "ts": "2026-09-25T09:05:59+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-25-stromfresser-finden-so-stoppst-du-die-energie-lecks": {
-  "title": "Stromfresser finden: So stoppst du die Energie-Lecks",
-  "ts": "2026-09-25T09:06:01+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
@@ -945,6 +545,15 @@
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
+  "title": "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan für den Start",
+  "ts": "2026-09-28T23:14:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }

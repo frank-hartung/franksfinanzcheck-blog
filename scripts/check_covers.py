@@ -38,6 +38,12 @@ VARIANTS = [
 ]
 
 
+def content_slug(path):
+    """Kanonischer Slug einer Content-Datei (Bundle oder einzelne Markdown-Datei)."""
+    base = os.path.basename(path)
+    return os.path.basename(os.path.dirname(path)) if base == "index.md" else os.path.splitext(base)[0]
+
+
 def collect_covers():
     """Alle cover.image-Pfade aus Posts + Pillar-Seiten."""
     covers = []
@@ -50,7 +56,8 @@ def collect_covers():
             if m:
                 tm = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
                 title = (tm.group(1).strip() if tm else "").strip('"')
-                covers.append({"file": f, "image": m.group(1).strip(), "title": title})
+                covers.append({"file": f, "image": m.group(1).strip(), "title": title,
+                               "source_slug": content_slug(f)})
     return covers
 
 
@@ -244,6 +251,8 @@ def check_stale(covers):
         if m_title and f_title and m_title != f_title:
             stale.append({
                 "file": c["file"], "slug": slug,
+                "source_slug": c.get("source_slug", slug),
+                "image": c["image"],
                 "manifest_title": m_title, "frontmatter_title": f_title,
             })
     return stale
@@ -365,6 +374,7 @@ def check_text_fit(covers):
         if not (ok_w and ok_h):
             why = "Breite" if not ok_w else "Höhe"
             problems.append({"file": c["file"], "slug": slug,
+                             "source_slug": c.get("source_slug", slug),
                              "reason": f"Cover-Text {why}: {len(lines)} Zeilen, "
                                        f"Block {block_h}px"})
     return problems
@@ -403,10 +413,27 @@ def main():
             print(f"{len(stale)} Cover mit veraltetem Text – generiere neu …")
             gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
             for s in stale:
-                print(f"  → {s['slug']}: '{s['manifest_title']}' ≠ "
+                target_slug = s.get("source_slug") or s["slug"]
+                print(f"  → {target_slug}: '{s['manifest_title']}' ≠ "
                       f"'{s['frontmatter_title']}'")
-                subprocess.run([sys.executable, gen, "--slug", s["slug"], "--force"],
-                               cwd=BLOG_DIR, check=False)
+                # Ein älteres Cover darf nach einer Umbenennung noch einen
+                # abweichenden Dateislug tragen. generate_covers filtert aber
+                # nach dem Content-Slug. Vor dem Neubau deshalb die Referenz
+                # kanonisieren; andernfalls läuft --fix grünlos ins Leere.
+                if target_slug != s["slug"]:
+                    old_image = s["image"]
+                    new_image = os.path.join(os.path.dirname(old_image),
+                                             f"{target_slug}.jpg").replace(os.sep, "/")
+                    text = open(s["file"], encoding="utf-8").read()
+                    if old_image in text:
+                        text = text.replace(old_image, new_image, 1)
+                        open(s["file"], "w", encoding="utf-8").write(text)
+                result = subprocess.run(
+                    [sys.executable, gen, "--slug", target_slug],
+                    cwd=BLOG_DIR, check=False)
+                if result.returncode:
+                    print(f"  ❌ Cover-Generator für {target_slug} scheiterte "
+                          f"(Exit {result.returncode}).")
             covers = collect_covers()
             stale = check_stale(covers)
         if brand_bad:
@@ -414,8 +441,8 @@ def main():
             gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
             for it, warum in brand_bad:
                 print(f"  → {it.get('slug', it['file'])}: {warum}")
-                subprocess.run([sys.executable, gen, "--slug", it.get("slug",
-                                   os.path.splitext(os.path.basename(it["image"]))[0]), "--force"],
+                subprocess.run([sys.executable, gen, "--slug", it.get("source_slug") or it.get("slug",
+                                   os.path.splitext(os.path.basename(it["image"]))[0])],
                                cwd=BLOG_DIR, check=False)
             covers = collect_covers()
             brand_bad = check_brand(covers)
@@ -425,7 +452,7 @@ def main():
             gen = os.path.join(BLOG_DIR, "scripts", "generate_covers.py")
             for t in text_bad:
                 print(f"  → {t['slug']}: {t['reason']}")
-                subprocess.run([sys.executable, gen, "--slug", t["slug"], "--force"],
+                subprocess.run([sys.executable, gen, "--slug", t.get("source_slug") or t["slug"]],
                                cwd=BLOG_DIR, check=False)
             covers = collect_covers()
             text_bad = check_text_fit(covers)
