@@ -1,0 +1,28 @@
+name: 🤖 Auto-Assign PR zu frank-hartung
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const actor = context.actor;
+            const bots = ['arena-ai-coding-agent[bot]', 'dependabot[bot]'];
+            
+            if (bots.includes(actor)) {
+              github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: ['frank-hartung']
+              });
+              console.log('✅ PR assigned to @frank-hartung');
+            }
