@@ -667,3 +667,59 @@ topics:
   - title: "Flugverspätung: So bekommst du deine Entschädigung"
     pillar: "mietwagen"
     keywords: ["Flugverspätung Entschädigung", "Fluggastrechte", "Entschädigung beantragen"]
+
+  # ============================================================
+  #  SAISON-OFFENSIVE HERBST/WINTER 2026/27 (Blogautomatik-
+  #  Optimierung 28.09.2026): Hochintente Wechselsaison-Themen
+  #  mit Kaufabsicht (Okt-Dez = stärkste Affiliate-Zeit bei
+  #  Strom/Gas, Kfz und Tarifen). Alle Titel gegen Bestand UND
+  #  Pool geprüft – keine Duplikate. Deep-Links folgen den
+  #  registrierten CHECK24-Routen (cat-Werte wie im Pool).
+  # ============================================================
+
+  - title: "Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Strom Nachzahlung vermeiden", "Stromabschlag berechnen", "Abschlag zu niedrig", "Nachzahlung Strom"]
+  - title: "Strompreis im Herbst 2026: Jetzt wechseln oder warten?"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Strompreis 2026", "Stromanbieter wechseln jetzt", "Strompreis Prognose", "Stromtarif wechseln Herbst"]
+  - title: "Gas-Abschlag winterfest: So planst du die Heizsaison richtig"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=gasanbieter-wechseln&cat=3"
+    keywords: ["Gasabschlag berechnen", "Gas Abschlag senken", "Heizsaison vorbereiten", "Gastarif Winter"]
+  - title: "Grundversorgung raus: So entkommst du dem teuersten Stromtarif"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Grundversorgung Strom Kosten", "aus Grundversorgung wechseln", "Grundtarif Strom zu teuer"]
+  - title: "Ökostrom wechseln: Günstig und seriös im Vergleich"
+    pillar: "strom-sparen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=stromanbieter-wechseln&cat=1"
+    keywords: ["Ökostrom Anbieter wechseln", "grüner Strom günstig", "Ökostrom Tarife vergleichen"]
+  - title: "Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=kfz-versicherung"
+    keywords: ["Kfz Versicherung Wechselsaison", "Kfz Versicherung kündigen Frist", "Kfz Versicherung wechseln Januar"]
+  - title: "Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember"
+    pillar: "versicherungen"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=haftpflichtversicherung"
+    keywords: ["Versicherungen prüfen Jahresende", "Policen kündigen Dezember", "überversichert was kündigen"]
+  - title: "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4"
+    keywords: ["Black Friday Internet Angebote", "DSL Deals Black Friday", "Internet Tarif Angebote November"]
+  - title: "Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt"
+    pillar: "internet-dsl"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=handytarife"
+    keywords: ["Handyvertrag wechseln Bonus", "Wechselbonus Handytarif", "Mobilfunk wechseln lohnt sich"]
+  - title: "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?"
+    pillar: "konto-karten"
+    affiliate_url: "https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=c24bank&cat=14"
+    keywords: ["Weihnachtsgeld was tun", "Weihnachtsgeld anlegen", "Weihnachtsgeld tilgen oder sparen"]
+  - title: "Weihnachtsbudget planen: Ohne Schulden durch die Feiertage"
+    pillar: "frugalismus"
+    keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Weihnachten ohne Schulden"]
+  - title: "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren"
+    pillar: "frugalismus"
+    keywords: ["Neujahrsvorsätze Geld", "finanzielle Ziele 2027", "Sparziele erreichen", "Gewohnheiten ändern"]
