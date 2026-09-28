@@ -43,6 +43,9 @@ rf = _load("revenue_funnel", os.path.join(SCRIPTS, "revenue_funnel.py"))
 cc = _load("click_chain_guard", os.path.join(SCRIPTS, "click_chain_guard.py"))
 gg = _load("governance_gate", os.path.join(SCRIPTS, "governance_gate.py"))
 gc = _load("governance_contract", os.path.join(SCRIPTS, "governance_contract.py"))
+uc = _load("umami_clicks", os.path.join(SCRIPTS, "umami_clicks.py"))
+uv = _load("umami_views", os.path.join(SCRIPTS, "umami_views.py"))
+sa = _load("secrets_age_guard", os.path.join(SCRIPTS, "secrets_age_guard.py"))
 
 MEIN_GUTES_SETUP = {"views": True, "clicks": True, "awin": True}
 
@@ -166,6 +169,46 @@ class TestReportProtokoll(unittest.TestCase):
         out = rf.render(f, [], [])
         self.assertIn("unbekannt", out)
         self.assertNotIn("| Affiliate-Klicks | 0 |", out)
+
+    def test_umami_free_operating_boundary_ist_gruen_ohne_luecke(self):
+        out = rf.render(self._f(), [], [], operating_boundaries=["Umami Analytics: API-Import deaktiviert (Umami Free)"])
+        self.assertIn("## 🚦 Gesamt-Ampel: **GREEN**", out)
+        self.assertIn("**Messlücken: 0**", out)
+        self.assertIn("| INFO | operating_boundary | Umami Analytics: API-Import deaktiviert (Umami Free) |", out)
+        self.assertNotIn("funnel_gap", out)
+
+
+class TestUmamiFreeBoundary(unittest.TestCase):
+    """Option 3: Umami Free als explizite Betriebsgrenze."""
+
+    def test_umami_free_deaktiviert_api_import_und_meldet_disabled(self):
+        import tempfile
+        with tempfile.NamedTemporaryFile("w+", encoding="utf-8") as tf:
+            tf.write("umami_api_import_enabled: false\n")
+            tf.flush()
+            _, c_meta = uc.fetch(days=30, config_path=tf.name)
+            self.assertEqual(c_meta.get("status"), "disabled")
+            self.assertIn("Umami Free", c_meta.get("reason", ""))
+
+            _, v_meta = uv.fetch(days=30, config_path=tf.name)
+            self.assertEqual(v_meta.get("status"), "disabled")
+            self.assertIn("Umami Free", v_meta.get("reason", ""))
+
+            # Revenue Funnel evaluiert 'disabled' als 0 Lücken
+            gaps = rf.evaluate([("views", "V", "disabled", None), ("clicks", "C", "disabled", None)])
+            self.assertEqual(gaps, [])
+
+            # Secrets Guard meldet BEWUSST DEAKTIVIERT (Umami Free)
+            status, _, finding = sa.classify(
+                "UMAMI_API_TOKEN",
+                {"days": 45, "label": "Umami Analytics-API-Token", "probe": "umami", "optional": True},
+                {},
+                config_path=tf.name,
+            )
+            self.assertEqual(status, "BEWUSST DEAKTIVIERT (Umami Free)")
+            self.assertIsNotNone(finding)
+            self.assertEqual(finding.get("level"), "info")
+            self.assertEqual(finding.get("code"), "operating_boundary")
 
 
 class TestCtaMessvertrag(unittest.TestCase):

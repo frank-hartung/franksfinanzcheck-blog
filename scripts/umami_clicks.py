@@ -77,7 +77,8 @@ def website_id():
     if env:
         return env
     try:
-        txt = open(HUGO_TOML, encoding="utf-8").read()
+        with open(HUGO_TOML, encoding="utf-8") as f:
+            txt = f.read()
     except OSError:
         return ""
     m = re.search(r"^\[params\.umami\]$(.*?)(?=^\[|\Z)", txt, re.M | re.S)
@@ -96,6 +97,21 @@ def api_token():
 
 def api_base():
     return (os.environ.get("UMAMI_API_BASE") or DEFAULT_BASE).strip().rstrip("/")
+
+
+def umami_api_import_enabled(config_path=None):
+    """Prüft, ob der Umami-API-Import in data/monetization.yaml aktiv ist.
+    Default ist True; `umami_api_import_enabled: false` markiert die bewusste
+    Betriebsgrenze (Umami Free im Browser aktiv, kein Cloud-API-Import)."""
+    path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
+    try:
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
+            return False
+    except OSError:
+        pass
+    return True
 
 
 def _redact(text, *secrets):
@@ -224,8 +240,15 @@ def aggregate(rows):
 
 # ------------------------------------------------------------------ Fetch
 
-def fetch(days=90, event_key=DEFAULT_EVENT):
+def fetch(days=90, event_key=DEFAULT_EVENT, config_path=None):
     """→ (rows|None, meta). rows=None bedeutet: API nicht nutzbar (Bestand bleibt!)."""
+    if not umami_api_import_enabled(config_path):
+        meta = {"attempted": TODAY.isoformat(), "base": api_base(),
+                "website_id_set": bool(website_id()), "token_present": False,
+                "days": days, "event": event_key, "endpoint": None, "rows": 0, "total": 0,
+                "status": "disabled",
+                "reason": "API-Import in data/monetization.yaml bewusst deaktiviert (Umami Free)"}
+        return None, meta
     token, base, wid = api_token(), api_base(), website_id()
     meta = {"attempted": TODAY.isoformat(), "base": base, "website_id_set": bool(wid),
             "token_present": bool(token), "days": days, "event": event_key,
@@ -291,19 +314,24 @@ def _meta_path_for(out_path):
     return os.path.splitext(out_path)[0] + ".meta.json"
 
 
-def cmd_fetch(days, strict, dry_run, event_key=DEFAULT_EVENT, out_path=None):
+def cmd_fetch(days, strict, dry_run, event_key=DEFAULT_EVENT, out_path=None, config_path=None):
     out = out_path or OUT
     meta_path = _meta_path_for(out)
-    rows, meta = fetch(days=days, event_key=event_key)
+    rows, meta = fetch(days=days, event_key=event_key, config_path=config_path)
     if rows is None:
         why = meta.get("reason") or "unbekannt"
-        print(f"ℹ️  Umami-Klicks nicht geladen: {why}")
-        print("    Folgen: Dashboard-Export von Hand nach `data/umami_clicks.json` "
-              "legen ODER GitHub-Secret `UMAMI_API_TOKEN` setzen "
-              "(Website-ID steht bereits in `hugo.toml`).")
-        _write_atomic(meta_path, json.dumps({**meta, "status": "skipped"},
+        if meta.get("status") == "disabled":
+            print(f"ℹ️  Umami-Klicks: {why}")
+            print("    Betriebsgrenze: Umami läuft im Browser, Events werden im Umami-Dashboard "
+                  "erfasst. Kein API-Token erforderlich.")
+        else:
+            print(f"ℹ️  Umami-Klicks nicht geladen: {why}")
+            print("    Folgen: Dashboard-Export von Hand nach `data/umami_clicks.json` "
+                  "legen ODER GitHub-Secret `UMAMI_API_TOKEN` setzen "
+                  "(Website-ID steht bereits in `hugo.toml`).")
+        _write_atomic(meta_path, json.dumps({**meta, "status": meta.get("status", "skipped")},
                                              ensure_ascii=False, indent=2) + "\n")
-        if strict:
+        if strict and meta.get("status") != "disabled":
             print("::error::--strict gesetzt: Datenlücke gilt als Fehler.")
             return 1
         return 0
@@ -328,7 +356,7 @@ def cmd_fetch(days, strict, dry_run, event_key=DEFAULT_EVENT, out_path=None):
     return 0
 
 
-def cmd_status():
+def cmd_status(config_path=None):
     meta = {}
     try:
         meta = json.load(open(META, encoding="utf-8"))
@@ -340,9 +368,11 @@ def cmd_status():
     except (OSError, json.JSONDecodeError):
         pass
     clicks = sum(int(r.get("count") or 0) for r in rows if isinstance(r, dict))
+    enabled = umami_api_import_enabled(config_path)
     print("Umami-Klickpipeline")
+    print(f"  API-Import:             {'aktiv' if enabled else 'deaktiviert (Umami Free)'}")
     print(f"  Website-ID (hugo.toml): {'gesetzt' if website_id() else 'fehlt'}")
-    print(f"  API-Token:              {'gesetzt' if api_token() else 'fehlt'}")
+    print(f"  API-Token:              {'gesetzt' if api_token() else 'nicht benötigt' if not enabled else 'fehlt'}")
     print(f"  Bestand:                {len(rows)} Attributionen, {clicks} Klicks")
     print(f"  Letzter Import:         {meta.get('written', meta.get('attempted', 'nie'))} "
           f"({meta.get('status', 'unbekannt')})")
@@ -411,16 +441,28 @@ def _selftest():
     if tok in _redact(f"fetch failed for {tok} at api.umami.is", tok):
         failures.append("Token im Log sichtbar")
     # --- Ehrliche Degradation: ohne Token => rows None, Grund dokumentiert, Exit 0
-    _env = dict(os.environ)
-    try:
-        for k in ("UMAMI_API_TOKEN", "UMAMI_API_KEY"):
-            os.environ.pop(k, None)
-        rows_none, meta = fetch(days=30)
-        if rows_none is not None or "UMAMI_API_TOKEN" not in meta.get("reason", ""):
-            failures.append("ohne Token wird keine Datenlücke dokumentiert")
-    finally:
-        os.environ.clear()
-        os.environ.update(_env)
+    # Bei deaktiviertem API-Import (Umami Free) wird 'disabled' dokumentiert
+    import tempfile as _tf
+    with _tf.NamedTemporaryFile("w+", encoding="utf-8") as _tf_cfg:
+        _tf_cfg.write("umami_api_import_enabled: false\n")
+        _tf_cfg.flush()
+        rows_free, meta_free = fetch(days=30, config_path=_tf_cfg.name)
+        if rows_free is not None or meta_free.get("status") != "disabled":
+            failures.append("Umami Free Modus liefert nicht status=disabled")
+
+    with _tf.NamedTemporaryFile("w+", encoding="utf-8") as _tf_cfg2:
+        _tf_cfg2.write("umami_api_import_enabled: true\n")
+        _tf_cfg2.flush()
+        _env = dict(os.environ)
+        try:
+            for k in ("UMAMI_API_TOKEN", "UMAMI_API_KEY"):
+                os.environ.pop(k, None)
+            rows_none, meta = fetch(days=30, config_path=_tf_cfg2.name)
+            if rows_none is not None or "UMAMI_API_TOKEN" not in meta.get("reason", ""):
+                failures.append("ohne Token wird keine Datenlücke dokumentiert")
+        finally:
+            os.environ.clear()
+            os.environ.update(_env)
     # --- Event-Trennschärfe (cta_click darf nie als affiliate_click zählen)
     cta_payload = {"data": [{"eventProperties": [{"dataKey": "slug", "stringValue": "home-strom"}]}]}
     cta_rows = _rows_from_event_data(cta_payload, event_name="cta_click")

@@ -51,7 +51,8 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 from umami_clicks import (api_base, api_token, website_id, _get_retry,  # noqa: E402
-                          _redact, _write_atomic, PAGE_SIZE)
+                          _redact, _write_atomic, PAGE_SIZE,
+                          umami_api_import_enabled)
 
 OUT = os.path.join(BLOG_DIR, "data", "umami_views.json")
 META = os.path.join(BLOG_DIR, "data", "umami_views.meta.json")
@@ -142,8 +143,15 @@ def parse_total(payload):
 
 # ------------------------------------------------------------------ Fetch
 
-def fetch(days=90):
+def fetch(days=90, config_path=None):
     """→ (result|None, meta). result=None heißt: API nicht nutzbar (Bestand bleibt)."""
+    if not umami_api_import_enabled(config_path):
+        meta = {"attempted": TODAY.isoformat(), "base": api_base(),
+                "website_id_set": bool(website_id()), "token_present": False,
+                "days": days, "source": "pages+total", "pages": 0,
+                "status": "disabled",
+                "reason": "API-Import in data/monetization.yaml bewusst deaktiviert (Umami Free)"}
+        return None, meta
     token, base, wid = api_token(), api_base(), website_id()
     meta = {"attempted": TODAY.isoformat(), "base": base, "website_id_set": bool(wid),
             "token_present": bool(token), "days": days, "source": "pages+total",
@@ -190,17 +198,22 @@ def fetch(days=90):
             "totals": totals, "pages": pages}, meta
 
 
-def cmd_fetch(days, strict, dry_run):
-    result, meta = fetch(days=days)
+def cmd_fetch(days, strict, dry_run, config_path=None):
+    result, meta = fetch(days=days, config_path=config_path)
     if result is None:
         why = meta.get("reason") or "unbekannt"
-        print(f"ℹ️  Umami-Seitenaufrufe nicht geladen: {why}")
-        print("    Folgen: Trichter- Kennzahlen (Outbound-CTR, Umsatz pro 100 Besuche) "
-              "bleiben unbekannt. Abhilfe: GitHub-Secret `UMAMI_API_TOKEN` setzen "
-              "(Anleitung: docs/UMSATZ-MESSUNG-PREMIUM.md).")
-        _write_atomic(META, json.dumps({**meta, "status": "skipped"},
+        if meta.get("status") == "disabled":
+            print(f"ℹ️  Umami-Seitenaufrufe: {why}")
+            print("    Betriebsgrenze: Umami läuft im Browser, Traffic wird im Umami-Dashboard "
+                  "erfasst. Kein API-Token erforderlich.")
+        else:
+            print(f"ℹ️  Umami-Seitenaufrufe nicht geladen: {why}")
+            print("    Folgen: Trichter- Kennzahlen (Outbound-CTR, Umsatz pro 100 Besuche) "
+                  "bleiben unbekannt. Abhilfe: GitHub-Secret `UMAMI_API_TOKEN` setzen "
+                  "(Anleitung: docs/UMSATZ-MESSUNG-PREMIUM.md).")
+        _write_atomic(META, json.dumps({**meta, "status": meta.get("status", "skipped")},
                                        ensure_ascii=False, indent=2) + "\n")
-        if strict:
+        if strict and meta.get("status") != "disabled":
             print("::error::--strict gesetzt: Datenlücke gilt als Fehler.")
             return 1
         return 0
@@ -225,7 +238,7 @@ def cmd_fetch(days, strict, dry_run):
     return 0
 
 
-def cmd_status():
+def cmd_status(config_path=None):
     meta = {}
     try:
         meta = json.load(open(META, encoding="utf-8"))
@@ -237,9 +250,11 @@ def cmd_status():
     except (OSError, json.JSONDecodeError):
         pass
     totals = views.get("totals") or {}
+    enabled = umami_api_import_enabled(config_path)
     print("Umami-Views-Pipeline")
+    print(f"  API-Import:             {'aktiv' if enabled else 'deaktiviert (Umami Free)'}")
     print(f"  Website-ID (hugo.toml): {'gesetzt' if website_id() else 'fehlt'}")
-    print(f"  API-Token:              {'gesetzt' if api_token() else 'fehlt'}")
+    print(f"  API-Token:              {'gesetzt' if api_token() else 'nicht benötigt' if not enabled else 'fehlt'}")
     print(f"  Bestand:                {len(views.get('pages') or [])} Pfade · "
           f"{totals.get('pageviews', 0)} Aufrufe · {totals.get('visits', 0)} Besuche")
     print(f"  Letzter Import:         {meta.get('written', meta.get('attempted', 'nie'))} "
@@ -301,16 +316,28 @@ def _selftest():
         except Exception as exc:  # noqa: BLE001
             failures.append(f"Müll-Payload {bad!r} wirft {exc.__class__.__name__}")
     # --- Ehrliche Degradation: ohne Token => None + Grund, keine Null-Besuche
-    saved = dict(os.environ)
-    try:
-        for k in ("UMAMI_API_TOKEN", "UMAMI_API_KEY"):
-            os.environ.pop(k, None)
-        res, meta = fetch(days=30)
-        if res is not None or "UMAMI_API_TOKEN" not in meta.get("reason", ""):
-            failures.append("ohne Token wird keine Datenlücke dokumentiert")
-    finally:
-        os.environ.clear()
-        os.environ.update(saved)
+    # Bei deaktiviertem API-Import (Umami Free) wird 'disabled' dokumentiert
+    import tempfile as _tf
+    with _tf.NamedTemporaryFile("w+", encoding="utf-8") as _tf_cfg:
+        _tf_cfg.write("umami_api_import_enabled: false\n")
+        _tf_cfg.flush()
+        res_free, meta_free = fetch(days=30, config_path=_tf_cfg.name)
+        if res_free is not None or meta_free.get("status") != "disabled":
+            failures.append("Umami Free Modus liefert nicht status=disabled in views")
+
+    with _tf.NamedTemporaryFile("w+", encoding="utf-8") as _tf_cfg2:
+        _tf_cfg2.write("umami_api_import_enabled: true\n")
+        _tf_cfg2.flush()
+        saved = dict(os.environ)
+        try:
+            for k in ("UMAMI_API_TOKEN", "UMAMI_API_KEY"):
+                os.environ.pop(k, None)
+            res, meta = fetch(days=30, config_path=_tf_cfg2.name)
+            if res is not None or "UMAMI_API_TOKEN" not in meta.get("reason", ""):
+                failures.append("ohne Token wird keine Datenlücke dokumentiert")
+        finally:
+            os.environ.clear()
+            os.environ.update(saved)
     # --- Konfigurationsquelle geteilt mit Klick-Pipeline (hugo.toml)
     if website_id() and not re.fullmatch(r"[0-9a-fA-F\-]{8,}", website_id()):
         failures.append("websiteId unplausibel")

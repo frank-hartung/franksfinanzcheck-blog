@@ -81,6 +81,21 @@ SOURCES = (
 AWIN_ENABLED = False
 
 
+def umami_api_import_enabled(config_path=None):
+    """Prüft, ob der Umami-API-Import in data/monetization.yaml aktiv ist.
+    Default ist True; `umami_api_import_enabled: false` markiert die bewusste
+    Betriebsgrenze (Umami Free im Browser aktiv, kein Cloud-API-Import)."""
+    path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
+    try:
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
+            return False
+    except OSError:
+        pass
+    return True
+
+
 # ------------------------------------------------------------------ IO-Helfer
 
 def _read_json(path, default=None):
@@ -105,9 +120,9 @@ def _age_days(meta, keys=("written", "generated", "attempted")):
 
 
 def _source_state(data, meta):
-    """→ (status, age_days). status: ok | alt | skipped | fehlt."""
-    if meta and meta.get("status") == "skipped":
-        return "skipped", _age_days(meta)
+    """→ (status, age_days). status: ok | alt | skipped | disabled | fehlt."""
+    if meta and meta.get("status") in ("skipped", "disabled"):
+        return meta.get("status"), _age_days(meta)
     if not data:
         return "fehlt", None
     age = _age_days(meta or data)
@@ -321,17 +336,17 @@ def evaluate(sources):
     """→ (gaps, notations): welche Quellen sind Löcher, was kostet die Behebung?"""
     gaps = []
     for key, label, data_state, age in sources:
-        if data_state == "ok":
+        if data_state in ("ok", "disabled"):
             continue
         why = {"fehlt": "noch nie importiert", "skipped": "Import übersprungen (Secret fehlt)",
-               "alt": f"Import {age or '?'}d alt (Frist {STALE_DAYS}d)"}[data_state]
+               "alt": f"Import {age or '?'}d alt (Frist {STALE_DAYS}d)"}.get(data_state, data_state)
         gaps.append(f"{label}: {why}")
     return gaps
 
 
 # ------------------------------------------------------------------ Report
 
-def render(f, gaps, fix_hints, wow=None):
+def render(f, gaps, fix_hints, wow=None, operating_boundaries=None):
     """Markdown-Wochenseite. Enthält die Markerzeile `Messlücken: N` und die
     Gesamt-Ampel – der Governance-Gate liest beides (kein Exit-Code-Raten)."""
     rate = f["raten"]
@@ -380,11 +395,15 @@ def render(f, gaps, fix_hints, wow=None):
                 "| Platzierung | Klicks |", "|---|---|"]
         out += [f"| `{k}` | {v} |" for k, v in list(f["platzierungen"].items())[:15]]
     out += ["", "## 🧾 Datenqualität der Messkette", ""]
-    if gaps:
+    if gaps or operating_boundaries:
         out += ["| Level | Code | Befund |", "|---|---|---|"]
-        out += [f"| AMBER | funnel_gap | {g} |" for g in gaps]
-        out += ["", "Behebung (Reihenfolge = Wirkung):"]
-        out += [f"- {h}" for h in fix_hints]
+        if gaps:
+            out += [f"| AMBER | funnel_gap | {g} |" for g in gaps]
+        if operating_boundaries:
+            out += [f"| INFO | operating_boundary | {b} |" for b in operating_boundaries]
+        if gaps:
+            out += ["", "Behebung (Reihenfolge = Wirkung):"]
+            out += [f"- {h}" for h in fix_hints]
     else:
         out += ["_keine Befunde_ – alle Quellen gemessen und frisch (≤ 14 Tage)."]
     out += ["", "## 🎯 Empfehlung (Agentur-Modus)", "",
@@ -468,14 +487,18 @@ def main(argv=None):
     awin_doc = _read_json(AWIN, {}) or {}
     awin_meta = _read_json(AWIN_META, {}) or {}
 
+    umami_api_enabled = umami_api_import_enabled()
     # „gemessen“ = Import sagt ok ODER Bestand mit Datum (manueller Export zählt auch).
     measured = {
-        "views": bool(views_doc) and (views_meta.get("status") or "ok") != "skipped",
+        "views": bool(views_doc) and (views_meta.get("status") or "ok") not in ("skipped", "disabled"),
         "clicks": (clicks_meta.get("status") or ("ok" if clicks_rows else "fehlt")) == "ok",
         "awin": bool(awin_doc),
     }
     src = [("views", SOURCES[0][1], *_source_state(views_doc, views_meta)),
            ("clicks", SOURCES[1][1], *_source_state(clicks_rows, clicks_meta))]
+    if not umami_api_enabled:
+        src = [(k, label, "disabled" if state in ("fehlt", "skipped", "disabled") else state, age)
+               for k, label, state, age in src]
     if AWIN_ENABLED:
         src.append(("awin", "Awin-Transaktionen (Publisher API)",
                     *_source_state(awin_doc, awin_meta)))
@@ -487,10 +510,15 @@ def main(argv=None):
         return state, age
     src = [(k, label, *_state_of(state, age, k)) for k, label, state, age in src]
     gaps = evaluate(src)
+    operating_boundaries = []
+    if not umami_api_enabled or any(state == "disabled" for _, _, state, _ in src):
+        operating_boundaries.append(
+            "Umami Analytics: API-Import deaktiviert (Umami Free – Klicks und Besuche werden im Umami-Dashboard erfasst)"
+        )
     source_fixes = {"views": SOURCES[0][4], "clicks": SOURCES[1][4]}
     if AWIN_ENABLED:
         source_fixes["awin"] = "Awin-Quelle konfigurieren oder CSV-Export importieren"
-    fixes = [source_fixes[k] for k, _l, state, _a in src if state != "ok"]
+    fixes = [source_fixes[k] for k, _l, state, _a in src if state not in ("ok", "disabled")]
     f = compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=measured)
     # Fenster ehrlich machen: die Importe schreiben ihr Zeitfenster in die Meta.
     for meta in (clicks_meta, views_meta):
@@ -502,7 +530,7 @@ def main(argv=None):
 
     prev = _prev_metrics()
     wow = _wow(_history_row(f), prev)
-    body = render(f, gaps, fixes, wow)
+    body = render(f, gaps, fixes, wow, operating_boundaries=operating_boundaries)
 
     if print_only:
         print(body)
@@ -535,8 +563,11 @@ def main(argv=None):
               f"EPC {fmt(f['raten']['epc'], 'eur')} · Messlücken: {len(gaps)}")
     try:
         from audit_log import log_event
+        v_state = next((s for k, _l, s, _a in src if k == "views"), ("unknown",))
+        c_state = next((s for k, _l, s, _a in src if k == "clicks"), ("unknown",))
+        a_state = next((s for k, _l, s, _a in src if k == "awin"), ("disabled",))
         log_event(module="revenue_funnel", action="report",
-                  input={"views": v_state[0], "clicks": c_state[0], "awin": a_state[0]},
+                  input={"views": v_state, "clicks": c_state, "awin": a_state},
                   output={"gaps": len(gaps), "clicks": f["affiliate_klicks"],
                           "revenue": f["provision"]["gesamt"]}, status="ok")
     except Exception:  # noqa: BLE001
@@ -642,6 +673,12 @@ def _selftest():
     rep_ok = render(f, [], [], [])
     if "Messlücken: 0" not in rep_ok or "GREEN" not in rep_ok:
         failures.append("grüner Trichter meldet nicht grün")
+    # --- Operating boundary (Umami Free)
+    rep_bound = render(empty, [], [], operating_boundaries=["Umami Free aktiv"])
+    if "Messlücken: 0" not in rep_bound or "GREEN" not in rep_bound or "operating_boundary" not in rep_bound:
+        failures.append("Betriebsgrenze (operating_boundary) wird nicht grün als INFO formatiert")
+    if evaluate([("views", "V", "disabled", None), ("clicks", "K", "disabled", None)]) != []:
+        failures.append("deaktivierte Quellen (disabled) dürfen nicht als Lücke gemeldet werden")
     # --- Datenqualitäts-Logik
     if evaluate([("views", "V", "ok", 0), ("clicks", "K", "ok", 2)]) != []:
         failures.append("frische Quellen werden als Lücke gemeldet")
