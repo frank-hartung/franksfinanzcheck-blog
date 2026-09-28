@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-09-28 13:50 UTC  
+**Stand:** 2026-09-28 20:32 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-09-28): 2 Artikel – Ziel erfüllt.
 
