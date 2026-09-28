@@ -4,13 +4,10 @@
 #  READY-TO-PASTE-DATEI: Diese Datei gehört (als identische Kopie)
 #  nach .github/workflows/zeit-rechtschreibung.yml – sie liegt
 #  bewusst außerhalb, weil Agent-Tokens Workflow-Pfade nicht
-#  pushen dürfen (siehe CLAUDE.md, CI-Abschnitt). AKTIVIERT am 28.09.2026 (Blogautomatik-Optimierung): die
-#  identische Kopie liegt jetzt in .github/workflows/
-#  zeit-rechtschreibung.yml und läuft montags 04:35 UTC. Diese
-#  Datei hier ist nur noch Referenz – nicht erneut kopieren.
-#  Fix bei Aktivierung: YAML-Quote im Schritt-Namen „Wachen-Lauf
-#  (Modus-Automatik: …)“ – die Vorlage hätte als Workflow nie
-#  geparst (unquoted Doppelpunkt im Plain Scalar).
+#  pushen dürfen (siehe CLAUDE.md, CI-Abschnitt). EINMALIG von
+#  einem Admin/Owner kopieren (Web-UI: neue Datei mit diesem
+#  Inhalt, oder lokal per Git), danach ist diese Datei hier nur
+#  noch Referenz.
 #
 #  Auftrag (Frank, 28.09.2026): „Integriere dauerhaft eine
 #  professionelle automatische Rechtschreibprüfung von zeit.de

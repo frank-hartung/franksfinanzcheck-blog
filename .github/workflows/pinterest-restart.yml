@@ -1,0 +1,195 @@
+# ============================================================
+#  PINTEREST-RESTART – geführter Wiederanlauf nach Domain-Sperre
+#  ------------------------------------------------------------
+#  WARUM (Blogautomatik-Optimierung, 28.09.2026): Pinterest hat
+#  franksfinanzcheck.de am 27.08.2026 als Link-Domain gesperrt
+#  (Issues #448, #246). Der Restart war bisher über drei Runbooks
+#  und vier Handgriffe verstreut (Formular → --domain-unblock →
+#  Token-Neu-Autorisierung → Plan/Engine wieder scharf). Dieser
+#  Workflow bündelt ALLES nach der Freigabe in EINEN geführten
+#  Lauf mit zwei Dialogfeldern – danach trägt sich der Kanal
+#  wieder selbst (Tages-Wache + Token-Refresh übernehmen).
+#
+#  ABFOLGE (menschengesteuert, maschinell ausgeführt):
+#    0. VORBEDINGUNG (nur Frank): Pinterest hat die Domain über
+#       das Kontaktformular „Link gesperrt“ wieder freigegeben
+#       (Vorlage: docs/PINTEREST-SPIELBUCH.md). OHNE Bestätigung
+#       verweigert der Workflow hart (fail-closed).
+#    1. Domain-Notbremse aufheben (spam_guard --domain-unblock)
+#       + Commit der Zustandsdatei.
+#    2. Token-Lage prüfen. Token tot (erwartet): Autorisierungs-
+#       URL in die Lauf-Zusammenfassung setzen UND optional den
+#       OAuth-Code gleich im selben Lauf eintauschen (Feld
+#       auth_code). Ohne Code: zweiter Lauf nur mit Code.
+#    3. Bei lebendem Token: Pinterest-Engine im Trockenlauf einen
+#       Plan bauen lassen (kein Posten). Das eigentliche Pinning
+#       läuft seit 20.08.2026 primär über Pinterests RSS-Auto-
+#       publish (index.xml) plus die bekannten Wachen – kein
+#       ungefragter Pin-Burst aus diesem Lauf.
+#    4. Abschluss-Kommentar in Issue #448 mit Belegen (Audit-Trail).
+#
+#  SICHERHEIT:
+#    - Ohne Haken `bestaetigt` KEINE Wirkung (nur Statusbericht).
+#    - Token nie loggen; Code kommt über ENV (add-mask), nie als
+#      Shell-Argument.
+#    - Jede Änderung wird committet + gepusht (git_sync.sh),
+#      Zustandsdateien bleiben die SSOT.
+# ============================================================
+name: Pinterest-Restart (geführt)
+
+on:
+  workflow_dispatch:
+    inputs:
+      bestaetigt:
+        description: "NUR ankreuzen, wenn Pinterest die Domain schriftlich freigegeben hat (sonst läuft nur der Statusbericht)"
+        type: boolean
+        required: true
+        default: false
+      auth_code:
+        description: "Optional: OAuth-Code von franksfinanzcheck.de/pinterest-oauth (oder komplette Adresszeile) – tauscht den Token im selben Lauf"
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: pinterest-restart
+  cancel-in-progress: false
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+      PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+      PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+      RESTART_ISSUE: "448"
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python-Abhängigkeiten
+        run: python3 -m pip install -q pyyaml cryptography 2>/dev/null || true
+
+      - name: Wachen-Selbsttests (fail-closed)
+        run: |
+          python3 scripts/spam_guard.py --selftest
+          python3 scripts/pinterest_token.py --selftest
+          python3 scripts/pinterest_auth.py --selftest
+
+      - name: Statusbericht (ohne Bestätigung keine Wirkung)
+        if: ${{ !inputs.bestaetigt }}
+        run: |
+          {
+            echo "### 🔍 Pinterest-Restart – nur Status (keine Bestätigung angehakt)"
+            echo ""
+            echo "**Aktuelle Lage:**"
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/spam_guard.py --domain-status | tee -a "$GITHUB_STEP_SUMMARY" || true
+          {
+            echo ""
+            echo "**Was zu tun ist, bevor dieser Workflow Wirkung hat:**"
+            echo "1. Pinterest-Kontaktformular „Link gesperrt“ absenden (Vorlage: \`docs/PINTEREST-SPIELBUCH.md\`)."
+            echo "2. Warten auf die schriftliche Freigabe von Pinterest."
+            echo "3. Diesen Workflow erneut starten – mit Haken bei \`bestaetigt\`."
+            echo ""
+            echo "Bis dahin pinnt der Betrieb bewusst nicht (Pins würden die Sperre verlängern)."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Domain-Notbremse aufheben (nach Bestätigung)
+        if: ${{ inputs.bestaetigt }}
+        run: |
+          python3 scripts/spam_guard.py --domain-unblock
+          python3 scripts/spam_guard.py --domain-status
+
+      - name: OAuth-Code eintauschen (optional, im selben Lauf)
+        if: ${{ inputs.bestaetigt && inputs.auth_code != '' }}
+        env:
+          PINTEREST_AUTH_CODE: ${{ inputs.auth_code }}
+        run: |
+          echo "::add-mask::$PINTEREST_AUTH_CODE"
+          python3 scripts/pinterest_auth.py --exchange 2>&1 | tee /tmp/exchange.log
+          {
+            echo "### 🔑 OAuth-Code eingetauscht"
+            echo '```'
+            tail -n 8 /tmp/exchange.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Token-Lage prüfen (tot → Autorisierungs-URL anzeigen)
+        if: ${{ inputs.bestaetigt && inputs.auth_code == '' }}
+        run: |
+          set +e
+          python3 scripts/pinterest_token.py --refresh > /tmp/token.log 2>&1
+          rc=$?
+          set -e
+          if [ "$rc" = "0" ]; then
+            echo "✅ Token lebendig – Refresh erfolgreich." | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "ℹ️ Token wie erwartet tot – Neu-Autorisierung nötig." | tee -a "$GITHUB_STEP_SUMMARY"
+            python3 scripts/pinterest_auth.py --auth-url | tee /tmp/authurl.txt || true
+            URL="$(grep -m1 -o 'https://www.pinterest.com/oauth/[^ ]*' /tmp/authurl.txt || true)"
+            {
+              echo "### 🔑 Schritt 2 von 2: Pinterest neu autorisieren"
+              echo ""
+              if [ -n "$URL" ]; then
+                echo "**[→ Hier klicken und mit dem Pinterest-Konto erlauben]($URL)**"
+                echo ""
+              fi
+              echo '```'
+              cat /tmp/authurl.txt 2>/dev/null || echo "(URL-Erzeugung fehlgeschlagen – siehe Log)"
+              echo '```'
+              echo ""
+              echo "Nach dem Erlauben zeigt \`franksfinanzcheck.de/pinterest-oauth\` den Code mit Kopier-Knopf."
+              echo "Diesen Workflow erneut starten: Haken bei \`bestaetigt\` + Code in \`auth_code\` einfügen."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Pinterest-Engine Bereitschaft (Plan bauen, ohne zu posten)
+        if: ${{ inputs.bestaetigt }}
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/pinterest_engine.py --auto --dry-run > /tmp/engine.log 2>&1
+          rc=$?
+          set -e
+          {
+            echo "### 🧩 Pin-Plan (Trockenlauf, kein Posten)"
+            echo ""
+            echo '```'
+            tail -n 25 /tmp/engine.log
+            echo '```'
+            if [ "$rc" != "0" ]; then
+              echo ""
+              echo "ℹ️ Planbau noch nicht möglich (z. B. Token erst im nächsten Lauf) – das Pinning läuft ohnehin primär über Pinterests RSS-Auto-Publish (\`index.xml\`), sobald die Domain frei ist."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Restart-Zustand committen
+        if: ${{ inputs.bestaetigt }}
+        run: |
+          git config user.name "Pinterest-Restart-Bot"
+          git config user.email "pinterest-restart-bot@users.noreply.github.com"
+          git add data/pinterest_domain_block.json data/pinterest_token_state.json data/pinterest_plan.yaml data/pinterest_plan_parked.yaml data/pin_queue.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Zustandsänderungen zu committen."
+          else
+            git commit -m "fix(pinterest): Domain-Notbremse nach Freigabe aufgehoben (Restart-Lauf)"
+            scripts/git_sync.sh --push-only
+          fi
+
+      - name: Abschluss-Kommentar in Issue (Audit-Trail)
+        if: ${{ inputs.bestaetigt }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/spam_guard.py --domain-status > /tmp/status.txt 2>&1 || true
+          gh issue comment "$RESTART_ISSUE" --body "🚀 **Pinterest-Restart-Lauf** (Run: ${{ github.run_id }}) – Domain-Notbremse nach Bestätigung aufgehoben.
+
+          $(cat /tmp/status.txt)
+
+          Token-Weg siehe Lauf-Zusammenfassung. Nach Restart läuft das Pinning primär über Pinterests RSS-Auto-Publish (Feed \`index.xml\`) und die bekannten Wachen (Pinterest-Watchdog täglich, Token-Refresh täglich). Dieses Issue kann geschlossen werden, sobald der erste Pin nach dem Restart nachweisbar ist." || echo "::warning::Issue-Kommentar fehlgeschlagen (nicht kritisch)"

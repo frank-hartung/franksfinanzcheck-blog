@@ -25,19 +25,69 @@
 # ============================================================
 
 campaigns:
+  # ============================================================
+  #  BLOGAUTOMATIK-OPTIMIERUNG 28.09.2026 (Arena-Session):
+  #  Die Saison-Kampagnen waren angelegt, aber alle „paused" – die
+  #  provisionsstärkste Zeit des Jahres (Wechselsaison Herbst/Winter)
+  #  lief ohne Kampagnen-CTA und ohne saisonale Themenpriorität.
+  #  Jetzt: Herbst aktiv + drei Folge-Kampagnen, die automatisch
+  #  starten, sobald ihr Zeitfenster beginnt (kein manueller Schritt
+  #  mehr im November/Dezember). Hints sind gegen den Bestand
+  #  geprüft (campaign_manager überspringt abgedeckte Titel).
+  # ============================================================
   - id: herbst-energiewechsel-2026
     type: promo
     name: "Herbst-Energiewechsel 2026"
-    goal: "Strom-/Gaswechsel vor der Heizperiode; Tarifvergleich als Sofort-Nutzen."
+    goal: "Strom-/Gaswechsel in der Heizperiode; Tarifvergleich als Sofort-Nutzen."
     cta: "Jetzt Strom- & Gaspreise vergleichen"
     pillars: ["strom-sparen"]
     start: "2026-09-01"
     end: "2026-10-31"
-    status: paused
+    status: active
     topics_hint:
-      - "Heizperiode vorbereiten im Spätsommer"
-      - "Gastarife vergleichen vor dem Herbst"
       - "Stromanbieter wechseln und bis zu 300 Euro sparen"
+      - "Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge"
+      - "Strompreis im Herbst 2026: Jetzt wechseln oder warten?"
+      - "Gas-Abschlag winterfest: So planst du die Heizsaison richtig"
+
+  - id: winter-energie-2026-27
+    type: promo
+    name: "Winter-Energie 2026/27"
+    goal: "Heizsaison läuft: Abschläge, Nachzahlungen und Tarifwechsel im Winter."
+    cta: "Jetzt Strom- & Gaspreise vergleichen"
+    pillars: ["strom-sparen"]
+    start: "2026-11-01"
+    end: "2026-12-31"
+    status: active
+    topics_hint:
+      - "Grundversorgung raus: So entkommst du dem teuersten Stromtarif"
+      - "Ökostrom wechseln: Günstig und seriös im Vergleich"
+
+  - id: kfz-wechselsaison-2027
+    type: promo
+    name: "Kfz-Wechselsaison 2027"
+    goal: "Kfz-Versicherung zum 1. Januar kündigen und wechseln – Fristen, Sparpotenzial, Fallen."
+    cta: "Jetzt Kfz-Versicherung vergleichen"
+    pillars: ["versicherungen"]
+    start: "2026-11-01"
+    end: "2026-12-15"
+    status: active
+    topics_hint:
+      - "Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten"
+      - "Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember"
+
+  - id: black-friday-tarife-2026
+    type: promo
+    name: "Black-Friday-Tarifdeals 2026"
+    goal: "Black-Friday-Deals bei DSL und Mobilfunk ehrlich bewerten: echter Rabatt oder Tariffalle."
+    cta: "Jetzt DSL- & Handytarife vergleichen"
+    pillars: ["internet-dsl"]
+    start: "2026-11-17"
+    end: "2026-12-02"
+    status: active
+    topics_hint:
+      - "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich"
+      - "Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt"
 
   - id: frugalismus-autoritaet-q4
     type: researched

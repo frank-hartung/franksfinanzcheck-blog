@@ -162,9 +162,17 @@ def generate_calendar(weeks=4, day=None, report=None):
     active = active_campaigns(day)
     free = uncovered_topics(day)
     slots = next_slots(weeks, day)
+    # Recherche-Brief nur mit echten Keywords (Hint-Themen ohne Keywords
+    # bekommen einen ehrlichen leeren Brief statt erfundener Suchbegriffe).
     plan = []
+    # BLOGAUTOMATIK-OPTIMIERUNG 28.09.2026: Abgedeckte Titel (bestehende
+    # Artikel) einmal laden und pro Lauf mitführen – Kampagnen-Hints, die
+    # bereits einen Artikel haben, werden übersprungen statt doppelt geplant.
+    covered = covered_titles()
+    planned = set()
     for i, slot in enumerate(slots):
-        topic_entry, source = _pick_topic(active, free, i, slot)
+        topic_entry, source = _pick_topic(active, free, i, slot,
+                                          covered=covered, planned=planned)
         topic = (topic_entry or {}).get("title", "").strip() or "—"
         pillar = (topic_entry or {}).get("pillar")
         camp = campaign_for(active, pillar)
@@ -193,21 +201,47 @@ def generate_calendar(weeks=4, day=None, report=None):
     }
 
 
-def _pick_topic(active, free, idx, slot):
-    """Themenwahl: Kampagnen-Hint > freie Themen > leeres Slot (nie doppelt)."""
-    # 1) Aktive Kampagne mit expliziten Themen-Hints
+def _pick_topic(active, free, idx, slot, covered=None, planned=None):
+    """Themenwahl: Kampagnen-Hint > freie Themen > leeres Slot (nie doppelt).
+
+    BLOGAUTOMATIK-OPTIMIERUNG 28.09.2026: Vorher lief die Hint-Schleife als
+    `for h, c in hints: return …` – JEDER Slot bekam denselben ersten Hint,
+    eine aktive Kampagne hätte also den kompletten Kalender mit ein und
+    demselben Thema gefüllt (Duplikat-Risiko für die Engine). Jetzt:
+      1. Hints der Reihe nach, jeder höchstens EINMAL pro Kalenderlauf
+         (`planned`) und nur, wenn dafür noch kein Artikel existiert
+         (`covered` – Titel-Abgleich wie bei freien Themen).
+      2. Freie Themen (Lücken) – deterministisch, ebenfalls ohne Wieder-
+         holung innerhalb des Laufs.
+      3. Fallback: irgendein Thema aus dem Pool (verhindert leeres Slot).
+    """
+    covered = covered if covered is not None else set()
+    planned = planned if planned is not None else set()
+
+    def _norm(t):
+        return (t or "").strip().lower()
+
+    # 1) Aktive Kampagne mit expliziten Themen-Hints (zyklisch, nie doppelt)
     hints = []
     for c in active:
         for h in (c.get("topics_hint") or []):
             hints.append((h, c))
     for h, c in hints:
+        if _norm(h) in covered:
+            continue
+        if _norm(h) in planned:
+            continue
         entry = {"title": h, "pillar": (c.get("pillars") or [None])[0],
                  "keywords": []}
+        planned.add(_norm(h))
         return entry, f"campaign:{c.get('id')}"
-    # 2) Freie Themen (Lücken) – deterministisch rotierend
+    # 2) Freie Themen (Lücken) – der Reihe nach, ohne Wiederholung im Lauf
     if free:
-        entry = free[idx % len(free)]
-        return entry, "topics"
+        for t in free:
+            if _norm(t.get("title")) in planned:
+                continue
+            planned.add(_norm(t.get("title")))
+            return t, "topics"
     # 3) Fallback: irgendein Thema aus dem Pool (verhindert leeres Slot)
     all_topics = load_topics()
     if all_topics:
@@ -238,6 +272,36 @@ def run_selftest():
         cta, _ = cta_for("strom-sparen")
         if not cta:
             errs.append("cta_for lieferte keinen CTA")
+
+    # BLOGAUTOMATIK-OPTIMIERUNG 28.09.2026: Eine aktive Kampagne darf den
+    # Kalender NIE mit ein und demselben Thema fluten (der alte Code gab
+    # jedem Slot den ersten Hint). Drei Verträge:
+    #   a) Hints werden zyklisch und nur einmal pro Lauf verplant
+    #   b) bereits abgedeckte Hints (Artikel existiert) werden übersprungen
+    #   c) im erzeugten Kalender wiederholt sich kein Thema
+    fake = [{"id": "selftest-kampagne", "status": "active",
+             "pillars": ["strom-sparen"],
+             "topics_hint": ["Hint Alpha", "Hint Beta"]}]
+    # Ein shared planned-Set pro Kalenderlauf – exakt die Semantik von
+    # generate_calendar. Der alte Code hätte hier 4× „Hint Alpha" geliefert.
+    planned = set()
+    seen = []
+    for i in range(4):
+        entry, _src = _pick_topic(fake, [], i, datetime.date.today(),
+                                  planned=planned)
+        seen.append((entry or {}).get("title"))
+    if seen[0] != "Hint Alpha" or seen[1] != "Hint Beta":
+        errs.append(f"_pick_topic verplant Kampagnen-Hints falsch: {seen}")
+    if any(t in ("Hint Alpha", "Hint Beta") for t in seen[2:]):
+        errs.append(f"_pick_topic wiederholt einen Hint: {seen}")
+    entry, _src = _pick_topic(fake, [], 0, datetime.date.today(),
+                              covered={"hint alpha"})
+    if entry and entry.get("title") == "Hint Alpha":
+        errs.append("_pick_topic plant einen bereits abgedeckten Hint")
+    titel = [s.get("topic", "").strip().lower() for s in plan.get("slots", [])]
+    if titel and len(set(titel)) < len(titel):
+        dup = sorted({t for t in titel if titel.count(t) > 1})
+        errs.append(f"Kalender plant Themen doppelt: {dup[:3]}")
     return errs
 
 
