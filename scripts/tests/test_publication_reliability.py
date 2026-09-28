@@ -272,6 +272,7 @@ class R5HoldRecoveryTests(unittest.TestCase):
                  patch.object(pg, 'title_integrity_failures', return_value=set()), \
                  patch.object(pg, 'readability_failures', return_value=({}, None)), \
                  patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \
+                 patch.object(pg, 'offenlegung_failures', return_value=({}, None, False)), \
                  patch.object(pg, 'keyword_failures', return_value=({}, None)), \
                  patch.object(pg, 'keyword_self_heal_candidates', return_value=0):
                 self.assertEqual(pg.main(), 0)
