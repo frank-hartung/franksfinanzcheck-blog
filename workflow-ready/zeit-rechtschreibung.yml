@@ -1,0 +1,124 @@
+# ============================================================
+#  ZEIT-NIVEAU-RECHTSCHREIB-WACHE – wöchentlicher Premium-Lauf
+#
+#  READY-TO-PASTE-DATEI: Diese Datei gehört (als identische Kopie)
+#  nach .github/workflows/zeit-rechtschreibung.yml – sie liegt
+#  bewusst außerhalb, weil Agent-Tokens Workflow-Pfade nicht
+#  pushen dürfen (siehe CLAUDE.md, CI-Abschnitt). EINMALIG von
+#  einem Admin/Owner kopieren (Web-UI: neue Datei mit diesem
+#  Inhalt, oder lokal per Git), danach ist diese Datei hier nur
+#  noch Referenz.
+#
+#  Auftrag (Frank, 28.09.2026): „Integriere dauerhaft eine
+#  professionelle automatische Rechtschreibprüfung von zeit.de
+#  auf Premium-Level einer Profi-Agentur in meinen Blog.“
+#
+#  Was macht dieser Workflow:
+#    1. Selbsttest HART (Sabotage-Schutz, Exit 2 = rot, kein Schreiben)
+#       - scripts/zeit_rechtschreibung.py --selftest
+#       - Unit-Tests (offline, Fixture-Transport)
+#    2. Provider-Probe (weich): meldet Premium/öffentlich/offline
+#    3. Wachen-Lauf über ALLE Artikel:
+#       - Premium-Modus, sobald Secrets gesetzt (ZR_API_URL ODER
+#         ZR_USERNAME+ZR_API_KEY) – sonst Offline-Modus (LT1–LT4).
+#       - NIEMALS --oeffentlich (ToS: keine Automation!; Guard in
+#         der Wache verweigert das im CI zusätzlich mit Exit 2).
+#    4. Report + History/Cache-Commit als Redaktions-Bot
+#
+#  MODUS-Eingaben (manuell):
+#    - report (Default): prüft, meldet
+#    - fix: heilt eindeutige Fälle (harte Allowlist, verifiziert)
+#    - strict: wie report, aber Exit 1 bei offenen Funden
+#
+#  Laufzeiten:
+#    - Jeden Montag 04:35 UTC (06:35 MESZ) – nach der Sprach-Politur
+#    - Manuell: Actions → „ZEIT-Niveau Rechtschreib-Wache“ → Run
+#
+#  Reports (gitignored, bleiben im Lauf-Log):
+#    - ZEIT-RECHTSCHREIBUNG-REPORT.md + .zeit_rechtschreibung_report.json
+#  Versioniert (Dedupe/Quota-Schutz):
+#    - data/zeit_rechtschreibung_history.jsonl
+#    - data/zeit_rechtschreibung_cache.json
+#  Doku: docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md
+# ============================================================
+name: ZEIT-Niveau Rechtschreib-Wache
+
+on:
+  schedule:
+    - cron: "35 4 * * 1"   # Montag 04:35 UTC (nach Redaktions-Politur 03:45)
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "report (Default) | fix | strict"
+        required: false
+        default: "report"
+      max_artikel:
+        description: "Optional: nur die ersten N Artikel prüfen"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zeit-rechtschreibung
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ZR_API_URL: ${{ secrets.ZR_API_URL }}
+      ZR_USERNAME: ${{ secrets.ZR_USERNAME }}
+      ZR_API_KEY: ${{ secrets.ZR_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Voraussetzungen prüfen
+        run: |
+          for f in scripts/zeit_rechtschreibung.py scripts/sprachkern.py \
+                   scripts/grammar_check.py scripts/git_sync.sh \
+                   data/zeit_rechtschreibung.json; do
+            if [ ! -f "$f" ]; then
+              echo "🛑 $f fehlt auf main – PR nicht gemergt?"
+              exit 1
+            fi
+          done
+          echo "✅ ZEIT-Niveau-Wache vollständig vorhanden."
+
+      - name: Selbsttest HART + Unit-Tests (offline, Sabotage-Schutz)
+        run: |
+          python3 scripts/zeit_rechtschreibung.py --selftest
+          python3 -m unittest scripts.tests.test_zeit_rechtschreibung
+
+      - name: Provider-Probe (weich – Ausfall blockiert nie den Lauf)
+        run: python3 scripts/zeit_rechtschreibung.py --probe || echo "⚠ Probe nicht grün – Lauf prüft im ermittelten Modus weiter."
+
+      - name: Wachen-Lauf (Modus-Automatik: Premium → offline)
+        run: |
+          MODUS="${{ github.event.inputs.modus || 'report' }}"
+          MAXA="${{ github.event.inputs.max_artikel }}"
+          FLAGS=""
+          [ "$MODUS" = "fix" ] && FLAGS="--fix"
+          [ "$MODUS" = "strict" ] && FLAGS="--strict"
+          [ -n "$MAXA" ] && FLAGS="$FLAGS --max-artikel=$MAXA"
+          python3 scripts/zeit_rechtschreibung.py $FLAGS | tee /tmp/zr_lauf.txt
+          cat /tmp/zr_lauf.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Änderungen committen & pushen (Redaktions-Bot)
+        run: |
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          git add content/ 2>/dev/null || true
+          git add data/zeit_rechtschreibung_history.jsonl 2>/dev/null || true
+          git add data/zeit_rechtschreibung_cache.json 2>/dev/null || true
+          git add data/spellcheck_whitelist.txt 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Bestand bereits über der ZEIT-Latte – nichts zu heilen."
+          else
+            git commit -m "redaktion: ZEIT-Niveau-Rechtschreibung (Premium-Wache)"
+            scripts/git_sync.sh --push-only
+          fi

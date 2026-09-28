@@ -68,6 +68,8 @@ python3 scripts/dom_audit.py --top 15 # DOM-Budget jeder Seite (Kinder/Head/Tief
 node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_PATH) – siehe docs/LAYOUT-AUTOMATISIERUNG.md
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
+python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
+npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
 
 # Design-Varianten-Werkbank (26.09.2026) – Details: docs/ANLEITUNG-DESIGN-VARIANTEN.md
 python3 scripts/design_variant_gate.py               # Marke + Messvertrag + Freigabe
@@ -154,6 +156,33 @@ Anthropic-API) für jeden bestehenden und jeden neuen Artikel.
   Faktenstand“) und als `citation`/`sdDatePublished` im Article-JSON-LD.
   **Eine Quelle, zwei Ausspielwege** – nie einen der beiden separat pflegen.
 - Runbook: `docs/ANLEITUNG-FAKTENFRISCHE.md`.
+
+## ZEIT-Niveau-Rechtschreib-Wache (Dauerbetrieb seit 28.09.2026)
+
+Dauerhafte Premium-Rechtschreibprüfung aller Artikel
+(`scripts/zeit_rechtschreibung.py`, SSOT `data/zeit_rechtschreibung.json`).
+Faktenlage: zeit.de bietet **keine** öffentliche Rechtschreib-API – die
+ZEIT-Latte (s. Abschnitt Sprache) wird über die `/v2/check`-kompatible
+Premium-Engine eingelöst. Provider-Kette: **Premium** (ENV `ZR_API_URL`
+bzw. `ZR_USERNAME`/`ZR_API_KEY`) → **öffentlich** (nur `--oeffentlich`,
+ToS verbieten Automation – im CI hart geblockt) → **offline**
+(LT1–LT4-Nachbau, immer verfügbar).
+
+- **Kosten-Regel:** kein Paid-/Netz-Provider als alleiniger Pfad –
+  `require_online`/`offline_fallback` in der Config sind verboten
+  (Selbsttest ST8, Exit 2).
+- **Schreibvertrag:** Auto-Fix nur aus harter Regel-Allowlist mit genau
+  einem Vorschlag, nie im Titel, nie in Schutzzonen (längentreue
+  Maskierung), immer `sprachkern.write_verified`; Stil/Komma bleiben
+  Agentur-Hand (Fund mit `owner=human`).
+- **Quota:** `data/zeit_rechtschreibung_cache.json` (versioniert) –
+  unveränderte Artikel kosten keine Anfrage; Verlauf in
+  `data/zeit_rechtschreibung_history.jsonl`.
+- **CI in einem Schritt:** `workflow-ready/zeit-rechtschreibung.yml`
+  montags 04:35 UTC – einmalig per Admin-Token nach
+  `.github/workflows/` kopieren.
+- Runbook + Datenschutz + Premium-Aktivierung:
+  `docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md`.
 
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 

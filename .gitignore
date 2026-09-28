@@ -37,6 +37,7 @@ __pycache__/
 .sprachglatt_report.json
 .claude_stilpolitur_report.json
 .spellcheck_report.json
+.zeit_rechtschreibung_report.json
 ops-report.json
 
 # Auto-generierte Reports (Profi-Cleanup 31.08.2026 – halten Root sauber)
