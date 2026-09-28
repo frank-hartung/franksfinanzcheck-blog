@@ -385,8 +385,8 @@ items:
   date: '2026-09-28'
   time: 07:30
   scheduled_at: '2026-09-28T07:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: linkedin:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:nutzen:2026-09-28
   channel: linkedin
@@ -397,9 +397,9 @@ items:
   date: '2026-09-28'
   time: 07:45
   scheduled_at: '2026-09-28T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit:nutzen:2026-09-28
   channel: bluesky
   slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
@@ -409,9 +409,9 @@ items:
   date: '2026-09-28'
   time: 08:15
   scheduled_at: '2026-09-28T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort:mythos:2026-09-28
   channel: x
   slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
@@ -421,9 +421,9 @@ items:
   date: '2026-09-28'
   time: 08:45
   scheduled_at: '2026-09-28T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:takeaway:2026-09-28
   channel: threads
   slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
@@ -433,9 +433,9 @@ items:
   date: '2026-09-28'
   time: 09:15
   scheduled_at: '2026-09-28T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:frage:2026-09-28
   channel: facebook
   slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
@@ -445,9 +445,9 @@ items:
   date: '2026-09-28'
   time: 09:45
   scheduled_at: '2026-09-28T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: mastodon:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug:thread:2026-09-28
   channel: mastodon
   slug: 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug
@@ -469,9 +469,9 @@ items:
   date: '2026-09-28'
   time: '12:15'
   scheduled_at: '2026-09-28T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-10-dsl-wechselbonus-sichern:frage:2026-09-28
   channel: x
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -481,9 +481,9 @@ items:
   date: '2026-09-28'
   time: '13:15'
   scheduled_at: '2026-09-28T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich:vergleich:2026-09-28
   channel: facebook
   slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
