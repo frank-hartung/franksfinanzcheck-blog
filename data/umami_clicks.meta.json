@@ -2,12 +2,12 @@
   "attempted": "2026-09-28",
   "base": "https://api.umami.is/v1",
   "website_id_set": true,
-  "token_present": false,
+  "token_present": true,
   "days": 90,
   "event": "affiliate_click",
-  "endpoint": null,
+  "endpoint": "event-data",
   "rows": 0,
   "total": 0,
-  "reason": "kein UMAMI_API_TOKEN",
+  "reason": "HTTP 401",
   "status": "skipped"
 }

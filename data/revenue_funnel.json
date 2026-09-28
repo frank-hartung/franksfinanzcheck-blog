@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-28",
   "window_days": 90,
-  "kaufnah_seiten": 62,
+  "kaufnah_seiten": 59,
   "views": {
     "total": null,
     "pageviews": null,
@@ -40,12 +40,7 @@
       "quelle": "clicks",
       "status": "skipped",
       "alter_tage": 0
-    },
-    {
-      "quelle": "awin",
-      "status": "skipped",
-      "alter_tage": 0
     }
   ],
-  "messluecken": 3
+  "messluecken": 2
 }
