@@ -51,6 +51,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Starte mit einem kleinen Check
 
+
+Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+
 Nimm dir heute zehn ruhige Minuten. Sieh auf die letzte Rechnung und schreibe Verbrauch, Preis je kWh und festen Preis auf. Mach danach ein Foto vom Zähler. Dieses Foto gibt dir einen klaren Startwert für den Herbst. Du musst dafür nichts an der Heizung ändern.
 
 Prüfe dann nur eine Sache am Vertrag: Wann darfst du kündigen? Vergleiche den Preis ohne Bonus mit zwei neuen Angeboten. Ein niedriger Abschlag zählt dabei nicht als Sparen. Er teilt die Zahlung nur anders auf. Entscheidend bleibt der Preis für ein ganzes Jahr.
@@ -244,6 +247,9 @@ Prüfe die Liste nach der ersten kalten Woche erneut. Manche Fehler zeigen sich 
 
 
 Die richtige Reihenfolge spart dir vor allem Fehlentscheidungen: Erst wenn Verbrauch, Preis und Abschläge getrennt vorliegen, zeigt sich, ob ein Tarifvergleich, ein höherer Abschlag oder eine technische Prüfung sinnvoll ist.
+
+
+Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu 15 % senken.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

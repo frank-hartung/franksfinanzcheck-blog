@@ -105,7 +105,7 @@ Eine Reserve braucht zwei Eigenschaften: Sie muss sicher sein und im Notfall ver
 
 Achte auf die Bedingungen des Kontos, vor allem auf mögliche Gebühren und die Einlagensicherung. Die gesetzliche Sicherung deckt in Deutschland und der EU grundsätzlich bis zu 100.000 € pro Person und Bank ab. Für einen Startpuffer ist diese Grenze normalerweise weit entfernt, sie ist aber ein guter Grund, das Geld nicht irgendwo ungeprüft zu parken.
 
-> 💶 **Hinweis zur Kontowahl:** Das Tagesgeld der [**C24 Bank ansehen**](/go/tagesgeld/) führt zu einem einzelnen Angebot der C24 Bank (CHECK24-Tochter), nicht zu einem Marktvergleich. Prüfe Zinssatz, Verfügbarkeit und Bedingungen immer selbst.
+> 💶 **Hinweis zur Kontowahl:** Das Tagesgeld der [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/) führt zu einem einzelnen Angebot der C24 Bank (CHECK24-Tochter), nicht zu einem Marktvergleich. Prüfe Zinssatz, Verfügbarkeit und Bedingungen immer selbst.
 
 ## Was wirklich als Notfall zählt
 
