@@ -4,10 +4,8 @@
   "website_id_set": true,
   "token_present": false,
   "days": 90,
-  "event": "affiliate_click",
-  "endpoint": null,
-  "rows": 0,
-  "total": 0,
+  "source": "pages+total",
+  "pages": 0,
   "status": "disabled",
   "reason": "API-Import in data/monetization.yaml bewusst deaktiviert (Umami Free)"
 }

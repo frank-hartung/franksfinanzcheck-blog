@@ -6,7 +6,7 @@
     "red": 2
   },
   "fingerprint": "f34ef14ae0fa",
-  "generated": "2026-09-28T11:43:30+00:00",
+  "generated": "2026-09-28T19:12:43+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
@@ -126,14 +126,14 @@
       "ts": "2026-09-28T11:43:27+00:00"
     },
     "revenue-funnel": {
-      "actionable": true,
-      "code": "funnel_gap",
+      "actionable": false,
+      "code": "ok",
       "exit": 0,
-      "findings": 3,
-      "level": "amber",
-      "message": "Besuche (Umami /pages): Import übersprungen (Secret fehlt); Affiliate-Klicks (Umami event-data): Import übersprungen (Secret fehlt); Awin-Transaktionen (Publisher API): Import übersprungen (Secret fehlt)",
+      "findings": 1,
+      "level": "green",
+      "message": "in Ordnung (1 Hinweis(e))",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-09-28T11:43:28+00:00"
+      "ts": "2026-09-28T19:12:43+00:00"
     },
     "scorecard": {
       "actionable": false,

@@ -29,16 +29,33 @@ Import nachweislich gelaufen ist (`data/*.meta.json` ⇒ `status: ok`). Der
 Governance-Gate unterscheidet genau deshalb zwischen Messlücke (Info/AMBER)
 und Kaputt (ROT).
 
-## 2) Secrets anlegen (einmalig, ~2 Minuten)
+## 2) Secrets anlegen & Betriebsmodi
+
+### Betriebsmodus: Umami Free (Kostenfreie Betriebsgrenze – Standard)
+
+Umami Cloud im kostenfreien Plan bietet keinen API-Zugang. Umami bleibt dennoch **im Frontend und Browser vollständig aktiv**:
+- Seitenaufrufe und `affiliate_click`-Events laufen live im **Umami-Dashboard** auf.
+- In `data/monetization.yaml` ist `umami_api_import_enabled: false` gesetzt.
+- Die Import-Skripte fragen keine Umami-API ab und erwarten kein `UMAMI_API_TOKEN`.
+- Die Secrets-Wache meldet `UMAMI_API_TOKEN | BEWUSST DEAKTIVIERT (Umami Free)`.
+- Der Revenue-Funnel bleibt grün (**GREEN**, 0 Messlücken), die Kennzahlen werden ehrlich als „unbekannt / im Dashboard einsehbar“ geführt und erzeugen keinen Alarm.
+
+### Optional: API-Import aktivieren (Umami Pro oder Self-Hosted)
+
+Falls du später auf einen kostenpflichtigen Umami Pro Plan wechselst oder Umami selbst hostest (z. B. auf Vercel oder einem eigenen VPS):
 
 GitHub → Repo → **Settings → Secrets and variables → Actions → Repository secrets**:
 
-### a) `UMAMI_API_TOKEN` (liest Klicks UND Besuche)
+#### a) `UMAMI_API_TOKEN` (liest Klicks UND Besuche)
 
 1. https://cloud.umami.is → anmelden → **Avatar → User Settings → API →
    Generate API token** (Read reicht).
-2. Secret `UMAMI_API_TOKEN` = dieser Token. **Fertig.**
-3. Die Website-ID brauchst du hier nirgends – die Skripte lesen sie aus
+2. Secret `UMAMI_API_TOKEN` = dieser Token.
+3. In `data/monetization.yaml` den Schalter aktivieren:
+   ```yaml
+   umami_api_import_enabled: true
+   ```
+4. Die Website-ID brauchst du hier nirgends – die Skripte lesen sie aus
    `hugo.toml` (`[params.umami] websiteId`). Selbst-gehostete Instanz?
    Dann zusätzlich Repository-**Variable** `UMAMI_API_BASE`
    (z. B. `https://umami.deinedomain.de/api`) setzen – kein Secret, keine
@@ -47,7 +64,7 @@ GitHub → Repo → **Settings → Secrets and variables → Actions → Reposit
 Nach dem nächsten Importlauf (siehe 4) prüfst du mit:
 `python3 scripts/umami_views.py --status` → muss `ok` melden.
 
-### b) `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` (liest Transaktionen)
+#### b) `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` (liest Transaktionen)
 
 1. Awin-Dashboard (app.awin.com) → **Settings → Users → „Manage your web
    services" (API credentials)** → API-Dienst anlegen/scopes auf *Lesen*

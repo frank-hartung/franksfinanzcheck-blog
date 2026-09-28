@@ -119,7 +119,7 @@ INFO_AMBER = {
     # Wochentäuschung entstanden: die Probe selbst ist die Maßnahme, ihr Ausfall
     # heilt von allein. Eskalation läuft über die Alters-Regel: bleibt der
     # Nachweis aus, wird der Befund beim Überschreiten der Frist ROT (`stale`).
-    "unreachable",
+    "unreachable", "operating_boundary", "channel_disabled",
 }
 # Step-spezifische Marker: Berichte ohne eigene Ampel/Befundtabelle (die beiden
 # Monetarisierungs-Importe) werden über diese Zeilen auswertbar – sonst wäre ein
@@ -139,7 +139,8 @@ DATA_GAP_PATTERNS = (
     # seiner Befundtabelle) – der Meta-Schritt bleibt Info, damit nicht zwei
     # Schritte dieselbe Lücke doppelt ins Issue schreiben.
     "awin_api_token", "awin-publisher", "umami-views nicht geladen",
-    "awin-transaktionen nicht geladen",
+    "awin-transaktionen nicht geladen", "umami free", "operating_boundary",
+    "api-import in data/monetization.yaml bewusst deaktiviert",
 )
 
 
@@ -170,7 +171,7 @@ def _verdict_from_report(text):
 def _findings_from_report(text):
     """Zeilen `| LEVEL | code | Meldung |` → [(level, code, msg)]."""
     out = []
-    for m in re.finditer(r"^\|\s*(RED|AMBER)\s*\|\s*([A-Za-z0-9_\-]+)\s*\|([^|]*)\|", text, re.M):
+    for m in re.finditer(r"^\|\s*(RED|AMBER|INFO)\s*\|\s*([A-Za-z0-9_\-]+)\s*\|([^|]*)\|", text, re.M):
         out.append((m.group(1).lower(), m.group(2), m.group(3).strip()))
     # Decay-Radar nutzt Zählerzeilen statt einer Befundtabelle.
     for label, level in (("STALE", "red"), ("DECAYING", "amber")):
@@ -558,6 +559,7 @@ def _selftest():
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **3**\n- 🟢 **FRESH** (ok): **27**", "", 1, "red"),
         ("decay", "- 🔴 **STALE** (sofort aktualisieren): **0**\n- 🟢 **FRESH** (ok): **30**", "", 0, "green"),
         ("scorecard", "## Gesamt-Score: **83/100** · Ampel: **AMBER**", "", 0, "info"),
+        ("revenue-funnel", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n| INFO | operating_boundary | Umami Free aktiv |\n", "", 0, "green"),
         # Lesbarkeits-Wache: Report liefert Ampel + Befundtabelle, Exit-Code
         # allein darf NICHT alarmieren (exit_only-Policy, vgl. #206).
         ("lesbarkeit", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n", "", 0, "green"),

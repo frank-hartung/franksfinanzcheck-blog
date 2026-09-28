@@ -33,14 +33,14 @@
   "quellen": [
     {
       "quelle": "views",
-      "status": "skipped",
+      "status": "disabled",
       "alter_tage": 0
     },
     {
       "quelle": "clicks",
-      "status": "skipped",
+      "status": "disabled",
       "alter_tage": 0
     }
   ],
-  "messluecken": 2
+  "messluecken": 0
 }

@@ -4,5 +4,8 @@
 provider: umami-only
 awin_enabled: false
 
-# Aktivierte Messquellen: Umami misst Reichweite und Affiliate-Klicks.
+# Aktivierte Messquellen: Umami misst Reichweite und Affiliate-Klicks im Browser.
+# Kostenfreie Betriebsgrenze: Umami Cloud Free bietet keinen API-Zugang.
+# Der API-Import ist daher bewusst deaktiviert (keine API-Anfragen, kein Token nötig).
 analytics: umami
+umami_api_import_enabled: false

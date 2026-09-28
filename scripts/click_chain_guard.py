@@ -313,12 +313,10 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
     lines += ["", "## 🧪 Eigen-Testklick (SOP – maximal ein Klick, NIE eine Anmeldung)",
               "",
               "1. Live-Artikel öffnen (z. B. letzter Gastbeitrag) und EINEN",
-              "   /go/-Button klicken – der Klick erzeugt die Click-Reference im",
-              "   Awin-Dashboard (Reports → Click References, bis 24 h Verzögerung).",
-              "2. Beim nächsten Importlauf (revenue-import.yml) muss der Klick in",
-              "   `data/umami_clicks.json` auftauchen.",
-              "3. Beides da? ⇒ Kette bewiesen. Sonst Issue-Kommentar des Guards",
-              "   abarbeiten (Stufe zeigen, die fehlt).",
+              "   /go/-Button klicken – der Klick erzeugt das Umami-Event `affiliate_click`.",
+              "2. Im Umami-Dashboard (Events → `affiliate_click`) prüfen, ob der",
+              "   Klick mit passendem `slug` aufgeführt wird.",
+              "3. Klick im Dashboard da? ⇒ Frontend-Messkette bewiesen.",
               "4. Kein Eigenabschluss! Transaktionen aus dem eigenen Netz werden",
               "   storniert und können das Programm kosten.",
               "",
@@ -351,8 +349,8 @@ def gateway_keys():
 def test_page_sop():
     print("Testklick-Anleitung (manuell, vom Betreiber – nie automatisiert):")
     print("  1. Live-Artikel öffnen, einen /go/-CTA klicken (rel=sponsored, SubID aktiv).")
-    print("  2. Danach: python3 scripts/revenue_funnel.py --print  → Klickzähler > 0?")
-    print("  3. Awin: Reports → Click References → Slug der Seite suchen.")
+    print("  2. Umami-Dashboard aufrufen: Events → `affiliate_click` (Slug der Seite prüfen).")
+    print("  3. Optional bei API-Import: python3 scripts/revenue_funnel.py --print")
     print("  4. KEINE Anmeldung, KEIN Antrag – nur der Klick ist der Test.")
     return 0
 

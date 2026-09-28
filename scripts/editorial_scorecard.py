@@ -67,6 +67,18 @@ except Exception:  # pragma: no cover – Fallback hält die Scorecard lauffähi
 STALE_AFTER_DAYS = 9
 
 
+def _umami_api_import_enabled():
+    path = os.path.join(BLOG_DIR, "data", "monetization.yaml")
+    try:
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        if re.search(r"^umami_api_import_enabled:\s*false\s*$", txt, re.M):
+            return False
+    except OSError:
+        pass
+    return True
+
+
 def _read_text(path):
     try:
         with open(path, encoding="utf-8") as f:
@@ -428,7 +440,7 @@ def collect():
         "click_articles": len(click_articles),
         "total_clicks": total_clicks,
         "top_article": top_article,
-        "clicks_pipeline": clicks_meta.get("status") or "nie",
+        "clicks_pipeline": clicks_meta.get("status") or ("disabled" if not _umami_api_import_enabled() else "nie"),
         "clicks_reason": clicks_meta.get("reason") or "",
         "clicks_stand": clicks_meta.get("written") or clicks_meta.get("attempted") or "nie",
         "awin_total": awin.get("total_commission", 0),
@@ -534,8 +546,11 @@ def _render_datalage(d):
          "(`casing_guard.py --json`)"),
         ("Affiliate-Klicks", "data/umami_clicks.json (via scripts/umami_clicks.py)",
          d.get("clicks_stand", "nie"),
-         {"ok": "automatisch befüllt", "skipped": "Pipeline wartet auf Secret "
-          "`UMAMI_API_TOKEN`"}.get(d.get("clicks_pipeline"), "Import nie gelaufen")),
+         {"ok": "automatisch befüllt",
+          "skipped": "Pipeline wartet auf Secret `UMAMI_API_TOKEN`",
+          "disabled": "Umami Free aktiv (Auswertung im Umami-Dashboard)"}.get(
+              d.get("clicks_pipeline"),
+              "Umami Free aktiv (Auswertung im Umami-Dashboard)" if not _umami_api_import_enabled() else "Import nie gelaufen")),
         ("Awin-Provision", "data/awin_transactions.csv", "-",
          "CSV-Export fehlt" if int(d.get("awin_articles") or 0) == 0 else "befüllt"),
         _funnel_datalage(),
@@ -762,7 +777,7 @@ def render(d, score):
         recs.append(f"**{d['drafts']}** Artikel in der Entwurf-Warteschlange – Freigabe "
                     "prüfen (`python3 scripts/publish_gate.py` bzw. Kadenz-Gate). "
                     "Vorrat ist kein Mangel – erst > 8 Entwürfe werden zu Altlasten.")
-    if d.get("clicks_pipeline") in (None, "nie", "skipped"):
+    if d.get("clicks_pipeline") in (None, "nie", "skipped") and _umami_api_import_enabled():
         recs.append("Umsatz-Daten fehlen, weil die Pipeline nie gefüllt wurde – nicht, "
                     "weil niemand klickt: `python3 scripts/umami_clicks.py --fetch` "
                     "(Secret `UMAMI_API_TOKEN`; Website-ID steht schon in `hugo.toml`).")
@@ -778,6 +793,9 @@ def render(d, score):
 def _render_clicks(d):
     """Zeigt den Umsatz-Hebel (Affiliate-Klicks) kompakt an."""
     if d.get("click_articles", 0) == 0:
+        if not _umami_api_import_enabled():
+            return "_Umami Free aktiv – Klicks werden im Browser erfasst und können im " \
+                   "Umami-Dashboard eingesehen werden (kein API-Import)._"
         return "_Noch keine Klick-Daten – Umami-Export nach `data/umami_clicks.json` legen, " \
                "dann `scripts/click_attribution.py` ausführen._"
     top = d.get("top_article") or "-"

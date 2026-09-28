@@ -83,12 +83,19 @@ Vertrauen + keine Drittanbieter-Labels in Lighthouse).
 
 ---
 
-## Automatische Klick-Übernahme in den Blog (seit 07.09.2026)
+## Automatische Klick-Übernahme in den Blog & Betriebsmodi
 
-Der Affiliate-Report (`scripts/click_attribution.py`) braucht die `affiliate_click`-
-Events als Datei. Bislang: manuell aus dem Dashboard exportieren – und weil das
-niemand wöchentlich tut, stand in jeder Scorecard „0 Klicks über 0 Artikel"
-(Governance-Report #206). Seit dem 07.09.2026 holt ein Job die Daten selbst:
+### Standard: Kostenfreier Betrieb (Umami Free)
+
+Im kostenfreien Plan von Umami Cloud steht kein API-Zugang zur Verfügung. Der Blog ist darauf optimal eingerichtet:
+- Das Tracking läuft im Browser vollständig weiter (Seitenaufrufe + `affiliate_click`-Events).
+- Alle Auswertungen stehen direkt im **Umami-Dashboard** bereit.
+- In `data/monetization.yaml` ist `umami_api_import_enabled: false` hinterlegt.
+- Die CI/Governance-Pipeline erwartet kein Token und erzeugt keinen Fehlalarm.
+
+### Optional: API-Import bei Self-Hosting oder Umami Pro
+
+Wenn du Umami selbst hostest (Option B / C) oder einen Pro-Plan nutzt, kann die Pipeline Daten vollautomatisch importieren:
 
 ```bash
 # lokal / im Workflow (premium-governance.yml, Schritt „Umami-Klicks laden")
@@ -96,14 +103,15 @@ python3 scripts/umami_clicks.py --fetch --days 90
 python3 scripts/umami_clicks.py --status     # Was ist der Stand der Pipeline?
 ```
 
-Einmalige Einrichtung (2 Minuten):
+Einrichtung bei Self-Hosting / Pro (2 Minuten):
 
-1. **Umami Cloud:** Avatar → *User Settings* → *API* → *Generate API Key*
+1. **Umami Cloud (Pro) / Self-Hosted:** Avatar → *User Settings* → *API* → *Generate API Key*
    (self-hosted: `POST /api/access-tokens` bzw. Token im Admin-Bereich).
-2. Repository-Secret anlegen: `gh secret set UMAMI_API_TOKEN`
-3. Optional, wenn die Instanz nicht `https://api.umami.is/v1` ist:
+2. `data/monetization.yaml` auf `umami_api_import_enabled: true` stellen.
+3. Repository-Secret anlegen: `gh secret set UMAMI_API_TOKEN`
+4. Optional, wenn die Instanz nicht `https://api.umami.is/v1` ist:
    Repository-Variable `UMAMI_API_BASE` (z. B. `https://umami.example.com/api`).
-4. Website-ID wird **nicht** als Secret gepflegt – `scripts/umami_clicks.py` liest sie
+5. Website-ID wird **nicht** als Secret gepflegt – `scripts/umami_clicks.py` liest sie
    aus `hugo.toml` (`[params.umami] websiteId`). Eine Wahrheit, kein zweiter Ort.
 
 Was ankommt: `data/umami_clicks.json` (aggregierte Zähler je /go/-Stelle,
