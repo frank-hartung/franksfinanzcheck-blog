@@ -1,0 +1,129 @@
+{
+  "datum": "2026-09-28",
+  "erzeugt_utc": "2026-09-28 11:42 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 0,
+  "ergebnisse": {
+    "rss": {
+      "vzbv – Energie": {
+        "treffer": [
+          {
+            "titel": "Fernwärme: Reform stärkt Transparenz und Preisaufsicht",
+            "url": "https://www.vzbv.de/meldungen/fernwaerme-reform-staerkt-transparenz-und-preisaufsicht",
+            "datum": "Wed, 26 Aug 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "91 Prozent der befragten Messstellenbetreiber sehen Probleme beim Smart Meter-Rollout",
+            "url": "https://www.vzbv.de/meldungen/91-prozent-der-befragten-messstellenbetreiber-sehen-probleme-beim-smart-meter-rollout",
+            "datum": "Fri, 21 Aug 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Energiesperren: Hohe Kosten belasten Verbraucher:innen",
+            "url": "https://www.vzbv.de/pressemitteilungen/energiesperren-hohe-kosten-belasten-verbraucherinnen",
+            "datum": "Tue, 04 Aug 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Urteile: Jahresentgelte von Bausparkassen sind unzulässig",
+            "url": "https://www.vzbv.de/urteile/urteile-jahresentgelte-von-bausparkassen-sind-unzulaessig",
+            "datum": "Thu, 30 Jul 2026",
+            "quelle": "vzbv – Energie"
+          }
+        ],
+        "fehler": null
+      },
+      "vzbv – Finanzen": {
+        "treffer": [
+          {
+            "titel": "Frühstartrente: Von Anfang an richtig",
+            "url": "https://www.vzbv.de/meldungen/fruehstartrente-von-anfang-richtig",
+            "datum": "Fri, 25 Sep 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Bargeld in Bus und Bahn: Jede:r Siebte hatte Probleme beim Ticketkauf",
+            "url": "https://www.vzbv.de/meldungen/bargeld-bus-und-bahn-jeder-siebte-hatte-probleme-beim-ticketkauf",
+            "datum": "Wed, 09 Sep 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Frühstartrente: Gute Idee mit erheblichem Nachbesserungsbedarf",
+            "url": "https://www.vzbv.de/meldungen/fruehstartrente-gute-idee-mit-erheblichem-nachbesserungsbedarf",
+            "datum": "Mon, 10 Aug 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Urteile: Jahresentgelte von Bausparkassen sind unzulässig",
+            "url": "https://www.vzbv.de/urteile/urteile-jahresentgelte-von-bausparkassen-sind-unzulaessig",
+            "datum": "Thu, 30 Jul 2026",
+            "quelle": "vzbv – Finanzen"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Presse": {
+        "treffer": [
+          {
+            "titel": "Schlag gegen internationalen Cyber-Anlagebetrug",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260925_Herakles.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Orientierungspunkte zu Entgeltprinzipien für offene Glasfasernetze",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260922_OpenAccess.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Bundesnetzagentur veröffentlicht halbjährliche Erhebung im Messwesen",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260921_Rollout.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Aus­schrei­bung für Wind an Land zum 1. August 2026 erneut stark überzeichnet",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20260917_Wind.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Gasversorgung": {
+        "treffer": [
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 26. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231026_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 19. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231019_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 12. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231012_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 5. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231005_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {},
+    "github": {}
+  }
+}
