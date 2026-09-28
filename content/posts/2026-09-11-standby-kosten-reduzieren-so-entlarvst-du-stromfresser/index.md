@@ -37,7 +37,9 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro Kilowattstunde aber knapp **65 € im Jahr**. Kein finanzieller Weltuntergang – nur ein ziemlich teures rotes Lämpchen.
+Du willst standby kosten? Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro Kilowattstunde aber knapp **65 € im Jahr**. Kein finanzieller Weltuntergang – nur ein ziemlich teures rotes Lämpchen.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Die Lösung ist nicht, jeden Stecker täglich zu ziehen. Du brauchst eine kurze Messrunde und klare Ausnahmen. Dann schaltest du nur dort ab, wo Komfort und Technik nicht leiden.
 

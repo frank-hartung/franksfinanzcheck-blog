@@ -38,9 +38,14 @@ faktencheck: 2026-09-28
 
 Heizkosten sinken selten durch einen spektakulären Trick. Meist gewinnt die nüchterne Kombination: ein Grad weniger, richtig lüften, Wärme nicht hinter dem Sofa parken und den Verbrauch regelmäßig ablesen.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Du musst dafür nicht frieren. Du musst nur aufhören, nach Gefühl an fünf Thermostaten zu drehen und am Monatsende den Abschlag mit den echten Kosten zu verwechseln.
 
 ## Das Wichtigste in Kürze
+
+
+Beim Thema Heizkosten senken lohnt sich ein genauer Blick auf die Details.
 
 - Die Verbraucherzentrale nennt **rund 6 % weniger Heizenergie pro Grad** als Faustwert.
 - Wohnräume liegen oft bei etwa **20 °C**, Schlafzimmer bei **16 bis 18 °C** sinnvoll.
@@ -206,6 +211,9 @@ Halte außerdem fest, ob sich dein Alltag verändert hat. Mehr Homeoffice, Besuc
 Bei sehr hohen oder unerklärlichen Werten lohnt ein Blick auf den Heizspiegel und eine Energieberatung. So erkennst du, ob Verhalten, Anlage oder Gebäudehülle der größere Hebel ist. Thermostat, Wetter und Anwesenheit schwanken täglich. Eine Monatsreihe ist nicht perfekt, aber deutlich belastbarer als das Gefühl nach zwei kalten Abenden.
 
 Miss, statt zu raten.
+
+
+Gerade für heizkosten senken gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

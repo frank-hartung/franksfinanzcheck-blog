@@ -37,9 +37,11 @@ faktencheck: 2026-09-28
 
 Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach beginnt die eigentliche Arbeit: Filter zurücksetzen, Bonus ausblenden und prüfen, ob Preisgarantie und Vertragslaufzeit überhaupt zusammenpassen.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Ganz oben steht nicht automatisch der günstigste Vertrag. Dieser Leitfaden führt dich in zehn Minuten von der Jahresabrechnung bis zur belastbaren Auswahl.
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – Preisgarantie Gas 2026
 
 - Nutze den Jahresverbrauch aus der letzten Rechnung, keine grobe Haushalts-Schätzung.
 - Blende Boni im ersten Vergleich aus.

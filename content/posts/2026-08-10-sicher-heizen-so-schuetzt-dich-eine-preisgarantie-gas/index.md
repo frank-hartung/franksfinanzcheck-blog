@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
-description: "Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche Klauseln du prüfen musst."
+description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche…"
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
@@ -38,7 +38,9 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Gaspreisgarantien sind keine Flatrate fürs warme Wohnzimmer. Sie hält bestimmte Preisbestandteile stabil. Verbrauchst du mehr oder steigen ausdrücklich ausgenommene Kosten, kann die Rechnung trotzdem höher ausfallen.
+Du willst sicher heizen? Gaspreisgarantien sind keine Flatrate fürs warme Wohnzimmer. Sie hält bestimmte Preisbestandteile stabil. Verbrauchst du mehr oder steigen ausdrücklich ausgenommene Kosten, kann die Rechnung trotzdem höher ausfallen.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Trotzdem kann die Garantie sinnvoll sein: nicht als Wette auf steigende Preise, sondern als **Obergrenze für einen vertraglich definierten Teil deiner Kosten**.
 

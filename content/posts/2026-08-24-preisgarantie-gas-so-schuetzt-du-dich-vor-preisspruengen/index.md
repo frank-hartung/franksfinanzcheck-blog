@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-description: "Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung richtig."
+description: "Preisgarantie Gas: Gaspreis steigt trotz Garantie? So prüfst du Klausel und Preiserhöhung, rechnest Marktrisiken ein und nutzt Widerspruch oder…"
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Preisgarantie Gas", "Gaspreiserhöhung", "Gastarif wechseln", "Heizkosten senken"]
@@ -38,7 +38,9 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Springt der Börsenpreis, warnt schnell die Schlagzeile – und du sollst sofort einen Zweijahresvertrag unterschreiben? Ruhig bleiben. Großhandelspreise wirken nicht eins zu eins und nicht sofort auf deinen Endkundentarif.
+Du willst preisgarantie gas? Springt der Börsenpreis, warnt schnell die Schlagzeile – und du sollst sofort einen Zweijahresvertrag unterschreiben? Ruhig bleiben. Großhandelspreise wirken nicht eins zu eins und nicht sofort auf deinen Endkundentarif.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Relevant wird es, wenn dein Anbieter eine konkrete Preisänderung ankündigt oder deine Garantie ausläuft. Dann zählen Klausel, Frist und deine Jahreskosten.
 

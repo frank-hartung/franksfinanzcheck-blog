@@ -1,6 +1,6 @@
 ---
 title: "Gasrechnung senken: Spätsommer-Check für Tarif und Heizung"
-description: "Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder Vermieter priorisieren."
+description: "Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder…"
 date: 2026-09-25T12:15:40Z
 lastmod: 2026-09-28
 draft: false
@@ -39,11 +39,13 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Eine Stunde im September kann dir den hektischen Samstag im November ersparen. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du rechtzeitig siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
+Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Eine Stunde im September kann dir den hektischen Samstag im November ersparen. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du rechtzeitig siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimierte Heizung, aber eine belastbare Prioritätenliste.
 
-## Das Wichtigste in Kürze
+## Das Wichtigste in Kürze – Gasrechnung senken
 
 - **15 Minuten:** Rechnung und Vertrag prüfen.
 - **10 Minuten:** Zählerstand und Zählernummer sichern.
