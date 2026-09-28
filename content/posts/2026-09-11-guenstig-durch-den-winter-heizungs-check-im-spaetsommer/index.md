@@ -55,7 +55,7 @@ Ein Heizungs-Check ist dabei keine Bastelanleitung für Gasgeräte. Er trennt sa
 
 Lege Bedienungsanleitung, letzte Wartungsrechnung und Verbrauchsdaten bereit. Notiere außerdem:
 
-- aktuellen Zählerstand,
+- Aktuellen Zählerstand,
 - aktuellen Anlagendruck,
 - eingestellte Heizzeiten,
 - bekannte Problemräume,
@@ -129,7 +129,7 @@ Alte ungeregelte Pumpen können viel Strom benötigen. Notiere Hersteller und Ty
 
 Typische Hinweise sind:
 
-- entfernte Heizkörper werden schlecht warm,
+- Entfernte Heizkörper werden schlecht warm,
 - nahe Heizkörper sind überversorgt,
 - Strömungsgeräusche treten häufig auf,
 - die Anlage braucht hohe Pumpenleistung,

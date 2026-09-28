@@ -17,8 +17,8 @@ cover:
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
-pin_title: "Gastarif mit Preisgarantie: Die 10-Minuten-Prüfung"
-pin_description: "*Werbung | Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung. Mehr Spartipps auf FranksFinanzcheck! #preisgarantiegas2026 #gaspreiseabsichern #gasanbieterfestpreis"
+pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
+pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026"
@@ -106,7 +106,7 @@ Eingeschränkte Preisgarantien können Steuern, Abgaben, Umlagen oder Netzentgel
 
 Markiere in den Tarifbedingungen:
 
-1. garantierte Bestandteile,
+1. Garantierte Bestandteile,
 2. ausgenommene Bestandteile,
 3. Beginn und Ende der Garantie,
 4. Geltung für Arbeits- und Grundpreis.
@@ -144,7 +144,7 @@ Bei Pakettarifen kaufst du eine feste Energiemenge. Verbrauchst du weniger, verf
 
 Schau nicht nur auf Sterne im Portal. Prüfe:
 
-- vollständiges Impressum,
+- Vollständiges Impressum,
 - verständliche Tarifbedingungen,
 - erreichbaren Kundenservice,
 - aktuelle Beschwerden aus seriösen Quellen,
@@ -175,7 +175,7 @@ Notiere den Zählerstand zum Wechseltermin und übermittle ihn wie angefordert. 
 
 ## Wie du die mögliche Ersparnis berechnest
 
-> alter Jahrespreis – neuer Jahrespreis = rechnerischer Vorteil
+> Alter Jahrespreis – neuer Jahrespreis = rechnerischer Vorteil
 
 Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr. Grundpreis und Bonus können die Differenz verändern.
 
@@ -187,7 +187,7 @@ Der BDEW-Durchschnitt von 11,93 Cent pro kWh im Einfamilienhaus hilft nur zur Ma
 
 Eine längere Laufzeit kann sinnvoll sein, wenn:
 
-- der Startpreis konkurrenzfähig ist,
+- Der Startpreis konkurrenzfähig ist,
 - die Garantie den wesentlichen Zeitraum abdeckt,
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
@@ -222,7 +222,7 @@ Notiere Stand, Zählernummer und Datum. Übermittle den Wert an die Stellen, die
 
 Prüfe zum Schluss auch die alte Abrechnung:
 
-- stimmt der Lieferzeitraum,
+- Stimmt der Lieferzeitraum,
 - wurde der richtige Endstand verwendet,
 - sind alle Abschläge verbucht,
 - wurden Bonus oder Guthaben korrekt berücksichtigt,

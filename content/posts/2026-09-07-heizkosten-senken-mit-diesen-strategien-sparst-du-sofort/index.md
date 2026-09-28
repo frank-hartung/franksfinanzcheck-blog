@@ -10,8 +10,8 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten", "Strategien"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
-pin_title: "Heizkosten sofort senken: 7 wirksame Schritte"
-pin_description: "*Werbung | Heizkosten senken ohne Frieren: Mit passenden Temperaturen, richtigem Lüften, freien Heizkörpern und Verbrauchskontrolle sparst du noch in der laufenden Saison. Mehr Spartipps auf FranksFinanzcheck! #heizkostensenken #heizungsparentipps #gasabschlaganpassen"
+pin_title: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
+pin_description: "*Werbung | Gaswechsel leicht gemacht: Preisgarantie, Kündigungsfristen und die Fallstricke im Kleingedruckten. Mit diesen Praxis-Tipps wechselst du stressfrei und sparst bis zu 680 Euro bei den Heizkosten. Jetzt die 10-Minuten-Anleitung lesen."
 ai_generated: false
 inspiration: "Heizkosten senken: Diese 6 To-dos erledigst du am besten JETZT"
 cover:
@@ -89,7 +89,7 @@ Prüfe drei Dinge:
 
 - Kann die Luft oberhalb und unterhalb zirkulieren?
 - Hängt der Vorhang vor Thermostat oder Heizfläche?
-- steht ein großes Möbelstück unmittelbar davor?
+- Steht ein großes Möbelstück unmittelbar davor?
 
 Auch Staub zwischen den Lamellen verschlechtert die Wärmeabgabe. Eine Reinigung ist kein Sparwunder, aber schnell erledigt.
 
@@ -194,7 +194,7 @@ Ein kalter Monat braucht mehr Heizenergie als ein milder. Vergleiche deshalb nic
 
 Für deinen Alltagscheck reicht eine einfache Notiz:
 
-- mittlere Außentemperatur oder „mild/kalt“,
+- Mittlere Außentemperatur oder „mild/kalt“,
 - Anwesenheitstage,
 - Zählerdifferenz,
 - geänderte Einstellung,
@@ -213,7 +213,7 @@ Bei sehr hohen oder unerklärlichen Werten lohnt ein Blick auf den Heizspiegel u
 Miss, statt zu raten.
 
 
-Gerade für heizkosten senken gilt: Kleine Änderungen bringen große Wirkung.
+Gerade für Heizkosten senken gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

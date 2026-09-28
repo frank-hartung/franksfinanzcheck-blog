@@ -17,8 +17,8 @@ cover:
 kurzantwort: "Eine Gaspreisgarantie schützt nur die im Vertrag genannten Preisbestandteile für einen festen Zeitraum. Beschaffungskosten sind typischerweise erfasst; Steuern, Abgaben, Umlagen oder Netzentgelte können ausgeschlossen sein. Sinnvoll ist die Garantie, wenn Gesamtpreis, Garantieumfang und Vertragslaufzeit zusammenpassen – nicht, wenn du für vermeintliche Sicherheit schon beim Start deutlich zu viel zahlst."
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
-pin_title: "Gaspreisgarantie: Was sie schützt – und was nicht"
-pin_description: "*Werbung | Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche… Mehr Spartipps auf FranksFinanzcheck! #sicherheizen #gaspreisgarantie #gastarifwechseln"
+pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
+pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "So finden Sie den passenden Strom- oder Gastarif"
@@ -86,7 +86,7 @@ Die Garantie sollte möglichst die relevante Erstlaufzeit abdecken. Bist du zwö
 
 Eine Garantie passt häufig, wenn:
 
-- dein Budget wenig Spielraum für Preissprünge hat,
+- Dein Budget wenig Spielraum für Preissprünge hat,
 - der angebotene Gesamtpreis konkurrenzfähig ist,
 - du nicht ständig den Markt beobachten willst,
 - die Klausel einen großen Preisanteil schützt,
@@ -94,7 +94,7 @@ Eine Garantie passt häufig, wenn:
 
 Sie passt eher nicht, wenn:
 
-- der Startpreis deutlich über vergleichbaren Tarifen liegt,
+- Der Startpreis deutlich über vergleichbaren Tarifen liegt,
 - wichtige Preisbestandteile ausgeschlossen sind,
 - Garantie und Bindung nicht zusammenpassen,
 - du bald umziehst oder deinen Verbrauch stark veränderst,
@@ -165,10 +165,10 @@ Nach Angaben der Bundesnetzagentur müssen Preisänderungen grundsätzlich trans
 Gehe so vor:
 
 1. Schreiben und Vertragsklausel nebeneinanderlegen.
-2. betroffenen Preisbestandteil markieren.
+2. Betroffenen Preisbestandteil markieren.
 3. Frist und Wirksamkeitsdatum notieren.
-4. bei Widerspruch oder Kündigung Zugang nachweisbar machen.
-5. bei Streit Verbraucherzentrale oder Schlichtungsstelle einbeziehen.
+4. Bei Widerspruch oder Kündigung Zugang nachweisbar machen.
+5. Bei Streit Verbraucherzentrale oder Schlichtungsstelle einbeziehen.
 
 ## Der Wechsel bleibt technisch unspektakulär
 

@@ -17,8 +17,8 @@ cover:
 kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte mindestens 24 Stunden und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken", "Stromanbieter wechseln"]
-pin_title: "Stromfresser finden: messen, rechnen, gezielt sparen"
-pin_description: "*Werbung | Energiediebe stoppen: Stromfresser finden statt raten: Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch, ohne funktionierende… Mehr Spartipps auf FranksFinanzcheck! #energiediebestoppen #stromfresserfinden #stromsparenhaushalt"
+pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
+pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,0 ct/kWh im Durchschnitt"
@@ -116,7 +116,7 @@ Kühlschränke und Gefriergeräte laufen ständig. Trotzdem ist „älter als ze
 
 Achte beim Vergleich auf:
 
-- ähnliches Nutzvolumen,
+- Ähnliches Nutzvolumen,
 - Kühl- und Gefrieraufteilung,
 - Jahresverbrauch in kWh auf dem EU-Energielabel,
 - Kaufpreis und voraussichtliche Nutzungsdauer.
@@ -130,7 +130,7 @@ Dein altes Gerät verbraucht gemessen 310 kWh im Jahr. Das passende Neugerät is
 - Differenz: **170 kWh**
 - Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
 - Kaufpreis: **650 €**
-- einfache Amortisationszeit: **rund 10,3 Jahre**
+- Einfache Amortisationszeit: **rund 10,3 Jahre**
 
 Automatisch folgt daraus noch kein Ja. Geht das Altgerät ohnehin bald kaputt, sieht die Rechnung anders aus. Funktioniert es zuverlässig, ist Weiterbetrieb oft vernünftig.
 
@@ -162,7 +162,7 @@ Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitsk
 
 ## Häufige Messfehler
 
-**Watt und Kilowattstunden verwechseln:** Watt ist die momentane Leistung. kWh ist die über Zeit verbrauchte Energie.
+**Watt und Kilowattstunden verwechseln:** Watt ist die momentane Leistung. KWh ist die über Zeit verbrauchte Energie.
 
 **Zu kurz messen:** Fünf Minuten sagen bei Kühlgerät und Waschprogramm fast nichts aus.
 
@@ -224,7 +224,7 @@ Prüfe bei unerklärlich hoher Grundlast außerdem, ob Gemeinschaftsstrom oder e
 Speichere Messwert, Datum und Strompreis gemeinsam. Sonst vergleichst du später kWh und Euro aus verschiedenen Annahmen.
 
 
-Gerade für energiediebe stoppen gilt: Kleine Änderungen bringen große Wirkung.
+Gerade für Energiediebe stoppen gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Fazit: Der größte Stromfresser ist der ungeprüfte
 

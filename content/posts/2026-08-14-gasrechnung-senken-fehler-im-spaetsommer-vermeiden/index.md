@@ -17,8 +17,8 @@ cover:
 kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein unrealistischer Abschlag, fehlende Zählerstände, ein aufgeschobener Heizungs-Check und pauschale Technik-Einstellungen. Prüfe Arbeitspreis, Grundpreis und Vorjahresverbrauch getrennt. Entlüfte nur bei Bedarf; wiederkehrender Druckverlust, Störungen und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
-pin_title: "Gasrechnung senken: 5 Fehler vor der Heizperiode"
-pin_description: "*Werbung | Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an… Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensenken #gastarifwechseln"
+pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
+pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026: 11,93 ct/kWh im Einfamilienhaus"
@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Im Spätsommer gluckert noch kein Heizkörper laut genug, um zu nerven. Genau deshalb ist jetzt der richtige Zeitpunkt für den Kostencheck. Im Januar wird aus einer kleinen Auffälligkeit schnell ein Terminproblem – und aus einem schlechten Tarif ein ganzer teurer Winter.
+Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im Spätsommer gluckert noch kein Heizkörper laut genug, um zu nerven. Genau deshalb ist jetzt der richtige Zeitpunkt für den Kostencheck. Im Januar wird aus einer kleinen Auffälligkeit schnell ein Terminproblem – und aus einem schlechten Tarif ein ganzer teurer Winter.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -45,7 +45,7 @@ Die größten Fehler liegen selten an einer einzelnen Schraube. Sie entstehen, w
 ## Das Wichtigste in Kürze
 
 
-Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Gerade wenn du deine Gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
 
 - Ein niedriger Abschlag ist keine Ersparnis, sondern nur eine kleinere Vorauszahlung.
 - Vergleiche Gastarife mit deinem echten Jahresverbrauch und dem Gesamtpreis.
@@ -125,7 +125,7 @@ Das kannst du selbst prüfen:
 - Heizflächen frei und sauber?
 - Thermostate beweglich?
 - Gluckern oder kalte Bereiche?
-- sichtbare Feuchtigkeit an Ventilen?
+- Sichtbare Feuchtigkeit an Ventilen?
 - Heizzeiten noch passend?
 
 Entlüfte nur bei typischen Anzeichen und nach Anleitung. Kontrolliere danach den Anlagendruck. Einen pauschalen Sollwert gibt es nicht; Gebäudehöhe und Anlage sind entscheidend.

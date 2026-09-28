@@ -3,7 +3,7 @@ title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
 description: "Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten …"
 date: 2026-09-28T11:05:52Z
 draft: true
-tags: ["Notgroschen aufbauen: Wie viel reicht wirklich?"]
+tags: ["Notgroschen aufbauen: wie viel reicht wirklich?"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["Notgroschen aufbauen: Wie viel reicht wirklich?"]
@@ -13,7 +13,7 @@ ki_redaktion: "claude"
 ki_redaktion_status: "review"
 ---
 
-Du hast das Gefühl, dass am Monatsende immer wieder etwas fehlt, obwohl du eigentlich nicht mehr ausgibst, als du verdienst? Vielleicht liegt das daran, dass du keinen Puffer hast, der dich vor unvorhergesehenen Ausgaben schützt. In diesem Ratgeber erfährst du, wie du einen Notgroschen aufbaust, welcher Betrag wirklich sinnvoll ist und welche Schritte du heute noch gehen kannst, um finanziell entspannter zu leben.
+Du hast das Gefühl, dass am Monatsende immer wieder etwas fehlt, obwohl du eigentlich nicht mehr ausgibst, als du verdienst? Vielleicht liegt das daran, dass du keinen Puffer hast, der dich vor unvorhergesehenen Ausgaben schützt. In diesem Ratgeber erfährst du, wie du einen Notgroschen aufbaust, welcher Betrag wirklich sinnvoll ist und welche Schritte du heute noch gehen kannst, um finanziell entspannter zu Leben.
 
 ## Warum ein Notgroschen unverzichtbar ist
 

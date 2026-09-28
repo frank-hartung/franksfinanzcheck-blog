@@ -44,7 +44,7 @@ Der Spätsommer ist dafür praktisch. Du hast noch Zeit, Abschlag und Tarif vor 
 ## Das Wichtigste in Kürze
 
 
-Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Gerade wenn du deine Gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
 
 - Prüfe Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge getrennt.
 - Eine Abschlagssenkung spart nichts; sie kann eine Nachzahlung vergrößern.
@@ -130,7 +130,7 @@ Teile die erwarteten Jahreskosten durch zwölf. Berücksichtige sichere Boni ode
 
 Passe den Abschlag an, wenn:
 
-- sich Arbeits- oder Grundpreis ändert,
+- Sich Arbeits- oder Grundpreis ändert,
 - dein Haushalt größer oder kleiner wird,
 - du die Heizung oder das Gebäude verändert hast,
 - der bisherige Verbrauch deutlich untypisch war.

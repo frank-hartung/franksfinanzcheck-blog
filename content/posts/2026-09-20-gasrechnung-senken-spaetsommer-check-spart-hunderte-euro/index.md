@@ -39,7 +39,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Wer seine gasrechnung senken senken will, sollte im Spätsommer handeln. Eine Stunde im September kann dir den hektischen Samstag im November ersparen. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du rechtzeitig siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
+Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Eine Stunde im September kann dir den hektischen Samstag im November ersparen. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du rechtzeitig siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -56,7 +56,7 @@ Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimiert
 
 ## Was du bereitlegst
 
-- letzte Gas- oder Heizkostenabrechnung,
+- Letzte Gas- oder Heizkostenabrechnung,
 - aktuellen Vertrag,
 - Smartphone für Fotos,
 - Raumthermometer, falls vorhanden,
@@ -135,7 +135,7 @@ Klebe nicht mehrere Dichtungsschichten auf Verdacht übereinander. Das kann Besc
 
 Ohne etwas zu öffnen, prüfst du:
 
-- sichtbares Wasser,
+- Sichtbares Wasser,
 - ungewöhnliche Geräusche,
 - Fehlermeldungen,
 - beschädigte Rohrdämmung,
@@ -157,7 +157,7 @@ Schreibe jeden Fund in eine von drei Spalten.
 
 ### Vermieter oder Fachbetrieb
 
-- wiederkehrender Druckverlust,
+- Wiederkehrender Druckverlust,
 - Leckage,
 - kalte Heizkörper trotz Entlüften,
 - Störungen und Fehlercodes,
@@ -167,7 +167,7 @@ Schreibe jeden Fund in eine von drei Spalten.
 
 ### Vertrag
 
-- deutlich zu hoher Gesamtpreis,
+- Deutlich zu hoher Gesamtpreis,
 - Preisgarantie endet,
 - Bonusjahr läuft aus,
 - Laufzeit oder Kündigungsfrist beachten,
@@ -195,7 +195,7 @@ Die Bundesnetzagentur modellierte für Januar 2026 bei 20.000 kWh ein durchschni
 
 Deine Ersparnis berechnest du so:
 
-> bisherige Jahreskosten – neue Jahreskosten = Tarifvorteil
+> Bisherige Jahreskosten – neue Jahreskosten = Tarifvorteil
 
 Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050 €, beträgt der rechnerische Vorteil 350 €. Prüfe Bonusbedingungen und Grundpreis, bevor du abschließt.
 
