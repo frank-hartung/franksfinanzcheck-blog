@@ -50,6 +50,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Dein Check in zehn Minuten
 
+
+Gerade wenn du deine gasrechnung prüfen willst, lohnt sich ein Check vor der Heizperiode.
+
 Lege Rechnung, Vertrag und ein Handy für ein Foto bereit. Schau zuerst auf den Zeitraum und auf beide Zählerstände. Dann notiere Verbrauch, Preis je kWh und festen Preis im Jahr. Diese fünf Werte zeigen dir meist schon, warum die Summe höher oder niedriger ist als im Vorjahr.
 
 Hast du einen eigenen Vertrag, rechnest du den Preis für ein Jahr mit deinem Verbrauch. Vergleiche diesen Wert ohne Bonus mit neuen Angeboten. Bei einer Heizung im Haus fragst du statt eines neuen Anbieters nach der Abrechnung und nach den Werten für deine Wohnung.
@@ -251,6 +254,9 @@ Hefte die Antwort zur Abrechnung. So bleibt der Vorgang auch beim nächsten Jahr
 
 
 Eine saubere Prüfung zeigt dir, ob Verbrauch, Tarif oder Abschläge die Rechnung treiben. Erst danach lässt sich seriös beurteilen, wo du ansetzen kannst.
+
+
+Mit dem richtigen Vorgehen lässt sich die gasrechnung prüfen um bis zu 15 % senken.
 
 ## Fazit: Die Rechnung erzählt dir, welcher Hebel wirkt
 
