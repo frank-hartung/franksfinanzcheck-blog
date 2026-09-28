@@ -125,11 +125,11 @@ Obwohl ein Sparplan nach dem Prinzip "Set and Forget" funktioniert, solltest du 
 
 Wenn du eine Gehaltserhöhung bekommst, ist es sinnvoll, die Sparrate prozentual mitzuziehen. Viele Broker bieten hierfür eine automatische Dynamisierung an (z. B. eine Erhöhung um 2 % oder 5 % pro Jahr).
 
-Ein weiterer Punkt ist das sogenannte Rebalancing. Wenn du mehrere ETFs besparst (z.
+Ein weiterer Punkt ist das sogenannte Rebalancing. Besparst du mehrere ETFs – zum Beispiel Welt- und Schwellenländer-Index im Verhältnis 70/30 –, kann sich dieser **Anteil** durch unterschiedliche Wertentwicklungen verschieben. Nach einiger Zeit besteht dein Depot vielleicht zu 80 % aus Industrieländern. Durch eine Anpassung der Sparraten für einige Monate stellst du das ursprüngliche Verhältnis wieder her, ohne Anteile verkaufen zu müssen (was Steuern auslösen würde).
 
-B. Welt und Schwellenländer im Verhältnis 70/30, kann sich dieser **Anteil** durch unterschiedliche Wertentwicklungen verschieben. Nach einiger Zeit besteht dein Depot vielleicht zu 80 % aus Industrieländern. Durch eine Anpassung der Sparraten für einige Monate kannst du das ursprüngliche Verhältnis wiederherstellen, ohne Anteile verkaufen zu müssen (was Steuern auslösen würde).
+Geld, das du nicht investieren willst – etwa deine Rücklage neben dem Depot –, legst du am besten verzinst an. Ein Beispiel dafür ist das Tagesgeld-Konto der [C24 Bank](/go/tagesgeld/) (Angebot der C24 Bank, einer CHECK24-Tochter).
 
-Nutze für den Vergleich der Broker und die Auswahl der besten Konditionen unabhängige Portale. Ein Wechsel des Depots ist heute in Deutschland unkompliziert und kostenlos möglich, falls dein bisheriger Anbieter die Gebühren für Sparpläne signifikant erhöht. Ein passender Einstiegspunkt für den Vergleich findet sich hier: [/go/tagesgeld/ der C24 Bank](/go/tagesgeld/).
+Und wenn du die Konditionen deines Brokers prüfst, hilft ein Blick auf unabhängige Portale. Ein Wechsel des Depots ist in Deutschland unkompliziert und meist kostenlos möglich, falls dein bisheriger Anbieter die Gebühren für Sparpläne signifikant erhöht.
 
 
 
