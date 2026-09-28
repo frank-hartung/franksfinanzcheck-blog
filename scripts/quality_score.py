@@ -31,6 +31,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import template_boilerplate  # noqa: E402  (SSOT Fazit-/FAQ-Bausteine, #251)
+import repetition_guard  # noqa: E402  (adjacent-word repetition SSOT)
 
 THRESHOLD_PUBLISH = 0.85
 THRESHOLD_REVIEW = 0.80
@@ -165,6 +166,12 @@ def score_article(path: str) -> dict:
         typo -= min(0.2, bad_quote * 0.02)
     if broken_ctx:
         typo -= min(0.3, broken_ctx * 0.05)
+    # Adjacent duplicate words are a hard editorial defect, not an optional
+    # style hint.  Keep this in the score as a second line of defence even
+    # when a producer forgot to run the auto-healing guard.
+    repeated_words = repetition_guard.repetitions(a["content"])
+    if repeated_words:
+        typo -= min(0.4, len(repeated_words) * 0.2)
     parts["typography"] = max(0.0, typo)
 
     # 5) Einzigartigkeit (bestehendes Audit-Ergebnis grob ermitteln)
