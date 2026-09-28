@@ -1,4 +1,25 @@
 {
+  "buero-equipment-absetzen-so-zahlst-du-weniger-steuern": {
+    "seit": "2026-09-28",
+    "slug": "2026-09-28-buero-equipment-absetzen-so-zahlst-du-weniger-steuern",
+    "titel": "Büro-Equipment absetzen: So zahlst du weniger Steuern",
+    "zuletzt_im_pool": "2026-09-28",
+    "zustand": "pool"
+  },
+  "camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle": {
+    "seit": "2026-09-28",
+    "slug": "2026-09-28-camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle",
+    "titel": "Camping 2026: So planst du deinen Urlaub ohne Kostenfalle",
+    "zuletzt_im_pool": "2026-09-28",
+    "zustand": "pool"
+  },
+  "etf-sparplan-2026-vermoegen-aufbauen-mit-system": {
+    "seit": "2026-09-28",
+    "slug": "2026-09-28-etf-sparplan-2026-vermoegen-aufbauen-mit-system",
+    "titel": "ETF-Sparplan 2026: Vermögen aufbauen mit System",
+    "zuletzt_im_pool": "2026-09-28",
+    "zustand": "pool"
+  },
   "gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",

@@ -37,11 +37,11 @@
  },
  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
   "title": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-  "ts": "2026-08-25T16:23:33+00:00",
+  "ts": "2026-09-28T10:43:19+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": "bis zu 720 € sparen"
+   "savings": ""
   }
  },
  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
@@ -64,11 +64,11 @@
  },
  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
   "title": "Energiediebe stoppen: So kannst du Stromfresser finden",
-  "ts": "2026-08-25T16:24:11+00:00",
+  "ts": "2026-09-28T10:43:23+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": "bis zu 420 € sparen"
+   "savings": ""
   }
  },
  "_index": {
@@ -122,11 +122,11 @@
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
   "title": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
-  "ts": "2026-08-25T16:24:28+00:00",
+  "ts": "2026-09-28T10:43:27+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
-   "savings": "bis zu 580 € im Jahr sparen"
+   "savings": ""
   }
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
@@ -527,7 +527,7 @@
  },
  "brand-franksfinanzcheck": {
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-27T19:42:13+00:00",
+  "ts": "2026-09-28T10:43:39+00:00",
   "design": {
    "v": 3,
    "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
@@ -945,6 +945,33 @@
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-28-etf-sparplan-2026-vermoegen-aufbauen-mit-system": {
+  "title": "ETF-Sparplan 2026: Vermögen aufbauen mit System",
+  "ts": "2026-09-28T10:43:00+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-28-buero-equipment-absetzen-so-zahlst-du-weniger-steuern": {
+  "title": "Büro-Equipment absetzen: So zahlst du weniger Steuern",
+  "ts": "2026-09-28T10:43:36+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-28-camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle": {
+  "title": "Camping 2026: So planst du deinen Urlaub ohne Kostenfalle",
+  "ts": "2026-09-28T10:42:57+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  }

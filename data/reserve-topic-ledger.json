@@ -6,17 +6,90 @@
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2027-03-26"
   },
+  "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
+    "fehler": 0,
+    "grund": "produziert: buero-equipment-absetzen-so-zahlst-du-weniger-steuern",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-28",
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2027-03-27"
+  },
+  "Campingurlaub 2026: So hältst du die Kosten im Rahmen": {
+    "fehler": 0,
+    "grund": "produziert: camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-28",
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2027-03-27"
+  },
+  "DSL-Anbieter wechseln: Wie du den besten Tarif findest": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 690 Wörter / 5261 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Keyword „dsl-anbieter“ fehlt)",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
   "E-Auto laden: So senkst du deine Stromkosten": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg",
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2026-09-30"
   },
+  "ETF-Sparplan für Einsteiger: So startest du monatlich": {
+    "fehler": 0,
+    "grund": "produziert: etf-sparplan-2026-vermoegen-aufbauen-mit-system",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-28",
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2027-03-27"
+  },
+  "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 876 Wörter / 6426 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 866 Wörter / 6375 Zeichen (Premium: ≥1.",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Glasfaserausbau: Wann lohnt sich der Anschluss?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 784 Wörter / 5792 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Hauskauf finanzieren: Darlehen clever vergleichen": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 685 Wörter / 5563 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 751 Wörter / 5837 Zeichen (Premium: ≥1.",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
   "Heizöl kaufen: Wann ist der beste Zeitpunkt?": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg",
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2026-09-30"
+  },
+  "Hund & Katze: Lohnt sich eine Tierversicherung?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 732 Wörter / 6007 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 938 Wörter / 7294 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Krankenzusatzversicherung: Welche Bausteine sich lohnen": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 1245 Wörter / 9808 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
   },
   "Last-Minute Urlaubsangebote sichern": {
     "fehler": 1,
@@ -37,12 +110,33 @@
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2026-09-30"
   },
+  "Riester-Rente: Lohnt sie sich 2026 noch?": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 853 Wörter / 6266 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 1071 Wörter / 8571 Zeichen (Premium: ≥1",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Smart Home: Diese Geräte sparen wirklich Strom": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 669 Wörter / 5001 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
     "fehler": 0,
     "grund": "produziert: 20-wege-zu-weniger-kosten-stromrechnung-zu-hoch",
     "letzter_erfolg": "2026-09-26",
     "letzter_versuch": "2026-09-26",
     "sperre_bis": "2027-03-25"
+  },
+  "Strom sparen im Sommer: 10 Tipps für heiße Monate": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 812 Wörter / 5787 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
   },
   "Stromanbieter wechseln und bis zu 300 Euro sparen": {
     "fehler": 0,
@@ -51,11 +145,46 @@
     "letzter_versuch": "2026-09-26",
     "sperre_bis": "2027-03-25"
   },
+  "Stromkosten senken mit cleveren Haushaltsgeräten": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 629 Wörter / 4781 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Keyword „stromkosten“ fehlt im ersten Absatz (Premium #",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Strompreis-Anpassung im Sommer ausnutzen": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 825 Wörter / 6057 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 776 Wörter / 5853 Zeichen (Premium: ≥1.",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Stromspar-Apps im Test für den Haushalt": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 683 Wörter / 5144 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Keyword „stromspar-apps“ fehlt)",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
   "Urlaubskasse clever aufbessern": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg",
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2026-09-30"
+  },
+  "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 672 Wörter / 5190 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
+  },
+  "Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 825 Wörter / 6157 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-28",
+    "sperre_bis": "2026-10-01"
   },
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
     "fehler": 1,
