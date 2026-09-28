@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "name": "ZEIT-Niveau-Rechtschreib-Wache",
+  "_doku": "SSOT der Premium-Rechtschreibprüfung (scripts/zeit_rechtschreibung.py). Felder werden mit den eingebauten Defaults gemergt; Leitplanken in docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md.",
+  "anbieter": {
+    "produkt": "LanguageTool-kompatibler Premium-Prüfdienst (v2/check)",
+    "api_url_umgebung": ["ZR_API_URL", "LT_API_URL"],
+    "benutzer_umgebung": ["ZR_USERNAME", "LT_USERNAME"],
+    "schluessel_umgebung": ["ZR_API_KEY", "LT_API_KEY", "LT_APIKEY"],
+    "standard_api_url": "https://api.languagetool.org/v2/check",
+    "require_online": false,
+    "offline_fallback": true,
+    "_kosten_regel": "require_online=true oder offline_fallback=false bricht den Lauf sofort mit Exit 2 (Dauervorgabe: kein Paid-/Netz-Provider als alleiniger Pfad)."
+  },
+  "anfrage": {
+    "language": "de-DE",
+    "motherTongue": "de-DE",
+    "level": "picky",
+    "timeout_s": 60,
+    "versuche": 3,
+    "chunk_zeichen": 9000,
+    "chunk_zeichen_premium": 15000,
+    "min_intervall_oeffentlich_s": 4.0,
+    "min_intervall_premium_s": 0.6,
+    "max_anfragen_pro_lauf": 120,
+    "max_anfragen_oeffentlich": 40,
+    "_oeffentlich": "Der öffentliche Gratis-Endpunkt ist nur der manuelle Modus (--oeffentlich) – ToS verbieten Automation (20 Anfragen/Min, 75 KB/Min, 20 KB/Anfrage)."
+  },
+  "auto_fix": {
+    "issue_types": ["misspelling", "typographical"],
+    "regeln": [
+      "GERMAN_SPELLER_RULE",
+      "UPPERCASE_SENTENCE_START",
+      "DOUBLE_PUNCTUATION",
+      "WHITESPACE_RULE",
+      "COMMA_PARENTHESIS_WHITESPACE",
+      "GERMAN_WORD_REPEAT_RULE"
+    ],
+    "nur_ein_vorschlag": true,
+    "max_fund_zeichen": 60,
+    "zonen": ["fluesstext", "description"],
+    "_vertrag": "Nur mechanisch eindeutige Fälle (ein Ersatz-Vorschlag, harte Regel-Allowlist). Stil, Komma, Semantik und Titel bleiben Agentur-Hand."
+  },
+  "ignorieren": {
+    "regeln": [],
+    "kategorien": [],
+    "_pflege": "Regel-IDs/Kategorien hier eintragen, wenn der Prüfdienst für dieses Blog bewusst irrelevante Befunde meldet (siehe Abschnitt 'Unterdrückte Funde' im Report)."
+  },
+  "whitelist_dateien": [
+    "data/spellcheck_whitelist.txt",
+    "data/grammar_whitelist.txt"
+  ],
+  "history": {
+    "pfad": "data/zeit_rechtschreibung_history.jsonl",
+    "max": 500
+  },
+  "cache": {
+    "pfad": "data/zeit_rechtschreibung_cache.json",
+    "aktiv": true,
+    "max": 400,
+    "_zweck": "Quoten-Schutz: Unveränderte Artikel kosten keine Anfrage."
+  }
+}

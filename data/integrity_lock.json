@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-28T03:04:40.494015+00:00",
-  "head": "aa15446",
+  "signed_at": "2026-09-28T13:18:28.740134+00:00",
+  "head": "af76ccd",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
@@ -38,7 +38,7 @@
     "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
     "scripts/link_density_guard.py": "296130444e6e875c388b6e657bad26821d9b20971931ea43f672189a7f1044ca",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
-    "scripts/redaktions_standard.py": "e85bca60d1b05baf7a1e32f4a21b3dc1bdf5f4d737b11b0b11af80699d18119a",
+    "scripts/redaktions_standard.py": "821e633a0a2dcbeacd0f5ad5ba7170e4a66492f056c57a00c9d6d57402878568",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2",
@@ -47,55 +47,16 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "2250e5475793e1c74bc0f4722305161b5dba611345acd6c557d509e28593dfdf",
-  "audit_start_sha256": "cecf19a6d342574c5fa3c3881c939b48e0caa609252de534bacd4d6438305277",
+  "files_sha256": "99f66745b16ead8a02fb0bdd475866fcfb6028340f3803d4c23b1fdc8fc79f13",
+  "audit_start_sha256": "bc8c84582b2ba008ad96ea061c2773b7b733372b09ee53c1ec05c7d8955e0942",
   "audit": [
-    {
-      "date": "2026-09-27",
-      "art": "set-current",
-      "head": "3732a6a",
-      "geaendert": [
-        "data/brand_lock.yaml",
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "3732a6a",
-              "datum": "2026-09-27",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/brand_lock.yaml",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "3732a6a",
-              "datum": "2026-09-27",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "10bbf3ee8b01be6d0c5ded2ace0c0a3a90e36a9a2bb7d5aedbe33e570da46302",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-27",
       "art": "set-current",
       "head": "6ac7c4f",
       "geaendert": [],
       "files_sha256": "10bbf3ee8b01be6d0c5ded2ace0c0a3a90e36a9a2bb7d5aedbe33e570da46302",
-      "prev_sha256": "cecf19a6d342574c5fa3c3881c939b48e0caa609252de534bacd4d6438305277"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-27",
@@ -414,8 +375,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "2af3b449e2335094941e559d8643c1868db46578535394d1e1c8f0347a676d29",
-      "files_sha256": "2250e5475793e1c74bc0f4722305161b5dba611345acd6c557d509e28593dfdf"
+      "files_sha256": "2250e5475793e1c74bc0f4722305161b5dba611345acd6c557d509e28593dfdf",
+      "prev_sha256": "2af3b449e2335094941e559d8643c1868db46578535394d1e1c8f0347a676d29"
+    },
+    {
+      "date": "2026-09-28",
+      "art": "set-current",
+      "head": "af76ccd",
+      "geaendert": [
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ac59f2e",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "8f9086e4daae7e9e3d4682ffbbdff072a8113e9120adb7d6db01efebe1cdf650",
+      "files_sha256": "99f66745b16ead8a02fb0bdd475866fcfb6028340f3803d4c23b1fdc8fc79f13"
     }
   ]
 }

@@ -12,3 +12,6 @@
 {"date": "2026-09-26", "generated_at": "2026-09-26 08:58:22 UTC", "modus": "FIX", "funde": 0, "geheilt": 0, "exit_code": 0}
 {"date": "2026-09-27", "generated_at": "2026-09-27 09:42:24 UTC", "modus": "FIX", "funde": 0, "geheilt": 0, "exit_code": 0}
 {"date": "2026-09-28", "generated_at": "2026-09-28 10:22:44 UTC", "modus": "FIX", "funde": 0, "geheilt": 0, "exit_code": 0}
+{"date": "2026-09-28", "generated_at": "2026-09-28 13:21:07 UTC", "modus": "REPORT", "funde": 1, "geheilt": 0, "exit_code": 1}
+{"date": "2026-09-28", "generated_at": "2026-09-28 13:24:26 UTC", "modus": "REPORT", "funde": 0, "geheilt": 0, "exit_code": 0}
+{"date": "2026-09-28", "generated_at": "2026-09-28 13:24:38 UTC", "modus": "REPORT", "funde": 0, "geheilt": 0, "exit_code": 0}

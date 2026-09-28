@@ -30,7 +30,13 @@
     "faktenfrische": "python3 scripts/faktenfrische.py",
     "faktenfrische:neu": "python3 scripts/faktenfrische.py --neu --apply",
     "faktenfrische:bestand": "python3 scripts/faktenfrische.py --apply",
-    "test:faktenfrische": "python3 scripts/faktenfrische.py --selftest"
+    "test:faktenfrische": "python3 scripts/faktenfrische.py --selftest",
+    "rechtschreibung:zeit": "python3 scripts/zeit_rechtschreibung.py",
+    "rechtschreibung:zeit:fix": "python3 scripts/zeit_rechtschreibung.py --fix",
+    "rechtschreibung:zeit:offline": "python3 scripts/zeit_rechtschreibung.py --offline",
+    "rechtschreibung:zeit:strict": "python3 scripts/zeit_rechtschreibung.py --strict",
+    "rechtschreibung:zeit:probe": "python3 scripts/zeit_rechtschreibung.py --probe",
+    "test:rechtschreibung": "python3 scripts/zeit_rechtschreibung.py --selftest && python3 -m unittest scripts.tests.test_zeit_rechtschreibung"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
