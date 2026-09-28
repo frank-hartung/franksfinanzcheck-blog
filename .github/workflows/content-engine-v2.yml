@@ -283,6 +283,9 @@ jobs:
           python3 scripts/emoji_guard.py --fix || echo "⚠ Emoji-Guard (nicht kritisch)"
           echo "== Faktencheck-Schreibtisch (math_guard: Rechenbeispiele selbst verifizieren) =="
           python3 scripts/math_guard.py --fix --new-only || echo "⚠ Math-Guard (nicht kritisch)"
+          echo "== Repetition-Guard (Premium: angrenzende Doppelwörter, idempotent) =="
+          python3 scripts/repetition_guard.py --selftest
+          python3 scripts/repetition_guard.py --fix --new-only || echo "⚠ Repetition-Guard (nicht kritisch)"
           echo "== Lektorat (Verlagsniveau: Doppelwoerter, Fuell-Phrasen, Person-Mix, Echo) =="
           python3 scripts/lektor_guard.py --fix --ai --new-only || echo "⚠ Lektorat (nicht kritisch)"
           echo "== Brand-Guard (Marken-Lock: Willkommenstext/Emojis/Disclaimer unantastbar) =="

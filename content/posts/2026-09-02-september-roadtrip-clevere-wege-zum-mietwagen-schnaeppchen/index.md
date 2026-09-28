@@ -220,7 +220,7 @@ Der Spätsommer ist kein Restposten, sondern das Preisfenster: Im Rechenbeispiel
 ## Häufige Fragen
 
 ### Muss ich eine Kaution hinterlegen, wenn ich ohne Selbstbeteiligung buche?
-Ja, in der Regel wird trotzdem eine Kaution auf deiner Kreditkarte blockiert. Der Vermieter sichert sich gegen Schäden ab, die die Versicherung nicht deckt – etwa grobe Fahrlässigkeit oder Verstöße gegen die Mietbedingungen. Die Höhe der Kaution variiert je nach Fahrzeugklasse und Anbieter.
+Ja, in der Regel wird trotzdem eine Kaution auf deiner Kreditkarte blockiert. Der Vermieter sichert sich gegen Schäden ab, die Versicherung nicht deckt – etwa grobe Fahrlässigkeit oder Verstöße gegen die Mietbedingungen. Die Höhe der Kaution variiert je nach Fahrzeugklasse und Anbieter.
 
 ### Was passiert, wenn ich den Wagen früher zurückbringe?
 Eine vorzeitige Rückgabe ist fast immer möglich. Rechne jedoch nicht damit, dass dir der Vermieter den Differenzbetrag für die unverbrachten Tage erstattet. Die meisten Tarife basieren auf der gebuchten Gesamtdauer. Es ist jedoch ratsam, die Station kurz vorab zu informieren, damit jemand für die Annahme bereitsteht.

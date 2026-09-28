@@ -187,6 +187,15 @@ def main() -> int:
     # HEADING-HEILUNG (nach der Description-Runde): anker-stabil, idempotent.
     # blockiert=0 → Exit 0; blockiert>0 → Exit 1 (Fund, keine Sabotage).
     heading_mode = "--dry-run" if DRY_RUN else "--fix"
+    # REPETITION-GUARD (Premium): tägliche, idempotente Heilung für
+    # versehentliche angrenzende Doppelwörter. Dieser Lauf ist bewusst vor
+    # Keyword-/Heading-Healing und deckt auch ältere Live-Posts ab.
+    repetition_run = subprocess.run(
+        [sys.executable, os.path.join(ROOT, "scripts", "repetition_guard.py"), "--fix"],
+        capture_output=True, text=True, timeout=600,
+    )
+    repetition_exit = repetition_run.returncode
+
     # KEYWORD-GATE (Premium #303): tägliche Heilung für Keyword-Lücken
     keyword_run = subprocess.run(
         [sys.executable, os.path.join(ROOT, "scripts", "keyword_gate.py"), "--fix"],
@@ -230,6 +239,7 @@ def main() -> int:
         "",
         f"**Überschriften-Hygiene (heading_guard {heading_mode}):** "
         + (heading_summary or f"exit {heading_exit} – Details: HEADING-REPORT.md"),
+        f"**Repetition-Hygiene (repetition_guard --fix):** exit {repetition_exit}",
         f"**Keyword-Hygiene (keyword_gate --fix):** "
         + (keyword_summary or f"exit {keyword_exit} – Details: KEYWORD-GATE-REPORT.md"),
     ]
@@ -251,6 +261,8 @@ def main() -> int:
     final_exit = 0
     if heading_exit in (1,2):
         final_exit = heading_exit
+    if repetition_exit in (1,2) and final_exit == 0:
+        final_exit = repetition_exit
     if keyword_exit in (1,2) and final_exit == 0:
         final_exit = keyword_exit
     return final_exit

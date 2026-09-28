@@ -92,7 +92,7 @@ Kreditkartenbetrug ist in Deutschland selten, aber die Gefahr wächst mit jedem 
 
 - **3-D-Secure-Verfahren:** Beim Online-Zahlen wirst du über deine Banking-App bestätigt. Ohne diese Freigabe ist keine Zahlung möglich.
 - **Virtuelle Kartennummern:** Einige Anbieter erzeugen für jeden Online-Kauf eine eigene Kartennummer, die nur einmal funktioniert. Selbst wenn sie abgefischt wird, bleibt deine echte Karte sicher.
-- **Sofortige Sperrfunktion:** Die App des Kartenanbieters sollte es dir ermöglichen, die Karte jederzeit mit einem Klick zu sperren. Die kostenlose Sperr-Notrufnummer 116 116 gilt für alle Karten in Deutschland.
+- **Sofortige Sperrfunktion:** Die App des Kartenanbieters sollte es dir ermöglichen, die Karte jederzeit mit einem Klick zu sperren. Die kostenlose Sperr-Notrufnummer 116 gilt für alle Karten in Deutschland.
 - **SMS- oder Push-Benachrichtigung:** Bei jeder Zahlung über einem selbst gewählten Betrag bekommst du eine Meldung aufs Handy.
 
 Viele unterschätzen die Haftung bei Missbrauch. Bei Karten mit Online-Zugang haftest du meist nur bis 50 €.
@@ -180,7 +180,7 @@ Eine gute Kreditkarte kostet im Jahr nichts und außerhalb Europas kein Vermöge
 
 **Brauche ich eine Kreditkarte für den Urlaub?** Außerhalb Europas ja, am besten ohne Fremdwährungsgebühr. In Europa reicht meist eine Debitkarte.
 
-**Was passiert bei Kartenverlust im Ausland?** Sperre die Karte sofort in der App und ruf die Bank an. Die kostenlose Nummer 116 116 sperrt alle Karten. Nimm auf Reisen immer eine Ersatzkarte oder Bargeld mit.
+**Was passiert bei Kartenverlust im Ausland?** Sperre die Karte sofort in der App und ruf die Bank an. Die kostenlose Nummer 116 sperrt alle Karten. Nimm auf Reisen immer eine Ersatzkarte oder Bargeld mit.
 
 **Sind Kreditkarten-Versicherungen ihr Geld wert?** Für Vielflieger ja. Für andere ist eine eigene, günstige [Auslandsreise-Absicherung](/go/reisekrankenversicherung/) meist die klarere Lösung.
 
