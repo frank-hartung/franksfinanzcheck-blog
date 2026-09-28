@@ -119,31 +119,86 @@ jobs:
           # 1) Manueller Lauf: immer Deploy (Audio-Backfill & Co. muessen
           #    erreichbar bleiben).
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Manuell geloest – Deploy laeuft immer."
+            echo "Manuell ausgeloest – Deploy laeuft immer."
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # 2) Push-Ereignis: Dateien zwischen Before und After diffen
-          #    (deckt auch Multi-Commit-Pushes ab; Compare-API arbeitet
-          #    ohne Checkout und unabhaeig von der Ancestry).
-          BEFORE="${{ github.event.before }}"
+
+          # 2) Ziel-Commit dieses Laufs (HEAD von main)
           AFTER="${{ github.event.after }}"
-          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            echo "Erst-Push (kein Before) – Deploy laeuft."
+          if [ -z "$AFTER" ] || [ "$AFTER" = "0000000000000000000000000000000000000000" ]; then
+            AFTER="$(gh api "repos/${{ github.repository }}/commits/main" --jq '.sha' 2>/dev/null || echo "")"
+          fi
+          if [ -z "$AFTER" ]; then
+            echo "Ziel-Commit nicht ermittelbar – Deploy laeuft (Fehlsicherheit)."
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          files="$(gh api "repos/${{ github.repository }}/compare/${BEFORE}...${AFTER}" \
+
+          # 3) Letzten TATSÄCHLICHEN Veröffentlichungsstand ermitteln (SSOT: gh-pages)
+          #    actions-gh-pages committet mit "deploy: <SHA>" – dies ist die einzige
+          #    verlässliche Wahrheit über das, was live ausgeliefert wird (Issue #433).
+          LIVE_DEPLOY_SHA=""
+          gh_pages_msg="$(gh api "repos/${{ github.repository }}/commits/gh-pages" --jq '.commit.message' 2>/dev/null || echo "")"
+          if [ -n "$gh_pages_msg" ]; then
+            LIVE_DEPLOY_SHA="$(echo "$gh_pages_msg" | grep -oE '[0-9a-f]{40}' | head -1 || echo "")"
+          fi
+
+          echo "Status-Uebersicht:"
+          echo "  • Live auf gh-pages : ${LIVE_DEPLOY_SHA:-unbekannt}"
+          echo "  • Ziel-Stand main   : ${AFTER}"
+          echo "  • Push before       : ${{ github.event.before }}"
+
+          # 4) Ist gh-pages bereits exakt auf dem Ziel-Stand?
+          if [ -n "$LIVE_DEPLOY_SHA" ] && [ "$LIVE_DEPLOY_SHA" = "$AFTER" ]; then
+            echo "gh-pages ist bereits exakt auf Stand ${AFTER:0:7} – kein Deploy noetig."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # 5) Basis für den Datei-Diff bestimmen:
+          #    Primär: LIVE_DEPLOY_SHA (schützt vor Lücken durch abgebrochene/übersprungene Vorläufe, #433)
+          #    Fallback: github.event.before (wenn gh-pages neu/leer ist)
+          BASE_SHA=""
+          if [ -n "$LIVE_DEPLOY_SHA" ]; then
+            BASE_SHA="$LIVE_DEPLOY_SHA"
+            echo "Vergleiche Live-Stand (${LIVE_DEPLOY_SHA:0:7}) mit Ziel (${AFTER:0:7}) …"
+          elif [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="${{ github.event.before }}"
+            echo "Kein Live-Stand auf gh-pages gefunden – Fallback auf Push-Before (${BASE_SHA:0:7}) …"
+          fi
+
+          if [ -z "$BASE_SHA" ]; then
+            echo "Erst-Push / keine Basis vorhanden – Deploy laeuft (Fehlsicherheit)."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # 6) Dateien zwischen BASE_SHA und AFTER diffen
+          files="$(gh api "repos/${{ github.repository }}/compare/${BASE_SHA}...${AFTER}" \
             --paginate --jq '.files[].filename' 2>/tmp/compare.err)" || files=""
+
+          if [ -z "$files" ]; then
+            # Wenn Compare gegen LIVE_DEPLOY_SHA fehlschlägt (z. B. nach Rebase/Force-Push
+            # kein gemeinsamer Vorfahre), Fallback auf Push-Before versuchen:
+            if [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "$BASE_SHA" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+              echo "Compare gegen Live-Stand fehlgeschlagen – versuche Fallback auf Push-Before …"
+              files="$(gh api "repos/${{ github.repository }}/compare/${{ github.event.before }}...${AFTER}" \
+                --paginate --jq '.files[].filename' 2>/tmp/compare_fb.err)" || files=""
+            fi
+          fi
+
           if [ -z "$files" ]; then
             # API nicht erreichbar o. a. -> Fehlsicherheit: Deploy laeuft.
             echo "⚠ Compare-API nicht erreichbar ($(head -c 200 /tmp/compare.err 2>/dev/null)) – Deploy laeuft (Fehlsicherheit)."
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "Pfade dieses Pushes:"
+
+          echo "Veraenderte Pfade (${BASE_SHA:0:7}..${AFTER:0:7}):"
           echo "$files" | sed 's/^/  /'
-          # 3) Negativliste: NUR bekannte Zustands-/Doku-Pfade sind
+
+          # 7) Negativliste: NUR bekannte Zustands-/Doku-Pfade sind
           #    deploy-irrelevant. Alles Neue (content/..., static/...,
           #    data/themenwelten.json, hugo.toml, layouts/...) ist per
           #    Default RELEVANT – so kann kein zukuenftiger State-Pfad
@@ -166,14 +221,14 @@ jobs:
           #    der Audit-Befund F1) genau das Gegenteil war. Jetzt `dir/.*`.
           #    Vertrag: tests/test_deploy_gate_paths.py friert beide
           #    Richtungen ein (Lebenszeichen irrelevant, Site-Pfade relevant).
-          STATE_ONLY='^(\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|static/images/social/.*|\.affiliate_integrity_state\.json|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
+          STATE_ONLY='^(\.github/.*|docs/.*|scripts/.*|e2e/.*|data/social/.*|data/research/.*|data/audit/.*|data/[^/]*_state\.json|data/[^/]*_history\.jsonl|data/[^/]*\.meta\.json|data/social_log\.jsonl|data/secrets_state\.json|data/pinterest_token_state\.json|data/integrity_lock\.json|data/governance_status\.json|data/governance_history\.jsonl|data/alerting_heartbeat\.json|data/revenue_funnel\.json|static/images/social/.*|\.[^/]*_state\.json|\.casing_report\.json|\.indexnow_submitted\.json|\.meta_cache\.json|\.affiliate_integrity_state\.json|\.gitignore|package\.json|package-lock\.json|[A-Za-z0-9._-]+\.md)$'
           relevant="$(echo "$files" | grep -vE "$STATE_ONLY" || true)"
           if [ -n "$relevant" ]; then
             echo "Deploy-relevante Pfade:"
             echo "$relevant" | sed 's/^/  /'
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Nur Zustands-/Doku-Aenderungen – Build+Vertonung wird uebersprungen."
+            echo "Nur Zustands-/Doku-Aenderungen seit letztem Livegang – Build+Vertonung wird uebersprungen."
             echo "(Gates laufen weiter: blog-health-daily + Content-Workflows.)"
             echo "deploy=false" >> "$GITHUB_OUTPUT"
           fi
