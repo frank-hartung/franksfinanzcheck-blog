@@ -417,8 +417,11 @@ def heal_article_ai(a, res):
             "(„laut einer Studie“, „Experten sagen“ …) – formuliere stattdessen "
             "neutrales Allgemeinwissen ohne erfundene Belege.")
     prompt = (
-        "Du bist Schlussredakteur eines seriösen deutschen Finanz-Ratgeber-Blogs "
-        "(Niveau: Capital, WirtschaftsWoche, DIE ZEIT). Überarbeite den folgenden "
+        "Du bist Schlussredakteur eines seriösen deutschen Finanz-Ratgeber-Blogs. "
+        "Arbeite sprachlich mindestens auf dem Niveau von ZEIT.de, aber eigenständig "
+        "und ohne Formeln oder Satzmuster nachzuahmen. Templates, austauschbare "
+        "Einstiege, Übergänge und Schlussformeln sind zu vermeiden; die Form folgt "
+        "dem konkreten Gegenstand. Überarbeite den folgenden "
         "Markdown-Artikel NUR gemäß dieser Aufträge:\n\n"
         + "\n".join(auftraege)
         + "\n\nHARTE REGELN:\n"
