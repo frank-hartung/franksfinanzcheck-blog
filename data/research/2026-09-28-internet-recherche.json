@@ -1,0 +1,229 @@
+{
+  "datum": "2026-09-28",
+  "erzeugt_utc": "2026-09-28 14:01 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Schaden in Milliardenhöhe - Anlagebetrug mit gefälschten Nachrichtenseiten",
+            "url": "https://www.tagesschau.de/investigativ/faktenfinder/geldanlage-betrug-fake-nachrichtenseiten-100.html",
+            "datum": "2026-09-28T13:43",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Schweden: Wahlsiegerin Andersson kann keine Regierung bilden",
+            "url": "https://www.tagesschau.de/ausland/europa/schweden-regierungsbildung-110.html",
+            "datum": "2026-09-28T13:20",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Drei deutsche BioNTech-Werke müssen schließen",
+            "url": "https://www.tagesschau.de/wirtschaft/unternehmen/biontech-standorte-schliessung-100.html",
+            "datum": "2026-09-28T13:17",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Hohe Ethanolpreise: Südzucker erwartet bessere Geschäfte",
+            "url": "https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html",
+            "datum": "2026-09-28T12:18",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Indien und Nepal: Viele Tote wegen Überschwemmungen",
+            "url": "https://www.tagesschau.de/ausland/asien/nepal-indien-flutkatastrophe-100.html",
+            "datum": "2026-09-28T11:51",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Biontech macht drei Standorte in Deutschland dicht",
+            "url": "https://www.spiegel.de/wirtschaft/biontech-macht-drei-standorte-in-deutschland-dicht-a-05ac2a9c-0845-4034-bc8b-f5057051f562#ref=rss",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Erneuerbare Energien: Solarstromproduktion übertrifft bereits Vorjahreswert",
+            "url": "https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Deutschland: Einwanderer in vielen Berufen unverzichtbar",
+            "url": "https://www.spiegel.de/wirtschaft/deutschland-einwanderer-in-vielen-berufen-unverzichtbar-a-7f74b8f3-348b-4e89-b16c-dd7baf3b188d#ref=rss",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Export: Wie Polen Deutschlands Wirtschaft rettet",
+            "url": "https://www.spiegel.de/wirtschaft/export-wie-polen-deutschlands-wirtschaft-rettet-a-07c5bce8-dec6-4a58-abf1-eea4d89c4632#ref=rss",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Reichtum: Vermögen macht glücklicher als Einkommen",
+            "url": "https://www.spiegel.de/wirtschaft/reichtum-warum-vermoegen-gluecklicher-macht-als-ein-hohes-einkommen-a-02282565-08c9-4f59-811b-b77186cf1d90#ref=rss",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Raspberry-Pi-Hersteller profitiert massiv von Speicherkrise",
+            "url": "https://www.heise.de/news/Raspberry-Pi-Hersteller-profitiert-massiv-von-Speicherkrise-11468415.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-28T15:32",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise+ | Windows 11 Update: Warum Version 26H2 absichtlich keine großen Neuerungen bringt",
+            "url": "https://www.heise.de/hintergrund/Windows-11-Update-Warum-Version-26H2-absichtlich-keine-grossen-Neuerungen-bringt-11443266.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+            "datum": "2026-09-28T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "KI-Update kompakt: Kardiologie, KI-Agenten, Rechenzentren, Cyberangriffe",
+            "url": "https://www.heise.de/news/KI-Update-kompakt-Kardiologie-KI-Agenten-Rechenzentren-Cyberangriffe-11467935.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-28T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "„Minecraft Dungeons 2“ angespielt: „Diablo“-Light in der Klötzchenwelt",
+            "url": "https://www.heise.de/tests/Minecraft-Dungeons-2-angespielt-Neue-Dimension-altes-Spielprinzip-11468027.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-28T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Bundesrat fordert strengere Regeln und Direktanstellung für Lieferdienste",
+            "url": "https://www.heise.de/news/Bundesrat-fordert-strengere-Regeln-und-Direktanstellung-fuer-Lieferdienste-11468231.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-09-28T14:55",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Ich wechsel meinen Stromanbieter live in diesem Video und zahle dann nur noch 36,88 Cent / kWh",
+            "url": "https://www.youtube.com/watch?v=uO2lRAkhLHE",
+            "kanal": "Smart2Finance",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Drastically reduce electricity costs when growing – online calculator shows your savings potential!",
+            "url": "https://www.youtube.com/watch?v=I0_3kUfiS84",
+            "kanal": "Growtutorials",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Strom- und Gastarife vergleichen - worauf muss man achten?",
+            "url": "https://www.youtube.com/watch?v=iMg2XuocVgs",
+            "kanal": "Tipps zum Nebenkosten senken",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Instabank Visa (2026) Lohnt sich die schufafreie Kreditkarte?",
+            "url": "https://www.youtube.com/watch?v=RLKZS6FUWTY",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
