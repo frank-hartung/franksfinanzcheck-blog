@@ -29,67 +29,101 @@
 import { readFileSync } from "node:fs";
 import { init } from "@heyputer/puter.js/src/init.cjs";
 
-const req = JSON.parse(readFileSync(0, "utf8"));
+const MODEL = "claude-sonnet-5";
+
+let req;
+try {
+  req = JSON.parse(readFileSync(0, "utf8"));
+} catch (err) {
+  console.error(`puter_chat: ungültiges JSON (${err?.message || err})`);
+  process.exit(1);
+}
 if (!req || !req.user) {
   console.error("puter_chat: Request braucht mindestens { user }");
   process.exit(1);
 }
+if (String(req.model || MODEL) !== MODEL) {
+  console.error(`puter_chat: Modell-Mandat verletzt (erlaubt ist ausschließlich ${MODEL})`);
+  process.exit(1);
+}
+if (!(process.env.PUTER_AUTH_TOKEN || "").trim()) {
+  console.error("puter_chat: PUTER_AUTH_TOKEN fehlt (kein API- oder Modell-Fallback erlaubt)");
+  process.exit(1);
+}
 
-const puter = init(process.env.PUTER_AUTH_TOKEN);
+let puter;
+try {
+  puter = init(process.env.PUTER_AUTH_TOKEN);
+} catch (err) {
+  console.error(`puter_chat [${MODEL}]: Puter.js konnte nicht initialisiert werden: ${err?.message || err}`);
+  process.exit(1);
+}
 const messages = [];
 if (req.system) messages.push({ role: "system", content: String(req.system) });
 messages.push({ role: "user", content: String(req.user) });
 
-const options = { model: req.model || "claude-sonnet-5", stream: true };
+const options = { model: MODEL, stream: true };
 if (typeof req.temperature === "number") options.temperature = req.temperature;
 if (typeof req.max_tokens === "number") options.max_tokens = req.max_tokens;
 
+// Puter kann je nach SDK-/Gateway-Version native Anthropic-Blöcke,
+// OpenAI-kompatible Delta-Blöcke oder einfache Text-Chunks liefern. Ein
+// einziger normalisierter Parser verhindert, dass ein gültiger Rewrite als
+// „leer“ verworfen wird, ohne jemals Inhalte aus einem Objekt zu String zu
+// serialisieren.
 function partsToText(content) {
   if (content == null) return "";
-  if (Array.isArray(content)) {
-    return content.map((p) => (p && typeof p.text === "string" ? p.text : "")).join("");
-  }
   if (typeof content === "string") return content;
+  if (Array.isArray(content)) return content.map(partsToText).join("");
+  if (typeof content !== "object") return "";
   if (typeof content.text === "string") return content.text;
-  return content.toString ? content.toString() : String(content);
+  if (typeof content.content === "string" || Array.isArray(content.content)) {
+    return partsToText(content.content);
+  }
+  if (content.delta) return partsToText(content.delta);
+  if (content.message) return partsToText(content.message);
+  if (Array.isArray(content.choices)) return content.choices.map(partsToText).join("");
+  if (content.choice) return partsToText(content.choice);
+  return "";
+}
+
+async function responseToText(resp) {
+  if (!resp) return "";
+  if (typeof resp[Symbol.asyncIterator] === "function") {
+    let streamed = "";
+    for await (const part of resp) streamed += partsToText(part);
+    return streamed;
+  }
+  return partsToText(resp);
+}
+
+async function request(requestOptions) {
+  // Streaming: dokumentiert für längere Anfragen – volle Artikel ohne
+  // Zwischen-Puffer-Caps (Rewrites sind 5–6k Token).
+  return responseToText(await puter.ai.chat(messages, false, requestOptions));
 }
 
 let text = "";
+let firstError;
 try {
-  // Streaming: dokumentiert für „longer queries" – volle Länge ohne
-  // Zwischen-Puffer-Caps (Artikel-Rewrites sind 5–6k Token).
-  const resp = await puter.ai.chat(messages, false, options);
-  if (resp && typeof resp[Symbol.asyncIterator] === "function") {
-    for await (const part of resp) {
-      if (!part) continue;
-      if (typeof part.text === "string") text += part.text;
-      else if (part.type === "text" && typeof part.text === "string") text += part.text;
-    }
-  } else {
-    text = partsToText(resp && resp.message ? resp.message.content : resp);
-  }
+  text = await request(options);
 } catch (err) {
-  // Optionen wie temperature/max_tokens sind nicht überall belegt –
-  // ein Rerun mit dem Kern-Set ist billiger als ein verlorener Lauf.
+  firstError = err;
+  // Optionen wie temperature/max_tokens sind nicht bei jedem Puter-Gateway
+  // belegt. Ein zweiter Versuch nutzt weiterhin exakt dasselbe Modell und
+  // entfernt nur optionale Parameter – niemals ein Ersatzmodell.
   try {
-    const resp = await puter.ai.chat(messages, false,
-      { model: options.model, stream: true });
-    if (resp && typeof resp[Symbol.asyncIterator] === "function") {
-      for await (const part of resp) {
-        if (part && typeof part.text === "string") text += part.text;
-      }
-    } else {
-      text = partsToText(resp && resp.message ? resp.message.content : resp);
-    }
+    text = await request({ model: MODEL, stream: true });
   } catch (err2) {
-    console.error(`puter_chat [${options.model}]: ${err2 && err2.message ? err2.message : err2}`);
+    const detail = err2?.message || firstError?.message || err2 || firstError;
+    console.error(`puter_chat [${MODEL}]: ${detail}`);
     process.exit(1);
   }
 }
 
 text = (text || "").trim();
 if (!text) {
-  console.error(`puter_chat [${options.model}]: leere Antwort`);
+  console.error(`puter_chat [${MODEL}]: leere Antwort`);
   process.exit(1);
 }
 process.stdout.write(text);

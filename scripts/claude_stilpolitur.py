@@ -449,15 +449,18 @@ def puter_chat(system: str, user: str, modell: str, cfg: dict) -> str | None:
 def call_claude(system: str, user: str, cfg: dict) -> str | None:
     """Claude KOSTENLOS über Puter.js (User-Pays, ohne Anthropic-API).
 
-    Modell: exakt claude-sonnet-5 (Nachtrag 2, ohne Fallback) aus
-    data/ki_redaktion.yaml. None = keine Antwort möglich.
+    Modell: exakt claude-sonnet-5 (Nachtrag 2). Die Funktion verweigert
+    bewusst jede Konfiguration mit Fallback, damit ein späterer Config- oder
+    Aufruferfehler niemals still ein anderes Modell anspricht. None = keine
+    Antwort möglich.
     """
-    kette = [cfg.get("modell")] + list(cfg.get("modell_fallback") or [])
-    for modell in [m for m in kette if m]:
-        text = puter_chat(system, user, str(modell), cfg)
-        if text:
-            return text
-    return None
+    kette = [str(cfg.get("modell") or "")] + [str(m) for m in
+                                               (cfg.get("modell_fallback") or [])]
+    if kette != ["claude-sonnet-5"]:
+        print("  🛑 Modell-Mandat verletzt – ausschließlich claude-sonnet-5 ist erlaubt.",
+              file=sys.stderr)
+        return None
+    return puter_chat(system, user, "claude-sonnet-5", cfg)
 
 
 def clean_answer(text: str) -> tuple[str, list]:
@@ -553,7 +556,8 @@ def _st_bruecke() -> bool:
     with open(BRUECKE, encoding="utf-8") as fh:
         src = fh.read()
     return ("@heyputer/puter.js" in src and "PUTER_AUTH_TOKEN" in src
-            and "readFileSync(0" in src and "claude-sonnet-5" in src)
+            and "readFileSync(0" in src and 'const MODEL = "claude-sonnet-5"' in src
+            and "Modell-Mandat verletzt" in src)
 
 
 def _st_wochentag() -> bool:

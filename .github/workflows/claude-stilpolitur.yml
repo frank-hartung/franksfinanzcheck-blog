@@ -78,44 +78,80 @@ concurrency:
 jobs:
   stilpolitur:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # 12 Artikel × 300 s KI-Timeout können seriell bis zu 60 Minuten dauern.
+    # 45 Minuten waren eine deterministische Abbruchkante, kein Schutz.
+    timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
+      - name: Python 3.12 (reproduzierbare Offline-Gates)
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
       - name: Node 24 (Puter-Brücke)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: npm
 
       - name: Voraussetzungen prüfen
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
-          for f in scripts/sprachkern.py scripts/grammar_check.py scripts/sprachglatt.py \
-                   scripts/claude_stilpolitur.py scripts/puter_chat.mjs \
-                   data/schreibstil.yaml scripts/git_sync.sh; do
-            if [ ! -f "$f" ]; then
-              echo "🛑 $f fehlt auf main – PR nicht gemergt?"
-              exit 1
+          set -Eeuo pipefail
+          required=(
+            scripts/sprachkern.py
+            scripts/grammar_check.py
+            scripts/sprachglatt.py
+            scripts/claude_stilpolitur.py
+            scripts/puter_chat.mjs
+            data/schreibstil.yaml
+            data/brand_brain.yaml
+            data/ki_redaktion.yaml
+            scripts/git_sync.sh
+          )
+          missing=()
+          for f in "${required[@]}"; do
+            if [ ! -s "$f" ]; then
+              missing+=("$f")
             fi
           done
-          if [ -z "$PUTER_AUTH_TOKEN" ]; then
-            echo "🛑 PUTER_AUTH_TOKEN fehlt in den Repo-Secrets – der"
-            echo "   KOSTENLOSE Claude-Zugang (Puter.js, ohne API) kann nicht laufen."
-            echo "   Einrichten: puter.com → kostenloses Konto → Auth-Token erzeugen"
-            echo "   (docs.puter.com) → Settings → Secrets and variables → Actions →"
-            echo "   New repository secret → Name: PUTER_AUTH_TOKEN"
-            echo "   Hinweis: KEIN Anthropic-Key und KEINE Kosten nötig (User-Pays)."
+          if ((${#missing[@]})); then
+            printf '🛑 Pflichtdateien fehlen oder sind leer:\n' >&2
+            printf '   - %s\n' "${missing[@]}" >&2
+            echo "::error title=Claude-Stilpolitur: Repository-Vertrag unvollständig::Pflichtdateien fehlen oder sind leer (siehe Liste oben)."
             exit 1
           fi
-          echo "✅ Voraussetzungen vorhanden (Engines + Stilprofil + Gratis-Token)."
+          if [ -z "${PUTER_AUTH_TOKEN//[[:space:]]/}" ]; then
+            echo "::error title=Claude-Stilpolitur: PUTER_AUTH_TOKEN fehlt::Kostenloser Puter-Zugang ist nicht eingerichtet; es wird kein anderes Modell und kein API-Fallback verwendet."
+            echo "🛑 PUTER_AUTH_TOKEN fehlt in den Repository-Secrets." >&2
+            echo "   Einrichten: puter.com → kostenloses Konto → Auth-Token erzeugen" >&2
+            echo "   → GitHub → Settings → Secrets and variables → Actions" >&2
+            echo "   → New repository secret → Name: PUTER_AUTH_TOKEN" >&2
+            echo "   Hinweis: kein Anthropic-Key und keine Kosten nötig (Puter User-Pays/Gratis-Kontingent)." >&2
+            exit 1
+          fi
+          echo "✅ Voraussetzungen vorhanden (Engines, Stilprofil, Marken-Brain, Konfiguration und Gratis-Token)."
 
       - name: Abhängigkeiten (Python + Puter-Brücke, transient)
         run: |
-          python3 -m pip install -q pyyaml 2>/dev/null || true
-          npm install --no-save @heyputer/puter.js
+          set -Eeuo pipefail
+          # Ubuntu kann systemweite pip-Installationen per PEP 668 blockieren.
+          # Eine eigene venv verhindert deshalb den nächsten CI-Ausfall: Ohne
+          # PyYAML lädt das Stilprofil leer und der harte Selbsttest stoppt.
+          VENV="$RUNNER_TEMP/claude-stilpolitur-venv"
+          python3 -m venv "$VENV"
+          "$VENV/bin/python" -m pip install --quiet --disable-pip-version-check \
+            'pyyaml>=6.0,<7'
+          echo "$VENV/bin" >> "$GITHUB_PATH"
+          # Pinning verhindert, dass ein ungeprüftes SDK-Release die Puter-
+          # Antwortform oder die Sonnet-5-Brücke mitten im Redaktionslauf ändert.
+          npm install --no-save --no-package-lock @heyputer/puter.js@2.6.3
+          node -e "const p=require('./node_modules/@heyputer/puter.js/package.json'); if (p.version !== '2.6.3') { process.exit(1) }"
+          echo "✅ Python venv + @heyputer/puter.js@2.6.3 installiert."
 
       - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
         run: |
@@ -134,13 +170,23 @@ jobs:
       - name: Claude (kostenlos ohne API) – Stil-Politur (personalisiert, Premium)
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
+          CLAUDE_FORCE: ${{ inputs.force || 'false' }}
+          CLAUDE_LIMIT: ${{ inputs.limit || '' }}
         run: |
-          ARGS=""
-          if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
-          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
+          set -Eeuo pipefail
+          args=()
+          if [ "$CLAUDE_FORCE" = "true" ]; then args+=(--force); fi
+          if [ -n "$CLAUDE_LIMIT" ]; then
+            case "$CLAUDE_LIMIT" in
+              ''|*[!0-9]*)
+                echo "::error title=Claude-Stilpolitur: ungültiges Limit::limit muss eine nichtnegative Ganzzahl sein."
+                exit 1
+                ;;
+            esac
+            args+=(--limit "$CLAUDE_LIMIT")
+          fi
           echo "== Claude (kostenlos, NUR claude-sonnet-5, personalisiert: data/schreibstil.yaml) =="
-          python3 scripts/claude_stilpolitur.py --fix $ARGS | tee /tmp/stilpolitur.txt
-          cat /tmp/stilpolitur.txt
+          python3 scripts/claude_stilpolitur.py --fix "${args[@]}" | tee /tmp/stilpolitur.txt
 
       - name: Änderungen committen & pushen (Redaktions-Bot)
         run: |
