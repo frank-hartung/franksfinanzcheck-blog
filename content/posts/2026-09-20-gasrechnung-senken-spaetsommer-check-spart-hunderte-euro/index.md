@@ -43,7 +43,14 @@ Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Eine St
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimierte Heizung, aber eine belastbare Prioritätenliste.
+Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimierte Heizung, aber eine belastbare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch entsprechen schon 1 Cent pro kWh rund 180 € im Jahr – deshalb prüfst du Tarif und Verbrauch getrennt statt nur auf die Abschlagsrate zu schauen.
+
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze – Gasrechnung senken
 
@@ -219,7 +226,7 @@ Den Liefervertrag wählt dann in der Regel nicht der einzelne Mieter.
 
 ## Sicherheit geht vor Sparen
 
-Bei Gas- oder Abgasgeruch vermeidest du Flammen und elektrische Schalter, öffnest Fenster, schließt wenn gefahrlos möglich die Gaszufuhr, verlässt das Gebäude und rufst von draußen Netzbetreiber oder Feuerwehr.
+Bei Gas- oder Abgasgeruch geht Sicherheit vor jedem Check: Verlasse das Gebäude, vermeide Zündquellen und rufe Netzbetreiber oder Feuerwehr erst von draußen. Die Gaszufuhr schließt du nur, wenn das gefahrlos möglich ist.
 
 Sichtbares Wasser, Störabschaltungen und starker Druckverlust brauchen ebenfalls fachliche Hilfe.
 

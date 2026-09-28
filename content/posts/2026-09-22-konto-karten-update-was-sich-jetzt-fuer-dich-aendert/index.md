@@ -427,5 +427,3 @@ Ein nüchterner Kontocheck pro Jahr reicht oft schon, damit aus Bequemlichkeit k
 👉 **Jetzt vergleichen und sparen:** [**→ Kostenloses Girokonto bei der C24 Bank prüfen**](/go/girokonto/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

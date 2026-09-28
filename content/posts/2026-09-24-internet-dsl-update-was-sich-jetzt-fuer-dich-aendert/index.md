@@ -88,16 +88,13 @@ Genau daraus ergibt sich der sinnvolle Bedarf – nicht aus der größten Zahl i
 
 ## Eine einfache Orientierung für den Alltag
 
-| Haushalt | Oft sinnvoll |
-|---|---:|
-| 1 Person | 50 Mbit/s |
-| 2 Personen | 50 bis 100 Mbit/s |
-| Familie | 100 bis 250 Mbit/s |
-| WG / Power-User | 250 Mbit/s oder mehr |
+Statt nach Haushaltsgröße zu buchen, schau auf die anspruchsvollste gleichzeitige Nutzung:
 
-Das ist keine starre Regel. Aber es hilft, die Größenordnung einzuordnen.
+- **50 Mbit/s** reichen häufig, wenn ein bis zwei Personen surfen, streamen und gelegentlich einen Video-Call führen.
+- **100 bis 250 Mbit/s** passen eher zu Familien, mehreren parallelen Streams oder regelmäßigem Homeoffice.
+- **Mehr als 250 Mbit/s** ist vor allem bei vielen gleichzeitigen Nutzern, großen Downloads oder sehr datenintensiver Arbeit plausibel.
 
-Wenn du zu Hause vor allem surfst, streamst und im Homeoffice arbeitest, brauchst du oft weniger, als viele glauben. Wenn dagegen mehrere Personen gleichzeitig große Downloads, Gaming und 4K-Streaming nutzen, sieht es anders aus.
+Das ist keine starre Regel. Ein schneller Tarif behebt weder schlechtes WLAN noch einen ungünstig platzierten Router. Wenn du zu Hause vor allem surfst, streamst und im Homeoffice arbeitest, brauchst du oft weniger, als viele glauben. Bei mehreren großen Downloads, Gaming und 4K-Streaming zur gleichen Zeit kann ein höheres Paket dagegen passen.
 
 ## Nicht jedes langsame Internet ist ein Tarifproblem
 
@@ -350,5 +347,3 @@ Der Markt wird weiter mit hohen Geschwindigkeiten werben. Für Verbraucher wird 
 👉 **Jetzt vergleichen und sparen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

@@ -48,8 +48,15 @@ Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf 
 
 #### Prüfe in drei Schritten
 
-Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg. Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffällige Werte. Prüfe sie später erneut. So vermeidest du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger. Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
+Erstens: Beobachte die Wärmeverteilung bei einem normalen Probelauf. Zweitens: Notiere Raum, Auffälligkeit und Datum. Drittens: Ändere nur eine harmlose Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich, ersetzt aber keine Fachdiagnose. Bei 18.000 kWh Jahresverbrauch machen schon rund 180 € pro Jahr je Cent Preisunterschied aus. Darum gehören der technische Check und der Tarifcheck zusammen – aber nicht in denselben Handgriff.
 
+
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Gastarife vergleichen**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Ein ruhiger Start vor dem ersten Frost
 
@@ -245,8 +252,8 @@ Heute genügt der Start: Fotografiere Anlagendruck und Zählerstand, notiere dre
 ### Wann ist der beste Zeitpunkt für den Heizungs-Check?
 Vor dem regelmäßigen Heizbetrieb, meist im Spätsommer oder frühen Herbst. Dann bleibt Zeit für Wartung und Reparatur.
 
-### Muss ich Heizkörper jedes Jahr entlüften?
-Nein. Entlüfte bei Anzeichen wie Gluckern oder ungleichmäßiger Wärme. Wiederkehrende Luft deutet möglicherweise auf ein anderes Problem hin.
+### Wann ist Entlüften überhaupt sinnvoll?
+Nur bei Anzeichen wie Gluckern oder einem oben kühl bleibenden Heizkörper. Kommt Luft wieder oder fällt der Druck mehrfach ab, dokumentierst du den Befund und holst fachliche Hilfe statt die Anlage immer wieder selbst zu befüllen.
 
 ### Welcher Anlagendruck ist richtig?
 Das hängt von Gebäude und Anlage ab. Maßgeblich sind Sollbereich am Gerät und Herstellerunterlagen, nicht ein pauschaler Internetwert.

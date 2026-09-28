@@ -449,5 +449,3 @@ Versicherungen ändern sich, dein Leben ändert sich und der Markt ändert sich 
 👉 **Jetzt vergleichen und sparen:** [**→ Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient nur der allgemeinen Information. Er ist keine Anlage-, Rechts- oder Steuerberatung. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

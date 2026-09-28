@@ -44,6 +44,13 @@ Du willst preisgarantie gas? Springt der Börsenpreis, warnt schnell die Schlagz
 
 Relevant wird es, wenn dein Anbieter eine konkrete Preisänderung ankündigt oder deine Garantie ausläuft. Dann zählen Klausel, Frist und deine Jahreskosten.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Wenn ein neuer Preis im Brief steht
 
 Leg das Schreiben neben deinen Vertrag. Markiere den alten und den neuen Preis je kWh. Markiere auch den Tag, an dem der neue Preis gelten soll. Suche danach die Stelle zum Preis-Schutz. So erkennst du, ob der Grund im Brief zu dem Schutz im Vertrag passt.
