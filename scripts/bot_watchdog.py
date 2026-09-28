@@ -83,6 +83,10 @@ try:
 except ImportError:
     cg = None
 
+# State-Vertrag der Affiliate-Wache: genau dieselbe Restmengen-Semantik wie
+# das Gate und der Workflow. Historische Heilungen dürfen nie einen P1 öffnen.
+from affiliate_integrity_state import unresolved_problems, state_contract_error
+
 # Alarm-Router (SSOT für Besitz, Kadenz, Schließpfad – seit Issue #272)
 try:
     import alert_router as ar
@@ -342,21 +346,13 @@ def check_produktions_status_age(max_age_hours=30):
     return True, f"{age:.1f}h alt"
 
 def _affiliate_open_problems(data):
-    """Liefert ausschließlich *offene* Affiliate-Funde.
+    """Kompatibilitäts-Wrapper für die kanonische Affiliate-Restmenge.
 
-    Alte Zustände besitzen nur ``content_problems``. Dieses Feld protokolliert
-    auch im selben Lauf geheilte Funde und ist bei ``exit_code == 0`` daher
-    ausdrücklich keine Restmenge. Neue Gates schreiben die eindeutige
-    ``unresolved_problems``-Liste. Fail-closed bleibt erhalten: Bei einem
-    roten Legacy-Lauf gilt weiterhin ``content_problems`` als offen.
+    Die Semantik lebt absichtlich in ``affiliate_integrity_state.py`` und
+    wird auch im täglichen Workflow verwendet. Diese Funktion bleibt nur für
+    externe Aufrufer und ältere Selbsttests erhalten.
     """
-    explicit = data.get("unresolved_problems")
-    if isinstance(explicit, list):
-        return explicit
-    if data.get("exit_code") == 0:
-        return []
-    legacy = data.get("content_problems")
-    return legacy if isinstance(legacy, list) else []
+    return unresolved_problems(data)
 
 
 def check_affiliate_integrity():
@@ -404,14 +400,19 @@ def check_affiliate_integrity():
                     break
                 except ValueError:
                     continue
-            # #446: `content_problems` enthält auch erfolgreich geheilte
-            # Funde. Nur die explizite Restmenge (bzw. bei alten roten
-            # Zuständen deren Legacy-Liste) darf ein P1-Ticket öffnen.
+            # #446: `content_problems` ist eine Laufhistorie. Nur die
+            # kanonische Restmenge (bzw. die klar definierte Legacy-Migration)
+            # darf einen P1 öffnen. Ein beschädigter v2-Vertrag ist dagegen
+            # fail-closed und wird nie als Grün ausgegeben.
+            contract_error = state_contract_error(data)
             problems = len(_affiliate_open_problems(data))
             errors = len(data.get("errors") or [])
             age_text = "Alter unlesbar" if age_h is None else f"{age_h:.0f} h alt"
 
             # 1) BEFUND – hat Vorrang, das Alter spielt hier keine Rolle
+            if contract_error:
+                return False, (f"Affiliate-Zustandsvertrag beschädigt: {contract_error} "
+                               f"(Zustand {age_text})")
             if problems > 0:
                 return False, f"{problems} offene Affiliate-Probleme (Zustand {age_text})"
             if data.get("exit_code") != 0 or errors:
@@ -458,9 +459,14 @@ def check_affiliate_integrity():
             if state_file.is_file():
                 try:
                     data = json.loads(state_file.read_text(encoding="utf-8"))
-                    problems = len(data.get("content_problems") or [])
-                    if problems > 0:
-                        return False, f"{problems} offene Affiliate-Probleme (siehe Report)"
+                    if isinstance(data, dict):
+                        contract_error = state_contract_error(data)
+                        if contract_error:
+                            return False, ("Affiliate-Zustandsvertrag beschädigt: "
+                                           f"{contract_error}")
+                        problems = len(_affiliate_open_problems(data))
+                        if problems > 0:
+                            return False, f"{problems} offene Affiliate-Probleme (siehe Report)"
                 except Exception:
                     pass
             # If report contains red but state says 0, still warn
@@ -1215,6 +1221,18 @@ def selftest():
         if _affiliate_open_problems({
                 "exit_code": 1, "content_problems": ["offen"]}) != ["offen"]:
             errors.append("Affiliate-Watchdog verliert roten Legacy-Fund")
+        if state_contract_error({
+                "state_schema_version": 2, "exit_code": 0,
+                "content_problems": ["historisch"],
+                "unresolved_problems": ["widerspruch"]}):
+            pass
+        else:
+            errors.append("Affiliate-Watchdog akzeptiert widersprüchlichen grünen Zustand")
+        if state_contract_error({
+                "state_schema_version": 2, "exit_code": 0,
+                "content_problems": ["historisch"],
+                "unresolved_problems": []}):
+            errors.append("Affiliate-Watchdog verwirft gültigen grünen v2-Zustand")
     except Exception as e:
         errors.append(f"Affiliate-Restmengen-Selftest Exception: {e}")
 
