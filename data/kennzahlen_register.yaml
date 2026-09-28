@@ -1,0 +1,192 @@
+# ============================================================
+#  KENNZAHLEN-REGISTER – Frühwarn-Radar für harte Kennzahlen
+#  (Quick Win H5 aus der Konkurrenz-Analyse Finanztip,
+#   28.09.2026: „Veränderungen früher erkennen“)
+#
+#  WARUM: Finanztip baut laut Stellenanzeige genau diese Maschine
+#  („(Senior) Product Data & AI Automation Manager – Änderungs-
+#  erkennung bis Aufbereitung“). Frank hat sie mit diesem Register
+#  + scripts/kennzahlen_radar.py für 0 € Personal: Der Radar
+#  prüft, welche Kennzahlen fällig sind, ob die Agent-Reach-Briefs
+#  (data/research/) ein neueres Signal erwähnen und welche
+#  Artikel älter sind als ihr Kennzahlenstand.
+#
+#  SSOT-VERTRAG (wie data/agent_reach/*.yaml):
+#    * Diese Datei ist MENSCHLICH KURATIERT.
+#      Die Maschine (scripts/kennzahlen_radar.py) LIEST sie,
+#      schreibt sie aber NIE.
+#    * `ist_wert`/`stand` pflegt Frank nach einer Prüfung von
+#      Hand (oder übernimmt sie aus einem Faktenfrische-Befund).
+#      Nur belegte Werte eintragen – nichts aus dem Gedächtnis.
+#    * Jede `quelle.url` muss auf der Allowlist in
+#      data/agent_reach/faktenfrische.yaml stehen (Rang 1–3).
+#      Affiliate-Partner sind als Kennzahlenquelle verboten.
+#    * `betroffene_slugs`: Posts als Slug (Ordnername unter
+#      content/posts/), Ratgeber-Seiten mit Präfix „pillar/“.
+#      Der Radar validiert, dass jeder Slug existiert.
+#
+#  Felder je Kennzahl:
+#    id, name, einheit          – Identität
+#    ist_wert                   – zuletzt geprüfter Wert (String) oder null
+#    stand                      – Datum der letzten Prüfung (YYYY-MM-DD)
+#    quelle.name / quelle.url   – Beleg (Allowlist-Domain!)
+#    rhythmus_tage              – Prüfintervall (danach gilt: fällig)
+#    toleranz                   – erlaubte Abweichung vor Alarm (null = jede Änderung)
+#    ymyl                       – verschärft die Priorität im Report
+#    suchbegriffe               – Trigger-Wörter für die Agent-Reach-Briefs
+#    betroffene_slugs           – Artikel/Ratgeber, deren Zahlen davon abhängen
+# ============================================================
+
+meta:
+  brand: FranksFinanzcheck
+  version: 1
+  angelegt: "2026-09-28"
+  quelle_dieser_entscheidung: "KONKURRENZ-ANALYSE-FINANZTIP-KI-TOOLS-2026-09-28.md (H5)"
+  melden:
+    # Issue ab wie vielen fälligen Kennzahlen? (Workflow liest das.)
+    issue_ab_faellig: 1
+
+kennzahlen:
+  # ---------- STROM & GAS (BDEW, monatlicher Takt) ----------
+  - id: bdew-haushaltsstrompreis
+    name: "BDEW-Strompreisanalyse: Haushaltsstrompreis"
+    einheit: "ct/kWh"
+    ist_wert: "37,0"
+    stand: 2026-08-21
+    quelle:
+      name: "BDEW-Strompreisanalyse"
+      url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    rhythmus_tage: 30
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Strompreis", "Haushaltsstrompreis", "BDEW", "Stromkosten"]
+    betroffene_slugs:
+      - "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+      - "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert"
+      - "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser"
+      - "pillar/strom-sparen"
+
+  - id: bdew-gaspreis-efh
+    name: "BDEW-Gaspreisanalyse: Gaspreis Einfamilienhaus"
+    einheit: "ct/kWh"
+    ist_wert: "11,93"
+    stand: 2026-08-24
+    quelle:
+      name: "BDEW-Gaspreisanalyse"
+      url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    rhythmus_tage: 30
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Gaspreis", "BDEW", "Heizkosten", "Gasrechnung"]
+    betroffene_slugs:
+      - "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+      - "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+      - "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+      - "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+      - "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort"
+      - "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor"
+
+  - id: bnetza-energie-marktdaten
+    name: "Bundesnetzagentur: Markt- und Preisdaten Strom/Gas"
+    einheit: "Marktdaten"
+    ist_wert: null
+    stand: 2026-07-10
+    quelle:
+      name: "Bundesnetzagentur – Elektrizität und Gas"
+      url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    rhythmus_tage: 60
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Grundversorgung", "Bundesnetzagentur", "Netzentgelt", "Energiepreis"]
+    betroffene_slugs:
+      - "pillar/strom-sparen"
+
+  # ---------- ZINSEN (EZB-Sitzungstakt ≈ 6 Wochen) ----------
+  - id: ezb-einlagenzins
+    name: "EZB-Einlagenzins (Maßstab für Tagesgeld-Bestzinsen)"
+    einheit: "% p.a."
+    ist_wert: null
+    stand: 2026-09-01
+    quelle:
+      name: "Deutsche Bundesbank – Aktuelle Zinssätze"
+      url: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/aktuelle-zinssaetze"
+    rhythmus_tage: 42
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["EZB", "Einlagenzins", "Leitzins", "Zentralbank", "Zinsentscheid"]
+    betroffene_slugs:
+      - "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich"
+      - "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster"
+      - "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug"
+
+  # ---------- VERSICHERUNGEN (Stichtage) ----------
+  - id: kfz-wechselfrist
+    name: "Kfz-Versicherung: Wechselfrist zum 30. November"
+    einheit: "Datum"
+    ist_wert: "30.11.2026"
+    stand: 2026-09-17
+    quelle:
+      name: "Verbraucherzentrale – Kfz-Versicherung wechseln"
+      url: "https://www.verbraucherzentrale.de/wissen/verkehr/auto-kfz/autoversicherung-wechseln-so-gehts-10540"
+    rhythmus_tage: 365
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Kfz-Versicherung", "Stichtag", "30. November", "Wechselfrist", "Spartarif"]
+    betroffene_slugs:
+      - "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+
+  # ---------- TELEKOM (BNetzA) ----------
+  - id: bnetza-breitband
+    name: "Bundesnetzagentur: Breitband-/DSL-Marktdaten"
+    einheit: "Marktdaten"
+    ist_wert: null
+    stand: 2026-07-10
+    quelle:
+      name: "Bundesnetzagentur – Telekommunikation"
+      url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    rhythmus_tage: 90
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Breitband", "DSL", "Glasfaser", "Mobilfunk", "Ausbau"]
+    betroffene_slugs:
+      - "2026-08-10-dsl-wechselbonus-sichern"
+      - "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel"
+      - "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet"
+      - "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause"
+      - "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife"
+      - "pillar/internet-dsl"
+
+  # ---------- KONTO & KARTEN ----------
+  - id: girokonto-kostenlos
+    name: "Marktcheck: Kostenlose Girokonten (Konditionen)"
+    einheit: "Angebotslage"
+    ist_wert: null
+    stand: 2026-02-14
+    quelle:
+      name: "Verbraucherzentrale – Kostenlose Girokonten"
+      url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+    rhythmus_tage: 90
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Girokonto", "Kontoführung", "Kontogebühren", "Direktbank"]
+    betroffene_slugs:
+      - "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren"
+      - "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen"
+      - "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert"
+      - "pillar/konto-karten"
+
+  # ---------- STEUERN (jährlich) ----------
+  - id: grundfreibetrag
+    name: "Grundfreibetrag (Einkommensteuer)"
+    einheit: "€/Jahr"
+    ist_wert: null
+    stand: 2026-01-02
+    quelle:
+      name: "Bundesministerium der Finanzen – Steuertarife"
+      url: "https://www.bundesfinanzministerium.de/Web/DE/Themen/Steuern/Steuertarife/steuertarife.html"
+    rhythmus_tage: 365
+    toleranz: null
+    ymyl: true
+    suchbegriffe: ["Grundfreibetrag", "Steuertarif", "Einkommensteuer", "Tarifautomatik"]
+    betroffene_slugs:
+      - "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge"

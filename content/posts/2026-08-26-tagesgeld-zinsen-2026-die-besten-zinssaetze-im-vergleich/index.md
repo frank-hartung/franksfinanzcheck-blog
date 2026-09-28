@@ -82,6 +82,8 @@ Die Europäische Zentralbank (EZB) hat die Zinsen zwischen 2022 und 2024 stark a
 | Einlagensicherung | ✅ 100.000 € | ✅ 100.000 € | ✅ 100.000 € |
 | Ideal für | Zahlungsverkehr | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), Reserve | mittelfristige Ziele (1–5 J.) |
 
+{{< tabellenstand quelle="Eigene Recherche & öffentliche Vergleichsportale" stand="August 2026" >}}
+
 **Faustregel für die Aufteilung deiner Sparguthaben:**
 
 - **Girokonto:** 1–2 Monatsausgaben als Puffer

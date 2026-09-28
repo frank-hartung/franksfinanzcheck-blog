@@ -1588,6 +1588,104 @@ details.toc .inner a:focus-visible {
 }
 
 /* ============================================================
+   KI-PRÜFZEILE – Transparenzlinie unter der Meta-Zeile (28.09.2026)
+   ------------------------------------------------------------
+   Renderer: layouts/_partials/ff_pruefzeile.html
+   Konkurrenz-Parität Finanztip (KI-Kennzeichnung je Artikel)
+   + EU-KI-VO Art. 50. Schlichte Dokument-Zeile (kein Kasten):
+   Sie darf die Kurzantwort-Box und den Titel nicht konkurrenzieren.
+   ============================================================ */
+.ff-pruef {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 6px 0 2px;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.ff-pruef__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  color: var(--ff-green-2);
+  background: color-mix(in srgb, var(--ff-green) 12%, transparent);
+}
+
+:root[data-theme="dark"] .ff-pruef__chip {
+  color: var(--ff-accent-2);
+  background: color-mix(in srgb, var(--ff-accent) 16%, transparent);
+}
+
+.ff-pruef__text {
+  color: var(--secondary);
+}
+
+.ff-pruef__sep {
+  margin: 0 2px;
+  color: color-mix(in srgb, var(--secondary) 55%, transparent);
+}
+
+.ff-pruef__link {
+  margin-left: auto;
+  color: var(--ff-green-2);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ff-green-2) 32%, transparent);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.ff-pruef__link:hover,
+.ff-pruef__link:focus-visible {
+  color: var(--ff-green);
+  border-bottom-color: currentColor;
+}
+
+:root[data-theme="dark"] .ff-pruef__link {
+  color: var(--ff-accent-2);
+  border-bottom-color: color-mix(in srgb, var(--ff-accent-2) 32%, transparent);
+}
+
+:root[data-theme="dark"] .ff-pruef__link:hover,
+:root[data-theme="dark"] .ff-pruef__link:focus-visible {
+  color: var(--ff-accent);
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: 640px) {
+  .ff-pruef__link {
+    margin-left: 0;
+  }
+}
+
+/* ============================================================
+   TABELLENSTAND – Quelle/Stand-Zeile unter Artikel-Tabellen (28.09.2026)
+   ------------------------------------------------------------
+   Renderer: layouts/shortcodes/tabellenstand.html UND die
+   Parameter stand=/quelle= der Komponenten-Shortcodes
+   einspartabelle/tarifvergleich. Finanztip-Standard: Jede
+   zahltabelle trägt Quelle + Stand. Schlichte Caption-Optik.
+   ============================================================ */
+.ff-tabellenstand {
+  margin: -0.45em 0 1.3em;
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+.ff-tabellenstand__sep {
+  margin: 0 5px;
+  color: color-mix(in srgb, var(--secondary) 55%, transparent);
+}
+
+/* ============================================================
    QUELLEN & FAKTENSTAND – Belegkette am Artikelende (27.09.2026)
    ------------------------------------------------------------
    Renderer: layouts/_partials/ff_quellen_box.html

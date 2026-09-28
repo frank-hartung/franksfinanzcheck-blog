@@ -33,6 +33,10 @@
       {{- partial "post_canonical.html" . -}}
     </div>
     {{- end }}
+    {{- /* KI-Prüfzeile (Konkurrenz-Parität Finanztip, 28.09.2026):
+           per Artikelseite sichtbare KI-Transparenz + Prüfperson.
+           Details/Vertrag: layouts/_partials/ff_pruefzeile.html */ -}}
+    {{- partial "ff_pruefzeile.html" . }}
   </header>
 
   {{- /* Korrektur-Box (WiWo-Standard: Fehler transparent korrigieren).

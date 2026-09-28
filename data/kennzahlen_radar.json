@@ -1,0 +1,198 @@
+{
+  "generated": "2026-09-28",
+  "count": 4,
+  "queue": [
+    {
+      "id": "girokonto-kostenlos",
+      "name": "Marktcheck: Kostenlose Girokonten (Konditionen)",
+      "einheit": "Angebotslage",
+      "ist_wert": null,
+      "stand": "2026-02-14",
+      "rhythmus_tage": 90,
+      "alter_tage": 226,
+      "ymyl": true,
+      "quelle": "Verbraucherzentrale – Kostenlose Girokonten",
+      "quelle_url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702",
+      "signale": [
+        {
+          "datei": "data/research/artikel/konto-karten.md",
+          "datum": "2026-09-27",
+          "begriffe": [
+            "Girokonto"
+          ]
+        }
+      ],
+      "artikel": [
+        {
+          "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+          "titel": "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+          "titel": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+          "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "pillar/konto-karten",
+          "titel": "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen",
+          "lastmod": "2026-08-31"
+        }
+      ],
+      "prioritaet": "P1",
+      "status": "AKTION (fällig + neues Brief-Signal)"
+    },
+    {
+      "id": "bnetza-energie-marktdaten",
+      "name": "Bundesnetzagentur: Markt- und Preisdaten Strom/Gas",
+      "einheit": "Marktdaten",
+      "ist_wert": null,
+      "stand": "2026-07-10",
+      "rhythmus_tage": 60,
+      "alter_tage": 80,
+      "ymyl": true,
+      "quelle": "Bundesnetzagentur – Elektrizität und Gas",
+      "quelle_url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "signale": [
+        {
+          "datei": "data/research/2026-09-12-internet-recherche.md",
+          "datum": "2026-09-12",
+          "begriffe": [
+            "Bundesnetzagentur",
+            "Energiepreis"
+          ]
+        }
+      ],
+      "artikel": [
+        {
+          "slug": "pillar/strom-sparen",
+          "titel": "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten",
+          "lastmod": "2026-09-21"
+        }
+      ],
+      "prioritaet": "P1",
+      "status": "AKTION (fällig + neues Brief-Signal)"
+    },
+    {
+      "id": "bdew-haushaltsstrompreis",
+      "name": "BDEW-Strompreisanalyse: Haushaltsstrompreis",
+      "einheit": "ct/kWh",
+      "ist_wert": "37,0",
+      "stand": "2026-08-21",
+      "rhythmus_tage": 30,
+      "alter_tage": 38,
+      "ymyl": true,
+      "quelle": "BDEW-Strompreisanalyse",
+      "quelle_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/",
+      "signale": [
+        {
+          "datei": "data/research/2026-09-21-internet-recherche.md",
+          "datum": "2026-09-21",
+          "begriffe": [
+            "Strompreis"
+          ]
+        },
+        {
+          "datei": "data/research/2026-09-14-internet-recherche.md",
+          "datum": "2026-09-14",
+          "begriffe": [
+            "Stromkosten",
+            "Strompreis"
+          ]
+        },
+        {
+          "datei": "data/research/2026-09-12-internet-recherche.md",
+          "datum": "2026-09-12",
+          "begriffe": [
+            "Stromkosten",
+            "Strompreis"
+          ]
+        }
+      ],
+      "artikel": [
+        {
+          "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+          "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
+          "titel": "Energie-Update: Was sich jetzt für dich ändert",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+          "titel": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "pillar/strom-sparen",
+          "titel": "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten",
+          "lastmod": "2026-09-21"
+        }
+      ],
+      "prioritaet": "P1",
+      "status": "AKTION (fällig + neues Brief-Signal)"
+    },
+    {
+      "id": "bdew-gaspreis-efh",
+      "name": "BDEW-Gaspreisanalyse: Gaspreis Einfamilienhaus",
+      "einheit": "ct/kWh",
+      "ist_wert": "11,93",
+      "stand": "2026-08-24",
+      "rhythmus_tage": 30,
+      "alter_tage": 35,
+      "ymyl": true,
+      "quelle": "BDEW-Gaspreisanalyse",
+      "quelle_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "signale": [
+        {
+          "datei": "data/research/2026-09-12-internet-recherche.md",
+          "datum": "2026-09-12",
+          "begriffe": [
+            "Gaspreis"
+          ]
+        }
+      ],
+      "artikel": [
+        {
+          "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+          "titel": "Sicher heizen: So schützt dich eine Gaspreisgarantie",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+          "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+          "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+          "titel": "Preisgarantie Gas: So schützt du dich vor Preissprüngen",
+          "lastmod": "2026-09-21"
+        },
+        {
+          "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+          "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+          "lastmod": "2026-09-25"
+        },
+        {
+          "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+          "titel": "Gasrechnung senken: So bereitest du dich im Spätsommer vor",
+          "lastmod": "2026-09-25"
+        }
+      ],
+      "prioritaet": "P1",
+      "status": "AKTION (fällig + neues Brief-Signal)"
+    }
+  ]
+}

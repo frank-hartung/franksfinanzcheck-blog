@@ -55,6 +55,8 @@ Strom und Gas machen in deutschen Haushalten oft den größten Block der variabl
 | Heizung entlüften & Thermostate prüfen | 50–120&nbsp;€ | 30 Minuten | Einfach |
 | LED-Umrüstung im gesamten Haushalt | 40–90&nbsp;€ | 1 Stunde | Einfach |
 
+{{< tabellenstand quelle="Eigene Praxiswerte aus über 10 Jahren Tarifvergleichen" stand="September 2026" >}}
+
 ---
 
 ## Heimliche Stromfresser aufspüren und ausschalten

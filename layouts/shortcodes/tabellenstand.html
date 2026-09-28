@@ -1,0 +1,30 @@
+{{- /* ============================================================
+    TABELLENSTAND – Quelle/Stand-Zeile unter JEDE Tabelle (28.09.2026)
+    ------------------------------------------------------------
+    KONKURRENZ-PARITÄT Finanztip: Dort trägt jede zahltabelle
+    eine Zeile „Quelle: X (Stand: September 2026)“. Dieser
+    Shortcode setzt dasselbe Signal unter Markdown-Tabellen:
+
+        | Anbieter | Zins |
+        |---|---|
+        | ... | ... |
+
+        {{< tabellenstand quelle="BDEW-Strompreisanalyse" stand="August 2026" >}}
+
+    VERTRAG:
+      * Beide Parameter optional – ohne beide rendert NICHTS.
+      * Werte NUR aus dem Frontmatter des Artikels belegen
+        (quellen-/faktencheck-Feld) – keine erfundenen Stände
+        (Anti-Halluzinations-Statut, CLAUDE.md).
+      * Optik: .ff-tabellenstand in z-premium-blog.css (kein
+        Inline-Style), funktioniert in hellem wie dunklem Modus.
+    ============================================================ */ -}}
+{{- $quelle := .Get "quelle" -}}
+{{- $stand := .Get "stand" -}}
+{{- if or $quelle $stand }}
+<p class="ff-tabellenstand">
+  {{- with $quelle }}<span class="ff-tabellenstand__quelle">Quelle: {{ . }}</span>{{ end -}}
+  {{- if and $quelle $stand }}<span class="ff-tabellenstand__sep" aria-hidden="true">·</span>{{ end -}}
+  {{- with $stand }}<span class="ff-tabellenstand__stand">Stand: {{ . }}</span>{{ end -}}
+</p>
+{{- end -}}
