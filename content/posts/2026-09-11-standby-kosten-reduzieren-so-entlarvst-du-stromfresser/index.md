@@ -1,400 +1,268 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-09-28
 title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
-description: "Wie du Standby-Verbrauch sauber misst, welche Geräte besonders oft Geld ziehen und mit welchen einfachen Schritten du unnötige Stromkosten senkst."
+description: "Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige Funktionen zu stören."
 date: 2026-09-11T20:00:23Z
 draft: false
 tags: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
+keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
-pin_title: "Diese 5 Geräte treiben deine Stromrechnung in die Höhe"
-pin_description: "*Werbung | Wie du Standby-Verbrauch sauber misst, welche Geräte besonders oft Geld ziehen und mit welchen einfachen Schritten du unnötige Stromkosten senkst. Mehr Spartipps auf FranksFinanzcheck! #standbykosten #stromfresserentlarven #geraeteabschaltensparen"
-ai_generated: true
-ai_provider: "Content-Engine v2"
-engine_level: "profi"
-
+pin_title: "Standby-Kosten senken: Diese Gerätegruppen lohnen zuerst"
+pin_description: "*Werbung | Wenige Watt summieren sich. Mit Messplan, Kostenformel und klaren Ausnahmen senkst du Standby-Kosten, ohne Router, OLED-TV oder Smart Home blind abzuschalten."
+ai_generated: false
 inspiration: "Standby-Falle & Co.: Die 5 schlimmsten Stromfresser im Check"
 cover:
   image: "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg"
   alt: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
   caption: "Tipp von FranksFinanzcheck"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
-kurzantwort: "Standby kostet meist weniger pro Gerät, als viele denken, aber in der Summe oft deutlich mehr. Schon 20 Watt Dauerlast entsprechen bei 0,40 € pro kWh rund 70 € im Jahr. Mit Strommessgerät, schaltbaren Steckdosenleisten und einem systematischen Raum-Check findest du die größten Dauerverbraucher schnell heraus."
+erfahrung: "Ich messe Standby nicht Gerät für Gerät ins Blaue hinein, sondern zuerst ganze Gerätegruppen. Das zeigt schnell, wo eine schaltbare Leiste im Alltag wirklich Geld spart."
+kurzantwort: "Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro. Miss zuerst TV-Ecke, Homeoffice und alte Audiotechnik. Schalte nur ab, wenn keine Telefonie, Updates, Aufnahmen, Wartungszyklen oder Smart-Home-Funktionen davon abhängen."
 social_posted: true
 quellen:
-  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,0 ct/kWh im Durchschnitt"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-21"
-  - titel: "So läuft der Anbieterwechsel bei Strom und Gas ab"
-    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-laeuft-der-anbieterwechsel-bei-strom-und-gas-ab-10645"
+  - titel: "Strom sparen im Haushalt: Einfache Tipps"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/strom-sparen-im-haushalt-einfache-tipps-10734"
     herausgeber: "Verbraucherzentrale"
-    datum: "2025-05-28"
-  - titel: "Grundversorgung oder Sondervertrag? Verträge bei Strom und Gas"
-    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/grundversorgung-oder-sondervertrag-vertraege-bei-strom-und-gas-10912"
-    herausgeber: "Verbraucherzentrale"
-    datum: "2026-08-24"
-faktencheck: 2026-09-27
+    datum: "2026-08-20"
+  - titel: "Leerlaufverluste"
+    url: "https://www.umweltbundesamt.de/themen/klima-energie/energiesparen/leerlaufverluste"
+    herausgeber: "Umweltbundesamt"
+    datum: "2015-09-30"
+faktencheck: 2026-09-28
 ---
 
-Ein Gerät mit **2 Watt** im Standby wirkt harmlos. Zehn solcher Geräte nicht mehr. Dann laufen plötzlich **20 Watt** rund um die Uhr – und das sind bei **0,40 € pro kWh** grob **70 € im Jahr**. Genau deshalb lohnt es sich, bei den kleinen Dauerverbrauchern genauer hinzusehen.
+Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro Kilowattstunde aber knapp **65 € im Jahr**. Kein finanzieller Weltuntergang – nur ein ziemlich teures rotes Lämpchen.
 
-Die gute Nachricht: Du musst nicht jede Steckdose in der Wohnung paranoid beobachten. Bei Standby geht es nicht um Kleinkrieg, sondern um Prioritäten. Manche Geräte ziehen fast nichts. Andere hängen 24 Stunden am Netz und sammeln still Jahr für Jahr Kosten ein.
+Die Lösung ist nicht, jeden Stecker täglich zu ziehen. Du brauchst eine kurze Messrunde und klare Ausnahmen. Dann schaltest du nur dort ab, wo Komfort und Technik nicht leiden.
 
 ## Das Wichtigste in Kürze
 
-- **Standby Kosten** sind oft klein pro Gerät, aber relevant in der Summe.
-- Schon **20 Watt Dauerlast** kosten bei **0,40 € pro kWh** ungefähr **70 € pro Jahr**.
-- Besonders spannend sind **TV-Zonen, Drucker, Spielkonsolen, alte Audiogeräte und Netzteile**.
-- Ein **Strommessgerät** ist der schnellste Weg zu ehrlichen Zahlen.
-- Schaltbare Steckdosenleisten bringen oft mehr als guter Vorsatz.
-- Bei manchen Geräten ist komplettes Abschalten sinnvoll, bei anderen nicht.
+- Unterscheide **Standby**, **Netzwerk-Bereitschaft** und notwendigen **Dauerbetrieb**.
+- Miss zuerst Gerätegruppen: TV-Ecke, Homeoffice und alte Audiotechnik.
+- **10 Watt rund um die Uhr** entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr.
+- Eine schaltbare Leiste lohnt eher bei mehreren Geräten als bei einem modernen Ladegerät.
+- Router, Smart-Home-Zentralen und Geräte mit Wartungszyklen schaltest du nicht blind ab.
+- Senke zuerst die unnötige Dauerlast; vergleiche danach den Stromtarif.
 
----
+## Standby ist nicht gleich Dauerbetrieb
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn du schon beim Verbrauch aufräumst, lohnt sich auch ein Blick auf deinen Preis pro Kilowattstunde. Oft spart ein Tarifwechsel zusätzlich bares Geld: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+Ein ausgeschaltetes Gerät kann weiter Strom beziehen. Dafür gibt es unterschiedliche Gründe:
 
-## Was genau zählt überhaupt als Standby?
+1. **Standby:** Das Gerät wartet etwa auf Fernbedienung oder Tastendruck.
+2. **Schein-Aus:** Das Gerät wirkt aus, bleibt intern aber am Netz.
+3. **Netzwerk-Bereitschaft:** Updates, App-Zugriff oder Fernstart bleiben aktiv.
+4. **Dauerbetrieb:** Router, Smart-Home-Zentrale oder Kühlschrank erfüllen bewusst ständig eine Aufgabe.
 
-Standby bedeutet: Das Gerät ist scheinbar aus, zieht aber weiter Strom. Mal wartet es auf die Fernbedienung. Mal hält es Netzwerkverbindungen offen. Mal leuchtet einfach nur dauerhaft eine Anzeige.
+Nur die ersten drei Kategorien bieten mögliches Standby-Potenzial. Auch dort gilt: Erst prüfen, welche Funktion du mit dem Abschalten verlierst.
 
-Wichtig ist der Unterschied zwischen drei Fällen:
+## So rechnest du wenige Watt in Jahreskosten um
 
-1. **echter Standby** – das Gerät ist aus, aber empfangsbereit
-2. **Netzwerk-Bereitschaft** – WLAN, Updates oder Smart-Home-Funktionen laufen weiter
-3. **Dauerbetrieb** – etwa Router, Repeater oder manche Smarthome-Zentralen
+Für eine konstante Leistung lautet die Formel:
 
-Nicht alles davon ist unnötig. Ein Router darf laufen, wenn du ihn brauchst. Eine alte Stereoanlage im Gästezimmer muss das eher nicht.
+> Watt × Stunden pro Tag × 365 ÷ 1.000 = kWh pro Jahr
 
-## Warum sich wenige Watt im Jahr summieren
+Anschließend multiplizierst du mit deinem Arbeitspreis in Euro. Der BDEW-Durchschnitt von 37,0 Cent pro kWh dient hier nur als Rechenwert. Auf deiner Rechnung steht dein echter Preis.
 
-Bei Strom hilft einfache Mathematik mehr als jedes Bauchgefühl.
+| Dauerlast | Verbrauch pro Jahr | Kosten bei 0,37 €/kWh |
+|---:|---:|---:|
+| 1 Watt | 8,76 kWh | 3,24 € |
+| 5 Watt | 43,8 kWh | 16,21 € |
+| 10 Watt | 87,6 kWh | 32,41 € |
+| 20 Watt | 175,2 kWh | 64,82 € |
+| 30 Watt | 262,8 kWh | 97,24 € |
 
-### Rechenbeispiele
+Das zeigt auch die richtige Priorität: Ein Ladegerät mit 0,1 Watt Leerlauf ist kein Projekt. Eine alte Gerätegruppe mit 18 Watt schon.
 
-| Dauerlast | Stromverbrauch pro Jahr | Kosten bei 0,40 € pro kWh |
-|---|---:|---:|
-| 1 Watt | 8,76 kWh | 3,50 € |
-| 3 Watt | 26,28 kWh | 10,51 € |
-| 5 Watt | 43,80 kWh | 17,52 € |
-| 10 Watt | 87,60 kWh | 35,04 € |
-| 20 Watt | 175,20 kWh | 70,08 € |
-| 40 Watt | 350,40 kWh | 140,16 € |
+## Wo sich die erste Messung meistens lohnt
 
-Ein einzelnes Gerät mit 1 Watt ist also kein Drama. Zehn Geräte mit 3 Watt schon eher. Genau deshalb bringt dir ein systematischer Blick deutlich mehr als blindes Steckerziehen.
+### TV-Ecke
 
-## So entlarvst du Stromfresser sauber
+Fernseher, Soundbar, Konsole, Receiver und Streaming-Box hängen oft an derselben Stelle. Moderne Fernseher sind im klassischen Standby meist sparsam. Schnellstart, Netzwerkfunktionen und Peripherie können die Gruppe trotzdem teuer machen.
 
-Der einfachste Helfer ist ein Strommessgerät für die Steckdose. Das kostet überschaubar Geld oder lässt sich teils bei Verbraucherzentralen ausleihen.
+### Homeoffice
 
-### So gehst du vor
+Drucker, Dockingstation, Monitor, Lautsprecher und Netzteile bleiben nach Feierabend gern aktiv. Miss die ganze Leiste zuerst. Danach kannst du einzelne Geräte auseinandernehmen.
 
-1. Gerät an die Messsteckdose hängen.
-2. Verbrauch im Betrieb ansehen.
-3. Gerät scheinbar ausschalten.
-4. Wert im Standby notieren.
-5. Bei wichtigen Geräten den Jahreswert hochrechnen.
+### Alte Audio- und Videotechnik
 
-Wenn du kein Messgerät hast, helfen zwei einfache Hinweise:
+Ältere Verstärker, Receiver und Subwoofer haben oft höhere Leerlaufwerte als moderne Geräte. Hier kann ein echter Netzschalter oder eine Leiste viel bewirken.
 
-- Netzteil bleibt warm, obwohl nichts aktiv läuft.
-- Das Gerät hat eine dauerhafte Uhr, LED oder Netzwerkfunktion.
+### Gästezimmer und Keller
 
-Das ersetzt keine Messung, zeigt dir aber schnell, wo du zuerst ansetzen solltest.
+Selten genutzte Geräte fallen im Alltag kaum auf. Genau deshalb laufen sie manchmal monatelang in Bereitschaft.
 
-## Die größten Verdächtigen im Haushalt
+## Messen: kurz genug für den Alltag, lang genug für eine gute Zahl
 
-Nicht jeder Raum ist gleich wichtig. Besonders oft lohnt sich der Blick auf diese Zonen.
+Ein Energiekostenmessgerät wird zwischen Steckdose und Gerät gesteckt. Für Standby reichen bei stabilen Werten oft 30 bis 60 Minuten. Bei wechselnder Netzwerkaktivität misst du besser über Nacht.
 
-### 1. TV-Ecke und Unterhaltungselektronik
-Hier hängt meist viel auf engem Raum: Fernseher, Soundbar, Konsole, Streaming-Box, Receiver, Ladegeräte. Jedes einzelne Gerät wirkt klein. Zusammen kommt aber schnell eine ordentliche Grundlast zusammen.
+### Mein Ablauf
 
-Gerade Spielkonsolen im Schnellstart oder mit automatischen Updates sind klassische Kandidaten. Auch ältere Receiver oder Verstärker sind oft überraschend durstig.
+1. Alle Geräte wie gewohnt ausschalten.
+2. Die gesamte Leiste messen.
+3. Standby-Leistung und Messdauer notieren.
+4. Geräte einzeln trennen, bis der Hauptverursacher feststeht.
+5. Funktionen prüfen und erst dann die Lösung wählen.
 
-### 2. Homeoffice
-Monitor, Drucker, Dockingstation, Lautsprecher und Ladegeräte laufen gern mit, obwohl gerade niemand arbeitet. Besonders Drucker im Netzwerk sind oft typische Dauerverbraucher.
+Manche Messgeräte zeigen niedrige Leistungen ungenau an. Achte beim Kauf oder Verleih darauf, dass das Gerät auch kleine Wattwerte zuverlässig erfassen kann.
 
-### 3. Küche
-Kaffeemaschinen mit Display, Mikrowellen mit Uhr, Wasserfilter mit Elektronik oder fest eingesteckte Ladegeräte werden gern übersehen. Das ist keine Katastrophe, aber in Summe oft ein echter Hebel.
+## Abschalten, einstellen oder weiterlaufen lassen?
 
-### 4. Keller und Nebenräume
-Genau hier stehen oft die stillen Klassiker: alte Stereoanlage, Zweitkühlschrank, Gefriertruhe, Werkzeugladegeräte oder Router für eine abgelegene Etage. Gerade alte Kühlgeräte sind kein Standby im engeren Sinn, aber energetisch oft noch viel teurer als jede TV-LED.
+| Befund | Sinnvolle Reaktion |
+|---|---|
+| Mehrere unkritische Geräte an einer Stelle | schaltbare Steckdosenleiste |
+| Konsole im Schnellstartmodus | Energiesparmodus aktivieren |
+| Drucker wird nur selten gebraucht | nach Nutzung ganz ausschalten |
+| Router mit unnötigen Funkfunktionen | Energiesparoptionen und Zeitplan prüfen |
+| Smart-Plug vor Mini-Verbraucher | Eigenverbrauch gegen Ersparnis rechnen |
+| Notwendiger Dauerbetrieb | nicht abschalten, Einstellungen optimieren |
 
-### 5. Smarthome und Netzwerk
-Router, Repeater, Smart-Speaker und Funkbrücken dürfen nicht pauschal verteufelt werden. Aber auch hier lohnt sich die Frage: Muss wirklich alles rund um die Uhr aktiv bleiben?
+Eine Funksteckdose braucht selbst Strom. Sie ist sinnvoll, wenn sie deutlich mehr Verbrauch vermeidet, als sie verursacht.
 
-## Typische Beispielwerte für häufige Geräte
+## Diese Geräte bitte nicht blind vom Netz trennen
 
-Die Werte schwanken je nach Alter und Modell. Als grobe Orientierung hilft diese Tabelle:
+**OLED-Fernseher:** Einige Modelle führen nach der Nutzung Pflegezyklen aus. Beachte die Herstellerhinweise und trenne nicht unmittelbar nach jedem Ausschalten den Strom.
 
-| Gerät | Typischer Bereitschaftsverbrauch | Jahreskosten bei 0,40 € pro kWh |
-|---|---:|---:|
-| Fernseher modern | 0,5 bis 1 Watt | 1,75 € bis 3,50 € |
-| Soundbar | 2 bis 4 Watt | 7 € bis 14 € |
-| Spielkonsole im Schnellstart | 8 bis 15 Watt | 28 € bis 53 € |
-| Drucker im Netzwerk | 3 bis 5 Watt | 10,50 € bis 17,50 € |
-| Alte Stereoanlage | 10 bis 15 Watt | 35 € bis 53 € |
-| Kaffeemaschine mit Daueranzeige | 2 bis 4 Watt | 7 € bis 14 € |
-| WLAN-Router | 7 bis 12 Watt | 25 € bis 42 € |
+**Router:** Festnetztelefonie, Alarmtechnik, Smart Home und nächtliche Sicherungen können davon abhängen. Oft ist ein WLAN-Zeitplan besser als komplettes Abschalten.
 
-Das sind bewusst Beispielwerte. Dein Gerät kann darunter oder darüber liegen. Genau deshalb ist Messen besser als Raten.
+**Recorder und Receiver:** Geplante Aufnahmen oder Programmdaten brauchen Bereitschaft.
 
-## Wo sich Abschalten wirklich lohnt – und wo eher nicht
+**Smart-Home-Zentrale:** Ohne sie können Heizungssteuerung, Sensoren oder Sicherheitsfunktionen ausfallen.
 
-Beim Energiesparen bringt Härte selten mehr als Verstand. Nicht jedes Gerät musst du zwanghaft vom Netz trennen.
+**Kühl- und Gefriergeräte:** Sie sind keine Standby-Kandidaten. Ihren Gesamtverbrauch misst du separat über mehrere Tage.
 
-### Sinnvoll ganz auszuschalten
+## Wann sich eine Steckdosenleiste rechnet
 
-- Selten genutzte Drucker
-- Zweitfernseher
-- alte Receiver oder Verstärker
-- Spielkonsolen außerhalb der Nutzungszeiten
-- Ladegeräte, die dauerhaft eingesteckt bleiben
+Angenommen, die TV-Ecke zieht ausgeschaltet 14 Watt. Du trennst sie im Schnitt 18 Stunden täglich vom Netz.
 
-### Mit Augenmaß behandeln
+- Ersparnis: 14 W × 18 h × 365 ÷ 1.000 = **92 kWh pro Jahr**
+- Kostenersparnis bei 0,37 €/kWh: **rund 34 € pro Jahr**
+- Preis der Leiste: beispielsweise 15 €
 
-- Router
-- Repeater
-- Smarthome-Zentralen
-- Geräte mit automatischer Wartung oder Hintergrundfunktionen
+In diesem Beispiel wäre der Kauf im ersten Jahr wieder drin. Zieht die Gruppe dagegen nur 1 Watt, spart dieselbe Leiste kaum 2,50 € jährlich.
 
-Ein OLED-Fernseher zum Beispiel sollte nicht direkt im Sekundentakt stromlos gemacht werden, wenn das Gerät intern noch Wartungsprozesse ausführt. Auch Router oder Smart-Home-Komponenten erfüllen oft bewusst eine Dauerfunktion.
+## Der 30-Minuten-Standby-Check
 
-## Welche Hilfsmittel im Alltag am meisten bringen
+### Minute 1 bis 10: TV-Ecke
 
-Nicht jede Lösung muss technisch aufwendig sein. Meist reichen einfache Werkzeuge.
+Schnellstartmodi prüfen, Gruppenwert messen, Herstellerhinweise des Fernsehers beachten.
 
-### Schaltbare Steckdosenleisten
-Ideal für TV-Zonen, Schreibtische und Musik-Ecken. Ein Schalter trennt mehrere Geräte auf einmal. Das ist oft die praktischste Lösung.
+### Minute 11 bis 20: Arbeitsplatz
 
-### Zeitschaltuhren
-Hilfreich an festen Stellen, etwa bei wenig genutzten Geräten oder Zusatztechnik im Keller.
+Drucker, Dock, Monitor und Lautsprecher im Feierabendzustand messen.
 
-### Funksteckdosen
-Praktisch, aber nicht immer die sparsamste Option. Auch sie verbrauchen selbst Strom. Lohnend sind sie vor allem vor Geräten mit deutlich höherem Standby-Verbrauch.
+### Minute 21 bis 30: Nebenräume
 
-### Master-Slave-Leisten
-Sinnvoll im Büro: Schaltet der Hauptrechner ab, gehen Monitor und Zubehör automatisch mit aus.
+Alte Audioanlage, Zweitfernseher und selten genutzte Netzteile suchen. Kühlgeräte nur auf die längere Messliste setzen.
 
-## Der 30-Minuten-Check für deine Wohnung
+Am Ende brauchst du keine perfekte Inventur. Notiere die zwei größten unnötigen Dauerlasten und löse genau diese.
 
-Wenn du keine Lust auf Großprojekt hast, mach diesen Kurzlauf:
+## Häufige Irrtümer
 
-### Minute 1 bis 10
-Gehe Wohnzimmer und Arbeitszimmer durch. Notiere alle Geräte mit Display, LED, Netzteil oder Fernbedienung.
+### „Neue Geräte verbrauchen im Standby immer fast nichts“
 
-### Minute 11 bis 20
-Miss oder prüfe die größten Verdächtigen: Konsole, Drucker, Soundbar, Receiver, Kaffeemaschine, Ladegeräte.
+Für viele klassische Bereitschaftszustände gelten strenge Vorgaben. Netzwerk-Bereitschaft und aktivierte Komfortfunktionen können trotzdem höher liegen. Miss dein Modell.
 
-### Minute 21 bis 30
-Ordne nach Priorität:
+### „Jedes Ladegerät muss sofort raus“
 
-- Sofort ganz abschalten,
-- über Steckdosenleiste bündeln,
-- bewusst weiterlaufen lassen.
+Ein modernes Netzteil ohne angeschlossenes Gerät verbraucht oft sehr wenig. Priorisiere messbare Gerätegruppen statt Symbolpolitik.
 
-So trennst du sinnvolle Dauerläufer von unnötigen Stromziehern.
+### „Aus- und Einschalten schadet allen Geräten“
 
-## In welcher Reihenfolge du am meisten findest
+Das stimmt pauschal nicht. Beachte aber Wartungszyklen, Aufnahmen und Herstellerhinweise.
 
-Wenn du schnell Wirkung sehen willst, starte nicht irgendwo. Geh in dieser Reihenfolge vor:
+### „Der Smart-Plug spart automatisch“
 
-1. **TV-Zone und Konsole** – hier summieren sich viele kleine Verbraucher.
-2. **Homeoffice** – Drucker, Dockingstation und Ladegeräte laufen oft unnötig mit.
-3. **Keller und Nebenräume** – dort stehen häufig alte Geräte, die deutlich mehr ziehen.
+Nein. Er hat einen Eigenverbrauch und lohnt nur vor einer größeren vermeidbaren Last.
 
-Mit dieser Reihenfolge findest du die teuren Kandidaten meist schneller als mit wahllosem Steckerziehen.
+> 💡 **Schnell-Tipp von FranksFinanzcheck:** Weniger kWh sind der erste Hebel. Ein günstigerer Arbeitspreis ist der zweite: [**Stromanbieter vergleichen & wechseln**](/go/strom/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
-## Was du nach dem ersten Fund sofort tun solltest
+## Erst Einstellungen prüfen, dann Zubehör kaufen
 
-Sobald du einen klaren Dauerverbraucher findest, hast du meist drei Optionen:
+Viele Geräte lassen sich ohne neue Steckdose sparsamer betreiben. Öffne die Energieoptionen und suche nach Schnellstart, Netzwerk-Bereitschaft, automatischem Einschalten oder dauerhaftem Display.
 
-- **direkt abschalten**, wenn das Gerät kaum gebraucht wird,
-- **über eine Leiste bündeln**, wenn mehrere Geräte zusammenhängen,
-- **bewusst laufen lassen**, wenn Hintergrundfunktionen wirklich wichtig sind.
+### Konsole
 
-Genau diese Sortierung spart mehr als allgemeiner Energiespar-Eifer.
+Der Energiesparmodus startet etwas langsamer, senkt aber häufig die Bereitschaft. Prüfe, ob automatische Downloads für dich wichtiger sind als die Ersparnis.
 
-## Wenn du heute nur drei Dinge misst
+### Fernseher und Streaming-Box
 
-Dann starte genau hier:
+Deaktiviere unnötigen Schnellstart und automatische Aktivierung über andere Geräte. Beachte bei OLED-Modellen weiterhin die Pflegezyklen des Herstellers.
 
-1. **Konsole oder TV-Zone** – dort laufen oft mehrere kleine Verbraucher zusammen.
-2. **Drucker oder Homeoffice-Ecke** – Netzteile und Bereitschaftsmodus bleiben hier gern unbemerkt aktiv.
-3. **alte Geräte im Keller oder Nebenraum** – genau dort sitzen oft die größten Überraschungen.
+### Drucker
 
-Mit genau diesen drei Checks findest du oft schneller echtes Sparpotenzial als mit zehn zufälligen Messungen.
+Verkürze die Zeit bis zum Schlafmodus. Wenn du nur selten druckst, schalte das Gerät danach aus. Ein Tintenstrahler sollte dabei seinen normalen Ausschaltvorgang beenden können.
 
-## Wenn du ohne Messgerät starten willst
+### Router und Repeater
 
-Dann achte zuerst auf genau diese Signale:
+Reduziere ungenutzte Funkbänder oder plane WLAN-Pausen, statt den Router samt Telefonie und Smart Home hart zu trennen. Firmware und Anbietergerät bestimmen, welche Optionen verfügbar sind.
 
-- Mehrere Geräte an einer TV-Leiste,
-- warme Netzteile trotz Pause,
-- Geräte mit Uhr, LED oder Schnellstart-Modus.
+### PC und Monitor
 
-Damit findest du oft schon die ersten Verdächtigen, bevor du überhaupt Zahlen misst.
+Nutze automatischen Ruhezustand und kurze Display-Abschaltung. Ein Bildschirmschoner spart bei modernen Displays nicht automatisch Energie.
 
-## Wenn du heute nur eine Leiste konsequent nutzt
+Miss nach jeder Änderung noch einmal. Eine aktivierte Option kann anders wirken als der Name vermuten lässt. Der Vorher-nachher-Wert entscheidet, nicht das grüne Blattsymbol im Menü.
 
-Dann nimm meist zuerst die TV-Zone.
+Schreibe die gewählte Option kurz auf. Nach einem Geräteupdate können Energiesparwerte zurückgesetzt sein. Wenn der Gruppenverbrauch später wieder steigt, findest du die Ursache schneller.
 
-Dort hängen oft Fernseher, Soundbar, Konsole und Streaming-Box zusammen. Genau an so einer Stelle wird aus einem kleinen Schalter oft schneller ein echter Spareffekt als bei fünf Einzelgeräten in verschiedenen Räumen.
+Prüfe auch Komfortfolgen erst einige Tage. Verpasst die Konsole Updates oder braucht der Drucker morgens lange, passt du den Plan an. Gute Spartechnik fällt im Alltag kaum auf; eine nervige Lösung wird früher oder später umgangen.
 
-## Was im Alltag oft mehr bringt als Perfektion
+## Abschaltzeiten realistisch rechnen
 
-Viele verlieren sich beim Thema Standby in Details. Dabei sind oft diese drei Hebel entscheidend:
+Geräte sind selten 24 Stunden im Standby. Die TV-Ecke läuft abends vielleicht vier Stunden aktiv und könnte die übrigen 20 Stunden getrennt sein. Rechne deshalb nur mit der vermeidbaren Zeit.
 
-1. **Gerätegruppen bündeln** statt alles einzeln ziehen.
-2. **alte Geräte zuerst prüfen** statt neue Mini-Verbraucher zu jagen.
-3. **Tarifpreis mitdenken** statt nur Watt zu zählen.
+> Ersparnis = Standby-Watt × vermeidbare Stunden × 365 ÷ 1.000 × Strompreis
 
-Genau hier wird das Ganze rund. Ein Haushalt mit 100 € Standby-Ersparnis und gleichzeitig zu teurem Stromtarif verschenkt weiter Potenzial. Lies dazu auch: [Energiediebe stoppen: So kannst du Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/).
+Beispiel: Eine Bürogruppe zieht 9 Watt und kann an 250 Arbeitstagen jeweils 14 Stunden sowie an 115 freien Tagen 24 Stunden aus sein.
 
-## Wann sich ein Messgerät besonders lohnt
+- Arbeitstage: 9 W × 14 h × 250 = 31,5 kWh
+- freie Tage: 9 W × 24 h × 115 = 24,8 kWh
+- zusammen: rund 56,3 kWh oder **20,83 €** bei 0,37 €/kWh
 
-Wenn du zwischen mehreren Räumen schwankst, miss zuerst dort, wo mehrere Geräte dauerhaft angeschlossen bleiben.
+Damit kannst du auch eine Funksteckdose beurteilen. Zieht sie selbst beispielsweise 0,7 Watt rund um die Uhr, verbraucht sie gut 6 kWh im Jahr. Von der Bruttoersparnis bleiben dann nur etwa 18,60 € übrig.
 
-Genau bei TV-Ecke, Homeoffice oder Nebenraum zeigt ein Messgerät meist schneller klare Unterschiede als beim einzelnen Handy-Ladegerät.
+Rechne Komfort mit ein. Eine Leiste, die hinter dem Schrank unerreichbar bleibt, spart auf Papier und sonst nichts. Platziere den Schalter so, dass Ausschalten zum normalen Handgriff wird.
 
-## Welche Gerätegruppe oft den ersten Aha-Effekt bringt
+### Urlaub ist ein eigener Betriebszustand
 
-Oft liefert nicht das Einzelgerät den größten Fund, sondern eine ganze Ecke mit mehreren Dauerläufern.
+Vor einer Reise kannst du mehr abschalten als an einem normalen Abend. Drucker, Monitor, Konsole, Audioanlage und unnötige Netzteile dürfen oft komplett vom Netz. Kühlschrank, Router für Sicherheitsfunktionen und Smart-Home-Technik brauchen eine bewusste Einzelentscheidung.
 
-Genau deshalb bringt die TV-Zone mit Fernseher, Soundbar, Konsole und Box oft schneller Klarheit als die Suche nach Mini-Verbrauchern.
+Nutze dafür eine kurze Abreise-Liste. Prüfe auch, ob Zeitschaltuhren oder automatische Routinen nach der Rückkehr noch stimmen. Das vermeidet den Klassiker: Zwei Wochen gut gespart und danach drei Monate WLAN oder TV-Zone im falschen Komfortmodus betrieben.
 
-## Welche Ecke du heute als Erstes prüfen kannst
+Der Messwert zählt.
 
-Wenn du nur einmal anfangen willst, nimm zuerst die TV-Ecke.
+## Fazit: Nicht jedes Watt jagen
 
-Dort hängen oft mehrere Geräte dauerhaft zusammen. Genau deshalb findest du dort meist schneller einen echten Effekt als an Einzelsteckdosen im Rest der Wohnung.
+Standby-Kosten sinken am schnellsten, wenn du Gruppen statt Kleinkram prüfst. Miss TV-Ecke und Arbeitsplatz, rechne mit deinem Strompreis und schalte nur unkritische Funktionen ab.
 
-## Welche Leiste du zuerst dauerhaft umstellen kannst
+Dein nächster Schritt dauert zehn Minuten: Miss heute Abend die TV-Leiste im ausgeschalteten Zustand. Liegt sie deutlich über 5 Watt, prüfst du Schnellstart, Konsole und Soundanlage einzeln.
 
-Wenn du nur eine Gerätegruppe konsequent ändern willst, nimm zuerst die Leiste mit Fernseher, Soundbar und Konsole.
-
-Dort bringt ein kleiner Alltagsschritt oft mehr als viele lose Einzelmaßnahmen im Rest der Wohnung.
-
-## Welche Kombination du oft direkt zusammen siehst
-
-Gerade Fernseher, Soundbar und Konsole laufen oft als stilles Trio.
-
-Wenn du diese Kombination einmal sauber trennst, merkst du meist schneller Wirkung als bei vielen kleinen Einzelfunden in anderen Räumen.
-
-## Welche zwei Räume du nie gleich priorisieren musst
-
-Wenn du wenig Zeit hast, behandle Wohnzimmer und Keller nicht gleich.
-
-Im Wohnzimmer findest du oft schnelle Gruppeneffekte über eine Leiste. Im Keller oder Nebenraum sitzt dafür eher der eine alte Dauerläufer, der allein schon teuer wird.
-
-Darum gilt: zuerst die Ecke mit vielen Geräten bündeln, dann den ältesten Einzelverbraucher messen. Genau diese Reihenfolge spart oft schneller Geld als eine perfekte Runde durch jeden Raum.
-
-## Welche Zahl dir den Raumwechsel oft spart
-
-Wenn ein einzelnes altes Gerät schon deutlich über 10 Watt liegt, bleib nicht zu lange bei kleinen Steckern in anderen Räumen hängen.
-
-Dann sitzt der größere Hebel meist genau dort. Drei kleine Ladegeräte wirken im Vergleich schnell harmlos. Genau diese Zahl spart dir oft einen unnötigen Zimmerwechsel und macht die nächste Entscheidung klarer.
-
-## Welche Gerätegruppe du nie zu klein rechnen solltest
-
-Gerade eine alte TV- oder Audio-Ecke wirkt oft harmlos, weil kein einzelnes Gerät extrem auffällt.
-
-Zusammen entstehen dort aber schnell 15 oder 20 Watt Dauerlast. Genau deshalb lohnt sich der Blick auf die ganze Gruppe oft mehr als die Suche nach einem perfekten Einzelwert.
-
-## Welche eine Gruppe du vor Einzelsteckern zuerst misst
-
-Wenn du nur kurz Zeit hast, miss zuerst die Ecke mit Fernseher, Soundbar und Konsole gemeinsam.
-
-Dort versteckt sich oft schneller ein klarer Wert als bei drei kleinen Steckern in verschiedenen Räumen. Genau dieser Gruppenblick spart Zeit und zeigt dir meist früher, wo sich eine Leiste wirklich lohnt.
-
-## Welche Entscheidung du nach dem ersten Gruppenwert sofort treffen kannst
-
-Wenn eine Gerätegruppe schon klar auffällt, musst du nicht erst jeden Stecker perfekt einzeln zerlegen.
-
-Oft reicht genau dieses erste Ergebnis, um eine Leiste dauerhaft anders zu nutzen. Den Feinschliff kannst du später immer noch messen. Genau so entsteht aus einem Aha-Moment schneller echte Ersparnis.
-
-## Welche Wattzahl dir eine schnelle Priorität zeigt
-
-Wenn eine Ecke schon deutlich über 10 Watt Dauerlast liegt, gehört sie fast immer auf deine kurze Prioritätenliste.
-
-Dann lohnt sich die nächste Minute meist dort mehr als bei Ladegeräten mit Mini-Verbrauch. Genau diese einfache Grenze hält dich bei den großen Hebeln.
-
-## Welche Leiste du nach dem ersten Test fest einplanen kannst
-
-Wenn eine TV- oder Audio-Ecke beim Gruppenwert klar auffällt, gehört genau dort oft die erste feste Leiste hin.
-
-Du musst dann nicht weiter theoretisch suchen. Genau dieser eine praktische Schritt spart im Alltag meist mehr als viele lose Einzelideen.
-
-## Rechenbeispiel für einen normalen Haushalt
-
-Nehmen wir an, in deinem Haushalt laufen diese Werte dauerhaft mit:
-
-- Soundbar: 3 Watt
-- Drucker: 4 Watt
-- Konsole: 10 Watt
-- alte Stereoanlage: 8 Watt
-- Ladegeräte und Kleinkram: 5 Watt
-
-Zusammen sind das **30 Watt**. Hochgerechnet auf ein Jahr ergibt das:
-
-- 30 Watt × 24 Stunden × 365 Tage = **262,8 kWh**
-- Bei 0,40 € pro kWh also rund **105 € im Jahr**
-
-Das ist kein Weltuntergang. Aber eben auch kein Trinkgeld. Vor allem, weil sich ein Teil davon oft mit einer Leiste und zehn Minuten Gewohnheitsänderung reduzieren lässt.
-
-## Häufige Irrtümer rund um Standby
-
-### „Neuere Geräte verbrauchen doch fast nichts mehr“
-Teilweise stimmt das. Aber Netzwerkfunktionen, Komfortmodi und viele kleine Geräte können zusammen trotzdem relevant werden.
-
-### „Ein- und Ausschalten schadet immer“
-Nicht pauschal. Bei vielen Geräten ist das völliger Alltag. Wichtig ist nur, Spezialfälle mit Wartungszyklen oder Dauerfunktionen zu kennen.
-
-### „Ladegeräte sind egal“
-Ein einzelnes modernes Ladegerät ist oft fast vernachlässigbar. Viele dauerhaft eingesteckte Ladegeräte plus andere Kleingeräte sind es nicht mehr.
-
-## Wann sich ein Gerätetausch mehr lohnt als bloßes Abschalten
-
-Manchmal ist nicht der Standby das Hauptproblem, sondern das Alter des Geräts. Das gilt vor allem für alte Kühltruhen, Zweitkühlschränke, Receiver oder Verstärker. Wenn ein altes Gerät nicht nur im Bereitschaftsmodus viel zieht, sondern auch im Betrieb ineffizient ist, bringt ein Austausch oft mehr als jede Steckdosenleiste.
-
-Ein gutes Beispiel ist der Kellerkühlschrank. Läuft er das ganze Jahr und ist 15 oder 20 Jahre alt, kostet er dich oft deutlich mehr als ein modernes Modell. Prüfe daher immer beides: den Verbrauch im Standby und den Gesamtverbrauch im Alltag. So vermeidest du, dass du kleine Watt jagst und den großen Kostenblock daneben übersiehst.
-
-> 💶 **Spar-Tipp zwischendurch:** Erst Verbrauch senken, dann Preis prüfen – diese Reihenfolge macht deine Stromrechnung doppelt schlanker. Einen Tarifcheck kannst du hier direkt anschließen: [**Stromanbieter vergleichen & sparen**](/go/strom/)
-
-## Fazit: Nicht jedes Watt jagen – die großen Dauerläufer zuerst
-
-Wenn du **Standby Kosten reduzieren** willst, brauchst du keine Energiespar-Hysterie. Du brauchst einen klaren Blick auf die größten Dauerverbraucher. Schon **20 bis 30 Watt** unnötige Grundlast kosten im Jahr schnell **70 € bis 105 €**. Genau dort sitzt der Hebel.
-
-Die beste Strategie ist simpel: erst messen, dann bündeln, dann gezielt abschalten. TV-Ecke, Drucker, Konsole, alte Audio-Geräte und Nebenräume sind fast immer die ersten Kandidaten. So sparst du mit wenig Aufwand dort, wo es wirklich zählt.
-
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · Stromfresser finden: So stoppst du die Energie-Lecks · [Preisgarantie Gas: So schützt du dich vor Preissprüngen](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)
+**Weiterlesen:** [Stromfresser im ganzen Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 
 ## Häufige Fragen
 
-### Verbrauchen Ladegeräte ohne Handy wirklich Strom?
-Ja, oft ein wenig. Ein einzelnes modernes Ladegerät ist meist kein großer Kostentreiber. Viele dauerhaft eingesteckte Netzteile zusammen können aber spürbar werden.
+### Wie viel kosten 10 Watt Standby im Jahr?
+Bei Dauerbetrieb sind es 87,6 kWh. Mit 37 Cent pro kWh zahlst du rund 32 € im Jahr.
 
-### Wie viel kann ich durch Standby-Vermeidung sparen?
-Das hängt stark von deinem Gerätepark ab. Bei 20 Watt unnötiger Dauerlast sind es rund 70 € im Jahr. Bei 30 Watt bereits gut 100 €.
+### Wie genau muss mein Messgerät sein?
+Für Standby sollte es kleine Leistungen im niedrigen Wattbereich erfassen. Prüfe Messbereich und Auflösung in der Anleitung.
 
-### Sind Funksteckdosen selbst Stromfresser?
-Sie brauchen selbst etwas Strom. Deshalb lohnen sie sich vor allem dort, wo das angeschlossene Gerät deutlich mehr verbraucht als die Steckdose selbst.
+### Darf ich den Router nachts abschalten?
+Ja, wenn du dann weder Telefonie noch Smart Home, Sicherheitsfunktionen oder Updates brauchst. Prüfe zuerst den Energiespar- oder WLAN-Zeitplan.
 
-### Sollte ich den Router nachts abschalten?
-Nur wenn du ihn nachts wirklich nicht brauchst. Für manche Haushalte ist das okay, bei Telefonie, Smart Home oder Updates aber nicht immer praktisch.
+### Sind schaltbare Steckdosenleisten sicher?
+Nutze geprüfte Produkte, beachte die maximale Belastung und schließe keine ungeeigneten Hochleistungsgeräte an. Beschädigte Leisten gehören ersetzt.
 
-### Welche Geräte sollte ich nicht einfach vom Strom trennen?
-Kühlgeräte natürlich nicht. Auch Geräte mit wichtigen Hintergrundfunktionen oder Wartungszyklen solltest du nicht blind vom Netz nehmen.
-
-### Lohnt sich eher Verbrauchssenkung oder Tarifwechsel?
-Im besten Fall beides. Verbrauch senkt kWh, Tarifwechsel senkt den Preis pro kWh. Zusammengenommen wirkt das am stärksten.
+### Was bringt mehr: Standby senken oder Tarif wechseln?
+Beides wirkt an unterschiedlichen Stellen. Standby senkt den Verbrauch dauerhaft, ein Tarifwechsel den Preis jeder verbleibenden kWh.
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Stromanbieter vergleichen & wechseln**](/go/strom/)
+👉 **Strompreis prüfen:** [**→ Stromanbieter vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
