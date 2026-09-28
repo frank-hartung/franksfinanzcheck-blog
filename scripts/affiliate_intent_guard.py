@@ -305,6 +305,13 @@ def load_articles(paths: list[Path] | None = None) -> list[dict]:
             "tags": fm_list(fm, "tags") + fm_list(fm, "keywords"),
             "pillar": fm_value(fm, "pillar"),
             "draft": bool(re.search(r"(?m)^draft:\s*true\s*$", fm or "")),
+            # Maschinenverwaltete Reserve ist eine eigene Besitzklasse: Nur
+            # dort darf die Wache einen unehrlichen, nicht sicher umformulier-
+            # baren Werbesatz komplett entkommerzialisieren (#436). Menschlich
+            # geschriebene Prosa und Live-Artikel bleiben owner=human.
+            "reserve": bool(re.search(r"(?m)^reserve:\s*true\s*$", fm or "")),
+            "ai_generated": bool(re.search(
+                r"(?m)^ai_generated:\s*true\s*$", fm or "")),
             "section": "pillar" if f"{os.sep}pillar{os.sep}" in str(path) else "posts",
         })
     return arts
@@ -913,6 +920,58 @@ def _heile_lesetipps(body: str, art: dict, iw7: list[dict]) -> tuple[str, list[s
     return "\n".join(zeilen), aktionen
 
 
+def _entkommerzialisere_ki_prosa(body: str, art: dict, f: dict
+                                 ) -> tuple[str, list[str]]:
+    """Entfernt einen unehrlichen Werbe-Satz aus maschineller Reserve-Prosa.
+
+    IW3 darf menschliche In-Text-Prosa bewusst nicht automatisch umformulieren:
+    Grammatik und Aussage könnten sich ändern. Für einen KI-generierten,
+    unveröffentlichten Reserve-Entwurf gibt es aber einen sichereren Weg als
+    den ewigen P1-Blocker: Der vollständige Satz mit dem täuschenden Werbelink
+    wird entfernt. Redaktionelle Nachbarsätze bleiben bytegenau stehen; die
+    kanonischen Top/Mid/End-CTAs bleiben ebenfalls erhalten. Das reale #436-
+    Muster („Broker vergleichen … [/go/tagesgeld/ der C24 Bank]") wird so
+    nicht schöngeschrieben, sondern konsequent entkommerzialisiert.
+
+    Nur normale Absatz-Prosa ist zulässig. Tabellen, Listen, Überschriften und
+    Zitate bleiben owner=human, weil ein Satzschnitt dort Struktur zerstören
+    könnte.
+    """
+    if not (art.get("draft") and art.get("reserve") and
+            art.get("ai_generated") and f.get("code") == "IW3" and
+            f.get("owner") == "human" and f.get("slot") == "intext"):
+        return body, []
+    zeilen = body.split("\n")
+    idx = int(f.get("line") or 0) - 1
+    if idx < 0 or idx >= len(zeilen):
+        return body, []
+    zeile = zeilen[idx]
+    if not zeile.strip() or re.match(r"^\s*(?:[#>|]|[-*+]\s|\d+[.)]\s)", zeile):
+        return body, []
+    link = next((m for m in MD_GO_LINK.finditer(zeile)
+                 if m.group("key").lower() == f.get("route", "").lower()), None)
+    if not link:
+        return body, []
+
+    # Satzgrenzen nur innerhalb derselben Markdown-Zeile. Punkte in
+    # Abkürzungen vor dem Link sind ungefährlich: Wir nehmen die LETZTE Grenze;
+    # im Zweifel wird weniger Prosa entfernt, nie eine Nachbarzeile.
+    grenzen = list(re.finditer(r"[.!?…][\"”’*]*\s+", zeile[:link.start()]))
+    anfang = grenzen[-1].end() if grenzen else 0
+    ende_fund = re.search(r"[.!?…][\"”’*]*(?=\s|$)", zeile[link.end():])
+    ende = link.end() + ende_fund.end() if ende_fund else len(zeile)
+    entfernt = zeile[anfang:ende].strip()
+    if not entfernt:
+        return body, []
+    neu = (zeile[:anfang] + zeile[ende:]).strip()
+    neu = re.sub(r"[ \t]{2,}", " ", neu)
+    zeilen[idx] = neu
+    return ("\n".join(zeilen),
+            [f"IW3 L{f['line']}: unehrlichen KI-Werbesatz "
+             f"entkommerzialisiert (/go/{f['route']}/; kanonische CTAs "
+             "bleiben erhalten)"])
+
+
 def _heile_link(body: str, art: dict, f: dict, reg: dict) -> tuple[str, list[str]]:
     """Heilt genau einen Link-Fund (zeilenweise, offset-sicher).
 
@@ -924,6 +983,15 @@ def _heile_link(body: str, art: dict, f: dict, reg: dict) -> tuple[str, list[str
         Kontrakt (produkt-exakt).
       · IW3/IW8 – der Anker wird ehrlich bzw. produkt-exakt, Route bleibt.
     """
+    # #436: Ein human-owned IW3-Prosa-Fund bleibt für Menschen/Live hart.
+    # Ausschließlich die maschinenverwaltete Reserve darf den sicheren
+    # Entkommerzialisierungs-Pfad nehmen (ganzer Werbesatz raus, keine
+    # erfundene Ersatzbehauptung).
+    if f.get("code") == "IW3" and f.get("owner") == "human":
+        geheilt, aktionen = _entkommerzialisere_ki_prosa(body, art, f)
+        if aktionen:
+            return geheilt, aktionen
+
     zeilen = body.split("\n")
     idx = f["line"] - 1
     if idx >= len(zeilen):
@@ -1479,8 +1547,17 @@ def run(root: Path | None = None, do_heal: bool | None = None) -> dict:
             elif BAKE_ONLY:
                 print(f"ℹ {len(reg)} Gateway-Seiten sind auf Kontrakt-Stand – nichts zu backen.")
         for art in arts:
-            art_funde = [f for f in funde if f["slug"] == art["slug"]
-                         and f["owner"] == "auto" and f.get("blocking")]
+            maschinen_reserve = (art.get("draft") and art.get("reserve") and
+                                  art.get("ai_generated"))
+            art_funde = [
+                f for f in funde
+                if f["slug"] == art["slug"] and f.get("blocking") and (
+                    f["owner"] == "auto" or
+                    # #436-Ausnahme mit enger Besitzgrenze: human-owned
+                    # In-Text-IW3 wird nicht umgeschrieben, sondern der
+                    # Werbesatz wird aus KI-Reserve-Prosa entfernt.
+                    (maschinen_reserve and f["owner"] == "human" and
+                     f["code"] == "IW3" and f["slot"] == "intext"))]
             if not art_funde:
                 continue
             neuer_body, aktionen = heile_artikel(art, art_funde, reg, titel_pfad)
