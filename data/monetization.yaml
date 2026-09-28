@@ -1,0 +1,8 @@
+# Monetarisierungsquellen des Blogs.
+# Awin ist bewusst deaktiviert: Die aktiven Partnerprogramme werden nicht über
+# Awin abgewickelt. Governance darf dafür keine nicht benötigten Secrets fordern.
+provider: umami-only
+awin_enabled: false
+
+# Aktivierte Messquellen: Umami misst Reichweite und Affiliate-Klicks.
+analytics: umami

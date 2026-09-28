@@ -41,6 +41,15 @@ Du willst energiediebe stoppen? Die Stromrechnung steigt, also muss der alte Kü
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Darum gilt bei Stromfressern eine einfache Reihenfolge: **messen, Jahreskosten rechnen, dann entscheiden**. So sparst du mehr als mit einem Einkauf aus schlechtem Gewissen.
+### Dein Schnellstart
+
+Beginne mit einem Gerät. Wähle einen typischen Tag. Lies den Zähler ab. Miss den Verbrauch. Notiere die kWh. Nutze deinen Arbeitspreis. Rechne die Jahreskosten aus. Vergleiche erst danach ein neues Gerät. So bleibt die Entscheidung klar. Ein Messwert ersetzt kein Bauchgefühl durch Werbung. Er zeigt, was dein Haushalt wirklich braucht. Prüfe außerdem die Laufzeit. Ein Gerät mit kurzer Nutzung ist oft weniger wichtig. Dauerläufer verdienen zuerst deine Aufmerksamkeit. Schalte unnötige Bereitschaft aus. Wiederhole die Messung bei Unsicherheit. Dokumentiere Datum, Preis und Ergebnis. Danach entscheidest du: abschalten, anders nutzen oder ersetzen.
+
+
+#### Prüfe in drei Schritten
+
+Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg. Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffällige Werte. Prüfe sie später erneut. So vermeidest du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger. Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
+
 
 ## Das Wichtigste in Kürze – Energiediebe stoppen
 
