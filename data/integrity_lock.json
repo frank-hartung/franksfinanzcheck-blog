@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-28T13:18:28.740134+00:00",
-  "head": "af76ccd",
+  "signed_at": "2026-09-28T14:18:03.358019+00:00",
+  "head": "7d260d9",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
@@ -17,8 +17,8 @@
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
-    "layouts/pillar/single.html": "8d0a474d457c9728054789da4c0c4f1576dc387143dc5eb9586610a241d75bc4",
+    "layouts/pillar/list.html": "e82f485c0fd98d4f4eaab4f02d03628e222388804c1af9db8f9893e4ad2970df",
+    "layouts/pillar/single.html": "624568282066ef0f2427d32fefcf307a0693d7d8d3505164cee3bc5dbfc1a0ec",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
@@ -47,17 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "99f66745b16ead8a02fb0bdd475866fcfb6028340f3803d4c23b1fdc8fc79f13",
-  "audit_start_sha256": "bc8c84582b2ba008ad96ea061c2773b7b733372b09ee53c1ec05c7d8955e0942",
+  "files_sha256": "1fe020babba31b050cb5be8c1e5561a47a8a0aa3817bb62fffaedc96c531f14b",
+  "audit_start_sha256": "51386f18c1d4fc242edd3fd2bfd384396646ade1d4372136b3aad587a33f5e74",
   "audit": [
-    {
-      "date": "2026-09-27",
-      "art": "set-current",
-      "head": "6ac7c4f",
-      "geaendert": [],
-      "files_sha256": "10bbf3ee8b01be6d0c5ded2ace0c0a3a90e36a9a2bb7d5aedbe33e570da46302",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-27",
       "art": "set-current",
@@ -75,7 +67,7 @@
         }
       ],
       "files_sha256": "b971159fbdd525ae46a6df79fe17c4964b47fd7e6fe697240800d86efddc7143",
-      "prev_sha256": "bc8c84582b2ba008ad96ea061c2773b7b733372b09ee53c1ec05c7d8955e0942"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-27",
@@ -400,8 +392,57 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "8f9086e4daae7e9e3d4682ffbbdff072a8113e9120adb7d6db01efebe1cdf650",
-      "files_sha256": "99f66745b16ead8a02fb0bdd475866fcfb6028340f3803d4c23b1fdc8fc79f13"
+      "files_sha256": "99f66745b16ead8a02fb0bdd475866fcfb6028340f3803d4c23b1fdc8fc79f13",
+      "prev_sha256": "8f9086e4daae7e9e3d4682ffbbdff072a8113e9120adb7d6db01efebe1cdf650"
+    },
+    {
+      "date": "2026-09-28",
+      "art": "heal",
+      "head": "7d260d9",
+      "geaendert": [
+        "layouts/pillar/list.html",
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/pillar/list.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "7d260d9",
+              "datum": "2026-09-28",
+              "betreff": "feat(offenlegung): Werbekennzeichnung artikelgenau, sichtbar und dauerhaft bewiesen"
+            },
+            {
+              "sha": "2fbe518",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "7d260d9",
+              "datum": "2026-09-28",
+              "betreff": "feat(offenlegung): Werbekennzeichnung artikelgenau, sichtbar und dauerhaft bewiesen"
+            },
+            {
+              "sha": "2fbe518",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "cbe2d18c5d32d9248775ed964e20781000ca8fb80cf3c1b5b660df9479c09b6e",
+      "files_sha256": "1fe020babba31b050cb5be8c1e5561a47a8a0aa3817bb62fffaedc96c531f14b"
     }
   ]
 }
