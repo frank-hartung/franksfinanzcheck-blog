@@ -1,63 +1,7 @@
 {
   "target": 6,
-  "ready": 1,
-  "pool_size": 3,
-  "generated_at": "2026-09-28T10:44:13Z",
-  "candidates": [
-    {
-      "slug": "2026-09-28-buero-equipment-absetzen-so-zahlst-du-weniger-steuern",
-      "ready": true,
-      "sha256": "53cd12ccabaa305274698f25dd875731935f01780cebd3f876eeb7fd52b9c93d",
-      "score": 0.864,
-      "parts": {
-        "spelling": 0.6,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-09-28-camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle",
-      "ready": false,
-      "sha256": "acddf255804ec26e8347210e86f6080edf715cf660b737aaf4628da2618c4095",
-      "reason": "quality-score 0.826 < 0.85 (schwach: spelling 0.46, readability 0.70, typography 0.94)",
-      "details": [
-        "Reserve nicht bereit: 2026-09-28-camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle: {'slug': '2026-09-28-camping-2026-so-planst-du-deinen-urlaub-ohne-kostenfalle', 'score': 0.826, 'parts': {'spelling': 0.45999999999999996, 'meta': 1.0, 'structure': 1.0, 'typography': 0.94, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.7}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.826,
-      "parts": {
-        "spelling": 0.45999999999999996,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.7
-      }
-    },
-    {
-      "slug": "2026-09-28-etf-sparplan-2026-vermoegen-aufbauen-mit-system",
-      "ready": false,
-      "sha256": "2a577c885dc0873a0ef65c8766434562be3798efe90fd9d9539c6574041a8f59",
-      "reason": "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW3 Zeile 132: Angebot wird falsch benannt: Satz verspricht „vergleich“, das Ziel liefert aber ein Angebot der C24 Bank (CHECK24-Tochter), kein ",
-      "details": [
-        "🛑 2026-09-28-etf-sparplan-2026-vermoegen-aufbauen-mit-system: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW3 Zeile 132: Angebot wird falsch benannt: Satz verspricht „vergleich“, das Ziel liefert aber ein Angebot der C24 Bank (CHECK24-Tochter), kein Marktvergleich",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.906,
-      "parts": {
-        "spelling": 0.78,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    }
-  ]
+  "ready": 0,
+  "pool_size": 0,
+  "generated_at": "2026-09-28T17:10:53Z",
+  "candidates": []
 }
