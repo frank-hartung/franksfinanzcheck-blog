@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-21
+lastmod: 2026-09-28
 title: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"
 description: "Strom- und Gaskosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln und die Heizperiode optimal vorbereiten."
 date: 2026-08-08
@@ -54,6 +54,8 @@ Strom und Gas machen in deutschen Haushalten oft den größten Block der variabl
 | Standby-Stromfresser abschalten | 80–150&nbsp;€ | 15 Minuten | Einfach |
 | Heizung entlüften & Thermostate prüfen | 50–120&nbsp;€ | 30 Minuten | Einfach |
 | LED-Umrüstung im gesamten Haushalt | 40–90&nbsp;€ | 1 Stunde | Einfach |
+
+{{< tabellenstand quelle="Eigene Praxiswerte aus über 10 Jahren Tarifvergleichen" stand="September 2026" >}}
 
 ---
 
@@ -130,7 +132,11 @@ Verbrauch zuerst, Preis danach. Wer nur wechselt, ohne zu messen, kauft denselbe
 
 ## Rechenbeispiel 3-Personen-Haus, Strom + Gas
 
-Strom 3.400 kWh, Gas 18.000 kWh. Strom 6 Cent günstiger = 204 €. Gas 2,5 Cent günstiger = 450 €. Standby und LED 150 €. Heizkurve und 1 °C = 180 €. Summe **rund 980 €**. Davon sind 650 € Vertragshebel (ein Nachmittag) und 330 € Verhalten (Gewohnheit). Beide gehören in denselben Ratgeber, weil Google und Leser beides suchen.
+Strom 3.400 kWh, Gas 18.000 kWh. Strom 6 Cent günstiger = 204 €. Gas 2,5 Cent günstiger = 450 €. Standby und LED 150 €. Heizkurve und 1 °C = 180 €. Summe **rund 980 €**. Davon sind 650 € Vertragshebel (ein Nachmittag) und 330 € Verhalten (Gewohnheit). Beide gehören in denselben Ratgeber, weil Google und Leser beides suchen.
+
+Prüfe auch deinen eigenen Abschlag: Er sollte nah an den voraussichtlichen Jahreskosten liegen – zu niedrig bedeutet Nachzahlung, zu hoch bedeutet zinslos geparktes Geld.
+
+{{< rechner typ="strom-abschlag" quelle="BDEW-Strompreisanalyse" stand="August 2026" >}}
 
 ## Dynamischer Tarif, Wärmepumpe, Börsenpreis
 

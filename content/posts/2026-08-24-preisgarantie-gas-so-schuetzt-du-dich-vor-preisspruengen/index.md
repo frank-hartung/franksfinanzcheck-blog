@@ -167,9 +167,11 @@ Tarife ohne Garantie gewinnen nur in Szenario A. Und nur, wenn du monatlich wech
 | **EnergieDirekt** | 12 Monate | 8,80 | 12,00 | 150 € (nach 12 Mon.) | 4,6 |
 | **GreenPower** | 24 Monate | 8,30 | 11,00 | 200 € (nach 24 Mon.) | 4,4 |
 | **VivaGas** | 12 Monate | 9,10 | 10,50 | 100 € (nach 12 Mon.) | 4,2 |
-| **EcoEnergy** | 18 Monate | 8,60 | 12,50 | 130 € (nach 18 Mon.) | 4,5 |
+| **EcoEnergy** | 18 Monate | 8,60 | 12,50 | 130 € (nach 18 Mon.) | 4,5 |
 
-*Die Werte basieren auf dem [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) vom August 2024 und gelten für einen Jahresverbrauch von 20.000 kWh. Alle Angaben zzgl. gesetzlicher Abgaben.*
+{{< tabellenstand quelle="Eigener Gasvergleich (Beispielwerte)" stand="August 2024" >}}
+
+*Gültig für einen Jahresverbrauch von 20.000 kWh, alle Angaben zzgl. gesetzlicher Abgaben – Details im [Gasvergleich](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/).*
 
 ## Kleingedrucktes, das Preissprünge trotz „Garantie“ durchlässt
 

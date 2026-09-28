@@ -829,3 +829,80 @@ test('healthz: zeigt Cron-Takte und letzten Dispatch (ohne Adressen/Secrets)', a
   assert.equal(daten.takt.letzte.digest.workflow, 'newsletter-daily.yml');
   assert.ok(!JSON.stringify(daten).includes('test-pat'), 'kein Secret im healthz');
 });
+
+// ---------------------------------------------------------------- FEEDBACK (H4)
+
+function feedback_request(slug, hilfreich, ip = '203.0.113.7') {
+  return new Request('http://abos.test/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'CF-Connecting-IP': ip },
+    body: JSON.stringify({ slug, hilfreich }),
+  });
+}
+
+test('feedback: zaehlt ja/nein je Slug und liest sie per GET', async () => {
+  const kv = kvLeeren();
+  await worker.fetch(feedback_request('2026-08-26-tagesgeld-zinsen', 'ja'), env_mit(kv));
+  await worker.fetch(feedback_request('2026-08-26-tagesgeld-zinsen', 'ja', '198.51.100.9'), env_mit(kv));
+  await worker.fetch(feedback_request('2026-08-26-tagesgeld-zinsen', 'nein', '198.51.100.10'), env_mit(kv));
+  const antwort = await worker.fetch(
+    new Request('http://abos.test/feedback?slug=2026-08-26-tagesgeld-zinsen', { headers: { Accept: 'application/json' } }), env_mit(kv));
+  const daten = await antwort.json();
+  assert.equal(antwort.status, 200);
+  assert.equal(daten.ja, 2);
+  assert.equal(daten.nein, 1);
+});
+
+test('feedback: Doppelklick gleiche IP zaehlt nur einmal (idempotent)', async () => {
+  const kv = kvLeeren();
+  const erster = await worker.fetch(feedback_request('pillar-strom-sparen', 'ja'), env_mit(kv));
+  const zweiter = await worker.fetch(feedback_request('pillar-strom-sparen', 'ja'), env_mit(kv));
+  assert.equal((await erster.json()).status, 'gezaehlt');
+  assert.equal((await zweiter.json()).status, 'bereits-gezaehlt');
+  const daten = await (await worker.fetch(
+    new Request('http://abos.test/feedback?slug=pillar-strom-sparen', { headers: { Accept: 'application/json' } }), env_mit(kv))).json();
+  assert.equal(daten.ja, 1);
+});
+
+test('feedback: andere IP darf erneut stimmen (Hash enthaelt den Slug)', async () => {
+  const kv = kvLeeren();
+  await worker.fetch(feedback_request('pillar-strom-sparen', 'ja', '203.0.113.7'), env_mit(kv));
+  await worker.fetch(feedback_request('pillar-strom-sparen', 'ja', '203.0.113.8'), env_mit(kv));
+  const daten = await (await worker.fetch(
+    new Request('http://abos.test/feedback?slug=pillar-strom-sparen', { headers: { Accept: 'application/json' } }), env_mit(kv))).json();
+  assert.equal(daten.ja, 2);
+});
+
+test('feedback: ungueltiger Slug und ungueltige Stimme -> 400', async () => {
+  const kv = kvLeeren();
+  const a = await worker.fetch(feedback_request('../evil', 'ja'), env_mit(kv));
+  const b = await worker.fetch(feedback_request('guter-slug', 'vielleicht'), env_mit(kv));
+  assert.equal(a.status, 400);
+  assert.equal(b.status, 400);
+});
+
+test('feedback: GET ohne Slug -> 400, unbekannter Slug -> 0/0', async () => {
+  const kv = kvLeeren();
+  const a = await worker.fetch(new Request('http://abos.test/feedback', { headers: { Accept: 'application/json' } }), env_mit(kv));
+  const b = await worker.fetch(new Request('http://abos.test/feedback?slug=gibts-noch-nicht', { headers: { Accept: 'application/json' } }), env_mit(kv));
+  assert.equal(a.status, 400);
+  const daten = await b.json();
+  assert.equal(daten.ja, 0);
+  assert.equal(daten.nein, 0);
+});
+
+test('feedback: zaehlt nur, keine Klartext-IP im KV (Missbrauchschluessel gehasht)', async () => {
+  const kv = kvLeeren();
+  await worker.fetch(feedback_request('pillar-konto-karten', 'nein'), env_mit(kv));
+  const schluessel = [...kv.map.keys()];
+  for (const s of schluessel) {
+    assert.ok(!s.includes('203.0.113.7'), `IP im Schluessel: ${s}`);
+    assert.ok(!String(kv.map.get(s)).includes('203.0.113.7'), `IP im Wert: ${s}`);
+  }
+});
+
+test('feedback: antwortet CORS nur fuer die Site-Origin', async () => {
+  const kv = kvLeeren();
+  const antwort = await worker.fetch(feedback_request('pillar-konto-karten', 'ja'), env_mit(kv));
+  assert.equal(antwort.headers.get('Access-Control-Allow-Origin'), 'https://franksfinanzcheck.de');
+});

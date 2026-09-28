@@ -1,0 +1,59 @@
+{{- /* ============================================================
+     ff_feedback.html – „War dieser Ratgeber hilfreich?" (H4, 28.09.2026)
+     ------------------------------------------------------------
+     KONKURRENZ-ANALYSE FINANZTIP: Finanztip zeigt je Ratgeber
+     „War dieser Ratgeber hilfreich?" mit öffentlicher Quote. Diese
+     Section ist Franks Variante – ohne Tracking, ohne Cookies:
+
+       * Klick -> POST an den eigenen Newsletter-Worker
+         (abos.franksfinanzcheck.de/feedback), der NUR einen
+         aggregierten Zählerstand je Slug speichert (keine IP,
+         keine Cookies; Missbrauchschutz über kurzen IP-Hash, 6 h).
+       * Umami wird bewusst NICHT benutzt (consent-geprüft – Feedback
+         soll auch ohne Analytics-Einwilligung funktionieren).
+       * Endpoint wird aus site.Params.newsletterFormAction abgeleitet
+         (…/anmeldung -> …/feedback) – deshalb braucht diese Datei
+         KEINEN eigenen hugo.toml-Parameter.
+
+     VERTRAG:
+       * Nur posts- und pillar-Seiten (keine Rechtsseiten).
+       * Slug: Posts = ContentBaseName, Ratgeber = "pillar-<name>"
+         (Worker validiert ^[a-z0-9][a-z0-9-]{0,119}$).
+       * Ohne JavaScript bleibt die Section unsichtbar (noscript-
+         Style) – keine toten Buttons, kein Layout-Shift.
+       * Danke-Text ersetzt die Buttons auf gleicher Höhe (CLS ≈ 0).
+       * Logik: static/premium/ff-feedback.js · Optik: .ff-feedback*
+         in assets/css/extended/z-premium-blog.css (Dark Mode dort).
+     ============================================================ */ -}}
+{{- $basis := "" -}}
+{{- with site.Params.newsletterFormAction -}}
+  {{- $basis = strings.TrimSuffix "/anmeldung" . -}}
+{{- end -}}
+{{- if and $basis (or (eq .Section "posts") (eq .Section "pillar")) -}}
+{{- $slug := .File.ContentBaseName -}}
+{{- if eq .Section "pillar" }}{{- $slug = printf "pillar-%s" $slug -}}{{- end -}}
+<section class="ff-feedback" data-ff-feedback
+         data-endpoint="{{ printf "%s/feedback" $basis }}" data-slug="{{ $slug }}">
+  <noscript><style>.ff-feedback{display:none !important}</style></noscript>
+  <p class="ff-feedback__frage" id="ff-feedback-label-{{ $slug }}">
+    <span class="ff-feedback__sigil" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+           stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20l1-4.9a8.4 8.4 0 1 1 17-3.6Z"/>
+        <path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>
+      </svg>
+    </span>
+    War dieser Ratgeber hilfreich?
+  </p>
+  <div class="ff-feedback__knopfe" role="group" aria-labelledby="ff-feedback-label-{{ $slug }}">
+    <button type="button" class="ff-feedback__btn" data-ff-feedback-wert="ja">
+      <span aria-hidden="true">👍</span> Ja, danke
+    </button>
+    <button type="button" class="ff-feedback__btn" data-ff-feedback-wert="nein">
+      <span aria-hidden="true">👎</span> Nein
+    </button>
+  </div>
+  <p class="ff-feedback__dank" role="status" aria-live="polite"></p>
+</section>
+<script defer src="{{ partial "asset_url.html" "premium/ff-feedback.js" }}"></script>
+{{- end -}}

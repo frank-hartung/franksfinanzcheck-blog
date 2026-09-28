@@ -76,3 +76,7 @@
 </section>
 {{- end -}}
 {{- end -}}
+{{- /* FEEDBACK (H4, 28.09.2026): „War dieser Ratgeber hilfreich?" –
+       eigenes Partial filtert posts/pillar, leitet den Endpoint aus
+       newsletterFormAction ab und lädt sein Skript selbst. */ -}}
+{{- partial "ff_feedback.html" . -}}

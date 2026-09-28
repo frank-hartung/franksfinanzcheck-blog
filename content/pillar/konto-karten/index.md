@@ -20,10 +20,10 @@ quellen:
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
     herausgeber: "Deutsche Bundesbank"
     datum: "2026-04-12"
-  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+  - titel: "Girokonto: Was Sie darüber wissen sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-02-14"
+    datum: "2025-12-10"
 ---
 Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühren, berechnen Buchungszeilen oder verlangen teure Jahresgebühren für Kreditkarten. Im Laufe eines Jahres fließen so schnell 60&nbsp;€ bis 180&nbsp;€ für Standardleistungen vom Konto ab, die moderne Direkt- und Neobanken komplett kostenlos zur Verfügung stellen. Die gute Nachricht: Wer einmal umstellt, spart dauerhaft – das gesamte Banking auf null Euro Gebühren, die passende Kreditkarte für Reisen und die besten Zinsen für den Notgroschen.
 

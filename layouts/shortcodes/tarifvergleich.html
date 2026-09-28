@@ -8,6 +8,11 @@
 {{- $title      := .Get "title" | default "💰 Tarifvergleich" -}}
 {{- $subtitle   := .Get "subtitle" -}}
 {{- $footnote   := .Get "footnote" -}}
+{{- /* TABELLENSTAND (28.09.2026, Finanztip-Parität): Quelle + Stand
+       der Zahlen unter der Tabelle. Werte NUR aus dem Artikel-
+       Frontmatter (quellen/faktencheck) belegen – nie erfinden. */ -}}
+{{- $stand      := .Get "stand" -}}
+{{- $quelle     := .Get "quelle" -}}
 {{- $defaultCta := .Get "cta_url" | default "" -}}
 {{- $inner      := trim .Inner "\n\r\t " -}}
 
@@ -143,6 +148,10 @@
       </tbody>
     </table>
   </div>
+
+  {{- if or $stand $quelle }}
+  <p class="ff-tv-stand">{{ with $quelle }}Quelle: {{ . }}{{ end }}{{ if and $quelle $stand }} · {{ end }}{{ with $stand }}Stand: {{ . }}{{ end }}</p>
+  {{- end }}
 
   <div class="ff-tv-cards">
     {{- range $t := $tariffs -}}

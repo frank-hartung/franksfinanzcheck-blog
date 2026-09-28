@@ -1,0 +1,105 @@
+# ============================================================
+#  KENNZAHLEN-RADAR – Frühwarnsystem für harte Kennzahlen
+#  (Quick Win H5, Konkurrenz-Analyse Finanztip, 28.09.2026)
+#
+#  Finanztip baut laut Stellenanzeige eine KI-gestützte
+#  Änderungserkennung für Produkt-/Konditionsdaten. Dieses
+#  Workflow ist Franks Pendant – ohne Personal, ohne Paid-API:
+#
+#    Mo 08:15 MESZ  agent-reach-research.yml schreibt Briefs
+#    DI 06:20 MESZ  DIESES Workflow liest sie:
+#                     1. Fälligkeit je Kennzahl (Register-Rhythmus)
+#                     2. Brief-Signale NEUER als der Prüfstand
+#                     3. Artikel, deren lastmod hinter dem
+#                        Kennzahlenstand hinterherhängt
+#
+#  Der Lauf schreibt NUR den Report + die Queue
+#  (KENNZAHLEN-RADAR.md, data/kennzahlen_radar.json). Das Register
+#  (data/kennzahlen_register.yaml) ist menschlich kuratiert und
+#  wird von der Maschine NIE geschrieben. Artikeltexte ändern
+#  sich hier nie – Befunde gehen als Issue an einen Menschen.
+#
+#  Manuell starten: GitHub → Actions → „Kennzahlen-Radar“
+# ============================================================
+name: Kennzahlen-Radar
+
+on:
+  schedule:
+    # Dienstag 06:20 MESZ – nach den Montag-Briefs, vor dem
+    # Newsletter (06:30) und der Faktenfrische (06:40).
+    - cron: "20 4 * * 2"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: kennzahlen-radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten
+        run: python3 -m pip install -q --disable-pip-version-check pyyaml
+
+      - name: Selbsttest (Sabotage-Schutz – kein Lauf ohne grünen Test)
+        run: python3 scripts/kennzahlen_radar.py --selftest
+
+      - name: Radar laufen lassen
+        id: radar
+        run: |
+          set +e
+          python3 scripts/kennzahlen_radar.py
+          code=$?
+          echo "exit=$code" >> "$GITHUB_OUTPUT"
+          # Exit 1 = Befunde (normal, Weiter geht's) · Exit 2 = kaputtes
+          # Register oder Selftest – das muss laut rot FAILen.
+          if [ "$code" -gt 1 ]; then exit "$code"; fi
+
+      - name: Report und Queue committen
+        run: |
+          if git status --porcelain KENNZAHLEN-RADAR.md data/kennzahlen_radar.json | grep -q .; then
+            git config user.name "Kennzahlen-Radar-Bot"
+            git config user.email "kennzahlen-radar-bot@users.noreply.github.com"
+            git add KENNZAHLEN-RADAR.md data/kennzahlen_radar.json
+            git commit -m "radar(kennzahlen): Frühwarn-Report aktualisiert"
+            scripts/git_sync.sh --push-only
+          else
+            echo "Keine Änderungen."
+          fi
+
+      - name: Fällige Kennzahlen melden (nur Menschen entscheiden über Text)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Governance C12: Label VOR der Issue-Erzeugung anlegen (HTTP 422).
+          gh label create kennzahlen-radar --repo "$GITHUB_REPOSITORY" \
+            --color "d4a72c" \
+            --description "Kennzahlen-Radar: fällige Prüfungen und Brief-Signale" --force || true
+          ANZAHL=$(python3 -c "import json;print(json.load(open('data/kennzahlen_radar.json'))['count'])" 2>/dev/null || echo 0)
+          SCHWELLE=$(python3 -c "import yaml;print((yaml.safe_load(open('data/kennzahlen_register.yaml')).get('meta') or {}).get('melden',{}).get('issue_ab_faellig',1))" 2>/dev/null || echo 1)
+          if [ "$ANZAHL" -ge "$SCHWELLE" ]; then
+            TITEL="Kennzahlen-Radar: $ANZAHL fällige Prüfungen ($(date +%F))"
+            if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+                 --search "in:title \"Kennzahlen-Radar:\"" | grep -q .; then
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "$TITEL" --label kennzahlen-radar \
+                --body-file KENNZAHLEN-RADAR.md
+            else
+              echo "Offenes Kennzahlen-Ticket existiert – kein Duplikat."
+            fi
+          else
+            echo "$ANZAHL fällig (< $SCHWELLE) – kein Ticket."
+          fi

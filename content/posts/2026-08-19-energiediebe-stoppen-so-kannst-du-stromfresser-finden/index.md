@@ -116,7 +116,9 @@ Sie ermöglichen das **Automatisieren** von Abschaltzeiten (z. B. Router 01:00
 
 {{< einspartabelle
     title="💰 Einsparpotenziale im direkten Vergleich"
-    footnote="Berechnungsbasis: 35 Cent pro Kilowattstunde Strom"
+    footnote="Berechnungsbasis: 35 Cent pro Kilowattstunde Strom"
+    quelle="BDEW-Strompreisanalyse"
+    stand="August 2026"
     cta_url="/go/strom/"
     cta_text="Stromanbieter vergleichen →" >}}
 

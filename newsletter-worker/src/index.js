@@ -51,6 +51,10 @@
 const TTL_NACHWEIS_SEK = 1095 * 24 * 60 * 60; // 3 Jahre (Art. 7 DSGVO)
 const TTL_RATE_SEK = 15 * 60;
 const MAX_ANMELDUNGEN_PRO_IP = 5;
+// FEEDBACK (H4, 28.09.2026): Leser-Stimmen je Artikel. Missbrauchsschutz =
+// IP-Hash + Slug, 6 h genau EINE Stimme (Hash nur kurzlebig, keine Klartext-IP).
+const TTL_FEEDBACK_RATE_SEK = 6 * 60 * 60;
+const FEEDBACK_SLUG_RE = /^[a-z0-9][a-z0-9-]{0,119}$/;
 const BESTAETIGUNG_TAGE_DEFAULT = 14;
 const MAX_VERSEND_VERSUCHE = 3;
 const TOKEN_LAENGE = 24; // 192 Bit, base64url
@@ -413,6 +417,55 @@ async function falle_zahlen(env) {
     const z = (roh && Number(roh.z)) || 0;
     await env.ABO.put('metrik:falle', JSON.stringify({ z: z + 1, ts: Date.now() }), { expirationTtl: 86400 });
   } catch (e) { /* Zählen darf die Anmeldung nie brechen */ }
+}
+
+// ---------------------------------------------------------------- Feedback (H4)
+/**
+ * POST /feedback – „War dieser Ratgeber hilfreich?" (Ja/Nein) je Artikel.
+ *
+ * Datenschutz by design: Body nur { slug, hilfreich: 'ja'|'nein' }.
+ * Gespeichert wird AUSSCHLIESSLICH ein聚合 Zählerstand je Slug
+ * (feedback:<slug> → { ja, nein, letzte }) – keine IPs, keine Cookies,
+ * kein Fingerprinting. Missbrauchsschutz: kurzer IP-Hash-Schlüssel
+ * (fb:<hash(ip|slug)>, TTL 6 h) verhindert Doppelzählen; erneuter Klick
+ * innerhalb des Fensters ist idempotent (200, „bereits-gezaehlt").
+ */
+async function feedback(request, env) {
+  const daten = await koerper_lesen(request);
+  if (!daten) return fehler(400, 'Unverständlicher Anfragekörper.', env, request);
+  const slug = erstein(daten, 'slug').toLowerCase();
+  const roh = erstein(daten, 'hilfreich').toLowerCase();
+  if (!FEEDBACK_SLUG_RE.test(slug)) {
+    return fehler(400, 'Unbekannter Artikel.', env, request);
+  }
+  const stimme = ['ja', 'true', '1'].includes(roh) ? 'ja'
+    : ['nein', 'false', '0'].includes(roh) ? 'nein' : null;
+  if (!stimme) {
+    return fehler(400, 'Feedback muss „ja" oder „nein" sein.', env, request);
+  }
+  const ip = request.headers.get('CF-Connecting-IP') || '';
+  const rate_key = `fb:${await sha256_kurz(`${ip}|${slug}`)}`;
+  if (await env.ABO.get(rate_key)) {
+    return json({ ok: true, status: 'bereits-gezaehlt' }, 200, env);
+  }
+  const schluessel = `feedback:${slug}`;
+  const stand = (await env.ABO.get(schluessel, 'json')) || { ja: 0, nein: 0 };
+  stand[stimme] = Number(stand[stimme] || 0) + 1;
+  stand.letzte = new Date().toISOString();
+  await env.ABO.put(schluessel, JSON.stringify(stand));
+  await env.ABO.put(rate_key, '1', { expirationTtl: TTL_FEEDBACK_RATE_SEK });
+  return json({ ok: true, status: 'gezaehlt' }, 200, env);
+}
+
+/** GET /feedback?slug=… – aggregierte Zähler (für spätere „X fanden … hilfreich“-Anzeige). */
+async function feedback_lesen(request, env, url) {
+  const slug = String(url.searchParams.get('slug') || '').toLowerCase();
+  if (!FEEDBACK_SLUG_RE.test(slug)) {
+    return fehler(400, 'Unbekannter Artikel.', env, request);
+  }
+  const stand = (await env.ABO.get(`feedback:${slug}`, 'json')) || { ja: 0, nein: 0 };
+  return json({ ok: true, slug, ja: Number(stand.ja || 0), nein: Number(stand.nein || 0) },
+    200, env, { 'Cache-Control': 'no-store' });
 }
 
 // ---------------------------------------------------------------- Routen
@@ -828,6 +881,8 @@ export default {
     try {
       if (p === '/' || p === '/healthz') return await health(env);
       if (p === '/anmeldung' && request.method === 'POST') return await anmeldung(request, env, url);
+      if (p === '/feedback' && request.method === 'POST') return await feedback(request, env);
+      if (p === '/feedback' && request.method === 'GET') return await feedback_lesen(request, env, url);
       if (p === '/bestaetigung' && request.method === 'GET') return await bestaetigung_seite(env, url);
       if (p === '/bestaetigung' && request.method === 'POST') return await bestaetigung(request, env);
       if (p === '/abmeldung') return await abmeldung(request, env, url);
