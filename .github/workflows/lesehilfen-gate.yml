@@ -10,9 +10,9 @@
 #
 #  Es läuft gegen eine ECHTE DOM (jsdom) mit der unveränderten
 #  static/premium/ff-voice.js, dem echten Seiten-Skelett und echtem
-#  Inhalt aus content/posts. Ergänzend prüfen vier weitere Suiten die
-#  Stimmen-Regie, die Parität zwischen Tonspur und Browserstimme sowie
-#  die Infrastruktur (Layout · Styling · Workflow · Rückbau).
+#  Inhalt aus content/posts. Ergänzend prüfen weitere Suiten die
+#  Stimmen-Regie, die Parität zwischen Tonspur und Browserstimme, die
+#  Selbstheilung sowie die Infrastruktur (Layout · Styling · Workflow · Rückbau).
 #
 #  Bricht eine Suite, wird der Deploy blockiert.
 #
@@ -41,6 +41,7 @@ on:
       - "scripts/ff_voice_voice_test.js"
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
+      - "scripts/ff_voice_self_heal_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
       - "scripts/ff_voice_qa_lib.mjs"
       - "tools/ff-voice-browser/**"
@@ -71,6 +72,7 @@ on:
       - "scripts/ff_voice_voice_test.js"
       - "scripts/ff_voice_repair_test.mjs"
       - "scripts/ff_voice_tts_hardening_test.mjs"
+      - "scripts/ff_voice_self_heal_test.mjs"
       - "scripts/ff_voice_browser_test.mjs"
   schedule:
     - cron: "20 6 * * *"   # 08:20 MESZ – tägliche Wache gegen stillen Verfall
@@ -158,6 +160,10 @@ jobs:
       #      Anzeige, verschlucktes speak(), hängende Tonspur) ----
       - name: TTS-Härtung Vorlesen (Stumm-Sweep, Physik-Deckel, Keep-Alive)
         run: node scripts/ff_voice_tts_hardening_test.mjs
+
+      # ---- Selbstheilung: onstart ohne onend und begrenzte Recovery ----
+      - name: Vorlesen-Selbstheilung (Stall-Recovery)
+        run: node scripts/ff_voice_self_heal_test.mjs
 
       # ---- Echt-Browser-Test (Chromium): der Befund vom 06.09.2026 war
       #      in jsdom unsichtbar — echte Timer, echtes <audio>, echte WAV ----

@@ -169,6 +169,8 @@
       trackStalled: 'Die Tonspur hängt – die Stimme deines Geräts übernimmt.',
       synthesisDead: 'Sprachausgabe ist auf diesem Gerät nicht verfügbar. Der Artikel bleibt vollständig lesbar.',
       synthesisMute: 'Dein Browser meldet Sprachausgabe, gibt aber keinen Ton aus. Das Vorlesen wurde gestoppt – der Artikel bleibt vollständig lesbar.',
+      synthesisStalled: 'Die Sprachausgabe hängt – der Satz wird automatisch neu gestartet.',
+      trackPaused: 'Die Tonspur wurde unterbrochen – die Gerätestimme übernimmt.',
       voiceActive: 'ElevenLabs Premium-Stimme aktiv (männlich, DE & EN).',
       voiceFallback: 'Vorlesen gestartet; dein Browser stellt die verfügbare Stimme bereit.',
       voiceLoading: 'Premium-Stimme wird geladen …',
@@ -235,6 +237,8 @@
       trackStalled: 'Track stalls — your device voice takes over.',
       synthesisDead: 'Speech is not available on this device. The article remains fully readable.',
       synthesisMute: 'Your browser reports speech but plays no sound. Listening stopped — article remains readable.',
+      synthesisStalled: 'Speech is stalled — restarting the sentence automatically.',
+      trackPaused: 'The studio track was interrupted — your device voice takes over.',
       voiceActive: 'ElevenLabs premium voice active (male, DE & EN).',
       voiceFallback: 'Listening started; your browser provides the available voice.',
       voiceLoading: 'Premium voice loading …',
@@ -1566,7 +1570,7 @@
     var TT = I18N[L] || T;
     var model = buildTableModel(tableEl);
     var out = [];
-    var title = model.title || TTTT.tableDefault;
+    var title = model.title || TT.tableDefault;
 
     var dataRows = model.rows.filter(function (r) { return r.kind === 'data' && r.parts.length; });
     var hasContent = dataRows.length > 0 || model.headers.some(function (h) { return h; })
@@ -1964,28 +1968,32 @@
   }
 
   /** Zerlegt einen Block in Sprecheinheiten (Atemgruppen).
-      NUR-DEUTSCH-VERTRAG: kein Satz-Routing mehr — jede Einheit trägt
-      „de“. (Ein optionales zweite Argument bleibt Signatur-Kompatibilität.) */
-  function splitForSpeech(text) {
+      Die Sprache wird als Metadatum durchgereicht. Das ist wichtig für
+      die automatische DE/EN-Regie: Die Zerlegung selbst darf keine
+      Sprachinformation verschlucken, sonst kann eine spätere Einheit
+      trotz englischem Block auf der deutschen Stimme landen.
+      Unbekannte Werte bleiben bewusst bei „de“ — der sichere Fallback. */
+  function splitForSpeech(text, blockLang) {
     var out = [];
+    var speechLang = String(blockLang || 'de').toLowerCase().indexOf('en') === 0 ? 'en' : 'de';
     sentences(text).forEach(function (sentence) {
       if (!sentence) return;
       if (sentence.length <= HARD_CHUNK) {
-        out.push({ text: sentence, lang: 'de' });
+        out.push({ text: sentence, lang: speechLang });
         return;
       }
       cutAtConnectives(sentence).forEach(function (piece) {
-        if (piece.length <= HARD_CHUNK) { out.push({ text: piece, lang: 'de' }); return; }
+        if (piece.length <= HARD_CHUNK) { out.push({ text: piece, lang: speechLang }); return; }
         commaPieces(piece).forEach(function (sub) {
-          if (sub.length <= HARD_CHUNK) { out.push({ text: sub, lang: 'de' }); return; }
+          if (sub.length <= HARD_CHUNK) { out.push({ text: sub, lang: speechLang }); return; }
           var words = sub.split(/\s+/);
           var buf = '';
           words.forEach(function (w) {
             var cand = buf ? buf + ' ' + w : w;
-            if (buf && cand.length > HARD_CHUNK - 12) { out.push({ text: buf.trim(), lang: 'de' }); buf = w; }
+            if (buf && cand.length > HARD_CHUNK - 12) { out.push({ text: buf.trim(), lang: speechLang }); buf = w; }
             else buf = cand;
           });
-          if (buf.trim()) out.push({ text: buf.trim(), lang: 'de' });
+          if (buf.trim()) out.push({ text: buf.trim(), lang: speechLang });
         });
       });
     });
@@ -2061,7 +2069,7 @@
     blocks.forEach(function (b, bi) {
       var profile = prosodyFor(b.type);
       var uInBlock = 0;
-      var raw = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+      var raw = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'), (b && b.lang) ? b.lang : 'de');
       raw.forEach(function (c, ci) {
         if (!c.text) return;
         var density = densityFactor(c.text);
@@ -2582,7 +2590,7 @@
     var out = [];
     var b = blocks[bi];
     if (b) {
-      var pieces = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+      var pieces = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'), (b && b.lang) ? b.lang : 'de');
       for (var i = 0; i < pieces.length; i++) {
         if (pieces[i] && pieces[i].text) out.push(pieces[i].text);
       }
@@ -2815,7 +2823,7 @@
     var b = blocks[bi];
     if (!b || !b.text) return null;
     var raw = normTokens(b.text);
-    var chunks = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'));
+    var chunks = splitForSpeech(speechNormalize(b.text, (b && b.lang) ? b.lang : 'de'), (b && b.lang) ? b.lang : 'de');
     var N = [];
     var units = [];
     var nAt = 0;
@@ -3143,11 +3151,31 @@
   var trackCur = -1;
   var trackBlock = 0;
   var trackLoadTimer = null;   // Lade-Wache: endloses Stumm ohne Fehlermeldung verhindern
+  var trackRecoveryTimer = null; // Selbstheilung bei unerwartetem pause()-Event
+  var trackRecoveryAttempts = 0;
   var trackLastTime = -1;      // Hänger-Wache: läuft die Uhr der Datei wirklich?
   var trackLastMoveAt = 0;
   var trackAudioCtx = null;    // Stille-Sonde (Web Audio)
   var trackProbe = null;
   var trackProbeState = { tried: false, playedMs: 0, heard: false, lastAt: 0 };
+
+  /* Laufzeit-Gesundheit — bewusst nur im aktuellen Tab, ohne Tracking.
+     Die Zähler machen Selbstheilung prüfbar und helfen im Störungsfall,
+     ohne persönliche Daten oder Hörinhalte zu speichern. */
+  var voiceHealth = {
+    trackRecoveries: 0,
+    speechRecoveries: 0,
+    speechStalls: 0,
+    lastRecovery: '',
+    lastRecoveryAt: 0
+  };
+
+  function noteRecovery(kind) {
+    var key = kind === 'track' ? 'trackRecoveries' : 'speechRecoveries';
+    voiceHealth[key] += 1;
+    voiceHealth.lastRecovery = kind;
+    voiceHealth.lastRecoveryAt = Date.now();
+  }
 
   /* ============================================================
      STILLE-SONDE DER TONSPUR (Befund 07.09.2026)
@@ -3226,11 +3254,18 @@
     if (!track || !reading || mode !== 'track' || !playing) return;
     var now = nowMs();
     var t = track.currentTime || 0;
-    if (track.paused || track.ended) { trackLastTime = t; trackLastMoveAt = now; return; }
+    if (track.paused || track.ended) {
+      trackLastTime = t;
+      trackLastMoveAt = now;
+      if (!track.ended && !trackRecoveryTimer) armTrackRecovery();
+      return;
+    }
+    clearTrackRecovery();
     if (trackLastMoveAt === 0) { trackLastMoveAt = now; trackLastTime = t; }
     if (Math.abs(t - trackLastTime) > 0.01) {
       trackLastTime = t;
       trackLastMoveAt = now;
+      trackRecoveryAttempts = 0;
     } else if (now - trackLastMoveAt > 6000) {
       fallbackToSpeech(T.trackStalled || T.trackBroken);
       return;
@@ -3253,10 +3288,32 @@
    */
   function trackPlausible() {
     if (!track) return false;
+    if (!blocks.length) {
+      blocks = collectBlocks();
+      resetWordPlans();
+    }
+    if (!blocks.length) return false;
     var a = cfg.audio || {};
     var chunks = trackChunks || [];
     if (!chunks.length) return false;
     var spoken = 0;
+    var previousT1 = -1;
+    var seenBlocks = {};
+    for (var ci = 0; ci < chunks.length; ci++) {
+      var card = chunks[ci] || {};
+      var bIndex = Number(card.b);
+      var t0 = Number(card.t0);
+      var t1 = Number(card.t1);
+      if (!isFinite(bIndex) || bIndex < 0 || bIndex >= blocks.length || Math.floor(bIndex) !== bIndex) return false;
+      if (seenBlocks[bIndex]) return false;
+      if (!isFinite(t0) || !isFinite(t1) || t1 <= t0 || t0 < previousT1) return false;
+      seenBlocks[bIndex] = true;
+      previousT1 = t1;
+    }
+    // Ältere Karten durften Blöcke zusammenfassen. Sie bleiben gültig,
+    // solange ihre belegten Indizes und Zeitfenster konsistent sind; eine
+    // lückenhafte Karte fällt bei der Live-Synchronisation auf die
+    // Abschnittsebene zurück, statt die gesamte hörbare Spur abzulehnen.
     for (var i = 0; i < chunks.length; i++) {
       if ((chunks[i].t1 || 0) > (chunks[i].t0 || 0)) spoken += 1;
     }
@@ -3319,15 +3376,56 @@
     try { doc.body.appendChild(elt); } catch (e) {}
 
     elt.addEventListener('timeupdate', trackOnTime);
-    elt.addEventListener('play', function () { if (reading) startProgressTicker(); });
-    elt.addEventListener('pause', stopProgressTicker);
+    elt.addEventListener('play', function () {
+      clearTrackRecovery();
+      if (reading) startProgressTicker();
+    });
+    elt.addEventListener('pause', function () {
+      stopProgressTicker();
+      if (reading && playing && mode === 'track') armTrackRecovery();
+    });
     elt.addEventListener('ended', trackOnEnded);
-    elt.addEventListener('error', function () { if (reading) fallbackToSpeech(T.trackBroken); });
+    elt.addEventListener('error', function () {
+      clearTrackRecovery();
+      if (reading) fallbackToSpeech(T.trackBroken);
+    });
     return true;
   }
 
   function clearTrackLoadGuard() {
     if (trackLoadTimer) { clearTimeout(trackLoadTimer); trackLoadTimer = null; }
+  }
+
+  function clearTrackRecovery() {
+    if (trackRecoveryTimer) { clearTimeout(trackRecoveryTimer); trackRecoveryTimer = null; }
+  }
+
+  /**
+   * Ein unerwartetes pause-Event ist kein normaler Zustand: Bei einer
+   * Bedienpause ist `playing` bereits false. Manche Browser pausieren
+   * eine HTML5-Spur aber wegen Codec-, Fokus- oder Netzwerkproblemen,
+   * ohne `error` zu senden. Ein kurzer Wiederanlauf heilt den häufigen
+   * transienten Fall; erst nach dem zweiten Fehlschlag übernimmt die
+   * Gerätestimme. So bleibt die Premium-Spur bevorzugt, aber niemals
+   * eine scheinbar aktive, tatsächlich stumme Leiste zurück.
+   */
+  function armTrackRecovery() {
+    clearTrackRecovery();
+    trackRecoveryTimer = setTimeout(function () {
+      trackRecoveryTimer = null;
+      if (!reading || !playing || mode !== 'track' || !track || !track.paused) return;
+      if (trackRecoveryAttempts < 1) {
+        trackRecoveryAttempts += 1;
+        noteRecovery('track');
+        trackLastMoveAt = 0;
+        startProgressTicker();
+        playElement(track);
+        armTrackLoadGuard();
+        return;
+      }
+      noteRecovery('track');
+      fallbackToSpeech(T.trackPaused || T.trackBroken);
+    }, 450);
   }
 
   /** Lade-Wache: startet die Spur nicht binnen 8 s hörbar (Netz
@@ -3451,6 +3549,8 @@
       }
       paintProgress(t / total);
     }
+    clearTrackRecovery();
+    trackRecoveryAttempts = 0;
     trackLastTime = -1;
     trackLastMoveAt = 0;
     trackProbeState.playedMs = 0;
@@ -3473,10 +3573,12 @@
     }
   }
 
-  function trackPause() { clearTrackLoadGuard(); if (track) { try { track.pause(); } catch (e) {} } }
-  function trackResume() { trackLastMoveAt = 0; armTrackLoadGuard(); playElement(track); }
+  function trackPause() { clearTrackLoadGuard(); clearTrackRecovery(); if (track) { try { track.pause(); } catch (e) {} } }
+  function trackResume() { clearTrackRecovery(); trackRecoveryAttempts = 0; trackLastMoveAt = 0; armTrackLoadGuard(); playElement(track); }
   function trackStop() {
     clearTrackLoadGuard();
+    clearTrackRecovery();
+    trackRecoveryAttempts = 0;
     if (!track) return;
     try { track.pause(); } catch (e) {}
     try { track.currentTime = 0; } catch (e) {}
@@ -3515,7 +3617,9 @@
     runId += 1;                     // alte Rückrufe entwerten
     clearPauseTimer();
     clearStartWatchdog();
+    clearSpeechStallWatchdog();
     clearTrackLoadGuard();
+    clearTrackRecovery();
     stopProgressTicker();
     stopKeepAlive();
     unitInFlight = false;
@@ -3552,6 +3656,7 @@
   var utteranceRefs = [];
   var unitInFlight = false;
   var startWatchdog = null;
+  var speechStallWatchdog = null;
   var keepAliveTimer = null;
   var pauseTimer = null;
   var errorStreak = 0;
@@ -3604,6 +3709,57 @@
   function clearStartWatchdog() {
     if (startWatchdog) { clearTimeout(startWatchdog); startWatchdog = null; }
   }
+
+  function clearSpeechStallWatchdog() {
+    if (speechStallWatchdog) { clearTimeout(speechStallWatchdog); speechStallWatchdog = null; }
+  }
+
+  /**
+   * Selbstheilung nach einem echten onstart ohne onend.
+   *
+   * Web-Speech meldet bei einzelnen Browser-/OS-Kombinationen zwar
+   * `onstart`, bleibt danach aber in `speaking` hängen. Die bisherige
+   * Start-Wache konnte diesen Fall nicht sehen, weil sie nach `onstart`
+   * korrekt abgeschaltet wurde. Der Timer wartet deshalb bewusst länger
+   * als die geschätzte Sprechzeit plus Reserve. Ein einmaliger Neustart
+   * heilt transiente Queue-/Focus-Rennen; beim zweiten Hänger endet der
+   * Lauf ehrlich statt Text zu überspringen oder den Nutzer endlos warten
+   * zu lassen. `speechStallTimeoutMs` ist nur ein lokaler QA-/Diagnose-
+   * Override, kein Produktionsparameter der Seite.
+   */
+  function speechStallBudget(unit) {
+    var configured = Number(cfg.speechStallTimeoutMs);
+    if (isFinite(configured) && configured > 0) return Math.max(20, Math.min(120000, configured));
+    var estimate = unit ? estimatedMs(unit) : 0;
+    return Math.max(12000, Math.min(120000, Math.round(estimate * 2.25 + 4000)));
+  }
+
+  function armSpeechStallWatchdog(myRun, index, unit) {
+    clearSpeechStallWatchdog();
+    speechStallWatchdog = setTimeout(function () {
+      speechStallWatchdog = null;
+      if (myRun !== runId || !reading || !playing || !unitInFlight || liveUtterance == null) return;
+      voiceHealth.speechStalls += 1;
+      var tries = retryCounts[index] || 0;
+      try { synth.cancel(); } catch (e) {}
+      unitInFlight = false;
+      liveUtterance = null;
+      clearActiveUnit();
+      if (tries < 2) {
+        retryCounts[index] = tries + 1;
+        noteRecovery('speech');
+        setStatus(T.synthesisStalled || T.sectionError, 6000);
+        clearPauseTimer();
+        pauseTimer = setTimeout(function () {
+          if (myRun !== runId || !reading || !playing) return;
+          speakUnit(index, false);
+        }, 180);
+      } else {
+        honestDeadStop(T.synthesisStalled || T.synthesisDead);
+      }
+    }, speechStallBudget(unit));
+  }
+
   function clearPauseTimer() {
     if (pauseTimer) { clearTimeout(pauseTimer); pauseTimer = null; }
   }
@@ -3679,6 +3835,7 @@
     function finishUnit() {
       if (myRun !== runId) return;
       clearStartWatchdog();
+      clearSpeechStallWatchdog();
       unitInFlight = false;
       liveUtterance = null;
       spokenChars = unit.endChars;
@@ -3691,6 +3848,7 @@
     function retryUnit() {
       if (myRun !== runId) return;
       clearStartWatchdog();
+      clearSpeechStallWatchdog();
       unitInFlight = false;
       liveUtterance = null;
       clearActiveUnit();
@@ -3809,6 +3967,7 @@
         lastStarted = 0;
         everStarted = true;            // Engine lebt — Ehrlichkeits-Wache entspannt
         clearStartWatchdog();
+        armSpeechStallWatchdog(myRun, index, unit);
         errorStreak = 0;
         startActiveUnit(unit);
         markWordFromUnitStart(unit);   // erstes Wort leuchtet, kaum dass die Stimme einsetzt
@@ -3832,6 +3991,7 @@
       u.onend = function () {
         if (myRun !== runId) return;
         clearStartWatchdog();
+        clearSpeechStallWatchdog();
         spokenChars = unit.endChars;
         setProgressChars(spokenChars, false);
         updateRemainingFromChars();
@@ -3923,6 +4083,7 @@
     playing = false;
     clearPauseTimer();
     clearStartWatchdog();
+    clearSpeechStallWatchdog();
     stopProgressTicker();
     stopKeepAlive();
     clockHalt();
@@ -4080,7 +4241,9 @@
     runId += 1;
     clearPauseTimer();
     clearStartWatchdog();
+    clearSpeechStallWatchdog();
     clearTrackLoadGuard();
+    clearTrackRecovery();
     stopProgressTicker();
     stopKeepAlive();
     clockHalt();
@@ -4122,6 +4285,7 @@
     }
     runId += 1;
     clearPauseTimer();
+    clearSpeechStallWatchdog();
     clearActiveUnit();
     if (synth) { try { synth.cancel(); } catch (e) {} }
     playing = true;
@@ -4155,6 +4319,7 @@
       if (target >= units.length) { endReading(true, true); return; }
       runId += 1;
       clearPauseTimer();
+      clearSpeechStallWatchdog();
       try { synth.cancel(); } catch (e) {}
       clearStartWatchdog();
       playing = true;
@@ -4800,6 +4965,13 @@
       trackSrc: (cfg.audio && (cfg.audio.src || cfg.audio)) || '',
       trackPlausible: (function () { try { if (!blocks.length) blocks = collectBlocks(); return trackPlausible(); } catch (e) { return null; } })(),
       trackProbe: { attached: !!trackProbe, heard: trackProbeState.heard, silentMs: trackProbeState.playedMs },
+      health: {
+        trackRecoveries: voiceHealth.trackRecoveries,
+        speechRecoveries: voiceHealth.speechRecoveries,
+        speechStalls: voiceHealth.speechStalls,
+        lastRecovery: voiceHealth.lastRecovery,
+        lastRecoveryAt: voiceHealth.lastRecoveryAt
+      },
       speechSupported: speechSupported,
       voiceCount: (voiceCache || []).length,
       maleVoice: (function () {
@@ -4873,6 +5045,13 @@
     get everStarted() { return everStarted; },
     get muteStop() { return muteStop; },
     get softStarts() { return softStarts; },
+    get health() { return {
+      trackRecoveries: voiceHealth.trackRecoveries,
+      speechRecoveries: voiceHealth.speechRecoveries,
+      speechStalls: voiceHealth.speechStalls,
+      lastRecovery: voiceHealth.lastRecovery,
+      lastRecoveryAt: voiceHealth.lastRecoveryAt
+    }; },
     get speechFloorCps() { return SPEECH_FLOOR_CPS; },
     get trackBlock() { return trackBlock; },
     trackPlausible: function () {

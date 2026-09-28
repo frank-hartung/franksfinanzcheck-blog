@@ -227,7 +227,7 @@ def main() -> int:
     check("Gate vorhanden", bool(gate), GATE)
     for suite in ("ff_voice_functional_test.mjs", "ff_voice_voice_test.js",
                   "ff_voice_repair_test.mjs", "ff_voice_tts_hardening_test.mjs",
-                  "ff_voice_parity_check.py", "ff_voice_toolbar_check.py",
+                  "ff_voice_self_heal_test.mjs", "ff_voice_parity_check.py", "ff_voice_toolbar_check.py",
                   "ff_voice_audio.py", "ff_voice_backends.py"):
         check("Gate führt %s aus" % suite, suite in gate)
     check("Gate installiert jsdom", "ff-voice-qa" in gate)

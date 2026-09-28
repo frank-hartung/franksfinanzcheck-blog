@@ -301,7 +301,8 @@ export function ensureToolbar(html, lang) {
 }
 
 export function skeleton({ title, description, kurzantwort, lang, readingTime, wordCount,
-  author, date, updated, category, slug, bodyHtml, korrektur, track, hideToolbar }) {
+  author, date, updated, category, slug, bodyHtml, korrektur, track, hideToolbar,
+  speechStallTimeoutMs }) {
   const cfg = {
     title: title || 'Testartikel',
     kurzantwort: kurzantwort || '',
@@ -317,6 +318,7 @@ export function skeleton({ title, description, kurzantwort, lang, readingTime, w
     slug: slug || 'testartikel',
     permalink: '/posts/' + (slug || 'testartikel') + '/',
   };
+  if (speechStallTimeoutMs != null) cfg.speechStallTimeoutMs = speechStallTimeoutMs;
   const trackBlock = track
     ? `<script type="application/json" id="ff-voice-track-config">${JSON.stringify(track)}</script>`
     : '';
