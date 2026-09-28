@@ -269,6 +269,8 @@ class R5HoldRecoveryTests(unittest.TestCase):
                  patch.object(pg, 'seo_audit_failures', return_value=(set(), None)), \
                  patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
                  patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
+                 patch.object(pg, 'affiliate_intent_failures', return_value=({}, None, False)), \
+                 patch.object(pg, 'offenlegung_failures', return_value=({}, None, False)), \
                  patch.object(pg, 'title_integrity_failures', return_value=set()), \
                  patch.object(pg, 'readability_failures', return_value=({}, None)), \
                  patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \

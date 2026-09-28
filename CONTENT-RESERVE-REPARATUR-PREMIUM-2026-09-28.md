@@ -105,6 +105,7 @@ zweiter Wächterlauf ist idempotent grün.
 
 | Prüfung | Ergebnis |
 |---|---|
+| Vollständige `unittest discover`-Regression | **1.080 Tests grün** |
 | `test_quality_score_spelling` + komplette `test_reserve_pipeline` | **82 Tests grün** |
 | Neue #436-Verträge | Reserve-Vorstufe, Live-Isolation, IW3-KI-Heilung, Menschen-Schutz, Unknown-Cap/Einmalzählung grün |
 | Engine-/Intent-/Heiler-/Konvergenz-/Themen-/End-Gate-Selbsttests | grün |
