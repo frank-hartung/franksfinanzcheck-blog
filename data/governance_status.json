@@ -1,17 +1,17 @@
 {
   "counts": {
     "amber": 2,
-    "green": 5,
+    "green": 6,
     "info": 6,
-    "red": 3
+    "red": 2
   },
-  "fingerprint": "3a156412e360",
-  "generated": "2026-09-21T10:46:21+00:00",
+  "fingerprint": "f34ef14ae0fa",
+  "generated": "2026-09-28T11:43:30+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "3a156412e360",
+    "fingerprint": "f34ef14ae0fa",
     "verdict": "RED"
   },
   "steps": {
@@ -23,7 +23,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "/tmp/automation-report.md",
-      "ts": "2026-09-21T10:46:14+00:00"
+      "ts": "2026-09-28T11:43:22+00:00"
     },
     "awin": {
       "actionable": false,
@@ -33,7 +33,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "AWIN-REPORT.md",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:28+00:00"
     },
     "awin-fetch": {
       "actionable": false,
@@ -43,7 +43,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/awin_fetch.meta.json",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:28+00:00"
     },
     "build": {
       "actionable": false,
@@ -53,17 +53,17 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-09-21T10:46:16+00:00"
+      "ts": "2026-09-28T11:43:25+00:00"
     },
     "click-chain": {
       "actionable": true,
       "code": "chain_gap",
       "exit": 0,
-      "findings": 495,
+      "findings": 465,
       "level": "amber",
       "message": "/go/strom/ ohne data-umami-event=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-umami-event-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne data-umami-event-placement (Klick im Funnel keiner Stelle zuordenbar); /go/dsl/ ohne data-umami-event=affiliate_click (Klick",
       "report": "CLICK-CHAIN-REPORT.md",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:28+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -73,7 +73,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:28+00:00"
     },
     "cwv": {
       "actionable": false,
@@ -83,7 +83,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-09-21T10:46:17+00:00"
+      "ts": "2026-09-28T11:43:25+00:00"
     },
     "decay": {
       "actionable": false,
@@ -93,27 +93,27 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-09-21T10:46:16+00:00"
+      "ts": "2026-09-28T11:43:25+00:00"
     },
     "lesbarkeit": {
       "actionable": true,
       "code": "red_finding",
       "exit": 1,
-      "findings": 5,
+      "findings": 9,
       "level": "red",
-      "message": "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/index.md – Flesch 51.5 < Floor 55; 2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md – Flesch 51.8 < Floor 55; 2026-09-20-gasrechnung-senken-clevere-herbst-vorbereitung-im-check/index.md – Flesch 50.8 < Floor",
+      "message": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md – Flesch 51.7 < Floor 55; 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md – Flesch 51.1 < Floor 55; 2026-09-28-buero-equipment-absetzen-so-zahlst-du-weniger-steuern/index.md – Flesch 48.9 < Floor 55",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-09-21T10:46:18+00:00"
+      "ts": "2026-09-28T11:43:27+00:00"
     },
     "live-policy": {
-      "actionable": true,
-      "code": "red_finding",
-      "exit": 1,
-      "findings": 3,
-      "level": "red",
-      "message": "L1: Repo-Gruppen fehlen live: Applebot, MistralAI-User, YouBot; L2: 1 Money-URL(s) fehlen live in der Sitemap, z. B. https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/ – Deploy/Cache-Hysterese; L3: /posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/ lie",
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 1,
+      "level": "green",
+      "message": "in Ordnung (1 Hinweis(e))",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-09-21T10:46:21+00:00"
+      "ts": "2026-09-28T11:43:30+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -123,7 +123,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-09-21T10:46:18+00:00"
+      "ts": "2026-09-28T11:43:27+00:00"
     },
     "revenue-funnel": {
       "actionable": true,
@@ -133,7 +133,7 @@
       "level": "amber",
       "message": "Besuche (Umami /pages): Import übersprungen (Secret fehlt); Affiliate-Klicks (Umami event-data): Import übersprungen (Secret fehlt); Awin-Transaktionen (Publisher API): Import übersprungen (Secret fehlt)",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:28+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -143,7 +143,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-09-21T10:46:21+00:00"
+      "ts": "2026-09-28T11:43:30+00:00"
     },
     "secrets": {
       "actionable": true,
@@ -153,7 +153,7 @@
       "level": "red",
       "message": "`PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pinterest_auth.py --auth-url`; `PINTEREST_TOKEN_KEY` – Pinterest Verschlüsselungs-Key: kein Erfolgs-/Li",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-09-21T10:46:18+00:00"
+      "ts": "2026-09-28T11:43:27+00:00"
     },
     "umami": {
       "actionable": false,
@@ -163,7 +163,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/umami_clicks.meta.json",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:27+00:00"
     },
     "umami-views": {
       "actionable": false,
@@ -173,7 +173,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "data/umami_views.meta.json",
-      "ts": "2026-09-21T10:46:19+00:00"
+      "ts": "2026-09-28T11:43:27+00:00"
     }
   },
   "verdict": "RED",
