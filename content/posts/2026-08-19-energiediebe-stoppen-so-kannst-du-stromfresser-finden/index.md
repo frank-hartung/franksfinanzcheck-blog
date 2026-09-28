@@ -51,6 +51,14 @@ Beginne mit einem Gerät. Wähle einen typischen Tag. Lies den Zähler ab. Miss 
 Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg. Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffällige Werte. Prüfe sie später erneut. So vermeidest du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger. Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
 
+## Ein Messplan für den ersten Abend
+
+Such dir nur ein Gerät aus. Stecke das Messgerät ein und schreibe Uhrzeit sowie Zählerstand auf. Lass das Gerät so laufen, wie du es sonst auch nutzt. Bei einem Kühlschrank wartest du mindestens einen Tag. Dann siehst du nicht nur einen kurzen Startwert, sondern den normalen Bedarf.
+
+Rechne die kWh mit deinem Preis je kWh. Vergleiche den Betrag mit dem Preis für ein neues Gerät. Ein altes Gerät muss nicht sofort raus. Erst der Unterschied pro Jahr zeigt, ob sich ein Kauf bald lohnt. Das schützt dich vor einem teuren Kauf aus einem Bauchgefühl.
+
+Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank, ein Boiler oder eine Pumpe sein. Kleine Ladegeräte kommen später. So bringt deine Zeit zuerst etwas und du behältst bei jedem Schritt den Überblick.
+
 ## Das Wichtigste in Kürze – Energiediebe stoppen
 
 

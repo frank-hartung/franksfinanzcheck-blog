@@ -53,7 +53,15 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 TODAY = datetime.date.today()
 ANCHOR_RE = re.compile(r"<a\b[^>]*>", re.I | re.S)
-ATTR_RE = re.compile(r"([A-Za-z_:][-A-Za-z0-9_:.]*)\s*=\s*(\"([^\"]*)\"|'([^']*)')", re.I)
+# Hugo --minify removes quotes from safe attribute values (for example
+# `data-umami-event=affiliate_click`).  HTML permits that, and the guard must
+# inspect the browser-equivalent markup instead of mistaking minification for
+# a missing measurement contract.  Capture double-quoted, single-quoted and
+# unquoted values explicitly; values without `=` remain intentional booleans.
+ATTR_RE = re.compile(
+    r"([A-Za-z_:][-A-Za-z0-9_:.]*)\s*=\s*(?:\"([^\"]*)\"|'([^']*)'|([^\s\"'=<>`]+))",
+    re.I,
+)
 GO_HREF_RE = re.compile(r"/go/([A-Za-z0-9_\-]+)/?")
 
 # Seiten, die den vollen CTA-Vertrag tragen müssen (Platzierung = Report-Label).
@@ -67,7 +75,8 @@ def _attrs(anchor_html):
     out = {}
     for m in ATTR_RE.finditer(anchor_html):
         key = m.group(1).lower()
-        out[key] = m.group(3) if m.group(3) is not None else (m.group(4) or "")
+        # groups 2–4 are double-quoted, single-quoted and bare values.
+        out[key] = next((value for value in m.groups()[1:] if value is not None), "")
     return out
 
 
@@ -163,14 +172,14 @@ def check_umami_script(root):
 
 # ------------------------------------------------------------------ Awin-Seite
 
-def check_awin_coverage():
+def check_awin_coverage(config_path=None, data_path=None):
     """Prüft Awin-Attribution nur, wenn Awin ausdrücklich aktiviert ist.
 
     Awin ist derzeit kein aktiver Partner dieses Blogs; fehlender Awin-Import
     ist daher eine bewusste Konfiguration und kein Governance-Befund. Wenn die
     Quelle später aktiviert wird, werden aggregierte SubID-Zuordnungen geprüft.
     """
-    config_path = os.path.join(BLOG_DIR, "data", "monetization.yaml")
+    config_path = config_path or os.path.join(BLOG_DIR, "data", "monetization.yaml")
     try:
         config = open(config_path, encoding="utf-8").read()
         if re.search(r"^awin_enabled:\s*false\s*$", config, re.M):
@@ -178,7 +187,7 @@ def check_awin_coverage():
     except OSError:
         pass
 
-    path = os.path.join(BLOG_DIR, "data", "awin_provisions.json")
+    path = data_path or os.path.join(BLOG_DIR, "data", "awin_provisions.json")
     try:
         doc = json.load(open(path, encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
@@ -260,7 +269,16 @@ def run(public_dir, report_path="", do_live=None, require_events=False):
                     gaps.append(problem)
             checked += len(keys)
     cov = check_awin_coverage()
-    if cov and cov["problems"]:
+    # `data/monetization.yaml` may deliberately disable Awin. That is a
+    # documented product decision, not an incomplete coverage report.  The
+    # previous branch fell through to the coverage message and indexed fields
+    # that do not exist for that sentinel (`KeyError: coverage_pct`).  A guard
+    # that crashes is worse than a missing metric: governance then reports its
+    # stale predecessor instead of the current build truth.
+    if cov and cov.get("disabled"):
+        notes.append("Awin-Attribution ist laut `data/monetization.yaml` bewusst deaktiviert "
+                     "(kein aktives Partnerprogramm).")
+    elif cov and cov["problems"]:
         gaps += cov["problems"]
     elif cov:
         notes.append(f"Awin-ClickRef-Abdeckung {cov['coverage_pct']} % "
@@ -373,6 +391,14 @@ def _selftest():
              ' data-umami-event-placement="pillar">y</a>')
     if scan_page(weird, "t"):
         failures.append("mehrzeiliger sauberer Anker falsch gemeldet")
+    # Hugo's minifier uses unquoted values wherever HTML permits it. This is
+    # the exact production representation that previously yielded hundreds of
+    # false chain gaps despite fully instrumented CTAs.
+    minified = ('<a href="/go/strom/?subid=x" rel="sponsored nofollow noopener" '
+                'data-umami-event=affiliate_click data-umami-event-slug=strom '
+                'data-umami-event-placement=artikel>Strom</a>')
+    if scan_page(minified, "t"):
+        failures.append("minifizierter, sauberer Anker wird falsch gemeldet")
     # --- Gateway-Check gegen Kunst-Baum
     import tempfile
     with tempfile.TemporaryDirectory() as td:
@@ -388,6 +414,15 @@ def _selftest():
             failures.append("Gateway ohne SubID-Förderung bleibt unentdeckt")
         if "Build" not in check_gateway(td, "kies"):
             failures.append("Gateway ohne Datei bleibt unentdeckt")
+        # Bewusst deaktiviertes Awin ist kein Messloch und darf niemals den
+        # Report mit einer fehlenden coverage_pct zum Absturz bringen.
+        with open(os.path.join(td, "monetization.yaml"), "w", encoding="utf-8") as f:
+            f.write("awin_enabled: false\n")
+        disabled = check_awin_coverage(
+            config_path=os.path.join(td, "monetization.yaml"),
+            data_path=os.path.join(td, "awin_provisions.json"))
+        if not disabled or not disabled.get("disabled") or disabled.get("problems"):
+            failures.append("deaktiviertes Awin wird nicht als bewusste Konfiguration erkannt")
         # Umami-Script
         if not check_umami_script(td):
             failures.append("fehlendes Umami-Script bleibt unentdeckt")

@@ -204,6 +204,13 @@ class TestCtaMessvertrag(unittest.TestCase):
                 'data-umami-event-placement="artikel">y</a>')
         self.assertEqual(cc.scan_page(html, "t"), [])
 
+    def test_hugo_minify_ohne_attribut_anfuehrungszeichen_ist_sauber(self):
+        """Hugo darf sichere Analytics-Werte ohne Anführungszeichen ausgeben."""
+        html = ('<a href="/go/strom/?subid=posts-x" rel="sponsored nofollow noopener" '
+                'data-umami-event=affiliate_click data-umami-event-slug=strom '
+                'data-umami-event-placement=artikel>↔</a>')
+        self.assertEqual(cc.scan_page(html, "t"), [])
+
 
 class TestVerdrahtung(unittest.TestCase):
     """Ohne diese Koppelungen melden die neuen Wachen nie – oder zu spät."""

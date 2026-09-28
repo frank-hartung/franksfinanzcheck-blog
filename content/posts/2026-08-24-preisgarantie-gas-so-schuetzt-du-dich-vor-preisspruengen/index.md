@@ -44,6 +44,14 @@ Du willst preisgarantie gas? Springt der Börsenpreis, warnt schnell die Schlagz
 
 Relevant wird es, wenn dein Anbieter eine konkrete Preisänderung ankündigt oder deine Garantie ausläuft. Dann zählen Klausel, Frist und deine Jahreskosten.
 
+## Wenn ein neuer Preis im Brief steht
+
+Leg das Schreiben neben deinen Vertrag. Markiere den alten und den neuen Preis je kWh. Markiere auch den Tag, an dem der neue Preis gelten soll. Suche danach die Stelle zum Preis-Schutz. So erkennst du, ob der Grund im Brief zu dem Schutz im Vertrag passt.
+
+Rechne dann den Preis für ein Jahr mit deinem Verbrauch. Lass den Bonus bei der ersten Rechnung weg. Vergleiche diesen Wert mit zwei neuen Angeboten. Ein Wechsel kann gut sein, muss aber nicht immer die beste Wahl sein. Dein alter Vertrag kann trotz neuer Preise noch fair sein.
+
+Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag und Foto an einem Ort. Das hilft, wenn du später nachfragen oder kündigen willst. Bei Streit holst du dir Rat, statt Zahlungen ohne Plan zu stoppen.
+
 ## Das Wichtigste in Kürze
 
 - Börsenpreis und Haushaltsgaspreis sind nicht dasselbe.

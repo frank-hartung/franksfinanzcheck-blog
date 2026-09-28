@@ -42,6 +42,14 @@ Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im Spä
 
 Die größten Fehler liegen selten an einer einzelnen Schraube. Sie entstehen, wenn **Preis, Verbrauch und Abschlag** durcheinandergeraten.
 
+## Starte mit einem kleinen Check
+
+Nimm dir heute zehn ruhige Minuten. Sieh auf die letzte Rechnung und schreibe Verbrauch, Preis je kWh und festen Preis auf. Mach danach ein Foto vom Zähler. Dieses Foto gibt dir einen klaren Startwert für den Herbst. Du musst dafür nichts an der Heizung ändern.
+
+Prüfe dann nur eine Sache am Vertrag: Wann darfst du kündigen? Vergleiche den Preis ohne Bonus mit zwei neuen Angeboten. Ein niedriger Abschlag zählt dabei nicht als Sparen. Er teilt die Zahlung nur anders auf. Entscheidend bleibt der Preis für ein ganzes Jahr.
+
+Zum Schluss geh einmal durch die Wohnung. Heizkörper sollten frei sein. Ein Vorhang oder ein Schrank davor stört die Wärme. Bei Gasgeruch, Wasser oder einem Fehler am Gerät hörst du auf. Dann hilft ein Fachbetrieb weiter.
+
 ## Das Wichtigste in Kürze
 
 
