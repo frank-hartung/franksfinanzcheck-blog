@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TEXTVERSTÄNDNIS-GUARD (R2–R9) für FranksFinanzcheck.
+TEXTVERSTÄNDNIS-GUARD (R2–R10) für FranksFinanzcheck.
 
 Die Verständnis-Regeln aus dem Textverständnis-Audit (01.09.2026), die
 KEIN bestehendes Gate misst:
@@ -18,6 +18,11 @@ KEIN bestehendes Gate misst:
       + R8-NESTED-LINK  Doppelt verschachtelte Markdown-Links
   R9  Klebewort-Guard      Inserter-Artefakte „HHerfindestdu“/„Ddeine…"
                            Leerzeichen in URL = harter Fehler
+  R10 Wortdopplungs-Guard  „senken senken will“ – reine Leerraum-Dopplung
+                           ohne trennendes Satzzeichen (Klebe-Rest einer
+                           Editier-/Heiler-Kaskade; Lektorat 25.09.2026
+                           heilte den Fall im alten Slug, das Rework trug
+                           ihn wieder ein – R2–R9 sahen ihn nicht).
 
 MODI:
   python3 scripts/textverstaendnis_guard.py            # Report (alle Artikel)
@@ -262,6 +267,7 @@ def check_article(rel: str, body: str, term: dict) -> list:
                           f"Ankertext „{anker[:45]}“ passt nicht zum Ziel „{slug}“", slug))
     finds += check_nested_links(rel, body)
     finds += check_klebewoerter(rel, body)
+    finds += check_wortdopplung(rel, body)
     return finds
 
 
@@ -319,6 +325,67 @@ def check_klebewoerter(rel: str, body: str) -> list:
         out.append((rel, "R9-KLEBEWORT",
                     f"Klebe-Artefakt „{w}“ (Wort fängt doppelt an: {w[0]}{w[1]}…) "
                     f"– Überrest eines defekten Text-Inserters, manuell reparieren", w))
+    return out
+
+
+# R10-DOPPELWORT (28.09.2026, Klebe-Artefakte-Premium-Audit):
+# Dritter belegter Maschinen-Klebe-Befund neben R9 (Doppel-Initialen) und
+# F6 (Frontmatter-Naht): unmittelbar doppelt geschriebene Wörter ohne
+# trennendes Satzzeichen („Wer seine Gasrechnung senken senken will“).
+# Beide Wörter sind einzeln korrekt geschrieben – Spellcheck, Casing und
+# R9 sehen die Dopplung nicht.
+# Präzision (kein False-Positive-Risiko):
+#   • CASE-EXAKT: Editier-/Heiler-Kaskaden kopieren Tokens bytetreu
+#     („senken senken“, „Die Die besten“). Nomen-Verb-Homographen mit
+#     Groß-/Klein-Unterschied („Konsum-Fallen fallen so auf“) sind
+#     korrektes Deutsch und bleiben außen vor.
+#   • Reine Leerraum-Trennung: Dopplungen MIT Komma/Doppelpunkt/
+#     Gedankenstrich dazwischen („kauft, kauft zweimal“, „werden,
+#     werden“, „voll-voll“) sind legitimes Deutsch.
+#   • Relativsatz-Gefüge „…, die die Thermostate …“: Artikel/Pronomen
+#     nach Komma ist der eine legitime case-exakte Leerraum-Doppel.
+#   • Nur Fließtext: „### Kinder“ + Absatz „Kinder haben …“ ist ein
+#     Journal-Muster, kein Befund.
+R10_ARTIKEL = {"die", "der", "den", "dem", "das"}
+
+# Einschub-Variante (gleiche Ursachenfamilie): Das Duplikat klammert einen
+# reinen Quantor ein („… lässt sich die Gasrechnung senken um bis zu 15 %
+# senken“, Fund 28.09.2026). Korrektes Deutsch stellt den Quantor VOR das
+# Verb – ein doppeltes Verb um einen Prozent-/Euro-Betrag ist immer ein
+# Klebe-Rest, darum ohne Ausnahme hart.
+R10_QUANTOR_RX = re.compile(
+    r"\b([A-Za-zÄÖÜäöüß]{3,})\s+"
+    r"um\s+(?:bis\s+zu\s+|rund\s+|etwa\s+|knapp\s+|mehr\s+als\s+|gut\s+)?"
+    r"[\d.,]+\s*(?:%|Prozent|Euro|€)\s+\1\b")
+
+
+def check_wortdopplung(rel: str, body: str) -> list:
+    """Erkennt unmittelbare, case-exakte Wortdopplungen („senken senken
+    will“) im Fließtext – harter Fehler, sofort reparieren.
+
+    Nur Fließtext-Absätze: Überschriften, Listen, Tabellen, Zitate und
+    Code sind Struktur. Dopplungen über Zeilenumbrüche innerhalb eines
+    Absatzes werden gefunden (Hard-Wrap), Fett-Markierung stört nicht.
+    """
+    out = []
+    for para in flow_paragraphs(body):
+        text = re.sub(r"\*+", "", para)  # „**Fett** Wort“-Kleben mitdenken
+        for m in re.finditer(r"\b([A-Za-zÄÖÜäöüß]{2,})(\s+)\1\b", text):
+            w = m.group(1)
+            vor = text[:m.start()].rstrip()[-1:]
+            if w.lower() in R10_ARTIKEL and vor in {",", ";", ":"}:
+                continue  # Relativsatz-Gefüge: „…, die die Thermostate …“
+            ctx = re.sub(r"\s+", " ", text[max(0, m.start() - 45):m.end() + 45])
+            out.append((rel, "R10-DOPPELWORT",
+                        f"Wortdopplung „{m.group(0)}“ ⟦…{ctx}…⟧ – Klebe-Rest "
+                        f"einer Editier-/Heiler-Kaskade, manuell reparieren",
+                        m.group(0)))
+        for m in R10_QUANTOR_RX.finditer(text):
+            ctx = re.sub(r"\s+", " ", text[max(0, m.start() - 45):m.end() + 45])
+            out.append((rel, "R10-DOPPELWORT",
+                        f"Verdopplung mit Quantor-Einschub „{m.group(0)}“ "
+                        f"⟦…{ctx}…⟧ – Klebe-Rest, Quantor gehört vor das Verb",
+                        m.group(0)))
     return out
 
 
@@ -390,6 +457,44 @@ def run_selftest() -> list:
         if check_klebewoerter("t", "TEXT\n\n" + _ok):
             fehler.append(f"R9: False-Positive bei „{_ok}“")
 
+    # R10-DOPPELWORT: verlorene Lektorats-Heilung („senken senken“, 28.09.2026)
+    body10 = ("TEXT\n\nWer seine Gasrechnung senken senken will, sollte "
+              "im Spätsommer handeln.")
+    if not any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10, {})):
+        fehler.append("R10: Wortdopplung nicht erkannt")
+    # Dopplung über Zeilenumbruch (Hard-Wrap im selben Absatz) muss finden
+    body10b = "TEXT\n\nDu kannst deine Kosten nachhaltig senken\nsenken und dabei ruhig bleiben."
+    if not any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10b, {})):
+        fehler.append("R10: Wortdopplung über Zeilenumbruch nicht erkannt")
+    # Dopplung über Fett-Markup („**senken** senken“) muss finden
+    body10c = "TEXT\n\nDu kannst deine Kosten nachhaltig **senken** senken und dabei ruhig bleiben."
+    if not any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10c, {})):
+        fehler.append("R10: Wortdopplung über Fett-Markup nicht erkannt")
+    # Einschub-Variante: Duplikat klammert Quantor (Fund 28.09.2026)
+    body10e = ("TEXT\n\nMit dem richtigen Vorgehen lässt sich die Gasrechnung "
+               "senken um bis zu 15 % senken.")
+    if not any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10e, {})):
+        fehler.append("R10: Wortdopplung mit Quantor-Einschub nicht erkannt")
+    # Korrekte Quantor-Stellung darf NICHT anschlagen
+    body10f = "TEXT\n\nMit dem richtigen Vorgehen senkst du die Gasrechnung um bis zu 15 Prozent."
+    if any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10f, {})):
+        fehler.append("R10: False-Positive bei korrekter Quantor-Stellung")
+    # Negativfälle dürfen NICHT anschlagen (legitime deutsche Muster)
+    for _ok in ("Zugluft, die die Thermostate nach oben treiben lässt.",
+                "Wer billig kauft, kauft bekanntlich zweimal.",
+                "Die Daten, die erfasst werden, werden sicher gespeichert.",
+                "Die Tankregelung voll-voll ist am fairsten.",
+                "Für dich heißt das: Das Angebot übersteigt die Nachfrage.",
+                "Der beste Tarif ist der, der im Ernstfall passt.",
+                "Auch teure Abos und Konsum-Fallen fallen so richtig auf.",
+                "Diese Sorgen sorgen selten für Ruhe."):
+        if any(f[1] == "R10-DOPPELWORT" for f in check_article("t", "TEXT\n\n" + _ok, {})):
+            fehler.append(f"R10: False-Positive bei „{_ok}“")
+    # Überschrift → Absatz-Wiederholung (Journal-Muster) darf NICHT anschlagen
+    body10d = "TEXT\n\n### Kinder\n\nKinder haben meist noch keine Berufsunfähigkeit."
+    if any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10d, {})):
+        fehler.append("R10: False-Positive bei Überschrift→Absatz-Wiederholung")
+
     return fehler
 
 
@@ -401,7 +506,7 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: 9 Fälle grün.")
+        print("✅ Verständnis-Selbsttest: R2–R10 grün.")
         return 0
 
     term = load_terminologie()
@@ -426,16 +531,21 @@ def main() -> int:
     # „HHerfindestdu“/„Ddeine6 Themenwelten“ das Reste-Artefakt eines
     # historischen Inserter-Skripts gefunden – seitdem laufen für diese
     # Seiten die Seiten-Level-Regeln (Nested-Links, Klebewörter) mit.
+    # Seit 28.09.2026 (Klebe-Artefakte-Premium-Audit) gilt das für ALLE
+    # Content-Flächen außerhalb der Artikel: „gesamter Blog“ heißt auch
+    # Startseite, Pillar-Hubs, Rechts-/Methodik-/Über-Seiten und die
+    # Newsletter-Seiten. Neue Seiten rücken automatisch in den Scan.
     if not NEW_ONLY:
-        hub_paths = [POSTS / "_index.md"]
-        hub_paths += sorted((ROOT / "content" / "pillar").glob("*/index.md"))
-        for p in hub_paths:
-            if not p.exists():
-                continue
+        alle_md = set((ROOT / "content").rglob("*.md"))
+        artikel_md = set(POSTS.glob("*/index.md"))
+        seiten_paths = sorted(p for p in alle_md - artikel_md
+                              if p.name in ("index.md", "_index.md"))
+        for p in seiten_paths:
             rel = str(p.relative_to(ROOT))
             body = split_body(p.read_text(encoding="utf-8"))
             all_finds += check_nested_links(rel, body)
             all_finds += check_klebewoerter(rel, body)
+            all_finds += check_wortdopplung(rel, body)
 
     # dedup
     uniq, seen = [], set()
@@ -449,15 +559,15 @@ def main() -> int:
     # R8-ANKER-ZIEL ist bewusst NUR weich (semantische Kohärenz ist nicht
     # deterministisch prüfbar – Funde sind Review-Kandidaten, keine Blocker).
     hard_rules = ("R2-KEYWORD-DUMP", "R3-TERMINOLOGIE", "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
-                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT")
+                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT", "R10-DOPPELWORT")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]
 
     lines = [f"# 🧠 TEXTVERSTÄNDNIS-REPORT (textverstaendnis_guard.py)",
              f"**Stand:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} · Artikel: {len(paths)}" +
-             (" · Engine (nur heute)" if NEW_ONLY else ""),
+             (f" · Seiten (Klebe-Scan): {len(seiten_paths)}" if not NEW_ONLY else " · Engine (nur heute)"),
              "",
-             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL):** {len(hard)} Funde",
+             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL/R9/R10):** {len(hard)} Funde",
              f"**Weiche Regeln (R4/R5/R8-Anker):** {len(soft)} Funde",
              ""]
     for rel, regel, detail, pos in uniq[:60]:

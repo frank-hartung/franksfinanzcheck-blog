@@ -603,6 +603,28 @@ python3 scripts/sprachglatt.py --fix
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
 
+- **28.09.2026 (Klebe-Artefakte-Premium-Audit):** Dritte Maschinen-Klebe-Klasse
+  dauerhaft unter Wache gestellt: **R10-DOPPELWORT** in `textverstaendnis_guard.py`
+  (guard-interner Nummernraum R2–R10 — nicht die Ketten-R-Nummern der
+  Verständnis-Tabelle oben) erkennt unmittelbare, case-exakte Wortdopplungen
+  („Wer seine Gasrechnung **senken senken** will“) sowie die Einschub-Variante
+  („… lässt sich die Gasrechnung **senken um bis zu 15 % senken**“) als harte
+  Funde. Anlass: Das Lektorat vom 25.09. heilte genau diesen Satz im damaligen
+  Slug `…deine-strategie-fuer-den-winter-2026`; beim Rework auf den heutigen
+  Slug (`…so-bereitest-du-dich-im-spaetsommer-vor`) überlebte die Dopplung,
+  und R2–R9 sahen sie nicht — beide Wörter sind einzeln korrekt geschrieben.
+  Präzision (eingefroren im `--selftest`, 12 Sabotage-Fälle): case-exakt
+  (Nomen-Verb-Homographen „Konsum-Fallen fallen“ bleiben draußen), reine
+  Leerraum-Trennung („kauft, kauft zweimal“, „voll-voll“, „werden, werden“
+  bleiben draußen), Relativsatz-Gefüge „…, die die …“ nach Komma erlaubt,
+  nur Fließtext („### Kinder“ + Absatz „Kinder haben …“ ist Journal-Muster).
+  Seit demselben Audit laufen die Klebe-Regeln (R9/R10, Nested-Links) nicht
+  nur über Artikel und Hub-Seiten, sondern über **alle Content-Flächen**
+  (Startseite, Pillar-Hubs, Rechts-/Methodik-/Über-/Newsletter-Seiten; neu
+  angelegte Seiten rücken automatisch in den Scan). Bestand bei Inkrafttreten:
+  52 Artikel + 17 Seiten, 0 harte Klebe-Funde (die zwei Live-Funde des Audits
+  sind im selben Commit geheilt). Details:
+  `KLEBE-ARTEFAKTE-PREMIUM-2026-09-28.md`.
 - **20.09.2026 (Nachtrag zu Regel 8):** Pflicht-Check-Vertrag als
   **Dauerzustand dokumentiert** statt als Dauer-Vorfall (Option B, Frank).
   Bestand: `GET /rules/branches/main` kennt weiterhin keinen
