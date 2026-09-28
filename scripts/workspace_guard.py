@@ -94,7 +94,11 @@ def find_junk(files: list) -> list:
 # ------------------------------------------------------------- W2: Waisen
 
 ORPHAN_PATTERN = re.compile(
-    r"static/images/covers/(?:\d+/)?(?:avif/|webp/)?([\w-]+)\.(jpg|webp|avif)$")
+    # Original/JPEG: <slug>.jpg, 360/<slug>.jpg
+    # Modern: avif/<slug>.avif UND avif/360/<slug>.avif (analog WebP).
+    # Die frühere Reihenfolge erwartete fälschlich 360/avif/… und ließ damit
+    # acht verwaiste Responsive-Dateien je gelöschtem Cover im Repository.
+    r"static/images/covers/(?:(?:\d+/)?|(?:avif|webp)/(?:\d+/)?)([\w-]+)\.(jpg|webp|avif)$")
 
 
 def existing_slugs() -> set:
@@ -265,6 +269,12 @@ SELFTEST = [
     ("billig-key",   _dup_billig, (["scripts/indexnow_key.txt", "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt"],), True),
     ("no-dup",       _dup_billig, (["x/a.md", "x/b.md"],), False),
     ("orphan",       lambda a: bool(ORPHAN_PATTERN.match(a)), ("static/images/covers/denne.jpg",), True),
+    ("orphan-jpg-responsive", lambda a: bool(ORPHAN_PATTERN.match(a)),
+     ("static/images/covers/620/denne.jpg",), True),
+    ("orphan-avif-responsive", lambda a: bool(ORPHAN_PATTERN.match(a)),
+     ("static/images/covers/avif/620/denne.avif",), True),
+    ("orphan-webp-responsive", lambda a: bool(ORPHAN_PATTERN.match(a)),
+     ("static/images/covers/webp/720/denne.webp",), True),
     ("no-orphan",    lambda a: bool(ORPHAN_PATTERN.match(a)), ("content/posts/x/index.md",), False),
     # W2-Falschpositiv-Schutz (14.09.): referenziertes Deckbild ist keine Waise,
     # auch wenn sein Name keinem Artikel-Slug entspricht (pillar-*, brand-*).

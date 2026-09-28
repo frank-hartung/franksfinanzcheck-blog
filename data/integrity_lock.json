@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-28T22:01:49.981544+00:00",
-  "head": "52dd21e",
+  "signed_at": "2026-09-28T23:17:00.785739+00:00",
+  "head": "2079bd2",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
@@ -25,14 +25,14 @@
     "scripts/affiliate_integrity_gate.py": "c220b727d81caa8909994dad40b5a44ec25109fba0defa6835013281d2277d4f",
     "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-    "scripts/blog_doctor.py": "06db0d1a1fa62b46a7d464bc50d1f206d5708177be8ab6cc3c2b329be63becf6",
+    "scripts/blog_doctor.py": "e90fe3daf14c3a0c22dff8477ae659851d35db93d3d024f701db59bab83b643e",
     "scripts/brand_guard.py": "5795781187cffd3bdaa831ab0cd0c88312a96a196b8a3b36be7cc3df81b58071",
     "scripts/casing_guard.py": "632b9c92cde0249fe9f6c57ce22a5ef2e1695d049c31532da8ed99fbd6f3d3c6",
     "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
-    "scripts/check_covers.py": "c888f5b301eba6e891ec719296ced218f643f020d1a2ec86b060c1d77cf2b2da",
+    "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "99a482e8f6a1bb035e841f905a68da6cbf42a32346682ecb3e339c7d48550689",
     "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
-    "scripts/generate_covers.py": "cc7adcce6e13d9a31e041f3f5dcbcc2390a29d93b72518b328f52247330d12c6",
+    "scripts/generate_covers.py": "a4cc9448cb6ad5702e1d690078921a7a8633a1abac4166be169b5580efc59985",
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "99ca6d25c0a43988cd498dde641ef1ab0ca182787187aab3c9b31143d2320dc5",
     "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
@@ -47,48 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "9a511ff64c727c44b93c9a9f6ad769954c7c4bb770402ed4df2b4eaa36b5424e",
-  "audit_start_sha256": "a722d2a8286815026cd1648d15b4e13481e2c985e5be07c74b4b65269a2c9077",
+  "files_sha256": "bfe5984cfcb28b0c2ae1ecc3d220c5d0c7f51d7e4fab7ee64904a93e812816f7",
+  "audit_start_sha256": "e22611b429ac186010bc9b3857e488c31b71d99428379a84d154b1d17dd5d775",
   "audit": [
-    {
-      "date": "2026-09-27",
-      "art": "set-current",
-      "head": "130b860",
-      "geaendert": [
-        "data/brand_lock.yaml",
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "130b860",
-              "datum": "2026-09-27",
-              "betreff": "feat(startseite): Willkommenstext SEO/GEO-Premium + Hero-Design v-hero-premium (freigegeben & live)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/brand_lock.yaml",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "130b860",
-              "datum": "2026-09-27",
-              "betreff": "feat(startseite): Willkommenstext SEO/GEO-Premium + Hero-Design v-hero-premium (freigegeben & live)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "58fb93938c44a13d34662ac728038200b6524a7cc669e28d8b90b75e7cf32e96",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-27",
       "art": "set-current",
@@ -126,7 +87,7 @@
         }
       ],
       "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6",
-      "prev_sha256": "a722d2a8286815026cd1648d15b4e13481e2c985e5be07c74b4b65269a2c9077"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-27",
@@ -479,8 +440,61 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "2dd8cd1f6c5c3a4c4432c89afee5a6bf870042de7233e748ebb4fa8e149da7e7",
-      "files_sha256": "9a511ff64c727c44b93c9a9f6ad769954c7c4bb770402ed4df2b4eaa36b5424e"
+      "files_sha256": "9a511ff64c727c44b93c9a9f6ad769954c7c4bb770402ed4df2b4eaa36b5424e",
+      "prev_sha256": "2dd8cd1f6c5c3a4c4432c89afee5a6bf870042de7233e748ebb4fa8e149da7e7"
+    },
+    {
+      "date": "2026-09-28",
+      "art": "set-current",
+      "head": "2079bd2",
+      "geaendert": [
+        "scripts/blog_doctor.py",
+        "scripts/check_covers.py",
+        "scripts/generate_covers.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/blog_doctor.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "2079bd2",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/check_covers.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "2079bd2",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/generate_covers.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "2079bd2",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "88eec015bf6d6beb2717f87316f228cffd135722e71476de6f3e7454110ff33d",
+      "files_sha256": "bfe5984cfcb28b0c2ae1ecc3d220c5d0c7f51d7e4fab7ee64904a93e812816f7"
     }
   ]
 }

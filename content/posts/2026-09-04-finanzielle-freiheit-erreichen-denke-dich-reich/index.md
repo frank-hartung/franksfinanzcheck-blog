@@ -49,9 +49,12 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
-* Am Anfang steht die Haltung: Wer seine Ausgaben nicht kennt, kann sie nicht steuern. * Automatische Abläufe bilden das Fundament für dein wachsendes Kapital. * Kleine monatliche Beträge führen über ca.
 
-15 bis 30 Jahre zu Wohlstand. * Bewusster Verzicht heute sichert dir morgen deine persönliche Unabhängigkeit. * Transparenz über alle Kosten verhindert unnötige Geldverluste.
+* Am Anfang steht die Haltung: Wer seine Ausgaben nicht kennt, kann sie nicht steuern.
+* Automatische Abläufe bilden das Fundament für dein wachsendes Kapital.
+* Kleine monatliche Beträge führen über ca. 15 bis 30 Jahre zu Wohlstand.
+* Bewusster Verzicht heute sichert dir morgen deine persönliche Unabhängigkeit.
+* Transparenz über alle Kosten verhindert unnötige Geldverluste.
 
 ---
 

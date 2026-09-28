@@ -24,6 +24,10 @@ quellen:
     herausgeber: "Deutsche Bundesbank"
     datum: "2026-04-12"
 faktencheck: "2026-09-28"
+cover:
+  image: "images/covers/2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich.jpg"
+  alt: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan für den Start"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Eine kaputte Waschmaschine, ein unerwarteter Zahnarzt-Eigenanteil oder eine Autoreparatur sind selten gut getimt. Ohne Reserve landet die Rechnung schnell auf der Kreditkarte oder im Dispo. Das ist genau der Moment, für den ein Notgroschen da ist.
@@ -113,7 +117,7 @@ Die Reserve schützt dich nur, wenn sie nicht zu einem zweiten Freizeitkonto wir
 
 **Typische Notfälle:**
 
-- eine dringende Reparatur an Waschmaschine, Heizung oder Auto,
+- Eine dringende Reparatur an Waschmaschine, Heizung oder Auto,
 - eine unerwartete medizinische Eigenleistung,
 - kurzfristiger Einkommensausfall,
 - eine notwendige Nachzahlung, wenn die Ursache geklärt ist,
