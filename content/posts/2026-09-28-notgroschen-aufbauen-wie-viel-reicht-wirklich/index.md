@@ -14,6 +14,10 @@ ki_redaktion_status: "review"
 ---
 
 Du hast das Gefühl, dass am Monatsende immer wieder etwas fehlt, obwohl du eigentlich nicht mehr ausgibst, als du verdienst? Vielleicht liegt das daran, dass du keinen Puffer hast, der dich vor unvorhergesehenen Ausgaben schützt. In diesem Ratgeber erfährst du, wie du einen Notgroschen aufbaust, welcher Betrag wirklich sinnvoll ist und welche Schritte du heute noch gehen kannst, um finanziell entspannter zu Leben.
+### Dein Schnellstart
+
+Starte mit deinen Fixkosten. Schreibe sie auf. Prüfe dein Einkommen. Wähle ein Monatsziel. Richte einen Dauerauftrag ein. Das Geld geht direkt nach dem Gehalt auf ein separates Konto. Kleine Raten sind erlaubt. Regelmäßigkeit zählt mehr als ein perfekter Start. Prüfe dein Ziel einmal im Jahr. Ändert sich dein Job, passe den Puffer an. Nutze das Geld nur für echte Notfälle. Ein kaputtes Auto kann dazugehören. Ein spontaner Einkauf gehört nicht dazu. So wächst dein Schutz Schritt für Schritt.
+
 
 ## Warum ein Notgroschen unverzichtbar ist
 

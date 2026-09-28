@@ -164,11 +164,20 @@ def check_umami_script(root):
 # ------------------------------------------------------------------ Awin-Seite
 
 def check_awin_coverage():
-    """Wie viele importierten Transaktionen tragen eine Click-Reference (SubID)?
+    """Prüft Awin-Attribution nur, wenn Awin ausdrücklich aktiviert ist.
 
-    Quelle: data/awin_provisions.json (aggregiert, dsGVO-OK). Ohne Import-Datei:
-    Hinweis statt Lücke (der Funnel meldet die Quelle schon als Lücke – hier soll
-    der Guard nur die Attribution bewerten, wenn Daten da sind)."""
+    Awin ist derzeit kein aktiver Partner dieses Blogs; fehlender Awin-Import
+    ist daher eine bewusste Konfiguration und kein Governance-Befund. Wenn die
+    Quelle später aktiviert wird, werden aggregierte SubID-Zuordnungen geprüft.
+    """
+    config_path = os.path.join(BLOG_DIR, "data", "monetization.yaml")
+    try:
+        config = open(config_path, encoding="utf-8").read()
+        if re.search(r"^awin_enabled:\s*false\s*$", config, re.M):
+            return {"disabled": True, "problems": []}
+    except OSError:
+        pass
+
     path = os.path.join(BLOG_DIR, "data", "awin_provisions.json")
     try:
         doc = json.load(open(path, encoding="utf-8"))

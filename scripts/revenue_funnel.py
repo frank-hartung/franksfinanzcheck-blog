@@ -70,15 +70,15 @@ MAX_HISTORY = 260       # gut 5 Jahre Wochenläufe
 SOURCES = (
     # (Schlüssel, menschenlesbarer Name, Daten-/Meta-Pfade, Behebung)
     ("views", "Besuche (Umami /pages)", VIEWS, VIEWS_META,
-     "Secret `UMAMI_API_TOKEN` setzen, dann läuft der Import automatisch "
-     "(docs/UMSATZ-MESSUNG-PREMIUM.md) – oder `python3 scripts/umami_views.py --fetch`"),
+     "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_views.py --fetch` ausführen"),
     ("clicks", "Affiliate-Klicks (Umami event-data)", CLICKS, CLICKS_META,
-     "Secret `UMAMI_API_TOKEN` setzen, dann läuft der Import automatisch "
-     "(docs/UMSATZ-MESSUNG-PREMIUM.md) – oder `python3 scripts/umami_clicks.py --fetch`"),
-    ("awin", "Awin-Transaktionen (Publisher API)", AWIN, AWIN_META,
-     "Secrets `AWIN_API_TOKEN` + `AWIN_PUBLISHER_ID` setzen "
-     "(Awin-UI → API Credentials) – oder CSV-Export nach `data/awin_transactions.csv`"),
+     "Secret `UMAMI_API_TOKEN` setzen, dann `python3 scripts/umami_clicks.py --fetch` ausführen"),
 )
+
+# Awin ist kein aktiver Partner dieses Blogs. Die Quelle bleibt im Code für
+# historische CSV-Importe verfügbar, darf aber ohne ausdrückliche Aktivierung
+# weder als fehlend noch als Governance-Befund erscheinen.
+AWIN_ENABLED = False
 
 
 # ------------------------------------------------------------------ IO-Helfer
@@ -475,8 +475,10 @@ def main(argv=None):
         "awin": bool(awin_doc),
     }
     src = [("views", SOURCES[0][1], *_source_state(views_doc, views_meta)),
-           ("clicks", SOURCES[1][1], *_source_state(clicks_rows, clicks_meta)),
-           ("awin", SOURCES[2][1], *_source_state(awin_doc, awin_meta))]
+           ("clicks", SOURCES[1][1], *_source_state(clicks_rows, clicks_meta))]
+    if AWIN_ENABLED:
+        src.append(("awin", "Awin-Transaktionen (Publisher API)",
+                    *_source_state(awin_doc, awin_meta)))
     # Ein leeres, aber frisch als ok geschriebenes Import-File ist eine MES-SUNG
     # (echte 0), kein Loch – evaluate darf das nicht doppelt zählen.
     def _state_of(state, age, key):
@@ -485,7 +487,10 @@ def main(argv=None):
         return state, age
     src = [(k, label, *_state_of(state, age, k)) for k, label, state, age in src]
     gaps = evaluate(src)
-    fixes = [SOURCES[i][4] for i, (_k, _l, state, _a) in enumerate(src) if state != "ok"]
+    source_fixes = {"views": SOURCES[0][4], "clicks": SOURCES[1][4]}
+    if AWIN_ENABLED:
+        source_fixes["awin"] = "Awin-Quelle konfigurieren oder CSV-Export importieren"
+    fixes = [source_fixes[k] for k, _l, state, _a in src if state != "ok"]
     f = compute(views_doc, clicks_rows, awin_doc, cta_rows, paths, measured=measured)
     # Fenster ehrlich machen: die Importe schreiben ihr Zeitfenster in die Meta.
     for meta in (clicks_meta, views_meta):

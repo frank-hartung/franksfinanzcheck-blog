@@ -41,6 +41,15 @@ Du willst heizungs-check? Der erste kalte Montag ist ein schlechter Termin für 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Ein Heizungs-Check ist dabei keine Bastelanleitung für Gasgeräte. Er trennt sauber: **beobachten und einfache Handgriffe selbst erledigen, sicherheitsrelevante Technik dem Fachbetrieb überlassen**.
+### Dein Schnellstart
+
+Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche. Sieh nach Wasser. Teste die Thermostate. Notiere den Druck. Vergleiche ihn mit der Anleitung. Ändere nur eine Einstellung. Warte danach einige Tage. So erkennst du die Wirkung. Bei Gasgeruch gilt: nicht weiterprüfen. Verlasse das Gebäude. Hole Hilfe von draußen. Auch bei starkem Druckverlust brauchst du Fachhilfe. Ein sauberer Check spart Zeit. Er ersetzt keine Wartung. Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
+
+
+#### Prüfe in drei Schritten
+
+Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg. Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffällige Werte. Prüfe sie später erneut. So vermeidest du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger. Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
+
 
 ## Das Wichtigste in Kürze
 

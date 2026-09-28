@@ -149,7 +149,7 @@ jobs:
           python3 scripts/governance_gate.py --emit cwv --report CWV-REPORT.md \
             --log /tmp/cwv.log --exit "$rc"
 
-      - name: Secrets-Wache mit Live-Probe (Pinterest/Mastodon/KI/Umami/Awin)
+      - name: Secrets-Wache mit Live-Probe (Pinterest/Mastodon/KI/Umami)
         id: secrets
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -162,8 +162,6 @@ jobs:
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
           UMAMI_API_TOKEN: ${{ secrets.UMAMI_API_TOKEN }}
-          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
-          AWIN_PUBLISHER_ID: ${{ secrets.AWIN_PUBLISHER_ID || vars.AWIN_PUBLISHER_ID }}
         run: |
           set +e
           python3 scripts/secrets_age_guard.py --verify | tee /tmp/secrets.log
@@ -238,7 +236,11 @@ jobs:
           python3 scripts/governance_gate.py --emit clicks --report CLICK-REPORT.md \
             --log /tmp/clicks.log --exit "$rc"
 
-      - name: Awin-Transaktionen per API laden (Publisher API, CSV bleibt Fallback)
+      # Awin ist laut data/monetization.yaml kein aktives Partnerprogramm.
+      # Der API-Import bleibt als historisches Werkzeug im Repository, wird aber
+      # im Premium-Lauf bewusst nicht aufgerufen.
+      - name: Awin-Transaktionen per API laden (deaktiviert – kein Awin-Partnerprogramm)
+        if: ${{ false }}
         id: awin_fetch
         # Offizieller Publisher-Endpunkt GET /publishers/{id}/transactions/ –
         # ersetzt den manuellen CSV-Export nicht, nur die Regelmäßigkeit:
