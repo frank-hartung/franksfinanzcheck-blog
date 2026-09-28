@@ -87,7 +87,7 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 | Teaser-Karte | `.post-entry` | Hover-Lift −2…−5px + Ebenen-2-Schatten, reduced-motion → aus |
 | Hero-Section | `.first-entry.home-info`, `.ff-home-ctas`, `.ff-btn-*`, `.ff-trust-row`, `.ff-trust-pill` | Gradient-Mesh, 8.2:1 Kontrast, weiche Schatten |
 | Pinterest-CTA | `.ff-pinterest-cta`, `.ff-pinterest-cta-btn` | Modernes Bento-Card-Layout mit Pinterest-Rot (#E60023) |
-| Pillar-Cluster | `.ff-pc-cluster/-head/-title/-count`, `.ff-pc-grid`, `.ff-pc-card/__body/__title/__desc/__cta` | Light+Dark definiert (zzz-agency-polish.css §7) |
+| Pillar-Cluster | `.ff-pc-cluster/-head/-title/-count`, `.ff-pc-grid`, `.ff-pc-card/__body/__title/__desc/__cta` | Light+Dark definiert (zzz-agency-polish.css §10; nachgeliefert 28.09.2026 – Kopf-Meta/Brotkrumen/Badge, Karten-Raster & Chips komplett) |
 | Ratgeber-Zentrale | `.ff-pillar-hero`, `.ff-pillar-grid`, `.ff-pillar-card`, `.ff-spar-matrix-section`, `.ff-method-grid`, `.ff-faq-list` | Volles Agentur-Layout (/pillar/) mit Dark-Mode-Unterstützung |
 | Vertrauens-Box | `.ff-trust-box`, `.ff-trust-box__avatar-wrap`, `.ff-trust-box__img`, `.ff-trust-box__badge` | E-E-A-T-Autorbox am Artikelende mit Verifizierungs-Badge |
 | Praxis-Marker | `.ff-experience-box`, `.ff-experience-box__tag`, `.ff-experience-box__text` | Bernstein-Akzent, persönlicher Testbericht-Marker |

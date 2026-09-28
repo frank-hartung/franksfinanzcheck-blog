@@ -16,7 +16,7 @@
   <header class="post-header">
     {{- /* DESIGN-SKILLS-ROLLOUT 12.09.2026: Inline-Styles auf semantische
            .ff-pc-*-Klassen umgestellt (Dark-Mode-fähig, siehe
-           assets/css/extended/zzz-agency-polish.css Abschnitt 7).
+           assets/css/extended/zzz-agency-polish.css Abschnitt 10).
            Light-Optik 1:1 übernommen. */ -}}
     <nav class="breadcrumbs ff-pc-breadcrumbs" aria-label="Breadcrumb">
       <a href="{{ "/" | relURL }}">Start</a>
@@ -39,9 +39,15 @@
              (08.08.2026) – die 6 Ratgeber wirkten damit dauerhaft
              „veraltet“, obwohl sie am 31.08.2026 überarbeitet wurden
              (lastmod-Frontmatter, auch Schema/Sitemap-Stand). Jetzt das
-             redaktionelle Frische-Datum aus article_dates.html. */ -}}
+             redaktionelle Frische-Datum aus article_dates.html.
+             FORMAT-REPARATUR 28.09.2026: Es stand `.Format "2. Januar 2006"`
+             hier – „Januar“ ist im Go-Layout KEIN Monats-Token, sondern
+             Literaltext. Jedes Datum erschien deshalb als „.. Januar ..“
+             (Live-Befund: „Stand: 28. Januar 2026“ statt „28. September
+             2026“). Korrekt: Referenz-Monat „January“ + `time.Format`,
+             das die Monatsnamen lokalisiert (Site-Sprache de). */ -}}
       {{- $ffPillarStand := partial "article_dates.html" . -}}
-      <span>📅 Stand: {{ $ffPillarStand.modified.Format "2. Januar 2006" }}</span>
+      <span>📅 Stand: {{ time.Format "2. January 2006" $ffPillarStand.modified }}</span>
       <span>·</span>
       <span>⏱️ {{ .ReadingTime }} Min. Lesezeit</span>
       <span>·</span>
