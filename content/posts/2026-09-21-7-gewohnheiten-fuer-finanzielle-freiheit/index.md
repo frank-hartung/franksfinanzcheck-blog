@@ -472,5 +472,3 @@ Oft schon nach wenigen Wochen – vor allem bei Budgetklarheit und automatisiert
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient nur der allgemeinen Information. Er ist keine Anlage-, Rechts- oder Steuerberatung. Prüfe Konditionen und Bedingungen immer beim Anbieter._

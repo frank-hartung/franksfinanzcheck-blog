@@ -7,7 +7,7 @@
  *
  * DREI TYPEN (Konkurrenz-Parität Finanztip /rechner/, in Franks
  * Kern-Nischen):
- *   notgroschen    – 3–6 Netto-Monatsgehälter Ziel + Sparraten
+ *   notgroschen    – 3–6 Monatsausgaben als Ziel + Sparraten
  *   strom-abschlag – fairer Monatsabschlag aus Verbrauch + Preisen
  *   dsl-effektiv   – Effektivpreis über die Laufzeit inkl. Bonus
  *
@@ -58,14 +58,14 @@
 
   var LOGIK = {
 
-    /** Notgroschen: Ziel = Reserve × Nettoeinkommen, Lücke, Sparraten. */
+    /** Notgroschen: Ziel = Reserve × notwendige Monatsausgaben, Lücke, Sparraten. */
     notgroschen: function (w) {
-      var einkommen = zuZahl(w.einkommen);
+      var ausgaben = zuZahl(w.ausgaben);
       var erspartes = zuZahl(w.erspartes);
       var reserve = zuZahl(w.reserve);
-      if (!(einkommen > 0) || !(reserve >= 1)) return null;
+      if (!(ausgaben > 0) || !(reserve >= 1)) return null;
       if (!(erspartes >= 0)) erspartes = 0;
-      var ziel = reserve * einkommen;
+      var ziel = reserve * ausgaben;
       var luecke = Math.max(0, ziel - erspartes);
       return {
         ziel: ziel,
@@ -166,7 +166,7 @@
     }
     if (typ === 'notgroschen') {
       var reserveAnzeige = zuZahl(werteLesen(container).reserve);
-      ziel.appendChild(zeile('Dein Notgroschen-Ziel (' + zahl(reserveAnzeige) + ' Monatsgehälter)', euro(erg.ziel), true));
+      ziel.appendChild(zeile('Dein Notgroschen-Ziel (' + zahl(reserveAnzeige) + ' Monatsausgaben)', euro(erg.ziel), true));
       if (erg.fertig) {
         var glueck = document.createElement('p');
         glueck.className = 'ff-rechner__hinweis ff-rechner__hinweis--gut';

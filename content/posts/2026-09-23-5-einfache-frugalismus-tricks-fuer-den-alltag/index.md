@@ -294,6 +294,8 @@ Wenn du nicht nur lesen, sondern starten willst, dann so:
 
 Mehr brauchst du für einen guten Start oft nicht. Wichtig ist nur, dass du nicht nach drei Tagen wieder alles vergisst, sondern den einfachsten Trick direkt zur Gewohnheit machst.
 
+Lege außerdem einen festen Monatsmoment fest, an dem du kurz nachsiehst: Was hat funktioniert, wo war die Regel zu eng und welcher Betrag ist tatsächlich übrig geblieben? Zehn ruhige Minuten reichen. Dieser Rückblick verhindert, dass aus Frugalismus ein kurzfristiges Projekt wird, und gibt dir einen sachlichen Grund, die Sparrate später vorsichtig zu erhöhen.
+
 ## Wo Frugalismus besonders schnell Wirkung zeigt
 
 Meiner Erfahrung nach vor allem hier:
@@ -343,5 +345,3 @@ Zu radikal zu starten und alles nur über Motivation statt über Routinen lösen
 👉 **Jetzt vergleichen und sparen:** [**→ Tagesgeld der C24 Bank eröffnen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

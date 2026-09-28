@@ -42,6 +42,13 @@ Heizkosten sinken selten durch einen spektakulären Trick. Meist gewinnt die nü
 
 Du musst dafür nicht frieren. Du musst nur aufhören, nach Gefühl an fünf Thermostaten zu drehen und am Monatsende den Abschlag mit den echten Kosten zu verwechseln.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Das Wichtigste in Kürze
 
 

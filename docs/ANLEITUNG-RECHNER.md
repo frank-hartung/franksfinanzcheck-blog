@@ -62,9 +62,9 @@ Finanztips Breite kopieren):
 ```bash
 node -e "
 eval(require('fs').readFileSync('static/premium/ff-rechner.js','utf8'));
-const r = globalThis.FFRechnerLogik.notgroschen({einkommen:'2.500',erspartes:'4.000',reserve:'3'});
+const r = globalThis.FFRechnerLogik.notgroschen({ausgaben:'1.800',erspartes:'4.000',reserve:'3'});
 console.log(r.ziel, r.luecke, r.rate12.toFixed(2));
-// erwartet: 7500 3500 291.67
+// erwartet: 5400 1400 116.67
 "
 ```
 
@@ -72,7 +72,7 @@ Verifizierte Referenzwerte (28.09.2026):
 
 | Rechner | Eingaben | Erwartung |
 |---|---|---|
-| notgroschen | 2.500 € netto, 4.000 € erspart, 3× | Ziel 7.500 €, Lücke 3.500 €, Rate 291,67 €/Monat |
+| notgroschen | 1.800 € notwendige Monatsausgaben, 4.000 € erspart, 3× | Ziel 5.400 €, Lücke 1.400 €, Rate 116,67 €/Monat |
 | strom-abschlag | 4.000 kWh, 37,0 ct, 12 €, 100 € aktuell | Jahreskosten 1.624 €, fair 135,33 €, Ampel „Nachzahlung" |
 | dsl-effektiv | 40 €/Monat, 24 Mon., 150 € Bonus, 40 € Kosten | Gesamt 850 €, Effektiv 35,42 €/Monat |
 

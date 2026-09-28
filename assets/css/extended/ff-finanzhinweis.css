@@ -1,0 +1,19 @@
+/* Zentraler Fachhinweis unter der Vertrauensbox – bewusst ruhig statt Warnbanner. */
+.ff-finanzhinweis {
+  margin: 14px 0 24px;
+  padding: 11px 14px;
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--ff-radius-sm, 8px) var(--ff-radius-sm, 8px) 0;
+  background: color-mix(in srgb, var(--entry) 82%, var(--theme));
+  color: var(--secondary);
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.ff-finanzhinweis strong {
+  color: var(--primary);
+}
+
+:root[data-theme="dark"] .ff-finanzhinweis {
+  border-left-color: color-mix(in srgb, var(--ff-emerald-bright, #7FD1B4) 45%, var(--border));
+}

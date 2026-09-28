@@ -118,14 +118,7 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 
 Beispiel: Eine Gerätegruppe zieht unnötig 18 Watt. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-| Dauerlast | Verbrauch pro Jahr | Kosten bei 0,37 €/kWh |
-|---:|---:|---:|
-| 1 Watt | 8,76 kWh | 3,24 € |
-| 5 Watt | 43,8 kWh | 16,21 € |
-| 10 Watt | 87,6 kWh | 32,41 € |
-| 20 Watt | 175,2 kWh | 64,82 € |
-
-So wird aus „zieht bestimmt viel“ eine belastbare Entscheidung.
+Für die Einordnung reicht ein konkreter Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt ungefähr 32 €. Miss aber nicht jeden Stecker einzeln, bevor du die großen Gruppen geprüft hast. So wird aus „zieht bestimmt viel“ eine belastbare Entscheidung.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 

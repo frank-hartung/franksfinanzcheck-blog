@@ -42,6 +42,13 @@ Wer seine Gasrechnung senken senken will, sollte im Spätsommer handeln. Im Spä
 
 Die größten Fehler liegen selten an einer einzelnen Schraube. Sie entstehen, wenn **Preis, Verbrauch und Abschlag** durcheinandergeraten.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Starte mit einem kleinen Check
 
 Nimm dir heute zehn ruhige Minuten. Sieh auf die letzte Rechnung und schreibe Verbrauch, Preis je kWh und festen Preis auf. Mach danach ein Foto vom Zähler. Dieses Foto gibt dir einen klaren Startwert für den Herbst. Du musst dafür nichts an der Heizung ändern.
@@ -53,7 +60,7 @@ Zum Schluss geh einmal durch die Wohnung. Heizkörper sollten frei sein. Ein Vor
 ## Das Wichtigste in Kürze
 
 
-Gerade wenn du deine Gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Der Check vor der Heizperiode lohnt sich besonders: Bei 18.000 kWh Jahresverbrauch verändern 1 Cent pro kWh die Rechnung bereits um 180 € im Jahr – noch bevor der Grundpreis dazukommt.
 
 - Ein niedriger Abschlag ist keine Ersparnis, sondern nur eine kleinere Vorauszahlung.
 - Vergleiche Gastarife mit deinem echten Jahresverbrauch und dem Gesamtpreis.
@@ -236,7 +243,7 @@ Diese Reihenfolge schützt vor Aktionismus. Wer gleichzeitig Thermostate tauscht
 Prüfe die Liste nach der ersten kalten Woche erneut. Manche Fehler zeigen sich erst, wenn die Anlage mehrere Tage unter echter Last arbeitet.
 
 
-Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu 15 % senken.
+Die richtige Reihenfolge spart dir vor allem Fehlentscheidungen: Erst wenn Verbrauch, Preis und Abschläge getrennt vorliegen, zeigt sich, ob ein Tarifvergleich, ein höherer Abschlag oder eine technische Prüfung sinnvoll ist.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

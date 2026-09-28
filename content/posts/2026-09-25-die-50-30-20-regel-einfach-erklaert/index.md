@@ -63,14 +63,7 @@ Die Idee ist sehr einfach:
 Von deinem monatlichen Netto bekommt jeder Euro möglichst früh eine Aufgabe.
 
 ### 50 % für notwendige Ausgaben
-Dazu zählen Dinge, die du wirklich brauchst:
-
-- Miete oder Kreditrate
-- Strom, Gas, Wasser
-- Lebensmittel des Grundbedarfs
-- Internet und Handy
-- notwendige Versicherungen
-- Arbeitsweg oder grundlegende Mobilität
+In diesen Topf gehört nur, was deinen Alltag verlässlich am Laufen hält: Wohnen und Energie, Grundversorgung mit Lebensmitteln, notwendige Mobilität, Pflichtversicherungen sowie der Zugang zu Kommunikation. Prüfe bei jedem Posten kurz: Würde eine Streichung in diesem Monat ein echtes Problem schaffen? Wenn nicht, ist er eher ein Wunsch als eine Notwendigkeit.
 
 ### 30 % für Wünsche
 Das ist dein bewusster Lifestyle-Teil:
@@ -320,6 +313,8 @@ Wunschbudget bewusst festlegen.
 
 Mehr brauchst du für den Einstieg oft nicht. Der eigentliche Fortschritt entsteht dann nicht durch Perfektion, sondern durch Wiederholung Monat für Monat. Genau diese ruhige Wiederholung macht aus einem Vorsatz ein tragfähiges Geldsystem.
 
+Wenn sich die Verteilung im ersten Monat noch falsch anfühlt, notiere die Abweichung statt sie als Scheitern zu werten. Ein zu hoher Pflichtblock ist eine Information: Vielleicht braucht es einen Vertragscheck, einen anderen Wohnkostenrahmen oder zunächst nur eine kleinere Sparquote. Die Regel soll dein Budget sichtbar machen, nicht Druck erzeugen.
+
 > 💶 **Spar-Tipp zwischendurch:** Die 50-30-20-Regel wird viel leichter, wenn dein Spargeld nicht auf dem Girokonto herumliegt. Ein separates Tagesgeldkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
 ## Fazit: Die 50-30-20-Regel ist simpel – und genau das ist ihre Stärke
@@ -355,5 +350,3 @@ Sparen nur mit dem Rest machen. Wenn du nicht zuerst planst, bleibt am Ende oft 
 👉 **Jetzt Budget sauber aufstellen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

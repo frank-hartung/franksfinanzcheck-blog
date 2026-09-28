@@ -41,6 +41,13 @@ Eine Nachzahlung hat meist eine nüchterne Ursache: mehr verbraucht, teurer beza
 
 Der Spätsommer ist dafür praktisch. Du hast noch Zeit, Abschlag und Tarif vor den verbrauchsstarken Monaten zu korrigieren.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Gastarife vergleichen**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Dein Check in zehn Minuten
 
 Lege Rechnung, Vertrag und ein Handy für ein Foto bereit. Schau zuerst auf den Zeitraum und auf beide Zählerstände. Dann notiere Verbrauch, Preis je kWh und festen Preis im Jahr. Diese fünf Werte zeigen dir meist schon, warum die Summe höher oder niedriger ist als im Vorjahr.
@@ -56,7 +63,7 @@ Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer B
 ## Das Wichtigste in Kürze
 
 
-Gerade wenn du deine Gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
 
 - Prüfe Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge getrennt.
 - Eine Abschlagssenkung spart nichts; sie kann eine Nachzahlung vergrößern.

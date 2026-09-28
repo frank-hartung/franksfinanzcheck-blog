@@ -10,6 +10,9 @@
 {{- partial "ff_quellen_box.html" . }}
 {{- /* E-E-A-T: Vertrauens-Box (Autor, Qualifikation, Transparenz) */ -}}
 {{- partial "trust_box.html" . }}
+{{- /* Zentraler Fachhinweis: verhindert Boilerplate-Duplikate im Artikelbestand
+       und hält den Hinweis überall sichtbar gleich. */ -}}
+{{- partial "ff_finanzhinweis.html" . }}
 {{- /* Pin-It-Button sitzt im Single-Layout (Float + Footer) – hier kein
        dritter roter CTA, sonst Conversion-Kannibalisierung. */ -}}
 

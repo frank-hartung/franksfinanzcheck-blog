@@ -44,11 +44,18 @@ Du willst sicher heizen? Gaspreisgarantien sind keine Flatrate fürs warme Wohnz
 
 Trotzdem kann die Garantie sinnvoll sein: nicht als Wette auf steigende Preise, sondern als **Obergrenze für einen vertraglich definierten Teil deiner Kosten**.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Gastarife vergleichen**](/go/gas/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Dein Plan für heute
 
 Nimm Vertrag und letzte Rechnung zur Hand. Suche den Preis je kWh und den festen Preis im Jahr. Schreibe beide Werte auf ein Blatt. Markiere auch das Datum, bis zu dem dein Preis geschützt ist. So siehst du schnell, ob ein Brief des Anbieters wirklich etwas am Vertrag ändert.
 
-Dann notiere deinen Verbrauch im Jahr. Rechne mit diesem Wert zwei Angebote durch. Lass den Bonus erst einmal weg. Ein ruhiger Blick auf den Preis im zweiten Jahr ist oft mehr wert als ein großer Rabatt im ersten Jahr. Bewahre den Vergleich mit Datum ab.
+Dann notiere deinen Verbrauch im Jahr. Rechne mit diesem Wert zwei Angebote durch. Lass den Bonus erst einmal weg. Bei 18.000 kWh machen schon 0,4 Cent pro kWh im Jahr 72 € aus – genau deshalb lohnt sich der Blick auf die zweite Nachkommastelle. Ein ruhiger Blick auf den Preis im zweiten Jahr ist oft mehr wert als ein großer Rabatt im ersten Jahr. Bewahre den Vergleich mit Datum ab.
 
 Setze zuletzt zwei Erinnerungen im Kalender. Eine passt vor das Ende des Schutzes. Die andere passt vor die Frist zum Kündigen. Damit entscheidest du mit Zeit und nicht erst, wenn ein neuer Preis schon gilt.
 

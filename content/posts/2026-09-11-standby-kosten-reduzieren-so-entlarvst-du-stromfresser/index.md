@@ -43,6 +43,13 @@ Du willst standby kosten? Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn G
 
 Die Lösung ist nicht, jeden Stecker täglich zu ziehen. Du brauchst eine kurze Messrunde und klare Ausnahmen. Dann schaltest du nur dort ab, wo Komfort und Technik nicht leiden.
 
+
+
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 ## Das Wichtigste in Kürze
 
 - Unterscheide **Standby**, **Netzwerk-Bereitschaft** und notwendigen **Dauerbetrieb**.

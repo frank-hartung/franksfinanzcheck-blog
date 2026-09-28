@@ -53,9 +53,10 @@
   <form novalidate>
     <div class="ff-rechner__grid">
       <div class="ff-rechner__feld">
-        <label for="{{ $id }}-einkommen">Nettoeinkommen pro Monat <span aria-hidden="true">*</span></label>
-        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-einkommen"
-               data-feld="einkommen" placeholder="z. B. 2.500" required>
+        <label for="{{ $id }}-ausgaben">Notwendige Ausgaben pro Monat <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-ausgaben"
+               data-feld="ausgaben" placeholder="z. B. 1.800" required>
+        <p class="ff-rechner__hinweis-klein">Zum Beispiel Wohnen, Lebensmittel, Mobilität, Versicherungen und unvermeidbare Verträge – nicht dein gesamtes Nettoeinkommen.</p>
       </div>
       <div class="ff-rechner__feld">
         <label for="{{ $id }}-erspartes">Bereits Erspartes</label>
@@ -63,7 +64,7 @@
                data-feld="erspartes" placeholder="z. B. 4.000">
       </div>
       <div class="ff-rechner__feld ff-rechner__feld--voll">
-        <label for="{{ $id }}-reserve">Monatsreserve (Faustregel: 3–6 Gehälter) – aktuell: <strong data-ff-rechner-slider-wert>3×</strong></label>
+        <label for="{{ $id }}-reserve">Reserve-Monate (Faustregel: 3–6 Monatsausgaben) – aktuell: <strong data-ff-rechner-slider-wert>3×</strong></label>
         <input type="range" min="3" max="6" step="1" value="3" id="{{ $id }}-reserve" data-feld="reserve">
       </div>
     </div>
@@ -135,7 +136,7 @@
   <div class="ff-rechner__methodik">
     <p class="ff-rechner__methodik-titel">So rechnet dieser Rechner</p>
     {{- if eq $typ "notgroschen" }}
-    <p>Zielbetrag = Monatsreserve × Nettoeinkommen. Fehlbetrag = Ziel − Erspartes. Sparrate = Fehlbetrag ÷ Monate (12 bzw. 24). Die Faustregel „3 bis 6 Netto-Monatsgehälter" ist der übliche Verbraucher-Rahmen für ungeplante Ausgaben – kein Gesetz: Mit stabilem Einkommen und wenig Fixkosten reicht eher das Minimum.</p>
+    <p>Zielbetrag = Reserve-Monate × notwendige Monatsausgaben. Fehlbetrag = Ziel − Erspartes. Sparrate = Fehlbetrag ÷ Monate (12 bzw. 24). Drei bis sechs Monatsausgaben sind ein praktischer Rahmen, kein Gesetz: Bei sicherem Einkommen und niedrigen Fixkosten passt oft eher das Minimum; bei schwankendem Einkommen oder mehr Verantwortung eher ein höherer Wert.</p>
     {{- else if eq $typ "strom-abschlag" }}
     <p>Jahreskosten = (Jahresverbrauch × Arbeitspreis ÷ 100) + (Grundpreis × 12). Fairer Abschlag = Jahreskosten ÷ 12. Liegt dein aktueller Abschlag über 15 % darunter, droht eine Nachzahlung; über 15 % darüber, parkst du Geld zinslos beim Versorger.</p>
     {{- else if eq $typ "dsl-effektiv" }}
