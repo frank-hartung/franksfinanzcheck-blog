@@ -307,8 +307,26 @@ jobs:
             exit 0
           fi
 
-          # Geparkter Kanal (Domain-Sperre): Reihenfolge erklären und Takt achten.
+          # Geparkter Kanal (Domain-Sperre): Die Domain-Freigabe besitzt den
+          # Vorgang, nicht der Token. Ein früheres pinterest-token-Ticket muss
+          # deshalb geschlossen werden, sobald der Bot-Watchdog das dedizierte
+          # Fach-Ticket angelegt hat. Der Marker-Fallback ist absichtlich dabei:
+          # eingeschränkte GitHub-App-Tokens können Labels verlieren, niemals
+          # aber den Alarm-Router-Marker im Body.
           if [ "${PARKED:-0}" = "1" ]; then
+            PARKED_URL="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+              --label "pinterest-parked" --limit 100 --json url --jq '.[0].url' 2>/dev/null || true)"
+            if [ -z "$PARKED_URL" ]; then
+              PARKED_URL="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+                --limit 100 --json url,body --jq '.[] | select(.body | contains("<!-- alarm-router: pinterest-parked -->")) | .url' \
+                2>/dev/null | head -n1 || true)"
+            fi
+            if [ -n "$OPEN" ] && [ -n "$PARKED_URL" ]; then
+              gh issue close "$OPEN" --repo "$GITHUB_REPOSITORY" --reason completed \
+                --comment "⏸️ Der Kanal ist wegen der Domain-Sperre geparkt. Der verbindliche menschliche Vorgang ist [das Fach-Ticket]($PARKED_URL): erst Domain freigeben, dann den Token neu autorisieren. Dieses ältere Token-Ticket wird geschlossen, damit kein widersprüchlicher Auftrag offen bleibt."
+              echo "⏸️ Altes Token-Ticket an den Kanal pinterest-parked übergeben und geschlossen."
+              exit 0
+            fi
             EXTRA=""
             EXTRA="$EXTRA"$'\n'"### ⏸️ Kanal geparkt – Reihenfolge beachten"$'\n'
             EXTRA="$EXTRA""Pinterest hat \`franksfinanzcheck.de\` gesperrt (\`data/pinterest_domain_block.json\`)."$'\n'

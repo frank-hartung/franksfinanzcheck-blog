@@ -41,6 +41,14 @@ Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach beginnt die eigent
 
 Ganz oben steht nicht automatisch der günstigste Vertrag. Dieser Leitfaden führt dich in zehn Minuten von der Jahresabrechnung bis zur belastbaren Auswahl.
 
+## So startest du ohne Stress
+
+Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den Preis je kWh und den festen Preis im Jahr. Mehr brauchst du für den ersten Vergleich nicht. Mit diesen drei Werten erkennst du rasch, ob ein Angebot wirklich zu deinem Haushalt passt.
+
+Sieh dir erst den Preis ohne Bonus an. Prüfe danach die Frist zum Kündigen und die Laufzeit. Lies auch nach, was der Preis-Schutz abdeckt. Ein gutes Angebot bleibt klar, wenn du den Bonus weglässt. Es passt zu deinem Verbrauch und lässt dir genug Zeit für den nächsten Check.
+
+Mach ein Foto vom Zählerstand, wenn du wechselst. Speichere das Angebot und die Bestätigung. Dann kannst du später Preis, Start und Abschlag leicht prüfen. Das spart Rückfragen, falls ein Wert nicht zu deinen Unterlagen passt.
+
 ## Das Wichtigste in Kürze – Preisgarantie Gas 2026
 
 - Nutze den Jahresverbrauch aus der letzten Rechnung, keine grobe Haushalts-Schätzung.

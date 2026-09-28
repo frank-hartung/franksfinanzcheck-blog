@@ -41,6 +41,18 @@ Eine Nachzahlung hat meist eine nüchterne Ursache: mehr verbraucht, teurer beza
 
 Der Spätsommer ist dafür praktisch. Du hast noch Zeit, Abschlag und Tarif vor den verbrauchsstarken Monaten zu korrigieren.
 
+## Dein Check in zehn Minuten
+
+Lege Rechnung, Vertrag und ein Handy für ein Foto bereit. Schau zuerst auf den Zeitraum und auf beide Zählerstände. Dann notiere Verbrauch, Preis je kWh und festen Preis im Jahr. Diese fünf Werte zeigen dir meist schon, warum die Summe höher oder niedriger ist als im Vorjahr.
+
+Hast du einen eigenen Vertrag, rechnest du den Preis für ein Jahr mit deinem Verbrauch. Vergleiche diesen Wert ohne Bonus mit neuen Angeboten. Bei einer Heizung im Haus fragst du statt eines neuen Anbieters nach der Abrechnung und nach den Werten für deine Wohnung.
+
+Mach heute ein Foto vom Zähler und speichere es mit dem Datum. Wiederhole das einmal im Monat. So findest du Fehler oder einen Mehrverbrauch früh. Bei Gasgeruch, Wasser oder einem Fehler am Gerät rufst du Hilfe und änderst nichts selbst.
+
+Wenn die Summe hoch wirkt, bleib bei diesen fünf Werten. Erst kommt der Verbrauch. Dann kommt der Preis. Danach siehst du auf die schon gezahlten Raten. So suchst du nicht an der falschen Stelle. Ein hoher Abschlag ist kein hoher Preis. Er kann aber die Summe im Monat ändern.
+
+Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer Blick auf den Vertrag reichen für den Start. Ruf erst beim Anbieter an, wenn du weißt, welche Zahl nicht passt. So bleibt das Gespräch klar und du musst nicht raten.
+
 ## Das Wichtigste in Kürze
 
 

@@ -51,6 +51,16 @@ Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf 
 Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kosten. Drittens: Vergleiche mit einer konkreten Alternative. Behalte den Beleg. Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffällige Werte. Prüfe sie später erneut. So vermeidest du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger. Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
 
+## Ein ruhiger Start vor dem ersten Frost
+
+Geh Raum für Raum durch die Wohnung. Räume Vorhänge und Möbel vor den Heizkörpern weg. Dreh den Thermostat einmal vorsichtig hin und her. Hörst du Gluckern oder bleibt ein Heizkörper oben kalt, notiere das. Ein Foto vom Manometer und vom Zähler macht den Start leicht.
+
+Ändere nicht viele Werte auf einmal. Teste erst die Heizzeit oder einen Thermostat. Warte ein paar Tage und schau dann noch einmal hin. So weißt du, was geholfen hat. Du musst weder Brenner noch Leitungen selbst anfassen, um gute Hinweise zu finden.
+
+Bei Gasgeruch, Wasser, starkem Druckverlust oder einem Fehler am Gerät ist Schluss. Öffne Fenster, geh aus dem Haus und ruf Hilfe von draußen. Für alles andere reicht oft eine kurze Liste für den Fachbetrieb oder die Hausverwaltung.
+
+Mach dir nach dem Rundgang drei kurze Notizen: Raum, Problem, Tag. So kann der Fachbetrieb rasch sehen, was los ist. Das spart einen zweiten Termin und macht deinen Anruf klarer.
+
 ## Das Wichtigste in Kürze
 
 - Starte vor der Heizperiode einen kurzen Probelauf.

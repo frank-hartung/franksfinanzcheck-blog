@@ -145,7 +145,8 @@ SECRETS = {
 LEVELS = ("red", "amber", "info")
 
 # Befunde, die NIEMALS ein Governance-Issue auslösen sollen (nur Hinweis).
-INFO_ONLY_CODES = {"not_configured", "not_used", "untracked_optional", "probe_skipped"}
+INFO_ONLY_CODES = {"not_configured", "not_used", "untracked_optional", "probe_skipped",
+                   "channel_parked"}
 
 # Lebenszyklus-Befunde des Pinterest-Zugangs (Quelle: scripts/pinterest_token.py).
 # Sie beantworten die Frage, die #206 wochenlang offen ließ: Läuft der Kanal nur
@@ -760,17 +761,62 @@ def pinterest_lifecycle_findings(health, token_dead=False):
     return out
 
 
+# ------------------------------------------------------------------ Kanalzustand
+
+def pinterest_channel_parked(path=None):
+    """Aktive Pinterest-Domain-Sperre oder ``None``.
+
+    Die Domain-Sperre ist ein bewusst gesetzter Kill-Switch: Es dürfen keine
+    Pins auf die gesperrte Domain gehen, bis der Betreiber die Freigabe
+    bestätigt. Der Bot-Watchdog besitzt dafür den Kanal `pinterest-parked`.
+    Ein abgelehnter Access-Token ist in diesem Zustand kein zweiter,
+    unabhängiger Produktionsnotfall und darf das zentrale Governance-Issue
+    nicht dauerhaft offenhalten. Die Datei wird absichtlich nicht nach Alter
+    verworfen – aufheben darf nur der explizite `--domain-unblock`-Weg.
+    """
+    path = path or os.path.join(BLOG_DIR, "data", "pinterest_domain_block.json")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            doc = json.load(fh)
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(doc, dict):
+        return None
+    reason = str(doc.get("reason") or "Pinterest-Domain-Sperre aktiv").strip()
+    return {"since": str(doc.get("since") or "unbekannt")[:32], "reason": reason[:220]}
+
+
+def parked_pinterest_finding(parked):
+    """Transparenter Hinweis statt Doppelalarm für den geparkten Kanal."""
+    return {
+        "level": "info", "code": "channel_parked", "var": "PINTEREST_ACCESS_TOKEN",
+        "msg": ("Pinterest-Kanal ist seit " + parked["since"] +
+                " bewusst geparkt (Domain-Sperre; Ticket-Kanal `pinterest-parked`). "
+                "Token-Erneuerung wird erst nach bestätigter Domain-Freigabe erwartet."),
+    }
+
+
+# ------------------------------------------------------------------ Audit
+
 def audit(verification=None, live_check_available=False, pin_health=None):
     verification = verification or {}
     state, state_warning = _read_state_file()
     entries = state.get("entries") or {}
     findings = []
     summary = []
+    parked = pinterest_channel_parked()
     for var, meta in SECRETS.items():
         status, proof, finding = classify(var, meta, entries.get(var) or {},
                                           today=_today(),
                                           verification=verification.get(var),
                                           live_check_available=live_check_available)
+        # A parked channel has a dedicated human escalation path. Keep its
+        # state visible, but do not make a known consequence (an expired or
+        # absent token) reopen the all-up governance report every week.
+        if parked and var == "PINTEREST_ACCESS_TOKEN" and finding and \
+                finding.get("code") in {"dead", "missing", "stale", "aging", "untracked"}:
+            status, proof = "GEPAUSIERT (Domain-Sperre)", "Kanal geparkt"
+            finding = parked_pinterest_finding(parked)
         summary.append((var, status, proof))
         if finding:
             findings.append(finding)
@@ -1085,6 +1131,21 @@ def _selftest():
             failures.append("ISO-Datetime nicht parst")
         if _parse_date("quatsch") is not None or _parse_date(None) is not None:
             failures.append("Mülldatum parst zu etwas")
+        # --- Geparkter Pinterest-Kanal: Domain-Sperre besitzt die Eskalation;
+        # der Token darf nicht zusätzlich Governance rot halten.
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            parked_file = os.path.join(td, "pinterest_domain_block.json")
+            with open(parked_file, "w", encoding="utf-8") as fh:
+                json.dump({"since": "2026-08-27T13:58:16Z", "reason": "Domain gesperrt"}, fh)
+            parked = pinterest_channel_parked(parked_file)
+            if not parked or parked.get("since") != "2026-08-27T13:58:16Z":
+                failures.append("Pinterest-Domain-Sperre wird nicht erkannt")
+            pf = parked_pinterest_finding(parked or {"since": "?", "reason": "?"})
+            if pf.get("level") != "info" or pf.get("code") not in INFO_ONLY_CODES:
+                failures.append("geparkter Pinterest-Kanal eskaliert falsch")
+            if pinterest_channel_parked(os.path.join(td, "fehlt.json")) is not None:
+                failures.append("fehlende Park-Datei wird fälschlich als Sperre gelesen")
         # --- Report-Format muss vom Governance-Gate parsebar bleiben
         rep = render_report([{"level": "red", "code": "dead", "var": "X", "msg": "tot"}],
                             [("X", "TOT (live-Probe)", "API-Lehnung")])
