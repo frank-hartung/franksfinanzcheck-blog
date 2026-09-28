@@ -8,10 +8,10 @@ tags: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Wi
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung", "Gaspreisgarantie", "Gastarif wechseln"]
+keywords: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten", "Strategien"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Heizkosten sofort senken: 7 wirksame Schritte"
-pin_description: "*Werbung | Raumtemperatur, Lüften, Heizkörper und Tarif: Diese Reihenfolge senkt Heizkosten ohne blindes Frieren und zeigt dir, ob die Maßnahmen wirklich wirken."
+pin_description: "*Werbung | Heizkosten senken ohne Frieren: Mit passenden Temperaturen, richtigem Lüften, freien Heizkörpern und Verbrauchskontrolle sparst du noch in der laufenden Saison. Mehr Spartipps auf FranksFinanzcheck! #heizkostensenken #heizungsparentipps #gasabschlaganpassen"
 ai_generated: false
 inspiration: "Heizkosten senken: Diese 6 To-dos erledigst du am besten JETZT"
 cover:

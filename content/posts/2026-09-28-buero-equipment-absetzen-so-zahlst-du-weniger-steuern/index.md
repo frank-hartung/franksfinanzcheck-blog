@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Büro-Equipment absetzen", "Büro-Equipment", "Absetzen"]
+keywords: ["Büro-Equipment absetzen", "Büro-Equipment", "Büro Equipment absetzen"]
 pin_title: "Büro-Equipment absetzen: So zahlst du weniger Steuern"
 pin_description: "*Werbung | Büro-Equipment absetzen: Spare Steuern mit der richtigen Büroausstattung. Erfahre, welche Kosten absetzbar sind und wie du Werbungskosten im Home-Office… Mehr Spartipps auf FranksFinanzcheck! #bueroequipmentabsetzen #bueroequipment #absetzen"
 ai_generated: true

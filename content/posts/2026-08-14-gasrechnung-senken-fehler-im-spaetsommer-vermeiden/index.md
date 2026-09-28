@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-09-28
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
-description: "Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an der Technik zu riskieren."
+description: "Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an…"
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["Gasrechnung senken", "Heizkosten sparen", "Gastarif wechseln", "Heizung entlüften"]
@@ -18,7 +18,7 @@ kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein 
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie"]
 pin_title: "Gasrechnung senken: 5 Fehler vor der Heizperiode"
-pin_description: "*Werbung | Abschlag, Tarif, Zählerstand und Heizungs-Check: Diese fünf Fehler machen den Winter unnötig teuer. Mit Rechenbeispiel und sicherer Checkliste."
+pin_description: "*Werbung | Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen oder an… Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensenken #gastarifwechseln"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026: 11,93 ct/kWh im Einfamilienhaus"

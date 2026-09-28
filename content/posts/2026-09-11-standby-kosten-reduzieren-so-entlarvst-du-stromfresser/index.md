@@ -1,17 +1,17 @@
 ---
 lastmod: 2026-09-28
 title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
-description: "Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige Funktionen zu stören."
+description: "Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige…"
 date: 2026-09-11T20:00:23Z
 draft: false
 tags: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren"]
+keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Standby-Kosten senken: Diese Gerätegruppen lohnen zuerst"
-pin_description: "*Werbung | Wenige Watt summieren sich. Mit Messplan, Kostenformel und klaren Ausnahmen senkst du Standby-Kosten, ohne Router, OLED-TV oder Smart Home blind abzuschalten."
+pin_description: "*Werbung | Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige… Mehr Spartipps auf FranksFinanzcheck! #standbykosten #stromfresserentlarven #geraeteabschaltensparen"
 ai_generated: false
 inspiration: "Standby-Falle & Co.: Die 5 schlimmsten Stromfresser im Check"
 cover:

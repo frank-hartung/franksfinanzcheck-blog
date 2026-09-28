@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["ETF-Sparplan 2026", "ETF-Sparplan", "Vermögen", "Aufbauen"]
+keywords: ["ETF-Sparplan 2026", "ETF-Sparplan", "ETF Sparplan 2026"]
 pin_title: "ETF-Sparplan 2026: Vermögen aufbauen mit System"
 pin_description: "*Werbung | ETF-Sparplan 2026: So startest du deinen ETF-Sparplan: Erfahre alles über Kosten, die Änderungen 2026 und wie du mit monatlichen Raten ab 25 Euro effektiv… Mehr Spartipps auf FranksFinanzcheck! #etfsparplan2026 #etfsparplan #vermoegen"
 ai_generated: true

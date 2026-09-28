@@ -18,7 +18,7 @@ kurzantwort: "Ein guter Heizungs-Check beginnt vor dem ersten Dauerbetrieb: Prob
 social_posted: true
 keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen", "Günstig durch den Winter", "Gaspreisgarantie"]
 pin_title: "Heizungs-Check vor dem Winter: sicher und systematisch"
-pin_description: "*Werbung | Probelauf, Heizkörper, Thermostate und Verbrauch: Diese Checkliste zeigt, was du selbst prüfen kannst und wann ein Fachbetrieb übernehmen sollte."
+pin_description: "*Werbung | Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb. Mehr Spartipps auf FranksFinanzcheck! #heizungscheck #heizkostensenken #heizungvorbereiten"
 pinwand: "Energie | Heizen & Sparen"
 quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"

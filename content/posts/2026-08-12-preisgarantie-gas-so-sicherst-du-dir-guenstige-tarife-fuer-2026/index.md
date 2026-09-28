@@ -18,7 +18,7 @@ kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und e
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
 pin_title: "Gastarif mit Preisgarantie: Die 10-Minuten-Prüfung"
-pin_description: "*Werbung | Bonus ausblenden, Gesamtpreis rechnen, Garantieumfang lesen: So findest du einen Gastarif, der nicht nur in der Ergebnisliste günstig aussieht."
+pin_description: "*Werbung | Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung. Mehr Spartipps auf FranksFinanzcheck! #preisgarantiegas2026 #gaspreiseabsichern #gasanbieterfestpreis"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026"

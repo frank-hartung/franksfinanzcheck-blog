@@ -12,7 +12,7 @@ author: "Frank Hartung"
 erfahrung: "Ich prüfe Gasrechnungen zeilenweise: Abrechnungszeitraum, Zählerstände, Verbrauch, Preise und Abschläge. Erst danach entscheide ich, ob Tarif, Verbrauch oder Rechnung das Problem ist."
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen", "Gaspreisgarantie"]
 pin_title: "Gasrechnung prüfen: So vermeidest du die nächste Überraschung"
-pin_description: "*Werbung | Verbrauch, Preise, Abschläge und Zählerstände: Dieser Spätsommer-Check zeigt dir, wo eine Gasrechnung teuer wird und was Mieter sowie Eigentümer konkret tun können."
+pin_description: "*Werbung | Gasrechnung verstehen und Nachzahlungen vermeiden: So prüfst du Verbrauch, Preis, Abschläge und Zählerstände vor der Heizperiode – auch als Mieter. Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"
 ai_generated: false
 inspiration: "Heizperiode vorbereiten im Spätsommer"
 cover:
