@@ -54,7 +54,11 @@ Beim Thema Energiediebe stoppen lohnt sich ein genauer Blick auf die Details.
 - Vergleiche bei einem Neukauf den konkreten Verbrauch in kWh, nicht nur die Effizienzklasse.
 - Ein funktionierendes Gerät zu ersetzen lohnt erst, wenn Ersparnis, Kaufpreis und Restlebensdauer zusammenpassen.
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Auf deiner Rechnung steht der Arbeitspreis in Cent pro kWh. Mit genau diesem Wert rechnest du. Der BDEW nennt für 2026 zwar durchschnittlich 37,0 Cent, dein Vertrag kann aber deutlich darüber oder darunter liegen.
+---
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+
 
 ## Wo du zuerst nach Stromfressern suchst
 
