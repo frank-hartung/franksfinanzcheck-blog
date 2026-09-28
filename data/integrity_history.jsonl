@@ -202,3 +202,4 @@
 {"date": "2026-09-28", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["layouts/pillar/list.html", "layouts/pillar/single.html"], "head": "7d260d9"}
 {"date": "2026-09-28", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-09-28", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-09-28", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}

@@ -1355,7 +1355,15 @@ def write_state(result: dict) -> None:
         "checked": result["checked"],
         "healed": result["healed"],
         "healed_count": result["healed_count"],
+        # `content_problems` ist die Laufhistorie: Sie enthält auch Funde, die
+        # derselbe Lauf erfolgreich geheilt hat. Verbraucher dürfen daraus
+        # deshalb keinen offenen Befund ableiten. `unresolved_problems` ist
+        # die kanonische Restmenge und bei EXIT_OK zwingend leer (#446).
         "content_problems": sorted(set(result["findings"]) | set(result["render_problems"])),
+        "unresolved_problems": (
+            sorted(set(result["findings"]) | set(result["render_problems"]))
+            if result["exit_code"] == EXIT_CONTENT else []
+        ),
         "errors": result["errors"],
         "build": result["build"],
     }

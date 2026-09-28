@@ -341,6 +341,24 @@ def check_produktions_status_age(max_age_hours=30):
         return False, f"PRODUKTIONS-STATUS.md {age:.1f}h alt (>{max_age_hours}h)"
     return True, f"{age:.1f}h alt"
 
+def _affiliate_open_problems(data):
+    """Liefert ausschließlich *offene* Affiliate-Funde.
+
+    Alte Zustände besitzen nur ``content_problems``. Dieses Feld protokolliert
+    auch im selben Lauf geheilte Funde und ist bei ``exit_code == 0`` daher
+    ausdrücklich keine Restmenge. Neue Gates schreiben die eindeutige
+    ``unresolved_problems``-Liste. Fail-closed bleibt erhalten: Bei einem
+    roten Legacy-Lauf gilt weiterhin ``content_problems`` als offen.
+    """
+    explicit = data.get("unresolved_problems")
+    if isinstance(explicit, list):
+        return explicit
+    if data.get("exit_code") == 0:
+        return []
+    legacy = data.get("content_problems")
+    return legacy if isinstance(legacy, list) else []
+
+
 def check_affiliate_integrity():
     """Prüft Affiliate-Integrität: Befund aus dem Zustand, Frische belegt.
 
@@ -386,7 +404,10 @@ def check_affiliate_integrity():
                     break
                 except ValueError:
                     continue
-            problems = len(data.get("content_problems") or [])
+            # #446: `content_problems` enthält auch erfolgreich geheilte
+            # Funde. Nur die explizite Restmenge (bzw. bei alten roten
+            # Zuständen deren Legacy-Liste) darf ein P1-Ticket öffnen.
+            problems = len(_affiliate_open_problems(data))
             errors = len(data.get("errors") or [])
             age_text = "Alter unlesbar" if age_h is None else f"{age_h:.0f} h alt"
 
@@ -1180,6 +1201,22 @@ def selftest():
             errors.append(f"check_syntax meldet Fehler im eigenen Repo: {err[:200]}")
     except Exception as e:
         errors.append(f"check_syntax Exception: {e}")
+
+    # Regression #446: Ein grüner Lauf darf seine im selben Lauf geheilten
+    # Funde als Historie behalten, ohne dass der Watchdog sie als offen zählt.
+    try:
+        if _affiliate_open_problems({
+                "exit_code": 0, "content_problems": ["im Lauf geheilt"]}):
+            errors.append("Affiliate-Watchdog wertet geheilten Legacy-Fund als offen")
+        if _affiliate_open_problems({
+                "exit_code": 0, "content_problems": ["historisch"],
+                "unresolved_problems": []}):
+            errors.append("Affiliate-Watchdog ignoriert explizite leere Restmenge nicht")
+        if _affiliate_open_problems({
+                "exit_code": 1, "content_problems": ["offen"]}) != ["offen"]:
+            errors.append("Affiliate-Watchdog verliert roten Legacy-Fund")
+    except Exception as e:
+        errors.append(f"Affiliate-Restmengen-Selftest Exception: {e}")
 
     # Test Pinterest-Kanal (sollte nicht crashen, liefert Findings + Text)
     try:
