@@ -9,6 +9,8 @@
    · Reflow-sichere Micro-Interactions & Hover-Lifts
    · Hochwertige Komponenten: Hero, Trust-Box, Pillar-Hub, Spar-Matrix,
      Erfahrungs-Marker, Callouts, Verwandte Artikel, 404-Page
+   · Pillar-Ratgeber-Cluster (.ff-pc-*, Abschnitt 10): Kopf-Meta,
+     Cluster-Karten-Raster, Themen-Chips – Light & Dark
    · Vollständige Barrierefreiheit mit >= 44px Tap-Zielen & Fokus-Ringen
    ============================================================ */
 
@@ -1763,8 +1765,369 @@ details.toc a {
   .ff-topic-card:hover,
   .ff-pillar-card:hover,
   .ff-related-card:hover,
+  .ff-pc-card:hover,
+  .ff-pc-chip:hover,
   .ff-btn:hover {
     transform: none !important;
+  }
+}
+
+/* ============================================================
+   10. PILLAR-RATGEBER-SEITEN (/pillar/<thema>/) – DAS .ff-pc-*-SYSTEM
+   ============================================================
+   FRANK-BEFUND 28.09.2026 („Alle vertiefenden Artikel in diesem
+   Ratgeber: Der Text wird nicht richtig dargestellt“):
+   Das Ratgeber-Cluster unten auf allen 6 Themenwelten liefert
+   sein Markup über .ff-pc-*-Klassen aus (Design-Skills-Rollout
+   12.09.2026, layouts/pillar/single.html) – aber die im
+   DESIGN.md §5 dokumentierte Definition („Light+Dark definiert
+   (zzz-agency-polish.css)“) wurde nie ausgeliefert: In der
+   Produktions-CSS existierte nicht ein einziger .ff-pc-Selektor
+   (27 Klassen, 0 Regeln; nachgewiesen am gebauten HTML der
+   Ratgeber-Strom-sparen). Folge: Cover-Bilder, Titel, Beschrei-
+   bung und „Jetzt lesen →“ aller Cluster-Karten flossen als ein
+   unformatierter Inline-Textstrom zusammen, die Zähler-Pill und
+   die Themen-Chips erschienen als reine Textwurst. Betroffen:
+   alle 6 Pillar-Seiten + die 404 (Themen-Chips).
+
+   Diese Sektion liefert das Stylesheet-Set nach – ohne eine
+   Zeile Markup zu ändern (die Templates sind korrekt gebaut,
+   es fehlte nur die CSS-Lieferung). Alle Werte folgen dem
+   Design-System: Tokens aus Abschnitt 1, Karten-Optik 1:1 wie
+   .ff-related-card (Abschnitt 4), Chip-Spezifikation wie
+   DESIGN.md §5 („Pill, Smaragd-Soft hell / 12 % Smaragd-Bright
+   dunkel“ – das Dark-Override von --ff-emerald-soft in
+   Abschnitt 1 erledigt das automatisch), H2-Identität des
+   Hauses (Inter + 2px Signalgelb-Unterstreichung), Dark Mode
+   über :root[data-theme="dark"] wie überall in dieser Datei.
+   Mobile: Grid bricht über minmax(min(100%, 220px), 1fr)
+   sauber auf 1 Spalte zurück, kein horizontaler Overflow.
+   ============================================================ */
+
+/* --- 10.1 Kopf: Brotkrumen, Titel, Meta-Zeile, Prüfbadge --- */
+/* PaperMod gibt .breadcrumbs/.post-title/.post-meta die Basis-
+   Typografie; die ff-pc-Klassen verfeinern nur den Ratgeber-Kopf. */
+.ff-pc-breadcrumbs {
+  gap: 0.45rem;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+}
+
+.ff-pc-breadcrumbs a {
+  font-size: 0.82rem; /* PaperMod setzt 16px – hier bewusst eine Stufe leiser */
+}
+
+.ff-pc-breadcrumbs__sep {
+  color: var(--ff-text-muted);
+}
+
+.ff-pc-breadcrumbs__current {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.ff-pc-title {
+  text-wrap: balance; /* Redundanz zu .post-title schadet nicht – Selbstauskunft der Klasse */
+}
+
+.ff-pc-meta {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Jedes Meta-Atom ist unteilbar (Datum/Lesezeit brechen nicht mittendrin);
+   die „·“-Trenner bleiben im Inline-Fluss – Redaktions-Konvention (PRODUCT.md). */
+.ff-pc-meta > span {
+  white-space: nowrap;
+}
+
+.ff-pc-meta__author {
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.ff-pc-meta__author > span:first-child {
+  margin-right: 4px; /* Luft zwischen ✍️ und Label */
+}
+
+/* Vertrauens-Badge „Geprüfter Praxis-Leitfaden“ (GEO/E-E-A-T):
+   Smaragd-Soft-Fläche wie alle Badges des Systems (DESIGN.md §1). */
+.ff-pc-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--ff-emerald-soft);
+  color: var(--ff-emerald);
+  border: 1px solid var(--ff-border-subtle);
+  border-radius: var(--ff-radius-pill);
+  padding: 3px 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+:root[data-theme="dark"] .ff-pc-badge {
+  color: var(--ff-emerald-bright);
+}
+
+/* --- 10.2 Cluster-Abschnitt „Alle vertiefenden Artikel“ --- */
+.ff-pc-cluster {
+  margin: 44px 0 8px;
+  padding-top: 30px;
+  border-top: 2px solid var(--ff-border-subtle);
+}
+
+.ff-pc-cluster__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 18px;
+  margin-bottom: 20px;
+}
+
+.ff-pc-cluster__head > div {
+  flex: 1 1 300px; /* schmalen Viewports erlaubt es, unter die Zähler-Pill zu wandern */
+  min-width: 0;
+}
+
+/* H2-Identität des Hauses: Inter, Smaragd, 2px Signalgelb-Unterstreichung
+   (wie .post-content h2 in custom.css). inline-block, damit die Linie
+   nur unter dem Titel liegt und nicht unter der halben Kopfzeile. */
+.ff-pc-cluster__title {
+  display: inline-block;
+  margin: 0;
+  font-size: clamp(1.25rem, 3.4vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ff-emerald);
+  border-bottom: 2px solid rgba(255, 179, 0, 0.5);
+  padding-bottom: 6px;
+}
+
+:root[data-theme="dark"] .ff-pc-cluster__title {
+  color: var(--ff-emerald-bright);
+}
+
+.ff-pc-cluster__sub {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  color: var(--secondary);
+}
+
+.ff-pc-cluster__count {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  background: var(--ff-emerald-soft);
+  color: var(--ff-emerald);
+  border-radius: var(--ff-radius-pill);
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+:root[data-theme="dark"] .ff-pc-cluster__count {
+  color: var(--ff-emerald-bright);
+}
+
+/* --- 10.3 Cluster-Karten-Raster --- */
+/* 720px-Inhaltsspalte → 3 Spalten à ~227px (gleiche Proportion wie die
+   Verwandte-Artikel-Karten in Artikeln). min(100%, 220px) verhindert
+   Overflow ab 240px Containerbreite. 2:3-Cover bleiben im natürlichen
+   Verhältnis (width/height-Attribute im Markup → kein CLS). */
+.ff-pc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 20px;
+}
+
+.ff-pc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--ff-radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--ff-shadow-1);
+  transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.18s ease;
+}
+
+.ff-pc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ff-shadow-2);
+}
+
+:root[data-theme="dark"] .ff-pc-card {
+  background: var(--ff-surface);
+  border-color: var(--ff-border-card);
+}
+
+.ff-pc-card__cover {
+  display: block;
+  overflow: hidden;
+  background: var(--ff-emerald-soft); /* Lade-Fläche; dunkel automatisch 12 % Smaragd-Bright */
+}
+
+.ff-pc-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+.ff-pc-card:hover .ff-pc-card__img {
+  transform: scale(1.03);
+}
+
+/* Fallback, wenn ein Cluster-Beitrag kein Cover hat:
+   flächige Smaragd-Gradiente im 2:3-Format (wie .ff-related-card__fallback). */
+.ff-pc-card__cover--fallback {
+  display: block;
+  width: 100%;
+  padding-top: 150%;
+  background: linear-gradient(160deg, #0E5A43, #0B4A36);
+}
+
+.ff-pc-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 16px 16px;
+}
+
+.ff-pc-card__title {
+  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ff-emerald);
+  transition: color 0.16s ease;
+}
+
+.ff-pc-card__desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--secondary);
+}
+
+/* CTA unten bündig ausrichten (margin-top:auto), auch bei
+   unterschiedlich langen Titeln/Beschreibungen – gerades Kartenraster. */
+.ff-pc-card__cta {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ff-emerald);
+  transition: color 0.16s ease, transform 0.16s ease;
+}
+
+.ff-pc-card:hover .ff-pc-card__title,
+.ff-pc-card:hover .ff-pc-card__cta {
+  color: var(--ff-emerald-dark);
+}
+
+.ff-pc-card:hover .ff-pc-card__cta {
+  transform: translateX(2px); /* Pfeil-Anregung ohne eigenes Markup */
+}
+
+:root[data-theme="dark"] .ff-pc-card__title,
+:root[data-theme="dark"] .ff-pc-card__cta {
+  color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-pc-card:hover .ff-pc-card__title,
+:root[data-theme="dark"] .ff-pc-card:hover .ff-pc-card__cta {
+  color: #a8ecd2;
+}
+
+/* --- 10.4 Themen-Chips „Weitere Ratgeber“ (auch 404) --- */
+.ff-pc-related {
+  margin: 36px 0 8px;
+  padding-top: 26px;
+  border-top: 2px solid var(--ff-border-subtle);
+}
+
+.ff-pc-related__title {
+  margin: 0 0 16px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--ff-emerald);
+}
+
+:root[data-theme="dark"] .ff-pc-related__title {
+  color: var(--ff-emerald-bright);
+}
+
+.ff-pc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Chipspezifikation DESIGN.md §5: Pill, Smaragd-Soft hell /
+   12 % Smaragd-Bright dunkel (automatisch via --ff-emerald-soft).
+   Hover folgt dem Button-Muster (.ff-pillar-box__btn): Vollton-
+   Smaragd mit Weißtext, dunkel Smaragd-Bright mit Tiefgrün-Text. */
+.ff-pc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ff-emerald-soft);
+  color: var(--ff-emerald);
+  border: 1px solid var(--ff-border-subtle);
+  border-radius: var(--ff-radius-pill);
+  padding: 7px 15px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.16s ease, border-color 0.16s ease,
+              color 0.16s ease, transform 0.16s ease;
+}
+
+.ff-pc-chip:hover {
+  background: var(--ff-emerald);
+  border-color: var(--ff-emerald);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] .ff-pc-chip {
+  color: var(--ff-emerald-bright);
+}
+
+:root[data-theme="dark"] .ff-pc-chip:hover {
+  background: var(--ff-emerald-bright);
+  border-color: var(--ff-emerald-bright);
+  color: #0E5A43;
+}
+
+/* --- 10.5 Mobile-Feinschliff (390px ist die Primärbreite, PRODUCT.md §5) --- */
+@media (max-width: 600px) {
+  .ff-pc-cluster {
+    margin-top: 36px;
+    padding-top: 24px;
+  }
+
+  .ff-pc-grid {
+    gap: 16px;
+  }
+
+  .ff-pc-card__body {
+    padding: 13px 14px 15px;
+  }
+
+  .ff-pc-related {
+    margin-top: 30px;
+    padding-top: 22px;
   }
 }
 

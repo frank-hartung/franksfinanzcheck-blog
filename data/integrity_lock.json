@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-28T01:00:00.691059+00:00",
-  "head": "fcbb600",
+  "signed_at": "2026-09-28T03:04:40.494015+00:00",
+  "head": "aa15446",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
@@ -18,7 +18,7 @@
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
     "layouts/pillar/list.html": "a3c6d00022af2785a699373634cbcb1b61acba1381052df5a35a6849adb6a8c7",
-    "layouts/pillar/single.html": "b64df10b0c0e12ee8a97b35518e232632064f0237b51fb2b9695a7040882c669",
+    "layouts/pillar/single.html": "8d0a474d457c9728054789da4c0c4f1576dc387143dc5eb9586610a241d75bc4",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
@@ -47,62 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "c8f1afe2f6024b113eff85aa75de28b0a8e105906505650ebac45995fbf81093",
-  "audit_start_sha256": "2dc5ccfb75731c1747c1784d530c3284f1f719cb9a516a81f5051eaab0b4dab9",
+  "files_sha256": "2250e5475793e1c74bc0f4722305161b5dba611345acd6c557d509e28593dfdf",
+  "audit_start_sha256": "cecf19a6d342574c5fa3c3881c939b48e0caa609252de534bacd4d6438305277",
   "audit": [
-    {
-      "date": "2026-09-26",
-      "art": "set-current",
-      "head": "f61001a1",
-      "geaendert": [
-        "hugo.toml",
-        "layouts/shortcodes/einspartabelle.html",
-        "layouts/shortcodes/tarifvergleich.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c7dc2db1",
-              "datum": "2026-09-26",
-              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        },
-        {
-          "pfad": "layouts/shortcodes/einspartabelle.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c7dc2db1",
-              "datum": "2026-09-26",
-              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        },
-        {
-          "pfad": "layouts/shortcodes/tarifvergleich.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c7dc2db1",
-              "datum": "2026-09-26",
-              "betreff": "TOC vollständig + beweglich, Spar-Signet statt Glühbirne"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "49eebb01a708f12c23a04089ba2ba57b821f15eab559d8cf91c23689583220ac",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-27",
       "art": "set-current",
@@ -140,7 +87,7 @@
         }
       ],
       "files_sha256": "10bbf3ee8b01be6d0c5ded2ace0c0a3a90e36a9a2bb7d5aedbe33e570da46302",
-      "prev_sha256": "2dc5ccfb75731c1747c1784d530c3284f1f719cb9a516a81f5051eaab0b4dab9"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-27",
@@ -437,8 +384,38 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "48b5d280dc44f6ce0a76f8f132816b9d748d2c6d76dc0acac3e4371642766a3b",
-      "files_sha256": "c8f1afe2f6024b113eff85aa75de28b0a8e105906505650ebac45995fbf81093"
+      "files_sha256": "c8f1afe2f6024b113eff85aa75de28b0a8e105906505650ebac45995fbf81093",
+      "prev_sha256": "48b5d280dc44f6ce0a76f8f132816b9d748d2c6d76dc0acac3e4371642766a3b"
+    },
+    {
+      "date": "2026-09-28",
+      "art": "set-current",
+      "head": "aa15446",
+      "geaendert": [
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "aa15446",
+              "datum": "2026-09-28",
+              "betreff": "fix(pillar): Cluster-CSS nachgeliefert (.ff-pc-*, Abschnitt 10) + Stand-Datum repariert"
+            },
+            {
+              "sha": "a263bcb",
+              "datum": "2026-09-28",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "2af3b449e2335094941e559d8643c1868db46578535394d1e1c8f0347a676d29",
+      "files_sha256": "2250e5475793e1c74bc0f4722305161b5dba611345acd6c557d509e28593dfdf"
     }
   ]
 }
