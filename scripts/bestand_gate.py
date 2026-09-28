@@ -149,6 +149,12 @@ def run_gate():
     affiliate_failed, affiliate_err = pg.affiliate_profi_failures()
     integrity_failed, integrity_err, integrity_tool_error = \
         pg.affiliate_integrity_failures()
+    # OFFENLEGUNG (28.09.2026): Die artikelgenaue Werbekennzeichnung gilt für
+    # den BESTAND genauso wie für druckfrische Artikel – sonst hätte jeder
+    # alte Beitrag dauerhaft den Zustand von vor dem Umbau. Gleiche Funktion
+    # wie im Publish-Gate, kein Parallel-Code.
+    offenlegung_failed, offenlegung_err, offenlegung_tool_error = \
+        pg.offenlegung_failures()
 
     # Keyword-Gate (Premium #303)
     try:
@@ -193,7 +199,11 @@ def run_gate():
         keyword_err = f"Keyword-Prüfung nicht verfügbar: {exc}"
         keyword_tool_error = False
 
-    errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err, keyword_err) if e]
+    errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err,
+                          offenlegung_err, keyword_err) if e]
+    if offenlegung_tool_error:
+        errors.append("Werbekennzeichnung nicht beweisbar (Werkzeugfehler) – "
+                      "Bestand gilt als NICHT geprüft")
     if integrity_tool_error:
         errors.append("Affiliate-Render-Beweis nicht möglich (Werkzeugfehler) – "
                       "Bestand gilt als NICHT geprüft")
@@ -204,6 +214,7 @@ def run_gate():
         "seo": seo_failed,
         "affiliate": affiliate_failed,
         "integrity": integrity_failed,
+        "offenlegung": offenlegung_failed,
         "keyword": keyword_failed,
     }, errors
 
@@ -534,6 +545,8 @@ def render_report(all_slugs: set[str], still_affected: dict, errors: list[str],
                 lines.append(f"- ⚠️ {msg}")
             for msg in detail["integrity"]:
                 lines.append(f"- ⚠️ Affiliate-Link-Integrität (CTA defekt/nicht gerendert), Selbstheilung fehlgeschlagen: {msg}")
+            for msg in detail.get("offenlegung", []):
+                lines.append(f"- ⚠️ Werbekennzeichnung nicht artikelgenau/nicht sichtbar genug: {msg}")
             lines.append("")
         lines.append(
             "---\n_Bestandsartikel werden NIE automatisch gelöscht (anders als druckfrische Kandidaten in "
@@ -567,7 +580,8 @@ def main():
         findings, errors = run_gate()
         affected = {s for s in (findings["length"] | findings["seo"] | findings.get("keyword", set())
                                 | set(findings["affiliate"].keys())
-                                | set(findings["integrity"].keys()))
+                                | set(findings["integrity"].keys())
+                                | set(findings.get("offenlegung", {}).keys()))
                     if s in all_slugs}
 
         healed_dims = []
@@ -594,10 +608,11 @@ def main():
                 "keyword": s in findings.get("keyword", set()),
                 "affiliate": findings["affiliate"].get(s, []),
                 "integrity": findings["integrity"].get(s, []),
+                "offenlegung": findings.get("offenlegung", {}).get(s, []),
             }
             for s in all_slugs
             if s in findings["length"] or s in findings["seo"] or s in findings.get("keyword", set()) or s in findings["affiliate"]
-            or s in findings["integrity"]
+            or s in findings["integrity"] or s in findings.get("offenlegung", {})
         }
 
         # EXIT-CODES (02.09.2026): 0 = grün, 1 = Inhaltsschaden, 2 = Auswertungsfehler.

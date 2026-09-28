@@ -102,10 +102,24 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
                                   "fix_url_hygiene.py"),
 }
 
-# Ausnahmen brauchen eine Begründung – und altern nicht still. Aktuell ist
-# jede ablehnende Regel des Gates gedeckt; die Liste ist trotzdem Pflicht,
-# damit eine künftige Regel nicht zwischen „gedeckt“ und „vergessen“ fällt.
-AUSNAHMEN: dict[str, str] = {}
+# Ausnahmen brauchen eine Begründung – und altern nicht still. Die Liste ist
+# Pflicht, damit eine künftige Regel nicht zwischen „gedeckt“ und „vergessen“
+# fällt.
+AUSNAHMEN: dict[str, str] = {
+    # Werbe-Offenlegung O1–O7 (28.09.2026). Bewusst OHNE Heiler in der
+    # Reserve-Kette: Die Kennzeichnung schreibt kein Artikeltext, sondern das
+    # Layout (layouts/_partials/ff_offenlegung.html) aus dem Partnerregister
+    # (data/affiliate_ziele.yaml). Ein Kandidat kann diese Regel also gar
+    # nicht durch eigene Textarbeit verletzen – ein Befund heißt immer:
+    # Template, CSS oder Register sind kaputt. Ein „Heiler“ am Entwurf würde
+    # genau den Schaden übertünchen, den die Wache melden soll (Kodex C15:
+    # Beweisen ist nicht Heilen). Zuständig ist ein Mensch; der nächste
+    # Schritt steht in jedem Befund und in docs/ANLEITUNG-OFFENLEGUNG.md.
+    "offenlegung_failures":
+        "Kennzeichnung entsteht im Template, nicht im Artikeltext – ein "
+        "Befund ist ein Layout-/Registerdefekt und gehört einem Menschen "
+        "(C15). Heilung am Kandidaten würde den Defekt verdecken.",
+}
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")
 # (Hinweis auf Aufrufe wird nicht geparst: die Kette ist die Wahrheit.)
@@ -132,7 +146,10 @@ def deckung(publish_gate_text: str | None = None,
             scripts_dir: Path | None = None) -> dict:
     """Deckungs-Bericht: gedeckt / Ausnahmen / Lücken / tote Einträge.
 
-    Rein lesend und injizierbar (Selbsttest ohne echtes Repo).
+    Rein lesend und injizierbar (Selbsttest ohne echtes Repo). Wer `regeln`
+    injiziert, sollte auch `ausnahmen` injizieren: sonst prüft ein Fixture
+    gegen die echten Ausnahmen und wird rot, sobald das Repo eine neue
+    (völlig korrekte) Ausnahme bekommt.
     """
     scripts_dir = Path(scripts_dir) if scripts_dir else SCRIPTS
     if publish_gate_text is None:
@@ -257,7 +274,7 @@ def run_selftest() -> int:
                         "affiliate_intent_failures":
                             ("affiliate_intent_guard.py",),
                         "readability_failures": ("profi_polish.py",)},
-                scripts_dir=SCRIPTS)
+                ausnahmen={}, scripts_dir=SCRIPTS)
     luecken = {(e["regel"], e["art"]) for e in b["luecken"]}
     if ("affiliate_intent_failures", "nicht-in-der-kette") not in luecken:
         fehler.append(f"fehlender Intent-Heiler nicht erkannt: {b['luecken']}")
@@ -271,7 +288,7 @@ def run_selftest() -> int:
                          "affiliate_intent_failures":
                              ("affiliate_intent_guard.py",),
                          "readability_failures": ("profi_polish.py",)},
-                 scripts_dir=SCRIPTS)
+                 ausnahmen={}, scripts_dir=SCRIPTS)
     if b2["luecken"] or b2["tote_ausnahmen"]:
         fehler.append(f"gedeckte Kette wird als Lücke gemeldet: {b2['luecken']}")
 
@@ -279,7 +296,7 @@ def run_selftest() -> int:
     b3 = deckung(gate + "def brand_new_failures(candidates):\n    pass\n",
                  kette_ohne_intent,
                  regeln={"check_length_failures": ("check_length.py",)},
-                 scripts_dir=SCRIPTS)
+                 ausnahmen={}, scripts_dir=SCRIPTS)
     if ("brand_new_failures", "keine-deckung") not in {
             (e["regel"], e["art"]) for e in b3["luecken"]}:
         fehler.append("neue Gate-Regel ohne Deckung nicht erkannt")
@@ -312,7 +329,7 @@ def run_selftest() -> int:
     # 6) Tippfehler im Heiler-Namen deckt nichts.
     b6 = deckung(gate, kette_ohne_intent,
                  regeln={"check_length_failures": ("check_lenght.py",)},
-                 scripts_dir=SCRIPTS)
+                 ausnahmen={}, scripts_dir=SCRIPTS)
     if not any(e["art"] == "heiler-fehlt-im-repo" for e in b6["luecken"]):
         fehler.append("Heiler-Tippfehler nicht erkannt")
 

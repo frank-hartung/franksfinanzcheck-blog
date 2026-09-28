@@ -90,11 +90,17 @@
   "name" site.Title
   "url" site.BaseURL
   "description" "Unabhängiger deutscher Finanz-Ratgeber von Frank Hartung: praxisnahe Spar-Anleitungen zu Strom, Gas, Internet, Versicherungen, Konto und Alltag – mit konkreten Euro-Beträgen."
+  "publishingPrinciples" (printf "%stransparenz/" site.BaseURL)
   "email" (site.Params.contactEmail | default "kontakt@franksfinanzcheck.de")
   "logo" (dict "@type" "ImageObject" "url" (printf "%simages/brand/logo.svg" site.BaseURL))
   "sameAs" $profiles
 -}}
 
+{{- /* OFFENLEGUNG 28.09.2026 (GEO): Antwortmaschinen bewerten, ob eine Quelle
+     ihre kommerziellen Interessen offenlegt. `publishingPrinciples` verweist
+     maschinenlesbar auf /transparenz/ – dieselbe Seite, die auch die sichtbare
+     Kennzeichnung im Artikelkopf verlinkt (ff_offenlegung.html). Eine Wahrheit,
+     zwei Kanäle: Leser und Maschine. */ -}}
 {{- $out := dict
   "@context" "https://schema.org"
   "@type" "Article"
@@ -110,6 +116,7 @@
   "dateModified" ($modified.Format "2006-01-02T15:04:05Z07:00")
   "wordCount" (.WordCount | int)
   "isAccessibleForFree" true
+  "publishingPrinciples" (printf "%stransparenz/" site.BaseURL)
   "speakable" (dict "@type" "SpeakableSpecification" "cssSelector" (slice ".post-title" ".ff-kurzantwort__text" ".post-description"))
 -}}
 {{- if $imgURL -}}

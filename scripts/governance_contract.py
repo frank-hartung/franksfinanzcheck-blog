@@ -168,6 +168,14 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Unterscheidung ein (Kante vs. Anbieter, Messlücke vs. Fund,
           # p=reject nur mit belegtem Domain-DKIM) und gehört ins Minimum.
           "newsletter_zustellbarkeit.py",
+          # Werbe-Offenlegung (28.09.2026, Wettbewerbsvergleich ZEIT Online,
+          # Dimension „Unabhängigkeit/Kommerz"): Die Kennzeichnung entsteht im
+          # Template – also stirbt sie auch dort, lautlos, bei der nächsten
+          # Layout-Änderung. Die Wache prüft O1–O7 am gebauten HTML (Existenz,
+          # Position vor dem ersten Partnerlink, Zahl/Partner artikelgenau,
+          # Pflichtangaben, Sichtbarkeit, Widerspruchsfreiheit, Partnerregister).
+          # Ihr --selftest friert 13 Sabotage-Proben ein und gehört ins Minimum.
+          "offenlegung_gate.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
           # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
           # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber

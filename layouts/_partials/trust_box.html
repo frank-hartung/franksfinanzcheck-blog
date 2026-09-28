@@ -3,8 +3,21 @@
     – erscheint am Ende jedes Artikels (vor der Related-Box)
     – Autor-Foto, Kurzbio, Qualifikation, Transparenz, Aktualität
     – unterstützt Googles E-E-A-T-Bewertung (Erfahrung/Expertise)
+
+    OFFENLEGUNG ARTIKELGENAU (28.09.2026, ZEIT-Wettbewerbsvergleich
+    „Unabhängigkeit/Kommerz"): Hier stand bis dahin auf JEDER Seite
+    derselbe Konjunktiv – „Dieser Artikel kann Affiliate-Links
+    enthalten (CHECK24, Tarifcheck)". Das war unabhängig vom Inhalt
+    wahr und deshalb ohne Aussage: Ein Text ohne einen einzigen
+    Partnerlink trug dieselbe Warnung wie einer mit fünf, und es
+    wurden Partner genannt, die im Artikel nicht vorkamen.
+    Jetzt liefert der SSOT layouts/_partials/_funcs/affiliate_offenlegung.html
+    die gezählte Wahrheit dieser Seite – dieselbe Zahl, die auch im
+    Artikelkopf steht (ff_offenlegung.html) und die das Gate
+    scripts/offenlegung_gate.py (O3) gegen das gebaute HTML prüft.
 ============================================================ */}}
 {{- if eq .Section "posts" -}}
+{{- $off := partial "_funcs/affiliate_offenlegung.html" . -}}
 <div class="ff-trust-box" role="complementary" aria-label="Über den Autor und Transparenz">
   <div class="ff-trust-box__avatar-wrap">
     <img src="{{ "images/frank-hartung.jpg" | absURL }}" alt="Frank Hartung" width="72" height="72" loading="lazy" decoding="async" fetchpriority="low" data-ff-fcp-image="deferred" class="ff-trust-box__img">
@@ -16,14 +29,22 @@
       Dieser Beitrag wurde von <strong>Frank Hartung</strong> erstellt – über 10 Jahre Erfahrung in
       privater Finanzplanung, hunderte selbst durchgeführte Tarifvergleiche und ständiges Testen in der Praxis.
     </p>
-    <p class="ff-trust-box__transparency">
-      <strong>Transparenz:</strong> Dieser Artikel kann Affiliate-Links enthalten (CHECK24, Tarifcheck) –
-      für dich entstehen keine Mehrkosten. Die Empfehlungen sind unabhängig von Provisionen.
-      <a href="{{ "ueber/" | absURL }}" class="ff-trust-box__link">Mehr über mich →</a>
+    <p class="ff-trust-box__transparency" data-ff-offenlegung-abbinder="{{ if $off.hat }}mit-partnerlinks{{ else }}ohne-partnerlinks{{ end }}">
+      <strong>Transparenz:</strong>
+      {{- if $off.hat }}
+      Dieser Artikel enthält {{ $off.anzahl }} als Werbung gekennzeichnete Affiliate-Links zu
+      {{ $off.partnerKurz }}. Bei einem Abschluss erhalte ich eine Provision – für dich entstehen
+      keine Mehrkosten, und die Empfehlungen entstehen unabhängig davon.
+      {{- else }}
+      Dieser Artikel enthält keine Affiliate-Links – an diesem Text verdiene ich nichts. Wo
+      Partnerlinks vorkommen, sind sie als Werbung gekennzeichnet und kosten dich keinen Cent extra.
+      {{- end }}
+      <a href="{{ "transparenz/" | absURL }}" class="ff-trust-box__link">Wie ich Geld verdiene →</a>
       {{- /* GEO/SEO-PREMIUM 21.09.2026: Methodik-Link in jedem Artikel –
              stärkt das E-E-A-T-Vertrauenssignal (Redaktionsstandards) und
              die interne Verlinkung der Vertrauensseite. */ -}}
       <a href="{{ "methodik/" | absURL }}" class="ff-trust-box__link">So arbeiten wir →</a>
+      <a href="{{ "ueber/" | absURL }}" class="ff-trust-box__link">Mehr über mich →</a>
     </p>
   </div>
 </div>

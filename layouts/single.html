@@ -37,6 +37,13 @@
            per Artikelseite sichtbare KI-Transparenz + Prüfperson.
            Details/Vertrag: layouts/_partials/ff_pruefzeile.html */ -}}
     {{- partial "ff_pruefzeile.html" . }}
+    {{- /* ARTIKELGENAUE WERBE-OFFENLEGUNG (28.09.2026, ZEIT-Vergleich
+           „Unabhängigkeit/Kommerz“): gezählte Partnerlinks, Partnernamen
+           und Vergütungsmodell VOR dem ersten Werbelink – bei null
+           Partnerlinks die sichtbare Gegenprobe. Vertrag + Herleitung:
+           layouts/_partials/ff_offenlegung.html, Wache:
+           scripts/offenlegung_gate.py (O1–O7). */ -}}
+    {{- partial "ff_offenlegung.html" . }}
   </header>
 
   {{- /* Korrektur-Box (WiWo-Standard: Fehler transparent korrigieren).

@@ -70,6 +70,8 @@ python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-R
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
+npm run offenlegung                                   # Build + Werbe-Offenlegung O1–O7 (artikelgenau, sichtbar)
+npm run test:offenlegung                              # Selbsttest (13 Sabotage-Proben) + 36 Unit-Tests
 
 # Design-Varianten-Werkbank (26.09.2026) – Details: docs/ANLEITUNG-DESIGN-VARIANTEN.md
 python3 scripts/design_variant_gate.py               # Marke + Messvertrag + Freigabe
@@ -194,6 +196,30 @@ feste Kopfzeile, Geometrie an `--main-width`, Ruhzustand, Breakpoint,
 Druck, Reduced Motion, Dark Mode, Materialtiefe, Fokus-Ring, keine
 Inline-Farben, kein Line-Clamp). Der Selbsttest sabotiert die Wache selbst
 und verlangt, dass sie es merkt. Läuft in `npm run test:toc`.
+
+## Werbe-Offenlegung ist artikelgenau (Wache seit 28.09.2026)
+
+Der ZEIT-Vergleich bewertete „Unabhängigkeit/Kommerz" mit 4 statt 5: Die
+Offenlegung stand pauschal („kann Affiliate-Links enthalten") und bei 56 % der
+Seiten **hinter** dem ersten Partnerlink. Jetzt gilt: Jede Seite nennt **über**
+dem Text die echte Zahl ihrer Partnerlinks samt Partner und Produkt, werbefreie
+Artikel sagen das aktiv.
+
+**Eine Quelle:** `data/affiliate_ziele.yaml` → `_funcs/affiliate_offenlegung.html`
+→ Kopf-Kennzeichnung (`ff_offenlegung.html`), Abbinder (`trust_box.html`),
+Partnerregister (`/transparenz/`). Nie eine zweite Partnerliste anlegen.
+
+**Beim Layout-Arbeiten:** Die Kennzeichnung hängt in **vier** Layouts
+(`single.html`, `_default/single.html`, `pillar/single.html`,
+`pillar/list.html` – letzteres mit `extraKeys`, weil Template-CTAs nicht in
+`.Content` stehen). Sie muss im `<header>` bleiben: `python3
+scripts/offenlegung_gate.py` (O1–O7, fail-closed) prüft Position **vor** dem
+ersten Partnerlink, Zahl/Partner artikelgenau, Pflichtangaben und
+Sichtbarkeit (kein `hidden`/`display:none`/`font-size:0`/`aria-hidden`).
+Läuft in Publish-Gate (Gate 6), Bestands-Gate, `npm run test:offenlegung` und
+E2E. **Ohne `--fix`** – die Kennzeichnung erzeugt das Template, ein Befund ist
+ein Layout-/Registerdefekt für einen Menschen (C15). Runbuch:
+`docs/ANLEITUNG-OFFENLEGUNG.md`.
 
 ## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)
 

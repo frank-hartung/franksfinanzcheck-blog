@@ -36,7 +36,10 @@
     "rechtschreibung:zeit:offline": "python3 scripts/zeit_rechtschreibung.py --offline",
     "rechtschreibung:zeit:strict": "python3 scripts/zeit_rechtschreibung.py --strict",
     "rechtschreibung:zeit:probe": "python3 scripts/zeit_rechtschreibung.py --probe",
-    "test:rechtschreibung": "python3 scripts/zeit_rechtschreibung.py --selftest && python3 -m unittest scripts.tests.test_zeit_rechtschreibung"
+    "test:rechtschreibung": "python3 scripts/zeit_rechtschreibung.py --selftest && python3 -m unittest scripts.tests.test_zeit_rechtschreibung",
+    "offenlegung": "hugo --minify --destination public --cleanDestinationDir && python3 scripts/offenlegung_gate.py",
+    "offenlegung:json": "python3 scripts/offenlegung_gate.py --json --no-report",
+    "test:offenlegung": "python3 scripts/offenlegung_gate.py --selftest && python3 -m unittest scripts.tests.test_offenlegung_gate"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

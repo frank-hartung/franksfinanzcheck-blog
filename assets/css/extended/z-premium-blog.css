@@ -1768,6 +1768,277 @@ details.toc .inner a:focus-visible {
 }
 
 /* ============================================================
+   WERBE-OFFENLEGUNG – artikelgenaue Kennzeichnung im Kopf (28.09.2026)
+   ------------------------------------------------------------
+   Renderer: layouts/_partials/ff_offenlegung.html
+   Wahrheit: layouts/_partials/_funcs/affiliate_offenlegung.html
+   Wache:    scripts/offenlegung_gate.py (O1–O7)
+
+   GESTALTUNGSREGEL: Die Kennzeichnung muss auffallen, ohne den
+   Artikel zu übertönen. Sie steht deshalb zwischen Prüfzeile und
+   Kurzantwort als ruhige Fläche mit gelber Kante – dem einzigen
+   Ort im Artikelkopf, an dem die Signalfarbe der Marke als
+   FLÄCHE erscheint (DESIGN.md: Gelb nie als Text auf Hell).
+   Aufgeklappt bleibt sie im Textmaß und bekommt keinen zweiten
+   Rahmen: eine Ebene Information, zwei Tiefen.
+   ============================================================ */
+.ff-offenlegung {
+  margin: 10px 0 4px;
+  font-size: .82rem;
+  line-height: 1.55;
+  color: var(--content);
+}
+
+.ff-offenlegung__kopf,
+.ff-offenlegung--frei {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-left: 3px solid color-mix(in srgb, var(--ff-accent) 70%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ff-accent) 7%, var(--entry));
+}
+
+.ff-offenlegung__kopf {
+  cursor: pointer;
+  list-style: none;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+
+.ff-offenlegung__kopf::-webkit-details-marker {
+  display: none;
+}
+
+.ff-offenlegung__kopf:hover {
+  background: color-mix(in srgb, var(--ff-accent) 12%, var(--entry));
+  border-color: color-mix(in srgb, var(--ff-accent) 45%, var(--border));
+  border-left-color: var(--ff-accent);
+}
+
+.ff-offenlegung__kopf:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ff-accent) 75%, transparent);
+  outline-offset: 2px;
+}
+
+.ff-offenlegung[open] > .ff-offenlegung__kopf {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Kennzeichnungs-Chip: Werbung (gelbe Fläche) / Werbefrei (grüne Fläche) */
+.ff-offenlegung__chip {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ff-accent) 34%, transparent);
+  color: var(--ff-ink);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ff-offenlegung__chip--frei {
+  background: color-mix(in srgb, var(--ff-green) 16%, transparent);
+  color: var(--ff-green-2);
+}
+
+.ff-offenlegung__satz {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.ff-offenlegung__satz strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.ff-offenlegung__mehr {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  color: var(--ff-green-2);
+  font-size: .76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ff-offenlegung__mehr-zu {
+  display: none;
+}
+
+.ff-offenlegung[open] .ff-offenlegung__mehr-auf {
+  display: none;
+}
+
+.ff-offenlegung[open] .ff-offenlegung__mehr-zu {
+  display: inline;
+}
+
+.ff-offenlegung__pfeil {
+  transition: transform .2s ease;
+}
+
+.ff-offenlegung[open] .ff-offenlegung__pfeil {
+  transform: rotate(180deg);
+}
+
+.ff-offenlegung__text {
+  padding: 10px 13px 12px;
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-left: 3px solid color-mix(in srgb, var(--ff-accent) 70%, var(--border));
+  border-radius: 0 0 10px 10px;
+  background: var(--entry);
+  color: var(--secondary);
+}
+
+.ff-offenlegung__text p {
+  margin: 0 0 8px;
+}
+
+.ff-offenlegung__text p:last-child {
+  margin-bottom: 0;
+}
+
+.ff-offenlegung__text strong {
+  color: var(--primary);
+}
+
+.ff-offenlegung__liste {
+  margin: 0 0 9px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.ff-offenlegung__liste li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  padding-left: 12px;
+  position: relative;
+}
+
+.ff-offenlegung__liste li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ff-accent) 80%, transparent);
+}
+
+.ff-offenlegung__zahl {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ff-green) 10%, transparent);
+  color: var(--ff-green-2);
+  font-size: .7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ff-offenlegung__wege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.ff-offenlegung__wege a,
+.ff-offenlegung__link {
+  color: var(--ff-green-2);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ff-green-2) 32%, transparent);
+  padding-bottom: 1px;
+}
+
+.ff-offenlegung__link {
+  margin-left: auto;
+  font-size: .76rem;
+  white-space: nowrap;
+}
+
+.ff-offenlegung__wege a:hover,
+.ff-offenlegung__wege a:focus-visible,
+.ff-offenlegung__link:hover,
+.ff-offenlegung__link:focus-visible {
+  color: var(--ff-green);
+  border-bottom-color: currentColor;
+}
+
+/* ---------- Dark Mode ---------- */
+:root[data-theme="dark"] .ff-offenlegung__kopf,
+:root[data-theme="dark"] .ff-offenlegung--frei {
+  background: color-mix(in srgb, var(--ff-accent) 9%, var(--entry));
+  border-left-color: color-mix(in srgb, var(--ff-accent) 55%, var(--border));
+}
+
+:root[data-theme="dark"] .ff-offenlegung__kopf:hover {
+  background: color-mix(in srgb, var(--ff-accent) 15%, var(--entry));
+}
+
+:root[data-theme="dark"] .ff-offenlegung__chip {
+  background: color-mix(in srgb, var(--ff-accent) 22%, transparent);
+  color: var(--ff-accent-2);
+}
+
+:root[data-theme="dark"] .ff-offenlegung__chip--frei {
+  background: color-mix(in srgb, var(--ff-green) 26%, transparent);
+  color: #7FD1B4;
+}
+
+:root[data-theme="dark"] .ff-offenlegung__mehr,
+:root[data-theme="dark"] .ff-offenlegung__zahl {
+  color: var(--ff-accent-2);
+}
+
+:root[data-theme="dark"] .ff-offenlegung__zahl {
+  background: color-mix(in srgb, var(--ff-accent) 14%, transparent);
+}
+
+:root[data-theme="dark"] .ff-offenlegung__text {
+  border-left-color: color-mix(in srgb, var(--ff-accent) 55%, var(--border));
+}
+
+:root[data-theme="dark"] .ff-offenlegung__wege a,
+:root[data-theme="dark"] .ff-offenlegung__link {
+  color: var(--ff-accent-2);
+  border-bottom-color: color-mix(in srgb, var(--ff-accent-2) 32%, transparent);
+}
+
+:root[data-theme="dark"] .ff-offenlegung__wege a:hover,
+:root[data-theme="dark"] .ff-offenlegung__wege a:focus-visible,
+:root[data-theme="dark"] .ff-offenlegung__link:hover,
+:root[data-theme="dark"] .ff-offenlegung__link:focus-visible {
+  color: var(--ff-accent);
+}
+
+@media (max-width: 640px) {
+  .ff-offenlegung__mehr,
+  .ff-offenlegung__link {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-offenlegung__kopf,
+  .ff-offenlegung__pfeil {
+    transition: none;
+  }
+}
+
+/* ============================================================
    TABELLENSTAND – Quelle/Stand-Zeile unter Artikel-Tabellen (28.09.2026)
    ------------------------------------------------------------
    Renderer: layouts/shortcodes/tabellenstand.html UND die

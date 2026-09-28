@@ -112,7 +112,7 @@ Bewertungsskala: 1 = schwach, 3 = solide, 5 = führend. ZEIT-Werte sind eine qua
 | Korrekturtransparenz | 5 | 2 | ZEIT dokumentiert wesentliche Korrekturen öffentlich; FF braucht ein standardisiertes Änderungsprotokoll. |
 | Formatvielfalt | 5 | 3 | Audio ist stark; Interviews, Pro/Contra, Fallstudien, Datenstories und echte Kolumnen fehlen. |
 | Autorität/Expertise | 5 | 3 | ZEIT hat spezialisierte Teams; FF kann mit einem kleinen, sichtbaren Expertennetzwerk aufholen. |
-| Unabhängigkeit/Kommerz | 5 | 4 | FF hat Affiliate-Governance; Offenlegung sollte artikelgenau und noch sichtbarer sein. |
+| Unabhängigkeit/Kommerz | 5 | 5 | **Geschlossen 28.09.2026:** Kennzeichnung artikelgenau (Anzahl + Partner + Produkt) und sichtbar **vor** dem ersten Partnerlink auf 100 % der Seiten (vorher 44 %), werbefreie Artikel sagen das aktiv, vollständige Offenlegung unter `/transparenz/`. Gehalten von `scripts/offenlegung_gate.py` (O1–O7, fail-closed) in Publish-Gate, Bestands-Gate, Unit- und E2E-Tests → `docs/OFFENLEGUNG-ARTIKELGENAU-PREMIUM-2026-09-28.md`. |
 | UX/Barrierearmut | 5 | 4 | FF Audio und Lesefunktionen sind stark; Personalisierung/Merkliste und hochwertige Grafiken bleiben Lücken. |
 | SEO/GEO-Maschinenlesbarkeit | 4 | 5 | FF hat hier durch strukturierte Quellen, Schema und feste Gates einen realistischen Vorsprung. |
 

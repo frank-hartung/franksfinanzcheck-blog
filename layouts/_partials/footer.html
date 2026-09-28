@@ -40,6 +40,12 @@
         {{- /* GEO/SEO-PREMIUM 21.09.2026: Methodik-Seite (E-E-A-T-Vertrauens-
                signal für Google/Bing/KI) – siteweit im Footer verlinkt. */ -}}
         <a href="{{ "methodik/" | absURL }}">So arbeiten wir</a>
+        {{- print " · " -}}
+        {{- /* OFFENLEGUNG 28.09.2026: Die Finanzierungs-/Werbeseite gehört auf
+               jede Seite der Site – ein Leser muss nicht erst einen Artikel
+               öffnen, um zu erfahren, womit hier Geld verdient wird.
+               O7 der Wache scripts/offenlegung_gate.py prüft diesen Link. */ -}}
+        <a href="{{ "transparenz/" | absURL }}">Transparenz &amp; Werbung</a>
     </span>
 </footer>
 {{- end }}
