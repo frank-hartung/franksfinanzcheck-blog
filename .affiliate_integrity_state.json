@@ -1,19 +1,20 @@
 {
- "generated_at": "2026-09-28 10:22:43 UTC",
- "verdict_changed": true,
- "exit_code": 0,
- "checked": 42,
- "healed": [
-  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
- ],
- "healed_count": 1,
- "content_problems": [
-  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
- ],
- "errors": [],
- "build": {
-  "built": true,
-  "reason": "public/ veraltet → Hugo-Rebuild",
-  "ok": true
- }
+  "generated_at": "2026-09-28 10:22:43 UTC",
+  "verdict_changed": true,
+  "exit_code": 0,
+  "checked": 42,
+  "healed": [
+    "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+  ],
+  "healed_count": 1,
+  "content_problems": [
+    "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden"
+  ],
+  "errors": [],
+  "build": {
+    "built": true,
+    "reason": "public/ veraltet → Hugo-Rebuild",
+    "ok": true
+  },
+  "unresolved_problems": []
 }
