@@ -52,9 +52,9 @@ kennzahlen:
     name: "BDEW-Strompreisanalyse: Haushaltsstrompreis"
     einheit: "ct/kWh"
     ist_wert: "37,0"
-    stand: 2026-08-21
+    stand: 2026-09-28   # geprüft: Analyse "Herbst 2026" (Seite v. 21.08.) bestätigt 37,0 ct/kWh
     quelle:
-      name: "BDEW-Strompreisanalyse"
+      name: "BDEW-Strompreisanalyse (Herbst 2026)"
       url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     rhythmus_tage: 30
     toleranz: null
@@ -70,9 +70,9 @@ kennzahlen:
     name: "BDEW-Gaspreisanalyse: Gaspreis Einfamilienhaus"
     einheit: "ct/kWh"
     ist_wert: "11,93"
-    stand: 2026-08-24
+    stand: 2026-09-28   # geprüft: Analyse "August 2026" (Seite v. 24.08.) bestätigt 11,93 ct/kWh
     quelle:
-      name: "BDEW-Gaspreisanalyse"
+      name: "BDEW-Gaspreisanalyse (August 2026)"
       url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     rhythmus_tage: 30
     toleranz: null
@@ -90,7 +90,7 @@ kennzahlen:
     name: "Bundesnetzagentur: Markt- und Preisdaten Strom/Gas"
     einheit: "Marktdaten"
     ist_wert: null
-    stand: 2026-07-10
+    stand: 2026-09-28   # geprüft: Seite aktuell (Aktuelles u. a. Vorfälle 01.09.2026, AgNes)
     quelle:
       name: "Bundesnetzagentur – Elektrizität und Gas"
       url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
@@ -161,10 +161,10 @@ kennzahlen:
     name: "Marktcheck: Kostenlose Girokonten (Konditionen)"
     einheit: "Angebotslage"
     ist_wert: null
-    stand: 2026-02-14
+    stand: 2026-09-28   # geprüft: alte VZ-Seite (10702) ist 404 – Nachfolge-Seite aktiv, Stand 10.12.2025
     quelle:
-      name: "Verbraucherzentrale – Kostenlose Girokonten"
-      url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+      name: "Verbraucherzentrale – Girokonto: Was Sie darüber wissen sollten"
+      url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     rhythmus_tage: 90
     toleranz: null
     ymyl: true

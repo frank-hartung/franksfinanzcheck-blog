@@ -2,7 +2,7 @@
 title: "Finanzieller Puffer: Wie viel Notgroschen ist genug?"
 description: "Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte: klare Faustregeln, einfache Rechenbeispiele und ein alltagstauglicher Plan für drei bis…"
 date: 2026-09-21T09:29:03Z
-lastmod: 2026-09-25
+lastmod: 2026-09-28
 draft: false
 reserve_published: 2026-09-21
 tags: ["Finanzieller Puffer", "Finanzieller", "Notgroschen"]
@@ -117,6 +117,10 @@ Jetzt multiplizierst du die Summe mit deinem Sicherheitsfaktor:
 Für einen Angestellten ohne Kinder kann **7.200 €** schon ein sauberer Zielwert sein. Für eine Familie mit Haus kann eher **10.800 €** passen.
 
 Wichtig ist nicht die perfekte Zahl auf den Euro. Wichtig ist, dass du einen realistischen Korridor hast und nicht blind sparst.
+
+Oder direkt hier: Trag dein Nettoeinkommen ein und der Rechner zeigt dir Ziel, Lücke und die Sparrate dorthin.
+
+{{< rechner typ="notgroschen" quelle="Verbraucherzentrale / Destatis (siehe Quellen unten)" stand="September 2026" >}}
 
 ## Wo parkst du den Notgroschen am besten?
 

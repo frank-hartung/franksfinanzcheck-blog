@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-09-28
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
 description: "Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist."
 date: 2026-08-10T10:20:09Z
@@ -113,6 +113,10 @@ Dann teilst du die Gesamtkosten durch 24. Fertig.
 - eventuell Zusatzoptionen, die du gar nicht brauchst
 
 Sobald du das einmal sauber nebeneinanderlegst, wirkt die Tarifliste oft sehr viel klarer.
+
+Rechne deinen eigenen Tarif-Kandidaten direkt durch – Bonus, Anschlusskosten und Laufzeit in einem Rutsch:
+
+{{< rechner typ="dsl-effektiv" >}}
 
 ## Welche Bonus-Arten es gibt – und worauf du achten musst
 

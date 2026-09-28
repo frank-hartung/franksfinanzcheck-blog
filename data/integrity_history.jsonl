@@ -193,3 +193,4 @@
 {"date": "2026-09-27", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-09-27", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-09-28", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["layouts/shortcodes/einspartabelle.html", "layouts/shortcodes/tarifvergleich.html"]}
+{"date": "2026-09-28", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["layouts/_partials/extend_post_content.html"]}

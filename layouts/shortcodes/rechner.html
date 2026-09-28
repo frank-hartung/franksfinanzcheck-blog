@@ -1,0 +1,195 @@
+{{- /* ============================================================
+    RECHNER – Interaktive Ratgeber-Rechner (H6, 28.09.2026)
+    ------------------------------------------------------------
+    Konkurrenz-Parität Finanztip (/rechner/): drei Rechner in
+    Franks Kern-Nischen, eingebettet genau dort, wo Leser sie
+    brauchen (nicht als eigener Silo-Bereich):
+
+      {{< rechner typ="notgroschen" … >}}     Notgroschen-Ziel + Sparraten
+      {{< rechner typ="strom-abschlag" … >}}  fairer Monatsabschlag + Ampel
+      {{< rechner typ="dsl-effektiv" … >}}    Effektivpreis inkl. Wechselbonus
+
+    Parameter:
+      typ    (Pflicht) notgroschen | strom-abschlag | dsl-effektiv
+      titel  (optional) Überschrift
+      quelle (optional) Quellenangabe für die Methodik-Zeile – NUR aus
+                       dem quellen-Frontmatter des Artikels belegen
+      stand  (optional) Stand der Daten (Monat/Jahr)
+
+    VERTRAG:
+      * Logik: static/premium/ff-rechner.js (lädt einmalig via Store,
+        egal wie viele Rechner auf der Seite stehen). Rechnet 100 %
+        lokal – kein Tracking, keine Cookies, kein Netz.
+      * Werte in titre/stand NIE erfinden (Anti-Halluzinations-Statut).
+      * Optik: scoped <style> mit globalen CSS-Variablen (automatisch
+        Dark-Mode-fähig). Hinweis-Texte bleiben var(--primary) –
+        Kontrast in beiden Themes gesichert.
+      * Ohne JavaScript bleibt der Rechner unsichtbar (noscript).
+    ============================================================= */ -}}
+{{- $typ := .Get "typ" -}}
+{{- $titel := .Get "titel" -}}
+{{- $quelle := .Get "quelle" -}}
+{{- $stand := .Get "stand" -}}
+{{- $id := printf "ffr-%d" (hash.FNV32a $typ) -}}
+
+{{- if eq $typ "notgroschen" -}}
+{{- $titel = $titel | default "🧮 Notgroschen-Rechner: Wie viel ist dein Ziel?" -}}
+{{- else if eq $typ "strom-abschlag" -}}
+{{- $titel = $titel | default "🧮 Strom-Abschlag-Rechner: Dein fairer Monatsabschlag" -}}
+{{- else if eq $typ "dsl-effektiv" -}}
+{{- $titel = $titel | default "🧮 DSL-Effektivpreis-Rechner: Was kostet der Tarif wirklich?" -}}
+{{- else -}}
+{{- errorf "rechner: unbekannter typ %q (erlaubt: notgroschen, strom-abschlag, dsl-effektiv)" $typ -}}
+{{- end -}}
+
+<div class="ff-rechner" data-ff-rechner data-typ="{{ $typ }}">
+  <noscript><style>.ff-rechner{display:none !important}</style></noscript>
+  <div class="ff-rechner__kopf">
+    <h3 class="ff-rechner__titel">{{ $titel }}</h3>
+    <p class="ff-rechner__unterzeile">Rechnet komplett in deinem Browser – keine Daten verlassen dein Gerät.</p>
+  </div>
+
+  {{- if eq $typ "notgroschen" }}
+  <form novalidate>
+    <div class="ff-rechner__grid">
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-einkommen">Nettoeinkommen pro Monat <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-einkommen"
+               data-feld="einkommen" placeholder="z. B. 2.500" required>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-erspartes">Bereits Erspartes</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-erspartes"
+               data-feld="erspartes" placeholder="z. B. 4.000">
+      </div>
+      <div class="ff-rechner__feld ff-rechner__feld--voll">
+        <label for="{{ $id }}-reserve">Monatsreserve (Faustregel: 3–6 Gehälter) – aktuell: <strong data-ff-rechner-slider-wert>3×</strong></label>
+        <input type="range" min="3" max="6" step="1" value="3" id="{{ $id }}-reserve" data-feld="reserve">
+      </div>
+    </div>
+    <button type="submit" class="ff-rechner__btn">Berechnen</button>
+  </form>
+  {{- else if eq $typ "strom-abschlag" }}
+  <form novalidate>
+    <div class="ff-rechner__grid">
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-verbrauch">Jahresverbrauch in kWh <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-verbrauch"
+               data-feld="verbrauch" placeholder="z. B. 4.000" required>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-preis">Arbeitspreis in ct/kWh <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-preis"
+               data-feld="preis" value="37,0" required>
+        <p class="ff-rechner__hinweis-klein">37,0 ct/kWh = BDEW-Durchschnitt Haushalt 2026 – ersetze ihn durch deinen Tarifpreis.</p>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-grundpreis">Grundpreis in €/Monat <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-grundpreis"
+               data-feld="grundpreis" value="12" required>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-aktuell">Dein aktueller Abschlag in €/Monat</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-aktuell"
+               data-feld="aktuell" placeholder="z. B. 100">
+      </div>
+    </div>
+    <button type="submit" class="ff-rechner__btn">Berechnen</button>
+  </form>
+  {{- else if eq $typ "dsl-effektiv" }}
+  <form novalidate>
+    <div class="ff-rechner__grid">
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-grundgebuehr">Grundgebühr in €/Monat <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-grundgebuehr"
+               data-feld="grundgebuehr" placeholder="z. B. 40" required>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-laufzeit">Laufzeit in Monaten <span aria-hidden="true">*</span></label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-laufzeit"
+               data-feld="laufzeit" value="24" required>
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-bonus">Wechselbonus in €</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-bonus"
+               data-feld="bonus" placeholder="z. B. 150">
+      </div>
+      <div class="ff-rechner__feld">
+        <label for="{{ $id }}-kosten">Einmalkosten (Anschluss o. Ä.) in €</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-kosten"
+               data-feld="kosten" placeholder="z. B. 40">
+      </div>
+      <div class="ff-rechner__feld ff-rechner__feld--voll">
+        <label for="{{ $id }}-aktuell">Dein aktueller Effektivpreis in €/Monat (optional)</label>
+        <input type="text" inputmode="decimal" autocomplete="off" id="{{ $id }}-aktuell"
+               data-feld="aktuell" placeholder="z. B. 45">
+      </div>
+    </div>
+    <button type="submit" class="ff-rechner__btn">Berechnen</button>
+  </form>
+  {{- end }}
+
+  <div class="ff-rechner__ergebnis" data-ff-rechner-ergebnis role="region"
+       aria-live="polite" aria-label="Rechenergebnis"></div>
+
+  <div class="ff-rechner__methodik">
+    <p class="ff-rechner__methodik-titel">So rechnet dieser Rechner</p>
+    {{- if eq $typ "notgroschen" }}
+    <p>Zielbetrag = Monatsreserve × Nettoeinkommen. Fehlbetrag = Ziel − Erspartes. Sparrate = Fehlbetrag ÷ Monate (12 bzw. 24). Die Faustregel „3 bis 6 Netto-Monatsgehälter" ist der übliche Verbraucher-Rahmen für ungeplante Ausgaben – kein Gesetz: Mit stabilem Einkommen und wenig Fixkosten reicht eher das Minimum.</p>
+    {{- else if eq $typ "strom-abschlag" }}
+    <p>Jahreskosten = (Jahresverbrauch × Arbeitspreis ÷ 100) + (Grundpreis × 12). Fairer Abschlag = Jahreskosten ÷ 12. Liegt dein aktueller Abschlag über 15 % darunter, droht eine Nachzahlung; über 15 % darüber, parkst du Geld zinslos beim Versorger.</p>
+    {{- else if eq $typ "dsl-effektiv" }}
+    <p>Effektivpreis = (Grundgebühr × Laufzeit − Wechselbonus + Einmalkosten) ÷ Laufzeit. Der Effektivpreis ist die ehrliche Vergleichszahl – ein hoher Bonus kaschiert nur, wenn die Grundgebühr nach dem Aktionszeitraum steigt.</p>
+    {{- end }}
+    {{- if or $quelle $stand }}
+    <p class="ff-rechner__beleg">
+      {{- with $quelle }}Quelle: {{ . }}{{ end -}}
+      {{- if and $quelle $stand }} · {{ end -}}
+      {{- with $stand }}Stand: {{ . }}{{ end -}}
+    </p>
+    {{- end }}
+  </div>
+</div>
+
+{{- /* Skript genau EINMAL pro Seite laden, egal wie viele Rechner stehen. */ -}}
+{{- if not (.Store.Get "ff-rechner-js-geladen") -}}
+{{- .Store.Set "ff-rechner-js-geladen" true -}}
+<script defer src="{{ partial "asset_url.html" "premium/ff-rechner.js" }}"></script>
+{{- end -}}
+
+<style>
+/* ============================================================
+   RECHNER – Komponenten-Optik (28.09.2026)
+   Global CSS-Variablen => automatisch Dark Mode. Hinweis-Texte
+   bleiben var(--primary) (Kontrast in beiden Themes gesichert),
+   farbige Akzente nur als Fläche/Border (PRODUCT.md-Farblogik).
+   ============================================================ */
+.ff-rechner{margin:26px 0;padding:20px 22px 18px;border:1px solid var(--border);border-radius:var(--ff-radius-md,14px);background:var(--entry);box-shadow:0 1px 2px rgba(15,52,43,.05),0 16px 40px -26px rgba(15,52,43,.25)}
+.ff-rechner__titel{margin:0;font-size:1.05rem;font-weight:800;letter-spacing:-.01em;color:var(--primary)}
+.ff-rechner__unterzeile{margin:4px 0 0;font-size:.78rem;color:var(--secondary)}
+.ff-rechner__grid{display:grid;grid-template-columns:1fr;gap:12px 16px;margin-top:16px}
+@media(min-width:640px){.ff-rechner__grid{grid-template-columns:1fr 1fr}.ff-rechner__feld--voll{grid-column:1/-1}}
+.ff-rechner__feld label{display:block;font-size:.82rem;font-weight:700;color:var(--primary);margin-bottom:6px}
+.ff-rechner__feld label span[aria-hidden]{color:var(--ff-green-2,#0E5A43)}
+.ff-rechner__feld input{width:100%;min-height:44px;padding:8px 12px;font:inherit;font-size:.95rem;color:var(--primary);background:var(--theme);border:1px solid var(--border);border-radius:10px}
+.ff-rechner__feld input:focus-visible{outline:3px solid var(--ff-yellow,#FFB300);outline-offset:2px}
+.ff-rechner__feld input[type="range"]{padding:0;accent-color:var(--ff-green-2,#0E5A43);background:transparent;border:none}
+.ff-rechner__hinweis-klein{margin:6px 0 0;font-size:.74rem;color:var(--secondary);line-height:1.45}
+.ff-rechner__btn{display:inline-flex;align-items:center;min-height:44px;margin-top:16px;padding:8px 22px;font:inherit;font-size:.9rem;font-weight:700;color:#fff;background:var(--ff-green,#0E5A43);border:none;border-radius:var(--ff-radius-pill,999px);cursor:pointer;box-shadow:0 2px 8px rgba(14,90,67,.28);transition:transform .15s,box-shadow .15s}
+.ff-rechner__btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,90,67,.4)}
+:root[data-theme="dark"] .ff-rechner__btn{background:var(--ff-emerald-bright,#7FD1B4);color:#0e5a43}
+.ff-rechner__ergebnis{min-height:96px;margin-top:16px;padding:14px 16px;border-radius:10px;background:color-mix(in srgb,var(--ff-green,#0E5A43) 5%,var(--entry));border:1px solid color-mix(in srgb,var(--ff-green,#0E5A43) 18%,var(--border))}
+.ff-rechner__leer{margin:0;font-size:.88rem;color:var(--secondary)}
+.ff-rechner__zeile{display:flex;justify-content:space-between;gap:14px;padding:5px 0;font-size:.9rem;color:var(--primary)}
+.ff-rechner__zeile--stark{font-weight:800;font-size:1rem}
+.ff-rechner__zeile--stark .ff-rechner__wert{color:var(--ff-green-2,#0E5A43)}
+:root[data-theme="dark"] .ff-rechner__zeile--stark .ff-rechner__wert{color:var(--ff-emerald-bright,#7FD1B4)}
+.ff-rechner__hinweis{margin:10px 0 0;padding:10px 12px;border-radius:8px;font-size:.82rem;line-height:1.5;color:var(--primary)}
+.ff-rechner__hinweis--gut{background:color-mix(in srgb,#0E5A43 10%,var(--entry));border-left:4px solid var(--ff-green,#0E5A43)}
+.ff-rechner__hinweis--nachzahlung{background:color-mix(in srgb,#B42318 10%,var(--entry));border-left:4px solid #B42318}
+.ff-rechner__hinweis--zu-hoch,.ff-rechner__hinweis--achtung{background:color-mix(in srgb,#FFB300 14%,var(--entry));border-left:4px solid var(--ff-yellow,#FFB300)}
+.ff-rechner__methodik{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)}
+.ff-rechner__methodik-titel{margin:0 0 6px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--secondary)}
+.ff-rechner__methodik p{margin:0 0 6px;font-size:.78rem;line-height:1.55;color:var(--secondary)}
+.ff-rechner__beleg{font-weight:700}
+</style>

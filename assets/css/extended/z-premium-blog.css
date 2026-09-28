@@ -1686,6 +1686,108 @@ details.toc .inner a:focus-visible {
 }
 
 /* ============================================================
+   FEEDBACK – „War dieser Ratgeber hilfreich?" (H4, 28.09.2026)
+   ------------------------------------------------------------
+   Renderer: layouts/_partials/ff_feedback.html
+   Logik: static/premium/ff-feedback.js (POST an den eigenen
+   Newsletter-Worker, nur aggregierte Zähler, kein Tracking).
+   Schlichte Trenner-Zeile unter dem Artikel – darf die Quellen-
+   Box und Related Posts nicht an Wichtigkeit erreichen.
+   Höhenkontrakt: Knöpfe und Danke-Text je min-height 44px,
+   damit der Klick-Swap keinen Layout-Shift erzeugt (CLS ≈ 0).
+   ============================================================ */
+.ff-feedback {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 30px 0 6px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+:root[data-theme="dark"] .ff-feedback {
+  border-top-color: var(--ff-border-card, var(--border));
+}
+
+.ff-feedback__frage {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.ff-feedback__sigil {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: var(--ff-green-2);
+  background: color-mix(in srgb, var(--ff-green) 12%, transparent);
+}
+
+:root[data-theme="dark"] .ff-feedback__sigil {
+  color: var(--ff-accent-2);
+  background: color-mix(in srgb, var(--ff-accent) 16%, transparent);
+}
+
+.ff-feedback__knopfe {
+  display: inline-flex;
+  gap: 10px;
+  min-height: 44px;
+  align-items: center;
+}
+
+.ff-feedback__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--ff-radius-pill, 999px);
+  background: var(--entry);
+  color: var(--primary);
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.ff-feedback__btn:hover {
+  background: var(--ff-green-soft, #EAF4EF);
+  border-color: var(--ff-green);
+  color: var(--ff-green);
+}
+
+:root[data-theme="dark"] .ff-feedback__btn {
+  background: var(--ff-surface, var(--entry));
+  border-color: var(--ff-border-card, var(--border));
+}
+
+:root[data-theme="dark"] .ff-feedback__btn:hover {
+  color: var(--ff-accent-2);
+  border-color: var(--ff-accent);
+  background: color-mix(in srgb, var(--ff-accent) 10%, transparent);
+}
+
+.ff-feedback__dank {
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: .86rem;
+  color: var(--secondary);
+}
+
+/* ============================================================
    QUELLEN & FAKTENSTAND – Belegkette am Artikelende (27.09.2026)
    ------------------------------------------------------------
    Renderer: layouts/_partials/ff_quellen_box.html

@@ -2,7 +2,7 @@
 title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
 description: "Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stift und Papier im ehrlichen Vergleich – mit der 50-30-20-Regel bis zu 430 € im Monat sparen."
 date: 2026-08-21T06:10:00Z
-lastmod: 2026-09-25
+lastmod: 2026-09-28
 draft: false
 tags: ["Haushaltsbuch führen", "Haushaltsbuch App", "Budgetplanung", "50 30 20 Regel", "Ausgaben tracken"]
 categories: ["Ratgeber"]
@@ -27,29 +27,16 @@ quellen:
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
     herausgeber: "Deutsche Bundesbank"
     datum: "2026-04-12"
-  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+  - titel: "Girokonto: Was Sie darüber wissen sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-02-14"
+    datum: "2025-12-10"
   - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "BaFin"
     datum: "2025-11-08"
 faktencheck: "2026-09-27"
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Am Monatsende ist das Konto leer. Du weißt nicht, wohin das Geld geflossen ist? So geht es rund **60 % der Haushalte** in Deutschland. Das zeigt eine Auswertung der Stiftung Warentest.
 

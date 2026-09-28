@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-25
+lastmod: 2026-09-28
 title: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
 description: "Woran du ein wirklich kostenloses Girokonto erkennst: Karten, Bargeld, Dispo, Kontowechsel und die typischen Gebührenfallen im Alltag."
 date: 2026-08-17T08:35:12Z
@@ -27,10 +27,10 @@ quellen:
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
     herausgeber: "Deutsche Bundesbank"
     datum: "2026-04-12"
-  - titel: "Kostenlose Girokonten: Worauf Sie achten sollten"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/kostenlose-girokonten-worauf-sie-achten-sollten-10702"
+  - titel: "Girokonto: Was Sie darüber wissen sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-02-14"
+    datum: "2025-12-10"
   - titel: "Girokonto und Zahlungsverkehr: Verbraucherinformationen der BaFin"
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "BaFin"
