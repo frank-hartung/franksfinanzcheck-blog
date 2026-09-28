@@ -128,12 +128,10 @@ canonical:
 
 frameworks:
   editorial:
-    - "Das Wichtigste in Kürze (fettes Label + 3–4 Bullets) direkt nach der Einleitung"
-    - "Mindestens 2 H2-Überschriften als Fragen, direkt beantwortet"
-    - "Mindestens eine markierte Faustregel (**Faustregel:** …)"
-    - "Mindestens eine nummerierte Schrittfolge (3–6 Schritte)"
+    - "Orientierung und Zusammenfassung nur dort, wo sie dem konkreten Thema dienen; keine Pflichtschablone"
+    - "Fragen, Faustregeln, Schrittfolgen und FAQs adaptiv einsetzen – nie als automatische Serienformel"
+    - "Jede Textsorte erhält einen eigenen Einstieg, Rhythmus und Schluss; wiederkehrende Formulierungen vermeiden"
     - "Zahlen-Ehrlichkeit: Spannen + Einordnung statt erfundener Präzision"
-    - "FAQ-Bereich (## Häufige Fragen, 5 Fragen als H3)"
   openings:
     - "Schritt-für-Schritt-Versprechen"
     - "Zahlen-These"

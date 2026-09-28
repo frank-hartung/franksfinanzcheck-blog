@@ -54,6 +54,27 @@ satzrhythmus:
   - "Sätze beginnen abwechslungsreich – kein Echo desselben Anfangsworts über drei Sätze hinweg."
   - "Zwischen Kapiteln kurze Brücken, die klingen wie Frank: Rückgriff aufs Rechenbeispiel oder eine trockene Zwischenfrage."
 
+# Eigenständigkeit statt Schablone. Diese Leitplanke gilt für jeden
+# Entwurf, jede Überarbeitung und jede wiederkehrende Textsorte.
+eigenstaendigkeit:
+  anspruch: >-
+    Sprachlich und journalistisch mindestens auf dem Niveau von ZEIT.de;
+    eigenständige Stimme statt Nachahmung. Der Text soll präzise, gedanklich
+    beweglich und überraschungsfähig sein – nie wie ein ausgefülltes Muster.
+  anti_formel: >-
+    Templates, wiederkehrende Einstiege, identische Übergänge, Serien-
+    Überschriften und routinierte Schlussformeln nicht automatisch
+    reproduzieren. Eine Struktur darf Orientierung geben, aber nicht den
+    Rhythmus und die Form jedes Artikels diktieren.
+  variation: >-
+    Perspektive, Satzlänge, Absatzöffnung, Überschriftenform und Schluss
+    bewusst am Gegenstand ausrichten. Jeder Artikel braucht mindestens einen
+    eigenen Blick, ein konkretes Bild oder eine präzise Beobachtung.
+  redaktionspruefung: >-
+    Vor der Ausgabe auf austauschbare Passagen prüfen: Würde dieser Satz
+    unverändert auch unter drei andere Themen passen, wird er neu gedacht.
+    Verständlichkeit bleibt Pflicht; anspruchsvoll heißt nicht ornamental.
+
 # Klangfarbe & Wortwahl.
 tonfall:
   - "Warm, trocken, mit Augenzwinkern – verbindlich, nie feierlich."

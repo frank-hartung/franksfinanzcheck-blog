@@ -41,6 +41,20 @@ Python-Gates in `scripts/`, ausführliche Zustands-Reports im Root.
    `python3 scripts/design_handoff.py --check` prüft Marken- und Exportdrift.
    Runbook: `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`.
 
+## Redaktionelle Sprache (DAUERVORGABE)
+
+Templates und wiederkehrende Formeln erzeugen Gleichförmigkeit. Für alle neuen
+und überarbeiteten Texte gilt deshalb: sprachlich mindestens auf dem Niveau von
+ZEIT.de, jedoch mit eigenständiger Stimme und ohne Nachahmung. Die Form folgt
+dem konkreten Thema; Einstiege, Übergänge, Überschriftenrhythmus und Schlüsse
+werden nicht schematisch wiederholt. Jeder Artikel braucht einen eigenen Blick,
+eine konkrete Beobachtung oder ein tragfähiges Bild. Anspruch bedeutet Präzision
+und gedankliche Beweglichkeit, nicht Ornament oder unnötige Komplexität.
+
+Die ausführliche, maschinenlesbare Leitplanke steht in
+`data/schreibstil.yaml` unter `eigenstaendigkeit`; Generierung und Stilpolitur
+müssen sie berücksichtigen.
+
 ## Test- und Verifikations-Pipeline
 
 ```bash
