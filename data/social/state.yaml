@@ -406,5 +406,18 @@ history:
     #HundVersichern #KatzeVersichern #Tierarztkosten #Haustierkosten'
   ref: '117348501740184448'
   ai: true
+- posted_at: '2026-09-28T22:09:06.108165+02:00'
+  channel: mastodon
+  slug: 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug
+  title: 'Finanzieller Puffer: Wie viel Notgroschen ist genug?'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117350478329944059
+  ok: true
+  text: '🔒 Schütze dich vor unerwarteten Ausgaben: Leg dir einen Notgroschen von drei
+    bis sechs Monatskosten an. Ein Notgroschen sollte meist drei bis sechs Monate
+    deiner festen Lebenshaltungskosten abdecken. https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #FinanziellerPuffer #Notgroschen'
+  ref: '117350478329944059'
+  ai: true
 failures: []
-updated_at: '2026-09-28T13:47:15.062854+02:00'
+updated_at: '2026-09-28T22:09:55.721493+02:00'
