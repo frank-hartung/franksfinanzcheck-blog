@@ -244,21 +244,35 @@ jobs:
         run: |
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json
+          import sys
           from pathlib import Path
+
+          # SSOT #446: Die Workflow-Ausgabe darf die Historienliste nicht
+          # erneut als "offen" umdeuten. Dieselbe Semantik verwenden Gate,
+          # Bot-Watchdog und dieses Issue-/Summary-Reporting.
+          sys.path.insert(0, "scripts")
+          from affiliate_integrity_state import unresolved_problems, state_contract_error
+
           state = {}
           for cand in (Path("/tmp/state.json"), Path(".affiliate_integrity_state.json")):
               if cand.is_file():
                   try:
-                      state = json.loads(cand.read_text(encoding="utf-8"))
-                      break
-                  except Exception:
+                      candidate = json.loads(cand.read_text(encoding="utf-8"))
+                      if isinstance(candidate, dict):
+                          state = candidate
+                          break
+                  except (OSError, ValueError):
                       pass
-          healed = state.get("healed") or []
+          healed = state.get("healed") if isinstance(state.get("healed"), list) else []
+          open_problems = unresolved_problems(state)
+          contract_error = state_contract_error(state) or ""
+          errors = state.get("errors") if isinstance(state.get("errors"), list) else []
           print(f"healed={'true' if healed else 'false'}")
           print(f"healed_count={len(healed)}")
           print(f"exit_code={state.get('exit_code', '')}")
-          print(f"content_problems={len(state.get('content_problems') or [])}")
-          print(f"tool_errors={len(state.get('errors') or [])}")
+          print(f"unresolved_problems={len(open_problems)}")
+          print(f"state_contract_error={'true' if contract_error else 'false'}")
+          print(f"tool_errors={len(errors)}")
           # HERZSCHLAG vs. BEFUND (#281): der Zeitstempel ist ein Lebenszeichen,
           # `verdict_changed` sagt, ob sich die LAGE geändert hat.
           print(f"verdict_changed={'true' if state.get('verdict_changed') else 'false'}")
@@ -363,7 +377,8 @@ jobs:
           GATE_EXIT: ${{ steps.gate.outputs.exit_code }}
           HEALED: ${{ steps.state.outputs.healed }}
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
-          CONTENT_PROBLEMS: ${{ steps.state.outputs.content_problems }}
+          UNRESOLVED_PROBLEMS: ${{ steps.state.outputs.unresolved_problems }}
+          STATE_CONTRACT_ERROR: ${{ steps.state.outputs.state_contract_error }}
           TOOL_ERRORS: ${{ steps.state.outputs.tool_errors }}
           HUGO_OUTCOME: ${{ steps.hugo.outcome }}
           SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
@@ -372,9 +387,13 @@ jobs:
             const fs = require('fs');
             const marker = process.env.ISSUE_MARKER;
             const exitCode = String(process.env.GATE_EXIT || '');
-            const green = exitCode === '0';
             const healedCount = Number(process.env.HEALED_COUNT || 0);
             const toolErrors = Number(process.env.TOOL_ERRORS || 0);
+            // Ein v2-Zustand mit widersprüchlicher Restmenge ist kein Grün.
+            // Ohne diesen Check könnte ein beschädigter Beweis ein offenes
+            // Ticket schließen; geheilte Historie bleibt dagegen korrekt grün.
+            const stateContractError = process.env.STATE_CONTRACT_ERROR === 'true';
+            const green = exitCode === '0' && !stateContractError;
 
             let report = '';
             try { report = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); }
@@ -413,7 +432,7 @@ jobs:
             }
 
             const isToolError = exitCode === '2' || exitCode === '' || toolErrors > 0
-              || process.env.SELFTEST_OUTCOME !== 'success';
+              || stateContractError || process.env.SELFTEST_OUTCOME !== 'success';
             const title = isToolError
               ? '🔗 Affiliate-Integritäts-Wache: Render-Beweis nicht möglich (Werkzeugfehler, fail-closed)'
               : '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit';
@@ -425,13 +444,17 @@ jobs:
                   'und `publish_gate.py` veröffentlicht in diesem Zustand keine Artikel. ' +
                   'Bitte `python3 scripts/affiliate_integrity_gate.py --selftest` und das Hugo-Log prüfen. ' +
                   (exitCode === '' ? ` Hinweis: Gate-Exit fehlt (Selftest=${process.env.SELFTEST_OUTCOME}, ` +
-                   `Hugo=${process.env.HUGO_OUTCOME}).` : '')
+                   `Hugo=${process.env.HUGO_OUTCOME}).` : '') +
+                  (stateContractError
+                    ? ' Hinweis: Der versionierte Affiliate-Zustand verletzt seinen Vertrag; ' +
+                      'der Lauf wird fail-closed als Werkzeugfehler behandelt.'
+                    : '')
                 : '> 🔴 **Inhaltsschaden:** Nach der automatischen Selbstheilung bleiben Affiliate-CTAs ' +
                   'auffällig. Betroffene Artikel wurden NICHT gelöscht.',
               '',
               `**Lauf:** ${new Date().toISOString()} · **Exit-Code:** ${exitCode || 'unbekannt'} · ` +
               `**Hugo:** ${process.env.HUGO_OUTCOME || '?'} · **Selftest:** ${process.env.SELFTEST_OUTCOME || '?'} · ` +
-              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Funde:** ${process.env.CONTENT_PROBLEMS || 0}`,
+              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Restfunde:** ${process.env.UNRESOLVED_PROBLEMS || 0}`,
               '',
               '---',
               '',
@@ -492,7 +515,8 @@ jobs:
             echo "| Lage gegenüber letztem Lauf | ${{ steps.state.outputs.verdict_changed == 'true' && 'GEÄNDERT' || 'unverändert' }} |"
             echo "| Gate-Exit | ${{ steps.gate.outputs.exit_code }} |"
             echo "| Automatisch geheilt | ${{ steps.state.outputs.healed_count }} Artikel |"
-            echo "| Offene Funde | ${{ steps.state.outputs.content_problems }} |"
+            echo "| Offene Restfunde | ${{ steps.state.outputs.unresolved_problems }} |"
+            echo "| Zustandsvertrag | ${{ steps.state.outputs.state_contract_error == 'true' && 'beschädigt (fail-closed)' || 'gültig/Legacy' }} |"
             echo "| Werkzeugfehler | ${{ steps.state.outputs.tool_errors }} |"
             echo "| Nachweis in origin/main | ${{ steps.commit.outputs.push_verified }} |"
             echo "| Intent-Wache (IW0–IW9) Exit | ${{ steps.intent.outputs.exit_code }} |"

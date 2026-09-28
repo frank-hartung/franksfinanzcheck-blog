@@ -119,7 +119,23 @@ class HerzschlagTestCase(unittest.TestCase):
         written = json.loads(gate.STATE.read_text(encoding="utf-8"))
         self.assertIs(broken["verdict_changed"], True,
                       "ein offener Fund muss als Lageänderung gelten")
+        self.assertEqual(written["state_schema_version"], 2)
         self.assertEqual(written["content_problems"], ["2026-08-10-test"])
+        self.assertEqual(written["unresolved_problems"], ["2026-08-10-test"])
+
+    def test_geheilter_fund_bleibt_audit_spur_aber_keine_restmenge(self):
+        """Der Produzent muss den #446-Vertrag selbst garantieren."""
+        healed = _result(
+            _stamp(0),
+            problems={"2026-08-10-geheilt": {"problems": [], "healed": ["CTA neu"]}},
+        )
+        healed["healed"] = ["2026-08-10-geheilt"]
+        healed["healed_count"] = 1
+        gate.write_state(healed)
+        written = json.loads(gate.STATE.read_text(encoding="utf-8"))
+        self.assertEqual(written["state_schema_version"], 2)
+        self.assertEqual(written["content_problems"], ["2026-08-10-geheilt"])
+        self.assertEqual(written["unresolved_problems"], [])
 
     def test_verdict_changed_verfaelscht_die_lage_nicht(self):
         """`verdict_changed` ist ein Lebenszeichen-Feld – die Lage selbst zählt."""
@@ -131,6 +147,49 @@ class HerzschlagTestCase(unittest.TestCase):
         written = json.loads(gate.STATE.read_text(encoding="utf-8"))
         self.assertEqual(written["content_problems"], [])
         self.assertEqual(written["exit_code"], 0)
+
+
+class GateWatchdogVertragTestCase(unittest.TestCase):
+    """Erzeuger und Verbraucher teilen exakt einen #446-Zustandsvertrag."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        self.alt_state, self.alt_report = gate.STATE, gate.REPORT
+        self.alt_dir = bw.BLOG_DIR
+        gate.STATE = self.tmp / ".affiliate_integrity_state.json"
+        gate.REPORT = self.tmp / "AFFILIATE-INTEGRITY-REPORT.md"
+        bw.BLOG_DIR = self.tmp
+
+    def tearDown(self):
+        gate.STATE, gate.REPORT = self.alt_state, self.alt_report
+        bw.BLOG_DIR = self.alt_dir
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_im_lauf_geheilter_fund_bleibt_bis_zum_watchdog_gruen(self):
+        result = _result(
+            _stamp(0),
+            problems={"2026-08-10-geheilt": {"problems": [], "healed": ["CTA neu"]}},
+        )
+        result["healed"] = ["2026-08-10-geheilt"]
+        result["healed_count"] = 1
+        gate.write_state(result)
+
+        ok, message = bw.check_affiliate_integrity()
+
+        self.assertIs(ok, True, message)
+        self.assertIn("Herzschlag", message)
+
+    def test_echter_restfund_bleibt_bis_zum_watchdog_rot(self):
+        result = _result(
+            _stamp(0), exit_code=1,
+            problems={"2026-08-10-offen": {"problems": ["CTA kaputt"], "healed": []}},
+        )
+        gate.write_state(result)
+
+        ok, message = bw.check_affiliate_integrity()
+
+        self.assertIs(ok, False)
+        self.assertIn("1 offene Affiliate-Probleme", message)
 
 
 class WatchdogFrischeTestCase(unittest.TestCase):
@@ -149,8 +208,9 @@ class WatchdogFrischeTestCase(unittest.TestCase):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def _state(self, hours_ago: float, exit_code: int = 0, problems=(),
-               errors=()) -> None:
-        self.state.write_text(json.dumps({
+               errors=(), unresolved=None, schema_version=None) -> None:
+        """Schreibt sowohl Legacy- als auch v2-Zustände gezielt als Fixture."""
+        data = {
             "generated_at": _stamp(hours_ago),
             "verdict_changed": False,
             "exit_code": exit_code,
@@ -160,7 +220,13 @@ class WatchdogFrischeTestCase(unittest.TestCase):
             "content_problems": list(problems),
             "errors": list(errors),
             "build": {"built": True, "reason": "public/ frisch", "ok": True},
-        }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        }
+        if schema_version is not None:
+            data["state_schema_version"] = schema_version
+        if unresolved is not None:
+            data["unresolved_problems"] = unresolved
+        self.state.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n",
+                              encoding="utf-8")
 
     def _evidence(self, total: int, success: int, running: int = 0) -> None:
         bw.workflow_run_evidence = (
@@ -177,10 +243,37 @@ class WatchdogFrischeTestCase(unittest.TestCase):
         self.assertIn("Herzschlag", msg)
 
     def test_roter_befund_gilt_unabhaengig_vom_alter(self):
-        self._state(1, problems=["slug-a", "slug-b"])
+        self._state(1, exit_code=1, problems=["slug-a", "slug-b"],
+                    unresolved=["slug-a", "slug-b"], schema_version=2)
         ok, msg = bw.check_affiliate_integrity()
         self.assertIs(ok, False)
         self.assertIn("2 offene Affiliate-Probleme", msg)
+
+    def test_geheilte_v2_historie_ist_gruen_und_eroeffnet_keinen_p1(self):
+        """Regression #446: Historie ist Audit-Trail, keine Alarm-Restmenge."""
+        self._state(1, problems=["im-lauf-geheilt"], unresolved=[], schema_version=2)
+        ok, msg = bw.check_affiliate_integrity()
+        self.assertIs(ok, True)
+        self.assertIn("Herzschlag", msg)
+
+    def test_gruener_legacy_lauf_mit_historie_ist_kompatibel_gruen(self):
+        """Alte Zustände haben keine Restmenge; Exit 0 ist ihre Migration."""
+        self._state(1, problems=["historisch-geheilt"])
+        ok, _ = bw.check_affiliate_integrity()
+        self.assertIs(ok, True)
+
+    def test_beschaedigter_v2_zustand_ist_fail_closed(self):
+        self._state(1, problems=["historisch"], unresolved="keine liste",
+                    schema_version=2)
+        ok, msg = bw.check_affiliate_integrity()
+        self.assertIs(ok, False)
+        self.assertIn("Zustandsvertrag beschädigt", msg)
+
+    def test_widerspruechlich_gruener_v2_zustand_ist_fail_closed(self):
+        self._state(1, problems=["offen"], unresolved=["offen"], schema_version=2)
+        ok, msg = bw.check_affiliate_integrity()
+        self.assertIs(ok, False)
+        self.assertIn("grüner Lauf enthält trotzdem offene Restfunde", msg)
 
     def test_werkzeugfehler_im_zustand_ist_rot(self):
         self._state(2, exit_code=2, errors=["kein public/ – fail-closed"])

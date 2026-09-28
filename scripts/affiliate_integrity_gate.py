@@ -169,6 +169,10 @@ RENDER_HOOK = ROOT / "layouts" / "_default" / "_markup" / "render-link.html"
 
 sys.path.insert(0, str(SCRIPTS))
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
+from affiliate_integrity_state import (  # noqa: E402 – State-Vertrag (#446)
+    STATE_SCHEMA_VERSION,
+    state_contract_error,
+)
 
 EXIT_OK = 0
 EXIT_CONTENT = 1
@@ -1350,23 +1354,28 @@ def write_state(result: dict) -> None:
     Watchdog als stiller Ausfall gelesen (#281). `verdict_changed` hält
     fest, ob die LAGE anders ist als im vorherigen Zustand.
     """
+    # Ein Fund kann im selben Lauf geheilt werden. `content_problems` behält
+    # diese nachvollziehbare Laufhistorie, während ausschließlich die
+    # kanonische Restmenge einen Alarm auslösen darf (#446).
+    content_problems = sorted(set(result["findings"]) | set(result["render_problems"]))
+    unresolved_problems = (content_problems if result["exit_code"] == EXIT_CONTENT
+                           else [])
     payload = {
+        "state_schema_version": STATE_SCHEMA_VERSION,
         "exit_code": result["exit_code"],
         "checked": result["checked"],
         "healed": result["healed"],
         "healed_count": result["healed_count"],
-        # `content_problems` ist die Laufhistorie: Sie enthält auch Funde, die
-        # derselbe Lauf erfolgreich geheilt hat. Verbraucher dürfen daraus
-        # deshalb keinen offenen Befund ableiten. `unresolved_problems` ist
-        # die kanonische Restmenge und bei EXIT_OK zwingend leer (#446).
-        "content_problems": sorted(set(result["findings"]) | set(result["render_problems"])),
-        "unresolved_problems": (
-            sorted(set(result["findings"]) | set(result["render_problems"]))
-            if result["exit_code"] == EXIT_CONTENT else []
-        ),
+        "content_problems": content_problems,
+        "unresolved_problems": unresolved_problems,
         "errors": result["errors"],
         "build": result["build"],
     }
+    contract_error = state_contract_error(payload)
+    if contract_error:
+        # Das wäre ein Programmierfehler im Produzenten, kein Content-Befund.
+        # Keinen widersprüchlichen "grünen" Beweis persistieren.
+        raise RuntimeError(f"Affiliate-Integritäts-Zustand ungültig: {contract_error}")
     previous = {}
     if STATE.is_file():
         try:
@@ -1793,10 +1802,33 @@ def run_selftest() -> list[str]:
 
             third = dict(base)
             third["generated_at"] = "2026-09-17 04:00:00 UTC"
+            third["exit_code"] = EXIT_CONTENT
             third["findings"] = {"2026-08-10-test": {"problems": ["kaputt"], "healed": []}}
             write_state(third)
             expect(third["verdict_changed"] is True,
                    "geänderter Befund (offener Fund) muss als Lageänderung gelten")
+            open_state = json.loads(globals()["STATE"].read_text(encoding="utf-8"))
+            expect(open_state.get("unresolved_problems") == ["2026-08-10-test"],
+                   "offene Content-Funde müssen in der kanonischen Restmenge stehen")
+
+            # 10) #446: Ein im selben Lauf geheilter Fund bleibt als Audit-Spur
+            #     sichtbar, darf aber die kanonische Restmenge NIE füllen.
+            #     Das ist der exakte Vertrag, den Watchdog und Workflow lesen.
+            healed = dict(base)
+            healed["generated_at"] = "2026-09-18 04:00:00 UTC"
+            healed["findings"] = {
+                "2026-08-11-geheilt": {"problems": [], "healed": ["CTA neu"]}
+            }
+            healed["healed"] = ["2026-08-11-geheilt"]
+            healed["healed_count"] = 1
+            write_state(healed)
+            healed_state = json.loads(globals()["STATE"].read_text(encoding="utf-8"))
+            expect(healed_state.get("state_schema_version") == STATE_SCHEMA_VERSION,
+                   "State-Version muss die Restmengen-Semantik eindeutig machen")
+            expect(healed_state.get("content_problems") == ["2026-08-11-geheilt"],
+                   "geheilter Fund muss als Audit-Spur erhalten bleiben")
+            expect(healed_state.get("unresolved_problems") == [],
+                   "geheilter Fund darf nicht als offen gespeichert werden (#446)")
     finally:
         globals()["STATE"], globals()["REPORT"] = old_state_path, old_report_path
 
@@ -1817,7 +1849,8 @@ def main() -> int:
               "Erkennung inkl. ?subid=/Legacy/unminifiziert, rohe Partner-Links, "
               "AI1–AI3-Schadensbilder, Deduplikation, AI5-Gateway-Beweis, "
               "Selbstheilung, Build-Frische, Hook-Drift-Wächter, Hugo-Rebuild-Klartext, "
-              "Herzschlag vs. Befund aus #281, CTA-Heilung für Entwürfe #295).")
+              "Herzschlag vs. Befund aus #281, geheilte Historie vs. offene "
+              "Restmenge aus #446, CTA-Heilung für Entwürfe #295).")
         return EXIT_OK
 
     # ---- Datei-bezirkelte Heilung (#295) ------------------------------
