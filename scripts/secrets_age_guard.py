@@ -649,6 +649,23 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
             "msg": f"{meta['label']}: Live-Check nicht möglich ({v_detail or 'unbekannt'}) – "
                    f"Health gilt NICHT als bestätigt"})
 
+    # Optionale Stütz-Secrets ohne eigene API-Probe (z. B.
+    # PINTEREST_TOKEN_KEY/PINTEREST_REFRESH_TOKEN) dürfen den wöchentlichen
+    # Governance-Report nicht offen halten, nur weil sie zwar gesetzt sind,
+    # aber naturgemäß keinen Live-200 liefern können. Ihre echte Wirkung wird
+    # über den primären Kanal (`PINTEREST_ACCESS_TOKEN` via Token-Broker) und
+    # dessen Lebenszyklusblock geprüft. Vorher wurde ein vorhandener
+    # Verschlüsselungs-Key als `untracked` AMBER geführt – genau der
+    # Dauerbefund aus Governance #439.
+    if meta.get("optional") and meta.get("probe") is None:
+        if _alt_active(meta):
+            return (f"VORHANDEN (Reserve via {meta['alt_of']})",
+                    "Struktur-Secret, primärer Kanal beweist Health", None)
+        return ("VORHANDEN (nicht live prüfbar)", "Struktur-Secret", {
+            "level": "info", "code": "untracked_optional", "var": var,
+            "msg": f"{meta['label']} ist gesetzt, hat aber keine eigene Live-Probe; "
+                   "die Betriebsfähigkeit wird über den primären Kanal geprüft"})
+
     last_success = _parse_date(ent.get("last_success"))
     quality = ent.get("quality") or ("proven" if ent.get("last_verified") else "declared")
     if last_success:
@@ -1052,6 +1069,24 @@ def _selftest():
         st = classify("PINTEREST_TOKEN_KEY", meta_opt, ent(), today=today)
         if st[2] is not None:
             failures.append("optionales Secret mit aktivem Alternativpfad meldet Befund")
+        # --- #439: Auch ein GESETZTES Stütz-Secret ohne eigene Live-Probe darf
+        # bei verfügbarem --verify nicht als `untracked` in den Governance-Alarm
+        # rutschen. Der primäre Pinterest-Kanal beweist die Health.
+        globals()["_present"] = lambda var: var in (
+            "PINTEREST_ACCESS_TOKEN", "PINTEREST_TOKEN_KEY")
+        st = classify("PINTEREST_TOKEN_KEY", meta_opt, ent(), today=today,
+                      live_check_available=True)
+        if st[2] is not None:
+            failures.append("gesetztes optionales Stütz-Secret ohne Probe alarmiert (#439)")
+        globals()["_present"] = lambda var: var == "PINTEREST_REFRESH_TOKEN"
+        refresh_meta = {"days": 365, "label": "Pinterest Refresh-Token (Auto-Erneuerung)",
+                        "optional": True, "probe": None}
+        st = classify("PINTEREST_REFRESH_TOKEN", refresh_meta, ent(), today=today,
+                      live_check_available=True)
+        if not st[2] or st[2]["level"] != "info" or st[2]["code"] != "untracked_optional":
+            failures.append("gesetzter optionaler Refresh-Stützkanal ohne Probe ist kein Info-Hinweis")
+        if st[2] and actionable([st[2]]):
+            failures.append("untracked_optional wird als handlungsbedürftig gezählt")
         # --- optional + nirgends eingerichtet -> info, nicht red
         globals()["_present"] = lambda var: False
         import tempfile as _tf_sec
@@ -1178,6 +1213,38 @@ def _selftest():
                 failures.append("geparkter Pinterest-Kanal eskaliert falsch")
             if pinterest_channel_parked(os.path.join(td, "fehlt.json")) is not None:
                 failures.append("fehlende Park-Datei wird fälschlich als Sperre gelesen")
+        # --- #439 komplett: geparkter Pinterest-Kanal + gesetzter Token-Key +
+        # tote Access-Probe darf nur als Info sichtbar sein, nicht als
+        # Governance-Handlungsbefund.
+        orig_parked = globals()["pinterest_channel_parked"]
+        orig_oauth = globals()["oauth_empfaenger_findings"]
+        try:
+            globals()["pinterest_channel_parked"] = lambda path=None: {
+                "since": "2026-08-27T13:58:16Z", "reason": "Domain gesperrt"}
+            globals()["oauth_empfaenger_findings"] = lambda *a, **k: []
+            globals()["_present"] = lambda var: var in {
+                "GROQ_API_KEY", "GEMINI_API_KEY", "MASTODON_ACCESS_TOKEN",
+                "PINTEREST_ACCESS_TOKEN", "PINTEREST_TOKEN_KEY"}
+            verification = {
+                "GROQ_API_KEY": {"ran": True, "kind": "ok", "detail": "200"},
+                "GEMINI_API_KEY": {"ran": True, "kind": "ok", "detail": "200"},
+                "MASTODON_ACCESS_TOKEN": {"ran": True, "kind": "ok", "detail": "200"},
+                "PINTEREST_ACCESS_TOKEN": {"ran": True, "kind": "dead", "detail": "HTTP 401"},
+            }
+            f439, _s439 = audit(verification, live_check_available=True,
+                                pin_health={"state": "unknown"})
+            hard439 = [f for f in actionable(f439)
+                       if f.get("var") in {"PINTEREST_ACCESS_TOKEN", "PINTEREST_TOKEN_KEY"}]
+            if hard439:
+                failures.append("#439-Pinterest-Parklage bleibt handlungsbedürftig: "
+                                f"{[(f.get('var'), f.get('code')) for f in hard439]}")
+            if not any(f.get("var") == "PINTEREST_ACCESS_TOKEN" and
+                       f.get("code") == "channel_parked" for f in f439):
+                failures.append("#439-Parklage wird im Report nicht transparent als Hinweis gezeigt")
+        finally:
+            globals()["pinterest_channel_parked"] = orig_parked
+            globals()["oauth_empfaenger_findings"] = orig_oauth
+            globals()["_present"] = orig_present
         # --- Report-Format muss vom Governance-Gate parsebar bleiben
         rep = render_report([{"level": "red", "code": "dead", "var": "X", "msg": "tot"}],
                             [("X", "TOT (live-Probe)", "API-Lehnung")])
