@@ -1,9 +1,9 @@
 ---
 title: "Rente 2026: So baust du heute deine sichere Altersvorsorge"
 description: "Rente 2026: Altersvorsorge verständlich erklärt: Frank Hartung zeigt dir, wie du 2026 die Rentenlücke schließt und welche Rentenbausteine sich wirklich lohnen."
-date: 2026-09-27T18:01:00Z
-draft: true
-reserve: true
+date: 2026-09-28T01:05:51Z
+draft: false
+reserve_published: 2026-09-28
 tags: ["Rente 2026", "Altersvorsorge", "Rentenlücke"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"

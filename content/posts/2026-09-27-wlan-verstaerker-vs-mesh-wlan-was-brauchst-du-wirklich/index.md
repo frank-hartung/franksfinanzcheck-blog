@@ -2,9 +2,9 @@
 lastmod: 2026-09-27
 title: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
 description: "WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit klaren Kosten, Grenzen und einer einfachen Entscheidung."
-date: 2026-09-27T18:01:00Z
-draft: true
-reserve: true
+date: 2026-09-28T01:05:48Z
+draft: false
+reserve_published: 2026-09-28
 tags: ["WLAN-Verstärker", "Mesh-WLAN"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
