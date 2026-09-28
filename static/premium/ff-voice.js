@@ -184,7 +184,7 @@
       progressWords: 'Wort {i} von {total}',
       progressModeReady: 'Bereit', progressModeSpeech: 'Gerät', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Fertig',
       progressHeading: 'Überschrift', progressParagraph: 'Absatz', progressList: 'Liste', progressQuote: 'Zitat',
-      progressCallout: 'Merksatz', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
+      progressCallout: 'Merksatz', progressKurzantwort: 'Kurzantwort', progressShortAnswer: 'Kurzantwort', progressWarning: 'Hinweis', progressOverview: 'Übersicht',
       progressTableIntro: 'Tabelle im Überblick', progressTableHeader: 'Tabelle · Spalten', progressTableGroup: 'Tabelle · Gruppe',
       progressTableRow: 'Tabelle · Zeile {row} von {total}', progressTableSum: 'Tabelle · Summe', progressTableCta: 'Tabelle · Empfehlung', progressTableOutro: 'Tabellenende',
       progressIntro: 'Intro', progressOutro: 'Abschluss',
@@ -252,7 +252,7 @@
       progressWords: 'Word {i} of {total}',
       progressModeReady: 'Ready', progressModeSpeech: 'Device', progressModeTrack: 'ElevenLabs', progressModePaused: 'Pause', progressModeDone: 'Done',
       progressHeading: 'Heading', progressParagraph: 'Paragraph', progressList: 'List', progressQuote: 'Quote',
-      progressCallout: 'Key point', progressWarning: 'Note', progressOverview: 'Overview',
+      progressCallout: 'Key point', progressKurzantwort: 'Quick answer', progressShortAnswer: 'Short answer', progressWarning: 'Note', progressOverview: 'Overview',
       progressTableIntro: 'Table overview', progressTableHeader: 'Table · Columns', progressTableGroup: 'Table · Group',
       progressTableRow: 'Table · Row {row} of {total}', progressTableSum: 'Table · Total', progressTableCta: 'Table · Recommendation', progressTableOutro: 'End of table',
       progressIntro: 'Intro', progressOutro: 'Outro',
@@ -531,6 +531,9 @@
     if (!block) return T.progressIdle;
     if (block.type === 'intro') return T.progressIntro;
     if (block.type === 'outro') return T.progressOutro;
+    if (block.type === 'kurzantwort' || block.type === 'short-answer' || (block.el && hasClass(block.el, 'ff-kurzantwort'))) {
+      return T.progressKurzantwort || 'Kurzantwort';
+    }
     if (/^h[2-6]$/i.test(block.type || '')) return trimUiText(headingTextOf(block.el) || block.text || T.progressHeading, 72);
     if (block.type === 'table-intro') return T.progressTableIntro;
     if (block.type === 'table-header') return T.progressTableHeader;
@@ -1667,7 +1670,7 @@
     var probe = box;
     if (box.cloneNode) {
       probe = box.cloneNode(true);
-      qsa('.ff-kurzantwort__head, .ff-kurzantwort__label, .ff-kurzantwort__icon, .ff-kurzantwort__eyebrow', probe)
+      qsa('.ff-kurzantwort__head, .ff-kurzantwort__label, .ff-kurzantwort__icon, .ff-kurzantwort__eyebrow, .ff-kurzantwort__badge, .ff-kurzantwort__progress-shell', probe)
         .forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
     }
     return readableText(probe);
@@ -1696,10 +1699,12 @@
       var text = boxTextWithoutHeadline(box);
       if (text.length <= 5) return;
       var isKorrektur = hasClass(box, 'ff-korrektur');
+      var isKurzantwort = hasClass(box, 'ff-kurzantwort');
+      var btype = isKorrektur ? 'warning' : (isKurzantwort ? 'kurzantwort' : 'callout');
       out.push({
         el: box,
         lang: lang,
-        type: isKorrektur ? 'warning' : 'callout',
+        type: btype,
         text: (isKorrektur ? T.cueCorrection : T.cueShortAnswer) + ' ' + text
       });
     });
@@ -1762,14 +1767,15 @@
         var isWarn = /\b(achtung|warnung|vorsicht|wichtig|caution|warning)\b/i.test(boxText.slice(0, 60))
           || hasClass(el, 'ff-korrektur');
         var TT2 = I18N[elLang] || T;
-        var cue = hasClass(el, 'ff-kurzantwort') ? TT2.cueShortAnswer
+        var isKZ = hasClass(el, 'ff-kurzantwort');
+        var cue = isKZ ? TT2.cueShortAnswer
           : hasClass(el, 'ff-einspar-box') ? TT2.cueSaving
             : hasClass(el, 'ff-tarif-card') ? TT2.cueTariff
               : isWarn ? TT2.cueWarning : TT2.cueNote;
         out.push({
           el: el,
           lang: elLang,
-          type: isWarn ? 'warning' : (hasClass(el, 'ff-tarif-card') || hasClass(el, 'ff-einspar-box') ? 'overview-card' : 'callout'),
+          type: isWarn ? 'warning' : (isKZ ? 'kurzantwort' : (hasClass(el, 'ff-tarif-card') || hasClass(el, 'ff-einspar-box') ? 'overview-card' : 'callout')),
           text: cue + ' ' + boxText
         });
         return;
@@ -1877,6 +1883,7 @@
     li:             { rate: 1.01, pitch: 1.00, volume: 1.00, before: 120, after: 320 },
     blockquote:     { rate: 0.95, pitch: 0.98, volume: 0.98, before: 380, after: 460 },
     callout:        { rate: 0.97, pitch: 1.00, volume: 1.00, before: 380, after: 460 },
+    kurzantwort:    { rate: 0.97, pitch: 1.00, volume: 1.00, before: 380, after: 460 },
     warning:        { rate: 0.93, pitch: 0.97, volume: 1.02, before: 460, after: 520 },
     emphasis:       { rate: 0.96, pitch: 1.01, volume: 1.02, before: 320, after: 420 },
     'overview-title': { rate: 0.90, pitch: 0.96, volume: 1.00, before: 560, after: 320 },
@@ -2530,36 +2537,84 @@
       if (nowReadingText) valParts.push(T.progressNowLabel + ': ' + trimUiText(nowReadingText, 160));
       meter.setAttribute('aria-valuetext', valParts.join(' · '));
     }
+    var kzBars = doc.querySelectorAll('.ff-kurzantwort__progress');
+    for (var kb = 0; kb < kzBars.length; kb++) {
+      kzBars[kb].setAttribute('aria-valuenow', String(Math.round(progressRatio * 100)));
+    }
   }
 
-  function paintProgress(ratio) {
-    var r = Math.max(0, Math.min(1, ratio || 0));
-    if (r < progressRatio && r < 0.999) r = progressRatio;      // monoton – nie zurück
+  function paintProgress(ratio, allowBackward) {
+    var r = Math.max(0, Math.min(1, Number(ratio) || 0));
+    if (!allowBackward && r < progressRatio && r < 0.999) r = progressRatio;      // monoton – nie zurück
     progressRatio = r;
-    if (progressEl) progressEl.style.width = (r * 100).toFixed(2) + '%';
+    var pct = (r * 100).toFixed(2) + '%';
+    if (progressEl) progressEl.style.width = pct;
+    
+    // Alle weiteren Fortschrittsbalken im Dokument synchronisieren:
+    var subBars = doc.querySelectorAll('.ff-voice-progress, .ff-kurzantwort__progress');
+    for (var i = 0; i < subBars.length; i++) {
+      subBars[i].style.width = pct;
+    }
+    var kzFills = doc.querySelectorAll('.ff-kurzantwort__progress-fill');
+    for (var kf = 0; kf < kzFills.length; kf++) {
+      kzFills[kf].style.width = pct;
+    }
+    
+    if (doc.documentElement && doc.documentElement.style) {
+      doc.documentElement.style.setProperty('--ff-voice-progress', pct);
+    }
+    if (bar && bar.style) {
+      bar.style.setProperty('--ff-voice-progress', pct);
+    }
+    var kzBoxes = doc.querySelectorAll('.ff-kurzantwort, .ff-kurzantwort__progress');
+    for (var k = 0; k < kzBoxes.length; k++) {
+      kzBoxes[k].style.setProperty('--ff-kurzantwort-progress', pct);
+    }
+
     syncProgressMeta();
   }
 
   function setProgressChars(chars, allowBackward) {
     if (!totalChars) return;
-    var next = Math.max(0, Math.min(totalChars, chars));
+    var next = Math.max(0, Math.min(totalChars, Number(chars) || 0));
     if (!allowBackward && next < displayedChars) next = displayedChars;
     displayedChars = next;
     // Physik-Deckel: Der Balken kann der Wanduhr nicht davonlaufen.
     var shown = (mode === 'speech') ? Math.min(next, clockCharCeiling()) : next;
-    paintProgress(totalChars ? shown / totalChars : 0);
+    paintProgress(totalChars ? shown / totalChars : 0, allowBackward);
   }
 
 
   function resetProgress(chars) {
     progressRatio = 0;
-    displayedChars = Math.max(0, chars || 0);
+    displayedChars = Math.max(0, Number(chars) || 0);
     if (progressEl) progressEl.style.width = '0%';
-    if (totalChars && displayedChars) paintProgress(displayedChars / totalChars);
+    var subBars = doc.querySelectorAll('.ff-voice-progress, .ff-kurzantwort__progress');
+    for (var i = 0; i < subBars.length; i++) {
+      subBars[i].style.width = '0%';
+    }
+    var kzFills = doc.querySelectorAll('.ff-kurzantwort__progress-fill');
+    for (var kf = 0; kf < kzFills.length; kf++) {
+      kzFills[kf].style.width = '0%';
+    }
+    if (doc.documentElement && doc.documentElement.style) {
+      doc.documentElement.style.setProperty('--ff-voice-progress', '0%');
+    }
+    if (bar && bar.style) {
+      bar.style.setProperty('--ff-voice-progress', '0%');
+    }
+    var kzBoxes = doc.querySelectorAll('.ff-kurzantwort, .ff-kurzantwort__progress');
+    for (var k = 0; k < kzBoxes.length; k++) {
+      kzBoxes[k].style.setProperty('--ff-kurzantwort-progress', '0%');
+    }
+    if (totalChars && displayedChars) paintProgress(displayedChars / totalChars, true);
     else syncProgressMeta();
   }
 
-  function completeProgress() { paintProgress(1); displayedChars = totalChars; }
+  function completeProgress() {
+    paintProgress(1, true);
+    displayedChars = totalChars;
+  }
 
   /* ---------- „Gerade vorgelesen“ (Barrierefreiheit) -----------
      Was spricht gerade? Satz in der Leiste (mit hellem Wort),
@@ -2746,9 +2801,23 @@
     var el = block && block.el ? block.el : null;
     progressBlock = block || progressBlock;
     syncProgressMeta();
-    blocks.forEach(function (b) { if (b.el && b.el !== el) b.el.classList.remove('ff-voice-active'); });
+    blocks.forEach(function (b) {
+      if (b.el && b.el !== el) {
+        b.el.classList.remove('ff-voice-active');
+        if (hasClass(b.el, 'ff-kurzantwort')) {
+          b.el.classList.remove('ff-kurzantwort--active');
+          var bText = b.el.querySelector('.ff-kurzantwort__badge-text');
+          if (bText) bText.textContent = T.progressKurzantwort || 'Kurzantwort';
+        }
+      }
+    });
     if (!el || el === bar) return;
     el.classList.add('ff-voice-active');
+    if (hasClass(el, 'ff-kurzantwort')) {
+      el.classList.add('ff-kurzantwort--active');
+      var badgeText = el.querySelector('.ff-kurzantwort__badge-text');
+      if (badgeText) badgeText.textContent = lang === 'en' ? 'Playing' : 'Wird vorgelesen';
+    }
     if (!reducedMotion && el.scrollIntoView) {
       try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) { el.scrollIntoView(); }
     } else if (el.scrollIntoView) {
@@ -2759,7 +2828,16 @@
   function clearHighlight() {
     progressBlock = null;
     syncProgressMeta();
-    blocks.forEach(function (b) { if (b.el) b.el.classList.remove('ff-voice-active'); });
+    blocks.forEach(function (b) {
+      if (b.el) {
+        b.el.classList.remove('ff-voice-active');
+        if (hasClass(b.el, 'ff-kurzantwort')) {
+          b.el.classList.remove('ff-kurzantwort--active');
+          var bText = b.el.querySelector('.ff-kurzantwort__badge-text');
+          if (bText) bText.textContent = T.progressKurzantwort || 'Kurzantwort';
+        }
+      }
+    });
     clearWordSync(true);      // Wort-Spans zurückbauen: DOM im Ruhezustand unverändert
     updateNowLine();          // Zeile leeren (Lesen beendet)
   }
@@ -2893,18 +2971,32 @@
     unwrapEl(el);
     var plan = blockPlan(bi);
     if (!plan || !plan.rawCount) return 0;
-    var nodes = collectWordNodes(el);
+    var targetEl = el;
+    if (hasClass(el, 'ff-kurzantwort')) {
+      targetEl = el.querySelector('.ff-kurzantwort__text') || el;
+    } else if (hasClass(el, 'ff-korrektur')) {
+      targetEl = el.querySelector('.ff-korrektur__text') || el;
+    }
+    var nodes = collectWordNodes(targetEl);
     var domWords = [];
     nodes.forEach(function (node) {
       var m = String(node.data).match(/\S+/g);
       if (m) domWords = domWords.concat(m);
     });
-    var same = domWords.length === plan.raw.length;
+
+    var planRaw = plan.raw.slice();
+    var cueOffset = 0;
+    if (planRaw.length > domWords.length && (planRaw[0] === 'Kurzantwort:' || planRaw[0] === 'Korrekturhinweis:' || planRaw[0] === 'Sparpotenzial:')) {
+      planRaw = planRaw.slice(1);
+      cueOffset = 1;
+    }
+
+    var same = domWords.length === planRaw.length;
     if (same) {
       for (var i = 0; i < domWords.length; i++) {
-        if (domWords[i] === plan.raw[i]) continue;
+        if (domWords[i] === planRaw[i]) continue;
         // Der Generator hängt Überschriften einen Punkt an — darf fehlen
-        if (i === domWords.length - 1 && domWords[i] + '.' === plan.raw[i]) continue;
+        if (i === domWords.length - 1 && domWords[i] + '.' === planRaw[i]) continue;
         same = false; break;
       }
     }
@@ -2929,7 +3021,7 @@
       if (node.parentNode) node.parentNode.replaceChild(frag, node);
     });
     if (!spans.length) return 0;
-    el._ffv = { bi: bi, spans: spans };
+    el._ffv = { bi: bi, spans: spans, targetEl: targetEl, cueOffset: cueOffset };
     wordSync.spans = spans;
     return spans.length;
   }
@@ -2984,7 +3076,7 @@
       var n = wrapBlockWords(bi);
       if (!n) {
         // Kein Wort-Sync für diesen Block (Barren-Intro, Tabelle,
-        // ausgefranster Text): alte Markierung löschan, nie stehen lassen.
+        // ausgefranster Text): alte Markierung löschen, nie stehen lassen.
         var pb = st.blockIndex >= 0 && blocks[st.blockIndex] ? blocks[st.blockIndex].el : null;
         var oldSpan = pb && pb._ffv && pb._ffv.spans ? pb._ffv.spans[st.rawIndex] : null;
         if (oldSpan && oldSpan.classList) oldSpan.classList.remove(WORD_NOW);
@@ -2995,16 +3087,20 @@
       st.blockIndex = bi;
       st.rawIndex = -1;
     }
-    if (rawIdx >= st.spans.length) rawIdx = st.spans.length - 1;
+    var el = blocks[bi] && blocks[bi].el;
+    var cueOffset = el && el._ffv && el._ffv.cueOffset ? el._ffv.cueOffset : 0;
+    var spanIdx = rawIdx - cueOffset;
+    if (spanIdx >= st.spans.length) spanIdx = st.spans.length - 1;
     st.source = source || st.source;
     if (st.rawIndex === rawIdx) return;
-    var prev = st.spans[st.rawIndex];
+    var prev = (st.spanIndex != null && st.spanIndex >= 0) ? st.spans[st.spanIndex] : null;
     if (prev && prev.classList) prev.classList.remove(WORD_NOW);
-    var now = st.spans[rawIdx];
+    var now = (spanIdx >= 0) ? st.spans[spanIdx] : null;
     if (now && now.classList) now.classList.add(WORD_NOW);
+    st.spanIndex = spanIdx;
     st.rawIndex = rawIdx;
     updateWordReadout();
-    nudgeWordIntoView(now);
+    if (now) nudgeWordIntoView(now);
   }
 
   function clearWordSync(unwrapAll) {
@@ -3120,8 +3216,9 @@
       nowEl.textContent = '';
       nowEl.appendChild(frag);
     }
+    var tok = typeof activeTok === 'number' && activeTok >= 0 ? activeTok : (reading && nowSpans.length ? 0 : -1);
     for (var i = 0; i < nowSpans.length; i++) {
-      if (nowSpans[i].classList) nowSpans[i].classList.toggle(LIVE_WORD_NOW, i === (activeTok | 0));
+      if (nowSpans[i].classList) nowSpans[i].classList.toggle(LIVE_WORD_NOW, i === tok);
     }
   }
 
@@ -4327,7 +4424,7 @@
       clockGo();
       var jumpUnit = units[target];
       spokenChars = jumpUnit.startChars;
-      setProgressChars(spokenChars, false);
+      setProgressChars(spokenChars, true);
       clockReset(spokenChars);
       measuredMs = 0; measuredChars = 0; measuredUnits = 0;
       speakUnit(target, true);

@@ -81,8 +81,15 @@
     <div class="ff-kurzantwort__head">
       <span class="ff-kurzantwort__medallion" aria-hidden="true">{{ partial "kurzantwort_icon.html" . }}</span>
       <span class="ff-kurzantwort__eyebrow" id="ff-kurzantwort-label-{{ .File.UniqueID }}">Kurz &amp; knapp – die Antwort</span>
+      <span class="ff-kurzantwort__badge" aria-hidden="true">
+        <span class="ff-kurzantwort__badge-dot"></span>
+        <span class="ff-kurzantwort__badge-text">Kurzantwort</span>
+      </span>
     </div>
     <p class="ff-kurzantwort__text">{{ $readerShort | partial "nbsp_sicherung.html" }}</p>
+    <div class="ff-kurzantwort__progress-shell" aria-hidden="true">
+      <div class="ff-kurzantwort__progress"></div>
+    </div>
   </div>
   {{- end }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
@@ -97,6 +104,10 @@
   {{- if .Content }}
   <div class="post-content md-content">
     {{- $articleContent := .Content | partial "nbsp_sicherung.html" -}}
+    {{- /* Themen-Signet statt Glühbirne in allen redaktionellen Schnell-Tipps.
+           Zentraler Renderer: gilt für bestehende und neue Posts. */ -}}
+    {{- $tipIcon := printf `<span class="ff-article-tip-icon" aria-hidden="true">%s</span>` (partial "kurzantwort_icon.html" .) -}}
+    {{- $articleContent = replace $articleContent "💡" $tipIcon -}}
     {{- if not (.Param "disableAnchoredHeadings") -}}
       {{- $articleContent = partial "anchored_headings.html" ($articleContent | safeHTML) -}}
     {{- end -}}

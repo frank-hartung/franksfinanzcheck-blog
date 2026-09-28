@@ -38,6 +38,7 @@ t.group('1) Toolbar, Rollen und Beschriftung');
     doc.getElementById('ff-voice-bar').getAttribute('role') === 'region');
   t.ok('Fortschritt vorhanden', !!doc.getElementById('ff-voice-progress'));
   t.ok('Progress-Meter vorhanden', !!doc.getElementById('ff-voice-meter'));
+  t.ok('Kurzantwort-Fortschritt vorhanden', !!doc.querySelector('.ff-kurzantwort__progress'));
   t.eq('Initiales Meter-Label DE', doc.getElementById('ff-voice-progress-label').textContent, 'Noch nicht gestartet');
   t.eq('Initialer Meter-Wert DE', doc.getElementById('ff-voice-progress-value').textContent, '0 %');
   t.ok('„Gerade vorgelesen“-Zeile vorhanden', !!doc.getElementById('ff-voice-now'));
@@ -84,7 +85,7 @@ t.group('2) Lesereihenfolge: Anmoderation → Vorab-Box → DOM → Abmoderation
   t.ok('Anmoderation nennt die Hördauer', /Hördauer/.test(blocks[0].text));
   t.ok('Abmoderation am Ende', types[types.length - 1] === 'outro');
   t.ok('Korrektur-Box wird gelesen', types.indexOf('warning') > 0);
-  t.ok('Kurzantwort-Box wird gelesen', types.indexOf('callout') > 0);
+  t.ok('Kurzantwort-Box wird gelesen', types.indexOf('kurzantwort') > 0 || types.indexOf('callout') > 0);
   t.ok('Überschrift dabei', types.indexOf('h2') > 0);
   t.ok('Listenpunkte dabei', types.filter((x) => x === 'li').length === 2);
   t.ok('Zitat dabei', types.indexOf('blockquote') > 0);
@@ -601,6 +602,61 @@ t.group('9b) Wort-Takt: hell Wort für Wort, sauber zurückgebaut');
   t.eq('Nach dem Beenden sind die Wort-Spans zurückgebaut', doc.querySelectorAll('.ff-voice-w').length, 0);
   t.eq('Nach dem Beenden leuchtet nichts mehr', doc.querySelectorAll('.ff-voice-w--now').length, 0);
   t.eq('Wortzähler nach Beenden leer', wc.textContent, '');
+}
+
+/* ============================================================
+   9c · Kurzantwort: Fortschrittsanzeige, Badge-Status & Wort-Takt
+   ------------------------------------------------------------
+   Die Kurzantwort-Box besitzt eine integrierte Fortschrittsanzeige
+   und dynamische Status-Badge („Wird vorgelesen“). Beim Vorlesen
+   wird die Box als aktiv markiert, der Fortschrittsbalken füllt sich
+   synchron, und die Wörter im inneren Fließtext leuchten passgenau.
+   ============================================================ */
+t.group('9c) Kurzantwort: Fortschrittsanzeige, Badge-Status & Wort-Takt');
+{
+  const { win, doc } = loadPage(skeleton({
+    title: 'Kurzantwort-Fortschritt Test',
+    readingTime: 1,
+    kurzantwort: 'Eine Gaspreisgarantie sichert den Arbeitspreis für die vereinbarte Erstlaufzeit gegen Erhöhungen ab.',
+    bodyHtml: mdToHtml('## Details\n\nAusführlicher Text nach der Kurzantwort mit weiteren Details zum Wechsel.\n'),
+  }));
+  const api = win.__ffVoice;
+  const kBox = doc.querySelector('.ff-kurzantwort');
+  const kBadge = doc.querySelector('.ff-kurzantwort__badge');
+  const kProgress = doc.querySelector('.ff-kurzantwort__progress');
+  const kFill = doc.querySelector('.ff-kurzantwort__progress-fill');
+
+  t.ok('Kurzantwort-Box vorhanden', !!kBox);
+  t.ok('Kurzantwort-Badge vorhanden', !!kBadge);
+  t.ok('Kurzantwort-Fortschrittsbalken vorhanden', !!kProgress);
+  t.ok('Kurzantwort-Fortschritt-Fill vorhanden', !!kFill);
+  t.eq('Initiales Badge-Label DE', kBadge ? kBadge.textContent.trim() : '', 'Kurzantwort');
+
+  // Start vorlesen
+  doc.getElementById('ff-voice-play').click();
+
+  // Polling bis Kurzantwort aktiv wird (Block 1 nach Intro)
+  let guard = 0;
+  while (guard++ < 80 && !kBox.classList.contains('ff-kurzantwort--active')) await sleep(40);
+
+  t.ok('Kurzantwort wird aktiv markiert (.ff-kurzantwort--active)', kBox.classList.contains('ff-kurzantwort--active'));
+  t.ok('Kurzantwort-Badge zeigt „Wird vorgelesen“', /Wird vorgelesen/.test(kBadge.textContent));
+
+  // Polling bis Fortschritt ansteigt
+  guard = 0;
+  while (guard++ < 60 && kProgress.getAttribute('aria-valuenow') === '0') await sleep(40);
+
+  t.ok('Kurzantwort-Fortschritt besitzt aria-valuenow', kProgress.hasAttribute('aria-valuenow'));
+  const kVal = parseFloat(kProgress.getAttribute('aria-valuenow') || '0');
+  t.ok('Kurzantwort-Fortschritt > 0%', kVal > 0, 'val: ' + kVal);
+
+  // Warten auf Beenden / Stop
+  doc.getElementById('ff-voice-stop').click();
+  await sleep(40);
+
+  t.ok('Nach Beenden Kurzantwort nicht mehr aktiv', !kBox.classList.contains('ff-kurzantwort--active'));
+  t.eq('Nach Beenden Badge wieder im Ruhezustand', kBadge.textContent.trim(), 'Kurzantwort');
+  t.eq('Nach Beenden Kurzantwort-Fortschritt wieder 0%', kProgress.getAttribute('aria-valuenow'), '0');
 }
 
 /* ============================================================

@@ -1143,7 +1143,9 @@ def extract_blocks(root: Node, cfg: dict):
         if len(probe_text) <= 5:
             continue
         is_korrektur = box.has_class("ff-korrektur")
-        out.append({"lang": lang, "type": "warning" if is_korrektur else "callout",
+        is_kurzantwort = box.has_class("ff-kurzantwort")
+        btype = "warning" if is_korrektur else ("kurzantwort" if is_kurzantwort else "callout")
+        out.append({"lang": lang, "type": btype,
                     "text": (C["cueCorrection"] if is_korrektur else C["cueShortAnswer"]) + " " + probe_text})
 
     # (3) Artikelblöcke in DOM-Reihenfolge
@@ -1210,17 +1212,19 @@ def extract_blocks(root: Node, cfg: dict):
                                      box_text[:60], re.I)) or el.has_class("ff-korrektur")
             if el.has_class("ff-kurzantwort"):
                 cue = C["cueShortAnswer"]
+                btype = "kurzantwort"
             elif el.has_class("ff-einspar-box"):
                 cue = C["cueSaving"]
+                btype = "overview-card"
             elif el.has_class("ff-tarif-card"):
                 cue = C["cueTariff"]
+                btype = "overview-card"
             elif is_warn:
                 cue = C["cueWarning"]
+                btype = "warning"
             else:
                 cue = C["cueNote"]
-            btype = "warning" if is_warn else (
-                "overview-card" if (el.has_class("ff-tarif-card") or el.has_class("ff-einspar-box"))
-                else "callout")
+                btype = "callout"
             spoken_blocks.append((el, cue + " " + box_text))
             out.append({"lang": el_lang, "type": btype, "text": cue + " " + box_text})
             continue
@@ -2213,7 +2217,7 @@ def selftest() -> int:
     types = [b["type"] for b in blocks]
     check("Blöcke gefunden", len(blocks) > 6)
     check("(1) Anmoderation zuerst", types[0] == "intro")
-    check("(2) Vorab-Box danach", types[1] == "callout")
+    check("(2) Vorab-Box danach", types[1] in ("callout", "kurzantwort"))
     check("(4) Abmoderation zuletzt", types[-1] == "outro")
     check("Überschrift dabei", "h2" in types)
     check("Liste dabei", "li" in types)

@@ -298,7 +298,7 @@ def main() -> int:
     js_path = os.path.join(ROOT, "static", "premium", "ff-voice.js")
     with open(js_path, "r", encoding="utf-8") as fh:
         js_source = fh.read()
-    for role in ("intro", "outro", "h2", "h3", "p", "li", "blockquote", "warning",
+    for role in ("intro", "outro", "h2", "h3", "p", "li", "blockquote", "warning", "kurzantwort",
                  "table-intro", "table-row", "table-group", "table-sum",
                  "table-cta", "table-outro",
                  "overview-title", "overview-note", "emphasis"):

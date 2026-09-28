@@ -80,8 +80,15 @@
     <div class="ff-kurzantwort__head">
       <span class="ff-kurzantwort__medallion" aria-hidden="true">{{ partial "kurzantwort_icon.html" . }}</span>
       <span class="ff-kurzantwort__eyebrow" id="ff-kurzantwort-label-{{ .File.UniqueID }}">Kurz &amp; knapp – die Antwort</span>
+      <span class="ff-kurzantwort__badge" aria-hidden="true">
+        <span class="ff-kurzantwort__badge-dot"></span>
+        <span class="ff-kurzantwort__badge-text">Kurzantwort</span>
+      </span>
     </div>
     <p class="ff-kurzantwort__text">{{ $readerShort | partial "nbsp_sicherung.html" }}</p>
+    <div class="ff-kurzantwort__progress-shell" aria-hidden="true">
+      <div class="ff-kurzantwort__progress"></div>
+    </div>
   </div>
   {{- end }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}

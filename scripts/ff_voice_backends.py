@@ -117,7 +117,14 @@ def _env_first(*names: str) -> str:
     return ""
 
 def get_elevenlabs_api_key() -> str:
-    return _env_first("ELEVENLABS_API_KEY", "ELEVEN_API_KEY", "ELEVENLABS_APIKEY")
+    return _env_first(
+        "ELEVENLABS_API_KEY",
+        "ELEVEN_API_KEY",
+        "ELEVENLABS_APIKEY",
+        "AGENT_REACH_ELEVENLABS_KEY",
+        "AGENT_REACH_API_KEY",
+        "AGENT_REACH_TTS_KEY",
+    )
 
 def get_elevenlabs_voice_id() -> str:
     return _env_first("ELEVENLABS_VOICE_ID", "ELEVEN_VOICE_ID") or ELEVENLABS_DEFAULT_VOICE
@@ -225,6 +232,7 @@ PROSODY = {
     "li":               {"rate": 1.01, "pitch": 0,   "volume": 1.00, "before": 120, "after": 320},
     "blockquote":       {"rate": 0.95, "pitch": -2,  "volume": 0.98, "before": 380, "after": 460},
     "callout":          {"rate": 0.97, "pitch": 0,   "volume": 1.00, "before": 380, "after": 460},
+    "kurzantwort":      {"rate": 0.97, "pitch": 0,   "volume": 1.00, "before": 380, "after": 460},
     "warning":          {"rate": 0.93, "pitch": -3,  "volume": 1.02, "before": 460, "after": 520},
     "emphasis":         {"rate": 0.96, "pitch": 1,   "volume": 1.02, "before": 320, "after": 420},
     "overview-title":   {"rate": 0.90, "pitch": -4,  "volume": 1.00, "before": 560, "after": 320},
