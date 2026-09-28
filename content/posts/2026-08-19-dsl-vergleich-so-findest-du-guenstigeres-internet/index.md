@@ -109,6 +109,8 @@ Willst du noch mehr aus deinem Vertrag holen? Dann sieh in die Leitfäden zu [DS
 
 Hier ein fiktives Rechenbeispiel: Ein Tarif wirbt mit ca. 29,99 € für die ersten 12 Monate.
 
+{{< chart dataset="dsl_effektivpreis_modell" >}}
+
 Danach kostet er rund 44,99 € monatlich. Dazu kommen ca. 70 € Router-Miete über 24 Monate.
 
 Die Bereitstellung schlägt mit einmalig rund 69,99 € zu Buche. Den Bonus von 100 € gibt es nach ca. 6 Monaten. Im Werbebanner sieht das günstig aus, die ehrliche Rechnung jedoch so:

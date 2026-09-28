@@ -1,0 +1,37 @@
+schema_version: "1.0"
+id: tagesgeld-modell-15000
+title: "Zinsertrag für 15.000 Euro im Modellvergleich"
+description: "Jährlicher Brutto-Zinsertrag der im Ratgeber dokumentierten Modellzinssätze; keine Angebots- oder Marktprognose."
+owner: "Frank Hartung"
+reviewed_by: "Redaktioneller Rechencheck, 28.09.2026"
+status: modellrechnung
+chart_type: bar
+unit: "€ pro Jahr"
+x_label: "Modell-Anlageform"
+y_label: "Brutto-Zinsertrag in Euro"
+updated: "2026-09-28"
+update_frequency: statisch
+sources:
+  - title: "Tagesgeld-Zinsen 2026: Rechenbeispiel mit 15.000 Euro"
+    url: "https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/"
+    publisher: "FranksFinanzcheck"
+    accessed: "2026-09-28"
+methodology:
+  summary: "Bruttoertrag = 15.000 Euro × Modellzinssatz. Steuern, Zinseszins, Gebühren und unterjährige Zinsänderungen sind nicht berücksichtigt."
+  version: "1.0.0"
+  url: "https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/#rechenbeispiel-was-bringt-das-tagesgeld-konkret"
+changelog:
+  - date: "2026-09-28"
+    note: "Erstfassung aus dem bestehenden, redaktionell geprüften Rechenbeispiel."
+license: "CC BY 4.0"
+values:
+  - label: "Girokonto (0,00 %)"
+    value: 0
+  - label: "Sparbuch (0,30 %)"
+    value: 45
+  - label: "Tagesgeld (2,00 %)"
+    value: 300
+  - label: "Top-Tagesgeld (3,00 %)"
+    value: 450
+  - label: "Festgeld 12 Monate (3,30 %)"
+    value: 495

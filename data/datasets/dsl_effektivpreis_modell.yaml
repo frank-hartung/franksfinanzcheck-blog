@@ -1,0 +1,31 @@
+schema_version: "1.0"
+id: dsl-effektivpreis-modell
+title: "Werbepreis und effektiver DSL-Monatspreis"
+description: "Vergleich des beworbenen Einstiegspreises mit dem über 24 Monate berechneten Effektivpreis im dokumentierten Modellfall."
+owner: "Frank Hartung"
+reviewed_by: "Redaktioneller Rechencheck, 28.09.2026"
+status: modellrechnung
+chart_type: bar
+unit: "€ pro Monat"
+x_label: "Preisart"
+y_label: "Euro pro Monat"
+updated: "2026-09-28"
+update_frequency: statisch
+sources:
+  - title: "DSL-Vergleich: 24-Monats-Modellrechnung"
+    url: "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
+    publisher: "FranksFinanzcheck"
+    accessed: "2026-09-28"
+methodology:
+  summary: "Effektivpreis = (12 × 29,99 Euro + 12 × 44,99 Euro + 120 Euro Router + 69,99 Euro Bereitstellung − 100 Euro Bonus) ÷ 24 Monate = 41,24 Euro."
+  version: "1.0.0"
+  url: "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/#der-24-monats-taschenrechner-den-vergleichsportale-nicht-zeigen"
+changelog:
+  - date: "2026-09-28"
+    note: "Erstfassung; Werte gegen die im Artikel offengelegte Rechnung geprüft."
+license: "CC BY 4.0"
+values:
+  - label: "Werbepreis (Monate 1–12)"
+    value: 29.99
+  - label: "Effektivpreis über 24 Monate"
+    value: 41.24

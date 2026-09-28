@@ -1,0 +1,45 @@
+name: Daten- und Visualisierungs-Gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "data/datasets/**"
+      - "layouts/shortcodes/chart.html"
+      - "assets/css/extended/zz-visual-data.css"
+      - "content/**"
+      - "scripts/visual_data_gate.py"
+      - "scripts/tests/test_visual_data_gate.py"
+      - ".github/workflows/visual-data-gate.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  visual-data:
+    name: Quellen, Stand, Einheit und Methodik
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: YAML-Abhängigkeit installieren
+        run: pip install "PyYAML==6.0.3"
+      - name: Datensätze und Einbindungen prüfen
+        run: python3 scripts/visual_data_gate.py
+      - name: Gate-Tests ausführen
+        run: python3 -m unittest scripts.tests.test_visual_data_gate -v
+      - name: Hugo installieren
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+      - name: Statisches SVG und Datentabelle bauen
+        run: hugo --minify --quiet --destination public
+      - name: Gebaute Visualisierungen nachweisen
+        run: |
+          test "$(grep -Roh 'data-ff-chart' public/posts | wc -l)" -ge 2
+          test "$(grep -Roh 'ff-chart__table' public/posts | wc -l)" -ge 2
+          test "$(grep -Roh 'ff-chart__mark' public/posts | wc -l)" -ge 7
