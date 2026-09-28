@@ -54,7 +54,7 @@ Auch wer dann erst den Tarif prüft, zahlt drauf. Besser ist es, im Spätsommer 
 ## Die 5 teuersten Spätsommer‑Fehler beim Gasrechnung senken
 
 
-Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Gerade wenn du deine Gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
 
 Wer [Heizkosten senken](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) will, sollte diese Fehler vor dem ersten Heizen beheben:
 
@@ -261,7 +261,7 @@ Mindestens einmal im Monat, besser zu Beginn und Ende jedes Abrechnungszeitraums
 * **Bundesförderung für den Austausch von Thermostatventilen** – bis zu 150 € pro Stück bei Austausch gegen intelligente Ventile.
 
 
-Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu 15 % senken.
+Mit dem richtigen Vorgehen lässt sich die Gasrechnung um bis zu 15 % senken.
 
 ## Fazit: Durch vorausschauende Vorbereitung hunderte Euro sparen
 
