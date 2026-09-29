@@ -282,6 +282,11 @@ Meist ist ein abgelaufener Token die Ursache (LinkedIn/Threads/Instagram: ~60 Ta
 **Kann ich einen Kanal testen, ohne dass etwas rausgeht?** Ja:
 `python3 scripts/social_studio.py --run --dry-run --channel <kanal>`.
 
+**Wo sehe ich den Kalender je Kanal?** Nach jedem Lauf schreibt der Autopilot
+für jeden Kanal einen lesbaren Veröffentlichungskalender (`.md`) plus eine
+abonnierbare `.ics`-Datei nach `data/social/kalender/`. Überblick:
+`data/social/kalender/UEBERSICHT.md`. Anleitung: `docs/ANLEITUNG-SOCIAL-KALENDER.md`.
+
 ---
 
 *Stand: 12.09.2026 · Bausteine: `scripts/social_studio.py` (Orchestrierung),

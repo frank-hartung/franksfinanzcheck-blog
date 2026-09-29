@@ -46,7 +46,7 @@ while IFS= read -r file; do
 
   for link in $links; do
     case "$link" in
-      http://*|https://*|mailto:*|tel:*|javascript:*|data:*|//*|\#*) continue ;;
+      http://*|https://*|mailto:*|tel:*|javascript:*|data:*|webcal://*|ftp://*|//*|\#*) continue ;;
     esac
 
     # Anker (#…) und Query (?…) abtrennen

@@ -1,0 +1,38 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Reddit
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahle
+ n:nutzen:2026-09-26@franksfinanzcheck.de
+DTSTAMP:20260929T104623Z
+DTSTART:20260926T121500Z
+DTEND:20260926T123000Z
+SUMMARY:Reddit: Kreditkarte vergleichen: Kostenlos und sicher zahlen (
+ nutzen)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Red
+ dit\nArtikel: https://franksfinanzcheck.de/posts/2026-09-03-kreditkar
+ te-vergleichen-kostenlos-sicher-bezahlen/
+URL:https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleic
+ hen-kostenlos-sicher-bezahlen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:reddit:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-bes
+ chleunigt:takeaway:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20260929T104623Z
+DTSTART:20261010T121500Z
+DTEND:20261010T123000Z
+SUMMARY:Reddit: Digitaler Turbo: Warum der DNS-Hack dein Netz beschleu
+ nigt (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-
+ der-dns-hack-dein-netz-beschleunigt/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-waru
+ m-der-dns-hack-dein-netz-beschleunigt/
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR

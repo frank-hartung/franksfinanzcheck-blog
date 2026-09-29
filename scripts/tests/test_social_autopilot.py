@@ -32,6 +32,7 @@ import social_copywriter as copy       # noqa: E402
 import social_gate as gate             # noqa: E402
 import social_images as images         # noqa: E402
 import social_planner as planner       # noqa: E402
+import social_calendar as calendar      # noqa: E402
 
 CFG = sch.load_config()
 CHANNELS = sch.channel_map(CFG)
@@ -429,6 +430,44 @@ class TestImages(unittest.TestCase):
         if not hasattr(TestImages, "_tmp"):
             TestImages._tmp = tempfile.mkdtemp(prefix="social-img-")
         return TestImages._tmp
+
+
+class TestKalender(unittest.TestCase):
+    """Veröffentlichungskalender je Kanal (Markdown + abonnierbares ICS)."""
+
+    def test_selftest_besteht(self):
+        self.assertEqual(calendar.selftest(), 0)
+
+    def test_ics_ist_utc_und_gefaltet(self):
+        now = planner.localize(datetime(2026, 9, 29, 9, 0))
+        ch = {
+            "label": "Testkanal", "enabled": True,
+            "text": {"max_chars": 300, "hashtags": {"min": 1, "max": 2},
+                     "emoji_max": 1, "link_position": "end"},
+            "media": {"supported": True, "required": False},
+            "cadence": {"days": [0, 1, 2, 3, 4, 5, 6], "times": ["08:00"],
+                        "max_per_day": 2, "recycle_cooldown_days": 75},
+        }
+        schedule = {"items": [{
+            "id": "t:slug:nutzen:2026-09-30", "channel": "test",
+            "slug": "2026-09-11-test", "angle": "nutzen", "kind": "launch",
+            "scheduled_at": "2026-09-30T08:00:00+02:00", "status": "planned"}]}
+        ics = calendar.build_channel_ics("test", ch, schedule, {}, {}, now)
+        # 08:00 Berlin (+02:00) -> 06:00 UTC
+        self.assertIn("DTSTART:20260930T060000Z", ics)
+        for line in ics.split("\r\n"):
+            self.assertLessEqual(len(line.encode("utf-8")), 75)
+
+    def test_md_zeigt_kanal_kriterien(self):
+        now = planner.localize(datetime(2026, 9, 29, 9, 0))
+        cfg = sch.load_config()
+        cmap = sch.channel_map(cfg)
+        # echter Kanal aus dem Playbook
+        cid, ch = next(iter(cmap.items()))
+        md = calendar.build_channel_md(cid, ch, {"items": []},
+                                       {"history": []}, {}, {}, now)
+        self.assertIn("Kanal-Kriterien", md)
+        self.assertIn("Kommende Beiträge", md)
 
 
 if __name__ == "__main__":  # pragma: no cover

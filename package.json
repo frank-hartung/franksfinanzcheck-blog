@@ -37,6 +37,8 @@
     "shorts:umgebung": "python3 scripts/social_video.py --pruefe-umgebung",
     "test:shorts": "python3 scripts/social_video.py --selftest",
     "social:preflight": "python3 scripts/social_preflight.py",
+    "social:kalender": "python3 scripts/social_calendar.py --build",
+    "test:social:kalender": "python3 scripts/social_calendar.py --selftest",
     "social:preflight:offline": "python3 scripts/social_preflight.py --offline",
     "test:social:preflight": "python3 scripts/social_preflight.py --selftest",
     "faktenfrische": "python3 scripts/faktenfrische.py",
