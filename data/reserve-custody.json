@@ -1,15 +1,8 @@
 {
-  "bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld": {
+  "gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf": {
     "seit": "2026-09-29",
-    "slug": "2026-09-29-bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld",
-    "titel": "Bankgebühren reduzieren: So sparst du monatlich bares Geld",
-    "zuletzt_im_pool": "2026-09-29",
-    "zustand": "pool"
-  },
-  "frugalismus-familie-so-sparst-du-mit-kindern-im-alltag": {
-    "seit": "2026-09-29",
-    "slug": "2026-09-29-frugalismus-familie-so-sparst-du-mit-kindern-im-alltag",
-    "titel": "Frugalismus Familie: So sparst du mit Kindern im Alltag",
+    "slug": "2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf",
+    "titel": "Gasabschlag berechnen: – So stellst du deine Heizung winterf",
     "zuletzt_im_pool": "2026-09-29",
     "zustand": "pool"
   },
@@ -25,10 +18,38 @@
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
     "zustand": "pool"
   },
-  "online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag": {
+  "grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g": {
     "seit": "2026-09-29",
-    "slug": "2026-09-29-online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag",
-    "titel": "Online-Konten: So sparst du Gebühren und Zeit im Alltag",
+    "slug": "2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g",
+    "titel": "Grundversorgung Strom Kosten senken –: so wechselst du zum g",
+    "zuletzt_im_pool": "2026-09-29",
+    "zustand": "pool"
+  },
+  "interrail-bahncard-so-sparst-du-bei-der-europa-zugreise": {
+    "seit": "2026-09-29",
+    "slug": "2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise",
+    "titel": "Interrail + Bahncard: So sparst du bei der Europa‑Zugreise",
+    "zuletzt_im_pool": "2026-09-29",
+    "zustand": "pool"
+  },
+  "konto-wechseln-leicht-gemacht-dein-schneller-leitfaden": {
+    "seit": "2026-09-29",
+    "slug": "2026-09-29-konto-wechseln-leicht-gemacht-dein-schneller-leitfaden",
+    "titel": "Konto wechseln leicht gemacht: Dein schneller Leitfaden",
+    "zuletzt_im_pool": "2026-09-29",
+    "zustand": "pool"
+  },
+  "rechtsschutzversicherung-was-sie-wirklich-zahlt": {
+    "seit": "2026-09-29",
+    "slug": "2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt",
+    "titel": "Rechtsschutzversicherung: Was sie wirklich zahlt",
+    "zuletzt_im_pool": "2026-09-29",
+    "zustand": "pool"
+  },
+  "reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig": {
+    "seit": "2026-09-29",
+    "slug": "2026-09-29-reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig",
+    "titel": "Reiseversicherungen im Check: Welcher Schutz ist 2026 nötig?",
     "zuletzt_im_pool": "2026-09-29",
     "zustand": "pool"
   },
@@ -39,31 +60,10 @@
     "zuletzt_im_pool": "2026-09-27",
     "zustand": "pool"
   },
-  "schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet": {
+  "stromspeicher-kaufen-2026-lohnt-sich-die-investition": {
     "seit": "2026-09-29",
-    "slug": "2026-09-29-schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet",
-    "titel": "Schufa Eintrag löschen: So rettest du deine Bonität",
-    "zuletzt_im_pool": "2026-09-29",
-    "zustand": "pool"
-  },
-  "so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s": {
-    "seit": "2026-09-29",
-    "slug": "2026-09-29-so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s",
-    "titel": "So nutzt du die Balkonkraftwerk Förderung: Geld zurück vom S",
-    "zuletzt_im_pool": "2026-09-29",
-    "zustand": "pool"
-  },
-  "stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an": {
-    "seit": "2026-09-29",
-    "slug": "2026-09-29-stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an",
-    "titel": "Stromanbieter Pleite: So bleibt dein Licht trotzdem an",
-    "zuletzt_im_pool": "2026-09-29",
-    "zustand": "pool"
-  },
-  "vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf": {
-    "seit": "2026-09-29",
-    "slug": "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf",
-    "titel": "VPN Zuhause: Teurer Schnickschnack oder Pflichtkauf?",
+    "slug": "2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition",
+    "titel": "Stromspeicher kaufen 2026 – Lohnt sich die Investition?",
     "zuletzt_im_pool": "2026-09-29",
     "zustand": "pool"
   },
@@ -72,6 +72,13 @@
     "slug": "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich",
     "titel": "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?",
     "zuletzt_im_pool": "2026-09-27",
+    "zustand": "pool"
+  },
+  "wohnmobil-mieten-so-sparst-du-im-vergleich-zum": {
+    "seit": "2026-09-29",
+    "slug": "2026-09-29-wohnmobil-mieten-so-sparst-du-im-vergleich-zum",
+    "titel": "Wohnmobil mieten: So sparst du im Vergleich – Camper",
+    "zuletzt_im_pool": "2026-09-29",
     "zustand": "pool"
   }
 }

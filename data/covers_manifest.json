@@ -557,66 +557,84 @@
    "savings": ""
   }
  },
- "2026-09-29-bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld": {
-  "title": "Bankgebühren reduzieren: So sparst du monatlich bares Geld",
-  "ts": "2026-09-29T10:19:18+00:00",
+ "2026-09-29-reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig": {
+  "title": "Reiseversicherungen im Check: Welcher Schutz ist 2026 nötig?",
+  "ts": "2026-09-29T15:44:31+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-konto-wechseln-leicht-gemacht-dein-schneller-leitfaden": {
+  "title": "Konto wechseln leicht gemacht: Dein schneller Leitfaden",
+  "ts": "2026-09-29T15:44:33+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  },
- "2026-09-29-frugalismus-familie-so-sparst-du-mit-kindern-im-alltag": {
-  "title": "Frugalismus Familie: So sparst du mit Kindern im Alltag",
-  "ts": "2026-09-29T10:48:15+00:00",
+ "2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt": {
+  "title": "Rechtsschutzversicherung: Was sie wirklich zahlt",
+  "ts": "2026-09-29T15:43:53+00:00",
   "design": {
    "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
+   "badge": "VERSICHERUNGEN",
    "savings": ""
   }
  },
- "2026-09-29-online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag": {
-  "title": "Online-Konten: So sparst du Gebühren und Zeit im Alltag",
-  "ts": "2026-09-29T10:19:21+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-09-29-so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s": {
-  "title": "So nutzt du die Balkonkraftwerk Förderung: Geld zurück vom S",
-  "ts": "2026-09-29T10:19:12+00:00",
+ "2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition": {
+  "title": "Stromspeicher kaufen 2026 – Lohnt sich die Investition?",
+  "ts": "2026-09-29T15:43:55+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
- "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf": {
-  "title": "VPN Zuhause: Teurer Schnickschnack oder Pflichtkauf?",
-  "ts": "2026-09-29T10:19:09+00:00",
+ "2026-09-29-wohnmobil-mieten-so-sparst-du-im-vergleich-zum": {
+  "title": "Wohnmobil mieten: So sparst du im Vergleich – Camper",
+  "ts": "2026-09-29T15:44:28+00:00",
   "design": {
    "v": 3,
-   "badge": "INTERNET & DSL",
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  },
- "2026-09-29-schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet": {
-  "title": "Schufa Eintrag löschen: So rettest du deine Bonität",
-  "ts": "2026-09-29T10:19:14+00:00",
+ "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
+  "title": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+  "ts": "2026-09-29T15:09:43+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  },
- "2026-09-29-stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an": {
-  "title": "Stromanbieter Pleite: So bleibt dein Licht trotzdem",
-  "ts": "2026-09-29T10:48:17+00:00",
+ "2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf": {
+  "title": "Gasabschlag berechnen: – So stellst du deine Heizung winterf",
+  "ts": "2026-09-29T15:43:45+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g": {
+  "title": "Grundversorgung Strom Kosten senken –: so wechselst du zum g",
+  "ts": "2026-09-29T15:43:47+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise": {
+  "title": "Interrail + Bahncard: So sparst du bei der Europa‑Zugreise",
+  "ts": "2026-09-29T15:44:26+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
    "savings": ""
   }
  }

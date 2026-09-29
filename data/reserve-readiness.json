@@ -1,118 +1,153 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 7,
-  "generated_at": "2026-09-29T10:15:56Z",
+  "ready": 3,
+  "pool_size": 8,
+  "generated_at": "2026-09-29T15:49:57Z",
   "candidates": [
     {
-      "slug": "2026-09-29-bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld",
+      "slug": "2026-09-29-konto-wechseln-leicht-gemacht-dein-schneller-leitfaden",
       "ready": true,
-      "sha256": "8b9406664ab6d0a54a716d4e0eb24da77f34fe6d4c2873acc1f2e4ba979af64d",
-      "score": 0.916,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-09-29-so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s",
-      "ready": true,
-      "sha256": "861552f1f1bfb05684720f109c892a664d7f947f57e02fdf03765d72e7b6c1c8",
-      "score": 0.938,
-      "parts": {
-        "spelling": 0.7000000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-29-frugalismus-familie-so-sparst-du-mit-kindern-im-alltag",
-      "ready": true,
-      "sha256": "53d9b17951f810edc06d7478e5075990b7f9f442a8f3a9dc68eadcfc0cbb1810",
-      "score": 0.868,
+      "sha256": "f2a0c5ce4df7d24c3f8bf19d28daff3a15d3d2dd9197e010c2a95b5b194aca59",
+      "score": 0.874,
       "parts": {
         "spelling": 0.8,
         "meta": 0.85,
         "structure": 1.0,
-        "typography": 0.8,
+        "typography": 0.86,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
     },
     {
-      "slug": "2026-09-29-online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag",
+      "slug": "2026-09-29-reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig",
       "ready": true,
-      "sha256": "6d0071db48907053a07cdf0d511dd597757f61549b47d8fda16f610502ad7f4a",
-      "score": 0.918,
+      "sha256": "4d67996fcada657bac7b147aab06d49728c656b7a35b1b5d4a34188140c2a918",
+      "score": 0.896,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-09-29-wohnmobil-mieten-so-sparst-du-im-vergleich-zum",
+      "ready": true,
+      "sha256": "5527a28875d123960d333cfc901966510579e320fde643bb2003a4c882efcff7",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-09-29-schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet",
-      "ready": true,
-      "sha256": "1e3a7937fa2b258e3ee43798f9ef4cae83ee7e2f5e52e89568f9b52908a35b48",
-      "score": 0.924,
+      "slug": "2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf",
+      "ready": false,
+      "sha256": "b6d9621dd7f6e5b28c03c690b66776ebdf0b733df46abe5c98573f2425b9b218",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.867,
       "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
+        "spelling": 0.96,
+        "meta": 0.85,
+        "structure": 0.7,
         "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.75
       }
     },
     {
-      "slug": "2026-09-29-stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an",
-      "ready": true,
-      "sha256": "5a50f9dbd5b095ed75fea90bed70b8528a34ab7ac36eff247f5fff7d6bc0431f",
-      "score": 0.952,
+      "slug": "2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g",
+      "ready": false,
+      "sha256": "d9f2aa6d3d442e47aa78e4d5568b091856ddc9508e7b494d35f7180d30624ff2",
+      "reason": "quality-score 0.827 < 0.85 (schwach: readability 0.60, structure 0.70, typography 0.74)",
+      "details": [
+        "Reserve nicht bereit: 2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g: {'slug': '2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g', 'score': 0.827, 'parts': {'spelling': 1.0, 'meta': 0.85, 'structure': 0.7, 'typography': 0.74, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.6}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.827,
       "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
+        "spelling": 1.0,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 0.74,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.6
       }
     },
     {
-      "slug": "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf",
+      "slug": "2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise",
       "ready": false,
-      "sha256": "5f69a7cefb699029845ba5ffe30362cf6f2511682328e651ed656f3abca2e345",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 59 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 9 Passiv-Formulierungen",
+      "sha256": "969fa6629456c61a5ea6a5fbd49e10024edd39e559c85417b75f64a17a54f8c7",
+      "reason": "quality-score 0.845 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.84)",
       "details": [
-        "🛑 2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 59 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 9 Passiv-Formulierungen",
+        "Reserve nicht bereit: 2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise: {'slug': '2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise', 'score': 0.845, 'parts': {'spelling': 0.84, 'meta': 0.85, 'structure': 0.7, 'typography': 0.94, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.845,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt",
+      "ready": false,
+      "sha256": "b35ba6e0ea0713910c8f43178726e4ffcb29dd8f1c86b86316cd82cf1fc08bff",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem beitrag“ ×1 (Template-Sprache – umformulieren)",
+      "details": [
+        "🛑 2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem beitrag“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.88,
+      "score": 0.896,
       "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
+        "spelling": 0.84,
+        "meta": 0.85,
         "structure": 1.0,
-        "typography": 0.8,
+        "typography": 0.9,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.7
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition",
+      "ready": false,
+      "sha256": "bbfe69013388ea740eb86aec863526754ccc5c3013b75e6ff2141e9a02992995",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.869,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
       }
     }
   ]

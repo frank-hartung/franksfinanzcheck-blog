@@ -6,6 +6,12 @@
     "letzter_versuch": "2026-09-27",
     "sperre_bis": "2027-03-26"
   },
+  "Auslandskrankenversicherung für Familien: Was sie kosten darf": {
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2026-09-30"
+  },
   "Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch": {
     "fehler": 0,
     "grund": "produziert: so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s",
@@ -13,6 +19,12 @@
     "letzter_erfolg": "2026-09-29",
     "letzter_versuch": "2026-09-29",
     "sperre_bis": "2027-03-28"
+  },
+  "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2026-09-30"
   },
   "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
     "fehler": 0,
@@ -63,6 +75,14 @@
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-09-29"
   },
+  "Die verschiedenen Arten von Reiseversicherungen im Vergleich": {
+    "fehler": 0,
+    "grund": "produziert: reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
+  },
   "E-Auto laden: So senkst du deine Stromkosten": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg",
@@ -84,9 +104,24 @@
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
   },
+  "Flugverspätung: So bekommst du deine Entschädigung": {
+    "fehler": 1,
+    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 764 Wörter / 5720 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); keine Faustregel markiert (RS3))",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2026-10-02"
+  },
   "Frugal leben mit Familie: So klappt Sparen auch mit Kindern": {
     "fehler": 0,
     "grund": "produziert: frugalismus-familie-so-sparst-du-mit-kindern-im-alltag",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
+  },
+  "Gas-Abschlag winterfest: So planst du die Heizsaison richtig": {
+    "fehler": 0,
+    "grund": "produziert: gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf",
     "infra_fehler": 0,
     "letzter_erfolg": "2026-09-29",
     "letzter_versuch": "2026-09-29",
@@ -98,6 +133,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
+  },
+  "Grundversorgung raus: So entkommst du dem teuersten Stromtarif": {
+    "fehler": 0,
+    "grund": "produziert: grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
   },
   "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung": {
     "fehler": 1,
@@ -133,12 +176,28 @@
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
   },
+  "Interrail und Bahncard: Günstig mit dem Zug durch Europa": {
+    "fehler": 0,
+    "grund": "produziert: interrail-bahncard-so-sparst-du-bei-der-europa-zugreise",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
+  },
   "Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 938 Wörter / 7294 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
+  },
+  "Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung": {
+    "fehler": 0,
+    "grund": "produziert: konto-wechseln-leicht-gemacht-dein-schneller-leitfaden",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
   },
   "Krankenzusatzversicherung: Welche Bausteine sich lohnen": {
     "fehler": 1,
@@ -166,6 +225,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
+  },
+  "Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab": {
+    "fehler": 0,
+    "grund": "produziert: rechtsschutzversicherung-was-sie-wirklich-zahlt",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
   },
   "Reisekrankenversicherung: Wann sie sich wirklich lohnt": {
     "fehler": 1,
@@ -258,6 +325,14 @@
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
   },
+  "Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?": {
+    "fehler": 0,
+    "grund": "produziert: stromspeicher-kaufen-2026-lohnt-sich-die-investition",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
+  },
   "Urlaubskasse clever aufbessern": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg",
@@ -271,6 +346,12 @@
     "letzter_erfolg": "2026-09-29",
     "letzter_versuch": "2026-09-29",
     "sperre_bis": "2027-03-28"
+  },
+  "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?": {
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2026-09-30"
   },
   "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
     "fehler": 1,
@@ -300,6 +381,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-28",
     "sperre_bis": "2026-10-01"
+  },
+  "Wohnmobil mieten statt kaufen: Was günstiger ist": {
+    "fehler": 0,
+    "grund": "produziert: wohnmobil-mieten-so-sparst-du-im-vergleich-zum",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-09-29",
+    "letzter_versuch": "2026-09-29",
+    "sperre_bis": "2027-03-28"
   },
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
     "fehler": 1,
