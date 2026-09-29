@@ -28,6 +28,8 @@ kurzantwort: "Ein 10 kWh‑Heimspeicher amortisiert sich ab 2026 meist nach 8–
 Willst du deine Stromrechnung um mehrere hundert Euro pro Jahr senken?  
 Ein **Stromspeicher kaufen** kann genau das ermöglichen – wenn du ihn richtig einsetzt.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**  
 - **Eigenverbrauch** steigt mit einem Speicher um ca. 30 % – 50 % und spart jährlich mehrere hundert Euro.
 - **Amortisationszeit** liegt meist zwischen 8 bis 12 Jahren, abhängig von Anlagengröße und Strompreis.

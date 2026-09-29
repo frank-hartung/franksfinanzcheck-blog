@@ -11,6 +11,10 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "konto"
+cover:
+  image: "images/covers/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg"
+  alt: "Konto & Karten-Update: Was sich jetzt für dich ändert"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 **Stand: 29.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
