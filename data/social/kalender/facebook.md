@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 29.09.2026 20:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 01:00 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 29. September 2026
-- **15:15** ⚪ Sparen im Herbst: Spartipps für die goldene Jahreszeit — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
 ### Mi, 30. September 2026
 - **09:45** ⏳ Heizkosten senken: Mit diesen Strategien sparst du sofort — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/

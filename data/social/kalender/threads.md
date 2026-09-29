@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 29.09.2026 20:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 01:00 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 29. September 2026
-- **16:15** ⚪ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Mi, 30. September 2026
 - **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/

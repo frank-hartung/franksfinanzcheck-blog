@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:threads:2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-
  umsetzen-kann:nutzen:2026-09-26@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260926T141500Z
 DTEND:20260926T143000Z
 SUMMARY:Threads: Geld sparen im Alltag: Tipps\, die jeder umsetzen kan
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-
  goldene-jahreszeit:frage:2026-09-26@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260926T141500Z
 DTEND:20260926T143000Z
 SUMMARY:Threads: Sparen im Herbst: Spartipps für die goldene Jahreszei
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-be
  schleunigt:nutzen:2026-09-27@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260927T071500Z
 DTEND:20260927T073000Z
 SUMMARY:Threads: Digitaler Turbo: Warum der DNS-Hack dein Netz beschle
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
  :zahl:2026-09-27@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260927T141500Z
 DTEND:20260927T143000Z
 SUMMARY:Threads: Finanzielle Freiheit erreichen: Denke dich reich – Ge
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein
  -zuhause:takeaway:2026-09-28@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260928T071500Z
 DTEND:20260928T073000Z
 SUMMARY:Threads: So findest du den richtigen: DSL-Tarif für dein Zuhau
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-ge
  nug:mythos:2026-09-28@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260928T141500Z
 DTEND:20260928T143000Z
 SUMMARY:Threads: Finanzieller Puffer: Wie viel Notgroschen ist genug? 
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-21-tierkrankenversicherung-hund-katze-kosten:takea
  way:2026-09-29@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260929T071500Z
 DTEND:20260929T073000Z
 SUMMARY:Threads: Tierkrankenversicherung für Hund & Katze: Kosten real
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spae
  tsommer-vor:zahl:2026-09-29@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260929T141500Z
 DTEND:20260929T143000Z
 SUMMARY:Threads: Gasrechnung prüfen: Fehler finden und Nachzahlungen (
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-10-dsl-wechselbonus-sichern:zahl:2026-09-30@franks
  finanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260930T071500Z
 DTEND:20260930T073000Z
 SUMMARY:Threads: DSL-Wechselbonus sichern: So sparst du beim Internetv
@@ -142,7 +142,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-
  du-sofort:frage:2026-09-30@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260930T141500Z
 DTEND:20260930T143000Z
 SUMMARY:Threads: Heizkosten senken: Mit diesen Strategien sparst du so
@@ -157,7 +157,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-up
  date-2026:takeaway:2026-10-01@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261001T071500Z
 DTEND:20261001T073000Z
 SUMMARY:Threads: Dein Haus sicher schützen: Das neue Vorsorge-Update 2
@@ -172,7 +172,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarant
  ie-gas:takeaway:2026-10-01@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261001T141500Z
 DTEND:20261001T143000Z
 SUMMARY:Threads: Sicher heizen: So schützt dich eine Gaspreisgarantie 
@@ -187,7 +187,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anb
  ieterwechsel:mythos:2026-10-02@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261002T071500Z
 DTEND:20261002T073000Z
 SUMMARY:Threads: Internet & DSL wechseln: Praxis-Tipps – Highspeed Int
@@ -202,7 +202,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hund
  erte-euro:zahl:2026-10-02@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261002T141500Z
 DTEND:20261002T143000Z
 SUMMARY:Threads: Gasrechnung senken: Spätsommer-Check für Tarif und He
@@ -217,7 +217,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-o
  hne-gebuehren:mythos:2026-10-03@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261003T071500Z
 DTEND:20261003T073000Z
 SUMMARY:Threads: Kostenloses Girokonto: So findest du ein Konto ohne G
@@ -232,7 +232,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-
  tarife-fuer-2026:vergleich:2026-10-03@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261003T141500Z
 DTEND:20261003T143000Z
 SUMMARY:Threads: Preisgarantie Gas: So sicherst du günstige Tarife (ve
@@ -247,7 +247,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-
  was-sie-kostet:takeaway:2026-10-04@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261004T071500Z
 DTEND:20261004T073000Z
 SUMMARY:Threads: Privathaftpflicht: Warum so wichtig und was sie koste
@@ -262,7 +262,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermei
  den:nutzen:2026-10-04@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261004T141500Z
 DTEND:20261004T143000Z
 SUMMARY:Threads: Gasrechnung senken: Fehler im Spätsommer vermeiden (n
@@ -277,7 +277,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
  et:zahl:2026-10-05@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261005T071500Z
 DTEND:20261005T073000Z
 SUMMARY:Threads: DSL-Vergleich: So findest du den günstigsten Internet
@@ -292,7 +292,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-
  finden:mythos:2026-10-05@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261005T141500Z
 DTEND:20261005T143000Z
 SUMMARY:Threads: Energiediebe stoppen: So kannst du Stromfresser finde
@@ -307,7 +307,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:tak
  eaway:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261006T071500Z
 DTEND:20261006T073000Z
 SUMMARY:Threads: Haushaltsbuch führen: App\, Excel oder Stift im Vergl
@@ -322,7 +322,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:myt
  hos:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261006T141500Z
 DTEND:20261006T143000Z
 SUMMARY:Threads: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
@@ -337,7 +337,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismu
  s-tipps:vergleich:2026-10-07@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261007T071500Z
 DTEND:20261007T073000Z
 SUMMARY:Threads: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzich
@@ -352,7 +352,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preis
  spruengen:nutzen:2026-10-07@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261007T141500Z
 DTEND:20261007T143000Z
 SUMMARY:Threads: Preisgarantie Gas: So schützt du dich vor Preissprüng
@@ -367,7 +367,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-dns-server-wechseln-schnelleres-sichereres-inte
  rnet:zahl:2026-10-08@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261008T071500Z
 DTEND:20261008T073000Z
 SUMMARY:Threads: DNS-Server wechseln: Schnelleres und sichereres Inter
@@ -382,7 +382,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spar
  en:takeaway:2026-10-08@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261008T141500Z
 DTEND:20261008T143000Z
 SUMMARY:Threads: Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen 
@@ -397,7 +397,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-eck
  e:mythos:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261009T071500Z
 DTEND:20261009T073000Z
 SUMMARY:Threads: WLAN verbessern: So bringst du stabilen Speed in jede
@@ -412,7 +412,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-ac
  hten-musst:takeaway:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261009T141500Z
 DTEND:20261009T143000Z
 SUMMARY:Threads: Wohngebäudeversicherung Vergleich: Worauf du achten m
@@ -427,7 +427,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:my
  thos:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261010T071500Z
 DTEND:20261010T073000Z
 SUMMARY:Threads: Handytarif 2026 vergleichen: Günstige Tarife ab 4\,99
@@ -442,7 +442,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:threads:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-s
  chnaeppchen:mythos:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261010T141500Z
 DTEND:20261010T143000Z
 SUMMARY:Threads: September-Roadtrip: Clevere Wege zum Mietwagen-Schnäp

@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:mastodon:2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-ver
  gleich:takeaway:2026-09-12@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260912T153000Z
 DTEND:20260912T154500Z
 SUMMARY:Mastodon: Wlan probleme loesen mesh oder repeater im vergleich
@@ -19,7 +19,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
  eschleunigt:vergleich:2026-09-26@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260926T093000Z
 DTEND:20260926T094500Z
 SUMMARY:Mastodon: Digitaler Turbo: Warum der DNS-Hack dein Netz beschl
@@ -34,7 +34,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
  h:nutzen:2026-09-26@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260926T153000Z
 DTEND:20260926T154500Z
 SUMMARY:Mastodon: Finanzielle Freiheit erreichen: Denke dich reich – G
@@ -49,7 +49,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
  n-zuhause:vergleich:2026-09-27@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260927T053000Z
 DTEND:20260927T054500Z
 SUMMARY:Mastodon: So findest du den richtigen: DSL-Tarif für dein Zuha
@@ -64,7 +64,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
  -goldene-jahreszeit:zahl:2026-09-27@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260927T093000Z
 DTEND:20260927T094500Z
 SUMMARY:Mastodon: Sparen im Herbst: Spartipps für die goldene Jahresze
@@ -79,7 +79,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-21-tierkrankenversicherung-hund-katze-kosten:verg
  leich:2026-09-28@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260928T053000Z
 DTEND:20260928T054500Z
 SUMMARY:Mastodon: Tierkrankenversicherung für Hund & Katze: Kosten rea
@@ -94,7 +94,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-g
  enug:thread:2026-09-28@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260928T093000Z
 DTEND:20260928T094500Z
 SUMMARY:Mastodon: Finanzieller Puffer: Wie viel Notgroschen ist genug?
@@ -109,7 +109,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst
  -du-sofort:vergleich:2026-09-29@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260929T053000Z
 DTEND:20260929T054500Z
 SUMMARY:Mastodon: Heizkosten senken: Mit diesen Strategien sparst du s
@@ -124,7 +124,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag:
  takeaway:2026-09-29@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260929T093000Z
 DTEND:20260929T094500Z
 SUMMARY:Mastodon: 5 einfache Frugalismus-Tricks für den Alltag: Geld s
@@ -139,7 +139,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spa
  etsommer-vor:nutzen:2026-09-30@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260930T053000Z
 DTEND:20260930T054500Z
 SUMMARY:Mastodon: Gasrechnung prüfen: Fehler finden und Nachzahlungen 
@@ -154,7 +154,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-
  2026:nutzen:2026-09-30@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20260930T093000Z
 DTEND:20260930T094500Z
 SUMMARY:Mastodon: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten s
@@ -169,7 +169,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hun
  derte-euro:nutzen:2026-10-01@franksfinanzcheck.de
-DTSTAMP:20260929T184145Z
+DTSTAMP:20260929T230059Z
 DTSTART:20261001T053000Z
 DTEND:20261001T054500Z
 SUMMARY:Mastodon: Gasrechnung senken: Spätsommer-Check für Tarif und H
