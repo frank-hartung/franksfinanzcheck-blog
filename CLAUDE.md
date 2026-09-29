@@ -254,9 +254,25 @@ dieses Archiv ein noindex?“, nicht „darf es dieses Archiv geben?“. Eine Se
 kann einzeln korrekt und in der Menge trotzdem ein Defekt sein. Deshalb misst
 `index_hygiene_gate.py` Anzahlen, nicht Attribute.
 
-**Nicht anfassen:** `[pagination] disableAliases = true` und der
-`[taxonomies]`-Block ohne `category` in `hugo.toml` – beide sind dokumentierte
-Index-Hygiene-Entscheidungen, keine Altlast. Bericht:
+**Keine Taxonomie-Archive mehr (Entscheidung 29.09.2026, Frank).** Der
+`[taxonomies]`-Block in `hugo.toml` ist **leer** – es gibt weder `/tags/` noch
+`/categories/`. Die Tag-Leiste im Artikel-Footer war echte, sichtbare
+Navigation, zeigte aber auf `noindex`-Archive: 42 Artikel verschenkten je 2–4
+interne Links an Seiten, die nie ranken können. Ersetzt durch
+`layouts/_partials/themenwelt_chips.html` – gleiche Position, gleiche Optik
+(bewusst dieselben `.post-tags`-Klassen, kein neues CSS), aber Ziele sind die
+sechs **indexierbaren** Pillar-Ratgeber. Aus Crawl-Last wurde Linkkraft auf die
+Money-Pages.
+
+**Drei Themen-Bausteine, keine Dopplung:** `pillar_box.html` = ein CTA in den
+eigenen Ratgeber (nach dem Text) · `themenwelten.html` = Karten-Raster auf
+Startseite und `/posts/` · `themenwelt_chips.html` = Quer-Navigation am
+Artikelende. Alle drei fail-closed gegen fehlende Ratgeber.
+
+**Nicht anfassen:** `[pagination] disableAliases = true` und der leere
+`[taxonomies]`-Block – beide sind dokumentierte Index-Hygiene-Entscheidungen,
+keine Altlast. Wer Archive zurückholt, muss `max_tag_archive` in
+`index_hygiene_gate.py` mit anheben (steht dort kommentiert). Bericht:
 `INDEX-HYGIENE-PREMIUM-2026-09-29.md`.
 
 ## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)

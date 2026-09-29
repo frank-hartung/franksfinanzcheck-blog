@@ -129,12 +129,11 @@
     {{- if and (eq .Section "posts") (not .Draft) .Params.cover.image }}
     <div class="ff-pin-footer" style="margin:4px 0 14px;">{{ partial "pin_button.html" (slice "footer" .) }}</div>
     {{- end }}
-    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-    <ul class="post-tags">
-      {{- range ($.GetTerms $tags) }}
-      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-      {{- end }}
-    </ul>
+    {{- /* Themen-Navigation: ersetzt die frühere Tag-Leiste (29.09.2026).
+           Die Tag-Archive waren noindex – jeder Artikel verschenkte hier
+           interne Links an Seiten, die nie ranken können. Die Chips zeigen
+           jetzt auf die sechs indexierbaren Pillar-Ratgeber. */ -}}
+    {{- partial "themenwelt_chips.html" . }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

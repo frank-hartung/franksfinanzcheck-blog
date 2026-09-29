@@ -1,0 +1,70 @@
+{{- /* ============================================================
+    themenwelt_chips.html – Themen-Navigation am Artikelende
+    ------------------------------------------------------------
+    ERSETZT die frühere Tag-Leiste (`<ul class="post-tags">` mit
+    `$.GetTerms "tags"`), Entscheidung vom 29.09.2026.
+
+    WARUM (Index-Hygiene, Bericht INDEX-HYGIENE-PREMIUM-2026-09-29.md):
+    Die Tag-Leiste war echte, sichtbare Navigation – sie zeigte aber auf
+    Tag-Archive, und die waren `noindex`. Jeder Artikel verschenkte damit
+    2–4 interne Links an Seiten, die nie ranken können und nur
+    Crawl-Budget kosten (147 Archive vor der Reparatur, 26 danach).
+
+    Jetzt zeigen dieselben Links auf die sechs Pillar-Ratgeber: das sind
+    INDEXIERBARE Money-Pages. Aus verschenkter Linkkraft wird damit
+    Linkkraft auf genau die Seiten, die ranken sollen – und die
+    Tag-Taxonomie kann ersatzlos entfallen (−27 URLs).
+
+    ABGRENZUNG zu den Nachbarbausteinen (bewusst keine Dopplung):
+      pillar_box.html    = EIN prominenter CTA in den EIGENEN Ratgeber
+                           (steht weiter oben, direkt nach dem Text)
+      themenwelten.html  = volles Karten-Raster, nur Startseite + /posts/
+      DIESE Leiste       = kompakte QUER-Navigation am Artikelende über
+                           alle sechs Themen, eigenes Thema zuerst
+    Die eigene Themenwelt steht vorn und ist als solche ausgezeichnet;
+    die übrigen fünf sind der seitliche Absprung – genau die Funktion,
+    die die Tag-Leiste hatte, nur auf indexierbaren Zielen.
+
+    STYLING: nutzt absichtlich die bestehenden Klassen `.post-tags`
+    (PaperMod post-single.css + assets/css/extended/zzz-agency-polish.css).
+    Dadurch ist die Leiste optisch identisch zur bisherigen Tag-Leiste –
+    kein neues CSS, keine Design-Drift, kein Lighthouse-Risiko.
+
+    FAIL-CLOSED wie themenwelten.html: fehlende oder unveröffentlichte
+    Ratgeber brechen den Build ab, statt still eine leere Leiste zu bauen.
+============================================================ */ -}}
+{{- $data := (partialCached "themenwelten_data.html" .) -}}
+{{- if ne (len $data.topics) 6 -}}
+  {{- errorf "Themenwelt-Chips: genau 6 Einträge in data/themenwelten.json erforderlich" -}}
+{{- end -}}
+{{- $eigen := .Params.pillar | default "" -}}
+{{- /* Eigene Themenwelt nach vorn sortieren, Reihenfolge sonst unverändert. */ -}}
+{{- $sortiert := slice -}}
+{{- range $data.topics }}{{ if and $eigen (eq .id $eigen) }}{{ $sortiert = $sortiert | append . }}{{ end }}{{ end -}}
+{{- range $data.topics }}{{ if not (and $eigen (eq .id $eigen)) }}{{ $sortiert = $sortiert | append . }}{{ end }}{{ end -}}
+<nav class="ff-themenwelt-nav" aria-labelledby="themenwelt-chips-label">
+  <p class="ff-themenwelt-nav__label" id="themenwelt-chips-label">Weiter zu deinen Themenwelten</p>
+  <ul class="post-tags ff-themenwelt-chips" role="list">
+    {{- range $sortiert -}}
+      {{- $ziel := site.GetPage (printf "/pillar/%s" .id) -}}
+      {{- if not $ziel -}}
+        {{- errorf "Themenwelt-Chips: Ratgeber /pillar/%s/ fehlt oder ist nicht veröffentlicht" .id -}}
+      {{- else if or $ziel.Draft (not $ziel.RelPermalink) -}}
+        {{- errorf "Themenwelt-Chips: Ratgeber /pillar/%s/ ist nicht öffentlich erreichbar" .id -}}
+      {{- else -}}
+        {{- $istEigen := and $eigen (eq .id $eigen) -}}
+    <li>
+      {{- /* cta_click wie in themenwelten.html – sonst wäre der Absprung
+             „Artikelende → Ratgeber" in der Umsatzmessung unsichtbar. */ -}}
+      <a href="{{ $ziel.RelPermalink }}" data-topic="{{ .id }}"
+         {{ if $istEigen }}data-own="true" {{ end }}data-umami-event="cta_click"
+         data-umami-event-cta="thema-{{ .id }}"
+         data-umami-event-slug="thema-{{ .id }}"
+         data-umami-event-placement="artikel-themenwelten">
+        <span class="ff-themenwelt-chip__icon" aria-hidden="true">{{ partial "themenwelt_icon.html" .id }}</span>{{ .title }}{{ if $istEigen }}<span class="ff-themenwelt-chip__own"> · dein Thema</span>{{ end }}
+      </a>
+    </li>
+      {{- end -}}
+    {{- end }}
+  </ul>
+</nav>

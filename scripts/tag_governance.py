@@ -19,6 +19,17 @@ Diese Wache schließt das Leck an der Quelle: Tags kommen ab jetzt aus dem
 kuratierten Register data/seo/tag_register.yaml. Was dort nicht steht, ist kein
 Tag – es ist ein Keyword und gehört ins `keywords`-Feld.
 
+WOZU TAGS NOCH DIENEN (Entscheidung 29.09.2026)
+Die Tag-Taxonomie ist in hugo.toml abgeschaltet – es gibt KEINE /tags/-Archive
+mehr. Das `tags`-Frontmatter-Feld bleibt aber bestehen und wichtig:
+  * Hugos Related-Matching ([related] in hugo.toml, Gewicht 80) baut daraus die
+    „Das könnte dich auch interessieren"-Karten unter jedem Artikel.
+  * Das Article-Schema nutzt es als Keyword-Rückfall (schema_article.html).
+Ein Tag ist damit kein URL-Erzeuger mehr, sondern ein Ähnlichkeits-Signal.
+Genau deshalb bleibt die Kuratierung nötig: ein Tag, den nur EIN Artikel trägt,
+kann per Definition nie zwei Artikel verbinden – er ist für das Related-Matching
+totes Gewicht (Regel T4). Ein wucherndes Vokabular verwässert die Treffer.
+
 REGELWERK (harte Funde => Exit 1):
   T1  Register     – Register ist ladbar, Namen eindeutig, kein Synonym doppelt
                      vergeben, kein Synonym gleich einem anderen Tag-Namen
@@ -26,7 +37,9 @@ REGELWERK (harte Funde => Exit 1):
                      Register (unbekannte Tags = neue Thin-Archive)
   T3  Kanonisch    – kein Artikel trägt ein Synonym statt des kanonischen Namens
                      (sonst entstehen zwei Archive für dasselbe Thema)
-  T4  Thin-Archiv  – jeder benutzte Tag erreicht politik.min_artikel_pro_tag
+  T4  Wirksamkeit  – jeder benutzte Tag erreicht politik.min_artikel_pro_tag
+                     (darunter verbindet er keine zwei Artikel → nutzlos fürs
+                      Related-Matching)
   T5  Menge        – kein Artikel über politik.max_tags_pro_artikel Tags,
                      kein Artikel ganz ohne Tag (Waisenkind ohne Crawl-Pfad)
   T6  Form         – Tag-Länge <= max_tag_laenge, keine verbotenen Zeichen
@@ -195,7 +208,8 @@ def tags_fuer(keywords, pillar: str = "", titel: str = "",
       1. Jedes Keyword gegen das Register spiegeln (Name oder Synonym).
       2. Reicht das nicht, den Titel gegen Namen/Synonyme prüfen.
       3. Bleibt es leer, die Tags des Pillars als Auffangnetz nehmen –
-         ein Artikel ohne Tag hätte keinen internen Crawl-Pfad.
+         ein Artikel ohne Tag fällt aus Hugos Related-Matching und bekommt
+         keine „Das könnte dich auch interessieren"-Karten.
     Es wird NIE ein neuer Tag erfunden. Passt nichts, entscheidet die
     Redaktion über einen Registereintrag.
     """
@@ -224,6 +238,8 @@ def tags_fuer(keywords, pillar: str = "", titel: str = "",
                 if len(treffer) >= max_tags:
                     return treffer[:max_tags]
 
+    # Auffangnetz: ein Artikel ohne Tag fällt aus dem Related-Matching und
+    # bekommt keine Verwandten-Karten mehr.
     if not treffer and pillar:
         for e in reg.eintraege:
             if isinstance(e, dict) and e.get("pillar") == pillar and e.get("name"):
@@ -350,7 +366,8 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
                   f"{len(kanon)} Tags (erlaubt: {max_tags}) – "
                   f"überzählig: {kanon[max_tags:]}")
         if not kanon:
-            F.add("T5", rel, "Artikel ohne gültigen Tag (kein interner Crawl-Pfad)")
+            F.add("T5", rel, "Artikel ohne gültigen Tag – fällt aus dem "
+                             "Related-Matching und verliert seine Verwandten-Karten")
         for k in kanon[:max_tags]:
             nutzung[k] = nutzung.get(k, 0) + 1
 
@@ -386,7 +403,8 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
         elif n < min_art:
             F.add("T4", "tag_register.yaml",
                   f"Tag {name!r} hat nur {n} Artikel (mind. {min_art}) – "
-                  f"Thin-Archiv, in einen breiteren Tag überführen")
+                  f"verbindet keine zwei Artikel, also wirkungslos fürs "
+                  f"Related-Matching; in einen breiteren Tag überführen")
 
     bericht = {
         "artikel": stats["artikel"],
@@ -594,7 +612,7 @@ def main() -> int:
     if F.hart:
         print(f"\n✗ {len(F.hart)} harte Funde – Taxonomie nicht sauber.")
         return 1
-    print("\n✓ Taxonomie sauber: jeder Tag kuratiert, kein Thin-Archiv.")
+    print("\n✓ Taxonomie sauber: jeder Tag kuratiert und wirksam.")
     return 0
 
 

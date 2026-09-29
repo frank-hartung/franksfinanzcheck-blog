@@ -19,26 +19,34 @@
 #  durch eine redaktionelle Entscheidung (Eintrag hier), nicht durch einen
 #  Generator.
 #
-#  ROLLENVERTEILUNG IM SEITENBAUM (bewusst, nicht historisch gewachsen):
-#    Pillar-Seiten  = die sechs indexierbaren Themen-Hubs (ranken sollen)
-#    Tag-Archive    = interne Verlinkung + Crawl-Pfade, bleiben `noindex,
-#                     follow` (head.html, Wache schema_seo_gate.py S6)
-#  Die Archive werden also NICHT indexierbar gemacht – sie werden auf ein
-#  Maß reduziert, das ein Crawler in einem Durchgang verkraftet.
+#  ROLLENVERTEILUNG IM SEITENBAUM (Entscheidung 29.09.2026, Frank)
+#    Pillar-Seiten  = die sechs indexierbaren Themen-Hubs (sollen ranken)
+#    Tag-ARCHIVE    = abgeschafft. Die Taxonomie `tags` ist in hugo.toml
+#                     abgeschaltet; es entsteht keine /tags/-URL mehr.
+#                     Die Themen-Navigation am Artikelende zeigt über
+#                     layouts/_partials/themenwelt_chips.html auf die
+#                     Pillar-Ratgeber – indexierbare Ziele statt noindex.
+#    Tag-FELD       = bleibt im Frontmatter und bleibt wichtig:
+#                     Hugos Related-Matching ([related], Gewicht 80) baut
+#                     daraus die Verwandten-Karten, das Article-Schema
+#                     nutzt es als Keyword-Rückfall.
+#  Ein Tag ist also ein ÄHNLICHKEITS-SIGNAL, kein URL-Erzeuger. Deshalb
+#  bleibt `min_artikel_pro_tag` gültig: ein Tag mit nur einem Artikel kann
+#  keine zwei Artikel verbinden und ist fürs Matching totes Gewicht.
 #
 #  PFLEGE
 #    python3 scripts/tag_governance.py --report   Bestand ansehen
 #    python3 scripts/tag_governance.py --check    Wache (CI, Exit 1 = Fund)
 #    python3 scripts/tag_governance.py --apply    Frontmatter normalisieren
 #  Ein neuer Tag braucht: name, pillar, mindestens `min_artikel_pro_tag`
-#  Artikel – sonst hängt er als Thin-Archiv im Index-Report.
+#  Artikel – sonst ist er fürs Related-Matching wirkungslos (Regel T4).
 # =====================================================================
 
 politik:
   # Wie viele Tags darf ein Artikel tragen? Mehr Tags = mehr Archive.
   max_tags_pro_artikel: 4
-  # Ab wie vielen Artikeln trägt ein Tag-Archiv seinen Crawl-Aufwand?
-  # Darunter ist es ein Thin-Archiv und gehört in einen breiteren Tag.
+  # Ab wie vielen Artikeln kann ein Tag überhaupt etwas verbinden?
+  # Unter 2 verknüpft er nichts und ist fürs Related-Matching wirkungslos.
   min_artikel_pro_tag: 2
   # Tag-Namen sind Navigationslabels, keine Überschriften. Alles, was
   # länger ist, war in der Praxis ein versehentlich kopierter Artikeltitel.
@@ -49,8 +57,8 @@ politik:
   verbotene_zeichen: [":", "–", "—", "!", "?", "\u202f", "\u00a0", "\u2009"]
   # Kategorien sind die grobe Publikationsart – nicht das Thema.
   erlaubte_kategorien: ["Ratgeber", "News"]
-  # Tag-Archive bleiben aus dem Index (siehe Rollenverteilung oben).
-  archiv_indexierung: "noindex, follow"
+  # Tag-Archive gibt es nicht mehr (Taxonomie in hugo.toml abgeschaltet).
+  archive: "abgeschaltet"
 
 tags:
   # ------------------------------------------------------------------

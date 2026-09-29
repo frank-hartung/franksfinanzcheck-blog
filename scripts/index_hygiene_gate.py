@@ -26,7 +26,8 @@ REGELWERK (harte Funde => Exit 1):
                         (Ausnahme: Verifikationsdateien in VERIFIKATION)
   H2  Aliase          – keine /page/1/-Weiterleitungen im Build
                         (hugo.toml: [pagination] disableAliases = true)
-  H3  Tag-Archive     – Anzahl <= budget.max_tag_archive
+  H3  Tag-Archive     – Anzahl <= budget.max_tag_archive (seit 29.09.2026: 0,
+                        die Taxonomie `tags` ist abgeschaltet)
   H4  Kategorien      – keine /categories/-Archive (Taxonomie abgeschaltet)
   H5  Verhältnis      – nicht-indexierbare URLs <= budget.max_verhaeltnis
                         mal indexierbare Seiten
@@ -64,12 +65,21 @@ PUBLIC = os.environ.get("INDEX_GATE_BASE", os.path.join(BLOG_DIR, "public"))
 VERIFIKATION = re.compile(
     r"^/(google[0-9a-f]+\.html|pinterest-[0-9a-f]+\.html|BingSiteAuth\.xml)$")
 
-# Budget der Crawl-Fläche. Bewusst großzügig über dem Ist-Stand, damit
-# normales Wachstum (neue Artikel, ein neuer Tag) nicht rot wird – aber eng
-# genug, dass eine erneute Tag-Explosion sofort auffällt.
+# Budget der Crawl-Fläche.
+#
+# max_tag_archive = 0: Die Taxonomie `tags` ist seit 29.09.2026 in hugo.toml
+# abgeschaltet (Entscheidung Frank). Es DARF kein /tags/-Archiv mehr entstehen –
+# taucht doch eines auf, hat jemand den `[taxonomies]`-Block wieder befüllt.
+# Das ist dann eine bewusste Architekturänderung und muss hier mitgezogen
+# werden, nicht stillschweigend durchrutschen.
+#
+# max_verhaeltnis = 1.0: Ist nach der Reparatur 0,66 (38 : 58). Vorher 5,98.
+# Der Puffer bis 1.0 trägt normales Wachstum (jeder neue Artikel bringt eine
+# indexierbare Seite und ggf. eine Pager-Seite), schlägt aber an, bevor sich
+# wieder eine ganze URL-Klasse unbemerkt aufbaut.
 BUDGET = {
-    "max_tag_archive": 35,      # Ist nach Reparatur: 26 (inkl. /tags/)
-    "max_verhaeltnis": 2.0,     # Ist nach Reparatur: 1,12 · Ist vorher: 5,98
+    "max_tag_archive": 0,       # Taxonomie abgeschaltet · Ist: 0 · vorher: 147
+    "max_verhaeltnis": 1.0,     # Ist: 0,66 · vor der Reparatur: 5,98
 }
 
 
@@ -218,9 +228,15 @@ def pruefe(basis: str = PUBLIC, budget: dict | None = None) -> tuple[Funde, dict
 
     # ---- H3: Tag-Archive ----
     if len(tag_archive) > b["max_tag_archive"]:
-        F.add("H3", "/tags/",
-              f"{len(tag_archive)} Tag-Archive (Budget: {b['max_tag_archive']}) – "
-              f"Taxonomie wuchert, siehe data/seo/tag_register.yaml")
+        if b["max_tag_archive"] == 0:
+            F.add("H3", "/tags/",
+                  f"{len(tag_archive)} Tag-Archive im Build, erlaubt sind 0 – "
+                  f"die Taxonomie `tags` ist in hugo.toml bewusst abgeschaltet "
+                  f"(Themen-Navigation läuft über themenwelt_chips.html)")
+        else:
+            F.add("H3", "/tags/",
+                  f"{len(tag_archive)} Tag-Archive (Budget: {b['max_tag_archive']}) – "
+                  f"Taxonomie wuchert, siehe data/seo/tag_register.yaml")
 
     # ---- H4: Kategorie-Archive ----
     for u in sorted(kategorie):
@@ -376,6 +392,15 @@ def selftest() -> int:
         baue(t, s, ["/"])
         F, _ = pruefe(t)
         check("H3 Tag-Budget", any(r == "H3" for r, _, _ in F.hart))
+
+    # 5b Seit dem Abschalten der Taxonomie ist bereits EIN Archiv ein Fund.
+    #    Ohne diesen Fall würde ein versehentlich wieder befüllter
+    #    [taxonomies]-Block mit wenigen Tags unter einem alten Budget durchrutschen.
+    with tempfile.TemporaryDirectory() as t:
+        baue(t, {"/": IDX.format(links="/"), "/tags/eines/": NOIDX}, ["/"])
+        F, _ = pruefe(t)
+        check("H3 ein einzelnes Tag-Archiv reicht",
+              any(r == "H3" for r, _, _ in F.hart))
 
     # 6 H4 Kategorie-Archiv
     with tempfile.TemporaryDirectory() as t:

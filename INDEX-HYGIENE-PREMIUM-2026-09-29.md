@@ -6,9 +6,15 @@ indexierte Seiten an. Bitte auf Premium-Level einer Profi-Agentur beheben.“
 **Kurzfassung:** Kein einziger Artikel war schuld. Die Site hat schlicht **sechsmal
 mehr URLs gebaut, als sie Inhalte hat** – 347 nicht indexierbare URLs auf 58 echte
 Seiten. Zwei Automatiken haben das erzeugt, beide unbemerkt, beide wachsend mit
-jedem neuen Artikel. Die Crawl-Fläche ist jetzt um **81 % reduziert** (347 → 65),
+jedem neuen Artikel. Die Crawl-Fläche ist jetzt um **89 % reduziert** (347 → 38),
 die Ursachen sind an der Quelle geschlossen und durch zwei neue Wachen mit
-23 Selbsttests gegen Rückfall gesichert.
+24 Selbsttests gegen Rückfall gesichert.
+
+> **Korrekturhinweis zu einer früheren Fassung dieses Berichts:** Abschnitt 8
+> behauptete zunächst, die Tag-Archive seien „von keiner Artikelseite verlinkt".
+> Das war **falsch** – 42 Artikel rendern eine sichtbare Tag-Leiste. Der Fehler
+> und seine Ursache sind in Abschnitt 8 dokumentiert; die daraus folgende
+> Entscheidung ist dort ebenfalls festgehalten und umgesetzt.
 
 ---
 
@@ -168,16 +174,20 @@ zu Recht als „blockiert“ erscheint.
 
 ```
                          VORHER          NACHHER        Δ
+  HTML-URLs gesamt          405              96        −309
   Indexierbare Seiten        58              58         unverändert
-  Nicht indexierbar         347              65        −282  (−81 %)
-  Verhältnis             1 : 5,98        1 : 1,12
+  Nicht indexierbar         347              38        −309  (−89 %)
+  Verhältnis             1 : 5,98        0,66 : 1
   ──────────────────────────────────────────────────────────────
-  Tag-Archive               147              26        −121
+  Tag-Archive               147               0        −147
   /page/1/-Aliase           154               0        −154
   Kategorie-Archive           4               0          −4
-  Roh-Tags                  217              25        −192
+  Pager-Seiten               14              10          −4
+  Roh-Tags (Vokabular)      217              25        −192
   Tags mit 1 Artikel        193               0        −193
   Sitemap-Einträge           55              56          +1
+  ──────────────────────────────────────────────────────────────
+  Verbleibend (alles gewollt): 20 /go/ · 10 Pager · 7 Funnel/OAuth · 1 404
 ```
 
 Alle bestehenden Wachen bleiben grün:
@@ -191,7 +201,7 @@ Alle bestehenden Wachen bleiben grün:
 | Wache | Regeln | Selbsttests | Läuft |
 |---|---|---|---|
 | `scripts/tag_governance.py` | T1–T8 | 14 | Deploy (vor Build, selbstheilend) + wöchentlich |
-| `scripts/index_hygiene_gate.py` | H1–H8 | 9 | Deploy (nach Build) + wöchentlich |
+| `scripts/index_hygiene_gate.py` | H1–H8 | 10 | Deploy (nach Build) + wöchentlich |
 
 **`tag_governance.py`** – T1 Register-Integrität · T2 unbekannter Tag ·
 T3 Synonym statt kanonisch · T4 Thin-Archiv (< 2 Artikel) · T5 Tag-Menge ·
@@ -200,8 +210,8 @@ T6 Form/Sonderzeichen · T7 Kategorie · T8 tote Registerzeile.
 gemeldet – die Entscheidung „Registereintrag oder Keyword“ bleibt redaktionell.
 
 **`index_hygiene_gate.py`** – misst die **Crawl-Fläche** des fertigen Builds:
-H1 Sitemap-Deckung · H2 `/page/1/`-Aliase · H3 Tag-Budget (max. 35) ·
-H4 Kategorie-Archive · H5 Verhältnis (max. 2,0 : 1) · H6 kaputte Slugs ·
+H1 Sitemap-Deckung · H2 `/page/1/`-Aliase · H3 Tag-Archive (jetzt: 0 erlaubt) ·
+H4 Kategorie-Archive · H5 Verhältnis (max. 1,0 : 1) · H6 kaputte Slugs ·
 H7 Waisenseiten · H8 `noindex` in der Sitemap.
 Bewusst **ohne** `--fix`: jeder Fund ist eine Architekturentscheidung.
 
@@ -219,7 +229,7 @@ npm run tags              # Bestand der Taxonomie
 npm run tags:check        # Wache
 npm run tags:fix          # Frontmatter normalisieren
 npm run index:hygiene     # Build + Crawl-Fläche messen
-npm run test:index:hygiene   # 23 Selbsttests
+npm run test:index:hygiene   # 24 Selbsttests
 ```
 
 ---
@@ -229,7 +239,7 @@ npm run test:index:hygiene   # 23 Selbsttests
 Die Zahl **fällt nicht sofort** – und sie kann kurzfristig sogar erst die Kategorie
 wechseln. Das ist normal und kein Rückschritt:
 
-1. **Tag 1–3:** Neuer Build live, Sitemap mit 56 Einträgen. Die 281 entfernten URLs
+1. **Tag 1–3:** Neuer Build live, Sitemap mit 56 Einträgen. Die 309 entfernten URLs
    liefern jetzt 404 statt `noindex`/Redirect.
 2. **Woche 1–3:** Google crawlt die alten URLs nach und bucht sie von „Durch
    ‚noindex‘ ausgeschlossen“ bzw. „Seite mit Weiterleitung“ nach **„Nicht gefunden
@@ -238,8 +248,9 @@ wechseln. Das ist normal und kein Rückschritt:
 3. **Woche 3–10:** 404er verschwinden dauerhaft aus dem Bericht. `noindex`-Seiten
    werden dagegen unbegrenzt weiter gecrawlt und gemeldet – deshalb ist 404 hier
    klar die bessere Endstation als eine Weiterleitung.
-4. **Dauerhaft:** Der Bericht pendelt sich bei rund **65** nicht indexierten URLs
-   ein, davon ~20 gewollte `/go/`-Weiterleitungen und ~11 Pager.
+4. **Dauerhaft:** Der Bericht pendelt sich bei rund **38** nicht indexierten URLs
+   ein – davon 20 gewollte `/go/`-Weiterleitungen, 10 Pager, 7 Newsletter-/
+   OAuth-Seiten und die 404. Alles davon ist Absicht.
 
 Eine Weiterleitung der alten Tag-URLs auf die neuen wurde **bewusst verworfen**:
 die alten Archive waren `noindex`, standen in keiner Sitemap und hatten keine
@@ -252,42 +263,101 @@ einreichen** und in 4 Wochen erneut draufschauen.
 
 ---
 
-## 8 · Offener Punkt zur Entscheidung – die 26 Tag-Archive
+## 8 · Die Tag-Archive – mein Analysefehler und die Entscheidung
 
-Bei der Analyse kam heraus, dass die Tag-Archive **von keiner einzigen
-Artikel-, Pillar- oder Startseite verlinkt sind**. Die einzigen Seiten, die auf
-`/tags/…` zeigen, sind die Tag-Seiten selbst (Brotkrumen). Sie sind damit eine
-**geschlossene Insel**: `noindex` (bringen also nie Traffic) und unverlinkt
-(bringen also auch keine interne Linkkraft).
+### 8.1 Was ich zuerst berichtet habe – und warum es falsch war
 
-Der Kommentar in `hugo.toml` begründete sie bisher mit „bleiben erhalten
-(interne Verlinkung)“ – diese Begründung trifft im aktuellen Build **nicht zu**.
+Die erste Fassung dieses Berichts behauptete:
 
-Damit gibt es zwei saubere Wege. Beide sind vertretbar, deshalb liegt die
-Entscheidung bei dir:
+> „Die Tag-Archive sind von keiner Artikel-, Pillar- oder Startseite verlinkt.
+> Sie sind eine geschlossene Insel."
 
-* **A – Archive entfernen** (`[taxonomies]`-Block in `hugo.toml` leeren):
-  −27 weitere URLs, Endstand 38 statt 65. Das `tags`-Feld bleibt als Metadatum
-  erhalten und speist weiter Related-Matching und Schema – genau wie es jetzt
-  schon bei `categories` gelöst ist. Ein Einzeiler.
-* **B – Archive aktivieren:** Tag-Chips unter jedem Artikel ausspielen. Dann
-  erfüllen die 26 Seiten ihren dokumentierten Zweck als interne Crawl-Pfade.
-  Kleiner Eingriff ins Artikel-Layout.
+**Das war falsch.** Nachgemessen am Build:
 
-Bis zur Entscheidung bleibt der Stand wie jetzt: 26 kuratierte, saubere Archive
-statt 147 kaputter – der Schaden ist in jedem Fall behoben.
+* **42 Artikel** rendern im Footer eine **sichtbare, gestylte Tag-Leiste**
+  (`<ul class="post-tags">` in `layouts/single.html` und
+  `layouts/_default/single.html`; Styling über PaperMod `post-single.css` und
+  `assets/css/extended/zzz-agency-polish.css`).
+* Die Archive waren also **echte, benutzbare Navigation** – keine Insel.
 
----
+Ursache meines Fehlers – zwei Effekte gleichzeitig:
+
+```
+gesucht:       href="/tags/                            (relativ + Anführungszeichen)
+ausgeliefert:  href=https://franksfinanzcheck.de/tags/ (absolut + minifiziert)
+```
+
+Hugo schreibt hier absolute Permalinks, und der geprüfte Build war mit
+`--minify` erzeugt (der Minifier entfernt die Anführungszeichen). Der Suchbegriff
+konnte damit nicht treffen. Bitter: Es ist **derselbe Minifier-Fallstrick**, den
+ich in `index_hygiene_gate.py` (H7) korrekt behandelt und eigens durch einen
+Selbsttest abgesichert habe – in der manuellen Analyse daneben bin ich ihm
+trotzdem aufgesessen. Konsequenz für die Zukunft: Aussagen über interne
+Verlinkung nur noch über `interne_ziele()` der Wache, nie über einen Ad-hoc-Grep.
+
+Nicht betroffen: der gesamte Rest des Berichts. Befund, beide Ursachen und alle
+Kennzahlen stammen aus der Klassifikation je Datei über `robots`-Meta und
+Meta-Refresh – nicht aus diesem Grep.
+
+### 8.2 Die Entscheidung (Frank, 29.09.2026): vollständig entfernen, Navigation ersetzen
+
+Auf der korrigierten Grundlage lautete die Frage nicht mehr „totes Gewicht
+wegräumen?", sondern: **Wohin sollen diese 2–4 internen Links pro Artikel
+zeigen?** Denn das war der eigentliche Missstand – die Leiste war nützlich, ihre
+**Ziele** waren es nicht: jeder Klickpfad endete auf einem `noindex`-Archiv, das
+per Definition nie ranken kann.
+
+Entschieden und umgesetzt wurde daher:
+
+* Die Taxonomien `tags` **und** `categories` sind in `hugo.toml` abgeschaltet –
+  es entsteht keine `/tags/`- und keine `/categories/`-URL mehr (**−27 URLs**).
+* Die Tag-Leiste ist durch **`layouts/_partials/themenwelt_chips.html`** ersetzt:
+  dieselbe Position am Artikelende, **dieselbe Optik** (bewusst dieselben
+  `.post-tags`-Klassen → kein neues CSS, keine Design-Drift), aber die Chips
+  zeigen auf die **sechs indexierbaren Pillar-Ratgeber**. Die eigene Themenwelt
+  steht vorn und ist als „· dein Thema" ausgezeichnet, die übrigen fünf sind der
+  seitliche Absprung.
+* Das `tags`-Feld im Frontmatter **bleibt** – es speist weiter Hugos
+  Related-Matching (Gewicht 80) und den Keyword-Rückfall im Article-Schema.
+  Beides verifiziert: Verwandten-Karten und `"keywords": …` stehen unverändert
+  im gebauten HTML.
+
+**Der eigentliche Gewinn ist nicht die URL-Ersparnis, sondern die Umleitung der
+Linkkraft:** Vorher verschenkten 42 Artikel je 2–4 interne Links an `noindex`-
+Seiten. Jetzt fließen von **jedem** Artikel sechs Links auf genau die sechs
+Seiten, die ranken sollen. Aus einer Crawl-Last wurde ein Ranking-Signal für die
+Money-Pages.
+
+**Abgrenzung zu den Nachbarbausteinen** (bewusst keine Dopplung):
+
+| Baustein | Wo | Funktion |
+|---|---|---|
+| `pillar_box.html` | nach dem Artikeltext | **ein** prominenter CTA in den **eigenen** Ratgeber |
+| `themenwelten.html` | Startseite, `/posts/` | volles Karten-Raster aller sechs Themen |
+| `themenwelt_chips.html` | Artikelende (neu) | kompakte **Quer**-Navigation über alle sechs, eigenes Thema zuerst |
+
+Der Baustein ist **fail-closed** wie `themenwelten.html`: fehlt ein Ratgeber oder
+ist er unveröffentlicht, bricht der Build ab, statt still eine leere Leiste zu
+bauen. Die Klick-Messung (`cta_click`, Platzierung `artikel-themenwelten`) ist
+angeschlossen, damit der Absprung „Artikelende → Ratgeber" im Umsatztrichter
+sichtbar bleibt.
+
+**Rückbau**, falls die Archive je wieder gewollt sind: `tag = "tags"` im
+`[taxonomies]`-Block eintragen, `max_tag_archive` in `index_hygiene_gate.py`
+anheben – beides ist an Ort und Stelle kommentiert.
 
 ## 9 · Geänderte Dateien
 
 **Neu**
 * `data/seo/tag_register.yaml` – 25 kanonische Tags, 217 Synonyme, Politik
 * `scripts/tag_governance.py` – Wache T1–T8, `--apply`, 14 Selbsttests
-* `scripts/index_hygiene_gate.py` – Wache H1–H8, 8 Selbsttests
+* `scripts/index_hygiene_gate.py` – Wache H1–H8, 10 Selbsttests
+* `layouts/_partials/themenwelt_chips.html` – Themen-Navigation am Artikelende
 
 **Geändert**
-* `hugo.toml` – `disableAliases`, `[taxonomies]` ohne `category`
+* `hugo.toml` – `disableAliases`, `[taxonomies]` leer (keine Taxonomie mehr)
+* `layouts/single.html`, `layouts/_default/single.html`,
+  `layouts/pillar/single.html` – Tag-Leiste → Themenwelt-Chips
 * `layouts/sitemap.xml` – `/transparenz/` ergänzt
 * `scripts/engine_generate.py` – Tags aus dem Register statt aus Keywords
 * `scripts/generate_drafts.py` – dito (`_register_tags()`)
