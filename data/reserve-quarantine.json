@@ -1,1 +1,13 @@
-{}
+{
+  "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf": {
+    "first": "2026-09-29T10:11:20Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 59 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 9 Passiv-Formulierungen",
+    "hits": 1,
+    "laeufe": [
+      "run:36552783354"
+    ],
+    "last": "2026-09-29T10:15:56Z",
+    "lauf": "run:36552783354",
+    "signatur": "lesbarkeits-gate nicht bestanden: lesbarkeits-score <n>/<n> (mindestwert <n>): flesch <n> (ziel ≥ <n>); <n> absätze > <n> sätze; <n> passiv-formulierungen"
+  }
+}

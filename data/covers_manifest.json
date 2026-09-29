@@ -556,5 +556,68 @@
    "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
+ },
+ "2026-09-29-bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld": {
+  "title": "Bankgebühren reduzieren: So sparst du monatlich bares Geld",
+  "ts": "2026-09-29T10:14:27+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-frugalismus-familie-so-sparst-du-mit-kindern-im-alltag": {
+  "title": "Frugalismus Familie: So sparst du mit Kindern im Alltag",
+  "ts": "2026-09-29T10:14:23+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-09-29-online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag": {
+  "title": "Online-Konten: So sparst du Gebühren und Zeit im Alltag",
+  "ts": "2026-09-29T10:14:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s": {
+  "title": "So nutzt du die Balkonkraftwerk Förderung: Geld zurück vom S",
+  "ts": "2026-09-29T10:14:20+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf": {
+  "title": "VPN Zuhause: Teurer Schnickschnack oder Pflichtkauf?",
+  "ts": "2026-09-29T10:13:55+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-09-29-schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet": {
+  "title": "Schufa Eintrag löschen: So rettest du deine Bonität",
+  "ts": "2026-09-29T10:13:49+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-09-29-stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an": {
+  "title": "Stromanbieter Pleite: So bleibt dein Licht trotzdem an",
+  "ts": "2026-09-29T10:13:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
  }
 }

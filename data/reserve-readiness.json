@@ -1,7 +1,119 @@
 {
   "target": 6,
-  "ready": 0,
-  "pool_size": 0,
-  "generated_at": "2026-09-28T17:10:53Z",
-  "candidates": []
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-09-29T10:15:56Z",
+  "candidates": [
+    {
+      "slug": "2026-09-29-bankgebuehren-reduzieren-so-sparst-du-monatlich-bares-geld",
+      "ready": true,
+      "sha256": "8b9406664ab6d0a54a716d4e0eb24da77f34fe6d4c2873acc1f2e4ba979af64d",
+      "score": 0.916,
+      "parts": {
+        "spelling": 0.8200000000000001,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-29-so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s",
+      "ready": true,
+      "sha256": "861552f1f1bfb05684720f109c892a664d7f947f57e02fdf03765d72e7b6c1c8",
+      "score": 0.938,
+      "parts": {
+        "spelling": 0.7000000000000001,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-29-frugalismus-familie-so-sparst-du-mit-kindern-im-alltag",
+      "ready": true,
+      "sha256": "53d9b17951f810edc06d7478e5075990b7f9f442a8f3a9dc68eadcfc0cbb1810",
+      "score": 0.868,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.8,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-09-29-online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag",
+      "ready": true,
+      "sha256": "6d0071db48907053a07cdf0d511dd597757f61549b47d8fda16f610502ad7f4a",
+      "score": 0.918,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-29-schufa-eintrag-loeschen-so-rettest-du-deine-bonitaet",
+      "ready": true,
+      "sha256": "1e3a7937fa2b258e3ee43798f9ef4cae83ee7e2f5e52e89568f9b52908a35b48",
+      "score": 0.924,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-29-stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an",
+      "ready": true,
+      "sha256": "5a50f9dbd5b095ed75fea90bed70b8528a34ab7ac36eff247f5fff7d6bc0431f",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf",
+      "ready": false,
+      "sha256": "5f69a7cefb699029845ba5ffe30362cf6f2511682328e651ed656f3abca2e345",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 59 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 9 Passiv-Formulierungen",
+      "details": [
+        "🛑 2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 59 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 9 Passiv-Formulierungen",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.88,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.8,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.7
+      }
+    }
+  ]
 }

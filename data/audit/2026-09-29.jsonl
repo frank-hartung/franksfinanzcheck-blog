@@ -1,0 +1,26 @@
+{"ts": "2026-09-29T10:03:57Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:03:57Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:03:57Z", "module": "fix_spaces", "action": "apply", "input": {"files": 60}, "output": {"fixes": 539}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:04:11Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:04:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:07:46Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 4}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:07:51Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:07:55Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:08:01Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:08:40Z", "module": "fix_spaces", "action": "apply", "input": {"files": 64}, "output": {"fixes": 594}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:10:14Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 12}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:10:14Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:10:14Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:10:14Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:10:14Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:11:20Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"]}, "output": {"gated": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:13:10Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:13:15Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:13:22Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:13:22Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:13:23Z", "module": "fix_spaces", "action": "apply", "input": {"files": 66}, "output": {"fixes": 557}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:14:38Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 6}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:14:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:14:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:14:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-09-29T10:15:56Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"]}, "output": {"gated": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
