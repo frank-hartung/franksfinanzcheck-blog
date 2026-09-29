@@ -5,7 +5,7 @@ description: "Finanzielle Freiheit erreichen: Wo die Denkfehler sitzen, wie du d
 kurzantwort: "Finanzielle Freiheit entsteht meist nicht durch ein höheres Einkommen, sondern durch klare Gewohnheiten: Ausgaben steuern, Sparraten automatisieren und früh breit gestreut investieren. Schon 300 € monatlich können bei 7 % Rendite in 20 Jahren auf rund 156.000 € anwachsen."
 date: 2026-09-16T08:58:26Z
 draft: false
-tags: ["Finanzielle Freiheit erreichen", "Geld Mindset", "Vermögen aufbauen", "Sparroutinen"]
+tags: ["Frugalismus", "Geld sparen im Alltag", "Altersvorsorge"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

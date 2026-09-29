@@ -4,7 +4,7 @@ title: "Die 50-30-20-Regel einfach erklärt"
 description: "Die 50-30-20-Regel erklärt in klaren Schritten: So teilst du dein Einkommen in Fixkosten, Wünsche und Sparen auf und setzt die Methode alltagstauglich um."
 date: 2026-09-25T09:42:31Z
 draft: true
-tags: ["50-30-20-Regel", "Budget planen", "Finanzen ordnen"]
+tags: ["Budget planen", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["Die 50-30-20-Regel einfach erklärt", "50-30-20-Regel", "Budgetregel", "Geld einteilen", "Die 50 30 20 Regel einfach erklärt"]

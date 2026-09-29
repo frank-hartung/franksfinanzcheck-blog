@@ -302,7 +302,33 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
     title, desc, pin_t, pin_d, kws = _casing_frontmatter(
         title, desc, pin_t, pin_d, kws)
     kw_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:8]) + "]"
-    tag_yaml = "[" + ", ".join(f'"{k}"' for k in kws[:4]) + "]"
+    # ------------------------------------------------------------------
+    # TAGS AUS DEM KURATIERTEN REGISTER (Index-Hygiene 29.09.2026)
+    #
+    # Vorher stand hier `tags = kws[:4]`. Keywords sind aber long-tail und
+    # pro Artikel einmalig – jeder neue Artikel hat damit bis zu vier
+    # brandneue Tags erzeugt und mit ihnen vier neue Tag-Archive plus vier
+    # /page/1/-Weiterleitungen. Nach 63 Artikeln waren das 217 Roh-Tags,
+    # 147 Archive (193 Tags mit genau EINEM Artikel) und in Summe ~294
+    # nicht indexierbare URLs. Genau das meldete die Google Search Console
+    # als „237 nicht indexierte Seiten".
+    #
+    # Ab jetzt spiegelt tags_fuer() die Keywords gegen
+    # data/seo/tag_register.yaml und gibt ausschließlich kanonische Tags
+    # zurück. Neue Tags entstehen nur durch einen Registereintrag, also
+    # durch eine redaktionelle Entscheidung – nie durch den Generator.
+    # Die Keywords selbst bleiben unverändert im `keywords`-Feld: dort
+    # gehören sie hin (Schema, Related-Matching), ohne je eine URL zu bauen.
+    # Wache: scripts/tag_governance.py (T2/T4), scripts/index_hygiene_gate.py (H3).
+    # ------------------------------------------------------------------
+    try:
+        from tag_governance import tags_fuer
+        _tags = tags_fuer(kws, pillar=pillar or "", titel=title)
+    except Exception as _tag_err:  # Register kaputt/fehlt: Artikel nicht blockieren
+        print(f"  ⚠ Tag-Register nicht nutzbar ({_tag_err}) – Tags bleiben leer, "
+              f"bitte `python3 scripts/tag_governance.py --check` laufen lassen")
+        _tags = []
+    tag_yaml = "[" + ", ".join(f'"{k}"' for k in _tags) + "]"
     pinwand_line = f"pinwand: {yaml_quote(pinwand)}\n" if pinwand else ""
     frontmatter = (
         "---\n"

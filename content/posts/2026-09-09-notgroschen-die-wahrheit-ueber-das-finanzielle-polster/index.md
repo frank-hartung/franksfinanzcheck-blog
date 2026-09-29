@@ -4,7 +4,7 @@ description: "Wie viel Notgroschen brauchst du wirklich? So berechnest du dein f
 date: 2026-09-09T08:16:43Z
 lastmod: 2026-09-25
 draft: false
-tags: ["Notgroschen", "Notfallreserve", "Tagesgeld", "Finanzpolster"]
+tags: ["Notgroschen", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

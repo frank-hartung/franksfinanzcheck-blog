@@ -4,7 +4,7 @@ title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
 description: "Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat."
 date: 2026-08-24T08:35:12Z
 draft: false
-tags: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Haushaltsbuch führen"]
+tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

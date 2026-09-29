@@ -57,6 +57,26 @@ jobs:
           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
           exit ${PIPESTATUS[0]}
 
+      # INDEX-HYGIENE (29.09.2026): wöchentlicher Blick auf die Crawl-Fläche.
+      # Der Deploy prüft sie bei jedem Build; hier steht sie zusätzlich im
+      # Wochenbericht, damit ein langsames Wachsen der Taxonomie sichtbar wird,
+      # bevor es wieder 147 Tag-Archive sind. Rein berichtend (continue-on-error).
+      - name: Index-Hygiene (Crawl-Fläche + Taxonomie)
+        continue-on-error: true
+        run: |
+          python3 scripts/tag_governance.py --report | tee /tmp/tags.log
+          python3 scripts/index_hygiene_gate.py | tee /tmp/indexhygiene.log
+          {
+            echo "### Taxonomie"
+            echo '```'
+            sed -n '1,45p' /tmp/tags.log
+            echo '```'
+            echo "### Crawl-Fläche"
+            echo '```'
+            sed -n '1,20p' /tmp/indexhygiene.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Keyword-Optimierungs-Audit + KI-LSI-Vorschläge
         id: kw
         continue-on-error: true

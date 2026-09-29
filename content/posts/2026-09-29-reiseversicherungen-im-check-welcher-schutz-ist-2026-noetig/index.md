@@ -4,7 +4,7 @@ description: Welche Reiseversicherungen sind sinnvoll? Erfahre alles über wicht
 date: 2026-09-29T14:58:23Z
 draft: true
 reserve: true
-tags: ["Reiseversicherungen", "Versicherungsarten", "Reise-Schutz", "Reiseversicherungen im Check"]
+tags: ["Gesundheit und Vorsorge", "Versicherungen vergleichen"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

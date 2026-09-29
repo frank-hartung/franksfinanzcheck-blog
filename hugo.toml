@@ -23,6 +23,18 @@ buildFuture = false
 buildExpired = false
 [pagination]
 pagerSize = 8
+# INDEX-HYGIENE 29.09.2026 (Befund: 237 nicht indexierte Seiten in der GSC).
+# Hugo legt für JEDE paginierte Liste zusätzlich eine Seite `…/page/1/` an, die
+# per Meta-Refresh auf die Listenseite selbst weiterleitet. Bei 147 Tag-Archiven,
+# 4 Kategorien und 3 Sektionen waren das 154 reine Weiterleitungs-URLs – von
+# Google gecrawlt und in der Search Console als „Seite mit Weiterleitung" unter
+# „nicht indexiert" gezählt. Verlinkt wird `/page/1/` nirgends: der Paginator
+# zeigt für Seite 1 immer auf die Basis-URL. Die Aliase waren also reiner
+# Crawl-Müll ohne jeden Nutzen.
+# `disableAliases` schaltet genau diese Automatik ab – die echten Pager-Seiten
+# (/page/2/, /page/3/ …) bleiben unverändert erhalten und weiter noindex,follow.
+# Wache: scripts/index_hygiene_gate.py (H2).
+disableAliases = true
 copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
 # Service Worker (sw.js) als eigenes Output-Format am Seiten-Root rendern.
@@ -46,9 +58,15 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # RSS-Feed – 116 zusätzliche Feeds (1 pro Tag), jeder mit ein und demselben
   # Artikel. Das ist Crawl-Rauschen (Google sieht Duplikat-Feeds), kostet
   # Build-Zeit und widerspricht der Entscheidung „nur der Home-Feed".
-  # Die Tag-/Kategorieseiten selbst bleiben erhalten (interne Verlinkung),
-  # werden aber in head.html auf noindex, follow gestellt und aus der
-  # Sitemap genommen (layouts/sitemap.xml, Wache: schema_seo_gate.py S6).
+  #
+  # STAND 29.09.2026: Diese beiden Zeilen laufen inzwischen INS LEERE – der
+  # [taxonomies]-Block weiter unten ist leer, es gibt also weder Taxonomie-
+  # noch Term-Seiten. Sie bleiben trotzdem stehen: Wer die Archive je
+  # zurückholt (dort beschrieben), soll nicht versehentlich wieder 100+
+  # Tag-Feeds miterzeugen. Die frühere Zusatzbemerkung „Tag-/Kategorieseiten
+  # bleiben erhalten (interne Verlinkung)" ist damit überholt und entfernt:
+  # die Themen-Navigation läuft über themenwelt_chips.html auf die
+  # indexierbaren Pillar-Ratgeber.
   taxonomy = ["HTML"]
   term = ["HTML"]
 
@@ -182,6 +200,42 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     name = "Datenschutz"
     url = "/datenschutz/"
     weight = 6
+
+# ---------------------------------------------------------------------
+# TAXONOMIEN – bewusst KEINE (Index-Hygiene, Entscheidung 29.09.2026)
+#
+# Hugo legt ohne diesen Block die Standard-Taxonomien `tags` UND
+# `categories` an. Beide erzeugten nur Crawl-Fläche ohne Gegenwert:
+#
+#   `categories` kannte zwei Werte ("Ratgeber" 61×, "News" 5×) und war
+#   NIRGENDS verlinkt: die drei Stellen, die das Feld lesen
+#   (schema_article.html → articleSection, extend_post_content.html →
+#   Karten-Label, ff_voice_toolbar.html), nutzen ausschließlich
+#   `.Params.categories` als WERT, nie die Archiv-URL.  → 8 URLs
+#
+#   `tags` war nach der Kuratierung noch 26 Archive – alle `noindex`.
+#   Sie WAREN verlinkt (Tag-Leiste im Artikel-Footer, 42 Artikel), aber
+#   jeder dieser Links verschenkte interne Linkkraft an eine Seite, die
+#   per Definition nie ranken kann. Die Leiste ist deshalb durch
+#   layouts/_partials/themenwelt_chips.html ersetzt: dieselbe Funktion,
+#   dieselbe Optik, aber Ziele sind die sechs INDEXIERBAREN
+#   Pillar-Ratgeber.  → 27 URLs (26 Archive + 1 Pager)
+#
+# Die Frontmatter-Felder `tags` und `categories` bleiben unverändert
+# erhalten und voll lesbar – sie speisen weiter Article-Schema und
+# Hugos Related-Matching ([related] unten), OHNE je eine URL zu bauen.
+# Genau dafür sind sie da; das kuratierte Vokabular sichert
+# data/seo/tag_register.yaml (Wache scripts/tag_governance.py).
+#
+# Themen-Einstieg für Menschen und Crawler läuft vollständig über die
+# sechs Pillar-Seiten: Startseite und /posts/ (Karten-Raster
+# themenwelten.html), Artikel (pillar_box.html + themenwelt_chips.html)
+# und die Sitemap. Wache: scripts/index_hygiene_gate.py (H3/H4).
+#
+# Rückbau (falls Archive je wieder gewollt sind): `tag = "tags"` hier
+# eintragen, das Budget in index_hygiene_gate.py (BUDGET) anheben und
+# in themenwelt_chips.html entscheiden, ob beides nebeneinander soll.
+[taxonomies]
 
 [sitemap]
   changefreq = "weekly"

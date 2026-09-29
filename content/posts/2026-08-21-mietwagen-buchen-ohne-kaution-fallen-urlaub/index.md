@@ -4,7 +4,7 @@ title: "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub"
 description: "Mietwagen ohne Kaution buchen: Kautionsfalle umgehen, Vollkasko ohne Selbstbeteiligung prüfen und so bis zu 40 Prozent am Urlaubsort sparen."
 date: 2026-08-21T06:10:00Z
 draft: false
-tags: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Reisekosten sparen"]
+tags: ["Mietwagen und Wohnmobil", "Kfz-Versicherung", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"

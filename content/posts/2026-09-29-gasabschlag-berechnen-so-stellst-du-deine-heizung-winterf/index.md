@@ -4,7 +4,7 @@ description: "TITLE: Gasabschlag berechnen – So stellst du deine Heizung winte
 date: 2026-09-29T15:11:55Z
 draft: true
 reserve: true
-tags: ["Gasabschlag berechnen", "Gas Abschlag senken", "Heizsaison vorbereiten", "Gastarif Winter"]
+tags: ["Gasrechnung prüfen", "Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

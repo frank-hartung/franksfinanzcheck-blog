@@ -15,7 +15,15 @@
 {{- $seen := slice -}}
 {{- $out := slice -}}
 {{- /* ---- Hilfsfunktion: Seite würfeln (URL, lastmod, freq, prio) ---- */ -}}
-{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" -}}
+{{- /* INDEX-HYGIENE 29.09.2026: /transparenz/ fehlte hier. Die Seite ist
+       indexierbar (head.html setzt index,follow) und aus dem Footer verlinkt,
+       stand aber in keiner Sitemap – für Google also nur über die interne
+       Verlinkung auffindbar („Gefunden – zurzeit nicht indexiert"). Sie ist
+       eine Vertrauensseite (E-E-A-T) und gehört damit zu den Money-Pages.
+       Die beiden Verifikationsdateien (/google…html, /pinterest-e238f.html)
+       bleiben bewusst draußen: sie sind Besitznachweise, keine Inhalte.
+       Wache: scripts/index_hygiene_gate.py (H1). */ -}}
+{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" "transparenz" -}}
 {{- /* ---------- 1) Startseite ---------- */ -}}
 {{- with site.Home -}}
   {{- if and (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) -}}

@@ -4,7 +4,7 @@ description: "Haushaltsbuch führen leicht gemacht: App, Excel-Tabelle oder Stif
 date: 2026-08-21T06:10:00Z
 lastmod: 2026-09-28
 draft: false
-tags: ["Haushaltsbuch führen", "Haushaltsbuch App", "Budgetplanung", "50 30 20 Regel", "Ausgaben tracken"]
+tags: ["Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

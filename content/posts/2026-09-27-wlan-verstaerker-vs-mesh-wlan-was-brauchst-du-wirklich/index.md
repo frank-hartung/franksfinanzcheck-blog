@@ -5,7 +5,7 @@ description: "WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was de
 date: 2026-09-28T01:05:48Z
 draft: false
 reserve_published: 2026-09-28
-tags: ["WLAN-Verstärker", "Mesh-WLAN"]
+tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

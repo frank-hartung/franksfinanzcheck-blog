@@ -5,7 +5,7 @@ description: "Die 50-30-20-Regel bringt Ordnung in dein Budget. So teilst du dei
 date: 2026-09-14T23:11:00Z
 draft: false
 reserve_published: 2026-09-14
-tags: ["50-30-20-Regel", "Budget planen", "Fixkosten senken"]
+tags: ["Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

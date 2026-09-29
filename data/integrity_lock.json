@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-28T23:17:00.785739+00:00",
-  "head": "2079bd2",
+  "signed_at": "2026-09-29T17:46:57.683102+00:00",
+  "head": "4515999",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
-    "hugo.toml": "91de4e32a6bee9763a6019e34d0b843e183ac22c77715c55a43c0d1e3ccaae0d",
+    "hugo.toml": "f3cbe6ca33a7e81f7b41492397ff5d0b0e28d48c3f06662d2b166f1226b6da54",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -18,7 +18,7 @@
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
     "layouts/pillar/list.html": "e82f485c0fd98d4f4eaab4f02d03628e222388804c1af9db8f9893e4ad2970df",
-    "layouts/pillar/single.html": "624568282066ef0f2427d32fefcf307a0693d7d8d3505164cee3bc5dbfc1a0ec",
+    "layouts/pillar/single.html": "c87253630acca7ec81c83290694314414b6a259b5a11536a6ebbe24ff02f9648",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
@@ -47,48 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "bfe5984cfcb28b0c2ae1ecc3d220c5d0c7f51d7e4fab7ee64904a93e812816f7",
-  "audit_start_sha256": "e22611b429ac186010bc9b3857e488c31b71d99428379a84d154b1d17dd5d775",
+  "files_sha256": "2e5a51fe50b41fe7c35ab71251a297d78969c747aafeba4e0bc18dd8b209a592",
+  "audit_start_sha256": "4ab7b7e5ba8e2a897e20b1720c3b8f7efe47f34cdfe7cb922e7ec77e66c28679",
   "audit": [
-    {
-      "date": "2026-09-27",
-      "art": "set-current",
-      "head": "059850d",
-      "geaendert": [
-        "layouts/_partials/extend_post_content.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_post_content.html",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "059850d",
-              "datum": "2026-09-27",
-              "betreff": "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "059850d",
-              "datum": "2026-09-27",
-              "betreff": "content: Willkommenstext automatisch aufgefrischt (SEO-Unique-Content-Automatik)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "bf1b0630c2ad18a4e8aa7b154a082689accca81eee9fd4ac78ef67a78397cdb6",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-27",
       "art": "set-current",
@@ -136,7 +97,7 @@
         }
       ],
       "files_sha256": "8b6d661de08f2a4cc582b8cd018ad01638151c201de1fc2bc7d69be3de4b26d6",
-      "prev_sha256": "e22611b429ac186010bc9b3857e488c31b71d99428379a84d154b1d17dd5d775"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-27",
@@ -493,8 +454,62 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "88eec015bf6d6beb2717f87316f228cffd135722e71476de6f3e7454110ff33d",
-      "files_sha256": "bfe5984cfcb28b0c2ae1ecc3d220c5d0c7f51d7e4fab7ee64904a93e812816f7"
+      "files_sha256": "bfe5984cfcb28b0c2ae1ecc3d220c5d0c7f51d7e4fab7ee64904a93e812816f7",
+      "prev_sha256": "88eec015bf6d6beb2717f87316f228cffd135722e71476de6f3e7454110ff33d"
+    },
+    {
+      "date": "2026-09-29",
+      "art": "set-current",
+      "head": "4515999",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/pillar/single.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "4515999",
+              "datum": "2026-09-29",
+              "betreff": "seo(index-hygiene): Taxonomie-Archive entfernt, Themen-Navigation auf Pillar-Ratgeber umgelenkt"
+            },
+            {
+              "sha": "1957221",
+              "datum": "2026-09-29",
+              "betreff": "seo(index-hygiene): Crawl-Fläche um 81 % reduziert – Ursache der 237 GSC-Meldungen behoben"
+            },
+            {
+              "sha": "cbfb618",
+              "datum": "2026-09-29",
+              "betreff": "dialog: Stand der Community-Arbeit aktualisiert"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/single.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "4515999",
+              "datum": "2026-09-29",
+              "betreff": "seo(index-hygiene): Taxonomie-Archive entfernt, Themen-Navigation auf Pillar-Ratgeber umgelenkt"
+            },
+            {
+              "sha": "cbfb618",
+              "datum": "2026-09-29",
+              "betreff": "dialog: Stand der Community-Arbeit aktualisiert"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "609aea41ec55f26286c13a2d6dd80c8c4c1e5bca85ce77d98f5a7ce93963e6c3",
+      "files_sha256": "2e5a51fe50b41fe7c35ab71251a297d78969c747aafeba4e0bc18dd8b209a592"
     }
   ]
 }

@@ -4,7 +4,7 @@ title: "Heizkosten senken: Mit diesen Strategien sparst du sofort"
 description: "Heizkosten senken ohne Frieren: Mit passenden Temperaturen, richtigem Lüften, freien Heizkörpern und Verbrauchskontrolle sparst du noch in der laufenden Saison."
 date: 2026-09-23T08:59:05Z
 draft: false
-tags: ["Heizkosten senken", "Heizung sparen Tipps", "Gas Abschlag anpassen", "Winter Vorbereitung Wohnung"]
+tags: ["Heizkosten senken", "Gasrechnung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

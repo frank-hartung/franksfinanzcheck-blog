@@ -5,7 +5,7 @@ date: 2026-09-21T09:29:03Z
 lastmod: 2026-09-28
 draft: false
 reserve_published: 2026-09-21
-tags: ["Finanzieller Puffer", "Finanzieller", "Notgroschen"]
+tags: ["Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

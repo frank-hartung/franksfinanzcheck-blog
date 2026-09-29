@@ -4,7 +4,7 @@ description: Konto wechseln ohne Stress – Schritt‑für‑Schritt‑Anleitung
 date: 2026-09-29T15:02:03Z
 draft: true
 reserve: true
-tags: ["Konto wechseln", "Kontowechsel Anleitung", "Girokonto kündigen", "Konto wechseln leicht gemacht"]
+tags: ["Girokonto"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

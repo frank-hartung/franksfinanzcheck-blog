@@ -4,7 +4,7 @@ title: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
 description: "Woran du ein wirklich kostenloses Girokonto erkennst: Karten, Bargeld, Dispo, Kontowechsel und die typischen Gebührenfallen im Alltag."
 date: 2026-08-17T08:35:12Z
 draft: false
-tags: ["Kostenloses Girokonto", "Girokonto ohne Gebühren", "C24 Bank", "Kontowechsel", "Bankgebühren sparen"]
+tags: ["Girokonto"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

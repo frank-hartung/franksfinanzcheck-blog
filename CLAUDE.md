@@ -221,6 +221,60 @@ E2E. **Ohne `--fix`** – die Kennzeichnung erzeugt das Template, ein Befund ist
 ein Layout-/Registerdefekt für einen Menschen (C15). Runbuch:
 `docs/ANLEITUNG-OFFENLEGUNG.md`.
 
+## Tags kommen aus dem Register, nie aus Keywords (Wache seit 29.09.2026)
+
+Die Search Console meldete 237 nicht indexierte Seiten. Ursache war nicht der
+Content, sondern die Taxonomie-Automatik: beide Generatoren setzten
+`tags = keywords[:4]`. Keywords sind long-tail und pro Artikel einmalig – jeder
+Artikel prägte damit **vier neue Tags = acht nutzlose URLs** (Archiv +
+`/page/1/`-Alias). Nach 63 Artikeln: 217 Roh-Tags, 147 Archive, 193 davon mit
+genau einem Artikel, insgesamt 347 nicht indexierbare URLs auf 58 echte Seiten.
+
+**Eine Quelle:** `data/seo/tag_register.yaml` – 25 kanonische Tags, jeder einem
+Pillar zugeordnet, mit vollständiger Synonymliste. `tag_governance.tags_fuer()`
+ist die **einzige** erlaubte Tag-Quelle für neuen Content (nutzen
+`engine_generate.py` und `generate_drafts.py`). Ein Tag wird **nie erfunden**:
+greift nichts, entscheidet die Redaktion über einen Registereintrag – oder der
+Begriff bleibt ein Keyword. Keywords gehören ins `keywords`-Feld, wo sie Schema
+und Related-Matching speisen, **ohne je eine URL zu bauen**.
+
+**Zwei Wachen, zwei Ebenen:**
+`python3 scripts/tag_governance.py` (T1–T8, **mit** `--apply`) prüft das
+Frontmatter: unbekannte Tags, Synonyme statt kanonischer Namen, Thin-Archive
+(< 2 Artikel), Tag-Menge, Sonderzeichen (U+202F/U+00A0 erzeugen kaputte Slugs),
+Kategorie, tote Registerzeilen.
+`python3 scripts/index_hygiene_gate.py` (H1–H8, **ohne** `--fix`) misst die
+**Crawl-Fläche des Builds** gegen ein Budget: Sitemap-Deckung,
+`/page/1/`-Aliase, Tag-Budget (max. 35), Kategorie-Archive, Verhältnis
+indexierbar : nicht indexierbar (max. 2,0 : 1), kaputte Slugs, Waisenseiten,
+`noindex` in der Sitemap.
+
+**Merke:** `schema_seo_gate.py` S6 war die ganze Zeit grün – es fragt „trägt
+dieses Archiv ein noindex?“, nicht „darf es dieses Archiv geben?“. Eine Seite
+kann einzeln korrekt und in der Menge trotzdem ein Defekt sein. Deshalb misst
+`index_hygiene_gate.py` Anzahlen, nicht Attribute.
+
+**Keine Taxonomie-Archive mehr (Entscheidung 29.09.2026, Frank).** Der
+`[taxonomies]`-Block in `hugo.toml` ist **leer** – es gibt weder `/tags/` noch
+`/categories/`. Die Tag-Leiste im Artikel-Footer war echte, sichtbare
+Navigation, zeigte aber auf `noindex`-Archive: 42 Artikel verschenkten je 2–4
+interne Links an Seiten, die nie ranken können. Ersetzt durch
+`layouts/_partials/themenwelt_chips.html` – gleiche Position, gleiche Optik
+(bewusst dieselben `.post-tags`-Klassen, kein neues CSS), aber Ziele sind die
+sechs **indexierbaren** Pillar-Ratgeber. Aus Crawl-Last wurde Linkkraft auf die
+Money-Pages.
+
+**Drei Themen-Bausteine, keine Dopplung:** `pillar_box.html` = ein CTA in den
+eigenen Ratgeber (nach dem Text) · `themenwelten.html` = Karten-Raster auf
+Startseite und `/posts/` · `themenwelt_chips.html` = Quer-Navigation am
+Artikelende. Alle drei fail-closed gegen fehlende Ratgeber.
+
+**Nicht anfassen:** `[pagination] disableAliases = true` und der leere
+`[taxonomies]`-Block – beide sind dokumentierte Index-Hygiene-Entscheidungen,
+keine Altlast. Wer Archive zurückholt, muss `max_tag_archive` in
+`index_hygiene_gate.py` mit anheben (steht dort kommentiert). Bericht:
+`INDEX-HYGIENE-PREMIUM-2026-09-29.md`.
+
 ## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)
 
 `data/integrity_lock.json` ist ein **Siegel**, kein Quelltext: SHA-256-Map,

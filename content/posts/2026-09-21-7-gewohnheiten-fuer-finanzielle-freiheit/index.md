@@ -4,7 +4,7 @@ title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "Diese 7 Gewohnheiten helfen dir, Fixkosten zu senken, Rücklagen aufzubauen und finanzielle Freiheit Schritt für Schritt realistischer zu machen."
 date: 2026-09-21T10:05:51Z
 draft: true
-tags: ["Finanzielle Freiheit", "Gewohnheiten", "Frugalismus", "Budget"]
+tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle Freiheit", "Geld sparen", "Notgroschen", "finanzielle"]

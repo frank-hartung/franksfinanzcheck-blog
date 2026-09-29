@@ -3,7 +3,7 @@ title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
 description: "Konto & Karten-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du …"
 date: 2026-09-29T10:48:18Z
 draft: true
-tags: ["Konto & Karten-Update: was sich jetzt für dich ändert", "Konto & Karten"]
+tags: ["Girokonto"]
 categories: ["News"]
 keywords: ["Konto & Karten-Update: Was sich jetzt für dich ändert"]
 author: "Frank Hartung"

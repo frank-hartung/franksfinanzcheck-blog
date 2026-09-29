@@ -5,7 +5,7 @@ date: 2026-09-25T12:15:40Z
 lastmod: 2026-09-28
 draft: false
 reserve_published: 2026-09-25
-tags: ["Gasrechnung senken", "Heizkosten sparen", "Herbst Vorbereitung", "Heizung prüfen"]
+tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

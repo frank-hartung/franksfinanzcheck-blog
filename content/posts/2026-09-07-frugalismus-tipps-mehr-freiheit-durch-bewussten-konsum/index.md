@@ -5,7 +5,7 @@ description: "Frugalismus für Einsteiger: So senkst du Fixkosten, stoppst Impul
 date: 2026-09-07T23:25:42Z
 draft: false
 reserve_published: 2026-09-07
-tags: ["Frugalismus-Tipps", "Geld sparen im Alltag", "Sparmethoden", "Haushaltsbuch führen"]
+tags: ["Frugalismus", "Geld sparen im Alltag", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

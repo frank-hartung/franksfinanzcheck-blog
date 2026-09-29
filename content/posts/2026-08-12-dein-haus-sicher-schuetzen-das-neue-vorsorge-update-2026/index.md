@@ -4,7 +4,7 @@ title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
 date: 2026-08-12T08:15:00Z
 draft: false
-tags: ["Dein Haus sicher schützen", "Hausversicherung", "Elementarschadenversicherung", "Hausratversicherung"]
+tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
