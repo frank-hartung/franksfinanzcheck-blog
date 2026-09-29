@@ -89,7 +89,9 @@ jobs:
       # prüft Kanäle, Zeichenlimits, Gate-Fälle, Duplikat-Schutz,
       # Planungsregeln und die Standby-Regel.
       - name: Selbsttest (fail-closed)
-        run: python3 scripts/social_studio.py --selftest
+        run: |
+          python3 scripts/social_studio.py --selftest
+          python3 scripts/social_calendar.py --selftest
 
       - name: Plan erneuern / Status schreiben
         if: ${{ github.event.inputs.modus == 'plan' || github.event.inputs.modus == 'status' }}
@@ -174,6 +176,13 @@ jobs:
       - name: Alte Bildvarianten aufräumen
         if: ${{ github.event_name == 'schedule' || github.event.inputs.modus == 'run' }}
         run: python3 scripts/social_images.py --prune --days 21
+
+      # Veröffentlichungskalender je Kanal aus dem aktuellen Plan neu schreiben
+      # (lesbare .md + abonnierbare .ics). Läuft IMMER – auch bei plan/status/
+      # dry-run – damit die Kalender nie veralten.
+      - name: Veröffentlichungskalender aktualisieren
+        if: always()
+        run: python3 scripts/social_calendar.py --build
 
       - name: Cockpit in die Job-Zusammenfassung schreiben
         if: always()

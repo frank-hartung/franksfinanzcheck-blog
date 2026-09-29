@@ -137,12 +137,20 @@ jobs:
             cat SOCIAL-VIDEO-STATUS.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # Video-Kalender (Produktionsrhythmus + zuletzt produziert) neu schreiben.
+      - name: Veröffentlichungskalender aktualisieren
+        if: always()
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+          python3 scripts/social_calendar.py --build
+
       - name: Stand sichern
         run: |
           git config user.name "Shorts-Schmiede"
           git config user.email "shorts-schmiede@users.noreply.github.com"
           # Nur der Zustand wird versioniert – Videos nie (zu groß, .gitignore).
-          git add data/social/video_state.yaml
+          git add data/social/video_state.yaml data/social/kalender/
           if git diff --cached --quiet; then
             echo "Keine Änderungen am Videostand."
           else

@@ -1,0 +1,98 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:telegram:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:fr
+ age:2026-09-26@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20260926T160000Z
+DTEND:20260926T161500Z
+SUMMARY:Telegram (Kanal): Haushaltsbuch führen: App\, Excel oder Stift
+  im Vergleich (frage)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: frage\nKanal: Tele
+ gram (Kanal)\nArtikel: https://franksfinanzcheck.de/posts/2026-08-21-
+ haushaltsbuch-fuehren-app-excel-oder-papier/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
+ n-app-excel-oder-papier/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
+ eschleunigt:nutzen:2026-10-03@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20261003T050000Z
+DTEND:20261003T051500Z
+SUMMARY:Telegram (Kanal): Digitaler Turbo: Warum der DNS-Hack dein Net
+ z beschleunigt (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turb
+ o-warum-der-dns-hack-dein-netz-beschleunigt/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-waru
+ m-der-dns-hack-dein-netz-beschleunigt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
+ h:frage:2026-10-04@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20261004T050000Z
+DTEND:20261004T051500Z
+SUMMARY:Telegram (Kanal): Finanzielle Freiheit erreichen: Denke dich r
+ eich – Geld (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Telegram (Kanal)\nA
+ rtikel: https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-fre
+ iheit-erreichen-denke-dich-reich/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit
+ -erreichen-denke-dich-reich/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
+ n-zuhause:vergleich:2026-10-09@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20261009T050000Z
+DTEND:20261009T051500Z
+SUMMARY:Telegram (Kanal): So findest du den richtigen: DSL-Tarif für d
+ ein Zuhause (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-20-so-findest-
+ du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+URL:https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-ri
+ chtigen-dsl-tarif-fuer-dein-zuhause/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
+ -goldene-jahreszeit:vergleich:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20261010T050000Z
+DTEND:20261010T051500Z
+SUMMARY:Telegram (Kanal): Sparen im Herbst: Spartipps für die goldene 
+ Jahreszeit (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-h
+ erbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die
+ -besten-spartipps-fuer-die-goldene-jahreszeit/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-09-21-tierkrankenversicherung-hund-katze-kosten:nutz
+ en:2026-10-10@franksfinanzcheck.de
+DTSTAMP:20260929T103956Z
+DTSTART:20261010T160000Z
+DTEND:20261010T161500Z
+SUMMARY:Telegram (Kanal): Tierkrankenversicherung für Hund & Katze: Ko
+ sten realistisch (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenver
+ sicherung-hund-katze-kosten/
+URL:https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicher
+ ung-hund-katze-kosten/
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
