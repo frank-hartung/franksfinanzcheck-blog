@@ -207,3 +207,5 @@
 {"date": "2026-09-28", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py"]}
 {"date": "2026-09-28", "kritisch": 0, "fest": 3, "modus": "set-current", "geaendert": ["scripts/blog_doctor.py", "scripts/check_covers.py", "scripts/generate_covers.py"]}
 {"date": "2026-09-28", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-09-29", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/pillar/single.html"]}
+{"date": "2026-09-29", "kritisch": 0, "fest": 0, "modus": "verify"}
