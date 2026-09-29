@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Di, 29. September 2026
-- **09:45** ⏳ So findest du den richtigen: DSL-Tarif für dein Zuhause — _zahl_ · Launch  
+- **09:45** ⚪ So findest du den richtigen: DSL-Tarif für dein Zuhause — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
 - **15:15** ⏳ Sparen im Herbst: Spartipps für die goldene Jahreszeit — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
@@ -23,7 +23,7 @@
 - **15:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 ### Do, 01. Oktober 2026
-- **09:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden — _frage_ · Launch  
+- **09:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 - **15:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/

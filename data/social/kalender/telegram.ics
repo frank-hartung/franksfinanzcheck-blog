@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:fr
  age:2026-09-26@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20260926T160000Z
 DTEND:20260926T161500Z
 SUMMARY:Telegram (Kanal): Haushaltsbuch führen: App\, Excel oder Stift
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
  eschleunigt:nutzen:2026-10-03@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20261003T050000Z
 DTEND:20261003T051500Z
 SUMMARY:Telegram (Kanal): Digitaler Turbo: Warum der DNS-Hack dein Net
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
  h:frage:2026-10-04@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20261004T050000Z
 DTEND:20261004T051500Z
 SUMMARY:Telegram (Kanal): Finanzielle Freiheit erreichen: Denke dich r
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
  n-zuhause:vergleich:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20261009T050000Z
 DTEND:20261009T051500Z
 SUMMARY:Telegram (Kanal): So findest du den richtigen: DSL-Tarif für d
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
  -goldene-jahreszeit:vergleich:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20261010T050000Z
 DTEND:20261010T051500Z
 SUMMARY:Telegram (Kanal): Sparen im Herbst: Spartipps für die goldene 
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-21-tierkrankenversicherung-hund-katze-kosten:nutz
  en:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20260929T104623Z
+DTSTAMP:20260929T112602Z
 DTSTART:20261010T160000Z
 DTEND:20261010T161500Z
 SUMMARY:Telegram (Kanal): Tierkrankenversicherung für Hund & Katze: Ko

@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -8,12 +8,12 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 
 | Kanal | Status | Geplant | Nächster Beitrag | Kalender |
 |---|---|---:|---|---|
-| Mastodon | ⚪ Standby | 5 | Di 29.09. 07:30 · Heizkosten senken: Mit diesen St | [md](mastodon.md) · [ics](mastodon.ics) |
-| Bluesky | ⚪ Standby | 24 | Di 29.09. 08:15 · Finanzieller Puffer: Wie viel No | [md](bluesky.md) · [ics](bluesky.ics) |
-| LinkedIn | ⚪ Standby | 9 | Di 29.09. 07:45 · Finanzielle Freiheit erreichen:  | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 32 | Di 29.09. 08:45 · Tierkrankenversicherung für Hund | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 24 | Di 29.09. 09:15 · Tierkrankenversicherung für Hund | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 24 | Di 29.09. 09:45 · So findest du den richtigen: DSL | [md](facebook.md) · [ics](facebook.ics) |
+| Mastodon | ⚪ Standby | 4 | Di 29.09. 11:30 · 5 einfache Frugalismus-Tricks fü | [md](mastodon.md) · [ics](mastodon.ics) |
+| Bluesky | ⚪ Standby | 22 | Di 29.09. 08:15 · Finanzieller Puffer: Wie viel No | [md](bluesky.md) · [ics](bluesky.ics) |
+| LinkedIn | ⚪ Standby | 8 | Di 29.09. 07:45 · Finanzielle Freiheit erreichen:  | [md](linkedin.md) · [ics](linkedin.ics) |
+| X (Twitter) | ⚪ Standby | 30 | Di 29.09. 08:45 · Tierkrankenversicherung für Hund | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 23 | Di 29.09. 09:15 · Tierkrankenversicherung für Hund | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 23 | Di 29.09. 09:45 · So findest du den richtigen: DSL | [md](facebook.md) · [ics](facebook.ics) |
 | Instagram | ⚪ Standby | 10 | Do 01.10. 11:45 · Digitaler Turbo: Warum der DNS-H | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 9 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
@@ -23,27 +23,26 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Di, 29. September 2026
-- **07:30** ⏳ Mastodon · _vergleich_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
-- **07:45** ⏳ LinkedIn · _frage_ · Finanzielle Freiheit erreichen: Denke dich reich – Geld
-- **08:15** ⏳ Bluesky · _takeaway_ · Finanzieller Puffer: Wie viel Notgroschen ist genug?
-- **08:45** ⏳ X (Twitter) · _thread_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
-- **09:15** ⏳ Threads · _takeaway_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
-- **09:45** ⏳ Facebook (Seite) · _zahl_ · So findest du den richtigen: DSL-Tarif für dein Zuhause
+- **07:45** ⚪ LinkedIn · _frage_ · Finanzielle Freiheit erreichen: Denke dich reich – Geld
+- **08:15** ⚪ Bluesky · _takeaway_ · Finanzieller Puffer: Wie viel Notgroschen ist genug?
+- **08:45** ⚪ X (Twitter) · _thread_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
+- **09:15** ⚪ Threads · _takeaway_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
+- **09:45** ⚪ Facebook (Seite) · _zahl_ · So findest du den richtigen: DSL-Tarif für dein Zuhause
 - **11:30** ⏳ Mastodon · _takeaway_ · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen
-- **12:15** ⏳ Bluesky · _takeaway_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
-- **13:15** ⏳ X (Twitter) · _takeaway_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
+- **12:15** ⚪ Bluesky · _takeaway_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
+- **13:15** ⚪ X (Twitter) · _takeaway_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
 - **15:15** ⏳ Facebook (Seite) · _frage_ · Sparen im Herbst: Spartipps für die goldene Jahreszeit
-- **16:15** ⏳ Threads · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **16:15** ⏳ Threads · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **19:15** ⏳ X (Twitter) · _nutzen_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 ### Mi, 30. September 2026
-- **07:30** ⏳ Mastodon · _nutzen_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **07:30** ⏳ Mastodon · _nutzen_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **07:45** ⏳ LinkedIn · _zitat_ · So findest du den richtigen: DSL-Tarif für dein Zuhause
 - **08:15** ⏳ Bluesky · _mythos_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 - **08:45** ⏳ X (Twitter) · _zahl_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
 - **09:15** ⏳ Threads · _zahl_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 - **09:45** ⏳ Facebook (Seite) · _vergleich_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
 - **11:30** ⏳ Mastodon · _nutzen_ · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken
-- **12:15** ⏳ Bluesky · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **12:15** ⏳ Bluesky · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **13:15** ⏳ X (Twitter) · _zahl_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet
 - **15:15** ⏳ Facebook (Seite) · _vergleich_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 - **16:15** ⏳ Threads · _frage_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
@@ -54,7 +53,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **08:15** ⏳ Bluesky · _zitat_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 - **08:45** ⏳ X (Twitter) · _frage_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
 - **09:15** ⏳ Threads · _takeaway_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
-- **09:45** ⏳ Facebook (Seite) · _frage_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **09:45** ⏳ Facebook (Seite) · _frage_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **11:45** ⏳ Instagram · _takeaway_ · Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt
 - **12:15** ⏳ Bluesky · _nutzen_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
 - **13:15** ⏳ X (Twitter) · _takeaway_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
@@ -133,14 +132,14 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **09:15** ⏳ Threads · _vergleich_ · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
 - **09:45** ⏳ Facebook (Seite) · _nutzen_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 - **10:15** ⏳ Pinterest · _takeaway_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
-- **11:45** ⏳ Instagram · _takeaway_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **11:45** ⏳ Instagram · _takeaway_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **12:15** ⏳ Bluesky · _frage_ · Preisgarantie Gas: So schützt du dich vor Preissprüngen
 - **13:15** ⏳ X (Twitter) · _nutzen_ · Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich
 - **15:15** ⏳ Facebook (Seite) · _vergleich_ · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub
 - **16:15** ⏳ Threads · _nutzen_ · Preisgarantie Gas: So schützt du dich vor Preissprüngen
 - **19:15** ⏳ X (Twitter) · _frage_ · Frugalismus-Tipps: Vier Tricks gegen teure Alltagsfehler
 ### Do, 08. Oktober 2026
-- **07:45** ⏳ LinkedIn · _zitat_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden
+- **07:45** ⏳ LinkedIn · _zitat_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **08:15** ⏳ Bluesky · _frage_ · DNS-Server wechseln: Schnelleres und sichereres Internet
 - **08:45** ⏳ X (Twitter) · _frage_ · Günstig durch den Winter: Heizungs-Check im Spätsommer
 - **09:15** ⏳ Threads · _zahl_ · DNS-Server wechseln: Schnelleres und sichereres Internet

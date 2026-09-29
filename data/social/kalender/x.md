@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Di, 29. September 2026
-- **08:45** ⏳ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _thread_ · Launch  
+- **08:45** ⚪ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _thread_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/
-- **13:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _takeaway_ · Launch  
+- **13:15** ⚪ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
 - **19:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/

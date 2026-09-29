@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Pinterest
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
 > Profil: https://www.pinterest.de/franksfinanzcheck/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `pinterest.ics`
 

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -31,7 +31,7 @@
 - **11:45** ⏳ Finanzieller Puffer: Wie viel Notgroschen ist genug? — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/
 ### Mi, 07. Oktober 2026
-- **11:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden — _takeaway_ · Launch  
+- **11:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Do, 08. Oktober 2026
 - **11:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _frage_ · Launch  

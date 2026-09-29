@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Di, 29. September 2026
-- **09:15** ⏳ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _takeaway_ · Launch  
+- **09:15** ⚪ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/
-- **16:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden — _zahl_ · Launch  
+- **16:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Mi, 30. September 2026
 - **09:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
