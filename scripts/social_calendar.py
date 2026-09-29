@@ -49,6 +49,9 @@ except Exception:  # pragma: no cover - Kalender darf auch ohne Pool laufen
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(BLOG_DIR, "data", "social", "kalender")
+# Öffentlich ausgelieferte Kopie: Hugo kopiert static/ → Domain-Wurzel, d. h.
+# static/kalender/<kanal>.ics ist live unter https://franksfinanzcheck.de/kalender/<kanal>.ics
+STATIC_DIR = os.path.join(BLOG_DIR, "static", "kalender")
 VIDEO_FILE = os.path.join(BLOG_DIR, "data", "social", "video.yaml")
 VIDEO_STATE_FILE = os.path.join(BLOG_DIR, "data", "social", "video_state.yaml")
 
@@ -539,6 +542,84 @@ def build_overview(cfg: dict, schedule: dict, state: dict,
     return "\n".join(lines) + "\n"
 
 
+def build_index_html(cfg: dict, base_url: str, now: datetime) -> str:
+    """Öffentliche Abo-Seite unter /kalender/ – ein Feed-Link je Kanal."""
+    cmap = sch.channel_map(cfg)
+    host = base_url.replace("https://", "").replace("http://", "").rstrip("/")
+
+    def _card(cid: str, label: str) -> str:
+        ics_https = f"{base_url.rstrip('/')}/kalender/{cid}.ics"
+        ics_webcal = f"webcal://{host}/kalender/{cid}.ics"
+        # Google „per URL abonnieren“ nimmt die HTTPS-Adresse entgegen.
+        google = ("https://calendar.google.com/calendar/r/settings/addbyurl"
+                  f"?cid={ics_https}")
+        return f"""      <article class="card">
+        <h3>{label}</h3>
+        <div class="btns">
+          <a class="btn primary" href="{ics_webcal}">Abonnieren (Apple · Outlook)</a>
+          <a class="btn" href="{google}" target="_blank" rel="noopener">Google Kalender</a>
+          <a class="btn ghost" href="{ics_https}" download>.ics laden</a>
+        </div>
+        <p class="url"><code>{ics_https}</code></p>
+      </article>"""
+
+    cards = [_card(cid, ch.get("label") or cid)
+             for cid, ch in sorted(cmap.items(),
+                                   key=lambda kv: kv[1].get("priority", 99))]
+    cards.append(_card("video", "🎬 Reels &amp; Shorts"))
+
+    return f"""<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>Veröffentlichungskalender · FranksFinanzcheck</title>
+<style>
+  :root {{ --bg:#0E1B2A; --card:#132538; --gold:#E9B44C; --text:#F4F7FB; --muted:#9DB0C6; }}
+  * {{ box-sizing:border-box; }}
+  body {{ margin:0; background:var(--bg); color:var(--text);
+         font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }}
+  .wrap {{ max-width:920px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }}
+  h1 {{ font-size:1.8rem; margin:0 0 .3rem; }}
+  .lead {{ color:var(--muted); margin:0 0 2rem; }}
+  .grid {{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }}
+  .card {{ background:var(--card); border:1px solid #20344b; border-radius:14px; padding:1.1rem 1.2rem; }}
+  .card h3 {{ margin:0 0 .8rem; font-size:1.15rem; }}
+  .btns {{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.7rem; }}
+  .btn {{ display:inline-block; padding:.45rem .7rem; border-radius:9px; text-decoration:none;
+          font-size:.86rem; border:1px solid #2d445f; color:var(--text); }}
+  .btn.primary {{ background:var(--gold); color:#20160a; border-color:var(--gold); font-weight:600; }}
+  .btn.ghost {{ color:var(--muted); }}
+  .url code {{ color:var(--muted); font-size:.72rem; word-break:break-all; }}
+  .note {{ margin-top:2.2rem; color:var(--muted); font-size:.9rem; border-top:1px solid #20344b; padding-top:1.2rem; }}
+  a {{ color:var(--gold); }}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🗓️ Veröffentlichungskalender</h1>
+    <p class="lead">Für jeden Social-Media-Kanal ein eigener, automatisch
+      aktualisierter Kalender. Einmal abonnieren – dann erscheinen alle geplanten
+      Beiträge von selbst in deinem Kalender. Stand: {now:%d.%m.%Y}.</p>
+    <div class="grid">
+{chr(10).join(cards)}
+    </div>
+    <p class="note">
+      <strong>So geht Abonnieren:</strong><br>
+      · <strong>iPhone / Mac / Outlook:</strong> auf „Abonnieren“ tippen – die
+        <code>webcal://</code>-Adresse öffnet direkt die Kalender-App.<br>
+      · <strong>Google Kalender:</strong> auf „Google Kalender“ klicken und die
+        vorbefüllte Adresse bestätigen (Andere Kalender → Per URL).<br>
+      Die Feeds werden nach jedem Autopilot-Lauf neu erzeugt und aktualisieren
+      sich im Abo automatisch. Erzeugt von <code>scripts/social_calendar.py</code>.
+    </p>
+  </div>
+</body>
+</html>
+"""
+
+
 def _readme() -> str:
     return (
         "# Social-Media-Veröffentlichungskalender\n\n"
@@ -551,6 +632,12 @@ def _readme() -> str:
         "Kalender, Apple Kalender oder Outlook hinzufügen, dann erscheinen alle geplanten "
         "Posts automatisch in deinem Kalender.\n"
         "- **`video.md` / `video.ics`** – Produktionsrhythmus für Reels & Shorts.\n\n"
+        "## Öffentlich abonnieren\n\n"
+        "Die Feeds werden zusätzlich nach `static/kalender/` gespiegelt und sind "
+        "nach dem nächsten Deploy live unter:\n\n"
+        "- Abo-Seite: `https://franksfinanzcheck.de/kalender/`\n"
+        "- Einzelfeed: `https://franksfinanzcheck.de/kalender/<kanal>.ics` "
+        "(bzw. `webcal://franksfinanzcheck.de/kalender/<kanal>.ics` fürs Ein-Klick-Abo).\n\n"
         "## Woher die Termine kommen\n\n"
         "Die Kalender werden **nicht von Hand gepflegt**. Sie werden aus dem versionierten "
         "Redaktionsplan `data/social/schedule.yaml` erzeugt, den der Social-Autopilot "
@@ -573,6 +660,8 @@ def build_all(only_channel: str | None = None, now: datetime | None = None) -> d
     urls = _url_map()
 
     os.makedirs(OUT_DIR, exist_ok=True)
+    os.makedirs(STATIC_DIR, exist_ok=True)
+    base_url = str(sch.meta_of(cfg).get("base_url") or "https://franksfinanzcheck.de")
     written = []
     cmap = sch.channel_map(cfg)
     for cid, ch in cmap.items():
@@ -583,6 +672,9 @@ def build_all(only_channel: str | None = None, now: datetime | None = None) -> d
         with open(os.path.join(OUT_DIR, f"{cid}.md"), "w", encoding="utf-8") as fh:
             fh.write(md)
         with open(os.path.join(OUT_DIR, f"{cid}.ics"), "w", encoding="utf-8") as fh:
+            fh.write(ics)
+        # öffentlich abonnierbare Kopie unter /kalender/<kanal>.ics
+        with open(os.path.join(STATIC_DIR, f"{cid}.ics"), "w", encoding="utf-8") as fh:
             fh.write(ics)
         written += [f"{cid}.md", f"{cid}.ics"]
 
@@ -595,6 +687,8 @@ def build_all(only_channel: str | None = None, now: datetime | None = None) -> d
         if vics:
             with open(os.path.join(OUT_DIR, "video.ics"), "w", encoding="utf-8") as fh:
                 fh.write(vics[0])
+            with open(os.path.join(STATIC_DIR, "video.ics"), "w", encoding="utf-8") as fh:
+                fh.write(vics[0])
             written.append("video.ics")
 
     if not only_channel:
@@ -603,7 +697,11 @@ def build_all(only_channel: str | None = None, now: datetime | None = None) -> d
             fh.write(overview)
         with open(os.path.join(OUT_DIR, "README.md"), "w", encoding="utf-8") as fh:
             fh.write(_readme())
-        written += ["UEBERSICHT.md", "README.md"]
+        # öffentliche Abo-Landingpage unter /kalender/
+        index_html = build_index_html(cfg, base_url, now)
+        with open(os.path.join(STATIC_DIR, "index.html"), "w", encoding="utf-8") as fh:
+            fh.write(index_html)
+        written += ["UEBERSICHT.md", "README.md", "static/kalender/index.html"]
 
     return {"written": written, "channels": list(cmap.keys())}
 
@@ -666,6 +764,19 @@ def selftest() -> int:
     # video.yaml existiert im Repo → Kalender sollte kommen; wenn nicht, kein harter Fehler
     if os.path.exists(VIDEO_FILE) and not vmd:
         fails.append("Video-Kalender konnte trotz video.yaml nicht erzeugt werden")
+
+    # Öffentliche Abo-Seite baubar und mit Live-URLs versehen?
+    try:
+        cfg = sch.load_config()
+        html = build_index_html(cfg, "https://franksfinanzcheck.de", now)
+        if "webcal://franksfinanzcheck.de/kalender/" not in html:
+            fails.append("Abo-Seite ohne webcal-Feed-Link")
+        if "https://franksfinanzcheck.de/kalender/" not in html:
+            fails.append("Abo-Seite ohne HTTPS-Feed-URL")
+        if "considerable" in html:
+            fails.append("Abo-Seite enthält kaputtes CSS")
+    except Exception as exc:  # pragma: no cover
+        fails.append(f"Abo-Seite nicht baubar: {exc}")
 
     if fails:
         print("❌ Selftest fehlgeschlagen:")

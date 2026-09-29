@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 29.09.2026 12:39 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 12:46 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 

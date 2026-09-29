@@ -198,7 +198,7 @@ jobs:
           # Das Cockpit ist bewusst NICHT versioniert (Lauf-Artefakt) – es
           # erscheint unten in der Job-Zusammenfassung. Versioniert werden nur
           # Plan, Stand und Bildvarianten: sie sichern die Dedupe über Läufe.
-          git add data/social/ static/images/social/
+          git add data/social/ static/images/social/ static/kalender/
           if git diff --cached --quiet; then
             echo "Keine Änderungen – Plan und Stand sind aktuell."
           else

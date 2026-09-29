@@ -69,24 +69,24 @@ liefert den Video-Rhythmus.
 
 ## Einen Kanal-Kalender im Handy abonnieren
 
-Die `.ics`-Dateien lassen sich direkt in jede Kalender-App laden. Zwei Wege:
+Die Feeds liegen live unter einer stabilen HTTPS-Adresse (nach dem nächsten
+Deploy von `main`):
 
-**A) Einmal-Import (Schnappschuss):** `<kanal>.ics` herunterladen und in deiner
-Kalender-App öffnen.
+- **Abo-Seite mit Ein-Klick-Buttons:** `https://franksfinanzcheck.de/kalender/`
+- **Einzelfeed:** `https://franksfinanzcheck.de/kalender/<kanal>.ics`
+- **Ein-Klick-Abo (Apple/Outlook):** `webcal://franksfinanzcheck.de/kalender/<kanal>.ics`
 
-**B) Dauer-Abo (empfohlen):** Wenn die Kalender öffentlich erreichbar sind
-(z. B. über die Roh-URL im GitHub-Repo oder gespiegelt unter
-`franksfinanzcheck.de`), abonnierst du die URL – dann aktualisiert sich der
-Kalender von selbst:
+So abonnierst du (das Abo aktualisiert sich dann von selbst):
 
-- **Google Kalender:** Andere Kalender → *Per URL* → `.ics`-Adresse einfügen.
-- **Apple Kalender (iPhone/Mac):** Kalender → *Kalenderabo hinzufügen*.
-- **Outlook:** Kalender hinzufügen → *Aus dem Internet abonnieren*.
+- **iPhone / Mac / Outlook:** auf der Abo-Seite „Abonnieren“ tippen – die
+  `webcal://`-Adresse öffnet direkt die Kalender-App.
+- **Google Kalender:** „Google Kalender“-Button (oder manuell: Andere Kalender →
+  *Per URL* → die `https://…/<kanal>.ics`-Adresse einfügen).
 
-> Tipp: Für ein echtes Live-Abo muss die `.ics`-Datei unter einer stabilen
-> HTTPS-URL liegen. Der GitHub-Raw-Link des jeweiligen Branch funktioniert
-> sofort; für eine hübsche Adresse kann der Feed später unter
-> `franksfinanzcheck.de/kalender/<kanal>.ics` gespiegelt werden.
+> Hinweis: Die Live-Adresse funktioniert, sobald der Branch nach `main`
+> gemergt und die Seite deployt wurde (GitHub Pages, Custom Domain). Bis dahin
+> lassen sich die `.ics`-Dateien aus `data/social/kalender/` auch direkt in die
+> Kalender-App importieren (Einmal-Schnappschuss).
 
 ---
 

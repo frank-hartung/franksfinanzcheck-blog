@@ -150,7 +150,7 @@ jobs:
           git config user.name "Shorts-Schmiede"
           git config user.email "shorts-schmiede@users.noreply.github.com"
           # Nur der Zustand wird versioniert – Videos nie (zu groß, .gitignore).
-          git add data/social/video_state.yaml data/social/kalender/
+          git add data/social/video_state.yaml data/social/kalender/ static/kalender/
           if git diff --cached --quiet; then
             echo "Keine Änderungen am Videostand."
           else
