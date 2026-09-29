@@ -1,8 +1,8 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-09-28 13:24:38 UTC · **Modus:** REPORT · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-09-29 10:17:56 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 63 · **Gateway-Links:** 183 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 67 · **Gateway-Links:** 207 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
 🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
 
