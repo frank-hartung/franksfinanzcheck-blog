@@ -1,0 +1,220 @@
+# ============================================================
+#  🎬 SHORTS-SCHMIEDE – VIDEO-REGIE (Single Source of Truth)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 29.09.2026): Aus jedem Artikel entsteht
+#  vollautomatisch ein vertikales Kurzvideo für YouTube Shorts,
+#  Instagram Reels, Facebook und TikTok – Premium-Niveau einer
+#  Profi-Agentur, passend zu einem Finanzblog.
+#
+#  WARUM DIESE FORM (Agentur-Begründung, nicht Geschmack):
+#    · 9:16, 1080×1920 – das einzige Format, das auf allen vier
+#      Plattformen ohne Beschnitt läuft.
+#    · 35–50 Sekunden – lang genug für einen echten Gedanken, kurz
+#      genug für die Wiedergabe-Rate, die die Verteilung steuert.
+#    · Untertitel IMMER eingebrannt – rund 80 % der Wiedergaben laufen
+#      ohne Ton. Ein Finanzvideo ohne Untertitel ist ein stummes Video.
+#    · Die erste Sekunde trägt eine Zahl oder eine Frage, nie den
+#      Blognamen. Branding am Anfang kostet Reichweite.
+#    · Keine Musik. Musikrechte sind je Plattform verschieden, und ein
+#      stiller Sprecherton wirkt bei Geldthemen seriöser.
+#
+#  BAUTEILE (alle kostenlos):
+#    Bild      vorhandenes Artikel-Cover (9:16-Variante, Ken-Burns-Fahrt)
+#    Stimme    die Vorlese-Kette des Blogs (edge-tts / Piper, 0 €)
+#    Schnitt   ffmpeg (0 €)
+#    Text      Artikel-Material + optionale Gratis-KI-Politur (Groq/Gemini)
+#
+#  Erzeugt: .cache/social-video/<slug>.mp4 (+ .json Metadaten)
+#  Videos werden NICHT versioniert (.gitignore: *.mp4).
+#
+#  Anleitung: docs/ANLEITUNG-SHORTS-SCHMIEDE.md
+# ============================================================
+
+version: 1
+
+meta:
+  timezone: "Europe/Berlin"
+  base_url: "https://franksfinanzcheck.de"
+  ausgabe_verzeichnis: ".cache/social-video"
+  # Wie viele Videos ein Lauf höchstens baut (Rechenzeit im Runner).
+  max_pro_lauf: 2
+  # Nur Artikel, die jünger sind (ältere laufen über die Evergreen-Welle).
+  neu_fenster_tage: 21
+  # Derselbe Artikel bekommt erst nach dieser Frist ein zweites Video.
+  wiedervorlage_tage: 120
+  llm:
+    mode: "auto"                    # auto | llm | off
+    providers: ["groq", "gemini"]   # nur Gratis-Zugänge (Kosten-Regel)
+    temperature: 0.4
+    max_tokens: 700
+
+# ============================================================================
+#  FORMAT – technische Eckdaten
+# ============================================================================
+format:
+  breite: 1080
+  hoehe: 1920
+  fps: 30
+  # Dauergrenzen: unter 24 s wirkt ein Erklärvideo abgehackt, darüber bricht die
+  # Wiedergabe-Rate ein (und Shorts kappt bei 60 s hart).
+  min_sekunden: 24
+  max_sekunden: 52
+  video_codec: "libx264"
+  preset: "medium"
+  crf: 21
+  audio_codec: "aac"
+  audio_bitrate: "160k"
+  # Lautheit: -14 LUFS ist der Plattform-Zielwert (YouTube/Meta normalisieren).
+  loudness_lufs: -14
+
+# ============================================================================
+#  MARKE – Farben und Typografie (aus dem Blog-Design abgeleitet)
+# ============================================================================
+marke:
+  name: "FranksFinanzcheck"
+  domain: "franksfinanzcheck.de"
+  farbe_grund: "0x0E1B2A"        # tiefes Nachtblau – ruhig, seriös
+  farbe_akzent: "0xE9B44C"       # warmes Gold – Zahlen und Fortschritt
+  farbe_text: "0xFFFFFF"
+  farbe_schatten: "0x000000"
+  schrift: "static/fonts/Inter-Bold.ttf"
+  # Abdunkelung über dem Cover, damit Untertitel IMMER lesbar sind.
+  bild_abdunklung: 0.55
+  # Ken-Burns: langsame Zoomfahrt statt Standbild (hält die Aufmerksamkeit).
+  zoom_faktor: 1.12
+
+# ============================================================================
+#  DRAMATURGIE – der Aufbau jedes Videos
+#  ----------------------------------------------------------------------------
+#  typ: hook | punkt | cta
+#  Die Sekunden sind Richtwerte; die tatsächliche Länge richtet sich nach
+#  der Sprechdauer der Tonspur (Bild folgt dem Ton, nie umgekehrt).
+# ============================================================================
+szenen:
+  - typ: "hook"
+    sekunden: 4
+    max_zeichen: 90
+    regie: >
+      Eine Frage oder eine konkrete Zahl. Niemals „Hallo", niemals der
+      Blogname, niemals „In diesem Video". Die erste Sekunde entscheidet,
+      ob überhaupt jemand die zweite sieht.
+  - typ: "punkt"
+    sekunden: 10
+    max_zeichen: 130
+    regie: "Ein Gedanke pro Szene, mit Beleg aus dem Artikel. Keine Aufzählungsfriedhöfe."
+  - typ: "punkt"
+    sekunden: 10
+    max_zeichen: 130
+    regie: "Der Punkt mit der stärksten Zahl gehört hierher – Mitte hält die Aufmerksamkeit."
+  - typ: "punkt"
+    sekunden: 10
+    max_zeichen: 130
+    regie: "Der praktische Handgriff: was man heute tun kann, ohne Empfehlung zu werden."
+  - typ: "cta"
+    sekunden: 5
+    max_zeichen: 100
+    regie: >
+      Verweis auf den vollständigen Ratgeber, ohne Marktschreierei.
+      Kein „Link in der Bio!!!", sondern ein Satz, der den Nutzen nennt.
+
+# ============================================================================
+#  UNTERTITEL – eingebrannt, weil ohne Ton gesehen wird
+# ============================================================================
+untertitel:
+  aktiv: true
+  schriftgroesse: 62
+  zeilen_max: 3
+  zeichen_pro_zeile: 26
+  rand_unten: 420           # Platz für die Bedienelemente der Plattformen
+  box: true
+  box_deckkraft: 0.45
+  # Das Schlüsselwort (Zahl/Betrag) wird farblich hervorgehoben.
+  akzent_bei_zahlen: true
+
+# ============================================================================
+#  PFLICHT-EINBLENDUNGEN – rechtlich, dauerhaft sichtbar
+# ============================================================================
+pflicht:
+  # Dauerhafte Fußzeile, damit der Absender nie unklar ist.
+  fusszeile: "franksfinanzcheck.de"
+  # Steht ab Sekunde 0 klein am unteren Rand: Ein Finanzvideo, das
+  # Handlungsdruck erzeugt, ohne das zu sagen, ist angreifbar.
+  hinweis: "Allgemeine Information, keine Anlage- oder Rechtsberatung."
+  hinweis_schriftgroesse: 30
+  # Wird in JEDE Videobeschreibung geschrieben (Plattform-Pflicht bei
+  # Affiliate-Finanzierung, auch wenn im Video selbst kein Link steht).
+  beschreibung_hinweis: >
+    Allgemeine Information, keine Anlage-, Steuer- oder Rechtsberatung.
+    Der verlinkte Blog enthält Werbe-/Affiliate-Links.
+
+# ============================================================================
+#  GATE – was ein Video NIEMALS enthalten darf (fail-closed)
+# ============================================================================
+gate:
+  min_szenen: 4
+  max_szenen: 6
+  # Ein Video ohne Zahl ist bei Geldthemen eine Behauptung.
+  zahl_pflicht: true
+  # Jede Zahl muss im Artikel stehen (Halluzinationsschutz).
+  zahlen_nur_aus_artikel: true
+  untertitel_pflicht: true
+  hinweis_pflicht: true
+  verbotene_phrasen:
+    - "garantiert"
+    - "risikofrei"
+    - "ohne risiko"
+    - "schnell reich"
+    - "geheimtipp"
+    - "das musst du sofort"
+    - "niemand sagt dir"
+    - "die banken hassen"
+    - "in diesem video"
+    - "vergiss nicht zu abonnieren"
+  verbotene_link_muster:
+    - "/go/"
+    - "a.check24.net"
+    - "bit.ly"
+    - "tinyurl.com"
+
+# ============================================================================
+#  STIMME – die Vorlese-Kette des Blogs (kostenlos)
+# ============================================================================
+stimme:
+  profil: "news"        # news | natural | narrator (siehe ff_voice_backends.py)
+  sprache: "de"
+  tempo: 1.06           # leicht über Lesetempo – Shorts vertragen Zug
+  # Ohne verfügbares TTS-Backend wird das Video trotzdem gebaut: dann mit
+  # Stille und längeren Standzeiten. Ein stummes Video mit Untertiteln ist
+  # besser als kein Video – aber das Cockpit weist es aus.
+  stille_erlaubt: true
+
+# ============================================================================
+#  KANÄLE – wohin das fertige Video geht
+# ============================================================================
+kanaele:
+  youtube:
+    aktiv: true
+    label: "YouTube Shorts"
+    titel_max: 100
+    beschreibung_max: 4900
+    hashtags: ["#Shorts", "#Finanzen", "#Sparen"]
+    kategorie_id: "22"           # People & Blogs
+    privatsphaere: "public"
+    hinweis: "Wichtigster Shorts-Kanal: dauerhafte Suchbarkeit statt Tages-Feed."
+  instagram:
+    aktiv: true
+    label: "Instagram Reels"
+    titel_max: 0
+    beschreibung_max: 2200
+    hashtags: ["#Finanzen", "#Sparen", "#Haushaltskasse"]
+    hinweis: "Nutzt denselben Upload-Weg wie Bild-Posts (media_type REELS)."
+  facebook:
+    aktiv: false
+    label: "Facebook Reels"
+    hinweis: "Erst aktivieren, wenn die Seite regelmäßig Video ausspielt."
+  tiktok:
+    aktiv: false
+    label: "TikTok"
+    hinweis: >
+      Die Content-Posting-API verlangt eine geprüfte App und erlaubt
+      unbestätigten Konten nur private Uploads – bleibt aus, bis geprüft.

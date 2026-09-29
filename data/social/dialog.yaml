@@ -1,0 +1,345 @@
+# ============================================================
+#  💬 DIALOG-AUTOPILOT – ANTWORT-PLAYBOOK (Single Source of Truth)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 29.09.2026): Kommentare, Erwähnungen und Antworten
+#  auf allen Kanälen sollen automatisch erfasst, eingeordnet und
+#  beantwortet werden – auf dem Niveau einer Profi-Agentur und
+#  passend zu einem FINANZBLOG.
+#
+#  DIE EINE REGEL, DIE ALLES ANDERE BESTIMMT
+#  ------------------------------------------------------------
+#  Ein Finanzblog darf keine individuelle Beratung geben. Eine KI, die
+#  auf „Soll ich meinen Vertrag kündigen?" antwortet, erzeugt genau
+#  diesen Anschein – mit Haftungsfolge (§ 675 BGB Auskunftsvertrag,
+#  UWG, ggf. RDG/WpIG). Deshalb arbeitet dieser Autopilot mit
+#  ABGESTUFTER AUTONOMIE statt mit Vollautomatik:
+#
+#    auto        Antwort geht ohne Rückfrage raus (nur risikoarme Klassen)
+#    review      Antwort wird fertig FORMULIERT, wartet aber auf Freigabe
+#    eskalation  keine Bot-Antwort, sofort in die Chefsache-Liste
+#    mute        nur protokollieren, keine Antwort, keine Meldung
+#
+#  Frank tippt dadurch nichts mehr selbst – er sagt nur noch ja oder nein.
+#
+#  ABLAUF EINES LAUFS (scripts/social_dialog.py)
+#    1 SAMMELN   neue Erwähnungen/Kommentare je Kanal (nur lesend)
+#    2 EINORDNEN deterministische Signale + optionale Gratis-KI
+#    3 BELEGEN   passenden EIGENEN Artikel als Beleg suchen
+#    4 ENTWERFEN Vorlage je Klasse, danach optionale KI-Politur
+#    5 PRÜFEN    hartes Gate (Beratungsanschein, Versprechen, Links, PII)
+#    6 ZUSTELLEN auto senden ODER in die Freigabemappe legen
+#    7 BERICHTEN Cockpit SOCIAL-DIALOG-STATUS.md
+#
+#  KOSTEN: 0 € – nur Gratis-APIs und Gratis-LLMs (Groq/Gemini).
+#  Anleitung: docs/ANLEITUNG-DIALOG-AUTOPILOT.md
+# ============================================================
+
+version: 1
+
+meta:
+  timezone: "Europe/Berlin"
+  base_url: "https://franksfinanzcheck.de"
+  # Wie weit zurück ein Lauf schaut (ältere Beiträge werden nicht mehr
+  # beantwortet – eine späte Antwort wirkt unaufmerksamer als keine).
+  lookback_hours: 72
+  # Obergrenzen je Lauf (Anti-Spam, Anti-Amoklauf).
+  max_fetch_per_channel: 40
+  max_replies_per_run: 8
+  max_replies_per_day_total: 20
+  # Nie zweimal am selben Tag an dieselbe Person (Anti-Endlosschleife).
+  user_cooldown_hours: 20
+  # Nach so vielen Tagen fällt ein unbeantworteter Entwurf aus der Mappe.
+  draft_expiry_days: 5
+  # Mindestlänge eines eingehenden Beitrags, damit er überhaupt zählt
+  # („👍" braucht keine Antwort).
+  min_incoming_chars: 12
+  llm:
+    mode: "auto"                    # auto | llm | off
+    providers: ["groq", "gemini"]   # NUR Gratis-Zugänge (Kosten-Regel)
+    max_per_run: 8
+    temperature: 0.3                # niedrig: Dialog braucht Treue, nicht Fantasie
+    max_tokens: 400
+
+# ============================================================================
+#  ANTWORT-HALTUNG (gilt für JEDE Antwort, auch die KI-polierte)
+# ============================================================================
+haltung:
+  anrede: "du"
+  signatur: ""                      # leer = keine Signatur (wirkt natürlicher)
+  max_emoji: 1
+  # Diese Klausel hängt der Autopilot an JEDE Antwort auf eine Frage.
+  # Sie ist der Unterschied zwischen Information und Beratung.
+  beratungsklausel: "Das ist allgemeine Information, keine persönliche Empfehlung – deine Situation kenne ich ja nicht."
+  # Bei Korrekturhinweisen: erst danken, nie rechtfertigen.
+  korrekturformel: "Danke für den Hinweis – ich schaue mir das an und korrigiere es, wenn es nicht stimmt."
+  tonalitaet: >
+    Ruhig, konkret, auf Augenhöhe. Kein Marketing, keine Ausrufezeichen-Ketten,
+    keine Floskeln. Wenn es eine Zahl aus dem Artikel gibt, steht sie in der
+    Antwort. Wenn die Antwort im Artikel steht, wird auf den Artikel verlinkt –
+    aber immer mit einem Satz Inhalt davor, nie nur der Link.
+    Bei Kritik: Punkt anerkennen, sachlich einordnen, nie verteidigen.
+    Im Zweifel lieber kurz und ehrlich als lang und glatt.
+
+# ============================================================================
+#  KLASSEN – was hereinkommt und wie darauf reagiert wird
+#  ----------------------------------------------------------------------------
+#  modus:   auto | review | eskalation | mute
+#  belegpflicht: true = ohne passenden eigenen Artikel KEINE Antwort
+# ============================================================================
+klassen:
+
+  dank:
+    label: "Dank / freundliche Rückmeldung"
+    modus: "auto"
+    belegpflicht: false
+    signale: ["danke", "danke dir", "vielen dank", "hilfreich", "super artikel",
+              "toller beitrag", "hat mir geholfen", "klasse", "sehr gut erklärt"]
+    vorlage: "Danke dir – freut mich, dass es weitergeholfen hat."
+    hinweis: "Risikoarm: kein Fakt, keine Empfehlung, keine Zahl."
+
+  lob_reichweite:
+    label: "Teilen / Weiterempfehlung"
+    modus: "auto"
+    belegpflicht: false
+    signale: ["geteilt", "teile ich", "empfehle ich weiter", "boost", "repost"]
+    vorlage: "Danke fürs Weitersagen."
+    hinweis: "Kurz halten – jede weitere Silbe wirkt bemüht."
+
+  frage_faktisch:
+    label: "Sachfrage (im Artikel beantwortbar)"
+    modus: "review"
+    belegpflicht: true
+    signale: ["wie funktioniert", "was bedeutet", "wo finde ich", "ab wann",
+              "wie hoch ist", "wie lange", "gilt das auch", "stimmt es dass",
+              "was ist der unterschied", "wie berechne"]
+    vorlage: "{antwortkern} Ausführlich steht das hier: {beleg_url}"
+    hinweis: >
+      Kann auf auto gestellt werden, sobald du dem Gate vertraust – dann
+      antwortet der Bot NUR, wenn er einen eigenen Artikel als Beleg hat.
+      Empfehlung: erst zwei Wochen im Review-Modus mitlesen.
+
+  frage_beratung:
+    label: "Bitte um individuelle Empfehlung"
+    modus: "review"
+    belegpflicht: false
+    signale: ["soll ich", "sollte ich", "lohnt sich das für mich", "was würdest du machen",
+              "was empfiehlst du mir", "ist das gut für mich", "meine situation",
+              "ich habe geerbt", "mein vertrag", "mein gehalt", "meine rente",
+              "welchen tarif soll", "welche aktie", "welcher etf", "kündigen oder"]
+    vorlage: "{beratungsklausel} Was ich allgemein dazu erklärt habe, steht hier: {beleg_url}"
+    hinweis: >
+      NIEMALS auf auto stellen. Hier entsteht der Beratungsanschein. Der
+      Entwurf verweist bewusst nur auf allgemeine Information und enthält
+      keine Handlungsempfehlung.
+
+  korrektur:
+    label: "Faktenhinweis / Widerspruch zur Sache"
+    modus: "review"
+    belegpflicht: false
+    signale: ["das stimmt nicht", "falsch", "veraltet", "seit 2026 gilt",
+              "nicht mehr aktuell", "fehler", "irrtum", "quelle?", "beleg?"]
+    vorlage: "{korrekturformel}"
+    hinweis: "Erzeugt zusätzlich einen Prüfauftrag für die Faktenfrische."
+
+  kritik:
+    label: "Kritik an Blog, Ton oder Affiliate-Modell"
+    modus: "review"
+    belegpflicht: false
+    signale: ["werbung", "affiliate", "provision", "clickbait", "unseriös",
+              "schlecht recherchiert", "ki-müll", "chatgpt", "bot", "spam"]
+    vorlage: >
+      Berechtigter Punkt. Die Finanzierung steht offen im Impressum und an jedem
+      Artikel; die Empfehlungen hängen nicht an der Provision. Wenn dir eine
+      Stelle konkret aufstößt, nenn sie mir – ich sehe sie mir an.
+    hinweis: >
+      Nie rechtfertigen, nie löschen. Öffentlich sichtbare, ruhige Antworten auf
+      Kritik sind der stärkste Vertrauensbeweis, den ein Finanzblog hat.
+
+  rechtlich:
+    label: "Rechtliches (Abmahnung, Datenschutz, Presserecht, Urheberrecht)"
+    modus: "eskalation"
+    belegpflicht: false
+    signale: ["abmahnung", "anwalt", "unterlassung", "dsgvo", "datenschutz",
+              "urheberrecht", "gegendarstellung", "impressum falsch", "klage",
+              "rechtliche schritte", "löschung meiner daten"]
+    vorlage: ""
+    hinweis: "KEINE Bot-Antwort. Sofort in die Chefsache-Liste, Frist läuft."
+
+  kooperation:
+    label: "Presse, Kooperation, Gastbeitrag, Linktausch"
+    modus: "review"
+    belegpflicht: false
+    signale: ["kooperation", "zusammenarbeit", "gastbeitrag", "gastartikel",
+              "linktausch", "backlink", "pressekontakt", "interview", "sponsored"]
+    vorlage: "Danke für die Nachricht – melde dich gern über das Kontaktformular auf der Seite, dann sehe ich es mir in Ruhe an."
+    hinweis: "Linktausch- und Sponsored-Anfragen sind fast immer SEO-Spam."
+
+  spam:
+    label: "Spam, Werbung, Scam, Krypto-Bots"
+    modus: "mute"
+    belegpflicht: false
+    signale: ["telegram gruppe", "trading signale", "whatsapp +", "recovery expert",
+              "hacker", "krypto gewinn", "investment manager", "dm me", "schreib mir privat",
+              "verdopple", "100% gewinn", "binary option", "forex"]
+    vorlage: ""
+    hinweis: >
+      Niemals antworten – jede Antwort ist ein Lebenszeichen und zieht mehr
+      Bots nach. Nur zählen und im Cockpit ausweisen.
+
+  troll:
+    label: "Beleidigung, Hass, reine Provokation"
+    modus: "mute"
+    belegpflicht: false
+    signale: ["idiot", "vollidiot", "dummkopf", "betrüger", "abzocke", "halt die",
+              "verpiss", "lügner"]
+    vorlage: ""
+    hinweis: >
+      Nicht füttern. Bei strafbaren Inhalten hebt der Lauf den Beitrag in die
+      Chefsache-Liste (Beweissicherung), antwortet aber nie.
+
+  sonstiges:
+    label: "Nicht eindeutig einzuordnen"
+    modus: "review"
+    belegpflicht: false
+    signale: []
+    vorlage: "Danke für deinen Kommentar."
+    hinweis: "Auffangklasse – landet immer bei dir, nie automatisch."
+
+# ============================================================================
+#  HARTES GATE – was eine Antwort NIEMALS enthalten darf
+#  Ein Verstoß blockiert die Antwort, auch wenn die Klasse „auto" ist.
+# ============================================================================
+gate:
+  max_chars_default: 480
+  min_chars: 12
+  max_links: 1
+  # Nur eigene Artikel dürfen verlinkt werden – nie ein Affiliate-Ziel.
+  erlaubte_link_praefixe: ["https://franksfinanzcheck.de/"]
+  verbotene_link_muster: ["/go/", "a.check24.net", "bit.ly", "tinyurl.com", "t.co/", "amzn.to"]
+
+  # Formulierungen, die aus Information eine BERATUNG machen.
+  beratungsanschein:
+    - "ich empfehle dir"
+    - "ich rate dir"
+    - "du solltest unbedingt"
+    - "an deiner stelle würde ich"
+    - "in deinem fall"
+    - "für dich ist"
+    - "nimm am besten"
+    - "wechsle zu"
+    - "kündige"
+    - "kauf dir"
+    - "investiere in"
+    - "das lohnt sich für dich"
+
+  # Versprechen, die rechtlich nicht tragbar sind.
+  versprechen:
+    - "garantiert"
+    - "risikofrei"
+    - "ohne risiko"
+    - "sichere rendite"
+    - "schnell reich"
+    - "zu 100 % sicher"
+    - "immer günstiger"
+    - "kostenlos abschließen"
+
+  # Rechts-/Steuerberatung ist erlaubnispflichtig – nie selbst erteilen.
+  erlaubnispflichtig:
+    - "steuerlich absetzen"
+    - "steuerlich absetzbar"
+    - "rechtlich bist du"
+    - "das ist rechtswidrig"
+    - "da hast du anspruch auf"
+    - "klag dagegen"
+
+  # Personenbezogene Daten dürfen nie in einer öffentlichen Antwort
+  # auftauchen – auch dann nicht, wenn das Gegenüber sie selbst nannte.
+  pii_muster:
+    - "(?i)\\b[A-Z]{2}\\d{2}[ ]?[0-9A-Z ]{12,32}\\b"   # IBAN
+    - "(?i)\\b\\d{3}[ ]?\\d{3,4}[ ]?\\d{3,4}\\b"        # Telefonnummer
+    - "(?i)[\\w.+-]+@[\\w-]+\\.[\\w.]{2,}"              # E-Mail
+
+  # Floskeln, die eine Antwort sofort nach Bot klingen lassen.
+  floskeln:
+    - "vielen dank für deine nachricht"
+    - "gerne helfe ich dir weiter"
+    - "zögere nicht"
+    - "ich hoffe, das hilft dir weiter"
+    - "als ki"
+    - "als sprachmodell"
+
+  # Eine Antwort darf keine Zahl behaupten, die nicht im Beleg-Artikel
+  # steht (Halluzinationsschutz).
+  zahlen_nur_aus_beleg: true
+
+# ============================================================================
+#  KANÄLE – wo der Autopilot zuhört
+#  ----------------------------------------------------------------------------
+#  quelle:   mentions | comments | messages
+#  status:   aktiv = wird abgefragt · ruht = bewusst aus
+#  Fehlt das Kanal-Secret, ruht der Kanal automatisch (Standby-Regel).
+# ============================================================================
+kanaele:
+
+  mastodon:
+    aktiv: true
+    quelle: "mentions"
+    endpoint: "notifications?types[]=mention"
+    max_chars: 480
+    hinweis: "Fediverse: Antworten sind Teil der Kultur, Reaktionszeit zählt."
+
+  bluesky:
+    aktiv: true
+    quelle: "mentions"
+    max_chars: 280
+    hinweis: "Antwort hängt im selben Thread (Reply-Ref auf Root + Parent)."
+
+  telegram:
+    aktiv: true
+    quelle: "messages"
+    max_chars: 900
+    hinweis: >
+      Kommentare unter Kanalbeiträgen laufen über die verknüpfte
+      Diskussionsgruppe. Ohne Gruppe gibt es nichts zu beantworten.
+
+  youtube:
+    aktiv: true
+    quelle: "comments"
+    max_chars: 900
+    hinweis: "Shorts-Kommentare – der wichtigste Dialogkanal, sobald Video läuft."
+
+  facebook:
+    aktiv: true
+    quelle: "comments"
+    max_chars: 900
+    hinweis: "Kommentare unter Seitenbeiträgen (pages_manage_engagement nötig)."
+
+  instagram:
+    aktiv: true
+    quelle: "comments"
+    max_chars: 900
+    hinweis: "Kommentare unter eigenen Beiträgen (instagram_manage_comments nötig)."
+
+  x:
+    aktiv: false
+    quelle: "mentions"
+    max_chars: 260
+    hinweis: "Erwähnungen lesen erfordert einen kostenpflichtigen Tarif – bleibt aus (Kosten-Regel)."
+
+  linkedin:
+    aktiv: false
+    quelle: "comments"
+    max_chars: 900
+    hinweis: "Kommentar-Lesezugriff nur für Partner-APIs – bleibt aus."
+
+  threads:
+    aktiv: false
+    quelle: "comments"
+    max_chars: 480
+    hinweis: "Erst freischalten, wenn der Threads-Kanal selbst sendet."
+
+  reddit:
+    aktiv: false
+    quelle: "mentions"
+    max_chars: 900
+    hinweis: "Erst freischalten, wenn Reddit bewusst bespielt wird."

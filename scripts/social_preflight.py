@@ -66,7 +66,19 @@ SYMBOL = {OK: "✅", STANDBY: "⚪", FAIL: "❌", UNKNOWN: "❓"}
 
 # Reihenfolge = empfohlene Einrichtungs-Reihenfolge (Aufwand/Nutzen)
 SETUP_ORDER = ["bluesky", "telegram", "mastodon", "linkedin", "facebook",
-               "instagram", "threads", "x", "pinterest", "reddit"]
+               "instagram", "threads", "x", "pinterest", "reddit", "youtube"]
+
+# Kanäle, die NICHT in channels.yaml stehen, weil sie kein Textkanal sind.
+# YouTube gehört der Shorts-Schmiede (data/social/video.yaml) – geprüft
+# wird er trotzdem hier, damit es EINEN Ort für Zugangs-Wahrheit gibt.
+VIRTUELLE_KANAELE = {
+    "youtube": {
+        "label": "YouTube Shorts",
+        "enabled": True,
+        "secrets": ["YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"],
+        "vars": ["YOUTUBE_CHANNEL_ID"],
+    },
+}
 
 # Kurzer nächster Handgriff, wenn ein Kanal im Standby steht.
 SETUP_HINT = {
@@ -79,6 +91,9 @@ SETUP_HINT = {
     "instagram": "Business-/Creator-Konto mit Facebook-Seite verknüpfen, dann instagram_content_publish.",
     "pinterest": "Pinterest-Developer-App, Token über den Broker: python3 scripts/pinterest_token.py.",
     "telegram": "@BotFather → /newbot → Token; Bot als Administrator in den Kanal aufnehmen.",
+    "youtube": ("console.cloud.google.com → Projekt → YouTube Data API v3 aktivieren → "
+                "OAuth-Client (Desktop) → einmalig Refresh-Token holen "
+                "(docs/ANLEITUNG-SHORTS-SCHMIEDE.md, Abschnitt 4)."),
     "reddit": "reddit.com/prefs/apps → „script\"-App anlegen (Client-ID + Secret + Konto-Login).",
 }
 
@@ -311,6 +326,41 @@ def _check_telegram(ch: dict, cfg: dict) -> dict:
     return _result(OK, f"Kanal „{titel}\"", identity=bot)
 
 
+def _check_youtube(ch: dict, cfg: dict) -> dict:
+    """Prüft den Shorts-Zugang: Refresh-Token tauschen + Kanal lesen."""
+    status, data, err = sch.http_json(
+        "https://oauth2.googleapis.com/token",
+        data=sch.form_encode({"client_id": _env("YOUTUBE_CLIENT_ID"),
+                              "client_secret": _env("YOUTUBE_CLIENT_SECRET"),
+                              "refresh_token": _env("YOUTUBE_REFRESH_TOKEN"),
+                              "grant_type": "refresh_token"}),
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        method="POST", retries=2)
+    if err or not isinstance(data, dict) or not data.get("access_token"):
+        hint = _http_hint(status, "youtube")
+        if status in (400, 401):
+            hint = ("Refresh-Token ungültig oder widerrufen. Ein Token aus einer App im "
+                    "Test-Modus verfällt nach 7 Tagen – App auf „In Produktion\" setzen "
+                    "und Token neu holen.")
+        return _result(FAIL, _short(err or "kein Access-Token"), hinweis=hint)
+    token = data["access_token"]
+    kstatus, kdata, kerr = sch.http_json(
+        "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true",
+        headers={"Authorization": f"Bearer {token}"}, method="GET", retries=2)
+    if kerr or not isinstance(kdata, dict) or not (kdata.get("items") or []):
+        return _result(FAIL, _short(kerr or "kein Kanal am Konto"),
+                       hinweis=_http_hint(kstatus, "youtube")
+                       or "Das Google-Konto hat keinen YouTube-Kanal – erst einen anlegen.")
+    kanal = (kdata["items"][0].get("snippet") or {}).get("title") or "?"
+    kid = kdata["items"][0].get("id") or ""
+    konf = _env("YOUTUBE_CHANNEL_ID")
+    if konf and kid and konf != kid:
+        return _result(FAIL, f"YOUTUBE_CHANNEL_ID={konf}, Token gehört zu {kid}",
+                       identity=kanal, hinweis=f"Variable auf {kid} korrigieren.")
+    return _result(OK, f"Kanal-ID {kid}", identity=kanal,
+                   hinweis="" if konf else f"Variable YOUTUBE_CHANNEL_ID={kid} nachtragen.")
+
+
 def _check_reddit(ch: dict, cfg: dict) -> dict:
     user = _env("REDDIT_USERNAME")
     body = sch.form_encode({"grant_type": "password", "username": user,
@@ -351,6 +401,7 @@ CHECKS = {
     "pinterest": _check_pinterest,
     "telegram": _check_telegram,
     "reddit": _check_reddit,
+    "youtube": _check_youtube,
 }
 
 
@@ -373,7 +424,7 @@ def pruefe_kanal(cid: str, ch: dict, cfg: dict, offline: bool = False) -> dict:
     if not eintrag["enabled"]:
         eintrag.update(status=STANDBY, detail="in channels.yaml deaktiviert")
         return eintrag
-    if sch.adapter_class(cid) is None:
+    if cid not in VIRTUELLE_KANAELE and sch.adapter_class(cid) is None:
         eintrag.update(status=FAIL, detail="Adapter nicht ladbar",
                        hinweis=f"scripts/social_channels/{cid}.py prüfen.")
         return eintrag
@@ -406,9 +457,11 @@ def pruefe_kanal(cid: str, ch: dict, cfg: dict, offline: bool = False) -> dict:
 
 def preflight(kanaele: list[str] | None = None, offline: bool = False) -> dict:
     cfg = sch.load_config()
-    channels = sch.channel_map(cfg)
+    channels = dict(sch.channel_map(cfg))
     if not channels:
         return {"zeit": _jetzt(), "kanaele": [], "fehler": "channels.yaml fehlt oder ist leer"}
+    for cid, ch in VIRTUELLE_KANAELE.items():
+        channels.setdefault(cid, dict(ch))
     ids = [c for c in SETUP_ORDER if c in channels] + \
           [c for c in channels if c not in SETUP_ORDER]
     if kanaele:
@@ -504,7 +557,9 @@ def markdown(bericht: dict) -> str:
 def selftest() -> int:
     fehler = []
     cfg = sch.load_config()
-    channels = sch.channel_map(cfg)
+    channels = dict(sch.channel_map(cfg))
+    for cid, ch in VIRTUELLE_KANAELE.items():
+        channels.setdefault(cid, dict(ch))
     if not channels:
         fehler.append("channels.yaml nicht lesbar")
     for cid in channels:

@@ -15,8 +15,8 @@ Dein Engpass ist **nicht Technik, sondern Zugangsdaten und ein fehlender Rückka
 | Kanäle mit echtem Versand | ⚠️ **nur Mastodon** (37 von 37 Posts in `data/social/state.yaml`) |
 | Kanäle im Standby (Adapter fertig, Secret fehlt) | ❌ Bluesky, LinkedIn, X, Threads, Facebook, Instagram, Telegram, Reddit, Pinterest-Refresh |
 | Rückkanal „Was performt?" → Redaktionsplan | ❌ fehlt (nur Pinterest hat `pinterest_perf_feedback.py`) |
-| Kommentare/Antworten | ❌ 100 % manuell |
-| Video/Shorts | ❌ nicht vorhanden |
+| Kommentare/Antworten | ✅ **gebaut 29.09.2026** – Dialog-Autopilot (abgestufte Autonomie) |
+| Video/Shorts | ✅ **gebaut 29.09.2026** – Shorts-Schmiede (9:16, ffmpeg + Gratis-TTS) |
 
 **Hebel-Reihenfolge: erst Tokens (Tag 1, ~90 Min, 0 €), dann Feedback-Loop, dann Video.**
 
@@ -82,13 +82,15 @@ automatisch mehr von dem, was zieht.
 
 ## 3. Mittelfristig (Monat 1–2)
 
-**a) Antwort-Assistent statt Voll-Automat (Kommentare/Mentions)**
+**a) Antwort-Assistent statt Voll-Automat (Kommentare/Mentions)** → **erledigt 29.09.2026**
+(`scripts/social_dialog.py`, `data/social/dialog.yaml`, `docs/ANLEITUNG-DIALOG-AUTOPILOT.md`)
 Vollautomatische Antworten sind bei Finanzthemen ein Rechtsrisiko (Beratungs-Anschein).
 Richtiger Zuschnitt: Bot sammelt Mentions/Kommentare/DMs aller Kanäle, formuliert per
 Groq/Gemini einen Antwortvorschlag mit Beleglink aus dem eigenen Bestand und legt ihn als
 GitHub-Issue-Checkliste ab. Du tippst 3×/Woche „ok" — 5 Minuten statt 5 Kanäle durchklicken.
 
-**b) Vertikal-Video (der einzige echte Reichweiten-Hebel, der dir noch fehlt)**
+**b) Vertikal-Video (der einzige echte Reichweiten-Hebel, der dir noch fehlt)** → **erledigt 29.09.2026**
+(`scripts/social_video.py`, `data/social/video.yaml`, `docs/ANLEITUNG-SHORTS-SCHMIEDE.md`)
 Aus jedem Artikel entsteht bereits Text + Cover. Ergänzen:
 `ffmpeg` (gratis) + vorhandene TTS-Pipeline (du hast schon Audio-Backfill) + Kenburns auf dem
 2:3-Cover + Untertitel aus dem Skript → 30–45-s-MP4 für Instagram Reels, YouTube Shorts,
@@ -138,6 +140,6 @@ Sag mir, womit ich anfangen soll:
 1. ~~Secret-Setup-Runbuch je Kanal mit Klickpfad + Verifikations-Lauf~~ → **erledigt 29.09.2026**:
    `docs/RUNBUCH-SOCIAL-SECRETS.md`, `scripts/social_preflight.py`, `social-preflight.yml`,
 2. `scripts/social_perf_feedback.py` + Planer-Gewichtung bauen,
-3. `social_video.py` + YouTube-/TikTok-Adapter,
-4. Antwort-Assistent,
-5. Cockpit-Konsolidierung.
+3. ~~`social_video.py` + YouTube-Adapter~~ → **erledigt 29.09.2026**,
+4. ~~Antwort-Assistent~~ → **erledigt 29.09.2026**,
+5. Cockpit-Konsolidierung (ein `COCKPIT.md` statt >50 Status-Dateien).
