@@ -49,11 +49,51 @@ DOM_JSON = os.environ.get("LAYOUT_DOM_JSON",
 
 CRITICAL, WARN, OK = [], [], []
 
+# Schemata, die KEIN internes Dateiziel im Build haben – sie zu prüfen wäre
+# sinnlos. Bewusst eine einzige Quelle: die Liste stand bis 29.09.2026 zweimal
+# wortgleich im Modul (in resolve() und in check_internal_links()), und genau
+# solche Kopien driften auseinander.
+NICHT_PRUEFBARE_SCHEMATA = (
+    "http://", "https://", "mailto:", "tel:", "#", "data:", "javascript:",
+)
+
+# `webcal://` ist KEIN kaputter Link, sondern das reguläre Abo-Schema für
+# ICS-Kalender (RFC-nah, von Apple/Google/Outlook unterstützt): der Client
+# ersetzt es durch https:// und abonniert die Datei, statt sie herunterzuladen.
+# /kalender/ verlinkt damit 11 .ics-Dateien; der Audit hielt alle 11 für tote
+# interne Links (Fund 29.09.2026).
+# Statt sie bloß zu überspringen, prüfen wir sie WEITER – nur eben auf dem
+# richtigen Pfad: eigene Domain → Datei im Build. So bleibt die Abdeckung
+# erhalten und ein wirklich fehlendes .ics fällt weiterhin auf.
+WEBCAL_PREFIX = "webcal://"
+EIGENE_DOMAIN = "franksfinanzcheck.de"
+
+
+def webcal_als_pfad(href):
+    """`webcal://franksfinanzcheck.de/kalender/x.ics` → `/kalender/x.ics`.
+
+    Gibt None zurück, wenn das Ziel auf einer FREMDEN Domain liegt – die ist
+    extern und im Build nicht prüfbar.
+    """
+    if not href.lower().startswith(WEBCAL_PREFIX):
+        return None
+    rest = href[len(WEBCAL_PREFIX):]
+    host, _, pfad = rest.partition("/")
+    if host.lower() not in (EIGENE_DOMAIN, "www." + EIGENE_DOMAIN):
+        return None
+    return "/" + pfad
+
 
 def resolve(base_dir, page_file, href):
     """Löst eine href gegen die public/-Struktur auf.
     Relative Links sind seitenrelativ; absolute (/...) gehen gegen BASE."""
-    if not href or href.startswith(("http://", "https://", "mailto:", "tel:", "#", "data:", "javascript:")):
+    if not href:
+        return None
+    # webcal:// der eigenen Domain wie einen internen Pfad behandeln.
+    umgeschrieben = webcal_als_pfad(href)
+    if umgeschrieben is not None:
+        href = umgeschrieben
+    elif href.startswith(NICHT_PRUEFBARE_SCHEMATA) or href.lower().startswith(WEBCAL_PREFIX):
         return None
     href = href.split("#")[0].split("?")[0]
     href = urllib.parse.unquote(href)
@@ -100,7 +140,11 @@ def check_internal_links():
             raw = m.group(1) if m.group(1) is not None else (
                 m.group(2) if m.group(2) is not None else (m.group(3) or ""))
             href = html.unescape(raw)
-            if href.startswith(("http://", "https://", "mailto:", "tel:", "#", "data:", "javascript:")):
+            if href.startswith(NICHT_PRUEFBARE_SCHEMATA):
+                continue
+            # webcal:// fremder Domains ist extern; eigenes fällt durch und
+            # wird unten wie ein interner Link gegen den Build geprüft.
+            if href.lower().startswith(WEBCAL_PREFIX) and webcal_als_pfad(href) is None:
                 continue
             checked += 1
             if resolve(BASE, page, href) is None:
