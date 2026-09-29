@@ -601,8 +601,8 @@ items:
   date: '2026-09-29'
   time: '11:30'
   scheduled_at: '2026-09-29T11:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: bluesky:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort:takeaway:2026-09-29
   channel: bluesky
@@ -637,9 +637,9 @@ items:
   date: '2026-09-29'
   time: '15:15'
   scheduled_at: '2026-09-29T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor:zahl:2026-09-29
   channel: threads
   slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
@@ -649,9 +649,9 @@ items:
   date: '2026-09-29'
   time: '16:15'
   scheduled_at: '2026-09-29T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-09-29
   channel: x
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -661,9 +661,9 @@ items:
   date: '2026-09-29'
   time: '19:15'
   scheduled_at: '2026-09-29T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: mastodon:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor:nutzen:2026-09-30
   channel: mastodon
   slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor

@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)
+> Automatisch aktualisiert: 29.09.2026 20:41 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -8,12 +8,12 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 
 | Kanal | Status | Geplant | Nächster Beitrag | Kalender |
 |---|---|---:|---|---|
-| Mastodon | ⚪ Standby | 4 | Di 29.09. 11:30 · 5 einfache Frugalismus-Tricks fü | [md](mastodon.md) · [ics](mastodon.ics) |
-| Bluesky | ⚪ Standby | 22 | Di 29.09. 08:15 · Finanzieller Puffer: Wie viel No | [md](bluesky.md) · [ics](bluesky.ics) |
-| LinkedIn | ⚪ Standby | 8 | Di 29.09. 07:45 · Finanzielle Freiheit erreichen:  | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 30 | Di 29.09. 08:45 · Tierkrankenversicherung für Hund | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 23 | Di 29.09. 09:15 · Tierkrankenversicherung für Hund | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 23 | Di 29.09. 09:45 · So findest du den richtigen: DSL | [md](facebook.md) · [ics](facebook.ics) |
+| Mastodon | ⚪ Standby | 3 | Mi 30.09. 07:30 · Gasrechnung prüfen: Fehler finde | [md](mastodon.md) · [ics](mastodon.ics) |
+| Bluesky | ⚪ Standby | 22 | Mi 30.09. 08:15 · DSL-Wechselbonus sichern: So spa | [md](bluesky.md) · [ics](bluesky.ics) |
+| LinkedIn | ⚪ Standby | 8 | Mi 30.09. 07:45 · So findest du den richtigen: DSL | [md](linkedin.md) · [ics](linkedin.ics) |
+| X (Twitter) | ⚪ Standby | 29 | Di 29.09. 19:15 · Dein Haus sicher schützen: Das n | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 22 | Di 29.09. 16:15 · Gasrechnung prüfen: Fehler finde | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 22 | Di 29.09. 15:15 · Sparen im Herbst: Spartipps für  | [md](facebook.md) · [ics](facebook.ics) |
 | Instagram | ⚪ Standby | 10 | Do 01.10. 11:45 · Digitaler Turbo: Warum der DNS-H | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 9 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
@@ -23,17 +23,9 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Di, 29. September 2026
-- **07:45** ⚪ LinkedIn · _frage_ · Finanzielle Freiheit erreichen: Denke dich reich – Geld
-- **08:15** ⚪ Bluesky · _takeaway_ · Finanzieller Puffer: Wie viel Notgroschen ist genug?
-- **08:45** ⚪ X (Twitter) · _thread_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
-- **09:15** ⚪ Threads · _takeaway_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
-- **09:45** ⚪ Facebook (Seite) · _zahl_ · So findest du den richtigen: DSL-Tarif für dein Zuhause
-- **11:30** ⏳ Mastodon · _takeaway_ · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen
-- **12:15** ⚪ Bluesky · _takeaway_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
-- **13:15** ⚪ X (Twitter) · _takeaway_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
-- **15:15** ⏳ Facebook (Seite) · _frage_ · Sparen im Herbst: Spartipps für die goldene Jahreszeit
-- **16:15** ⏳ Threads · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
-- **19:15** ⏳ X (Twitter) · _nutzen_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
+- **15:15** ⚪ Facebook (Seite) · _frage_ · Sparen im Herbst: Spartipps für die goldene Jahreszeit
+- **16:15** ⚪ Threads · _zahl_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
+- **19:15** ⚪ X (Twitter) · _nutzen_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 ### Mi, 30. September 2026
 - **07:30** ⏳ Mastodon · _nutzen_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
 - **07:45** ⏳ LinkedIn · _zitat_ · So findest du den richtigen: DSL-Tarif für dein Zuhause

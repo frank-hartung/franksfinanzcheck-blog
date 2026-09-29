@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 20:41 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 29. September 2026
-- **07:45** ⚪ Finanzielle Freiheit erreichen: Denke dich reich – Geld — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 ### Mi, 30. September 2026
 - **07:45** ⏳ So findest du den richtigen: DSL-Tarif für dein Zuhause — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/

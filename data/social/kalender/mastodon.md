@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 29.09.2026 13:26 (Europe/Berlin)  
+> Automatisch aktualisiert: 29.09.2026 20:41 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 29. September 2026
-- **11:30** ⏳ 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/
 ### Mi, 30. September 2026
 - **07:30** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
@@ -26,6 +23,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 29.09.2026 20:41 · 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen → https://mastodon.social/@FranksFinanzcheck/117355793846755045
 - ✅ 29.09.2026 13:25 · Heizkosten senken: Mit diesen Strategien sparst du sofort → https://mastodon.social/@FranksFinanzcheck/117354080626572441
 - ✅ 28.09.2026 22:09 · Finanzieller Puffer: Wie viel Notgroschen ist genug? → https://mastodon.social/@FranksFinanzcheck/117350478329944059
 - ✅ 28.09.2026 13:47 · Tierkrankenversicherung für Hund & Katze: Kosten realistisch → https://mastodon.social/@FranksFinanzcheck/117348501740184448
@@ -35,7 +33,6 @@
 - ✅ 26.09.2026 11:56 · Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt → https://mastodon.social/@FranksFinanzcheck/117336743450810591
 - ✅ 12.09.2026 18:22 · WLAN-Probleme lösen: Mesh oder Repeater im Vergleich → https://mastodon.social/@FranksFinanzcheck/117258986614384406
 - ✅ 11.09.2026 20:00 · Standby Kosten reduzieren: So entlarvst du Stromfresser → https://franksfinanzcheck.de/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/
-- ✅ 11.09.2026 18:17 · Günstig durch den Winter: Heizungs-Check im Spätsommer → https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*
