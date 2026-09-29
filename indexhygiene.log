@@ -1,0 +1,15 @@
+==================================================================
+ INDEX-HYGIENE – Crawl-Fläche des Builds
+==================================================================
+  HTML-URLs gesamt ........... 96
+  davon indexierbar .......... 58
+  davon NICHT indexierbar .... 38   (Verhältnis 0.66 : 1, Budget 1.0)
+
+    Tag-Archive ..............    0   (Budget 0)
+    Kategorie-Archive ........    0
+    Pager-Seiten .............   10
+    /page/1/-Aliase ..........    0
+    /go/-Weiterleitungen .....   20   (gewollt)
+    Sitemap-Einträge ......... 56
+
+✓ Crawl-Fläche sauber: jede gebaute URL ist gewollt.
