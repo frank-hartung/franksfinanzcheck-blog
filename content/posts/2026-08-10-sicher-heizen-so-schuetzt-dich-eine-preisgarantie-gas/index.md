@@ -4,7 +4,7 @@ title: "Sicher heizen: So schützt dich eine Gaspreisgarantie"
 description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche…"
 date: 2026-08-10T09:29:05Z
 draft: false
-tags: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

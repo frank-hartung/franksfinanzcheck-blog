@@ -4,7 +4,7 @@ description: Erfahre, welche Fälle eine Rechtsschutzversicherung abdeckt, welch
 date: 2026-09-29T15:00:55Z
 draft: true
 reserve: true
-tags: ["Rechtsschutzversicherung", "Rechtsschutz Leistungen", "Rechtsstreit versichern", "Wirklich"]
+tags: ["Haftpflichtversicherung", "Versicherungen vergleichen"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

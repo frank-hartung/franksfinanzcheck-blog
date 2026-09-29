@@ -5,7 +5,7 @@ description: "Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrol
 date: 2026-09-25T12:15:37Z
 draft: false
 reserve_published: 2026-09-25
-tags: ["Gasrechnung prüfen", "Nachzahlung vermeiden", "Zählerstand", "Heizkostenabrechnung"]
+tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

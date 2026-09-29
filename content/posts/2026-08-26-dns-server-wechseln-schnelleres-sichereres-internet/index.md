@@ -4,7 +4,7 @@ title: "DNS-Server wechseln: Schnelleres und sichereres Internet"
 description: "DNS-Server wechseln für mehr Tempo: Beste kostenlose DNS-Server 2026 (Cloudflare, Google, Quad9) + Anleitung für FRITZ!Box, Windows & Android."
 date: 2026-08-26T06:00:00Z
 draft: false
-tags: ["DNS Server wechseln", "DNS Server ändern", "Schnelleres Internet", "FRITZ!Box DNS", "Cloudflare DNS", "Internet Sicherheit"]
+tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

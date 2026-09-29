@@ -23,6 +23,18 @@ buildFuture = false
 buildExpired = false
 [pagination]
 pagerSize = 8
+# INDEX-HYGIENE 29.09.2026 (Befund: 237 nicht indexierte Seiten in der GSC).
+# Hugo legt für JEDE paginierte Liste zusätzlich eine Seite `…/page/1/` an, die
+# per Meta-Refresh auf die Listenseite selbst weiterleitet. Bei 147 Tag-Archiven,
+# 4 Kategorien und 3 Sektionen waren das 154 reine Weiterleitungs-URLs – von
+# Google gecrawlt und in der Search Console als „Seite mit Weiterleitung" unter
+# „nicht indexiert" gezählt. Verlinkt wird `/page/1/` nirgends: der Paginator
+# zeigt für Seite 1 immer auf die Basis-URL. Die Aliase waren also reiner
+# Crawl-Müll ohne jeden Nutzen.
+# `disableAliases` schaltet genau diese Automatik ab – die echten Pager-Seiten
+# (/page/2/, /page/3/ …) bleiben unverändert erhalten und weiter noindex,follow.
+# Wache: scripts/index_hygiene_gate.py (H2).
+disableAliases = true
 copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
 
 # Service Worker (sw.js) als eigenes Output-Format am Seiten-Root rendern.
@@ -182,6 +194,25 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     name = "Datenschutz"
     url = "/datenschutz/"
     weight = 6
+
+# ---------------------------------------------------------------------
+# TAXONOMIEN – bewusst nur EINE (Index-Hygiene 29.09.2026)
+#
+# Hugo legt ohne diesen Block die Standard-Taxonomien `tags` UND
+# `categories` an. `categories` kannte auf dieser Site aber nur zwei Werte
+# ("Ratgeber" 61×, "News" 5×) und wird NIRGENDS verlinkt: die drei Stellen,
+# die das Feld lesen (schema_article.html → articleSection,
+# extend_post_content.html → Karten-Label, ff_voice_toolbar.html), nutzen
+# ausschließlich `.Params.categories` als WERT, nie die Archiv-URL.
+# Die Taxonomie erzeugte damit 8 reine Crawl-URLs ohne Nutzen:
+#   /categories/, /categories/ratgeber/, /categories/news/
+#   + /categories/ratgeber/page/2..6/
+# Ohne den Eintrag hier bleibt das Frontmatter-Feld unverändert lesbar –
+# nur die Archivseiten entfallen. Themen-Einstieg läuft über die sechs
+# Pillar-Seiten (indexierbar) und /tags/ (noindex, interne Verlinkung).
+# Wache: scripts/index_hygiene_gate.py (H4).
+[taxonomies]
+  tag = "tags"
 
 [sitemap]
   changefreq = "weekly"

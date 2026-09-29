@@ -860,6 +860,32 @@ def validate_frontmatter(path):
         print(f"    ✓ Frontmatter repariert: {', '.join(fixes)} ergänzt")
 
 
+def _register_tags(keywords, pillar=None, titel=""):
+    """Kanonische Tags aus data/seo/tag_register.yaml (Index-Hygiene 29.09.2026).
+
+    Vorher stand im Frontmatter `normalize_tags(keywords[:4])` – die ersten vier
+    SEO-Keywords wurden also direkt zu Tags. Keywords sind aber long-tail und pro
+    Artikel einmalig: jeder Entwurf hat damit bis zu vier neue Tag-Archive plus
+    vier /page/1/-Weiterleitungen erzeugt. Zusammen mit engine_generate.py war das
+    die Ursache der 237 „nicht indexiert"-Meldungen in der Search Console.
+
+    Tags kommen jetzt ausschließlich aus dem kuratierten Register; erfunden wird
+    keiner mehr. Die Keywords bleiben unverändert im `keywords`-Feld.
+    Fail-open: ist das Register nicht ladbar, greift die alte Schreibweisen-
+    Normalisierung, damit die Entwurfsproduktion nie stehen bleibt – die Wache
+    scripts/tag_governance.py --check meldet den Rest.
+    """
+    try:
+        from tag_governance import tags_fuer
+        tags = tags_fuer(keywords, pillar=pillar or "", titel=titel or "")
+        if tags:
+            return tags
+        print("    ⚠ Kein Register-Tag getroffen – bitte data/seo/tag_register.yaml prüfen")
+    except Exception as _e:                      # Fail-open: Generation laeuft weiter
+        print(f"    ⚠ Tag-Register nicht ladbar ({_e}) – Legacy-Normalisierung greift")
+    return normalize_tags(keywords[:4])
+
+
 def normalize_tags(keywords):
     """Korrigiert die Schreibweise von Tags (sichtbar im Footer/Tag-Seiten).
     Hugo wendet KEINEN Title-Case mehr an (titleCaseStyle=none) – die Tags
@@ -1032,7 +1058,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         f"description: {yaml_str(desc)}\n"
         f"date: {date}\n"
         f"draft: {draft_flag}\n"
-        f'tags: {json.dumps(normalize_tags(keywords[:4]), ensure_ascii=False)}\n'
+        f'tags: {json.dumps(_register_tags(keywords, topic_entry.get("pillar"), title), ensure_ascii=False)}\n'
         f'categories: ["Ratgeber"]\n'
         + (f'pillar: "{topic_entry.get("pillar")}"\n' if topic_entry.get("pillar") else "")
         + f"keywords: {json.dumps(keywords, ensure_ascii=False)}\n"

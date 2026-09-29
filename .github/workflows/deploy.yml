@@ -387,6 +387,20 @@ jobs:
       - name: FM-Gate (Frontmatter-Grenzen – selbstheilend, VOR dem Build)
         run: python3 scripts/fm_boundary_guard.py --fix
 
+      # ================= TAXONOMIE-WACHE (Index-Hygiene, 29.09.2026) =================
+      # Befund: Die Search Console meldete 237 nicht indexierte Seiten. Ursache war
+      # die Tag-Automatik der Content-Engine (`tags = keywords[:4]`): Keywords sind
+      # long-tail und pro Artikel einmalig, also entstand mit JEDEM Artikel ein
+      # neues Thin-Archiv. Nach 63 Artikeln: 217 Roh-Tags → 147 Tag-Archive, 193
+      # davon mit genau einem Artikel, dazu 147 /page/1/-Weiterleitungen.
+      # Die Wache läuft VOR dem Build, weil sie Frontmatter normalisiert
+      # (Synonym → kanonischer Tag aus data/seo/tag_register.yaml).
+      - name: Taxonomie-Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/tag_governance.py --selftest
+
+      - name: Taxonomie-Gate (Tags kanonisieren – selbstheilend, VOR dem Build)
+        run: python3 scripts/tag_governance.py --apply
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
@@ -394,6 +408,31 @@ jobs:
 
       - name: Build (für Publish-Gate + Publish)
         run: hugo --minify
+
+      # ================= INDEX-HYGIENE (Crawl-Fläche, 29.09.2026) =================
+      # Die bestehenden Wachen prüfen jede Seite EINZELN und korrekt
+      # (schema_seo_gate S6: „Archive tragen noindex" war die ganze Zeit grün).
+      # Niemand prüfte die MENGE der gebauten URLs – genau dort lag der Defekt.
+      # Diese Wache misst die Crawl-Fläche des fertigen Builds gegen ein Budget:
+      # /page/1/-Aliase, Tag-Archive, Kategorie-Archive, Sitemap-Deckung und das
+      # Verhältnis indexierbar : nicht indexierbar. Läuft NACH dem Build, weil
+      # sie public/ auswertet. Blockiert bewusst NICHT das Deployment – ein
+      # Crawl-Budget-Fund ist dringend, aber kein Grund, eine fertige Site
+      # zurückzuhalten. Er landet als Warnung im Log und in der Zusammenfassung.
+      - name: Index-Hygiene-Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/index_hygiene_gate.py --selftest
+
+      - name: Index-Hygiene-Gate (Crawl-Fläche gegen Budget)
+        run: |
+          python3 scripts/index_hygiene_gate.py | tee indexhygiene.log || {
+            echo "::warning title=Index-Hygiene::Crawl-Fläche über Budget – siehe Log und INDEX-HYGIENE-PREMIUM-2026-09-29.md"
+          }
+          {
+            echo "### Index-Hygiene (Crawl-Fläche)"
+            echo '```'
+            sed -n '1,20p' indexhygiene.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # ================= SPAM-WACHE (Google + Pinterest, 26.08.2026) =================
       # Dauerauftrag: Blog, RSS-Feed (/index.xml = Quelle des Pinterest-

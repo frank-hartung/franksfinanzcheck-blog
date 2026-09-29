@@ -4,7 +4,7 @@ title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
 description: "DSL-Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €."
 date: 2026-08-19T08:35:12Z
 draft: false
-tags: ["DSL-Vergleich", "Internettarif wechseln", "Günstiges Internet", "Breitband Vergleich"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

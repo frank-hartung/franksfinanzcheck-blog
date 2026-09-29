@@ -4,7 +4,7 @@ description: Erfahre, wie du mit Interrail und cleverer Bahncard‑Nutzung deine
 date: 2026-09-29T15:15:07Z
 draft: true
 reserve: true
-tags: ["Interrail", "Bahncard sparen", "Zugreise Europa günstig", "Interrail + Bahncard"]
+tags: ["Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"

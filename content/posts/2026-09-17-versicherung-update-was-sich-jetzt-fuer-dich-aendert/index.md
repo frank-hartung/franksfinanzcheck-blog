@@ -4,7 +4,7 @@ title: "Versicherung-Update: Was sich jetzt für dich ändert"
 description: "Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten."
 date: 2026-09-25T08:00:00Z
 draft: true
-tags: ["Versicherung-Update", "Beitragserhöhung", "Kfz-Versicherung", "Versicherungen prüfen"]
+tags: ["Versicherungen vergleichen", "Kfz-Versicherung"]
 categories: ["News"]
 pillar: "versicherungen"
 keywords: ["Versicherung-Update: Was sich jetzt für dich ändert", "Versicherung-Update", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]

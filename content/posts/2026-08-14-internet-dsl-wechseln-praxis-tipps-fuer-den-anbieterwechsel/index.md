@@ -4,7 +4,7 @@ title: "Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet"
 description: "So wechselst du Internet und DSL ohne Stress: Effektivpreis sauber rechnen, Ausfallzeiten vermeiden und Bonus, Router sowie Laufzeit richtig prüfen."
 date: 2026-08-14T08:35:12Z
 draft: false
-tags: ["DSL wechseln", "Internetvertrag kündigen", "Breitband Vergleich", "GigaSpeed Tarife", "Routerfreiheit"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

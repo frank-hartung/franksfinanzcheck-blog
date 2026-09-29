@@ -4,7 +4,7 @@ title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
 description: "Wie du Wechselbonus, Startguthaben und Effektivpreis richtig rechnest, damit dein neuer DSL-Tarif nicht nur günstig aussieht, sondern es auch wirklich ist."
 date: 2026-08-10T10:20:09Z
 draft: false
-tags: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

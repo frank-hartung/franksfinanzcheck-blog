@@ -4,7 +4,7 @@ title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und…"
 date: 2026-08-31T13:47:31Z
 draft: false
-tags: ["Wohngebäudeversicherung", "Elementarschadenversicherung", "Gebäudeversicherung Vergleich", "Hausratversicherung", "Immobilien absichern"]
+tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

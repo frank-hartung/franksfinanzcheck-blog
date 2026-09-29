@@ -5,7 +5,7 @@ description: "Mietwagen-Schnäppchen im September: Bis zu 270 € sparen mit dem
 date: 2026-09-02T06:34:48Z
 lastmod: 2026-09-21
 draft: false
-tags: ["September Roadtrip", "Mietwagen-Schnäppchen", "Mietwagen Tagespreis", "Günstig Auto mieten"]
+tags: ["Reisekosten sparen", "Mietwagen und Wohnmobil"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"

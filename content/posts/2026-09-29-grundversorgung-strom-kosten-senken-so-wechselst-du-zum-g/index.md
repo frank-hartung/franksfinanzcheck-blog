@@ -4,7 +4,7 @@ description: "Grundversorgung Strom Kosten: Verstehe die Grundversorgung Strom
 date: 2026-09-29T15:11:48Z
 draft: true
 reserve: true
-tags: ["Grundversorgung Strom Kosten", "Aus Grundversorgung wechseln", "Grundtarif Strom zu teuer", "Grundversorgung Strom Kosten senken –"]
+tags: ["Stromkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

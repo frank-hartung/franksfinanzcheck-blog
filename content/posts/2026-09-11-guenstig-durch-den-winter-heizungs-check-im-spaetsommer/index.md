@@ -4,8 +4,8 @@ title: "Günstig durch den Winter: Heizungs-Check im Spätsommer"
 description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung sicher – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
 date: 2026-09-11T08:45:00Z
 draft: false
-tags: ["Heizkosten senken", "Heizungscheck", "Energie sparen", "Winter vorbereiten", "Nebenkosten"]
-categories: ["Energie"]
+tags: ["Heizkosten senken", "Stromkosten senken"]
+categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Mein Heizungs-Check beginnt mit Beobachten und Dokumentieren. Ich ändere nie mehrere Anlagenwerte gleichzeitig – sonst weiß ich hinterher weder, was geholfen hat, noch wie ich sicher zurückstelle."

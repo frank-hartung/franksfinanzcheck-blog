@@ -4,7 +4,7 @@ title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
 draft: false
-tags: ["Preisgarantie Gas", "Gastarif 2026", "Gaspreisvergleich", "Heizkosten senken", "Energiekrise Vorsorge"]
+tags: ["Gastarif wechseln", "Heizkosten senken", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

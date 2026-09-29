@@ -4,7 +4,7 @@ title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
 description: "Gebühren, Gratis-Kriterien und Kartenkosten ändern sich laufend. So prüfst du dein Girokonto, vermeidest stille Mehrkosten und vergleichst klug."
 date: 2026-09-22T09:23:53Z
 draft: true
-tags: ["Konto & Karten-Update", "Girokonto", "Kreditkarte", "Kontogebühren"]
+tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["News"]
 pillar: "konto-karten"
 keywords: ["Konto & Karten-Update: Was sich jetzt für dich ändert", "Konto & Karten-Update", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]

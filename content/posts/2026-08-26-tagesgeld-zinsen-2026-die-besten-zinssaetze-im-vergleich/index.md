@@ -4,7 +4,7 @@ description: "Tagesgeld-Zinsen 2026 im Vergleich: Höchste Zinsen finden, Einlag
 date: 2026-09-09T14:46:26Z
 lastmod: 2026-09-28
 draft: false
-tags: ["Tagesgeld", "Tagesgeldkonto", "Tagesgeldzinsen", "Zinsen vergleichen", "Geld sicher anlegen", "Notgroschen"]
+tags: ["Tagesgeld und Zinsen", "Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

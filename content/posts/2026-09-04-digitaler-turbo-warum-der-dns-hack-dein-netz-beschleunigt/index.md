@@ -4,7 +4,7 @@ title: "Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt"
 description: "Dns hack: Erfahre, wie der DNS-Hack deine Ladezeiten minimiert und die DNS Privatsphäre stärkt. Optimiere dein System für schnelleres WLAN und mehr Sicherheit."
 date: 2026-09-16T08:58:26Z
 draft: false
-tags: ["DNS Hack", "DNS Privatsphäre", "Schnelleres WLAN", "Internet Tipps und Tricks"]
+tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"

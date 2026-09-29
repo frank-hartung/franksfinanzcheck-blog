@@ -4,7 +4,7 @@ title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute Pflicht sind und was guter Schutz für Singles und Familien kostet."
 date: 2026-08-17T08:35:12Z
 draft: false
-tags: ["Privathaftpflicht", "Haftpflichtversicherung", "Versicherungsvergleich", "Existenzschutz"]
+tags: ["Haftpflichtversicherung", "Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

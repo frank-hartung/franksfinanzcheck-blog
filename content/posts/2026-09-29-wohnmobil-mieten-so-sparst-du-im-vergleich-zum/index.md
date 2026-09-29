@@ -4,7 +4,7 @@ description: Erfahre, wann Wohnmobil mieten günstiger ist als kaufen – klarer
 date: 2026-09-29T15:02:09Z
 draft: true
 reserve: true
-tags: ["Wohnmobil mieten", "Wohnmobil kaufen oder mieten", "Camper Vergleich", "Wohnmobil"]
+tags: ["Mietwagen und Wohnmobil"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"

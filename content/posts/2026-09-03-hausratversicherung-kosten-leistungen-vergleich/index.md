@@ -5,7 +5,7 @@ date: 2026-09-04T21:17:05Z
 lastmod: 2026-09-03
 draft: false
 reserve_published: 2026-09-04
-tags: ["Hausratversicherung", "Hausrat Vergleich", "Versicherungen sparen", "Wohnung absichern"]
+tags: ["Hausratversicherung", "Versicherungen vergleichen"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

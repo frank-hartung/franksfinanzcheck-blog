@@ -221,6 +221,44 @@ E2E. **Ohne `--fix`** – die Kennzeichnung erzeugt das Template, ein Befund ist
 ein Layout-/Registerdefekt für einen Menschen (C15). Runbuch:
 `docs/ANLEITUNG-OFFENLEGUNG.md`.
 
+## Tags kommen aus dem Register, nie aus Keywords (Wache seit 29.09.2026)
+
+Die Search Console meldete 237 nicht indexierte Seiten. Ursache war nicht der
+Content, sondern die Taxonomie-Automatik: beide Generatoren setzten
+`tags = keywords[:4]`. Keywords sind long-tail und pro Artikel einmalig – jeder
+Artikel prägte damit **vier neue Tags = acht nutzlose URLs** (Archiv +
+`/page/1/`-Alias). Nach 63 Artikeln: 217 Roh-Tags, 147 Archive, 193 davon mit
+genau einem Artikel, insgesamt 347 nicht indexierbare URLs auf 58 echte Seiten.
+
+**Eine Quelle:** `data/seo/tag_register.yaml` – 25 kanonische Tags, jeder einem
+Pillar zugeordnet, mit vollständiger Synonymliste. `tag_governance.tags_fuer()`
+ist die **einzige** erlaubte Tag-Quelle für neuen Content (nutzen
+`engine_generate.py` und `generate_drafts.py`). Ein Tag wird **nie erfunden**:
+greift nichts, entscheidet die Redaktion über einen Registereintrag – oder der
+Begriff bleibt ein Keyword. Keywords gehören ins `keywords`-Feld, wo sie Schema
+und Related-Matching speisen, **ohne je eine URL zu bauen**.
+
+**Zwei Wachen, zwei Ebenen:**
+`python3 scripts/tag_governance.py` (T1–T8, **mit** `--apply`) prüft das
+Frontmatter: unbekannte Tags, Synonyme statt kanonischer Namen, Thin-Archive
+(< 2 Artikel), Tag-Menge, Sonderzeichen (U+202F/U+00A0 erzeugen kaputte Slugs),
+Kategorie, tote Registerzeilen.
+`python3 scripts/index_hygiene_gate.py` (H1–H8, **ohne** `--fix`) misst die
+**Crawl-Fläche des Builds** gegen ein Budget: Sitemap-Deckung,
+`/page/1/`-Aliase, Tag-Budget (max. 35), Kategorie-Archive, Verhältnis
+indexierbar : nicht indexierbar (max. 2,0 : 1), kaputte Slugs, Waisenseiten,
+`noindex` in der Sitemap.
+
+**Merke:** `schema_seo_gate.py` S6 war die ganze Zeit grün – es fragt „trägt
+dieses Archiv ein noindex?“, nicht „darf es dieses Archiv geben?“. Eine Seite
+kann einzeln korrekt und in der Menge trotzdem ein Defekt sein. Deshalb misst
+`index_hygiene_gate.py` Anzahlen, nicht Attribute.
+
+**Nicht anfassen:** `[pagination] disableAliases = true` und der
+`[taxonomies]`-Block ohne `category` in `hugo.toml` – beide sind dokumentierte
+Index-Hygiene-Entscheidungen, keine Altlast. Bericht:
+`INDEX-HYGIENE-PREMIUM-2026-09-29.md`.
+
 ## Maschinen-Artefakte niemals mergen (seit 22.09.2026, Issue #346)
 
 `data/integrity_lock.json` ist ein **Siegel**, kein Quelltext: SHA-256-Map,

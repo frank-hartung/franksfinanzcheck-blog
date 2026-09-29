@@ -4,7 +4,7 @@ title: "5 einfache Frugalismus-Tricks für den Alltag"
 description: "Frugalismus im Alltag ohne Verzichtsdrama: Diese 5 einfachen Tricks helfen dir, Ausgaben klarer zu steuern und Monat für Monat spürbar Geld zu sparen."
 date: 2026-09-23T09:24:25Z
 draft: true
-tags: ["Frugalismus", "Alltag sparen", "Bewusster Konsum", "Geld sparen"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben", "5 einfache Frugalismus Tricks für den Alltag"]

@@ -1,0 +1,374 @@
+# =====================================================================
+#  KANONISCHES TAG-REGISTER  ·  Indexierungs-Hygiene der Taxonomie
+#  Angelegt 29.09.2026 (Befund: 237 nicht indexierte Seiten in der GSC)
+# ---------------------------------------------------------------------
+#  WARUM ES DIESES REGISTER GIBT
+#  scripts/engine_generate.py hat die Tags eines Artikels blind aus
+#  seinen SEO-Keywords abgeleitet (`tags = kws[:4]`). Keywords sind aber
+#  per Definition long-tail und pro Artikel einmalig – jeder neue Artikel
+#  hat damit ~4 brandneue Tags erzeugt. Ergebnis nach 63 Artikeln:
+#    217 Roh-Tags → 147 Tag-Archive, 193 davon mit genau EINEM Artikel,
+#    dazu 147 zusätzliche /page/1/-Alias-Weiterleitungen.
+#  Das sind ~294 URLs ohne eigenen Suchwert, die Google crawlt, als
+#  „nicht indexiert" meldet und die Crawl-Budget von den 58 echten
+#  Money-Pages abziehen.
+#
+#  DIE REGEL AB JETZT
+#  Tags sind ein KURATIERTES Navigationsraster, kein Keyword-Abfallprodukt.
+#  Ein Artikel darf nur Tags tragen, die hier stehen. Neue Tags entstehen
+#  durch eine redaktionelle Entscheidung (Eintrag hier), nicht durch einen
+#  Generator.
+#
+#  ROLLENVERTEILUNG IM SEITENBAUM (bewusst, nicht historisch gewachsen):
+#    Pillar-Seiten  = die sechs indexierbaren Themen-Hubs (ranken sollen)
+#    Tag-Archive    = interne Verlinkung + Crawl-Pfade, bleiben `noindex,
+#                     follow` (head.html, Wache schema_seo_gate.py S6)
+#  Die Archive werden also NICHT indexierbar gemacht – sie werden auf ein
+#  Maß reduziert, das ein Crawler in einem Durchgang verkraftet.
+#
+#  PFLEGE
+#    python3 scripts/tag_governance.py --report   Bestand ansehen
+#    python3 scripts/tag_governance.py --check    Wache (CI, Exit 1 = Fund)
+#    python3 scripts/tag_governance.py --apply    Frontmatter normalisieren
+#  Ein neuer Tag braucht: name, pillar, mindestens `min_artikel_pro_tag`
+#  Artikel – sonst hängt er als Thin-Archiv im Index-Report.
+# =====================================================================
+
+politik:
+  # Wie viele Tags darf ein Artikel tragen? Mehr Tags = mehr Archive.
+  max_tags_pro_artikel: 4
+  # Ab wie vielen Artikeln trägt ein Tag-Archiv seinen Crawl-Aufwand?
+  # Darunter ist es ein Thin-Archiv und gehört in einen breiteren Tag.
+  min_artikel_pro_tag: 2
+  # Tag-Namen sind Navigationslabels, keine Überschriften. Alles, was
+  # länger ist, war in der Praxis ein versehentlich kopierter Artikeltitel.
+  max_tag_laenge: 32
+  # Zeichen, die in einem Tag-Namen nie vorkommen dürfen: sie erzeugen
+  # entweder kaputte Slugs (U+202F/U+00A0 → %E2%80%AF in der URL) oder
+  # verraten einen kopierten Titel (Doppelpunkt, Gedankenstrich, Ausrufezeichen).
+  verbotene_zeichen: [":", "–", "—", "!", "?", "\u202f", "\u00a0", "\u2009"]
+  # Kategorien sind die grobe Publikationsart – nicht das Thema.
+  erlaubte_kategorien: ["Ratgeber", "News"]
+  # Tag-Archive bleiben aus dem Index (siehe Rollenverteilung oben).
+  archiv_indexierung: "noindex, follow"
+
+tags:
+  # ------------------------------------------------------------------
+  # PILLAR: strom-sparen
+  # ------------------------------------------------------------------
+  - name: "Heizkosten senken"
+    pillar: strom-sparen
+    synonyme:
+      - "Heizkosten sparen"
+      - "Heizung entlüften"
+      - "Heizung prüfen"
+      - "Heizung sparen Tipps"
+      - "Heizungscheck"
+      - "Heizsaison vorbereiten"
+      - "Heizkostenabrechnung"
+      - "Sicher heizen"
+      - "Winter vorbereiten"
+      - "Winter Vorbereitung Wohnung"
+      - "Herbst Vorbereitung"
+      - "Sparen im Herbst"
+
+  - name: "Gastarif wechseln"
+    pillar: strom-sparen
+    synonyme:
+      - "Gastarif 2026"
+      - "Gastarif Winter"
+      - "Gaspreisvergleich"
+      - "Gaspreiserhöhung"
+      - "Gaspreisgarantie"
+      - "Preisgarantie Gas"
+      - "Aus Grundversorgung wechseln"
+
+  - name: "Gasrechnung prüfen"
+    pillar: strom-sparen
+    synonyme:
+      - "Gasrechnung senken"
+      - "Gas Abschlag anpassen"
+      - "Gas Abschlag senken"
+      - "Gasabschlag berechnen"
+      - "Nachzahlung vermeiden"
+      - "Zählerstand"
+
+  - name: "Stromkosten senken"
+    pillar: strom-sparen
+    synonyme:
+      - "Strom sparen im Haushalt"
+      - "Stromfresser finden"
+      - "Stromfresser entlarven"
+      - "Energiediebe stoppen"
+      - "Energie sparen"
+      - "Energie"
+      - "Energiekrise Vorsorge"
+      - "Standby Kosten"
+      - "Geräte abschalten sparen"
+      - "Dauerverbraucher"
+      - "Nebenkosten"
+      - "Grundversorgung Strom Kosten"
+      - "Grundversorgung Strom Kosten senken –"
+      - "Grundtarif Strom zu teuer"
+      - "Stromspeicher kaufen"
+      - "Stromspeicher kaufen 2026 – Lohnt sich die Investition"
+      - "Batteriespeicher Solar"
+      - "Photovoltaik Speicher"
+      - "Energie-Update: was sich jetzt für dich ändert"
+
+  # ------------------------------------------------------------------
+  # PILLAR: versicherungen
+  # ------------------------------------------------------------------
+  - name: "Hausratversicherung"
+    pillar: versicherungen
+    synonyme:
+      - "Hausrat Vergleich"
+      - "Elementarschadenversicherung"
+      - "Wohnung absichern"
+
+  - name: "Wohngebäudeversicherung"
+    pillar: versicherungen
+    synonyme:
+      - "Gebäudeversicherung Vergleich"
+      - "Hausversicherung"
+      - "Immobilien absichern"
+      - "Dein Haus sicher schützen"
+
+  - name: "Kfz-Versicherung"
+    pillar: versicherungen
+    synonyme:
+      - "Kfz-Versicherung wechseln"
+      - "Kfz Versicherung Vergleich"
+      - "Kfz Versicherung wechseln"
+      - "Kfz Haftpflicht"
+      - "Autoversicherung Vergleich"
+      - "Schadenfreiheitsklasse"
+      - "Vollkasko ohne Selbstbeteiligung"
+
+  - name: "Haftpflichtversicherung"
+    pillar: versicherungen
+    synonyme:
+      - "Privathaftpflicht"
+      - "Rechtsschutzversicherung"
+      - "Rechtsschutz Leistungen"
+      - "Rechtsstreit versichern"
+
+  - name: "Gesundheit und Vorsorge"
+    pillar: versicherungen
+    synonyme:
+      - "Zahnzusatzversicherung"
+      - "Zahnzusatzversicherung Vergleich"
+      - "Zahnversicherung"
+      - "Zahnersatz Kosten"
+      - "Unfallversicherung"
+      - "Unfallversicherung Vergleich"
+      - "Private Unfallversicherung"
+      - "Invalidität absichern"
+      - "Existenzschutz"
+      - "Reiseversicherungen"
+      - "Reiseversicherungen im Check"
+      - "Reise-Schutz"
+      - "Tierkrankenversicherung"
+      - "Hund versichern"
+      - "Katze versichern"
+      - "Tierarztkosten"
+      - "Haustierkosten"
+
+  - name: "Versicherungen vergleichen"
+    pillar: versicherungen
+    synonyme:
+      - "Versicherungsvergleich"
+      - "Versicherungen prüfen"
+      - "Versicherungen sparen"
+      - "Versicherungsarten"
+      - "Versicherung-Update"
+      - "Beitragserhöhung"
+      - "Wirklich"
+
+  # ------------------------------------------------------------------
+  # PILLAR: internet-dsl
+  # ------------------------------------------------------------------
+  - name: "DSL-Vergleich"
+    pillar: internet-dsl
+    synonyme:
+      - "DSL wechseln"
+      - "DSL Tarif finden"
+      - "DSL-Wechselbonus"
+      - "DSL-Wechselbonus sichern"
+      - "Breitband Vergleich"
+      - "Günstiges Internet"
+      - "Glasfaser vs DSL"
+      - "Kabel Internet"
+      - "Internet Bandbreite"
+      - "Bandbreite"
+      - "GigaSpeed Tarife"
+      - "Internet & DSL-Update"
+
+  # Name ohne Ergänzungsbindestrich: "Internet- und Handytarif" hätte den Slug
+  # /tags/internet--und-handytarif/ erzeugt (doppelter Bindestrich, Fund H6).
+  - name: "Internet und Mobilfunk"
+    pillar: internet-dsl
+    synonyme:
+      - "Internetvertrag"
+      - "Internet- und Handytarif"
+      - "Internetvertrag wechseln"
+      - "Internetvertrag kündigen"
+      - "Internettarif wechseln"
+      - "Routerfreiheit"
+      - "Handytarif-Vergleich"
+      - "Handytarif-vergleichen"
+      - "Handyvertrag wechseln"
+      - "Günstiger Handytarif"
+      - "Allnet Flat"
+      - "5G Tarif"
+
+  - name: "WLAN verbessern"
+    pillar: internet-dsl
+    synonyme:
+      - "WLAN-Empfang"
+      - "WLAN-Verstärker"
+      - "Schnelleres WLAN"
+      - "Mesh WLAN"
+      - "Mesh-WLAN"
+      - "Internet schneller machen"
+      - "Schnelleres Internet"
+      - "Internet Tipps und Tricks"
+
+  - name: "DNS und Netzsicherheit"
+    pillar: internet-dsl
+    synonyme:
+      - "DNS Server wechseln"
+      - "DNS Server ändern"
+      - "DNS Hack"
+      - "DNS Privatsphäre"
+      - "FRITZ!Box DNS"
+      - "Cloudflare DNS"
+      - "Internet Sicherheit"
+
+  # ------------------------------------------------------------------
+  # PILLAR: konto-karten
+  # ------------------------------------------------------------------
+  - name: "Girokonto"
+    pillar: konto-karten
+    synonyme:
+      - "Kostenloses Girokonto"
+      - "Girokonto ohne Gebühren"
+      - "Girokonto kündigen"
+      - "Konto wechseln"
+      - "Konto wechseln leicht gemacht"
+      - "Kontowechsel"
+      - "Kontowechsel Anleitung"
+      - "Kontogebühren"
+      - "Bankgebühren sparen"
+      - "C24 Bank"
+      - "Konto & Karten"
+      - "Konto & Karten-Update"
+      - "Konto & Karten-Update: was sich jetzt für dich ändert"
+
+  - name: "Kreditkarte und Kredit"
+    pillar: konto-karten
+    synonyme:
+      - "Kreditkarte"
+      - "Kreditkarte vergleichen"
+      - "Kostenlose Kreditkarte"
+      - "Kreditkarte Ausland"
+      - "Kreditkarte ohne Gebühren"
+      - "Ratenkredit"
+      - "Ratenkredit Vergleich"
+      - "Kredit Zinsen"
+      - "Umschuldung"
+
+  - name: "Tagesgeld und Zinsen"
+    pillar: konto-karten
+    synonyme:
+      - "Tagesgeld"
+      - "Tagesgeldkonto"
+      - "Tagesgeldzinsen"
+      - "Zinsen vergleichen"
+      - "Geld sicher anlegen"
+
+  - name: "Altersvorsorge"
+    pillar: konto-karten
+    synonyme:
+      - "Rente 2026"
+      - "Rentenlücke"
+      - "Sparplan"
+      - "Vermögen aufbauen"
+
+  # ------------------------------------------------------------------
+  # PILLAR: frugalismus
+  # ------------------------------------------------------------------
+  - name: "Geld sparen im Alltag"
+    pillar: frugalismus
+    synonyme:
+      - "Geld sparen"
+      - "Alltag sparen"
+      - "Spartipps"
+      - "Sparmethoden"
+      - "Sparroutinen"
+      - "Gewohnheiten"
+      - "Bewusster Konsum"
+      - "Geld Mindset"
+      - "1.000 Euro sparen"
+
+  - name: "Frugalismus"
+    pillar: frugalismus
+    synonyme:
+      - "Frugalismus-Tipps"
+      - "Frugalismus-Tricks"
+      - "5 einfache Frugalismus-Tricks für den Alltag"
+      - "Finanzielle Freiheit"
+      - "Finanzielle Freiheit erreichen"
+
+  - name: "Haushaltsbuch führen"
+    pillar: frugalismus
+    synonyme:
+      - "Haushaltsbuch"
+      - "Haushaltsbuch App"
+      - "Ausgaben tracken"
+      - "Finanzen ordnen"
+
+  - name: "Budget planen"
+    pillar: frugalismus
+    synonyme:
+      - "Budget"
+      - "Budgetplanung"
+      - "Haushaltsbudget"
+      - "50-30-20-Regel"
+      - "50 30 20 Regel"
+      - "Fixkosten senken"
+
+  - name: "Notgroschen"
+    pillar: frugalismus
+    synonyme:
+      - "Notgroschen aufbauen"
+      - "Notfallreserve"
+      - "Finanzpolster"
+      - "Finanzieller Puffer"
+      - "Finanzieller"
+
+  # ------------------------------------------------------------------
+  # PILLAR: mietwagen
+  # ------------------------------------------------------------------
+  - name: "Mietwagen und Wohnmobil"
+    pillar: mietwagen
+    synonyme:
+      - "Mietwagen buchen"
+      - "Mietwagen ohne Kaution"
+      - "Mietwagen Fallen"
+      - "Mietwagen Tagespreis"
+      - "Mietwagen-Schnäppchen"
+      - "Günstig Auto mieten"
+      - "Wohnmobil"
+      - "Wohnmobil mieten"
+      - "Wohnmobil kaufen oder mieten"
+      - "Camper Vergleich"
+
+  - name: "Reisekosten sparen"
+    pillar: mietwagen
+    synonyme:
+      - "September Roadtrip"
+      - "Interrail"
+      - "Interrail + Bahncard"
+      - "Bahncard sparen"
+      - "Zugreise Europa günstig"

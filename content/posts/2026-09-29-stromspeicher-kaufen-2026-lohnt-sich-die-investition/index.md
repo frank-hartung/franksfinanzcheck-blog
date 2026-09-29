@@ -4,7 +4,7 @@ description: "TITLE: Stromspeicher kaufen 2026 – Lohnt sich die Investition? S
 date: 2026-09-29T15:03:15Z
 draft: true
 reserve: true
-tags: ["Stromspeicher kaufen", "Batteriespeicher Solar", "Photovoltaik Speicher", "Stromspeicher kaufen 2026 – Lohnt sich die Investition"]
+tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

@@ -4,7 +4,7 @@ title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
 description: "Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll."
 date: 2026-09-24T09:24:26Z
 draft: true
-tags: ["Internet & DSL-Update", "DSL-Vergleich", "Internetvertrag", "Bandbreite"]
+tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["News"]
 pillar: "internet-dsl"
 keywords: ["Internet & DSL-Update: Was sich jetzt für dich ändert", "Internet & DSL-Update", "Internet & DSL Update", "DSL-Update", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
