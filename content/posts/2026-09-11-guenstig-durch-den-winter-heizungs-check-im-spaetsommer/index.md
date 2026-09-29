@@ -252,7 +252,7 @@ Heute genügt der Start: Fotografiere Anlagendruck und Zählerstand, notiere dre
 ### Wann ist der beste Zeitpunkt für den Heizungs-Check?
 Vor dem regelmäßigen Heizbetrieb, meist im Spätsommer oder frühen Herbst. Dann bleibt Zeit für Wartung und Reparatur.
 
-### Wann ist Entlüften überhaupt sinnvoll?
+### Wann ist entlüften überhaupt sinnvoll?
 Nur bei Anzeichen wie Gluckern oder einem oben kühl bleibenden Heizkörper. Kommt Luft wieder oder fällt der Druck mehrfach ab, dokumentierst du den Befund und holst fachliche Hilfe statt die Anlage immer wieder selbst zu befüllen.
 
 ### Welcher Anlagendruck ist richtig?

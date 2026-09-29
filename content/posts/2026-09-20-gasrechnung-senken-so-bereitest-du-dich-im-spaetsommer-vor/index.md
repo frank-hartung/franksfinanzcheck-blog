@@ -51,7 +51,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Dein Check in zehn Minuten
 
 
-Gerade wenn du deine gasrechnung prüfen willst, lohnt sich ein Check vor der Heizperiode.
+Gerade wenn du deine Gasrechnung prüfen willst, lohnt sich ein Check vor der Heizperiode.
 
 Lege Rechnung, Vertrag und ein Handy für ein Foto bereit. Schau zuerst auf den Zeitraum und auf beide Zählerstände. Dann notiere Verbrauch, Preis je kWh und festen Preis im Jahr. Diese fünf Werte zeigen dir meist schon, warum die Summe höher oder niedriger ist als im Vorjahr.
 

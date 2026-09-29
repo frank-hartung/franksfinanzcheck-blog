@@ -25,3 +25,4 @@
 {"ts": "2026-09-29T10:14:39Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-09-29T10:15:56Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"]}, "output": {"gated": ["2026-09-29-vpn-zuhause-teurer-schnickschnack-oder-pflichtkauf"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
 {"ts": "2026-09-29T10:48:27Z", "module": "secrets_age_guard", "action": "verify", "input": {"vars": ["PINTEREST_ACCESS_TOKEN"]}, "output": {"PINTEREST_ACCESS_TOKEN": "dead"}, "status": "error", "critical": true, "commit": null}
+{"ts": "2026-09-29T11:35:03Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 61}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}
