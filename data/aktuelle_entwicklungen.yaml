@@ -72,6 +72,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten wieder fallen."
+  ki_news_used: true
 
 - id: seo-qualitaet-e-e-a-t
   kategorie: seo_qualitaet
