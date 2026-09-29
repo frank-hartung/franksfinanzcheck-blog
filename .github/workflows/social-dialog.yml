@@ -141,6 +141,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           OFFEN=$(python3 -c "import yaml,sys; d=yaml.safe_load(open('data/social/dialog_state.yaml')) or {}; print(len(d.get('offen') or [])+len(d.get('chefsache') or []))" 2>/dev/null || echo 0)
+          # Governance-Vertrag C12 (Label-Garantie, #209): Label VOR der
+          # Issue-Erzeugung anlegen, sonst scheitert die Meldung mit HTTP 422.
+          gh label create social --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" \
+            --description "Social Media: automatische Meldungen" --force || true
           TITEL="💬 Dialog: Freigaben und Chefsache"
           NUM=$(gh issue list --state open --search "$TITEL in:title" --json number \
                 --jq '.[0].number' 2>/dev/null || true)
@@ -149,8 +154,7 @@ jobs:
               gh issue edit "$NUM" --body-file SOCIAL-DIALOG-STATUS.md
             else
               gh issue create --title "$TITEL" --body-file SOCIAL-DIALOG-STATUS.md \
-                --label "social" 2>/dev/null \
-                || gh issue create --title "$TITEL" --body-file SOCIAL-DIALOG-STATUS.md
+                --label "social"
             fi
           elif [ -n "$NUM" ]; then
             gh issue close "$NUM" --comment "Alles abgearbeitet – nichts wartet mehr."
