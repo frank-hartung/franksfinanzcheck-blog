@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Bankgebühren", "Reduzieren", "Konto", "Bankgebühren reduzieren", "Monatlich"]
+keywords: ["Bankgebühren", "Reduzieren", "Bankgebühren reduzieren"]
 pin_title: "Bankgebühren reduzieren: So sparst du monatlich bares Geld"
 pin_description: "*Werbung | Willst du deine Bankgebühren reduzieren? Ich zeige dir, wie du dein Konto optimierst, unnötige Kosten vermeidest und jährlich dreistellige Summen sparst. Mehr Spartipps auf FranksFinanzcheck! #bankgebuehren #reduzieren #konto"
 ai_generated: true

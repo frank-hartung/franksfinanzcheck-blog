@@ -1,5 +1,5 @@
 ---
-title: "Stromanbieter Pleite: So bleibt dein Licht trotzdem an"
+title: "Stromanbieter Pleite: So bleibt dein Licht trotzdem"
 description: "Dein Stromversorger ist zahlungsunfähig? Keine Panik. Erfahre hier, wie dich die Grundversorgung Strom schützt und was du bei einer Stromanbieter Pleite tu."
 date: 2026-09-29T10:10:52Z
 draft: true
@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Stromanbieter Pleite", "Grundversorgung Strom", "Anbieterinsolvenz", "Stromanbieter", "Trotzdem"]
+keywords: ["Stromanbieter Pleite", "Grundversorgung Strom", "Anbieterinsolvenz", "Stromanbieter"]
 pin_title: "Stromanbieter Pleite: So bleibt dein Licht trotzdem an"
 pin_description: "*Werbung | Dein Stromversorger ist zahlungsunfähig? Keine Panik. Erfahre hier, wie dich die Grundversorgung Strom schützt und was du bei einer Stromanbieter Pleite tu Mehr Spartipps auf FranksFinanzcheck! #stromanbieterpleite #grundversorgungstrom #anbieterinsolvenz"
 ai_generated: true

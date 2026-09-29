@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Online-Konten", "Vorteile", "Nutzen", "Gebühren"]
+keywords: ["Online-Konten", "Online Konten", "Geld sparen"]
 pin_title: "Online-Konten: So sparst du Gebühren und Zeit im Alltag"
 pin_description: "*Werbung | Erfahre, welche Vorteile Online-Konten bieten und wie du sie effektiv nutzen kannst. Frank Hartung zeigt dir, worauf es beim digitalen Konto ankommt. Mehr Spartipps auf FranksFinanzcheck! #onlinekonten #vorteile #nutzen"
 ai_generated: true

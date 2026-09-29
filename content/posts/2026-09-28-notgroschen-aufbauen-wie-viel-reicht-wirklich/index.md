@@ -1,13 +1,13 @@
 ---
 lastmod: 2026-09-28
-title: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan für den Start"
+title: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan"
 description: "Notgroschen aufbauen, auch mit kleiner Sparrate: Ein realistischer 12-Monats-Plan für die ersten 1.000 € – mit Monatszielen, Dauerauftrag und klaren Regeln."
 date: 2026-09-28T11:05:52Z
 draft: true
 tags: ["Notgroschen aufbauen", "1.000 Euro sparen", "Notfallreserve", "Sparplan"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Notgroschen aufbauen", "1000 Euro Notgroschen", "Notfallreserve aufbauen", "Sparplan Notgroschen"]
+keywords: ["Notgroschen aufbauen", "1000 Euro Notgroschen", "Notfallreserve aufbauen", "Sparplan Notgroschen", "1.000 € Notgroschen aufbauen", "Notgroschen", "12-Monats-Plan"]
 author: "Frank Hartung"
 erfahrung: "Für Rücklagen setze ich auf ein separates Konto und einen Dauerauftrag direkt nach dem Gehalt. Erst eine überschaubare erste Stufe, dann der Ausbau auf den persönlichen Zielbetrag – so bleibt der Plan auch in teuren Monaten durchhaltbar."
 ai_generated: true
@@ -28,6 +28,8 @@ cover:
   image: "images/covers/2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich.jpg"
   alt: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan für den Start"
   caption: "Tipp von FranksFinanzcheck"
+pin_title: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan"
+pin_description: "*Werbung | Notgroschen aufbauen, auch mit kleiner Sparrate: Ein realistischer 12-Monats-Plan für die ersten 1.000 € – mit Monatszielen, Dauerauftrag und klaren Regeln. Mehr Spartipps auf FranksFinanzcheck! #notgroschenaufbauen #1000euronotgroschen #notfallreserveaufbauen"
 ---
 
 Eine kaputte Waschmaschine, ein unerwarteter Zahnarzt-Eigenanteil oder eine Autoreparatur sind selten gut getimt. Ohne Reserve landet die Rechnung schnell auf der Kreditkarte oder im Dispo. Das ist genau der Moment, für den ein Notgroschen da ist.

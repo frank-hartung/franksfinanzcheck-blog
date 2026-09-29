@@ -1,5 +1,5 @@
 ---
-title: "Frugalismus Familie: So sparst du mit Kindern im Alltag"
+title: "Frugalismus Familie: So sparst du mit Kindern im Alltag"
 description: "Frugalismus Familie: Mit Frugalismus Familie das Familienbudget entlasten – praxisnahe Tipps, typische Fehler und ein klarer Sparplan für Eltern."
 date: 2026-09-29T10:04:26Z
 draft: true
@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen"]
+keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Frugalismus Familie: So sparst du mit Kindern im Alltag"
 pin_description: "*Werbung | Frugalismus Familie: Mit Frugalismus Familie das Familienbudget entlasten – praxisnahe Tipps, typische Fehler und ein klarer Sparplan für Eltern. Mehr Spartipps auf FranksFinanzcheck! #frugalismusfamilie #sparenmitkindern #familienbudget"
 ai_generated: true

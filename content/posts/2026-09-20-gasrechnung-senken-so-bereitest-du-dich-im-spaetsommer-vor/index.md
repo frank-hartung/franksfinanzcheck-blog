@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Gasrechnung prüfen: Fehler finden und Nachzahlungen vermeiden"
+title: "Gasrechnung prüfen: Fehler finden und Nachzahlungen"
 description: "Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter."
 date: 2026-09-25T12:15:37Z
 draft: false
@@ -10,7 +10,7 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich prüfe Gasrechnungen zeilenweise: Abrechnungszeitraum, Zählerstände, Verbrauch, Preise und Abschläge. Erst danach entscheide ich, ob Tarif, Verbrauch oder Rechnung das Problem ist."
-keywords: ["Gasrechnung prüfen", "Gasrechnung Fehler", "Nachzahlung vermeiden", "Zählerstand kontrollieren", "Heizkostenabrechnung prüfen"]
+keywords: ["Gasrechnung prüfen", "Gasrechnung Fehler", "Nachzahlung vermeiden", "Zählerstand kontrollieren", "Heizkostenabrechnung prüfen", "Nachzahlungen", "Gaspreisgarantie"]
 pin_title: "Gasrechnung prüfen: So vermeidest du die nächste Überraschung"
 pin_description: "*Werbung | Gasrechnung prüfen und Nachzahlungen vermeiden: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #nachzahlung #zählerstand"
 ai_generated: false
