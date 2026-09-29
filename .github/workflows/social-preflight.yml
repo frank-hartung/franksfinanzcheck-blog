@@ -1,0 +1,147 @@
+# ============================================================
+#  SOCIAL-PREFLIGHT – Verifikations-Lauf für Kanal-Zugänge
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 29.09.2026): Wenn ein neues Secret hinterlegt wird,
+#  muss auf Knopfdruck beweisbar sein, ob der Kanal WIRKLICH sendet –
+#  ohne dass dafür etwas veröffentlicht wird.
+#
+#  WAS DER LAUF TUT (scripts/social_preflight.py):
+#    Je aktivem Kanal ein NUR-LESENDER „Wer bin ich?"-Aufruf gegen die
+#    echte API (verify_credentials / users/me / getMe / …). Ergebnis:
+#      ✅ ok       Zugang verifiziert – der Autopilot sendet hier
+#      ⚪ standby  Secret fehlt (KEIN Fehler, kein Alarm)
+#      ❌ befund   Zugangsdaten da, aber die API weist sie ab
+#      ❓ offen    Netz-/Anbieterstörung – kein Zugangsproblem
+#
+#  ES WIRD NICHTS GEPOSTET und nichts committet. Der Bericht landet in
+#  der Job-Zusammenfassung (Cockpit ist ein Lauf-Artefakt, .gitignore).
+#
+#  TAKTUNG: montags 06:10 MESZ als Frühwarnung (LinkedIn-, Threads- und
+#  Instagram-Token verfallen nach ~60 Tagen) – plus jederzeit manuell.
+#
+#  Manuell: Actions → „Social-Preflight" → Run workflow
+#  Runbuch: docs/RUNBUCH-SOCIAL-SECRETS.md
+# ============================================================
+name: Social-Preflight (Zugangs-Verifikation)
+
+on:
+  schedule:
+    # Montags 06:10 MESZ (= 04:10 UTC) – vor der Arbeitswoche.
+    - cron: "10 4 * * 1"
+  workflow_dispatch:
+    inputs:
+      kanal:
+        description: "Nur diesen Kanal prüfen (leer = alle), z. B. bluesky"
+        required: false
+        default: ""
+      strict:
+        description: "Lauf rot färben, wenn ein konfigurierter Kanal nicht trägt"
+        required: false
+        default: false
+        type: boolean
+
+# Nur lesen – dieser Workflow schreibt bewusst nichts ins Repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: social-preflight
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+
+      # Fail-closed: Eine blinde Wache darf keinen grünen Haken setzen.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/social_preflight.py --selftest
+
+      - name: Zugänge verifizieren (nur lesend)
+        id: pruefung
+        env:
+          # --- Mastodon -----------------------------------------------------
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          # --- Bluesky ------------------------------------------------------
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLUESKY_PDS: ${{ vars.BLUESKY_PDS }}
+          # --- LinkedIn -----------------------------------------------------
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ vars.LINKEDIN_PERSON_URN }}
+          LINKEDIN_ORG_URN: ${{ vars.LINKEDIN_ORG_URN }}
+          # --- X (Twitter) --------------------------------------------------
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          # --- Threads ------------------------------------------------------
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ vars.THREADS_USER_ID }}
+          # --- Facebook -----------------------------------------------------
+          FACEBOOK_PAGE_TOKEN: ${{ secrets.FACEBOOK_PAGE_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ vars.FACEBOOK_PAGE_ID }}
+          # --- Instagram ----------------------------------------------------
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          # --- Pinterest (Token über den Broker) ----------------------------
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+          # --- Telegram -----------------------------------------------------
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
+          # --- Reddit -------------------------------------------------------
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_SUBREDDIT: ${{ vars.REDDIT_SUBREDDIT }}
+        run: |
+          set -o pipefail
+          ARGS=""
+          if [ -n "${{ github.event.inputs.kanal }}" ]; then
+            ARGS="$ARGS --kanal ${{ github.event.inputs.kanal }}"
+          fi
+          if [ "${{ github.event.inputs.strict }}" = "true" ]; then
+            ARGS="$ARGS --strict"
+          fi
+          echo "Aufruf: python3 scripts/social_preflight.py $ARGS"
+          python3 scripts/social_preflight.py $ARGS
+
+      - name: Bericht in die Job-Zusammenfassung schreiben
+        if: always()
+        run: |
+          if [ -f SOCIAL-PREFLIGHT-STATUS.md ]; then
+            cat SOCIAL-PREFLIGHT-STATUS.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Kein Bericht erzeugt (Einzelkanal-Lauf oder Abbruch)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # Betriebsruhe: Der Preflight ändert NICHTS im Repository. Falls ein
+      # Lauf doch eine Datei hinterlässt, fällt das hier auf statt still
+      # im nächsten Autopilot-Commit mitzufahren.
+      - name: Sicherstellen, dass nichts verändert wurde
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::warning::Preflight hat Dateien verändert – das sollte nicht passieren:"
+            git status --porcelain
+          else
+            echo "✅ Arbeitsverzeichnis unverändert – reiner Lesevorgang bestätigt."
+          fi

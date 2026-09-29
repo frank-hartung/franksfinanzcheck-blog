@@ -1,0 +1,152 @@
+# ============================================================
+#  SHORTS-SCHMIEDE – vertikale Kurzvideos aus Artikeln
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 29.09.2026): Aus jedem Artikel entsteht ohne
+#  manuellen Schnitt ein 9:16-Video für YouTube Shorts und Reels.
+#
+#  WAS DER LAUF TUT (scripts/social_video.py):
+#    1 wählt einen jungen Artikel ohne Video
+#    2 baut das Drehbuch (Hook · 3 Punkte · Abbinder) aus Artikel-Material
+#    3 prüft hart: Zahlen belegt, keine Versprechen, Pflichthinweis da
+#    4 spricht den Text über die Vorlese-Kette des Blogs (edge-tts/Piper)
+#    5 rendert mit ffmpeg: Ken-Burns, eingebrannte Untertitel, Marke
+#    6 lädt das Ergebnis als YouTube Short hoch (wenn der Zugang steht)
+#
+#  TAKTUNG: Di + Sa 07:20 MESZ – zwischen den Artikel-Tagen (Mo/Mi/Fr),
+#  damit sich Blog- und Videoproduktion nicht im Runner drängeln.
+#
+#  WICHTIG: ffmpeg wird per apt installiert. Die pip-Variante
+#  (imageio-ffmpeg) reicht NICHT – sie kann kein `drawtext` und damit
+#  keine Untertitel. Untertitel sind hier nicht optional: rund 80 % der
+#  Shorts laufen ohne Ton.
+#
+#  Videos sind Lauf-Artefakte: .cache/social-video/ ist nicht versioniert
+#  (.gitignore: *.mp4). Was bleibt, ist der Upload und der Zustand.
+#
+#  KOSTEN: 0 € – ffmpeg, edge-tts/Piper, YouTube Data API (Gratis-Kontingent).
+#  Regie: data/social/video.yaml · Anleitung: docs/ANLEITUNG-SHORTS-SCHMIEDE.md
+# ============================================================
+name: Shorts-Schmiede (Video & Reels)
+
+on:
+  schedule:
+    - cron: "20 5 * * 2,6"    # Di + Sa, 07:20 MESZ
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Was soll der Lauf tun?"
+        required: true
+        default: "bauen"
+        type: choice
+        options:
+          - plan              # nur zeigen, was dran wäre
+          - drehbuch          # Drehbuchtexte ausgeben, nichts bauen
+          - bauen             # Video(s) rendern, nicht hochladen
+          - bauen-und-senden  # rendern + als YouTube Short veröffentlichen
+      slug:
+        description: "Bestimmter Artikel (leer = automatisch wählen)"
+        required: false
+        default: ""
+      limit:
+        description: "Höchstens so viele Videos"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-video
+  cancel-in-progress: false
+
+jobs:
+  shorts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      # ffmpeg MIT libfreetype (drawtext) – sonst keine Untertitel.
+      - name: ffmpeg installieren
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffmpeg -hide_banner -filters | grep -q " drawtext " \
+            || { echo "::error::ffmpeg ohne drawtext – Untertitel nicht renderbar."; exit 1; }
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml pillow edge-tts \
+            || python3 -m pip install -q --break-system-packages pyyaml pillow edge-tts
+
+      # Fail-closed: Ein Video mit erfundener Zahl ist schlimmer als kein Video.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/social_video.py --selftest
+
+      - name: Render-Umgebung prüfen
+        run: python3 scripts/social_video.py --pruefe-umgebung
+
+      - name: Produktion
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VIDEO_LLM_MODE: ${{ vars.VIDEO_LLM_MODE }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+        run: |
+          MODUS="${{ github.event.inputs.modus }}"
+          [ -z "$MODUS" ] && MODUS="bauen-und-senden"
+          SLUG="${{ github.event.inputs.slug }}"
+          LIMIT="${{ github.event.inputs.limit }}"
+          [ -z "$LIMIT" ] && LIMIT="1"
+          case "$MODUS" in
+            plan)     python3 scripts/social_video.py --plan ;;
+            drehbuch) python3 scripts/social_video.py --drehbuch ${SLUG:+--slug $SLUG} --limit "$LIMIT" ;;
+            bauen)    python3 scripts/social_video.py --bauen ${SLUG:+--slug $SLUG} --limit "$LIMIT" ;;
+            *)        python3 scripts/social_video.py --bauen --veroeffentlichen \
+                        ${SLUG:+--slug $SLUG} --limit "$LIMIT" ;;
+          esac
+
+      # Das fertige Video bleibt 14 Tage abrufbar – falls du es woanders
+      # (TikTok, LinkedIn) von Hand hochladen willst.
+      - name: Video als Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shorts
+          path: |
+            .cache/social-video/*.mp4
+            .cache/social-video/*.json
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Cockpit in die Job-Zusammenfassung
+        if: always()
+        run: |
+          if [ -f SOCIAL-VIDEO-STATUS.md ]; then
+            cat SOCIAL-VIDEO-STATUS.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Stand sichern
+        run: |
+          git config user.name "Shorts-Schmiede"
+          git config user.email "shorts-schmiede@users.noreply.github.com"
+          # Nur der Zustand wird versioniert – Videos nie (zu groß, .gitignore).
+          git add data/social/video_state.yaml
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen am Videostand."
+          else
+            git commit -m "video: Shorts-Produktion aktualisiert"
+            scripts/git_sync.sh --push-only || git push
+            echo "✅ Videostand gesichert"
+          fi

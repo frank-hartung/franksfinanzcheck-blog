@@ -1,0 +1,177 @@
+# ============================================================
+#  DIALOG-AUTOPILOT – Kommentare, Erwähnungen und Antworten
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 29.09.2026): Community-Arbeit ohne Handarbeit –
+#  aber mit Sicherheitsnetz, weil es ein FINANZBLOG ist.
+#
+#  WAS DER LAUF TUT (scripts/social_dialog.py):
+#    sammelt neue Kommentare/Erwähnungen, ordnet sie ein, formuliert
+#    Antworten und stellt sie zu:
+#      auto        Dank/Weiterempfehlung → geht sofort raus
+#      review      alles Beratungsnahe → fertig formuliert, wartet auf Ja
+#      eskalation  Rechtliches → nie ein Bot, sofort Chefsache
+#      mute        Spam/Trolle → bekommen nichts
+#
+#  TAKTUNG: 3× täglich (08:40 · 13:40 · 18:40 MESZ). Häufiger wäre
+#  Aktionismus – seltener wirkt unaufmerksam.
+#
+#  FREIGEBEN (das Einzige, was du tust):
+#    Actions → „Dialog-Autopilot" → Run workflow
+#      modus:     freigeben
+#      ids:       m7f3a2,bl91cc   (oder: alle)
+#    Die IDs stehen im Cockpit SOCIAL-DIALOG-STATUS.md und in der
+#    Job-Zusammenfassung jedes Laufs.
+#
+#  KOSTEN: 0 € – Gratis-APIs, Gratis-LLM (Groq/Gemini).
+#  Playbook: data/social/dialog.yaml
+#  Anleitung: docs/ANLEITUNG-DIALOG-AUTOPILOT.md
+# ============================================================
+name: Dialog-Autopilot (Kommentare & Antworten)
+
+on:
+  schedule:
+    - cron: "40 6 * * *"     # 08:40 MESZ
+    - cron: "40 11 * * *"    # 13:40 MESZ
+    - cron: "40 16 * * *"    # 18:40 MESZ
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Was soll der Lauf tun?"
+        required: true
+        default: "run"
+        type: choice
+        options:
+          - run          # sammeln, einordnen, zustellen
+          - dry-run      # alles zeigen, nichts senden
+          - freigeben    # wartende Entwürfe senden (ids angeben)
+          - verwerfen    # wartende Entwürfe löschen (ids angeben)
+          - status       # nur das Cockpit neu schreiben
+      ids:
+        description: "IDs für freigeben/verwerfen (Komma) oder 'alle'"
+        required: false
+        default: ""
+      kanal:
+        description: "Nur dieser Kanal (leer = alle)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: social-dialog
+  cancel-in-progress: false
+
+jobs:
+  dialog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+
+      # Fail-closed: Ein Bot, der ungeprüft antwortet, ist ein Haftungsrisiko.
+      # Der Selbsttest prüft Einordnung, Gate und die Standby-Regel.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/social_dialog.py --selftest
+
+      - name: Lauf
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLUESKY_PDS: ${{ vars.BLUESKY_PDS }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
+          FACEBOOK_PAGE_TOKEN: ${{ secrets.FACEBOOK_PAGE_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ vars.FACEBOOK_PAGE_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DIALOG_LLM_MODE: ${{ vars.DIALOG_LLM_MODE }}
+        run: |
+          MODUS="${{ github.event.inputs.modus }}"
+          [ -z "$MODUS" ] && MODUS="run"
+          IDS="${{ github.event.inputs.ids }}"
+          KANAL="${{ github.event.inputs.kanal }}"
+          case "$MODUS" in
+            freigeben)
+              if [ -z "$IDS" ]; then echo "::error::Bitte IDs angeben."; exit 1; fi
+              python3 scripts/social_dialog.py --freigeben "$IDS" ;;
+            verwerfen)
+              if [ -z "$IDS" ]; then echo "::error::Bitte IDs angeben."; exit 1; fi
+              python3 scripts/social_dialog.py --verwerfen "$IDS" ;;
+            status)
+              python3 scripts/social_dialog.py --status ;;
+            dry-run)
+              python3 scripts/social_dialog.py --run --dry-run ${KANAL:+--kanal $KANAL} ;;
+            *)
+              python3 scripts/social_dialog.py --run ${KANAL:+--kanal $KANAL} ;;
+          esac
+
+      - name: Cockpit in die Job-Zusammenfassung
+        if: always()
+        run: |
+          if [ -f SOCIAL-DIALOG-STATUS.md ]; then
+            cat SOCIAL-DIALOG-STATUS.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # Chefsache und Freigabemappe sollen nicht in einem Log versanden:
+      # ein einziges, immer wieder aktualisiertes Issue ist die Ablage.
+      - name: Freigabemappe als Issue pflegen
+        if: ${{ github.event.inputs.modus != 'status' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          OFFEN=$(python3 -c "import yaml,sys; d=yaml.safe_load(open('data/social/dialog_state.yaml')) or {}; print(len(d.get('offen') or [])+len(d.get('chefsache') or []))" 2>/dev/null || echo 0)
+          # Governance-Vertrag C12 (Label-Garantie, #209): Label VOR der
+          # Issue-Erzeugung anlegen, sonst scheitert die Meldung mit HTTP 422.
+          gh label create social --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" \
+            --description "Social Media: automatische Meldungen" --force || true
+          TITEL="💬 Dialog: Freigaben und Chefsache"
+          NUM=$(gh issue list --state open --search "$TITEL in:title" --json number \
+                --jq '.[0].number' 2>/dev/null || true)
+          if [ "${OFFEN:-0}" -gt 0 ]; then
+            if [ -n "$NUM" ]; then
+              gh issue edit "$NUM" --body-file SOCIAL-DIALOG-STATUS.md
+            else
+              gh issue create --title "$TITEL" --body-file SOCIAL-DIALOG-STATUS.md \
+                --label "social"
+            fi
+          elif [ -n "$NUM" ]; then
+            gh issue close "$NUM" --comment "Alles abgearbeitet – nichts wartet mehr."
+          fi
+
+      - name: Stand sichern
+        if: ${{ github.event.inputs.modus != 'dry-run' }}
+        run: |
+          git config user.name "Dialog-Autopilot"
+          git config user.email "dialog-autopilot@users.noreply.github.com"
+          # Das Cockpit ist ein Lauf-Artefakt (.gitignore) – versioniert wird
+          # nur der Zustand, damit kein Kommentar doppelt beantwortet wird.
+          git add data/social/dialog_state.yaml
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen am Dialog-Stand."
+          else
+            git commit -m "dialog: Stand der Community-Arbeit aktualisiert"
+            scripts/git_sync.sh --push-only || git push
+            echo "✅ Dialog-Stand gesichert"
+          fi
