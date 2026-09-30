@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 30.09.2026 01:00 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 13:13 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -12,11 +12,8 @@
 
 ## Kommende Beiträge
 
-### Di, 29. September 2026
-- **19:15** ⚪ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 ### Mi, 30. September 2026
-- **08:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Launch  
+- **08:45** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **13:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/

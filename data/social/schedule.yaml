@@ -673,8 +673,8 @@ items:
   date: '2026-09-30'
   time: 07:30
   scheduled_at: '2026-09-30T07:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: linkedin:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:zitat:2026-09-30
   channel: linkedin
@@ -685,9 +685,9 @@ items:
   date: '2026-09-30'
   time: 07:45
   scheduled_at: '2026-09-30T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-10-dsl-wechselbonus-sichern:mythos:2026-09-30
   channel: bluesky
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -697,9 +697,9 @@ items:
   date: '2026-09-30'
   time: 08:15
   scheduled_at: '2026-09-30T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:zahl:2026-09-30
   channel: x
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -709,9 +709,9 @@ items:
   date: '2026-09-30'
   time: 08:45
   scheduled_at: '2026-09-30T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-10-dsl-wechselbonus-sichern:zahl:2026-09-30
   channel: threads
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -721,9 +721,9 @@ items:
   date: '2026-09-30'
   time: 09:15
   scheduled_at: '2026-09-30T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort:vergleich:2026-09-30
   channel: facebook
   slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
@@ -733,9 +733,9 @@ items:
   date: '2026-09-30'
   time: 09:45
   scheduled_at: '2026-09-30T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: mastodon:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026:nutzen:2026-09-30
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
@@ -757,9 +757,9 @@ items:
   date: '2026-09-30'
   time: '12:15'
   scheduled_at: '2026-09-30T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:zahl:2026-09-30
   channel: x
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel

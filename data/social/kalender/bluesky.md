@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 30.09.2026 01:00 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 13:13 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Mi, 30. September 2026
-- **08:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _mythos_ · Launch  
+- **08:15** ⚪ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-- **12:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zahl_ · Launch  
+- **12:15** ⚪ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Do, 01. Oktober 2026
 - **08:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _zitat_ · Launch  

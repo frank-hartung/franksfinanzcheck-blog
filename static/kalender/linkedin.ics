@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:linkedin:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
  eschleunigt:nutzen:2026-09-28@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20260928T054500Z
 DTEND:20260928T060000Z
 SUMMARY:LinkedIn: Digitaler Turbo: Warum der DNS-Hack dein Netz beschl
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
  h:frage:2026-09-29@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20260929T054500Z
 DTEND:20260929T060000Z
 SUMMARY:LinkedIn: Finanzielle Freiheit erreichen: Denke dich reich – G
@@ -38,14 +38,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
  n-zuhause:zitat:2026-09-30@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20260930T054500Z
 DTEND:20260930T060000Z
 SUMMARY:LinkedIn: So findest du den richtigen: DSL-Tarif für dein Zuha
  use (zitat)
-DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
- https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richt
- igen-dsl-tarif-fuer-dein-zuhause/
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: zitat\nKanal: Link
+ edIn\nArtikel: https://franksfinanzcheck.de/posts/2026-08-20-so-finde
+ st-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
 URL:https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-ri
  chtigen-dsl-tarif-fuer-dein-zuhause/
 STATUS:TENTATIVE
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
  -goldene-jahreszeit:zahl:2026-10-01@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261001T054500Z
 DTEND:20261001T060000Z
 SUMMARY:LinkedIn: Sparen im Herbst: Spartipps für die goldene Jahresze
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-21-tierkrankenversicherung-hund-katze-kosten:take
  away:2026-10-02@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261002T054500Z
 DTEND:20261002T060000Z
 SUMMARY:LinkedIn: Tierkrankenversicherung für Hund & Katze: Kosten rea
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-g
  enug:vergleich:2026-10-05@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261005T054500Z
 DTEND:20261005T060000Z
 SUMMARY:LinkedIn: Finanzieller Puffer: Wie viel Notgroschen ist genug?
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst
  -du-sofort:nutzen:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261006T054500Z
 DTEND:20261006T060000Z
 SUMMARY:LinkedIn: Heizkosten senken: Mit diesen Strategien sparst du s
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:frage:2026-10-07@fran
  ksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261007T054500Z
 DTEND:20261007T060000Z
 SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
@@ -127,7 +127,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spa
  etsommer-vor:zitat:2026-10-08@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261008T054500Z
 DTEND:20261008T060000Z
 SUMMARY:LinkedIn: Gasrechnung prüfen: Fehler finden und Nachzahlungen 
@@ -142,7 +142,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
  pdate-2026:zitat:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20260929T230059Z
+DTSTAMP:20260930T111316Z
 DTSTART:20261009T054500Z
 DTEND:20261009T060000Z
 SUMMARY:LinkedIn: Dein Haus sicher schützen: Das neue Vorsorge-Update 

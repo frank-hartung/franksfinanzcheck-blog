@@ -462,5 +462,18 @@ history:
     #Frugalismus #Geldsparen #MinimalistischLeben'
   ref: '117355793846755045'
   ai: false
+- posted_at: '2026-09-30T13:13:11.455485+02:00'
+  channel: mastodon
+  slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  title: 'Gasrechnung prüfen: Fehler finden und Nachzahlungen'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117359692643267110
+  ok: true
+  text: "\U0001F50D Spare Nachzahlungen – prüfe deine Gasrechnung rechtzeitig.  \n\
+    Kontrolliere vor der Heizperiode Abrechnungszeitraum, Anfang‑ und Endzählerstand,\
+    \ Verbrauch in kWh, Arbeits‑ und Grundpreis sowie die Abschläge.  \n\nhttps://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \  \n#Gaspreis #Preisgarantie #Gasrechnung #Heizkosten"
+  ref: '117359692643267110'
+  ai: true
 failures: []
-updated_at: '2026-09-30T01:00:58.256746+02:00'
+updated_at: '2026-09-30T13:13:14.691678+02:00'
