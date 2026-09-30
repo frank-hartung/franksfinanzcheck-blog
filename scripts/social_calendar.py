@@ -554,7 +554,7 @@ def build_index_html(cfg: dict, base_url: str, now: datetime) -> str:
         google = ("https://calendar.google.com/calendar/r/settings/addbyurl"
                   f"?cid={ics_https}")
         return f"""      <article class="card">
-        <h3>{label}</h3>
+        <h2>{label}</h2>
         <div class="btns">
           <a class="btn primary" href="{ics_webcal}">Abonnieren (Apple · Outlook)</a>
           <a class="btn" href="{google}" target="_blank" rel="noopener">Google Kalender</a>
@@ -580,12 +580,16 @@ def build_index_html(cfg: dict, base_url: str, now: datetime) -> str:
   * {{ box-sizing:border-box; }}
   body {{ margin:0; background:var(--bg); color:var(--text);
          font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }}
+  .skip-link {{ position:fixed; top:.75rem; left:.75rem; z-index:10; padding:.65rem .9rem;
+                border-radius:9px; background:var(--gold); color:#20160a; font-weight:700;
+                transform:translateY(calc(-100% - 1.5rem)); transition:transform .15s ease; }}
+  .skip-link:focus {{ transform:translateY(0); }}
   .wrap {{ max-width:920px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }}
   h1 {{ font-size:1.8rem; margin:0 0 .3rem; }}
   .lead {{ color:var(--muted); margin:0 0 2rem; }}
   .grid {{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }}
   .card {{ background:var(--card); border:1px solid #20344b; border-radius:14px; padding:1.1rem 1.2rem; }}
-  .card h3 {{ margin:0 0 .8rem; font-size:1.15rem; }}
+  .card h2 {{ margin:0 0 .8rem; font-size:1.15rem; }}
   .btns {{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.7rem; }}
   .btn {{ display:inline-block; padding:.45rem .7rem; border-radius:9px; text-decoration:none;
           font-size:.86rem; border:1px solid #2d445f; color:var(--text); }}
@@ -594,10 +598,15 @@ def build_index_html(cfg: dict, base_url: str, now: datetime) -> str:
   .url code {{ color:var(--muted); font-size:.72rem; word-break:break-all; }}
   .note {{ margin-top:2.2rem; color:var(--muted); font-size:.9rem; border-top:1px solid #20344b; padding-top:1.2rem; }}
   a {{ color:var(--gold); }}
+  :focus-visible {{ outline:3px solid var(--gold); outline-offset:3px; }}
+  @media (prefers-reduced-motion: reduce) {{
+    *, *::before, *::after {{ scroll-behavior:auto !important; transition:none !important; }}
+  }}
 </style>
 </head>
 <body>
-  <div class="wrap">
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+  <main class="wrap" id="main-content" tabindex="-1">
     <h1>🗓️ Veröffentlichungskalender</h1>
     <p class="lead">Für jeden Social-Media-Kanal ein eigener, automatisch
       aktualisierter Kalender. Einmal abonnieren – dann erscheinen alle geplanten
@@ -614,7 +623,7 @@ def build_index_html(cfg: dict, base_url: str, now: datetime) -> str:
       Die Feeds werden nach jedem Autopilot-Lauf neu erzeugt und aktualisieren
       sich im Abo automatisch. Erzeugt von <code>scripts/social_calendar.py</code>.
     </p>
-  </div>
+  </main>
 </body>
 </html>
 """
@@ -775,6 +784,14 @@ def selftest() -> int:
             fails.append("Abo-Seite ohne HTTPS-Feed-URL")
         if "considerable" in html:
             fails.append("Abo-Seite enthält kaputtes CSS")
+        if 'class="skip-link" href="#main-content"' not in html:
+            fails.append("Abo-Seite ohne funktionsfähigen Skip-Link")
+        if '<main class="wrap" id="main-content" tabindex="-1">' not in html:
+            fails.append("Abo-Seite ohne adressierbares Main-Landmark")
+        if ":focus-visible" not in html or "prefers-reduced-motion: reduce" not in html:
+            fails.append("Abo-Seite ohne Fokus- oder Reduced-Motion-Schutz")
+        if "<h3>" in html or "<h2>" not in html:
+            fails.append("Abo-Seite mit fehlerhafter Überschriften-Hierarchie")
     except Exception as exc:  # pragma: no cover
         fails.append(f"Abo-Seite nicht baubar: {exc}")
 
