@@ -10,27 +10,13 @@ name: Redaktions-Politur (Sprachglatt + Grammatik, offline)
 #  beheben."
 #
 #  ⛔ REDUNDANZ-AUFLÖSUNG (30.09.2026, Automatik-Audit):
-#  Der Zeitplan (Montag 03:45 UTC) wurde ENTFERNT. Dieser Lauf war
-#  eine 1:1-Teilmenge der Claude-Stilpolitur
-#  (`.github/workflows/claude-stilpolitur.yml`): deren Schritt
-#  „Offline-Optimierung (LT + DW, ohne API – IMMER zuerst)" führt
-#  SEIT 25.09.2026 in jedem Lauf (Mo/Mi/Fr, 04:50 UTC) exakt
-#  dieselben beiden Fix-Läufe über ALLE Artikel aus:
-#    - grammar_check --fix (LT1–LT4)
-#    - sprachglatt --fix (DW1–DW9 + V1)
-#  Am Montag lief damit derselbe Bestands-Fix zweimal binnen 65
-#  Minuten. Eine zusätzliche Wochenausführung brachte keinerlei
-#  Mehrwert – dieselbe Kette läuft jetzt 3× pro Woche statt 1×.
-#
-#  Dieser Workflow bleibt als MANUELLER NOTLAUF erhalten (gleiches
-#  Muster wie social-ai.yml, 12.09.2026): Falls der Puter-Zugang
-#  (PUTER_AUTH_TOKEN) der Claude-Stilpolitur gestört ist, kann die
-#  reine Offline-Politur hiermit von Hand angestoßen werden – ohne
-#  Token, ohne Netz. Die Offline-Grundversorgung des Bestands ist
-#  darüber hinaus garantiert durch:
-#    - claude-stilpolitur.yml (Mo/Mi/Fr, Offline-Kette läuft vor Claude)
-#    - zeit-rechtschreibung.yml (Mo, Offline-Fallback LT1–LT4)
-#    - content-engine-v2.yml (Geburtslauf, --new-only)
+#  Der Zeitplan (Montag 03:45 UTC) bleibt entfernt. Die geplante
+#  Bestandsversorgung läuft jetzt im Hemingway-Workflow
+#  (`.github/workflows/hemingway-check.yml`, Mo/Mi/Fr 04:50 UTC).
+#  Dieser Lauf bleibt als MANUELLER NOTLAUF erhalten: Die reine
+#  Offline-Politur kann jederzeit ohne Konto, Token oder Netz von
+#  Hand angestoßen werden. Der Hemingway-Check selbst verändert
+#  keine Texte, sondern liefert Hinweise für die manuelle Schlussrunde.
 #
 #  Was dieser Lauf tut, wenn er manuell gestartet wird:
 #    1. Selbsttest HART (Sabotage-Schutz, Exit 2 = rot, kein Schreiben)

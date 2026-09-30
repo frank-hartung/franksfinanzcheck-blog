@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // ============================================================
-//  PUTER-CHAT-BRÜCKE – Claude kostenlos, OHNE API (Claude-Stilpolitur)
+//  PUTER-CHAT-BRÜCKE – optionaler Gratis-Zugang für Fach- und Hero-Checks
 //  ------------------------------------------------------------
-//  AUFTRAG (Frank, 25.09.2026): „Claude sollte nur ohne API genutzt
-//  werden. Dafür sollte das aktuell beste kostenlose Claude-Modell
-//  gewählt werden."
+//  Diese Brücke wird nur von den ausdrücklich dafür vorgesehenen
+//  Recherche-/Startseiten-Workflows genutzt. Die Hemingway-Lesbarkeitsprüfung
+//  läuft davon unabhängig vollständig offline.
 //
 //  ZUGANG: Puter.js „Free, Unlimited Claude API" (User-Pays-Modell):
 //    · KEINE Anthropic-API, KEIN ANTHROPIC_API_KEY, keine Kosten
@@ -14,10 +14,10 @@
 //
 //  MODELL (Nachtrag Frank, 25.09.2026): AUSCHLIESSLICH
 //  claude-sonnet-5 – „nur das Claude-Modell claude-sonnet-5".
-//  Kein Fallback, kein anderes Modell (der Aufrufer pinnt das
-//  ebenfalls; Selbsttest ST3 in claude_stilpolitur.py).
+//  Kein Fallback, kein anderes Modell (die jeweiligen Aufrufer pinnen das
+//  jeweils selbst).
 //
-//  PROTOKOLL (Aufruf aus scripts/claude_stilpolitur.py):
+//  PROTOKOLL (Aufruf aus den Recherche-/Startseiten-Skripten):
 //    stdin  = JSON: { "system": "…", "user": "…", "model": "…",
 //                     "temperature": 0.5, "max_tokens": 8192 }
 //    stdout = reiner Antworttext (kein JSON, kein Prompt-Echo)

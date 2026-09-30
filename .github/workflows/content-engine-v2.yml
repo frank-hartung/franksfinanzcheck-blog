@@ -62,14 +62,6 @@ jobs:
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
 
-      # Node 24 für die Puter-Brücke der Claude-Stilpolitur (kostenlos ohne API,
-      # Auftrag 25.09.2026). @heyputer/puter.js braucht Node 24+; installiert
-      # wird es transient im Phase-2-Schritt (--no-save).
-      - name: Node 24 (Puter-Brücke der Claude-Stilpolitur)
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
       # ============ INTEGRITÄTS-LOCK (HARD STOP + BELEGTE SIGNATUR) ============
       # Zuerst der Safe, dann die Arbeit: Der Lock (integrity_guard.py)
       # bürgt, dass Kern-Layouts, CTA-Shortcodes und die Dienst-Wachen exakt
@@ -227,13 +219,12 @@ jobs:
           fi
 
       # ================= PHASE 2: QUALITÄTS-KETTE (weich) =================
-      - name: Phase 2 – Qualitäts-Kette (Polish, Gates, Cover)
+      - name: Phase 2 – Qualitäts-Kette (Hemingway, Gates, Cover)
         if: ${{ !cancelled() && env.ARTIKEL_ERSTELLT == 'true' }}
         continue-on-error: true
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
           echo "== Profi-Polish (KI) =="
           python3 scripts/profi_polish.py --new || echo "⚠ Polish-Fehler (nicht kritisch)"
@@ -256,14 +247,6 @@ jobs:
           python3 scripts/grammar_check.py --fix --new-only || echo "⚠ Grammatik-Fehler (nicht kritisch)"
           echo "== Sprachglatt (DW1–DW9, offline DeepL-Write-Nachbau, ohne API, 25.09.2026) =="
           python3 scripts/sprachglatt.py --fix --new-only || echo "⚠ Sprachglatt (nicht kritisch)"
-          echo "== Claude Stil-Politur (KOSTENLOS ohne API: Puter.js, nur claude-sonnet-5, personalisiert, 25.09.2026) =="
-          # Beauftragte Gratis-Lane (Dauervorgabe Frank 25.09.2026, Nachtraege „nur ohne
-          # API" + „nur claude-sonnet-5"): laeuft NACH der Offline-Optimierung (LT+DW)
-          # ueber jeden neuen Artikel mit Franks persoenlichem Schreibstil
-          # (data/schreibstil.yaml). Der Bestandslauf (Mo/Mi/Fr, auffrischung_tage)
-          # deckt die Alt-Artikel ab (claude-stilpolitur.yml).
-          npm install --no-save @heyputer/puter.js >/dev/null 2>&1 || echo "⚠ puter.js nicht installiert"
-          python3 scripts/claude_stilpolitur.py --fix --new-only || echo "⚠ Stil-Politur (nicht kritisch)"
           echo "== Akronym-/Marken-/Tagschreibung (casing_guard: C1–C17 + T1, Selbsttest vor jedem Schreibvorgang) =="
           python3 scripts/casing_guard.py --fix --new-only || echo "⚠ Casing-Guard (nicht kritisch)"
           # CASING-VERBUND (PREMIUM 09.09.2026): Pin-Texte werden IMMER aus
@@ -303,8 +286,11 @@ jobs:
           python3 scripts/length_guard.py --fix --ai --new-only --scope pillar || echo "⚠ Length-Guard Pillar (nicht kritisch)"
           echo "== Profi-Text-Gate =="
           python3 scripts/profi_text_check.py --new-only || echo "⚠ Profi-Gate (nicht blockierend)"
-          echo "== Lesbarkeit =="
-          python3 scripts/readability_check.py --new-only || echo "⚠ Lesbarkeit (nicht blockierend)"
+          echo "== Hemingway-Lesbarkeitscheck (kostenlos, lokal, ohne API) =="
+          # Hemingway Editor bleibt die kostenlose manuelle Schlussrunde.
+          # Der lokale Begleiter prüft nach allen Fixes deterministisch und
+          # sendet keine Artikel an einen externen Dienst.
+          python3 scripts/hemingway_check.py --new-only || echo "⚠ Hemingway-Gate (nicht blockierend)"
           echo "== Titel-Gate (check_titles, selbstheilend) =="
           python3 scripts/check_titles.py --fix || echo "⚠ Titel-Gate (nicht blockierend)"
           echo "== Keyword-Gate (Premium #303, Titel/Description/First-Para/H2/Dichte selbstheilend) =="

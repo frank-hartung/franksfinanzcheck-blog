@@ -53,11 +53,9 @@ KI-Artikel (engine_generate.py)
    ├─► 📖 absorb_whitelist.py     Rechtschreib-Rauschen (Komposita → Whitelist)
  ├─► 🧴 sprachglatt.py          Glätt-Gate (DW1–DW9, offline DeepL-Write-Nachbau, V1 Vorschläge)
  ├─► 🩺 grammar_check.py        Grammatik-Gate (LT1–LT4, offline, Exit 2 bei Selbsttest-Rot)
- └─► ✍️ claude_stilpolitur.py   Stil-Politur (Claude, KOSTENLOS ohne API via Puter.js,
-                                NUR claude-sonnet-5 + personalisiert: Franks
-                                Schreibstil aus data/schreibstil.yaml – Auftrag
-                                25.09.2026, läuft NACH der Offline-Optimierung;
-                                Auffrischung Mo/Mi/Fr + bei jedem neuen Artikel)
+ └─► ✍️ hemingway_check.py      Hemingway-Lesbarkeitscheck (kostenlos, offline,
+                                Flesch, Satzlänge, lange Wörter, Passiv und
+                                Schachtelsätze; keine automatische Umschreibung)
 ```
 
 Ausführung aller Regeln: **niemals blockierend** (`|| echo "nicht kritisch"`).
@@ -447,7 +445,7 @@ Dauerauftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft automatisc
 
 **Verdrahtung:**
 - Content-Engine v2 Phase 2: `--selftest` implizit + `--fix --new-only` (nach Spellcheck, vor Casing)
-- `claude-stilpolitur.yml`: Mo/Mi/Fr 04:50 UTC – Offline-Kette (LT+DW `--fix` über alle Artikel) läuft dort IMMER zuerst *(seit Audit 30.09. SSOT; der Montags-Cron von `redaktions-politur.yml` und die Sprach-Schritte in `seo-weekly.yml` waren Redundanzen und wurden entfernt; `redaktions-politur.yml` bleibt manueller Notlauf)*
+- `hemingway-check.yml`: Mo/Mi/Fr 04:50 UTC – Offline-Kette (LT+DW `--fix` über alle Artikel) und anschließender Hemingway-Lesbarkeitscheck *(seit Audit 30.09. SSOT; der Montags-Cron von `redaktions-politur.yml` und die Sprach-Schritte in `seo-weekly.yml` waren Redundanzen und wurden entfernt; `redaktions-politur.yml` bleibt manueller Notlauf)*
 
 **Aufruf:**
 ```bash
@@ -1147,7 +1145,7 @@ python3 scripts/sprachglatt.py --fix
   C4 Zahl ohne €/% fehlt, C5 Jahres-Drift, C6 Titel-Versprechen).
   Fund heute: 🚨 C2-Systemluecke: kein Artikel hat eine Fazit-Rubrik
   (echter Auditfund); Roadmap: redaktions-politur-Workflow → erledigt 25.09.2026
-  (offline LT+DW, Mo/Mi/Fr 04:50 UTC in claude-stilpolitur.yml, Hook in content-engine-v2; Audit 30.09.).
+  (offline LT+DW, Mo/Mi/Fr 04:50 UTC in hemingway-check.yml, Hook in content-engine-v2; Audit 30.09.).
   Integrity-FEST: 32 -> 35 Dateien (inkl. data/content_fingerprints.jsonl).
   Lektion: Audit-Messung sah zuerst 77/77 ohne Fazit – Messung korrekt:
   C2 deckt echte Strukturlücke auf; Auto-Plattencheck wirkt wie beworben.
