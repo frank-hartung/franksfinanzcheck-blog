@@ -3,7 +3,7 @@ title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
 description: "Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten …"
 date: 2026-09-30T10:36:24Z
 draft: true
-tags: ["Notgroschen aufbauen: Wie viel reicht wirklich?"]
+tags: ["Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["Notgroschen aufbauen: Wie viel reicht wirklich?"]

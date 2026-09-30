@@ -53,6 +53,14 @@ Kategorie-Korrektur). Unbekannte Tags werden NICHT geraten: sie werden entfernt
 und gemeldet, damit die Redaktion entscheidet, ob daraus ein Registereintrag
 oder ein Keyword wird. Reine Register-Defekte (T1) repariert --apply nie.
 
+WAISEN-NETZ (30.09.2026, Deploy-Härtung): Bleibt nach dem Verwerfen unbekannter
+Tags KEIN gültiger Tag übrig, füllt --apply mit derselben Auffang-Logik wie die
+Generierung (tags_fuer) auf – Keywords und Titel gegen das Register spiegeln,
+sonst die Tags des Pillars. So kann ein einzelner Artikel mit long-tail-Tags nie
+mehr über T5 („Artikel ohne gültigen Tag") den Deploy blockieren. Erfunden wird
+weiterhin kein Tag: fehlt der Pillar und trifft nichts, bleibt es leer und T5
+meldet den Fall an die Redaktion.
+
 Nutzung:
     python3 scripts/tag_governance.py --report     Bestand + Bilanz
     python3 scripts/tag_governance.py --check      Wache (CI)
@@ -228,12 +236,27 @@ def tags_fuer(keywords, pillar: str = "", titel: str = "",
 
     if titel:
         t_cmp = vergleichsform(titel)
+
+        def _im_titel(phrase: str) -> bool:
+            p = vergleichsform(phrase)
+            # Wortgrenzen: "gas" darf nicht in "gasthaus" treffen.
+            return bool(p) and re.search(rf"(?<!\w){re.escape(p)}(?!\w)", t_cmp) is not None
+
         for e in reg.eintraege:
             if not isinstance(e, dict) or not e.get("name"):
                 continue
             name = normalisiere(e["name"])
-            kandidaten = [name] + [normalisiere(s) for s in (e.get("synonyme") or [])]
-            if any(vergleichsform(k) in t_cmp for k in kandidaten):
+            # Nur unterscheidungskräftige Phrasen dürfen per Titel greifen: der
+            # kanonische Name und MEHRWORT-Synonyme. Einzelne Allerweltswörter als
+            # Synonym ("Wirklich", "Gewohnheiten") würden sonst wildfremde Titel
+            # falsch verschlagworten – genau so bekam ein Notgroschen-Artikel den
+            # Tag „Versicherungen vergleichen" (Befund 30.09.2026).
+            kandidaten = [name]
+            for s in (e.get("synonyme") or []):
+                s_n = normalisiere(s)
+                if " " in vergleichsform(s_n):
+                    kandidaten.append(s_n)
+            if any(_im_titel(k) for k in kandidaten):
                 nimm(name)
                 if len(treffer) >= max_tags:
                     return treffer[:max_tags]
@@ -385,6 +408,25 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
         # ---- Selbstheilung ----
         if anwenden:
             neu_tags = kanon[:max_tags]
+            # Waisen-Netz (T5 dauerhaft selbstheilend, 30.09.2026):
+            # Bleibt nach dem Verwerfen unbekannter Tags KEIN gültiger Tag
+            # übrig, darf der Artikel nicht ohne Crawl-/Related-Pfad
+            # zurückbleiben – genau das brach bisher den Deploy (harter T5).
+            # Statt zu scheitern, greift dieselbe Auffang-Logik wie bei der
+            # Generierung (tags_fuer): Keywords und Titel gegen das Register
+            # spiegeln, sonst die Tags des Pillars nehmen. Es wird NIE ein Tag
+            # erfunden – hat der Artikel keinen Pillar und trifft nichts,
+            # bleibt es leer und der T5-Fund meldet es der Redaktion.
+            if not neu_tags:
+                kw_quelle = fm.get("keywords") or roh
+                if isinstance(kw_quelle, str):
+                    kw_quelle = [kw_quelle]
+                neu_tags = tags_fuer(
+                    kw_quelle,
+                    pillar=str(fm.get("pillar") or ""),
+                    titel=str(fm.get("title") or ""),
+                    register=reg,
+                )[:max_tags]
             neuer_text = text
             if neu_tags != [normalisiere(t) for t in roh]:
                 neuer_text = schreibe_feld(neuer_text, "tags", neu_tags)
@@ -558,6 +600,44 @@ def selftest() -> int:
     # 14 Titel-Treffer, wenn die Keywords nichts hergeben
     check("tags_fuer Titel-Treffer",
           tags_fuer(["nichts"], "", "Wie du Gas sparen kannst", reg) == ["Gas sparen"])
+
+    # ---- Waisen-Netz: --apply darf keinen Artikel ohne Tag zurücklassen ----
+    # 15 Nur unbekannter Tag, aber Pillar gesetzt → --apply füllt aus dem
+    #    Pillar auf (der T5-Fund, der bisher den Deploy brach, verschwindet).
+    with tempfile.TemporaryDirectory() as tmp:
+        p = baue(tmp, '---\ntitle: "T"\ntags: ["Voellig unbekannt"]\n'
+                      'keywords: ["Voellig unbekannt"]\npillar: "p"\n'
+                      'categories: ["Ratgeber"]\n---')
+        pruefe(reg, [p], anwenden=True)
+        fm, _ = lese_frontmatter(p)
+        F2, _ = pruefe(reg, [p])
+        check("--apply Waisen-Netz füllt Pillar-Tag",
+              bool(fm.get("tags")) and not any(r == "T5" for r, _, _ in F2.hart))
+    # 16 Keyword/Titel-Treffer schlägt das Pillar-Netz (präziser Tag gewinnt)
+    with tempfile.TemporaryDirectory() as tmp:
+        p = baue(tmp, '---\ntitle: "Wie du beim Gas sparen kannst"\n'
+                      'tags: ["Gaskosten senken 2026 im Altbau"]\n'
+                      'keywords: ["Gaskosten senken 2026 im Altbau"]\npillar: "p"\n'
+                      'categories: ["Ratgeber"]\n---')
+        pruefe(reg, [p], anwenden=True)
+        fm, _ = lese_frontmatter(p)
+        check("--apply Waisen-Netz bevorzugt Titel-/Keyword-Treffer",
+              fm.get("tags") == ["Gas sparen"])
+
+    # 17 Titel-Fallback ignoriert Einzelwort-Synonyme (kein Falsch-Tag mehr).
+    #    Regressionsschutz für den Befund 30.09.2026: das Synonym „Wirklich"
+    #    zog „Versicherungen vergleichen" auf einen Notgroschen-Artikel.
+    reg2 = Register({
+        "politik": {"max_tags_pro_artikel": 4, "min_artikel_pro_tag": 1,
+                    "erlaubte_kategorien": ["Ratgeber"]},
+        "tags": [
+            {"name": "Versicherung Vergleich", "pillar": "v", "synonyme": ["wirklich"]},
+            {"name": "Notgroschen", "pillar": "f", "synonyme": ["Notgroschen aufbauen"]},
+        ],
+    })
+    check("Titel-Fallback ohne Einzelwort-Synonym",
+          tags_fuer([], "", "Wie viel Notgroschen reicht wirklich", reg2)
+          == ["Notgroschen"])
 
     print(f"Selbsttest: {ok} bestanden, {len(fehl)} fehlgeschlagen")
     for f in fehl:

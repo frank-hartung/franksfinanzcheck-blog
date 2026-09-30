@@ -5,7 +5,7 @@ description: "Kreditkarte 2026 vergleichen: kostenlose Karten, Fremdwährungsgeb
 date: 2026-09-04T21:17:05Z
 draft: false
 reserve_published: 2026-09-04
-tags: ["Kreditkarte vergleichen", "kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte Ausland gebührenfrei"]
+tags: ["Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

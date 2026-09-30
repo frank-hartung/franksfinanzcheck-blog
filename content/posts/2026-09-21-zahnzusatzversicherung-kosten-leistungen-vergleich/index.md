@@ -4,7 +4,7 @@ title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
 description: "Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig…"
 date: 2026-09-25T08:10:00Z
 draft: true
-tags: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnzusatzversicherung Kosten", "Zahnersatz Kosten"]
+tags: ["Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 keywords: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnzusatzversicherung Kosten", "Zahnersatz Kosten", "Implantat Kosten", "Zahnstaffel", "Zahnzusatzversicherung ohne Wartezeit", "Krankenkasse Zahnersatz"]

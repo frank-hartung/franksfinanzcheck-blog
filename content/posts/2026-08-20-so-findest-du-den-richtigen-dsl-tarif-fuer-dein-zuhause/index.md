@@ -4,7 +4,7 @@ title: "So findest du den richtigen: DSL-Tarif für dein Zuhause"
 description: "DSL Tarif finden: Welcher DSL-Tarif passt wirklich? Dieser Ratgeber zeigt dir, wie viel Bandbreite du brauchst, wie du den 24-Monats-Preis rechnest und welche…"
 date: 2026-09-18T19:09:52Z
 draft: false
-tags: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss"]
+tags: ["DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
