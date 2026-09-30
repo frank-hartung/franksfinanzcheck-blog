@@ -468,6 +468,17 @@ jobs:
           python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
           echo "== Finale CTA-Hygiene nach allen Rewrite-Heilern (FIX #247) =="
           python3 scripts/fix_cta_hygiene.py --include-drafts || echo "⚠ CTA-Hygiene – Restfunde siehe Log"
+          echo "== Repetition-Wache nach allen Rewrite-Heilern (Issue #456) =="
+          # Phase 2 heilt Doppelwoerter bereits VOR der Geburt (repetition_guard +
+          # blog_doctor-Kette), aber Phase 3 schreibt danach noch einmal in den
+          # Artikeltext (Keyword-Gate/-Optimizer ein zweites Mal, Pinterest-SEO-
+          # Healer, interne Verlinkung, Affiliate-Profi-Check, CTA-Hygiene). Genau
+          # eine erneute Keyword-Injektion war der reale Auslöser fuer "senken
+          # senken" (#456) – ohne einen Sweep NACH diesen Heilern wuerde ein neu
+          # entstandenes Doppelwort ungeheilt bis zur naechsten blog-health-daily
+          # (naechster Tag) live bleiben statt schon vor DIESEM Commit zu heilen.
+          python3 scripts/repetition_guard.py --selftest
+          python3 scripts/repetition_guard.py --fix --new-only || echo "⚠ Repetition-Guard – Funde im Log (selbstgeheilt)"
           echo "== Faktenfrische: Erstrecherche BEI CONTENT-ERSTELLUNG (Agent Reach + Claude, 27.09.2026) =="
           # Auftrag Frank 27.09.2026: Jeder NEUE Artikel bekommt vor der
           # Veröffentlichung eine Internet-Recherche und eine Belegkette.
