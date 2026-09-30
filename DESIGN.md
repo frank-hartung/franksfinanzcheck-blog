@@ -89,6 +89,8 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 | Pinterest-CTA | `.ff-pinterest-cta`, `.ff-pinterest-cta-btn` | Modernes Bento-Card-Layout mit Pinterest-Rot (#E60023) |
 | Pillar-Cluster | `.ff-pc-cluster/-head/-title/-count`, `.ff-pc-grid`, `.ff-pc-card/__body/__title/__desc/__cta` | Light+Dark definiert (zzz-agency-polish.css §10; nachgeliefert 28.09.2026 – Kopf-Meta/Brotkrumen/Badge, Karten-Raster & Chips komplett) |
 | Ratgeber-Zentrale | `.ff-pillar-hero`, `.ff-pillar-grid`, `.ff-pillar-card`, `.ff-spar-matrix-section`, `.ff-method-grid`, `.ff-faq-list` | Volles Agentur-Layout (/pillar/) mit Dark-Mode-Unterstützung |
+| Tabellen (überall) | `.ff-table-scroll`, `.ff-tbl`, `.ff-tbl-corner/-num/-nowrap/-a-*` | Basis-Schicht OHNE `.post-content`-Bindung (zzz-agency-polish.css §11, nachgeliefert 30.09.2026): Zellpolster 12/14 px, Sticky-Kopf Smaragd/Weiß, Zebra, Zeilentrenner, Scroll-Container mit Fokusring |
+| Spar-Matrix | `.ff-spar-matrix-scroll`, `.ff-spar-matrix-table`, `.ff-spar-matrix-caption`, `.ff-spar-matrix-thema/-aktion`, `.ff-highlight-cell`, `.ff-table-btn` | Fünf Spalten mit `<colgroup>`-Maß; **unter 760 px stapelt jede Zeile zu einer Karte** (Feldnamen aus `data-label`, kein zweites Markup). Wache: `scripts/tabellen_lesbarkeit_guard.py` |
 | Vertrauens-Box | `.ff-trust-box`, `.ff-trust-box__avatar-wrap`, `.ff-trust-box__img`, `.ff-trust-box__badge` | E-E-A-T-Autorbox am Artikelende mit Verifizierungs-Badge |
 | Praxis-Marker | `.ff-experience-box`, `.ff-experience-box__tag`, `.ff-experience-box__text` | Bernstein-Akzent, persönlicher Testbericht-Marker |
 | Ratgeber-Link | `.ff-pillar-box`, `.ff-pillar-box__inner`, `.ff-pillar-box__btn` | Vernetzt Artikel bidirektional mit übergeordnetem Ratgeber |

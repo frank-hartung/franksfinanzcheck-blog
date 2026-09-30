@@ -194,7 +194,8 @@ Offsets bleiben gültig).
 | R4 | Ausrichtung aus dem Markdown-Separator (`:---`, `:---:`, `---:`) → `.ff-tbl-a-left/-center/-right` | semantisch, ohne Inline-Styles |
 | R5 | Sticky-Kopf (Smaragd, weiss) + Sticky-Labelspalte, Zebra, Hover, abgerundeter Container, Scroll-Fade auf Mobil | Lesbarkeit & Orientierung |
 | R6 | Haus-Regeln bleiben: `hyphens: manual`, kein `overflow-wrap: anywhere` in Zellen, `word-break: normal` | UMBRUCH-Report-konform |
-| R7 | VERBOTEN: `display:block` auf `.ff-tbl`/`.ff-tv-table`/`.ff-es-table`, `min-width` auf generische `.post-content table` – bricht Sticky & mobile Karten | design_guard-Vertrag |
+| R7 | VERBOTEN: `display:block` auf `.ff-tbl`/`.ff-tv-table`/`.ff-es-table`, `min-width` auf generische `.post-content table` – bricht Sticky & mobile Karten. **Präzisierung 30.09.2026:** innerhalb einer `@media (max-width: …)`-Bedingung ist das Stapeln einer *benannten* Tabelle erlaubt (Spar-Matrix), weil dort kein Sticky-Nutzen mehr besteht | design_guard-Vertrag |
+| R9 | Jede Tabelle AUSSERHALB von `.post-content` braucht eine Versorgung ohne diesen Scope (Klassenabdeckung, Zellpolster ≥ 10 px, Kopf-Fläche, Zeilentrenner, Mobilpfad) und darf keine toten Selektoren hinterlassen | `scripts/tabellen_lesbarkeit_guard.py` (L1–L5), `npm run test:tabellen`, e2e `spar-matrix.spec.mjs` + `mobile.spec.mjs` |
 | R8 | Shortcodes `tarifvergleich` + `einspartabelle` tragen eigene Premium-Overrides (`ff-tv-style-premium`, `ff-es-style-premium`): Tabelle im Wrapper, Sticky-Z-Lagen, **mobil Karten statt Tabelle** (`display:none !important`) | keine Doppel-Anzeige Tabelle+Karten |
 
 **Warum:** Das Theme rendert Tabellen als `display:block`-Scrollcontainer – dadurch

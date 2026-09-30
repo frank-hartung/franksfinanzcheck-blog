@@ -1052,7 +1052,7 @@ details:not(.toc)[open] > summary::before {
 /* Fallback: rohe HTML-Tabellen ohne Render-Hook (nie im Container platzen).
    Handgestylte Layout-Tabellen (inline-style, z. B. Ratgeber-Uebersicht)
    bleiben unberuehrt – deshalb :not([style]). */
-.post-content table:not([style]):not(.ff-tbl):not(.ff-es-table):not(.ff-tv-table):not(.ff-spar-matrix) {
+.post-content table:not([style]):not(.ff-tbl):not(.ff-es-table):not(.ff-tv-table):not(.ff-spar-matrix-table) {
   display: block;
   width: 100%;
   max-width: 100%;

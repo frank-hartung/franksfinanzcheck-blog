@@ -69,6 +69,14 @@ jobs:
       - run: python3 scripts/generate_pwa_icons.py --selftest
       - run: python3 scripts/generate_pwa_icons.py || echo "⚠ PWA-Manifest/Icons – nichtkritisch"
 
+      # TABELLEN-LESBARKEIT (30.09.2026, Frank-Befund Spar-Matrix): Die
+      # Wache prüft, dass jede Tabelle AUSSERHALB von .post-content ihre
+      # CSS-Lieferung wirklich bekommt (Klassen, Scope, Zellpolster,
+      # Kopf-Fläche, Zeilentrenner, Mobilpfad) und kein toter Selektor
+      # zurückbleibt. Kein Build, kein Browser – läuft in Sekunden.
+      - run: python3 scripts/tabellen_lesbarkeit_guard.py --selftest
+      - run: python3 scripts/tabellen_lesbarkeit_guard.py || echo "⚠ Tabellen-Lesbarkeit – Funde im TABELLEN-LESBARKEIT-REPORT.md"
+
       # ROOT-HYGIENE (12.09.2026): generierte Reports, die niemand liest, fliegen aus
       # dem Index (Datei bleibt auf der Platte, .gitignore deckt sie bereits), und
       # von Hand geschriebene Root-Berichte wandern nach docs/. Vor dem git add -A

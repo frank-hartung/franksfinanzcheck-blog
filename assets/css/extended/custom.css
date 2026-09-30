@@ -903,17 +903,25 @@ input:focus-visible {
     }
 }
 
-/* Tabellen auf Pillar-Seiten sauber responsiv & scrollbar */
-.post-content table,
-.ff-spar-matrix table {
+/* Tabellen: Grundversorgung im Artikel.
+   TOTE SELEKTOR-LEICHE ENTFERNT (30.09.2026, Frank-Befund „Spar-Matrix"):
+   Hier stand zusaetzlich `.ff-spar-matrix table`. Diese Klasse gibt es im
+   Markup nicht (mehr) – die Ratgeber-Zentrale baut
+   `.ff-spar-matrix-section` mit `.ff-tbl.ff-spar-matrix-table`. Die Regeln
+   feuerten also ins Leere, und weil das Premium-Tabellen-System in
+   z-premium-blog.css komplett auf `.post-content` gescopt war, blieb die
+   Spar-Matrix voellig ungestylt (PaperMod-Reset, kein Zellpolster).
+   Zustaendig ist jetzt zzz-agency-polish.css Abschnitt 11 (Basis-Schicht
+   `.ff-table-scroll`/`.ff-tbl` ohne `.post-content`-Fessel + mobile
+   Kartenansicht). Bewacht von scripts/tabellen_lesbarkeit_guard.py. */
+.post-content table {
     width: 100%;
     border-collapse: collapse;
     margin: 16px 0;
     font-variant-numeric: tabular-nums;
 }
 
-.post-content table th,
-.ff-spar-matrix table th {
+.post-content table th {
     background: var(--ff-emerald);
     color: #fff;
     padding: 10px 14px;
@@ -921,8 +929,7 @@ input:focus-visible {
     text-align: left;
 }
 
-.post-content table td,
-.ff-spar-matrix table td {
+.post-content table td {
     padding: 10px 14px;
     border-bottom: 1px solid var(--border);
 }

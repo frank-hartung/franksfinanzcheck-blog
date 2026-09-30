@@ -2131,6 +2131,408 @@ details.toc a {
   }
 }
 
+
+/* ============================================================
+   11. TABELLEN AUSSERHALB VON .post-content – LESBARKEIT
+       (Frank-Befund 30.09.2026: „Die FranksFinanzcheck Spar-Matrix
+       auf einen Blick" – Tabelle unlesbar)
+   ------------------------------------------------------------
+   BEFUND: Die Spar-Matrix auf /pillar/ wird vom Layout gebaut
+   (layouts/pillar/list.html), nicht aus Markdown. Sie lag damit
+   ausserhalb von `.post-content` – und genau dorthin war das
+   Premium-Tabellen-System (z-premium-blog.css, „TABELLEN-SYSTEM")
+   vollstaendig gescopt: JEDE Regel beginnt mit `.post-content`.
+   Die einzige Regel, die die Matrix je meinte, stand in custom.css
+   als `.ff-spar-matrix table` – ein Klassenname, den das Markup
+   seit dem Agentur-Layout nicht mehr traegt (`ff-spar-matrix-section`
+   / `ff-spar-matrix-table`). Ergebnis in Produktion: uebrig blieb der
+   PaperMod-Reset (`table { display:block; word-break:keep-all }`)
+   plus NULL Zellabstand – fuenf Spalten klebten als Textband
+   zusammen, ohne Kopfkontrast, ohne Zeilenfuehrung, ohne
+   Scroll-Container. Dieselbe Ursachenklasse wie die
+   `.ff-pc-*`-Lieferluecke vom 28.09.2026: Markup da, CSS nie
+   geliefert.
+   HEILUNG in zwei Schichten:
+   11.1 Basis-Schicht OHNE `.post-content`-Fessel – das
+        Tabellen-System gilt jetzt ueberall, wo `.ff-table-scroll`
+        + `.ff-tbl` im Markup stehen (Layouts, Partials, Shortcodes,
+        zukuenftige Komponenten). Die Werte sind 1:1 die des
+        bestehenden Systems; innerhalb von `.post-content` gewinnen
+        weiterhin die dortigen, spezifischeren Regeln – kein Artikel
+        aendert sein Aussehen.
+   11.2 Spar-Matrix-Politur + mobile Kartenansicht: unter 760 px
+        wird jede Zeile eine Karte (Feldnamen aus `data-label`),
+        statt fuenf Spalten durch ein 390-px-Fenster zu schieben.
+        Keine zweite Markup-Kopie – die Affiliate-Knoepfe bleiben
+        gezaehlt genau einmal im HTML (Offenlegungs-SSOT, O3).
+   Wache: `scripts/tabellen_lesbarkeit_guard.py` (L1–L5) haelt die
+   Lieferung dauerhaft: jede Tabellen-Klasse aus den Layouts muss
+   versorgt sein, keine tote Selektor-Leiche, Mindest-Lesbarkeit
+   (Zellpolster, Kopfkontrast, Zeilentrenner, Mobilpfad) bewiesen.
+   ============================================================ */
+
+/* ---------- 11.1 Basis-Schicht (gilt ausserhalb wie innerhalb) ---------- */
+.ff-table-scroll {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 18px 0 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--ff-radius-md);
+  background: var(--entry);
+  box-shadow: 0 8px 24px rgba(15, 52, 43, .06);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 90, 67, .4) transparent;
+}
+
+.ff-table-scroll::-webkit-scrollbar { height: 10px; }
+.ff-table-scroll::-webkit-scrollbar-track {
+  background: rgba(14, 90, 67, .06);
+  border-radius: 999px;
+}
+.ff-table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(14, 90, 67, .35);
+  border-radius: 999px;
+}
+
+/* Tastatur-Bedienbarkeit des Scroll-Bereichs (role=region + tabindex="0"):
+   der Fokus muss sichtbar sein, sonst scrollt man blind. */
+.ff-table-scroll:focus-visible {
+  outline: 3px solid var(--ff-yellow);
+  outline-offset: 2px;
+}
+
+.ff-table-scroll .ff-tbl {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .95rem;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  background: var(--entry);
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual; /* Haus-Regel: keine automatische Silbentrennung */
+}
+
+.ff-table-scroll .ff-tbl th,
+.ff-table-scroll .ff-tbl td {
+  padding: 12px 14px;
+  vertical-align: top;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--entry);
+  white-space: normal;
+  color: var(--primary);
+}
+
+.ff-table-scroll .ff-tbl thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--ff-emerald);
+  color: #fff;
+  font-size: .83rem;
+  font-weight: 700;
+  letter-spacing: .015em;
+  line-height: 1.3;
+  border-bottom: 2px solid var(--ff-emerald-dark);
+}
+
+.ff-table-scroll .ff-tbl thead th.ff-tbl-corner {
+  left: 0;
+  z-index: 5;
+  border-right: 1px solid var(--ff-emerald-dark);
+}
+
+.ff-table-scroll .ff-tbl tbody tr > .ff-tbl-corner {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--entry);
+  font-weight: 600;
+  color: var(--primary);
+  border-right: 1px solid var(--border);
+}
+
+.ff-table-scroll .ff-tbl tbody tr:nth-child(even) > td,
+.ff-table-scroll .ff-tbl tbody tr:nth-child(even) > th {
+  background: rgba(14, 90, 67, .045);
+}
+
+.ff-table-scroll .ff-tbl tbody tr:last-child > td,
+.ff-table-scroll .ff-tbl tbody tr:last-child > th {
+  border-bottom: 0;
+}
+
+.ff-table-scroll .ff-tbl tbody tr:hover > td,
+.ff-table-scroll .ff-tbl tbody tr:hover > th {
+  background: color-mix(in srgb, var(--ff-emerald-soft) 55%, var(--entry));
+}
+
+.ff-table-scroll .ff-tbl .ff-tbl-a-center { text-align: center; }
+.ff-table-scroll .ff-tbl .ff-tbl-a-right  { text-align: right; }
+.ff-table-scroll .ff-tbl .ff-tbl-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ff-table-scroll .ff-tbl .ff-tbl-nowrap { white-space: nowrap; }
+
+.ff-table-scroll .ff-tbl a:not(.ff-table-btn) {
+  font-weight: 600;
+  color: var(--ff-emerald);
+  text-decoration: none;
+}
+.ff-table-scroll .ff-tbl a:not(.ff-table-btn):hover { text-decoration: underline; }
+
+:root[data-theme="dark"] .ff-table-scroll {
+  background: var(--ff-surface, var(--entry));
+  border-color: var(--ff-border-card, var(--border));
+  box-shadow: none;
+}
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl,
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl th,
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl td,
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl tbody tr > .ff-tbl-corner {
+  background: var(--ff-surface, var(--entry));
+  border-color: var(--ff-border-card, var(--border));
+}
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl thead th {
+  background: var(--ff-emerald-dark);
+  color: #fff;
+  border-bottom-color: var(--ff-emerald);
+}
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl tbody tr:nth-child(even) > td,
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl tbody tr:nth-child(even) > th {
+  background: rgba(127, 209, 180, .07);
+}
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl tbody tr:hover > td,
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl tbody tr:hover > th {
+  background: rgba(127, 209, 180, .12);
+}
+:root[data-theme="dark"] .ff-table-scroll .ff-tbl a:not(.ff-table-btn) { color: var(--ff-emerald-bright); }
+
+/* ---------- 11.2 Spar-Matrix (/pillar/) ---------- */
+.ff-spar-matrix-scroll {
+  margin-top: 0;
+}
+
+.ff-spar-matrix-caption {
+  caption-side: top;
+  text-align: left;
+  padding: 0 0 10px;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--secondary);
+}
+
+/* Spaltenmass: Themenspalte breit genug fuer „Mietwagen & Reisen",
+   Geld-/Aufwandsspalte kompakt, Hebel bekommt den Rest, Aktion so
+   schmal wie der Knopf. Summe 100 % – kein Rechenrest. */
+.ff-spar-matrix-col--thema   { width: 22%; min-width: 172px; }
+.ff-spar-matrix-col--spar    { width: 18%; min-width: 132px; }
+.ff-spar-matrix-col--aufwand { width: 14%; min-width: 108px; }
+.ff-spar-matrix-col--hebel   { width: 30%; min-width: 200px; }
+.ff-spar-matrix-col--aktion  { width: 16%; min-width: 150px; }
+
+/* Hinweis zur Spezifitaet: die Basis-Schicht oben adressiert Zellen als
+   `.ff-table-scroll .ff-tbl td` (zwei Klassen + Typ). Jede Politur hier
+   muss mindestens gleichziehen, sonst gewinnt die Basis – deshalb
+   `.ff-tbl.ff-spar-matrix-table td…` statt kurzer Selektoren. */
+.ff-tbl.ff-spar-matrix-table th.ff-spar-matrix-thema a {
+  display: inline-block;
+  font-weight: 700;
+}
+
+.ff-tbl.ff-spar-matrix-table td.ff-highlight-cell {
+  color: var(--ff-emerald);
+  font-weight: 700;
+}
+:root[data-theme="dark"] .ff-tbl.ff-spar-matrix-table td.ff-highlight-cell {
+  color: var(--ff-emerald-bright);
+}
+
+.ff-tbl.ff-spar-matrix-table td.ff-spar-matrix-aktion { vertical-align: middle; }
+
+/* Der gelbe Knopf traegt jetzt ein echtes Tap-Ziel (Regelwerk: >= 44 px
+   Hoehe inkl. Polster) statt der alten 4-px-Zeile. */
+.ff-tbl.ff-spar-matrix-table .ff-table-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 16px;
+  line-height: 1.2;
+}
+
+/* Scroll-Hinweis, solange die Tabelle breiter ist als ihr Fenster. */
+@media (min-width: 761px) {
+  .ff-spar-matrix-scroll {
+    background:
+      linear-gradient(to right, var(--entry) 30%, rgba(255, 255, 255, 0)) left center,
+      linear-gradient(to left, var(--entry) 30%, rgba(255, 255, 255, 0)) right center,
+      radial-gradient(farthest-side at 0 50%, rgba(14, 90, 67, .14), rgba(14, 90, 67, 0)) left center,
+      radial-gradient(farthest-side at 100% 50%, rgba(14, 90, 67, .14), rgba(14, 90, 67, 0)) right center;
+    background-repeat: no-repeat;
+    background-size: 28px 100%, 28px 100%, 14px 100%, 14px 100%;
+    background-attachment: local, local, scroll, scroll;
+  }
+}
+
+/* ---------- 11.3 Mobil: aus jeder Zeile wird eine Karte ----------
+   Unter 760 px passen fuenf Spalten in kein Fenster. Statt die
+   Tabelle quer wegzuschieben, stapelt sie sich zu sechs Karten:
+   Themenname als Kartenkopf, darunter Feldname (data-label) +
+   Wert, Knopf volle Breite. Das Markup bleibt eine einzige
+   Tabelle – dadurch keine doppelten Affiliate-Links und keine
+   Drift in der Werbe-Offenlegung. `display` wird nur hier, nur
+   fuer diese Tabelle und nur unterhalb der Sticky-Nutzschwelle
+   veraendert (Regelwerk R7). */
+@media (max-width: 760px) {
+  .ff-spar-matrix-scroll {
+    overflow-x: visible;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody th,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td {
+    display: block;
+    width: auto;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table .ff-spar-matrix-caption {
+    display: block;
+    padding-bottom: 12px;
+  }
+
+  /* Die Basis-Schicht nimmt der LETZTEN Tabellenzeile den Trenner
+     (schoener Tabellenfuss). In der Kartenansicht ist jede Zeile eine
+     eigene Karte – dort braucht auch die letzte Karte ihre Feldlinien. */
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:last-child > td:not(.ff-spar-matrix-aktion),
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:last-child > th {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr {
+    margin: 0 0 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--ff-radius-md);
+    background: var(--entry);
+    box-shadow: var(--ff-shadow-1);
+    overflow: hidden;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:last-child { margin-bottom: 0; }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:nth-child(even) > td,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:nth-child(even) > th,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:hover > td,
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr:hover > th {
+    background: transparent;
+  }
+
+  /* Kartenkopf: Themenname auf Smaragd-Soft, nicht mehr sticky */
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr > .ff-tbl-corner {
+    position: static;
+    padding: 12px 14px;
+    background: var(--ff-emerald-soft);
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr > .ff-tbl-corner a {
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  /* Feldzeilen: Label links, Wert rechts – eine Zeile je Angabe */
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 40%) 1fr;
+    gap: 4px 12px;
+    align-items: baseline;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td::before {
+    content: attr(data-label);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td.ff-tbl-num { white-space: normal; }
+
+  /* Aktionszeile: Knopf ueber die volle Kartenbreite, ohne Label */
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td.ff-spar-matrix-aktion {
+    display: block;
+    border-bottom: 0;
+    padding: 12px 14px 14px;
+    text-align: left;
+  }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td.ff-spar-matrix-aktion::before { content: none; }
+
+  .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody td.ff-spar-matrix-aktion .ff-table-btn {
+    display: flex;
+    width: 100%;
+    min-height: 44px;
+    white-space: normal;
+  }
+
+  :root[data-theme="dark"] .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr {
+    background: var(--ff-surface, var(--entry));
+    border-color: var(--ff-border-card, var(--border));
+  }
+
+  :root[data-theme="dark"] .ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table tbody tr > .ff-tbl-corner {
+    background: rgba(127, 209, 180, .12);
+  }
+}
+
+/* Druck: keine Schatten, keine Scroll-Verlaeufe, Kopf wiederholt sich. */
+@media print {
+  .ff-table-scroll {
+    overflow: visible;
+    box-shadow: none;
+    background: none;
+    border-color: #999;
+  }
+  .ff-table-scroll .ff-tbl thead th {
+    position: static;
+    background: #eee;
+    color: #000;
+    border-bottom: 2px solid #999;
+  }
+  .ff-table-scroll .ff-tbl tbody tr > .ff-tbl-corner { position: static; }
+  .ff-spar-matrix-scroll { background: none; }
+}
+
 /* ============================================================
    SPAR-SIGNET statt Glühbirne (Frank-Befund 26.09.2026)
    ------------------------------------------------------------

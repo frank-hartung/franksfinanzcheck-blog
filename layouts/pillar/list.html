@@ -174,15 +174,43 @@
     So viel kannst du durch einen Anbieter- oder Tarifwechsel in jedem Bereich sparen:
   </p>
 
-  <div class="ff-table-scroll" role="region" aria-label="Spar-Matrix Tabelle">
+  {{- /* ---------- LESBARKEIT DER MATRIX (30.09.2026, Frank-Befund) ----------
+         Diese Tabelle steht im LAYOUT, nicht in `.post-content`. Das
+         Premium-Tabellen-System in z-premium-blog.css war aber komplett
+         auf `.post-content …` geschraubt, und die einzige Regel, die
+         diese Tabelle je meinte (`.ff-spar-matrix table`, custom.css),
+         zeigte auf einen Klassennamen, den es im Markup nicht mehr gibt.
+         Ergebnis live: PaperMod-Reset (`table{display:block}`), null
+         Zellabstand, kein Kopfkontrast – fünf Spalten klebten zusammen.
+         Die CSS-Lieferung sitzt jetzt in zzz-agency-polish.css §11 und
+         hängt an DIESEN Haken:
+           · `.ff-spar-matrix-scroll`  Scroll-Container mit Scroll-Hinweis
+           · `.ff-tbl-corner`          Themenspalte (sticky, Zeilenkopf)
+           · `.ff-tbl-num`             Geldspalte (tabular-nums, ruhig)
+           · `data-label`              Feldnamen der mobilen Kartenansicht
+             (unter 760 px wird jede Zeile eine Karte – kein Quer-Scrollen,
+             keine doppelten Links; deshalb data-label statt zweitem Markup)
+         `scripts/tabellen_lesbarkeit_guard.py` prüft dauerhaft, dass jede
+         dieser Klassen versorgt ist und die Spaltenzahl zu den Labels passt. */ -}}
+  <div class="ff-table-scroll ff-spar-matrix-scroll" role="region" aria-label="Spar-Matrix: Sparpotenzial je Themenbereich" tabindex="0">
     <table class="ff-tbl ff-spar-matrix-table">
+      <caption class="ff-spar-matrix-caption">
+        Sparpotenzial, Aufwand und wichtigster Hebel je Themenbereich – auf schmalen Displays als Karten.
+      </caption>
+      <colgroup>
+        <col class="ff-spar-matrix-col--thema">
+        <col class="ff-spar-matrix-col--spar">
+        <col class="ff-spar-matrix-col--aufwand">
+        <col class="ff-spar-matrix-col--hebel">
+        <col class="ff-spar-matrix-col--aktion">
+      </colgroup>
       <thead>
         <tr>
-          <th>Themenbereich</th>
-          <th>Sparpotenzial</th>
-          <th>Aufwand</th>
-          <th>Wichtigster Hebel</th>
-          <th>Aktion</th>
+          <th scope="col" class="ff-tbl-corner">Themenbereich</th>
+          <th scope="col">Sparpotenzial</th>
+          <th scope="col">Aufwand</th>
+          <th scope="col">Wichtigster Hebel</th>
+          <th scope="col" class="ff-tbl-a-right">Aktion</th>
         </tr>
       </thead>
       <tbody>
@@ -200,11 +228,13 @@
         -}}
         {{- range $row := $matrix }}
         <tr>
-          <td><a href="{{ $row.p }}/">{{ $row.label }}</a></td>
-          <td class="ff-highlight-cell">{{ $row.spar }}</td>
-          <td>{{ $row.aufwand }}</td>
-          <td>{{ $row.hebel }}</td>
-          <td>{{- partial "ff_affiliate_cta.html" (dict "url" $row.go "text" $row.cta "class" "ff-table-btn" "arrow" true "placement" "spar-matrix" "page" $) -}}</td>
+          <th scope="row" class="ff-tbl-corner ff-spar-matrix-thema">
+            <a href="{{ $row.p }}/">{{ $row.label }}</a>
+          </th>
+          <td class="ff-highlight-cell ff-tbl-num" data-label="Sparpotenzial">{{ $row.spar }}</td>
+          <td data-label="Aufwand">{{ $row.aufwand }}</td>
+          <td data-label="Wichtigster Hebel">{{ $row.hebel }}</td>
+          <td class="ff-spar-matrix-aktion ff-tbl-a-right" data-label="Aktion">{{- partial "ff_affiliate_cta.html" (dict "url" $row.go "text" $row.cta "class" "ff-table-btn" "arrow" true "placement" "spar-matrix" "page" $) -}}</td>
         </tr>
         {{- end }}
       </tbody>
