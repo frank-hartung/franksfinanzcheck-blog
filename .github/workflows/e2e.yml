@@ -75,6 +75,16 @@ jobs:
       - name: Playwright-Chromium installieren (mit System-libs)
         run: npx playwright install --with-deps chromium
 
+      # Statische Wache VOR dem Browser: sie braucht weder Build noch
+      # Chromium und faengt die Ursachenklasse „Markup da, CSS nie
+      # geliefert" (Spar-Matrix 30.09.2026, .ff-pc-* 28.09.2026) in
+      # Sekunden ab – inklusive Selbsttest, damit ein stumpfer Messer
+      # nicht als Gruen durchgeht.
+      - name: Tabellen-Lesbarkeit (L1–L5, statisch)
+        run: |
+          python3 scripts/tabellen_lesbarkeit_guard.py --selftest
+          python3 scripts/tabellen_lesbarkeit_guard.py
+
       - name: Website bauen
         env:
           HUGO_JSDELIVR_SHA: ${{ github.sha }}

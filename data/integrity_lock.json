@@ -1,9 +1,9 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-30T15:54:21.925027+00:00",
-  "head": "9eb06de",
+  "signed_at": "2026-09-30T19:50:56.406408+00:00",
+  "head": "a76e5d2",
   "files": {
-    "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
+    "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
     "hugo.toml": "f3cbe6ca33a7e81f7b41492397ff5d0b0e28d48c3f06662d2b166f1226b6da54",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
@@ -17,7 +17,7 @@
     "layouts/_partials/home_clusters.html": "e68acefe3fe1d00a99250a65bc2920e64e67618fd481b196f1fc1b2b977f19c8",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "e82f485c0fd98d4f4eaab4f02d03628e222388804c1af9db8f9893e4ad2970df",
+    "layouts/pillar/list.html": "b94859e25e7b4966ea83e4a460a7719498fea3fe568e6b06c099a3ce07af78a8",
     "layouts/pillar/single.html": "c87253630acca7ec81c83290694314414b6a259b5a11536a6ebbe24ff02f9648",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
@@ -47,48 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714",
-  "audit_start_sha256": "48b5d280dc44f6ce0a76f8f132816b9d748d2c6d76dc0acac3e4371642766a3b",
+  "files_sha256": "d95bccef666052331c68e0a9687eb66c3cc4a497871ca80812b4aa7393b06dd4",
+  "audit_start_sha256": "2af3b449e2335094941e559d8643c1868db46578535394d1e1c8f0347a676d29",
   "audit": [
-    {
-      "date": "2026-09-28",
-      "art": "set-current",
-      "head": "1e820eb",
-      "geaendert": [
-        "layouts/shortcodes/einspartabelle.html",
-        "layouts/shortcodes/tarifvergleich.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/shortcodes/einspartabelle.html",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "1e820eb",
-              "datum": "2026-09-27",
-              "betreff": "revenue-import: Messstände + Funnel (4× täglich)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/shortcodes/tarifvergleich.html",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "1e820eb",
-              "datum": "2026-09-27",
-              "betreff": "revenue-import: Messstände + Funnel (4× täglich)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "5ab5054026648066a375c49346f00c60130bbc3da15a86fc5f8abfe03068c42b",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-28",
       "art": "set-current",
@@ -106,7 +67,7 @@
         }
       ],
       "files_sha256": "c8f1afe2f6024b113eff85aa75de28b0a8e105906505650ebac45995fbf81093",
-      "prev_sha256": "48b5d280dc44f6ce0a76f8f132816b9d748d2c6d76dc0acac3e4371642766a3b"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-28",
@@ -466,8 +427,57 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "1f30b668ac901427561215f540db04db4d15addaa1fb7abd5290c03a64ad2146",
-      "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714"
+      "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714",
+      "prev_sha256": "1f30b668ac901427561215f540db04db4d15addaa1fb7abd5290c03a64ad2146"
+    },
+    {
+      "date": "2026-09-30",
+      "art": "set-current",
+      "head": "a76e5d2",
+      "geaendert": [
+        "assets/css/extended/custom.css",
+        "layouts/pillar/list.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "assets/css/extended/custom.css",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "a76e5d2",
+              "datum": "2026-09-30",
+              "betreff": "fix(pillar): Spar-Matrix-Tabelle lesbar – CSS-Lieferung ohne .post-content-Fessel + mobile Karten + Wache L1–L5"
+            },
+            {
+              "sha": "5611751",
+              "datum": "2026-09-30",
+              "betreff": "Lesbarkeit #482 dauerhaft: sechs Entwürfe über die Publish-Schwelle + Politur-Ruinen-Wache R11–R15 (#485)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/pillar/list.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "a76e5d2",
+              "datum": "2026-09-30",
+              "betreff": "fix(pillar): Spar-Matrix-Tabelle lesbar – CSS-Lieferung ohne .post-content-Fessel + mobile Karten + Wache L1–L5"
+            },
+            {
+              "sha": "5611751",
+              "datum": "2026-09-30",
+              "betreff": "Lesbarkeit #482 dauerhaft: sechs Entwürfe über die Publish-Schwelle + Politur-Ruinen-Wache R11–R15 (#485)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "e7d7ac7282faea5461eac1a31cd3c9435616a8013e34116040db9b4d0ad4caf8",
+      "files_sha256": "d95bccef666052331c68e0a9687eb66c3cc4a497871ca80812b4aa7393b06dd4"
     }
   ]
 }

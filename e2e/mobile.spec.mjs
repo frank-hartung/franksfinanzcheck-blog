@@ -149,4 +149,51 @@ test.describe('Mobile (iPhone 14)', () => {
     const verletzt = (geo.pills || []).filter((q) => !q.inBox || !q.innerlichSauber);
     expect(verletzt, 'Keine Trust-Pill ragt aus der Hero-Box oder überläuft intern').toEqual([]);
   });
+  // ============================================================
+  //  SPAR-MATRIX MOBIL (Frank-Befund 30.09.2026)
+  //  Fuenf Spalten passen in kein 390-px-Fenster. Unter 760 px
+  //  stapelt die Matrix deshalb zu sechs Karten: Themenname als
+  //  Kartenkopf, Feldname aus data-label, Knopf auf voller Breite.
+  //  Ein zweites Markup gibt es bewusst NICHT (sonst zaehlte die
+  //  Werbe-Offenlegung jeden Partnerlink doppelt) – die Karten
+  //  entstehen rein aus CSS.
+  // ============================================================
+  test('Spar-Matrix: stapelt zu Karten statt quer zu scrollen', async ({ page }) => {
+    await page.goto('/pillar/');
+    const tabelle = page.locator('table.ff-spar-matrix-table');
+    await expect(tabelle).toBeVisible();
+
+    const befund = await page.evaluate(() => {
+      const tab = document.querySelector('table.ff-spar-matrix-table');
+      const wrap = document.querySelector('.ff-spar-matrix-scroll');
+      const zeile = tab.querySelector('tbody tr');
+      const zelle = zeile.querySelector('td[data-label]');
+      const knopf = zeile.querySelector('.ff-table-btn');
+      const label = getComputedStyle(zelle, '::before').content;
+      return {
+        zeileGestapelt: getComputedStyle(zeile).display === 'block',
+        kopfVersteckt: getComputedStyle(tab.querySelector('thead')).position === 'absolute',
+        labelSichtbar: label && label !== 'none' && label.includes(zelle.dataset.label),
+        querScroll: wrap.scrollWidth - wrap.clientWidth,
+        knopfBreite: knopf.getBoundingClientRect().width,
+        kartenBreite: zeile.getBoundingClientRect().width,
+        knopfHoehe: knopf.getBoundingClientRect().height,
+        karten: tab.querySelectorAll('tbody tr').length,
+      };
+    });
+
+    expect(befund.zeileGestapelt, 'jede Zeile wird zur Karte').toBe(true);
+    expect(befund.kopfVersteckt, 'Spaltenkopf wandert in die Feldnamen').toBe(true);
+    expect(befund.labelSichtbar, 'Feldname steht als Label in der Karte').toBe(true);
+    expect(befund.querScroll, 'kein horizontales Scrollen mehr noetig').toBeLessThanOrEqual(1);
+    expect(befund.karten, 'sechs Themenkarten').toBe(6);
+    expect(befund.knopfHoehe, 'Tap-Ziel >= 44px').toBeGreaterThanOrEqual(44);
+    expect(befund.knopfBreite, 'Knopf nutzt die Kartenbreite')
+      .toBeGreaterThan(befund.kartenBreite * 0.7);
+
+    const overflow = await page.evaluate(() => (
+      document.documentElement.scrollWidth - document.documentElement.clientWidth
+    ));
+    expect(overflow, `document um ${overflow}px zu breit`).toBeLessThanOrEqual(1);
+  });
 });
