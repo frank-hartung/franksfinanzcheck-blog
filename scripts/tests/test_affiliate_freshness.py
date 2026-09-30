@@ -191,6 +191,57 @@ class GateWatchdogVertragTestCase(unittest.TestCase):
         self.assertIs(ok, False)
         self.assertIn("1 offene Affiliate-Probleme", message)
 
+    def test_teilheilung_alarmiert_nur_die_tatsaechliche_restmenge(self):
+        """#446 gilt auch dann, wenn daneben ein anderer Fund offen bleibt."""
+        result = _result(
+            _stamp(0), exit_code=1,
+            problems={
+                "2026-08-10-vollstaendig-geheilt": {
+                    "problems": [], "healed": ["CTA neu"],
+                },
+                "2026-08-11-teilgeheilt": {
+                    "problems": ["zweite CTA noch kaputt"],
+                    "healed": ["erste CTA neu"],
+                },
+                "2026-08-12-unheilbar": {
+                    "problems": ["CTA kaputt"], "healed": [],
+                },
+            },
+        )
+        result["healed"] = [
+            "2026-08-10-vollstaendig-geheilt",
+            "2026-08-11-teilgeheilt",
+        ]
+        result["healed_count"] = 2
+        result["render_problems"] = {"2026-08-13-render-offen": "Gateway fehlt"}
+        gate.write_state(result)
+        written = json.loads(gate.STATE.read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            written["content_problems"],
+            [
+                "2026-08-10-vollstaendig-geheilt",
+                "2026-08-11-teilgeheilt",
+                "2026-08-12-unheilbar",
+                "2026-08-13-render-offen",
+            ],
+            "Die Laufhistorie bleibt für Audit und Heilungsnachweis vollständig.",
+        )
+        self.assertEqual(
+            written["unresolved_problems"],
+            [
+                "2026-08-11-teilgeheilt",
+                "2026-08-12-unheilbar",
+                "2026-08-13-render-offen",
+            ],
+            "Ein vollständig geheilter Artikel darf nicht Teil eines P1-Alarms sein.",
+        )
+
+        ok, message = bw.check_affiliate_integrity()
+
+        self.assertIs(ok, False)
+        self.assertIn("3 offene Affiliate-Probleme", message)
+
 
 class WatchdogFrischeTestCase(unittest.TestCase):
     """Seite 2: Der Watchdog liest Befund und Frische getrennt."""

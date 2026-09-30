@@ -59,6 +59,27 @@ class AffiliateIntegrityStateContractTests(unittest.TestCase):
         }
         self.assertIn("keine offene Restmenge", state_contract_error(state) or "")
 
+    def test_v2_restmenge_enthält_nur_funde_aus_diesem_lauf(self):
+        """Eine fremde Restmenge wäre ein neuer Phantom-Alarm (#446)."""
+        state = {
+            "state_schema_version": STATE_SCHEMA_VERSION,
+            "exit_code": 1,
+            "content_problems": ["geheilt", "noch-offen"],
+            "unresolved_problems": ["phantom"],
+        }
+        self.assertIn("keinen Fund der Laufhistorie",
+                      state_contract_error(state) or "")
+
+    def test_v2_teilheilung_behält_nur_den_echten_restfund(self):
+        state = {
+            "state_schema_version": STATE_SCHEMA_VERSION,
+            "exit_code": 1,
+            "content_problems": ["geheilt", "noch-offen"],
+            "unresolved_problems": ["noch-offen"],
+        }
+        self.assertEqual(unresolved_problems(state), ["noch-offen"])
+        self.assertIsNone(state_contract_error(state))
+
     def test_v2_restmenge_muss_liste_sein(self):
         state = {
             "state_schema_version": STATE_SCHEMA_VERSION,

@@ -388,12 +388,16 @@ jobs:
             const marker = process.env.ISSUE_MARKER;
             const exitCode = String(process.env.GATE_EXIT || '');
             const healedCount = Number(process.env.HEALED_COUNT || 0);
+            const unresolvedProblems = Number(process.env.UNRESOLVED_PROBLEMS || 0);
             const toolErrors = Number(process.env.TOOL_ERRORS || 0);
             // Ein v2-Zustand mit widersprüchlicher Restmenge ist kein Grün.
-            // Ohne diesen Check könnte ein beschädigter Beweis ein offenes
-            // Ticket schließen; geheilte Historie bleibt dagegen korrekt grün.
+            // Zusätzlich verlangt der Schließpfad die explizit leere,
+            // kanonische Restmenge: geheilte Historie ist damit grün,
+            // ein echter Restfund oder Werkzeugfehler kann ein Issue aber
+            // niemals versehentlich schließen (#446, Defense in Depth).
             const stateContractError = process.env.STATE_CONTRACT_ERROR === 'true';
-            const green = exitCode === '0' && !stateContractError;
+            const green = exitCode === '0' && unresolvedProblems === 0
+              && toolErrors === 0 && !stateContractError;
 
             let report = '';
             try { report = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); }
