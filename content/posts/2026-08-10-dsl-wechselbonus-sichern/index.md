@@ -144,7 +144,7 @@ Ein Wechsel ist fast immer dann spannend, wenn du:
 - ohnehin ein Vertragsende vor dir hast,
 - mit deinem Preis, nicht aber zwingend mit der Technik unzufrieden bist.
 
-Wenn du zusätzlich noch zu viel Bandbreite gebucht hast, wird es doppelt interessant. Dann sparst du nicht nur durch Bonus, sondern auch durch einen passenderen Tarif. Dazu passt dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+Wenn du zusätzlich noch zu viel Bandbreite gebucht hast, wird es doppelt interessant. Dann sparst du nicht nur durch Bonus, sondern auch durch einen passenderen Tarif. Dazu passt dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 ## Wann ein hoher Bonus trotzdem die falsche Wahl ist
 
