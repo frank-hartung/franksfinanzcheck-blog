@@ -7,7 +7,7 @@
 #  Workflow ist Franks Pendant – ohne Personal, ohne Paid-API:
 #
 #    Mo 08:15 MESZ  agent-reach-research.yml schreibt Briefs
-#    DI 06:20 MESZ  DIESES Workflow liest sie:
+#    DI 06:24 MESZ  DIESES Workflow liest sie:
 #                     1. Fälligkeit je Kennzahl (Register-Rhythmus)
 #                     2. Brief-Signale NEUER als der Prüfstand
 #                     3. Artikel, deren lastmod hinter dem
@@ -25,9 +25,11 @@ name: Kennzahlen-Radar
 
 on:
   schedule:
-    # Dienstag 06:20 MESZ – nach den Montag-Briefs, vor dem
+    # Dienstag 06:24 MESZ – nach den Montag-Briefs, vor dem
     # Newsletter (06:30) und der Faktenfrische (06:40).
-    - cron: "20 4 * * 2"
+    # AUDIT 30.09. (Kollision entzerrt): war 04:20 UTC – gleichzeitig mit
+    # der Marken-Oberflächen-Wache (täglich 04:20).
+    - cron: "24 4 * * 2"
   workflow_dispatch: {}
 
 permissions:

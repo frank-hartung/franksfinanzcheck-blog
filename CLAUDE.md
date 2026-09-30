@@ -180,9 +180,9 @@ ToS verbieten Automation – im CI hart geblockt) → **offline**
 - **Quota:** `data/zeit_rechtschreibung_cache.json` (versioniert) –
   unveränderte Artikel kosten keine Anfrage; Verlauf in
   `data/zeit_rechtschreibung_history.jsonl`.
-- **CI in einem Schritt:** `workflow-ready/zeit-rechtschreibung.yml`
-  montags 04:35 UTC – einmalig per Admin-Token nach
-  `.github/workflows/` kopieren.
+- **CI aktiv:** `.github/workflows/zeit-rechtschreibung.yml`
+  montags 04:35 UTC (seit 28.09. aktiv; die einstige Vorlagen-Kopie in
+  `workflow-ready/` ist am 30.09. entfernt – SSOT ist der aktive Workflow).
 - Runbook + Datenschutz + Premium-Aktivierung:
   `docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md`.
 

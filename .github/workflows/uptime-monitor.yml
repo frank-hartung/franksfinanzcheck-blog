@@ -1,7 +1,7 @@
 # ============================================================
 #  UPTIME-MONITOR (kostenlos, GitHub Actions + Issues)
 #  ------------------------------------------------------------
-#  Prüft alle 15 Minuten die Erreichbarkeit der Live-Site:
+#  Prüft alle 30 Minuten die Erreichbarkeit der Live-Site:
 #    - https://franksfinanzcheck.de/          (Startseite, 200 + Inhalt)
 #    - https://franksfinanzcheck.de/posts/    (Blog-Übersicht)
 #    - https://franksfinanzcheck.de/pillar/   (Ratgeber-Übersicht)
@@ -18,7 +18,15 @@ name: Uptime-Monitor
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # REDUNDANZ-AUFLÖSUNG (30.09.2026, Automatik-Audit): war */15 (96
+    # Läufe/Tag = 672/Woche). Für eine statische Hugo-Site auf GitHub
+    # Pages ist 15-Minuten-Kadenz Over-Monitoring – der repo-eigene
+    # Incident-Nachweis (25.09.2026) zeigte zudem, dass GitHubs
+    # Scheduler unter Last ohnehin nur 6 von 96 Läufen auslöste; das
+    # 15-Minuten-Versprechen war also faktisch nie einhaltbar.
+    # 30 Minuten halbiert die Scheduler-Last (336 Läufe/Woche) bei
+    # gleicher Erkennungsqualität im real betreibbaren Rahmen.
+    - cron: "*/30 * * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -70,7 +78,7 @@ jobs:
           EXISTING=$(gh issue list --state open --label uptime \
             --json number --jq '.[0].number' 2>/dev/null || echo "")
           if [ -z "$EXISTING" ]; then
-            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 15 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${{ env.FAILED }}")
+            BODY=$(printf '**%s** – folgende URLs antworten nicht korrekt:%s\n\nDer Monitor prueft alle 30 Minuten. Das Issue wird automatisch geschlossen, sobald die Site wieder erreichbar ist.' "$TS" "${{ env.FAILED }}")
             gh issue create --title "Uptime-Alarm: Site nicht erreichbar" \
               --label uptime \
               --body "$BODY"

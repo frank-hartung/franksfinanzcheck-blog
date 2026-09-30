@@ -8,7 +8,7 @@
 #  schreibt den Trichter neu; bewertet und gemeldet wird weiterhin zentral
 #  über das Governance-Gate (Issue-Eskalation = eine Stimme, nicht zwei).
 #
-#  Pipeline (alle 6 h): Umami-Views + CTA-Events → Umami-Affiliate-Klicks →
+#  Pipeline (2×/Tag, s. Audit 30.09.): Umami-Views + CTA-Events → Umami-Affiliate-Klicks →
 #  Awin-Transaktionen (Publisher API) → Provisions-Statistik → Umsatz-Funnel.
 #  Der Trichter-Lauf erscheint zusätzlich in der Lauf-Zusammenfassung –
 #  direkt lesbar, ohne Root-Müll (Reports sind gitignored).
@@ -24,7 +24,15 @@
 name: Revenue-Import
 on:
   schedule:
-    - cron: "10 2,8,14,20 * * *"   # ~alle 6 h (04:10, 10:10, 16:10, 22:10 MESZ)
+    # AUDIT 30.09. (Redundanz-Auflösung): war 4×/Tag (alle 6 h). Der
+    # dokumentierte Bedarf ist TAGESFrische („Klicks und Stornos kommen
+    # täglich herein") – kein Verbraucher im Repo liest die Daten
+    # intraday (Scorecard/Funnel-Report wöchentlich, Kennzahlen-Radar
+    # liest Research-Briefs, Pinterest-Feedback wöchentlich). 2×/Tag
+    # (Morgenbericht + Abendbericht) halbiert die Umami-API-Last bei
+    # gleicher Aussagekraft; Montags läuft zusätzlich der Verifikations-
+    # Import der Premium-Governance (05:15 UTC, Nachweis-Prinzip).
+    - cron: "10 4,16 * * *"   # 2×/Tag (06:10 + 18:10 MESZ)
   workflow_dispatch: {}
 
 permissions:

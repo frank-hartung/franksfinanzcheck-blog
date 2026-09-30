@@ -96,7 +96,21 @@ on:
       - "Mastodon-Manueller-Post"
       - "Newsletter-Daily (Capture-Wache + Digest)"   # PREM-AUDIT 23.09.: Lauf #14 rot = Versand-Pfad kaputt – aber kein Issue: die Wache war blind für genau den Workflow, der Emails verschickt
       - "Newsletter-Kadenz-Wache"   # PREM-AUDIT 23.09.: sie holt still verworfene Crons nach – kann sie das nicht, muss es laut werden
+      - "Newsletter-Lifecycle (Bestätigung + Nachgang)"   # AUDIT 30.09.: Double-Opt-In-Bestätigungsmails – Stillstand = Anmeldungen verfallen still
       - "Claude-Stilpolitur (Mo/Mi/Fr)"   # PREM-AUDIT 25.09.: Gratis-Claude-Lane darf nie still ausfallen (Watch-Name = Workflow-`name:`, exakt)
+      - "ZEIT-Niveau Rechtschreib-Wache"   # AUDIT 30.09.: committed Content-Heilungen – still rot wäre Qualitätsverlust ohne Signal
+      - "Redaktions-Politur (Sprachglatt + Grammatik, offline)"   # AUDIT 30.09.: manueller Notlauf – auch Handläufe gehören überwacht
+      - "Agent-Reach Internet-Recherche"   # AUDIT 30.09.: liefert die Montag-Briefs für Kennzahlen-Radar + Redaktion
+      - "Kennzahlen-Radar"   # AUDIT 30.09.: Frühwarnsystem für Konditionsdaten – still ausfallen = Blindflug
+      - "Design-Varianten"   # AUDIT 30.09.: Design-Werkbank (Varianten-Gate + Reach-Briefing)
+      - "Faktenfrische (Bestand)"   # AUDIT 30.09.: aktualisiert Artikeldaten + committed Content – Herzstück der Ehrlichkeits-Doktrin
+      - "Revenue-Import"   # AUDIT 30.09.: 4×/Tag Umsatz-Datenpipeline – ohne sie zeigt der Trichter Altdaten ohne Warnung
+      - "Social-Autopilot"   # AUDIT 30.09.: 8×/Tag Reichweiten-Maschine auf allen Kanälen – still rot = Kanäle verstummen
+      - "Dialog-Autopilot (Kommentare & Antworten)"   # AUDIT 30.09.: 3×/Tag Antwort-Vorschläge – Ausfall frisst Vertrauen bei der Community
+      - "Social-Preflight (Zugangs-Verifikation)"   # AUDIT 30.09.: Kanal-Token-Verifikation – rot = ein Kanal ist faktisch abgemeldet
+      - "Shorts-Schmiede (Video & Reels)"   # AUDIT 30.09.: Video-Pipeline (Di/Sa) – still rot = Reichweitenkanal Videos verstummt
+      - "Marken-Oberfläche (öffentliche Sichtbarkeit)"   # AUDIT 30.09.: Brand-Schutz öffentlicher Flächen – Stillstand wäre unsichtbar
+      - "E2E-Tests (Playwright)"   # AUDIT 30.09.: dienstags auf main – Regressionen brauchen dasselbe Signal wie jedes Gate
     types:
       - completed
 

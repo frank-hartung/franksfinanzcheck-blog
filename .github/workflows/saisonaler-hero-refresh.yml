@@ -21,9 +21,11 @@ name: Saisonaler Hero-Refresh (Agent Reach + Claude)
 
 on:
   schedule:
-    # täglich 07:15 MESZ: Saisonwechsel wird unmittelbar aufgegriffen;
+    # täglich 07:27 MESZ: Saisonwechsel wird unmittelbar aufgegriffen;
     # das Skript spart Claude-Aufrufe, solange der Hero noch frisch ist.
-    - cron: "15 5 * * *"
+    # AUDIT 30.09. (Kollision entzerrt): war 05:15 UTC – montags gleichzeitig
+    # mit Premium-Governance (beide bauen Hugo; 05:27 entzerrt das).
+    - cron: "27 5 * * *"
   workflow_dispatch:
     inputs:
       force:

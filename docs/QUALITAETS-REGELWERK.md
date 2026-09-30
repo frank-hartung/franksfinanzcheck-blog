@@ -95,10 +95,12 @@ Schritt bricht mit Exit 1 ab – der Artikel bleibt Entwurf, bis er manuell
 freigegeben wird. Sind mehr als 3 Artikel betroffen, greift der Circuit-Breaker:
 NICHTS wird geparkt, die Guards selbst gelten als fehlerhaft.
 
-**Wöchentlicher Verständnis-Report** (`seo-weekly.yml`): `duplikat_guard` und
-`textverstaendnis_guard` laufen als Komplett-Audit über alle Artikel;
-`absorb_whitelist.py` senkt das Rechtschreib-Rauschen (Wörter, die in ≥ 3
-Artikeln als „unbekannt“ auftauchen, werden in die Whitelist übernommen).
+**Verständnis-Report im Bestand** (seit Audit 30.09. SSOT: `blog-health-daily.yml`,
+täglich): `duplikat_guard` und `textverstaendnis_guard` laufen als Komplett-Audit
+über alle Artikel; `absorb_whitelist.py` senkt das Rechtschreib-Rauschen (Wörter,
+die in ≥ 3 Artikeln als „unbekannt“ auftauchen, werden in die Whitelist
+übernommen). *(Der frühere zusätzliche Wochendurchlauf in `seo-weekly.yml` war
+eine 1:1-Wiederholung der Tageswache und wurde entfernt.)*
 
 ---
 
@@ -445,8 +447,7 @@ Dauerauftrag (Frank, 25.09.2026): „Sämtliche Blogartikel dauerhaft automatisc
 
 **Verdrahtung:**
 - Content-Engine v2 Phase 2: `--selftest` implizit + `--fix --new-only` (nach Spellcheck, vor Casing)
-- `redaktions-politur.yml`: Mo 03:45 UTC Bestandslauf `--fix` über alle Artikel, Commit als `Redaktions-Bot` via `git_sync.sh --push-only`
-- `seo-weekly.yml`: wöchentlicher Bestands-Audit + `--fix` (zusätzliche Absicherung)
+- `claude-stilpolitur.yml`: Mo/Mi/Fr 04:50 UTC – Offline-Kette (LT+DW `--fix` über alle Artikel) läuft dort IMMER zuerst *(seit Audit 30.09. SSOT; der Montags-Cron von `redaktions-politur.yml` und die Sprach-Schritte in `seo-weekly.yml` waren Redundanzen und wurden entfernt; `redaktions-politur.yml` bleibt manueller Notlauf)*
 
 **Aufruf:**
 ```bash
@@ -1146,7 +1147,7 @@ python3 scripts/sprachglatt.py --fix
   C4 Zahl ohne €/% fehlt, C5 Jahres-Drift, C6 Titel-Versprechen).
   Fund heute: 🚨 C2-Systemluecke: kein Artikel hat eine Fazit-Rubrik
   (echter Auditfund); Roadmap: redaktions-politur-Workflow → erledigt 25.09.2026
-  (offline LT+DW, Mo 03:45 UTC, Hook in content-engine-v2 + seo-weekly).
+  (offline LT+DW, Mo/Mi/Fr 04:50 UTC in claude-stilpolitur.yml, Hook in content-engine-v2; Audit 30.09.).
   Integrity-FEST: 32 -> 35 Dateien (inkl. data/content_fingerprints.jsonl).
   Lektion: Audit-Messung sah zuerst 77/77 ohne Fazit – Messung korrekt:
   C2 deckt echte Strukturlücke auf; Auto-Plattencheck wirkt wie beworben.

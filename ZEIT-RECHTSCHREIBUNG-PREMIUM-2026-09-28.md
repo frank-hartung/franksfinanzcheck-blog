@@ -91,7 +91,8 @@ Offset + `sprachkern.write_verified` (Link-/Shortcode-/Überschriften-Wächter).
 
 1. **Lokal/Manuell:** npm-Skripte (`rechtschreibung:zeit[:fix|:offline|:strict|:probe]`),
    GNUPG-freie Standard-Kommandos im CLAUDE.md.
-2. **CI-ready:** `workflow-ready/zeit-rechtschreibung.yml` — einmalig nach
+2. ~~**CI-ready:** `workflow-ready/zeit-rechtschreibung.yml`~~ → aktiviert als
+   `.github/workflows/zeit-rechtschreibung.yml` (Vorlagen-Ordner 30.09. entfernt); einmalig nach
    `.github/workflows/` kopieren (Admin; Agent-Tokens dürfen Workflow-Pfade
    nicht pushen). Dann: jeden Montag 04:35 UTC + manuell, mit
    Redaktions-Bot-Commit (History/Cache/Heilungen).
@@ -106,7 +107,7 @@ Offset + `sprachkern.write_verified` (Link-/Shortcode-/Überschriften-Wächter).
 | `data/zeit_rechtschreibung.json` | SSOT-Konfiguration (Profil: de-DE/picky) |
 | `scripts/tests/test_zeit_rechtschreibung.py` | 23 Offline-Tests |
 | `docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md` | Betrieb, Premium-Aktivierung, DSGVO |
-| `workflow-ready/zeit-rechtschreibung.yml` | einmalig zu aktivierender CI-Lauf |
+| `.github/workflows/zeit-rechtschreibung.yml` | aktiver CI-Lauf (Mo 04:35 UTC) |
 | `ZEIT-RECHTSCHREIBUNG-REPORT.md` · `.zeit_rechtschreibung_report.json` | Pro-Lauf-Sicht (gitignored) |
 | `data/zeit_rechtschreibung_history.jsonl` · `data/zeit_rechtschreibung_cache.json` | Verlauf + Quoten-Schutz (versioniert) |
 
@@ -153,9 +154,9 @@ $ CI=1 python3 scripts/zeit_rechtschreibung.py --oeffentlich
 1. (Optional, empfohlen) Enterprise-Zugang oder eigene Instanz beschaffen →
    Secrets `ZR_USERNAME`/`ZR_API_KEY` bzw. `ZR_API_URL` setzen
    (Anleitung, Abschnitt 3).
-2. `workflow-ready/zeit-rechtschreibung.yml` einmalig nach
-   `.github/workflows/zeit-rechtschreibung.yml` kopieren → Dauerbetrieb
-   steht (Montag 04:35 UTC).
+2. ~~`workflow-ready/zeit-rechtschreibung.yml` kopieren~~ → erledigt 28.09.:
+   Dauerbetrieb steht (`.github/workflows/zeit-rechtschreibung.yml`,
+   Montag 04:35 UTC).
 3. Bei wiederkehrenden Fehlalarmen: Whitelist
    (`data/spellcheck_whitelist.txt`) oder `ignorieren.regeln` in
    `data/zeit_rechtschreibung.json` pflegen.

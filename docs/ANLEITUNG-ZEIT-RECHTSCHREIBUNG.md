@@ -93,10 +93,10 @@ Limits, kein Pacing):
      `LT_API_KEY` (für vorhandene Infrastruktur).
 3. **Probe:** `python3 scripts/zeit_rechtschreibung.py --probe`
    → `"modus": "premium"`, `"online": true`.
-4. **CI dauerhaft schalten:** `workflow-ready/zeit-rechtschreibung.yml` einmalig
-   nach `.github/workflows/zeit-rechtschreibung.yml` kopieren (Admin-Token;
-   Agent-Tokens dürfen Workflow-Pfade nicht pushen). Danach läuft die Wache
-   **jeden Montag 04:35 UTC** plus manuell.
+4. **CI dauerhaft schalten:** ✅ erledigt am 28.09.2026 – die Wache läuft als
+   `.github/workflows/zeit-rechtschreibung.yml` **jeden Montag 04:35 UTC** plus
+   manuell. (Die einstige Kopier-Vorlage in `workflow-ready/` wurde am 30.09.
+   entfernt – SSOT ist der aktive Workflow.)
 
 > **Kosten-Regel (Dauervorgabe):** Auch mit Premium bleibt der Offline-Pfad
 > existenziell. `require_online: true` in der Konfiguration bricht den Lauf
@@ -162,7 +162,7 @@ wird angefasst).
 | `data/zeit_rechtschreibung_history.jsonl` | **ja** | Qualitätsverlauf |
 | `data/zeit_rechtschreibung_cache.json` | **ja** | Quoten-Schutz/Dedupe |
 | `data/zeit_rechtschreibung.json` | **ja** | SSOT-Konfiguration |
-| `workflow-ready/zeit-rechtschreibung.yml` | **ja** | einmalig zu aktivierender CI-Lauf |
+| `.github/workflows/zeit-rechtschreibung.yml` | **ja** | aktiver CI-Lauf (Mo 04:35 UTC) |
 
 ## 8. Datenschutz & Bedingungen (Pflichtlektüre)
 
