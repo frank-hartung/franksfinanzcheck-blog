@@ -183,7 +183,7 @@ Hake diese Punkte ab, bevor du die Buchung abschließt. So sicherst du dir dein 
 
 ### Schnell buchen über den Partner
 
-Du willst sofort ein aktuelles Angebot prüfen? Nutze den <a href="/go/mietwagen/" rel="sponsored">CHECK24‑Vergleich</a> für die besten Pakete. Dort findest du tagesaktuelle Preise für deinen nächsten Traumurlaub.
+Du willst sofort ein aktuelles Angebot prüfen? Nutze den [Mietwagen-Preisvergleich](/go/mietwagen/) für die besten Pakete. Dort findest du tagesaktuelle Preise für deinen nächsten Traumurlaub.
 
 
 

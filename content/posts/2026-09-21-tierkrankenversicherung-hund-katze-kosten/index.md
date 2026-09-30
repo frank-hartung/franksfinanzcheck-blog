@@ -4,7 +4,7 @@ title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch"
 description: "Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif…"
 date: 2026-09-21T09:05:00Z
 draft: false
-tags: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung"]
+tags: ["Versicherungen vergleichen"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"

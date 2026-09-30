@@ -191,7 +191,13 @@ tags:
       - "Versicherungsarten"
       - "Versicherung-Update"
       - "Beitragserhöhung"
-      - "Wirklich"
+      # Tierkrankenversicherung ist ein Nischenthema mit zu wenig Artikeln für
+      # einen eigenen Tag (T4: min. 2 Artikel). Es gehört redaktionell unter den
+      # breiten Versicherungs-Vergleich, statt ein Thin-Archiv zu erzeugen.
+      - "Tierkrankenversicherung Hund"
+      - "Tierkrankenversicherung Katze"
+      - "Tierarztkosten absichern"
+      - "Haustier Versicherung"
 
   # ------------------------------------------------------------------
   # PILLAR: internet-dsl
@@ -318,6 +324,10 @@ tags:
       - "Bewusster Konsum"
       - "Geld Mindset"
       - "1.000 Euro sparen"
+      # Sparziele und saisonales Sparen (Weihnachten) sind Alltags-Spar-Signale.
+      - "Sparziele erreichen"
+      - "Weihnachten sparen"
+      - "Weihnachten ohne Schulden"
 
   - name: "Frugalismus"
     pillar: frugalismus
@@ -327,6 +337,8 @@ tags:
       - "5 einfache Frugalismus-Tricks für den Alltag"
       - "Finanzielle Freiheit"
       - "Finanzielle Freiheit erreichen"
+      # Verhaltensänderung ist der Kern des Frugalismus (Gewohnheiten umbauen).
+      - "Gewohnheiten ändern"
 
   - name: "Haushaltsbuch führen"
     pillar: frugalismus
@@ -345,6 +357,12 @@ tags:
       - "50-30-20-Regel"
       - "50 30 20 Regel"
       - "Fixkosten senken"
+      # Vorsätze/Jahresziele und Anlass-Budgets (Weihnachten) sind konkrete
+      # Ausprägungen der Budgetplanung – kein eigenes Archiv wert.
+      - "Neujahrsvorsätze Geld"
+      - "Finanzielle Ziele 2027"
+      - "Weihnachten Budget planen"
+      - "Geschenkebudget"
 
   - name: "Notgroschen"
     pillar: frugalismus
@@ -353,7 +371,9 @@ tags:
       - "Notfallreserve"
       - "Finanzpolster"
       - "Finanzieller Puffer"
-      - "Finanzieller"
+      # Ein früher automatisch erzeugter Roh-Tag war der komplette Artikeltitel.
+      # Explizit kanonisieren, statt ihn per unscharfem Titel-Abgleich zu heilen.
+      - "Notgroschen aufbauen: Wie viel reicht wirklich?"
 
   # ------------------------------------------------------------------
   # PILLAR: mietwagen

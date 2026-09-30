@@ -4,7 +4,7 @@ description: Wer klug sein Weihnachten Budget planen kann, vermeidet den Januar-
 date: 2026-09-30T10:01:33Z
 draft: true
 reserve: true
-tags: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Weihnachten ohne Schulden"]
+tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

@@ -4,7 +4,7 @@ title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten"
 description: "Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen."
 date: 2026-09-23T08:20:00Z
 draft: true
-tags: ["Unfallversicherung", "Unfallversicherung Vergleich", "Unfallversicherung sinnvoll", "Unfallversicherung Kosten"]
+tags: ["Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 keywords: ["Unfallversicherung", "Unfallversicherung Vergleich", "Unfallversicherung sinnvoll", "Unfallversicherung Kosten", "Gliedertaxe", "Progression Unfallversicherung", "Invaliditätsleistung", "Kinder Unfallversicherung"]
