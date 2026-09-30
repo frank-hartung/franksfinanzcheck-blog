@@ -156,7 +156,10 @@ def load_article(path):
     body = re.sub(r':\n', ':\n\x00', body)
     body = re.sub(r'\s+', ' ', body)
     body = body.replace('\x00', '\n')
-    return {'file': os.path.relpath(path, POSTS_DIR), 'body': body}
+    fm = parts[1]
+    is_draft = bool(re.search(r'^draft:\s*true\s*$', fm, re.M | re.I))
+    return {'file': os.path.relpath(path, POSTS_DIR), 'body': body,
+            'draft': is_draft}
 
 
 def count_syllables(word):
@@ -280,11 +283,52 @@ def analyze(a):
         sd = (sum((x - mean) ** 2 for x in sent_lens) / (len(sent_lens) - 1)) ** 0.5
 
     return {
-        'file': a['file'], 'flesch': round(flesch, 1), 'wps': round(wps, 1),
+        'file': a['file'], 'draft': a.get('draft', False),
+        'flesch': round(flesch, 1), 'wps': round(wps, 1),
         'word_len': round(avg_word_len, 1), 'long_pct': round(long_pct, 1),
         'nested_pct': round(nested_pct, 1), 'long_paras': len(long_paras),
         'dumps': dumps, 'sat_len_sd': round(sd, 1),
         'passiv': passiv_count, 'score': max(0, min(100, score)), 'issues': issues,
+    }
+
+
+# ============================================================
+#  BESTANDS-GATE – Urteilsfunktion (rein, testbar)
+#
+#  ANLASS (30.09.2026): `--gate-bestand` wertete ALLE Dateien unter
+#  content/posts aus – inklusive 18 Entwürfen (draft: true). Vier der
+#  fünf roten Artikel waren Entwürfe, die nie live gehen. Die Wache war
+#  dadurch dauerhaft rot und damit wertlos: genau die Fehlalarm-Bauart,
+#  die Issue #476 ausgelöst hat.
+#
+#  TRENNUNG (ehrlich, nichts wird verschwiegen):
+#    • LIVE-Bestand (draft: false) → harter Maßstab, Exit 1.
+#      Ø Flesch ≥ AVG_TARGET und kein Artikel unter FLOOR_MIN.
+#    • ENTWÜRFE (draft: true) → Publish-Schwelle NEW_FLESCH_MIN.
+#      Sie werden namentlich ausgewiesen (AMBER), blockieren aber nur
+#      die Veröffentlichung – dafür ist `--new-only` die Wache.
+# ============================================================
+def gate_bestand_urteil(results):
+    """Urteil über den Bestand. Rein: kein I/O, kein sys.exit."""
+    live = [r for r in results if not r.get('draft')]
+    drafts = [r for r in results if r.get('draft')]
+    avg_live = sum(r['flesch'] for r in live) / len(live) if live else 0.0
+    below_floor = [r for r in live if r['flesch'] < FLOOR_MIN]
+    drafts_below = [r for r in drafts if r['flesch'] < NEW_FLESCH_MIN]
+    stopper = []
+    if live and avg_live < AVG_TARGET:
+        stopper.append(f"Ø Flesch (live) {avg_live:.1f} < Ziel {AVG_TARGET:.0f}")
+    for r in sorted(below_floor, key=lambda x: x['flesch']):
+        stopper.append(f"Floor: {r['file']} Flesch {r['flesch']:.1f} "
+                       f"< {FLOOR_MIN:.0f}")
+    hinweise = [f"Entwurf unter Publish-Schwelle {NEW_FLESCH_MIN:.0f}: "
+                f"{r['file']} Flesch {r['flesch']:.1f}"
+                for r in sorted(drafts_below, key=lambda x: x['flesch'])]
+    return {
+        'live': live, 'drafts': drafts, 'avg_live': round(avg_live, 1),
+        'below_floor': below_floor, 'drafts_below': drafts_below,
+        'stopper': stopper, 'hinweise': hinweise, 'stop': bool(stopper),
+        'ampel': 'RED' if stopper else ('AMBER' if hinweise else 'GREEN'),
     }
 
 
@@ -303,11 +347,28 @@ def _selftest():
     single = "Text {{< tarifvergleich anbieter=\"a\" >}} danach."
     if "tarifvergleich" in _strip_shortcodes(single):
         fails.append("Einzel-Shortcode wurde nicht entfernt")
+    # Bestands-Gate in BEIDE Richtungen absichern (30.09.2026):
+    # roter LIVE-Artikel muss stoppen, roter ENTWURF darf nicht stoppen –
+    # und darf trotzdem nicht verschwiegen werden.
+    roter_live = {'file': 'live-rot', 'draft': False, 'flesch': 45.0}
+    guter_live = {'file': 'live-gut', 'draft': False, 'flesch': 70.0}
+    roter_draft = {'file': 'entwurf-rot', 'draft': True, 'flesch': 45.0}
+    u1 = gate_bestand_urteil([roter_live, guter_live])
+    if not u1['stop']:
+        fails.append("Bestands-Gate stoppt nicht bei rotem LIVE-Artikel")
+    u2 = gate_bestand_urteil([guter_live, roter_draft])
+    if u2['stop']:
+        fails.append("Bestands-Gate stoppt bei rotem ENTWURF (Fehlalarm)")
+    if not any('entwurf-rot' in h for h in u2['hinweise']):
+        fails.append("Roter Entwurf wird verschwiegen statt ausgewiesen")
+    if u2['ampel'] != 'AMBER' or u1['ampel'] != 'RED':
+        fails.append(f"Ampel falsch: {u1['ampel']}/{u2['ampel']}")
     if fails:
         for f in fails:
             print("❌ " + f)
         return 1
-    print("✅ readability_check --selftest OK (R6-Schwellen + Shortcode-Stripping)")
+    print("✅ readability_check --selftest OK (R6-Schwellen + Shortcode-Stripping "
+          "+ Bestands-Urteil live/Entwurf)")
     return 0
 
 
@@ -391,32 +452,43 @@ def main():
         print("✅ Lesbarkeits-Gate OK – neue Artikel auf Top-Level (Score ≥ 75, Flesch ≥ 60)")
         return
     if '--gate-bestand' in sys.argv:
-        issues = []
-        if avg_flesch < AVG_TARGET:
-            issues.append(f"Ø Flesch {avg_flesch:.1f} < Ziel {AVG_TARGET:.0f}")
-        for r in below_floor:
-            issues.append(f"Floor: {r['file']} Flesch {r['flesch']:.1f} < {FLOOR_MIN:.0f}")
-        # Governance-/Alerting-Report (Ampel + Befundtabelle), damit die Wache
-        # für governance_gate auswertbar ist (Exit-Code allein ist kein Befund).
+        u = gate_bestand_urteil(results)
+        print(f"Bestand: {len(u['live'])} Live-Artikel (Ø Flesch "
+              f"{u['avg_live']:.1f}) · {len(u['drafts'])} Entwürfe "
+              f"(nicht blockierend)")
+        for h in u['hinweise']:
+            print("⚠️ " + h)
         if '--report' in sys.argv:
             rep = (sys.argv[sys.argv.index('--report') + 1]
                    if sys.argv.index('--report') + 1 < len(sys.argv) else '')
             if rep:
-                ampel = ('RED' if below_floor
-                         else ('AMBER' if avg_flesch < AVG_TARGET else 'GREEN'))
                 rows = []
-                if avg_flesch < AVG_TARGET:
-                    rows.append(f"| AMBER | read_avg | Ø Flesch {avg_flesch:.1f} "
-                                f"< Ziel {AVG_TARGET:.0f} (Regelwerk R6) |")
-                for r in below_floor:
+                if u['live'] and u['avg_live'] < AVG_TARGET:
+                    rows.append(f"| AMBER | read_avg | Ø Flesch (live) "
+                                f"{u['avg_live']:.1f} < Ziel {AVG_TARGET:.0f} "
+                                f"(Regelwerk R6) |")
+                for r in sorted(u['below_floor'], key=lambda x: x['flesch']):
                     rows.append(f"| RED | read_floor | {r['file']} – Flesch "
                                 f"{r['flesch']:.1f} < Floor {FLOOR_MIN:.0f} |")
+                for r in sorted(u['drafts_below'], key=lambda x: x['flesch']):
+                    rows.append(f"| AMBER | read_draft | {r['file']} (Entwurf) "
+                                f"– Flesch {r['flesch']:.1f} < Publish-Schwelle "
+                                f"{NEW_FLESCH_MIN:.0f} |")
+                if not rows:
+                    rows.append("| GREEN | read_ok | keine Befunde |")
                 content = (
                     "# Lesbarkeits-Wache – Bestands-Gate (Flesch-Amstad, deutsch)\n\n"
-                    "Gesamt-Ampel: **" + ampel + "**\n\n"
-                    f"- Geprüfte Artikel: **{len(results)}**\n"
-                    f"- Ø Flesch: **{avg_flesch:.1f}** (Ziel ≥ {AVG_TARGET:.0f})\n"
-                    f"- Unter Floor {FLOOR_MIN:.0f}: **{len(below_floor)}**\n\n"
+                    "Gesamt-Ampel: **" + u['ampel'] + "**\n\n"
+                    f"- Live-Bestand: **{len(u['live'])}** Artikel "
+                    f"(hart geprüft)\n"
+                    f"- Entwürfe: **{len(u['drafts'])}** (Publish-Schwelle "
+                    f"{NEW_FLESCH_MIN:.0f}, blockieren nur die Veröffentlichung)\n"
+                    f"- Ø Flesch live: **{u['avg_live']:.1f}** "
+                    f"(Ziel ≥ {AVG_TARGET:.0f})\n"
+                    f"- Live unter Floor {FLOOR_MIN:.0f}: "
+                    f"**{len(u['below_floor'])}**\n"
+                    f"- Entwürfe unter Publish-Schwelle: "
+                    f"**{len(u['drafts_below'])}**\n\n"
                     "## Befunde\n\n"
                     "| Level | Code | Befund |\n"
                     "|---|---|---|\n" + "\n".join(rows) + "\n")
@@ -425,12 +497,15 @@ def main():
                         fh.write(content)
                 except OSError as exc:
                     print(f"⚠️ Report {rep} nicht schreibbar: {exc}")
-        if issues:
-            for i in issues:
+        if u['stop']:
+            for i in u['stopper']:
                 print("❌ " + i)
-            print("❌ Bestands-Gate nicht bestanden – Lesbarkeit ist Handlungsfeld.")
+            print("❌ Bestands-Gate nicht bestanden – Lesbarkeit im LIVE-Bestand "
+                  "ist Handlungsfeld.")
             sys.exit(1)
-        print("✅ Bestands-Gate OK – Ø Flesch im Ziel, kein Artikel unter Floor")
+        print(f"✅ Bestands-Gate OK – {len(u['live'])} Live-Artikel, "
+              f"Ø Flesch {u['avg_live']:.1f}, kein Live-Artikel unter Floor "
+              f"{FLOOR_MIN:.0f}")
         return
     if below_floor or avg_flesch < AVG_TARGET:
         print("⚠️ Lesbarkeit unter Ziel/Floor – rote Artikel zuerst redaktionell heben "
