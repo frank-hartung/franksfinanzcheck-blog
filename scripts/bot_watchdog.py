@@ -483,6 +483,14 @@ def check_affiliate_integrity():
 # Besitzer. Zwei Wahrheiten über denselben Kanal sind der Kern von #272.
 
 
+# #462: Diagnose-Ablage des letzten Reserve-Checks. Das Routing braucht die
+# UNTERSCHEIDUNG „Content fehlt" vs. „Nachweis fehlt" – beide Zustände haben
+# denselben Zähler, aber völlig verschiedene Heilungen (produzieren vs.
+# nachzertifizieren). Ein Befund, dessen nächster Schritt nicht zur Ursache
+# passt, ist der Anfang jedes Dauer-Tickets (vgl. #272, #393).
+RESERVE_DIAGNOSE: dict = {}
+
+
 def check_content_reserve():
     """Prüft den belegten, frischen Reife-Nachweis der Reserve.
 
@@ -525,6 +533,7 @@ def check_content_reserve():
 
     certified = 0
     blocked = []
+    drifted = []
     for candidate in cert["candidates"]:
         if not isinstance(candidate, dict):
             continue
@@ -544,7 +553,13 @@ def check_content_reserve():
             blocked.append(f"{slug}: Entwurf nicht lesbar ({exc})")
             continue
         if hashlib.sha256(content).hexdigest() != expected_hash:
-            blocked.append(f"{slug}: Zertifikat passt nicht mehr zum Entwurf")
+            # #462: Das ist KEIN Content-Engpass, sondern ein Nachweis-Engpass.
+            # Ein Heiler-Lauf (Stilpolitur, Rechtschreibung, Pinterest-SEO …)
+            # hat den Entwurf nach der Zertifizierung angefasst. Der Artikel
+            # kann fachlich fertig sein – gemessen wurde er nur nicht erneut.
+            drifted.append(slug)
+            blocked.append(f"{slug}: Zertifikat passt nicht mehr zum Entwurf "
+                           f"(Heiler-Lauf danach – Nachzertifizierung nötig)")
             continue
         certified += 1
 
@@ -560,11 +575,57 @@ def check_content_reserve():
         reserve_economy.zertifikat_ziel(cert_path), ziel)
     if drift:
         diagnosis += f"; {drift}"
+    # #462: Drift ist ein eigener Befund mit eigener Heilung. Er wird hier
+    # ausgewiesen, damit das Routing nicht „zu wenig Content" meldet, wenn in
+    # Wahrheit „zu wenig frischer Nachweis" das Problem ist.
+    RESERVE_DIAGNOSE.clear()
+    RESERVE_DIAGNOSE.update({"certified": certified, "minimum": minimum,
+                             "ziel": ziel, "drifted": list(drifted),
+                             "pool": len(draft_paths)})
+    if drifted:
+        diagnosis += (f"; {len(drifted)} Kandidat(en) mit Zertifikats-Drift "
+                      f"(nach der Zertifizierung geheilt)")
     if certified < minimum:
         if blocked:
             diagnosis += "; Blocker: " + " | ".join(blocked[:2])
         return False, f"Reserve unter Mindestbestand ({diagnosis})"
     return True, f"Reserve ausreichend ({diagnosis})"
+
+def reserve_finding(msg: str):
+    """Baut den Reserve-Befund – mit dem nächsten Schritt, der zur URSACHE passt.
+
+    #462: Zwei Zustände teilen sich denselben Zähler, brauchen aber
+    gegensätzliche Heilungen:
+
+      · NACHWEIS fehlt (Zertifikats-Drift nach einem Heiler-Lauf)
+        → nachzertifizieren (`reserve_recert.py --fix`), Sekunden statt Stunden.
+      · CONTENT fehlt (zu wenige Kandidaten, echte Gate-Blocker)
+        → produzieren (`content-reserve.yml`).
+
+    Ein Ticket, dessen nächster Schritt die Ursache verfehlt, wird nie
+    abgearbeitet und kommt jeden Tag zurück – exakt die Historie von #272
+    und #393.
+    """
+    drift_slugs = list(RESERVE_DIAGNOSE.get("drifted") or [])
+    nachweis_traegt = (RESERVE_DIAGNOSE.get("certified", 0) + len(drift_slugs)
+                       >= RESERVE_DIAGNOSE.get("minimum", 0))
+    if drift_slugs and nachweis_traegt:
+        return _f(
+            "content-reserve", "Reserve-Zertifikat veraltet (Heiler-Drift)",
+            "P2", "auto", detail=msg,
+            next_step=(
+                "Nachzertifizierung starten: "
+                "`python3 scripts/reserve_recert.py --fix` – misst nur die "
+                f"{len(drift_slugs)} nach der Zertifizierung geheilten Entwürfe "
+                "am echten Gate neu und schreibt `data/reserve-readiness.json` "
+                "fort. Der Bot-Watchdog tut das ab #462 im selben Lauf selbst; "
+                "bleibt der Befund stehen, fehlte die Messkette (Exit 3)."))
+    return _f(
+        "content-reserve", "Content-Reserve niedrig", "P2", "auto", detail=msg,
+        next_step=("`data/reserve-readiness.json` auf konkrete Gate-Blocker prüfen; "
+                   "anschließend den letzten Lauf von `content-reserve.yml` "
+                   "kontrollieren und mindestens 4 zertifizierte Kandidaten herstellen."))
+
 
 def check_pinterest_duplicate():
     """Prüft PINTEREST-REPORT auf Duplikat-Befunde."""
@@ -957,11 +1018,7 @@ def run_all():
     ok_res, msg_res = check_content_reserve()
     if ok_res is False:
         env["CHECK8"] = f"WARN ({msg_res})"
-        findings.append(_f(
-            "content-reserve", "Content-Reserve niedrig", "P2", "auto", detail=str(msg_res),
-            next_step=("`data/reserve-readiness.json` auf konkrete Gate-Blocker prüfen; "
-                       "anschließend den letzten Lauf von `content-reserve.yml` "
-                       "kontrollieren und mindestens 4 zertifizierte Kandidaten herstellen.")))
+        findings.append(reserve_finding(str(msg_res)))
     else:
         env["CHECK8"] = f"OK ({msg_res})"
 

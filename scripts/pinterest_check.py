@@ -75,8 +75,23 @@ FIXED = []
 # Fingerabdruck umfasst deshalb alle Quellen, die die lokalen Pinterest-Checks
 # beeinflussen. Er enthält bewusst keine flüchtige `public/`-Ausgabe; die wird
 # im Watchdog-Lauf direkt vor dem Check frisch gebaut.
-REPORT_SCHEMA_VERSION = 2
-_REPORT_SOURCE_DIRS = ("content/posts", "layouts")
+#
+# PREMIUM-FIX 30.09.2026 (#462) – der Fingerabdruck war ZU BREIT:
+# Er hashte die kompletten Bytes von `content/posts`. Jeder Prosa-Eingriff
+# (Stilpolitur, Rechtschreibung, Faktenfrische, Fazit-Schmiede) und jeder neue
+# Artikel machte den Report damit „veraltet", obwohl KEINE einzige Pinterest-
+# Prüfung ein anderes Ergebnis geliefert hätte. Weil der Pinterest-Watchdog um
+# 04:30 UTC läuft und der Morgen-Artikel um 08:10 erscheint, war der Report
+# beim Bot-Watchdog um 08:30 per KONSTRUKTION stale – ein Dauer-Alarm ohne
+# Erkenntnisgewinn (dieselbe Fehlklasse wie #393).
+# Der Fingerabdruck deckt jetzt den PIN-RELEVANTEN Quellenstand ab: pro
+# Artikel das Frontmatter (Titel, Description, pin_title, pin_description,
+# Keywords, Cover …) plus die Affiliate-Gateway-Links aus dem Fließtext
+# (Grundlage von P11/P12) – also exakt das, was die Prüfungen lesen.
+# Schema 3, weil alte Reports mit Schema-2-Abdruck nicht vergleichbar sind.
+REPORT_SCHEMA_VERSION = 3
+_REPORT_SOURCE_DIRS = ("layouts",)
+_REPORT_SOURCE_POSTS = "content/posts"
 _REPORT_SOURCE_FILES = (
     "hugo.toml",
     ".github/workflows/pinterest-watchdog.yml",
@@ -86,6 +101,28 @@ _REPORT_SOURCE_FILES = (
     "scripts/pinterest_seo_healer.py",
 )
 _REPORT_SOURCE_ASSETS = ("static/images/pins",)
+
+
+def pin_projection(article_text: str) -> bytes:
+    """Der pin-relevante Anteil EINES Artikels (Frontmatter + Gateway-Links).
+
+    Warum nicht die ganze Datei? Weil die Pinterest-Prüfungen genau diese
+    beiden Dinge lesen: das Frontmatter (P4/P4b/P5/P8 – pin_title,
+    pin_description, Hashtags, Cover) und die Affiliate-Gateways im Text
+    (P11/P12). Eine Komma-Korrektur im dritten Absatz ändert an keinem
+    einzigen Pinterest-Signal etwas und darf den Nachweis nicht entwerten
+    (#462).
+    """
+    text = article_text or ""
+    fm = ""
+    if text.startswith("---"):
+        ende = text.find("\n---", 3)
+        if ende != -1:
+            fm = text[:ende + 4]
+    gateways = sorted(set(re.findall(r"\]\((/go/[\w-]+/)\)", text)))
+    direct = sorted(set(re.findall(
+        r"\]\((https://a\.(?:check24|partner-versicherung)[^)]*)\)", text)))
+    return ("\n".join([fm, *gateways, *direct])).encode("utf-8")
 
 
 def source_fingerprint() -> str:
@@ -119,6 +156,25 @@ def source_fingerprint() -> str:
         digest.update(b"\\0")
         with open(path, "rb") as fh:
             digest.update(fh.read())
+        digest.update(b"\\0")
+
+    # Artikel gehen NUR mit ihrer pin-relevanten Projektion ein (#462).
+    posts_dir = os.path.join(root, _REPORT_SOURCE_POSTS)
+    artikel = []
+    if os.path.isdir(posts_dir):
+        for current, _dirs, files in os.walk(posts_dir):
+            for name in files:
+                if name.endswith(".md"):
+                    artikel.append(os.path.join(current, name))
+    for path in sorted(set(artikel)):
+        rel = os.path.relpath(path, root).replace(os.sep, "/")
+        digest.update(rel.encode("utf-8"))
+        digest.update(b"\\0")
+        try:
+            with open(path, encoding="utf-8") as fh:
+                digest.update(pin_projection(fh.read()))
+        except OSError:
+            digest.update(b"<unlesbar>")
         digest.update(b"\\0")
     return digest.hexdigest()
 
