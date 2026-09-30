@@ -328,6 +328,24 @@ jobs:
             echo "✅ Affiliate-Fixes gepusht"
           fi
 
+      - name: Struktur-Wache – Zerfaserung des Bestands (Issue #476)
+        # ANLASS 30.09.2026: Ein Live-Artikel lief in das harte „zu lang“-
+        # Kriterium des Bestand-Gates – nicht weil er zu viel Inhalt hatte,
+        # sondern weil 15 Politur-Runden je einen 40–70-Wörter-Abschnitt
+        # ans Ende gehängt hatten. length_guard.py heilt ausschließlich
+        # nach OBEN (zu kurz → KI ergänzt); die Gegenrichtung war unbewacht.
+        # struktur_guard.py hält den Bestand per Sperrklinke
+        # (data/struktur_baseline.json) fest: Zuwachs an Mikro-Abschnitten
+        # oder Serien-Überschriften = Exit 1, Rückgang rastet automatisch
+        # ein. Läuft VOR dem Bestand-Gate, damit der Bericht die URSACHE
+        # nennen kann statt nur die Zeichenzahl. Meldend, nie schreibend.
+        id: struktur
+        continue-on-error: true
+        run: |
+          python3 scripts/struktur_guard.py --selftest
+          python3 scripts/struktur_guard.py | tee /tmp/struktur_log.txt
+          exit ${PIPESTATUS[0]}
+
       - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
         # Frank-Beschluss 13.08., erweitert 14.08.: Die harte Publish-Gate-
         # Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py
@@ -360,6 +378,10 @@ jobs:
           # add-Aufruf statt eines gemeinsamen (siehe uniqueness-guard.yml).
           git add content/ 2>/dev/null || true
           git add BESTAND-REPORT.md 2>/dev/null || true
+          # Sperrklinke des Struktur-Guards (#476): Baseline + Historie
+          # MÜSSEN mitwandern, sonst kennt der nächste Lauf den Stand nicht.
+          git add data/struktur_baseline.json 2>/dev/null || true
+          git add data/struktur_history.jsonl 2>/dev/null || true
           git add AFFILIATE-REPORT.md 2>/dev/null || true
           git add AFFILIATE-INTEGRITY-REPORT.md 2>/dev/null || true
           git add .affiliate_report.json 2>/dev/null || true
@@ -382,6 +404,14 @@ jobs:
             const fs = require('fs');
             let details = 'Bestand-Gate hat Artikel gefunden, die die aktuellen Publish-Gate-Regeln nicht (mehr) erfüllen.';
             try { details = fs.readFileSync('BESTAND-REPORT.md', 'utf-8'); } catch (e) {}
+            // Ursachen-Anhang (#476): Überlänge im Bestand entsteht fast immer
+            // durch angehängte Mini-Abschnitte. Der Struktur-Report benennt sie.
+            try {
+              const struktur = fs.readFileSync('STRUKTUR-REPORT.md', 'utf-8');
+              if (struktur.includes('Struktur-Regressionen')) {
+                details += '\n\n---\n\n' + struktur;
+              }
+            } catch (e) {}
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,

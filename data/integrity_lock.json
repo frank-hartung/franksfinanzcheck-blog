@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-09-30T12:16:26.073702+00:00",
-  "head": "eb15c1c",
+  "signed_at": "2026-09-30T15:54:21.925027+00:00",
+  "head": "9eb06de",
   "files": {
     "assets/css/extended/custom.css": "5f04d67001715c18372c176aa2c56822a5b28a7bf33258c263394df4851283b6",
     "data/brand_lock.yaml": "3c445091d36ed0c012411579a0ebc23f100893b9f7767d01aa16584c35b510f8",
@@ -25,7 +25,7 @@
     "scripts/affiliate_integrity_gate.py": "68b3b6b1348c2cec41f92d920dc4aab2df7404807949dbbbd5a23caedcd5d638",
     "scripts/affiliate_marketer.py": "61ec2e02ffca84c625f9e83d87839aa7cfc7a056ed75f5df75785fef28caa611",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
-    "scripts/blog_doctor.py": "e90fe3daf14c3a0c22dff8477ae659851d35db93d3d024f701db59bab83b643e",
+    "scripts/blog_doctor.py": "4f2c9888f06d22436f766ff152760681123e26adc31a836ae61ba25fc8a60382",
     "scripts/brand_guard.py": "5795781187cffd3bdaa831ab0cd0c88312a96a196b8a3b36be7cc3df81b58071",
     "scripts/casing_guard.py": "632b9c92cde0249fe9f6c57ce22a5ef2e1695d049c31532da8ed99fbd6f3d3c6",
     "scripts/check24_links.yaml": "054ec34a1b75703d5120b88094253b980a60136baec10358bae70b8705038946",
@@ -47,62 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "092b5a9f36e81bfb712d7dfc68b823537efd2f5d1471d23948263bf4474fd54c",
-  "audit_start_sha256": "459ff28cd3f34f86354fc2ecd35ac3e33d0533e31f041ad530e64bff2a010f92",
+  "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714",
+  "audit_start_sha256": "48b5d280dc44f6ce0a76f8f132816b9d748d2c6d76dc0acac3e4371642766a3b",
   "audit": [
-    {
-      "date": "2026-09-27",
-      "art": "set-current",
-      "head": "2748af4",
-      "geaendert": [
-        "data/brand_lock.yaml",
-        "hugo.toml",
-        "scripts/brand_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "2748af4",
-              "datum": "2026-09-27",
-              "betreff": "Merge pull request #418 from frank-hartung/arena/01a0e2f9-franksfinanzcheck-blog"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/brand_lock.yaml",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "2748af4",
-              "datum": "2026-09-27",
-              "betreff": "Merge pull request #418 from frank-hartung/arena/01a0e2f9-franksfinanzcheck-blog"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/brand_guard.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "2748af4",
-              "datum": "2026-09-27",
-              "betreff": "Merge pull request #418 from frank-hartung/arena/01a0e2f9-franksfinanzcheck-blog"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "96629b239e82d8ffc96d102a58e265e4f643a1d789aa5f2c0d79145af81bb298",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-28",
       "art": "set-current",
@@ -140,7 +87,7 @@
         }
       ],
       "files_sha256": "5ab5054026648066a375c49346f00c60130bbc3da15a86fc5f8abfe03068c42b",
-      "prev_sha256": "459ff28cd3f34f86354fc2ecd35ac3e33d0533e31f041ad530e64bff2a010f92"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-28",
@@ -489,8 +436,38 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "2ef393574ed6e88932318a8213fa0bce3b674c2c1ca1d0ccc2dd5749315b7909",
-      "files_sha256": "092b5a9f36e81bfb712d7dfc68b823537efd2f5d1471d23948263bf4474fd54c"
+      "files_sha256": "092b5a9f36e81bfb712d7dfc68b823537efd2f5d1471d23948263bf4474fd54c",
+      "prev_sha256": "2ef393574ed6e88932318a8213fa0bce3b674c2c1ca1d0ccc2dd5749315b7909"
+    },
+    {
+      "date": "2026-09-30",
+      "art": "heal",
+      "head": "9eb06de",
+      "geaendert": [
+        "scripts/blog_doctor.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/blog_doctor.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9eb06de",
+              "datum": "2026-09-30",
+              "betreff": "redaktion+wache: Zerfaserung des Bestands dauerhaft beheben (#476)"
+            },
+            {
+              "sha": "df7ca98",
+              "datum": "2026-09-30",
+              "betreff": "redaktion: Claude-Stilpolitur durch Hemingway-Check ersetzen (#479)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "1f30b668ac901427561215f540db04db4d15addaa1fb7abd5290c03a64ad2146",
+      "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714"
     }
   ]
 }

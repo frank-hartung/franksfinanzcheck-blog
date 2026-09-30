@@ -498,6 +498,61 @@ def manage_issues(exit_code: int, report_text: str, dry_run: bool = False) -> No
 # ------------------------------------------------------------------ #
 #  Report
 # ------------------------------------------------------------------ #
+def length_hinweis(slug: str) -> str:
+    """Ehrlicher Längen-Befund statt Legacy-Text.
+
+    REPARATUR 30.09.2026 (Issue #476): Hier stand jahrelang die feste
+    Zeile „Länge außerhalb 700-1800 Wörter“. Das war schlicht falsch –
+    gemessen wird seit dem Premium-Korridor (length_policy.py, SSOT)
+    in ZEICHEN (Floor 10.000, Optimum 12.000–18.000, Deckel 22.000).
+    Die Redaktion bekam damit eine Zahl, die zu keinem Prüfwert passte,
+    und keinen Hinweis auf die Ursache. Neu: echter Messwert, echter
+    Korridor und – wenn es um Überlänge geht – der Zerfaserungs-Befund
+    des Struktur-Guards (angehängte Mini-Abschnitte statt Textarbeit).
+    """
+    path = POSTS_DIR / slug / "index.md"
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return ("Länge außerhalb des Premium-Korridors "
+                f"({_length_policy().corridor_label('posts')}) – braucht echte Textarbeit")
+    lp = _length_policy()
+    _words, chars = lp.measure(text)
+    pol = lp.POSTS
+    if chars < pol["target_min_chars"]:
+        return (f"Zu kurz: {chars} Zeichen < Floor {pol['target_min_chars']} "
+                f"(Optimum {pol['opt_min_chars']}–{pol['opt_max_chars']}). "
+                "Selbstheilung: `python3 scripts/length_guard.py --fix --ai`")
+    if chars <= pol["fat_chars"]:
+        # Kann nur auftreten, wenn Messung und Bericht auseinanderlaufen –
+        # dann lieber ehrlich „unklar“ melden als eine erfundene Zahl.
+        return (f"Längen-Befund unklar: {chars} Zeichen liegen im Korridor "
+                f"{pol['target_min_chars']}–{pol['fat_chars']} – "
+                "`python3 scripts/check_length.py --json` prüfen.")
+    zusatz = ""
+    try:
+        sys.path.insert(0, str(SCRIPTS))
+        import struktur_guard as sg  # noqa: PLC0415
+        res = sg.analyse(text)
+        if res["mikro"]:
+            zusatz = (f" Ursache laut Struktur-Guard: {res['mikro']} Mikro-Abschnitte"
+                      + (f" (Serien: {', '.join(res['serien_detail'])})"
+                         if res["serien_detail"] else "")
+                      + " – zusammenführen statt kürzen.")
+    except Exception:  # noqa: BLE001 – Diagnose darf den Bericht nie sprengen
+        zusatz = ""
+    return (f"Zu lang: {chars} Zeichen > Deckel {pol['fat_chars']} "
+            f"(Optimum {pol['opt_min_chars']}–{pol['opt_max_chars']}). "
+            "Nicht automatisch heilbar, braucht redaktionelle Verdichtung."
+            + zusatz)
+
+
+def _length_policy():
+    sys.path.insert(0, str(SCRIPTS))
+    import length_policy as lp  # noqa: PLC0415
+    return lp
+
+
 def render_report(all_slugs: set[str], still_affected: dict, errors: list[str],
                   healed_dims: list[str]) -> str:
     lines = [
@@ -536,7 +591,7 @@ def render_report(all_slugs: set[str], still_affected: dict, errors: list[str],
         for slug, detail in still_affected.items():
             lines.append(f"#### {slug}")
             if detail["length"]:
-                lines.append("- ⚠️ Länge außerhalb 700-1800 Wörter (braucht echte Textarbeit, nicht automatisch heilbar)")
+                lines.append(f"- ⚠️ {length_hinweis(slug)}")
             if detail["seo"]:
                 lines.append("- ⚠️ SEO-Mangel laut seo_audit.py besteht nach meta_optimizer.py --fix weiter")
             if detail.get("keyword"):
