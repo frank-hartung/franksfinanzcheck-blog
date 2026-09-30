@@ -1,28 +1,13 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 7,
-  "generated_at": "2026-09-30T10:06:39Z",
+  "ready": 4,
+  "pool_size": 5,
+  "generated_at": "2026-09-30T12:32:21Z",
   "candidates": [
-    {
-      "slug": "2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich",
-      "ready": true,
-      "sha256": "22121795664dc96e60f92d8ea528de3efcdfe2ddab5491b45d8616e6f0838165",
-      "score": 0.916,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
     {
       "slug": "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
       "ready": true,
-      "sha256": "23521b59f595bf969bd307c42c92db367aaf3e1fd1ece689236cdbf0558affbf",
+      "sha256": "7fda9696f05cea919f7f4a494320c2be10fbdafebb282c4a867faca8d27fbe29",
       "score": 0.938,
       "parts": {
         "spelling": 0.78,
@@ -37,7 +22,7 @@
     {
       "slug": "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
       "ready": true,
-      "sha256": "19c5046dfa1896dac3a5052c8b1309e2151400978505b46fb1d1de58c6ac7d98",
+      "sha256": "01c4fc3577b230e7be3ea1564c39d86620a09c749ef58577eb918fbd4a0d9be0",
       "score": 0.864,
       "parts": {
         "spelling": 0.6000000000000001,
@@ -52,7 +37,7 @@
     {
       "slug": "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
       "ready": true,
-      "sha256": "6cd4dae29517b30119996e0290546a7a602c6753d30aef61236e64e69009bd6d",
+      "sha256": "4f9d904dff6bff1e48c32be0878c33d18b73f139d3b4bde26f4772bf5a638c67",
       "score": 0.912,
       "parts": {
         "spelling": 0.8,
@@ -67,7 +52,7 @@
     {
       "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
       "ready": false,
-      "sha256": "7ec8680b8529ecb0735af08ccc3843adfe1a89e37244c71d8c796cd2cc49b9fb",
+      "sha256": "6a55e2db1c8491e3c9fa964ab672e33cf58d96552de1dfb813ff50b7b761a99d",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
       "details": [
         "🛑 2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -86,24 +71,9 @@
       }
     },
     {
-      "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-      "ready": true,
-      "sha256": "51d7c94f63de19f5a6eac1088a692d33d10aa15e5dcf6a532c8af51af460c1a9",
-      "score": 0.958,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden",
       "ready": true,
-      "sha256": "556fe0eafb7e6d48f658233213b6f56537c05b58ff45ccd5305e6cf46a665b34",
+      "sha256": "28ff46448a9f545aec845e6608eafef66c707ece40a4d89e1ee442e225a139bf",
       "score": 0.914,
       "parts": {
         "spelling": 0.8,
@@ -115,5 +85,16 @@
         "readability": 0.8
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-09-30T12:32:21Z",
+    "renewed": [
+      "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
+      "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
+      "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
+      "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
+      "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
