@@ -27,6 +27,8 @@ kurzantwort: "Nutze einen Niedertarif‑Stromtarif (z. B. 0,09 €/kWh) und lad
 
 Der Umstieg auf die Elektromobilität verspricht sauberes Fahren und geringere Betriebskosten. Doch wer nach den ersten tausend Kilometern die Stromrechnung prüft, erlebt oft eine Überraschung.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Die **E-Auto Ladekosten** hängen nämlich massiv davon ab, wo und zu welchen Konditionen der Strom in den Akku fließt. Während das Tanken von Benzin oder Diesel an der Anzeigetafel der Tankstelle transparent erscheint, verstecken sich beim Stromladen viele Variablen hinter Grundpreisen, Kilowattstunden-Tarifen und Ladeverlusten. Wer hier blindlings den erstbesten Haushaltsstrom nutzt, zahlt unter Umständen deutlich mehr als nötig.
 
 **Das Wichtigste in Kürze**

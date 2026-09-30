@@ -1,9 +1,9 @@
 ---
 title: "Autokosten senken: So sparst du hunderte Euro jährlich"
 description: Deine Autokosten fressen dein Budget auf? Frank Hartung zeigt dir, wie du bei Versicherungen und Kraftstoff sparst, ohne auf Mobilität zu verzichten.
-date: 2026-09-30T09:53:28Z
-draft: true
-reserve: true
+date: 2026-09-30T10:11:03Z
+draft: false
+reserve_published: 2026-09-30
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

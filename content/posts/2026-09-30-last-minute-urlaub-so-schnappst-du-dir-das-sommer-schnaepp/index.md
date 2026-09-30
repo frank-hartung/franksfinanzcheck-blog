@@ -1,9 +1,9 @@
 ---
 title: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
 description: "Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst."
-date: 2026-09-30T10:01:39Z
-draft: true
-reserve: true
+date: 2026-09-30T10:11:05Z
+draft: false
+reserve_published: 2026-09-30
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
