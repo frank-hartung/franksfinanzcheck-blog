@@ -117,21 +117,39 @@ geschrieben (fail-closed wie im ganzen Haus).
   Premium-Korridor in **Zeichen**. Neu meldet der Bericht Messwert, echten
   Korridor, Heilbefehl (zu kurz) bzw. den Zerfaserungs-Befund (zu lang).
 
-## 6) Restschuld, bewusst sichtbar gehalten
+## 6) Restschuld: die fünf schwersten Live-Fälle sind abgeräumt
 
-Die Wache zeigt, dass die Zerfaserung kein Einzelfall war: **57 von 62**
-Artikeln tragen noch Mikro-Abschnitte, **14** zusätzlich Serien. Nichts davon
-ist heute ein Gate-Verstoß, und nichts davon wird automatisch angefasst –
-aber alles ist eingefroren und kann nur noch **kleiner** werden. Größte Posten
-für die nächsten Politur-Runden (dann bitte verdichtend statt anhängend):
+Die Wache hat gezeigt, dass die Zerfaserung kein Einzelfall war. Deshalb blieb
+es nicht beim Auslöser-Artikel: Die fünf am stärksten zerfaserten **Live**-Artikel
+wurden in derselben Runde redaktionell verdichtet – angehängte Mini-Sektionen
+ersatzlos in tragende Kapitel gefaltet, Doppelaussagen gestrichen, Listen und
+Tabellen erhalten. Kein Auto-Fix, sondern Textarbeit.
+
+| Artikel (live) | Zeichen vorher → nachher | Mikro vorher → nachher | Serien |
+|---|---|---|---|
+| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | 18.945 → 15.654 | 18 → 0 | 1 → 0 |
+| `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | 16.526 → 14.686 | 13 → 0 | 1 → 0 |
+| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | 15.751 → 14.475 | 19 → 3 | 1 → 0 |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | 15.596 → 13.989 | 20 → 3 | 1 → 0 |
+| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | 15.030 → 13.956 | 18 → 3 | 1 → 0 |
+
+Die verbliebenen Mikro-Abschnitte dieser Artikel sind bewusst kurze Kapitel mit
+Tabelle oder Checkliste – keine angehängten Frage-Überschriften. Alle fünf
+Artikel stehen weiter bei **Lesbarkeit 100/100**, jeder Ziel-Korridor ist
+eingehalten.
+
+Damit sinkt die Sperrklinke für diese Slugs dauerhaft: Ein Rückfall auf die
+alten Werte ist ab sofort eine **Regression** und bricht das Gate.
+
+Offen bleiben bewusst die **Entwürfe**, die nie live gegangen sind. Sie sind
+eingefroren und dürfen nur noch besser werden:
 
 | Artikel | Mikro | Serien | Status |
 |---|---|---|---|
 | `2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich` | 31 | 1 | Entwurf |
 | `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | 30 | 1 | Entwurf |
 | `2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | 30 | 1 | Entwurf |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | 20 | 1 | live |
-| `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | 18 | 1 | live |
+| `2026-09-13-7-gewohnheiten-die-dein-geld-schuetzen` | 26 | 1 | Entwurf |
 
 ## 7) Prüfbefehle
 
