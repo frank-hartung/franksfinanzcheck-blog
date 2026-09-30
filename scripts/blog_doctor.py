@@ -135,6 +135,12 @@ KETTE = [
     ("plagiat_guard.py",      ["--fix"],                "B-Semantik", "Originalitaet P1-P5 + Fingerprint-Registry (12.08.)"),
     ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
     ("length_guard.py",       ["--fix"],                "B-Semantik", "Premium-Zeichenlänge Google+Pinterest (SSOT length_policy.py)"),
+    # STRUKTUR-GUARD (30.09.2026, Issue #476): length_guard heilt nur nach
+    # OBEN (zu kurz -> KI ergaenzt). Die Gegenrichtung war unbewacht: 15
+    # angehaengte Mini-Abschnitte trieben einen Live-Artikel ueber den
+    # harten Deckel. Diese Wache haelt den Bestand per Sperrklinke fest –
+    # meldend, nie schreibend (Zusammenfuehren ist redaktionelle Arbeit).
+    ("struktur_guard.py",     [],                       "B-Semantik", "Zerfaserung S1-S3: Mikro-Abschnitte, Serien-Ueberschriften, Ueberlaenge (Sperrklinke)"),
     ("fazit_schmiede.py",     ["--fix"],                "B-Semantik", "Fazit- & FAQ-Schmiede mit Selbstheilung"),
     ("redaktions_standard.py",["--fix"],                "B-Semantik", "Redaktions-Standard RS1-RS8 (Capital/WiWo/ZEIT, 02.09.)"),
     ("compound_guard.py",     ["--fix"],                "B-Semantik", "Komposita SEO-Falle"),
