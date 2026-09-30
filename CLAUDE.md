@@ -52,8 +52,8 @@ eine konkrete Beobachtung oder ein tragfähiges Bild. Anspruch bedeutet Präzisi
 und gedankliche Beweglichkeit, nicht Ornament oder unnötige Komplexität.
 
 Die ausführliche, maschinenlesbare Leitplanke steht in
-`data/schreibstil.yaml` unter `eigenstaendigkeit`; Generierung und Stilpolitur
-müssen sie berücksichtigen.
+`data/schreibstil.yaml` unter `eigenstaendigkeit`; Generierung und manuelle
+Lesbarkeitsprüfung müssen sie berücksichtigen.
 
 ## Test- und Verifikations-Pipeline
 

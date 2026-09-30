@@ -1,0 +1,118 @@
+name: Hemingway-Lesbarkeitscheck (Mo/Mi/Fr)
+
+# ============================================================
+#  HEMINGWAY-EDITOR-CHECK – kostenlos, ohne API und ohne Konto
+#  ------------------------------------------------------------
+#  Der kostenlose Hemingway Editor ist die manuelle Schlussrunde für
+#  Autorinnen und Autoren: https://hemingwayapp.com/
+#
+#  Für CI gibt es dort keine offizielle API. Deshalb läuft hier der
+#  datenschutzfreundliche, deterministische Repository-Begleiter
+#  scripts/hemingway_check.py. Er misst dieselben redaktionellen Hebel
+#  (Satzlänge, Flesch, lange Wörter, Schachtelsätze, Passiv und Absätze),
+#  schreibt aber niemals eigenmächtig Text um.
+#
+#  Reihenfolge:
+#    1. Offline-Rechtschreibung und Sprachglättung (kostenlos, lokal)
+#    2. Hemingway-Lesbarkeitscheck über den gesamten Bestand
+#    3. Report + sichere Änderungen committen
+#
+#  Ein roter Lesbarkeitsbefund stoppt die redaktionellen Fixes nicht. Er
+#  bleibt als Report und Warnung sichtbar; so werden bestehende Artikel
+#  nicht still verworfen und können in Hemingway manuell nachbearbeitet
+#  werden.
+# ============================================================
+
+on:
+  schedule:
+    - cron: "50 4 * * 1,3,5"   # Mo/Mi/Fr 04:50 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hemingway-check
+  cancel-in-progress: false
+
+jobs:
+  hemingway:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Voraussetzungen prüfen
+        run: |
+          set -Eeuo pipefail
+          for f in \
+            scripts/sprachkern.py \
+            scripts/grammar_check.py \
+            scripts/sprachglatt.py \
+            scripts/readability_check.py \
+            scripts/hemingway_check.py \
+            scripts/git_sync.sh; do
+            test -s "$f" || { echo "🛑 Pflichtdatei fehlt oder ist leer: $f"; exit 1; }
+          done
+          echo "✅ Hemingway-Begleiter und Offline-Engines vorhanden."
+
+      - name: Python-Abhängigkeiten
+        run: python3 -m pip install --quiet pyyaml
+
+      - name: Selbsttests HART
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/grammar_check.py --selftest
+          python3 scripts/sprachglatt.py --selftest
+          python3 scripts/hemingway_check.py --selftest
+
+      - name: Offline-Sprachpflege
+        run: |
+          set -Eeuo pipefail
+          echo "== Grammatik (offline) =="
+          python3 scripts/grammar_check.py --fix
+          echo "== Sprachglatt (offline) =="
+          python3 scripts/sprachglatt.py --fix
+
+      - name: Hemingway-Lesbarkeitscheck
+        id: check
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python3 scripts/hemingway_check.py \
+            --gate-bestand \
+            --report HEMINGWAY-REPORT.md \
+            2>&1 | tee /tmp/hemingway-check.txt
+
+      - name: Lauf-Bilanz
+        if: ${{ !cancelled() }}
+        run: |
+          {
+            echo "### Hemingway-Lesbarkeitscheck"
+            echo
+            echo "Kostenloser Editor: https://hemingwayapp.com/"
+            echo
+            if [ -f HEMINGWAY-REPORT.md ]; then
+              cat HEMINGWAY-REPORT.md
+            else
+              cat /tmp/hemingway-check.txt || true
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Änderungen committen & pushen (Redaktions-Bot)
+        if: ${{ !cancelled() }}
+        run: |
+          set -Eeuo pipefail
+          git config user.name "Redaktions-Bot"
+          git config user.email "redaktions-bot@users.noreply.github.com"
+          git add content/ 2>/dev/null || true
+          git add data/sprachglatt_history.jsonl 2>/dev/null || true
+          git add data/grammar_whitelist.txt 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "✅ Bestand unverändert – nichts zu committen."
+          else
+            git commit -m "redaktion: Hemingway-Lesbarkeit und Offline-Sprachpflege"
+            scripts/git_sync.sh --push-only
+          fi

@@ -161,7 +161,7 @@ standard:
     - "https://www.verbraucherzentrale.de/aktuelle-meldungen"
 
 # --- Claude-Fachprüfung (kostenlos über die Puter-Brücke) ----------
-# Gleiche Lane wie scripts/claude_stilpolitur.py: KEINE Anthropic-API,
+# Diese Prüfung ist ausschließlich fachlich: KEINE Anthropic-API,
 # nur PUTER_AUTH_TOKEN. Ohne Token läuft alles außer der Fachprüfung.
 claude:
   modell: "claude-sonnet-5"

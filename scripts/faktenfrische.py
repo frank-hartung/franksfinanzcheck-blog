@@ -16,7 +16,6 @@
 #                                       (Themenplan, ein Brief/Woche)
 #    DIESE Datei                      → TIEFE, artikelgenaue
 #                                       Faktenrecherche + Belegkette
-#    scripts/claude_stilpolitur.py    → STIL (wie es klingt)
 #    DIESE Datei                      → FACHLICHKEIT (ob es stimmt)
 #    scripts/decay_radar.py           → misst Alter/Verfall
 #    DIESE Datei                      → handelt: recherchiert, belegt,

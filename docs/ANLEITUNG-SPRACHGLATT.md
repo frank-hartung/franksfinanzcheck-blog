@@ -1,7 +1,7 @@
 # 🧴 ANLEITUNG – Sprachglatt & Grammatik (offline, ohne API)
 
-**Stand:** 2026-09-25 · **Skripte:** `scripts/sprachkern.py`, `scripts/grammar_check.py`, `scripts/sprachglatt.py`
-**Workflows:** `claude-stilpolitur.yml` (Mo/Mi/Fr 04:50 UTC – Offline-Kette läuft dort IMMER zuerst über den Bestand), `content-engine-v2.yml` (bei jedem neuen Artikel, `--new-only`), `redaktions-politur.yml` (manueller Notlauf). *(Audit 30.09.2026: Der eigene Montags-Cron der Redaktions-Politur und die Sprach-Schritte in `seo-weekly.yml` waren Redundanzen zur Stilpolitur-Kette und wurden entfernt.)*
+**Stand:** 2026-09-30 · **Skripte:** `scripts/sprachkern.py`, `scripts/grammar_check.py`, `scripts/sprachglatt.py`
+**Workflows:** `hemingway-check.yml` (Mo/Mi/Fr 04:50 UTC – Offline-Kette und Hemingway-Check über den Bestand), `content-engine-v2.yml` (bei jedem neuen Artikel, `--new-only`), `redaktions-politur.yml` (manueller Notlauf). *(Audit 30.09.2026: Der eigene Montags-Cron der Redaktions-Politur und die Sprach-Schritte in `seo-weekly.yml` waren Redundanzen und wurden entfernt.)*
 
 ---
 
@@ -43,7 +43,7 @@ Bewusst **anderswo** (keine Doppel-Regeln, Regelwerk-Prinzip „jede Regel genau
 - Füllphrasen/Intensiv/Pleonasmus/Zahlen = `lektor_guard.py` (L2/L10/L11)
 - Fest-Fehler `einzigste/daß/seid-Pronomen` = `hardcases_guard.py` (H1–H9)
 - Stil-Messung (Passiv, LIX) = `stil_guard.py` (S1–S8)
-- Stil-Politur auf Premium-Level (Claude, kostenlos ohne API via Puter.js, personalisiert, 25.09.2026) = `claude_stilpolitur.py` – läuft NACH dieser Offline-Optimierung, Details in `docs/ANLEITUNG-CLAUDE-STILPOLITUR.md`
+- Lesbarkeits-Politur mit dem kostenlosen Hemingway Editor = `hemingway_check.py` – läuft nach dieser Offline-Optimierung; Details in `docs/ANLEITUNG-HEMINGWAY.md`
 
 ---
 
@@ -95,8 +95,9 @@ Exit-Codes: 0 = sauber/gelaufen, 1 = offene Funde (nur `--strict`), 2 = Selbstte
 | Workflow | Wann | Was |
 |---|---|---|
 | `content-engine-v2.yml` Phase 2 | Bei jedem neuen Artikel | `--selftest` implizit + `--fix --new-only` für beide Engines (nach Spellcheck, vor Casing) |
-| `redaktions-politur.yml` | manueller Notlauf (Cron entfernt 30.09. – SSOT ist die Stilpolitur) | `--selftest` hart, dann `--fix` über **alle** Artikel, Commit als `Redaktions-Bot` via `git_sync.sh --push-only` |
-| ~~`seo-weekly.yml`~~ | — | Sprach-Schritte am 30.09. entfernt (liefen identisch in der Stilpolitur 3×/Woche); hunspell-Rechtschreib-Check bleibt dort |
+| `hemingway-check.yml` | Mo/Mi/Fr 04:50 UTC | Offline-Fixes über den Bestand, danach Hemingway-Lesbarkeitscheck und Report |
+| `redaktions-politur.yml` | manueller Offline-Notlauf | `--selftest` hart, dann `--fix` über **alle** Artikel, Commit als `Redaktions-Bot` via `git_sync.sh --push-only` |
+| ~~`seo-weekly.yml`~~ | — | Sprach-Schritte am 30.09. entfernt (liefen identisch im Hemingway-Workflow 3×/Woche); hunspell-Rechtschreib-Check bleibt dort |
 
 ---
 

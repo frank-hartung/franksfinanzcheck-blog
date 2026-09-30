@@ -60,7 +60,7 @@ python3 scripts/saisonale_startseite_guard.py --public public
 python3 scripts/design_variant_gate.py --produktionswache
 ```
 
-Für eine echte Claude-Politur muss vorher ein Brief für den heutigen UTC-Tag unter `data/research/saisonal/` vorliegen und `PUTER_AUTH_TOKEN` gesetzt sein:
+Für eine echte Claude-Textprüfung muss vorher ein Brief für den heutigen UTC-Tag unter `data/research/saisonal/` vorliegen und `PUTER_AUTH_TOKEN` gesetzt sein:
 
 ```bash
 python3 scripts/agent_reach_research.py \

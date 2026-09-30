@@ -386,7 +386,7 @@ def selftest() -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Saisonaler SEO-/GEO-Hero mit Agent Reach + Claude")
-    parser.add_argument("--fix", action="store_true", help="bei Fälligkeit Claude-Politur schreiben")
+    parser.add_argument("--fix", action="store_true", help="bei Fälligkeit die geprüfte Hero-Fassung schreiben")
     parser.add_argument("--force", action="store_true", help="Rotation/Fingerprint übergehen")
     parser.add_argument("--check", action="store_true", help="nur Fälligkeit berichten")
     parser.add_argument("--set-current", action="store_true", help="aktuellen Saison-Hero als freigegebenen Basisstand markieren (keine KI-Änderung)")

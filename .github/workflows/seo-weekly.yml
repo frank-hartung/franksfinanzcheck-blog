@@ -252,14 +252,14 @@ jobs:
       # Die Schritte „Grammatikprüfung aller Artikel" (grammar_check
       # --fix) und „Sprachglatt-Politur aller Artikel" (sprachglatt
       # --fix) sind hier ENTFERNT – sie liefen byte-identisch zur
-      # Offline-Kette der Claude-Stilpolitur (claude-stilpolitur.yml,
-      # Mo/Mi/Fr 04:50 UTC, Schritt „Offline-Optimierung – IMMER
-      # zuerst"). Ein und derselbe Bestands-Fix lief damit mittwochs
-      # doppelt (05:50 + 08:00 Uhr MESZ). SSOT für Grammatik (LT1–LT4)
-      # und Sprachglatt (DW1–DW9) über den GESAMTEN Bestand ist seit
-      # 25.09.2026 die Claude-Stilpolitur; der Geburtslauf der
-      # Content-Engine deckt neue Artikel ab (--new-only), die
-      # ZEIT-Rechtschreib-Wache montags die Rechtschreib-Ebene.
+      # Offline-Kette des Hemingway-Lesbarkeitschecks
+      # (hemingway-check.yml, Mo/Mi/Fr 04:50 UTC). Ein und derselbe
+      # Bestands-Fix lief damit mittwochs doppelt (05:50 + 08:00 Uhr
+      # MESZ). SSOT für Grammatik (LT1–LT4) und Sprachglatt (DW1–DW9)
+      # über den GESAMTEN Bestand ist der Hemingway-Workflow; der
+      # Geburtslauf der Content-Engine deckt neue Artikel ab
+      # (--new-only), die ZEIT-Rechtschreib-Wache montags die
+      # Rechtschreib-Ebene.
       # Rechtschreib-Check (hunspell) bleibt hier – er lief in dieser
       # Vollbestands-Form nur in diesem Workflow.
       # ------------------------------------------------------------
