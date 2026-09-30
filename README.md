@@ -86,6 +86,27 @@ Hier liegen die Quellen der Website – Artikel, Seitenlayouts, Bilder und
 Rechtstexte. Die Inhalte werden redaktionell gepflegt und regelmäßig geprüft;
 Fehlerhinweise sind willkommen und werden eingearbeitet.
 
+### Premium-Kontrollturm für die Blogautomatik
+
+Die Automatik wird nicht nur funktional, sondern auch als Produktionsplattform
+überwacht. Der schreibgeschützte Workflow-Audit prüft alle GitHub-Actions auf
+explizite Berechtigungen, Concurrency-Verträge, Laufzeit-Timeouts, doppelte
+Workflow-Namen, ungepinnte Drittanbieter-Actions und sichtbar gemachte
+`continue-on-error`-Stellen:
+
+```bash
+npm run automation:audit       # lesbarer Agentur-Befund
+npm run automation:audit:json  # maschinenlesbar für CI/Reporting
+python3 scripts/automation_premium_audit.py --strict
+```
+
+`--strict` ist bewusst ein kleiner Basisschutz und ändert keine Workflows. Der
+Audit-Bericht liefert die priorisierte Härtungsliste, bevor neue Automatik
+hinzukommt: zuerst Timeout und Least-Privilege-Rechte, dann unveränderliche
+Action-Versionen und zuletzt jede tolerierte Teilstörung mit Issue- oder
+Summary-Fallback. So bleibt die Blogautomatik beobachtbar, statt nur größer zu
+werden.
+
 © 2026 FranksFinanzcheck · Frank Hartung – alle Rechte vorbehalten.
 
 ## Kostenloses SEO-Cockpit
