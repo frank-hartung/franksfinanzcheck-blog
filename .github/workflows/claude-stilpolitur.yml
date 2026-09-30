@@ -48,6 +48,26 @@ name: Claude-Stilpolitur (Mo/Mi/Fr)
 #      (Inputs: force = alle neu polieren + Wochentag-Sperre aufheben,
 #      limit = Budget-Lauf)
 #
+#  AUSFALLSICHERHEIT (Reparatur Issue #468, 30.09.2026) – zwei Lanes,
+#  getrennt bewertet, damit ein FREMDER Dienst nie die eigene Redaktion
+#  stoppt und nie eine Regression im eigenen Code verdeckt:
+#    · INTERNE LANE (Repository-Vertrag, FAIL-CLOSED → roter Lauf):
+#      Pflichtdateien, Selbsttests, Grammatik- und Sprachglatt-Politur.
+#      Exit ≠ 0 heißt hier immer „eigener Code/Vertrag kaputt". Früher
+#      waren die Offline-Läufe mit `| tee … || echo` maskiert – ein
+#      echter Absturz wäre unbemerkt grün durchgelaufen.
+#    · EXTERNE LANE (Puter/Claude, BEST EFFORT → gelbe Warnung):
+#      fehlendes Token, npm-Transient, Puter-Ausfall oder erschöpftes
+#      Gratis-Kontingent degradieren den Lauf ehrlich auf die
+#      Offline-Premium-Politur – ohne Ersatzmodell, ohne kostenpflichtige
+#      API und ohne die bereits erarbeiteten Verbesserungen wegzuwerfen.
+#      Ausnahme: Exit 2 (Selbsttest rot im Stil-Skript) ist KEIN externer
+#      Ausfall, sondern Sabotage-Schutz → roter Lauf.
+#    · Der Commit-Schritt läuft mit `!cancelled()`: das Ergebnis der
+#      Offline-Politur wird IMMER gesichert, auch wenn die externe Lane
+#      danach degradiert. Sonst wiederholt jeder Lauf dieselbe Arbeit.
+#    · Vertrag maschinell gepinnt: scripts/tests/test_claude_stilpolitur_workflow.py
+#
 #  Reports (gitignored, bleiben im Lauf-Log):
 #    - CLAUDE-STILPOLITUR-REPORT.md + .claude_stilpolitur_report.json
 #  State/Historie (versioniert):
@@ -154,37 +174,78 @@ jobs:
           # PyYAML lädt das Stilprofil leer und der harte Selbsttest stoppt.
           VENV="$RUNNER_TEMP/claude-stilpolitur-venv"
           python3 -m venv "$VENV"
-          "$VENV/bin/python" -m pip install --quiet --disable-pip-version-check \
-            'pyyaml>=6.0,<7'
+          # Ein einzelner PyPI-Blip darf die eigene Redaktion nicht stoppen:
+          # drei Versuche mit Backoff, erst danach ist es ein echter Fehler.
+          installiert=0
+          for versuch in 1 2 3; do
+            if "$VENV/bin/python" -m pip install --quiet --disable-pip-version-check \
+                 'pyyaml>=6.0,<7'; then
+              installiert=1
+              break
+            fi
+            echo "⚠ pip-Versuch $versuch fehlgeschlagen – neuer Versuch in $((versuch * 5)) s …"
+            sleep "$((versuch * 5))"
+          done
+          if [ "$installiert" -ne 1 ]; then
+            echo "::error title=Claude-Stilpolitur: Python-Abhängigkeiten::PyYAML konnte nach 3 Versuchen nicht installiert werden – ohne Stilprofil wäre jede Politur wertlos."
+            exit 1
+          fi
           echo "$VENV/bin" >> "$GITHUB_PATH"
           echo "✅ Python-Abhängigkeiten in isolierter venv installiert."
 
       - name: Puter-Brücke installieren (nur mit konfiguriertem Zugang)
+        id: sdk
         if: steps.preflight.outputs.puter_available == 'true'
         run: |
           set -Eeuo pipefail
           # Pinning verhindert, dass ein ungeprüftes SDK-Release die Puter-
           # Antwortform oder die Sonnet-5-Brücke mitten im Redaktionslauf ändert.
-          npm install --no-save --no-package-lock @heyputer/puter.js@2.6.3
-          node -e "const p=require('./node_modules/@heyputer/puter.js/package.json'); if (p.version !== '2.6.3') { process.exit(1) }"
-          echo "✅ @heyputer/puter.js@2.6.3 installiert."
+          #
+          # Die npm-Registry ist ein FREMDER Dienst: ein Transient darf den
+          # Redaktionslauf nicht rot machen. Drei Versuche, danach ehrliche
+          # Degradierung auf die Offline-Premium-Lane (Reparatur Issue #468).
+          for versuch in 1 2 3; do
+            if npm install --no-save --no-package-lock --no-audit --no-fund \
+                 @heyputer/puter.js@2.6.3; then
+              if node -e "const p=require('./node_modules/@heyputer/puter.js/package.json'); if (p.version !== '2.6.3') { process.exit(1) }"; then
+                echo "claude_ready=true" >> "$GITHUB_OUTPUT"
+                echo "✅ @heyputer/puter.js@2.6.3 installiert."
+                exit 0
+              fi
+              echo "::warning title=Puter-SDK::Installierte Version weicht von der gepinnten 2.6.3 ab – Claude-Zusatz wird übersprungen."
+              break
+            fi
+            echo "⚠ npm-Versuch $versuch fehlgeschlagen – neuer Versuch in $((versuch * 10)) s …"
+            sleep "$((versuch * 10))"
+          done
+          echo "claude_ready=false" >> "$GITHUB_OUTPUT"
+          echo "::warning title=Puter-Brücke nicht installierbar::Das gepinnte SDK @heyputer/puter.js@2.6.3 war nicht verfügbar. Die Offline-Premium-Politur läuft vollständig weiter; kein Ersatzmodell, keine kostenpflichtige API."
 
       - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
         run: |
+          set -Eeuo pipefail
           python3 scripts/grammar_check.py --selftest
           python3 scripts/sprachglatt.py --selftest
           python3 scripts/claude_stilpolitur.py --selftest
           echo "✅ Selbsttests grün (offline)."
 
       - name: Offline-Optimierung (LT + DW, ohne API – IMMER zuerst)
+        id: offline
         run: |
+          set -Eeuo pipefail
+          # INTERNE LANE = fail-closed. Ohne --strict liefern beide Engines nur
+          # dann ≠ 0, wenn der Selbsttest rot ist oder das Skript abstürzt –
+          # also nie wegen „Restfunden". Ein `|| echo` würde genau diese echten
+          # Regressionen verschlucken (Reparatur Issue #468).
           echo "== Grammatik (LT1–LT4, offline LanguageTool-Nachbau) =="
-          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_politur.txt || echo "⚠ Grammatik: Restfunde im Report"
+          python3 scripts/grammar_check.py --fix 2>&1 | tee /tmp/grammar_politur.txt
           echo "== Sprachglatt (DW1–DW9 + V1, offline DeepL-Write-Nachbau) =="
-          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
+          python3 scripts/sprachglatt.py --fix 2>&1 | tee /tmp/sprachglatt_politur.txt
+          echo "✅ Offline-Premium-Politur abgeschlossen (Grammatik + Sprachglatt)."
 
       - name: Claude (kostenlos ohne API) – Stil-Politur (personalisiert, Premium)
-        if: steps.preflight.outputs.puter_available == 'true'
+        id: claude
+        if: steps.preflight.outputs.puter_available == 'true' && steps.sdk.outputs.claude_ready == 'true'
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
           CLAUDE_FORCE: ${{ inputs.force || 'false' }}
@@ -203,16 +264,34 @@ jobs:
             args+=(--limit "$CLAUDE_LIMIT")
           fi
           echo "== Claude (kostenlos, NUR claude-sonnet-5, personalisiert: data/schreibstil.yaml) =="
-          python3 scripts/claude_stilpolitur.py --fix "${args[@]}" | tee /tmp/stilpolitur.txt
-
-      - name: Offline-Fallback transparent bestätigen
-        if: steps.preflight.outputs.puter_available != 'true'
-        run: |
-          echo "✅ Offline-Premium-Politur abgeschlossen."
-          echo "ℹ️ Claude wurde nicht aufgerufen, weil PUTER_AUTH_TOKEN nicht konfiguriert ist."
-          echo "ℹ️ Kein stiller Modellwechsel, kein API-Fallback, keine Kosten."
+          # EXTERNE LANE = best effort. Der Exit-Code wird bewusst selbst
+          # ausgewertet statt über `set -e` zu sterben, damit ein Puter-
+          # Ausfall bzw. ein erschöpftes Gratis-Kontingent den Lauf nicht rot
+          # macht UND die Offline-Ergebnisse trotzdem committet werden.
+          # Einzige Ausnahme: Exit 2 = Selbsttest rot = Sabotage-Schutz.
+          rc=0
+          python3 scripts/claude_stilpolitur.py --fix "${args[@]}" \
+            > /tmp/stilpolitur.txt 2>&1 || rc=$?
+          cat /tmp/stilpolitur.txt
+          echo "claude_rc=$rc" >> "$GITHUB_OUTPUT"
+          if [ "$rc" -eq 0 ]; then
+            echo "claude_status=ok" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$rc" -eq 2 ]; then
+            echo "claude_status=sabotage" >> "$GITHUB_OUTPUT"
+            echo "::error title=Claude-Stilpolitur: Selbsttest rot::Der eingefrorene Sabotage-Schutz in scripts/claude_stilpolitur.py schlägt an (Exit 2). Das ist eine Regression im eigenen Code, kein Fremdausfall – der Lauf bleibt rot."
+            exit 1
+          fi
+          echo "claude_status=degradiert" >> "$GITHUB_OUTPUT"
+          echo "::warning title=Claude-Zusatz gestört (Exit $rc)::Der kostenlose Puter-Zugang war in diesem Lauf nicht nutzbar (Ausfall, Netz oder erschöpftes Gratis-Kontingent). Die Offline-Premium-Politur bleibt vollständig gültig; kein Ersatzmodell, keine kostenpflichtige API."
 
       - name: Änderungen committen & pushen (Redaktions-Bot)
+        # Ergebnisse der internen Lane werden IMMER gesichert – auch wenn der
+        # externe Claude-Zusatz danach degradiert oder rot gemeldet hat.
+        # Nur ein Absturz der Offline-Engines selbst verhindert den Commit
+        # (kein halb angewandter Bestand, Reparatur Issue #468).
+        if: ${{ !cancelled() && steps.offline.outcome == 'success' }}
         run: |
           git config user.name "Redaktions-Bot"
           git config user.email "redaktions-bot@users.noreply.github.com"
@@ -229,3 +308,43 @@ jobs:
             git commit -m "redaktion: Claude-Stilpolitur (kostenlos ohne API, personalisiert) – Premium-Level einer Profi-Agentur"
             scripts/git_sync.sh --push-only
           fi
+
+      - name: Lauf-Bilanz (ehrliche Transparenz, immer)
+        if: ${{ !cancelled() }}
+        env:
+          PUTER_AVAILABLE: ${{ steps.preflight.outputs.puter_available }}
+          SDK_READY: ${{ steps.sdk.outputs.claude_ready }}
+          CLAUDE_STATUS: ${{ steps.claude.outputs.claude_status }}
+          OFFLINE_OUTCOME: ${{ steps.offline.outcome }}
+        run: |
+          set -Eeuo pipefail
+          # Eine einzige Stelle beantwortet nachprüfbar: Was ist tatsächlich
+          # gelaufen? Kein grüner Haken, der einen Claude-Lauf vortäuscht.
+          if [ "$PUTER_AVAILABLE" != "true" ]; then
+            claude_zeile="⚠️ übersprungen – \`PUTER_AUTH_TOKEN\` ist nicht gesetzt (Repository → Settings → Secrets and variables → Actions)."
+          elif [ "$SDK_READY" != "true" ]; then
+            claude_zeile="⚠️ übersprungen – die gepinnte Puter-Brücke \`@heyputer/puter.js@2.6.3\` war nicht installierbar (npm-Transient)."
+          elif [ "$CLAUDE_STATUS" = "ok" ]; then
+            claude_zeile="✅ gelaufen – Modell \`claude-sonnet-5\`, kostenlos über Puter, personalisiert aus \`data/schreibstil.yaml\`."
+          elif [ "$CLAUDE_STATUS" = "sabotage" ]; then
+            claude_zeile="🛑 rot – Selbsttest des Stil-Skripts schlägt an (Sabotage-Schutz, Exit 2). Eigener Code, kein Fremdausfall."
+          else
+            claude_zeile="⚠️ degradiert – der kostenlose Puter-Zugang war in diesem Lauf nicht nutzbar. Kein Ersatzmodell, keine kostenpflichtige API, keine Kosten."
+          fi
+          if [ "$OFFLINE_OUTCOME" = "success" ]; then
+            offline_zeile="✅ vollständig – Grammatik (LT1–LT4) und Sprachglatt (DW1–DW9 + V1) über den gesamten Bestand."
+          else
+            offline_zeile="🛑 fehlgeschlagen – die eigenen Offline-Engines sind abgestürzt; es wurde bewusst nichts committet."
+          fi
+          {
+            echo "## Claude-Stilpolitur – Lauf-Bilanz"
+            echo ""
+            echo "| Lane | Status |"
+            echo "|---|---|"
+            echo "| Offline-Premium (intern, fail-closed) | $offline_zeile |"
+            echo "| Claude-Zusatz (extern, best effort) | $claude_zeile |"
+            echo ""
+            echo "Ein Ausfall des kostenlosen Fremdzugangs degradiert den Lauf bewusst"
+            echo "auf die Offline-Premium-Politur, statt die Redaktion zu stoppen oder"
+            echo "heimlich auf ein anderes Modell auszuweichen (Reparatur Issue #468)."
+          } >> "$GITHUB_STEP_SUMMARY"
