@@ -475,5 +475,9 @@ history:
     \  \n#Gaspreis #Preisgarantie #Gasrechnung #Heizkosten"
   ref: '117359692643267110'
   ai: true
-failures: []
-updated_at: '2026-09-30T13:13:14.691678+02:00'
+failures:
+- at: '2026-09-30T18:51:07.136181+02:00'
+  channel: mastodon
+  slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
+updated_at: '2026-09-30T18:51:27.033328+02:00'

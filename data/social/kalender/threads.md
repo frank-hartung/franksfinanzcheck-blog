@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 30.09.2026 13:13 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 18:51 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### Mi, 30. September 2026
-- **09:15** ⚪ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-- **16:15** ⏳ Heizkosten senken: Mit diesen Strategien sparst du sofort — _frage_ · Launch  
+- **16:15** ⚪ Heizkosten senken: Mit diesen Strategien sparst du sofort — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/
 ### Do, 01. Oktober 2026
 - **09:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _takeaway_ · Launch  
