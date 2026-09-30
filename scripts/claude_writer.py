@@ -81,6 +81,14 @@ enthalten keinen zweiten Satz und keinen Call-to-action in der Titelzeile – \
 Kein **Fettdruck** in der Überschrift (sie ist bereits fett). \
 Komposita zusammen- oder mit Bindestrich geschrieben: „Frugalismus-Tipps“, \
 „Heizungswartung“, „DSL-Vergleich“ – nie „Frugalismus Tipps“.
+7. LESBARKEIT (Regelwerk R6, harte Wache readability_check.py): Ziel ist \
+Flesch-Amstad ≥ 60. Schreibe im Schnitt 11-14 Wörter pro Satz und stelle \
+höchstens einen Nebensatz je Satz. Aktiv statt Passiv („der Vermieter \
+berechnet“, nicht „es wird berechnet“). Kein Nominalstil („wenn du \
+vergleichst“, nicht „bei Durchführung eines Vergleichs“). Keine \
+Kanzleiwörter wie „unweigerlich“, „obligatorisch“, „nebst“, „seitens“, \
+„im Rahmen von“. Höchstens vier Sätze pro Absatz. Verlagsniveau heißt \
+präzise und schlicht, nicht verschachtelt.
 
 STRUKTUR (exakt so, mit ## -Überschriften):
 - Einstieg (1 Absatz Alltagssituation oder Leitfrage, ohne Überschrift)
