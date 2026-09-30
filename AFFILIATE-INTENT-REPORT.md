@@ -1,10 +1,15 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-09-29 10:17:56 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-09-30 10:10:47 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 67 · **Gateway-Links:** 207 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 68 · **Gateway-Links:** 206 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
-🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
+## 🟡 Hinweise – nicht blockierend (ehrliches Cross-Selling, redaktioneller Prüfpunkt)
+
+### IW4 – Nie-Paare (2)
+
+- `content/posts/2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung/index.md`:41 [top] /go/hausrat/ «Hausratversicherung prüfen & sparen» – Verbotenes Paar: Artikelthema „Wohngebäudeversicherung“ → Route „Hausratversicherung“. Fund 19.09.2026: Wohngebäude-Vergleich, Top-CTA → /go/hausrat/ (Gebäude ≠ Hausrat: zwei verschiedene Policen). – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/wohngebaeudeversicherung/? (ℹ️ Hinweis)
+- `content/posts/2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung/index.md`:106 [mid] /go/hausrat/ «Jetzt Hausratversicherung vergleichen» – Verbotenes Paar: Artikelthema „Wohngebäudeversicherung“ → Route „Hausratversicherung“. Fund 19.09.2026: Wohngebäude-Vergleich, Top-CTA → /go/hausrat/ (Gebäude ≠ Hausrat: zwei verschiedene Policen). – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/wohngebaeudeversicherung/? (ℹ️ Hinweis)
 
 ## Vertrag
 
