@@ -46,12 +46,12 @@ Die klassische Faustregel lautet: Ein Notgroschen sollte drei bis sechs Monats
 | Lebenssituation               | Empfohlene Pufferhöhe (Monatsgehälter) |
 |-------------------------------|----------------------------------------|
 | Single, keine Kinder          | 3                                      |
-| Paar ohne Kinder              | 3 – 4                                   |
-| Familie mit Kindern           | 4 – 6                                   |
-| Selbstständige, unregelmäßiges Einkommen | 6 – 12 (je nach Sicherheit) |
+| Paar ohne Kinder              | 3–4                                   |
+| Familie mit Kindern           | 4–6                                   |
+| Selbstständige, unregelmäßiges Einkommen | 6–12 (je nach Sicherheit) |
 
 > **Rechenbeispiel:**
-> Angenommen, du bist ein Paar ohne Kinder und dein gemeinsames Nettoeinkommen beträgt 4.200 € pro Monat. Die empfohlene Pufferhöhe liegt bei 3,5 Monatsgehältern (Mittelwert aus 3 – 4).
+> Angenommen, du bist ein Paar ohne Kinder und dein gemeinsames Nettoeinkommen beträgt 4.200 € pro Monat. Die empfohlene Pufferhöhe liegt bei 3,5 Monatsgehältern (Mittelwert aus 3–4).
 > 4.200 € × 3,5 = 14.700 €
 > Das bedeutet, ein Notgroschen von rund 14.700 € deckt euch im Notfall für drei bis vier Monate.
 

@@ -38,7 +38,7 @@ faktencheck: "2026-09-27"
 
 Die meisten Menschen scheitern beim Sparen nicht daran, dass sie nie davon gehört hätten. Sie scheitern daran, dass ihr Geld keinen klaren Plan hat. Das Gehalt kommt rein, Miete und Lastschriften gehen raus, zwischendurch wird eingekauft, bestellt und spontan bezahlt – und am Ende bleibt oft weniger übrig als gedacht.
 
-Genau deshalb ist die **50-30-20-Regel** so beliebt. Sie ist kein kompliziertes Finanzmodell. Sie ist ein einfaches Ordnungssystem. Und genau diese Einfachheit macht sie für den Alltag so stark.
+Genau deshalb ist die **50–30–20-Regel** so beliebt. Sie ist kein kompliziertes Finanzmodell. Sie ist ein einfaches Ordnungssystem. Und genau diese Einfachheit macht sie für den Alltag so stark.
 
 Wenn du wissen willst, wie du dein Einkommen sinnvoll einteilst, ohne jedes Wochenende stundenlang Tabellen zu pflegen, dann ist diese Methode ein guter Startpunkt.
 
@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Das Wichtigste in Kürze
 
-- Die 50-30-20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
+- Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
 - **50 %** sind für notwendige Ausgaben gedacht.
 - **30 %** stehen für Wünsche und Freizeit.
 - **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
@@ -92,7 +92,7 @@ Viele Budgets scheitern an einem simplen Problem: Alles läuft über denselben i
 
 Dadurch wirken alle Ausgaben gleich dringend. Und genau da beginnt das Chaos.
 
-Die 50-30-20-Regel schafft Ordnung, weil sie Rollen verteilt. Sie sagt nicht nur „spar mehr“, sondern auch:
+Die 50–30–20-Regel schafft Ordnung, weil sie Rollen verteilt. Sie sagt nicht nur „spar mehr“, sondern auch:
 
 - Das ist notwendig,
 - das ist Wunsch,
@@ -174,7 +174,7 @@ Nicht verbieten, sondern einrahmen. Genau so bleibt die Regel alltagstauglich.
 
 ## Was tun, wenn deine Verteilung noch ganz anders aussieht?
 
-Nicht jeder startet bei 50-30-20. Viele liegen eher bei 60-30-10 oder sogar 70-25-5.
+Nicht jeder startet bei 50–30–20. Viele liegen eher bei 60–30–10 oder sogar 70–25–5.
 
 Das ist kein Scheitern. Es ist eine Standortbestimmung.
 
@@ -231,7 +231,7 @@ Passend dazu helfen dir diese Artikel:
 
 Sehr flexibel. Und das ist gut so.
 
-Wenn du in einer teuren Stadt wohnst, mit Familie planst oder ein schwankendes Einkommen hast, ist 50-30-20 eher ein Zielbild als ein starres Gesetz.
+Wenn du in einer teuren Stadt wohnst, mit Familie planst oder ein schwankendes Einkommen hast, ist 50–30–20 eher ein Zielbild als ein starres Gesetz.
 
 Mögliche Varianten sind zum Beispiel:
 
@@ -282,7 +282,7 @@ Wenn du den Puffer getrennt parkst, bleibt die 20-%-Kategorie viel stabiler.
 
 Frugalismus heißt nicht, alles billig zu machen. Es heißt, bewusst zu entscheiden, wofür dein Geld wirklich arbeiten soll.
 
-Die 50-30-20-Regel ist dafür ein sehr gutes Grundgerüst. Sie zeigt dir schwarz auf weiß, wie viel für Alltag draufgeht, wie viel in Konsum fließt und wie ernst du deine Zukunft im Moment nimmst.
+Die 50–30–20-Regel ist dafür ein sehr gutes Grundgerüst. Sie zeigt dir schwarz auf weiß, wie viel für Alltag draufgeht, wie viel in Konsum fließt und wie ernst du deine Zukunft im Moment nimmst.
 
 Gerade deshalb ist sie ein guter Einstieg in ein bewussteres Finanzleben.
 
@@ -315,11 +315,11 @@ Mehr brauchst du für den Einstieg oft nicht. Der eigentliche Fortschritt entste
 
 Wenn sich die Verteilung im ersten Monat noch falsch anfühlt, notiere die Abweichung statt sie als Scheitern zu werten. Ein zu hoher Pflichtblock ist eine Information: Vielleicht braucht es einen Vertragscheck, einen anderen Wohnkostenrahmen oder zunächst nur eine kleinere Sparquote. Die Regel soll dein Budget sichtbar machen, nicht Druck erzeugen.
 
-> 💶 **Spar-Tipp zwischendurch:** Die 50-30-20-Regel wird viel leichter, wenn dein Spargeld nicht auf dem Girokonto herumliegt. Ein separates Tagesgeldkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
+> 💶 **Spar-Tipp zwischendurch:** Die 50–30–20-Regel wird viel leichter, wenn dein Spargeld nicht auf dem Girokonto herumliegt. Ein separates Tagesgeldkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
 ## Fazit: Die 50-30-20-Regel ist simpel – und genau das ist ihre Stärke
 
-Die **50-30-20-Regel einfach erklärt** bedeutet am Ende genau das: Du gibst deinem Geld eine klare Struktur. Ein Teil trägt dein Leben, ein Teil bleibt für Wünsche, ein Teil baut Sicherheit und Vermögen auf.
+Die **50–30–20-Regel einfach erklärt** bedeutet am Ende genau das: Du gibst deinem Geld eine klare Struktur. Ein Teil trägt dein Leben, ein Teil bleibt für Wünsche, ein Teil baut Sicherheit und Vermögen auf.
 
 Sie ist nicht perfekt. Aber sie ist alltagstauglich. Und genau deshalb hilft sie so vielen Menschen mehr als komplizierte Excel-Kunstwerke, die nie dauerhaft genutzt werden. Wenn du einmal ehrlich hinschaust und die Regel in echte Euro übersetzt, entsteht oft sofort mehr Klarheit.
 

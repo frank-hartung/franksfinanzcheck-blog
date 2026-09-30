@@ -98,7 +98,7 @@ Tarif A klingt im Werbebanner spektakulär. Tarif B ist in der Praxis deutlich
 
 Die Formel ist simpel:
 
-**Alle Monatsgebühren über 24 Monate + Anschlusskosten + Routerkosten - Bonus - Cashback = Gesamtkosten**
+**Alle Monatsgebühren über 24 Monate + Anschlusskosten + Routerkosten – Bonus – Cashback = Gesamtkosten**
 
 Dann teilst du die Gesamtkosten durch 24. Fertig.
 

@@ -156,7 +156,7 @@ Zweite Rechnung für einen Bestandstarif: Der Altvertrag läuft 24 Monate ohne R
 
 Glasfaser bietet gegenüber VDSL oft Vorteile bei der Latenz, sofern der Hausanschluss modernisiert ist. Ein 250-Mbit-VDSL-Anschluss mit optimaler WLAN-Abdeckung kann jedoch in der Praxis leistungsfähiger sein als ein 1-Gbit-Glasfaseranschluss, dessen Signal durch dicke Wände blockiert wird.
 
-**Faustregel:** Wer alle zwei Jahre konsequent den Internetanbieter wechselt, spart durch Neukundenboni und wegfallende Preissprünge in der Regel rund 250 bis 360 Euro.
+**Faustregel:** Wer alle zwei Jahre konsequent den Internetanbieter wechselt, spart durch Neukundenboni und wegfallende Preissprünge in der Regel rund 250 bis 360 €.
 
 ## Router kaufen oder mieten?
 

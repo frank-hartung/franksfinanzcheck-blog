@@ -40,7 +40,7 @@ Finanzielle Freiheit klingt für viele nach einer fernen Welt. Nach sehr hohem E
 
 Denn die meisten Geldprobleme entstehen nicht nur durch zu wenig Einkommen. Sie entstehen auch durch fehlende Struktur, teure Routinen und Entscheidungen, die immer wieder Geld in die falsche Richtung schieben. Genau deshalb lohnt sich der Blick auf Gewohnheiten so sehr.
 
-Diese **7 Gewohnheiten für finanzielle Freiheit** machen dich nicht über Nacht reich. Aber sie machen dich Schritt für Schritt stabiler, klarer und unabhängiger. Und genau das ist der realistische Kern von finanzieller Freiheit.
+Diese **sieben Gewohnheiten für finanzielle Freiheit** machen dich nicht über Nacht reich. Aber sie machen dich Schritt für Schritt stabiler, klarer und unabhängiger. Und genau das ist der realistische Kern von finanzieller Freiheit.
 
 ---
 
@@ -86,7 +86,7 @@ Ohne diese Ehrlichkeit bleiben alle weiteren Gewohnheiten diffus.
 
 Ein Budget muss nicht kompliziert sein, um zu funktionieren. Viele Menschen scheitern nicht an zu wenig Disziplin, sondern an zu komplexen Methoden.
 
-Darum funktioniert ein einfaches Modell oft besser – etwa die **50-30-20-Regel**.
+Darum funktioniert ein einfaches Modell oft besser – etwa die **50–30–20-Regel**.
 
 ### Grundlogik
 
@@ -293,7 +293,7 @@ Finanzielle Freiheit beginnt selten mit luxuriösem Reichtum. Sie beginnt oft vi
 
 Genau deshalb sind Gewohnheiten so entscheidend. Sie verschieben dein Leben nicht nur finanziell, sondern oft auch mental.
 
-## Was diese 7 Gewohnheiten gemeinsam haben
+## Was diese sieben Gewohnheiten gemeinsam haben
 
 Alle sieben Routinen tun im Kern dasselbe:
 
@@ -441,7 +441,7 @@ Zum Beispiel: Dauerauftrag bleibt so oder Lieferdienst nur einmal pro Woche. Gen
 
 ## Fazit: Finanzielle Freiheit ist oft zuerst ein Gewohnheitsprojekt
 
-Diese **7 Gewohnheiten für finanzielle Freiheit** wirken nicht, weil sie spektakulär sind. Sie wirken, weil sie wiederholbar sind. Zahlen kennen, Budget führen, Fixkosten prüfen, Rücklagen priorisieren, Konsum verlangsamen, Automatisierung nutzen und langfristig denken – genau daraus entsteht Schritt für Schritt mehr Freiheit.
+Diese **sieben Gewohnheiten für finanzielle Freiheit** wirken nicht, weil sie spektakulär sind. Sie wirken, weil sie wiederholbar sind. Zahlen kennen, Budget führen, Fixkosten prüfen, Rücklagen priorisieren, Konsum verlangsamen, Automatisierung nutzen und langfristig denken – genau daraus entsteht Schritt für Schritt mehr Freiheit.
 
 Du musst dafür nicht perfekt sein. Du musst nur anfangen, aus Geldentscheidungen gute Routinen zu machen. Dann wird finanzielle Freiheit nicht plötzlich leicht – aber deutlich realistischer.
 

@@ -38,7 +38,7 @@ faktencheck: "2026-09-27"
 
 Viele glauben, sie müssten mehr verdienen, um endlich Geld übrig zu haben. In der Praxis fehlt aber oft nicht nur Einkommen. Es fehlt vor allem Struktur. Das Gehalt kommt, Rechnungen gehen ab, zwischendurch kaufst, bestellst und buchst du – und am Monatsende ist wieder unklar, wo das Geld geblieben ist.
 
-Genau hier hilft die **50-30-20-Regel**. Sie ist kein starres Spargesetz und auch keine Askese-Übung. Sie ist ein einfaches Ordnungssystem für dein Netto. Und genau deshalb funktioniert sie so gut.
+Genau hier hilft die **50–30–20-Regel**. Sie ist kein starres Spargesetz und auch keine Askese-Übung. Sie ist ein einfaches Ordnungssystem für dein Netto. Und genau deshalb funktioniert sie so gut.
 
 Die Idee ist simpel: Du gibst deinem Geld von Anfang an Aufgaben. Ein Teil deckt dein Leben, ein Teil bleibt für Wünsche, ein Teil baut Sicherheit und Vermögen auf. Wer das sauber trennt, trifft bessere Entscheidungen. Nicht perfekt, aber spürbar besser.
 
@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Das Wichtigste in Kürze
 
-- Die 50-30-20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
+- Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
 - **50 %** sind für notwendige Ausgaben gedacht.
 - **30 %** sind für Wünsche und Freizeit da.
 - **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
@@ -101,7 +101,7 @@ Dieser Topf macht aus Einkommen Schritt für Schritt Vermögen oder zumindest St
 
 ## Warum die Regel so gut funktioniert
 
-Die Stärke der 50-30-20-Regel liegt nicht in komplizierter Mathematik. Sie liegt in Klarheit.
+Die Stärke der 50–30–20-Regel liegt nicht in komplizierter Mathematik. Sie liegt in Klarheit.
 
 Viele Haushalte scheitern nicht daran, dass sie nie gerechnet hätten. Sie scheitern daran, dass alles aus einem Topf bezahlt wird. Dann fühlt sich jeder Euro gleich an. Die Miete, der Supermarkt, der Impulskauf und die Rücklage konkurrieren auf demselben Konto.
 
@@ -159,7 +159,7 @@ Denn dort zahlst du jeden Monat automatisch.
 - Versicherungen aktualisieren
 - unnötige Abos kündigen
 
-Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50-30-20-Regel plötzlich viel realistischer.
+Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer.
 
 Passend dazu helfen dir auch diese Ratgeber:
 
@@ -205,14 +205,14 @@ Das Fitnessstudio, drei Streaming-Abos oder der tägliche Coffee-to-go sind nich
 Wenn Sparen immer das ist, was zufällig übrig bleibt, bleibt oft nichts übrig.
 
 ### Fehler 3: Zu streng starten
-Wer aus dem Nichts sofort perfekt bei 50-30-20 landen will, bricht oft wieder ab. Besser ist ein realistischer Start.
+Wer aus dem Nichts sofort perfekt bei 50–30–20 landen will, bricht oft wieder ab. Besser ist ein realistischer Start.
 
 ### Fehler 4: Gehaltserhöhungen komplett verleben
 Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), wenn sofort alles in höhere Ausgaben fließt.
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
-Nicht jeder Haushalt landet sofort bei 50-30-20. Gerade in teuren Städten oder bei niedrigem Einkommen kann der Pflichtblock deutlich höher liegen.
+Nicht jeder Haushalt landet sofort bei 50–30–20. Gerade in teuren Städten oder bei niedrigem Einkommen kann der Pflichtblock deutlich höher liegen.
 
 Das ist kein Scheitern. Es ist eine Diagnose.
 
@@ -231,7 +231,7 @@ Wichtig ist nur: **Der Sparanteil darf nicht dauerhaft auf null fallen.**
 
 ## Jahreskosten nicht vergessen – sonst wirkt das Budget schöner als es ist
 
-Ein häufiger Denkfehler bei der 50-30-20-Regel: Viele betrachten nur die monatlichen Abbuchungen. Genau dadurch wirkt das Budget oft entspannter, als es in Wahrheit ist.
+Ein häufiger Denkfehler bei der 50–30–20-Regel: Viele betrachten nur die monatlichen Abbuchungen. Genau dadurch wirkt das Budget oft entspannter, als es in Wahrheit ist.
 
 Denn viele teure Posten kommen nicht jeden Monat, sondern nur ein- oder zweimal im Jahr:
 
@@ -244,7 +244,7 @@ Denn viele teure Posten kommen nicht jeden Monat, sondern nur ein- oder zweimal 
 
 Wenn du zum Beispiel **720 €** Kfz-Kosten pro Jahr hast, sind das nicht „irgendwann 720 €“, sondern eigentlich **60 € pro Monat**, die in deinem System mitgedacht werden müssen. Gleiches gilt für viele andere Jahresrechnungen.
 
-Darum wirkt die 50-30-20-Regel viel realistischer, wenn du solche Kosten auf den Monat herunterbrichst und als eigene Rücklage mit einplanst. Erst dann zeigt dir dein Budget wirklich, wie viel für Wünsche und Sparen übrig bleibt.
+Darum wirkt die 50–30–20-Regel viel realistischer, wenn du solche Kosten auf den Monat herunterbrichst und als eigene Rücklage mit einplanst. Erst dann zeigt dir dein Budget wirklich, wie viel für Wünsche und Sparen übrig bleibt.
 
 ## Für wen die Regel besonders nützlich ist
 
@@ -260,7 +260,7 @@ Die Methode ist stark, wenn du …
 
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Bedeutet nicht, alles billig zu machen. Es bedeutet, Geld bewusst dorthin zu lenken, wo es dir wirklich etwas bringt.
 
-Die 50-30-20-Regel ist dafür ein starkes Grundgerüst. Sie zeigt dir, wie viel Raum deine Fixkosten einnehmen, wie viel Geld in spontane Wünsche fließt und wie ernst du deine Zukunft gerade wirklich nimmst.
+Die 50–30–20-Regel ist dafür ein starkes Grundgerüst. Sie zeigt dir, wie viel Raum deine Fixkosten einnehmen, wie viel Geld in spontane Wünsche fließt und wie ernst du deine Zukunft gerade wirklich nimmst.
 
 Wer das einmal klar sieht, trifft oft automatisch bessere Entscheidungen.
 
@@ -274,13 +274,13 @@ Wenn du durch Vertragschecks und Kündigungen **100 € pro Monat** einsparst u
 - **6.000 € in fünf Jahren**
 - Plus mögliche Zinsen oder Rendite
 
-Darum fühlt sich die 50-30-20-Regel so wirksam an: Sie verbindet Alltag und Vermögensaufbau.
+Darum fühlt sich die 50–30–20-Regel so wirksam an: Sie verbindet Alltag und Vermögensaufbau.
 
 > 💶 **Spar-Tipp zwischendurch:** Ein separates Sparkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum. Wenn du das System sauber aufsetzen willst, hilft ein Tagesgeldkonto oft mehr als die nächste Budget-App: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
 ## Fazit: Die 50-30-20-Regel macht Geld planbar
 
-Die **50-30-20-Regel** ist keine Wunderformel. Aber sie ist eine der einfachsten Methoden, um aus diffusem Geldstress ein klares System zu machen. Du weißt, was du brauchst, was du genießen darfst und was in deine Zukunft fließt.
+Die **50–30–20-Regel** ist keine Wunderformel. Aber sie ist eine der einfachsten Methoden, um aus diffusem Geldstress ein klares System zu machen. Du weißt, was du brauchst, was du genießen darfst und was in deine Zukunft fließt.
 
 Der eigentliche Gamechanger liegt oft nicht im Verzicht, sondern in besseren Fixkosten. Genau dort werden aus kleinen Entscheidungen schnell **50 €, 100 € oder 200 € pro Monat**. Und genau diese Summe entscheidet oft darüber, ob Sparen nur ein Vorsatz bleibt – oder endlich real wird.
 

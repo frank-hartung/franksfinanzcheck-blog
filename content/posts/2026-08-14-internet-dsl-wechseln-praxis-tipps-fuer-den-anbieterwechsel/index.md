@@ -129,7 +129,7 @@ Der größte Denkfehler beim **Internet Anbieterwechsel** ist simpel: Viele scha
 
 Du rechnest:
 
-**alle Grundgebühren über 24 Monate + Anschlusskosten + Routerkosten - Bonus - Cashback = Gesamtkosten**
+**alle Grundgebühren über 24 Monate + Anschlusskosten + Routerkosten – Bonus – Cashback = Gesamtkosten**
 
 Dann teilst du durch 24.
 

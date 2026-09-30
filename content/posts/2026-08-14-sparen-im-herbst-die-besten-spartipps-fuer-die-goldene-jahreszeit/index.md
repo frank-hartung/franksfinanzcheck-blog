@@ -283,7 +283,7 @@ Setz dir 75 Minuten – so teilst du sie ein:
 
 Wenn nur eine der drei Schichten sitzt, nimm die Verträge. Sie amortisieren sich am schnellsten.
 
-**Faustregel:** Wer seine Fixkosten konsequent alle zwölf Monate prüft, spart in der Regel zwischen 10 und 20 % der jährlichen Haushaltskosten ein.
+**Faustregel:** Wer seine Fixkosten konsequent alle zwölf Monate prüft, spart in der Regel zwischen 10 % und 20 % der jährlichen Haushaltskosten ein.
 
 ## Fazit: Nutze den Herbst für deinen persönlichen Kassensturz
 

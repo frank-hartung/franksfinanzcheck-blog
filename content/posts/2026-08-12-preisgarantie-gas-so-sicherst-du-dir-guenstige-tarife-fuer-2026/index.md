@@ -56,7 +56,7 @@ Sieh dir erst den Preis ohne Bonus an. Prüfe danach die Frist zum Kündigen und
 
 Mach ein Foto vom Zählerstand, wenn du wechselst. Speichere das Angebot und die Bestätigung. Dann kannst du später Preis, Start und Abschlag leicht prüfen. Das spart Rückfragen, falls ein Wert nicht zu deinen Unterlagen passt.
 
-## Das Wichtigste in Kürze – Preisgarantie Gas 2026
+## Das Wichtigste in Kürze – Gaspreisgarantie 2026
 
 - Nutze den Jahresverbrauch aus der letzten Rechnung, keine grobe Haushalts-Schätzung.
 - Blende Boni im ersten Vergleich aus.

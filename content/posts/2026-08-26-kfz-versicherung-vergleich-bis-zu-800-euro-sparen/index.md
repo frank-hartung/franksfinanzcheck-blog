@@ -68,7 +68,7 @@ Für 2026 hat der GDV **über 400 der 413 Zulassungsbezirke neu eingestuft**. Be
 
 Wichtig dabei: Eine reine Klassenanpassung löst in der Regel **kein** Sonderkündigungsrecht aus. Steigt dein Beitrag dagegen durch eine echte Tariferhöhung des Versicherers, hast du nach § 40 VVG **einen Monat ab Mitteilung** Zeit für eine Sonderkündigung – unabhängig vom 30.11.
 
-## Gilt der 30.11. Auch für deinen Vertrag?
+## Gilt der 30.11. auch für deinen Vertrag?
 
 Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
 
@@ -154,7 +154,7 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 
-### 7. Den Stichtag 30.11. Kennen und nutzen
+### 7. Den Stichtag 30.11. kennen und nutzen
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Wenn dein Versicherer den Preis ohne Schadensfall erhöht, hast du **vier Wochen** nach Eingang der Mitteilung Zeit zu kündigen – unabhängig vom 30.11.
