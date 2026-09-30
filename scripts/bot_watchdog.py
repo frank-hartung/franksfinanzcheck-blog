@@ -366,8 +366,10 @@ def check_affiliate_integrity():
     Zeitstempel ist aber kein Lebenszeichen. Deshalb prüft der Check jetzt
     zwei Dinge getrennt:
 
-      BEFUND (Zustand)   exit_code, content_problems, errors – rot bleibt
-                         rot, bis ein Lauf heilt. Gilt unabhängig vom Alter.
+      BEFUND (Zustand)   exit_code, kanonische `unresolved_problems`, errors
+                         – rot bleibt rot, bis ein Lauf heilt. Die historische
+                         `content_problems`-Liste öffnet nie selbst einen Alarm.
+                         Gilt unabhängig vom Alter.
       FRISCHE            Herzschlag des Zustands ≤ 30 h ODER ein fehler-
                          freier Lauf der Wache im selben Fenster (der Lauf
                          ist die härtere Evidenz: unveränderlich, nicht

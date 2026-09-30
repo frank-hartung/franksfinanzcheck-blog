@@ -1131,6 +1131,30 @@ def heal_file(path: Path, reg: dict | None = None) -> dict:
             "problems": f.get("problems", []), "gefunden": True}
 
 
+def unresolved_problem_slugs(findings: dict[str, dict],
+                             render_problems: dict[str, str]) -> list[str]:
+    """Liefert die kanonische, artikelgenaue Restmenge eines Laufs.
+
+    ``findings`` ist bewusst ein Audit-Trail: Er behält auch einen Fund, den
+    ``heal_markdown()`` im selben Lauf vollständig behoben hat.  Für einen
+    Alarm zählt dagegen nur, was nach der Heilung noch offen ist. Ein Artikel
+    bleibt offen, wenn keine Heilung möglich war oder Markdown-Probleme nach
+    der Heilung übrig sind; Render-/Gateway-Funde sind immer Restfunde.
+
+    Diese Ableitung ist die eine Quelle für Exit-Code *und*
+    ``unresolved_problems`` im Zustand. Damit kann ein teilweise geheilter
+    Lauf weder geheilte Slugs mitzählen noch Gate und Watchdog auseinander
+    laufen lassen (#446).
+    """
+    unresolved = set(render_problems)
+    for slug, finding in findings.items():
+        healed = finding.get("healed") or []
+        problems = finding.get("problems") or []
+        if not healed or problems:
+            unresolved.add(slug)
+    return sorted(unresolved)
+
+
 def run(root: Path | None = None, posts_dir: Path | None = None,
         do_heal: bool | None = None, allow_build: bool = True) -> dict:
     """Kernprüfung – von CLI, publish_gate und bestand_gate genutzt."""
@@ -1189,12 +1213,15 @@ def run(root: Path | None = None, posts_dir: Path | None = None,
                 r["problems"] = []
         errors.extend(detector_drift())
 
-    still_broken = {slug: f for slug, f in findings.items()
-                    if not f["healed"] or f["problems"] or slug in render_problems}
+    # Eine gefundene CTA kann im selben Lauf vollständig geheilt werden.
+    # Der Alarmpfad arbeitet deshalb ausschließlich mit dieser Restmenge,
+    # niemals mit allen historischen Funden.  Die Funktion ist zugleich die
+    # SSOT für den Zustand, den Bot-Watchdog und Workflow später lesen.
+    unresolved = unresolved_problem_slugs(findings, render_problems)
 
     if errors:
         code = EXIT_TOOL
-    elif still_broken or render_problems:
+    elif unresolved:
         code = EXIT_CONTENT
     else:
         code = EXIT_OK
@@ -1356,10 +1383,14 @@ def write_state(result: dict) -> None:
     """
     # Ein Fund kann im selben Lauf geheilt werden. `content_problems` behält
     # diese nachvollziehbare Laufhistorie, während ausschließlich die
-    # kanonische Restmenge einen Alarm auslösen darf (#446).
+    # kanonische Restmenge einen Alarm auslösen darf (#446). Wichtig auch bei
+    # Teilheilungen: Ein geheilter Slug darf nicht neben einem anderen,
+    # tatsächlich offenen Slug in die Restmenge geraten.
     content_problems = sorted(set(result["findings"]) | set(result["render_problems"]))
-    unresolved_problems = (content_problems if result["exit_code"] == EXIT_CONTENT
-                           else [])
+    unresolved_problems = (
+        unresolved_problem_slugs(result["findings"], result["render_problems"])
+        if result["exit_code"] == EXIT_CONTENT else []
+    )
     payload = {
         "state_schema_version": STATE_SCHEMA_VERSION,
         "exit_code": result["exit_code"],
@@ -1829,6 +1860,27 @@ def run_selftest() -> list[str]:
                    "geheilter Fund muss als Audit-Spur erhalten bleiben")
             expect(healed_state.get("unresolved_problems") == [],
                    "geheilter Fund darf nicht als offen gespeichert werden (#446)")
+
+            # 11) #446 Teilheilung: Neben einem echten Restfund darf die
+            #     Audit-Historie keine bereits geheilte CTA erneut alarmieren.
+            partial = dict(base)
+            partial["generated_at"] = "2026-09-19 04:00:00 UTC"
+            partial["exit_code"] = EXIT_CONTENT
+            partial["findings"] = {
+                "2026-08-12-voll-geheilt": {
+                    "problems": [], "healed": ["CTA neu"],
+                },
+                "2026-08-13-rest-offen": {
+                    "problems": ["zweite CTA kaputt"], "healed": ["erste CTA neu"],
+                },
+            }
+            partial["render_problems"] = {"2026-08-14-render": "Gateway fehlt"}
+            write_state(partial)
+            partial_state = json.loads(globals()["STATE"].read_text(encoding="utf-8"))
+            expect(partial_state.get("unresolved_problems") == [
+                "2026-08-13-rest-offen", "2026-08-14-render"],
+                "Teilheilung: nur nach der Heilung verbliebene Funde dürfen "
+                "in unresolved_problems stehen (#446)")
     finally:
         globals()["STATE"], globals()["REPORT"] = old_state_path, old_report_path
 
