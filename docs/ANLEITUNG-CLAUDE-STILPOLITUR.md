@@ -37,7 +37,7 @@ Claude läuft **nicht** über die bezahlte Anthropic-API, sondern über **Puter.
 2. Auth-Token erzeugen (Anleitung: [docs.puter.com](https://docs.puter.com) → Node.js/Auth-Token)
 3. GitHub → Settings → Secrets and variables → Actions → **`PUTER_AUTH_TOKEN`**
 
-Ohne Token bricht der Tageslauf bewusst **laut** ab (Exit 3) – `alert-on-failure.yml` meldet es als Issue („Claude-Stilpolitur (Mo/Mi/Fr)“ ist im Watch-List). Nie ein stiller Ausfall.
+Ohne Token bleibt der geplante Tageslauf **grün und ehrlich**: Die vollständige Offline-Premium-Politur (`grammar_check` + `sprachglatt`) läuft weiter und wird committed; ausschließlich der externe Claude-Zusatz wird mit einer gelben Workflow-Warnung und einem Eintrag in der Job-Zusammenfassung übersprungen. Es gibt weder einen stillen Modellwechsel noch einen kostenpflichtigen API-Fallback. Dadurch erzeugt eine noch nicht eingerichtete externe Zugangsdatenquelle keine wiederkehrenden Fehlalarm-Issues mehr (Härtung #468). Der direkte CLI-Aufruf `claude_stilpolitur.py --fix` bleibt dagegen fail-closed (Exit 3), wenn das Token fehlt.
 
 ---
 
