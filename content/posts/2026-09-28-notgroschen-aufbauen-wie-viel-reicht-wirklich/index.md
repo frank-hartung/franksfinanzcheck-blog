@@ -2,8 +2,8 @@
 lastmod: 2026-09-28
 title: "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan"
 description: "Notgroschen aufbauen, auch mit kleiner Sparrate: Ein realistischer 12-Monats-Plan für die ersten 1.000 € – mit Monatszielen, Dauerauftrag und klaren Regeln."
-date: 2026-09-28T11:05:52Z
-draft: true
+date: 2026-09-30
+draft: false
 tags: ["Notgroschen", "Geld sparen im Alltag", "Altersvorsorge"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
