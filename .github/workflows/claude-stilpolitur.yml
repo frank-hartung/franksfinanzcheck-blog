@@ -98,6 +98,7 @@ jobs:
           cache: npm
 
       - name: Voraussetzungen prüfen
+        id: preflight
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
@@ -125,18 +126,27 @@ jobs:
             echo "::error title=Claude-Stilpolitur: Repository-Vertrag unvollständig::Pflichtdateien fehlen oder sind leer (siehe Liste oben)."
             exit 1
           fi
-          if [ -z "${PUTER_AUTH_TOKEN//[[:space:]]/}" ]; then
-            echo "::error title=Claude-Stilpolitur: PUTER_AUTH_TOKEN fehlt::Kostenloser Puter-Zugang ist nicht eingerichtet; es wird kein anderes Modell und kein API-Fallback verwendet."
-            echo "🛑 PUTER_AUTH_TOKEN fehlt in den Repository-Secrets." >&2
-            echo "   Einrichten: puter.com → kostenloses Konto → Auth-Token erzeugen" >&2
-            echo "   → GitHub → Settings → Secrets and variables → Actions" >&2
-            echo "   → New repository secret → Name: PUTER_AUTH_TOKEN" >&2
-            echo "   Hinweis: kein Anthropic-Key und keine Kosten nötig (Puter User-Pays/Gratis-Kontingent)." >&2
-            exit 1
-          fi
-          echo "✅ Voraussetzungen vorhanden (Engines, Stilprofil, Marken-Brain, Konfiguration und Gratis-Token)."
 
-      - name: Abhängigkeiten (Python + Puter-Brücke, transient)
+          # Ein externes Zugangstoken ist keine Repository-Invariante. Fehlt es,
+          # läuft die vollständige Offline-Politur trotzdem weiter und wird
+          # committed. So bleibt die Redaktion hochwertig und der Zeitplan grün,
+          # ohne einen Claude-Lauf vorzutäuschen oder auf ein anderes Modell bzw.
+          # eine kostenpflichtige API auszuweichen (Reparatur Issue #468).
+          if [ -z "${PUTER_AUTH_TOKEN//[[:space:]]/}" ]; then
+            echo "puter_available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Claude-Zugang nicht konfiguriert::PUTER_AUTH_TOKEN fehlt. Offline-Premium-Politur läuft vollständig; nur der externe Claude-Zusatz wird ehrlich übersprungen."
+            {
+              echo "### ⚠️ Claude-Zusatz übersprungen"
+              echo "Der Repository-Secret \`PUTER_AUTH_TOKEN\` ist nicht gesetzt."
+              echo "Grammar- und Sprachglatt-Politur laufen dennoch vollständig; kein Ersatzmodell und keine kostenpflichtige API werden verwendet."
+              echo "Einmalige Einrichtung: Repository → Settings → Secrets and variables → Actions → \`PUTER_AUTH_TOKEN\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "puter_available=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Voraussetzungen vorhanden (Engines, Stilprofil, Marken-Brain, Konfiguration und Gratis-Token)."
+          fi
+
+      - name: Python-Abhängigkeiten (isoliert und reproduzierbar)
         run: |
           set -Eeuo pipefail
           # Ubuntu kann systemweite pip-Installationen per PEP 668 blockieren.
@@ -147,11 +157,17 @@ jobs:
           "$VENV/bin/python" -m pip install --quiet --disable-pip-version-check \
             'pyyaml>=6.0,<7'
           echo "$VENV/bin" >> "$GITHUB_PATH"
+          echo "✅ Python-Abhängigkeiten in isolierter venv installiert."
+
+      - name: Puter-Brücke installieren (nur mit konfiguriertem Zugang)
+        if: steps.preflight.outputs.puter_available == 'true'
+        run: |
+          set -Eeuo pipefail
           # Pinning verhindert, dass ein ungeprüftes SDK-Release die Puter-
           # Antwortform oder die Sonnet-5-Brücke mitten im Redaktionslauf ändert.
           npm install --no-save --no-package-lock @heyputer/puter.js@2.6.3
           node -e "const p=require('./node_modules/@heyputer/puter.js/package.json'); if (p.version !== '2.6.3') { process.exit(1) }"
-          echo "✅ Python venv + @heyputer/puter.js@2.6.3 installiert."
+          echo "✅ @heyputer/puter.js@2.6.3 installiert."
 
       - name: Selbsttest HART (Sabotage-Schutz, Exit 2 = rot)
         run: |
@@ -168,6 +184,7 @@ jobs:
           python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_politur.txt || echo "⚠ Sprachglatt: Restfunde im Report"
 
       - name: Claude (kostenlos ohne API) – Stil-Politur (personalisiert, Premium)
+        if: steps.preflight.outputs.puter_available == 'true'
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
           CLAUDE_FORCE: ${{ inputs.force || 'false' }}
@@ -187,6 +204,13 @@ jobs:
           fi
           echo "== Claude (kostenlos, NUR claude-sonnet-5, personalisiert: data/schreibstil.yaml) =="
           python3 scripts/claude_stilpolitur.py --fix "${args[@]}" | tee /tmp/stilpolitur.txt
+
+      - name: Offline-Fallback transparent bestätigen
+        if: steps.preflight.outputs.puter_available != 'true'
+        run: |
+          echo "✅ Offline-Premium-Politur abgeschlossen."
+          echo "ℹ️ Claude wurde nicht aufgerufen, weil PUTER_AUTH_TOKEN nicht konfiguriert ist."
+          echo "ℹ️ Kein stiller Modellwechsel, kein API-Fallback, keine Kosten."
 
       - name: Änderungen committen & pushen (Redaktions-Bot)
         run: |
