@@ -39,6 +39,7 @@
 **Checkliste vor Merge:**
 - [ ] Code-Review abgeschlossen
 - [ ] Tests bestanden
-- [ ] Assignee zugewiesen
-- [ ] Zielzweig korrekt (main/develop)
-- [ ] Commit-Nachrichten auf Standard
+- [ ] Verantwortlichkeit ist klar (Assignee nur, wenn menschliches Handeln erforderlich ist)
+- [ ] Zielzweig ist `main`
+- [ ] Keine Secrets, Tokens oder personenbezogenen Produktionsdaten im Diff/Log
+- [ ] Commit-Nachrichten entsprechen dem Projektstandard

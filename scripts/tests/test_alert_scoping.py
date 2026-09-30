@@ -92,6 +92,17 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("listJobsForWorkflowRun", self.code)
         self.assertIn("Fehlgeschlagene Schritte", self.code)
 
+    def test_timeout_ist_echter_produktionsfehler(self):
+        # GitHub unterscheidet `timed_out` von `failure`. Ohne diese explizite
+        # Conclusion würde ein festgefahrener Produktionslauf trotz rotem
+        # Herzschlag nie direkt gemeldet.
+        self.assertRegex(self.code, r"conclusion\s*==\s*'timed_out'")
+        self.assertRegex(self.code, r"j\.conclusion\s*===\s*'timed_out'")
+        self.assertRegex(self.code, r"s\.conclusion\s*===\s*'timed_out'")
+
+    def test_github_script_unveraenderlich_gepinnt(self):
+        self.assertRegex(self.code, r"uses:\s*actions/github-script@[0-9a-f]{40}")
+
 
 class ProdScopingResolve(unittest.TestCase):
     """Vertrag 2: Auto-Close nur bei Grün auf dem Default-Branch."""

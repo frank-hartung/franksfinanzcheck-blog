@@ -56,7 +56,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        # v4 – unveränderlich gepinnt (der Wächter selbst darf keine bewegliche Abhängigkeit haben)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Python-Abhängigkeit (PyYAML für die Wacht-Liste, Fallback im Skript)
         run: python3 -m pip install -q --break-system-packages pyyaml 2>/dev/null || python3 -m pip install -q pyyaml 2>/dev/null || true

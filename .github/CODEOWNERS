@@ -1,4 +1,4 @@
-﻿# 🏢 CODEOWNERS: Professionelle Ownership & Review-Struktur
+# 🏢 CODEOWNERS: Professionelle Ownership & Review-Struktur
 # Premium-Agentur-Standard für franksfinanzcheck-blog
 
 # Alle Dateien
@@ -8,4 +8,6 @@
 /.github/workflows/ @frank-hartung
 /.github/CODEOWNERS @frank-hartung
 /package.json @frank-hartung
-/astro.config.mjs @frank-hartung
+/package-lock.json @frank-hartung
+/hugo.toml @frank-hartung
+/SECURITY.md @frank-hartung
