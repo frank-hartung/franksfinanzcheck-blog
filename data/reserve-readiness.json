@@ -1,150 +1,115 @@
 {
   "target": 6,
-  "ready": 3,
-  "pool_size": 8,
-  "generated_at": "2026-09-29T15:49:57Z",
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-09-30T10:06:39Z",
   "candidates": [
     {
-      "slug": "2026-09-29-konto-wechseln-leicht-gemacht-dein-schneller-leitfaden",
+      "slug": "2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich",
       "ready": true,
-      "sha256": "f2a0c5ce4df7d24c3f8bf19d28daff3a15d3d2dd9197e010c2a95b5b194aca59",
-      "score": 0.874,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-09-29-reiseversicherungen-im-check-welcher-schutz-ist-2026-noetig",
-      "ready": true,
-      "sha256": "4d67996fcada657bac7b147aab06d49728c656b7a35b1b5d4a34188140c2a918",
-      "score": 0.896,
+      "sha256": "22121795664dc96e60f92d8ea528de3efcdfe2ddab5491b45d8616e6f0838165",
+      "score": 0.916,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-09-29-wohnmobil-mieten-so-sparst-du-im-vergleich-zum",
-      "ready": true,
-      "sha256": "5527a28875d123960d333cfc901966510579e320fde643bb2003a4c882efcff7",
-      "score": 0.89,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.7,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf",
-      "ready": false,
-      "sha256": "b6d9621dd7f6e5b28c03c690b66776ebdf0b733df46abe5c98573f2425b9b218",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.867,
+      "slug": "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
+      "ready": true,
+      "sha256": "23521b59f595bf969bd307c42c92db367aaf3e1fd1ece689236cdbf0558affbf",
+      "score": 0.938,
       "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 0.7,
+        "spelling": 0.78,
+        "meta": 1.0,
+        "structure": 1.0,
         "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.95
       }
     },
     {
-      "slug": "2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g",
-      "ready": false,
-      "sha256": "d9f2aa6d3d442e47aa78e4d5568b091856ddc9508e7b494d35f7180d30624ff2",
-      "reason": "quality-score 0.827 < 0.85 (schwach: readability 0.60, structure 0.70, typography 0.74)",
-      "details": [
-        "Reserve nicht bereit: 2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g: {'slug': '2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g', 'score': 0.827, 'parts': {'spelling': 1.0, 'meta': 0.85, 'structure': 0.7, 'typography': 0.74, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.6}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.827,
+      "slug": "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
+      "ready": true,
+      "sha256": "19c5046dfa1896dac3a5052c8b1309e2151400978505b46fb1d1de58c6ac7d98",
+      "score": 0.864,
       "parts": {
-        "spelling": 1.0,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.74,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.6
-      }
-    },
-    {
-      "slug": "2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise",
-      "ready": false,
-      "sha256": "969fa6629456c61a5ea6a5fbd49e10024edd39e559c85417b75f64a17a54f8c7",
-      "reason": "quality-score 0.845 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.84)",
-      "details": [
-        "Reserve nicht bereit: 2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise: {'slug': '2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise', 'score': 0.845, 'parts': {'spelling': 0.84, 'meta': 0.85, 'structure': 0.7, 'typography': 0.94, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.845,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt",
-      "ready": false,
-      "sha256": "b35ba6e0ea0713910c8f43178726e4ffcb29dd8f1c86b86316cd82cf1fc08bff",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem beitrag“ ×1 (Template-Sprache – umformulieren)",
-      "details": [
-        "🛑 2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem beitrag“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.896,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 0.85,
+        "spelling": 0.6000000000000001,
+        "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.9,
+        "typography": 0.84,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition",
+      "slug": "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
+      "ready": true,
+      "sha256": "6cd4dae29517b30119996e0290546a7a602c6753d30aef61236e64e69009bd6d",
+      "score": 0.912,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
       "ready": false,
-      "sha256": "bbfe69013388ea740eb86aec863526754ccc5c3013b75e6ff2141e9a02992995",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "sha256": "7ec8680b8529ecb0735af08ccc3843adfe1a89e37244c71d8c796cd2cc49b9fb",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
       "details": [
-        "🛑 2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
+        "🛑 2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.869,
+      "score": 0.92,
       "parts": {
-        "spelling": 0.84,
+        "spelling": 0.8,
         "meta": 1.0,
-        "structure": 0.7,
-        "typography": 0.86,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+      "ready": true,
+      "sha256": "51d7c94f63de19f5a6eac1088a692d33d10aa15e5dcf6a532c8af51af460c1a9",
+      "score": 0.958,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden",
+      "ready": true,
+      "sha256": "556fe0eafb7e6d48f658233213b6f56537c05b58ff45ccd5305e6cf46a665b34",
+      "score": 0.914,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8

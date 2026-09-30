@@ -1,57 +1,13 @@
 {
-  "2026-09-29-gasabschlag-berechnen-so-stellst-du-deine-heizung-winterf": {
-    "first": "2026-09-29T15:29:35Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+  "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung": {
+    "first": "2026-09-30T10:01:58Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
     "hits": 1,
     "laeufe": [
-      "run:36586424191"
+      "run:36698807636"
     ],
-    "last": "2026-09-29T15:49:57Z",
-    "lauf": "run:36586424191",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-09-29-grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g": {
-    "first": "2026-09-29T15:29:35Z",
-    "grund": "quality-score 0.827 < 0.85 (schwach: readability 0.60, structure 0.70, typography 0.74)",
-    "hits": 1,
-    "laeufe": [
-      "run:36586424191"
-    ],
-    "last": "2026-09-29T15:49:57Z",
-    "lauf": "run:36586424191",
-    "signatur": "quality-score <score> < <score> (schwach: readability <score>, structure <score>, typography <score>)"
-  },
-  "2026-09-29-interrail-bahncard-so-sparst-du-bei-der-europa-zugreise": {
-    "first": "2026-09-29T15:29:35Z",
-    "grund": "quality-score 0.845 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.84)",
-    "hits": 1,
-    "laeufe": [
-      "run:36586424191"
-    ],
-    "last": "2026-09-29T15:49:57Z",
-    "lauf": "run:36586424191",
-    "signatur": "quality-score <score> < <score> (schwach: structure <score>, readability <score>, spelling <score>)"
-  },
-  "2026-09-29-rechtsschutzversicherung-was-sie-wirklich-zahlt": {
-    "first": "2026-09-29T15:12:41Z",
-    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem beitrag“ ×1 (Template-Sprache – umformulieren)",
-    "hits": 1,
-    "laeufe": [
-      "run:36586424191"
-    ],
-    "last": "2026-09-29T15:49:57Z",
-    "lauf": "run:36586424191",
-    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem beitrag“ ×<n> (template-sprache – umformulieren)"
-  },
-  "2026-09-29-stromspeicher-kaufen-2026-lohnt-sich-die-investition": {
-    "first": "2026-09-29T15:12:41Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:36586424191"
-    ],
-    "last": "2026-09-29T15:49:57Z",
-    "lauf": "run:36586424191",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+    "last": "2026-09-30T10:06:39Z",
+    "lauf": "run:36698807636",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem artikel“ ×<n> (template-sprache – umformulieren)"
   }
 }
