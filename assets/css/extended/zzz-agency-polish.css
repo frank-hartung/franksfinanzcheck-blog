@@ -2358,13 +2358,14 @@ details.toc a {
 
 .ff-tbl.ff-spar-matrix-table td.ff-spar-matrix-aktion { vertical-align: middle; }
 
-/* Der gelbe Knopf traegt jetzt ein echtes Tap-Ziel (Regelwerk: >= 44 px
-   Hoehe inkl. Polster) statt der alten 4-px-Zeile. */
+/* Der gelbe Knopf traegt auf ALLEN Viewports ein echtes 44-px-Tap-Ziel
+   (WCAG 2.2 Target Size, nicht nur rechnerisch ueber Innenabstand) statt
+   der alten 4-px-Zeile. Die Wache L3 versiegelt dieses Mindestmass. */
 .ff-tbl.ff-spar-matrix-table .ff-table-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 9px 16px;
   line-height: 1.2;
 }

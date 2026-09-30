@@ -12,7 +12,7 @@ Spar-Matrix mit den umsatznächsten Knöpfen der Seite.
 | **Befund** | Die Tabelle war **vollständig ungestylt**: 0 Deklarationen erreichten ihre Zellen |
 | **Ursache** | Premium-Tabellen-System komplett auf `.post-content` gescopt + tote Selektor-Leiche `.ff-spar-matrix` in custom.css |
 | **Reparatur** | Basis-Schicht ohne Scope-Fessel (zzz-agency-polish.css §11), Markup-Vertrag im Layout, mobile Kartenansicht < 760 px |
-| **Dauerhaft** | `scripts/tabellen_lesbarkeit_guard.py` (L1–L5, 8 Sabotage-Proben) + 7 Unit-Tests + 6 Browser-Tests + 2 Workflows |
+| **Dauerhaft** | `scripts/tabellen_lesbarkeit_guard.py` (L1–L5, 9 Proben inkl. Aktionsziel-Sabotage) + 7 Unit-Tests + 6 Browser-Tests + 2 Workflows |
 | **Beweis** | Wache auf dem alten Stand: **13 Funde** · auf dem neuen Stand: **0** |
 
 ---
@@ -78,8 +78,8 @@ Klassennamen umbenannt wurden, ohne die CSS mitzunehmen.
 * **Spar-Matrix-Politur:** `<colgroup>`-Spaltenmaß (22/18/14/30/16 %,
   je mit `min-width`), Caption über der Tabelle, Themenspalte sticky
   und halbfett, Geldspalte smaragdgrün mit tabellarischen Ziffern,
-  Aktionsspalte rechtsbündig, CTA-Knopf mit echtem Tap-Ziel
-  (min-height 40 px statt der alten 4-px-Zeile), weicher Scroll-Hinweis
+  Aktionsspalte rechtsbündig, CTA-Knopf mit echtem 44-px-Tap-Ziel
+  auf allen Viewports statt der alten 4-px-Zeile, weicher Scroll-Hinweis
   an beiden Kanten.
 * **Mobile Kartenansicht (< 760 px):** Jede Zeile wird zur Karte –
   Themenname als Kartenkopf auf Smaragd-Soft, darunter je Angabe eine
@@ -119,11 +119,12 @@ Build und ohne Browser (Laufzeit < 1 s):
 |---|---|
 | **L1** Klassenabdeckung | Jede Tabellen-Klasse aus dem Template hat mindestens einen Selektor in der ausgelieferten CSS |
 | **L2** Scope-Falle | Für Tabellen außerhalb von `.post-content` existiert mindestens ein deckender Selektor **ohne** `.post-content`/`.md-content`-Präfix |
-| **L3** Lesbarkeits-Floor | Zellpolster ≥ 10 px, Kopfzeile mit eigener Fläche, Zeilentrenner, Mobilpfad (`@media max-width`) |
+| **L3** Lesbarkeits-Floor | Zellpolster ≥ 10 px, Kopfzeile mit eigener Fläche, Zeilentrenner, Aktionsziel ≥ 44 px, Mobilpfad (`@media max-width`) |
 | **L4** Tote Selektoren | Kein `.ff-*`-Tabellenselektor, dessen Klasse in keinem Markup vorkommt (genau die `.ff-spar-matrix`-Leiche) |
 | **L5** Markup-Vertrag | Spaltenzahl = `<colgroup>` = `scope="col"`, Zeilenkopf als `th scope="row"`, `data-label` je Datenzelle, Scroll-Container mit role/aria-label/tabindex |
 
-Sabotage-Schutz: **8 Miniatur-Repos** im Temp, je ein gezielter Defekt;
+Sabotage-Schutz: **9 Miniatur-Repos** im Temp (eine gesunde Referenz,
+acht gezielte Defekte – darunter ein auf 32 px geschrumpftes Aktionsziel);
 schlägt eine Probe nicht an, endet die Wache mit Exit 2, bevor sie
 irgendetwas bewertet.
 
@@ -158,7 +159,7 @@ irgendetwas bewertet.
   Deklaration, nachher vollständige Versorgung bei 1280 px **und**
   390 px; die mobile Schicht gewinnt nachweislich gegen die
   Basis-Schicht (deshalb `.ff-spar-matrix-scroll .ff-tbl.ff-spar-matrix-table …`).
-* `python3 scripts/tabellen_lesbarkeit_guard.py --selftest` → 8/8 grün.
+* `python3 scripts/tabellen_lesbarkeit_guard.py --selftest` → 9/9 Proben grün.
 * `python3 -m unittest scripts.tests.test_tabellen_lesbarkeit_guard` →
   7/7 grün.
 * `python3 scripts/report_hygiene.py --check` → Root sortenrein.
