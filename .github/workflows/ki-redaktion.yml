@@ -95,6 +95,15 @@ jobs:
             python3 scripts/ki_redaktion.py --run --rolle "$ROLLE" --fix || true
           fi
 
+      # INDEX-HYGIENE DEFENSE-IN-DEPTH (Issue #463): Alle Writer laufen
+      # hinter derselben Registergrenze. Vor dem Commit wird der Bestand
+      # normalisiert und anschließend hart geprüft – Keywords bleiben Keywords.
+      - name: Taxonomie-Gate nach Writer-Lauf
+        run: |
+          python3 scripts/tag_governance.py --selftest
+          python3 scripts/tag_governance.py --apply
+          python3 scripts/tag_governance.py --check
+
       - name: Entwürfe committen (drafts only)
         run: |
           git config user.name "Content-Bot"

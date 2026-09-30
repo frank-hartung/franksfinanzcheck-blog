@@ -416,23 +416,28 @@ jobs:
       # Diese Wache misst die Crawl-Fläche des fertigen Builds gegen ein Budget:
       # /page/1/-Aliase, Tag-Archive, Kategorie-Archive, Sitemap-Deckung und das
       # Verhältnis indexierbar : nicht indexierbar. Läuft NACH dem Build, weil
-      # sie public/ auswertet. Blockiert bewusst NICHT das Deployment – ein
-      # Crawl-Budget-Fund ist dringend, aber kein Grund, eine fertige Site
-      # zurückzuhalten. Er landet als Warnung im Log und in der Zusammenfassung.
+      # sie public/ auswertet. Das Gate ist bewusst hart: Ein neuer URL-Leak
+      # darf nicht erst nach Wochen in der Search Console auffallen. Die
+      # Zusammenfassung wird auch bei Exit 1 geschrieben, danach stoppt der
+      # Deploy vor dem Publish.
       - name: Index-Hygiene-Selbsttest (Wache muss lauffähig sein)
         run: python3 scripts/index_hygiene_gate.py --selftest
 
       - name: Index-Hygiene-Gate (Crawl-Fläche gegen Budget)
         run: |
-          python3 scripts/index_hygiene_gate.py | tee indexhygiene.log || {
-            echo "::warning title=Index-Hygiene::Crawl-Fläche über Budget – siehe Log und INDEX-HYGIENE-PREMIUM-2026-09-29.md"
-          }
+          set +e
+          python3 scripts/index_hygiene_gate.py | tee indexhygiene.log
+          gate_status=${PIPESTATUS[0]}
           {
             echo "### Index-Hygiene (Crawl-Fläche)"
             echo '```'
-            sed -n '1,20p' indexhygiene.log
+            sed -n '1,80p' indexhygiene.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$gate_status" -ne 0 ]; then
+            echo "::error title=Index-Hygiene::Crawl-Fläche über Budget – Deploy wird zum Schutz vor neuen GSC-URLs gestoppt"
+          fi
+          exit "$gate_status"
 
       # ================= SPAM-WACHE (Google + Pinterest, 26.08.2026) =================
       # Dauerauftrag: Blog, RSS-Feed (/index.xml = Quelle des Pinterest-

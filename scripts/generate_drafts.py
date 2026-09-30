@@ -871,84 +871,25 @@ def _register_tags(keywords, pillar=None, titel=""):
 
     Tags kommen jetzt ausschließlich aus dem kuratierten Register; erfunden wird
     keiner mehr. Die Keywords bleiben unverändert im `keywords`-Feld.
-    Fail-open: ist das Register nicht ladbar, greift die alte Schreibweisen-
-    Normalisierung, damit die Entwurfsproduktion nie stehen bleibt – die Wache
-    scripts/tag_governance.py --check meldet den Rest.
+    Fail-closed: ist das Register nicht ladbar oder findet sich kein kanonischer
+    Tag, bricht dieser Entwurf mit einem klaren Fehler ab. Die alte
+    Schreibweisen-Normalisierung darf niemals wieder Keywords zu URL-erzeugenden
+    Tags machen.
     """
-    try:
-        from tag_governance import tags_fuer
-        tags = tags_fuer(keywords, pillar=pillar or "", titel=titel or "")
-        if tags:
-            return tags
-        print("    ⚠ Kein Register-Tag getroffen – bitte data/seo/tag_register.yaml prüfen")
-    except Exception as _e:                      # Fail-open: Generation laeuft weiter
-        print(f"    ⚠ Tag-Register nicht ladbar ({_e}) – Legacy-Normalisierung greift")
-    return normalize_tags(keywords[:4])
+    from tag_governance import kanonische_tags
+    return kanonische_tags(keywords, pillar=pillar or "", titel=titel or "")
 
 
 def normalize_tags(keywords):
-    """Korrigiert die Schreibweise von Tags (sichtbar im Footer/Tag-Seiten).
-    Hugo wendet KEINEN Title-Case mehr an (titleCaseStyle=none) – die Tags
-    werden exakt wie im Frontmatter angezeigt. Deshalb müssen sie hier
-    korrekt geschrieben werden: erstes Wort groß, bekannte Nomen/Fachbegriffe
-    korrekt, Rest klein (deutsche Regeln).
-    Der Kanon liegt in scripts/tag_casing.py (gemeinsame Quelle mit
-    casing_guard.py) – damit gilt dieselbe Schreibweise in Tag, Pin-Text und
-    Artikel. Nur wenn das Lexikon nicht ladbbar ist, greifen die unten
-    hinterlegten Legacy-Regeln (NOMEN_SET + TAG_FIXES).
+    """Kompatibilitäts-API mit derselben fail-closed Registergrenze.
+
+    Der frühere Fallback hat beliebige Keywords als Tags ausgegeben und damit
+    genau die behobene Crawl-Flächen-Leckage wieder öffnen können. Der Name
+    bleibt für externe Aufrufer erhalten, delegiert aber ausschließlich an
+    das kuratierte Register.
     """
-    try:
-        import tag_casing as _tc
-        items = [str(k).strip() for k in (keywords or []) if str(k).strip()]
-        norm, _changed, _notes = _tc.normalize_terms(items)
-        if norm:
-            return norm
-    except Exception as _e:                      # Fail-open: Generation laeuft weiter
-        print(f"    ⚠ tag_casing nicht ladbar ({_e}) – Legacy-Regeln greifen")
-    NOMEN_SET = {
-        "alltag", "budget", "checkliste", "energie", "freiheit", "girokonto",
-        "haushalt", "haushaltsbuch", "internet", "kredit", "kreditkarte",
-        "mietwagen", "notgroschen", "ratenkredit", "reise", "reisebudget",
-        "sparmethoden", "strom", "tagesgeld", "tarif", "urlaub", "versicherung",
-        "wärmepumpe", "zinsen", "dns", "dsl", "wlan", "kfz", "e-auto", "gas",
-        "heizung", "stromtarif", "handytarif", "ratgeber", "tier", "hund",
-        "katze", "tierversicherung", "hundeversicherung", "katzenversicherung",
-    }
-    TAG_FIXES = {
-        "dns server wechseln": "DNS-Server wechseln",
-        "dsl tipps": "DSL-Tipps",
-        "dsl hacks": "DSL-Hacks",
-        "reise budget": "Reisebudget",
-        "geld sparen im alltag": "Geld sparen im Alltag",
-        "internet schneller machen": "Internet schneller machen",
-        "mietwagen günstig buchen": "Mietwagen günstig buchen",
-        "mietwagen roadtrip": "Mietwagen Roadtrip",
-        "haushaltsbuch führen": "Haushaltsbuch führen",
-        "frugalismus tipps": "Frugalismus Tipps",
-        "sparmethoden": "Sparmethoden",
-    }
-    out = []
-    for kw in keywords:
-        kw = kw.strip()
-        if not kw:
-            continue
-        low = kw.lower()
-        if low in TAG_FIXES:
-            out.append(TAG_FIXES[low])
-            continue
-        # Generische Regel: erstes Wort groß, Rest klein – Nomen behalten Groß
-        words = kw.split()
-        fixed = []
-        for i, w in enumerate(words):
-            wl = w.lower()
-            if i == 0:
-                fixed.append(wl[0].upper() + wl[1:] if wl else w)
-            elif wl in NOMEN_SET:
-                fixed.append(wl[0].upper() + wl[1:])
-            else:
-                fixed.append(wl)
-        out.append(" ".join(fixed))
-    return out
+    from tag_governance import kanonische_tags
+    return kanonische_tags(keywords)
 
 
 def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):

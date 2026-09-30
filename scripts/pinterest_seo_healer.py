@@ -12,7 +12,7 @@ Was geheilt wird (deterministisch, idempotent):
   H5  Cover-Bilder        1000×1500 (2:3), Brand-Band, Stale-Titel → neu
   H6  Pin-SEO-Felder      pin_title (≤100, optimal 40–60), pin_description
                           (≤500, Keyword + CTA + max. 3 ASCII-Hashtags)
-  H7  Tags                aus Keywords (Pinterest-/Related-Matching)
+  H7  Tags                aus dem kuratierten Register (Pinterest-/Related-Matching)
 
 Aufruf:
   python3 scripts/pinterest_seo_healer.py              # Audit
@@ -449,6 +449,7 @@ def load_articles():
         desc = fm_get(fm, "description")
         kws = fm_get_list(fm, "keywords")
         tags = fm_get_list(fm, "tags")
+        pillar = fm_get(fm, "pillar")
         draft = "draft: true" in fm
         alt_m = re.search(r"^\s*alt:\s*[\"']?(.+?)[\"']?\s*$", fm, re.M)
         alt = alt_m.group(1).strip() if alt_m else ""
@@ -463,6 +464,7 @@ def load_articles():
             "description": desc,
             "keywords": kws,
             "tags": tags,
+            "pillar": pillar,
             "draft": draft,
             "alt": alt,
             "cover": cover,
@@ -622,13 +624,23 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
         content = fm_set_list(content, "keywords", kws[:8])
         actions.append(f"Keywords → {kws[:4]}")
 
-    # Tags aus Keywords (Related + Pinterest)
+    # Tags aus dem kuratierten Register (Related-Matching), niemals aus
+    # Keywords kopieren. Ein nicht zuordenbares Keyword bleibt ein Keyword;
+    # der Heiler meldet den redaktionellen Fall statt eine neue URL-Taxonomie
+    # zu erfinden.
     tags = a["tags"]
     if len(tags) < 2:
-        new_tags = kws[:4]
-        content = fm_set_list(content, "tags", new_tags)
-        actions.append(f"Tags → {new_tags}")
-        tags = new_tags
+        try:
+            from tag_governance import kanonische_tags
+            new_tags = kanonische_tags(
+                kws, pillar=a.get("pillar") or "", titel=title)
+        except (FileNotFoundError, RuntimeError) as exc:
+            new_tags = []
+            actions.append(f"Tags offen – Register nicht sicher nutzbar ({exc})")
+        if new_tags and new_tags != tags:
+            content = fm_set_list(content, "tags", new_tags)
+            actions.append(f"Tags kanonisiert → {new_tags}")
+            tags = new_tags
 
     # H2 Description
     desc = a["description"]

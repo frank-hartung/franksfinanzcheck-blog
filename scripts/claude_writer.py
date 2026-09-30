@@ -245,7 +245,9 @@ def run(args) -> int:
         "Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ.")
     fm = ks.build_frontmatter(
         title=title, description=description,
-        tags=(keywords or [title])[:4], pillar=topic.get("pillar"),
+        # `build_frontmatter` kanonisiert an der letzten Writer-Grenze
+        # gegen data/seo/tag_register.yaml; Keywords bleiben separat.
+        tags=keywords or [title], pillar=topic.get("pillar"),
         keywords=keywords or [title], rolle=ROLLE)
     content = fm + body
     if provider != "offline":

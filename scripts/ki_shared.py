@@ -181,6 +181,18 @@ def unique_bundle_slug(title: str) -> str:
     return f"{base}-{i}"
 
 
+def _kanonische_frontmatter_tags(tags, *, pillar=None, title="") -> list[str]:
+    """Zentrale, fail-closed Tag-Grenze für alle KI-Writer.
+
+    `tags` ist aus historischen Gründen der Parametername, darf aber niemals
+    ungeprüfte Keywords in das Frontmatter durchreichen.  Das Register ist
+    die einzige Quelle; ein fehlendes Register oder ein nicht zuordenbares
+    Thema stoppt den Draft statt neue URL-Terme zu erfinden.
+    """
+    from tag_governance import kanonische_tags
+    return kanonische_tags(tags or [], pillar=pillar or "", titel=title or "")
+
+
 def build_frontmatter(*, title, description, tags, pillar=None,
                       keywords=None, rolle="claude", kurzantwort=None,
                       news=False, kategorie=None) -> str:
@@ -189,10 +201,13 @@ def build_frontmatter(*, title, description, tags, pillar=None,
     Kein cadence_wait: Damit bleiben die Entwürfe für die Kadenz-
     Automatik unsichtbar (cadence_guard fasst sie nie an). Veröffent-
     licht wird ausschließlich bewusst über ki_redaktion.py --promote.
+    Die Tags werden an dieser letzten Writer-Grenze noch einmal gegen das
+    Register geprüft (Defense-in-Depth gegen neue Crawl-URLs).
     """
     date = datetime.datetime.now(datetime.timezone.utc)
     date_str = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-    tags = [t for t in (tags or []) if t][:5]
+    tags = _kanonische_frontmatter_tags(tags, pillar=pillar, title=title)
+    tags = [t for t in tags if t][:5]
     keywords = [k for k in (keywords or []) if k][:8]
     fm = (
         "---\n"

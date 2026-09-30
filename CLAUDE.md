@@ -232,11 +232,14 @@ genau einem Artikel, insgesamt 347 nicht indexierbare URLs auf 58 echte Seiten.
 
 **Eine Quelle:** `data/seo/tag_register.yaml` – 25 kanonische Tags, jeder einem
 Pillar zugeordnet, mit vollständiger Synonymliste. `tag_governance.tags_fuer()`
-ist die **einzige** erlaubte Tag-Quelle für neuen Content (nutzen
-`engine_generate.py` und `generate_drafts.py`). Ein Tag wird **nie erfunden**:
-greift nichts, entscheidet die Redaktion über einen Registereintrag – oder der
-Begriff bleibt ein Keyword. Keywords gehören ins `keywords`-Feld, wo sie Schema
-und Related-Matching speisen, **ohne je eine URL zu bauen**.
+ist die **einzige** erlaubte Tag-Quelle für neuen Content. Die Grenze ist
+fail-closed und wird an jeder Writer-Ausgabe erneut geprüft: `engine_generate.py`,
+`generate_drafts.py`, `ki_shared.py` (Claude/News) und
+`pinterest_seo_healer.py`. Ein Tag wird **nie erfunden**: greift nichts,
+decidiert die Redaktion über einen Registereintrag – oder der Begriff bleibt
+ein Keyword. Keywords gehören ins `keywords`-Feld, wo sie Schema und
+Related-Matching speisen, **ohne je eine URL zu bauen**. Ein fehlendes Register
+bricht den Writer ab; es gibt keinen Legacy-Fallback auf `keywords[:4]`.
 
 **Zwei Wachen, zwei Ebenen:**
 `python3 scripts/tag_governance.py` (T1–T8, **mit** `--apply`) prüft das
@@ -245,9 +248,10 @@ Frontmatter: unbekannte Tags, Synonyme statt kanonischer Namen, Thin-Archive
 Kategorie, tote Registerzeilen.
 `python3 scripts/index_hygiene_gate.py` (H1–H8, **ohne** `--fix`) misst die
 **Crawl-Fläche des Builds** gegen ein Budget: Sitemap-Deckung,
-`/page/1/`-Aliase, Tag-Budget (max. 35), Kategorie-Archive, Verhältnis
-indexierbar : nicht indexierbar (max. 2,0 : 1), kaputte Slugs, Waisenseiten,
-`noindex` in der Sitemap.
+`/page/1/`-Aliase, Tag-Budget (0), Kategorie-Archive, Verhältnis
+indexierbar : nicht indexierbar (max. 1,0 : 1), kaputte Slugs, Waisenseiten,
+`noindex` in der Sitemap. Das Deploy-Gate ist hart: Ein Verstoß stoppt den
+Publish, statt nur eine Warnung zu schreiben.
 
 **Merke:** `schema_seo_gate.py` S6 war die ganze Zeit grün – es fragt „trägt
 dieses Archiv ein noindex?“, nicht „darf es dieses Archiv geben?“. Eine Seite
