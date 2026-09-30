@@ -24,7 +24,7 @@ python3 scripts/hemingway_check.py
 
 # Einen Artikel prüfen
 python3 scripts/hemingway_check.py \
-  --file content/posts/2026-09-30-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md
+  --file content/posts/2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md
 
 # Nur neue Artikel im Content-Geburtslauf
 python3 scripts/hemingway_check.py --new-only
