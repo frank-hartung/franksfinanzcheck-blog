@@ -5,7 +5,7 @@ description: "5 einfache Frugalismus-Tricks für den Alltag: Frugalismus ohne As
 date: 2026-09-14T12:53:44Z
 draft: false
 reserve_published: 2026-09-14
-tags: ["Frugalismus"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["5 einfache Frugalismus-Tricks für den Alltag", "5 einfache Frugalismus Tricks für den Alltag", "Frugalismus-Tricks", "Frugalismus", "Geld sparen", "minimalistisch leben"]

@@ -6,11 +6,17 @@ draft: true
 tags: ["Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Notgroschen aufbauen: Wie viel reicht wirklich?"]
+keywords: ["Notgroschen aufbauen: Wie viel reicht wirklich?", "Notgroschen aufbauen", "Notgroschen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
+pin_title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
+pin_description: "*Werbung | Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten … Mehr Spartipps auf FranksFinanzcheck! #notgroschenaufbauen #notgroschen"
+cover:
+  image: "images/covers/2026-09-30-notgroschen-aufbauen-wie-viel-reicht-wirklich.jpg"
+  alt: "Notgroschen aufbauen: Wie viel reicht wirklich?"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast gerade deine monatlichen Ausgaben durchgecheckt, ein paar Verträge gekündigt und merkst, dass das Geld am Monatsende trotzdem knapp wird. Die Frage, die dir jetzt im Kopf herumspukt, lautet: Wie viel Geld sollte ich eigentlich als Notgroschen zurücklegen, damit ich im Notfall nicht in die Schuld rutsche? In diesem Ratgeber zeige ich dir, welche Überlegungen wirklich zählen, wie du die passende Summe ermittelst und welche Schritte dir helfen, den Puffer systematisch aufzubauen – ohne dabei deinen Alltag unnötig zu verknappen.
