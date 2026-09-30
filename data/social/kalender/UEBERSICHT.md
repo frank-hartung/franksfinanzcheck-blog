@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 30.09.2026 18:51 (Europe/Berlin)
+> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -11,9 +11,9 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 | Mastodon | ⚪ Standby | 1 | Do 01.10. 07:30 · Gasrechnung senken: Spätsommer-C | [md](mastodon.md) · [ics](mastodon.ics) |
 | Bluesky | ⚪ Standby | 20 | Do 01.10. 08:15 · Dein Haus sicher schützen: Das n | [md](bluesky.md) · [ics](bluesky.ics) |
 | LinkedIn | ⚪ Standby | 7 | Do 01.10. 07:45 · Sparen im Herbst: Spartipps für  | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 27 | Mi 30.09. 13:15 · Internet & DSL wechseln: Praxis- | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 20 | Mi 30.09. 16:15 · Heizkosten senken: Mit diesen St | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 20 | Mi 30.09. 15:15 · Dein Haus sicher schützen: Das n | [md](facebook.md) · [ics](facebook.ics) |
+| X (Twitter) | ⚪ Standby | 26 | Mi 30.09. 19:15 · Preisgarantie Gas: So sicherst d | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 20 | Do 01.10. 09:15 · Dein Haus sicher schützen: Das n | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 20 | Do 01.10. 09:45 · Gasrechnung prüfen: Fehler finde | [md](facebook.md) · [ics](facebook.ics) |
 | Instagram | ⚪ Standby | 10 | Do 01.10. 11:45 · Digitaler Turbo: Warum der DNS-H | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 9 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
@@ -23,10 +23,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Mi, 30. September 2026
-- **13:15** ⚪ X (Twitter) · _zahl_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet
-- **15:15** ⚪ Facebook (Seite) · _vergleich_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
-- **16:15** ⚪ Threads · _frage_ · Heizkosten senken: Mit diesen Strategien sparst du sofort
-- **19:15** ⏳ X (Twitter) · _zahl_ · Preisgarantie Gas: So sicherst du günstige Tarife
+- **19:15** ⚪ X (Twitter) · _zahl_ · Preisgarantie Gas: So sicherst du günstige Tarife
 ### Do, 01. Oktober 2026
 - **07:30** ⏳ Mastodon · _nutzen_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
 - **07:45** ⏳ LinkedIn · _zahl_ · Sparen im Herbst: Spartipps für die goldene Jahreszeit

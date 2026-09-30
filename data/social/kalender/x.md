@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 30.09.2026 18:51 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### Mi, 30. September 2026
-- **13:15** ⚪ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-- **19:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Launch  
+- **19:15** ⚪ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Do, 01. Oktober 2026
 - **08:45** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _frage_ · Launch  

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 30.09.2026 18:51 (Europe/Berlin)  
+> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mi, 30. September 2026
-- **15:15** ⚪ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 ### Do, 01. Oktober 2026
 - **09:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
