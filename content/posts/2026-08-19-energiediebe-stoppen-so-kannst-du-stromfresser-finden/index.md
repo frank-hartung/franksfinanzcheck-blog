@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Du willst energiediebe stoppen? Die Stromrechnung steigt, also muss der alte Kühlschrank raus? Nicht so schnell. Sichtbare Altgeräte sind nicht automatisch die größten Verbraucher. Oft sitzt der teure Kandidat im Keller, bereitet Warmwasser oder läuft als Spielekonsole im Schnellstartmodus rund um die Uhr.
+Du willst Energiediebe stoppen? Die Stromrechnung steigt, also muss der alte Kühlschrank raus? Nicht so schnell. Sichtbare Altgeräte sind nicht automatisch die größten Verbraucher. Oft sitzt der teure Kandidat im Keller, bereitet Warmwasser oder läuft als Spielekonsole im Schnellstartmodus rund um die Uhr.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -118,7 +118,7 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 
 Beispiel: Eine Gerätegruppe zieht unnötig 18 Watt. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-Für die Einordnung reicht ein konkreter Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt ungefähr 32 €. Miss aber nicht jeden Stecker einzeln, bevor du die großen Gruppen geprüft hast. So wird aus „zieht bestimmt viel“ eine belastbare Entscheidung.
+Für die Einordnung reicht ein konkreter Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt ungefähr 32 €. Miss aber nicht jeden Stecker einzeln, bevor du die großen Gruppen geprüft hast. So wird aus „zieht bestimmt viel“ eine belastbare Entscheidung.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 
@@ -190,7 +190,7 @@ Bevor du zehn Steckdosen misst, wirf einen Blick auf die gesamte Wohnung. Viele 
 
 Wähle einen ruhigen Zeitpunkt. Schalte nur unkritische Verbraucher aus und notiere, was bewusst weiterläuft: Kühlgerät, Router, Heizungspumpe oder Sicherheitsanlage. Eine verbleibende Leistung ist deshalb nicht automatisch Verschwendung.
 
-Gehe danach gruppenweise vor:
+Gehe danach Gruppenweise vor:
 
 1. TV- und Audioleiste ausschalten.
 2. Homeoffice-Gruppe trennen.

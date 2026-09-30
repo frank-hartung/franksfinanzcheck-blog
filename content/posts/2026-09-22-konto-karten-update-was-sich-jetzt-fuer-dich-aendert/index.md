@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 
 Viele zahlen bei Konto und Karten nicht deshalb zu viel, weil eine einzelne Gebühr riesig wäre. Sie zahlen zu viel, weil sich kleine Posten still addieren.
 
-4,90 € Kontoführung hier. 1 € für eine Buchung dort. 12 € Jahrespreis für die Karte. Dazu kommen teure Abhebungen im Ausland oder ein Mindestgeldeingang, der plötzlich nicht mehr passt.
+4,90 € Kontoführung hier. 1 € für eine Buchung dort. 12 € Jahrespreis für die Karte. Dazu kommen teure Abhebungen im Ausland oder ein Mindestgeldeingang, der plötzlich nicht mehr passt.
 
 Genau deshalb ist Konto nicht gleich Konto. Und kostenlos ist nicht immer dauerhaft kostenlos. Wer die Bedingungen nicht regelmäßig prüft, merkt oft erst spät, dass aus einem bequemen Alltagskonto ein unnötiger Dauerposten geworden ist.
 
@@ -55,7 +55,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Kontomodelle ändern sich häufiger als früher.
 - Ein kostenloses Girokonto bleibt oft nur dann gratis, wenn du bestimmte Kriterien erfüllst.
 - Auch Kartenkosten gehören in die Rechnung – nicht nur die Kontoführung.
-- Typische Mehrkosten liegen schnell bei **60 € bis 180 € pro Jahr**.
+- Typische Mehrkosten liegen schnell bei **60 € bis 180 € pro Jahr**.
 - Ein Kontocheck alle **6 bis 12 Monate** reicht oft schon.
 - Wichtig ist nicht nur der Preis, sondern auch, wie gut Konto und Karte zu deinem Alltag passen.
 
@@ -92,19 +92,19 @@ Viele unterschätzen, wie stark kleine Bankkosten auf ein Jahr wirken.
 
 ### Beispiel 1: Klassisches Girokonto
 
-- Kontoführung: **4,90 € pro Monat**
-- Girocard: **12 € pro Jahr**
-- Zwei kostenpflichtige Zusatzleistungen: **18 € pro Jahr**
+- Kontoführung: **4,90 € pro Monat**
+- Girocard: **12 € pro Jahr**
+- Zwei kostenpflichtige Zusatzleistungen: **18 € pro Jahr**
 
-Das sind zusammen **88,80 € pro Jahr**.
+Das sind zusammen **88,80 € pro Jahr**.
 
 ### Beispiel 2: Konto plus Kreditkarte
 
-- Kontoführung: **6,90 € pro Monat**
-- Kreditkarte: **39 € pro Jahr**
-- Drei Fremdwährungs-Einsätze: **9 €**
+- Kontoführung: **6,90 € pro Monat**
+- Kreditkarte: **39 € pro Jahr**
+- Drei Fremdwährungs-Einsätze: **9 €**
 
-Hier liegst du schon bei **130,80 € pro Jahr**.
+Hier liegst du schon bei **130,80 € pro Jahr**.
 
 Das ist kein Drama. Aber es ist eben auch kein Kleingeld mehr. Und genau diese Beträge fehlen dir später beim Notgroschen, beim ETF-Sparplan oder einfach im Monatsbudget.
 
@@ -114,7 +114,7 @@ Viele Konten sind nicht grundsätzlich gratis. Sie sind **unter Bedingungen** ko
 
 Häufige Kriterien sind:
 
-- Monatlicher Geldeingang, zum Beispiel **700 € oder 1.000 €**
+- Monatlicher Geldeingang, zum Beispiel **700 € oder 1.000 €**
 - Mindestanzahl digitaler Transaktionen
 - bestimmtes Alter oder Ausbildungsstatus
 - nur App-Nutzung statt Filiale
@@ -275,7 +275,7 @@ Genau diese Zahl zeigt dir am klarsten, ob Bequemlichkeit gerade teuer wird oder
 
 Viele einzelne Posten wirken im Monat harmlos.
 
-Wenn daraus im Jahr aber 80, 120 oder 180 € zusammenkommen, sieht dein Kontomodell plötzlich ganz anders aus. Genau diese Jahreszahl trennt oft praktischen Komfort von stillen Nebenkosten.
+Wenn daraus im Jahr aber 80, 120 oder 180 € zusammenkommen, sieht dein Kontomodell plötzlich ganz anders aus. Genau diese Jahreszahl trennt oft praktischen Komfort von stillen Nebenkosten.
 
 ## Welche kleine Jahresnotiz dein Kontomodell ehrlich macht
 
@@ -338,13 +338,13 @@ Nehmen wir einen typischen Alltag:
 
 | Kostenpunkt | Altes Konto | Neues Konto |
 |---|---:|---:|
-| Kontoführung | 5,90 € pro Monat = 70,80 € | 0 € |
-| Girocard | 12 € pro Jahr | 0 € |
-| Kreditkarte | 39 € pro Jahr | 0 € oder deutlich günstiger |
-| Bargeld / Ausland | 18 € pro Jahr | 0 € bis deutlich geringer |
-| **Gesamtkosten pro Jahr** | **139,80 €** | **0 € bis deutlich niedriger** |
+| Kontoführung | 5,90 € pro Monat = 70,80 € | 0 € |
+| Girocard | 12 € pro Jahr | 0 € |
+| Kreditkarte | 39 € pro Jahr | 0 € oder deutlich günstiger |
+| Bargeld / Ausland | 18 € pro Jahr | 0 € bis deutlich geringer |
+| **Gesamtkosten pro Jahr** | **139,80 €** | **0 € bis deutlich niedriger** |
 
-Selbst wenn du am Ende nur **80 € oder 100 € pro Jahr** sparst, ist das für einen 20-Minuten-Check ein sehr guter Hebel.
+Selbst wenn du am Ende nur **80 € oder 100 € pro Jahr** sparst, ist das für einen 20-Minuten-Check ein sehr guter Hebel.
 
 ## Ein Punkt, den viele vergessen: Konto muss zu deinem Geldsystem passen
 
@@ -392,7 +392,7 @@ Mehr dazu hier: [Notgroschen: die Wahrheit über das finanzielle Polster](../../
 
 Das aktuelle **Konto & Karten-Update** zeigt vor allem eins: Nicht die spektakuläre Einmalgebühr ist das Problem, sondern viele kleine Veränderungen im Alltag. Neue Gratis-Kriterien, Kartenpreise und Nebenbedingungen können ein ehemals gutes Konto still verschlechtern.
 
-Wenn du einmal sauber prüfst, ob dein Girokonto, deine Debitkarte und deine Kreditkarte noch zu dir passen, sparst du oft **60 € bis 180 € pro Jahr** – manchmal mehr. Genau deshalb lohnt der Vergleich nicht nur beim Wechsel, sondern auch zwischendurch.
+Wenn du einmal sauber prüfst, ob dein Girokonto, deine Debitkarte und deine Kreditkarte noch zu dir passen, sparst du oft **60 € bis 180 € pro Jahr** – manchmal mehr. Genau deshalb lohnt der Vergleich nicht nur beim Wechsel, sondern auch zwischendurch.
 
 **Weiterlesen:** [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/) · [Kreditkarte vergleichen](../../posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/) · [Pillar Konto & Karten](../../pillar/konto-karten/)
 
@@ -414,7 +414,7 @@ Vor allem dann, wenn du laufend Gebühren zahlst, Bedingungen nicht mehr erfüll
 Nicht jeder. Für Reisen, Hotels oder Mietwagen kann sie aber sehr sinnvoll sein. Für reinen Alltag reicht vielen eine gute Debitkarte.
 
 ### Wie hoch ist eine realistische Ersparnis?
-Oft liegen **60 € bis 180 € pro Jahr** drin. Bei teuren Kontopaketen oder unnötigen Kartenkosten kann es auch mehr sein.
+Oft liegen **60 € bis 180 € pro Jahr** drin. Bei teuren Kontopaketen oder unnötigen Kartenkosten kann es auch mehr sein.
 
 ## Ausblick: Was du von Konto und Karten künftig erwarten solltest
 

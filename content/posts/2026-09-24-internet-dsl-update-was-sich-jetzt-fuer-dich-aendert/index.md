@@ -53,7 +53,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Viele Haushalte buchen **mehr Bandbreite als nötig**.
 - Ein teurer Altvertrag kostet oft mehr als ein moderner Tarif mit passender Leistung.
 - Entscheidend ist nicht nur die Geschwindigkeit, sondern auch **WLAN, Router und Nutzungsmuster**.
-- Wer sauber rechnet, spart oft **120 € bis 300 € pro Jahr**.
+- Wer sauber rechnet, spart oft **120 € bis 300 € pro Jahr**.
 - Der wichtigste Vergleichswert ist der **24-Monats-Effektivpreis**.
 - Nicht jedes Internetproblem ist ein Tarifproblem – manchmal ist es ein Router- oder WLAN-Thema.
 
@@ -119,10 +119,10 @@ Nehmen wir zwei Haushalte mit ähnlicher Nutzung.
 
 | Tarif | Monatspreis | 24 Monate | Einordnung |
 |---|---:|---:|---|
-| 50 Mbit/s | 29,99 € | 719,76 € | ausreichend für viele Haushalte |
-| 250 Mbit/s | 44,99 € | 1.079,76 € | oft überdimensioniert |
+| 50 Mbit/s | 29,99 € | 719,76 € | ausreichend für viele Haushalte |
+| 250 Mbit/s | 44,99 € | 1.079,76 € | oft überdimensioniert |
 
-Die Differenz beträgt **360 € in zwei Jahren**.
+Die Differenz beträgt **360 € in zwei Jahren**.
 
 Wenn der Haushalt die höhere Leistung kaum spürt, ist das schlicht ein teurer Puffer. Genau deshalb lohnt die ehrliche Bedarfsfrage mehr als blindes Aufrüsten.
 
@@ -145,11 +145,11 @@ Darum gilt:
 
 | Kostenpunkt | Tarif A | Tarif B |
 |---|---:|---:|
-| Monate 1–6 | 6 × 9,99 € = 59,94 € | 6 × 19,99 € = 119,94 € |
-| Monate 7–24 | 18 × 39,99 € = 719,82 € | 18 × 29,99 € = 539,82 € |
-| Router | 5,99 € × 24 = 143,76 € | 0 € |
-| Bonus | -80 € | -40 € |
-| **Gesamtkosten 24 Monate** | **843,52 €** | **619,76 €** |
+| Monate 1–6 | 6 × 9,99 € = 59,94 € | 6 × 19,99 € = 119,94 € |
+| Monate 7–24 | 18 × 39,99 € = 719,82 € | 18 × 29,99 € = 539,82 € |
+| Router | 5,99 € × 24 = 143,76 € | 0 € |
+| Bonus | -80 € | -40 € |
+| **Gesamtkosten 24 Monate** | **843,52 €** | **619,76 €** |
 
 Hier wirkt Tarif A am Anfang günstiger, ist über zwei Jahre aber deutlich teurer.
 
@@ -159,12 +159,12 @@ Ein schöner Rabatt vorn hilft wenig, wenn die Routermiete leise alles wieder ve
 
 ### Beispiel
 
-- Routermiete: **5,99 € pro Monat**
-- Auf 24 Monate: **143,76 €**
+- Routermiete: **5,99 € pro Monat**
+- Auf 24 Monate: **143,76 €**
 
-Oder bei **8,99 € pro Monat**:
+Oder bei **8,99 € pro Monat**:
 
-- Auf 24 Monate: **215,76 €**
+- Auf 24 Monate: **215,76 €**
 
 Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
@@ -200,13 +200,13 @@ Gerade bei älteren Verträgen ist das Sparpotenzial häufig größer als gedach
 
 ## Ein realistisches Sparszenario
 
-Nehmen wir einen Haushalt, der aktuell **44,95 € pro Monat** zahlt und auf einen passenden Tarif mit Effektivpreis von **31 € bis 33 €** kommt.
+Nehmen wir einen Haushalt, der aktuell **44,95 € pro Monat** zahlt und auf einen passenden Tarif mit Effektivpreis von **31 € bis 33 €** kommt.
 
 Das macht etwa:
 
-- **12 € bis 14 € pro Monat** Unterschied
-- **144 € bis 168 € pro Jahr**
-- Über 24 Monate also **288 € bis 336 €**
+- **12 € bis 14 € pro Monat** Unterschied
+- **144 € bis 168 € pro Jahr**
+- Über 24 Monate also **288 € bis 336 €**
 
 Dazu kommen mögliche Einsparungen durch geringere Routerkosten.
 
@@ -314,7 +314,7 @@ Mehr brauchst du oft nicht. Genau diese drei Angaben zeigen schneller als jede W
 
 Das aktuelle **Internet & DSL-Update** zeigt vor allem eines: Viele Haushalte zahlen nicht nur wegen schlechter Preise zu viel, sondern auch wegen unpassender Tarife. Mehr Mbit klingen stark, helfen aber nur dann, wenn sie wirklich gebraucht werden.
 
-Wenn du deinen Vertrag ehrlich auf Bedarf, Routerkosten und 24-Monats-Preis prüfst, sparst du oft **120 € bis 300 € pro Jahr** – manchmal mehr. Genau deshalb ist der klügste Schritt aktuell oft nicht blindes Aufrüsten, sondern sauberes Nachrechnen.
+Wenn du deinen Vertrag ehrlich auf Bedarf, Routerkosten und 24-Monats-Preis prüfst, sparst du oft **120 € bis 300 € pro Jahr** – manchmal mehr. Genau deshalb ist der klügste Schritt aktuell oft nicht blindes Aufrüsten, sondern sauberes Nachrechnen.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
 
@@ -333,7 +333,7 @@ Ja. Manchmal reicht schon ein interner Tarifwechsel oder ein kleineres Paket bei
 Weil Rabattmonate, Bonus, Anschlusskosten und Routermiete das Angebot sonst schnell schöner wirken lassen, als es wirklich ist.
 
 ### Was bringt ein kleinerer Tarif finanziell?
-Je nach Ausgangslage oft **120 € bis 300 € pro Jahr**. Bei teuren Altverträgen kann es auch mehr sein.
+Je nach Ausgangslage oft **120 € bis 300 € pro Jahr**. Bei teuren Altverträgen kann es auch mehr sein.
 
 ### Soll ich lieber mehr Speed als Reserve buchen?
 Nur begrenzt. Ein kleiner Puffer ist okay, dauerhaft stark überbuchte Tarife sind aber oft unnötig teuer.

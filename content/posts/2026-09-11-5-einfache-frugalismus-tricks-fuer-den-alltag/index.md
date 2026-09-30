@@ -274,7 +274,7 @@ Bilanz ziehen: Was fiel leicht? Was hat direkt Geld gespart?
 
 Das reicht völlig für einen guten Start. Frugalismus lebt nicht von Perfektion, sondern von Wiederholung.
 
-> 💶 **Spar-Tipp zwischendurch:** Wenn du Frugalismus ernsthaft im Alltag verankern willst, fang bei den teuren Dauerposten an. Genau dort entstehen oft die schnellsten 100 € Vorteil pro Monat: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+> 💶 **Spar-Tipp zwischendurch:** Wenn du Frugalismus ernsthaft im Alltag verankern willst, Fang bei den teuren Dauerposten an. Genau dort entstehen oft die schnellsten 100 € Vorteil pro Monat: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 ## Fazit: Frugalismus ist kein Verzichtsprogramm, sondern ein Freiheitsprogramm
 

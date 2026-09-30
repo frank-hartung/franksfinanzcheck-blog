@@ -50,9 +50,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Das Wichtigste in Kürze
 
 - Die 50-30-20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
-- **50 %** sind für notwendige Ausgaben gedacht.
-- **30 %** stehen für Wünsche und Freizeit.
-- **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
+- **50 %** sind für notwendige Ausgaben gedacht.
+- **30 %** stehen für Wünsche und Freizeit.
+- **20 %** gehen in Sparen, Rücklagen oder Schuldenabbau.
 - Die Regel ist ein **Rahmen**, kein starres Gesetz.
 - Sie funktioniert am besten, wenn du mit echten Zahlen arbeitest und den Sparteil automatisierst.
 
@@ -62,10 +62,10 @@ Die Idee ist sehr einfach:
 
 Von deinem monatlichen Netto bekommt jeder Euro möglichst früh eine Aufgabe.
 
-### 50 % für notwendige Ausgaben
+### 50 % für notwendige Ausgaben
 In diesen Topf gehört nur, was deinen Alltag verlässlich am Laufen hält: Wohnen und Energie, Grundversorgung mit Lebensmitteln, notwendige Mobilität, Pflichtversicherungen sowie der Zugang zu Kommunikation. Prüfe bei jedem Posten kurz: Würde eine Streichung in diesem Monat ein echtes Problem schaffen? Wenn nicht, ist er eher ein Wunsch als eine Notwendigkeit.
 
-### 30 % für Wünsche
+### 30 % für Wünsche
 Das ist dein bewusster Lifestyle-Teil:
 
 - Restaurantbesuche
@@ -75,7 +75,7 @@ Das ist dein bewusster Lifestyle-Teil:
 - Reisen
 - spontane Extras
 
-### 20 % für Sparen und Zukunft
+### 20 % für Sparen und Zukunft
 Hier landet alles, was dich stabiler macht:
 
 - Notgroschen
@@ -102,40 +102,40 @@ Schon diese Trennung verändert Entscheidungen spürbar.
 
 ## Ein erstes Rechenbeispiel
 
-Nehmen wir **2.500 € netto** im Monat.
+Nehmen wir **2.500 € netto** im Monat.
 
 | Bereich | Anteil | Betrag |
 |---|---:|---:|
-| Notwendige Ausgaben | 50 % | 1.250 € |
-| Wünsche | 30 % | 750 € |
-| Sparen / Tilgung | 20 % | 500 € |
+| Notwendige Ausgaben | 50 % | 1.250 € |
+| Wünsche | 30 % | 750 € |
+| Sparen / Tilgung | 20 % | 500 € |
 
-Allein die letzte Zahl ist spannend: **500 € pro Monat** für Sparen oder Schuldenabbau.
+Allein die letzte Zahl ist spannend: **500 € pro Monat** für Sparen oder Schuldenabbau.
 
-Auf ein Jahr gerechnet sind das **6.000 €**. Genau daran siehst du, dass Budgetregeln kein Selbstzweck sind. Sie schaffen echten Spielraum.
+Auf ein Jahr gerechnet sind das **6.000 €**. Genau daran siehst du, dass Budgetregeln kein Selbstzweck sind. Sie schaffen echten Spielraum.
 
 ## So sieht das im Alltag aus
 
 Damit die Regel nicht nur nach Theorie klingt, hier ein einfaches Beispiel für einen typischen Single-Haushalt.
 
-### 50 % Notwendiges = 1.250 €
-- Miete warm: 780 €
-- Strom und Gas: 120 €
-- Lebensmittel: 220 €
-- Internet und Handy: 45 €
-- Versicherungen: 45 €
-- ÖPNV oder Sprit: 40 €
+### 50 % Notwendiges = 1.250 €
+- Miete warm: 780 €
+- Strom und Gas: 120 €
+- Lebensmittel: 220 €
+- Internet und Handy: 45 €
+- Versicherungen: 45 €
+- ÖPNV oder Sprit: 40 €
 
-### 30 % Wünsche = 750 €
-- Freizeit und Essen gehen: 220 €
-- Kleidung und Shopping: 140 €
-- Reisen / Rücklage für Ausflüge: 180 €
-- Abos, Hobbys, Sonstiges: 210 €
+### 30 % Wünsche = 750 €
+- Freizeit und Essen gehen: 220 €
+- Kleidung und Shopping: 140 €
+- Reisen / Rücklage für Ausflüge: 180 €
+- Abos, Hobbys, Sonstiges: 210 €
 
-### 20 % Sparen = 500 €
-- Notgroschen: 150 €
-- ETF-Sparplan: 250 €
-- Sondertilgung oder Zusatzrücklage: 100 €
+### 20 % Sparen = 500 €
+- Notgroschen: 150 €
+- ETF-Sparplan: 250 €
+- Sondertilgung oder Zusatzrücklage: 100 €
 
 Niemand muss genau so leben. Aber solche Zahlen machen die Regel greifbar.
 
@@ -182,9 +182,9 @@ Das ist kein Scheitern. Es ist eine Standortbestimmung.
 
 | Bereich | Beispiel-Verteilung |
 |---|---:|
-| Notwendige Ausgaben | 65 % |
-| Wünsche | 25 % |
-| Sparen | 10 % |
+| Notwendige Ausgaben | 65 % |
+| Wünsche | 25 % |
+| Sparen | 10 % |
 
 Auch das ist nützlich, wenn du es ehrlich siehst. Denn erst dann kannst du etwas verbessern.
 
@@ -207,7 +207,7 @@ Hier passieren die meisten Denkfehler:
 
 Gerade diese kleinen Fehlzuordnungen machen einen Budgetplan schnell ungenau.
 
-## Wo du die 50 % oft am besten verbessern kannst
+## Wo du die 50 % oft am besten verbessern kannst
 
 Viele suchen zuerst bei Kleinigkeiten. Der stärkste Hebel liegt aber oft bei den Fixkosten.
 
@@ -219,7 +219,7 @@ Typische Prüfpunkte:
 - Versicherungen
 - unnötige Abos
 
-Wenn du hier **50 € bis 150 € pro Monat** einsparst, verändert das deine Verteilung oft stärker als jede Kaffee-Debatte.
+Wenn du hier **50 € bis 150 € pro Monat** einsparst, verändert das deine Verteilung oft stärker als jede Kaffee-Debatte.
 
 Passend dazu helfen dir diese Artikel:
 
@@ -237,10 +237,10 @@ Mögliche Varianten sind zum Beispiel:
 
 | Modell | Pflicht | Wünsche | Sparen |
 |---|---:|---:|---:|
-| klassisch | 50 % | 30 % | 20 % |
-| teuerer Wohnort | 60 % | 20 % | 20 % |
-| Übergangsphase | 65 % | 25 % | 10 % |
-| stark frugalistisch | 45 % | 20 % | 35 % |
+| klassisch | 50 % | 30 % | 20 % |
+| teuerer Wohnort | 60 % | 20 % | 20 % |
+| Übergangsphase | 65 % | 25 % | 10 % |
+| stark frugalistisch | 45 % | 20 % | 35 % |
 
 Wichtig ist nicht, dass du mathematisch perfekt triffst. Wichtig ist, dass du bewusst steuerst.
 
@@ -330,10 +330,10 @@ Sie ist nicht perfekt. Aber sie ist alltagstauglich. Und genau deshalb hilft sie
 ### Muss ich mich exakt an 50-30-20 halten?
 Nein. Die Regel ist ein Rahmen. Wichtig ist, dass du mit einer bewussten Verteilung arbeitest.
 
-### Zählen Schuldenabbau und Sparen beide in die 20 %?
+### Zählen Schuldenabbau und Sparen beide in die 20 %?
 Ja. Gerade teure Konsumschulden abzubauen ist finanziell oft genauso wichtig wie klassisches Sparen.
 
-### Was ist, wenn meine Fixkosten über 50 % liegen?
+### Was ist, wenn meine Fixkosten über 50 % liegen?
 Dann startest du mit deiner realen Lage und arbeitest dich schrittweise in eine bessere Richtung.
 
 ### Wie oft sollte ich mein Budget prüfen?

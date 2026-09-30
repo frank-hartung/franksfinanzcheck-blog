@@ -280,7 +280,7 @@ Mit dieser kleinen Notiz vermeidest du den häufigsten Vergleichsfehler. Du prü
 
 Rechne den Preisunterschied zwischen zwei Tarifen einmal auf den Monat herunter.
 
-Wenn starke Bedingungen im Jahr nur 12 oder 18 € mehr kosten, reden wir oft über 1 bis 1,50 € im Monat. Genau diese kleine Zahl zeigt schnell, wie wenig ein echter Schutzsprung manchmal kostet.
+Wenn starke Bedingungen im Jahr nur 12 oder 18 € mehr kosten, reden wir oft über 1 bis 1,50 € im Monat. Genau diese kleine Zahl zeigt schnell, wie wenig ein echter Schutzsprung manchmal kostet.
 
 ## Welche Vertragsfrage Preisstress oft sofort ordnet
 

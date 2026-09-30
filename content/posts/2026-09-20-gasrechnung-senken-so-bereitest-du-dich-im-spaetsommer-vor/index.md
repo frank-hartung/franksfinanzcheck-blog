@@ -66,7 +66,7 @@ Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer B
 ## Das Wichtigste in Kürze
 
 
-Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
+Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
 
 - Prüfe Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge getrennt.
 - Eine Abschlagssenkung spart nichts; sie kann eine Nachzahlung vergrößern.
@@ -256,7 +256,7 @@ Hefte die Antwort zur Abrechnung. So bleibt der Vorgang auch beim nächsten Jahr
 Eine saubere Prüfung zeigt dir, ob Verbrauch, Tarif oder Abschläge die Rechnung treiben. Erst danach lässt sich seriös beurteilen, wo du ansetzen kannst.
 
 
-Mit dem richtigen Vorgehen lässt sich die gasrechnung prüfen um bis zu 15 % senken.
+Mit dem richtigen Vorgehen lässt sich die Gasrechnung prüfen um bis zu 15 % senken.
 
 ## Fazit: Die Rechnung erzählt dir, welcher Hebel wirkt
 
@@ -281,7 +281,7 @@ Nur wenn du einen eigenen Gasliefervertrag hast. Bei Zentralheizung wählt in de
 Rechne erwartete Jahreskosten realistisch und passe den Abschlag an. Eine hohe Rate vermeidet aber keine hohen Kosten; sie verteilt sie nur anders.
 
 ### Was mache ich bei einer Preiserhöhung?
-Prüfe Preisgarantie, Änderungsgrund und Frist. In der Regel kannst du zum Wirksamkeitsdatum sonderkündigen; beachte mögliche gesetzliche Ausnahmen.
+Prüfe Preisgarantie, Änderungsgrund und Frist. In der Regel kannst du zum Wirksamkeitsdatum Sonderkündigen; beachte mögliche gesetzliche Ausnahmen.
 
 ---
 

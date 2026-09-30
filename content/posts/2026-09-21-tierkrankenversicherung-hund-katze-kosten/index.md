@@ -98,10 +98,10 @@ In Zahlen heißt das für die typischen Kostentreiber:
 
 | Ernstfall | Realistische Spanne | Warum es teuer wird |
 |---|---:|---|
-| Kreuzbandriss-OP (TPLO/TTA) | ca. 1.800–4.500 € | Implantate, Bildgebung, mehrwöchige Nachsorge |
-| Magendrehung (Notfall, Hund) | ca. 2.000–5.000 € | Nacht-/Wochenendsatz, Intensivüberwachung |
-| Bandscheibenvorfall | ca. 2.000–5.000 € | MRT, Neurochirurgie, Reha |
-| Diagnostik + Behandlung Katze | ca. 400–1.200 € | Labor, Bildgebung, Kontrollen |
+| Kreuzbandriss-OP (TPLO/TTA) | ca. 1.800–4.500 € | Implantate, Bildgebung, mehrwöchige Nachsorge |
+| Magendrehung (Notfall, Hund) | ca. 2.000–5.000 € | Nacht-/Wochenendsatz, Intensivüberwachung |
+| Bandscheibenvorfall | ca. 2.000–5.000 € | MRT, Neurochirurgie, Reha |
+| Diagnostik + Behandlung Katze | ca. 400–1.200 € | Labor, Bildgebung, Kontrollen |
 
 Das ist die Zahl, gegen die du rechnen musst. Nicht die 20 Euro Monatsbeitrag.
 
@@ -253,7 +253,7 @@ In der Praxis passt oft dieses einfache Raster:
 - **solide Rücklage, aber Respekt vor großen OP-Kosten** → oft OP-Schutz plus Reserve
 - **stabile Rücklage und hohe Kostentoleranz** → Rücklage bewusst selbst aufbauen
 
-Entscheidend ist nicht, was theoretisch am billigsten wirkt. Entscheidend ist, wie ruhig du mit einer Rechnung über 2.000 € oder mehr umgehen kannst.
+Entscheidend ist nicht, was theoretisch am billigsten wirkt. Entscheidend ist, wie ruhig du mit einer Rechnung über 2.000 € oder mehr umgehen kannst.
 
 ## Rechenbeispiel: Rücklage gegen Versicherung denken
 
@@ -276,7 +276,7 @@ Genau hier liegt oft das Problem. Viele Haushalte haben zwar ein kleines Polster
 
 Das ist finanziell riskant. Denn wenn zwei Dinge gleichzeitig passieren, reicht die Reserve schnell nicht mehr.
 
-Wer für Hund oder Katze bewusst ohne Vollversicherung arbeiten will, sollte darum wenigstens ehrlich prüfen, ob **1.500 € bis 3.000 €** für einen tierischen Ernstfall wirklich kurzfristig frei verfügbar wären. Wenn diese Summe dein Haushaltsbudget deutlich ins Wanken bringen würde, ist eine Versicherung oft nicht nur emotional, sondern auch finanziell die ruhigere Lösung.
+Wer für Hund oder Katze bewusst ohne Vollversicherung arbeiten will, sollte darum wenigstens ehrlich prüfen, ob **1.500 € bis 3.000 €** für einen tierischen Ernstfall wirklich kurzfristig frei verfügbar wären. Wenn diese Summe dein Haushaltsbudget deutlich ins Wanken bringen würde, ist eine Versicherung oft nicht nur emotional, sondern auch finanziell die ruhigere Lösung.
 
 ## Diese Fragen solltest du dir vor Abschluss stellen
 
@@ -293,7 +293,7 @@ Allein diese Fragen verhindern viele Schnellschüsse.
 
 ## Wo Tierkrankenversicherung in deine Finanzplanung passt
 
-[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) sind nie isoliert sinnvoll. Sie müssen zu deiner Haushaltslage passen. Wenn du gerade generell Fixkosten sortierst, helfen dir auch diese Ratgeber:
+[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) Sind nie isoliert sinnvoll. Sie müssen zu deiner Haushaltslage passen. Wenn du gerade generell Fixkosten sortierst, helfen dir auch diese Ratgeber:
 
 - [Versicherungen, die du wirklich brauchst](../../pillar/versicherungen/)
 - [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) prüfen
@@ -305,7 +305,7 @@ Gerade beim Haustier zeigt sich klar: Rücklagen und Versicherung sind keine Geg
 
 Dann prüfe zuerst genau diese drei Punkte:
 
-1. **Könntest du 1.500 € bis 3.000 € kurzfristig zahlen?**
+1. **Könntest du 1.500 € bis 3.000 € kurzfristig zahlen?**
 2. **Willst du nur OP-Risiken oder auch laufende Behandlungen absichern?**
 3. **Passt eine Selbstbeteiligung wirklich zu deinem Monatsbudget?**
 
@@ -313,7 +313,7 @@ Mit diesen drei Fragen kommst du oft schneller zu einer ehrlichen Entscheidung a
 
 ## Welche Rechnung du einmal nüchtern durchspielen solltest
 
-Stell dir kurz eine Tierarztrechnung über **2.000 €** vor.
+Stell dir kurz eine Tierarztrechnung über **2.000 €** vor.
 
 Wenn du sofort weißt, wie du sie zahlen würdest, brauchst du vielleicht weniger Schutz. Wenn du dafür den Dispo, eine Ratenzahlung oder andere Rücklagen anfassen müsstest, ist Planbarkeit oft mehr wert als der niedrigste Monatsbeitrag.
 
@@ -327,7 +327,7 @@ Sonst soll dasselbe Geld plötzlich Auto, Haushalt und Tierarzt gleichzeitig abf
 
 Frag dich nicht nur, was die Versicherung kostet.
 
-Frag dich auch, wie sich eine Rechnung über 2.000 € in deinem nächsten Monatsbudget anfühlen würde. Wenn sie andere Ziele sofort kippen würde, ist Planbarkeit oft mehr wert als ein niedriger Beitrag.
+Frag dich auch, wie sich eine Rechnung über 2.000 € in deinem nächsten Monatsbudget anfühlen würde. Wenn sie andere Ziele sofort kippen würde, ist Planbarkeit oft mehr wert als ein niedriger Beitrag.
 
 Wenn du sie aus einer sauberen Reserve locker zahlen könntest, darf auch eine schlankere Lösung reichen. Genau diese Gegenprobe macht die Entscheidung ehrlicher.
 

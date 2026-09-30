@@ -96,7 +96,7 @@ Fernseher, Soundbar, Konsole, Receiver und Streaming-Box hängen oft an derselbe
 
 ### Homeoffice
 
-Drucker, Dockingstation, Monitor, Lautsprecher und Netzteile bleiben nach Feierabend gern aktiv. Miss die ganze Leiste zuerst. Danach kannst du einzelne Geräte auseinandernehmen.
+Drucker, Dockingstation, Monitor, Lautsprecher und Netzteile bleiben nach Feierabend gern aktiv. Miss die ganze Leiste zuerst. Danach kannst du einzelne Geräte Auseinandernehmen.
 
 ### Alte Audio- und Videotechnik
 

@@ -63,7 +63,7 @@ Zum Schluss geh einmal durch die Wohnung. Heizkörper sollten frei sein. Ein Vor
 ## Das Wichtigste in Kürze
 
 
-Der Check vor der Heizperiode lohnt sich besonders: Bei 18.000 kWh Jahresverbrauch verändern 1 Cent pro kWh die Rechnung bereits um 180 € im Jahr – noch bevor der Grundpreis dazukommt.
+Der Check vor der Heizperiode lohnt sich besonders: Bei 18.000 kWh Jahresverbrauch verändern 1 Cent pro kWh die Rechnung bereits um 180 € im Jahr – noch bevor der Grundpreis dazukommt.
 
 - Ein niedriger Abschlag ist keine Ersparnis, sondern nur eine kleinere Vorauszahlung.
 - Vergleiche Gastarife mit deinem echten Jahresverbrauch und dem Gesamtpreis.
@@ -98,7 +98,7 @@ Prüfe nach Preisänderung, Umzug oder deutlicher Verbrauchsänderung neu. Nutze
 
 ## Fehler 2: Einen Tarif nach Bonus oder Arbeitspreis auswählen
 
-Niedrige Arbeitspreise können durch hohe Grundpreise relativiert werden. Große Boni können einen teuren Tarif nur im ersten Jahr schönrechnen.
+Niedrige Arbeitspreise können durch hohe Grundpreise relativiert werden. Große Boni können einen teuren Tarif nur im ersten Jahr Schönrechnen.
 
 Vergleiche mindestens:
 
@@ -252,7 +252,7 @@ Die richtige Reihenfolge spart dir vor allem Fehlentscheidungen: Erst wenn Verbr
 Realistisch sparen kannst du erst, wenn du Preis und Verbrauch getrennt prüfst. Eine pauschale Prozentzusage wäre dagegen unseriös.
 
 
-Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu 15 % senken.
+Mit dem richtigen Vorgehen lässt sich die Gasrechnung senken um bis zu 15 % senken.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

@@ -209,7 +209,7 @@ Ein einfaches Modell ist:
 - ein zweites Tagesgeld- oder Unterkonto für planbare Jahreskosten
 - das Girokonto nur für den laufenden Zahlungsverkehr
 
-So landet zum Beispiel die Kfz-Versicherung nicht ungeplant auf dem Alltagskonto. Wenn du **200 € im Monat** für Rücklagen beiseitelegst, sind das nach einem Jahr **2.400 €**. Auf einem verzinsten Tagesgeldkonto arbeitet dieses Geld wenigstens mit, statt komplett zinslos herumzuliegen.
+So landet zum Beispiel die Kfz-Versicherung nicht ungeplant auf dem Alltagskonto. Wenn du **200 € im Monat** für Rücklagen beiseitelegst, sind das nach einem Jahr **2.400 €**. Auf einem verzinsten Tagesgeldkonto arbeitet dieses Geld wenigstens mit, statt komplett zinslos herumzuliegen.
 
 ## Wann Festgeld trotzdem die bessere Wahl sein kann
 

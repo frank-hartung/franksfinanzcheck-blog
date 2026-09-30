@@ -43,12 +43,12 @@ Du willst heizungs-check? Der erste kalte Montag ist ein schlechter Termin für 
 Ein Heizungs-Check ist dabei keine Bastelanleitung für Gasgeräte. Er trennt sauber: **beobachten und einfache Handgriffe selbst erledigen, sicherheitsrelevante Technik dem Fachbetrieb überlassen**.
 ### Dein Schnellstart
 
-Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche. Sieh nach Wasser. Teste die Thermostate. Notiere den Druck. Vergleiche ihn mit der Anleitung. Ändere nur eine Einstellung. Warte danach einige Tage. So erkennst du die Wirkung. Bei Gasgeruch gilt: nicht weiterprüfen. Verlasse das Gebäude. Hole Hilfe von draußen. Auch bei starkem Druckverlust brauchst du Fachhilfe. Ein sauberer Check spart Zeit. Er ersetzt keine Wartung. Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
+Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche. Sieh nach Wasser. Teste die Thermostate. Notiere den Druck. Vergleiche ihn mit der Anleitung. Ändere nur eine Einstellung. Warte danach einige Tage. So erkennst du die Wirkung. Bei Gasgeruch gilt: nicht Weiterprüfen. Verlasse das Gebäude. Hole Hilfe von draußen. Auch bei starkem Druckverlust brauchst du Fachhilfe. Ein sauberer Check spart Zeit. Er ersetzt keine Wartung. Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
 
 
 #### Prüfe in drei Schritten
 
-Erstens: Beobachte die Wärmeverteilung bei einem normalen Probelauf. Zweitens: Notiere Raum, Auffälligkeit und Datum. Drittens: Ändere nur eine harmlose Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich, ersetzt aber keine Fachdiagnose. Bei 18.000 kWh Jahresverbrauch machen schon rund 180 € pro Jahr je Cent Preisunterschied aus. Darum gehören der technische Check und der Tarifcheck zusammen – aber nicht in denselben Handgriff.
+Erstens: Beobachte die Wärmeverteilung bei einem normalen Probelauf. Zweitens: Notiere Raum, Auffälligkeit und Datum. Drittens: Ändere nur eine harmlose Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich, ersetzt aber keine Fachdiagnose. Bei 18.000 kWh Jahresverbrauch machen schon rund 180 € pro Jahr je Cent Preisunterschied aus. Darum gehören der technische Check und der Tarifcheck zusammen – aber nicht in denselben Handgriff.
 
 
 

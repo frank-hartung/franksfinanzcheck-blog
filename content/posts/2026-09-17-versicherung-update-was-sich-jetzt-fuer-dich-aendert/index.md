@@ -56,7 +56,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Besonders wichtig ist der **30. November** bei der Kfz-Versicherung.
 - Eine Beitragserhöhung ohne Mehrleistung kann ein **Sonderkündigungsrecht** auslösen.
 - Nicht nur der Beitrag zählt, sondern auch Leistung, Selbstbeteiligung und Ausschlüsse.
-- Ein guter Jahresend-Check spart oft **100 € bis 500 € pro Jahr**.
+- Ein guter Jahresend-Check spart oft **100 € bis 500 € pro Jahr**.
 - Alte Verträge sind nicht automatisch schlecht, aber oft unnötig teuer oder lückenhaft.
 
 ## Was sich für Verbraucher gerade wirklich ändert
@@ -96,9 +96,9 @@ Warum das wichtig ist:
 
 | Tarif | Jahresbeitrag |
 |---|---:|
-| alter Vertrag | 780 € |
-| neues Angebot | 560 € |
-| **Ersparnis** | **220 € pro Jahr** |
+| alter Vertrag | 780 € |
+| neues Angebot | 560 € |
+| **Ersparnis** | **220 € pro Jahr** |
 
 Natürlich hängt das stark von Region, Fahrzeug, Schadenfreiheitsklasse und Fahrleistung ab. Aber genau deshalb lohnt sich der Vergleich so oft.
 
@@ -198,12 +198,12 @@ Nehmen wir einen typischen Haushalt mit drei relevanten Policen.
 
 | Police | alter Beitrag | neuer Beitrag / Alternative |
 |---|---:|---:|
-| Kfz | 760 € | 590 € |
-| Hausrat | 145 € | 118 € |
-| Privathaftpflicht | 92 € | 74 € |
-| **Gesamt** | **997 €** | **782 €** |
+| Kfz | 760 € | 590 € |
+| Hausrat | 145 € | 118 € |
+| Privathaftpflicht | 92 € | 74 € |
+| **Gesamt** | **997 €** | **782 €** |
 
-Das macht eine mögliche Differenz von **215 € pro Jahr**.
+Das macht eine mögliche Differenz von **215 € pro Jahr**.
 
 Und das ohne wilde Tricks – nur durch sauberes Prüfen. In anderen Fällen kann die Ersparnis kleiner oder deutlich größer ausfallen. Vor allem bei Kfz gibt es oft starke Ausschläge.
 
@@ -416,7 +416,7 @@ Wenn du unsicher bist, ob du anfangen sollst, nimm diesen einfachen Merksatz: **
 
 Das aktuelle **Versicherung-Update** bedeutet nicht, dass du jetzt hektisch jede Police kündigen sollst. Es bedeutet nur: **Jetzt ist der richtige Zeitpunkt zum Prüfen.** Gerade zum Jahresende zeigt sich oft, ob du im neuen Jahr unnötig mehr zahlst oder deinen Schutz bewusster und günstiger aufstellst.
 
-Besonders wichtig bleiben der **30. November** bei Kfz, mögliche Beitragserhöhungen und die Frage, ob Leistung und Preis noch zu deinem Leben passen. Wer sich dafür einmal ruhig Zeit nimmt, spart oft **100 € bis 500 € pro Jahr** – manchmal mehr.
+Besonders wichtig bleiben der **30. November** bei Kfz, mögliche Beitragserhöhungen und die Frage, ob Leistung und Preis noch zu deinem Leben passen. Wer sich dafür einmal ruhig Zeit nimmt, spart oft **100 € bis 500 € pro Jahr** – manchmal mehr.
 
 **Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Kfz-Versicherung Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) · [Hausratversicherung Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/)
 
@@ -435,7 +435,7 @@ Typischerweise bei einer Beitragserhöhung ohne entsprechende Mehrleistung oder 
 Nein. Der Beitrag ist wichtig, aber Leistung, Selbstbeteiligung und Ausschlüsse sind genauso entscheidend.
 
 ### Wie viel kann ein Versicherungs-Check bringen?
-Oft **100 € bis 500 € pro Jahr**. Besonders bei Kfz kann die Differenz deutlich sein.
+Oft **100 € bis 500 € pro Jahr**. Besonders bei Kfz kann die Differenz deutlich sein.
 
 ### Welche Police sollte ich zuerst prüfen?
 Meist die Kfz-Versicherung, danach Hausrat und Privathaftpflicht.

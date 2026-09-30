@@ -165,7 +165,7 @@ Vernachlässige niemals den Ölstand. Ein Motorschaden durch Ölmangel ist der f
 
 ## Warum Transparenz bei den Kosten so wichtig ist
 
-[Geld sparen](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) beginnt im Kopf. Wenn du weißt, dass dich jeder Kilometer mit dem Auto in der Gesamtrechnung etwa 30 bis 50 Cent kostet (inklusive Wertverlust), triffst du andere Entscheidungen. Der Weg zum Bäcker um die Ecke wird dann plötzlich doch öfter zu Fuß oder mit dem Rad erledigt. Nicht, weil du musst, sondern weil du den Wert deines Geldes kennst.
+[Geld sparen](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) Beginnt im Kopf. Wenn du weißt, dass dich jeder Kilometer mit dem Auto in der Gesamtrechnung etwa 30 bis 50 Cent kostet (inklusive Wertverlust), triffst du andere Entscheidungen. Der Weg zum Bäcker um die Ecke wird dann plötzlich doch öfter zu Fuß oder mit dem Rad erledigt. Nicht, weil du musst, sondern weil du den Wert deines Geldes kennst.
 
 In meiner Arbeit als Finanz-Praktiker stelle ich immer wieder fest, dass das Auto der größte "Vermögensfresser" der Deutschen ist. Wer hier die Kontrolle übernimmt, hat den wichtigsten Schritt zu einer soliden Finanzplanung getan. Es geht nicht darum, das Autofahren zu verteufeln. Es geht darum, es so effizient wie möglich zu gestalten.
 

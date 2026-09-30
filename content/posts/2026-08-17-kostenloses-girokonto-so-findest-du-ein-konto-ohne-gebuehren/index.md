@@ -137,7 +137,7 @@ Die wichtigsten Quellen sind:
 3. **Zusatzprodukte:** Manche Banken bewerben Depots, [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) oder Kreditkarten.
 4. **Zinsmarge:** Guthaben wird wirtschaftlich weiterverarbeitet.
 
-Für dich ist das erstmal nicht schlimm. Relevant ist nur, dass du nicht in Produkte gedrückt wirst, die du gar nicht brauchst.
+Für dich ist das Erstmal nicht schlimm. Relevant ist nur, dass du nicht in Produkte gedrückt wirst, die du gar nicht brauchst.
 
 ## Girocard oder Debitkarte – was brauchst du wirklich?
 

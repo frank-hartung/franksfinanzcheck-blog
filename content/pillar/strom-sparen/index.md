@@ -132,7 +132,7 @@ Verbrauch zuerst, Preis danach. Wer nur wechselt, ohne zu messen, kauft denselbe
 
 ## Rechenbeispiel 3-Personen-Haus, Strom + Gas
 
-Strom 3.400 kWh, Gas 18.000 kWh. Strom 6 Cent günstiger = 204 €. Gas 2,5 Cent günstiger = 450 €. Standby und LED 150 €. Heizkurve und 1 °C = 180 €. Summe **rund 980 €**. Davon sind 650 € Vertragshebel (ein Nachmittag) und 330 € Verhalten (Gewohnheit). Beide gehören in denselben Ratgeber, weil Google und Leser beides suchen.
+Strom 3.400 kWh, Gas 18.000 kWh. Strom 6 Cent günstiger = 204 €. Gas 2,5 Cent günstiger = 450 €. Standby und LED 150 €. Heizkurve und 1 °C = 180 €. Summe **rund 980 €**. Davon sind 650 € Vertragshebel (ein Nachmittag) und 330 € Verhalten (Gewohnheit). Beide gehören in denselben Ratgeber, weil Google und Leser beides suchen.
 
 Prüfe auch deinen eigenen Abschlag: Er sollte nah an den voraussichtlichen Jahreskosten liegen – zu niedrig bedeutet Nachzahlung, zu hoch bedeutet zinslos geparktes Geld.
 

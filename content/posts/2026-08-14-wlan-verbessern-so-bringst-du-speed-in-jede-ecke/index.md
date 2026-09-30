@@ -38,7 +38,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
+[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) Im Check: Du zahlst jeden Monat rund 45 € für einen schnellen Anschluss. 100 oder 250 Mbit/s sind drin. Doch im Arbeitszimmer ruckelt der Video-Call. Im Schlafzimmer bricht der 4K-Stream ständig ab?
 
 In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
 
@@ -151,7 +151,7 @@ Ein einfacher Test hilft:
 2. Miss danach im selben Raum per WLAN.
 3. Miss anschließend an deinem Problemort.
 
-Wenn schon per Kabel deutlich zu wenig ankommt, liegt das Problem eher beim Anschluss oder beim Tarif. Dann bringt dir das beste Mesh-System nur begrenzt etwas. Zahlst du zum Beispiel **39 € bis 49 € im Monat** für einen 100-Mbit- oder 250-Mbit-Tarif und per LAN kommen dauerhaft nur **40 % bis 50 %** davon an, solltest du zuerst den Anbieter oder Router prüfen.
+Wenn schon per Kabel deutlich zu wenig ankommt, liegt das Problem eher beim Anschluss oder beim Tarif. Dann bringt dir das beste Mesh-System nur begrenzt etwas. Zahlst du zum Beispiel **39 € bis 49 € im Monat** für einen 100-Mbit- oder 250-Mbit-Tarif und per LAN kommen dauerhaft nur **40 % bis 50 %** davon an, solltest du zuerst den Anbieter oder Router prüfen.
 
 Wenn per Kabel fast alles ankommt, per WLAN aber nur ein Bruchteil, ist das Funknetz der eigentliche Hebel. Dann helfen Standort, Kanalwahl, Bandtrennung und gegebenenfalls Mesh deutlich mehr als ein neuer Vertrag.
 

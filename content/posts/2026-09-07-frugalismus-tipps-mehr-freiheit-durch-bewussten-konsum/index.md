@@ -153,7 +153,7 @@ Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar
 Wenn du damit anfangen willst, helfen dir diese Artikel weiter:
 
 - [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
-- [DSL-Tarif passend wählen](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
+- [DSL-Tarif passend wählen](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/)
 - [Standby-Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 
 ## Frugalismus-Tipp 4: Essen planen statt spontan bezahlen
@@ -262,13 +262,13 @@ Viele scheitern nicht am fehlenden Willen, sondern an zu viel Ehrgeiz. Deshalb m
 
 Das ist keine Revolution. Genau deshalb funktioniert es.
 
-> 💶 **Spar-Tipp zwischendurch:** Wenn du bei Frugalismus nur einen großen Hebel suchst, fang immer bei den wiederkehrenden Kosten an. Genau dort entstehen oft die schnellsten 100 € Vorteil im Monat: [**Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+> 💶 **Spar-Tipp zwischendurch:** Wenn du bei Frugalismus nur einen großen Hebel suchst, Fang immer bei den wiederkehrenden Kosten an. Genau dort entstehen oft die schnellsten 100 € Vorteil im Monat: [**Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 ## Fazit: Kleine Beträge sind nicht klein, wenn sie ständig wiederkommen
 
 Der Hebel bei **Kleine Beträge, große Wirkung: Frugalismus für den Einstieg** sitzt nicht im harten Verzicht, sondern im Klaren Blick. Ausgaben sichtbar machen, Impulse bremsen, Fixkosten optimieren und Ersparnisse sofort sichern – genau daraus entsteht finanzieller Spielraum.
 
-Wenn du heute nur einen Schritt machst, dann diesen: Schreib deine wiederkehrenden Kosten auf und streich einen unnötigen Posten. Das ist oft der Moment, in dem Frugalismus vom netten Gedanken zur echten Entlastung wird.
+Wenn du heute nur einen Schritt machst, dann diesen: Schreib deine wiederkehrenden Kosten auf und Streich einen unnötigen Posten. Das ist oft der Moment, in dem Frugalismus vom netten Gedanken zur echten Entlastung wird.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [5 einfache Frugalismus-Tricks für den Alltag](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) · [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 

@@ -76,9 +76,9 @@ Viele wissen grob, was sie verdienen. Aber deutlich weniger Menschen wissen prä
 
 ### Beispiel
 
-Nehmen wir **2.800 € netto** im Monat.
+Nehmen wir **2.800 € netto** im Monat.
 
-Wenn davon **1.650 €** in Fixkosten und Grundbedarf gehen, **650 €** in spontane Wünsche und nur **100 €** in Rücklagen, dann weißt du sofort: Das Problem ist nicht nur das Einkommen. Das Problem ist die Verteilung.
+Wenn davon **1.650 €** in Fixkosten und Grundbedarf gehen, **650 €** in spontane Wünsche und nur **100 €** in Rücklagen, dann weißt du sofort: Das Problem ist nicht nur das Einkommen. Das Problem ist die Verteilung.
 
 Ohne diese Ehrlichkeit bleiben alle weiteren Gewohnheiten diffus.
 
@@ -92,17 +92,17 @@ Darum funktioniert ein einfaches Modell oft besser – etwa die **50-30-20-Regel
 
 | Bereich | Anteil | Bedeutung |
 |---|---:|---|
-| Notwendige Ausgaben | 50 % | Miete, Strom, Lebensmittel, Basis |
-| Wünsche | 30 % | Freizeit, Konsum, Extras |
-| Sparen / Tilgung | 20 % | Rücklagen, Vermögen, Schuldenabbau |
+| Notwendige Ausgaben | 50 % | Miete, Strom, Lebensmittel, Basis |
+| Wünsche | 30 % | Freizeit, Konsum, Extras |
+| Sparen / Tilgung | 20 % | Rücklagen, Vermögen, Schuldenabbau |
 
 ### Rechenbeispiel
 
-Bei **2.800 € netto** wären das:
+Bei **2.800 € netto** wären das:
 
-- **1.400 €** notwendige Ausgaben
-- **840 €** Wünsche
-- **560 €** Sparen oder Tilgung
+- **1.400 €** notwendige Ausgaben
+- **840 €** Wünsche
+- **560 €** Sparen oder Tilgung
 
 Selbst wenn deine aktuelle Verteilung anders aussieht, hilft dir dieses Raster. Denn es gibt deinem Geld Rollen.
 
@@ -126,12 +126,12 @@ Genau dort bremsen hohe Fixkosten deine finanzielle Freiheit aus. Denn Fixkosten
 
 Wenn du durch mehrere kleine Checks sparst:
 
-- Konto: **8 € pro Monat**
-- Internet: **12 € pro Monat**
-- Versicherung: **10 € pro Monat**
-- Strom / Gas: **20 € pro Monat**
+- Konto: **8 € pro Monat**
+- Internet: **12 € pro Monat**
+- Versicherung: **10 € pro Monat**
+- Strom / Gas: **20 € pro Monat**
 
-Dann ergibt das zusammen **50 € pro Monat** oder **600 € pro Jahr**.
+Dann ergibt das zusammen **50 € pro Monat** oder **600 € pro Jahr**.
 
 Finanzielle Freiheit wächst genau aus solchen wiederkehrenden Hebeln.
 
@@ -149,7 +149,7 @@ Ohne Rücklage wird jede größere Rechnung zum Rückschritt. Dann musst du im Z
 
 ### Beispiel
 
-Wenn deine monatlichen Grundausgaben bei **1.800 €** liegen, wäre ein solider Notgroschen oft irgendwo zwischen **5.400 € und 10.800 €**.
+Wenn deine monatlichen Grundausgaben bei **1.800 €** liegen, wäre ein solider Notgroschen oft irgendwo zwischen **5.400 € und 10.800 €**.
 
 Das musst du nicht sofort erreichen. Aber ohne diese Orientierung fehlt deinem Geldsystem oft die Basis.
 
@@ -171,13 +171,13 @@ Genau deshalb hilft eine einfache Regel: Kaufentscheidungen verlangsamen.
 
 Du willst spontan kaufen:
 
-- Kopfhörer für **89 €**
-- Deko für **35 €**
-- Ein Gadget für **59 €**
+- Kopfhörer für **89 €**
+- Deko für **35 €**
+- Ein Gadget für **59 €**
 
-Macht zusammen **183 €**.
+Macht zusammen **183 €**.
 
-Wenn nach ein paar Tagen nur noch ein Kauf wirklich sinnvoll ist, bleiben vielleicht **59 €** statt **183 €**. Die Differenz beträgt **124 €**. Genau solche Mini-Entscheidungen wiederholen sich oft viel häufiger, als man denkt.
+Wenn nach ein paar Tagen nur noch ein Kauf wirklich sinnvoll ist, bleiben vielleicht **59 €** statt **183 €**. Die Differenz beträgt **124 €**. Genau solche Mini-Entscheidungen wiederholen sich oft viel häufiger, als man denkt.
 
 ## Gewohnheit 6: Automatisiere gute Entscheidungen
 
@@ -194,9 +194,9 @@ Denn was jeden Monat manuell entschieden werden muss, kippt im Alltag leichter w
 
 ### Beispiel
 
-Du richtest direkt nach Gehaltseingang einen Dauerauftrag über **250 €** ein.
+Du richtest direkt nach Gehaltseingang einen Dauerauftrag über **250 €** ein.
 
-Nach einem Jahr liegen dadurch **3.000 €** auf der Seite – nicht, weil du jeden Monat heldenhaft warst, sondern weil das System für dich gearbeitet hat.
+Nach einem Jahr liegen dadurch **3.000 €** auf der Seite – nicht, weil du jeden Monat heldenhaft warst, sondern weil das System für dich gearbeitet hat.
 
 Diese Form von Automatik ist langweilig. Genau deshalb ist sie so stark.
 
@@ -208,10 +208,10 @@ Monatlich fühlt sich vieles klein an. Jährlich oder über mehrere Jahre wird d
 
 | Gewohnheit | monatlicher Effekt | Jahreswirkung |
 |---|---:|---:|
-| 50 € weniger Fixkosten | 50 € | 600 € |
-| 100 € automatische Sparrate | 100 € | 1.200 € |
-| 1 Impulskauf pro Woche weniger | ca. 25 € | ca. 1.300 € |
-| zusammen |  | **über 3.000 € pro Jahr** |
+| 50 € weniger Fixkosten | 50 € | 600 € |
+| 100 € automatische Sparrate | 100 € | 1.200 € |
+| 1 Impulskauf pro Woche weniger | ca. 25 € | ca. 1.300 € |
+| zusammen |  | **über 3.000 € pro Jahr** |
 
 Genau hier beginnt das Denken in Freiheit. Nicht weil du sofort ausgesorgt hättest, sondern weil du erkennst, wie viel Kraft in stabilen Systemen steckt.
 
@@ -310,7 +310,7 @@ Und genau daraus wächst am Ende das, was viele finanzielle Freiheit nennen.
 
 Viele Gewohnheiten wirken im Monat klein. Im Jahr wirken sie plötzlich ernst.
 
-Wer nur 8 € am Konto spart, 20 € bei einem Vertrag gewinnt und 100 € regelmäßig zurücklegt, bewegt schon **1.536 € pro Jahr**. Genau dieser Jahresblick macht finanzielle Freiheit greifbarer.
+Wer nur 8 € am Konto spart, 20 € bei einem Vertrag gewinnt und 100 € regelmäßig zurücklegt, bewegt schon **1.536 € pro Jahr**. Genau dieser Jahresblick macht finanzielle Freiheit greifbarer.
 
 Nicht irgendwann. Sondern schon im normalen Alltag.
 

@@ -40,7 +40,7 @@ Versicherung wirkt oft langweilig – bis ein Keller vollläuft, nach einem Einb
 
 Das Problem ist selten, dass Menschen gar nicht versichert sind. Das Problem sind Lücken. Alte Tarife ohne Elementarschutz, zu niedrige Versicherungssummen oder schwache Klauseln fallen oft erst im Schadenfall auf. Dann ist aus einem vermeintlich kleinen Vertragsthema plötzlich ein sehr großes Geldthema geworden.
 
-Schon ein einzelner Schaden durch Rückstau, Leitungswasser oder Einbruch kann schnell **5.000 € bis 20.000 €** kosten. Bei größeren Gebäudeschäden liegt die Summe deutlich höher. Genau deshalb lohnt sich ein ruhiger Vertragscheck lange vor dem Ernstfall.
+Schon ein einzelner Schaden durch Rückstau, Leitungswasser oder Einbruch kann schnell **5.000 € bis 20.000 €** kosten. Bei größeren Gebäudeschäden liegt die Summe deutlich höher. Genau deshalb lohnt sich ein ruhiger Vertragscheck lange vor dem Ernstfall.
 
 ---
 
@@ -124,11 +124,11 @@ Denn teure Schäden entstehen oft nicht erst bei großem Hochwasser. Schon stark
 
 | Schadenposten | Beispielkosten |
 |---|---:|
-| Trocknung | 2.000 € bis 6.000 € |
-| Boden und Wandaufarbeitung | 1.500 € bis 5.000 € |
-| Geräte und Hausrat | 1.000 € bis 4.000 € |
-| Aufräumung und Entsorgung | 500 € bis 2.000 € |
-| **Gesamt** | **5.000 € bis 17.000 €** |
+| Trocknung | 2.000 € bis 6.000 € |
+| Boden und Wandaufarbeitung | 1.500 € bis 5.000 € |
+| Geräte und Hausrat | 1.000 € bis 4.000 € |
+| Aufräumung und Entsorgung | 500 € bis 2.000 € |
+| **Gesamt** | **5.000 € bis 17.000 €** |
 
 Das ist keine Panikmache. Es zeigt nur, wie schnell aus „ein bisschen Wasser“ ein teurer Schaden wird.
 
@@ -143,8 +143,8 @@ Ist dein Hausrat oder dein Gebäude zu niedrig versichert, kann die Versicherung
 ### Beispiel Hausrat
 
 - Wohnfläche: **90 m²**
-- Richtwert: **650 € pro m²**
-- Sinnvolle Summe: **58.500 €**
+- Richtwert: **650 € pro m²**
+- Sinnvolle Summe: **58.500 €**
 
 Liegt deine Summe deutlich darunter, kann das später teuer werden. Gerade nach Umzug, Renovierung oder größeren Anschaffungen ist ein Update wichtig.
 
@@ -159,7 +159,7 @@ Lässt du ein Fenster gekippt oder reagierst in einer Stresssituation nicht idea
 Nach einem Schaden geht es nicht nur um den kaputten Gegenstand. Auch Schutt, Trocknung, Entsorgung und Wiederherstellung kosten Geld.
 
 ### Unterbringungskosten
-Ist das Zuhause vorübergehend unbewohnbar, laufen weitere Kosten auf. Zwei Wochen Hotel können schnell **1.200 € oder mehr** kosten.
+Ist das Zuhause vorübergehend unbewohnbar, laufen weitere Kosten auf. Zwei Wochen Hotel können schnell **1.200 € oder mehr** kosten.
 
 ### Fahrrad, E-Bike, Photovoltaik, Wärmepumpe
 Gerade bei neuen Anschaffungen oder Technik am Haus lohnt der Blick ins Kleingedruckte. Nicht alles ist automatisch sinnvoll mitversichert.
@@ -181,11 +181,11 @@ Nach starkem Regen drückt Wasser in den Keller. Betroffen sind Boden, Geräte, 
 
 | Posten | Kosten |
 |---|---:|
-| Boden und Trocknung | 4.500 € |
-| Waschmaschine und Technik | 2.000 € |
-| Möbel und gelagerte Dinge | 2.800 € |
-| Aufräumung und Entsorgung | 1.200 € |
-| **Gesamt** | **10.500 €** |
+| Boden und Trocknung | 4.500 € |
+| Waschmaschine und Technik | 2.000 € |
+| Möbel und gelagerte Dinge | 2.800 € |
+| Aufräumung und Entsorgung | 1.200 € |
+| **Gesamt** | **10.500 €** |
 
 Ohne passenden Schutz bleibt schnell ein großer Teil an dir hängen. Mit einem modernen Vertrag wird der Schaden nicht angenehm – aber finanziell beherrschbar.
 
@@ -199,11 +199,11 @@ Nein. Genau das überrascht viele.
 
 | Baustein | älterer Tarif | moderner Tarif |
 |---|---:|---:|
-| Hausrat | 120 € pro Jahr | 82 € pro Jahr |
-| Elementar-Zusatz | nicht enthalten | 28 € pro Jahr |
+| Hausrat | 120 € pro Jahr | 82 € pro Jahr |
+| Elementar-Zusatz | nicht enthalten | 28 € pro Jahr |
 | grobe Fahrlässigkeit | eingeschränkt | enthalten |
 | Fahrradschutz | extra | teils enthalten |
-| **Gesamt** | **120 €** | **110 €** |
+| **Gesamt** | **120 €** | **110 €** |
 
 Die Zahlen sind Beispiele. Die Aussage dahinter ist wichtig: **Mehr Schutz kostet nicht automatisch deutlich mehr.**
 
@@ -270,7 +270,7 @@ Schon diese Vorbereitung spart oft Zeit. Vor allem verhindert sie, dass du bei d
 
 ## Wann du beim Schutz nicht nur auf den Preis schauen solltest
 
-Natürlich ist der Beitrag wichtig. Aber bei Haus und Hausrat ist ein zu billiger Vertrag oft nur scheinbar günstig. Wenn du im Jahr 30 € oder 50 € sparst, im Schadenfall aber auf 5.000 € oder 10.000 € sitzen bleibst, war es am Ende kein Sparen.
+Natürlich ist der Beitrag wichtig. Aber bei Haus und Hausrat ist ein zu billiger Vertrag oft nur scheinbar günstig. Wenn du im Jahr 30 € oder 50 € sparst, im Schadenfall aber auf 5.000 € oder 10.000 € sitzen bleibst, war es am Ende kein Sparen.
 
 Darum lohnt sich immer die Gegenfrage: Was kostet mich eine Lücke wirklich? Bei genau diesem Blick wird aus einem Preisvergleich ein echter Vorsorge-Check.
 
@@ -285,7 +285,7 @@ Typische Schäden:
 - Einbruchdiebstahl
 - Rückstau oder Starkregen mit beschädigtem Hausrat
 
-Laptop, Fernseher, Möbel, Kleidung, Fahrrad und Kleinteile summieren sich schneller, als viele denken. **10.000 € bis 30.000 €** sind dabei keine absurde Größenordnung.
+Laptop, Fernseher, Möbel, Kleidung, Fahrrad und Kleinteile summieren sich schneller, als viele denken. **10.000 € bis 30.000 €** sind dabei keine absurde Größenordnung.
 
 ## Wann sich ein Vergleich besonders lohnt
 
@@ -349,7 +349,7 @@ Mehr braucht es oft nicht. Genau diese kleine Hausliste hilft dir beim nächsten
 
 Wer Haus oder Wohnung wirklich schützen will, braucht keine Versicherungs-Sammlung ohne Ende. Er braucht die **richtigen Bausteine** und möglichst wenige Lücken. Genau darum geht es beim Vorsorge-Update 2026: Eigentum und Inhalt trennen, Elementarschutz realistisch prüfen und [Unterversicherung vermeiden](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/).
 
-Schon ein einzelner Schaden im Bereich von **5.000 € bis 15.000 €** zeigt, warum dieser Check sinnvoll ist. Die gute Nachricht: Ein moderner, besserer Schutz kostet nicht automatisch viel mehr. Oft reicht schon ein sauberer Vergleich.
+Schon ein einzelner Schaden im Bereich von **5.000 € bis 15.000 €** zeigt, warum dieser Check sinnvoll ist. Die gute Nachricht: Ein moderner, besserer Schutz kostet nicht automatisch viel mehr. Oft reicht schon ein sauberer Vergleich.
 
 **Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Hausratversicherung: Kosten, Leistungen, Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/) · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
 

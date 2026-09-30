@@ -51,10 +51,10 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 ## Das Wichtigste in Kürze
 
-- Ein **WLAN‑Verstärker (Repeater)** ist die günstige Lösung für **ein einzelnes** Funkloch.  
-- **Mesh‑WLAN** ist die Komfortlösung für **mehrere Räume, Etagen oder viele Geräte**.  
-- Ein Repeater halbiert oft das verfügbare Tempo, Mesh‑Systeme mit eigenem Rückkanal tun das kaum.  
-- **Vor jedem Kauf:** Miss, ob das Problem wirklich das WLAN ist, oder der Vertrag.  
+- Ein **WLAN‑Verstärker (Repeater)** ist die günstige Lösung für **ein einzelnes** Funkloch.
+- **Mesh‑WLAN** ist die Komfortlösung für **mehrere Räume, Etagen oder viele Geräte**.
+- Ein Repeater halbiert oft das verfügbare Tempo, Mesh‑Systeme mit eigenem Rückkanal tun das kaum.
+- **Vor jedem Kauf:** Miss, ob das Problem wirklich das WLAN ist, oder der Vertrag.
 - Der teuerste Fehler ist, ein Mesh‑System gegen ein Problem zu kaufen, das nur ein neuer Tarif lösen kann.
 
 ## Warum schwächelt dein WLAN überhaupt?
@@ -63,11 +63,11 @@ WLAN ist Funk, und Funk hat physikalische Feinde. Der Router strahlt von seinem 
 
 Die größten Schwachstellen in deutschen Wohnungen und Häusern:
 
-- **Stahlbetondecken und -Wände** (der Klassiker im Neubau und Altbau mit Kernsanierung)  
-- **Metall**: Heizkörper, Fußbodenheizung im Estrich, metallene Türrahmen  
-- **Spiegel und Fliesen** im Bad, die das Signal reflektieren  
-- **Nachbar‑WLANs**, die auf demselben Kanal funken (typisch in Mehrfamilienhäusern)  
-- **Der Router‑Standort selbst**: im Flurschrank, hinter dem Fernseher oder am Fußboden  
+- **Stahlbetondecken und -Wände** (der Klassiker im Neubau und Altbau mit Kernsanierung)
+- **Metall**: Heizkörper, Fußbodenheizung im Estrich, metallene Türrahmen
+- **Spiegel und Fliesen** im Bad, die das Signal reflektieren
+- **Nachbar‑WLANs**, die auf demselben Kanal funken (typisch in Mehrfamilienhäusern)
+- **Der Router‑Standort selbst**: im Flurschrank, hinter dem Fernseher oder am Fußboden
 
 Bevor du irgendetwas kaufst: Trage den Router, wenn möglich, an eine halbwegs zentrale, erhöhte Position. Das kostet null Euro und löst gefühlt ein Drittel aller Fälle. Mehr solcher Handgriffe findest du im Beitrag [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
 
@@ -77,15 +77,15 @@ Ein WLAN‑Verstärker – im Handel meist **Repeater** genannt – ist eine kle
 
 ### Die Vorteile
 
-- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 €.  
-- **Schnell eingerichtet**: Steckdose, WPS‑Knopf drücken, fertig.  
-- **Unauffällig**: Kein Kabel, keine Montage, kein neues Netz.  
+- **Günstig**: Brauchbare Geräte gibt es ab etwa 20 bis 60 €.
+- **Schnell eingerichtet**: Steckdose, WPS‑Knopf drücken, fertig.
+- **Unauffällig**: Kein Kabel, keine Montage, kein neues Netz.
 
 Die Nachteile, und die sind wichtig:
 
-- **Tempoverlust**: Ein klassischer Repeater muss jedes Datenpaket erst empfangen und dann weiterfunken. Im schlechtesten Fall halbiert das Tempo.  
-- **Empfindliche Position**: Steht der Repeater schon am Rand des Funklochs, verstärkt er ein schwaches Signal – Müll rein, Müll raus. Er gehört ungefähr auf **halber Strecke** zwischen Router und Problemraum.  
-- **Handover‑Lücke**: Viele günstige Repeater bauen ein eigenes Netz mit eigener SSID. Dein Handy wechselt dann nicht automatisch, sondern klammert sich an das schwächere Netz, bis gar nichts mehr geht.  
+- **Tempoverlust**: Ein klassischer Repeater muss jedes Datenpaket erst empfangen und dann Weiterfunken. Im schlechtesten Fall halbiert das Tempo.
+- **Empfindliche Position**: Steht der Repeater schon am Rand des Funklochs, verstärkt er ein schwaches Signal – Müll rein, Müll raus. Er gehört ungefähr auf **halber Strecke** zwischen Router und Problemraum.
+- **Handover‑Lücke**: Viele günstige Repeater bauen ein eigenes Netz mit eigener SSID. Dein Handy wechselt dann nicht automatisch, sondern klammert sich an das schwächere Netz, bis gar nichts mehr geht.
 
 **Meine Faustregel aus der Praxis:** Ein Repeater ist die richtige Antwort auf **genau ein** Funkloch in **genau einem** Raum – etwa das Arbeitszimmer hinter der Stahlbetonwand. Für alles Größere wird es zur Flickerei.
 
@@ -95,15 +95,15 @@ Ein Mesh‑System besteht aus mehreren Stationen (meist zwei oder drei), die zus
 
 ### Die Vorteile
 
-- **Ein Netz, ein Name**: Du läufst vom Keller in den ersten Stock, und der Video‑Call merkt davon nichts.  
-- **Volles Tempo**: Gute Systeme nutzen ein eigenes Frequenzband als Rückkanal (Backhaul), sodass das Weiterfunken dein Surftempo kaum bremst.  
-- **Selbstheilend**: Fällt eine Station aus, routen die übrigen den Verkehr um.  
-- **Erweiterbar**: Brauchst du später eine Station mehr, steckst du sie einfach dazu.  
+- **Ein Netz, ein Name**: Du läufst vom Keller in den ersten Stock, und der Video‑Call merkt davon nichts.
+- **Volles Tempo**: Gute Systeme nutzen ein eigenes Frequenzband als Rückkanal (Backhaul), sodass das Weiterfunken dein Surftempo kaum bremst.
+- **Selbstheilend**: Fällt eine Station aus, Routen die übrigen den Verkehr um.
+- **Erweiterbar**: Brauchst du später eine Station mehr, steckst du sie einfach dazu.
 
 ### Die Nachteile
 
-- **Preis**: Solide Sets starten bei etwa 150 €, leistungsstarke mit Wi‑Fi 6E oder Wi‑Fi 7 liegen bei 250 bis 400 €.  
-- **Standorte nötig**: Jede Station braucht eine Steckdose an einer sinnvollen Stelle – nicht im Schrank versteckt.  
+- **Preis**: Solide Sets starten bei etwa 150 €, leistungsstarke mit Wi‑Fi 6E oder Wi‑Fi 7 liegen bei 250 bis 400 €.
+- **Standorte nötig**: Jede Station braucht eine Steckdose an einer sinnvollen Stelle – nicht im Schrank versteckt.
 - **Overkill‑Gefahr**: In einer 55‑Quadratmeter‑Wohnung ist Mesh meist überdimensioniert.
 
 ## Der direkte Vergleich
@@ -148,17 +148,17 @@ Nach allem, was ich an Messungen gemacht habe, lässt sich die Wahl erstaunlich 
 
 ### WLAN‑Verstärker, wenn …
 
-- … Genau **ein Raum** schlecht versorgt ist,  
-- … Dein Grundtempo am Router stimmt,  
-- … Du weniger als 70 € ausgeben willst,  
-- … Du im betroffenen Raum keine Anwendungen hast, die maximales Tempo brauchen (Surfen, Mail, Musik reichen meist völlig).  
+- … Genau **ein Raum** schlecht versorgt ist,
+- … Dein Grundtempo am Router stimmt,
+- … Du weniger als 70 € ausgeben willst,
+- … Du im betroffenen Raum keine Anwendungen hast, die maximales Tempo brauchen (Surfen, Mail, Musik reichen meist völlig).
 
 ### Mesh‑WLAN, wenn …
 
-- … **mehrere Räume oder Etagen** betroffen sind,  
-- … Viele Geräte gleichzeitig online sind (Familie, Streaming, Home‑Office, Smart‑Home),  
-- … Du dich durch das Haus bewegst und das Netz nicht wechseln willst,  
-- … Du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 € oder mehr zu investieren.  
+- … **mehrere Räume oder Etagen** betroffen sind,
+- … Viele Geräte gleichzeitig online sind (Familie, Streaming, Home‑Office, Smart‑Home),
+- … Du dich durch das Haus bewegst und das Netz nicht wechseln willst,
+- … Du eine Lösung für die nächsten Jahre suchst und bereit bist, dafür 150 € oder mehr zu investieren.
 
 ### Übrigens: die dritte Option
 
@@ -179,11 +179,11 @@ Die laufenden Kosten sind klein, aber sie existieren – drei zusätzliche Steck
 
 Egal ob Repeater oder Mesh – ein paar Handgriffe entscheiden über das Ergebnis:
 
-1. **Halbe Strecke wählen**: Zusatztechnik gehört nie ins Funkloch selbst, sondern dorthin, wo das Signal noch stabil ankommt.  
-2. **5 GHz und 2,4 GHz verstehen**: 5 GHz ist schneller, aber kurzreichweitig; 2,4 GHz geht besser durch Wände. Gute Systeme steuern das automatisch.  
-3. **Firmware aktuell halten**: Ein Update hat mir einmal mehr Tempo gebracht als jede Standortoptimierung.  
-4. **Kanalwechsel bei Nachbar‑WLANs**: Im Router‑Menü einen freieren Funkkanal wählen – vor allem in Mehrfamilienhäusern wirksam.  
-5. **Nachmessen**: Erst der Speedtest vorher/nachher zeigt, ob sich der Kauf gelohnt hat.  
+1. **Halbe Strecke wählen**: Zusatztechnik gehört nie ins Funkloch selbst, sondern dorthin, wo das Signal noch stabil ankommt.
+2. **5 GHz und 2,4 GHz verstehen**: 5 GHz ist schneller, aber kurzreichweitig; 2,4 GHz geht besser durch Wände. Gute Systeme steuern das automatisch.
+3. **Firmware aktuell halten**: Ein Update hat mir einmal mehr Tempo gebracht als jede Standortoptimierung.
+4. **Kanalwechsel bei Nachbar‑WLANs**: Im Router‑Menü einen freieren Funkkanal wählen – vor allem in Mehrfamilienhäusern wirksam.
+5. **Nachmessen**: Erst der Speedtest vorher/nachher zeigt, ob sich der Kauf gelohnt hat.
 
 Und falls du beim Messen feststellst, dass dein Grundtempo selbst am Router weit unter dem liegt, was du zahlst, dann ist Zusatztechnik das falsche Werkzeug. Dann steht ein Blick auf den Vertrag an: [Internet & DSL wechseln: Praxis‑Tipps für den Anbieterwechsel](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/).
 

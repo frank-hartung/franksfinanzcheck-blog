@@ -53,7 +53,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 - Frugalismus heißt **bewusster konsumieren**, nicht freudlos leben.
 - Die größten Hebel liegen oft bei wiederkehrenden Ausgaben.
-- Schon einfache Routinen sparen oft **300 € bis 1.000 € pro Jahr**.
+- Schon einfache Routinen sparen oft **300 € bis 1.000 € pro Jahr**.
 - Wichtig ist, Geldströme sichtbar zu machen.
 - Gute Systeme schlagen spontane Motivation.
 - Kleine Ersparnisse wirken erst stark, wenn du sie **wiederholbar** machst.
@@ -84,14 +84,14 @@ Solange Geld nur als Gefühl existiert, ist Sparen oft diffus. Du ahnst zwar, da
 
 Nehmen wir an, du findest in einem Monat:
 
-- Lieferdienste: **92 €**
-- Coffee-to-go: **48 €**
-- Impulskäufe online: **76 €**
-- Doppelte Abos oder kaum genutzte Dienste: **34 €**
+- Lieferdienste: **92 €**
+- Coffee-to-go: **48 €**
+- Impulskäufe online: **76 €**
+- Doppelte Abos oder kaum genutzte Dienste: **34 €**
 
-Das sind zusammen **250 € in einem Monat**.
+Das sind zusammen **250 € in einem Monat**.
 
-Selbst wenn du davon nur die Hälfte reduzierst, sparst du **125 € pro Monat**. Aufs Jahr gerechnet sind das **1.500 €**.
+Selbst wenn du davon nur die Hälfte reduzierst, sparst du **125 € pro Monat**. Aufs Jahr gerechnet sind das **1.500 €**.
 
 Der Punkt ist nicht, alles zu streichen. Der Punkt ist, überhaupt erst zu erkennen, was da passiert.
 
@@ -113,12 +113,12 @@ Denn Fixkosten laufen automatisch. Monat für Monat. Ohne Diskussion.
 
 Angenommen, du reduzierst:
 
-- Girokonto-Gebühren: **8 € pro Monat**
-- Internetvertrag: **12 € pro Monat**
-- Versicherung: **9 € pro Monat**
-- Strom / Gas durch Tarif-Check: **15 € pro Monat**
+- Girokonto-Gebühren: **8 € pro Monat**
+- Internetvertrag: **12 € pro Monat**
+- Versicherung: **9 € pro Monat**
+- Strom / Gas durch Tarif-Check: **15 € pro Monat**
 
-Dann sparst du zusammen **44 € pro Monat**. Das sind **528 € pro Jahr**. Und das fast ohne tägliche Willenskraft.
+Dann sparst du zusammen **44 € pro Monat**. Das sind **528 € pro Jahr**. Und das fast ohne tägliche Willenskraft.
 
 Genau deshalb ist Frugalismus nicht nur Konsumkontrolle, sondern vor allem kluges Systemdenken.
 
@@ -150,13 +150,13 @@ Weil viele Wünsche nicht stabil sind. Nach einem Tag verlieren sie schon an Kra
 
 Du willst spontan:
 
-- Kopfhörer für **89 €**
-- Neue Deko für **34 €**
-- Ein Gadget für **59 €**
+- Kopfhörer für **89 €**
+- Neue Deko für **34 €**
+- Ein Gadget für **59 €**
 
-Zusammen sind das **182 €**.
+Zusammen sind das **182 €**.
 
-Wenn nach der Pause nur noch ein Kauf wirklich sinnvoll wirkt, bleiben vielleicht **59 €** statt **182 €**. Die gesparte Differenz beträgt **123 €** – ohne echtes Leid.
+Wenn nach der Pause nur noch ein Kauf wirklich sinnvoll wirkt, bleiben vielleicht **59 €** statt **182 €**. Die gesparte Differenz beträgt **123 €** – ohne echtes Leid.
 
 ### Extra-Tipp
 
@@ -176,11 +176,11 @@ Typische Beispiele:
 ### So sieht das konkret aus
 
 #### Essen bündeln
-Wenn du 2 Mal pro Woche spontan bestellst und jedes Mal **18 €** zahlst, sind das rund **144 € pro Monat**.
+Wenn du 2 Mal pro Woche spontan bestellst und jedes Mal **18 €** zahlst, sind das rund **144 € pro Monat**.
 
-Wenn du eine einfache Kochroutine einführst und daraus nur 1 Bestellung pro Woche wird, sinkt das auf rund **72 €**.
+Wenn du eine einfache Kochroutine einführst und daraus nur 1 Bestellung pro Woche wird, sinkt das auf rund **72 €**.
 
-Ersparnis: **72 € pro Monat** oder **864 € pro Jahr**.
+Ersparnis: **72 € pro Monat** oder **864 € pro Jahr**.
 
 #### Einkaufen bündeln
 Mehrere kleine Einkäufe erzeugen oft Mehrkäufe. Ein geplanter Wocheneinkauf reduziert genau diese Reibung.
@@ -206,13 +206,13 @@ Was nicht aktiv umgeleitet wird, verschwindet oft wieder im Alltag.
 
 Du sparst durch drei Maßnahmen:
 
-- 12 € beim Konto
-- 18 € beim Internet
-- 20 € bei Energie
+- 12 € beim Konto
+- 18 € beim Internet
+- 20 € bei Energie
 
-Zusammen sind das **50 € pro Monat**.
+Zusammen sind das **50 € pro Monat**.
 
-Wenn diese **50 €** nur „irgendwie im Girokonto bleiben“, gehen sie oft im normalen Leben unter. Wenn du sie sofort separat sicherst, hast du nach einem Jahr **600 €** sichtbar aufgebaut.
+Wenn diese **50 €** nur „irgendwie im Girokonto bleiben“, gehen sie oft im normalen Leben unter. Wenn du sie sofort separat sicherst, hast du nach einem Jahr **600 €** sichtbar aufgebaut.
 
 Genau das ist der Unterschied zwischen theoretisch sparen und praktisch Vermögen bilden.
 
@@ -224,13 +224,13 @@ Jeder einzelne Trick wirkt schon allein. Richtig gut werden sie in Kombination.
 
 | Hebel | mögliche Ersparnis pro Jahr |
 |---|---:|
-| Geld sichtbar machen | 300 € bis 1.500 € |
-| Fixkosten prüfen | 200 € bis 600 € |
-| Kaufpausen einbauen | 150 € bis 800 € |
-| Routinen bündeln | 200 € bis 900 € |
+| Geld sichtbar machen | 300 € bis 1.500 € |
+| Fixkosten prüfen | 200 € bis 600 € |
+| Kaufpausen einbauen | 150 € bis 800 € |
+| Routinen bündeln | 200 € bis 900 € |
 | Ersparnisse aktiv sichern | kein neuer Rabatt, aber bessere Wirkung |
 
-Natürlich schöpft nicht jeder alle Bereiche gleich aus. Aber schon bei vorsichtiger Rechnung sind **500 € bis 1.000 € pro Jahr** oft völlig realistisch.
+Natürlich schöpft nicht jeder alle Bereiche gleich aus. Aber schon bei vorsichtiger Rechnung sind **500 € bis 1.000 € pro Jahr** oft völlig realistisch.
 
 ## Frugalismus heißt nicht, dir alles zu verbieten
 
@@ -329,7 +329,7 @@ Nein. Es geht nicht um Totalverzicht, sondern um bewusstere Entscheidungen und b
 Häufig bei Fixkosten, Lieferdiensten, Abos und Impulskäufen.
 
 ### Wie viel kann ich realistisch sparen?
-Schon mit einfachen Maßnahmen sind oft **300 € bis 1.000 € pro Jahr** drin. In manchen Haushalten auch mehr.
+Schon mit einfachen Maßnahmen sind oft **300 € bis 1.000 € pro Jahr** drin. In manchen Haushalten auch mehr.
 
 ### Was ist der beste erste Schritt?
 Mach deine Ausgaben sichtbar. Ohne Überblick bleibt Sparen meist zufällig.

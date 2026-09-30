@@ -43,7 +43,7 @@ Wer seine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimierte Heizung, aber eine belastbare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch entsprechen schon 1 Cent pro kWh rund 180 € im Jahr – deshalb prüfst du Tarif und Verbrauch getrennt statt nur auf die Abschlagsrate zu schauen.
+Dieser Ablauf ist bewusst knapp. Nach 60 Minuten hast du keine perfekt optimierte Heizung, aber eine belastbare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch entsprechen schon 1 Cent pro kWh rund 180 € im Jahr – deshalb prüfst du Tarif und Verbrauch getrennt statt nur auf die Abschlagsrate zu schauen.
 
 
 

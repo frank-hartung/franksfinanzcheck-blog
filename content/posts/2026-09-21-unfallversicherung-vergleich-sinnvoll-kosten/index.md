@@ -168,11 +168,11 @@ Dazu zählen zum Beispiel:
 
 ### Grobe Orientierung
 
-- Kinder: oft mindestens **100.000 €**
-- Erwachsene: oft **100.000 € bis 200.000 €**
+- Kinder: oft mindestens **100.000 €**
+- Erwachsene: oft **100.000 € bis 200.000 €**
 - Bei höherem Risiko oder mehr Verantwortung: teils mehr
 
-Das sind keine starren Regeln. Aber 50.000 € sind in vielen Fällen einfach zu knapp.
+Das sind keine starren Regeln. Aber 50.000 € sind in vielen Fällen einfach zu knapp.
 
 ## Warum die Progression so wichtig ist
 
@@ -180,9 +180,9 @@ Die Progression ist ein Turbo für schwere Fälle. Sie hebt die Leistung stark a
 
 ### Einfaches Beispiel
 
-- Grundsumme: **150.000 €**
-- Progression: **350 %**
-- Mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**
+- Grundsumme: **150.000 €**
+- Progression: **350 %**
+- Mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**
 
 Ohne gute Progression bleibt die Leistung oft gerade dort zu klein, wo der Schaden am größten ist.
 
@@ -196,17 +196,17 @@ Sie legt fest, welcher Anteil der Grundsumme für bestimmte Verletzungen gilt.
 
 | Verletzung | schwächerer Tarif | stärkerer Tarif |
 |---|---:|---:|
-| Hand | 55 % | 70 % |
-| Daumen | 20 % | teils mehr |
-| Arm | 70 % | teils höher |
+| Hand | 55 % | 70 % |
+| Daumen | 20 % | teils mehr |
+| Arm | 70 % | teils höher |
 
 ### Rechenbeispiel
 
-- Grundsumme: **200.000 €**
-- Hand bei 55 %: **110.000 €**
-- Hand bei 70 %: **140.000 €**
+- Grundsumme: **200.000 €**
+- Hand bei 55 %: **110.000 €**
+- Hand bei 70 %: **140.000 €**
 
-Das macht **30.000 € Unterschied**. Genau deshalb darfst du die Gliedertaxe nie überblättern.
+Das macht **30.000 € Unterschied**. Genau deshalb darfst du die Gliedertaxe nie überblättern.
 
 ## Was gute Tarife kosten
 
@@ -216,9 +216,9 @@ Die Beiträge sind oft überschaubar.
 
 | Person | Beitrag pro Jahr |
 |---|---:|
-| Kind | 40 € bis 80 € |
-| Erwachsener, Bürojob | 60 € bis 120 € |
-| mit Unfallrente oder Extras | 100 € bis 180 € |
+| Kind | 40 € bis 80 € |
+| Erwachsener, Bürojob | 60 € bis 120 € |
+| mit Unfallrente oder Extras | 100 € bis 180 € |
 | riskanter Beruf | oft höher |
 
 Der Preis hängt unter anderem ab von:
@@ -234,7 +234,7 @@ Der Preis hängt unter anderem ab von:
 
 Diese Frage ist fair. Und sie lässt sich gut beantworten.
 
-Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige Summe leisten kann, ist das vom Hebel her stark. Natürlich nur dann, wenn der Tarif auch wirklich gut gebaut ist.
+Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige Summe leisten kann, ist das vom Hebel her stark. Natürlich nur dann, wenn der Tarif auch wirklich gut gebaut ist.
 
 Die bessere Frage lautet darum oft: **Könnte dein Haushalt die Folgen eines schweren Freizeitunfalls allein tragen?**
 
@@ -324,9 +324,9 @@ Erst jetzt vergleichst du den Preis.
 
 ## Beispiel für Familien
 
-Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen.
+Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen.
 
-Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann schon eine Grundsumme von **100.000 €** zeigen, wie stark der Hebel ist. Genau deshalb ist dieser Schutz für Kinder oft besonders gut nachvollziehbar.
+Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann schon eine Grundsumme von **100.000 €** zeigen, wie stark der Hebel ist. Genau deshalb ist dieser Schutz für Kinder oft besonders gut nachvollziehbar.
 
 ## Wann du eher verzichten kannst
 
@@ -367,7 +367,7 @@ Nein. Sie zahlt in der Regel nur bei Unfallfolgen, nicht bei normalen Krankheite
 Für viele Berufstätige zuerst die BU. Die Unfallversicherung ist oft eher Zusatzschutz.
 
 ### Wie hoch sollte die Grundsumme sein?
-Oft mindestens 100.000 €. Je nach Lage kann mehr sinnvoll sein.
+Oft mindestens 100.000 €. Je nach Lage kann mehr sinnvoll sein.
 
 ### Warum ist die Progression so wichtig?
 Weil sie bei schweren Schäden viel mehr Geld freisetzen kann.

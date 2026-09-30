@@ -64,7 +64,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Börsenpreis und Haushaltsgaspreis sind nicht dasselbe.
 - Eine Garantie schützt nur die ausdrücklich erfassten Preisbestandteile.
 - Lies bei einer Erhöhung Änderungsgrund, neuen Preis und Wirksamkeitsdatum.
-- In der Regel kannst du zum Zeitpunkt der Preisänderung sonderkündigen.
+- In der Regel kannst du zum Zeitpunkt der Preisänderung Sonderkündigen.
 - Bestimmte hoheitliche Anpassungen oder Umsatzsteueränderungen können anders behandelt werden.
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.

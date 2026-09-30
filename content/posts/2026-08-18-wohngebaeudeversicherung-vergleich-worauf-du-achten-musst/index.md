@@ -97,17 +97,17 @@ Genau dafür braucht es meist den Baustein **Elementarschutz**.
 
 Viele Eigentümer halten das für ein Spezialfall-Thema. In der Praxis reicht aber oft schon ein starker Regen, um Keller, Böden oder Technik teuer zu beschädigen.
 
-Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann. Genau deshalb sollte Elementarschutz nicht als Luxus wirken, sondern als nüchterne Risiko-Frage.
+Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann. Genau deshalb sollte Elementarschutz nicht als Luxus wirken, sondern als nüchterne Risiko-Frage.
 
 ### Beispielhafte Schadenrechnung
 
 | Schadenposten | Beispielkosten |
 |---|---:|
-| Trocknung | 3.000 € bis 7.000 € |
-| Boden und Putz | 2.000 € bis 8.000 € |
-| Haustechnik / Geräte | 1.500 € bis 6.000 € |
-| Aufräumung und Entsorgung | 800 € bis 2.500 € |
-| **Gesamt** | **7.300 € bis 23.500 €** |
+| Trocknung | 3.000 € bis 7.000 € |
+| Boden und Putz | 2.000 € bis 8.000 € |
+| Haustechnik / Geräte | 1.500 € bis 6.000 € |
+| Aufräumung und Entsorgung | 800 € bis 2.500 € |
+| **Gesamt** | **7.300 € bis 23.500 €** |
 
 Daran sieht man schnell: Ein Aufpreis von ein paar zig oder einigen hundert Euro pro Jahr wirkt plötzlich klein.
 
@@ -147,7 +147,7 @@ Bei vielen Eigentümern heute ein Muss im Prüfblock. Nicht stillschweigend anne
 
 ## Welche drei Klauseln du zuerst prüfen solltest
 
-Wenn du nicht den ganzen Vertrag auf einmal auseinandernehmen willst, starte mit diesen drei Punkten:
+Wenn du nicht den ganzen Vertrag auf einmal Auseinandernehmen willst, starte mit diesen drei Punkten:
 
 1. **Elementarschutz** – weil Rückstau, Starkregen oder Überschwemmung sonst schnell zur teuren Lücke werden.
 2. **grobe Fahrlässigkeit** – weil genau hier schwache Tarife im Ernstfall gern kürzen.
@@ -163,9 +163,9 @@ Mit einer Selbstbeteiligung sinkt oft der Jahresbeitrag. Das kann sinnvoll sein,
 
 | Variante | Jahresbeitrag |
 |---|---:|
-| ohne Selbstbeteiligung | 420 € |
-| 500 € Selbstbeteiligung | 380 € |
-| 1.000 € Selbstbeteiligung | 340 € |
+| ohne Selbstbeteiligung | 420 € |
+| 500 € Selbstbeteiligung | 380 € |
+| 1.000 € Selbstbeteiligung | 340 € |
 
 Der billigste Tarif ist aber nicht automatisch klug. Wenn häufig eher kleinere Schäden auftreten könnten, musst du sauber rechnen.
 
@@ -175,10 +175,10 @@ Nehmen wir ein Einfamilienhaus mit 140 m².
 
 | Tarif | Elementar | grobe Fahrlässigkeit | Jahresbeitrag |
 |---|---|---|---:|
-| alter Standardtarif | nein | eingeschränkt | 580 € |
-| günstiger Basistarif | nein | ja | 285 € |
-| starker Tarif | ja | ja | 395 € |
-| teurer Filialtarif | ja | ja | 735 € |
+| alter Standardtarif | nein | eingeschränkt | 580 € |
+| günstiger Basistarif | nein | ja | 285 € |
+| starker Tarif | ja | ja | 395 € |
+| teurer Filialtarif | ja | ja | 735 € |
 
 Die spannendste Zeile ist oft nicht der billigste Tarif und auch nicht der teuerste. Häufig ist es der solide Mitteltarif mit guten Klauseln.
 

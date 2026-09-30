@@ -144,7 +144,7 @@ Ein Wechsel ist fast immer dann spannend, wenn du:
 - ohnehin ein Vertragsende vor dir hast,
 - mit deinem Preis, nicht aber zwingend mit der Technik unzufrieden bist.
 
-Wenn du zusätzlich noch zu viel Bandbreite gebucht hast, wird es doppelt interessant. Dann sparst du nicht nur durch Bonus, sondern auch durch einen passenderen Tarif. Dazu passt dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+Wenn du zusätzlich noch zu viel Bandbreite gebucht hast, wird es doppelt interessant. Dann sparst du nicht nur durch Bonus, sondern auch durch einen passenderen Tarif. Dazu passt dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
 
 ## Wann ein hoher Bonus trotzdem die falsche Wahl ist
 
@@ -185,7 +185,7 @@ Dafür bekommst du kein Eigentum. Ein eigenes Gerät kann sich also lohnen, wenn
 ### Kauf ist oft sinnvoll, wenn …
 
 - Du längerfristig planst,
-- du Routerkosten nicht dauerhaft mitschleppen willst,
+- du Routerkosten nicht dauerhaft Mitschleppen willst,
 - du ein vernünftiges Gerät schon kennst oder weiterverwenden kannst.
 
 Am Ende zählt wieder die Gesamtrechnung – nicht das Gefühl von „nur sieben Euro im Monat“.

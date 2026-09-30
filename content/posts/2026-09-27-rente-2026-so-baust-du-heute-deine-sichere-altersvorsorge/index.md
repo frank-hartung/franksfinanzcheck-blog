@@ -22,7 +22,7 @@ cover:
   image: "images/covers/2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge.jpg"
   alt: "Rente 2026: So baust du heute deine sichere Altersvorsorge"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Du schließt die Rentenlücke, indem du zusätzlich etwa 400 € pro Monat (ca. 4.800 € pro Jahr) sparst. Kombiniere die gesetzliche Rente mit einem Riester- oder Rürup-Vertrag und einem kostengünstigen ETF-Sparplan. Investiere mindestens 10 % deines Bruttoeinkommens, um das Ziel von rund 70 % deines letzten Nettoeinkommens im Ruhestand zu erreichen."
+kurzantwort: "Du schließt die Rentenlücke, indem du zusätzlich etwa 400 € pro Monat (ca. 4.800 € pro Jahr) sparst. Kombiniere die gesetzliche Rente mit einem Riester- oder Rürup-Vertrag und einem kostengünstigen ETF-Sparplan. Investiere mindestens 10 % deines Bruttoeinkommens, um das Ziel von rund 70 % deines letzten Nettoeinkommens im Ruhestand zu erreichen."
 ---
 
 Markus saß neulich bei mir am Küchentisch, den Blick starr auf einen Brief der Deutschen Rentenversicherung gerichtet. „Frank“, sagte er und rieb sich die Schläfen. „Wenn ich diese Zahl sehe und dann an die Inflation denke, sehe ich mich im Alter Pfandflaschen sammeln.“ Markus ist Mitte 40 und verdient gut. Trotzdem hat er das Thema Vorsorge jahrelang vor sich hergeschoben.
@@ -37,7 +37,7 @@ Das klingt hart. Es ist aber auch eine Chance.
 - **Sicherungsniveau:** Der Gesetzgeber hat das Rentenniveau stabilisiert. Doch die steigenden Beiträge und die Inflation fressen die Kaufkraft der gesetzlichen Rente schleichend auf.
 - **Generationenkapital:** Seit 2026 fließt ein Teil der staatlichen Mittel in den Kapitalmarkt. Das soll das System langfristig stützen – ein erster Schritt weg von der reinen Umlagefinanzierung.
 - **Rentenbaustein-Strategie:** Eine solide Vorsorge besteht heute aus einem Mix: gesetzliche Basis, betriebliche Förderung und private, kostengünstige Anlagen wie ETFs.
-- **Kosten-Fokus:** Bei privaten Rentenversicherungen entscheiden oft die Vertragskosten (ca. 1,0 % bis 2,5 % pro Jahr) über Erfolg oder Misserfolg deiner Strategie.
+- **Kosten-Fokus:** Bei privaten Rentenversicherungen entscheiden oft die Vertragskosten (ca. 1,0 % bis 2,5 % pro Jahr) über Erfolg oder Misserfolg deiner Strategie.
 
 ---
 
@@ -46,7 +46,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was hat sich 2026 bei der Altersvorsorge geändert?
 
-Das Jahr 2026 markiert einen Wendepunkt in der deutschen Rentenpolitik. Das sogenannte Rentenpaket II schreibt das Rentenniveau bei rund 48 % fest.
+Das Jahr 2026 markiert einen Wendepunkt in der deutschen Rentenpolitik. Das sogenannte Rentenpaket II schreibt das Rentenniveau bei rund 48 % fest.
 
 Das klingt beruhigend, hat aber eine Kehrseite. Um dieses Niveau zu halten, müssen die Rentenbeiträge in den kommenden Jahren steigen. Für dich heißt das: weniger Netto vom Brutto. Die spätere Auszahlung bleibt zwar stabil, reicht aber im Vergleich zu den Lebenshaltungskosten oft nicht aus.
 
@@ -68,7 +68,7 @@ Zur ersten Säule gehört auch die Rürup-Rente. Sie lohnt sich vor allem für S
 
 Die zweite Säule ist die geförderte Vorsorge. Dazu zählen die betriebliche Altersvorsorge (bAV) und die oft kritisierte Riester-Rente. Bei der bAV wandelt dein Arbeitgeber einen Teil deines Bruttogehalts um (Entgeltumwandlung).
 
-Seit 2022 ist der Arbeitgeberzuschuss von 15 % für fast alle Verträge verpflichtend. Das macht diesen Rentenbaustein attraktiv. Voraussetzung: Die Kosten des Anbieters bleiben niedrig.
+Seit 2022 ist der Arbeitgeberzuschuss von 15 % für fast alle Verträge verpflichtend. Das macht diesen Rentenbaustein attraktiv. Voraussetzung: Die Kosten des Anbieters bleiben niedrig.
 
 Die dritte Säule ist die private Vorsorge. Hier hast du die volle Freiheit. Du entscheidest selbst: private Rentenversicherung, eigenes Haus oder ETF-Sparplan. Du finanzierst diese Säule meist aus versteuertem Einkommen.
 
@@ -78,19 +78,19 @@ Dafür genießt du in der Auszahlungsphase oft steuerliche Vorteile. Beispiele: 
 
 Die Antwort ist simpel und schmerzhaft: Demografie. Als die Politik das System konzipierte, kamen auf einen Rentner noch etwa sechs Beitragszahler. Heute sind es etwa zwei, und der Trend zeigt weiter nach unten.
 
-Das Rentenniveau von 48 % gilt zudem nur für den „Eckrentner“. Das ist jemand, der 45 Jahre lang durchschnittlich verdient und eingezahlt hat. Die meisten Menschen erreichen diese Werte nicht.
+Das Rentenniveau von 48 % gilt zudem nur für den „Eckrentner“. Das ist jemand, der 45 Jahre lang durchschnittlich verdient und eingezahlt hat. Die meisten Menschen erreichen diese Werte nicht.
 
-Zudem darfst du die Inflation nicht unterschätzen. Schon bei moderaten 2 % Inflation halbiert sich die Kaufkraft deines Geldes in etwa 35 Jahren.
+Zudem darfst du die Inflation nicht unterschätzen. Schon bei moderaten 2 % Inflation halbiert sich die Kaufkraft deines Geldes in etwa 35 Jahren.
 
-Nehmen wir an, deine Renteninformation weist heute 1.500 € aus. In 30 Jahren fühlt sich das an wie heute ca. 750 bis 800 €.
+Nehmen wir an, deine Renteninformation weist heute 1.500 € aus. In 30 Jahren fühlt sich das an wie heute ca. 750 bis 800 €.
 
 Ohne zusätzlichen privaten Rentenbaustein entsteht eine Lücke. Sie bedroht deinen Lebensstandard im Alter massiv. Das kannst du verhindern.
 
 Ein weiterer Punkt ist die nachgelagerte Besteuerung. Viele vergessen, dass sie ihre gesetzliche Rente im Alter versteuern müssen. Seit 2005 steigt der steuerpflichtige Anteil jährlich an.
 
-Wer ab 2040 in Rente geht, muss seine Bezüge zu 100 % versteuern. Davon ziehst du nur den Grundfreibetrag und eventuelle Krankenkassenbeiträge ab. Was am Ende auf dem Konto landet, ist oft deutlich weniger, als die Brutto-Zahlen vermuten lassen.
+Wer ab 2040 in Rente geht, muss seine Bezüge zu 100 % versteuern. Davon ziehst du nur den Grundfreibetrag und eventuelle Krankenkassenbeiträge ab. Was am Ende auf dem Konto landet, ist oft deutlich weniger, als die Brutto-Zahlen vermuten lassen.
 
-**Faustregel:** Du solltest monatlich etwa 10 bis 15 % deines Nettoeinkommens in private oder betriebliche Rentenbausteine investieren, um deinen Lebensstandard im Alter annähernd zu halten.
+**Faustregel:** Du solltest monatlich etwa 10 bis 15 % deines Nettoeinkommens in private oder betriebliche Rentenbausteine investieren, um deinen Lebensstandard im Alter annähernd zu halten.
 
 ## Private Rentenbausteine im Vergleich
 
@@ -99,14 +99,14 @@ Wer selbst aktiv wird, hat die Wahl zwischen verschiedenen Instrumenten. Nicht j
 | Merkmal | ETF-Sparplan (Depot) | Private Rentenversicherung | Betriebliche Altersvorsorge |
 | :--- | :--- | :--- | :--- |
 | **Flexibilität** | Sehr hoch (jederzeit kündbar) | Mittel (oft feste Laufzeit) | Gering (an Arbeitgeber gebunden) |
-| **Kosten** | Sehr niedrig (ca. 0,2 % p.a.) | Mittel bis hoch (ca. 1,0–2,0 %) | Mittel (durch Gruppenverträge) |
+| **Kosten** | Sehr niedrig (ca. 0,2 % p.a.) | Mittel bis hoch (ca. 1,0–2,0 %) | Mittel (durch Gruppenverträge) |
 | **Steuervorteil** | Erst bei Auszahlung | Steuerstundung & Halbeinkünfte | Sofortige Brutto-Ersparnis |
 | **Sicherheit** | Marktrisiko | Meist Fondsguthaben + Garantie | Hohe Sicherheit (Sicherungsvermögen) |
 | **Vererbbarkeit** | Einfach möglich | Je nach Tarifoption | Eingeschränkt |
 
 Ich persönlich bin ein Fan von Transparenz. Ein ETF-Sparplan auf einen weltweit gestreuten Index (wie den MSCI World) ist für viele der ehrlichste Rentenbaustein. Du weißt genau, wo dein Geld ist, und zahlst kaum Gebühren an Banken oder Vermittler.
 
-Eine private Rentenversicherung kann trotzdem sinnvoll sein. Etwa wenn du Steuervorteile nutzen willst und dich nicht selbst um die Umschichtung im Alter kümmern magst. Wichtig ist hierbei: Achte auf die „Effektivkosten“ im Produktinformationsblatt. Alles über 1,2 % pro Jahr schmälert deine Rendite über die Jahrzehnte massiv.
+Eine private Rentenversicherung kann trotzdem sinnvoll sein. Etwa wenn du Steuervorteile nutzen willst und dich nicht selbst um die Umschichtung im Alter kümmern magst. Wichtig ist hierbei: Achte auf die „Effektivkosten“ im Produktinformationsblatt. Alles über 1,2 % pro Jahr schmälert deine Rendite über die Jahrzehnte massiv.
 
 > 💶 **Spar‑Tipp zwischendurch:** Wer jeden Monat etwas zur Seite legt, sollte dafür Zinsen bekommen – ganz ohne Risiko und jederzeit verfügbar: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
@@ -115,16 +115,16 @@ Eine private Rentenversicherung kann trotzdem sinnvoll sein. Etwa wenn du Steuer
 Zuerst musst du deine Zahlen kennen. Hier ein echtes Beispiel aus meiner Beratung, Stand 2026.
 
 **Rechenbeispiel (Claudia, 35 Jahre, Stand 2026):**
-- Aktuelles Nettoeinkommen: 2.800 €
-- Gewünschtes Budget im Alter (80 % vom Netto): 2.240 €
-- Hochgerechnete gesetzliche Rente (laut Bescheid): ca. 1.450 € (netto nach Steuern/KK)
-- **Monatliche Rentenlücke:** 790 €
+- Aktuelles Nettoeinkommen: 2.800 €
+- Gewünschtes Budget im Alter (80 % vom Netto): 2.240 €
+- Hochgerechnete gesetzliche Rente (laut Bescheid): ca. 1.450 € (netto nach Steuern/KK)
+- **Monatliche Rentenlücke:** 790 €
 
-Claudia braucht also 790 € im Monat zusätzlich, wenn sie mit 67 in Rente geht. Wir rechnen 2 % Inflation über die nächsten 32 Jahre ein. Dadurch steigt der benötigte Betrag nominal noch deutlich.
+Claudia braucht also 790 € im Monat zusätzlich, wenn sie mit 67 in Rente geht. Wir rechnen 2 % Inflation über die nächsten 32 Jahre ein. Dadurch steigt der benötigte Betrag nominal noch deutlich.
 
-Um diese Lücke von 790 € zu schließen, bräuchte Claudia ein Vermögen von rund 237.000 €. Das gilt bei einem Entnahmeplan mit 4 % Rendite nach Steuern, sofern sie das Kapital über 25 Jahre verbraucht.
+Um diese Lücke von 790 € zu schließen, bräuchte Claudia ein Vermögen von rund 237.000 €. Das gilt bei einem Entnahmeplan mit 4 % Rendite nach Steuern, sofern sie das Kapital über 25 Jahre verbraucht.
 
-Angenommen, sie hat heute bereits 10.000 € Erspartes. Sie investiert 32 Jahre lang monatlich etwa 250 € in einen ETF-basierten Rentenbaustein (ca. 6 % Rendite pro Jahr). Dann kann sie dieses Ziel erreichen.
+Angenommen, sie hat heute bereits 10.000 € Erspartes. Sie investiert 32 Jahre lang monatlich etwa 250 € in einen ETF-basierten Rentenbaustein (ca. 6 % Rendite pro Jahr). Dann kann sie dieses Ziel erreichen.
 
 Das Beispiel zeigt zwei Dinge. Erstens ist die Lücke oft größer als gedacht. Zweitens ist dein mächtigster Verbündeter die Zeit. Je früher du beginnst, desto weniger musst du monatlich für das gleiche Ziel aufbringen.
 
@@ -132,13 +132,13 @@ Das Beispiel zeigt zwei Dinge. Erstens ist die Lücke oft größer als gedacht. 
 
 In zehn Jahren Finanzberatung habe ich viele Muster gesehen. Die meisten Menschen scheitern nicht am Einkommen. Sie scheitern an strukturellen Fehlern bei der Wahl ihrer Rentenbausteine. Die gute Nachricht: Alle lassen sich vermeiden.
 
-Der teuerste Fehler ist das späte Starten. Wer mit 20 anfängt, 100 € zu sparen, hat es viel leichter. Wer erst mit 40 beginnt, muss 300 € aufholen.
+Der teuerste Fehler ist das späte Starten. Wer mit 20 anfängt, 100 € zu sparen, hat es viel leichter. Wer erst mit 40 beginnt, muss 300 € aufholen.
 
 Der Zinseszins entfaltet seine Kraft erst in den letzten zehn Jahren einer 40-jährigen Sparphase. Wer später beginnt, verpasst die Phase des exponentiellen Wachstums.
 
 Der zweite Renditekiller: hohe Abschluss- und Verwaltungskosten. Viele klassische Renten-Verträge ziehen in den ersten fünf Jahren hohe Gebühren ab (Zillmerung). Kündigst du den Vertrag nach acht Jahren oder stellst ihn beitragsfrei, bekommst du oft weniger heraus, als du eingezahlt hast.
 
-Frage immer nach der „Nettopolice“. Das sind Tarife ohne Provisionen: Du zahlst nur ein Honorar an den Berater, dafür fließen 100 % deiner Beiträge von Tag eins an in die Anlage.
+Frage immer nach der „Nettopolice“. Das sind Tarife ohne Provisionen: Du zahlst nur ein Honorar an den Berater, dafür fließen 100 % deiner Beiträge von Tag eins an in die Anlage.
 
 Unterschätze auch nicht das Risiko der Inflation bei reinen Geldwerten. Wer nur auf das Sparbuch oder klassische Lebensversicherungen setzt, verliert real an Kaufkraft.
 
@@ -150,7 +150,7 @@ Du musst kein Finanzgenie sein, um deine Rente zu planen. Es reicht, systematisc
 
 **So gehst du vor:**
 
-1. **Bestandsaufnahme machen:** Nimm deine aktuelle Renteninformation zur Hand und ziehe pauschal 20 % für Steuern und Sozialabgaben ab. Das ist dein Startpunkt.
+1. **Bestandsaufnahme machen:** Nimm deine aktuelle Renteninformation zur Hand und ziehe pauschal 20 % für Steuern und Sozialabgaben ab. Das ist dein Startpunkt.
 2. **Lücke definieren:** Überlege dir, wie viel Geld du heute im Monat zum Leben brauchst. Ziehe Kosten ab, die im Alter wegfallen (z. B. Pendelkosten), und rechne Puffer für Gesundheit oder Reisen hinzu.
 3. **Bestehende Verträge prüfen:** Hast du eine bAV oder eine alte Lebensversicherung? Prüfe die Kosten und die voraussichtliche Auszahlung. Lohnt sich das Weitermachen, oder ist eine Beitragsfreistellung günstiger?
 4. **Rentenbaustein wählen:** Entscheide dich für ein primäres Instrument. Für die meisten ist ein breit gestreuter Welt-ETF im Depot oder in einer kostengünstigen Fondspolice die beste Wahl.
@@ -180,11 +180,11 @@ Wenn du heute nur einen Schritt gehst, leg die aktuelle Renteninformation neben 
 
 ## Häufige Fragen
 
-### Wie viel Rente bekomme ich, wenn ich 3.000 € brutto verdiene?
-Als grobe Orientierung: Nach 45 Beitragsjahren liegt deine Bruttorente bei etwa 1.400 bis 1.500 €. Davon gehen noch Beiträge zur Kranken- und Pflegeversicherung sowie eventuell Steuern ab. Netto bleiben oft rund 1.200 bis 1.300 €. Das zeigt deutlich, wie wichtig zusätzliche Rentenbausteine sind.
+### Wie viel Rente bekomme ich, wenn ich 3.000 € brutto verdiene?
+Als grobe Orientierung: Nach 45 Beitragsjahren liegt deine Bruttorente bei etwa 1.400 bis 1.500 €. Davon gehen noch Beiträge zur Kranken- und Pflegeversicherung sowie eventuell Steuern ab. Netto bleiben oft rund 1.200 bis 1.300 €. Das zeigt deutlich, wie wichtig zusätzliche Rentenbausteine sind.
 
 ### Lohnt sich eine betriebliche Altersvorsorge (bAV) 2026 noch?
-Ja, aber nur, wenn der Arbeitgeberzuschuss hoch genug ist. Der Pflicht-Zuschuss von 15 % und die Ersparnis bei Steuern und Sozialabgaben machen die bAV oft rentabel. Kritisch ist es bei teuren Tarifen. Auch häufige Arbeitgeberwechsel sind ein Problem, wenn du das Kapital nicht mitnehmen kannst.
+Ja, aber nur, wenn der Arbeitgeberzuschuss hoch genug ist. Der Pflicht-Zuschuss von 15 % und die Ersparnis bei Steuern und Sozialabgaben machen die bAV oft rentabel. Kritisch ist es bei teuren Tarifen. Auch häufige Arbeitgeberwechsel sind ein Problem, wenn du das Kapital nicht mitnehmen kannst.
 
 ### Sind ETFs für die Rente nicht zu riskant?
 Kurzfristig schwanken ETFs natürlich. Historisch gab es mit weltweit gestreuten Aktiendepots über 15 Jahre und mehr noch keinen Verlust. Deine Altersvorsorge läuft meist 20 bis 40 Jahre. In diesem Zeitraum ist das Risiko eines Totalverlusts minimal, die Chance auf Rendite dagegen deutlich höher als beim Sparbuch.
