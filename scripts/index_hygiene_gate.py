@@ -44,7 +44,7 @@ Nutzung:
     hugo --destination public
     python3 scripts/index_hygiene_gate.py            # prüft public/
     python3 scripts/index_hygiene_gate.py --json     # Maschinen-Ausgabe
-    python3 scripts/index_hygiene_gate.py --selftest # 8 Fälle
+    python3 scripts/index_hygiene_gate.py --selftest # 12 Fälle
 
 Exit: 0 = grün · 1 = harte Funde · 2 = Fehler/Selbsttest fehlgeschlagen
 """
@@ -101,14 +101,36 @@ def rel_url(pfad: str, basis: str) -> str:
     return rel[: -len("index.html")] if rel.endswith("index.html") else rel
 
 
+ATTR = re.compile(
+    r'''([:\w-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'<>`=]+))''',
+    re.I,
+)
+
+
+def meta_attributes(html: str):
+    """Liest minifiziertes und nicht minifiziertes `<meta>` robust aus.
+
+    Hugo/Minify darf Quotes entfernen und Attribute umordnen. Die alte Regex
+    setzte dagegen Quotes voraus und verlangte `name` vor `content`; beides
+    erzeugt bei einem SEO-Gate gefährliche Falschmessungen.
+    """
+    for m in re.finditer(r"<meta\b([^>]*)>", html, re.I | re.S):
+        attrs = {}
+        for attr in ATTR.finditer(m.group(1)):
+            attrs[attr.group(1).lower()] = (
+                attr.group(2) or attr.group(3) or attr.group(4) or "")
+        yield attrs
+
+
 def ist_alias(html: str) -> bool:
-    return bool(re.search(r'http-equiv=["\']?refresh', html, re.I))
+    return any(a.get("http-equiv", "").lower() == "refresh"
+               for a in meta_attributes(html))
 
 
 def robots_wert(html: str) -> str:
-    m = re.search(r'<meta[^>]+name=["\']?robots["\']?[^>]*content=["\']([^"\']*)',
-                  html, re.I)
-    return (m.group(1) if m else "").lower()
+    values = [a.get("content", "") for a in meta_attributes(html)
+              if a.get("name", "").lower() == "robots"]
+    return ",".join(values).lower()
 
 
 # href-Werte in drei Schreibweisen. Die dritte ist Pflicht, weil Produktion mit
@@ -129,9 +151,22 @@ def interne_ziele(html: str) -> set[str]:
             continue
         if h.startswith(("mailto:", "tel:", "javascript:", "data:")):
             continue
-        if h.startswith("http"):
+        # Absolute links dürfen nur die eigene Domain als interne Ziele
+        # markieren. Ein bloßes `in netloc` würde z. B.
+        # `franksfinanzcheck.de.evil.example` fälschlich akzeptieren und das
+        # Waisen-Gate unzuverlässig machen.
+        if h.startswith("//"):
+            p = urlparse("https:" + h)
+            host = (p.hostname or "").lower().rstrip(".")
+            if host not in {"franksfinanzcheck.de", "www.franksfinanzcheck.de"}:
+                continue
+            h = p.path or "/"
+        elif urlparse(h).scheme:
             p = urlparse(h)
-            if "franksfinanzcheck.de" not in (p.netloc or ""):
+            if p.scheme.lower() not in {"http", "https"}:
+                continue
+            host = (p.hostname or "").lower().rstrip(".")
+            if host not in {"franksfinanzcheck.de", "www.franksfinanzcheck.de"}:
                 continue
             h = p.path or "/"
         else:
@@ -369,6 +404,26 @@ def selftest() -> int:
         F, _ = pruefe(t)
         check("minifiziertes HTML: keine Falsch-Waisen",
               not any(r == "H7" for r, _, _ in F.weich))
+
+    # 1c Meta-Attribute dürfen ebenfalls unquoted und umsortiert sein. Sonst
+    # würde ein echtes noindex beim Audit als indexierbar durchrutschen.
+    with tempfile.TemporaryDirectory() as t:
+        root = ('<html><head><meta content=index,follow name=robots>'
+                '</head><body><a href=/x/>x</a></body></html>')
+        noidx = ('<html><head><meta content=noindex,follow name=robots>'
+                 '</head><body></body></html>')
+        baue(t, {"/": root, "/x/": noidx}, ["/", "/x/"])
+        F, _ = pruefe(t)
+        check("unquoted/umsortierte Robots-Meta wird erkannt",
+              any(r == "H8" for r, _, _ in F.hart))
+
+    # 1d Nur die eigene Domain darf ein internes Ziel erzeugen. Der Test
+    # schützt gegen den früheren Teilstring-Check im Hostnamen.
+    fremd = interne_ziele(
+        '<a href=https://franksfinanzcheck.de.evil.example/waise/>x</a>')
+    check("fremde Domain wird nicht intern",
+          "/waise/" not in fremd)
+
     # 2 Zählung stimmt
     check("Zählung indexierbar", b["indexierbar"] == 2 and b["nicht_indexierbar"] == 0)
 

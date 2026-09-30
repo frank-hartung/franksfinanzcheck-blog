@@ -66,7 +66,7 @@ Nutzung:
     python3 scripts/tag_governance.py --check      Wache (CI)
     python3 scripts/tag_governance.py --apply      Frontmatter normalisieren
     python3 scripts/tag_governance.py --json       Maschinen-Ausgabe
-    python3 scripts/tag_governance.py --selftest   9 Fälle (Sabotage-Schutz)
+    python3 scripts/tag_governance.py --selftest   19 Fälle (Sabotage-Schutz)
 
 Exit: 0 = grün · 1 = harte Funde · 2 = Fehler/Selbsttest fehlgeschlagen
 """
@@ -82,9 +82,11 @@ import unicodedata
 
 try:
     import yaml
-except ImportError:  # pragma: no cover
-    print("FEHLER: pyyaml fehlt (pip install pyyaml)", file=sys.stderr)
-    sys.exit(2)
+except ImportError:  # pragma: no cover - the deploy installs PyYAML explicitly
+    # Importing this module must stay safe for the generators.  They can then
+    # fail closed with a precise error at the register boundary instead of
+    # silently falling back to keyword-shaped tags (the original URL leak).
+    yaml = None
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REGISTER = os.environ.get(
@@ -199,8 +201,28 @@ class Register:
 
 
 def lade_register(pfad: str = REGISTER) -> Register:
+    if yaml is None:
+        raise RuntimeError("PyYAML fehlt – Tag-Register kann nicht sicher geladen werden")
     with open(pfad, encoding="utf-8") as fh:
         return Register(yaml.safe_load(fh) or {})
+
+
+def kanonische_tags(keywords, pillar: str = "", titel: str = "",
+                   register: Register | None = None) -> list[str]:
+    """Liefert ausschließlich registergeprüfte Tags für neue Frontmatter.
+
+    Das ist die fail-closed Grenze für *alle* Writer und Heiler.  Ein kaputtes
+    oder fehlendes Register darf niemals dazu führen, dass ein Keyword direkt
+    zum Tag und damit wieder zur URL wird.  In diesem Fall wird absichtlich
+    ein Fehler an den aufrufenden Workflow gegeben.
+    """
+    reg = register or lade_register()
+    tags = tags_fuer(keywords, pillar=pillar, titel=titel, register=reg)
+    if not tags:
+        raise RuntimeError(
+            "Kein kanonischer Tag gefunden – Keyword bleibt Keyword; "
+            "Pillar/Register redaktionell prüfen")
+    return tags
 
 
 def tags_fuer(keywords, pillar: str = "", titel: str = "",
@@ -601,8 +623,21 @@ def selftest() -> int:
     check("tags_fuer Titel-Treffer",
           tags_fuer(["nichts"], "", "Wie du Gas sparen kannst", reg) == ["Gas sparen"])
 
+    # 15 Writer-Grenze: ein unbekanntes Keyword darf nicht als stiller
+    # Fallback-Tag in Frontmatter landen. Ein Register-/Pillar-Fehler ist ein
+    # harter Redaktionsfehler, kein Anlass für eine neue URL.
+    try:
+        kanonische_tags(["voellig unbekanntes long-tail keyword"], register=reg)
+    except RuntimeError:
+        sicher_ohne_fallback = True
+    else:
+        sicher_ohne_fallback = False
+    check("Writer-Grenze fail-closed", sicher_ohne_fallback)
+    check("Writer-Grenze Pillar-Auffangnetz",
+          kanonische_tags(["nichts"], pillar="p", register=reg) != [])
+
     # ---- Waisen-Netz: --apply darf keinen Artikel ohne Tag zurücklassen ----
-    # 15 Nur unbekannter Tag, aber Pillar gesetzt → --apply füllt aus dem
+    # 17 Nur unbekannter Tag, aber Pillar gesetzt → --apply füllt aus dem
     #    Pillar auf (der T5-Fund, der bisher den Deploy brach, verschwindet).
     with tempfile.TemporaryDirectory() as tmp:
         p = baue(tmp, '---\ntitle: "T"\ntags: ["Voellig unbekannt"]\n'
@@ -613,7 +648,7 @@ def selftest() -> int:
         F2, _ = pruefe(reg, [p])
         check("--apply Waisen-Netz füllt Pillar-Tag",
               bool(fm.get("tags")) and not any(r == "T5" for r, _, _ in F2.hart))
-    # 16 Keyword/Titel-Treffer schlägt das Pillar-Netz (präziser Tag gewinnt)
+    # 18 Keyword/Titel-Treffer schlägt das Pillar-Netz (präziser Tag gewinnt)
     with tempfile.TemporaryDirectory() as tmp:
         p = baue(tmp, '---\ntitle: "Wie du beim Gas sparen kannst"\n'
                       'tags: ["Gaskosten senken 2026 im Altbau"]\n'
@@ -624,7 +659,7 @@ def selftest() -> int:
         check("--apply Waisen-Netz bevorzugt Titel-/Keyword-Treffer",
               fm.get("tags") == ["Gas sparen"])
 
-    # 17 Titel-Fallback ignoriert Einzelwort-Synonyme (kein Falsch-Tag mehr).
+    # 19 Titel-Fallback ignoriert Einzelwort-Synonyme (kein Falsch-Tag mehr).
     #    Regressionsschutz für den Befund 30.09.2026: das Synonym „Wirklich"
     #    zog „Versicherungen vergleichen" auf einen Notgroschen-Artikel.
     reg2 = Register({
@@ -662,6 +697,9 @@ def main() -> int:
         reg = lade_register()
     except FileNotFoundError:
         print(f"FEHLER: Register fehlt: {REGISTER}", file=sys.stderr)
+        return 2
+    except RuntimeError as exc:
+        print(f"FEHLER: {exc}", file=sys.stderr)
         return 2
 
     dateien = artikel_dateien()

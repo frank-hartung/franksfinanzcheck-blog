@@ -194,6 +194,15 @@ jobs:
           PIN_TOPICS: "1"
         run: python3 scripts/engine_generate.py
 
+      # INDEX-HYGIENE DEFENSE-IN-DEPTH (Issue #463): Die Content-Engine darf
+      # keinen Entwurf mit Keyword-Tags committen. Der Deploy prüft den
+      # fertigen Build erneut; hier stoppen wir die Quelle bereits vor Phase 1.
+      - name: Taxonomie-Gate nach Generierung (kein Keyword-Tag-Leak)
+        run: |
+          python3 scripts/tag_governance.py --selftest
+          python3 scripts/tag_governance.py --apply
+          python3 scripts/tag_governance.py --check
+
       - name: Phase-1-Commit – sofort veröffentlichen (auch Entwürfe)
         run: |
           git config user.name "Content-Bot"

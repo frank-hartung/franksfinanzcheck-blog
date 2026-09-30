@@ -207,7 +207,10 @@ def run(args) -> int:
         "passiert ist, was es für dich bedeutet und was du jetzt tun kannst.")
     fm = ks.build_frontmatter(
         title=title, description=description,
-        tags=(keywords or [title, _kategorie_wort(kategorie)])[:4],
+        # `build_frontmatter` übernimmt die Register-Kanonisierung; die
+        # Keywords werden nicht direkt in URL-erzeugende Tags kopiert.
+        tags=keywords or [title, _kategorie_wort(kategorie)],
+        pillar=_kategorie_pillar(kategorie),
         keywords=keywords or [title], rolle=ROLLE, news=True,
         kategorie=kategorie)
     stand = (f"**Stand: {today}.** Dieser News-Kompakt-Artikel ordnet eine "
@@ -245,6 +248,18 @@ def _kategorie_wort(kategorie: str) -> str:
             "konto": "Konto & Karten", "internet": "Internet & DSL",
             "saisonal": "Saison", "seo_qualitaet": "Markt"}.get(
                 kategorie, "Markt")
+
+
+def _kategorie_pillar(kategorie: str) -> str:
+    """Ordnet News dem bestehenden Register-Silo zu, ohne einen Tag zu erfinden."""
+    return {
+        "energie": "strom-sparen",
+        "versicherung": "versicherungen",
+        "konto": "konto-karten",
+        "internet": "internet-dsl",
+        "saisonal": "frugalismus",
+        "seo_qualitaet": "frugalismus",
+    }.get(kategorie, "frugalismus")
 
 
 def main() -> int:
