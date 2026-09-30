@@ -1,6 +1,6 @@
 # ✍️ ANLEITUNG – Claude-Stilpolitur (Claude, kostenlos ohne API, personalisiert)
 
-**Stand:** 2026-09-25 · **Skripte:** `scripts/claude_stilpolitur.py` + `scripts/puter_chat.mjs`
+**Stand:** 2026-09-30 · **Skripte:** `scripts/claude_stilpolitur.py` + `scripts/puter_chat.mjs` + `scripts/claude_stilpolitur_wirkung.py`
 **Stilprofil:** `data/schreibstil.yaml` (Franks eigener Schreibstil) + `data/brand_brain.yaml` (Marken-Stimme)
 **Workflows:** `claude-stilpolitur.yml` (Mo/Mi/Fr 04:50 UTC), `content-engine-v2.yml` Phase 2 (bei jedem neuen Artikel)
 
@@ -36,6 +36,21 @@ Claude läuft **nicht** über die bezahlte Anthropic-API, sondern über **Puter.
 1. [puter.com](https://puter.com) → kostenloses Konto anlegen
 2. Auth-Token erzeugen (Anleitung: [docs.puter.com](https://docs.puter.com) → Node.js/Auth-Token)
 3. GitHub → Settings → Secrets and variables → Actions → **`PUTER_AUTH_TOKEN`**
+
+### Ausfallsicherheit: zwei Lanes, getrennt bewertet (Härtung #468, 30.09.2026)
+
+| Lane | Inhalt | Verhalten bei Störung |
+|---|---|---|
+| **intern** (eigener Code, *fail-closed*) | Pflichtdateien, Selbsttests, `grammar_check --fix`, `sprachglatt --fix` | **roter Lauf** – Fehler werden nicht mehr mit `\|\| echo` maskiert; ohne `--strict` liefern beide Engines nur bei echtem Defekt ≠ 0 |
+| **extern** (Puter/Claude, *best effort*) | Token, npm-SDK, Claude-Aufruf | **grüner Lauf mit gelber Warnung** – fehlendes/abgelaufenes Token, npm-Transient, Puter-Ausfall oder leeres Gratis-Kontingent degradieren ehrlich auf die Offline-Premium-Politur |
+
+Zusätzlich gilt dauerhaft:
+
+- **Der Commit läuft immer** (`!cancelled() && steps.offline.outcome == 'success'`): Die Offline-Ergebnisse werden gesichert, auch wenn der externe Zusatz danach streikt. Nur ein Absturz der eigenen Engines verhindert den Commit (kein halb angewandter Bestand).
+- **Kein Schein-Grün:** `scripts/claude_stilpolitur_wirkung.py` liest den Lauf-Report. Gab es Kandidaten, aber **0 polierte** Artikel und nur Fehlversuche, meldet der Lauf `wirkungslos` mit dem Hinweis, das Gratis-Token zu erneuern – statt grün zu tun, als sei Claude gelaufen.
+- **Exit 2 bleibt rot:** Der eingefrorene Sabotage-Schutz ist eine Regression im eigenen Code, kein Fremdausfall.
+- **Lauf-Bilanz:** Jeder Lauf schreibt eine Tabelle in die Job-Zusammenfassung, die für beide Lanes nachprüfbar sagt, was wirklich passiert ist.
+- **Vertrag maschinell gepinnt:** `scripts/tests/test_claude_stilpolitur_workflow.py` und `scripts/tests/test_claude_stilpolitur_wirkung.py` (Teil von `python3 -m unittest discover -s scripts/tests`).
 
 Ohne Token bleibt der geplante Tageslauf **grün und ehrlich**: Die vollständige Offline-Premium-Politur (`grammar_check` + `sprachglatt`) läuft weiter und wird committed; ausschließlich der externe Claude-Zusatz wird mit einer gelben Workflow-Warnung und einem Eintrag in der Job-Zusammenfassung übersprungen. Es gibt weder einen stillen Modellwechsel noch einen kostenpflichtigen API-Fallback. Dadurch erzeugt eine noch nicht eingerichtete externe Zugangsdatenquelle keine wiederkehrenden Fehlalarm-Issues mehr (Härtung #468). Der direkte CLI-Aufruf `claude_stilpolitur.py --fix` bleibt dagegen fail-closed (Exit 3), wenn das Token fehlt.
 
@@ -143,6 +158,13 @@ python3 scripts/claude_stilpolitur.py --selftest         # 16 eingefrorene Fäll
 - `data/claude_stil_state.json` (Fingerprint-State, versioniert)
 
 Exit-Codes: `0` = sauber/gelaufen · `1` = offene Kandidaten (nur `--strict`) · `2` = Selbsttest rot · `3` = `--fix` ohne `PUTER_AUTH_TOKEN`.
+
+Wirksamkeits-Urteil (im Workflow nach jedem Claude-Lauf, lokal jederzeit nutzbar):
+
+```bash
+python3 scripts/claude_stilpolitur_wirkung.py            # ok|… · wirkungslos|… · unklar|…
+python3 scripts/claude_stilpolitur_wirkung.py --selftest # Sabotage-Schutz
+```
 
 ---
 
