@@ -85,13 +85,20 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/keyword_optimizer.py --selftest
-          python3 scripts/keyword_optimizer.py --fix | tee /tmp/kw_heal_log.txt
           python3 scripts/keyword_gate.py --selftest
-          python3 scripts/keyword_gate.py --fix | tee /tmp/kw_gate_log.txt
           python3 scripts/keyword_optimizer.py --ai --apply | tee /tmp/kw_audit_log.txt
-          cat /tmp/kw_heal_log.txt /tmp/kw_gate_log.txt /tmp/kw_audit_log.txt > /tmp/kw_combined.txt
+          python3 scripts/keyword_gate.py | tee /tmp/kw_gate_log.txt
+          gate_rc=${PIPESTATUS[0]}
+          cat /tmp/kw_audit_log.txt /tmp/kw_gate_log.txt > /tmp/kw_combined.txt
           cat /tmp/kw_combined.txt
-          exit ${PIPESTATUS[0]}
+          exit "$gate_rc"
+        # REDUNDANZ-AUFLÖSUNG (30.09.2026, Automatik-Audit): Die Fix-Läufe
+        # „keyword_optimizer --fix" und „keyword_gate --fix" sind aus diesem
+        # Wochenschritt entfernt – die TÄGLICHE Blog-Gesundheitswache
+        # (blog-health-daily.yml, Premium #303) heilt Keyword-Lücken im
+        # Bestand jeden Tag. Dieser Schritt behält die echte Wochenarbeit:
+        # KI-LSI-Vorschläge (--ai --apply) + reines Prüfgate ohne --fix,
+        # damit der Issue-Trigger unten weiter Restbedarf meldet.
 
       - name: LSI-Keyword-Änderungen committen
         # PREMIUM-FIX #233 (09.09.2026): Der Schritt lief wochenlang NIE –
@@ -240,29 +247,22 @@ jobs:
           python3 scripts/spellcheck.py --fix | tee /tmp/spell_log.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Grammatikprüfung aller Artikel (LanguageTool de-DE)
-        # Wöchentliche Komplettprüfung: Grammatik, Zeichensetzung,
-        # Kontext-Fehler in allen Posts – eindeutige Korrekturen werden
-        # automatisch angewendet (Stil-Fälle nur im Report).
-        # OFFLINE-UMBAU 25.09.2026: grammar_check läuft komplett offline
-        # (LanguageTool-Nachbau LT1–LT4, ohne API, ohne Netz).
-        # BUGFIX 13.08.: fehlendes continue-on-error ließ diesen (rein
-        # informativen) Schritt bei verbleibenden Stil-Funden den GESAMTEN
-        # Workflow abbrechen – alle nachfolgenden Schritte (Cover-Check,
-        # Meta-Gate, A11y, IndexNow, Bestand-Gate) liefen dadurch nie.
-        continue-on-error: true
-        run: |
-          python3 scripts/grammar_check.py --fix | tee /tmp/grammar_log.txt
-          exit ${PIPESTATUS[0]}
-
-      - name: Sprachglatt-Politur aller Artikel (DeepL-Write-Nachbau, offline)
-        # Wöchentliche Komplett-Glättung (DW1–DW9): Behörden-/Nominalstil
-        # → knackig, 100 % offline, kostenlos, ohne API (25.09.2026).
-        # V1-Vorschläge nur im Report, nie Auto-Fix.
-        continue-on-error: true
-        run: |
-          python3 scripts/sprachglatt.py --fix | tee /tmp/sprachglatt_log.txt
-          exit ${PIPESTATUS[0]}
+      # ------------------------------------------------------------
+      # REDUNDANZ-AUFLÖSUNG (30.09.2026, Automatik-Audit):
+      # Die Schritte „Grammatikprüfung aller Artikel" (grammar_check
+      # --fix) und „Sprachglatt-Politur aller Artikel" (sprachglatt
+      # --fix) sind hier ENTFERNT – sie liefen byte-identisch zur
+      # Offline-Kette der Claude-Stilpolitur (claude-stilpolitur.yml,
+      # Mo/Mi/Fr 04:50 UTC, Schritt „Offline-Optimierung – IMMER
+      # zuerst"). Ein und derselbe Bestands-Fix lief damit mittwochs
+      # doppelt (05:50 + 08:00 Uhr MESZ). SSOT für Grammatik (LT1–LT4)
+      # und Sprachglatt (DW1–DW9) über den GESAMTEN Bestand ist seit
+      # 25.09.2026 die Claude-Stilpolitur; der Geburtslauf der
+      # Content-Engine deckt neue Artikel ab (--new-only), die
+      # ZEIT-Rechtschreib-Wache montags die Rechtschreib-Ebene.
+      # Rechtschreib-Check (hunspell) bleibt hier – er lief in dieser
+      # Vollbestands-Form nur in diesem Workflow.
+      # ------------------------------------------------------------
 
       - name: Lesbarkeits-Audit aller Artikel
         # Wöchentliche Komplettprüfung der Lesbarkeit – meldet Artikel
@@ -276,48 +276,16 @@ jobs:
             --report LESBARKEIT-REPORT.md | tee /tmp/read_audit.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Textverständnis-Audit (R2–R8 Komplettprüfung + R8-Anker-Selbstheilung)
-        # WÖCHENTLICHES VERSTÄNDNIS-AUDIT (Regelwerk: Verständnis-Guards R1–R10):
-        # Läuft als Komplett-Audit über ALLE Artikel – nicht nur über neue.
-        # - textverstaendnis_guard.py prüft R2 (Keyword-Dumps), R3 (Terminologie),
-        #   R4 (Satzanfangs-Echo), R5 (Absatzlänge), R7 (Intro-Formeln),
-        #   R8 (Ankertext-Ziel-Kohärenz + URL-Hygiene)
-        # - fix_r8_anker.py --fix heilt erkannte R8-Ankertext-Mismatches
-        #   deterministisch (Kanon). Neue Ankertext-Formulierungen müssen
-        #   mit dem Kanon in scripts/fix_r8_anker.py abgestimmt sein.
-        # Duplikat-Prüfung (R1) läuft separat (siehe duplikat_guard.py – Bestand).
-        id: verstaendnis
-        continue-on-error: true
-        run: |
-          python3 scripts/textverstaendnis_guard.py --selftest
-          python3 scripts/fix_r8_anker.py --selftest
-          python3 scripts/fix_r8_anker.py --fix || echo "⚠ R8-Anker: Restfunde siehe Report"
-          python3 scripts/textverstaendnis_guard.py
-          cat TEXTVERSTAENDNIS-REPORT.md | head -10
-          exit 0
-
-      - name: Textverständnis-Report und -Fixes committen
-        # GENAU HIER starb Lauf #23 / Issue #233 (09.09.2026): Ein EINMALIGER
-        # transienter Netzwerkfehler beim git-pull im git_sync.sh machte den
-        # Schritt rot – 18 nachfolgende Schritte (Affiliate-, Bestand-,
-        # Cover-, Meta-Gates, IndexNow) wurden komplett übersprungen.
-        # Doppelt gehärtet: (1) git_sync.sh wiederholt fetch/rebase/push mit
-        # Backoff + Rettungsanker, (2) dieser Schritt bleibt bei einem
-        # Rest-Fehler nicht-killend – das Fangnetz am Ende sichert alles.
-        if: always()
-        continue-on-error: true
-        run: |
-          git config user.name "SEO-Bot"
-          git config user.email "seo-bot@users.noreply.github.com"
-          # 12.09.2026 (Premium-Audit): Report gitignored/nicht versioniert.
-          git add data/verstaendnis_history.jsonl 2>/dev/null || true
-          git add content/ 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo "Textverständnis: keine Änderungen."
-          else
-            git commit -m "seo: Textverständnis-Audit + Anker-Heilung (R2–R8 Premium)"
-            scripts/git_sync.sh --push-only
-          fi
+      # ------------------------------------------------------------
+      # REDUNDANZ-AUFLÖSUNG (30.09.2026, Automatik-Audit):
+      # Der Schritt „Textverständnis-Audit (R2–R8 + R8-Anker-Heilung)"
+      # samt Commit-Schritt ist hier ENTFERNT – er lief identisch zur
+      # TÄGLICHEN Blog-Gesundheitswache (blog-health-daily.yml, 05:45
+      # UTC: fix_r8_anker --fix + textverstaendnis_guard Komplett-Audit
+      # über alle Artikel). Eine wöchentliche Wiederholung desselben
+      # Audits am selben Bestand brachte keine zusätzliche Deckung –
+      # die Tageswache ist die SSOT für R2–R8 im Bestand.
+      # ------------------------------------------------------------
 
       - name: Affiliate-Link-Check (Deep-Links – VOLLAUTOMATISCH)
         # Wöchentliche Komplettprüfung ALLER Posts + Pillar-Seiten:

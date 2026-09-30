@@ -106,7 +106,7 @@ mit den konkreten Prüfkommandos. Wer es genau wissen will: Awinexport
 
 | Takt | Workflow | Aufgabe |
 |---|---|---|
-| ~alle 6 h | `revenue-import.yml` | Umami-Views + CTA-Klicks + Affiliate-Klicks + Awin-API → Daten committen; Funnel neu berechnet in die Lauf-Zusammenfassung |
+| 2×/Tag (06:10 + 18:10 MESZ; war ~alle 6 h, Audit 30.09.) | `revenue-import.yml` | Umami-Views + CTA-Klicks + Affiliate-Klicks + Awin-API → Daten committen; Funnel neu berechnet in die Lauf-Zusammenfassung |
 | Montag 07:15 | `premium-governance.yml` | Alles messen → GATE bewertet → Scorecard (zeigt Datenalter + Messlücken des Funnels) → bei Befund: EIN Issue mit Label `governance` |
 | PR/push auf layouts/e2e | `e2e.yml` | Playwright `affiliate-guard`: jeder gebaute CTA trägt Event+Slug+SubID+Placement (der Layout-Vertrag) |
 

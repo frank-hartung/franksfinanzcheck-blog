@@ -2,12 +2,15 @@
 #  FRISTEN-CHECK (RECHT) – kostenloses Erinnerungssystem
 #  Fristen-Check + Issue-Eskalation
 #
-#  READY-TO-PASTE-DATEI: Diese Datei gehört (als identical Kopie)
-#  nach .github/workflows/fristen-check.yml – sie liegt nur hier
-#  im patches/-Ordner, weil das Agent-Token Workflow-Pfade nicht
-#  pushen darf. Einmalig kopieren (Web-UI oder git apply des
-#  Patches fristen-check-2026-08-30-workflows.patch), danach ist
-#  dieser Ordner hier nur noch Referenz.
+#  HINWEIS ZUM DATEINAMEN (30.09.2026, Automatik-Audit): Diese Datei
+#  hieß bislang fristen-check-2026-08-30-workflow-ready.yml – ein
+#  Ready-to-Paste-Name aus der Zeit, als Agent-Token Workflow-Pfade
+#  nicht pushen durften und die Datei von Hand kopiert werden musste
+#  (siehe docs/CLEANUP-REPORT-2026-08-31.md: „Workflow-Rename … kann
+#  nicht via GitHub-App-Token gepusht werden"). Der Rename ist jetzt
+#  ausgeführt. Watch-Listen (Fehler-Alerting, Deploy-Catchup) matchen
+#  auf den Workflow-Namen „Fristen-Check (Recht)", der unverändert
+#  bleibt – der Cron läuft nach dem Merge nahtlos weiter.
 #
 #  Prüft TÄGLICH (07:55 MESZ):
 #    1. Fristen aus data/recht-fristen.yaml

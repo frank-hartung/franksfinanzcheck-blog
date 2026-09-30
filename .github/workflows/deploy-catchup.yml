@@ -54,6 +54,15 @@ on:
       - "Blog-Gesundheits-Check (täglich)"
       - "Mastodon-SEO"
       - "Premium-Governance"
+      # AUDIT 30.09. (Redundanz-/Lückenprüfung): Diese fünf Läufe committen
+      # Content-Heilungen per GITHUB_TOKEN – sie lösen selbst keinen Deploy
+      # aus und fehlten im Schnellpfad. Ohne Eintrag warteten ihre Fixes
+      # bis zur stündlichen Backstop-Runde statt Minuten nach Commit.
+      - "Claude-Stilpolitur (Mo/Mi/Fr)"   # Offline-Kette heilt Grammatik/Glätte im Bestand
+      - "ZEIT-Niveau Rechtschreib-Wache"  # heilt eindeutige Rechtschreib-Fälle
+      - "Redaktions-Standard Bestand (Capital/WiWo/ZEIT)"   # KI-Hebung von 3 Altartikeln/Woche
+      - "Faktenfrische (Bestand)"         # aktualisiert Zahlen/Daten im Bestand
+      - "Redaktions-Politur (Sprachglatt + Grammatik, offline)"  # manueller Notlauf, committet content/
     types:
       - completed
 

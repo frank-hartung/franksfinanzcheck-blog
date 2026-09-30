@@ -117,9 +117,11 @@ curl -s https://franksfinanzcheck.de/ | grep -o "v=[a-f0-9]\{7\}" | head -1
 data/recht-fristen.yaml          # Fristen-Kalender (redaktionell gepflegt)
 data/fristen_state.json          # Erledigungen + Issue-/Eskalations-Marker (Bot)
 scripts/fristen_check.py         # Auswertung + Scan + Eskalation
-.github/workflows/fristen-check.yml   # täglich 07:55 MESZ – LIEGT ALS PATCH BEREIT:
-patches/fristen-check-2026-08-30-workflows.patch  # (Agent-Token ohne workflows-Scope;
-                                   #  einmalig anwenden + committen, dann aktiv)
+.github/workflows/fristen-check.yml   # täglich 07:55 MESZ – AKTIV (30.09.2026
+                                   #  aus der ready-Datei umbenannt; der alte
+                                   #  Temporär-Name stammte aus der Zeit, in der
+                                   #  Workflow-Pfade nur per Hand kopiert werden
+                                   #  konnten)
 FRISTEN-REPORT.md                # generierter Status-Report
 ```
 

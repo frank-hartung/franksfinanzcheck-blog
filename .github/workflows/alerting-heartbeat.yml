@@ -36,7 +36,9 @@ name: Alerting-Herzschlag (workflow_run-Zustellung)
 
 on:
   schedule:
-    - cron: "50 4 * * *"   # täglich 04:50 UTC – nach dem nächtlichen Gate,
+    # AUDIT 30.09. (Kollision entzerrt): war 04:50 UTC – exakt die Minute
+    # der Claude-Stilpolitur (Mo/Mi/Fr). 04:47 ändert am 26-h-Fenster nichts.
+    - cron: "47 4 * * *"   # täglich 04:47 UTC – nach dem nächtlichen Gate,
                            # vor dem Morgen; Fenster deckt 26 h rückwärts ab
   workflow_dispatch: {}
 
