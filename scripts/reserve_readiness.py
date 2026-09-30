@@ -114,6 +114,55 @@ def score_diagnosis(index) -> dict | None:
         return {"fehler": str(exc)}
 
 
+def certify_one(index) -> dict:
+    """Zertifiziert GENAU EINEN Entwurf am echten Produktions-Gate.
+
+    Herausgelöst am 30.09.2026 (#462), damit die Nachzertifizierung
+    (`scripts/reserve_recert.py`) exakt dieselbe Messung benutzt wie der
+    nächtliche Volllauf. Zwei Messvorschriften für dieselbe Reife wären
+    genau die Sorte „zweite Wahrheit“, die dieses Repo schon mehrfach
+    Dauer-Alarme gekostet hat (#272, #393).
+
+    Der Entwurf wird für die Messung kurz auf `draft: false` gesetzt und
+    danach BYTEGENAU zurückgeschrieben – das Zertifikat gilt für genau
+    diese Bytes.
+    """
+    original = index.read_text(encoding="utf-8")
+    diag = score_diagnosis(index)
+    ready, reason, details = False, None, []
+    try:
+        rp.publish_one(index)
+        ready, gate_text = capture_gate(index)
+        if not ready:
+            details = gate_findings(gate_text)
+            if diag and diag.get("score") is not None \
+                    and diag["score"] < 0.85:
+                schwach = ", ".join(
+                    f"{k} {v:.2f}" for k, v in sorted(
+                        diag.get("parts", {}).items(),
+                        key=lambda kv: kv[1])[:3])
+                reason = (f"quality-score {diag['score']} < 0.85 "
+                          f"(schwach: {schwach})")
+            else:
+                # REPARATUR 15.09.2026 (#295): der KONKRETE Gate-Fund,
+                # nicht der Platzhalter („Details im Workflow-Log“).
+                reason = grund_aus_funden(details)
+    except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
+        ready, reason = False, f"Gate-Ausnahme: {exc}"
+    finally:
+        index.write_text(original, encoding="utf-8")
+    row = {"slug": index.parent.name, "ready": ready,
+           "sha256": hashlib.sha256(original.encode()).hexdigest()}
+    if reason:
+        row["reason"] = reason
+    if details:
+        row["details"] = details
+    if diag:
+        row["score"] = diag.get("score")
+        row["parts"] = diag.get("parts")
+    return row
+
+
 def prune_stale_rows(rows: list[dict]) -> list[dict]:
     """Zählt nur echte Reserve-Entwürfe – nie bereits LIVE geschaltete.
 
@@ -144,40 +193,7 @@ def main():
     # Nur aktuelle Reserve-Entwürfe (draft+reserve). Bereits veröffentlichte
     # Kandidaten (reserve_published) erscheinen hier bewusst nicht mehr.
     for index in rp.reserve_drafts():
-        original = index.read_text(encoding="utf-8")
-        diag = score_diagnosis(index)
-        ready, reason, details = False, None, []
-        try:
-            rp.publish_one(index)
-            ready, gate_text = capture_gate(index)
-            if not ready:
-                details = gate_findings(gate_text)
-                if diag and diag.get("score") is not None \
-                        and diag["score"] < 0.85:
-                    schwach = ", ".join(
-                        f"{k} {v:.2f}" for k, v in sorted(
-                            diag.get("parts", {}).items(),
-                            key=lambda kv: kv[1])[:3])
-                    reason = (f"quality-score {diag['score']} < 0.85 "
-                              f"(schwach: {schwach})")
-                else:
-                    # REPARATUR 15.09.2026 (#295): der KONKRETE Gate-Fund,
-                    # nicht der Platzhalter („Details im Workflow-Log“).
-                    reason = grund_aus_funden(details)
-        except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
-            ready, reason = False, f"Gate-Ausnahme: {exc}"
-        finally:
-            index.write_text(original, encoding="utf-8")
-        row = {"slug": index.parent.name, "ready": ready,
-               "sha256": hashlib.sha256(original.encode()).hexdigest()}
-        if reason:
-            row["reason"] = reason
-        if details:
-            row["details"] = details
-        if diag:
-            row["score"] = diag.get("score")
-            row["parts"] = diag.get("parts")
-        rows.append(row)
+        rows.append(certify_one(index))
 
     # REPARATUR 15.09.2026 (#295): Ein Kandidat, den kein Heiler reparieren
     # kann, darf den Zielbestand nicht dauerhaft unerreichbar machen. Nach

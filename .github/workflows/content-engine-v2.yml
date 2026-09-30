@@ -496,6 +496,21 @@ jobs:
         continue-on-error: true
         run: python3 scripts/publication_release.py
 
+      # PRÄVENTION #462 (30.09.2026): Wer Entwürfe anfasst, erneuert ihren
+      # Nachweis. Dieser Lauf heilt Reserve-Entwürfe (Politur, Rechtschreibung,
+      # Links, Meta) und machte damit bisher das bytegebundene Reife-Zertifikat
+      # ungültig – ohne es zu erneuern. Am nächsten Morgen meldete der
+      # Bot-Watchdog „Zertifikat passt nicht mehr zum Entwurf" und die
+      # Veröffentlichungslinie fand einen Pool, den sie nicht anfassen durfte.
+      # Hier steht die komplette Messkette bereits (Hugo + hunspell), deshalb
+      # kostet die Nachzertifizierung nur die tatsächlich geänderten Entwürfe.
+      - name: Reserve-Zertifikat nachziehen (#462)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          python3 scripts/reserve_recert.py --selftest
+          python3 scripts/reserve_recert.py --fix || true
+
       - name: Persist final acceptance corrections
         if: ${{ !cancelled() }}
         run: |

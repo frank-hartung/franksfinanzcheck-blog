@@ -249,5 +249,44 @@ class WatchdogKanalTestCase(unittest.TestCase):
         self.assertIn("veraltet", text)
 
 
+class ReserveBefundRoutetNachUrsache(unittest.TestCase):
+    """#462: Der nächste Schritt muss zur Ursache passen.
+
+    Zertifikats-Drift (Heiler-Lauf nach der Zertifizierung) ist ein
+    NACHWEIS-Problem und in Sekunden nachzertifiziert. Ein echter Engpass
+    ist ein PRODUKTIONS-Problem. Beide teilten sich bis #462 denselben
+    Befundtext – das Ticket war damit nie abarbeitbar und kam täglich zurück.
+    """
+
+    def tearDown(self):
+        bw.RESERVE_DIAGNOSE.clear()
+
+    def _diagnose(self, certified, drifted, minimum=4):
+        bw.RESERVE_DIAGNOSE.clear()
+        bw.RESERVE_DIAGNOSE.update({"certified": certified, "minimum": minimum,
+                                    "ziel": 6, "drifted": drifted, "pool": 8})
+
+    def test_drift_verweist_auf_die_nachzertifizierung(self):
+        self._diagnose(certified=2, drifted=["a", "b"])
+        f = bw.reserve_finding("Reserve unter Mindestbestand (…)")
+        self.assertIn("Zertifikat veraltet", f.title)
+        self.assertIn("reserve_recert.py --fix", f.next_step)
+        self.assertEqual(f.owner, "auto")
+
+    def test_echter_engpass_verweist_weiter_auf_die_produktionslinie(self):
+        self._diagnose(certified=1, drifted=[])
+        f = bw.reserve_finding("Reserve unter Mindestbestand (…)")
+        self.assertIn("Content-Reserve niedrig", f.title)
+        self.assertIn("content-reserve.yml", f.next_step)
+
+    def test_drift_ohne_tragfaehigen_bestand_bleibt_produktionsbefund(self):
+        # 0 zertifiziert + 1 gedriftet trägt die Schwelle 4 NICHT: Auch nach
+        # perfekter Nachzertifizierung fehlt Content – dann darf der Befund
+        # nicht beschwichtigen.
+        self._diagnose(certified=0, drifted=["a"])
+        f = bw.reserve_finding("Reserve unter Mindestbestand (…)")
+        self.assertIn("Content-Reserve niedrig", f.title)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

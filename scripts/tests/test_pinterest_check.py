@@ -59,5 +59,38 @@ class PinterestReportProvenanceTests(unittest.TestCase):
         )
 
 
+    def test_prosa_aenderung_entwertet_den_report_nicht(self):
+        """#462: Der Nachweis gilt dem PIN-RELEVANTEN Quellenstand.
+
+        Vorher hashte der Fingerabdruck die kompletten Artikel-Bytes. Jede
+        Stilpolitur und jeder neue Absatz machte den Pinterest-Report
+        „veraltet“, obwohl keine einzige Pinterest-Prüfung ein anderes
+        Ergebnis geliefert hätte – ein täglicher Alarm ohne Erkenntnis.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            post = Path(tmp) / "content" / "posts" / "a" / "index.md"
+            post.parent.mkdir(parents=True)
+            fm = ('---\ntitle: Eins\npin_title: "Pin Eins"\n'
+                  'pin_description: "Text"\n---\n')
+            post.write_text(fm + "Absatz eins.\n", encoding="utf-8")
+            with patch.object(pc, "BLOG_DIR", tmp):
+                vorher = pc.source_fingerprint()
+                post.write_text(fm + "Absatz eins, sprachlich poliert.\n",
+                                encoding="utf-8")
+                nach_politur = pc.source_fingerprint()
+                post.write_text(fm.replace("Pin Eins", "Pin Zwei")
+                                + "Absatz eins.\n", encoding="utf-8")
+                nach_pin_feld = pc.source_fingerprint()
+                post.write_text(fm + "Absatz [Angebot](/go/check24-strom/).\n",
+                                encoding="utf-8")
+                nach_gateway = pc.source_fingerprint()
+        self.assertEqual(vorher, nach_politur,
+                         "Prosa-Politur darf den Pinterest-Nachweis nicht entwerten")
+        self.assertNotEqual(vorher, nach_pin_feld,
+                            "Pin-Felder MÜSSEN den Nachweis entwerten")
+        self.assertNotEqual(vorher, nach_gateway,
+                            "Affiliate-Gateways (P11/P12) MÜSSEN zählen")
+
+
 if __name__ == "__main__":
     unittest.main()

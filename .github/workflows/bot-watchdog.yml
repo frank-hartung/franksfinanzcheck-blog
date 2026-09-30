@@ -125,6 +125,78 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/watchdog_recovery.py --reserve
 
+      # ------------------------------------------------------------
+      #  SELBSTHEILUNG #462 (30.09.2026) – „Automatisierung braucht Eingriff"
+      #  ------------------------------------------------------------
+      #  Zwei Befunde kamen täglich zurück, weil der Melder sie zwar sehen,
+      #  aber niemand sie heilen konnte:
+      #    a) Zertifikats-Drift der Reserve: Heiler-Läufe (Stilpolitur,
+      #       Rechtschreibung, Pinterest-SEO) fassen zertifizierte Entwürfe
+      #       an – das hash-gebundene Zertifikat verfällt, obwohl der Artikel
+      #       fachlich fertig ist. Geheilt wird er hier mit derselben
+      #       Messvorschrift wie im Nachtlauf (nur die betroffenen Entwürfe).
+      #    b) Pinterest-Report-Provenienz: Der Report entsteht um 04:30 UTC,
+      #       der Morgen-Artikel um 08:10 – beim Watchdog um 08:30 war der
+      #       Nachweis per Konstruktion alt. Der Fingerabdruck deckt seit
+      #       #462 nur noch den pin-relevanten Quellenstand ab; ein neuer
+      #       Artikel bleibt aber eine echte Änderung und wird hier mit einem
+      #       vollwertigen Lauf (Hugo-Build + --fix) nachgezogen.
+      #  Beide Schritte laufen NUR bei Befund, sind idempotent und dürfen den
+      #  Melder nie röten (continue-on-error).
+      - name: Hugo installieren (für echte Nachmessungen)
+        if: ${{ contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Reserve-Zertifikat nachziehen (#462)
+        if: ${{ contains(env.CHECK8, 'WARN') }}
+        continue-on-error: true
+        run: |
+          python3 -m pip install -q pyyaml 2>/dev/null || true
+          # VOLLSTÄNDIGE Messkette – ohne hunspell wertet quality_score
+          # spelling als „unbekannt" (0.5) und würde gesunde Kandidaten
+          # abwerten. reserve_recert.py bricht dann fail-closed ab (Exit 3);
+          # dieser Schritt sorgt dafür, dass es gar nicht erst dazu kommt.
+          sudo apt-get update -qq || true
+          sudo apt-get install -y -qq hunspell hunspell-de-de || true
+          python3 scripts/reserve_recert.py --selftest
+          set +e
+          python3 scripts/reserve_recert.py --fix
+          echo "recert_exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          set -e
+          GIT_USER="Bot-Watchdog" GIT_MAIL="bot-watchdog@users.noreply.github.com" \
+            scripts/git_sync.sh "chore(reserve): Zertifikat nachgezogen (#462)" \
+            data/reserve-readiness.json
+
+      - name: Pinterest-Report nachziehen (#462)
+        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        continue-on-error: true
+        run: |
+          python3 -m pip install -q pyyaml 2>/dev/null || true
+          hugo --minify || true
+          set +e
+          python3 scripts/pinterest_check.py --fix
+          echo "pinterest_exit=$?" >> "$GITHUB_STEP_SUMMARY"
+          set -e
+          GIT_USER="Bot-Watchdog" GIT_MAIL="bot-watchdog@users.noreply.github.com" \
+            scripts/git_sync.sh "chore(pinterest): Report nachgezogen (#462)" \
+            PINTEREST-REPORT.md content/posts static/robots.txt
+
+      # Nach der Selbstheilung wird NEU gemessen – sonst meldet das Routing
+      # einen Zustand, den dieser Lauf bereits repariert hat (ein Ticket für
+      # ein gelöstes Problem ist derselbe Vertrauensverlust wie ein
+      # übersehener Fehler).
+      - name: Nachmessung (geheilte Befunde dürfen kein Ticket erzeugen)
+        if: ${{ contains(env.CHECK8, 'WARN') || contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/bot_watchdog.py --emit-env
+          echo "--- Befunde nach Selbstheilung ---"
+          cat /tmp/problems.txt || echo "(keine)"
+
       - name: Zusammenfassung
         if: always()
         run: |
