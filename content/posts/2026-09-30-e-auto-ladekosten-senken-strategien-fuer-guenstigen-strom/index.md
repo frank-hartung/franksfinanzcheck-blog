@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "E-Auto Ladekosten senken", "E-Auto"]
+keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "E-Auto Ladekosten senken", "E-Auto", "E Auto Ladekosten senken", "Ladekosten", "Strategien"]
 pin_title: "E-Auto Ladekosten senken: Strategien für günstigen Strom"
 pin_description: "*Werbung | Wer E-Auto Ladekosten reduzieren will, braucht den richtigen Mix aus Tarif und Technik. Erfahre, wie du beim Laden zu Hause und unterwegs effektiv sparst. Mehr Spartipps auf FranksFinanzcheck! #eautoladekosten #stromtarifeauto #wallboxsparen"
 ai_generated: true

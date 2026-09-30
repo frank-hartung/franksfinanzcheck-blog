@@ -10,7 +10,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen", "Schnappst"]
+keywords: ["Last Minute Urlaub", "Reiseangebote günstig", "Sommerurlaub Schnäppchen"]
 pin_title: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
 pin_description: "*Werbung | Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst. Mehr Spartipps auf FranksFinanzcheck! #lastminuteurlaub #reiseangeboteguenstig #sommerurlaubschnaeppchen"
 ai_generated: true

@@ -4,13 +4,13 @@ description: Wer klug sein Weihnachten Budget planen kann, vermeidet den Januar-
 date: 2026-09-30T10:01:33Z
 draft: true
 reserve: true
-tags: ["Budget planen"]
+tags: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Weihnachten ohne Schulden"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Weihnachten ohne Schulden", "Weihnachten", "Entspannt", "Schulden"]
+keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Weihnachten ohne Schulden", "Weihnachten"]
 pin_title: "Weihnachten Budget planen: Entspannt feiern ohne Schulden"
 pin_description: "*Werbung | Wer klug sein Weihnachten Budget planen kann, vermeidet den Januar-Blues. Erfahre, wie du 2026 finanziell gelassen bleibst und Schulden vermeidest. Mehr Spartipps auf FranksFinanzcheck! #weihnachtenbudgetplanen #weihnachtensparen #geschenkebudget"
 ai_generated: true

@@ -4,7 +4,7 @@ lastmod: 2026-09-28
 description: "Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst."
 date: 2026-09-23T08:00:00Z
 draft: true
-tags: ["Kreditkarte und Kredit"]
+tags: ["Ratenkredit", "Ratenkredit Vergleich", "Ratenkredit Zinsen", "effektiver Jahreszins"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 keywords: ["Ratenkredit", "Ratenkredit Vergleich", "Ratenkredit Zinsen", "effektiver Jahreszins", "Umschuldung", "Dispo ablösen", "Restschuldversicherung", "Kredit aufnehmen"]

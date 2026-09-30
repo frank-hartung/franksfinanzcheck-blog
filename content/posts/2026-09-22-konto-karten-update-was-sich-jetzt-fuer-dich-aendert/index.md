@@ -19,7 +19,7 @@ cover:
   image: "images/covers/2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Konto & Karten-Update: Was sich jetzt für dich ändert"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
+pin_title: "Konto & Karten-Update: Was sich jetzt für dich ändert – So sparst du"
 pin_description: "*Werbung | Gebühren, Gratis-Kriterien und Kartenkosten ändern sich laufend. So prüfst du dein Girokonto, vermeidest stille Mehrkosten und vergleichst klug. Mehr Spartipps auf FranksFinanzcheck! #kontokartenupdate #kartenupdate #girokontovergleichen"
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"

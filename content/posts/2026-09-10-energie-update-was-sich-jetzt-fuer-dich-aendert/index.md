@@ -4,7 +4,7 @@ description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Eino
 date: 2026-09-23T08:10:00Z
 lastmod: 2026-09-25
 draft: true
-tags: ["Stromkosten senken"]
+tags: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
 categories: ["News"]
 keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]
 author: "Frank Hartung"
@@ -36,7 +36,6 @@ quellen:
     datum: "2026-07-15"
 faktencheck: "2026-09-27"
 ---
-
 
 **Stand: 10.09.2026.** Diese News-Einordnung fasst die aktuelle Lage kompakt zusammen. Tarife und Regeln ändern sich laufend – prüfe Details immer direkt beim jeweiligen Anbieter.
 

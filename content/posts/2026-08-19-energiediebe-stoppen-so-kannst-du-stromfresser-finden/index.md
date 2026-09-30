@@ -4,7 +4,7 @@ description: "Energiediebe stoppen: Stromfresser finden statt raten: Mit Messpla
 date: 2026-08-19T08:35:12Z
 lastmod: 2026-09-28
 draft: false
-tags: ["Stromkosten senken"]
+tags: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

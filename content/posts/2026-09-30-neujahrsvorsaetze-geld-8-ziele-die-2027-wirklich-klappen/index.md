@@ -4,7 +4,7 @@ description: "Neujahrsvorsätze Geld: So setzt du finanzielle Ziele 2027 erfolgr
 date: 2026-09-30T09:55:04Z
 draft: true
 reserve: true
-tags: ["Versicherungen vergleichen"]
+tags: ["Neujahrsvorsätze Geld", "Finanzielle Ziele 2027", "Sparziele erreichen", "Gewohnheiten ändern"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"

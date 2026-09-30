@@ -1,5 +1,5 @@
 ---
-title: "So wechselst du Ökostrom Anbieter: – günstig & seriös im Übe"
+title: "So wechselst du Ökostrom Anbieter: – günstig & seriös"
 description: "Ökostrom Anbieter wechseln: Erfahre, wie du Ökostrom Anbieter wechselst, grünen Strom günstig bekommst und Tarife effektiv vergleichst – praxisnah und ohne…"
 date: 2026-09-30T09:55:11Z
 draft: true
@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen", "So wechselst du Ökostrom Anbieter", "Wechselst"]
+keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen", "So wechselst du Ökostrom Anbieter"]
 pin_title: "So wechselst du Ökostrom Anbieter: – günstig & seriös im Übe"
 pin_description: "*Werbung | Ökostrom Anbieter wechseln: Erfahre, wie du Ökostrom Anbieter wechselst, grünen Strom günstig bekommst und Tarife effektiv vergleichst – praxisnah und ohne… Mehr Spartipps auf FranksFinanzcheck! #gruenerstromguenstig #wechselst #oekostrom"
 ai_generated: true

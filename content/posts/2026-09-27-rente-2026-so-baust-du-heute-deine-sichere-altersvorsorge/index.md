@@ -4,7 +4,7 @@ description: "Rente 2026: Altersvorsorge verständlich erklärt: Frank Hartung z
 date: 2026-09-28T01:05:51Z
 draft: false
 reserve_published: 2026-09-28
-tags: ["Altersvorsorge"]
+tags: ["Rente 2026", "Altersvorsorge", "Rentenlücke"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"

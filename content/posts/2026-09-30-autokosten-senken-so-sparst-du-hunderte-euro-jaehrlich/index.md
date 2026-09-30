@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Autokosten", "Versicherungen", "Kraftstoff", "Autokosten senken", "Hunderte"]
+keywords: ["Autokosten", "Versicherungen", "Kraftstoff", "Autokosten senken"]
 pin_title: "Autokosten senken: So sparst du hunderte Euro jährlich"
 pin_description: "*Werbung | Deine Autokosten fressen dein Budget auf? Frank Hartung zeigt dir, wie du bei Versicherungen und Kraftstoff sparst, ohne auf Mobilität zu verzichten. Mehr Spartipps auf FranksFinanzcheck! #autokosten #versicherungen #kraftstoff"
 ai_generated: true
