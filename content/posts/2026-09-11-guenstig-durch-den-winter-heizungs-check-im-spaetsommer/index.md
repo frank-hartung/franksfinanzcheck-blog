@@ -43,7 +43,17 @@ Du willst heizungs-check? Der erste kalte Montag ist ein schlechter Termin für 
 Ein Heizungs-Check ist dabei keine Bastelanleitung für Gasgeräte. Er trennt sauber: **beobachten und einfache Handgriffe selbst erledigen, sicherheitsrelevante Technik dem Fachbetrieb überlassen**.
 ### Dein Schnellstart
 
-Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche. Sieh nach Wasser. Teste die Thermostate. Notiere den Druck. Vergleiche ihn mit der Anleitung. Ändere nur eine Einstellung. Warte danach einige Tage. So erkennst du die Wirkung. Bei Gasgeruch gilt: nicht Weiterprüfen. Verlasse das Gebäude. Hole Hilfe von draußen. Auch bei starkem Druckverlust brauchst du Fachhilfe. Ein sauberer Check spart Zeit. Er ersetzt keine Wartung. Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
+Plane eine ruhige Stunde. Starte die Heizung kurz. Prüfe jeden Raum. Höre auf Geräusche.
+
+Sieh nach Wasser. Teste die Thermostate. Notiere den Druck. Vergleiche ihn mit der Anleitung.
+
+Ändere nur eine Einstellung. Warte danach einige Tage. So erkennst du die Wirkung.
+
+Bei Gasgeruch gilt: nicht Weiterprüfen. Verlasse das Gebäude. Hole Hilfe von draußen. Auch bei starkem Druckverlust brauchst du Fachhilfe.
+
+Ein sauberer Check spart Zeit. Er ersetzt keine Wartung.
+
+Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den Fachbetrieb.
 
 
 #### Prüfe in drei Schritten

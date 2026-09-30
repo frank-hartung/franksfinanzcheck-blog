@@ -256,7 +256,7 @@ Bearbeite zuerst Sicherheit, dann Fristen, danach Geld und Komfort. Ein Gasgeruc
 
 Für Geldthemen hilft eine einfache Schwelle: Beginne mit dem Punkt, der auf Basis deiner Rechnung den größten jährlichen Unterschied macht. Ein Tarifabstand von 300 € ist dringlicher als eine fünf Euro teure Thermostateinstellung. Bei Technik zählt dagegen nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht trotz unklarer Ersparnis fachliche Prüfung.
 
-Streiche erledigte Punkte und übertrage offene Aufgaben mit neuem Datum. So bleibt das Ergebnisblatt kurz. Nach dem Winter vergleichst du es mit Rechnung und Zählerreihe. Dann siehst du, welche Entscheidung Wirkung hatte und welche nur gut klang. „Wir lesen den Zähler ab“ heißt oft, dass es niemand tut. Name und Datum machen aus der guten Absicht einen erledigten Punkt.
+Streiche erledigte Punkte und übertrage offene Aufgaben mit neuem Datum. So bleibt das Ergebnisblatt kurz. Nach dem Winter vergleichst du es mit Rechnung und Zählerreihe. Dann siehst du, welche Entscheidung Wirkung hatte und welche nur gut klang.
 
 ## Aus der Stunde einen Jahresrhythmus machen
 

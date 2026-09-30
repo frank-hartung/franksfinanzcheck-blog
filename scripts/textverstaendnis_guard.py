@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TEXTVERSTÄNDNIS-GUARD (R2–R10) für FranksFinanzcheck.
+TEXTVERSTÄNDNIS-GUARD (R2–R15) für FranksFinanzcheck.
 
 Die Verständnis-Regeln aus dem Textverständnis-Audit (01.09.2026), die
 KEIN bestehendes Gate misst:
@@ -23,6 +23,27 @@ KEIN bestehendes Gate misst:
                            Editier-/Heiler-Kaskade; Lektorat 25.09.2026
                            heilte den Fall im alten Slug, das Rework trug
                            ihn wieder ein – R2–R9 sahen ihn nicht).
+  R11 Jahreszahl-Split     „Nutze 20 26 gezielt …“ – zerrissene Jahreszahl
+                           aus automatisierter Politur (#482, Weihnachten).
+  R12 Zahl-Ruine           „Du bist der 0 am deutschen Strommarkt“ –
+                           Artikel + nackte Zahl + Präposition, Überrest
+                           einer defekten Ersetzung (#482, Ökostrom).
+  R13 Datum-ohne-Punkt     „es ist der 2 Januar“ – Ordinalzahl vor
+                           Monatsname ohne Punkt (#482, Weihnachten;
+                           Zwillingsfund „am 1 Januar“, Neujahrs-Entwurf).
+  R14 Marker-Ruine         „SATZ: | **CHECK24-Vergleich** | – | | | | |“ –
+                           halbfertige Politur-Zeile (#482, E-Bike).
+  R15 Phrasen-Dopplung     identische ≥ 10-Wort-Sequenz im Fließtext eines
+                           Artikels – fingert das Doppel-Intro aus #482
+                           (Mietwagen: „Stell dir vor: Du stehst am
+                           Flughafen von Faro …“) und den mehr-freiheit-
+                           Doppelblock (08/2026), die D1/D2 verpassen
+                           (Ratio < 0,85 bzw. < 120 Zeichen).
+
+R11–R14 teilen sich die Muster-SSOT mit der Schreib-Verifikation:
+`sprachkern.POLITUR_RUINEN` (write_verified verweigert jede Schrift,
+die eine NEUE Ruine einführt). Diese Wache meldet sie zusätzlich im
+Bestands-Audit und blockiert die Veröffentlichung (Publish-Gate).
 
 MODI:
   python3 scripts/textverstaendnis_guard.py            # Report (alle Artikel)
@@ -44,6 +65,12 @@ try:
     import yaml
 except ImportError:
     yaml = None
+
+# Muster-SSOT für R11–R14 (Politur-Ruinen): sprachkern.POLITUR_RUINEN –
+# dieselben Muster, mit denen write_verified jede Schrift verweigert, die
+# eine NEUE Ruine einführt. Eine Quelle, zwei Einsatzstellen.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sprachkern import politur_ruine_funde  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
@@ -268,6 +295,8 @@ def check_article(rel: str, body: str, term: dict) -> list:
     finds += check_nested_links(rel, body)
     finds += check_klebewoerter(rel, body)
     finds += check_wortdopplung(rel, body)
+    finds += check_politur_ruinen(rel, body)
+    finds += check_phrasendoppel(rel, body)
     return finds
 
 
@@ -389,6 +418,68 @@ def check_wortdopplung(rel: str, body: str) -> list:
     return out
 
 
+# R11–R14 POLITUR-RUINEN (30.09.2026, Issue #482):
+# Vier echte Textdefekte aus automatisierten Politur-Läufen („Du bist der 0
+# am deutschen Strommarkt“, „es ist der 2 Januar“, „Nutze 20 26 gezielt
+# Mindestbestellwerte“, „SATZ: | **CHECK24-Vergleich** | …“) waren live im
+# Content – keine Wache maß sie. Die Muster liegen genau einmal in
+# sprachkern.POLITUR_RUINEN (SSOT): dort verweigert write_verified jede
+# Schrift, die eine NEUE Ruine einführt; hier werden sie gemeldet und
+# blockieren die Veröffentlichung. Am gesamten Content gegen False-Positive
+# geprüft (0 Treffer auf 61 Artikel + alle Seiten).
+def check_politur_ruinen(rel: str, body: str) -> list:
+    """Erkennt Politur-Ruinen R11–R14 (Muster-SSOT: sprachkern) – hart."""
+    out = []
+    for regel, fund in politur_ruine_funde(body):
+        out.append((rel, regel,
+                    f"Politur-Ruine „{fund}“ – Überrest eines automatisierten "
+                    f"Politur-Laufs, manuell reparieren", fund))
+    return out
+
+
+# R15-PHRASEN-DOPPEL (30.09.2026, Issue #482 – Mietwagen-Doppel-Intro):
+# Zwei Intro-Blöcke im selben Artikel („Du willst mietwagen schnäppchen? …“
+# vor der Politur, „Du willst ein Mietwagen-Schnäppchen? …“ danach) teilen
+# sich eine identische 13-Wort-Sequenz („Stell dir vor: Du stehst am
+# Flughafen von Faro. Die Luft ist warm“). duplikat_guard D1/D2 verpasste
+# beide (kein exaktes Absatz-Duplikat, Ratio < 0,85, < 120 Zeichen).
+# Grenzwert 10 Wörter: darunter liegen legitime Titel-Echos und
+# Kurzformeln („50 € bis 200 € mehr Spielraum im Monat“), darüber ist eine
+# wortgleiche Wiederholung im Fließtext immer ein Redaktionsfehler. Nur
+# Fließtext: Überschriften, Listen, Tabellen, Zitate, CTA-Boxen und
+# fett geführte Transparenz-Zeilen sind Struktur und bleiben außen vor.
+R15_N = 10
+
+
+def check_phrasendoppel(rel: str, body: str) -> list:
+    """Erkennt identische ≥ 10-Wort-Sequenzen im Fließtext eines Artikels
+    (Doppel-Intro, angehängte Blöcke) – harter Fehler, Redaktion entscheidet."""
+    out = []
+    text = " ".join(flow_paragraphs(body))
+    text = re.sub(r"\*+", "", text)
+    w = re.findall(r"[a-zäöüß0-9€%]+", text.lower())
+    seen = {}
+    gemeldete_spalten = []
+    for i in range(len(w) - R15_N + 1):
+        g = tuple(w[i:i + R15_N])
+        if g not in seen:
+            seen[g] = i
+            continue
+        erste = seen[g]
+        # Überlappende Folgefunde derselben Passage nur einmal melden
+        if any(a <= i <= b for a, b in gemeldete_spalten):
+            continue
+        if any(a <= erste <= b for a, b in gemeldete_spalten):
+            continue
+        frag = " ".join(g)
+        out.append((rel, "R15-PHRASEN-DOPPEL",
+                    f"identische {R15_N}-Wort-Sequenz im Fließtext: "
+                    f"„…{frag}…“ – doppelte Passage, manuell reparieren",
+                    frag))
+        gemeldete_spalten.append((i, i + R15_N - 1))
+    return out
+
+
 def run_selftest() -> list:
     fehler = []
     term = {"dns": {"leitbegriff": "DNS-Server", "synonyme": ["Resolver", "Namensauflösung"],
@@ -495,6 +586,70 @@ def run_selftest() -> list:
     if any(f[1] == "R10-DOPPELWORT" for f in check_article("t", body10d, {})):
         fehler.append("R10: False-Positive bei Überschrift→Absatz-Wiederholung")
 
+    # ---------- R11–R14 Politur-Ruinen (eingefrorene Schadensfälle #482) ----------
+    # R11: zerrissene Jahreszahl (Weihnachtsartikel, 30.09.2026)
+    body11 = ("TEXT\n\nVersandkosten fressen dein Budget auf. "
+              "Nutze 20 26 gezielt Mindestbestellwerte, um diesen Posten zu streichen.")
+    if not any(f[1] == "R11-JAHRESZAHL-SPLIT" for f in check_article("t", body11, {})):
+        fehler.append("R11: zerrissene Jahreszahl nicht erkannt")
+    # R11-Negativ: echte Tausender-Gruppen (DREIER-Blöcke) bleiben außen vor
+    for _ok in ("Bei 40 000 € netto sind das rund 2 000 €.",
+                "Der Sparplan läuft seit 1998 und trägt seit 2026 Früchte.",
+                "Rund 1 100 € im Jahr bleiben so in der Kasse."):
+        if any(f[1] == "R11-JAHRESZAHL-SPLIT" for f in check_article("t", "TEXT\n\n" + _ok, {})):
+            fehler.append(f"R11: False-Positive bei „{_ok}“")
+
+    # R12: Artikel + nackte Zahl + Präposition (Ökostromartikel, 30.09.2026)
+    body12 = ("TEXT\n\nFiltere beim Vergleich nach diesen Siegeln. "
+              "Du bist der 0 am deutschen Strommarkt und wirst von Umweltverbänden empfohlen.")
+    if not any(f[1] == "R12-ZAHL-RUINE" for f in check_article("t", body12, {})):
+        fehler.append("R12: Zahl-Ruine „der 0 am“ nicht erkannt")
+    # R12-Negativ: Ordinal-Daten mit Punkt und normale Mengen bleiben frei
+    for _ok in ("Der 3. Oktober ist der Tag der Deutschen Einheit.",
+                "Die 30 € Gebühr fällt nur im ersten Jahr an."):
+        if any(f[1] == "R12-ZAHL-RUINE" for f in check_article("t", "TEXT\n\n" + _ok, {})):
+            fehler.append(f"R12: False-Positive bei „{_ok}“")
+
+    # R13: Ordinal-Datum ohne Punkt (Weihnachten + Neujahrs-Entwurf, 30.09.2026)
+    body13 = "TEXT\n\nStell dir vor, es ist der 2 Januar 2026. Jedes Jahr am 1 Januar ist die Motivation riesig."
+    r13 = [f for f in check_article("t", body13, {}) if f[1] == "R13-DATUM-PUNKT"]
+    if len(r13) < 2:
+        fehler.append(f"R13: Datum ohne Punkt nicht erkannt (Funde: {len(r13)})")
+    # R13-Negativ: Datum MIT Punkt ist korrekt
+    if any(f[1] == "R13-DATUM-PUNKT" for f in check_article("t", "TEXT\n\nAm 2. Januar 2026 öffnest du deine App.", {})):
+        fehler.append("R13: False-Positive bei korrektem Datum mit Punkt")
+
+    # R14: Marker-Ruine am Zeilenanfang (E-Bike-Tabelle, 30.09.2026)
+    body14 = ("TEXT\n\n| Anbieter | Beitrag | Selbstbeteiligung |\n|---|---|---|\n"
+              "| **HUK‑Coburg** | 36 € | 100 € |\n"
+              "SATZ: | **CHECK24-Vergleich** | – | | | | |")
+    if not any(f[1] == "R14-MARKER-RUINE" for f in check_article("t", body14, {})):
+        fehler.append("R14: Marker-Ruine „SATZ:“ nicht erkannt")
+    # R14-Negativ: normale Satz-Anfänge und Kleingeschriebenes bleiben frei
+    for _ok in ("Der Satz: kurze Hauptsätze gewinnen.\n\nZähle deine Fixkosten auf.",
+                "Tipp: Prüfe die Laufzeit vor dem Abschluss."):
+        if any(f[1] == "R14-MARKER-RUINE" for f in check_article("t", "TEXT\n\n" + _ok, {})):
+            fehler.append(f"R14: False-Positive bei „{_ok}“")
+
+    # ---------- R15 Phrasen-Dopplung (Mietwagen-Doppel-Intro, #482) ----------
+    body15 = ("TEXT\n\n"
+              "Du willst mietwagen schnell machen? Stell dir vor: Du stehst am Flughafen von Faro. "
+              "Die Luft ist warm, doch die drückende Hitze ist jener milden Brise gewichen.\n\n"
+              "Dieses Privileg hast du dir Wochen zuvor gesichert.\n\n"
+              "Du willst ein Mietwagen-Schnäppchen? Stell dir vor: Du stehst am Flughafen von Faro. "
+              "Die Luft ist warm, andere Reisende haben im August horrende Summen bezahlt.\n\n"
+              "Dieses Privileg hast du dir ebenfalls Wochen zuvor gesichert.")
+    if not any(f[1] == "R15-PHRASEN-DOPPEL" for f in check_article("t", body15, {})):
+        fehler.append("R15: Doppel-Intro (identische 13-Wort-Sequenz) nicht erkannt")
+    # R15-Negativ: 9-Wort-Echo (Titel-Anklang) und einmalige Formeln bleiben frei
+    body15b = ("TEXT\n\n"
+               "Diese fünf einfachen Frugalismus-Tricks für den Alltag schaffen schnell Spielraum.\n\n"
+               "Die fünf einfachen Frugalismus-Tricks für den Alltag funktionieren, weil sie wiederholbar sind.\n\n"
+               "Ein Überschuss von 50 € bis 200 € mehr Spielraum im Monat ist realistisch. "
+               "Noch einmal: 50 € bis 200 € mehr Spielraum im Monat.")
+    if any(f[1] == "R15-PHRASEN-DOPPEL" for f in check_article("t", body15b, {})):
+        fehler.append("R15: False-Positive bei 9-Wort-Titel-Echo")
+
     return fehler
 
 
@@ -506,7 +661,7 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: R2–R10 grün.")
+        print("✅ Verständnis-Selbsttest: R2–R15 grün.")
         return 0
 
     term = load_terminologie()
@@ -546,6 +701,9 @@ def main() -> int:
             all_finds += check_nested_links(rel, body)
             all_finds += check_klebewoerter(rel, body)
             all_finds += check_wortdopplung(rel, body)
+            # R11–R14 (Regex-Ruinen) laufen auch auf Seiten – R15 bewusst
+            # nicht: Rechtsseiten wiederholen Adressen/Blöcke legitim.
+            all_finds += check_politur_ruinen(rel, body)
 
     # dedup
     uniq, seen = [], set()
@@ -567,7 +725,7 @@ def main() -> int:
              f"**Stand:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} · Artikel: {len(paths)}" +
              (f" · Seiten (Klebe-Scan): {len(seiten_paths)}" if not NEW_ONLY else " · Engine (nur heute)"),
              "",
-             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL/R9/R10):** {len(hard)} Funde",
+             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL/R9/R10/R11–R15):** {len(hard)} Funde",
              f"**Weiche Regeln (R4/R5/R8-Anker):** {len(soft)} Funde",
              ""]
     for rel, regel, detail, pos in uniq[:60]:

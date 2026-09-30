@@ -186,6 +186,34 @@ ToS verbieten Automation – im CI hart geblockt) → **offline**
 - Runbook + Datenschutz + Premium-Aktivierung:
   `docs/ANLEITUNG-ZEIT-RECHTSCHREIBUNG.md`.
 
+## Politur-Ruinen: Wache R11–R15 (seit 30.09.2026, Issue #482)
+
+Vier echte Textdefekte aus automatisierten Politur-Läufen waren live
+gegangen („Du bist der 0 am deutschen Strommarkt“, „es ist der 2 Januar“,
+„Nutze 20 26 gezielt Mindestbestellwerte“, „SATZ: | **CHECK24-Vergleich** |
+– | | | | |“) — plus das Mietwagen-Doppel-Intro. Keine Wache maß sie,
+`sprachkern.write_verified` prüfte nur Struktur (Links, Shortcodes,
+Überschriften, Wortzahl), nie den Ergebnis-Text.
+
+- **Eine Muster-SSOT:** `sprachkern.POLITUR_RUINEN` (R11 Jahreszahl-Split,
+  R12 Zahl-Ruine, R13 Datum-ohne-Punkt, R14 Marker-Ruine).
+  `write_verified` **verweigert jede Schrift, die eine NEUE Ruine
+  einführt** (bestehende blockieren die Heilung nicht) — gilt damit für
+  Sprachglatt, Grammatik-Check und ZEIT-Rechtschreibung automatisch.
+- **Eine Wache:** `textverstaendnis_guard.py` R11–R14 (via SSOT) +
+  **R15-PHRASEN-DOPPEL** (identische ≥-10-Wort-Sequenz im Fließtext eines
+  Artikels; fingert Doppel-Intros, die duplikat_guard D1/D2 verpassen).
+  Tägliches Audit (`blog-health-daily.yml`), Selbsttest mit den
+  eingefrorenen echten Schadensfällen.
+- **Publish-Gate blockt die Maschinen-Ruinen-Familie komplett:**
+  R8-NESTED-LINK, R9, R10 und R11–R15 sind hart in
+  `publish_gate.textverstaendnis_failures()` — genau diese Klasse ist
+  früher live gegangen.
+- R15 läuft bewusst **nur auf Artikel-Fließtext** (nicht auf Rechtsseiten:
+  Impressum-Adressen wiederholen sich legitim) und nicht auf
+  Überschriften/Listen/Tabellen/CTA-Boxen.
+- Runbook + Zahlen: `LESBARKEIT-ENTWUERFE-PREMIUM-2026-09-30.md`.
+
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 
 Die schwebende Artikel-Navigation ist zweimal (26.09.2026) an einem

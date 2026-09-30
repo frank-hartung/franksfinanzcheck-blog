@@ -251,7 +251,7 @@ Wenn du dort sparen willst, findest du hier gute Startpunkte:
 
 ## Fazit: Ein guter Puffer ist groß genug, nicht maximal groß
 
-Ein **finanzieller Puffer** muss dich nicht reich machen. Er soll dich ruhig halten. Für viele Haushalte reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das **4.500 € bis 9.000 €**.
+Ein **finanzieller Puffer** muss dich nicht reich machen. Er soll dich ruhig halten. Rechne dafür einmal ehrlich zusammen, was bei dir jeden Monat fest abgeht. Das Dreifache dieser Summe ist ein solides Ziel, das Sechsfache die volle Reserve.
 
 Wenn du heute nur einen Schritt machst, dann diesen: Rechne deine festen Monatskosten ehrlich zusammen und setze ein erstes Ziel. Danach richtest du ein separates Tagesgeldkonto ein und automatisierst die Sparrate. Das ist unspektakulär. Genau deshalb funktioniert es.
 

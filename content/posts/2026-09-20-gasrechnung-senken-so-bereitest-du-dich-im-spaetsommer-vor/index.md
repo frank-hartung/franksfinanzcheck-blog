@@ -59,7 +59,9 @@ Hast du einen eigenen Vertrag, rechnest du den Preis für ein Jahr mit deinem Ve
 
 Mach heute ein Foto vom Zähler und speichere es mit dem Datum. Wiederhole das einmal im Monat. So findest du Fehler oder einen Mehrverbrauch früh. Bei Gasgeruch, Wasser oder einem Fehler am Gerät rufst du Hilfe und änderst nichts selbst.
 
-Wenn die Summe hoch wirkt, bleib bei diesen fünf Werten. Erst kommt der Verbrauch. Dann kommt der Preis. Danach siehst du auf die schon gezahlten Raten. So suchst du nicht an der falschen Stelle. Ein hoher Abschlag ist kein hoher Preis. Er kann aber die Summe im Monat ändern.
+Wenn die Summe hoch wirkt, bleib bei diesen fünf Werten. Erst kommt der Verbrauch. Dann kommt der Preis. Danach siehst du auf die schon gezahlten Raten.
+
+So suchst du nicht an der falschen Stelle. Ein hoher Abschlag ist kein hoher Preis. Er kann aber die Summe im Monat ändern.
 
 Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer Blick auf den Vertrag reichen für den Start. Ruf erst beim Anbieter an, wenn du weißt, welche Zahl nicht passt. So bleibt das Gespräch klar und du musst nicht raten.
 
