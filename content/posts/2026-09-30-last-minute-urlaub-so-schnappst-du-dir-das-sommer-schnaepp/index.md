@@ -192,19 +192,33 @@ Du willst sofort ein aktuelles Angebot prüfen? Nutze den [Mietwagen-Preisvergle
 
 ## Häufige Fragen
 
-### Wie kurzfristig kann ich noch buchen? Oft findest du noch 48 Stunden vor dem Abflug exzellente Deals. Einige Spezialisten bieten sogar Reisen mit Abflug am selben Tag an.
+### Wie kurzfristig kann ich noch buchen?
 
-### Welche Destinationen bieten die größten Rabatte? Regionen mit vielen Hotelbetten bieten meist die besten Chancen. Besonders die Balearen, die Algarve oder Kroatien haben oft hohe Restkapazitäten.
+Oft findest du noch 48 Stunden vor dem Abflug exzellente Deals. Einige Spezialisten bieten sogar Reisen mit Abflug am selben Tag an.
 
-### Ist ein Last Minute Urlaub sicher? Ja, die rechtliche Absicherung entspricht der einer normalen Pauschalreise. Prüfe lediglich die Seriosität des Portals und die Stornierungsregeln.
+### Welche Destinationen bieten die größten Rabatte?
 
-### Wie viel Kaution sollte ich einplanen? Üblich sind Beträge zwischen 1 000 € und 2 000 € für einen Mittelklassewagen. Deine Kreditkarte muss diesen Rahmen zwingend abdecken können.
+Regionen mit vielen Hotelbetten bieten meist die besten Chancen. Besonders die Balearen, die Algarve oder Kroatien haben oft hohe Restkapazitäten.
 
-### Gibt es Last Minute auch mit All‑Inclusive? Ja, viele Hotels füllen so ihre letzten freien Zimmer auf. Die Auswahl ist jedoch geringer als bei einer langfristigen Planung.
+### Ist ein Last Minute Urlaub sicher?
 
-### Kann ich meine Buchung nachträglich ändern? Viele Anbieter erlauben kostenfreie Umbuchungen bis 24 h vor Abflug. Prüfe das im Kleingedruckten; bei Billig‑Tarifen kann eine Gebühr von 30 € bis 70 € anfallen.
+Ja, die rechtliche Absicherung entspricht der einer normalen Pauschalreise. Prüfe lediglich die Seriosität des Portals und die Stornierungsregeln.
 
-### Was tun, wenn das Wetter plötzlich schlecht ist? Bei schlechtem Wetter bieten manche Airlines Umbuchungen auf den nächsten Tag ohne Aufpreis an – das gilt vor allem für Flüge innerhalb Europas. Für Hotels gilt meist die Stornierungsfrist; wenn du flexibel bleibst, kannst du das Zimmer kostenfrei auf einen anderen Tag verlegen.
+### Wie viel Kaution sollte ich einplanen?
+
+Üblich sind Beträge zwischen 1 000 € und 2 000 € für einen Mittelklassewagen. Deine Kreditkarte muss diesen Rahmen zwingend abdecken können.
+
+### Gibt es Last Minute auch mit All‑Inclusive?
+
+Ja, viele Hotels füllen so ihre letzten freien Zimmer auf. Die Auswahl ist jedoch geringer als bei einer langfristigen Planung.
+
+### Kann ich meine Buchung nachträglich ändern?
+
+Viele Anbieter erlauben kostenfreie Umbuchungen bis 24 h vor Abflug. Prüfe das im Kleingedruckten; bei Billig‑Tarifen kann eine Gebühr von 30 € bis 70 € anfallen.
+
+### Was tun, wenn das Wetter plötzlich schlecht ist?
+
+Bei schlechtem Wetter bieten manche Airlines Umbuchungen auf den nächsten Tag ohne Aufpreis an – das gilt vor allem für Flüge innerhalb Europas. Für Hotels gilt meist die Stornierungsfrist; wenn du flexibel bleibst, kannst du das Zimmer kostenfrei auf einen anderen Tag verlegen.
 
 ---
 

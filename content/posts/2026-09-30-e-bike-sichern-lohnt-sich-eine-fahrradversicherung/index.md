@@ -177,19 +177,33 @@ SATZ: | **CHECK24-Vergleich** | – | | | | |
 
 ## Häufige Fragen
 
-### Wie schnell wird ein Diebstahl gemeldet? Melde den Diebstahl sofort bei der nächsten Polizeidienststelle. Danach hast du meist 48 Stunden Zeit für die Meldung beim Versicherer. Reiche das Aktenzeichen der Polizei direkt mit ein.
+### Wie schnell wird ein Diebstahl gemeldet?
 
-### Deckt die Versicherung auch den Akku? Ja, hochwertige Tarife schließen den Akku explizit mit ein. Er ist gegen Diebstahl, Kurzschluss und sogar Tiefentladung versichert. Prüfe dies zur Sicherheit in den Tarifdetails.
+Melde den Diebstahl sofort bei der nächsten Polizeidienststelle. Danach hast du meist 48 Stunden Zeit für die Meldung beim Versicherer. Reiche das Aktenzeichen der Polizei direkt mit ein.
 
-### Kann ich die Versicherung kündigen, wenn ich das Rad verkaufe? Beim Verkauf des Rades hast du ein Sonderkündigungsrecht. Schicke dem Versicherer einfach eine Kopie des Kaufvertrags als Nachweis. Zu viel gezahlte Beiträge erhältst du anteilig zurück.
+### Deckt die Versicherung auch den Akku?
 
-### Gibt es eine Mindestlaufzeit? Viele Verträge laufen über mindestens 12 Monate. Es gibt jedoch immer mehr Anbieter mit monatlicher Kündigungsfrist. Diese Flexibilität kostet meist einen kleinen Aufpreis.
+Ja, hochwertige Tarife schließen den Akku explizit mit ein. Er ist gegen Diebstahl, Kurzschluss und sogar Tiefentladung versichert. Prüfe dies zur Sicherheit in den Tarifdetails.
 
-### Was passiert bei Teilschäden durch Vandalismus? Der Versicherer übernimmt die Reparaturkosten in einer Fachwerkstatt. Du reichst dafür einfach den Kostenvoranschlag zur Freigabe ein. Nach der Reparatur wird die Rechnung direkt beglichen.
+### Kann ich die Versicherung kündigen, wenn ich das Rad verkaufe?
 
-### Wie hoch ist die maximale Versicherungssumme? Die meisten Anbieter bieten eine Deckung bis zu 5.000 €, manche sogar bis 10.000 €. Achte darauf, dass die Summe mindestens deinem aktuellen Neupreis entspricht, sonst entsteht eine Unterversicherung.
+Beim Verkauf des Rades hast du ein Sonderkündigungsrecht. Schicke dem Versicherer einfach eine Kopie des Kaufvertrags als Nachweis. Zu viel gezahlte Beiträge erhältst du anteilig zurück.
 
-### Gibt es Rabatte für mehrere Fahrräder? Ja, einige Versicherer gewähren einen Kombinationsrabatt, wenn du mehrere Fahrräder (z. B. ein E‑Bike und ein City‑Bike) im selben Vertrag versicherst. Der Rabatt liegt häufig zwischen 5 % und 15 % des Jahresbeitrags.
+### Gibt es eine Mindestlaufzeit?
+
+Viele Verträge laufen über mindestens 12 Monate. Es gibt jedoch immer mehr Anbieter mit monatlicher Kündigungsfrist. Diese Flexibilität kostet meist einen kleinen Aufpreis.
+
+### Was passiert bei Teilschäden durch Vandalismus?
+
+Der Versicherer übernimmt die Reparaturkosten in einer Fachwerkstatt. Du reichst dafür einfach den Kostenvoranschlag zur Freigabe ein. Nach der Reparatur wird die Rechnung direkt beglichen.
+
+### Wie hoch ist die maximale Versicherungssumme?
+
+Die meisten Anbieter bieten eine Deckung bis zu 5.000 €, manche sogar bis 10.000 €. Achte darauf, dass die Summe mindestens deinem aktuellen Neupreis entspricht, sonst entsteht eine Unterversicherung.
+
+### Gibt es Rabatte für mehrere Fahrräder?
+
+Ja, einige Versicherer gewähren einen Kombinationsrabatt, wenn du mehrere Fahrräder (z. B. ein E‑Bike und ein City‑Bike) im selben Vertrag versicherst. Der Rabatt liegt häufig zwischen 5 % und 15 % des Jahresbeitrags.
 
 ---
 
