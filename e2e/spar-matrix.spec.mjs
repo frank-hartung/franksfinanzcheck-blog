@@ -92,7 +92,7 @@ test.describe('Spar-Matrix (/pillar/)', () => {
     await expect(knoepfe).toHaveCount(6);
     for (let i = 0; i < 6; i += 1) {
       const box = await knoepfe.nth(i).boundingBox();
-      expect(box.height, `Knopf ${i + 1} mindestens 36px hoch`).toBeGreaterThanOrEqual(36);
+      expect(box.height, `Knopf ${i + 1} mindestens 44px hoch`).toBeGreaterThanOrEqual(44);
     }
   });
 

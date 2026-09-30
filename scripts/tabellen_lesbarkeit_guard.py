@@ -25,10 +25,10 @@
 #        `.post-content` muss die Versorgung auch ausserhalb
 #        greifen: mindestens ein deckender Selektor ohne
 #        `.post-content`/`.md-content`-Praefix.
-#    L3  LESBARKEITS-FLOOR Die deckenden Regeln muessen die vier
+#    L3  LESBARKEITS-FLOOR Die deckenden Regeln muessen die fuenf
 #        Lesbarkeits-Grundpfeiler liefern: Zellpolster (>= 10 px),
-#        Kopf-Flaeche, Zeilentrenner und einen Mobilpfad
-#        (@media max-width) fuer breite Tabellen.
+#        Kopf-Flaeche, Zeilentrenner, Aktionsziel (>= 44 px) und einen
+#        Mobilpfad (@media max-width) fuer breite Tabellen.
 #    L4  TOTE SELEKTOREN   Kein `.ff-*`-Tabellenselektor im CSS,
 #        dessen Klasse in keinem Template/Markdown vorkommt
 #        (genau die `.ff-spar-matrix`-Leiche).
@@ -37,7 +37,7 @@
 #        mit `data-label` (Feldname der mobilen Kartenansicht),
 #        Scroll-Container mit role/aria-label/tabindex.
 #
-#  SABOTAGE-SCHUTZ: `--selftest` baut sieben kaputte Miniatur-
+#  SABOTAGE-SCHUTZ: `--selftest` baut acht kaputte Miniatur-
 #  Repos im Temp und verlangt, dass jede Regel genau dort feuert.
 #  Schlaegt der Selbsttest fehl, ist der Messer stumpf -> Exit 2,
 #  bevor irgendetwas bewertet wird.
@@ -352,6 +352,16 @@ def pruefe(root: Path) -> Ergebnis:
             erg.add("L3", f"{k.name}: Kopfzeile ohne eigene Flaeche "
                           f"(thead th ohne background)")
 
+        aktionsregeln = [r for r in regeln
+                         if not r.media
+                         and any((not selektor_ist_gescopt(s))
+                                 and selektor_trifft(s, {"ff-table-btn"})
+                                 for s in r.selektoren)]
+        aktionshoehe = _max_px_deklaration(aktionsregeln, "min-height")
+        if aktionshoehe < 44:
+            erg.add("L3", f"{k.name}: Aktionsziel zu klein oder nicht fest versiegelt "
+                          f"(min-height {aktionshoehe} px, Mindestmass 44 px)")
+
         mobil = [r for r in regeln
                  if (r.mobil or 0) >= 1
                  and any(selektor_trifft(s, {k.tabelle, k.wrapper}) for s in r.selektoren)]
@@ -391,6 +401,15 @@ def _max_padding(regeln: list[Regel]) -> int:
             zahlen = [int(z) for z in re.findall(r"(\d+)px", v)]
             if zahlen:
                 werte.append(zahlen[0])
+    return max(werte) if werte else 0
+
+
+def _max_px_deklaration(regeln: list[Regel], key: str) -> int:
+    """Groesster fester px-Wert einer Deklaration in den deckenden Regeln."""
+    werte: list[int] = []
+    for r in regeln:
+        wert = r.deklarationen.get(key, "")
+        werte.extend(int(z) for z in re.findall(r"(\d+)px", wert))
     return max(werte) if werte else 0
 
 
@@ -495,7 +514,7 @@ GUT_CSS = """
 .ff-spar-matrix-table .ff-tbl-corner { position: sticky; left: 0; }
 .ff-spar-matrix-table .ff-spar-matrix-thema a { font-weight: 700; }
 .ff-spar-matrix-table .ff-spar-matrix-aktion { vertical-align: middle; }
-.ff-spar-matrix-table .ff-table-btn { min-height: 40px; }
+.ff-spar-matrix-table .ff-table-btn { min-height: 44px; }
 .ff-spar-matrix-caption { caption-side: top; }
 @media (max-width: 760px) {
   .ff-spar-matrix-table tbody tr { display: block; }
@@ -538,6 +557,8 @@ def selftest() -> list[str]:
          GUT_CSS.replace("padding: 12px 14px;", "padding: 2px 3px;"), "L3"),
         ("L3 kein Mobilpfad", GUT_TEMPLATE,
          GUT_CSS.split("@media")[0], "L3"),
+        ("L3 Aktionsziel zu klein", GUT_TEMPLATE,
+         GUT_CSS.replace("min-height: 44px", "min-height: 32px"), "L3"),
         ("L4 tote Leiche", GUT_TEMPLATE,
          GUT_CSS + "\n.ff-spar-matrix table { color: red; }\n", "L4"),
         ("L5 Spalten-Drift", GUT_TEMPLATE.replace("<col><col><col><col><col>", "<col><col><col>"),
@@ -580,7 +601,7 @@ def schreibe_report(erg: Ergebnis) -> str:
     else:
         zeilen += ["🎉 Alle Tabellen ausserhalb des Artikel-Containers sind vollstaendig "
                    "versorgt: Klassenabdeckung, Scope, Lesbarkeits-Floor "
-                   "(Polster/Kopf/Trenner/Mobilpfad) und Markup-Vertrag erfuellt."]
+                   "(Polster/Kopf/Trenner/Aktionsziel/Mobilpfad) und Markup-Vertrag erfuellt."]
     zeilen += [
         "",
         "---",
@@ -603,7 +624,7 @@ def main() -> None:
         print("\n".join(f"  · {f}" for f in fehler))
         sys.exit(2)
     if nur_selftest:
-        print("✅ Selbsttest gruen: 8 Sabotage-Faelle, L1–L5 feuern punktgenau.")
+        print("✅ Selbsttest gruen: 9 Sabotage-Faelle, L1–L5 feuern punktgenau.")
         sys.exit(0)
 
     erg = pruefe(ROOT)
