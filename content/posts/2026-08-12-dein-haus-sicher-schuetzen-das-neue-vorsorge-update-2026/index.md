@@ -70,7 +70,7 @@ Diese Unterscheidung ist wichtiger, als viele denken. Denn Gebäude und Inhalt s
 
 - Hausratversicherung
 - je nach Lage Elementarschutz für Hausrat
-- Privathaftpflicht als eigener Pflichtbaustein
+- [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) als eigener Pflichtbaustein
 
 Kurz gesagt:
 
@@ -347,7 +347,7 @@ Mehr braucht es oft nicht. Genau diese kleine Hausliste hilft dir beim nächsten
 
 ## Fazit: Zuhause nicht gefühlt, sondern geprüft absichern
 
-Wer Haus oder Wohnung wirklich schützen will, braucht keine Versicherungs-Sammlung ohne Ende. Er braucht die **richtigen Bausteine** und möglichst wenige Lücken. Genau darum geht es beim Vorsorge-Update 2026: Eigentum und Inhalt trennen, Elementarschutz realistisch prüfen und Unterversicherung vermeiden.
+Wer Haus oder Wohnung wirklich schützen will, braucht keine Versicherungs-Sammlung ohne Ende. Er braucht die **richtigen Bausteine** und möglichst wenige Lücken. Genau darum geht es beim Vorsorge-Update 2026: Eigentum und Inhalt trennen, Elementarschutz realistisch prüfen und [Unterversicherung vermeiden](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/).
 
 Schon ein einzelner Schaden im Bereich von **5.000 € bis 15.000 €** zeigt, warum dieser Check sinnvoll ist. Die gute Nachricht: Ein moderner, besserer Schutz kostet nicht automatisch viel mehr. Oft reicht schon ein sauberer Vergleich.
 

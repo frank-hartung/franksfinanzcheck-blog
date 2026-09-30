@@ -119,7 +119,7 @@ Genau dieser letzte Punkt ist der eigentliche Wert der Police: Sie verhindert, d
 
 Je mehr Punkte zutreffen, desto deutlicher fällt die Antwort aus:
 
-- **Reserve unter 3.000 Euro** oder bereits für Auto, Haushalt und Notgroschen verplant.
+- **Reserve unter 3.000 Euro** oder bereits für Auto, Haushalt und [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) verplant.
 - **Junges Tier** (Welpe, Kitten bis etwa drei Jahre): bester Beitrag, volle Tarifauswahl, keine Vorerkrankungs-Ausschlüsse.
 - **Rasse mit bekanntem Risiko** – etwa große Hunde mit Gelenk- und Magendrehungsrisiko oder Rassekatzen mit Herz- und Nierenthemen.
 - **Ein Einkommen, ein Haushalt, wenig Puffer**: Hier trifft ein vierstelliger Ausreißer das Budget doppelt hart.
@@ -293,11 +293,11 @@ Allein diese Fragen verhindern viele Schnellschüsse.
 
 ## Wo Tierkrankenversicherung in deine Finanzplanung passt
 
-Versicherungen sind nie isoliert sinnvoll. Sie müssen zu deiner Haushaltslage passen. Wenn du gerade generell Fixkosten sortierst, helfen dir auch diese Ratgeber:
+[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) sind nie isoliert sinnvoll. Sie müssen zu deiner Haushaltslage passen. Wenn du gerade generell Fixkosten sortierst, helfen dir auch diese Ratgeber:
 
 - [Versicherungen, die du wirklich brauchst](../../pillar/versicherungen/)
-- Hausratversicherung prüfen
-- Notgroschen aufbauen
+- [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) prüfen
+- [Notgroschen aufbauen](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
 Gerade beim Haustier zeigt sich klar: Rücklagen und Versicherung sind keine Gegensätze. Oft ist die Mischung sinnvoll.
 

@@ -36,7 +36,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-Die Wohngebäudeversicherung gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.
+Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.
 
 Trotzdem vergleichen viele nur den Jahresbeitrag. Genau das ist der Fehler. Denn hier zählt nicht nur der Preis. Es zählen vor allem die Bedingungen – etwa bei Elementarschutz, grober Fahrlässigkeit, Rohren, Nebengebäuden und der passenden Summe.
 

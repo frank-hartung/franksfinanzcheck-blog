@@ -183,7 +183,7 @@ Ein kleinerer Tarif ist meist sinnvoll, wenn:
 - dein WLAN aktuell eher der Flaschenhals ist,
 - du vor allem einen guten Effektivpreis suchst.
 
-Wenn du statt **250 Mbit/s** dauerhaft mit **100 Mbit/s** auskommst und dadurch zum Beispiel **8 € bis 12 € im Monat** sparst, sind das über zwei Jahre schnell **192 € bis 288 €**. Genau solche stillen Unterschiede machen einen guten DSL-Vergleich wertvoll.
+Wenn du statt **250 Mbit/s** dauerhaft mit **100 Mbit/s** auskommst und dadurch zum Beispiel **8 € bis 12 € im Monat** sparst, sind das über zwei Jahre schnell **192 € bis 288 €**. Genau solche stillen Unterschiede machen einen guten [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) wertvoll.
 
 ## Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen
 

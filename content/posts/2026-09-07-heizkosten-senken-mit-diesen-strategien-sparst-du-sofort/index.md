@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Das Wichtigste in Kürze
 
 
-Beim Thema Heizkosten senken lohnt sich ein genauer Blick auf die Details.
+Beim Thema [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) lohnt sich ein genauer Blick auf die Details.
 
 - Die Verbraucherzentrale nennt **rund 6 % weniger Heizenergie pro Grad** als Faustwert.
 - Wohnräume liegen oft bei etwa **20 °C**, Schlafzimmer bei **16 bis 18 °C** sinnvoll.
@@ -220,7 +220,7 @@ Bei sehr hohen oder unerklärlichen Werten lohnt ein Blick auf den Heizspiegel u
 Miss, statt zu raten.
 
 
-Gerade für Heizkosten senken gilt: Kleine Änderungen bringen große Wirkung.
+Gerade für Heizkosten senken gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

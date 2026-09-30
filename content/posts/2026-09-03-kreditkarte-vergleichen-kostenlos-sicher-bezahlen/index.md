@@ -104,7 +104,7 @@ Dazu musst du den Verlust sofort melden. Bei manchen Karten entfällt sogar dies
 
 Viele Premium-Karten locken mit Reiseversicherungen und Lounge-Zugang. Das klingt gut, ist aber nicht immer etwas wert. Entscheidend ist: Nutzt du die Leistungen wirklich?
 
-Ein Versicherungs-Baustein in der Karte hilft, wenn du keine eigene Police hast. Doch Vorsicht: Viele Karten-Versicherungen greifen nur, wenn du die Reise mit der Karte bezahlt hast. Eine eigene, günstige Police ist oft klarer.
+Ein Versicherungs-Baustein in der Karte hilft, wenn du keine eigene Police hast. Doch Vorsicht: Viele Karten-[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) greifen nur, wenn du die Reise mit der Karte bezahlt hast. Eine eigene, günstige Police ist oft klarer.
 
 Mein Rat: Vergleiche die Kernkosten der Karte. Sieh Versicherungen als Bonus, nicht als Kaufgrund. Wer seine [Privathaftpflicht](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) schon gut geregelt hat, braucht keine Doppelversicherung.
 

@@ -216,7 +216,7 @@ Sparen darf nicht wehtun. Wenn du dich ständig einschränkst, wirst du das Ziel
 Belohne dich für erreichte Etappenziele. Hast du den ersten Tausender gespart? Dann gönne dir etwas Besonderes, das dir wirklich Freude bereitet. Das erhält den Spaß an der Sache und verhindert Frustration.
 
 
-Suche dir Gleichgesinnte. Es ist viel einfacher, **Geld sparen im Alltag** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt.
+Suche dir Gleichgesinnte. Es ist viel einfacher, **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** durchzuziehen, wenn dein Umfeld ähnliche Werte teilt.
 
 Wenn alle deine Freunde ständig teuer essen gehen wollen, wird es für dich schwer. Tausche dich in Foren oder Gruppen aus. Dort findest du oft neue Inspirationen und praktische Kniffe für deinen Weg.
 

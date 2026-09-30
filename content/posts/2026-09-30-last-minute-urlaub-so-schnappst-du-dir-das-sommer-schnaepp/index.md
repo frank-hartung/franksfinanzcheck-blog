@@ -115,7 +115,7 @@ Die Tabellen zeigen dir, wo du mit kurzer Vorlaufzeit besonders viel sparen kann
 
 Ein Mietwagen ist oft Teil des Pakets – doch hier lauern häufig versteckte Kostenfallen. Anbieter blocken oft 1 000 € bis 2 000 € auf deiner Kreditkarte.
 
-Zusatzgebühren für Kindersitze oder Navis treiben den Preis schnell nach oben. Prüfe vorab, ob deine Kreditkarte bereits einen Vollkaskoschutz enthält. So vermeidest du teure Doppel‑Versicherungen direkt am Schalter.
+Zusatzgebühren für Kindersitze oder Navis treiben den Preis schnell nach oben. Prüfe vorab, ob deine Kreditkarte bereits einen Vollkaskoschutz enthält. So vermeidest du teure Doppel‑[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) direkt am Schalter.
 
 **Faustregel:** Beträgt die Kaution mehr als 30 % des Reisepreises? Dann solltest du nach einem anderen Anbieter suchen.
 

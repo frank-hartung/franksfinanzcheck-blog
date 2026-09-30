@@ -38,7 +38,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Du willst preisgarantie gas? Springt der Börsenpreis, warnt schnell die Schlagzeile – und du sollst sofort einen Zweijahresvertrag unterschreiben? Ruhig bleiben. Großhandelspreise wirken nicht eins zu eins und nicht sofort auf deinen Endkundentarif.
+Du willst [preisgarantie gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)? Springt der Börsenpreis, warnt schnell die Schlagzeile – und du sollst sofort einen Zweijahresvertrag unterschreiben? Ruhig bleiben. Großhandelspreise wirken nicht eins zu eins und nicht sofort auf deinen Endkundentarif.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

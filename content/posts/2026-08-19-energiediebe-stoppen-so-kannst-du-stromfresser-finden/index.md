@@ -55,7 +55,7 @@ Erstens: Miss unter normalen Bedingungen. Zweitens: Rechne mit deinen echten Kos
 
 Such dir nur ein Gerät aus. Stecke das Messgerät ein und schreibe Uhrzeit sowie Zählerstand auf. Lass das Gerät so laufen, wie du es sonst auch nutzt. Bei einem Kühlschrank wartest du mindestens einen Tag. Dann siehst du nicht nur einen kurzen Startwert, sondern den normalen Bedarf.
 
-Rechne die kWh mit deinem Preis je kWh. Vergleiche den Betrag mit dem Preis für ein neues Gerät. Ein altes Gerät muss nicht sofort raus. Erst der Unterschied pro Jahr zeigt, ob sich ein Kauf bald lohnt. Das schützt dich vor einem teuren Kauf aus einem Bauchgefühl.
+Rechne die kWh mit deinem Preis je kWh. Vergleiche den Betrag mit dem Preis für ein neues Gerät. Ein altes Gerät muss nicht sofort raus. Erst der Unterschied pro Jahr zeigt, ob sich ein Kauf bald lohnt. Das [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor einem teuren Kauf aus einem Bauchgefühl.
 
 Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank, ein Boiler oder eine Pumpe sein. Kleine Ladegeräte kommen später. So bringt deine Zeit zuerst etwas und du behältst bei jedem Schritt den Überblick.
 
@@ -100,7 +100,7 @@ Energiekostenmessgeräte kommen zwischen Steckdose und Gerätestecker. Viele Ver
 - **Kühl- und Gefriergerät:** mindestens 24 Stunden, besser 72 Stunden. So erfasst du Kühl- und Abtauzyklen.
 - **Waschmaschine, Spülmaschine, Trockner:** drei bis fünf vollständige, typische Programme messen.
 - **TV, PC und Konsole:** Betrieb und Bereitschaft getrennt erfassen.
-- **Dauerverbraucher:** aktuelle Leistung notieren und auf die tatsächliche Laufzeit hochrechnen.
+- **[Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/):** aktuelle Leistung notieren und auf die tatsächliche Laufzeit hochrechnen.
 
 Eine Momentaufnahme kann täuschen. Beim Start des Kompressors zieht ein Kühlschrank viel und dazwischen fast nichts. Entscheidend ist die Energiemenge über einen passenden Zeitraum.
 
@@ -234,7 +234,7 @@ Prüfe bei unerklärlich hoher Grundlast außerdem, ob Gemeinschaftsstrom oder e
 Speichere Messwert, Datum und Strompreis gemeinsam. Sonst vergleichst du später kWh und Euro aus verschiedenen Annahmen.
 
 
-Gerade für Energiediebe stoppen gilt: Kleine Änderungen bringen große Wirkung.
+Gerade für Energiediebe stoppen gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Fazit: Der größte Stromfresser ist der ungeprüfte
 

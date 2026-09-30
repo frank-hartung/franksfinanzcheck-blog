@@ -131,7 +131,7 @@ Dazu ein Wochenabschluss. Vorteile: keine Technik, keine Datenweitergabe. Schrei
 
 Viele hören nach ein paar Wochen auf. Sie wollen jede Ausgabe bis auf den Cent notieren. Besser ist ein **Top-down-Budget** nach der **50–30–20-Regel**:
 
-* **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, Versicherungen, ÖPNV-Ticket, notwendige Abos.
+* **50 % des Nettoeinkommens → Fixkosten & Bedürfnisse:** Miete, Energie, Lebensmittel, [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/), ÖPNV-Ticket, notwendige Abos.
 * **30 % → Wünsche & Freizeit:** Restaurantbesuche, Urlaub, Streaming, Shopping, Hobbys.
 * **20 % → Sparen & Vermögensaufbau:** [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) auf dem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/), ETF-Sparplan, Sondertilgung.
 

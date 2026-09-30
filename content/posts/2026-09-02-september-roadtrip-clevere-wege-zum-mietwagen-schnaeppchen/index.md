@@ -110,7 +110,7 @@ Das Beispiel zeigt: Das richtige Zeitfenster spart fast die Hälfte. Die 270 �
 
 Ein häufiger Fehler bei der Suche nach einem Mietwagen-Schnäppchen ist das Ignorieren der Tankregelung. Es gibt hier im Wesentlichen zwei Modelle: „Full-to-Full“ (Voll/Voll) und „Full-to-Empty“ (Voll/Leer). In meiner Praxis hat sich gezeigt, dass nur die „Voll/Voll“-Variante wirklich fair ist.
 
-Bei „Full-to-Empty“ zahlst du bei der Abholung oft eine überhöhte Tankfüllung und eine zusätzliche Servicegebühr. Den restlichen Kraftstoff im Tank bei der Rückgabe schenkst du dem Vermieter. Das ist fast immer ein Verlustgeschäft für dich.
+Bei „Full-to-Empty“ zahlst du bei der Abholung oft eine überhöhte Tankfüllung und eine zusätzliche Servicegebühr. Den restlichen [Kraftstoff](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) im Tank bei der Rückgabe schenkst du dem Vermieter. Das ist fast immer ein Verlustgeschäft für dich.
 
 Bei „Voll/Voll“ bekommst du das Auto vollgetankt. Du gibst es auch voll wieder ab. Du zahlst nur den Sprit, den du wirklich verbrauchst.
 

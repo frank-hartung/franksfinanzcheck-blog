@@ -244,7 +244,7 @@ Auch Rücklagen gehören zur Entscheidung. Wenn du eine unerwartete Mehrbelastun
 
 ## Fazit: Kaufe keinen Namen, sondern einen klaren Schutz
 
-Eine Gaspreisgarantie ist gut, wenn sie einen konkurrenzfähigen Tarif für einen passenden Zeitraum absichert. Sie ist schlecht, wenn der große Begriff nur eine kleine Kostenkomponente schützt.
+Eine [Gaspreisgarantie](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) ist gut, wenn sie einen konkurrenzfähigen Tarif für einen passenden Zeitraum absichert. Sie ist schlecht, wenn der große Begriff nur eine kleine Kostenkomponente schützt.
 
 Dein nächster Schritt: Öffne die Tarifdetails und markiere Garantiebeginn, Garantieende und Ausnahmen. Sind diese drei Punkte nicht in zwei Minuten verständlich, nimm den nächsten Tarif.
 

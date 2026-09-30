@@ -44,7 +44,7 @@ Die Idee ist simpel: Du gibst deinem Geld von Anfang an Aufgaben. Ein Teil deckt
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Budget endlich planbar werden soll, trenne Sparen konsequent vom Girokonto-Alltag. Ein separates Tagesgeldkonto macht genau das leichter: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Budget endlich planbar werden soll, trenne Sparen konsequent vom Girokonto-Alltag. Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) macht genau das leichter: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
@@ -67,7 +67,7 @@ Hierzu zählen Dinge, die du wirklich brauchst:
 - Strom, Gas, Wasser
 - Lebensmittel des Grundbedarfs
 - Internet und Mobilfunk
-- notwendige Versicherungen
+- notwendige [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/)
 - Arbeitsweg oder nötige Mobilität
 
 Das ist dein Pflichtblock. Er soll dein Leben stabil tragen, aber nicht unnötig aufgebläht sein.
@@ -155,7 +155,7 @@ Denn dort zahlst du jeden Monat automatisch.
 
 - Stromtarif prüfen
 - Gasanbieter vergleichen
-- Internetvertrag wechseln
+- [Internetvertrag wechseln](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
 - Versicherungen aktualisieren
 - unnötige Abos kündigen
 
@@ -208,7 +208,7 @@ Wenn Sparen immer das ist, was zufällig übrig bleibt, bleibt oft nichts übrig
 Wer aus dem Nichts sofort perfekt bei 50-30-20 landen will, bricht oft wieder ab. Besser ist ein realistischer Start.
 
 ### Fehler 4: Gehaltserhöhungen komplett verleben
-Mehr Netto heißt nicht automatisch mehr Freiheit, wenn sofort alles in höhere Ausgaben fließt.
+Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), wenn sofort alles in höhere Ausgaben fließt.
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
@@ -258,7 +258,7 @@ Die Methode ist stark, wenn du …
 
 ## Was die Regel mit Frugalismus zu tun hat
 
-Frugalismus bedeutet nicht, alles billig zu machen. Es bedeutet, Geld bewusst dorthin zu lenken, wo es dir wirklich etwas bringt.
+[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) bedeutet nicht, alles billig zu machen. Es bedeutet, Geld bewusst dorthin zu lenken, wo es dir wirklich etwas bringt.
 
 Die 50-30-20-Regel ist dafür ein starkes Grundgerüst. Sie zeigt dir, wie viel Raum deine Fixkosten einnehmen, wie viel Geld in spontane Wünsche fließt und wie ernst du deine Zukunft gerade wirklich nimmst.
 

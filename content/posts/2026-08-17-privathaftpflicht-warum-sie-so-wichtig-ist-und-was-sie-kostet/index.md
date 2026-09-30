@@ -40,7 +40,7 @@ faktencheck: "2026-09-27"
 
 Ein Moment reicht. Du rempelst jemanden an, ein teures Gerät geht kaputt oder ein Mensch verletzt sich durch deine Unachtsamkeit. Dann geht es nicht um 50 € oder 200 €, sondern im schlimmsten Fall um Forderungen, die dein Vermögen über Jahre belasten können.
 
-Genau deshalb gehört die **Privathaftpflicht** zu den wichtigsten Versicherungen überhaupt. Sie schützt nicht vor jedem Ärger im Leben, aber vor Schadenersatzforderungen, die privat richtig gefährlich werden. Und das meist für erstaunlich wenig Geld.
+Genau deshalb gehört die **Privathaftpflicht** zu den wichtigsten [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) überhaupt. Sie schützt nicht vor jedem Ärger im Leben, aber vor Schadenersatzforderungen, die privat richtig gefährlich werden. Und das meist für erstaunlich wenig Geld.
 
 ---
 
@@ -49,7 +49,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Das Wichtigste in Kürze
 
-- Die Privathaftpflicht schützt dich vor Forderungen nach **Personen-, Sach- und Vermögensschäden**.
+- Die Privathaftpflicht [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Forderungen nach **Personen-, Sach- und Vermögensschäden**.
 - Gerade Personenschäden können schnell **sechs- oder siebenstellig** werden.
 - Gute Tarife kosten oft nur **wenige Euro im Monat**.
 - Achte auf **hohe Deckungssumme, Forderungsausfall, Schlüsselverlust und grobe Fahrlässigkeit**.
@@ -78,7 +78,7 @@ Grundsätzlich geht es um Schäden, die du anderen zufügst.
 
 - **Personenschäden** – jemand verletzt sich durch dein Verhalten
 - **Sachschäden** – du beschädigst fremdes Eigentum
-- **Vermögensschäden** – finanzielle Folgen aus einem Personen- oder Sachschaden
+- **Vermögensschäden** – [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Folgen aus einem Personen- oder Sachschaden
 
 ### Beispiele aus dem Alltag
 
@@ -231,7 +231,7 @@ Auch das ist wichtig. Diese Police ist stark, aber nicht allmächtig.
 Sie ersetzt zum Beispiel nicht:
 
 - Hausratversicherung für deinen eigenen Besitz
-- Wohngebäudeversicherung für dein Haus
+- [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) für dein Haus
 - Kfz-Haftpflicht für dein Auto
 - Tierhalterhaftpflicht für Hunde oder Pferde
 

@@ -152,7 +152,7 @@ Stand: August 2026, eigene Recherche und öffentliche Vergleichsportale. Zinsen 
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Angenommen, du hast einen **Notgroschen von 15.000 €**:
+Angenommen, du hast einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 
@@ -164,7 +164,7 @@ Angenommen, du hast einen **Notgroschen von 15.000 €**:
 | Top-Tagesgeld | 3,00 % | 450,00 € |
 | Festgeld 12 Monate | 3,30 % | 495,00 € |
 
-Der Unterschied zwischen „totem Geld auf dem Girokonto“ und „aktiv geparktem Tagesgeld“ sind **450 € im Jahr**. Das ist ein Urlaub oder die Prämie mehrerer Versicherungen.
+Der Unterschied zwischen „totem Geld auf dem Girokonto“ und „aktiv geparktem Tagesgeld“ sind **450 € im Jahr**. Das ist ein Urlaub oder die Prämie mehrerer [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/).
 
 ## Schritt-für-Schritt: So eröffnest du ein Tagesgeldkonto
 

@@ -71,7 +71,7 @@ Der **DNS-Hack** ist schlicht der manuelle Wechsel dieser Auskunftstelle. Du wä
 
 Im Jahr 2026 ist diese Technik ausgereift. Früher gingen Anfragen oft als offener Text übers Netz. Heute sind fast alle Verbindungen verschlüsselt.
 
-Ein gut gewählter DNS-Server schützt dich zudem vor Phishing-Seiten. Gefährliche Adressen löst er gar nicht erst auf. Dein Netz wird so sicherer – ganz ohne Zusatz-Software.
+Ein gut gewählter DNS-Server [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) zudem vor Phishing-Seiten. Gefährliche Adressen löst er gar nicht erst auf. Dein Netz wird so sicherer – ganz ohne Zusatz-Software.
 
 ## Warum bremst der DNS-Server deines Providers dich aus?
 

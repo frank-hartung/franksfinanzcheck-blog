@@ -72,7 +72,7 @@ Seit 2022 ist der Arbeitgeberzuschuss von 15 % für fast alle Verträge verpflic
 
 Die dritte Säule ist die private Vorsorge. Hier hast du die volle Freiheit. Du entscheidest selbst: private Rentenversicherung, eigenes Haus oder ETF-Sparplan. Du finanzierst diese Säule meist aus versteuertem Einkommen.
 
-Dafür genießt du in der Auszahlungsphase oft steuerliche Vorteile. Beispiele: das Halbeinkünfteverfahren bei Versicherungen und die Abgeltungsteuer auf Kursgewinne.
+Dafür genießt du in der Auszahlungsphase oft steuerliche Vorteile. Beispiele: das Halbeinkünfteverfahren bei [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) und die Abgeltungsteuer auf Kursgewinne.
 
 ## Warum reicht die gesetzliche Rente allein nicht mehr aus?
 

@@ -38,7 +38,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-5 einfache Frugalismus-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. Frugalismus klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
+5 einfache [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. Frugalismus klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 

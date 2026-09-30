@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Wer seine Gasrechnung senken will, sollte im Spätsommer handeln. Im Spätsommer gluckert noch kein Heizkörper laut genug, um zu nerven. Genau deshalb ist jetzt der richtige Zeitpunkt für den Kostencheck. Im Januar wird aus einer kleinen Auffälligkeit schnell ein Terminproblem – und aus einem schlechten Tarif ein ganzer teurer Winter.
+Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte im Spätsommer handeln. Im Spätsommer gluckert noch kein Heizkörper laut genug, um zu nerven. Genau deshalb ist jetzt der richtige Zeitpunkt für den Kostencheck. Im Januar wird aus einer kleinen Auffälligkeit schnell ein Terminproblem – und aus einem schlechten Tarif ein ganzer teurer Winter.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -216,7 +216,7 @@ Nicht jeder Haushalt darf dieselben Dinge ändern. Kläre die Zuständigkeit, be
 | Raumtemperatur und Lüften | selbst | selbst | selbst |
 | Heizkörper freistellen | selbst | selbst | selbst |
 | technischen Mangel melden | Vermieter/Verwaltung | Vermieter/Verwaltung | Fachbetrieb |
-| Gastarif wechseln | meist nicht möglich | bei eigenem Vertrag | bei eigenem Vertrag |
+| [Gastarif wechseln](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) | meist nicht möglich | bei eigenem Vertrag | bei eigenem Vertrag |
 | Heizkurve und Pumpe ändern | nicht selbst | nur nach Zuständigkeit | nach Anleitung oder Fachbetrieb |
 | größeren Umbau beauftragen | Vermieter | Vermieter | selbst |
 

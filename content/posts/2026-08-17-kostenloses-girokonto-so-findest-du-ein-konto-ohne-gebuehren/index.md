@@ -134,7 +134,7 @@ Die wichtigsten Quellen sind:
 
 1. **Kartenzahlungen:** Händler zahlen Gebühren an das Kartensystem.
 2. **Dispo und Kredite:** Wer Geld leiht, zahlt Zinsen.
-3. **Zusatzprodukte:** Manche Banken bewerben Depots, Versicherungen oder Kreditkarten.
+3. **Zusatzprodukte:** Manche Banken bewerben Depots, [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) oder Kreditkarten.
 4. **Zinsmarge:** Guthaben wird wirtschaftlich weiterverarbeitet.
 
 Für dich ist das erstmal nicht schlimm. Relevant ist nur, dass du nicht in Produkte gedrückt wirst, die du gar nicht brauchst.

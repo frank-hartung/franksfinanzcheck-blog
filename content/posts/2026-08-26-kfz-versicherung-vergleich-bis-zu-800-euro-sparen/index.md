@@ -138,7 +138,7 @@ Fahrer unter 23 Jahren verteuern die Prämie stark. Ihr Unfallrisiko ist statist
 
 ### 5. Rabattschutz und Fahrerschutz prüfen
 
-Der **Rabattschutz** hält deine SF-Klasse nach einem Unfall. Er kostet 10 bis 15 % Aufpreis. Für Fahrer mit hoher SF-Klasse (ab SF 20) lohnt er sich. Ein einziger Unfall kann dort hunderte Euro kosten.
+Der **Rabattschutz** hält deine SF-Klasse nach einem Unfall. Er kostet 10 bis 15 % Aufpreis. Für Fahrer mit hoher SF-Klasse (ab SF 20) lohnt er sich. Ein einziger Unfall kann dort [hunderte Euro](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) kosten.
 
 ### 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen
 
