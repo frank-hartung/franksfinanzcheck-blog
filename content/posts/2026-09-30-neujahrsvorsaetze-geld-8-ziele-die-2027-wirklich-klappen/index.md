@@ -47,7 +47,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Beim Thema Neujahrsvorsätze Geld lohnt sich ein genauer Blick auf die Details.
 
-Jedes Jahr am 1 Januar ist die Motivation riesig. Du lädst Finanz-Apps und willst nie wieder auswärts essen.
+Jedes Jahr am 1. Januar ist die Motivation riesig. Du lädst Finanz-Apps und willst nie wieder auswärts essen.
 
 Drei Wochen später gewinnt der Alltagstrott. Oft nimmst du dir einfach zu viel gleichzeitig vor. Das Gehirn streikt bei dieser massiven Überlastung.
 

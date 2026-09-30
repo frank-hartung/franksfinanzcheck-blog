@@ -161,6 +161,39 @@ class KernVertragTests(unittest.TestCase):
         self.assertFalse(ok)
         self.assertIn("Link", grund)
 
+    def test_write_verified_blockt_politur_ruine(self):
+        """Issue #482: keine Schrift darf eine NEUE Ruine (R11–R14) einführen."""
+        a = {"content": "Nutze im kommenden Jahr gezielt hohe "
+                        "Mindestbestellwerte für deine Bestellungen.",
+             "path": "/tmp/sprachkern_test.md"}
+        ok, grund = sprachkern.write_verified(
+            a, "Nutze 20 26 gezielt hohe Mindestbestellwerte für deine "
+               "Bestellungen.", "test")
+        self.assertFalse(ok)
+        self.assertIn("Politur-Ruine", grund)
+        self.assertIn("R11", grund)
+
+    def test_write_verified_laesst_ruinenheilung_zu(self):
+        """Bestehende Ruinen dürfen geheilt werden – keine Einfrierung."""
+        a = {"content": "Du bist der 0 am deutschen Strommarkt.",
+             "path": "/tmp/sprachkern_test.md"}
+        ok, grund = sprachkern.write_verified(
+            a, "Diese Siegel gelten als strengster Maßstab am Markt.", "test")
+        self.assertTrue(ok, grund)
+        self.assertEqual(grund, "ok")
+
+    def test_politur_ruine_funde_kennt_vier_regeln(self):
+        funde = sprachkern.politur_ruine_funde(
+            "Nutze 20 26 gezielt. Du bist der 0 am Markt. Es ist der 2 Januar.\n"
+            "SATZ: | Rest |")
+        regeln = {r for r, _ in funde}
+        self.assertEqual(regeln, {"R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
+                                  "R13-DATUM-PUNKT", "R14-MARKER-RUINE"})
+        # Negativ-Proben: korrektes Deutsch bleibt fundfrei
+        self.assertEqual(sprachkern.politur_ruine_funde(
+            "Am 2. Januar 2026 starten wir. Seit 1998 läuft der Plan. "
+            "Bei 40 000 € netto bleiben 2 000 € übrig."), [])
+
 
 if __name__ == "__main__":
     unittest.main()

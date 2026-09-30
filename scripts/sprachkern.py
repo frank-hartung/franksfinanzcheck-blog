@@ -173,6 +173,62 @@ def words(text: str) -> int:
     return len(re.findall(r"\w+", text, re.UNICODE))
 
 
+# ------------------------------------------------- Politur-Ruinen (30.09.2026)
+# Issue #482 – vier echte Textdefekte, alle aus automatisierten Politur-Läufen
+# (Sprachglatt/Grammatik/SEO-Heiler), alle durch write_verified durchgegangen,
+# weil die Verifikation nur Struktur zählt (Links, Shortcodes, Überschriften,
+# Wortzahl), nie den Ergebnis-Text selbst. Diese Muster sind der gemeinsame
+# Detektor (SSOT): sprachkern.write_verified verweigert jede Schrift, die eine
+# NEUE Ruine enthält, und textverstaendnis_guard meldet sie als R11–R14
+# (tägliches Audit + Publish-Gate). Jedes Muster ist am gesamten Content
+# (61 Artikel + alle Seiten) gegen False-Positive geprüft – 0 Treffer.
+POLITUR_RUINEN = [
+    # R11: durch Leerraum zerrissene Jahreszahl („Nutze 20 26 gezielt
+    # Mindestbestellwerte“, Weihnachtsartikel 30.09.2026). Tausender-Gruppen
+    # sind DREIER-Blöcke („40 000“) – Zweier-Zweier mit 19/20-Anfang ist
+    # immer eine Ruine.
+    ("R11-JAHRESZAHL-SPLIT",
+     re.compile(r"\b(19|20)[\s\u00A0\u202F]\d{2}\b"),
+     "Jahreszahl durch Leerraum zerrissen"),
+    # R12: Artikel + nackte Zahl + Präposition („Du bist der 0 am deutschen
+    # Strommarkt“, Ökostrom-Artikel 30.09.2026 – Überrest einer defekten
+    # Ersetzungs-Kaskade).
+    ("R12-ZAHL-RUINE",
+     re.compile(r"\b(der|die|das|den|dem|des)\s+\d{1,2}\s+"
+                r"(am|im|auf|für|vom|zum|beim|an|in|aus|über)\b", re.I),
+     "nackte Zahl nach Artikel (Ersetzungs-Ruine)"),
+    # R13: Ordinal-Datum ohne Punkt („es ist der 2 Januar“, Weihnachtsartikel
+    # 30.09.2026; Zwillingsfund „am 1 Januar“, Neujahrs-Entwurf 30.09.2026).
+    # Korrekt ist „2. Januar“ – die Zahl vor dem Monatsnamen trägt immer
+    # einen Punkt; der Lookbehind schließt „20. November“ aus.
+    ("R13-DATUM-PUNKT",
+     re.compile(r"(?<![\d.])(\d{1,2})\s+"
+                r"(Januar|Februar|März|April|Mai|Juni|Juli|August|"
+                r"September|Oktober|November|Dezember)\b"),
+     "Ordinal-Datum ohne Punkt"),
+    # R14: Marker-Ruine am Zeilenanfang („SATZ: | **CHECK24-Vergleich** |
+    # – | | | | |“, E-Bike-Artikel 30.09.2026 – halbfertige Tabellenzeile
+    # eines Politur-Laufs). Debug-/Platzhalter-Marker sind niemals Inhalt.
+    ("R14-MARKER-RUINE",
+     re.compile(r"(?m)^\s*(SATZ|TOKEN|MARKER|PLACEHOLDER|TODO|FIXME|"
+                r"XXX|DEBUG|ROW|ZEILE|NL|REST)\s*[:|]"),
+     "Marker-/Debug-Ruine am Zeilenanfang"),
+]
+
+
+def politur_ruine_funde(text: str) -> list:
+    """Alle Politur-Ruinen in `text` als Liste (Regel, Fundstelle).
+
+    Deterministisch, offline, ohne Schonzeiten – diese vier Muster sind
+    im deutschen Satz nie korrekt. Rückgabe ist leer ⇔ kein Befund.
+    """
+    out = []
+    for regel, rx, _desc in POLITUR_RUINEN:
+        for m in rx.finditer(text):
+            out.append((regel, m.group(0)))
+    return out
+
+
 def write_verified(a: dict, new_content: str, engine: str) -> tuple[bool, str]:
     """Verifikation VOR dem Schreiben (Repo-Vertrag). Rückgabe: (geschrieben, Grund)."""
     old, new = a["content"], new_content
@@ -184,9 +240,18 @@ def write_verified(a: dict, new_content: str, engine: str) -> tuple[bool, str]:
         return False, "Überschriften-Zahl verändert"
     if words(new) < 0.90 * words(old):
         return False, "Wortzahl unter 90 % des Originals"
+    # Politur-Ruinen (R11–R14, Issue #482): keine Schrift darf eine NEUE
+    # Ruine einführen. Bestehende Ruinen blockieren die Heilung nicht –
+    # sonst wäre ein Artikel mit Alt-Ruine für jede Politur eingefroren.
+    alte_ruinen = set(politur_ruine_funde(old))
+    neue_ruinen = set(politur_ruine_funde(new)) - alte_ruinen
+    if neue_ruinen:
+        regel, fund = sorted(neue_ruinen)[0]
+        return False, f"Politur-Ruine eingeführt ({regel}: „{fund}“)"
     with open(a["path"], "w", encoding="utf-8") as fh:
         fh.write(new)
     return True, "ok"
+
 
 
 def rebuild(a: dict, new_body: str, new_description: str | None = None) -> str:

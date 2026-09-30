@@ -394,10 +394,14 @@ def readability_failures(candidates):
 
 
 def textverstaendnis_failures(candidates):
-    """Harte R2/R3/R5/R7/R8-URL-Verstöße pro Kandidat finden.
+    """Harte R2/R3/R5/R7/R8-URL/R9/R10/R11–R15-Verstöße pro Kandidat finden.
 
     R4 und R8-Anker bleiben bewusst Review-Hinweise; die deterministisch
-    harten Regeln blockieren dagegen jede neue Veröffentlichung.
+    harten Regeln blockieren dagegen jede neue Veröffentlichung. Seit
+    #482 blockiert auch die Politur-Ruinen-Familie (R9–R15): Klebe-Wörter,
+    Wortdopplungen, zerrissene Jahreszahlen, Zahl-/Datums-Ruinen, Marker-
+    Reste und Doppel-Intros sind niemals veröffentlichungsfähig – genau
+    diese Defekte sind in der Vergangenheit live gegangen.
     """
     try:
         from textverstaendnis_guard import (
@@ -406,7 +410,11 @@ def textverstaendnis_failures(candidates):
         hard_rules = {
             "R2-KEYWORD-DUMP", "R3-TERMINOLOGIE",
             "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
-            "R8-URL-LEERZEICHEN",
+            "R8-URL-LEERZEICHEN", "R8-NESTED-LINK",
+            "R9-KLEBEWORT", "R10-DOPPELWORT",
+            "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
+            "R13-DATUM-PUNKT", "R14-MARKER-RUINE",
+            "R15-PHRASEN-DOPPEL",
         }
         term = load_terminologie()
         failed = {}

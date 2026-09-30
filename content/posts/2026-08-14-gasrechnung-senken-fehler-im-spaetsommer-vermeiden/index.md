@@ -252,7 +252,7 @@ Die richtige Reihenfolge spart dir vor allem Fehlentscheidungen: Erst wenn Verbr
 Realistisch sparen kannst du erst, wenn du Preis und Verbrauch getrennt prüfst. Eine pauschale Prozentzusage wäre dagegen unseriös.
 
 
-Mit dem richtigen Vorgehen lässt sich die Gasrechnung senken um bis zu 15 % senken.
+Mit dem richtigen Vorgehen senkst du die Gasrechnung um bis zu 15 %.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 
