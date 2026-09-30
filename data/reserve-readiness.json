@@ -2,12 +2,12 @@
   "target": 6,
   "ready": 4,
   "pool_size": 5,
-  "generated_at": "2026-09-30T12:32:21Z",
+  "generated_at": "2026-09-30T21:32:45Z",
   "candidates": [
     {
       "slug": "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
       "ready": true,
-      "sha256": "7fda9696f05cea919f7f4a494320c2be10fbdafebb282c4a867faca8d27fbe29",
+      "sha256": "7bc7f18cee14b1ffea552ddd43c01c5cafec5f8a054a25e000f84abbde98e570",
       "score": 0.938,
       "parts": {
         "spelling": 0.78,
@@ -22,44 +22,44 @@
     {
       "slug": "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
       "ready": true,
-      "sha256": "01c4fc3577b230e7be3ea1564c39d86620a09c749ef58577eb918fbd4a0d9be0",
-      "score": 0.864,
+      "sha256": "db1fb6a6b7ffa3b0df539e6b3deb5110eb0117d633377a698a2dcc5bb0bceb42",
+      "score": 0.962,
       "parts": {
-        "spelling": 0.6000000000000001,
+        "spelling": 0.86,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.84,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
-      "ready": true,
-      "sha256": "4f9d904dff6bff1e48c32be0878c33d18b73f139d3b4bde26f4772bf5a638c67",
-      "score": 0.912,
+      "ready": false,
+      "sha256": "b1780911bcfdb6bfb0e1388edaf510847a4767b04d647e4ad66c0708975ed3c2",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.97,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.92,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
-      "ready": false,
-      "sha256": "6a55e2db1c8491e3c9fa964ab672e33cf58d96552de1dfb813ff50b7b761a99d",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-      "details": [
-        "🛑 2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.92,
+      "ready": true,
+      "sha256": "e70eba40924e331788ea84068d0a118df6ce7c37f307b6f720b9e05923dfe779",
+      "score": 0.95,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
@@ -67,27 +67,27 @@
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden",
       "ready": true,
-      "sha256": "28ff46448a9f545aec845e6608eafef66c707ece40a4d89e1ee442e225a139bf",
-      "score": 0.914,
+      "sha256": "8a2529babfd1f3396184cb9d3615b07764f724071d42a5270147b183d047c822",
+      "score": 0.954,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.8200000000000001,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.94,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.95
       }
     }
   ],
   "recert": {
-    "at": "2026-09-30T12:32:21Z",
+    "at": "2026-09-30T21:32:45Z",
     "renewed": [
       "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
       "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
