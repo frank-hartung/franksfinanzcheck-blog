@@ -66,7 +66,7 @@ Der komplette Job wurde lokal Schritt für Schritt mit echter Ausführung durchg
   Selbsttest-vor-Schreiben, Commit-Bedingung, Bilanz, Modell-Mandat, Mo/Mi/Fr-Cron.
 - `scripts/tests/test_claude_stilpolitur_wirkung.py` – 7 Tests auf das Wirksamkeits-Urteil.
 - `python3 scripts/claude_stilpolitur_wirkung.py --selftest` – 9 eingefrorene Fälle, läuft im Workflow mit.
-- Gesamtsuite: `python3 -m unittest discover -s scripts/tests` → **1139 Tests grün**.
+- Gesamtsuite: `python3 -m unittest discover -s scripts/tests` → **1140 Tests grün**.
 
 ## 6. Einmalige Handarbeit (optional, 2 Minuten)
 
