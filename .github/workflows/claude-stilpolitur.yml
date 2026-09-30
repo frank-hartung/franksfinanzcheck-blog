@@ -128,6 +128,7 @@ jobs:
             scripts/grammar_check.py
             scripts/sprachglatt.py
             scripts/claude_stilpolitur.py
+            scripts/claude_stilpolitur_wirkung.py
             scripts/puter_chat.mjs
             data/schreibstil.yaml
             data/brand_brain.yaml
@@ -227,6 +228,7 @@ jobs:
           python3 scripts/grammar_check.py --selftest
           python3 scripts/sprachglatt.py --selftest
           python3 scripts/claude_stilpolitur.py --selftest
+          python3 scripts/claude_stilpolitur_wirkung.py --selftest
           echo "✅ Selbsttests grün (offline)."
 
       - name: Offline-Optimierung (LT + DW, ohne API – IMMER zuerst)
@@ -275,8 +277,30 @@ jobs:
           cat /tmp/stilpolitur.txt
           echo "claude_rc=$rc" >> "$GITHUB_OUTPUT"
           if [ "$rc" -eq 0 ]; then
-            echo "claude_status=ok" >> "$GITHUB_OUTPUT"
-            exit 0
+            # WIRKSAMKEITS-PRÜFUNG (Reparatur Issue #468): Das Skript fängt
+            # jeden Fehlversuch pro Artikel selbst ab und endet dann trotzdem
+            # mit 0. Ein abgelaufenes Token oder ein leeres Gratis-Kontingent
+            # sähe damit ewig grün aus, ohne dass je ein Artikel poliert wird.
+            # Deshalb entscheidet der Report, nicht der Exit-Code allein.
+            urteil="$(python3 scripts/claude_stilpolitur_wirkung.py)"
+            detail="${urteil#*|}"
+            case "${urteil%%|*}" in
+              ok)
+                echo "claude_status=ok" >> "$GITHUB_OUTPUT"
+                echo "✅ Claude-Zusatz wirksam: $detail"
+                exit 0
+                ;;
+              wirkungslos)
+                echo "claude_status=degradiert" >> "$GITHUB_OUTPUT"
+                echo "::warning title=Claude-Zusatz wirkungslos::Kein einziger Artikel wurde poliert ($detail). Typisch: abgelaufenes PUTER_AUTH_TOKEN oder erschöpftes Gratis-Kontingent. Die Offline-Premium-Politur bleibt vollständig gültig – bitte das Gratis-Token erneuern."
+                exit 0
+                ;;
+              *)
+                echo "claude_status=unklar" >> "$GITHUB_OUTPUT"
+                echo "::warning title=Claude-Zusatz ohne Nachweis::$detail"
+                exit 0
+                ;;
+            esac
           fi
           if [ "$rc" -eq 2 ]; then
             echo "claude_status=sabotage" >> "$GITHUB_OUTPUT"
@@ -326,10 +350,12 @@ jobs:
             claude_zeile="⚠️ übersprungen – die gepinnte Puter-Brücke \`@heyputer/puter.js@2.6.3\` war nicht installierbar (npm-Transient)."
           elif [ "$CLAUDE_STATUS" = "ok" ]; then
             claude_zeile="✅ gelaufen – Modell \`claude-sonnet-5\`, kostenlos über Puter, personalisiert aus \`data/schreibstil.yaml\`."
+          elif [ "$CLAUDE_STATUS" = "unklar" ]; then
+            claude_zeile="⚠️ ohne Nachweis – der Lauf meldete Erfolg, aber es liegt kein auswertbarer Report vor. Die Offline-Premium-Politur bleibt vollständig gültig."
           elif [ "$CLAUDE_STATUS" = "sabotage" ]; then
             claude_zeile="🛑 rot – Selbsttest des Stil-Skripts schlägt an (Sabotage-Schutz, Exit 2). Eigener Code, kein Fremdausfall."
           else
-            claude_zeile="⚠️ degradiert – der kostenlose Puter-Zugang war in diesem Lauf nicht nutzbar. Kein Ersatzmodell, keine kostenpflichtige API, keine Kosten."
+            claude_zeile="⚠️ degradiert – der kostenlose Puter-Zugang war in diesem Lauf nicht nutzbar oder blieb wirkungslos (Ausfall, Netz, abgelaufenes Token oder erschöpftes Gratis-Kontingent). Kein Ersatzmodell, keine kostenpflichtige API, keine Kosten – ggf. \`PUTER_AUTH_TOKEN\` erneuern."
           fi
           if [ "$OFFLINE_OUTCOME" = "success" ]; then
             offline_zeile="✅ vollständig – Grammatik (LT1–LT4) und Sprachglatt (DW1–DW9 + V1) über den gesamten Bestand."

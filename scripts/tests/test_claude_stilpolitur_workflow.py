@@ -121,6 +121,19 @@ class ClaudeStilpoliturWorkflowContractTest(unittest.TestCase):
                       claude["run"])
         self.assertIn("::warning title=Claude-Zusatz gestört", claude["run"])
 
+    def test_silent_uselessness_is_reported_not_faked_green(self):
+        """Exit 0 ohne einen einzigen polierten Artikel ist KEIN Erfolg."""
+        claude = self.schritt("Claude (kostenlos ohne API)")
+        run = claude["run"]
+        self.assertIn("python3 scripts/claude_stilpolitur_wirkung.py", run)
+        self.assertIn("::warning title=Claude-Zusatz wirkungslos", run)
+        self.assertIn('echo "claude_status=unklar" >> "$GITHUB_OUTPUT"', run)
+
+        preflight = self.schritt("Voraussetzungen prüfen")
+        self.assertIn("scripts/claude_stilpolitur_wirkung.py", preflight["run"])
+        self.assertIn("python3 scripts/claude_stilpolitur_wirkung.py --selftest",
+                      self.schritt("Selbsttest HART")["run"])
+
     def test_sabotage_exit_two_stays_red(self):
         """Exit 2 ist eine Regression im EIGENEN Code – niemals wegdegradieren."""
         run = self.schritt("Claude (kostenlos ohne API)")["run"]
