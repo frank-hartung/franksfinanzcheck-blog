@@ -371,6 +371,11 @@ class Api:
     def repo_daten(self) -> dict:
         return self.ruf(f"/repos/{self.repo}")
 
+    def repo_patch(self, felder: dict) -> dict:
+        """Setzt Repo-Kopfdaten (Beschreibung/Homepage/Wiki) – und liest zurück."""
+        self.ruf(f"/repos/{self.repo}", "PATCH", felder)
+        return self.repo_daten()
+
     def releases(self) -> list:
         daten = self.ruf(f"/repos/{self.repo}/releases?per_page=100")
         return daten if isinstance(daten, list) else []
@@ -421,6 +426,57 @@ def heile_releases(api, releases: list[dict]) -> tuple[list[str], list[str]]:
             geheilt.append(f"{tag} → Entwurf (nachgeprüft: draft=true)")
         else:
             offen.append(f"{tag}: Nachprüfung meldet „{zustand}“ – Heilung ungültig")
+    return geheilt, offen
+
+
+# ---------------------------------------------------------------
+#  Soll-Zustand des Repo-Kopfs (eine Quelle der Wahrheit, auch für
+#  den Runbook-Text). Sichtbarkeit (privat/öffentlich) steht bewusst
+#  NICHT hier: sie bleibt Handarbeit, weil GitHub Pages auf dem
+#  Free-Plan an der Öffentlichkeit des Repos hängt – ein Automatik-
+#  Schalter könnte die Website abschalten.
+# ---------------------------------------------------------------
+REPO_SOLL = {
+    "description": "FranksFinanzcheck – unabhängiger Finanz-Ratgeber von Frank Hartung",
+    "homepage": "https://franksfinanzcheck.de/",
+    "has_wiki": False,
+}
+
+
+def heile_repo_kopf(api, repodaten: dict) -> tuple[list[str], list[str]]:
+    """Zieht Beschreibung, Homepage und Wiki auf den Markenstand.
+
+    Nur mit einem Token, das Repo-Verwaltung darf (Umgebungsvariable
+    BRAND_ADMIN_TOKEN) – das Automatik-Token darf das bewusst nicht.
+    Geändert wird ausschließlich, was abweicht; geheilt gilt nur, was
+    die Nachlese bestätigt (gleiche Regel wie bei Releases und Tags).
+    """
+    noetig: dict = {}
+    if (repodaten.get("description") or "").strip() != REPO_SOLL["description"]:
+        noetig["description"] = REPO_SOLL["description"]
+    if (repodaten.get("homepage") or "").strip() != REPO_SOLL["homepage"]:
+        noetig["homepage"] = REPO_SOLL["homepage"]
+    if repodaten.get("has_wiki"):
+        noetig["has_wiki"] = False
+    if not noetig:
+        return [], []
+    try:
+        nach = api.repo_patch(noetig)
+    except Exception as fehler:  # noqa: BLE001
+        hinweis = str(fehler)
+        if "403" in hinweis:
+            hinweis += (" – das Token darf den Repo-Kopf nicht ändern. "
+                        f"Admin-Fahrplan: {RUNBOOK}")
+        return [], [f"Repo-Kopf: Heilung fehlgeschlagen ({hinweis})"]
+    geheilt, offen = [], []
+    for schluessel, wert in noetig.items():
+        ist = nach.get(schluessel)
+        ist_norm = (ist or "").strip() if isinstance(wert, str) else bool(ist)
+        if ist_norm == wert:
+            geheilt.append(f"Repo-Kopf: {schluessel} → „{wert}“ (nachgelesen)")
+        else:
+            offen.append(f"Repo-Kopf: {schluessel} meldet nach dem Schreiben „{ist}“ "
+                         "– Heilung ungültig")
     return geheilt, offen
 
 
@@ -627,14 +683,46 @@ def selftest() -> int:
     if tagstub.tagbestand != ["v1.0"]:
         fehler.append(f"F14b: falscher Tag-Bestand nach Heilung: {tagstub.tagbestand}")
 
+    # F15/F16: Repo-Kopf-Heilung – schreibt nur Abweichungen und glaubt nur der Nachlese
+    class KopfApi:
+        def __init__(self, folgsam: bool = True):
+            self.folgsam = folgsam
+            self.geschrieben: dict = {}
+            self.stand = {"description": "FranksFinanzcheck (Affiliate-Blog, Hugo)",
+                          "homepage": "", "has_wiki": True}
+
+        def repo_patch(self, felder: dict) -> dict:
+            self.geschrieben = dict(felder)
+            if self.folgsam:
+                self.stand.update(felder)
+            return dict(self.stand)
+
+    folgsam = KopfApi()
+    kopf_geheilt, kopf_offen = heile_repo_kopf(folgsam, dict(folgsam.stand))
+    if len(kopf_geheilt) != 3 or kopf_offen:
+        fehler.append(f"F15: Repo-Kopf-Heilung unvollständig: {kopf_geheilt} / {kopf_offen}")
+    if set(folgsam.geschrieben) != {"description", "homepage", "has_wiki"}:
+        fehler.append(f"F15b: falsche Schreibfelder: {sorted(folgsam.geschrieben)}")
+
+    sauber = KopfApi()
+    sauber.stand = dict(REPO_SOLL)
+    nichts_geheilt, nichts_offen = heile_repo_kopf(sauber, dict(REPO_SOLL))
+    if nichts_geheilt or nichts_offen or sauber.geschrieben:
+        fehler.append("F15c: sauberer Repo-Kopf wurde unnötig überschrieben")
+
+    taub = KopfApi(folgsam=False)
+    taub_geheilt, taub_offen = heile_repo_kopf(taub, dict(taub.stand))
+    if taub_geheilt or len(taub_offen) != 3:
+        fehler.append(f"F16: unbelegte Repo-Kopf-Heilung gilt als Erfolg: {taub_geheilt}")
+
     if fehler:
         print("🛑 Selbsttest der Marken-Oberflächen-Wache FEHLGESCHLAGEN:")
         for f in fehler:
             print(f"   · {f}")
         return 2
-    print("✅ Selbsttest: 14 Fallgruppen bestanden "
-          "(Erkennung, Entwurfs- und Tag-Heilung mit Nachprüfung, blinder Detektor, "
-          "Markenfläche, Allowlist, Repo-Kopf, Issue-Titel).")
+    print("✅ Selbsttest: 16 Fallgruppen bestanden "
+          "(Erkennung, Entwurfs-, Tag- und Repo-Kopf-Heilung mit Nachprüfung, "
+          "blinder Detektor, Markenfläche, Allowlist, Repo-Kopf, Issue-Titel).")
     return 0
 
 
@@ -647,6 +735,9 @@ def main(argv: list[str] | None = None) -> int:
     zerleger.add_argument("--gate", action="store_true", help="Standardlauf (prüfen)")
     zerleger.add_argument("--fix", action="store_true",
                           help="öffentliche Backup-Releases auf Entwurf zurückstufen")
+    zerleger.add_argument("--fix-repo", action="store_true",
+                          help="Repo-Kopf (Beschreibung/Homepage/Wiki) auf den "
+                               "Markenstand ziehen – braucht BRAND_ADMIN_TOKEN")
     zerleger.add_argument("--selftest", action="store_true", help="Logik-Beweis ohne Netz")
     zerleger.add_argument("--json", action="store_true", help="Befund als JSON")
     zerleger.add_argument("--offline", action="store_true", help="kein Netz-Zugriff")
@@ -744,6 +835,20 @@ def main(argv: list[str] | None = None) -> int:
     # ---- O3/O4 Repo-Kopf ----
     if args.only in (None, "repo"):
         repodaten = fixture.get("repo") if args.offline else hole("repo", api.repo_daten)
+        if repodaten and args.fix_repo and not args.offline and api:
+            # Der Repo-Kopf gehört dem Admin: nur ein ausdrücklich hinterlegtes
+            # Verwaltungs-Token (BRAND_ADMIN_TOKEN) darf hier schreiben. Fehlt es,
+            # bleibt der Befund GELB mit Befehl – das war vorher der einzige Weg.
+            admin = os.environ.get("BRAND_ADMIN_TOKEN", "").strip()
+            if not admin:
+                hinweise.append("--fix-repo ohne BRAND_ADMIN_TOKEN: Repo-Kopf bleibt "
+                                f"Admin-Aufgabe (Anleitung: {RUNBOOK}).")
+            else:
+                kopf_geheilt, kopf_offen = heile_repo_kopf(Api(repo, admin), repodaten)
+                geheilt += kopf_geheilt
+                offen += kopf_offen
+                if kopf_geheilt:
+                    repodaten = hole("repo", api.repo_daten) or repodaten
         if repodaten:
             befunde += pruefe_repo(repodaten)
         else:

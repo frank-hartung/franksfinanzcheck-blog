@@ -74,6 +74,35 @@ frugalismus, stromvergleich, versicherungen, ratgeber`.
 `frank-hartung`). Ohne Admin-Recht zeigt es nur den Plan und bricht einen
 Schreibversuch sauber ab – die Automatik darf den Repo-Kopf bewusst nicht ändern.
 
+#### Dauerhaft statt einmalig: `BRAND_ADMIN_TOKEN` (empfohlen, 3 Minuten)
+
+Der Repo-Kopf ist kein Einmal-Griff: Eine spätere Änderung in den Einstellungen
+(oder ein wieder eingeschaltetes Wiki) fällt sonst erst wieder als GELB auf und
+bleibt stehen, bis jemand Zeit hat. Hinterlegst du **ein** fein granuliertes
+Token, zieht die Tageswache den Kopf jede Nacht selbst auf den Markenstand –
+mit Nachlese, und ohne der Automatik Vollzugriff zu geben.
+
+1. GitHub → *Settings → Developer settings → Personal access tokens →
+   Fine-grained tokens → Generate new token*
+2. **Repository access:** nur `frank-hartung/franksfinanzcheck-blog`
+3. **Permissions:** `Administration: Read and write` + `Metadata: Read-only`
+   (mehr nicht – kein Code-, kein Workflow-, kein Secrets-Recht)
+4. Laufzeit setzen (z. B. 1 Jahr) und Wert kopieren
+5. Repo → *Settings → Secrets and variables → Actions → New repository secret*
+   · Name: `BRAND_ADMIN_TOKEN` · Wert: das Token
+
+Danach gilt:
+
+| Zustand | Verhalten der Wache |
+|---|---|
+| Secret hinterlegt | Beschreibung, Homepage und Wiki werden automatisch gesetzt, jede Änderung zurückgelesen (`--fix --fix-repo`) |
+| Secret fehlt | unverändert wie bisher: GELB mit fertigem Befehl, kein Schreibversuch |
+| Secret abgelaufen/zu schwach | roter Lauf mit Klartext („das Token darf den Repo-Kopf nicht ändern") – ein stiller Ausfall wäre schlimmer |
+
+**Nicht automatisiert bleibt die Sichtbarkeit** (Schritt 1): Ein Automatik-Schalter,
+der das Repo privat stellt, könnte auf dem Free-Plan die Website abschalten.
+Diese Entscheidung bleibt bewusst bei dir.
+
 ### Schritt 1 – Repository privat: erst prüfen, welcher Weg trägt
 
 > **Achtung, das ist der kritische Punkt:** GitHub Pages aus einem **privaten**
@@ -210,3 +239,42 @@ zwei Betriebsabschnitte gewandert („Premium-Kontrollturm für die Blogautomati
 Wiki (Abschnitt 3) sowie die Betriebstitel der Alarm-Issues. Das
 Automatik-Token hat kein Repo-Admin-Recht (`403 Resource not accessible by
 integration`) – diese Griffe bleiben bewusst bei dir.
+
+
+---
+
+## 7. Öffentliche Issue-Titel (O6) – dauerhaft gelöst am 01.10.2026
+
+**Befund:** Offene Fehlermeldungen hießen „⚠️ Workflow fehlgeschlagen: KI-Redaktion
+(failure)". Titel sind öffentlich, werden indexiert und erzählten bei einer
+Markensuche die Betriebsgeschichte statt der Expertenpositionierung.
+
+**Warum das nicht nur ein Umbenennen war:** Der Titel war die *Identität* der
+Meldung – Dedupe beim Anlegen, Auto-Close bei Grün, Aufräumlauf hingen daran.
+Ein hübscher Titel ohne neue Identität hätte Doppel-Issues und nie wieder
+geschlossene Meldungen erzeugt.
+
+**Lösung (eine Quelle der Wahrheit: `scripts/alert_issue_identity.py`):**
+
+| Baustein | Umsetzung |
+|---|---|
+| Identität | unsichtbarer Marker im Body: `<!-- alert-key: WF-XXXX -->`, deterministisch aus dem Workflow-Namen (sha256) – stabil über Jahre |
+| Titel | `🔧 Wartung · <Bereich> · Vorgang WF-XXXX` – ohne Workflow-Name, ohne „fehlgeschlagen", trotzdem einsortierbar |
+| Zuordnung | `python3 scripts/alert_issue_identity.py --tabelle` (Code → Bereich → Workflow, 56 überwachte Workflows) |
+| Übergang | Dedupe und Auto-Close erkennen zusätzlich die Alt-Titel; jede Alt-Meldung wird beim nächsten Kontakt still umbenannt |
+| Nachzug | Die Tageswache ruft `--migrate --apply` – offene Alt-Meldungen verschwinden auch ohne neuen Lauf ihres Workflows |
+| Beweis | `--selftest`: 9 Fallgruppen (Eindeutigkeit aller Codes, Markenfreiheit der Titel **geprüft mit der Marken-Wache selbst**, Erkennung von Alt-Titeln, schreibfreier Planmodus, unbelegte Heilung = Fehler) |
+
+Mitbereinigt: die beiden Betriebstitel des Qualitäts-Laufs
+(„🧠 Schema-/SEO-Gate meldet Funde", „🚨 Qualitäts-Gate rot") heißen jetzt
+„🧠 Strukturdaten der Website: Prüfung meldet Funde" bzw.
+„🚨 Qualitätsprüfung rot (Selbsttests, Vertrag oder Aufbau)"; die Alt-Formen
+bleiben im Schließ-Pfad, bis keine Meldung von vorher mehr offen ist.
+
+**Kontrolle in 30 Sekunden:**
+
+```bash
+python3 scripts/alert_issue_identity.py --selftest
+python3 scripts/alert_issue_identity.py --tabelle
+python3 scripts/brand_surface_guard.py --gate      # O6 muss leer bleiben
+```

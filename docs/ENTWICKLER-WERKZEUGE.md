@@ -66,3 +66,20 @@ python3 scripts/brand_surface_guard.py --only readme --gate --offline
 
 Ausnahmen gehören mit Begründung in `data/brand_surface_allowlist.txt`.
 Hintergrund und Admin-Fahrplan: [MARKEN-OBERFLAECHE-RUNBOOK.md](MARKEN-OBERFLAECHE-RUNBOOK.md).
+
+---
+
+## Automatische Fehlermeldungen: Vorgangscodes
+
+Fehlermeldungen tragen markenneutrale Titel („🔧 Wartung · Inhaltsqualität ·
+Vorgang WF-8F6F"). Welcher Workflow dahintersteht, zeigt:
+
+```bash
+python3 scripts/alert_issue_identity.py --tabelle
+python3 scripts/alert_issue_identity.py --workflow "Faktenfrische (Bestand)"
+python3 scripts/alert_issue_identity.py --selftest
+```
+
+Die Identität einer Meldung ist der unsichtbare Marker im Body
+(`<!-- alert-key: WF-XXXX -->`), **nicht** der Titel – wer den Titel von Hand
+ändert, zerstört also nichts. Hintergrund: Runbook, Abschnitt 7.

@@ -7,10 +7,10 @@
 #
 #  Meldet (Label auto-report, ohne Duplikate, automatisch geschlossen bei Grün):
 #    · kaputte interne Links   → "🔗 Defekte interne Links gefunden"
-#    · Schema-/SEO-Funde       → "🧠 Schema-/SEO-Gate meldet Funde"
+#    · Schema-/SEO-Funde       → "🧠 Strukturdaten der Website: Prüfung meldet Funde"
 #    · roter Selbsttest/Vertrag/Build
-#                              → "🚨 Qualitäts-Gate rot (Selbsttests, Vertrag
-#                                 oder Build)"   ← seit 18.09.2026, weil das
+#                              → "🚨 Qualitätsprüfung rot (Selbsttests, Vertrag
+#                                 oder Aufbau)"   ← seit 18.09.2026, weil das
 #                                 zentrale Fehler-Alerting für die nächtlichen
 #                                 Läufe dieses Gates nachweislich nicht griff
 #                                 (17./18.09. rot – ohne eine einzige Meldung).
@@ -180,7 +180,7 @@ jobs:
             LOG=linkcheck.log
             MUSTER='KAPUTT:'
           else
-            TITLE="🧠 Schema-/SEO-Gate meldet Funde"
+            TITLE="🧠 Strukturdaten der Website: Prüfung meldet Funde"
             LOG=schemagate.log
             MUSTER='❌'
           fi
@@ -246,7 +246,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TITEL="🚨 Qualitäts-Gate rot (Selbsttests, Vertrag oder Build)"
+          TITEL="🚨 Qualitätsprüfung rot (Selbsttests, Vertrag oder Aufbau)"
           # Welche Schritte sind wirklich gefallen? (API statt Raterei)
           SCHRITTE="$(gh run view "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" \
             --json jobs --jq '.jobs[].steps[] | select(.conclusion=="failure") | .name' \
@@ -298,7 +298,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          for TITLE in "🔗 Defekte interne Links gefunden" "🧠 Schema-/SEO-Gate meldet Funde" \
+          # Markenfläche #496: Die Titel wurden am 01.10.2026 von Betriebssprache
+          # („SEO-Gate", „Qualitäts-Gate") auf Alltagssprache umgestellt. Die
+          # Alt-Formen bleiben in dieser Liste, bis keine Meldung von vorher mehr
+          # offen ist – sonst bliebe eine erledigte Meldung für immer stehen.
+          for TITLE in "🔗 Defekte interne Links gefunden" \
+                       "🧠 Strukturdaten der Website: Prüfung meldet Funde" \
+                       "🚨 Qualitätsprüfung rot (Selbsttests, Vertrag oder Aufbau)" \
+                       "🧠 Schema-/SEO-Gate meldet Funde" \
                        "🚨 Qualitäts-Gate rot (Selbsttests, Vertrag oder Build)"; do
             for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label auto-report \
               --json number,title \
