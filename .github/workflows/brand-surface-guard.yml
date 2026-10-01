@@ -42,6 +42,21 @@ on:
     - cron: "20 4 * * *"
   release:
     types: [published, edited]
+  # Rückfall-Sperre (01.10.2026): Betriebssprache gelangte über einen
+  # README-Commit zurück auf die Markenfläche – der Tageslauf meldete das
+  # erst Stunden später und 5 Nächte in Folge rot. Jetzt schlägt die Prüfung
+  # schon beim Commit an, offline und ohne Schreibrechte.
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "data/brand_surface_allowlist.txt"
+      - "scripts/brand_surface_guard.py"
+  pull_request:
+    paths:
+      - "README.md"
+      - "data/brand_surface_allowlist.txt"
+      - "scripts/brand_surface_guard.py"
   workflow_dispatch:
     inputs:
       modus:
@@ -54,11 +69,38 @@ permissions:
   contents: write
 
 concurrency:
-  group: brand-surface-guard
+  group: brand-surface-guard-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  # ----------------------------------------------------------------
+  #  Rückfall-Sperre: prüft nur die lokale Markenfläche (README),
+  #  ohne Netz und ohne Schreibzugriff – läuft bei jedem Commit, der
+  #  README, Allowlist oder die Wache selbst berührt.
+  # ----------------------------------------------------------------
+  markenflaeche:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Selbsttest der Wache (blind wäre schlimmer als keine)
+        run: python3 scripts/brand_surface_guard.py --selftest
+
+      - name: README als Markenfläche prüfen (offline, schreibgeschützt)
+        run: |
+          set -euo pipefail
+          python3 scripts/brand_surface_guard.py --only readme --gate --offline || {
+            echo "::error::Betriebssprache im README – technische Abschnitte gehören nach docs/ENTWICKLER-WERKZEUGE.md (Ausnahmen mit Begründung in data/brand_surface_allowlist.txt)."
+            exit 1
+          }
+
   oberflaeche:
+    if: github.event_name != 'push' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:

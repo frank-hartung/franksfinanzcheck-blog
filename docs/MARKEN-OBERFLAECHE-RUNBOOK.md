@@ -184,3 +184,29 @@ der einzige Schlüssel zum Backup – ohne sie sind die `.enc`-Dateien verloren.
 6. **Nicht grün stellen, was ungeprüft ist.** Ist die API nicht erreichbar,
    meldet die Wache „nicht prüfbar" (`::warning::`) – `--strict` macht daraus
    einen Befund, wenn du es hart brauchst.
+
+---
+
+## 6. Rückfall vom 01.10.2026 (Issue #496) – Ursache und dauerhafte Sperre
+
+**Symptom:** Der Tageslauf „Marken-Oberfläche" war fünf Nächte in Folge rot
+(Läufe 36311346362 … 36852734783), jede Nacht mit demselben Alarm-Issue.
+
+**Ursache (keine Störung der Wache – sie hatte recht):** Ins README waren wieder
+zwei Betriebsabschnitte gewandert („Premium-Kontrollturm für die Blogautomatik",
+„Kostenloses SEO-Cockpit"). Das ergab **15 ROT-Befunde** auf der Markenfläche
+(Automatik-, Workflow-, SEO-Sprache und der Pfad `scripts/`). Der Selbsttest
+(14 Fallgruppen) lief dabei grün – der Detektor war also nachweislich intakt.
+
+**Dauerhafte Heilung:**
+
+| Maßnahme | Wirkung |
+|---|---|
+| Beide Abschnitte nach `docs/ENTWICKLER-WERKZEUGE.md` verschoben, im README nur noch ein Verweis | Markenfläche wieder ROT=0 (`--only readme --gate --offline`) |
+| `docs/ENTWICKLER-WERKZEUGE.md` sagt im Kopf, **warum** technische Abschnitte nicht ins README dürfen | Der nächste Mitwirkende sieht die Regel dort, wo er schreibt |
+| Neuer Job `markenflaeche` in `.github/workflows/brand-surface-guard.yml`, ausgelöst bei **push/PR** auf `README.md`, Allowlist oder die Wache selbst (offline, `contents: read`) | Der Rückfall scheitert am Commit, nicht erst Stunden später im Nachtlauf – fünf rote Nächte können sich nicht wiederholen |
+
+**Offen (Admin, GELB – blockiert nichts):** Repo-Beschreibung, Homepage-URL und
+Wiki (Abschnitt 3) sowie die Betriebstitel der Alarm-Issues. Das
+Automatik-Token hat kein Repo-Admin-Recht (`403 Resource not accessible by
+integration`) – diese Griffe bleiben bewusst bei dir.
