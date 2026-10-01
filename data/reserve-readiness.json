@@ -1,18 +1,130 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 7,
-  "generated_at": "2026-10-01T15:36:38Z",
+  "ready": 3,
+  "pool_size": 11,
+  "generated_at": "2026-10-01T16:21:28Z",
   "candidates": [
     {
-      "slug": "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
+      "slug": "2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v",
       "ready": true,
-      "sha256": "2ebe310fd335624f0c96729e3d62af10835c8f5d627661f745c3e06348e872b7",
-      "score": 0.898,
+      "sha256": "75d057f13d9886db39fbf3b5c763b3cfe2ef7b3d37ecb1bfb9ca5f79871966be",
+      "score": 0.936,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.76,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund",
+      "ready": true,
+      "sha256": "9e3eb095eb0b687c0d82de31cf1cbd579d10fa9a15637861b1b99bc8e5195a3d",
+      "score": 0.858,
       "parts": {
         "spelling": 0.8,
         "meta": 0.85,
         "structure": 1.0,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis",
+      "ready": true,
+      "sha256": "6072192e134362380ac501693c54d35c198dfd1bd23112c0d517b8ea790c2d62",
+      "score": 0.898,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe",
+      "ready": false,
+      "sha256": "847325e55a7d17ea94636a0d483ecccaef9b34c93797068e25b29800fa3d14af",
+      "reason": "quality-score 0.809 < 0.85 (schwach: structure 0.70, typography 0.70, spelling 0.72)",
+      "details": [
+        "Reserve nicht bereit: 2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe: {'slug': '2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe', 'score': 0.809, 'parts': {'spelling': 0.7200000000000001, 'meta': 1.0, 'structure': 0.7, 'typography': 0.7, 'uniqueness': 0.9, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.809,
+      "parts": {
+        "spelling": 0.7200000000000001,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.7,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me",
+      "ready": false,
+      "sha256": "f9d47b7b7a3295b71a8c69ce8a40a813cc3bec826be25f831afaad4941db5eb6",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.893,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen",
+      "ready": false,
+      "sha256": "04cf54afe18ff2ca4d00b02308ee408dabeffeda6ee1574be999ef3beeb5cba0",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.879,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig",
+      "ready": false,
+      "sha256": "3b260448e11393444620327588f86371343923eec3579007934bfa05f5fb71ef",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.877,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 0.85,
+        "structure": 0.7,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
@@ -20,14 +132,60 @@
       }
     },
     {
-      "slug": "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
-      "ready": true,
-      "sha256": "a384bdf33c5f1b1fe45617f20b8e47ecca31cbfa36ce7a665363ff41b4f1298d",
-      "score": 0.974,
+      "slug": "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig",
+      "ready": false,
+      "sha256": "7c03c97a92f324feef2df7a18ebb6507271a322ce029f0cf4aab1d06aeb257d2",
+      "reason": "quality-score 0.825 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.80)",
+      "details": [
+        "Reserve nicht bereit: 2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig: {'slug': '2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig', 'score': 0.825, 'parts': {'spelling': 0.8, 'meta': 0.85, 'structure': 0.7, 'typography': 0.8200000000000001, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.825,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 0.8200000000000001,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich",
+      "ready": false,
+      "sha256": "a5abafbd80ac0e7da5ba1c25775a2cdd2bcfbc971805f228f3c83ad05a6dcc23",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.905,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 1.0,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart",
+      "ready": false,
+      "sha256": "b88ba5d9c2b6e1d6ccc2cca74f26292a7e643f5c62c704ee2bfee9ded7a88713",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.929,
       "parts": {
         "spelling": 0.92,
         "meta": 1.0,
-        "structure": 1.0,
+        "structure": 0.7,
         "typography": 0.9,
         "uniqueness": 1.0,
         "affiliate": 1.0,
@@ -35,104 +193,25 @@
       }
     },
     {
-      "slug": "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
-      "ready": true,
-      "sha256": "8bce831fa970774568befb03a63e73ebad272b2edc988ad6f385889293fdbfed",
-      "score": 0.908,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever",
-      "ready": true,
-      "sha256": "e67e01458d1c9031b44a061b405a2f931c35323ad54984acfbfc138c9487e2e2",
-      "score": 0.882,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende",
+      "slug": "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri",
       "ready": false,
-      "sha256": "90b20fbf3f34adfe44641a4fc32ee9eddeb5fa425ac3d389e11c1f59fc250558",
-      "reason": "Keyword-Gate nicht bestanden: Keyword-Score 50/100 (<60 kritisch): Keyword nicht in: Description; Keyword nicht in: Erster Absatz; Keyword nicht in: Dichte",
+      "sha256": "60cee8359b42745eca286e39af8f4cc7e4c70b68d379ac9f1f512a12189fa5ed",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im",
       "details": [
-        "🛑 2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Keyword-Gate nicht bestanden: Keyword-Score 50/100 (<60 kritisch): Keyword nicht in: Description; Keyword nicht in: Erster Absatz; Keyword nicht in: Dichte",
+        "🛑 2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wie du mit einer budget app du willst wie du…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…mit einer budget app du willst wie du mit einer…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…budget app du willst wie du mit einer budget app…“ – doppelte Passage, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.918,
+      "score": 0.888,
       "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
+        "spelling": 0.8,
+        "meta": 0.85,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
-    },
-    {
-      "slug": "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
-      "ready": false,
-      "sha256": "47630273acaf1b9549e32389062594fdd13b966584bbad44b51ca703bc0a7222",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
-      "details": [
-        "🛑 2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.938,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.88,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab",
-      "ready": true,
-      "sha256": "4e57628a0ecc7a44a9f8b00eb73fd125979c32ee49a90958e15fba36e4ca9fc8",
-      "score": 0.896,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
     }
-  ],
-  "recert": {
-    "at": "2026-10-01T15:36:38Z",
-    "renewed": [
-      "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
-      "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende",
-      "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
-      "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
-      "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
-      "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab",
-      "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  ]
 }

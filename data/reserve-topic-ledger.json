@@ -106,11 +106,12 @@
     "sperre_bis": "2027-03-27"
   },
   "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 876 Wörter / 6426 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 866 Wörter / 6375 Zeichen (Premium: ≥1.",
+    "fehler": 0,
+    "grund": "produziert: 365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?": {
     "fehler": 0,
@@ -152,11 +153,12 @@
     "sperre_bis": "2027-03-29"
   },
   "Glasfaserausbau: Wann lohnt sich der Anschluss?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 784 Wörter / 5792 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: wann-ein-glasfaseranschluss-wirklich-geld-spart",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Grundversorgung raus: So entkommst du dem teuersten Stromtarif": {
     "fehler": 0,
@@ -167,11 +169,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 745 Wörter / 5594 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); Keyword „handyvertrag kündigen“ fehlt im ersten Absatz (Premium #303); leere An",
+    "fehler": 0,
+    "grund": "produziert: handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Haushaltskosten reduzieren mit einfachen Mitteln": {
     "fehler": 1,
@@ -197,11 +200,12 @@
     "sperre_bis": "2027-03-30"
   },
   "Hund & Katze: Lohnt sich eine Tierversicherung?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 732 Wörter / 6007 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Interrail und Bahncard: Günstig mit dem Zug durch Europa": {
     "fehler": 0,
@@ -220,11 +224,12 @@
     "sperre_bis": "2027-03-29"
   },
   "Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 938 Wörter / 7294 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung": {
     "fehler": 0,
@@ -235,11 +240,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Krankenzusatzversicherung: Welche Bausteine sich lohnen": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 1245 Wörter / 9808 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: krankenzusatz-bausteine-die-wirklich-etwas-bringen",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Last-Minute Urlaubsangebote sichern": {
     "fehler": 0,
@@ -301,11 +307,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Smart Home: Diese Geräte sparen wirklich Strom": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 669 Wörter / 5001 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: smart-home-so-senkst-du-deine-stromrechnung-nachhaltig",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
     "fehler": 0,
@@ -322,10 +329,12 @@
     "sperre_bis": "2026-10-01"
   },
   "Strom und Gas vergleichen und sparen": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-09-29"
+    "fehler": 0,
+    "grund": "produziert: strom-tarif-check-so-sparst-du-clever-im-jahresvergleich",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Stromanbieter wechseln und bis zu 300 Euro sparen": {
     "fehler": 0,
@@ -409,11 +418,12 @@
     "sperre_bis": "2026-10-01"
   },
   "Wie du deine monatlichen Ausgaben reduzieren kannst": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 848 Wörter / 6488 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Wie du deine monatlichen Bankgebühren reduzieren kannst": {
     "fehler": 0,
@@ -424,11 +434,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 825 Wörter / 6157 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen))",
+    "fehler": 0,
+    "grund": "produziert: wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Wohnmobil mieten statt kaufen: Was günstiger ist": {
     "fehler": 0,
@@ -439,10 +450,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg",
-    "letzter_versuch": "2026-09-27",
-    "sperre_bis": "2026-09-30"
+    "fehler": 0,
+    "grund": "produziert: waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Ökostrom wechseln: Günstig und seriös im Vergleich": {
     "fehler": 0,

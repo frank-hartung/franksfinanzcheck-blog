@@ -575,66 +575,102 @@
    "savings": ""
   }
  },
- "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck": {
-  "title": "DSL-Anbieter wechseln: So holst du hunderte Euro zurück",
-  "ts": "2026-10-01T10:35:58+00:00",
-  "design": {
-   "v": 3,
-   "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen": {
-  "title": "Baufinanzierung: So findest du das günstigste Darlehen",
-  "ts": "2026-10-01T10:35:52+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende": {
-  "title": "Die 5 besten: Apps für mehr Geld am Monatsende – Sparen",
-  "ts": "2026-10-01T10:36:01+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im": {
-  "title": "Online‑Banking schlank machen – So: steuerst du dein Geld",
-  "ts": "2026-10-01T10:36:05+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever": {
-  "title": "Urlaub sparen: So baust du deine Urlaubskasse 2026 clever",
-  "ts": "2026-10-01T10:35:55+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
- "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt": {
-  "title": "Heizöl Preise: So findest du den günstigsten Kaufzeitpunkt",
-  "ts": "2026-10-01T10:35:25+00:00",
+ "2026-10-01-waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis": {
+  "title": "Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?",
+  "ts": "2026-10-01T16:15:10+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
- "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab": {
-  "title": "Riester-Rente 2026: Zulagen-Segen oder teures Grab?",
-  "ts": "2026-10-01T10:35:29+00:00",
+ "2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v": {
+  "title": "Handyvertrag kündigen – So: entkommst du der automatischen V",
+  "ts": "2026-10-01T16:15:13+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen": {
+  "title": "Krankenzusatz –: Bausteine, die wirklich etwas bringen",
+  "ts": "2026-10-01T16:14:14+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart": {
+  "title": "Wann ein Glasfaseranschluss: wirklich Geld spart",
+  "ts": "2026-10-01T16:14:27+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri": {
+  "title": "Wie du mit einer Budget‑App: deine Geldflüsse endlich im Gri",
+  "ts": "2026-10-01T16:14:31+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe": {
+  "title": "365 Tage ohne Neukauf: – So sparst du mit der Kleider‑Challe",
+  "ts": "2026-10-01T16:14:08+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me": {
+  "title": "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste für me",
+  "ts": "2026-10-01T16:14:11+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund": {
+  "title": "Tierversicherung im Check – lohnt sich der Schutz für Hund?",
+  "ts": "2026-10-01T16:15:07+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig": {
+  "title": "Monatliche Kosten halbieren –: deine Checkliste für sofortig",
+  "ts": "2026-10-01T16:14:18+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig": {
+  "title": "Smart Home: So senkst du deine Stromrechnung nachhaltig",
+  "ts": "2026-10-01T16:14:21+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich": {
+  "title": "Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich",
+  "ts": "2026-10-01T16:14:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

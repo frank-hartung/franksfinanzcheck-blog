@@ -1,13 +1,90 @@
 {
-  "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt": {
-    "first": "2026-10-01T10:33:54Z",
-    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
+  "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe": {
+    "first": "2026-10-01T16:02:24Z",
+    "grund": "quality-score 0.809 < 0.85 (schwach: structure 0.70, typography 0.70, spelling 0.72)",
     "hits": 1,
     "laeufe": [
-      "run:36848427266"
+      "run:36885423259"
     ],
-    "last": "2026-10-01T10:37:28Z",
-    "lauf": "run:36848427266",
-    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem guide“ ×<n> (template-sprache – umformulieren)"
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "quality-score <score> < <score> (schwach: structure <score>, typography <score>, spelling <score>)"
+  },
+  "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me": {
+    "first": "2026-10-01T16:02:24Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen": {
+    "first": "2026-10-01T15:50:38Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig": {
+    "first": "2026-10-01T16:21:28Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig": {
+    "first": "2026-10-01T16:21:28Z",
+    "grund": "quality-score 0.825 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.80)",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "quality-score <score> < <score> (schwach: structure <score>, readability <score>, spelling <score>)"
+  },
+  "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich": {
+    "first": "2026-10-01T16:21:28Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart": {
+    "first": "2026-10-01T15:50:38Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri": {
+    "first": "2026-10-01T16:02:24Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im",
+    "hits": 1,
+    "laeufe": [
+      "run:36885423259"
+    ],
+    "last": "2026-10-01T16:21:28Z",
+    "lauf": "run:36885423259",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-phrasen-doppel: identische <n>-wort-sequenz im fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte passage, manuell reparieren; r<n>-ph"
   }
 }
