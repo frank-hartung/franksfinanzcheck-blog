@@ -68,7 +68,18 @@ class Grundgeruest(unittest.TestCase):
         p = os.path.join(d, "index.md")
         with open(p, "w", encoding="utf-8") as f:
             f.write(text)
-        stamp = (datetime.datetime.now() - datetime.timedelta(days=alt_tage)).timestamp()
+        # ZEITBOMBEN-SCHUTZ (01.10.2026): Der Stempel wird an HEUTE verankert,
+        # NICHT an datetime.now(). Vorher war es umgekehrt – damit maß der Test
+        # die Realzeit mit: classify() rechnet `alter = HEUTE - Dateistempel`,
+        # und je weiter die Uhr von HEUTE (12.09.2026) weglief, desto kleiner
+        # wurde das gemessene Alter. Am 01.10.2026 ergab `alt_tage=40` nur noch
+        # 21 Tage, die Verfallschwelle (`alter > 21`) kippte, und der Test
+        # forderte VERWAIST, bekam aber REIF. Gleiche Fehlerklasse wie
+        # docs/INCIDENT-2026-09-18-qualitaets-gate-zeitbombe.md.
+        # Mittags-Anker (12:00) statt Mitternacht: so kann keine Zeitzone und
+        # keine Sommerzeitumstellung das Datum um einen Tag kippen.
+        stamp = datetime.datetime.combine(
+            HEUTE - datetime.timedelta(days=alt_tage), datetime.time(12, 0)).timestamp()
         os.utime(p, (stamp, stamp))
         return p
 
@@ -80,6 +91,24 @@ class Grundgeruest(unittest.TestCase):
                         self.root, HEUTE, 21)
         self.assertEqual("REIF", r["zustand"], r["blocker"])
         self.assertEqual([], r["blocker"])
+
+    def test_fixturalter_ist_unabhaengig_von_der_realzeit(self):
+        """Zeitbomben-Wache: Das gemessene Alter muss `alt_tage` sein – immer.
+
+        Dieser Test ist der Grund, warum `_artikel` den Dateistempel an HEUTE
+        hängt und nicht an die Uhr. Schlägt er fehl, driftet die Fixture
+        wieder mit der Realzeit und alle Verfalls-Aussagen darunter werden
+        wertlos (Befund 01.10.2026).
+        """
+        for alt_tage in (0, 2, 21, 22, 40):
+            with self.subTest(alt_tage=alt_tage):
+                r = dt.classify(
+                    self._artikel(f"2026-09-10-alter-{alt_tage}", self._reif(),
+                                  alt_tage=alt_tage),
+                    self.root, HEUTE, 21)
+                self.assertEqual(alt_tage, r["tage_seit_letzte_aenderung"])
+                # Die Schwelle ist `alter > stale_days` – exakt, nicht ungefähr.
+                self.assertEqual("VERWAIST" if alt_tage > 21 else "REIF", r["zustand"])
 
     def test_verfall_nur_ohne_hindernis(self):
         r = dt.classify(self._artikel("2026-09-10-gastarif-sichern", self._reif(), alt_tage=40),
