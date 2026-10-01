@@ -265,6 +265,37 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
         self.assertIn("neu", self.origin_read(manifest))
 
+    def test_faktenfrische_artefakte_konflikt_heilt_frischer_lauf_gewinnt(self):
+        """Issue #497: Faktenfrische-Queue und Dossiers sind Snapshots.
+
+        Sie werden vollständig aus dem aktuellen Lauf erzeugt und sind keine
+        redaktionellen Quellen. Ein paralleler Bot darf den Rebase deshalb
+        nicht blockieren; der frische Faktenlauf gewinnt deterministisch.
+        Redaktioneller Content bleibt durch den separaten Content-Test
+        weiterhin fail-closed.
+        """
+        artefakte = {
+            "data/faktenfrische_queue.json":
+                ('{"lauf": "alt"}\n', '{"lauf": "frisch"}\n'),
+            "data/research/artikel/probe.md":
+                ("# Dossier alt\n", "# Dossier frisch\n"),
+            "data/research/artikel/probe.json":
+                ('{"lauf": "alt"}\n', '{"lauf": "frisch"}\n'),
+        }
+
+        for pfad, (alt, _) in artefakte.items():
+            self._commit(self.bot_a, pfad, alt, f"A: {pfad}")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+
+        for pfad, (_, frisch) in artefakte.items():
+            self._commit(self.bot_b, pfad, frisch, f"B: {pfad}")
+        res = self.run_sync(["--push-only"])
+
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Bot-Artefakt-Konflikte automatisch gelöst", res.stdout)
+        for pfad, (_, frisch) in artefakte.items():
+            self.assertEqual(self.origin_read(pfad), frisch)
+
     def test_jsonl_konflikt_wird_union_gemerget(self):
         base_jsonl = 'data/history.jsonl'
         self._commit(self.bot_a, base_jsonl, '{"run": "basis"}\n', "init jsonl")
