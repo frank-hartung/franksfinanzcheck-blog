@@ -156,6 +156,11 @@ def run_gate():
     offenlegung_failed, offenlegung_err, offenlegung_tool_error = \
         pg.offenlegung_failures()
 
+    # INTENT (01.10.2026, #493): Prüft, ob Satz und Anker ehrlich zum
+    # Partnerangebot passen (C24 Bank statt allgemeiner Marktvergleich).
+    intent_failed, intent_warn, intent_tool_error = \
+        pg.affiliate_intent_failures()
+
     # Keyword-Gate (Premium #303)
     try:
         if "keyword_optimizer" in sys.modules:
@@ -201,11 +206,16 @@ def run_gate():
 
     errors = [e for e in (length_err, seo_err, affiliate_err, integrity_err,
                           offenlegung_err, keyword_err) if e]
+    if intent_warn and intent_tool_error:
+        errors.append(intent_warn)
     if offenlegung_tool_error:
         errors.append("Werbekennzeichnung nicht beweisbar (Werkzeugfehler) – "
                       "Bestand gilt als NICHT geprüft")
     if integrity_tool_error:
         errors.append("Affiliate-Render-Beweis nicht möglich (Werkzeugfehler) – "
+                      "Bestand gilt als NICHT geprüft")
+    if intent_tool_error:
+        errors.append("Affiliate-Intent-Beweis nicht möglich (Werkzeugfehler) – "
                       "Bestand gilt als NICHT geprüft")
     if keyword_tool_error:
         errors.append("Keyword-Gate nicht beweisbar (Werkzeugfehler) – Bestand gilt als NICHT geprüft")
@@ -216,6 +226,7 @@ def run_gate():
         "integrity": integrity_failed,
         "offenlegung": offenlegung_failed,
         "keyword": keyword_failed,
+        "intent": intent_failed,
     }, errors
 
 
@@ -247,6 +258,9 @@ def heal(dimension: str) -> None:
         # melden – das ist die vom Nutzer geforderte "sofortige Reparatur"
         # für bereits veröffentlichte Bestandsartikel.
         subprocess.run([sys.executable, str(SCRIPTS / "affiliate_integrity_gate.py")],
+                        cwd=ROOT, capture_output=True, text=True, timeout=180)
+    elif dimension == "intent":
+        subprocess.run([sys.executable, str(SCRIPTS / "affiliate_intent_guard.py"), "--fix"],
                         cwd=ROOT, capture_output=True, text=True, timeout=180)
     elif dimension == "keyword":
         subprocess.run([sys.executable, str(SCRIPTS / "keyword_optimizer.py"), "--fix"],
@@ -602,6 +616,8 @@ def render_report(all_slugs: set[str], still_affected: dict, errors: list[str],
                 lines.append(f"- ⚠️ Affiliate-Link-Integrität (CTA defekt/nicht gerendert), Selbstheilung fehlgeschlagen: {msg}")
             for msg in detail.get("offenlegung", []):
                 lines.append(f"- ⚠️ Werbekennzeichnung nicht artikelgenau/nicht sichtbar genug: {msg}")
+            for msg in detail.get("intent", []):
+                lines.append(f"- ⚠️ Affiliate-Intent (Versprechen ≠ Ziel), Selbstheilung fehlgeschlagen: {msg}")
             lines.append("")
         lines.append(
             "---\n_Bestandsartikel werden NIE automatisch gelöscht (anders als druckfrische Kandidaten in "
@@ -636,7 +652,8 @@ def main():
         affected = {s for s in (findings["length"] | findings["seo"] | findings.get("keyword", set())
                                 | set(findings["affiliate"].keys())
                                 | set(findings["integrity"].keys())
-                                | set(findings.get("offenlegung", {}).keys()))
+                                | set(findings.get("offenlegung", {}).keys())
+                                | set(findings.get("intent", {}).keys()))
                     if s in all_slugs}
 
         healed_dims = []
@@ -650,6 +667,9 @@ def main():
             if affected & set(findings["integrity"].keys()):
                 heal("integrity")
                 healed_dims.append("integrity")
+            if affected & set(findings.get("intent", {}).keys()):
+                heal("intent")
+                healed_dims.append("intent")
             if affected & findings.get("keyword", set()):
                 heal("keyword")
                 healed_dims.append("keyword")
@@ -664,10 +684,11 @@ def main():
                 "affiliate": findings["affiliate"].get(s, []),
                 "integrity": findings["integrity"].get(s, []),
                 "offenlegung": findings.get("offenlegung", {}).get(s, []),
+                "intent": findings.get("intent", {}).get(s, []),
             }
             for s in all_slugs
             if s in findings["length"] or s in findings["seo"] or s in findings.get("keyword", set()) or s in findings["affiliate"]
-            or s in findings["integrity"] or s in findings.get("offenlegung", {})
+            or s in findings["integrity"] or s in findings.get("offenlegung", {}) or s in findings.get("intent", {})
         }
 
         # EXIT-CODES (02.09.2026): 0 = grün, 1 = Inhaltsschaden, 2 = Auswertungsfehler.

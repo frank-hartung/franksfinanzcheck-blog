@@ -188,6 +188,7 @@ REGELN – STRENG EINHALTEN:
 7. Behalte Listen, Tabellen und deren Struktur bei.
 8. Mindestlänge: der neue Text muss mindestens 85% der ursprünglichen Länge haben.
 9. Kein Markdown-Code, keine Anführungszeichen um den Text, keine Einleitung wie "Hier ist...".
+10. Affiliate-Ehrlichkeit (#493): Verändere bei Affiliate-Links (z. B. zu /go/tagesgeld/, /go/girokonto/) NIEMALS den umgebenden Satz so, dass ein Einzelangebot als 'Vergleich' oder 'Marktüberblick' versprochen wird. Die C24 Bank ist ein Angebot der C24 Bank, kein Marktvergleich mehrerer Banken. Behalte bestehende ehrliche Partnerbezeichnungen und Sätze bei.
 
 ARTIKEL-TITEL: {a['title']}
 KEYWORDS: {a['description'][:100]}
@@ -274,6 +275,22 @@ def verify_update(a, new_body):
     # Code-Blöcke nicht zerstört
     if a["body"].count("```") % 2 == 0 and new_body.count("```") % 2 != 0:
         problems.append("Code-Blöcke kaputt")
+
+    # Affiliate-Intent-Prüfung (#493): KI darf keine unehrlichen Satzversprechen
+    # wie „Tagesgeldvergleich → C24 Bank" einschleusen – fail-closed vor dem Schreiben.
+    try:
+        import affiliate_intent_guard as aig
+        reg = aig.load_registry()
+        virt_art = dict(a)
+        virt_art["body"] = new_body
+        virt_art["text"] = f"---\n{a.get('fm', '')}---\n{new_body}"
+        intent_funde = aig.pruefe_artikel(virt_art, reg, {})
+        blocking = [f for f in intent_funde if f.get("blocking")]
+        if blocking:
+            for f in blocking:
+                problems.append(f"Affiliate-Intent-Verletzung: {f['code']} – {f['problem']}")
+    except Exception as exc:
+        problems.append(f"Affiliate-Intent-Prüfung fehlgeschlagen: {exc}")
 
     return problems
 

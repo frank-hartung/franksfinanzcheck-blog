@@ -231,6 +231,6 @@ So reduzierst du deine Restschuld und wirst deutlich schneller schuldenfrei.
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Kreditangebote prüfen**](/go/kredit/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
