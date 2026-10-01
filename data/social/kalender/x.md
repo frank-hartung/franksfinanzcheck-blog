@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 01.10.2026 20:56 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Do, 01. Oktober 2026
-- **19:15** ⚪ Privathaftpflicht: Warum so wichtig und was sie kostet — _thread_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Fr, 02. Oktober 2026
 - **08:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/

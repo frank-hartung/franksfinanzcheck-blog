@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 01.10.2026 20:56 (Europe/Berlin)
+> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -11,9 +11,9 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 | Mastodon | ⚪ Standby | 0 | – | [md](mastodon.md) · [ics](mastodon.ics) |
 | Bluesky | ⚪ Standby | 18 | Fr 02.10. 08:15 · Internet & DSL wechseln: Praxis- | [md](bluesky.md) · [ics](bluesky.ics) |
 | LinkedIn | ⚪ Standby | 6 | Fr 02.10. 07:45 · Tierkrankenversicherung für Hund | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 23 | Do 01.10. 19:15 · Privathaftpflicht: Warum so wich | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 18 | Do 01.10. 16:15 · Sicher heizen: So schützt dich e | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 18 | Do 01.10. 15:15 · DSL-Wechselbonus sichern: So spa | [md](facebook.md) · [ics](facebook.ics) |
+| X (Twitter) | ⚪ Standby | 23 | Fr 02.10. 08:45 · DSL-Vergleich: So findest du den | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 18 | Fr 02.10. 09:15 · Internet & DSL wechseln: Praxis- | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 18 | Fr 02.10. 09:45 · Gasrechnung senken: Spätsommer-C | [md](facebook.md) · [ics](facebook.ics) |
 | Instagram | ⚪ Standby | 9 | Fr 02.10. 11:45 · Finanzielle Freiheit erreichen:  | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 9 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
@@ -22,10 +22,6 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 
 ## Nächste 14 Tage – alle Kanäle zusammen
 
-### Do, 01. Oktober 2026
-- **15:15** ⚪ Facebook (Seite) · _vergleich_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **16:15** ⚪ Threads · _takeaway_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
-- **19:15** ⚪ X (Twitter) · _thread_ · Privathaftpflicht: Warum so wichtig und was sie kostet
 ### Fr, 02. Oktober 2026
 - **07:45** ⏳ LinkedIn · _takeaway_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
 - **08:15** ⏳ Bluesky · _takeaway_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet

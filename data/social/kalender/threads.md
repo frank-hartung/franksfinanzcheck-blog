@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 01.10.2026 20:56 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Do, 01. Oktober 2026
-- **16:15** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### Fr, 02. Oktober 2026
 - **09:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
