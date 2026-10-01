@@ -7,6 +7,10 @@ on:
 
 permissions:
   contents: write
+  # Das Einzigartigkeits-Audit führt seinen eigenen, deduplizierten Issue-
+  # Lebenszyklus. Ohne diese eng begrenzte Berechtigung wäre ein kritischer
+  # Live-Befund nur im Lauf-Log sichtbar und könnte unbemerkt liegen bleiben.
+  issues: write
 
 concurrency:
   group: blog-health
@@ -118,6 +122,43 @@ jobs:
       - run: python3 scripts/keyword_optimizer.py --fix || echo "⚠ Keyword-Gate – Restfunde im Log"
       - run: python3 scripts/keyword_gate.py --selftest
       - run: python3 scripts/keyword_gate.py --fix || echo "⚠ Keyword-Gate (Premium) – Restfunde im Log"
+
+      # EINZIGARTIGKEITS-AUDIT (#490): Der Quartalslauf darf nicht der einzige
+      # Ort sein, an dem ein Live↔Live-Duplikat auffällt. `continue-on-error`
+      # ist hier bewusst: Ein bestehender Befund darf die deterministischen
+      # Heilungen dieser täglichen Visite nicht am Commit hindern. Exit 1 wird
+      # aber NICHT verschluckt, sondern direkt unterhalb als ein kanonisches
+      # Issue mit vollem Beleg synchronisiert. Exit >= 2 bedeutet dagegen:
+      # Selbsttest/Sabotage-Schutz defekt -> hart stoppen, nichts committen.
+      - name: Einzigartigkeits-Audit (Bestand, täglich)
+        id: uniqueness
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/check_uniqueness.py | tee /tmp/uniqueness_audit.txt
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+
+      - name: Audit-Sabotage-Schutz erzwingen
+        if: steps.uniqueness.outputs.exit_code != '0' && steps.uniqueness.outputs.exit_code != '1'
+        run: |
+          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${{ steps.uniqueness.outputs.exit_code }})."
+          exit 2
+
+      - name: Kritischen Bestandsbefund als einen Vorgang führen
+        if: steps.uniqueness.outputs.exit_code == '1' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          UNIQUE_PRODUCTION_REF: refs/heads/${{ github.event.repository.default_branch }}
+        run: python3 scripts/uniqueness_issue_sync.py --status critical --report /tmp/uniqueness_audit.txt
+
+      - name: Erledigten Bestandsbefund automatisch schließen
+        if: steps.uniqueness.outputs.exit_code == '0' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          UNIQUE_PRODUCTION_REF: refs/heads/${{ github.event.repository.default_branch }}
+        run: python3 scripts/uniqueness_issue_sync.py --status clean
 
       - run: python3 scripts/blog_health_gate.py
       - run: |

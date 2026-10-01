@@ -193,12 +193,35 @@ zurückziehen**:
 | Prompt-Echo der KI-Auffrischung | ungeprüft in den Body geschrieben | `strip_prompt_echo()` **vor** Prüfung und Schreiben; `verify_update()` verwirft das Update fail-closed, falls eine unbekannte Variante durchkommt (wie bei verlorenen Affiliate-Links) |
 | Prompt-Echo im News-Desk | `_strip_fences()` entfernte nur Code-Fences und H1 | zusätzlich `C7_SCAFFOLD_RE` — **dieselbe Marke**, importiert aus `content_audit.py`, kein zweites Muster |
 | Bestand im Gerüst-Zustand | unentdeckt (8 Artikel, seit August) | `content_audit.py --fix` heilt C7 bei jedem Doktor-Lauf |
-| Bestandsüberlappungen | nur im **Quartals**-Lauf sichtbar (bis zu 3 Monate) | `check_uniqueness.py` ist Teil der **Doktor-Kette** (Phase B-Semantik, meldend, nie schreibend) → `blog-health-daily.yml` prüft den Bestand **täglich** |
+| Bestandsüberlappungen | nur im **Quartals**-Lauf sichtbar (bis zu 3 Monate) | `blog-health-daily.yml` führt `check_uniqueness.py` als **direkte tägliche Messung** aus |
+| Offener Befund | Quartals-Issue blieb nach einer Heilung offen oder enthielt nur den alten Log | `uniqueness_issue_sync.py` aktualisiert genau einen Vorgang mit dem letzten Beleg und kommentiert/schließt ihn nach einem grünen Produktionslauf |
 | Regel-Drift zwischen den Wachen | zwei Strip-Listen | `template_boilerplate.py` bleibt SSOT für `check_uniqueness` **und** `quality_score` |
 
-**Keine Workflow-Datei wurde angefasst** (Agenten-Tokens haben keine
-`workflows`-Permission, CLAUDE.md): Die Taktverschärfung läuft über die
-Doktor-Kette, die `blog-health-daily.yml` bereits aufruft.
+### Nachschärfung: nicht nur dokumentiert, sondern tatsächlich verdrahtet
+
+Die erste Fassung dieses Berichts hatte die Doktor-Kette als täglichen Takt
+benannt. Die Workflow-Prüfung hat die Lücke aufgedeckt: `blog-health-daily.yml`
+rief `blog_doctor.py` nicht auf und führte damit auch das Einzigartigkeits-Audit
+nicht aus. Ein sauberer Grundsatz ohne ausführenden Schritt ist keine Wache.
+
+Seit dieser Nachschärfung gilt deshalb ein expliziter Betriebsvertrag:
+
+1. Der tägliche Gesundheitslauf misst nach seinen deterministischen Heilungen
+   den ganzen Bestand. **Exit 1** (echte Live-Überlappung) wird nicht als
+   `|| echo` verschluckt: Ein dedupliziertes Issue erhält den vollständigen
+   Audit-Beleg. Die übrigen sicheren Tagesheilungen dürfen trotzdem committen.
+2. **Exit ≥ 2** bedeutet einen defekten Audit-Selbsttest, nicht einen
+   redaktionellen Fund. Der Lauf stoppt hart vor dem Commit und fällt in das
+   bestehende Fehler-Alerting.
+3. Nur `main` darf den Produktionsvorgang erzeugen, aktualisieren oder schließen
+   (Workflow-Ref **und** Skript prüfen das). Ein manueller Lauf auf einem
+   Arbeitsbranch kann folglich niemals einen echten Befund still schließen.
+4. Der Quartalslauf nutzt dieselbe Skript-SSOT als zweite, unabhängige Messung
+   direkt nach der KI-Aktualisierung. Kein zweiter Titel, kein zweiter
+   Dedupe-Algorithmus, kein schleichender Lifecycle-Drift.
+5. Die Befundklasse folgt jetzt `post_utils.build_state()` statt nur dem
+   `draft:`-Regex: Zukunfts- und abgelaufene Posts sind nicht auslieferbar und
+   erscheinen als Vorab-Aufgabe, nie als falscher Live-Bestandsschaden.
 
 ### Beweise (alle lokal grün)
 
@@ -206,8 +229,8 @@ Doktor-Kette, die `blog-health-daily.yml` bereits aufruft.
 python3 scripts/check_uniqueness.py --selftest       # 6 Twin-Fälle + Klassen + Anker-Pinne
 python3 scripts/template_boilerplate.py              # Fazit/FAQ, Marketing, interne Anker, Idempotenz
 python3 scripts/content_audit.py --selftest          # 13 Fälle (inkl. C7 + Falsch-Positiv-Gegenprobe)
-python3 scripts/blog_doctor.py --selftest            # 7 Fälle, Kette 27 Wachen
-python3 -m unittest discover -s scripts/tests        # 1164 Tests
+python3 scripts/uniqueness_issue_sync.py --selftest  # Ref-Scope, Dedupe, Beleg, Schlusskommentar
+python3 -m unittest discover -s scripts/tests        # Regressionen inkl. Workflow-Vertrag
 python3 scripts/check_uniqueness.py                  # Bestand: Exit 0
 ```
 
@@ -228,14 +251,15 @@ Unverändert geprüft, ohne neue Funde gegenüber `main`: `math_guard`,
 
 | Messgröße | Vorher (Issue #490) | Nachher |
 |---|---|---|
-| Interne Überlappungen gesamt | 30 | 11 |
+| Interne Überlappungen gesamt | 30 | **9** (nur unkritische Standardformulierungen) |
 | **Kritisch (live↔live)** | **10** (gemischt) | **0** |
-| Entwurfs-Paare (eigene Klasse) | – (in „kritisch" versteckt) | **0** (Zwilling zusammengeführt) |
+| Nicht-Live-Paare (eigene Klasse) | – (in „kritisch" versteckt) | **0** (Entwurf/Zukunft/Ablauf vor Veröffentlichung sichtbar) |
 | Pin-Konflikte | 0 | 0 |
 | Same-Day-Zwillinge | 0 | 0 |
 | Generator-Gerüst in Live-Artikeln | 17 Zeilen in 8 Artikeln | 0 |
 | Exit-Code `check_uniqueness.py` | 1 | **0 — „✅ Audit bestanden"** |
-| Prüftakt des Bestands | quartalsweise | täglich (Doktor-Kette) |
+| Prüftakt des Bestands | quartalsweise | **täglich, direkt im Gesundheitslauf** + Quartals-Gegenmessung |
+| Befund-Lebenszyklus | offenes Quartals-Issue ohne Schlussbeweis | ein deduplizierter Vorgang, automatisch aktualisiert und nach Grün geschlossen |
 
 Der Bestand ist sauber, die Wache misst, was sie messen soll, und die Quelle
 des Gerüst-Lecks ist an beiden Enden geschlossen. Der letzte offene Punkt —
