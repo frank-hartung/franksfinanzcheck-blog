@@ -154,7 +154,9 @@ jobs:
       - name: Ergebnisse committen
         if: always()
         run: |
-          PFADE="SCHALTWERK-STATUS.md data/schaltwerk_state.json data/schaltwerk_log.jsonl \
+          # Hinweis: SCHALTWERK-STATUS.md ist bewusst git-ignoriert
+          # (.gitignore: /*-STATUS.md – Cockpits werden erzeugt, nicht versioniert).
+          PFADE="data/schaltwerk_state.json data/schaltwerk_log.jsonl \
                  data/schaltwerk_standby.log data/schaltwerk_konfig.log \
                  data/agent_reach/themen_vorschlaege.yaml data/social/state.yaml \
                  data/social/schedule.yaml"
