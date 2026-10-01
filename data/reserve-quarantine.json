@@ -1,13 +1,13 @@
 {
-  "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung": {
-    "first": "2026-09-30T10:01:58Z",
-    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+  "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt": {
+    "first": "2026-10-01T10:33:54Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
     "hits": 1,
     "laeufe": [
-      "run:36698807636"
+      "run:36848427266"
     ],
-    "last": "2026-09-30T10:06:39Z",
-    "lauf": "run:36698807636",
-    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem artikel“ ×<n> (template-sprache – umformulieren)"
+    "last": "2026-10-01T10:37:28Z",
+    "lauf": "run:36848427266",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem guide“ ×<n> (template-sprache – umformulieren)"
   }
 }

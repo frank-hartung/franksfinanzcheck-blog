@@ -1,0 +1,27 @@
+{"ts": "2026-10-01T10:22:32Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:22:32Z", "module": "fix_spaces", "action": "apply", "input": {"files": 62}, "output": {"fixes": 327}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:22:50Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:22:50Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:26:11Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:26:17Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:26:22Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 22}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:26:26Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 18}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:26:27Z", "module": "fix_dash_eol", "action": "apply", "input": {"files": 2}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:27:29Z", "module": "fix_spaces", "action": "apply", "input": {"files": 66}, "output": {"fixes": 409}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:29:41Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 12}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:29:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:29:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:29:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:29:41Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:31:16Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 40}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:31:49Z", "module": "fix_spaces", "action": "apply", "input": {"files": 67}, "output": {"fixes": 310}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:32:49Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:32:49Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:33:54Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt"]}, "output": {"gated": ["2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt"], "demoted": []}, "status": "gated", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:34:53Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:34:59Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:35:00Z", "module": "fix_spaces", "action": "apply", "input": {"files": 68}, "output": {"fixes": 334}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:36:10Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:36:10Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:36:10Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 1}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-01T10:37:17Z", "module": "publish_gate", "action": "gate", "input": {"candidates": ["2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt"]}, "output": {"gated": ["2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt"], "demoted": []}, "status": "gated", "critical": false, "commit": null}

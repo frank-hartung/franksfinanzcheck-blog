@@ -1,100 +1,119 @@
 {
   "target": 6,
-  "ready": 4,
-  "pool_size": 5,
-  "generated_at": "2026-09-30T21:32:45Z",
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-10-01T10:37:28Z",
   "candidates": [
     {
-      "slug": "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
+      "slug": "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
       "ready": true,
-      "sha256": "7bc7f18cee14b1ffea552ddd43c01c5cafec5f8a054a25e000f84abbde98e570",
-      "score": 0.938,
+      "sha256": "16774061f80abcab7b4e94e9504cb5502a7cc02816221f21fc952da2600b1efc",
+      "score": 0.898,
       "parts": {
-        "spelling": 0.78,
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
+      "ready": true,
+      "sha256": "b213c8be42318913a34bca3a7c183cc85bd4fe6f90973c0e56d5c197fdc9f10f",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
+      "ready": true,
+      "sha256": "d6f980fc791fb5b54804e5c47eb9101c39d0b3bd22055b32719c0b5792aef6f4",
+      "score": 0.888,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.78,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever",
+      "ready": true,
+      "sha256": "b58b8569bbb6d1cf9ad2a5b1e64c80c9bfcd716268f12da60fb2742f4656b446",
+      "score": 0.882,
+      "parts": {
+        "spelling": 0.7,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.75
       }
     },
     {
-      "slug": "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
+      "slug": "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende",
       "ready": true,
-      "sha256": "db1fb6a6b7ffa3b0df539e6b3deb5110eb0117d633377a698a2dcc5bb0bceb42",
-      "score": 0.962,
+      "sha256": "c8c15fb033f5449df222c8cb5c801e229f2ef90d0e13c97db79bdf60faf070f0",
+      "score": 0.918,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.75
       }
     },
     {
-      "slug": "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
+      "slug": "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
       "ready": false,
-      "sha256": "b1780911bcfdb6bfb0e1388edaf510847a4767b04d647e4ad66c0708975ed3c2",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "sha256": "3b4e69a3bc45dbec57ed084840cff75a72d52b1919d4e5ed49f7ab0368973a8b",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
       "details": [
-        "🛑 2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
+        "🛑 2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.97,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
-      "ready": true,
-      "sha256": "e70eba40924e331788ea84068d0a118df6ce7c37f307b6f720b9e05923dfe779",
-      "score": 0.95,
+      "score": 0.918,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.6799999999999999,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
       }
     },
     {
-      "slug": "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden",
+      "slug": "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab",
       "ready": true,
-      "sha256": "8a2529babfd1f3396184cb9d3615b07764f724071d42a5270147b183d047c822",
-      "score": 0.954,
+      "sha256": "c8de383347e988ceab2941b5b5d96959539e17dcd307b86a8a82fcc40429283a",
+      "score": 0.896,
       "parts": {
-        "spelling": 0.8200000000000001,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.86,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.75
       }
     }
-  ],
-  "recert": {
-    "at": "2026-09-30T21:32:45Z",
-    "renewed": [
-      "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom",
-      "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
-      "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen",
-      "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe",
-      "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  ]
 }

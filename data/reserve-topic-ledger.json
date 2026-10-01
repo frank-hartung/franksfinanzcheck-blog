@@ -43,10 +43,12 @@
     "sperre_bis": "2027-03-27"
   },
   "DSL-Anbieter wechseln und Geld sparen": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-09-29"
+    "fehler": 0,
+    "grund": "produziert: dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "DSL-Anbieter wechseln: Wie du den besten Tarif findest": {
     "fehler": 1,
@@ -56,10 +58,12 @@
     "sperre_bis": "2026-10-01"
   },
   "Dein Online-Banking und Kontomanagement optimieren": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-09-29"
+    "fehler": 0,
+    "grund": "produziert: online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Die Vorteile von Online-Konten und wie du sie nutzt": {
     "fehler": 0,
@@ -70,10 +74,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Die besten Apps für das Sparen von Geld": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-09-29"
+    "fehler": 0,
+    "grund": "produziert: die-5-besten-apps-fuer-mehr-geld-am-monatsende",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Die verschiedenen Arten von Reiseversicherungen im Vergleich": {
     "fehler": 0,
@@ -175,17 +181,20 @@
     "sperre_bis": "2026-10-01"
   },
   "Hauskauf finanzieren: Darlehen clever vergleichen": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 685 Wörter / 5563 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 751 Wörter / 5837 Zeichen (Premium: ≥1.",
+    "fehler": 0,
+    "grund": "produziert: baufinanzierung-so-findest-du-das-guenstigste-darlehen",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Heizöl kaufen: Wann ist der beste Zeitpunkt?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg",
-    "letzter_versuch": "2026-09-27",
-    "sperre_bis": "2026-09-30"
+    "fehler": 0,
+    "grund": "produziert: heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Hund & Katze: Lohnt sich eine Tierversicherung?": {
     "fehler": 1,
@@ -276,11 +285,12 @@
     "sperre_bis": "2026-10-01"
   },
   "Riester-Rente: Lohnt sie sich 2026 noch?": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: nur 853 Wörter / 6266 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); leere Antwort (GEMINI); Profi-Gate: nur 1071 Wörter / 8571 Zeichen (Premium: ≥1",
+    "fehler": 0,
+    "grund": "produziert: riester-rente-2026-zulagen-segen-oder-teures-grab",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-28",
-    "sperre_bis": "2026-10-01"
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "Schufa-Eintrag löschen lassen: So gehst du richtig vor": {
     "fehler": 0,
@@ -362,10 +372,12 @@
     "sperre_bis": "2027-03-28"
   },
   "Urlaubskasse clever aufbessern": {
-    "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg",
-    "letzter_versuch": "2026-09-27",
-    "sperre_bis": "2026-09-30"
+    "fehler": 0,
+    "grund": "produziert: urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-01",
+    "letzter_versuch": "2026-10-01",
+    "sperre_bis": "2027-03-30"
   },
   "VPN für Zuhause: Brauchst du das wirklich?": {
     "fehler": 0,

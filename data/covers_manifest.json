@@ -548,15 +548,6 @@
    "savings": ""
   }
  },
- "2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
-  "title": "1.000 € Notgroschen aufbauen: Dein 12-Monats-Plan",
-  "ts": "2026-09-29T10:48:12+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Konto & Karten-Update: Was sich jetzt für dich ändert",
   "ts": "2026-09-29T15:09:43+00:00",
@@ -575,42 +566,6 @@
    "savings": ""
   }
  },
- "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom": {
-  "title": "E-Auto Ladekosten senken: Strategien für günstigen Strom",
-  "ts": "2026-09-30T10:11:50+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung": {
-  "title": "E‑Bike sichern: Lohnt sich eine Fahrradversicherung?",
-  "ts": "2026-09-30T10:11:57+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
- },
- "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen": {
-  "title": "Neujahrsvorsätze Geld: 8 Ziele, die 2027 wirklich klappen",
-  "ts": "2026-09-30T10:11:48+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe": {
-  "title": "So wechselst du Ökostrom Anbieter: – günstig & seriös",
-  "ts": "2026-09-30T10:35:56+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
   "title": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
   "ts": "2026-09-30T10:11:51+00:00",
@@ -620,12 +575,66 @@
    "savings": ""
   }
  },
- "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden": {
-  "title": "Weihnachten Budget planen: Entspannt feiern ohne Schulden",
-  "ts": "2026-09-30T10:11:59+00:00",
+ "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck": {
+  "title": "DSL-Anbieter wechseln: So holst du hunderte Euro zurück",
+  "ts": "2026-10-01T10:35:58+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen": {
+  "title": "Baufinanzierung: So findest du das günstigste Darlehen",
+  "ts": "2026-10-01T10:35:52+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende": {
+  "title": "Die 5 besten: Apps für mehr Geld am Monatsende – Sparen",
+  "ts": "2026-10-01T10:36:01+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im": {
+  "title": "Online‑Banking schlank machen – So: steuerst du dein Geld",
+  "ts": "2026-10-01T10:36:05+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever": {
+  "title": "Urlaub sparen: So baust du deine Urlaubskasse 2026 clever",
+  "ts": "2026-10-01T10:35:55+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt": {
+  "title": "Heizöl Preise: So findest du den günstigsten Kaufzeitpunkt",
+  "ts": "2026-10-01T10:35:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab": {
+  "title": "Riester-Rente 2026: Zulagen-Segen oder teures Grab?",
+  "ts": "2026-10-01T10:35:29+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }
