@@ -283,7 +283,12 @@ jobs:
             //  Fällt (b) weg, bevor alle Alt-Meldungen geschlossen sind,
             //  entstünden Doppel-Issues; deshalb bleibt es bis dahin stehen.
             // ================================================================
-            const ident = JSON.parse(require('fs').readFileSync('/tmp/alarm-identitaet.json', 'utf8'));
+            // Pfad über die Umgebung, damit die Verhaltens-Simulation
+            // (scripts/tests/sim/alert_scoping_sim.mjs) dieselbe Identitäts-
+            // Quelle einspielen kann wie der echte Lauf – ein Test, der eine
+            // andere Namensgebung benutzt als die Produktion, prüft nichts.
+            const identPfad = process.env.ALARM_IDENTITAET || '/tmp/alarm-identitaet.json';
+            const ident = JSON.parse(require('fs').readFileSync(identPfad, 'utf8'));
             const altTitel = 'Workflow fehlgeschlagen: ' + wfName;
             const open = existing.filter(i => !i.pull_request && (
               (i.body && i.body.indexOf(ident.marker) !== -1) ||
