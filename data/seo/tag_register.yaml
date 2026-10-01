@@ -153,14 +153,6 @@ tags:
       - "Schadenfreiheitsklasse"
       - "Vollkasko ohne Selbstbeteiligung"
 
-  - name: "Haftpflichtversicherung"
-    pillar: versicherungen
-    synonyme:
-      - "Privathaftpflicht"
-      - "Rechtsschutzversicherung"
-      - "Rechtsschutz Leistungen"
-      - "Rechtsstreit versichern"
-
   - name: "Gesundheit und Vorsorge"
     pillar: versicherungen
     synonyme:
@@ -198,6 +190,18 @@ tags:
       - "Tierkrankenversicherung Katze"
       - "Tierarztkosten absichern"
       - "Haustier Versicherung"
+      # Haftpflichtversicherung am 01.10.2026 hierher überführt (T4-Befund im
+      # KI-Redaktions-Gate): nur noch EIN zählbarer Artikel trug den Tag,
+      # nachdem die Reserve-Rotation den einzigen zweiten Träger (E-Bike-
+      # Reserveentwurf) gelöscht hatte. Gleiche Entscheidung wie bei der
+      # Tierkrankenversicherung: unter den breiten Vergleich, statt totes
+      # Matching-Gewicht zu halten. Rückweg: tragen wieder ≥ 2 zählbare
+      # Artikel das Thema, Eintrag hier entfernen und als eigenen Tag anlegen.
+      - "Haftpflichtversicherung"
+      - "Privathaftpflicht"
+      - "Rechtsschutzversicherung"
+      - "Rechtsschutz Leistungen"
+      - "Rechtsstreit versichern"
 
   # ------------------------------------------------------------------
   # PILLAR: internet-dsl
