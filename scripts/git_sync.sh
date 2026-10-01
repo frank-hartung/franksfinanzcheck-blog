@@ -394,6 +394,19 @@ path.write_text(json.dumps(merged, ensure_ascii=False, indent=2,
 PY
           git add -- "$f"
           ;;
+        data/faktenfrische_queue.json|data/research/artikel/*)
+          # REPARATUR 01.10.2026 (Issue #497 – „Faktenfrische (Bestand) rot trotz
+          # erfolgreicher Recherche“): Queue und Dossiers sind vollständig aus
+          # dem aktuellen Lauf erzeugte Maschinen-Artefakte. Parallel laufende
+          # Bots dürfen sie nicht als fachlichen Content-Konflikt blockieren;
+          # der frische Lauf gewinnt deterministisch (--theirs). Die
+          # Fakten-Historie bleibt davon getrennt und wird oben als JSONL-Union
+          # zusammengeführt. Artikel unter content/ bleiben bewusst ein harter
+          # Konflikt, damit redaktionelle Änderungen niemals überschrieben
+          # werden.
+          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+          git add -- "$f"
+          ;;
         data/reserve-readiness.json|data/covers_manifest.json)
           # REPARATUR 15.09.2026 (Issue #295 – „Content-Reserve rot trotz
           # gesundem Inhalt“):
