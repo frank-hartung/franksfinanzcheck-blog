@@ -1,29 +1,22 @@
 {
- "generated_at": "2026-09-30 10:10:47 UTC",
+ "generated_at": "2026-10-01 10:38:03 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 68,
- "checked_links": 206,
+ "checked_articles": 69,
+ "checked_links": 209,
  "healed_count": 0,
  "healed": [],
  "findings": [
   {
    "code": "IW4",
-   "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
-   "line": 15,
-   "route": "hausrat",
+   "slug": "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
+   "line": 17,
+   "route": "kredit",
    "slot": "top",
    "owner": "human",
-   "problem": "Verbotenes Paar: Artikelthema „Wohngebäudeversicherung“ → Route „Hausratversicherung“. Fund 19.09.2026: Wohngebäude-Vergleich, Top-CTA → /go/hausrat/ (Gebäude ≠ Hausrat: zwei verschiedene Policen). – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/wohngebaeudeversicherung/?"
-  },
-  {
-   "code": "IW4",
-   "slug": "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung",
-   "line": 80,
-   "route": "hausrat",
-   "slot": "mid",
-   "owner": "human",
-   "problem": "Verbotenes Paar: Artikelthema „Wohngebäudeversicherung“ → Route „Hausratversicherung“. Fund 19.09.2026: Wohngebäude-Vergleich, Top-CTA → /go/hausrat/ (Gebäude ≠ Hausrat: zwei verschiedene Policen). – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/wohngebaeudeversicherung/?"
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Tagesgeld der C24 Bank“ → Route „Ratenkredit“. Geldanlage-Interesse darf nicht im Ratenkredit-Rechner landen. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/tagesgeld/?"
   }
  ],
  "errors": []

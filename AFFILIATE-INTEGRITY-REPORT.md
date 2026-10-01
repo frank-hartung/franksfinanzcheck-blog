@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-09-30 10:10:45 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-01 10:38:02 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 42 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 44 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -54,6 +54,8 @@
 | 2026-09-21-tierkrankenversicherung-hund-katze-kosten | 1 → 3 ✅ | /go/hunde/ |
 | 2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge | 3 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
+| 2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich | 3 → 3 ✅ | /go/kfz-versicherung/ |
+| 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp | 2 → 3 ✅ | /go/mietwagen/ |
 
 ## Hinweise (nicht blockierend)
 
