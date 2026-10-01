@@ -1,0 +1,37 @@
+{{- /* sitemap_kandidaten.html – findet JEDE Inhaltsseite des Projekts.
+
+     WARUM DIESE PARTIAL EXISTIERT (Befund 01.10.2026, Vorgang WF-54C4)
+     Die Sitemap zählte ihre Seiten früher per Hand auf: sechs Pillar-Slugs,
+     zwei Hub-Sektionen, eine Liste der Rechts-/Vertrauensseiten. Jede NEUE
+     Seite (zuletzt /cockpit/) war damit automatisch unsichtbar für die
+     Sitemap – und die Index-Hygiene-Wache H1 stoppte den Deploy, bis jemand
+     den Namen nachtrug. Ein Seitentyp, der bei jedem Wachstum bricht, ist
+     kein Premium-Zustand: Die Sitemap muss den Bestand ABLEITEN, nicht
+     behaupten.
+
+     Warum nicht einfach `site.RegularPages`? Die sechs Pillar-Ratgeber tragen
+     bewusst `build.list: never` (sie werden in /pillar/ redaktionell kuratiert
+     statt automatisch gelistet). Hugo nimmt solche Seiten aus allen
+     Page-Collections heraus – `site.Pages` würde sie stillschweigend
+     verschlucken. Verlässlich bleibt nur die Quelle selbst: der content-Baum.
+     Diese Partial läuft ihn rekursiv ab und holt zu jedem Seitenbündel die
+     echte Hugo-Seite über `site.GetPage`. Entwürfe, Zukunftsdaten und
+     `build.render: never` liefern dabei schlicht keine Seite zurück.
+
+     Kontext: Pfad relativ zum Projekt (Start: "content").
+     Rückgabe: Slice aus Seitenpfaden ("/", "/cockpit", "/posts/xy"), die
+     sitemap.xml über `site.GetPage` auflöst. Bewusst Pfade statt Seiten:
+     Hugo reicht Partial-Rückgaben als `interface{}` durch, Feldzugriffe auf
+     Page-Objekte scheitern dann zur Laufzeit.
+*/ -}}
+{{- $dir := . -}}
+{{- $out := slice -}}
+{{- range os.ReadDir $dir -}}
+  {{- if .IsDir -}}
+    {{- $out = $out | append (partial "sitemap_kandidaten.html" (path.Join $dir .Name)) -}}
+  {{- else if or (eq .Name "index.md") (eq .Name "_index.md") -}}
+    {{- $pfad := strings.TrimPrefix "content" $dir -}}
+    {{- $out = $out | append (cond (eq $pfad "") "/" $pfad) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}
