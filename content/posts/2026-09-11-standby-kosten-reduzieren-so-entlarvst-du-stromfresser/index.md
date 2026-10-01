@@ -76,7 +76,7 @@ Für eine konstante Leistung lautet die Formel:
 
 > Watt × Stunden pro Tag × 365 ÷ 1.000 = kWh pro Jahr
 
-Anschließend multiplizierst du mit deinem Arbeitspreis in Euro. Der BDEW-Durchschnitt von 37,0 Cent pro kWh dient hier nur als Rechenwert. Auf deiner Rechnung steht dein echter Preis.
+Anschließend multiplizierst du mit deinem Arbeitspreis in Euro. Der BDEW-Durchschnitt von 37,0 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert. Auf deiner Rechnung steht dein echter Preis.
 
 | Dauerlast | Verbrauch pro Jahr | Kosten bei 0,37 €/kWh |
 |---:|---:|---:|

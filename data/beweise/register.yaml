@@ -1,0 +1,216 @@
+# ============================================================
+#  BEWEIS-REGISTER – originäre Belege statt Behauptungen
+#  (Beweissystem 01.10.2026; Vertrag: data/beweise/schema.yaml)
+#
+#  MENSCHLICH KURATIERT. scripts/beweis_gate.py prüft die Form,
+#  schreibt aber nie. Öffentliches Rendering:
+#    {{< beweis id="…" >}}        – einzelner Beweis im Artikel
+#    {{< beweisregister >}}       – Gesamtübersicht (/methodik/)
+#
+#  EHRLICHKEITS-REGEL: Was noch nicht fertig dokumentiert ist,
+#  steht hier mit status geplant/in-erhebung und erscheint
+#  öffentlich nur im Backlog („Woran wir gerade dokumentieren“).
+#  Ein leeres Versprechen wäre schlechter als ein sichtbarer,
+#  terminierter Dokumentationsstand.
+# ============================================================
+
+meta:
+  brand: FranksFinanzcheck
+  version: 1
+  angelegt: "2026-10-01"
+  quelle_dieser_entscheidung: "BEWEISSYSTEM-PREMIUM-2026-10-01.md"
+
+eintraege:
+  # ==========================================================
+  #  MODELLRECHNUNGEN (Belegklasse M) – verifiziert:
+  #  Formel, Annahmen und Grenzen sind vollständig offengelegt,
+  #  die Werte wurden redaktionell nachgerechnet und sind als
+  #  Datensatz (data/datasets/) mit Changelog versioniert.
+  # ==========================================================
+  - id: mr-dsl-effektivpreis-24m
+    typ: modellrechnung
+    titel: "DSL-Effektivpreis über 24 Monate (Werbepreis vs. echter Monatspreis)"
+    themenbereich: internet-dsl
+    belegklasse: markt
+    status: verifiziert
+    angelegt: "2026-09-28"
+    stand: "2026-09-28"
+    kurzfazit: >-
+      Ein mit 29,99 € beworbener DSL-Tarif kostet im dokumentierten
+      Modellfall über die volle Laufzeit 41,24 € pro Monat – der
+      Werbepreis unterschätzt die echten Kosten um 37 Prozent.
+    rechenweg: >-
+      Effektivpreis = (12 × 29,99 € + 12 × 44,99 € + 120 € Router
+      + 69,99 € Bereitstellung − 100 € Bonus) ÷ 24 Monate = 41,24 €.
+    annahmen:
+      - "24 Monate Mindestlaufzeit, Preisstufe ab Monat 13 laut Preisliste"
+      - "Routermiete 5 €/Monat über die gesamte Laufzeit (120 €)"
+      - "Wechselbonus wird vollständig ausgezahlt (Auszahlungshürden siehe Grenzen)"
+    grenzen:
+      - "Modellfall mit typischen Konditionen – kein Angebotsvergleich und keine Preisprognose"
+      - "Boni mit Auszahlungshürden (Portal-Registrierung, Fristen) können den Effektivpreis real verschlechtern"
+    dataset: dsl_effektivpreis_modell
+    quellen:
+      - name: "Rechenweg im Artikel (Abschnitt „24-Monats-Taschenrechner“)"
+        url: "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/#der-24-monats-taschenrechner-den-vergleichsportale-nicht-zeigen"
+      - name: "Versionierter Datensatz mit Changelog (CC BY 4.0)"
+        url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/data/datasets/dsl_effektivpreis_modell.yaml"
+    changelog:
+      - datum: "2026-09-28"
+        notiz: "Erstfassung; Werte gegen die im Artikel offengelegte Rechnung geprüft (redaktioneller Rechencheck)."
+
+  - id: mr-tagesgeld-15000
+    typ: modellrechnung
+    titel: "Zinsertrag für 15.000 € Notgroschen im Modellvergleich"
+    themenbereich: konto-karten
+    belegklasse: markt
+    status: verifiziert
+    angelegt: "2026-09-28"
+    stand: "2026-10-01"
+    kurzfazit: >-
+      Zwischen Girokonto (0 €) und gut verzinstem Tagesgeld (465 €)
+      liegen im Modell 465 € Bruttozins pro Jahr – bei identischer
+      Verfügbarkeit des Geldes.
+    rechenweg: >-
+      Bruttoertrag = 15.000 € × Modellzinssatz pro Jahr; Modellsätze:
+      Girokonto 0,00 %, Sparbuch 0,40 %, Tagesgeld 1,90 %,
+      Top-Tagesgeld 3,10 %, Festgeld 12 Monate 3,40 %.
+    annahmen:
+      - "Einmalanlage 15.000 €, keine Zu- oder Abflüsse im Jahr"
+      - "Zinssatz bleibt das volle Jahr konstant (Tagesgeldzinsen sind real variabel)"
+    grenzen:
+      - "Brutto vor Abgeltungsteuer; Zinseszins und unterjährige Zinsänderungen nicht berücksichtigt"
+      - "Modellzinssätze dokumentieren Größenordnungen, keine konkreten Angebote"
+    dataset: tagesgeld_modell
+    quellen:
+      - name: "Rechenbeispiel im Artikel (15.000 €)"
+        url: "https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/#rechenbeispiel-was-bringt-das-tagesgeld-konkret"
+      - name: "Versionierter Datensatz mit Changelog (CC BY 4.0)"
+        url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/data/datasets/tagesgeld_modell.yaml"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "Modellzinssätze und Bruttoerträge mit der Oktober-Aktualisierung des Artikels synchronisiert (v1.1.0)."
+      - datum: "2026-09-28"
+        notiz: "Erstfassung aus dem redaktionell geprüften Rechenbeispiel."
+
+  # ==========================================================
+  #  FALLSTUDIEN
+  # ==========================================================
+  - id: fs-dsl-modellfall-2026
+    typ: fallstudie
+    titel: "Modellfall: Bestandskunde zahlt 44,95 € – was bringt der Wechsel wirklich?"
+    themenbereich: internet-dsl
+    belegklasse: markt
+    status: modellfall
+    angelegt: "2026-10-01"
+    stand: "2026-10-01"
+    kurzfazit: >-
+      Der Modellfall zeigt den typischen Entscheidungsweg: Nicht der
+      Werbepreis (29,99 €), sondern der Effektivpreis (41,24 €)
+      entscheidet – der Wechsel lohnt sich hier trotzdem, bringt aber
+      real 44,52 € pro Jahr statt der suggerierten 179,52 €.
+    ausgangslage: >-
+      Bestandstarif nach Ablauf der Aktionsphase: 44,95 € pro Monat
+      für DSL 100, Vertrag monatlich kündbar. Ein Portal bewirbt
+      einen Neuvertrag mit „29,99 €“.
+    entscheidung: >-
+      Statt auf den Werbepreis zu reagieren, wird der Effektivpreis
+      über 24 Monate gerechnet (Formel siehe Modellrechnung
+      mr-dsl-effektivpreis-24m): 41,24 € pro Monat inklusive
+      Preisstufe ab Monat 13, Routermiete, Bereitstellung und Bonus.
+    ergebnis: >-
+      Ersparnis real 3,71 € pro Monat (44,52 € pro Jahr) statt der
+      suggerierten 14,96 € pro Monat. Der Wechsel bleibt sinnvoll –
+      die Entscheidung fällt aber auf Basis der ehrlichen Rechnung,
+      nicht des Lockpreises.
+    zeitraum: "Modellzeitraum: 24 Monate Vertragslaufzeit"
+    anonymisierung: >-
+      Durchgerechneter Modellfall mit typischen Marktkonditionen
+      (Stand 09/2026) – keine reale Einzelperson, keine realen
+      Vertragsdaten. Reale, anonymisierte Fallstudien sind im
+      Backlog dieses Registers terminiert.
+    grenzen:
+      - "Kein realer Einzelfall – Ausgangstarif und Konditionen sind typisiert"
+      - "Regionale Verfügbarkeit und individuelle Boni können das Ergebnis verschieben"
+    quellen:
+      - name: "Zugrunde liegende Modellrechnung (Formel, Annahmen, Datensatz)"
+        url: "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/#der-24-monats-taschenrechner-den-vergleichsportale-nicht-zeigen"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "Erstfassung als ausgewiesener Modellfall auf Basis der verifizierten Modellrechnung mr-dsl-effektivpreis-24m."
+
+  - id: fs-kfz-leserfall-2026
+    typ: fallstudie
+    titel: "Anonymisierte Leser-Fallstudie: Kfz-Wechsel zum Stichtag 30.11."
+    themenbereich: versicherungen
+    belegklasse: erfahrung
+    status: geplant
+    angelegt: "2026-10-01"
+    kurzfazit: >-
+      Reale, anonymisierte Fallstudie eines Kfz-Versicherungswechsels
+      mit dokumentierter Ausgangsprämie, Entscheidungsweg und
+      Beitragsrechnung alt/neu.
+    dokumentationsplan: >-
+      Benötigt: schriftliche Einwilligung der Leserin/des Lesers,
+      Beitragsrechnungen alt und neu (intern archiviert, öffentlich
+      geschwärzt: Name, Adresse, Kennzeichen, Versicherungsnummer),
+      Tarifmerkmale (SF-Klasse, Typklasse, Leistungsumfang) und das
+      Ergebnis nach der ersten Jahresrechnung. Veröffentlichung nur
+      nach Vier-Augen-Freigabe der Anonymisierung.
+    faellig: "2027-01-15"
+
+  # ==========================================================
+  #  WECHSELPROTOKOLLE (Belegklasse E)
+  # ==========================================================
+  - id: wp-internet-dsl-2026
+    typ: wechselprotokoll
+    titel: "Dokumentierter eigener DSL-Anbieterwechsel (mit Rechnungen)"
+    themenbereich: internet-dsl
+    belegklasse: erfahrung
+    status: in-erhebung
+    angelegt: "2026-10-01"
+    kurzfazit: >-
+      Eigener Anbieterwechsel wird vollständig protokolliert:
+      jedes Datum, jede Rechnung, jede Hürde – als öffentlicher
+      Beleg für die im Ratgeber beschriebenen Abläufe.
+    pflichtfelder:
+      - "Auftragsdatum, bestätigter Schalttermin, tatsächlicher Schalttermin"
+      - "Letzte Rechnung Altanbieter und erste Rechnung Neuanbieter (anonymisierte Scans; Originale intern archiviert)"
+      - "Ausfallzeit in Stunden am Wechseltag"
+      - "Bonus beantragt am / gutgeschrieben am (Nachweis der Auszahlungshürden)"
+      - "Effektivpreis-Nachrechnung nach Formel mr-dsl-effektivpreis-24m mit den realen Beträgen"
+    dokumentationsplan: >-
+      Protokoll läuft seit Oktober 2026 mit dem Kündigungsfenster des
+      Bestandsvertrags. Veröffentlicht wird der Eintrag erst, wenn die
+      erste Rechnung des Neuanbieters vorliegt – vorher wäre das
+      Ergebnis eine Behauptung, kein Beleg.
+    faellig: "2026-12-15"
+
+  # ==========================================================
+  #  MESSREIHEN (Belegklasse E)
+  # ==========================================================
+  - id: ms-standby-haushalt-2026
+    typ: messreihe
+    titel: "Standby-Messreihe: 10 Gerätegruppen, 14 Tage, Energiekostenmessgerät"
+    themenbereich: strom-sparen
+    belegklasse: erfahrung
+    status: in-erhebung
+    angelegt: "2026-10-01"
+    kurzfazit: >-
+      Eigene Messreihe ersetzt die bisher zitierten Pauschalwerte zu
+      Standby-Verbräuchen durch selbst gemessene Watt- und
+      Jahreskostenwerte je Gerätegruppe.
+    messaufbau:
+      geraet: "Zwischenstecker-Energiekostenmessgerät (Messbereich ab 0,1 W, Genauigkeitsklasse laut Hersteller ±1 %)"
+      zeitraum: "14 Tage je Gerätegruppe, Oktober–November 2026"
+      protokoll:
+        - "Je Gerätegruppe: Standby-Leistung in Watt (Mittelwert aus 3 Ablesungen) und Aus-Zustand"
+        - "Hochrechnung: kWh/Jahr = Watt × 24 h × 365 ÷ 1000, bewertet mit dem BDEW-Durchschnittspreis (Kennzahl bdew-haushaltsstrompreis, Stand-Datum wird mitveröffentlicht)"
+        - "Gerätegruppen: Router, TV, Spielkonsole, Kaffeevollautomat, Mikrowelle, PC+Monitor, Soundbar, Drucker, Ladegeräte, Smart-Home-Hub"
+        - "Rohdaten erscheinen als versionierter Datensatz unter data/datasets/ (CC BY 4.0)"
+    dokumentationsplan: >-
+      Messung läuft im realen Haushalt; veröffentlicht werden
+      Rohwerte, Rechenweg und Gerätegenerationen (ohne Marken-
+      Einzelbewertung). Bis dahin tragen Standby-Artikel weiterhin
+      die Belegklasse A/M an jeder Zahl – nicht E.
+    faellig: "2026-11-30"

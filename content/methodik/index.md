@@ -1,14 +1,14 @@
 ---
-title: "So arbeiten wir: Redaktionsstandards, Recherche & Methodik"
-description: "Transparenz bei FranksFinanzcheck: Internet-Recherche mit Agent Reach, Claude-Faktenprüfung, strenge Quell-Allowlist, Update-Rhythmus und unabhängige Empfehlungen."
+title: "So arbeiten wir: Beweissystem, Methodik & Redaktionsstandards"
+description: "Transparenz bei FranksFinanzcheck: Beweis-Register mit Fallstudien und Messreihen, versionierte Vergleichsmethodik je Themenbereich, Belegklassen an jeder Zahl, öffentliches Änderungsprotokoll, Claude-Faktenprüfung und strenge Quell-Allowlist."
 draft: false
 author: "Frank Hartung"
 showToc: true
 ---
 
-<p style="font-size:.9em; color:#555;">Stand: September 2026 · Verantwortlich: Frank Hartung (<a href="/ueber/">Über mich</a>) · Kontakt: kontakt@franksfinanzcheck.de</p>
+<p style="font-size:.9em; color:#555;">Stand: Oktober 2026 · Verantwortlich: Frank Hartung (<a href="/ueber/">Über mich</a>) · Kontakt: kontakt@franksfinanzcheck.de</p>
 
-Auf **FranksFinanzcheck** findest du Spar-Ratgeber und Tarifvergleiche, die du ohne Finanzstudium sofort im Alltag umsetzen kannst. Diese Seite dokumentiert transparent, **wie** unsere Inhalte entstehen, **womit** sie faktenbasiert belegt werden, **wie** wir moderne KI- und Recherche-Werkzeuge wie Agent Reach und Claude qualitätsgesichert einsetzen und **in welchen Abständen** alle Angaben überprüft werden.
+Auf **FranksFinanzcheck** findest du Spar-Ratgeber und Tarifvergleiche, die du ohne Finanzstudium sofort im Alltag umsetzen kannst. Diese Seite erklärt nicht nur, **wie** unsere Inhalte entstehen – sie ist der Einstieg in unser **Beweissystem**: Jede wichtige Aussage soll hier nachprüfbar sein, nicht nur behauptet. Konkret heißt das: ein öffentliches [Beweis-Register](#beweis-register) mit Fallstudien, Wechselprotokollen, Messreihen und Modellrechnungen, eine [versionierte Vergleichsmethodik je Themenbereich](#vergleichsmethodik-je-themenbereich), [Belegklassen direkt an den Zahlen](#belegklassen-jede-zahl-trägt-ihre-quelle) und ein [öffentliches Änderungsprotokoll](/aenderungsprotokoll/).
 
 ## Der FranksFinanzcheck-Ansatz: Fixkosten-Kompass statt Tipp-Sammlung
 
@@ -23,18 +23,70 @@ Das kostenlose [Fixkosten-Cockpit](/cockpit/) setzt diese erste Orientierung dir
 
 ---
 
-## 1. Recherche: Primärquellen und Multi-Kanal-Recherche
+## Vom Erklärtext zum Beweissystem
+
+„Selbst geprüft“, „praxisgetestet“, „unabhängig“ – solche Worte sind schnell geschrieben. Vertrauen entsteht aber durch **sichtbare Belege**, nicht durch Behauptungen. Deshalb gilt bei uns für jede Art von Aussage eine feste Beweisregel:
+
+| Aussage-Typ | Beweisregel |
+|---|---|
+| Harte Kennzahl (Strompreis, Zins, Frist) | Quelle **direkt an der Zahl** mit Stand-Datum, gespeist aus dem kuratierten Kennzahlen-Register mit festen Prüfintervallen |
+| Einsparbehauptung („spart X € im Jahr“) | Offengelegter Rechenweg mit Annahmen und Grenzen – als [Modellrechnung im Beweis-Register](#beweis-register) oder Formel im Artikel |
+| Vergleichsempfehlung („dieser Tarif-Typ“) | Versionierte [Vergleichsmethodik des Themenbereichs](#vergleichsmethodik-je-themenbereich): Formel, K.-o.-Kriterien, Rangfolge, Datenbasis |
+| Erfahrungsaussage („ich habe gewechselt/gemessen“) | Eintrag im Beweis-Register mit Protokoll und archiviertem Original-Beleg – sonst wird sie als Einordnung gekennzeichnet, nicht als Beweis |
+| Korrektur/Änderung | Öffentlicher Eintrag im [Änderungsprotokoll](/aenderungsprotokoll/): was, wann, warum, welche Quelle |
+
+### Belegklassen: Jede Zahl trägt ihre Quelle
+
+Wir trennen sichtbar, **woher** eine Aussage stammt. Dafür gibt es drei Belegklassen, die im gesamten Auftritt als Badge erscheinen – an Beleg-Chips neben Zahlen, im Beweis-Register und im Änderungsprotokoll:
+
+- **A – Amtliche / institutionelle Quelle:** Bundesbehörden, Gesetze und etablierte Fachinstanzen (BNetzA, Destatis, Bundesbank, BaFin, Verbraucherzentralen, Stiftung Warentest, BDEW, GDV). Der Beleg hängt als Chip direkt an der Zahl, mit Herausgeber und Stand-Datum.
+- **M – Marktbeobachtung / Modellrechnung:** Eigene, reproduzierbare Rechenwege und Tarif-Stichproben mit dokumentiertem Abrufdatum. Kein amtlicher Beleg – aber Formel, Annahmen und Grenzen liegen vollständig offen, jeder kann nachrechnen.
+- **E – Eigene Erfahrung / Messung:** Selbst durchgeführte Wechsel, Messreihen und Praxistests. Diese Klasse ist bewusst die **strengste**: Sie darf nur zitiert werden, wenn ein Protokoll im Beweis-Register existiert und die Original-Belege (Rechnungen, Bestätigungen) intern archiviert sind.
+
+Eine persönliche Einschätzung ohne Protokoll bleibt erlaubt – sie wird dann aber als Einordnung formuliert und **nie** mit einer Zahl oder dem Etikett „getestet“ verkauft.
+
+---
+
+## Vergleichsmethodik je Themenbereich
+
+Jeder Themenbereich hat eine eigene, **versionierte** Vergleichsmethodik: Leitfrage, Rechenweg, K.-o.-Kriterien und Rangfolge, Datenbasis nach Belegklassen und die Grenzen des Verfahrens. Wir verwenden bewusst Prüfregeln und Rangfolgen statt erfundener Gewichtungs-Prozente – Scheinpräzision wäre das Gegenteil von Beweisführung. Jede inhaltliche Änderung erhöht die Versionsnummer und landet im [Änderungsprotokoll](/aenderungsprotokoll/).
+
+{{< vergleichsmethodik >}}
+
+---
+
+## Beweis-Register
+
+Das Register ist die zentrale, öffentliche Sammlung unserer originären Belege: **Fallstudien** (Ausgangslage → Entscheidung → Ergebnis), **Wechselprotokolle** mit Datum und archivierter Rechnung, **Messreihen** mit offengelegtem Messaufbau und **Modellrechnungen** mit versionierten Datensätzen. Es zeigt ehrlich beide Seiten: was bereits belegt ist – und was sich mit festem Fälligkeitsdatum noch in der Dokumentation befindet. Ein Modellfall wird dabei immer als Modellfall gekennzeichnet; ein laufendes Protokoll wird erst dann zum Beweis, wenn alle Original-Belege vorliegen.
+
+{{< beweisregister >}}
+
+### Dokumentationsregeln für eigene Belege (Klasse E)
+
+1. **Protokoll vor Veröffentlichung:** Kein Wechsel, kein Test und keine Messung wird zitiert, bevor das Protokoll vollständig ist (Daten, Beträge, Zeitpunkte, Hürden).
+2. **Original-Belege werden archiviert:** Rechnungen und Bestätigungen liegen intern im Original vor; veröffentlicht werden anonymisierte Fassungen (geschwärzt: Namen, Adressen, Kunden- und Vertragsnummern, Kennzeichen).
+3. **Fallstudien nur mit Einwilligung:** Leser-Fallstudien erscheinen ausschließlich anonymisiert und mit schriftlicher Einwilligung; die Anonymisierung wird vor Veröffentlichung im Vier-Augen-Prinzip geprüft.
+4. **Messreihen mit offenem Aufbau:** Messgerät, Zeitraum, Protokollschritte und Rechenweg werden vor Beginn festgelegt und mitveröffentlicht; Rohdaten erscheinen als versionierte Datensätze (CC BY 4.0).
+5. **Ehrlicher Status:** Solange ein Beleg in Erhebung ist, tragen die betroffenen Artikel weiterhin Belegklasse A/M an ihren Zahlen – nicht E.
+
+### Was wir (noch) nicht belegen können
+
+Beweisführung heißt auch, Lücken zu benennen: Reale anonymisierte Fallstudien und die erste vollständig dokumentierte eigene Messreihe sind terminiert, aber noch nicht abgeschlossen (siehe Backlog im Register). Bis dahin gilt: Was nicht im Register steht, ist eine Einordnung – kein Beweis. Erfahrungs-Hinweise in Artikeln („Meine Erfahrung“) beschreiben Arbeitsweise und Einschätzung des Autors und werden nicht als unabhängiger Beleg gewertet.
+
+---
+
+## Recherche: Primärquellen und Multi-Kanal-Recherche
 
 Jeder Ratgeber und jeder Blogartikel basiert auf verifizierten Daten. Wir stützen uns nicht auf Hörensagen, ungeprüfte Pressemitteilungen oder Werbeaussagen, sondern recherchieren an der Quelle:
 
 1. **Amtliche Register und Bundesbehörden (Rang 1):** Bundesnetzagentur (BNetzA), Statistisches Bundesamt (Destatis), Bundesbank, BaFin, Bundesministerium der Finanzen und Bundesjustizministerium (gesetze-im-internet.de).
 2. **Etablierte Verbraucherschutz- und Fachinstanzen (Rang 2):** Verbraucherzentralen der Bundesländer, Stiftung Warentest (test.de), BDEW (Bundesverband der Energie- und Wasserwirtschaft), GDV (Gesamtverband der Deutschen Versicherungswirtschaft), co2online und dena.
 3. **Führende Fach- und Wirtschaftsredaktionen (Rang 3):** tagesschau, heise online, DER SPIEGEL.
-4. **Eigene Praxistests:** Tarife buchen, Apps testen, Kündigungen und Wechsel selbst durchführen – echte Erfahrungswerte aus über 10 Jahren Praxis.
+4. **Eigene Dokumentation (Klasse E und M):** Tarif-Stichproben, Modellrechnungen, Wechselprotokolle und Messreihen – zitierfähig nur nach den oben genannten Dokumentationsregeln über das Beweis-Register.
 
 ---
 
-## 2. Automatisierte Recherche & Claude-Faktenprüfung
+## Automatisierte Recherche & Claude-Faktenprüfung
 
 Um die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelbestand dauerhaft auf **Premium-Level einer Profi-Agentur** zu sichern, nutzen wir ein mehrstufiges, automatisiertes Qualitäts- und Recherche-System:
 
@@ -64,29 +116,31 @@ Um die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelb
 - **Recherche bei Content-Erstellung:** Jeder neue Artikel durchläuft vor Veröffentlichung eine gezielte Faktenrecherche mit Agent Reach und wird mit aktuellen Daten angereichert.
 - **Doppelter Anti-Halluzinations-Filter:** Eine Quelle darf nur in einen Artikel übernommen werden, wenn ihre URL nachweisbar im Recherche-Dossier existiert **und** die Domain auf unserer kuratierten Allowlist liegt. Affiliate-Partnerseiten sind als Belege grundsätzlich ausgeschlossen.
 - **GEO- und LLM-Zitierbarkeit:** Jeder belegte Artikel spiegelt seine Faktenbasis doppelt aus: als sichtbare Box **„Quellen & Faktenstand“** für Leser und als semantisches `schema.org/citation`-Markup für KI-Antwortmaschinen (ChatGPT Search, Perplexity, Google AI Overviews, Apple Intelligence).
+- **Maschinelle Beweis-Wache:** Ein eigenes Prüfprogramm validiert bei jeder Änderung den Vertrag des Beweissystems – Pflichtfelder je Beweis-Typ, gültige Querverweise aus Artikeln ins Register und die Regel, dass unfertige Belege nie als Beweis gerendert werden können.
 
 ---
 
-## 3. Aktualität: Systematischer Revisions-Rhythmus
+## Aktualität: Systematischer Revisions-Rhythmus
 
 Preise, Zinsen und Gesetze ändern sich. Deshalb wird unser Bestand in festen, risikobasierten Intervallen nachrecherchiert und aktualisiert:
 
 | Risikoklasse | Prüfintervall | Themenbereiche |
 |---|---|---|
+| **Harte Kennzahlen** | je Kennzahl 30–365 Tage | Kennzahlen-Register mit eigenem Prüfrhythmus pro Zahl (z. B. BDEW-Preise alle 30 Tage) |
 | **Saisonale Schwerpunkte** | alle 30 Tage | Heizung/Gas vor der Heizperiode, Kfz-Wechsel zum 30.11., Jahreswechsel |
 | **YMYL (Your Money, Your Life)** | alle 45 Tage | Zinsen, Kredite, Versicherungsverträge, gesetzliche Kündigungsfristen |
 | **Standard-Ratgeber** | alle 90 Tage | Budget-Methoden, Haushaltsgewohnheiten, Frugalismus-Tipps |
 
 - **Sichtbare Datums-Transparenz:** Artikel mit inhaltlicher Überarbeitung tragen eine explizite Stand-Zeile. Ein rein technisches Deployment verändert das redaktionelle Datum niemals.
-- **Korrektur-Kultur (WiWo-Standard):** Sollte sich trotz doppelter Prüfung ein Fehler einschleichen, wird er transparent korrigiert und im Artikel als gut sichtbarer Korrekturhinweis ausgewiesen.
+- **Öffentliche Korrektur-Kultur:** Sollte sich trotz doppelter Prüfung ein Fehler einschleichen, wird er transparent korrigiert, im Artikel als Korrekturhinweis ausgewiesen **und** im [Änderungsprotokoll](/aenderungsprotokoll/) mit Datum, Anlass und Quelle dokumentiert.
 
 ---
 
-## 4. Finanzierung: Unabhängigkeit & Affiliate-Transparenz
+## Finanzierung: Unabhängigkeit & Affiliate-Transparenz
 
 Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle Leser zugänglich bleibt, finanzieren wir den redaktionellen Betrieb über Partnerschaften mit renommierten Vergleichsportalen (z. B. CHECK24, Tarifcheck über das Awin-Netzwerk):
 
-- **Strikte Trennung von Redaktion und Provision:** Wir empfehlen ausschließlich Tarife, Verträge und Strategien, die rechnerisch überzeugen und die Frank Hartung selbst nutzt oder der eigenen Familie empfehlen würde.
+- **Strikte Trennung von Redaktion und Provision:** Empfehlungen folgen der versionierten Vergleichsmethodik des jeweiligen Themenbereichs – Partnerlinks haben auf Formel, K.-o.-Kriterien und Rangfolge keinen Einfluss, und Affiliate-Partner sind als Beleg-Quellen technisch ausgeschlossen.
 - **Keine Mehrkosten für dich:** Wenn du über einen unserer Empfehlungslinks wechselst, zahlst du exakt denselben Preis wie direkt beim Anbieter.
 - **Eindeutige Kennzeichnung:** Alle Partnerlinks sind transparent als Werbung gekennzeichnet und technisch über gesicherte `/go/`-Weiterleitungen mit `rel="sponsored nofollow"` standardisiert.
 - **Vollständige Nutzbarkeit ohne Klick:** Jeder Ratgeber bietet alle Rechenwege, Kriterien und Tipps, um den Wechsel auch völlig eigenständig und ohne Klick auf einen Partnerlink durchzuführen.
@@ -94,18 +148,19 @@ Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle 
 
 ---
 
-## 5. Was FranksFinanzcheck bewusst nicht ist
+## Was FranksFinanzcheck bewusst nicht ist
 
 - **Keine individuelle Rechts- oder Steuerberatung:** Unsere Leitfäden bieten praxisnahe Orientierung und sorgfältig recherchierte Allgemein-Informationen, ersetzen jedoch keine persönliche Rechts- oder Finanzberatung.
-- **Keine Schein-Rankings:** Wir verkaufen keine redaktionellen Testsiege an den Meistbietenden.
+- **Keine Schein-Rankings:** Wir verkaufen keine redaktionellen Testsiege an den Meistbietenden – und wir erfinden keine Gewichtungs-Prozente, die Objektivität nur simulieren.
 - **Kein Tracking-Missbrauch:** Wir respektieren deine Privatsphäre. Die Website nutzt keine zustimmungspflichtigen Werbetracker von Drittanbietern.
 
 ---
 
-## 6. Kontakt für Leser und Fachinstanzen
+## Kontakt für Leser und Fachinstanzen
 
 Du hast eine inhaltliche Anmerkung, eine veraltete Angabe entdeckt oder möchtest eine methodische Frage stellen? Schreib uns direkt an:
 
 📧 **E-Mail:** kontakt@franksfinanzcheck.de<br>
 👤 **Verantwortlicher Autor:** Frank Hartung · [Über mich & Werdegang](/ueber/)<br>
+📝 **Korrekturen:** [Öffentliches Änderungsprotokoll](/aenderungsprotokoll/)<br>
 📜 **Rechtliches:** [Impressum](/impressum/) · [Datenschutzerklärung](/datenschutz/)

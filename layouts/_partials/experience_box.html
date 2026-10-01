@@ -4,6 +4,11 @@
     – Erscheint direkt nach dem ersten Absatz (via extend_post_content)
     – Macht Googles "Erfahrung" (E-E-A-T) sichtbar: persönlicher Test
 ============================================================ */}}
+{{- /* BEWEISSYSTEM 01.10.2026: Erfahrung wird sichtbar von Beweis
+       getrennt (Belegklassen A/M/E, /methodik/). Die Box bleibt ein
+       ehrliches Erfahrungs-Signal, verkauft sich aber nicht mehr
+       als geprüfter Beleg – geprüfte Belege stehen im öffentlichen
+       Beweis-Register und hängen als Chips direkt an den Zahlen. */ -}}
 {{- $erfahrung := .Params.erfahrung -}}
 {{- if and (eq .Section "posts") $erfahrung -}}
 <div class="ff-experience-box" role="note" aria-label="Praxis-Erfahrung von Frank Hartung">
@@ -11,5 +16,10 @@
     <span aria-hidden="true">🧪 </span>MEINE ERFAHRUNG
   </p>
   <div class="ff-experience-box__text">{{ $erfahrung | markdownify }}</div>
+  <p class="ff-experience-box__einordnung">
+    Persönliche Einordnung des Autors (Belegklasse&nbsp;E) – kein unabhängiger Beleg.
+    Geprüfte Zahlen tragen ihre Quelle direkt am Wert; dokumentierte Tests stehen im
+    <a href="{{ "methodik/" | relURL }}#beweis-register">Beweis-Register</a>.
+  </p>
 </div>
 {{- end -}}

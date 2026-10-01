@@ -1,0 +1,38 @@
+{{- /* ============================================================
+     aenderungsprotokoll.html – ÖFFENTLICHES ÄNDERUNGSPROTOKOLL
+     (Beweissystem 01.10.2026; genutzt auf /aenderungsprotokoll/)
+     ------------------------------------------------------------
+     Rendert data/beweise/korrekturen.yaml als Zeitleiste:
+     Was wurde wann aufgrund welcher Quelle geändert/korrigiert –
+     mit Typ-Badge, Belegklasse, Quelle und betroffenen Seiten.
+     Kein site.Data (vgl. chart.html); CSS: .ff-chg* in
+     assets/css/extended/zz-beweissystem.css.
+     ============================================================ */ -}}
+{{- $daten := os.ReadFile "data/beweise/korrekturen.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $typNamen := dict "korrektur" "Korrektur" "quellen-update" "Quellen-Update" "aktualisierung" "Aktualisierung" "system" "Belegführung" -}}
+{{- $klassenKurz := dict "amtlich" "A" "markt" "M" "erfahrung" "E" -}}
+{{- $klassenNamen := dict "amtlich" "Amtliche Quelle" "markt" "Marktbeobachtung / Modellrechnung" "erfahrung" "Eigene Erfahrung / Messung" -}}
+<ol class="ff-chg" aria-label="Änderungsprotokoll, neueste Einträge zuerst">
+  {{- range $daten.eintraege }}
+  <li class="ff-chg__eintrag">
+    <div class="ff-chg__kopf">
+      <time class="ff-chg__datum" datetime="{{ substr (printf "%v" .datum) 0 10 }}">{{ dateFormat "02.01.2006" (substr (printf "%v" .datum) 0 10) }}</time>
+      <span class="ff-chg__typ ff-chg__typ--{{ .typ }}">{{ index $typNamen .typ | default .typ }}</span>
+      <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}" title="Belegklasse: {{ index $klassenNamen .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+    </div>
+    <p class="ff-chg__titel">{{ .titel }}</p>
+    <p class="ff-chg__was">{{ .was }}</p>
+    <p class="ff-chg__warum"><b>Anlass:</b> {{ .warum }}</p>
+    <p class="ff-chg__quelle">
+      <b>Quelle/Beleg:</b>
+      <a href="{{ .quelle.url }}" rel="noopener external" target="_blank">{{ .quelle.name }}</a>
+    </p>
+    {{- with .seiten }}
+    <p class="ff-chg__seiten">
+      <b>Betroffen:</b>
+      {{- range $i, $s := . }}{{ if $i }} · {{ end }} <a href="{{ $s.pfad | relURL }}">{{ $s.name }}</a>{{ end }}
+    </p>
+    {{- end }}
+  </li>
+  {{- end }}
+</ol>

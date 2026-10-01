@@ -1,0 +1,191 @@
+# ============================================================
+#  VERGLEICHSMETHODIK JE THEMENBEREICH – versioniert
+#  (Beweissystem 01.10.2026; Vertrag: data/beweise/schema.yaml)
+#
+#  WARUM: „Wir vergleichen unabhängig“ ist eine Behauptung.
+#  Nachvollziehbar wird ein Vergleich erst, wenn je Themen-
+#  bereich offenliegt: Welche Formel, welche K.-o.-Kriterien,
+#  welche Rangfolge, welche Datenbasis, welche Grenzen.
+#
+#  REGELN:
+#    * BEWUSST Prüfregeln + Rangfolge statt Pseudo-Gewichten
+#      („35 % Preis, 15 % Service“) – erfundene Gewichtungs-
+#      prozente wären Scheinpräzision ohne Beleg.
+#    * Jede Änderung an Formel, Kriterien oder Rangfolge
+#      erhöht die Version und bekommt einen Changelog-Eintrag;
+#      größere Umbauten zusätzlich einen Eintrag in
+#      data/beweise/korrekturen.yaml (öffentliches Protokoll).
+#    * bereich-ids = Pillar-Slugs (content/pillar/<id>/).
+#
+#  RENDERING: {{< vergleichsmethodik >}} auf /methodik/.
+#  PRÜFUNG: scripts/beweis_gate.py (Pflichtfelder, Pillar-Slugs).
+# ============================================================
+
+meta:
+  brand: FranksFinanzcheck
+  version: 1
+  angelegt: "2026-10-01"
+
+bereiche:
+  - id: strom-sparen
+    name: "Strom & Gas"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Welcher Tarif ist über 12 Monate nach Abzug realistisch erreichbarer Boni am günstigsten – ohne Vorkasse-Risiko?"
+    rechenweg: >-
+      Jahreskosten = Grundpreis × 12 + Jahresverbrauch (kWh) ×
+      Arbeitspreis − Neukundenbonus (nur wenn Auszahlung innerhalb
+      der ersten 12 Monate vertraglich zugesichert ist).
+    pruefregeln:
+      - "K.-o.: Vorkasse-, Kautions- und Pakettarife fliegen raus – Insolvenzrisiko trägt sonst der Kunde"
+      - "K.-o.: Preisgarantie muss Grund- und Arbeitspreis umfassen (eingeschränkte Garantien werden als solche ausgewiesen)"
+      - "Rangfolge: 1. Jahreskosten im Modellverbrauch, 2. Umfang und Dauer der Preisgarantie, 3. Kündigungsfrist/Laufzeit, 4. Bonus-Auszahlungsregeln"
+      - "Referenzpreis für Einsparrechnungen ist der BDEW-Durchschnitt (Kennzahl bdew-haushaltsstrompreis bzw. bdew-gaspreis-efh), nie ein Bestwert"
+    datenbasis:
+      - klasse: amtlich
+        text: "BDEW-Preisanalysen, Bundesnetzagentur-Marktdaten (Kennzahlen-Register mit Stand-Datum je Zahl)"
+      - klasse: markt
+        text: "Tarif-Stichproben aus Vergleichsrechnern mit dokumentiertem Abrufdatum und Modellverbrauch (3.500 kWh Strom, 18.000 kWh Gas)"
+      - klasse: erfahrung
+        text: "Messreihe ms-standby-haushalt-2026 (in Erhebung, Beweis-Register)"
+    grenzen:
+      - "Regionale Netzentgelte verschieben Preise – Modellverbrauch und PLZ der Stichprobe werden immer genannt"
+      - "Kein Anspruch auf Marktvollständigkeit: Stichprobe statt Vollerhebung"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung der bislang nur intern dokumentierten Prüfregeln."
+
+  - id: internet-dsl
+    name: "Internet, DSL & Mobilfunk"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Was kostet der Tarif wirklich pro Monat, wenn man alle 24 Monate der Laufzeit zusammenzählt?"
+    rechenweg: >-
+      Effektivpreis = (Summe aller Grundgebühren über 24 Monate +
+      Bereitstellung + Routerkosten − Boni) ÷ 24. Verifizierte
+      Beispielrechnung: Beweis mr-dsl-effektivpreis-24m.
+    pruefregeln:
+      - "K.-o.: Bandbreite muss am Anschluss verfügbar sein (Verfügbarkeitsprüfung vor Preisvergleich)"
+      - "Rangfolge: 1. Effektivpreis über 24 Monate, 2. Preisstufe ab Monat 13 (Kostenfalle Vertragsverlängerung), 3. Routerkosten über Laufzeit, 4. Bonus-Auszahlungshürden, 5. Kündigungsfrist"
+      - "Werbepreise werden nie zitiert, ohne den Effektivpreis daneben zu stellen"
+    datenbasis:
+      - klasse: amtlich
+        text: "Bundesnetzagentur (Breitbandmessung, Anbieterwechsel-Rechte), Verbraucherzentrale"
+      - klasse: markt
+        text: "Tarif-Stichproben mit Abrufdatum; Modellrechnung mr-dsl-effektivpreis-24m (versionierter Datensatz)"
+      - klasse: erfahrung
+        text: "Wechselprotokoll wp-internet-dsl-2026 (in Erhebung, Beweis-Register)"
+    grenzen:
+      - "Regionale Verfügbarkeit (DSL/Kabel/Glasfaser) begrenzt die Übertragbarkeit jeder Beispielrechnung"
+      - "Junge-Leute- und Bestandskunden-Aktionen sind nicht Teil der Standard-Stichprobe"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung; Effektivpreis-Formel aus dem DSL-Ratgeber als normative Methodik übernommen."
+
+  - id: versicherungen
+    name: "Versicherungen"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Reicht die Leistung im Ernstfall – und erst danach: Was kostet sie?"
+    rechenweg: >-
+      Leistungsfilter vor Preisvergleich: Tarife, die die
+      Mindest-Leistungskriterien des jeweiligen Ratgebers nicht
+      erfüllen, werden unabhängig vom Preis aussortiert. Danach
+      Jahresprämie im Modellprofil, Selbstbehalt-Szenarien als
+      Nebenrechnung (Prämienersparnis vs. Risiko im Schadensfall).
+    pruefregeln:
+      - "K.-o. Privathaftpflicht: Deckungssumme unter 10 Mio. € pauschal für Personen-/Sachschäden"
+      - "K.-o.: Tarife ohne Verzicht auf den Einwand grober Fahrlässigkeit (sofern im Ratgeber als Mindestkriterium genannt)"
+      - "Rangfolge: 1. Leistungskriterien erfüllt, 2. Jahresprämie im Modellprofil, 3. Selbstbehalt-Szenario, 4. Vertragslaufzeit (1 Jahr bevorzugt)"
+      - "Kfz: Einsparrechnungen beziehen sich auf den Stichtag 30.11. (Kennzahl kfz-wechselfrist) und nennen das Modellprofil"
+    datenbasis:
+      - klasse: amtlich
+        text: "Verbraucherzentralen, GDV, BaFin; Urteile/Gesetze über gesetze-im-internet.de"
+      - klasse: markt
+        text: "Prämien-Stichproben im dokumentierten Modellprofil (Alter, Region, Schadenfreiheitsklasse) mit Abrufdatum"
+      - klasse: erfahrung
+        text: "Leser-Fallstudie fs-kfz-leserfall-2026 (geplant, Beweis-Register)"
+    grenzen:
+      - "Prämien hängen stark vom Individualprofil ab – jede Zahl gilt nur für das genannte Modellprofil"
+      - "Kein Rating-Ersatz: Wir verweisen für Finanzstärke-Urteile auf Stiftung Warentest statt eigene Scores zu erfinden"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung; Leistungsfilter-vor-Preis-Prinzip aus den Versicherungs-Ratgebern formalisiert."
+
+  - id: konto-karten
+    name: "Konto, Karten & Zinsen"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Was kostet das Konto im realen Nutzungsjahr – inklusive aller Bedingungen für ‚kostenlos‘?"
+    rechenweg: >-
+      Effektivkosten pro Jahr = Kontoführung × 12 + Kartengebühren +
+      (Bargeldabhebungen × Gebühr je Modellnutzung) + Fremdwährungs-
+      entgelte im Modellprofil − Guthabenzinsen. „Kostenlos“ zählt
+      nur, wenn die Bedingung (z. B. Mindestgeldeingang) im
+      Modellprofil realistisch erfüllt ist – sonst rechnen wir den
+      bedingten Preis.
+    pruefregeln:
+      - "K.-o.: Konten, deren Gebührenfreiheit an Wertpapier- oder Kreditprodukte gekoppelt ist"
+      - "Rangfolge: 1. Effektivkosten im Modellprofil, 2. Bedingungen für Gebührenfreiheit (Transparenz), 3. Bargeld-Infrastruktur, 4. Dispozins als Warnwert"
+      - "Tagesgeld: Bestzinsen werden am EZB-Einlagenzins gespiegelt (Kennzahl ezb-einlagenzins); Lockzins-Garantiezeiträume werden immer genannt"
+    datenbasis:
+      - klasse: amtlich
+        text: "Bundesbank-Zinsstatistik, BaFin, Verbraucherzentrale (Kennzahlen-Register mit Stand je Zahl)"
+      - klasse: markt
+        text: "Konditionen-Stichproben mit Abrufdatum; Modellrechnung mr-tagesgeld-15000 (versionierter Datensatz)"
+    grenzen:
+      - "Filialbank-Leistungen (Beratung, Bargeld am Schalter) sind nicht monetär bewertet"
+      - "Konditionen ändern sich kurzfristig – es gilt das Stand-Datum an der jeweiligen Zahl"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung des Effektivkosten-Modells für Girokonten und der Tagesgeld-Spiegelregel."
+
+  - id: mietwagen
+    name: "Mietwagen & Reise"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Was kostet die Miete nach Rückgabe wirklich – inklusive Versicherung, Tank- und Kautionsregeln?"
+    rechenweg: >-
+      Gesamtpreis = Mietpreis + Vollkasko ohne Selbstbeteiligung
+      (bzw. SB-Erstattungspolice) + realistische Nebenkosten
+      (Zusatzfahrer, junge Fahrer, Einweg) − nie der nackte
+      Lockpreis der Ergebnisliste.
+    pruefregeln:
+      - "K.-o.: Angebote ohne Vollkasko-Option ohne Selbstbeteiligung oder mit ‚Tank leer zurück‘-Regelung"
+      - "Rangfolge: 1. Gesamtpreis mit Vollschutz, 2. faire Tankregelung (voll/voll), 3. Kautionshöhe und akzeptierte Zahlungsmittel, 4. Stornobedingungen"
+      - "Kautions- und Kreditkartenpflichten werden vor dem Preis genannt – sie entscheiden, ob das Angebot überhaupt buchbar ist"
+    datenbasis:
+      - klasse: amtlich
+        text: "Verbraucherzentralen (Mietwagen-Rechte, Kautionsfallen), EU-Verbraucherrecht"
+      - klasse: markt
+        text: "Preis-Stichproben je Saison mit Abrufdatum, Abholstation und Buchungsvorlauf"
+    grenzen:
+      - "Saisonpreise schwanken stark – Stichproben gelten nur für das dokumentierte Abrufdatum und die genannte Station"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung der Vollschutz-vor-Lockpreis-Regel."
+
+  - id: frugalismus
+    name: "Frugalismus & Budget"
+    version: "1.0.0"
+    stand: "2026-10-01"
+    leitfrage: "Trägt die Sparstrategie eine nachvollziehbare Rechnung – oder nur ein Versprechen?"
+    rechenweg: >-
+      Kein Anbietervergleich. Jede Einsparbehauptung wird als
+      Modellrechnung mit offengelegten Annahmen geführt
+      (Betrag × Frequenz × Zeitraum); Durchschnittswerte kommen aus
+      amtlicher Statistik, nie aus Bauchgefühl.
+    pruefregeln:
+      - "Jede ‚spart X € im Jahr‘-Aussage braucht Formel + Annahmen im Artikel oder einen Beweis-Register-Eintrag"
+      - "Durchschnittsausgaben werden mit Destatis (EVS/LWR) belegt, Zinseffekte mit dokumentiertem Zinssatz und Zeitraum"
+      - "Verhaltenstipps ohne Rechenbasis werden als Erfahrung/Einordnung gekennzeichnet – nicht als Zahl verkauft"
+    datenbasis:
+      - klasse: amtlich
+        text: "Statistisches Bundesamt (Konsumausgaben), Bundesbank (Zins-/Sparstatistik)"
+      - klasse: markt
+        text: "Eigene Modellrechnungen mit versionierten Annahmen"
+    grenzen:
+      - "Haushalte unterscheiden sich stark – Modellannahmen (Haushaltsgröße, Ausgangsbudget) stehen an jeder Rechnung"
+    changelog:
+      - datum: "2026-10-01"
+        notiz: "v1.0.0 – Erstveröffentlichung der Belegpflicht für Einsparbehauptungen."

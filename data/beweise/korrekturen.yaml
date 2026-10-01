@@ -1,0 +1,142 @@
+# ============================================================
+#  ÖFFENTLICHES ÄNDERUNGSPROTOKOLL – Korrekturen & Belege
+#  (Beweissystem 01.10.2026; Vertrag: data/beweise/schema.yaml)
+#
+#  WARUM: Korrektur-Kultur ist nur dann ein E-E-A-T-Signal,
+#  wenn sie ÖFFENTLICH nachvollziehbar ist: Was wurde wann
+#  aufgrund welcher Quelle geändert oder korrigiert?
+#
+#  REGELN (menschlich kuratiert, Maschine liest nur):
+#    * Eintrag anlegen bei: inhaltlicher Korrektur, Quellen-
+#      wechsel (z. B. Beleg-URL tot), Methodik-Versionssprung,
+#      Zahlen-Aktualisierung mit neuem Stand, Systemänderung
+#      an der Belegführung.
+#    * KEINE Einträge für rein technische Deployments oder
+#      Tippfehler ohne Faktenbezug (Rauschen verwässert Beweise).
+#    * typ: korrektur | quellen-update | aktualisierung | system
+#    * beleg = wo die Änderung intern nachprüfbar ist
+#      (Report im Repo, Datensatz-Changelog, Git-Historie).
+#    * Neueste Einträge OBEN.
+#
+#  RENDERING: {{< aenderungsprotokoll >}} auf /aenderungsprotokoll/.
+#  PRÜFUNG: scripts/beweis_gate.py.
+# ============================================================
+
+meta:
+  brand: FranksFinanzcheck
+  version: 1
+  angelegt: "2026-10-01"
+
+eintraege:
+  - datum: "2026-10-01"
+    typ: system
+    titel: "Beweissystem eingeführt: Register, Methodik-Versionen, Änderungsprotokoll"
+    was: >-
+      Belegführung vom Erklärtext auf ein prüfbares System umgestellt:
+      öffentliches Beweis-Register (Fallstudien, Wechselprotokolle,
+      Messreihen, Modellrechnungen), versionierte Vergleichsmethodik
+      je Themenbereich, Belegklassen A/M/E an Zahlen und dieses
+      öffentliche Änderungsprotokoll.
+    warum: >-
+      Interner Audit-Befund: zu viele Erfahrungs-Behauptungen
+      („selbst geprüft“, „praxisgetestet“) ohne sichtbaren,
+      originären Beleg.
+    quelle:
+      name: "Audit- und Rollout-Report im offenen Repository"
+      url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/BEWEISSYSTEM-PREMIUM-2026-10-01.md"
+    belegklasse: markt
+    seiten:
+      - pfad: "/methodik/"
+        name: "Methodik (So arbeiten wir)"
+      - pfad: "/aenderungsprotokoll/"
+        name: "Änderungsprotokoll"
+
+  - datum: "2026-10-01"
+    typ: aktualisierung
+    titel: "Tagesgeld-Modellrechnung auf v1.1.0 synchronisiert"
+    was: >-
+      Modellzinssätze und Bruttoerträge des 15.000-€-Rechenbeispiels
+      mit der Oktober-Aktualisierung des Artikels abgeglichen;
+      Datensatz-Changelog fortgeschrieben.
+    warum: "Artikel-Aktualisierung Oktober 2026; Datensatz und Artikel dürfen nie auseinanderlaufen."
+    quelle:
+      name: "Versionierter Datensatz tagesgeld_modell.yaml (Changelog)"
+      url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/data/datasets/tagesgeld_modell.yaml"
+    belegklasse: markt
+    seiten:
+      - pfad: "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/"
+        name: "Tagesgeld-Zinsen 2026"
+
+  - datum: "2026-09-28"
+    typ: quellen-update
+    titel: "Girokonto-Beleg der Verbraucherzentrale ersetzt (alte Seite 404)"
+    was: >-
+      Die bislang als Beleg geführte Verbraucherzentralen-Seite zu
+      kostenlosen Girokonten ist nicht mehr erreichbar (HTTP 404).
+      Beleg im Kennzahlen-Register auf die aktive Nachfolgeseite
+      „Girokonto: Was Sie darüber wissen sollten“ (Stand 10.12.2025)
+      umgestellt.
+    warum: "Tote Beleg-Links sind keine Belege; Linkprüfung im Kennzahlen-Review 28.09.2026."
+    quelle:
+      name: "Verbraucherzentrale – Girokonto: Was Sie darüber wissen sollten"
+      url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
+    belegklasse: amtlich
+    seiten:
+      - pfad: "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
+        name: "Kostenloses Girokonto"
+      - pfad: "/pillar/konto-karten/"
+        name: "Ratgeber Konto & Karten"
+
+  - datum: "2026-09-28"
+    typ: aktualisierung
+    titel: "BDEW-Haushaltsstrompreis 37,0 ct/kWh bestätigt, Kennzahlen-Register eingeführt"
+    was: >-
+      Haushaltsstrompreis gegen die BDEW-Strompreisanalyse „Herbst
+      2026“ geprüft (bestätigt: 37,0 ct/kWh) und als Kennzahl mit
+      Prüfrhythmus 30 Tage in das neue Kennzahlen-Register
+      aufgenommen; betroffene Artikel sind dort verzeichnet.
+    warum: "Aufbau des Frühwarn-Radars für harte Kennzahlen (Prüfintervalle je Zahl statt pauschaler Artikel-Revision)."
+    quelle:
+      name: "BDEW-Strompreisanalyse"
+      url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    belegklasse: amtlich
+    seiten:
+      - pfad: "/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/"
+        name: "Standby-Kosten reduzieren"
+      - pfad: "/pillar/strom-sparen/"
+        name: "Ratgeber Strom sparen"
+
+  - datum: "2026-09-28"
+    typ: system
+    titel: "Artikelgenaue Werbe-Offenlegung über jedem Beitrag"
+    was: >-
+      Jeder Artikel nennt seitdem über dem Text, wie viele
+      Partnerlinks er enthält und zu welchen Partnern sie führen;
+      Artikel ohne Partnerlinks sind sichtbar als werbefrei
+      gekennzeichnet. Eine automatische Wache prüft die Angaben
+      gegen den tatsächlichen Linkbestand.
+    warum: "Finanzierungs-Transparenz gehört an den Artikel, nicht nur auf eine zentrale Seite."
+    quelle:
+      name: "Rollout-Report im offenen Repository"
+      url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/AFFILIATE-INTEGRITY-REPORT.md"
+    belegklasse: markt
+    seiten:
+      - pfad: "/transparenz/"
+        name: "Transparenz & Werbung"
+
+  - datum: "2026-09-27"
+    typ: system
+    titel: "Sichtbare Quellen-Box und Prüfdatum je Artikel eingeführt"
+    was: >-
+      Belegte Artikel zeigen seitdem die Box „Quellen & Faktenstand“
+      mit Herausgeber und Datum je Beleg sowie dem letzten
+      Faktenprüfdatum; dieselbe Belegliste wird maschinenlesbar als
+      schema.org/citation ausgespielt.
+    warum: "Belege gehören sichtbar an den Artikel – für Leser wie für KI-Antwortmaschinen."
+    quelle:
+      name: "Rollout-Report im offenen Repository"
+      url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/SEO-GEO-FAKTENFRISCHE-PREMIUM-2026-09-27.md"
+    belegklasse: markt
+    seiten:
+      - pfad: "/methodik/"
+        name: "Methodik (So arbeiten wir)"

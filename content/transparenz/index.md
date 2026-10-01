@@ -84,6 +84,6 @@ Eine Selbstverpflichtung, die niemand prüft, ist eine Behauptung. Die Offenlegu
 
 ## 8. Wenn dir etwas auffällt
 
-Ein fehlender Hinweis, eine falsche Zahl, ein Link, der woanders landet als angekündigt: Das sind Fehler, keine Kleinigkeiten. Melde sie bitte an **kontakt@franksfinanzcheck.de** – mit Artikel-Link und kurzer Beschreibung. Bestätigte Fehler werden korrigiert und der Artikel bekommt einen sichtbaren Korrekturhinweis.
+Ein fehlender Hinweis, eine falsche Zahl, ein Link, der woanders landet als angekündigt: Das sind Fehler, keine Kleinigkeiten. Melde sie bitte an **kontakt@franksfinanzcheck.de** – mit Artikel-Link und kurzer Beschreibung. Bestätigte Fehler werden korrigiert, der Artikel bekommt einen sichtbaren Korrekturhinweis und die Änderung wird im öffentlichen [Änderungsprotokoll](/aenderungsprotokoll/) mit Datum, Anlass und Quelle dokumentiert.
 
 Verantwortlich für Inhalt und Offenlegung: Frank Hartung, vollständige Anbieterkennzeichnung im [Impressum](/impressum/). Wie Inhalte entstehen, recherchiert und geprüft werden, steht in [So arbeiten wir](/methodik/).

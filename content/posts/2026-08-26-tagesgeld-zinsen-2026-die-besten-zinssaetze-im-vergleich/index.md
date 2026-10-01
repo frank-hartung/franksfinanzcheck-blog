@@ -153,6 +153,8 @@ Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgrosche
 
 Der Wechsel vom zinslosen Girokonto zu einem Top-Anbieter bringt dir in dieser Modellrechnung somit ein Plus von **über 450 € pro Jahr** – ohne Kursrisiko und innerhalb der gesetzlichen Einlagensicherung. Das entspricht fast einem monatlichen Budget für [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) oder einen kleinen Wochenendtrip.
 
+{{< beweis id="mr-tagesgeld-15000" >}}
+
 ## Schritt-für-Schritt: So eröffnest du ein Tagesgeldkonto
 
 1. **Angebot prüfen:** Prüfe Zinssatz, Zinsgarantie und Einlagensicherung beim [Tagesgeldkonto der C24 Bank](/go/tagesgeld/) und gleiche die Konditionen mit deinem bisherigen Konto ab.

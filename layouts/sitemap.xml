@@ -23,7 +23,12 @@
        Die beiden Verifikationsdateien (/google…html, /pinterest-e238f.html)
        bleiben bewusst draußen: sie sind Besitznachweise, keine Inhalte.
        Wache: scripts/index_hygiene_gate.py (H1). */ -}}
-{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" "transparenz" -}}
+{{- /* BEWEISSYSTEM 01.10.2026: /aenderungsprotokoll/ ist die neue öffentliche
+       Korrektur-/Beleg-Seite (E-E-A-T-Vertrauensseite wie /transparenz/) und
+       gehört in die Sitemap. /cockpit/ (Produktkern, Commit „Fixkosten-
+       Cockpit product core“) fehlte hier ebenfalls – Index-Hygiene-Wache H1
+       meldete beide als „indexierbar, aber nur intern verlinkt“. */ -}}
+{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" "transparenz" "aenderungsprotokoll" -}}
 {{- /* ---------- 1) Startseite ---------- */ -}}
 {{- with site.Home -}}
   {{- if and (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) -}}
@@ -61,13 +66,19 @@
     {{- $seen = $seen | append .Permalink -}}
   {{- end -}}
 {{- end -}}
-{{- /* ---------- 4) Pillar-/Blog-Übersicht + Rechtliches/Über ---------- */ -}}
+{{- /* ---------- 4) Pillar-/Blog-Übersicht + Cockpit + Rechtliches/Über ---------- */ -}}
 {{- range (slice "pillar" "posts") -}}
   {{- with site.GetPage (printf "/%s" .) -}}
     {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
       {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
       {{- $seen = $seen | append .Permalink -}}
     {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with site.GetPage "/cockpit" -}}
+  {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
+    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
+    {{- $seen = $seen | append .Permalink -}}
   {{- end -}}
 {{- end -}}
 {{- range $legal -}}

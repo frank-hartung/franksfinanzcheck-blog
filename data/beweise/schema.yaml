@@ -1,0 +1,104 @@
+# ============================================================
+#  BEWEISSYSTEM – Normativer Vertrag (menschenlesbar)
+#  Rollout 01.10.2026 (Auftrag Frank: „Zu wenig originäre
+#  Beweise – vom Erklärtext zum Beweissystem“).
+#
+#  WARUM: Highend-E-E-A-T entsteht durch SICHTBARE BELEGE,
+#  nicht durch Behauptungen („selbst geprüft“, „praxisgetestet“).
+#  Dieses Verzeichnis (data/beweise/) ist die Single Source of
+#  Truth für alles, was die Site öffentlich als Beweis zeigt:
+#
+#    register.yaml           – Beweis-Register (Fallstudien,
+#                              Wechselprotokolle, Messreihen,
+#                              Modellrechnungen)
+#    vergleichsmethodik.yaml – versionierte Vergleichsmethodik
+#                              je Themenbereich
+#    korrekturen.yaml        – öffentliches Änderungsprotokoll
+#
+#  SSOT-VERTRAG (wie data/kennzahlen_register.yaml):
+#    * Diese Dateien sind MENSCHLICH KURATIERT. Die Maschine
+#      (scripts/beweis_gate.py) LIEST sie, schreibt sie aber NIE.
+#    * Nur belegte Einträge bekommen status "verifiziert" –
+#      nichts aus dem Gedächtnis, nichts ohne Protokoll/Beleg.
+#    * Ein Modellfall ist KEIN realer Einzelfall und wird
+#      öffentlich immer als Modellfall gekennzeichnet (das
+#      Shortcode-Rendering erzwingt den Warnhinweis).
+#    * Einträge mit status "in-erhebung"/"geplant" erscheinen
+#      öffentlich NUR im Beweis-Backlog („Woran wir dokumentieren“),
+#      nie als Beweis. {{< beweis >}} bricht den Build ab, wenn
+#      ein unfertiger Eintrag als Beweis eingebettet wird.
+#
+#  AUSFÜHRBARE PRÜFUNG: scripts/beweis_gate.py (CI:
+#  .github/workflows/beweis-gate.yml). Runbook:
+#  docs/ANLEITUNG-BEWEISSYSTEM.md
+# ============================================================
+
+schema_version: "1.0"
+
+# ---------- Belegklassen (öffentliche Dreiteilung) ----------
+# Jede Zahl und jeder Beweis trägt genau EINE Klasse. Die
+# Klassen trennen persönliche Erfahrung, Marktbeobachtung und
+# offizielle Quelle – sichtbar als Badge (A/M/E) im Frontend.
+belegklassen:
+  amtlich:
+    kurz: "A"
+    name: "Amtliche / institutionelle Quelle"
+    definition: >-
+      Bundesbehörden, Gesetze, etablierte Fachinstanzen der
+      Allowlist Rang 1–2 (BNetzA, Destatis, Bundesbank, BaFin,
+      Verbraucherzentralen, Stiftung Warentest, BDEW, GDV …).
+      Beleg = Link direkt an der Zahl, mit Stand-Datum.
+  markt:
+    kurz: "M"
+    name: "Marktbeobachtung / Modellrechnung"
+    definition: >-
+      Eigene, reproduzierbare Rechenwege und dokumentierte
+      Tarif-Stichproben mit Datum. Kein amtlicher Beleg, aber
+      vollständig offengelegte Annahmen, Formel und Grenzen –
+      jeder Leser kann nachrechnen.
+  erfahrung:
+    kurz: "E"
+    name: "Eigene Erfahrung / Messung"
+    definition: >-
+      Selbst durchgeführte Wechsel, Messreihen und Praxistests.
+      Nur zitierfähig mit Protokoll im Beweis-Register; Original-
+      Belege (Rechnungen, Bestätigungen) werden intern archiviert
+      und anonymisiert veröffentlicht.
+
+# ---------- Eintragstypen im Register ----------
+typen: [fallstudie, wechselprotokoll, messreihe, modellrechnung]
+
+# ---------- Status-Lebenszyklus ----------
+# geplant       → Dokumentationsvorhaben, Pflichtfelder definiert
+# in-erhebung   → Protokoll läuft, Daten noch nicht vollständig
+# modellfall    → durchgerechneter Modellfall, KEIN realer Einzelfall
+# verifiziert   → vollständig belegt (Protokoll + Beleg + Changelog)
+status_werte: [geplant, in-erhebung, modellfall, verifiziert]
+
+# Nur diese Status dürfen öffentlich als Beweis gerendert werden:
+oeffentlich_als_beweis: [verifiziert, modellfall]
+
+# ---------- Pflichtfelder ----------
+pflicht_alle: [id, typ, titel, themenbereich, belegklasse, status, angelegt, kurzfazit]
+pflicht_beweisbar:          # zusätzlich bei verifiziert/modellfall
+  - stand
+  - quellen
+  - grenzen
+  - changelog
+pflicht_backlog:            # zusätzlich bei geplant/in-erhebung
+  - dokumentationsplan
+  - faellig
+pflicht_je_typ:
+  fallstudie: [ausgangslage, entscheidung, ergebnis, zeitraum, anonymisierung]
+  wechselprotokoll: [pflichtfelder]        # bei verifiziert: zusätzlich protokoll + beleg
+  messreihe: [messaufbau]                  # bei verifiziert: zusätzlich werte
+  modellrechnung: [rechenweg, annahmen]
+
+quelle_pflicht: [name, url]
+changelog_pflicht: [datum, notiz]
+
+# ---------- Querverweise ----------
+# themenbereich  → muss eine bereich-id in vergleichsmethodik.yaml sein
+# dataset        → muss als data/datasets/<dataset>.yaml existieren
+# quellen[].url  → nur https; Affiliate-Partner sind als Beleg verboten
+#                  (gleiche Regel wie data/agent_reach/faktenfrische.yaml)
