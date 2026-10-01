@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung", "Günstigste", "Darlehen"]
+keywords: ["Baufinanzierung", "Immobilienkredit", "Hauskauf Finanzierung", "Günstigste"]
 pin_title: "Baufinanzierung: So findest du das günstigste Darlehen"
 pin_description: "*Werbung | Den Hauskauf finanzieren und Zinsen sparen: Erfahre, wie du eine Baufinanzierung clever vergleichst und worauf es beim Immobilienkredit wirklich ankommt. Mehr Spartipps auf FranksFinanzcheck! #baufinanzierung #immobilienkredit #hauskauffinanzierung"
 ai_generated: true

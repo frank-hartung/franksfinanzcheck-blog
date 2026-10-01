@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Riester-Rente 2026", "Riester-Rente", "Zulagen-Segen"]
+keywords: ["Riester-Rente 2026", "Riester-Rente", "Zulagen-Segen", "Riester Rente 2026"]
 pin_title: "Riester-Rente 2026: Zulagen-Segen oder teures Grab?"
 pin_description: "*Werbung | TITLE: Riester-Rente 2026: Zulagen-Segen oder teures Grab? So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #riesterrente2026 #riesterrente #zulagensegen"
 ai_generated: true
@@ -26,6 +26,8 @@ kurzantwort: "Du bekommst ab 2026 pro Jahr mindestens 175 € Grundzulage und, 
 ---
 
 TITLE: Riester-Rente 2026: Zulagen-Segen oder teures Grab?
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 DESCRIPTION: Lohnt sich die Riester-Rente 2026 noch für dich? Frank Hartung zeigt dir die häufigsten Fehler, echte Kosten und ob sich dein Vertrag wirklich rechnet.
 

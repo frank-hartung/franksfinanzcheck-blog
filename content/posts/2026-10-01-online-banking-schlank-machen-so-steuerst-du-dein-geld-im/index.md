@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Online-Banking", "Kontomanagement", "Optimieren", "Online‑Banking schlank machen – So", "Steuerst"]
+keywords: ["Online-Banking", "Kontomanagement", "Optimieren", "Online‑Banking schlank machen – So"]
 pin_title: "Online‑Banking schlank machen – So: steuerst du dein Geld im"
 pin_description: "*Werbung | Online-Banking: Mit gezielten Tipps das Online‑Banking optimieren, Kontomanagement vereinfachen und jährlich Geld sparen. Mehr Spartipps auf FranksFinanzcheck! #onlinebanking #kontomanagement #optimieren"
 ai_generated: true

@@ -4,13 +4,13 @@ description: Urlaub sparen leicht gemacht – mit konkreten Reisebudget Tipps ba
 date: 2026-10-01T10:22:06Z
 draft: true
 reserve: true
-tags: ["Frugalismus"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Urlaubskasse", "Frugalismus"]
+keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Urlaubskasse", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Urlaub sparen: So baust du deine Urlaubskasse 2026 clever"
 pin_description: "*Werbung | Urlaub sparen leicht gemacht – mit konkreten Reisebudget Tipps baust du 2026 deine Urlaubskasse clever auf. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #urlaubsparen #reisebudgettipps #guenstigreisen"
 ai_generated: true

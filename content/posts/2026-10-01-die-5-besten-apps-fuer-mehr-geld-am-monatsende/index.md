@@ -10,9 +10,9 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Apps", "Sparen", "Geld", "Die 5 besten", "Monatsende"]
+keywords: ["Die 5 besten", "Monatsende", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Die 5 besten: Apps für mehr Geld am Monatsende"
-pin_description: "*Werbung | Mit den richtigen Apps behältst du deine Ausgaben im Griff. Ich zeige dir, wie du mit digitalen Helfern effektiv Geld sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #apps #sparen #geld"
+pin_description: "*Werbung | Mit den richtigen Apps behältst du deine Ausgaben im Griff. Ich zeige dir, wie du mit digitalen Helfern effektiv Geld sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #die5besten #monatsende #frugalismus"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

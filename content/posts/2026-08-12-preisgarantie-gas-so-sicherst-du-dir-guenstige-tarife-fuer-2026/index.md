@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-09-28
-title: "Preisgarantie Gas 2026: So sicherst du dir günstige Tarife"
+title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
 draft: false

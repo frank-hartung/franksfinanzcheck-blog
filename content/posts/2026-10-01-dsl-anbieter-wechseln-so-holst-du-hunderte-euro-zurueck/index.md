@@ -4,13 +4,13 @@ description: Den DSL-Anbieter wechseln ist der schnellste Weg zu mehr Budget. Ic
 date: 2026-10-01T10:21:06Z
 draft: true
 reserve: true
-tags: ["Geld sparen im Alltag"]
+tags: ["Geld sparen im Alltag", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["DSL-Anbieter", "Wechseln", "Geld sparen", "DSL-Anbieter wechseln", "Hunderte"]
+keywords: ["DSL-Anbieter", "Geld sparen", "DSL-Anbieter wechseln", "DSL Anbieter wechseln", "DSL-Vergleich", "Internetvertrag wechseln"]
 pin_title: "DSL-Anbieter wechseln: So holst du hunderte Euro zurück"
 pin_description: "*Werbung | Den DSL-Anbieter wechseln ist der schnellste Weg zu mehr Budget. Ich zeige dir, wie du ohne Ausfallzeiten Geld sparen kannst. Jetzt optimieren! Mehr Spartipps auf FranksFinanzcheck! #dslanbieter #wechseln #geldsparen"
 ai_generated: true
