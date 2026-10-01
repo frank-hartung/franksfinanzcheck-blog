@@ -12,10 +12,10 @@
 #      Tap-Ziele >= 40px
 #
 #  Läuft: bei PRs auf main (nur wenn layouts/assets/content/e2e/
-#  berührt sind), wöchentlich (Di 07:00 MESZ) + manuell.
-#  KEIN push-Trigger: der Deploy-Workflow pusst bei Push auf main
-#  nach gh-pages – eine E2E auf jedem Push würde die Actions-
-#  Minuten verbrennen, ohne neue Information zu liefern.
+#  berührt sind), jede Nacht um 07:00 MESZ + manuell.
+#  KEIN push-Trigger: der Deploy-Workflow pusht bei Push auf main
+#  nach gh-pages. Der tägliche Lauf schließt trotzdem die Lücke für
+#  automatische Content-Commits, die ohne PR direkt auf main landen.
 #
 #  Browser: Chromium (offizieller Download via npx playwright install
 #  – auf GitHub-Runnern problemlos; der @sparticuz/chromium-Fallback
@@ -38,7 +38,7 @@ on:
       - "package-lock.json"
       - ".github/workflows/e2e.yml"
   schedule:
-    - cron: "0 5 * * 2"    # Dienstag 07:00 MESZ (05:00 UTC)
+    - cron: "0 5 * * *"    # täglich 07:00 MESZ (05:00 UTC) – deckt direkte Content-Pushes ab
   workflow_dispatch: {}
 
 permissions:

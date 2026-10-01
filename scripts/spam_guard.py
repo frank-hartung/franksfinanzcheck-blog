@@ -123,7 +123,11 @@ CLAIMS_HARD = [
     r"100\s*%\s*(sicher|garantiert|ohne\s+risiko|profitabel)",
     r"ohne\s+risiko\s+(?:testen|kaufen|einsteigen|sparen\s+müssen|verlieren)",
     r"risikolos",
-    r"garantiert\w*\s+(?:gewinn|ertrag|erträge|zins|zinsen|spar)",
+    # „garantierter Zinssatz“ ist die korrekte Bezeichnung für Festgeld und
+    # Zinsgarantien. Hart sind nur garantierte ERTRÄGE/GEWINNE bzw. die
+    # umgekehrte Werbeaussage „Zinsen garantiert“ (#492: False-Positive
+    # demotete einen redaktionell korrekten Tagesgeld-Artikel).
+    r"garantiert\w*\s+(?:gewinn|ertrag|erträge|spar)",
     r"(?:zinsen|erträge)\s+garantiert", r"sofort\s+reich",
     r"geld\s+(?:verdienen|verdienst)\s+garantiert",
     r"bester\s+(?:zins|anbieter|markt)\b", r"sicherer\s+gewinn",
@@ -1364,6 +1368,12 @@ def run_selftest():
                 "aff_links": 0}
         ok, _r = api_check_pin(good)
         check("A2 sauberer Pin durch", ok)
+        legitimer_zins = "Festgeld bietet einen garantierten Zinssatz für zwölf Monate."
+        check("B2 lässt sachlichen garantierten Zinssatz zu",
+              not any(re.search(p, legitimer_zins, re.I) for p in CLAIMS_HARD))
+        check("B2 blockt garantierten Ertrag weiterhin",
+              any(re.search(p, "garantierter Ertrag ohne Prüfung", re.I)
+                  for p in CLAIMS_HARD))
         ok, r = api_check_pin(dict(good, title="100 % sicherer Gewinn garantiert"))
         check("A2 blockt Garantie-Claim", not ok)
         ok, r = api_check_pin(dict(good, aff_links=2))

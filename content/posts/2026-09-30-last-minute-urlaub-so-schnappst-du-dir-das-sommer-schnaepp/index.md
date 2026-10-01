@@ -25,7 +25,7 @@ cover:
 kurzantwort: "Last-Minute-Urlaub buchst du am besten zwei bis acht Wochen vor der Abreise, um Ersparnisse von bis zu 50 Prozent gegenüber dem regulären Preis zu erzielen. Maximale Rabatte sicherst du dir durch hohe Flexibilität bei Reiseziel und Abflughafen sowie durch das gezielte Vergleichen von Restplatzangeboten kurz vor dem gewünschten Termin."
 ---
 
-# Last-Minute-Urlaub: Wie du die Preissignale des Marktes für dich nutzt
+## Last-Minute-Urlaub: Wie du die Preissignale des Marktes für dich nutzt
 
 Wer die Nerven besitzt, erst wenige Tage vor dem Abflug zu buchen, profitiert von einem ökonomischen Paradoxon: Während Planungssicherheit meistens Geld kostet, wird Spontaneität im Tourismussektor oft mit Preisnachlässen belohnt, die sich in einer Spanne von ca. 20 bis 40 Prozent unter den regulären Raten bewegen. Last-Minute-Angebote sind das Ergebnis eines effizienten Kapazitätsmanagements – ungenutzte Plätze im Flugzeug oder leere Hotelbetten bedeuten für die Anbieter einen Totalausfall, den sie kurz vor knapp über den Preis zu verhindern suchen.
 

@@ -31,6 +31,7 @@ Laufbar über die Repo-Konvention (kein pytest nötig):
 """
 from __future__ import annotations
 
+import json
 import shutil
 import subprocess
 import sys
@@ -445,6 +446,39 @@ class BestandUndWerkzeugfehler(unittest.TestCase):
     def test_selbsttests_von_kontrakt_und_wache(self):
         self.assertEqual([], vk.selftest())
         self.assertEqual([], aig.run_selftest())
+
+    def test_zustand_bewahrt_blocking_und_severity_fuer_escalation(self):
+        """Die tägliche Wache muss harte Menschen-Funde von P3-Hinweisen trennen."""
+        tmp = Path(tempfile.mkdtemp(prefix="intent-state-"))
+        alt = (aig.STATE, aig.HISTORY, aig.DRY_RUN, aig.AS_JSON)
+        try:
+            aig.STATE = tmp / "state.json"
+            aig.HISTORY = tmp / "history.jsonl"
+            aig.DRY_RUN = False
+            aig.AS_JSON = False
+            aig.write_state({
+                "generated_at": "2026-10-01 05:00:00 UTC",
+                "exit_code": aig.EXIT_CONTENT,
+                "modus": "FIX",
+                "checked_articles": 1,
+                "checked_links": 1,
+                "healed_count": 0,
+                "healed": [],
+                "findings": [{
+                    "code": "IW3", "slug": "slug", "line": 8,
+                    "route": "tagesgeld", "slot": "intext",
+                    "owner": "human", "severity": "P1", "blocking": True,
+                    "problem": "Problem",
+                }],
+                "errors": [],
+            })
+            zustand = json.loads(aig.STATE.read_text(encoding="utf-8"))
+            fund = zustand["findings"][0]
+            self.assertEqual("P1", fund["severity"])
+            self.assertIs(True, fund["blocking"])
+        finally:
+            aig.STATE, aig.HISTORY, aig.DRY_RUN, aig.AS_JSON = alt
+            shutil.rmtree(tmp, ignore_errors=True)
 
     def test_wache_laueft_als_skript(self):
         proc = subprocess.run(

@@ -41,7 +41,8 @@ def load_posts():
     """Alle Posts (Page-Bundles + Legacy .md) – draft-fähig gefiltert im main."""
     posts = []
     for path in list_post_paths():
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as source:
+            content = source.read()
         fm = content.split("---", 2)
         body = fm[2] if len(fm) == 3 else content
         fm_txt = fm[1] if len(fm) > 1 else ""
@@ -106,7 +107,14 @@ def audit_post(p):
             tips.append("Kein Keyword im Titel")
         if not any(k in dl for k in kws):
             tips.append("Kein Keyword in der Description")
-    # Struktur (H1 rendert PaperMod automatisch aus dem Titel)
+    # Struktur: PaperMod rendert den Frontmatter-Titel bereits als einziges
+    # H1. Ein zusätzliches Markdown-H1 im Body erzeugt zwei H1 im fertigen
+    # Artikel (E2E-Fund #492) und ist deshalb ein harter Publish-Fehler.
+    if h1s:
+        issues.append(
+            f"{h1s} zusätzliches Markdown-H1 im Artikeltext "
+            "(der Seitentitel wird bereits als H1 gerendert)"
+        )
     if h2s < 2:
         tips.append(f"Nur {h2s} H2-Abschnitte (empfohlen: 3+)")
     # Bilder
@@ -124,11 +132,13 @@ def audit_post(p):
 
     return {
         "file": p["file"],
+        "slug": p["slug"],
         "title": p["title"][:50],
         "score_issues": len(issues),
         "issues": issues,
         "tips": tips,
         "words": words,
+        "h1_body": h1s,
         "h2": h2s,
     }
 
@@ -138,7 +148,8 @@ def audit_sitemap(posts):
     sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
     if not os.path.exists(sitemap_path):
         return []
-    sitemap = open(sitemap_path, encoding="utf-8").read()
+    with open(sitemap_path, encoding="utf-8") as source:
+        sitemap = source.read()
     missing = []
     for p in posts:
         if p["draft"]:
@@ -146,7 +157,7 @@ def audit_sitemap(posts):
         slug = p.get("slug") or p["file"][:-3]
         if slug not in sitemap:
             missing.append(slug)
-    return [f"{len(missing)} Artikel fehlen in sitemap.xml: {missing[:5]}" if missing else ""]
+    return [f"{len(missing)} Artikel fehlen in sitemap.xml: {missing[:5]}"] if missing else []
 
 
 def main():

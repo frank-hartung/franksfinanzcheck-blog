@@ -1726,7 +1726,7 @@ def write_state(res: dict) -> None:
         "healed": res["healed"][:50],
         "findings": [
             {k: f[k] for k in ("code", "slug", "line", "route", "slot",
-                               "owner", "problem")}
+                               "owner", "severity", "blocking", "problem")}
             for f in res["findings"][:100]
         ],
         "errors": res["errors"],

@@ -2,6 +2,10 @@ name: Publication reliability regression tests
 on:
   pull_request:
     paths:
+      # Die Regressionstests prüfen ausdrücklich den gesamten Content-Bestand
+      # (u. a. Affiliate-Intent). Content-only-Korrekturen müssen sie deshalb
+      # genauso auslösen wie Änderungen am Detektor selbst (#493).
+      - 'content/**'
       - 'scripts/**'
       - '.github/workflows/**'
   workflow_dispatch: {}

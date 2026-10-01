@@ -145,8 +145,58 @@ def validate_dataset(path: Path, doc) -> tuple[list[str], str | None]:
     return errors, dataset_id
 
 
+def front_matter(text: str) -> dict | None:
+    """Liest YAML-Frontmatter; ``None`` markiert unlesbare Metadaten."""
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+    try:
+        end = next(i for i, line in enumerate(lines[1:], 1) if line.strip() == "---")
+        import yaml
+        parsed = yaml.safe_load("\n".join(lines[1:end])) or {}
+    except Exception:
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
+def _as_datetime(value) -> dt.datetime | None:
+    if isinstance(value, dt.datetime):
+        return value if value.tzinfo else value.replace(tzinfo=dt.timezone.utc)
+    if isinstance(value, dt.date):
+        return dt.datetime.combine(value, dt.time.min, tzinfo=dt.timezone.utc)
+    if isinstance(value, str):
+        try:
+            parsed = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+            return parsed if parsed.tzinfo else parsed.replace(tzinfo=dt.timezone.utc)
+        except ValueError:
+            return None
+    return None
+
+
+def is_production_content(text: str, now: dt.datetime | None = None) -> bool:
+    """Spiegelt Hugos Standard-Ausschlüsse: Entwurf, Zukunft und Ablaufdatum."""
+    parsed = front_matter(text)
+    if parsed is None:
+        return False
+    meta = {str(key).lower(): value for key, value in parsed.items()}
+    if meta.get("draft") is True:
+        return False
+    now = now or dt.datetime.now(dt.timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=dt.timezone.utc)
+    for key in ("date", "publishdate"):
+        value = _as_datetime(meta.get(key))
+        if value and value > now:
+            return False
+    expiry = _as_datetime(meta.get("expirydate"))
+    return not (expiry and expiry <= now)
+
+
 def run() -> dict:
-    result = {"datasets": 0, "references": 0, "errors": [], "warnings": []}
+    result = {
+        "datasets": 0, "references": 0, "production_references": 0,
+        "errors": [], "warnings": [],
+    }
     files = sorted(p for p in DATA_DIR.glob("*.yaml") if p.name != "schema.yaml")
     if not files:
         result["errors"].append("Keine Datensätze unter data/datasets gefunden")
@@ -170,15 +220,28 @@ def run() -> dict:
             ids[dataset_id] = str(path.relative_to(ROOT))
 
     used: set[str] = set()
+    used_in_production: set[str] = set()
     for path in CONTENT_DIR.rglob("*.md"):
         text = path.read_text(encoding="utf-8")
-        for key in SHORTCODE_RE.findall(text):
+        keys = SHORTCODE_RE.findall(text)
+        production = is_production_content(text)
+        for key in keys:
             result["references"] += 1
             used.add(key)
+            if production:
+                result["production_references"] += 1
+                used_in_production.add(key)
             if key not in known_keys:
                 result["errors"].append(f"{path.relative_to(ROOT)}: unbekannter Chart-Datensatz {key!r}")
-    for key in sorted(known_keys - used):
-        result["warnings"].append(f"data/datasets/{key}.yaml ist noch in keinem Inhalt eingebunden")
+    for key in sorted(known_keys - used_in_production):
+        detail = (
+            "nur in Entwürfen, zukünftigen oder abgelaufenen Inhalten eingebunden"
+            if key in used else "in keinem Inhalt eingebunden"
+        )
+        result["errors"].append(
+            f"data/datasets/{key}.yaml ist {detail}; "
+            "eine Produktionsreferenz ist erforderlich"
+        )
     return result
 
 
@@ -190,7 +253,11 @@ def main() -> int:
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
-        print(f"Visual-Data-Gate: {result['datasets']} Datensätze, {result['references']} Einbindungen")
+        print(
+            f"Visual-Data-Gate: {result['datasets']} Datensätze, "
+            f"{result['production_references']}/{result['references']} "
+            "Einbindungen in Produktion/gesamt"
+        )
         for warning in result["warnings"]:
             print(f"WARN: {warning}")
         for error in result["errors"]:

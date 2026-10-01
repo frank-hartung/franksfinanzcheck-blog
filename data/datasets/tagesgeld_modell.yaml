@@ -9,29 +9,31 @@ chart_type: bar
 unit: "€ pro Jahr"
 x_label: "Modell-Anlageform"
 y_label: "Brutto-Zinsertrag in Euro"
-updated: "2026-09-28"
+updated: "2026-10-01"
 update_frequency: statisch
 sources:
   - title: "Tagesgeld-Zinsen 2026: Rechenbeispiel mit 15.000 Euro"
     url: "https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/"
     publisher: "FranksFinanzcheck"
-    accessed: "2026-09-28"
+    accessed: "2026-10-01"
 methodology:
   summary: "Bruttoertrag = 15.000 Euro × Modellzinssatz. Steuern, Zinseszins, Gebühren und unterjährige Zinsänderungen sind nicht berücksichtigt."
-  version: "1.0.0"
+  version: "1.1.0"
   url: "https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/#rechenbeispiel-was-bringt-das-tagesgeld-konkret"
 changelog:
+  - date: "2026-10-01"
+    note: "Modellzinssätze und Bruttoerträge mit der Oktober-Aktualisierung des Artikels synchronisiert."
   - date: "2026-09-28"
     note: "Erstfassung aus dem bestehenden, redaktionell geprüften Rechenbeispiel."
 license: "CC BY 4.0"
 values:
   - label: "Girokonto (0,00 %)"
     value: 0
-  - label: "Sparbuch (0,30 %)"
-    value: 45
-  - label: "Tagesgeld (2,00 %)"
-    value: 300
-  - label: "Top-Tagesgeld (3,00 %)"
-    value: 450
-  - label: "Festgeld 12 Monate (3,30 %)"
-    value: 495
+  - label: "Sparbuch (0,40 %)"
+    value: 60
+  - label: "Tagesgeld (1,90 %)"
+    value: 285
+  - label: "Top-Tagesgeld (3,10 %)"
+    value: 465
+  - label: "Festgeld 12 Monate (3,40 %)"
+    value: 510
