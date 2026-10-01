@@ -1,94 +1,99 @@
 {{- /* Sitemap der zur Indexierung vorgesehenen Originalseiten.
-     Artikel, sechs Themen-Ratgeber, beide Hubs und Vertrauens-/Rechtsseiten.
-     Keine Archive, Pager oder explizit ausgeschlossenen Seiten.
-     lastmod wird ausschließlich aus belegten Redaktionsdaten abgeleitet;
-     ohne Datum auf Einzel-/Rechtsseiten wird es weggelassen.
-     priority/changefreq sind Hinweise, keine Rankingversprechen.
+
+     GRUNDSATZ (Neufassung 01.10.2026, Vorgang WF-54C4)
+     Die Sitemap wird ABGELEITET, nicht aufgezählt. Aufgenommen wird jede
+     Seite des content-Baums, die laut `seo_indexierbar.html` ein
+     `index, follow` trägt und kein `sitemap.disable` gesetzt hat – also
+     genau die Menge, die auch die Index-Hygiene-Wache (H1/H8) erwartet.
+     Keine Archive (term/taxonomy), keine Pager, keine Entwürfe, keine
+     Verifikationsdateien (die liegen in static/ und sind keine Inhalte).
+
+     Vorher stand hier eine Namensliste (sechs Pillar-Slugs, zwei Hubs, die
+     Rechtsseiten). Jede neue Seite fiel damit aus der Sitemap, bis jemand
+     den Namen nachtrug: /transparenz/ (29.09.), /aenderungsprotokoll/ und
+     /cockpit/ (01.10., Deploy-Stopp durch H1). Diese Klasse von Fehler ist
+     mit der Ableitung strukturell erledigt.
+
+     Reihenfolge (stabil, damit Diffs lesbar bleiben): Startseite, Artikel,
+     Pillar-Ratgeber, Sektionen/Hubs, übrige Seiten – je Gruppe alphabetisch
+     nach URL.
+
+     Prioritäten/changefreq sind Hinweise, keine Rankingversprechen; die
+     Werte stehen in `$regeln` und sind an Sektion/Seitentyp gebunden,
+     nicht an einzelne Seitennamen.
+
      GEO/SEO-PREMIUM 21.09.2026: Google-Bild-Sitemap (image:image) für alle
      Artikel- und Ratgeber-Cover – zweiter Discovery-Pfad für Google Bilder,
      Discover und Pinterest. Die Bild-Tags stehen ZWINGEND NACH priority:
      schema_seo_gate S7 parst `<loc>…</loc>\s*(<lastmod>)?` per Regex und
      meldet jeden Bild-Tag dazwischen als fehlendes lastmod. seo_cockpit.py
      liest nur direkte url/loc-Kinder (image:loc wird ignoriert).
-     Regressionen: schema_seo_gate.py, seo_cockpit.py, seo-pagination.spec.mjs.
+     Regressionen: schema_seo_gate.py, seo_cockpit.py, seo-pagination.spec.mjs,
+     scripts/index_hygiene_gate.py (H1/H8).
 */ -}}
-{{- $seen := slice -}}
+{{- /* ---- 1) Kandidaten: der gesamte content-Baum ---- */ -}}
+{{- $kandidaten := partial "sitemap_kandidaten.html" "content" -}}
+{{- /* ---- 2) Filter: indexierbar + nicht abgewählt + echte URL ---- */ -}}
+{{- $seiten := slice -}}
+{{- $gesehen := slice -}}
+{{- range $kandidaten -}}
+  {{- $seite := site.GetPage . -}}
+  {{- if not $seite }}{{ continue }}{{ end -}}
+  {{- if not $seite.Permalink }}{{ continue }}{{ end -}}
+  {{- if in $gesehen $seite.Permalink }}{{ continue }}{{ end -}}
+  {{- if $seite.Params.sitemap.disable }}{{ continue }}{{ end -}}
+  {{- if not (partial "seo_indexierbar.html" $seite) }}{{ continue }}{{ end -}}
+  {{- $gesehen = $gesehen | append $seite.Permalink -}}
+  {{- $seiten = $seiten | append $seite.RelPermalink -}}
+{{- end -}}
+{{- /* ---- 3) Einordnung: Gruppe, Priorität, changefreq ---- */ -}}
+{{- $regeln := dict
+      "home"    (dict "rang" 0 "freq" "daily"   "prio" 1.0 "bild" false)
+      "posts"   (dict "rang" 1 "freq" "weekly"  "prio" 0.8 "bild" true)
+      "pillar"  (dict "rang" 2 "freq" "weekly"  "prio" 0.9 "bild" true)
+      "sektion" (dict "rang" 3 "freq" "weekly"  "prio" 0.6 "bild" false)
+      "seite"   (dict "rang" 4 "freq" "monthly" "prio" 0.3 "bild" false)
+-}}
 {{- $out := slice -}}
-{{- /* ---- Hilfsfunktion: Seite würfeln (URL, lastmod, freq, prio) ---- */ -}}
-{{- /* INDEX-HYGIENE 29.09.2026: /transparenz/ fehlte hier. Die Seite ist
-       indexierbar (head.html setzt index,follow) und aus dem Footer verlinkt,
-       stand aber in keiner Sitemap – für Google also nur über die interne
-       Verlinkung auffindbar („Gefunden – zurzeit nicht indexiert"). Sie ist
-       eine Vertrauensseite (E-E-A-T) und gehört damit zu den Money-Pages.
-       Die beiden Verifikationsdateien (/google…html, /pinterest-e238f.html)
-       bleiben bewusst draußen: sie sind Besitznachweise, keine Inhalte.
-       Wache: scripts/index_hygiene_gate.py (H1). */ -}}
-{{- /* BEWEISSYSTEM 01.10.2026: /aenderungsprotokoll/ ist die neue öffentliche
-       Korrektur-/Beleg-Seite (E-E-A-T-Vertrauensseite wie /transparenz/) und
-       gehört in die Sitemap. /cockpit/ (Produktkern, Commit „Fixkosten-
-       Cockpit product core“) fehlte hier ebenfalls – Index-Hygiene-Wache H1
-       meldete beide als „indexierbar, aber nur intern verlinkt“. */ -}}
-{{- $legal := slice "impressum" "datenschutz" "ueber" "methodik" "transparenz" "aenderungsprotokoll" -}}
-{{- /* ---------- 1) Startseite ---------- */ -}}
-{{- with site.Home -}}
-  {{- if and (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) -}}
-    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "daily" "prio" 1.0) -}}
-    {{- $seen = $seen | append .Permalink -}}
+{{- range $seiten -}}
+  {{- $pg := site.GetPage . -}}
+  {{- $art := "seite" -}}
+  {{- if $pg.IsHome -}}
+    {{- $art = "home" -}}
+  {{- else if $pg.IsSection -}}
+    {{- $art = "sektion" -}}
+  {{- else if eq $pg.Section "posts" -}}
+    {{- $art = "posts" -}}
+  {{- else if eq $pg.Section "pillar" -}}
+    {{- $art = "pillar" -}}
   {{- end -}}
-{{- end -}}
-{{- /* ---------- 2) Live-Artikel ---------- */ -}}
-{{- range site.RegularPages -}}
-  {{- if ne .Section "posts" }}{{ continue }}{{ end -}}
-  {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
-  {{- $pg := . -}}
+  {{- $r := index $regeln $art -}}
+  {{- /* Feinsteuerung bleibt bei der Seite selbst (Hugo-Frontmatter
+         `sitemap.priority` / `sitemap.changefreq`) – kein Namenseintrag im
+         Template. Ohne Angabe gilt die Regel der Gruppe. */ -}}
+  {{- $prio := $r.prio -}}
+  {{- $freq := $r.freq -}}
+  {{- with $pg.Params.sitemap -}}
+    {{- with .priority -}}{{- $prio = . -}}{{- end -}}
+    {{- with .changefreq -}}{{- $freq = . -}}{{- end -}}
+  {{- end -}}
   {{- $img := "" -}}{{- $imgT := "" -}}{{- $imgC := "" -}}
-  {{- with .Params.cover.image -}}
-    {{- $img = . | absURL -}}
-    {{- $imgT = $pg.Title | plainify -}}
-    {{- with $pg.Params.cover.alt -}}{{- $imgC = . | plainify -}}{{- end -}}
-  {{- end -}}
-  {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.8 "img" $img "imgtitle" $imgT "imgcap" $imgC) -}}
-  {{- $seen = $seen | append .Permalink -}}
-{{- end -}}
-{{- /* ---------- 3) Pillar-Ratgeber (list: never → manuell) ---------- */ -}}
-{{- $pillars := slice "strom-sparen" "versicherungen" "mietwagen" "frugalismus" "internet-dsl" "konto-karten" -}}
-{{- range $pillars -}}
-  {{- with site.GetPage (printf "pillar/%s" .) -}}
-    {{- if or (.Params.sitemap.disable) (eq .Params.robotsNoIndex true) (in $seen .Permalink) }}{{ continue }}{{ end -}}
-    {{- $pg := . -}}
-    {{- $img := "" -}}{{- $imgT := "" -}}{{- $imgC := "" -}}
-    {{- with .Params.cover.image -}}
+  {{- if $r.bild -}}
+    {{- with $pg.Params.cover.image -}}
       {{- $img = . | absURL -}}
       {{- $imgT = $pg.Title | plainify -}}
       {{- with $pg.Params.cover.alt -}}{{- $imgC = . | plainify -}}{{- end -}}
     {{- end -}}
-    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.9 "img" $img "imgtitle" $imgT "imgcap" $imgC) -}}
-    {{- $seen = $seen | append .Permalink -}}
   {{- end -}}
+  {{- $out = $out | append (dict
+        "rang" $r.rang
+        "url" $pg.Permalink
+        "lastmod" (partial "sitemap_lastmod" $pg)
+        "freq" $freq
+        "prio" $prio
+        "img" $img "imgtitle" $imgT "imgcap" $imgC) -}}
 {{- end -}}
-{{- /* ---------- 4) Pillar-/Blog-Übersicht + Cockpit + Rechtliches/Über ---------- */ -}}
-{{- range (slice "pillar" "posts") -}}
-  {{- with site.GetPage (printf "/%s" .) -}}
-    {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
-      {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
-      {{- $seen = $seen | append .Permalink -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- with site.GetPage "/cockpit" -}}
-  {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
-    {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "weekly" "prio" 0.6) -}}
-    {{- $seen = $seen | append .Permalink -}}
-  {{- end -}}
-{{- end -}}
-{{- range $legal -}}
-  {{- with site.GetPage (printf "/%s" .) -}}
-    {{- if and .Permalink (not .Params.sitemap.disable) (ne .Params.robotsNoIndex true) (not (in $seen .Permalink)) -}}
-      {{- $out = $out | append (dict "url" .Permalink "lastmod" (partial "sitemap_lastmod" .) "freq" "monthly" "prio" 0.3) -}}
-      {{- $seen = $seen | append .Permalink -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
+{{- $out = sort (sort $out "url") "rang" -}}
 {{ printf `<?xml version="1.0" encoding="utf-8" standalone="yes"?>` | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 {{- range $out }}

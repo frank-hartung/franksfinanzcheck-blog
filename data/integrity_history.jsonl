@@ -218,3 +218,5 @@
 {"date": "2026-10-01", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/blog_doctor.py", "scripts/content_audit.py"]}
 {"date": "2026-10-01", "kritisch": 1, "fest": 3, "modus": "set-current", "geaendert": ["data/brand_lock.yaml", "hugo.toml", "layouts/_partials/home_clusters.html", "layouts/pillar/list.html"]}
 {"date": "2026-10-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-01", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["layouts/_partials/head.html"]}
+{"date": "2026-10-01", "kritisch": 0, "fest": 0, "modus": "verify"}

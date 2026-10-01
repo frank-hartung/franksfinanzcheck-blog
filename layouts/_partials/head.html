@@ -7,13 +7,19 @@
 {{- $pager    := $seo.isPager -}}
 {{- $notFound := hasPrefix .RelPermalink "/404" -}}
 {{- $explicit := eq .Params.robotsNoIndex true -}}
+{{- /* Die Index-Entscheidung selbst liegt in seo_indexierbar.html – dieselbe
+       Partial nutzt die Sitemap, damit robots-Meta und Sitemap nie
+       auseinanderlaufen (Index-Hygiene H1/H8). */ -}}
+{{- $indexierbar := partial "seo_indexierbar.html" . -}}
 {{- if and $prod (not $explicit) (not $notFound) -}}
   {{- if $archiv -}}
 <meta name="robots" content="noindex, follow">
   {{- else if $pager -}}
 <meta name="robots" content="noindex, follow">
-  {{- else -}}
+  {{- else if $indexierbar -}}
 <meta name="robots" content="index, follow, max-image-preview:large">
+  {{- else -}}
+<meta name="robots" content="noindex, follow">
   {{- end -}}
 {{- else -}}
 <meta name="robots" content="noindex, nofollow">

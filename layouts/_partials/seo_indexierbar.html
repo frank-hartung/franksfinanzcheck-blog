@@ -1,0 +1,18 @@
+{{- /* seo_indexierbar.html – EINE Quelle für die Frage „darf diese Seite in
+     den Index?“.
+
+     Vorher beantworteten zwei Stellen dieselbe Frage mit eigenen Regeln:
+     head.html setzte das robots-Meta, sitemap.xml pflegte eine Namensliste.
+     Driften beide auseinander, entsteht genau der Defekt, den die
+     Index-Hygiene-Wache als H1 (indexierbar, aber nicht in der Sitemap) bzw.
+     H8 (noindex, aber in der Sitemap) meldet. Beide Templates fragen deshalb
+     ab sofort diese Partial.
+
+     Rückgabe: true = Seite trägt `index, follow` und gehört in die Sitemap.
+*/ -}}
+{{- $seo := partial "seo_context.html" . -}}
+{{- $prod := hugo.IsProduction | or (eq site.Params.env "production") -}}
+{{- $archiv := or (eq .Kind "term") (eq .Kind "taxonomy") -}}
+{{- $notFound := hasPrefix .RelPermalink "/404" -}}
+{{- $explicit := eq .Params.robotsNoIndex true -}}
+{{- return (and $prod (not $explicit) (not $notFound) (not $archiv) (not $seo.isPager)) -}}
