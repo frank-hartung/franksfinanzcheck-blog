@@ -89,6 +89,14 @@ Static-Server (`e2e/server.mjs`), hermetische Produktions-URL-Umleitung
 Mobile-Projekt: `browserName: 'chromium'` explizit setzen – sonst startet
 Playwright heimlich WebKit (device-`defaultBrowserType`-Falle).
 
+**Browser-Pflicht (seit #507, 01.10.2026):** Ein merge-fähiger Stand hat den
+vollen Playwright-Lauf hinter sich – „in dieser Sandbox nicht startbar" ist
+kein akzeptabler PR-Zustand mehr. Wenn `cdn.playwright.dev` blockiert ist
+(TLS-Reset), läuft die Suite über den eingebauten Fallback:
+`npm i --no-save @sparticuz/chromium` (Resolver greift automatisch) –
+Hintergrund und weitere Rettungswege: `docs/ANLEITUNG-DESIGN-VARIANTEN.md`,
+Abschnitt Troubleshooting, und `docs/INCIDENT-2026-10-01-e2e-suite-492.md`.
+
 ## CI
 
 - `.github/workflows/e2e.yml` – Playwright bei PRs auf main + dienstags
