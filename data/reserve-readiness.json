@@ -1,13 +1,13 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 5,
   "pool_size": 7,
-  "generated_at": "2026-10-01T10:37:28Z",
+  "generated_at": "2026-10-01T15:36:38Z",
   "candidates": [
     {
       "slug": "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
       "ready": true,
-      "sha256": "16774061f80abcab7b4e94e9504cb5502a7cc02816221f21fc952da2600b1efc",
+      "sha256": "2ebe310fd335624f0c96729e3d62af10835c8f5d627661f745c3e06348e872b7",
       "score": 0.898,
       "parts": {
         "spelling": 0.8,
@@ -22,7 +22,7 @@
     {
       "slug": "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
       "ready": true,
-      "sha256": "b213c8be42318913a34bca3a7c183cc85bd4fe6f90973c0e56d5c197fdc9f10f",
+      "sha256": "a384bdf33c5f1b1fe45617f20b8e47ecca31cbfa36ce7a665363ff41b4f1298d",
       "score": 0.974,
       "parts": {
         "spelling": 0.92,
@@ -37,13 +37,13 @@
     {
       "slug": "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
       "ready": true,
-      "sha256": "d6f980fc791fb5b54804e5c47eb9101c39d0b3bd22055b32719c0b5792aef6f4",
-      "score": 0.888,
+      "sha256": "8bce831fa970774568befb03a63e73ebad272b2edc988ad6f385889293fdbfed",
+      "score": 0.908,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.78,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
@@ -52,7 +52,7 @@
     {
       "slug": "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever",
       "ready": true,
-      "sha256": "b58b8569bbb6d1cf9ad2a5b1e64c80c9bfcd716268f12da60fb2742f4656b446",
+      "sha256": "e67e01458d1c9031b44a061b405a2f931c35323ad54984acfbfc138c9487e2e2",
       "score": 0.882,
       "parts": {
         "spelling": 0.7,
@@ -66,8 +66,14 @@
     },
     {
       "slug": "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende",
-      "ready": true,
-      "sha256": "c8c15fb033f5449df222c8cb5c801e229f2ef90d0e13c97db79bdf60faf070f0",
+      "ready": false,
+      "sha256": "90b20fbf3f34adfe44641a4fc32ee9eddeb5fa425ac3d389e11c1f59fc250558",
+      "reason": "Keyword-Gate nicht bestanden: Keyword-Score 50/100 (<60 kritisch): Keyword nicht in: Description; Keyword nicht in: Erster Absatz; Keyword nicht in: Dichte",
+      "details": [
+        "🛑 2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Keyword-Gate nicht bestanden: Keyword-Score 50/100 (<60 kritisch): Keyword nicht in: Description; Keyword nicht in: Erster Absatz; Keyword nicht in: Dichte",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
       "score": 0.918,
       "parts": {
         "spelling": 0.84,
@@ -82,19 +88,19 @@
     {
       "slug": "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
       "ready": false,
-      "sha256": "3b4e69a3bc45dbec57ed084840cff75a72d52b1919d4e5ed49f7ab0368973a8b",
+      "sha256": "47630273acaf1b9549e32389062594fdd13b966584bbad44b51ca703bc0a7222",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
       "details": [
         "🛑 2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem guide“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.918,
+      "score": 0.938,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.6799999999999999,
+        "typography": 0.88,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -103,7 +109,7 @@
     {
       "slug": "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab",
       "ready": true,
-      "sha256": "c8de383347e988ceab2941b5b5d96959539e17dcd307b86a8a82fcc40429283a",
+      "sha256": "4e57628a0ecc7a44a9f8b00eb73fd125979c32ee49a90958e15fba36e4ca9fc8",
       "score": 0.896,
       "parts": {
         "spelling": 0.8,
@@ -115,5 +121,18 @@
         "readability": 0.75
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-01T15:36:38Z",
+    "renewed": [
+      "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
+      "2026-10-01-die-5-besten-apps-fuer-mehr-geld-am-monatsende",
+      "2026-10-01-dsl-anbieter-wechseln-so-holst-du-hunderte-euro-zurueck",
+      "2026-10-01-heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt",
+      "2026-10-01-online-banking-schlank-machen-so-steuerst-du-dein-geld-im",
+      "2026-10-01-riester-rente-2026-zulagen-segen-oder-teures-grab",
+      "2026-10-01-urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
