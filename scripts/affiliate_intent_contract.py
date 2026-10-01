@@ -660,6 +660,10 @@ THEMEN_REIHE: tuple[tuple[str, str], ...] = (
     (r"breitband|glasfaser|router|fritz", "dsl"),
     (r"dsl", "dsl"),
     (r"internet", "dsl"),
+    # 01.10.2026 (#493): Baufinanzierung/Darlehen vor Tagesgeld –
+    # Baufinanzierungs-Artikel erwähnen oft „Vermögen“/„Eigenkapital“,
+    # gehören aber fachlich zur Kredit-Route, nicht zur Geldanlage.
+    (r"baufinanzierung|immobiliendarlehen|immobilienkredit|baukredit|baudarlehen|baugeld|hypothek|darlehen", "kredit"),
     # 19.09.2026 (Intent-Wache): Vermögensaufbau-Vokabular ergänzt. Ein
     # Artikel über finanzielle Freiheit wurde durch EIN rhetorisches
     # „Kredit" im Intro als Ratenkredit-Thema gelesen und sein Schluss-CTA
@@ -1244,6 +1248,7 @@ def selftest() -> list[str]:
          "wohngebaeudeversicherung"),
         ("Flugtickets günstig buchen: Strategien für deine Reise", "fluege"),
         ("Gasrechnung senken: Spätsommer-Check spart hunderte Euro", "gas"),
+        ("Baufinanzierung: So findest du das günstigste Darlehen", "kredit"),
         # Regression: bestehende eingefrorene Fälle dürfen nicht kippen.
         ("Hausratversicherung: Was sie kostet und wen sie schützt", "hausrat"),
         ("Privathaftpflicht: Warum so wichtig und was sie kostet", "haftpflicht"),

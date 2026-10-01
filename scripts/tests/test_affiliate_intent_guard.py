@@ -487,5 +487,77 @@ class BestandUndWerkzeugfehler(unittest.TestCase):
         self.assertEqual(0, proc.returncode, proc.stdout + proc.stderr)
 
 
+# --------------------------------------------------------------------- #
+# 5) Regression #493: Tagesgeld-Artikel verspricht Vergleich
+# --------------------------------------------------------------------- #
+class TagesgeldIntentRegression493(unittest.TestCase):
+    """Spezifische Regressionstests für Issue #493:
+    Tagesgeld-Artikel verspricht Vergleich, verlinkt Einzelangebot."""
+
+    def test_live_tagesgeld_artikel_ist_sauber(self):
+        """Der Live-Tagesgeld-Artikel muss frei von allen Intent-Mängeln sein."""
+        reg = aig.load_registry()
+        pfad = ROOT / "content" / "posts" / "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich" / "index.md"
+        self.assertTrue(pfad.is_file(), "Tagesgeld-Artikel existiert")
+        text = pfad.read_text(encoding="utf-8")
+        prefix, fm_raw, body_raw = aig.split_article(text)
+        art = {
+            "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+            "path": pfad, "rel": str(pfad.relative_to(ROOT)),
+            "prefix": prefix, "fm": fm_raw, "body": body_raw, "text": text,
+            "title": aig.fm_value(fm_raw, "title"),
+            "tags": aig.fm_list(fm_raw, "tags"),
+            "pillar": aig.fm_value(fm_raw, "pillar"),
+            "draft": False, "section": "posts",
+        }
+        res = aig.pruefe_artikel(art, reg, {})
+        blocking = [f for f in res if f.get("blocking")]
+        self.assertEqual([], blocking, f"Tagesgeld-Artikel hat Intent-Funde: {blocking}")
+
+    def test_vergleichs_versprechen_auf_c24_tagesgeld_wird_als_p1_erkannt(self):
+        """Wenn ein Satz 'Vergleich' verspricht und auf /go/tagesgeld/ verlinkt,
+        muss die Wache einen blockierenden IW3-Fund (owner: human) melden."""
+        art = artikel(
+            "tagesgeld-vergleich-test",
+            "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich",
+            "\nIntro.\n1. **Markt sondieren:** Nutze aktuelle Vergleiche wie das "
+            "[Tagesgeldkonto der C24 Bank](/go/tagesgeld/), um Spitzenreiter zu finden.\n"
+        )
+        res = funde(art)
+        iw3 = [f for f in res if f["code"] == "IW3"]
+        self.assertTrue(len(iw3) >= 1, "IW3 wurde nicht ausgelöst")
+        self.assertEqual("human", iw3[0]["owner"])
+        self.assertTrue(iw3[0]["blocking"])
+        self.assertIn("vergleich", iw3[0]["problem"].lower())
+
+    def test_baufinanzierung_theme_routing_is_kredit(self):
+        """Baufinanzierung darf nicht fälschlich als Tagesgeld erkannt werden."""
+        titel = "Baufinanzierung: So findest du das günstigste Darlehen"
+        route = vk.route_fuer_text("", titel)
+        self.assertEqual("kredit", route)
+
+    def test_update_articles_verify_rejects_intent_violations(self):
+        """update_articles.verify_update muss unehrliche Sätze abfangen."""
+        import update_articles as ua
+        alt_art = {
+            "slug": "test-tg",
+            "fm": "title: Test\n",
+            "body": "Gesunder Text mit [Tagesgeld der C24 Bank](/go/tagesgeld/).",
+        }
+        kaputter_body = (
+            "Aktualisierter Text:\n"
+            "Nutze unseren großen Marktvergleich für das [Tagesgeldkonto der C24 Bank](/go/tagesgeld/).\n"
+        )
+        problems = ua.verify_update(alt_art, kaputter_body)
+        self.assertTrue(any("Affiliate-Intent" in p for p in problems),
+                        f"verify_update hat Intent-Verletzung nicht abgefangen: {problems}")
+
+    def test_bestand_gate_checks_intent_dimension(self):
+        """bestand_gate.run_gate muss die Intent-Dimension prüfen."""
+        import bestand_gate as bg
+        findings, errors = bg.run_gate()
+        self.assertIn("intent", findings)
+
+
 if __name__ == "__main__":
     unittest.main()

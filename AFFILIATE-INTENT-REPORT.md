@@ -1,14 +1,10 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-10-01 10:38:03 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-10-01 15:08:54 UTC · **Modus:** REPORT · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 69 · **Gateway-Links:** 209 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 68 · **Gateway-Links:** 206 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
-## 🟡 Hinweise – nicht blockierend (ehrliches Cross-Selling, redaktioneller Prüfpunkt)
-
-### IW4 – Nie-Paare (1)
-
-- `content/posts/2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen/index.md`:42 [top] /go/kredit/ «Jetzt Kreditangebote prüfen» – Verbotenes Paar: Artikelthema „Tagesgeld der C24 Bank“ → Route „Ratenkredit“. Geldanlage-Interesse darf nicht im Ratenkredit-Rechner landen. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/tagesgeld/? (ℹ️ Hinweis)
+🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
 
 ## Vertrag
 

@@ -1,23 +1,11 @@
 {
- "generated_at": "2026-10-01 10:38:03 UTC",
+ "generated_at": "2026-10-01 15:08:54 UTC",
  "exit_code": 0,
- "modus": "FIX",
- "checked_articles": 69,
- "checked_links": 209,
+ "modus": "REPORT",
+ "checked_articles": 68,
+ "checked_links": 206,
  "healed_count": 0,
  "healed": [],
- "findings": [
-  {
-   "code": "IW4",
-   "slug": "2026-10-01-baufinanzierung-so-findest-du-das-guenstigste-darlehen",
-   "line": 17,
-   "route": "kredit",
-   "slot": "top",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "Verbotenes Paar: Artikelthema „Tagesgeld der C24 Bank“ → Route „Ratenkredit“. Geldanlage-Interesse darf nicht im Ratenkredit-Rechner landen. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/tagesgeld/?"
-  }
- ],
+ "findings": [],
  "errors": []
 }

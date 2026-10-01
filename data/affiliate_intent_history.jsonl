@@ -18,3 +18,7 @@
 {"date": "2026-09-29", "generated_at": "2026-09-29 10:17:56 UTC", "modus": "FIX", "funde": 0, "geheilt": 0, "exit_code": 0}
 {"date": "2026-09-30", "generated_at": "2026-09-30 10:10:47 UTC", "modus": "FIX", "funde": 2, "geheilt": 0, "exit_code": 0}
 {"date": "2026-10-01", "generated_at": "2026-10-01 10:38:03 UTC", "modus": "FIX", "funde": 1, "geheilt": 0, "exit_code": 0}
+{"date": "2026-10-01", "generated_at": "2026-10-01 14:59:03 UTC", "modus": "REPORT", "funde": 1, "geheilt": 0, "exit_code": 0}
+{"date": "2026-10-01", "generated_at": "2026-10-01 15:05:38 UTC", "modus": "REPORT", "funde": 1, "geheilt": 0, "exit_code": 0}
+{"date": "2026-10-01", "generated_at": "2026-10-01 15:05:53 UTC", "modus": "REPORT", "funde": 0, "geheilt": 0, "exit_code": 0}
+{"date": "2026-10-01", "generated_at": "2026-10-01 15:08:54 UTC", "modus": "REPORT", "funde": 0, "geheilt": 0, "exit_code": 0}
