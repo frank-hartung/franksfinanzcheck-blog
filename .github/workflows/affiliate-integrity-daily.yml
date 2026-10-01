@@ -69,6 +69,14 @@
 #    · Der Deploy-Trigger verlangt genau diesen Nachweis.
 #    · Der Zustand ist deploy-irrelevant (Deploy-Gate-Negativliste); ein
 #      Lebenszeichen darf nie eine Veröffentlichung auslösen.
+#
+#  REPARATUR #493 (01.10.2026) – INTENT-FUNDE BRAUCHEN EINEN MELDEWEG
+#    Die tägliche IW0–IW9-Wache erkannte owner=human korrekt und hielt den
+#    Publish-Vertrag rot, die Issue-Pflege wertete aber ausschließlich den
+#    AI1–AI5-Zustand aus. Ein redaktioneller P1-Fund blieb damit nur in Report
+#    und Step-Summary. Ab jetzt ist Grün die UND-Verknüpfung beider Wachen;
+#    Human-Intent-Funde öffnen/aktualisieren dasselbe deduplizierte Fach-Issue
+#    und können es niemals versehentlich schließen.
 # ============================================================
 name: Affiliate-Integritäts-Wache (täglich)
 
@@ -223,7 +231,10 @@ jobs:
               try:
                   daten = json.loads(state.read_text(encoding="utf-8"))
                   geheilt = int(daten.get("healed_count", 0) or 0)
-                  offen = sum(1 for f in daten.get("findings", []) if f.get("owner") == "human")
+                  offen = sum(
+                      1 for f in daten.get("findings", [])
+                      if f.get("owner") == "human" and f.get("blocking") is True
+                  )
               except Exception:
                   pass
           print(f"healed={'true' if geheilt else 'false'}")
@@ -382,6 +393,9 @@ jobs:
           TOOL_ERRORS: ${{ steps.state.outputs.tool_errors }}
           HUGO_OUTCOME: ${{ steps.hugo.outcome }}
           SELFTEST_OUTCOME: ${{ steps.selftest.outcome }}
+          INTENT_EXIT: ${{ steps.intent.outputs.exit_code }}
+          INTENT_HUMAN_FINDINGS: ${{ steps.intent.outputs.human_findings }}
+          INTENT_SELFTEST_OUTCOME: ${{ steps.intent_selftest.outcome }}
         with:
           script: |
             const fs = require('fs');
@@ -390,20 +404,30 @@ jobs:
             const healedCount = Number(process.env.HEALED_COUNT || 0);
             const unresolvedProblems = Number(process.env.UNRESOLVED_PROBLEMS || 0);
             const toolErrors = Number(process.env.TOOL_ERRORS || 0);
+            const intentExit = String(process.env.INTENT_EXIT || '');
+            const intentHumanFindings = Number(process.env.INTENT_HUMAN_FINDINGS || 0);
             // Ein v2-Zustand mit widersprüchlicher Restmenge ist kein Grün.
             // Zusätzlich verlangt der Schließpfad die explizit leere,
-            // kanonische Restmenge: geheilte Historie ist damit grün,
-            // ein echter Restfund oder Werkzeugfehler kann ein Issue aber
-            // niemals versehentlich schließen (#446, Defense in Depth).
+            // kanonische Restmenge BEIDER Wachen: geheilte Historie ist damit
+            // grün; ein Integritäts- ODER Intent-Restfund kann das gemeinsame
+            // Fach-Issue aber niemals versehentlich schließen (#446/#493).
             const stateContractError = process.env.STATE_CONTRACT_ERROR === 'true';
             const green = exitCode === '0' && unresolvedProblems === 0
-              && toolErrors === 0 && !stateContractError;
+              && toolErrors === 0 && !stateContractError
+              && intentExit === '0' && intentHumanFindings === 0
+              && process.env.INTENT_SELFTEST_OUTCOME === 'success';
 
             let report = '';
             try { report = fs.readFileSync('AFFILIATE-INTEGRITY-REPORT.md', 'utf-8'); }
             catch (e) { report = '_Report konnte nicht gelesen werden._'; }
+            let intentReport = '';
+            try { intentReport = fs.readFileSync('AFFILIATE-INTENT-REPORT.md', 'utf-8'); }
+            catch (e) { intentReport = '_Intent-Report konnte nicht gelesen werden._'; }
             let log = '';
             try { log = fs.readFileSync('/tmp/integrity_log.txt', 'utf-8'); }
+            catch (e) {}
+            let intentLog = '';
+            try { intentLog = fs.readFileSync('/tmp/intent_log.txt', 'utf-8'); }
             catch (e) {}
             let hugoLog = '';
             try { hugoLog = fs.readFileSync('/tmp/hugo-build.log', 'utf-8'); }
@@ -420,9 +444,10 @@ jobs:
                 await github.rest.issues.createComment({
                   owner: context.repo.owner, repo: context.repo.repo,
                   issue_number: issue.number,
-                  body: `${marker}\n✅ **Affiliate-Integritäts-Wache grün** (${new Date().toISOString()}): ` +
+                  body: `${marker}\n✅ **Affiliate-Wachen grün** (${new Date().toISOString()}): ` +
                         `alle Affiliate-Links sind intakt, registriert und der Render-Beweis im gebauten HTML ` +
-                        `ist geführt (AI4/AI5).${healedCount ? ` In diesem Lauf automatisch geheilt: ${healedCount} Artikel.` : ''}\n\n` +
+                        `ist geführt (AI4/AI5); Anker, Satzversprechen und Ziele sind intent-sauber (IW0–IW9).` +
+                        `${healedCount ? ` In diesem Lauf automatisch geheilt: ${healedCount} Artikel.` : ''}\n\n` +
                         `Issue wird automatisch geschlossen.`,
                 });
                 await github.rest.issues.update({
@@ -436,38 +461,58 @@ jobs:
             }
 
             const isToolError = exitCode === '2' || exitCode === '' || toolErrors > 0
-              || stateContractError || process.env.SELFTEST_OUTCOME !== 'success';
+              || stateContractError || process.env.SELFTEST_OUTCOME !== 'success'
+              || intentExit === '2' || intentExit === ''
+              || process.env.INTENT_SELFTEST_OUTCOME !== 'success';
+            const hasIntentFinding = intentExit === '1' || intentHumanFindings > 0;
             const title = isToolError
-              ? '🔗 Affiliate-Integritäts-Wache: Render-Beweis nicht möglich (Werkzeugfehler, fail-closed)'
-              : '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit';
+              ? '🔗 Affiliate-Wachen: Beweis nicht möglich (Werkzeugfehler, fail-closed)'
+              : hasIntentFinding
+                ? '🔗 Affiliate-Intent-Wache: redaktionelle Prüfung erforderlich'
+                : '🔗 Affiliate-Integritäts-Wache: CTA-Boxen brauchen Aufmerksamkeit';
             const body = [
               marker,
               isToolError
-                ? '> 🟠 **Werkzeugfehler:** Der Render-Beweis konnte nicht geführt werden ' +
-                  '(Hugo-Build, `public/`, Detektor oder Python). **Fail-closed:** Es wurde nichts "geheilt" ' +
+                ? '> 🟠 **Werkzeugfehler:** Mindestens einer der Integritäts-/Intent-Beweise konnte nicht geführt werden ' +
+                  '(Hugo-Build, `public/`, Detektor oder Python). **Fail-closed:** Es wurde nichts blind "geheilt" ' +
                   'und `publish_gate.py` veröffentlicht in diesem Zustand keine Artikel. ' +
-                  'Bitte `python3 scripts/affiliate_integrity_gate.py --selftest` und das Hugo-Log prüfen. ' +
-                  (exitCode === '' ? ` Hinweis: Gate-Exit fehlt (Selftest=${process.env.SELFTEST_OUTCOME}, ` +
-                   `Hugo=${process.env.HUGO_OUTCOME}).` : '') +
+                  'Bitte beide Selbsttests und das Hugo-Log prüfen. ' +
+                  (exitCode === '' || intentExit === ''
+                    ? ` Hinweis: Exit fehlt (Integrität=${exitCode || '?'}, Intent=${intentExit || '?'}, ` +
+                      `Selftests=${process.env.SELFTEST_OUTCOME}/${process.env.INTENT_SELFTEST_OUTCOME}, ` +
+                      `Hugo=${process.env.HUGO_OUTCOME}).`
+                    : '') +
                   (stateContractError
                     ? ' Hinweis: Der versionierte Affiliate-Zustand verletzt seinen Vertrag; ' +
                       'der Lauf wird fail-closed als Werkzeugfehler behandelt.'
                     : '')
-                : '> 🔴 **Inhaltsschaden:** Nach der automatischen Selbstheilung bleiben Affiliate-CTAs ' +
-                  'auffällig. Betroffene Artikel wurden NICHT gelöscht.',
+                : hasIntentFinding
+                  ? '> 🧑 **Redaktioneller Intent-Fund:** Ein Linkziel ist technisch erreichbar, aber Anker oder Satz ' +
+                    'versprechen ein anderes Angebot. Automatische Umschreibung ist bewusst gesperrt (`owner: human`). ' +
+                    'Der Fund bleibt offen, bis die redaktionelle Entscheidung geprüft ist.'
+                  : '> 🔴 **Inhaltsschaden:** Nach der automatischen Selbstheilung bleiben Affiliate-CTAs ' +
+                    'auffällig. Betroffene Artikel wurden NICHT gelöscht.',
               '',
-              `**Lauf:** ${new Date().toISOString()} · **Exit-Code:** ${exitCode || 'unbekannt'} · ` +
-              `**Hugo:** ${process.env.HUGO_OUTCOME || '?'} · **Selftest:** ${process.env.SELFTEST_OUTCOME || '?'} · ` +
-              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Restfunde:** ${process.env.UNRESOLVED_PROBLEMS || 0}`,
+              `**Lauf:** ${new Date().toISOString()} · **Integrität-Exit:** ${exitCode || 'unbekannt'} · ` +
+              `**Intent-Exit:** ${intentExit || 'unbekannt'} · **Intent-Menschenfunde:** ${intentHumanFindings} · ` +
+              `**Hugo:** ${process.env.HUGO_OUTCOME || '?'} · ` +
+              `**Selftests:** ${process.env.SELFTEST_OUTCOME || '?'}/${process.env.INTENT_SELFTEST_OUTCOME || '?'} · ` +
+              `**Automatisch geheilt:** ${healedCount} Artikel · **Offene Integritätsfunde:** ${process.env.UNRESOLVED_PROBLEMS || 0}`,
               '',
               '---',
               '',
+              '## Link-Integrität (AI1–AI5)',
+              '',
               report,
               '',
-              '<details><summary>Gate-Log</summary>',
+              '## Angebots-Intent (IW0–IW9)',
+              '',
+              intentReport,
+              '',
+              '<details><summary>Gate-Logs</summary>',
               '',
               '```',
-              (log || hugoLog || '(kein Log)').slice(0, 20000),
+              ([log, intentLog, hugoLog].filter(Boolean).join('\n\n---\n\n') || '(kein Log)').slice(0, 20000),
               '```',
               '</details>',
               '',
@@ -485,8 +530,10 @@ jobs:
               await github.rest.issues.createComment({
                 owner: context.repo.owner, repo: context.repo.repo,
                 issue_number: issue.number,
-                body: `${marker}\n🔁 Wache lief erneut (${new Date().toISOString()}), Befund aktualisiert. ` +
-                      `Exit-Code ${exitCode || '?'}, Hugo=${process.env.HUGO_OUTCOME}, ${healedCount} Artikel geheilt.`,
+                body: `${marker}\n🔁 Wachen liefen erneut (${new Date().toISOString()}), Befund aktualisiert. ` +
+                      `Integrität=${exitCode || '?'}, Intent=${intentExit || '?'}, ` +
+                      `Intent-Menschenfunde=${intentHumanFindings}, Hugo=${process.env.HUGO_OUTCOME}, ` +
+                      `${healedCount} Artikel geheilt.`,
               });
               console.log(`🔁 Issue #${issue.number} aktualisiert (kein Duplikat).`);
               for (const dup of existing.slice(1)) {

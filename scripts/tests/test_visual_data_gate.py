@@ -1,4 +1,5 @@
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -14,7 +15,45 @@ class VisualDataGateTests(unittest.TestCase):
         result = MOD.run()
         self.assertGreaterEqual(result["datasets"], 2)
         self.assertGreaterEqual(result["references"], 2)
+        self.assertGreaterEqual(result["production_references"], 2)
         self.assertEqual([], result["errors"])
+
+    def test_draft_reference_cannot_satisfy_production_gate(self):
+        with tempfile.TemporaryDirectory(prefix="visual-data-") as tmp_name:
+            tmp = Path(tmp_name)
+            data_dir = tmp / "data" / "datasets"
+            post = tmp / "content" / "posts" / "test" / "index.md"
+            data_dir.mkdir(parents=True)
+            post.parent.mkdir(parents=True)
+            (data_dir / "dsl_effektivpreis_modell.yaml").write_text(
+                (ROOT / "data" / "datasets" / "dsl_effektivpreis_modell.yaml")
+                .read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            post.write_text(
+                '---\ntitle: "Test"\ndraft: true\n---\n\n'
+                '{{< chart dataset="dsl_effektivpreis_modell" >}}\n',
+                encoding="utf-8",
+            )
+            old = MOD.ROOT, MOD.DATA_DIR, MOD.CONTENT_DIR
+            try:
+                MOD.ROOT = tmp
+                MOD.DATA_DIR = data_dir
+                MOD.CONTENT_DIR = tmp / "content"
+                result = MOD.run()
+                self.assertEqual(1, result["references"])
+                self.assertEqual(0, result["production_references"])
+                self.assertTrue(any("Produktionsreferenz" in e for e in result["errors"]))
+
+                post.write_text(
+                    post.read_text(encoding="utf-8").replace("draft: true", "draft: false"),
+                    encoding="utf-8",
+                )
+                result = MOD.run()
+                self.assertEqual(1, result["production_references"])
+                self.assertEqual([], result["errors"])
+            finally:
+                MOD.ROOT, MOD.DATA_DIR, MOD.CONTENT_DIR = old
 
     def test_missing_source_fails_closed(self):
         doc = {

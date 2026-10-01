@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Vertrag zwischen Affiliate-State und täglicher Issue-Pflege (#446).
+"""Vertrag zwischen Affiliate-States und täglicher Issue-Pflege (#446/#493).
 
-Die Python-Wache schützt den Bot-Watchdog. Dieses kleine Regressionstest-Modul
+Die Python-Wachen schützen den Bot-Watchdog. Dieses kleine Regressionstest-Modul
 schützt zusätzlich den zweiten Meldeweg im GitHub-Workflow: Eine im selben
-Lauf geheilte Fundhistorie darf ein offenes Fach-Issue schließen, ein echter
-Restfund oder Werkzeugfehler dagegen nicht.
+Lauf geheilte Fundhistorie darf ein offenes Fach-Issue schließen; ein echter
+Integritätsfund, ein menschlicher Intent-Fund oder ein Werkzeugfehler dagegen
+nicht.
 
 Der Test liest bewusst den ausgeführten github-script-Block statt Kommentare
 zu prüfen. So fällt eine Rückkehr zur früheren Abkürzung ``exit_code == 0``
@@ -49,9 +50,28 @@ class AffiliateIntegrityWorkflowContractTests(unittest.TestCase):
             self.code,
             re.compile(
                 r"const green = exitCode === '0' && unresolvedProblems === 0\s*"
-                r"&& toolErrors === 0 && !stateContractError;"
+                r"&& toolErrors === 0 && !stateContractError\s*"
+                r"&& intentExit === '0' && intentHumanFindings === 0\s*"
+                r"&& process\.env\.INTENT_SELFTEST_OUTCOME === 'success';"
             ),
         )
+
+    def test_human_owned_intent_findings_open_the_shared_issue(self):
+        """#493: owner=human darf nicht nur im Artefakt/Step-Summary landen."""
+        self.assertIn("INTENT_EXIT: ${{ steps.intent.outputs.exit_code }}", self.code)
+        self.assertIn(
+            "INTENT_HUMAN_FINDINGS: ${{ steps.intent.outputs.human_findings }}",
+            self.code,
+        )
+        self.assertIn('f.get("owner") == "human"', self.code)
+        self.assertIn('f.get("blocking") is True', self.code)
+        self.assertIn(
+            "const hasIntentFinding = intentExit === '1' || intentHumanFindings > 0;",
+            self.code,
+        )
+        self.assertIn("Affiliate-Intent-Wache: redaktionelle Prüfung erforderlich",
+                      self.code)
+        self.assertIn("intentReport", self.code)
 
 
 if __name__ == "__main__":

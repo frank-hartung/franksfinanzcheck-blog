@@ -181,10 +181,20 @@ def seo_audit_failures():
     data = _run_json(["scripts/seo_audit.py", "--json"])
     if not data:
         return set(), "seo_audit.py: keine Auswertung möglich (public/ gebaut?)"
-    failed = {
-        d["file"] for d in data.get("details", [])
-        if d.get("score_issues", 0) > 0
-    }
+    # Kandidaten werden überall im Publish-Gate als nackte Slugs geführt.
+    # `seo_audit.py` lieferte historisch nur "<slug>.md"; dadurch griff die
+    # Mitgliedschaftsprüfung in main() nie und das SEO-Gate war faktisch
+    # wirkungslos. Neue Ausgaben tragen `slug`, Legacy-Ausgaben werden sauber
+    # normalisiert (Page-Bundle und Einzeldatei-Post).
+    failed = set()
+    for detail in data.get("details", []):
+        if detail.get("score_issues", 0) <= 0:
+            continue
+        slug = detail.get("slug") or str(detail.get("file") or "")
+        if slug.endswith(".md"):
+            slug = slug[:-3]
+        if slug:
+            failed.add(slug)
     sitemap_issues = [s for s in data.get("sitemap_issues", []) if s]
     return failed, ("; ".join(sitemap_issues) if sitemap_issues else None)
 
