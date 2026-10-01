@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Do, 01. Oktober 2026
-- **07:45** ⏳ Sparen im Herbst: Spartipps für die goldene Jahreszeit — _zahl_ · Launch  
+- **07:45** ⚪ Sparen im Herbst: Spartipps für die goldene Jahreszeit — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
 ### Fr, 02. Oktober 2026
 - **07:45** ⏳ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _takeaway_ · Launch  

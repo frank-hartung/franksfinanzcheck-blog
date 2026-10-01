@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -12,13 +12,10 @@
 
 ## Kommende Beiträge
 
-### Mi, 30. September 2026
-- **19:15** ⚪ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Do, 01. Oktober 2026
-- **08:45** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _frage_ · Launch  
+- **08:45** ⚪ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
-- **13:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _takeaway_ · Launch  
+- **13:15** ⚪ Gasrechnung senken: Fehler im Spätsommer vermeiden — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 - **19:15** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _thread_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/

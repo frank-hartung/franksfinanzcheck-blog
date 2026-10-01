@@ -475,9 +475,30 @@ history:
     \  \n#Gaspreis #Preisgarantie #Gasrechnung #Heizkosten"
   ref: '117359692643267110'
   ai: true
+- posted_at: '2026-10-01T13:40:34.665416+02:00'
+  channel: mastodon
+  slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  title: 'Gasrechnung senken: Spätsommer-Check für Tarif und Heizung'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117365463246886384
+  ok: true
+  text: '💶 Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
+
+
+    Für den Spätsommer-Check reichen 60 Minuten: 15 Minuten Rechnung und Vertrag prüfen,
+    10 Minuten Zähler dokumentieren, 25 Minuten Heizkörper und Thermostate kontrollieren
+    und 10 Minuten Maßnahmen sortieren.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
+  ref: '117365463246886384'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-09-30T23:27:14.436108+02:00'
+updated_at: '2026-10-01T13:40:47.239904+02:00'

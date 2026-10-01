@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Do, 01. Oktober 2026
-- **09:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _takeaway_ · Launch  
+- **09:15** ⚪ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 - **16:15** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/

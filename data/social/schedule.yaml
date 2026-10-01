@@ -817,8 +817,8 @@ items:
   date: '2026-10-01'
   time: 07:30
   scheduled_at: '2026-10-01T07:30:00+02:00'
-  status: planned
-  attempts: 0
+  status: published
+  attempts: 1
   reason: ''
 - id: linkedin:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit:zahl:2026-10-01
   channel: linkedin
@@ -829,9 +829,9 @@ items:
   date: '2026-10-01'
   time: 07:45
   scheduled_at: '2026-10-01T07:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: LINKEDIN_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:zitat:2026-10-01
   channel: bluesky
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -841,9 +841,9 @@ items:
   date: '2026-10-01'
   time: 08:15
   scheduled_at: '2026-10-01T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:frage:2026-10-01
   channel: x
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
@@ -853,9 +853,9 @@ items:
   date: '2026-10-01'
   time: 08:45
   scheduled_at: '2026-10-01T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:takeaway:2026-10-01
   channel: threads
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -865,9 +865,9 @@ items:
   date: '2026-10-01'
   time: 09:15
   scheduled_at: '2026-10-01T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor:frage:2026-10-01
   channel: facebook
   slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
@@ -877,9 +877,9 @@ items:
   date: '2026-10-01'
   time: 09:45
   scheduled_at: '2026-10-01T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: instagram:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:takeaway:2026-10-01
   channel: instagram
   slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
@@ -889,9 +889,9 @@ items:
   date: '2026-10-01'
   time: '11:45'
   scheduled_at: '2026-10-01T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro:nutzen:2026-10-01
   channel: bluesky
   slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
@@ -901,9 +901,9 @@ items:
   date: '2026-10-01'
   time: '12:15'
   scheduled_at: '2026-10-01T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:takeaway:2026-10-01
   channel: x
   slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
@@ -913,9 +913,9 @@ items:
   date: '2026-10-01'
   time: '13:15'
   scheduled_at: '2026-10-01T13:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: facebook:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-10-01
   channel: facebook
   slug: 2026-08-10-dsl-wechselbonus-sichern

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 30.09.2026 23:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Do, 01. Oktober 2026
-- **09:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
+- **09:45** ⚪ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 - **15:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
