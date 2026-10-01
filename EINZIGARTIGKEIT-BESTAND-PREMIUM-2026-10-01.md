@@ -147,23 +147,42 @@ Weitere redaktionelle Auflösungen:
   Live-Artikel vom 14.08. zu kannibalisieren — statt als Dauer-Entwurf im
   Bestand zu verfaulen.
 
-### Offen und bewusst offen: ein Themen-Zwilling (owner: human)
+### Erledigt: der Themen-Zwilling 50-30-20 (zusammengeführt)
 
-`2026-09-25-die-50-30-20-regel-einfach-erklaert` **[Entwurf]** ist inhaltlich
-ein zweiter Anlauf auf dasselbe Hauptkeyword wie der Live-Artikel
-`2026-09-11-50-30-20-regel-…` (25 geteilte Phrasen). Das ist **kein
+`2026-09-25-die-50-30-20-regel-einfach-erklaert` **[Entwurf]** war ein zweiter
+Anlauf auf dasselbe Hauptkeyword wie der Live-Artikel
+`2026-09-11-50-30-20-regel-…` (26 geteilte Phrasen). Das war **kein
 Formulierungsproblem**: Zwei Artikel auf ein Keyword kannibalisieren sich,
-egal wie unterschiedlich sie geschrieben sind. Umschreiben wäre hier das
-Verstecken des Befunds.
+egal wie unterschiedlich sie geschrieben sind. Umschreiben hätte den Befund
+nur versteckt.
 
-Deshalb bleibt er bewusst stehen — als benannte Entscheidung, nicht als
-Restmüll:
+Deshalb der redaktionelle Weg statt Textkosmetik — **zusammenführen und
+zurückziehen**:
 
-* Park-Zustand `manual` (Franks Entwurf) wird **nicht** von der Automatik
-  verändert (Draft-Schutz, `park_state.py`).
-* Das Audit meldet ihn dauerhaft im Abschnitt 2b mit `[live]`/`[Entwurf]`.
-* Empfehlung der Agentur: **zusammenführen** (die besten Passagen in den
-  Live-Artikel, Entwurf zurückziehen) statt zusätzlich veröffentlichen.
+* **In den Live-Artikel übernommen** (neu formuliert, nicht kopiert):
+  die Varianten-Tabelle „Vier Verteilungen, die im echten Leben vorkommen"
+  (50-30-20 · 60-20-20 · 65-25-10 · 45-20-35) ersetzt das frühere
+  Einzelbeispiel; die Gegenseite „für wen es schwieriger ist" (schwankendes
+  Einkommen, hohe Wohnkosten, Schuldenabbau, Jahresposten) samt Auswegen;
+  der konkrete Notgroschen-Zielwert **3 bis 6 Monatsausgaben** mit
+  Reihenfolge und getrenntem Parken; der Sortier-Test für Pflicht- gegen
+  Wunschkosten; die FAQ „Muss ich mich exakt an 50-30-20 halten?".
+* **Bewusst nicht übernommen:** der „Mini-Plan für die nächsten 7 Tage"
+  (hätte die Frugalismus-Artikel vom 07./11.09. kannibalisiert), das
+  2.500-€-Rechenbeispiel (der Live-Artikel rechnet durchgängig mit 2.800 €)
+  und der Jahreskosten-Block (im Live-Artikel bereits stärker vorhanden).
+* **Entwurf zurückgezogen** über den vorgesehenen Repo-Pfad
+  `publish_gate.discard_article()` — Content-Bundle **und** alle 15
+  Cover-Varianten (jpg/webp/avif in allen Größen) entfernt, kein Artefakt
+  bleibt liegen. Der Entwurf war nie veröffentlicht: keine URL im Pin-Plan,
+  in `pins_upload.csv` oder im Newsletter-Stand, also kein 404-Risiko. Die
+  Fassung bleibt über die Git-Historie jederzeit abrufbar.
+* **Zwei interne Links umgehängt** (`2026-09-21-7-gewohnheiten-…`,
+  `2026-09-23-5-einfache-frugalismus-tricks-…`) auf den Live-Artikel —
+  `link_guard`: 0 Totstellen.
+* Länge nach der Zusammenführung: **17.006 Zeichen** (Korridor für Posts:
+  max. 18.000), keine neuen Mikro-Abschnitte, `quality_score`-Verdikt
+  weiterhin `publish`.
 
 ---
 
@@ -209,9 +228,9 @@ Unverändert geprüft, ohne neue Funde gegenüber `main`: `math_guard`,
 
 | Messgröße | Vorher (Issue #490) | Nachher |
 |---|---|---|
-| Interne Überlappungen gesamt | 30 | 14 |
+| Interne Überlappungen gesamt | 30 | 11 |
 | **Kritisch (live↔live)** | **10** (gemischt) | **0** |
-| Entwurfs-Paare (eigene Klasse) | – (in „kritisch" versteckt) | 1 (benannt, owner: human) |
+| Entwurfs-Paare (eigene Klasse) | – (in „kritisch" versteckt) | **0** (Zwilling zusammengeführt) |
 | Pin-Konflikte | 0 | 0 |
 | Same-Day-Zwillinge | 0 | 0 |
 | Generator-Gerüst in Live-Artikeln | 17 Zeilen in 8 Artikeln | 0 |
@@ -219,6 +238,8 @@ Unverändert geprüft, ohne neue Funde gegenüber `main`: `math_guard`,
 | Prüftakt des Bestands | quartalsweise | täglich (Doktor-Kette) |
 
 Der Bestand ist sauber, die Wache misst, was sie messen soll, und die Quelle
-des Gerüst-Lecks ist an beiden Enden geschlossen. Was bleibt, ist eine
-redaktionelle Entscheidung über einen Themen-Zwilling — benannt, mit Besitzer,
-statt als elfter Eintrag in einer Liste, die niemand abarbeitet.
+des Gerüst-Lecks ist an beiden Enden geschlossen. Der letzte offene Punkt —
+der Themen-Zwilling 50-30-20 — ist nicht umformuliert, sondern redaktionell
+aufgelöst: eine starke Seite statt zweier halber. Alle zehn Paare aus
+Issue #490 sind damit erledigt, und zwar jedes auf die Art, die zu seiner
+Fehlerklasse passt.

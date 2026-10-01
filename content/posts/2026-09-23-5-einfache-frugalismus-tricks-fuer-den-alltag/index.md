@@ -308,7 +308,7 @@ Meiner Erfahrung nach vor allem hier:
 
 Genau dort ist oft genug Geld versteckt, um einen Notgroschen aufzubauen oder die Sparquote zu erhöhen.
 
-Wenn du dein Gesamtbudget strukturieren willst, passt auch dieser Artikel gut: [Die 50-30-20-Regel einfach erklärt](../../posts/2026-09-25-die-50-30-20-regel-einfach-erklaert/).
+Wenn du dein Gesamtbudget strukturieren willst, passt auch dieser Artikel gut: [50-30-20-Regel: Beherrsche dein Budget](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 > 💶 **Spar-Tipp zwischendurch:** Der stärkste Frugalismus-Trick ist oft nicht das Weglassen, sondern das Absichern. Wenn du gesparte Beträge sofort separat parkst, bleiben sie nicht im Alltagsrauschen hängen: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 

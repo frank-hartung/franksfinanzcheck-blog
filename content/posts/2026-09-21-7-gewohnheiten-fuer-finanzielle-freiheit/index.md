@@ -106,7 +106,7 @@ Bei **2.800 € netto** wären das:
 
 Selbst wenn deine aktuelle Verteilung anders aussieht, hilft dir dieses Raster. Denn es gibt deinem Geld Rollen.
 
-Mehr dazu findest du auch hier: [Die 50-30-20-Regel einfach erklärt](../../posts/2026-09-25-die-50-30-20-regel-einfach-erklaert/).
+Mehr dazu findest du auch hier: [50-30-20-Regel: Beherrsche dein Budget](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 ## Gewohnheit 3: Prüfe Fixkosten regelmäßig statt nur bei Schmerz
 

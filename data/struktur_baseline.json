@@ -1,17 +1,17 @@
 {
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "mikro": 11,
+      "mikro": 7,
       "serien": 0,
       "ueberlang": false
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "mikro": 9,
+      "mikro": 8,
       "serien": 0,
       "ueberlang": false
     },
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-      "mikro": 3,
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
@@ -21,8 +21,8 @@
       "ueberlang": false
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "mikro": 8,
-      "serien": 1,
+      "mikro": 3,
+      "serien": 0,
       "ueberlang": false
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
@@ -41,12 +41,12 @@
       "ueberlang": false
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "mikro": 8,
+      "mikro": 5,
       "serien": 0,
       "ueberlang": false
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-      "mikro": 3,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -91,7 +91,7 @@
       "ueberlang": false
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "mikro": 11,
+      "mikro": 10,
       "serien": 0,
       "ueberlang": false
     },
@@ -151,7 +151,7 @@
       "ueberlang": false
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "mikro": 11,
+      "mikro": 10,
       "serien": 0,
       "ueberlang": false
     },
@@ -171,7 +171,7 @@
       "ueberlang": false
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "mikro": 9,
+      "mikro": 6,
       "serien": 0,
       "ueberlang": false
     },
@@ -245,11 +245,6 @@
       "serien": 1,
       "ueberlang": false
     },
-    "2026-09-25-die-50-30-20-regel-einfach-erklaert": {
-      "mikro": 13,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge": {
       "mikro": 0,
       "serien": 0,
@@ -312,5 +307,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-09-30"
+  "stand": "2026-10-01"
 }

@@ -632,6 +632,20 @@ python3 scripts/sprachglatt.py --fix
   **die Zahl darf überall stehen, der Satz darum muss artikel-eigen sein.**
   Tests: `scripts/tests/test_check_uniqueness.py` (10 Fälle, synthetischer
   Korpus). Details: `EINZIGARTIGKEIT-BESTAND-PREMIUM-2026-10-01.md`.
+  **Nachtrag vom selben Tag — Themen-Zwillinge:** Zwei Artikel auf ein
+  Hauptkeyword sind kein Formulierungs-, sondern ein Redaktionsproblem;
+  Umschreiben versteckt nur den Befund. Verbindlicher Weg ist deshalb
+  **zusammenführen statt doppelt veröffentlichen**: die tragenden Passagen
+  wandern neu formuliert in den etablierten Artikel (Kanon bleibt die ältere,
+  bereits verlinkte URL), interne Links werden umgehängt, und der nie
+  veröffentlichte Entwurf wird über `publish_gate.discard_article()`
+  zurückgezogen — Bundle plus sämtliche Cover-Varianten, kein Artefakt bleibt
+  liegen, die Fassung bleibt in der Git-Historie. Voraussetzung für den
+  Rückzug: Der Entwurf taucht in keinem Verteilkanal auf (`pinterest_plan.yaml`,
+  `pins_upload.csv`, Newsletter-Stand) — sonst gilt der URL-Schutz und es wird
+  weitergeleitet statt gelöscht. Erster Fall: 50-30-20
+  (`2026-09-25-die-50-30-20-regel-einfach-erklaert` → `2026-09-11-50-30-20-regel-…`),
+  danach **0 Entwurfs-Paare** im Audit.
 
 - **28.09.2026 (Klebe-Artefakte-Premium-Audit):** Dritte Maschinen-Klebe-Klasse
   dauerhaft unter Wache gestellt: **R10-DOPPELWORT** in `textverstaendnis_guard.py`
