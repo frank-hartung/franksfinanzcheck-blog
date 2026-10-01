@@ -173,7 +173,7 @@ Online-Banking schlank machen bedeutet auch, Ballast bei der Unsicherheit abzuwe
 | Benachrichtigungen | Aktiviere Push-Meldungen für alle Umsätze |
 | Datensicherung | Speichere Auszüge monatlich als PDF-Datei |
 | Freistellungsauftrag | Prüfe, ob deine Zinserträge steuerfrei bleiben (bis 1.000 € p.P.) |
-| Karten-Sperrnotruf | Speichere die 116 116 im Handy für Notfälle |
+| Karten-Sperrnotruf | Speichere die 116 im Handy für Notfälle |
 
 Arbeite diese Liste Punkt für Schritt in Ruhe ab.  
 Du wirst sofort merken, wie dein finanzieller Aufwand sinkt und deine Transparenz steigt.

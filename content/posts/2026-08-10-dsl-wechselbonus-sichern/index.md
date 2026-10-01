@@ -281,7 +281,7 @@ Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). In
 Idealerweise beginnst du **ca. 3 bis 6 Monate** vor Ende deiner Vertragslaufzeit mit dem Vergleich. So hast du genug Zeit, um die besten Bonus-Aktionen abzupassen.
 
 ### Reicht der Bonus allein als Entscheidungskriterium?
-Definitiv nein. Er ist ein wichtiger Faktor, aber der **24-Monats-Effektivpreis** ist die einzige Kennzahl, die die wahre Ersparnis widerspiegelt.
+Definitiv nein. Er ist ein wichtiger Faktor, aber der **24-Monats-Effektivpreis** ist die einzige Kennzahl, die wahre Ersparnis widerspiegelt.
 
 ---
 

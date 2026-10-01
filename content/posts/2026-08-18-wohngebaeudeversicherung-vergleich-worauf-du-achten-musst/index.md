@@ -280,7 +280,7 @@ Dazu brauchst du selten den ganzen Ordner: die letzte Beitragsrechnung, ein Blic
 
 ### Vier Auslöser, bei denen du nicht warten solltest
 
-- nach einer deutlichen Beitragserhöhung,
+- Nach einer deutlichen Beitragserhöhung,
 - nach Sanierung, Anbau oder Dachausbau,
 - bei neuer PV, Wärmepumpe oder Wallbox,
 - wenn Starkregen oder Rückstau in deiner Region zuletzt häufiger Thema waren.

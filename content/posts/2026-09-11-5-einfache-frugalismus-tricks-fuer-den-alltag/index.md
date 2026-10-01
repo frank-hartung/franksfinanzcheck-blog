@@ -151,7 +151,7 @@ Typische Geldfresser sind:
 
 ### Was im Alltag gut funktioniert
 
-- fünf Gerichte festlegen, die ohne Nachdenken gelingen
+- Fünf Gerichte festlegen, die ohne Nachdenken gelingen
 - den Zettel fertig haben, bevor du das Haus verlässt
 - Reste als eigenen Gang einplanen
 - Mittagessen öfter mitnehmen

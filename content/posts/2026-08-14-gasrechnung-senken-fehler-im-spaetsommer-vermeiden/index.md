@@ -117,7 +117,7 @@ Erstelle zum Saisonstart ein Foto von:
 
 - Dem aktuellen Zählerstand,
 - der Zählernummer zur Identifikation,
-- einem Zeitstempel (z.B. durch eine Tageszeitung im Bild oder digitale Metadaten).
+- einem Zeitstempel (z.B. Durch eine Tageszeitung im Bild oder digitale Metadaten).
 
 Wiederhole diesen Vorgang idealerweise monatlich. Dies schafft eine belastbare Belegkette gegenüber dem Versorger, falls Schätzungen vorgenommen werden.
 

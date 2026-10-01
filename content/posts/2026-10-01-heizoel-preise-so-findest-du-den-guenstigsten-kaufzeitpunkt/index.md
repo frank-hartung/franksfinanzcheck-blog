@@ -95,7 +95,7 @@ Viel Geld geht nicht wegen eines schlechten Ölpreises verloren, sondern infolge
 |--------|----------------|-----------------------|
 | **Notkauf im leeren Tank** | Du musst sofort kaufen, egal wie hoch der Preis steht. | Bestelle immer, wenn der Tank noch bei 20–25 % steht. Das gibt dir 4 Wochen Spielraum für Marktschwankungen. |
 | **Kleinstmengen bestellen** | Lieferpauschalen und Mindermengenaufschläge fressen die Ersparnis auf. | Versuche, immer mindestens 1.500 bis 2.000 Liter zu bestellen. |
-| **Premium-Vorteil ignorieren** | Standard-Öl kann Rückstände bilden, die die Effizienz mindern. | Nutze Premium-Heizöl. Es kostet ca. 1–2 Cent mehr, spart aber bis zu 3 % Verbrauch durch bessere Verbrennung. |
+| **Premium-Vorteil ignorieren** | Standard-Öl kann Rückstände bilden, die Effizienz mindern. | Nutze Premium-Heizöl. Es kostet ca. 1–2 Cent mehr, spart aber bis zu 3 % Verbrauch durch bessere Verbrennung. |
 | **Liefertermin-Poker** | Wer "sofort" will, zahlt Expresszuschläge. | Plane 10–14 Tage Vorlauf ein. Flexible Lieferfenster sind oft günstiger. |
 | **Veraltete Anlagentechnik** | Der beste Preis hilft nicht, wenn die Heizung 15 % des Öls verschwendet. | Einmal jährlich den Brenner warten lassen. Das spart oft mehr als der Preisvergleich beim Öl. |
 | **Preistrends ignorieren** | Man kauft "einfach so" im Dezember. | Beachte die CO2-Preis-Erhöhung zum 1. Januar. Kaufe spätestens im November. |

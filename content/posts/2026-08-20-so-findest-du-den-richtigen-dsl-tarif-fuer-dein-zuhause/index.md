@@ -139,17 +139,17 @@ Die Miete beim Provider ist bequem: Geht das Gerät kaputt, gibt es Ersatz. Doch
 
 ### Kauf lohnt sich oft, wenn …
 
-- du planst, länger als zwei Jahre beim selben Standard zu bleiben.
-- du Wert auf spezifische Funktionen (VPN, Mesh-Optimierung) legst.
-- du bei einem Anbieterwechsel nicht jedes Mal die Hardware zurückschicken willst.
+- Du planst, länger als zwei Jahre beim selben Standard zu bleiben.
+- Du Wert auf spezifische Funktionen (VPN, Mesh-Optimierung) legst.
+- Du bei einem Anbieterwechsel nicht jedes Mal die Hardware zurückschicken willst.
 
 ### Miete kann okay sein, wenn …
 
-- du immer das neueste Top-Modell des Anbieters nutzen möchtest.
-- du technische Probleme komplett dem Support des Providers überlassen willst.
-- du nur für einen absehbaren Zeitraum an einem Ort wohnst.
+- Du immer das neueste Top-Modell des Anbieters nutzen möchtest.
+- Du technische Probleme komplett dem Support des Providers überlassen willst.
+- Du nur für einen absehbaren Zeitraum an einem Ort wohnst.
 
-Unterm Strich ist der Kauf eines eigenen Geräts (z. B. einer aktuellen Fritz!Box) langfristig fast immer die günstigere Entscheidung.
+Unterm Strich ist der Kauf eines eigenen Geräts (z. B. einer aktuellen FRITZ!Box) langfristig fast immer die günstigere Entscheidung.
 
 ## Nicht jedes Internetproblem ist ein Tarifproblem
 
@@ -167,7 +167,7 @@ Prüfe vor einem Wechsel:
 |---|---|---|
 | Speed per Kabel top, per WLAN Flop | Funkstörungen oder Distanz | Mesh-System oder Repeater einsetzen |
 | Auch per Kabel zu langsam | Leitungsproblem | Störung beim Support melden |
-| Nur zu Stoßzeiten langsam | Netzüberlastung | Anbieter- oder Technikwechsel (z.B. zu DSL/Glasfaser) |
+| Nur zu Stoßzeiten langsam | Netzüberlastung | Anbieter- oder Technikwechsel (z.B. Zu DSL/Glasfaser) |
 | Verbindung stabil, aber teuer | Altvertrag ohne Rabatte | Tarifvergleich und Wechsel |
 
 Falls dein WLAN das Nadelöhr ist, schau hier rein: [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
