@@ -3,7 +3,7 @@ title: "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich"
 description: "Tagesgeld-Zinsen 2026 im Vergleich: Höchste Zinsen finden, Einlagensicherung verstehen und den Notgroschen clever statt auf dem Girokonto parken."
 date: 2026-09-09T14:46:26Z
 lastmod: 2026-10-01
-draft: false
+draft: true
 tags: ["Tagesgeld und Zinsen", "Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
