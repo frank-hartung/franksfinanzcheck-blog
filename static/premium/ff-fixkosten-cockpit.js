@@ -53,8 +53,13 @@
   }
 
   function startOfToday(now) {
-    var d = now instanceof Date ? new Date(now) : new Date();
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12, 0, 0, 0);
+    // Duck-Typing statt instanceof: Ein Date aus einem anderen Realm
+    // (jsdom-Test, iframe) scheitert an instanceof dieses Realms – der
+    // Rechenkern soll aber gerade ohne Browser testbar sein.
+    var zeit = now && typeof now === 'object' && typeof now.getTime === 'function'
+      ? new Date(now.getTime())
+      : new Date();
+    return new Date(zeit.getFullYear(), zeit.getMonth(), zeit.getDate(), 12, 0, 0, 0);
   }
 
   function dayDifference(value, now) {
@@ -325,6 +330,7 @@
       dayDifference: dayDifference,
       evaluate: evaluate,
       deadlineText: deadlineText,
+      copyPlan: copyPlan,
       euros: euros,
     };
   }

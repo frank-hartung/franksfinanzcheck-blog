@@ -3059,8 +3059,8 @@ details.toc a {
 }
 
 .ff-cockpit__remember input {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   flex: 0 0 auto;
   margin: 1px 0 0;
   accent-color: var(--ff-emerald);
@@ -3231,7 +3231,10 @@ details.toc a {
   .ff-kompass__step { min-height: 180px; }
   .ff-kompass__step::after { display: none; }
   .ff-cockpit__row { grid-template-columns: minmax(180px, 1fr) minmax(145px, .7fr) minmax(150px, .75fr); }
-  .ff-cockpit__guide { grid-column: 1 / -1; min-height: 30px; }
+  /* Tap-Ziel bleibt auch mobil auf Haus-Niveau (44px): Die sechs
+     Ratgeber-Handoffs stehen in eigener Zeile – 30px lägen unter dem
+     Standard, den mobile.spec.mjs überall sonst durchsetzt. */
+  .ff-cockpit__guide { grid-column: 1 / -1; min-height: 44px; }
 }
 
 @media (max-width: 600px) {

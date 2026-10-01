@@ -86,6 +86,26 @@ export function assertNoErrors(state, kontext) {
   }
 }
 
+/**
+ * Consent-Banner wegklären (01.10.2026, Cockpit-Reset-Test):
+ * Der Banner liegt position:fixed über der kompletten unteren
+ * Viewport-Kante und fängt sonst jeden Klick auf Seiteninhalt am
+ * unteren Rand ab (Playwright-Hit-Target-Check dreht sich im Kreis).
+ * Klickt – wenn sichtbar – „Nur notwendige“, wie ein echter Besucher.
+ */
+export async function consentAway(page) {
+  const banner = page.locator('#ff-consent-banner');
+  if (await banner.isVisible().catch(() => false)) {
+    await banner.locator('.ff-consent-banner__btn-necessary').click();
+    await page.waitForFunction(
+      () => !document.querySelector('#ff-consent-banner') ||
+        getComputedStyle(document.querySelector('#ff-consent-banner')).display === 'none',
+      null,
+      { timeout: 5_000 }
+    ).catch(() => {});
+  }
+}
+
 /** Seite einmal komplett durchscrollen (löst lazy-loading aus). */
 export async function scrollThrough(page) {
   await page.evaluate(async () => {

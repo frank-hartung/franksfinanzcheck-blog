@@ -196,4 +196,54 @@ test.describe('Mobile (iPhone 14)', () => {
     ));
     expect(overflow, `document um ${overflow}px zu breit`).toBeLessThanOrEqual(1);
   });
+
+  // ============================================================
+  //  FIXKOSTEN-COCKPIT MOBIL (Premium-Nachtrag 01.10.2026, #507)
+  //  Der Produktkern bringt ein Sechs-Zeilen-Grid mit Betrags-,
+  //  Datumsfeldern und Ratgeber-Handoffs mit. Beim Merge von #507
+  //  konnte der Browserlauf in der Sandbox nicht starten – die
+  //  Ratgeber-Links fielen mobil auf 30px Tap-Höhe, ohne dass es
+  //  ein Test bemerkte. Dieser Wächter hält die Seite auf dem
+  //  Haus-Standard: kein Overflow, alle Ziele thumb-gerecht.
+  // ============================================================
+  test('Fixkosten-Cockpit: kein Overflow, alle Ziele thumb-gerecht', async ({ page }) => {
+    await page.goto('/cockpit/');
+    await scrollThrough(page);
+    const overflow = await page.evaluate(() => ({
+      doc: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      body: document.body.scrollWidth - document.body.clientWidth,
+    }));
+    expect(overflow.doc, `document um ${overflow.doc}px zu breit`).toBeLessThanOrEqual(1);
+    expect(overflow.body, `body um ${overflow.body}px zu breit`).toBeLessThanOrEqual(1);
+
+    const befund = await page.evaluate(() => {
+      const zuKlein = [];
+      document.querySelectorAll('.ff-cockpit input, .ff-cockpit button, .ff-cockpit a').forEach((el) => {
+        // Die Opt-in-Checkbox hat ihre eigene Schwelle (24px, WCAG 2.5.8):
+        // Ihr volles Label ist das klickbare Ziel, 40px Kästchen wären
+        // optisch fremd. Alle anderen Ziele folgen dem 40px-Haus-Standard.
+        if (el.matches('[data-ff-cockpit-remember]')) return;
+        const r = el.getBoundingClientRect();
+        if (r.height > 0 && r.height < 40) {
+          zuKlein.push(`${el.tagName.toLowerCase()}${el.className ? '.' + String(el.className).split(' ')[0] : ''}=${Math.round(r.height)}px`);
+        }
+      });
+      return {
+        zuKlein,
+        knobHoehen: [...document.querySelectorAll('.ff-cockpit__submit, .ff-cockpit__reset')].map(
+          (el) => Math.round(el.getBoundingClientRect().height)
+        ),
+        checkbox: Math.round(document.querySelector('[data-ff-cockpit-remember]').getBoundingClientRect().height),
+      };
+    });
+
+    expect(befund.zuKlein, 'kein Cockpit-Ziel unter 40px Tap-Höhe').toEqual([]);
+    // Primäre Handlungen des Produktkerns: volle 44px (Haus-Standard,
+    // gleiche Schwelle wie der Spar-Matrix-Knopf oben).
+    for (const hoehe of befund.knobHoehen) {
+      expect(hoehe, '„Mein Prüfplan“-/„Zurücksetzen“-Knopf >= 44px').toBeGreaterThanOrEqual(44);
+    }
+    // Opt-in-Checkbox: WCAG 2.5.8 verlangt mindestens 24px Zielfläche.
+    expect(befund.checkbox, 'Opt-in-Checkbox >= 24px').toBeGreaterThanOrEqual(24);
+  });
 });
