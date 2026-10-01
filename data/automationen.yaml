@@ -1,0 +1,324 @@
+# ============================================================
+#  🔌 SCHALTWERK – REGELWERK (der Zapier-Nachbau, Single Source of Truth)
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 01.10.2026): Vollautomatisierung der Social-Media-
+#  Kanäle OHNE Zapier, OHNE Zapier-API, OHNE laufende Kosten.
+#
+#  Diese Datei ist die Regelsammlung. Eine Regel = ein „Zap“:
+#
+#      trigger  →  filter  →  aktionen
+#
+#  Engine:    scripts/schaltwerk.py
+#  Trigger:   scripts/schaltwerk_triggers.py   (die „Wenn“-Seite)
+#  Aktionen:  scripts/schaltwerk_actions.py    (die „Dann“-Seite)
+#  Takt:      .github/workflows/schaltwerk.yml (alle 30 Minuten)
+#  Cockpit:   SCHALTWERK-STATUS.md
+#  Anleitung: docs/ANLEITUNG-SCHALTWERK.md
+#
+#  ------------------------------------------------------------
+#  ⚠️ ARBEITSTEILUNG MIT DEM SOCIAL-AUTOPILOTEN (wichtig!)
+#  Der Social-Autopilot (.github/workflows/social-autopilot.yml) bleibt
+#  der SENDER für neue Artikel und Evergreen-Recycling. Er plant 14 Tage
+#  im Voraus, kennt Kadenz, Sperrfristen und Duplikatschutz.
+#  Das Schaltwerk ist der DIRIGENT. Es übernimmt genau das, was dem
+#  Autopiloten fehlt – und postet nie dieselbe Sache zweimal:
+#    · Update-Wellen für überarbeitete Bestandsartikel
+#    · Rückkopplung aus Agent Reach in die Themenkuratierung
+#    · Wachhunde: Standby-Kanäle, stille Kanäle, Konfigurationsdrift
+#    · nächtliche Planerneuerung
+#    · Ad-hoc-Posts per Webhook (ohne Zapier, ohne Kosten)
+#  Regeln, die direkt posten, tragen deshalb immer `dedupe_key` und
+#  `throttle` – und laufen durch dasselbe harte Gate (social_gate.py).
+#
+#  ------------------------------------------------------------
+#  OPERATOREN FÜR `filter`
+#    gleich · ungleich · enthaelt · enthaelt_nicht · enthaelt_eines
+#    beginnt_mit · endet_mit · regex · in_liste
+#    groesser · groesser_gleich · kleiner · kleiner_gleich
+#    ist_wahr · ist_falsch · leer · nicht_leer
+#    laenger_als · kuerzer_als
+#
+#  PLATZHALTER IN `params`: {artikel.title}, {url}, {kanal_label}, …
+#  (alles, was der Trigger unter `daten` liefert)
+# ============================================================
+
+version: 1
+
+meta:
+  timezone: "Europe/Berlin"
+  # Harte Obergrenze an Aktionen pro Lauf – Schutz vor Regel-Lawinen.
+  max_aktionen_pro_lauf: 25
+  # Kostenregel: Kanäle, die nur gegen Gebühr senden, werden nie fest
+  # verdrahtet (der Selbsttest ST5 erzwingt das).
+  kostenpflichtige_kanaele: ["x"]
+
+regeln:
+
+  # ==========================================================
+  #  1 · UPDATE-WELLE – überarbeitete Bestandsartikel
+  #  Der Autopilot kennt nur „neu“ und „Evergreen“. Ein inhaltlich
+  #  aktualisierter Artikel ist aber eine echte Nachricht – und
+  #  bislang fiel er durch das Raster.
+  # ==========================================================
+  - id: update-welle
+    name: "Artikel aktualisiert → Update-Welle auf den Kurzkanälen"
+    enabled: true
+    trigger:
+      typ: artikel_aktualisiert
+      params:
+        max_alter_tage: 2
+    filter:
+      - feld: artikel.slug
+        operator: nicht_leer
+    aktionen:
+      - typ: social_welle
+        params:
+          kanaele: ["mastodon", "bluesky", "telegram"]
+          winkel: "takeaway"
+          artikel_slug: "{artikel.slug}"
+      - typ: protokoll
+        params:
+          text: "Update-Welle für {artikel.slug} abgeschlossen."
+    dedupe_key: "update:{artikel.slug}"
+    throttle:
+      max_pro_tag: 2
+      max_pro_lauf: 1
+      cooldown_minuten: 180
+
+  # ==========================================================
+  #  2 · AGENT-REACH-RÜCKKOPPLUNG (lesend!)
+  #  Signale aus dem Montags-Brief landen in der Kuratierungsablage.
+  #  NIEMALS direkt posten: Der Brief ist eine Signalsammlung,
+  #  kein freigegebener Inhalt (docs/ANLEITUNG-AGENT-REACH.md §6).
+  # ==========================================================
+  - id: reach-signale-kuratieren
+    name: "Agent-Reach-Signal → Themen-Vorschlag für die Redaktion"
+    enabled: true
+    trigger:
+      typ: recherche_signal
+      params:
+        max_treffer: 6
+        max_alter_tage: 9
+        stichworte:
+          - strom
+          - gas
+          - energie
+          - tarif
+          - versicherung
+          - internet
+          - dsl
+          - mobilfunk
+          - konto
+          - gebühr
+          - inflation
+          - preis
+          - sparen
+    filter:
+      - feld: titel
+        operator: laenger_als
+        wert: 18
+      - feld: url
+        operator: beginnt_mit
+        wert: "http"
+    aktionen:
+      - typ: themen_vorschlag
+        params:
+          titel: "{titel}"
+          url: "{url}"
+          quelle: "{quelle}"
+          notiz: "Automatisch erfasst aus {brief} – Quellenprüfung erforderlich."
+    dedupe_key: "signal:{url}"
+    throttle:
+      max_pro_tag: 6
+      max_pro_lauf: 6
+
+  # ==========================================================
+  #  3 · WACHHUND: STANDBY-KANÄLE
+  #  „Vollautomatisch“ darf nicht heißen „still und unbemerkt aus“.
+  #  Alle 14 Tage eine Erinnerung, welches Secret noch fehlt.
+  # ==========================================================
+  - id: standby-erinnerung
+    name: "Kanal ohne Zugangsdaten → Erinnerung mit Secret-Namen"
+    enabled: true
+    trigger:
+      typ: kanal_standby
+      params:
+        erinnerung_tage: 14
+        # X ist kostenpflichtig – daran erinnert zu werden, bringt nichts.
+        ignoriere: ["x"]
+    aktionen:
+      - typ: protokoll
+        params:
+          text: "Kanal {kanal_label} wartet auf Zugangsdaten: {grund}"
+      - typ: datei_anhaengen
+        params:
+          datei: "data/schaltwerk_standby.log"
+          text: "{jetzt} · {kanal} · {grund}"
+    dedupe_key: "standby:{kanal}"
+    throttle:
+      max_pro_tag: 10
+      # Höchstens drei Erinnerungen je Lauf – sonst frisst diese Regel
+      # beim Erstlauf das komplette Aktions-Budget.
+      max_pro_lauf: 3
+
+  # ==========================================================
+  #  4 · WACHHUND: STILLE KANÄLE
+  #  Ein eingerichteter Kanal, der 48 Stunden nichts gesendet hat,
+  #  ist ein Störungsfall – nicht Normalbetrieb.
+  # ==========================================================
+  - id: stiller-kanal
+    name: "Sendebereiter Kanal 48 h stumm → Issue"
+    enabled: true
+    trigger:
+      typ: kanal_stille
+      params:
+        stunden: 48
+    aktionen:
+      - typ: github_issue
+        params:
+          titel: "Schaltwerk: Kanal {kanal_label} sendet seit 48 h nicht"
+          label: "schaltwerk"
+          text: |
+            Der Kanal **{kanal_label}** (`{kanal}`) ist eingerichtet und
+            sendebereit, hat aber seit über 48 Stunden nichts veröffentlicht.
+
+            Letzter erfolgreicher Beitrag: {letzter_post}
+
+            Prüfen:
+            1. `SOCIAL-AUTOPILOT-STATUS.md` – steht der Kanal im Plan?
+            2. Actions → „Social-Autopilot“ – letzter Lauf grün?
+            3. `python3 scripts/social_studio.py --dry-run --channel {kanal}`
+            4. Token noch gültig? → `docs/RUNBUCH-SOCIAL-SECRETS.md`
+    dedupe_key: "stille:{kanal}"
+    throttle:
+      max_pro_tag: 3
+
+  # ==========================================================
+  #  5 · NÄCHTLICHE PLANERNEUERUNG
+  #  Hält den 14-Tage-Plan gefüllt, auch wenn ein Lauf ausgefallen ist.
+  # ==========================================================
+  - id: nacht-planung
+    name: "03:40 Uhr → Redaktionsplan erneuern"
+    enabled: true
+    trigger:
+      typ: zeitplan
+      params:
+        zeiten: ["03:40"]
+        toleranz_minuten: 50
+    aktionen:
+      - typ: social_autopilot_lauf
+        params:
+          modus: "plan"
+    dedupe_key: "planung:{datum}"
+    throttle:
+      max_pro_tag: 1
+
+  # ==========================================================
+  #  6 · WOCHENRÜCKBLICK IM BETRIEBSKANAL
+  #  Sonntags 19:00: ein Lagebericht nach Telegram (falls eingerichtet).
+  # ==========================================================
+  - id: wochenbericht
+    name: "Sonntag 19:00 → Lagebericht nach Telegram"
+    enabled: true
+    trigger:
+      typ: zeitplan
+      params:
+        zeiten: ["19:00"]
+        tage: [6]
+        toleranz_minuten: 60
+    aktionen:
+      - typ: telegram_nachricht
+        params:
+          text: |
+            📊 <b>Wochenbericht Schaltwerk</b>
+            Stand {datum}. Details im Cockpit SCHALTWERK-STATUS.md
+            und SOCIAL-AUTOPILOT-STATUS.md.
+    dedupe_key: "wochenbericht:{datum}"
+    throttle:
+      max_pro_tag: 1
+
+  # ==========================================================
+  #  7 · KONFIGURATIONSDRIFT
+  #  Wer am Kanal-Playbook schraubt, soll es im Protokoll wiederfinden.
+  # ==========================================================
+  - id: kanal-konfig-drift
+    name: "channels.yaml geändert → Protokolleintrag"
+    enabled: true
+    trigger:
+      typ: datei_geaendert
+      params:
+        datei: "data/social/channels.yaml"
+    aktionen:
+      - typ: datei_anhaengen
+        params:
+          datei: "data/schaltwerk_konfig.log"
+          text: "{jetzt} · channels.yaml geändert (Hash {hash})"
+      - typ: protokoll
+        params:
+          text: "Kanal-Playbook wurde geändert – Hash {hash}."
+    dedupe_key: "konfig:{hash}"
+    throttle:
+      max_pro_tag: 5
+
+  # ==========================================================
+  #  8 · AD-HOC-POST PER WEBHOOK (Zapiers „Webhooks“, kostenlos)
+  #  Auslösen vom Handy oder aus jedem Skript:
+  #    gh api repos/$GITHUB_REPOSITORY/dispatches \
+  #      -f event_type=schaltwerk \
+  #      -F 'client_payload[typ]=sofortpost' \
+  #      -F 'client_payload[kanal]=mastodon' \
+  #      -F 'client_payload[artikel_slug]=2026-09-30-beispiel'
+  # ==========================================================
+  - id: sofortpost-webhook
+    name: "Webhook „sofortpost“ → Beitrag auf einem Kanal"
+    enabled: true
+    trigger:
+      typ: webhook
+      params:
+        typ: "sofortpost"
+    filter:
+      - feld: webhook.kanal
+        operator: nicht_leer
+    aktionen:
+      - typ: social_post
+        params:
+          kanal: "{webhook.kanal}"
+          artikel_slug: "{webhook.artikel_slug}"
+          winkel: "{webhook.winkel}"
+          text: "{webhook.text}"
+      - typ: protokoll
+        params:
+          text: "Sofortpost auf {webhook.kanal} ausgelöst."
+    throttle:
+      max_pro_tag: 12
+      max_pro_lauf: 1
+
+  # ==========================================================
+  #  9 · VERBRAUCHER-NACHRICHTENLAGE (kostenloser RSS-Trigger)
+  #  Ersetzt Zapiers „RSS by Zapier“. Geht ausschließlich in die
+  #  Kuratierung – nie direkt in einen Post.
+  # ==========================================================
+  - id: verbraucher-nachrichten
+    name: "Verbraucher-Feed → Themen-Vorschlag"
+    enabled: true
+    trigger:
+      typ: rss
+      params:
+        url: "https://www.tagesschau.de/wirtschaft/index~rss2.xml"
+        max_treffer: 3
+        stichworte: ["strom", "gas", "energiepreis", "inflation", "tarif", "versicherung"]
+    filter:
+      - feld: titel
+        operator: laenger_als
+        wert: 20
+    aktionen:
+      - typ: themen_vorschlag
+        params:
+          titel: "{titel}"
+          url: "{url}"
+          quelle: "Tagesschau Wirtschaft (RSS)"
+          notiz: "RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich."
+    dedupe_key: "rss:{url}"
+    throttle:
+      max_pro_tag: 3
+      max_pro_lauf: 3

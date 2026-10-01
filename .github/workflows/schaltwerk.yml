@@ -1,0 +1,179 @@
+# ============================================================
+#  🔌 SCHALTWERK – der eigene Zapier-Ersatz
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 01.10.2026): vollautomatische Social-Media-
+#  Kanäle OHNE Zapier, OHNE Zapier-API, OHNE laufende Kosten.
+#
+#  Dieser Workflow ist der Scheduler (= Zapiers Task-Runner):
+#    1. Selbsttest (fail-closed): Engine, Regelvertrag, Operatoren
+#    2. Lauf:        scripts/schaltwerk.py --run
+#                    → Trigger abfragen, filtern, Aktionen ausführen
+#    3. Commit:      State, Protokoll, Cockpit, Themen-Vorschläge
+#
+#  TAKTUNG: alle 30 Minuten (:05 und :35). Zeit-Trigger rechnen in
+#  Berliner Ortszeit und haben ein Toleranzfenster – verpasste Slots
+#  holt der nächste Lauf nach, Sommer- wie Winterzeit.
+#
+#  WEBHOOK (ersetzt „Webhooks by Zapier“, kostenlos):
+#    gh api repos/$GITHUB_REPOSITORY/dispatches \
+#      -f event_type=schaltwerk \
+#      -F 'client_payload[typ]=sofortpost' \
+#      -F 'client_payload[kanal]=mastodon' \
+#      -F 'client_payload[artikel_slug]=2026-09-30-beispiel'
+#
+#  BETRIEBSRUHE: Fehlt einem Kanal sein Secret, meldet der Lauf
+#  „Standby“ – grün, ohne Alarm. Nur echte Fehler setzen Exit 2.
+#
+#  Anleitung: docs/ANLEITUNG-SCHALTWERK.md · Cockpit: SCHALTWERK-STATUS.md
+# ============================================================
+name: Schaltwerk (Automationen)
+
+on:
+  schedule:
+    - cron: "5,35 * * * *"
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Was soll der Lauf tun?"
+        required: true
+        default: "run"
+        type: choice
+        options:
+          - run        # Regeln scharf ausführen
+          - dry-run    # nur anzeigen, nichts senden
+          - list       # Regelwerk auflisten
+          - status     # nur das Cockpit neu schreiben
+      regel:
+        description: "Nur diese Regel-id (leer = alle)"
+        required: false
+        default: ""
+  repository_dispatch:
+    types: [schaltwerk]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: schaltwerk
+  cancel-in-progress: false
+
+jobs:
+  schaltwerk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml pillow \
+            || python3 -m pip install -q --break-system-packages pyyaml pillow
+
+      # Fail-closed: Eine Engine, die ihren eigenen Regelvertrag nicht
+      # erfüllt, darf nichts auslösen. Der Selbsttest prüft Operatoren,
+      # Dedupe/Throttle, Trigger- und Aktionsnamen jeder Regel, die
+      # Kostenregel (kein kostenpflichtiger Kanal fest verdrahtet) und
+      # die Leseregel für Agent Reach.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/schaltwerk.py --selftest
+
+      - name: Regelwerk auflisten
+        if: ${{ github.event.inputs.modus == 'list' }}
+        run: python3 scripts/schaltwerk.py --list
+
+      - name: Cockpit neu schreiben
+        if: ${{ github.event.inputs.modus == 'status' }}
+        run: python3 scripts/schaltwerk.py --status
+
+      - name: Schaltwerk-Lauf
+        id: lauf
+        if: ${{ github.event.inputs.modus != 'list' && github.event.inputs.modus != 'status' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # --- Mastodon -----------------------------------------------------
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          # --- Bluesky ------------------------------------------------------
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLUESKY_PDS: ${{ vars.BLUESKY_PDS }}
+          # --- Telegram -----------------------------------------------------
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ vars.TELEGRAM_CHAT_ID }}
+          # --- Reddit -------------------------------------------------------
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+          REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+          REDDIT_SUBREDDIT: ${{ vars.REDDIT_SUBREDDIT }}
+          # --- Pinterest (Token-Broker erneuert selbst) ---------------------
+          PINTEREST_TOKEN_KEY: ${{ secrets.PINTEREST_TOKEN_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+          # --- LinkedIn -----------------------------------------------------
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ vars.LINKEDIN_PERSON_URN }}
+          LINKEDIN_ORG_URN: ${{ vars.LINKEDIN_ORG_URN }}
+          # --- Threads ------------------------------------------------------
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ vars.THREADS_USER_ID }}
+          # --- Facebook -----------------------------------------------------
+          FACEBOOK_PAGE_TOKEN: ${{ secrets.FACEBOOK_PAGE_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ vars.FACEBOOK_PAGE_ID }}
+          # --- Instagram ----------------------------------------------------
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          # --- KI-Politur (ausschließlich Gratis-Zugänge) -------------------
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          set +e
+          MODUS="${{ github.event.inputs.modus }}"
+          REGEL="${{ github.event.inputs.regel }}"
+          ARGS="--run"
+          [ "$MODUS" = "dry-run" ] && ARGS="--dry-run"
+          [ -n "$REGEL" ] && ARGS="$ARGS --regel $REGEL"
+
+          # Webhook-Nutzlast (repository_dispatch) an die Engine durchreichen.
+          EVENT='${{ toJSON(github.event.client_payload) }}'
+          if [ "${{ github.event_name }}" = "repository_dispatch" ] && [ -n "$EVENT" ] && [ "$EVENT" != "null" ]; then
+            python3 scripts/schaltwerk.py $ARGS --event "$EVENT"
+          else
+            python3 scripts/schaltwerk.py $ARGS
+          fi
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Ergebnisse committen
+        if: always()
+        run: |
+          PFADE="SCHALTWERK-STATUS.md data/schaltwerk_state.json data/schaltwerk_log.jsonl \
+                 data/schaltwerk_standby.log data/schaltwerk_konfig.log \
+                 data/agent_reach/themen_vorschlaege.yaml data/social/state.yaml \
+                 data/social/schedule.yaml"
+          # shellcheck disable=SC2086
+          if git status --porcelain $PFADE 2>/dev/null | grep -q .; then
+            git config user.name "Schaltwerk"
+            git config user.email "schaltwerk@users.noreply.github.com"
+            # shellcheck disable=SC2086
+            git add $PFADE 2>/dev/null || true
+            git commit -m "chore(schaltwerk): Automationslauf $(date +%F\ %H:%M)" || true
+            scripts/git_sync.sh --push-only || git push || true
+            echo "Ergebnisse committet."
+          else
+            echo "Keine Änderungen."
+          fi
+
+      - name: Exit-Vertrag durchsetzen
+        if: ${{ steps.lauf.outputs.code != '' && steps.lauf.outputs.code != '0' }}
+        run: |
+          echo "::error::Schaltwerk meldet Fehler (Exit ${{ steps.lauf.outputs.code }})."
+          echo "Standby-Kanäle sind KEIN Fehler – siehe SCHALTWERK-STATUS.md."
+          exit 1

@@ -8,6 +8,12 @@
 > **Dein einziger Auftrag (einmalig):** Die Zugangsdaten der Kanäle hinterlegen,
 > die du bespielen willst. Alles andere erledigt der Autopilot – jeden Tag,
 > alle zwei Stunden, rund um die Uhr.
+>
+> **Seit 01.10.2026 hat der Autopilot einen Dirigenten:** das **Schaltwerk**
+> (`docs/ANLEITUNG-SCHALTWERK.md`), der repo-eigene Zapier-Ersatz. Es sendet
+> nicht statt des Autopiloten, sondern schließt dessen Lücken – Update-Wellen
+> für überarbeitete Artikel, Agent-Reach-Kuratierung, Wachhunde für stille
+> Kanäle, nächtliche Planerneuerung, Ad-hoc-Posts per Webhook.
 
 ---
 
