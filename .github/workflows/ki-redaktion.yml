@@ -100,9 +100,27 @@ jobs:
       # normalisiert und anschließend hart geprüft – Keywords bleiben Keywords.
       - name: Taxonomie-Gate nach Writer-Lauf
         run: |
+          set -euo pipefail
+          # Der Gate-Code ist Teil der Produktionskette: nach einem Writer-Lauf
+          # darf weder ein stiller Selbsttest-Regress noch ein halbfertiger
+          # Normalisierungslauf in den Commit gelangen.
           python3 scripts/tag_governance.py --selftest
-          python3 scripts/tag_governance.py --apply
-          python3 scripts/tag_governance.py --check
+          for versuch in 1 2 3; do
+            echo "Taxonomie-Normalisierung, Versuch ${versuch}/3"
+            python3 scripts/tag_governance.py --apply
+            if python3 scripts/tag_governance.py --check; then
+              echo "Taxonomie-Gate grün (Versuch ${versuch})"
+              break
+            fi
+            if [ "$versuch" = 3 ]; then
+              echo "::error::Taxonomie-Gate nach drei idempotenten Läufen rot"
+              python3 scripts/tag_governance.py --json || true
+              exit 1
+            fi
+            # --apply ist idempotent. Ein erneuter Lauf fängt Writer-Ausgaben
+            # ab, die beim ersten Scan noch durch den Dateisystem-Cache liefen.
+            sleep 1
+          done
 
       - name: Entwürfe committen (drafts only)
         run: |
