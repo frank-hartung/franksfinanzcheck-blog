@@ -925,9 +925,9 @@ items:
   date: '2026-10-01'
   time: '15:15'
   scheduled_at: '2026-10-01T15:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: threads:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:takeaway:2026-10-01
   channel: threads
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -937,9 +937,9 @@ items:
   date: '2026-10-01'
   time: '16:15'
   scheduled_at: '2026-10-01T16:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: x:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:thread:2026-10-01
   channel: x
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
@@ -949,9 +949,9 @@ items:
   date: '2026-10-01'
   time: '19:15'
   scheduled_at: '2026-10-01T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: linkedin:2026-09-21-tierkrankenversicherung-hund-katze-kosten:takeaway:2026-10-02
   channel: linkedin
   slug: 2026-09-21-tierkrankenversicherung-hund-katze-kosten

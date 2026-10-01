@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)
+> Automatisch aktualisiert: 01.10.2026 20:56 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -9,12 +9,12 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 | Kanal | Status | Geplant | Nächster Beitrag | Kalender |
 |---|---|---:|---|---|
 | Mastodon | ⚪ Standby | 0 | – | [md](mastodon.md) · [ics](mastodon.ics) |
-| Bluesky | ⚪ Standby | 18 | Do 01.10. 08:15 · Dein Haus sicher schützen: Das n | [md](bluesky.md) · [ics](bluesky.ics) |
-| LinkedIn | ⚪ Standby | 6 | Do 01.10. 07:45 · Sparen im Herbst: Spartipps für  | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 24 | Do 01.10. 08:45 · Kostenloses Girokonto: So findes | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 19 | Do 01.10. 09:15 · Dein Haus sicher schützen: Das n | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 19 | Do 01.10. 09:45 · Gasrechnung prüfen: Fehler finde | [md](facebook.md) · [ics](facebook.ics) |
-| Instagram | ⚪ Standby | 9 | Do 01.10. 11:45 · Digitaler Turbo: Warum der DNS-H | [md](instagram.md) · [ics](instagram.ics) |
+| Bluesky | ⚪ Standby | 18 | Fr 02.10. 08:15 · Internet & DSL wechseln: Praxis- | [md](bluesky.md) · [ics](bluesky.ics) |
+| LinkedIn | ⚪ Standby | 6 | Fr 02.10. 07:45 · Tierkrankenversicherung für Hund | [md](linkedin.md) · [ics](linkedin.ics) |
+| X (Twitter) | ⚪ Standby | 23 | Do 01.10. 19:15 · Privathaftpflicht: Warum so wich | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 18 | Do 01.10. 16:15 · Sicher heizen: So schützt dich e | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 18 | Do 01.10. 15:15 · DSL-Wechselbonus sichern: So spa | [md](facebook.md) · [ics](facebook.ics) |
+| Instagram | ⚪ Standby | 9 | Fr 02.10. 11:45 · Finanzielle Freiheit erreichen:  | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 9 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
 | Reddit | ⚪ Standby | 1 | Sa 10.10. 14:15 · Digitaler Turbo: Warum der DNS-H | [md](reddit.md) · [ics](reddit.ics) |
@@ -23,17 +23,9 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Do, 01. Oktober 2026
-- **07:45** ⚪ LinkedIn · _zahl_ · Sparen im Herbst: Spartipps für die goldene Jahreszeit
-- **08:15** ⚪ Bluesky · _zitat_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
-- **08:45** ⚪ X (Twitter) · _frage_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
-- **09:15** ⚪ Threads · _takeaway_ · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
-- **09:45** ⚪ Facebook (Seite) · _frage_ · Gasrechnung prüfen: Fehler finden und Nachzahlungen
-- **11:45** ⚪ Instagram · _takeaway_ · Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt
-- **12:15** ⚪ Bluesky · _nutzen_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
-- **13:15** ⚪ X (Twitter) · _takeaway_ · Gasrechnung senken: Fehler im Spätsommer vermeiden
-- **15:15** ⏳ Facebook (Seite) · _vergleich_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
-- **16:15** ⏳ Threads · _takeaway_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
-- **19:15** ⏳ X (Twitter) · _thread_ · Privathaftpflicht: Warum so wichtig und was sie kostet
+- **15:15** ⚪ Facebook (Seite) · _vergleich_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
+- **16:15** ⚪ Threads · _takeaway_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
+- **19:15** ⚪ X (Twitter) · _thread_ · Privathaftpflicht: Warum so wichtig und was sie kostet
 ### Fr, 02. Oktober 2026
 - **07:45** ⏳ LinkedIn · _takeaway_ · Tierkrankenversicherung für Hund & Katze: Kosten realistisch
 - **08:15** ⏳ Bluesky · _takeaway_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet

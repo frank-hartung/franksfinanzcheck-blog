@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 01.10.2026 13:40 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.10.2026 20:56 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Do, 01. Oktober 2026
-- **11:45** ⚪ Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
 ### Fr, 02. Oktober 2026
 - **11:45** ⏳ Finanzielle Freiheit erreichen: Denke dich reich – Geld — _karussell_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
