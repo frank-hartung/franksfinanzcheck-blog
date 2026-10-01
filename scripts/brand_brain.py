@@ -42,8 +42,8 @@ DEFAULTS = {
         "author": "Frank Hartung",
         "domain": "https://franksfinanzcheck.de/",
         "tagline": "So holst du mit ehrlichen Tipps das Beste aus deinem Geld",
-        "niche": "Geld sparen leicht gemacht: Praxis-Ratgeber",
-        "value_proposition": "Fixkosten senken – bis zu 1.800 € pro Jahr.",
+        "niche": "Das unabhängige Fixkosten-Cockpit für deutsche Haushalte",
+        "value_proposition": "Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und den Kurs halten.",
         "languages": ["de"],
     },
     "voice": {
@@ -66,7 +66,16 @@ DEFAULTS = {
     "products": [],
     "audience": {"primary": "", "secondary": "", "pain_points": []},
     "hard_rules": [],
-    "frameworks": {"editorial": [], "openings": [], "hooks": []},
+    "frameworks": {
+        "fixkosten_kompass": {
+            "name": "Franks Fixkosten-Kompass",
+            "short_name": "4K-Prüfpfad",
+            "positioning": "Das unabhängige Fixkosten-Cockpit für deutsche Haushalte",
+            "steps": [],
+            "editorial_rule": "Keine pauschalen Sparversprechen; die konkrete Rechnung bleibt beim Leser.",
+        },
+        "editorial": [], "openings": [], "hooks": [],
+    },
 }
 
 
@@ -202,6 +211,18 @@ def compact_context(brain):
     verboten = v.get("forbidden_phrases", [])
     if verboten:
         lines.append("VERBOTENE Floskeln: " + " · ".join(verboten[:8]))
+    kompass = brain.get("frameworks", {}).get("fixkosten_kompass", {})
+    if isinstance(kompass, dict) and kompass.get("name"):
+        kompass_zeilen = [str(step) for step in kompass.get("steps", []) if str(step).strip()]
+        lines.append(
+            "PRODUKT-KERN: "
+            + f"{kompass.get('name')} ({kompass.get('short_name', '')}) – "
+            + str(kompass.get('positioning', ''))
+        )
+        if kompass_zeilen:
+            lines.append("4K-PRÜFPFAD: " + " | ".join(kompass_zeilen[:4]))
+        if kompass.get("editorial_rule"):
+            lines.append("KOMPASS-REGEL: " + str(kompass["editorial_rule"]))
     regeln = brain.get("hard_rules", [])
     if regeln:
         lines.append("HARTE REGELN: " + " | ".join(regeln[:4]))

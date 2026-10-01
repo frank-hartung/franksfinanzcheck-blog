@@ -1,8 +1,8 @@
 ---
-title: "Alle Ratgeber – Strom, Gas, Internet & Finanzen clever sparen"
-heading: "Wissen, das sich auszahlt."
-intro: "Verständliche Ratgeber für deinen Alltag – von niedrigeren Fixkosten bis zu einem entspannten Budget. Finde den nächsten Schritt, der zu dir passt."
-description: "Entdecke Ratgeber zu Strom, Gas, Internet, Versicherungen, Konto, Budget und Reisen. Sechs Themenwelten, verständliche Tipps und die neuesten Beiträge."
+title: "Alle Ratgeber für dein Fixkosten-Cockpit"
+heading: "Wissen für bessere Kostenentscheidungen."
+intro: "Der 4K-Prüfpfad für deinen Alltag: Kosten sehen, Konditionen rechnen, Fristen sichern und den Kurs halten. Finde den Ratgeber für deinen nächsten Schritt."
+description: "Ratgeber für Strom, Gas, Internet, Versicherungen, Konto, Budget und Mobilität – geordnet nach dem FranksFinanzcheck Fixkosten-Kompass."
 keywords: ["Strom sparen", "Gasvergleich", "DSL-Vergleich", "Versicherungen", "Frugalismus", "Geld sparen", "Girokonto", "Mietwagen"]
 # Die Themen-Navigation wird aus data/themenwelten.json im Layout gerendert.
 # Hier keine zweite Themenliste und keine Pagination-Aliase anlegen.

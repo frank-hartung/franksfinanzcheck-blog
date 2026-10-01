@@ -242,46 +242,12 @@
   </div>
 </section>
 
-{{- /* ---------- Die Frank-Methode: 4 Schritte zu 2.000 € mehr im Jahr ---------- */ -}}
-<section aria-label="Spar-Methode" class="ff-method-section">
-  <h2 class="ff-method-section__title">
-    🎯 Franks 4-Schritte-Methode: So optimierst du deine Finanzen ohne Verzicht
-  </h2>
-
-  <div class="ff-method-grid">
-    <div class="ff-method-card">
-      <div class="ff-method-num">01</div>
-      <h3 class="ff-method-title">Fixkosten-Inventur</h3>
-      <p class="ff-method-desc">
-        Kontoauszüge der letzten drei Monate scannen: Welche wiederkehrenden Posten für Strom, Gas, DSL, Abos und Versicherungen fallen wirklich an?
-      </p>
-    </div>
-
-    <div class="ff-method-card">
-      <div class="ff-method-num">02</div>
-      <h3 class="ff-method-title">Überflüssiges kündigen</h3>
-      <p class="ff-method-desc">
-        Doppelte Policen, ungenutzte Streaming-Dienste und alte Zusatzoptionen sofort kündigen – gesetzlich meist monatlich möglich.
-      </p>
-    </div>
-
-    <div class="ff-method-card">
-      <div class="ff-method-num">03</div>
-      <h3 class="ff-method-title">Tarifvergleich nutzen</h3>
-      <p class="ff-method-desc">
-        Über unsere geprüften Vergleichsrechner die Bestkonditionen mit Preisgarantie und Wechselbonus sichern – der neue Anbieter übernimmt die Kündigung.
-      </p>
-    </div>
-
-    <div class="ff-method-card">
-      <div class="ff-method-num">04</div>
-      <h3 class="ff-method-title">Überschuss anlegen</h3>
-      <p class="ff-method-desc">
-        Das monatlich gesparte Geld direkt per Dauerauftrag auf ein zinsstarkes Tagesgeldkonto oder in den Notgroschen lenken.
-      </p>
-    </div>
-  </div>
-</section>
+{{- /* ---------- Produktkern: ein 4K-Prüfpfad über alle Themen ----------
+     Quelle ist data/fixkosten_kompass.yaml. Die frühere generische
+     „4-Schritte-Methode" machte pauschale Wechsel-/Sparversprechen und
+     war nur eine von mehreren Varianten im Bestand. Der Kompass ist die
+     einzige verbindliche Methodik für Ratgeber-Hub, Startseite und Cockpit. */ -}}
+{{- partial "fixkosten_kompass.html" (dict "mode" "full") -}}
 
 {{- /* ---------- FAQ-Sektion ---------- */ -}}
 <section aria-label="Häufige Fragen" class="ff-faq-section">

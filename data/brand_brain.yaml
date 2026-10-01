@@ -34,8 +34,8 @@ brand:
   tagline: "So holst du mit ehrlichen Tipps das Beste aus deinem Geld"
   domain: "https://franksfinanzcheck.de/"
   author: "Frank Hartung"
-  niche: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
-  value_proposition: "Oft reichen zehn Minuten, um Fixkosten massiv zu senken – bis zu 1.800 € pro Jahr."
+  niche: "Das unabhängige Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten mit nachvollziehbarer Rechnung statt Werbeversprechen prüfen."
+  value_proposition: "Franks Fixkosten-Kompass ordnet laufende Kosten in vier klare Schritte: Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und den Kurs halten."
   languages: ["de"]
 
 audience:
@@ -123,10 +123,20 @@ default_cta: "Jetzt bei CHECK24 vergleichen"
 # Kanonische Marken-Texte – MÜSSEN mit data/brand_lock.yaml übereinstimmen
 # (brand_brain.py --selftest erzwingt das; bei Drift: --fix oder --set-current).
 canonical:
-  description: "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
+  description: "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
   disclaimer: "Hinweis: Dieser Blog enthält Affiliate-Links (Werbung). Wenn du über einen Link etwas bei CHECK24 buchst oder abschließt, erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Unsere Empfehlungen bleiben davon unabhängig."
 
 frameworks:
+  fixkosten_kompass:
+    name: "Franks Fixkosten-Kompass"
+    short_name: "4K-Prüfpfad"
+    positioning: "Das unabhängige Fixkosten-Cockpit für deutsche Haushalte"
+    steps:
+      - "Kosten sehen: wiederkehrende Beträge zuerst erfassen und priorisieren"
+      - "Konditionen rechnen: Gesamtkosten, Leistung, Laufzeit und Bonus zusammen prüfen"
+      - "Kündigungsfenster sichern: Vertrags- und Prüftermine sichtbar machen"
+      - "Kurs halten: nur bei sinnvoller Rechnung handeln und quartalsweise nachprüfen"
+    editorial_rule: "Jeder Ratgeber ordnet sein Thema, wenn passend, einem 4K-Schritt zu. Nie behaupten, ein Wechsel spare automatisch Geld; die konkrete Rechnung bleibt beim Leser."
   editorial:
     - "Orientierung und Zusammenfassung nur dort, wo sie dem konkreten Thema dienen; keine Pflichtschablone"
     - "Fragen, Faustregeln, Schrittfolgen und FAQs adaptiv einsetzen – nie als automatische Serienformel"

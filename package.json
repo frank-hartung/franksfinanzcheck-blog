@@ -33,6 +33,8 @@
     "design:quality": "npm run design:handoff:check && npm run design:gate && npm run test:design",
     "test:design": "python3 -m unittest scripts.tests.test_design_varianten",
     "test:toc": "node scripts/ff_toc_beweglich_test.mjs && node scripts/ff_heading_glyph_guard_test.mjs && python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
+    "cockpit:check": "python3 scripts/fixkosten_kompass_guard.py --selftest && python3 scripts/fixkosten_kompass_guard.py --source-only && hugo --minify --cleanDestinationDir && python3 scripts/fixkosten_kompass_guard.py --public public",
+    "test:cockpit": "python3 -m unittest scripts.tests.test_fixkosten_kompass && node --test tools/fixkosten-cockpit.test.mjs",
     "test:imartikel": "python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
     "dialog": "python3 scripts/social_dialog.py --run",
     "dialog:probe": "python3 scripts/social_dialog.py --run --dry-run",

@@ -104,8 +104,8 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # ---------------------------------------------------------------
   designVariante = "v-hero-premium"
   title = "FranksFinanzcheck"
-  description = "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen."
-  keywords = ["Geld sparen", "Frugalismus", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Kfz-Versicherung", "Sparen"]
+  description = "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
+  keywords = ["Fixkosten-Cockpit", "Fixkosten senken", "Geld sparen", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Versicherungen", "Kündigungsfrist"]
   author = "Frank Hartung"
   contactEmail = "kontakt@franksfinanzcheck.de"
   # SITE-WEITES Social-Fallback-Bild (Premium-Audit 11.09.2026).
@@ -117,7 +117,7 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   # (2:3, 1000x1500, gleiche Marke) und wird von der Wache eingefordert (S5).
   images = ["images/covers/og-default-1200x630.jpg", "images/covers/brand-franksfinanzcheck.jpg"]
   # Alt-Text des Site-Fallback-Bildes (og:image:alt) – konkret, nicht generisch.
-  ogImageAlt = "FranksFinanzcheck: unabhängige Spar-Ratgeber mit echten Euro-Beträgen"
+  ogImageAlt = "FranksFinanzcheck: Fixkosten-Cockpit für Verträge, Fristen und laufende Kosten"
   DateFormat = "02.01.2006"
   defaultTheme = "auto"
   disableThemeToggle = true
@@ -176,30 +176,35 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "/"
     weight = 1
 [[menu.main]]
+    identifier = "cockpit"
+    name = "Fixkosten-Cockpit"
+    url = "/cockpit/"
+    weight = 2
+[[menu.main]]
     identifier = "posts"
     name = "Blog"
     url = "/posts/"
-    weight = 2
+    weight = 3
 [[menu.main]]
     identifier = "pillars"
     name = "Ratgeber"
     url = "/pillar/"
-    weight = 3
+    weight = 4
 [[menu.main]]
     identifier = "ueber"
     name = "Über mich"
     url = "/ueber/"
-    weight = 4
+    weight = 5
 [[menu.main]]
     identifier = "impressum"
     name = "Impressum"
     url = "/impressum/"
-    weight = 5
+    weight = 6
 [[menu.main]]
     identifier = "datenschutz"
     name = "Datenschutz"
     url = "/datenschutz/"
-    weight = 6
+    weight = 7
 
 # ---------------------------------------------------------------------
 # TAXONOMIEN – bewusst KEINE (Index-Hygiene, Entscheidung 29.09.2026)

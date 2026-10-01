@@ -1,0 +1,4 @@
+{{- /* data/ enthält JSONL-Betriebsprotokolle. `hugo.Data`/`site.Data` würde
+       den gesamten Baum parsen und am Format scheitern. Der Produktkern wird
+       deshalb gezielt aus seiner kuratierten YAML-Datei gelesen. */ -}}
+{{- return (os.ReadFile "data/fixkosten_kompass.yaml" | transform.Unmarshal (dict "format" "yaml")) -}}

@@ -7,13 +7,25 @@
 
 ## Was das Produkt ist
 
-**FranksFinanzcheck** (franksfinanzcheck.de) ist ein deutschsprachiger
-Finanz-Ratgeber-Blog von Frank Hartung – seriös, ehrlich, ohne Fachchinesisch
-und ohne Verkaufsdruck. Ehemalige >10 Jahre Praxis im Finanzbereich; die
-Erfahrung (E-E-A-T) ist das Redaktions-Fundament. Geschäftsmodell: Affiliate
-(CHECK24, Awin) + organische Reichweite über Google und Pinterest.
+**FranksFinanzcheck** (franksfinanzcheck.de) ist das unabhängige
+**Fixkosten-Cockpit für deutsche Haushalte** – entwickelt von Frank Hartung.
+Es verbindet Ratgeber zu Strom, Internet, Versicherungen, Konto, Budget und
+Mobilität über einen eigenen Ansatz: **Franks Fixkosten-Kompass**. Der
+4K-Prüfpfad macht aus einzelnen Spartipps eine nachvollziehbare Entscheidung:
+**Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern, Kurs halten.**
+
+Das Produktversprechen lautet nicht „immer wechseln", sondern: Verträge,
+Fristen und laufende Kosten zuerst in eine saubere Reihenfolge bringen – mit
+einer Rechnung statt mit Werbeversprechen. Das interaktive
+[`Fixkosten-Cockpit`](/cockpit/) setzt diesen Ansatz lokal im Browser um; keine
+persönlichen Eingaben werden an den Server übertragen. Die Erfahrung aus über
+zehn Jahren Praxis im Finanzbereich bleibt das E-E-A-T-Fundament.
+Geschäftsmodell: Affiliate (CHECK24, Awin) + organische Reichweite über Google
+und Pinterest.
 
 - **Plattform:** Hugo 0.164 (Extended) + PaperMod (stark angepasst), GitHub Pages
+- **Produktkern:** Fixkosten-Cockpit + Franks Fixkosten-Kompass als verbindlicher
+  4K-Prüfpfad über alle sechs Themenwelten
 - **Umfang:** ~180 Ratgeber-Artikel, 6 Themenwelten („Pillar"/Cluster), tägliche
   Veröffentlichungen durch eine KI-gestützte Redaktions-Pipeline
 - **Betrieb:** vollautomatisiertes Qualitäts- und Publishing-System (45+
