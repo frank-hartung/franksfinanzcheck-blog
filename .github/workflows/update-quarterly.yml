@@ -59,10 +59,23 @@ jobs:
           python3 scripts/update_articles.py --apply --max 10 | tee /tmp/update_log.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Einzigartigkeits-Gate (Qualitäts-Check)
+      - name: Einzigartigkeits-Gate (Qualitäts-Check, nicht blockierend)
+        id: uniqueness
         run: |
+          # Prüft den GESAMTEN Artikelbestand (nicht nur die heute aktualisierten
+          # Top-10) gegeneinander. Bestandsweite Themenüberlappungen (z. B. mehrere
+          # Gas-/Strom-Ratgeber, die dieselbe BDEW-Kennzahl zitieren) sind in einem
+          # 60+-Artikel-Finanzblog normal und unabhängig vom heutigen KI-Update –
+          # sie dürfen den Quartalslauf nicht auf Dauer blockieren (vgl. selbe
+          # Linie in content-engine-v2.yml: "Uniqueness (nicht blockierend)").
+          # Funde werden geloggt und unten als Issue gemeldet, aber Commit/Deploy/
+          # IndexNow laufen trotzdem weiter.
           python3 scripts/check_uniqueness.py | tee /tmp/update_uniqueness.txt
-          exit ${PIPESTATUS[0]}
+          code=${PIPESTATUS[0]}
+          if [ "$code" -ne 0 ]; then
+            echo "⚠ Uniqueness (nicht blockierend – Bestandsüberlappungen, siehe Report/Issue)"
+          fi
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
 
       - name: Meta-Daten der aktualisierten Artikel nachziehen
         env:
@@ -100,5 +113,36 @@ jobs:
               repo: context.repo.repo,
               title: '🔄 Artikel-Update fehlgeschlagen',
               body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom Quartals-Workflow.'
+            });
+            console.log('✅ Issue erstellt');
+
+      - name: Issue bei Bestandsüberlappungen erstellen (nicht blockierend, max. 1 offen)
+        if: steps.uniqueness.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const title = '📋 Einzigartigkeits-Audit: Bestandsüberlappungen gefunden';
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 50,
+            });
+            if (open.some(i => i.title === title)) {
+              console.log('ℹ️ Es existiert bereits eine offene Meldung – keine neue erstellt.');
+              return;
+            }
+            let details = 'Einzigartigkeits-Gate meldete Bestandsüberlappungen.';
+            try { details = fs.readFileSync('/tmp/update_uniqueness.txt', 'utf-8'); } catch (e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: '```\n' + details + '\n```\n\n---\n' +
+                'Nicht blockierend: Commit, Deploy und IndexNow liefen trotzdem durch. ' +
+                'Betroffene Passagen bei Gelegenheit redaktionell umformulieren, dann ' +
+                '`python3 scripts/check_uniqueness.py` erneut laufen lassen. ' +
+                'Automatisch erstellt vom Quartals-Workflow (Einzigartigkeits-Gate).'
             });
             console.log('✅ Issue erstellt');

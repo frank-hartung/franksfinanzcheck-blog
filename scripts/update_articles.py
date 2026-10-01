@@ -39,7 +39,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths, join_article  # Naht-SSOT
+from post_utils import list_post_paths, join_article, slug_of  # Naht-SSOT
 import groq_config
 TRACKING_FILE = os.path.join(BLOG_DIR, ".article_updates.json")
 REPORT_FILE = os.path.join(BLOG_DIR, "ARTIKEL-UPDATE-REPORT.md")
@@ -81,8 +81,8 @@ def load_articles():
             return m.group(1).strip() if m else ""
 
         arts.append({
-            "file": fn,
-            "slug": fn[:-3],
+            "file": os.path.relpath(path, POSTS_DIR),
+            "slug": slug_of(path),
             "title": get("title"),
             "description": get("description"),
             "date": get("date"),
