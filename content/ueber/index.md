@@ -15,6 +15,12 @@ showToc: true
   </div>
 </div>
 
+## Wofür FranksFinanzcheck steht
+
+FranksFinanzcheck ist kein Sammelblog für beliebige Spartipps. Ich baue ein **Fixkosten-Cockpit für deutsche Haushalte**: ein Ort, an dem du wiederkehrende Kosten, Vertragsbedingungen und Fristen in eine nachvollziehbare Reihenfolge bringst. Der eigene [Fixkosten-Kompass](/cockpit/#fixkosten-kompass) folgt dabei immer vier Schritten: **Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und Kurs halten.**
+
+Das bedeutet auch: Ein Wechsel ist nie das Ziel an sich. Erst wenn Preis, Leistung, Laufzeit und deine Situation zusammenpassen, ist er eine gute Entscheidung. Die [Ratgeber](/pillar/) liefern den fachlichen Tiefgang; das [Fixkosten-Cockpit](/cockpit/) macht deinen persönlichen Startpunkt sichtbar.
+
 ## Was mich qualifiziert (E-E-A-T)
 
 - **Über 10 Jahre praktische Erfahrung** mit privater Finanzplanung: eigene Haushaltsbudgets, Notgroschen-Konzepte, Sparstrategien und fundierte Tarifentscheidungen.

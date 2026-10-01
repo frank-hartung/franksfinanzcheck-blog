@@ -1,0 +1,91 @@
+{{- /* ============================================================
+    FIXKOSTEN-COCKPIT – lokale Browser-Anwendung
+    ------------------------------------------------------------
+    Die Kategorien kommen aus data/fixkosten_kompass.yaml. Das Formular
+    hat bewusst kein action-Attribut: ff-fixkosten-cockpit.js rechnet
+    ausschließlich lokal. Optionales Merken schreibt nur nach aktivem
+    Opt-in in localStorage dieses Browsers.
+    ============================================================ */ -}}
+{{- $data := partialCached "fixkosten_kompass_data.html" .Page -}}
+<section class="ff-cockpit" aria-label="Fixkosten-Cockpit" data-ff-fixkosten-cockpit>
+  <noscript>
+    <p class="ff-cockpit__noscript">Für die persönliche Auswertung braucht das Fixkosten-Cockpit JavaScript. Die 4K-Methode und alle Ratgeber bleiben darunter vollständig lesbar.</p>
+  </noscript>
+
+  <header class="ff-cockpit__head">
+    <div>
+      <p class="ff-cockpit__eyebrow"><span aria-hidden="true">◈</span> Dein persönlicher Startpunkt</p>
+      <h2>Fixkosten-Cockpit</h2>
+      <p>Trag ein, was heute regelmäßig von deinem Konto abgeht. Das Cockpit rechnet Monats- und Jahresbetrag, zeigt die größten Posten und erinnert an nahe Prüfzeitpunkte.</p>
+    </div>
+    <p class="ff-cockpit__privacy"><span aria-hidden="true">⌁</span> 100&nbsp;% lokal im Browser<br><span>Keine Übertragung deiner Eingaben</span></p>
+  </header>
+
+  <form class="ff-cockpit__form" novalidate>
+    <fieldset class="ff-cockpit__fieldset">
+      <legend>Deine laufenden Kosten</legend>
+      <p class="ff-cockpit__legend-note">Betrag und Datum sind freiwillig. Ein leeres Feld zählt nicht mit.</p>
+      <div class="ff-cockpit__rows">
+        {{- range $data.categories -}}
+        <div class="ff-cockpit__row" data-ff-cockpit-row data-category="{{ .id }}" data-pillar="{{ .pillar }}">
+          <div class="ff-cockpit__category">
+            <span class="ff-cockpit__icon" aria-hidden="true">{{ .icon }}</span>
+            <span><strong>{{ .label }}</strong><small>{{ .help }}</small></span>
+          </div>
+          <label class="ff-cockpit__field" for="ff-cockpit-{{ .id }}-amount">
+            <span>Pro Monat</span>
+            <span class="ff-cockpit__input-wrap"><input id="ff-cockpit-{{ .id }}-amount" type="text" inputmode="decimal" autocomplete="off" placeholder="z. B. 45,90" data-ff-cockpit-amount aria-describedby="ff-cockpit-{{ .id }}-help"><span aria-hidden="true">€</span></span>
+            <small id="ff-cockpit-{{ .id }}-help" class="sr-only">Monatlicher Betrag für {{ .label }}</small>
+          </label>
+          <label class="ff-cockpit__field ff-cockpit__field--date" for="ff-cockpit-{{ .id }}-date">
+            <span>Nächster Check</span>
+            <input id="ff-cockpit-{{ .id }}-date" type="date" data-ff-cockpit-date>
+          </label>
+          <a class="ff-cockpit__guide" href="{{ printf "pillar/%s/" .pillar | relURL }}" data-umami-event="cta_click" data-umami-event-cta="cockpit-{{ .id }}-ratgeber" data-umami-event-slug="cockpit-{{ .id }}-ratgeber" data-umami-event-placement="fixkosten-cockpit">{{ .pillar_label }} <span aria-hidden="true">→</span></a>
+        </div>
+        {{- end -}}
+      </div>
+    </fieldset>
+
+    <div class="ff-cockpit__actions">
+      <label class="ff-cockpit__remember"><input type="checkbox" data-ff-cockpit-remember> <span>Diese Angaben auf diesem Gerät merken</span></label>
+      <div class="ff-cockpit__buttons">
+        <button type="button" class="ff-cockpit__reset" data-ff-cockpit-reset>Zurücksetzen</button>
+        <button type="submit" class="ff-cockpit__submit">Mein Prüfplan <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </form>
+
+  <section class="ff-cockpit__result" data-ff-cockpit-result aria-live="polite" aria-label="Dein persönlicher Prüfplan" hidden>
+    <div class="ff-cockpit__result-head">
+      <div>
+        <p class="ff-cockpit__eyebrow">Deine Übersicht</p>
+        <h3>Dein nächster klarer Schritt</h3>
+      </div>
+      <button type="button" class="ff-cockpit__copy" data-ff-cockpit-copy>Prüfplan kopieren</button>
+    </div>
+    <div class="ff-cockpit__totals">
+      <div><span>Laufende Kosten</span><strong data-ff-cockpit-monthly>0&nbsp;€</strong><small>pro Monat</small></div>
+      <div><span>Hochgerechnet</span><strong data-ff-cockpit-yearly>0&nbsp;€</strong><small>pro Jahr</small></div>
+      <div><span>Erfasste Bereiche</span><strong data-ff-cockpit-count>0</strong><small>von {{ len $data.categories }}</small></div>
+    </div>
+    <div class="ff-cockpit__plan">
+      <div class="ff-cockpit__plan-block">
+        <h4>Priorität nach Betrag</h4>
+        <ol data-ff-cockpit-priorities></ol>
+      </div>
+      <div class="ff-cockpit__plan-block">
+        <h4>Termine, die du im Blick behalten solltest</h4>
+        <ul data-ff-cockpit-deadlines></ul>
+      </div>
+    </div>
+    <p class="ff-cockpit__disclaimer">Das Cockpit sortiert nur deine Eingaben. Ob Kündigung, Wechsel oder Behalten sinnvoll ist, entscheidest du nach der vollständigen Rechnung aus Preis, Leistung, Laufzeit und deiner Situation.</p>
+  </section>
+
+  <p class="ff-cockpit__data-note">{{ $data.privacy_note }}</p>
+</section>
+
+{{- if not (.Store.Get "ff-fixkosten-cockpit-js-geladen") -}}
+{{- .Store.Set "ff-fixkosten-cockpit-js-geladen" true -}}
+<script defer src="{{ partial "asset_url.html" "premium/ff-fixkosten-cockpit.js" }}"></script>
+{{- end -}}

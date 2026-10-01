@@ -304,6 +304,13 @@ jobs:
       - name: Themenwelten – Quellvertrag (sechs Themen, saubere Texte)
         run: python3 scripts/themenwelten_guard.py --source-only
 
+      # Produktvertrag: Der Fixkosten-Kompass ist die übergeordnete Methode;
+      # das Cockpit darf weder zum bloßen Link noch zu einem Daten-Sink werden.
+      - name: Fixkosten-Kompass – Quell- und Datenschutzvertrag
+        run: |
+          python3 scripts/fixkosten_kompass_guard.py --selftest
+          python3 scripts/fixkosten_kompass_guard.py --source-only
+
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
       # Kernbefund Mi 02.09.2026: Ein fertiger Artikel wurde wegen einer
       # Markdown-URL mit Leerzeichen (R8-URL-LEERZEICHEN, „…-zu Hause/“
@@ -505,6 +512,9 @@ jobs:
       # Kein || true / continue-on-error: defekte Navigation geht nicht live.
       - name: Themenwelten – finales Veröffentlichungs-Gate
         run: python3 scripts/themenwelten_guard.py --public public
+
+      - name: Fixkosten-Kompass – finales Produkt-Gate
+        run: python3 scripts/fixkosten_kompass_guard.py --public public
 
       # ================= ANKER-WACHE (Befund 10.09.2026) =================
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als TEXT in

@@ -1,10 +1,14 @@
 # FranksFinanzcheck
 
-**So holst du mit ehrlichen Tipps das Beste aus deinem Geld.**
+**Das unabhängige Fixkosten-Cockpit für deutsche Haushalte.**
 
-FranksFinanzcheck ist der unabhängige Finanz-Ratgeber von **Frank Hartung**:
-praxisnahe Anleitungen rund um Strom, Gas, Internet, Versicherungen, Konto und
-Sparen – in Alltagssprache, mit konkreten Euro-Beträgen statt Fachchinesisch.
+FranksFinanzcheck ist das Finanzprodukt von **Frank Hartung** für Verträge,
+Fristen und laufende Kosten. Statt lose Spartipps zu sammeln, verbindet der
+**Fixkosten-Kompass** Strom, Gas, Internet, Versicherungen, Konto, Budget und
+Mobilität über einen klaren 4K-Prüfpfad: **Kosten sehen, Konditionen rechnen,
+Kündigungsfenster sichern, Kurs halten.** Verständlich erklärt, mit konkreten
+Euro-Beträgen und nachvollziehbarer Rechnung statt Fachchinesisch oder
+Werbeversprechen.
 
 ### 👉 [franksfinanzcheck.de](https://franksfinanzcheck.de/)
 
@@ -13,9 +17,12 @@ Sparen – in Alltagssprache, mit konkreten Euro-Beträgen statt Fachchinesisch.
 ## Worum es geht
 
 Eine Nachzahlung bei der Stromrechnung, ein Tarif, der seit Jahren zu teuer ist,
-oder ein Versicherungsvertrag, den niemand mehr prüft: Auf FranksFinanzcheck
-findest du Schritt-für-Schritt-Anleitungen, mit denen du deine Fixkosten senkst –
-oft in weniger als einer halben Stunde und oft um mehrere hundert Euro pro Jahr.
+oder ein Versicherungsvertrag ohne bekannten Stichtag: Das sind keine
+Einzelfälle, sondern Teile deiner Fixkosten-Architektur. Im
+[Fixkosten-Cockpit](https://franksfinanzcheck.de/cockpit/) sammelst du deine
+Beträge und nächsten Checks lokal im Browser. Die Ratgeber liefern danach die
+passende Rechnung, Kriterien und Schritte für die Entscheidung – ohne Druck
+zum Wechsel.
 
 | Themenwelt | Worum es geht |
 |---|---|

@@ -1,0 +1,94 @@
+# ============================================================
+# FRANKS FIXKOSTEN-KOMPASS – Produktkern & Inhaltsvertrag
+# ------------------------------------------------------------
+# Diese Datei ist die einzige redaktionelle Quelle für den wieder-
+# erkennbaren Ansatz von FranksFinanzcheck. Der Fixkosten-Kompass
+# verbindet alle Themenwelten über einen wiederholbaren 4K-Prüfpfad:
+# Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und
+# den Kurs halten. Das interaktive Fixkosten-Cockpit setzt denselben
+# Pfad lokal im Browser um.
+#
+# Konsumenten:
+#   - layouts/_partials/fixkosten_kompass.html (Startseite & Cockpit)
+#   - layouts/shortcodes/fixkosten-cockpit.html (Kategorien/Links)
+#   - data/brand_brain.yaml / scripts/brand_brain.py (Redaktionskontext)
+#   - scripts/fixkosten_kompass_guard.py (Quell- und Build-Vertrag)
+#
+# Regeln:
+#   - Keine pauschalen Sparversprechen. Das Cockpit priorisiert nur
+#     eingegebene Kosten und Vertragsdaten; ob ein Wechsel passt,
+#     entscheidet immer die konkrete Rechnung.
+#   - Private Eingaben verlassen nie den Browser. Speicherung ist
+#     optional und liegt ausschließlich im localStorage des Geräts.
+# ============================================================
+
+version: 1
+name: "Franks Fixkosten-Kompass"
+short_name: "4K-Prüfpfad"
+positioning: "Das unabhängige Fixkosten-Cockpit für deutsche Haushalte"
+promise: "Verträge, Fristen und laufende Kosten in eine nachvollziehbare Reihenfolge bringen – mit einer Rechnung statt mit Werbeversprechen."
+privacy_note: "Deine Eingaben bleiben in deinem Browser. Sie werden nicht an FranksFinanzcheck übertragen und nicht für Werbung oder Profiling verwendet."
+
+stages:
+  - id: kosten
+    number: "01"
+    title: "Kosten sehen"
+    kicker: "Erfassen"
+    description: "Wiederkehrende Abbuchungen in Euro pro Monat nebeneinanderlegen. Erst der Gesamtblick zeigt, welcher Posten deine Aufmerksamkeit verdient."
+    action: "Monatsbetrag eintragen"
+  - id: konditionen
+    number: "02"
+    title: "Konditionen rechnen"
+    kicker: "Vergleichen"
+    description: "Nicht am Lockangebot hängen bleiben: Laufzeit, Grundpreis, Bonus, Leistung und Folgekosten gehören in dieselbe Rechnung."
+    action: "Gesamtkosten prüfen"
+  - id: kuendigungsfenster
+    number: "03"
+    title: "Kündigungsfenster sichern"
+    kicker: "Fristen"
+    description: "Vertragsende und nächstes Prüfdatum festhalten. So entscheidest du rechtzeitig und nicht erst nach einer Preiserhöhung."
+    action: "Termin hinterlegen"
+  - id: kurs
+    number: "04"
+    title: "Kurs halten"
+    kicker: "Wiederholen"
+    description: "Nach einer Entscheidung beginnt die Routine: Quartalsweise auf Änderungen schauen und nur handeln, wenn die Rechnung dafür spricht."
+    action: "Nächsten Check planen"
+
+categories:
+  - id: energie
+    label: "Strom & Gas"
+    icon: "⚡"
+    pillar: "strom-sparen"
+    pillar_label: "Ratgeber Strom & Gas"
+    help: "Abschlag, Verbrauch und Preisgarantie"
+  - id: internet
+    label: "Internet & Mobilfunk"
+    icon: "🌐"
+    pillar: "internet-dsl"
+    pillar_label: "Ratgeber Internet & DSL"
+    help: "Grundpreis, Laufzeit und Hardware"
+  - id: versicherung
+    label: "Versicherungen"
+    icon: "🛡️"
+    pillar: "versicherungen"
+    pillar_label: "Ratgeber Versicherungen"
+    help: "Beitrag, Leistung und Stichtag"
+  - id: konto
+    label: "Konto & Karten"
+    icon: "💳"
+    pillar: "konto-karten"
+    pillar_label: "Ratgeber Konto & Karten"
+    help: "Gebühren, Zinsen und Bedingungen"
+  - id: budget
+    label: "Abos & Budget"
+    icon: "🌱"
+    pillar: "frugalismus"
+    pillar_label: "Ratgeber Budget"
+    help: "Mitgliedschaften und Daueraufträge"
+  - id: mobilitaet
+    label: "Mobilität & Reisen"
+    icon: "🚗"
+    pillar: "mietwagen"
+    pillar_label: "Ratgeber Mobilität & Reisen"
+    help: "Regelmäßige Mobilitätskosten und Reise-Entscheidungen"

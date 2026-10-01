@@ -1,20 +1,20 @@
 ---
-title: "Ratgeber: Die 6 großen Sparthemen im Überblick"
-description: "Fixkosten gezielt senken: Ratgeber zu Strom, Gas, Versicherungen, Internet, Konto, Budget und Reisen. Mit Rechenbeispielen und Checklisten für deinen Alltag."
+title: "Franks Fixkosten-Kompass: 6 Kostenbereiche im Überblick"
+description: "Strom, Internet, Versicherungen, Konto, Budget und Mobilität im 4K-Prüfpfad ordnen: mit Rechenbeispielen, Vertragschecks und klaren nächsten Schritten."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"
 ---
 
-## Fixkosten senken ohne Verzicht – Dein persönlicher Sparplan
+## Ein System für deine laufenden Kosten
 
-Jeden Monat buchen Energieversorger, Telekommunikations­anbieter, Banken und Versicherungen feste Beträge von deinem Girokonto ab. Viele dieser Verträge laufen seit Jahren unverändert – und genau hier verschenken die meisten Haushalte in Deutschland zwischen 500&nbsp;€ und 2.000&nbsp;€ pro Jahr. 
+Jeden Monat buchen Energieversorger, Telekommunikations­anbieter, Banken und Versicherungen feste Beträge von deinem Girokonto ab. Dazu kommen Abos, Mobilität und einzelne Reiseentscheidungen. Ein Vertrag für sich allein wirkt überschaubar. Erst zusammen zeigen die Posten, wo ein genauer Blick sinnvoll ist.
 
-Auf **FranksFinanzcheck** zerlege ich die komplexen Tarifwelten in verständliche, praxisnahe Leitfäden. Statt trockenem Fachchinesisch bekommst du konkrete Euro-Beträge, transparente Vor- und Nachteile, rechtssichere Checklisten und den direkten Weg zum besten Angebot.
+Auf **FranksFinanzcheck** folgt jeder Bereich demselben **Fixkosten-Kompass**: Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern und den Kurs halten. Statt trockenem Fachchinesisch bekommst du konkrete Rechenwege, transparente Vor- und Nachteile und Kriterien, mit denen du selbst entscheiden kannst. Einen ersten Überblick erstellt das kostenlose [Fixkosten-Cockpit](/cockpit/) direkt in deinem Browser.
 
-### Warum Themen-Ratgeber der schnellste Weg zum Sparen sind
+### Sechs Kostenbereiche, ein Prüfpfad
 
-Wer seine Finanzen optimieren möchte, verliert im Informationsdschungel schnell den Überblick. Deshalb habe ich alle Artikel und Vergleiche in sechs große **Themen-Ratgeber (Pillars)** gebündelt. Jeder Ratgeber bildet das Fundament für einen Lebensbereich:
+Die sechs Ratgeber sind keine lose Themenliste. Jeder deckt einen Teil deiner Fixkosten-Architektur ab und hilft dir, genau den Schritt im 4K-Prüfpfad sauber zu erledigen:
 
 1. ⚡ **[Strom & Gas sparen](strom-sparen/):** Vom Aufspüren heimlicher Standby-Fresser über Gaspreisgarantien bis zum sicheren Tarifwechsel mit bis zu 800&nbsp;€ Ersparnis.
 2. 🌐 **[Internet, DSL & Mobilfunk](internet-dsl/):** Highspeed-WLAN in jedem Zimmer, DSL-Wechselboni und faire Handytarife ohne überflüssigen Schnickschnack.

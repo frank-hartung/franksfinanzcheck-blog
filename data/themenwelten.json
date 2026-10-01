@@ -1,7 +1,7 @@
 {
   "title": "Deine 6 Themenwelten",
-  "intro": "Was möchtest du als Nächstes angehen? Wähle dein Thema und finde den passenden Ratgeber.",
-  "tip": "Starte mit deiner höchsten regelmäßigen Rechnung. Dort lohnt sich der erste Blick.",
+  "intro": "Jede Themenwelt ist ein Teil deines Haushalts-Cockpits. Wähle den Bereich, den du als Nächstes nach dem 4K-Prüfpfad prüfen möchtest.",
+  "tip": "Starte mit deiner höchsten regelmäßigen Rechnung. Nicht weil sie automatisch zu teuer ist, sondern weil sich dort die vollständige Rechnung zuerst lohnt.",
   "topics": [
     {
       "id": "strom-sparen",

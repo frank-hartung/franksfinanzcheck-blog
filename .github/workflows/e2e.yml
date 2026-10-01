@@ -29,8 +29,13 @@ on:
     paths:
       - "layouts/**"
       - "assets/**"
+      - "static/**"
       - "content/**"
       - "data/datasets/**"
+      - "data/fixkosten_kompass.yaml"
+      - "scripts/fixkosten_kompass_guard.py"
+      - "scripts/tests/test_fixkosten_kompass.py"
+      - "tools/fixkosten-cockpit.test.mjs"
       - "hugo.toml"
       - "e2e/**"
       - "playwright.config.mjs"
@@ -84,6 +89,11 @@ jobs:
         run: |
           python3 scripts/tabellen_lesbarkeit_guard.py --selftest
           python3 scripts/tabellen_lesbarkeit_guard.py
+
+      - name: Fixkosten-Cockpit – lokaler Produktvertrag
+        run: |
+          python3 -m pip install -q pyyaml
+          npm run test:cockpit
 
       - name: Website bauen
         env:

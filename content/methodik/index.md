@@ -10,6 +10,17 @@ showToc: true
 
 Auf **FranksFinanzcheck** findest du Spar-Ratgeber und Tarifvergleiche, die du ohne Finanzstudium sofort im Alltag umsetzen kannst. Diese Seite dokumentiert transparent, **wie** unsere Inhalte entstehen, **womit** sie faktenbasiert belegt werden, **wie** wir moderne KI- und Recherche-Werkzeuge wie Agent Reach und Claude qualitätsgesichert einsetzen und **in welchen Abständen** alle Angaben überprüft werden.
 
+## Der FranksFinanzcheck-Ansatz: Fixkosten-Kompass statt Tipp-Sammlung
+
+FranksFinanzcheck ist kein allgemeiner Spartipps-Feed. Unser Produktkern ist der **Fixkosten-Kompass**: ein vierstufiger Prüfpfad, der alle Themen über dieselbe Frage verbindet – welche Entscheidung verbessert deinen Haushalt nach einer nachvollziehbaren Rechnung?
+
+1. **Kosten sehen:** Wiederkehrende Beträge erfassen und nach Relevanz ordnen.
+2. **Konditionen rechnen:** Preis, Leistung, Laufzeit, Bonus und Folgekosten gemeinsam bewerten.
+3. **Kündigungsfenster sichern:** Vertragsdaten, Preisgarantien und persönliche Prüftermine sichtbar machen.
+4. **Kurs halten:** Im festen Rhythmus neu prüfen und nur handeln, wenn die Rechnung dafür spricht.
+
+Das kostenlose [Fixkosten-Cockpit](/cockpit/) setzt diese erste Orientierung direkt im Browser um. Es überträgt keine Eingaben an unseren Server und empfiehlt keinen Anbieter. Die einzelnen Ratgeber vertiefen anschließend genau den Schritt, der zu deinem Vertrag passt.
+
 ---
 
 ## 1. Recherche: Primärquellen und Multi-Kanal-Recherche

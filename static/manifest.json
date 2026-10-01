@@ -2,7 +2,7 @@
   "id": "https://franksfinanzcheck.de/",
   "name": "FranksFinanzcheck",
   "short_name": "Finanzcheck",
-  "description": "Geld sparen leicht gemacht: Praxis-Ratgeber für Strom, Gas, DSL, Versicherungen & Finanzen – unabhängig, verständlich, mit konkreten Euro-Beträgen.",
+  "description": "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung.",
   "start_url": "https://franksfinanzcheck.de/?utm_source=pwa&utm_medium=app",
   "scope": "https://franksfinanzcheck.de/",
   "display": "standalone",
@@ -37,6 +37,11 @@
     }
   ],
   "shortcuts": [
+    {
+      "name": "Fixkosten-Cockpit",
+      "url": "https://franksfinanzcheck.de/cockpit/?utm_source=pwa-shortcut",
+      "description": "Ratgeber-Kategorie öffnen"
+    },
     {
       "name": "Strom & Gas sparen",
       "url": "https://franksfinanzcheck.de/pillar/strom-sparen/?utm_source=pwa-shortcut",

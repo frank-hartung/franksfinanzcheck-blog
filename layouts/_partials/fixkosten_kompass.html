@@ -1,0 +1,43 @@
+{{- /* ============================================================
+    FRANKS FIXKOSTEN-KOMPASS
+    ------------------------------------------------------------
+    Wiederverwendbare Produkt-Erklärung für Startseite und Cockpit.
+    Die Texte leben ausschließlich in data/fixkosten_kompass.yaml;
+    so kann der 4K-Prüfpfad weder je Seite abweichen noch als lose
+    Kampagnenfloskel enden.
+
+    Aufruf:
+      partial "fixkosten_kompass.html" (dict "mode" "home")
+      partial "fixkosten_kompass.html" (dict "mode" "full")
+    ============================================================ */ -}}
+{{- $data := partialCached "fixkosten_kompass_data.html" . -}}
+{{- $mode := .mode | default "full" -}}
+{{- $compact := eq $mode "home" -}}
+{{- $id := "fixkosten-kompass" -}}
+<section class="ff-kompass{{ if $compact }} ff-kompass--home{{ end }}" id="{{ $id }}" aria-label="{{ $data.name }}" data-ff-fixkosten-kompass>
+  <header class="ff-kompass__head">
+    <p class="ff-kompass__eyebrow"><span aria-hidden="true">◈</span> Der FranksFinanzcheck-Ansatz</p>
+    <h2>{{ $data.name }}</h2>
+    <p class="ff-kompass__intro"><strong>{{ $data.short_name }}:</strong> {{ $data.promise }}</p>
+  </header>
+
+  <ol class="ff-kompass__steps" aria-label="Die vier Schritte des Fixkosten-Kompasses">
+    {{- range $data.stages -}}
+    <li class="ff-kompass__step ff-kompass__step--{{ .id }}">
+      <span class="ff-kompass__number" aria-hidden="true">{{ .number }}</span>
+      <div class="ff-kompass__copy">
+        <p class="ff-kompass__kicker">{{ .kicker }}</p>
+        <h3>{{ .title }}</h3>
+        <p>{{ .description }}</p>
+      </div>
+    </li>
+    {{- end -}}
+  </ol>
+
+  <div class="ff-kompass__footer">
+    <p>Der Kompass ist kein Tarif-Ranking. Er macht zuerst deine Ausgangslage sichtbar – damit jeder Vergleich später zu deinem Haushalt passt.</p>
+    {{- if $compact }}
+    <a class="ff-kompass__cta" href="{{ "cockpit/" | relURL }}" data-umami-event="cta_click" data-umami-event-cta="fixkosten-kompass-cockpit" data-umami-event-slug="fixkosten-kompass-cockpit" data-umami-event-placement="start-kompass">Fixkosten-Cockpit öffnen <span aria-hidden="true">→</span></a>
+    {{- end }}
+  </div>
+</section>

@@ -42,16 +42,17 @@
     {{- /* Der Hinweis ergänzt den Lead, ohne dessen Antwort-zuerst-Satz zu
            verwässern. Quelle und Saison sind mit Badge/Block identisch. */ -}}
     {{- partial "home_season.html" (dict "modus" "hinweis") }}
-    {{- /* cta_click: die drei Startseitenwege bleiben der messbare erste
-           Trichter-Schritt. `slug` trennt sie vom Saison-Fokus darunter. */ -}}
+    {{- /* Der Produkt-Einstieg ist kein weiterer Artikel-Feed, sondern das
+           Fixkosten-Cockpit. Die drei Wege bleiben messbar und führen jeweils
+           zu einem klaren nächsten Schritt: Überblick, Methode, Vertiefung. */ -}}
     <div class="ff-home-ctas">
-        <a href="/posts/" class="ff-btn ff-btn-primary" data-umami-event="cta_click" data-umami-event-cta="home-ratgeber" data-umami-event-slug="home-ratgeber" data-umami-event-placement="start-hero">Alle Ratgeber entdecken <span aria-hidden="true">→</span></a>
-        <a href="/pillar/strom-sparen/" class="ff-btn ff-btn-secondary" data-umami-event="cta_click" data-umami-event-cta="home-strom" data-umami-event-slug="home-strom" data-umami-event-placement="start-hero">⚡ Strom &amp; Gas sparen</a>
-        <a href="/pillar/versicherungen/" class="ff-btn ff-btn-outline" data-umami-event="cta_click" data-umami-event-cta="home-versicherung" data-umami-event-slug="home-versicherung" data-umami-event-placement="start-hero">🛡️ Versicherungen prüfen</a>
+        <a href="{{ "cockpit/" | relURL }}" class="ff-btn ff-btn-primary" data-umami-event="cta_click" data-umami-event-cta="home-cockpit" data-umami-event-slug="home-cockpit" data-umami-event-placement="start-hero">Fixkosten-Cockpit starten <span aria-hidden="true">→</span></a>
+        <a href="#fixkosten-kompass" class="ff-btn ff-btn-secondary" data-umami-event="cta_click" data-umami-event-cta="home-kompass" data-umami-event-slug="home-kompass" data-umami-event-placement="start-hero">4K-Prüfpfad ansehen</a>
+        <a href="{{ "posts/" | relURL }}" class="ff-btn ff-btn-outline" data-umami-event="cta_click" data-umami-event-cta="home-ratgeber" data-umami-event-slug="home-ratgeber" data-umami-event-placement="start-hero">Alle Ratgeber</a>
     </div>
     <div class="ff-trust-row">
-        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Unabhängig &amp; klar erklärt</span>
-        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Mit nachvollziehbaren Quellen</span>
+        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Rechnung statt Werbeversprechen</span>
+        <span class="ff-trust-pill"><span class="ff-trust-check" aria-hidden="true">✓</span> Verträge, Fristen &amp; Kosten zusammen</span>
         {{- /* Herausgeber-Pill (Reparatur 27.09.2026, „ragt über die innere
                Box“): Ein <br> ist in einem Flex-Item KEIN Zeilenumbruch –
                er wird selbst zum nullbreiten Flex-Item. Zusammen mit
@@ -85,3 +86,8 @@
 {{- /* Saison-Fokus: direktes Kind von <main>, damit die mobile LCP-Reihenfolge
        der Premium-Variante die Artikelkarte vor dem langen Hero hält. */ -}}
 {{- partial "home_season.html" (dict "modus" "block") }}
+
+{{- /* Der Kompass ist der dauerhafte Produktkern hinter allen sechs Themen.
+       Er bleibt außerhalb des saisonalen Datenpfads: Jahreszeit und Produkt-
+       positionierung können sich nicht gegenseitig überschreiben. */ -}}
+{{- partial "fixkosten_kompass.html" (dict "mode" "home") }}

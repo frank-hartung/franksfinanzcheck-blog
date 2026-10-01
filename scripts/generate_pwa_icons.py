@@ -45,6 +45,7 @@ ICONS = [("icon-192.png", 192, "any"),
          ("icon-512.png", 512, "any"),
          ("icon-maskable-512.png", 512, "maskable")]
 SHORTCUTS = [
+    ("/cockpit/", "Fixkosten-Cockpit"),
     ("/pillar/strom-sparen/", "Strom & Gas sparen"),
     ("/pillar/internet-dsl/", "Internet & DSL"),
     ("/pillar/versicherungen/", "Versicherungen"),
