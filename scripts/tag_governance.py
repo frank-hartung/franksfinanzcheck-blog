@@ -61,12 +61,27 @@ mehr über T5 („Artikel ohne gültigen Tag") den Deploy blockieren. Erfunden w
 weiterhin kein Tag: fehlt der Pillar und trifft nichts, bleibt es leer und T5
 meldet den Fall an die Redaktion.
 
+RESERVE ZÄHLT NICHT (01.10.2026, Befund KI-Redaktion-Lauf 36853928089):
+Die Redaktionsreserve (Frontmatter `reserve: true`) rotiert frei – der
+Reserve-Auffüller löscht und ersetzt diese Entwürfe nach eigener Logik. Am
+01.10.2026 löschte genau so eine Rotation den einzigen zweiten Träger des Tags
+'Haftpflichtversicherung' (E-Bike-Reserveentwurf) – und das Taxonomie-Gate
+sprang auf Rot, obwohl sich am Live-Bestand nichts geändert hatte. Umgekehrt
+kann ein Reserve-Entwurf einen Ein-Artikel-Tag künstlich „gesund" rechnen,
+obwohl er auf der Live-Seite nie zwei Artikel verbindet (Drafts werden nicht
+gebaut, Related-Matching sieht sie nicht). Konsequenz: Für die WIRKSAMKEITS-
+Zählung (T4/T8) zählen nur Artikel ohne `reserve: true` – Live-Artikel und
+geplante Pipeline-Entwürfe. Reserve-Artikel durchlaufen weiterhin die volle
+Hygiene (T2/T3/T5/T6/T7) samt --apply-Heilung; ein Register-Tag, den nur die
+Reserve trägt, ist ein Hinweis (weich), keine Blockade – die Rotation darf das
+Gate in keine Richtung kippen.
+
 Nutzung:
     python3 scripts/tag_governance.py --report     Bestand + Bilanz
     python3 scripts/tag_governance.py --check      Wache (CI)
     python3 scripts/tag_governance.py --apply      Frontmatter normalisieren
     python3 scripts/tag_governance.py --json       Maschinen-Ausgabe
-    python3 scripts/tag_governance.py --selftest   19 Fälle (Sabotage-Schutz)
+    python3 scripts/tag_governance.py --selftest   23 Fälle (Sabotage-Schutz)
 
 Exit: 0 = grün · 1 = harte Funde · 2 = Fehler/Selbsttest fehlgeschlagen
 """
@@ -369,6 +384,7 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
                       f"verbotenes Zeichen {ch!r} in Tag-Name {name!r}")
 
     nutzung: dict[str, int] = {n: 0 for n in reg.namen}
+    reserve_nutzung: dict[str, int] = {n: 0 for n in reg.namen}
     unbekannt: dict[str, list[str]] = {}
     geaendert: list[str] = []
     stats = {"artikel": 0, "roh_tags": set(), "tags_vorher": 0}
@@ -380,6 +396,9 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
             F.warn("T0", rel, "kein lesbares Frontmatter – übersprungen")
             continue
         stats["artikel"] += 1
+        # Reserve-Entwürfe rotieren frei (siehe Modul-Doku 01.10.2026): volle
+        # Hygiene ja, aber KEIN Gewicht in der Wirksamkeits-Zählung T4/T8.
+        ist_reserve = bool(fm.get("reserve"))
         roh = fm.get("tags") or []
         if isinstance(roh, str):
             roh = [roh]
@@ -414,7 +433,10 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
             F.add("T5", rel, "Artikel ohne gültigen Tag – fällt aus dem "
                              "Related-Matching und verliert seine Verwandten-Karten")
         for k in kanon[:max_tags]:
-            nutzung[k] = nutzung.get(k, 0) + 1
+            if ist_reserve:
+                reserve_nutzung[k] = reserve_nutzung.get(k, 0) + 1
+            else:
+                nutzung[k] = nutzung.get(k, 0) + 1
 
         # T7 – Kategorie
         kats = fm.get("categories") or []
@@ -459,16 +481,26 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
                     fh.write(neuer_text)
                 geaendert.append(rel)
 
-    # ---- T4 / T8 ----
+    # ---- T4 / T8 (zählbar = ohne Reserve, siehe Modul-Doku 01.10.2026) ----
     for name, n in sorted(nutzung.items()):
+        n_res = reserve_nutzung.get(name, 0)
         if n == 0:
-            F.add("T8", "tag_register.yaml",
-                  f"Register-Tag {name!r} wird von keinem Artikel benutzt (tote Zeile)")
+            if n_res:
+                # Nur die rotierende Reserve trägt den Tag: Hinweis statt
+                # Blockade – sonst kippt jede Reserve-Rotation das Gate.
+                F.warn("T8", "tag_register.yaml",
+                       f"Register-Tag {name!r} wird nur von {n_res} "
+                       f"Reserve-Entwurf/-Entwürfen getragen – zählt nicht als "
+                       f"wirksam; beobachten, bei Dauerzustand überführen")
+            else:
+                F.add("T8", "tag_register.yaml",
+                      f"Register-Tag {name!r} wird von keinem Artikel benutzt (tote Zeile)")
         elif n < min_art:
             F.add("T4", "tag_register.yaml",
-                  f"Tag {name!r} hat nur {n} Artikel (mind. {min_art}) – "
-                  f"verbindet keine zwei Artikel, also wirkungslos fürs "
-                  f"Related-Matching; in einen breiteren Tag überführen")
+                  f"Tag {name!r} hat nur {n} zählbare Artikel (mind. {min_art}; "
+                  f"Reserve zählt nicht, hier: {n_res}) – verbindet keine zwei "
+                  f"Artikel, also wirkungslos fürs Related-Matching; in einen "
+                  f"breiteren Tag überführen")
 
     bericht = {
         "artikel": stats["artikel"],
@@ -477,6 +509,7 @@ def pruefe(reg: Register, dateien: list[str], anwenden: bool = False) -> tuple[F
         "tags_benutzt": sum(1 for v in nutzung.values() if v),
         "tag_zuweisungen_vorher": stats["tags_vorher"],
         "nutzung": nutzung,
+        "reserve_nutzung": reserve_nutzung,
         "unbekannt": {k: sorted(set(v)) for k, v in sorted(unbekannt.items())},
         "geaendert": geaendert,
         "politik": pol,
@@ -504,7 +537,9 @@ def drucke_report(reg: Register, b: dict) -> None:
         print(f"  ── {pil or '(ohne Pillar)'}")
         for name, n in sorted(nach_pillar[pil], key=lambda x: (-x[1], x[0])):
             marke = "  " if n >= int(b["politik"]["min_artikel_pro_tag"]) else " ⚠"
-            print(f"    {n:3d} Artikel {marke} {name}")
+            res = b.get("reserve_nutzung", {}).get(name, 0)
+            zusatz = f"  (+{res} Reserve)" if res else ""
+            print(f"    {n:3d} Artikel {marke} {name}{zusatz}")
     if b["unbekannt"]:
         print(f"\n  ── Nicht im Register ({len(b['unbekannt'])})")
         for t, wo in b["unbekannt"].items():
@@ -569,8 +604,8 @@ def selftest() -> int:
     kaputt["tags"][1]["synonyme"].append("Stromkosten")
     check("T1 doppeltes Synonym", bool(Register(kaputt).register_funde))
 
-    def baue(tmp: str, fm: str) -> str:
-        d = os.path.join(tmp, "posts", "a")
+    def baue(tmp: str, fm: str, name: str = "a") -> str:
+        d = os.path.join(tmp, "posts", name)
         os.makedirs(d, exist_ok=True)
         p = os.path.join(d, "index.md")
         open(p, "w", encoding="utf-8").write(fm + "\nText\n")
@@ -673,6 +708,54 @@ def selftest() -> int:
     check("Titel-Fallback ohne Einzelwort-Synonym",
           tags_fuer([], "", "Wie viel Notgroschen reicht wirklich", reg2)
           == ["Notgroschen"])
+
+    # ---- Reserve zählt nicht (Regressionsschutz Befund 01.10.2026) ----
+    # Die Reserve-Rotation löschte den einzigen zweiten Träger eines Tags und
+    # kippte das Gate. Seitdem: `reserve: true` hat KEIN Gewicht in T4/T8.
+    # 20 Ein Reserve-Entwurf rechnet einen Ein-Artikel-Tag NICHT gesund.
+    with tempfile.TemporaryDirectory() as tmp:
+        p1 = baue(tmp, '---\ntitle: "A"\ntags: ["Strom sparen", "Gas sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "a")
+        p2 = baue(tmp, '---\ntitle: "B"\ntags: ["Gas sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "b")
+        p3 = baue(tmp, '---\ntitle: "R"\nreserve: true\ntags: ["Strom sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "r")
+        F3, _ = pruefe(reg, [p1, p2, p3])
+        check("Reserve rechnet T4 nicht gesund",
+              any(r == "T4" and "Strom sparen" in t for r, _, t in F3.hart))
+    # 21 Zwei zählbare Artikel bleiben grün – egal, was die Reserve tut.
+    with tempfile.TemporaryDirectory() as tmp:
+        p1 = baue(tmp, '---\ntitle: "A"\ntags: ["Strom sparen", "Gas sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "a")
+        p2 = baue(tmp, '---\ntitle: "B"\ntags: ["Strom sparen", "Gas sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "b")
+        p3 = baue(tmp, '---\ntitle: "R"\nreserve: true\ntags: ["Strom sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "r")
+        F4, _ = pruefe(reg, [p1, p2, p3])
+        check("Reserve-Rotation kippt grünes Gate nicht",
+              not any(r in ("T4", "T8") for r, _, _ in F4.hart))
+    # 22 Tag nur in der Reserve: Hinweis (weich), keine Blockade – sonst
+    #    würde jede Rotation das Gate in eine Richtung kippen.
+    with tempfile.TemporaryDirectory() as tmp:
+        p1 = baue(tmp, '---\ntitle: "A"\ntags: ["Strom sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "a")
+        p2 = baue(tmp, '---\ntitle: "B"\ntags: ["Strom sparen"]\n'
+                       'categories: ["Ratgeber"]\n---', "b")
+        p3 = baue(tmp, '---\ntitle: "R"\nreserve: true\ntags: ["Gaskosten"]\n'
+                       'categories: ["Ratgeber"]\n---', "r")
+        F5, _ = pruefe(reg, [p1, p2, p3])
+        check("Reserve-only-Tag ist Hinweis statt Blockade",
+              not any(r == "T8" for r, _, _ in F5.hart)
+              and any(r == "T8" for r, _, _ in F5.weich))
+    # 23 Reserve-Entwürfe behalten die volle Hygiene: --apply heilt Synonyme
+    #    auch dort (Reserve ist von der Zählung befreit, nie von der Pflege).
+    with tempfile.TemporaryDirectory() as tmp:
+        p = baue(tmp, '---\ntitle: "R"\nreserve: true\ntags: ["Stromkosten"]\n'
+                      'categories: ["Ratgeber"]\n---', "r")
+        pruefe(reg, [p], anwenden=True)
+        fm, _ = lese_frontmatter(p)
+        check("--apply heilt auch Reserve-Entwürfe",
+              fm.get("tags") == ["Strom sparen"])
 
     print(f"Selbsttest: {ok} bestanden, {len(fehl)} fehlgeschlagen")
     for f in fehl:
