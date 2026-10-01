@@ -133,7 +133,14 @@ KETTE = [
     ("hardcases_guard.py",    ["--fix"],                "A-Text", "Deutsche Fest-Fehler H1-H9 (12.08. hinzu)"),
     ("stil_guard.py",         ["--fix"],                "A-Text", "Stil-Qualitaet S1-S8 (12.08. hinzu)"),
     ("plagiat_guard.py",      ["--fix"],                "B-Semantik", "Originalitaet P1-P5 + Fingerprint-Registry (12.08.)"),
-    ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C6: Duenn, Struktur, Platzhalter (12.08.)"),
+    ("content_audit.py",      ["--fix"],                "B-Semantik", "Content-Auditor C1-C7: Duenn, Struktur, Platzhalter, Generator-Geruest (12.08., C7 seit #490)"),
+    # EINZIGARTIGKEIT (01.10.2026, Issue #490): Bestandsueberlappungen fielen
+    # bis dahin nur dem QUARTALS-Lauf (update-quarterly.yml) auf – bis zu drei
+    # Monate, in denen zwei Live-Artikel dieselben Passagen tragen und sich
+    # gegenseitig aus dem Index draengen. Die Wache meldet nur (Exit 1 ist ein
+    # Fund, kein Sabotagefall) und schreibt nie: Umformulieren ist redaktionelle
+    # Arbeit. Mit dem taeglichen Doktor-Lauf ist der Befund maximal einen Tag alt.
+    ("check_uniqueness.py",   [],                       "B-Semantik", "Einzigartigkeit: Pin-Konflikte, Bestandsueberlappungen live<->live, Same-Day-Zwillinge (meldend)"),
     ("length_guard.py",       ["--fix"],                "B-Semantik", "Premium-Zeichenlänge Google+Pinterest (SSOT length_policy.py)"),
     # STRUKTUR-GUARD (30.09.2026, Issue #476): length_guard heilt nur nach
     # OBEN (zu kurz -> KI ergaenzt). Die Gegenrichtung war unbewacht: 15

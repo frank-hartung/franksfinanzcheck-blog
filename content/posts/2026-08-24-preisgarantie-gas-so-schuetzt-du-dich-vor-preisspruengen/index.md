@@ -75,7 +75,7 @@ Versorger beschaffen Gas zu unterschiedlichen Zeiten und über verschiedene Vert
 
 Auch ein fallender Börsenpreis wird nicht immer sofort weitergegeben. Genau deshalb vergleichst du deinen konkreten Tarif mit aktuell abschließbaren Angeboten, statt aus einer Tagesbewegung eine Jahresprognose zu bauen.
 
-Für 2026 nennt der BDEW bislang durchschnittlich 11,93 Cent pro kWh im Einfamilienhaus. Dieser Wert bildet einen Marktstand ab, nicht die Zukunft und nicht deinen lokalen Tarif.
+Zur Einordnung: Im Einfamilienhaus lag der Gaspreis 2026 laut BDEW im Mittel bei 11,93 Cent je Kilowattstunde. Diese Zahl beschreibt den Markt von gestern. Über den kommenden Winter und über das Angebot an deiner Adresse sagt sie nichts.
 
 ## Wie eine Preisgarantie den Schock begrenzt
 

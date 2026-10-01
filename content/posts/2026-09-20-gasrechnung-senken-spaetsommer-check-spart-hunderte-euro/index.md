@@ -148,7 +148,7 @@ Ohne etwas zu öffnen, prüfst du:
 - beschädigte Rohrdämmung,
 - auffälligen Geruch.
 
-An Brenner, Gasleitung und Abgasweg arbeitest du nicht selbst.
+Brenner, Gasleitung und Abgasweg bleiben Sache einer Fachkraft.
 
 ## Minute 50 bis 60: Aufgaben sortieren
 
@@ -184,7 +184,7 @@ Mehr als drei Sofortaufgaben brauchst du nicht. Der Rest bekommt einen Termin.
 
 ## Wie du den Tarif fair vergleichst
 
-Der BDEW nennt für 2026 bislang durchschnittlich 11,93 Cent pro kWh bei Einfamilienhäusern. Nutze diesen Wert nur zur Einordnung. Dein Markt hängt von Postleitzahl, Verbrauch und Vertragsbedingungen ab.
+Der Branchenverband BDEW weist für 2026 einen Durchschnitt von 11,93 Cent pro Kilowattstunde bei Einfamilienhäusern aus. Nimm ihn als Orientierungslinie, mehr nicht: Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden darüber, was am Ende auf deiner Rechnung steht.
 
 Die Verbraucherzentrale empfiehlt unter anderem:
 
@@ -208,7 +208,7 @@ Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050�
 
 ## Verbrauchssparen ohne Doppelzählung
 
-Die Verbraucherzentrale nennt rund 6 % weniger Heizenergie je Grad niedrigere Raumtemperatur als Faustwert. Andere Maßnahmen – besser lüften, freie Heizkörper, angepasste Zeiten – wirken ebenfalls.
+Pro Grad weniger Raumtemperatur sinkt der Heizbedarf nach der Faustregel der Verbraucherzentrale um etwa 6 %. Andere Maßnahmen – besser lüften, freie Heizkörper, angepasste Zeiten – wirken ebenfalls.
 
 Addiere diese Prozentwerte nicht. Sie greifen teilweise auf denselben unnötigen Verbrauch zu. Beobachte lieber den Zähler über mehrere vergleichbare Wochen.
 

@@ -151,21 +151,21 @@ Typische Geldfresser sind:
 
 ### Was im Alltag gut funktioniert
 
-- Wochenplan mit 4 bis 5 einfachen Gerichten
-- feste Einkaufsliste
-- Reste bewusst einplanen
+- fünf Gerichte festlegen, die ohne Nachdenken gelingen
+- den Zettel fertig haben, bevor du das Haus verlässt
+- Reste als eigenen Gang einplanen
 - Mittagessen öfter mitnehmen
-- Standardprodukte in günstiger guter Variante kaufen
+- bei Grundzutaten zur günstigen guten Marke greifen
 
 ### Rechenbeispiel
 
-| Gewohnheit | Typischer Effekt |
+| Gewohnheit | Typischer Effekt pro Monat |
 |---|---:|
-| Einkauf mit Liste | 10 € bis 20 € pro Woche weniger |
-| 2 Mittagessen selbst mitnehmen | 12 € bis 20 € pro Woche weniger |
-| weniger Wegwerfen | 5 € bis 10 € pro Woche weniger |
+| Zettel statt Bauchgefühl im Supermarkt | 40 € bis 80 € weniger |
+| zweimal pro Woche Essen mitnehmen | 50 € bis 85 € weniger |
+| Lebensmittel seltener wegwerfen | 20 € bis 40 € weniger |
 
-Das sind schnell **30 € bis 50 € pro Woche**. Natürlich nicht immer. Aber selbst die Hälfte davon wirkt im Monat deutlich.
+Unterm Strich stehen damit **110 € bis 205 € im Monat** auf dem Zettel. Nicht in jedem Monat, und nicht bei jedem Haushalt. Aber selbst die Hälfte davon fällt auf dem Konto auf.
 
 Frugalismus im Alltag heißt hier nicht trockene Nudeln. Es heißt, planbarer zu essen und weniger im Affekt auszugeben.
 
@@ -261,7 +261,7 @@ Ein Abo kündigen oder pausieren.
 Strom, Handy oder Internet kurz vergleichen.
 
 ### Tag 4
-Einkaufsliste für die Woche vorbereiten.
+Mahlzeiten für die kommende Woche festlegen und danach einkaufen.
 
 ### Tag 5
 Ein separates Sparkonto oder Unterkonto anlegen.

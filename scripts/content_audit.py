@@ -29,6 +29,17 @@
 #    C6  TITEL-PROMPT: Hauptkeyword (erstes Titelwort > 4 Buchstaben,
 #        kein Stoppwort) taucht im Text mindestens 2x auf → Wikitigung:
 #        sonst „Titel-Versprechen gebrochen" (SEO-Gefahr)
+#    C7  GENERATOR-GERUEST (Issue #490, 01.10.2026): Die KI-Auffrischung
+#        (scripts/update_articles.py) uebergibt den Artikel mit den
+#        Marken „ARTIKEL-TITEL:", „KEYWORDS:" und „ARTIKEL-TEXT:" an das
+#        Modell. Manche Modelle ECHOEN diesen Prompt-Kopf und er wird
+#        mitgespeichert – gefunden in 8 Live-Artikeln, dort als erste
+#        sichtbare Zeile unter der Ueberschrift. Fuer den Leser ist das
+#        Maschinenmuell, fuer Google ein Qualitaetssignal, und im
+#        Einzigartigkeits-Audit kollidierte der echo-te Titel mit den
+#        Ankertexten anderer Artikel. → AUTO-FIX: ganze Zeile entfernen
+#        (deterministisch sicher, es gibt keinen redaktionellen Grund
+#        fuer eine Zeile, die mit „ARTIKEL-TEXT:" beginnt).
 #
 #  SCHUTZZONEN strikt wie ueberall: Frontmatter, Code, URLs, Linkziele,
 #  Tabellen, Zitate, Disclaimer-Block (C5/C6 heben da niemals an).
@@ -36,7 +47,7 @@
 #  AUTO-FIX begrenzt auf C3-Faelle im Kanon (Name/Domain) – alles andere
 #  ist EDITORIAL und bleibt Report.
 #
-#  SELBSTTEST: 8 eingefrorene Faelle (inkl. Negativ-Faelle); rot = Exit 2.
+#  SELBSTTEST: 13 eingefrorene Faelle (inkl. Negativ-Faelle); rot = Exit 2.
 #
 #  Aufruf:
 #    python3 scripts/content_audit.py            # Report (weich, Exit 0)
@@ -85,6 +96,13 @@ C3_REPORT_ONLY = [
     (r"\bhier einfuegen\b", "„hier einfügen“"),
     (r"\bwird nachgereicht\b", "„wird nachgereicht“"),
 ]
+
+# C7: Prompt-Kopfzeilen der KI-Auffrischung, die das Modell zurueckgeschrieben
+# hat. Nur ZEILENANFANG + Doppelpunkt zaehlt – „Keywords: …“ mitten im Satz
+# oder eine Zwischenueberschrift „## Keywords“ bleibt unangetastet.
+C7_SCAFFOLD_RE = re.compile(
+    r"(?m)^[ \t]*(?:ARTIKEL[-\s]?TITEL|ARTIKEL[-\s]?TEXT|KEYWORDS|"
+    r"ARTIKEL[-\s]?BESCHREIBUNG)[ \t]*:.*(?:\r?\n)?")
 
 STOPW = {"diese", "diesem", "beim", "dein", "deine", "deinen", "fur", "für",
          "gibt", "hast", "hier", "jahr", "jetzt", "kann", "mehr", "nicht",
@@ -158,6 +176,10 @@ def audit_body(slug: str, frontmatter: dict, body: str) -> dict:
         if not found:
             issues.append(f"C6 Titel-Keyword {tkw[0]!r} nicht im Text")
 
+    # C7: Generator-Geruest (echo-ter Prompt-Kopf) – immer auto-fixbar
+    for m in C7_SCAFFOLD_RE.finditer(body):
+        issues.append(f"C7 auto-fixbar: Generator-Geruest „{m.group(0).strip()[:48]}“")
+
     return {"issues": issues, "words": len(words)}
 
 
@@ -173,6 +195,11 @@ def apply_c3_fixes(full_doc: str, pfad: Path) -> int:
     for rx, repl in C3_FIXES:
         masked, k = rx.subn(repl, masked)
         n += k
+    # C7 (Issue #490): echo-te Prompt-Kopfzeilen der KI-Auffrischung fliegen
+    # komplett raus. Sicher, weil die Marke nur am ZEILENANFANG mit
+    # Doppelpunkt greift und das Frontmatter in der Maske liegt.
+    masked, k7 = C7_SCAFFOLD_RE.subn("", masked)
+    n += k7
     if n:
         Path(pfad).write_text(unmask(masked, origs), encoding="utf-8")
     return n
@@ -234,6 +261,37 @@ def selftest() -> list:
     out_doc = test_path.read_text(encoding="utf-8")
     if k != 1 or not out_doc.startswith('---\ntitle: "T"'):
         fehler.append("Fall 10: C3-Fix zerstoert Frontmatter!")
+
+    # Fall 11 (Issue #490): echo-tes Generator-Geruest wird erkannt …
+    leck = ("ARTIKEL-TITEL: So sparst du Strom\nKEYWORDS: Strom sparen, Tarif\n"
+            "\nARTIKEL-TEXT:\n\nEchter erster Absatz mit 50\\xa0€ Ersparnis. " * 1
+            + "Weiterer Fliesstext. " * 60)
+    r = audit_body("t9", fm, leck)
+    if len([i for i in r["issues"] if i.startswith("C7")]) != 3:
+        fehler.append(f"Fall 11: C7 Generator-Geruest nicht (vollstaendig) "
+                      f"erkannt: {[i for i in r['issues'] if i.startswith('C7')]}")
+
+    # … und vom Fix restlos entfernt, ohne Frontmatter oder Fliesstext zu
+    # beschaedigen (der Prompt-Kopf stand in 8 Live-Artikeln direkt im Body).
+    p7 = Path("/tmp/audit_c7.md")
+    p7.write_text('---\ntitle: "T"\nkeywords: ["a"]\n---\n'
+                  "ARTIKEL-TITEL: So sparst du Strom\n"
+                  "KEYWORDS: Strom sparen\n\nARTIKEL-TEXT:\n\n"
+                  "Echter Absatz bleibt stehen.\n", encoding="utf-8")
+    apply_c3_fixes(p7.read_text(encoding="utf-8"), p7)
+    out7 = p7.read_text(encoding="utf-8")
+    if "ARTIKEL-TITEL" in out7 or "ARTIKEL-TEXT" in out7 or "KEYWORDS:" in out7:
+        fehler.append("Fall 12: C7-Fix hat das Generator-Geruest stehen lassen")
+    if 'keywords: ["a"]' not in out7:
+        fehler.append("Fall 12: C7-Fix hat das Frontmatter beschaedigt")
+    if "Echter Absatz bleibt stehen." not in out7:
+        fehler.append("Fall 12: C7-Fix hat Fliesstext entfernt")
+
+    # Fall 13 (Gegenprobe): „Keywords:“ im Satz oder als Ueberschrift ist
+    # KEIN Geruest – der Fix darf dort nichts anfassen.
+    harmlos = "## Keywords im Marketing\nEr sagte: Keywords: sind wichtig.\n"
+    if C7_SCAFFOLD_RE.search(harmlos):
+        fehler.append("Fall 13: C7 greift in harmlosem Text (Falsch-Positiv)")
     return fehler
 
 
@@ -250,7 +308,7 @@ def posts_paths():
 def main():
     if "--selftest" in sys.argv:
         stf = selftest()
-        print("✅ Audit-Selbsttest: 9 Faelle gruen." if not stf
+        print("✅ Audit-Selbsttest: 13 Faelle gruen (inkl. C7 Generator-Geruest)." if not stf
               else "🛑 SELBSTTEST ROT:\n" + "\n".join(stf))
         return 0 if not stf else 2
 

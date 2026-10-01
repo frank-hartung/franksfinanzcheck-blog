@@ -42,7 +42,7 @@ KI-Artikel (engine_generate.py)
    ├─► check_titles.py          Titel-Gate
    ├─► pinterest_seo_healer.py  Pinterest+Google SEO (Titel/Cover/Pin/KW)*
    ├─► generate_covers.py       Titelbilder (Manifest-selbstheilend*)
-   ├─► check_uniqueness.py      Duplikat-Audit
+   ├─► check_uniqueness.py      Duplikat-Audit (kritisch nur live↔live; interne Ankertexte zählen nicht — #490)
    ├─► affiliate_link_check.py  Check24-/Tarifcheck-Link-Pflege
    ├─► check_covers.py --fix    *Cover-Stale-Erkennung über Manifest
    ├─► generate_kurzantworten.py  💡-Box „Kurz & knapp"
@@ -602,6 +602,36 @@ python3 scripts/sprachglatt.py --fix
 | Wassertemperaturen | `BOT-STATUS.md` / `ENGINE-STATUS.md` jederzeit auf der Repo-Seite sichtbar |
 
 ## 🧾 Änderungsjournal (nur Qualitäts-Regelwerk)
+
+- **01.10.2026 (Einzigartigkeits-Audit, Issue #490):** Das Duplikat-Audit misst
+  ab sofort **Fließtext statt Navigation** und trennt **Veröffentlichtes von
+  Entwürfen**. Drei Änderungen, eine Linie — ein Befund zählt nur, wenn er
+  wirken kann:
+  1. **Interne Link-Ankertexte zählen nicht mehr** (`template_boilerplate.
+     strip_internal_link_anchors`, SSOT für `check_uniqueness.py` **und**
+     `quality_score.py`). `internal_linker.py` setzt dort per Konstruktion den
+     TITEL des Zielartikels; zwei Ratgeber, die denselben Pillar verlinken,
+     galten dadurch als Duplikat — die Wache bestrafte korrekte interne
+     Verlinkung. Externe Linktexte bleiben in der Messung.
+  2. **Befund-Klassen** (`paar_klasse()`): `kritisch` nur **live↔live**,
+     Entwürfe (`draft: true`, von Hugo nicht gebaut, in keinem Index) stehen in
+     einem eigenen Abschnitt „2b) Entwürfe mit Überlappung“ und bestimmen den
+     Exit-Code des Bestands-Audits nicht mehr. Schwelle unverändert:
+     `KRITISCH_AB = 5` geteilte 7-Wort-Phrasen.
+  3. **C7 GENERATOR-GERÜST** in `content_audit.py` (auto-fixbar): echo-te
+     Prompt-Kopfzeilen (`ARTIKEL-TITEL:`, `KEYWORDS:`, `ARTIKEL-TEXT:`) der
+     KI-Auffrischung — gefunden in 8 Live-Artikeln. Quelle geschlossen:
+     `update_articles.strip_prompt_echo()` + fail-closed in `verify_update()`,
+     `news_writer._strip_fences()`; dieselbe Marke (`C7_SCAFFOLD_RE`) in allen
+     drei Dateien, kein zweites Muster.
+  Neu in der Doktor-Kette (B-Semantik, meldend): `check_uniqueness.py` — der
+  Bestand wird damit **täglich** geprüft statt nur im Quartalslauf.
+  Bestand bei Inkrafttreten: 61 Artikel, **0 kritische live↔live-Überlappungen**
+  (vorher 10 gemeldete, davon 4 Messfehler, 3 Entwürfe, 3 echte Dopplungen; die
+  echten sind im selben Commit redaktionell aufgelöst). Regel für Kennzahlen:
+  **die Zahl darf überall stehen, der Satz darum muss artikel-eigen sein.**
+  Tests: `scripts/tests/test_check_uniqueness.py` (10 Fälle, synthetischer
+  Korpus). Details: `EINZIGARTIGKEIT-BESTAND-PREMIUM-2026-10-01.md`.
 
 - **28.09.2026 (Klebe-Artefakte-Premium-Audit):** Dritte Maschinen-Klebe-Klasse
   dauerhaft unter Wache gestellt: **R10-DOPPELWORT** in `textverstaendnis_guard.py`
