@@ -151,9 +151,9 @@ Notiere Wetter und Abwesenheiten knapp dazu. So erkennst du Trends, ohne einen k
 
 ## Tarif prüfen: der zweite Hebel
 
-Der BDEW nennt für 2026 bislang durchschnittlich 11,93 Cent pro kWh für Einfamilienhäuser. Das ist ein Marktwert, keine persönliche Zielmarke. Region, Verbrauch und Vertragsart verändern den Preis.
+11,93 Cent je Kilowattstunde – auf diesen Mittelwert für Einfamilienhäuser kommt der BDEW für 2026. Als Zielmarke taugt er nicht, als Maßstab schon: Liegt dein Arbeitspreis klar darüber, lohnt der Blick in den Vertrag. Region, Verbrauchsmenge und Vertragsart verschieben das Bild.
 
-Vergleiche deshalb mit deinem echten Jahresverbrauch. Achte auf:
+Rechne jedes Angebot mit deiner tatsächlichen Jahresmenge durch. Wichtig sind:
 
 - Gesamtpreis im ersten Jahr,
 - Preis ohne Bonus,

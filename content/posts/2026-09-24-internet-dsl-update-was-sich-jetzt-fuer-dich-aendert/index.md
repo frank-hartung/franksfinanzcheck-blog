@@ -39,7 +39,7 @@ faktencheck: "2026-09-27"
 
 **Stand: 24.09.2026.** Dieses **Internet & DSL-Update** ordnet ein, warum aktuell nicht nur der Anbieterwechsel zählt, sondern vor allem die ehrliche Frage: **Passt dein Tarif überhaupt zu deinem Alltag?**
 
-Viele Haushalte zahlen beim Internet nicht deshalb zu viel, weil das Netz an ihrer Adresse grundsätzlich teuer wäre. Sie zahlen zu viel, weil sie vor Jahren einen Tarif abgeschlossen haben, der heute nicht mehr zu ihrer Nutzung passt – oder weil sie sich beim Abschluss von möglichst viel Geschwindigkeit haben beeindrucken lassen.
+Teure Internetverträge sind selten das Ergebnis teurer Technik an der eigenen Adresse. Sie zahlen zu viel, weil sie vor Jahren einen Tarif abgeschlossen haben, der heute nicht mehr zu ihrer Nutzung passt – oder weil sie sich beim Abschluss von möglichst viel Geschwindigkeit haben beeindrucken lassen.
 
 Genau deshalb ist das wichtigste Update im Markt oft kein großer Technik-Skandal, sondern etwas viel Alltäglicheres: **Zu viele Menschen buchen mehr Bandbreite, als sie wirklich brauchen – und behalten zu teure Altverträge zu lange.**
 
@@ -159,12 +159,7 @@ Ein schöner Rabatt vorn hilft wenig, wenn die Routermiete leise alles wieder ve
 
 ### Beispiel
 
-- Routermiete: **5,99 € pro Monat**
-- Auf 24 Monate: **143,76 €**
-
-Oder bei **8,99 € pro Monat**:
-
-- Auf 24 Monate: **215,76 €**
+Ein Mietrouter für **6,99 € im Monat** kostet über eine Mindestlaufzeit von 24 Monaten **167,76 €**. Wer das Komfortmodell für **9,99 €** nimmt, zahlt im selben Zeitraum **239,76 €** – ein gekauftes Gerät liegt oft darunter und bleibt danach deins.
 
 Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
@@ -200,13 +195,13 @@ Gerade bei älteren Verträgen ist das Sparpotenzial häufig größer als gedach
 
 ## Ein realistisches Sparszenario
 
-Nehmen wir einen Haushalt, der aktuell **44,95 € pro Monat** zahlt und auf einen passenden Tarif mit Effektivpreis von **31 € bis 33 €** kommt.
+Nehmen wir einen Vertrag über **39,99 € im Monat**, dem ein passender Tarif mit einem Effektivpreis von **27 € bis 29 €** gegenübersteht.
 
 Das macht etwa:
 
-- **12 € bis 14 € pro Monat** Unterschied
-- **144 € bis 168 € pro Jahr**
-- Über 24 Monate also **288 € bis 336 €**
+- **11 € bis 13 € pro Monat** Unterschied
+- **132 € bis 156 € pro Jahr**
+- Über 24 Monate also **264 € bis 312 €**
 
 Dazu kommen mögliche Einsparungen durch geringere Routerkosten.
 

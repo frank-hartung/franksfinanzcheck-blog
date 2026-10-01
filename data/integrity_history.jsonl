@@ -215,3 +215,4 @@
 {"date": "2026-09-30", "kritisch": 0, "fest": 2, "modus": "verify"}
 {"date": "2026-09-30", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["assets/css/extended/custom.css", "layouts/pillar/list.html"]}
 {"date": "2026-09-30", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-01", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/blog_doctor.py", "scripts/content_audit.py"]}

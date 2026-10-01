@@ -190,7 +190,7 @@ Bei Unklarheiten kannst du Belegeinsicht verlangen. Auffällige Heizkörper, def
 
 ## Was Haushalte mit eigenem Vertrag beim Tarif prüfen
 
-Der BDEW nennt für 2026 bislang durchschnittlich 11,93 Cent pro kWh im Einfamilienhaus. Dieser Wert bildet Marktangebote ab und ist kein persönlicher Sollpreis.
+Als Messlatte dient der Mittelwert des BDEW für Einfamilienhäuser: 2026 waren es 11,93 Cent pro Kilowattstunde. Er zeigt, was der Markt aufruft – nicht, was in deinem Vertrag stehen muss.
 
 Vergleiche mit deinem echten Jahresverbrauch. Achte auf:
 

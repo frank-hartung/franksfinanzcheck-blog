@@ -66,10 +66,16 @@ def clean_body(content):
     body = re.sub(r">\s*💶\s*\*\*Spar-Tipp.*?(?:\n\n|\Z)", " ", body, flags=re.S)
     body = re.sub(r"👉.*?\)", " ", body, flags=re.S)
     body = re.sub(r"\*\*Weiterlesen:\*\*.*?(?:\n\n|\Z)", " ", body, flags=re.S)
+    # Interne Verweise (internal_linker.py) sind NAVIGATION, kein Fließtext:
+    # ihr Ankertext ist der Titel des Zielartikels. Zwei Ratgeber, die
+    # denselben Pillar verlinken, teilen ihn sonst als „Duplikat“ – Issue #490.
+    # Reihenfolge wichtig: VOR dem generischen Markdown-Link-Strip, der nur
+    # den Ankertext behalten würde.
+    body = template_boilerplate.strip_internal_link_anchors(body)
     # ROBUST: ALLE URLs entfernen (unabhängig vom CTA-Format)
     body = re.sub(r"https?://[^\s)\"']+", " ", body)
     body = re.sub(r"www\.[^\s)\"']+", " ", body)
-    # Markdown-Links: nur den Ankertext behalten
+    # Markdown-Links (ab hier: externe): nur den Ankertext behalten
     body = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body)
     # FAQ-Intro-Standardsätze
     body = re.sub(r"## Häufige Fragen", " ", body)
@@ -168,6 +174,41 @@ def same_day_twin(t_a: str, t_b: str) -> bool:
     return inter / (len(a) + len(b) - inter) >= SAMEDAY_JACCARD
 
 
+# ============================================================
+#  BEFUND-KLASSEN (Issue #490, 01.10.2026)
+#  Ein Befund ist nur dann „kritisch", wenn er auch WIRKEN kann:
+#  Duplicate Content und Keyword-Kannibalisierung entstehen zwischen
+#  VERÖFFENTLICHTEN Seiten. Ein Entwurf (draft: true, buildDrafts=false)
+#  steht in keinem Index, hat keine URL und kann nichts kannibalisieren –
+#  er ist eine REDAKTIONELLE Aufgabe vor der Veröffentlichung, kein
+#  Bestandsschaden. Beides in einen Topf zu werfen hatte zwei Folgen:
+#    · Der Quartals-Report meldete 10 „kritische" Funde, von denen 3 nur
+#      Entwürfe betrafen – der Bestand war nie so beschädigt, wie das
+#      Ticket aussah (Alarm-Inflation, niemand arbeitet sie ab).
+#    · Umgekehrt verschwand die Entwurfs-Dopplung in derselben Liste,
+#      statt als eigene, VOR der Veröffentlichung fällige Aufgabe
+#      sichtbar zu sein.
+#  Deshalb: eigene Klasse, eigener Abschnitt, eigene Zählung – und nur
+#  live↔live bestimmt den Exit-Code des Bestands-Audits.
+# ============================================================
+KRITISCH_AB = 5          # ab so vielen geteilten Phrasen ist es Dopplung
+
+
+def paar_klasse(overlap: int, a_draft: bool, b_draft: bool,
+                max_sim: int = 1) -> str:
+    """Klasse eines Artikelpaars: ok | unkritisch | entwurf | kritisch.
+
+    overlap   Anzahl geteilter n-Gramme
+    a/b_draft ob der jeweilige Artikel ein Entwurf ist (draft: true)
+    max_sim   Toleranz für Standard-Formulierungen
+    """
+    if overlap <= max_sim:
+        return "ok"
+    if overlap < KRITISCH_AB:
+        return "unkritisch"
+    return "entwurf" if (a_draft or b_draft) else "kritisch"
+
+
 SELFTEST_SAMEDAY = [
     # DER echte Zwillings-Fall vom 11.08.2026:
     ("Gaspreisgarantie: So sicherst du dich gegen Preissprünge ab",
@@ -199,6 +240,34 @@ def run_selftest() -> list:
                              "2026-09-11-stromfresser")):
         if _slug(pfad) != erwartet:
             fehler.append(f"  _slug({pfad!r}) = {_slug(pfad)!r}, erwartet {erwartet!r}")
+    # Befund-Klassen (Issue #490): nur live↔live ist ein Bestandsschaden,
+    # Entwürfe sind eine redaktionelle Aufgabe VOR der Veröffentlichung –
+    # und echte Dopplung darf in keiner Konstellation verschwinden.
+    for overlap, a_d, b_d, want in (
+            (1, False, False, "ok"),          # Toleranz für Standardsätze
+            (3, False, False, "unkritisch"),
+            (5, False, False, "kritisch"),    # Schwelle ist inklusiv
+            (26, False, False, "kritisch"),
+            (9, True, False, "entwurf"),      # Entwurf gegen Live-Artikel
+            (9, False, True, "entwurf"),
+            (9, True, True, "entwurf"),
+            (3, True, False, "unkritisch"),   # unter der Schwelle bleibt es
+    ):
+        got = paar_klasse(overlap, a_d, b_d)
+        if got != want:
+            fehler.append(f"  paar_klasse({overlap}, {a_d}, {b_d}) = {got!r}, "
+                          f"erwartet {want!r}")
+    # Interne Link-Ankertexte sind Navigation, kein Fließtext – sonst gilt
+    # korrekte interne Verlinkung als Duplikat (3 von 10 Funden in #490).
+    anker = ("Mehr dazu: [So findest du den richtigen DSL-Tarif für dein "
+             "Zuhause](../../posts/2026-08-20-dsl-tarif/). Eigener Satz hier.")
+    if "richtigen dsl tarif fuer dein zuhause" in norm(clean_body(anker)):
+        fehler.append("  interner Link-Ankertext zählt noch als Fließtext "
+                      "– zwei Artikel, die denselben Ratgeber verlinken, "
+                      "werden fälschlich als Duplikat gemeldet")
+    if "eigener satz hier" not in norm(clean_body(anker)):
+        fehler.append("  Fließtext um einen internen Link wurde mitentfernt")
+
     a = "Heizung laufen lassen und Strom sparen jeden Monat mit diesen Tipps"
     b = "So Heizung laufen lassen und Strom sparen jeden Monat ohne Folgeschäden"
     gem = ngrams(a, PHRASE_LEN) & ngrams(b, PHRASE_LEN)
@@ -418,29 +487,53 @@ def main():
     grams = {fn: ngrams(articles[fn], n) for fn in names}
     internal = 0
     critical = 0
+    entwuerfe = []
     for a, b in combinations(names, 2):
         overlap = len(grams[a] & grams[b])
-        if overlap > max_sim:
-            internal += 1
-            if overlap >= 5:
-                critical += 1
-                print(f"  🚨 KRITISCH {_slug(a)} ↔ {_slug(b)}: {overlap} gleiche "
-                      f"{n}-Wort-Phrasen")
-                # Die betroffenen Passagen gleich mit ausgeben: „irgendwas ist
-                # doppelt" wird in der Redaktion umformuliert, indem man rät –
-                # mit den konkreten Ketten ist der Fix 10 Minuten Arbeit.
-                for gram in sorted(grams[a] & grams[b])[:8]:
-                    print(f"       · {gram}")
-            else:
-                print(f"  ℹ️ unkritisch {_slug(a)} ↔ {_slug(b)}: {overlap} Phrasen "
-                      f"(Standard-Formulierungen)")
+        klasse = paar_klasse(overlap, a in drafts, b in drafts, max_sim)
+        if klasse == "ok":
+            continue
+        internal += 1
+        if klasse == "kritisch":
+            critical += 1
+            print(f"  🚨 KRITISCH {_slug(a)} ↔ {_slug(b)}: {overlap} gleiche "
+                  f"{n}-Wort-Phrasen")
+            # Die betroffenen Passagen gleich mit ausgeben: „irgendwas ist
+            # doppelt" wird in der Redaktion umformuliert, indem man rät –
+            # mit den konkreten Ketten ist der Fix 10 Minuten Arbeit.
+            for gram in sorted(grams[a] & grams[b])[:8]:
+                print(f"       · {gram}")
+        elif klasse == "entwurf":
+            entwuerfe.append((a, b, overlap))
+        else:
+            print(f"  ℹ️ unkritisch {_slug(a)} ↔ {_slug(b)}: {overlap} Phrasen "
+                  f"(Standard-Formulierungen)")
     if not internal:
         print("  ✅ Keine internen Duplikate")
     else:
-        print(f"  (davon kritisch: {critical} – unter 5 Phrasen ist normal und kein Duplicate Content)")
+        print(f"  (davon kritisch: {critical} – unter {KRITISCH_AB} Phrasen ist "
+              f"normal und kein Duplicate Content)")
+
+    # Entwürfe: eigene Liste, eigene Verantwortung (owner: human). Sie stehen
+    # in keinem Index – der Bestand ist davon nicht beschädigt –, dürfen aber
+    # nicht unverändert live gehen. Deshalb benannt, nicht stillgeschwiegen.
+    print("\n=== 2b) Entwürfe mit Überlappung (nicht veröffentlicht) ===")
+    if not entwuerfe:
+        print("  ✅ Kein Entwurf überlappt kritisch mit dem Bestand")
+    else:
+        for a, b, overlap in entwuerfe:
+            mark = lambda p: _slug(p) + (" [Entwurf]" if p in drafts else " [live]")  # noqa: E731
+            print(f"  📝 {mark(a)} ↔ {mark(b)}: {overlap} gleiche "
+                  f"{n}-Wort-Phrasen")
+            for gram in sorted(grams[a] & grams[b])[:5]:
+                print(f"       · {gram}")
+        print(f"  ({len(entwuerfe)} Entwurfs-Paar(e) – vor der Veröffentlichung "
+              f"umschreiben oder zusammenführen; blockiert den Bestand nicht)")
 
     same_open = same_crit - len(healed)
-    print(f"\nErgebnis: Pin-Konflikte: {pin_problems} | Interne Überlappungen: {internal} | Kritisch: {critical} | Same-Day-Twins: {same_crit} (geheilt: {len(healed)})")
+    print(f"\nErgebnis: Pin-Konflikte: {pin_problems} | Interne Überlappungen: "
+          f"{internal} | Kritisch (live↔live): {critical} | Entwurfs-Paare: "
+          f"{len(entwuerfe)} | Same-Day-Twins: {same_crit} (geheilt: {len(healed)})")
 
     # Exit-Code für CI/Automatisierung:
     #   0 = alles ok (keine kritischen Probleme)

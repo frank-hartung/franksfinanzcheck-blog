@@ -36,8 +36,6 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-ARTIKEL-TITEL: Gasrechnung senken: Fehler im Spätsommer vermeiden
-KEYWORDS: Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif
 
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, muss jetzt im Oktober 2026 aktiv werden. Während die ersten kühlen Nächte den Heizbedarf ankündigen, entscheidet sich genau in diesen Wochen, wie teuer die kommende Saison wirklich wird. Ein verspäteter Check im tiefsten Winter führt oft nur zu Frust und hohen Nachzahlungen – wer dagegen jetzt die Weichen stellt, sichert sich die besten Konditionen für das laufende Jahr (Stand: Oktober 2026).
 

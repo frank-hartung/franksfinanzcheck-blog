@@ -41,6 +41,10 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, join_article, slug_of  # Naht-SSOT
 import groq_config
+# SSOT für das Generator-Gerüst (Issue #490): dieselbe Marke, die
+# content_audit.py als C7 im Bestand findet und heilt – kein zweites Muster,
+# das auseinanderlaufen kann.
+from content_audit import C7_SCAFFOLD_RE
 TRACKING_FILE = os.path.join(BLOG_DIR, ".article_updates.json")
 REPORT_FILE = os.path.join(BLOG_DIR, "ARTIKEL-UPDATE-REPORT.md")
 CACHE_FILE = os.path.join(BLOG_DIR, ".update_cache.json")
@@ -221,9 +225,32 @@ Liefere NUR den vollständigen aktualisierten Artikeltext (Markdown), ohne Front
     return None
 
 
+def strip_prompt_echo(text: str) -> str:
+    """Entfernt zurückgespiegelte Prompt-Kopfzeilen aus der KI-Antwort.
+
+    WARUM (Issue #490, 01.10.2026): Der Prompt oben übergibt den Artikel mit
+    den Marken „ARTIKEL-TITEL:", „KEYWORDS:" und „ARTIKEL-TEXT:". Mehrere
+    Modelle wiederholen diesen Kopf am Anfang ihrer Antwort – und `set_lastmod`
+    schrieb ihn ungeprüft in den Body. Ergebnis: acht Live-Artikel begannen
+    unter der Überschrift mit „ARTIKEL-TITEL: …" (Maschinenmüll für den Leser,
+    Qualitätssignal für Google, Falschfund im Einzigartigkeits-Audit).
+
+    Deterministisch, idempotent, verlustfrei für echten Fließtext: Es gibt
+    keinen redaktionellen Grund für eine Zeile, die mit „ARTIKEL-TEXT:"
+    beginnt.
+    """
+    return C7_SCAFFOLD_RE.sub("", text).lstrip("\n")
+
+
 def verify_update(a, new_body):
     """Prüft, ob das KI-Update sicher ist (Links, Struktur, Länge)."""
     problems = []
+
+    # Zweite Verteidigungslinie zu strip_prompt_echo(): Käme das Gerüst in
+    # einer unbekannten Variante zurück, wird das Update VERWORFEN statt
+    # veröffentlicht – fail-closed, wie bei verlorenen Affiliate-Links.
+    if C7_SCAFFOLD_RE.search(new_body):
+        problems.append("Generator-Gerüst in der KI-Antwort (Prompt-Echo)")
     old_links = set(re.findall(r"https?://[^\s)\"']+", a["body"]))
     new_links = set(re.findall(r"https?://[^\s)\"']+", new_body))
 
@@ -322,6 +349,8 @@ def main():
         if not new_body:
             failed.append(a["slug"])
             continue
+        # Prompt-Echo sofort entfernen (Issue #490) – vor Prüfung und Schreiben.
+        new_body = strip_prompt_echo(new_body)
         problems = verify_update(a, new_body)
         if problems:
             print(f"  ❌ Verworfen: {'; '.join(problems)}")

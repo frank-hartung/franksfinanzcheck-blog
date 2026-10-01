@@ -42,6 +42,8 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import ki_shared as ks  # noqa: E402
 import llm_client  # noqa: E402
+# SSOT für das Generator-Gerüst (Issue #490), identisch mit content_audit C7.
+from content_audit import C7_SCAFFOLD_RE  # noqa: E402
 
 try:
     import length_policy
@@ -114,6 +116,11 @@ def _strip_fences(text: str) -> str:
         t = re.sub(r"^```[a-z]*\s*", "", t)
         t = re.sub(r"\s*```$", "", t)
     t = re.sub(r"(?m)^#\s+.+$", "", t, count=1)
+    # Prompt-Echo entfernen (Issue #490): Auch dieser Prompt übergibt eine
+    # „ARTIKEL-TITEL:“-Zeile; echo-t das Modell sie, stünde sie als erste
+    # sichtbare Zeile im Artikel. Gleiche Marke wie content_audit C7 –
+    # ein Muster, eine Wahrheit.
+    t = C7_SCAFFOLD_RE.sub("", t)
     return t.strip()
 
 

@@ -65,6 +65,40 @@ MARKETING_PATTERNS = (
 )
 
 
+# ------------------------------------------------------------------
+# NAVIGATION ≠ FLIESSTEXT (Issue #490, 01.10.2026)
+# ------------------------------------------------------------------
+# `scripts/internal_linker.py` setzt interne Verweise automatisch, und der
+# Ankertext IST per Konstruktion der TITEL des Zielartikels:
+#
+#     [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/…/)
+#
+# Verlinken zwei Ratgeber denselben Pillar-Artikel – genau das ist der Zweck
+# interner Verlinkung –, teilen sie dadurch bis zu acht 7-Wort-Phrasen, OHNE
+# dass ein einziger Satz Fließtext doppelt wäre. Im Einzigartigkeits-Audit vom
+# 01.10.2026 war das die Ursache von 3 der 10 „kritischen" Funde: Die Wache
+# bestrafte korrekte interne Verlinkung als Duplicate Content – und die
+# „Heilung" wäre gewesen, Ankertexte zu verstümmeln oder Links zu löschen.
+#
+# Deshalb: Ankertexte INTERNER Links zählen nicht als Fließtext. Externe
+# Linktexte bleiben erhalten (sie sind redaktionelle Formulierung, und zwei
+# Artikel mit identischem Satz um einen Quellenlink herum sind ein echter
+# Befund). Entfernt wird nur der Markdown-Link, nicht der Satz drumherum.
+INTERNAL_LINK_RE = re.compile(
+    r"\[[^\]]*\]\(\s*(?:\.{1,2}/|/)(?![/])[^)\s]*\)"
+)
+
+
+def strip_internal_link_anchors(text: str) -> str:
+    """Entfernt interne Markdown-Links samt Ankertext (Navigation, kein Text).
+
+    Intern = relatives Ziel (`../../posts/…`, `./…`) oder wurzel-relativ
+    (`/posts/…`, `/pillar/…`, `/go/…`). Extern (`https://…`, `mailto:`) und
+    Anker-Sprünge im selben Dokument (`#faq`) bleiben unangetastet.
+    """
+    return INTERNAL_LINK_RE.sub(" ", text)
+
+
 def strip_generated_conclusions(text: str) -> str:
     """Entfernt die deterministischen Fazit-/FAQ-Blöcke der Fazit-Schmiede.
 
@@ -140,6 +174,37 @@ def run_selftest() -> list:
         fehler.append("Fall 4: Marketing-/Affiliate-Bausteine wurden nicht entfernt")
     if "Echter Fließtext" not in stripped3 or "Noch ein echter Satz" not in stripped3:
         fehler.append("Fall 4: echter Fließtext wurde mitentfernt")
+
+    # Fall 5 (Issue #490): interne Link-Ankertexte sind Navigation. Zwei
+    # Artikel, die denselben Ratgeber verlinken, teilen sonst dessen Titel als
+    # „Duplikat“ – die Wache bestrafte damit korrekte interne Verlinkung.
+    doc4 = ("Satz davor. Mehr dazu: "
+            "[So findest du den richtigen DSL-Tarif für dein Zuhause]"
+            "(../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif/). "
+            "Satz danach.")
+    stripped4 = strip_internal_link_anchors(doc4)
+    if "richtigen DSL-Tarif" in stripped4:
+        fehler.append("Fall 5: interner Link-Ankertext wurde nicht entfernt")
+    if "Satz davor" not in stripped4 or "Satz danach" not in stripped4:
+        fehler.append("Fall 5: Fließtext um den internen Link wurde mitentfernt")
+
+    # Fall 6: wurzel-relative interne Ziele (/posts/, /pillar/, /go/) zählen
+    # ebenfalls als Navigation – protokoll-relative (//cdn…) nicht.
+    if "Girokonto ohne Gebühren" in strip_internal_link_anchors(
+            "[Girokonto ohne Gebühren](/posts/konto/)"):
+        fehler.append("Fall 6: wurzel-relativer interner Link blieb stehen")
+
+    # Fall 7 (Gegenprobe): EXTERNE Linktexte sind redaktionelle Formulierung
+    # und bleiben im Vergleich – sonst verschwände echte Dopplung rund um
+    # Quellenangaben aus der Messung.
+    extern = strip_internal_link_anchors(
+        "Laut [Bundesnetzagentur](https://www.bundesnetzagentur.de/) gilt das.")
+    if "Bundesnetzagentur]" not in extern:
+        fehler.append("Fall 7: externer Linktext wurde fälschlich entfernt")
+
+    # Fall 8: Idempotenz – ein zweiter Lauf ändert nichts mehr.
+    if strip_internal_link_anchors(stripped4) != stripped4:
+        fehler.append("Fall 8: strip_internal_link_anchors ist nicht idempotent")
 
     return fehler
 
