@@ -97,6 +97,14 @@ themenplan.yaml    ───►  Mo 08:15 MESZ (CI) + manuell ───►  data
 3. Die KI-Redaktion (`scripts/ki_redaktion.py`) zitiert anschließend nur
    aus diesen kuratierten Pools – niemals direkt aus dem Brief.
 
+**Seit 01.10.2026 ist dieser Weg automatisiert – aber nicht abgekürzt:** Das
+Schaltwerk (`scripts/schaltwerk.py`, Regel `reach-signale-kuratieren`) liest
+den Brief und legt passende Signale in `data/agent_reach/themen_vorschlaege.yaml`
+ab (`status: offen`). Von dort übernimmt weiterhin **ein Mensch** nach
+Quellenprüfung in die kuratierten Pools. Ein Selbsttest und ein Unit-Test
+verhindern, dass je eine Regel ein Signal direkt auf einen Social-Kanal
+schiebt. Details: `docs/ANLEITUNG-SCHALTWERK.md`.
+
 Für Agenten gilt zusätzlich (steht in `CLAUDE.md`): Ad-hoc-Recherchen zu
 einzelnen Themen/URLs laufen über den Skill `.claude/skills/agent-reach/`
 (Routing-Tabelle + `references/` beachten, vorher `agent-reach doctor`).

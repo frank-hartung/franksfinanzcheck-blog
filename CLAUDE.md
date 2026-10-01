@@ -137,6 +137,26 @@ Dauer-Alarm ohne Schließpfad, der #272 erzeugt hat.
   (`data/aktuelle_entwicklungen.yaml`, `data/topics.yaml`) übernehmen.
 - Installations- und Betriebsdetails: `docs/ANLEITUNG-AGENT-REACH.md`.
 
+## Schaltwerk: Automationen statt Zapier (seit 01.10.2026)
+
+`scripts/schaltwerk.py` ist der repo-eigene Zapier-Ersatz: **Trigger → Filter
+→ Aktion**, deklariert in `data/automationen.yaml`, getaktet von
+`.github/workflows/schaltwerk.yml` (alle 30 min, dazu `workflow_dispatch` und
+`repository_dispatch` als kostenloser Webhook). Kein Fremddienst, keine
+Task-Limits, keine Kosten.
+
+- **Arbeitsteilung:** Der Social-Autopilot bleibt der Sender für neue Artikel
+  und Evergreen-Recycling. Das Schaltwerk dirigiert und füllt Lücken
+  (Update-Wellen, Reach-Kuratierung, Wachhunde, Planerneuerung, Ad-hoc-Posts).
+  Jede sendende Regel braucht `dedupe_key` und `throttle` – sonst Doppelposts.
+- **Leitplanken (durch Selbsttest + Unit-Tests erzwungen):** Agent-Reach-Signale
+  nie direkt posten (nur `themen_vorschlag`); kostenpflichtige Kanäle (X) nicht
+  fest verdrahten; Standby ist kein Fehler; `--dry-run` schreibt nichts;
+  gescheiterte Ketten gelten nicht als erledigt.
+- **Vor jedem Umbau am Regelwerk:** `npm run test:schaltwerk`, danach
+  `python3 scripts/schaltwerk.py --dry-run`.
+- Cockpit: `SCHALTWERK-STATUS.md` · Anleitung: `docs/ANLEITUNG-SCHALTWERK.md`.
+
 ## Faktenfrische: Recherche pro Artikel (seit 27.09.2026)
 
 `scripts/faktenfrische.py` ist die **artikelgenaue** Schwester der breiten
