@@ -20,6 +20,7 @@ den Live-Bestand (sonst wäre der Test vom Tagesgeschäft abhängig).
 
 Ausführung:  python3 -m unittest discover -s scripts/tests -v
 """
+import datetime as dt
 import sys
 import unittest
 from pathlib import Path
@@ -43,6 +44,12 @@ class SelbsttestTests(unittest.TestCase):
 class BefundKlassenTests(unittest.TestCase):
     """live↔live ist ein Bestandsschaden, Entwürfe sind eine Vorab-Aufgabe."""
 
+    NOW = dt.datetime(2026, 10, 1, tzinfo=dt.timezone.utc)
+
+    @staticmethod
+    def _frontmatter(extra: str = "", date: str = "2026-09-01T08:00:00Z") -> str:
+        return "---\ntitle: T\ndate: " + date + "\ndraft: false\n" + extra + "---\nText"
+
     def test_live_paar_ab_fuenf_phrasen_kritisch(self):
         self.assertEqual(cu.paar_klasse(5, False, False), "kritisch")
         self.assertEqual(cu.paar_klasse(30, False, False), "kritisch")
@@ -62,6 +69,26 @@ class BefundKlassenTests(unittest.TestCase):
                          "unkritisch")
         self.assertEqual(cu.paar_klasse(cu.KRITISCH_AB, False, False),
                          "kritisch")
+
+    def test_hugo_auslieferungssemantik_statt_nur_draft_regex(self):
+        """Nicht nur drafts, auch Zukunft/Ablauf gehören in die Vorab-Liste."""
+        live, reason = cu.audit_publication_state(self._frontmatter(), now=self.NOW)
+        self.assertTrue(live, reason)
+
+        draft, draft_reason = cu.audit_publication_state(
+            self._frontmatter().replace("draft: false", "draft: true"), now=self.NOW)
+        self.assertFalse(draft)
+        self.assertIn("Draft", draft_reason)
+
+        future, future_reason = cu.audit_publication_state(
+            self._frontmatter(date="2026-12-01T08:00:00Z"), now=self.NOW)
+        self.assertFalse(future)
+        self.assertIn("Zukunfts-Post", future_reason)
+
+        expired, expired_reason = cu.audit_publication_state(
+            self._frontmatter("expiryDate: 2026-09-30T08:00:00Z\n"), now=self.NOW)
+        self.assertFalse(expired)
+        self.assertIn("abgelaufen", expired_reason)
 
 
 class NavigationZaehltNichtTests(unittest.TestCase):

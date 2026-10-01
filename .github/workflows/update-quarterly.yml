@@ -59,23 +59,47 @@ jobs:
           python3 scripts/update_articles.py --apply --max 10 | tee /tmp/update_log.txt
           exit ${PIPESTATUS[0]}
 
-      - name: Einzigartigkeits-Gate (Qualitäts-Check, nicht blockierend)
+      - name: Einzigartigkeits-Gate (Bestand, mit Issue-Lebenszyklus)
         id: uniqueness
+        continue-on-error: true
         run: |
-          # Prüft den GESAMTEN Artikelbestand (nicht nur die heute aktualisierten
-          # Top-10) gegeneinander. Bestandsweite Themenüberlappungen (z. B. mehrere
-          # Gas-/Strom-Ratgeber, die dieselbe BDEW-Kennzahl zitieren) sind in einem
-          # 60+-Artikel-Finanzblog normal und unabhängig vom heutigen KI-Update –
-          # sie dürfen den Quartalslauf nicht auf Dauer blockieren (vgl. selbe
-          # Linie in content-engine-v2.yml: "Uniqueness (nicht blockierend)").
-          # Funde werden geloggt und unten als Issue gemeldet, aber Commit/Deploy/
-          # IndexNow laufen trotzdem weiter.
+          # Der tägliche Gesundheitslauf ist die Hauptwache. Dieser Quartalslauf
+          # bleibt eine zweite, unabhängige Messung direkt NACH der KI-Aktualisierung.
+          # Ein bestehender Live-Befund (Exit 1) hält Meta-/Deploy-Nachpflege nicht
+          # an, wird aber als EIN deduplizierter Vorgang mit Audit-Beleg geführt.
+          # Ein kaputter Selbsttest (Exit >= 2) ist kein Inhaltsbefund, sondern
+          # ein Vertrauensbruch der Wache und stoppt den Lauf hart im Folgeschritt.
+          set +e
           python3 scripts/check_uniqueness.py | tee /tmp/update_uniqueness.txt
           code=${PIPESTATUS[0]}
-          if [ "$code" -ne 0 ]; then
-            echo "⚠ Uniqueness (nicht blockierend – Bestandsüberlappungen, siehe Report/Issue)"
-          fi
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+
+      - name: Audit-Sabotage-Schutz erzwingen
+        if: steps.uniqueness.outputs.exit_code != '0' && steps.uniqueness.outputs.exit_code != '1'
+        run: |
+          echo "🛑 Einzigartigkeits-Audit konnte sich nicht selbst beweisen (Exit ${{ steps.uniqueness.outputs.exit_code }})."
+          exit 2
+
+      # Ein Skript für Tages- UND Quartalslauf: Aktualisiert denselben
+      # kanonischen Vorgang mit vollem Log und schließt ihn beim nächsten
+      # grünen Produktionsbeweis. Das passiert VOR jeder nachgelagerten
+      # Netzarbeit; ein IndexNow-Fehler darf den redaktionellen Befund nicht
+      # unsichtbar machen. Arbeitsbranches dürfen niemals ein echtes
+      # Produktions-Issue schließen oder still überschreiben.
+      - name: Kritischen Bestandsbefund als einen Vorgang führen
+        if: steps.uniqueness.outputs.exit_code == '1' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          UNIQUE_PRODUCTION_REF: refs/heads/${{ github.event.repository.default_branch }}
+        run: python3 scripts/uniqueness_issue_sync.py --status critical --report /tmp/update_uniqueness.txt
+
+      - name: Erledigten Bestandsbefund automatisch schließen
+        if: steps.uniqueness.outputs.exit_code == '0' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          UNIQUE_PRODUCTION_REF: refs/heads/${{ github.event.repository.default_branch }}
+        run: python3 scripts/uniqueness_issue_sync.py --status clean
 
       - name: Meta-Daten der aktualisierten Artikel nachziehen
         env:
@@ -113,36 +137,5 @@ jobs:
               repo: context.repo.repo,
               title: '🔄 Artikel-Update fehlgeschlagen',
               body: '```\n' + details + '\n```\n\n---\nAutomatisch erstellt vom Quartals-Workflow.'
-            });
-            console.log('✅ Issue erstellt');
-
-      - name: Issue bei Bestandsüberlappungen erstellen (nicht blockierend, max. 1 offen)
-        if: steps.uniqueness.outputs.exit_code != '0'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const title = '📋 Einzigartigkeits-Audit: Bestandsüberlappungen gefunden';
-            const { data: open } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              per_page: 50,
-            });
-            if (open.some(i => i.title === title)) {
-              console.log('ℹ️ Es existiert bereits eine offene Meldung – keine neue erstellt.');
-              return;
-            }
-            let details = 'Einzigartigkeits-Gate meldete Bestandsüberlappungen.';
-            try { details = fs.readFileSync('/tmp/update_uniqueness.txt', 'utf-8'); } catch (e) {}
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title,
-              body: '```\n' + details + '\n```\n\n---\n' +
-                'Nicht blockierend: Commit, Deploy und IndexNow liefen trotzdem durch. ' +
-                'Betroffene Passagen bei Gelegenheit redaktionell umformulieren, dann ' +
-                '`python3 scripts/check_uniqueness.py` erneut laufen lassen. ' +
-                'Automatisch erstellt vom Quartals-Workflow (Einzigartigkeits-Gate).'
             });
             console.log('✅ Issue erstellt');

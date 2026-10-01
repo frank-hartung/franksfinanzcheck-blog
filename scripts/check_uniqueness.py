@@ -29,7 +29,7 @@ from itertools import combinations
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
-from post_utils import list_post_paths
+from post_utils import build_state, list_post_paths
 import template_boilerplate  # SSOT für deterministische Fazit-/FAQ-Bausteine (#251)
 PINTEREST_PLAN = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 
@@ -88,6 +88,16 @@ def clean_body(content):
 def ngrams(text, n):
     words = re.findall(r"\w+", norm(text))
     return set(" ".join(words[i:i + n]) for i in range(len(words) - n + 1))
+
+
+def audit_publication_state(content: str, now=None) -> tuple[bool, str]:
+    """Spiegelt für die Befundklasse exakt, ob Hugo die Seite ausliefert.
+
+    Diese kleine Naht ist absichtlich testbar: Ein `draft:`-Regex übersieht
+    Zukunfts- und Ablaufdaten; `post_utils.build_state` ist die gemeinsame
+    Hugo-Semantik der übrigen Publikationswachen.
+    """
+    return build_state(content, now=now)
 
 
 def _slug(path):
@@ -178,16 +188,17 @@ def same_day_twin(t_a: str, t_b: str) -> bool:
 #  BEFUND-KLASSEN (Issue #490, 01.10.2026)
 #  Ein Befund ist nur dann „kritisch", wenn er auch WIRKEN kann:
 #  Duplicate Content und Keyword-Kannibalisierung entstehen zwischen
-#  VERÖFFENTLICHTEN Seiten. Ein Entwurf (draft: true, buildDrafts=false)
-#  steht in keinem Index, hat keine URL und kann nichts kannibalisieren –
-#  er ist eine REDAKTIONELLE Aufgabe vor der Veröffentlichung, kein
-#  Bestandsschaden. Beides in einen Topf zu werfen hatte zwei Folgen:
+#  VERÖFFENTLICHTEN Seiten. Ein nicht auslieferbarer Artikel – Entwurf
+#  (draft: true), Zukunfts-Post (buildFuture=false) oder abgelaufene Seite
+#  (buildExpired=false) – steht in keinem aktuellen Index, hat keine
+#  öffentliche URL und kann nichts kannibalisieren. Er ist eine
+#  REDAKTIONELLE Aufgabe vor der Veröffentlichung, kein Bestandsschaden.
+#  Beides in einen Topf zu werfen hatte zwei Folgen:
 #    · Der Quartals-Report meldete 10 „kritische" Funde, von denen 3 nur
 #      Entwürfe betrafen – der Bestand war nie so beschädigt, wie das
 #      Ticket aussah (Alarm-Inflation, niemand arbeitet sie ab).
-#    · Umgekehrt verschwand die Entwurfs-Dopplung in derselben Liste,
-#      statt als eigene, VOR der Veröffentlichung fällige Aufgabe
-#      sichtbar zu sein.
+#    · Umgekehrt verschwand die Vorab-Dopplung in derselben Liste, statt als
+#      eigene, VOR der Veröffentlichung fällige Aufgabe sichtbar zu sein.
 #  Deshalb: eigene Klasse, eigener Abschnitt, eigene Zählung – und nur
 #  live↔live bestimmt den Exit-Code des Bestands-Audits.
 # ============================================================
@@ -199,7 +210,8 @@ def paar_klasse(overlap: int, a_draft: bool, b_draft: bool,
     """Klasse eines Artikelpaars: ok | unkritisch | entwurf | kritisch.
 
     overlap   Anzahl geteilter n-Gramme
-    a/b_draft ob der jeweilige Artikel ein Entwurf ist (draft: true)
+    a/b_draft ob der jeweilige Artikel derzeit nicht auslieferbar ist
+              (Entwurf, Zukunfts-Post oder abgelaufen)
     max_sim   Toleranz für Standard-Formulierungen
     """
     if overlap <= max_sim:
@@ -409,15 +421,22 @@ def main():
 
     articles = {}
     titles = {}
-    drafts = set()
+    # Hugo liefert nicht nur `draft: true` nicht aus: Auch Zukunfts- und
+    # abgelaufene Seiten haben unter buildDrafts/buildFuture/buildExpired=false
+    # keine öffentliche URL. Für einen Bestandsbefund zählt deshalb exakt die
+    # gemeinsame Hugo-Semantik aus post_utils.build_state(), nicht ein einzelner
+    # Regex auf `draft:`. Solche Vorab-Fälle bleiben sichtbar, aber sie färben
+    # den Live-Bestand nicht rot.
+    not_live = {}
     dates = {}
     for path in list_post_paths():
         content = open(path, encoding="utf-8").read()
         m = re.search(r'^title:\s*["\']?(.+?)["\']?\s*$', content, re.M)
         titles[path] = m.group(1) if m else path
         articles[path] = clean_body(content)
-        if re.search(r'(?m)^draft:\s*true', content):
-            drafts.add(path)
+        visible, reason = audit_publication_state(content)
+        if not visible:
+            not_live[path] = reason
         dm = re.search(r'(?m)^date:\s*["\']?([0-9T:\-]+)', content)
         dates[path] = dm.group(1) if dm else ""
 
@@ -429,7 +448,7 @@ def main():
     for fn in articles:
         base = os.path.basename(os.path.dirname(fn))
         dm = re.match(r"(20\d\d-\d\d-\d\d)", base)
-        if dm and fn not in drafts:
+        if dm and fn not in not_live:
             by_day.setdefault(dm.group(1), []).append(fn)
     for day, fns in sorted(by_day.items()):
         for a, b in combinations(sorted(fns), 2):
@@ -445,7 +464,10 @@ def main():
                         print(f"               ⏸️ kein Auto-Draft für "
                               f"{os.path.basename(os.path.dirname(loser))}: {schutz}")
                     elif heal_twin(loser):
-                        drafts.add(loser)
+                        # Das Dokument ist gerade zu draft:true geworden und
+                        # darf im anschließenden Bestandsvergleich nicht mehr
+                        # als auslieferbar gelten.
+                        not_live[loser] = "Draft (Same-Day-Twin-Heilung)"
                         healed.append(os.path.basename(os.path.dirname(loser)))
                         print(f"               🛠️ geheilt: Zweitling {os.path.basename(os.path.dirname(loser))} → draft:true")
     if not same_crit:
@@ -490,7 +512,7 @@ def main():
     entwuerfe = []
     for a, b in combinations(names, 2):
         overlap = len(grams[a] & grams[b])
-        klasse = paar_klasse(overlap, a in drafts, b in drafts, max_sim)
+        klasse = paar_klasse(overlap, a in not_live, b in not_live, max_sim)
         if klasse == "ok":
             continue
         internal += 1
@@ -514,25 +536,27 @@ def main():
         print(f"  (davon kritisch: {critical} – unter {KRITISCH_AB} Phrasen ist "
               f"normal und kein Duplicate Content)")
 
-    # Entwürfe: eigene Liste, eigene Verantwortung (owner: human). Sie stehen
-    # in keinem Index – der Bestand ist davon nicht beschädigt –, dürfen aber
+    # Nicht auslieferbare Seiten: eigene Liste, eigene Verantwortung (owner:
+    # human). Entwürfe, Zukunfts- und abgelaufene Seiten stehen in keinem
+    # aktuellen Index – der Bestand ist davon nicht beschädigt –, dürfen aber
     # nicht unverändert live gehen. Deshalb benannt, nicht stillgeschwiegen.
-    print("\n=== 2b) Entwürfe mit Überlappung (nicht veröffentlicht) ===")
+    print("\n=== 2b) Nicht veröffentlichte Artikel mit Überlappung ===")
     if not entwuerfe:
-        print("  ✅ Kein Entwurf überlappt kritisch mit dem Bestand")
+        print("  ✅ Kein nicht veröffentlichter Artikel überlappt kritisch mit dem Bestand")
     else:
+        def mark(path):
+            return _slug(path) + (f" [{not_live[path]}]" if path in not_live else " [live]")
         for a, b, overlap in entwuerfe:
-            mark = lambda p: _slug(p) + (" [Entwurf]" if p in drafts else " [live]")  # noqa: E731
             print(f"  📝 {mark(a)} ↔ {mark(b)}: {overlap} gleiche "
                   f"{n}-Wort-Phrasen")
             for gram in sorted(grams[a] & grams[b])[:5]:
                 print(f"       · {gram}")
-        print(f"  ({len(entwuerfe)} Entwurfs-Paar(e) – vor der Veröffentlichung "
+        print(f"  ({len(entwuerfe)} Nicht-Live-Paar(e) – vor der Veröffentlichung "
               f"umschreiben oder zusammenführen; blockiert den Bestand nicht)")
 
     same_open = same_crit - len(healed)
     print(f"\nErgebnis: Pin-Konflikte: {pin_problems} | Interne Überlappungen: "
-          f"{internal} | Kritisch (live↔live): {critical} | Entwurfs-Paare: "
+          f"{internal} | Kritisch (live↔live): {critical} | Nicht-Live-Paare: "
           f"{len(entwuerfe)} | Same-Day-Twins: {same_crit} (geheilt: {len(healed)})")
 
     # Exit-Code für CI/Automatisierung:
