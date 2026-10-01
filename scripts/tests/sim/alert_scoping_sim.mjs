@@ -14,6 +14,23 @@
 // Der Test-Haken läuft in CI über scripts/tests/test_alert_scoping.py
 // (unittest discover; GitHub-Runner bringen node mit).
 import fs from 'fs';
+import { createRequire } from 'module';
+
+// github-script stellt dem Skript ein CommonJS-`require` bereit; dieses
+// Harness ist ein ES-Modul und muss es deshalb nachbilden – sonst prüfte
+// die Simulation eine Umgebung, die es in der Produktion nicht gibt.
+const requireShim = createRequire(import.meta.url);
+
+// Identität der Meldung (Marker + markenneutraler Titel) kommt aus derselben
+// Quelle wie in der Produktion: scripts/alert_issue_identity.py schreibt die
+// JSON-Datei, deren Pfad der Test über ALARM_IDENTITAET setzt (Marken-Oberfläche
+// #496). Ein Test mit eigener Namensgebung würde die echte Zusage nicht prüfen.
+const identPfad = process.env.ALARM_IDENTITAET;
+if (!identPfad) {
+  console.error('ALARM_IDENTITAET fehlt – die Simulation braucht die echte Identitäts-Quelle.');
+  process.exit(2);
+}
+const IDENT = JSON.parse(fs.readFileSync(identPfad, 'utf8'));
 
 const scriptPath = process.argv[2];
 if (!scriptPath) {
@@ -24,6 +41,7 @@ const raw = fs.readFileSync(scriptPath, 'utf8');
 
 function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = null, jobsFail = false, openIssues = [] }) {
   const created = [];
+  const updated = [];
   const github = {
     paginate: async (method) => {
       if (method === 'LIST_JOBS') {
@@ -39,6 +57,7 @@ function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = nu
         listForRepo: 'LIST_ISSUES',
         createLabel: async () => { throw new Error('Label existiert bereits'); },
         create: async (o) => { created.push(o); },
+        update: async (o) => { updated.push(o); },
       },
     },
   };
@@ -53,35 +72,50 @@ function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = nu
       },
     },
   };
-  return { github, context, created };
+  return { github, context, created, updated };
 }
 
 let failed = 0;
 let count = 0;
 
-async function run(name, cfg, expectIssue, expectInBody = []) {
+async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = null) {
   count++;
-  const { github, context, created } = makeCtx(cfg);
+  const { github, context, created, updated } = makeCtx(cfg);
   const logs = [];
   // github-script führt den `script:`-Block als async-Funktionsrumpf aus –
   // genau das wird hier nachgebildet (return auf oberster Ebene ist dort legal).
-  const fn = new Function('github', 'context', 'console', 'return (async () => {' + raw + '\n})()');
-  await fn(github, context, { log: (m) => logs.push(String(m)) });
+  const fn = new Function('github', 'context', 'console', 'require', 'process',
+    'return (async () => {' + raw + '\n})()');
+  await fn(github, context, { log: (m) => logs.push(String(m)) }, requireShim, process);
   const got = created.length > 0;
   const body = created[0] ? created[0].body : '';
   const title = created[0] ? created[0].title : '';
   let ok = got === expectIssue;
   if (ok && expectIssue) {
-    ok = title === '⚠️ Workflow fehlgeschlagen: Layout-AI (' + cfg.conclusion + ')';
+    // Markenfläche: der Titel nennt weder Workflow noch „fehlgeschlagen“;
+    // die Identität steckt unsichtbar als Marker im Body.
+    ok = title === IDENT.titel;
+    if (!body.includes(IDENT.marker)) ok = false;
+    if (/fehlgeschlagen|Layout-AI/.test(title)) ok = false;
     for (const needle of expectInBody) if (!body.includes(needle)) ok = false;
     if (created[0].labels && JSON.stringify(created[0].labels) !== JSON.stringify(['auto-report'])) ok = false;
+  }
+  if (ok && expectUpdates !== null) {
+    ok = updated.length === expectUpdates.anzahl;
+    if (ok && expectUpdates.anzahl > 0) {
+      ok = updated[0].issue_number === expectUpdates.nummer &&
+           updated[0].title === IDENT.titel &&
+           String(updated[0].body).includes(IDENT.marker);
+    }
   }
   console.log((ok ? '✅' : '❌') + ' ' + name + (got ? ' → Issue' : ' → kein Issue') +
     (logs[0] ? ' | ' + logs[0].slice(0, 95) : ''));
   if (!ok) {
     failed++;
-    console.log('   ERWARTET: ' + (expectIssue ? 'Issue mit: ' + expectInBody.join(' / ') : 'KEIN Issue'));
+    console.log('   ERWARTET: ' + (expectIssue ? 'Issue „' + IDENT.titel + '“ mit: ' + expectInBody.join(' / ') : 'KEIN Issue'));
+    console.log('   TITEL: ' + title);
     console.log('   BODY: ' + body.slice(0, 400));
+    console.log('   UPDATES: ' + JSON.stringify(updated).slice(0, 300));
   }
 }
 
@@ -118,13 +152,30 @@ await run('echter Abbruch main (cancelled, Schritte liefen) → Alarm',
              steps: [{ name: 'Build', conclusion: 'success' },
                      { name: 'Upload', conclusion: 'cancelled' }] }] },
   true, ['**Versuch:** 2', 'Upload']);
-// 8. Dedupe: offenes Issue desselben Workflows → kein Duplikat
-await run('Dedupe: offenes Layout-AI-Issue existiert → kein Duplikat',
+// 8. Dedupe über den ALT-TITEL (Übergangszeit) → kein Duplikat, aber stille
+//    Migration auf den markenneutralen Titel samt Marker.
+await run('Dedupe: offene Alt-Meldung existiert → kein Duplikat, Titel wird migriert',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
-    openIssues: [{ number: 99, title: '⚠️ Workflow fehlgeschlagen: Layout-AI (failure)' }] }, false);
+    openIssues: [{ number: 99, title: '⚠️ Workflow fehlgeschlagen: Layout-AI (failure)',
+                   body: 'alter Text ohne Marker' }] },
+  false, [], { anzahl: 1, nummer: 99 });
 // 9. Fail-open: Job-API tot bei main-Fehler → Alarm trotzdem (ohne Diagnose)
 await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
+  true, ['Häufigste Ursachen']);
+
+// 10. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
+//     und auch keine überflüssige Umbenennung.
+await run('Dedupe: offene Meldung mit Marker → kein Duplikat, keine Umschrift',
+  { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
+    openIssues: [{ number: 100, title: IDENT.titel, body: IDENT.marker + '\nDetails' }] },
+  false, [], { anzahl: 0 });
+// 11. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
+//     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
+await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entsteht',
+  { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
+    openIssues: [{ number: 101, title: '🔧 Wartung · Newsletter · Vorgang WF-0000',
+                   body: '<!-- alert-key: WF-0000 -->' }] },
   true, ['Häufigste Ursachen']);
 
 console.log(failed === 0

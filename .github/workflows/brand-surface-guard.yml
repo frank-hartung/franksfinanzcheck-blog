@@ -42,6 +42,21 @@ on:
     - cron: "20 4 * * *"
   release:
     types: [published, edited]
+  # Rückfall-Sperre (01.10.2026): Betriebssprache gelangte über einen
+  # README-Commit zurück auf die Markenfläche – der Tageslauf meldete das
+  # erst Stunden später und 5 Nächte in Folge rot. Jetzt schlägt die Prüfung
+  # schon beim Commit an, offline und ohne Schreibrechte.
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "data/brand_surface_allowlist.txt"
+      - "scripts/brand_surface_guard.py"
+  pull_request:
+    paths:
+      - "README.md"
+      - "data/brand_surface_allowlist.txt"
+      - "scripts/brand_surface_guard.py"
   workflow_dispatch:
     inputs:
       modus:
@@ -54,15 +69,21 @@ permissions:
   contents: write
 
 concurrency:
-  group: brand-surface-guard
+  group: brand-surface-guard-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  oberflaeche:
+  # ----------------------------------------------------------------
+  #  Rückfall-Sperre: prüft nur die lokale Markenfläche (README),
+  #  ohne Netz und ohne Schreibzugriff – läuft bei jedem Commit, der
+  #  README, Allowlist oder die Wache selbst berührt.
+  # ----------------------------------------------------------------
+  markenflaeche:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      GH_TOKEN: ${{ github.token }}
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -70,7 +91,51 @@ jobs:
       - name: Selbsttest der Wache (blind wäre schlimmer als keine)
         run: python3 scripts/brand_surface_guard.py --selftest
 
+      - name: README als Markenfläche prüfen (offline, schreibgeschützt)
+        run: |
+          set -euo pipefail
+          python3 scripts/brand_surface_guard.py --only readme --gate --offline || {
+            echo "::error::Betriebssprache im README – technische Abschnitte gehören nach docs/ENTWICKLER-WERKZEUGE.md (Ausnahmen mit Begründung in data/brand_surface_allowlist.txt)."
+            exit 1
+          }
+
+  oberflaeche:
+    if: github.event_name != 'push' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write   # Releases/Tags heilen
+      issues: write     # O6: Alt-Titel der Fehlermeldungen neutral nachziehen
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      # ----------------------------------------------------------------
+      #  O6 – Markenfläche „öffentliche Issue-Titel" (Issue #496):
+      #  Neue Meldungen tragen bereits markenneutrale Titel
+      #  (scripts/alert_issue_identity.py). Meldungen aus der Zeit davor
+      #  werden hier täglich nachgezogen – mit Nachprüfung, und ohne die
+      #  Identität zu verlieren (der Marker wandert mit in den Body).
+      # ----------------------------------------------------------------
+      - name: Selbsttest der Namensgebung (Alarm-Identität)
+        run: python3 scripts/alert_issue_identity.py --selftest
+
+      - name: Alt-Titel offener Fehlermeldungen neutral nachziehen
+        run: python3 scripts/alert_issue_identity.py --migrate --apply
+
+      - name: Selbsttest der Wache (blind wäre schlimmer als keine)
+        run: python3 scripts/brand_surface_guard.py --selftest
+
       - name: Befund über alle öffentlichen Flächen (mit Nachprüfung)
+        env:
+          # Optionales Verwaltungs-Token (fein granuliert, nur „Administration:
+          # read & write" + „Metadata: read"). Ist es hinterlegt, zieht die Wache
+          # auch Beschreibung, Homepage und Wiki selbst auf den Markenstand;
+          # fehlt es, bleibt das wie bisher eine GELB-Meldung mit Befehl.
+          # Anleitung: docs/MARKEN-OBERFLAECHE-RUNBOOK.md, Abschnitt 3.
+          BRAND_ADMIN_TOKEN: ${{ secrets.BRAND_ADMIN_TOKEN }}
         run: |
           set -euo pipefail
           MODUS="${{ inputs.modus }}"
@@ -78,6 +143,6 @@ jobs:
             echo "Modus: nur prüfen (kein Schreibzugriff)"
             python3 scripts/brand_surface_guard.py --gate
           else
-            echo "Modus: heilen (öffentliche Backups → Entwurf, danach Nachprüfung)"
-            python3 scripts/brand_surface_guard.py --fix
+            echo "Modus: heilen (öffentliche Backups → Entwurf, Repo-Kopf auf Markenstand, danach Nachprüfung)"
+            python3 scripts/brand_surface_guard.py --fix --fix-repo
           fi

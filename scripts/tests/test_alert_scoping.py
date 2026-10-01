@@ -15,9 +15,17 @@ dass die Regeln nicht still zurückgebaut werden:
   2. PROD-SCOPING RESOLVE: Der resolve-Job schließt Alarme nur bei Grün
      AUF DEM DEFAULT-BRANCH (symmetrische Regel; ein grüner Zweig-Lauf
      ist kein Produktionsbeweis – genau so wurde #343 falschgeschlossen).
-  3. TITEL-VERTRAG: „⚠️ Workflow fehlgeschlagen: <name> (<conclusion>)"
-     + Label auto-report bleiben byte-stabil – resolve-Job, Aufräum-
-     Workflow (cleanup_issues.sh) und Herzschlag-Tests parsen darauf.
+  3. IDENTITÄTS-VERTRAG (neu seit 01.10.2026, Marken-Oberfläche #496):
+     Issue-Titel sind eine öffentliche, indexierte Markenfläche. Der
+     Titel ist deshalb markenneutral („🔧 Wartung · <Bereich> ·
+     Vorgang WF-XXXX") und taugt NICHT mehr als Schlüssel; die
+     Identität ist der unsichtbare Marker im Body
+     (<!-- alert-key: WF-XXXX -->) aus scripts/alert_issue_identity.py.
+     Diese Datei bewacht: Anlegen und Auto-Close benutzen denselben
+     Marker, die Alt-Titel-Erkennung bleibt bis zum Abklingen stehen
+     (sonst Doppel-Issues bzw. ewig offene Meldungen), Label
+     auto-report bleibt byte-stabil, und der erzeugte Titel enthält
+     keine Betriebssprache (geprüft mit der Marken-Wache selbst).
   4. WACHT-LISTEN-VERTRAG: on.workflow_run.workflows + types: [completed]
      bleiben lesbar für alerting_heartbeat.gelistete_workflows (SSOT des
      Alerting-Herzschlags; Handkopien sind die Fehlerklasse vom 18.09.).
@@ -41,7 +49,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 YAML_PATH = REPO / ".github" / "workflows" / "alert-on-failure.yml"
 
-TITEL_PRÄFIX = "⚠️ Workflow fehlgeschlagen: "
+TITEL_PRÄFIX = "⚠️ Workflow fehlgeschlagen: "   # Alt-Form: nur noch Übergangs-Erkennung
 
 
 def _text() -> str:
@@ -85,7 +93,12 @@ class ProdScopingAlarm(unittest.TestCase):
     def test_dedupe_und_phantomfilter_bleiben(self):
         # Bestandszusagen (Issue #218) dürfen durch das Scoping nicht fallen.
         self.assertIn("Verdrängter Wartelauf", self.code)
-        self.assertRegex(self.code, r"indexOf\('Workflow fehlgeschlagen: '")
+        # Dedupe läuft jetzt über den Marker (Identität) …
+        self.assertIn("ident.marker", self.code)
+        # … und erkennt die Alt-Titel weiter, solange Meldungen von vorher
+        # offen stehen können – ohne diesen Pfad gäbe es Doppel-Issues.
+        self.assertRegex(self.code, r"indexOf\(altTitel\)")
+        self.assertRegex(self.code, r"'Workflow fehlgeschlagen: '")
 
     def test_diagnose_fehlgeschlagene_schritte(self):
         # Vertrag 5: Der Alarm benennt die roten Jobs/Schritte im Issue.
@@ -135,20 +148,59 @@ class ProdScopingResolve(unittest.TestCase):
 
 
 class TitelUndLabelVertrag(unittest.TestCase):
-    """Vertrag 3: Titel/Label bleiben parse-stabil für resolve + cleanup."""
+    """Vertrag 3: Identität = Marker, Titel = Markenfläche."""
 
-    def test_titel_format(self):
+    def test_titel_kommt_aus_der_identitaets_quelle(self):
         code = _kommentarfrei(_text())
-        self.assertIn("title: '" + TITEL_PRÄFIX + "' + wfName + ' (' + conclusion + ')'", code)
+        self.assertIn("title: ident.titel", code)
+        # Der Alt-Titel darf nur noch ERKANNT (altTitel, Übergang), nie mehr
+        # GESCHRIEBEN werden – sonst stünde Betriebssprache wieder im Index.
+        self.assertNotIn("title: '" + TITEL_PRÄFIX, code,
+                         "Alt-Titel darf nicht mehr erzeugt werden (Markenfläche #496)")
+        self.assertNotRegex(code, r"title:\s*'[^']*fehlgeschlagen")
+        self.assertIn("alert_issue_identity.py", _text())
+
+    def test_marker_steht_im_body(self):
+        code = _kommentarfrei(_text())
+        pos_marker = code.find("ident.marker")
+        pos_create = code.find("issues.create({")
+        self.assertGreater(pos_marker, -1, "Marker fehlt – die Meldung hätte keine Identität")
+        self.assertLess(pos_marker, pos_create,
+                        "Der Marker muss im Body stehen, bevor die Meldung erzeugt wird")
+
+    def test_erzeugter_titel_ist_markenfrei(self):
+        """Der Titel wird mit der Marken-Wache selbst geprüft – derselbe
+        Detektor, der den Befund O6 erhoben hat (kein zweiter Maßstab)."""
+        import alert_issue_identity as ident
+        import brand_surface_guard as wache
+        namen = ident.wacht_liste()
+        self.assertGreaterEqual(len(namen), 35, "Wacht-Liste nicht lesbar")
+        for name in namen:
+            funde = wache.pruefe_text(ident.titel(name), "titel",
+                                      "O6 Öffentliche Issue-Titel", [])
+            self.assertEqual(funde, [], f"Betriebssprache im Titel für „{name}“")
+
+    def test_codes_sind_eindeutig(self):
+        import alert_issue_identity as ident
+        namen = ident.wacht_liste()
+        codes = [ident.code(n) for n in namen]
+        self.assertEqual(len(codes), len(set(codes)),
+                         "Code-Kollision – zwei Workflows teilten sich eine Identität")
 
     def test_auto_report_label(self):
         code = _kommentarfrei(_text())
         self.assertIn("labels: ['auto-report']", code)
         self.assertIn("createLabel", code)  # Label-Garantie (C12-Klasse)
 
-    def test_resolve_parse_titel_startswith(self):
-        # Der resolve-Job muss denselben Präfix per startswith matchen.
-        self.assertIn('startswith("' + TITEL_PRÄFIX + '" + $w)', _text())
+    def test_resolve_schliesst_ueber_marker_und_alt_titel(self):
+        """Symmetrie-Zusage: Was über den Marker angelegt wird, muss auch
+        über den Marker schließen – sonst bleibt jede Meldung ewig offen.
+        Der Alt-Titel-Pfad bleibt für Meldungen aus der Zeit davor."""
+        roh = _text()
+        self.assertIn("alert_issue_identity.py --workflow", roh)
+        self.assertIn('contains($m)', roh)
+        self.assertIn('startswith($t)', roh)
+        self.assertIn(TITEL_PRÄFIX, roh)
 
 
 class VerhaltensSimulation(unittest.TestCase):
@@ -172,18 +224,36 @@ class VerhaltensSimulation(unittest.TestCase):
             self.skipTest("PyYAML lokal nicht installiert (CI installiert es)")
 
         daten = yaml.safe_load(_text())
-        skript = daten["jobs"]["alarm"]["steps"][0]["with"]["script"]
+        # Den github-script-Schritt suchen statt auf eine Position zu wetten:
+        # vor ihm stehen Checkout, Selbsttest und Identitäts-Schritt.
+        schritte = daten["jobs"]["alarm"]["steps"]
+        kandidaten = [s for s in schritte if "github-script" in str(s.get("uses", ""))]
+        self.assertEqual(len(kandidaten), 1,
+                         "genau ein github-script-Schritt im alarm-Job erwartet")
+        skript = kandidaten[0]["with"]["script"]
         harness = REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs"
         self.assertTrue(harness.exists(), f"Simulations-Harness fehlt: {harness}")
         with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False,
                                          encoding="utf-8") as tmp:
             tmp.write(skript)
             tmp_path = tmp.name
+        # Identität aus der ECHTEN Quelle erzeugen (wie der Lauf es tut):
+        # die Simulation darf keine eigene Namensgebung erfinden.
+        import json
+        import os
+        import alert_issue_identity as ident_modul
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
+                                         encoding="utf-8") as idf:
+            json.dump(ident_modul.identitaet("Layout-AI"), idf, ensure_ascii=False)
+            ident_pfad = idf.name
+        umgebung = dict(os.environ, ALARM_IDENTITAET=ident_pfad)
         try:
             proc = subprocess.run([node, str(harness), tmp_path],
-                                  capture_output=True, text=True, timeout=120)
+                                  capture_output=True, text=True, timeout=120,
+                                  env=umgebung)
         finally:
             Path(tmp_path).unlink(missing_ok=True)
+            Path(ident_pfad).unlink(missing_ok=True)
         self.assertEqual(proc.returncode, 0,
                          "Verhaltens-Simulation fehlgeschlagen:\n" + proc.stdout + proc.stderr)
         self.assertIn("Szenarien korrekt", proc.stdout)

@@ -41,6 +41,24 @@
 #  Name „Fehler-Alerting") bleibt unangetastet – der Alerting-
 #  Herzschlag (alerting_heartbeat.py) liest ihn aus dieser Datei.
 #
+#  MARKENNEUTRALE TITEL (01.10.2026, Folge von Issue #496):
+#    Offene Issue-Titel sind eine öffentliche, indexierte Markenfläche.
+#    „⚠️ Workflow fehlgeschlagen: KI-Redaktion (failure)" erzählte bei
+#    einer Markensuche die Betriebsgeschichte – die Marken-Wache meldete
+#    das zu Recht als GELB (O6). Der Titel war aber zugleich die
+#    IDENTITÄT der Meldung (Dedupe hier, Auto-Close unten, Aufräumlauf).
+#    Deshalb wurde beides getrennt:
+#      · IDENTITÄT = unsichtbarer Marker im Body (<!-- alert-key: WF-XXXX -->)
+#        plus Label `auto-report` – vergeben von scripts/alert_issue_identity.py
+#        (eine Quelle der Wahrheit, mit Selbsttest über die Wacht-Liste).
+#      · TITEL     = „🔧 Wartung · <Bereich> · Vorgang WF-XXXX" – ohne
+#        Workflow-Name, ohne „fehlgeschlagen", für Frank trotzdem
+#        einsortierbar. Zuordnung jederzeit:
+#        `python3 scripts/alert_issue_identity.py --tabelle`
+#    Alt-Titel bleiben während der Übergangszeit erkannt (Dedupe und
+#    Auto-Close greifen auf beiden Formen) und werden bei jedem Lauf
+#    still auf die neue Form migriert – kein Issue fällt durchs Raster.
+#
 #  BEWUSST NICHT ÜBERWACHT:
 #    - "Fehler-Alerting" selbst (kann sich nicht selbst beobachten)
 #    - "Textverständnis-Patches einspielen (einmalig)" (Einmal-Aktion)
@@ -115,6 +133,7 @@ on:
       - completed
 
 permissions:
+  contents: read  # Checkout der Identitäts-Quelle (scripts/alert_issue_identity.py)
   issues: write
   actions: read   # Issue #218: Jobs/Schritte eines Runs lesen, um verdrängte Läufe zu erkennen
 
@@ -127,6 +146,20 @@ jobs:
           github.event.workflow_run.conclusion == 'timed_out' ||
           github.event.workflow_run.conclusion == 'cancelled' }}
     steps:
+      - name: Repository auschecken (Identitäts-Quelle)
+        uses: actions/checkout@v4
+
+      - name: Selbsttest der Namensgebung (ein blinder Namensgeber wäre schlimmer)
+        run: python3 scripts/alert_issue_identity.py --selftest
+
+      - name: Markenneutrale Identität der Meldung bestimmen
+        env:
+          WF_NAME: ${{ github.event.workflow_run.name }}
+        run: |
+          set -euo pipefail
+          python3 scripts/alert_issue_identity.py --workflow "$WF_NAME" --json > /tmp/alarm-identitaet.json
+          cat /tmp/alarm-identitaet.json
+
       - name: Issue bei fehlgeschlagenem Workflow erstellen
         # v7 – unveränderlich gepinnt (Supply-Chain-Schutz)
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
@@ -242,13 +275,47 @@ jobs:
               state: 'open',
               per_page: 100
             });
-            const open = existing.filter(i => i.title && i.title.indexOf('Workflow fehlgeschlagen: ' + wfName) !== -1 && !i.pull_request);
+            // ================================================================
+            //  IDENTITÄT: Marker statt Titel (Marken-Oberfläche #496)
+            //  Der Titel ist jetzt markenneutral und taugt nicht mehr als
+            //  Schlüssel. Erkannt wird an (a) dem unsichtbaren Marker im Body
+            //  und (b) – für Meldungen aus der Zeit davor – am Alt-Titel.
+            //  Fällt (b) weg, bevor alle Alt-Meldungen geschlossen sind,
+            //  entstünden Doppel-Issues; deshalb bleibt es bis dahin stehen.
+            // ================================================================
+            // Pfad über die Umgebung, damit die Verhaltens-Simulation
+            // (scripts/tests/sim/alert_scoping_sim.mjs) dieselbe Identitäts-
+            // Quelle einspielen kann wie der echte Lauf – ein Test, der eine
+            // andere Namensgebung benutzt als die Produktion, prüft nichts.
+            const identPfad = process.env.ALARM_IDENTITAET || '/tmp/alarm-identitaet.json';
+            const ident = JSON.parse(require('fs').readFileSync(identPfad, 'utf8'));
+            const altTitel = 'Workflow fehlgeschlagen: ' + wfName;
+            const open = existing.filter(i => !i.pull_request && (
+              (i.body && i.body.indexOf(ident.marker) !== -1) ||
+              (i.title && i.title.indexOf(altTitel) !== -1)
+            ));
             if (open.length > 0) {
-              console.log('Offenes Issue existiert bereits (#' + open[0].number + ') – kein Duplikat.');
+              const treffer = open[0];
+              console.log('Offenes Issue existiert bereits (#' + treffer.number + ') – kein Duplikat.');
+              // Still migrieren: Alt-Meldung bekommt den neutralen Titel und den
+              // Marker, damit der nächste Lauf sie ohne Titel-Vergleich findet.
+              if (!treffer.body || treffer.body.indexOf(ident.marker) === -1) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: treffer.number,
+                  title: ident.titel,
+                  body: ident.marker + '\n' + (treffer.body || '')
+                });
+                console.log('↻ Alt-Meldung #' + treffer.number + ' auf markenneutralen Titel migriert.');
+              }
               return;
             }
 
             const lines = [
+              ident.marker,
+              '> Vorgang **' + ident.code + '** · Bereich *' + ident.bereich + '* · Zuordnung: ' +
+                '`python3 scripts/alert_issue_identity.py --tabelle`',
+              '',
               '## ' + wfName + ' ist fehlgeschlagen (' + conclusion + ')',
               '',
               '- **Workflow:** ' + wfName,
@@ -295,11 +362,11 @@ jobs:
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '⚠️ Workflow fehlgeschlagen: ' + wfName + ' (' + conclusion + ')',
+              title: ident.titel,
               body: body,
               labels: ['auto-report']
             });
-            console.log('✅ Issue erstellt für ' + wfName);
+            console.log('✅ Meldung erstellt: ' + ident.titel + ' (' + wfName + ')');
 
   # ------------------------------------------------------------
   #  AUTO-CLOSE: Behobene Fehlermeldungen automatisch schließen
@@ -324,20 +391,41 @@ jobs:
           github.event.workflow_run.head_branch == (github.event.repository.default_branch || 'main') &&
           github.event.workflow_run.event != 'pull_request' }}
     steps:
-      - name: Behobene Fehlermeldung schließen
+      - name: Repository auschecken (Identitäts-Quelle)
+        uses: actions/checkout@v4
+
+      - name: Behobene Fehlermeldung schließen (Marker-Identität, Alt-Titel inbegriffen)
         env:
           GH_TOKEN: ${{ github.token }}
+          WF_NAME: ${{ github.event.workflow_run.name }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
-          WF_NAME="${{ github.event.workflow_run.name }}"
-          RUN_URL="${{ github.event.workflow_run.html_url }}"
-          RUN_BRANCH="${{ github.event.workflow_run.head_branch }}"
+          set -euo pipefail
 
-          for n in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-            --label auto-report --json number,title \
-            | jq -r --arg w "$WF_NAME" \
-            '.[] | select(.title | startswith("⚠️ Workflow fehlgeschlagen: " + $w)) | .number'); do
+          # Identität aus derselben Quelle wie beim Anlegen – ein zweiter,
+          # abweichender Namensgeber wäre die klassische Stelle, an der
+          # Meldungen für immer offen stehen bleiben.
+          MARKER="$(python3 scripts/alert_issue_identity.py --workflow "$WF_NAME" --json | jq -r .marker)"
+          ALT_TITEL="⚠️ Workflow fehlgeschlagen: ${WF_NAME}"
+          echo "Schlüssel: ${MARKER} · Übergangsform: ${ALT_TITEL}"
+
+          # Body UND Titel prüfen: Marker (neu) oder Alt-Titel (Übergang).
+          # Ohne den Alt-Pfad bliebe jede vor der Umstellung erzeugte Meldung
+          # für immer offen – genau der Fehler, den diese Umstellung vermeiden soll.
+          NUMMERN="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label auto-report --limit 200 --json number,title,body \
+            | jq -r --arg m "$MARKER" --arg t "$ALT_TITEL" \
+              '.[] | select((.body // "" | contains($m)) or (.title // "" | startswith($t))) | .number')"
+
+          if [ -z "$NUMMERN" ]; then
+            echo "Keine offene Meldung zu diesem Vorgang – nichts zu schließen."
+            exit 0
+          fi
+
+          for n in $NUMMERN; do
             gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
-              --comment "✅ Behoben: \`${WF_NAME}\` läuft wieder fehlerfrei auf \`${RUN_BRANCH}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+              --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
             echo "→ Issue #$n geschlossen."
           done
           echo "Auto-Close-Prüfung abgeschlossen."
