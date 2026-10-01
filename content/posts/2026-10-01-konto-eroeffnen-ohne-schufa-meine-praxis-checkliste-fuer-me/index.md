@@ -29,6 +29,8 @@ Ein Konto ohne Schufa zu bekommen, klingt nach Wunschtraum – doch du kannst es
 Im letzten Jahr habe ich den Prozess durchlaufen und dabei monatlich bis zu 15 € gespart.  
 Hier zeige ich dir, welche Schritte funktionieren und welche Fallen du meiden solltest.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**  
 - Ein Konto ohne Schufa gibt es bei vielen Direktbanken und FinTechs.
 - Monatliche Gebühren liegen meist zwischen 5 € und 15 €, oft kostenlos bei Mindestgeldeingang.
