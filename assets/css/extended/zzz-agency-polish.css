@@ -3235,6 +3235,7 @@ details.toc a {
 }
 
 @media (max-width: 600px) {
+  main.main:has(.home-info) > section.ff-kompass { order: 5; }
   .ff-kompass { margin: 32px 0; padding: 20px 18px; }
   .ff-kompass__steps { grid-template-columns: 1fr; gap: 9px; margin-top: 20px; }
   .ff-kompass__step { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; min-height: 0; padding: 15px; }
