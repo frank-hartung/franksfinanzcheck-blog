@@ -1,0 +1,144 @@
+/* ============================================================
+   BEWEISSYSTEM v1 (01.10.2026) – Belege sichtbar machen
+   Komponenten: .ff-beleg  (Quelle direkt an der Zahl)
+                .ff-bw     (einzelner Beweis-Kasten)
+                .ff-bwreg  (Beweis-Register-Übersicht)
+                .ff-vm     (Vergleichsmethodik je Bereich)
+                .ff-chg    (öffentliches Änderungsprotokoll)
+   Farben ausschließlich aus den Marken-Tokens (DESIGN.md §1);
+   Belegklassen: A amtlich = Smaragd, M markt = Signal-Amber,
+   E erfahrung = Tinte. Dark Mode über Tokens + Overrides unten.
+   Runbook: docs/ANLEITUNG-BEWEISSYSTEM.md
+   ============================================================ */
+
+/* ---------- Beleg-Chip an der Zahl ---------- */
+.ff-beleg{font-size:.68em;line-height:1;vertical-align:super}
+.ff-beleg__link{display:inline-flex;align-items:center;gap:.28em;padding:.14em .5em .14em .14em;border:1px solid var(--border);border-radius:999px;background:var(--entry);color:var(--secondary);text-decoration:none;white-space:nowrap;transition:border-color .15s ease,color .15s ease}
+.ff-beleg__link:hover,.ff-beleg__link:focus-visible{border-color:var(--ff-green,#1f6f5c);color:var(--primary)}
+.ff-beleg__link:focus-visible{outline:2px solid var(--ff-accent,#ffb300);outline-offset:2px}
+.ff-beleg__mark{display:inline-flex;align-items:center;justify-content:center;width:1.45em;height:1.45em;border-radius:50%;font-weight:800;font-style:normal;color:#fff;background:var(--ff-green-2,#0e5a43)}
+.ff-beleg--markt .ff-beleg__mark{background:#8a5a00}
+.ff-beleg--erfahrung .ff-beleg__mark{background:var(--ff-ink,#17211d)}
+.ff-beleg__text{font-weight:650;letter-spacing:.01em}
+
+/* ---------- Belegklassen-Badge (gemeinsam) ---------- */
+.ff-bw__klasse{display:inline-flex;align-items:center;gap:.4em;padding:.18em .6em;border-radius:999px;font-size:.74rem;font-weight:650;color:var(--primary);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 10%,transparent);border:1px solid color-mix(in srgb,var(--ff-green-2,#0e5a43) 35%,transparent)}
+.ff-bw__klasse b{display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;color:#fff;background:var(--ff-green-2,#0e5a43);font-style:normal}
+.ff-bw__klasse--markt{background:color-mix(in srgb,#8a5a00 10%,transparent);border-color:color-mix(in srgb,#8a5a00 35%,transparent)}
+.ff-bw__klasse--markt b{background:#8a5a00}
+.ff-bw__klasse--erfahrung{background:color-mix(in srgb,var(--ff-ink,#17211d) 8%,transparent);border-color:color-mix(in srgb,var(--ff-ink,#17211d) 30%,transparent)}
+.ff-bw__klasse--erfahrung b{background:var(--ff-ink,#17211d)}
+
+/* ---------- Status-Chips ---------- */
+.ff-bw__typ{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ff-green,#1f6f5c)}
+.ff-bw__status{padding:.18em .6em;border-radius:999px;font-size:.74rem;font-weight:700}
+.ff-bw__status--ok{color:#fff;background:var(--ff-green-2,#0e5a43)}
+.ff-bw__status--modell{color:var(--primary);background:color-mix(in srgb,var(--ff-accent,#ffb300) 28%,transparent);border:1px solid color-mix(in srgb,#8a5a00 45%,transparent)}
+.ff-bw__status--offen{color:var(--secondary);background:transparent;border:1px dashed var(--border)}
+.ff-bw__stand{font-size:.74rem;color:var(--secondary)}
+
+/* ---------- Einzelner Beweis-Kasten ---------- */
+.ff-bw{margin:2rem 0;padding:clamp(1rem,3vw,1.5rem);border:1px solid var(--border);border-left:4px solid var(--ff-green-2,#0e5a43);border-radius:var(--ff-radius-md,18px);background:var(--entry);box-shadow:0 16px 40px -32px rgba(15,52,43,.35)}
+.ff-bw__kopf{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
+.ff-bw__titel{margin:.7rem 0 0;font-size:1.08rem;font-weight:800;line-height:1.3;color:var(--primary)}
+.ff-bw__warnung{margin:.7rem 0 0;padding:.6rem .8rem;border-left:4px solid #8a5a00;background:color-mix(in srgb,#8a5a00 9%,transparent);font-size:.85rem;line-height:1.5;color:var(--primary)}
+.ff-bw__fazit{margin:.6rem 0 0;color:var(--content);line-height:1.6}
+.ff-bw__formel{margin:.8rem 0 0;padding:.65rem .8rem;border-radius:10px;background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 7%,transparent);font-size:.92rem;line-height:1.55}
+.ff-bw__fall{margin:.8rem 0 0;padding-left:1.2rem}
+.ff-bw__fall li{margin:.4rem 0;line-height:1.6}
+.ff-bw__listtitel{margin:.9rem 0 .25rem;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--secondary)}
+.ff-bw__liste{margin:0;padding-left:1.2rem;font-size:.92rem;line-height:1.55}
+.ff-bw__liste li{margin:.25rem 0}
+.ff-bw__quellen{margin:0;padding-left:1.2rem;font-size:.9rem}
+.ff-bw__quellen a{text-decoration:underline;text-underline-offset:2px}
+.ff-bw__meta{margin:.5rem 0 0;font-size:.82rem;color:var(--secondary)}
+.ff-bw__fuss{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1rem;margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--secondary)}
+.ff-bw__fuss a{font-weight:700;white-space:nowrap}
+
+/* ---------- Register-Übersicht ---------- */
+.ff-bwreg__legende{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.75rem;margin:1.25rem 0}
+.ff-bwreg__klasse{padding:.85rem;border:1px solid var(--border);border-radius:var(--ff-radius-md,18px);background:var(--entry)}
+.ff-bwreg__klasse p{margin:.5rem 0 0;font-size:.85rem;line-height:1.55;color:var(--secondary)}
+.ff-bwreg__liste{list-style:none;margin:1rem 0;padding:0}
+.ff-bwreg__item{margin:.9rem 0;padding:1rem 1.1rem;border:1px solid var(--border);border-radius:var(--ff-radius-md,18px);background:var(--entry)}
+.ff-bwreg__liste--backlog .ff-bwreg__item{border-style:dashed;background:transparent}
+.ff-bwreg__kopf{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
+.ff-bwreg__titel{margin:.55rem 0 0;font-weight:800;color:var(--primary);line-height:1.35}
+.ff-bwreg__fazit{margin:.4rem 0 0;font-size:.92rem;line-height:1.6;color:var(--content)}
+.ff-bwreg__plan,.ff-bwreg__log{margin:.5rem 0 0;font-size:.85rem;line-height:1.55;color:var(--secondary)}
+.ff-bwreg__hinweis{padding:.65rem .8rem;border-left:4px solid var(--ff-green-2,#0e5a43);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 7%,transparent);font-size:.9rem;line-height:1.55}
+
+/* ---------- Vergleichsmethodik ---------- */
+.ff-vm__bereich{margin:1.5rem 0;padding:clamp(1rem,3vw,1.4rem);border:1px solid var(--border);border-radius:var(--ff-radius-md,18px);background:var(--entry)}
+.ff-vm__kopf{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .75rem}
+.ff-vm__name{margin:0;font-size:1.1rem}
+.ff-vm__version{padding:.12em .55em;border-radius:999px;font-size:.74rem;font-weight:800;color:#fff;background:var(--ff-green-2,#0e5a43)}
+.ff-vm__stand{font-size:.78rem;color:var(--secondary)}
+.ff-vm__pillar{margin-left:auto;font-size:.82rem;font-weight:700;white-space:nowrap}
+.ff-vm__leitfrage{margin:.6rem 0 0;font-style:italic;color:var(--content)}
+.ff-vm__formel{margin:.7rem 0 0;padding:.65rem .8rem;border-radius:10px;background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 7%,transparent);font-size:.92rem;line-height:1.55}
+.ff-vm__spalten{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1rem;margin-top:.5rem}
+.ff-vm__listtitel{margin:.9rem 0 .25rem;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--secondary)}
+.ff-vm__liste{margin:0;padding-left:1.2rem;font-size:.9rem;line-height:1.55}
+.ff-vm__liste li{margin:.3rem 0}
+.ff-vm__liste--daten{list-style:none;padding-left:0}
+.ff-vm__liste--daten li{display:flex;gap:.5rem;align-items:flex-start}
+.ff-vm__liste--daten .ff-bw__klasse{flex:none;margin-top:.1rem}
+.ff-vm__log{margin-top:.8rem;border-top:1px solid var(--border);padding-top:.6rem;font-size:.85rem}
+.ff-vm__log summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700;color:var(--primary)}
+.ff-vm__log summary:focus-visible{outline:3px solid var(--ff-accent,#ffb300);outline-offset:3px}
+.ff-vm__log ul{margin:.4rem 0 0;padding-left:1.2rem;color:var(--secondary)}
+
+/* ---------- Änderungsprotokoll ---------- */
+.ff-chg{list-style:none;margin:1.5rem 0;padding:0;position:relative}
+.ff-chg::before{content:"";position:absolute;left:.45rem;top:.4rem;bottom:.4rem;width:2px;background:var(--border)}
+.ff-chg__eintrag{position:relative;margin:0 0 1.4rem;padding:0 0 0 2rem}
+.ff-chg__eintrag::before{content:"";position:absolute;left:0;top:.35rem;width:1rem;height:1rem;border-radius:50%;background:var(--ff-green-2,#0e5a43);border:3px solid var(--entry);box-shadow:0 0 0 1px var(--border)}
+.ff-chg__kopf{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
+.ff-chg__datum{font-weight:800;color:var(--primary)}
+.ff-chg__typ{padding:.15em .6em;border-radius:999px;font-size:.74rem;font-weight:700;border:1px solid var(--border);color:var(--secondary)}
+.ff-chg__typ--korrektur{color:#fff;background:#8a5a00;border-color:#8a5a00}
+.ff-chg__typ--quellen-update{color:var(--primary);background:color-mix(in srgb,var(--ff-accent,#ffb300) 25%,transparent)}
+.ff-chg__typ--aktualisierung{color:#fff;background:var(--ff-green-2,#0e5a43);border-color:var(--ff-green-2,#0e5a43)}
+.ff-chg__titel{margin:.45rem 0 0;font-weight:800;color:var(--primary);line-height:1.35}
+.ff-chg__was{margin:.35rem 0 0;line-height:1.6;color:var(--content)}
+.ff-chg__warum,.ff-chg__quelle,.ff-chg__seiten{margin:.3rem 0 0;font-size:.88rem;line-height:1.55;color:var(--secondary)}
+.ff-chg__quelle a,.ff-chg__seiten a{text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- Erfahrungs-Box: Einordnungszeile (Trennung E ≠ Beweis) ---------- */
+.ff-experience-box__einordnung{margin:.6rem 0 0;padding-top:.5rem;border-top:1px dashed var(--border);font-size:.78rem;line-height:1.5;color:var(--secondary)}
+.ff-experience-box__einordnung a{font-weight:700;text-decoration:underline;text-underline-offset:2px}
+
+/* ---------- Dark Mode ---------- */
+:root[data-theme="dark"] .ff-beleg__mark,
+[data-theme="dark"] .ff-beleg__mark{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-bw__klasse b,
+[data-theme="dark"] .ff-bw__klasse b{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-bw__klasse--markt b,
+[data-theme="dark"] .ff-bw__klasse--markt b{background:#c98a1e;color:var(--ff-ink,#17211d)}
+:root[data-theme="dark"] .ff-bw__klasse--erfahrung b,
+[data-theme="dark"] .ff-bw__klasse--erfahrung b{background:#5a6d66}
+:root[data-theme="dark"] .ff-beleg--markt .ff-beleg__mark,
+[data-theme="dark"] .ff-beleg--markt .ff-beleg__mark{background:#c98a1e;color:var(--ff-ink,#17211d)}
+:root[data-theme="dark"] .ff-beleg--erfahrung .ff-beleg__mark,
+[data-theme="dark"] .ff-beleg--erfahrung .ff-beleg__mark{background:#5a6d66}
+:root[data-theme="dark"] .ff-bw__status--ok,
+[data-theme="dark"] .ff-bw__status--ok{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-vm__version,
+[data-theme="dark"] .ff-vm__version{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-chg__eintrag::before,
+[data-theme="dark"] .ff-chg__eintrag::before{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-chg__typ--aktualisierung,
+[data-theme="dark"] .ff-chg__typ--aktualisierung{background:var(--ff-green,#1f6f5c);border-color:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-chg__typ--korrektur,
+[data-theme="dark"] .ff-chg__typ--korrektur{background:#c98a1e;border-color:#c98a1e;color:var(--ff-ink,#17211d)}
+
+@media(max-width:560px){
+  .ff-bw,.ff-vm__bereich{padding:1rem .8rem}
+  .ff-vm__pillar{margin-left:0}
+}
+@media print{
+  .ff-bw,.ff-vm__bereich,.ff-bwreg__item{break-inside:avoid;box-shadow:none}
+  .ff-vm__log:not([open])>*:not(summary){display:block}
+  .ff-vm__log>summary{display:none}
+}

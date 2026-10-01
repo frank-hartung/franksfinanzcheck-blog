@@ -1,0 +1,56 @@
+{{- /* ============================================================
+     vergleichsmethodik.html – VERSIONIERTE METHODIK JE BEREICH
+     (Beweissystem 01.10.2026; genutzt auf /methodik/)
+     ------------------------------------------------------------
+     Rendert data/beweise/vergleichsmethodik.yaml: je Themenbereich
+     Leitfrage, Rechenweg, Prüfregeln (K.-o. + Rangfolge statt
+     Pseudo-Gewichten), Datenbasis nach Belegklassen, Grenzen und
+     Changelog – mit Versionsnummer und Anker #methodik-<bereich>.
+     Kein site.Data (vgl. chart.html); CSS: .ff-vm* in
+     assets/css/extended/zz-beweissystem.css.
+     ============================================================ */ -}}
+{{- $daten := os.ReadFile "data/beweise/vergleichsmethodik.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $klassenKurz := dict "amtlich" "A" "markt" "M" "erfahrung" "E" -}}
+{{- $klassenNamen := dict "amtlich" "Amtliche Quelle" "markt" "Marktbeobachtung / Modellrechnung" "erfahrung" "Eigene Erfahrung / Messung" -}}
+<div class="ff-vm">
+  {{- range $daten.bereiche }}
+  <section class="ff-vm__bereich" id="methodik-{{ .id }}" aria-label="Vergleichsmethodik {{ .name }}">
+    <header class="ff-vm__kopf">
+      <h3 class="ff-vm__name">{{ .name }}</h3>
+      <span class="ff-vm__version" title="Jede inhaltliche Änderung an Formel oder Prüfregeln erhöht die Version und landet im Änderungsprotokoll.">v{{ .version }}</span>
+      <span class="ff-vm__stand">Stand {{ dateFormat "02.01.2006" (substr (printf "%v" .stand) 0 10) }}</span>
+      <a class="ff-vm__pillar" href="{{ printf "pillar/%s/" .id | relURL }}">Zum Ratgeber &rarr;</a>
+    </header>
+    <p class="ff-vm__leitfrage">{{ .leitfrage }}</p>
+    <p class="ff-vm__formel"><b>Rechenweg:</b> {{ .rechenweg }}</p>
+    <div class="ff-vm__spalten">
+      <div>
+        <p class="ff-vm__listtitel">Prüfregeln &amp; Rangfolge</p>
+        <ul class="ff-vm__liste">{{ range .pruefregeln }}<li>{{ . }}</li>{{ end }}</ul>
+      </div>
+      <div>
+        <p class="ff-vm__listtitel">Datenbasis</p>
+        <ul class="ff-vm__liste ff-vm__liste--daten">
+          {{- range .datenbasis }}
+          <li><span class="ff-bw__klasse ff-bw__klasse--{{ .klasse }}" title="{{ index $klassenNamen .klasse }}"><b aria-hidden="true">{{ index $klassenKurz .klasse }}</b></span> {{ .text }}</li>
+          {{- end }}
+        </ul>
+        {{- with .grenzen }}
+        <p class="ff-vm__listtitel">Grenzen</p>
+        <ul class="ff-vm__liste">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        {{- end }}
+      </div>
+    </div>
+    {{- with .changelog }}
+    <details class="ff-vm__log">
+      <summary>Methodik-Changelog ({{ len . }})</summary>
+      <ul>
+        {{- range . }}
+        <li><time datetime="{{ substr (printf "%v" .datum) 0 10 }}">{{ dateFormat "02.01.2006" (substr (printf "%v" .datum) 0 10) }}</time> – {{ .notiz }}</li>
+        {{- end }}
+      </ul>
+    </details>
+    {{- end }}
+  </section>
+  {{- end }}
+</div>

@@ -1,0 +1,60 @@
+{{- /* ============================================================
+     beleg.html – QUELLE DIREKT AN DER ZAHL (Beweissystem 01.10.2026)
+     ------------------------------------------------------------
+     WARUM: Allgemeine Quellenblöcke am Artikelende belegen keinen
+     einzelnen Wert. Dieser Shortcode hängt den Beleg als kompakten
+     Chip DIREKT an die Zahl – mit Belegklasse (A/M/E), Herausgeber
+     und Stand-Datum. Das ist die sichtbare Umsetzung der Regel
+     „jede Zahl trägt ihre Quelle“ aus /methodik/.
+
+     ZWEI MODI (Aufruf mit spitzen Klammern wie bei chart.html):
+       1. Kennzahl aus dem Register (bevorzugt – ein Stand, überall):
+          beleg kennzahl="bdew-haushaltsstrompreis"
+          → liest data/kennzahlen_register.yaml (SSOT, menschlich
+            kuratiert); Klasse ist immer „amtlich“, weil das Register
+            nur Allowlist-Quellen Rang 1–3 akzeptiert.
+       2. Freier Beleg:
+          beleg url="…" name="BDEW" stand="2026-09-28" klasse="amtlich"
+          klasse ∈ amtlich | markt | erfahrung (Vertrag:
+          data/beweise/schema.yaml → belegklassen).
+
+     VERTRAG:
+       * Unbekannte Kennzahl-ID oder fehlende Pflichtparameter
+         brechen den BUILD ab (errorf) – ein toter Beleg darf nie
+         leise verschwinden. Zusätzlich: scripts/beweis_gate.py.
+       * Kein site.Data (JSONL-Auditspuren im data-Baum, siehe
+         chart.html) – gezieltes os.ReadFile der freigegebenen Datei.
+       * Keine Inline-Farben (CLAUDE.md §4): Klassen .ff-beleg* in
+         assets/css/extended/zz-beweissystem.css, Dark Mode dort.
+     ============================================================ */ -}}
+{{- $kennzahl := .Get "kennzahl" -}}
+{{- $url := "" -}}{{- $name := "" -}}{{- $stand := "" -}}{{- $klasse := "amtlich" -}}
+{{- if $kennzahl -}}
+  {{- $regPath := "data/kennzahlen_register.yaml" -}}
+  {{- if not (os.FileExists $regPath) }}{{ errorf "beleg: %s fehlt (Seite %s)" $regPath .Page.File.Path }}{{ end -}}
+  {{- $register := os.ReadFile $regPath | transform.Unmarshal (dict "format" "yaml") -}}
+  {{- $treffer := dict -}}
+  {{- range $register.kennzahlen }}{{ if eq .id $kennzahl }}{{ $treffer = . }}{{ end }}{{ end -}}
+  {{- if not $treffer.id }}{{ errorf "beleg: Kennzahl %q nicht im Register (Seite %s)" $kennzahl .Page.File.Path }}{{ end -}}
+  {{- $url = $treffer.quelle.url -}}
+  {{- $name = ((.Get "name") | default $treffer.quelle.name) -}}
+  {{- $stand = (printf "%v" $treffer.stand) -}}
+{{- else -}}
+  {{- $url = .Get "url" -}}
+  {{- $name = .Get "name" -}}
+  {{- $stand = .Get "stand" -}}
+  {{- $klasse = ((.Get "klasse") | default "amtlich") -}}
+  {{- if or (not $url) (not $name) }}{{ errorf "beleg: url und name sind Pflicht, wenn keine kennzahl gesetzt ist (Seite %s)" .Page.File.Path }}{{ end -}}
+{{- end -}}
+{{- if not (in (slice "amtlich" "markt" "erfahrung") $klasse) }}{{ errorf "beleg: unbekannte klasse %q (Seite %s)" $klasse .Page.File.Path }}{{ end -}}
+{{- $klassenName := dict "amtlich" "amtliche/institutionelle Quelle" "markt" "Marktbeobachtung/Modellrechnung" "erfahrung" "eigene Erfahrung/Messung" -}}
+{{- $kurz := ((.Get "kurz") | default $name) -}}
+{{- $intern := strings.HasPrefix $url "/" -}}
+{{- $standLesbar := "" -}}{{- with $stand }}{{ $standLesbar = dateFormat "02.01.2006" (substr . 0 10) }}{{ end -}}
+<sup class="ff-beleg"><a class="ff-beleg__link ff-beleg--{{ $klasse }}"
+  href="{{ if $intern }}{{ $url | relURL }}{{ else }}{{ $url }}{{ end }}"
+  {{- if not $intern }} rel="noopener external" target="_blank"{{ end }}
+  title="Beleg ({{ index $klassenName $klasse }}): {{ $name }}{{ with $standLesbar }} – Stand {{ . }}{{ end }}"
+  ><span class="ff-beleg__mark" aria-hidden="true">{{ if eq $klasse "amtlich" }}A{{ else if eq $klasse "markt" }}M{{ else }}E{{ end }}</span
+  ><span class="ff-beleg__text">{{ $kurz }}{{ with $standLesbar }}&nbsp;· {{ . }}{{ end }}</span></a></sup>
+{{- /* kein trailing newline: Chip klebt an der Zahl */ -}}

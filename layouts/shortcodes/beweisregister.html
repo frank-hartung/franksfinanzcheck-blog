@@ -1,0 +1,89 @@
+{{- /* ============================================================
+     beweisregister.html – ÖFFENTLICHE GESAMTÜBERSICHT
+     (Beweissystem 01.10.2026; genutzt auf /methodik/)
+     ------------------------------------------------------------
+     Rendert data/beweise/register.yaml vollständig und EHRLICH:
+       1. Belegte Einträge (verifiziert/modellfall) als Karten
+          mit Anker #beweis-<id> (Ziel der Artikel-Querverweise).
+       2. Backlog „Woran wir gerade dokumentieren“ – Einträge in
+          Erhebung/Planung MIT Fälligkeitsdatum. Ein öffentlich
+          terminierter Dokumentationsstand ist ein Beweis-Signal;
+          ein verschwiegener wäre eine Behauptung.
+     Kein site.Data (vgl. chart.html); CSS: .ff-bwreg* in
+     assets/css/extended/zz-beweissystem.css.
+     ============================================================ */ -}}
+{{- $register := os.ReadFile "data/beweise/register.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $schema := os.ReadFile "data/beweise/schema.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $typNamen := dict "fallstudie" "Fallstudie" "wechselprotokoll" "Wechselprotokoll" "messreihe" "Messreihe" "modellrechnung" "Modellrechnung" -}}
+{{- $klassenKurz := dict "amtlich" "A" "markt" "M" "erfahrung" "E" -}}
+{{- $belegt := slice -}}{{- $backlog := slice -}}
+{{- range $register.eintraege -}}
+  {{- if in (slice "verifiziert" "modellfall") .status -}}{{- $belegt = $belegt | append . -}}
+  {{- else -}}{{- $backlog = $backlog | append . -}}{{- end -}}
+{{- end -}}
+{{- /* Anker: Die H2 „Beweis-Register“ auf /methodik/ trägt bereits
+       id="beweis-register" (Goldmark) – hier bewusst ein ANDERER
+       Anker, sonst doppelte DOM-ID. */ -}}
+<div class="ff-bwreg" id="beweis-register-uebersicht">
+
+  <div class="ff-bwreg__legende" role="list" aria-label="Belegklassen">
+    {{- range $key, $k := $schema.belegklassen }}
+    <div class="ff-bwreg__klasse" role="listitem">
+      <span class="ff-bw__klasse ff-bw__klasse--{{ $key }}"><b aria-hidden="true">{{ $k.kurz }}</b> {{ $k.name }}</span>
+      <p>{{ $k.definition }}</p>
+    </div>
+    {{- end }}
+  </div>
+
+  <h3 id="belegte-eintraege">Belegte Einträge ({{ len $belegt }})</h3>
+  <ul class="ff-bwreg__liste">
+    {{- range $belegt }}
+    <li class="ff-bwreg__item" id="beweis-{{ .id }}">
+      <div class="ff-bwreg__kopf">
+        <span class="ff-bw__typ">{{ index $typNamen .typ }}</span>
+        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+        {{- if eq .status "verifiziert" }}
+        <span class="ff-bw__status ff-bw__status--ok">Verifiziert</span>
+        {{- else }}
+        <span class="ff-bw__status ff-bw__status--modell">Modellfall</span>
+        {{- end }}
+        {{- with .stand }}<span class="ff-bw__stand">Stand {{ dateFormat "02.01.2006" (substr (printf "%v" .) 0 10) }}</span>{{ end }}
+      </div>
+      <p class="ff-bwreg__titel">{{ .titel }}</p>
+      <p class="ff-bwreg__fazit">{{ .kurzfazit }}</p>
+      {{- with .quellen }}
+      <ul class="ff-bw__quellen">
+        {{- range . }}<li><a href="{{ .url }}" rel="noopener external" target="_blank">{{ .name }}</a></li>{{ end }}
+      </ul>
+      {{- end }}
+      {{- with index .changelog 0 }}
+      <p class="ff-bwreg__log">Letzte Änderung: {{ dateFormat "02.01.2006" (substr (printf "%v" .datum) 0 10) }} – {{ .notiz }}</p>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+
+  {{- if $backlog }}
+  <h3 id="beweis-backlog">Woran wir gerade dokumentieren ({{ len $backlog }})</h3>
+  <p class="ff-bwreg__hinweis">
+    Diese Belege sind <strong>noch keine Beweise</strong> – sie werden erst
+    veröffentlicht, wenn Protokoll und Original-Belege vollständig sind.
+    Bis dahin stehen hier Vorhaben, Dokumentationsplan und Fälligkeit.
+  </p>
+  <ul class="ff-bwreg__liste ff-bwreg__liste--backlog">
+    {{- range $backlog }}
+    <li class="ff-bwreg__item" id="beweis-{{ .id }}">
+      <div class="ff-bwreg__kopf">
+        <span class="ff-bw__typ">{{ index $typNamen .typ }}</span>
+        <span class="ff-bw__klasse ff-bw__klasse--{{ .belegklasse }}"><b aria-hidden="true">{{ index $klassenKurz .belegklasse }}</b></span>
+        <span class="ff-bw__status ff-bw__status--offen">{{ if eq .status "in-erhebung" }}In Erhebung{{ else }}Geplant{{ end }}</span>
+        {{- with .faellig }}<span class="ff-bw__stand">fällig {{ dateFormat "02.01.2006" (substr (printf "%v" .) 0 10) }}</span>{{ end }}
+      </div>
+      <p class="ff-bwreg__titel">{{ .titel }}</p>
+      <p class="ff-bwreg__fazit">{{ .kurzfazit }}</p>
+      {{- with .dokumentationsplan }}<p class="ff-bwreg__plan"><b>Dokumentationsplan:</b> {{ . }}</p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</div>

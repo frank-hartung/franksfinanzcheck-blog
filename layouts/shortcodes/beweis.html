@@ -1,0 +1,101 @@
+{{- /* ============================================================
+     beweis.html – EINZELNER BEWEIS IM ARTIKEL (Beweissystem 01.10.2026)
+     ------------------------------------------------------------
+     Bettet einen Eintrag aus dem Beweis-Register
+     (data/beweise/register.yaml) als prüfbaren Beleg-Kasten ein.
+     Aufruf im Artikel (spitze Klammern wie bei chart.html):
+       beweis id="mr-dsl-effektivpreis-24m"
+
+     EHRLICHKEITS-VERTRAG (hart, bricht den Build):
+       * Unbekannte ID → errorf.
+       * Nur status verifiziert|modellfall darf als Beweis
+         erscheinen (schema.yaml → oeffentlich_als_beweis).
+         Ein Eintrag „in Erhebung“ ist noch kein Beleg.
+       * Ein Modellfall rendert IMMER den Warnhinweis
+         „kein realer Einzelfall“ – nicht abschaltbar.
+
+     Kein site.Data (JSONL im data-Baum, vgl. chart.html);
+     CSS: .ff-bw* in assets/css/extended/zz-beweissystem.css.
+     ============================================================ */ -}}
+{{- $id := .Get "id" -}}
+{{- if not $id }}{{ errorf "beweis: Parameter id fehlt (Seite %s)" .Page.File.Path }}{{ end -}}
+{{- $regPath := "data/beweise/register.yaml" -}}
+{{- if not (os.FileExists $regPath) }}{{ errorf "beweis: %s fehlt (Seite %s)" $regPath .Page.File.Path }}{{ end -}}
+{{- $register := os.ReadFile $regPath | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $e := dict -}}
+{{- range $register.eintraege }}{{ if eq .id $id }}{{ $e = . }}{{ end }}{{ end -}}
+{{- if not $e.id }}{{ errorf "beweis: ID %q nicht im Beweis-Register (Seite %s)" $id .Page.File.Path }}{{ end -}}
+{{- if not (in (slice "verifiziert" "modellfall") $e.status) }}{{ errorf "beweis: %q hat status %q – nur verifiziert/modellfall dürfen als Beweis eingebettet werden (Seite %s)" $id $e.status .Page.File.Path }}{{ end -}}
+{{- $typNamen := dict "fallstudie" "Fallstudie" "wechselprotokoll" "Wechselprotokoll" "messreihe" "Messreihe" "modellrechnung" "Modellrechnung" -}}
+{{- $klassenNamen := dict "amtlich" "Amtliche Quelle" "markt" "Marktbeobachtung / Modellrechnung" "erfahrung" "Eigene Erfahrung / Messung" -}}
+{{- $klassenKurz := dict "amtlich" "A" "markt" "M" "erfahrung" "E" -}}
+{{- $uid := printf "ff-bw-%s-%d" $e.id .Ordinal -}}
+<aside class="ff-bw" id="beweis-{{ $e.id }}" aria-labelledby="{{ $uid }}-titel">
+  <header class="ff-bw__kopf">
+    <span class="ff-bw__typ">{{ index $typNamen $e.typ }}</span>
+    <span class="ff-bw__klasse ff-bw__klasse--{{ $e.belegklasse }}" title="Belegklasse: {{ index $klassenNamen $e.belegklasse }}">
+      <b aria-hidden="true">{{ index $klassenKurz $e.belegklasse }}</b> {{ index $klassenNamen $e.belegklasse }}
+    </span>
+    {{- if eq $e.status "verifiziert" }}
+    <span class="ff-bw__status ff-bw__status--ok">Verifizierter Beleg</span>
+    {{- else }}
+    <span class="ff-bw__status ff-bw__status--modell">Modellfall</span>
+    {{- end }}
+    {{- with $e.stand }}
+    <span class="ff-bw__stand">Stand: <time datetime="{{ substr (printf "%v" .) 0 10 }}">{{ dateFormat "02.01.2006" (substr (printf "%v" .) 0 10) }}</time></span>
+    {{- end }}
+  </header>
+  <p class="ff-bw__titel" id="{{ $uid }}-titel" role="heading" aria-level="3">{{ $e.titel }}</p>
+  {{- if eq $e.status "modellfall" }}
+  <p class="ff-bw__warnung"><strong>Modellfall:</strong> durchgerechnetes Beispiel mit typischen Konditionen – kein realer Einzelfall. {{ with $e.anonymisierung }}{{ . }}{{ end }}</p>
+  {{- end }}
+  <p class="ff-bw__fazit">{{ $e.kurzfazit }}</p>
+
+  {{- if eq $e.typ "fallstudie" }}
+  <ol class="ff-bw__fall">
+    <li><b>Ausgangslage:</b> {{ $e.ausgangslage }}</li>
+    <li><b>Entscheidung:</b> {{ $e.entscheidung }}</li>
+    <li><b>Ergebnis:</b> {{ $e.ergebnis }}</li>
+  </ol>
+  <p class="ff-bw__meta">{{ $e.zeitraum }}</p>
+  {{- else if eq $e.typ "modellrechnung" }}
+  <p class="ff-bw__formel"><b>Rechenweg:</b> {{ $e.rechenweg }}</p>
+  {{- with $e.annahmen }}
+  <p class="ff-bw__listtitel">Annahmen</p>
+  <ul class="ff-bw__liste">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+  {{- else if eq $e.typ "messreihe" }}
+  {{- with $e.messaufbau }}
+  <p class="ff-bw__listtitel">Messaufbau</p>
+  <ul class="ff-bw__liste">
+    <li><b>Messgerät:</b> {{ .geraet }}</li>
+    <li><b>Zeitraum:</b> {{ .zeitraum }}</li>
+    {{- range .protokoll }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{- end }}
+  {{- else if eq $e.typ "wechselprotokoll" }}
+  {{- with $e.pflichtfelder }}
+  <p class="ff-bw__listtitel">Dokumentierte Punkte</p>
+  <ul class="ff-bw__liste">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+  {{- end }}
+
+  {{- with $e.grenzen }}
+  <p class="ff-bw__listtitel">Grenzen dieses Belegs</p>
+  <ul class="ff-bw__liste ff-bw__liste--grenzen">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+  {{- with $e.quellen }}
+  <p class="ff-bw__listtitel">Beleg nachprüfen</p>
+  <ul class="ff-bw__quellen">
+    {{- range . }}
+    <li><a href="{{ .url }}" rel="noopener external" target="_blank">{{ .name }}</a></li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  <footer class="ff-bw__fuss">
+    {{- with index $e.changelog 0 }}
+    <span>Letzte Änderung: {{ dateFormat "02.01.2006" (substr (printf "%v" .datum) 0 10) }} – {{ .notiz }}</span>
+    {{- end }}
+    <a href="{{ "methodik/" | relURL }}#beweis-register">Beweis-Register &rarr;</a>
+  </footer>
+</aside>

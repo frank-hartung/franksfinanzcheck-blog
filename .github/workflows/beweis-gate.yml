@@ -1,0 +1,80 @@
+# ============================================================
+#  BEWEIS-GATE – Wache des Beweissystems (01.10.2026)
+#  ------------------------------------------------------------
+#  WARUM: Das Beweissystem (data/beweise/ + Shortcodes beleg/
+#  beweis/beweisregister/vergleichsmethodik/aenderungsprotokoll)
+#  ersetzt Erfahrungs-Behauptungen durch prüfbare Belege. Dieses
+#  Gate hält den Vertrag dauerhaft: Pflichtfelder je Beweis-Typ,
+#  gültige Querverweise aus Artikeln, Ehrlichkeits-Regeln
+#  (unfertige Belege nie als Beweis, Backlog nur mit Fälligkeit).
+#
+#  Vertrag:  data/beweise/schema.yaml (menschenlesbar)
+#  Wache:    scripts/beweis_gate.py  (ausführbar, mit Selbsttest)
+#  Runbook:  docs/ANLEITUNG-BEWEISSYSTEM.md
+#
+#  Läuft bei jedem Push/PR, der Beweisdaten, Content oder die
+#  Render-Bausteine berührt. Der Selbsttest läuft zuerst – eine
+#  sabotierte Prüflogik darf kein grünes Gate liefern.
+# ============================================================
+name: Beweis-Gate (Beweissystem)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "data/beweise/**"
+      - "data/kennzahlen_register.yaml"
+      - "data/datasets/**"
+      - "content/**"
+      - "layouts/shortcodes/beleg.html"
+      - "layouts/shortcodes/beweis.html"
+      - "layouts/shortcodes/beweisregister.html"
+      - "layouts/shortcodes/vergleichsmethodik.html"
+      - "layouts/shortcodes/aenderungsprotokoll.html"
+      - "layouts/_partials/experience_box.html"
+      - "scripts/beweis_gate.py"
+      - ".github/workflows/beweis-gate.yml"
+  pull_request:
+    paths:
+      - "data/beweise/**"
+      - "data/kennzahlen_register.yaml"
+      - "data/datasets/**"
+      - "content/**"
+      - "layouts/shortcodes/beleg.html"
+      - "layouts/shortcodes/beweis.html"
+      - "layouts/shortcodes/beweisregister.html"
+      - "layouts/shortcodes/vergleichsmethodik.html"
+      - "layouts/shortcodes/aenderungsprotokoll.html"
+      - "layouts/_partials/experience_box.html"
+      - "scripts/beweis_gate.py"
+      - ".github/workflows/beweis-gate.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: beweis-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  beweis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: pip install --quiet pyyaml
+
+      - name: Selbsttest der Wache (Sabotage-Proben)
+        run: python3 scripts/beweis_gate.py --selftest
+
+      - name: Beweissystem prüfen
+        run: python3 scripts/beweis_gate.py
