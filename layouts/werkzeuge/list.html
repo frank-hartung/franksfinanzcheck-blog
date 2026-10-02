@@ -1,0 +1,70 @@
+{{- define "main" }}
+{{- $daten := partialCached "werkzeuge_data.html" "werkzeuge" -}}
+{{- $kompass := partialCached "fixkosten_kompass_data.html" "kompass" -}}
+
+<article class="post-single ff-wz-hub">
+  <header class="post-header ff-wz-hub__kopf">
+    <nav class="breadcrumbs ff-pc-breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ "/" | relURL }}">Start</a>
+      <span class="ff-pc-breadcrumbs__sep">/</span>
+      <span class="ff-pc-breadcrumbs__current">Werkzeuge</span>
+    </nav>
+
+    <p class="ff-wz-hub__eyebrow"><span aria-hidden="true">◈</span> {{ $daten.hub_kicker }}</p>
+    <h1 class="post-title">{{ .Title | safeHTML }}</h1>
+    {{- if .Description }}
+    <p class="ff-wz-hub__intro">{{ .Description }}</p>
+    {{- end }}
+
+    <p class="ff-wz-hub__versprechen">
+      <span class="ff-wz__versprechen-marke" aria-hidden="true">✓</span>
+      <span>{{ $daten.versprechen }}</span>
+    </p>
+  </header>
+
+  {{- /* Das Raster der Werkzeuge steht VOR dem Fließtext. Wer hierher
+         kommt, will rechnen – nicht erst eine Einleitung lesen. */ -}}
+  <section class="ff-wz-raster" aria-label="Alle Werkzeuge">
+    {{- range $daten.werkzeuge }}
+    {{- $stufe := "" -}}
+    {{- with where $kompass.stages "id" .kompass -}}{{- $stufe = (index . 0).title -}}{{- end -}}
+    <a class="ff-wz-karte" href="{{ printf "werkzeuge/%s/" .slug | relURL }}">
+      <span class="ff-wz-karte__icon" aria-hidden="true">{{ .icon }}</span>
+      <span class="ff-wz-karte__stufe">{{ $stufe }}</span>
+      <strong class="ff-wz-karte__name">{{ .name }}</strong>
+      <span class="ff-wz-karte__kurz">{{ .kurz }}</span>
+      <span class="ff-wz-karte__meta">
+        {{- range .exporte }}<span class="ff-wz-karte__format">{{ . | upper }}</span>{{ end -}}
+        {{- if .speicher }}<span class="ff-wz-karte__format">Lokal speicherbar</span>{{ end -}}
+      </span>
+      <span class="ff-wz-karte__cta" aria-hidden="true">Öffnen →</span>
+    </a>
+    {{- end }}
+  </section>
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- $inhalt := .Content | partial "nbsp_sicherung.html" -}}
+    {{- $inhalt = partial "anchored_headings.html" ($inhalt | safeHTML) -}}
+    {{- partial "sectioned_content.html" ($inhalt | safeHTML) -}}
+  </div>
+  {{- end }}
+
+  <footer class="post-footer">
+    <section class="ff-wz-vertrauen" aria-labelledby="ff-wz-hub-vertrauen">
+      <h2 class="ff-wz-vertrauen__titel" id="ff-wz-hub-vertrauen">{{ $daten.vertrauen.ueberschrift }}</h2>
+      <ul class="ff-wz-vertrauen__liste">
+        {{- range $daten.vertrauen.punkte }}
+        <li class="ff-wz-vertrauen__punkt ff-wz-vertrauen__punkt--{{ .id }}">
+          <strong>{{ .titel }}</strong>
+          <span>{{ .text }}</span>
+        </li>
+        {{- end }}
+      </ul>
+    </section>
+
+    {{- partial "fixkosten_kompass.html" (dict "mode" "home") }}
+  </footer>
+</article>
+
+{{- end }}{{/* end main */}}

@@ -1,0 +1,155 @@
+{{- define "main" }}
+{{- $daten := partialCached "werkzeuge_data.html" "werkzeuge" -}}
+{{- $id := .Params.werkzeug -}}
+{{- $treffer := where $daten.werkzeuge "id" $id -}}
+{{- if not $treffer -}}
+  {{- errorf "werkzeuge/single.html: %q nennt das unbekannte Werkzeug %q" .File.Path $id -}}
+{{- end -}}
+{{- $w := index $treffer 0 -}}
+
+<article class="post-single ff-wz-seite">
+  <header class="post-header">
+    <nav class="breadcrumbs ff-pc-breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ "/" | relURL }}">Start</a>
+      <span class="ff-pc-breadcrumbs__sep">/</span>
+      <a href="{{ "werkzeuge/" | relURL }}">Werkzeuge</a>
+      <span class="ff-pc-breadcrumbs__sep">/</span>
+      <span class="ff-pc-breadcrumbs__current">{{ $w.name }}</span>
+    </nav>
+
+    <h1 class="post-title entry-hint-parent">{{ .Title | safeHTML }}</h1>
+
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+
+    <div class="post-meta ff-wz-seite__meta">
+      <span>✍️ Werkzeug von Frank Hartung</span>
+      <span>·</span>
+      {{- $stand := partial "article_dates.html" . -}}
+      <span>📅 Stand: {{ time.Format "2. January 2006" $stand.modified }}</span>
+      <span>·</span>
+      <span>⌁ Rechnet lokal im Browser</span>
+    </div>
+
+    {{- /* GEGENPROBE ZUR WERBE-OFFENLEGUNG: Werkzeugseiten tragen
+           bewusst keinen Partnerlink. Statt zu schweigen, sagen sie
+           das aktiv – dieselbe Logik wie ff_offenlegung.html für
+           werbefreie Artikel (Wache: scripts/werkzeuge_gate.py W3). */ -}}
+    <p class="ff-wz-seite__offenlegung" data-ff-wz-offenlegung>
+      <strong>Ohne Werbung:</strong> Diese Seite enthält keinen Partnerlink.
+      {{ $daten.versprechen }}
+      <a href="{{ "transparenz/" | relURL }}">Wie sich FranksFinanzcheck finanziert</a>
+    </p>
+  </header>
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- $inhalt := .Content | partial "nbsp_sicherung.html" -}}
+    {{- $inhalt = partial "anchored_headings.html" ($inhalt | safeHTML) -}}
+    {{- partial "sectioned_content.html" ($inhalt | safeHTML) -}}
+  </div>
+  {{- end }}
+
+  <footer class="post-footer ff-wz-seite__footer">
+    {{- /* Vertrauensvertrag ausführlich – nach der Nutzung, nicht statt ihr. */ -}}
+    <section class="ff-wz-vertrauen" aria-labelledby="ff-wz-vertrauen-titel">
+      <h2 class="ff-wz-vertrauen__titel" id="ff-wz-vertrauen-titel">{{ $daten.vertrauen.ueberschrift }}</h2>
+      <ul class="ff-wz-vertrauen__liste">
+        {{- range $daten.vertrauen.punkte }}
+        <li class="ff-wz-vertrauen__punkt ff-wz-vertrauen__punkt--{{ .id }}">
+          <strong>{{ .titel }}</strong>
+          <span>{{ .text }}</span>
+        </li>
+        {{- end }}
+      </ul>
+    </section>
+
+    {{- /* Der Weg zurück in die Inhalte: passender Ratgeber + Cockpit. */ -}}
+    <section class="ff-wz-weiter" aria-labelledby="ff-wz-weiter-titel">
+      <h2 class="ff-wz-weiter__titel" id="ff-wz-weiter-titel">Wenn du nach dem Rechnen weiterlesen willst</h2>
+      <div class="ff-wz-weiter__karten">
+        <a class="ff-wz-weiter__karte" href="{{ printf "pillar/%s/" $w.pillar | relURL }}">
+          <span class="ff-wz-weiter__label">Passender Ratgeber</span>
+          <strong>{{ $w.pillar_label }}</strong>
+          <span class="ff-wz-weiter__text">Kriterien, Fallstricke und Praxisbeispiele zu den Zahlen aus diesem Werkzeug.</span>
+        </a>
+        <a class="ff-wz-weiter__karte" href="{{ "cockpit/" | relURL }}">
+          <span class="ff-wz-weiter__label">Produktkern</span>
+          <strong>Fixkosten-Cockpit</strong>
+          <span class="ff-wz-weiter__text">Alle Verträge, Beträge und Prüftermine an einem Ort – ebenfalls lokal im Browser.</span>
+        </a>
+      </div>
+    </section>
+
+    {{- /* Alle anderen Werkzeuge: eine Werkzeugseite ist nie eine Sackgasse. */ -}}
+    <section class="ff-wz-andere" aria-labelledby="ff-wz-andere-titel">
+      <h2 class="ff-wz-andere__titel" id="ff-wz-andere-titel">Die anderen Werkzeuge</h2>
+      <ul class="ff-wz-andere__liste">
+        {{- range $daten.werkzeuge }}
+        {{- if ne .id $w.id }}
+        <li>
+          <a href="{{ printf "werkzeuge/%s/" .slug | relURL }}">
+            <span class="ff-wz-andere__icon" aria-hidden="true">{{ .icon }}</span>
+            <span class="ff-wz-andere__name">{{ .name }}</span>
+          </a>
+        </li>
+        {{- end }}
+        {{- end }}
+      </ul>
+      <p class="ff-wz-andere__alle"><a href="{{ "werkzeuge/" | relURL }}">Alle Werkzeuge im Überblick <span aria-hidden="true">→</span></a></p>
+    </section>
+  </footer>
+</article>
+
+{{- /* ---------- SoftwareApplication-Schema ----------
+       Werkzeugseiten sind keine Artikel: Google wertet sie als Anwendung,
+       nicht als Text. Deshalb hier SoftwareApplication statt Article –
+       FAQPage und BreadcrumbList liefert extend_head.html zusätzlich.
+       "offers" mit Preis 0 ist Pflichtfeld für kostenlose Anwendungen und
+       zugleich die maschinenlesbare Fassung unseres Versprechens:
+       vollständige Nutzung ohne Gegenleistung, ohne Konto, ohne Klick. */ -}}
+{{- $preis := dict
+  "@type" "Offer"
+  "price" "0"
+  "priceCurrency" "EUR"
+  "availability" "https://schema.org/InStock"
+-}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "SoftwareApplication"
+  "name" $w.name
+  "alternateName" (.Title | plainify)
+  "description" (or .Description $w.kurz)
+  "url" .Permalink
+  "applicationCategory" "FinanceApplication"
+  "applicationSubCategory" "Rechner"
+  "operatingSystem" "Web-Browser"
+  "browserRequirements" "Benötigt JavaScript. Rechnet vollständig lokal, ohne Serverkontakt."
+  "inLanguage" "de-DE"
+  "isAccessibleForFree" true
+  "offers" $preis
+  "featureList" (slice
+    "Rechnet vollständig im Browser, ohne Datenübertragung"
+    "Offengelegte Formel, Annahmen und Quellen"
+    (printf "Export als %s" (delimit (apply $w.exporte "upper" ".") ", " " und "))
+    "Nutzbar ohne Konto, ohne Anmeldung und ohne personenbezogene Daten"
+  )
+  "author" (dict
+    "@type" "Person"
+    "@id" (printf "%s#frank-hartung" site.BaseURL)
+    "name" "Frank Hartung"
+  )
+  "publisher" (dict
+    "@type" "Organization"
+    "name" "FranksFinanzcheck"
+    "url" site.BaseURL
+  )
+  "isPartOf" (dict
+    "@type" "WebSite"
+    "name" "FranksFinanzcheck"
+    "url" site.BaseURL
+  )
+) | jsonify | safeJS }}</script>
+
+{{- end }}{{/* end main */}}

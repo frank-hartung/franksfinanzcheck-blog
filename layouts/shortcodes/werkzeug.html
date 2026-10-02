@@ -1,0 +1,18 @@
+{{- /* ============================================================
+    {{< werkzeug >}} – setzt das Werkzeug dieser Seite in den Text.
+
+    Ohne Argument nimmt der Shortcode die Frontmatter-Angabe
+    `werkzeug:` der Seite. So gibt es je Werkzeugseite genau eine
+    Zuordnung – im Frontmatter, nicht zweimal im Text.
+
+      {{< werkzeug >}}              (Regelfall)
+      {{< werkzeug id="notgroschen" >}}   (Einbettung anderswo)
+
+    Wache: scripts/werkzeuge_gate.py (W4) verlangt den Aufruf auf
+    jeder Werkzeugseite und verbietet widersprüchliche IDs.
+============================================================ */ -}}
+{{- $id := .Get "id" | default .Page.Params.werkzeug -}}
+{{- if not $id -}}
+  {{- errorf "werkzeug-Shortcode in %q: weder id= noch Frontmatter `werkzeug:` gesetzt" .Page.File.Path -}}
+{{- end -}}
+{{ partial "ff_werkzeug.html" (dict "id" $id "page" .Page) }}

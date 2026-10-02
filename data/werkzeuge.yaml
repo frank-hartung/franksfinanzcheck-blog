@@ -1,0 +1,743 @@
+# ============================================================
+#  WERKZEUGE – SSOT der eigenständigen Finanz-Werkzeuge
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 02.10.2026, Befund 5 „Die Rechner fehlen als
+#  echter Wettbewerbsvorteil"):
+#    Shortcode-Rechner im Artikel sind ein Beiwerk. Der Unterschied
+#    entsteht durch ein EIGENSTÄNDIGES, vertrauenswürdiges
+#    Werkzeug-Erlebnis: eigene Seite, eigene Methodik, eigener
+#    Export, nachvollziehbare Formeln – und keine Pflicht, je einen
+#    Affiliate-Link anzuklicken.
+#
+#  DIESE DATEI IST DIE EINZIGE QUELLE.
+#    * layouts/_partials/werkzeuge_data.html liest sie,
+#    * layouts/_partials/ff_werkzeug.html baut daraus das Formular,
+#    * static/premium/ff-werkzeuge.js rechnet gegen dieselben
+#      Feld-IDs,
+#    * scripts/werkzeuge_gate.py beweist, dass alle drei deckungs-
+#      gleich sind (W1–W9, fail-closed).
+#  Eine zweite Liste von Werkzeugen, Feldern oder Formeln darf es
+#  nirgends geben. Wer ein Feld umbenennt, benennt es hier um.
+#
+#  FELDTYPEN (ff_werkzeug.html + ff-werkzeuge.js kennen genau diese)
+#    euro      Geldbetrag in € (deutsche Schreibweise 1.234,56)
+#    zahl      dimensionslose Zahl
+#    prozent   Prozentwert p. a.
+#    datum     ISO-Datum über <input type="date">
+#    auswahl   <select> mit `optionen:` (wert/label[/zahl])
+#
+#  ANTI-HALLUZINATION: `quellen` enthält ausschließlich geprüfte,
+#  öffentlich erreichbare Primärquellen (Gesetze, Behörden,
+#  Verbraucherzentrale, Statistik). Affiliate-Partner sind hier
+#  NIEMALS belegfähig – das Gate (W6) weist sie zurück.
+# ============================================================
+version: 1
+name: "Franks Werkzeuge"
+short_name: "Werkzeuge"
+hub_titel: "Werkzeuge: Rechnen, bevor du entscheidest"
+hub_kicker: "Acht eigenständige Werkzeuge"
+positionierung: >-
+  Acht eigenständige Rechner für die Entscheidungen, die deine Fixkosten wirklich
+  bewegen. Jedes Werkzeug läuft vollständig in deinem Browser, legt seine Formel
+  offen und lässt sich als CSV oder PDF mitnehmen.
+versprechen: "Du kannst das Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken."
+
+# ------------------------------------------------------------------
+# VERTRAUENSVERTRAG – steht sichtbar auf dem Hub und über JEDEM Werkzeug.
+# Der Satz unter `versprechen` ist wörtlich bindend (Gate W3).
+# ------------------------------------------------------------------
+vertrauen:
+  ueberschrift: "Was dieses Werkzeug dir zusichert"
+  punkte:
+    - id: "ohne-affiliate"
+      titel: "Vollständig nutzbar ohne Affiliate-Link"
+      text: >-
+        Rechnung, Ergebnis, Methodik und Export funktionieren ohne einen einzigen Klick
+        auf einen Partnerlink. Es gibt keine gesperrte Zeile, kein Ergebnis hinter einer
+        Weiterleitung und keinen Rechner, der erst nach einem Vergleich rechnet.
+    - id: "keine-daten"
+      titel: "Keine personenbezogenen Daten nötig"
+      text: >-
+        Kein Konto, keine E-Mail-Adresse, keine Postleitzahl, kein Zählerstand mit Namen.
+        Die Werkzeuge fragen Beträge und Termine ab – nicht, wer du bist.
+    - id: "lokal"
+      titel: "Die Rechnung bleibt auf deinem Gerät"
+      text: >-
+        Jede Berechnung läuft im Browser. Es gibt kein Formularziel, keinen Netzaufruf und
+        keine Übertragung deiner Eingaben. Gespeichert wird ausschließlich nach aktivem
+        Häkchen – lokal, widerrufbar, ohne Kopie bei uns.
+    - id: "offene-formel"
+      titel: "Offene Formel, benannte Quelle"
+      text: >-
+        Unter jedem Ergebnis steht die Rechnung, die dazu geführt hat, dazu die Annahmen
+        und die Quellen mit Stand. Was wir nicht wissen können, steht als Annahme da –
+        nicht als Zahl mit Komma.
+  speicher_hinweis: >-
+    Speichern ist freiwillig und bleibt lokal: Nur wenn du das Häkchen setzt, legt dein
+    Browser die Eingaben in diesem Gerät ab. Häkchen entfernen oder „Zurücksetzen" löscht
+    sie sofort wieder.
+  export_hinweis: >-
+    Export erzeugt die Datei direkt im Browser. Es wird nichts hochgeladen, nichts
+    zwischengespeichert und nichts an einen Dienst geschickt.
+
+# ------------------------------------------------------------------
+# EXPORT – Vertrag für CSV/PDF/ICS (ff-werkzeuge.js setzt ihn um).
+# ------------------------------------------------------------------
+export:
+  dateipraefix: "franksfinanzcheck"
+  formate:
+    - id: "csv"
+      label: "Als CSV"
+      beschreibung: "Trennzeichen Semikolon, UTF-8 mit BOM – öffnet sauber in Excel, Numbers und LibreOffice."
+    - id: "pdf"
+      label: "Als PDF"
+      beschreibung: "Einseitiges Protokoll mit Eingaben, Ergebnis, Formel und Quellen – im Browser erzeugt."
+    - id: "ics"
+      label: "In den Kalender"
+      beschreibung: "Termindatei (iCalendar) für Apple Kalender, Google Kalender, Outlook und Thunderbird."
+
+# ------------------------------------------------------------------
+# DIE WERKZEUGE. Reihenfolge = Reihenfolge auf dem Hub.
+# ------------------------------------------------------------------
+werkzeuge:
+  # ----------------------------------------------------------------
+  - id: "fixkosten-scanner"
+    slug: "fixkosten-scanner"
+    engine: "scanner"
+    name: "Fixkosten-Scanner"
+    kurz: "Alle laufenden Kosten in einer Zahl – samt Prüfreihenfolge und realistischem Sparkorridor."
+    icon: "◎"
+    kompass: "kosten"
+    pillar: "strom-sparen"
+    pillar_label: "Strom & Gas sparen"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "wohnen"
+        label: "Wohnen (Miete oder Rate, Nebenkosten)"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Kaltmiete plus Nebenkosten oder Kreditrate plus Hausgeld."
+        sparkorridor: [0.0, 0.03]
+      - id: "energie"
+        label: "Strom & Gas"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Die Summe deiner Abschläge, nicht die letzte Jahresrechnung."
+        sparkorridor: [0.08, 0.25]
+      - id: "kommunikation"
+        label: "Internet, Mobilfunk & Streaming"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Festnetz, Mobilfunk, Streaming-Dienste und Gerätemieten zusammen."
+        sparkorridor: [0.1, 0.3]
+      - id: "versicherungen"
+        label: "Versicherungen"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Jahresbeiträge durch zwölf teilen, damit alles vergleichbar bleibt."
+        sparkorridor: [0.05, 0.2]
+      - id: "mobilitaet"
+        label: "Mobilität"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Kfz-Kosten ohne Versicherung, Ticket, Leasing, Stellplatz."
+        sparkorridor: [0.03, 0.15]
+      - id: "finanzen"
+        label: "Konto, Karten & Kredite"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Kontoführung, Kartengebühren, Raten für laufende Kredite."
+        sparkorridor: [0.05, 0.2]
+      - id: "abos"
+        label: "Abos & Mitgliedschaften"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Fitnessstudio, Vereine, Software, Zeitungen, Cloud-Speicher."
+        sparkorridor: [0.1, 0.4]
+      - id: "einkommen"
+        label: "Haushaltsnetto (freiwillig)"
+        typ: "euro"
+        einheit: "€/Monat"
+        optional: true
+        hilfe: "Nur für die Fixkostenquote. Ohne Angabe rechnet der Scanner trotzdem vollständig."
+    formel:
+      - "Monatssumme = Summe aller eingetragenen Posten."
+      - "Jahressumme = Monatssumme × 12."
+      - "Fixkostenquote = Monatssumme ÷ Haushaltsnetto × 100 (nur bei freiwilliger Angabe)."
+      - "Sparkorridor je Posten = Jahresbetrag × hinterlegte Unter- bzw. Obergrenze."
+    annahmen:
+      - "Der Sparkorridor ist ein Erfahrungsrahmen aus Tarifvergleichen, keine Zusage und kein Durchschnitt deines Marktes."
+      - "Wohnen bleibt bewusst nahe null: Miete senkt man selten durch einen Vergleich, sondern durch einen Umzug."
+      - "Der Scanner bewertet keine Leistung. Ein hoher Betrag kann vollkommen berechtigt sein."
+    quellen:
+      - titel: "Statistisches Bundesamt: Konsumausgaben privater Haushalte"
+        url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
+        herausgeber: "Statistisches Bundesamt"
+        stand: "2026-09"
+      - titel: "Verbraucherzentrale: Haushaltsbuch und laufende Kosten im Griff behalten"
+        url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen"
+        herausgeber: "Verbraucherzentrale Bundesverband"
+        stand: "2026-09"
+    faq_hinweis: "Scanner ordnet, er bewertet nicht."
+
+  # ----------------------------------------------------------------
+  - id: "effektivpreis-24"
+    slug: "effektivpreis-rechner"
+    engine: "effektivpreis"
+    name: "24-Monats-Effektivpreis-Rechner"
+    kurz: "Was ein Tarif über die ganze Laufzeit kostet – mit Aktionsphase, Bonus, Hardware und Einmalkosten."
+    icon: "∑"
+    kompass: "konditionen"
+    pillar: "internet-dsl"
+    pillar_label: "Internet, DSL & Mobilfunk"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "laufzeit"
+        label: "Laufzeit"
+        typ: "zahl"
+        einheit: "Monate"
+        standard: "24"
+        hilfe: "Die Mindestvertragslaufzeit, über die du rechnest."
+      - id: "aktionspreis"
+        label: "Preis in der Aktionsphase"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Der beworbene Einstiegspreis. Ohne Aktion hier denselben Wert wie unten eintragen."
+      - id: "aktionsmonate"
+        label: "Dauer der Aktionsphase"
+        typ: "zahl"
+        einheit: "Monate"
+        standard: "6"
+        hilfe: "Wie viele Monate der Aktionspreis gilt. Ohne Aktion: 0."
+      - id: "normalpreis"
+        label: "Preis nach der Aktion"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Der reguläre Monatspreis ab dem ersten Monat nach der Aktion."
+      - id: "hardware"
+        label: "Gerätemiete oder Zusatzoption"
+        typ: "euro"
+        einheit: "€/Monat"
+        optional: true
+        hilfe: "Router, Receiver, Servicepauschale – alles, was monatlich zusätzlich abgebucht wird."
+      - id: "einmalkosten"
+        label: "Einmalkosten"
+        typ: "euro"
+        einheit: "€"
+        optional: true
+        hilfe: "Anschlusspreis, Versand, Aktivierung, Hardwarekauf."
+      - id: "bonus"
+        label: "Bonus, Cashback oder Gutschrift"
+        typ: "euro"
+        einheit: "€"
+        optional: true
+        hilfe: "Nur Beträge, die vertraglich zugesagt sind – keine Gewinnspiele, keine Prämien mit Bedingungen."
+      - id: "vergleichspreis"
+        label: "Dein heutiger Preis (freiwillig)"
+        typ: "euro"
+        einheit: "€/Monat"
+        optional: true
+        hilfe: "Für den direkten Vergleich: Was zahlst du aktuell pro Monat?"
+    formel:
+      - "Gesamtkosten = Aktionspreis × Aktionsmonate + Normalpreis × (Laufzeit − Aktionsmonate) + Zusatz je Monat × Laufzeit + Einmalkosten − Bonus."
+      - "Effektivpreis = Gesamtkosten ÷ Laufzeit."
+      - "Differenz zu heute = (heutiger Preis − Effektivpreis) × 12."
+      - "Preissprung = Normalpreis + Zusatz je Monat − Effektivpreis."
+    annahmen:
+      - "Der Bonus wird vollständig und innerhalb der Laufzeit ausgezahlt. Verfällt er bei Kündigung, gehört er nicht in die Rechnung."
+      - "Preisanpassungen während der Laufzeit sind nicht enthalten – sie stehen im Vertrag, nicht in der Werbung."
+      - "Nach der Mindestlaufzeit gilt der Normalpreis, nicht der Effektivpreis. Genau dort beginnt der nächste Check."
+    quellen:
+      - titel: "§ 56 TKG: Laufzeit, Kündigung und Verlängerung von Verbraucherverträgen"
+        url: "https://www.gesetze-im-internet.de/tkg_2021/__56.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "Bundesnetzagentur: Verbraucherservice Telekommunikation"
+        url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html"
+        herausgeber: "Bundesnetzagentur"
+        stand: "2026-09"
+    faq_hinweis: "Der Effektivpreis ist die einzige ehrliche Vergleichszahl."
+
+  # ----------------------------------------------------------------
+  - id: "energie-abschlag"
+    slug: "abschlag-nachzahlung-rechner"
+    engine: "energie"
+    name: "Strom- und Gas-Abschlagsrechner"
+    kurz: "Fairer Monatsabschlag, erwartete Nachzahlung oder Guthaben – vor der Jahresabrechnung statt danach."
+    icon: "⌁"
+    kompass: "konditionen"
+    pillar: "strom-sparen"
+    pillar_label: "Strom & Gas sparen"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "medium"
+        label: "Was rechnest du?"
+        typ: "auswahl"
+        standard: "strom"
+        optionen:
+          - wert: "strom"
+            label: "Strom"
+          - wert: "gas"
+            label: "Gas"
+        hilfe: "Die Formel ist identisch; die Einordnung der Werte unterscheidet sich."
+      - id: "verbrauch"
+        label: "Jahresverbrauch"
+        typ: "zahl"
+        einheit: "kWh"
+        hilfe: "Steht auf deiner letzten Jahresabrechnung. Schätzwerte sind möglich, aber ungenauer."
+      - id: "arbeitspreis"
+        label: "Arbeitspreis"
+        typ: "zahl"
+        einheit: "ct/kWh"
+        hilfe: "Brutto, also inklusive Steuern und Abgaben – so steht er im Tarifblatt."
+      - id: "grundpreis"
+        label: "Grundpreis"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Der verbrauchsunabhängige Anteil. Jahresgrundpreis durch zwölf teilen."
+      - id: "abschlag"
+        label: "Dein aktueller Abschlag"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Der Betrag, den dein Versorger derzeit monatlich abbucht."
+      - id: "monate"
+        label: "Bereits gezahlte Monate der laufenden Abrechnungsperiode"
+        typ: "zahl"
+        einheit: "Monate"
+        standard: "0"
+        optional: true
+        hilfe: "0 bis 12. Daraus wird die Hochrechnung bis zur nächsten Abrechnung."
+    formel:
+      - "Jahreskosten = Jahresverbrauch × Arbeitspreis ÷ 100 + Grundpreis × 12."
+      - "Fairer Abschlag = Jahreskosten ÷ 12."
+      - "Erwartete Abweichung über zwölf Monate = (fairer Abschlag − aktueller Abschlag) × 12."
+      - "Bereits aufgelaufen = (fairer Abschlag − aktueller Abschlag) × bereits gezahlte Monate."
+    annahmen:
+      - "Der Verbrauch des kommenden Jahres entspricht dem eingetragenen. Ein kalter Winter oder ein neues Gerät verschiebt das Ergebnis."
+      - "Preisänderungen während der Periode sind nicht enthalten; nach einer Preisanpassung lohnt die Rechnung erneut."
+      - "Boni und Einmalgutschriften bleiben außen vor – sie gehören in den Effektivpreis, nicht in den Abschlag."
+    quellen:
+      - titel: "§ 13 StromGVV: Abschlagszahlungen in der Grundversorgung"
+        url: "https://www.gesetze-im-internet.de/stromgvv/__13.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "§ 13 GasGVV: Abschlagszahlungen in der Gasgrundversorgung"
+        url: "https://www.gesetze-im-internet.de/gasgvv/__13.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "Bundesnetzagentur: Verbraucherservice Energie"
+        url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html"
+        herausgeber: "Bundesnetzagentur"
+        stand: "2026-09"
+    faq_hinweis: "Ein zu niedriger Abschlag ist ein Kredit, den du selbst aufnimmst."
+
+  # ----------------------------------------------------------------
+  - id: "selbstbehalt"
+    slug: "selbstbehalt-rechner"
+    engine: "selbstbehalt"
+    name: "Versicherungs-Selbstbehalt-Rechner"
+    kurz: "Ab welcher Schadenhäufigkeit sich ein Selbstbehalt rechnet – und wann er nur Risiko verschiebt."
+    icon: "⛉"
+    kompass: "konditionen"
+    pillar: "versicherungen"
+    pillar_label: "Versicherungen & Vorsorge"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "beitrag_ohne"
+        label: "Jahresbeitrag ohne Selbstbehalt"
+        typ: "euro"
+        einheit: "€/Jahr"
+        hilfe: "Der Tarif, bei dem der Versicherer ab dem ersten Euro zahlt."
+      - id: "beitrag_mit"
+        label: "Jahresbeitrag mit Selbstbehalt"
+        typ: "euro"
+        einheit: "€/Jahr"
+        hilfe: "Derselbe Leistungsumfang, nur mit Eigenanteil je Schaden."
+      - id: "selbstbehalt"
+        label: "Selbstbehalt je Schaden"
+        typ: "euro"
+        einheit: "€"
+        hilfe: "Der Betrag, den du bei jedem Schadenfall selbst trägst."
+      - id: "schadenhoehe"
+        label: "Typische Schadenhöhe"
+        typ: "euro"
+        einheit: "€"
+        optional: true
+        hilfe: "Liegt ein Schaden unter dem Selbstbehalt, zahlst du ihn ohnehin allein."
+      - id: "schaeden"
+        label: "Erwartete Schäden in zehn Jahren"
+        typ: "zahl"
+        einheit: "Anzahl"
+        standard: "2"
+        hilfe: "Ehrliche Schätzung aus deiner Vergangenheit, nicht aus dem besten Fall."
+    formel:
+      - "Beitragsersparnis = Jahresbeitrag ohne − Jahresbeitrag mit Selbstbehalt."
+      - "Wirksamer Eigenanteil = kleinerer Wert aus Selbstbehalt und typischer Schadenhöhe."
+      - "Break-even = Beitragsersparnis ÷ wirksamer Eigenanteil (Schäden pro Jahr, ab denen der Selbstbehalt teurer wird)."
+      - "Zehn-Jahres-Kosten = Jahresbeitrag × 10 + erwartete Schäden × wirksamer Eigenanteil."
+    annahmen:
+      - "Beide Tarife haben denselben Leistungsumfang. Ein günstigerer Beitrag mit schlechteren Bedingungen ist kein Selbstbehalt-Effekt."
+      - "Schadenfreiheitsrabatte und Rückstufungen sind nicht enthalten – in der Kfz-Versicherung können sie den Vergleich drehen."
+      - "Der Selbstbehalt muss liquide verfügbar sein. Wer ihn im Schadenfall nicht zahlen kann, spart an der falschen Stelle."
+    quellen:
+      - titel: "§ 11 VVG: Verlängerung und Kündigung von Versicherungsverträgen"
+        url: "https://www.gesetze-im-internet.de/vvg_2008/__11.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "BaFin: Rund um den Versicherungsvertrag"
+        url: "https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/versicherungen/versicherungsvertrag/versicherungsvertrag_node.html"
+        herausgeber: "Bundesanstalt für Finanzdienstleistungsaufsicht"
+        stand: "2026-09"
+    faq_hinweis: "Ein Selbstbehalt kauft Beitrag mit Risiko."
+
+  # ----------------------------------------------------------------
+  - id: "notgroschen"
+    slug: "notgroschen-rechner"
+    engine: "notgroschen"
+    name: "Notgroschen-Rechner"
+    kurz: "Zielbetrag nach Lebenslage, ehrliche Dauer bis dorthin und drei Zwischenziele, die du erreichst."
+    icon: "◍"
+    kompass: "kurs"
+    pillar: "frugalismus"
+    pillar_label: "Frugalismus & Budget"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "ausgaben"
+        label: "Notwendige Ausgaben"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Wohnen, Energie, Lebensmittel, Mobilität, Versicherungen – nicht dein ganzes Einkommen."
+      - id: "lage"
+        label: "Deine Lage"
+        typ: "auswahl"
+        standard: "angestellt"
+        optionen:
+          - wert: "angestellt"
+            label: "Unbefristet angestellt, zweites Einkommen im Haushalt"
+            zahl: 3
+          - wert: "einverdiener"
+            label: "Ein Einkommen trägt den Haushalt"
+            zahl: 4
+          - wert: "schwankend"
+            label: "Schwankendes Einkommen oder befristete Stelle"
+            zahl: 6
+          - wert: "selbststaendig"
+            label: "Selbstständig oder mit Unterhaltspflichten"
+            zahl: 6
+        hilfe: "Bestimmt die Zahl der Monatsausgaben im Ziel – zwischen drei und sechs."
+      - id: "erspartes"
+        label: "Bereits verfügbar"
+        typ: "euro"
+        einheit: "€"
+        optional: true
+        hilfe: "Nur, was du binnen Tagen ohne Verlust abheben kannst. Depot und Bausparer zählen nicht."
+      - id: "sparrate"
+        label: "Monatliche Sparrate"
+        typ: "euro"
+        einheit: "€/Monat"
+        hilfe: "Der Betrag, den du dauerhaft durchhältst – nicht der Betrag im besten Monat."
+      - id: "zins"
+        label: "Zins deines Tagesgeldkontos"
+        typ: "prozent"
+        einheit: "% p. a."
+        optional: true
+        standard: "0"
+        hilfe: "Freiwillig. Ohne Angabe rechnet das Werkzeug konservativ ohne Zins."
+    formel:
+      - "Zielbetrag = Monate deiner Lage × notwendige Monatsausgaben."
+      - "Fehlbetrag = Zielbetrag − bereits Verfügbares."
+      - "Dauer = monatliche Fortschreibung von Bestand × (1 + Zins ÷ 12 ÷ 100) + Sparrate bis zum Zielbetrag."
+      - "Zwischenziele = eine Monatsausgabe, die Hälfte des Ziels, das volle Ziel."
+    annahmen:
+      - "Drei bis sechs Monatsausgaben sind ein praktischer Rahmen, kein Gesetz. Wer sichere Einkünfte und niedrige Fixkosten hat, kommt mit weniger aus."
+      - "Der Zins wird monatlich gutgeschrieben; reale Konten zahlen oft quartalsweise. Der Unterschied ist bei dieser Laufzeit gering."
+      - "Inflation ist nicht eingerechnet. Der Notgroschen sichert Liquidität, er ist keine Geldanlage."
+    quellen:
+      - titel: "Deutsche Bundesbank: Zinsstatistik für Einlagen privater Haushalte"
+        url: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen"
+        herausgeber: "Deutsche Bundesbank"
+        stand: "2026-09"
+      - titel: "Verbraucherzentrale: Geld anlegen und Rücklagen bilden"
+        url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen"
+        herausgeber: "Verbraucherzentrale Bundesverband"
+        stand: "2026-09"
+    faq_hinweis: "Der Notgroschen ist Liquidität, keine Rendite."
+
+  # ----------------------------------------------------------------
+  - id: "kuendigungsfristen"
+    slug: "kuendigungsfristen-kalender"
+    engine: "fristen"
+    name: "Kündigungsfristen-Kalender"
+    kurz: "Letzter Kündigungstag, drei Erinnerungen und eine Kalenderdatei, die den Termin für dich hält."
+    icon: "◷"
+    kompass: "kuendigungsfenster"
+    pillar: "internet-dsl"
+    pillar_label: "Internet, DSL & Mobilfunk"
+    speicher: true
+    exporte: ["ics", "csv", "pdf"]
+    felder:
+      - id: "vertragsart"
+        label: "Vertragsart"
+        typ: "auswahl"
+        standard: "telekommunikation"
+        optionen:
+          - wert: "telekommunikation"
+            label: "Internet, Mobilfunk, Kabel"
+          - wert: "energie"
+            label: "Strom oder Gas"
+          - wert: "versicherung"
+            label: "Versicherung"
+          - wert: "abo"
+            label: "Abo, Verein, Fitnessstudio"
+          - wert: "sonstiges"
+            label: "Sonstiger Dauervertrag"
+        hilfe: "Dient der Einordnung im Ergebnis. Die Frist trägst du selbst aus dem Vertrag ein."
+      - id: "vertragsende"
+        label: "Vertragsende oder Verlängerungsstichtag"
+        typ: "datum"
+        hilfe: "Das Datum, zu dem gekündigt werden kann – steht in der Auftragsbestätigung."
+      - id: "frist_wert"
+        label: "Kündigungsfrist"
+        typ: "zahl"
+        standard: "3"
+        hilfe: "Die Zahl aus deinem Vertrag, zum Beispiel 3."
+      - id: "frist_einheit"
+        label: "Einheit der Frist"
+        typ: "auswahl"
+        standard: "monate"
+        optionen:
+          - wert: "monate"
+            label: "Monate"
+          - wert: "wochen"
+            label: "Wochen"
+          - wert: "tage"
+            label: "Tage"
+        hilfe: "Monate, Wochen oder Tage – genau wie im Vertrag formuliert."
+      - id: "verlaengerung"
+        label: "Verlängerung, wenn du nichts tust"
+        typ: "auswahl"
+        standard: "monatlich"
+        optionen:
+          - wert: "monatlich"
+            label: "Monatlich kündbar (gesetzlicher Regelfall seit 2022)"
+            zahl: 1
+          - wert: "jaehrlich"
+            label: "Um zwölf Monate"
+            zahl: 12
+          - wert: "keine"
+            label: "Keine automatische Verlängerung"
+            zahl: 0
+        hilfe: "Entscheidet, wie teuer ein verpasster Termin wird."
+    formel:
+      - "Letzter Kündigungstag = Vertragsende − Frist (Monate, Wochen oder Tage)."
+      - "Verbleibende Tage = letzter Kündigungstag − heute."
+      - "Erinnerung 1 = letzter Kündigungstag − 42 Tage (Vergleich rechnen)."
+      - "Erinnerung 2 = letzter Kündigungstag − 14 Tage (Kündigung schreiben)."
+      - "Erinnerung 3 = letzter Kündigungstag (Zugang sicherstellen)."
+    annahmen:
+      - "Maßgeblich ist der Zugang der Kündigung beim Vertragspartner, nicht der Absendetag (§ 130 BGB). Plane Postlaufzeit ein oder nutze den Kündigungsknopf."
+      - "Monatsfristen werden kalendarisch gerechnet: drei Monate vor dem 31. Mai ist der 28. Februar, wenn der 31. nicht existiert."
+      - "Der Kalender ersetzt keine Rechtsberatung. Verbindlich ist immer der Vertragstext."
+    quellen:
+      - titel: "§ 309 Nr. 9 BGB: Laufzeit und Verlängerung bei Dauerschuldverhältnissen"
+        url: "https://www.gesetze-im-internet.de/bgb/__309.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "§ 130 BGB: Wirksamwerden einer Willenserklärung bei Zugang"
+        url: "https://www.gesetze-im-internet.de/bgb/__130.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "§ 312k BGB: Kündigungsschaltfläche für Verbraucherverträge im Netz"
+        url: "https://www.gesetze-im-internet.de/bgb/__312k.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+    faq_hinweis: "Zugang zählt, nicht Absendung."
+
+  # ----------------------------------------------------------------
+  - id: "tarifwechsel-baum"
+    slug: "tarifwechsel-entscheidungsbaum"
+    engine: "entscheidung"
+    name: "Tarifwechsel-Entscheidungsbaum"
+    kurz: "Fünf Fragen, eine begründete Empfehlung: wechseln, nachverhandeln, abwarten – oder erst rechnen."
+    icon: "⌥"
+    kompass: "konditionen"
+    pillar: "strom-sparen"
+    pillar_label: "Strom & Gas sparen"
+    speicher: false
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "kosten_bekannt"
+        label: "Kennst du deine echten Jahreskosten?"
+        typ: "auswahl"
+        standard: "ja"
+        optionen:
+          - wert: "ja"
+            label: "Ja, aus der letzten Jahresabrechnung"
+          - wert: "nein"
+            label: "Nein, nur den Abschlag"
+        hilfe: "Ohne Jahreskosten vergleichst du Werbepreise, keine Verträge."
+      - id: "bindung"
+        label: "Bist du aktuell kündbar?"
+        typ: "auswahl"
+        standard: "frei"
+        optionen:
+          - wert: "frei"
+            label: "Ja, Frist läuft oder Vertrag ist monatlich kündbar"
+          - wert: "bald"
+            label: "In den nächsten sechs Monaten"
+          - wert: "gebunden"
+            label: "Nein, länger als sechs Monate gebunden"
+        hilfe: "Eine Bindung ist kein Hindernis – sie verschiebt nur den richtigen Zeitpunkt."
+      - id: "ersparnis"
+        label: "Rechnerische Ersparnis pro Jahr"
+        typ: "euro"
+        einheit: "€/Jahr"
+        hilfe: "Effektivpreis des neuen Tarifs gegen deine echten Jahreskosten – nicht gegen den Listenpreis."
+      - id: "konditionen"
+        label: "Wie ist der neue Tarif gebaut?"
+        typ: "auswahl"
+        standard: "garantie"
+        optionen:
+          - wert: "garantie"
+            label: "Preisgarantie über die Laufzeit"
+          - wert: "bonuslastig"
+            label: "Günstig vor allem durch Neukundenbonus"
+          - wert: "ohne"
+            label: "Weder Garantie noch Bonus"
+        hilfe: "Ein Bonus wirkt einmal, eine Preisgarantie wirkt jeden Monat."
+      - id: "vorkasse"
+        label: "Verlangt der Anbieter Vorkasse oder Kaution?"
+        typ: "auswahl"
+        standard: "nein"
+        optionen:
+          - wert: "nein"
+            label: "Nein, normale monatliche Abschläge"
+          - wert: "ja"
+            label: "Ja, Vorauszahlung oder Kaution"
+        hilfe: "Vorkasse verwandelt eine Ersparnis in ein Ausfallrisiko."
+    formel:
+      - "Regel 1: Ohne bekannte Jahreskosten lautet das Ergebnis immer „erst rechnen\"."
+      - "Regel 2: Vorkasse oder Kaution setzt die Empfehlung unabhängig von der Ersparnis auf „Finger weg\"."
+      - "Regel 3: Ersparnis unter 60 € im Jahr trägt den Aufwand und das Wechselrisiko nicht."
+      - "Regel 4: Gebundener Vertrag → Termin setzen statt kündigen; Bindung unter sechs Monaten → jetzt vorbereiten."
+      - "Regel 5: Bonuslastige Tarife werden nur empfohlen, wenn die Ersparnis auch im zweiten Jahr trägt."
+    annahmen:
+      - "Der Baum bewertet Struktur, nicht Anbieter. Er nennt keinen Namen und sortiert keine Liste."
+      - "Die Schwelle von 60 € im Jahr ist eine Aufwandsgrenze aus der Praxis, keine mathematische Konstante."
+      - "Sonderkündigungsrechte nach Preiserhöhung bleiben unberührt und können jede Bindung aushebeln."
+    quellen:
+      - titel: "§ 41 EnWG: Strom- und Gaslieferverträge mit Haushaltskunden"
+        url: "https://www.gesetze-im-internet.de/enwg_2005/__41.html"
+        herausgeber: "Bundesministerium der Justiz"
+        stand: "2026-09"
+      - titel: "Verbraucherzentrale: Anbieterwechsel bei Strom und Gas"
+        url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel"
+        herausgeber: "Verbraucherzentrale Bundesverband"
+        stand: "2026-09"
+    faq_hinweis: "Eine Empfehlung ohne Begründung ist Werbung."
+
+  # ----------------------------------------------------------------
+  - id: "haushaltsbudget"
+    slug: "haushaltsbudget"
+    engine: "budget"
+    name: "Haushaltsbudget mit lokalem Speicher"
+    kurz: "Einnahmen, Ausgaben, Saldo und die 50-30-20-Verteilung – gespeichert nur in deinem Browser."
+    icon: "▤"
+    kompass: "kurs"
+    pillar: "frugalismus"
+    pillar_label: "Frugalismus & Budget"
+    speicher: true
+    exporte: ["csv", "pdf"]
+    felder:
+      - id: "einkommen"
+        label: "Haushaltsnetto"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "einnahme"
+        hilfe: "Alle regelmäßigen Einkünfte nach Steuern und Sozialabgaben."
+      - id: "wohnen"
+        label: "Wohnen"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Miete oder Rate, Nebenkosten, Hausgeld."
+      - id: "energie"
+        label: "Energie"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Strom, Gas, Fernwärme."
+      - id: "lebensmittel"
+        label: "Lebensmittel & Drogerie"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Der Posten, den fast alle unterschätzen. Drei Monate Kontoauszug mitteln."
+      - id: "mobilitaet"
+        label: "Mobilität"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Ticket, Kraftstoff, Rate, Wartung, Stellplatz."
+      - id: "versicherungen"
+        label: "Versicherungen"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Jahresbeiträge durch zwölf."
+      - id: "kommunikation"
+        label: "Internet, Mobilfunk & Medien"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        hilfe: "Festnetz, Mobilfunk, Rundfunkbeitrag."
+      - id: "gesundheit"
+        label: "Gesundheit & Vorsorge"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "bedarf"
+        optional: true
+        hilfe: "Zuzahlungen, Brille, Zahnersatz-Rücklage."
+      - id: "freizeit"
+        label: "Freizeit, Abos & Reisen"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "wunsch"
+        hilfe: "Streaming, Essen gehen, Hobby, Urlaubsrücklage."
+      - id: "sonstiges"
+        label: "Sonstiges & Puffer"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "wunsch"
+        optional: true
+        hilfe: "Kleidung, Geschenke, alles ohne festen Platz."
+      - id: "sparen"
+        label: "Sparen, Tilgung & Vorsorge"
+        typ: "euro"
+        einheit: "€/Monat"
+        bucket: "sparen"
+        hilfe: "Sparplan, Sondertilgung, Notgroschen-Rate."
+    formel:
+      - "Ausgaben = Summe aller Ausgabenfelder."
+      - "Saldo = Haushaltsnetto − Ausgaben."
+      - "Istverteilung = Summe je Gruppe (Bedarf, Wünsche, Sparen) ÷ Haushaltsnetto × 100."
+      - "Zielverteilung nach 50-30-20 = Haushaltsnetto × 0,50 bzw. 0,30 bzw. 0,20."
+    annahmen:
+      - "Die 50-30-20-Regel ist eine Orientierung aus der Budgetberatung, keine Norm. In teuren Städten liegt der Bedarfsanteil regelmäßig höher."
+      - "Jährliche Zahlungen gehören durch zwölf geteilt ins Budget, sonst erzeugt der Dezember ein Loch."
+      - "Ein positiver Saldo ist noch kein Sparbetrag – erst die Überweisung am Monatsanfang macht ihn dazu."
+    quellen:
+      - titel: "Statistisches Bundesamt: Einkommen, Konsum und Lebensbedingungen"
+        url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/_inhalt.html"
+        herausgeber: "Statistisches Bundesamt"
+        stand: "2026-09"
+      - titel: "Verbraucherzentrale: Budgetplanung und Haushaltsbuch"
+        url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen"
+        herausgeber: "Verbraucherzentrale Bundesverband"
+        stand: "2026-09"
+    faq_hinweis: "Ein Budget ist eine Entscheidung, keine Tabelle."

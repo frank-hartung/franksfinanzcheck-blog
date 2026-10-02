@@ -36,6 +36,10 @@ on:
       - "scripts/fixkosten_kompass_guard.py"
       - "scripts/tests/test_fixkosten_kompass.py"
       - "tools/fixkosten-cockpit.test.mjs"
+      - "data/werkzeuge.yaml"
+      - "scripts/werkzeuge_gate.py"
+      - "scripts/tests/test_werkzeuge_gate.py"
+      - "tools/werkzeuge.test.mjs"
       - "hugo.toml"
       - "e2e/**"
       - "playwright.config.mjs"
@@ -94,6 +98,13 @@ jobs:
         run: |
           python3 -m pip install -q pyyaml
           npm run test:cockpit
+
+      # Rechenkern und Produktvertrag der Werkzeuge: 55 Prüfungen ohne
+      # Browser (jsdom + reine Funktionen) plus die Sabotageproben der
+      # Wache. Läuft vor dem Build, weil ein falsch rechnender Rechner
+      # keine E2E-Runde wert ist.
+      - name: Werkzeuge – Rechenkern und Produktvertrag
+        run: npm run test:werkzeuge
 
       - name: Website bauen
         env:

@@ -1,0 +1,204 @@
+{{- /* ============================================================
+    FF-WERKZEUG – ein eigenständiges Finanz-Werkzeug
+    ------------------------------------------------------------
+    Baut Formular, Ergebnisbereich, Export und Methodik komplett aus
+    data/werkzeuge.yaml. Es gibt bewusst KEIN handgeschriebenes
+    Formular je Werkzeug: Ein Feld existiert genau einmal – in der
+    YAML – und erscheint daraus im Markup, im Rechenkern
+    (static/premium/ff-werkzeuge.js liest dieselben data-Attribute)
+    und im Export.
+
+    Aufruf:
+      {{ partial "ff_werkzeug.html" (dict "id" "notgroschen" "page" .) }}
+
+    VERTRAG (Wache: scripts/werkzeuge_gate.py)
+      * Das Formular hat kein action-Attribut. Es gibt nichts zu senden.
+      * Die Vertrauenszusage steht ÜBER dem Formular, nicht darunter.
+      * Jedes Eingabefeld hat ein <label for>, eine Einheit und eine
+        Erklärung; Pflichtfelder sind als solche ausgezeichnet.
+      * Methodik und Quellen stehen auf derselben Seite, nicht in
+        einem Popup und nicht hinter einem Klick ins Nichts.
+      * Keine Inline-Farben: jede Optik kommt aus
+        assets/css/extended/zz-werkzeuge.css.
+============================================================ */ -}}
+{{- $daten := partialCached "werkzeuge_data.html" "werkzeuge" -}}
+{{- $id := .id -}}
+{{- $page := .page -}}
+{{- $treffer := where $daten.werkzeuge "id" $id -}}
+{{- if not $treffer -}}
+  {{- errorf "ff_werkzeug.html: Werkzeug %q steht nicht in data/werkzeuge.yaml" $id -}}
+{{- end -}}
+{{- $w := index $treffer 0 -}}
+
+{{- /* 4K-Einordnung: jedes Werkzeug gehört zu genau einem Schritt des
+       Fixkosten-Kompasses. Die Benennung kommt aus dessen SSOT, damit
+       Produktkern und Werkzeuge nicht auseinanderlaufen. */ -}}
+{{- $kompass := partialCached "fixkosten_kompass_data.html" "kompass" -}}
+{{- $stufe := "" -}}
+{{- with where $kompass.stages "id" $w.kompass -}}
+  {{- $stufe = (index . 0).title -}}
+{{- end -}}
+{{- if not $stufe -}}
+  {{- errorf "ff_werkzeug.html: Werkzeug %q nennt den unbekannten Kompass-Schritt %q" $id $w.kompass -}}
+{{- end -}}
+
+{{- $praefix := $daten.export.dateipraefix | default "franksfinanzcheck" -}}
+
+<section class="ff-wz" id="werkzeug"
+         data-ff-werkzeug
+         data-werkzeug="{{ $w.id }}"
+         data-engine="{{ $w.engine }}"
+         data-name="{{ $w.name }}"
+         data-dateipraefix="{{ $praefix }}"
+         data-herkunft="{{ site.BaseURL }}"
+         data-versprechen="{{ $daten.versprechen }}"
+         aria-label="{{ $w.name }} – Rechenwerkzeug">
+
+  <noscript>
+    <p class="ff-wz__noscript">Dieses Werkzeug rechnet im Browser und braucht dafür JavaScript. Formel, Annahmen und Quellen stehen trotzdem vollständig unter dem Formular – du kannst die Rechnung jederzeit von Hand nachvollziehen.</p>
+  </noscript>
+
+  <header class="ff-wz__kopf">
+    <p class="ff-wz__eyebrow"><span aria-hidden="true">◈</span> Werkzeug · Schritt „{{ $stufe }}"</p>
+    {{- /* KEIN id-Attribut auf dieser H2 (Chunker-Vertrag, scripts/layout_audit.py):
+           Die Text-Teilung in sectioned_content.html setzt vor jede H2/H3 MIT id
+           eine Gruppengrenze. Steckt die Überschrift wie hier in einem Container,
+           würde diese Grenze den Container aufreißen. Das Werkzeug ist deshalb
+           über aria-label der Sektion benannt statt über aria-labelledby. */ -}}
+    <h2 class="ff-wz__titel"><span class="ff-wz__icon" aria-hidden="true">{{ $w.icon }}</span> {{ $w.name }}</h2>
+    <p class="ff-wz__kurz">{{ $w.kurz }}</p>
+  </header>
+
+  {{- /* Die Vertrauenszusage steht VOR der ersten Eingabe. Wer sie erst
+         unter dem Ergebnis liest, hat längst entschieden. */ -}}
+  <p class="ff-wz__versprechen" data-ff-wz-versprechen>
+    <span class="ff-wz__versprechen-marke" aria-hidden="true">✓</span>
+    <span>{{ $daten.versprechen }} Keine Anmeldung, keine personenbezogenen Daten, keine Übertragung deiner Eingaben.</span>
+  </p>
+
+  <form class="ff-wz__form" novalidate>
+    <fieldset class="ff-wz__fieldset">
+      <legend class="ff-wz__legend">Deine Eingaben</legend>
+      <div class="ff-wz__felder">
+        {{- range $w.felder }}
+        {{- $feldId := printf "ff-wz-%s-%s" $w.id .id -}}
+        <div class="ff-wz__feld{{ if eq .typ "auswahl" }} ff-wz__feld--breit{{ end }}">
+          <label class="ff-wz__label" for="{{ $feldId }}">
+            {{ .label }}
+            {{- if .einheit }} <span class="ff-wz__einheit">({{ .einheit }})</span>{{ end }}
+            {{- if not .optional }} <span class="ff-wz__pflicht" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span>{{ end }}
+          </label>
+          {{- if eq .typ "auswahl" }}
+          <select class="ff-wz__eingabe ff-wz__eingabe--auswahl"
+                  id="{{ $feldId }}"
+                  data-feld="{{ .id }}"
+                  data-typ="auswahl"
+                  data-label="{{ .label }}"
+                  {{ with .standard }}data-standard="{{ . }}"{{ end }}
+                  {{ if not .optional }}data-pflicht{{ end }}
+                  aria-describedby="{{ $feldId }}-hilfe">
+            {{- range .optionen }}
+            <option value="{{ .wert }}"{{ with .zahl }} data-zahl="{{ . }}"{{ end }}>{{ .label }}</option>
+            {{- end }}
+          </select>
+          {{- else }}
+          <input class="ff-wz__eingabe"
+                 id="{{ $feldId }}"
+                 type="{{ if eq .typ "datum" }}date{{ else }}text{{ end }}"
+                 {{ if ne .typ "datum" }}inputmode="decimal"{{ end }}
+                 autocomplete="off"
+                 spellcheck="false"
+                 data-feld="{{ .id }}"
+                 data-typ="{{ .typ }}"
+                 data-label="{{ .label }}"
+                 {{ with .einheit }}data-einheit="{{ . }}"{{ end }}
+                 {{ with .bucket }}data-bucket="{{ . }}"{{ end }}
+                 {{ with .sparkorridor }}data-korridor="{{ delimit . "," }}"{{ end }}
+                 {{ with .standard }}data-standard="{{ . }}" value="{{ . }}"{{ end }}
+                 {{ if not .optional }}data-pflicht{{ end }}
+                 aria-describedby="{{ $feldId }}-hilfe">
+          {{- end }}
+          <p class="ff-wz__hilfe" id="{{ $feldId }}-hilfe">{{ .hilfe }}</p>
+        </div>
+        {{- end }}
+      </div>
+    </fieldset>
+
+    <div class="ff-wz__aktionen">
+      {{- if $w.speicher }}
+      <label class="ff-wz__merken">
+        <input type="checkbox" data-ff-wz-speichern>
+        <span>Eingaben auf diesem Gerät merken</span>
+      </label>
+      {{- else }}
+      <p class="ff-wz__merken ff-wz__merken--aus">Dieses Werkzeug speichert nichts – es beantwortet eine einmalige Frage.</p>
+      {{- end }}
+      <div class="ff-wz__knoepfe">
+        <button type="button" class="ff-wz__btn ff-wz__btn--leise" data-ff-wz-reset>Zurücksetzen</button>
+        <button type="submit" class="ff-wz__btn">Berechnen <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="ff-wz__ergebnis" data-ff-wz-ergebnis role="region" aria-live="polite" aria-label="Ergebnis von {{ $w.name }}">
+    <p class="ff-wz__leer" data-ff-wz-leer>Noch nichts gerechnet. Trag deine Werte ein – das Ergebnis erscheint hier, ohne dass die Seite neu lädt.</p>
+    <div class="ff-wz__fehler" data-ff-wz-fehler hidden></div>
+
+    <div data-ff-wz-ausgabe hidden>
+      <div class="ff-wz__kennzahlen" data-ff-wz-kennzahlen></div>
+      <div class="ff-wz__block" data-ff-wz-liste hidden></div>
+      <div class="ff-wz__block" data-ff-wz-termine hidden></div>
+      <div class="ff-wz__block" data-ff-wz-zeilen hidden></div>
+      <div class="ff-wz__hinweise" data-ff-wz-hinweise></div>
+
+      <div class="ff-wz__export">
+        <p class="ff-wz__export-titel">Ergebnis mitnehmen</p>
+        <div class="ff-wz__export-knoepfe">
+          {{- range $w.exporte }}
+          {{- $format := . -}}
+          {{- $meta := index (where $daten.export.formate "id" $format) 0 -}}
+          <button type="button" class="ff-wz__btn ff-wz__btn--leise" data-ff-wz-export-format="{{ $format }}"
+                  title="{{ $meta.beschreibung }}">{{ $meta.label }}</button>
+          {{- end }}
+        </div>
+        <p class="ff-wz__export-note">{{ $daten.vertrauen.export_hinweis }}</p>
+      </div>
+    </div>
+  </div>
+
+  {{- if $w.speicher }}
+  <p class="ff-wz__speicher-note">{{ $daten.vertrauen.speicher_hinweis }}</p>
+  {{- end }}
+
+  <div class="ff-wz__methodik">
+    <h3 class="ff-wz__methodik-titel">So rechnet dieses Werkzeug</h3>
+    <ol class="ff-wz__formel" data-ff-wz-formel>
+      {{- range $w.formel }}
+      <li>{{ . }}</li>
+      {{- end }}
+    </ol>
+
+    <h4 class="ff-wz__methodik-sub">Annahmen und Grenzen</h4>
+    <ul class="ff-wz__annahmen" data-ff-wz-annahme>
+      {{- range $w.annahmen }}
+      <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+
+    <h4 class="ff-wz__methodik-sub">Quellen</h4>
+    <ul class="ff-wz__quellen">
+      {{- range $w.quellen }}
+      <li data-ff-wz-quelle data-url="{{ .url }}">
+        <a href="{{ .url }}" rel="noopener nofollow" target="_blank">{{ .titel }}</a>
+        <span class="ff-wz__quelle-meta">{{ .herausgeber }} · Stand {{ .stand }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+
+{{- /* Das Skript genau EINMAL pro Seite, egal wie viele Werkzeuge stehen. */ -}}
+{{- if and $page (not ($page.Store.Get "ff-werkzeuge-js-geladen")) -}}
+{{- $page.Store.Set "ff-werkzeuge-js-geladen" true -}}
+<script defer src="{{ partial "asset_url.html" "premium/ff-werkzeuge.js" }}"></script>
+{{- end -}}

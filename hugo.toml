@@ -180,31 +180,41 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     name = "Fixkosten-Cockpit"
     url = "/cockpit/"
     weight = 2
+# WERKZEUGE (02.10.2026): Die acht eigenständigen Rechner sind ein
+# Produktversprechen, kein Beiwerk im Artikel – deshalb stehen sie
+# direkt neben dem Cockpit in der Hauptnavigation und nicht in einem
+# Untermenü. Ohne diesen Eintrag wären die Werkzeugseiten zudem
+# Waisen (Wache: scripts/index_hygiene_gate.py H7).
+[[menu.main]]
+    identifier = "werkzeuge"
+    name = "Werkzeuge"
+    url = "/werkzeuge/"
+    weight = 3
 [[menu.main]]
     identifier = "posts"
     name = "Blog"
     url = "/posts/"
-    weight = 3
+    weight = 4
 [[menu.main]]
     identifier = "pillars"
     name = "Ratgeber"
     url = "/pillar/"
-    weight = 4
+    weight = 5
 [[menu.main]]
     identifier = "ueber"
     name = "Über mich"
     url = "/ueber/"
-    weight = 5
+    weight = 6
 [[menu.main]]
     identifier = "impressum"
     name = "Impressum"
     url = "/impressum/"
-    weight = 6
+    weight = 7
 [[menu.main]]
     identifier = "datenschutz"
     name = "Datenschutz"
     url = "/datenschutz/"
-    weight = 7
+    weight = 8
 
 # ---------------------------------------------------------------------
 # TAXONOMIEN – bewusst KEINE (Index-Hygiene, Entscheidung 29.09.2026)

@@ -1,0 +1,23 @@
+{{- /* ============================================================
+    werkzeuge_data.html – EINE Quelle für alle Werkzeuge.
+
+    data/ enthält JSONL-Betriebsprotokolle; `site.Data` würde den
+    gesamten Baum parsen und daran scheitern. Das Werkzeug-Register
+    wird deshalb gezielt aus seiner kuratierten YAML gelesen – genau
+    wie der Fixkosten-Kompass (fixkosten_kompass_data.html).
+
+    Fail-closed: Fehlt die Datei oder eine Pflichtangabe, bricht der
+    Build ab. Ein halb gerendertes Werkzeug ohne Vertrauenszusage
+    wäre schlimmer als gar keins.
+============================================================ */ -}}
+{{- $daten := os.ReadFile "data/werkzeuge.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- if not $daten -}}
+  {{- errorf "werkzeuge_data.html: data/werkzeuge.yaml fehlt oder ist leer" -}}
+{{- end -}}
+{{- if not $daten.versprechen -}}
+  {{- errorf "werkzeuge_data.html: Das Vertrauensversprechen fehlt – ohne es darf kein Werkzeug ausgeliefert werden" -}}
+{{- end -}}
+{{- if not $daten.werkzeuge -}}
+  {{- errorf "werkzeuge_data.html: Kein Werkzeug im Register" -}}
+{{- end -}}
+{{- return $daten -}}

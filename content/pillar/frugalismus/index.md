@@ -10,7 +10,7 @@ build:
   list: never
 keywords: ["Frugalismus", "Geld sparen im Alltag", "50 30 20 Regel", "Notgroschen aufbauen", "Finanzielle Freiheit", "Haushaltsbudget", "Tagesgeld Zinsen"]
 cover:
-  image: "images/covers/frugalismus.jpg"
+  image: "images/covers/pillar-frugalismus.jpg"
   alt: "Haushaltsbudget & Frugalismus: Der große Ratgeber für finanzielle Puffer"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
