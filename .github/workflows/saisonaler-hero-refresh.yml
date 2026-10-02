@@ -84,12 +84,22 @@ jobs:
             --out-dir data/research/saisonal
 
       - name: Claude-Textprüfung – nur H1 und GEO-Lead
+        id: politur
         env:
           PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="--force"; fi
+          set +e
           python3 scripts/saisonaler_hero_refresh.py --fix $ARGS
+          CODE=$?
+          set -e
+          echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
+          # Das Skript unterscheidet selbst zwischen gelb (geprüfte Basis bleibt
+          # live, Kette pausiert) und rot (Live-Hero defekt, Überalterung oder
+          # Ausfall-Serie). Nur rot darf den Lauf kippen – sonst entsteht täglich
+          # ein Fehlalarm, obwohl die Startseite einwandfrei ausgeliefert wird.
+          exit $CODE
 
       - name: Render-Beweis und Premium-Layout-Gates
         run: |
@@ -97,7 +107,21 @@ jobs:
           python3 scripts/saisonale_startseite_guard.py --public public
           python3 scripts/design_variant_gate.py --produktionswache
 
+      - name: Diagnose in die Lauf-Zusammenfassung schreiben
+        if: always()
+        run: |
+          {
+            echo "## Saisonaler Hero"
+            echo
+            if [ -f SAISONALER-HERO-REPORT.md ]; then
+              cat SAISONALER-HERO-REPORT.md
+            else
+              echo "_Kein Report erzeugt – der Lauf brach vor der Textprüfung ab._"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Saisontext, Nachweis und Recherche committen
+        if: always() && steps.politur.conclusion != 'skipped'
         run: |
           if git status --porcelain -- \
                data/saisons.yaml data/saisonaler_hero_state.json \
@@ -123,20 +147,64 @@ jobs:
             data/research/saisonal/*.json
           if-no-files-found: ignore
 
+      # ------------------------------------------------------------
+      #  ISSUE-HYGIENE (Premium-Fix 02.10.2026)
+      #  Vorher: jeder rote Lauf legte ein Issue an, aber niemand schloss es
+      #  wieder – ein einmal geöffnetes Issue blieb auch dann stehen, wenn der
+      #  nächste Lauf längst grün war. Jetzt gilt: genau EIN Vorgang je Störung,
+      #  mit Diagnose als Kommentar, und er schließt sich selbst, sobald die
+      #  Kette wieder sauber durchläuft.
+      # ------------------------------------------------------------
       - name: Ausfall sichtbar machen (kein stiller Fallback)
-        if: failure()
+        if: failure() && steps.politur.conclusion != 'skipped'
         env:
           GH_TOKEN: ${{ github.token }}
+          LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           gh label create saisonaler-hero --repo "$GITHUB_REPOSITORY" \
             --color "0e8a16" \
             --description "Saisonaler SEO/GEO-Hero: Agent-Reach- oder Claude-Lauf" --force || true
-          TITEL="Saisonaler Hero-Refresh: Aktion nötig ($(date +%F))"
-          if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-               --search "in:title \"Saisonaler Hero-Refresh: Aktion nötig\"" | grep -q .; then
-            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITEL" \
-              --label saisonaler-hero \
-              --body "Der saisonale Hero wurde nicht als Agent-Reach + Claude-poliert veröffentlicht. Prüfe den Lauf, die Agent-Reach-Quellen und PUTER_AUTH_TOKEN. Die kuratierte Saisonbasis bleibt absichtlich unverändert sichtbar; es gab keinen stillen KI- oder Fakten-Fallback."
+          {
+            echo "Der saisonale Hero wurde nicht als Agent-Reach + Claude-poliert veröffentlicht."
+            echo "Die kuratierte Saisonbasis bleibt absichtlich unverändert sichtbar; es gab"
+            echo "keinen stillen KI- oder Fakten-Fallback."
+            echo
+            echo "**Lauf:** $LAUF"
+            echo
+            if [ -f SAISONALER-HERO-REPORT.md ]; then
+              echo "<details><summary>Diagnose-Report</summary>"
+              echo
+              cat SAISONALER-HERO-REPORT.md
+              echo
+              echo "</details>"
+            fi
+            echo
+            echo "Prüfreihenfolge: 1. Diagnose-Report oben (Kettennachweis),"
+            echo "2. \`PUTER_AUTH_TOKEN\` (Secret gesetzt und gültig?),"
+            echo "3. Agent-Reach-Quellen in \`data/agent_reach/saisonaler_hero.yaml\`,"
+            echo "4. \`python3 scripts/saisonaler_hero_refresh.py --check --json\` lokal."
+          } > /tmp/hero-issue.md
+          NUMMER="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label saisonaler-hero --search "in:title \"Saisonaler Hero-Refresh: Aktion nötig\"" \
+            --json number --jq '.[0].number // empty')"
+          if [ -n "$NUMMER" ]; then
+            gh issue comment "$NUMMER" --repo "$GITHUB_REPOSITORY" --body-file /tmp/hero-issue.md
+            echo "Bestehender Vorgang #$NUMMER um die aktuelle Diagnose ergänzt."
           else
-            echo "Offenes Saison-Hero-Issue existiert bereits."
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Saisonaler Hero-Refresh: Aktion nötig ($(date +%F))" \
+              --label saisonaler-hero --body-file /tmp/hero-issue.md
           fi
+
+      - name: Behobene Störung selbst schließen
+        if: success() && steps.politur.outputs.ampel == 'gruen'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          for NUMMER in $(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label saisonaler-hero --search "in:title \"Saisonaler Hero-Refresh: Aktion nötig\"" \
+            --json number --jq '.[].number'); do
+            gh issue close "$NUMMER" --repo "$GITHUB_REPOSITORY" \
+              --comment "Automatisch geschlossen: Der saisonale Hero-Lauf ist wieder grün ($LAUF). Zustand und Kettennachweis stehen im Lauf-Summary und in SAISONALER-HERO-REPORT.md."
+          done
