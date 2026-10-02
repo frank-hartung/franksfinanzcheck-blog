@@ -76,7 +76,7 @@ Auch wenn die Europäische Zentralbank (EZB) die Leitzinsen nach dem Peak der Vo
 | Zinsgarantie | keine | variabel (oft Aktionszinsen) | über die gesamte Laufzeit |
 | Kursrisiko | nein | nein | nein |
 | Einlagensicherung | ✅ 100.000 € | ✅ 100.000 € | ✅ 100.000 € |
-| Ideal für | Gehalt & Miete | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), Urlaubskasse | Geplante Anschaffungen (2-5 J.) |
+| Ideal für | Gehalt & Miete | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), [Urlaubskasse](../../posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/) | Geplante Anschaffungen (2-5 J.) |
 
 {{< tabellenstand quelle="Eigene Recherche & öffentliche Vergleichsportale" stand="Oktober 2026" >}}
 
@@ -138,7 +138,7 @@ Stand: Oktober 2026. Bitte beachte, dass sich Zinssätze täglich ändern könne
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Nehmen wir an, du parkst einen **Notgroschen von ca. 15.000 €**:
+Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von ca. 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 

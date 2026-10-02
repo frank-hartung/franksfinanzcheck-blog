@@ -8,9 +8,9 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL", "Anschluss", "Preiswert", "Preiswert surfen", "Optimalen"]
+keywords: ["Preiswert surfen", "DSL-Vergleich", "Internetvertrag wechseln", "günstiges Internet"]
 pin_title: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
-pin_description: "*Werbung | Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche Tarife 2026 sinnvoll sind und wie du beim Wechsel Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #dsl #anschluss #preiswert"
+pin_description: "*Werbung | Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche Tarife 2026 sinnvoll sind und wie du beim Wechsel Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #preiswertsurfen #dslvergleich #internetvertragwechseln"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

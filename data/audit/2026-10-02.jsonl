@@ -58,3 +58,4 @@
 {"ts": "2026-10-02T19:38:42Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 1}, "output": {"changes": 1}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-02T19:38:42Z", "module": "fix_spaces", "action": "apply", "input": {"files": 62}, "output": {"fixes": 468}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-02T19:39:46Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 56}, "output": {"changed": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-02T19:49:43Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}

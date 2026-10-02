@@ -8,7 +8,7 @@ tags: ["Hausratversicherung", "Wohngebäudeversicherung", "Kfz-Versicherung", "G
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz", "Vermeidest"]
+keywords: ["Reisekrankenversicherung", "Auslandskrankenversicherung", "Reiseschutz", "Vermeidest", "Arztkosten"]
 pin_title: "Reisekrankenversicherung: So vermeidest du teure"
 pin_description: "*Werbung | Warum eine Reisekrankenversicherung oft die wichtigste Urlaubsinvestition ist und wie du sie im Fixkosten-Check prüfst. Hier mehr erfahren. Mehr Spartipps auf FranksFinanzcheck! #reisekrankenversicherung #reiseschutz #vermeidest"
 ai_generated: true

@@ -22,6 +22,12 @@ cover:
   alt: "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Last-Minute-Urlaub buchst du am besten zwei bis acht Wochen vor der Abreise, um Ersparnisse von bis zu 50 Prozent gegenüber dem regulären Preis zu erzielen. Maximale Rabatte sicherst du dir durch hohe Flexibilität bei Reiseziel und Abflughafen sowie durch das gezielte Vergleichen von Restplatzangeboten kurz vor dem gewünschten Termin."
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite verbraucherzentrale.de"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    herausgeber: "Verbraucherzentrale"
+faktencheck: 2026-10-02
 ---
 
 ## Last-Minute-Urlaub: Wie du die Preissignale des Marktes für dich nutzt

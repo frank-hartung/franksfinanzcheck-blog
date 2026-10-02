@@ -4,11 +4,11 @@ description: Eine Hausratversicherung schützt dein Eigentum. Erfahre im Verglei
 date: 2026-10-02T14:53:34Z
 draft: true
 reserve: true
-tags: ["Hausratversicherung"]
+tags: ["Hausratversicherung", "Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-keywords: ["Hausratversicherung", "Vergleich", "Sparen", "Hausratversicherung optimieren", "Optimieren"]
+keywords: ["Hausratversicherung", "Hausratversicherung optimieren", "Optimieren", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Hausratversicherung optimieren: Schutz prüfen und sparen"
 pin_description: "*Werbung | Eine Hausratversicherung schützt dein Eigentum. Erfahre im Vergleich, wie du Leistungen prüfst und bei deinen Fixkosten effektiv sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #hausratversicherung #vergleich #sparen"
 ai_generated: true

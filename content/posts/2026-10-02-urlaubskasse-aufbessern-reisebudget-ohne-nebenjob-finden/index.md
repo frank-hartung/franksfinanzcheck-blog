@@ -1,13 +1,13 @@
 ---
 title: "Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden"
-description: Du willst deine Urlaubskasse aufbessern? Ohne Nebenjob und Überstunden zeigen wir dir, wie du hunderte Euro in deinem Alltag durch Budget-Optimierung finde
+description: "Du willst deine Urlaubskasse aufbessern? Ohne Nebenjob und Überstunden zeigen wir dir, wie du hunderte Euro in deinem Alltag durch Budget-Optimierung finde."
 date: 2026-10-02T19:15:56Z
 draft: false
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Urlaubskasse aufbessern", "Geld nebenbei ohne nebenjob", "Abo audit", "Urlaub finanzieren"]
+keywords: ["Urlaubskasse aufbessern", "Geld nebenbei ohne nebenjob", "Abo audit", "Urlaub finanzieren", "Urlaubskasse", "aufbessern", "Reisebudget"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Urlaubskasse aufbessern ohne Nebenjob: 7 sofort umsetzbare Tipps"
 pin_description: "*Werbung | Keine Lust auf einen Samstagsjob? Muss auch nicht sein: Diese 7 Geldquellen stecken in deinem Alltag – vom Abo-Audit über die Steuererstattung bis zum Flohmarkt-Wochenende. Realistisch: 300–800 € extra fürs nächste Reiseziel. Jetzt die Liste durchgehen!"
