@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Fr, 02. Oktober 2026
-- **09:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _mythos_ · Launch  
+- **09:15** ⚪ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 - **16:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
@@ -23,8 +23,7 @@
 - **16:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### So, 04. Oktober 2026
-- **09:15** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
+- **09:15** ⏳ Privathaftpflicht warum sie so wichtig ist und was sie kostet — _takeaway_ · Launch
 - **16:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### Mo, 05. Oktober 2026
@@ -45,13 +44,11 @@
 ### Do, 08. Oktober 2026
 - **09:15** ⏳ DNS-Server wechseln: Schnelleres und sichereres Internet — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **16:15** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+- **16:15** ⏳ Kfz versicherung vergleich bis zu 800 euro sparen — _takeaway_ · Launch
 ### Fr, 09. Oktober 2026
 - **09:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
-- **16:15** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
+- **16:15** ⏳ Wohngebaeudeversicherung vergleich worauf du achten musst — _takeaway_ · Launch
 ### Sa, 10. Oktober 2026
 - **09:15** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/

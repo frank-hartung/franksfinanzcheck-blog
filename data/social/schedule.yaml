@@ -961,9 +961,9 @@ items:
   date: '2026-10-02'
   time: 07:45
   scheduled_at: '2026-10-02T07:45:00+02:00'
-  status: planned
-  attempts: 0
-  reason: ''
+  status: blocked
+  attempts: 1
+  reason: Artikel nicht mehr im Bestand
 - id: bluesky:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:takeaway:2026-10-02
   channel: bluesky
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
@@ -973,9 +973,9 @@ items:
   date: '2026-10-02'
   time: 08:15
   scheduled_at: '2026-10-02T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:zahl:2026-10-02
   channel: x
   slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
@@ -985,9 +985,9 @@ items:
   date: '2026-10-02'
   time: 08:45
   scheduled_at: '2026-10-02T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:mythos:2026-10-02
   channel: threads
   slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
@@ -997,9 +997,9 @@ items:
   date: '2026-10-02'
   time: 09:15
   scheduled_at: '2026-10-02T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro:takeaway:2026-10-02
   channel: facebook
   slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
@@ -1009,9 +1009,9 @@ items:
   date: '2026-10-02'
   time: 09:45
   scheduled_at: '2026-10-02T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:zahl:2026-10-02
   channel: pinterest
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -1021,9 +1021,9 @@ items:
   date: '2026-10-02'
   time: '10:15'
   scheduled_at: '2026-10-02T10:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: kein lebender Pinterest-Token (pinterest_token.py)
 - id: instagram:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich:karussell:2026-10-02
   channel: instagram
   slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
@@ -1033,9 +1033,9 @@ items:
   date: '2026-10-02'
   time: '11:45'
   scheduled_at: '2026-10-02T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:vergleich:2026-10-02
   channel: bluesky
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -1045,9 +1045,9 @@ items:
   date: '2026-10-02'
   time: '12:15'
   scheduled_at: '2026-10-02T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:frage:2026-10-02
   channel: x
   slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden

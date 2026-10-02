@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Fr, 02. Oktober 2026
-- **08:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _zahl_ · Launch  
+- **08:45** ⚪ DSL-Vergleich: So findest du den günstigsten Internettarif — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 - **13:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
@@ -29,22 +29,18 @@
 ### So, 04. Oktober 2026
 - **08:45** ⏳ DNS-Server wechseln: Schnelleres und sichereres Internet — _thread_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **13:15** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+- **13:15** ⏳ Kfz versicherung vergleich bis zu 800 euro sparen — _takeaway_ · Launch
 - **19:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 ### Mo, 05. Oktober 2026
-- **08:45** ⏳ Geld sparen im Alltag: Tipps, die jeder umsetzen kann — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/
-- **13:15** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
+- **08:45** ⏳ Geld sparen im alltag einfache tipps die jeder umsetzen kann — _mythos_ · Launch
+- **13:15** ⏳ Wohngebaeudeversicherung vergleich worauf du achten musst — _frage_ · Launch
 - **19:15** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 ### Di, 06. Oktober 2026
 - **08:45** ⏳ September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/
-- **13:15** ⏳ Hausratversicherung: Was sie kostet und wen sie schützt — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/
+- **13:15** ⏳ Hausratversicherung kosten leistungen vergleich — _mythos_ · Launch
 - **19:15** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
 ### Mi, 07. Oktober 2026

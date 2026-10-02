@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -24,8 +24,7 @@
 ### Sa, 10. Oktober 2026
 - **07:00** ⏳ Sparen im Herbst: Spartipps für die goldene Jahreszeit — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
-- **18:00** ⏳ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/
+- **18:00** ⏳ Tierkrankenversicherung hund katze kosten — _nutzen_ · Launch
 
 ## Zuletzt veröffentlicht
 

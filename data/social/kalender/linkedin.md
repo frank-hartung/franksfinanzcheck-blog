@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **07:45** ⏳ Tierkrankenversicherung für Hund & Katze: Kosten realistisch — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/
 ### Mo, 05. Oktober 2026
 - **07:45** ⏳ Finanzieller Puffer: Wie viel Notgroschen ist genug? — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/
@@ -28,12 +25,15 @@
 - **07:45** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
 ### Fr, 09. Oktober 2026
-- **07:45** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _zitat_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
+- **07:45** ⏳ Dein haus sicher schuetzen das neue vorsorge update 2026 — _zitat_ · Launch
 
 ## Zuletzt veröffentlicht
 
 _Noch nichts über diesen Kanal versendet._
+
+## Zurückgestellt (Autopilot hat blockiert)
+
+- 🚫 02.10. 07:45 · Tierkrankenversicherung hund katze kosten · Artikel nicht mehr im Bestand
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*

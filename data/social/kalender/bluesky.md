@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 02.10.2026 01:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,9 +13,9 @@
 ## Kommende Beiträge
 
 ### Fr, 02. Oktober 2026
-- **08:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _takeaway_ · Launch  
+- **08:15** ⚪ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-- **12:15** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
+- **12:15** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### Sa, 03. Oktober 2026
 - **08:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _takeaway_ · Launch  
@@ -23,8 +23,7 @@
 - **12:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### So, 04. Oktober 2026
-- **08:15** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
+- **08:15** ⏳ Privathaftpflicht warum sie so wichtig ist und was sie kostet — _frage_ · Launch
 - **12:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### Mo, 05. Oktober 2026
@@ -45,16 +44,13 @@
 ### Do, 08. Oktober 2026
 - **08:15** ⏳ DNS-Server wechseln: Schnelleres und sichereres Internet — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **12:15** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+- **12:15** ⏳ Kfz versicherung vergleich bis zu 800 euro sparen — _mythos_ · Launch
 ### Fr, 09. Oktober 2026
 - **08:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
-- **12:15** ⏳ Geld sparen im Alltag: Tipps, die jeder umsetzen kann — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/
+- **12:15** ⏳ Geld sparen im alltag einfache tipps die jeder umsetzen kann — _takeaway_ · Launch
 ### Sa, 10. Oktober 2026
-- **08:15** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
+- **08:15** ⏳ Wohngebaeudeversicherung vergleich worauf du achten musst — _vergleich_ · Launch
 - **12:15** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 
