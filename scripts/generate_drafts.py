@@ -1074,12 +1074,25 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     os.makedirs(bundle_dir, exist_ok=True)
     filename = os.path.join(bundle_dir, "index.md")
 
-    cta = (
-        "\n---\n\n"
-        f"👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**]({affiliate_url})\n\n"
-        "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
-        "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n"
-    )
+    try:
+        # REPARATUR 02.10.2026 (WF-D4E0, Issue #513): Auch hier stand die
+        # rohe Partner-URL mit dem generischen Anker „Jetzt Angebote
+        # vergleichen“ – Link-Integrität, IW8 und IW3 verwarfen jeden so
+        # erzeugten Reserve-Kandidaten bei der Zertifizierung. Ab jetzt
+        # kommt der End-CTA aus scripts/cta_builder.py (Kontrakt-Wahrheit,
+        # immer /go/-Übergabeseite). Route-Erkennung: erst Themensignale
+        # des Topics, dann die URL-Abbildung aus check24_links.yaml.
+        import cta_builder
+        import affiliate_intent_contract as aic
+        route = aic.route_fuer_text(
+            "\n".join([topic or "", " ".join(keywords or [])]),
+            titel=topic or "", pillar=str(topic_entry.get("pillar") or "")) or ""
+        cta = cta_builder.cta_end_block(
+            affiliate_url=affiliate_url, route=route, slug=slug)
+    except Exception as _cta_err:                       # noqa: BLE001
+        print(f"  ⚠ Kontrakt-CTA nicht verfügbar ({_cta_err}) – Portal-Fallback")
+        import cta_builder
+        cta = cta_builder.cta_end_block(affiliate_url=affiliate_url, slug=slug)
     def _yq(value):
         """YAML-sicher quoten (Doppelpunkte/Sonderzeichen)."""
         v = str(value)

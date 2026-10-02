@@ -1,22 +1,31 @@
 {
   "target": 6,
-  "ready": 0,
-  "pool_size": 3,
-  "generated_at": "2026-10-02T15:27:08Z",
+  "ready": 6,
+  "pool_size": 6,
+  "generated_at": "2026-10-02T20:21:35Z",
   "candidates": [
     {
-      "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
-      "ready": false,
-      "sha256": "85400fef68749440938d7e83b4c87f78d13b6d7745f2f94e18a6181de17caf6f",
-      "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
-      "details": [
-        "🛑 2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein geplatzter Schlauch an deiner Waschmaschine ruiniert in Minuten Möbel für 10.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „650 € pro Quadratmeter fest.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „52.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Versicherer rechnen hier meist pauschal mit 650 € pro Quadratmeter.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn dein Hausrat 100.000 € wert ist, du aber nur 50.000 € versicherst, kürzt die Versicherung jede…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn dein Hausrat 100.000 € wert ist, du aber nur 50.000 € versicherst, kürzt die Versicherung jede…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „30 € und 90 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „30 € und 90 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du im Schadensfall etwa 150 € selbst zahlst, sinkt deine Prämie spürbar.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das spart gegenüber der monatlichen Zahlung oft rund 5 %.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „20 % der Summe | Bis zu 40 % oder höher |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „20 % der Summe | Bis zu 40 % oder höher |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Zudem ist die Entschädigungshöhe oft auf 10 % der Versicherungssumme begrenzt.“; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (117/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.952,
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "ready": true,
+      "sha256": "2a98107eeae80cae8c055fd1a19761e196256e81acea7a7b56062536c90b0979",
+      "score": 0.9,
       "parts": {
-        "spelling": 0.98,
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
+      "ready": true,
+      "sha256": "7bd88a4bdbb6a49d7ecb3d1f9a81eec2e57fcbc1d46073f5f6f06cf16a17c97e",
+      "score": 0.856,
+      "parts": {
+        "spelling": 0.5,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
@@ -27,46 +36,62 @@
     },
     {
       "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
-      "ready": false,
-      "sha256": "72acff48d370a820e5d682f61123bc994cf1be6a5d691f641a7b17cd068bacb3",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.899,
+      "ready": true,
+      "sha256": "187780e3c3bff7f0eaf2eee6cff860f8a8681d75477acf569be631c8de80c7df",
+      "score": 0.85,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.5,
         "meta": 1.0,
-        "structure": 0.7,
+        "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.75
       }
     },
     {
       "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
-      "ready": false,
-      "sha256": "188bfbed7fde189bd332a9f4638bd8a2aac0c63077e6e2209cf718a78ebd6c9d",
-      "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
-      "details": [
-        "🛑 2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 30 €, was sie zu einer der günstigsten und wichtigsten Versicherungen macht.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € im Jahr) weniger als 1 % deiner Reisekosten ausmachen, das Risiko aber die gesamten Ersparniss…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € im Jahr) weniger als 1 % deiner Reisekosten ausmachen, das Risiko aber die gesamten Ersparniss…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Ambulanzflug aus Südeuropa kostet jedoch schnell zwischen 15.000 € und 25.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Ambulanzflug aus Südeuropa kostet jedoch schnell zwischen 15.000 € und 25.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Aus Übersee können es über 100.000 € sein.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 30 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „25 bis 60 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „50 bis 100 € fällig werden.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wir nehmen an, du zahlst für eine solide Reisekrankenversicherung 15 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „45.000 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „12.000 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamtkosten ohne Versicherung: 57.000 €**“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Um die Kosten dieses einen Notfalls durch gesparte Versicherungsbeiträge selbst zu finanzieren, müs…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung wählen:** Viele Tarife bieten 50 oder 100 € Selbstbehalt an, um den Jahresbeitr…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung wählen:** Viele Tarife bieten 50 oder 100 € Selbstbehalt an, um den Jahresbeitr…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € so günstig, dass man sich die Unsicherheit der Kreditkarten-Police sparen kann.“; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (237/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 48 (Ziel ≥ 60); 10% Schachtelsätze (Ziel < 10%); 1 Absätze > 4 Sätze",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.86,
+      "ready": true,
+      "sha256": "e83c9ec90e216964231a71667f3d6953499ab67efdd6b23cb3f8c6afc10b5251",
+      "score": 0.85,
       "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
+        "spelling": 0.5,
+        "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.92,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.65
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-02-die-50-30-20-regel-einfach-erklaert",
+      "ready": true,
+      "sha256": "672d2bc500596b4fae71f49f91c3e62cc768b6a9cd55c3d9e66dc6571d612a06",
+      "score": 0.85,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "ready": true,
+      "sha256": "d8cb283be65caa98394ceb1178ebcfd084225cb1bcd946ffd18422f6e87f88b8",
+      "score": 0.86,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
       }
     }
   ]

@@ -20,7 +20,12 @@ redaktionelle_pruefung:
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
 inspiration: "Urlaubskasse aufbessern ohne Nebenjob: 7 sofort umsetzbare Tipps"
+cover:
+  image: "images/covers/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden.jpg"
+  alt: "Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
+
 Wer seine **urlaubskasse aufbessern** möchte, denkt meistens zuerst an mehr Arbeit. Überstunden im Büro, ein Wochenendjob in der Gastronomie oder bezahlte Umfragen im Netz scheinen die logische Lösung zu sein. Doch oft liegt das Geld für den nächsten Strandurlaub oder den Städtetrip bereits auf deinem Konto – es fließt nur unbemerkt in Verträge, die du längst nicht mehr brauchst oder die viel zu teuer sind. Wenn du ohne zusätzliche Arbeitsstunden dein Reisebudget erhöhen willst, ist eine systematische Budget-Optimierung der effektivste Hebel.
 
 In diesem Ratgeber erfährst du, wie du durch gezielte Anpassungen deiner Fixkosten und kleine Verhaltensänderungen spürbare Beträge freisetzt. Wir klären dabei folgende Kernfragen:

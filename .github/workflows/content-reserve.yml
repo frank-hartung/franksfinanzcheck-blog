@@ -1,6 +1,47 @@
 # ============================================================
 #  CONTENT-RESERVE (täglicher Vorrat) – Produktionslinie v2
 #
+#  REPARATUR 02.10.2026 (Vorgang WF-D4E0, Issue #513 – „dauerhaft auf
+#  Premium-Level einer Profi-Agentur beheben“): Der Lauf war rot, weil drei
+#  Ursachen sich verstärkten – jede ist strukturell behoben:
+#    1. END-CTA AUS DREI KANONEN, DREIMAL DERSELBE DEFEKT.
+#       ki_shared.cta_block, engine_generate.save_article und
+#       generate_drafts.write_draft schrieben je eine eigene Kopie des
+#       End-CTA – alle mit ROHER Partner-URL (statt /go/-Übergabeseite)
+#       und dem generischen Anker „Jetzt Angebote vergleichen“. Genau
+#       diese Klasse verwerfen Link-Integrität, IW8 (Anker nennt kein
+#       Angebot) und IW3 („Vergleich“ vor C24-Einzelangebot) bei der
+#       Zertifizierung: JEDER maschinell erzeugte Reserve-Kandidat fiel
+#       am Affiliate-Gate, obwohl Autoren und Heiler „grün“ meldeten.
+#       Fix: scripts/cta_builder.py als EINE Werkstatt für den End-CTA –
+#       Satz/Anker aus affiliate_intent_contract.cta_bausteine()
+#       (dieselbe Wahrheit wie IW0–IW9), Ziel immer /go/<route>/, Slug
+#       stabilisiert die Anker-Variante. Alle drei Autoren delegieren;
+#       die Fehlerklasse ist unerzeugbar geworden. Regressionstests in
+#       scripts/tests/test_cta_builder.py (10 Fälle) + Affiliate-/
+#       Intent-Batterie 98 grün.
+#    2. PRODUKTIONSAUSFALL OHNE BESTAND. Groq/Gemini im Provider-Cooldown
+#       (bis 03.10.) – der Konvergenz-Top-up lief leer, das Zertifikat
+#       alterte über die 36-h-Grenze und der harte End-Gate meldete den
+#       Engpass korrekt. Der Bestand wurde deshalb redaktionell auf
+#       Premium-Niveau gefüllt: vier KI-Rohtexte fertiggestellt/veredelt
+#       (Reisekranken VERSIEGELT; Hausrat, DSL zertifiziert; 50-30-20 auf
+#       10.700 Zeichen gehoben, Struktur 1.0, Kontrakt-CTA nachgeroutet,
+#       interne Links ergänzt) und zwei vollwertige Premium-Artikel neu
+#       (Gasabschlag-Heizsaison 10.234 Zeichen, Quality 0.90/Readability
+#       100; Weihnachtsbudget 10.040 Zeichen, Quality 0.86 – Keyword-Gate
+#       je 100/100, governed Tags, themenehrliche CTA-Routen /go/gas/
+#       und /go/tagesgeld/, Branded Covers inkl. Manifest/LCP/FCP).
+#       Re-Zertifizierung: reserve_readiness ready 6/6 (vorher 0/3),
+#       reserve_gate --cert grün („6/6 Kandidaten zertifiziert“, Alter 0 h).
+#    3. DOKUMENTATION DER KETTE. Der Finisher-Beweis lief während der
+#       Reparatur weiter: R5-ABSATZ-HART spaltete zwei lange Absätze
+#       deterministisch, diagnose() berichtete jede ehrliche Fehlerklasse
+#       – die Kettenlogik (Heilen statt Verwerfen, Konvergenz-Kap,
+#       Quarantäne erst nach 2 identischen Content-Funden) bleibt die
+#       Leitplanke und wurde nicht aufgeweicht.
+#  Details: CONTENT-RESERVE-REPARATUR-PREMIUM-2026-10-02.md
+#
 #  REPARATUR 28.09.2026 (Content-Reserve #28, Issue #436, Run 36407111494 –
 #  1/6 READY nach 43 Minuten, obwohl alle Prozessschritte „grün“ waren):
 #    1. GEBURTS-GATE WARF HEILBARE ROHTEXTE VOR DER WERKBANK WEG. 15 Themen
