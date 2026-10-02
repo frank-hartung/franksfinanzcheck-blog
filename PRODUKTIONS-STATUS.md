@@ -1,16 +1,16 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-01 23:50 UTC  
-**Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-09-30): 2 Artikel – Ziel erfüllt.
+**Stand:** 2026-10-02 13:09 UTC  
+**Stufe:** P1  
+**Befund:** Heute (Freitag, 2026-10-02) ist ein Publikationstag – der Engine-Lauf ist FEHLGESCHLAGEN und es sind 0 Artikel erschienen (Ziel: 2).
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-10-01 (Donnerstag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-09-30) | 2 |
-| Letzter Artikel überhaupt | 2026-09-30 (1 Tage her) |
-| Live-Artikel gesamt | 44 |
+| Heute | 2026-10-02 (Freitag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-10-02) | 0 |
+| Letzter Artikel überhaupt | 2026-09-30 (2 Tage her) |
+| Live-Artikel gesamt | 35 |
 | Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 0 |
 | Mindestziel/Tag | 2 |
