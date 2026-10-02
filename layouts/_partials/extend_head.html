@@ -133,6 +133,25 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
+{{- /* ---------- Dataset-Schema für quartalsweise Linkable Assets ---------- */ -}}
+{{- if and .IsPage .Params.dataset -}}
+{{- $datasetURL := .Params.datasetDownload | absURL -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org"
+  "@type" "Dataset"
+  "name" (.Params.datasetName | default .Title)
+  "description" (.Description | default .Summary)
+  "url" .Permalink
+  "inLanguage" "de-DE"
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "creator" (dict "@type" "Person" "@id" (printf "%s#frank-hartung" site.BaseURL) "name" "Frank Hartung")
+  "publisher" (dict "@type" "Organization" "name" "FranksFinanzcheck" "url" site.BaseURL)
+  "license" (.Params.datasetLicense | absURL)
+  "distribution" (slice (dict "@type" "DataDownload" "encodingFormat" "text/csv" "contentUrl" $datasetURL))
+) | jsonify | safeJS }}</script>
+{{- end -}}
+
 {{- /* ---------- FAQPage-Schema (Featured Snippets & AI Overviews) ---------- */ -}}
 {{- /* WERKZEUGE (02.10.2026): Die Werkzeugseiten tragen denselben
        "### Frage?"-FAQ-Abschnitt wie Artikel und Pillars und sind für

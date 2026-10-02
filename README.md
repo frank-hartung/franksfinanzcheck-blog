@@ -88,6 +88,8 @@ Empfehlungslinks (Werbung) sind der einzige Finanzierungsweg.
 - **Impressum:** [franksfinanzcheck.de/impressum/](https://franksfinanzcheck.de/impressum/)
 - **Datenschutz:** [franksfinanzcheck.de/datenschutz/](https://franksfinanzcheck.de/datenschutz/)
 - **Über mich:** [franksfinanzcheck.de/ueber/](https://franksfinanzcheck.de/ueber/)
+- **Daten & Studien:** [franksfinanzcheck.de/studien/](https://franksfinanzcheck.de/studien/) – offene Datensätze und Quartalsreports
+- **Presse & Interviews:** [franksfinanzcheck.de/presse/](https://franksfinanzcheck.de/presse/)
 - **Kontakt:** kontakt@franksfinanzcheck.de – Fragen, Themenwünsche, Presse
 - **Pinterest:** [pinterest.de/franksfinanzcheck](https://www.pinterest.de/franksfinanzcheck/)
 - **Mastodon:** [@FranksFinanzcheck@mastodon.social](https://mastodon.social/@FranksFinanzcheck)

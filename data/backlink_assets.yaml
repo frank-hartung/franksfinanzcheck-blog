@@ -4,6 +4,21 @@
 #  Kein Outreach-Spam: Assets bauen → Digital-PR / Embeds / Roundups.
 # ============================================================
 assets:
+  - id: fixkosten-index-2026-q4
+    name: "Fixkosten-Index Deutschland: Energie-Baseline Q4 2026"
+    format: datensatz-report
+    status: live
+    pillar: strom-sparen
+    source_slug: /studien/fixkosten-index-2026-q4/
+    why: "Offene Originalrechnung mit CSV, Methodik und Pressegrafik; zitierfähig statt bloßer Ratgeberbehauptung."
+    pitch_to: [digital-pr, gastartikel, resource, podcast, partnerschaft]
+    seasonal: [all]
+    deliverable: "Landingpage + CSV + 1200×628 SVG + Quellen- und Zitierhinweis"
+    effort_hours: 6
+    seo_value: 5
+    published: "2026-10-02"
+    refresh_due: "2027-01-15"
+
   - id: kfz-wechselkalender-2026
     name: Kfz-Wechselsaison-Kalender 2026 (Stichtag 30.11.)
     format: kalender-infografik
