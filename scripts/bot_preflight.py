@@ -40,13 +40,16 @@ def check_api_keys():
 def check_topics():
     if not os.path.exists(TOPICS_FILE):
         return False, 0, "topics.yaml fehlt"
-    # Parse-Check über generate_drafts.load_topics (nutzt den echten Parser)
     sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
     try:
         import generate_drafts as g
         topics = g.load_topics()
+        if not topics:
+            return False, 0, "topics.yaml ist leer"
         used = g.existing_titles()
         freie = [t for t in topics if not g.topic_already_covered(t["title"], used)]
+        if not freie:
+            return True, 0, "0 freie Themen – Engine kann heute nichts produzieren"
         return True, len(freie), f"{len(topics)} Themen, {len(freie)} frei"
     except Exception as e:
         return False, 0, f"topics.yaml unlesbar: {e}"
@@ -58,7 +61,6 @@ def main():
     print("=" * 60)
     ok = True
 
-    # 1) Syntax
     bad = check_syntax()
     if bad:
         ok = False
@@ -68,7 +70,6 @@ def main():
     else:
         print(f"✅ Syntax: {len(SCRIPTS)} Skripte valide")
 
-    # 2) API-Keys
     has_key, groq, gemini = check_api_keys()
     if not has_key:
         ok = False
@@ -76,14 +77,16 @@ def main():
     else:
         print(f"✅ API-Keys: Groq={'ja' if groq else 'nein'} | Gemini={'ja' if gemini else 'nein'}")
 
-    # 3) Themenpool
     parse_ok, freie, msg = check_topics()
     if not parse_ok:
         ok = False
         print(f"❌ Themenpool: {msg}")
     else:
         print(f"✅ Themenpool: {msg}")
-        if freie < 8:
+        if freie == 0:
+            ok = False
+            print("   ❌ Keine freien Themen – Content-Engine darf nicht starten.")
+        elif freie < 8:
             print("   ℹ️ Wenig freie Themen – KI-Nachschub wird beim Lauf aktiviert.")
 
     print("-" * 60)
