@@ -1,4 +1,18 @@
 {
+  "die-50-30-20-regel-einfach-erklaert": {
+    "seit": "2026-10-02",
+    "slug": "2026-10-02-die-50-30-20-regel-einfach-erklaert",
+    "titel": "Die 50-30-20-Regel einfach erklärt",
+    "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
+  "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
+    "seit": "2026-10-02",
+    "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+    "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+    "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
   "gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",
@@ -36,6 +50,13 @@
     "seit": "2026-10-02",
     "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
     "titel": "Reisekrankenversicherung: So vermeidest du teure Arztkosten",
+    "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
+  "weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
+    "seit": "2026-10-02",
+    "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+    "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
     "zuletzt_im_pool": "2026-10-02",
     "zustand": "pool"
   },

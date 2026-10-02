@@ -243,15 +243,22 @@ def clip_text(text: str, max_len: int = 158) -> str:
     return cut.rstrip(" ,;:-–") + " …"
 
 
-def cta_block(affiliate_url: str | None = None) -> str:
-    """Affiliate-CTA + Werbekennzeichnung (Hausstil der Engine)."""
-    url = affiliate_url or AFFILIATE_URL
-    return (
-        "\n---\n\n"
-        f"👉 **Jetzt vergleichen und sparen:** "
-        f"[**→ Jetzt Angebote vergleichen**]({url})\n\n"
-        f"*{DISCLOSURE}*\n"
-    )
+def cta_block(affiliate_url: str | None = None, route: str = "",
+              slug: str = "") -> str:
+    """Affiliate-CTA + Werbekennzeichnung (Hausstil der Engine).
+
+    REPARATUR 02.10.2026 (WF-D4E0, Issue #513): Diese Funktion schrieb
+    bis heute die ROHE Partner-URL mit dem generischen Anker „Jetzt
+    Angebote vergleichen“ – Link-Integrität (kein /go/-Redirect), IW8
+    (Anker nennt kein Angebot) und IW3 („Vergleich“ vor Einzelangebot)
+    verwarfen so jeden erzeugten Reserve-Kandidaten bei der Zertifizie-
+    rung. Delegiert ab jetzt an scripts/cta_builder.py: Satz und Anker
+    aus affiliate_intent_contract (eine Wahrheit mit der Intent-Wache),
+    Ziel immer die /go/-Übergabeseite.
+    """
+    import cta_builder
+    return cta_builder.cta_end_block(
+        affiliate_url=affiliate_url, route=route, slug=slug)
 
 
 def write_report(lines: list) -> None:

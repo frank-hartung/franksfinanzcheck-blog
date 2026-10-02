@@ -12,6 +12,20 @@
 #    L4 Hashtags (Anzahl, Länge, Schreibweise)
 #    L5 Emoji-Budget des Kanals
 #    L6 Sprach-Check (deutsch – keine englischen Satzleichen)
+#
+#  REPARATUR 02.10.2026 (PR #530, CI „gate“/„regression“ rot sobald der
+#  Urlaubskasse-Artikel der jüngste Pool-Eintrag wurde):
+#  Die Regel war Flexions-BLIND: exakter Wort-Vorkommnis-Abgleich
+#  (`" die " in text`). Echter deutscher Text ohne Liste der bloßen
+#  Grundformen – „Du willst deine Urlaubskasse aufbessern?" (deine,
+#  ohne, willst) – fiel mit null Treffern durch: FALSCH-NEGATIV in
+#  einer fail-closed-Wache, und das sauberste mögliche Beispiel
+#  (Titel + Hook des aktuellen Live-Artikels). Die Heuristik bleibt
+#  absichtlich schwach (sie erkennt deutsche Funktionswörter, sie
+#  beweist keine Grammatik), wird aber robust: Treffer jetzt auch über
+#  die häufigsten Flexionsendungen (dein+e/n/r/s/em/en …) und eine
+#  ergänzte Funktionswort-Liste (ohne, vom, beim, über …). Gegenprobe
+#  bleibt Pflicht: rein englischer Text muss weiterhin blockieren.
 #    L7 Shouting / Spam-Muster (!!!!!, ALLES GROSS, Link-Shortener)
 #    L8 Duplikat-Schutz (Ähnlichkeit zu früheren Postings desselben Kanals)
 #    L9 Fakten-Treue (keine Zahl, die nicht im Artikel steht)
@@ -45,7 +59,34 @@ URL_RX = re.compile(r"https?://\S+")
 
 GERMAN_MARKERS = ["der", "die", "das", "und", "nicht", "für", "mit", "ein", "eine",
                   "ist", "sind", "du", "dein", "auf", "im", "am", "zum", "wird",
-                  "oder", "dass", "so", "mehr", "kann", "kannst", "sparen"]
+                  "oder", "dass", "so", "mehr", "kann", "kannst", "sparen",
+                  # REPARATUR 02.10.2026 (s. Kopfkommentar L6): häufige
+                  # Funktionswörter, die in Hooks alltäglich sind, deren
+                  # bloßes Fehlen aber fälschlich „nicht deutsch“ meldete.
+                  "ohne", "von", "auch", "wenn", "wie", "was", "nur", "noch",
+                  "sehr", "jetzt", "hier", "hat", "haben", "sie", "wir",
+                  "vom", "beim", "nach", "über"]
+
+# Flexions-Endungen für die robuste L6-Erkennung: Marker als Wortanfang
+# plus übliche deutsche Endung gilt als Treffer (dein+e, dein+en,
+# dein+er, dein+s, dein+em, kann+en …). Bewusst konservativ: nur Marker
+# mit ≥3 Zeichen und eine eng geführte Endungsliste, damit englische
+# Wörter (z. B. „diet“ ≉ „die“) weiterhin durchfallen.
+_FLEXION_ENDUNGEN = ("e", "en", "er", "es", "em", "n", "s", "st", "est", "ern", "et")
+_GERMAN_TOKEN_RX = re.compile(r"[a-zäöüß]+", re.IGNORECASE)
+
+
+def _german_hit(text: str) -> bool:
+    """L6-Trefferheuristik: Grundwort-Abgleich ODER Marker+Flexion."""
+    low = (text or "").lower()
+    if any(f" {w} " in f" {low} " for w in GERMAN_MARKERS):
+        return True
+    for tok in _GERMAN_TOKEN_RX.findall(low):
+        for w in GERMAN_MARKERS:
+            if len(w) >= 3 and tok != w and tok.startswith(w):
+                if tok[len(w):] in _FLEXION_ENDUNGEN:
+                    return True
+    return False
 
 SHORTENER_RX = re.compile(r"(bit\.ly|tinyurl|t\.co|goo\.gl|is\.gd|ow\.ly|buff\.ly)", re.I)
 
@@ -157,8 +198,7 @@ def check(pkg: dict, channel_cfg: dict, meta: dict,
         violations.append(f"L5 zu viele Emojis: {count_emoji(text)} > {emo_max}")
 
     # -- L6 Sprache ---------------------------------------------------------
-    low = text.lower()
-    if not any(f" {w} " in f" {low} " for w in GERMAN_MARKERS):
+    if not _german_hit(text):
         violations.append("L6 Text wirkt nicht deutschsprachig")
 
     # -- L7 Shouting / Spam -------------------------------------------------

@@ -19,7 +19,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-10-02T19:49:29+00:00",
+  "ts": "2026-10-01T11:03:40+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -602,12 +602,30 @@
    "savings": ""
   }
  },
+ "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
+  "title": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+  "ts": "2026-10-02T20:11:39+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
  "2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden": {
   "title": "Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden",
-  "ts": "2026-10-02T19:44:53+00:00",
+  "ts": "2026-10-02T20:11:41+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
+  "title": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
+  "ts": "2026-10-02T20:11:43+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }

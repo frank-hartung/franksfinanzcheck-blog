@@ -127,7 +127,7 @@ Wichtig ist nicht die perfekte Zahl auf den Euro. Wichtig ist, dass du einen rea
 
 Oder direkt hier: Trag deine notwendigen Monatsausgaben ein und der Rechner zeigt dir Ziel, Lücke und die Sparrate dorthin.
 
-{{< rechner typ="[notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)" quelle="Verbraucherzentrale / Destatis (siehe Quellen unten)" stand="September 2026" >}}
+{{< rechner typ="notgroschen" quelle="Verbraucherzentrale / Destatis (siehe Quellen unten)" stand="September 2026" >}}
 
 ## Wo parkst du den Notgroschen am besten?
 
