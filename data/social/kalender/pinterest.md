@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Pinterest
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
 > Profil: https://www.pinterest.de/franksfinanzcheck/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `pinterest.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **10:15** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### Sa, 03. Oktober 2026
 - **10:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/

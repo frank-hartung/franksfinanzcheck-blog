@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **11:45** ⚪ Finanzielle Freiheit erreichen: Denke dich reich – Geld — _karussell_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/
 ### Sa, 03. Oktober 2026
 - **11:45** ⏳ So findest du den richtigen: DSL-Tarif für dein Zuhause — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/

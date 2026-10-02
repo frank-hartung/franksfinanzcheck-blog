@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### Fr, 02. Oktober 2026
-- **08:45** ⚪ DSL-Vergleich: So findest du den günstigsten Internettarif — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
-- **13:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _frage_ · Launch  
+- **13:15** ⚪ Energiediebe stoppen: So kannst du Stromfresser finden — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 - **19:15** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/

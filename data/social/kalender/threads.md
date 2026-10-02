@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### Fr, 02. Oktober 2026
-- **09:15** ⚪ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-- **16:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _zahl_ · Launch  
+- **16:15** ⚪ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
 ### Sa, 03. Oktober 2026
 - **09:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _mythos_ · Launch  

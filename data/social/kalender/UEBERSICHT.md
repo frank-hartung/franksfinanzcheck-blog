@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -9,13 +9,13 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 | Kanal | Status | Geplant | Nächster Beitrag | Kalender |
 |---|---|---:|---|---|
 | Mastodon | ⚪ Standby | 0 | – | [md](mastodon.md) · [ics](mastodon.ics) |
-| Bluesky | ⚪ Standby | 16 | Fr 02.10. 08:15 · Internet & DSL wechseln: Praxis- | [md](bluesky.md) · [ics](bluesky.ics) |
+| Bluesky | ⚪ Standby | 16 | Sa 03.10. 08:15 · Kostenloses Girokonto: So findes | [md](bluesky.md) · [ics](bluesky.ics) |
 | LinkedIn | ⚪ Standby | 5 | Mo 05.10. 07:45 · Finanzieller Puffer: Wie viel No | [md](linkedin.md) · [ics](linkedin.ics) |
-| X (Twitter) | ⚪ Standby | 22 | Fr 02.10. 08:45 · DSL-Vergleich: So findest du den | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 17 | Fr 02.10. 09:15 · Internet & DSL wechseln: Praxis- | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 17 | Fr 02.10. 09:45 · Gasrechnung senken: Spätsommer-C | [md](facebook.md) · [ics](facebook.ics) |
-| Instagram | ⚪ Standby | 8 | Fr 02.10. 11:45 · Finanzielle Freiheit erreichen:  | [md](instagram.md) · [ics](instagram.ics) |
-| Pinterest | ⚪ Standby | 8 | Fr 02.10. 10:15 · Sicher heizen: So schützt dich e | [md](pinterest.md) · [ics](pinterest.ics) |
+| X (Twitter) | ⚪ Standby | 21 | Fr 02.10. 13:15 · Energiediebe stoppen: So kannst  | [md](x.md) · [ics](x.ics) |
+| Threads | ⚪ Standby | 16 | Fr 02.10. 16:15 · Gasrechnung senken: Spätsommer-C | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 16 | Fr 02.10. 15:15 · Kostenloses Girokonto: So findes | [md](facebook.md) · [ics](facebook.ics) |
+| Instagram | ⚪ Standby | 8 | Sa 03.10. 11:45 · So findest du den richtigen: DSL | [md](instagram.md) · [ics](instagram.ics) |
+| Pinterest | ⚪ Standby | 8 | Sa 03.10. 10:15 · DSL-Wechselbonus sichern: So spa | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 5 | Sa 03.10. 07:00 · Digitaler Turbo: Warum der DNS-H | [md](telegram.md) · [ics](telegram.ics) |
 | Reddit | ⚪ Standby | 1 | Sa 10.10. 14:15 · Digitaler Turbo: Warum der DNS-H | [md](reddit.md) · [ics](reddit.ics) |
 | 🎬 Reels & Shorts | 🟢 aktiv | Di+Sa | Nächste Produktion | [md](video.md) · [ics](video.ics) |
@@ -23,16 +23,9 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Fr, 02. Oktober 2026
-- **08:15** ⚪ Bluesky · _takeaway_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet
-- **08:45** ⚪ X (Twitter) · _zahl_ · DSL-Vergleich: So findest du den günstigsten Internettarif
-- **09:15** ⚪ Threads · _mythos_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet
-- **09:45** ⚪ Facebook (Seite) · _takeaway_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
-- **10:15** ⚪ Pinterest · _zahl_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
-- **11:45** ⚪ Instagram · _karussell_ · Finanzielle Freiheit erreichen: Denke dich reich – Geld
-- **12:15** ⚪ Bluesky · _vergleich_ · Sicher heizen: So schützt dich eine Gaspreisgarantie
-- **13:15** ⏳ X (Twitter) · _frage_ · Energiediebe stoppen: So kannst du Stromfresser finden
-- **15:15** ⏳ Facebook (Seite) · _vergleich_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
-- **16:15** ⏳ Threads · _zahl_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
+- **13:15** ⚪ X (Twitter) · _frage_ · Energiediebe stoppen: So kannst du Stromfresser finden
+- **15:15** ⚪ Facebook (Seite) · _vergleich_ · Kostenloses Girokonto: So findest du ein Konto ohne Gebühren
+- **16:15** ⚪ Threads · _zahl_ · Gasrechnung senken: Spätsommer-Check für Tarif und Heizung
 - **19:15** ⏳ X (Twitter) · _takeaway_ · Haushaltsbuch führen: App, Excel oder Stift im Vergleich
 ### Sa, 03. Oktober 2026
 - **07:00** ⏳ Telegram (Kanal) · _nutzen_ · Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt

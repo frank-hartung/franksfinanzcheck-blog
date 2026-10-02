@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 02.10.2026 13:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -12,11 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **08:15** ⚪ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-- **12:15** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 ### Sa, 03. Oktober 2026
 - **08:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
