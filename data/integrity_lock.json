@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-01T19:06:45.820122+00:00",
-  "head": "2a831905",
+  "signed_at": "2026-10-02T10:43:32.174371+00:00",
+  "head": "10d2614",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -17,7 +17,7 @@
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
-    "layouts/pillar/list.html": "a537c5a9cd6f53f905e00e6c02255f1ec18d523dcdcb768c28c1006a75192724",
+    "layouts/pillar/list.html": "75d8e32d32fed7ca1ee0a656db5b9e056d38926af0ec1330be51fd45306f90ed",
     "layouts/pillar/single.html": "c87253630acca7ec81c83290694314414b6a259b5a11536a6ebbe24ff02f9648",
     "layouts/robots.txt": "e21089e44da08ba411462e263b82a3b48aa67e028e420bc27f77127dbf6c8ccf",
     "layouts/shortcodes/einspartabelle.html": "ba31dc7130a623646844198bbe93a4213c111b89a350c61080a4ebd881003643",
@@ -38,7 +38,7 @@
     "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
     "scripts/link_density_guard.py": "296130444e6e875c388b6e657bad26821d9b20971931ea43f672189a7f1044ca",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
-    "scripts/redaktions_standard.py": "821e633a0a2dcbeacd0f5ad5ba7170e4a66492f056c57a00c9d6d57402878568",
+    "scripts/redaktions_standard.py": "d01d51f67d3e824236ef96fd4380fb1c923406517c4e8ccbeb02fb7b2d107f68",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
     "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt": "290e3e94c46b151d4923ce8694d82fc1dc0f0947d62583a781859e712a8afbb2",
@@ -47,58 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "e1a5984dd74293823f06f69f669491dbb364e7dd949340e789033b72398c98ba",
-  "audit_start_sha256": "64f78de75828c91e1088a6760fa0a15aeacacc29931891070a2939e0ca4c686b",
+  "files_sha256": "22d93f9891a3e94a429fa7e701d98bd218a5e41b9ddd9ab625af00aa80c2796b",
+  "audit_start_sha256": "c42b077f9d77f41342f49e5919745d8d3d49d2336dd48ff99e3bf5da7e8ec044",
   "audit": [
-    {
-      "date": "2026-09-28",
-      "art": "heal",
-      "head": "7d260d9",
-      "geaendert": [
-        "layouts/pillar/list.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/pillar/list.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "7d260d9",
-              "datum": "2026-09-28",
-              "betreff": "feat(offenlegung): Werbekennzeichnung artikelgenau, sichtbar und dauerhaft bewiesen"
-            },
-            {
-              "sha": "2fbe518",
-              "datum": "2026-09-28",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "7d260d9",
-              "datum": "2026-09-28",
-              "betreff": "feat(offenlegung): Werbekennzeichnung artikelgenau, sichtbar und dauerhaft bewiesen"
-            },
-            {
-              "sha": "2fbe518",
-              "datum": "2026-09-28",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "1fe020babba31b050cb5be8c1e5561a47a8a0aa3817bb62fffaedc96c531f14b",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-28",
       "art": "set-current",
@@ -127,7 +78,7 @@
         }
       ],
       "files_sha256": "c1fb6913a4d0cdd44eac9d0744012d72857c8141f03c1dda8fc46117c4f52599",
-      "prev_sha256": "64f78de75828c91e1088a6760fa0a15aeacacc29931891070a2939e0ca4c686b"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-28",
@@ -563,8 +514,57 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "de2a1bf388b4eacda0834a8fa444f5e4fa58b00ddc9934dda4a0ae18b5c8eb34",
-      "files_sha256": "e1a5984dd74293823f06f69f669491dbb364e7dd949340e789033b72398c98ba"
+      "files_sha256": "e1a5984dd74293823f06f69f669491dbb364e7dd949340e789033b72398c98ba",
+      "prev_sha256": "de2a1bf388b4eacda0834a8fa444f5e4fa58b00ddc9934dda4a0ae18b5c8eb34"
+    },
+    {
+      "date": "2026-10-02",
+      "art": "set-current",
+      "head": "10d2614",
+      "geaendert": [
+        "layouts/pillar/list.html",
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "layouts/pillar/list.html",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "10d2614",
+              "datum": "2026-10-02",
+              "betreff": "feat: enforce human YMYL editorial approval"
+            },
+            {
+              "sha": "5d8fcfe",
+              "datum": "2026-10-02",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "10d2614",
+              "datum": "2026-10-02",
+              "betreff": "feat: enforce human YMYL editorial approval"
+            },
+            {
+              "sha": "5d8fcfe",
+              "datum": "2026-10-02",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "0f7c806b6a512bf70d2962ce9c3875948d5aada31ff89b709ea9022ad29a3ecc",
+      "files_sha256": "22d93f9891a3e94a429fa7e701d98bd218a5e41b9ddd9ab625af00aa80c2796b"
     }
   ]
 }
