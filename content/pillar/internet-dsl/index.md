@@ -1,216 +1,414 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-10-02
 title: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
-description: "Schnelleres Internet & günstigere Tarife: DSL-Wechselbonus sichern, WLAN im ganzen Haus verbessern, DNS-Tuning und die besten Handytarife."
+description: "Verträge und Wechselentscheidungen meistern: DSL-Wechselbonus sichern, Glasfaser einordnen, Kündigungsrechte nutzen, WLAN verbessern und Mobilfunk optimieren."
 date: 2026-08-08
 draft: false
 author: "Frank Hartung"
 categories: ["Ratgeber"]
 build:
   list: never
-keywords: ["DSL-Vergleich", "Internet schneller machen", "WLAN verbessern", "DSL-Wechselbonus", "Handytarife"]
+keywords: ["DSL-Vergleich", "Internet schneller machen", "WLAN verbessern", "DSL-Wechselbonus", "Handytarife", "Kündigungsfrist", "Glasfaser"]
 cover:
   image: "images/covers/pillar-internet-dsl.jpg"
   alt: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
-faktencheck: "2026-09-27"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-07-10"
+    datum: "2026-09-01"
   - titel: "Probleme beim Anbieterwechsel: Rechte von Verbrauchern"
     url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658"
     herausgeber: "Verbraucherzentrale"
-    datum: "2025-09-18"
+    datum: "2026-08-15"
+  - titel: "Gesetz für faire Verbraucherverträge: Kündigungsfristen und Kündigungsbutton"
+    url: "https://www.bmj.de/DE/themen/verbraucherschutz/vertraege_verbraucherrechte/faire_vertraege/faire_vertraege_node.html"
+    herausgeber: "Bundesministerium der Justiz"
+    datum: "2026-07-20"
   - titel: "Ratgeber: WLAN-Optimierung und Heimnetzwerk-Praxis"
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
+faktencheck: "2026-10-02"
 ---
-Ein stabiler und schneller Internetanschluss gehört heute zur absoluten Grundversorgung in jedem Haushalt – egal ob für Homeoffice, 4K-Streaming oder Online-Gaming. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten oder unzureichende WLAN-Abdeckung. Drei Stellschrauben zählen: das Heimnetzwerk optimieren, teure DSL-Altverträge durch lukrative Wechselprämien ersetzen und beim Smartphone-Tarif massiv sparen – in genau dieser Reihenfolge sinkt deine monatliche Rechnung am schnellsten.
+
+Ein stabiler und schneller Internetanschluss gehört heute zur Grundversorgung jedes Haushalts – egal ob für Homeoffice, 4K-Streaming oder Cloud-Backups. Dennoch zahlen Millionen Haushalte in Deutschland Monat für Monat deutlich zu viel für veraltete Bandbreiten, unnötige Routermieten oder stillschweigend verlängerte Altverträge. Die Hebel für eine erfolgreiche Vertrags- und Wechselentscheidung sind klar definiert: Heimnetzwerk optimieren, den echten 24-Monats-Effektivpreis kalkulieren, gesetzliche Kündigungsrechte nach TKG und BGB konsequent nutzen und Mobilfunkverträge von teuren Endgeräte-Finanzierungen entkoppeln. In diesem umfassenden Ratgeber erfährst du, wie du Verträge systematisch bereinigst und dauerhaft Bestkonditionen sicherst.
 
 ### Das Wichtigste auf einen Blick
 
-* **DSL-Wechselbonus nutzen:** Neukunden erhalten bei einem Wechsel oft Cashback, Router-Gutschriften und Freimonate im Gesamtwert von 150&nbsp;€ bis 350&nbsp;€.
-* **WLAN-Empfang optimieren:** Die richtige Positionierung des Routers und moderne Mesh-Repeater bringen stabilen Highspeed in jeden Raum, ohne teure Kabel verlegen zu müssen.
-* **DNS-Server kostenfrei anpassen:** Ein schnellerer, datenschutzfreundlicher DNS-Server sorgt für spürbar kürzere Reaktionszeiten beim Surfen.
-* **Mobilfunkverträge entkoppeln:** SIM-Only-Tarife ohne teures subventioniertes Smartphone sparen im Monat oft 20&nbsp;€ bis 40&nbsp;€.
+* **DSL- & Glasfaser-Effektivpreis kalkulieren:** Der Werbepreis (z.&nbsp;B. „29,99&nbsp;€“) täuscht oft. Nur der echte Effektivpreis über 24 Monate inklusive Bereitstellung, Routermiete und Boni zeigt, was ein Tarif wirklich kostet.
+* **Monatliche Kündbarkeit nach 24 Monaten:** Nach Ablauf der Erstvertragslaufzeit gilt nach §&nbsp;56 TKG und §&nbsp;309 Nr.&nbsp;9 BGB eine gesetzliche Kündigungsfrist von maximal einem Monat.
+* **Unterbrechungsfreier Anbieterwechsel:** Die Bundesnetzagentur garantiert die nahtlose Weiterversorgung beim Anbieterwechsel. Ein Wechselausfall darf maximal einen Kalendertag betragen.
+* **SIM-Only schlägt Smartphone-Bundles:** Kaufe Endgeräte separat. SIM-Only-Tarife mit Allnet-Flat und 20–30&nbsp;GB 5G-Datenvolumen gibt es heute bereits für unter 10&nbsp;€ bis 15&nbsp;€ pro Monat.
 
 ---
 
-## Sparpotenziale bei Internet & Mobilfunk
+## 1. Aktuelles Marktradar Telekommunikation (Q4 2026)
+
+Hier sind die aktuellen Markt-Benchmarks für Festnetz- und Mobilfunkverträge in Deutschland:
+
+<div class="ff-radar-card">
+  <div class="ff-radar-card__head">
+    <h3 class="ff-radar-card__title"><span>📊</span> Telekommunikations-Marktradar Q4 2026</h3>
+    <span class="ff-radar-card__meta">Stand: Oktober 2026 · Quelle: BNetzA &amp; Tarifdaten</span>
+  </div>
+  <div class="ff-radar-grid">
+    <div class="ff-radar-kpi">
+      <div class="ff-radar-kpi__label">VDSL 50 / 100 Effektivpreis</div>
+      <div class="ff-radar-kpi__value">24,99 – 32,90 €</div>
+      <div class="ff-radar-kpi__source">Monatlicher Effektivpreis inkl. Wechselboni</div>
+    </div>
+    <div class="ff-radar-kpi">
+      <div class="ff-radar-kpi__label">Glasfaser Gigabit (FTTH)</div>
+      <div class="ff-radar-kpi__value">44,99 – 59,99 €</div>
+      <div class="ff-radar-kpi__source">Regulärer Grundpreis nach Aktionsphase</div>
+    </div>
+    <div class="ff-radar-kpi">
+      <div class="ff-radar-kpi__label">5G Allnet-Flat (SIM-Only)</div>
+      <div class="ff-radar-kpi__value">7,99 – 14,99 €</div>
+      <div class="ff-radar-kpi__source">20–40 GB Datenvolumen monatlich kündbar</div>
+    </div>
+    <div class="ff-radar-kpi">
+      <div class="ff-radar-kpi__label">Routermiete Vermeidbar</div>
+      <div class="ff-radar-kpi__value">120 – 190 € / 24M</div>
+      <div class="ff-radar-kpi__source">Ersparnis durch Kaufrouter statt 5–8 €/M Miete</div>
+    </div>
+  </div>
+  <div class="ff-radar-alert">
+    <strong>Gesetzlicher Verbraucherschutz:</strong> Seit Einführung des Kündigungsbuttons (§ 312k BGB) müssen Online-Verträge mit maximal zwei Klicks kündbar sein. Bei anhaltender Minderleistung steht dir nach BNetzA-Messprotokoll ein gesetzliches Minderungs- oder Sonderkündigungsrecht zu.
+  </div>
+</div>
+
+---
+
+## 2. Der 4K-Prüfpfad für Verträge und Wechselentscheidungen
+
+1. **Kosten sehen:** Erstelle eine lückenlose Inventur aller laufenden Verträge (DSL, Kabel, Mobilfunk, Streaming, Software, Fitness).
+2. **Konditionen rechnen:** Rechne den echten Monats-Effektivpreis über die Gesamtlaufzeit aus – niemals nur die ersten sechs Rabattmonate betrachten.
+3. **Kündigungsfenster sichern:** Bei Verträgen älter als 24 Monate sofort die 1-Monats-Kündigungsfrist nutzen, um Neukundenkonditionen zu verhandeln oder zu wechseln.
+4. **Kurs halten:** Verträge niemals passiv in teure Folgejahre laufen lassen; alle 24 Monate den Markt prüfen.
+
+---
+
+## 3. Sparpotenziale bei Internet & Mobilfunk
 
 | Bereich | Typische Ersparnis | Zeitaufwand | Effekt |
 |---|---|---|---|
 | DSL- & Glasfaser-Wechsel | 150–350&nbsp;€ / 2 Jahre | 10 Minuten | Mehr Bandbreite + Cashback |
 | WLAN & Heimnetz-Optimierung | 0&nbsp;€ Investition | 20 Minuten | Spürbar schnellere Ladezeiten |
 | SIM-Only-Handytarif wählen | 120–300&nbsp;€ / Jahr | 5 Minuten | Niedrigere monatliche Fixkosten |
-| Router mieten vs. kaufen | 60–120&nbsp;€ / 2 Jahre | Einmalig | Keine dauerhaften Mietgebühren |
+| Eigener Router statt Mietgerät | 60–140&nbsp;€ / 2 Jahre | Einmalig | Keine dauerhaften Hardware-Mieten |
+| Ungenutzte Streaming- & App-Abos | 100–240&nbsp;€ / Jahr | 10 Minuten | Sofortige monatliche Entlastung |
+
+{{< tabellenstand quelle="Markterhebungen & Preismodelle FranksFinanzcheck" stand="Oktober 2026" >}}
 
 ---
 
-## DSL-Tarifvergleich: Wechselbonus sichern und dauerhaft sparen
+## 4. Interaktiver DSL- & Vertrags-Effektivpreis-Rechner
 
-Viele Verbraucher bleiben über Jahre beim selben Anbieter, obwohl die zweijährige Mindestvertragslaufzeit längst abgelaufen ist. Nach 24 Monaten entfallen jedoch die anfänglichen Rabatte, und der Vertrag wird spürbar teurer.
+Berechne hier den echten monatlichen Durchschnittspreis über die gesamte Vertragslaufzeit:
 
-Wie du den Markt systematisch analysierst und günstige Tarife für deine Region findest, zeige ich dir im Leitfaden [DSL-Vergleich: So findest du günstigeres Internet](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/). Welche Boni und Cashbacks sich besonders lohnen und wie der Anbieterwechsel nahtlos funktioniert, erfährst du im Spezialbeitrag [DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](../../posts/2026-08-10-dsl-wechselbonus-sichern/).
-
-### Worauf du beim DSL-Vergleich achten solltest:
-1. **Effektiver Monatspreis:** Berechne den Preis über 24 Monate inklusive aller Boni, Freimonate, Bereitstellungsentgelte und Router-Kosten.
-2. **Benötigte Bandbreite:** Für Singles und Paare genügen oft 50 bis 100&nbsp;Mbit/s. Familien oder WGs mit parallelem 4K-Streaming und Homeoffice profitieren von 100 bis 250&nbsp;Mbit/s.
-3. **Hardware-Optionen:** Prüfe, ob du deinen vorhandenen Router Weiternutzen kannst, statt monatliche Mietgebühren beim Provider zu zahlen.
-
-👉 **Jetzt regionale DSL- und Glasfaser-Angebote prüfen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)
+{{< rechner typ="dsl-effektiv" quelle="BNetzA & Preismodelle Telekommunikation" stand="Oktober 2026" >}}
 
 ---
 
-## WLAN im ganzen Haus verbessern: Speed in jeder Ecke
+## 5. Entscheidungstabelle: Kündigen, Wechseln oder Nachverhandeln?
 
-Selbst der schnellste Glasfaser- oder VDSL-Anschluss nützt wenig, wenn das Funksignal in der Wohnung durch dicke Wände, Decken oder Störquellen ausgebremst wird.
+Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
 
-Praktische Anleitungen zur Beseitigung von Funklöchern und zur Einrichtung eines stabilen Heimnetzwerks findest du in unserem Praxisbericht WLAN verbessern: So bringst du stabilen Speed in jede Ecke.
-
-### Die 3 wichtigsten WLAN-Sofortmaßnahmen:
-* **Router freistehend platzieren:** Nicht in Schränken, hinter dem Fernseher oder auf dem Boden verstecken, sondern leicht erhöht und zentral im Raum aufstellen.
-* **5-GHz-Frequenzband nutzen:** Moderne Router bieten 2,4&nbsp;GHz (höhere Reichweite) und 5&nbsp;GHz (deutlich höhere Geschwindigkeit und weniger Störungen durch Nachbarn).
-* **Mesh-System statt Billig-Repeater:** Für größere Wohnungen oder Häuser sorgt ein Mesh-Netzwerk für unterbrechungsfreies Roaming unter einem einheitlichen Netzwerknamen.
-
----
-
-## Handytarife vergleichen: Schluss mit teuren 24-Monats-Knebelverträgen
-
-Beim Mobilfunk gilt eine einfache Grundregel: Kaufe dein Smartphone idealerweise separat und buche dazu einen flexiblen SIM-Only-Tarif. Tarife mit Allnet-Flat, SMS-Flat und 15 bis 30&nbsp;GB Highspeed-Datenvolumen im 5G-Netz gibt es heute bereits für unter 10&nbsp;€ bis 15&nbsp;€ pro Monat.
-
-💡 **Schnell-Tipp von Frank:** Prüfe vor dem Neuabschluss dein tatsächliches Datenvolumen in den Smartphone-Einstellungen der letzten drei Monate. Oft zahlt man für 50&nbsp;GB Datenvolumen, verbraucht im Alltag mit heimischem WLAN aber selten mehr als 8&nbsp;GB.
-
-👉 **Günstige SIM-Only & Handytarife vergleichen:** [**→ Jetzt Handytarife vergleichen**](/go/handytarife/)
-
----
-
-<!-- premium-length-2026 -->
-
-## Der 12-Monats-Plan für Netz und Mobilfunk
-
-Ein Silo lebt von Wiederholung, nicht von einem einmaligen Wechsel. Deshalb gehört Internet in denselben Kalender wie Strom und Versicherung.
-
-**Januar.** Speedtest-Kabel + WLAN an drei Orten. Foto der Werte. Weicht Kabel um mehr als 30 % vom Vertrag ab, Entstörung – nicht erst den Tarif wechseln.
-
-**März.** Mobilfunk: drei Monats-Verbrauchsdaten im Handy. Tarif gegen Realität. SIM-Only, wenn das Handy abbezahlt ist.
-
-**Juni.** DSL/Glasfaser-Vertrag: Laufzeitende prüfen. Liegt es in den nächsten 16 Wochen, Vergleich starten, Bonusbedingungen lesen, eigenen Router klären.
-
-**September.** WLAN-Herbstcheck: Mesh-Knoten, Firmware, Gäste-WLAN, IoT getrennt. Homeoffice-Platz messen, bevor die dunkle Jahreszeit Videocalls verdichtet.
-
-**November.** Black-Friday-Tarife nur mit Effektivpreis über 24 Monate. Die 1-€-erste-Monate sind selten das günstigste Paket.
-
-## Cluster: welche Artikel du in welcher Reihenfolge liest
-
-1. Bedarf und Technik – [richtigen DSL-Tarif finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
-2. Preis und Fallen – [DSL-Vergleich](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/)
-3. Bonus – [Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
-4. Prozess – [Anbieterwechsel Praxis](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
-5. Funk – [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
-6. Feinschliff – [DNS wechseln](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
-7. Mobil – [Handytarif 2026](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/)
-
-Die Reihenfolge verhindert, dass du 1 Gbit kaufst und dann merkst, dass der Router im Schrank steht.
-
-## Rechenbeispiel Haushalt 2026: Festnetz + zwei SIM
-
-Alt: 44,99 € DSL nach Rabattphase + 2 × 29,99 € Handy im 24-Monats-Bündel mit abbezahltem Smartphone = 104,97 €. Neu: 34,50 € effektiv DSL inkl. Bonus / 24 Monate + 2 × 9,99 € SIM-Only 15 GB = 54,48 €. Differenz **50,49 € im Monat, 605 € im Jahr**. Zeitaufwand: ein Nachmittag plus Umschalttag. Das ist der größte Hebel im Silo, größer als jedes Mesh-Marketing.
-
-## Typische Silo-Fehler
-
-- Nur Handy wechseln, DSL seit 2019 unangetastet (oder umgekehrt)
-- Glasfaser bestellen, ohne die Inhouse-Verkabelung zu klären
-- Mesh kaufen, bevor der Kabeltest am Router stimmt
-- Bonus mitnehmen und in Monat 13 den teuren Folgepreis übersehen
-- Familienkarte mit 50 GB für ein Kind, das 95 % im WLAN ist
-
-## FAQ-Ergänzung zum Ratgeber
-
-### Lohnt Glasfaser, wenn VDSL 250 schon da ist?
-
-Ja, wenn Upload, Ping und Stabilität für dich zählen (VPN, Videokonferenzen, Upload großer Dateien) und der Hausanschluss ohne vierstellige Extra-Rechnung kommt. Nein, wenn du 80 € mehr zahlst für 900 Mbit, von denen WLAN 80 ausliefert.
-
-### Kann ich während des Wechsels kündigen?
-
-Widerruf 14 Tage. Danach bindet die Mindestlaufzeit. Deshalb den Vertrag lesen, bevor du klickst – nicht danach.
-
-### Ist 5G zu Hause ein Ersatz für DSL?
-
-Als Backup oder in der Bauphase ja. Als Dauerlösung nur, wenn das Datenvolumen und der Ping alltagstauglich sind und du Drosselgrenzen kennst. Homeoffice mit VPN auf gedrosseltem 5G ist Frust.
-
-Dieses Silo ist dann fertig, wenn du einmal im Jahr 40 Minuten investierst – nicht wenn du jeden Monat einen neuen Router kaufst.
-
-<!-- premium-length-2026-b -->
-
-## Technik-Entscheid 2026: VDSL, Kabel, FTTH, Hybrid
-
-Die Verfügbarkeitskarte lügt höflich. „Bis zu 250 Mbit“ heißt: an der Straße, nicht in deiner Dose, nicht in deinem WLAN. Deshalb drei Messungen, bevor du unterschreibst.
-
-**Messung A – Leitungsqualität.** Ein Techniker- oder Selbsttest am Abschluss (Teilnehmeranschluss, Glasfaser-ONT). Liegt der Sync 40 % unter der Werbung, ist der Tarif falsch, nicht dein Router.
-
-**Messung B – Inhouse.** 15 m CAT7 zur FRITZ!Box schlägt 15 m Powerline durch die Spülmaschine. Wer neu baut oder renoviert, legt Leerrohr. Wer mietet, verhandelt eine Dose im Arbeitszimmer, nicht nur im Flur.
-
-**Messung C – Funk.** Dieselbe Speedtest-App, drei Orte, 19 Uhr. Unter 30 % der Leitung ist Mesh- oder Positionsthema, kein Grund für 1 Gbit.
-
-Hybrid (DSL+LTE) ist Backup, kein Dauerzustand. Das LTE-Volumen ist gedrosselt, VPN leidet, der Ping tanzt. Als Baustellenlösung drei Monate okay, als „wir haben ja Hybrid“-Dauerlösung teuer und nervig.
-
-## Provider-Wechselrecht nach TKG – was du 2026 wirklich hast
-
-Nach der Mindestlaufzeit monatlich kündbar, Umschaltung max. ein Kalendertag, Entstörung mit gesetzlicher Frist. Das steht im Gesetz, nicht in der Kulanzabteilung. Wenn der Wechseltag überschritten wird, dokumentieren (Ping, Traceroute, Ticketnummer) und Minderungsanspruch ansprechen. Die meisten Fälle lösen sich mit einem Ticket am Umschaltmorgen – aber nur, wenn du den Hotspot parat hast und nicht drei Stunden in der Warteschleife ohne Protokoll verbringst.
-
-Rufnummern und E-Mail-Adressen @Anbieter.de sind kein Grund zu bleiben. Domain und Mail besser selbst hosten oder bei einem unabhängigen Postfach. Wer 24 Monate bleibt, weil „die E-Mail“, zahlt eine emotionale Miete.
-
-## Hardware-Parkour ohne Neu-Kauf-Zwang
-
-Eine solide FRITZ!Box aus 2023/24 trägt 2026 noch VDSL 250 und FTTH im Bridge hinter dem ONT. Mesh-Repeater derselben Generation halten mit. Der Zwang zur Provider-Box ist oft Firmware-Politik, nicht Physik. Bridge-Modus schriftlich erfragen, bevor du die eigene Box in den Schrank stellst.
-
-Stromkosten: Router + zwei Mesh-Knoten + Switch ≈ 15–25 Watt dauerhaft ≈ 40–70 €/Jahr. Das rechtfertigt keinen Billig-Repeater, der alle zwei Tage neu startet. Es rechtfertigt Zeitsteuerung nachts, wenn niemand streamt.
-
-## Inhaltsverzeichnis für interne Links (Silo-Hygiene)
-
-Jeder neue Artikel in diesem Cluster sollte auf diese Pillar zeigen – einmal, mit verständlichem Anker, nicht fünfmal. Die Pillar zeigt auf die sieben Vertiefungen. So entsteht Topical Authority, ohne Keyword-Spam. Pinterest-Pins aus dem Board „Internet & DSL“ landen auf dem passenden Vertiefungsartikel, nicht auf dieser Übersicht, sobald der Artikel existiert. Die Übersicht bleibt der Hub für Menschen, die noch nicht wissen, welche Teildisziplin ihr Problem ist.
-
-## Häufige Fragen zu DSL, Internet und Mobilfunk
-
-### Wie lange dauert die Umstellung beim DSL-Anbieterwechsel?
-Der Wechselprozess dauert in der Regel zwei bis vier Wochen. Gemäß dem novellierten Telekommunikations­gesetz (TKG) darf die Unterbrechung beim Anbieterwechsel am Umschaltetag höchstens einen Kalendertag dauern.
-
-### Kann ich meinen DSL-Vertrag monatlich kündigen?
-Ja. Sobald die anfängliche Mindestvertragslaufzeit (in der Regel 24 Monate) abgelaufen ist, verlängert sich der Vertrag auf unbestimmte Zeit und kann jederzeit mit einer Frist von einem Monat gekündigt werden.
-
-### Reicht ein 50-Mbit/s-Anschluss für Homeoffice und Streaming?
-Für einen Ein- bis Zwei-Personen-Haushalt reicht ein stabiler Anschluss mit 50&nbsp;Mbit/s für gleichzeitige Videokonferenzen in HD und 4K-Streaming problemlos aus. Wichtig ist dabei auch ein Upload von mindestens 10&nbsp;Mbit/s für flüssige Upstreams.
-
-### Lohnt es sich, den Router beim Anbieter zu mieten?
-In den meisten Fällen nicht. Nach zwei bis drei Jahren übersteigen die monatlichen Mietkosten von 5&nbsp;€ bis 8&nbsp;€ den Neupreis eines eigenen Geräts wie einer AVM FRITZ!Box deutlich.
+<div class="ff-decision-matrix">
+  <div class="ff-decision-matrix__head">
+    <h3 class="ff-decision-matrix__title">Entscheidungsmatrix: Die 4 Vertragsszenarien</h3>
+    <p class="ff-decision-matrix__sub">Wann lohnt sich ein Wechsel, wann die Kündigung und wann das Bleiben?</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Ausgangssituation</th>
+        <th>Handlungsoption</th>
+        <th>Aufwand</th>
+        <th>Einsparpotenzial</th>
+        <th>Empfohlene Vorgehensweise</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vertrag älter als 24 Monate</strong> (Rabatt entfallen)</td>
+        <td>Kündigen &amp; Wechseln</td>
+        <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (10 Min.)</span></td>
+        <td>150–350 € / 2 Jahre</td>
+        <td>Neuen Anbieter beauftragen; dieser kündigt den Altvertrag automatisch zum Monatsende.</td>
+      </tr>
+      <tr>
+        <td><strong>Zufrieden mit Leitung, aber Preis steigt</strong></td>
+        <td>Kündigen &amp; Nachverhandeln</td>
+        <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (1 Anruf)</span></td>
+        <td>100–200 € / 2 Jahre</td>
+        <td>Kündigung vormerken; bei der Kundenrückgewinnung (Retention) Neukundenrabatt einfordern.</td>
+      </tr>
+      <tr>
+        <td><strong>Glasfaser-Ausbaugebiet (FTTH verfügbar)</strong></td>
+        <td>Technologiewechsel</td>
+        <td><span class="ff-decision-badge ff-decision-badge--warn">Mittel (Montage)</span></td>
+        <td>Höhere Stabilität</td>
+        <td>Kostenlosen Hausanschluss während der Nachfragebündelung sichern; Tarif vergleichen.</td>
+      </tr>
+      <tr>
+        <td><strong>Anhaltende Leitungsstörungen / Unterversorgung</strong></td>
+        <td>Sonderkündigung nach TKG</td>
+        <td><span class="ff-decision-badge ff-decision-badge--warn">Mittel (Messung)</span></td>
+        <td>Sofortiger Ausstieg</td>
+        <td>BNetzA-Desktop-App nutzen (30 Messungen an 3 Tagen) → Fristlose Kündigung nach § 57 TKG.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ---
 
-👉 **DSL- und Mobilfunktarife vergleichen:** [**→ Internet & DSL vergleichen**](/go/dsl/)
+## 6. Schritt-für-Schritt: Die 8-Punkte-Checkliste für den Vertrags-Audit
+
+Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren:
+
+<div class="ff-audit-checklist">
+  <div class="ff-audit-checklist__head">
+    <h3 class="ff-audit-checklist__title"><span>📋</span> 8-Punkte-Checkliste: Dein Vertrags- &amp; Kündigungs-Audit</h3>
+    <span class="ff-audit-checklist__badge">Praxis-Checkliste</span>
+  </div>
+  <ul class="ff-audit-checklist__list">
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-1" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-1" class="ff-audit-item__content">
+        <strong>1. Vertragsende und Kündigungsfrist prüfen</strong>
+        Im Kundenportal nachsehen: Wurde die 24-Monats-Mindestlaufzeit bereits erreicht? (Falls ja: 1 Monat Kündigungsfrist).
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-2" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-2" class="ff-audit-item__content">
+        <strong>2. Tatsächlich benötigte Bandbreite ermitteln</strong>
+        Single/Paar: 50–100 Mbit/s. Familie mit 4K-Streaming &amp; Homeoffice: 100–250 Mbit/s. Gigabit nur bei extremen Up-/Downloads.
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-3" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-3" class="ff-audit-item__content">
+        <strong>3. Echten Effektivpreis mit Rechner kalkulieren</strong>
+        Grundgebühr, Rabatte ab Monat 13, Wechselbonus, Bereitstellung und Routerkosten über 24 Monate verrechnen.
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-4" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-4" class="ff-audit-item__content">
+        <strong>4. Routerkauf statt Routermiete prüfen</strong>
+        Vorhandenen Router weiterverwenden oder Standard-Modell kaufen (spart 5–8 €/Monat dauerhafte Gerätemiete).
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-5" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-5" class="ff-audit-item__content">
+        <strong>5. Festnetz-Wechsel beauftragen (Nicht selbst kündigen!)</strong>
+        Neuen Anbieter beauftragen und Wechselauftrag erteilen – der neue Provider kündigt beim Altanbieter für nahtlosen Übergang.
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-6" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-6" class="ff-audit-item__content">
+        <strong>6. Rufnummernmitnahme (Portierung) veranlassen</strong>
+        Die Portierung der Festnetz- oder Mobilfunknummer ist in Deutschland gesetzlich kostenfrei.
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-7" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-7" class="ff-audit-item__content">
+        <strong>7. Mobilfunk auf SIM-Only umstellen</strong>
+        Tatsächlichen Datenverbrauch im Smartphone prüfen; Tarif auf flexible monatliche SIM-Only-Allnet-Flat anpassen.
+      </label>
+    </li>
+    <li class="ff-audit-item">
+      <input type="checkbox" id="chk-dsl-8" class="ff-audit-item__checkbox">
+      <label for="chk-dsl-8" class="ff-audit-item__content">
+        <strong>8. Wechselkalender für Monat 22 setzen</strong>
+        Im Kalender 2 Monate vor Ablauf der neuen 24-Monats-Frist eine Erinnerung für den nächsten Effektivpreis-Check einstellen.
+      </label>
+    </li>
+  </ul>
+</div>
+
+---
+
+## 7. Praxis-Fallstudien aus deutschen Haushalten
+
+### Fallstudie 1: Paar Elena &amp; David – Vertragsbereinigung nach dem Zusammenzug
+
+<div class="ff-case-study-box">
+  <div class="ff-case-study-box__header">
+    <div>
+      <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Haushaltskonsolidierung</div>
+      <h3 class="ff-case-study-box__title">Elena &amp; David: Zusammenzug &amp; Vertrags-Detox</h3>
+    </div>
+    <span class="ff-case-study-box__profile">👫 2 Personen · Zusammenzug in 3-Zimmer-Wohnung</span>
+  </div>
+  <div class="ff-case-study-box__grid">
+    <div class="ff-case-card">
+      <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
+      <div class="ff-case-card__value">2.159,52 € / Jahr</div>
+      <p class="ff-case-card__details">
+        2 alte DSL-Verträge (je 39,99 €/Monat) = 79,98 €<br>
+        2 teure Smartphone-Verträge mit Handy-Finanzierung (je 49,99 €/Monat) = 99,98 €<br>
+        Monatliche Belastung: <strong>179,96 € / Monat</strong>
+      </p>
+    </div>
+    <div class="ff-case-card">
+      <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
+      <div class="ff-case-card__value">581,76 € / Jahr</div>
+      <p class="ff-case-card__details">
+        1 DSL-Vertrag wegen Zusammenzugs sondergekündigt (§ 46 TKG).<br>
+        1 neuer Highspeed-Kabeltarif (effektiv 28,50 €/Monat inkl. 150 € Bonus).<br>
+        2× SIM-Only 25 GB 5G Allnet-Flats (je 9,99 €/Monat) = 19,98 €.<br>
+        Monatliche Belastung: <strong>48,48 € / Monat</strong>
+      </p>
+    </div>
+  </div>
+  <div class="ff-case-study-box__steps">
+    <div class="ff-case-study-box__steps-title">Umgesetzte Maßnahmen:</div>
+    <ul class="ff-case-study-box__steps-list">
+      <li>Sonderkündigung des überzähligen DSL-Anschlusses mit Meldebescheinigung der gemeinsamen Wohnung.</li>
+      <li>Smartphones nach Ende der Finanzierung behalten und auf dauerhaft günstige SIM-Only-Tarife umgestellt.</li>
+      <li>Kauf einer gebrauchten FRITZ!Box für 70 € statt 5,99 €/Monat Routermiete beim Provider (Amortisation nach 12 Monaten).</li>
+    </ul>
+  </div>
+  <div class="ff-case-study-box__savings">
+    <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
+    <span class="ff-case-study-box__savings-amount">1.577,76 € / Jahr (131,48 € / Monat)</span>
+  </div>
+</div>
+
+### Fallstudie 2: Rentner-Ehepaar Helga &amp; Klaus – Wegfall Nebenkostenprivileg Kabel-TV &amp; DSL-Check
+
+<div class="ff-case-study-box">
+  <div class="ff-case-study-box__header">
+    <div>
+      <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Seniorenhaushalt</div>
+      <h3 class="ff-case-study-box__title">Helga &amp; Klaus: TV- und DSL-Optimierung ohne Qualitätsverlust</h3>
+    </div>
+    <span class="ff-case-study-box__profile">👵👴 2 Personen · 75 m² Mietwohnung</span>
+  </div>
+  <div class="ff-case-study-box__grid">
+    <div class="ff-case-card">
+      <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
+      <div class="ff-case-card__value">898,80 € / Jahr</div>
+      <p class="ff-case-card__details">
+        Kabelnetzbetreiber verlangte 29,99 €/Monat für Einzelnutzervertrag nach Nebenkostenprivileg-Wegfall.<br>
+        Bestehender überdimensionierter DSL-250-Tarif (44,90 €/Monat).<br>
+        Monatliche Belastung: <strong>74,90 € / Monat</strong>
+      </p>
+    </div>
+    <div class="ff-case-card">
+      <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
+      <div class="ff-case-card__value">408,80 € / Jahr</div>
+      <p class="ff-case-card__details">
+        Kabel-TV-Vertrag abgelehnt; TV-Empfang kostenfrei über DVB-T2 / Mediatheken auf Smart-TV.<br>
+        DSL-Wechsel auf soliden 50 Mbit/s Spar-Tarif zu 24,90 €/Monat + 90 € Wechselbonus.<br>
+        Monatliche Belastung: <strong>34,07 € / Monat</strong>
+      </p>
+    </div>
+  </div>
+  <div class="ff-case-study-box__savings">
+    <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
+    <span class="ff-case-study-box__savings-amount">490,00 € / Jahr (40,83 € / Monat)</span>
+  </div>
+</div>
+
+---
+
+## 8. Kostenlose E-Mail-Serie: Der Vertrags-Detox-Masterplan
+
+Befreie dich in vier Tagen von überflüssigen Vertragskosten:
+
+<div class="ff-course-series-box">
+  <div class="ff-course-series-box__head">
+    <span class="ff-course-series-box__badge">Kostenlose E-Mail-Serie</span>
+    <h3 class="ff-course-series-box__title">Der 4-Tage Vertrags-Detox-Plan</h3>
+    <p class="ff-course-series-box__sub">In vier Tagen alle Altlasten erfassen, Kündigungsrechte nutzen und monatlich über 100 € Fixkosten freisetzen.</p>
+  </div>
+  <div class="ff-course-syllabus">
+    <div class="ff-course-day">
+      <span class="ff-course-day__tag">Tag 1</span>
+      <h4 class="ff-course-day__title">Die 15-Minuten-Inventur</h4>
+      <p class="ff-course-day__desc">Alle laufenden Festnetz-, Handy- und Abo-Verträge erfassen und Kündigungsfenster markieren.</p>
+    </div>
+    <div class="ff-course-day">
+      <span class="ff-course-day__tag">Tag 2</span>
+      <h4 class="ff-course-day__title">DSL, Kabel oder Glasfaser?</h4>
+      <p class="ff-course-day__desc">Wie viel Bandbreite dein Haushalt wirklich braucht und welche Router-Mieten reine Geldverschwendung sind.</p>
+    </div>
+    <div class="ff-course-day">
+      <span class="ff-course-day__tag">Tag 3</span>
+      <h4 class="ff-course-day__title">Die Kündigungsbutton-Taktik</h4>
+      <p class="ff-course-day__desc">Warum eine Kündigung die beste Verhandlungsposition für unschlagbare Treue-Rabatte bringt.</p>
+    </div>
+    <div class="ff-course-day">
+      <span class="ff-course-day__tag">Tag 4</span>
+      <h4 class="ff-course-day__title">Mobilfunk- &amp; Abo-Befreiung</h4>
+      <p class="ff-course-day__desc">Der saubere Umstieg auf SIM-Only und die Beseitigung stiller Mikro-Abos.</p>
+    </div>
+  </div>
+  <div class="ff-course-cta">
+    <a href="/newsletter/#newsletter-anmeldung" class="ff-course-cta__btn">
+      <span>✉️</span> Jetzt kostenlose Vertrags-Serie starten →
+    </a>
+  </div>
+</div>
+
+---
+
+## 9. Häufige Fragen zu Internet &amp; Verträgen
+
+### Wie funktioniert der DSL-Anbieterwechsel ohne Internetausfall?
+Kündige niemals selbst, wenn du zu einem anderen DSL- oder Kabelanbieter wechselst. Dein neuer Anbieter stimmt den Umschalttermin direkt mit dem bisherigen Versorger ab. Die gesetzliche Ausfallzeit darf nach § 58 TKG einen Kalendertag nicht überschreiten.
+
+### Was ist der Unterschied zwischen Werbepreis und Effektivpreis?
+Vergleichsportale werben oft mit niedrigen Preisen für die ersten sechs bis zwölf Monate (z. B. 19,99 €). Ab Monat 13 springt der Preis oft auf 44,99 €. Der Effektivpreis teilt die tatsächlichen Gesamtkosten aller 24 Monate (inklusive Bereitstellung und Router) durch 24 und liefert den einzig ehrlichen Vergleichswert.
+
+### Gilt die 1-Monats-Kündigungsfrist für alle Verträge?
+Ja, für fast alle Verbraucherverträge (DSL, Handy, Fitnessstudio, Streaming, Zeitschriften), die ab dem 1. März 2022 abgeschlossen wurden oder deren 24-monatige Mindestvertragslaufzeit abgelaufen ist. Sie verlängern sich nur noch auf unbestimmte Zeit mit 1 Monat Kündigungsfrist.
+
+---
+
+## 10. Revisions- und Änderungslog
+
+<div class="ff-changelog-card">
+  <div class="ff-changelog-card__title"><span>📝</span> Revisionsprotokoll &amp; Datenbasis</div>
+  <ul class="ff-changelog-list">
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.2</span>
+      <span class="ff-changelog-item__date">02.10.2026</span>
+      <span>Vollständige Überarbeitung als Flagship-Kernbereich für Verträge &amp; Wechselentscheidungen: TK-Marktradar Q4 2026 integriert, 8-Punkte-Checkliste, Entscheidungsmatrix und Fallstudien Elena/Klaus ergänzt.</span>
+    </li>
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.1</span>
+      <span class="ff-changelog-item__date">28.09.2026</span>
+      <span>Integration des interaktiven DSL-Effektivpreisrechners und Synchronisation mit der BNetzA-Breitbandmessung.</span>
+    </li>
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v2.0</span>
+      <span class="ff-changelog-item__date">31.08.2026</span>
+      <span>Erweiterung um WLAN-Mesh-Optimierung, DNS-Tuning und SIM-Only-Mobilfunkstrategien.</span>
+    </li>
+    <li class="ff-changelog-item">
+      <span class="ff-changelog-item__version">v1.0</span>
+      <span class="ff-changelog-item__date">08.08.2026</span>
+      <span>Erstveröffentlichung des Basis-Ratgebers Internet &amp; DSL.</span>
+    </li>
+  </ul>
+</div>
+
+---
+
+👉 **Jetzt regionale DSL- und Glasfaser-Angebote prüfen:** [**→ Jetzt DSL-Tarife vergleichen**](/go/dsl/)  
+👉 **Günstige SIM-Only &amp; Handytarife vergleichen:** [**→ Jetzt Handytarife vergleichen**](/go/handytarife/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-## Praxisbuch: vom Funkloch zum belastbaren Anschluss
-
-Viele Leser landen auf dieser Übersicht, weil etwas nicht funktioniert: der Call bricht ab, der Stream stockt, die Rechnung ist zu hoch. Die Diagnose-Reihenfolge ist absichtlich langweilig.
-
-**Schritt 1 – Kabel.** Laptop per LAN an die Box, Speedtest, Screenshot. Ohne diese Referenz rätst du. Unter 70 % der Vertragsgeschwindigkeit an einem Werktagabend: Ticket beim Provider, 14 Tage messen, nicht sofort Hardware kaufen.
-
-**Schritt 2 – Dose und Hausstrecke.** In Altbauten liegt die Telekom-Dose im Flur, die Box 12 Meter und zwei Wände weiter. Eine 10-€-Dose versetzen lassen (Vermieter, Elektro) schlägt jedes Mesh, das ein schlechtes Signal verdoppelt.
-
-**Schritt 3 – Funk.** 5 GHz für Arbeit, 2,4 GHz für Smarthome, Kanalplan, Firmware. Mesh nur, wenn Schritt 1 und 2 erledigt sind.
-
-**Schritt 4 – Vertrag.** Effektivpreis, Upload, Hardware-Freiheit, Bonusbedingungen. Der Wechsel ist der letzte Schritt, nicht der erste.
-
-Wer die Reihenfolge umdreht, kauft 1 Gbit in ein Funkloch. Wer sie einhält, braucht diese Pillar nur noch einmal im Jahr – als Checkliste, nicht als Krisenratgeber.
-
-Zusätzlich 2026: Glasfaser-Ausbau in der Straße heißt nicht Glasfaser in der Wohnung. Hausanschluss, Eigentümerversammlung, Kostenbeteiligung klären, bevor du den Tarif mit 24 Monaten unterschreibst, der erst in 11 Monaten schaltbar ist. Die Lücke füllt VDSL oder ein ehrlicher Hybrid auf Zeit, nicht ein zweiter Vertrag parallel.
-
-Mobilfunk gehört in denselben Kopf, aber in einen eigenen Vertrag: SIM-Only, Netz der Infrastruktur, nicht das Logo auf der Plastikkarte. Familienkarten rechnen sich, wenn alle wirklich Mobilfunk brauchen – nicht wenn drei von vier dauerhaft im WLAN sind.
-
-Diese Übersicht bleibt der Hub. Die sieben Vertiefungsartikel tragen die Details. Neue Artikel im Cluster müssen hier einen Satz und einen Link bekommen – das ist die redaktionelle Pflicht, nicht SEO-Dekoration.

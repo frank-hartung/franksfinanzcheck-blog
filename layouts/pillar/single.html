@@ -51,7 +51,12 @@
       <span>·</span>
       <span>⏱️ {{ .ReadingTime }} Min. Lesezeit</span>
       <span>·</span>
+      {{- $pillarSlug := path.Base .File.Dir -}}
+      {{- if in (slice "strom-sparen" "internet-dsl" "frugalismus") $pillarSlug }}
+      <span class="ff-pc-badge ff-pc-badge--core">🌟 Kernbereich · Flagship-Leitfaden</span>
+      {{- else }}
       <span class="ff-pc-badge">Geprüfter Praxis-Leitfaden</span>
+      {{- end }}
     </div>
     {{- /* ARTIKELGENAUE WERBE-OFFENLEGUNG (28.09.2026): gilt für die
            Ratgeber-Ringe genauso wie für Artikel – sie tragen die

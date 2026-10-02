@@ -114,7 +114,13 @@
       {{- with site.GetPage (printf "pillar/%s" $key) }}
       {{- $count := len (where site.RegularPages ".Params.pillar" $key) }}
       {{- $cta := index $ctas $key }}
-      <article id="pillar-{{ $key }}" class="ff-pillar-card">
+      {{- $isCore := in (slice "strom-sparen" "internet-dsl" "frugalismus") $key }}
+      <article id="pillar-{{ $key }}" class="ff-pillar-card{{ if $isCore }} ff-pillar-card--core{{ end }}">
+        {{- if $isCore }}
+        <div class="ff-pillar-card__badge-row">
+          <span class="ff-pillar-core-badge">🌟 Kernbereich · Maximale Fachexpertise</span>
+        </div>
+        {{- end }}
         <div class="ff-pillar-card__head">
           <span class="ff-pillar-card__icon" aria-hidden="true">{{ index $labels $key }}</span>
           <span class="ff-pillar-card__savings">

@@ -76,6 +76,43 @@
       };
     },
 
+    /** 50-30-20-Budget: 50 % Grundbedürfnisse, 30 % Wünsche, 20 % Sparen/Puffer. */
+    'budget-503020': function (w) {
+      var netto = zuZahl(w.netto);
+      var fixkosten = zuZahl(w.fixkosten);
+      if (!(netto > 0)) return null;
+      var fixSoll = netto * 0.50;
+      var wunschSoll = netto * 0.30;
+      var sparSoll = netto * 0.20;
+      var fixQuote = null;
+      var fixDifferenz = null;
+      var hinweis = '';
+      var ampel = 'passend';
+      if (isFinite(fixkosten) && fixkosten > 0) {
+        fixQuote = (fixkosten / netto) * 100;
+        fixDifferenz = fixkosten - fixSoll;
+        if (fixQuote > 55) {
+          ampel = 'nachzahlung';
+          hinweis = 'Deine Fixkosten liegen bei ' + zahl(fixQuote) + ' % deines Nettoeinkommens (Empfehlung: max. 50 %). ' +
+            'Das bedeutet ' + euro(fixDifferenz) + ' pro Monat über dem Richtwert – durch Fixkosten-Optimierung kannst du diesen Betrag für Freizeit oder Notgroschen freisetzen.';
+        } else if (fixQuote <= 50) {
+          ampel = 'gut';
+          hinweis = 'Hervorragend: Deine Fixkosten liegen bei sparsamen ' + zahl(fixQuote) + ' % deines Einkommens. Du hast vollen Spielraum für Lebensqualität und Vermögensaufbau.';
+        } else {
+          hinweis = 'Deine Fixkosten liegen mit ' + zahl(fixQuote) + ' % leicht über der 50-%-Marke, aber im soliden Korridor.';
+        }
+      }
+      return {
+        fixSoll: fixSoll,
+        wunschSoll: wunschSoll,
+        sparSoll: sparSoll,
+        fixQuote: fixQuote,
+        fixDifferenz: fixDifferenz,
+        hinweis: hinweis,
+        ampel: ampel,
+      };
+    },
+
     /** Strom-Abschlag: fairer Monatsabschlag + Nachzahlungswarnung. */
     'strom-abschlag': function (w) {
       var verbrauch = zuZahl(w.verbrauch);
@@ -100,6 +137,35 @@
             ' pro Jahr zinslos.';
         } else {
           hinweis = 'Dein Abschlag passt – Abweichung unter 15 % ist normal.';
+        }
+      }
+      return { jahreskosten: jahreskosten, fair: fair, ampel: ampel, hinweis: hinweis };
+    },
+
+    /** Gas-Abschlag: fairer Monatsabschlag + Nachzahlungswarnung für Gas. */
+    'gas-abschlag': function (w) {
+      var verbrauch = zuZahl(w.verbrauch);
+      var preis = zuZahl(w.preis);
+      var grundpreis = zuZahl(w.grundpreis);
+      var aktuell = zuZahl(w.aktuell);
+      if (!(verbrauch > 0) || !(preis > 0) || !(grundpreis >= 0)) return null;
+      var jahreskosten = (verbrauch * preis) / 100 + grundpreis * 12;
+      var fair = jahreskosten / 12;
+      var ampel = 'passend';
+      var hinweis = '';
+      if (isFinite(aktuell) && aktuell > 0) {
+        if (aktuell < fair * 0.85) {
+          ampel = 'nachzahlung';
+          hinweis = 'Dein Gasabschlag liegt über 15 % unter dem fairen Betrag – ' +
+            'das ist ein klassisches Nachzahlungsrisiko (Nachzahlung ≈ ' +
+            euro((fair - aktuell) * 12) + ' pro Jahr nach der Heizperiode).';
+        } else if (aktuell > fair * 1.15) {
+          ampel = 'zu-hoch';
+          hinweis = 'Dein Gasabschlag liegt über 15 % über dem fairen Betrag – ' +
+            'du leihst deinem Gasversorger ≈ ' + euro((aktuell - fair) * 12) +
+            ' pro Jahr zinslos.';
+        } else {
+          hinweis = 'Dein Gasabschlag passt gut zum angegebenen Verbrauch und Preis.';
         }
       }
       return { jahreskosten: jahreskosten, fair: fair, ampel: ampel, hinweis: hinweis };
@@ -177,14 +243,36 @@
         ziel.appendChild(zeile('Sparrate für 12 Monate', euro(erg.rate12, 2)));
         ziel.appendChild(zeile('Sparrate für 24 Monate', euro(erg.rate24, 2)));
       }
+    } else if (typ === 'budget-503020') {
+      ziel.appendChild(zeile('50 % für Grundbedürfnisse & Fixkosten (Soll)', euro(erg.fixSoll), true));
+      ziel.appendChild(zeile('30 % für Wünsche & Freizeit (Soll)', euro(erg.wunschSoll), true));
+      ziel.appendChild(zeile('20 % für Notgroschen & Sparen (Soll)', euro(erg.sparSoll), true));
+      if (erg.fixQuote !== null) {
+        ziel.appendChild(zeile('Deine aktuelle Fixkostenquote', zahl(erg.fixQuote) + ' %'));
+      }
+      if (erg.hinweis) {
+        var pBudget = document.createElement('p');
+        pBudget.className = 'ff-rechner__hinweis ff-rechner__hinweis--' + erg.ampel;
+        pBudget.textContent = erg.hinweis;
+        ziel.appendChild(pBudget);
+      }
     } else if (typ === 'strom-abschlag') {
-      ziel.appendChild(zeile('Voraussichtliche Jahreskosten', euro(erg.jahreskosten), true));
-      ziel.appendChild(zeile('Fairer Monatsabschlag', euro(erg.fair, 2), true));
+      ziel.appendChild(zeile('Voraussichtliche Jahreskosten Strom', euro(erg.jahreskosten), true));
+      ziel.appendChild(zeile('Fairer Monatsabschlag Strom', euro(erg.fair, 2), true));
       if (erg.hinweis) {
         var p = document.createElement('p');
         p.className = 'ff-rechner__hinweis ff-rechner__hinweis--' + erg.ampel;
         p.textContent = erg.hinweis;
         ziel.appendChild(p);
+      }
+    } else if (typ === 'gas-abschlag') {
+      ziel.appendChild(zeile('Voraussichtliche Jahreskosten Gas', euro(erg.jahreskosten), true));
+      ziel.appendChild(zeile('Fairer Monatsabschlag Gas', euro(erg.fair, 2), true));
+      if (erg.hinweis) {
+        var pGas = document.createElement('p');
+        pGas.className = 'ff-rechner__hinweis ff-rechner__hinweis--' + erg.ampel;
+        pGas.textContent = erg.hinweis;
+        ziel.appendChild(pGas);
       }
     } else if (typ === 'dsl-effektiv') {
       ziel.appendChild(zeile('Gesamtkosten über die Laufzeit', euro(erg.summe)));
