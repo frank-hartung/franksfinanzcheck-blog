@@ -9,7 +9,6 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Gewohnheiten", "finanzielle Freiheit", "Geld sparen", "Notgroschen", "finanzielle"]
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
 ki_redaktion: "claude"
 ki_redaktion_status: "review"

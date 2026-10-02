@@ -1,54 +1,100 @@
 {{- /* ============================================================
-     ff_pruefzeile.html – KI-PRÜFZEILE unter der Meta-Zeile
+     REDAKTIONELLE PRÜFUNG – sichtbarer, artikelgenauer Nachweis
      ------------------------------------------------------------
-     KONKURRENZ-PARITÄT 28.09.2026 (Analyse Finanztip):
-     Finanztip kennzeichnet KI-Beteiligung JE ARTIKEL; Frank hatte
-     die KI-Offenlegung bisher nur global im Impressum. Diese Zeile
-     holt die Kennzeichnung an den Artikel – E-E-A-T-Signal für
-     Google UND EU-KI-VO Art. 50 (Transparenz über KI-Beteiligung)
-     an genau der Stelle, wo Leser sie sehen.
+     Ein Autor ist nicht automatisch fachlicher Prüfer. `ai_generated`,
+     ein Qualitäts-Score oder ein `faktencheck`-Datum dürfen daher niemals
+     den Satz „Zahlen & Fakten geprüft“ auslösen.
 
-     WARUM UNTER DER META-ZEILE: Die Prüfzeile beantwortet die
-     erste Vertrauensfrage eines YMYL-Lesers („Wem glaube ich
-     hier die Zahlen?“), bevor der erste Absatz beginnt.
-
-     DATENLAGE (alles Frontmatter, nichts erfunden):
-       * ai_generated: true  → KI-Entwurf, menschlich geprüft
-       * ai_generated: false → KI-Recherche (Agent Reach/Claude,
-         siehe /methodik/), Zahlen vom Betreiber geprüft
-       * author              → Prüfperson (Fallback Frank Hartung)
-       * article_dates.html  → ehrlicher Stand (kein Mtime-Fallback,
-         gleiche Quelle wie Schema/Sitemap)
-
-     VERTRAG:
-       * Nur posts-Sektion (Pillar-Seiten haben ihre eigene
-         „Geprüfter Praxis-Leitfaden“-Zeile in ff-pc-meta).
-       * Stand-Datum NUR wenn kein „zuletzt aktualisiert“-Zeile
-         folgt (die .ff-stand-Zeile im Single-Layout zeigt das
-         Datum bereits bei belegten Überarbeitungen – keine
-         Doppelung desselben Datums in zwei Zeilen).
-       * Keine Inline-Farben (CLAUDE.md §4): Klassen .ff-pruef*
-         in assets/css/extended/z-premium-blog.css, Dark Mode dort.
+     Nur ein explizit freigegebener Block `redaktionelle_pruefung` rendert
+     das grüne Prüfsiegel. Vollständigkeit und Fassungsgleichheit beweist
+     scripts/editorial_review_gate.py vor der Veröffentlichung. Der Hash
+     selbst wird nicht veröffentlicht; er ist der Manipulationsschutz.
      ============================================================ */ -}}
 {{- if eq .Section "posts" -}}
-{{- $dates := partial "article_dates.html" . -}}
+{{- $review := .Params.redaktionelle_pruefung -}}
+{{- $status := "" -}}
+{{- with $review }}{{- $status = .status | default "" | lower -}}{{- end -}}
+{{- $approved := or (eq $status "freigegeben") (eq $status "approved") -}}
+{{- $author := .Params.author | default "Frank Hartung" -}}
 {{- $ai := .Params.ai_generated | default false -}}
-{{- $pruefer := .Params.author | default "Frank Hartung" -}}
-{{- $showStand := not ($dates.modified.After $dates.published) -}}
-<p class="ff-pruef">
+
+{{- if and $review $approved -}}
+{{- $reviewer := $review.pruefer -}}
+{{- $coreClaims := $review.gepruefte_aussagen | default (slice) -}}
+{{- $claims := $review.gepruefte_zahlen | default (slice) -}}
+<section class="ff-review-card" aria-labelledby="ff-review-title-{{ .File.UniqueID }}" data-review-status="freigegeben">
+  <div class="ff-review-card__head">
+    <span class="ff-review-card__seal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+           stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <path d="M8 3.8h8a2 2 0 0 1 2 2v9.4a2 2 0 0 1-.9 1.66L12 20l-5.1-3.14A2 2 0 0 1 6 15.2V5.8a2 2 0 0 1 2-2Z"/>
+        <path d="m9.1 11.7 2 2 3.9-4.3"/>
+      </svg>
+    </span>
+    <div class="ff-review-card__heading">
+      <span class="ff-review-card__eyebrow">Redaktionell geprüft von</span>
+      <strong id="ff-review-title-{{ .File.UniqueID }}">{{ $reviewer.name }}</strong>
+      {{- with $reviewer.rolle }}<span class="ff-review-card__role">{{ . }}</span>{{ end -}}
+    </div>
+    <a class="ff-review-card__sources" href="#ff-quellen-{{ .File.UniqueID }}">
+      {{ len (.Params.quellen | default (slice)) }} Quellen ansehen
+    </a>
+  </div>
+
+  <dl class="ff-review-card__facts">
+    <div><dt>Autor</dt><dd>{{ $author }}</dd></div>
+    <div><dt>Prüfdatum</dt><dd><time datetime="{{ $review.pruefdatum }}">{{ dateFormat "02.01.2006" $review.pruefdatum }}</time></dd></div>
+    <div><dt>Geprüfte Zahlen</dt><dd>{{ len $claims }}</dd></div>
+    <div><dt>Nächste Prüfung</dt><dd><time datetime="{{ $review.naechste_pruefung }}">{{ dateFormat "02.01.2006" $review.naechste_pruefung }}</time></dd></div>
+  </dl>
+
+  <details class="ff-review-card__details">
+    <summary>Prüfumfang und Änderungsgrund</summary>
+    <p><strong>Anlass:</strong> {{ $review.aenderungsgrund }}</p>
+    {{- if gt (len $coreClaims) 0 }}
+    <p><strong>Geprüfte Kernaussagen:</strong></p>
+    <ul>
+      {{- range $coreClaims }}
+      <li>
+        <q>{{ .textanker }}</q>
+        {{- with .pruefung }}<span> – {{ . }}</span>{{ end -}}
+        {{- with .quellen }}<small>Belege: {{ delimit . ", " }}</small>{{ end -}}
+      </li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- if gt (len $claims) 0 }}
+    <p><strong>Geprüfte Zahlen und Annahmen:</strong></p>
+    <ul>
+      {{- range $claims }}
+      <li>
+        <strong>{{ .aussage }}</strong>{{ with .wert }}: {{ . }}{{ end }}
+        {{- with .pruefung }}<span> – {{ . }}</span>{{ end -}}
+        {{- with .quellen }}<small>Belege: {{ delimit . ", " }}</small>{{ end -}}
+      </li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    <a href="{{ "methodik/" | relURL }}#redaktionelle-freigabe-fuer-ymyl-themen">Vollständiger Prüfprozess →</a>
+  </details>
+</section>
+{{- else -}}
+<p class="ff-pruef{{ if and $review (eq ($review.risikoklasse | default "") "hoch") }} ff-pruef--pending{{ end }}">
   <span class="ff-pruef__chip" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
          stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" focusable="false">
       <path d="M8 4h8a2 2 0 0 1 2 2v9.2a2 2 0 0 1-.9 1.66L12 20l-5.1-3.14A2 2 0 0 1 6 15.2V6a2 2 0 0 1 2-2Z"/>
-      <path d="m9.2 11.6 2 2 3.6-4"/>
+      <path d="M9 12h6"/>
     </svg>
   </span>
   <span class="ff-pruef__text">
-    {{- if $ai }}Mit KI-Unterstützung entworfen{{ else }}Mit KI-Recherche unterstützt{{ end -}}
-    <span class="ff-pruef__sep" aria-hidden="true">·</span>
-    Zahlen &amp; Fakten geprüft von {{ $pruefer }}
-    {{- if $showStand }}<span class="ff-pruef__sep" aria-hidden="true">·</span>Stand: {{ $dates.modified | time.Format "02.01.2006" }}{{ end -}}
+    Verantwortlicher Autor: {{ $author }}
+    {{- if $ai }}<span class="ff-pruef__sep" aria-hidden="true">·</span> Mit KI-Unterstützung entworfen{{ end -}}
+    {{- if and $review (eq ($review.risikoklasse | default "") "hoch") -}}
+      <span class="ff-pruef__sep" aria-hidden="true">·</span> Fachliche Freigabe ausstehend
+    {{- end -}}
   </span>
   <a class="ff-pruef__link" href="{{ "methodik/" | relURL }}">So arbeiten wir</a>
 </p>
+{{- end -}}
 {{- end -}}

@@ -8,7 +8,6 @@ tags: ["Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpe oder Gasheizung – welcher Weg spart 2026 am meis", "Gasheizung"]
 pin_title: Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?

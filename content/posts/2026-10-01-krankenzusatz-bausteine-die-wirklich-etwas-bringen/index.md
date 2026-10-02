@@ -8,7 +8,6 @@ tags: ["Hausratversicherung", "Wohngebäudeversicherung", "Kfz-Versicherung", "G
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Krankenzusatz", "Versicherung", "Zahnzusatz", "Bausteine", "Wirklich"]
 pin_title: "Krankenzusatz –: Bausteine, die wirklich etwas bringen"
@@ -23,6 +22,10 @@ cover:
   alt: "Krankenzusatz –: Bausteine, die wirklich etwas bringen"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Wähle einen Krankenzusatz, der ausschließlich die Leistungen abdeckt, die du wirklich nutzt, und setze die jährliche Selbstbeteiligung auf 200 €. So senkst du die monatliche Prämie in der Regel um 10–15 %, das entspricht etwa 5–10 € Ersparnis pro Monat. Durch den gezielten Vergleich von Tarifen kannst du zusätzlich weitere 2–3 % Rabatt erzielen."
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 TITLE: Krankenzusatz – Bausteine, die wirklich etwas bringen  

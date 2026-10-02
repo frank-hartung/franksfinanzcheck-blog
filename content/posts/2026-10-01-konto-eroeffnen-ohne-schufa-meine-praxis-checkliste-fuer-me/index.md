@@ -8,7 +8,6 @@ tags: ["Girokonto", "Kreditkarte und Kredit", "Tagesgeld und Zinsen", "Altersvor
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Konto eröffnen", "Schufa", "Konto ohne Schufa", "Konto eröffnen ohne Schufa –", "Eröffnen"]
 pin_title: "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste für me"
@@ -23,6 +22,10 @@ cover:
   alt: "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste für me"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du kannst ein Girokonto bei Online‑Banken oder Schufa‑freien Anbietern eröffnen, die in der Regel keine Grundgebühr verlangen – das spart dir etwa 5–15 € pro Monat gegenüber klassischen Konten. Halte dafür einen gültigen Personalausweis, eine aktuelle Meldebestätigung und ggf. einen Einkommensnachweis bereit und prüfe vorab, dass keine versteckten Transaktionsgebühren anfallen."
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Ein Konto ohne Schufa zu bekommen, klingt nach Wunschtraum – doch du kannst es jetzt selbst erledigen.  

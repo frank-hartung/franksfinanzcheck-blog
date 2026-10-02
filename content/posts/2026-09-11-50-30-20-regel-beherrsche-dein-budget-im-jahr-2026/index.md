@@ -9,7 +9,6 @@ tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 keywords: ["50-30-20-Regel", "50 30 20 Regel", "Budget planen", "Fixkosten senken", "Geld sparen", "Vermögensaufbau", "Beherrsche"]
 pin_title: "50-30-20-Regel: Beherrsche dein Budget"
 pin_description: "*Werbung | Die 50-30-20-Regel bringt Ordnung in dein Budget. So teilst du dein Nettoeinkommen sinnvoll auf, senkst Fixkosten und sparst Monat für Monat planbar Geld. Mehr Spartipps auf FranksFinanzcheck! #503020regel #budgetplanen #fixkostensenken"

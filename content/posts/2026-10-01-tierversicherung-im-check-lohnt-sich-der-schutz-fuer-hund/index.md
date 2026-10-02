@@ -8,7 +8,6 @@ tags: ["Hausratversicherung", "Wohngebäudeversicherung", "Kfz-Versicherung", "G
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Tierversicherung", "Hundeversicherung", "Katzenversicherung", "Tierversicherung im Check – lohnt sich der Schutz für Hund"]
 pin_title: Tierversicherung im Check – lohnt sich der Schutz für Hund ?
@@ -22,6 +21,10 @@ cover:
   image: "images/covers/2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund.jpg"
   alt: "Tierversicherung im Check – lohnt sich der Schutz für Hund?"
   caption: "Tipp von FranksFinanzcheck"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Wie viel würdest du für eine unerwartete Tierarztrechnung ausgeben?  

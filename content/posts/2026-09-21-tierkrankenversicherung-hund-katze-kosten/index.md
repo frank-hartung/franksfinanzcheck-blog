@@ -3,12 +3,11 @@ lastmod: 2026-09-30
 title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch"
 description: "Tierkrankenversicherung Hund: Wann sich eine Tierkrankenversicherung lohnen kann, welche Kosten bei Hund und Katze auftreten und worauf du bei Tarif…"
 date: 2026-09-21T09:05:00Z
-draft: false
+draft: true
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich betrachte Versicherungen konsequent aus Haushalts- und Risikosicht: Was ist existenziell, was ist planbar, und wo lohnt sich Absicherung wirklich? Genau nach diesem Raster ist auch dieser Artikel aufgebaut."
 ai_generated: false
 cover:
   image: "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg"
@@ -34,6 +33,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Ein Haustier kostet nicht nur Futter, Streu oder Zubehör. Teuer wird es oft dann, wenn gesundheitlich etwas passiert. Und das oft plötzlich. Eine OP, Diagnostik, Nachsorge oder längere Behandlung kann aus einer kleinen Rechnung schnell einen Budgetschock machen.

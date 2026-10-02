@@ -10,6 +10,10 @@ categories: ["Ratgeber"]
 pillar: ""
 keywords: []
 kurzantwort: ""
+redaktionelle_pruefung:
+  risikoklasse: "standard"
+  status: "ausstehend"
+  aenderungsgrund: "Erstentwurf – Risikoklasse und fachliche Freigabe offen"
 pinwand: "Finanzen | Spartipps & Tarifvergleiche"
 pin_title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 pin_description: ""

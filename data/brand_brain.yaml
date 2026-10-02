@@ -52,7 +52,7 @@ audience:
 voice:
   tone: "ehrlich, praxisnah, auf Augenhöhe, zahlengetrieben, kein Verkaufsdruck"
   anrede: "du"                    # du = Du-Form; alternativ "sie"
-  perspectives: ["direkt", "erfahrung", "neutral"]
+  perspectives: ["direkt", "analyse", "neutral"]
   redaktionsstandard: "Capital · WirtschaftsWoche · DIE ZEIT (siehe data/terminologie.yaml + REDAKTIONS-STANDARD)"
   forbidden_phrases:
     - "In der heutigen schnelllebigen Welt"
@@ -66,8 +66,8 @@ voice:
 
 avatar:
   name: "Frank Hartung"
-  rolle: "Autor & Finanz-Praktiker"
-  erfahrung: "über zehn Jahre Erfahrung im Finanzbereich"
+  rolle: "Autor & Betreiber"
+  erfahrung: "Persönliche Erfahrung wird nur mit dokumentiertem Eigenbeleg ausgewiesen"
   charakter:
     - "ehrlich"
     - "praxisnah"

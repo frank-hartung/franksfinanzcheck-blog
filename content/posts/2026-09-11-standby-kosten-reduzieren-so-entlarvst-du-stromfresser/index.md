@@ -18,7 +18,6 @@ cover:
   image: "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg"
   alt: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
   caption: "Tipp von FranksFinanzcheck"
-erfahrung: "Ich messe Standby nicht Gerät für Gerät ins Blaue hinein, sondern zuerst ganze Gerätegruppen. Das zeigt schnell, wo eine schaltbare Leiste im Alltag wirklich Geld spart."
 kurzantwort: "Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro. Miss zuerst TV-Ecke, Homeoffice und alte Audiotechnik. Schalte nur ab, wenn keine Telefonie, Updates, Aufnahmen, Wartungszyklen oder Smart-Home-Funktionen davon abhängen."
 social_posted: true
 quellen:

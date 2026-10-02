@@ -8,7 +8,6 @@ tags: ["Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-erfahrung: "Ich habe in den letzten zehn Jahren acht verschiedene Mobilfunkanbieter ausprobiert, darunter alle drei Netzbetreiber und mehrere Discounter. Mein aktueller Tarif im Telekom-Netz mit 25 GB und 5G kostet 9,99 € im Monat – nachdem ich zuvor jahrelang 34,99 € für einen vergleichbaren Alttarif gezahlt habe. Die Zahlen in diesem Artikel stammen aus meinen eigenen Wechseln."
 
 ai_generated: false
 cover:

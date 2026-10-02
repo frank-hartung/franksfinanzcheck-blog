@@ -119,6 +119,14 @@ AUSNAHMEN: dict[str, str] = {
         "Kennzeichnung entsteht im Template, nicht im Artikeltext – ein "
         "Befund ist ein Layout-/Registerdefekt und gehört einem Menschen "
         "(C15). Heilung am Kandidaten würde den Defekt verdecken.",
+    # YMYL-Freigabe (02.10.2026): Absichtlich KEIN Auto-Heiler. Prüfer,
+    # Zahlenprotokoll, Änderungsgrund und Freigabe-Hash sind menschliche
+    # Redaktionsakte. Die Reserve behält den Kandidaten zunächst; nach der
+    # Quarantäne verlässt er nur den automatischen Pool, nie das Repository.
+    "editorial_review_failures":
+        "Fachliche Freigaben dürfen nicht automatisiert erzeugt werden. "
+        "Hochrisiko-Kandidaten bleiben als Review-Hold erhalten; Quellen, "
+        "Zahlen und Prüfer werden redaktionell dokumentiert und versiegelt.",
 }
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")

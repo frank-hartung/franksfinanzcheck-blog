@@ -8,7 +8,6 @@ tags: ["Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-erfahrung: "Ich führe seit über acht Jahren selbst ein digitales Haushaltsbuch, habe Dutzende Apps und Excel-Vorlagen ausprobiert und meine Fixkosten dabei von 1.940 € auf 1.510 € im Monat gedrückt. Die Tipps in diesem Artikel stammen aus meiner eigenen Buchführung, nicht aus einem Lehrbuch."
 
 ai_generated: false
 cover:

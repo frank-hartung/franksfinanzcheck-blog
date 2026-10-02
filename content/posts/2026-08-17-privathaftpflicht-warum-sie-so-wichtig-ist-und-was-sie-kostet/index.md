@@ -3,12 +3,11 @@ lastmod: 2026-10-01
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Warum die Privathaftpflicht zu den wichtigsten Versicherungen gehört, welche Klauseln heute Pflicht sind und was guter Schutz für Singles und Familien kostet."
 date: 2026-08-17T08:35:12Z
-draft: false
+draft: true
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 ai_generated: false
 cover:
@@ -36,6 +35,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Du willst privathaftpflicht? Ein einziger Moment der Unachtsamkeit reicht oft aus: Du bist kurz abgelenkt, rempelst jemanden an, ein teures Gerät geht zu Bruch oder – im schlimmsten Fall – ein Mensch verletzt sich durch dein Versehen. In solchen Situationen geht es nicht mehr nur um Kleingeld, sondern um Forderungen, die ohne Absicherung dein gesamtes finanzielles Fundament über Jahre hinweg erschüttern könnten.

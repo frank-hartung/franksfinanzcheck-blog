@@ -9,7 +9,6 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 keywords: ["Ratenkredit", "Ratenkredit Vergleich", "Ratenkredit Zinsen", "effektiver Jahreszins", "Umschuldung", "Dispo ablösen", "Restschuldversicherung", "Kredit aufnehmen"]
 author: "Frank Hartung"
-erfahrung: "Ich habe für diesen Vergleich aktuelle Ratenkredit-Konditionen, Bundesbank-Daten und Testergebnisse (u. a. Stiftung Warentest) ausgewertet und alle Zinsbeispiele mit echten Effektivzinsen durchgerechnet – nachgerechnet statt abgeschrieben."
 kurzantwort: "Ein Ratenkredit kostet im Schnitt rund 8,5 Prozent effektiv im Jahr (Bundesbank Anfang 2026), Top-Angebote starten bei guter Bonität bei rund 4 Prozent. Er ist fast immer günstiger als der Dispo (im Schnitt 11,3 Prozent) und ersetzt ihn mit einer Überweisung. Entscheidend sind Effektivzins statt Schaufensterzins, der 2/3-Zins, kostenlose Sondertilgung und der Verzicht auf die teure Restschuldversicherung."
 ai_generated: true
 ki_redaktion: "arena"
@@ -35,6 +34,10 @@ quellen:
     herausgeber: "BaFin"
     datum: "2025-11-08"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Dein Girokonto steht mit rund 3.000 € im Minus. Der Dispo verlangt dafür im Schnitt 11,30 % Zinsen im Jahr. Ein Ratenkredit kostet laut Bundesbank im Schnitt nur 8,54 % – und löst den Dispo mit einer einzigen Überweisung ab.

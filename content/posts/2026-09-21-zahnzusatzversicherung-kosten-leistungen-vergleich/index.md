@@ -9,7 +9,6 @@ categories: ["Ratgeber"]
 pillar: "versicherungen"
 keywords: ["Zahnzusatzversicherung", "Zahnzusatzversicherung Vergleich", "Zahnzusatzversicherung Kosten", "Zahnersatz Kosten", "Implantat Kosten", "Zahnstaffel", "Zahnzusatzversicherung ohne Wartezeit", "Krankenkasse Zahnersatz"]
 author: "Frank Hartung"
-erfahrung: "Ich habe für diesen Artikel aktuelle Zahnzusatz-Tarife, Bedingungswerke und Testergebnisse (u. a. Stiftung Warentest) verglichen und jedes Rechenbeispiel an echten Zahnarztkosten ausgerichtet – was hier steht, ist nachgerechnet, nicht abgeschrieben."
 kurzantwort: "Die gesetzliche Krankenkasse zahlt bei Zahnersatz meist nur einen Festzuschuss zur Regelversorgung. Für Implantate, hochwertige Kronen oder Inlays bleibt oft ein Eigenanteil von mehreren hundert bis mehreren tausend Euro. Eine gute Zahnzusatzversicherung kann diese Lücke deutlich schließen. Wichtig sind Erstattungssatz, GOZ-Höchstsatz, Zahnstaffel, Gesundheitsfragen und der Abschluss vor angeratenen Behandlungen."
 ai_generated: false
 cover:
@@ -33,6 +32,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Sobald Zahnersatz plötzlich Thema wird, steigen die Kosten oft schnell. Nicht ein bisschen teuer, sondern richtig teuer. Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen.

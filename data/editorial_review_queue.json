@@ -1,0 +1,3093 @@
+{
+  "generated_at": "2026-10-02",
+  "high_risk_total": 15,
+  "approved": 0,
+  "open_live": 0,
+  "open_drafts": 17,
+  "items": [
+    {
+      "slug": "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+      "path": "content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.000 € bis 25.000 € kosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.000 € bis 25.000 € kosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Professionelle Trocknung | 2.500 € bis 7.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Professionelle Trocknung | 2.500 € bis 7.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Boden- und Wandflächensanierung | 2.000 € bis 6.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Boden- und Wandflächensanierung | 2.000 € bis 6.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Ersatz von Technik und Inventar | 1.500 € bis 5.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Ersatz von Technik und Inventar | 1.500 € bis 5.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Entsorgung und Reinigung | 800 € bis 2.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Entsorgung und Reinigung | 800 € bis 2.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.800 € bis 21.000 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.800 € bis 21.000 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „750 € bis 850 € pro m²**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „750 € bis 850 € pro m²**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „67.500 € bis 76.500 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „67.500 € bis 76.500 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.500 € oder mehr kosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kellertrocknung & Sanierung | 5.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Defekte Waschmaschine & Trockner | 2.200 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Beschädigte Möbel & Lagerware | 3.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Abtransport & Entsorgung | 1.400 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „12.600 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „135 € / Jahr | ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „95 € / Jahr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „35 € / Jahr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „135 €** | **ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „130 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „25.000 € bis 45.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „25.000 € bis 45.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein vermeintliches Schnäppchen für 40 € im Jahr ist wertlos, wenn es im Schadensfall aufgrund von U…“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (208/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+      "path": "content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „3.000 € bis 15.000 €** verursachen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „3.000 € bis 15.000 €** verursachen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „45 € bis 75 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „45 € bis 75 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „55 € bis 95 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „55 € bis 95 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „65 € bis 125 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „65 € bis 125 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „500 € bis 1.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „500 € bis 1.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.500 € bis 5.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.500 € bis 5.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „2.500 € bis 12.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „2.500 € bis 12.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.000 € bis 25.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6.000 € bis 25.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10 € bis 25 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10 € bis 25 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „42 € | Oft geringe Summen bei Schlüsselverlust |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „59 € | Hohe Deckung, Ausfallschutz, Top-Klauseln |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1,50 €**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „4 bis 8 Euro im Monat erhältlich.“"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (155/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann",
+      "path": "content/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/index.md",
+      "state": "entwurf",
+      "risk": "standard",
+      "findings": [
+        {
+          "code": "E16",
+          "detail": "veralteter Artikelstand 2024 in einem Beitrag aus 2026"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+      "path": "content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein ei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein ei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein ei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein ei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Trocknung | 3.000 € bis 7.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Trocknung | 3.000 € bis 7.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Boden und Putz | 2.000 € bis 8.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Boden und Putz | 2.000 € bis 8.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Haustechnik / Geräte | 1.500 € bis 6.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Haustechnik / Geräte | 1.500 € bis 6.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Aufräumung und Entsorgung | 800 € bis 2.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Aufräumung und Entsorgung | 800 € bis 2.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Gesamt** | **7.300 € bis 23.500 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Gesamt** | **7.300 € bis 23.500 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| ohne Selbstbeteiligung | 420 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 500 € Selbstbeteiligung | 380 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 500 € Selbstbeteiligung | 380 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 1.000 € Selbstbeteiligung | 340 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 1.000 € Selbstbeteiligung | 340 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| alter Standardtarif | nein | eingeschränkt | 580 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| günstiger Basistarif | nein | ja | 285 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| starker Tarif | ja | ja | 395 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| teurer Filialtarif | ja | ja | 735 € |“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (118/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+      "path": "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, rea…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, rea…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Jahresbeitrag | 1.040 € | 412 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Jahresbeitrag | 1.040 € | 412 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Sie wählen 0 € Selbstbeteiligung und zahlen dafür oft 25 bis 40 % mehr Beitrag.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Sie wählen 0 € Selbstbeteiligung und zahlen dafür oft 25 bis 40 % mehr Beitrag.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „* **Teilkasko:** 150 € SB → ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „15 bis 20 % günstiger“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „* **Vollkasko:** 300 € SB → ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 15 % günstiger“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Kannst du im Schadensfall 300 € selbst tragen?“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Dafür sparst du **10 bis 20 % Beitrag**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Dann zahlst du im Schnitt 120 € zu viel.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Tarife, bei denen \"jede Person das Fahrzeug fahren darf\", sind bis zu 35 % teurer.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Er kostet 10 bis 15 % Aufpreis.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| SF 0 | 0 (Fahranfänger) | 230–260 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „60 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „40 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „28 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „20 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Schlüsselverlust** (mindestens 500 €, besser 1.000 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Schlüsselverlust** (mindestens 500 €, besser 1.000 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- ❌ *\"Alte Verträge sind immer die besonders günstigen.\"* Das Gegenteil ist der Fall: Alttarife aus…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Fahranfänger, Tarif seit 3 Jahren | 150–300 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Mittelklasse-Fahrzeug, SF 10, 10 Jahre nicht verglichen | 400–600 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Familie, zwei Fahrzeuge, alte Tarife | 600–1.100 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Premium-Fahrzeug, SF 30, Werkstattneuling | 200–400 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „– der Kalender, der 800 € wert sein kann“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Werkstattbindung spart 10 bis 20 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Für die meisten Fahrer ja: Sie spart 10 bis 20 % Beitrag bei gleichwertiger Reparaturqualität.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein gemeldeter Schaden führt in der Regel zur Rückstufung um mehrere SF-Klassen, was den Folgebeitr…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.000 € sind daher oft günstiger selbst zu bezahlen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ja, viele Versicherer bieten einen Zweitwagen-Rabatt oder einen \"Multi-Car\"-Rabatt von bis zu 20 %.“"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (210/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-03-hausratversicherung-kosten-leistungen-vergleich",
+      "path": "content/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Polizei schätzt den Schaden auf 18.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Er kostet je nach Lage 10 bis 40 € im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Für 70 Quadratmeter in einem normalen Tarif zahlst du etwa 85 bis 140 € im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sind 7 bis 12 € im Monat.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer Hausrat mit Haftpflicht oder Kfz kombiniert, spart oft 5 bis 15 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 60 % Deckung bekommst du bei 10.000 € Schaden nur 6.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 60 % Deckung bekommst du bei 10.000 € Schaden nur 6.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 60 % Deckung bekommst du bei 10.000 € Schaden nur 6.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Verzicht auf die Unterversicherungsprüfung:** Der Versicherer akzeptiert eine pauschal vereinbart…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Als Faustregel gelten 650 bis 700 € pro Quadratmeter.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 80 Quadratmetern sind das rund 52.000 bis 56.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Fahrrad | Alle mit Rädern ab 500 € | 15 bis 35 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Fahrrad | Alle mit Rädern ab 500 € | 15 bis 35 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Elementar | Erdgeschoss, Hochwassergebiet, Keller | 10 bis 40 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Glas | Wohnungen mit großen Scheiben | 10 bis 25 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Photovoltaik | Eigentümer mit Balkonkraftwerk | ab 10 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Auslandsschutz | Wertgegenstände auf Reisen | 5 bis 20 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Wohnfläche realistisch angeben und Versicherungssumme mit 650 bis 700 € pro Quadratmeter planen“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei einem geschätzten Diebstahlschaden von 18.000 € entscheidet allein die vereinbarte Versicherung…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Was kostet die Hausratversicherung für ein Haus mit 120 Quadratmetern?** Als Faustregel gelten 65…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 120 m² sind das 78.000 bis 84.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Dafür zahlst du je nach Tarif 150 bis 240 € im Jahr.“"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (153/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert",
+      "path": "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Ein guter Jahresend-Check spart oft **100 € bis 500 € pro Jahr**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Ein guter Jahresend-Check spart oft **100 € bis 500 € pro Jahr**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| alter Vertrag | 780 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| neues Angebot | 560 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Ersparnis** | **220 € pro Jahr** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kfz | 760 € | 590 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kfz | 760 € | 590 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Hausrat | 145 € | 118 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Hausrat | 145 € | 118 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Privathaftpflicht | 92 € | 74 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Privathaftpflicht | 92 € | 74 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Gesamt** | **997 €** | **782 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Gesamt** | **997 €** | **782 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das macht eine mögliche Differenz von **215 € pro Jahr**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer sich dafür einmal ruhig Zeit nimmt, spart oft **100 € bis 500 € pro Jahr** – manchmal mehr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer sich dafür einmal ruhig Zeit nimmt, spart oft **100 € bis 500 € pro Jahr** – manchmal mehr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Oft **100 € bis 500 € pro Jahr**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Oft **100 € bis 500 € pro Jahr**.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (137/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen",
+      "path": "content/posts/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Dein Girokonto steht mit rund 3.000 € im Minus.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der Dispo verlangt dafür im Schnitt 11,30 % Zinsen im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Ratenkredit kostet laut Bundesbank im Schnitt nur 8,54 % – und löst den Dispo mit einer einzige…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Doch die Zinsspannen sind riesig: von unter 4 % für Top-Bonitäten bis über 12 % bei schwacher Kredi…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Doch die Zinsspannen sind riesig: von unter 4 % für Top-Bonitäten bis über 12 % bei schwacher Kredi…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Der Ratenkredit kostet im Schnitt 8,54 %, der Dispo 11,30 % – die Ablösung spart dreistellig.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Der Ratenkredit kostet im Schnitt 8,54 %, der Dispo 11,30 % – die Ablösung spart dreistellig.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Vergleiche den Effektivzins und den 2/3-Zins, nie den Schaufensterzins ab 0,68 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab ru…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab ru…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab ru…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Durchschnittszins 2026 | rund 11,30 % (Spanne 7,50 bis 15,00 %) | rund 8,54 % (Top-Angebote ab ru…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Überziehung darüber hinaus | rund 13,10 % (geduldete Überziehung) | entfällt – feste Kreditsumme |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Dispo-Ablösung:** 5.000 € Dispo zu 11,30 % kosten bei zwei Jahren Nutzung rund 1.1…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Dispo-Ablösung:** 5.000 € Dispo zu 11,30 % kosten bei zwei Jahren Nutzung rund 1.1…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Dispo-Ablösung:** 5.000 € Dispo zu 11,30 % kosten bei zwei Jahren Nutzung rund 1.1…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Derselbe Betrag als Ratenkredit zu 6,50 % über 36 Monate kostet insgesamt rund 500 € Zinsen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Derselbe Betrag als Ratenkredit zu 6,50 % über 36 Monate kostet insgesamt rund 500 € Zinsen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Ersparnis liegt bei rund 600 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Werbung zeigt Schaufensterzinsen ab 0,68 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Bonitätsabhängig, guter Score:** rund 3 bis 5 % effektiv (Einstiegsangebote von Direkt- und Fil…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Bonitätsabhängig, mittlerer Score:** rund 6 bis 9 % effektiv – hier landet die Mehrheit der Kun…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Bonitätsabhängig, schwacher Score:** rund 10 bis 13 % effektiv, teils mit Ablehnungsrisiko.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Bonitätsunabhängiger Festzins:** rund 5 bis 7 % für alle – planbar, aber ohne Top-Satz-Chance.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel 10.000 €:** Über 36 Monate zahlst du zu 3,49 % rund 10.550 € zurück.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel 10.000 €:** Über 36 Monate zahlst du zu 3,49 % rund 10.550 € zurück.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel 10.000 €:** Über 36 Monate zahlst du zu 3,49 % rund 10.550 € zurück.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Zu 10,99 % sind es rund 11.750 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Zu 10,99 % sind es rund 11.750 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der Unterschied beträgt rund 1.200 € – für denselben Kreditbetrag.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 60 Monaten Laufzeit wächst die Differenz auf über 2.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Beispiel: Schaufenster 0,68 %, 2/3-Zins 7,22 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Beispiel: Schaufenster 0,68 %, 2/3-Zins 7,22 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10.000 € zu 7 % kosten über 36 Monate rund 1.100 € Zinsen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10.000 € zu 7 % kosten über 36 Monate rund 1.100 € Zinsen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10.000 € zu 7 % kosten über 36 Monate rund 1.100 € Zinsen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Über 84 Monate sind es rund 2.650 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Dauerhaft im Dispo (über 1.000 €) | Ablösen lohnt fast immer – Zins halbiert sich oft, dazu ein T…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Rechenbeispiel Umschuldung:** Zwei Altkredite (4.000 € zu 11 %, 3.000 € zu 9 %) plus 2.000 € Disp…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Umschuldungskredit über 9.000 € zu 6 % kostet rund 540 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Umschuldungskredit über 9.000 € zu 6 % kostet rund 540 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Umschuldungskredit über 9.000 € zu 6 % kostet rund 540 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Ersparnis liegt bei rund 360 € pro Jahr – bei nur noch einer Rate.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Dem Schaufensterzins glauben.** 0,68 % gelten nur für Musterkunden mit Top-Bonität.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Die Restschuldversicherung mitnehmen.** Sie verteuert den Kredit oft um 20 bis 30 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gute Tarife erlauben 100 % Sondertilgung kostenlos.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine spätere Ablösung kostet laut § 502 BGB maximal 1 % der Restschuld – viele Banken verzichten ga…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer sie verkauft bekommt, zahlt oft 20 bis 30 % Aufpreis.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon 500 € zwischendurch verkürzen spürbar.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Dispo-Ablösung ab rund 1.000 € rechnet sich meist schon im ersten Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Fakt:** Filialbanken starten oft bei rund 3 % – enden aber auch bei 13 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Fakt:** Filialbanken starten oft bei rund 3 % – enden aber auch bei 13 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der **Ratenkredit** schlägt den Dispo fast immer: rund 8,54 % gegen 11,30 % im Schnitt, dazu Tilgun…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der **Ratenkredit** schlägt den Dispo fast immer: rund 8,54 % gegen 11,30 % im Schnitt, dazu Tilgun…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer Effektivzins und 2/3-Zins vergleicht, Sondertilgung sichert und die Restschuldversicherung able…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Rund 15 Minuten Vergleich heute bringen deiner Familie **bis zu 2.000 €** – ein Stundenlohn, den ka…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Im Schnitt rund 8,54 % effektiv (Bundesbank Anfang 2026).“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gute Bonitäten bekommen rund 3 bis 5 %, mittlere rund 6 bis 9 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gute Bonitäten bekommen rund 3 bis 5 %, mittlere rund 6 bis 9 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bonitätsunabhängige Festzinsen liegen bei rund 5 bis 7 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Fast immer: Der Dispo kostet im Schnitt 11,30 %, der Ratenkredit 8,54 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Fast immer: Der Dispo kostet im Schnitt 11,30 %, der Ratenkredit 8,54 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ab rund 1.000 € dauerhaftem Minus rechnet sich die Ablösung meist schon im ersten Jahr – inklusive …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Laut § 502 BGB maximal 1 % der Restschuld, bei unter 12 Monaten Restlaufzeit nur 0,5 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Laut § 502 BGB maximal 1 % der Restschuld, bei unter 12 Monaten Restlaufzeit nur 0,5 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Meist nein: Sie verteuert den Kredit oft um 20 bis 30 %, und Stiftung Warentest rät in der Regel ab.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (164/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-tierkrankenversicherung-hund-katze-kosten",
+      "path": "content/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Größere OP beim Hund** inklusive Narkose und Nachsorge: **1.800 € bis 3.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Größere OP beim Hund** inklusive Narkose und Nachsorge: **1.800 € bis 3.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Diagnostik plus Behandlung bei der Katze** (Labor, Bildgebung, Medikamente, Kontrollen): **400 …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Diagnostik plus Behandlung bei der Katze** (Labor, Bildgebung, Medikamente, Kontrollen): **400 …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Seit der Novelle der Gebührenordnung für Tierärzte (GOT) im November 2022 sind tierärztliche Leistu…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Tierärzte dürfen je nach Aufwand den ein- bis dreifachen Satz abrechnen, im Notdienst ist auch der …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.800–4.500 € | Implantate, Bildgebung, mehrwöchige Nachsorge |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „2.000–5.000 € | Nacht-/Wochenendsatz, Intensivüberwachung |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „2.000–5.000 € | MRT, Neurochirurgie, Reha |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „400–1.200 € | Labor, Bildgebung, Kontrollen |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Nicht die 20 € Monatsbeitrag.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Stell dir eine Rechnung über **3.000 €** vor, fällig innerhalb von 14 Tagen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Reserve unter 3.000 €** oder bereits für Auto, Haushalt und [Notgroschen](../../posts/2026-09-2…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Liquide Reserve von **5.000 € und mehr**, die ausschließlich für Notfälle reserviert ist.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein OP-Schutz für rund 20 € im Monat kostet über zehn Jahre etwa 2.400 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein OP-Schutz für rund 20 € im Monat kostet über zehn Jahre etwa 2.400 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Stiftung Warentest hat in Finanztest 05/2025 insgesamt 121 Hunde-OP-Tarife geprüft und dabei vor al…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung**: 20 % auf 3.500 € sind 700 € Eigenanteil.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung**: 20 % auf 3.500 € sind 700 € Eigenanteil.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung**: 20 % auf 3.500 € sind 700 € Eigenanteil.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Wartezeiten** (üblich sind 30 Tage für Krankheiten, oft 0 Tage bei Unfällen) und **Jahreshöchstgr…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Tarif A | 24 € | 0 % | höherer laufender Beitrag, weniger Kosten im Schadenfall |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Tarif A | 24 € | 0 % | höherer laufender Beitrag, weniger Kosten im Schadenfall |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Tarif B | 17 € | 20 % | günstiger pro Monat, dafür Eigenanteil bei Rechnungen |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Tarif B | 17 € | 20 % | günstiger pro Monat, dafür Eigenanteil bei Rechnungen |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Kostet eine Behandlung **1.500 €**, zahlst du bei 20 % Selbstbeteiligung **300 € selbst**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Kostet eine Behandlung **1.500 €**, zahlst du bei 20 % Selbstbeteiligung **300 € selbst**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Kostet eine Behandlung **1.500 €**, zahlst du bei 20 % Selbstbeteiligung **300 € selbst**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Nehmen wir an, du zahlst **25 € pro Monat**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sind **300 € pro Jahr**, über drei Jahre also **900 €**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sind **300 € pro Jahr**, über drei Jahre also **900 €**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bis eine größere OP mit Nachsorge **2.200 €** kostet.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Andersherum gilt das genauso: Wer 2.000 € bis 3.000 € locker aus Rücklagen zahlt, fährt oft schlank…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Andersherum gilt das genauso: Wer 2.000 € bis 3.000 € locker aus Rücklagen zahlt, fährt oft schlank…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Prüfe deshalb ehrlich: Wären **1.500 € bis 3.000 €** kurzfristig frei?“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Prüfe deshalb ehrlich: Wären **1.500 € bis 3.000 €** kurzfristig frei?“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Könntest du 1.500 € bis 3.000 € kurzfristig zahlen** – ohne Dispo, Ratenzahlung oder Griff in and…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Könntest du 1.500 € bis 3.000 € kurzfristig zahlen** – ohne Dispo, Ratenzahlung oder Griff in and…“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (132/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten",
+      "path": "content/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Kinder: oft mindestens **100.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Erwachsene: oft **100.000 € bis 200.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Erwachsene: oft **100.000 € bis 200.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Aber 50.000 € sind in vielen Fällen einfach zu knapp.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Grundsumme: **150.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Progression: **350 %**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Hand | 55 % | 70 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Hand | 55 % | 70 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Daumen | 20 % | teils mehr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Arm | 70 % | teils höher |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Grundsumme: **200.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Hand bei 55 %: **110.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Hand bei 55 %: **110.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Hand bei 70 %: **140.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Hand bei 70 %: **140.000 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das macht **30.000 € Unterschied**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kind | 40 € bis 80 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kind | 40 € bis 80 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Erwachsener, Bürojob | 60 € bis 120 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Erwachsener, Bürojob | 60 € bis 120 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| mit Unfallrente oder Extras | 100 € bis 180 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| mit Unfallrente oder Extras | 100 € bis 180 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann schon eine Grundsumm…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Oft mindestens 100.000 €.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (103/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich",
+      "path": "content/posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 1: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 2: eindeutige id fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "Quelle 3: eindeutige id fehlt"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Gute Zahnzusatz-Tarife leisten oft **80 % bis 100 %** – aber nur unter passenden Bedingungen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Gute Zahnzusatz-Tarife leisten oft **80 % bis 100 %** – aber nur unter passenden Bedingungen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Ohne Bonusheft: rund **60 %** der Regelversorgung“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- mit 5 Jahren Bonusheft: rund **70 %**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Mit 10 Jahren Bonusheft: rund **75 %**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Implantat inklusive Versorgung | 3.200 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Festzuschuss der Kasse | 230 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Eigenanteil ohne Zusatzschutz** | **2.970 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Es geht nicht um 50 € hier oder dort.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Viele lesen „100 % Erstattung“ und glauben, damit sei alles geklärt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 1.000 € bis 1.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 1.000 € bis 1.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 2.000 € bis 3.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 2.000 € bis 3.000 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 3.000 € bis 4.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahr | 3.000 € bis 4.500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gerade deshalb reicht es nicht, nur nach „80 %“ oder „100 %“ zu schauen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gerade deshalb reicht es nicht, nur nach „80 %“ oder „100 %“ zu schauen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| jung, einfacher Tarif | 10 € bis 20 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| jung, einfacher Tarif | 10 € bis 20 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 30 bis 40, guter Tarif | 20 € bis 40 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 30 bis 40, guter Tarif | 20 € bis 40 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 50 plus, starker Tarif | 30 € bis 55 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 50 plus, starker Tarif | 30 € bis 55 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **25 € pro Monat**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Also **300 € pro Jahr**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Über zehn Jahre sind das **3.000 €** Beitrag.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn in dieser Zeit ein Implantat mit Eigenanteil von rund **2.500 € bis 3.000 €** ansteht und zusä…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn in dieser Zeit ein Implantat mit Eigenanteil von rund **2.500 € bis 3.000 €** ansteht und zusä…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Kann ich einen Eigenanteil von 2.000 € bis 4.000 € notfalls selbst tragen?**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Kann ich einen Eigenanteil von 2.000 € bis 4.000 € notfalls selbst tragen?**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Diese drei Fragen bringen oft mehr Klarheit als zehn Werbeslogans mit „100 % Erstattung“.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Keramikkrone | 900 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kassenzuschuss | 350 € bis 500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Kassenzuschuss | 350 € bis 500 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Eigenanteil ohne Zusatzschutz** | **400 € bis 550 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Eigenanteil ohne Zusatzschutz** | **400 € bis 550 €** |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine Zahnspange kann – je nach Situation – schnell **3.000 € bis 6.000 €** kosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Eine Zahnspange kann – je nach Situation – schnell **3.000 € bis 6.000 €** kosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du problemlos **2.000 € bis 4.000 €** aus Rücklagen zahlen könntest, kann eine andere Strategi…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du problemlos **2.000 € bis 4.000 €** aus Rücklagen zahlen könntest, kann eine andere Strategi…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn bei einer Krone oder einem Implantat am Ende 250 € oder 900 € bei dir hängen bleiben, wirkt de…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn bei einer Krone oder einem Implantat am Ende 250 € oder 900 € bei dir hängen bleiben, wirkt de…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Viele gute Tarife übernehmen ein Budget für Prophylaxe, oft etwa **100 € bis 200 € pro Jahr**.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Viele gute Tarife übernehmen ein Budget für Prophylaxe, oft etwa **100 € bis 200 € pro Jahr**.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (148/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge",
+      "path": "content/posts/2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1,0 % bis 2,5 % pro Jahr) über Erfolg oder Misserfolg deiner Strategie.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1,0 % bis 2,5 % pro Jahr) über Erfolg oder Misserfolg deiner Strategie.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sogenannte Rentenpaket II schreibt das Rentenniveau bei rund 48 % fest.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Seit 2022 ist der Arbeitgeberzuschuss von 15 % für fast alle Verträge verpflichtend.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das Rentenniveau von 48 % gilt zudem nur für den „Eckrentner“.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schon bei moderaten 2 % Inflation halbiert sich die Kaufkraft deines Geldes in etwa 35 Jahren.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Nehmen wir an, deine Renteninformation weist heute 1.500 € aus.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „750 bis 800 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer ab 2040 in Rente geht, muss seine Bezüge zu 100 % versteuern.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Faustregel:** Du solltest monatlich etwa 10 bis 15 % deines Nettoeinkommens in private oder betri…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „0,2 % p.a.) | Mittel bis hoch (ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1,0–2,0 %) | Mittel (durch Gruppenverträge) |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Alles über 1,2 % pro Jahr schmälert deine Rendite über die Jahrzehnte massiv.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Aktuelles Nettoeinkommen: 2.800 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Gewünschtes Budget im Alter (80 % vom Netto): 2.240 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Gewünschtes Budget im Alter (80 % vom Netto): 2.240 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „1.450 € (netto nach Steuern/KK)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Monatliche Rentenlücke:** 790 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Claudia braucht also 790 € im Monat zusätzlich, wenn sie mit 67 in Rente geht.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wir rechnen 2 % Inflation über die nächsten 32 Jahre ein.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Um diese Lücke von 790 € zu schließen, bräuchte Claudia ein Vermögen von rund 237.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Um diese Lücke von 790 € zu schließen, bräuchte Claudia ein Vermögen von rund 237.000 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das gilt bei einem Entnahmeplan mit 4 % Rendite nach Steuern, sofern sie das Kapital über 25 Jahre …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Angenommen, sie hat heute bereits 10.000 € Erspartes.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Sie investiert 32 Jahre lang monatlich etwa 250 € in einen ETF-basierten Rentenbaustein (ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „6 % Rendite pro Jahr).“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer mit 20 anfängt, 100 € zu sparen, hat es viel leichter.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wer erst mit 40 beginnt, muss 300 € aufholen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sind Tarife ohne Provisionen: Du zahlst nur ein Honorar an den Berater, dafür fließen 100 % dei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Bestandsaufnahme machen:** Nimm deine aktuelle Renteninformation zur Hand und ziehe pauschal 20 %…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Als grobe Orientierung: Nach 45 Beitragsjahren liegt deine Bruttorente bei etwa 1.400 bis 1.500 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Netto bleiben oft rund 1.200 bis 1.300 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der Pflicht-Zuschuss von 15 % und die Ersparnis bei Steuern und Sozialabgaben machen die bAV oft re…“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (236/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich",
+      "path": "content/posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Ein jährlicher Wechsel der Kfz-Versicherung im November spart in der Regel rund 100 bis 300 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 20 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Du denkst vielleicht an die 80 € für die letzte Tankfüllung oder die 400 € für die Versicherung im …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Du denkst vielleicht an die 80 € für die letzte Tankfüllung oder die 400 € für die Versicherung im …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „150 bis 300 € zu vereinbaren.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du eine freie Werkstatt aufsuchst, die nach Herstellervorgaben arbeitet, sparst du bei den Stu…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Versicherung (altes Modell, keine Werkstattbindung): 650 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Kraftstoff (Durchschnittsverbrauch 7,5l/100km, teures Tanken): 1.950 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Wartung (Vertragswerkstatt): 450 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamt: 3.050 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Versicherung (Wechsel im November, Werkstattbindung, angepasste km): 420 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Kraftstoff (Verbrauch 6,2l/100km durch Fahrweise, günstiges Tanken): 1.500 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Wartung (Freie Werkstatt, eigenes Öl mitgebracht): 280 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamt: 2.200 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „In diesem Beispiel beträgt die Ersparnis rund 850 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das sind über 70 € im Monat, die du ohne großen Verzicht direkt in deinen Vermögensaufbau oder ande…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du die 70 € aus unserem Rechenbeispiel monatlich in einen breit gestreuten ETF investierst, wi…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Du sparst dabei oft 10 bis 20 % deines Kasko-Beitrags.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (183/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v",
+      "path": "content/posts/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v/index.md",
+      "state": "entwurf",
+      "risk": "erhoeht",
+      "findings": [
+        {
+          "code": "E16",
+          "detail": "veralteter Artikelstand 2024 in einem Beitrag aus 2026"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me",
+      "path": "content/posts/2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Im letzten Jahr habe ich den Prozess durchlaufen und dabei monatlich bis zu 15 € gespart.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Monatliche Gebühren liegen meist zwischen 5 € und 15 €, oft kostenlos bei Mindestgeldeingang.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Monatliche Gebühren liegen meist zwischen 5 € und 15 €, oft kostenlos bei Mindestgeldeingang.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Direktbank‑Y | Tagesgeld‑Konto | 100 € | 5 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Direktbank‑Y | Tagesgeld‑Konto | 100 € | 5 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Regionalbank‑Z | Basis‑Konto | 0 € | 9 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Regionalbank‑Z | Basis‑Konto | 0 € | 9 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Bei 12 Auszahlungen im Jahr entstehen rund 18 € Zusatzkosten.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „70 € bis 120 € pro Jahr, je nach Nutzung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „70 € bis 120 € pro Jahr, je nach Nutzung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Faustregel:** Ein Konto ohne Schufa lohnt sich, solange die Jahresgebühren unter 150 € bleiben.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das kann die Grundgebühr um bis zu 5 € erhöhen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Erreichst du die geforderten 100 €, kann die Bank eine Nachzahlungsgebühr erheben.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Grundgebühr: 7 € × 12 Monate = 84 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Grundgebühr: 7 € × 12 Monate = 84 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Karten‑Aufpreis: 3 € × 12 Monate = 36 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Karten‑Aufpreis: 3 € × 12 Monate = 36 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Auszahlungsgebühren: 1,50 € × 12 Auszahlungen = 18 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> - Auszahlungsgebühren: 1,50 € × 12 Auszahlungen = 18 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Damit liegt das Konto unter der **Faustregel**‑Grenze von 150 €, also wirtschaftlich sinnvoll.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Geldautomaten außerhalb des Netzwerks können 1‑2 € pro Nutzung kosten.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (125/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen",
+      "path": "content/posts/2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „200 € pro Jahr, wenn du regelmäßig Zahnersatz brauchst.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Auslandskrankenversicherung** ist sinnvoll ab 30 % der regulären Prämie, wenn du mehr als 2 Woc…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „30 % der Rechnung selbst.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein gutes Zahnzusatz‑Modul erstattet bis zu 80 % der Aufwendungen, maximal ca.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „2 000 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du jährlich 1 500 € an Zahnbehandlungen ausgibst, bleibt dir nur 300 € Selbstbeteiligung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du jährlich 1 500 € an Zahnbehandlungen ausgibst, bleibt dir nur 300 € Selbstbeteiligung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das entspricht einer direkten Ersparnis von 1 200 € im Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „In der Regel liegt die monatliche Prämie für einen Zahnzusatz zwischen 5 € und 12 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „In der Regel liegt die monatliche Prämie für einen Zahnzusatz zwischen 5 € und 12 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Chefarzt‑Upgrade kostet meist 10 € bis 20 € pro Monat.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ein Chefarzt‑Upgrade kostet meist 10 € bis 20 € pro Monat.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der Auslandsschutz liegt bei etwa 3 % bis 5 % der Jahresprämie deiner Grundversicherung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Der Auslandsschutz liegt bei etwa 3 % bis 5 % der Jahresprämie deiner Grundversicherung.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Faustregel:** Wenn ein Baustein mehr als 30 % deiner gesamten Zusatzprämie ausmacht, prüfe, ob du…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „*Ausgangssituation:* Du zahlst 15 € Monat für ein Komplettpaket (Zahn + Heilpraktiker + Ausland).“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Zahnzusatz allein kostet 6 € Monat, deckt 80 % der Zahnarztrechnungen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Zahnzusatz allein kostet 6 € Monat, deckt 80 % der Zahnarztrechnungen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Heilpraktiker‑Kosten fallen bei dir kaum an (nur 1 € Monat in Wirklichkeit).“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gesamtkosten bisher: 15 € × 12 = 180 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Gesamtkosten bisher: 15 € × 12 = 180 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das Beispiel zeigt, dass du fast 100 € jährlich sparen kannst, wenn du unnötige Bausteine streichst.“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (513/600 Wörter, 4/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    },
+    {
+      "slug": "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund",
+      "path": "content/posts/2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund/index.md",
+      "state": "entwurf",
+      "risk": "hoch",
+      "findings": [
+        {
+          "code": "E05",
+          "detail": "Status ist nicht „freigegeben“"
+        },
+        {
+          "code": "E07",
+          "detail": "Prüfername und konkrete Prüferrolle fehlen"
+        },
+        {
+          "code": "E08",
+          "detail": "Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein"
+        },
+        {
+          "code": "E09",
+          "detail": "gültiges Prüfdatum fehlt"
+        },
+        {
+          "code": "E10",
+          "detail": "nächster Review-Termin fehlt"
+        },
+        {
+          "code": "E12",
+          "detail": "sichtbare Belegkette braucht mindestens 2 Quellen"
+        },
+        {
+          "code": "E18",
+          "detail": "Liste der geprüften Kernaussagen mit Textankern fehlt"
+        },
+        {
+          "code": "E13",
+          "detail": "Liste der geprüften Zahlen/Rechenannahmen fehlt"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Eine Faustregel: Die Jahresprämie sollte nicht mehr als 10 % deiner erwarteten Behandlungskosten …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „15 %.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Zu niedrige Deckungssumme** – Bei einer Deckung von nur 5 000 € musst du den Rest einer großen Op…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Zu hoher Selbstbehalt** – Ein Eigenanteil von 500 € senkt die Prämie, erhöht aber das Risiko, bei…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Jahresprämie: 300 € (Hund)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Erwartete Tierarztkosten pro Jahr: 1 200 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Selbstbehalt: 200 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „In diesem Szenario sparst du rund 700 € jährlich, vorausgesetzt, du hast im Jahr mindestens 1 000 €…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „In diesem Szenario sparst du rund 700 € jährlich, vorausgesetzt, du hast im Jahr mindestens 1 000 €…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Das Tool berechnet automatisch, ob die Prämie unter 10 % deiner erwarteten Kosten liegt.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Deckungssumme | Mindestens 10 000 €, wenn du teure Eingriffe erwartest.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Jahresprämie darf nicht mehr als 10 % deiner erwarteten Tierarztkosten betragen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schätzt du jährliche Ausgaben von 1 000 €, sollte die Prämie idealerweise unter 100 € liegen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Schätzt du jährliche Ausgaben von 1 000 €, sollte die Prämie idealerweise unter 100 € liegen.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Deutsche Dogge | Hüftdysplasie, Herzfehler | 1 200 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Labrador Retriever | Allergien, Kreuzbandriss | 900 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Chihuahua | Zahnprobleme, Herzklappenfehler | 750 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Border Collie | Augenkrankheiten, Epilepsie | 800 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Perserkatze | Nierenversagen, Atemwegserkrankungen | 1 050 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Siamkatze | Herzkrankheiten, Diabetes | 950 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Europäisch Kurzhaar | Zahnprobleme, Parasiten | 600 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „| Maine Coon | Hypertrophe Kardiomyopathie | 1 100 € |“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Tierarzt‑Rabattkarten** – Oft 10‑15 % Rabatt auf jede Rechnung, aber keine Kostenübernahme bei ho…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Sparplan für Tierarztkosten** – Monatlich 20‑30 € auf ein separates Konto einzahlen; flexibel, ab…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „**Gemeinschafts‑Versicherung** – In einigen Vereinen gibt es Gruppenversicherungen, die Prämien um …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „850 € pro Jahr.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherung:** Hundeversicherung von **PetProtect** mit 15 000 € Deckung, 200 € Selbstbehalt, …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherung:** Hundeversicherung von **PetProtect** mit 15 000 € Deckung, 200 € Selbstbehalt, …“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Jahresprämie 280 €.“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Operation Hüftgelenk (Einlage, Implantat): 4 200 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Nachbehandlung (Physio, Medikamente): 1 100 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- Zahn‑Prophylaxe: 150 € (Add‑On)“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamtkosten:** 5 450 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“"
+        },
+        {
+          "code": "E19",
+          "detail": "Zahl ohne Fundstelle im Prüfprotokoll: „- **Ja**, wenn du mit hohen Behandlungskosten (Operation, chronische Therapie) rechnest und die Prä…“"
+        },
+        {
+          "code": "E14",
+          "detail": "Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg"
+        },
+        {
+          "code": "E15",
+          "detail": "Affiliate-CTA steht vor ausreichender fachlicher Grundlage (112/600 Wörter, 0/2 H2 davor)"
+        },
+        {
+          "code": "E17",
+          "detail": "Freigabe-Hash fehlt"
+        }
+      ]
+    }
+  ]
+}

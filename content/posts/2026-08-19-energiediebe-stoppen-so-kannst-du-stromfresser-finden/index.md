@@ -8,7 +8,6 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich prüfe Stromfresser mit einem Energiekostenmessgerät und rechne vor jedem Gerätetausch nach. So landet nur auf der Einkaufsliste, was sich im Alltag wirklich lohnt."
 ai_generated: false
 cover:
   image: "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg"

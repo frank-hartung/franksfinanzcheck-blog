@@ -9,7 +9,6 @@ categories: ["News"]
 pillar: "versicherungen"
 keywords: ["Versicherung-Update: Was sich jetzt für dich ändert", "Versicherung-Update", "Versicherung Update", "Versicherungen prüfen", "Beitragserhöhung Versicherung"]
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
@@ -35,6 +34,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 **Stand: 17.09.2026.** Dieses **Versicherung-Update** zeigt, warum gerade jetzt ein Blick auf deine Policen wichtig ist – und warum Bequemlichkeit in diesem Bereich schnell teuer wird.

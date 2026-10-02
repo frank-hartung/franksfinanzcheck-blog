@@ -2,13 +2,12 @@
 title: "Autokosten senken: So sparst du hunderte Euro jährlich"
 description: Deine Autokosten fressen dein Budget auf? Frank Hartung zeigt dir, wie du bei Versicherungen und Kraftstoff sparst, ohne auf Mobilität zu verzichten.
 date: 2026-09-30T10:11:03Z
-draft: false
+draft: true
 reserve_published: 2026-09-30
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Autokosten", "Versicherungen", "Kraftstoff", "Autokosten senken"]
 pin_title: "Autokosten senken: So sparst du hunderte Euro jährlich"
@@ -23,6 +22,10 @@ cover:
   alt: "Autokosten senken: So sparst du hunderte Euro jährlich"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Wechsel die Kfz‑Versicherung mindestens einmal jährlich und nutze Vergleichsportale – das senkt die Prämie um etwa 200 € bis 300 € pro Jahr. Gleichzeitig reduziert vorausschauendes Fahren, korrekter Reifendruck und das Vermeiden von Kurzstrecken den Kraftstoffverbrauch um rund 5 %, was weitere 150 € bis 250 € spart."
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Dein Auto steht vermutlich mehr als 23 Stunden am Tag ungenutzt am Straßenrand oder in der Garage. Trotzdem buchen Versicherungen, Finanzämter und Werkstätten regelmäßig Beträge von deinem Konto ab, die in der Summe oft einen beachtlichen Teil deines Nettoeinkommens ausmachen.

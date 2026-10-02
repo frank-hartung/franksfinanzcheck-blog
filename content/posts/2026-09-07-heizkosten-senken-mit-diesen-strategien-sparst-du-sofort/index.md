@@ -18,7 +18,6 @@ cover:
   image: "images/covers/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort.jpg"
   alt: "Heizkosten senken: Mit diesen Strategien sparst du sofort"
   caption: "Tipp von FranksFinanzcheck"
-erfahrung: "Ich trenne beim Heizkosten-Check konsequent Verbrauch, Preis und Abschlag. Nur so sehe ich, ob eine Maßnahme Energie spart oder lediglich die nächste Zahlung verschiebt."
 kurzantwort: "Heizkosten senkst du zuerst über passende Raumtemperaturen, kurzes Stoßlüften und freie Heizkörper. Ein Grad weniger spart als Faustwert etwa 6 Prozent Heizenergie, sofern du vorher tatsächlich wärmer geheizt hast. Miss monatlich den Verbrauch und prüfe zusätzlich Arbeitspreis sowie Grundpreis; ein niedrigerer Abschlag allein spart nichts."
 quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"

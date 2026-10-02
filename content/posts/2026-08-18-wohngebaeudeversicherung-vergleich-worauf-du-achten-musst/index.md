@@ -3,12 +3,11 @@ lastmod: 2026-09-30
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
 description: "Wohngebäudeversicherung Vergleich: So vergleichst du Wohngebäudeversicherungen richtig: Elementarschutz, grobe Fahrlässigkeit, Neuwert, Selbstbeteiligung und…"
 date: 2026-08-31T13:47:31Z
-draft: false
+draft: true
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
 cover:
   image: "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg"
@@ -34,6 +33,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.

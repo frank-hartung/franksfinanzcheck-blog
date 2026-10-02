@@ -8,7 +8,6 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Monatliche Kosten halbieren –", "Monatliche", "Halbieren", "Checkliste", "Sofortig"]
 pin_title: "Monatliche Kosten halbieren –: deine Checkliste für sofortig"

@@ -459,7 +459,7 @@ jobs:
       - name: Spam-Gate (Blog, RSS-Feed, CSV, API – selbstheilend)
         run: python3 scripts/spam_guard.py --check blog feed csv api --fix || echo "⚠ Spam-Gate – Funde in SPAM-REPORT.md (selbstgeheilt, kein Content-Verlust)"
 
-      - name: Publish-Gate (5 harte Prüfungen inkl. Cover-Text-Komplettheit)
+      - name: Publish-Gate (harte Qualitäts-, Affiliate- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
 
       # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
@@ -474,6 +474,13 @@ jobs:
         run: |
           python3 scripts/publication_release.py --selftest
           python3 scripts/publication_release.py --refill-only
+
+      # Bestands-Sicherheitsnetz: publish_gate prüft Kandidaten des heutigen
+      # Slots. Diese zweite Wache prüft ALLE tatsächlich veröffentlichten
+      # Artikel, damit auch ein manueller draft:false-Flip bei einem alten
+      # YMYL-Text oder veralteten Artikelstand niemals ins Deploy gelangt.
+      - name: YMYL-Bestand – nur fachlich freigegebene Live-Artikel
+        run: python3 scripts/editorial_review_gate.py --published --strict
 
       - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
         id: gate_diff

@@ -3,13 +3,12 @@ title: "Hausratversicherung: Was sie kostet und wen sie schützt"
 description: "Hausratversicherung im Check: Kosten, versicherte Gefahren, Unterversicherung und sinnvolle Zusatzbausteine – so findest du den passenden Schutz."
 date: 2026-09-04T21:17:05Z
 lastmod: 2026-09-03
-draft: false
+draft: true
 reserve_published: 2026-09-04
 tags: ["Hausratversicherung", "Versicherungen vergleichen"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich vergleiche Versicherungsverträge seit über zehn Jahren selbst und habe meinen eigenen Hausratvertrag nach einem Wasserschaden in der Küche genau unter die Lupe genommen. Die Zahlen und Faustregeln in diesem Artikel habe ich an realen Tarifen mehrerer Anbieter geprüft."
 keywords: ["Hausratversicherung Kosten", "Hausratversicherung Vergleich", "Hausratversicherung was ist versichert", "Unterversicherung vermeiden", "Hausrat Zusatzbausteine", "Hausratversicherung Wohnung", "Versicherung Hausrat", "Hausrat absichern"]
 pinwand: "Versicherungen | Clever absichern & sparen"
 pin_title: "Hausratversicherung: Kosten, Leistungen & Spartipps"
@@ -36,6 +35,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 

@@ -330,6 +330,14 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         _tags = []
     tag_yaml = "[" + ", ".join(f'"{k}"' for k in _tags) + "]"
     pinwand_line = f"pinwand: {yaml_quote(pinwand)}\n" if pinwand else ""
+    try:
+        import editorial_review_gate as _erg
+        review_risk = _erg.classify_text(
+            " ".join([title] + list(keywords or [])[:2]), pillar or "")
+        review_block = _erg.review_scaffold_yaml(review_risk)
+    except Exception as _review_err:  # Publish-Gate klassifiziert erneut fail-closed
+        print(f"  ⚠ Redaktionelle Risikoklasse nicht vormerkbar: {_review_err}")
+        review_block = ""
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
@@ -347,6 +355,7 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
         "ai_generated: true\n"
         f'ai_provider: "Content-Engine v2"\n'
         f"engine_level: \"{'draft' if draft else level}\"\n"
+        f"{review_block}"
         f"{insp_line}"
         "---\n"
     )

@@ -8,7 +8,6 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["365 Tage ohne Neukauf", "Geld sparen 2", "Geld sparen 3"]
 pin_title: "365 Tage ohne Neukauf: – So sparst du mit der Kleider‑Challe"

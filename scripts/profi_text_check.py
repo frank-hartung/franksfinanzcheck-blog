@@ -227,12 +227,9 @@ def score_article(a):
         score -= 8
         issues.append(f"{len(real_low)} Sätze beginnen mit Kleinbuchstaben")
 
-    # 10. Persönliche/Erfahrungs-Elemente (E-E-A-T)
-    eeat = any(w in text for w in ["ich habe", "ich habe es", "meine erfahrung",
-                                   "ich selbst", "aus eigener erfahrung",
-                                   "in der praxis", "ich empfehle"])
-    if eeat:
-        score += 5  # Bonus
+    # Persönliche Behauptungen geben bewusst KEINEN Score-Bonus. Erfahrung ist
+    # nur mit Eigenbeleg zulässig; fachliche YMYL-Freigabe prüft separat
+    # editorial_review_gate.py und kann durch diesen Stilscore nie ersetzt werden.
 
     return max(0, min(100, score)), issues
 

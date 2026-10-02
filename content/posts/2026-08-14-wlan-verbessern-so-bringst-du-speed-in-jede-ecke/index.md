@@ -8,7 +8,6 @@ tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 ai_generated: false
 cover:

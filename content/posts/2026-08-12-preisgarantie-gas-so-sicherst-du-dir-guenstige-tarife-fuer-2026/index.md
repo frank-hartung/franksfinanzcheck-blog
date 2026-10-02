@@ -8,7 +8,6 @@ tags: ["Gastarif wechseln", "Heizkosten senken", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich vergleiche Gastarife zweimal: zuerst ohne Bonus nach Gesamtpreis, danach mit allen Bedingungen. So trennt sich ein günstiger Tarif von einer günstigen Ergebniszeile."
 ai_generated: false
 cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"

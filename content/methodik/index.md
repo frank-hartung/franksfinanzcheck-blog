@@ -86,9 +86,31 @@ Jeder Ratgeber und jeder Blogartikel basiert auf verifizierten Daten. Wir stütz
 
 ---
 
+## Redaktionelle Freigabe für YMYL-Themen {#redaktionelle-freigabe-fuer-ymyl-themen}
+
+Baufinanzierung, Altersvorsorge, Kredite und Versicherungen behandeln wir als **Hochrisiko-Inhalte**. In diesen Bereichen ist ein guter Stil- oder Qualitäts-Score ausdrücklich **keine** fachliche Freigabe. Ein neuer Hochrisiko-Artikel bleibt Entwurf, bis sein Prüfdatensatz vollständig ist.
+
+Jede Freigabe dokumentiert direkt am Artikel:
+
+- den **verantwortlichen Autor**,
+- die **Prüfperson mit konkreter Rolle** – entweder fachlicher Prüfer oder redaktionelle Prüfung anhand externer Primär- und Verbraucherquellen,
+- **Prüfdatum** und **nächsten Review-Termin**,
+- die **geprüften Kernaussagen** mit exaktem Textanker und Quellen-IDs,
+- die einzeln **geprüften Zahlen und Rechenannahmen** mit exakter Fundstelle, Konsistenzprüfung, Quellen-IDs und, bei Modellrechnungen, dem Rechenweg,
+- den **Änderungsgrund** sowie
+- einen internen **Fassungs-Hash**, der Text, Kurzantwort, Prüfprotokoll und Belegkette an die Freigabe bindet.
+
+Ändert sich nach der Freigabe auch nur der fachliche Text, die Kurzantwort, das Prüfprotokoll oder eine Quelle, stimmt der Hash nicht mehr. Das Veröffentlichungs-Gate sperrt die Fassung dann automatisch bis zur erneuten Prüfung. Dasselbe gilt bei einem überfälligen Review-Termin, weniger als zwei belastbaren Quellen, einer unbekannten Quellen-ID, einer Euro-/Prozentangabe ohne protokollierte Fundstelle, widersprüchlichen Rechenergebnissen oder einem veralteten Artikelstand. Pauschalaussagen zu Zinsbindung, Eigenkapital und Bankverhalten müssen einer konkret geprüften Aussage zugeordnet sein.
+
+Eine Hochrisiko-Seite darf außerdem nicht zuerst verkaufen und später erklären: Vor dem ersten Affiliate-Aufruf verlangt das Gate mindestens 600 Wörter fachliche Einordnung und zwei Hauptabschnitte. Autorenschaft, KI-Unterstützung, Werbefinanzierung und fachliche Prüfung werden sichtbar als getrennte Rollen ausgewiesen. So entsteht kein „Redaktionell geprüft“-Siegel allein durch ein Autorenfeld oder eine automatisierte Recherche.
+
+Der Freigabeweg ist absichtlich menschlich: Die Redaktion trägt Prüfergebnis und Zahlenprotokoll ein; `editorial_review_gate.py --seal` prüft die Vollständigkeit, bindet die Freigabe an die konkrete Fassung und protokolliert sie append-only. Die Automatik kann dieses Siegel weder selbst erteilen noch einen Prüfer erfinden.
+
+---
+
 ## Automatisierte Recherche & Claude-Faktenprüfung
 
-Um die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelbestand dauerhaft auf **Premium-Level einer Profi-Agentur** zu sichern, nutzen wir ein mehrstufiges, automatisiertes Qualitäts- und Recherche-System:
+Automatisierte Recherche unterstützt die Redaktion, ersetzt sie aber nicht. Für die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelbestand nutzen wir ein mehrstufiges Recherche-System:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -97,8 +119,8 @@ Um die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelb
 └───────────────────────────────────┬────────────────────────────────────┘
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│ 2. Fachtechnische Prüfung & Synthese (Claude)                          │
-│    Abgleich von Rechenbeispielen, Fristen & Konditionen                │
+│ 2. Maschinelle Befundsuche & Synthese (Claude)                         │
+│    Hinweise zu Rechenbeispielen, Fristen & Konditionen – keine Freigabe │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -108,12 +130,13 @@ Um die fachliche Aktualität bei der Content-Erstellung und im gesamten Artikelb
 └───────────────────────────────────┬────────────────────────────────────┘
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│ 4. Menschliche Endabnahme (Frank Hartung)                              │
-│    Freigabe, finale Redaktion und Veröffentlichung                     │
+│ 4. Risikoklasse & Veröffentlichungs-Gate                               │
+│    Hochrisiko: dokumentierte menschliche Freigabe + Fassungssiegel      │
+│    Standard: Qualitätsgates, aber kein automatisches Prüfsiegel         │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **Recherche bei Content-Erstellung:** Jeder neue Artikel durchläuft vor Veröffentlichung eine gezielte Faktenrecherche mit Agent Reach und wird mit aktuellen Daten angereichert.
+- **Recherche bei Content-Erstellung:** Neue Artikel werden zur gezielten Faktenrecherche angemeldet. Ist keine belastbare Belegkette erreichbar, gilt das nicht als Freigabe; ein Hochrisiko-Artikel bleibt gesperrt.
 - **Doppelter Anti-Halluzinations-Filter:** Eine Quelle darf nur in einen Artikel übernommen werden, wenn ihre URL nachweisbar im Recherche-Dossier existiert **und** die Domain auf unserer kuratierten Allowlist liegt. Affiliate-Partnerseiten sind als Belege grundsätzlich ausgeschlossen.
 - **GEO- und LLM-Zitierbarkeit:** Jeder belegte Artikel spiegelt seine Faktenbasis doppelt aus: als sichtbare Box **„Quellen & Faktenstand“** für Leser und als semantisches `schema.org/citation`-Markup für KI-Antwortmaschinen (ChatGPT Search, Perplexity, Google AI Overviews, Apple Intelligence).
 - **Maschinelle Beweis-Wache:** Ein eigenes Prüfprogramm validiert bei jeder Änderung den Vertrag des Beweissystems – Pflichtfelder je Beweis-Typ, gültige Querverweise aus Artikeln ins Register und die Regel, dass unfertige Belege nie als Beweis gerendert werden können.

@@ -8,7 +8,6 @@ tags: ["Heizkosten senken", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Mein Heizungs-Check beginnt mit Beobachten und Dokumentieren. Ich ändere nie mehrere Anlagenwerte gleichzeitig – sonst weiß ich hinterher weder, was geholfen hat, noch wie ich sicher zurückstelle."
 ai_generated: false
 cover:
   image: "images/covers/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg"

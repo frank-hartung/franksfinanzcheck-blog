@@ -8,7 +8,6 @@ tags: ["Gastarif wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Bei Preisalarm rechne ich zuerst Szenarien und lese danach die Vertragsklausel. Börsenmeldungen allein sind weder Kündigungsgrund noch Tarifempfehlung."
 ai_generated: false
 cover:
   image: "images/covers/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg"

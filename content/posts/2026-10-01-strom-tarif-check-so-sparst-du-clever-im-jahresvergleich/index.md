@@ -8,7 +8,6 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Strom", "Gas", "Vergleichen", "Sparen", "Strom‑Tarif‑Check", "Jahresvergleich"]
 pin_title: "Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich"
