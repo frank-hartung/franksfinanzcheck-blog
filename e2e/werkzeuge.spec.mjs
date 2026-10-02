@@ -9,7 +9,7 @@
 // ============================================================
 
 import { test, expect } from './fixtures.mjs';
-import { consentAway } from './helpers.mjs';
+import { consentAway, EXTERNAL_NOISE } from './helpers.mjs';
 
 const VERSPRECHEN = 'Du kannst das Tool vollständig nutzen, ohne einen Affiliate-Link anzuklicken.';
 
@@ -41,10 +41,18 @@ test.describe('Werkzeuge', () => {
   });
 
   test('rechnet im Browser, ohne die Seite zu verlassen und ohne einen Netzaufruf', async ({ page }) => {
+    // Jede aktive Anfrage mitschreiben – inklusive Rumpf, denn die eigentliche
+    // Zusage lautet: Die eingetippten Zahlen verlassen das Gerät nicht.
+    // Die seitenweite Reichweitenmessung (EXTERNAL_NOISE, z. B. umami) gehört
+    // nicht zum Rechner; sie läuft auf jeder Seite und hat ihre eigene
+    // Einwilligung. Sie wird hier getrennt, aber nicht ignoriert: Auch sie
+    // darf keine Eingabe tragen.
     const anfragen = [];
     page.on('request', (request) => {
-      if (['xhr', 'fetch', 'websocket'].includes(request.resourceType())) anfragen.push(request.url());
+      if (!['xhr', 'fetch', 'websocket'].includes(request.resourceType())) return;
+      anfragen.push({ url: request.url(), rumpf: request.postData() || '' });
     });
+    const istFremd = (url) => EXTERNAL_NOISE.some((host) => url.includes(host));
 
     await page.goto('/werkzeuge/notgroschen-rechner/');
     const werkzeug = page.locator('[data-ff-werkzeug]');
@@ -65,7 +73,13 @@ test.describe('Werkzeuge', () => {
     await expect(ausgabe.locator('[data-ff-wz-kennzahlen]')).toContainText('1 Jahr und 6 Monate');
     await expect(page).toHaveURL(/\/werkzeuge\/notgroschen-rechner\/$/);
 
-    expect(anfragen, 'die Rechnung verlässt den Browser nicht').toEqual([]);
+    expect(
+      anfragen.filter((a) => !istFremd(a.url)).map((a) => a.url),
+      'der Rechner selbst schickt nichts ins Netz'
+    ).toEqual([]);
+
+    const verraeter = anfragen.filter((a) => /\b(2000|1500|250)\b/.test(a.url + a.rumpf));
+    expect(verraeter, 'keine Anfrage trägt die eingetippten Zahlen').toEqual([]);
   });
 
   test('zeigt Formel, Annahmen und Quellen ohne einen einzigen Klick', async ({ page }) => {
