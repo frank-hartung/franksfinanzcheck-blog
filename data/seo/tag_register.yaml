@@ -305,14 +305,6 @@ tags:
       - "Zinsen vergleichen"
       - "Geld sicher anlegen"
 
-  - name: "Altersvorsorge"
-    pillar: konto-karten
-    synonyme:
-      - "Rente 2026"
-      - "Rentenlücke"
-      - "Sparplan"
-      - "Vermögen aufbauen"
-
   # ------------------------------------------------------------------
   # PILLAR: frugalismus
   # ------------------------------------------------------------------
