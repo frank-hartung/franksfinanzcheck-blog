@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-02T23:29:29.972726+00:00",
-  "head": "80beeb3",
+  "signed_at": "2026-10-02T23:37:18.477007+00:00",
+  "head": "eb62152",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -521,7 +521,7 @@
     {
       "date": "2026-10-02",
       "art": "set-current",
-      "head": "80beeb3",
+      "head": "eb62152",
       "geaendert": [
         "scripts/internal_linker.py",
         "scripts/link_density_guard.py",
@@ -531,12 +531,17 @@
         {
           "pfad": "scripts/internal_linker.py",
           "klasse": "fest",
-          "urteil": "UNERKLÄRT",
+          "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "d761cd0",
-              "datum": "2026-09-30",
-              "betreff": "chore: PRODUKTIONS-STATUS aktualisiert [skip ci]"
+              "sha": "eb62152",
+              "datum": "2026-10-02",
+              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
+            },
+            {
+              "sha": "80beeb3",
+              "datum": "2026-10-03",
+              "betreff": "fix(watchdog): Alarm nach Reserve-Heilung sofort abgleichen (#520) (#535)"
             }
           ],
           "commits_art": "letzte-commits"
@@ -544,12 +549,30 @@
         {
           "pfad": "scripts/link_density_guard.py",
           "klasse": "fest",
-          "urteil": "UNERKLÄRT",
+          "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "d761cd0",
-              "datum": "2026-09-30",
-              "betreff": "chore: PRODUKTIONS-STATUS aktualisiert [skip ci]"
+              "sha": "eb62152",
+              "datum": "2026-10-02",
+              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
+            },
+            {
+              "sha": "80beeb3",
+              "datum": "2026-10-03",
+              "betreff": "fix(watchdog): Alarm nach Reserve-Heilung sofort abgleichen (#520) (#535)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/shortcode_guard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "eb62152",
+              "datum": "2026-10-02",
+              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
             }
           ],
           "commits_art": "letzte-commits"
