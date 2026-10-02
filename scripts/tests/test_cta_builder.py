@@ -84,6 +84,27 @@ class TestCtaBuilder(unittest.TestCase):
         self.assertNotIn("ergleich", block.replace("CHECK24", ""),
                          "Einzelanbieter-CTA verspricht einen Vergleich")
 
+    # -- CodeQL-Fund 48 (PR #530): kein Substring-Befund auf URLs --------
+    def test_url_sanitization_gehaertet(self):
+        """Spoofing: Partner-String nur am Host-Ende, nie irgendwo in der URL."""
+        spoof = (
+            "https://check24.net.evil.test/x",
+            "https://evil.test/?next=check24.net",
+            "https://partner-versicherung.de.evil.example/click.php",
+            "https://evil.test/a.check24.net/",
+        )
+        for u in spoof:
+            self.assertEqual("", cta_builder.route_fuer_url(u),
+                             f"Spoof-URL wurde Partner zugeordnet: {u}")
+        echt = (
+            "https://a.check24.net/misc/click.php?pid=80968",
+            "https://check24.net",
+            "https://a.partner-versicherung.de/click.php?partner_id=1",
+        )
+        for u in echt:
+            self.assertEqual("allgemein", cta_builder.route_fuer_url(u),
+                             f"Echter Partnerlink wird nicht erkannt: {u}")
+
     # -- Stabilität: gleiche Eingabe → gleiche Bytes ----------------------
     def test_determinismus(self):
         a = cta_builder.cta_end_block(route="gas", slug="probe-artikel")

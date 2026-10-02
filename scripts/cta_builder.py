@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import os
 import re
+from urllib.parse import urlparse
 
 import yaml
 
@@ -59,6 +60,13 @@ def route_fuer_url(url: str) -> str:
     gebaut werden. Unbekannte URLs landen ehrlich beim Portal-
     Schlüssel „allgemein“ – niemals still bei einem andersartigen
     Einzelangebot. Bereits korrekte /go/-Pfade passieren unverändert.
+
+    Hostnamen werden NIE per Substring geprüft, sondern per
+    urllib.parse.hostname (CodeQL-Fund 48 in PR #530:
+    „Incomplete URL substring sanitization“ – eine Zeichenkette wie
+    „check24.net“ darf nicht an beliebiger Position in der URL suchen,
+    sonst täte z. B. „.../x.html?next=check24.net.evil.test“ so, als
+    sei sie ein Partnerlink).
     """
     u = (url or "").strip()
     if not u:
@@ -75,8 +83,11 @@ def route_fuer_url(url: str) -> str:
                 return str(key)
     except Exception:                                   # noqa: BLE001
         pass
-    if "check24.net" in u or "partner-versicherung.de" in u:
-        return "allgemein"
+    host = (urlparse(u if "://" in u else f"https://{u}").hostname
+            or "").lower()
+    for partner in ("check24.net", "partner-versicherung.de"):
+        if host == partner or host.endswith(f".{partner}"):
+            return "allgemein"
     return ""
 
 
@@ -139,6 +150,15 @@ def _selftest() -> list[str]:
         fehler.append("End-CTA nicht deterministisch (Slug-Stabilisator)")
     if route_fuer_url("/go/strom/") != "strom":
         fehler.append("/go/-Pfad wird nicht als Route erkannt")
+    # CodeQL-Fund 48 (PR #530): Substring-Befund darf keinen Host benennen.
+    if route_fuer_url("https://check24.net.evil.test/x") != "":
+        fehler.append("Spoof-Host check24.net.evil.test wird als Partner erkannt")
+    if route_fuer_url("https://evil.test/?next=check24.net") != "":
+        fehler.append("URL-Parameter mit Partner-String wird als Partner erkannt")
+    if route_fuer_url("https://a.check24.net/misc/click.php") != "allgemein":
+        fehler.append("Echter Subdomain-Partnerlink wird nicht erkannt")
+    if route_fuer_url("https://a.partner-versicherung.de/click.php") != "allgemein":
+        fehler.append("Partner-Versicherung-Subdomain wird nicht erkannt")
     try:
         with open(os.path.join(BLOG_DIR, "scripts", "check24_links.yaml"),
                   encoding="utf-8") as fh:
