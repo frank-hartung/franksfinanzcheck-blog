@@ -40,6 +40,13 @@ Prüfungen bestehen:
                                   ein Artikel mit falscher oder fehlender
                                   Kennzeichnung live gehen, weil niemand die
                                   Kennzeichnung gegen das Ergebnis prüfte.)
+  7. editorial_review_gate.py   – YMYL-Freigabe für Baufinanzierung,
+                                  Altersvorsorge, Kredite und Versicherungen:
+                                  Autor, Prüfer/Quellenbasis, Prüfdatum,
+                                  geprüfte Zahlen, Änderungsgrund, nächster
+                                  Review sowie ein fassungsgebundener Hash.
+                                  Frühe Affiliate-CTAs und veraltete
+                                  „Stand 2024"-Angaben blockieren ebenfalls.
 
 Läuft NACH der bestehenden Qualitäts-/Selbstheilungs-Kette (Rechtschreibung,
 Meta-Optimierung, interne Verlinkung, affiliate_profi_check --fix, …) und
@@ -370,6 +377,39 @@ def affiliate_intent_failures(candidates=None):
     return per_slug, warn, False
 
 
+def editorial_review_failures(candidates):
+    """Gate #7: dokumentierte YMYL-Freigabe statt bloßem Qualitäts-Score.
+
+    Für Hochrisiko-Themen ist ein fehlender/gebrochener Review-Nachweis ein
+    fachlicher Blocker. Ein Werkzeugfehler ist davon strikt getrennt: Dann
+    stoppt das Publish-Gate fail-closed, vernichtet aber keinen Artikel.
+
+    Rückgabe: ({slug: [befunde]}, warnung, werkzeugfehler, {hochrisiko-slugs})
+    """
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import editorial_review_gate as erg
+    except Exception as exc:  # noqa: BLE001
+        return {}, f"Redaktionelle YMYL-Prüfung nicht ladbar: {exc}", True, set()
+
+    failed = {}
+    high_risk = set()
+    try:
+        for slug in candidates:
+            path = os.path.join(POSTS_DIR, slug, "index.md")
+            result = erg.evaluate_path(path)
+            if result.get("risk") == erg.RISK_HIGH:
+                high_risk.add(slug)
+            if result.get("blocking"):
+                failed[slug] = [
+                    f"{finding.get('code')}: {finding.get('detail')}"
+                    for finding in result.get("findings", [])
+                ] or ["redaktionelle Freigabe nicht nachgewiesen"]
+    except Exception as exc:  # noqa: BLE001 - Beweisweg muss fail-closed sein
+        return {}, f"Redaktionelle YMYL-Prüfung lief nicht durch: {exc}", True, high_risk
+    return failed, None, False, high_risk
+
+
 def readability_failures(candidates):
     """Live-Kandidaten mit Lesbarkeits-Score unter Top-Level (75) finden.
 
@@ -675,6 +715,8 @@ def main():
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)
     offen_fail, offen_warn, offen_tool_error = offenlegung_failures(candidates)
+    review_fail, review_warn, review_tool_error, review_high_risk = \
+        editorial_review_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
     keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
@@ -688,6 +730,8 @@ def main():
         print(f"⚠ {integ_warn}")
     if offen_warn:
         print(f"⚠ {offen_warn}")
+    if review_warn:
+        print(f"⚠ {review_warn}")
     if keyword_warn:
         print(f"⚠ {keyword_warn}")
     if readability_warn:
@@ -702,6 +746,21 @@ def main():
     # Also: nichts veröffentlichen – aber auch NICHTS vernichten. Exit 1 bricht
     # den Deploy-Schritt sichtbar ab (alert-on-failure meldet es), die Artikel
     # bleiben unangetastet und gehen beim nächsten Lauf erneut ins Gate.
+    if review_tool_error:
+        print("\n🛑 REDAKTIONELLE YMYL-PRÜFUNG NICHT BEWEISBAR → Publish-Gate "
+              "stoppt (fail-closed, kein Artikel wird verworfen):")
+        print(f"   {review_warn}")
+        print("   Diagnose: python3 scripts/editorial_review_gate.py --selftest")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="editorial_review_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": review_warn}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
     if intent_tool_error:
         print("\n🛑 AFFILIATE-INTENT NICHT BEWEISBAR → Publish-Gate stoppt "
               "(fail-closed, kein Artikel wird verworfen oder zurückgestuft):")
@@ -751,6 +810,7 @@ def main():
 
     gated = []
     demoted = []
+    editorial_holds = []
     for slug in candidates:
         reasons = []
         if slug in len_fail:
@@ -770,6 +830,9 @@ def main():
             reasons.append("Affiliate-Intent nicht bestanden (Link liefert ein anderes "
                            "Produkt als Anker/Satz versprechen): "
                             + "; ".join(intent_fail[slug]))
+        if slug in review_fail:
+            reasons.append("Redaktionelle YMYL-Freigabe nicht bestanden: "
+                           + "; ".join(review_fail[slug]))
         if slug in r5_fail:
             reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
                            "Titel vermutlich unvollständig")
@@ -781,7 +844,34 @@ def main():
             reasons.append("Textverständnis-Gate nicht bestanden: " + "; ".join(understanding_fail[slug]))
 
         if reasons:
-            if slug.startswith(today):
+            if slug in review_high_risk and slug in review_fail:
+                # YMYL-Fund ist eine REDAKTIONSAUFGABE, kein Wegwerf-Grund.
+                # Anders als ein kaputter Neu-Text bleibt der Entwurf erhalten:
+                # Quellen, Zahlen und Prüfer müssen nachvollziehbar ergänzt und
+                # anschließend versiegelt werden. hold = niemals Auto-Requeue.
+                gated.append((slug, reasons))
+                demoted.append(slug)
+                editorial_holds.append(slug)
+                print(f"  🛑 {slug}: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, "
+                      "keine automatische Veröffentlichung")
+                for r in reasons:
+                    print(f"     - {r}")
+                if not DRY_RUN:
+                    path = os.path.join(POSTS_DIR, slug, "index.md")
+                    try:
+                        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+                        import park_state
+                        grund = "ymyl-review: " + "; ".join(review_fail[slug])
+                        if len(grund) > 180:
+                            grund = grund[:177] + "…"
+                        park_state.hold(path, grund)
+                    except Exception as exc:
+                        print(f"  ⚠ {slug}: Review-Hold nicht sauber schreibbar ({exc})")
+                        content = open(path, encoding="utf-8").read()
+                        content = re.sub(r"(?m)^draft:\s*false\s*$",
+                                         "draft: true", content, count=1)
+                        open(path, "w", encoding="utf-8").write(content)
+            elif slug.startswith(today):
                 # NEUER Artikel: Verwurf (Betriebsregel 13.08.2026:
                 # kein Artefakt – der nächste Slot erzeugt frischen Content)
                 gated.append((slug, reasons))
@@ -833,7 +923,8 @@ def main():
             log_event(module="publish_gate", action="gate",
                       input={"candidates": candidates},
                       output={"gated": [g[0] for g in gated],
-                              "demoted": demoted},
+                              "demoted": demoted,
+                              "editorial_holds": editorial_holds},
                       status="gated")
         except Exception:
             pass

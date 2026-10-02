@@ -2,13 +2,12 @@
 title: "Handyvertrag kündigen – So: entkommst du der automatischen V"
 description: Handyvertrag kündigen, ohne Fallen zu tappen – klare Schritte, Fehler vermeiden, Mobilfunk sparen. So sparst du jeden Monat bares Geld.
 date: 2026-10-02T05:41:58Z
-draft: false
+draft: true
 reserve_published: 2026-10-02
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel", "Handyvertrag kündigen – So", "Handyvertrag", "automatischen"]
 pin_title: "Handyvertrag kündigen – So: entkommst du der automatischen V"

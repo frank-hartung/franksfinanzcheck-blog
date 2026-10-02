@@ -1,6 +1,6 @@
 ---
 title: "Über mich und diesen Blog"
-description: "Über Frank Hartung und FranksFinanzcheck: Unabhängiger Ratgeber für Geld sparen, Frugalismus, Tarifvergleiche und praxiserprobte Spartipps im Alltag."
+description: "Über Frank Hartung und FranksFinanzcheck: Verantwortlichkeiten, Methodik, Quellenprüfung und transparente Finanzierung."
 draft: false
 showToc: true
 ---
@@ -10,7 +10,7 @@ showToc: true
   <div style="flex:1 1 320px;">
     <p style="margin:0 0 4px; font-size:.85em; font-weight:700; letter-spacing:.06em; color:#0E5A43;">AUTOR &AMP; BETREIBER</p>
     <h2 style="margin:0 0 10px; font-family:'Inter',sans-serif; font-weight:800; font-size:1.9em; color:#2E2E33;">Frank Hartung</h2>
-    <p style="margin:0 0 12px; font-size:1.02em; line-height:1.6; color:#333;">Mein Name ist <strong>Frank Hartung</strong> – ich beschäftige mich seit über 10 Jahren intensiv mit privater Finanzplanung, Tarifvergleichen und den Hebeln, die im Alltag wirklich bares Geld sparen. Auf FranksFinanzcheck teile ich erprobte Strategien, verifizierte Rechnungen und echte Praxiserfahrungen.</p>
+    <p style="margin:0 0 12px; font-size:1.02em; line-height:1.6; color:#333;">Mein Name ist <strong>Frank Hartung</strong>. Ich betreibe FranksFinanzcheck und verantworte die redaktionelle Einordnung. Quellen, Zahlenprüfungen und fachliche Freigaben weisen wir getrennt und direkt am jeweiligen Artikel aus.</p>
     <p style="margin:0; font-size:.9em; color:#555;"><strong>Kontakt:</strong> kontakt@franksfinanzcheck.de · <a href="https://www.pinterest.de/franksfinanzcheck/" rel="me" style="color:#0E5A43;">Pinterest</a></p>
   </div>
 </div>
@@ -21,35 +21,35 @@ FranksFinanzcheck ist kein Sammelblog für beliebige Spartipps. Ich baue ein **F
 
 Das bedeutet auch: Ein Wechsel ist nie das Ziel an sich. Erst wenn Preis, Leistung, Laufzeit und deine Situation zusammenpassen, ist er eine gute Entscheidung. Die [Ratgeber](/pillar/) liefern den fachlichen Tiefgang; das [Fixkosten-Cockpit](/cockpit/) macht deinen persönlichen Startpunkt sichtbar.
 
-## Was mich qualifiziert (E-E-A-T)
+## Verantwortung und Nachweise
 
-- **Über 10 Jahre praktische Erfahrung** mit privater Finanzplanung: eigene Haushaltsbudgets, Notgroschen-Konzepte, Sparstrategien und fundierte Tarifentscheidungen.
-- **Hunderte von Tarifvergleichen** selbst durchgeführt (Strom, Gas, DSL, Versicherungen, Mietwagen, Reisen) – ich kenne die Fallstricke und versteckten Klauseln aus erster Hand.
-- **Ständiges Testen und Verifizieren:** Ich buche, wechsle und vergleiche selbst – und berichte darüber, was wirklich funktioniert und was reines Marketing ist.
-- **Verbraucherschutz-Perspektive:** Ich lese das Kleingedruckte, prüfe Preisgarantien und weise auf versteckte Kosten hin – unabhängig von Vertriebsinteressen.
-- **Wissenschaftlich fundierte Recherche:** Automatisierte multi-quellige Gegenprüfung mit Agent Reach und Claude gegen Primärquellen von Bundesbehörden (BNetzA, Destatis, Bundesbank, BaFin) und Verbraucherzentralen.
+- **Klare Autorenschaft:** Frank Hartung ist für Text und redaktionelle Einordnung verantwortlich.
+- **Sichtbare Belegketten:** Externe Quellen stehen mit Herausgeber, Datum und Quellen-ID direkt am Artikel.
+- **Getrennte Fachfreigabe:** Bei Baufinanzierung, Altersvorsorge, Krediten und Versicherungen nennt ein freigegebener Beitrag zusätzlich Prüfperson, Rolle, geprüfte Aussagen und Zahlen sowie den nächsten Review-Termin.
+- **Keine Schein-Erfahrung:** Persönliche Tests oder Erfahrungen werden nur ausgewiesen, wenn ein dokumentierter Eigenbeleg referenziert ist. Autorenschaft allein ist kein Fachprüfsiegel.
+- **Transparente Finanzierung:** Partnerlinks werden vor dem ersten kommerziellen Link offengelegt; Affiliate-Partner gelten nie als fachliche Belegquelle.
 
-> **Hinweis:** Meine Empfehlungen ersetzen keine individuelle Finanz-, Steuer- oder Rechtsberatung. Sie sind sorgfältig recherchierte Erfahrungswerte und verifizierte Berechnungen für den Verbraucheralltag.
+> **Hinweis:** Die Inhalte ersetzen keine individuelle Finanz-, Steuer- oder Rechtsberatung. Modellrechnungen werden als solche gekennzeichnet; tatsächliche Konditionen hängen vom Einzelfall ab.
 
 ---
 
-## Wie ich teste und arbeite
+## Wie die Redaktion arbeitet
 
-1. **Recherche an der Quelle:** Tarifbedingungen, Preisblätter, amtliche Bekanntmachungen und offizielle Vergleichsrechner – niemals Hörensagen.
-2. **Praxisnahe Umsetzung:** Anleitungen entstehen aus echten Vorgängen. Wo eigene Praxiserfahrung drinsteckt, ist dies im Artikel transparent als Erfahrungs-Box markiert.
-3. **Kontinuierliche Aktualisierung:** Feste Revisionszyklen (alle 30–90 Tage nach Risikoklasse) stellen sicher, dass veraltete Tarife und Fristen sofort aktualisiert werden.
-4. **Klare Trennung von Fakten und Einschätzungen:** Subjektive Praxisempfehlungen werden transparent als persönliche Meinung deklariert.
+1. **Recherche an der Quelle:** Tarifbedingungen, Preisblätter, amtliche Bekanntmachungen und etablierte Verbraucherquellen bilden die Belegkette.
+2. **Aussagen verankern:** Entscheidungsrelevante Kernaussagen und jede materielle Euro-/Prozentangabe werden über exakte Textfundstellen mit dem Prüfprotokoll verbunden.
+3. **Risikobasiert freigeben:** Hochrisiko-Inhalte benötigen eine dokumentierte fachliche Prüfung und einen nächsten Review innerhalb von höchstens 45 Tagen.
+4. **Fassung schützen:** Ein Hash bindet Freigabe, Text, Quellen und Prüfprotokoll. Eine spätere Änderung macht die Freigabe ungültig.
 
 ---
 
 ## Die 6 großen Themenwelten auf FranksFinanzcheck
 
-- ⚡ **[Strom & Gas sparen](/pillar/strom-sparen/):** Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln und die Heizperiode optimal vorbereiten (Sparpotenzial: bis zu 800&nbsp;€/Jahr).
-- 🌐 **[Internet, DSL & Mobilfunk](/pillar/internet-dsl/):** DSL-Wechselbonus sichern, WLAN im ganzen Haus optimieren, DNS-Tuning und günstige Handytarife (Sparpotenzial: bis zu 350&nbsp;€/Jahr).
-- 🛡️ **[Versicherungen](/pillar/versicherungen/):** Privathaftpflicht, Wohngebäude, Hausrat, Kfz-Wechsel zum 30. November und Zahnzusatz ohne Überversicherung (Sparpotenzial: bis zu 500&nbsp;€/Jahr).
-- 💳 **[Konto & Karten](/pillar/konto-karten/):** Dauerhaft kostenlose Girokonten, gebührenfreie Reise-Kreditkarten und Tagesgeld mit Top-Zinsen (Sparpotenzial: bis zu 180&nbsp;€/Jahr).
-- 🌱 **[Frugalismus & Budget](/pillar/frugalismus/):** 50–30–20-Regel, Notgroschen aufbauen und bewusste Konsumgewohnheiten (Sparpotenzial: über 200&nbsp;€/Monat).
-- 🚗 **[Mietwagen & Reisen](/pillar/mietwagen/):** Urlaubsfallen am Schalter umgehen, günstige Flüge finden und Vollkasko ohne Selbstbeteiligung buchen (Sparpotenzial: bis zu 400&nbsp;€/Reise).
+- ⚡ **[Strom & Gas sparen](/pillar/strom-sparen/):** Stromfresser einordnen, Tarifbedingungen prüfen und die Heizperiode vorbereiten.
+- 🌐 **[Internet, DSL & Mobilfunk](/pillar/internet-dsl/):** Vertragswechsel, WLAN, DNS und Handytarife nachvollziehbar vergleichen.
+- 🛡️ **[Versicherungen](/pillar/versicherungen/):** Leistungen, Ausschlüsse, Fristen und persönlichen Bedarf gegeneinander abwägen.
+- 💳 **[Konto & Karten](/pillar/konto-karten/):** Gebühren, Kartenleistungen und Zinskonditionen prüfen.
+- 🌱 **[Frugalismus & Budget](/pillar/frugalismus/):** Budgetmethoden, Notgroschen und bewusste Konsumentscheidungen strukturieren.
+- 🚗 **[Mietwagen & Reisen](/pillar/mietwagen/):** Buchungsbedingungen, Kaution und Versicherungsschutz vor der Reise prüfen.
 
 ---
 

@@ -10,6 +10,10 @@ categories: ["Ratgeber"]
 pillar: ""
 keywords: []
 kurzantwort: ""
+redaktionelle_pruefung:
+  risikoklasse: "standard"
+  status: "ausstehend"
+  aenderungsgrund: "Erstentwurf – Risikoklasse und fachliche Freigabe offen"
 cover:
   image: ""
   alt: "{{ replace .File.ContentBaseName "-" " " | title }}"

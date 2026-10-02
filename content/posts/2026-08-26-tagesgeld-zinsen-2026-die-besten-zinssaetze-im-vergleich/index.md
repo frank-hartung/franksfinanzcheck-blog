@@ -8,7 +8,6 @@ tags: ["Tagesgeld und Zinsen", "Notgroschen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-erfahrung: "Ich habe meinen Notgroschen seit 2018 auf Tagesgeldkonten geparkt und in den letzten acht Jahren mehrfach den Anbieter gewechselt, um immer die besten Zinsen zu sichern. Mein aktueller Mix aus zwei Tagesgeldkonten hat mir 2025 rund 270 € Zinsen eingebracht, ohne dass ich einen Cent an Kursrisiko in Kauf nehmen musste."
 
 ai_generated: false
 cover:

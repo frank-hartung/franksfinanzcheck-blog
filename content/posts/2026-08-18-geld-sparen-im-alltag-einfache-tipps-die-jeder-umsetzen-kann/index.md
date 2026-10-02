@@ -3,12 +3,11 @@ lastmod: 2026-09-02
 title: "Geld sparen im Alltag: Tipps, die jeder umsetzen kann"
 description: "Geld sparen im Alltag: 10 sofort umsetzbare Spartipps für Haushalt, Einkaufen, Verträge & Finanzen. Baue mühelos 3.500 € Notgroschen auf!"
 date: 2026-08-31T13:47:31Z
-draft: false
+draft: true
 tags: ["Geld sparen im Alltag", "Haushaltsbuch führen", "Tagesgeld und Zinsen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 ai_generated: false
 cover:

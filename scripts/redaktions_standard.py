@@ -19,7 +19,7 @@
 #         (ca./rund/laut/Stand/Spanne)                          [WEICH]
 #    RS6  WiWo-Quellen-Regel: Phantom-Quellen („laut einer Studie“,
 #         „Experten sagen“ …) – ein Bot darf nichts erfinden     [WEICH]
-#    RS7  Byline/E-E-A-T: Frontmatter `author:` UND `erfahrung:`  [HART,
+#    RS7  Byline/E-E-A-T: `author:`; Erfahrung nur mit `erfahrung_beleg` [HART,
 #         deterministische Selbstheilung]
 #    RS8  Korrektur-Transparenz: `korrektur:`-Feld → Korrektur-Box
 #         im Layout + Log data/korrekturen.yaml (dauerhaft aktiv)
@@ -103,11 +103,9 @@ PHANTOM_QUELLEN = [
     r"laut einer erhebung", r"einer erhebung zufolge",
 ]
 
-STD_ERFAHRUNG = (
-    "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft "
-    "und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung "
-    "an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
-)
+# Erfahrung ist optional. Eine Automatik darf weder Eigenpraxis erfinden noch
+# ein Belegfeld ergänzen; vorhandene Erfahrungsangaben brauchen eine Referenz
+# ins öffentliche Beweis-Register.
 
 
 # ---------------------------------------------------------------------------
@@ -139,6 +137,7 @@ def load_article(path):
         "description": get("description"),
         "kurzantwort": get("kurzantwort"),
         "erfahrung": get("erfahrung"),
+        "erfahrung_beleg": get("erfahrung_beleg"),
         "author": get("author"),
         "korrektur": get("korrektur"),
         "date": get("date")[:10],
@@ -268,15 +267,12 @@ def detect_rs6(body):
 
 
 def detect_rs7(a):
-    """RS7: author + erfahrung im Frontmatter. → (ok, details)"""
-    fehlt = []
+    """RS7: Autor Pflicht; persönliche Erfahrung nur mit Eigenbeleg."""
     if not a.get("author"):
-        fehlt.append("author")
-    if not a.get("erfahrung"):
-        fehlt.append("erfahrung")
-    if fehlt:
-        return False, "fehlt: " + ", ".join(fehlt)
-    return True, "author + erfahrung vorhanden"
+        return False, "fehlt: author"
+    if a.get("erfahrung") and not a.get("erfahrung_beleg"):
+        return False, "erfahrung ohne erfahrung_beleg (keine automatische Schein-Evidenz)"
+    return True, "author vorhanden; Erfahrung fehlt ehrlich oder ist belegt"
 
 
 def analyse_article(a):
@@ -304,19 +300,10 @@ def analyse_article(a):
 # ---------------------------------------------------------------------------
 
 def fix_rs7(path, a):
-    """Ergänzt fehlende author-/erfahrung-Felder. Liefert neue fm oder None."""
-    if a.get("author") and a.get("erfahrung"):
+    """Ergänzt nur den Autor; Erfahrung/Eigenbeleg sind niemals Auto-Felder."""
+    if a.get("author"):
         return None
-    fm = a["fm"]
-    geaendert = False
-    if not a.get("author"):
-        fm = set_fm_field(fm, "author", "Frank Hartung")
-        geaendert = True
-    if not a.get("erfahrung"):
-        fm = set_fm_field(fm, "erfahrung", STD_ERFAHRUNG)
-        geaendert = True
-    if not geaendert:
-        return None
+    fm = set_fm_field(a["fm"], "author", "Frank Hartung")
     content = open(path, encoding="utf-8").read()
     parts = content.split("---", 2)
     return join_article(fm, parts[2], parts[0])
@@ -490,7 +477,7 @@ def write_report(results, mode, gehärtet=None):
                      ("RS2", "≥ 2 Frage-Überschriften"),
                      ("RS3", "Faustregel"),
                      ("RS4", "Nummerierte Schrittfolge"),
-                     ("RS7", "Byline/E-E-A-T (author+erfahrung)")):
+                     ("RS7", "Byline/E-E-A-T (Autor; Erfahrung nur mit Eigenbeleg)")):
         lines.append(f"| {k} | {label} | "
                      f"{'✅ 0 Funde' if counters[k] == 0 else '⚠ ' + str(counters[k]) + ' Artikel'} |")
     lines.append(f"| RS5 | Harte Zahlen ohne Einordnung | "
@@ -614,9 +601,15 @@ SELFTEST = [
     ("RS6-ok", lambda: detect_rs6(
         "In der Praxis sparst du oft mehrere hundert Euro im Jahr.")[0], True),
     ("RS7-fund", lambda: detect_rs7(
-        {"author": "Frank Hartung", "erfahrung": ""})[0], False),
-    ("RS7-ok", lambda: detect_rs7(
-        {"author": "Frank Hartung", "erfahrung": "Praxisgetestet."})[0], True),
+        {"author": "", "erfahrung": ""})[0], False),
+    ("RS7-unbelegte-erfahrung", lambda: detect_rs7(
+        {"author": "Frank Hartung", "erfahrung": "Praxisgetestet.",
+         "erfahrung_beleg": ""})[0], False),
+    ("RS7-ok-ohne-erfahrung", lambda: detect_rs7(
+        {"author": "Frank Hartung", "erfahrung": "", "erfahrung_beleg": ""})[0], True),
+    ("RS7-ok-mit-beleg", lambda: detect_rs7(
+        {"author": "Frank Hartung", "erfahrung": "Dokumentierter Test.",
+         "erfahrung_beleg": "WP-2026-001"})[0], True),
     ("Verify-link-schutz", lambda: _verify(
         "Text [A](https://a.check24.net/x) mehr Text.",
         "Text [A](https://a.check24.net/x) mehr Text, ergänzt.")[0], True),
@@ -678,7 +671,7 @@ def main():
             if neu and not DRY_RUN:
                 with open(a["path"], "w", encoding="utf-8") as fh:
                     fh.write(neu)
-                gehärtet.append(f"{a['slug']}: RS7 (author/erfahrung ergänzt)")
+                gehärtet.append(f"{a['slug']}: RS7 (fehlenden Autor ergänzt; keine Erfahrung erfunden)")
                 history.append({"slug": a["slug"], "regel": "RS7",
                                 "aktion": "fix-deterministisch"})
         if not DRY_RUN and gehärtet:

@@ -49,7 +49,7 @@ DEFAULTS = {
     "voice": {
         "tone": "ehrlich, praxisnah, auf Augenhöhe",
         "anrede": "du",
-        "perspectives": ["direkt", "erfahrung", "neutral"],
+        "perspectives": ["direkt", "analyse", "neutral"],
         "redaktionsstandard": "Capital · WirtschaftsWoche · DIE ZEIT",
         "forbidden_phrases": [
             "In der heutigen schnelllebigen Welt",
@@ -59,8 +59,8 @@ DEFAULTS = {
     },
     "avatar": {
         "name": "Frank Hartung",
-        "rolle": "Autor & Finanz-Praktiker",
-        "erfahrung": "über zehn Jahre Erfahrung im Finanzbereich",
+        "rolle": "Autor & Betreiber",
+        "erfahrung": "Persönliche Erfahrung wird nur mit dokumentiertem Eigenbeleg ausgewiesen",
     },
     "default_cta": "Jetzt bei CHECK24 vergleichen",
     "products": [],

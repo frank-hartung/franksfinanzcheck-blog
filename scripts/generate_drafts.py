@@ -74,9 +74,9 @@ ANGLES = [
 # damit zwei Artikel zum selben Thema nie gleich klingen)
 PERSPECTIVES = [
     ("direkt", "Sprich den Leser direkt mit 'du' an und gib ihm konkrete Handlungsanweisungen"),
-    ("erfahrung", "Schreibe aus der Ich-Perspektive, als hättest du es selbst ausprobiert (mit Beispielen aus dem Alltag)"),
-    ("neutral", "Schreibe sachlich-neutral wie ein unabhängiger Tester, ohne Ich-Form"),
-    ("story", "Eröffne mit einer kurzen Alltagsgeschichte/Beispielsituation, dann die Erklärung"),
+    ("analyse", "Beginne mit einer konkreten Entscheidungssituation und analysiere sie ohne erfundene Eigenerfahrung"),
+    ("neutral", "Schreibe sachlich-neutral wie eine unabhängige Redaktion, ohne Test- oder Beratungsleistung zu behaupten"),
+    ("modellfall", "Eröffne mit einem ausdrücklich als Modellfall markierten Beispiel, niemals mit einer erfundenen realen Person"),
     ("fragen", "Stelle zu Beginn 2-3 Leitfragen, die der Artikel beantwortet"),
 ]
 
@@ -111,11 +111,12 @@ SYSTEM_PROMPT = (
     "Übergänge und Schlussformeln sind verboten: Die Form folgt dem konkreten Thema. "
     "Jeder Artikel braucht einen eigenen Blick, ein konkretes Bild oder eine präzise "
     "Beobachtung. Du schreibst sachlich korrekte Artikel. "
-    "Du erfindest keine konkreten Preise, Statistiken, Studien, Umfragen oder "
-    "Experten-Zitate – werte, die du nicht belegen kannst, formulierst du als "
-    "allgemeines Wissen, als vorsichtige Spannen (\"ca. X–Y €\", \"in der Regel\", "
-    "\"oft\", \"je nach Anbieter\") oder kennzeichnest sie klar als eigenes "
-    "Rechenbeispiel. Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze "
+    "Du erfindest keine Preise, Spannen, Zinssätze, Statistiken, Studien, Umfragen, "
+    "Personen, Kundengeschichten, eigenen Tests oder Experten-Zitate. Ein \"ca.\" "
+    "macht eine unbelegte Zahl nicht belastbar. Harte Zahlen verwendest du nur, wenn "
+    "der Recherchekontext eine konkrete externe Quelle dafür enthält. Modellrechnungen "
+    "kennzeichnest du als Modellrechnung und nennst Annahmen, Formel, Rechenschritte "
+    "und Ergebnis; sie sind kein Marktwert. Du schreibst in AKTIVER, lebendiger Sprache: kurze Sätze "
     "(max. ~20 Wörter), starke Verben. " + SYSTEM_ANREDE + " Kein Passiv, keine Füllphrasen, kein Werbesprech. "
     "Du verzichtest auf typische KI-Floskeln wie \"In der heutigen schnelllebigen Welt\", "
     "\"Es ist wichtig zu beachten\", \"Zusammenfassend lässt sich sagen\", \"Des Weiteren\", "
@@ -723,6 +724,37 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
                 topic, pillar=pillar, keywords=keywords, pin=pin)
         except Exception:  # noqa: BLE001
             agc_block = ""
+
+    # YMYL wird VOR dem Schreiben klassifiziert. Ein Modell darf bei
+    # Baufinanzierung, Rente, Kredit und Versicherung keinen glatten
+    # Veröffentlichungsersatz simulieren; es liefert einen prüfpflichtigen
+    # Arbeitsentwurf ohne Scheinquellen oder erfundene Eigenerfahrung.
+    try:
+        import editorial_review_gate as _erg
+        risk = _erg.classify_text(" ".join([topic] + list(keywords or [])[:2]), pillar or "")
+    except Exception:  # noqa: BLE001 - Publish-Gate klassifiziert erneut
+        risk = "standard"
+    current_year = datetime.date.today().year
+    if risk == "hoch":
+        risk_instructions = (
+            "YMYL-RISIKOKLASSE HOCH – ARBEITSENTWURF, KEINE FREIGABE:\n"
+            "- Behaupte weder fachliche Prüfung noch Beratung, eigene Kundenfälle oder eigene Tests.\n"
+            "- Nenne keine Marktwerte, Zinsspannen, Sparsummen, Fristen oder pauschalen Bankregeln, "
+            "wenn sie nicht im gelieferten Recherchekontext mit konkreter Quelle belegt sind.\n"
+            "- Eine Modellrechnung ist nur erlaubt, wenn alle Annahmen frei gewählt und als solche "
+            "markiert sind; zeige Formel und jeden Rechenschritt.\n"
+            "- Pauschalaussagen zu Zinsbindung, Eigenkapital, Bonität, Bankverhalten und "
+            "Versicherungsschutz sind verboten; nenne Bedingungen und Gegenfälle.\n"
+            "- Verwende keinen Artikelstand vor dem aktuellen Jahr " + str(current_year) + ".\n"
+            "- Kein Affiliate-Aufruf im Fachtext. Die Pipeline setzt einen CTA erst am Artikelende; "
+            "vorher müssen Kriterien, Risiken und Alternativen vollständig erklärt sein.\n"
+        )
+    else:
+        risk_instructions = (
+            "RISIKOKLASSE " + risk.upper() + ": Zahlen nur mit gelieferter Quelle oder als "
+            "transparent hergeleitete Modellannahme verwenden. Verwende keinen als aktuell "
+            "bezeichneten Artikelstand vor " + str(current_year) + ".\n"
+        )
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
@@ -730,6 +762,7 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
 Erzählperspektive: {persp_desc}.
 
 {agc_block}
+{risk_instructions}
 FORMAT – halte dich GENAU daran (wichtig für die Weiterverarbeitung):
 Zeile 1: TITLE: Ein prägnanter, klickstarker Titel (max. 60 Zeichen). Wähle einen FRISCHEN Blickwinkel – verwende NICHT den Pin-Titel und nicht wörtlich das Thema.
 Zeile 2: DESCRIPTION: Eine Meta-Beschreibung (max. 155 Zeichen, mit wichtigstem Keyword)
@@ -741,7 +774,7 @@ Ab Zeile 3: Der Artikel in Markdown:
   Einleitungsende. Entwickle stattdessen einen frischen Einstieg aus dem konkreten
   Gegenstand. Kein Rotationsschema, keine vorgegebene Liste von Öffnungsformeln.
 - 5 bis 8 Abschnitte mit H2-Überschriften (##) – strukturiere sie ANDERS als die Pin-Vorlage
-- Pflicht-Module (kein Fülltext): ein Rechenbeispiel mit Jahr, eine Tabelle ODER Checkliste, ein Abschnitt „Typische Fehler“
+- Pflicht-Module (kein Fülltext): eine Tabelle ODER Checkliste und ein Abschnitt „Typische Fehler“. Eine Modellrechnung nur, wenn sie fachlich hilft; dann mit offen gelegten Annahmen, Formel, Rechenschritten und Rechenprobe – nie mit einem künstlichen Jahreslabel.
 - REDAKTIONS-STANDARD (Capital/WirtschaftsWoche/ZEIT, Pflicht für alle Module):
   1) „Das Wichtigste in Kürze“: Direkt NACH der Einleitung (vor der ersten H2) ein Block
      mit fettem Label + 3–4 Bullet-Punkten mit den Kernaussagen (Zahlen nur als Spannen).
@@ -764,9 +797,10 @@ Ab Zeile 3: Der Artikel in Markdown:
   durchgehend verwenden; Synonyme höchstens einmal als Erklärung bei Ersterwähnung
   (z. B. „DNS-Server (auch Namensauflösung oder Resolver genannt)“)
 - ANREDE: {anrede_var} – konsistent durchgehend verwenden
-- PRAXISBEZUG (E-E-A-T): konkrete, plausible Alltagsbeispiele; eigene Erfahrung als
-  Formulierung erlaubt ("Ich habe…", "In der Praxis…") – aber KEINE erfundenen Fakten,
-  KEINE konkreten Preise; Preisspannen nur mit "ca." oder "in der Regel"
+- PRAXISBEZUG (E-E-A-T): konkrete Entscheidungssituationen als ausdrücklich benannte
+  Modellfälle. NIEMALS „Ich habe …“, „meine Klienten …“ oder reale Tests/Beratungen
+  behaupten, wenn kein dokumentierter Eigenbeleg im Recherchekontext steht. Auch
+  Preisspannen mit „ca.“ oder „in der Regel“ brauchen eine konkrete Quelle.
 - KEINE KI-Floskeln: verboten sind u.a. "In der heutigen schnelllebigen Welt", "Es ist
   wichtig zu beachten", "Zusammenfassend lässt sich sagen", "Des Weiteren", "Es gibt viele
   Möglichkeiten", "heutzutage", "Tauchen wir ein", "Der Schlüssel zum Erfolg"
@@ -993,6 +1027,15 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
             "(nur Themen-Grundlage, eigenständig formuliert)\n"
         )
     draft_flag = "false" if auto_publish else "true"
+    try:
+        import editorial_review_gate as _erg
+        review_risk = _erg.classify_text(
+            " ".join([title, topic] + list(keywords or [])[:2]),
+            topic_entry.get("pillar") or "")
+        review_block = _erg.review_scaffold_yaml(review_risk)
+    except Exception as exc:  # noqa: BLE001 - Gate klassifiziert später fail-closed
+        print(f"  ⚠ Risikoklasse nicht vormerkbar: {exc}")
+        review_block = ""
     frontmatter = (
         "---\n"
         f"title: {yaml_str(title)}\n"
@@ -1006,6 +1049,7 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
         f"author: {yaml_str(AUTHOR)}\n"
         f"ai_generated: true\n"
         f"ai_provider: {yaml_str(provider_name)}\n"
+        f"{review_block}"
         f"{inspiration_line}"
         "---\n\n"
     )

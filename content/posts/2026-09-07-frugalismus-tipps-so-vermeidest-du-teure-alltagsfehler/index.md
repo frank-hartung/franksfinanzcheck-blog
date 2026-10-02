@@ -9,7 +9,6 @@ tags: ["Frugalismus", "Geld sparen im Alltag", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Frugalismus-Tipps", "geld sparen im alltag", "sparmethoden", "haushaltsbuch führen", "Frugalismus", "vermeidest", "Alltagsfehler", "Geld sparen"]
 pinwand: Geld sparen im Alltag | Frugalismus-Tipps

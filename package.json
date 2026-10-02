@@ -69,7 +69,11 @@
     "offenlegung:json": "python3 scripts/offenlegung_gate.py --json --no-report",
     "test:offenlegung": "python3 scripts/offenlegung_gate.py --selftest && python3 -m unittest scripts.tests.test_offenlegung_gate",
     "tabellen": "python3 scripts/tabellen_lesbarkeit_guard.py",
-    "test:tabellen": "python3 scripts/tabellen_lesbarkeit_guard.py --selftest && python3 -m unittest scripts.tests.test_tabellen_lesbarkeit_guard"
+    "test:tabellen": "python3 scripts/tabellen_lesbarkeit_guard.py --selftest && python3 -m unittest scripts.tests.test_tabellen_lesbarkeit_guard",
+    "redaktion:ymyl": "python3 scripts/editorial_review_gate.py --all --report",
+    "redaktion:ymyl:strict": "python3 scripts/editorial_review_gate.py --all --strict",
+    "redaktion:ymyl:published": "python3 scripts/editorial_review_gate.py --published --strict",
+    "test:redaktion:ymyl": "python3 scripts/editorial_review_gate.py --selftest && python3 -m unittest scripts.tests.test_editorial_review_gate"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

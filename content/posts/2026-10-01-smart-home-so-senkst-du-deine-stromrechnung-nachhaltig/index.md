@@ -8,7 +8,6 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Smart Home", "Energie sparen", "Smarte Steckdosen", "Stromrechnung", "Nachhaltig"]
 pin_title: "Smart Home: So senkst du deine Stromrechnung nachhaltig"

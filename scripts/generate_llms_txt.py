@@ -116,8 +116,8 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 
 ## Über diese Website
 
-- Betreiber und Autor: Frank Hartung, über 10 Jahre Praxis in privater
-  Finanzplanung, hunderte selbst durchgeführte Tarifvergleiche.
+- Betreiber und verantwortlicher Autor: Frank Hartung. Fachprüfung,
+  Quellenketten und Erfahrungsbelege werden artikelbezogen ausgewiesen.
 - Arbeitsweise und Redaktionsstandards: {BASE_URL}/methodik/
 - Über den Autor: {BASE_URL}/ueber/ – Kontakt: kontakt@franksfinanzcheck.de
 - Finanzierung: Affiliate-Partnerschaften (CHECK24, Tarifcheck),

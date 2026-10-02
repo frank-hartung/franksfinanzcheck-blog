@@ -2,13 +2,12 @@
 title: "Rente 2026: So baust du heute deine sichere Altersvorsorge"
 description: "Rente 2026: Altersvorsorge verständlich erklärt: Frank Hartung zeigt dir, wie du 2026 die Rentenlücke schließt und welche Rentenbausteine sich wirklich lohnen."
 date: 2026-09-28T01:05:51Z
-draft: false
+draft: true
 reserve_published: 2026-09-28
 tags: ["Altersvorsorge"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Rente 2026", "Altersvorsorge", "Rentenlücke"]
 pin_title: "Rente 2026: So baust du heute deine sichere Altersvorsorge"
@@ -23,6 +22,10 @@ cover:
   alt: "Rente 2026: So baust du heute deine sichere Altersvorsorge"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Du schließt die Rentenlücke, indem du zusätzlich etwa 400 € pro Monat (ca. 4.800 € pro Jahr) sparst. Kombiniere die gesetzliche Rente mit einem Riester- oder Rürup-Vertrag und einem kostengünstigen ETF-Sparplan. Investiere mindestens 10 % deines Bruttoeinkommens, um das Ziel von rund 70 % deines letzten Nettoeinkommens im Ruhestand zu erreichen."
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Markus saß neulich bei mir am Küchentisch, den Blick starr auf einen Brief der Deutschen Rentenversicherung gerichtet. „Frank“, sagte er und rieb sich die Schläfen. „Wenn ich diese Zahl sehe und dann an die Inflation denke, sehe ich mich im Alter Pfandflaschen sammeln.“ Markus ist Mitte 40 und verdient gut. Trotzdem hat er das Thema Vorsorge jahrelang vor sich hergeschoben.

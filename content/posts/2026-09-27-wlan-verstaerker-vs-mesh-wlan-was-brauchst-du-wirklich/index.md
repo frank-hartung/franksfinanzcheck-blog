@@ -9,7 +9,6 @@ tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-erfahrung: "Ich habe in den letzten Jahren in zwei Wohnungen und einem Einfamilienhaus selbst Repeater, Powerline und Mesh-Systeme aufgebaut, gemessen und wieder abgebaut. Was hier steht, ist das, was nach diesen Praxistests übrig geblieben ist – nicht das, was auf den Verpackungen versprochen wird."
 keywords: ["WLAN verbessern", "DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
 pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"

@@ -176,6 +176,10 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Pflichtangaben, Sichtbarkeit, Widerspruchsfreiheit, Partnerregister).
           # Ihr --selftest friert 13 Sabotage-Proben ein und gehört ins Minimum.
           "offenlegung_gate.py",
+          # YMYL-Freigabe (02.10.2026): Ein Score ist keine Fachprüfung.
+          # Die Wache verlangt Prüfer, Belegkette, Zahlenprotokoll, Termine
+          # und bindet jede Freigabe per Hash an exakt eine Textfassung.
+          "editorial_review_gate.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
           # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
           # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber

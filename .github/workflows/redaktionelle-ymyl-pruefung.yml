@@ -1,0 +1,85 @@
+# Risikobasierte Redaktion: Bestand sichtbar halten, neue YMYL-Publikationen
+# blockiert zusätzlich das in publish_gate.py verdrahtete harte Gate.
+name: Redaktionelle YMYL-Prüfung
+
+on:
+  schedule:
+    - cron: "20 5 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: redaktionelle-ymyl-pruefung
+  cancel-in-progress: false
+
+jobs:
+  pruefung:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeit installieren
+        run: python3 -m pip install -q "pyyaml==6.0.3"
+
+      - name: Regelwerk selbst prüfen
+        run: python3 scripts/editorial_review_gate.py --selftest
+
+      - name: Bestand prüfen und Review-Queue erzeugen
+        id: audit
+        run: |
+          python3 scripts/editorial_review_gate.py --all --report --json > ymyl-review.json
+          cat REDAKTIONELLE-PRUEFUNG-REPORT.md >> "$GITHUB_STEP_SUMMARY"
+          OPEN=$(python3 -c 'import json; d=json.load(open("data/editorial_review_queue.json")); print(d["open_live"] + d["open_drafts"])')
+          echo "open=$OPEN" >> "$GITHUB_OUTPUT"
+
+      - name: Prüfbericht sichern
+        uses: actions/upload-artifact@v7
+        with:
+          name: redaktionelle-ymyl-pruefung
+          path: |
+            REDAKTIONELLE-PRUEFUNG-REPORT.md
+            data/editorial_review_queue.json
+            ymyl-review.json
+
+      - name: Offene Fachprüfungen als ein Arbeits-Ticket pflegen
+        if: ${{ steps.audit.outputs.open != '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
+            --color "B42318" \
+            --description "YMYL-Fachprüfung vor Freigabe oder Review überfällig" --force
+          ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label redaktionelle-pruefung --json number --jq '.[0].number // empty')
+          if [ -n "$ISSUE" ]; then
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+              --title "Redaktionelle YMYL-Prüfqueue" \
+              --body-file REDAKTIONELLE-PRUEFUNG-REPORT.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Redaktionelle YMYL-Prüfqueue" \
+              --label redaktionelle-pruefung \
+              --body-file REDAKTIONELLE-PRUEFUNG-REPORT.md
+          fi
+
+      - name: Erledigtes Arbeits-Ticket schließen
+        if: ${{ steps.audit.outputs.open == '0' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+            --label redaktionelle-pruefung --json number --jq '.[].number' \
+            | while read -r issue; do
+                gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
+                  --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün."
+              done

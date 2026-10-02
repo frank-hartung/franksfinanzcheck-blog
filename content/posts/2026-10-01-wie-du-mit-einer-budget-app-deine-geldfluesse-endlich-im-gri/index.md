@@ -8,7 +8,6 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["Wie du mit einer Budget‑App", "Geldflüsse", "Geld sparen 3"]
 pin_title: "Wie du mit einer Budget‑App: deine Geldflüsse endlich im Gri"

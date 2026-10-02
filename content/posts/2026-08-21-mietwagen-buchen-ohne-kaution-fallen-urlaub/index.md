@@ -8,7 +8,6 @@ tags: ["Mietwagen und Wohnmobil", "Kfz-Versicherung", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-erfahrung: "Ich habe in über 15 Urlauben Mietwagen in Spanien, Italien, Portugal, Griechenland und den USA gebucht – inklusive einer unschönen 1.200-€-Kautionserfahrung auf Mallorca. Die folgenden Tipps stammen aus erster Hand und haben mir seitdem hunderte Euro an versteckten Gebühren erspart."
 
 ai_generated: false
 cover:

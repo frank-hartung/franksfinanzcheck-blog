@@ -6,8 +6,9 @@ Sabotage-Schutz (Selbsttest vor jeder Fix-Aktion).
 
   A1  OFFENLEGUNG    Jeder Artikel enthält den sichtbaren Affiliate-Hinweis
                      (Trust-Box: „Dieser Artikel kann Affiliate-Links enthalten")
-  A2  E-E-A-T        Jeder Artikel hat `erfahrung:` im Frontmatter
-                     (Erfahrungs-Box „MEINE ERFAHRUNG" – Googles E-E-A-T)
+  A2  E-E-A-T        `erfahrung:` ist optional, aber muss artikelindividuell
+                     und nachweisbar sein. Generische Auto-Erfahrung ist ein
+                     harter Täuschungsbefund und wird entfernt.
   A3  INTERNE LINKS  Mindestens 2 interne Links pro Artikel (Artikel/Pillar)
                      – SEO-Struktur, Themen-Cluster
   A4  SCHEMA         Article + FAQPage + BreadcrumbList + Person im HTML
@@ -19,8 +20,8 @@ Sabotage-Schutz (Selbsttest vor jeder Fix-Aktion).
 
 SELBSTHEILUNG (--fix) – Sofortheilungs-Prinzip (heilen → verifizieren →
 nur unheilbare Reste alarmieren, wie in großen Onlineredaktionen):
-  - A2: erfahrung-Zeile ergänzen (generischer Baustein, wenn kein Text
-        hinterlegt – Profi-Textbaustein, ehrlich formuliert)
+  - A2: früher automatisch ergänzten Schein-Erfahrungsbaustein entfernen;
+        echte Erfahrung wird nie von einer Automatik erfunden oder ergänzt
   - A3: ZWEISTUFIG (Redaktions-Fix 02.09.2026, Heiler-Deckel behoben):
         Stufe 1: „Weiterlesen"-Block mit Pillar-Link (falls Pillar existiert)
         Stufe 2: „Lesetipp"-Link auf thematisch passenden LIVE-Artikel
@@ -58,7 +59,7 @@ PROBLEMS = []   # (code, artikel, msg)
 FIXED = []
 
 AUTHOR = "Frank"
-GENERIC_ERFAHRUNG = (
+VERBOTENE_AUTO_ERFAHRUNG = (
     "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft "
     "und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung "
     "an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
@@ -100,19 +101,32 @@ def _check_offenlegung():
 
 
 def _check_eeat():
-    """A2: erfahrung: im Frontmatter jedes Artikels."""
+    """A2: Keine Automatik darf persönliche Erfahrung vortäuschen.
+
+    Ein fehlendes Erfahrungsfeld ist ehrlich und daher kein Fehler. Nur der
+    frühere, auf jeden Artikel kopierte Baustein wird gemeldet bzw. entfernt.
+    Artikelindividuelle Erfahrung bleibt unangetastet und braucht redaktionell
+    dokumentierte Eigenbelege – das kann kein Regex-Autofix herstellen.
+    """
+    quoted = re.escape(VERBOTENE_AUTO_ERFAHRUNG)
+    pattern = re.compile(rf'^erfahrung:\s*["\']{quoted}["\']\s*\n?', re.M)
     for slug in _post_slugs():
         p = os.path.join(BLOG_DIR, "content", "posts", slug, "index.md")
         c = open(p, encoding="utf-8").read()
-        if not re.search(r"^erfahrung:", c, re.M):
+        if pattern.search(c):
             if DO_FIX:
-                m = re.search(r"^(author:.*)$", c, re.M)
-                if m:
-                    c2 = c[:m.end()] + "\n" + f'erfahrung: "{GENERIC_ERFAHRUNG}"\n' + c[m.end():]
-                    open(p, "w", encoding="utf-8").write(c2)
-                    FIXED.append(("A2", slug, "erfahrung ergänzt (generischer Profi-Baustein)"))
-                    continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
-            PROBLEMS.append(("A2", slug, "kein erfahrung-Feld (E-E-A-T)"))
+                c2 = pattern.sub("", c, count=1)
+                open(p, "w", encoding="utf-8").write(c2)
+                FIXED.append(("A2", slug, "automatisch erfundenen Erfahrungsbaustein entfernt"))
+                continue
+            PROBLEMS.append(("A2", slug, "generischer Auto-Erfahrungsbaustein täuscht Eigenprüfung vor"))
+            continue
+        if re.search(r"(?m)^erfahrung:\s*\S", c) and not re.search(
+                r"(?m)^erfahrung_beleg:\s*[\"']?\S+", c):
+            PROBLEMS.append((
+                "A2", slug,
+                "Erfahrungsbehauptung ohne erfahrung_beleg (wird nicht gerendert; "
+                "Eigenbeleg im Beweis-Register dokumentieren oder Feld entfernen)"))
 
 
 def _count_internal_links(text):
@@ -363,10 +377,11 @@ def _selftest():
     fehler = []
     if AUTHOR != "Frank":
         fehler.append("AUTHOR verändert")
-    if not re.search(r"^erfahrung:", "erfahrung: test", re.M):
-        fehler.append("erfahrung-Regex defekt")
-    if re.search(r"^erfahrung:", "xerfahrung: test", re.M):
-        fehler.append("erfahrung-Regex zu aggressiv")
+    auto = f'erfahrung: "{VERBOTENE_AUTO_ERFAHRUNG}"\n'
+    if VERBOTENE_AUTO_ERFAHRUNG not in auto:
+        fehler.append("Auto-Erfahrungsdetektor defekt")
+    if VERBOTENE_AUTO_ERFAHRUNG in 'erfahrung: "Echter, artikelindividueller Test."':
+        fehler.append("Erfahrungsdetektor zu aggressiv")
     if not re.search(r"\]\(\.\./\.\./posts/[\w-]+/\)", "x [a](../../posts/y/) z"):
         fehler.append("intern-Link-Regex defekt")
     # Sofortheilung A3 (02.09.2026): Zähler + Lesetipp-Kandidatenwahl prüfen

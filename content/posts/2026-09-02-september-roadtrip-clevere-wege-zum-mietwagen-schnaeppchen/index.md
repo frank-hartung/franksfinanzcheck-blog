@@ -8,7 +8,6 @@ tags: ["Reisekosten sparen", "Mietwagen und Wohnmobil"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
 keywords: ["mietwagen schnäppchen", "mietwagen tagespreis", "günstig auto mieten", "september roadtrip", "September-Roadtrip", "Mietwagen-Schnäppchen", "mietwagen buchen tipps", "Mietwagen buchen"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen

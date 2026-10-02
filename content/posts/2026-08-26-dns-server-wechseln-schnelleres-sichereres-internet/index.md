@@ -8,7 +8,6 @@ tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-erfahrung: "Ich habe meinen DNS-Server vor rund sechs Jahren zum ersten Mal gewechselt und messe seitdem regelmäßig Ladezeiten und Antwortzeiten. Die Unterschiede sind real, aber kein Wundermittel – in diesem Artikel teile ich meine Messwerte und die Fallstricke, die ich selbst erlebt habe."
 
 ai_generated: false
 cover:

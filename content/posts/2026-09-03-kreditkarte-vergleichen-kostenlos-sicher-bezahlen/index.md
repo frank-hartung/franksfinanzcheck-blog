@@ -9,7 +9,6 @@ tags: ["Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-erfahrung: "Ich nutze seit Jahren eine kostenlose Kreditkarte als Reise- und Online-Karte und habe dafür mehr als ein Dutzend Modelle getestet. Die Gebührenfallen, die ich in diesem Artikel beschreibe, sind mir in eigenen Verträgen und aus der Beratung von Freunden immer wieder begegnet."
 keywords: ["Kreditkarte vergleichen", "kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte Ausland gebührenfrei", "Fremdwährungsgebühr vermeiden", "Kreditkarte Sicherheit", "beste Kreditkarte 2026", "Kreditkarte mit Reiseversicherung"]
 pinwand: "Konto & Karten | Gebührenfrei & clever"
 pin_title: "Kreditkarte 2026: Kostenlos & sicher bezahlen"

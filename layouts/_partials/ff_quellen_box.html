@@ -38,13 +38,14 @@
     <h2 class="ff-quellen__title" id="ff-quellen-{{ .File.UniqueID }}">Quellen &amp; Faktenstand</h2>
     {{- with $geprueft }}
     <span class="ff-quellen__stamp">
-      Fakten geprüft am <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time>
+      Quellen recherchiert am <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time>
     </span>
     {{- end }}
   </header>
   <ol class="ff-quellen__list">
     {{- range $quellen }}
     <li class="ff-quellen__item">
+      {{- with .id }}<span class="ff-quellen__id">{{ . }}</span>{{ end -}}
       <a class="ff-quellen__link" href="{{ .url }}" rel="noopener external" target="_blank">
         {{ .titel | default .herausgeber | default .url }}
         <span class="ff-quellen__ext" aria-hidden="true">

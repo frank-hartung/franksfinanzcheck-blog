@@ -285,9 +285,8 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
         first_idx = i
         break
     if first_idx == -1:
-        einstieg = (f"{main_kw} im Check: So vermeidest du teure Fehler und "
-                    f"sparst bares Geld – praxisgetestet und sofort "
-                    f"umsetzbar.\n\n")
+        einstieg = (f"{main_kw} im Check: So erkennst du typische Fehler und "
+                    f"ordnest die nächsten Schritte anhand transparenter Kriterien ein.\n\n")
         return lead + einstieg + body
     first_para = paras[first_idx].strip()
     lowered_kw = main_kw.lower()

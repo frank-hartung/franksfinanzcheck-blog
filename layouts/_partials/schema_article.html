@@ -136,6 +136,19 @@
   {{- $out = merge $out (dict "keywords" (delimit $kwList ", ")) -}}
 {{- end -}}
 
+{{- /* Dokumentierte Fachredaktion – nur bei expliziter Freigabe. Autor und
+     Editor bleiben getrennte Rollen; ein author-Feld erzeugt nie automatisch
+     eine Prüfbehauptung. Die fassungsgebundene Vollständigkeit erzwingt
+     scripts/editorial_review_gate.py vor Veröffentlichung. */ -}}
+{{- with .Params.redaktionelle_pruefung -}}
+  {{- $reviewStatus := .status | default "" | lower -}}
+  {{- if and (or (eq $reviewStatus "freigegeben") (eq $reviewStatus "approved")) .pruefer.name -}}
+    {{- $editor := dict "@type" "Person" "name" .pruefer.name -}}
+    {{- with .pruefer.rolle -}}{{- $editor = merge $editor (dict "jobTitle" .) -}}{{- end -}}
+    {{- $out = merge $out (dict "editor" $editor) -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* ---------- Belegkette → schema.org/citation (GEO, 27.09.2026) ----------
      Antwortmaschinen (AI Overviews, Perplexity, ChatGPT Search) bewerten
      Quellenangaben als Vertrauenssignal und zitieren belegte Seiten häufiger.

@@ -9,7 +9,6 @@ tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich teile den Spätsommer-Check in vier Blöcke: Rechnung, Zähler, Räume und Vertrag. So bleibt nach einer Stunde eine kurze Aufgabenliste statt eines Wochenendprojekts."
 keywords: ["Gasrechnung senken", "Heizkosten sparen", "Herbstvorbereitung", "Heizung prüfen", "Spätsommer-Check", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Gasrechnung senken: Der 60-Minuten-Spätsommer-Check"
 pin_description: "*Werbung | Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder… Mehr Spartipps auf FranksFinanzcheck! #gasrechnungsenken #heizkostensparen #herbstvorbereitung"

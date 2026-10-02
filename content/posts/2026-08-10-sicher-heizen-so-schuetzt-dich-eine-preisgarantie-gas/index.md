@@ -8,7 +8,6 @@ tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-erfahrung: "Ich bewerte eine Gaspreisgarantie nie allein nach ihrer Laufzeit. Entscheidend ist, welche Preisbestandteile sie schützt und ob der Tarif schon am ersten Tag konkurrenzfähig ist."
 ai_generated: false
 cover:
   image: "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg"

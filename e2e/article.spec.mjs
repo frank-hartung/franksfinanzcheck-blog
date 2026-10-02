@@ -124,12 +124,12 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
   });
 
   test('Desktop-Inhaltsnavigation schneidet lange Abschnittstitel nicht ab', async ({ page }) => {
-    // Regression 26.09.2026: Der zweizeilige Line-Clamp kappte das deutsche
-    // Kompositum sichtbar zu „Tierkrankenversicherun…“. Der Eintrag darf
-    // höher werden; die komplette Navigation besitzt ohnehin einen eigenen
+    // Regression 26.09.2026: Der zweizeilige Line-Clamp kappte lange deutsche
+    // Abschnittstitel sichtbar. Der Eintrag darf höher werden; die komplette
+    // Navigation besitzt ohnehin einen eigenen
     // Scrollbereich.
     await page.setViewportSize({ width: 1600, height: 900 });
-    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+    await page.goto('/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/');
 
     // Lesefenster (26.09.2026): Die Navigation blendet sich erst ein, wenn
     // der Artikelkörper die obere Zone erreicht – erst dorthin scrollen,
@@ -141,7 +141,7 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     const nav = page.locator('.ff-mini-toc');
     await expect(nav).toBeVisible();
 
-    const label = 'Wann sich eine Tierkrankenversicherung lohnt';
+    const label = 'Ergebnisblatt: Was nach 60 Minuten feststehen soll';
     const entry = page.locator(`.ff-mini-toc a[aria-label="${label}"]`);
     await expect(entry).toBeVisible();
     await expect(entry).toHaveText(label);
@@ -323,7 +323,7 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     // des Artikels hat einen eigenen Link im Verzeichnis.
     // (Umlaut-Anker kommen URL-kodiert im href – Browser lösen Fragmente
     // nach Dekodierung auf, der Vertrag tut es ihnen gleich.)
-    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+    await page.goto('/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/');
     const toc = page.locator('details.toc');
     await expect(toc).toBeVisible();
     expect(await toc.evaluate((el) => el.open === true), 'Inhaltsverzeichnis steht offen').toBe(true);
@@ -353,7 +353,7 @@ test.describe('Artikel-Seite (neuester Beitrag)', () => {
     // mit Pos1 an die Standardposition zurückholen – und sie bleibt
     // dabei IMMER komplett im Fenster.
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto('/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/');
+    await page.goto('/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/');
     await page.waitForSelector('.ff-mini-toc', { state: 'attached' });
     await page.evaluate(() => {
       const content = document.querySelector('.post-content');

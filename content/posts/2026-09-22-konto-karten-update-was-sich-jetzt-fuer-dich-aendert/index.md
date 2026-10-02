@@ -9,7 +9,6 @@ categories: ["News"]
 pillar: "konto-karten"
 keywords: ["Konto & Karten-Update: Was sich jetzt für dich ändert", "Konto & Karten-Update", "Konto & Karten Update", "Karten-Update", "Girokonto vergleichen", "Konto ohne Gebühren"]
 author: "Frank Hartung"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 ai_generated: false
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"

@@ -713,8 +713,11 @@ def fm_setze_quellen(fm: str, quellen: list[dict]) -> str:
     if not quellen:
         return fm
     block = ["quellen:"]
-    for q in quellen:
-        block.append(f"  - titel: {yaml_quote(q['titel'])}")
+    for nr, q in enumerate(quellen, 1):
+        # Stabile Quellen-ID für das YMYL-Zahlenprotokoll. Eine geprüfte Zahl
+        # verweist auf Q1/Q2 statt lose auf „irgendeine Quelle im Kasten“.
+        block.append(f"  - id: {yaml_quote(f'Q{nr}')}")
+        block.append(f"    titel: {yaml_quote(q['titel'])}")
         block.append(f"    url: {yaml_quote(q['url'])}")
         if q.get("herausgeber"):
             block.append(f"    herausgeber: {yaml_quote(q['herausgeber'])}")

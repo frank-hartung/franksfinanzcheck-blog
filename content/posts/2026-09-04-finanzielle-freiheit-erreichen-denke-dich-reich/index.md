@@ -22,7 +22,6 @@ cover:
   image: "images/covers/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich.jpg"
   alt: "Finanzielle Freiheit erreichen: Denke dich reich!"
   caption: "Tipp von FranksFinanzcheck"
-erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 social_posted: false
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

@@ -3,12 +3,11 @@ lastmod: 2026-09-21
 title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
 description: "Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis - Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung."
 date: 2026-08-26T06:10:00Z
-draft: false
+draft: true
 tags: ["Kfz-Versicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
 author: "Frank Hartung"
-erfahrung: "Ich habe meine Kfz-Versicherung in den letzten zehn Jahren fünfmal gewechselt und dabei meinen Jahresbeitrag für denselben Wagen von 1.040 € auf 412 € gedrückt. Die SF-Klassen, Tarifmerkmale und Wechseltricks in diesem Artikel habe ich alle am eigenen Fahrzeug durchgespielt."
 
 ai_generated: false
 cover:
@@ -36,6 +35,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei.

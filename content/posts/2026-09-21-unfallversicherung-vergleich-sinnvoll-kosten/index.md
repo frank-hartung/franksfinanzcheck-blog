@@ -9,7 +9,6 @@ categories: ["Ratgeber"]
 pillar: "versicherungen"
 keywords: ["Unfallversicherung", "Unfallversicherung Vergleich", "Unfallversicherung sinnvoll", "Unfallversicherung Kosten", "Gliedertaxe", "Progression Unfallversicherung", "Invaliditätsleistung", "Kinder Unfallversicherung"]
 author: "Frank Hartung"
-erfahrung: "Ich habe für diesen Artikel aktuelle Unfall-Tarife, Bedingungswerke und Testergebnisse 2026 verglichen und die Beispiele an realen Leistungsdaten ausgerichtet. Der Fokus liegt auf Praxis, nicht auf Werbesprache."
 kurzantwort: "Eine private Unfallversicherung zahlt bei dauerhaften Folgen nach einem Unfall. Meist gibt es eine Einmalzahlung, teils auch eine Unfallrente. Sie ersetzt aber keine BU, weil Krankheiten viel häufiger die Arbeitskraft bedrohen als Unfälle. Sinnvoll ist sie oft für Kinder, Senioren und Menschen ohne bezahlbare BU. Wichtig sind Grundsumme, Progression, Gliedertaxe und faire Fristen."
 ai_generated: false
 cover:
@@ -33,6 +32,10 @@ quellen:
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
 faktencheck: "2026-09-27"
+redaktionelle_pruefung:
+  risikoklasse: "hoch"
+  status: "ausstehend"
+  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
 Ein Sturz auf der Treppe. Ein Radunfall.
