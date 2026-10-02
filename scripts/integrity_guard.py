@@ -206,6 +206,10 @@ FEST = {
     # Linker-Bewacher (12.08. Profi-Uebau; Root-Cause-Lock gegen Link-Leck):
     "scripts/internal_linker.py",
     "scripts/link_density_guard.py",
+    # Shortcode-Wache (02.10.2026, WF-1F8C #522): entscheidet ueber die
+    # Build-Faehigkeit der ganzen Site (Markdown-Link in Shortcode-Parameter
+    # = Hugo-Abbruch blog-weit) – deshalb unter Siegel wie der Linker.
+    "scripts/shortcode_guard.py",
     "scripts/stil_guard.py",
     "scripts/hardcases_guard.py",
     "scripts/plagiat_guard.py",

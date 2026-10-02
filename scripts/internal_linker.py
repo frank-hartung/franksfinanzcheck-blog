@@ -137,9 +137,30 @@ def markdown_link_ranges(text):
     return ranges
 
 
+def shortcode_ranges(body):
+    """Hugo-Shortcodes ({{< … >}} / {{% … %}}) sind CODE, kein Fließtext.
+
+    Root-Cause WF-1F8C (#522, 02.10.2026): der Linker verlinkte das Wort
+    „notgroschen“ INNERHALB von {{< rechner typ="notgroschen" … >}} –
+    der Parameter wurde zu typ="[notgroschen](../../posts/…/)" und Hugo
+    brach blog-weit mit „rechner: unbekannter typ“ ab. Zwei Kadenz-
+    Endkontrollen rot, kein Deploy. Shortcode-Parameter dürfen deshalb
+    NIE als Anker-Fundstelle gelten – genau wie Code-Blöcke.
+    """
+    return [(m.start(), m.end())
+            for m in re.finditer(r"\{\{[<%].*?[>%]\}\}", body, re.S)]
+
+
+def html_tag_ranges(body):
+    """Inline-HTML-Tags sperren: Attribute (alt/title/aria-label) sind
+    genauso Build-/Markup-Substanz wie Shortcode-Parameter."""
+    return [(m.start(), m.end())
+            for m in re.finditer(r"</?[A-Za-z][^>\n]*>", body)]
+
+
 def find_anchor(body, phrase):
     """Findet das erste Vorkommen einer Phrase im Body, außerhalb von
-    Überschriften, Links, Code und Frontmatter."""
+    Überschriften, Links, Code, Shortcodes, HTML-Tags und Frontmatter."""
     # Body ohne Code-Blöcke betrachten (Positionen bleiben erhalten)
     code_ranges = []
     for m in re.finditer(r"(`[^`]*`|```.*?```)", body, re.S):
@@ -152,7 +173,8 @@ def find_anchor(body, phrase):
     for m in re.finditer(r"^#{1,6} .*$", body, re.M):
         head_ranges.append((m.start(), m.end()))
 
-    blocked = code_ranges + link_ranges + head_ranges
+    blocked = (code_ranges + link_ranges + head_ranges
+               + shortcode_ranges(body) + html_tag_ranges(body))
 
     def is_blocked(pos):
         return any(s <= pos < e for s, e in blocked)
@@ -253,7 +275,50 @@ def topic_overlap(a, b):
     return len(a_set & b_set)
 
 
+def selftest():
+    """Beweist die Sperrzonen, BEVOR der Linker schreiben darf.
+
+    Kernfall ist der reale Schaden aus WF-1F8C (#522): ein Anker-Kandidat,
+    der im Fließtext bereits verlinkt ist und dessen nächstes freies
+    Vorkommen in einem Shortcode-Parameter liegt, darf NICHT gefunden
+    werden – sonst zerreißt der Insert den Hugo-Build.
+    """
+    body = (
+        "## Notgroschen im Überblick\n\n"
+        "Ein [notgroschen](../../posts/alt-artikel/) ist schon verlinkt.\n\n"
+        '{{< rechner typ="notgroschen" quelle="Verbraucherzentrale" >}}\n\n'
+        '<img src="x.png" alt="notgroschen Grafik">\n\n'
+        "Code bleibt tabu: `notgroschen = 3 * ausgaben`.\n\n"
+        "Erst hier im Fließtext ist der notgroschen frei verlinkbar.\n"
+    )
+    fails = []
+    hit = find_anchor(body, "notgroschen")
+    if hit is None:
+        fails.append("freies Fließtext-Vorkommen nicht gefunden")
+    else:
+        start, _end = hit
+        frei_ab = body.index("Erst hier im Fließtext")
+        if start < frei_ab:
+            zeile = body[:start].rsplit("\n", 1)[-1]
+            fails.append(f"Anker in Sperrzone gelandet (Zeile: {zeile!r})")
+    nur_shortcode = '{{< rechner typ="notgroschen" >}}\n'
+    if find_anchor(nur_shortcode, "notgroschen") is not None:
+        fails.append("Shortcode-Parameter wurde als Anker angeboten")
+    nur_html = '<img alt="notgroschen">\n'
+    if find_anchor(nur_html, "notgroschen") is not None:
+        fails.append("HTML-Attribut wurde als Anker angeboten")
+    if fails:
+        for f in fails:
+            print(f"❌ Linker-Selbsttest: {f}")
+        return 2
+    print("✅ Linker-Selbsttest: Shortcodes/HTML/Code/Links/Überschriften "
+          "sind Sperrzonen – nur Fließtext wird verlinkt.")
+    return 0
+
+
 def main():
+    if "--selftest" in sys.argv:
+        raise SystemExit(selftest())
     dry = "--dry-run" in sys.argv
     apply = "--apply" in sys.argv
     max_links = MAX_LINKS_PER_ARTICLE

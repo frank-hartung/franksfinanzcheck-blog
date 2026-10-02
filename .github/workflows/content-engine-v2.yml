@@ -408,6 +408,12 @@ jobs:
           python3 scripts/generate_kurzantworten.py || echo "⚠ Kurzantworten (nicht kritisch)"
           echo "== URL-Hygiene (R8-URL-LEERZEICHEN selbstheilend, PREMIUM-FIX 03.09.2026) =="
           python3 scripts/fix_url_hygiene.py --fix || echo "⚠ URL-Hygiene – Restfunde siehe Log"
+          echo "== Shortcode-Wache (WF-1F8C #522: keine Markdown-Links in Shortcode-Parametern) =="
+          # Der Doktor oben ruft link_density_guard --fix und damit den Linker –
+          # dieses Fangnetz verhindert, dass ein zerrissener Shortcode-Parameter
+          # ({{< rechner typ="[…](…)"  >}} → Hugo-Build tot) jemals committet wird.
+          python3 scripts/shortcode_guard.py --selftest
+          python3 scripts/shortcode_guard.py --fix || echo "⚠ Shortcode-Wache – Restfunde siehe Log"
           # DUPLIKAT-GATE (Premium-Audit 12.09.2026): die Wache war nie
           # verdrahtet – dadurch konnten Intro-Duplikate KI-Entwuerfe
           # monatelang unentdeckt durchlaufen. Neue Artikel werden hier
@@ -447,7 +453,12 @@ jobs:
           python3 scripts/pinterest_duplicate_guard.py --fix || echo "⚠ Pinterest-Duplikat-Guard – Restfunde im Log"
           echo "== Cover-Stale-Erkennung: Titel geändert → Cover neu rendern =="
           python3 scripts/check_covers.py --fix || echo "⚠ Cover-Stale (nicht blockierend)"
+          # Linker-Selbsttest VOR dem Schreiben (WF-1F8C #522: Shortcode-Parameter
+          # sind Sperrzone) + Shortcode-Fangnetz danach – Schaden endet hier,
+          # nie im Commit.
+          python3 scripts/internal_linker.py --selftest
           python3 scripts/internal_linker.py --apply --max 5 || echo "⚠ Linker-Fehler (nicht kritisch)"
+          python3 scripts/shortcode_guard.py --fix || echo "⚠ Shortcode-Wache – Restfunde siehe Log"
           echo "== Affiliate-Profi-Check (A1-A8, selbstheilend: CTA/E-E-A-T/Links) =="
           python3 scripts/affiliate_profi_check.py --fix || echo "⚠ Profi-Check (nicht blockierend)"
           echo "== URL-Hygiene nach Optimierung (R8-URL-LEERZEICHEN, PREMIUM-FIX 03.09.2026) =="
