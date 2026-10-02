@@ -41,3 +41,25 @@ test('Notgroschen-Rechner weist unvollständige oder unbrauchbare Eingaben zurü
   assert.equal(logic.notgroschen({ ausgaben: '', reserve: '3' }), null);
   assert.equal(logic.notgroschen({ ausgaben: '1800', reserve: '0' }), null);
 });
+
+test('50-30-20-Budget-Rechner teilt Nettoeinkommen korrekt auf und berechnet Fixkostenquote', () => {
+  const logic = loadLogic();
+  const res = logic['budget-503020']({ netto: '3.000', fixkosten: '1.800' });
+
+  assert.equal(res.fixSoll, 1500);
+  assert.equal(res.wunschSoll, 900);
+  assert.equal(res.sparSoll, 600);
+  assert.equal(res.fixQuote, 60);
+  assert.equal(res.fixDifferenz, 300);
+  assert.equal(res.ampel, 'nachzahlung');
+});
+
+test('Gas-Abschlag-Rechner ermittelt korrekten Abschlag und Jahreskosten', () => {
+  const logic = loadLogic();
+  // 18.000 kWh * 10,0 ct/kWh = 1.800 € + 12 * 10 € Grundpreis = 1.920 € -> 160 € / Monat
+  const res = logic['gas-abschlag']({ verbrauch: '18.000', preis: '10,0', grundpreis: '10', aktuell: '160' });
+
+  assert.equal(res.jahreskosten, 1920);
+  assert.equal(res.fair, 160);
+  assert.equal(res.ampel, 'passend');
+});
