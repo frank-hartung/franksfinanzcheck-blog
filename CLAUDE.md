@@ -72,6 +72,8 @@ python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibu
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
 npm run offenlegung                                   # Build + Werbe-Offenlegung O1–O7 (artikelgenau, sichtbar)
 npm run test:offenlegung                              # Selbsttest (13 Sabotage-Proben) + 36 Unit-Tests
+npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
+npm run test:werkzeuge                                # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 
 # Design-Varianten-Werkbank (26.09.2026) – Details: docs/ANLEITUNG-DESIGN-VARIANTEN.md
 python3 scripts/design_variant_gate.py               # Marke + Messvertrag + Freigabe
@@ -276,6 +278,26 @@ Läuft in Publish-Gate (Gate 6), Bestands-Gate, `npm run test:offenlegung` und
 E2E. **Ohne `--fix`** – die Kennzeichnung erzeugt das Template, ein Befund ist
 ein Layout-/Registerdefekt für einen Menschen (C15). Runbuch:
 `docs/ANLEITUNG-OFFENLEGUNG.md`.
+
+## Werkzeuge sind ein Produkt, kein Shortcode (Wache seit 02.10.2026)
+
+Die acht Rechner unter `/werkzeuge/` sind der **zweite Produktkern** neben dem
+Fixkosten-Cockpit. Ihr Wert hängt an Eigenschaften, die man einer Seite nicht
+ansieht: vollständige Nutzbarkeit **ohne Affiliate-Klick**, Rechnen ohne
+Datenabfluss, offengelegte Formeln und Quellen, Export als CSV/PDF/ICS.
+
+**Eine Quelle:** `data/werkzeuge.yaml` → `werkzeuge_data.html` →
+`ff_werkzeug.html` (Markup), `static/premium/ff-werkzeuge.js` (Rechenkern),
+`layouts/werkzeuge/{single,list}.html`. Felder, Formeln, Annahmen und Quellen
+nie ein zweites Mal pflegen.
+
+**Harte Zusage im Text und im Gate:** „Du kannst das Tool vollständig nutzen,
+ohne einen Affiliate-Link anzuklicken." – `python3 scripts/werkzeuge_gate.py`
+prüft W1–W7 (Versprechen, Vollständigkeit, Werbefreiheit, Verdrahtung,
+Nachvollziehbarkeit, Lokalität, offene Methodik), **ohne `--fix`** und zweimal
+im Deploy: Quellvertrag vor dem Build, Produkt-Gate gegen `public/`. Skript und
+Markup sprechen ausschließlich über `data-`-Hooks, nie über Klassen. Runbuch:
+`docs/ANLEITUNG-WERKZEUGE.md`, Rollout-Report: `WERKZEUGE-PREMIUM-2026-10-02.md`.
 
 ## Tags kommen aus dem Register, nie aus Keywords (Wache seit 29.09.2026)
 

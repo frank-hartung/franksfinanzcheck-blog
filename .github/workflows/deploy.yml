@@ -311,6 +311,15 @@ jobs:
           python3 scripts/fixkosten_kompass_guard.py --selftest
           python3 scripts/fixkosten_kompass_guard.py --source-only
 
+      # Produktvertrag: Die acht Werkzeuge unter /werkzeuge/ sind nur dann
+      # ein Vorsprung, wenn sie vollständig ohne Affiliate-Klick nutzbar
+      # bleiben, lokal rechnen und ihre Formeln offenlegen. Diese Zusagen
+      # sind unsichtbar – ohne Wache verschwinden sie beim nächsten Umbau.
+      - name: Werkzeuge – Quell- und Datenschutzvertrag
+        run: |
+          python3 scripts/werkzeuge_gate.py --selftest
+          python3 scripts/werkzeuge_gate.py --source-only
+
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
       # Kernbefund Mi 02.09.2026: Ein fertiger Artikel wurde wegen einer
       # Markdown-URL mit Leerzeichen (R8-URL-LEERZEICHEN, „…-zu Hause/“
@@ -522,6 +531,11 @@ jobs:
 
       - name: Fixkosten-Kompass – finales Produkt-Gate
         run: python3 scripts/fixkosten_kompass_guard.py --public public
+
+      # Prüft das auszuliefernde HTML: Versprechen wörtlich auf jeder
+      # Werkzeugseite, kein Partnerlink, kein Formularziel, Methodik sichtbar.
+      - name: Werkzeuge – finales Produkt-Gate
+        run: python3 scripts/werkzeuge_gate.py --public public
 
       # ================= ANKER-WACHE (Befund 10.09.2026) =================
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als TEXT in

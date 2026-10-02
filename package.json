@@ -35,6 +35,8 @@
     "test:toc": "node scripts/ff_toc_beweglich_test.mjs && node scripts/ff_heading_glyph_guard_test.mjs && python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
     "cockpit:check": "python3 scripts/fixkosten_kompass_guard.py --selftest && python3 scripts/fixkosten_kompass_guard.py --source-only && hugo --minify --cleanDestinationDir && python3 scripts/fixkosten_kompass_guard.py --public public",
     "test:cockpit": "python3 -m unittest scripts.tests.test_fixkosten_kompass && node --test tools/fixkosten-cockpit.test.mjs",
+    "werkzeuge:check": "python3 scripts/werkzeuge_gate.py --selftest && python3 scripts/werkzeuge_gate.py --source-only && hugo --minify --cleanDestinationDir && python3 scripts/werkzeuge_gate.py --public public",
+    "test:werkzeuge": "python3 -m unittest scripts.tests.test_werkzeuge_gate && node --test tools/werkzeuge.test.mjs",
     "test:imartikel": "python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
     "dialog": "python3 scripts/social_dialog.py --run",
     "dialog:probe": "python3 scripts/social_dialog.py --run --dry-run",

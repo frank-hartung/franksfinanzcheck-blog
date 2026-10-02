@@ -24,6 +24,15 @@ Beträge und nächsten Checks lokal im Browser. Die Ratgeber liefern danach die
 passende Rechnung, Kriterien und Schritte für die Entscheidung – ohne Druck
 zum Wechsel.
 
+Wer sofort rechnen will, braucht dafür keinen Artikel: Die acht
+[Werkzeuge](https://franksfinanzcheck.de/werkzeuge/) – Fixkosten-Scanner,
+24-Monats-Effektivpreis, Abschlag und Nachzahlung, Selbstbehalt, Notgroschen,
+Kündigungsfristen-Kalender, Tarifwechsel-Entscheidungsbaum und Haushaltsbudget –
+sind eigenständige Seiten. Sie rechnen im Browser, zeigen Formel, Annahmen und
+Quellen offen, exportieren das Ergebnis als CSV, PDF oder Kalenderdatei und
+speichern nur, wenn du es anhakst. **Du kannst jedes Werkzeug vollständig
+nutzen, ohne einen Affiliate-Link anzuklicken.**
+
 | Themenwelt | Worum es geht |
 |---|---|
 | **Strom & Gas sparen** | Tarifwechsel ohne Fallen, Preisgarantien, Abschläge richtig planen |

@@ -246,4 +246,46 @@ test.describe('Mobile (iPhone 14)', () => {
     // Opt-in-Checkbox: WCAG 2.5.8 verlangt mindestens 24px Zielfläche.
     expect(befund.checkbox, 'Opt-in-Checkbox >= 24px').toBeGreaterThanOrEqual(24);
   });
+
+  // ============================================================
+  //  WERKZEUGE (02.10.2026)
+  //  Die eigenständigen Rechner sind ein Produkt für unterwegs:
+  //  Wer mit dem Handy vor dem Vertrag steht, muss tippen können,
+  //  ohne zu zoomen oder quer zu scrollen.
+  // ============================================================
+  test('Werkzeuge: Hub und Rechner ohne Overflow, Ziele thumb-gerecht', async ({ page }) => {
+    for (const pfad of ['/werkzeuge/', '/werkzeuge/effektivpreis-rechner/']) {
+      await page.goto(pfad);
+      await scrollThrough(page);
+      const overflow = await page.evaluate(() => ({
+        doc: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        body: document.body.scrollWidth - document.body.clientWidth,
+      }));
+      expect(overflow.doc, `${pfad}: document um ${overflow.doc}px zu breit`).toBeLessThanOrEqual(1);
+      expect(overflow.body, `${pfad}: body um ${overflow.body}px zu breit`).toBeLessThanOrEqual(1);
+    }
+
+    const befund = await page.evaluate(() => {
+      const zuKlein = [];
+      document.querySelectorAll('[data-ff-werkzeug] input, [data-ff-werkzeug] select, [data-ff-werkzeug] button, [data-ff-werkzeug] a').forEach((el) => {
+        // Opt-in-Checkbox: eigene Schwelle nach WCAG 2.5.8 (24px),
+        // ihr Label ist das eigentliche Ziel – wie im Cockpit.
+        if (el.matches('[data-ff-wz-speichern]')) return;
+        const r = el.getBoundingClientRect();
+        if (r.height > 0 && r.height < 40) {
+          zuKlein.push(`${el.tagName.toLowerCase()}=${Math.round(r.height)}px`);
+        }
+      });
+      const knopf = document.querySelector('[data-ff-werkzeug] button[type="submit"]');
+      return {
+        zuKlein,
+        knopf: knopf ? Math.round(knopf.getBoundingClientRect().height) : 0,
+        checkbox: Math.round(document.querySelector('[data-ff-wz-speichern]').getBoundingClientRect().height),
+      };
+    });
+
+    expect(befund.zuKlein, 'kein Werkzeug-Ziel unter 40px Tap-Höhe').toEqual([]);
+    expect(befund.knopf, '„Berechnen“-Knopf >= 44px').toBeGreaterThanOrEqual(44);
+    expect(befund.checkbox, 'Opt-in-Checkbox >= 24px').toBeGreaterThanOrEqual(24);
+  });
 });

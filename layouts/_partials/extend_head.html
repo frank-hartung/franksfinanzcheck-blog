@@ -134,7 +134,13 @@
 {{- end -}}
 
 {{- /* ---------- FAQPage-Schema (Featured Snippets & AI Overviews) ---------- */ -}}
-{{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar")) -}}
+{{- /* WERKZEUGE (02.10.2026): Die Werkzeugseiten tragen denselben
+       "### Frage?"-FAQ-Abschnitt wie Artikel und Pillars und sind für
+       genau die Fragen gebaut, die Nutzer vor einer Rechnung stellen
+       ("Werden meine Eingaben übertragen?"). Ohne diese Section wäre
+       das Schema dort stillschweigend leer geblieben. Die Antwortlänge
+       (>= 40 Zeichen) prüft scripts/schema_seo_gate.py (S4). */ -}}
+{{- if and .IsPage (or (eq .Section "posts") (eq .Section "pillar") (eq .Section "werkzeuge")) -}}
 {{- $faq := slice -}}
 {{- $raw := .RawContent -}}
 {{- $faqSection := "" -}}
@@ -231,14 +237,17 @@
 ) | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- /* ---------- BreadcrumbList (Artikel + Pillars + /posts/) ---------- */ -}}
-{{- if and (not .IsHome) (or (eq .Section "posts") (eq .Section "pillar")) -}}
+{{- /* ---------- BreadcrumbList (Artikel + Pillars + /posts/ + /werkzeuge/) ---------- */ -}}
+{{- if and (not .IsHome) (or (eq .Section "posts") (eq .Section "pillar") (eq .Section "werkzeuge")) -}}
 {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Start" "item" site.BaseURL) -}}
 {{- if and (eq .Section "posts") (ne .Kind "section") -}}
   {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "Blog" "item" (printf "%sposts/" site.BaseURL)) -}}
   {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" (.Title | plainify) "item" .Permalink) -}}
 {{- else if and (eq .Section "pillar") (ne .Kind "section") -}}
   {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "Ratgeber" "item" (printf "%spillar/" site.BaseURL)) -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" (.Title | plainify) "item" .Permalink) -}}
+{{- else if and (eq .Section "werkzeuge") (ne .Kind "section") -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "Werkzeuge" "item" (printf "%swerkzeuge/" site.BaseURL)) -}}
   {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 3 "name" (.Title | plainify) "item" .Permalink) -}}
 {{- else -}}
   {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" (.Title | plainify) "item" .Permalink) -}}
