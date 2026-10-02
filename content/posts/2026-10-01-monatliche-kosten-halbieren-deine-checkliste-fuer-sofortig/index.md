@@ -10,9 +10,9 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Monatliche Kosten halbieren –", "Monatliche", "Halbieren", "Checkliste", "Sofortig"]
+keywords: ["Monatliche Kosten halbieren –", "Monatliche", "Checkliste"]
 pin_title: "Monatliche Kosten halbieren –: deine Checkliste für sofortig"
-pin_description: "*Werbung | Monatliche Kosten halbieren –: Praktische Tipps, wie du Fixkosten senkst, Verträge prüfst und typische Sparfallen vermeidest. Mehr Spartipps auf FranksFinanzcheck! #monatliche #halbieren #checkliste"
+pin_description: "*Werbung | Monatliche Kosten halbieren –: Praktische Tipps, wie du Fixkosten senkst, Verträge prüfst und typische Sparfallen vermeidest. Mehr Spartipps auf FranksFinanzcheck! #monatliche #checkliste"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

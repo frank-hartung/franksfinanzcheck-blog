@@ -10,7 +10,7 @@ pillar: "versicherungen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Krankenzusatz", "Versicherung", "Zahnzusatz", "Bausteine", "Wirklich"]
+keywords: ["Krankenzusatz", "Versicherung", "Zahnzusatz", "Krankenzusatz –"]
 pin_title: "Krankenzusatz –: Bausteine, die wirklich etwas bringen"
 pin_description: "*Werbung | TITLE: Krankenzusatz – Bausteine, die wirklich etwas bringen So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #krankenzusatz #versicherung #zahnzusatz"
 ai_generated: true

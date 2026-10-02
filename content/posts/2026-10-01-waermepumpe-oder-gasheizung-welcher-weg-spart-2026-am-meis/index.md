@@ -1,16 +1,16 @@
 ---
-title: Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?
+title: "Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?"
 description: "Wärmepumpe vs. Gasheizung: Praktischer Heizung Vergleich, Kosten‑Check und Tipps zum Heizkosten senken im Jahr 2026. So sparst du jeden Monat bares Geld."
 date: 2026-10-01T15:37:09Z
 draft: true
 reserve: true
-tags: ["Heizkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpe oder Gasheizung – welcher Weg spart 2026 am meis", "Gasheizung"]
+keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpe oder Gasheizung – welcher Weg spart 2026 am meis", "Gasheizung", "Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?
 pin_description: "*Werbung | Wärmepumpe vs. Gasheizung: Praktischer Heizung Vergleich, Kosten‑Check und Tipps zum Heizkosten senken im Jahr 2026. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #waermepumpe #heizungvergleich #heizkostensenken"
 ai_generated: true

@@ -1,5 +1,5 @@
 ---
-title: "Wie du mit einer Budget‑App: deine Geldflüsse endlich im Gri"
+title: "Wie du mit einer Budget‑App: deine Geldflüsse endlich"
 description: "Wie du mit einer Budget‑App: Entdecke, warum eine Budget‑App besser als das klassische Haushaltsbuch ist und wie du sie Schritt für Schritt nutzt."
 date: 2026-10-01T15:41:23Z
 draft: true

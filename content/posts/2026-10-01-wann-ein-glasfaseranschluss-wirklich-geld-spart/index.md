@@ -10,7 +10,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Glasfaser", "Glasfaseranschluss", "Schnelles Internet", "Wann ein Glasfaseranschluss", "Wirklich"]
+keywords: ["Glasfaseranschluss", "Schnelles Internet", "Wann ein Glasfaseranschluss"]
 pin_title: "Wann ein Glasfaseranschluss: wirklich Geld spart"
 pin_description: "*Werbung | Glasfaser, schnelleres Internet und die Frage, wann sich der Anschluss lohnt – dein Praxis‑Check. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #glasfaser #glasfaseranschluss #schnellesinternet"
 ai_generated: true

@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Strom", "Gas", "Vergleichen", "Sparen", "Strom‑Tarif‑Check", "Jahresvergleich"]
+keywords: ["Vergleichen", "Strom‑Tarif‑Check", "Jahresvergleich"]
 pin_title: "Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich"
 pin_description: "*Werbung | TITLE: Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #strom #gas #vergleichen"
 ai_generated: true

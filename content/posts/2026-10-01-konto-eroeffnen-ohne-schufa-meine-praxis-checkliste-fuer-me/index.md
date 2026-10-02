@@ -1,5 +1,5 @@
 ---
-title: "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste für me"
+title: "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste"
 description: "TITLE: Konto eröffnen ohne Schufa – meine Praxis‑Checkliste für mehr Finanzfreiheit So sparst du jeden Monat bares Geld."
 date: 2026-10-01T15:52:55Z
 draft: true
@@ -10,9 +10,9 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 erfahrung: "Ich habe die Vergleiche und Zahlen in diesem Artikel selbst geprüft und wende die Empfehlungen seit Jahren in meiner eigenen Finanzplanung an – die Tipps sind praxisgetestet, nicht vom Schreibtisch."
 
-keywords: ["Konto eröffnen", "Schufa", "Konto ohne Schufa", "Konto eröffnen ohne Schufa –", "Eröffnen"]
+keywords: ["Konto eröffnen", "Konto ohne Schufa", "Konto eröffnen ohne Schufa –", "Checkliste", "Girokonto vergleichen", "Konto ohne Gebühren"]
 pin_title: "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste für me"
-pin_description: "*Werbung | TITLE: Konto eröffnen ohne Schufa – meine Praxis‑Checkliste für mehr Finanzfreiheit So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #kontoeroeffnen #schufa #kontoohneschufa"
+pin_description: "*Werbung | TITLE: Konto eröffnen ohne Schufa – meine Praxis‑Checkliste für mehr Finanzfreiheit So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #kontoeroeffnen #kontoohneschufa #kontoeroeffnenohneschufa"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
