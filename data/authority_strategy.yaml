@@ -1,0 +1,90 @@
+# Externe Autorität & Distribution – verbindlicher Betriebsvertrag
+# Zahlen bleiben null, bis ein belegter Import vorliegt. Keine Hochrechnungen.
+meta:
+  owner: Frank Hartung
+  started: 2026-10-02
+  review_day: 5
+  minimum_linkable_assets_per_quarter: 1
+  contact: kontakt@franksfinanzcheck.de
+  north_star: "Verdiente redaktionelle Erwähnungen und wiederkehrende Leser – nicht bloße Social-Impressions"
+
+quarters:
+  - quarter: 2026-Q4
+    asset_id: fixkosten-index-2026-q4
+    status: live
+    release: 2026-10-02
+    refresh_due: 2027-01-15
+  - quarter: 2027-Q1
+    asset_id: kuendigungsfristen-kalender-2027
+    status: planned
+    release_due: 2027-02-15
+  - quarter: 2027-Q2
+    asset_id: vertragskosten-studie-2027
+    status: planned
+    release_due: 2027-05-15
+  - quarter: 2027-Q3
+    asset_id: strom-gas-preis-tracker-2027-q3
+    status: planned
+    release_due: 2027-08-15
+  - quarter: 2027-Q4
+    asset_id: versicherungs-klausel-atlas-2027
+    status: planned
+    release_due: 2027-10-15
+
+assets:
+  - id: fixkosten-index-2026-q4
+    title: "Fixkosten-Index Deutschland: Energie-Baseline Q4 2026"
+    canonical: /studien/fixkosten-index-2026-q4/
+    status: live
+    published: 2026-10-02
+    owner: Frank Hartung
+    methodology: /studien/fixkosten-index-2026-q4/#methodik
+    dataset: /downloads/fixkosten-index-2026-q4.csv
+    press_asset: /downloads/fixkosten-index-2026-q4-pressegrafik.svg
+    source_urls:
+      - https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+      - https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/
+    refresh_days: 105
+    pitch_angles:
+      - "Was ein modellierter Zwei-Personen-Haushalt für Strom und Gas einplanen muss"
+      - "Wie stark Verbrauchsannahmen den oft zitierten Durchschnitt verzerren"
+
+measurement:
+  periods:
+    - period: 2026-10
+      status: awaiting_import
+      updated: 2026-10-02
+      # null bedeutet: noch nicht belegt. Null ist nicht 0.
+      editorial_links: null
+      media_mentions: null
+      expert_interviews: null
+      active_cooperations: null
+      newsletter_subscribers: null
+      newsletter_click_rate: null
+      returning_reader_rate: null
+      gsc_clicks: null
+      gsc_impressions: null
+      gsc_brand_clicks: null
+      conversions: null
+      evidence: []
+
+cadence:
+  weekly:
+    - "Ein redaktionell passendes Medienziel individuell ansprechen"
+    - "Zwei hilfreiche Community-Beiträge ohne Linkpflicht"
+    - "Gewonnene Erwähnungen mit URL und Datum belegen"
+  monthly:
+    - "GSC-Leistungsdaten exportieren und aggregiert importieren"
+    - "Newsletter-, Conversion- und Returning-Reader-Kennzahlen belegen"
+    - "Markensuche sowie unverlinkte Erwähnungen prüfen"
+    - "Presse-/Expertenliste und Follow-ups bereinigen"
+  quarterly:
+    - "Mindestens ein zitierfähiges Asset mit Datensatz, Methodik und Presseformat veröffentlichen"
+    - "Asset nach Quellenaktualität prüfen und Outreach-Winkel erneuern"
+
+policies:
+  - "Keine gekauften Links, Linktauschprogramme oder automatisierten Pitches."
+  - "Keine Kooperation oder Mediennennung ohne öffentliche bzw. intern belegte URL behaupten."
+  - "Jede Kennzahl braucht Zeitraum, Stand und Evidenz; unbekannt bleibt null."
+  - "Rohdaten mit Suchanfragen oder Empfängerbezug werden nicht versioniert; nur Aggregate."
+  - "Affiliate-Partner sind keine unabhängige Studienquelle."

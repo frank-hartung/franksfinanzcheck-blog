@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628" role="img" aria-labelledby="title desc">
+<title id="title">Fixkosten-Index Deutschland – Energie-Baseline Q4 2026</title>
+<desc id="desc">Modellrechnung: 925 Euro Strom plus 1431,60 Euro Gas ergeben 2356,60 Euro Energiekosten pro Jahr.</desc>
+<rect width="1200" height="628" fill="#0b2f2b"/><rect x="72" y="64" width="1056" height="500" rx="28" fill="#f6f2e8"/>
+<text x="120" y="132" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#1b665c">FRANKSFINANZCHECK · DATEN Q4/2026</text>
+<text x="120" y="196" font-family="Georgia,serif" font-size="48" font-weight="700" fill="#102b28">Energie-Fixkosten im Modell</text>
+<text x="120" y="246" font-family="Arial,sans-serif" font-size="25" fill="#3f514e">2-Personen-Haushalt · 2.500 kWh Strom · 12.000 kWh Gas</text>
+<rect x="120" y="294" width="300" height="142" rx="18" fill="#dcebe6"/><text x="150" y="342" font-family="Arial,sans-serif" font-size="23" fill="#31504b">STROM / JAHR</text><text x="150" y="404" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#0b594f">925 €</text>
+<rect x="450" y="294" width="300" height="142" rx="18" fill="#efe3bf"/><text x="480" y="342" font-family="Arial,sans-serif" font-size="23" fill="#5f5131">GAS / JAHR</text><text x="480" y="404" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#66521d">1.431,60 €</text>
+<rect x="780" y="294" width="300" height="142" rx="18" fill="#163f3a"/><text x="810" y="342" font-family="Arial,sans-serif" font-size="23" fill="#d9e9e5">GESAMT / JAHR</text><text x="810" y="404" font-family="Arial,sans-serif" font-size="43" font-weight="700" fill="#ffffff">2.356,60 €</text>
+<text x="120" y="492" font-family="Arial,sans-serif" font-size="20" fill="#465653">Quelle: BDEW-Preisanalysen; eigene Modellrechnung. Stand: 02.10.2026.</text>
+<text x="120" y="526" font-family="Arial,sans-serif" font-size="20" fill="#465653">Methodik + CSV: franksfinanzcheck.de/studien/fixkosten-index-2026-q4/</text>
+</svg>
