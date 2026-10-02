@@ -127,12 +127,40 @@ class Eskalation(unittest.TestCase):
         self.assertTrue(hart)
 
 
-class ClaudeWiederholung(unittest.TestCase):
+class Anbieterkette(unittest.TestCase):
+    """Transportweg ist der gemeinsame LLM-Zugang – nicht die tote Puter-Brücke."""
+
+    SCHLUESSEL = ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY")
+
+    def _ohne_schluessel(self):
+        gesichert = {k: os.environ.pop(k) for k in self.SCHLUESSEL if k in os.environ}
+        self.addCleanup(os.environ.update, gesichert)
+
+    def test_ohne_schluessel_wird_nichts_erfunden_und_nichts_geworfen(self):
+        self._ohne_schluessel()
+        hero.LAST_BRIDGE_ERROR.clear()
+        antwort, provider, modell = hero.call_model("system", "user")
+        self.assertIsNone(antwort)
+        self.assertEqual((provider, modell), ("", ""))
+        self.assertIn("Schlüssel", hero.LAST_BRIDGE_ERROR[-1])
+
+    def test_reihenfolge_ist_dokumentiert_und_vollstaendig(self):
+        self.assertEqual(hero.PROVIDER_ORDER, ("claude", "openai", "groq", "gemini"))
+
+    def test_kettennachweis_meldet_fehlende_anbieter(self):
+        self._ohne_schluessel()
+        chain = hero.chain_status(dt.date(2026, 10, 2))
+        self.assertFalse(chain["anbieter_vorhanden"])
+        self.assertEqual(chain["anbieter"], [])
+        self.assertTrue(chain["llm_client"], "scripts/llm_client.py muss importierbar sein")
+
+
+class Wiederholung(unittest.TestCase):
     """Ein Formatfehler darf den Lauf nicht mehr sofort rot machen."""
 
     def setUp(self):
-        self._original = hero.call_claude
-        self.addCleanup(setattr, hero, "call_claude", self._original)
+        self._original = hero.call_model
+        self.addCleanup(setattr, hero, "call_model", self._original)
 
     def test_zweiter_versuch_mit_korrekturauflage_gewinnt(self):
         antworten = ["unbrauchbar", f"TITLE: {HERBST['hero_title']}\nLEAD: {HERBST['hero_lead']}"]
@@ -140,24 +168,29 @@ class ClaudeWiederholung(unittest.TestCase):
 
         def fake(system, user):
             gesehen.append(user)
-            return antworten.pop(0)
+            return antworten.pop(0), "groq", "openai/gpt-oss-120b"
 
-        hero.call_claude = fake
-        parsed, protokoll = hero.claude_candidate(HERBST, [], [], attempts=3, sleep=lambda _s: None)
+        hero.call_model = fake
+        parsed, protokoll, quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=3, sleep=lambda _s: None)
         self.assertEqual(parsed, (HERBST["hero_title"], HERBST["hero_lead"]))
         self.assertEqual(len(protokoll), 2)
         self.assertIn("KORREKTURAUFLAGE", gesehen[1])
+        self.assertEqual(quelle, "groq:openai/gpt-oss-120b")
 
     def test_dauerhafter_ausfall_liefert_protokoll_statt_absturz(self):
-        hero.call_claude = lambda system, user: None
-        parsed, protokoll = hero.claude_candidate(HERBST, [], [], attempts=2, sleep=lambda _s: None)
+        hero.call_model = lambda system, user: (None, "", "")
+        parsed, protokoll, _quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=2, sleep=lambda _s: None)
         self.assertIsNone(parsed)
         self.assertEqual(len(protokoll), 2)
 
     def test_faktenverstoss_wird_nicht_durchgewunken(self):
         schlecht = HERBST["hero_lead"].replace("Herbst", "Herbst 2026")
-        hero.call_claude = lambda system, user: f"TITLE: {HERBST['hero_title']}\nLEAD: {schlecht}"
-        parsed, protokoll = hero.claude_candidate(HERBST, [], [], attempts=2, sleep=lambda _s: None)
+        hero.call_model = lambda system, user: (
+            f"TITLE: {HERBST['hero_title']}\nLEAD: {schlecht}", "gemini", "gemini-2.0-flash")
+        parsed, protokoll, _quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=2, sleep=lambda _s: None)
         self.assertIsNone(parsed)
         self.assertTrue(all("verworfen" in eintrag for eintrag in protokoll))
 

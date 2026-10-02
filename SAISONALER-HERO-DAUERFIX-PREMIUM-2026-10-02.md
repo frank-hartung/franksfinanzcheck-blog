@@ -17,7 +17,7 @@ grün). Defekt war die Automatik darum herum:
 |---|---|
 | Fälligkeit | Der kuratierte Hero wurde redaktionell überarbeitet (neuer Lead: „… ist dein Fixkosten-Cockpit für Strom, Gas, Internet, Konto und Versicherungen im Herbst …"). Der Nachweis in `data/saisonaler_hero_state.json` stand noch auf dem Stand vom 27.09. → **Fingerprint-Abweichung**. |
 | Folge | `is_due()` kannte nur „fällig". Jede redaktionelle Änderung machte den Hero damit **dauerhaft fällig** – Tag für Tag, bis ein Claude-Lauf gelingt. |
-| Zweitfehler | Die Claude-Kette schlug fehl (Exit 3 unmittelbar nach dem Agent-Reach-Brief → Vorbedingung, typischerweise fehlendes/abgelaufenes `PUTER_AUTH_TOKEN`). |
+| Zweitfehler | Die Textkette schlug fehl (Exit 3 unmittelbar nach dem Agent-Reach-Brief). Ursache bestätigt: Der Lauf hing an einer **Puter-Brücke**, die im Betrieb gar nicht genutzt wird – `PUTER_AUTH_TOKEN` existiert nicht und wird auch nicht angelegt. Die Automatik konnte strukturell nie gelingen. |
 | Eskalation | Exit 3 = harter Job-Fehler → Issue #514. Da die Fingerprint-Abweichung bleibt, hätte sich das **jeden Tag** wiederholt. |
 | Diagnose | Exit 3 stand gleichzeitig für „kein Brief", „kein Token", „kein Format", „Kandidat verworfen". Der Report wurde im Fehlerfall gar nicht geschrieben – das Artefakt des roten Laufs war leer. |
 
@@ -26,7 +26,7 @@ Live-Seite einwandfrei war.
 
 ---
 
-## 2. Dauerfix (vier Hebel)
+## 2. Dauerfix (fünf Hebel)
 
 ### Hebel 1 – Redaktionelle Änderung einholen statt bestrafen
 `due_state()` liefert jetzt einen Grundcode statt eines nackten Flags:
@@ -57,7 +57,31 @@ nur nicht mehr nach dem ersten Stolperer zum Jobabbruch.
 | Freigegebene Fassung ≥ 35 Tage alt (21 + 14 Kulanz) | 🔴 rot | Issue |
 | Live-Hero verletzt den Vertrag | 🔴 rot | sofort, ohne Kulanz |
 
-### Hebel 4 – Diagnose, die den Namen verdient
+### Hebel 4 – Toten Anbieter ersetzen statt wiederbeleben
+Der Feinschliff lief über `scripts/puter_chat.mjs` (Puter.js, `PUTER_AUTH_TOKEN`,
+Node 24, npm-Paket). Dieses Konto wird nicht genutzt – eine Automatik, die
+strukturell nie gelingen kann, ist schlimmer als keine. Ersetzt durch den
+Zugang, den die KI-Redaktion produktiv fährt:
+
+| vorher | jetzt |
+|---|---|
+| `scripts/puter_chat.mjs` + Node 24 + `npm install` | `scripts/llm_client.py` (reine Standardbibliothek) |
+| `PUTER_AUTH_TOKEN` (nicht vorhanden) | `GROQ_API_KEY` / `GEMINI_API_KEY` (in 20 Workflows etabliert), optional `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` |
+| ein Modell, kein Ausweichweg | `PROVIDER_ORDER` – erster Anbieter mit Schlüssel gewinnt, bei Ausfall rückt der nächste nach |
+| Modell im Report behauptet | tatsächlich benutztes `anbieter:modell` steht in State, Historie und Report |
+
+Dieselbe Brücke steckte in der **Faktenfrische**: Ihre fachliche Prüfung meldete
+seit jeher „übersprungen (kein PUTER_AUTH_TOKEN)". Auch sie läuft jetzt über
+`llm_client` – gleicher Anti-Halluzinations-Vertrag, nur ein Transportweg, der
+existiert. `scripts/puter_chat.mjs` ist gelöscht, Node/npm aus beiden Workflows
+entfernt.
+
+**Rückfallsperre:** `scripts/tests/test_keine_puter_abhaengigkeit.py` (6 Tests)
+verbietet `secrets.PUTER_AUTH_TOKEN`, das npm-Paket und jeden Brückenaufruf in
+allen Workflows und Skripten – und verlangt umgekehrt, dass beide Nutzer den
+gemeinsamen Client samt dokumentierter Anbieter-Reihenfolge verwenden.
+
+### Hebel 5 – Diagnose, die den Namen verdient
 Jeder Ausgang schreibt denselben `SAISONALER-HERO-REPORT.md`: Zustand, Ampel,
 Grundcode, Exit, Alter der Fassung, **Kettennachweis** (Brief vorhanden? Token
 gesetzt? Brücke vorhanden? Ausfallserie?) und das Versuchsprotokoll. Der Report
@@ -83,12 +107,10 @@ landet im Lauf-Summary, im Artefakt und – bei Rot – im Issue.
 
 ```
 python3 scripts/saisonaler_hero_refresh.py --selftest        → ✅ grün
-python3 -m unittest discover -s scripts/tests \
-        -p "test_saisonaler_hero_refresh.py"                 → 21 Tests, OK
-python3 -m unittest discover -s scripts/tests \
-        -p "test_saisonale_startseite.py"                    → 36 Tests, OK
-python3 -m unittest discover -s scripts/tests \
-        -p "test_workflow_yaml.py"                           → 6 Tests, OK
+python3 scripts/faktenfrische.py --selftest                  → ✅ 23/23 Fälle
+python3 -m unittest discover -s scripts/tests                → 1309 Tests, OK
+        (darin: 24 Hero-Verträge, 6 Puter-Rückfallsperre,
+         36 saisonale Startseite, 6 Workflow-YAML)
 python3 scripts/saisonale_startseite_guard.py --source-only  → ✅ Keine Funde
 python3 scripts/saisonaler_hero_refresh.py --check --json    → due: false
 ```
@@ -99,15 +121,17 @@ Lauf 1 🟡 Exit 0 · Lauf 2 🟡 Exit 0 · Lauf 3 🔴 Exit 3 mit Begründung
 wiederhergestellt.
 
 Neue Testklassen: `Faelligkeit` (Grundcodes), `Eskalation` (Ampelvertrag),
-`ClaudeWiederholung` (Retry, Korrekturauflage, Faktenbremse),
-`Ausfallzaehler` (Persistenz der Serie).
+`Anbieterkette` (kein Schlüssel → kein erfundener Text, kein Absturz),
+`Wiederholung` (Retry, Korrekturauflage, Faktenbremse),
+`Ausfallzaehler` (Persistenz der Serie) sowie die eigene Datei
+`test_keine_puter_abhaengigkeit.py`.
 
 ---
 
 ## 5. Was bewusst **nicht** geändert wurde
 
-* Kein Modellwechsel, kein Anthropic-Key, kein Fallback-Modell – weiterhin
-  ausschließlich `claude-sonnet-5` über die Puter-Brücke.
+* Keine neue Abhängigkeit, kein neues Konto, keine neuen Kosten: Es werden
+  ausschließlich die Schlüssel genutzt, die im Repo ohnehin gesetzt sind.
 * Keine Lockerung der Faktenbremse: keine Zahlen, Preise, Fristen, Quellen,
   URLs oder Superlative im Hero.
 * Keine Template-, CSS-, CTA- oder Layoutänderung; die freigegebene
@@ -116,11 +140,13 @@ Neue Testklassen: `Faelligkeit` (Grundcodes), `Eskalation` (Ampelvertrag),
 
 ---
 
-## 6. Offene Betreiberaufgabe (einmalig)
+## 6. Keine offene Betreiberaufgabe
 
-Der wahrscheinlichste Auslöser des Kettenausfalls ist ein **abgelaufenes
-`PUTER_AUTH_TOKEN`** (Secret ist aus dem Lauf heraus nicht prüfbar). Bitte das
-Secret einmal erneuern; der Workflow sagt ab sofort selbst, woran es liegt:
-Der Kettennachweis im Report zeigt „PUTER_AUTH_TOKEN ❌ fehlt/leer" bzw. den
-Brückenfehler im Klartext. Bis dahin bleibt die Startseite mit dem geprüften,
-kuratierten Herbst-Hero live – ohne tägliche Fehl-Issues.
+Es ist **nichts** einzurichten. `GROQ_API_KEY` und `GEMINI_API_KEY` sind im
+Repo längst gesetzt (je 20 Workflows nutzen sie); der Hero-Lauf und die
+Faktenfrische greifen jetzt auf dieselben Schlüssel zu. Ein Puter-Konto wird
+nicht gebraucht und kann nicht zurückkehren – der Vertragstest verhindert es.
+
+Sollte später einmal jeder Schlüssel fehlen, ist das kein Fehlalarm mehr,
+sondern eine gelbe, begründete Warnung mit Klartext im Report – und die
+Startseite bleibt mit dem geprüften, kuratierten Hero live.

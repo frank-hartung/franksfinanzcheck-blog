@@ -77,12 +77,22 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import post_utils as pu  # noqa: E402
 
+try:  # gemeinsamer Multi-Provider-Zugang (nur Standardbibliothek)
+    import llm_client  # noqa: E402
+except Exception:  # noqa: BLE001 - ohne Client läuft alles außer der Fachprüfung
+    llm_client = None
+
+# Reihenfolge der Fachprüfung: erster Anbieter mit Schlüssel gewinnt.
+# KORREKTUR 02.10.2026: Die frühere Puter-Brücke (PUTER_AUTH_TOKEN,
+# scripts/puter_chat.mjs) ist entfernt – Puter wird im Betrieb nicht genutzt,
+# die Fachprüfung lief deshalb nie.
+PROVIDER_ORDER = ("claude", "openai", "groq", "gemini")
+
 CONFIG_PFAD = os.path.join(BLOG_DIR, "data", "agent_reach", "faktenfrische.yaml")
 DOSSIER_DIR = os.path.join(BLOG_DIR, "data", "research", "artikel")
 QUEUE_PFAD = os.path.join(BLOG_DIR, "data", "faktenfrische_queue.json")
 HISTORIE_PFAD = os.path.join(BLOG_DIR, "data", "faktenfrische_history.jsonl")
 REPORT_PFAD = os.path.join(BLOG_DIR, "FAKTENFRISCHE-REPORT.md")
-BRUECKE = os.path.join(BLOG_DIR, "scripts", "puter_chat.mjs")
 
 USER_AGENT = "franksfinanzcheck-faktenfrische/1.0 (Agent-Reach-Integration)"
 TIMEOUT_STD = 30
@@ -523,13 +533,14 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
     else:
         zeilen += ["_Keine thematisch passende Fundstelle in diesem Lauf._", ""]
 
-    zeilen += ["## Fachliche Befunde (Claude)", ""]
+    zeilen += ["## Fachliche Befunde (KI-Fachprüfung)", ""]
     if befunde:
         for b in befunde:
             zeilen.append(f"- **{b.get('typ', 'Befund')}** – {b.get('text', '').strip()}"
                           + (f" (Beleg: <{b['beleg']}>)" if b.get("beleg") else ""))
     else:
-        zeilen.append("_Keine Fachprüfung in diesem Lauf (kein PUTER_AUTH_TOKEN oder keine Befunde)._")
+        zeilen.append("_Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel "
+                      "GROQ_API_KEY/GEMINI_API_KEY oder keine Befunde)._")
     zeilen += ["", "## Offene GEO-Punkte", ""]
     zeilen += [f"- {p}" for p in geo["offen"]] or ["- keine"]
     if dossier["fehler"]:
@@ -570,11 +581,28 @@ Code-Fence, in diesem Schema:
 Fehler erspart."""
 
 
+def verfuegbare_anbieter() -> list:
+    """Anbieter mit Schlüssel, in der festgelegten Reihenfolge."""
+    if llm_client is None:
+        return []
+    return [p for p in PROVIDER_ORDER if llm_client.available(p)]
+
+
 def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
                         trocken: bool = False) -> tuple[list[dict], list[dict], str]:
+    """Fachprüfung über den gemeinsamen LLM-Zugang des Blogs.
+
+    Der Anti-Halluzinations-Vertrag (claude_antwort_pruefen) bleibt unverändert:
+    Befunde zählen nur mit Beleg aus dem Dossier. Geändert hat sich allein der
+    Transportweg – statt der nie genutzten Puter-Brücke die Schlüssel, die im
+    Repo tatsächlich gesetzt sind.
+    """
     ccfg = cfg.get("claude") or {}
-    if trocken or not os.environ.get("PUTER_AUTH_TOKEN"):
-        return [], [], "übersprungen (kein PUTER_AUTH_TOKEN)"
+    if trocken:
+        return [], [], "übersprungen (Trockenlauf)"
+    anbieter = verfuegbare_anbieter()
+    if not anbieter:
+        return [], [], "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)"
     if not dossier["treffer"]:
         return [], [], "übersprungen (keine Fundstellen)"
 
@@ -593,22 +621,22 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
         "Aufgabe: Nenne fachliche Befunde (veraltete Angaben, fehlende Aspekte, "
         "unpräzise Formulierungen) und belege sie ausschließlich mit den obigen URLs."
     )
-    payload = json.dumps({
-        "system": SYSTEM_PROMPT, "user": user,
-        "model": ccfg.get("modell", "claude-sonnet-5"),
-        "temperature": float(ccfg.get("temperatur", 0.2)),
-        "max_tokens": int(ccfg.get("max_tokens", 4096)),
-    })
-    try:
-        proc = subprocess.run(["node", BRUECKE], input=payload, capture_output=True,
-                              text=True, timeout=int(ccfg.get("timeout", 300)))
-    except FileNotFoundError:
-        return [], [], "Fehler: node nicht gefunden (Puter-Brücke)"
-    except subprocess.TimeoutExpired:
-        return [], [], "Fehler: Zeitüberschreitung der Puter-Brücke"
-    if proc.returncode != 0:
-        return [], [], f"Fehler: Puter-Brücke Exit {proc.returncode}"
-    return *claude_antwort_pruefen(proc.stdout, dossier, cfg), "geprüft"
+    fehler = []
+    for provider in anbieter:
+        modell = llm_client.model_for(provider)
+        try:
+            antwort = llm_client.chat(
+                provider, system=SYSTEM_PROMPT, prompt=user,
+                temperature=float(ccfg.get("temperatur", 0.2)),
+                max_tokens=int(ccfg.get("max_tokens", 4096)),
+                timeout=int(ccfg.get("timeout", 300)), attempts=2)
+        except Exception as exc:  # noqa: BLE001 - Lauf darf daran nicht sterben
+            fehler.append(f"{provider}: {exc}")
+            continue
+        if antwort and antwort.strip():
+            return *claude_antwort_pruefen(antwort, dossier, cfg), f"geprüft ({provider}:{modell})"
+        fehler.append(f"{provider}/{modell}: keine verwertbare Antwort")
+    return [], [], "Fehler: " + "; ".join(fehler)[:300]
 
 
 def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[list[dict], list[dict]]:

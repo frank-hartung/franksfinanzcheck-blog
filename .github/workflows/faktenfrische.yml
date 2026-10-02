@@ -54,15 +54,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Node einrichten (Puter-Brücke für Claude, ohne Anthropic-API)
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-
       - name: Abhängigkeiten
         run: |
+          # Kein Node/npm: Die Fachprüfung läuft über scripts/llm_client.py
+          # (reine Standardbibliothek) mit den Schlüsseln der KI-Redaktion.
           python3 -m pip install -q --disable-pip-version-check pyyaml feedparser
-          npm install --no-save @heyputer/puter.js >/dev/null 2>&1 || echo "⚠ puter.js nicht installiert"
 
       - name: Selbsttest (Sabotage-Schutz – kein Schreiben ohne grünen Lauf)
         run: python3 scripts/faktenfrische.py --selftest
@@ -71,7 +67,10 @@ jobs:
         id: lauf
         continue-on-error: true   # Exit 3 = Kanäle tot → melden, nicht abbrechen
         env:
-          PUTER_AUTH_TOKEN: ${{ secrets.PUTER_AUTH_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python3 scripts/faktenfrische.py --apply \
             --max "${{ github.event.inputs.max || '3' }}"

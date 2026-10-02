@@ -79,8 +79,18 @@ stehen. Affiliate-Partner (CHECK24, Tarifcheck) sind bewusst **nicht**
 belegfähig: Provisionsquelle ≠ Faktenquelle. `--selftest` friert genau diesen
 Fall ein (ST3), inklusive einer erfundenen Beispiel-URL.
 
-Ohne `PUTER_AUTH_TOKEN` läuft alles außer der Fachprüfung; die Belegkette wird
-dann deterministisch aus den belegfähigen Fundstellen gebildet.
+Die Fachprüfung läuft über den gemeinsamen LLM-Zugang des Blogs
+(`scripts/llm_client.py`) mit den bereits etablierten Schlüsseln
+`GROQ_API_KEY` bzw. `GEMINI_API_KEY` (optional `ANTHROPIC_API_KEY` /
+`OPENAI_API_KEY`). Der erste verfügbare Anbieter gewinnt, bei Ausfall rückt der
+nächste nach. Ohne jeden Schlüssel läuft alles außer der Fachprüfung; die
+Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
+
+> **Korrektur 02.10.2026:** Die frühere Puter-Brücke (`PUTER_AUTH_TOKEN`,
+> `scripts/puter_chat.mjs`, `npm @heyputer/puter.js`) ist ersatzlos entfernt.
+> Puter wird im Betrieb nicht genutzt – die Fachprüfung war damit dauerhaft
+> „übersprungen". `scripts/tests/test_keine_puter_abhaengigkeit.py` verhindert,
+> dass die Abhängigkeit zurückkehrt.
 
 ## Was der Leser sieht
 

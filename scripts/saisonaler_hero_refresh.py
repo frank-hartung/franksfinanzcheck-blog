@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Saisonaler Startseiten-Hero: Agent Reach + Claude, sicher automatisiert.
+"""Saisonaler Startseiten-Hero: Agent Reach + KI-Feinschliff, sicher automatisiert.
 
 Der alte, statische Willkommenstext in ``hugo.toml`` wurde absichtlich
 entfernt. Die Startseite nimmt ihre H1 und ihren Antwort-zuerst-Lead aus der
@@ -11,9 +11,10 @@ Kette
 1. Der Workflow erzeugt vorher mit Agent Reach einen LESENDEN Recherche-Brief
    unter ``data/research/saisonal/``. Der Brief ist ein Signal-Pool, keine
    Quelle für Behauptungen.
-2. Claude Sonnet 5 poliert daraus mit Franks Stilprofil eine saisonale,
-   suchintentionklare Passage. Der Prompt bekommt nur kontrollierte saisonale
-   Themen, keine unbestätigten Behauptungen aus dem Brief.
+2. Der gemeinsame LLM-Zugang des Blogs (``scripts/llm_client.py``) poliert
+   daraus mit Franks Stilprofil eine saisonale, suchintentionklare Passage.
+   Der Prompt bekommt nur kontrollierte saisonale Themen, keine unbestätigten
+   Behauptungen aus dem Brief.
 3. Eine lokale Verifikation verlangt Entity-first, Suchintention, mindestens
    drei Kernkategorien, du-Ansprache, keine Zahlen/URLs/Quellenbehauptungen,
    keine KI-Floskeln und ausreichende Neuheit.
@@ -24,7 +25,7 @@ Dauerfestigkeit (Premium-Fix 02.10.2026)
 ----------------------------------------
 Früher galt jede Abweichung vom gespeicherten Fingerprint als „fällig". Eine
 redaktionelle Änderung am Hero machte den Lauf damit dauerhaft fällig – und
-jeder Ausfall der Claude-Kette (fehlender Token, Kontingent, Netz) erzeugte
+jeder Ausfall der Textkette (fehlender Schlüssel, Kontingent, Netz) erzeugte
 täglich einen roten Lauf plus Fehl-Issue, obwohl der live ausgelieferte Hero
 geprüft und frisch war. Drei Stufen beenden das:
 
@@ -33,7 +34,7 @@ geprüft und frisch war. Drei Stufen beenden das:
   als geprüfter Basisstand übernommen (Modell ``approved-seasonal-baseline``).
   Es wird nichts generiert und nichts als KI-poliert ausgegeben; nur der
   Nachweis holt auf. Besteht er den Vertrag nicht, bleibt der Lauf hart rot.
-* **Stufe 2 – Kette mit Wiederholung:** Claude wird bis zu drei Mal befragt;
+* **Stufe 2 – Kette mit Wiederholung:** Das Modell wird bis zu drei Mal befragt;
   verworfene Kandidaten gehen als präzise Korrekturauflage zurück in den
   Prompt. Jeder Versuch steht im Report.
 * **Stufe 3 – gestufte Eskalation:** Ein Kettenausfall bei gesunder, frischer
@@ -45,11 +46,20 @@ geprüft und frisch war. Drei Stufen beenden das:
 Jeder Ausgang schreibt denselben Diagnose-Report (``SAISONALER-HERO-REPORT.md``)
 mit Grundcode, Kettennachweis und Versuchsprotokoll – auch im Fehlerfall.
 
-Claude wird ausschliesslich kostenlos über die vorhandene Puter-Brücke
-(``scripts/puter_chat.mjs``) mit ``claude-sonnet-5`` genutzt. Kein
-Anthropic-API-Key, kein Modellfallback. Fehlt ein frischer Agent-Reach-Brief
-oder der Puter-Token, wird fail-closed abgebrochen: Die kuratierte saisonale
-Basis bleibt sichtbar, aber es erscheint kein als KI-poliert ausgegebener Text.
+Anbieter (Korrektur 02.10.2026: Puter wird nicht genutzt)
+---------------------------------------------------------
+Die frühere Puter-Brücke (``PUTER_AUTH_TOKEN``, ``scripts/puter_chat.mjs``)
+war im Betrieb nie aktiv – der Hero-Lauf konnte damit grundsätzlich nicht
+gelingen. Der Feinschliff läuft jetzt über denselben Multi-Provider-Zugang,
+den die KI-Redaktion ohnehin benutzt: ``scripts/llm_client.py`` mit den im
+Repo etablierten Schlüsseln ``GROQ_API_KEY`` und ``GEMINI_API_KEY`` (optional
+zusätzlich ``ANTHROPIC_API_KEY``/``OPENAI_API_KEY``). Der erste verfügbare
+Anbieter der Reihenfolge in ``PROVIDER_ORDER`` gewinnt, bei Ausfall wird der
+nächste versucht. Nur Standardbibliothek, kein Node, kein npm-Paket.
+
+Fehlt ein frischer Agent-Reach-Brief oder jeder Schlüssel, wird fail-closed
+abgebrochen: Die kuratierte saisonale Basis bleibt sichtbar, aber es erscheint
+kein als KI-poliert ausgegebener Text.
 
 Aufruf:
   python3 scripts/saisonaler_hero_refresh.py --check
@@ -77,21 +87,30 @@ except ImportError as exc:  # pragma: no cover - Workflow installs PyYAML
     raise SystemExit("PyYAML fehlt: python3 -m pip install pyyaml") from exc
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+try:  # gemeinsamer Multi-Provider-Zugang der KI-Redaktion (nur Standardbibliothek)
+    import llm_client
+except Exception:  # noqa: BLE001 - ohne Client bleibt nur die kuratierte Basis
+    llm_client = None
+
 SAISONS = ROOT / "data" / "saisons.yaml"
 STATE = ROOT / "data" / "saisonaler_hero_state.json"
 HISTORY = ROOT / "data" / "saisonaler_hero_history.jsonl"
 RESEARCH_DIR = ROOT / "data" / "research" / "saisonal"
-BRUECKE = ROOT / "scripts" / "puter_chat.mjs"
 STIL = ROOT / "data" / "schreibstil.yaml"
 BRAND = ROOT / "data" / "brand_brain.yaml"
 GUARD = ROOT / "scripts" / "saisonale_startseite_guard.py"
 REPORT = ROOT / "SAISONALER-HERO-REPORT.md"
 
-MODEL = "claude-sonnet-5"
+# Reihenfolge des Feinschliffs: der erste Anbieter mit Schlüssel gewinnt, bei
+# Fehler rückt der nächste nach. Bewusst identisch zur KI-Redaktion, damit es
+# genau EINEN Ort für Schlüssel, Modelle und Retries gibt.
+PROVIDER_ORDER = ("claude", "openai", "groq", "gemini")
 MAX_AGE_DAYS = 21
 # Kulanzfenster: Solange die kuratierte Basis den kompletten SEO/GEO-Vertrag und
 # die Startseiten-Wache besteht, ist ein Ausfall der Claude-Kette (Token, Netz,
-# Puter-Kontingent) KEIN Live-Schaden. Der Lauf bleibt dann grün, meldet den
+# Anbieter-Kontingent) KEIN Live-Schaden. Der Lauf bleibt dann grün, meldet den
 # Zustand aber sichtbar als Warnung im Report und im Step-Summary. Erst wenn der
 # Ausfall bleibt (Serie) oder die Politur wirklich überaltert, wird eskaliert.
 GRACE_DAYS = 14
@@ -273,72 +292,86 @@ Kontext; mache daraus keine neue Tatsachenbehauptung."""
     return system, user
 
 
-def call_claude(system: str, user: str) -> str | None:
-    payload = json.dumps({
-        "system": system,
-        "user": user,
-        "model": MODEL,
-        "temperature": 0.45,
-        "max_tokens": 700,
-    })
-    try:
-        proc = subprocess.run(
-            ["node", str(BRUECKE)], input=payload, text=True, capture_output=True, timeout=300,
-        )
-    except FileNotFoundError:
-        LAST_BRIDGE_ERROR.append("node nicht gefunden – Puter-Brücke nicht ausführbar")
-        return None
-    except subprocess.TimeoutExpired:
-        LAST_BRIDGE_ERROR.append("Zeitüberschreitung (300 s) der Puter-Brücke")
-        return None
-    if proc.returncode != 0:
+def verfuegbare_anbieter() -> list[str]:
+    """Anbieter mit Schlüssel, in der festgelegten Reihenfolge."""
+    if llm_client is None:
+        return []
+    return [p for p in PROVIDER_ORDER if llm_client.available(p)]
+
+
+def call_model(system: str, user: str) -> tuple[str | None, str, str]:
+    """Fragt den ersten verfügbaren Anbieter; bei Ausfall rückt der nächste nach.
+
+    Rückgabe: (Antworttext oder None, Anbieter, Modell). ``llm_client`` wirft
+    nie in die Pipeline hinein – ein fehlender Schlüssel oder ein API-Fehler
+    kommt hier als ``None`` an und landet als Klartext im Diagnose-Report.
+    """
+    if llm_client is None:
+        LAST_BRIDGE_ERROR.append("scripts/llm_client.py nicht importierbar")
+        return None, "", ""
+    anbieter = verfuegbare_anbieter()
+    if not anbieter:
         LAST_BRIDGE_ERROR.append(
-            f"Puter-Brücke Exit {proc.returncode}: {(proc.stderr or '').strip()[-400:]}")
-        return None
-    text = (proc.stdout or "").strip()
-    if not text:
-        LAST_BRIDGE_ERROR.append("Puter-Brücke lieferte eine leere Antwort")
-        return None
-    return text
+            "kein KI-Schlüssel gesetzt (erwartet GROQ_API_KEY oder GEMINI_API_KEY)")
+        return None, "", ""
+    for provider in anbieter:
+        modell = llm_client.model_for(provider)
+        try:
+            antwort = llm_client.chat(
+                provider, system=system, prompt=user,
+                temperature=0.45, max_tokens=700, timeout=120, attempts=2,
+            )
+        except Exception as exc:  # noqa: BLE001 - der Lauf darf daran nicht sterben
+            LAST_BRIDGE_ERROR.append(f"{provider}/{modell}: {exc}")
+            continue
+        if antwort and antwort.strip():
+            return antwort.strip(), provider, modell
+        LAST_BRIDGE_ERROR.append(f"{provider}/{modell}: keine verwertbare Antwort")
+    return None, "", ""
 
 
-def claude_candidate(season: dict, topics: list[str], history: list[dict],
+def polish_candidate(season: dict, topics: list[str], history: list[dict],
                      attempts: int = CLAUDE_ATTEMPTS,
-                     sleep=time.sleep) -> tuple[tuple[str, str] | None, list[str]]:
+                     sleep=time.sleep) -> tuple[tuple[str, str] | None, list[str], str]:
     """Holt eine vertragsfeste Fassung – mit Wiederholung statt Einmal-Versuch.
 
     Ein einzelner Netz-, Kontingent- oder Formatfehler hat den Lauf früher
     sofort rot gemacht. Jetzt wird bis zu ``attempts`` mal versucht; abgelehnte
     Kandidaten gehen als präzise Korrekturauflage zurück in den Prompt, statt
     verworfen zu werden. Der Protokollpfad bleibt vollständig nachweisbar.
+
+    Rückgabe: (Fassung oder None, Versuchsprotokoll, "anbieter:modell").
     """
     system, user = prompt_for(season, topics)
     protokoll: list[str] = []
     auflage = ""
+    quelle = ""
     for attempt in range(1, max(1, attempts) + 1):
         if attempt > 1:
             sleep(CLAUDE_BACKOFF_SECONDS[min(attempt - 1, len(CLAUDE_BACKOFF_SECONDS) - 1)])
         LAST_BRIDGE_ERROR.clear()
-        answer = call_claude(system, user + auflage)
+        answer, provider, modell = call_model(system, user + auflage)
+        if provider:
+            quelle = f"{provider}:{modell}"
         if not answer:
             protokoll.append(f"Versuch {attempt}: keine Antwort – "
-                             + (LAST_BRIDGE_ERROR[-1] if LAST_BRIDGE_ERROR else "unbekannter Brückenfehler"))
+                             + (LAST_BRIDGE_ERROR[-1] if LAST_BRIDGE_ERROR else "unbekannter Anbieterfehler"))
             continue
         parsed = parse_answer(answer)
         if not parsed:
-            protokoll.append(f"Versuch {attempt}: Antwort ohne gültiges TITLE/LEAD-Format")
+            protokoll.append(f"Versuch {attempt} ({quelle}): Antwort ohne gültiges TITLE/LEAD-Format")
             auflage = ("\n\nKORREKTURAUFLAGE: Antworte ausschließlich in genau zwei Zeilen, "
                        "die erste beginnt mit 'TITLE: ', die zweite mit 'LEAD: '.")
             continue
         title, lead = parsed
         errors = validate_candidate(title, lead, season, history)
         if not errors:
-            protokoll.append(f"Versuch {attempt}: Kandidat besteht den SEO/GEO-Vertrag")
-            return (title, lead), protokoll
-        protokoll.append(f"Versuch {attempt}: verworfen – " + "; ".join(errors))
+            protokoll.append(f"Versuch {attempt} ({quelle}): Kandidat besteht den SEO/GEO-Vertrag")
+            return (title, lead), protokoll, quelle
+        protokoll.append(f"Versuch {attempt} ({quelle}): verworfen – " + "; ".join(errors))
         auflage = "\n\nKORREKTURAUFLAGE: Die letzte Fassung wurde verworfen: " + "; ".join(errors) \
                   + ". Behebe genau diese Punkte, ohne neue Fakten zu erfinden."
-    return None, protokoll
+    return None, protokoll, quelle
 
 
 def parse_answer(answer: str) -> tuple[str, str] | None:
@@ -554,11 +587,13 @@ def failure_streak(season: dict, state: dict) -> int:
 def chain_status(day: dt.date) -> dict:
     """Beweisbare Vorbedingungen der Kette – für Report, Issue und Eskalation."""
     brief = newest_research_brief(day)
+    anbieter = verfuegbare_anbieter()
     return {
         "research_brief": str(brief.relative_to(ROOT)) if brief else "",
         "brief_vorhanden": bool(brief),
-        "token_vorhanden": bool((os.environ.get("PUTER_AUTH_TOKEN") or "").strip()),
-        "bruecke_vorhanden": BRUECKE.is_file(),
+        "anbieter": anbieter,
+        "anbieter_vorhanden": bool(anbieter),
+        "llm_client": llm_client is not None,
     }
 
 
@@ -569,7 +604,7 @@ def escalate(reason_code: str, age: int | None, streak: int, baseline_ok: bool) 
     if age is not None and age >= HARD_STALE_DAYS:
         return True, f"die freigegebene Fassung ist {age} Tage alt (Grenze {HARD_STALE_DAYS})"
     if streak >= FAILURE_STREAK_LIMIT:
-        return True, f"{streak} Läufe in Folge ohne erfolgreiche Claude-Politur"
+        return True, f"{streak} Läufe in Folge ohne erfolgreiche KI-Politur"
     return False, ""
 
 
@@ -615,13 +650,28 @@ def selftest() -> int:
 
     # Wiederholung mit Korrekturauflage statt Einmal-Abbruch.
     antworten = ["kaputt", f"TITLE: {fake['hero_title']}\nLEAD: {fake['hero_lead']}"]
-    _echtes_call_claude = globals()["call_claude"]
-    globals()["call_claude"] = lambda system, user: antworten.pop(0) if antworten else None
+    _echtes_call_model = globals()["call_model"]
+    globals()["call_model"] = lambda system, user: (
+        (antworten.pop(0), "selftest", "offline") if antworten else (None, "", ""))
     try:
-        parsed, protokoll = claude_candidate(fake, [], [], attempts=3, sleep=lambda _s: None)
+        parsed, protokoll, quelle = polish_candidate(fake, [], [], attempts=3, sleep=lambda _s: None)
     finally:
-        globals()["call_claude"] = _echtes_call_claude
+        globals()["call_model"] = _echtes_call_model
     ok &= parsed == (fake["hero_title"], fake["hero_lead"]) and len(protokoll) == 2
+    ok &= quelle == "selftest:offline"
+
+    # Anbieterkette: ohne Schlüssel darf nichts erfunden, aber auch nichts
+    # geworfen werden – der Lauf muss die Lage als Klartext melden können.
+    LAST_BRIDGE_ERROR.clear()
+    umgebung = {k: os.environ.pop(k) for k in
+                ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY")
+                if k in os.environ}
+    try:
+        antwort, provider, _modell = _echtes_call_model("s", "u")
+        ok &= antwort is None and provider == ""
+        ok &= bool(LAST_BRIDGE_ERROR) and "Schlüssel" in LAST_BRIDGE_ERROR[-1]
+    finally:
+        os.environ.update(umgebung)
 
     if not ok:
         print("❌ Saisonaler-Hero-Selbsttest fehlgeschlagen")
@@ -631,7 +681,8 @@ def selftest() -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Saisonaler SEO-/GEO-Hero mit Agent Reach + Claude")
+    parser = argparse.ArgumentParser(
+        description="Saisonaler SEO-/GEO-Hero mit Agent Reach + KI-Feinschliff")
     parser.add_argument("--fix", action="store_true", help="bei Fälligkeit die geprüfte Hero-Fassung schreiben")
     parser.add_argument("--force", action="store_true", help="Rotation/Fingerprint übergehen")
     parser.add_argument("--check", action="store_true", help="nur Fälligkeit berichten")
@@ -717,8 +768,8 @@ def main(argv: list[str] | None = None) -> int:
             "", "## Kettennachweis", "",
             "| Vorbedingung | Status |", "|---|---|",
             f"| Agent-Reach-Brief ({day.isoformat()}) | {'✅ ' + chain['research_brief'] if chain['brief_vorhanden'] else '❌ fehlt'} |",
-            f"| PUTER_AUTH_TOKEN | {'✅ gesetzt' if chain['token_vorhanden'] else '❌ fehlt/leer'} |",
-            f"| Puter-Brücke `scripts/puter_chat.mjs` | {'✅ vorhanden' if chain['bruecke_vorhanden'] else '❌ fehlt'} |",
+            f"| KI-Anbieter mit Schlüssel | {'✅ ' + ', '.join(chain['anbieter']) if chain['anbieter_vorhanden'] else '❌ keiner (GROQ_API_KEY / GEMINI_API_KEY)'} |",
+            f"| `scripts/llm_client.py` | {'✅ geladen' if chain['llm_client'] else '❌ nicht importierbar'} |",
             f"| Ausfall-Serie | {failure_streak(season, load_json(STATE, {})) or 0} (Eskalation ab {FAILURE_STREAK_LIMIT}) |",
             "",
         ]
@@ -783,11 +834,12 @@ def main(argv: list[str] | None = None) -> int:
     if not chain["brief_vorhanden"]:
         hindernisse.append("frischer Agent-Reach-Brief fehlt "
                            f"(erwartet: data/research/saisonal/{day.isoformat()}-internet-recherche.md)")
-    if not chain["token_vorhanden"]:
-        hindernisse.append("PUTER_AUTH_TOKEN fehlt oder ist leer – Claude Sonnet 5 "
-                           "darf nicht still ersetzt werden")
-    if not chain["bruecke_vorhanden"]:
-        hindernisse.append("Puter-Brücke scripts/puter_chat.mjs fehlt")
+    if not chain["llm_client"]:
+        hindernisse.append("scripts/llm_client.py ist nicht importierbar")
+    elif not chain["anbieter_vorhanden"]:
+        hindernisse.append("kein KI-Schlüssel gesetzt – erwartet wird GROQ_API_KEY "
+                           "oder GEMINI_API_KEY (optional ANTHROPIC_API_KEY/OPENAI_API_KEY); "
+                           "ohne Schlüssel wird kein Text als KI-poliert ausgegeben")
 
     baseline_ok, baseline_errors, baseline_message = baseline_healthy(season)
 
@@ -798,11 +850,11 @@ def main(argv: list[str] | None = None) -> int:
         if not baseline_ok:
             zeilen += ["", "## Zusätzlich: Live-Hero defekt", ""] + [f"- {e}" for e in baseline_errors]
         if hart:
-            print("🛑 Claude-Kette nicht lauffähig: " + "; ".join(hindernisse)
+            print("🛑 Textkette nicht lauffähig: " + "; ".join(hindernisse)
                   + f" · Eskalation, weil {warum}.", file=sys.stderr)
             return finish(3, f"rot – {warum}", "Kette nicht lauffähig",
                           zeilen + ["", f"**Eskalation:** {warum}."])
-        print(f"::warning title=Saisonaler Hero::Claude-Kette pausiert "
+        print(f"::warning title=Saisonaler Hero::Textkette pausiert "
               f"({'; '.join(hindernisse)}). Der geprüfte Saison-Hero bleibt live; "
               f"Eskalation ab {FAILURE_STREAK_LIMIT} Läufen in Folge oder "
               f"{HARD_STALE_DAYS} Tagen Alter.")
@@ -813,21 +865,21 @@ def main(argv: list[str] | None = None) -> int:
                                 "als KI-poliert ausgegeben.",
                                 f"Serie: {streak} von {FAILURE_STREAK_LIMIT} bis zur Eskalation."])
 
-    # Stufe 3: Claude mit Wiederholung und Korrekturauflage.
+    # Stufe 3: KI-Feinschliff mit Wiederholung und Korrekturauflage.
     brief = newest_research_brief(day)
     topics = research_topics(brief, season)
     history = read_history()
-    parsed, protokoll = claude_candidate(season, topics, history)
+    parsed, protokoll, quelle = polish_candidate(season, topics, history)
     if not parsed:
-        streak = note_failure(season, state, "claude-ohne-gueltige-fassung", " | ".join(protokoll))
+        streak = note_failure(season, state, "ki-ohne-gueltige-fassung", " | ".join(protokoll))
         hart, warum = escalate(code, age, streak, baseline_ok)
         zeilen = ["## Versuchsprotokoll", ""] + [f"- {p}" for p in protokoll]
         if hart:
-            print("🛑 Claude lieferte keine vertragsfeste Fassung: " + " | ".join(protokoll)
+            print("🛑 Kein Anbieter lieferte eine vertragsfeste Fassung: " + " | ".join(protokoll)
                   + f" · Eskalation, weil {warum}.", file=sys.stderr)
-            return finish(4, f"rot – {warum}", "Keine vertragsfeste Claude-Fassung",
+            return finish(4, f"rot – {warum}", "Keine vertragsfeste KI-Fassung",
                           zeilen + ["", f"**Eskalation:** {warum}."])
-        print("::warning title=Saisonaler Hero::Claude lieferte keine vertragsfeste Fassung "
+        print("::warning title=Saisonaler Hero::Kein Anbieter lieferte eine vertragsfeste Fassung "
               f"({len(protokoll)} Versuche). Der geprüfte Saison-Hero bleibt unverändert live.")
         return finish(0, "gelb – Kandidaten verworfen, geprüfte Basis bleibt live",
                       "Kandidaten verworfen (Faktenbremse hat gegriffen)",
@@ -856,7 +908,7 @@ def main(argv: list[str] | None = None) -> int:
     changed = next(s for s in changed_seasons if s.get("id") == season.get("id"))
     brief_hash = hashlib.sha256(brief.read_bytes()).hexdigest()
     record = {
-        "updated": iso_now(), "fingerprint": fingerprint(changed), "model": MODEL,
+        "updated": iso_now(), "fingerprint": fingerprint(changed), "model": quelle or "unbekannt",
         "research_brief": str(brief.relative_to(ROOT)), "research_sha256": brief_hash,
     }
     state.setdefault("version", 1)
@@ -864,13 +916,13 @@ def main(argv: list[str] | None = None) -> int:
     save_json(STATE, state)
     append_history({
         "ts": record["updated"], "season": season["id"], "hero_title": title,
-        "hero_lead": lead, "model": MODEL, "research_brief": record["research_brief"],
+        "hero_lead": lead, "model": record["model"], "research_brief": record["research_brief"],
         "research_sha256": brief_hash, "topics": topics,
     })
-    print(f"✅ Saisonaler Hero poliert: {season['id']} · Agent Reach + {MODEL}.")
-    return finish(0, "grün – Agent Reach + Claude", "Agent Reach + Claude", [
+    print(f"✅ Saisonaler Hero poliert: {season['id']} · Agent Reach + {record['model']}.")
+    return finish(0, "grün – Agent Reach + KI-Feinschliff", "Agent Reach + KI-Feinschliff", [
         f"**Agent-Reach-Brief:** `{record['research_brief']}` (SHA-256 `{brief_hash[:12]}…`)",
-        f"**Claude-Modell:** `{MODEL}` über Puter.js, ohne Anthropic-API",
+        f"**Textmodell:** `{record['model']}` über `scripts/llm_client.py`",
         f"**Themen aus Signalen:** {', '.join(topics) or '–'}", "",
         "## Neue H1", title, "", "## Neuer GEO-Lead", lead, "",
         "## Versuchsprotokoll", "",
