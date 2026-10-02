@@ -79,7 +79,7 @@ Dazu zählen zum Beispiel:
 
 - Miete oder Kreditrate
 - Strom, Gas, Wasser, Internet
-- [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/)
+- Versicherungen
 - Lebensmittel und Mobilität
 - laufende Kosten für Kinder oder Haustiere
 

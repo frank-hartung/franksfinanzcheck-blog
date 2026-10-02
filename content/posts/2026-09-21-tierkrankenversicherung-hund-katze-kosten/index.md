@@ -239,7 +239,7 @@ Wenn du Leistung, Eigenanteil, Ausschlüsse und deine eigene Finanzlage zusammen
 
 
 
-**Lesetipp:** [Hausratversicherung: Was sie kostet und wen sie schützt](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/)
+**Lesetipp:** Hausratversicherung: Was sie kostet und wen sie schützt
 ## Häufige Fragen
 
 ### Lohnt sich eine Tierkrankenversicherung für jede Katze und jeden Hund?

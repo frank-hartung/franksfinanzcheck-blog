@@ -282,7 +282,7 @@ Sicherheit im Jahr 2026 bedeutet, auf die veränderten Umweltbedingungen und tec
 
 Bereits ein mittlerer Schaden zeigt, wie wertvoll ein moderner Vertrag ist. Die gute Nachricht bleibt: Wer aktiv vergleicht, bekommt heute exzellenten Schutz zu fairen Konditionen.
 
-**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Hausratversicherung: Kosten, Leistungen, Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/) · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · Hausratversicherung: Kosten, Leistungen, Vergleich · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
 
 ## Häufige Fragen
 

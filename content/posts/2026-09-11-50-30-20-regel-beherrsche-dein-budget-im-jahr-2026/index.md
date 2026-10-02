@@ -66,7 +66,7 @@ Hierzu zählen Dinge, die du wirklich brauchst:
 - Strom, Gas, Wasser
 - Lebensmittel des Grundbedarfs
 - Internet und Mobilfunk
-- notwendige [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/)
+- notwendige Versicherungen
 - Arbeitsweg oder nötige Mobilität
 
 Das ist dein Pflichtblock. Er soll dein Leben stabil tragen, aber nicht unnötig aufgebläht sein.

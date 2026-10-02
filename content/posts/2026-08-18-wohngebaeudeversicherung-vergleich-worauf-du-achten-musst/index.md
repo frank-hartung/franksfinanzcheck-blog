@@ -302,7 +302,7 @@ Die **Wohngebäudeversicherung** ist kein Produkt, das du nur nach dem niedrigst
 
 Wenn du sauber vergleichst, bekommst du oft ein besseres Schutzpaket und zahlst nicht automatisch mehr. Im besten Fall sparst du sogar. Im Ernstfall sparst du dir vor allem ein sehr teures Problem.
 
-**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · [Hausratversicherung: Kosten, Leistungen, Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/) · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · Hausratversicherung: Kosten, Leistungen, Vergleich · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
 
 ## Häufige Fragen
 

@@ -123,7 +123,7 @@ Keine Bank arbeitet völlig ohne Profitinteresse. Auch bei einem „Gratis-Konto
 
 1. **Interchange-Gebühren:** Bei jeder Kartenzahlung zahlt der Händler eine kleine Gebühr, die teils an deine Bank fließt.
 2. **Zinsdifferenzgeschäfte:** Die Bank arbeitet mit den Einlagen auf deinem Konto.
-3. **Zusatzangebote:** Oft ist das Girokonto der Einstieg für lukrativere Produkte wie Depots, [Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) oder Kredite.
+3. **Zusatzangebote:** Oft ist das Girokonto der Einstieg für lukrativere Produkte wie Depots, Versicherungen oder Kredite.
 4. **Sollzinsen:** Wenn Kunden den Dispo nutzen, verdient die Bank an den Zinsen.
 
 Für dich als Nutzer ist das vorteilhaft, solange du nur die Leistungen nutzt, die für dich tatsächlich kostenfrei sind.

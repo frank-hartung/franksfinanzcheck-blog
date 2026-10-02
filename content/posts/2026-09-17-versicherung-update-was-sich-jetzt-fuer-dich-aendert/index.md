@@ -125,7 +125,7 @@ Wichtige Fragen:
 - Hast du neue, wertvolle Dinge angeschafft?
 - Ist Elementarschutz relevant?
 
-Mehr dazu hier: [Hausratversicherung: Kosten, Leistungen, Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/).
+Mehr dazu hier: Hausratversicherung: Kosten, Leistungen, Vergleich.
 
 ### 3. Kfz-Versicherung
 Hier liegt oft der größte klassische Sparhebel. Prüfe:
@@ -421,7 +421,7 @@ Das aktuelle **Versicherung-Update** bedeutet nicht, dass du jetzt hektisch jede
 
 Besonders wichtig bleiben der **30. November** bei Kfz, mögliche Beitragserhöhungen und die Frage, ob Leistung und Preis noch zu deinem Leben passen. Wer sich dafür einmal ruhig Zeit nimmt, spart oft **100 € bis 500 € pro Jahr** – manchmal mehr.
 
-**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Kfz-Versicherung Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) · [Hausratversicherung Vergleich](../../posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/)
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Kfz-Versicherung Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) · Hausratversicherung Vergleich
 
 ## Häufige Fragen
 

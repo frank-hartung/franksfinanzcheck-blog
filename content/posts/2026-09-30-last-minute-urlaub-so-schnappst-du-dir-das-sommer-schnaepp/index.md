@@ -99,7 +99,7 @@ Es empfiehlt sich, die Preisentwicklung über zwei bis drei Tage intensiv zu beo
 
 Oft ist der Mietwagen der versteckte Kostentreiber einer vermeintlich günstigen Reise. Ein kritischer Blick in die Mietbedingungen ist unerlässlich: Viele Anbieter blocken Kautionsbeträge zwischen ca. 1.000 € und 2.000 € auf der Kreditkarte. Das kann dein verfügbares Budget vor Ort massiv einschränken.
 
-Zusatzkosten für Navigationsgeräte oder Kindersitze sind oft überproportional teuer. Zudem solltest du prüfen, ob deine Kreditkarte bereits einen Vollkaskoschutz für Mietwagen beinhaltet – dies erspart dir teure Doppel-[Versicherungen](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) am Schalter.
+Zusatzkosten für Navigationsgeräte oder Kindersitze sind oft überproportional teuer. Zudem solltest du prüfen, ob deine Kreditkarte bereits einen Vollkaskoschutz für Mietwagen beinhaltet – dies erspart dir teure Doppel-Versicherungen am Schalter.
 
 **Faustregel:** Sollte die geforderte Kaution ca. 30 Prozent der gesamten Reisekosten überschreiten, ist ein Anbieterwechsel meist wirtschaftlich sinnvoll.
 

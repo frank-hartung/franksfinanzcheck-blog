@@ -63,7 +63,7 @@ Dazu kommt der Kapitalmarkt. Steigen die Zinsen allgemein, passen die Banken ihr
 **Lesetipp:** [Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
 
 
-**Lesetipp:** [Autokosten senken: So sparst du hunderte Euro jährlich](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/)
+**Lesetipp:** Autokosten senken: So sparst du hunderte Euro jährlich
 ## FAQ – die wichtigsten Fragen zur Meldung
 
 ### Warum senken Banken den Zinssatz nach der Befristung?

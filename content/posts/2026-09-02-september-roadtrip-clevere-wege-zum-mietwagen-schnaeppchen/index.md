@@ -90,7 +90,7 @@ Das richtige Zeitfenster halbiert die Kosten fast. Die 270 € steckst du besser
 
 Die Tankregelung wird oft unterschätzt. Es gibt zwei Modelle: „Voll/Voll“ und „Voll/Leer“. Sinnvoll ist nur „Voll/Voll“.
 
-Bei „Voll/Leer“ zahlst du bei der Abholung eine teure Tankfüllung plus Servicegebühr. Den Rest [Kraftstoff](../../posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/) im Tank schenkst du dem Vermieter. Das ist ein klares Verlustgeschäft.
+Bei „Voll/Leer“ zahlst du bei der Abholung eine teure Tankfüllung plus Servicegebühr. Den Rest Kraftstoff im Tank schenkst du dem Vermieter. Das ist ein klares Verlustgeschäft.
 
 | Modell | Was du zahlst | Für wen lohnt es sich |
 | :--- | :--- | :--- |
