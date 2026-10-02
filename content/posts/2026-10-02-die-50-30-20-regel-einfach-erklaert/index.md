@@ -2,7 +2,9 @@
 title: "Die 50-30-20-Regel einfach erklärt"
 description: "Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-10-02T21:37:05Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-02T21:59:29Z
+cadence_grund: "Redaktions-Standard: RS1, RS2, RS3, RS4"
 reserve_published: 2026-10-02
 tags: ["Budget planen"]
 categories: ["Ratgeber"]
