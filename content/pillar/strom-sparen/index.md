@@ -67,12 +67,12 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Einsparpotenzial Grundversorgung</div>
-      <div class="ff-radar-kpi__value">bis 35 %</div>
+      <div class="ff-radar-kpi__value">bis 35 %</div>
       <div class="ff-radar-kpi__source">Differenz Grundversorger vs. Top-Alternativtarife</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">CO₂-Preis 2026</div>
-      <div class="ff-radar-kpi__value">55–65 €/t</div>
+      <div class="ff-radar-kpi__value">55–65 €/t</div>
       <div class="ff-radar-kpi__source">Gesetzliche Staffel nach BEHG</div>
     </div>
   </div>
@@ -205,7 +205,7 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
       <input type="checkbox" id="chk-en-3" class="ff-audit-item__checkbox">
       <label for="chk-en-3" class="ff-audit-item__content">
         <strong>3. Monatsabschlag mit Rechner gegenprüfen</strong>
-        Prüfen, ob der Abschlag im Korridor ±15 % der echten Jahreskosten liegt (Nachzahlungsbremse).
+        Prüfen, ob der Abschlag im Korridor ±15 % der echten Jahreskosten liegt (Nachzahlungsbremse).
       </label>
     </li>
     <li class="ff-audit-item">
@@ -247,7 +247,7 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
       <input type="checkbox" id="chk-en-9" class="ff-audit-item__checkbox">
       <label for="chk-en-9" class="ff-audit-item__content">
         <strong>9. Kühl- und Gefriergeräte abtauen</strong>
-        Bereits eine Eisschicht von 5 mm erhöht den Stromverbrauch des Kompressors um bis zu 30 %.
+        Bereits eine Eisschicht von 5 mm erhöht den Stromverbrauch des Kompressors um bis zu 30 %.
       </label>
     </li>
     <li class="ff-audit-item">
@@ -274,26 +274,26 @@ Die folgenden beiden realitätsnahen Fallstudien zeigen, wie die systematische U
       <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Bestandsgebäude</div>
       <h3 class="ff-case-study-box__title">Familie Peters: Vollständige Heiz- &amp; Stromkosten-Sanierung</h3>
     </div>
-    <span class="ff-case-study-box__profile">👨‍👩‍👧‍👦 4 Personen · 130 m² Einfamilienhaus</span>
+    <span class="ff-case-study-box__profile">👨👩👧👦 4 Personen · 130 m² Einfamilienhaus</span>
   </div>
   <div class="ff-case-study-box__grid">
     <div class="ff-case-card">
       <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">3.740 € / Jahr</div>
+      <div class="ff-case-card__value">3.740 € / Jahr</div>
       <p class="ff-case-card__details">
-        4.200 kWh Strom in der Grundversorgung (41,5 ct/kWh + 14 €/M) = 1.911 €<br>
-        19.500 kWh Gas im Alttarif (11,8 ct/kWh + 15 €/M) = 2.481 €<br>
-        Monatliche Gesamtbelastung: <strong>311 € / Monat</strong>
+        4.200 kWh Strom in der Grundversorgung (41,5 ct/kWh + 14 €/M) = 1.911 €<br>
+        19.500 kWh Gas im Alttarif (11,8 ct/kWh + 15 €/M) = 2.481 €<br>
+        Monatliche Gesamtbelastung: <strong>311 € / Monat</strong>
       </p>
     </div>
     <div class="ff-case-card">
       <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">2.590 € / Jahr</div>
+      <div class="ff-case-card__value">2.590 € / Jahr</div>
       <p class="ff-case-card__details">
-        Stromwechsel auf 29,8 ct/kWh + 11 €/M = 1.383 €<br>
-        Gaswechsel auf 8,6 ct/kWh + 12 €/M = 1.821 €<br>
-        Minus 220 € Einsparung durch Standby-Leisten &amp; Absenkung Heizkurve um 1,5 °C<br>
-        Monatliche Gesamtbelastung: <strong>215 € / Monat</strong>
+        Stromwechsel auf 29,8 ct/kWh + 11 €/M = 1.383 €<br>
+        Gaswechsel auf 8,6 ct/kWh + 12 €/M = 1.821 €<br>
+        Minus 220 € Einsparung durch Standby-Leisten &amp; Absenkung Heizkurve um 1,5 °C<br>
+        Monatliche Gesamtbelastung: <strong>215 € / Monat</strong>
       </p>
     </div>
   </div>
@@ -307,7 +307,7 @@ Die folgenden beiden realitätsnahen Fallstudien zeigen, wie die systematische U
   </div>
   <div class="ff-case-study-box__savings">
     <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">1.150 € / Jahr (96 € / Monat)</span>
+    <span class="ff-case-study-box__savings-amount">1.150 € / Jahr (96 € / Monat)</span>
   </div>
 </div>
 
@@ -324,25 +324,25 @@ Die folgenden beiden realitätsnahen Fallstudien zeigen, wie die systematische U
   <div class="ff-case-study-box__grid">
     <div class="ff-case-card">
       <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">1.020 € / Jahr</div>
+      <div class="ff-case-card__value">1.020 € / Jahr</div>
       <p class="ff-case-card__details">
         Stromverbrauch 2.200 kWh/Jahr durch hydraulischen Durchlauferhitzer und alten Kühlschrank.<br>
-        Grundversorgungstarif (42,0 ct/kWh + 12 €/M). Abschlag: <strong>85 € / Monat</strong>.
+        Grundversorgungstarif (42,0 ct/kWh + 12 €/M). Abschlag: <strong>85 € / Monat</strong>.
       </p>
     </div>
     <div class="ff-case-card">
       <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">630 € / Jahr</div>
+      <div class="ff-case-card__value">630 € / Jahr</div>
       <p class="ff-case-card__details">
         Verbrauch durch Sparduschkopf und LED auf 1.850 kWh gesenkt.<br>
-        Neuer Ökostromtarif zu 30,5 ct/kWh + 9,50 €/M = 678 € abzgl. 80 € Neukundenbonus.<br>
-        Neuer Abschlag: <strong>52 € / Monat</strong>.
+        Neuer Ökostromtarif zu 30,5 ct/kWh + 9,50 €/M = 678 € abzgl. 80 € Neukundenbonus.<br>
+        Neuer Abschlag: <strong>52 € / Monat</strong>.
       </p>
     </div>
   </div>
   <div class="ff-case-study-box__savings">
     <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">390 € / Jahr (32,50 € / Monat)</span>
+    <span class="ff-case-study-box__savings-amount">390 € / Jahr (32,50 € / Monat)</span>
   </div>
 </div>
 

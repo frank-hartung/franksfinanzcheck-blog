@@ -39,6 +39,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Du willst finanzieller puffer? Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
 Die gute Nachricht: Du brauchst dafür kein Vermögen. In vielen Haushalten reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €. Das ist viel Geld, aber kein Fantasiewert.
@@ -126,13 +127,13 @@ Wichtig ist nicht die perfekte Zahl auf den Euro. Wichtig ist, dass du einen rea
 
 Oder direkt hier: Trag deine notwendigen Monatsausgaben ein und der Rechner zeigt dir Ziel, Lücke und die Sparrate dorthin.
 
-{{< rechner typ="notgroschen" quelle="Verbraucherzentrale / Destatis (siehe Quellen unten)" stand="September 2026" >}}
+{{< rechner typ="[notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)" quelle="Verbraucherzentrale / Destatis (siehe Quellen unten)" stand="September 2026" >}}
 
 ## Wo parkst du den Notgroschen am besten?
 
 Ein Notgroschen muss vor allem eines können: **sofort verfügbar sein**. Hohe Rendite ist hier Nebensache. Wenn du das Geld erst kündigen oder verkaufen musst, ist es für den Notfall zu träge.
 
-Darum landet der Puffer in den meisten Fällen am besten auf einem separaten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
+Darum landet der Puffer in den meisten Fällen am besten auf einem separaten Tagesgeldkonto. Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
 
 ### Kontotypen im Vergleich
 

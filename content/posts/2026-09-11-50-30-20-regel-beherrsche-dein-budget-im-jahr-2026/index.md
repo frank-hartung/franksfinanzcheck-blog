@@ -251,7 +251,7 @@ Wenn du zum Beispiel **720 €** Kfz-Kosten pro Jahr hast, sind das nicht „ir
 
 Darum wirkt die 50–30–20-Regel viel realistischer, wenn du solche Kosten auf den Monat herunterbrichst und als eigene Rücklage mit einplanst. Erst dann zeigt dir dein Budget wirklich, wie viel für Wünsche und Sparen übrig bleibt.
 
-## Für wen die Regel passt – und für wen sie schwieriger ist
+## Für wen die Regel passt und für wen sie schwieriger ist
 
 Die Methode ist stark, wenn du …
 
@@ -283,7 +283,7 @@ Wenn du durch Vertragschecks und Kündigungen **100 € pro Monat** einsparst u
 
 Darum fühlt sich die 50–30–20-Regel so wirksam an: Sie verbindet Alltag und Vermögensaufbau.
 
-> 💶 **Spar-Tipp zwischendurch:** Ein separates Sparkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum. Wenn du das System sauber aufsetzen willst, hilft ein Tagesgeldkonto oft mehr als die nächste Budget-App: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
+> 💶 **Spar-Tipp zwischendurch:** Ein separates Sparkonto macht den 20-%-Topf sichtbar und schützt ihn vor Alltagskonsum. Wenn du das System sauber aufsetzen willst, hilft ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) oft mehr als die nächste Budget-App: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
 ## Fazit: Die 50-30-20-Regel macht Geld planbar
 

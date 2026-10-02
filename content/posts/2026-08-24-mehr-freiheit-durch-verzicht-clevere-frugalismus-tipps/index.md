@@ -65,7 +65,7 @@ Die Idee ist einfach. Jeder Euro für unnötigen Konsum kostet dich Arbeitszeit.
 
 Ohne komplizierte Tabellen behältst du deine Finanzen mit der 50–30–20‑Methode im Griff:
 
-| Budget‑Block | Anteil vom Netto | Typische Ausgaben | Frugalismus‑Hebel |
+| Budget‑Block | Anteil vom Netto | Typische Ausgaben | [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)‑Hebel |
 |:---|:---|:---|:---|
 | **Fixkosten & Grundbedürfnisse** | **50 %** | Miete, Strom, Gas, DSL, Lebensmittel, Pflichtversicherungen | Durch Tarifwechsel, Mit‑Wohngemeinschaft oder Ökostrom‑Anbieter auf unter 45 % drücken |
 | **Persönliche Wünsche & Lifestyle** | **30 %** | Hobbys, Restaurant, Urlaub, Kleidung, Kultur | Bewusst genießen – 72‑Stunden‑Regel bei Käufen, Preis‑Vergleich vor jedem größeren Einkauf |
@@ -113,7 +113,7 @@ Dann ist meist nichts übrig. Setze einen Dauerauftrag direkt nach dem Gehalt. E
 4. **Rund-um-die‑Uhr‑Monitoring** – Apps wie Outbank oder MoneyControl zeigen dir sofort, wenn ein Abo überfällig ist.
 5. **Jährliche Anpassung** – prüfe im Januar, ob die 50‑30‑20‑Verteilung noch passt, und justiere die Daueraufträge.
 
-Durch diese **Automatisierung** entfallen Fehlentscheidungen aus „Ich‑hab‑gerade‑kein‑Geld‑mehr“-Situationen. Das ist ein zentraler Baustein, um **Finanzielle Freiheit** zu erreichen.
+Durch diese **Automatisierung** entfallen Fehlentscheidungen aus „Ich‑hab‑gerade‑kein‑Geld‑mehr“-Situationen. Das ist ein zentraler Baustein, um **[Finanzielle Freiheit](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/)** zu erreichen.
 
 ## Typische Ersparnis durch Frugalismus im Jahresvergleich
 

@@ -47,7 +47,7 @@ Das Problem dabei bleibt jedoch bestehen: Ein hoher Bonus auf dem Werbebanner si
 
 - Ein **DSL-Wechselbonus** ist lediglich ein Puzzleteil der Gesamtrechnung, nicht die alleinige Ersparnis.
 - Der entscheidende Vergleichswert ist immer der **Effektivpreis über 24 Monate**.
-- Aktuelle Wechselangebote ermöglichen oft Einsparungen von **ca. 10 € bis 25 € pro Monat** im Vergleich zu veralteten Bestandskundentarifen.
+- Aktuelle Wechselangebote ermöglichen oft Einsparungen von **ca. 10 € bis 25 € pro Monat** im Vergleich zu veralteten Bestandskundentarifen.
 - Vermeide es in der Regel, selbst zu kündigen; überlasse den Wechselprozess dem neuen Anbieter, um Ausfälle zu minimieren.
 - Beachte versteckte Kosten wie Routermiete und Bereitstellungsgebühren in deiner Kalkulation.
 - Ein frühzeitiger Vergleich – etwa drei bis sechs Monate vor Vertragsende – schützt vor Zeitdruck.
@@ -73,7 +73,7 @@ Wichtig ist dabei, genau zu differenzieren, **wie** dieser Vorteil verrechnet wi
 
 ## Der häufigste Denkfehler: Bonus mit Ersparnis verwechseln
 
-Ein Tarif, der mit einem **ca. 200 € bis 300 € Bonus** wirbt, wirkt zunächst unschlagbar. Wenn dieser Vertrag jedoch ab dem 13. Monat massiv im Preis steigt oder eine hohe monatliche Routermiete fällig wird, kann die Bilanz am Ende der 24 Monate schlechter ausfallen als bei einem Tarif mit geringerem Bonus, aber stabiler Grundgebühr.
+Ein Tarif, der mit einem **ca. 200 € bis 300 € Bonus** wirbt, wirkt zunächst unschlagbar. Wenn dieser Vertrag jedoch ab dem 13. Monat massiv im Preis steigt oder eine hohe monatliche Routermiete fällig wird, kann die Bilanz am Ende der 24 Monate schlechter ausfallen als bei einem Tarif mit geringerem Bonus, aber stabiler Grundgebühr.
 
 Es gilt weiterhin die goldene Regel:
 
@@ -83,13 +83,13 @@ Es gilt weiterhin die goldene Regel:
 
 | Posten | Tarif A (Hoher Bonus) | Tarif B (Fairer Grundpreis) |
 |---|---:|---:|
-| Grundgebühr Monat 1–12 | ca. 19,99 € | ca. 24,99 € |
-| Grundgebühr Monat 13–24 | ca. 54,99 € | ca. 39,99 € |
-| Anschlussgebühr | ca. 69,99 € | ca. 0,00 € |
-| Routermiete 24 Monate | ca. 190,00 € | ca. 0,00 € |
-| Bonus / Cashback | ca. -250,00 € | ca. -80,00 € |
-| **Gesamt 24 Monate** | **ca. 909,75 €** | **ca. 699,76 €** |
-| **Effektiv pro Monat** | **ca. 37,90 €** | **ca. 29,15 €** |
+| Grundgebühr Monat 1–12 | ca. 19,99 € | ca. 24,99 € |
+| Grundgebühr Monat 13–24 | ca. 54,99 € | ca. 39,99 € |
+| Anschlussgebühr | ca. 69,99 € | ca. 0,00 € |
+| Routermiete 24 Monate | ca. 190,00 € | ca. 0,00 € |
+| Bonus / Cashback | ca. -250,00 € | ca. -80,00 € |
+| **Gesamt 24 Monate** | **ca. 909,75 €** | **ca. 699,76 €** |
+| **Effektiv pro Monat** | **ca. 37,90 €** | **ca. 29,15 €** |
 
 Wie das Beispiel zeigt, kann Tarif B trotz deutlich geringerem Bonus über die gesamte Laufzeit die günstigere Wahl sein. Lass dich also nicht von großen Zahlen blenden.
 
@@ -128,7 +128,7 @@ Dies ist die unkomplizierteste Variante. Der Bonus wird direkt mit deinen ersten
 Diese Boni sind oft sehr hoch, erfordern aber meist Eigeninitiative. In der Regel musst du nach der Schaltung des Anschlusses die erste Rechnung im Portal hochladen. Wer hier Fristen versäumt, verliert bares Geld.
 
 ### 3. Freimonate oder stark reduzierte Startpreise
-Hier wird der Bonus indirekt gewährt. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) einen sehr niedrigen Betrag von **ca. 10 € bis 20 €**, bevor der Preis auf das Normalniveau steigt.
+Hier wird der Bonus indirekt gewährt. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) einen sehr niedrigen Betrag von **ca. 10 € bis 20 €**, bevor der Preis auf das Normalniveau steigt.
 
 ### 4. Hardware-Zuschuss
 Einige Anbieter locken mit hochwertigen Routern oder Spielekonsolen. Prüfe hier genau, ob du die Hardware wirklich benötigst oder ob ein direkter Preisnachlass nicht wertvoller für dich wäre.
@@ -138,7 +138,7 @@ Einige Anbieter locken mit hochwertigen Routern oder Spielekonsolen. Prüfe hier
 Ein Wechsel ist im aktuellen Marktumfeld (Stand: Oktober 2026) besonders ratsam, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100-250 Mbit/s) zahlst,
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100-250 Mbit/s) zahlst,
 - du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
@@ -149,7 +149,7 @@ Oft lässt sich durch einen Wechsel nicht nur der Preis drücken, sondern auch d
 
 Ein massiver Bonus sollte niemals über mangelhafte Leistung oder horrende Folgekosten hinwegtäuschen. Kritisch wird es immer dann, wenn der Tarif ab dem zweiten Jahr so teuer wird, dass er die anfängliche Ersparnis komplett auffrisst. Auch versteckte Kosten für Service-Optionen, die sich nach drei Probemonaten automatisch in kostenpflichtige Abos verwandeln, sind Warnsignale.
 
-Achte zudem auf die Router-Thematik: Eine monatliche Miete von **ca. 6 € bis 9 €** summiert sich über zwei Jahre auf eine stattliche Summe, die den "tollen Bonus" schnell relativiert.
+Achte zudem auf die Router-Thematik: Eine monatliche Miete von **ca. 6 € bis 9 €** summiert sich über zwei Jahre auf eine stattliche Summe, die den "tollen Bonus" schnell relativiert.
 
 ## Warum du nicht bis zur letzten Woche warten solltest
 
@@ -170,8 +170,8 @@ Dies ist oft ein unterschätzter Kostenfaktor in der Kalkulation des Effektivpre
 
 ### Rechenbeispiel Routermiete
 
-- Monatliche Gebühr: ca. 7,50 €
-- Gesamtkosten auf 24 Monate: **180,00 €**
+- Monatliche Gebühr: ca. 7,50 €
+- Gesamtkosten auf 24 Monate: **180,00 €**
 
 Nach zwei Jahren hast du viel Geld bezahlt, aber das Gerät gehört dir nicht. Ein Kaufgerät der Mittelklasse kostet oft ähnlich viel, kann aber über viele Jahre und bei verschiedenen Anbietern genutzt werden.
 
@@ -234,9 +234,9 @@ Besonders attraktiv sind Tarife, die eine Preisgarantie über die vollen 24 Mona
 
 ## Ein realistisches Sparbeispiel für einen normalen Haushalt
 
-Angenommen, du zahlst für einen alten DSL-Vertrag aktuell **ca. 49 € pro Monat**. Ein aktueller Vergleichstarif bietet dir einen **Effektivpreis von ca. 31 € pro Monat**.
+Angenommen, du zahlst für einen alten DSL-Vertrag aktuell **ca. 49 € pro Monat**. Ein aktueller Vergleichstarif bietet dir einen **Effektivpreis von ca. 31 € pro Monat**.
 
-Dies entspricht einer Ersparnis von **18 € monatlich**. Auf die Mindestlaufzeit von zwei Jahren gerechnet, sparst du somit **432 €**. Inklusive eines Cashbacks kann die Gesamtersparnis sogar die 500-Euro-Marke knacken.
+Dies entspricht einer Ersparnis von **18 € monatlich**. Auf die Mindestlaufzeit von zwei Jahren gerechnet, sparst du somit **432 €**. Inklusive eines Cashbacks kann die Gesamtersparnis sogar die 500-Euro-Marke knacken.
 
 Diese Summe ist eine erhebliche Entlastung für das Haushaltsbudget, die du mit nur wenigen Klicks realisieren kannst.
 
@@ -268,13 +268,13 @@ Entscheidend für deinen Geldbeutel bleibt die Summe, die unter dem Strich nach 
 Es handelt sich um einen finanziellen Anreiz für Neukunden, der in Form von Gutschriften, Cashbacks oder Hardware-Vergünstigungen gewährt wird, um den Anbieterwechsel attraktiver zu machen.
 
 ### Wie hoch kann die Ersparnis realistisch sein?
-Je nach Ausgangslage und gewähltem Tarif sparen Haushalte durch den Wechsel oft zwischen **ca. 300 € und 500 €** über die gesamte Vertragslaufzeit von zwei Jahren.
+Je nach Ausgangslage und gewähltem Tarif sparen Haushalte durch den Wechsel oft zwischen **ca. 300 € und 500 €** über die gesamte Vertragslaufzeit von zwei Jahren.
 
 ### Ist Cashback besser als eine direkte Gutschrift?
 Das kommt auf deine Disziplin an. Gutschriften auf der Rechnung sind bequemer, da sie automatisch erfolgen. Cashbacks sind oft höher, müssen aber meist aktiv durch das Einreichen von Dokumenten angefordert werden.
 
 ### Sollte ich meinen Router mieten oder kaufen?
-Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). In vielen Fällen ist der Kauf eines eigenen Geräts nach zwei Jahren die günstigere Variante, da das Gerät in dein Eigentum übergeht.
+Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). In vielen Fällen ist der Kauf eines eigenen Geräts nach zwei Jahren die günstigere Variante, da das Gerät in dein Eigentum übergeht.
 
 ### Wie früh sollte ich mit dem Wechsel anfangen?
 Idealerweise beginnst du **ca. 3 bis 6 Monate** vor Ende deiner Vertragslaufzeit mit dem Vergleich. So hast du genug Zeit, um die besten Bonus-Aktionen abzupassen.

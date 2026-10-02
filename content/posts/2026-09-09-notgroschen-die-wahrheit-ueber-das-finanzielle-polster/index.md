@@ -38,6 +38,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Wenn die Waschmaschine ausläuft oder das Auto plötzlich in die Werkstatt muss, wird aus einem normalen Dienstag schnell ein teurer Tag. Genau dafür ist ein [Notgroschen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) da. Er hält dich handlungsfähig und verhindert, dass du sofort den Dispo, eine Kreditkarte oder einen Ratenkredit brauchst.
 
 Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft daneben. Entscheidend ist nicht dein Gehalt, sondern das Geld, das du jeden Monat wirklich brauchst. Wer hohe Fixkosten hat, braucht meist mehr Reserve als jemand mit kleiner Wohnung und stabilem Job.
@@ -162,13 +163,13 @@ Der Zielbetrag entmutigt viele. Deshalb funktioniert der Aufbau in Stufen besser
 
 | Stufe | Zielmarke | Was sie dir bringt |
 |---|---|---|
-| 1 | **1.000 € Sofortpuffer** | fängt die häufigsten Alltagsreparaturen ab |
+| 1 | **1.000 € Sofortpuffer** | fängt die häufigsten Alltagsreparaturen ab |
 | 2 | **ein voller Monatsbedarf** | nimmt kurzfristigem Budgetstress die Schärfe |
 | 3 | **drei bis sechs Monatsausgaben** | trägt auch eine Einkommenslücke |
 
 Genau nach dem ersten Tausender bleiben viele zu lange stehen. Setz dir deshalb sofort Stufe 2 als nächstes Ziel.
 
-**Schritt 3 – die Rate automatisieren.** Ein kleiner Dauerauftrag direkt nach Gehaltseingang schlägt jeden guten Vorsatz. Oft reichen 25, 50 oder 100 € im Monat. Das wirkt unspektakulär, bringt dich aber verlässlicher ans Ziel als ein kurzer, zu ehrgeiziger Sprint. Läuft die Rate drei Monate sauber, prüfe 10 bis 20 € mehr – kleine Anpassungen halten länger als ein einmalig zu großer Sprung.
+**Schritt 3 – die Rate automatisieren.** Ein kleiner Dauerauftrag direkt nach Gehaltseingang schlägt jeden guten Vorsatz. Oft reichen 25, 50 oder 100 € im Monat. Das wirkt unspektakulär, bringt dich aber verlässlicher ans Ziel als ein kurzer, zu ehrgeiziger Sprint. Läuft die Rate drei Monate sauber, prüfe 10 bis 20 € mehr – kleine Anpassungen halten länger als ein einmalig zu großer Sprung.
 
 **Schritt 4 – Zwischenstände feiern.** Schau nach drei Monaten auf die erste Zwischensumme und nach sechs Monaten nicht auf den Kontostand, sondern auf die Zahl deiner Monatsausgaben: Deckt der Puffer schon einen halben oder vollen Monatsbedarf? Diese Marke hält den Aufbau ruhiger als der ferne Blick aufs Endziel.
 

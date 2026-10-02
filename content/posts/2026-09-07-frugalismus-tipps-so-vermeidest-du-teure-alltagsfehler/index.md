@@ -41,6 +41,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Frugalismus im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
@@ -123,7 +124,7 @@ Wir leben in einer Abo-Wirtschaft: Software, Streaming, Fitnessstudio oder Zeits
 
 Gehe deshalb einmal im Quartal deine Kontoauszüge durch. Identifiziere jede automatische Abbuchung. Frage dich bei jedem Posten: „Habe ich diesen Dienst im letzten Monat wirklich genutzt?“ Wenn die Antwort nein lautet, kündige sofort. Viele Anbieter lassen dich monatlich aussteigen, was dir maximale Flexibilität gibt.
 
-Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme, Magazine und teils sogar Streaming-Zugänge. Wer Fixkosten so drückt, gewinnt Spielraum ohne täglichen Verzicht-Stress – einer der stärksten Hebel beim **[Geld sparen im Alltag](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)**.
+Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme, Magazine und teils sogar Streaming-Zugänge. Wer Fixkosten so drückt, gewinnt Spielraum ohne täglichen Verzicht-Stress – einer der stärksten Hebel beim **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)**.
 
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 
@@ -214,7 +215,7 @@ Teure Alltagsfehler entstehen nicht aus Schwäche, sondern aus fehlender Struktu
 Fang mit einem einzigen Schritt an: Verschiebe heute einen Kauf um 24 Stunden und kündige morgen ein Abo, das du seit Monaten nicht genutzt hast. Prüfe deine Fixkosten einmal im Jahr, halte den Unterschied schriftlich fest – fünf Minuten reichen.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
+**Lesetipp:** Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
 
 ## Häufige Fragen
 

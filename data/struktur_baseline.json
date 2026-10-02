@@ -299,6 +299,31 @@
       "mikro": 3,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-10-02-die-50-30-20-regel-einfach-erklaert": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
+      "mikro": 5,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -307,5 +332,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-10-01"
+  "stand": "2026-10-02"
 }

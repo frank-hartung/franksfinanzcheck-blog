@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 
 In über 90 % der Fälle liegt das nicht an der Leitung. Es fehlt an Funkabdeckung in den eigenen vier Wänden. Dicke Wände bremsen das Signal. Auch Fußbodenheizung und elektrische Störquellen tun das.
 
-Die folgenden Schritte zeigen dir, wie du dein **WLAN verbessern** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
+Die folgenden Schritte zeigen dir, wie du dein **[WLAN verbessern](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)** kannst. Die Skala reicht von kostenlosen Sofort-Maßnahmen bis zur Profi-Lösung. So bekommst du im ganzen Haus stabiles Netz. Schon kleine Standortwechsel bringen oft überraschend viel.
 
 ---
 

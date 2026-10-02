@@ -41,6 +41,7 @@ faktencheck: "2026-09-27"
 
 
 
+
 Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden.
 
 Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erreichen? Dann löse zuerst die Ketten im Kopf. Wer nur Statussymbolen jagt, bleibt Sklave seiner Ausgaben.
@@ -166,7 +167,7 @@ Rechne das Endkapital mit realer Rendite (nominale Rendite – Inflation). B
 
 Starte heute mit deiner Bestandsaufnahme. Liste alle Einnahmen, Ausgaben und Schulden auf – zwei Wochen [Haushaltsbuch](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/) reichen, um die Posten zu sehen, die wirklich Bewegung zulassen. Sei ehrlich zu dir, nur Fakten helfen weiter.
 
-Bilde zuerst einen [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/). Drei bis sechs Monatsausgaben sind ein guter Wert. Lege sie auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/).
+Bilde zuerst einen Notgroschen. Drei bis sechs Monatsausgaben sind ein guter Wert. Lege sie auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/).
 
 So schützt du dich bei Jobverlust oder Reparaturen. Tilge danach teure Kredite und den Dispo. Ohne Schulden startet jeder Anleger besser.
 
