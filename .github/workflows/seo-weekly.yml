@@ -168,8 +168,13 @@ jobs:
         # ihre Änderungen (falls vorhanden) landen sonst im Fangnetz-Schritt.
         continue-on-error: true
         run: |
+          # Selbsttest vor dem Schreiben + Shortcode-Fangnetz danach
+          # (WF-1F8C #522: Linker zerriss {{< rechner typ="…" >}} → Build tot).
+          python3 scripts/internal_linker.py --selftest
           python3 scripts/internal_linker.py --apply --max 5 | tee /tmp/internal_link_log.txt \
             || echo "::warning::Internal-Linker fehlgeschlagen (nicht kritisch, Rest siehe Log)"
+          python3 scripts/shortcode_guard.py --fix \
+            || echo "::warning::Shortcode-Wache – Restfunde siehe Log"
           python3 scripts/draft_link_healer.py --fix \
             || echo "::warning::Draft-Link-Heiler fehlgeschlagen (nicht kritisch)"
           git config user.name "SEO-Bot"

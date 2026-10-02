@@ -42,6 +42,12 @@ jobs:
           sudo apt-get install -y -qq hunspell hunspell-de-de
       - name: Recover deterministic holds and queue
         run: |
+          # Shortcode-Wache ZUERST (WF-1F8C #522): ein Markdown-Link in einem
+          # Shortcode-Parameter toetet den Hugo-Build blog-weit – genau das
+          # liess beide Endkontrollen am 02.10. rot laufen. Selbstheilung hier
+          # macht die Endkontrolle immun gegen bereits committeten Schaden.
+          python3 scripts/shortcode_guard.py --selftest
+          python3 scripts/shortcode_guard.py --fix
           python3 scripts/fix_url_hygiene.py --fix
           python3 scripts/fix_url_hygiene.py --heal-holds
           python3 scripts/cadence_guard.py --fix

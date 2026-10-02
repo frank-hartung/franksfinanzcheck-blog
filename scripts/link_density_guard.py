@@ -213,6 +213,13 @@ def main():
             subprocess.run([sys.executable, os.path.join(ROOT, "scripts",
                             "internal_linker.py"), "--apply", "--max", "3"],
                            cwd=ROOT, check=False)
+            # Fangnetz WF-1F8C (#522): sollte je ein Linker-Insert einen
+            # Shortcode-Parameter zerreissen ({{< rechner typ="[…](…)" >}}
+            # = Hugo-Build blog-weit tot), wird er HIER entlinkt – im
+            # selben Lauf, nie im Commit.
+            subprocess.run([sys.executable, os.path.join(ROOT, "scripts",
+                            "shortcode_guard.py"), "--fix"],
+                           cwd=ROOT, check=False)
             posts = scan_posts()
             healed_low = [p["slug"] for p in scan_posts()
                           if p["n"] >= MIN_LINKS and p["slug"] in {x["slug"] for x in low}]
