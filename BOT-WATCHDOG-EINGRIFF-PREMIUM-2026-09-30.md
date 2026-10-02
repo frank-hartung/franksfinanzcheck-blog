@@ -80,6 +80,32 @@ Quellenstand ab (Frontmatter + Affiliate-Gateways pro Artikel, Layouts,
 Pin-Assets, Skripte – Report-Schema 3). Eine Stilpolitur entwertet den
 Nachweis nicht mehr; ein neues Pin-Feld oder ein neuer Gateway-Link sehr wohl.
 
+### Schicht 5 – Bestätigte Heilung schließt den richtigen Alarm sofort
+**Nachtrag 03.10.2026, Issue #520:** Der Watchdog dispatcht die
+`content-reserve.yml` asynchron. Selbst wenn deren hartes End-Gate später
+wieder grün war, blieb das generische Automations-Ticket bisher bis zum
+nächsten Tageslauf des Watchdogs sichtbar – ein gelöster Vorfall wirkte damit
+unnötig offen.
+
+Nach einem erfolgreichen `reserve_gate.py` startet eine explizit vom
+Watchdog ausgelöste Reserve-Reparatur deshalb jetzt
+`watchdog_recovery.py --reconcile`. Der reguläre Nachtlauf bleibt davon
+bewusst ausgenommen: Er soll keine vorgezogene, noch transiente Lagebewertung
+unabhängiger Wachen erzeugen. Der Broker verwendet ausdrücklich die bestehenden
+SSOTs `bot_watchdog.py --emit-env` und `--route`: Er misst die **gesamte** Lage
+neu, statt nur auf das grüne Reserve-Gate zu vertrauen. `alert_router.py`
+schließt das Ticket folglich ausschließlich dann, wenn kein
+maschinell behebbarer Befund mehr übrig ist; ein gleichzeitig auftretendes
+Deploy-, Kadenz-, Syntax- oder Affiliate-Problem bleibt sichtbar und
+aktualisiert den Vorgang. Der versionierte Routing-Zustand wird anschließend
+separat gesichert.
+
+Scheitert diese Bestätigung (GitHub API, Router, Push), wird das nicht als
+Bestandsfehler ausgegeben: Der erfolgreiche Reserve-Nachweis bleibt gültig,
+der Fehler steht als sichtbare Warnung im Lauf und der planmäßige Watchdog
+versucht den Abgleich erneut. So kann weder ein offener Schein-Vorfall noch
+kein Melder zum Incident werden.
+
 ---
 
 ## 3. Sofort-Wirkung in diesem Commit

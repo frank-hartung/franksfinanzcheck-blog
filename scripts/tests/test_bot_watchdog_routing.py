@@ -18,15 +18,18 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import alert_router as ar  # noqa: E402
 import bot_watchdog as bw  # noqa: E402
+import watchdog_recovery as recovery  # noqa: E402
 
 # Zeit-Anker relativ zur echten Uhr: der Watchdog misst die Lagebild-Frische an
 # now() (Fenster: STATE_MAX_AGE_HOURS = 48 h). Ein absolut datierter Anker ist eine
@@ -286,6 +289,99 @@ class ReserveBefundRoutetNachUrsache(unittest.TestCase):
         self._diagnose(certified=0, drifted=["a"])
         f = bw.reserve_finding("Reserve unter Mindestbestand (…)")
         self.assertIn("Content-Reserve niedrig", f.title)
+
+
+class ReserveRecoveryReconciliationTest(unittest.TestCase):
+    """#520: Ein erfolgreicher Heiler muss seinen Alarm vollständig abgleichen.
+
+    Der Content-Reserve-Lauf darf sein eigenes grünes Zertifikat nicht direkt
+    zum Schließen des generischen Tickets verwenden: Es könnten parallel
+    andere maschinelle Befunde offen sein. Der Broker muss daher stets erst
+    ``--emit-env`` (Gesamtmessung) und dann ``--route`` (zentraler
+    Schließpfad) in genau dieser Reihenfolge ausführen.
+    """
+
+    def _environment(self):
+        return mock.patch.dict(os.environ, {
+            "GH_TOKEN": "test-token",
+            "GITHUB_REPOSITORY": "frank-hartung/franksfinanzcheck-blog",
+        }, clear=False)
+
+    def test_reconcile_measures_before_it_routes(self):
+        calls = []
+
+        def fake_run(command):
+            calls.append(command)
+            return subprocess.CompletedProcess(command, 0, "ok", "")
+
+        with self._environment(), \
+                mock.patch.object(recovery.shutil, "which", return_value="/usr/bin/gh"), \
+                mock.patch.object(recovery, "_run", side_effect=fake_run):
+            self.assertEqual(recovery.reconcile_after_reserve(), 0)
+
+        self.assertEqual(calls, [
+            [sys.executable, str(recovery.WATCHDOG), "--emit-env"],
+            [sys.executable, str(recovery.WATCHDOG), "--route"],
+        ])
+
+    def test_reconcile_does_not_route_after_failed_measurement(self):
+        failed = subprocess.CompletedProcess(
+            [sys.executable, str(recovery.WATCHDOG), "--emit-env"], 7, "", "Messung kaputt")
+        with self._environment(), \
+                mock.patch.object(recovery.shutil, "which", return_value="/usr/bin/gh"), \
+                mock.patch.object(recovery, "_run", return_value=failed) as runner:
+            self.assertEqual(recovery.reconcile_after_reserve(), 7)
+        runner.assert_called_once_with([sys.executable, str(recovery.WATCHDOG), "--emit-env"])
+
+    def test_dispatch_marks_the_child_as_watchdog_recovery(self):
+        commands = []
+
+        def fake_run(command):
+            commands.append(command)
+            if command[:3] == ["gh", "run", "list"]:
+                return subprocess.CompletedProcess(command, 0, "[]", "")
+            return subprocess.CompletedProcess(command, 0, "", "")
+
+        with self._environment(), \
+                mock.patch.object(recovery.shutil, "which", return_value="/usr/bin/gh"), \
+                mock.patch.object(recovery, "_run", side_effect=fake_run):
+            self.assertEqual(recovery.trigger_reserve(), 0)
+
+        self.assertEqual(commands[-1], [
+            "gh", "workflow", "run", recovery.WORKFLOW, "--ref", recovery.REF,
+            "--field", f"{recovery.RECOVERY_INPUT}=true",
+        ])
+
+    def test_reconcile_requires_action_context(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(recovery.reconcile_after_reserve(), 2)
+
+
+class ContentReserveWorkflowHandoffTest(unittest.TestCase):
+    """Der Workflow darf den Abgleich nicht wieder hinter dem Gate verlieren."""
+
+    ROOT = Path(__file__).resolve().parents[2]
+    WORKFLOW = ROOT / ".github" / "workflows" / "content-reserve.yml"
+
+    def test_validated_repair_reconciles_the_alarm_and_persists_its_state(self):
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        gate = text.index("name: Stock shortage must not look successful")
+        reconcile = text.index("name: Watchdog nach bestätigter Reserve-Reparatur abgleichen")
+        persist = text.index("name: Routing-Zustand nach Reserve-Reparatur sichern")
+
+        self.assertLess(gate, reconcile,
+                        "Erst der harte Reserve-Beweis, dann der Alarm-Abgleich")
+        self.assertLess(reconcile, persist,
+                        "Der Router-Zustand muss nach der Zustellung gesichert werden")
+        self.assertIn("actions: read", text)
+        self.assertIn("issues: write", text)
+        self.assertIn("watchdog_recovery:", text)
+        self.assertIn("python3 scripts/watchdog_recovery.py --reconcile", text)
+        recovery_condition = ("if: ${{ success() && github.event_name == 'workflow_dispatch' "
+                              "&& inputs.watchdog_recovery == true }}")
+        self.assertIn(recovery_condition, text[reconcile:])
+        self.assertIn("git add data/alert_router_state.json", text[persist:])
+        self.assertIn("BRANCH=main scripts/git_sync.sh --push-only", text[persist:])
 
 
 if __name__ == "__main__":

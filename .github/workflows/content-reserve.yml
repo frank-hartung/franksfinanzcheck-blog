@@ -197,10 +197,21 @@ name: Content-Reserve (täglicher Vorrat)
 on:
   schedule:
     - cron: "25 3 * * *"
-  workflow_dispatch: { }
+  workflow_dispatch:
+    inputs:
+      watchdog_recovery:
+        description: "Vom Bot-Watchdog ausgelöste Reserve-Heilung: nach grünem Gate Alarm sofort neu bewerten"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
+  # Der Lauf schließt einen von ihm NACHWEISLICH geheilten Watchdog-Befund
+  # nicht blind, sondern lässt den zentralen Router die komplette Lage neu
+  # bewerten. Dafür braucht der Router Workflow-Lese- und Issue-Schreibrecht.
+  actions: read
+  issues: write
 
 concurrency:
   group: content-bot
@@ -415,3 +426,47 @@ jobs:
       - name: Stock shortage must not look successful
         if: ${{ !cancelled() }}
         run: python3 scripts/reserve_gate.py
+
+      # Der Watchdog startet die Reserve bei einem Engpass asynchron. Vorher
+      # blieb sein Automations-Ticket deshalb bis zum nächsten Tageslauf offen,
+      # obwohl genau dieser Lauf den Bestand bereits am harten Gate bewiesen
+      # hatte. Nur der explizit markierte Watchdog-Recovery-Lauf schließt die
+      # Schleife unmittelbar; der reguläre Nachtlauf bleibt von einer zu
+      # frühen Lagebewertung unabhängiger Wachen frei. Die Schleife ist NIE blind:
+      # Der Broker misst alle Watchdog-Signale frisch und der zentrale Router
+      # schließt das Ticket nur ohne *irgendeinen* maschinellen Restbefund.
+      # Routing-Ausfälle werden sichtbar protokolliert, entwerten aber keinen
+      # erfolgreich zertifizierten Bestand; der nächste Watchdog versucht es
+      # erneut (ein Melder darf nicht selbst zum Incident werden).
+      - name: Watchdog nach bestätigter Reserve-Reparatur abgleichen
+        if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.watchdog_recovery == true }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python3 scripts/watchdog_recovery.py --reconcile
+          CODE=$?
+          set -e
+          echo "watchdog_reconciliation_exit=$CODE" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$CODE" -ne 0 ]; then
+            echo "::warning::Reserve ist grün, aber der Watchdog-Abgleich konnte nicht vollständig zustellen (Exit $CODE). Der planmäßige Watchdog wiederholt die Zustellung."
+          fi
+
+      # alert_router.py speichert Kanalzustand (Ticket, Eskalationsstufe,
+      # Schließzeitpunkt) versioniert. Ohne diesen kleinen, gesonderten Commit
+      # wäre die gerade bestätigte Selbstheilung beim nächsten Lauf vergessen.
+      - name: Routing-Zustand nach Reserve-Reparatur sichern
+        if: ${{ success() && github.event_name == 'workflow_dispatch' && inputs.watchdog_recovery == true }}
+        continue-on-error: true
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add data/alert_router_state.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Routing-Zustand unverändert."
+          elif ! git commit -m "chore(watchdog): Reserve-Heilung abgeglichen"; then
+            echo "::warning::Routing-Zustand konnte nicht committed werden."
+          elif ! BRANCH=main scripts/git_sync.sh --push-only; then
+            echo "::warning::Routing-Zustand konnte nicht nach main gepusht werden."
+          fi
