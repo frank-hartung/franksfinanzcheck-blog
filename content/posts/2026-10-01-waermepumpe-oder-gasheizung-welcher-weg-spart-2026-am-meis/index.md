@@ -53,7 +53,9 @@ Im Neubau kombinierst du das System ideal mit einer Fußbodenheizung, weil die n
 | Sole‑Wasser (Erdwärme) | Erdreich (Sonden oder Flächenkollektor) | **Vorteil:** konstanter COP (3,8–4,5) das ganze Jahr. **Nachteil:** höhere Installationskosten, Bohrungen nötig. | 5–20 |
 | Wasser‑Wasser | Grundwasser | **Vorteil:** höchster COP (4,5–5,0). **Nachteil:** Genehmigungspflicht, Grundwasserqualität muss geprüft werden. | 6–25 |
 
-## Warum lohnt sich eine Wärmepumpe im Vergleich zu Gas? Gaspreise bleiben ein unberechenbares Risiko für deine Finanzplanung. Politische Krisen, Lieferengpässe und CO₂‑Abgaben treiben die Kosten oft schlagartig nach oben. Strompreise schwanken zwar ebenfalls, doch die hohe Effizienz der Wärmepumpe schützt dein Budget vor extremen Ausschlägen.
+## Warum lohnt sich eine Wärmepumpe im Vergleich zu Gas?
+
+Gaspreise bleiben ein unberechenbares Risiko für deine Finanzplanung. Politische Krisen, Lieferengpässe und CO₂‑Abgaben treiben die Kosten oft schlagartig nach oben. Strompreise schwanken zwar ebenfalls, doch die hohe Effizienz der Wärmepumpe schützt dein Budget vor extremen Ausschlägen.
 
 - **Kostenkontrolle:** Bei einem COP = 4 brauchst du für 15 000 kWh Wärme nur 3 750 kWh Strom. Selbst bei einem Strompreis von 35 ¢/kWh beträgt der Jahresverbrauch 1 312 €, während ein Gaspreis von 12 ¢/kWh für dieselbe Wärme 1 800 € kosten würde.
 - **CO₂‑Reduktion:** Eine Luft‑Wasser‑Wärmepumpe spart im Schnitt 5 t CO₂ pro Jahr gegenüber einer Gasheizung (Ausgangswert 200 g/kWh). Das wirkt sich positiv auf mögliche zukünftige CO₂‑Steuern aus.
@@ -140,7 +142,9 @@ Im Neubau kombinierst du das System ideal mit einer Fußbodenheizung, weil die n
 | Hamburg | Altbau, 120 m² | 15 | Luft‑Wasser‑WP | 5 200 | 14 000 € | 35 % (BAFA) | 1 350 € (Strom) | 8 Jahre |
 | Sachsen | Neubau, 180 m² | 10 | Wasser‑Wasser‑WP | 3 800 | 22 000 € | 45 % (KfW) | 1 050 € (Strom) | 7 Jahre |
 
-## Fazit – Wärmepumpe oder Gasheizung? Die Wärmepumpe gewinnt den Heizung Vergleich, wenn du langfristig planst und deine Finanzen sichern willst. Du bist geschützt vor explodierenden Rohstoffpreisen und deine monatliche Belastung sinkt. Gas bleibt lediglich für sehr knappe Budgets ohne Zugang zu Förderkrediten eine kurzfristige Alternative. Dein individueller Wärmebedarf und der Zustand deiner Dämmung bestimmen den Erfolg. Nutze diesen Heizung Vergleich als Basis für dein Gespräch mit dem Fachhandwerker.
+## Fazit – Wärmepumpe oder Gasheizung?
+
+Die Wärmepumpe gewinnt den Heizung Vergleich, wenn du langfristig planst und deine Finanzen sichern willst. Du bist geschützt vor explodierenden Rohstoffpreisen und deine monatliche Belastung sinkt. Gas bleibt lediglich für sehr knappe Budgets ohne Zugang zu Förderkrediten eine kurzfristige Alternative. Dein individueller Wärmebedarf und der Zustand deiner Dämmung bestimmen den Erfolg. Nutze diesen Heizung Vergleich als Basis für dein Gespräch mit dem Fachhandwerker.
 
 
 
@@ -149,19 +153,33 @@ Im Neubau kombinierst du das System ideal mit einer Fußbodenheizung, weil die n
 
 ## Häufige Fragen
 
-### Wie viel Strom verbraucht eine typische Wärmepumpe pro Jahr? Dein Verbrauch hängt stark von der Effizienz und dem Gebäudezustand ab. Bei einem Bedarf von 15 000 kWh Wärme und dem COP von 4 benötigst du circa 3 750 kWh Strom. Bei einem COP von 3,5 steigt der Stromverbrauch auf 4 285 kWh.
+### Wie viel Strom verbraucht eine typische Wärmepumpe pro Jahr?
 
-### Lohnt sich die Wärmepumpe bei hohen Strompreisen? Ja, denn die Effizienz gleicht die Strompreise aus. Selbst bei 35 ¢ / kWh Strom heizt du mit einer guten Wärmepumpe oft günstiger als mit Gas für 12 ¢ / kWh. Der entscheidende Faktor bleibt der COP – je höher, desto weniger wirkt sich ein steigender Strompreis aus.
+Dein Verbrauch hängt stark von der Effizienz und dem Gebäudezustand ab. Bei einem Bedarf von 15 000 kWh Wärme und dem COP von 4 benötigst du circa 3 750 kWh Strom. Bei einem COP von 3,5 steigt der Stromverbrauch auf 4 285 kWh.
 
-### Welche Förderprogramme stehen 2026 zur Verfügung? Du nutzt weiterhin die lukrativen Programme der KfW und des BAFA. Diese decken je nach System bis zu 40 % deiner Kosten für erneuerbare Energien. Zusätzlich gibt es das **Bundesprogramm „Heizen mit erneuerbaren Energien“**, das 2026 einen zusätzlichen Bonus von 5 % für Luft‑Wasser‑Wärmepumpen in Kombination mit einer Photovoltaik‑Anlage bietet.
+### Lohnt sich die Wärmepumpe bei hohen Strompreisen?
 
-### Muss ich meine Heizkörper austauschen, wenn ich auf Wärmepumpe umsteige? Oft reicht es, einzelne Heizkörper gegen größere Modelle zu tauschen. Eine Fußbodenheizung ist kein Muss, steigert aber die Wirtschaftlichkeit deiner Anlage enorm, weil sie mit niedrigeren Vorlauftemperaturen arbeitet.
+Ja, denn die Effizienz gleicht die Strompreise aus. Selbst bei 35 ¢ / kWh Strom heizt du mit einer guten Wärmepumpe oft günstiger als mit Gas für 12 ¢ / kWh. Der entscheidende Faktor bleibt der COP – je höher, desto weniger wirkt sich ein steigender Strompreis aus.
 
-### Wie lange dauert die Amortisation im Durchschnitt? In den meisten Fällen hast du dein eingesetztes Kapital nach 7 bis 12 Jahren wieder eingespielt. Hohe Förderquoten verkürzen diesen Zeitraum oft auf unter 8 Jahre.
+### Welche Förderprogramme stehen 2026 zur Verfügung?
 
-### Was passiert, wenn ich meine Immobilie in 10 Jahren verkaufe? Eine moderne Wärmepumpe erhöht den Marktwert deiner Immobilie um durchschnittlich 5–8 % – vor allem in Regionen mit hohen CO₂‑Steuern. Käufer schätzen die niedrigen Betriebskosten und die vorhandenen Fördernachweise, sodass du beim Verkauf häufig einen Aufpreis erzielen kannst.
+Du nutzt weiterhin die lukrativen Programme der KfW und des BAFA. Diese decken je nach System bis zu 40 % deiner Kosten für erneuerbare Energien. Zusätzlich gibt es das **Bundesprogramm „Heizen mit erneuerbaren Energien“**, das 2026 einen zusätzlichen Bonus von 5 % für Luft‑Wasser‑Wärmepumpen in Kombination mit einer Photovoltaik‑Anlage bietet.
 
-### Wie oft muss ich die Wärmepumpe warten lassen? Einmal jährlich reicht ein **Check‑Up** beim Fachbetrieb: Filter reinigen, Kältemittelstand prüfen und die Regelung kalibrieren. Die meisten Hersteller geben 10‑jährige Garantie auf den Kompressor, sofern die Wartungsintervalle eingehalten werden.
+### Muss ich meine Heizkörper austauschen, wenn ich auf Wärmepumpe umsteige?
+
+Oft reicht es, einzelne Heizkörper gegen größere Modelle zu tauschen. Eine Fußbodenheizung ist kein Muss, steigert aber die Wirtschaftlichkeit deiner Anlage enorm, weil sie mit niedrigeren Vorlauftemperaturen arbeitet.
+
+### Wie lange dauert die Amortisation im Durchschnitt?
+
+In den meisten Fällen hast du dein eingesetztes Kapital nach 7 bis 12 Jahren wieder eingespielt. Hohe Förderquoten verkürzen diesen Zeitraum oft auf unter 8 Jahre.
+
+### Was passiert, wenn ich meine Immobilie in 10 Jahren verkaufe?
+
+Eine moderne Wärmepumpe erhöht den Marktwert deiner Immobilie um durchschnittlich 5–8 % – vor allem in Regionen mit hohen CO₂‑Steuern. Käufer schätzen die niedrigen Betriebskosten und die vorhandenen Fördernachweise, sodass du beim Verkauf häufig einen Aufpreis erzielen kannst.
+
+### Wie oft muss ich die Wärmepumpe warten lassen?
+
+Einmal jährlich reicht ein **Check‑Up** beim Fachbetrieb: Filter reinigen, Kältemittelstand prüfen und die Regelung kalibrieren. Die meisten Hersteller geben 10‑jährige Garantie auf den Kompressor, sofern die Wartungsintervalle eingehalten werden.
 
 ---
 

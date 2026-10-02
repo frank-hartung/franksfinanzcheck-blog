@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-02T10:36:35+00:00",
+  "generatedAt": "2026-10-02T11:21:58+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v.jpg",
+      "image": "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v.jpg",
+      "image": "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -64,22 +64,6 @@
     },
     "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/": {
       "image": "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/": {
-      "image": "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -176,54 +160,6 @@
     },
     "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/": {
       "image": "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/": {
-      "image": "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/": {
-      "image": "images/covers/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/": {
-      "image": "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -382,22 +318,6 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/": {
-      "image": "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/": {
       "image": "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg",
       "type": "single",
@@ -416,22 +336,6 @@
     },
     "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/": {
       "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-03-hausratversicherung-kosten-leistungen-vergleich/": {
-      "image": "images/covers/2026-09-03-hausratversicherung-kosten-leistungen-vergleich.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -670,38 +574,6 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/": {
-      "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge/": {
-      "image": "images/covers/2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/": {
       "image": "images/covers/2026-09-26-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg",
       "type": "single",
@@ -718,40 +590,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich/": {
-      "image": "images/covers/2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/": {
       "image": "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v/": {
-      "image": "images/covers/2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

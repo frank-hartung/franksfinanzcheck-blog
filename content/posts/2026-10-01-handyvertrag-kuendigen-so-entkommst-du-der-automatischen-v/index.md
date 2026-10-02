@@ -209,15 +209,25 @@ Die Tabelle verdeutlicht, dass ein Wechsel zu einem Discount‑Anbieter bereits 
 
 ## Häufige Fragen (FAQ)
 
-### Wie lange dauert es, bis die Kündigung wirksam wird? In der Regel wird die Kündigung zum letzten Tag der aktuellen Laufzeit wirksam. Du nutzt bis zu diesem Datum deine gewohnte Leistung, bekommst aber keine weiteren Rechnungen.
+### Wie lange dauert es, bis die Kündigung wirksam wird?
 
-### Muss ich meine Rufnummer wirklich mitnehmen? Eine Rufnummernmitnahme ist kein Muss, spart dir aber den Aufwand, Kontakte neu zu informieren. Beantrage die Portierung rechtzeitig, sonst droht ein Aufpreis von etwa 10 € bis 20 €.
+In der Regel wird die Kündigung zum letzten Tag der aktuellen Laufzeit wirksam. Du nutzt bis zu diesem Datum deine gewohnte Leistung, bekommst aber keine weiteren Rechnungen.
 
-### Was passiert, wenn der Anbieter die Kündigung nicht bestätigt? Du hast einen schriftlichen Nachweis (Einschreiben mit Rückschein). Rufe beim Anbieter an, weise auf das Einschreiben hin und fordere eine schriftliche Bestätigung. Bleibt das Problem bestehen, kannst du die Schlichtungsstelle einschalten.
+### Muss ich meine Rufnummer wirklich mitnehmen?
 
-### Kann ich während der Kündigungsfrist bereits einen neuen Tarif wählen? Ja, du kannst parallel einen neuen Vertrag abschließen. Achte jedoch darauf, dass sich die Laufzeiten nicht überschneiden, sonst zahlst du doppelt.
+Eine Rufnummernmitnahme ist kein Muss, spart dir aber den Aufwand, Kontakte neu zu informieren. Beantrage die Portierung rechtzeitig, sonst droht ein Aufpreis von etwa 10 € bis 20 €.
 
-### Gibt es Sonderkündigungsrechte bei Preisänderungen? Erhöht der Anbieter die Grundgebühr, hast du in der Regel ein Sonderkündigungsrecht von 3 Monaten. Prüfe die Mitteilung genau und nutze das Recht, wenn die Erhöhung für dich nicht tragbar ist.
+### Was passiert, wenn der Anbieter die Kündigung nicht bestätigt?
+
+Du hast einen schriftlichen Nachweis (Einschreiben mit Rückschein). Rufe beim Anbieter an, weise auf das Einschreiben hin und fordere eine schriftliche Bestätigung. Bleibt das Problem bestehen, kannst du die Schlichtungsstelle einschalten.
+
+### Kann ich während der Kündigungsfrist bereits einen neuen Tarif wählen?
+
+Ja, du kannst parallel einen neuen Vertrag abschließen. Achte jedoch darauf, dass sich die Laufzeiten nicht überschneiden, sonst zahlst du doppelt.
+
+### Gibt es Sonderkündigungsrechte bei Preisänderungen?
+
+Erhöht der Anbieter die Grundgebühr, hast du in der Regel ein Sonderkündigungsrecht von 3 Monaten. Prüfe die Mitteilung genau und nutze das Recht, wenn die Erhöhung für dich nicht tragbar ist.
 
 ### Wie erkenne ich, ob ein „Schnell‑Wechsel‑Angebot“ wirklich günstiger ist?
 1. **Gesamtkosten über 12 Monate berechnen** (Monatsrate + Einmalgebühren).
@@ -225,7 +235,9 @@ Die Tabelle verdeutlicht, dass ein Wechsel zu einem Discount‑Anbieter bereits 
 3. **Vertragslaufzeit prüfen** – ein 24‑Monate‑Vertrag kann günstiger erscheinen, bindet dich aber länger.
 4. **Kundenbewertungen lesen** – häufige Beschwerden über versteckte Kosten deuten auf ein schlechtes Angebot hin.
 
-## Fazit: So gehst du beim **Handyvertrag kündigen** clever vor
+## Fazit: So gehst du beim
+
+**Handyvertrag kündigen** clever vor
 
 - **Frist im Blick behalten** – 45 Tage Puffer sind dein Sicherheitsnetz.
 - **Schriftlich und nachweislich kündigen** – Einschreiben mit Rückschein ist Goldstandard.

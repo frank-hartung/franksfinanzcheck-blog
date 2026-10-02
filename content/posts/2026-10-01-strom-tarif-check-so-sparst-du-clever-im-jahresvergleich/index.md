@@ -121,15 +121,25 @@ Mit dieser Liste hast du alle relevanten Daten auf einen Blick und kannst objekt
 
 ## Häufige Fragen
 
-### Wie oft sollte ich Strom und Gas vergleichen? Einmal pro Jahr reicht in der Regel aus, besonders nach den jährlichen Preis‑Anpassungen der Anbieter.
+### Wie oft sollte ich Strom und Gas vergleichen?
 
-### Lohnt sich ein Kombi‑Angebot immer? Nicht zwingend. Wenn ein Anbieter bei einem Produkt deutlich bessere Konditionen bietet, kann ein separater Vertrag günstiger sein.
+Einmal pro Jahr reicht in der Regel aus, besonders nach den jährlichen Preis‑Anpassungen der Anbieter.
 
-### Was passiert, wenn ich die Kündigungsfrist verpasse? Der alte Vertrag verlängert sich meist um ein weiteres Jahr und kann teurer werden – du zahlst also mehr, als nötig.
+### Lohnt sich ein Kombi‑Angebot immer?
 
-### Wie erkenne ich versteckte Kosten? Achte auf **Grundgebühren**, **Mindestabnahmemengen** und **Nachzahlungs‑Optionen** im Kleingedruckten.
+Nicht zwingend. Wenn ein Anbieter bei einem Produkt deutlich bessere Konditionen bietet, kann ein separater Vertrag günstiger sein.
 
-### Kann ich den Wechsel selbst erledigen? Ja, du brauchst nur den schriftlichen Kündigungsnachweis und deine Zählerstände. Der neue Anbieter übernimmt den Rest.
+### Was passiert, wenn ich die Kündigungsfrist verpasse?
+
+Der alte Vertrag verlängert sich meist um ein weiteres Jahr und kann teurer werden – du zahlst also mehr, als nötig.
+
+### Wie erkenne ich versteckte Kosten?
+
+Achte auf **Grundgebühren**, **Mindestabnahmemengen** und **Nachzahlungs‑Optionen** im Kleingedruckten.
+
+### Kann ich den Wechsel selbst erledigen?
+
+Ja, du brauchst nur den schriftlichen Kündigungsnachweis und deine Zählerstände. Der neue Anbieter übernimmt den Rest.
 
 ---
 

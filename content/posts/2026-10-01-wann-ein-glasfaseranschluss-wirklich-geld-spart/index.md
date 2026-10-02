@@ -131,15 +131,25 @@ B. Netzwerk‑Repeater). In vielen Fällen lässt sich dadurch indirekt Geld spa
 
 ## Häufige Fragen
 
-### Wie schnell muss mein Hausanschluss sein, um Glasfaser zu nutzen? Der Glasfaser‑Kabelstrang endet meist im Hausverteiler. Der interne Anschluss (z. B. über ein Ethernet‑Kabel) sollte mindestens 1 Gbps unterstützen, was gängige Router problemlos liefern.
+### Wie schnell muss mein Hausanschluss sein, um Glasfaser zu nutzen?
 
-### Gibt es versteckte Kosten beim Glasfaser‑Tarif? Versteckte Kosten entstehen häufig durch optionale Services wie ein dedizierter Kunden‑Support oder Premium‑Router. Prüfe die Angebotsdetails genau, bevor du unterschreibst.
+Der Glasfaser‑Kabelstrang endet meist im Hausverteiler. Der interne Anschluss (z. B. über ein Ethernet‑Kabel) sollte mindestens 1 Gbps unterstützen, was gängige Router problemlos liefern.
 
-### Wie lange dauert die Installation? Bei vorhandener Infrastruktur beträgt die Aktivierung meist 2 – 4 Wochen. Bei Neubau kann es bis zu 3 Monate dauern, abhängig vom Ausbauplan des Netzbetreibers.
+### Gibt es versteckte Kosten beim Glasfaser‑Tarif?
 
-### Kann ich meinen bestehenden DSL‑Vertrag behalten, falls der Glasfaser‑Anschluss nicht passt? Viele Anbieter bieten eine Mindestvertragslaufzeit von 24 Monaten. Ein vorzeitiger Wechsel zurück zu DSL kann eine Kündigungsgebühr nach sich ziehen. Achte auf flexible Vertragsbedingungen.
+Versteckte Kosten entstehen häufig durch optionale Services wie ein dedizierter Kunden‑Support oder Premium‑Router. Prüfe die Angebotsdetails genau, bevor du unterschreibst.
 
-### Was passiert, wenn mein Nachbar bereits Glasfaser nutzt, ich aber nicht? In den meisten Fällen teilen sich mehrere Haushalte denselben Glasfaser‑Knoten. Die Kosten für den Strang werden nicht automatisch auf dich umgelegt, du musst jedoch einen eigenen Anschluss beantragen.
+### Wie lange dauert die Installation?
+
+Bei vorhandener Infrastruktur beträgt die Aktivierung meist 2 – 4 Wochen. Bei Neubau kann es bis zu 3 Monate dauern, abhängig vom Ausbauplan des Netzbetreibers.
+
+### Kann ich meinen bestehenden DSL‑Vertrag behalten, falls der Glasfaser‑Anschluss nicht passt?
+
+Viele Anbieter bieten eine Mindestvertragslaufzeit von 24 Monaten. Ein vorzeitiger Wechsel zurück zu DSL kann eine Kündigungsgebühr nach sich ziehen. Achte auf flexible Vertragsbedingungen.
+
+### Was passiert, wenn mein Nachbar bereits Glasfaser nutzt, ich aber nicht?
+
+In den meisten Fällen teilen sich mehrere Haushalte denselben Glasfaser‑Knoten. Die Kosten für den Strang werden nicht automatisch auf dich umgelegt, du musst jedoch einen eigenen Anschluss beantragen.
 
 ---
 

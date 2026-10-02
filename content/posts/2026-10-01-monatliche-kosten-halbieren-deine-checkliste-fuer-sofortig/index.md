@@ -129,15 +129,25 @@ Durch das tägliche Befolgen dieser Punkte behältst du die Kontrolle und erkenn
 
 ## Häufige Fragen
 
-### Wie oft sollte ich meine Verträge prüfen? Einmal im Jahr reicht, wenn du den Jahres‑Check im Herbst machst – das ist der Zeitpunkt, an dem viele Anbieter neue Tarife veröffentlichen.
+### Wie oft sollte ich meine Verträge prüfen?
 
-### Lohnt sich ein Anbieterwechsel bei kleinen Einsparungen? Ja, weil kleine Prozentsätze über mehrere Verträge schnell zu mehreren hundert Euro pro Jahr summieren.
+Einmal im Jahr reicht, wenn du den Jahres‑Check im Herbst machst – das ist der Zeitpunkt, an dem viele Anbieter neue Tarife veröffentlichen.
 
-### Was mache ich, wenn mein Anbieter keinen günstigeren Tarif anbietet? Fordere ein Sonderangebot an. Viele Unternehmen geben Kunden, die drohen zu kündigen, einen Rabatt von **5 %** bis **10 %**.
+### Lohnt sich ein Anbieterwechsel bei kleinen Einsparungen?
 
-### Wie kann ich meine Stromrechnung ohne Messgerät senken? Reduziere Stand‑by‑Verbrauch, nutze LED‑Lampen und stelle Geräte bei Nichtgebrauch komplett aus.
+Ja, weil kleine Prozentsätze über mehrere Verträge schnell zu mehreren hundert Euro pro Jahr summieren.
 
-### Welche Versicherungen sollte ich zuerst prüfen? Beginne mit Haftpflicht, Hausrat und Kfz‑Versicherung – das sind die größten Fixkosten im Versicherungsbereich.
+### Was mache ich, wenn mein Anbieter keinen günstigeren Tarif anbietet?
+
+Fordere ein Sonderangebot an. Viele Unternehmen geben Kunden, die drohen zu kündigen, einen Rabatt von **5 %** bis **10 %**.
+
+### Wie kann ich meine Stromrechnung ohne Messgerät senken?
+
+Reduziere Stand‑by‑Verbrauch, nutze LED‑Lampen und stelle Geräte bei Nichtgebrauch komplett aus.
+
+### Welche Versicherungen sollte ich zuerst prüfen?
+
+Beginne mit Haftpflicht, Hausrat und Kfz‑Versicherung – das sind die größten Fixkosten im Versicherungsbereich.
 
 ---
 

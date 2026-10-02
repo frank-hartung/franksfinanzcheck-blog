@@ -217,19 +217,33 @@ Das Beispiel verdeutlicht, dass bei einer bereits bestehenden chronischen Erkran
 
 ## Häufige Fragen
 
-### Was kostet eine Tierversicherung im Durchschnitt? Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je nach Rasse, Alter und Leistungsumfang.
+### Was kostet eine Tierversicherung im Durchschnitt?
 
-### Wann sollte ich eine Hundeversicherung abschließen? Am besten, sobald du deinen Welpen bekommst. Die Wartezeit beginnt dann sofort, und du profitierst von niedrigen Prämien, bevor das Tier älter wird.
+Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je nach Rasse, Alter und Leistungsumfang.
 
-### Deckt eine Katzenversicherung auch Impfungen? Nur, wenn du das Vorsorge‑Modul buchst. Ohne Zusatzleistung übernimmt die Police in der Regel nur Unfall‑ und Operationskosten.
+### Wann sollte ich eine Hundeversicherung abschließen?
 
-### Wie häufig kann ich den Vertrag kündigen? Die meisten Anbieter erlauben eine Kündigung zum Ende der Vertragslaufzeit mit einer Frist von 30 Tagen. Einige bieten eine Sonderkündigung bei Preisänderungen an.
+Am besten, sobald du deinen Welpen bekommst. Die Wartezeit beginnt dann sofort, und du profitierst von niedrigen Prämien, bevor das Tier älter wird.
 
-### Lohnt sich eine Tierversicherung bei einem gesunden Seniorentier? Bei älteren Tieren steigen die Prämien und die Ausschlüsse werden strenger. Oft ist ein Vergleich der erwarteten Kosten versus Prämie nötig – die oben genannte Faustregel hilft dabei, eine fundierte Entscheidung zu treffen.
+### Deckt eine Katzenversicherung auch Impfungen?
 
-### Was passiert, wenn mein Tier bereits eine Vorerkrankung hat? Die meisten Tierversicherungen schließen bereits bestehende Krankheiten aus. Es gibt jedoch Anbieter, die eine **„Pre‑Existing Condition“-Klausel** mit reduziertem Leistungsumfang anbieten. Prüfe die Bedingungen genau, bevor du unterschreibst.
+Nur, wenn du das Vorsorge‑Modul buchst. Ohne Zusatzleistung übernimmt die Police in der Regel nur Unfall‑ und Operationskosten.
 
-### Gibt es steuerliche Vorteile bei einer Tierversicherung? In Deutschland können Tierarztkosten für beruflich genutzte Tiere (z. B. Diensthunde, Zuchttiere) als Betriebsausgaben geltend gemacht werden. Die Versicherungsprämie ist dann ebenfalls abzugsfähig. Für private Haustiere gibt es keinen steuerlichen Abzug, jedoch kann die Prämie im Rahmen der Haushaltsrechnung als Ausgabenposten betrachtet werden.
+### Wie häufig kann ich den Vertrag kündigen?
+
+Die meisten Anbieter erlauben eine Kündigung zum Ende der Vertragslaufzeit mit einer Frist von 30 Tagen. Einige bieten eine Sonderkündigung bei Preisänderungen an.
+
+### Lohnt sich eine Tierversicherung bei einem gesunden Seniorentier?
+
+Bei älteren Tieren steigen die Prämien und die Ausschlüsse werden strenger. Oft ist ein Vergleich der erwarteten Kosten versus Prämie nötig – die oben genannte Faustregel hilft dabei, eine fundierte Entscheidung zu treffen.
+
+### Was passiert, wenn mein Tier bereits eine Vorerkrankung hat?
+
+Die meisten Tierversicherungen schließen bereits bestehende Krankheiten aus. Es gibt jedoch Anbieter, die eine **„Pre‑Existing Condition“-Klausel** mit reduziertem Leistungsumfang anbieten. Prüfe die Bedingungen genau, bevor du unterschreibst.
+
+### Gibt es steuerliche Vorteile bei einer Tierversicherung?
+
+In Deutschland können Tierarztkosten für beruflich genutzte Tiere (z. B. Diensthunde, Zuchttiere) als Betriebsausgaben geltend gemacht werden. Die Versicherungsprämie ist dann ebenfalls abzugsfähig. Für private Haustiere gibt es keinen steuerlichen Abzug, jedoch kann die Prämie im Rahmen der Haushaltsrechnung als Ausgabenposten betrachtet werden.
 
 ## Fazit: Lohnt sich die Tierversicherung für deinen Hund?
 

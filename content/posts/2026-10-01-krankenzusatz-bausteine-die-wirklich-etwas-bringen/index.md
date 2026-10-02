@@ -129,15 +129,25 @@ Durch diese strukturierte Vorgehensweise vermeidest du Überraschungen und behä
 
 ## Häufige Fragen
 
-### Wie oft sollte ich meine Krankenzusatzversicherung überprüfen? Einmal im Jahr, idealerweise nach dem Jahreswechsel, wenn du deine Gesundheitsausgaben des Vorjahres kennst.
+### Wie oft sollte ich meine Krankenzusatzversicherung überprüfen?
 
-### Lohnt sich ein Zahnzusatz, wenn ich selten zum Zahnarzt gehe? Nur, wenn du in den letzten fünf Jahren bereits größere Zahnersatz‑Kosten hattest. Andernfalls sparst du mehr, wenn du das Baustein‑Modul streichst.
+Einmal im Jahr, idealerweise nach dem Jahreswechsel, wenn du deine Gesundheitsausgaben des Vorjahres kennst.
 
-### Was passiert, wenn ich im Ausland krank werde und keinen Zusatzschutz habe? Du musst die Behandlung aus eigener Tasche bezahlen und später bei deiner gesetzlichen Krankenkasse einreichen – die Erstattung ist meist begrenzt.
+### Lohnt sich ein Zahnzusatz, wenn ich selten zum Zahnarzt gehe?
 
-### Kann ich einzelne Bausteine nachträglich hinzufügen? Ja, die meisten Anbieter erlauben das, allerdings häufig gegen eine Aufpreis‑ und Wartezeit‑Regelung.
+Nur, wenn du in den letzten fünf Jahren bereits größere Zahnersatz‑Kosten hattest. Andernfalls sparst du mehr, wenn du das Baustein‑Modul streichst.
 
-### Wie finde ich den günstigsten Tarif für meinen Bedarf? Nutze mindestens drei unabhängige Vergleichsplattformen, achte auf Deckungsquote, Selbstbeteiligung und Vertragsbedingungen.
+### Was passiert, wenn ich im Ausland krank werde und keinen Zusatzschutz habe?
+
+Du musst die Behandlung aus eigener Tasche bezahlen und später bei deiner gesetzlichen Krankenkasse einreichen – die Erstattung ist meist begrenzt.
+
+### Kann ich einzelne Bausteine nachträglich hinzufügen?
+
+Ja, die meisten Anbieter erlauben das, allerdings häufig gegen eine Aufpreis‑ und Wartezeit‑Regelung.
+
+### Wie finde ich den günstigsten Tarif für meinen Bedarf?
+
+Nutze mindestens drei unabhängige Vergleichsplattformen, achte auf Deckungsquote, Selbstbeteiligung und Vertragsbedingungen.
 
 ---
 

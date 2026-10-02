@@ -40,12 +40,16 @@ Du willst 365 tage ohne neukauf? Du willst 365 tage ohne neukauf? **Das Wichtigs
 - **Faustregel:** Pro Monat solltest du höchstens ein Kleidungsstück ausleihen oder tauschen.
 - **Typische Fehler:** Impulskäufe und fehlende Wasch‑ bzw. Reparaturroutine kosten dich schnell zurück.
 
-## Wie funktioniert die 365‑Tage‑Herausforderung? Du kaufst ein ganzes Jahr lang keine neue Kleidung.
+## Wie funktioniert die 365‑Tage‑Herausforderung?
+
+Du kaufst ein ganzes Jahr lang keine neue Kleidung.
 Stattdessen nutzt du, was du bereits hast, reparierst Defekte und leihst oder tauschst mit Freunden.  
 Der Fokus liegt auf bewusster Nutzung, nicht auf Verzicht um jeden Preis.  
 Ein freier Tag im Kalender reicht als Startsignal – du kannst sofort beginnen.  
 
-## Was kostet dich das Verzichten auf neue Kleidung? Ein typischer Neukauf liegt bei ca. 30 € – 80 € pro Stück, je nach Qualität und Marke.
+## Was kostet dich das Verzichten auf neue Kleidung?
+
+Ein typischer Neukauf liegt bei ca. 30 € – 80 € pro Stück, je nach Qualität und Marke.
 Kaufst du durchschnittlich fünf Stück pro Jahr, sparst du rund 150 € – 400 €.  
 Das klingt nach wenig, wirkt sich aber stark aus, wenn du den Betrag in deine monatliche Sparrate einbeziehst.  
 
@@ -98,14 +102,18 @@ Jeder dieser Punkte kann deine Einsparungen um 10 % – 30 % reduzieren, w
 
 Die Tabelle zeigt dir, wo du gerade stehst und welche Maßnahmen noch fehlen.  
 
-## Warum lohnt sich die Challenge für deine Finanzen? **Faustregel:** Jeder Verzicht auf ein Kleidungsstück spart mindestens 25 % des durchschnittlichen Jahresbudgets für Mode.
+## Warum lohnt sich die Challenge für deine Finanzen?
+
+**Faustregel:** Jeder Verzicht auf ein Kleidungsstück spart mindestens 25 % des durchschnittlichen Jahresbudgets für Mode.
 
 Der finanzielle Nutzen entsteht nicht nur durch direkte Einsparungen.  
 Du reduzierst den Bedarf an schnellen Modetrends, die häufig zu kurzfristigen Anschaffungen führen.  
 Gleichzeitig steigt dein Qualitätsbewusstsein – du investierst eher in langlebige Stücke, die langfristig günstiger sind.  
 Das Ergebnis: ein stabilerer Geldfluss und mehr Spielraum für wichtige Ziele wie Altersvorsorge oder Urlaub.  
 
-## Wie integrierst du nachhaltige Alternativen? Secondhand‑Läden, Kleiderbörsen und Online‑Plattformen bieten eine riesige Auswahl zu günstigen Preisen.
+## Wie integrierst du nachhaltige Alternativen?
+
+Secondhand‑Läden, Kleiderbörsen und Online‑Plattformen bieten eine riesige Auswahl zu günstigen Preisen.
 Achte beim Kauf auf Materialqualität; Naturfasern halten in der Regel länger als Kunststoffe.  
 Fast jedes Kleidungsstück lässt sich mit Nadel, Garn und etwas Geduld reparieren.  
 Wenn du selbst reparierst, sparst du Geld und vermeidest zusätzliche Transport‑ und Produktionsemissionen.  
@@ -122,19 +130,29 @@ Wenn du selbst reparierst, sparst du Geld und vermeidest zusätzliche Transport�
 
 ## Häufige Fragen
 
-### Wie finde ich passende Secondhand‑Artikel, ohne viel Zeit zu investieren? Suche lokale Flohmärkte oder nutze Apps, die Filter für Preis und Zustand bieten.
+### Wie finde ich passende Secondhand‑Artikel, ohne viel Zeit zu investieren?
+
+Suche lokale Flohmärkte oder nutze Apps, die Filter für Preis und Zustand bieten.
 Setze dir ein Zeitlimit von 30 Minuten pro Suche, um Impulskäufe zu vermeiden.
 
-### Was tun, wenn ein Kleidungsstück plötzlich untragbar wird? Prüfe zunächst, ob eine Reparatur möglich ist.
+### Was tun, wenn ein Kleidungsstück plötzlich untragbar wird?
+
+Prüfe zunächst, ob eine Reparatur möglich ist.
 Oft reicht ein kleiner Stich oder ein neuer Knopf, um das Teil wieder nutzbar zu machen.
 
-### Kann die Challenge meine Arbeitssituation gefährden? Nur wenn du beruflich auf bestimmte Kleidung angewiesen bist.
+### Kann die Challenge meine Arbeitssituation gefährden?
+
+Nur wenn du beruflich auf bestimmte Kleidung angewiesen bist.
 Definiere klare Ausnahmen für Arbeitskleidung und halte diese dokumentiert.
 
-### Wie motiviere ich mich, wenn die Versuchung groß ist? Führe ein Erfolgstagebuch.
+### Wie motiviere ich mich, wenn die Versuchung groß ist?
+
+Führe ein Erfolgstagebuch.
 Jeder gesparte Euro und jedes reparierte Teil steigern das Erfolgserlebnis.
 
-### Lohnt sich die Challenge, wenn ich bereits wenig Kleidung habe? Ja. Der Fokus verschiebt sich von Quantität zu Qualität.
+### Lohnt sich die Challenge, wenn ich bereits wenig Kleidung habe?
+
+Ja. Der Fokus verschiebt sich von Quantität zu Qualität.
 Du lernst, vorhandene Stücke vielseitiger zu kombinieren und sparst gleichzeitig Geld.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)

@@ -121,15 +121,25 @@ Gehe die Liste durch, bevor du neue Geräte kaufst. So stellst du sicher, dass j
 
 ## Häufige Fragen
 
-### Wie schnell merkt man die ersten Einsparungen? Erste Effekte zeigen sich meist nach ein bis zwei Wochen, sobald die automatischen Abschalt‑Pläne aktiv sind. Der Zählerstand sinkt sofort, weil Stand‑by‑Verbrauch entfällt.
+### Wie schnell merkt man die ersten Einsparungen?
 
-### Brauche ich ein separates Hub‑System? Für die meisten smarten Steckdosen reicht ein WLAN‑Router aus. Nur wenn du mehrere Protokolle (Zigbee, Z‑Wave) kombinieren willst, empfiehlt sich ein Hub.
+Erste Effekte zeigen sich meist nach ein bis zwei Wochen, sobald die automatischen Abschalt‑Pläne aktiv sind. Der Zählerstand sinkt sofort, weil Stand‑by‑Verbrauch entfällt.
 
-### Können smarte Geräte den Strompreis erhöhen? Nur wenn du sie unbedacht laufen lässt. Richtig programmiert senken sie jedoch den Verbrauch – das gilt besonders für Geräte mit hohem Eigenverbrauch.
+### Brauche ich ein separates Hub‑System?
 
-### Wie sicher sind meine Daten im Smart Home? Achte auf Hersteller, die regelmäßige Firmware‑Updates anbieten und Verschlüsselung (TLS) nutzen. Nutze ein separates WLAN‑Gastnetz für IoT‑Geräte, um dein Hauptnetz zu schützen.
+Für die meisten smarten Steckdosen reicht ein WLAN‑Router aus. Nur wenn du mehrere Protokolle (Zigbee, Z‑Wave) kombinieren willst, empfiehlt sich ein Hub.
 
-### Lohnt sich ein Komplettsystem oder nur einzelne Geräte? Ein schrittweises Vorgehen ist empfehlenswert. Beginne mit smarten Steckdosen, erweitere dann um Thermostate und schließlich um eine zentrale Steuerung, wenn du den Überblick behalten willst.
+### Können smarte Geräte den Strompreis erhöhen?
+
+Nur wenn du sie unbedacht laufen lässt. Richtig programmiert senken sie jedoch den Verbrauch – das gilt besonders für Geräte mit hohem Eigenverbrauch.
+
+### Wie sicher sind meine Daten im Smart Home?
+
+Achte auf Hersteller, die regelmäßige Firmware‑Updates anbieten und Verschlüsselung (TLS) nutzen. Nutze ein separates WLAN‑Gastnetz für IoT‑Geräte, um dein Hauptnetz zu schützen.
+
+### Lohnt sich ein Komplettsystem oder nur einzelne Geräte?
+
+Ein schrittweises Vorgehen ist empfehlenswert. Beginne mit smarten Steckdosen, erweitere dann um Thermostate und schließlich um eine zentrale Steuerung, wenn du den Überblick behalten willst.
 
 ---
 

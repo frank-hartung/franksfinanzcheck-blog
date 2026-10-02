@@ -123,15 +123,25 @@ Wenn du jeden Punkt abhaken kannst, bist du bereit für die Eröffnung.
 
 ## Häufige Fragen
 
-### Wie lange dauert die Kontoeröffnung ohne Schufa? In der Regel 1‑3 Werktage, wenn alle Unterlagen vollständig sind.
+### Wie lange dauert die Kontoeröffnung ohne Schufa?
 
-### Muss ich ein Mindesteinkommen nachweisen? Manche Anbieter verlangen einen Nachweis, andere nicht. Prüfe das im Vorfeld.
+In der Regel 1‑3 Werktage, wenn alle Unterlagen vollständig sind.
 
-### Kann ich eine Kreditkarte erhalten? Ja, aber sie kostet oft extra. Achte darauf, ob die Karte wirklich nötig ist.
+### Muss ich ein Mindesteinkommen nachweisen?
 
-### Gibt es versteckte Kosten bei Auszahlungen? Geldautomaten außerhalb des Netzwerks können 1‑2 € pro Nutzung kosten.
+Manche Anbieter verlangen einen Nachweis, andere nicht. Prüfe das im Vorfeld.
 
-### Wie wirkt sich das Konto auf meine Schufa aus? Ein Konto ohne Schufa wird nicht an die Auskunftei gemeldet, also ändert sich nichts an deinem Score.
+### Kann ich eine Kreditkarte erhalten?
+
+Ja, aber sie kostet oft extra. Achte darauf, ob die Karte wirklich nötig ist.
+
+### Gibt es versteckte Kosten bei Auszahlungen?
+
+Geldautomaten außerhalb des Netzwerks können 1‑2 € pro Nutzung kosten.
+
+### Wie wirkt sich das Konto auf meine Schufa aus?
+
+Ein Konto ohne Schufa wird nicht an die Auskunftei gemeldet, also ändert sich nichts an deinem Score.
 
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Handytarife vergleichen**](/go/handytarife/)
 
