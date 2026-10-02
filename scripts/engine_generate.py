@@ -1135,9 +1135,24 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics,
     Tag – wenn bereits ein Entwurf existiert, versucht die Engine weiter
     LIVE-Qualität zu erzeugen, statt den Tag mit Entwürfen zuzuparken.
     Liefert (level, draft_saved) oder None bei fatalem Fehler."""
-    freie = [t for t in topics
-             if not g.topic_already_covered(t["title"], used_titles)
-             and id(t) not in used_topics]
+    # BAHN-FILTER (02.10.2026, Issue #521): Die LIVE-Quote wird nur noch aus
+    # Themen geplant, die die Automatik auch ausliefern darf. 46 der 187
+    # Themen sind YMYL-Hochrisiko und per editorial_review_gate fail-closed –
+    # ohne namentliche Fachfreigabe gehen sie nie live. Am 02.10.2026 hat
+    # genau diese Blindheit zwei von drei Tagesslots verbrannt und den Tag
+    # bei 0/2 LIVE beendet. Die Themen sind nicht verboten, sie gehören nur
+    # in die FACHFREIGABE-Bahn (siehe scripts/engine_capacity.py).
+    def _quotenfaehig(kandidaten):
+        try:
+            import engine_capacity as ec  # noqa: PLC0415 – fail-open
+            return ec.nur_auto(kandidaten)
+        except Exception as exc:  # noqa: BLE001 – Planung darf nie blockieren
+            print(f"  ⚠ Bahn-Filter inaktiv ({exc}) – Themenwahl wie bisher.")
+            return kandidaten
+
+    freie = _quotenfaehig([t for t in topics
+                           if not g.topic_already_covered(t["title"], used_titles)
+                           and id(t) not in used_topics])
     if not freie:
         print("Themenpool erschöpft – KI-Nachschub startet …")
         try:
@@ -1145,11 +1160,12 @@ def publish_one_article(topics, quelle, pin_topics, used_titles, used_topics,
         except Exception as exc:  # noqa: BLE001
             print(f"  ⚠ refill fehlgeschlagen: {exc}")
         topics = g.load_topics()
-        freie = [t for t in topics
-                 if not g.topic_already_covered(t["title"], used_titles)
-                 and id(t) not in used_topics]
+        freie = _quotenfaehig([t for t in topics
+                               if not g.topic_already_covered(t["title"], used_titles)
+                               and id(t) not in used_topics])
     if not freie:
-        print("✗ Keine freien Themen – Abbruch.")
+        print("✗ Keine freien Themen in der AUTO-Bahn – Abbruch. "
+              "Lage: python3 scripts/engine_capacity.py")
         return None
 
     # Datengeführte Themen-Auswahl (Pinterest-Performance-Gewichte, 01.09.2026):

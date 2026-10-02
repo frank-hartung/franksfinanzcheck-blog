@@ -1093,8 +1093,13 @@ class ThemenDispositionTests(unittest.TestCase):
         self.rt = rt
 
     def test_belegtes_thema_wird_nicht_erneut_vorgeschlagen(self):
+        # Beide Themen sind bewusst NICHT-YMYL: Hier wird die
+        # Leitbegriff-Kollision geprüft, nicht die Bahn-Trennung (die hat
+        # ihren eigenen Test weiter unten). Vorher stand hier ein
+        # Versicherungs-Thema – seit der Bahn-Trennung (#521) filtert die
+        # AUTO-Bahn das korrekt weg und der Test maß zwei Dinge auf einmal.
         topics = [{"title": "Stromfresser finden: Die größten Energiediebe"},
-                  {"title": "Reisekrankenversicherung: Das musst du wissen"}]
+                  {"title": "Haushaltsbuch führen: App, Excel oder Papier?"}]
         bestand = {"2026-09-25-a":
                    "Stromfresser finden: So stoppst du teure Energiediebe"}
         with tempfile.TemporaryDirectory() as tmp:
@@ -1102,7 +1107,51 @@ class ThemenDispositionTests(unittest.TestCase):
                 topics, bestand=bestand, limit=5,
                 pfad=Path(tmp) / "ledger.json")
         self.assertEqual([t["title"] for t in vorschlaege],
+                         ["Haushaltsbuch führen: App, Excel oder Papier?"])
+
+    # ---------------------------------------------------------------
+    # Issue #521 (02.10.2026): Die Disposition war risikoblind.
+    # Sie wählte YMYL-Themen (Versicherung, Rente, Kredit) für die
+    # Automatik aus, obwohl deren Artikel per Vertrag (editorial_review_
+    # gate, fail-closed) NIE ohne menschliche Freigabe live gehen. Jeder
+    # solche Griff kostete einen LLM-Aufruf, einen Produktionsslot UND
+    # sperrte das Thema 180 Tage – ohne dass je ein Artikel erscheinen
+    # konnte. Am 02.10.2026 waren 2 der 4 produzierten Themen genau das.
+    # ---------------------------------------------------------------
+    def test_ymyl_thema_belegt_keinen_automatik_slot(self):
+        topics = [{"title": "Reisekrankenversicherung: Das musst du wissen"},
+                  {"title": "Haushaltsbuch führen: App, Excel oder Papier?"}]
+        with tempfile.TemporaryDirectory() as tmp:
+            auto = self.rt.disponieren(topics, bestand={}, limit=5,
+                                       pfad=Path(tmp) / "l.json")
+        titel = [t["title"] for t in auto]
+        self.assertNotIn("Reisekrankenversicherung: Das musst du wissen", titel,
+                         "ein YMYL-Thema in der AUTO-Bahn verbrennt Slot und "
+                         "Thema, ohne je live gehen zu können")
+        self.assertIn("Haushaltsbuch führen: App, Excel oder Papier?", titel)
+
+    def test_ymyl_thema_bleibt_fuer_die_fachbahn_erreichbar(self):
+        """Nicht verbannt, nur umgeleitet – sonst stirbt die Hälfte des Pools."""
+        topics = [{"title": "Reisekrankenversicherung: Das musst du wissen"},
+                  {"title": "Haushaltsbuch führen: App, Excel oder Papier?"}]
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = Path(tmp) / "l.json"
+            fach = self.rt.disponieren(topics, bestand={}, limit=5,
+                                       pfad=pfad, bahn="fachfreigabe")
+            alle = self.rt.disponieren(topics, bestand={}, limit=5,
+                                       pfad=pfad, bahn=None)
+        self.assertEqual([t["title"] for t in fach],
                          ["Reisekrankenversicherung: Das musst du wissen"])
+        self.assertEqual(len(alle), 2,
+                         "bahn=None muss weiterhin den ganzen Pool liefern")
+
+    def test_bahn_default_ist_auto(self):
+        """Altaufrufer (reserve_gate, reserve_pool) erben die sichere Bahn."""
+        import inspect
+        sig = inspect.signature(self.rt.disponieren)
+        self.assertEqual(sig.parameters["bahn"].default,
+                         self.rt.BAHN_DEFAULT)
+        self.assertEqual(self.rt.BAHN_DEFAULT, "auto")
 
     def test_engine_nutzt_die_disposition_statt_des_ersten_freien(self):
         root = Path(__file__).resolve().parents[2]

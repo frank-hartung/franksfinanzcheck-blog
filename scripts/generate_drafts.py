@@ -832,21 +832,88 @@ Ab Zeile 3: Der Artikel in Markdown:
 # ---------------------------------------------------------------- Artikel bauen
 
 
+# Marker des Prompt-Ausgabeformats. Bewusst großzügiger als die zwei
+# Marker, die der Prompt selbst verlangt: Modelle erfinden regelmäßig
+# „META:“, „SLUG:“ oder „OUTPUT:“ dazu.
+_MARKER_RX = re.compile(
+    r"(?im)^\s{0,3}(TITLE|TITEL|DESCRIPTION|BESCHREIBUNG|BODY|ARTIKEL|"
+    r"ARTICLE|KEYWORDS|META|METADESCRIPTION|SLUG|H1|OUTPUT|AUSGABE|"
+    r"ANTWORT|PROMPT|SYSTEM|ASSISTANT|USER|PILLAR)\s*:\s*(?P<wert>.*)$")
+# Wie weit vorne im Output darf ein Kopf-Marker stehen? Großzügig genug
+# für Leerzeilen, Code-Fences und ein vorangestelltes „---“, eng genug,
+# dass eine Zeile mitten im Artikel nicht als Kopfzeile missverstanden wird.
+_MARKER_FENSTER = 8
+
+
 def parse_article(raw, topic, angle_name):
-    """Extrahiert Titel, Beschreibung und Body aus dem KI-Output."""
-    title, desc, body = None, None, raw
+    """Extrahiert Titel, Beschreibung und Body aus dem KI-Output.
+
+    ISSUE #521 (02.10.2026) – warum diese Funktion gehärtet wurde:
+    Die alte Fassung verlangte „TITLE:“ auf Zeile 0 UND „DESCRIPTION:“ auf
+    Zeile 1. Beides war positionsgebunden, und die zweite Bedingung war
+    zusätzlich die einzige Stelle, an der der Body überhaupt vom Kopf
+    getrennt wurde. Setzte das Modell eine Leerzeile zwischen die beiden
+    Marker – am 02.10.2026 real geschehen –, griff:
+
+      * `title`  … noch korrekt (Zeile 0 passte),
+      * `desc`   … NICHT, Fallback nahm die erste Body-Zeile …
+      * `body`   … NICHT, blieb der komplette Rohtext INKLUSIVE Kopf.
+
+    Ergebnis: `description: "TITLE: Preiswert surfen: …"`,
+    `pin_description: "*Werbung | TITLE: …"`, und der Artikel begann mit
+    „TITLE:“. Dass der Entwurf nicht live ging, war Zufall (Zeichenlänge).
+
+    Die neue Fassung ist positionsunabhängig, entfernt JEDEN Kopf-Marker
+    aus dem Body und lässt nie einen Marker in die Beschreibung.
+    """
+    title, desc = None, None
     lines = raw.split("\n")
-    if lines and lines[0].startswith("TITLE:"):
-        title = lines[0][6:].strip()
-    if len(lines) > 1 and lines[1].startswith("DESCRIPTION:"):
-        desc = lines[1][12:].strip()
-        body = "\n".join(lines[2:]).strip()
+
+    # 1) Kopfzone: Marker einsammeln, egal in welcher Reihenfolge und mit
+    #    wie vielen Leerzeilen dazwischen.
+    kopf_bis = 0
+    for i, line in enumerate(lines[:_MARKER_FENSTER]):
+        s = line.strip()
+        if not s or s in ("---", "```") or s.startswith("```"):
+            continue
+        m = _MARKER_RX.match(line)
+        if not m:
+            break           # erste echte Inhaltszeile -> Kopfzone zu Ende
+        schluessel = m.group(1).upper()
+        wert = m.group("wert").strip()
+        if schluessel in ("TITLE", "TITEL") and not title:
+            title = wert
+        elif schluessel in ("DESCRIPTION", "BESCHREIBUNG",
+                            "META", "METADESCRIPTION") and not desc:
+            desc = wert
+        kopf_bis = i + 1
+    body = "\n".join(lines[kopf_bis:]).strip()
+
+    # 2) Rest-Marker im gesamten Body entfernen. Ein Modell, das den Kopf
+    #    wiederholt oder mitten im Text „KEYWORDS:“ setzt, darf das nicht
+    #    in den Artikel schreiben. R16-PROMPT-ECHO blockt es sonst später
+    #    hart – hier ist die Stelle, an der es gar nicht erst entsteht.
+    body = _MARKER_RX.sub("", body).strip()
+    # 3) Trenner, den Modelle gern zwischen Kopf und Text setzen. Ein „---“
+    #    als erste Body-Zeile ist nach dem Frontmatter kein Gestaltungs-
+    #    element, sondern ein Rest des Ausgabeformats (Realfall 02.10.2026).
+    body = re.sub(r"\A(?:\s*(?:-{3,}|\*{3,}|_{3,})\s*\n)+", "", body).strip()
+
     if not title:
         m = re.search(r"^#\s+(.+)$", raw, re.M)
         title = m.group(1).strip() if m else topic
     if not desc:
-        m = re.search(r"^(.+)$", body, re.M)
-        desc = (m.group(1).strip() if m else topic)[:155]
+        # Erste Zeile, die weder leer noch Marker noch Überschrift ist.
+        for line in body.split("\n"):
+            s = line.strip()
+            if s and not _MARKER_RX.match(line) and not s.startswith("#"):
+                desc = s
+                break
+        desc = desc or topic
+    # Letzte Sicherung: Was hier durchrutscht, geht als Google-Snippet und
+    # Pinterest-Pin nach außen. Ein Marker darf dort nie landen.
+    title = _MARKER_RX.sub("", title).strip() or topic
+    desc = _MARKER_RX.sub("", desc).strip() or topic
     desc = desc[:155]
     # Code-Fences entfernen, falls die KI welche setzt
     body = re.sub(r"^```[a-zA-Z]*\s*$", "", body, flags=re.M).strip()

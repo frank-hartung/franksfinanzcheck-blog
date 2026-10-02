@@ -213,13 +213,52 @@ POLITUR_RUINEN = [
      re.compile(r"(?m)^\s*(SATZ|TOKEN|MARKER|PLACEHOLDER|TODO|FIXME|"
                 r"XXX|DEBUG|ROW|ZEILE|NL|REST)\s*[:|]"),
      "Marker-/Debug-Ruine am Zeilenanfang"),
+    # R15 ist eine Phrasen-Regel und wohnt in textverstaendnis_guard.
+    # R16: Der Generator spricht mit sich selbst. Das Ausgabeformat der
+    # KI-Prompts lautet „TITLE: …\nDESCRIPTION: …\n<Artikel>“;
+    # `generate_drafts.parse_article` hat diese Kopfzeilen bis zum
+    # 02.10.2026 nur erkannt, wenn sie EXAKT auf Zeile 1 und 2 standen.
+    # Setzte das Modell eine Leerzeile dazwischen – am 02.10.2026 real
+    # geschehen – blieben die Marker im Fließtext stehen UND die
+    # Beschreibung wurde aus der Marker-Zeile gebildet:
+    #
+    #   description:     "TITLE: Preiswert surfen: So findest du den …"
+    #   pin_description: "*Werbung | TITLE: Preiswert surfen: …"
+    #   Fließtext Zeile 1: "TITLE: Preiswert surfen: …"
+    #
+    # Gestoppt hat den Entwurf nur zufällig die Zeichenlänge, keine Wache.
+    # Mit Meta-Description und Pin-Text wäre die Prompt-Ruine bis zu
+    # Google und Pinterest durchgeschlagen.
+    #
+    # Nur VERSALE ASCII-Marker am Zeilenanfang: „Beispiel:“, „Faustregel:“
+    # und „Tipp:“ bleiben unberührt – „TITLE:“ ist im deutschen Fließtext
+    # nie Inhalt.
+    ("R16-PROMPT-ECHO",
+     re.compile(r"(?m)^\s{0,3}(TITLE|DESCRIPTION|BODY|ARTIKEL|ARTICLE|"
+                r"KEYWORDS|META|METADESCRIPTION|SLUG|H1|OUTPUT|AUSGABE|"
+                r"ANTWORT|PROMPT|SYSTEM|ASSISTANT|USER|PILLAR)\s*:"),
+     "Prompt-/Ausgabeformat-Marker im Artikeltext"),
 ]
+
+# Dieselben Marker ohne Zeilenanker – für einzelne Frontmatter-Felder
+# (description, pin_description, kurzantwort), in die die Ruine am
+# 02.10.2026 ebenfalls geflossen ist. EINE Quelle, zwei Einsatzorte: Wer
+# die Marker-Liste oben erweitert, erweitert automatisch auch diese Prüfung.
+PROMPT_ECHO_RX = POLITUR_RUINEN[-1][1]
+PROMPT_ECHO_FELD_RX = re.compile(
+    PROMPT_ECHO_RX.pattern.replace(r"(?m)^\s{0,3}", r"(?:^|\|)\s*"))
+
+
+def prompt_echo_im_feld(wert: str) -> str:
+    """Erste Prompt-Marker-Fundstelle in einem Frontmatter-Wert (sonst '')."""
+    treffer = PROMPT_ECHO_FELD_RX.search(str(wert or ""))
+    return treffer.group(0).strip() if treffer else ""
 
 
 def politur_ruine_funde(text: str) -> list:
     """Alle Politur-Ruinen in `text` als Liste (Regel, Fundstelle).
 
-    Deterministisch, offline, ohne Schonzeiten – diese vier Muster sind
+    Deterministisch, offline, ohne Schonzeiten – diese Muster sind
     im deutschen Satz nie korrekt. Rückgabe ist leer ⇔ kein Befund.
     """
     out = []
