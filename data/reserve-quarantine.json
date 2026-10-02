@@ -1,90 +1,35 @@
 {
-  "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe": {
-    "first": "2026-10-01T16:02:24Z",
-    "grund": "quality-score 0.809 < 0.85 (schwach: structure 0.70, typography 0.70, spelling 0.72)",
+  "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
+    "first": "2026-10-02T14:55:31Z",
+    "grund": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
     "hits": 1,
     "laeufe": [
-      "run:36885423259"
+      "run:37022891832"
     ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "quality-score <score> < <score> (schwach: structure <score>, typography <score>, spelling <score>)"
+    "last": "2026-10-02T15:27:08Z",
+    "lauf": "run:37022891832",
+    "signatur": "redaktionelle ymyl-freigabe nicht bestanden: e<n>: status ist nicht „freigegeben“; e<n>: prüfername und konkrete prüferrolle fehlen; e<n>: prüfertyp muss fachpruefer oder redaktion-mit-externer-belegk"
   },
-  "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me": {
-    "first": "2026-10-01T16:02:24Z",
+  "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
+    "first": "2026-10-02T15:14:07Z",
     "grund": "Zeichenlänge (check_length.py) nicht bestanden",
     "hits": 1,
     "laeufe": [
-      "run:36885423259"
+      "run:37022891832"
     ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
+    "last": "2026-10-02T15:27:08Z",
+    "lauf": "run:37022891832",
     "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   },
-  "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen": {
-    "first": "2026-10-01T15:50:38Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+  "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure": {
+    "first": "2026-10-02T15:14:07Z",
+    "grund": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
     "hits": 1,
     "laeufe": [
-      "run:36885423259"
+      "run:37022891832"
     ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig": {
-    "first": "2026-10-01T16:21:28Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:36885423259"
-    ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig": {
-    "first": "2026-10-01T16:21:28Z",
-    "grund": "quality-score 0.825 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.80)",
-    "hits": 1,
-    "laeufe": [
-      "run:36885423259"
-    ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "quality-score <score> < <score> (schwach: structure <score>, readability <score>, spelling <score>)"
-  },
-  "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich": {
-    "first": "2026-10-01T16:21:28Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:36885423259"
-    ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart": {
-    "first": "2026-10-01T15:50:38Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:36885423259"
-    ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri": {
-    "first": "2026-10-01T16:02:24Z",
-    "grund": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im",
-    "hits": 1,
-    "laeufe": [
-      "run:36885423259"
-    ],
-    "last": "2026-10-01T16:21:28Z",
-    "lauf": "run:36885423259",
-    "signatur": "textverständnis-gate nicht bestanden: r<n>-phrasen-doppel: identische <n>-wort-sequenz im fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte passage, manuell reparieren; r<n>-ph"
+    "last": "2026-10-02T15:27:08Z",
+    "lauf": "run:37022891832",
+    "signatur": "redaktionelle ymyl-freigabe nicht bestanden: e<n>: status ist nicht „freigegeben“; e<n>: prüfername und konkrete prüferrolle fehlen; e<n>: prüfertyp muss fachpruefer oder redaktion-mit-externer-belegk"
   }
 }

@@ -215,15 +215,6 @@
    "savings": "bis zu 270 € sparen"
   }
  },
- "2026-09-03-hausratversicherung-kosten-leistungen-vergleich": {
-  "title": "Hausratversicherung: Was sie kostet und wen sie schützt",
-  "ts": "2026-09-04T04:35:13+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
- },
  "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
   "title": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
   "ts": "2026-09-04T04:35:16+00:00",
@@ -539,15 +530,6 @@
    "savings": ""
   }
  },
- "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge": {
-  "title": "Rente 2026: So baust du heute deine sichere Altersvorsorge",
-  "ts": "2026-09-27T19:42:10+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
  "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Konto & Karten-Update: Was sich jetzt für dich ändert",
   "ts": "2026-09-29T15:09:43+00:00",
@@ -557,120 +539,12 @@
    "savings": ""
   }
  },
- "2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich": {
-  "title": "Autokosten senken: So sparst du hunderte Euro jährlich",
-  "ts": "2026-09-30T10:11:55+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
   "title": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
   "ts": "2026-09-30T10:11:51+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
- "2026-10-01-waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis": {
-  "title": "Wärmepumpe oder Gasheizung – Welcher Weg spart 2026 am meis?",
-  "ts": "2026-10-02T10:36:26+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v": {
-  "title": "Handyvertrag kündigen – So: entkommst du der automatischen V",
-  "ts": "2026-10-01T16:46:47+00:00",
-  "design": {
-   "v": 3,
-   "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen": {
-  "title": "Krankenzusatz –: Bausteine, die wirklich etwas bringen",
-  "ts": "2026-10-01T16:46:40+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
- },
- "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart": {
-  "title": "Wann ein Glasfaseranschluss: wirklich Geld spart",
-  "ts": "2026-10-01T16:46:42+00:00",
-  "design": {
-   "v": 3,
-   "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri": {
-  "title": "Wie du mit einer Budget‑App: deine Geldflüsse endlich",
-  "ts": "2026-10-02T10:36:28+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe": {
-  "title": "365 Tage ohne Neukauf: – So sparst du mit der Kleider‑Challe",
-  "ts": "2026-10-01T16:46:31+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me": {
-  "title": "Konto eröffnen ohne Schufa –: meine Praxis‑Checkliste",
-  "ts": "2026-10-02T10:36:24+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund": {
-  "title": "Tierversicherung im Check – lohnt sich der Schutz für Hund?",
-  "ts": "2026-10-01T16:46:34+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
- },
- "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig": {
-  "title": "Monatliche Kosten halbieren –: deine Checkliste für sofortig",
-  "ts": "2026-10-01T16:46:44+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig": {
-  "title": "Smart Home: So senkst du deine Stromrechnung nachhaltig",
-  "ts": "2026-10-01T16:46:36+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich": {
-  "title": "Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich",
-  "ts": "2026-10-01T16:46:49+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  },
@@ -692,21 +566,39 @@
    "savings": ""
   }
  },
- "2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric": {
-  "title": "So bringst du deine Urlaubskasse: in Schwung – 7 smarte Tric",
-  "ts": "2026-10-02T12:41:22+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
  "2026-10-02-stromfresser-finden-so-stoppst-du-den-energiediebstahl": {
   "title": "Stromfresser finden: So stoppst du den Energiediebstahl",
   "ts": "2026-10-02T12:41:25+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
+  "title": "Hausratversicherung optimieren: Schutz prüfen und sparen",
+  "ts": "2026-10-02T15:25:32+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
+  "title": "Preiswert surfen: So findest du den optimalen DSL‑Anschluss",
+  "ts": "2026-10-02T15:25:34+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure": {
+  "title": "Reisekrankenversicherung: So vermeidest du teure Arztkosten",
+  "ts": "2026-10-02T15:25:37+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
    "savings": ""
   }
  }

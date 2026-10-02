@@ -1,122 +1,45 @@
 {
   "target": 6,
-  "ready": 1,
-  "pool_size": 11,
-  "generated_at": "2026-10-02T14:53:53Z",
+  "ready": 0,
+  "pool_size": 3,
+  "generated_at": "2026-10-02T15:27:08Z",
   "candidates": [
     {
-      "slug": "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund",
+      "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
       "ready": false,
-      "sha256": "d4f5369bdeecff1cbc20ca8bbcedba1d69d0caacaf15c14ca6666422dfccf393",
+      "sha256": "85400fef68749440938d7e83b4c87f78d13b6d7745f2f94e18a6181de17caf6f",
       "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
       "details": [
-        "🛑 2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Eine Faustregel: Die Jahresprämie sollte nicht mehr als 10 % deiner erwarteten Behandlungskosten …“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Junger, gesunder Welpe** | 300 € (Vorsorge, Impfungen) | 120 € | 0 € | 120 € | – 180 € (negativ…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Mittelgroßer Hund, 5 Jahre, Hüftdysplasie‑Risiko** | 1 200 € (regelmäßige Kontrollen + Operatio…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **Senior‑Katze, 12 Jahre, Nierenerkrankung** | 800 € (Medikamente + Diagnostik) | 250 € | 150 € |…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 %.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Zu niedrige Deckungssumme** – Bei einer Deckung von nur 5 000 € musst du den Rest einer großen Op…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Zu hoher Selbstbehalt** – Ein Eigenanteil von 500 € senkt die Prämie, erhöht aber das Risiko, bei…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „250 € bis 400 € pro Jahr, während eine reinrassige Katze etwa 150 € bis 250 € zahlt.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Jahresprämie: 300 € (Hund)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Erwartete Tierarztkosten pro Jahr: 1 200 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Selbstbehalt: 200 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Effektive Kosten: 300 € + 200 € = 500 € (statt 1 200 €)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In diesem Szenario sparst du rund 700 € jährlich, vorausgesetzt, du hast im Jahr mindestens 1 000 €…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In diesem Szenario sparst du rund 700 € jährlich, vorausgesetzt, du hast im Jahr mindestens 1 000 €…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2020 | 260 € | 170 € | 2,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2021 | 275 € | 180 € | 3,0 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2022 | 285 € | 190 € | 3,2 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2023 | 295 € | 200 € | 3,5 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| 2024 | 310 € | 215 € | 3,8 % |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das Tool berechnet automatisch, ob die Prämie unter 10 % deiner erwarteten Kosten liegt.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Deckungssumme | Mindestens 10 000 €, wenn du teure Eingriffe erwartest.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Jahresprämie darf nicht mehr als 10 % deiner erwarteten Tierarztkosten betragen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Schätzt du jährliche Ausgaben von 1 000 €, sollte die Prämie idealerweise unter 100 € liegen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Schätzt du jährliche Ausgaben von 1 000 €, sollte die Prämie idealerweise unter 100 € liegen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **PetProtect** | 280 € | 15 000 € | 200 € | 14 Tage | Kostenlose Zahn‑Add‑On im ersten Jahr |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **AnimalCare** | 265 € | 12 000 € | 150 € | 30 Tage | 5 % Rabatt bei jährlicher Beitragszahlung |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **VitaPet** | 295 € | 20 000 € | 250 € | 21 Tage | Inkl.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **SecurePaws** | 250 € | 10 000 € | 300 € | 30 Tage | Keine Deckung für Erbkrankheiten bei Rassen…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| **HappyTail** | 310 € | 25 000 € | 100 € | 14 Tage | Sofortiger Schutz nach Vertragsabschluss (ke…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Deutsche Dogge | Hüftdysplasie, Herzfehler | 1 200 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Labrador Retriever | Allergien, Kreuzbandriss | 900 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Chihuahua | Zahnprobleme, Herzklappenfehler | 750 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Border Collie | Augenkrankheiten, Epilepsie | 800 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Perserkatze | Nierenversagen, Atemwegserkrankungen | 1 050 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Siamkatze | Herzkrankheiten, Diabetes | 950 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Europäisch Kurzhaar | Zahnprobleme, Parasiten | 600 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Maine Coon | Hypertrophe Kardiomyopathie | 1 100 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Tierarzt‑Rabattkarten** – Oft 10‑15 % Rabatt auf jede Rechnung, aber keine Kostenübernahme bei ho…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Sparplan für Tierarztkosten** – Monatlich 20‑30 € auf ein separates Konto einzahlen; flexibel, ab…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Gemeinschafts‑Versicherung** – In einigen Vereinen gibt es Gruppenversicherungen, die Prämien um …“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „850 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherung:** Hundeversicherung von **PetProtect** mit 15 000 € Deckung, 200 € Selbstbehalt, …“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherung:** Hundeversicherung von **PetProtect** mit 15 000 € Deckung, 200 € Selbstbehalt, …“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Jahresprämie 280 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Operation Hüftgelenk (Einlage, Implantat): 4 200 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Nachbehandlung (Physio, Medikamente): 1 100 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Zahn‑Prophylaxe: 150 € (Add‑On)“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamtkosten:** 5 450 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Versicherungsleistung:** 5 450 € – 200 € Selbstbehalt = 5 250 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Prämie:** 200 € + 280 € = 480 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Ersparnis gegenüber Ohne Versicherung:** 5 450 € – 480 € = **4 970 €**“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Prämie liegt für Hunde zwischen 250 € und 400 € pro Jahr und für Katzen von 150 € bis 250 €, je…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Ja**, wenn du mit hohen Behandlungskosten (Operation, chronische Therapie) rechnest und die Prä…“; E14: Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (112/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
+        "🛑 2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
+        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein geplatzter Schlauch an deiner Waschmaschine ruiniert in Minuten Möbel für 10.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „650 € pro Quadratmeter fest.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „52.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Die Versicherer rechnen hier meist pauschal mit 650 € pro Quadratmeter.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn dein Hausrat 100.000 € wert ist, du aber nur 50.000 € versicherst, kürzt die Versicherung jede…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn dein Hausrat 100.000 € wert ist, du aber nur 50.000 € versicherst, kürzt die Versicherung jede…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „30 € und 90 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „30 € und 90 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du im Schadensfall etwa 150 € selbst zahlst, sinkt deine Prämie spürbar.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das spart gegenüber der monatlichen Zahlung oft rund 5 %.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In unserem Modellfall mit 52.000 € Summe wären 1 % lediglich 520 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „20 % der Summe | Bis zu 40 % oder höher |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „20 % der Summe | Bis zu 40 % oder höher |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Zudem ist die Entschädigungshöhe oft auf 10 % der Versicherungssumme begrenzt.“; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (117/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.858,
+      "score": 0.952,
       "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.7,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis",
-      "ready": true,
-      "sha256": "a98cabf4f4ea2d36fb8c0badb013021ff4dfba617ac9698ad2ca19143b43e51b",
-      "score": 0.888,
-      "parts": {
-        "spelling": 0.84,
+        "spelling": 0.98,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.7,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe",
+      "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
       "ready": false,
-      "sha256": "3593228895c8949c2b81a0f0f69025540b388eae67b3a931cfbbbe8531077a7c",
-      "reason": "quality-score 0.809 < 0.85 (schwach: structure 0.70, typography 0.70, spelling 0.72)",
-      "details": [
-        "Reserve nicht bereit: 2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe: {'slug': '2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe', 'score': 0.809, 'parts': {'spelling': 0.7200000000000001, 'meta': 1.0, 'structure': 0.7, 'typography': 0.7, 'uniqueness': 0.9, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.809,
-      "parts": {
-        "spelling": 0.7200000000000001,
-        "meta": 1.0,
-        "structure": 0.7,
-        "typography": 0.7,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me",
-      "ready": false,
-      "sha256": "ac3dfbfadb698fea11386af75c80da116129e39f910aeab44079947a5eabc86d",
+      "sha256": "72acff48d370a820e5d682f61123bc994cf1be6a5d691f641a7b17cd068bacb3",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
+        "🛑 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Im letzten Jahr habe ich den Prozess durchlaufen und dabei monatlich bis zu 15 € gespart.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Monatliche Gebühren liegen meist zwischen 5 € und 15 €, oft kostenlos bei Mindestgeldeingang.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Monatliche Gebühren liegen meist zwischen 5 € und 15 €, oft kostenlos bei Mindestgeldeingang.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| FinTech‑X | Giro‑Konto | 0 € | 0 € (bei 3 % Kartennutzung) |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Direktbank‑Y | Tagesgeld‑Konto | 100 € | 5 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Direktbank‑Y | Tagesgeld‑Konto | 100 € | 5 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Regionalbank‑Z | Basis‑Konto | 0 € | 9 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „| Regionalbank‑Z | Basis‑Konto | 0 € | 9 € |“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein typisches Szenario: Grundgebühr 7 €, Karten‑Aufpreis 3 € und 1,50 € pro Auszahlung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Bei 12 Auszahlungen im Jahr entstehen rund 18 € Zusatzkosten.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „70 € bis 120 € pro Jahr, je nach Nutzung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „70 € bis 120 € pro Jahr, je nach Nutzung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Faustregel:** Ein Konto ohne Schufa lohnt sich, solange die Jahresgebühren unter 150 € bleiben.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das kann die Grundgebühr um bis zu 5 € erhöhen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Erreichst du die geforderten 100 €, kann die Bank eine Nachzahlungsgebühr erheben.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Grundgebühr: 7 € × 12 Monate = 84 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Grundgebühr: 7 € × 12 Monate = 84 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Karten‑Aufpreis: 3 € × 12 Monate = 36 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Karten‑Aufpreis: 3 € × 12 Monate = 36 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Auszahlungsgebühren: 1,50 € × 12 Auszahlungen = 18 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> - Auszahlungsgebühren: 1,50 € × 12 Auszahlungen = 18 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „> **Gesamtkosten:** 84 € + 36 € + 18 € = 138 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Damit liegt das Konto unter der **Faustregel**‑Grenze von 150 €, also wirtschaftlich sinnvoll.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Geldautomaten außerhalb des Netzwerks können 1‑2 € pro Nutzung kosten.“; E14: Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (125/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.893,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 0.7,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen",
-      "ready": false,
-      "sha256": "2b4e9df0d627a971d1c6abbca1d9940bafd0e5a0bebcb30d9db8695bed29c5a3",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „200 € pro Jahr, wenn du regelmäßig Zahnersatz brauchst.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Auslandskrankenversicherung** ist sinnvoll ab 30 % der regulären Prämie, wenn du mehr als 2 Woc…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „30 % der Rechnung selbst.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein gutes Zahnzusatz‑Modul erstattet bis zu 80 % der Aufwendungen, maximal ca.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „2 000 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du jährlich 1 500 € an Zahnbehandlungen ausgibst, bleibt dir nur 300 € Selbstbeteiligung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wenn du jährlich 1 500 € an Zahnbehandlungen ausgibst, bleibt dir nur 300 € Selbstbeteiligung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das entspricht einer direkten Ersparnis von 1 200 € im Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In der Regel liegt die monatliche Prämie für einen Zahnzusatz zwischen 5 € und 12 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „In der Regel liegt die monatliche Prämie für einen Zahnzusatz zwischen 5 € und 12 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Chefarzt‑Upgrade kostet meist 10 € bis 20 € pro Monat.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Chefarzt‑Upgrade kostet meist 10 € bis 20 € pro Monat.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Der Auslandsschutz liegt bei etwa 3 % bis 5 % der Jahresprämie deiner Grundversicherung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Der Auslandsschutz liegt bei etwa 3 % bis 5 % der Jahresprämie deiner Grundversicherung.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Faustregel:** Wenn ein Baustein mehr als 30 % deiner gesamten Zusatzprämie ausmacht, prüfe, ob du…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „*Ausgangssituation:* Du zahlst 15 € Monat für ein Komplettpaket (Zahn + Heilpraktiker + Ausland).“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Zahnzusatz allein kostet 6 € Monat, deckt 80 % der Zahnarztrechnungen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Zahnzusatz allein kostet 6 € Monat, deckt 80 % der Zahnarztrechnungen.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- Heilpraktiker‑Kosten fallen bei dir kaum an (nur 1 € Monat in Wirklichkeit).“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Gesamtkosten bisher: 15 € × 12 = 180 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Gesamtkosten bisher: 15 € × 12 = 180 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Optimierter Mix: Zahn 6 € + Heilpraktiker 1 € = 7 € Monat → 84 € Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ersparnis: 180 € − 84 € = 96 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Das Beispiel zeigt, dass du fast 100 € jährlich sparen kannst, wenn du unnötige Bausteine streichst.“; E14: Artikel enthält ein Rechenbeispiel, aber keinen dokumentierten Rechenweg; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (513/600 Wörter, 4/2 H2 davor); E17: Freigabe-Hash fehlt",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.879,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 0.7,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig",
-      "ready": false,
-      "sha256": "e5f8413084fa34c40accd4c75a32dd488f57c15b60910932a8ed85c0fd6a95bd",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.877,
+      "score": 0.899,
       "parts": {
         "spelling": 0.92,
-        "meta": 0.85,
+        "meta": 1.0,
         "structure": 0.7,
         "typography": 1.0,
         "uniqueness": 1.0,
@@ -125,123 +48,26 @@
       }
     },
     {
-      "slug": "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig",
+      "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
       "ready": false,
-      "sha256": "727a01f8c53c2e2c49198ae432a17ad27a0de66ea2cccc217d5f6ac45c61d771",
-      "reason": "quality-score 0.825 < 0.85 (schwach: structure 0.70, readability 0.75, spelling 0.80)",
+      "sha256": "188bfbed7fde189bd332a9f4638bd8a2aac0c63077e6e2209cf718a78ebd6c9d",
+      "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E",
       "details": [
-        "Reserve nicht bereit: 2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig: {'slug': '2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig', 'score': 0.825, 'parts': {'spelling': 0.8, 'meta': 0.85, 'structure': 0.7, 'typography': 0.8200000000000001, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.825,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.8200000000000001,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich",
-      "ready": false,
-      "sha256": "0373277d107ea5a7c7d92922c6ec823c3defeeaa4778011c37cd5ab5391da04a",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Keyword-Gate nicht bestanden: Keyword-Score 50/100 (<60 kritisch): Keyword nicht in: Titel; Keyword nicht in: Description; Keyword nicht in: URL-Slug",
+        "🛑 2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure: FACHLICHER REVIEW-HOLD → Entwurf bleibt erhalten, keine automatische Veröffentlichung",
+        "Redaktionelle YMYL-Freigabe nicht bestanden: E05: Status ist nicht „freigegeben“; E07: Prüfername und konkrete Prüferrolle fehlen; E08: Prüfertyp muss fachpruefer oder redaktion-mit-externer-belegkette sein; E09: gültiges Prüfdatum fehlt; E10: nächster Review-Termin fehlt; E12: sichtbare Belegkette braucht mindestens 2 Quellen; E18: Liste der geprüften Kernaussagen mit Textankern fehlt; E13: Liste der geprüften Zahlen/Rechenannahmen fehlt; E19: Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 30 €, was sie zu einer der günstigsten und wichtigsten Versicherungen macht.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € im Jahr) weniger als 1 % deiner Reisekosten ausmachen, das Risiko aber die gesamten Ersparniss…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € im Jahr) weniger als 1 % deiner Reisekosten ausmachen, das Risiko aber die gesamten Ersparniss…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Ambulanzflug aus Südeuropa kostet jedoch schnell zwischen 15.000 € und 25.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Ein Ambulanzflug aus Südeuropa kostet jedoch schnell zwischen 15.000 € und 25.000 €.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Aus Übersee können es über 100.000 € sein.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „10 bis 30 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „25 bis 60 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „50 bis 100 € fällig werden.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Wir nehmen an, du zahlst für eine solide Reisekrankenversicherung 15 € pro Jahr.“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „45.000 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „12.000 €“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „- **Gesamtkosten ohne Versicherung: 57.000 €**“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „Um die Kosten dieses einen Notfalls durch gesparte Versicherungsbeiträge selbst zu finanzieren, müs…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung wählen:** Viele Tarife bieten 50 oder 100 € Selbstbehalt an, um den Jahresbeitr…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „**Selbstbeteiligung wählen:** Viele Tarife bieten 50 oder 100 € Selbstbehalt an, um den Jahresbeitr…“; E19: Zahl ohne Fundstelle im Prüfprotokoll: „15 € so günstig, dass man sich die Unsicherheit der Kreditkarten-Police sparen kann.“; E15: Affiliate-CTA steht vor ausreichender fachlicher Grundlage (237/600 Wörter, 0/2 H2 davor); E17: Freigabe-Hash fehlt",
+        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 48 (Ziel ≥ 60); 10% Schachtelsätze (Ziel < 10%); 1 Absätze > 4 Sätze",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.905,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 1.0,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart",
-      "ready": false,
-      "sha256": "f3e3c72071fa2a18b5bac801ee52df1629ac9149f7422a45cfcf05ccbb32c95b",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.889,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 0.7,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri",
-      "ready": false,
-      "sha256": "08356b41032ddc880116d6a1da8a3b6e09525dfcf8f6fd831554b4c2e671f777",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im",
-      "details": [
-        "🛑 2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…du willst wie du mit einer budget app du willst…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wie du mit einer budget app du willst wie du…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…mit einer budget app du willst wie du mit einer…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…budget app du willst wie du mit einer budget app…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.888,
+      "score": 0.86,
       "parts": {
         "spelling": 0.8,
         "meta": 0.85,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric",
-      "ready": false,
-      "sha256": "ff93a4d3f4401cba613b99000a22059bdf8937d40fec832e61498384cb09beb2",
-      "reason": "quality-score 0.758 < 0.85 (schwach: spelling 0.58, structure 0.70, typography 0.70)",
-      "details": [
-        "Reserve nicht bereit: 2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric: {'slug': '2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric', 'score': 0.758, 'parts': {'spelling': 0.58, 'meta': 0.85, 'structure': 0.7, 'typography': 0.7, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.7}, 'verdict': 'human-review'}"
-      ],
-      "score": 0.758,
-      "parts": {
-        "spelling": 0.58,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.7,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.7
+        "readability": 0.65
       }
     }
-  ],
-  "recert": {
-    "at": "2026-10-02T14:53:53Z",
-    "renewed": [
-      "2026-10-01-365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe",
-      "2026-10-01-konto-eroeffnen-ohne-schufa-meine-praxis-checkliste-fuer-me",
-      "2026-10-01-krankenzusatz-bausteine-die-wirklich-etwas-bringen",
-      "2026-10-01-monatliche-kosten-halbieren-deine-checkliste-fuer-sofortig",
-      "2026-10-01-smart-home-so-senkst-du-deine-stromrechnung-nachhaltig",
-      "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich",
-      "2026-10-01-tierversicherung-im-check-lohnt-sich-der-schutz-fuer-hund",
-      "2026-10-01-waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis",
-      "2026-10-01-wann-ein-glasfaseranschluss-wirklich-geld-spart",
-      "2026-10-01-wie-du-mit-einer-budget-app-deine-geldfluesse-endlich-im-gri",
-      "2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  ]
 }
