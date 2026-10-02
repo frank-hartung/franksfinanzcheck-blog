@@ -221,4 +221,4 @@
 {"date": "2026-10-01", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["layouts/_partials/head.html"]}
 {"date": "2026-10-01", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-02", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["layouts/pillar/list.html", "scripts/redaktions_standard.py"]}
-{"date": "2026-10-02", "kritisch": 1, "fest": 2, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/pillar/list.html", "layouts/pillar/single.html"]}
+{"date": "2026-10-02", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["layouts/pillar/list.html", "layouts/pillar/single.html"], "head": "f52bce0"}

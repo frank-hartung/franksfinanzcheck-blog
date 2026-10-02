@@ -11,6 +11,10 @@ author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
+cover:
+  image: "images/covers/2026-10-02-die-50-30-20-regel-einfach-erklaert.jpg"
+  alt: "Die 50-30-20-Regel einfach erklärt"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du bekommst am Monatsende immer wieder das Gefühl, dass das Geld schneller verschwindet, als du es ausgeben kannst. Du willst wissen, wie du deine Einnahmen strukturiert aufteilen kannst, ohne dich zu verkrampfen. Die 50‑30‑20‑Regel bietet dafür einen klaren Rahmen, der sich leicht in den Alltag einbauen lässt.

@@ -342,8 +342,8 @@
   }
  },
  "pillar-frugalismus": {
-  "title": "Frugalismus & Budget: Der große Ratgeber für finanzielle Freiheit",
-  "ts": "2026-09-11T22:56:42+00:00",
+  "title": "Haushaltsbudget & Frugalismus: Der große Ratgeber für finanzielle Puffer",
+  "ts": "2026-10-02T12:41:25+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -668,6 +668,42 @@
  "2026-10-01-strom-tarif-check-so-sparst-du-clever-im-jahresvergleich": {
   "title": "Strom‑Tarif‑Check: So sparst du clever im Jahresvergleich",
   "ts": "2026-10-01T16:46:49+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-die-50-30-20-regel-einfach-erklaert": {
+  "title": "Die 50-30-20-Regel einfach erklärt",
+  "ts": "2026-10-02T12:41:18+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-02-notgroschen-aufbauen-dein-finanzielles-sicherheitsnetz": {
+  "title": "Notgroschen aufbauen: Dein finanzielles Sicherheitsnetz",
+  "ts": "2026-10-02T12:41:20+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric": {
+  "title": "So bringst du deine Urlaubskasse: in Schwung – 7 smarte Tric",
+  "ts": "2026-10-02T12:41:22+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-02-stromfresser-finden-so-stoppst-du-den-energiediebstahl": {
+  "title": "Stromfresser finden: So stoppst du den Energiediebstahl",
+  "ts": "2026-10-02T12:41:25+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
