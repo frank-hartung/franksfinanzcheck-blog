@@ -36,7 +36,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
   workers: process.env.CI ? 2 : undefined,
+  // Der GitHub-Reporter schreibt jeden Fehlschlag als Annotation an die
+  // Datei/Zeile. Das ist der einzige Weg, einen roten Lauf zu lesen, wenn
+  // Run-Log und Report-Artefakt nicht erreichbar sind (API statt Blob-Host).
   reporter: [
+    ...(process.env.CI ? [['github']] : []),
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ],
