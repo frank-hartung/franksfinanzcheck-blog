@@ -1,9 +1,9 @@
 ---
 title: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
 description: "Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison."
-date: 2026-10-02T19:40:00Z
-draft: true
-reserve: true
+date: 2026-10-02T21:37:08Z
+draft: false
+reserve_published: 2026-10-02
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

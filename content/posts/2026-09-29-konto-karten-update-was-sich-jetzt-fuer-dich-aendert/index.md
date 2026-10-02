@@ -87,7 +87,7 @@ Dazu kommt der Kapitalmarkt. Steigen die Zinsen allgemein, passen die Banken ihr
 **Lesetipp:** Autokosten senken: So sparst du hunderte Euro jährlich
 
 
-**Lesetipp:** [Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden](../../posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/)
+**Lesetipp:** Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden
 ## FAQ – die wichtigsten Fragen zur Meldung
 
 ### Warum senken Banken den Zinssatz nach der Befristung?

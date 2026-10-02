@@ -160,6 +160,8 @@ kurzantwort: "Ja, sie lohnt sich ab dem ersten Kilometer im Ausland: Eine Jahres
 
 Ein gebrochenes Bein beim Wandern in Südtirol. Eine Blinddarmentzündung in Thailand. Ein schwerer Infekt in den USA. Medizinische Notfälle im Urlaub sind belastend – und ohne private Reisekrankenversicherung können sie dein ganzes Vermögen kosten. Viele Reisende glauben, ihre gesetzliche Krankenkasse schütze sie weltweit. Das stimmt nicht. Der teuerste Posten, ein medizinisch sinnvoller Rücktransport, zahlt die gesetzliche Kasse grundsätzlich nicht.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Dieser Ratgeber beantwortet dir drei Fragen:
 - Warum reicht der gesetzliche Versicherungsschutz im Ausland oft nicht aus?
 - Welche Leistungen sind bei einer Auslandskrankenversicherung unverzichtbar?

@@ -138,6 +138,8 @@ kurzantwort: "Vergleiche mindestens drei Angebote und prüfe, ob du überversich
 
 Ein geplatzter Schlauch an deiner Waschmaschine ruiniert in Minuten Möbel für 10.000 €. In einer 80 m² großen Wohnung kostet die Einrichtung oft mehr als ein Neuwagen. Ohne eine gute **Hausratversicherung** trägst du dieses finanzielle Risiko komplett allein. Du sicherst mit dieser Police deine gesamte finanzielle Basis in deinem Zuhause ab.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**
 * Die Police zahlt den Wiederbeschaffungswert zum Neupreis, nicht den Zeitwert.
 * Setze die Versicherungssumme auf rund 650 € pro Quadratmeter fest.
