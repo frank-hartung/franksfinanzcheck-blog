@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-02T12:30:11.943046+00:00",
-  "head": "f52bce0",
+  "signed_at": "2026-10-02T12:55:50.545337+00:00",
+  "head": "fd89544",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "21b6f43bef0e7c8cd5f324f240aab364086dd5df422551c5529c9224a9805539",
+    "hugo.toml": "b4317c100cc2e4c3880c38064a154470f494c88a274c32227f753fb559f67054",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -47,39 +47,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "088c2dca90dc0c0b5aeed753c96e4435f215e793914b528ac3ca705eea9bbfb7",
-  "audit_start_sha256": "2dd8cd1f6c5c3a4c4432c89afee5a6bf870042de7233e748ebb4fa8e149da7e7",
+  "files_sha256": "55d81ea72666c28b68cb8308c923ea42928ec096a5dd45217067959548d83cc2",
+  "audit_start_sha256": "88eec015bf6d6beb2717f87316f228cffd135722e71476de6f3e7454110ff33d",
   "audit": [
-    {
-      "date": "2026-09-28",
-      "art": "set-current",
-      "head": "9c60f68f",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9c60f68f",
-              "datum": "2026-09-28",
-              "betreff": "fix(watchdog): enforce canonical affiliate residual findings"
-            },
-            {
-              "sha": "d8f12c1e",
-              "datum": "2026-09-28",
-              "betreff": "Merge pull request #452 from frank-hartung/arena/01a0e9a6-franksfinanzcheck-blog"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "7df0358b45726d095f91bea1e9fb66e8c52d538127bc3551319e7b0245e72206",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-28",
       "art": "set-current",
@@ -108,7 +78,7 @@
         }
       ],
       "files_sha256": "9a511ff64c727c44b93c9a9f6ad769954c7c4bb770402ed4df2b4eaa36b5424e",
-      "prev_sha256": "2dd8cd1f6c5c3a4c4432c89afee5a6bf870042de7233e748ebb4fa8e149da7e7"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-28",
@@ -572,8 +542,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "5a26379d7e438f3c97b1d436ce8f44e11a78e0fefc9019f25cc77ac7cab59a3c",
-      "files_sha256": "088c2dca90dc0c0b5aeed753c96e4435f215e793914b528ac3ca705eea9bbfb7"
+      "files_sha256": "088c2dca90dc0c0b5aeed753c96e4435f215e793914b528ac3ca705eea9bbfb7",
+      "prev_sha256": "5a26379d7e438f3c97b1d436ce8f44e11a78e0fefc9019f25cc77ac7cab59a3c"
+    },
+    {
+      "date": "2026-10-02",
+      "art": "set-current",
+      "head": "fd89544",
+      "geaendert": [
+        "hugo.toml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "bada5c6",
+              "datum": "2026-10-02",
+              "betreff": "feat(werkzeuge): eigenständige Tool-Erfahrung unter /werkzeuge/ (Befund 5)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "4377ff88ddeee4c9289f4278db76be2d5a8165137a0d71f0dd24fbbbc50f62b9",
+      "files_sha256": "55d81ea72666c28b68cb8308c923ea42928ec096a5dd45217067959548d83cc2"
     }
   ]
 }
