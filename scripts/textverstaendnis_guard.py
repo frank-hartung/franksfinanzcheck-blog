@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TEXTVERSTÄNDNIS-GUARD (R2–R15) für FranksFinanzcheck.
+TEXTVERSTÄNDNIS-GUARD (R2–R16) für FranksFinanzcheck.
 
 Die Verständnis-Regeln aus dem Textverständnis-Audit (01.09.2026), die
 KEIN bestehendes Gate misst:
@@ -39,8 +39,16 @@ KEIN bestehendes Gate misst:
                            Flughafen von Faro …“) und den mehr-freiheit-
                            Doppelblock (08/2026), die D1/D2 verpassen
                            (Ratio < 0,85 bzw. < 120 Zeichen).
+  R16 Prompt-Echo          „TITLE:“/„DESCRIPTION:“ aus dem Generator-Prompt
+                           im Fließtext (R16-PROMPT-ECHO) oder im
+                           Frontmatter (R16-PROMPT-ECHO-META). Realfall
+                           02.10.2026, Issue #521: Der DSL-Entwurf trug den
+                           Marker im Text, in `description` UND in
+                           `pin_description` – Snippet- und Pin-Text also
+                           direkt nach außen. Gestoppt hat ihn nur zufällig
+                           die Zeichenlänge, keine Wache.
 
-R11–R14 teilen sich die Muster-SSOT mit der Schreib-Verifikation:
+R11–R14/R16 teilen sich die Muster-SSOT mit der Schreib-Verifikation:
 `sprachkern.POLITUR_RUINEN` (write_verified verweigert jede Schrift,
 die eine NEUE Ruine einführt). Diese Wache meldet sie zusätzlich im
 Bestands-Audit und blockiert die Veröffentlichung (Publish-Gate).
@@ -70,7 +78,7 @@ except ImportError:
 # dieselben Muster, mit denen write_verified jede Schrift verweigert, die
 # eine NEUE Ruine einführt. Eine Quelle, zwei Einsatzstellen.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from sprachkern import politur_ruine_funde  # noqa: E402
+from sprachkern import politur_ruine_funde, prompt_echo_im_feld  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
@@ -428,12 +436,49 @@ def check_wortdopplung(rel: str, body: str) -> list:
 # blockieren die Veröffentlichung. Am gesamten Content gegen False-Positive
 # geprüft (0 Treffer auf 61 Artikel + alle Seiten).
 def check_politur_ruinen(rel: str, body: str) -> list:
-    """Erkennt Politur-Ruinen R11–R14 (Muster-SSOT: sprachkern) – hart."""
+    """Erkennt Politur-Ruinen R11–R14/R16 (Muster-SSOT: sprachkern) – hart."""
     out = []
     for regel, fund in politur_ruine_funde(body):
         out.append((rel, regel,
                     f"Politur-Ruine „{fund}“ – Überrest eines automatisierten "
                     f"Politur-Laufs, manuell reparieren", fund))
+    return out
+
+
+# R16-PROMPT-ECHO-META (02.10.2026, Issue #521):
+# Alle Regeln dieses Gates lasen bis heute ausschließlich den Fließtext –
+# `split_body()` schneidet das Frontmatter vorher ab. Genau dort landete
+# am 02.10.2026 aber der Schaden: `description` und `pin_description` des
+# DSL-Entwurfs begannen mit „TITLE: …“, weil `parse_article` die
+# Beschreibung aus der Marker-Zeile baute. Diese Felder sind das, was
+# Google als Snippet und Pinterest als Pin-Text ausliefert – ein Defekt
+# dort ist sichtbarer als im Artikel selbst.
+META_FELDER = ("title", "description", "pin_description", "pin_title",
+               "kurzantwort", "summary", "linktitle")
+_META_ZEILE_RX = re.compile(
+    rf"(?m)^(?P<key>{'|'.join(META_FELDER)})\s*:\s*(?P<val>.+?)\s*$")
+
+
+def check_meta_prompt_echo(rel: str, raw: str) -> list:
+    """Prompt-Marker in den Frontmatter-Feldern – hart.
+
+    Arbeitet bewusst zeilenweise auf dem rohen Frontmatter statt über YAML:
+    Ein Entwurf, dessen Frontmatter nicht parst, soll hier nicht still
+    durchrutschen, sondern von den YAML-Wachen gemeldet werden.
+    """
+    teile = raw.split("---", 2)
+    if len(teile) < 3:
+        return []
+    out = []
+    for m in _META_ZEILE_RX.finditer(teile[1]):
+        wert = m.group("val").strip().strip("\"'")
+        fund = prompt_echo_im_feld(wert)
+        if fund:
+            out.append((rel, "R16-PROMPT-ECHO-META",
+                        f"Prompt-Marker „{fund}“ im Frontmatter-Feld "
+                        f"„{m.group('key')}“ – dieser Text geht als "
+                        f"Google-Snippet bzw. Pin-Text nach außen",
+                        f"{m.group('key')}: {wert[:60]}"))
     return out
 
 
@@ -650,6 +695,62 @@ def run_selftest() -> list:
     if any(f[1] == "R15-PHRASEN-DOPPEL" for f in check_article("t", body15b, {})):
         fehler.append("R15: False-Positive bei 9-Wort-Titel-Echo")
 
+    # ---------- R16 Prompt-Echo (Issue #521, Realfall 02.10.2026) ----------
+    # Exakt die Form, die am 02.10.2026 im Entwurf stand: eine Leerzeile
+    # zwischen TITLE und DESCRIPTION – genau die Form, die parse_article
+    # nicht erkannte.
+    body16 = ("TITLE: Preiswert surfen: So findest du den optimalen DSL-Anschluss\n"
+              "\n"
+              "DESCRIPTION: So sparst du jeden Monat bares Geld.\n\n"
+              "Der eigentliche Artikeltext beginnt erst hier unten.")
+    if not any(f[1] == "R16-PROMPT-ECHO" for f in check_article("t", body16, {})):
+        fehler.append("R16: Prompt-Echo „TITLE:/DESCRIPTION:“ nicht erkannt "
+                      "– der Schadensfall vom 02.10.2026 liefe erneut durch")
+    for _marker in ("KEYWORDS: dsl, tarif", "PILLAR: fixkosten",
+                    "OUTPUT: fertiger Text", "ARTIKEL: Kapitel 1"):
+        if not any(f[1] == "R16-PROMPT-ECHO"
+                   for f in check_article("t", f"TEXT\n\n{_marker}", {})):
+            fehler.append(f"R16: Marker „{_marker}“ nicht erkannt")
+    # False-Positive-Schutz: deutsche Fließtext-Doppelpunkte sind Inhalt.
+    for _ok in ("Tipp: Vergleiche drei Angebote.",
+                "Beispiel: 2.500 € netto im Monat.",
+                "Faustregel: Alle drei Jahre prüfen.",
+                "Achtung: Die Frist endet am 31.12.",
+                "Fazit: Der Wechsel lohnt sich.",
+                "Hinweis: Das gilt erst ab 2027.",
+                "Wichtig: Kündige rechtzeitig."):
+        if any(f[1] == "R16-PROMPT-ECHO"
+               for f in check_article("t", "TEXT\n\n" + _ok, {})):
+            fehler.append(f"R16: False-Positive bei „{_ok}“")
+    # Frontmatter-Ebene: genau die zwei Felder, die am 02.10. verseucht waren.
+    roh16 = ("---\n"
+             "title: \"Preiswert surfen\"\n"
+             "description: \"TITLE: Preiswert surfen: So findest du den Anschluss\"\n"
+             "pin_description: \"*Werbung | TITLE: Preiswert surfen\"\n"
+             "---\n\nSauberer Fließtext ohne jeden Marker.\n")
+    meta_funde = {f[1] for f in check_meta_prompt_echo("t", roh16)}
+    if "R16-PROMPT-ECHO-META" not in meta_funde:
+        fehler.append("R16-META: Prompt-Marker in description/pin_description "
+                      "nicht erkannt – Google-Snippet und Pin-Text ungeschützt")
+    if len(check_meta_prompt_echo("t", roh16)) != 2:
+        fehler.append("R16-META: nicht beide verseuchten Felder gemeldet")
+    sauber16 = ("---\n"
+                "title: \"Strom sparen: 20 Tipps\"\n"
+                "description: \"Tipp: So senkst du deine Stromrechnung spürbar.\"\n"
+                "---\n\nText.\n")
+    if check_meta_prompt_echo("t", sauber16):
+        fehler.append("R16-META: False-Positive bei sauberem Frontmatter")
+    # Vertrag: Beide R16-Kennungen MÜSSEN hart sein. Ein Prompt-Echo, das
+    # nur gemeldet statt geblockt wird, ist genau der Zustand, der den
+    # 02.10.2026 ermöglicht hat.
+    import inspect as _inspect
+    _quelle = _inspect.getsource(main)
+    for _regel in ("R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META",
+                   "R11-JAHRESZAHL-SPLIT", "R15-PHRASEN-DOPPEL"):
+        if f'"{_regel}"' not in _quelle:
+            fehler.append(f"{_regel} fehlt in hard_rules – die Regel würde "
+                          f"nur gemeldet, nicht blockiert")
+
     return fehler
 
 
@@ -661,7 +762,7 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: R2–R15 grün.")
+        print("✅ Verständnis-Selbsttest: R2–R16 grün (inkl. Prompt-Echo im Text und im Frontmatter).")
         return 0
 
     term = load_terminologie()
@@ -679,8 +780,11 @@ def main() -> int:
     all_finds = []
     for p in paths:
         rel = str(p.relative_to(ROOT))
-        body = split_body(p.read_text(encoding="utf-8"))
-        all_finds += check_article(rel, body, term)
+        raw = p.read_text(encoding="utf-8")
+        all_finds += check_article(rel, split_body(raw), term)
+        # Frontmatter separat: split_body() schneidet es ab, der Schaden
+        # vom 02.10.2026 saß aber genau dort (description/pin_description).
+        all_finds += check_meta_prompt_echo(rel, raw)
 
     # Hub-/Listen-Seiten (02.09.2026): In posts/_index.md wurde mit
     # „HHerfindestdu“/„Ddeine6 Themenwelten“ das Reste-Artefakt eines
@@ -716,8 +820,16 @@ def main() -> int:
 
     # R8-ANKER-ZIEL ist bewusst NUR weich (semantische Kohärenz ist nicht
     # deterministisch prüfbar – Funde sind Review-Kandidaten, keine Blocker).
+    # 02.10.2026 (Issue #521): R11–R15 standen seit dem 30.09. im Kopf des
+    # Reports als „harte Regeln“, fehlten in dieser Liste aber – der Guard
+    # versprach eine Blockade, die er nie vollzog (publish_gate blockte
+    # allein). Die Liste ist jetzt deckungsgleich mit der Dokumentation
+    # und mit publish_gate.textverstaendnis_failures.
     hard_rules = ("R2-KEYWORD-DUMP", "R3-TERMINOLOGIE", "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
-                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT", "R10-DOPPELWORT")
+                  "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT", "R10-DOPPELWORT",
+                  "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE", "R13-DATUM-PUNKT",
+                  "R14-MARKER-RUINE", "R15-PHRASEN-DOPPEL",
+                  "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]
 
@@ -725,7 +837,7 @@ def main() -> int:
              f"**Stand:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} · Artikel: {len(paths)}" +
              (f" · Seiten (Klebe-Scan): {len(seiten_paths)}" if not NEW_ONLY else " · Engine (nur heute)"),
              "",
-             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL/R9/R10/R11–R15):** {len(hard)} Funde",
+             f"**Harte Regeln (R2/R3/R5-hart/R7/R8-URL/R9/R10/R11–R16):** {len(hard)} Funde",
              f"**Weiche Regeln (R4/R5/R8-Anker):** {len(soft)} Funde",
              ""]
     for rel, regel, detail, pos in uniq[:60]:

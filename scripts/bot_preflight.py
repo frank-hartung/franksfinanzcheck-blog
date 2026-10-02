@@ -52,6 +52,51 @@ def check_topics():
         return False, 0, f"topics.yaml unlesbar: {e}"
 
 
+def check_capacity():
+    """Die Zahl, die am Morgen eines Publikationstages wirklich zählt.
+
+    PREMIUM-FIX 02.10.2026 (Issue #521). `check_topics()` zählt mit der
+    laxen 60-%-Token-Regel aus `generate_drafts.topic_already_covered` und
+    meldete am 02.10.2026 **157 freie Themen**. Der Disponent, der das Thema
+    tatsächlich auswählt (`reserve_topics.disponieren`: Leitbegriff-Kollision
+    + Cooldown-Gedächtnis + Publikations-Bahn), fand zur selben Zeit **3**.
+
+    Ein Pre-Flight, der mit einem anderen Maß misst als der Disponent, ist
+    kein Pre-Flight – er ist eine grüne Lampe am falschen Kabel. Der Lauf
+    startete grün, produzierte vier Artikel und endete bei 0/2 LIVE.
+
+    Diese Prüfung misst deshalb mit genau dem Maß des Disponenten und heilt
+    vorher die nachweislich falschen Sperren (`--abgleich`): Eine
+    Erfolgsmeldung „produziert: <slug>“ zu einem Artikel, den es nicht
+    gibt, sperrt das Thema 180 Tage für nichts. Am 02.10. betraf das 47 von
+    63 Einträgen.
+
+    Sie bricht den Lauf NIE ab: Auch bei leerem Themenpool bleiben
+    Re-Queue-Beförderung und Reserve-Veröffentlichung sinnvoll. Ein Engpass
+    ist ein lautes Signal, kein Grund, die Produktion zuzusperren.
+    """
+    sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+    try:
+        import reserve_topics as rt
+        import engine_capacity as ec
+    except Exception as e:  # noqa: BLE001 – Pre-Flight darf nie hart fallen
+        return None, [f"Kapazitäts-Rechnung nicht ladbar: {e}"]
+    hinweise = []
+    try:
+        korrekturen = rt.abgleich()
+        if korrekturen:
+            hinweise.append(
+                f"{len(korrekturen)} Erfolgsmeldung(en) ohne Artikel "
+                f"zurückgenommen – so viele Themen waren grundlos gesperrt "
+                f"(erste: „{korrekturen[0]['titel']}“).")
+    except Exception as e:  # noqa: BLE001
+        hinweise.append(f"Themen-Abgleich übersprungen: {e}")
+    try:
+        return ec.lage(), hinweise
+    except Exception as e:  # noqa: BLE001
+        return None, hinweise + [f"Kapazitäts-Lage nicht ermittelbar: {e}"]
+
+
 def main():
     print("=" * 60)
     print("PRE-FLIGHT-CHECK Content-Bot")
@@ -76,15 +121,40 @@ def main():
     else:
         print(f"✅ API-Keys: Groq={'ja' if groq else 'nein'} | Gemini={'ja' if gemini else 'nein'}")
 
-    # 3) Themenpool
+    # 3) Themenpool (Parsebarkeit – nicht die Kapazität!)
     parse_ok, freie, msg = check_topics()
     if not parse_ok:
         ok = False
         print(f"❌ Themenpool: {msg}")
     else:
-        print(f"✅ Themenpool: {msg}")
-        if freie < 8:
-            print("   ℹ️ Wenig freie Themen – KI-Nachschub wird beim Lauf aktiviert.")
+        print(f"✅ Themenpool lesbar: {msg} (grobe Zählung)")
+
+    # 4) KAPAZITÄT – mit dem Maß des Disponenten (Issue #521)
+    lage, hinweise = check_capacity()
+    for hinweis in hinweise:
+        print(f"   ℹ️ {hinweis}")
+    if lage is None:
+        print("⚠️ Kapazität: nicht messbar – Lauf startet trotzdem.")
+    else:
+        symbol = {"ok": "✅", "knapp": "⚠️", "erschoepft": "🛑"}[lage["verdikt"]]
+        print(f"{symbol} Kapazität: {lage['befund']}")
+        print(f"   AUTO-Bahn frei: {lage['frei_auto']} · "
+              f"FACHFREIGABE-Bahn frei: {lage['frei_fachfreigabe']} "
+              f"(von {lage['themen_auto']} + {lage['themen_fachfreigabe']} "
+              f"Themen)")
+        fach = lage["fachfreigabe"]
+        if not fach["geoeffnet"]:
+            print(f"   ℹ️ Fachfreigabe-Bahn geschlossen: {fach['grund']}.")
+        for warnung in lage["warnungen"]:
+            print(f"   ⚠️ {warnung}")
+        # Sichtbar im Actions-Log, ohne den Lauf abzubrechen: Ein Engpass
+        # heilt nicht dadurch, dass die Engine gar nicht erst anläuft –
+        # Re-Queue und Reserve bleiben auch dann die richtige Arbeit.
+        if lage["verdikt"] != "ok":
+            print(f"::warning title=Content-Engine-Kapazität::"
+                  f"{lage['befund']} "
+                  f"(AUTO frei: {lage['frei_auto']}, Ziel/Tag: "
+                  f"{lage['min_artikel_pro_tag']})")
 
     print("-" * 60)
     if ok:

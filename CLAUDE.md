@@ -242,7 +242,59 @@ gegangen („Du bist der 0 am deutschen Strommarkt“, „es ist der 2 Januar“
 - R15 läuft bewusst **nur auf Artikel-Fließtext** (nicht auf Rechtsseiten:
   Impressum-Adressen wiederholen sich legitim) und nicht auf
   Überschriften/Listen/Tabellen/CTA-Boxen.
-- Runbook + Zahlen: `LESBARKEIT-ENTWUERFE-PREMIUM-2026-09-30.md`.
+- **R16-PROMPT-ECHO / R16-PROMPT-ECHO-META** (seit 02.10.2026, Issue #521):
+  Prompt-Marker (`TITLE:`, `DESCRIPTION:`, `KEYWORDS:` …) im Fließtext bzw.
+  im Frontmatter. Realfall: `parse_article` erkannte den Prompt-Kopf nur
+  positionsgebunden; eine Leerzeile zwischen den Markern genügte, und
+  „TITLE: …“ stand in `description`, `pin_description` **und** im Artikel.
+  R16-META ist die **erste Regel dieses Guards, die ins Frontmatter sieht** –
+  `split_body()` schneidet es sonst ab, und genau dort geht der Text als
+  Google-Snippet und Pin nach außen.
+- **Die beiden harten Regelsätze müssen deckungsgleich bleiben**
+  (`textverstaendnis_guard.hard_rules` ↔ `publish_gate.textverstaendnis_failures`).
+  Am 02.10.2026 behauptete der Report-Kopf „harte Regeln R11–R15“, während
+  die Liste des Guards sie gar nicht enthielt – eine Wache, die eine
+  Blockade nur versprach. `test_prompt_echo.py` vergleicht beide Sätze jetzt
+  dauerhaft.
+- Runbook + Zahlen: `LESBARKEIT-ENTWUERFE-PREMIUM-2026-09-30.md`,
+  `CONTENT-ENGINE-KAPAZITAET-PREMIUM-2026-10-02.md`.
+
+## Themen haben zwei Bahnen (seit 02.10.2026, Issue #521)
+
+Am 02.10.2026 lief die Engine, schrieb vier Artikel und veröffentlichte
+**null**. Nicht die Produktion war kaputt, sondern die Buchhaltung darüber.
+
+- **AUTO vs. FACHFREIGABE:** YMYL-Themen (Versicherung, Rente, Kredit –
+  46 von 187) können per Vertrag nie ohne menschliche Freigabe live gehen.
+  Die Disposition war dafür blind, gab sie an die Automatik und verbuchte
+  den unveröffentlichbaren Entwurf als Erfolg: Slot weg, Thema 180 Tage
+  gesperrt, LIVE-Zähler unverändert. **Nur `engine_capacity.nur_auto()`
+  beantwortet „schaffen wir das Tagesziel?“.**
+- **Die Bahn ersetzt nie ein Gate.** Sie ist asymmetrisch konservativ: Ein
+  bekanntes `hoch`-Thema kommt nicht in die Quote; ein als `auto`
+  eingestuftes Thema, dessen Artikel sich doch als YMYL erweist, läuft
+  weiterhin ins fail-closed `editorial_review_gate`.
+- **Eine Klassifikation, nicht zwei:** `engine_capacity` ruft
+  `editorial_review_gate.classify_text()`. Die Risikomuster nie kopieren –
+  ein Test verbietet es.
+- **Ein Maß für „frei“:** `engine_capacity.lage()` zählt ausschließlich über
+  `reserve_topics.disponieren`. Vorher maß der Pre-Flight mit einer laxen
+  60-%-Token-Regel (`157 frei`), während der Disponent **3** fand. Nie eine
+  zweite Zählregel einführen.
+- **Pre-Flight bricht bei Engpass NICHT ab** (`::warning::` statt Exit 1):
+  Re-Queue und Reserve-Veröffentlichung brauchen keine neuen Themen. Ein
+  leerer Pool heilt nicht dadurch, dass die Engine stillsteht.
+- **`merke(ok=True, "produziert: …")` ist keine Garantie, dass es den
+  Artikel gibt.** `reserve_topics.abgleich()` (läuft im Pre-Flight) prüft
+  gegen den Bestand und löst Phantom-Sperren – am 02.10. waren das **47 von
+  63** Einträgen; freie AUTO-Themen 3 → 37. Der Abgleich hebt nur den
+  *Cooldown* auf, nie den Dubletten-Schutz.
+  ⚠️ **Slug-Falle:** Das Ledger speichert ohne Datumspräfix, auf der Platte
+  liegt `<datum>-<slug>` (ggf. mit `-N`). Immer über `_bestands_slugs()`
+  normalisieren – die naive Prüfung meldet 51/63 Einträge falsch als
+  Phantom und entsperrt den halben Pool.
+- Bedienung: `npm run engine:kapazitaet`, `npm run engine:abgleich`.
+  Anleitung: `docs/ANLEITUNG-ENGINE-KAPAZITAET.md`.
 
 ## „Im Artikel“ bleibt Premium (Wache seit 27.09.2026)
 

@@ -465,6 +465,11 @@ def textverstaendnis_failures(candidates):
             "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
             "R13-DATUM-PUNKT", "R14-MARKER-RUINE",
             "R15-PHRASEN-DOPPEL",
+            # R16 (02.10.2026, Issue #521): Prompt-Echo im Artikeltext und
+            # in den Meta-Feldern. Der Entwurf vom 02.10. trug „TITLE: …“
+            # im Fließtext, in der description UND im Pinterest-Text –
+            # gestoppt hat ihn nur zufällig die Zeichenlänge.
+            "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META",
         }
         term = load_terminologie()
         failed = {}

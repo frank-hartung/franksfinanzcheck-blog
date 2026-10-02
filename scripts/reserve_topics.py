@@ -312,17 +312,188 @@ def merke(titel: str, ok: bool, grund: str = "", *, pfad: Path | None = None,
 
 
 # ---------------------------------------------------------------------------
+#  Abgleich: ein Erfolgseintrag ohne Artefakt ist kein Erfolg
+# ---------------------------------------------------------------------------
+#  PREMIUM-FIX 02.10.2026 (Issue #521). `merke(..., ok=True)` wird gesetzt,
+#  sobald der Entwurf GESCHRIEBEN ist – nicht, wenn er die Gates überlebt.
+#  Das Thema bekommt dabei SPERRE_ERFOLG (180 Tage). Verwirft das Publish-Gate
+#  den Artikel danach, bleibt ein Ledger-Eintrag „produziert: <slug>“ zurück,
+#  zu dem es keinen Artikel mehr gibt: Das Thema ist ein halbes Jahr gesperrt,
+#  der Blog hat nichts davon.
+#
+#  Realer Fund vom 02.10.2026: „Urlaubskasse clever aufbessern: 7 Tipps für
+#  mehr Reisebudget“ → `produziert: so-bringst-du-deine-urlaubskasse-in-
+#  schwung…`, gesperrt bis 2027-03-31 – der Slug existiert im Repository
+#  nicht. Ein Produktionsslot und ein Thema, beide weg, ohne eine Zeile Text.
+#  Insgesamt behaupteten 47 von 63 Ledger-Einträgen eine Produktion, zu der
+#  es keinen Artikel gibt. Genau diese Phantom-Sperren – nicht ein leerer
+#  Themenpool – ließen die Disposition am 02.10. nur noch 3 von 187 Themen
+#  finden.
+#
+#  WARUM DAS GEFAHRLOS IST: Der Abgleich hebt ausschließlich den COOLDOWN
+#  auf, nie den Dubletten-Schutz. Ob zu einem Thema schon ein Artikel
+#  existiert, entscheidet weiterhin `thema_kollision()` gegen den echten
+#  Bestand. Ein Thema ohne Artikel ist per Definition nicht belegt.
+#
+#  WARUM ES KEINE SCHLEIFE GIBT: Ein einzelner Phantom-Eintrag ist ein
+#  Buchhaltungsfehler und wird nicht bestraft (kein `fehler`-Zähler, keine
+#  Sperre). Wiederholt er sich, ist es ein Inhaltsproblem – ab
+#  DAUERFEHLER_AB Abgleichen greift die lange Sperre.
+ABGLEICH_ZAEHLER = "abgleich_fehler"
+
+
+def _produzierter_slug(grund: str) -> str:
+    """Slug aus einem Erfolgs-Eintrag („produziert: <slug>“) – sonst ''."""
+    text = str(grund or "").strip()
+    if not text.lower().startswith("produziert:"):
+        return ""
+    rest = text.split(":", 1)[1].strip()
+    return rest.split()[0] if rest else ""
+
+
+# Die Engine merkt sich den Slug OHNE Datumspräfix („hausratversicherung-…“),
+# das Bündel auf der Platte heißt aber „2026-10-02-hausratversicherung-…“ –
+# und bei Titel-Dubletten hängt save_article zusätzlich „-2“ an. Wer hier
+# naiv `posts_dir / slug` prüft, erklärt JEDEN produzierten Artikel für
+# verschwunden und gibt den halben Themenpool frei. Genau diese Falle wurde
+# beim Bau von `abgleich()` einmal gestellt und durch Messen gefunden.
+_DATUMSPRAEFIX = re.compile(r"^\d{4}-\d{2}-\d{2}-")
+_DUBLETTEN_SUFFIX = re.compile(r"-\d+$")
+
+
+def _bestands_slugs(posts_dir: Path) -> set[str]:
+    """Alle Artikel-Slugs auf der Platte, normalisiert wie im Ledger."""
+    out: set[str] = set()
+    posts_dir = Path(posts_dir)
+    if not posts_dir.is_dir():
+        return out
+    for index in posts_dir.glob("*/index.md"):
+        name = index.parent.name
+        out.add(name)
+        ohne_datum = _DATUMSPRAEFIX.sub("", name)
+        out.add(ohne_datum)
+        out.add(_DUBLETTEN_SUFFIX.sub("", ohne_datum))
+    return out
+
+
+def abgleich(posts_dir: Path = POSTS, *, pfad: Path | None = None,
+             jetzt: dt.date | None = None, apply: bool = True) -> list[dict]:
+    """Erfolgs-Sperren ohne Artefakt auflösen – Themen zurück in die Rotation.
+
+    Prüft jeden Eintrag „produziert: <slug>“ gegen das Dateisystem. Fehlt der
+    Artikel, war die Meldung falsch: Die 180-Tage-Erfolgssperre fällt und das
+    Thema steht der nächsten Disposition sofort wieder zur Verfügung. Der
+    Dubletten-Schutz (`thema_kollision`) bleibt davon unberührt – er misst
+    den echten Bestand, nicht das Gedächtnis.
+
+    Wiederholt sich der Fund für dasselbe Thema (ab DAUERFEHLER_AB), ist es
+    kein Buchhaltungsfehler mehr, sondern ein Thema, dessen Artikel immer
+    wieder an den Gates stirbt: dann greift die lange Sperre.
+
+    Rückgabe: Liste der Korrekturen (leer = Ledger und Bestand sind einig).
+    """
+    posts_dir = Path(posts_dir)
+    pfad = ledger_pfad(pfad)
+    heute = _heute(jetzt)
+    data = ledger_laden(pfad)
+    vorhanden = _bestands_slugs(posts_dir)
+    korrekturen: list[dict] = []
+    for titel, eintrag in list(data.items()):
+        if not isinstance(eintrag, dict):
+            continue
+        slug = _produzierter_slug(eintrag.get("grund", ""))
+        if not slug:
+            continue
+        if slug in vorhanden:
+            continue
+        runden = int(eintrag.get(ABGLEICH_ZAEHLER) or 0) + 1
+        chronisch = runden >= DAUERFEHLER_AB
+        korrekturen.append({
+            "titel": titel,
+            "slug": slug,
+            "war_gesperrt_bis": eintrag.get("sperre_bis"),
+            "runde": runden,
+            "chronisch": chronisch,
+        })
+        if not apply:
+            continue
+        neu = dict(eintrag)
+        neu[ABGLEICH_ZAEHLER] = runden
+        neu.pop("letzter_erfolg", None)
+        if chronisch:
+            neu["fehler"] = int(neu.get("fehler") or 0) + 1
+            neu["sperre_bis"] = (
+                heute + dt.timedelta(days=SPERRE_DAUERFEHLER)).isoformat()
+            neu["grund"] = (
+                f"Artefakt fehlt ({slug}) – bereits {runden}× ohne Ergebnis "
+                f"produziert, Thema für {SPERRE_DAUERFEHLER} Tage geparkt")[:200]
+        else:
+            # Kein Urteil über das Thema: nur die falsche Sperre fällt.
+            neu.pop("sperre_bis", None)
+            neu["grund"] = (
+                f"Artefakt fehlt ({slug}) – Erfolgsmeldung zurückgenommen, "
+                f"Thema wieder frei (Dubletten-Schutz bleibt aktiv)")[:200]
+        data[titel] = neu
+    if apply and korrekturen:
+        ledger_speichern(data, pfad)
+    return korrekturen
+
+
+# ---------------------------------------------------------------------------
 #  Disposition
 # ---------------------------------------------------------------------------
+#: Standard-Bahn der Disposition. Siehe `scripts/engine_capacity.py`.
+#: Wer den GESAMTEN Pool sehen will (Reports, Kollisions-Tests), ruft
+#: ausdrücklich mit `bahn=None` auf.
+BAHN_DEFAULT = "auto"
+
+
+def _bahn_filter(topics: list, bahn: str | None) -> list:
+    """Themen auf eine Publikations-Bahn eingrenzen (fail-open).
+
+    PREMIUM-FIX 02.10.2026 (Issue #521): Bis hierher war die Disposition
+    blind gegenüber der Frage, ob ein Thema überhaupt automatisch
+    veröffentlicht werden DARF. 46 der 187 Themen sind YMYL-Hochrisiko und
+    damit per `editorial_review_gate` fail-closed – sie brauchen eine
+    namentliche Fachfreigabe. Am 02.10.2026 hat die Disposition zwei davon
+    in die Tagesquote gegeben; beide Artikel wurden sauber erzeugt, vom Gate
+    korrekt gehalten und der Tag endete bei 0/2 LIVE.
+
+    Die Einstufung wird NICHT hier nachgebaut: `engine_capacity` leitet sie
+    aus derselben Funktion ab, die das Gate später am fertigen Artikel
+    benutzt. Lädt das Modul nicht, disponieren wir wie früher über den
+    ganzen Pool – eine kaputte Kapazitätsrechnung darf die Produktion
+    nicht anhalten, sie soll sie nur besser planen.
+    """
+    if bahn is None:
+        return list(topics or [])
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import engine_capacity as ec  # noqa: PLC0415 – fail-open, siehe oben
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ⚠ Bahn-Filter inaktiv ({exc}) – Disposition nutzt den "
+              f"gesamten Themenpool.")
+        return list(topics or [])
+    return [t for t in (topics or [])
+            if (t or {}).get("title") and ec.bahn_fuer_thema(t) == bahn]
+
+
 def disponieren(topics: list, used_titles=None, *, posts_dir: Path = POSTS,
                 pfad: Path | None = None, limit: int = 5,
                 jetzt: dt.date | None = None,
-                bestand: dict[str, str] | None = None) -> list[dict]:
+                bestand: dict[str, str] | None = None,
+                bahn: str | None = BAHN_DEFAULT) -> list[dict]:
     """Beste Themen für die Reserve-Produktion – begründet und rotierend.
 
     Rückgabe: Liste von Themen-Dicts (Original-Objekte aus topics.yaml),
     höchstens `limit` Stück, beste zuerst.
+
+    `bahn` (seit 02.10.2026, Issue #521) grenzt auf Themen ein, die die
+    Automatik auch ausliefern darf. Default ist die AUTO-Bahn – die
+    Tagesquote wird nie wieder mit Hochrisiko-Themen geplant, die nur ein
+    Mensch freigeben kann. `bahn=None` liefert den gesamten Pool.
     """
+    topics = _bahn_filter(topics, bahn)
     bestand = bestands_titel(posts_dir) if bestand is None else bestand
     data = ledger_laden(pfad)
     kandidaten = []
@@ -352,6 +523,10 @@ def bericht(topics: list | None = None, *, posts_dir: Path = POSTS,
     bestand = bestands_titel(posts_dir)
     frei = disponieren(topics, posts_dir=posts_dir, pfad=pfad, limit=10,
                        bestand=bestand)
+    # Der Bericht nennt beide Bahnen getrennt (Issue #521): „frei“ ohne
+    # Bahn-Angabe war die Zahl, die am 02.10. in die Irre geführt hat.
+    frei_alle = disponieren(topics, posts_dir=posts_dir, pfad=pfad,
+                            limit=10_000, bestand=bestand, bahn=None)
     belegt = sum(1 for t in topics
                  if thema_kollision((t or {}).get("title") or "", bestand))
     data = ledger_laden(pfad)
@@ -359,7 +534,12 @@ def bericht(topics: list | None = None, *, posts_dir: Path = POSTS,
         "themen_gesamt": len(topics),
         "themen_belegt": belegt,
         "themen_gesperrt": sum(1 for e in data.values() if gesperrt(e)),
+        "frei_auto": len(disponieren(topics, posts_dir=posts_dir, pfad=pfad,
+                                     limit=10_000, bestand=bestand)),
+        "frei_alle_bahnen": len(frei_alle),
         "naechste": [t.get("title") for t in frei],
+        "erfolge_ohne_artefakt": len(abgleich(posts_dir, pfad=pfad,
+                                              apply=False)),
         "klumpen": {k: len(v) for k, v in klumpen(posts_dir).items()},
     }
 
@@ -394,9 +574,14 @@ def run_selftest() -> int:
             fehler.append(f"Falsch-Positiv bei frischem Thema: {frisch!r}")
 
     # 2. Rotation: nie versuchte Themen zuerst, dann das älteste.
+    #    Alle drei Themen liegen bewusst in der AUTO-Bahn: Seit Issue #521
+    #    filtert `disponieren` Hochrisiko-Themen aus der Tagesquote, ein
+    #    Versicherungs-Thema würde hier also die Rotation prüfen wollen und
+    #    stattdessen den Bahn-Filter messen. Die Bahn hat ihren eigenen
+    #    Prüfblock (8); hier geht es ausschließlich um die Reihenfolge.
     topics = [{"title": "Tagesgeld-Vergleich: Zinsen sichern"},
               {"title": "Mietwagen im Urlaub clever buchen"},
-              {"title": "Zahnzusatzversicherung: Leistungen im Blick"}]
+              {"title": "Haushaltsbuch führen: App, Excel oder Papier?"}]
     with tempfile.TemporaryDirectory() as tmp:
         pfad = Path(tmp) / "ledger.json"
         heute = dt.date(2026, 9, 26)
@@ -494,6 +679,69 @@ def run_selftest() -> int:
             fehler.append(f"Klumpen-Bericht findet „stromfresser“ nicht: "
                           f"{sorted(gefunden)}")
 
+    # 8. BAHN-FILTER (02.10.2026, Issue #521): Die Tagesquote darf kein
+    #    Hochrisiko-Thema mehr bekommen. Eingefroren mit den zwei Themen,
+    #    die am 02.10. real zwei Slots verbrannt haben.
+    with _tf.TemporaryDirectory() as tmp:
+        pfad = Path(tmp) / "ledger.json"
+        pool = [
+            {"title": "Vergleich von Hausratversicherungen und wie du sparst"},
+            {"title": "Reisekrankenversicherung: Wann sie sich wirklich lohnt"},
+            {"title": "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich"},
+        ]
+        quote = [t["title"] for t in
+                 disponieren(pool, posts_dir=Path(tmp), pfad=pfad, limit=10,
+                             bestand={})]
+        if quote != ["Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich"]:
+            fehler.append(f"Bahn-Filter lässt Hochrisiko-Themen in die "
+                          f"Tagesquote: {quote}")
+        alle = [t["title"] for t in
+                disponieren(pool, posts_dir=Path(tmp), pfad=pfad, limit=10,
+                            bestand={}, bahn=None)]
+        if len(alle) != 3:
+            fehler.append(f"bahn=None muss den ganzen Pool liefern: {alle}")
+
+    # 9. ABGLEICH (02.10.2026, Issue #521): Eine Erfolgsmeldung ohne Artikel
+    #    sperrt das Thema 180 Tage für nichts. Realer Fund: „Urlaubskasse
+    #    clever aufbessern“ → produziert: <slug>, Slug existiert nicht.
+    with _tf.TemporaryDirectory() as tmp:
+        pfad = Path(tmp) / "ledger.json"
+        posts = Path(tmp) / "posts"
+        posts.mkdir()
+        heute = dt.date(2026, 10, 2)
+        echt, phantom = "Thema mit Artikel", "Urlaubskasse clever aufbessern"
+        (posts / "2026-10-02-echt").mkdir()
+        (posts / "2026-10-02-echt" / "index.md").write_text(
+            '---\ntitle: "Echt"\ndraft: false\n---\n\nText.\n',
+            encoding="utf-8")
+        # Das Ledger merkt sich den Slug OHNE Datum – der Abgleich muss
+        # das Bündel trotzdem finden (sonst gibt er alles frei).
+        merke(echt, True, "produziert: echt", pfad=pfad, jetzt=heute)
+        merke(phantom, True, "produziert: 2026-10-02-phantom", pfad=pfad,
+              jetzt=heute)
+        korrekturen = abgleich(posts, pfad=pfad, jetzt=heute)
+        if [k["titel"] for k in korrekturen] != [phantom]:
+            fehler.append(f"Abgleich erkennt die Phantom-Produktion nicht: "
+                          f"{korrekturen}")
+        data = ledger_laden(pfad)
+        if gesperrt(data[phantom], heute):
+            fehler.append("Phantom-Thema bleibt nach dem Abgleich gesperrt – "
+                          "genau diese Sperre ließ die Disposition am "
+                          "02.10.2026 nur 3 von 187 Themen finden")
+        if not gesperrt(data[echt], heute + dt.timedelta(days=30)):
+            fehler.append("Abgleich hebt eine ECHTE Erfolgssperre auf "
+                          "(der Artikel existiert – das Thema ist belegt)")
+        # Wiederholung ist ein Inhaltsproblem, kein Buchhaltungsfehler:
+        # ab DAUERFEHLER_AB Runden muss die lange Sperre greifen.
+        for _ in range(DAUERFEHLER_AB - 1):
+            merke(phantom, True, "produziert: 2026-10-02-phantom", pfad=pfad,
+                  jetzt=heute)
+            abgleich(posts, pfad=pfad, jetzt=heute)
+        data = ledger_laden(pfad)
+        if not gesperrt(data[phantom], heute + dt.timedelta(days=20)):
+            fehler.append("Chronische Phantom-Produktion wird nicht geparkt "
+                          "– das Thema dreht sich endlos im Kreis")
+
     if fehler:
         print("🛑 RESERVE-TOPICS-SELBSTTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -501,7 +749,8 @@ def run_selftest() -> int:
         return 2
     print("✅ Reserve-Themen-Selbsttest grün (Leitbegriff-Kollision, "
           "Rotation, Cooldown, Erfolgs-/Dauerfehler-Sperre, fail-open, "
-          "Infra-Klasse ohne Content-Cooldown, Klumpen-Bericht).")
+          "Infra-Klasse ohne Content-Cooldown, Klumpen-Bericht, "
+          "Bahn-Filter, Abgleich).")
     return 0
 
 
@@ -511,10 +760,24 @@ def main() -> int:
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--klumpen", action="store_true")
+    ap.add_argument("--abgleich", action="store_true",
+                    help="Erfolgs-Sperren ohne Artefakt auflösen (Issue #521)")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
     if args.selftest:
         return run_selftest()
+    if args.abgleich:
+        korrekturen = abgleich()
+        if not korrekturen:
+            print("✅ Ledger und Bestand sind einig – keine Erfolgsmeldung "
+                  "ohne Artikel.")
+            return 0
+        print(f"🔧 {len(korrekturen)} Erfolgsmeldung(en) ohne Artikel "
+              f"zurückgenommen – Themen wieder frei:")
+        for k in korrekturen:
+            print(f"   - „{k['titel']}“ (war gesperrt bis "
+                  f"{k['war_gesperrt_bis']}, Slug {k['slug']} existiert nicht)")
+        return 0
     if args.klumpen:
         gefunden = klumpen()
         if not gefunden:
@@ -534,6 +797,12 @@ def main() -> int:
         print(f"Themenpool: {daten['themen_gesamt']} Themen · "
               f"{daten['themen_belegt']} thematisch belegt · "
               f"{daten['themen_gesperrt']} im Cooldown")
+        print(f"Frei disponierbar: {daten['frei_auto']} in der AUTO-Bahn "
+              f"(quotenfähig) von {daten['frei_alle_bahnen']} über alle "
+              f"Bahnen – Details: python3 scripts/engine_capacity.py")
+        if daten["erfolge_ohne_artefakt"]:
+            print(f"⚠️ {daten['erfolge_ohne_artefakt']} Erfolgsmeldung(en) "
+                  f"ohne Artikel – `--abgleich` gibt die Themen frei.")
         print("Nächste Themen der Reserve-Produktion:")
         for titel in daten["naechste"]:
             print(f"   - {titel}")
