@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-01 10:38:02 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-02 10:13:19 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 44 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 45 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -56,6 +56,7 @@
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich | 3 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp | 2 → 3 ✅ | /go/mietwagen/ |
+| 2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v | 3 → 3 ✅ | /go/handytarife/ |
 
 ## Hinweise (nicht blockierend)
 
