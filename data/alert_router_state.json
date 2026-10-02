@@ -2,15 +2,15 @@
   "channels": {
     "bot-watchdog": {
       "closed_at": "2026-09-12T19:14:27.262270+00:00",
-      "first_seen": "2026-09-29T14:57:04.005659+00:00",
+      "first_seen": "2026-10-02T14:54:05.251058+00:00",
       "last_tier": 0,
       "open": true,
-      "ticket": 462
+      "ticket": 520
     },
     "pinterest-parked": {
       "last_action": "2026-09-27T14:10:54.132068+00:00",
       "last_tier": 1
     }
   },
-  "updated_at": "2026-10-01T15:36:54.618041+00:00"
+  "updated_at": "2026-10-02T14:54:09.011746+00:00"
 }
