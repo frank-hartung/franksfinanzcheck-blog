@@ -61,6 +61,158 @@ class GeoVertrag(unittest.TestCase):
         self.assertIsNone(hero.parse_answer("TITLE: nur ein Feld"))
 
 
+class Faelligkeit(unittest.TestCase):
+    """Der Grundcode trennt redaktionelle Änderung von abgelaufener Rotation.
+
+    Genau diese Vermischung war die Ursache von Issue #514: Ein redaktionell
+    geänderter Hero galt dauerhaft als „fällig", also lief täglich ein
+    Claude-Zwangsversuch – und jeder Ausfall erzeugte einen roten Lauf.
+    """
+
+    JETZT = dt.datetime(2026, 10, 2, 6, 0, tzinfo=dt.timezone.utc)
+
+    def _state(self, updated: str, fingerprint: str) -> dict:
+        return {"version": 1, "saisons": {"herbst": {"updated": updated, "fingerprint": fingerprint}}}
+
+    def test_frischer_nachweis_ist_nicht_faellig(self):
+        state = self._state("2026-09-30T06:00:00Z", hero.fingerprint(HERBST))
+        status = hero.due_state(HERBST, state, False, self.JETZT)
+        self.assertFalse(status["due"])
+        self.assertEqual(status["code"], "aktuell")
+
+    def test_redaktionelle_aenderung_bekommt_eigenen_code(self):
+        state = self._state("2026-09-30T06:00:00Z", "fremder-fingerprint")
+        self.assertEqual(hero.due_state(HERBST, state, False, self.JETZT)["code"], "redaktion")
+
+    def test_abgelaufene_rotation_bleibt_rotation(self):
+        state = self._state("2026-08-01T06:00:00Z", hero.fingerprint(HERBST))
+        status = hero.due_state(HERBST, state, False, self.JETZT)
+        self.assertEqual(status["code"], "rotation")
+        self.assertGreaterEqual(status["age_days"], hero.MAX_AGE_DAYS)
+
+    def test_ohne_nachweis_ist_die_saison_neu(self):
+        self.assertEqual(hero.due_state(HERBST, {}, False, self.JETZT)["code"], "neu")
+        self.assertEqual(
+            hero.due_state(HERBST, {"saisons": {"herbst": {"updated": "x"}}}, False, self.JETZT)["code"],
+            "neu")
+
+    def test_force_sticht_alles(self):
+        state = self._state("2026-10-01T06:00:00Z", hero.fingerprint(HERBST))
+        self.assertEqual(hero.due_state(HERBST, state, True, self.JETZT)["code"], "force")
+
+    def test_kompatible_kurzfassung_bleibt_erhalten(self):
+        state = self._state("2026-09-30T06:00:00Z", hero.fingerprint(HERBST))
+        self.assertEqual(hero.is_due(HERBST, state, False, self.JETZT), (False, "aktuell"))
+
+
+class Eskalation(unittest.TestCase):
+    """Gelb statt rot, solange die ausgelieferte Basis geprüft und frisch ist."""
+
+    def test_einzelner_ausfall_bei_gesunder_basis_ist_gelb(self):
+        hart, _ = hero.escalate("rotation", hero.MAX_AGE_DAYS + 1, 1, True)
+        self.assertFalse(hart)
+
+    def test_serie_eskaliert(self):
+        hart, grund = hero.escalate("rotation", hero.MAX_AGE_DAYS + 1, hero.FAILURE_STREAK_LIMIT, True)
+        self.assertTrue(hart)
+        self.assertIn("Folge", grund)
+
+    def test_ueberalterung_eskaliert(self):
+        hart, grund = hero.escalate("rotation", hero.HARD_STALE_DAYS, 1, True)
+        self.assertTrue(hart)
+        self.assertIn("alt", grund)
+
+    def test_defekte_basis_eskaliert_sofort(self):
+        hart, _ = hero.escalate("redaktion", 1, 0, False)
+        self.assertTrue(hart)
+
+
+class Anbieterkette(unittest.TestCase):
+    """Transportweg ist der gemeinsame LLM-Zugang – nicht die tote Puter-Brücke."""
+
+    SCHLUESSEL = ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY")
+
+    def _ohne_schluessel(self):
+        gesichert = {k: os.environ.pop(k) for k in self.SCHLUESSEL if k in os.environ}
+        self.addCleanup(os.environ.update, gesichert)
+
+    def test_ohne_schluessel_wird_nichts_erfunden_und_nichts_geworfen(self):
+        self._ohne_schluessel()
+        hero.LAST_BRIDGE_ERROR.clear()
+        antwort, provider, modell = hero.call_model("system", "user")
+        self.assertIsNone(antwort)
+        self.assertEqual((provider, modell), ("", ""))
+        self.assertIn("Schlüssel", hero.LAST_BRIDGE_ERROR[-1])
+
+    def test_reihenfolge_ist_dokumentiert_und_vollstaendig(self):
+        self.assertEqual(hero.PROVIDER_ORDER, ("claude", "openai", "groq", "gemini"))
+
+    def test_kettennachweis_meldet_fehlende_anbieter(self):
+        self._ohne_schluessel()
+        chain = hero.chain_status(dt.date(2026, 10, 2))
+        self.assertFalse(chain["anbieter_vorhanden"])
+        self.assertEqual(chain["anbieter"], [])
+        self.assertTrue(chain["llm_client"], "scripts/llm_client.py muss importierbar sein")
+
+
+class Wiederholung(unittest.TestCase):
+    """Ein Formatfehler darf den Lauf nicht mehr sofort rot machen."""
+
+    def setUp(self):
+        self._original = hero.call_model
+        self.addCleanup(setattr, hero, "call_model", self._original)
+
+    def test_zweiter_versuch_mit_korrekturauflage_gewinnt(self):
+        antworten = ["unbrauchbar", f"TITLE: {HERBST['hero_title']}\nLEAD: {HERBST['hero_lead']}"]
+        gesehen = []
+
+        def fake(system, user):
+            gesehen.append(user)
+            return antworten.pop(0), "groq", "openai/gpt-oss-120b"
+
+        hero.call_model = fake
+        parsed, protokoll, quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=3, sleep=lambda _s: None)
+        self.assertEqual(parsed, (HERBST["hero_title"], HERBST["hero_lead"]))
+        self.assertEqual(len(protokoll), 2)
+        self.assertIn("KORREKTURAUFLAGE", gesehen[1])
+        self.assertEqual(quelle, "groq:openai/gpt-oss-120b")
+
+    def test_dauerhafter_ausfall_liefert_protokoll_statt_absturz(self):
+        hero.call_model = lambda system, user: (None, "", "")
+        parsed, protokoll, _quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=2, sleep=lambda _s: None)
+        self.assertIsNone(parsed)
+        self.assertEqual(len(protokoll), 2)
+
+    def test_faktenverstoss_wird_nicht_durchgewunken(self):
+        schlecht = HERBST["hero_lead"].replace("Herbst", "Herbst 2026")
+        hero.call_model = lambda system, user: (
+            f"TITLE: {HERBST['hero_title']}\nLEAD: {schlecht}", "gemini", "gemini-2.0-flash")
+        parsed, protokoll, _quelle = hero.polish_candidate(
+            HERBST, [], [], attempts=2, sleep=lambda _s: None)
+        self.assertIsNone(parsed)
+        self.assertTrue(all("verworfen" in eintrag for eintrag in protokoll))
+
+
+class Ausfallzaehler(unittest.TestCase):
+    """Die Serie muss persistent sein – sonst eskaliert nie etwas."""
+
+    def test_zaehler_steigt_und_wird_zurueckgesetzt(self):
+        original = hero.STATE
+        with tempfile.TemporaryDirectory() as tmp:
+            hero.STATE = Path(tmp) / "state.json"
+            try:
+                state = {"version": 1, "saisons": {}}
+                self.assertEqual(hero.note_failure(HERBST, state, "test", "x"), 1)
+                self.assertEqual(hero.note_failure(HERBST, state, "test", "x"), 2)
+                self.assertEqual(hero.failure_streak(HERBST, state), 2)
+                hero.clear_failure(HERBST, state)
+                self.assertEqual(hero.failure_streak(HERBST, state), 0)
+            finally:
+                hero.STATE = original
+
+
 class SicheresSchreiben(unittest.TestCase):
     def test_rewrite_beruehrt_nur_den_angegebenen_saisonblock(self):
         original_path = hero.SAISONS

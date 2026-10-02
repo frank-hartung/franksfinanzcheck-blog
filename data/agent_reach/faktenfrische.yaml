@@ -160,11 +160,14 @@ standard:
   web:
     - "https://www.verbraucherzentrale.de/aktuelle-meldungen"
 
-# --- Claude-Fachprüfung (kostenlos über die Puter-Brücke) ----------
-# Diese Prüfung ist ausschließlich fachlich: KEINE Anthropic-API,
-# nur PUTER_AUTH_TOKEN. Ohne Token läuft alles außer der Fachprüfung.
+# --- KI-Fachprüfung (gemeinsamer LLM-Zugang des Blogs) --------------
+# Transport: scripts/llm_client.py mit GROQ_API_KEY / GEMINI_API_KEY
+# (optional ANTHROPIC_API_KEY / OPENAI_API_KEY). Ohne Schlüssel läuft
+# alles außer der Fachprüfung. KORREKTUR 02.10.2026: Die frühere
+# Puter-Brücke (PUTER_AUTH_TOKEN) ist entfernt – sie war nie aktiv.
+# Der Schlüsselname `claude` bleibt als Konfigurationsabschnitt erhalten,
+# das Modell bestimmt jetzt llm_client/groq_config.
 claude:
-  modell: "claude-sonnet-5"
   modell_fallback: []
   temperatur: 0.2          # Faktenarbeit, keine Kreativität
   max_tokens: 4096

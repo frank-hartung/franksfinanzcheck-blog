@@ -2,13 +2,13 @@
   "version": 1,
   "saisons": {
     "herbst": {
-      "updated": "2026-09-27T14:15:31Z",
-      "fingerprint": "1cee2b623565be751d3175f521f89c341566844837373cf365f0eb4a6237e57f",
+      "updated": "2026-10-02T22:40:15Z",
+      "fingerprint": "f44d6e939a7367a7c37ed10db376ea3756cf2fde30e9d855ce284f0b96fd7b89",
       "model": "approved-seasonal-baseline",
       "research_brief": "",
       "research_sha256": "",
       "set_current": true,
-      "reason": "Premium-Fix 2026-09-27: Herbst-Hero SEO/GEO-poliert, statischer Willkommenstext gelöscht, alte Fallback-Rotation blockiert"
+      "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)"
     }
   }
 }
