@@ -21,7 +21,12 @@ redaktionelle_pruefung:
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
 inspiration: "Urlaubskasse clever aufbessern: 7 Tipps für mehr Reisebudget"
+cover:
+  image: "images/covers/2026-10-02-so-bringst-du-deine-urlaubskasse-in-schwung-7-smarte-tric.jpg"
+  alt: "So bringst du deine Urlaubskasse: in Schwung – 7 smarte Tric"
+  caption: "Tipp von FranksFinanzcheck"
 ---
+
 ## Einleitung  
 Du hast das nächste Fernweh im Blick, aber das Reisebudget kratzt noch am Rand? Viele Haushalte verlieren Geld an unnötige Ausgaben, bevor sie überhaupt an die Urlaubskasse denken. Ein gezielter Blick auf die eigenen Finanzen zeigt oft, dass bereits kleine Anpassungen das Sparpotenzial deutlich erhöhen. Hier erfährst du, welche Stolperfallen die meisten übersehen und wie du deine urlaubskasse aufbessern kannst – ohne Nebenjob, dafür mit Alltagsstrategien, die sofort greifen.  
 
