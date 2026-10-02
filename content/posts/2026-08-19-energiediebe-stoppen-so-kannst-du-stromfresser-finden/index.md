@@ -181,7 +181,7 @@ Der Ersatz lohnt bei hohem gemessenem Jahresverbrauch, realistischer Nutzung und
 | Samstag | Wasch-, Spül- oder Trockenprogramm messen | kWh je Durchlauf |
 | Sonntag | Jahreskosten und Maßnahmen notieren | abschalten, nutzen oder ersetzen |
 
-Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitskomponenten ab. Notiere stattdessen den Stand vor und nach einer typischen Nacht und prüfe, welche notwendigen Dauerverbraucher weiterlaufen.
+Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitskomponenten ab. Notiere stattdessen den Stand vor und nach einer typischen Nacht und prüfe, welche notwendigen [Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) weiterlaufen.
 
 ## Häufige Messfehler
 

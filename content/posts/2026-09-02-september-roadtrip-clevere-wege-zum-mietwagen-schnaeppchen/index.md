@@ -47,8 +47,8 @@ In der Praxis scheitern solche Pläne an banalen Hürden. Man bucht zu spät, od
 **Das Wichtigste in Kürze**
 
 - **Preisvorteil:** Im September fallen die Mietpreise gegenüber August oft um 40 bis 50 Prozent. Das Angebot ist groß, die Nachfrage sinkt.
-- **Kostentransparenz:** Nur die Tankregelung „Voll/Voll“ schützt dich vor Servicegebühren und teurem Sprit.
-- **Sicherheitsnetz:** Du brauchst eine Vollkasko ohne Selbstbeteiligung und eine echte Kreditkarte. Sonst wird es an der Station teuer.
+- **Kostentransparenz:** Nur die Tankregelung „Voll/Voll“ [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Servicegebühren und teurem Sprit.
+- **Sicherheitsnetz:** Du brauchst eine [Vollkasko ohne Selbstbeteiligung](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) und eine echte Kreditkarte. Sonst wird es an der Station teuer.
 
 ## Warum ist der Spätsommer die smarteste Zeit für Mietwagen-Schnäppchen?
 
@@ -80,11 +80,11 @@ Wie groß der Unterschied ausfällt, zeigt ein Rechenbeispiel. Wir nehmen eine W
 
 | Zeitraum | Mietpreis (ca.) | Versicherung (ohne SB) | Gesamtpreis |
 | :--- | :--- | :--- | :--- |
-| August (Hauptsaison) | 450,00 € | 150,00 € | 600,00 € |
-| September (Nebensaison) | 210,00 € | 120,00 € | 330,00 € |
-| **Ersparnis** | **240,00 €** | **30,00 €** | **270,00 €** |
+| August (Hauptsaison) | 450,00 € | 150,00 € | 600,00 € |
+| September (Nebensaison) | 210,00 € | 120,00 € | 330,00 € |
+| **Ersparnis** | **240,00 €** | **30,00 €** | **270,00 €** |
 
-Das richtige Zeitfenster halbiert die Kosten fast. Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub.
+Das richtige Zeitfenster halbiert die Kosten fast. Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub.
 
 ## Die Tankregelung: Fair geht vor
 
@@ -103,7 +103,7 @@ Bei „Voll/Voll“ zahlst du nur, was du wirklich verfährst. Heb die Quittung 
 
 Ein paar Stolperfallen übersehen selbst erfahrene Reisende. Die erste ist die Kreditkarte. Viele Vermieter wollen eine echte Karte mit Hochprägung für die Kaution. Wer nur eine Debitkarte hat, muss oft teure Zusatzversicherungen kaufen.
 
-Der zweite Punkt ist der Zweitfahrer. Er ist selten im Preis enthalten und kostet meist 10 bis 15 € pro Tag. Wenn ihr euch am Steuer abwechseln wollt, sucht gezielt Tarife mit Zweitfahrer.
+Der zweite Punkt ist der Zweitfahrer. Er ist selten im Preis enthalten und kostet meist 10 bis 15 € pro Tag. Wenn ihr euch am Steuer abwechseln wollt, sucht gezielt Tarife mit Zweitfahrer.
 
 Auch Pünktlichkeit zählt. Wer die Abholzeit deutlich überzieht und nichts sagt, verliert womöglich die Reservierung. Gib bei der Buchung deine Flugnummer an. Dann weiß die Station bei einer Verspätung Bescheid.
 

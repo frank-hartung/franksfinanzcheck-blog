@@ -18,6 +18,27 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
 pin_description: "*Werbung | Konto und Karten-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du … Mehr Spartipps auf FranksFinanzcheck! #kontokartenupdate #kartenupdate #girokontovergleichen"
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite verbraucherzentrale.de"
+    url: "https://www.verbraucherzentrale.de/aktuelle-meldungen"
+    herausgeber: "Verbraucherzentrale"
+  - id: "Q2"
+    titel: "Update Wirtschaft vom 02.10.2026"
+    url: "https://www.tagesschau.de/multimedia/sendung/tagesschau24/boerselive/video-1659176.html"
+    herausgeber: "tagesschau"
+    datum: "2026-10-02"
+  - id: "Q3"
+    titel: "Warum es schon wieder Diskussionen über die Zuckersteuer gibt"
+    url: "https://www.tagesschau.de/inland/innenpolitik/zuckersteuer-protest-klingbeil-entwurf-100.html"
+    herausgeber: "tagesschau"
+    datum: "2026-10-01"
+  - id: "Q4"
+    titel: "BGH kippt Preiserhöhung bei Amazon Prime"
+    url: "https://www.tagesschau.de/wirtschaft/verbraucher/amazon-prime-preiserhoehung-bgh-100.html"
+    herausgeber: "tagesschau"
+    datum: "2026-10-01"
+faktencheck: 2026-10-02
 ---
 
 **Stand: 29.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
@@ -64,6 +85,9 @@ Dazu kommt der Kapitalmarkt. Steigen die Zinsen allgemein, passen die Banken ihr
 
 
 **Lesetipp:** Autokosten senken: So sparst du hunderte Euro jährlich
+
+
+**Lesetipp:** [Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden](../../posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/)
 ## FAQ – die wichtigsten Fragen zur Meldung
 
 ### Warum senken Banken den Zinssatz nach der Befristung?

@@ -19,7 +19,7 @@ cover:
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
 pin_title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
-pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten! Mit Rechenbeispiel (120 €)."
+pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten! Aktualisiert für 2028."
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -37,7 +37,8 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-5 einfache [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. Frugalismus klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
+
+5 einfache [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 
@@ -178,7 +179,7 @@ Darum gilt: Jede Ersparnis braucht sofort einen festen Platz.
 
 - Eigenes Unterkonto für Rücklagen
 - Dauerauftrag direkt nach Geldeingang
-- Extra-Konto für Urlaub, Reparaturen und [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)
+- Extra-Konto für Urlaub, Reparaturen und Notgroschen
 - Ersparnisse aus Tarifwechseln direkt umleiten
 
 Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 € direkt auf ein separates Konto. Sonst lösen sie sich im Alltag fast immer wieder auf.

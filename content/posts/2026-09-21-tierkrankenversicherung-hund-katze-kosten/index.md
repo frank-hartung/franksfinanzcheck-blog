@@ -65,8 +65,8 @@ Viele rechnen bei Haustieren mit laufenden Kleinkosten. Teuer sind aber selten F
 
 Diese Kosten kommen unregelmäßig. Deshalb schieben viele sie weg. Richtig weh tut es erst, wenn mehrere Posten zusammenfallen. Drei Größenordnungen zeigen, worüber wir reden:
 
-- **Größere OP beim Hund** inklusive Narkose und Nachsorge: **1.800 € bis 3.000 €**
-- **Diagnostik plus Behandlung bei der Katze** (Labor, Bildgebung, Medikamente, Kontrollen): **400 € bis 1.200 €**
+- **Größere OP beim Hund** inklusive Narkose und Nachsorge: **1.800 € bis 3.000 €**
+- **Diagnostik plus Behandlung bei der Katze** (Labor, Bildgebung, Medikamente, Kontrollen): **400 € bis 1.200 €**
 - **Wiederkehrende Behandlung:** einzeln kleine, aber regelmäßige Rechnungen, die sich über Monate deutlich summieren
 
 Es geht nicht darum, Angst zu machen. Es geht um Realität: Tierarztkosten fallen häufig deutlich höher aus, als viele spontan einkalkulieren.
@@ -170,10 +170,10 @@ Eine Selbstbeteiligung senkt den Beitrag spürbar. Sie passt aber nur, wenn du d
 
 | Modell | Monatsbeitrag | Selbstbeteiligung | Wirkung |
 |---|---:|---:|---|
-| Tarif A | 24 € | 0 % | höherer laufender Beitrag, weniger Kosten im Schadenfall |
-| Tarif B | 17 € | 20 % | günstiger pro Monat, dafür Eigenanteil bei Rechnungen |
+| Tarif A | 24 € | 0 % | höherer laufender Beitrag, weniger Kosten im Schadenfall |
+| Tarif B | 17 € | 20 % | günstiger pro Monat, dafür Eigenanteil bei Rechnungen |
 
-Kostet eine Behandlung **1.500 €**, zahlst du bei 20 % Selbstbeteiligung **300 € selbst**. Das ist nicht dramatisch – aber eben nur, wenn es in dein Budget passt.
+Kostet eine Behandlung **1.500 €**, zahlst du bei 20 % Selbstbeteiligung **300 € selbst**. Das ist nicht dramatisch – aber eben nur, wenn es in dein Budget passt.
 
 ### Diese Ausschlüsse solltest du besonders ernst nehmen
 
@@ -197,11 +197,11 @@ Das hängt von deinem Geldpuffer und deinem Risikogefühl ab – nicht davon, wa
 
 ### Rechenbeispiel: Rücklage gegen Versicherung
 
-Nehmen wir an, du zahlst **25 € pro Monat**. Das sind **300 € pro Jahr**, über drei Jahre also **900 €**.
+Nehmen wir an, du zahlst **25 € pro Monat**. Das sind **300 € pro Jahr**, über drei Jahre also **900 €**.
 
-Das klingt nach viel. Bis eine größere OP mit Nachsorge **2.200 €** kostet.
+Das klingt nach viel. Bis eine größere OP mit Nachsorge **2.200 €** kostet.
 
-Andersherum gilt das genauso: Wer 2.000 € bis 3.000 € locker aus Rücklagen zahlt, fährt oft schlanker. Eine Einheitsantwort gibt es hier nicht.
+Andersherum gilt das genauso: Wer 2.000 € bis 3.000 € locker aus Rücklagen zahlt, fährt oft schlanker. Eine Einheitsantwort gibt es hier nicht.
 
 ### Die Rücklagen-Falle, die viele übersehen
 
@@ -209,13 +209,13 @@ Andersherum gilt das genauso: Wer 2.000 € bis 3.000 € locker aus Rücklagen 
 
 Genau hier liegt das Problem. Dasselbe Polster soll oft die Autoreparatur, die Waschmaschine, den Notgroschen **und** den Tierarzt tragen. Passieren zwei Dinge im selben Monat, reicht es nicht.
 
-Prüfe deshalb ehrlich: Wären **1.500 € bis 3.000 €** kurzfristig frei? Und führe diese Summe getrennt vom übrigen Notgroschen. Wenn der Betrag dein Budget ins Wanken bringt, ist die Versicherung auch finanziell die ruhigere Lösung.
+Prüfe deshalb ehrlich: Wären **1.500 € bis 3.000 €** kurzfristig frei? Und führe diese Summe getrennt vom übrigen Notgroschen. Wenn der Betrag dein Budget ins Wanken bringt, ist die Versicherung auch finanziell die ruhigere Lösung.
 
 ## In drei Fragen zur Entscheidung
 
 Wenn du heute entscheiden musst, reichen diese drei Fragen weiter als jede Tarifliste:
 
-1. **Könntest du 1.500 € bis 3.000 € kurzfristig zahlen** – ohne Dispo, Ratenzahlung oder Griff in andere Rücklagen?
+1. **Könntest du 1.500 € bis 3.000 € kurzfristig zahlen** – ohne Dispo, Ratenzahlung oder Griff in andere Rücklagen?
 2. **Willst du nur OP-Risiken oder auch laufende Behandlungen absichern?**
 3. **Passt eine Selbstbeteiligung wirklich zu deinem Monatsbudget?**
 

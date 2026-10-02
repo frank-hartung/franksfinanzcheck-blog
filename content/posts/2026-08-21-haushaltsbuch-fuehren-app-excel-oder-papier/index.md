@@ -37,6 +37,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Am Monatsende ist das Konto leer. Du weißt nicht, wohin das Geld geflossen ist? So geht es rund **60 % der Haushalte** in Deutschland. Das zeigt eine Auswertung der Stiftung Warentest.
 
 Schon fünf Minuten im Monat reichen, um das zu ändern. Wer ein **Haushaltsbuch führt**, sieht alle Einnahmen und Ausgaben auf einen Blick. Auch teure Abos, schlechte Tarife und Konsum-Fallen fallen so auf.
@@ -199,7 +200,7 @@ App, Excel oder Papier? Entscheidend ist nicht das Werkzeug, sondern die **Gewoh
 
 Meine Empfehlung nach acht Jahren Buchführung: Starte mit der Ausgabenanalyse deiner Banking-App. Sie kostet nichts. Sie nimmt dir die meiste Arbeit ab. Schon in der ersten Woche liefert sie gute Daten.
 
-Wenn du dabei bleibst, wird aus Kontrolle mit der Zeit echte finanzielle Gelassenheit.
+Wenn du dabei bleibst, wird aus Kontrolle mit der Zeit echte [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Gelassenheit.
 
 Später kannst du jederzeit auf Excel umsteigen. Wichtig ist nur eines: **Fang heute an**. Jeder Monat ohne Haushaltsbuch lässt dich vielleicht hunderte Euro verlieren.
 

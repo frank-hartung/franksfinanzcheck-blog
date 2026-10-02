@@ -39,6 +39,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Du willst finanzieller puffer? Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
 Die gute Nachricht: Du brauchst dafür kein Vermögen. In vielen Haushalten reichen **drei bis sechs Monatsausgaben**. Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €. Das ist viel Geld, aber kein Fantasiewert.

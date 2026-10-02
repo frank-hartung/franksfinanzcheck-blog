@@ -1,0 +1,91 @@
+{
+  "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+  "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+  "erzeugt": "2026-10-02 19:49 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45
+  },
+  "geo": {
+    "punkte": 1,
+    "maximum": 6,
+    "prozent": 17,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)",
+      "Mindestens eine Tabelle (extrahierbare Struktur)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": false,
+      "tabelle": false,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/aktuelle-meldungen",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Seite wurde nicht gefunden | Verbraucherzentrale.de\n\nURL Source: https://www.verbraucherzentrale.de/aktuelle-meldungen\n\nWarning: Target URL returned error 404: Not Found\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/aktuelle-meldungen#main-content)\n\n[](https://www.verbraucherzentrale.de/)\n\nSuche\n\n## Wählen sie Ihr Bundesland\n\nWählen Sie Ihr Bundesland, um regionale Angebote und Services zu sehen.\n\nStandort wählen \n\nBundesland festlegen \n\n[Wie wir mit Ihren Daten umgehen](https://www.verbraucherzentrale.de/datenschutz)\n\n Menü \n\n*   [Beratung](https://www.verbraucherzentrale.de/beratung)\n*   [Beschwerde einreichen](https://www.verbraucherzentrale.de/beschwerde)\n*   [Bildung](https://www.verbraucherzentrale.de/bildung)\n*   [Klagen](https://www.verbraucherzentrale.de/verbandsklagen)\n*   [Politik](https://www.verbraucherzentrale.de/politik)\n*   [Shop](https://shop.verbraucherzentrale.de/)\n\nSuche Suche\n\n Themen \n\n*   [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\nclose \n\n## [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\n    *   [Sparen und Anlegen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen) \n    *   [Altersvorsorge](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/altersvorsorge) \n    *   [Bau- und Immobilienfinanzierung](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung) \n    *   [Kredit, Schulden, Insolvenz](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz) \n    *   [Krankenversicherung](https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/krankenversicherung) \n    *   [Pflegeantrag und Leistungen](https://www.verbraucherzentrale.de/wissen/gesu",
+      "score": 0,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": true
+    },
+    {
+      "titel": "Update Wirtschaft vom 02.10.2026",
+      "url": "https://www.tagesschau.de/multimedia/sendung/tagesschau24/boerselive/video-1659176.html",
+      "datum": "Fri, 02 Oct 2026",
+      "quelle": "tagesschau – Wirtschaft",
+      "kanal": "rss",
+      "auszug": "Update Wirtschaft vom 02.10.2026",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "tagesschau",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "Warum es schon wieder Diskussionen über die Zuckersteuer gibt",
+      "url": "https://www.tagesschau.de/inland/innenpolitik/zuckersteuer-protest-klingbeil-entwurf-100.html",
+      "datum": "Thu, 01 Oct 2026",
+      "quelle": "tagesschau – Wirtschaft",
+      "kanal": "rss",
+      "auszug": "Dass eine Zuckersteuer kommen soll, war eigentlich schon geklärt. Dennoch bremst das Kanzleramt jetzt bei einem Entwurf aus dem Finanzministerium. Was steckt dahinter? Warum drängt das Thema? Von Nicole Kohnert.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "tagesschau",
+      "rang": 3,
+      "zitierbar": false
+    },
+    {
+      "titel": "BGH kippt Preiserhöhung bei Amazon Prime",
+      "url": "https://www.tagesschau.de/wirtschaft/verbraucher/amazon-prime-preiserhoehung-bgh-100.html",
+      "datum": "Thu, 01 Oct 2026",
+      "quelle": "tagesschau – Wirtschaft",
+      "kanal": "rss",
+      "auszug": "Eine Preiserhöhung von Amazon Prime vor vier Jahren ist laut BGH-Urteil unwirksam. Bestimmte Kundinnen und Kunden können jetzt Geld zurückverlangen. Verbraucherschützer raten zur Sammelklage. Von Klaus Hempel.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "tagesschau",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [],
+  "fehler": [
+    "Verbraucherzentrale – Aktuelle Meldungen: Feed nicht lesbar"
+  ]
+}

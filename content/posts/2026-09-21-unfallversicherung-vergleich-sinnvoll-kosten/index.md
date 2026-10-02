@@ -38,6 +38,7 @@ redaktionelle_pruefung:
   aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
 ---
 
+
 Ein Sturz auf der Treppe. Ein Radunfall.
 
 Eine Verletzung beim Sport. Solche Dinge passieren oft in der Freizeit. Genau dort zahlt die gesetzliche Unfallversicherung meist nicht.
@@ -359,7 +360,7 @@ Die private Unfallversicherung kann sehr sinnvoll sein. Vor allem für Kinder, S
 
 Sie ersetzt aber keine BU. Genau das ist der wichtigste Punkt. Wer das sauber trennt und auf Grundsumme, Progression, Gliedertaxe und Fristen achtet, kann mit einer guten Police einen nützlichen und oft günstigen Baustein für den eigenen Schutz aufbauen.
 
-**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · [Zahnzusatzversicherung 2026](../../posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/) · [Tierkrankenversicherung 2026](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/)
+**Weiterlesen:** [Pillar Versicherungen](../../pillar/versicherungen/) · Zahnzusatzversicherung 2026 · [Tierkrankenversicherung 2026](../../posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/)
 
 ## Häufige Fragen
 

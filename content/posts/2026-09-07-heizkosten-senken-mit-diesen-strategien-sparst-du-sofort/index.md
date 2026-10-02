@@ -219,7 +219,7 @@ Bei sehr hohen oder unerklärlichen Werten lohnt ein Blick auf den Heizspiegel u
 Miss, statt zu raten.
 
 
-Gerade für Heizkosten senken gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
+Gerade für [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

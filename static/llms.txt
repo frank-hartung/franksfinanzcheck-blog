@@ -32,15 +32,16 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 
 ## Themen-Ratgeber (Pillars)
 
-- [Strom & Gas sparen](https://franksfinanzcheck.de/pillar/strom-sparen/): Strom- und Gaskosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln und die Heizperiode optimal vorbereiten.
-- [Internet, DSL & Mobilfunk](https://franksfinanzcheck.de/pillar/internet-dsl/): Schnelleres Internet & günstigere Tarife: DSL-Wechselbonus sichern, WLAN im ganzen Haus verbessern, DNS-Tuning und die besten Handytarife.
+- [Strom & Gas sparen](https://franksfinanzcheck.de/pillar/strom-sparen/): Strom-, Gas- und Heizkosten drastisch senken: Stromfresser enttarnen, Preisgarantien nutzen, Gasanbieter wechseln, dynamische Tarife einordnen und Rechner nutzen.
+- [Internet, DSL & Mobilfunk](https://franksfinanzcheck.de/pillar/internet-dsl/): Verträge und Wechselentscheidungen meistern: DSL-Wechselbonus sichern, Glasfaser einordnen, Kündigungsrechte nutzen, WLAN verbessern und Mobilfunk optimieren.
 - [Versicherungen](https://franksfinanzcheck.de/pillar/versicherungen/): Versicherungen im Überblick: Privathaftpflicht, Wohngebäude, Hausrat, Kfz, Zahnzusatz und Unfallversicherung – welcher Schutz wirklich unverzichtbar ist.
 - [Konto & Karten](https://franksfinanzcheck.de/pillar/konto-karten/): Banking ohne Gebühren: Kostenlose Girokonten, Kreditkarten ohne Jahresgebühr, Tagesgeld mit Top-Zinsen und Ratenkredite zum Bestzins.
-- [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Frugalismus im Alltag: Die 50–30–20-Regel, Notgroschen aufbauen, Konsumfallen entlarven und Schritt für Schritt Vermögen aufbauen.
+- [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 35 Beiträge)
+## Alle Artikel (neueste zuerst, 36 Beiträge)
 
+- [Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden](https://franksfinanzcheck.de/posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/): Du willst deine Urlaubskasse aufbessern? Ohne Nebenjob und Überstunden zeigen wir dir, wie du hunderte Euro in deinem Alltag durch Budget-Optimierung finde.
 - [Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp](https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/): Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst.
 - [WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?](https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/): WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit klaren Kosten, Grenzen und einer einfachen Entscheidung.
 - [Gasrechnung senken: Spätsommer-Check für Tarif und Heizung](https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/): Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder…

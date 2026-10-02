@@ -1,0 +1,49 @@
+{
+  "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+  "titel": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
+  "erzeugt": "2026-10-02 19:50 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "saisonal",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 30
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Urlaub...\n\n### [Musterbriefe](https://www.verbraucherzen",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [],
+  "fehler": [
+    "Verbraucherzentrale – Reise: Feed nicht lesbar"
+  ]
+}

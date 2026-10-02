@@ -57,23 +57,23 @@ Hier sind die aktuellen Markt-Benchmarks für Festnetz- und Mobilfunkverträge i
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">VDSL 50 / 100 Effektivpreis</div>
-      <div class="ff-radar-kpi__value">24,99 – 32,90 €</div>
+      <div class="ff-radar-kpi__value">24,99 – 32,90 €</div>
       <div class="ff-radar-kpi__source">Monatlicher Effektivpreis inkl. Wechselboni</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Glasfaser Gigabit (FTTH)</div>
-      <div class="ff-radar-kpi__value">44,99 – 59,99 €</div>
+      <div class="ff-radar-kpi__value">44,99 – 59,99 €</div>
       <div class="ff-radar-kpi__source">Regulärer Grundpreis nach Aktionsphase</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">5G Allnet-Flat (SIM-Only)</div>
-      <div class="ff-radar-kpi__value">7,99 – 14,99 €</div>
+      <div class="ff-radar-kpi__value">7,99 – 14,99 €</div>
       <div class="ff-radar-kpi__source">20–40 GB Datenvolumen monatlich kündbar</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Routermiete Vermeidbar</div>
-      <div class="ff-radar-kpi__value">120 – 190 € / 24M</div>
-      <div class="ff-radar-kpi__source">Ersparnis durch Kaufrouter statt 5–8 €/M Miete</div>
+      <div class="ff-radar-kpi__value">120 – 190 € / 24M</div>
+      <div class="ff-radar-kpi__source">Ersparnis durch Kaufrouter statt 5–8 €/M Miete</div>
     </div>
   </div>
   <div class="ff-radar-alert">
@@ -138,14 +138,14 @@ Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
         <td><strong>Vertrag älter als 24 Monate</strong> (Rabatt entfallen)</td>
         <td>Kündigen &amp; Wechseln</td>
         <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (10 Min.)</span></td>
-        <td>150–350 € / 2 Jahre</td>
+        <td>150–350 € / 2 Jahre</td>
         <td>Neuen Anbieter beauftragen; dieser kündigt den Altvertrag automatisch zum Monatsende.</td>
       </tr>
       <tr>
         <td><strong>Zufrieden mit Leitung, aber Preis steigt</strong></td>
         <td>Kündigen &amp; Nachverhandeln</td>
         <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (1 Anruf)</span></td>
-        <td>100–200 € / 2 Jahre</td>
+        <td>100–200 € / 2 Jahre</td>
         <td>Kündigung vormerken; bei der Kundenrückgewinnung (Retention) Neukundenrabatt einfordern.</td>
       </tr>
       <tr>
@@ -203,7 +203,7 @@ Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren
       <input type="checkbox" id="chk-dsl-4" class="ff-audit-item__checkbox">
       <label for="chk-dsl-4" class="ff-audit-item__content">
         <strong>4. Routerkauf statt Routermiete prüfen</strong>
-        Vorhandenen Router weiterverwenden oder Standard-Modell kaufen (spart 5–8 €/Monat dauerhafte Gerätemiete).
+        Vorhandenen Router weiterverwenden oder Standard-Modell kaufen (spart 5–8 €/Monat dauerhafte Gerätemiete).
       </label>
     </li>
     <li class="ff-audit-item">
@@ -254,21 +254,21 @@ Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren
   <div class="ff-case-study-box__grid">
     <div class="ff-case-card">
       <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">2.159,52 € / Jahr</div>
+      <div class="ff-case-card__value">2.159,52 € / Jahr</div>
       <p class="ff-case-card__details">
-        2 alte DSL-Verträge (je 39,99 €/Monat) = 79,98 €<br>
-        2 teure Smartphone-Verträge mit Handy-Finanzierung (je 49,99 €/Monat) = 99,98 €<br>
-        Monatliche Belastung: <strong>179,96 € / Monat</strong>
+        2 alte DSL-Verträge (je 39,99 €/Monat) = 79,98 €<br>
+        2 teure Smartphone-Verträge mit Handy-Finanzierung (je 49,99 €/Monat) = 99,98 €<br>
+        Monatliche Belastung: <strong>179,96 € / Monat</strong>
       </p>
     </div>
     <div class="ff-case-card">
       <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">581,76 € / Jahr</div>
+      <div class="ff-case-card__value">581,76 € / Jahr</div>
       <p class="ff-case-card__details">
         1 DSL-Vertrag wegen Zusammenzugs sondergekündigt (§ 46 TKG).<br>
-        1 neuer Highspeed-Kabeltarif (effektiv 28,50 €/Monat inkl. 150 € Bonus).<br>
-        2× SIM-Only 25 GB 5G Allnet-Flats (je 9,99 €/Monat) = 19,98 €.<br>
-        Monatliche Belastung: <strong>48,48 € / Monat</strong>
+        1 neuer Highspeed-Kabeltarif (effektiv 28,50 €/Monat inkl. 150 € Bonus).<br>
+        2× SIM-Only 25 GB 5G Allnet-Flats (je 9,99 €/Monat) = 19,98 €.<br>
+        Monatliche Belastung: <strong>48,48 € / Monat</strong>
       </p>
     </div>
   </div>
@@ -277,12 +277,12 @@ Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren
     <ul class="ff-case-study-box__steps-list">
       <li>Sonderkündigung des überzähligen DSL-Anschlusses mit Meldebescheinigung der gemeinsamen Wohnung.</li>
       <li>Smartphones nach Ende der Finanzierung behalten und auf dauerhaft günstige SIM-Only-Tarife umgestellt.</li>
-      <li>Kauf einer gebrauchten FRITZ!Box für 70 € statt 5,99 €/Monat Routermiete beim Provider (Amortisation nach 12 Monaten).</li>
+      <li>Kauf einer gebrauchten FRITZ!Box für 70 € statt 5,99 €/Monat Routermiete beim Provider (Amortisation nach 12 Monaten).</li>
     </ul>
   </div>
   <div class="ff-case-study-box__savings">
     <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">1.577,76 € / Jahr (131,48 € / Monat)</span>
+    <span class="ff-case-study-box__savings-amount">1.577,76 € / Jahr (131,48 € / Monat)</span>
   </div>
 </div>
 
@@ -299,26 +299,26 @@ Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren
   <div class="ff-case-study-box__grid">
     <div class="ff-case-card">
       <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
-      <div class="ff-case-card__value">898,80 € / Jahr</div>
+      <div class="ff-case-card__value">898,80 € / Jahr</div>
       <p class="ff-case-card__details">
-        Kabelnetzbetreiber verlangte 29,99 €/Monat für Einzelnutzervertrag nach Nebenkostenprivileg-Wegfall.<br>
-        Bestehender überdimensionierter DSL-250-Tarif (44,90 €/Monat).<br>
-        Monatliche Belastung: <strong>74,90 € / Monat</strong>
+        Kabelnetzbetreiber verlangte 29,99 €/Monat für Einzelnutzervertrag nach Nebenkostenprivileg-Wegfall.<br>
+        Bestehender überdimensionierter DSL-250-Tarif (44,90 €/Monat).<br>
+        Monatliche Belastung: <strong>74,90 € / Monat</strong>
       </p>
     </div>
     <div class="ff-case-card">
       <div class="ff-case-card__label">Nach Optimierung (Nachher)</div>
-      <div class="ff-case-card__value">408,80 € / Jahr</div>
+      <div class="ff-case-card__value">408,80 € / Jahr</div>
       <p class="ff-case-card__details">
         Kabel-TV-Vertrag abgelehnt; TV-Empfang kostenfrei über DVB-T2 / Mediatheken auf Smart-TV.<br>
-        DSL-Wechsel auf soliden 50 Mbit/s Spar-Tarif zu 24,90 €/Monat + 90 € Wechselbonus.<br>
-        Monatliche Belastung: <strong>34,07 € / Monat</strong>
+        DSL-Wechsel auf soliden 50 Mbit/s Spar-Tarif zu 24,90 €/Monat + 90 € Wechselbonus.<br>
+        Monatliche Belastung: <strong>34,07 € / Monat</strong>
       </p>
     </div>
   </div>
   <div class="ff-case-study-box__savings">
     <span class="ff-case-study-box__savings-label">Rechnerische Netto-Ersparnis pro Jahr:</span>
-    <span class="ff-case-study-box__savings-amount">490,00 € / Jahr (40,83 € / Monat)</span>
+    <span class="ff-case-study-box__savings-amount">490,00 € / Jahr (40,83 € / Monat)</span>
   </div>
 </div>
 
@@ -332,7 +332,7 @@ Befreie dich in vier Tagen von überflüssigen Vertragskosten:
   <div class="ff-course-series-box__head">
     <span class="ff-course-series-box__badge">Kostenlose E-Mail-Serie</span>
     <h3 class="ff-course-series-box__title">Der 4-Tage Vertrags-Detox-Plan</h3>
-    <p class="ff-course-series-box__sub">In vier Tagen alle Altlasten erfassen, Kündigungsrechte nutzen und monatlich über 100 € Fixkosten freisetzen.</p>
+    <p class="ff-course-series-box__sub">In vier Tagen alle Altlasten erfassen, Kündigungsrechte nutzen und monatlich über 100 € Fixkosten freisetzen.</p>
   </div>
   <div class="ff-course-syllabus">
     <div class="ff-course-day">
@@ -371,7 +371,7 @@ Befreie dich in vier Tagen von überflüssigen Vertragskosten:
 Kündige niemals selbst, wenn du zu einem anderen DSL- oder Kabelanbieter wechselst. Dein neuer Anbieter stimmt den Umschalttermin direkt mit dem bisherigen Versorger ab. Die gesetzliche Ausfallzeit darf nach § 58 TKG einen Kalendertag nicht überschreiten.
 
 ### Was ist der Unterschied zwischen Werbepreis und Effektivpreis?
-Vergleichsportale werben oft mit niedrigen Preisen für die ersten sechs bis zwölf Monate (z. B. 19,99 €). Ab Monat 13 springt der Preis oft auf 44,99 €. Der Effektivpreis teilt die tatsächlichen Gesamtkosten aller 24 Monate (inklusive Bereitstellung und Router) durch 24 und liefert den einzig ehrlichen Vergleichswert.
+Vergleichsportale werben oft mit niedrigen Preisen für die ersten sechs bis zwölf Monate (z. B. 19,99 €). Ab Monat 13 springt der Preis oft auf 44,99 €. Der Effektivpreis teilt die tatsächlichen Gesamtkosten aller 24 Monate (inklusive Bereitstellung und Router) durch 24 und liefert den einzig ehrlichen Vergleichswert.
 
 ### Gilt die 1-Monats-Kündigungsfrist für alle Verträge?
 Ja, für fast alle Verbraucherverträge (DSL, Handy, Fitnessstudio, Streaming, Zeitschriften), die ab dem 1. März 2022 abgeschlossen wurden oder deren 24-monatige Mindestvertragslaufzeit abgelaufen ist. Sie verlängern sich nur noch auf unbestimmte Zeit mit 1 Monat Kündigungsfrist.

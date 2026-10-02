@@ -45,7 +45,7 @@ Versicherungen wirken oft wie ein trockenes Thema – bis das Wetter umschlägt 
 
 Das Hauptproblem ist heute seltener das Fehlen einer Versicherung an sich. Die Gefahr liegt in den Details: Veraltete Tarife ohne ausreichenden Elementarschutz, zu niedrig angesetzte Versicherungssummen oder Klauseln, die moderne Technik wie Wärmepumpen und Photovoltaik-Speicher gar nicht abdecken. Solche Lücken fallen oft erst auf, wenn der Gutachter vor der Tür steht. Dann wird aus einer vermeintlich kleinen Formalität schnell eine existenzbedrohende finanzielle Belastung.
 
-Schon ein einzelner Schaden durch Rückstau, Leitungswasser oder Einbruch kann heute, je nach Ausstattung, schnell ca. 6.000 € bis 25.000 € kosten. Bei größeren Gebäudeschäden bewegen sich die Summen oft im sechsstelligen Bereich. Genau deshalb lohnt sich ein regelmäßiger Vertragscheck, um sicherzustellen, dass dein Schutzpaket zu den aktuellen Bedingungen passt.
+Schon ein einzelner Schaden durch Rückstau, Leitungswasser oder Einbruch kann heute, je nach Ausstattung, schnell ca. 6.000 € bis 25.000 € kosten. Bei größeren Gebäudeschäden bewegen sich die Summen oft im sechsstelligen Bereich. Genau deshalb lohnt sich ein regelmäßiger Vertragscheck, um sicherzustellen, dass dein Schutzpaket zu den aktuellen Bedingungen passt.
 
 ---
 
@@ -120,11 +120,11 @@ Das alte Argument "Ich wohne nicht am Wasser" zieht nicht mehr. Extreme Wetterer
 
 | Schadenposten | Geschätzte Kosten (ca.) |
 |---|---:|
-| Professionelle Trocknung | 2.500 € bis 7.500 € |
-| Boden- und Wandflächensanierung | 2.000 € bis 6.000 € |
-| Ersatz von Technik und Inventar | 1.500 € bis 5.000 € |
-| Entsorgung und Reinigung | 800 € bis 2.500 € |
-| **Voraussichtliche Gesamtkosten** | **ca. 6.800 € bis 21.000 €** |
+| Professionelle Trocknung | 2.500 € bis 7.500 € |
+| Boden- und Wandflächensanierung | 2.000 € bis 6.000 € |
+| Ersatz von Technik und Inventar | 1.500 € bis 5.000 € |
+| Entsorgung und Reinigung | 800 € bis 2.500 € |
+| **Voraussichtliche Gesamtkosten** | **ca. 6.800 € bis 21.000 €** |
 
 Diese Zahlen verdeutlichen, wie massiv ein "kleiner" Wasserschaden das Budget belasten kann.
 
@@ -139,8 +139,8 @@ Sollte dein Gebäude oder Hausrat zu niedrig versichert sein, hat der Versichere
 ### Beispiel Hausrat (Richtwerte 2026)
 
 - Wohnfläche: **ca. 90 m²**
-- Empfohlener Richtwert: **ca. 750 € bis 850 € pro m²**
-- Angemessene Versicherungssumme: **ca. 67.500 € bis 76.500 €**
+- Empfohlener Richtwert: **ca. 750 € bis 850 € pro m²**
+- Angemessene Versicherungssumme: **ca. 67.500 € bis 76.500 €**
 
 Wer hier noch mit alten Sätzen aus den 2010er Jahren rechnet, riskiert im Ernstfall, auf einem Teil der Kosten sitzen zu bleiben.
 
@@ -155,7 +155,7 @@ Wer die brennende Kerze kurz vergisst oder ein Fenster bei aufkommendem Sturm ge
 Ein Feuer zerstört nicht nur, es hinterlässt auch Sondermüll. Die Kosten für den Abtransport und die fachgerechte Entsorgung von Schutt können enorm sein und sollten ausreichend hoch abgesichert sein.
 
 ### Übernahme von Unterbringungskosten
-Wenn das Haus nach einem Schaden unbewohnbar ist, übernimmt ein guter Tarif die Kosten für Hotel oder Ersatzunterkunft. In der heutigen Zeit können zwei Wochen Hotelaufenthalt für eine Familie schnell ca. 1.500 € oder mehr kosten.
+Wenn das Haus nach einem Schaden unbewohnbar ist, übernimmt ein guter Tarif die Kosten für Hotel oder Ersatzunterkunft. In der heutigen Zeit können zwei Wochen Hotelaufenthalt für eine Familie schnell ca. 1.500 € oder mehr kosten.
 
 ### Nachhaltige Technik: PV, Wärmepumpen und Wallboxen
 Prüfe unbedingt, ob moderne Komponenten wie die Photovoltaikanlage auf dem Dach oder die Wärmepumpe im Garten explizit mitversichert sind. Viele ältere Verträge decken diese teuren Investitionen nicht ausreichend ab.
@@ -177,11 +177,11 @@ Ein heftiges Gewitter sorgt für Rückstau. Der Keller inklusive Hobbyraum und H
 
 | Posten | Tatsächliche Kosten (ca.) |
 |---|---:|
-| Kellertrocknung & Sanierung | 5.500 € |
-| Defekte Waschmaschine & Trockner | 2.200 € |
-| Beschädigte Möbel & Lagerware | 3.500 € |
-| Abtransport & Entsorgung | 1.400 € |
-| **Gesamtschaden** | **ca. 12.600 €** |
+| Kellertrocknung & Sanierung | 5.500 € |
+| Defekte Waschmaschine & Trockner | 2.200 € |
+| Beschädigte Möbel & Lagerware | 3.500 € |
+| Abtransport & Entsorgung | 1.400 € |
+| **Gesamtschaden** | **ca. 12.600 €** |
 
 Ein veralteter Schutz würde hier oft nur einen Bruchteil oder gar nichts leisten. Ein moderner Tarif hingegen fängt diese Summe ab.
 
@@ -193,11 +193,11 @@ Die Antwort lautet oft: Nein. Der Versicherungsmarkt ist hochdynamisch. Oft biet
 
 | Baustein | Veralteter Tarif | Moderner Toptarif |
 |---|---:|---:|
-| Hausrat-Basis | ca. 135 € / Jahr | ca. 95 € / Jahr |
-| Elementar-Einschluss | Nicht möglich | ca. 35 € / Jahr |
+| Hausrat-Basis | ca. 135 € / Jahr | ca. 95 € / Jahr |
+| Elementar-Einschluss | Nicht möglich | ca. 35 € / Jahr |
 | Grobe Fahrlässigkeit | Nur eingeschränkt | Inklusive |
 | Zusatz (E-Bike/Elektronik) | Teure Zusatzoption | Teils inklusive |
-| **Gesamtkosten pro Jahr** | **ca. 135 €** | **ca. 130 €** |
+| **Gesamtkosten pro Jahr** | **ca. 135 €** | **ca. 130 €** |
 
 Das zeigt: Wer vergleicht, bekommt oft **mehr Leistung für weniger oder gleiches Geld**.
 
@@ -246,7 +246,7 @@ Um im Vergleichsrechner präzise Ergebnisse zu erhalten, lege dir folgende Daten
 
 ## Für Mieter ist Hausrat oft wichtiger als gedacht
 
-Viele Mieter unterschätzen den Gesamtwert ihres Besitzes. In einer durchschnittlich ausgestatteten 3-Zimmer-Wohnung summiert sich der Wert von Möbeln, Technik, Kleidung und Küchenausstattung heute schnell auf ca. 25.000 € bis 45.000 €. Ein Brand oder ein großer Wasserschaden in der Nachbarwohnung kann diesen Wert binnen Minuten vernichten.
+Viele Mieter unterschätzen den Gesamtwert ihres Besitzes. In einer durchschnittlich ausgestatteten 3-Zimmer-Wohnung summiert sich der Wert von Möbeln, Technik, Kleidung und Küchenausstattung heute schnell auf ca. 25.000 € bis 45.000 €. Ein Brand oder ein großer Wasserschaden in der Nachbarwohnung kann diesen Wert binnen Minuten vernichten.
 
 ## Dein Check-Fahrplan: erst Ordner, dann Vergleich
 
@@ -263,7 +263,7 @@ Ein Update deines Versicherungsschutzes ist besonders dann dringend, wenn:
 
 ### Warum der Preis nicht alles ist
 
-Ein vermeintliches Schnäppchen für 40 € im Jahr ist wertlos, wenn es im Schadensfall aufgrund von Unterversicherung oder fehlendem Elementarschutz nicht zahlt. Die Frage sollte immer lauten: Wie viel Risiko kann ich mir leisten, selbst zu tragen?
+Ein vermeintliches Schnäppchen für 40 € im Jahr ist wertlos, wenn es im Schadensfall aufgrund von Unterversicherung oder fehlendem Elementarschutz nicht zahlt. Die Frage sollte immer lauten: Wie viel Risiko kann ich mir leisten, selbst zu tragen?
 
 ### Deine Hausliste: Drei Zeilen für die Zukunft
 

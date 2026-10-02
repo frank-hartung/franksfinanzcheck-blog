@@ -19,7 +19,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, 5 Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat. So gewinnst du Zeit und finanzielle Freiheit. Jetzt Guide lesen!"
+pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, fünf Hacks für den Alltag und eine Fallstudie mit bis zu 450 € Ersparnis pro Monat. Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geldsparenimalltag #503020regel"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -65,7 +65,7 @@ Die Idee ist einfach. Jeder Euro für unnötigen Konsum kostet dich Arbeitszeit.
 
 Ohne komplizierte Tabellen behältst du deine Finanzen mit der 50–30–20‑Methode im Griff:
 
-| Budget‑Block | Anteil vom Netto | Typische Ausgaben | Frugalismus‑Hebel |
+| Budget‑Block | Anteil vom Netto | Typische Ausgaben | [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)‑Hebel |
 |:---|:---|:---|:---|
 | **Fixkosten & Grundbedürfnisse** | **50 %** | Miete, Strom, Gas, DSL, Lebensmittel, Pflichtversicherungen | Durch Tarifwechsel, Mit‑Wohngemeinschaft oder Ökostrom‑Anbieter auf unter 45 % drücken |
 | **Persönliche Wünsche & Lifestyle** | **30 %** | Hobbys, Restaurant, Urlaub, Kleidung, Kultur | Bewusst genießen – 72‑Stunden‑Regel bei Käufen, Preis‑Vergleich vor jedem größeren Einkauf |
@@ -113,7 +113,7 @@ Dann ist meist nichts übrig. Setze einen Dauerauftrag direkt nach dem Gehalt. E
 4. **Rund-um-die‑Uhr‑Monitoring** – Apps wie Outbank oder MoneyControl zeigen dir sofort, wenn ein Abo überfällig ist.
 5. **Jährliche Anpassung** – prüfe im Januar, ob die 50‑30‑20‑Verteilung noch passt, und justiere die Daueraufträge.
 
-Durch diese **Automatisierung** entfallen Fehlentscheidungen aus „Ich‑hab‑gerade‑kein‑Geld‑mehr“-Situationen. Das ist ein zentraler Baustein, um **Finanzielle Freiheit** zu erreichen.
+Durch diese **Automatisierung** entfallen Fehlentscheidungen aus „Ich‑hab‑gerade‑kein‑Geld‑mehr“-Situationen. Das ist ein zentraler Baustein, um **[Finanzielle Freiheit](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/)** zu erreichen.
 
 ## Typische Ersparnis durch Frugalismus im Jahresvergleich
 
