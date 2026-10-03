@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import sys
 import unittest
 import urllib.request
@@ -224,6 +225,64 @@ class BelegdisziplinTests(unittest.TestCase):
         """Allowlist ist eine Allowlist – nicht 'alles außer Sperrliste'."""
         self.assertIsNone(
             aw.belegfaehig("https://irgendein-blog.example/x", self.allow, self.sperre))
+
+
+class VerschwiegenheitTests(unittest.TestCase):
+    """Nichts aus der Umgebung darf im Klartext ins Cockpit sickern.
+
+    WERKBANK-STATUS.md wird eingecheckt. Eine SearXNG-Instanz hinter
+    Basic-Auth steht als https://nutzer:geheim@host in SEARXNG_URL –
+    landete sie ungekürzt im Cockpit, stünde das Passwort im Repo.
+    Von CodeQL auf PR #548 gemeldet, hier eingefroren.
+    """
+
+    GEHEIM = "s3hr-geheim"
+
+    def test_anzeige_url_entfernt_zugangsdaten(self):
+        gekuerzt = wa.anzeige_url(f"https://nutzer:{self.GEHEIM}@searx.example.org/search?q=x")
+        self.assertEqual(gekuerzt, "https://searx.example.org")
+        self.assertNotIn(self.GEHEIM, gekuerzt)
+        self.assertNotIn("nutzer", gekuerzt)
+
+    def test_anzeige_url_behaelt_port_und_vertraegt_muell(self):
+        self.assertEqual(wa.anzeige_url("http://127.0.0.1:8080/search"),
+                         "http://127.0.0.1:8080")
+        for muell in ("", "   ", "kein-schema", "http://"):
+            self.assertIsInstance(wa.anzeige_url(muell), str)
+
+    def test_cockpit_grund_zeigt_das_passwort_nicht(self):
+        anbieter = {"id": "searxng", "env_url": "WERKBANK_TEST_SEARXNG"}
+        os.environ["WERKBANK_TEST_SEARXNG"] = f"https://nutzer:{self.GEHEIM}@searx.example.org"
+        try:
+            zustand = wa.such_status(anbieter)
+        finally:
+            os.environ.pop("WERKBANK_TEST_SEARXNG", None)
+        self.assertEqual(zustand["zustand"], wa.BEREIT)
+        self.assertNotIn(self.GEHEIM, zustand["grund"])
+        self.assertIn("searx.example.org", zustand["grund"])
+
+    def test_abruffehler_zitiert_die_zugangsdaten_nicht(self):
+        # Kaputtes Schema -> ValueError, deren Text die URL wörtlich enthält.
+        _, fehler = wa._hole(f"httpx://nutzer:{self.GEHEIM}@host.example/pfad", timeout=1)
+        self.assertIsNotNone(fehler)
+        self.assertNotIn(self.GEHEIM, fehler)
+
+    def test_schluessel_steht_nie_in_einer_rueckgabe(self):
+        ssot = wa.lade_ssot()
+        env = (wa.gewerk(ssot, "konnektor") or {}).get("env") or "COMPOSIO_API_KEY"
+        os.environ[env] = self.GEHEIM
+        try:
+            texte = [
+                json.dumps(wa.konnektor_status(ssot), ensure_ascii=False),
+                json.dumps(wa.konnektor_ausfuehren(ssot, "GMAIL_SEND_EMAIL",
+                                                   {"an": "x@example.org"},
+                                                   trocken=True), ensure_ascii=False),
+                json.dumps(wa.gesamtlage(ssot), ensure_ascii=False),
+            ]
+        finally:
+            os.environ.pop(env, None)
+        for text in texte:
+            self.assertNotIn(self.GEHEIM, text)
 
 
 class FeedTests(unittest.TestCase):

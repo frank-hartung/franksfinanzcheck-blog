@@ -101,6 +101,25 @@ def _env(name: str | None) -> str:
     return (os.environ.get(name) or "").strip() if name else ""
 
 
+def anzeige_url(url: str) -> str:
+    """Eine URL so kürzen, dass sie gefahrlos in Log und Cockpit darf.
+
+    Bleibt: Schema und Host (mit Port). Weg: Zugangsdaten, Pfad, Query,
+    Fragment. Eine selbstgehostete SearXNG-Instanz hinter Basic-Auth steht
+    als `https://nutzer:geheim@searx.example.org` in der Umgebung – und
+    `WERKBANK-STATUS.md` wird eingecheckt. Ohne diese Kürzung wäre das
+    Cockpit ein Secret-Leck im Repo.
+    """
+    try:
+        teile = urllib.parse.urlsplit(url.strip())
+    except ValueError:
+        return "(unlesbare URL)"
+    host = teile.netloc.rpartition("@")[2]      # Zugangsdaten entfernen
+    if not host:
+        return "(ohne Host)"
+    return f"{teile.scheme}://{host}" if teile.scheme else host
+
+
 def _modul_da(name: str) -> bool:
     """Ist ein Python-Modul importierbar? Ohne es zu importieren."""
     import importlib.util
@@ -123,7 +142,11 @@ def _hole(url: str, timeout: int = 30, headers: dict | None = None) -> tuple[str
     except urllib.error.HTTPError as exc:
         return "", f"HTTP {exc.code}"
     except Exception as exc:  # noqa: BLE001
-        return "", f"{type(exc).__name__}: {exc}"
+        # Manche Ausnahmen (z. B. ValueError bei kaputter URL) zitieren die
+        # URL wörtlich. Steckten Zugangsdaten darin, stünden sie sonst im
+        # Klartext im Fehlertext – und damit im Cockpit.
+        meldung = f"{type(exc).__name__}: {exc}".replace(url, anzeige_url(url))
+        return "", meldung
 
 
 # ======================================================================
@@ -145,7 +168,8 @@ def such_status(anbieter: dict) -> dict:
         if not url.startswith(("http://", "https://")):
             return {"id": aid, "zustand": DEFEKT,
                     "grund": f"{anbieter.get('env_url')} ist keine http(s)-URL"}
-        return {"id": aid, "zustand": BEREIT, "grund": f"Instanz: {url}"}
+        # Nur Schema und Host ins Cockpit – siehe anzeige_url().
+        return {"id": aid, "zustand": BEREIT, "grund": f"Instanz: {anzeige_url(url)}"}
     if aid == "duckduckgo":
         return {"id": aid, "zustand": BEREIT, "grund": "schlüsselfrei, gedrosselt"}
     if aid == "themenpool":
