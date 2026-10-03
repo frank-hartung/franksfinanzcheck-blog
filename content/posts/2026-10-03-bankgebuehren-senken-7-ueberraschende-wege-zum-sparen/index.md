@@ -8,7 +8,7 @@ tags: ["Girokonto", "Kreditkarte und Kredit", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Bankgebühren", "Reduzieren", "Konto", "Bankgebühren senken", "Überraschende"]
+keywords: ["Bankgebühren", "Reduzieren", "Bankgebühren senken", "Überraschende", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Bankgebühren senken: 7 überraschende Wege zum Sparen"
 pin_description: "*Werbung | Erfahre, welche Fehler dich jährlich hunderte Euro kosten und wie du Bankgebühren effektiv reduzieren kannst. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #bankgebuehren #reduzieren #konto"
 ai_generated: true

@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "Stromrechnung senken", "Stromrechnung", "Strategien"]
+keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "Stromrechnung senken", "Stromrechnung", "Strategien", "Energiekosten"]
 pin_title: "Stromrechnung senken: 20 Strategien für dein"
 pin_description: "*Werbung | Mit effektiven Strom sparen Tipps behältst du die Kontrolle über deine Ausgaben. Erfahre, wie du deinen Stromverbrauch reduzieren und Kosten senken kannst. Mehr Spartipps auf FranksFinanzcheck! #stromsparentipps #energiekostensenken #stromverbrauchreduzieren"
 ai_generated: true

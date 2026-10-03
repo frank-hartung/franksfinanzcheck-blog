@@ -1,15 +1,10 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-10-02 14:53 UTC · Modus: FIX
+**Stand:** 2026-10-03 09:57 UTC · Modus: FIX
 
-**Report-Schema:** 3 · **Geprüfte Artikel:** 67
-**Quellfingerabdruck:** `c52a868c6be87a9ec1b9186205a919fa68ed9a6d1a447de2bac2ad1397598a2e`
+**Report-Schema:** 3 · **Geprüfte Artikel:** 63
+**Quellfingerabdruck:** `0138d1eccf93f7a582785e9a6677076db2f3b8517b1729b6d276979c0522d670`
 
-Probleme: 1 · Geheilt: 1
+Probleme: 0 · Geheilt: 0
 
-| Code | Artikel | Problem |
-|---|---|---|
-| P4b | 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann, 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag | DUPLIKAT-pin_title (Spam-Risiko) |
-
-**Selbstheilung (diese Runde):**
-- [P4b] 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag: pin_title ent-dupliziert → 5 einfache Frugalismus-Tricks für den Alltag: Geld sparen
+✅ Alle Pinterest-Signale im Profi-Bereich.

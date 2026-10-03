@@ -8,7 +8,7 @@ tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Camping", "Urlaub sparen", "Campingplatz", "Camping 2026", "Kostenfallen"]
+keywords: ["Urlaub sparen", "Campingplatz", "Camping 2026", "Kostenfallen"]
 pin_title: "Camping 2026: Kostenfallen vermeiden & clever planen"
 pin_description: "*Werbung | Camping 2026 geplant? Erfahre, wie du beim Urlaub sparen kannst und welche Kosten auf dem Campingplatz wirklich zählen. Franks Finanz-Check für Camper. Mehr Spartipps auf FranksFinanzcheck! #camping #urlaubsparen #campingplatz"
 ai_generated: true

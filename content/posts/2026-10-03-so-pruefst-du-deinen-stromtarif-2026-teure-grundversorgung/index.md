@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026", "So prüfst du deinen Stromtarif 2026", "Stromtarif", "Grundversorgung"]
+keywords: ["Stromanbieter wechseln", "Stromvergleich", "Stromkosten sparen 2026", "So prüfst du deinen Stromtarif 2026", "Stromtarif", "Grundversorgung", "Stromanbieter"]
 pin_title: "So prüfst du deinen Stromtarif 2026: Teure Grundversorgung?"
 pin_description: "*Werbung | Den Stromanbieter wechseln kann die Haushaltskasse entlasten. Erfahre, wie du beim Stromvergleich Fehler vermeidest und Stromkosten sparen 2026 realisierst Mehr Spartipps auf FranksFinanzcheck! #stromanbieterwechseln #stromvergleich #stromkostensparen2026"
 ai_generated: true

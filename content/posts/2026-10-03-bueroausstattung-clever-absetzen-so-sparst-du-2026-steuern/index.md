@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Büroausstattung clever", "Büroausstattung", "Absetzen"]
+keywords: ["Büroausstattung clever", "Büroausstattung", "Geld sparen"]
 pin_title: "Büroausstattung clever: absetzen – so sparst du 2026 Steuern"
 pin_description: "*Werbung | Büroausstattung clever: Alles, was du 2026 über absetzbare Büroausstattung wissen musst – Leitfragen, Praxis‑Checkliste und typische Fehler. Mehr Spartipps auf FranksFinanzcheck! #bueroausstattungclever #bueroausstattung #absetzen"
 ai_generated: true

@@ -4,11 +4,11 @@ description: "Frugalismus Familie: Wie du dein Familienbudget optimierst und bei
 date: 2026-10-03T09:21:17Z
 draft: true
 reserve: true
-tags: ["Frugalismus"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Verzicht"]
+keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Frugalismus Familie: Clever sparen ohne Verzicht"
 pin_description: "*Werbung | Frugalismus Familie: Wie du dein Familienbudget optimierst und beim Sparen mit Kindern die Fixkosten im Griff behältst. Tipps von FranksFinanzcheck. Mehr Spartipps auf FranksFinanzcheck! #frugalismusfamilie #sparenmitkindern #familienbudget"
 ai_generated: true

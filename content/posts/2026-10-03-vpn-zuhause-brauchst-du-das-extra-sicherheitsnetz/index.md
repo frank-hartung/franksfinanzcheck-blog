@@ -8,7 +8,7 @@ tags: ["DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["VPN Zuhause", "VPN sinnvoll", "Internet Sicherheit", "VPN Zuhause – Brauchst du das extra Sicherheitsnetz", "Brauchst", "Sicherheitsnetz"]
+keywords: ["VPN Zuhause", "VPN sinnvoll", "Internet Sicherheit", "VPN Zuhause – Brauchst du das extra Sicherheitsnetz", "Sicherheitsnetz"]
 pin_title: VPN Zuhause – Brauchst du das extra Sicherheitsnetz?
 pin_description: "*Werbung | Erkunde, ob ein VPN Zuhause deine Internet Sicherheit wirklich stärkt und wann es sich lohnt. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #vpnzuhause #vpnsinnvoll #internetsicherheit"
 ai_generated: true

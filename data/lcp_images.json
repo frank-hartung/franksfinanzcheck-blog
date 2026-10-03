@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-10-02T21:37:57+00:00",
+  "generatedAt": "2026-10-03T09:57:19+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -15,7 +15,7 @@
   },
   "pages": {
     "/": {
-      "image": "images/covers/2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe.jpg",
+      "image": "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg",
       "type": "home",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -31,7 +31,7 @@
       "decoding": "async"
     },
     "/posts/": {
-      "image": "images/covers/2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe.jpg",
+      "image": "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg",
       "type": "section",
       "reason": "erstes sichtbares Listen-Cover",
       "sizes": "(min-width: 768px) 620px, 100vw",
@@ -606,8 +606,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe/": {
-      "image": "images/covers/2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe.jpg",
+    "/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/": {
+      "image": "images/covers/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -622,8 +622,24 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/": {
-      "image": "images/covers/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden.jpg",
+    "/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/": {
+      "image": "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/": {
+      "image": "images/covers/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

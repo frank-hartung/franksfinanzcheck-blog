@@ -8,10 +8,10 @@ tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Gasabschlag berechnen", "Gas Abschlag senken", "Heizsaison vorbereiten", "Gastarif prüfen", "Grundversorgung Gas"]
+keywords: ["Gasabschlag berechnen", "Gas Abschlag senken", "Heizsaison vorbereiten", "Gastarif prüfen", "Grundversorgung Gas", "Gasabschlag", "Heizsaison"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
-pin_description: "*Werbung | Gasabschlag berechnen und Heizkosten senken: Mit der einfachen Formel, einer Modellrechnung und fünf Sparhebeln vermeidest du die Nachzahlungsfalle in der Heizsaison. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison. Mehr Spartipps auf FranksFinanzcheck! #gasabschlagberechnen #gasabschlagsenken #heizsaisonvorbereiten"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"

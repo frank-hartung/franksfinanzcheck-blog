@@ -8,10 +8,10 @@ tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Dispo vermeiden", "Weihnachtsgeld anlegen"]
+keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Dispo vermeiden", "Weihnachtsgeld anlegen", "Weihnachten"]
 pinwand: "Budget & Sparen | Familienfinanzen"
 pin_title: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
-pin_description: "*Werbung | Weihnachten Budget planen ohne Dispo: 6-Topf-Modell, Modellrechnung und sieben Sparhebel für entspannte Feiertage ohne Januar-Kater. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, einer Modellrechnung und sieben Sparhebeln kommst du schuldenfrei durch die Feiertage. Mehr Spartipps auf FranksFinanzcheck! #weihnachtenbudgetplanen #weihnachtensparen #geschenkebudget"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "profi"
