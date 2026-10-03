@@ -46,6 +46,12 @@
     {{- partial "ff_offenlegung.html" . }}
   </header>
 
+  {{- /* Wiedererkennbares redaktionelles Objekt: ordnet jeden Ratgeber
+         sichtbar in dasselbe 4K-Prüfraster ein, ohne einen Score zu erfinden. */ -}}
+  {{- if eq .Section "posts" }}
+    {{- partial "kostenprofil.html" (dict "page" . "mode" "article") }}
+  {{- end }}
+
   {{- /* Korrektur-Box (WiWo-Standard: Fehler transparent korrigieren).
          Frontmatter-Feld `korrektur:` – Registrierung über
          scripts/redaktions_standard.py --register-korrektur.

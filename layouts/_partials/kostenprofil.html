@@ -1,0 +1,62 @@
+{{- /* ============================================================
+    FF KOSTENPROFIL — das wiedererkennbare redaktionelle Prüfobjekt
+    ------------------------------------------------------------
+    Ein Format, zwei Anwendungen:
+      mode=home    Markenobjekt + Herausgeber im Startseiten-Hero
+      mode=article kompakter Themenpass in jedem Ratgeber
+
+    Das Profil zeigt bewusst keine erfundenen Scores. Es visualisiert den
+    kanonischen 4K-Prüfpfad und benennt das Prüffeld des Beitrags.
+    ============================================================ */ -}}
+{{- $page := .page -}}
+{{- $mode := .mode | default "article" -}}
+{{- $pillar := "" -}}
+{{- with $page }}{{- $pillar = .Params.pillar | default "" -}}{{- end -}}
+{{- $label := "Haushalts-Fixkosten" -}}
+{{- $code := "FK" -}}
+{{- if eq $pillar "strom-sparen" -}}{{- $label = "Strom & Gas" -}}{{- $code = "EN" -}}
+{{- else if eq $pillar "internet-dsl" -}}{{- $label = "Internet & DSL" -}}{{- $code = "NET" -}}
+{{- else if eq $pillar "versicherungen" -}}{{- $label = "Versicherungen" -}}{{- $code = "VS" -}}
+{{- else if eq $pillar "konto-karten" -}}{{- $label = "Konto & Karten" -}}{{- $code = "BK" -}}
+{{- else if eq $pillar "mietwagen" -}}{{- $label = "Mietwagen & Reisen" -}}{{- $code = "RE" -}}
+{{- else if eq $pillar "frugalismus" -}}{{- $label = "Budget & Alltag" -}}{{- $code = "BU" -}}
+{{- end -}}
+
+<aside class="ff-kostenprofil ff-kostenprofil--{{ $mode }}" aria-label="Franks Kostenprofil: {{ $label }}" data-ff-kostenprofil>
+  <header class="ff-kostenprofil__head">
+    <span class="ff-kostenprofil__index" aria-hidden="true">FF—KP / {{ $code }}</span>
+    <div>
+      <p class="ff-kostenprofil__eyebrow">Das FranksFinanzcheck-Objekt</p>
+      <p class="ff-kostenprofil__title">Kostenprofil</p>
+    </div>
+  </header>
+
+  <div class="ff-kostenprofil__subject">
+    <span>Prüffeld</span>
+    <strong>{{ $label }}</strong>
+  </div>
+
+  <ol class="ff-kostenprofil__track" aria-label="Vier Schritte des Kostenprofils">
+    <li><span>01</span><strong>Kosten</strong><small>sehen</small></li>
+    <li><span>02</span><strong>Konditionen</strong><small>rechnen</small></li>
+    <li><span>03</span><strong>Frist</strong><small>sichern</small></li>
+    <li><span>04</span><strong>Kurs</strong><small>halten</small></li>
+  </ol>
+
+  {{- if eq $mode "home" }}
+  <div class="ff-kostenprofil__rule">
+    <span aria-hidden="true">↳</span>
+    <p><strong>Der Prüfgrundsatz</strong> Gesamtkosten vor Bonus. Vertragsdaten vor Bauchgefühl.</p>
+  </div>
+  <a class="ff-kostenprofil__author" href="{{ "ueber/" | relURL }}">
+    <img src="{{ partial "asset_url.html" "images/frank-hartung.jpg" }}" width="800" height="800" alt="Frank Hartung, Autor und Herausgeber" loading="eager" decoding="async">
+    <span><small>Verantwortet von</small><strong>Frank Hartung</strong><em>Autor &amp; Herausgeber</em></span>
+    <b aria-hidden="true">→</b>
+  </a>
+  {{- else }}
+  <footer class="ff-kostenprofil__foot">
+    <span>Prüfraster 4K</span>
+    <a href="{{ "methodik/" | relURL }}">Methodik ansehen <span aria-hidden="true">→</span></a>
+  </footer>
+  {{- end }}
+</aside>

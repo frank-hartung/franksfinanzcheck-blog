@@ -233,3 +233,4 @@
 {"date": "2026-10-02", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-02", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": ["scripts/internal_linker.py", "scripts/link_density_guard.py", "scripts/shortcode_guard.py"]}
 {"date": "2026-10-02", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-03", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/header.html"]}

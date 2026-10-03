@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-03T03:23:03.821369+00:00",
-  "head": "fc0d6bd",
+  "signed_at": "2026-10-03T07:57:45.137229+00:00",
+  "head": "f1a3c6f",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "1bb1a0a5c3a34ebf51d4152ef3ccdb006f9ef94c5cbaa6ec65d8f3b6577f5f05",
+    "hugo.toml": "827f34403b06f3e2e94913105bbc5485841c6a62430f9f5940c0cfbd0e1d2407",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
@@ -13,7 +13,7 @@
     "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
     "layouts/_partials/head.html": "266e693120e9928b57d31ecd577eef2e7fd8d0c814741f84e668c549997c7d55",
-    "layouts/_partials/header.html": "03828d37e9f0a4423fd3708dae10c2cf50d115988ba6762942d040fb506261ea",
+    "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
     "layouts/index.sw.js": "389fe9edc19946d3c4e0079b340046353f808bbf349ea85d0288a5074db3772b",
@@ -48,39 +48,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "bdaf8650847e20c1d772427d9fa87f0dadc28c48ac35c3ed01359a5846ccde6d",
-  "audit_start_sha256": "1f30b668ac901427561215f540db04db4d15addaa1fb7abd5290c03a64ad2146",
+  "files_sha256": "8c75b37d7d7a319d4bd80b7e41dbc79d28cae12ce8d87b93b65b5f5afecc385e",
+  "audit_start_sha256": "e7d7ac7282faea5461eac1a31cd3c9435616a8013e34116040db9b4d0ad4caf8",
   "audit": [
-    {
-      "date": "2026-09-30",
-      "art": "set-current",
-      "head": "eb15c1c",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "eb15c1c",
-              "datum": "2026-09-30",
-              "betreff": "fix(watchdog): exclude healed affiliate findings from residual alerts"
-            },
-            {
-              "sha": "b911d58",
-              "datum": "2026-09-30",
-              "betreff": "fix(content-engine): repetition-guard sweep after Phase 3 rewrite healers (#456) (#471)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "092b5a9f36e81bfb712d7dfc68b823537efd2f5d1471d23948263bf4474fd54c",
-      "prev_sha256": null
-    },
     {
       "date": "2026-09-30",
       "art": "heal",
@@ -109,7 +79,7 @@
         }
       ],
       "files_sha256": "2786f9ae6fbae627b1a38727ea4ff65ea67d7bfa81ee80be348c2d51ca3b1714",
-      "prev_sha256": "1f30b668ac901427561215f540db04db4d15addaa1fb7abd5290c03a64ad2146"
+      "prev_sha256": null
     },
     {
       "date": "2026-09-30",
@@ -549,8 +519,47 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "997dec145ceb4d8c1d33753850bf3f0d664098644537825f9dd76f0b4c28be9b",
-      "files_sha256": "bdaf8650847e20c1d772427d9fa87f0dadc28c48ac35c3ed01359a5846ccde6d"
+      "files_sha256": "bdaf8650847e20c1d772427d9fa87f0dadc28c48ac35c3ed01359a5846ccde6d",
+      "prev_sha256": "997dec145ceb4d8c1d33753850bf3f0d664098644537825f9dd76f0b4c28be9b"
+    },
+    {
+      "date": "2026-10-03",
+      "art": "set-current",
+      "head": "f1a3c6f",
+      "geaendert": [
+        "hugo.toml",
+        "layouts/_partials/header.html"
+      ],
+      "herkunft": [
+        {
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "f1a3c6f",
+              "datum": "2026-10-03",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/header.html",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "f1a3c6f",
+              "datum": "2026-10-03",
+              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "357417041813592a58888f2755d3b4a2faf45501bc156d2ee4c5c1346faca0b1",
+      "files_sha256": "8c75b37d7d7a319d4bd80b7e41dbc79d28cae12ce8d87b93b65b5f5afecc385e"
     }
   ]
 }

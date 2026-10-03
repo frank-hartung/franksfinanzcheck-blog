@@ -27,6 +27,7 @@
 
 <figure class="ff-chart" data-ff-chart data-dataset="{{ $dataset.id }}" data-chart-type="{{ $kind }}">
   <div class="ff-chart__head">
+    <p class="ff-chart__eyebrow"><span aria-hidden="true">FF—DATENBLATT</span><span class="sr-only">FranksFinanzcheck Datenblatt</span> · {{ upper $kind }}</p>
     <div id="{{ $uid }}-title" class="ff-chart__title" role="heading" aria-level="3">{{ $title }}</div>
     <p id="{{ $uid }}-desc" class="ff-chart__summary">{{ $summary }}</p>
   </div>

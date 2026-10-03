@@ -199,3 +199,47 @@ Playwright, Lighthouse, Messprotokoll und menschliche Freigabe in Produktion.
 
 Runbook:
 [`docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`](docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md)
+
+## 11. Kanonische Markenobjekte (seit 03.10.2026)
+
+Die Produktionsbasis trägt die Markenidee selbst; eine Hero-Variante ist nicht
+mehr aktiv (`designVariante = ""`). Neue Kampagnen dürfen diese Ebene nicht mit
+einer parallelen Bildsprache überschreiben.
+
+### FF Kostenprofil
+
+Das **Kostenprofil** ist das wiedererkennbare FranksFinanzcheck-Objekt über
+Startseite und Ratgeber hinweg. Es visualisiert immer denselben 4K-Prüfpfad:
+
+1. Kosten sehen
+2. Konditionen rechnen
+3. Frist sichern
+4. Kurs halten
+
+Vertrag: `layouts/_partials/kostenprofil.html`, Gestaltung in Abschnitt 18 von
+`zzz-agency-polish.css`, DOM-Marker `[data-ff-kostenprofil]`. Das Objekt darf
+**keine errechneten Scores vortäuschen**. Artikel unterscheiden sich über das
+redaktionelle Prüffeld (Energie, Internet, Versicherung, Konto, Reise oder
+Budget), nie über willkürliche Prozentwerte. Auf der Startseite verbindet es
+den Prüfpfad mit dem echten Autorenfoto und der Herausgeberseite.
+
+### FF Datenblatt
+
+Individuelle Diagramme tragen die Kennung `FF—DATENBLATT`, eine cremefarbene
+Papierfläche, die dunkle Kopfregel und Smaragd als Datenfarbe. Die zugängliche
+SVG-Grafik, Datentabelle, Quelle, Stand und Methodik bleiben Pflicht. Vertrag:
+`layouts/shortcodes/chart.html` und `assets/css/extended/zz-visual-data.css`;
+die markentypische Art Direction liegt ebenfalls in Abschnitt 18 der
+kanonischen Agenturdatei.
+
+### Oberflächenregeln
+
+- Dunkles Redaktionsgrün, Papiercreme und Signalgelb bilden die feste Trias.
+- Eckige Drucksachen-Kanten sind den Markenobjekten vorbehalten; normale
+  Produktkarten verwenden weiter die dokumentierte Radius-Skala.
+- Echte Personenbilder werden nicht durch KI-Porträts ersetzt. Das kanonische
+  Autorenbild ist `static/images/frank-hartung.jpg`.
+- Website, Newsletter, Pinterest und Social übernehmen Kennung, Farbreihenfolge
+  und 4K-Achse; zusätzliche Cover-Varianten schaffen keine neue Designsprache.
+- Ein neues Visual-Format wird nur ergänzt, wenn es Information transportiert,
+  nicht um eine weitere dekorative Variante zu erzeugen.

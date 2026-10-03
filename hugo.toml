@@ -96,13 +96,14 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
   #   python3 scripts/design_variant_gate.py --produktionswache
   # im Deploy, VOR dem Build.
   #
-  # Scharf geschaltet am 26.09.2026 (Frank Hartung, Freigabe vom
-  # 26.09.2026, Protokoll data/design/messungen/
-  # v-hero-conversion-2026-09-26.json).
-  # Rückbau: diesen Wert auf "" setzen, im Register `aktiv: ""` und
-  # den Status auf `gemessen` bzw. `verworfen`.
+  # Seit 03.10.2026 läuft bewusst die kanonische Basis: Die tragfähige
+  # Hero-Hierarchie und das FF Kostenprofil liegen dauerhaft in der
+  # Markenebene, nicht mehr in einer Produktionsvariante. Historische
+  # Entwürfe und Messungen bleiben im Varianten-Register nachvollziehbar.
+  # Eine neue Variante darf hier nur nach dem dokumentierten Mess- und
+  # Freigabeprozess eingetragen werden.
   # ---------------------------------------------------------------
-  designVariante = "v-hero-premium"
+  designVariante = ""
   title = "FranksFinanzcheck"
   description = "Das Fixkosten-Cockpit für deutsche Haushalte: Verträge, Fristen und laufende Kosten nachvollziehbar prüfen – unabhängig und mit klarer Rechnung."
   keywords = ["Fixkosten-Cockpit", "Fixkosten senken", "Geld sparen", "Budgetplanung", "Stromvergleich", "Gasvergleich", "DSL vergleichen", "Versicherungen", "Kündigungsfrist"]
