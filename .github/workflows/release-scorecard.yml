@@ -81,7 +81,10 @@ jobs:
       # Seiten-Existenz) brauchen den Build. Ohne ihn wäre die Scorecard
       # ehrlich „nicht beweisbar“ – wir bauen also lieber.
       - name: Site bauen (Beweisbasis public/)
-        run: hugo --minify --destination public
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Scorecard-Beweisbasis"
 
       # Messung: --streng macht Bestands-Rot zum Exit 1 (Issue-Entscheidung).
       # Werkzeugfehler bleiben Exit 2 (fail-closed). Weiterlaufen mit

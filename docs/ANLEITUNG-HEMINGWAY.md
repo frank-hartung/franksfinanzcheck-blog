@@ -38,6 +38,20 @@ python3 scripts/hemingway_check.py --json
 
 # Regressionstest
 python3 scripts/hemingway_check.py --selftest
+
+# Seit 03.10.2026 ein ECHTER Selbsttest des Adapters (A1–A7):
+#   A1 Argumente kommen unverändert bei der Engine an
+#   A2 Exit-Codes werden durchgereicht, nicht geschluckt
+#   A3 Umbenennung greift im Textmodus
+#   A4 --json bleibt unangetastet und parsebar
+#   A5 --report-Dateien werden nachgezogen
+#   A6 Fälschungsprobe: ein roter Lauf darf nie grün aussehen
+#   A7 die Engine hat die Flagge wirklich
+# Zusätzlich läuft der Selbsttest von readability_check mit.
+#
+# Vorher reichte die Flagge nur weiter und druckte die Zeile der Engine,
+# in der „readability_check" durch „hemingway_check" ersetzt war - ein
+# grünes Häkchen, hergestellt durch Suchen-und-Ersetzen.
 ```
 
 Ein Befund ist ein redaktioneller Hinweis, keine automatische Umschreibung. Für die manuelle Schlussrunde Text in den [kostenlosen Hemingway Editor](https://hemingwayapp.com/) kopieren, Vorschläge prüfen und nur sinnvolle Änderungen in den Artikel übernehmen. Zahlen, Fakten, Links, Shortcodes und Marken bleiben dabei unter redaktioneller Kontrolle.

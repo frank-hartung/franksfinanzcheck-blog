@@ -49,11 +49,18 @@ jobs:
         # BUGFIX 13.08. / 26.08.: pyyaml, cryptography, pillow, fonttools, brotli
         run: python3 -m pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli 2>/dev/null || true
 
+      # Vorher: `hugo --minify > /dev/null 2>&1`. Ein Schritt, der rot wird
+      # und KEINE Zeile hinterlässt, ist die teuerste Variante von allen.
+      - name: Seite bauen (Grundlage des SEO-Audits)
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "SEO-Audit-Build"
+
       - name: SEO-Audit ausführen
         id: audit
         continue-on-error: true
         run: |
-          hugo --minify > /dev/null 2>&1
           python3 scripts/seo_audit.py | tee /tmp/seo_audit_log.txt
           exit ${PIPESTATUS[0]}
 
@@ -351,6 +358,17 @@ jobs:
           python3 scripts/struktur_guard.py | tee /tmp/struktur_log.txt
           exit ${PIPESTATUS[0]}
 
+      # NEU BAUEN, nicht den alten Build wiederverwenden: Zwischen dem
+      # SEO-Audit und hier heilen mehrere Schritte echten Content (interne
+      # Verlinkung, Meta-Daten, Struktur). Das Bestand-Gate prüft das
+      # GERENDERTE HTML – gegen einen veralteten public/-Stand würde es
+      # Befunde melden, die dieser Lauf längst repariert hat.
+      - name: Seite neu bauen (Grundlage des Bestand-Gates)
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Bestand-Gate-Build (nach den Heilungen)"
+
       - name: Bestand-Gate (aktuelle Publish-Gate-Regeln auch auf Bestandsartikel anwenden)
         # Frank-Beschluss 13.08., erweitert 14.08.: Die harte Publish-Gate-
         # Prüfung (check_length.py + seo_audit.py + affiliate_profi_check.py
@@ -368,7 +386,6 @@ jobs:
         id: bestand
         continue-on-error: true
         run: |
-          hugo --minify > /dev/null 2>&1
           python3 scripts/bestand_gate.py | tee /tmp/bestand_log.txt
           exit ${PIPESTATUS[0]}
 

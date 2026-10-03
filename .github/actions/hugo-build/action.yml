@@ -1,0 +1,282 @@
+# ============================================================
+#  hugo-build – Ein Bau, eine Fehlerausgabe (Profi-Agentur)
+#  ------------------------------------------------------------
+#  WARUM (Reparatur der Klasse „stiller Build-Tod", 03.10.2026):
+#
+#  Am 02.10.2026 starb `hugo --minify` an einer einzigen Zeile:
+#     layouts/sitemap.xml:40:29 … wrong type for value; expected
+#     string; got []string
+#  Auslöser war ein LEERES Verzeichnis unter content/ (content/drafts/).
+#  Die Suche danach dauerte Stunden – nicht, weil der Fehler schwer war,
+#  sondern weil ihn fast jeder Workflow unsichtbar machte:
+#
+#     seo-weekly.yml       hugo --minify > /dev/null 2>&1   ← Totalverlust
+#     bot-watchdog.yml     hugo --minify || true            ← verschluckt
+#     e2e.yml              hugo --quiet                     ← Meldung weg
+#     layout-ai.yml        hugo --minify --quiet            ← Meldung weg
+#     visual-data-gate.yml hugo --minify --quiet            ← Meldung weg
+#
+#  Ein Schritt, der rot wird und NICHTS sagt, ist schlimmer als ein
+#  Schritt, der durchläuft: Er kostet Zeit und erzieht zum Wegsehen.
+#  Diese Action macht die Fehlerausgabe zur Eigenschaft des Bauens
+#  selbst – sie kann von keinem Aufrufer mehr vergessen werden.
+#
+#  WAS SIE GARANTIERT (an jeder Baustelle, ohne Zutun des Aufrufers):
+#    1. `set -o pipefail` + `tee` – der Exit-Code überlebt die Pipe,
+#       die Ausgabe landet gleichzeitig im Log und in der Konsole.
+#    2. `::error title=…::` – der Fehler erscheint als Annotation
+#       DIREKT an der Datei/Zeile im PR, nicht nur im Rohlog.
+#       (Rohlogs sind aus manchen Umgebungen gar nicht abrufbar.)
+#    3. `$GITHUB_STEP_SUMMARY` – Befund, Kommando, Exit-Code und der
+#       Log-Auszug stehen auf der Übersichtsseite des Laufs.
+#    4. SELBSTDIAGNOSE bei Fehlschlag: Die Action sucht aktiv nach den
+#       bekannten Ursachen – allen voran LEERE VERZEICHNISSE unter
+#       content/ und data/. Die sieht `git status` grundsätzlich NICHT,
+#       auch nicht mit --ignored. Genau diese Blindstelle kostete die
+#       Stunden vom 02.10.2026.
+#    5. `--quiet` wird ABGELEHNT (fail-closed, Exit 2). Die Flagge
+#       verschluckt die entscheidende Fehlerzeile sogar bei gefangener
+#       Ausgabe. Wer Ruhe im Protokoll will, bekommt sie über das
+#       Log-Artefakt – nicht durch Wegwerfen der Diagnose.
+#
+#  TOLERIERTE FEHLSCHLÄGE: `weiter-bei-fehler: "true"` ersetzt das alte
+#  `|| true`. Unterschied: Der Fehlschlag bleibt SICHTBAR (Annotation +
+#  Zusammenfassung), er stoppt nur den Job nicht. „Toleriert" und
+#  „unbemerkt" sind zwei verschiedene Dinge.
+#
+#  NUTZUNG:
+#     - name: Seite bauen
+#       uses: ./.github/actions/hugo-build
+#       with:
+#         args: "--minify"
+#  statt
+#     - name: Seite bauen
+#       run: hugo --minify
+#
+#  Der Vertrag wird erzwungen von scripts/hugo_build_vertrag.py (H1–H7)
+#  und läuft in jedem Qualitäts-Gate mit. Runbook: docs/ANLEITUNG-HUGO-BUILD.md
+# ============================================================
+name: "Hugo bauen (eine Fehlerausgabe für alle Workflows)"
+description: >-
+  Baut die Seite mit sichtbarer, einheitlicher Fehlerausgabe: pipefail+tee,
+  GitHub-Annotation, Lauf-Zusammenfassung und Selbstdiagnose der bekannten
+  Build-Killer (leere Verzeichnisse, fehlendes Extended).
+
+inputs:
+  args:
+    description: "Hugo-Argumente, z. B. '--minify --destination public'. OHNE --quiet."
+    required: false
+    default: "--minify"
+  label:
+    description: "Klartext-Name dieses Baus (erscheint in Annotation und Zusammenfassung)."
+    required: false
+    default: "Seite bauen"
+  log:
+    description: "Pfad der Logdatei (wird immer geschrieben, auch im Erfolgsfall)."
+    required: false
+    default: "hugo-build.log"
+  zeilen:
+    description: "Wie viele Log-Zeilen bei Fehlschlag in die Zusammenfassung wandern."
+    required: false
+    default: "40"
+  weiter-bei-fehler:
+    description: "'true' = Fehlschlag sichtbar melden, aber den Job nicht stoppen (Ersatz für '|| true')."
+    required: false
+    default: "false"
+
+outputs:
+  rc:
+    description: "Exit-Code von Hugo (0 = grün). Auch gesetzt, wenn weiter-bei-fehler greift."
+    value: ${{ steps.bauen.outputs.rc }}
+  log:
+    description: "Pfad der geschriebenen Logdatei – für Folgeschritte und Artefakt-Upload."
+    value: ${{ steps.bauen.outputs.log }}
+  dauer:
+    description: "Bauzeit in Sekunden."
+    value: ${{ steps.bauen.outputs.dauer }}
+  seiten:
+    description: "Von Hugo gemeldete Anzahl gebauter Seiten (leer, wenn nicht ermittelbar)."
+    value: ${{ steps.bauen.outputs.seiten }}
+
+runs:
+  using: composite
+  steps:
+    # ------------------------------------------------------------
+    #  Vorprüfung: lieber hier mit klarer Ansage sterben als später
+    #  mit „command not found" mitten in einer Pipe.
+    # ------------------------------------------------------------
+    - name: "Voraussetzungen und Argumente prüfen (fail-closed)"
+      id: vorpruefung
+      shell: bash
+      env:
+        FF_ARGS: ${{ inputs.args }}
+        FF_LABEL: ${{ inputs.label }}
+      run: |
+        set -euo pipefail
+
+        if ! command -v hugo >/dev/null 2>&1; then
+          echo "::error title=Hugo-Build: ${FF_LABEL}::Hugo fehlt im PATH. Vor dieser Action muss ./.github/actions/install-hugo laufen."
+          exit 2
+        fi
+        if ! hugo version 2>&1 | grep -qi extended; then
+          echo "::error title=Hugo-Build: ${FF_LABEL}::Hugo ist nicht Extended. PaperMod braucht TOCSS/Libsass – ein Build mit der Standard-Binary erzeugt Phantom-Fehler (#209/#220)."
+          exit 2
+        fi
+
+        # --quiet ist kein Komfort, sondern Beweisvernichtung: Die Flagge
+        # unterdrückt die Fehlerzeile selbst dann, wenn der Aufrufer die
+        # Ausgabe sauber einfängt. Genau daran scheiterte die Diagnose am
+        # 02.10.2026. Ruhe gibt es über die Logdatei, nicht über Blindheit.
+        for a in ${FF_ARGS}; do
+          if [ "$a" = "--quiet" ] || [ "$a" = "-q" ]; then
+            echo "::error title=Hugo-Build: ${FF_LABEL}::'--quiet' ist in dieser Action verboten – sie verschluckt die entscheidende Fehlerzeile. Die vollstaendige Ausgabe liegt ohnehin in der Logdatei; lass die Flagge einfach weg."
+            exit 2
+          fi
+        done
+
+    - name: "Bauen (pipefail + tee – der Exit-Code ueberlebt die Pipe)"
+      id: bauen
+      shell: bash
+      env:
+        FF_ARGS: ${{ inputs.args }}
+        FF_LABEL: ${{ inputs.label }}
+        FF_LOG: ${{ inputs.log }}
+        FF_ZEILEN: ${{ inputs.zeilen }}
+        FF_WEITER: ${{ inputs.weiter-bei-fehler }}
+      run: |
+        set -uo pipefail
+        # GitHub startet `shell: bash` mit `-e`. Das muss hier WEG: Wir wollen
+        # den Exit-Code von Hugo auswerten, nicht am Fehlschlag sofort sterben –
+        # sonst stirbt der Schritt, bevor Annotation und Diagnose geschrieben
+        # sind, und genau dieses stumme Sterben soll die Action ja abschaffen.
+        set +e
+        # In Fremdumgebungen (act, lokale Probe) koennen die beiden Senken
+        # fehlen; unter `set -u` waere das ein Absturz statt eines Builds.
+        : "${GITHUB_OUTPUT:=/dev/null}"
+        : "${GITHUB_STEP_SUMMARY:=/dev/null}"
+
+        LOG="${FF_LOG:-hugo-build.log}"
+        mkdir -p "$(dirname "$LOG")" 2>/dev/null || true
+        START="$(date +%s)"
+
+        echo "::group::Hugo-Build – ${FF_LABEL}  (hugo ${FF_ARGS})"
+        # pipefail sorgt dafuer, dass rc von hugo kommt und nicht von tee.
+        # Ohne diese Zeile meldet JEDER Build Erfolg, sobald getee't wird.
+        hugo ${FF_ARGS} 2>&1 | tee "$LOG"
+        rc="${PIPESTATUS[0]}"
+        echo "::endgroup::"
+
+        DAUER="$(( $(date +%s) - START ))"
+        # ACHTUNG: Hugo trennt die Statistiktabelle mit dem Unicode-Strich
+        # U+2502 („│"), nicht mit ASCII-Pipe. Ein Muster mit `\|` trifft nie
+        # und liefert still eine leere Seitenzahl – aufgefallen in der
+        # Generalprobe am 03.10.2026. Darum hier: Zahl nach beliebigem
+        # Nicht-Ziffern-Trenner.
+        SEITEN="$(grep -Eo '^[[:space:]]*Pages[^0-9]+[0-9]+' "$LOG" 2>/dev/null | grep -Eo '[0-9]+$' | head -n1 || true)"
+
+        {
+          echo "rc=${rc}"
+          echo "log=${LOG}"
+          echo "dauer=${DAUER}"
+          echo "seiten=${SEITEN}"
+        } >> "$GITHUB_OUTPUT"
+
+        if [ "$rc" -eq 0 ]; then
+          echo "✅ ${FF_LABEL}: Build grün (${DAUER}s${SEITEN:+, ${SEITEN} Seiten})."
+          {
+            echo "### ✅ Hugo-Build – ${FF_LABEL}"
+            echo ""
+            echo "\`hugo ${FF_ARGS}\` · ${DAUER}s${SEITEN:+ · ${SEITEN} Seiten} · Log: \`${LOG}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+
+        # ---------- ab hier: Fehlschlag, und zwar laut ----------
+
+        # Die erste echte Fehlerzeile ist das, wonach ein Mensch sucht.
+        # Hugo schreibt sie als "ERROR …" oder "Error: …".
+        MELDUNG="$(grep -m1 -E '^(ERROR|Error:)' "$LOG" 2>/dev/null || true)"
+        [ -n "$MELDUNG" ] || MELDUNG="$(tail -n 1 "$LOG" 2>/dev/null || true)"
+        [ -n "$MELDUNG" ] || MELDUNG="Hugo endete mit Exit ${rc}, schrieb aber keine Zeile."
+        # Annotationen sind einzeilig: Umbrueche und %/CR maskieren.
+        SAUBER="$(printf '%s' "$MELDUNG" | tr -d '\r' | sed 's/%/%25/g' | tr '\n' ' ')"
+        echo "::error title=Hugo-Build: ${FF_LABEL}::${SAUBER}"
+
+        # ---------- Selbstdiagnose der bekannten Ursachen ----------
+        # Diese Liste ist Gedaechtnis, kein Raten. Jeder Eintrag stand schon
+        # einmal als roter Lauf da. Die Befunde wandern in eine Datei, damit
+        # der Markdown-Text spaltengenau bleibt (fuehrende Leerzeichen wuerden
+        # ihn in der Zusammenfassung zu einem Codeblock verformen).
+        DIAG="$(mktemp)"
+
+        # (1) LEERE VERZEICHNISSE – die teuerste Blindstelle. `git status`
+        #     meldet sie grundsaetzlich nicht, auch nicht mit --ignored.
+        #     Unter content/ toeten sie den Sitemap-Build (02.10.2026), und
+        #     zwar SORTIERABHAENGIG: nur wenn der Ordner NACH dem ersten
+        #     string-liefernden Eintrag einsortiert. Darum sucht die Action
+        #     ALLE – raten hilft hier nicht.
+        LEER="$(find content data -type d -empty 2>/dev/null | sort || true)"
+        if [ -n "$LEER" ]; then
+          {
+            echo "**Leere Verzeichnisse gefunden** – fuer \`git status\` unsichtbar, auch mit \`--ignored\`. Genau das war die Ursache am 02.10.2026:"
+            echo '```'
+            printf '%s\n' "$LEER"
+            echo '```'
+            echo "Behebung: Verzeichnis loeschen, oder (ausserhalb von \`content/\`) mit einer Datei fuellen."
+          } >> "$DIAG"
+        fi
+
+        # (2) Der Typfehler aus der Sitemap-Klasse – mit konkretem Fix-Muster.
+        if grep -q 'wrong type for value' "$LOG" 2>/dev/null; then
+          {
+            echo "**Template-Typfehler.** Das Muster, das ihn erzeugt: \`\$out = \$out | append (partial …)\`, wenn das Partial ein Slice liefert."
+            echo "Ersatz: \`range\` ueber das Ergebnis und elementweise anhaengen."
+          } >> "$DIAG"
+        fi
+
+        # (3) Extended-Verwechslung (#209/#220).
+        if grep -qi 'TOCSS\|libsass\|this feature is not available' "$LOG" 2>/dev/null; then
+          echo "**Hugo ohne Extended.** PaperMod braucht TOCSS/Libsass. Pruefen: \`hugo version | grep extended\`." >> "$DIAG"
+        fi
+
+        if [ ! -s "$DIAG" ]; then
+          echo "Keine der bekannten Ursachen erkannt – der Log-Auszug unten ist die Primaerquelle." >> "$DIAG"
+        fi
+
+        {
+          echo "### ❌ Hugo-Build fehlgeschlagen – ${FF_LABEL}"
+          echo ""
+          echo "| | |"
+          echo "|---|---|"
+          echo "| Kommando | \`hugo ${FF_ARGS}\` |"
+          echo "| Exit-Code | \`${rc}\` |"
+          echo "| Dauer | ${DAUER}s |"
+          echo "| Log | \`${LOG}\` |"
+          echo ""
+          echo "**Erste Fehlerzeile**"
+          echo ""
+          echo '```'
+          printf '%s\n' "$MELDUNG"
+          echo '```'
+          echo ""
+          echo "#### Selbstdiagnose"
+          echo ""
+          cat "$DIAG"
+          echo ""
+          echo "#### Letzte ${FF_ZEILEN} Log-Zeilen"
+          echo ""
+          echo '```'
+          tail -n "${FF_ZEILEN}" "$LOG" 2>/dev/null || echo "(kein Log)"
+          echo '```'
+          echo ""
+          echo "Runbook: \`docs/ANLEITUNG-HUGO-BUILD.md\`"
+        } >> "$GITHUB_STEP_SUMMARY"
+        rm -f "$DIAG"
+
+        if [ "${FF_WEITER}" = "true" ]; then
+          # Bewusst toleriert – aber nicht verschwiegen. Das ist der ganze
+          # Unterschied zum alten `|| true`.
+          echo "⚠ ${FF_LABEL}: Build rot (Exit ${rc}) – als toleriert gekennzeichnet, Job läuft weiter."
+          exit 0
+        fi
+        exit "$rc"

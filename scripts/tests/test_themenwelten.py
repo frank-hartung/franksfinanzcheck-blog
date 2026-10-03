@@ -211,7 +211,8 @@ class ThemenweltenTests(unittest.TestCase):
         self.assertIsNotNone(final)
         self.assertEqual(source[1], "python3 scripts/themenwelten_guard.py --source-only")
         self.assertEqual(final[1], "python3 scripts/themenwelten_guard.py --public public")
-        builds = list(re.finditer(r"run: hugo --minify", workflow))
+        # Anker nachgezogen 03.10.2026: gemeinsame hugo-build-Action.
+        builds = list(re.finditer(r"uses: \./\.github/actions/hugo-build", workflow))
         self.assertTrue(builds)
         self.assertLess(source.start(), builds[0].start())
         self.assertGreater(final.start(), builds[-1].start())

@@ -494,7 +494,10 @@ jobs:
           version: "0.164.0"
 
       - name: Build (für Publish-Gate + Publish)
-        run: hugo --minify
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Produktions-Build (Publish-Gate)"
 
       # ================= INDEX-HYGIENE (Crawl-Fläche, 29.09.2026) =================
       # Die bestehenden Wachen prüfen jede Seite EINZELN und korrekt
@@ -592,7 +595,10 @@ jobs:
 
       - name: Rebuild nach Heilungen (nur wenn sich Content geändert hat)
         if: steps.gate_diff.outputs.changed == 'true'
-        run: hugo --minify
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Rebuild nach Gate-Heilungen"
 
       # NACH ALLEN Content-Heilungen und dem letzten Rebuild: prüft genau
       # das auszuliefernde HTML, auch /posts/page/2/, Links und Live-Zähler.

@@ -143,7 +143,17 @@ class BauFailClosed(unittest.TestCase):
     def test_kommando_identisch_zum_workflow(self):
         self.assertEqual(("hugo", "--minify", "--destination", "public"), cwv.HUGO_BUILD_CMD)
         workflow = (ROOT / ".github/workflows/premium-governance.yml").read_text()
-        self.assertIn("hugo --minify", workflow,
+        # Seit 03.10.2026 baut der Workflow über die gemeinsame Action. Die
+        # Frage bleibt dieselbe: Baut er so, wie `cwv_guard --build` es tut?
+        # Zwei Bau-Wahrheiten wären genau die Sorte Abweichung, die eine
+        # Messung unbrauchbar macht, ohne rot zu werden.
+        self.assertIn("./.github/actions/hugo-build", workflow,
+                      "Workflow baut nicht über die gemeinsame Action")
+        treffer = re.search(
+            r"uses: \./\.github/actions/hugo-build\n(?:.*\n)*?\s+args: \"([^\"]+)\"",
+            workflow)
+        self.assertIsNotNone(treffer, "hugo-build-Schritt ohne args gefunden")
+        self.assertIn("--minify", treffer[1].split(),
                       "Workflow baut anders als `--build` – zwei Bau-Wahrheiten")
 
 

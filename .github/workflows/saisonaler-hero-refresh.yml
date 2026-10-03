@@ -112,9 +112,14 @@ jobs:
           # ein Fehlalarm, obwohl die Startseite einwandfrei ausgeliefert wird.
           exit $CODE
 
-      - name: Render-Beweis und Premium-Layout-Gates
+      - name: Render-Beweis bauen
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Saisonaler Hero – Render-Beweis"
+
+      - name: Premium-Layout-Gates gegen den Build
         run: |
-          hugo --minify
           python3 scripts/saisonale_startseite_guard.py --public public
           python3 scripts/design_variant_gate.py --produktionswache
 

@@ -174,9 +174,11 @@ class WerkzeugeVertragTests(unittest.TestCase):
         self.assertIn("python3 scripts/werkzeuge_gate.py --selftest", workflow)
         self.assertIn("python3 scripts/werkzeuge_gate.py --source-only", workflow)
         self.assertIn("python3 scripts/werkzeuge_gate.py --public public", workflow)
+        # Anker nachgezogen 03.10.2026 (gemeinsame hugo-build-Action).
+        # Der Vertrag bleibt: Quelle vor dem Bau, Produkt nach dem Bau.
         self.assertLess(
             workflow.index("Werkzeuge – Quell- und Datenschutzvertrag"),
-            workflow.index("run: hugo --minify"),
+            workflow.index("uses: ./.github/actions/hugo-build"),
         )
         self.assertLess(
             workflow.index("Werkzeuge – finales Produkt-Gate"),

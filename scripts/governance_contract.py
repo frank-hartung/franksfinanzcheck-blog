@@ -109,6 +109,10 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Regelwerk, weil eine Wache, die niemand verlangt,
           # irgendwann niemand mehr ausfuehrt.
           "kostensperre.py",
+          # Hugo-Build-Vertrag (03.10.2026): Ohne diese Wache broeckelt die
+          # gemeinsame Fehlerausgabe zurueck in `> /dev/null`, `|| true` und
+          # `--quiet` – genau die Lage, die am 02.10.2026 Stunden kostete.
+          "hugo_build_vertrag.py",
           "editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
