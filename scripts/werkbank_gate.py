@@ -151,17 +151,25 @@ def b5_belegpflicht(ssot: dict) -> list[str]:
 
 
 def b6_keine_secrets(ssot_text: str) -> list[str]:
-    """In der SSOT stehen ENV-Namen, niemals Werte."""
+    """In der SSOT stehen ENV-Namen, niemals Werte.
+
+    Die Meldung nennt **Fundstelle und Art, nie den Fund**. Früher standen
+    hier die ersten zwölf Zeichen des Treffers – ausgerechnet die Regel
+    gegen Klartext-Secrets hätte das Secret so in das eingecheckte
+    WERKBANK-STATUS.md geschrieben, und zwar genau dann, wenn jemand den
+    Fehler gerade gemacht hat. Von CodeQL auf PR #548 gemeldet.
+    """
     befunde = []
     muster = [
         (r"(?:sk-|gsk_|pplx-|ak_live|uak_)[A-Za-z0-9_\-]{12,}", "API-Schlüssel"),
         (r"(?i)\b(api[_-]?key|token|secret)\s*:\s*[\"']?[A-Za-z0-9_\-]{16,}", "Secret-Wert"),
     ]
     for regex, was in muster:
-        for fund in re.findall(regex, ssot_text):
-            treffer = fund if isinstance(fund, str) else fund[0]
-            befunde.append(f"B6: {was} im Klartext in data/werkbank.yaml: "
-                           f"{str(treffer)[:12]}… – gehört in GitHub-Secrets.")
+        for treffer in re.finditer(regex, ssot_text):
+            zeile = ssot_text.count("\n", 0, treffer.start()) + 1
+            befunde.append(f"B6: {was} im Klartext in data/werkbank.yaml, "
+                           f"Zeile {zeile} – gehört in GitHub-Secrets. "
+                           "Wert wird hier bewusst nicht wiederholt.")
     return befunde
 
 

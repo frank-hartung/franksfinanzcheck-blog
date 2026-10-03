@@ -22,7 +22,7 @@ bessere Werkzeug für genau diesen Blog.
 | `scripts/werkbank_adapters.py` | Adapterschicht zu Suche, Leser, Browser, Konnektor |
 | `scripts/antwortwerk.py` | Die Antwortmaschine selbst (Selbsttest ST1–ST15) |
 | `scripts/werkbank_gate.py` | Vertrag B1–B9, fail-closed, mit `--selftest` |
-| `scripts/tests/test_werkbank.py` | **60 Tests**, vollständig offline, ~1,3 s |
+| `scripts/tests/test_werkbank.py` | **62 Tests**, vollständig offline, ~1,2 s |
 | `tools/werkbank/render.mjs` | Playwright-Brücke: Zitat im echten Browser prüfen |
 | `docs/ANLEITUNG-WERKBANK.md` | Runbook, 13 Abschnitte |
 | `.github/workflows/werkbank.yml` | Donnerstag 07:40 MESZ + Handstart |
@@ -151,7 +151,7 @@ Alles hermetisch, ohne Netz, reproduzierbar:
 
 ```
 $ python3 -m unittest scripts.tests.test_werkbank
-Ran 60 tests in 1.262s — OK
+Ran 62 tests in 1.197s — OK
 
 $ python3 scripts/werkbank_gate.py --selftest
 ✅ Werkbank-Gate-Selbsttest grün (Positivprobe + 10 Sabotage-Proben)
@@ -221,6 +221,19 @@ eingecheckt, also hätte das Passwort im Repo gestanden. Neue Funktion
 Fehlertexten, weil manche Ausnahmen die URL wörtlich zitieren. API-Schlüssel
 waren nie betroffen – sie erscheinen ausschließlich als `bool()`. Fünf
 Regressionstests (`VerschwiegenheitTests`) frieren das ein.
+
+**5. Die Secret-Wache verriet das Secret.** Derselbe CodeQL-Lauf führte auf
+`b6_keine_secrets()` – die Regel, die Klartext-Schlüssel in der SSOT
+verbietet. Fand sie einen, schrieb sie dessen erste zwölf Zeichen in die
+Meldung. Diese Meldung geht auf die Konsole *und* in das eingecheckte
+`WERKBANK-STATUS.md`. Ausgerechnet im Moment des Fehlers hätte die Wache das
+Secret ins Repo getragen. Jetzt nennt sie **Art und Zeilennummer, nie den
+Fund**:
+
+```
+B6: API-Schlüssel im Klartext in data/werkbank.yaml, Zeile 3 –
+    gehört in GitHub-Secrets. Wert wird hier bewusst nicht wiederholt.
+```
 
 Dazu eine Härtung beim Schreiben dieses Reports: Die unterste Leseebene
 (rohes HTML, wenn Crawl4AI und Jina ausfallen) schleppte `<nav>`, `<footer>`

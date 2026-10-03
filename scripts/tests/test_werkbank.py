@@ -267,6 +267,25 @@ class VerschwiegenheitTests(unittest.TestCase):
         self.assertIsNotNone(fehler)
         self.assertNotIn(self.GEHEIM, fehler)
 
+    def test_b6_nennt_die_fundstelle_aber_nicht_den_fund(self):
+        """Die Regel gegen Klartext-Secrets darf das Secret nicht wiederholen.
+
+        Sonst schreibt ausgerechnet der Fehlerfall den Schlüssel ins
+        eingecheckte WERKBANK-STATUS.md.
+        """
+        gift = "antwortwerk:\n  synthese:\n    - api_key: sk-abcdef0123456789XYZ\n"
+        befunde = gate.b6_keine_secrets(gift)
+        self.assertTrue(befunde, "B6 muss den Klartext-Schlüssel finden")
+        text = " ".join(befunde)
+        self.assertNotIn("sk-abcdef0123456789XYZ", text)
+        for bruchstueck in ("sk-abcdef", "abcdef0123", "0123456789"):
+            self.assertNotIn(bruchstueck, text, f"verrät {bruchstueck}")
+        self.assertIn("Zeile 3", text, "Fundstelle muss auffindbar bleiben")
+
+    def test_b6_schweigt_bei_sauberer_ssot(self):
+        echt = (ROOT / "data" / "werkbank.yaml").read_text(encoding="utf-8")
+        self.assertEqual(gate.b6_keine_secrets(echt), [])
+
     def test_schluessel_steht_nie_in_einer_rueckgabe(self):
         ssot = wa.lade_ssot()
         env = (wa.gewerk(ssot, "konnektor") or {}).get("env") or "COMPOSIO_API_KEY"
