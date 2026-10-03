@@ -176,6 +176,17 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Pflichtangaben, Sichtbarkeit, Widerspruchsfreiheit, Partnerregister).
           # Ihr --selftest friert 13 Sabotage-Proben ein und gehört ins Minimum.
           "offenlegung_gate.py",
+          # Bewertungsraster (03.10.2026, Audit-Befund 8 „Monetarisierung und
+          # Vertrauen sauberer austarieren"): Die öffentliche Seite „So
+          # entstehen unsere Vergleiche" beantwortet die sieben Audit-Fragen
+          # aus drei Quellen (kuratierte Grundsätze, gebackenes Routen-
+          # Register, versionierte Methodik). Die Wache prüft V1–V8 am
+          # gebauten HTML – Register-Sync in beide Richtungen, Zieltyp-
+          # Ehrlichkeit (Einzelangebot nie als „Marktvergleich"), die
+          # wörtliche Provisions-Antwort „nein" und die Wegweiser-Kette.
+          # Ihr --selftest friert 13 Sabotage-Proben ein und gehört ins
+          # Minimum: Ein Raster ohne Wache veraltet in die Unwahrheit.
+          "vergleichsgrundsaetze_gate.py",
           # YMYL-Freigabe (02.10.2026): Ein Score ist keine Fachprüfung.
           # Die Wache verlangt Prüfer, Belegkette, Zahlenprotokoll, Termine
           # und bindet jede Freigabe per Hash an exakt eine Textfassung.

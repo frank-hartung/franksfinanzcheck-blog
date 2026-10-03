@@ -1,0 +1,98 @@
+# ============================================================
+#  VERGLEICHS-GATE – Wache des Bewertungsrasters (03.10.2026)
+#  ------------------------------------------------------------
+#  WARUM: Audit-Befund 8 („Monetarisierung und Vertrauen sauberer
+#  austarieren") verlangt eine öffentliche Seite „So entstehen
+#  unsere Vergleiche" mit konkretem Bewertungsraster – dauerhaft.
+#  Dauerhaft heißt: Das Raster wird bei jeder Änderung gegen die
+#  Realität geprüft. Eine neue /go/-Route ohne Register-Zeile,
+#  ein Einzelangebot, das als „Marktvergleich" gerendert wird,
+#  oder eine „präzisierte" Provisions-Antwort brechen das Gate.
+#
+#  Quellen:  data/vergleichsgrundsaetze.yaml (kuratiert)
+#            data/affiliate_ziele.yaml (gebacken, Intent-Kontrakt)
+#            data/beweise/vergleichsmethodik.yaml (versioniert)
+#  Wache:    scripts/vergleichsgrundsaetze_gate.py (V1–V8, Selbsttest)
+#  Runbook:  docs/ANLEITUNG-VERGLEICHSGRUNDSAETZE.md
+#
+#  Läuft bei jedem Push/PR, der Raster-Quellen, die Seite, die
+#  Render-Bausteine oder die Wache selbst berührt. Der Selbsttest
+#  läuft zuerst – eine sabotierte Prüflogik darf kein grünes Gate
+#  liefern. Im Deploy läuft dieselbe Wache zusätzlich als finales
+#  Transparenz-Gate gegen das auszuliefernde HTML.
+# ============================================================
+name: Vergleichs-Gate (Bewertungsraster)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "data/vergleichsgrundsaetze.yaml"
+      - "data/affiliate_ziele.yaml"
+      - "data/beweise/vergleichsmethodik.yaml"
+      - "content/so-entstehen-unsere-vergleiche/**"
+      - "content/transparenz/**"
+      - "content/methodik/**"
+      - "layouts/shortcodes/vergleichsgrundsaetze.html"
+      - "layouts/_partials/footer.html"
+      - "layouts/_partials/ff_offenlegung.html"
+      - "layouts/_partials/affiliate_ziele_data.html"
+      - "assets/css/extended/zz-vergleichsgrundsaetze.css"
+      - "scripts/vergleichsgrundsaetze_gate.py"
+      - ".github/workflows/vergleichsgrundsaetze-gate.yml"
+  pull_request:
+    paths:
+      - "data/vergleichsgrundsaetze.yaml"
+      - "data/affiliate_ziele.yaml"
+      - "data/beweise/vergleichsmethodik.yaml"
+      - "content/so-entstehen-unsere-vergleiche/**"
+      - "content/transparenz/**"
+      - "content/methodik/**"
+      - "layouts/shortcodes/vergleichsgrundsaetze.html"
+      - "layouts/_partials/footer.html"
+      - "layouts/_partials/ff_offenlegung.html"
+      - "layouts/_partials/affiliate_ziele_data.html"
+      - "assets/css/extended/zz-vergleichsgrundsaetze.css"
+      - "scripts/vergleichsgrundsaetze_gate.py"
+      - ".github/workflows/vergleichsgrundsaetze-gate.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vergleichsgrundsaetze-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  raster:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten installieren
+        run: pip install --quiet pyyaml
+
+      - name: Selbsttest der Wache (Sabotage-Proben)
+        run: python3 scripts/vergleichsgrundsaetze_gate.py --selftest
+
+      - name: Quellen prüfen (V4-Zusage, V6-Auslöser, V8-Kuratierung)
+        run: python3 scripts/vergleichsgrundsaetze_gate.py --source-only
+
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Build (minifiziert – wie im Deploy)
+        run: hugo --minify --destination public
+
+      - name: Raster gegen das gebaute HTML prüfen (V1–V8)
+        run: python3 scripts/vergleichsgrundsaetze_gate.py

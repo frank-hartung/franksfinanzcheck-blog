@@ -1,0 +1,79 @@
+/* ============================================================
+   VERGLEICHSGRUNDSÄTZE v1 (03.10.2026) – Bewertungsraster
+   Seite: /so-entstehen-unsere-vergleiche/
+   Komponenten: .ff-vg (Abschnittskörper je Audit-Frage),
+   Routen-Register-Tabelle, Zieltyp-Chips, Ausschluss-Liste,
+   Deaktivierungs-Tabelle. Farben ausschließlich aus den
+   Marken-Tokens (DESIGN.md §1); Dark Mode über Tokens +
+   Overrides unten. Detektor-Fingerabdrücke (data-ff-vg*) setzt
+   layouts/shortcodes/vergleichsgrundsaetze.html; geprüft von
+   scripts/vergleichsgrundsaetze_gate.py.
+   ============================================================ */
+
+/* ---------- Kopfzeile (Version + Stand + Wache) ---------- */
+.ff-vg__kopf{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem;margin:1rem 0 1.5rem}
+.ff-vg__version{padding:.14em .6em;border-radius:999px;font-size:.78rem;font-weight:800;color:#fff;background:var(--ff-green-2,#0e5a43)}
+.ff-vg__stand{font-size:.8rem;color:var(--secondary)}
+.ff-vg__wache{padding:.14em .6em;border-radius:999px;font-size:.74rem;font-weight:650;color:var(--primary);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 10%,transparent);border:1px solid color-mix(in srgb,var(--ff-green-2,#0e5a43) 35%,transparent)}
+
+/* ---------- Abschnittskörper ---------- */
+.ff-vg{margin:.75rem 0 2rem}
+.ff-vg__listtitel{margin:1rem 0 .3rem;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--secondary)}
+.ff-vg__liste{margin:0;padding-left:1.2rem;line-height:1.6}
+.ff-vg__liste li{margin:.35rem 0}
+.ff-vg__fussnote{margin:.6rem 0 0;font-size:.82rem;line-height:1.55;color:var(--secondary)}
+.ff-vg__portal{padding:.65rem .8rem;border-left:4px solid var(--ff-green-2,#0e5a43);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 7%,transparent);line-height:1.6}
+.ff-vg__antwort{font-size:1.05rem;line-height:1.65}
+.ff-vg__antwort b{color:var(--ff-green-2,#0e5a43);font-weight:800}
+
+/* ---------- Tabellen (Routen-Register, Deaktivierung) ---------- */
+.ff-vg__scroll{overflow-x:auto;margin:.5rem 0}
+.ff-vg__tabelle{width:100%;border-collapse:collapse;font-size:.9rem}
+.ff-vg__tabelle th,.ff-vg__tabelle td{padding:.5rem .65rem;border:1px solid var(--border);text-align:left;vertical-align:top;line-height:1.5}
+.ff-vg__tabelle thead th{background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 8%,transparent);font-weight:800}
+.ff-vg__tabelle tbody th{font-weight:650}
+.ff-vg__tabelle code{font-size:.82em;word-break:break-word}
+
+/* ---------- Zieltyp-Chips (Ehrlichkeit: Marktvergleich vs. Abweichung) ---------- */
+.ff-vg__zieltyp{display:inline-block;padding:.14em .6em;border-radius:999px;font-size:.76rem;font-weight:700;white-space:nowrap;color:var(--primary);background:color-mix(in srgb,var(--ff-green-2,#0e5a43) 10%,transparent);border:1px solid color-mix(in srgb,var(--ff-green-2,#0e5a43) 35%,transparent)}
+.ff-vg__zieltyp--abweichung{background:color-mix(in srgb,#8a5a00 12%,transparent);border-color:color-mix(in srgb,#8a5a00 40%,transparent)}
+.ff-vg__abweichung{display:block;margin-top:.3rem;font-size:.76rem;line-height:1.45;color:var(--secondary)}
+
+/* ---------- Ausschluss-Register ----------
+   PaperMod setzt .md-content dl auf flex mit dt=25%/dd=75% (Zwei-
+   Spalten-Definitionen). Hier ist jede Definition eine eigene Karte –
+   deshalb beide Breiten explizit auf 100% zurückstellen, sonst
+   brechen die Titel wortweise um (Befund im Shot-Review 03.10.2026). */
+.ff-vg__ausschluesse{display:block;margin:0}
+.ff-vg__ausschluss{margin:.9rem 0;padding:.9rem 1rem;border:1px solid var(--border);border-left:4px solid #8a5a00;border-radius:var(--ff-radius-md,18px);background:var(--entry)}
+.ff-vg__ausschluss dt{width:100%;font-weight:800;color:var(--primary)}
+.ff-vg__ausschluss dd{width:100%;margin:.4rem 0 0;padding-inline-start:0;line-height:1.6;color:var(--content)}
+
+/* ---------- Bereichs-Karten (Rangfolge / K.-o. aus der Methodik) ---------- */
+.ff-vg__bereiche{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:1rem;margin-top:1rem}
+.ff-vg__bereich{padding:.9rem 1rem;border:1px solid var(--border);border-radius:var(--ff-radius-md,18px);background:var(--entry)}
+.ff-vg__bereichname{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem .6rem;margin:0 0 .5rem;font-size:1rem}
+.ff-vg__mversion{padding:.1em .5em;border-radius:999px;font-size:.7rem;font-weight:800;color:#fff;background:var(--ff-green-2,#0e5a43);white-space:nowrap}
+.ff-vg__keinvergleich{margin:0;font-size:.88rem;line-height:1.55;color:var(--secondary);font-style:italic}
+.ff-vg__methodiklink{display:inline-block;margin-top:.5rem;font-size:.82rem;font-weight:700}
+
+/* ---------- Dark Mode ---------- */
+:root[data-theme="dark"] .ff-vg__version,
+[data-theme="dark"] .ff-vg__version{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-vg__mversion,
+[data-theme="dark"] .ff-vg__mversion{background:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-vg__antwort b,
+[data-theme="dark"] .ff-vg__antwort b{color:var(--ff-green,#1f6f5c)}
+:root[data-theme="dark"] .ff-vg__ausschluss,
+[data-theme="dark"] .ff-vg__ausschluss{border-left-color:#c98a1e}
+:root[data-theme="dark"] .ff-vg__zieltyp--abweichung,
+[data-theme="dark"] .ff-vg__zieltyp--abweichung{background:color-mix(in srgb,#c98a1e 16%,transparent);border-color:color-mix(in srgb,#c98a1e 45%,transparent)}
+:root[data-theme="dark"] .ff-vg__portal,
+[data-theme="dark"] .ff-vg__portal{border-left-color:var(--ff-green,#1f6f5c)}
+
+@media(max-width:560px){
+  .ff-vg__bereich,.ff-vg__ausschluss{padding:.8rem}
+}
+@media print{
+  .ff-vg__bereich,.ff-vg__ausschluss{break-inside:avoid}
+}

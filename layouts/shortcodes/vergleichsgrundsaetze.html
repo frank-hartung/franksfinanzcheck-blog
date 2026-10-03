@@ -1,0 +1,189 @@
+{{- /* ============================================================
+     vergleichsgrundsaetze – BEWERTUNGSRASTER (03.10.2026)
+     „So entstehen unsere Vergleiche" – Audit-Befund 8:
+     Monetarisierung/Vertrauen braucht ein konkretes Raster statt
+     eines allgemeinen Unabhängigkeitshinweises.
+     ------------------------------------------------------------
+     Aufruf im Markdown:  {{< vergleichsgrundsaetze abschnitt="v1" >}}
+     Abschnitte: kopf, v1 … v7 (die sieben Audit-Fragen). Die
+     Überschriften stehen bewusst im Markdown der Seite (ToC!),
+     dieser Shortcode rendert nur die datengetriebenen Körper.
+
+     DREI QUELLEN, KEINE KOPIE (SSOT-Regel):
+       * data/vergleichsgrundsaetze.yaml  – kuratierte Antworten
+       * data/affiliate_ziele.yaml        – Routen-Register (gebacken,
+         via partialCached affiliate_ziele_data.html; NIE site.Data –
+         siehe Build-Killer-Historie in diesem Partial)
+       * data/beweise/vergleichsmethodik.yaml – K.-o./Rangfolge je
+         Bereich, versioniert (dieselbe Datei wie /methodik/)
+     Eine neue /go/-Route oder ein neues K.-o.-Kriterium erscheint
+     damit automatisch im Raster. Die Wache
+     scripts/vergleichsgrundsaetze_gate.py prüft im gebauten HTML
+     beide Richtungen (V1–V8); die data-ff-vg-Attribute hier sind
+     ihr Detektor-Fingerabdruck – NICHT entfernen oder umbenennen.
+
+     CSS: .ff-vg* in assets/css/extended/zz-vergleichsgrundsaetze.css
+     (Dark Mode über Marken-Tokens ebenda).
+   ============================================================ */ -}}
+{{- $g := os.ReadFile "data/vergleichsgrundsaetze.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $methodik := os.ReadFile "data/beweise/vergleichsmethodik.yaml" | transform.Unmarshal (dict "format" "yaml") -}}
+{{- $ziele := dict -}}
+{{- with partialCached "affiliate_ziele_data.html" "" "ziele" -}}
+  {{- with .ziele }}{{ $ziele = . }}{{ end -}}
+{{- end -}}
+{{- $zieltypen := dict
+      ""              "Marktvergleich"
+      "portal"        "Portalstartseite"
+      "einzelanbieter" "Einzelangebot"
+      "buendelung"    "Bündelprodukt" -}}
+{{- $abschnitt := .Get "abschnitt" | default "kopf" -}}
+
+{{- if eq $abschnitt "kopf" -}}
+<div class="ff-vg__kopf" data-ff-vg="kopf">
+  <span class="ff-vg__version" title="Jede inhaltliche Änderung an diesem Raster erhöht die Version und bekommt einen Changelog-Eintrag.">Raster v{{ $g.meta.version }}</span>
+  <span class="ff-vg__stand">Stand {{ dateFormat "02.01.2006" (substr (printf "%v" $g.meta.stand) 0 10) }}</span>
+  <span class="ff-vg__wache" title="scripts/vergleichsgrundsaetze_gate.py prüft bei jedem Seitenbau: alle sieben Antworten vorhanden, Routen-Register vollständig, Zieltypen ehrlich, Provisions-Antwort unverändert ‚Nein‘.">maschinell geprüft bei jedem Seitenbau</span>
+</div>
+{{- end -}}
+
+{{- /* ---------- V1: Berücksichtigte Anbieter + Routen-Register ---------- */ -}}
+{{- if eq $abschnitt "v1" -}}
+<div class="ff-vg" data-ff-vg-frage="v1">
+  <p>{{ $g.aufnahme.modell }}</p>
+  <p class="ff-vg__listtitel">Aufnahmekriterien für Partner</p>
+  <ul class="ff-vg__liste">
+    {{- range $g.aufnahme.kriterien }}<li>{{ . | markdownify }}</li>{{ end }}
+  </ul>
+  <p class="ff-vg__listtitel">Vollständiges Routen-Register ({{ len $ziele }} Weiterleitungen, automatisch aus dem geprüften Zielregister erzeugt)</p>
+  <div class="ff-vg__scroll">
+    <table class="ff-vg__tabelle">
+      <thead>
+        <tr>
+          <th scope="col">Produktbereich</th>
+          <th scope="col">Partner</th>
+          <th scope="col">Zieltyp</th>
+          <th scope="col">Zielseite</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $key, $z := $ziele }}
+        {{- $ab := $z.abweichung | default "" }}
+        <tr data-ff-vg-route="{{ $key }}" data-ff-vg-zieltyp="{{ if $ab }}{{ $ab }}{{ else }}marktvergleich{{ end }}">
+          <th scope="row">{{ $z.produkt }}</th>
+          <td>{{ $z.partner }}</td>
+          <td>
+            <span class="ff-vg__zieltyp{{ if $ab }} ff-vg__zieltyp--abweichung{{ end }}"{{ with $z.abweichung_ziel }} title="{{ . }}"{{ end }}>{{ index $zieltypen $ab | default "Marktvergleich" }}</span>
+            {{- with $z.abweichung_ziel }}<small class="ff-vg__abweichung">{{ . }}</small>{{ end }}
+          </td>
+          <td><code>{{ $z.landing }}</code></td>
+        </tr>
+        {{- end }}
+      </tbody>
+    </table>
+  </div>
+  <p class="ff-vg__fussnote">Dieses Register liest dieselbe geprüfte Datei, aus der die Links ihre Ziele beziehen (<code>data/affiliate_ziele.yaml</code>). Eine neue Partnerroute kann nicht live gehen, ohne hier zu erscheinen – das erzwingt die Vergleichs-Wache bei jedem Seitenbau.</p>
+</div>
+{{- end -}}
+
+{{- /* ---------- V2: Ausschlüsse mit Begründung ---------- */ -}}
+{{- if eq $abschnitt "v2" -}}
+<div class="ff-vg" data-ff-vg-frage="v2">
+  <dl class="ff-vg__ausschluesse">
+    {{- range $g.ausschluesse }}
+    <div class="ff-vg__ausschluss" data-ff-vg-ausschluss>
+      <dt>{{ .name }}</dt>
+      <dd>{{ .grund }}</dd>
+    </div>
+    {{- end }}
+  </dl>
+</div>
+{{- end -}}
+
+{{- /* ---------- V3: Reihenfolge (Grundsatz + Rangfolge je Bereich) ---------- */ -}}
+{{- if eq $abschnitt "v3" -}}
+<div class="ff-vg" data-ff-vg-frage="v3">
+  <p>{{ $g.reihenfolge.grundsatz }}</p>
+  <p class="ff-vg__portal">{{ $g.reihenfolge.portal_hinweis }}</p>
+  <div class="ff-vg__bereiche">
+    {{- range $methodik.bereiche }}
+    {{- $rang := slice }}
+    {{- range .pruefregeln }}{{ if hasPrefix . "Rangfolge" }}{{ $rang = $rang | append . }}{{ end }}{{ end }}
+    <section class="ff-vg__bereich" data-ff-vg-bereich="{{ .id }}">
+      <h3 class="ff-vg__bereichname">{{ .name }} <span class="ff-vg__mversion">Methodik v{{ .version }}</span></h3>
+      {{- if $rang }}
+      <ul class="ff-vg__liste">{{ range $rang }}<li>{{ . }}</li>{{ end }}</ul>
+      {{- else }}
+      <p class="ff-vg__keinvergleich">Kein Anbieter-Ranking in diesem Bereich – hier werden Rechenwege geprüft, keine Tarife sortiert.</p>
+      {{- end }}
+      <a class="ff-vg__methodiklink" href="{{ printf "methodik/#methodik-%s" .id | relURL }}">Vollständige Methodik &rarr;</a>
+    </section>
+    {{- end }}
+  </div>
+</div>
+{{- end -}}
+
+{{- /* ---------- V4: Provision in der Bewertung? ---------- */ -}}
+{{- if eq $abschnitt "v4" -}}
+<div class="ff-vg" data-ff-vg-frage="v4">
+  <p class="ff-vg__antwort" data-ff-vg-provision="{{ $g.provision.antwort }}"><b>{{ if eq (lower (printf "%v" $g.provision.antwort)) "nein" }}Nein.{{ else }}{{ $g.provision.antwort }}{{ end }}</b> {{ $g.provision.begruendung }}</p>
+  <p class="ff-vg__listtitel">Warum das keine Behauptung ist, sondern Mechanik</p>
+  <ul class="ff-vg__liste">
+    {{- range $g.provision.durchsetzung }}<li>{{ . }}</li>{{ end }}
+  </ul>
+</div>
+{{- end -}}
+
+{{- /* ---------- V5: Mindestkriterien (global + K.-o. je Bereich) ---------- */ -}}
+{{- if eq $abschnitt "v5" -}}
+<div class="ff-vg" data-ff-vg-frage="v5">
+  <p>{{ $g.mindestkriterien.grundsatz }}</p>
+  <div class="ff-vg__bereiche">
+    {{- range $methodik.bereiche }}
+    {{- $ko := slice }}
+    {{- range .pruefregeln }}{{ if hasPrefix . "K.-o." }}{{ $ko = $ko | append . }}{{ end }}{{ end }}
+    <section class="ff-vg__bereich" data-ff-vg-bereich="{{ .id }}">
+      <h3 class="ff-vg__bereichname">{{ .name }} <span class="ff-vg__mversion">Methodik v{{ .version }}</span></h3>
+      {{- if $ko }}
+      <ul class="ff-vg__liste">{{ range $ko }}<li>{{ . }}</li>{{ end }}</ul>
+      {{- else }}
+      <p class="ff-vg__keinvergleich">Keine Tarif-K.-o.-Kriterien – in diesem Bereich gilt die Belegpflicht für jede Einsparbehauptung (siehe Methodik).</p>
+      {{- end }}
+    </section>
+    {{- end }}
+  </div>
+</div>
+{{- end -}}
+
+{{- /* ---------- V6: Link-Deaktivierung ---------- */ -}}
+{{- if eq $abschnitt "v6" -}}
+<div class="ff-vg" data-ff-vg-frage="v6">
+  <p>{{ $g.deaktivierung.pruefrhythmus }}</p>
+  <div class="ff-vg__scroll">
+    <table class="ff-vg__tabelle">
+      <thead>
+        <tr>
+          <th scope="col">Auslöser</th>
+          <th scope="col">Reaktion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range $g.deaktivierung.ausloeser }}
+        <tr data-ff-vg-trigger>
+          <td>{{ .ausloeser }}</td>
+          <td>{{ .reaktion }}</td>
+        </tr>
+        {{- end }}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{- end -}}
+
+{{- /* ---------- V7: Lücken & Nichtvergleichbares ---------- */ -}}
+{{- if eq $abschnitt "v7" -}}
+<div class="ff-vg" data-ff-vg-frage="v7">
+  <ul class="ff-vg__liste ff-vg__liste--luecken">
+    {{- range $g.luecken }}<li>{{ . }}</li>{{ end }}
+  </ul>
+</div>
+{{- end -}}

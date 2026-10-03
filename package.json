@@ -78,6 +78,8 @@
     "redaktion:ymyl:strict": "python3 scripts/editorial_review_gate.py --all --strict",
     "redaktion:ymyl:published": "python3 scripts/editorial_review_gate.py --published --strict",
     "test:redaktion:ymyl": "python3 scripts/editorial_review_gate.py --selftest && python3 -m unittest scripts.tests.test_editorial_review_gate",
+    "vergleiche:check": "python3 scripts/vergleichsgrundsaetze_gate.py --selftest && python3 scripts/vergleichsgrundsaetze_gate.py --source-only && hugo --minify --cleanDestinationDir && python3 scripts/vergleichsgrundsaetze_gate.py",
+    "test:vergleiche": "python3 scripts/vergleichsgrundsaetze_gate.py --selftest",
     "engine:kapazitaet": "python3 scripts/engine_capacity.py",
     "engine:abgleich": "python3 scripts/reserve_topics.py --abgleich",
     "test:engine:kapazitaet": "python3 scripts/engine_capacity.py --selftest && python3 -m unittest scripts.tests.test_engine_capacity",

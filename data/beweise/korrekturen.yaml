@@ -28,6 +28,35 @@ meta:
   angelegt: "2026-10-01"
 
 eintraege:
+  - datum: "2026-10-03"
+    typ: system
+    titel: "Bewertungsraster veröffentlicht: So entstehen unsere Vergleiche"
+    was: >-
+      Neue öffentliche Seite mit dem vollständigen Bewertungsraster:
+      berücksichtigte Anbieter samt Routen-Register und ehrlichem
+      Zieltyp je Weiterleitung, Ausschlussregeln mit Begründung,
+      Reihenfolge-Grundsätze, die Provisions-Antwort („Nein") mit
+      Durchsetzungs-Mechanik, Mindestkriterien je Themenbereich,
+      konkrete Link-Deaktivierungs-Auslöser und Regeln für fehlende
+      oder nicht vergleichbare Tarife. Eine eigene Wache prüft das
+      Raster bei jedem Seitenbau gegen Zielregister und Methodik.
+    warum: >-
+      Audit-Befund 8: Der allgemeine Unabhängigkeitshinweis
+      beantwortete die konkreten Fragen (Wer wird berücksichtigt?
+      Wer ausgeschlossen? Wonach sortiert? Wann fliegt ein Link
+      raus?) nicht nachprüfbar.
+    quelle:
+      name: "Rollout-Report im offenen Repository"
+      url: "https://github.com/frank-hartung/franksfinanzcheck-blog/blob/main/VERGLEICHSGRUNDSAETZE-PREMIUM-2026-10-03.md"
+    belegklasse: markt
+    seiten:
+      - pfad: "/so-entstehen-unsere-vergleiche/"
+        name: "So entstehen unsere Vergleiche (Bewertungsraster)"
+      - pfad: "/transparenz/"
+        name: "Transparenz & Werbung"
+      - pfad: "/methodik/"
+        name: "Methodik (So arbeiten wir)"
+
   - datum: "2026-10-01"
     typ: system
     titel: "Beweissystem eingeführt: Register, Methodik-Versionen, Änderungsprotokoll"
