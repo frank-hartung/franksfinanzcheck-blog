@@ -67,6 +67,8 @@ python3 scripts/layout_audit.py      # statisches Layout-Gate (Links, Covers, Al
 python3 scripts/dom_audit.py --top 15 # DOM-Budget jeder Seite (Kinder/Head/Tiefe/Elemente, browser-treu ohne Chrome)
 node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_PATH) – siehe docs/LAYOUT-AUTOMATISIERUNG.md
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
+npm run test:release                                 # Release-Scorecard: Selbsttest + 41 Unit-Tests (Produktionswahrheit)
+python3 scripts/release_scorecard.py                 # Release-Scorecard: acht Dimensionen je Live-Artikel + Siegel
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
 python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibungs-Wache (offline, Sabotage-Schutz)
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
@@ -474,6 +476,46 @@ Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:
   Verträge: `MesslattenBesitzTests` / `PufferInvarianteTests` in
   `scripts/tests/test_reserve_pipeline.py`.
 - Vorfallbericht: `docs/INCIDENT-2026-09-26-bot-watchdog-393.md`.
+
+## Release-Scorecard: die Produktionswahrheit (seit 03.10.2026)
+
+Das Repo hat viele Gates, Reports, Zustandsdateien und Wachen – stark, aber
+ohne EINEN Wahrheitsort kann niemand auf einen Blick sagen, was
+veröffentlicht, was blockiert, wer entscheidet und ob die live gegangene
+Version wirklich die geprüfte war. Die Antwort ist die **Release-Scorecard**:
+
+- **Eine Zeile pro Artikel, acht Dimensionen:** Technik · Quellen ·
+  Faktenalter · Affiliate-Integrität · Redundanz · YMYL-Risiko · menschliche
+  Freigabe · nächste Überprüfung. Sichtbar in `RELEASE-SCORECARD.md`,
+  maschinenlesbar in `data/release_scorecard_state.json` (Siegel) und
+  `data/release_scorecard_history.jsonl` (Verlauf).
+- **SSOT ist deklarativ:** `data/release_scorecard.yaml` erklärt jeden Check
+  mit `wirkung: blockiert|warnung` (Fragen 1+2), Besitz
+  (`entscheidung: auto|human`), Eskalationsmatrix, Falsch-Positiv-Protokoll,
+  Freigabeprozess und Siegel-Mechanik (Fragen 3–6). Die Datei ist menschlich
+  kuratiert – die Maschine liest sie, schreibt sie nie.
+- **Keine zweite Messregel (C19):** `scripts/release_scorecard.py` misst
+  ausschließlich über die Collector-Funktionen des Publish-Gates und die
+  Prüffunktionen der Fachwachen (`editorial_review_gate.evaluate_path`,
+  `faktenfrische.faelligkeit`, `duplikat_guard`). Die Governance-Regel **C19**
+  erzwingt Deckungsgleichheit – eine harte Gate-Familie, die nicht als
+  blockierend deklariert ist, bricht den Build.
+- **Beweislauf ohne Heilung (C15):** Die Scorecard setzt
+  `publish_gate.DRY_RUN = True` und schreibt ausschließlich ihre eigenen
+  Artefakte. Ein nicht führbarer Beweis heißt „nicht beweisbar“ – nie
+  „bestanden“ (Exit 2).
+- **Siegel (Frage 6):** Beim Deploy versiegelt sie jeden Live-Artikel
+  (SHA-256 der Quelldatei + Dimensionen + Deploy-Commit); Drift nach der
+  Versiegelung wird im nächsten Lauf sichtbar.
+- **Ausnahmen sind befristet:** Falsch-Alarme über `ausnahmen` in der SSOT –
+  Pflichtfelder, Ablaufdatum, Unterschrift; downgraden auf warnung, nie auf
+  grün; `M2-siegel-bindung` und `T7-render-beweis` sind nie ausnehmbar.
+- **Takt:** Deploy hart über die heutigen Kandidaten (`deploy.yml`, vor der
+  Auslieferung) + täglich 07:07 MESZ über den Bestand
+  (`release-scorecard.yml`, ein Ticket bei Rot, Schließen bei Grün – C4/C12/C14).
+- Bedienung: `npm run release:scorecard` · `npm run release:bestand` ·
+  `npm run release:artikel -- <slug>` · `npm run test:release`.
+  Runbook mit den sechs Antworten: `docs/ANLEITUNG-RELEASE-SCORECARD.md`.
 
 ## Wichtige Konventionen
 

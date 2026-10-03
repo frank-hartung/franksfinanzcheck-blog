@@ -1,0 +1,217 @@
+# ============================================================
+#  RELEASE-SCORECARD – die tägliche Produktionswahrheit
+#  (Auftrag Frank, 03.10.2026, Befund 10: „Der Produktions-
+#   prozess ist sehr komplex“ – „Ich würde daraus eine einzige
+#   sichtbare Release-Scorecard machen.“)
+#
+#  WARUM DIESE WACHE
+#  -----------------
+#  Das Repository besitzt viele Gates, Reports und Automationen.
+#  Stark – aber ohne EINEN Wahrheitsort kann niemand auf einen
+#  Blick sagen: Welche Checks blockieren? Welche warnen nur?
+#  Wer entscheidet? Und war die veröffentlichte Version wirklich
+#  die geprüfte? Diese Wache hält die Antwort aktuell:
+#
+#    * Baut die Site (Render-Beweise brauchen public/ – ein
+#      Bericht über einen Tag alten Build wäre ein Mess-Artefakt,
+#      genau die Klasse, die die alte Editorial-Scorecard hatte).
+#    * Misst den KOMPLETTEN Live-Bestand über die Publish-Gate-
+#      Collectoren (keine zweite Messregel) und schreibt
+#      RELEASE-SCORECARD.md (Mensch), data/release_scorecard_state.json
+#      (Siegel) und data/release_scorecard_history.jsonl (Verlauf).
+#    * Exit-Vertrag: 0 = Bestand freigabe-reif · 1 = blockierende
+#      Funde · 2 = Werkzeugfehler (fail-closed).
+#    * Issue-Politik (C4): Ein roter Bestand öffnet GENAU EIN
+#      Ticket (Suche über Wache-ID, update statt duplizieren),
+#      Grün schließt es. Kein Dauer-Alarm ohne Schließpfad (C14):
+#      Blockierende Bestandsfunde gehören den fachlich
+#      zuständigen Wachen (Eigentümer steht je Check in der SSOT),
+#      dieses Ticket ist nur der sichtbare Wahrheitsort.
+#
+#  Der DEPLOY läuft die selbe Engine hart vor jeder Auslieferung
+#  (deploy.yml, „Release-Scorecard (Produktionswahrheit
+#  versiegeln, fail-closed)“) – hier geht es um die tägliche
+#  Bestands-Sicht und die Historie.
+#
+#  Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md
+# ============================================================
+name: Release-Scorecard (Produktionswahrheit)
+
+on:
+  schedule:
+    - cron: "7 5 * * *"    # täglich 07:07 MESZ – nach den Nacht-Gates, vor blog-health-daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: release-scorecard
+  cancel-in-progress: false
+
+env:
+  LABEL: release-scorecard
+  REPORT: RELEASE-SCORECARD.md
+  STATE: data/release_scorecard_state.json
+
+jobs:
+  scorecard:
+    name: Live-Bestand messen, versiegeln, melden
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Py-Abhängigkeiten
+        run: python3 -m pip install -q pyyaml 2>/dev/null || python3 -m pip install -q --break-system-packages pyyaml
+
+      # Selbsttest zuerst (C6/C15): Eine sabotierte Engine darf keine
+      # Wahrheit schreiben – fail-closed, kein || true.
+      - name: Scorecard-Selbsttest
+        run: python3 scripts/release_scorecard.py --selftest
+
+      # Render-Beweise (Affiliate-Integrität, Offenlegung, SEO-Audit,
+      # Seiten-Existenz) brauchen den Build. Ohne ihn wäre die Scorecard
+      # ehrlich „nicht beweisbar“ – wir bauen also lieber.
+      - name: Site bauen (Beweisbasis public/)
+        run: hugo --minify --destination public
+
+      # Messung: --streng macht Bestands-Rot zum Exit 1 (Issue-Entscheidung).
+      # Werkzeugfehler bleiben Exit 2 (fail-closed). Weiterlaufen mit
+      # continue-on-error, damit Report, Siegel und Ticket IMMER geschrieben
+      # werden – ein stiller Abbruch wäre das Gegenteil von Wahrheit.
+      - name: Release-Scorecard über den Live-Bestand
+        id: scorecard
+        continue-on-error: true
+        run: python3 scripts/release_scorecard.py --live --streng
+
+      # ------------------------------------------------------------ ---
+      # Issue-Politik (C4): genau ein Ticket, update statt neu, Grün
+      # schließt. Label vorher anlegen (C12, HTTP-422-Falle #209).
+      # ----------------------------------------------------------------
+      - name: Scorecard-Ticket pflegen (ein Ticket, mit Schließpfad)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ERGEBNIS: ${{ steps.scorecard.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh label create "$LABEL" --color "b60205" \
+            --description "Release-Scorecard: Produktionswahrheit rot (Befund 10)" --force 2>/dev/null || true
+          FID="wache-id: release-scorecard"
+          NUM="$(FID="$FID" gh issue list --label "$LABEL" --state open --json number,body \
+                 --jq '[.[] | select(.body // "" | contains(env.FID)) | .number] | first // ""')"
+
+          BODY="$(python3 - <<'PY'
+          import json, os
+          state = json.load(open(os.environ["STATE"], encoding="utf-8"))
+          artikel = state.get("artikel") or {}
+          rot = {s: a for s, a in artikel.items() if a.get("urteil") in ("blockiert", "nicht beweisbar")}
+          warn = sum(1 for a in artikel.values() if a.get("urteil") == "warnung")
+          frei = sum(1 for a in artikel.values() if a.get("urteil") == "freigabe-reif")
+          modus = "grün" if os.environ.get("ERGEBNIS") == "success" else "rot"
+          lines = [
+              f"## Release-Scorecard: Bestand {modus}",
+              "",
+              f"**{frei}/{len(artikel)}** Live-Artikel freigabe-reif · "
+              f"**{len(rot)}** blockiert/nicht beweisbar · **{warn}** mit Warnungen.",
+              "",
+          ]
+          if rot:
+              lines += ["| Artikel | Urteil | Risikoklasse | nicht bestandene Dimension |", "|---|---|---|---|"]
+              for slug, a in sorted(rot.items()):
+                  schlecht = ", ".join(d for d, s in sorted((a.get("dimensionen") or {}).items())
+                                       if s in ("blockiert", "nicht beweisbar")) or "–"
+                  lines.append(f"| `{slug}` | {a['urteil']} | {a.get('risikoklasse')} | {schlecht} |")
+              lines += [
+                  "",
+                  "**Wer entscheidet was:** Besitz je Check steht in "
+                  "`data/release_scorecard.yaml` (`entscheidung: auto|human`), "
+                  "Eskalationsmatrix im Runbook. Fachliche Konflikte entscheidet "
+                  "der Herausgeber – die Maschine nie.",
+                  "",
+                  "Details: `RELEASE-SCORECARD.md` im Repo (Schritt-Log und Artefakt).",
+              ]
+          else:
+              lines.append("Alle Live-Artikel frei von blockierenden Funden. "
+                           "Details: `RELEASE-SCORECARD.md`.")
+          print(chr(10).join(lines))
+          PY
+          )"
+
+          if [ "$ERGEBNIS" = "success" ]; then
+            if [ -n "$NUM" ]; then
+              gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – Bestand wieder freigabe-reif.
+
+          $BODY
+
+          Lauf: $RUN_URL" >/dev/null
+              gh issue close "$NUM" --comment "Geschlossen durch Release-Scorecard (Schließpfad C4)." >/dev/null
+              echo "Ticket #$NUM kommentiert und geschlossen."
+            else
+              echo "Grün und kein offenes Ticket – nichts zu tun."
+            fi
+          else
+            if [ -z "$NUM" ]; then
+              gh issue create --title "Release-Scorecard: Produktionswahrheit rot (Bestand blockiert)" \
+                --label "$LABEL" --body "$BODY
+
+          Lauf: $RUN_URL
+
+          <!-- $FID -->" >/dev/null
+              echo "Ticket erstellt."
+            else
+              gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – weiterhin rot.
+
+          $BODY
+
+          Lauf: $RUN_URL" >/dev/null
+              echo "Ticket #$NUM kommentiert."
+            fi
+          fi
+
+      # ------------------------------------------------------------
+      # Report, Siegel und Historie IMMER sichern – mit if: always(),
+      # damit die Produktionswahrheit nicht einfrieren kann, genau
+      # wie PRODUKTIONS-STATUS.md (gleiche Betriebsregel).
+      # Alle drei Pfade sind deploy-irrelevant (STATE_ONLY im
+      # Deploy-Gate) – dieser Commit löst keinen Folge-Deploy aus.
+      # ------------------------------------------------------------
+      - name: Scorecard-Artefakte committen (immer)
+        if: always()
+        run: |
+          set -Eeuo pipefail
+          git config user.name "Release-Scorecard-Bot"
+          git config user.email "release-scorecard-bot@users.noreply.github.com"
+          git add -- "$REPORT" data/release_scorecard_state.json data/release_scorecard_history.jsonl
+          if git diff --cached --quiet; then
+            echo "Scorecard unverändert."
+            exit 0
+          fi
+          git commit -m "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+          scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – Report im Artefakt gesichert."
+
+      - name: Report als Artefakt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-scorecard-${{ github.run_number }}
+          path: |
+            RELEASE-SCORECARD.md
+            data/release_scorecard_state.json
+          retention-days: 30
+
+      # Roter Lauf = roter Job (nachdem Report und Ticket gesichert sind).
+      - name: Lauf-Ergebnis durchreichen
+        if: steps.scorecard.outcome == 'failure'
+        run: |
+          echo "::error::Release-Scorecard rot – Details im Ticket, in RELEASE-SCORECARD.md und im Schritt-Log."
+          exit 1

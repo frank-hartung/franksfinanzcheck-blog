@@ -1,0 +1,361 @@
+# ============================================================
+#  RELEASE-SCORECARD – SSOT der Produktionswahrheit
+#  (Auftrag Frank, 03.10.2026, Befund 10 „Der Produktions-
+#   prozess ist sehr komplex": „Ich würde daraus eine einzige
+#   sichtbare Release-Scorecard machen – bitte dauerhaft auf
+#   Highend-Level einer Profi-Agentur beheben.“)
+#
+#  Diese Datei beantwortet die sechs Fragen der Produktions-
+#  wahrheit EINMAL und maschinenlesbar:
+#
+#   1. Welche Checks blockieren Veröffentlichung?  → wirkung: blockiert
+#   2. Welche liefern nur Warnungen?                → wirkung: warnung
+#   3. Wer entscheidet bei fachlichen Konflikten?   → eskalation.*
+#   4. Was passiert bei falschen Positivmeldungen?  → falschpositive.*
+#   5. Wie wird ein Artikel fachlich freigegeben?   → freigabeprozess.*
+#   6. Wie wird nachgewiesen, dass die veröffentlichte
+#      Version wirklich geprüft wurde?              → siegel.*
+#
+#  Die Engine (scripts/release_scorecard.py) LIEST diese Datei und
+#  misst über die COLLECTOR-FUNKTIONEN des Publish-Gates – sie führt
+#  KEINE zweite Messregel ein (Lektion aus „Themen haben zwei Bahnen“:
+#  nie eine zweite Zählregel). Die Wache scripts/governance_contract.py
+#  prüft diese Datei mit Regel C19 auf Vollständigkeit: Jede harte
+#  Gate-Familie des Publish-Gates MUSS hier als blockierender Check
+#  deklariert sein – sonst ist die Scorecard eine Sicht, die lügt.
+#
+#  Diese Datei ist – wie data/agent_reach/faktenfrische.yaml –
+#  MENSCHLICH KURATIERT. Die Maschine liest sie, schreibt sie nie.
+# ============================================================
+
+version: 1
+
+# ------------------------------------------------------------
+#  Die acht Dimensionen der Scorecard (eine Zeile pro Artikel)
+# ------------------------------------------------------------
+dimensionen:
+  technik:
+    titel: "Technik"
+    ziel: "bestanden"
+    beschreibung: >
+      Build, Struktur, Länge, SEO-Härte, Titel, Keywords, Lesbarkeit und
+      Textverständnis des Artikels sind technisch veröffentlichungsfähig.
+  quellen:
+    titel: "Quellen"
+    ziel: "bestanden"
+    beschreibung: >
+      Der Artikel trägt eine strukturierte, vertrauenswürdige Belegkette
+      (HTTPS, kein Affiliate-Partner als Beleg, Rang-1/2-Quelle, Datum).
+  faktenalter:
+    titel: "Faktenalter"
+    ziel: "bestanden"
+    beschreibung: >
+      Der Faktenstand ist nach Risikoklasse frisch (saisonal 30 /
+      YMYL 45 / Standard 90 Tage, SSOT data/agent_reach/faktenfrische.yaml)
+      und der Artikel trägt keine veraltete Stand-Kennzeichnung.
+  affiliate:
+    titel: "Affiliate-Integrität"
+    ziel: "bestanden"
+    beschreibung: >
+      Jeder Partnerlink ist registriert, rendert im Build, liefert das
+      versprochene Angebot (Intent) und die artikelgenaue Offenlegung
+      steht sichtbar über dem ersten Partnerlink.
+  redundanz:
+    titel: "Redundanz"
+    ziel: "bestanden"
+    beschreibung: >
+      Keine Duplikate innerhalb des Artikels und gegen den Bestand
+      (D1–D6) – jeder Text leistet einen eigenen Beitrag.
+  ymyl:
+    titel: "YMYL-Risiko"
+    ziel: "geprüft"
+    beschreibung: >
+      Risikoklasse ist klassifiziert und darf nie von der Automatik
+      herabgestuft werden; für „hoch“ liegt ein vollständiges
+      Prüfprotokoll (Aussagen, Zahlen, Konsistenz) vor.
+  freigabe:
+    titel: "menschliche Freigabe"
+    ziel: "vorhanden"
+    beschreibung: >
+      Für Risikoklasse „hoch“ gilt fail-closed: Nur ein benannter
+      Fachprüfer mit Prüfdatum und fassungsgebundenem Siegel gibt frei.
+      Für „standard“/„erhöht“ ist die maschinelle Gate-Kette die
+      dokumentierte Freigabe (zwei Bahnen, Issue #521).
+  revision:
+    titel: "nächste Überprüfung"
+    ziel: "Datum"
+    beschreibung: >
+      Jeder Artikel nennt sein nächstes Prüfdatum (YMYL-hoch: aus der
+      redaktionellen Prüfung; sonst: faktencheck + Intervall).
+
+# ------------------------------------------------------------
+#  Die Checks: Wirkung, Besitz, Quelle.
+#  wirkung:   blockiert = Veröffentlichung stoppt (Antwort auf Frage 1)
+#             warnung   = sichtbar, stoppt nicht       (Antwort auf Frage 2)
+#  entscheidung: auto  = Maschine heilt/entscheidet deterministisch
+#                human = nur ein Mensch entscheidet fachlich
+#  geltung:   alle (Standard) · risikoklasse hoch ·
+#             risikoklasse standard-und-erhoeht
+#             Ein Check, der für einen Artikel nicht gilt, zeigt
+#             „nicht erforderlich“ – ein Check, der gelten würde aber
+#             nicht messbar war, zeigt „nicht beweisbar“ (fail-closed).
+# ------------------------------------------------------------
+checks:
+  # ——— Technik (blockierend im Publish-Gate) ———
+  - id: T0-artikel-lesbar
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/editorial_review_gate.py load_article (E00)
+    pruefung: "Frontmatter ist gültiges YAML und die Artikel-Datei ist lesbar"
+  - id: T1-zeichenlaenge
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/check_length.py (via publish_gate.check_length_failures)
+    pruefung: "zu-kurz (<10.000) oder zu-lang – harte Länge"
+  - id: T1w-zeichenlaenge-optimum
+    dimension: technik
+    wirkung: warnung
+    entscheidung: auto
+    quelle: scripts/check_length.py (Status unter-/ueber-optimum)
+    pruefung: "Länge außerhalb des Optimums 12.000–18.000 (Hinweis, kein Stopp)"
+  - id: T2-seo-audit
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/seo_audit.py (via publish_gate.seo_audit_failures; braucht public/)
+    pruefung: "harte SEO-Mängel (score_issues > 0) und Sitemap-Konsistenz"
+  - id: T3-titel-r5
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/check_titles.py R5 (via publish_gate.title_integrity_failures)
+    pruefung: "Titel vollständig (kein truncierter Cover-Text)"
+  - id: T4-keyword-score
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/keyword_optimizer.py (via publish_gate.keyword_failures)
+    pruefung: "Keyword-Score ≥ 60 (Titel/Description/First-Para/H2/Dichte)"
+  - id: T5-lesbarkeit
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/readability_check.py (via publish_gate.readability_failures)
+    pruefung: "Lesbarkeits-Score ≥ 75 (Top-Level für neue Veröffentlichungen)"
+  - id: T6-textverstaendnis
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)
+    pruefung: "harte Regeln R2/R3/R5/R7/R8/R9–R16 (deckungsgleich mit dem Publish-Gate)"
+  - id: T7-render-beweis
+    dimension: technik
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: Hugo-Build + public/posts/<slug>/index.html
+    pruefung: "Der Artikel existiert im gebauten Stand (Beweisbasis aller Render-Checks)"
+
+  # ——— Quellen ———
+  - id: Q1-belegkette
+    dimension: quellen
+    wirkung: blockiert
+    entscheidung: human
+    geltung: risikoklasse hoch
+    quelle: scripts/editorial_review_gate.py (E12, via publish_gate.editorial_review_failures)
+    pruefung: "≥2 Quellen, strukturiert, HTTPS, Beleg-Allowlist, Rang 1/2, kein Affiliate-Partner"
+  - id: Q2-quellen-vorhanden
+    dimension: quellen
+    wirkung: warnung
+    entscheidung: auto
+    geltung: risikoklasse standard-und-erhoeht
+    quelle: Frontmatter `quellen` (faktenfrische-Pflege)
+    pruefung: "Artikel ohne Belegkette im Frontmatter (Risikoklasse hoch prüft Q1 hart)"
+
+  # ——— Faktenalter ———
+  - id: F1-faktenfrische
+    dimension: faktenalter
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/faktenfrische.py faelligkeit() (SSOT-Intervalle)
+    pruefung: "Faktencheck-Alter innerhalb des Intervalls (saisonal 30 / YMYL 45 / Standard 90)"
+  - id: F2-stand-kennzeichnung
+    dimension: faktenalter
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/editorial_review_gate.py (E16)
+    pruefung: "keine veraltete „Stand 20xx“-Kennzeichnung im laufenden Jahr"
+  - id: F3-pruefdatum
+    dimension: faktenalter
+    wirkung: blockiert
+    entscheidung: human
+    geltung: risikoklasse hoch
+    quelle: scripts/editorial_review_gate.py (E09)
+    pruefung: "fachliches Prüfdatum höchstens 45 Tage alt"
+
+  # ——— Affiliate-Integrität (alle fail-closed) ———
+  - id: A1-link-integritaet
+    dimension: affiliate
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/affiliate_integrity_gate.py AI1–AI4 + Render-Beweis (via publish_gate)
+    pruefung: "CTA-Struktur, nur registrierte /go/-Redirects, Link rendert im Build"
+  - id: A2-intent
+    dimension: affiliate
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/affiliate_intent_guard.py IW0–IW9 (via publish_gate, Beweislauf ohne Heilung)
+    pruefung: "jeder Link liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen"
+  - id: A3-offenlegung
+    dimension: affiliate
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/offenlegung_gate.py O1–O7 (via publish_gate; braucht public/)
+    pruefung: "artikelgenaue Werbekennzeichnung sichtbar VOR dem ersten Partnerlink"
+  - id: A4-profi-check
+    dimension: affiliate
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/affiliate_profi_check.py A1–A8 (via publish_gate)
+    pruefung: "Offenlegung, E-E-A-T-Feld, interne Links, Schema, Dichte, Trust-Box, Autor, CTA"
+
+  # ——— Redundanz ———
+  - id: RD1-duplikate
+    dimension: redundanz
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: scripts/duplikat_guard.py D1–D6
+    pruefung: "keine Absatz-/Sektions-Duplikate im Artikel oder gegen den Bestand"
+
+  # ——— YMYL-Risiko ———
+  - id: Y1-risikoklasse
+    dimension: ymyl
+    wirkung: blockiert
+    entscheidung: human
+    quelle: scripts/editorial_review_gate.py inferred_risk (E01/E02)
+    pruefung: "Klassifikation konsistent; Herabstufung unter die automatische Erkennung ist verboten"
+  - id: Y2-pruefprotokoll
+    dimension: ymyl
+    wirkung: blockiert
+    entscheidung: human
+    geltung: risikoklasse hoch
+    quelle: scripts/editorial_review_gate.py (E13/E14/E15/E18/E19)
+    pruefung: "geprüfte Zahlen mit Fundstelle/Konsistenz, geprüfte Aussagen mit Textankern, CTA erst nach Grundlage"
+
+  # ——— menschliche Freigabe (fail-closed für Risikoklasse hoch) ———
+  - id: M1-fachliche-freigabe
+    dimension: freigabe
+    wirkung: blockiert
+    entscheidung: human
+    geltung: risikoklasse hoch
+    quelle: scripts/editorial_review_gate.py (E03–E08, E11) + --seal
+    pruefung: "status freigegeben, benannter Prüfer mit Rolle/Typ, Prüfdatum, Änderungsgrund"
+  - id: M2-siegel-bindung
+    dimension: freigabe
+    wirkung: blockiert
+    entscheidung: human
+    geltung: risikoklasse hoch
+    quelle: scripts/editorial_review_gate.py content_fingerprint (E17)
+    pruefung: "inhalt_sha256 passt exakt zur geprüften Fassung – jede Änderung entwertet die Freigabe"
+
+  # ——— nächste Überprüfung ———
+  - id: N1-naechste-pruefung
+    dimension: revision
+    wirkung: blockiert
+    entscheidung: auto
+    quelle: faktenfrische-Intervall bzw. redaktionelle_pruefung.naechste_pruefung (E10)
+    pruefung: "nächstes Prüfdatum vorhanden, liegt in der Zukunft und im Intervall"
+
+# ------------------------------------------------------------
+#  Frage 3: Wer entscheidet bei Konflikten? (Eskalationsmatrix)
+#  Letztentscheid fachlich bleibt immer beim Herausgeber.
+# ------------------------------------------------------------
+eskalation:
+  technischer_konflikt:
+    beispiel: "Gate meldet rot, ein anderes grün; Werkzeugfehler"
+    entscheidung: "Der Gate-Vertrag (fail-closed) entscheidet; Besitz: auto"
+    weg: "Selbsttest der Wache → Issue im Kanal der Wache → bot_watchdog --route"
+  fachlicher_konflikt:
+    beispiel: "Quellenlage, Bewertung, Formulierung einer Kernaussage"
+    entscheidung: "Herausgeber Frank Hartung entscheidet als Chefredaktion"
+    weg: >
+      Befund mit owner=human (Alert-Routing C14) → Entscheidung im
+      aenderungsgrund dokumentieren → bei Risikoklasse hoch neu versiegeln
+      (editorial_review_gate --seal). Die Maschine entscheidet fachlich NIE.
+  messkonflikt:
+    beispiel: "Scorecard und Publish-Gate melden Verschiedenes (Scheingrün-Verdacht)"
+    entscheidung: "Beide nutzen dieselben Collector-Funktionen – Abweichung ist immer ein Defekt"
+    weg: "Deploy stoppt (fail-closed) → Ursache ist eine der beiden Messketten → P1-Vorfall"
+
+# ------------------------------------------------------------
+#  Frage 4: Was passiert bei falschen Positivmeldungen?
+#  (Scheingrün = Gate meldet bestanden, obwohl der Artikel mangelhaft)
+# ------------------------------------------------------------
+falschpositive:
+  schutz_1: >
+    Die Scorecard misst über DIESELBEN Collector-Funktionen wie das
+    Publish-Gate (keine zweite Messregel) – unterschiedliche Ampeln
+    derselben Collector sind konstruktiv unmöglich; Abweichung = P1.
+  schutz_2: >
+    Fail-closed: Kann ein Beweis nicht geführt werden (kein public/,
+    toter Build, Detektor veraltet), lautet das Ergebnis
+    „nicht beweisbar“ – niemals „bestanden“.
+  schutz_3: >
+    Governance C19 prüft, dass jede harte Gate-Familie des Publish-Gates
+    in dieser Datei deklariert ist – eine Wache kann nicht unbemerkt
+    zur Warnung werden oder verschwinden.
+  falscher_alarm: >
+    Ein Check, der zu Unrecht blockiert (falscher Alarm), wird NIEMALS
+    durch Schwächung des Gates behoben, sondern über eine befristete,
+    begründete, unterschriebene Ausnahme in `ausnahmen` – mit Ablaufdatum.
+    Abgelaufene Ausnahmen werden ignoriert und sichtbar gemeldet.
+
+# ------------------------------------------------------------
+#  Frage 5: Wie wird ein Artikel fachlich freigegeben?
+# ------------------------------------------------------------
+freigabeprozess:
+  risikoklasse_hoch:
+    schritte: >
+      1. Belegkette im Frontmatter (quellen, ≥2, Rang 1/2 dabei) ·
+      2. gepruefte_aussagen mit exakten Textankern ·
+      3. gepruefte_zahlen mit Fundstelle, Prüfung, Konsistenz ·
+      4. pruefer (Name, Rolle, Typ fachpruefer/redaktion-mit-externer-belegkette),
+         pruefdatum, aenderungsgrund, naechste_pruefung ·
+      5. status: freigegeben ·
+      6. python3 scripts/editorial_review_gate.py --seal --file <pfad>
+         (setzt inhalt_sha256, schreibt Audit-Historie) ·
+      7. jede spätere Änderung bricht das Siegel (E17) → neu prüfen + versiegeln.
+  risikoklasse_standard_und_erhoeht:
+    schritte: >
+      Zwei Bahnen (Issue #521): Diese Artikel gehen über die AUTO-Bahn –
+      die harte Gate-Kette (alle Dimensionen oben) IST die dokumentierte
+      Freigabe. Stellt sich ein Artikel nachträglich als YMYL-hoch heraus,
+      greift das fail-closed editorial_review_gate sofort.
+
+# ------------------------------------------------------------
+#  Frage 6: Wie ist nachgewiesen, dass die geprüfte Version
+#  veröffentlicht wurde? (Release-Siegel)
+# ------------------------------------------------------------
+siegel:
+  mechanismus: >
+    Beim Deploy versiegelt die Scorecard JEDEN Live-Artikel: SHA-256 über
+    die exakte Quelldatei + alle acht Dimensionen + Urteil + Zeitstempel
+    + Deploy-Commit. Siegel steht in data/release_scorecard_state.json,
+    der Verlauf append-only in data/release_scorecard_history.jsonl,
+    das Ereignis im Audit-Log (data/audit/). Die tägliche Wache prüft
+    Drift: Ändert sich eine Datei nach der Versiegelung, ohne dass ein
+    neuer Lauf prüfte, meldet die Scorecard „Siegel entwertet“.
+  verifikation: >
+    python3 scripts/release_scorecard.py --slug <slug> zeigt Siegel-Hash,
+    Dimensionen und Drift-Status des Artikels;
+    python3 scripts/release_scorecard.py --live prüft den ganzen Bestand.
+
+# ------------------------------------------------------------
+#  Ausnahmen (Falsch-Alarm-Protokoll). Pflichtfelder je Eintrag:
+#  slug, check (Check-ID oben), begruendung (≥15 Zeichen),
+#  gueltig_bis (ISO-Datum), entschieden_von.
+#  NICHT ausnehmbar: M2-siegel-bindung und T7-render-beweis –
+#  Siegel und Build-Beweis gelten immer.
+# ------------------------------------------------------------
+ausnahmen: []

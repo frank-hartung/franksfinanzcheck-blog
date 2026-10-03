@@ -637,6 +637,43 @@ jobs:
       - name: Anker-Wache (kein § in Überschriften, Kurzfassung & Vorlesen)
         run: python3 scripts/heading_anchor_guard.py
 
+      # ============ RELEASE-SCORECARD (Befund 10, 03.10.2026) ============
+      # Die EINE sichtbare Produktionswahrheit, NACH allen Content-Gates
+      # und VOR der Auslieferung: Acht Dimensionen pro Artikel (Technik,
+      # Quellen, Faktenalter, Affiliate-Integrität, Redundanz, YMYL-Risiko,
+      # menschliche Freigabe, nächste Überprüfung), gemessen über DIESELBEN
+      # Collector-Funktionen wie das Publish-Gate – als Beweislauf ohne
+      # Heilung. Deckt sich die Scorecard nicht mit dem Publish-Gate, ist
+      # das ein Scheingrün-Befund und der Deploy stoppt (fail-closed).
+      # Sie versiegelt den kompletten Live-Bestand (SHA-256 je Artikel +
+      # Dimensionen + Deploy-Commit) – der Nachweis, dass die veröffentlichte
+      # Version wirklich die geprüfte ist. Exit-Vertrag: 0 = ok ·
+      # 1 = heutige Kandidaten blockiert · 2 = Werkzeugfehler (fail-closed).
+      # Kein || true / continue-on-error: Scheingrün geht nicht live.
+      # Runbook: docs/ANLEITUNG-RELEASE-SCORECARD.md
+      - name: Release-Scorecard (Produktionswahrheit versiegeln, fail-closed)
+        run: python3 scripts/release_scorecard.py --kandidaten --commit-sha "$GITHUB_SHA"
+
+      # Scorecard-Artefakte sichern (Report + Siegel-Zustand + Historie).
+      # Alle drei Pfade sind deploy-irrelevant (STATE_ONLY im Deploy-Gate):
+      # Der Commit löst keinen Folge-Deploy aus. State-Push ist best effort –
+      # die Inhalts-Gates und die Auslieferung bleiben davon unberührt.
+      - name: Release-Scorecard committen (Report, Siegel, Historie)
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add -- RELEASE-SCORECARD.md data/release_scorecard_state.json data/release_scorecard_history.jsonl
+          if git diff --cached --quiet; then
+            echo "Scorecard: keine Änderungen zu committen."
+          else
+            git commit -m "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            if scripts/git_sync.sh --push-only; then
+              echo "✅ Release-Scorecard gepusht."
+            else
+              echo "::warning::Scorecard-Push fehlgeschlagen – Siegel liegt im Lauf-Log; nächster Lauf versiegelt erneut."
+            fi
+          fi
+
       # ================= VORLESE-AUDIO (FF Voice Studio, 05.09.2026) ========
       # Vorab vertonte Artikel mit einem MÄNNLICHEN DEUTSCHEN
       # NACHRICHTENSPRECHER – wie bei zeit.de. Die Tonspur (MP3) läuft über

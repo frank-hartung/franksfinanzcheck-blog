@@ -83,7 +83,11 @@
     "engine:kapazitaet": "python3 scripts/engine_capacity.py",
     "engine:abgleich": "python3 scripts/reserve_topics.py --abgleich",
     "test:engine:kapazitaet": "python3 scripts/engine_capacity.py --selftest && python3 -m unittest scripts.tests.test_engine_capacity",
-    "test:prompt:echo": "python3 scripts/textverstaendnis_guard.py --selftest && python3 -m unittest scripts.tests.test_prompt_echo"
+    "test:prompt:echo": "python3 scripts/textverstaendnis_guard.py --selftest && python3 -m unittest scripts.tests.test_prompt_echo",
+    "release:scorecard": "python3 scripts/release_scorecard.py",
+    "release:bestand": "python3 scripts/release_scorecard.py --live --streng",
+    "release:artikel": "python3 scripts/release_scorecard.py --slug",
+    "test:release": "python3 scripts/release_scorecard.py --selftest && python3 -m unittest scripts.tests.test_release_scorecard"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
