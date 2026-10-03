@@ -1,0 +1,654 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-03T08:57:57Z",
+  "modus": "live",
+  "commit": null,
+  "artikel": {
+    "2026-08-10-dsl-wechselbonus-sichern": {
+      "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
+      "sha256": "15a8e186ed679f223fa82233b8665959be6fa957ead3bd04079599b6dffc9297",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "blockiert",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
+      "sha256": "38e5d0dc60266a94bc9105a42f225553e75d7d8573a4c8b01c0fe6869c1932b4",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
+      "sha256": "7f5637022a2c29c705efb37f2d10743c243731f830d3128bb6dcd566a19946ee",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
+      "sha256": "37aa3ff004fc667921db34dc365989e0355504e817f5305163dbbb32f709b5c1",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
+      "sha256": "f067a452f3328f14ca9badd91b21d29091367b369fffafbf46c578b0c90eb416",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-27",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
+      "sha256": "987a99fada1e757823909044a04decad5d32b4dff5286b98d29317ad550dcb95",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
+      "sha256": "53f176dca04f218c22a8dca9edb2e87eacf54f5fceda8bf6272d93c1981b538a",
+      "urteil": "blockiert",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "blockiert",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
+      "sha256": "1ae2f82ed5b4a9a54a4fa3153d6fb21423b4d73aeb5ddf72688d6da95af04262",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
+      "sha256": "acca5625780d4a5c085350b6a0c8d311965f9a244a7b3cbaca94f9d51a7ef9a9",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-12",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
+      "sha256": "a77d9c27ce06cb3eb76256dba5f2c25f52c97285e1c339512ff6fae273e015f3",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
+      "sha256": "1b7168ddfeda0de1bcf1c252d90abaa182d35cdecf79edd92d068022462e11e8",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
+      "sha256": "3f3134d084431b6bf7d578e8b34bb496bf02178abb39d83665d028d97ab16e7d",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-27",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
+      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
+      "sha256": "72bd76ef4193ae515ed4e3fdc35b95f706ebe9a8183c6ae4a93809e4235965fc",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
+      "sha256": "1d24a47304b775f2ff89e5b1fb6213a0c9825d790268aa11dee5c82b3a40b588",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "blockiert",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-26",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
+      "sha256": "29c44e657a0330377996132c0427df5b89fbbc438053103a215e9a80e3c3adf2",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
+      "sha256": "4b5e340d3c7562379eefa3470335ebe04c03e2e41fa941feedd33998a425eea7",
+      "urteil": "blockiert",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "blockiert",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
+      "sha256": "d2a8b78b56aba5c17e031b457ff523b100a31729e63e5c4b236f8567b65b678e",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-26",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
+      "sha256": "702d3bc07c3dafe76ba90ce2080ac1d9d196a0951a3dca99e52727a0b81f34c7",
+      "urteil": "warnung",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
+      "sha256": "d5080af8d5612f029c2a4a37076e6be808f8d4e9d1d444f6514e8c96576e26ed",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-26",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
+      "sha256": "75d799ebc783f719ea8655689967a1e39946bbf786efac3a2f3e1315eb0a6ec8",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
+      "sha256": "0f6fc98763aebe606ae360f5757c83cb9f3973c50db534d581966ad1dbc53b2e",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
+      "sha256": "b597f133ca6ddc0537772ccbe313719374061a7b601933de4a8b9d72c4a978e0",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
+      "sha256": "cadc4eff530c31b0a130e3b4007d091b6af0a9d44da77aaa05bf2efe7461e05b",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
+      "sha256": "6f1c908d48a5fc37122636d6e15d47fbacbdfa6965bcd8a8534c1fae5163236b",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
+      "sha256": "57df71adb4dbaa4ef0f8d4599fd1d5cef887f50fe4d01942ce9075266dabf2d1",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
+      "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
+      "sha256": "34011fe75329c0f196e556b3859ca80e6820555a1d86096578327389028caf0e",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
+      "sha256": "ae1a869c17c5779d0d05e66506615cc5f6a36ecc056cf6c22029a18165258394",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-12",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
+      "sha256": "c5ee7e0d1629e5216a6e7698d4d582d4079b06ed9440da51ff319fec33e64b72",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
+      "sha256": "2c7f4cacdbc9b8ad09ff1a478722d7b23a0480ae7d1a56609256456b5b79b027",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
+      "sha256": "7cf1fdfc91f11ad94b09bb7d6b7b53a73da01606b42e08861bd53231af9b70ea",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-10-28",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
+      "sha256": "d5b4906f8761bd9de1d585a584e73538778de15413b867f8c1cafed715fe06d1",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-26",
+      "siegel_drift": "unverändert"
+    },
+    "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
+      "sha256": "a0189d5852f4cbaaad44b5d6effa637f65fe3e3b852a1c74cdb0c2298b25d245",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-01",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
+      "sha256": "ed47f555e7371717ad94f76949559063a4a6f45eae270f316da239faa0f9143a",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "warnung",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "blockiert"
+      },
+      "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
+      "sha256": "241fa86dc3cc04b0c732d85d9deccfd5d813067ee259d17f6bb553fcfdba75f9",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "warnung",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "blockiert"
+      },
+      "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
+      "siegel_drift": "unverändert"
+    },
+    "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
+      "sha256": "909e646fa107afbded4a29d3b03c91d8dd9c4ad6adecc5c87e05ae783d1cb387",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "warnung",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "blockiert"
+      },
+      "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
+      "siegel_drift": "unverändert"
+    }
+  }
+}

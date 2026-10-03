@@ -1,6 +1,6 @@
 # 🔒 Governance-Vertrag (automatisch geprüft)
 
-**Stand:** 2026-09-28 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
+**Stand:** 2026-10-03 · erzeugt von `scripts/governance_contract.py` · geprüft in `link-check.yml` (Qualitäts-Gate) und als Preflight in `premium-governance.yml`.
 
 Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report #206 ermöglicht haben. Jede Verletzung ist ein Build-Fehler.
 
@@ -24,6 +24,7 @@ Dieser Vertrag hält die Regeln fest, die den Dauer-Alarm aus Governance-Report 
 - **C16 Wache-Herzschlag** – Ein Lebenszeichen ist kein Befund: die Affiliate-Integritäts-Wache erneuert ihren Zeitstempel bei jedem Lauf (Beweis im Gate-Selbsttest), ihre Frische wird per Herzschlag ODER fehlerfreiem Lauf belegt, und der Lebenszeichen-Pfad ist deploy-irrelevant – ein ruhiger Tag darf weder einen Fehlalarm noch eine Veröffentlichung auslösen (#281).
 - **C17 Pinterest-Duplikate** – Pinterest-Duplikate (P4) sind Spam: pin_title und pin_description müssen über alle Artikel hinweg einzigartig sein – der Duplicate-Guard heilt deterministisch, läuft in Watchdog und Content-Engine und verhindert Repeat-Pin-Spam (#305).
 - **C18 Pflicht-Check** – Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt: Der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist als Konstante eingefroren und muss Workflow und Ruleset gleichermaßen entsprechen; das Gate läuft bei jedem PR auf `main` ohne Pfadfilter, ohne `if:` am Job, ohne `continue-on-error` und nur mit Leserechten, und die Live-Wache `pflichtcheck_guard.py` prüft im Gate selbst, ob der Branch-Schutz den Check wirklich verlangt – ein umbenannter Job friert `main` ein, ein Ruleset ohne Ziel-Branch schützt nichts (19.09.2026). Ist der Vertrag nachweislich nicht erfüllbar, legt `PFLICHT_CHECK_DAUERZUSTAND` ihn als befristeten Dauerzustand ab: Die Wache meldet genau diesen Befund als BEKANNT statt als Vorfall, jeder andere bleibt rot, und `--strict` zieht auch den bekannten Befund wieder auf Exit 1 (20.09.2026).
+- **C19 Release-Scorecard** – Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert Eskalation, Falsch-Positiv-Protokoll, Freigabeprozess und Siegel – und scripts/release_scorecard.py misst ausschließlich über die Publish-Gate-Collectoren, als Beweislauf ohne Heilung, mit versiegeltem Versionsnachweis. Wer eine blockierende Prüfung zur Warnung herabstuft oder eine zweite Messregel einzieht, macht die Scorecard zur Lüge (Befund 10, 03.10.2026).
 
 ## Befund
 

@@ -57,6 +57,11 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
   C17 Pinterest-Duplikate – pin_title/pin_description sind über alle Artikel
                      einzigartig; der Duplicate-Guard läuft in Watchdog und
                      Content-Engine (#305)
+  C19 Release-Scorecard – die SSOT der Produktionswahrheit: jede harte
+                     Publish-Gate-Familie ist als blockierend deklariert,
+                     die Engine misst über die Publish-Gate-Collectoren
+                     (keine zweite Messregel) und siegelt die geprüfte
+                     Version (Befund 10, 03.10.2026)
   C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist
                      der Vertrag mit dem Branch-Schutz: Konstante = Workflow =
                      Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
@@ -86,6 +91,7 @@ import os
 import re
 import subprocess
 import sys
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -243,7 +249,14 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # Deploy-Drift-Wache (28.09.2026, #433 – „Deploy-Drift: #431 auf main,
           # aber nicht live“): Prüft Parität zwischen main und gh-pages.
           # Schützt vor Queue-Verdrängung und Skip-Deploy-Täuschung.
-          "deploy_drift_guard.py"]
+          "deploy_drift_guard.py",
+          # Release-Scorecard (03.10.2026, Befund 10 „Der Produktionsprozess
+          # ist sehr komplex“): EINE sichtbare Produktionswahrheit – acht
+          # Dimensionen pro Artikel, gemessen über die Publish-Gate-
+          # Collectoren (keine zweite Messregel), versiegelt gegen die
+          # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
+          # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
+          "release_scorecard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -928,6 +941,107 @@ def c17_pinterest_duplicate_guard(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
+# --- C19: Release-Scorecard – die SSOT der Produktionswahrheit -------------
+RELEASE_SSOT = os.path.join("data", "release_scorecard.yaml")
+RELEASE_ENGINE = "release_scorecard.py"
+
+
+def c19_release_ssot(script_texts, root=BLOG_DIR):
+    """C19: Die Produktionswahrheit ist deklariert, deckungsgleich und versiegelt.
+
+    Auslöser (03.10.2026, Audit-Befund 10 „Der Produktionsprozess ist sehr
+    komplex“): Das Repo hat viele Gates, Reports, Zustandsdateien und Wachen –
+    aber niemand konnte auf einen Blick sagen, welche Checks veröffentlichen
+    blockieren, welche nur warnen, wer bei fachlichen Konflikten entscheidet
+    und ob die VERÖFFENTLICHTE Version wirklich die geprüfte ist. Die Antwort
+    ist die Release-Scorecard (scripts/release_scorecard.py) mit ihrer
+    deklarativen SSOT (data/release_scorecard.yaml).
+
+    Dieser Vertrag verhindert die drei Arten, wie eine solche Wahrheit
+    still verrotet:
+      a) SSOT fehlt/unvollständig → die Sicht erfindet ihre eigene Wahrheit.
+      b) Eine harte Publish-Gate-Familie ist nicht (mehr) als blockierend
+         deklariert → die Scorecard verschweigt live blockierende Gates
+         (Scheingrün in Reinform, vgl. die „Wache, die eine Blockade nur
+         versprach“, 02.10.2026).
+      c) Die Engine misst nicht (mehr) über die Publish-Gate-Collectoren →
+         zwei Messregeln, zwei Ampeln (Lektion „Themen haben zwei Bahnen“).
+    """
+    out = []
+    engine = script_texts.get(RELEASE_ENGINE, "")
+    if not engine.strip():
+        out.append((f"C19", f"scripts/{RELEASE_ENGINE} fehlt – die Produktions-"
+                             "wahrheit (Befund 10) hat keine Engine."))
+        return out
+    ssot_pfad = os.path.join(root, RELEASE_SSOT)
+    if not os.path.isfile(ssot_pfad):
+        out.append((f"C19", f"{RELEASE_SSOT} fehlt – ohne deklarierte Wahrheit "
+                             "(blockiert/warnt, Besitz, Eskalation) ist die "
+                             "Scorecard eine Sicht, die lügt."))
+        return out
+
+    sys.path.insert(0, os.path.join(root, "scripts"))
+    try:
+        import release_scorecard as rs  # noqa: PLC0415
+    except Exception as exc:  # noqa: BLE001 – Importfehler ist ein Befund
+        out.append((f"C19", f"scripts/{RELEASE_ENGINE} nicht importierbar: {exc}"))
+        return out
+
+    try:
+        ssot = rs.ssot_laden(Path(ssot_pfad))
+    except Exception as exc:  # noqa: BLE001 – Konfigurationsfehler ist ein Befund
+        out.append((f"C19", f"{RELEASE_SSOT} unzulässig: {exc}"))
+        ssot = None
+    if ssot is not None:
+        fehler = rs.ssot_pruefen(ssot)
+        for f in fehler:
+            out.append((f"C19", f"{RELEASE_SSOT}: {f}"))
+        # Frage 3–6 brauchen einen Ort mit Antworten, nicht nur Checks.
+        for block in ("eskalation", "falschpositive", "freigabeprozess", "siegel"):
+            if block not in ssot:
+                out.append((f"C19", f"{RELEASE_SSOT}: Block `{block}` fehlt – die "
+                                    "Antworten auf die sechs Fragen der "
+                                    "Produktionswahrheit müssen deklariert sein."))
+        # Ausnahmen: Pflichtfelder + nicht ausnehmbare Checks (Frage 4).
+        heute = datetime.date.today()
+        try:
+            rs.ausnahmen_aufbereiten(ssot, heute)
+        except rs.KonfigurationsFehler as exc:
+            out.append((f"C19", f"{RELEASE_SSOT}: unzulässige Ausnahme – {exc}"))
+
+    # c) Die Engine muss über die Publish-Gate-Collectoren messen (Quelltext-
+    #    Vertrag, gespiegelt in scripts/tests/test_release_scorecard.py).
+    #    Editorial-Familie: erlaubt ist auch der Direktaufruf der Messfunktion
+    #    `editorial_review_gate.evaluate_path` – genau das ruft die Collector-
+    #    Funktion des Publish-Gates intern auf (keine zweite Messregel).
+    for collector in ("check_length_failures", "seo_audit_failures",
+                      "affiliate_profi_failures", "affiliate_integrity_failures",
+                      "affiliate_intent_failures", "offenlegung_failures",
+                      "title_integrity_failures", "keyword_failures",
+                      "readability_failures", "textverstaendnis_failures"):
+        if f"publish_gate.{collector}" not in engine and f".{collector}(" not in engine:
+            out.append((f"C19", f"scripts/{RELEASE_ENGINE}: misst nicht über "
+                                f"`publish_gate.{collector}` – eine zweite "
+                                "Messregel wäre eine zweite Ampel."))
+            break
+    editorial_ueber_collector = "publish_gate.editorial_review_failures" in engine
+    editorial_ueber_messfunktion = ("editorial_review_gate" in engine
+                                    and "evaluate_path(" in engine)
+    if not (editorial_ueber_collector or editorial_ueber_messfunktion):
+        out.append((f"C19", f"scripts/{RELEASE_ENGINE}: misst nicht über "
+                            "`publish_gate.editorial_review_failures` oder "
+                            "`editorial_review_gate.evaluate_path` – eine zweite "
+                            "Messregel wäre eine zweite Ampel."))
+    if "DRY_RUN = True" not in engine:
+        out.append((f"C19", f"scripts/{RELEASE_ENGINE}: erzwingt keinen Beweislauf "
+                            "(publish_gate.DRY_RUN = True fehlt) – die Scorecard "
+                            "dürfte nebenbei heilen (C15-Verstoß)."))
+    if RELEASE_ENGINE not in GUARDS:
+        out.append((f"C19", f"scripts/{RELEASE_ENGINE} steht nicht in GUARDS – ihr "
+                            "Selbsttest läuft nicht im vertraglichen Minimum (C6)."))
+    return out
+
+
 # --- C18: Pflicht-Check-Vertrag (der Name im Branch-Schutz ist ein Vertrag) ---
 # Auslöser (19.09.2026, Nachtrag zu #316 / PR #317): Das neue PR-Gate
 # integrity-lock.yml meldete sich bei GitHub als Check „lock" – die Job-ID, weil
@@ -1300,6 +1414,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     runbook_pfad = str(dauerz.get("runbook") or "")
     checks += c18_dauerzustand(dauerz, script_texts.get(PFLICHT_CHECK_WACHE, ""),
                                _read(os.path.join(root, runbook_pfad)) if runbook_pfad else "")
+    checks += c19_release_ssot(script_texts, root=root)
     return checks
 
 
@@ -1365,6 +1480,15 @@ RULE_TEXT = {
            "meldet genau diesen Befund als BEKANNT statt als Vorfall, jeder andere bleibt "
            "rot, und `--strict` zieht auch den bekannten Befund wieder auf Exit 1 "
            "(20.09.2026).",
+    "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
+           "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
+           "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
+           "Eskalation, Falsch-Positiv-Protokoll, Freigabeprozess und Siegel – "
+           "und scripts/release_scorecard.py misst ausschließlich über die "
+           "Publish-Gate-Collectoren, als Beweislauf ohne Heilung, mit "
+           "versiegeltem Versionsnachweis. Wer eine blockierende Prüfung zur "
+           "Warnung herabstuft oder eine zweite Messregel einzieht, macht die "
+           "Scorecard zur Lüge (Befund 10, 03.10.2026).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -1373,7 +1497,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C10": "Token-Broker", "C11": "Token-Lebenszyklus", "C12": "Label-Garantie",
          "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing",
          "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag",
-         "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check"}
+         "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check",
+         "C19": "Release-Scorecard"}
 
 
 def render_md(checks, ok_notes=()):
@@ -1788,6 +1913,17 @@ def _selftest():
                         "(das wäre Scheingrün auf Dauer).")
     if not c18_dauerzustand(_dauer(), wache_ok, "anderer Text"):
         failures.append("C18: Runbook-Abschnitt der Dauerzustand-Erklärung fehlt, meldet nicht.")
+    # --- C19: Release-Scorecard – die SSOT der Produktionswahrheit ---------------
+    echtes_script = {RELEASE_ENGINE: _read(os.path.join(BLOG_DIR, "scripts", RELEASE_ENGINE))}
+    if c19_release_ssot(echtes_script):
+        failures.append(f"C19: der echte Zustand wird beanstandet: "
+                        f"{c19_release_ssot(echtes_script)}")
+    if not c19_release_ssot({}):
+        failures.append("C19: fehlende Engine bleibt unentdeckt.")
+    blind = {RELEASE_ENGINE: "print('hallo')"}
+    if not [f for f in c19_release_ssot(blind) if "Collector" in f[1] or "DRY_RUN" in f[1]]:
+        failures.append("C19: eine Engine ohne Publish-Gate-Collectoren und ohne "
+                        "Beweislauf-Erzwingung bleibt unentdeckt (zweite Messregel).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
