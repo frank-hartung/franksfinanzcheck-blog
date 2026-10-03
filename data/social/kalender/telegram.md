@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 03.10.2026 12:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 17:09 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 03. Oktober 2026
-- **07:00** ⚪ Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
 ### So, 04. Oktober 2026
 - **07:00** ⏳ Finanzielle Freiheit erreichen: Denke dich reich – Geld — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/

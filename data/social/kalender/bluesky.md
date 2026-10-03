@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 03.10.2026 12:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 17:09 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Sa, 03. Oktober 2026
-- **08:15** ⚪ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
 - **12:15** ⚪ Preisgarantie Gas: So sicherst du günstige Tarife — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### So, 04. Oktober 2026
