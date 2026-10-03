@@ -1,175 +1,101 @@
 {
   "target": 6,
-  "ready": 6,
-  "pool_size": 9,
-  "generated_at": "2026-10-03T13:36:41Z",
+  "ready": 2,
+  "pool_size": 5,
+  "generated_at": "2026-10-03T14:02:58Z",
   "candidates": [
     {
-      "slug": "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
+      "slug": "2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
       "ready": true,
-      "sha256": "7d108d9bb6000c59d2459cd1a59582f9e023ee4298f814b14a9a809cb196d331",
-      "score": 0.874,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
-      "ready": true,
-      "sha256": "27814e4ba371e87d47cb84b878d1b96e73b131c25f79e1fec56adc5e74ad96ea",
-      "score": 0.892,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
-      "ready": true,
-      "sha256": "fe34ba9ba3359784d88f49e918e11c1d5405b61aea4818e3a82609bb119cdbc1",
-      "score": 0.892,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
-      "ready": true,
-      "sha256": "33d743d5b44abf23acccfc5fb3e35375586ec244891d872bf7bf29e09255b0b7",
-      "score": 0.904,
+      "sha256": "ff4e6af57578b8368009f78ea2c761f3e09ba80bd15be719001d4f99a8f9d5f6",
+      "score": 0.96,
       "parts": {
         "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-03-balkonkraftwerk-foerderung-2026-deine-optionen-fuer-zusaetzl",
+      "ready": true,
+      "sha256": "db12cd65994a837cb3378ff9c45ef3aba79a2bc301a55495913d4612df4ceb70",
+      "score": 0.876,
+      "parts": {
+        "spelling": 0.8,
         "meta": 0.85,
         "structure": 1.0,
-        "typography": 0.92,
+        "typography": 0.88,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
     },
     {
-      "slug": "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
-      "ready": true,
-      "sha256": "303f2a5e3da88d9c2ac4e1020cdb174db3949922b9d807461b1bf6785d2d719c",
-      "score": 0.878,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
+      "slug": "2026-10-03-die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen",
       "ready": false,
-      "sha256": "afba0c6ed664e6687fda64ecfb1ef4c57707e93ed928c6b22574ab74faf7867b",
+      "sha256": "9902bc0968fa1f1f2b97d27dd127c78349c0183b2a25fbb6f7782bca191807b6",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
       "details": [
-        "🛑 2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-10-03-die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.95,
+      "score": 0.872,
       "parts": {
         "spelling": 0.8,
-        "meta": 1.0,
+        "meta": 0.85,
         "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
-      "ready": true,
-      "sha256": "9c8031b68e3f7450b40ac151556a0074fb50357c65a17c5b1baaeb37fc727242",
-      "score": 0.924,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
+        "typography": 0.84,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
     },
     {
-      "slug": "2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher",
+      "slug": "2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
       "ready": false,
-      "sha256": "38d68f6ce70f4da6da90896c1ff8524ad61a6c839bf548114fb9d41a163a89c2",
-      "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026",
+      "sha256": "37c992f61eba06d359f6887d4e642db7f6f2c32da1665f8e13b64a91fe4fc79c",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026",
+        "🛑 2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.912,
+      "score": 0.851,
       "parts": {
         "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.92,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz",
+      "slug": "2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-stromversorgung",
       "ready": false,
-      "sha256": "994a0a1903d7555f1743a6f71fa024e1fe42e5d7a7041f32d340231a48311328",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
+      "sha256": "f33cbe0e48aadeafa8de964e9fac9e6861fa9c843f60aa6f4c327ef13f025424",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
+        "🛑 2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-stromversorgung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.92,
+      "score": 0.871,
       "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
+        "spelling": 0.94,
+        "meta": 0.85,
+        "structure": 0.7,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.75
       }
     }
-  ],
-  "recert": {
-    "at": "2026-10-03T13:36:41Z",
-    "renewed": [
-      "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
-      "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
-      "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
-      "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
-      "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
-      "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
-      "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
-      "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz"
-    ],
-    "tool": "scripts/reserve_recert.py"
-  }
+  ]
 }

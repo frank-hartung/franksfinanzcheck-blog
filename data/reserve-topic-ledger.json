@@ -14,9 +14,11 @@
   "Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (so-nutzt-du-die-balkonkraftwerk-foerderung-geld-zurueck-vom-s) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: balkonkraftwerk-foerderung-2026-deine-optionen-fuer-zusaetzl",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "letzter_erfolg": "2026-10-03",
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2027-04-01"
   },
   "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
     "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
@@ -66,9 +68,10 @@
   "Die Vorteile von Online-Konten und wie du sie nutzt": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (online-konten-so-sparst-du-gebuehren-und-zeit-im-alltag) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2026-10-04"
   },
   "Die besten Apps für das Sparen von Geld": {
     "abgleich_fehler": 1,
@@ -116,10 +119,10 @@
   },
   "Flugverspätung: So bekommst du deine Entschädigung": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [inhalt] (leere Antwort (GEMINI); Profi-Gate: nur 764 Wörter / 5720 Zeichen (Premium: ≥1.400 Wörter und ≥10.000 Zeichen); keine Faustregel markiert (RS3))",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29",
-    "sperre_bis": "2026-10-02"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2026-10-04"
   },
   "Frugal leben mit Familie: So klappt Sparen auch mit Kindern": {
     "abgleich_fehler": 1,
@@ -196,9 +199,11 @@
   "Interrail und Bahncard: Günstig mit dem Zug durch Europa": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (interrail-bahncard-so-sparst-du-bei-der-europa-zugreise) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "letzter_erfolg": "2026-10-03",
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2027-04-01"
   },
   "Jahreskosten fürs Auto minimieren": {
     "abgleich_fehler": 1,
@@ -217,9 +222,10 @@
   "Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (konto-wechseln-leicht-gemacht-dein-schneller-leitfaden) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2026-10-04"
   },
   "Krankenzusatzversicherung: Welche Bausteine sich lohnen": {
     "abgleich_fehler": 1,
@@ -239,8 +245,11 @@
   "Photovoltaik: Lohnt sich eine Solaranlage 2026?": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (photovoltaik-2026-wann-rechnet-sich-die-sonne-wirklich) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
-    "letzter_versuch": "2026-09-26"
+    "grund": "produziert: photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-03",
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2027-04-01"
   },
   "Preiswerter DSL-Anschluss für Zuhause": {
     "fehler": 0,
@@ -328,9 +337,11 @@
   "Stromanbieter-Insolvenz: Was du jetzt wissen musst": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (stromanbieter-pleite-so-bleibt-dein-licht-trotzdem-an) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: stromanbieter-pleite-so-sicherst-du-deine-stromversorgung",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "letzter_erfolg": "2026-10-03",
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2027-04-01"
   },
   "Stromkosten senken mit cleveren Haushaltsgeräten": {
     "fehler": 1,
@@ -439,9 +450,11 @@
   "Wohnmobil mieten statt kaufen: Was günstiger ist": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (wohnmobil-mieten-so-sparst-du-im-vergleich-zum) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "letzter_erfolg": "2026-10-03",
+    "letzter_versuch": "2026-10-03",
+    "sperre_bis": "2027-04-01"
   },
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
     "abgleich_fehler": 1,
