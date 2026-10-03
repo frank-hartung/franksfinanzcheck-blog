@@ -40,6 +40,7 @@ AUFRUF:
 from __future__ import annotations
 
 import argparse
+import contextlib
 import datetime
 import http.server
 import json
@@ -47,6 +48,7 @@ import os
 import re
 import socketserver
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -351,7 +353,46 @@ def ping_n8n(url: str | None = None) -> dict[str, Any]:
 #  SELBSTTEST (Offline & hermetisch)
 # =====================================================================
 
+@contextlib.contextmanager
+def _ablage_im_sandkasten():
+    """Lenkt Log und Zustand der Bruecke waehrend des Selbsttests in einen
+    Wegwerf-Ordner.
+
+    WARUM (03.10.2026, Gate rot auf main · Schritt "Governance-Selbsttests"):
+    `selftest()` schrieb echte Zeilen nach data/n8n_bridge_log.jsonl und
+    verbog data/n8n_bridge_state.json. Der Selbsttest-Runner meldet das als
+    C15-Bruch – zu Recht: Ein Pruef-Aufruf heilt nicht und hinterlaesst
+    nichts. Nebenwirkung in der Praxis: Jeder lokale Testlauf erzeugte
+    Diff-Rauschen, das versehentlich mitcommittet werden konnte.
+
+    Die Pfade sind Modul-Globale und werden erst beim Schreiben gelesen –
+    Umbiegen auf Zeit genuegt, der Rueckbau steht im finally.
+    """
+    global BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
+    echt_state, echt_log = BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
+    with tempfile.TemporaryDirectory(prefix="n8n-bridge-selftest-") as sandkasten:
+        # Den echten Zustand hineinkopieren, damit der Test denselben
+        # Ausgangspunkt sieht wie der Normalbetrieb.
+        kopie = os.path.join(sandkasten, "n8n_bridge_state.json")
+        if os.path.exists(echt_state):
+            with open(echt_state, encoding="utf-8") as quelle:
+                with open(kopie, "w", encoding="utf-8") as ziel:
+                    ziel.write(quelle.read())
+        BRIDGE_STATE_PATH = kopie
+        BRIDGE_LOG_PATH = os.path.join(sandkasten, "n8n_bridge_log.jsonl")
+        try:
+            yield sandkasten
+        finally:
+            BRIDGE_STATE_PATH, BRIDGE_LOG_PATH = echt_state, echt_log
+
+
 def selftest() -> bool:
+    """Selbsttest, der den Arbeitsbaum nicht anfasst (C15)."""
+    with _ablage_im_sandkasten():
+        return _selftest_kern()
+
+
+def _selftest_kern() -> bool:
     """Führt Offline-Prüfungen der n8n-Bridge-Logik durch."""
     print("🔬 Starte n8n-Bridge Selbsttest...")
 
