@@ -73,6 +73,7 @@ REGELN = {
     "T7": "Routing vollständig – jede Pflicht-Aufgabe hat eine Kette",
     "T8": "Verdrahtung – Runbook, Cockpit und npm-Skripte existieren",
     "T9": "Schlüssel-Durchreichung – KI-Workflows bekommen ≥2 Gratis-Schlüssel",
+    "T10": "Kostensperre – jede Geldfläche außerhalb der Textkette ist verriegelt",
 }
 
 # Aufgaben, für die eine Kette existieren MUSS (T7). Jede entspricht
@@ -444,6 +445,46 @@ def t9_schluessel_durchreichung(ssot: dict) -> list[str]:
     return befunde
 
 
+def t10_kostensperre(ssot: dict) -> list[str]:
+    """Die Geldflächen AUSSERHALB der Textkette müssen verriegelt sein.
+
+    WARUM DIESE REGEL ZUM TRANSPORTWEG GEHÖRT (03.10.2026)
+    T1 sichert, dass im LLM-Pfad kein kostenpflichtiger Weg mehr
+    EXISTIERT. Zwei Flächen daneben – Vorlese-Stimme und
+    Rechtschreibung – blieben bewusst erhalten, weil sie echte Qualität
+    liefern und je einen kostenlosen Normalbetrieb haben. Sie wurden
+    deshalb nicht gelöscht, sondern verriegelt (data/kostensperre.yaml).
+
+    Ohne diese Regel hinge der Schutz an einer zweiten Wache, die
+    niemand aufruft. Zwei Verträge, die voneinander nichts wissen,
+    laufen auseinander – und zwar immer in die teure Richtung. T10
+    fragt die Kostensperre also aus dieser Richtung ab und meldet
+    zusätzlich, wenn eine Fläche offen steht.
+    """
+    befunde: list[str] = []
+    try:
+        import kostensperre
+    except ImportError:
+        return ["T10: scripts/kostensperre.py fehlt – die Geldflächen "
+                "außerhalb der Textkette wären ungeschützt."]
+
+    sperr_ssot = kostensperre.lade_ssot()
+    for fund in kostensperre.pruefen(sperr_ssot):
+        befunde.append(f"T10: {fund}")
+
+    for eintrag in sperr_ssot.get("flaechen", []):
+        if not isinstance(eintrag, dict):
+            continue
+        fid = eintrag.get("id", "")
+        if fid and kostensperre.erlaubt(fid, sperr_ssot):
+            befunde.append(
+                f"T10: Geldfläche `{fid}` ({eintrag.get('name', fid)}) ist "
+                "ENTSICHERT. Das darf vorkommen – aber nie unbemerkt. "
+                f"Begründung: {eintrag.get('grund', '—')} "
+                f"({eintrag.get('datum', 'ohne Datum')}).")
+    return befunde
+
+
 PRUEFER = {
     "T1": t1_kostenregel,
     "T2": t2_nur_implementierte,
@@ -454,6 +495,7 @@ PRUEFER = {
     "T7": t7_routing_vollstaendig,
     "T8": t8_verdrahtung,
     "T9": t9_schluessel_durchreichung,
+    "T10": t10_kostensperre,
 }
 
 
@@ -719,6 +761,36 @@ def selftest() -> list[str]:
     finally:
         paid_probe.unlink(missing_ok=True)
 
+    # ST9c: T10 muss eine aufgeweichte Kostensperre bemerken.
+    #       Geprüft wird an einer KOPIE der SSOT – die echte Datei bleibt
+    #       unangetastet, ein Prüf-Aufruf heilt und beschädigt nichts (C15).
+    try:
+        import tempfile
+
+        import kostensperre
+        echte_ssot = kostensperre.SSOT
+        with tempfile.TemporaryDirectory(prefix="t10-probe-") as ordner:
+            gefaelscht = Path(ordner) / "kostensperre.yaml"
+            daten = kostensperre.lade_ssot()
+            # Freigabe ohne Begründung: muss als Versehen abgelehnt werden.
+            if daten.get("flaechen"):
+                daten["flaechen"][0]["freigegeben"] = True
+                daten["flaechen"][0].pop("grund", None)
+                daten["flaechen"][0].pop("datum", None)
+            gefaelscht.write_text(yaml.safe_dump(daten, allow_unicode=True),
+                                  encoding="utf-8")
+            kostensperre.SSOT = gefaelscht
+            try:
+                if not t10_kostensperre(echt):
+                    fehler.append("Sabotage 'Kostensperre aufgeweicht': T10 "
+                                  "hat die unbegründete Freigabe nicht "
+                                  "bemerkt.")
+            finally:
+                kostensperre.SSOT = echte_ssot
+    except ImportError:
+        fehler.append("Sabotage 'Kostensperre': scripts/kostensperre.py "
+                      "nicht importierbar.")
+
     # ST9b: Die Brücken-Erkennung muss auf einer Probe anschlagen.
     probe = ROOT / "scripts" / ".transportweg_sabotage_probe.py"
     try:
@@ -779,7 +851,7 @@ def main() -> int:
                 print(f"   · {f}")
             return 2
         print("✅ Transportweg-Selbsttest grün "
-              "(Positivprobe + 15 Sabotage-Proben + 2 Driftproben).")
+              "(Positivprobe + 16 Sabotage-Proben + 2 Driftproben).")
         return 0
 
     try:

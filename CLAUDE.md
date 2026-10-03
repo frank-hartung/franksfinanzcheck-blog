@@ -204,6 +204,27 @@ Anthropic-API) für jeden bestehenden und jeden neuen Artikel.
   **Eine Quelle, zwei Ausspielwege** – nie einen der beiden separat pflegen.
 - Runbook: `docs/ANLEITUNG-FAKTENFRISCHE.md`.
 
+## Kostensperre: Geldflächen sind verriegelt, nicht gelöscht
+
+**SSOT `data/kostensperre.yaml` · Wache `scripts/kostensperre.py` · Vertrag T10**
+
+Zwei Flächen außerhalb der Textkette können Geld kosten: die
+Vorlese-Stimme (ElevenLabs) und die Rechtschreibung auf ZEIT-Niveau.
+Beide bleiben im Code, sind aber **fail-closed verriegelt**: Ein
+gesetztes Secret allein löst nichts mehr aus. Entsichern geht nur über
+einen Commit in der SSOT – mit `grund` und `datum`, sonst wirkt die
+Freigabe nicht.
+
+```bash
+npm run kosten:sperre     # Bericht
+npm run kosten:pruefen    # Wache (CI)
+npm run test:kosten       # Selbsttest + Vertragstests
+```
+
+Regel: **Neue Geldfläche → Eintrag in `data/kostensperre.yaml` und
+Aufruf von `kostensperre.wache(<id>)` an der Engstelle.** T10 wird sonst
+rot. Runbook: `docs/ANLEITUNG-KOSTENSPERRE.md`.
+
 ## KI-Transportweg: ein Modell, drei Wege, 0 € (seit 03.10.2026)
 
 Jeder Modell-Ruf des Blogs geht durch **einen** Zugang

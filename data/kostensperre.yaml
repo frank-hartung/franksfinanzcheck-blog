@@ -1,0 +1,114 @@
+# ============================================================
+#  KOSTENSPERRE – Single Source of Truth aller Geldflächen
+#  ------------------------------------------------------------
+#  Eingerichtet 03.10.2026. Wache: scripts/kostensperre.py
+#  Vertrag: scripts/ki_transportweg.py (Regel T10)
+#
+#  WARUM ES DIESE DATEI GIBT
+#  Der KI-Transportweg ist seit dem 03.10.2026 strukturell kostenfrei:
+#  Es gibt dort keinen kostenpflichtigen Pfad mehr, den man vergessen
+#  könnte (Regel T1). Zwei Flächen AUSSERHALB der Textkette blieben
+#  bewusst erhalten, weil sie echte Qualität liefern und jeweils einen
+#  kostenlosen Normalbetrieb haben:
+#
+#    · die Vorlese-Stimme der Artikel (ElevenLabs → edge → piper)
+#    · die Rechtschreib-Prüfung auf ZEIT-Niveau (Premium → offline LT1–LT4)
+#
+#  Beide kosten heute 0 €, weil schlicht kein Schlüssel gesetzt ist.
+#  GENAU DAS ist die Gefahr: Ein Zustand, der nur deshalb gratis ist,
+#  weil jemand etwas vergessen hat, ist keine Zusicherung. Er kippt
+#  still, sobald irgendwann ein Secret gesetzt wird – und die Rechnung
+#  kommt einen Monat später.
+#
+#  WIE DER SCHREIBSCHUTZ WIRKT
+#  Ein gesetzter Schlüssel reicht NICHT mehr aus, um Geld auszugeben.
+#  Der kostenpflichtige Zweig fragt vorher scripts/kostensperre.py, und
+#  die antwortet fail-closed: gesperrt, solange hier nicht ausdrücklich
+#  etwas anderes steht. Entsichern geht nur über diese Datei – also über
+#  einen sichtbaren, überprüfbaren Commit mit Begründung und Datum.
+#  Ein vergessenes Secret kann keine Kosten mehr auslösen.
+#
+#  WAS DER SCHUTZ NICHT TUT
+#  Er löscht nichts. Beide Premium-Pfade bleiben vollständig im Code und
+#  sind innerhalb einer Minute wieder nutzbar (freigegeben: true +
+#  grund + datum). Qualität bleibt erreichbar, nur eben nicht aus
+#  Versehen.
+# ============================================================
+
+version: 1
+stand: "2026-10-03"
+
+# ------------------------------------------------------------------
+#  VERTRAGSREGELN (geprüft von scripts/kostensperre.py --pruefen
+#  und von scripts/ki_transportweg.py, Regel T10)
+# ------------------------------------------------------------------
+regeln:
+  # Fail-closed: Was hier nicht ausdrücklich freigegeben ist, ist gesperrt.
+  # Eine unbekannte Fläche gilt ebenfalls als gesperrt.
+  standard_gesperrt: true
+  # Eine Freigabe ohne Begründung und Datum ist keine Entscheidung,
+  # sondern ein Versehen – die Wache lehnt sie ab.
+  freigabe_braucht_grund: true
+  freigabe_braucht_datum: true
+  # Jede Fläche muss einen kostenlosen Normalbetrieb benennen. Ohne
+  # Rückfallweg wäre die Sperre ein Ausfall statt eines Schutzes.
+  jede_flaeche_braucht_gratis_weg: true
+
+# ------------------------------------------------------------------
+#  GELDFLÄCHEN
+#  modul/funktion = die Engstelle, die die Sperre fragen MUSS.
+#  Ändert sich der Name, meldet T10 den Bruch.
+# ------------------------------------------------------------------
+flaechen:
+
+  - id: vorlese_stimme
+    name: "Vorlese-Stimme der Artikel (ElevenLabs)"
+    freigegeben: false
+    modul: "scripts/ff_voice_backends.py"
+    funktion: "get_elevenlabs_api_key"
+    endpunkt: "api.elevenlabs.io"
+    schluessel_umgebung:
+      - ELEVENLABS_API_KEY
+      - ELEVEN_API_KEY
+      - ELEVENLABS_APIKEY
+      - AGENT_REACH_ELEVENLABS_KEY
+      - AGENT_REACH_API_KEY
+      - AGENT_REACH_TTS_KEY
+    gratis_weg: "edge → piper (lokal, ohne Schlüssel, bereits Normalbetrieb)"
+    wirkung_bei_sperre: >-
+      get_elevenlabs_api_key() liefert eine leere Zeichenkette. Die
+      bestehende Kette fällt damit genau so zurück wie bei einem fehlenden
+      Schlüssel – kein Sonderpfad, kein Abbruch, nur eine Stufe weiter.
+    qualitaetsverlust: >-
+      Hörbar. edge klingt synthetischer als ElevenLabs. Deshalb wurde
+      gesperrt statt gelöscht: Die Entscheidung bleibt jederzeit umkehrbar.
+
+  - id: rechtschreibung_premium
+    name: "Rechtschreibung auf ZEIT-Niveau (Premium-Prüfdienst)"
+    freigegeben: false
+    modul: "scripts/zeit_rechtschreibung.py"
+    funktion: "zugang_ermitteln"
+    endpunkt: "api.languagetool.org"
+    schluessel_umgebung:
+      - ZR_API_URL
+      - ZR_USERNAME
+      - ZR_API_KEY
+      - LT_API_URL
+      - LT_USERNAME
+      - LT_API_KEY
+      - LT_APIKEY
+    gratis_weg: "Offline-Engine LT1–LT4 (deterministisch, bereits Normalbetrieb)"
+    wirkung_bei_sperre: >-
+      zugang_ermitteln() liefert nie den Modus "premium". Der Offline-Pfad
+      ist ohnehin der Normalbetrieb, der Unterschied ist im Ergebnis gering.
+    qualitaetsverlust: >-
+      Gering. LT1–LT4 laufen deterministisch und ohne Netz; der Premium-
+      Dienst findet zusätzlich einige Stil- und Grammatikfälle.
+
+# ------------------------------------------------------------------
+#  NICHT HIER AUFGEFÜHRT – und warum
+#  Der LLM-Transportweg (groq, nvidia, cloudflare, gemini) braucht keine
+#  Sperre: Dort EXISTIERT kein kostenpflichtiger Pfad mehr. Regel T1
+#  hält diesen Zustand über SSOT, Client, alle Skripte und alle
+#  Workflows. Eine Sperre für etwas, das es nicht gibt, wäre Theater.
+# ------------------------------------------------------------------

@@ -735,6 +735,16 @@ jobs:
           # Zeigt Engines, Rezept-Version UND den gefundenen Dekoder an.
           python3 scripts/ff_voice_audio.py --engines || true
 
+      - name: Kostensperre belegen (vor jeder Geldflaeche)
+        # WARUM VOR DER VERTONUNG (03.10.2026)
+        # Dieser Job reicht ELEVENLABS_API_KEY durch. Frueher genuegte
+        # ein gesetztes Secret, damit kostenpflichtig vertont wird – ein
+        # vergessenes Secret waere eine monatliche Rechnung ohne
+        # Fehlermeldung gewesen. Jetzt entscheidet data/kostensperre.yaml,
+        # und dieser Schritt beweist, dass der Riegel verdrahtet ist,
+        # BEVOR der teure Schritt laeuft. Fail-closed: Exit 1 stoppt.
+        run: python3 scripts/kostensperre.py --pruefen
+
       - name: Vorlese-Tonspuren erzeugen (männlich, DE+EN ohne Umschalter – ElevenLabs Premium, kostenloser Fallback)
         # WANDUHR FÜR DEN SCHLIMMSTEN FALL (Härtung 10.09.2026):
         # Normal braucht dieser Schritt Budget (20 Min., Backfill 90)
@@ -749,6 +759,9 @@ jobs:
         timeout-minutes: 120
         continue-on-error: true
         env:
+          # Das Secret wird weiter durchgereicht – aber es allein kann
+          # nichts mehr ausloesen. Der Schreibschutz in
+          # data/kostensperre.yaml entscheidet (Schritt davor belegt es).
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
           mkdir -p /tmp/ff-voice-cache

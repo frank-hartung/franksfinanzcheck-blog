@@ -92,6 +92,15 @@ import subprocess
 import sys
 import wave
 
+# Die Kostensperre liegt im selben Ordner. Nicht jeder Aufrufer setzt
+# sys.path vorher (social_video importiert erst zur Laufzeit), deshalb
+# hier selbst dafuer sorgen – ein ImportError wuerde den Schutz still
+# aushebeln, und genau das darf nicht passieren.
+_HIER = os.path.dirname(os.path.abspath(__file__))
+if _HIER not in sys.path:
+    sys.path.insert(0, _HIER)
+import kostensperre  # noqa: E402  – fail-closed Schutz vor Geldflaechen
+
 # ---------------------------------------------------------------------------
 # Stimmen-Kette
 # ---------------------------------------------------------------------------
@@ -117,7 +126,25 @@ def _env_first(*names: str) -> str:
     return ""
 
 def get_elevenlabs_api_key() -> str:
-    return _env_first(
+    """Schluessel fuer die Premium-Stimme – hinter der Kostensperre.
+
+    SCHREIBSCHUTZ (03.10.2026, data/kostensperre.yaml)
+    Ein gesetztes Secret allein darf keine Rechnung mehr ausloesen.
+    Vorher galt: Schluessel da -> ElevenLabs laeuft. Damit haette ein
+    einziges vergessenes Secret die Vertonung dauerhaft kostenpflichtig
+    gemacht, ohne dass irgendwo ein Fehler sichtbar geworden waere.
+
+    Jetzt entscheidet die SSOT, nicht die Umgebung. Ist die Flaeche
+    gesperrt, liefert diese Funktion eine leere Zeichenkette – exakt so,
+    wie wenn kein Schluessel gesetzt waere. Die bestehende Kette faellt
+    dadurch von allein auf edge -> piper zurueck: kein Sonderpfad, kein
+    Abbruch, nur eine Stufe weiter.
+
+    Gesperrt heisst ausdruecklich NICHT geloescht: Der gesamte
+    ElevenLabs-Pfad bleibt erhalten und ist ueber einen begruendeten
+    Eintrag in data/kostensperre.yaml jederzeit wieder scharf.
+    """
+    schluessel = _env_first(
         "ELEVENLABS_API_KEY",
         "ELEVEN_API_KEY",
         "ELEVENLABS_APIKEY",
@@ -125,6 +152,13 @@ def get_elevenlabs_api_key() -> str:
         "AGENT_REACH_API_KEY",
         "AGENT_REACH_TTS_KEY",
     )
+    if not schluessel:
+        return ""
+    # Erst fragen, dann ausgeben. Die Meldung kommt nur, wenn wirklich
+    # jemand einen Schluessel gesetzt hat – sonst waere sie Rauschen.
+    if not kostensperre.wache("vorlese_stimme"):
+        return ""
+    return schluessel
 
 def get_elevenlabs_voice_id() -> str:
     return _env_first("ELEVENLABS_VOICE_ID", "ELEVEN_VOICE_ID") or ELEVENLABS_DEFAULT_VOICE

@@ -224,19 +224,50 @@ Offenlegungs-Gates dahinter – liegt der Qualitätsunterschied zwischen
 nachgelagerten Wachen ohnehin einebnen. Der Engpass dieses Blogs ist
 nicht die Modellqualität, sondern Faktenbelege und Freigaben.
 
-### Noch offen: zwei kostenpflichtige Flächen außerhalb der Textkette
+### Erledigt: die zwei Geldflächen außerhalb der Textkette sind verriegelt
 
-Beide sind **nicht** angetastet, weil sie nichts mit der Textproduktion
-zu tun haben und je einen kostenlosen Standardweg haben:
+**Auftrag Frank, 03.10.2026:** „Bitte für beide einen dauerhaften
+Schreibschutz einrichten, damit Kostenpflicht dauerhaft verhindert wird."
 
-| Fläche | Wo | Status |
+Ausdrücklich **nicht** gelöscht. Die Vorlese-Stimme von ElevenLabs klingt
+hörbar besser als der Gratis-Weg; eine Amputation hätte Qualität
+vernichtet, um ein Risiko zu lösen, das sich auch verriegeln lässt.
+
+| Fläche | Engstelle | Bei Sperre aktiv |
 |---|---|---|
-| **ElevenLabs** (Vorlese-Stimme) | `scripts/ff_voice_backends.py`, `deploy.yml` | Kette ist `elevenlabs → edge → piper`; ohne `ELEVENLABS_API_KEY` läuft automatisch der kostenlose Weg |
-| **ZEIT-Rechtschreibung Premium** | `zeit-rechtschreibung.yml` (`ZR_USERNAME`/`ZR_API_KEY`) | Offline-Modus LT1–LT4 ist immer verfügbar und bereits der Normalbetrieb |
+| **Vorlese-Stimme** (ElevenLabs) | `ff_voice_backends.get_elevenlabs_api_key` | `edge → piper` |
+| **Rechtschreibung Premium** | `zeit_rechtschreibung.zugang_ermitteln` | Offline LT1–LT4 |
 
-Beide würden sich nach demselben Muster entfernen lassen. Das ist eine
-Entscheidung über Hörqualität bzw. Prüftiefe, nicht über die
-Blogautomatik – deshalb wurde sie nicht vorweggenommen.
+**Das eigentliche Problem war nicht der Preis, sondern die Stille.** Beide
+Flächen kosteten 0 € – aber nur, weil kein Schlüssel gesetzt war. Ein
+Zustand, der allein davon lebt, dass jemand etwas vergessen hat, ist
+keine Zusicherung. Er kippt lautlos, sobald irgendwann ein Secret gesetzt
+wird, und die Rechnung kommt einen Monat später. Dieselbe Schadensklasse
+wie #514, nur mit Betrag.
+
+**Jetzt gilt:** Ein gesetztes Secret reicht nicht mehr aus. Beide Zweige
+fragen vor der ersten Ausgabe `scripts/kostensperre.py`, und die
+antwortet fail-closed – bei fehlender SSOT, unbekannter Fläche, bei
+`freigegeben` ungleich exakt `true` und bei einer Freigabe ohne `grund`
+und `datum`. Der letzte Punkt ist Absicht: Eine unbegründete Freigabe ist
+kein Beschluss, sondern ein Ausrutscher beim Editieren.
+
+Bei Sperre bricht nichts ab. Die Kette fällt genau so zurück wie bei
+einem fehlenden Schlüssel – eine Stufe weiter, mit einer Klartextzeile
+im Protokoll statt eines stillen Downgrades.
+
+**Umkehrbar in einer Minute:** `freigegeben: true` + `grund` + `datum` in
+`data/kostensperre.yaml`. Das verlangt einen sichtbaren Commit, und T10
+meldet die Fläche danach dauerhaft als ENTSICHERT. Entsichern ist
+erlaubt — unbemerkt entsichern nicht.
+
+**Abgesichert an sechs Stellen:** SSOT, Riegel mit 11 Sabotageproben,
+beide Engstellen im Code, Regel T10 im Transportweg-Vertrag,
+`governance_contract.GUARDS` (macht die Wache zur Pflicht) und je ein
+`--pruefen`-Schritt **vor** dem teuren Schritt in `deploy.yml` und
+`zeit-rechtschreibung.yml`.
+
+Runbook: `docs/ANLEITUNG-KOSTENSPERRE.md`.
 
 ---
 
