@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-03T10:39:28Z",
+  "generated_at": "2026-10-03T11:08:13Z",
   "modus": "kandidaten",
-  "commit": "7d0b3b33f5e9aa8b9fe89421dab248fd95383ec1",
+  "commit": "28b8c3ba75dbe9f702073ac6d0498b2af0079140",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "72bd76ef4193ae515ed4e3fdc35b95f706ebe9a8183c6ae4a93809e4235965fc",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
@@ -614,7 +614,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "2b2c56e6ff84fd8a898d62c0a0d4ca33f1a6611d4c719c30e4e55cab94561c34",
@@ -631,7 +631,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
       "sha256": "701c4a75803452633c6bc1aa7680a7464719b9f5fff4f3067d7759a989d83d43",
@@ -648,7 +648,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     }
   }
 }
