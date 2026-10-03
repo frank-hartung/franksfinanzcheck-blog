@@ -1,11 +1,34 @@
 # ============================================================
-#  DEPLOY AUF GITHUB PAGES (Branch gh-pages)
+#  DEPLOY AUF GITHUB PAGES (Branch gh-pages + offizielles Pages-Deployment)
 #
 #  Baut die Hugo-Website bei jedem Push auf 'main' sowie bei
-#  manueller / Workflow-Auslösung (workflow_dispatch) und
-#  pusht das erzeugte public/ in den Branch 'gh-pages'.
+#  manueller / Workflow-Auslösung (workflow_dispatch), pusht das
+#  erzeugte public/ zur Archivierung/Vertonungs-Cache in den Branch
+#  'gh-pages' UND liefert es zusätzlich über das offizielle GitHub-
+#  Pages-Deployment (Environment "github-pages") aus.
 #
 #  Hosting: GitHub Pages (Custom Domain: franksfinanzcheck.de)
+#
+#  ------------------------------------------------------------
+#  PREMIUM-FIX 03.10.2026 (Issue #537 – öffentliche Auslieferung
+#  dauerhaft unter Mindestziel):
+#  Die Pages-Konfiguration dieses Repos steht auf `build_type: workflow`
+#  und das Environment "github-pages" ist bereits mit einer
+#  Branch-Policy (main, gh-pages) angelegt – GitHub erwartet also ein
+#  offizielles Actions-Pages-Deployment (`actions/deploy-pages`), NICHT
+#  nur einen Push auf den `gh-pages`-Branch. Der reine `peaceiris`-Push
+#  wurde von GitHub Pages seit dem 30.09.2026 ~13:00 UTC schlicht
+#  ignoriert (letztes automatisches Pages-Deployment/Build:
+#  f641f413, 2026-09-30T13:00:07Z) – jeder Deploy-Lauf meldete danach
+#  "success", ohne dass je wieder ein Artikel öffentlich ausgeliefert
+#  wurde. `deploy_drift_guard.py` und das `deploy-gate` oben werten den
+#  `gh-pages`-Branch weiterhin als Cache-/Audit-Spur aus (Diff-Basis,
+#  Audio-Cache, Offsite-Backup) – das bleibt unverändert und schadet
+#  nicht, ist aber NICHT mehr die Quelle der Wahrheit für das, was
+#  öffentlich erreichbar ist. Das ist jetzt ausschließlich das Ergebnis
+#  des `actions/deploy-pages`-Jobs unten (Job `pages-deployment`),
+#  sichtbar über `GET /repos/.../deployments?environment=github-pages`.
+#  Siehe docs/publication-reliability.md (Befund 03.10.2026).
 # ============================================================
 name: Deploy auf GitHub Pages
 
@@ -55,6 +78,11 @@ on:
 
 permissions:
   contents: write
+  # Für das offizielle GitHub-Pages-Deployment (Job "pages-deployment",
+  # Issue #537 – ohne diese zwei Rechte bleibt `actions/deploy-pages`
+  # wirkungslos und die Site friert trotz "erfolgreichem" Lauf ein).
+  pages: write
+  id-token: write
 
 # ============================================================
 #  WARTESCHLANGE (Befund Issue #218, 08.09.2026)
@@ -771,3 +799,55 @@ jobs:
           # weiterhin korrekt aus dem letzten gh-pages-Stand.
           force_orphan: true
           cname: franksfinanzcheck.de
+
+      # ------------------------------------------------------------
+      # PREMIUM-FIX 03.10.2026 (Issue #537): Der Push oben hält NUR den
+      # `gh-pages`-Branch als Cache/Backup/Audit-Spur aktuell. Die Pages-
+      # Konfiguration dieses Repos ist `build_type: workflow` – ausliefern
+      # muss daher ein echtes Pages-Deployment (unten, Job
+      # "pages-deployment"). `upload-pages-artifact` verpackt denselben
+      # bereits fertigen `public/`-Stand (inkl. Vorlese-Audio) als
+      # Artefakt für `actions/deploy-pages`.
+      # ------------------------------------------------------------
+      - name: GitHub Pages konfigurieren (Workflow-Quelle)
+        uses: actions/configure-pages@v5
+
+      - name: Artefakt für offizielles Pages-Deployment hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  # ============================================================
+  #  OFFIZIELLES PAGES-DEPLOYMENT (Premium-Fix 03.10.2026, Issue #537)
+  #  ------------------------------------------------------------
+  #  Eigener Job, weil `actions/deploy-pages` an das GitHub-Environment
+  #  "github-pages" gebunden ist (eigene Deployment-Historie, eigene
+  #  Branch-Policy main/gh-pages, eigene URL-Ausgabe). Ohne diesen Job
+  #  bleibt die Live-Site exakt auf dem Stand des letzten Laufs
+  #  einstehen, der hier tatsächlich deployt hat – unabhängig davon,
+  #  wie viele `deploy`-Jobs danach "success" melden (siehe Befund
+  #  oben: eingefroren seit 2026-09-30T13:00 UTC trotz täglich vieler
+  #  erfolgreicher `gh-pages`-Pushes).
+  # ============================================================
+  pages-deployment:
+    name: An GitHub Pages ausliefern (Environment github-pages)
+    # WICHTIG: `deploy-gate` muss explizit in `needs` stehen, sonst ist
+    # `needs.deploy-gate.outputs.deploy` im `if:` unten nicht auswertbar
+    # und der Job würde NIE laufen (stiller Deploy-Ausfall, Issue-#537-Klasse).
+    needs: [deploy-gate, deploy]
+    if: needs.deploy-gate.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Deployment auslösen
+        id: deployment
+        uses: actions/deploy-pages@v4
