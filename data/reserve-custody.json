@@ -1,9 +1,37 @@
 {
-  "die-50-30-20-regel-einfach-erklaert": {
-    "seit": "2026-10-02",
-    "slug": "2026-10-02-die-50-30-20-regel-einfach-erklaert",
-    "titel": "Die 50-30-20-Regel einfach erklärt",
-    "zuletzt_im_pool": "2026-10-02",
+  "bankgebuehren-senken-7-ueberraschende-wege-zum-sparen": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
+    "titel": "Bankgebühren senken: 7 überraschende Wege zum Sparen",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
+    "titel": "Büroausstattung clever: absetzen – so sparst du 2026 Steuern",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "camping-2026-kostenfallen-vermeiden-clever-planen": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
+    "titel": "Camping 2026: Kostenfallen vermeiden & clever planen",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
+    "titel": "ETF-Sparplan: Vermögensaufbau ohne hohe Gebühren starten",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "frugalismus-familie-clever-sparen-ohne-verzicht": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
+    "titel": "Frugalismus Familie: So spart ihr clever und ohne Verzicht",
+    "zuletzt_im_pool": "2026-10-03",
     "zustand": "pool"
   },
   "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
@@ -25,13 +53,6 @@
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
     "zustand": "pool"
   },
-  "hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
-    "seit": "2026-10-02",
-    "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
-    "titel": "Hausratversicherung optimieren: Schutz prüfen und sparen",
-    "zuletzt_im_pool": "2026-10-02",
-    "zustand": "pool"
-  },
   "last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
     "seit": "2026-09-30",
     "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
@@ -46,11 +67,32 @@
     "zuletzt_im_pool": "2026-10-02",
     "zustand": "pool"
   },
-  "reisekrankenversicherung-so-vermeidest-du-teure": {
-    "seit": "2026-10-02",
-    "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
-    "titel": "Reisekrankenversicherung: So vermeidest du teure Arztkosten",
-    "zuletzt_im_pool": "2026-10-02",
+  "so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
+    "titel": "Stromanbieter wechseln: Raus aus der teuren Grundversorgung",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "stromrechnung-senken-20-strategien-fuer-dein": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
+    "titel": "Stromrechnung senken: 20 Strategien – Energiekosten senken",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher",
+    "titel": "Stromspeicher kaufen – Lohnt sich ein Batteriespeicher?",
+    "zuletzt_im_pool": "2026-10-03",
+    "zustand": "pool"
+  },
+  "vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz": {
+    "seit": "2026-10-03",
+    "slug": "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz",
+    "titel": "VPN Zuhause – Brauchst du das extra Sicherheitsnetz?",
+    "zuletzt_im_pool": "2026-10-03",
     "zustand": "pool"
   },
   "weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {

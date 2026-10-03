@@ -1,32 +1,17 @@
 {
   "target": 6,
   "ready": 6,
-  "pool_size": 6,
-  "generated_at": "2026-10-02T20:21:35Z",
+  "pool_size": 9,
+  "generated_at": "2026-10-03T09:39:49Z",
   "candidates": [
     {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "slug": "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
       "ready": true,
-      "sha256": "2a98107eeae80cae8c055fd1a19761e196256e81acea7a7b56062536c90b0979",
-      "score": 0.9,
+      "sha256": "398fc367871d411a1e98adcc4d73b0ae618267c35df256af7482f408563ac0b7",
+      "score": 0.874,
       "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
-      "ready": true,
-      "sha256": "7bd88a4bdbb6a49d7ecb3d1f9a81eec2e57fcbc1d46073f5f6f06cf16a17c97e",
-      "score": 0.856,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
+        "spelling": 0.7,
+        "meta": 0.85,
         "structure": 1.0,
         "typography": 0.96,
         "uniqueness": 1.0,
@@ -35,57 +20,135 @@
       }
     },
     {
-      "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
+      "slug": "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
       "ready": true,
-      "sha256": "187780e3c3bff7f0eaf2eee6cff860f8a8681d75477acf569be631c8de80c7df",
-      "score": 0.85,
+      "sha256": "1d8b962378b5793f6c6486b321370210c4daa98e1f6a325ee47a60fdce6e2df8",
+      "score": 0.892,
       "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
+        "spelling": 0.8,
+        "meta": 0.85,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
+      "ready": true,
+      "sha256": "1c430917bf31be199f43c12b3924579ae3af0c743cd37e18302d49b432650156",
+      "score": 0.892,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
+      "ready": true,
+      "sha256": "c9242bfea358d46938873e5b1b7939a506120d56bbd2a2f574e5dbd0b3af049d",
+      "score": 0.904,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
     },
     {
-      "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
+      "slug": "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
       "ready": true,
-      "sha256": "e83c9ec90e216964231a71667f3d6953499ab67efdd6b23cb3f8c6afc10b5251",
-      "score": 0.85,
+      "sha256": "1e65c202f2b2c6eb8974d10fd5ecbca2e67aab6f4e726613c8e30e013b780fe3",
+      "score": 0.878,
       "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
+        "spelling": 0.7,
+        "meta": 0.85,
         "structure": 1.0,
         "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
+      "ready": false,
+      "sha256": "3153576323ce91aeee2b6b4eae09a64dfbf2b18654d085c81962b4f20377d301",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+      "details": [
+        "🛑 2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
+      "ready": true,
+      "sha256": "d19e803a712bb9cbbde0a993801b7f500eca05777ab9067640232486072eab67",
+      "score": 0.924,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
       }
     },
     {
-      "slug": "2026-10-02-die-50-30-20-regel-einfach-erklaert",
-      "ready": true,
-      "sha256": "672d2bc500596b4fae71f49f91c3e62cc768b6a9cd55c3d9e66dc6571d612a06",
-      "score": 0.85,
+      "slug": "2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher",
+      "ready": false,
+      "sha256": "38d68f6ce70f4da6da90896c1ff8524ad61a6c839bf548114fb9d41a163a89c2",
+      "reason": "Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026",
+      "details": [
+        "🛑 2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.912,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "ready": true,
-      "sha256": "d8cb283be65caa98394ceb1178ebcfd084225cb1bcd946ffd18422f6e87f88b8",
-      "score": 0.86,
+      "slug": "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz",
+      "ready": false,
+      "sha256": "4c9fdc9d34350744221eb0374c49ab395d0354456a72c8cba7af05f3a23e5cd2",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
+      "details": [
+        "🛑 2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.92,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,

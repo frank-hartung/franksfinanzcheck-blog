@@ -1,1 +1,35 @@
-{}
+{
+  "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen": {
+    "first": "2026-10-03T09:27:24Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+    "hits": 1,
+    "laeufe": [
+      "run:37112596753"
+    ],
+    "last": "2026-10-03T09:39:49Z",
+    "lauf": "run:37112596753",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem artikel“ ×<n> (template-sprache – umformulieren)"
+  },
+  "2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher": {
+    "first": "2026-10-03T09:32:39Z",
+    "grund": "Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026",
+    "hits": 1,
+    "laeufe": [
+      "run:37112596753"
+    ],
+    "last": "2026-10-03T09:39:49Z",
+    "lauf": "run:37112596753",
+    "signatur": "redaktionelle ymyl-freigabe nicht bestanden: e<n>: veralteter artikelstand <n> in einem beitrag aus <n>"
+  },
+  "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz": {
+    "first": "2026-10-03T09:32:39Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
+    "hits": 1,
+    "laeufe": [
+      "run:37112596753"
+    ],
+    "last": "2026-10-03T09:39:49Z",
+    "lauf": "run:37112596753",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem ratgeber“ ×<n> (template-sprache – umformulieren)"
+  }
+}

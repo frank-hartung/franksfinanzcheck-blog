@@ -548,15 +548,6 @@
    "savings": ""
   }
  },
- "2026-10-02-die-50-30-20-regel-einfach-erklaert": {
-  "title": "Die 50-30-20-Regel einfach erklärt",
-  "ts": "2026-10-02T12:41:18+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-10-02-notgroschen-aufbauen-dein-finanzielles-sicherheitsnetz": {
   "title": "Notgroschen aufbauen: Dein finanzielles Sicherheitsnetz",
   "ts": "2026-10-02T12:41:20+00:00",
@@ -575,30 +566,12 @@
    "savings": ""
   }
  },
- "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
-  "title": "Hausratversicherung optimieren: Schutz prüfen und sparen",
-  "ts": "2026-10-02T16:21:55+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
-   "savings": ""
-  }
- },
  "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
   "title": "Preiswert surfen: So findest du den optimalen DSL‑Anschluss",
   "ts": "2026-10-02T16:22:01+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure": {
-  "title": "Reisekrankenversicherung: So vermeidest du teure Arztkosten",
-  "ts": "2026-10-02T16:21:58+00:00",
-  "design": {
-   "v": 3,
-   "badge": "VERSICHERUNGEN",
    "savings": ""
   }
  },
@@ -632,6 +605,87 @@
  "2026-10-02-stromfresser-finden-so-stoppst-du-heimliche-energiediebe": {
   "title": "Stromfresser finden: So stoppst du heimliche Energiediebe",
   "ts": "2026-10-02T21:37:55+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten": {
+  "title": "ETF-Sparplan: Vermögensaufbau ohne hohe Gebühren starten",
+  "ts": "2026-10-03T09:36:39+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern": {
+  "title": "Büroausstattung clever: absetzen – so sparst du 2026 Steuern",
+  "ts": "2026-10-03T09:36:33+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen": {
+  "title": "Camping 2026: Kostenfallen vermeiden & clever planen",
+  "ts": "2026-10-03T09:36:11+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht": {
+  "title": "Frugalismus Familie: So spart ihr clever und ohne Verzicht",
+  "ts": "2026-10-03T09:36:35+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung": {
+  "title": "Stromanbieter wechseln: Raus aus der teuren Grundversorgung",
+  "ts": "2026-10-03T09:36:37+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher": {
+  "title": "Stromspeicher kaufen – Lohnt sich ein Batteriespeicher?",
+  "ts": "2026-10-03T09:36:15+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz": {
+  "title": "VPN Zuhause – Brauchst du das extra Sicherheitsnetz?",
+  "ts": "2026-10-03T09:36:17+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen": {
+  "title": "Bankgebühren senken: 7 überraschende Wege zum Sparen",
+  "ts": "2026-10-03T09:36:09+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein": {
+  "title": "Stromrechnung senken: 20 Strategien – Energiekosten senken",
+  "ts": "2026-10-03T09:36:31+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
