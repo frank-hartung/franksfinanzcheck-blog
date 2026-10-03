@@ -223,7 +223,7 @@ waren nie betroffen – sie erscheinen ausschließlich als `bool()`. Fünf
 Regressionstests (`VerschwiegenheitTests`) frieren das ein.
 
 **5. Die Secret-Wache verriet das Secret.** Derselbe CodeQL-Lauf führte auf
-`b6_keine_secrets()` – die Regel, die Klartext-Schlüssel in der SSOT
+`b6_klartext_disziplin()` – die Regel, die Klartext-Schlüssel in der SSOT
 verbietet. Fand sie einen, schrieb sie dessen erste zwölf Zeichen in die
 Meldung. Diese Meldung geht auf die Konsole *und* in das eingecheckte
 `WERKBANK-STATUS.md`. Ausgerechnet im Moment des Fehlers hätte die Wache das
@@ -234,6 +234,11 @@ Fund**:
 B6: API-Schlüssel im Klartext in data/werkbank.yaml, Zeile 3 –
     gehört in GitHub-Secrets. Wert wird hier bewusst nicht wiederholt.
 ```
+
+Die Regel hieß vorher `b6_keine_secrets()`. Sie gibt Befunde zurück, keine
+Funde – der Name legte das Gegenteil nahe, weshalb jede Code-Analyse den
+Rückgabewert als Schlüsselmaterial wertete. Jetzt `b6_klartext_disziplin()`,
+nach dem Vorbild von `b9_domain_disziplin()`.
 
 Dazu eine Härtung beim Schreiben dieses Reports: Die unterste Leseebene
 (rohes HTML, wenn Crawl4AI und Jina ausfallen) schleppte `<nav>`, `<footer>`
