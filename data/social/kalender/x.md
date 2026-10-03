@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 03.10.2026 17:09 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 20:42 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### Sa, 03. Oktober 2026
-- **13:15** ⚪ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
-- **19:15** ⏳ Preisgarantie Gas: So schützt du dich vor Preissprüngen — _mythos_ · Launch  
+- **19:15** ⚪ Preisgarantie Gas: So schützt du dich vor Preissprüngen — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
 ### So, 04. Oktober 2026
 - **08:45** ⏳ DNS-Server wechseln: Schnelleres und sichereres Internet — _thread_ · Launch  
