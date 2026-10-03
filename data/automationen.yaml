@@ -322,3 +322,62 @@ regeln:
     throttle:
       max_pro_tag: 3
       max_pro_lauf: 3
+
+  # ==========================================================
+  #  10 · WHISPER-INBOX: SPRACHMEMO → ARTIKEL-ENTWURF (0 €)
+  #  Neue Aufnahme in data/whisper_inbox/ → lokale Whisper-Transkription
+  #  → Erzeugung eines Hugo-Drafts nach 4K-Prüfpfad & ZEIT-Standard.
+  # ==========================================================
+  - id: whisper-diktat-zu-entwurf
+    name: "Whisper-Aufnahme → Hugo-Entwurf & n8n-Benachrichtigung"
+    enabled: true
+    trigger:
+      typ: whisper_aufnahme
+      params:
+        inbox_dir: "data/whisper_inbox"
+    aktionen:
+      - typ: whisper_transkribieren
+        params:
+          datei_pfad: "{pfad}"
+          kategorie: "{kategorie}"
+      - typ: n8n_webhook
+        params:
+          event_typ: "draft_aus_whisper_erstellt"
+      - typ: protokoll
+        params:
+          text: "Whisper-Diktat {datei} erfolgreich in Entwurf umgewandelt."
+    dedupe_key: "whisper:{datei}"
+    throttle:
+      max_pro_tag: 10
+      max_pro_lauf: 3
+
+  # ==========================================================
+  #  11 · N8N-DISPATCHER: OMNICHANNEL SOCIAL TRIGGER (0 €)
+  #  Vom n8n-Workflow ausgelöstes Multichannel-Broadcasting.
+  # ==========================================================
+  - id: n8n-omnichannel-dispatch
+    name: "n8n-Signal → Omnichannel-Welle"
+    enabled: true
+    trigger:
+      typ: n8n_event
+      params:
+        typ: "omnichannel_dispatch"
+    filter:
+      - feld: artikel_slug
+        operator: nicht_leer
+    aktionen:
+      - typ: social_welle
+        params:
+          kanaele: ["mastodon", "bluesky", "telegram"]
+          winkel: "takeaway"
+          artikel_slug: "{artikel_slug}"
+      - typ: indexnow_ping
+        params:
+          slug: "{artikel_slug}"
+      - typ: protokoll
+        params:
+          text: "Omnichannel-Welle via n8n für {artikel_slug} ausgelöst."
+    dedupe_key: "n8n_dispatch:{artikel_slug}"
+    throttle:
+      max_pro_tag: 12
+      max_pro_lauf: 2

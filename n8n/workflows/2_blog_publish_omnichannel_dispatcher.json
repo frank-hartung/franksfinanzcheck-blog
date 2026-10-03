@@ -1,0 +1,117 @@
+{
+  "name": "2. Blog-Publish Omnichannel Dispatcher (Schaltwerk & IndexNow)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "blog-publish",
+        "options": {}
+      },
+      "id": "node-webhook-publish",
+      "name": "Webhook Blog Publish",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $json.body || $json;\nconst slug = item.slug || '2026-10-03-ratgeber';\nconst title = item.title || 'Neuer Ratgeber';\nconst url = `https://franksfinanzcheck.de/posts/${slug}/`;\n\nreturn [{\n  json: {\n    slug,\n    title,\n    url,\n    host: 'franksfinanzcheck.de',\n    key: 'f009361665a54db687353f8680e6f5c7',\n    keyLocation: 'https://franksfinanzcheck.de/f009361665a54db687353f8680e6f5c7.txt',\n    urlList: [url]\n  }\n}];"
+      },
+      "id": "node-code-parse",
+      "name": "Payload Aufbereiten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.indexnow.org/indexnow",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"host\": \"{{ $json.host }}\",\n  \"key\": \"{{ $json.key }}\",\n  \"keyLocation\": \"{{ $json.keyLocation }}\",\n  \"urlList\": {{ JSON.stringify($json.urlList) }}\n}",
+        "options": {}
+      },
+      "id": "node-indexnow-ping",
+      "name": "IndexNow Ping (Bing/Yandex)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [640, 160]
+    },
+    {
+      "parameters": {
+        "command": "python3 /workspace/blog/scripts/schaltwerk.py --run --event '{\"typ\":\"webhook\",\"daten\":{\"webhook\":{\"typ\":\"sofortpost\",\"kanal\":\"mastodon\",\"artikel_slug\":\"{{ $json.slug }}\"}}}'"
+      },
+      "id": "node-schaltwerk-social",
+      "name": "Schaltwerk Social Wave",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [640, 320]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "node-response-finish",
+      "name": "Abschluss Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 240]
+    }
+  ],
+  "connections": {
+    "Webhook Blog Publish": {
+      "main": [
+        [
+          {
+            "node": "Payload Aufbereiten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Payload Aufbereiten": {
+      "main": [
+        [
+          {
+            "node": "IndexNow Ping (Bing/Yandex)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Schaltwerk Social Wave",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IndexNow Ping (Bing/Yandex)": {
+      "main": [
+        [
+          {
+            "node": "Abschluss Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schaltwerk Social Wave": {
+      "main": [
+        [
+          {
+            "node": "Abschluss Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

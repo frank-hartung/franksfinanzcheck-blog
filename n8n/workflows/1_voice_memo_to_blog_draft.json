@@ -1,0 +1,111 @@
+{
+  "name": "1. Voice-Memo & Diktat zu Hugo Blogartikel (0 € Whisper)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice-memo",
+        "options": {}
+      },
+      "id": "node-webhook-in",
+      "name": "Webhook Sprachmemo",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://whisper-api:8765/v1/audio/transcriptions",
+        "sendBinaryData": true,
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "node-whisper-transcribe",
+      "name": "Lokales Whisper (0 €)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "const transcript = $json.text || '';\nconst data = $('Webhook Sprachmemo').first().json.body || {};\nconst kategorie = data.kategorie || 'spartipps';\nconst customTitle = data.titel || '';\n\n// Füllwörter bereinigen\nlet cleaned = transcript\n  .replace(/\\b(äh+|ähm+|öh+|öhm+|sozusagen|quasi|halt|wie gesagt)\\b/gi, '')\n  .replace(/\\s+/g, ' ')\n  .trim();\n\nconst today = new Date().toISOString().split('T')[0];\nconst slug = (customTitle || cleaned.slice(0, 45))\n  .toLowerCase()\n  .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/^-|-$/g, '');\n\nconst title = customTitle || (cleaned.slice(0, 55).trim() + ' – Der Praxis-Check');\nconst wordCount = cleaned.split(' ').length;\nconst readingTime = Math.max(1, Math.round(wordCount / 160));\n\nconst markdown = `---` +\n`\\ntitle: \"${title}\"` +\n`\\ndate: ${today}T08:00:00+02:00` +\n`\\ndraft: true` +\n`\\nauthor: \"Frank Hartung\"` +\n`\\ndescription: \"${cleaned.slice(0, 150)}...\"` +\n`\\ncategories: [\"${kategorie}\"]` +\n`\\ntags: [\"${kategorie}\", \"fixkosten\", \"spartipps\", \"whisper-diktat\"]` +\n`\\nreadingTime: ${readingTime}` +\n`\\n---` +\n`\\n\\n## Auf den Punkt: Das Wichtigste in Kürze` +\n`\\n\\n> **Franks Praxis-Fazit:** Mit dem planvollen 4K-Prüfpfad senkst du deine monatlichen Fixkosten spürbar und sicher.` +\n`\\n\\n${cleaned}` +\n`\\n\\n---` +\n`\\n\\n## Der 4K-Prüfpfad für diesen Ratgeber` +\n`\\n1. **Kosten sehen:** Reale Ausgaben erfassen.` +\n`\\n2. **Konditionen rechnen:** Leistungen genau vergleichen.` +\n`\\n3. **Kündigungsfenster sichern:** Fristen im Kalender vormerken.` +\n`\\n4. **Kurs halten:** Einmal jährlich Verträge nachjustieren.` +\n`\\n\\n---` +\n`\\n*Erstellt via 0 € Whisper-Pipeline auf Profi-Agentur-Niveau.*`;\n\nreturn [{\n  json: {\n    slug: `${today}-${slug}`,\n    title,\n    kategorie,\n    wordCount,\n    readingTime,\n    markdown,\n    cleanedText: cleaned\n  }\n}];"
+      },
+      "id": "node-code-structure",
+      "name": "Struktur & 4K-Prüfpfad (ZEIT-Niveau)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [620, 240]
+    },
+    {
+      "parameters": {
+        "command": "python3 /workspace/blog/scripts/n8n_bridge.py --receive-payload '{\"typ\":\"voice_memo\",\"data\":{\"titel\":\"'\"$title\"'\",\"inhalt\":\"'\"$cleanedText\"'\",\"kategorie\":\"'\"$kategorie\"'\"}}'"
+      },
+      "id": "node-exec-bridge",
+      "name": "Blog Bridge (Draft anlegen)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [840, 240]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "node-respond",
+      "name": "Webhook Antwort",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1060, 240]
+    }
+  ],
+  "connections": {
+    "Webhook Sprachmemo": {
+      "main": [
+        [
+          {
+            "node": "Lokales Whisper (0 €)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lokales Whisper (0 €)": {
+      "main": [
+        [
+          {
+            "node": "Struktur & 4K-Prüfpfad (ZEIT-Niveau)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Struktur & 4K-Prüfpfad (ZEIT-Niveau)": {
+      "main": [
+        [
+          {
+            "node": "Blog Bridge (Draft anlegen)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blog Bridge (Draft anlegen)": {
+      "main": [
+        [
+          {
+            "node": "Webhook Antwort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "name": "4. Audio-TTS & Lokales Whisper-QA (Paritäts-Wache)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "audio-qa",
+        "options": {}
+      },
+      "id": "node-webhook-audio-qa",
+      "name": "Webhook Audio QA",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $json.body || $json;\nconst slug = item.slug || '2026-10-03-beispiel';\nconst audioPath = item.audio_path || `/workspace/blog/public/audio/articles/${slug}.mp3`;\nconst articlePath = item.article_path || `/workspace/blog/content/posts/${slug}/index.md`;\n\nreturn [{\n  json: {\n    slug,\n    audioPath,\n    articlePath\n  }\n}];"
+      },
+      "id": "node-code-paths",
+      "name": "Dateipfade Auflösen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "command": "python3 /workspace/blog/scripts/whisper_engine.py --verify-audio \"{{ $json.audioPath }}\" --article \"{{ $json.articlePath }}\" --json"
+      },
+      "id": "node-exec-qa",
+      "name": "Whisper Audio QA (Lokal)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [620, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "let result = {};\ntry {\n  result = JSON.parse($json.stdout || '{}');\n} catch (e) {\n  result = { status: 'parse_error', error: e.message, passed: false };\n}\n\nreturn [{\n  json: {\n    passed: result.passed === true,\n    score: result.similarity_score || 0.0,\n    status: result.status || 'unknown',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-eval-qa",
+      "name": "QA Score Prüfen (>= 0.65)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 240]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "node-response-qa",
+      "name": "QA Rückmeldung",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1060, 240]
+    }
+  ],
+  "connections": {
+    "Webhook Audio QA": {
+      "main": [
+        [
+          {
+            "node": "Dateipfade Auflösen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dateipfade Auflösen": {
+      "main": [
+        [
+          {
+            "node": "Whisper Audio QA (Lokal)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Whisper Audio QA (Lokal)": {
+      "main": [
+        [
+          {
+            "node": "QA Score Prüfen (>= 0.65)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "QA Score Prüfen (>= 0.65)": {
+      "main": [
+        [
+          {
+            "node": "QA Rückmeldung",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

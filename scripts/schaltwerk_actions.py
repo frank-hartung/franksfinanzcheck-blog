@@ -457,6 +457,99 @@ def aktion_protokoll(params: dict, daten: dict, ctx: dict) -> dict:
     return ok(text[:300])
 
 
+# ============================================================== 5 · Whisper & n8n (0 € Stack)
+def aktion_n8n_webhook(params: dict, daten: dict, ctx: dict) -> dict:
+    """Sendet ein Ereignis per HTTP an einen n8n-Webhook."""
+    import n8n_bridge
+
+    event_typ = str(params.get("event_typ") or daten.get("typ") or "schaltwerk_event")
+    webhook_url = params.get("webhook_url")
+    dry_run = bool(ctx.get("dry_run"))
+
+    res = n8n_bridge.dispatch_event_to_n8n(
+        event_type=event_typ,
+        payload=daten,
+        webhook_url=webhook_url,
+        dry_run=dry_run,
+    )
+    if res.get("status") == "success" or res.get("status") == "dry_run":
+        return ok(f"n8n Webhook '{event_typ}' erfolgreich ausgelöst")
+    elif res.get("status") == "standby":
+        return standby(f"n8n nicht erreichbar: {res.get('message')}")
+    else:
+        return standby(f"n8n Webhook {res.get('status')}: {res.get('message', 'Keine Verbindung')}")
+
+
+def aktion_whisper_transkribieren(params: dict, daten: dict, ctx: dict) -> dict:
+    """Transkribiert eine Audiodatei lokal und erzeugt einen Blog-Entwurf."""
+    import whisper_engine
+
+    pfad = str(params.get("datei_pfad") or daten.get("pfad") or "")
+    kategorie = str(params.get("kategorie") or daten.get("kategorie") or "spartipps")
+    titel = params.get("titel") or daten.get("titel")
+
+    if not pfad:
+        return fehler("whisper_transkribieren: kein Dateipfad angegeben")
+
+    if ctx.get("dry_run"):
+        return uebersprungen(f"Probelauf: Whisper-Transkription für {pfad}")
+
+    engine = whisper_engine.WhisperEngine(backend="auto")
+    try:
+        transcript = engine.transcribe(pfad)
+        article = whisper_engine.transform_voice_to_article(
+            transcript=transcript,
+            kategorie=kategorie,
+            custom_title=titel,
+            audio_filename=os.path.basename(pfad),
+        )
+        drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", article["slug"])
+        os.makedirs(drafts_dir, exist_ok=True)
+        draft_file = os.path.join(drafts_dir, "index.md")
+        with open(draft_file, "w", encoding="utf-8") as fh:
+            fh.write(article["markdown"])
+
+        # Untertitel
+        whisper_engine.export_vtt(transcript, os.path.join(drafts_dir, "transcript.vtt"))
+        return ok(f"Entwurf aus Whisper-Aufnahme erzeugt: {draft_file}")
+    except Exception as exc:  # noqa: BLE001
+        return fehler(f"Whisper-Transkription gescheitert: {exc}")
+
+
+def aktion_indexnow_ping(params: dict, daten: dict, ctx: dict) -> dict:
+    """Sendet publizierte URLs an die IndexNow API (Bing/Yandex) – 0 € Kosten."""
+    url = str(params.get("url") or daten.get("url") or "")
+    if not url:
+        slug = str(params.get("slug") or daten.get("artikel_slug") or daten.get("slug") or "")
+        if slug:
+            url = f"https://franksfinanzcheck.de/posts/{slug}/"
+    if not url:
+        return uebersprungen("indexnow_ping: keine URL vorhanden")
+
+    if ctx.get("dry_run"):
+        return uebersprungen(f"Probelauf: IndexNow Ping für {url}")
+
+    key = "f009361665a54db687353f8680e6f5c7"
+    body = {
+        "host": "franksfinanzcheck.de",
+        "key": key,
+        "keyLocation": f"https://franksfinanzcheck.de/{key}.txt",
+        "urlList": [url],
+    }
+    try:
+        req = urllib.request.Request(
+            "https://api.indexnow.org/indexnow",
+            data=json.dumps(body).encode("utf-8"),
+            headers={"Content-Type": "application/json; charset=utf-8"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            code = resp.status
+        return ok(f"IndexNow Ping erfolgreich ({code}): {url}")
+    except Exception as exc:  # noqa: BLE001
+        return standby(f"IndexNow Ping fehlgeschlagen ({exc}) – unkritisch")
+
+
 # ------------------------------------------------------------- Registrierung
 AKTION = {
     "social_post": aktion_social_post,
@@ -468,6 +561,9 @@ AKTION = {
     "workflow_starten": aktion_workflow_starten,
     "datei_anhaengen": aktion_datei_anhaengen,
     "protokoll": aktion_protokoll,
+    "n8n_webhook": aktion_n8n_webhook,
+    "whisper_transkribieren": aktion_whisper_transkribieren,
+    "indexnow_ping": aktion_indexnow_ping,
 }
 
 
