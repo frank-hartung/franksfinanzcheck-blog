@@ -18,7 +18,7 @@ cover:
   image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
+pin_title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
 pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten! Mit Rechenbeispiel (120 €)."
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
