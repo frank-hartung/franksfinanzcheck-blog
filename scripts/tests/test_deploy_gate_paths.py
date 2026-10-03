@@ -16,8 +16,10 @@ Zustands-/Doku-Push ist. Zwei Fehlerrichtungen sind teuer:
 Hintergrund Issue #433 (28.09.2026):
 Wenn ein site-relevanter PR (#431) in der pages-deploy-Queue von einem
 reinen Workflow-PR (#432) verdrängt wird, vergleicht das Gate nicht
-mehr nur `event.before...after`, sondern diffed seit dem letzten ECHTEN
-Live-Stand auf `gh-pages` (SSOT).
+mehr nur `event.before...after`, sondern diffed seit dem letzten gebauten
+Cache-Stand auf `gh-pages`. Seit WF-7C1F/#538 ist dieser Branch ausdrücklich
+nur Diff-Basis; der öffentliche Live-Beleg kommt aus dem erfolgreichen
+GitHub-Pages-Deployment für `main`.
 """
 from __future__ import annotations
 
@@ -159,7 +161,7 @@ class DeployGatePfadTestCase(unittest.TestCase):
         self.assertTrue(drift_res["is_drift"])
 
     def test_workflow_dateien_enthalten_gh_pages_pruefung(self):
-        """Stellt sicher, dass deploy.yml und deploy-catchup.yml gh-pages als SSOT prüfen."""
+        """gh-pages bleibt Diff-Basis; der echte Live-Beleg wird separat getestet."""
         with open(DEPLOY_YML, encoding="utf-8") as f:
             deploy_text = f.read()
         self.assertIn("LIVE_DEPLOY_SHA", deploy_text)

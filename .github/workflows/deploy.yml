@@ -163,23 +163,66 @@ jobs:
             exit 0
           fi
 
-          # 3) Letzten TATSÄCHLICHEN Veröffentlichungsstand ermitteln (SSOT: gh-pages)
-          #    actions-gh-pages committet mit "deploy: <SHA>" – dies ist die einzige
-          #    verlässliche Wahrheit über das, was live ausgeliefert wird (Issue #433).
+          # 3) Zwei ausdrücklich getrennte Wahrheiten ermitteln:
+          #    a) gh-pages = Build-Cache/Audit-Spur und damit Diff-Basis (#433)
+          #    b) Environment github-pages, ref main, Status success = der Stand,
+          #       den actions/deploy-pages TATSÄCHLICH öffentlich ausgeliefert hat.
+          #
+          #    PREMIUM-FIX WF-7C1F / #538 (03.10.2026): #537 ergänzte zwar
+          #    actions/deploy-pages, das Entlastungs-Gate vertraute beim nächsten
+          #    Push aber weiterhin allein auf den aktuellen gh-pages-Cache. Weil
+          #    dieser Cache schon frisch war, übersprang es Build UND den neuen
+          #    Pages-Job. Es gab weiterhin kein einziges Workflow-Deployment.
+          #    Deshalb darf die Pfad-Entlastung erst greifen, wenn Cache-SHA und
+          #    nachweislich erfolgreiches Pages-Deployment dieselbe Source-SHA
+          #    tragen. API-/Status-Unklarheit ist fail-safe: deploy=true.
           LIVE_DEPLOY_SHA=""
           gh_pages_msg="$(gh api "repos/${{ github.repository }}/commits/gh-pages" --jq '.commit.message' 2>/dev/null || echo "")"
           if [ -n "$gh_pages_msg" ]; then
             LIVE_DEPLOY_SHA="$(echo "$gh_pages_msg" | grep -oE '[0-9a-f]{40}' | head -1 || echo "")"
           fi
 
-          echo "Status-Uebersicht:"
-          echo "  • Live auf gh-pages : ${LIVE_DEPLOY_SHA:-unbekannt}"
-          echo "  • Ziel-Stand main   : ${AFTER}"
-          echo "  • Push before       : ${{ github.event.before }}"
+          PAGES_DEPLOYMENT_ID=""
+          PAGES_DEPLOY_SHA=""
+          PAGES_DEPLOY_STATUS=""
+          pages_deployment="$(gh api \
+            "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" \
+            --jq '[.[] | select(.ref == "main" or .ref == "refs/heads/main")][0] | if . == null then "" else "\(.id) \(.sha)" end' \
+            2>/tmp/pages-deployment.err || true)"
+          if [ -n "$pages_deployment" ]; then
+            read -r PAGES_DEPLOYMENT_ID PAGES_DEPLOY_SHA <<< "$pages_deployment"
+            PAGES_DEPLOY_STATUS="$(gh api \
+              "repos/${{ github.repository }}/deployments/${PAGES_DEPLOYMENT_ID}/statuses?per_page=1" \
+              --jq '.[0].state // ""' 2>/tmp/pages-status.err || true)"
+          fi
 
-          # 4) Ist gh-pages bereits exakt auf dem Ziel-Stand?
-          if [ -n "$LIVE_DEPLOY_SHA" ] && [ "$LIVE_DEPLOY_SHA" = "$AFTER" ]; then
-            echo "gh-pages ist bereits exakt auf Stand ${AFTER:0:7} – kein Deploy noetig."
+          echo "Status-Uebersicht:"
+          echo "  • Cache auf gh-pages        : ${LIVE_DEPLOY_SHA:-unbekannt}"
+          echo "  • Offizielles Pages-Deploy  : ${PAGES_DEPLOY_SHA:-nicht vorhanden} (${PAGES_DEPLOY_STATUS:-kein Erfolgsstatus})"
+          echo "  • Ziel-Stand main           : ${AFTER}"
+          echo "  • Push before               : ${{ github.event.before }}"
+
+          # 4) Harte Auslieferungs-Invariante VOR jeder Entlastung:
+          #    Nur ein erfolgreiches offizielles Deployment derselben Source-SHA
+          #    beweist, dass der Cache öffentlich ist. Fehlt dieser Beleg, muss
+          #    selbst ein reiner Workflow-/Doku-Push den vollständigen Deploy
+          #    ausführen. Genau das bootstrapped den Fix nach dem Merge von #538.
+          if [ -z "$LIVE_DEPLOY_SHA" ]; then
+            echo "Kein belastbarer gh-pages-Cache – vollständiger Deploy (fail-safe)."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$PAGES_DEPLOY_STATUS" != "success" ] || [ "$PAGES_DEPLOY_SHA" != "$LIVE_DEPLOY_SHA" ]; then
+            echo "Öffentliches Pages-Deployment fehlt/ist nicht erfolgreich oder hinkt dem Cache hinterher."
+            echo "Cache ${LIVE_DEPLOY_SHA:0:7}, Pages ${PAGES_DEPLOY_SHA:0:7} (${PAGES_DEPLOY_STATUS:-unbekannt}) – Reparatur-Deploy läuft."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Erst NACH dem öffentlichen Nachweis darf ein identischer Zielstand
+          # entlastet werden. gh-pages allein ist ausdrücklich kein Live-Beleg.
+          if [ "$LIVE_DEPLOY_SHA" = "$AFTER" ]; then
+            echo "Cache und offizielles Pages-Deployment sind auf Stand ${AFTER:0:7} – kein Deploy noetig."
             echo "deploy=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
