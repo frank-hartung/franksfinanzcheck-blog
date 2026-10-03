@@ -37,7 +37,10 @@ Dieser Runner ersetzt beides durch Nachweis:
               Datums-Abhängigkeit kippt damit am Tag des Einbaus und nicht an
               einem Feiertag drei Monate später.
   C15         ändert sich der Arbeitsbaum während des Laufs, ist das ein Befund:
-              ein Prüf-Aufruf heilt nicht (Vertragsregel C15).
+              ein Prüf-Aufruf heilt nicht (Vertragsregel C15). Gezählt werden
+              Dateien (git status) UND leer zurückgelassene Verzeichnisse, die
+              Git prinzipiell nicht meldet (03.10.2026: content/drafts/ ließ
+              den Hugo-Build sterben, während beide Wachen grün waren).
   ZEITDECKEL  eine hängende Wache kostet ihr Budget und wird gemeldet – sie
               frisst nicht das Zeitlimit des ganzen Jobs.
   VERDRAHTUNG `verdrahtet(name)` beweist für eine einzelne Wache, dass sie im
@@ -148,8 +151,44 @@ def entdecken(skript_dir: str = SKRIPT_DIR) -> tuple:
     return echt, erwähnt
 
 
+# Ordner, in denen ein LEER zurückgelassenes Verzeichnis echten Schaden macht.
+# content/ ist der scharfe Fall (siehe _leere_verzeichnisse), data/ steht dabei,
+# weil Hugo daraus ebenfalls liest.
+BAUM_ORDNER = ("content", "data")
+
+
+def _leere_verzeichnisse(root: str) -> set:
+    """Leere Verzeichnisse unter BAUM_ORDNER – Git kann sie nicht melden.
+
+    WARUM DAS EINE EIGENE SPUR BRAUCHT (Befund 03.10.2026, Lauf 37149404892):
+    Git versioniert keine Verzeichnisse, nur Dateien. Ein leer
+    zurückgelassener Ordner taucht deshalb in `git status --porcelain`
+    NICHT auf – die C15-Wache war an dieser Stelle blind.
+
+    Der Schaden ist trotzdem echt: Der n8n-Bridge-Selbsttest ließ
+    `content/drafts/` leer liegen, und der Hugo-Build starb danach im
+    selben Job mit einem Typfehler in der Sitemap. Zwei Wachen grün, die
+    Produktion rot – genau die Lücke, gegen die C15 geschrieben ist.
+    """
+    treffer = set()
+    for basis in BAUM_ORDNER:
+        start = os.path.join(root, basis)
+        if not os.path.isdir(start):
+            continue
+        for ordner, unter, dateien in os.walk(start):
+            if not unter and not dateien:
+                rel = os.path.relpath(ordner, root).replace(os.sep, "/")
+                treffer.add(f"LEERES VERZEICHNIS {rel}/")
+    return treffer
+
+
 def arbeitsbaum(root: str = BLOG_DIR):
-    """`git status --porcelain` als Menge, oder None wenn Git nicht antwortet.
+    """Zustand des Arbeitsbaums als Menge, oder None wenn Git nicht antwortet.
+
+    Zwei Spuren in EINER Menge, damit jeder Vergleich (nachher − vorher)
+    beide Schadensarten sieht:
+      · `git status --porcelain` – geänderte, neue, gelöschte Dateien,
+      · `_leere_verzeichnisse()` – was Git grundsätzlich nicht zeigen kann.
 
     None heißt: Die C15-Wache kann hier nicht beweisen – und das wird gemeldet,
     statt die Prüfung still auszuschalten.
@@ -161,7 +200,8 @@ def arbeitsbaum(root: str = BLOG_DIR):
         return None
     if r.returncode != 0:
         return None
-    return {z.strip() for z in r.stdout.splitlines() if z.strip()}
+    spuren = {z.strip() for z in r.stdout.splitlines() if z.strip()}
+    return spuren | _leere_verzeichnisse(root)
 
 
 def regelwerk(skript_dir: str = SKRIPT_DIR) -> list:
@@ -465,6 +505,14 @@ def _selftest() -> int:
               "with open(os.path.join(os.environ['RUNNER_BAUM'],\n"
               "                       'heiler-rest.md'), 'w') as fh:\n"
               "    fh.write('x')\nsys.exit(0)\n")
+        # Ordner-Leiche: grün, schreibt keine Datei – lässt aber ein LEERES
+        # Verzeichnis unter content/ zurück (der reale n8n-Bridge-Fall).
+        # Git meldet das nie; die Wache muss es trotzdem finden.
+        bauen("ordner_leiche.py",
+              "import os, sys\n"
+              "os.makedirs(os.path.join(os.environ['RUNNER_BAUM'],\n"
+              "                         'content', 'entwuerfe'), exist_ok=True)\n"
+              "sys.exit(0)\n")
         # Ohne Kennung: darf gar nicht erst geprüft werden
         with open(os.path.join(skripte, "ohne_selbsttest.py"), "w",
                   encoding="utf-8") as fh:
@@ -490,11 +538,12 @@ def _selftest() -> int:
         erg = pruefen(python=sys.executable, uhr_probe=True, skript_dir=skripte,
                       deckel=180, baum_wurzel=tmp)
         texte, hinweise = " ".join(erg["befunde"]), " ".join(erg["hinweise"])
-        if erg["wachen"] != 6:
-            fehler.append(f"Entdeckung zählt {erg['wachen']} statt 6 (gut, kaputt, "
-                          "bombe, kettenleiter, schreiber, selftest_clock)")
-        if erg["gelaufen"] != 5:
-            fehler.append(f"Gelaufen {erg['gelaufen']} statt 5 "
+        if erg["wachen"] != 7:
+            fehler.append(f"Entdeckung zählt {erg['wachen']} statt 7 (gut, kaputt, "
+                          "bombe, kettenleiter, schreiber, ordner_leiche, "
+                          "selftest_clock)")
+        if erg["gelaufen"] != 6:
+            fehler.append(f"Gelaufen {erg['gelaufen']} statt 6 "
                           "(die begründete Ausnahme muss übersprungen werden)")
         if "kaputt.py --selftest Exit 1" not in texte:
             fehler.append("roter Selbsttest wird nicht gemeldet")
@@ -508,9 +557,13 @@ def _selftest() -> int:
             fehler.append("Erwähnung ohne Implementierung bleibt ohne Hinweis")
         if "heiler-rest.md" not in texte or "C15" not in texte:
             fehler.append("C15-Wache sieht den schreibenden Selbsttest nicht")
-        if erg["uhr_proben"] != 5 * len(UHR_PROBE_TAGE):
+        if "LEERES VERZEICHNIS content/entwuerfe/" not in texte:
+            fehler.append("C15-Wache sieht das leer zurückgelassene Verzeichnis "
+                          "nicht – genau diese Lücke ließ am 03.10.2026 den "
+                          "Hugo-Build sterben, während die Wache grün meldete")
+        if erg["uhr_proben"] != 6 * len(UHR_PROBE_TAGE):
             fehler.append(f"Uhr-Proben {erg['uhr_proben']} statt "
-                          f"{5 * len(UHR_PROBE_TAGE)}")
+                          f"{6 * len(UHR_PROBE_TAGE)}")
 
         # ------------------------------------------------------------
         # VERDRAHTUNGS-NACHWEIS: `verdrahtet()` muss den Mechanismus prüfen,

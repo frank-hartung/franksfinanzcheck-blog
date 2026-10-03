@@ -24,11 +24,33 @@
      Hugo reicht Partial-Rückgaben als `interface{}` durch, Feldzugriffe auf
      Page-Objekte scheitern dann zur Laufzeit.
 */ -}}
+{{- /* WARUM HIER EINZELN ANGEHÄNGT WIRD (Befund 03.10.2026, Lauf 37149404892)
+
+     Vorher stand hier `$out | append (partial …)` – die Rückgabe der Rekursion
+     wurde als EIN Wert angehängt und darauf vertraut, dass Hugos `append` eine
+     Liste flachklopft. Das tut es nur, solange die innere Liste denselben
+     Elementtyp hat. Ein LEERES Verzeichnis unter content/ liefert eine leere
+     Liste ohne Typ – die landet als verschachteltes Element im Ergebnis, und
+     `sitemap.xml` ruft `site.GetPage` dann mit einer Liste statt einem Pfad:
+
+       render of "/_sitemap.xml" failed: … expected string; got []string
+
+     Wirkung: Der GESAMTE Build stirbt nach einer Sekunde. Ein leerer Ordner –
+     von einem Werkzeug, einem Selbsttest, einem abgebrochenen Verschieben –
+     reichte aus. Git zeigt leere Verzeichnisse nicht an, also war der Auslöser
+     im Diff unsichtbar (real passiert: `content/drafts/`, zurückgelassen vom
+     n8n-Bridge-Selbsttest, der im selben Job VOR dem Build läuft).
+
+     Jetzt werden nur noch Zeichenketten angehängt. Kein Verlass mehr auf
+     Flachklopf-Verhalten, leere Zweige tragen schlicht nichts bei.
+     Regression: scripts/tests/test_sitemap_kandidaten.py */ -}}
 {{- $dir := . -}}
 {{- $out := slice -}}
 {{- range os.ReadDir $dir -}}
   {{- if .IsDir -}}
-    {{- $out = $out | append (partial "sitemap_kandidaten.html" (path.Join $dir .Name)) -}}
+    {{- range (partial "sitemap_kandidaten.html" (path.Join $dir .Name)) -}}
+      {{- $out = $out | append . -}}
+    {{- end -}}
   {{- else if or (eq .Name "index.md") (eq .Name "_index.md") -}}
     {{- $pfad := strings.TrimPrefix "content" $dir -}}
     {{- $out = $out | append (cond (eq $pfad "") "/" $pfad) -}}

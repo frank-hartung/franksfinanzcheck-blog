@@ -367,9 +367,19 @@ def _ablage_im_sandkasten():
 
     Die Pfade sind Modul-Globale und werden erst beim Schreiben gelesen –
     Umbiegen auf Zeit genuegt, der Rueckbau steht im finally.
+
+    NACHTRAG (03.10.2026, Lauf 37149404892): Der Entwurfs-Teil des Tests legt
+    content/drafts/<slug>/ an und raeumte nur den <slug>-Ordner wieder weg.
+    Der LEERE Elternordner content/drafts/ blieb liegen. Git zeigt leere
+    Verzeichnisse nicht an, also sah ihn weder `git status` noch die C15-Wache
+    – Hugo dagegen schon: Der Build starb danach mit einem Typfehler in der
+    Sitemap. Deshalb merkt sich dieser Kontext auch, welche Entwurfs-Ordner es
+    VOR dem Test gab, und entfernt nur das, was der Test selbst erzeugt hat.
     """
     global BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
     echt_state, echt_log = BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
+    entwuerfe = os.path.join(BLOG_DIR, "content", "drafts")
+    entwuerfe_gab_es = os.path.isdir(entwuerfe)
     with tempfile.TemporaryDirectory(prefix="n8n-bridge-selftest-") as sandkasten:
         # Den echten Zustand hineinkopieren, damit der Test denselben
         # Ausgangspunkt sieht wie der Normalbetrieb.
@@ -384,6 +394,13 @@ def _ablage_im_sandkasten():
             yield sandkasten
         finally:
             BRIDGE_STATE_PATH, BRIDGE_LOG_PATH = echt_state, echt_log
+            # Nur wegraeumen, was der Test angelegt hat – und nur, wenn leer.
+            # Ein Ordner mit echten Entwuerfen darf hier NIE verschwinden.
+            if not entwuerfe_gab_es and os.path.isdir(entwuerfe):
+                try:
+                    os.rmdir(entwuerfe)
+                except OSError:
+                    pass  # nicht leer: fremder Inhalt, bleibt unangetastet
 
 
 def selftest() -> bool:
