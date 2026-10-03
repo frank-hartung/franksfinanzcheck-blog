@@ -1,0 +1,3 @@
+# Hier legt das Antwortwerk seine Dossiers ab (scripts/antwortwerk.py).
+# Jedes Dossier ist eine Signalsammlung, kein Freigabedokument.
+# Faktenübernahme in Artikel läuft über scripts/faktenfrische.py.

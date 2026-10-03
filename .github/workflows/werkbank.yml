@@ -1,0 +1,250 @@
+# ============================================================
+#  🛠 WERKBANK – Antwortwerk, Crawl4AI, Playwright, Composio
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 03.10.2026): Crawl4AI, Playwright und Composio
+#  dauerhaft auf Premium-Level integrieren – und statt Perplexity
+#  eine KOSTENLOSE Antwortmaschine, die gleichwertig oder besser ist.
+#
+#  WAS DIESER LAUF TUT
+#    1. Selbsttests (fail-closed): Antwortwerk + Gate-Sabotageproben
+#    2. SearXNG hochfahren: eigener Container, JSON-API an, Limiter aus
+#       → die Suche kostet damit nichts und gehört uns selbst
+#    3. Gate B1–B9: Vertrag prüfen, Cockpit schreiben
+#    4. Antwortwerk: fällige Fragen aus data/werkbank.yaml beantworten
+#    5. Dossiers committen (data/werkbank/antworten/)
+#
+#  TAKTUNG: Donnerstag 07:40 MESZ – bewusst in einem freien Slot
+#  (Di/Do gehören der Faktenfrische, Mo der Agent-Reach-Recherche).
+#
+#  KOSTEN: 0 €. Kein bezahlter API-Zugang im Pflichtpfad (Vertrag B1).
+#  Die LLM-Synthese nutzt – falls Secrets vorhanden – ausschließlich
+#  Gratis-Kontingente (Groq/Gemini). Fehlen sie, läuft der extraktive
+#  Modus: wörtliche Zitate statt Fließtext. Das ist Standby, kein Fehler.
+#
+#  Anleitung: docs/ANLEITUNG-WERKBANK.md · Cockpit: WERKBANK-STATUS.md
+# ============================================================
+name: Werkbank (Antwortwerk & Werkzeuge)
+
+on:
+  schedule:
+    - cron: "40 5 * * 4"     # Donnerstag 07:40 MESZ
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Was soll der Lauf tun?"
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan          # fällige Fragen beantworten
+          - alle          # alle Fragen, unabhängig vom Takt
+          - gate          # nur Vertrag prüfen, nichts erzeugen
+          - dry-run       # zeigen, nichts schreiben
+      frage:
+        description: "Einzelne Ad-hoc-Frage (leer = Fragenplan)"
+        required: false
+        default: ""
+  repository_dispatch:
+    types: [werkbank]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: werkbank
+  cancel-in-progress: false
+
+jobs:
+  werkbank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v5
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Node einrichten
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Python-Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+          # Crawl4AI ist optional (Vertrag B2): Scheitert die Installation,
+          # läuft das Gewerk `leser` über Jina Reader weiter. Kein Abbruch.
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-werkbank.txt || \
+            echo "::warning::Crawl4AI/Composio nicht installiert – Rückfallebenen aktiv."
+
+      # Fail-closed VOR allem anderen: Eine Engine, die ihren eigenen
+      # Vertrag nicht erfüllt, darf nicht ins Internet greifen.
+      - name: Selbsttest Antwortwerk (offline, fail-closed)
+        run: python3 scripts/antwortwerk.py --selftest
+
+      - name: Selbsttest Gate (Sabotage-Proben)
+        run: python3 scripts/werkbank_gate.py --selftest
+
+      - name: Unit-Tests der Werkbank
+        run: python3 -m unittest scripts.tests.test_werkbank -v
+
+      - name: Browser für den Beweis bereitstellen
+        id: browser
+        continue-on-error: true
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      # ---------------------------------------------------------------
+      #  SearXNG: unsere eigene Suche. Kostenlos, kein Schlüssel, keine
+      #  Abfragegebühr. JSON ist bei SearXNG standardmäßig AUS und der
+      #  Bot-Limiter blockiert Automaten – beides hier bewusst gesetzt.
+      # ---------------------------------------------------------------
+      - name: SearXNG starten (eigene Suche, kostenlos)
+        id: searxng
+        continue-on-error: true
+        run: |
+          mkdir -p /tmp/searxng
+          cat > /tmp/searxng/settings.yml <<'EOF'
+          use_default_settings: true
+          general:
+            instance_name: "franksfinanzcheck-werkbank"
+          server:
+            secret_key: "${{ github.run_id }}-werkbank-ephemeral"
+            limiter: false
+            image_proxy: false
+          search:
+            safe_search: 0
+            default_lang: "de"
+            formats:
+              - html
+              - json
+          EOF
+          docker run -d --name searxng -p 8080:8080 \
+            -v /tmp/searxng/settings.yml:/etc/searxng/settings.yml:ro \
+            -e SEARXNG_BASE_URL=http://localhost:8080/ \
+            docker.io/searxng/searxng:latest
+
+          # Auf Bereitschaft warten statt blind zu schlafen.
+          for i in $(seq 1 30); do
+            if curl -sf "http://localhost:8080/healthz" >/dev/null 2>&1; then
+              echo "SearXNG bereit nach ${i}s."
+              break
+            fi
+            sleep 1
+          done
+
+          # Beweis statt Hoffnung: Liefert die JSON-API wirklich JSON?
+          if curl -sf -H 'X-Forwarded-For: 127.0.0.1' \
+               "http://localhost:8080/search?q=strompreis&format=json" \
+               | head -c 1 | grep -q '{'; then
+            echo "bereit=ja" >> "$GITHUB_OUTPUT"
+          else
+            echo "bereit=nein" >> "$GITHUB_OUTPUT"
+            echo "::warning::SearXNG-JSON nicht verfügbar – Antwortwerk nutzt die Rückfallkette."
+            docker logs searxng --tail 30 || true
+          fi
+
+      - name: Gate B1–B9 prüfen und Cockpit schreiben
+        env:
+          SEARXNG_URL: ${{ steps.searxng.outputs.bereit == 'ja' && 'http://localhost:8080' || '' }}
+        run: python3 scripts/werkbank_gate.py
+
+      - name: Antwortwerk-Lauf
+        id: lauf
+        if: ${{ github.event.inputs.modus != 'gate' }}
+        continue-on-error: true   # Exit 3 = keine Quelle → warnen, nicht abbrechen
+        env:
+          SEARXNG_URL: ${{ steps.searxng.outputs.bereit == 'ja' && 'http://localhost:8080' || '' }}
+          # Gratis-Kontingente. Fehlen sie, läuft die extraktive Synthese.
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Konnektor bleibt lesend; schreibende Aktionen brauchen zusätzlich
+          # eine Freigabe in data/werkbank.yaml (Vertrag B4).
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+        run: |
+          MODUS="${{ github.event.inputs.modus }}"
+          FRAGE="${{ github.event.inputs.frage }}"
+          if [ -n "$FRAGE" ]; then
+            python3 scripts/antwortwerk.py --frage "$FRAGE"
+          elif [ "$MODUS" = "alle" ]; then
+            python3 scripts/antwortwerk.py --plan --alle
+          elif [ "$MODUS" = "dry-run" ]; then
+            python3 scripts/antwortwerk.py --plan --dry-run
+          else
+            python3 scripts/antwortwerk.py --plan
+          fi
+
+      - name: SearXNG stoppen
+        if: always()
+        run: docker rm -f searxng >/dev/null 2>&1 || true
+
+      - name: Dossiers committen
+        if: ${{ github.event.inputs.modus != 'gate' && github.event.inputs.modus != 'dry-run' }}
+        run: |
+          PFADE="data/werkbank/antworten data/werkbank/antwortwerk_state.json"
+          # shellcheck disable=SC2086
+          if git status --porcelain $PFADE 2>/dev/null | grep -q .; then
+            git config user.name "Werkbank"
+            git config user.email "werkbank@users.noreply.github.com"
+            # shellcheck disable=SC2086
+            git add $PFADE
+            git commit -m "docs(werkbank): Antwortwerk-Dossiers $(date +%F)"
+            scripts/git_sync.sh --push-only || git push || true
+            echo "Dossiers committet."
+          else
+            echo "Keine neuen Dossiers."
+          fi
+
+      - name: Cockpit und Dossiers als Artefakt sichern
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: werkbank
+          path: |
+            WERKBANK-STATUS.md
+            data/werkbank/antworten/*.md
+            data/werkbank/antworten/*.json
+          if-no-files-found: ignore
+
+      - name: Issue bei Totalausfall aller Quellen
+        if: ${{ steps.lauf.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Governance C12 (Label-Garantie): Label VOR der Issue-Erzeugung.
+          gh label create werkbank --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" \
+            --description "Werkbank: Antwortwerk, Crawl4AI, Playwright, Composio" --force || true
+          TITEL="Werkbank: keine belegfähige Quelle erreicht ($(date +%F))"
+          if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+               --search "in:title \"$TITEL\"" | grep -q .; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "$TITEL" \
+              --label werkbank \
+              --body "$(cat <<'EOF'
+          `scripts/antwortwerk.py --plan` lieferte für keine Frage eine belegfähige Fundstelle.
+
+          **Owner:** auto · **Severity:** P3 · **Channel:** werkbank
+
+          Mögliche Ursachen (in dieser Reihenfolge prüfen):
+          1. SearXNG-Container kam nicht hoch → Schritt „SearXNG starten" im Log.
+          2. JSON-API blockiert → `search.formats` bzw. `limiter` in settings.yml.
+          3. DuckDuckGo drosselt die Runner-IP → normal, nur in Verbindung mit 1./2. kritisch.
+          4. Treffer waren allesamt nicht belegfähig → Allowlist in
+             `data/agent_reach/faktenfrische.yaml` zu eng für diese Fragen.
+
+          Das ist **kein** Produktionsausfall: Der Blog ist davon nicht betroffen.
+          Runbook: `docs/ANLEITUNG-WERKBANK.md`, Abschnitt „Störungen".
+          EOF
+          )"
+          else
+            echo "Issue existiert bereits – kein Duplikat."
+          fi

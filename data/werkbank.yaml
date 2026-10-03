@@ -1,0 +1,286 @@
+# ============================================================
+#  WERKBANK – Vertrag der vier Fremdwerkzeuge
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 03.10.2026): „Crawl4AI, Playwright und Composio
+#  dauerhaft auf Premium-Level einer Profi-Agentur integrieren –
+#  und statt Perplexity eine KOSTENLOSE Alternative einbauen, die
+#  gleichwertig oder besser ist.“
+#
+#  Diese Datei ist die SSOT. Sie wird MENSCHLICH KURATIERT.
+#  Die Maschine liest sie, schreibt sie nie.
+#  Wache: scripts/werkbank_gate.py (Vertrag B1–B9, mit Sabotage-Tests)
+#  Runbook: docs/ANLEITUNG-WERKBANK.md
+#
+#  DIE VIER GEWERKE
+#    antwortwerk  Antwortmaschine (der Perplexity-Ersatz, kostenlos)
+#    leser        Crawl4AI – Seite → sauberes Markdown
+#    browser      Playwright – Browser-Beweis (rendert, misst, belegt)
+#    konnektor    Composio – Aktionen in Fremd-Apps (schreibend, gedeckelt)
+#
+#  HARTE LEITPLANKEN (vom Gate erzwungen, nicht aufweichen):
+#    B1  Kostenregel: kein kostenpflichtiger Anbieter im Pflichtpfad.
+#    B2  Jedes Gewerk hat mindestens einen schlüsselfreien Weg.
+#    B3  Standby (fehlendes Secret) ist KEIN Fehler, sondern ein Zustand.
+#    B4  Leseregel: antwortwerk/leser/browser lesen nur. Schreiben nach
+#        außen darf ausschließlich `konnektor` – und nur mit Freigabe.
+#    B5  Belegpflicht: Jede Antwort nennt URL + Abrufdatum je Aussage.
+#    B6  Keine Secrets in dieser Datei – nur ENV-Namen.
+#    B7  Selbsttest läuft offline, ohne einen einzigen Netzaufruf.
+#    B8  Verdrahtung: Workflow, npm-Skripte und Runbook existieren.
+#    B9  Domain-Disziplin: Sperrliste gilt, Belege nur aus der
+#        Allowlist von data/agent_reach/faktenfrische.yaml.
+# ============================================================
+
+version: 1
+
+meta:
+  eingefuehrt: "2026-10-03"
+  verantwortlich: human          # Umbauten am Vertrag sind Menschenarbeit
+  cockpit: WERKBANK-STATUS.md
+  runbook: docs/ANLEITUNG-WERKBANK.md
+
+# ------------------------------------------------------------------
+#  1. GEWERKE
+# ------------------------------------------------------------------
+# `pflicht: true`  → das Gewerk muss einsatzbereit sein, sonst ist das
+#                    Gate rot. Nur für Gewerke mit schlüsselfreiem Weg.
+# `schreibend`     → darf das Gewerk nach außen wirken? (B4)
+# `standby_ok`     → fehlende Voraussetzung = gelber Zustand, kein Fehler.
+gewerke:
+  - id: antwortwerk
+    name: "Antwortwerk"
+    zweck: >-
+      Freie Antwortmaschine: Frage rein, belegte Antwort raus. Ersetzt
+      Perplexity vollständig und kostenlos – Suche über SearXNG/DuckDuckGo,
+      Lektüre über das Gewerk `leser`, Synthese extraktiv oder über einen
+      Gratis-LLM-Zugang. Siehe Abschnitt `antwortwerk` weiter unten.
+    pflicht: true
+    schreibend: false
+    standby_ok: true
+
+  - id: leser
+    name: "Crawl4AI"
+    zweck: >-
+      Verwandelt eine Webseite in sauberes, LLM-taugliches Markdown
+      (Boilerplate raus, Hauptinhalt rein). Löst den Jina-Reader als
+      bevorzugten Web-Kanal ab; Jina bleibt Rückfallebene.
+    heimat: "https://crawl4ai.org"
+    paket: crawl4ai
+    pflicht: true
+    schreibend: false
+    standby_ok: true
+    # Rückfallkette, wenn crawl4ai nicht installiert ist. Jeder Eintrag
+    # ist schlüsselfrei – deshalb kann dieses Gewerk `pflicht: true` sein.
+    rueckfall: [jina, urllib]
+
+  - id: browser
+    name: "Playwright"
+    zweck: >-
+      Browser-Beweis. Rendert eine Seite wirklich (Chromium), misst
+      Statuscode, Titel, sichtbaren Text und Konsolenfehler. Im
+      Antwortwerk prüft er, ob eine zitierte Quelle die Aussage auch
+      wirklich trägt – das kann eine Snippet-API nicht leisten.
+    heimat: "https://playwright.dev"
+    paket: "@playwright/test"
+    bruecke: tools/werkbank/render.mjs
+    pflicht: false          # Browser-Download ist nicht überall möglich
+    schreibend: false
+    standby_ok: true
+
+  - id: konnektor
+    name: "Composio"
+    zweck: >-
+      Konnektor-Schicht für das Schaltwerk: eine Aktion in einer
+      Fremd-App ausführen, mit Composios Auth-Verwaltung statt eigener
+      Token-Bastelei. Einziges Gewerk mit Schreibrecht nach außen.
+    heimat: "https://composio.dev"
+    paket: composio
+    env: COMPOSIO_API_KEY     # nur der NAME, nie der Wert (B6)
+    basis_url: "https://backend.composio.dev/api/v3.1"
+    pflicht: false
+    schreibend: true
+    standby_ok: true
+    # B4: Schreibende Aktionen brauchen zwei Schlösser.
+    freigabe:
+      modus: mensch           # kein Autopilot auf fremden Konten
+      erlaubte_aktionen: []   # leer = nichts erlaubt, bis ein Mensch einträgt
+      trockenlauf_pflicht: true
+
+# ------------------------------------------------------------------
+#  2. ANTWORTWERK – der kostenlose Perplexity-Ersatz
+# ------------------------------------------------------------------
+# Aufbau in vier Schritten, jeder einzeln abschaltbar:
+#   suchen → lesen → synthetisieren → belegen/prüfen
+#
+# Warum das gleichwertig oder besser ist als Perplexity:
+#   · Volltext statt Snippet – `leser` liest die ganze Seite, nicht
+#     die zwei Zeilen, die eine Such-API mitliefert.
+#   · Beleg-Prüfung im echten Browser (`browser`), nicht nur eine
+#     URL-Liste neben der Antwort.
+#   · Harte Domain-Disziplin: Affiliate-Partner sind nie belegfähig.
+#   · Ohne LLM-Schlüssel läuft der extraktive Modus – wörtliche
+#     Zitate, keine Halluzination, reproduzierbar.
+#   · Kosten: 0 €. Keine Abfragegebühr, kein Monatspreis, kein Limit.
+antwortwerk:
+  # --- 2.1 Suche ---------------------------------------------------
+  # Reihenfolge = Rangfolge. Der erste Anbieter, der liefert, gewinnt;
+  # die übrigen bleiben als Rückfall stehen.
+  suche:
+    - id: searxng
+      name: "SearXNG (selbst gehostet)"
+      art: metasuche
+      kostenpflichtig: false
+      schluessel_noetig: false
+      # ENV-Name, nicht der Wert. Leer = Gewerk meldet Standby.
+      env_url: SEARXNG_URL
+      pfad: "/search"
+      # JSON ist in SearXNG standardmäßig AUS. In settings.yml nötig:
+      #   search: {formats: [html, json]}   und   server: {limiter: false}
+      # Runbook: docs/ANLEITUNG-WERKBANK.md, Abschnitt „SearXNG“.
+      parameter:
+        format: json
+        language: de
+        safesearch: "0"
+      bemerkung: >-
+        Bevorzugt. Bündelt Google, Bing, DuckDuckGo, Brave & Co. in
+        einer Abfrage, ohne Schlüssel und ohne Abfragegebühr. In CI als
+        Service-Container, lokal per Docker.
+
+    - id: duckduckgo
+      name: "DuckDuckGo (schlüsselfrei)"
+      art: suche
+      kostenpflichtig: false
+      schluessel_noetig: false
+      endpunkt: "https://html.duckduckgo.com/html/"
+      bemerkung: >-
+        Rückfallebene ohne jede Einrichtung. Wird von DuckDuckGo
+        gedrosselt – deshalb nie der Hauptweg, aber besser als nichts.
+
+    - id: themenpool
+      name: "Kuratierter RSS-/Themenpool"
+      art: bestand
+      kostenpflichtig: false
+      schluessel_noetig: false
+      quelle: data/agent_reach/themenplan.yaml
+      bemerkung: >-
+        Letzte Ebene und zugleich die ehrlichste: die redaktionell
+        kuratierten Feeds des Hauses. Funktioniert auch ohne Internet
+        gegen den vorhandenen Bestand und macht den Selbsttest offline.
+
+  # --- 2.2 Synthese ------------------------------------------------
+  # `extraktiv` ist der Standard und braucht nichts. Die LLM-Wege sind
+  # Gratis-Kontingente, die es im Repo ohnehin schon gibt (Schaltwerk).
+  synthese:
+    - id: extraktiv
+      name: "Extraktive Beleglage"
+      kostenpflichtig: false
+      schluessel_noetig: false
+      standard: true
+      bemerkung: >-
+        Baut die Antwort aus wörtlichen Passagen der gelesenen Seiten,
+        nach Relevanz geordnet, jede mit Quelle und Abrufdatum. Kann
+        per Konstruktion nicht halluzinieren – der Preis ist eine
+        nüchterne, listenhafte Antwort statt eines runden Fließtexts.
+
+    - id: groq
+      name: "Groq (Gratis-Kontingent)"
+      kostenpflichtig: false
+      schluessel_noetig: true
+      env: GROQ_API_KEY
+      endpunkt: "https://api.groq.com/openai/v1/chat/completions"
+      modell: "llama-3.3-70b-versatile"
+      bemerkung: "Schreibt die Beleglage zu einem Fließtext zusammen."
+
+    - id: gemini
+      name: "Google Gemini (Gratis-Kontingent)"
+      kostenpflichtig: false
+      schluessel_noetig: true
+      env: GEMINI_API_KEY
+      endpunkt: "https://generativelanguage.googleapis.com/v1beta/models"
+      modell: "gemini-2.0-flash"
+      bemerkung: "Zweiter Gratis-Weg, falls Groq drosselt."
+
+  # --- 2.3 Budget --------------------------------------------------
+  budget:
+    max_treffer_suche: 12         # so viele Suchergebnisse je Frage
+    max_seiten_lesen: 5           # so viele davon werden wirklich gelesen
+    max_zeichen_je_seite: 6000    # Auszug je Seite (Volltext, nicht Snippet)
+    max_belege_antwort: 6         # so viele Belege stehen unter der Antwort
+    timeout_sekunden: 30
+    max_fragen_pro_lauf: 3        # Rotation statt Rundumschlag
+
+  # --- 2.4 Belegdisziplin (B5/B9) ----------------------------------
+  belege:
+    # Belegfähig ist nur, was in dieser Allowlist steht. Bewusst dieselbe
+    # Datei wie die Faktenfrische – eine Quelle der Wahrheit, nicht zwei.
+    allowlist_quelle: data/agent_reach/faktenfrische.yaml
+    abrufdatum_pflicht: true
+    # Nie belegfähig, egal was die Suche sagt:
+    # Der Eintrag sperrt die Domain samt aller Subdomains.
+    sperrliste:
+      - franksfinanzcheck.de     # kein Selbstbeleg (Zirkelschluss)
+      - check24.de               # Provisionsquelle ≠ Faktenquelle
+      - check24.net              # Partnernetz-Domain (a.check24.net)
+      - partner-versicherung.de  # Partnernetz-Domain (a.partner-versicherung.de)
+      - tarifcheck.de
+      - verivox.de
+      - awin1.com
+      - financeads.net
+    # Wenn der Browser-Beweis läuft: Trägt die Seite die Aussage wirklich?
+    browser_beweis:
+      aktiv: true
+      standby_ok: true           # kein Chromium da → Hinweis, kein Fehler
+
+# ------------------------------------------------------------------
+#  3. FRAGENPLAN – was das Antwortwerk regelmäßig wissen will
+# ------------------------------------------------------------------
+# Kuratiert wie der Themenplan. Die Maschine beantwortet, der Mensch
+# entscheidet, was davon in einen Artikel wandert (KI-Redaktions-Statut).
+fragen:
+  - id: strompreis-entwicklung
+    frage: "Wie haben sich die Strompreise für Haushalte in Deutschland zuletzt entwickelt?"
+    themenwelt: strom-gas
+    takt_tage: 30
+  - id: gaspreis-entwicklung
+    frage: "Wie entwickeln sich die Gaspreise für private Haushalte in Deutschland aktuell?"
+    themenwelt: strom-gas
+    takt_tage: 30
+  - id: kuendigungsfristen-recht
+    frage: "Welche gesetzlichen Kündigungsfristen gelten aktuell für Verbraucherverträge in Deutschland?"
+    themenwelt: vertraege
+    takt_tage: 90
+  - id: tarifwechsel-rechtslage
+    frage: "Welche Rechte haben Verbraucher bei Preiserhöhungen von Strom- und Gasanbietern?"
+    themenwelt: strom-gas
+    takt_tage: 90
+  - id: kontofuehrungsgebuehren
+    frage: "Was ist die aktuelle Rechtslage zu Kontoführungsgebühren und Zustimmungsfiktion bei Banken?"
+    themenwelt: konto
+    takt_tage: 90
+
+# ------------------------------------------------------------------
+#  4. BROWSER-BEWEIS (Playwright)
+# ------------------------------------------------------------------
+browser:
+  bruecke: tools/werkbank/render.mjs
+  # Nutzt denselben Resolver wie die E2E-Suite (e2e/browser.mjs):
+  # offizieller Playwright-Chromium, sonst @sparticuz/chromium.
+  resolver: e2e/browser.mjs
+  timeout_ms: 20000
+  viewport: { breite: 1280, hoehe: 900 }
+  # Was der Beweis liefern muss, damit er zählt:
+  pflichtfelder: [status, titel, text_laenge]
+
+# ------------------------------------------------------------------
+#  5. KONNEKTOR (Composio) – schreibend, deshalb doppelt verriegelt
+# ------------------------------------------------------------------
+konnektor:
+  nutzer_id: franksfinanzcheck     # Composio-Scope, kein Personenbezug
+  # Erst wenn hier etwas steht UND freigabe.modus == mensch durchlaufen
+  # wurde, führt das Schaltwerk eine Composio-Aktion aus.
+  aktionen: []
+  # Beispiel (bewusst auskommentiert – Eintragen ist eine Entscheidung):
+  # aktionen:
+  #   - slug: GITHUB_CREATE_AN_ISSUE
+  #     zweck: "Redaktionsbefund als Ticket"
+  #     trockenlauf_zuerst: true

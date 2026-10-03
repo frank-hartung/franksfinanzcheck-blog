@@ -1,0 +1,39 @@
+# ============================================================
+#  WERKBANK – optionale Abhängigkeiten der vier Gewerke
+#  (Integration 03.10.2026, siehe docs/ANLEITUNG-WERKBANK.md)
+#
+#  WICHTIG: Diese Datei ist OPTIONAL. Die Werkbank läuft auch ohne
+#  sie – dann über die schlüssel- und paketfreien Rückfallebenen
+#  (Jina Reader statt Crawl4AI, REST statt Composio-SDK). Das Gate
+#  meldet das als „Standby", nicht als Fehler (Vertrag B2/B3).
+#
+#  Installation:  pip install -r requirements-werkbank.txt
+#                 python3 -m playwright install --with-deps chromium
+#  Verifikation:  python3 scripts/werkbank_gate.py
+# ============================================================
+
+# --- Gewerk „leser" -------------------------------------------------
+# Crawl4AI (https://crawl4ai.org) verwandelt eine Seite in sauberes,
+# LLM-taugliches Markdown. Bringt Playwright als Abhängigkeit mit –
+# derselbe Browser-Unterbau, den auch die E2E-Suite nutzt.
+crawl4ai>=0.7.0
+
+# --- Gewerk „konnektor" ---------------------------------------------
+# Composio (https://composio.dev). Das SDK ist bequemer als der
+# REST-Weg, aber nicht zwingend: werkbank_adapters.py spricht notfalls
+# direkt mit backend.composio.dev/api/v3.1.
+composio>=0.22.1
+
+# --- Querschnitt ----------------------------------------------------
+# YAML liest die SSOT (data/werkbank.yaml). Im Repo ohnehin überall
+# vorausgesetzt; hier explizit, damit ein frisches venv sofort läuft.
+PyYAML>=6.0
+
+# NICHT hier gelistet und bewusst so:
+#   · Playwright        → kommt über package.json (@playwright/test),
+#                         damit E2E-Suite und Werkbank denselben
+#                         Browser-Pin teilen. Zwei Pins = zwei Wahrheiten.
+#   · Perplexity-SDK    → ersatzlos gestrichen (Auftrag 03.10.2026):
+#                         Die Antwortmaschine läuft kostenlos über
+#                         SearXNG + Crawl4AI + extraktive Synthese.
+#   · OpenAI/Anthropic  → kostenpflichtig, verstößt gegen Vertrag B1.

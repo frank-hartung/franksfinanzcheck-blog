@@ -214,7 +214,38 @@ def sammle_github(query: str, limit: int, timeout: int) -> tuple[list[dict], str
     return treffer, None
 
 
+def _sammle_web_crawl4ai(url: str, max_zeichen: int, timeout: int) -> dict | None:
+    """Werkbank-Leser (Crawl4AI) als bevorzugter Web-Kanal.
+
+    Additive Verdrahtung vom 03.10.2026 (siehe docs/ANLEITUNG-WERKBANK.md):
+    Ist Crawl4AI installiert, liefert es entrümpeltes Markdown statt der
+    Jina-Textsuppe. Fehlt es – oder geht etwas schief – bleibt alles beim
+    Alten. Dieser Zweig darf den Recherche-Lauf unter keinen Umständen
+    abbrechen; der Brief ist wichtiger als sein Komfort.
+    """
+    try:
+        import werkbank_adapters as wa
+    except Exception:  # noqa: BLE001 – Werkbank ist optional
+        return None
+    if not wa._modul_da("crawl4ai"):
+        return None
+    try:
+        ergebnis = wa._lies_crawl4ai([url], max_zeichen, timeout)
+    except Exception as exc:  # noqa: BLE001
+        print(f"⚠ Crawl4AI für {url} gescheitert ({type(exc).__name__}) – Jina übernimmt.")
+        return None
+    text = (ergebnis.get(url) or {}).get("text", "")
+    if not text.strip():
+        return None
+    return {"url": url, "auszug": text[:max_zeichen], "quelle": "Web (Crawl4AI)"}
+
+
 def sammle_web(url: str, max_zeichen: int, timeout: int) -> tuple[dict | None, str | None]:
+    # Stufe 1: Crawl4AI (sauberes Markdown). Stufe 2: Jina Reader (Hausweg).
+    besser = _sammle_web_crawl4ai(url, max_zeichen, timeout)
+    if besser:
+        return besser, None
+
     ziel = f"https://r.jina.ai/{url}"
     req = urllib.request.Request(ziel, headers={"User-Agent": USER_AGENT})
     try:
