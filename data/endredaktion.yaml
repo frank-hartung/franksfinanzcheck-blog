@@ -1,0 +1,48 @@
+# ============================================================
+#  ENDREDAKTION – Konfiguration (Prüfen · Optimieren · Freigeben)
+#  ------------------------------------------------------------
+#  Die Endredaktion prüft ALLE wartenden Entwürfe (Content-Engine,
+#  KI-Redaktion, Poppy-Werkbank) gegen die etablierten Wachen,
+#  optimiert mit deterministischen Fixes + EINER KI-Politur
+#  (Gratis-Kette Groq → Gemini) und gibt grüne Entwürfe
+#  vollautomatisch in die Re-Queue frei.
+#
+#  VERÖFFENTLICHUNGS-WAHRHEIT (unveränderlich):
+#  Freigabe heißt park_state.rearm → cadence_guard veröffentlicht
+#  am nächsten Publikationstag (Mo/Mi/Fr, max. 2–3 Artikel/Tag).
+#  Die Endredaktion ist NIE der Veröffentlicher – sie reiht ein,
+#  exakt wie ki_redaktion.py --promote.
+#
+#  KILL-SWITCH: modus auf "manuell" setzen → es wird nur geprüft
+#  und berichtet, NIEMALS automatisch freigegeben.
+#
+#  Anleitung: docs/ANLEITUNG-ENDREDAKTION.md
+# ============================================================
+
+# automatisch = grüne Entwürfe wandern vollautomatisch in die Re-Queue.
+# manuell    = Kill-Switch: nur Bericht (Empfehlung, wenn du jede
+#              Veröffentlichung selbst abnicken willst).
+modus: automatisch
+
+# Sicherheitsdecken (bewusst konservativ starten):
+max_freigaben_pro_lauf: 1      # pro Lauf maximal 1 Entwurf freigeben
+max_politur_versuche: 2        # KI-Politur: max. 2 Runden je Entwurf
+min_behalte_laenge_prozent: 85 # Politur darf max. 15 % kürzen
+
+# Kanäle
+kanal_blog: true               # Blog-Entwürfe prüfen/optimieren/freigeben
+kanal_mastodon: true           # Poppy-Social-Texte posten (erst wenn Artikel LIVE)
+mastodon_max_pro_lauf: 1       # max. 1 Mastodon-Post pro Lauf
+
+# ---- Spam-Schutz (Premium, ab 03.10.2026) ----
+# Rollendes Wochenbudget: max. so viele Auto-Freigaben in 7 Tagen.
+auto_freigaben_max_pro_woche: 3
+# Near-Duplicate-Grenzen (SimHash-Hamming-Abstand zum LIVE-Bestand,
+# SSOT: scripts/plagiat_guard.py). ≤ rot = nie freigeben,
+# ≤ gelb = Politur muss eigenständige Formulierungen finden.
+near_dup_hamming_rot: 10
+near_dup_hamming_gelb: 14
+# Handshake mit der Spam-Schutz-Wache: Ohne gültiges Statusfile
+# (data/spam_schutz_status.json) gibt es KEINE Auto-Freigabe
+# (fail-closed). Auf false nur im bewussten Ausnahmefall.
+spam_status_erforderlich: true

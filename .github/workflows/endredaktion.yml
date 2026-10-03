@@ -1,0 +1,116 @@
+# ============================================================
+#  ENDREDAKTION – Prüfstand, Politur & Freigabe-Zentrale
+#  ------------------------------------------------------------
+#  Das hochwertige, kostenlose KI-Qualitätstool des Blogs:
+#  prüft ALLE wartenden Entwürfe gegen die etablierten Wachen
+#  (length_policy, check_titles, readability_check, grammar_check,
+#  KI-Floskel-SSOT, URL-Hygiene, Offenlegung, Duplikate), optimiert
+#  mit deterministischen Fixes + EINER KI-Politur (Gratis-Kette
+#  Groq → Gemini, harter Sicherheitsvertrag) und gibt grüne
+#  Entwürfe VOLLAUTOMATISCH in die Re-Queue frei.
+#
+#  VERÖFFENTLICHUNGS-WAHRHEIT: Die Endredaktion veröffentlicht NIE
+#  selbst. Sie ruft park_state.rearm auf (wie ki_redaktion.py
+#  --promote) – cadence_guard (Content-Engine-Lauf) hebt den Entwurf
+#  am nächsten Publikationstag (Mo/Mi/Fr, 2–3 Artikel/Tag) ins
+#  Live-Blog. Es bleibt der EINE Veröffentlichungsweg des Repos.
+#
+#  KADENZ: Mo–Sa 05:48 UTC (07:48 MESZ) – NACH den Erzeugern
+#  (Poppy-Werkbank Di/Sa 03:23 UTC, KI-Redaktion 04:53 UTC) und
+#  VOR der Content-Engine (06:10 UTC), damit freigegebene Entwürfe
+#  noch am selben Publikationstag pickup-fähig sind. Slot frei
+#  laut Cron-Belegungs-Audit 03.10.2026.
+#
+#  Mastodon: Poppy-Social-Texte werden erst gepostet, wenn der
+#  zugehörige Artikel wirklich live ist (draft weg). Newsletter
+#  läuft eigenständig (newsletter-daily, Di/Fr).
+#
+#  Kill-Switch: data/endredaktion.yaml → modus: manuell
+# ============================================================
+name: Endredaktion
+
+on:
+  schedule:
+    - cron: "48 5 * * 1-6"    # Mo–Sa, 07:48 MESZ
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: "Was soll laufen?"
+        type: choice
+        options: [komplett, nur_pruefen, status]
+        default: komplett
+
+permissions:
+  contents: write
+
+concurrency:
+  group: endredaktion
+  cancel-in-progress: false
+
+jobs:
+  endredaktion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Abhängigkeiten installieren
+        run: python3 -m pip install -q pyyaml
+
+      - name: Selbsttest (fail-closed)
+        run: |
+          python3 scripts/endredaktion.py --selftest
+          python3 scripts/zeit_rechtschreibung.py --selftest \
+            || echo "::warning::Rechtschreib-Selbsttest der Basis-Wache"
+
+      - name: Endredaktion ausführen
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+        run: |
+          AKTION="${{ github.event.inputs.aktion }}"
+          if [ -z "$AKTION" ]; then AKTION="komplett"; fi
+          case "$AKTION" in
+            nur_pruefen) python3 scripts/endredaktion.py --nur-pruefen ;;
+            status)      python3 scripts/endredaktion.py --status ;;
+            *)           python3 scripts/endredaktion.py ;;
+          esac
+
+      # Freigaben ändern Frontmatter (cadence_wait) und evtl. Inhalte
+      # (Politur) – deshalb dasselbe Taxonomie-Gate wie nach den Writern.
+      - name: Taxonomie-Gate nach Politur/Freigabe
+        run: |
+          set -euo pipefail
+          python3 scripts/tag_governance.py --selftest
+          for versuch in 1 2 3; do
+            echo "Taxonomie-Normalisierung, Versuch ${versuch}/3"
+            python3 scripts/tag_governance.py --apply
+            if python3 scripts/tag_governance.py --check; then
+              echo "Taxonomie-Gate grün (Versuch ${versuch})"
+              break
+            fi
+            if [ "$versuch" = 3 ]; then
+              echo "::error::Taxonomie-Gate nach drei idempotenten Läufen rot"
+              python3 scripts/tag_governance.py --json || true
+              exit 1
+            fi
+            sleep 1
+          done
+
+      - name: Änderungen committen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git add content/ 2>/dev/null || true
+          git add data/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – nichts zu committen."
+          else
+            git commit -m "content(endredaktion): Entwürfe geprüft/poliert, Freigaben in die Re-Queue"
+            scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
+          fi

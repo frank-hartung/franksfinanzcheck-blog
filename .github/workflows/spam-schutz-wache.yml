@@ -1,0 +1,76 @@
+# ============================================================
+#  SPAM-SCHUTZ-WACHE – Google-Spam-Policy täglich (Premium)
+#  ------------------------------------------------------------
+#  Misst täglich die Spam-Risiko-KPIs des LIVE-Bestands gegen
+#  die Budgets in data/spam_schutz.yaml:
+#    Tempo (Tag/Woche), KI-Anteil, Auto-Freigaben-Rate,
+#    Near-Duplicates (SimHash, SSOT plagiat_guard), Thin Content,
+#    Titel-Duplikate, fehlende Werbe-Offenlegung.
+#
+#  NOTBREMSE: Bei ROT stellt die Wache data/endredaktion.yaml
+#  automatisch auf „modus: manuell“ (mit Marker) – die Endredaktion
+#  nimmt dann KEINE automatischen Freigaben mehr vor. Bei GRÜN löst
+#  sie nur eigene Notbremsen (Frank-Entscheidungen bleiben gesetzt).
+#  Zusätzlich prüft die Endredaktion vor jeder Freigabe das
+#  Statusfile (fail-closed) – zwei unabhängige Verteidigungslinien.
+#
+#  KADENZ: täglich 05:41 UTC (07:41 MESZ) – VOR der Endredaktion
+#  (05:48 UTC) und damit immer frisch im Handshake. Exit 2 bei ROT
+#  löst die bestehende Alert-Kette (alert-on-failure) aus.
+# ============================================================
+name: Spam-Schutz-Wache
+
+on:
+  schedule:
+    - cron: "41 5 * * *"    # täglich 07:41 MESZ
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: "Was soll laufen?"
+        type: choice
+        options: [pruefen, nur_messen]
+        default: pruefen
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spam-schutz-wache
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Abhängigkeiten installieren
+        run: python3 -m pip install -q pyyaml
+
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/spam_schutz_wache.py --selftest
+
+      - name: Spam-Policy prüfen (mit Notbremse)
+        run: |
+          if [ "${{ github.event.inputs.aktion }}" = "nur_messen" ]; then
+            python3 scripts/spam_schutz_wache.py --nur-messen
+          else
+            python3 scripts/spam_schutz_wache.py
+          fi
+
+      - name: Status und Notbremse committen
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          # Nur die Maschinen-Wahrheit + evtl. Notbremse; Reports sind
+          # gitignored (/*-REPORT.md).
+          git add data/spam_schutz_status.json 2>/dev/null || true
+          git add data/endredaktion.yaml 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – nichts zu committen."
+          else
+            git commit -m "governance(spam-schutz): Status aktualisiert$( [ -n "$(git diff --cached data/endredaktion.yaml)" ] && echo ', Notbremse angepasst' )"
+            scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
+          fi
