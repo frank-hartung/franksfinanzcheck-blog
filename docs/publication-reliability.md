@@ -1,4 +1,61 @@
-# Veröffentlichungs-Zuverlässigkeit – Issue #217 / #287
+# Veröffentlichungs-Zuverlässigkeit – Issue #217 / #287 / #537
+
+## Befund am 03.10.2026 (Issue #537 – öffentliche Auslieferung dauerhaft unter Mindestziel)
+
+- Symptom: `publication_check.py --online` meldete am 02.10. 23:45 UTC
+  `source=2/2` (`2026-10-02-gasabschlag-berechnen-…`,
+  `2026-10-02-preiswert-surfen-…`), aber `delivered=0/2`. `publication_incident.py`
+  diagnostizierte reflexhaft „Source ok, Public defizit → Deploy/CDN-Propagation“
+  und stieß – wie bei jedem Public-only-Defizit – nur `deploy.yml` erneut an.
+  Das Muster war nicht neu: Dieselbe Diagnose wurde seit dem 30.09.2026 bei
+  **jedem** Lauf gestellt, ohne dass sich etwas änderte.
+- **Root-Cause (die eigentliche Ursache, nicht „CDN-Lag“):** Die Pages-
+  Konfiguration dieses Repos steht auf `build_type: workflow`, und das
+  GitHub-Environment `github-pages` ist mit einer Branch-Policy
+  (`main`, `gh-pages`) angelegt – beides Voraussetzungen für ein offizielles
+  Actions-Pages-Deployment (`actions/deploy-pages`). `deploy.yml` kannte diesen
+  Schritt nie; es pushte ausschließlich mit `peaceiris/actions-gh-pages` auf den
+  Branch `gh-pages`. Solange die Pages-Quelle „Branch“ war, hat GitHub jeden
+  Push automatisch gebaut und ausgeliefert (`github-pages[bot]`-Deployments,
+  zuletzt SHA `f641f413`, **2026-09-30T13:00:07 UTC**). Seit genau diesem
+  Zeitpunkt ist die Quelle `workflow` – jeder weitere Push auf `gh-pages` wurde
+  von GitHub Pages kommentarlos **ignoriert**. Der Deploy-Job meldete trotzdem
+  `success` (er pusht ja erfolgreich einen Branch), der `deploy-gate`-Vergleich
+  und `deploy_drift_guard.py` hielten `gh-pages` weiter für die SSOT des
+  Live-Stands – beide Annahmen waren seit dem 30.09. falsch. Ergebnis: Die
+  öffentliche Site war über drei Tage auf dem Stand vom 30.09. eingefroren,
+  während Source, Gates, Reserve und `gh-pages`-Branch vollkommen gesund
+  aussahen. Jede automatische Recovery (erneuter `deploy.yml`-Lauf) wiederholte
+  exakt denselben wirkungslosen Schritt.
+- Auslöser des Quellwechsels (Branch → Workflow) ist aus dem Repo-Verlauf nicht
+  rekonstruierbar (keine Audit-Log-Berechtigung in dieser Umgebung); relevant
+  für die Reparatur ist nur, dass der Workflow ab sofort zur **tatsächlichen**
+  Pages-Konfiguration passt, statt sich auf eine der beiden Quellen zu
+  verlassen.
+
+### Dauerhafte Reparatur 03.10.2026
+
+1. `deploy.yml`: Nach dem `peaceiris`-Push (bleibt als Cache-/Backup-/
+   Audio-Quelle für `gh-pages` bestehen) lädt `actions/configure-pages` +
+   `actions/upload-pages-artifact` denselben `public/`-Stand als Artefakt hoch.
+   Ein neuer Job `pages-deployment` (Environment `github-pages`, Rechte
+   `pages: write` + `id-token: write`) liefert mit `actions/deploy-pages` aus –
+   das ist jetzt der einzige Schritt, der tatsächlich bestimmt, was öffentlich
+   erreichbar ist.
+2. Die Environment-Branch-Policy (`main`, `gh-pages`) bleibt unverändert aktiv:
+   Ein versehentlicher Lauf von einem Feature-Branch kann nicht mehr
+   ausliefern, selbst wenn `workflow_dispatch` falsch ausgelöst würde – vorher
+   hätte ein solcher Lauf blind auf den Produktions-`gh-pages`-Branch gepusht.
+3. `gh-pages`-Branch, `deploy-gate`-Diff-Logik und `deploy_drift_guard.py`
+   bleiben als Cache-/Entlastungs-/Audit-Mechanismus bestehen (Audio-Cache,
+   Offsite-Backup, Deploy-Entlastung) – sie sind jetzt aber ausdrücklich NICHT
+   mehr die Quelle der Wahrheit für „live“. Das ist ausschließlich
+   `GET /repos/.../deployments?environment=github-pages` bzw. der öffentliche
+   Nachweis aus `publication_check.py --online`.
+4. Empfehlung für die nächste Inbetriebnahme: `Deploy auf GitHub Pages` einmal
+   manuell auslösen und im Lauf-Summary prüfen, dass der neue Job
+   `pages-deployment` grün ist und `actions/deploy-pages` eine `page_url`
+   liefert. Erst danach `Publication Delivery` erneut laufen lassen.
 
 ## Befund am 15.09.2026 (Issue #287 – öffentlicher Mindestziel-Bruch)
 
