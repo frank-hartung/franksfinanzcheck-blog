@@ -169,16 +169,46 @@ class TransportwegVertrag(unittest.TestCase):
         das Web-UI anzuzapfen – verstößt gegen die OpenAI-Bedingungen
         und bricht beim ersten Frontend-Update. Er darf nicht erst
         auffallen, wenn er schon im Repo steht.
+
+        GEPRÜFT WIRD DAS VERHALTEN, NICHT DIE SCHREIBWEISE (03.10.2026).
+        Vorher verglich dieser Test die Muster-Quelltexte per Teilstring.
+        Das hatte zwei Mängel: Es prüfte die Rechtschreibung der Sperrliste
+        statt ihrer Wirkung, und CodeQL las die Host-Vergleiche als
+        unvollständige URL-Prüfung (2 Treffer, „high"). Jetzt werden echte
+        Proben eingeschleust und die Wache muss anschlagen.
         """
-        # Die Muster sind Regex-Quelltext („chatgpt\\.com"), deshalb wird
-        # auf den unmaskierten Kern geprüft.
-        muster = [m.replace("\\", "") for m, _ in kt.BRUECKEN_SPUREN]
-        self.assertTrue(
-            any("chatgpt.com" in m or "chat.openai.com" in m for m in muster),
-            "Die ChatGPT-UI-Spur fehlt in der Sperrliste.")
-        self.assertTrue(
-            any("session-token" in m for m in muster),
-            "Die Sitzungscookie-Spur fehlt in der Sperrliste.")
+        # Zur Laufzeit zusammengesetzt: Ein literaler Treffer in dieser
+        # Datei wäre selbst eine Spur (siehe Kopfkommentar des Gates).
+        host = "chat.openai" + ".com"
+        proben = {
+            "ui_anzapfung": f'URL = "https://{host}/backend-api/conversation"',
+            "sitzungscookie": ('COOKIE = "__Secure-next-auth' + '.session-token"'),
+        }
+        for name, inhalt in proben.items():
+            probe = SCRIPTS / f".vertragstest_{name}.py"
+            probe.write_text(inhalt + "\n", encoding="utf-8")
+            try:
+                befunde = kt.t5_keine_bruecken(kt.lade_ssot())
+            finally:
+                probe.unlink(missing_ok=True)
+            self.assertTrue(
+                befunde,
+                f"T5 übersieht die eingeschleuste Probe ‚{name}‘ – die "
+                "ChatGPT-UI-Abkürzung wäre unbemerkt möglich.")
+
+    def test_sperrliste_meldet_harmlosen_code_nicht(self):
+        """Gegenprobe: Eine Wache, die immer anschlägt, schützt nichts."""
+        probe = SCRIPTS / ".vertragstest_harmlos.py"
+        probe.write_text('ANTWORT = "Die Rolle ChatGPT schreibt News."\n',
+                         encoding="utf-8")
+        try:
+            befunde = kt.t5_keine_bruecken(kt.lade_ssot())
+        finally:
+            probe.unlink(missing_ok=True)
+        self.assertEqual(
+            befunde, [],
+            "T5 meldet harmlosen Text als Brücke – Fehlalarme entwerten "
+            "die Wache.")
 
     def test_sperrliste_schlaegt_auf_einer_echten_probe_an(self):
         probe = SCRIPTS / ".vertragstest_bruecke.py"
