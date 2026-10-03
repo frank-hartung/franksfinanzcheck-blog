@@ -1,0 +1,156 @@
+# ============================================================
+#  KI-TRANSPORTWEG – Single Source of Truth
+#  ------------------------------------------------------------
+#  Rollout 03.10.2026. Gate: scripts/ki_transportweg.py
+#  Runbook: docs/ANLEITUNG-KI-TRANSPORTWEG.md
+#  Cockpit: KI-TRANSPORTWEG-STATUS.md
+#
+#  WARUM ES DIESE DATEI GIBT
+#  Die Blog-Automatik ruft an zwölf Stellen ein Sprachmodell. Welcher
+#  Anbieter das ist, welches Modell, was er kostet und was passiert,
+#  wenn er ausfällt, stand bisher verstreut in Skripten. Genau dieser
+#  blinde Fleck war Issue #514: Eine Automatik lief monatelang gegen
+#  ein Konto, das es nicht gab, und meldete brav „übersprungen".
+#
+#  Hier steht jetzt EINMAL: wer, womit, zu welchem Preis, in welcher
+#  Reihenfolge – und welche Regeln nie gebrochen werden dürfen.
+#
+#  KOSTENFREIHEIT IST STRUKTURELL (03.10.2026)
+#  Diese Datei kennt keinen kostenpflichtigen Anbieter mehr. Die
+#  früheren Opt-ins auf die OpenAI- und die Anthropic-API sind samt
+#  Endpunkten, Schlüsseln und CLI-Flags entfernt. Regel T1 hält den
+#  Zustand: Sie durchsucht SSOT, Client, Skripte und Workflows nach
+#  Paid-Spuren und wird rot, sobald eine zurückkehrt.
+#
+#  DIE CHATGPT-FRAGE (beantwortet, nicht ignoriert)
+#  „ChatGPT (Free)" ist eine Chat-Oberfläche ohne Programmierschnitt-
+#  stelle. Sie kann in keiner Pipeline laufen:
+#    · Die OpenAI-API hat keinen nutzbaren Gratis-Tier (Stand 10/2026).
+#    · Das Web-UI zu automatisieren verstößt gegen die Nutzungs-
+#      bedingungen und ist der Brücken-Pfusch aus Issue #514.
+#    · GitHub Models, der einzige offizielle Gratis-Weg zu echten
+#      GPT-Modellen, ist seit 30.07.2026 abgeschaltet.
+#  Was es wirklich gibt: openai/gpt-oss-120b – OpenAIs eigenes offenes
+#  Modell, kostenlos bei drei unabhängigen Hostern. Das ist die
+#  „OpenAI-Bahn". Ein Modell, drei Wege, 0 €, saubere Lizenz.
+# ============================================================
+
+# ------------------------------------------------------------------
+#  ANBIETER
+#  kostenklasse: gratis          (ES GIBT NUR NOCH GRATIS – Regel T1.
+#                                 Das Feld bleibt, damit ein künftiger
+#                                 Anbieter seine Kosten deklarieren muss
+#                                 und am Gate scheitert, wenn er zahlt.)
+#  bahn:         openai | fremd  (openai = echtes OpenAI-Modell)
+# ------------------------------------------------------------------
+anbieter:
+  - id: groq
+    name: Groq Cloud
+    modell: openai/gpt-oss-120b
+    kostenklasse: gratis
+    bahn: openai
+    schluessel: [GROQ_API_KEY]
+    kontingent: 30 Anfragen/Min · 1.000/Tag · 200.000 Token/Tag
+    staerke: schnellster Hoster, langer Output – trägt die langen Artikel
+    quelle: https://console.groq.com/docs/rate-limits
+
+  - id: nvidia
+    name: NVIDIA NIM (build.nvidia.com)
+    modell: openai/gpt-oss-120b
+    kostenklasse: gratis
+    bahn: openai
+    schluessel: [NVIDIA_API_KEY]
+    kontingent: ca. 40 Anfragen/Min, dauerhafter Gratis-Key ohne Karte
+    staerke: identisches Modell, komplett anderer Betreiber – echte Redundanz
+    quelle: https://build.nvidia.com/
+
+  - id: cloudflare
+    name: Cloudflare Workers AI
+    modell: "@cf/openai/gpt-oss-120b"
+    kostenklasse: gratis
+    bahn: openai
+    schluessel: [CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID]
+    kontingent: 10.000 Neuronen/Tag (ca. 100+ Anfragen), 300 Anfragen/Min
+    staerke: dritter unabhängiger Hoster, Edge-nah, hartes Tageslimit
+    quelle: https://developers.cloudflare.com/workers-ai/platform/pricing/
+
+  - id: gemini
+    name: Google Gemini (Gratis-Tier)
+    modell: gemini-3-flash-preview
+    kostenklasse: gratis
+    bahn: fremd
+    schluessel: [GEMINI_API_KEY]
+    kontingent: Google-Gratis-Tier
+    staerke: anderer Modellhersteller – fängt systemische GPT-OSS-Ausfälle
+    quelle: https://ai.google.dev/pricing
+
+
+# ------------------------------------------------------------------
+#  ROUTING: Aufgabe → Anbieter-Kette
+#  Der erste Anbieter mit Schlüssel und ohne Fehler gewinnt.
+#  Jede Kette braucht mindestens zwei Gratis-Glieder (Regel T3) und
+#  mindestens einen Hoster der OpenAI-Bahn (Regel T4).
+#
+#  Warum nicht überall dieselbe Kette? Weil die Aufgaben verschieden
+#  sind. Ein 14.000-Zeichen-Ratgeber braucht langen Output (Groq).
+#  Eine Faktenprüfung braucht Urteilsvermögen und ein zweites
+#  Modellhaus als Gegenprobe (Gemini weiter vorn).
+# ------------------------------------------------------------------
+routing:
+  lang:
+    zweck: lange Premium-Ratgeber (11.000–18.000 Zeichen)
+    kette: [groq, nvidia, cloudflare, gemini]
+  news:
+    zweck: schnelle News-Kompakt-Artikel
+    kette: [groq, nvidia, cloudflare, gemini]
+  faktenpruefung:
+    zweck: fachliche Prüfung gegen Rechercheergebnisse
+    kette: [groq, gemini, nvidia, cloudflare]
+  politur:
+    zweck: Feinschliff kurzer Texte (Hero, Titel, Meta)
+    kette: [groq, nvidia, cloudflare, gemini]
+
+# ------------------------------------------------------------------
+#  HARTE REGELN – vom Gate erzwungen, nicht verhandelbar
+# ------------------------------------------------------------------
+regeln:
+  # T1: Es existiert KEIN kostenpflichtiger Weg – nicht in dieser SSOT,
+  #     nicht im Client, nicht als Schlüssel oder Endpunkt in Skripten
+  #     und Workflows. Entfernt am 03.10.2026 (Auftrag Frank).
+  #     Ein Opt-in, das man vergessen kann, ist eine Rechnung, die man
+  #     vergisst: Bis dahin reichten zwei nächtliche Workflows klaglos
+  #     Paid-Schlüssel durch, und zwei Anbieter-Reihenfolgen begannen
+  #     sogar damit. Jetzt ist der Weg nicht abgeschaltet, sondern
+  #     nicht vorhanden.
+  kostenregel: true
+  keine_paid_anbieter: true
+  # T2: Jeder Anbieter in einer Kette muss im llm_client implementiert
+  #     sein. Eine Kette, die auf einen Phantom-Provider zeigt, ist ein
+  #     stiller Ausfall mit Ansage.
+  nur_implementierte_anbieter: true
+  # T3: Mindestens zwei Gratis-Glieder je Kette – ein Hoster, der
+  #     sein Tageskontingent verbraucht hat, darf die Produktion nicht
+  #     anhalten.
+  mindest_redundanz: 2
+  # T4: Mindestens ein Hoster der OpenAI-Bahn je Kette.
+  openai_bahn_pflicht: true
+  # T5: Keine Browser-Brücke, kein UI-Scraping, kein geteiltes
+  #     Fremdkonto (Puter & Co). Transportweg ist immer eine
+  #     dokumentierte API mit eigenem Schlüssel.
+  keine_bruecken: true
+  # T6: Jede Automatik, die ein Modell ruft, muss den gemeinsamen
+  #     scripts/llm_client.py nutzen – kein zweiter Transportweg.
+  ein_transportweg: true
+
+# ------------------------------------------------------------------
+#  BETRIEBSZUSTAND
+#  Wie viele Gratis-Hoster müssen erreichbar sein, damit der Betrieb
+#  als gesund gilt? Darunter meldet das Gate gelb (Standby) bzw. rot.
+# ------------------------------------------------------------------
+betrieb:
+  soll_hoster_erreichbar: 2     # Ziel: zwei Wege stehen immer
+  warnung_ab_hoster: 1          # nur noch ein Weg → sichtbare Warnung
+  # Standby (kein einziger Schlüssel gesetzt) ist KEIN Fehler: Die
+  # Writer haben einen Offline-Gerüst-Modus. Es ist aber auch kein
+  # Erfolg – das Cockpit sagt es laut.
+  standby_ist_gruen: true

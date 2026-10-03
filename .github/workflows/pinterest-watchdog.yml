@@ -30,6 +30,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    # Job-Ebene: Composite-Actions sehen Job-Variablen, Schritt-`env:` nicht.
+    env:
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -61,9 +64,10 @@ jobs:
           python3 scripts/pinterest_duplicate_guard.py --fix || true
 
       - name: Seite bauen (für Pin-Button-/og-Checks)
-        env:
-          HUGO_JSDELIVR_SHA: ${{ github.sha }}
-        run: hugo --minify
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Pinterest-Watchdog-Build"
 
       - name: Spam-Wache (Google/Pinterest – Blog, Feed, CSV, API + Live-Pin-Sync)
         # Dauerauftrag (26.08.2026): täglich ALLE 4 Kanäle prüfen + heilen:

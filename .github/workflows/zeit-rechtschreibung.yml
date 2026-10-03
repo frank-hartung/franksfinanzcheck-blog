@@ -77,6 +77,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Kostensperre belegen (vor jeder Geldflaeche)
+        # Dieser Job reicht ZR_USERNAME/ZR_API_KEY durch. Der
+        # Schreibschutz in data/kostensperre.yaml entscheidet, ob der
+        # Premium-Dienst ueberhaupt angesprochen werden darf – ein
+        # gesetztes Secret allein genuegt seit 03.10.2026 nicht mehr.
+        run: python3 scripts/kostensperre.py --pruefen
+
       - name: Voraussetzungen prüfen
         run: |
           for f in scripts/zeit_rechtschreibung.py scripts/sprachkern.py \

@@ -62,6 +62,10 @@ jobs:
     name: Playwright-Suite (Desktop + Mobile)
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Job-Ebene statt Schritt-Ebene: Die Composite-Action hugo-build sieht
+    # Job-Variablen zuverlässig, ein `env:` am `uses:`-Schritt nicht.
+    env:
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
 
     steps:
       - name: Repository auschecken
@@ -107,9 +111,10 @@ jobs:
         run: npm run test:werkzeuge
 
       - name: Website bauen
-        env:
-          HUGO_JSDELIVR_SHA: ${{ github.sha }}
-        run: hugo --quiet --destination public
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--destination public"
+          label: "E2E-Build"
 
       - name: E2E-Suite ausführen
         run: npx playwright test

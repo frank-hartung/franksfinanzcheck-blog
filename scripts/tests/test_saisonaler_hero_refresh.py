@@ -130,7 +130,8 @@ class Eskalation(unittest.TestCase):
 class Anbieterkette(unittest.TestCase):
     """Transportweg ist der gemeinsame LLM-Zugang – nicht die tote Puter-Brücke."""
 
-    SCHLUESSEL = ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY")
+    SCHLUESSEL = ("GROQ_API_KEY", "GEMINI_API_KEY", "NVIDIA_API_KEY",
+                  "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID")
 
     def _ohne_schluessel(self):
         gesichert = {k: os.environ.pop(k) for k in self.SCHLUESSEL if k in os.environ}
@@ -145,7 +146,28 @@ class Anbieterkette(unittest.TestCase):
         self.assertIn("Schlüssel", hero.LAST_BRIDGE_ERROR[-1])
 
     def test_reihenfolge_ist_dokumentiert_und_vollstaendig(self):
-        self.assertEqual(hero.PROVIDER_ORDER, ("claude", "openai", "groq", "gemini"))
+        """Seit 03.10.2026: ausschließlich kostenlose Hoster.
+
+        Die alte Reihenfolge begann mit zwei kostenpflichtigen
+        Anbietern. Das war harmlos, solange kein Schlüssel gesetzt war –
+        und genau deshalb gefährlich: Ein versehentlich hinterlegter
+        Paid-Schlüssel hätte den nächtlichen Hero-Lauf still
+        kostenpflichtig gemacht. Beide sind jetzt entfernt.
+        """
+        self.assertEqual(hero.PROVIDER_ORDER,
+                         ("groq", "nvidia", "cloudflare", "gemini"))
+
+    def test_kein_kostenpflichtiger_anbieter_in_der_reihenfolge(self):
+        import llm_client
+        for p in hero.PROVIDER_ORDER:
+            self.assertEqual(llm_client.KOSTENKLASSE[p], "gratis")
+
+    def test_drei_unabhaengige_gratis_hoster_in_der_kette(self):
+        import llm_client
+        bahn = [p for p in hero.PROVIDER_ORDER if p in llm_client.OPENAI_BAHN]
+        self.assertEqual(len(bahn), 3,
+                         "Ein leeres Tageskontingent darf den Hero-Lauf nicht "
+                         "anhalten (Lehre aus Issue #514).")
 
     def test_kettennachweis_meldet_fehlende_anbieter(self):
         self._ohne_schluessel()

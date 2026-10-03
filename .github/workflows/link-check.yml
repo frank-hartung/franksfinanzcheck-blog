@@ -101,13 +101,26 @@ jobs:
       - name: Governance-Vertrag C1–C18 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check)
         run: python3 scripts/governance_contract.py --quick
 
+      # ------------------------------------------------------------
+      #  HUGO-BUILD-VERTRAG (H1–H8, 03.10.2026)
+      #  Prüft, dass JEDER Hugo-Bau im Repo über die gemeinsame Action
+      #  läuft und seinen Fehler laut meldet. Am 02.10.2026 kostete die
+      #  umgekehrte Lage Stunden: fünf Workflows warfen die Fehlerzeile
+      #  weg (`> /dev/null`, `|| true`, `--quiet`).
+      # ------------------------------------------------------------
+      - name: Hugo-Build-Vertrag (eine Fehlerausgabe für alle Workflows)
+        run: python3 scripts/hugo_build_vertrag.py
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
           version: "0.164.0"
 
       - name: Seite bauen
-        run: hugo --minify
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Qualitäts-Gate"
 
       # ------------------------------------------------------------
       #  NEWSLETTER-WACHE (am frischen Build, 22.09.2026)

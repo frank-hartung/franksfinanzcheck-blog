@@ -104,7 +104,16 @@ WORKFLOWS_DIR = os.path.join(BLOG_DIR, ".github", "workflows")
 # Live-Artikel unbrauchbar gemacht, und die Site registrierte einen Service
 # Worker ohne Manifest. Beide Fehler waren im Build unsichtbar – jede Korrektur
 # ohne Wache hier wäre eine Leihgabe.
-GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
+GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
+          # Geldflaechen ausserhalb der Textkette. Gehoert ins
+          # Regelwerk, weil eine Wache, die niemand verlangt,
+          # irgendwann niemand mehr ausfuehrt.
+          "kostensperre.py",
+          # Hugo-Build-Vertrag (03.10.2026): Ohne diese Wache broeckelt die
+          # gemeinsame Fehlerausgabe zurueck in `> /dev/null`, `|| true` und
+          # `--quiet` – genau die Lage, die am 02.10.2026 Stunden kostete.
+          "hugo_build_vertrag.py",
+          "editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
           # Umsatz-Messkette (19.09.2026): Views-Nenner, Awin-API-Import,

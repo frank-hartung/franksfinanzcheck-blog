@@ -76,10 +76,14 @@ seit jeher „übersprungen (kein PUTER_AUTH_TOKEN)". Auch sie läuft jetzt übe
 existiert. `scripts/puter_chat.mjs` ist gelöscht, Node/npm aus beiden Workflows
 entfernt.
 
-**Rückfallsperre:** `scripts/tests/test_keine_puter_abhaengigkeit.py` (6 Tests)
-verbietet `secrets.PUTER_AUTH_TOKEN`, das npm-Paket und jeden Brückenaufruf in
-allen Workflows und Skripten – und verlangt umgekehrt, dass beide Nutzer den
-gemeinsamen Client samt dokumentierter Anbieter-Reihenfolge verwenden.
+**Rückfallsperre:** seit 03.10.2026 der Transportweg-Vertrag
+(`scripts/ki_transportweg.py`, Tests in
+`scripts/tests/test_ki_transportweg.py`). Er löst die anbieterspezifische
+Puter-Sperre ab und fasst sie breiter: **T5** verbietet jede Browser-Brücke,
+jedes UI-Scraping und jedes geteilte Fremdkonto in Skripten *und* Workflows,
+**T6** verlangt den gemeinsamen Client samt dokumentierter Anbieter-Reihenfolge,
+**T9** verlangt zwei kostenlose Schlüssel je KI-Workflow und verbietet
+Paid-Schlüssel im Zeitplan.
 
 ### Hebel 5 – Diagnose, die den Namen verdient
 Jeder Ausgang schreibt denselben `SAISONALER-HERO-REPORT.md`: Zustand, Ampel,
@@ -123,8 +127,9 @@ wiederhergestellt.
 Neue Testklassen: `Faelligkeit` (Grundcodes), `Eskalation` (Ampelvertrag),
 `Anbieterkette` (kein Schlüssel → kein erfundener Text, kein Absturz),
 `Wiederholung` (Retry, Korrekturauflage, Faktenbremse),
-`Ausfallzaehler` (Persistenz der Serie) sowie die eigene Datei
-`test_keine_puter_abhaengigkeit.py`.
+`Ausfallzaehler` (Persistenz der Serie). Die anbieterspezifische Datei
+`test_keine_puter_abhaengigkeit.py` ist am 03.10.2026 in den breiteren
+`test_ki_transportweg.py` aufgegangen.
 
 ---
 

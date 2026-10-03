@@ -40,6 +40,7 @@ AUFRUF:
 from __future__ import annotations
 
 import argparse
+import contextlib
 import datetime
 import http.server
 import json
@@ -47,6 +48,7 @@ import os
 import re
 import socketserver
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -351,7 +353,63 @@ def ping_n8n(url: str | None = None) -> dict[str, Any]:
 #  SELBSTTEST (Offline & hermetisch)
 # =====================================================================
 
+@contextlib.contextmanager
+def _ablage_im_sandkasten():
+    """Lenkt Log und Zustand der Bruecke waehrend des Selbsttests in einen
+    Wegwerf-Ordner.
+
+    WARUM (03.10.2026, Gate rot auf main · Schritt "Governance-Selbsttests"):
+    `selftest()` schrieb echte Zeilen nach data/n8n_bridge_log.jsonl und
+    verbog data/n8n_bridge_state.json. Der Selbsttest-Runner meldet das als
+    C15-Bruch – zu Recht: Ein Pruef-Aufruf heilt nicht und hinterlaesst
+    nichts. Nebenwirkung in der Praxis: Jeder lokale Testlauf erzeugte
+    Diff-Rauschen, das versehentlich mitcommittet werden konnte.
+
+    Die Pfade sind Modul-Globale und werden erst beim Schreiben gelesen –
+    Umbiegen auf Zeit genuegt, der Rueckbau steht im finally.
+
+    NACHTRAG (03.10.2026, Lauf 37149404892): Der Entwurfs-Teil des Tests legt
+    content/drafts/<slug>/ an und raeumte nur den <slug>-Ordner wieder weg.
+    Der LEERE Elternordner content/drafts/ blieb liegen. Git zeigt leere
+    Verzeichnisse nicht an, also sah ihn weder `git status` noch die C15-Wache
+    – Hugo dagegen schon: Der Build starb danach mit einem Typfehler in der
+    Sitemap. Deshalb merkt sich dieser Kontext auch, welche Entwurfs-Ordner es
+    VOR dem Test gab, und entfernt nur das, was der Test selbst erzeugt hat.
+    """
+    global BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
+    echt_state, echt_log = BRIDGE_STATE_PATH, BRIDGE_LOG_PATH
+    entwuerfe = os.path.join(BLOG_DIR, "content", "drafts")
+    entwuerfe_gab_es = os.path.isdir(entwuerfe)
+    with tempfile.TemporaryDirectory(prefix="n8n-bridge-selftest-") as sandkasten:
+        # Den echten Zustand hineinkopieren, damit der Test denselben
+        # Ausgangspunkt sieht wie der Normalbetrieb.
+        kopie = os.path.join(sandkasten, "n8n_bridge_state.json")
+        if os.path.exists(echt_state):
+            with open(echt_state, encoding="utf-8") as quelle:
+                with open(kopie, "w", encoding="utf-8") as ziel:
+                    ziel.write(quelle.read())
+        BRIDGE_STATE_PATH = kopie
+        BRIDGE_LOG_PATH = os.path.join(sandkasten, "n8n_bridge_log.jsonl")
+        try:
+            yield sandkasten
+        finally:
+            BRIDGE_STATE_PATH, BRIDGE_LOG_PATH = echt_state, echt_log
+            # Nur wegraeumen, was der Test angelegt hat – und nur, wenn leer.
+            # Ein Ordner mit echten Entwuerfen darf hier NIE verschwinden.
+            if not entwuerfe_gab_es and os.path.isdir(entwuerfe):
+                try:
+                    os.rmdir(entwuerfe)
+                except OSError:
+                    pass  # nicht leer: fremder Inhalt, bleibt unangetastet
+
+
 def selftest() -> bool:
+    """Selbsttest, der den Arbeitsbaum nicht anfasst (C15)."""
+    with _ablage_im_sandkasten():
+        return _selftest_kern()
+
+
+def _selftest_kern() -> bool:
     """Führt Offline-Prüfungen der n8n-Bridge-Logik durch."""
     print("🔬 Starte n8n-Bridge Selbsttest...")
 

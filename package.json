@@ -78,6 +78,12 @@
     "antwortwerk:probe": "python3 scripts/antwortwerk.py --plan --dry-run",
     "antwortwerk:offline": "python3 scripts/antwortwerk.py --plan --offline --dry-run",
     "test:werkbank": "python3 scripts/antwortwerk.py --selftest && python3 scripts/werkbank_gate.py --selftest && python3 -m unittest scripts.tests.test_werkbank",
+    "ki:transportweg": "python3 scripts/ki_transportweg.py",
+    "ki:status": "python3 scripts/ki_transportweg.py --status",
+    "ki:json": "python3 scripts/ki_transportweg.py --json --no-cockpit",
+    "ki:ping": "python3 scripts/ki_transportweg.py --ping",
+    "ki:strict": "python3 scripts/ki_transportweg.py --strict",
+    "test:ki": "python3 scripts/ki_transportweg.py --selftest && python3 scripts/ki_redaktion.py --selftest && python3 -m unittest scripts.tests.test_ki_transportweg scripts.tests.test_kostensperre",
     "shorts:plan": "python3 scripts/social_video.py --plan",
     "shorts:drehbuch": "python3 scripts/social_video.py --drehbuch",
     "shorts:bauen": "python3 scripts/social_video.py --bauen --limit 1",
@@ -121,7 +127,13 @@
     "spam:messen": "python3 scripts/spam_schutz_wache.py --nur-messen",
     "spam:status": "python3 scripts/spam_schutz_wache.py --json",
     "spam:notbremse": "python3 -c \"import json;s=json.load(open('data/spam_schutz_status.json'));print('Urteil:',s['urteil'],'| Probleme:',s['probleme'])\"",
-    "test:spam": "python3 -m unittest scripts.tests.test_spam_schutz_wache"
+    "test:spam": "python3 -m unittest scripts.tests.test_spam_schutz_wache",
+    "kosten:sperre": "python3 scripts/kostensperre.py",
+    "kosten:pruefen": "python3 scripts/kostensperre.py --pruefen",
+    "test:kosten": "python3 scripts/kostensperre.py --selftest && python3 -m unittest scripts.tests.test_kostensperre",
+    "build:vertrag": "python3 scripts/hugo_build_vertrag.py",
+    "build:selftest": "python3 scripts/hugo_build_vertrag.py --selftest",
+    "test:build": "python3 scripts/hugo_build_vertrag.py --selftest && python3 -m unittest scripts.tests.test_hugo_build_vertrag"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

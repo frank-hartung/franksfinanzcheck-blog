@@ -92,6 +92,7 @@ import urllib.request
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import kostensperre  # noqa: E402  – Schutz vor Geldflaechen
 from sprachkern import (  # noqa: E402
     ROOT, load_articles, rebuild, write_verified, now_utc,
 )
@@ -212,11 +213,32 @@ def _env(name_liste) -> str:
 
 
 def zugang_ermitteln(cfg: dict, oeffentlich: bool) -> dict:
-    """Ermittelt den Provider-Modus. Liefert dict mit modus/api_url/keys."""
+    """Ermittelt den Provider-Modus. Liefert dict mit modus/api_url/keys.
+
+    SCHREIBSCHUTZ (03.10.2026, data/kostensperre.yaml)
+    Der Premium-Modus ist eine Geldflaeche. Vorher genuegte ein gesetztes
+    Secret, um ihn zu aktivieren – ein vergessenes ZR_API_KEY haette die
+    naechtliche Wache dauerhaft kostenpflichtig gemacht, ohne dass
+    irgendwo ein Fehler sichtbar geworden waere.
+
+    Jetzt entscheidet die SSOT. Ist die Flaeche gesperrt, wird der
+    Premium-Zweig uebersprungen, als waere kein Zugang konfiguriert. Der
+    Offline-Pfad LT1-LT4 ist ohnehin der Normalbetrieb, der Unterschied
+    im Ergebnis ist gering.
+
+    Gesperrt heisst nicht geloescht: Der Premium-Pfad bleibt vollstaendig
+    erhalten und ist ueber einen begruendeten Eintrag in
+    data/kostensperre.yaml jederzeit wieder scharf.
+    """
     anb = cfg.get("anbieter", {})
     basis_umg = _env(anb.get("api_url_umgebung"))
     benutzer = _env(anb.get("benutzer_umgebung"))
     schluessel = _env(anb.get("schluessel_umgebung"))
+    if (basis_umg or (benutzer and schluessel)) and not kostensperre.wache(
+            "rechtschreibung_premium"):
+        # Gesperrt: so tun, als waere nichts konfiguriert. Die Meldung hat
+        # die Sperre bereits ausgegeben – hier kein zweites Mal.
+        basis_umg = benutzer = schluessel = ""
     if basis_umg or (benutzer and schluessel):
         return {
             "modus": "premium",

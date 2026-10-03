@@ -80,6 +80,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
+      # Job-Ebene: Composite-Actions sehen Job-Variablen, Schritt-`env:` nicht.
+      HUGO_JSDELIVR_SHA: ${{ github.sha }}
       ISSUE_MARKER: "<!-- layout-ai-report -->"
       ISSUE_TITLE: "⚠ Layout-Automatisierung: Probleme gefunden"
     steps:
@@ -91,10 +93,11 @@ jobs:
         with:
           version: "0.164.0"
 
-      - name: "Website bauen (identisch zur Produktion: hugo --minify)"
-        env:
-          HUGO_JSDELIVR_SHA: ${{ github.sha }}
-        run: hugo --minify --quiet
+      - name: "Website bauen (identisch zur Produktion, minifiziert)"
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Layout-Audit-Build"
 
       # ============ STATISCHES AUDIT ============
       - name: Statisches Layout-Audit (Links, Covers, Alt-Texte, DOM-Budget)

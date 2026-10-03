@@ -92,7 +92,10 @@ jobs:
           version: "0.164.0"
 
       - name: Build (minifiziert – wie im Deploy)
-        run: hugo --minify --destination public
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Vergleichsgrundsätze-Gate"
 
       - name: Raster gegen das gebaute HTML prüfen (V1–V8)
         run: python3 scripts/vergleichsgrundsaetze_gate.py

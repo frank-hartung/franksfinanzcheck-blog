@@ -6,16 +6,30 @@
 #  Funktions-Abbildung (siehe KI-REDAKTION.md).
 #
 #  KOSTEN-REGEL (Dauervorgabe Frank, 08.09.2026):
-#  In den Anbieter-Ketten dürfen NUR Gratis-Provider stehen
-#  (groq, gemini). Der Selbsttest (ki_redaktion.py --selftest)
-#  bricht mit Exit 2 ab, sobald hier ein Paid-Provider als
-#  alleinige Option konfiguriert ist.
+#  In den Anbieter-Ketten dürfen NUR Gratis-Provider stehen.
+#  Der Selbsttest (ki_redaktion.py --selftest) bricht mit Exit 2 ab,
+#  sobald hier ein Paid-Provider auftaucht; das Transportweg-Gate
+#  (scripts/ki_transportweg.py, Regel T1) prüft dasselbe hart.
+#
+#  ROLLE „CHATGPT" (geklärt 03.10.2026):
+#  Es gibt keine automatisierbare Gratis-ChatGPT-Schnittstelle – die
+#  OpenAI-API ist kostenpflichtig, das Web-UI darf nicht automatisiert
+#  werden, GitHub Models ist seit 30.07.2026 abgeschaltet. Statt eines
+#  Konto-Hacks läuft die Rolle auf OpenAIs eigenem offenen Modell
+#  `openai/gpt-oss-120b` bei drei unabhängigen Gratis-Hostern.
+#  Begründung: CHATGPT-GRATIS-TRANSPORTWEG-PREMIUM-2026-10-03.md
 # ============================================================
 
 # Rollen-Ketten: erster erreichbarer Provider gewinnt.
-# groq = GPT-OSS 120B (kostenlos), gemini = Gratis-Tier.
-anbieter_kette_lang: [groq, gemini]
-anbieter_kette_news: [groq, gemini]
+# Die Reihenfolge ist Redundanz, keine Deko – dasselbe OpenAI-Modell
+# bei drei Hostern, danach ein fremdes Modellhaus als Gegenprobe:
+#   groq       → openai/gpt-oss-120b   (30/Min, 1.000/Tag)
+#   nvidia     → openai/gpt-oss-120b   (ca. 40/Min)
+#   cloudflare → @cf/openai/gpt-oss-120b (10.000 Neuronen/Tag)
+#   gemini     → gemini-3-flash-preview (Google-Gratis-Tier)
+# SSOT der Ketten für alle anderen Automatiken: data/ki_transportweg.yaml
+anbieter_kette_lang: [groq, nvidia, cloudflare, gemini]
+anbieter_kette_news: [groq, nvidia, cloudflare, gemini]
 
 # Zeichen-Korridore (müssen den length_policy-Floor 10.000 erfüllen)
 zeichenvorgabe_lang:

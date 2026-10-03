@@ -81,16 +81,24 @@ Fall ein (ST3), inklusive einer erfundenen Beispiel-URL.
 
 Die Fachprüfung läuft über den gemeinsamen LLM-Zugang des Blogs
 (`scripts/llm_client.py`) mit den bereits etablierten Schlüsseln
-`GROQ_API_KEY` bzw. `GEMINI_API_KEY` (optional `ANTHROPIC_API_KEY` /
-`OPENAI_API_KEY`). Der erste verfügbare Anbieter gewinnt, bei Ausfall rückt der
+`GROQ_API_KEY`, `NVIDIA_API_KEY`, `CLOUDFLARE_API_TOKEN` (+ `CLOUDFLARE_ACCOUNT_ID`)
+oder `GEMINI_API_KEY` – alle kostenlos; kostenpflichtige Anbieter gibt es seit
+dem 03.10.2026 nicht mehr. Der erste verfügbare Anbieter gewinnt, bei Ausfall rückt der
 nächste nach. Ohne jeden Schlüssel läuft alles außer der Fachprüfung; die
 Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
 
-> **Korrektur 02.10.2026:** Die frühere Puter-Brücke (`PUTER_AUTH_TOKEN`,
-> `scripts/puter_chat.mjs`, `npm @heyputer/puter.js`) ist ersatzlos entfernt.
-> Puter wird im Betrieb nicht genutzt – die Fachprüfung war damit dauerhaft
-> „übersprungen". `scripts/tests/test_keine_puter_abhaengigkeit.py` verhindert,
-> dass die Abhängigkeit zurückkehrt.
+> **Korrektur 02.10.2026:** Die frühere Browser-Brücke über ein geteiltes
+> Fremdkonto ist ersatzlos entfernt – sie wurde im Betrieb nie genutzt, die
+> Fachprüfung war damit dauerhaft „übersprungen".
+>
+> **Seit 03.10.2026** hält das Transportweg-Gate diese Bauweise generell
+> draußen: `scripts/ki_transportweg.py` Regel **T5** verbietet jede
+> Browser-Brücke und jedes UI-Scraping (auch das von ChatGPT) in Skripten
+> **und** Workflows, Regel **T9** verlangt, dass dieser Workflow mindestens
+> zwei kostenlose Schlüssel durchreicht – damit ein leeres Tageskontingent
+> die Fachprüfung nicht erneut still ausfallen lässt. Tests:
+> `scripts/tests/test_ki_transportweg.py`, Runbook:
+> `docs/ANLEITUNG-KI-TRANSPORTWEG.md`.
 
 ## Was der Leser sieht
 

@@ -169,12 +169,26 @@ jobs:
             scripts/git_sync.sh "chore(reserve): Zertifikat nachgezogen (#462)" \
             data/reserve-readiness.json
 
+      - name: Abhängigkeiten für den Pinterest-Report
+        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        continue-on-error: true
+        run: python3 -m pip install -q pyyaml 2>/dev/null || true
+
+      # Vorher: `hugo --minify || true`. Der Bau DARF hier scheitern (der
+      # Watchdog soll trotzdem messen), aber er darf es nicht lautlos tun –
+      # „toleriert" und „unbemerkt" sind zwei verschiedene Dinge.
+      - name: Seite bauen (Fehlschlag toleriert, aber sichtbar)
+        if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Bot-Watchdog (Pinterest-Report)"
+          weiter-bei-fehler: "true"
+
       - name: Pinterest-Report nachziehen (#462)
         if: ${{ contains(env.CHECK9B, 'FAIL') || contains(env.CHECK9B, 'WARN') }}
         continue-on-error: true
         run: |
-          python3 -m pip install -q pyyaml 2>/dev/null || true
-          hugo --minify || true
           set +e
           python3 scripts/pinterest_check.py --fix
           echo "pinterest_exit=$?" >> "$GITHUB_STEP_SUMMARY"

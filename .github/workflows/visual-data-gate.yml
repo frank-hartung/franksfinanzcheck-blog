@@ -37,7 +37,10 @@ jobs:
         with:
           version: "0.164.0"
       - name: Statisches SVG und Datentabelle bauen
-        run: hugo --minify --quiet --destination public
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Visual-Data-Gate"
       - name: Gebaute Visualisierungen nachweisen
         run: |
           test "$(grep -Roh 'data-ff-chart' public/posts | wc -l)" -ge 2

@@ -10,9 +10,17 @@
 #    jasper_seo.py     → Rolle „Jasper":    SEO-Pass (deterministisch)
 #
 #  KOSTEN-REGEL (Dauervorgabe Frank, 08.09.2026): Diese Automatik
-#  darf NUR Gratis-Zugänge nutzen (Groq/Gemini – bereits im Repo
-#  etabliert). Paid-APIs (Anthropic/OpenAI) werden NIE automatisch
-#  verwendet; sie lassen sich nur manuell per Env-Key zuschalten.
+#  darf NUR Gratis-Zugänge nutzen. Paid-APIs (Anthropic/OpenAI)
+#  werden NIE automatisch verwendet; sie lassen sich nur manuell per
+#  Env-Key zuschalten.
+#
+#  SEIT 03.10.2026: Die Rolle „ChatGPT" läuft auf OpenAIs eigenem
+#  offenen Modell `openai/gpt-oss-120b` – kostenlos über drei
+#  unabhängige Hoster (Groq → NVIDIA NIM → Cloudflare Workers AI),
+#  Gemini als Gegenprobe aus einem anderen Modellhaus. Die Ketten
+#  stehen in data/ki_transportweg.yaml, das Gate ist
+#  scripts/ki_transportweg.py. Warum kein echtes ChatGPT-Konto:
+#  CHATGPT-GRATIS-TRANSPORTWEG-PREMIUM-2026-10-03.md.
 # ============================================================
 from __future__ import annotations
 
@@ -54,8 +62,11 @@ DISCLAIMER = (
 DEFAULT_CONFIG = {
     # Gratis-Provider zuerst (Kosten-Regel). Paid-Anbieter nur, wenn
     # jemand bewusst einen Key hinterlegt UND hier freischaltet.
-    "anbieter_kette_lang": ["groq", "gemini"],
-    "anbieter_kette_news": ["groq", "gemini"],
+    # Drei Hoster desselben OpenAI-Modells + ein fremdes Modellhaus:
+    # fällt einer aus oder ist sein Tageskontingent leer, rückt der
+    # nächste nach, statt die Produktion anzuhalten.
+    "anbieter_kette_lang": ["groq", "nvidia", "cloudflare", "gemini"],
+    "anbieter_kette_news": ["groq", "nvidia", "cloudflare", "gemini"],
     "zeichenvorgabe_lang": {"min": 11000, "ziel": 14000, "max": 18000},
     "zeichenvorgabe_news": {"min": 10500, "ziel": 12000, "max": 15000},
     "auto_veroeffentlichen": False,   # Dauervorgabe: NIE automatisch live

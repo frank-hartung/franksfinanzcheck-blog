@@ -63,9 +63,12 @@ class FixkostenKompassContractTests(unittest.TestCase):
         self.assertIn("python3 scripts/fixkosten_kompass_guard.py --selftest", workflow)
         self.assertIn("python3 scripts/fixkosten_kompass_guard.py --source-only", workflow)
         self.assertIn("python3 scripts/fixkosten_kompass_guard.py --public public", workflow)
+        # Anker nachgezogen 03.10.2026: Der Bau läuft jetzt über die
+        # gemeinsame Action. Der VERTRAG ist unverändert – der Quellvertrag
+        # muss VOR dem Bau greifen, sonst baut Hugo bereits Defektes.
         self.assertLess(
             workflow.index("Fixkosten-Kompass – Quell- und Datenschutzvertrag"),
-            workflow.index("run: hugo --minify"),
+            workflow.index("uses: ./.github/actions/hugo-build"),
         )
         self.assertLess(
             workflow.index("Fixkosten-Kompass – finales Produkt-Gate"),

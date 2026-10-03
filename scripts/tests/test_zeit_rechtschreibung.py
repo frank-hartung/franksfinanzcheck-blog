@@ -25,8 +25,10 @@ Läuft deterministisch ohne Netz
 """
 from __future__ import annotations
 
+import contextlib
 import json
 import os
+import pathlib
 import sys
 import tempfile
 import unittest
@@ -98,12 +100,68 @@ class TestZugang(unittest.TestCase):
                   "ZR_API_KEY", "LT_API_KEY", "LT_APIKEY"):
             os.environ.pop(k, None)
 
-    def test_premium_per_schluessel(self):
+    # ------------------------------------------------------------------
+    #  SCHREIBSCHUTZ (03.10.2026, data/kostensperre.yaml)
+    #
+    #  Bis hierher galt: Schluessel gesetzt -> Premium laeuft. Genau das
+    #  ist jetzt gesperrt, denn ein vergessenes Secret darf keine
+    #  Rechnung ausloesen. Die beiden folgenden Tests pruefen deshalb
+    #  BEIDE Haelften des neuen Vertrags:
+    #
+    #    · gesperrt  -> trotz Schluessel bleibt es offline
+    #    · entsichert-> die Premium-Erkennung funktioniert unveraendert
+    #
+    #  Nur die zweite Haelfte zu streichen waere bequem gewesen und
+    #  falsch: Dann waere unbewiesen, dass der Premium-Pfad ueberhaupt
+    #  noch funktioniert – gesperrt haette sich von kaputt nicht mehr
+    #  unterscheiden lassen.
+    # ------------------------------------------------------------------
+    @contextlib.contextmanager
+    def _entsichert(self, fid="rechtschreibung_premium"):
+        """Gibt die Geldflaeche voruebergehend frei (nur im Speicher)."""
+        import copy
+
+        import kostensperre as ks
+        import yaml
+        echte = ks.SSOT
+        daten = ks.lade_ssot()
+        kopie = copy.deepcopy(daten)
+        for eintrag in kopie.get("flaechen", []):
+            if eintrag.get("id") == fid:
+                eintrag.update(freigegeben=True, grund="Vertragstest",
+                               datum="2026-10-03")
+        with tempfile.TemporaryDirectory(prefix="zr-entsichert-") as ordner:
+            pfad = pathlib.Path(ordner) / "kostensperre.yaml"
+            pfad.write_text(yaml.safe_dump(kopie, allow_unicode=True),
+                            encoding="utf-8")
+            ks.SSOT = pfad
+            try:
+                yield
+            finally:
+                ks.SSOT = echte
+
+    def test_premium_bleibt_gesperrt_trotz_schluessel(self):
+        """Der Schreibschutz schlaegt die Umgebung."""
         self._clean_env()
         try:
             os.environ["ZR_USERNAME"] = "frank@example.de"
             os.environ["ZR_API_KEY"] = "geheim"
             z = zr.zugang_ermitteln(zr.DEFAULT_CONFIG, False)
+            self.assertEqual(
+                z["modus"], "offline",
+                "Ein gesetztes Secret aktiviert den kostenpflichtigen "
+                "Dienst – der Schreibschutz greift nicht.")
+        finally:
+            self._clean_env()
+
+    def test_premium_per_schluessel_wenn_entsichert(self):
+        """Entsichert muss der Premium-Pfad weiterhin sauber greifen."""
+        self._clean_env()
+        try:
+            os.environ["ZR_USERNAME"] = "frank@example.de"
+            os.environ["ZR_API_KEY"] = "geheim"
+            with self._entsichert():
+                z = zr.zugang_ermitteln(zr.DEFAULT_CONFIG, False)
             self.assertEqual(z["modus"], "premium")
             self.assertEqual(z["api_url"], zr.STANDARD_API_URL)
         finally:
@@ -120,13 +178,26 @@ class TestZugang(unittest.TestCase):
         self.assertEqual(z["modus"], "oeffentlich")
         self.assertIn("manuelle Nutzung", z["grund"])
 
-    def test_eigener_endpunkt_hat_vorrang(self):
+    def test_eigener_endpunkt_hat_vorrang_wenn_entsichert(self):
+        self._clean_env()
+        try:
+            os.environ["ZR_API_URL"] = "https://lt.eigen.example/v2/check"
+            with self._entsichert():
+                z = zr.zugang_ermitteln(zr.DEFAULT_CONFIG, True)
+            self.assertEqual(z["modus"], "premium")
+            self.assertEqual(z["api_url"], "https://lt.eigen.example/v2/check")
+        finally:
+            self._clean_env()
+
+    def test_eigener_endpunkt_bleibt_gesperrt(self):
+        """Auch ein eigener Endpunkt ist eine Geldflaeche."""
         self._clean_env()
         try:
             os.environ["ZR_API_URL"] = "https://lt.eigen.example/v2/check"
             z = zr.zugang_ermitteln(zr.DEFAULT_CONFIG, True)
-            self.assertEqual(z["modus"], "premium")
-            self.assertEqual(z["api_url"], "https://lt.eigen.example/v2/check")
+            self.assertEqual(
+                z["modus"], "oeffentlich",
+                "Gesperrt muss der eigene Endpunkt uebersprungen werden.")
         finally:
             self._clean_env()
 

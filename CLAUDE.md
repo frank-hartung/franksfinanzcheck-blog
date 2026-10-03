@@ -75,6 +75,9 @@ npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tes
 npm run offenlegung                                   # Build + Werbe-Offenlegung O1–O7 (artikelgenau, sichtbar)
 npm run test:offenlegung                              # Selbsttest (13 Sabotage-Proben) + 36 Unit-Tests
 npm run vergleiche:check                              # Bewertungsraster V1–V8: Selbsttest + Quellen + Build + HTML-Beweis
+npm run ki:transportweg                               # KI-Transportweg: Vertrag T1–T9 + Cockpit (ein Modell, drei Wege, 0 €)
+npm run ki:status                                      # welche Gratis-Hoster sind gerade erreichbar?
+npm run test:ki                                        # Gate-Selbsttest (10 Sabotage-Proben) + 28 Vertragstests
 npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                                # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
@@ -200,6 +203,125 @@ Anthropic-API) für jeden bestehenden und jeden neuen Artikel.
   Faktenstand“) und als `citation`/`sdDatePublished` im Article-JSON-LD.
   **Eine Quelle, zwei Ausspielwege** – nie einen der beiden separat pflegen.
 - Runbook: `docs/ANLEITUNG-FAKTENFRISCHE.md`.
+
+## Hugo-Build: eine Fehlerausgabe für alle Workflows (seit 03.10.2026)
+
+**Jeder Hugo-Bau läuft über `./.github/actions/hugo-build`.** Direkte
+`run: hugo …`-Zeilen sind ein Befund (H6).
+
+```yaml
+- name: Seite bauen
+  uses: ./.github/actions/hugo-build
+  with:
+    args: "--minify"
+    label: "Qualitäts-Gate"
+```
+
+**Warum.** Am 02.10.2026 starb der Build an einem leeren Verzeichnis unter
+`content/`. Die Suche dauerte Stunden, weil fünf Workflows die Fehlerzeile
+vernichteten: `> /dev/null 2>&1` (seo-weekly, 2×), `|| true` (bot-watchdog),
+`--quiet` (e2e, layout-ai, visual-data-gate). Ein Schritt, der rot wird und
+nichts sagt, ist teurer als einer, der grün durchläuft.
+
+Die Action garantiert ohne Zutun des Aufrufers: `pipefail` + `PIPESTATUS[0]` +
+`tee`, eine `::error title=…::`-Annotation, einen Block in
+`$GITHUB_STEP_SUMMARY` und eine **Selbstdiagnose**, die aktiv nach leeren
+Verzeichnissen sucht — die sieht `git status` grundsätzlich nicht.
+
+**`--quiet` wird abgelehnt** (Exit 2). Ruhe gibt es über die Logdatei, nicht
+durch Wegwerfen der Diagnose.
+
+**Darf ein Bau scheitern?** Dann `weiter-bei-fehler: "true"` statt `|| true`.
+Der Fehlschlag bleibt sichtbar, er stoppt nur den Job nicht. *Toleriert* und
+*unbemerkt* sind zwei verschiedene Dinge.
+
+Wache `scripts/hugo_build_vertrag.py` (H1–H8) läuft im Qualitäts-Gate.
+Ausnahmen nur mit Begründung in `AUSNAHMEN` — ein toter Eintrag ist selbst ein
+Befund. Runbook: `docs/ANLEITUNG-HUGO-BUILD.md`.
+
+---
+
+## Ein `--selftest` muss das Modul prüfen, dessen Namen er trägt
+
+`scripts/hemingway_check.py` warb mit `--selftest`, reichte die Flagge aber nur
+an `readability_check` weiter — und ersetzte in dessen grüner Zeile den
+Modulnamen. Das Häkchen lautete `✅ hemingway_check --selftest OK`, geprüft war
+davon keine Zeile. Der zugehörige Test bestätigte genau diese gefälschte
+Zeichenkette (behoben 03.10.2026).
+
+**Regel für Adapter-Module:** Der Selbsttest prüft die eigenen Versprechen
+(Durchreichen, Exit-Codes, Umbenennung, JSON-Unversehrtheit) **und** ruft den
+Selbsttest der Engine zusätzlich auf. Er darf die Flagge nie bloß weiterreichen.
+
+**Gegenregel zum Weiterreichen:** Hat die Engine gar kein `--selftest`, startet
+ein Aufruf mit der Flagge ihre Standard-Aktion — bei `publish_gate.py` wäre das
+der scharfe Lauf, der am 18.09.2026 beinahe einen Live-Artikel auf `draft`
+herabstufte. `selftest_runner.GEFAHREN` führt solche Module mit Begründung.
+
+---
+
+## Kostensperre: Geldflächen sind verriegelt, nicht gelöscht
+
+**SSOT `data/kostensperre.yaml` · Wache `scripts/kostensperre.py` · Vertrag T10**
+
+Zwei Flächen außerhalb der Textkette können Geld kosten: die
+Vorlese-Stimme (ElevenLabs) und die Rechtschreibung auf ZEIT-Niveau.
+Beide bleiben im Code, sind aber **fail-closed verriegelt**: Ein
+gesetztes Secret allein löst nichts mehr aus. Entsichern geht nur über
+einen Commit in der SSOT – mit `grund` und `datum`, sonst wirkt die
+Freigabe nicht.
+
+```bash
+npm run kosten:sperre     # Bericht
+npm run kosten:pruefen    # Wache (CI)
+npm run test:kosten       # Selbsttest + Vertragstests
+```
+
+Regel: **Neue Geldfläche → Eintrag in `data/kostensperre.yaml` und
+Aufruf von `kostensperre.wache(<id>)` an der Engstelle.** T10 wird sonst
+rot. Runbook: `docs/ANLEITUNG-KOSTENSPERRE.md`.
+
+## KI-Transportweg: ein Modell, drei Wege, 0 € (seit 03.10.2026)
+
+Jeder Modell-Ruf des Blogs geht durch **einen** Zugang
+(`scripts/llm_client.py`) und folgt **einer** Routing-Tabelle
+(`data/ki_transportweg.yaml`). Gate: `scripts/ki_transportweg.py` (T1–T9,
+fail-closed, Selbsttest mit zehn Sabotage-Proben).
+
+- **„ChatGPT (Free)" ist keine Option – nicht aus Sparzwang, sondern
+  weil es sie nicht gibt.** Keine API; die OpenAI-API hat keinen
+  nutzbaren Gratis-Tier; das Web-UI zu automatisieren verstößt gegen die
+  Nutzungsbedingungen; **GitHub Models ist seit 30.07.2026
+  abgeschaltet**. Wer das „nur mal eben" nachrüstet, baut Issue #514 neu.
+  Begründung: `CHATGPT-GRATIS-TRANSPORTWEG-PREMIUM-2026-10-03.md`.
+- **Die OpenAI-Bahn:** `openai/gpt-oss-120b` – OpenAIs eigenes offenes
+  Modell – bei **drei** unabhängigen Gratis-Hostern (Groq → NVIDIA NIM →
+  Cloudflare Workers AI), danach Gemini als Gegenprobe aus einem anderen
+  Modellhaus. Ein leeres Tageskontingent hält damit keine Automatik mehr an.
+- **T1 ist eine Dauersperre (verschärft 03.10.2026):** Es gibt **keinen**
+  kostenpflichtigen Weg mehr – die Provider `openai`/`claude` sind samt
+  Endpunkten, Schlüsseln und `--provider`-Flags aus dem Repo entfernt.
+  T1 prüft SSOT, Client, **alle** Skripte und **alle** Workflows auf
+  Rückkehr (Schlüsselnamen *und* Endpunkte); T9 bewacht zusätzlich die
+  vier KI-Workflows. Ein alter `chat("openai", …)`-Aufruf scheitert
+  **laut** mit Klartext-Ansage, nicht still. Wer wieder eine Paid-API
+  anschließen will, ändert zuerst diesen Vertrag – nicht nebenbei ein
+  Skript.
+- **T3/T4 sind Verfügbarkeitsregeln:** mindestens zwei Gratis-Glieder und
+  mindestens ein OpenAI-Hoster je Kette. Eine Kette mit einem Glied ist
+  ein Vertragsbruch, kein Betriebszustand.
+- **T5 verbietet die Bauweise, nicht einen Namen:** keine Browser-Brücke,
+  kein UI-Scraping (auch nicht von ChatGPT), kein geteiltes Fremdkonto –
+  in Skripten **und** Workflows. Diese Regel hat am 03.10.2026 die
+  anbieterspezifische Datei `test_keine_puter_abhaengigkeit.py` abgelöst.
+- **Denkspuren-Filter:** GPT-OSS denkt laut. `llm_client._ohne_denkspuren()`
+  entfernt `<think>`/`analysis…assistantfinal` zentral für alle Hoster –
+  sonst landet es als R16-PROMPT-ECHO im Frontmatter (#521).
+- **Standby ist grün, aber nicht still.** Kein Schlüssel = Offline-Gerüste,
+  und das Cockpit sagt es laut. Genau diese Ehrlichkeit fehlte bei #514.
+- **Vor jedem Umbau:** `npm run test:ki`, danach `npm run ki:transportweg`.
+- Cockpit: `KI-TRANSPORTWEG-STATUS.md` · Anleitung:
+  `docs/ANLEITUNG-KI-TRANSPORTWEG.md`.
 
 ## Werkbank: die eigene Antwortmaschine statt Perplexity (seit 03.10.2026)
 

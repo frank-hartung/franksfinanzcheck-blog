@@ -11,7 +11,9 @@
 #    Rolle Jasper   → scripts/jasper_seo.py      (SEO-Pass/-Fixes)
 #
 #  KOSTEN-REGEL (Dauervorgabe): Die Automatik nutzt ausschließlich
-#  Gratis-Zugänge (Groq/Gemini – bereits im Repo etabliert). Paid-
+#  Gratis-Zugänge. Die Rolle „ChatGPT" läuft seit 03.10.2026 auf
+#  OpenAIs offenem Modell openai/gpt-oss-120b bei drei Gratis-Hostern
+#  (Groq → NVIDIA → Cloudflare), Gemini als Gegenprobe. Paid-
 #  APIs (Anthropic/OpenAI/Jasper) werden NIE automatisch angerufen.
 #  Jasper selbst hat keine öffentliche API – die Rolle ist als
 #  Funktions-Äquivalent an Bord (siehe KI-REDAKTION.md).
@@ -185,12 +187,15 @@ def cmd_selftest(_args) -> int:
             print(f"  ✅ {script} vorhanden")
 
     cfg = ks.load_config()
+    import llm_client as _lc
     for key in ("anbieter_kette_lang", "anbieter_kette_news"):
         chain = cfg.get(key) or []
-        paid_only = all(p in ("claude", "openai") for p in chain)
-        if paid_only:
-            print(f"  ❌ {key} enthält nur Paid-Provider – Kosten-Regel "
-                  "verletzt!")
+        # Kostenklasse kommt aus EINER Quelle (llm_client.KOSTENKLASSE),
+        # damit ein neuer Anbieter nicht versehentlich als gratis gilt.
+        bezahlt = [p for p in chain if not _lc.ist_gratis(p)]
+        if chain and bezahlt:
+            print(f"  ❌ {key} enthält kostenpflichtige Provider "
+                  f"({', '.join(bezahlt)}) – Kosten-Regel verletzt!")
             ok = False
         elif chain:
             print(f"  ✅ {key}: {' → '.join(chain)}")

@@ -115,19 +115,27 @@ jobs:
           version: "0.164.0"
 
       # ---------- 1) MESSEN ----------
+      # Der Bau darf hier NICHT sofort abbrechen: Sein Exit-Code ist der
+      # Messwert, den governance_gate.py bewertet. weiter-bei-fehler liefert
+      # genau das – Fehlschlag sichtbar (Annotation + Zusammenfassung),
+      # Auswertung läuft weiter.
       - name: Hugo-Build (Fehler werden bewertet, nicht verschluckt)
         id: build
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Premium-Governance (Messung)"
+          log: "/tmp/build.log"
+          zeilen: "25"
+          weiter-bei-fehler: "true"
+
+      - name: Build-Befund an den Governance-Gate melden
+        env:
+          BUILD_RC: ${{ steps.build.outputs.rc }}
+          BUILD_LOG: ${{ steps.build.outputs.log }}
         run: |
-          set +e
-          hugo --minify > /tmp/build.log 2>&1
-          rc=$?
-          set -e
-          if [ "$rc" -ne 0 ]; then
-            echo "Hugo-Build fehlgeschlagen (letzte 25 Zeilen):"
-            tail -n 25 /tmp/build.log
-          fi
-          python3 scripts/governance_gate.py --emit build --log /tmp/build.log \
-            --exit "$rc" --require-green
+          python3 scripts/governance_gate.py --emit build --log "$BUILD_LOG" \
+            --exit "$BUILD_RC" --require-green
 
       - name: Content-Decay-Radar
         id: decay

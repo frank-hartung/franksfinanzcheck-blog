@@ -7,11 +7,12 @@
 #  Premium-Ratgeber (11.000–18.000 Zeichen) mit klarer Struktur,
 #  Tabellen, Rechenbeispielen und FAQ.
 #
-#  KOSTEN-REGEL: Standardmäßig laufen NUR die Gratis-Zugänge des
-#  Repos (Groq → Gemini, Kette aus data/ki_redaktion.yaml). Die
-#  echte Anthropic-API wird nur verwendet, wenn ausdrücklich ein
-#  ANTHROPIC_API_KEY gesetzt UND --provider claude übergeben wird
-#  (kostenpflichtig – deshalb nie Default).
+#  KOSTEN-REGEL: Es laufen AUSSCHLIESSLICH Gratis-Zugänge
+#  (Groq → NVIDIA → Cloudflare → Gemini, Kette aus
+#  data/ki_redaktion.yaml). Seit 03.10.2026 gibt es keinen
+#  kostenpflichtigen Pfad mehr – das frühere Opt-in auf die
+#  Anthropic-API ist ersatzlos entfernt. „Rolle Claude" ist ein
+#  REDAKTIONELLER Rollenname (langer Premium-Ratgeber), kein Anbieter.
 #
 #  Ergebnis ist IMMER ein Entwurf (draft: true, kein cadence_wait):
 #  Die Content-Engine v2 und ihre Gates bleiben der einzige Weg ins
@@ -22,7 +23,6 @@
 #    python3 scripts/claude_writer.py                    # freies Thema
 #    python3 scripts/claude_writer.py --topic "Titel" --pillar strom-sparen
 #    python3 scripts/claude_writer.py --offline          # ohne KI-API
-#    python3 scripts/claude_writer.py --provider claude  # paid, opt-in
 # ============================================================
 from __future__ import annotations
 
@@ -132,11 +132,12 @@ def _brief(topic: dict, keywords: list, extra: str = "") -> str:
 
 def _generate(provider_chain: list, system: str, prompt: str,
               model: str | None) -> tuple[str | None, str]:
-    """Erster erreichbarer Gratis-Provider der Kette. Liefert (Text, Name)."""
+    """Erster erreichbarer Gratis-Provider der Kette. Liefert (Text, Name).
+
+    Alle Glieder sind kostenfrei (Vertrag T1) – es gibt deshalb keine
+    Sonderbehandlung mehr für kostenpflichtige Anbieter.
+    """
     for prov in provider_chain:
-        if prov == "claude" and not (os.environ.get("ANTHROPIC_API_KEY")
-                                     and "--provider" in sys.argv):
-            continue
         text = llm_client.chat(prov, prompt=prompt, system=system,
                                model=model, temperature=0.5,
                                max_tokens=8192, timeout=240)
@@ -292,17 +293,10 @@ def main() -> int:
     ap.add_argument("--offline", action="store_true",
                     help="ohne KI-API: nur Struktur-Gerüst erzeugen")
     ap.add_argument("--provider",
-                    choices=["groq", "gemini", "claude", "openai"],
-                    help="Provider erzwingen (claude/openai = kostenpflichtig, "
-                         "nur mit gesetztem Key)")
+                    choices=list(llm_client.PROVIDERS),
+                    help="Provider erzwingen (alle kostenfrei)")
     ap.add_argument("--model", help="Modell-ID überschreiben")
     args = ap.parse_args()
-    if args.provider in ("claude", "openai") and not os.environ.get(
-            "ANTHROPIC_API_KEY" if args.provider == "claude"
-            else "OPENAI_API_KEY"):
-        print(f"❌ --provider {args.provider} braucht einen (kostenpflichtigen) "
-              "API-Key. Gratis-Regel: weglassen, dann laufen Groq/Gemini.")
-        return 2
     return run(args)
 
 

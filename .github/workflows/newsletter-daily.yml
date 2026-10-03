@@ -105,7 +105,10 @@ jobs:
           version: "0.164.0"
 
       - name: Seite bauen
-        run: hugo --minify
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Newsletter-Build"
 
       - name: Capture-Wache – konfiguriert oder laut inert
         # --strict-inert: ein Lauf, der senden will, darf Inaktivität nicht als

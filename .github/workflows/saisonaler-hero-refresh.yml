@@ -7,13 +7,15 @@
 #  beiden Felder automatisiert, aber eng begrenzt und nachweisbar:
 #
 #    1. Agent Reach erzeugt einen frischen, rein lesenden Signal-Brief.
-#    2. Der gemeinsame LLM-Zugang des Blogs (scripts/llm_client.py mit
-#       GROQ_API_KEY / GEMINI_API_KEY) schreibt nur H1 + Lead in Franks Stil;
-#       keine neuen Fakten werden erlaubt.
-#       KORREKTUR 02.10.2026: Die frühere Puter-Brücke (Token, npm-Paket,
-#       Node 24) ist ersatzlos entfernt – dieses Konto wird im Betrieb nicht
-#       genutzt, der Lauf konnte damit nie gelingen. Rückfall verhindert
-#       scripts/tests/test_keine_puter_abhaengigkeit.py.
+#    2. Der gemeinsame LLM-Zugang des Blogs (scripts/llm_client.py)
+#       schreibt nur H1 + Lead in Franks Stil; keine neuen Fakten werden
+#       erlaubt. Die Anbieter-Kette ist seit 03.10.2026 redundant:
+#       Groq → NVIDIA → Cloudflare (dreimal openai/gpt-oss-120b bei
+#       unabhängigen Hostern) → Gemini. Ein leeres Tageskontingent hält
+#       den Lauf damit nicht mehr an.
+#       Vertrag und Sperrliste (keine Brücken, keine Paid-Schlüssel im
+#       Zeitplan): scripts/ki_transportweg.py, Regeln T5/T9 –
+#       Tests in scripts/tests/test_ki_transportweg.py.
 #    3. saisonaler_hero_refresh.py validiert SEO/GEO, Markenstimme,
 #       Faktenbremse und Neuheit; bei Fehlern wird nichts geschrieben.
 #    4. Hugo + saisonale Startseitenwache beweisen das gerenderte Resultat.
@@ -92,9 +94,10 @@ jobs:
           # Anbieter gewinnt; fehlt jeder Schlüssel, bleibt die kuratierte
           # Saisonbasis live und der Lauf meldet das als gelbe Warnung.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           ARGS=""
           if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="--force"; fi
@@ -109,9 +112,14 @@ jobs:
           # ein Fehlalarm, obwohl die Startseite einwandfrei ausgeliefert wird.
           exit $CODE
 
-      - name: Render-Beweis und Premium-Layout-Gates
+      - name: Render-Beweis bauen
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Saisonaler Hero – Render-Beweis"
+
+      - name: Premium-Layout-Gates gegen den Build
         run: |
-          hugo --minify
           python3 scripts/saisonale_startseite_guard.py --public public
           python3 scripts/design_variant_gate.py --produktionswache
 

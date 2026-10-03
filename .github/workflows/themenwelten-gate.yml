@@ -64,16 +64,25 @@ jobs:
         run: |
           python3 -m unittest discover -s scripts/tests -p 'test_themenwelten.py' -v
           python3 scripts/themenwelten_guard.py --source-only
-      - name: Produktions-Build und Auslieferungsprüfung
-        run: |
-          hugo --minify --cleanDestinationDir
-          python3 scripts/themenwelten_guard.py --public public
+      - name: Produktions-Build
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --cleanDestinationDir"
+          label: "Themenwelten – Produktions-Build"
+
+      - name: Auslieferungsprüfung
+        run: python3 scripts/themenwelten_guard.py --public public
       - name: Browser-Abhängigkeiten aus dem vorhandenen Lockfile
         run: npm ci --prefix tools/ff-voice-browser --no-audit --no-fund
       - name: Chromium – mobil, Desktop, Tastatur, Dunkelmodus, ohne JavaScript
         run: node scripts/themenwelten_browser_test.mjs --public public
       - name: Unterverzeichnis-Build (keine kaputten relativen Links)
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --baseURL https://example.invalid/blog/ --destination tmp/themenwelten-subdir"
+          label: "Themenwelten – Unterverzeichnis-Build"
+
+      - name: Unterverzeichnis-Build prüfen
         run: |
-          hugo --minify --baseURL https://example.invalid/blog/ --destination tmp/themenwelten-subdir
           python3 scripts/themenwelten_guard.py --public tmp/themenwelten-subdir --base-path /blog/
           node scripts/themenwelten_browser_test.mjs --public tmp/themenwelten-subdir --base-path /blog/
