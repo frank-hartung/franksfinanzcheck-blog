@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 03.10.2026 20:42 (Europe/Berlin)
+> Automatisch aktualisiert: 04.10.2026 00:11 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -12,8 +12,8 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 | Bluesky | ⚪ Standby | 14 | So 04.10. 08:15 · Privathaftpflicht warum sie so w | [md](bluesky.md) · [ics](bluesky.ics) |
 | LinkedIn | ⚪ Standby | 5 | Mo 05.10. 07:45 · Finanzieller Puffer: Wie viel No | [md](linkedin.md) · [ics](linkedin.ics) |
 | X (Twitter) | ⚪ Standby | 17 | Sa 03.10. 19:15 · Preisgarantie Gas: So schützt du | [md](x.md) · [ics](x.ics) |
-| Threads | ⚪ Standby | 14 | Sa 03.10. 16:15 · Preisgarantie Gas: So sicherst d | [md](threads.md) · [ics](threads.ics) |
-| Facebook (Seite) | ⚪ Standby | 14 | Sa 03.10. 15:15 · Internet & DSL wechseln: Praxis- | [md](facebook.md) · [ics](facebook.ics) |
+| Threads | ⚪ Standby | 14 | So 04.10. 09:15 · Privathaftpflicht warum sie so w | [md](threads.md) · [ics](threads.ics) |
+| Facebook (Seite) | ⚪ Standby | 14 | So 04.10. 09:45 · Preisgarantie Gas: So sicherst d | [md](facebook.md) · [ics](facebook.ics) |
 | Instagram | ⚪ Standby | 7 | So 04.10. 11:45 · Sparen im Herbst: Spartipps für  | [md](instagram.md) · [ics](instagram.ics) |
 | Pinterest | ⚪ Standby | 7 | So 04.10. 10:15 · Dein haus sicher schuetzen das n | [md](pinterest.md) · [ics](pinterest.ics) |
 | Telegram (Kanal) | ⚪ Standby | 4 | So 04.10. 07:00 · Finanzielle Freiheit erreichen:  | [md](telegram.md) · [ics](telegram.ics) |
@@ -23,8 +23,6 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 ## Nächste 14 Tage – alle Kanäle zusammen
 
 ### Sa, 03. Oktober 2026
-- **15:15** ⚪ Facebook (Seite) · _vergleich_ · Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet
-- **16:15** ⚪ Threads · _vergleich_ · Preisgarantie Gas: So sicherst du günstige Tarife
 - **19:15** ⚪ X (Twitter) · _mythos_ · Preisgarantie Gas: So schützt du dich vor Preissprüngen
 ### So, 04. Oktober 2026
 - **07:00** ⏳ Telegram (Kanal) · _frage_ · Finanzielle Freiheit erreichen: Denke dich reich – Geld
