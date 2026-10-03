@@ -6,10 +6,13 @@
 #  News" mit gleichem Funktionsumfang ab: zügig produzierte,
 #  kompakte News-Artikel zu aktuellen Anlässen.
 #
-#  KOSTEN-REGEL: Standardmäßig laufen NUR die Gratis-Zugänge des
-#  Repos (Groq → Gemini). Die echte OpenAI-API wird nur verwendet,
-#  wenn ausdrücklich ein OPENAI_API_KEY gesetzt UND --provider
-#  openai übergeben wird (kostenpflichtig – deshalb nie Default).
+#  KOSTEN-REGEL: Es laufen AUSSCHLIESSLICH Gratis-Zugänge
+#  (Groq → NVIDIA → Cloudflare → Gemini). Seit 03.10.2026 gibt es
+#  keinen kostenpflichtigen Pfad mehr – das frühere Opt-in auf die
+#  OpenAI-API ist ersatzlos entfernt. „Rolle ChatGPT" ist ein
+#  REDAKTIONELLER Rollenname (schnelle News), kein Anbieter: Das
+#  Modell dahinter ist openai/gpt-oss-120b, OpenAIs offenes Modell,
+#  kostenlos bei drei Hostern.
 #
 #  ANTI-HALLUZINATION (YMYL-Finanzen, Haftungsschutz):
 #  „Aktualität" kommt ausschließlich aus dem KURATIERTEN Pool
@@ -97,8 +100,6 @@ def _brief(hook: dict, keywords: list) -> str:
 def _generate(chain: list, system: str, prompt: str,
               model: str | None) -> tuple[str | None, str]:
     for prov in chain:
-        if prov == "openai" and "--provider" not in sys.argv:
-            continue
         text = llm_client.chat(prov, prompt=prompt, system=system,
                                model=model, temperature=0.45,
                                max_tokens=8192, timeout=240)
@@ -281,15 +282,10 @@ def main() -> int:
     ap.add_argument("--offline", action="store_true",
                     help="ohne KI-API: nur Struktur-Gerüst erzeugen")
     ap.add_argument("--provider",
-                    choices=["groq", "gemini", "claude", "openai"],
-                    help="Provider erzwingen (claude/openai = kostenpflichtig, "
-                         "nur mit gesetztem Key)")
+                    choices=list(llm_client.PROVIDERS),
+                    help="Provider erzwingen (alle kostenfrei)")
     ap.add_argument("--model", help="Modell-ID überschreiben")
     args = ap.parse_args()
-    if args.provider == "openai" and not os.environ.get("OPENAI_API_KEY"):
-        print("❌ --provider openai braucht einen (kostenpflichtigen) "
-              "API-Key. Gratis-Regel: weglassen, dann laufen Groq/Gemini.")
-        return 2
     return run(args)
 
 

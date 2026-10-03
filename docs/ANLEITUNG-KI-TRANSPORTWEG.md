@@ -29,6 +29,11 @@ Modell**. Es läuft kostenlos bei drei unabhängigen Hostern:
 Drei Hoster, ein Modell. Fällt einer aus oder ist sein Tageskontingent
 leer, rückt der nächste nach – ohne dass ein Mensch eingreift.
 
+**Das ist die vollständige Liste.** Kostenpflichtige Anbieter existieren
+im Repo nicht mehr (siehe „T1 ist eine Dauersperre"). Es gibt keinen
+Schalter, kein Flag und keinen Schlüssel, mit dem versehentlich eine
+Rechnung entstehen könnte.
+
 ---
 
 ## 2. Warum kein echtes ChatGPT-Konto
@@ -84,7 +89,7 @@ Exit-Codes sind Vertrag:
 
 | Regel | Inhalt | Warum |
 |---|---|---|
-| **T1** | Kein kostenpflichtiger Anbieter in einer automatischen Kette | Dauervorgabe Frank, 08.09.2026 |
+| **T1** | **Kein kostenpflichtiger Weg existiert** – nicht in SSOT, Client, Code oder CI | Dauervorgabe Frank; verschärft 03.10.2026 |
 | **T2** | Nur implementierte Anbieter, Kostenklassen deckungsgleich mit `llm_client` | Zwei Wahrheiten über Geld sind eine zu viel |
 | **T3** | Mindestens zwei Gratis-Glieder je Kette | Ein leeres Tageskontingent darf die Produktion nicht anhalten |
 | **T4** | Mindestens ein kostenloser OpenAI-Modell-Hoster je Kette | Das ist die eingelöste Fassung von „ChatGPT einbauen" |
@@ -96,9 +101,24 @@ Exit-Codes sind Vertrag:
 Der Selbsttest sabotiert das Gate **selbst**: Er schmuggelt einen
 Paid-Anbieter in eine Kette, lügt eine Kostenklasse um, setzt einen
 Phantom-Provider ein, kürzt eine Kette auf ein Glied, entfernt die
-OpenAI-Bahn, löscht eine Pflicht-Aufgabe und schleust eine
-Brücken-Spur ein. Bemerkt das Gate eine dieser Sabotagen nicht, ist der
-Selbsttest rot. Eine Wache, die nur verspricht, ist keine Wache.
+OpenAI-Bahn, löscht eine Pflicht-Aufgabe, unterversorgt einen Workflow
+und schleust je eine Brücken- und eine Paid-Spur in echte Dateien ein.
+Bemerkt das Gate eine dieser Sabotagen nicht, ist der Selbsttest rot.
+Eine Wache, die nur verspricht, ist keine Wache.
+
+### T1 ist eine Dauersperre, kein Hinweis
+
+Bis zum 03.10.2026 galt: kostenpflichtige Anbieter sind erlaubt, nur
+nicht automatisch. Das war zu weich – zwei nächtliche Workflows reichten
+Paid-Schlüssel durch, und zwei Anbieter-Reihenfolgen begannen sogar
+damit. **Ein Opt-in, das man vergessen kann, ist eine Rechnung, die man
+vergisst.**
+
+Seither sind die kostenpflichtigen Wege nicht abgeschaltet, sondern
+**entfernt**: Provider, Endpunkte, Schlüssel und CLI-Flags. T1 prüft an
+vier Orten, ob einer zurückkehrt – SSOT, `llm_client`, alle Skripte und
+alle Workflows. Ein alter Aufruf wie `llm_client.chat("openai", …)`
+liefert kein stilles `None`, sondern eine Klartext-Ansage auf stderr.
 
 ---
 

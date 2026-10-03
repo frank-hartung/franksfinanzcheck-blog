@@ -10,6 +10,11 @@
 #    1. Ist der VERTRAG eingehalten?    → darf rot werden (Exit 1)
 #    2. Ist gerade alles EINSATZBEREIT? → Standby ist gelb, nicht rot
 #
+#  SEIT 03.10.2026 IST T1 EINE DAUERSPERRE, KEIN HINWEIS: Es existiert
+#  kein kostenpflichtiger Weg mehr – nicht in der SSOT, nicht im
+#  Client, nicht als Schlüssel oder Endpunkt in Skripten und
+#  Workflows. Rückkehr = Exit 1.
+#
 #  Die Trennung ist der Kern. Ein fehlender NVIDIA_API_KEY ist ein
 #  Betriebszustand – die Writer haben einen Offline-Modus. Eine Kette
 #  mit nur einem Gratis-Glied ist ein Vertragsbruch: Sie hält die
@@ -59,7 +64,7 @@ RUNBOOK = "docs/ANLEITUNG-KI-TRANSPORTWEG.md"
 BEREIT, STANDBY, DEFEKT = "bereit", "standby", "defekt"
 
 REGELN = {
-    "T1": "Kostenregel – kein kostenpflichtiger Anbieter in einer Kette",
+    "T1": "Kostenfreiheit – kein kostenpflichtiger Weg existiert (SSOT/Client/Code/CI)",
     "T2": "Nur implementierte Anbieter – keine Phantom-Provider",
     "T3": "Redundanz – mindestens zwei Gratis-Glieder je Kette",
     "T4": "OpenAI-Bahn – mindestens ein echter OpenAI-Modell-Hoster je Kette",
@@ -100,6 +105,54 @@ SCHLUESSEL_WORKFLOWS = {
 
 # Die Brückendatei aus Issue #514 bleibt gelöscht (T5).
 GELOESCHTE_BRUECKEN = ("scripts/puter_chat.mjs",)
+
+# ------------------------------------------------------------------
+#  DAUERSPERRE FÜR KOSTENPFLICHTIGE WEGE (T1, seit 03.10.2026)
+#  Die Namen sind zusammengesetzt, damit diese Erklärdatei nicht selbst
+#  auf der Sperrliste landet – das Gate schließt sich ohnehin aus, aber
+#  die Absicht soll im Quelltext lesbar sein.
+# ------------------------------------------------------------------
+PAID_PROVIDER_IDS = ("openai", "claude", "anthropic", "perplexity", "jasper")
+
+_OAI = "OPENAI"
+_ANT = "ANTHROPIC"
+PAID_SPUREN = (
+    (rf"{_OAI}_API_KEY", "kostenpflichtiger OpenAI-Schlüssel"),
+    (rf"{_ANT}_API_KEY", "kostenpflichtiger Anthropic-Schlüssel"),
+    (r"PERPLEXITY_API_KEY", "kostenpflichtiger Perplexity-Schlüssel"),
+    (r"api\.openai\.com", "Endpunkt der kostenpflichtigen OpenAI-API"),
+    (r"api\.anthropic\.com", "Endpunkt der kostenpflichtigen Anthropic-API"),
+    (r"api\.perplexity\.ai", "Endpunkt der kostenpflichtigen Perplexity-API"),
+)
+
+
+def paid_spuren_in(text: str) -> list[str]:
+    """Kostenpflichtige Schlüssel/Endpunkte in einem Text benennen.
+
+    EIN Erkenner für T1 (Code + CI) und T9 (KI-Workflows) – zwei
+    Listen würden irgendwann auseinanderlaufen, und die Lücke fiele
+    erst mit der Rechnung auf.
+    """
+    return [klartext for muster, klartext in PAID_SPUREN
+            if re.search(muster, text)]
+
+
+def _quelltexte():
+    """Alle Dateien, die T1/T5 prüfen: Skripte und Workflows.
+
+    Dokumentation ist bewusst NICHT dabei – Reports und Runbooks müssen
+    erklären dürfen, was entfernt wurde und warum.
+    """
+    kandidaten = (sorted((ROOT / "scripts").glob("*.py"))
+                  + sorted((ROOT / "scripts").glob("*.mjs"))
+                  + sorted((ROOT / ".github" / "workflows").glob("*.yml")))
+    for pfad in kandidaten:
+        if pfad.name == Path(__file__).name:
+            continue        # diese Datei benennt die Spuren ja gerade
+        try:
+            yield pfad, pfad.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
 
 # Spuren verbotener Brücken (T5). Bewusst auf AUSFÜHRBARE Spuren
 # geprüft, nicht auf das bloße Wort – die Dokumentation darf die
@@ -146,21 +199,53 @@ def _ketten(ssot: dict) -> dict:
 #  Jede Funktion gibt eine Liste von Befunden zurück. Leer = grün.
 # ====================================================================
 def t1_kostenregel(ssot: dict) -> list[str]:
-    """Kein kostenpflichtiger Anbieter in einer automatischen Kette.
+    """Es existiert kein kostenpflichtiger Weg – nirgends.
 
-    Dauervorgabe Frank (08.09.2026). Paid-Anbieter bleiben im Repo
-    erlaubt – aber nur per bewusstem `--provider`-Opt-in, nie in einer
-    Kette, die nachts von selbst läuft.
+    Verschärft am 03.10.2026 (Auftrag Frank). Vorher galt: Paid darf
+    nicht in einer automatischen Kette stehen, bleibt aber als Opt-in
+    erlaubt. Das war zu weich. Ein Opt-in, das man vergessen kann, ist
+    eine Rechnung, die man vergisst – bis dahin reichten zwei
+    nächtliche Workflows klaglos Paid-Schlüssel durch, und zwei
+    Anbieter-Reihenfolgen begannen sogar damit.
+
+    Geprüft wird darum an vier Orten: SSOT, Client, Skripte, Workflows.
     """
     befunde = []
     karte = _anbieter_karte(ssot)
+
+    # (a) SSOT: kein Anbieter darf sich als kostenpflichtig deklarieren.
+    for pid, a in karte.items():
+        if a.get("kostenklasse") != "gratis":
+            befunde.append(
+                f"T1: Anbieter '{pid}' ist mit kostenklasse "
+                f"'{a.get('kostenklasse')}' eingetragen. Die Blog-Automatik "
+                "läuft vollständig kostenfrei.")
+
+    # (b) SSOT + Client: kein gesperrter Anbietername taucht wieder auf.
+    for pid in karte:
+        if pid in PAID_PROVIDER_IDS:
+            befunde.append(
+                f"T1: '{pid}' ist ein kostenpflichtiger Anbieter und am "
+                "03.10.2026 entfernt worden – er gehört nicht zurück in die "
+                "SSOT.")
+    for pid in llm_client.PROVIDERS:
+        if pid in PAID_PROVIDER_IDS:
+            befunde.append(
+                f"T1: llm_client.PROVIDERS enthält wieder '{pid}'.")
     for aufgabe, kette in _ketten(ssot).items():
         for pid in kette:
-            klasse = (karte.get(pid) or {}).get("kostenklasse")
-            if klasse == "paid":
+            if pid in PAID_PROVIDER_IDS:
                 befunde.append(
                     f"T1: Kette '{aufgabe}' enthält den kostenpflichtigen "
-                    f"Anbieter '{pid}'. Automatische Ketten bleiben bei 0 €.")
+                    f"Anbieter '{pid}'.")
+
+    # (c) Skripte + Workflows: keine Paid-Schlüssel, keine Paid-Endpunkte.
+    for pfad, text in _quelltexte():
+        for klartext in paid_spuren_in(text):
+            befunde.append(
+                f"T1: {pfad.relative_to(ROOT)} – {klartext}. "
+                "Kostenpflichtige Wege sind dauerhaft entfernt "
+                "(03.10.2026).")
     return befunde
 
 
@@ -247,16 +332,7 @@ def t5_keine_bruecken(_ssot: dict) -> list[str]:
                 f"T5: {rel} ist zurück. Diese Brücke wurde mit Issue #514 "
                 "entfernt – der Transportweg ist scripts/llm_client.py.")
 
-    kandidaten = (sorted((ROOT / "scripts").glob("*.py"))
-                  + sorted((ROOT / "scripts").glob("*.mjs"))
-                  + sorted((ROOT / ".github" / "workflows").glob("*.yml")))
-    for pfad in kandidaten:
-        if pfad.name == Path(__file__).name:
-            continue        # diese Datei benennt die Spuren ja gerade
-        try:
-            text = pfad.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
+    for pfad, text in _quelltexte():
         for muster, klartext in BRUECKEN_SPUREN:
             if re.search(muster, text):
                 befunde.append(
@@ -358,15 +434,13 @@ def t9_schluessel_durchreichung(ssot: dict) -> list[str]:
 
         # Ein Paid-Schlüssel in einem nächtlichen Workflow ist ein
         # Kostenrisiko, das niemand bemerkt, bis die Rechnung kommt.
-        for pid, a in karte.items():
-            if a.get("kostenklasse") != "paid":
-                continue
-            for s in (a.get("schluessel") or []):
-                if f"secrets.{s}" in text:
-                    befunde.append(
-                        f"T9: {rel} reicht den kostenpflichtigen Schlüssel "
-                        f"{s} ({pid}) durch. Paid läuft nur per bewusstem "
-                        "Opt-in von Hand, nie im Zeitplan.")
+        # Die Liste kommt aus der Dauersperre, nicht aus der SSOT: Dort
+        # steht seit 03.10.2026 kein kostenpflichtiger Anbieter mehr,
+        # und genau deshalb braucht die Prüfung ein eigenes Gedächtnis.
+        for klartext in paid_spuren_in(text):
+            befunde.append(
+                f"T9: {rel} – {klartext}. Ein Zeitplan darf keine "
+                "kostenpflichtige API anrufen können.")
     return befunde
 
 
@@ -576,12 +650,12 @@ def selftest() -> list[str]:
               lambda s: s["routing"]["lang"]["kette"].insert(0, "openai"),
               "T1")
 
-    # ST2: Kostenklasse umlügen (gratis behaupten, wo Geld fließt).
+    # ST2: Kostenklasse umlügen – SSOT und Client dürfen nie driften.
     def _luege(s):
         for a in s["anbieter"]:
-            if a["id"] == "openai":
-                a["kostenklasse"] = "gratis"
-    sabotiere("Kostenklasse umgelogen", _luege, "T2")
+            if a["id"] == "groq":
+                a["kostenklasse"] = "paid"
+    sabotiere("Kostenklasse driftet", _luege, "T2")
 
     # ST3: Phantom-Provider in eine Kette setzen.
     sabotiere("Phantom-Provider",
@@ -619,14 +693,33 @@ def selftest() -> list[str]:
                 a["schluessel"] = [f"NIE_DURCHGEREICHT_{a['id'].upper()}"]
     sabotiere("Workflow unterversorgt", _schluessel_verbiegen, "T9")
 
-    # ST8b: Ein Paid-Schlüssel schleicht sich in den Zeitplan.
-    def _gemini_wird_teuer(s):
-        for a in s["anbieter"]:
-            if a["id"] == "gemini":
-                a["kostenklasse"] = "paid"
-    sabotiere("Paid-Schlüssel im Zeitplan", _gemini_wird_teuer, "T9")
+    # ST8b: Der Paid-Erkenner selbst muss anschlagen – er ist die
+    # gemeinsame Grundlage von T1 (Code/CI) und T9 (Zeitpläne).
+    for probe_text, name in (
+            ("OPENAI" + "_API_KEY: x", "OpenAI-Schlüssel"),
+            ("ANTHROPIC" + "_API_KEY: x", "Anthropic-Schlüssel"),
+            ("url = https://api." + "openai.com/v1/chat", "OpenAI-Endpunkt"),
+            ("url = https://api." + "anthropic.com/v1/messages",
+             "Anthropic-Endpunkt")):
+        if not paid_spuren_in(probe_text):
+            fehler.append(f"Sabotage '{name}': Der Paid-Erkenner hat die "
+                          "Spur nicht gefunden.")
+    if paid_spuren_in("GROQ_API_KEY und NVIDIA_API_KEY sind kostenlos"):
+        fehler.append("Der Paid-Erkenner meldet Gratis-Schlüssel als "
+                      "kostenpflichtig (Fehlalarm).")
 
-    # ST9: Die Brücken-Erkennung muss auf einer Probe anschlagen.
+    # ST9a: Eine eingeschleuste Paid-Spur im Code muss T1 auslösen.
+    paid_probe = ROOT / "scripts" / ".transportweg_paid_probe.py"
+    try:
+        paid_probe.write_text(
+            f'KEY = os.environ.get("{"OPENAI"}_API_KEY")\n', encoding="utf-8")
+        if not t1_kostenregel(echt):
+            fehler.append("Sabotage 'Paid-Schlüssel eingeschleust': T1 hat "
+                          "die Spur im Code nicht gefunden.")
+    finally:
+        paid_probe.unlink(missing_ok=True)
+
+    # ST9b: Die Brücken-Erkennung muss auf einer Probe anschlagen.
     probe = ROOT / "scripts" / ".transportweg_sabotage_probe.py"
     try:
         # Literal bewusst zusammengesetzt: Sonst fände die eigene
@@ -686,7 +779,7 @@ def main() -> int:
                 print(f"   · {f}")
             return 2
         print("✅ Transportweg-Selbsttest grün "
-              "(Positivprobe + 10 Sabotage-Proben + 2 Driftproben).")
+              "(Positivprobe + 15 Sabotage-Proben + 2 Driftproben).")
         return 0
 
     try:

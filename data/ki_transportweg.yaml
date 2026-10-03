@@ -15,6 +15,13 @@
 #  Hier steht jetzt EINMAL: wer, womit, zu welchem Preis, in welcher
 #  Reihenfolge – und welche Regeln nie gebrochen werden dürfen.
 #
+#  KOSTENFREIHEIT IST STRUKTURELL (03.10.2026)
+#  Diese Datei kennt keinen kostenpflichtigen Anbieter mehr. Die
+#  früheren Opt-ins auf die OpenAI- und die Anthropic-API sind samt
+#  Endpunkten, Schlüsseln und CLI-Flags entfernt. Regel T1 hält den
+#  Zustand: Sie durchsucht SSOT, Client, Skripte und Workflows nach
+#  Paid-Spuren und wird rot, sobald eine zurückkehrt.
+#
 #  DIE CHATGPT-FRAGE (beantwortet, nicht ignoriert)
 #  „ChatGPT (Free)" ist eine Chat-Oberfläche ohne Programmierschnitt-
 #  stelle. Sie kann in keiner Pipeline laufen:
@@ -30,8 +37,10 @@
 
 # ------------------------------------------------------------------
 #  ANBIETER
-#  kostenklasse: gratis | paid   (paid darf nie in einer Pflicht-Kette
-#                                 stehen – Regel T1)
+#  kostenklasse: gratis          (ES GIBT NUR NOCH GRATIS – Regel T1.
+#                                 Das Feld bleibt, damit ein künftiger
+#                                 Anbieter seine Kosten deklarieren muss
+#                                 und am Gate scheitert, wenn er zahlt.)
 #  bahn:         openai | fremd  (openai = echtes OpenAI-Modell)
 # ------------------------------------------------------------------
 anbieter:
@@ -75,25 +84,6 @@ anbieter:
     staerke: anderer Modellhersteller – fängt systemische GPT-OSS-Ausfälle
     quelle: https://ai.google.dev/pricing
 
-  - id: openai
-    name: OpenAI API (GPT-4o/GPT-5)
-    modell: gpt-4o
-    kostenklasse: paid
-    bahn: openai
-    schluessel: [OPENAI_API_KEY]
-    kontingent: pro Token abgerechnet, kein nutzbarer Gratis-Tier
-    staerke: höchste Qualität – nur per bewusstem Opt-in, nie automatisch
-    quelle: https://openai.com/api/pricing/
-
-  - id: claude
-    name: Anthropic Claude
-    modell: claude-sonnet-4-5
-    kostenklasse: paid
-    bahn: fremd
-    schluessel: [ANTHROPIC_API_KEY]
-    kontingent: pro Token abgerechnet
-    staerke: lange Texte – nur per bewusstem Opt-in, nie automatisch
-    quelle: https://www.anthropic.com/pricing
 
 # ------------------------------------------------------------------
 #  ROUTING: Aufgabe → Anbieter-Kette
@@ -124,8 +114,16 @@ routing:
 #  HARTE REGELN – vom Gate erzwungen, nicht verhandelbar
 # ------------------------------------------------------------------
 regeln:
-  # T1: In keiner Kette darf ein kostenpflichtiger Anbieter stehen.
+  # T1: Es existiert KEIN kostenpflichtiger Weg – nicht in dieser SSOT,
+  #     nicht im Client, nicht als Schlüssel oder Endpunkt in Skripten
+  #     und Workflows. Entfernt am 03.10.2026 (Auftrag Frank).
+  #     Ein Opt-in, das man vergessen kann, ist eine Rechnung, die man
+  #     vergisst: Bis dahin reichten zwei nächtliche Workflows klaglos
+  #     Paid-Schlüssel durch, und zwei Anbieter-Reihenfolgen begannen
+  #     sogar damit. Jetzt ist der Weg nicht abgeschaltet, sondern
+  #     nicht vorhanden.
   kostenregel: true
+  keine_paid_anbieter: true
   # T2: Jeder Anbieter in einer Kette muss im llm_client implementiert
   #     sein. Eine Kette, die auf einen Phantom-Provider zeigt, ist ein
   #     stiller Ausfall mit Ansage.

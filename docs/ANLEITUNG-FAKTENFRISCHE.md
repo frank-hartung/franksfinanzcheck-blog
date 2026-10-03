@@ -81,8 +81,9 @@ Fall ein (ST3), inklusive einer erfundenen Beispiel-URL.
 
 Die Fachprüfung läuft über den gemeinsamen LLM-Zugang des Blogs
 (`scripts/llm_client.py`) mit den bereits etablierten Schlüsseln
-`GROQ_API_KEY` bzw. `GEMINI_API_KEY` (optional `ANTHROPIC_API_KEY` /
-`OPENAI_API_KEY`). Der erste verfügbare Anbieter gewinnt, bei Ausfall rückt der
+`GROQ_API_KEY`, `NVIDIA_API_KEY`, `CLOUDFLARE_API_TOKEN` (+ `CLOUDFLARE_ACCOUNT_ID`)
+oder `GEMINI_API_KEY` – alle kostenlos; kostenpflichtige Anbieter gibt es seit
+dem 03.10.2026 nicht mehr. Der erste verfügbare Anbieter gewinnt, bei Ausfall rückt der
 nächste nach. Ohne jeden Schlüssel läuft alles außer der Fachprüfung; die
 Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
 

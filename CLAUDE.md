@@ -221,11 +221,15 @@ fail-closed, Selbsttest mit zehn Sabotage-Proben).
   Modell – bei **drei** unabhängigen Gratis-Hostern (Groq → NVIDIA NIM →
   Cloudflare Workers AI), danach Gemini als Gegenprobe aus einem anderen
   Modellhaus. Ein leeres Tageskontingent hält damit keine Automatik mehr an.
-- **T1/T9 sind Geldregeln:** kein Paid-Anbieter in einer automatischen
-  Kette, kein Paid-Secret in einem geplanten Workflow. Paid bleibt
-  erlaubt – aber nur von Hand per `--provider`. Beim Rollout wurden
-  genau hier `ANTHROPIC_API_KEY`/`OPENAI_API_KEY` aus zwei Nacht-Workflows
-  entfernt.
+- **T1 ist eine Dauersperre (verschärft 03.10.2026):** Es gibt **keinen**
+  kostenpflichtigen Weg mehr – die Provider `openai`/`claude` sind samt
+  Endpunkten, Schlüsseln und `--provider`-Flags aus dem Repo entfernt.
+  T1 prüft SSOT, Client, **alle** Skripte und **alle** Workflows auf
+  Rückkehr (Schlüsselnamen *und* Endpunkte); T9 bewacht zusätzlich die
+  vier KI-Workflows. Ein alter `chat("openai", …)`-Aufruf scheitert
+  **laut** mit Klartext-Ansage, nicht still. Wer wieder eine Paid-API
+  anschließen will, ändert zuerst diesen Vertrag – nicht nebenbei ein
+  Skript.
 - **T3/T4 sind Verfügbarkeitsregeln:** mindestens zwei Gratis-Glieder und
   mindestens ein OpenAI-Hoster je Kette. Eine Kette mit einem Glied ist
   ein Vertragsbruch, kein Betriebszustand.

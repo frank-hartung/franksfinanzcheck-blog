@@ -186,20 +186,57 @@ Secrets hinterlegen bleibt Menschenarbeit (Governance C15).
 
 ---
 
-## 7. Wenn doch echtes GPT-5 gewünscht ist
+## 7. Nachtrag 03.10.2026: Kostenpflichtiges vollständig entfernt
 
-Der Weg steht offen und ist bewusst **nicht** verbaut: `OPENAI_API_KEY`
-setzen und die Writer mit `--provider openai` von Hand starten. Das ist
-Opt-in, kostet Geld und läuft nie im Zeitplan – T9 sorgt dafür, dass es
-dabei bleibt.
+Auf Franks Entscheidung ist der verbliebene Opt-in-Weg **gelöscht**,
+nicht nur abgeschaltet. Begründung in einem Satz: *Ein Opt-in, das man
+vergessen kann, ist eine Rechnung, die man vergisst.* Der Beleg lag
+schon vor – bis zu diesem Umbau reichten zwei nächtliche Workflows
+klaglos Paid-Schlüssel durch, und zwei Anbieter-Reihenfolgen begannen
+sogar damit.
 
-Realistische Einordnung: Für die Textsorten dieses Blogs – lange
-Ratgeber nach festem Gerüst, mit kuratierten Faktenankern und harten
-Lesbarkeits-, Rechtschreib- und Offenlegungs-Gates dahinter – liegt der
-Qualitätsunterschied zwischen `gpt-oss-120b` und einem Frontier-Modell
-deutlich unter dem, was die nachgelagerten Wachen ohnehin einebnen. Der
-Engpass dieses Blogs ist nicht die Modellqualität, sondern Faktenbelege
-und Freigaben. Die kostet ein Abo nicht weg.
+**Entfernt:** die Provider `openai` und `claude` aus `llm_client.py`
+(inklusive `_call_anthropic`, beider Endpunkte und beider
+Schlüsselnamen), beide Einträge aus der SSOT, die `--provider`-Auswahl
+in `claude_writer.py` und `news_writer.py`, beide aus allen
+`PROVIDER_ORDER`-Reihenfolgen.
+
+**Was bleibt, ist die Sperre.** T1 ist keine Empfehlung mehr, sondern
+eine Dauersperre über vier Orte: SSOT, Client, alle Skripte, alle
+Workflows – geprüft auf Anbieternamen, Schlüsselnamen **und**
+API-Endpunkte. Ein eingeschleuster `OPENAI_API_KEY` im Code macht das
+Gate rot; eine Sabotage-Probe im Selbsttest friert genau das ein.
+
+**Kein stiller Fehlschlag.** Ein alter Aufruf `chat("openai", …)` gibt
+jetzt Klartext auf stderr aus, statt wortlos `None` zu liefern – stille
+Fehlschläge sind die Schadensklasse aus Issue #514.
+
+**Die Rollennamen bleiben.** „Rolle Claude" (langer Ratgeber) und
+„Rolle ChatGPT" (schnelle News) sind redaktionelle Rollen, keine
+Anbieter. Beide laufen auf `openai/gpt-oss-120b`.
+
+### Was das inhaltlich kostet: wenig
+
+Für die Textsorten dieses Blogs – lange Ratgeber nach festem Gerüst, mit
+kuratierten Faktenankern und harten Lesbarkeits-, Rechtschreib- und
+Offenlegungs-Gates dahinter – liegt der Qualitätsunterschied zwischen
+`gpt-oss-120b` und einem Frontier-Modell deutlich unter dem, was die
+nachgelagerten Wachen ohnehin einebnen. Der Engpass dieses Blogs ist
+nicht die Modellqualität, sondern Faktenbelege und Freigaben.
+
+### Noch offen: zwei kostenpflichtige Flächen außerhalb der Textkette
+
+Beide sind **nicht** angetastet, weil sie nichts mit der Textproduktion
+zu tun haben und je einen kostenlosen Standardweg haben:
+
+| Fläche | Wo | Status |
+|---|---|---|
+| **ElevenLabs** (Vorlese-Stimme) | `scripts/ff_voice_backends.py`, `deploy.yml` | Kette ist `elevenlabs → edge → piper`; ohne `ELEVENLABS_API_KEY` läuft automatisch der kostenlose Weg |
+| **ZEIT-Rechtschreibung Premium** | `zeit-rechtschreibung.yml` (`ZR_USERNAME`/`ZR_API_KEY`) | Offline-Modus LT1–LT4 ist immer verfügbar und bereits der Normalbetrieb |
+
+Beide würden sich nach demselben Muster entfernen lassen. Das ist eine
+Entscheidung über Hörqualität bzw. Prüftiefe, nicht über die
+Blogautomatik – deshalb wurde sie nicht vorweggenommen.
 
 ---
 

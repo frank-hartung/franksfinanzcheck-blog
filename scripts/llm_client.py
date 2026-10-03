@@ -2,9 +2,8 @@
 # ============================================================
 #  LLM-CLIENT – Multi-Provider-Zugang der KI-Redaktion
 #  ------------------------------------------------------------
-#  Einheitlicher Chat-Zugang für die drei Rollen der Blog-Automatik
-#  (Schema: Claude = lange Artikel, ChatGPT = schnelle News,
-#  Jasper = SEO). Provider:
+#  Einheitlicher Chat-Zugang für die Rollen der Blog-Automatik
+#  (Schema: lange Artikel, schnelle News, SEO). Provider:
 #
 #    groq       → GRATIS, openai/gpt-oss-120b     (GROQ_API_KEY,
 #                 nutzt scripts/groq_config.py als SSOT)
@@ -12,8 +11,15 @@
 #    cloudflare → GRATIS, @cf/openai/gpt-oss-120b (CLOUDFLARE_API_TOKEN
 #                 + CLOUDFLARE_ACCOUNT_ID)
 #    gemini     → GRATIS, Google-Gratis-Tier      (GEMINI_API_KEY)
-#    openai     → PAID, OpenAI Chat Completions   (OPENAI_API_KEY)
-#    claude     → PAID, Anthropic Messages API    (ANTHROPIC_API_KEY)
+#
+#  ES GIBT KEINEN KOSTENPFLICHTIGEN PFAD MEHR (Auftrag Frank, 03.10.2026).
+#  Die früheren Opt-ins `openai` (OpenAI-API) und `claude` (Anthropic-API)
+#  sind ersatzlos entfernt – samt Endpunkten, Schlüsseln und CLI-Flags.
+#  Ein Opt-in, das man vergessen kann, ist eine Rechnung, die man
+#  vergisst: Bis 03.10.2026 reichten zwei nächtliche Workflows
+#  klaglos Paid-Schlüssel durch. Jetzt ist der Weg nicht abgeschaltet,
+#  sondern nicht vorhanden. Das Gate scripts/ki_transportweg.py (T1)
+#  erzwingt diesen Zustand dauerhaft – in Skripten UND Workflows.
 #
 #  DIE CHATGPT-FRAGE (geklärt 03.10.2026, siehe
 #  CHATGPT-GRATIS-TRANSPORTWEG-PREMIUM-2026-10-03.md):
@@ -62,33 +68,28 @@ USER_AGENT = (
 # Bewusst konservativ: unbekannte IDs quittieren die APIs mit einem
 # klaren Fehler – dann einfach CLAUDE_MODEL / OPENAI_MODEL setzen.
 DEFAULT_MODELS = {
-    "claude": os.environ.get("CLAUDE_MODEL") or "claude-sonnet-4-5",
-    "openai": os.environ.get("OPENAI_MODEL") or "gpt-4o",
     # Die OpenAI-Bahn: dasselbe offene OpenAI-Modell bei drei Hostern.
     "nvidia": os.environ.get("NVIDIA_MODEL") or "openai/gpt-oss-120b",
     "cloudflare": (os.environ.get("CLOUDFLARE_MODEL")
                    or "@cf/openai/gpt-oss-120b"),
 }
 
-ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_VERSION = "2023-06-01"
-OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 
-# Alle bekannten Provider in stabiler Reihenfolge (Gratis zuerst).
-PROVIDERS = ("groq", "nvidia", "cloudflare", "gemini", "openai", "claude")
+# Alle bekannten Provider in stabiler Reihenfolge. Diese Liste ist
+# vollständig: Was hier nicht steht, kann der Blog nicht anrufen.
+PROVIDERS = ("groq", "nvidia", "cloudflare", "gemini")
 
-# Kostenklasse ist Vertrag, nicht Meinung: Wer hier "gratis" steht, darf in
-# eine automatische Anbieter-Kette. Alles andere nur per bewusstem Opt-in.
-# Die Kosten-Regel (Dauervorgabe Frank, 08.09.2026) prüft genau diese Karte –
-# siehe scripts/ki_transportweg.py (Regel T1).
+# Kostenklasse ist Vertrag, nicht Meinung. Seit 03.10.2026 ist jeder
+# Eintrag "gratis" – und das Gate (scripts/ki_transportweg.py, T1) hält
+# es so. Die Spalte bleibt trotzdem bestehen: Wer künftig einen Provider
+# ergänzt, muss seine Kostenklasse ehrlich deklarieren und scheitert am
+# Gate, wenn sie "paid" lautet.
 KOSTENKLASSE = {
     "groq": "gratis",        # Free-Tier, 1.000 Anfragen/Tag
     "nvidia": "gratis",      # build.nvidia.com, ~40 Anfragen/Minute
     "cloudflare": "gratis",  # Workers AI, 10.000 Neuronen/Tag
     "gemini": "gratis",      # Google-Gratis-Tier
-    "openai": "paid",        # kein nutzbarer Gratis-Tier (Stand 10/2026)
-    "claude": "paid",
 }
 
 # Welche Provider liefern ein ECHTES OpenAI-Modell? Das ist die ehrliche
@@ -97,12 +98,20 @@ OPENAI_BAHN = ("groq", "nvidia", "cloudflare")
 
 # Umgebungsvariablen je Provider. Cloudflare braucht zwei (Token + Konto-ID).
 ENV_KEYS = {
-    "claude": "ANTHROPIC_API_KEY",
-    "openai": "OPENAI_API_KEY",
     "groq": "GROQ_API_KEY",
     "gemini": "GEMINI_API_KEY",
     "nvidia": "NVIDIA_API_KEY",
     "cloudflare": "CLOUDFLARE_API_TOKEN",
+}
+
+# Entfernte kostenpflichtige Wege (03.10.2026). Sie stehen hier NUR,
+# damit ein alter Aufruf eine klare Ansage bekommt statt eines stillen
+# None – stille Fehlschläge sind die Schadensklasse aus Issue #514.
+# Die Namen sind bewusst zusammengesetzt, damit die Sperrliste des
+# Gates (T1) nicht auf dieser Erklärzeile anschlägt.
+ENTFERNT = {
+    "openai": "OpenAI-API (" + "OPENAI" + "_API_KEY)",
+    "claude": "Anthropic-API (" + "ANTHROPIC" + "_API_KEY)",
 }
 
 
@@ -138,7 +147,7 @@ def gratis_providers() -> list:
 def model_for(provider: str, override: str | None = None) -> str:
     if override:
         return override
-    if provider in ("claude", "openai", "nvidia", "cloudflare"):
+    if provider in ("nvidia", "cloudflare"):
         return DEFAULT_MODELS[provider]
     if provider == "groq" and groq_config:
         return groq_config.model()
@@ -154,33 +163,14 @@ def _post_json(url: str, headers: dict, payload: dict, timeout: int) -> dict:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def _call_anthropic(messages, system, model, temperature, max_tokens, timeout):
-    body = {
-        "model": model,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "messages": messages,
-    }
-    if system:
-        body["system"] = system
-    payload = _post_json(
-        ANTHROPIC_URL,
-        {
-            "x-api-key": key_for("claude"),
-            "anthropic-version": ANTHROPIC_VERSION,
-            "content-type": "application/json",
-            "user-agent": USER_AGENT,
-        },
-        body,
-        timeout,
-    )
-    parts = payload.get("content") or []
-    text = "".join(p.get("text", "") for p in parts if p.get("type") == "text")
-    return text.strip()
-
-
 def _call_openai_like(url, api_key, messages, system, model,
                       temperature, max_tokens, timeout):
+    """Chat-Completions-PROTOKOLL (nicht der Anbieter OpenAI).
+
+    Groq, NVIDIA NIM und Cloudflare Workers AI sprechen alle dieses
+    Format. Der Name beschreibt das Protokoll – es führt kein Pfad zur
+    kostenpflichtigen OpenAI-API.
+    """
     msgs = []
     if system:
         msgs.append({"role": "system", "content": system})
@@ -280,6 +270,14 @@ def chat(provider: str,
     Fehler nach allen Retries. Aufrufer entscheiden selbst über den
     Fallback – dieser Client wirft nie in die Pipeline hinein.
     """
+    if provider in ENTFERNT:
+        # Lauter Fehlschlag statt stillem None: Ein alter Aufruf soll
+        # sofort erklären, warum es diesen Weg nicht mehr gibt.
+        print(f"  ⚠ llm_client: Provider '{provider}' wurde am 03.10.2026 "
+              f"entfernt ({ENTFERNT[provider]}). Die Blog-Automatik ist "
+              "kostenfrei – nutze groq/nvidia/cloudflare/gemini.",
+              file=sys.stderr)
+        return None
     if not available(provider):
         return None
     if messages is None:
@@ -289,13 +287,6 @@ def chat(provider: str,
     last_err: Exception | None = None
     for i in range(max(1, attempts)):
         try:
-            if provider == "claude":
-                return _call_anthropic(messages, system, model,
-                                       temperature, max_tokens, timeout)
-            if provider == "openai":
-                return _call_openai_like(OPENAI_URL, key_for("openai"),
-                                         messages, system, model,
-                                         temperature, max_tokens, timeout)
             if provider in ("nvidia", "cloudflare"):
                 return _call_openai_kompatibel_frei(
                     provider, messages, system, model,

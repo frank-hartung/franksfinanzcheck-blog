@@ -76,17 +76,47 @@ class Kostenwahrheit(unittest.TestCase):
             self.assertTrue(str(a.get("quelle", "")).startswith("http"),
                             f"{a['id']} behauptet ein Kontingent ohne Quelle.")
 
-    def test_paid_anbieter_bleiben_erlaubt_aber_nur_per_opt_in(self):
-        """Paid ist nicht verboten – nur nie automatisch.
+    def test_es_gibt_keinen_kostenpflichtigen_weg_mehr(self):
+        """Verschärft am 03.10.2026: Paid ist nicht mehr Opt-in, sondern weg.
 
-        Die Writer erlauben `--provider openai` bewusst. Verboten ist
-        allein der Weg, der nachts von selbst läuft.
+        Vorher galt „kostenpflichtig erlaubt, aber nicht automatisch".
+        Das war zu weich: Zwei nächtliche Workflows reichten Paid-
+        Schlüssel durch, zwei Anbieter-Reihenfolgen begannen damit.
+        Ein Opt-in, das man vergessen kann, ist eine Rechnung, die man
+        vergisst.
         """
-        paid = [a["id"] for a in self.ssot["anbieter"]
-                if a["kostenklasse"] == "paid"]
-        self.assertTrue(paid, "Der Opt-in-Weg darf nicht verschwinden.")
-        for pid in paid:
-            self.assertIn(pid, llm_client.PROVIDERS)
+        self.assertEqual(kt.t1_kostenregel(self.ssot), [])
+        self.assertEqual(set(llm_client.KOSTENKLASSE.values()), {"gratis"})
+        for pid in kt.PAID_PROVIDER_IDS:
+            self.assertNotIn(pid, llm_client.PROVIDERS)
+            self.assertNotIn(pid, llm_client.ENV_KEYS)
+
+    def test_alter_paid_aufruf_scheitert_laut_statt_still(self):
+        """Ein vergessener Aufruf muss erklären, nicht schweigen.
+
+        Stille Fehlschläge sind die Schadensklasse aus Issue #514.
+        """
+        for pid in ("openai", "claude"):
+            self.assertIn(pid, llm_client.ENTFERNT)
+            self.assertIsNone(llm_client.chat(pid, prompt="x"))
+
+    def test_paid_erkenner_findet_schluessel_und_endpunkte(self):
+        for text in ("OPENAI" + "_API_KEY", "ANTHROPIC" + "_API_KEY",
+                     "https://api." + "openai.com/v1/chat/completions",
+                     "https://api." + "anthropic.com/v1/messages"):
+            self.assertTrue(kt.paid_spuren_in(text),
+                            f"Paid-Spur nicht erkannt: {text}")
+
+    def test_paid_erkenner_meldet_gratis_schluessel_nicht(self):
+        self.assertEqual(
+            kt.paid_spuren_in("GROQ_API_KEY NVIDIA_API_KEY "
+                              "CLOUDFLARE_API_TOKEN GEMINI_API_KEY"), [])
+
+    def test_kein_paid_endpunkt_in_code_und_ci(self):
+        for pfad, text in kt._quelltexte():
+            self.assertEqual(
+                kt.paid_spuren_in(text), [],
+                f"{pfad} enthält wieder einen kostenpflichtigen Weg.")
 
 
 class Redundanz(unittest.TestCase):
@@ -258,6 +288,21 @@ class WorkflowSchluessel(unittest.TestCase):
         for rel in kt.SCHLUESSEL_WORKFLOWS:
             self.assertTrue((ROOT / rel).exists(),
                             f"{rel} fehlt – der Vertrag zeigt ins Leere.")
+
+
+class WriterFlags(unittest.TestCase):
+    """Die CLI darf keinen kostenpflichtigen Weg mehr anbieten."""
+
+    def test_writer_bieten_nur_gratis_provider_an(self):
+        import re
+        for rel in ("scripts/claude_writer.py", "scripts/news_writer.py"):
+            text = (ROOT / rel).read_text(encoding="utf-8")
+            self.assertNotRegex(
+                text, r'choices=\[[^\]]*"(openai|claude)"',
+                f"{rel} bietet weiter einen kostenpflichtigen Provider an.")
+            self.assertIn("llm_client.PROVIDERS", text,
+                          f"{rel} soll die Auswahl aus dem Client ziehen – "
+                          "eine zweite Liste läuft auseinander.")
 
 
 class Routing(unittest.TestCase):

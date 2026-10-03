@@ -52,8 +52,9 @@ Die frühere Puter-Brücke (``PUTER_AUTH_TOKEN``, ``scripts/puter_chat.mjs``)
 war im Betrieb nie aktiv – der Hero-Lauf konnte damit grundsätzlich nicht
 gelingen. Der Feinschliff läuft jetzt über denselben Multi-Provider-Zugang,
 den die KI-Redaktion ohnehin benutzt: ``scripts/llm_client.py`` mit den im
-Repo etablierten Schlüsseln ``GROQ_API_KEY`` und ``GEMINI_API_KEY`` (optional
-zusätzlich ``ANTHROPIC_API_KEY``/``OPENAI_API_KEY``). Der erste verfügbare
+Repo etablierten Gratis-Schlüsseln ``GROQ_API_KEY``, ``NVIDIA_API_KEY``,
+``CLOUDFLARE_API_TOKEN``/``CLOUDFLARE_ACCOUNT_ID`` und ``GEMINI_API_KEY``.
+Kostenpflichtige Anbieter gibt es nicht. Der erste verfügbare
 Anbieter der Reihenfolge in ``PROVIDER_ORDER`` gewinnt, bei Ausfall wird der
 nächste versucht. Nur Standardbibliothek, kein Node, kein npm-Paket.
 
@@ -106,13 +107,13 @@ REPORT = ROOT / "SAISONALER-HERO-REPORT.md"
 # Reihenfolge des Feinschliffs: der erste Anbieter mit Schlüssel gewinnt, bei
 # Fehler rückt der nächste nach. Bewusst identisch zur KI-Redaktion, damit es
 # genau EINEN Ort für Schlüssel, Modelle und Retries gibt.
-# Reihenfolge seit 03.10.2026 (Transportweg-Vertrag T3/T4): drei
+# Reihenfolge seit 03.10.2026 (Transportweg-Vertrag T1/T3/T4): drei
 # unabhängige Gratis-Hoster desselben OpenAI-Modells, danach Gemini.
 # Genau diese Redundanz verhindert den Dauerausfall aus Issue #514 –
 # ein leeres Tageskontingent ist dann kein roter Lauf mehr.
+# Kostenpflichtige Anbieter gibt es im Repo nicht mehr.
 # SSOT der Kette: data/ki_transportweg.yaml → routing.politur
-PROVIDER_ORDER = ("groq", "nvidia", "cloudflare", "gemini",
-                  "claude", "openai")
+PROVIDER_ORDER = ("groq", "nvidia", "cloudflare", "gemini")
 MAX_AGE_DAYS = 21
 # Kulanzfenster: Solange die kuratierte Basis den kompletten SEO/GEO-Vertrag und
 # die Startseiten-Wache besteht, ist ein Ausfall der Claude-Kette (Token, Netz,
@@ -670,7 +671,8 @@ def selftest() -> int:
     # geworfen werden – der Lauf muss die Lage als Klartext melden können.
     LAST_BRIDGE_ERROR.clear()
     umgebung = {k: os.environ.pop(k) for k in
-                ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY")
+                ("GROQ_API_KEY", "NVIDIA_API_KEY", "CLOUDFLARE_API_TOKEN",
+                 "CLOUDFLARE_ACCOUNT_ID", "GEMINI_API_KEY")
                 if k in os.environ}
     try:
         antwort, provider, _modell = _echtes_call_model("s", "u")
@@ -843,9 +845,11 @@ def main(argv: list[str] | None = None) -> int:
     if not chain["llm_client"]:
         hindernisse.append("scripts/llm_client.py ist nicht importierbar")
     elif not chain["anbieter_vorhanden"]:
-        hindernisse.append("kein KI-Schlüssel gesetzt – erwartet wird GROQ_API_KEY "
-                           "oder GEMINI_API_KEY (optional ANTHROPIC_API_KEY/OPENAI_API_KEY); "
-                           "ohne Schlüssel wird kein Text als KI-poliert ausgegeben")
+        hindernisse.append("kein KI-Schlüssel gesetzt – erwartet wird einer der "
+                           "kostenlosen Zugänge GROQ_API_KEY, NVIDIA_API_KEY, "
+                           "CLOUDFLARE_API_TOKEN+CLOUDFLARE_ACCOUNT_ID oder "
+                           "GEMINI_API_KEY; ohne Schlüssel wird kein Text als "
+                           "KI-poliert ausgegeben")
 
     baseline_ok, baseline_errors, baseline_message = baseline_healthy(season)
 
