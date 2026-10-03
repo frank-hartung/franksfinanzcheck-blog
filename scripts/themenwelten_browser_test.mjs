@@ -24,11 +24,13 @@ const PUBLIC = path.resolve(arg('--public', path.join(ROOT, 'public')));
 const prefix = arg('--base-path', '/').replace(/^\/+|\/+$/g, '');
 const BASE_PATH = prefix ? `/${prefix}/` : '/';
 const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/themenwelten.json'), 'utf8'));
-// Der Startseiten-Vertrag ist variantenabhängig: Die Kontrollgruppe bleibt
-// bei 800 px, die freigegebenen Hero-Bühnen dürfen 1024 px nutzen.
-// Unbekannte Varianten bekommen bewusst keinen impliziten Freifahrtschein.
+// Der Startseiten-Vertrag ist variantenabhängig. Seit 03.10.2026 trägt die
+// kanonische Basis selbst die editoriale Kostenprofil-Bühne und darf deshalb
+// dieselben 1120 px wie das dokumentierte Desktop-Raster nutzen. Historische
+// Varianten behalten ihr damaliges Budget; unbekannte Varianten bekommen
+// bewusst keinen impliziten Freifahrtschein.
 const HOME_MAIN_WIDTH_LIMITS = Object.freeze({
-  basis: 800,
+  basis: 1120,
   'v-hero-conversion': 1024,
   'v-hero-premium': 1024,
 });
@@ -236,7 +238,10 @@ try {
 
   await page.goto(url(''), { waitUntil: 'networkidle' });
   check(await page.locator('.ff-topics .ff-topic-card').count() === 6, 'Startseite nutzt dieselben sechs Themen');
-  const aktiveVariante = await page.locator('style[data-ff-variante]').first().getAttribute('data-ff-variante') || 'basis';
+  const variantenMarker = page.locator('style[data-ff-variante]').first();
+  const aktiveVariante = await variantenMarker.count()
+    ? (await variantenMarker.getAttribute('data-ff-variante') || 'basis')
+    : 'basis';
   const breiteMax = Object.hasOwn(HOME_MAIN_WIDTH_LIMITS, aktiveVariante)
     ? HOME_MAIN_WIDTH_LIMITS[aktiveVariante]
     : undefined;

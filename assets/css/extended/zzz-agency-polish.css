@@ -3938,3 +3938,426 @@ details.toc a {
   margin-bottom: 12px;
 }
 
+
+/* ============================================================
+   18. EDITORIAL BRAND CORE — KOSTENPROFIL (03.10.2026)
+   ============================================================
+   Dauerhafte Markenebene statt Kampagnenvariante: klare Verlagstypografie,
+   ein kanonisches Prüfobjekt und echte Autorenschaft. Keine erfundenen
+   Scores; die vier Achsen entsprechen immer dem 4K-Prüfpfad.
+   ============================================================ */
+:root {
+  --ff-paper: #f5f1e8;
+  --ff-paper-line: #d8d1c3;
+  --ff-night: #102d25;
+  --ff-signal: #f2b544;
+  --ff-rule: rgba(16, 45, 37, .18);
+}
+
+/* Masthead: das Logo steht wie bei einer Redaktion, nicht wie in einer App. */
+.header-nav {
+  min-height: 82px;
+  align-items: center;
+}
+.ff-brand {
+  display: grid !important;
+  grid-template-columns: auto;
+  gap: 5px;
+  align-content: center;
+  border: 0 !important;
+}
+.ff-brand-descriptor {
+  color: var(--ff-text-muted);
+  font-size: .625rem;
+  font-weight: 750;
+  letter-spacing: .16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.menu a {
+  font-size: .78rem;
+  font-weight: 720;
+  letter-spacing: .015em;
+}
+.menu .active {
+  text-decoration-color: var(--ff-yellow);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+}
+
+/* Startseiten-Bühne: tiefe Druckfarbe + feines Prüfraster statt Gradient-Mesh. */
+.first-entry.home-info {
+  background-color: var(--ff-night) !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) !important;
+  background-size: 32px 32px !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 12px 12px 0 var(--ff-paper-line);
+  padding: clamp(26px, 4.8vw, 52px);
+  overflow: hidden;
+}
+.first-entry.home-info .entry-header {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+}
+.first-entry.home-info .entry-header h1 {
+  max-width: 18ch;
+  margin: 14px 0 18px;
+  color: #fff;
+  font-size: clamp(2.1rem, 5vw, 4rem);
+  font-weight: 780;
+  letter-spacing: -.052em;
+  line-height: 1.01;
+  text-wrap: balance;
+}
+.first-entry.home-info .entry-content {
+  max-width: 61ch;
+  color: rgba(255,255,255,.86);
+  font-size: clamp(.98rem, 1.4vw, 1.08rem);
+  line-height: 1.68;
+}
+.first-entry.home-info .entry-content > p:first-of-type::first-line {
+  color: inherit;
+  font-family: inherit;
+  font-style: normal;
+}
+.first-entry.home-info .ff-saison-hinweis {
+  margin-top: 18px;
+  padding-left: 12px;
+  border-left: 2px solid var(--ff-signal);
+  color: rgba(255,255,255,.72);
+  font-size: .84rem;
+}
+.first-entry.home-info .ff-saison-badge {
+  width: fit-content;
+  border: 0;
+  border-radius: 0;
+  background: var(--ff-signal);
+  color: var(--ff-night);
+  box-shadow: none;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.first-entry.home-info > .ff-trust-row {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Das eigenständige FranksFinanzcheck-Objekt. */
+.ff-kostenprofil {
+  --kp-line: rgba(16,45,37,.22);
+  position: relative;
+  color: var(--ff-night);
+  background: var(--ff-paper);
+  border: 1px solid rgba(255,255,255,.52);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 rgba(242,181,68,.88);
+  font-variant-numeric: tabular-nums;
+}
+.ff-kostenprofil::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--kp-line);
+  pointer-events: none;
+}
+.ff-kostenprofil__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 24px 24px 17px;
+  border-bottom: 1px solid var(--kp-line);
+}
+.ff-kostenprofil__index {
+  order: 2;
+  color: #49615a;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.ff-kostenprofil__eyebrow {
+  margin: 0 0 3px;
+  color: #52655f;
+  font-size: .58rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.ff-kostenprofil__title {
+  margin: 0;
+  color: var(--ff-night);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1;
+}
+.ff-kostenprofil__subject {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 24px;
+  border-bottom: 1px solid var(--kp-line);
+}
+.ff-kostenprofil__subject span {
+  color: #52655f;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.ff-kostenprofil__subject strong {
+  color: var(--ff-night);
+  font-size: .78rem;
+  text-align: right;
+}
+.ff-kostenprofil__track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ff-kostenprofil__track li {
+  position: relative;
+  min-width: 0;
+  padding: 17px 10px 16px;
+  border-right: 1px solid var(--kp-line);
+}
+.ff-kostenprofil__track li:last-child { border-right: 0; }
+.ff-kostenprofil__track li::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  bottom: 21px;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--ff-night);
+  border-radius: 50%;
+  background: var(--ff-signal);
+}
+.ff-kostenprofil__track li:last-child::after { display: none; }
+.ff-kostenprofil__track span,
+.ff-kostenprofil__track strong,
+.ff-kostenprofil__track small { display: block; }
+.ff-kostenprofil__track span {
+  margin-bottom: 18px;
+  color: #687770;
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.ff-kostenprofil__track strong {
+  overflow: hidden;
+  color: var(--ff-night);
+  font-size: .66rem;
+  letter-spacing: -.02em;
+  text-overflow: ellipsis;
+}
+.ff-kostenprofil__track small {
+  margin-top: 2px;
+  color: #687770;
+  font-size: .58rem;
+}
+.ff-kostenprofil__rule {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  padding: 14px 24px;
+  border-top: 1px solid var(--kp-line);
+  background: rgba(255,255,255,.36);
+}
+.ff-kostenprofil__rule > span { color: var(--ff-emerald); font-weight: 850; }
+.ff-kostenprofil__rule p { margin: 0; color: #344a43; font-size: .68rem; line-height: 1.45; }
+.ff-kostenprofil__rule strong { display: block; color: var(--ff-night); text-transform: uppercase; letter-spacing: .08em; }
+.ff-kostenprofil__author {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 72px;
+  padding: 12px 24px;
+  border-top: 1px solid var(--kp-line);
+  color: var(--ff-night) !important;
+  text-decoration: none !important;
+}
+.ff-kostenprofil__author img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  filter: saturate(.78) contrast(1.04);
+  object-fit: cover;
+}
+.ff-kostenprofil__author span,
+.ff-kostenprofil__author small,
+.ff-kostenprofil__author strong,
+.ff-kostenprofil__author em { display: block; }
+.ff-kostenprofil__author small { color: #687770; font-size: .56rem; letter-spacing: .08em; text-transform: uppercase; }
+.ff-kostenprofil__author strong { margin-top: 1px; font-size: .78rem; }
+.ff-kostenprofil__author em { color: #52655f; font-size: .62rem; font-style: normal; }
+.ff-kostenprofil__author b { font-size: 1rem; }
+.ff-kostenprofil__author:hover { background: rgba(255,255,255,.42); }
+
+/* Artikelpass: dasselbe Objekt, auf eine redaktionelle Zeile verdichtet. */
+.ff-kostenprofil--article {
+  width: 100%;
+  margin: 20px 0 26px;
+  box-shadow: 5px 5px 0 var(--ff-paper-line);
+}
+.ff-kostenprofil--article::before { inset: 5px; }
+.ff-kostenprofil--article .ff-kostenprofil__head {
+  padding: 18px 20px 13px;
+}
+.ff-kostenprofil--article .ff-kostenprofil__title { font-size: 1.35rem; }
+.ff-kostenprofil--article .ff-kostenprofil__subject { padding: 11px 20px; }
+.ff-kostenprofil--article .ff-kostenprofil__track li { padding: 13px 12px 12px; }
+.ff-kostenprofil--article .ff-kostenprofil__track span { margin-bottom: 10px; }
+.ff-kostenprofil__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--kp-line);
+  color: #52655f;
+  font-size: .65rem;
+  font-weight: 750;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.ff-kostenprofil__foot a { color: var(--ff-emerald); }
+
+/* Originäre Diagramme wirken wie redaktionelle Datenblätter. */
+.ff-chart {
+  position: relative;
+  border: 0;
+  border-top: 5px solid var(--ff-night);
+  border-radius: 0;
+  background: var(--ff-paper);
+  box-shadow: 8px 8px 0 var(--ff-paper-line);
+}
+.ff-chart__eyebrow {
+  margin: 0 0 .55rem;
+  color: var(--ff-emerald);
+  font-size: .63rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.ff-chart__bar { fill: var(--ff-emerald); }
+.ff-chart__line { stroke: var(--ff-emerald); stroke-width: 4; }
+.ff-chart__point { stroke: var(--ff-emerald); }
+
+:root[data-theme="dark"] {
+  --ff-paper: #e7e1d5;
+  --ff-paper-line: #5b5a54;
+}
+:root[data-theme="dark"] .ff-brand-descriptor { color: var(--secondary); }
+:root[data-theme="dark"] .ff-kostenprofil,
+:root[data-theme="dark"] .ff-kostenprofil__title,
+:root[data-theme="dark"] .ff-kostenprofil__subject strong,
+:root[data-theme="dark"] .ff-kostenprofil__track strong,
+:root[data-theme="dark"] .ff-kostenprofil__author { color: var(--ff-night) !important; }
+:root[data-theme="dark"] .ff-chart { color: var(--ff-night); }
+:root[data-theme="dark"] .ff-chart__title,
+:root[data-theme="dark"] .ff-chart__value { color: var(--ff-night); fill: var(--ff-night); }
+
+@media (min-width: 769px) {
+  main.main:has(.home-info) { max-width: 1120px; }
+  .first-entry.home-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1.38fr) minmax(300px, .78fr);
+    grid-template-areas:
+      "badge profile"
+      "header profile"
+      "content profile"
+      "season profile"
+      "ctas profile";
+    column-gap: clamp(34px, 5vw, 68px);
+    align-items: center;
+  }
+  .first-entry.home-info > .ff-saison-badge { grid-area: badge; align-self: end; }
+  .first-entry.home-info > .entry-header { grid-area: header; }
+  .first-entry.home-info > .entry-content { grid-area: content; }
+  .first-entry.home-info > .ff-saison-hinweis { grid-area: season; }
+  .first-entry.home-info > .ff-home-ctas { grid-area: ctas; }
+  .first-entry.home-info > .ff-trust-row { grid-area: profile; align-self: center; }
+}
+
+@media (max-width: 768px) {
+  .header-nav { min-height: 70px; }
+  .ff-brand-descriptor { display: none; }
+  main.main:has(.home-info) { display: flex; flex-direction: column; }
+  /* Das erste redaktionelle Cover bleibt das mobile LCP-Element. Die
+     ausführliche Markenbühne folgt direkt danach; so kostet die zusätzliche
+     Premium-Substanz keinen First-Viewport-Paint. */
+  main.main:has(.home-info) > article.post-entry { order: 1; }
+  main.main:has(.home-info) > article.first-entry.home-info { order: 2; }
+  main.main:has(.home-info) > div.ff-pinterest-cta { order: 3; }
+  main.main:has(.home-info) > footer.page-footer { order: 4; }
+  main.main:has(.home-info) > section.ff-saison { order: 5; }
+  main.main:has(.home-info) > section.ff-kompass { order: 6; }
+  main.main:has(.home-info) > section.ff-topics { order: 7; }
+  .first-entry.home-info {
+    padding: 26px 18px 30px;
+    box-shadow: 7px 7px 0 var(--ff-paper-line);
+  }
+  .first-entry.home-info .entry-header h1 {
+    margin-top: 12px;
+    font-size: clamp(2rem, 9.4vw, 3rem);
+  }
+  .first-entry.home-info > .ff-trust-row { margin-top: 26px; }
+  .ff-kostenprofil--home { box-shadow: 5px 5px 0 var(--ff-signal); }
+}
+
+@media (max-width: 520px) {
+  .ff-kostenprofil__head { padding: 21px 18px 15px; }
+  .ff-kostenprofil__index { font-size: .54rem; }
+  .ff-kostenprofil__subject { padding-inline: 18px; }
+  .ff-kostenprofil__track { grid-template-columns: repeat(2, 1fr); }
+  .ff-kostenprofil__track li:nth-child(2) { border-right: 0; }
+  .ff-kostenprofil__track li:nth-child(-n+2) { border-bottom: 1px solid var(--kp-line); }
+  .ff-kostenprofil__track li:nth-child(2)::after { display: none; }
+  .ff-kostenprofil__track strong { font-size: .7rem; }
+  .ff-kostenprofil__rule,
+  .ff-kostenprofil__author { padding-inline: 18px; }
+  .ff-kostenprofil--article .ff-kostenprofil__track {
+    grid-template-columns: repeat(4, minmax(0,1fr));
+  }
+  .ff-kostenprofil--article .ff-kostenprofil__track li {
+    padding: 10px 6px;
+    border-bottom: 0;
+    border-right: 1px solid var(--kp-line);
+  }
+  .ff-kostenprofil--article .ff-kostenprofil__track li:nth-child(2)::after { display: block; }
+  .ff-kostenprofil--article .ff-kostenprofil__track li:last-child { border-right: 0; }
+  .ff-kostenprofil--article .ff-kostenprofil__track span { margin-bottom: 8px; }
+  .ff-kostenprofil--article .ff-kostenprofil__track strong { font-size: .54rem; }
+  .ff-kostenprofil--article .ff-kostenprofil__track small { display: none; }
+  .ff-kostenprofil__foot { align-items: flex-start; font-size: .57rem; }
+}
+
+@media print {
+  .ff-kostenprofil { box-shadow: none; border: 1px solid #777; }
+  .ff-kostenprofil__author img { filter: grayscale(1); }
+}
+
+/* Die Editorial-Masthead-Höhe beträgt im breiten Layout bis zu 106 px.
+   Abschnittssprünge müssen deshalb mehr Abstand als PaperMods 60-px-Header
+   reservieren; andernfalls liegt die Überschrift knapp unter der Navigation. */
+.ff-topics h2[id],
+.ff-topics-legacy-anchor,
+.ff-posts-feed-heading {
+  scroll-margin-top: 120px;
+}

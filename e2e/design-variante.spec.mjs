@@ -132,17 +132,19 @@ test.describe('Design-Varianten: Produktions-Sicherung', () => {
     for (const datei of variantenDateien()) {
       if (aktiv && datei === `${aktiv}.css`) continue;
       const quelle = readFileSync(join(VARIANTEN_DIR, datei), 'utf8');
-      // Eine markante Deklaration aus der Datei suchen: die erste
-      // Regel mit einem Wert, die nicht in einem Kommentar steht.
+      // Eine vollständige markante Regel verwenden, nicht nur eine generische
+      // Deklaration wie `max-width:1024px`. Solche Werte dürfen nach einer
+      // bewussten Migration auch in der kanonischen Basis vorkommen; ein Leak
+      // liegt erst vor, wenn Selektor UND Deklarationsblock übernommen wurden.
       const ohneKommentare = quelle.replace(/\/\*[\s\S]*?\*\//g, ' ');
-      const treffer = ohneKommentare.match(/([a-z-]+)\s*:\s*([^;{}]+);/);
+      const treffer = ohneKommentare.match(/([^{}]+)\{([^{}]+)\}/);
       if (!treffer) continue;
-      const nadel = `${treffer[1]}:${treffer[2].trim()}`.replace(/\s+/g, '');
+      const nadel = `${treffer[1].trim()}{${treffer[2].trim()}}`.replace(/\s+/g, '');
       if (aktivQuelleNormalisiert && aktivQuelleNormalisiert.includes(nadel)) continue;
       const heuHaufen = ausgeliefert.replace(/\s+/g, '');
       expect(
         heuHaufen.includes(nadel),
-        `Regel aus ${datei} ("${nadel}") darf nicht im Produktions-CSS stehen`
+        `Regel aus ${datei} darf nicht vollständig im Produktions-CSS stehen`
       ).toBe(false);
     }
   });
