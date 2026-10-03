@@ -72,6 +72,8 @@ python3 scripts/zeit_rechtschreibung.py --selftest   # ZEIT-Niveau-Rechtschreibu
 npm run test:rechtschreibung                          # Selbsttest + 23 Unit-Tests der Wache
 npm run offenlegung                                   # Build + Werbe-Offenlegung O1–O7 (artikelgenau, sichtbar)
 npm run test:offenlegung                              # Selbsttest (13 Sabotage-Proben) + 36 Unit-Tests
+npm run vergleiche:check                              # Bewertungsraster V1–V8: Selbsttest + Quellen + Build + HTML-Beweis
+npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                                # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 

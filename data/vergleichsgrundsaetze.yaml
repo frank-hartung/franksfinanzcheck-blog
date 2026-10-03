@@ -1,0 +1,175 @@
+# ============================================================
+#  VERGLEICHSGRUNDSÄTZE – „So entstehen unsere Vergleiche"
+#  (Rollout 03.10.2026, Auftrag Frank: „Monetarisierung und
+#  Vertrauen sauberer austarieren – Bewertungsraster statt
+#  allgemeiner Unabhängigkeitshinweis. Dauerhaft auf
+#  Highend-Level einer Profi-Agentur.")
+#
+#  WARUM DIESE DATEI:
+#  Die sieben Fragen des Audits (Berücksichtigung, Ausschluss,
+#  Reihenfolge, Provisionseinfluss, Mindestkriterien,
+#  Link-Deaktivierung, Lücken) beantwortet man nicht in einem
+#  Fließtext, den niemand nachpflegt – sondern in einem
+#  kuratierten Register, das eine Wache gegen die Realität
+#  prüft. Diese Datei ist der menschlich kuratierte Teil des
+#  Bewertungsrasters auf /so-entstehen-unsere-vergleiche/.
+#
+#  WAS NICHT HIER STEHT (bewusst, SSOT-Regel):
+#    * Partner-/Routen-Register  → data/affiliate_ziele.yaml
+#      (gebacken aus scripts/affiliate_intent_contract.py; der
+#      Shortcode liest es direkt – eine neue Route erscheint
+#      automatisch im Raster, V2 der Wache erzwingt das).
+#    * K.-o.-Kriterien & Rangfolgen je Themenbereich
+#      → data/beweise/vergleichsmethodik.yaml (versioniert;
+#      der Shortcode spiegelt sie, V5 der Wache erzwingt das).
+#
+#  REGELN:
+#    * provision.antwort MUSS wörtlich "nein" bleiben. Die
+#      Wache (V4) bricht bei jedem anderen Wert – wer das
+#      ändern will, muss zuerst öffentlich erklären, warum.
+#    * Jede inhaltliche Änderung erhöht meta.version (SemVer)
+#      und bekommt einen changelog-Eintrag; größere Umbauten
+#      zusätzlich einen Eintrag in data/beweise/korrekturen.yaml.
+#    * Aussagen hier müssen dem realen Betrieb entsprechen
+#      (affiliate_health.py, affiliate_intent_guard.py,
+#      offenlegung_gate.py) – keine Versprechen ohne Mechanik.
+#
+#  RENDERING: {{< vergleichsgrundsaetze >}} auf
+#             /so-entstehen-unsere-vergleiche/.
+#  PRÜFUNG:   scripts/vergleichsgrundsaetze_gate.py (V1–V8).
+# ============================================================
+
+meta:
+  brand: FranksFinanzcheck
+  version: "1.0.0"
+  stand: "2026-10-03"
+  verantwortlich: "Frank Hartung"
+
+# ---------- V1: Welche Anbieter werden berücksichtigt? ----------
+aufnahme:
+  modell: >-
+    FranksFinanzcheck betreibt keine eigene Tarifdatenbank. Die Artikel
+    erklären Rechenwege, nennen Prüfkriterien und rechnen Modellfälle
+    nach der versionierten Methodik des jeweiligen Themenbereichs;
+    für tagesaktuelle Einzeltarife verlinken sie auf Vergleichsportale.
+    Das Anbieteruniversum eines Vergleichs ist deshalb zweistufig:
+    redaktionelle Stichproben mit dokumentiertem Abrufdatum im Artikel,
+    Marktabdeckung in Echtzeit beim verlinkten Portal.
+  kriterien:
+    - "Der Partner deckt den jeweiligen Produktbereich als Marktvergleich ab – Ausnahmen (Einzelangebot, Portalstartseite, Bündelprodukt) stehen sichtbar als Zieltyp im Register unten."
+    - "Abrechnung über ein etabliertes, nachprüfbares Partnerprogramm (CHECK24- und Tarifcheck-Programm, beide über das Awin-Netzwerk) – keine Direktdeals mit Handschlag-Konditionen."
+    - "Der Partner stellt keine Bedingungen an redaktionelle Inhalte: kein Textabnahme-Recht, keine Platzierungszusagen, keine Vorgaben zur Bewertung."
+    - "Deutsches Verbraucherrecht gilt: Widerrufs- und Kündigungsrechte, Preisangaben nach PAngV, Aufsicht durch BaFin bzw. Bundesnetzagentur im jeweiligen Markt."
+    - "Jede Route führt auf eine konkrete, wöchentlich maschinell geprüfte Zielseite – nicht auf eine rotierende Kampagnen-URL."
+
+# ---------- V2: Welche Anbieter werden ausgeschlossen – und warum? ----------
+ausschluesse:
+  - name: "Einzelne Versicherer, Banken und Energieversorger mit Direkt-Partnerprogramm"
+    grund: >-
+      Ein Link auf genau einen Anbieter ist kein Vergleich. Solche
+      Programme zahlen oft höhere Provisionen als Portale – genau
+      deshalb bleiben sie draußen. Die zwei dokumentierten Ausnahmen
+      (Girokonto und Tagesgeld der C24 Bank) tragen im Register unten
+      und an jedem Link den Zieltyp „Einzelangebot" und werden im
+      Artikel nie als Marktvergleich ausgegeben.
+  - name: "Krypto-, CFD- und Trading-Plattformen"
+    grund: >-
+      Hochrisikoprodukte außerhalb unseres Fixkosten-Auftrags. Die
+      Provisionen wären ein Vielfaches der Portal-Vergütungen – ein
+      Themenfeld, das man nur wegen der Vergütung eröffnet, ist der
+      sicherste Weg, die Methodik zu korrumpieren.
+  - name: "Anbieter mit Vorkasse-, Kautions- oder Paketmodellen (Strom/Gas)"
+    grund: >-
+      K.-o.-Kriterium der Energie-Methodik: Das Insolvenzrisiko trägt
+      sonst der Kunde. Solche Tarife werden weder empfohlen noch
+      verlinkt – auch nicht, wenn sie eine Ergebnisliste anführen.
+  - name: "Partnerprogramme, die Vergütung an redaktionelle Gegenleistungen knüpfen"
+    grund: >-
+      Textabnahme, garantierte Platzierungen, „Mindest-Sichtbarkeit"
+      oder Bewertungs-Vorgaben beenden jede Zusammenarbeit, bevor sie
+      beginnt. Es gibt keine bezahlten Artikel und keine gekauften
+      Platzierungen – das prüft die Offenlegungs-Wache an jedem Build.
+  - name: "Angebote ohne deutsches Verbraucherschutz-Fundament"
+    grund: >-
+      Ohne Widerrufsrechte, deutsche Aufsicht und durchsetzbare
+      Kündigungsregeln ist der beste Preis wertlos. Auslandskonten
+      ohne deutsche Einlagensicherungs-Äquivalenz verlinken wir nicht.
+
+# ---------- V3: Wie wird die Reihenfolge bestimmt? ----------
+reihenfolge:
+  grundsatz: >-
+    Reihenfolgen in redaktionellen Tabellen folgen ausschließlich der
+    versionierten Rangfolge des Themenbereichs – Sachkriterien in
+    dokumentierter Reihenfolge, nie Provisionshöhe, nie Partnerstatus.
+    Jede Rangfolge steht unten im Raster; ändert sie sich, springt die
+    Versionsnummer und das öffentliche Änderungsprotokoll bekommt
+    einen Eintrag.
+  portal_hinweis: >-
+    Nach dem Klick auf ein Portal gilt dessen Sortierung – darauf
+    haben wir keinen Einfluss, und wir behaupten das Gegenteil nicht.
+    Deshalb nennen die Artikel die Prüfkriterien, mit denen du jede
+    Portal-Ergebnisliste selbst gegenlesen kannst, und empfehlen nie
+    „Platz 1 der Liste", sondern den Tarif-Typ, der die Kriterien
+    erfüllt.
+
+# ---------- V4: Wird Provision bei der Bewertung berücksichtigt? ----------
+provision:
+  antwort: "nein"
+  begruendung: >-
+    Die Provisionshöhe legt der Partner fest, nicht die Redaktion –
+    und sie ist in keiner Formel, keinem K.-o.-Kriterium und keiner
+    Rangfolge ein Parameter. Kein Partner kann sich eine Empfehlung,
+    eine Platzierung oder eine mildere Bewertung kaufen, auch nicht
+    durch eine höhere Vergütung.
+  durchsetzung:
+    - "Die Bewertungslogik steht versioniert und öffentlich in der Vergleichsmethodik – eine still eingebaute Provisions-Variable wäre ein sichtbarer Versionssprung mit Changelog-Pflicht."
+    - "Affiliate-Partnerseiten sind als Beleg-Quellen technisch ausgeschlossen (Quell-Allowlist der Recherche); keine Zahl im Text stammt vom Partner."
+    - "Die Offenlegungs-Wache erzwingt bei jedem Build die artikelgenaue Kennzeichnung jedes Partnerlinks – ein unausgewiesener Werbelink geht nicht live."
+    - "Die Intent-Wache vergleicht bei jedem Lauf Ankertext, CTA und Linkziel – ein Link darf nie etwas anderes liefern, als der Text verspricht."
+
+# ---------- V5: Gibt es Mindestkriterien? ----------
+mindestkriterien:
+  grundsatz: >-
+    Ja – zweistufig. Global gilt: kein Produkt ohne deutsches
+    Verbraucherschutz-Fundament, keine Empfehlung ohne nachvollziehbare
+    Rechnung im Text, keine „kostenlos"-Behauptung, deren Bedingung im
+    Modellprofil nicht realistisch erfüllbar ist. Je Themenbereich
+    kommen die versionierten K.-o.-Kriterien der Vergleichsmethodik
+    dazu – ein Tarif, der sie reißt, fliegt unabhängig vom Preis raus.
+
+# ---------- V6: Wann wird ein Link deaktiviert? ----------
+deaktivierung:
+  pruefrhythmus: >-
+    Jede /go/-Weiterleitung wird wöchentlich (montags) maschinell
+    Ende-zu-Ende geprüft: Die komplette Redirect-Kette wird verfolgt,
+    die finale Landeseite muss erreichbar sein, im richtigen
+    Partnernetz liegen und die richtige Produktkategorie zeigen.
+    Zusätzlich prüft eine tägliche Integritäts-Wache alle Links im
+    Bestand.
+  ausloeser:
+    - ausloeser: "Die Ziel- oder Landeseite ist tot (Fehlerseite, Endlos-Redirect) oder zeigt eine andere Produktkategorie als versprochen"
+      reaktion: "Automatischer Umbau auf das sichere Portal-Fallback noch im selben Prüflauf, plus Vorgang zur Nacharbeit – niemand klickt in einen 404"
+    - ausloeser: "Das Partnerprogramm wird pausiert oder beendet (Awin-Status)"
+      reaktion: "Route wird deaktiviert; betroffene Artikel verlieren den Link, der redaktionelle Inhalt bleibt vollständig nutzbar"
+    - ausloeser: "Das verlinkte Produkt reißt ein K.-o.-Kriterium der aktuellen Methodik-Version"
+      reaktion: "Link wird redaktionell entfernt, auch wenn die Provision weiterfließen würde; die Änderung landet im öffentlichen Änderungsprotokoll"
+    - ausloeser: "Ankertext, CTA oder Artikelthema versprechen etwas anderes, als die Route liefert"
+      reaktion: "Die Intent-Wache heilt deterministisch oder blockiert die Veröffentlichung – ein Besucher mit konkreter Absicht darf nie woanders landen"
+    - ausloeser: "Die Werbekennzeichnung der Seite ist unvollständig, falsch gezählt oder steht hinter dem ersten Partnerlink"
+      reaktion: "Die Offenlegungs-Wache stoppt die Veröffentlichung der Seite, bis die Kennzeichnung stimmt"
+
+# ---------- V7: Fehlende und nicht vergleichbare Tarife ----------
+luecken:
+  - "Stichprobe statt Vollerhebung: Redaktionelle Tabellen erheben nie den Anspruch auf Marktvollständigkeit – Abrufdatum, Modellprofil und PLZ der Stichprobe stehen an jeder Zahl."
+  - "Ist die beste Option nicht verlinkbar (kein Partnerprogramm, Direktabschluss nötig), wird sie trotzdem genannt – ohne Link. Die Empfehlung hängt nicht an der Vergütbarkeit."
+  - "Nicht vergleichbare Märkte werden als solche benannt: Grundversorgung mit regionalen Monopolpreisen, individuell kalkulierte Prämien oder Bestandskunden-Konditionen bekommen keine Schein-Rangliste, sondern einen Prüfpfad zum Selberrechnen."
+  - "Fehlt für einen Tarif eine belastbare Angabe (z. B. Bonus-Auszahlungsregeln nicht dokumentiert), wird er nicht stillschweigend eingereiht, sondern mit genau dieser Lücke ausgewiesen oder weggelassen."
+  - "Veraltet eine Stichprobe über ihr Prüfintervall hinaus, gilt sie als offen – der Artikel trägt das Stand-Datum, und die Faktenfrische-Warteschlange holt die Aktualisierung nach."
+
+changelog:
+  - datum: "2026-10-03"
+    notiz: >-
+      v1.0.0 – Erstveröffentlichung des Bewertungsrasters
+      (Audit-Befund 8: „Monetarisierung und Vertrauen sauberer
+      austarieren"): sieben Fragen, ein kuratiertes Register,
+      maschinell erzwungen durch scripts/vergleichsgrundsaetze_gate.py.

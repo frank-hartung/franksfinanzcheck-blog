@@ -168,6 +168,7 @@ Damit FranksFinanzcheck dauerhaft kostenfrei und ohne Bezahlschranken für alle 
 - **Eindeutige Kennzeichnung:** Alle Partnerlinks sind transparent als Werbung gekennzeichnet und technisch über gesicherte `/go/`-Weiterleitungen mit `rel="sponsored nofollow"` standardisiert.
 - **Vollständige Nutzbarkeit ohne Klick:** Jeder Ratgeber bietet alle Rechenwege, Kriterien und Tipps, um den Wechsel auch völlig eigenständig und ohne Klick auf einen Partnerlink durchzuführen.
 - **Artikelgenaue Offenlegung (seit 28.09.2026):** Jeder Ratgeber nennt bereits **über** dem Text, wie viele Partnerlinks er enthält und zu welchen Partnern sie führen – Artikel ohne Partnerlinks sind sichtbar als werbefrei gekennzeichnet. Welche Partner es gibt, wie die Provision funktioniert und was sie nicht beeinflusst, steht vollständig unter [Transparenz & Werbung](/transparenz/).
+- **Öffentliches Bewertungsraster (seit 03.10.2026):** Welche Anbieter berücksichtigt und welche ausgeschlossen werden, wie Reihenfolgen entstehen, welche Mindestkriterien gelten und wann ein Link deaktiviert wird, dokumentiert [So entstehen unsere Vergleiche](/so-entstehen-unsere-vergleiche/) – maschinell gegen das Routen-Register und diese Methodik geprüft.
 
 ---
 

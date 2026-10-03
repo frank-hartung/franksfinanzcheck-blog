@@ -46,7 +46,7 @@ Das ist der Kern der Unabhängigkeit, und er ist bewusst als Regelwerk formulier
 
 1. **Themenauswahl.** Worüber geschrieben wird, entscheidet der Nutzen für Leser – nicht die Vergütungsfähigkeit eines Themas. Es erscheinen regelmäßig Artikel, an denen nichts verdient wird.
 2. **Empfehlung.** Was rechnerisch oder qualitativ nicht überzeugt, wird nicht empfohlen. Auch dann nicht, wenn es vergütet würde.
-3. **Reihenfolge.** Tabellen und Vergleiche werden nach Sachkriterien sortiert (Preis, Leistung, Bedingungen) – nie nach Provisionshöhe.
+3. **Reihenfolge.** Tabellen und Vergleiche werden nach Sachkriterien sortiert (Preis, Leistung, Bedingungen) – nie nach Provisionshöhe. Das vollständige Bewertungsraster mit Rangfolgen und K.-o.-Kriterien je Themenbereich steht unter [So entstehen unsere Vergleiche](/so-entstehen-unsere-vergleiche/).
 4. **Zahlen und Fakten.** Preise, Zinsen, Fristen und Rechenbeispiele stammen aus Primärquellen (Behörden, Gesetzestexte, Preisblätter, Statistik). Partnerseiten sind als Beleg ausdrücklich ausgeschlossen – siehe [So arbeiten wir](/methodik/).
 5. **Kritik.** Nachteile, Kostenfallen und Absagegründe stehen im Text, auch wenn sie einen Abschluss verhindern. Ein Artikel, der nur zustimmt, ist ein Werbetext.
 6. **Zugänglichkeit.** Jeder Ratgeber ist vollständig nutzbar, ohne einen einzigen Partnerlink anzuklicken. Es gibt keine Inhalte, die hinter einem Klick auf Werbung liegen.
@@ -86,4 +86,4 @@ Eine Selbstverpflichtung, die niemand prüft, ist eine Behauptung. Die Offenlegu
 
 Ein fehlender Hinweis, eine falsche Zahl, ein Link, der woanders landet als angekündigt: Das sind Fehler, keine Kleinigkeiten. Melde sie bitte an **kontakt@franksfinanzcheck.de** – mit Artikel-Link und kurzer Beschreibung. Bestätigte Fehler werden korrigiert, der Artikel bekommt einen sichtbaren Korrekturhinweis und die Änderung wird im öffentlichen [Änderungsprotokoll](/aenderungsprotokoll/) mit Datum, Anlass und Quelle dokumentiert.
 
-Verantwortlich für Inhalt und Offenlegung: Frank Hartung, vollständige Anbieterkennzeichnung im [Impressum](/impressum/). Wie Inhalte entstehen, recherchiert und geprüft werden, steht in [So arbeiten wir](/methodik/).
+Verantwortlich für Inhalt und Offenlegung: Frank Hartung, vollständige Anbieterkennzeichnung im [Impressum](/impressum/). Wie Inhalte entstehen, recherchiert und geprüft werden, steht in [So arbeiten wir](/methodik/). Welche Anbieter in Vergleiche aufgenommen oder ausgeschlossen werden, wie Reihenfolgen entstehen und wann ein Link deaktiviert wird, dokumentiert das Bewertungsraster unter [So entstehen unsere Vergleiche](/so-entstehen-unsere-vergleiche/).

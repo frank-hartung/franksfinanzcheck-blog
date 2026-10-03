@@ -50,6 +50,14 @@
                öffnen, um zu erfahren, womit hier Geld verdient wird.
                O7 der Wache scripts/offenlegung_gate.py prüft diesen Link. */ -}}
         <a href="{{ "transparenz/" | absURL }}">Transparenz &amp; Werbung</a>
+        {{- print " · " -}}
+        {{- /* VERGLEICHSGRUNDSÄTZE 03.10.2026 (Audit-Befund 8): Das
+               Bewertungsraster (Anbieter-Auswahl, Ausschlüsse, Reihenfolge,
+               Provisions-Frage, Deaktivierungsregeln) ist siteweit verlinkt –
+               wer einen Vergleich liest, findet die Regeln dahinter in einem
+               Klick. V7 der Wache scripts/vergleichsgrundsaetze_gate.py
+               prüft diesen Link im gebauten HTML. */ -}}
+        <a href="{{ "so-entstehen-unsere-vergleiche/" | absURL }}">So entstehen unsere Vergleiche</a>
     </span>
 </footer>
 {{- end }}

@@ -608,6 +608,20 @@ jobs:
       - name: Werkzeuge – finales Produkt-Gate
         run: python3 scripts/werkzeuge_gate.py --public public
 
+      # ============ VERGLEICHS-GATE (Audit-Befund 8, 03.10.2026) ============
+      # „So entstehen unsere Vergleiche" ist kein Text, sondern ein Vertrag:
+      # Jede /go/-Route steht im öffentlichen Routen-Register, Einzelangebote
+      # tragen den ehrlichen Zieltyp (nie „Marktvergleich"), die Provisions-
+      # Antwort bleibt wörtlich „Nein", K.-o./Rangfolge spiegeln die
+      # versionierte Methodik, und Footer/Transparenz/Methodik verlinken das
+      # Raster. Selbsttest zuerst – eine sabotierte Wache darf kein grünes
+      # Gate liefern. Kein || true: ein unwahres Raster geht nicht live.
+      - name: Vergleichs-Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/vergleichsgrundsaetze_gate.py --selftest
+
+      - name: Vergleichsgrundsätze – finales Transparenz-Gate
+        run: python3 scripts/vergleichsgrundsaetze_gate.py --public public
+
       # ================= ANKER-WACHE (Befund 10.09.2026) =================
       # Der Abschnitts-Knopf „Link kopieren“ trug ein „§“ als TEXT in
       # JEDER Überschrift. Kurzfassung („In diesem Artikel“), Tabellen-
