@@ -69,7 +69,7 @@ class SsotTests(unittest.TestCase):
 
     def test_ssot_nennt_nur_env_namen_keine_werte(self):
         roh = (ROOT / "data" / "werkbank.yaml").read_text(encoding="utf-8")
-        self.assertEqual(gate.b6_keine_secrets(roh), [])
+        self.assertEqual(gate.b6_klartext_disziplin(roh), [])
 
     def test_perplexity_ist_vollstaendig_raus(self):
         """Auftrag 03.10.2026: kostenlose Alternative statt Perplexity."""
@@ -143,12 +143,12 @@ class VertragTests(unittest.TestCase):
         for gift in ('api_key: "sk-0123456789abcdefghij"',
                      'token: "gsk_0123456789abcdefghijklmn"',
                      "schluessel: pplx-0123456789abcdefghij"):
-            self.assertTrue(gate.b6_keine_secrets(self.text + "\n" + gift),
+            self.assertTrue(gate.b6_klartext_disziplin(self.text + "\n" + gift),
                             f"nicht erkannt: {gift}")
 
     def test_b6_gibt_keinen_fehlalarm_auf_env_namen(self):
         harmlos = self.text + "\n  env: PERPLEXITY_API_KEY\n  env: COMPOSIO_API_KEY\n"
-        self.assertEqual(gate.b6_keine_secrets(harmlos), [])
+        self.assertEqual(gate.b6_klartext_disziplin(harmlos), [])
 
     def test_b8_bricht_wenn_workflow_den_selbsttest_verliert(self):
         """Ein Workflow ohne fail-closed-Prüfung ist Scheingrün."""
@@ -274,7 +274,7 @@ class VerschwiegenheitTests(unittest.TestCase):
         eingecheckte WERKBANK-STATUS.md.
         """
         gift = "antwortwerk:\n  synthese:\n    - api_key: sk-abcdef0123456789XYZ\n"
-        befunde = gate.b6_keine_secrets(gift)
+        befunde = gate.b6_klartext_disziplin(gift)
         self.assertTrue(befunde, "B6 muss den Klartext-Schlüssel finden")
         text = " ".join(befunde)
         self.assertNotIn("sk-abcdef0123456789XYZ", text)
@@ -284,7 +284,7 @@ class VerschwiegenheitTests(unittest.TestCase):
 
     def test_b6_schweigt_bei_sauberer_ssot(self):
         echt = (ROOT / "data" / "werkbank.yaml").read_text(encoding="utf-8")
-        self.assertEqual(gate.b6_keine_secrets(echt), [])
+        self.assertEqual(gate.b6_klartext_disziplin(echt), [])
 
     def test_schluessel_steht_nie_in_einer_rueckgabe(self):
         ssot = wa.lade_ssot()

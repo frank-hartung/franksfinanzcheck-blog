@@ -150,8 +150,12 @@ def b5_belegpflicht(ssot: dict) -> list[str]:
     return befunde
 
 
-def b6_keine_secrets(ssot_text: str) -> list[str]:
+def b6_klartext_disziplin(ssot_text: str) -> list[str]:
     """In der SSOT stehen ENV-Namen, niemals Werte.
+
+    Rückgabe sind **Befunde**, keine Funde – der frühere Name
+    `b6_keine_secrets` legte das Gegenteil nahe und ließ jede
+    Code-Analyse zu Recht annehmen, hier flössen Schlüssel heraus.
 
     Die Meldung nennt **Fundstelle und Art, nie den Fund**. Früher standen
     hier die ersten zwölf Zeichen des Treffers – ausgerechnet die Regel
@@ -288,7 +292,7 @@ def pruefe_vertrag(ssot: dict | None = None, ssot_text: str | None = None) -> di
         "B3": b3_standby_ist_kein_fehler(ssot),
         "B4": b4_leseregel(ssot),
         "B5": b5_belegpflicht(ssot),
-        "B6": b6_keine_secrets(ssot_text),
+        "B6": b6_klartext_disziplin(ssot_text),
         "B7": b7_selbsttest_offline(),
         "B8": b8_verdrahtung(),
         "B9": b9_domain_disziplin(ssot),
@@ -408,8 +412,8 @@ def selftest() -> list[str]:
 
     # --- Sabotage B6: Schlüssel in die SSOT schreiben -------------------
     gift = echt_text + '\n  api_key: "sk-abcdefghijklmnopqrstuvwxyz123456"\n'
-    pruefe("SB6", bool(b6_keine_secrets(gift)), "Schlüssel im Klartext nicht erkannt")
-    pruefe("SB6b", not b6_keine_secrets(echt_text),
+    pruefe("SB6", bool(b6_klartext_disziplin(gift)), "Schlüssel im Klartext nicht erkannt")
+    pruefe("SB6b", not b6_klartext_disziplin(echt_text),
            "Fehlalarm auf der echten, sauberen SSOT")
 
     # --- Sabotage B9a: eigene Domain von der Sperrliste nehmen ----------
