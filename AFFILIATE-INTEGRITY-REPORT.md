@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-02 10:13:19 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-03 09:34:45 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 45 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 38 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -14,16 +14,12 @@
 |:---|:---:|:---|
 | 2026-08-10-dsl-wechselbonus-sichern | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas | 2 → 3 ✅ | /go/gas/ |
-| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit | 3 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/ |
-| 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet | 3 → 3 ✅ | /go/haftpflicht/ |
-| 2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann | 2 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
-| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 2 → 3 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |
@@ -33,10 +29,8 @@
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 2 → 4 ✅ | /go/dsl/ |
 | 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 2 → 3 ✅ | /go/dsl/, /go/handytarife/ |
-| 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen | 2 → 2 ✅ | /go/mietwagen/ |
-| 2026-09-03-hausratversicherung-kosten-leistungen-vergleich | 3 → 3 ✅ | /go/hausrat/ |
 | 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen | 2 → 3 ✅ | /go/kreditkarte/, /go/reisekrankenversicherung/ |
 | 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich | 3 → 3 ✅ | /go/tagesgeld/ |
@@ -51,12 +45,11 @@
 | 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor | 2 → 3 ✅ | /go/gas/ |
 | 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro | 2 → 3 ✅ | /go/gas/ |
-| 2026-09-21-tierkrankenversicherung-hund-katze-kosten | 1 → 3 ✅ | /go/hunde/ |
-| 2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge | 3 → 3 ✅ | /go/tagesgeld/ |
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
-| 2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich | 3 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp | 2 → 3 ✅ | /go/mietwagen/ |
-| 2026-10-01-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v | 3 → 3 ✅ | /go/handytarife/ |
+| 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig | 3 → 3 ✅ | /go/gas/ |
+| 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss | 3 → 3 ✅ | /go/dsl/ |
+| 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage | 2 → 3 ✅ | /go/tagesgeld/ |
 
 ## Hinweise (nicht blockierend)
 

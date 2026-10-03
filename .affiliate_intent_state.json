@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-02 10:13:21 UTC",
+ "generated_at": "2026-10-03 09:34:47 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 72,
- "checked_links": 219,
+ "checked_articles": 64,
+ "checked_links": 190,
  "healed_count": 0,
  "healed": [],
  "findings": [],
