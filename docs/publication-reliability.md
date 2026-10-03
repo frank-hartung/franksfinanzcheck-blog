@@ -1,4 +1,35 @@
-# Veröffentlichungs-Zuverlässigkeit – Issue #217 / #287 / #537
+# Veröffentlichungs-Zuverlässigkeit – Issue #217 / #287 / #537 / #538
+
+## Nachhärtung am 03.10.2026 (Issue #538 / WF-7C1F – erster #537-Fix wurde übersprungen)
+
+- Der erste #537-Fix ergänzte korrekt `actions/deploy-pages`, wurde nach dem
+  Merge aber **nicht ausgeführt**: Der Push-Lauf `37086053804` endete grün,
+  während sowohl `deploy` als auch `pages-deployment` übersprungen wurden.
+- Ursache: Das Deploy-Entlastungs-Gate las weiterhin nur die Commit-Nachricht
+  des `gh-pages`-Branches. Der Cache war durch einen älteren manuellen Lauf
+  bereits auf Source-SHA `c721e2a` aktualisiert. Da zwischen diesem Cache-Stand
+  und dem #537-Merge nur Workflow/Dokumentation lagen, wertete die Negativliste
+  alles als deploy-irrelevant. Die echte Deployment-API zeigte dagegen
+  weiterhin als jüngsten öffentlichen Stand `f641f41` vom 30.09.; es existierte
+  **kein** offizielles Deployment von `main`. Der Reparaturjob war vorhanden,
+  konnte wegen des vorgeschalteten Gates aber nie anlaufen.
+
+### Dauerhafte Nachhärtung #538
+
+1. Das Gate trennt nun Cache und Auslieferungsnachweis: `gh-pages` bleibt nur
+   Diff-/Audio-/Audit-Basis; Live-Beleg ist ausschließlich das neueste
+   Deployment im Environment `github-pages` für Ref `main` mit Status
+   `success`.
+2. Vor jedem Entlastungs-Shortcut müssen Source-SHA des erfolgreichen
+   offiziellen Deployments und Source-SHA in der `gh-pages`-Commit-Nachricht
+   identisch sein. Fehlt Deployment, Status oder API-Antwort, gilt
+   **fail-safe `deploy=true`**. Damit bootstrapped bereits der Merge dieses
+   Fixes den zuvor übersprungenen Pages-Job.
+3. Erst nach dieser Invariante dürfen ein identischer Zielstand oder reine
+   Zustands-/Doku-Pfade den teuren Build überspringen. Ein frischer Cache kann
+   nie wieder einen fehlenden öffentlichen Livegang verdecken.
+4. Der Vertragstest `test_pages_deployment_guard.py` friert API-Abfrage,
+   Erfolgsstatus, SHA-Gleichheit und die Reihenfolge „Live-Beleg vor Skip“ ein.
 
 ## Befund am 03.10.2026 (Issue #537 – öffentliche Auslieferung dauerhaft unter Mindestziel)
 

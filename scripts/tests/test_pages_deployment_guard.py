@@ -42,6 +42,8 @@ class PagesDeploymentGuardTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.workflow = _load_workflow()
         self.jobs = self.workflow["jobs"]
+        with open(DEPLOY_YML, encoding="utf-8") as f:
+            self.workflow_text = f.read()
 
     def test_top_level_permissions_allow_pages_deployment(self) -> None:
         perms = self.workflow.get("permissions") or {}
@@ -111,6 +113,39 @@ class PagesDeploymentGuardTestCase(unittest.TestCase):
         job = self.jobs["pages-deployment"]
         condition = job.get("if", "")
         self.assertIn("deploy-gate.outputs.deploy", condition)
+
+    def test_deploy_gate_uses_successful_official_deployment_as_live_receipt(self) -> None:
+        """WF-7C1F/#538: Ein frischer gh-pages-Cache ist kein Live-Beleg.
+
+        Der erste #537-Fix wurde nach dem Merge vom Entlastungs-Gate
+        übersprungen, weil dieses nur die Commit-Nachricht auf gh-pages las.
+        Das Gate muss deshalb zusätzlich die echte Deployment-Historie und
+        ihren letzten Status prüfen.
+        """
+        self.assertIn(
+            "deployments?environment=github-pages",
+            self.workflow_text,
+            "Das Gate muss das echte github-pages-Environment abfragen.",
+        )
+        self.assertIn(
+            "/statuses?per_page=1",
+            self.workflow_text,
+            "Ein Deployment-Objekt ohne success-Status ist kein Live-Beleg.",
+        )
+        self.assertIn('PAGES_DEPLOY_STATUS" != "success"', self.workflow_text)
+        self.assertIn('PAGES_DEPLOY_SHA" != "$LIVE_DEPLOY_SHA"', self.workflow_text)
+
+    def test_official_receipt_is_checked_before_any_skip(self) -> None:
+        """Kein Shortcut darf den Reparatur-Deploy erneut überspringen."""
+        invariant = self.workflow_text.index(
+            'PAGES_DEPLOY_STATUS" != "success"'
+        )
+        skip = self.workflow_text.index(
+            'Cache und offizielles Pages-Deployment sind auf Stand'
+        )
+        path_filter = self.workflow_text.index("STATE_ONLY='")
+        self.assertLess(invariant, skip)
+        self.assertLess(invariant, path_filter)
 
     def test_selftest(self) -> None:
         """Smoke-Test: Die Testdatei selbst muss ohne Fixtures importierbar sein."""
