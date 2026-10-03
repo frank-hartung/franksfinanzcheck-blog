@@ -86,7 +86,13 @@ except Exception:  # noqa: BLE001 - ohne Client läuft alles außer der Fachprü
 # KORREKTUR 02.10.2026: Die frühere Puter-Brücke (PUTER_AUTH_TOKEN,
 # scripts/puter_chat.mjs) ist entfernt – Puter wird im Betrieb nicht genutzt,
 # die Fachprüfung lief deshalb nie.
-PROVIDER_ORDER = ("claude", "openai", "groq", "gemini")
+# Reihenfolge seit 03.10.2026 (Transportweg-Vertrag T3/T4): zuerst die
+# drei Gratis-Hoster von OpenAIs offenem Modell, danach Gemini als
+# Gegenprobe aus einem anderen Modellhaus. Paid-Anbieter stehen am Ende
+# und greifen nur, wenn jemand bewusst einen Schlüssel hinterlegt hat.
+# SSOT der Kette: data/ki_transportweg.yaml → routing.faktenpruefung
+PROVIDER_ORDER = ("groq", "gemini", "nvidia", "cloudflare",
+                  "claude", "openai")
 
 CONFIG_PFAD = os.path.join(BLOG_DIR, "data", "agent_reach", "faktenfrische.yaml")
 DOSSIER_DIR = os.path.join(BLOG_DIR, "data", "research", "artikel")

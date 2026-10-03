@@ -106,7 +106,13 @@ REPORT = ROOT / "SAISONALER-HERO-REPORT.md"
 # Reihenfolge des Feinschliffs: der erste Anbieter mit Schlüssel gewinnt, bei
 # Fehler rückt der nächste nach. Bewusst identisch zur KI-Redaktion, damit es
 # genau EINEN Ort für Schlüssel, Modelle und Retries gibt.
-PROVIDER_ORDER = ("claude", "openai", "groq", "gemini")
+# Reihenfolge seit 03.10.2026 (Transportweg-Vertrag T3/T4): drei
+# unabhängige Gratis-Hoster desselben OpenAI-Modells, danach Gemini.
+# Genau diese Redundanz verhindert den Dauerausfall aus Issue #514 –
+# ein leeres Tageskontingent ist dann kein roter Lauf mehr.
+# SSOT der Kette: data/ki_transportweg.yaml → routing.politur
+PROVIDER_ORDER = ("groq", "nvidia", "cloudflare", "gemini",
+                  "claude", "openai")
 MAX_AGE_DAYS = 21
 # Kulanzfenster: Solange die kuratierte Basis den kompletten SEO/GEO-Vertrag und
 # die Startseiten-Wache besteht, ist ein Ausfall der Claude-Kette (Token, Netz,

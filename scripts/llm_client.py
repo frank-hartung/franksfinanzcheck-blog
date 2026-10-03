@@ -6,11 +6,27 @@
 #  (Schema: Claude = lange Artikel, ChatGPT = schnelle News,
 #  Jasper = SEO). Provider:
 #
-#    claude   → Anthropic Messages API   (ANTHROPIC_API_KEY)
-#    openai   → OpenAI Chat Completions  (OPENAI_API_KEY)
-#    groq     → vorhandener Gratis-Fallback (GROQ_API_KEY,
-#               nutzt scripts/groq_config.py als SSOT)
-#    gemini   → vorhandener Gratis-Fallback (GEMINI_API_KEY)
+#    groq       → GRATIS, openai/gpt-oss-120b     (GROQ_API_KEY,
+#                 nutzt scripts/groq_config.py als SSOT)
+#    nvidia     → GRATIS, openai/gpt-oss-120b     (NVIDIA_API_KEY)
+#    cloudflare → GRATIS, @cf/openai/gpt-oss-120b (CLOUDFLARE_API_TOKEN
+#                 + CLOUDFLARE_ACCOUNT_ID)
+#    gemini     → GRATIS, Google-Gratis-Tier      (GEMINI_API_KEY)
+#    openai     → PAID, OpenAI Chat Completions   (OPENAI_API_KEY)
+#    claude     → PAID, Anthropic Messages API    (ANTHROPIC_API_KEY)
+#
+#  DIE CHATGPT-FRAGE (geklärt 03.10.2026, siehe
+#  CHATGPT-GRATIS-TRANSPORTWEG-PREMIUM-2026-10-03.md):
+#  „ChatGPT (Free)“ ist eine Chat-Oberfläche ohne API. Sie lässt sich
+#  nicht automatisieren – und das UI nachzubauen verstößt gegen die
+#  OpenAI-Nutzungsbedingungen und wäre exakt der Brücken-Pfusch, den
+#  Issue #514 (Puter) aus diesem Repo entfernt hat. GitHub Models, der
+#  einzige offizielle Gratis-Weg zu echten GPT-Modellen, ist seit dem
+#  30.07.2026 abgeschaltet.
+#  Was es wirklich gibt: `openai/gpt-oss-120b` – OpenAIs eigenes
+#  offenes Modell, kostenlos über DREI unabhängige Hoster (Groq,
+#  NVIDIA NIM, Cloudflare Workers AI). Genau diese drei bilden die
+#  „OpenAI-Bahn“: ein Modell, drei Wege, keine Rechnung.
 #
 #  NUR Standardbibliothek (urllib) – keine neuen Abhängigkeiten,
 #  damit alle GitHub-Workflows ohne extra pip-Installation laufen.
@@ -23,6 +39,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -47,38 +64,82 @@ USER_AGENT = (
 DEFAULT_MODELS = {
     "claude": os.environ.get("CLAUDE_MODEL") or "claude-sonnet-4-5",
     "openai": os.environ.get("OPENAI_MODEL") or "gpt-4o",
+    # Die OpenAI-Bahn: dasselbe offene OpenAI-Modell bei drei Hostern.
+    "nvidia": os.environ.get("NVIDIA_MODEL") or "openai/gpt-oss-120b",
+    "cloudflare": (os.environ.get("CLOUDFLARE_MODEL")
+                   or "@cf/openai/gpt-oss-120b"),
 }
 
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_VERSION = "2023-06-01"
 OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+
+# Alle bekannten Provider in stabiler Reihenfolge (Gratis zuerst).
+PROVIDERS = ("groq", "nvidia", "cloudflare", "gemini", "openai", "claude")
+
+# Kostenklasse ist Vertrag, nicht Meinung: Wer hier "gratis" steht, darf in
+# eine automatische Anbieter-Kette. Alles andere nur per bewusstem Opt-in.
+# Die Kosten-Regel (Dauervorgabe Frank, 08.09.2026) prüft genau diese Karte –
+# siehe scripts/ki_transportweg.py (Regel T1).
+KOSTENKLASSE = {
+    "groq": "gratis",        # Free-Tier, 1.000 Anfragen/Tag
+    "nvidia": "gratis",      # build.nvidia.com, ~40 Anfragen/Minute
+    "cloudflare": "gratis",  # Workers AI, 10.000 Neuronen/Tag
+    "gemini": "gratis",      # Google-Gratis-Tier
+    "openai": "paid",        # kein nutzbarer Gratis-Tier (Stand 10/2026)
+    "claude": "paid",
+}
+
+# Welche Provider liefern ein ECHTES OpenAI-Modell? Das ist die ehrliche
+# Antwort auf „ChatGPT einbauen": nicht die Oberfläche, sondern das Modell.
+OPENAI_BAHN = ("groq", "nvidia", "cloudflare")
+
+# Umgebungsvariablen je Provider. Cloudflare braucht zwei (Token + Konto-ID).
+ENV_KEYS = {
+    "claude": "ANTHROPIC_API_KEY",
+    "openai": "OPENAI_API_KEY",
+    "groq": "GROQ_API_KEY",
+    "gemini": "GEMINI_API_KEY",
+    "nvidia": "NVIDIA_API_KEY",
+    "cloudflare": "CLOUDFLARE_API_TOKEN",
+}
 
 
 def key_for(provider: str) -> str:
-    env = {
-        "claude": "ANTHROPIC_API_KEY",
-        "openai": "OPENAI_API_KEY",
-        "groq": "GROQ_API_KEY",
-        "gemini": "GEMINI_API_KEY",
-    }
-    return (os.environ.get(env.get(provider, "")) or "").strip()
+    return (os.environ.get(ENV_KEYS.get(provider, "")) or "").strip()
+
+
+def cloudflare_account() -> str:
+    return (os.environ.get("CLOUDFLARE_ACCOUNT_ID") or "").strip()
 
 
 def available(provider: str) -> bool:
+    if provider == "cloudflare":
+        # Ohne Konto-ID gibt es keine URL – ein halber Schlüssel ist keiner.
+        return bool(key_for("cloudflare") and cloudflare_account())
     return bool(key_for(provider))
 
 
 def available_providers() -> list:
-    return [p for p in ("claude", "openai", "groq", "gemini") if available(p)]
+    return [p for p in PROVIDERS if available(p)]
+
+
+def ist_gratis(provider: str) -> bool:
+    """True, wenn der Provider ohne Rechnung läuft (Kosten-Regel)."""
+    return KOSTENKLASSE.get(provider) == "gratis"
+
+
+def gratis_providers() -> list:
+    """Alle Gratis-Provider – auch ohne Schlüssel (Konfigurationssicht)."""
+    return [p for p in PROVIDERS if ist_gratis(p)]
 
 
 def model_for(provider: str, override: str | None = None) -> str:
     if override:
         return override
-    if provider == "claude":
-        return DEFAULT_MODELS["claude"]
-    if provider == "openai":
-        return DEFAULT_MODELS["openai"]
+    if provider in ("claude", "openai", "nvidia", "cloudflare"):
+        return DEFAULT_MODELS[provider]
     if provider == "groq" and groq_config:
         return groq_config.model()
     if provider == "gemini":
@@ -143,6 +204,40 @@ def _call_openai_like(url, api_key, messages, system, model,
             .get("message", {}).get("content") or "").strip()
 
 
+def cloudflare_url() -> str:
+    """OpenAI-kompatibler Workers-AI-Endpunkt des eigenen Kontos."""
+    return ("https://api.cloudflare.com/client/v4/accounts/"
+            f"{cloudflare_account()}/ai/v1/chat/completions")
+
+
+# GPT-OSS denkt im Harmony-Format laut. Groq schaltet das per Flag ab
+# (groq_config), NVIDIA und Cloudflare nicht immer. Ungefiltert landet
+# „analysis…assistantfinal" im Artikel und zerlegt Frontmatter-Parser –
+# dieselbe Schadensklasse wie R16-PROMPT-ECHO (Issue #521).
+_DENKSPUREN = (
+    re.compile(r"(?is)<think>.*?</think>"),
+    re.compile(r"(?is)<reasoning>.*?</reasoning>"),
+    re.compile(r"(?is)^\s*analysis\b.*?assistantfinal\s*"),
+    re.compile(r"(?is)^\s*<\|channel\|>analysis<\|message\|>.*?"
+               r"<\|channel\|>final<\|message\|>"),
+)
+
+
+def _ohne_denkspuren(text: str) -> str:
+    for muster in _DENKSPUREN:
+        text = muster.sub("", text)
+    return text.strip()
+
+
+def _call_openai_kompatibel_frei(provider, messages, system, model,
+                                 temperature, max_tokens, timeout):
+    """NVIDIA NIM und Cloudflare Workers AI – beide OpenAI-kompatibel."""
+    url = NVIDIA_URL if provider == "nvidia" else cloudflare_url()
+    roh = _call_openai_like(url, key_for(provider), messages, system, model,
+                            temperature, max_tokens, timeout)
+    return _ohne_denkspuren(roh or "")
+
+
 def _call_gemini(messages, system, model, temperature, max_tokens, timeout):
     key = key_for("gemini")
     url = ("https://generativelanguage.googleapis.com/v1beta/models/"
@@ -201,6 +296,10 @@ def chat(provider: str,
                 return _call_openai_like(OPENAI_URL, key_for("openai"),
                                          messages, system, model,
                                          temperature, max_tokens, timeout)
+            if provider in ("nvidia", "cloudflare"):
+                return _call_openai_kompatibel_frei(
+                    provider, messages, system, model,
+                    temperature, max_tokens, timeout)
             if provider == "gemini":
                 return _call_gemini(messages, system, model,
                                     temperature, max_tokens, timeout)
@@ -235,14 +334,37 @@ def chat(provider: str,
     return None
 
 
+def chat_kette(kette, prompt: str | None = None, **kw):
+    """Erster erreichbarer Provider der Kette gewinnt; bei Ausfall rückt
+    der nächste nach.
+
+    Rückgabe: ``(text, provider)`` – ``(None, None)``, wenn kein Glied der
+    Kette liefert. Damit ist im Log IMMER sichtbar, WER geantwortet hat;
+    genau diese Sichtbarkeit fehlte beim Puter-Dauerausfall (#514).
+    """
+    for provider in kette:
+        if not available(provider):
+            continue
+        text = chat(provider, prompt=prompt, **kw)
+        if text:
+            return text, provider
+    return None, None
+
+
 def selftest() -> int:
     """Verfügbarkeit aller Provider melden (Exit 0, rein informativ)."""
     print("LLM-Client – Provider-Status:")
-    for p in ("claude", "openai", "groq", "gemini"):
+    for p in PROVIDERS:
         ok = available(p)
-        print(f"  {'✅' if ok else '— '} {p:<7} "
-              f"({'Key vorhanden' if ok else 'kein Key (Offline-Fallback aktiv)'})"
-              f" – Modell: {model_for(p)}")
+        klasse = KOSTENKLASSE.get(p, "?")
+        bahn = " [OpenAI-Bahn]" if p in OPENAI_BAHN else ""
+        print(f"  {'✅' if ok else '— '} {p:<10} {klasse:<8}"
+              f"{'Key vorhanden' if ok else 'kein Key (Offline-Fallback aktiv)'}"
+              f" – Modell: {model_for(p)}{bahn}")
+    frei = [p for p in OPENAI_BAHN if available(p)]
+    print(f"\n  OpenAI-Bahn (openai/gpt-oss-120b, 0 €): "
+          f"{len(frei)}/{len(OPENAI_BAHN)} Hoster erreichbar"
+          f"{' – ' + ', '.join(frei) if frei else ''}")
     if not available_providers():
         print("  Hinweis: Ohne Keys laufen alle Writer im Offline-Gerüst-Modus.")
     return 0

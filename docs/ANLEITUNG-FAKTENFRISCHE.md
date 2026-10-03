@@ -86,11 +86,18 @@ Die Fachprüfung läuft über den gemeinsamen LLM-Zugang des Blogs
 nächste nach. Ohne jeden Schlüssel läuft alles außer der Fachprüfung; die
 Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
 
-> **Korrektur 02.10.2026:** Die frühere Puter-Brücke (`PUTER_AUTH_TOKEN`,
-> `scripts/puter_chat.mjs`, `npm @heyputer/puter.js`) ist ersatzlos entfernt.
-> Puter wird im Betrieb nicht genutzt – die Fachprüfung war damit dauerhaft
-> „übersprungen". `scripts/tests/test_keine_puter_abhaengigkeit.py` verhindert,
-> dass die Abhängigkeit zurückkehrt.
+> **Korrektur 02.10.2026:** Die frühere Browser-Brücke über ein geteiltes
+> Fremdkonto ist ersatzlos entfernt – sie wurde im Betrieb nie genutzt, die
+> Fachprüfung war damit dauerhaft „übersprungen".
+>
+> **Seit 03.10.2026** hält das Transportweg-Gate diese Bauweise generell
+> draußen: `scripts/ki_transportweg.py` Regel **T5** verbietet jede
+> Browser-Brücke und jedes UI-Scraping (auch das von ChatGPT) in Skripten
+> **und** Workflows, Regel **T9** verlangt, dass dieser Workflow mindestens
+> zwei kostenlose Schlüssel durchreicht – damit ein leeres Tageskontingent
+> die Fachprüfung nicht erneut still ausfallen lässt. Tests:
+> `scripts/tests/test_ki_transportweg.py`, Runbook:
+> `docs/ANLEITUNG-KI-TRANSPORTWEG.md`.
 
 ## Was der Leser sieht
 
