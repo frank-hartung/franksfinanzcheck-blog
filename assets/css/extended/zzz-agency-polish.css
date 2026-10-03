@@ -4299,8 +4299,11 @@ details.toc a {
   .header-nav { min-height: 70px; }
   .ff-brand-descriptor { display: none; }
   main.main:has(.home-info) { display: flex; flex-direction: column; }
-  main.main:has(.home-info) > article.first-entry.home-info { order: 1; }
-  main.main:has(.home-info) > article.post-entry { order: 2; }
+  /* Das erste redaktionelle Cover bleibt das mobile LCP-Element. Die
+     ausführliche Markenbühne folgt direkt danach; so kostet die zusätzliche
+     Premium-Substanz keinen First-Viewport-Paint. */
+  main.main:has(.home-info) > article.post-entry { order: 1; }
+  main.main:has(.home-info) > article.first-entry.home-info { order: 2; }
   main.main:has(.home-info) > div.ff-pinterest-cta { order: 3; }
   main.main:has(.home-info) > footer.page-footer { order: 4; }
   main.main:has(.home-info) > section.ff-saison { order: 5; }
