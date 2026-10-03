@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Pinterest
 
-> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 12:27 (Europe/Berlin)  
 > Profil: https://www.pinterest.de/franksfinanzcheck/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `pinterest.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Sa, 03. Oktober 2026
-- **10:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+- **10:15** ⚪ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### So, 04. Oktober 2026
 - **10:15** ⏳ Dein haus sicher schuetzen das neue vorsorge update 2026 — _takeaway_ · Launch

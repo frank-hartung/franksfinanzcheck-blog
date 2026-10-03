@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 12:27 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -12,11 +12,8 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **16:15** ⚪ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
 ### Sa, 03. Oktober 2026
-- **09:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _mythos_ · Launch  
+- **09:15** ⚪ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
 - **16:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/

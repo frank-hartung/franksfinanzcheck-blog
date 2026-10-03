@@ -1093,9 +1093,9 @@ items:
   date: '2026-10-02'
   time: '19:15'
   scheduled_at: '2026-10-02T19:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: telegram:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt:nutzen:2026-10-03
   channel: telegram
   slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
@@ -1105,9 +1105,9 @@ items:
   date: '2026-10-03'
   time: 07:00
   scheduled_at: '2026-10-03T07:00:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: TELEGRAM_BOT_TOKEN fehlt
 - id: bluesky:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:takeaway:2026-10-03
   channel: bluesky
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
@@ -1117,9 +1117,9 @@ items:
   date: '2026-10-03'
   time: 08:15
   scheduled_at: '2026-10-03T08:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:mythos:2026-10-03
   channel: x
   slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
@@ -1129,9 +1129,9 @@ items:
   date: '2026-10-03'
   time: 08:45
   scheduled_at: '2026-10-03T08:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
 - id: threads:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:mythos:2026-10-03
   channel: threads
   slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
@@ -1141,9 +1141,9 @@ items:
   date: '2026-10-03'
   time: 09:15
   scheduled_at: '2026-10-03T09:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: THREADS_ACCESS_TOKEN fehlt
 - id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:vergleich:2026-10-03
   channel: facebook
   slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
@@ -1153,9 +1153,9 @@ items:
   date: '2026-10-03'
   time: 09:45
   scheduled_at: '2026-10-03T09:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: FACEBOOK_PAGE_TOKEN fehlt
 - id: pinterest:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-03
   channel: pinterest
   slug: 2026-08-10-dsl-wechselbonus-sichern
@@ -1165,9 +1165,9 @@ items:
   date: '2026-10-03'
   time: '10:15'
   scheduled_at: '2026-10-03T10:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: kein lebender Pinterest-Token (pinterest_token.py)
 - id: instagram:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause:zahl:2026-10-03
   channel: instagram
   slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
@@ -1177,9 +1177,9 @@ items:
   date: '2026-10-03'
   time: '11:45'
   scheduled_at: '2026-10-03T11:45:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: INSTAGRAM_ACCESS_TOKEN fehlt
 - id: bluesky:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:mythos:2026-10-03
   channel: bluesky
   slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
@@ -1189,9 +1189,9 @@ items:
   date: '2026-10-03'
   time: '12:15'
   scheduled_at: '2026-10-03T12:15:00+02:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
+  reason: BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 - id: x:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps:zahl:2026-10-03
   channel: x
   slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps

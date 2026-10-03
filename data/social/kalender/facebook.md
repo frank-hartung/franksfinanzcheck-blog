@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 02.10.2026 18:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.10.2026 12:27 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -12,11 +12,8 @@
 
 ## Kommende Beiträge
 
-### Fr, 02. Oktober 2026
-- **15:15** ⚪ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
 ### Sa, 03. Oktober 2026
-- **09:45** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
+- **09:45** ⚪ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 - **15:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
