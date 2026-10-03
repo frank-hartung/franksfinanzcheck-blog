@@ -266,13 +266,14 @@ im Klartext statt eines Stacktrace.
 
 ---
 
-## 8. Offener Punkt: der Workflow
+## 8. Der Workflow
 
-**`.github/workflows/werkbank.yml` ist geschrieben, lässt sich aber unter
-Umständen nicht pushen.** Agenten-Tokens haben keine `workflows`-Permission.
-Scheitert der Push mit `refusing to allow an OAuth App to create or update
-workflow`, muss die Datei einmalig von Hand übernommen werden – ihr Inhalt ist
-vollständig und unverändert einsatzbereit.
+`.github/workflows/werkbank.yml` ist **gepusht und einsatzbereit**. Das war
+nicht selbstverständlich: Agenten-Tokens haben üblicherweise keine
+`workflows`-Permission, hier griff die Sperre nicht. Sollte ein künftiger Push
+auf diese Datei mit `refusing to allow an OAuth App to create or update
+workflow` scheitern, ist die Datei von Hand zu übernehmen – inhaltlich ist sie
+vollständig.
 
 Eckdaten: Donnerstag 07:40 MESZ, `workflow_dispatch` (Modus plan/alle/gate/
 dry-run, freie Frage), `repository_dispatch: [werkbank]`,
@@ -295,8 +296,8 @@ sind `continue-on-error`. Ein Issue entsteht nur bei echtem Fehlschlag, Label
 
 ## 10. Nächste Schritte
 
-1. `.github/workflows/werkbank.yml` von Hand übernehmen, falls der Push
-   scheitert (Abschnitt 8).
+1. Einen ersten Handstart des Workflows fahren (`workflow_dispatch`, Modus
+   `gate`) und das Ergebnis im Actions-Reiter gegenlesen.
 2. Eigene SearXNG-Instanz aufsetzen und `SEARXNG_URL` hinterlegen – der
    DuckDuckGo-Rückfall ist Best-Effort, keine tragende Säule.
 3. `GROQ_API_KEY` hinterlegen (Gratis-Kontingent) und den Synthese-Pfad einen
