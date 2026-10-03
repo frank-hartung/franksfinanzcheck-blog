@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-03T09:45:14Z",
+  "generated": "2026-10-03T22:49:26Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "rot",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit)",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig",
         "lesbarkeit: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md – Flesch 51.7 < Floor 55; 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/in…",
-        "Artikel-Reserve 6/6 bereit"
+        "Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -51,11 +51,11 @@
       ]
     },
     "Social-Automation": {
-      "level": "gruen",
+      "level": "gelb",
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 1.9 Tag(en)",
+        "letzter erfolgreicher Post vor 2.5 Tag(en)",
         "1 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
