@@ -44,7 +44,9 @@ In der Regel zahlen Kontoinhaber 30–50 € pro Jahr für Kontoführung, Ü
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Kreditkarten vergleichen**](/go/kreditkarte/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Was sind Bankgebühren und warum fallen sie an? Bankgebühren umfassen alle Entgelte, die Banken für die Kontoführung, Transaktionen und Serviceleistungen erheben. Sie entstehen, weil Banken Infrastruktur, Personal und Regulierungsaufwand finanzieren müssen. Für dich bedeutet das: Jede Buchung, jeder Karteneinsatz oder jede Kontoführung kann einen kleinen Preis haben.
+## Was sind Bankgebühren und warum fallen sie an?
+
+Bankgebühren umfassen alle Entgelte, die Banken für die Kontoführung, Transaktionen und Serviceleistungen erheben. Sie entstehen, weil Banken Infrastruktur, Personal und Regulierungsaufwand finanzieren müssen. Für dich bedeutet das: Jede Buchung, jeder Karteneinsatz oder jede Kontoführung kann einen kleinen Preis haben.
 
 ## Welche Fehler kosten dich Bankgebühren?
 ### Typische Fehler
@@ -55,9 +57,13 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 | Nicht genutzte Zusatzleistungen | Jahresgebühr für Premium‑Karte | Karte kündigen, wenn du sie selten nutzt |
 | Versäumte Fristen | Automatischer Vertragswechsel | Kündigungsfrist im Kalender markieren |
 
-## Warum lohnt sich ein Jahres‑Check deines Kontos? Einmal im Jahr die Kontodetails zu prüfen, spart mehr, als sporadische Wechsel. Du erkennst sofort, ob neue Gebühren eingeführt wurden oder ob dein Kontostand die Freigrenze unterschreitet. Der Aufwand ist gering: Kontoauszüge vergleichen, AGBs durchlesen und die Ergebnisse im Fixkosten‑Kompass festhalten.
+## Warum lohnt sich ein Jahres‑Check deines Kontos?
 
-## Welche Alternativen reduzieren Bankgebühren? Kostenlose Online‑Banken bieten oft ein komplett gebührenfreies Girokonto an. Sie verzichten auf Filialnetz, dafür bekommst du digitale Services und eine klare Kostenstruktur. Eine weitere Option ist das Kombi‑Konto: ein Hauptkonto für Einnahmen und ein Zweitkonto für Ausgaben, das nur für bestimmte Transaktionen genutzt wird.
+Einmal im Jahr die Kontodetails zu prüfen, spart mehr, als sporadische Wechsel. Du erkennst sofort, ob neue Gebühren eingeführt wurden oder ob dein Kontostand die Freigrenze unterschreitet. Der Aufwand ist gering: Kontoauszüge vergleichen, AGBs durchlesen und die Ergebnisse im Fixkosten‑Kompass festhalten.
+
+## Welche Alternativen reduzieren Bankgebühren?
+
+Kostenlose Online‑Banken bieten oft ein komplett gebührenfreies Girokonto an. Sie verzichten auf Filialnetz, dafür bekommst du digitale Services und eine klare Kostenstruktur. Eine weitere Option ist das Kombi‑Konto: ein Hauptkonto für Einnahmen und ein Zweitkonto für Ausgaben, das nur für bestimmte Transaktionen genutzt wird.
 
 ## So gehst du vor: Schritt‑für‑Schritt zum geringeren Gebührenkonto
 1. **Alle wiederkehrenden Kontoführungs‑ und Transaktionsgebühren erfassen.** Nutze dafür eine einfache Excel‑Liste oder den 4K‑Prüfpfad.
@@ -66,7 +72,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 4. **Kündige das alte Konto fristgerecht.** Notiere das Kündigungsfenster im Kalender, um automatische Verlängerungen zu vermeiden.
 5. **Richte das neue Konto ein und teste die Funktionen.** Überweise dein Gehalt, lege Daueraufträge an und beobachte die ersten drei Monate.
 
-## Modellrechnung: Einsparpotenzial bei einem Durchschnittskonto **Annahmen:**
+## Modellrechnung: Einsparpotenzial bei einem Durchschnittskonto Annahmen:
 - Jahresgebühr für Kontoführung 30 €
 - 5 % Fremdwährungsaufschlag bei 1 000 € Jahresumsatz im Ausland (Durchschnittsrate 2 %)
 - Keine Mindestumsatzbedingung für ein Gratis‑Konto
@@ -175,17 +181,29 @@ Durch das **Reduzieren** des Dispokredits sparst du also fast **Bankgebühren** 
 
 ## Häufige Fragen
 
-### Wie oft sollte ich meine Kontokonditionen überprüfen? Einmal im Jahr reicht, wenn du dir einen festen Termin im Kalender setzt.
+### Wie oft sollte ich meine Kontokonditionen überprüfen?
 
-### Was kostet ein Kontowechsel bei meiner Bank? Einige Institute erheben eine einmalige Wechselgebühr von etwa 20–40 €, andere verzichten darauf. Prüfe die AGBs, bevor du kündigst.
+Einmal im Jahr reicht, wenn du dir einen festen Termin im Kalender setzt.
 
-### Lohnt sich ein Kombi‑Konto für jeden? Nur, wenn du klare Trennungen zwischen Einnahmen und Ausgaben brauchst und die zusätzlichen Kontoführungsgebühren die Ersparnisse nicht übersteigen.
+### Was kostet ein Kontowechsel bei meiner Bank?
 
-### Wie finde ich ein kostenloses Girokonto? Vergleiche die Angebote großer Online‑Banken, achte auf die Bedingungen für kostenlose Kontoführung und prüfe, ob du die Mindestumsatzgrenze einhalten kannst.
+Einige Institute erheben eine einmalige Wechselgebühr von etwa 20–40 €, andere verzichten darauf. Prüfe die AGBs, bevor du kündigst.
 
-### Kann ich meine Kreditkarte ohne Gebühren im Ausland nutzen? Ja, es gibt Karten, die keine Fremdwährungsaufschläge erheben. Achte auf die Jahresgebühr und prüfe, ob sie sich bei deinem Ausgabenvolumen lohnt.
+### Lohnt sich ein Kombi‑Konto für jeden?
 
-### Was passiert, wenn ich mein altes Konto vor Ablauf der Kündigungsfrist schließe? Die meisten Banken verlangen eine Nachfrist von 2–4 Wochen und können eine vorzeitige Schließungsgebühr von 10–30 € erheben. Dokumentiere das Kündigungsschreiben und fordere eine schriftliche Bestätigung, um spätere Nachforderungen zu vermeiden.
+Nur, wenn du klare Trennungen zwischen Einnahmen und Ausgaben brauchst und die zusätzlichen Kontoführungsgebühren die Ersparnisse nicht übersteigen.
+
+### Wie finde ich ein kostenloses Girokonto?
+
+Vergleiche die Angebote großer Online‑Banken, achte auf die Bedingungen für kostenlose Kontoführung und prüfe, ob du die Mindestumsatzgrenze einhalten kannst.
+
+### Kann ich meine Kreditkarte ohne Gebühren im Ausland nutzen?
+
+Ja, es gibt Karten, die keine Fremdwährungsaufschläge erheben. Achte auf die Jahresgebühr und prüfe, ob sie sich bei deinem Ausgabenvolumen lohnt.
+
+### Was passiert, wenn ich mein altes Konto vor Ablauf der Kündigungsfrist schließe?
+
+Die meisten Banken verlangen eine Nachfrist von 2–4 Wochen und können eine vorzeitige Schließungsgebühr von 10–30 € erheben. Dokumentiere das Kündigungsschreiben und fordere eine schriftliche Bestätigung, um spätere Nachforderungen zu vermeiden.
 
 ### Wie kann ich versteckte Gebühren bei Kreditkarten vermeiden?
 - **Jahresgebühr prüfen:** Oft günstiger, wenn du die Karte mindestens 12 Monate nutzt.

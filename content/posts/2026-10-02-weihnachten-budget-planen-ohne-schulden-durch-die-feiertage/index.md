@@ -129,7 +129,7 @@ Die teuerste Falle dieser Übersicht ist der Griff zum Dispokredit. Überziehung
 **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
 
-Gerade für weihnachten budget planen gilt: Kleine Änderungen bringen große Wirkung.
+Gerade für Weihnachten budget planen gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Häufige Fragen
 
