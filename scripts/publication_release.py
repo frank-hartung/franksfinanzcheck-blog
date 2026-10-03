@@ -15,6 +15,16 @@ oder Hold) füllt sie Re-Queue und Reserve bis zum LIVE-Mindestziel nach.
 Ohne diesen Schritt blieb am 14.09. nach dem Verwurf des Tages-Artikels nur
 noch 1 LIVE-Post stehen, bis der nächtliche Backstop griff – der öffentliche
 Nachweis meldete das Defizit zu Recht.
+
+Premium-Fix 02.10.2026 (WF-A535 #529): Die Endabnahme stirbt nicht mehr
+stumm. `heal_shortcode_damage()` heilt die deterministische Shortcode-
+Schadensklasse vor dem Build (alle Aufrufer), `build_site()` diagnostiziert
+einen toten Hugo-Build strukturiert statt mit rohem Traceback, und die
+Exit-Codes sind ein Vertrag: 0 = ok · 1 = Tagesdefizit (ehrlich rot) ·
+3 = Release-Crash (fail-closed, diagnostiziert). Am 02.10.2026 ließ genau
+ein Markdown-Link in einem rechner-Shortcode-Parameter die Engine-Läufe
+19:15 und 21:26 am ERSTEN Build der Endabnahme sterben – im 21:26-Lauf
+bei gefülltem, zertifiziertem Reserve-Pool (6/6), dessen Refill nie lief.
 """
 import argparse
 import datetime as dt
@@ -26,9 +36,142 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
+# ================= WF-A535 (#529): Endabnahme bleibt diagnostizierbar =====
+# 02.10.2026: Die Content-Engine-Läufe 19:15 und 21:26 (WF-A535 #529)
+# endeten an derselben Stelle rot („Do not report a quota deficit as
+# success“) – ohne dass ein Defizit die Ursache war. Der ERSTE Hugo-Build
+# der Endabnahme starb an
+# `typ="[notgroschen](../../posts/…)"` (Markdown-Link im rechner-Shortcode-
+# Parameter, Commit c181d75): publication_release endete in einem rohen
+# CalledProcessError-Traceback, der Reserve-Refill lief nie (im 21:26-Lauf
+# trotz 6/6 zertifizierter Reserve-Kandidaten), und das Fehler-Ticket riet
+# zu API-Keys/GitHub-Status statt zur echten Ursache.
+# Der Schreiber ist seit WF-1F8C (#522) shortcode-blind. Diese Schicht
+# macht die Endabnahme selbst immun und benennbar:
+#   1. heal_shortcode_damage(): deterministische Heilung VOR dem Build –
+#      eine Quelle, alle Aufrufer (Engine, Kadenz-Backstop, Deploy-Refill).
+#   2. build_site(): Hugo-Build mit strukturierter Diagnose statt
+#      Traceback – die Ursache steht namentlich im Schritt-Log.
+#   3. Exit-Codes als Vertrag: 0 = ok · 1 = Tagesdefizit (ehrlich rot,
+#      unverändert) · 3 = Release-Crash (fail-closed, diagnostiziert).
+
+EXIT_DEFIZIT = 1
+EXIT_CRASH = 3
+
+
+class ReleaseBuildCrash(Exception):
+    """Hugo-Build oder Gate-Werkzeug versagt – Endabnahme stoppt fail-closed."""
+
 
 def run(*args):
     subprocess.run(args, cwd=ROOT, check=True, timeout=240)
+
+
+def heal_shortcode_damage(runner=None) -> bool:
+    """Heilt die deterministische Shortcode-Schadensklasse vor dem Build.
+
+    Führt die Shortcode-Wache (WF-1F8C #522) best-effort aus: Ein Markdown-
+    Link in einem Shortcode-Parameter tötet den Hugo-Build blog-weit –
+    genau die Klasse, die am 02.10.2026 alle drei Engine-Läufe (WF-A535
+    #529) rote laufen ließ, obwohl der Reserve-Pool 6/6 Kandidaten hatte.
+    Die Wache ist idempotent; ihr Scheitern blockiert die Endabnahme nicht
+    (nur Warnung) – der Build selbst bleibt die harte Instanz.
+    """
+    if runner is None:
+        def runner(cmd):
+            return subprocess.run(cmd, cwd=ROOT, timeout=120)
+    try:
+        proc = runner([sys.executable, str(ROOT / 'scripts' / 'shortcode_guard.py'), '--fix'])
+    except Exception as exc:  # noqa: BLE001 – Heilung darf die Abnahme nie blockieren
+        print(f"⚠ Shortcode-Wache vor der Endabnahme nicht ausführbar: {exc}")
+        return False
+    if getattr(proc, 'returncode', 1) != 0:
+        print(f"⚠ Shortcode-Wache vor der Endabnahme: Exit {getattr(proc, 'returncode', '?')} – "
+              "der Hugo-Build entscheidet (fail-closed).")
+        return False
+    return True
+
+
+def diagnose_hugo_failure(log: str) -> list[str]:
+    """Extrahiert die Fehler-Zeilen aus dem Hugo-Log (max. 10, gekürzt)."""
+    funde = []
+    for line in (log or '').splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        if s.lower().startswith('error'):
+            funde.append(s[:300])
+        if len(funde) >= 10:
+            break
+    return funde
+
+
+def _report_build_crash(errors: list[str], log_tail: list[str]) -> None:
+    print()
+    print("🛑 PUBLICATION-RELEASE: Hugo-Build GESCHEITERT – Endabnahme stoppt fail-closed.")
+    print("    Keine Veröffentlichung aus einem kaputten Build; nichts wurde verworfen;")
+    print(f"    Exit {EXIT_CRASH} = Release-Crash, ausdrücklich KEIN Tagesdefizit.")
+    if errors:
+        print("    Hugo-Fehler (Auszug):")
+        for e in errors:
+            print(f"      {e}")
+    if log_tail:
+        print("    Log-Ende:")
+        for line in log_tail:
+            print(f"      {line}")
+    print("    Bekannte Ursache dieser Klasse (WF-A535, 02.10.2026): Markdown-Link im")
+    print("    Shortcode-Parameter → „rechner: unbekannter typ …“. Diagnose + Heilung:")
+    print("      python3 scripts/shortcode_guard.py            # Funde zeigen")
+    print("      python3 scripts/shortcode_guard.py --fix      # deterministisch entlinken")
+    print("    (Die Wache lief bereits VOR dem Build – bleibt er rot, liegt eine andere")
+    print("    Build-Ursache vor: Layout, Frontmatter, Theme, Shortcode-Werte.)")
+    try:
+        from audit_log import log_event
+        log_event(module="publication_release", action="build_error",
+                  input={"cmd": "hugo --minify"},
+                  output={"errors": errors}, status="fail_closed")
+    except Exception:  # noqa: BLE001 – Diagnose darf nie am Audit scheitern
+        pass
+
+
+def build_site(runner=None) -> None:
+    """Hugo-Produktionsbuild – bei Versagen Diagnose statt rohem Traceback."""
+    if runner is None:
+        def runner(cmd):
+            return subprocess.run(cmd, cwd=ROOT, capture_output=True,
+                                  text=True, timeout=240)
+    try:
+        proc = runner(['hugo', '--minify', '--cleanDestinationDir'])
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        _report_build_crash([f"hugo nicht ausführbar: {exc}"], [])
+        raise ReleaseBuildCrash("hugo nicht ausführbar") from exc
+    if proc.returncode != 0:
+        stderr = getattr(proc, 'stderr', '') or ''
+        stdout = getattr(proc, 'stdout', '') or ''
+        log = stderr + '\n' + stdout
+        _report_build_crash(diagnose_hugo_failure(log), log.splitlines()[-25:])
+        raise ReleaseBuildCrash(f"hugo --minify: Exit {proc.returncode}")
+    if getattr(proc, 'stdout', ''):
+        print(proc.stdout.rstrip())
+
+
+def _report_tool_crash(exc: subprocess.CalledProcessError) -> None:
+    cmd = ' '.join(map(str, exc.cmd)) if exc.cmd else '<unbekannt>'
+    print()
+    print("🛑 PUBLICATION-RELEASE: Werkzeugaufruf gescheitert – Endabnahme stoppt fail-closed.")
+    print(f"    Befehl: {cmd}  ·  Exit-Code: {exc.returncode}")
+    print(f"    Das ist KEIN Tagesdefizit (Exit {EXIT_DEFIZIT}): Die Veröffentlichungskette")
+    print("    selbst ist blockiert; der Reserve-Refill lief nicht.")
+    if exc.cmd and 'hugo' in exc.cmd:
+        print("    Bekannte Build-Killer-Klasse (WF-A535 #529): python3 scripts/shortcode_guard.py --fix")
+    print("    Details stehen in der Ausgabe des Werkzeugs oben im Schritt-Log.")
+    try:
+        from audit_log import log_event
+        log_event(module="publication_release", action="tool_error",
+                  input={"cmd": exc.cmd or []},
+                  output={"returncode": exc.returncode}, status="fail_closed")
+    except Exception:  # noqa: BLE001 – Diagnose darf nie am Audit scheitern
+        pass
 
 
 def finish_reserve_if_needed() -> bool:
@@ -295,6 +438,24 @@ def main(argv=None):
     if args.selftest:
         return run_selftest()
 
+    # WF-A535 (#529): Die deterministische Shortcode-Schadensklasse wird
+    # VOR jedem Build der Endabnahme geheilt – eine Quelle, alle Aufrufer
+    # (Engine, Kadenz-Backstop, Deploy-Refill). Best-Effort: Der Build
+    # selbst bleibt die harte, fail-closed Instanz.
+    heal_shortcode_damage()
+
+    try:
+        return _dispatch(args)
+    except ReleaseBuildCrash:
+        # build_site() hat bereits strukturiert diagnostiziert.
+        return EXIT_CRASH
+    except subprocess.CalledProcessError as exc:
+        _report_tool_crash(exc)
+        return EXIT_CRASH
+
+
+def _dispatch(args) -> int:
+    """Endabnahme ohne Crash-Behandlung – main() fängt strukturiert ab."""
     if args.refill_only:
         # Deploy-Pfad (#287): publish_gate hat gerade verworfen/gehalten.
         # Hier nur nachfüllen – Commit/Rebuild macht der Aufrufer.
@@ -324,12 +485,12 @@ def main(argv=None):
 
     # Vollständige Endabnahme (Engine + Kadenz-Backstop).
     hold_under_score_candidates()
-    run('hugo', '--minify', '--cleanDestinationDir')
+    build_site()
     run(sys.executable, 'scripts/publish_gate.py')
     # Nach Gate-Verlust sofort nachfüllen – nicht erst auf den nächsten Slot warten.
     refill_to_min(finalize=False)
     run(sys.executable, 'scripts/draft_link_healer.py', '--fix')
-    run('hugo', '--minify', '--cleanDestinationDir')
+    build_site()
     run(sys.executable, 'scripts/publish_gate.py')
     # Falls das zweite Gate erneut etwas verworfen hat: noch einmal nachfüllen.
     refill_to_min(finalize=True)
@@ -340,7 +501,9 @@ def main(argv=None):
         return 0
     result = receipt.check(day)
     print(result)
-    return 0 if result['ok'] else 1
+    # EXIT_DEFIZIT (1) = ehrliches Tagesdefizit – unveränderter Vertrag;
+    # ein Release-Crash (Build/Gate) wird oben als EXIT_CRASH (3) gemeldet.
+    return 0 if result['ok'] else EXIT_DEFIZIT
 
 
 def run_selftest() -> int:
@@ -430,13 +593,60 @@ def run_selftest() -> int:
         if (posts / 'off-reserve' / 'index.md').read_bytes() != before:
             errors.append("Off-Day hat Reserve-Datei verändert")
 
+    # 3) WF-A535 (#529): Diagnose- und Heilungsvertrag der Endabnahme –
+    #    offline, ohne Hugo, ohne Netz, ohne Repo-Schreibzugriff.
+    real_hugo_log = (
+        "Start building sites … \n"
+        "hugo v0.164.0-… linux/amd64 \n"
+        'ERROR rechner: unbekannter typ "[notgroschen](../../posts/2026-09-09-'
+        'notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)" '
+        "(erlaubt: notgroschen, budget-503020, strom-abschlag, gas-abschlag, dsl-effektiv)\n"
+        "Total in 1321 ms\n"
+        "ERROR error building site: logged 1 error(s)\n"
+    )
+    funde = diagnose_hugo_failure(real_hugo_log)
+    if not funde or 'unbekannter typ' not in funde[0]:
+        errors.append(f"Diagnose findet den realen WF-A535-Hugo-Fehler nicht: {funde}")
+    if diagnose_hugo_failure("Total in 42 ms\n"):
+        errors.append("Diagnose meldet Fehler auf sauberem Build-Log")
+
+    class _Rc0:
+        returncode = 0
+
+    class _Rc2:
+        returncode = 2
+
+    if not heal_shortcode_damage(runner=lambda cmd: _Rc0()):
+        errors.append("Shortcode-Heilung meldet Erfolg falsch")
+    if heal_shortcode_damage(runner=lambda cmd: _Rc2()):
+        errors.append("Shortcode-Heilung meldet Wachen-Fehler als Erfolg")
+
+    def _wirft(cmd):
+        raise OSError("Wache nicht startbar")
+
+    if heal_shortcode_damage(runner=_wirft):
+        errors.append("Shortcode-Heilung wirft, statt nur zu warnen")
+
+    class _ToterBuild:
+        returncode = 1
+        stdout = ""
+        stderr = real_hugo_log
+
+    import audit_log as _al
+    with mock.patch.object(_al, 'log_event', lambda **kw: '/dev/null'):
+        try:
+            build_site(runner=lambda cmd: _ToterBuild())
+            errors.append("build_site schluckt einen toten Hugo-Build")
+        except ReleaseBuildCrash:
+            pass  # Vertrag: Crash wird diagnostiziert UND weitergereicht
+
     if errors:
         print("🛑 PUBLICATION-RELEASE-SELFTEST FEHLGESCHLAGEN:")
         for e in errors:
             print(f"   - {e}")
         return 2
     print("✅ publication_release-Selbsttest grün "
-          "(Refill bis Minimum, Off-Day-Schutz).")
+          "(Refill bis Minimum, Off-Day-Schutz, WF-A535-Diagnose).")
     return 0
 
 

@@ -508,10 +508,29 @@ jobs:
         with:
           version: "0.164.0"
 
+      # WF-A535 (#529, 02.10.2026): Alle drei Engine-Läufe des Tages starben
+      # an derselben Stelle – nicht am Tagesdefizit, sondern am ERSTEN Build
+      # der Endabnahme: Ein Markdown-Link in einem rechner-Shortcode-Parameter
+      # (c181d75) tötete den Hugo-Build blog-weit, publication_release endete
+      # im rohen Traceback, der Reserve-Refill lief nie – obwohl der Pool
+      # 6/6 Kandidaten hatte. Der Linker ist seit WF-1F8C (#522) shortcode-
+      # blind; diese Wache VOR der Endabnahme heilt auch bereits committeten
+      # Schaden (gleiches Muster wie die Kadenz-Endkontrolle). publication_
+      # release führt sie zusätzlich selbst aus – eine Quelle, alle Aufrufer.
+      - name: "Shortcode-Wache vor der Endabnahme (WF-A535 #529)"
+        run: |
+          python3 scripts/shortcode_guard.py --selftest
+          python3 scripts/shortcode_guard.py --fix
+
       - name: Final publication acceptance and reserve refill
         id: final_release
         continue-on-error: true
-        run: python3 scripts/publication_release.py
+        run: |
+          set +e
+          python3 scripts/publication_release.py
+          rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit $rc
 
       # PRÄVENTION #462 (30.09.2026): Wer Entwürfe anfasst, erneuert ihren
       # Nachweis. Dieser Lauf heilt Reserve-Entwürfe (Politur, Rechtschreibung,
@@ -566,4 +585,27 @@ jobs:
 
       - name: Do not report a quota deficit as success
         if: ${{ !cancelled() }}
-        run: test '${{ steps.final_release.outcome }}' = success
+        run: |
+          RC='${{ steps.final_release.outputs.rc }}'
+          if [ "${{ steps.final_release.outcome }}" = 'success' ]; then
+            exit 0
+          fi
+          # WF-A535 (#529): Die Endabnahme kennt zwei ehrlich rote Klassen –
+          # Tagesdefizit (Exit 1) und Release-Crash (Exit 3). Die Klasse steht
+          # als Annotation im Run, statt dass das Fehler-Ticket zu API-Keys
+          # und GitHub-Status rät, während der Hugo-Build tot ist.
+          case "$RC" in
+            1)
+              echo "::error::TAGESDEFIZIT – Endabnahme meldet LIVE unter dem Minimum (ehrlich rot). Lage und Ursachen: Schritt „Final publication acceptance“ bzw. python3 scripts/engine_capacity.py"
+              ;;
+            3)
+              echo "::error::RELEASE-CRASH (WF-A535 #529) – Hugo-Build oder Gate-Werkzeug versagt; Diagnose und Hugo-Fehlerauszug stehen im Schritt „Final publication acceptance“. Kein Tagesdefizit, kein API-Key-Problem."
+              ;;
+            '')
+              echo "::error::Endabnahme ohne Exit-Code fehlgeschlagen – siehe Schritt „Final publication acceptance“."
+              ;;
+            *)
+              echo "::error::Endabnahme mit Exit $RC fehlgeschlagen – siehe Schritt „Final publication acceptance“."
+              ;;
+          esac
+          exit 1

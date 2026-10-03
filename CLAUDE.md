@@ -259,6 +259,28 @@ gegangen („Du bist der 0 am deutschen Strommarkt“, „es ist der 2 Januar“
 - Runbook + Zahlen: `LESBARKEIT-ENTWUERFE-PREMIUM-2026-09-30.md`,
   `CONTENT-ENGINE-KAPAZITAET-PREMIUM-2026-10-02.md`.
 
+## Die Endabnahme heilt Shortcode-Schaden und benennt Build-Crashs (WF-A535 #529, seit 02.10.2026)
+
+Am 02.10.2026 ließ ein einziger Markdown-Link in einem
+`rechner`-Shortcode-Parameter **alle** Hugo-Builds sterben; die
+Content-Engine-Endabnahme (`publication_release.py`) endete in rohem
+Traceback, der Reserve-Refill lief nie, und das Auto-Issue riet zu
+API-Keys statt zur echten Ursache. Vertrag seither:
+
+- `publication_release.py` führt am Anfang **jedes** Laufs
+  `shortcode_guard.py --fix` aus (eine Quelle, alle Aufrufer: Engine,
+  Kadenz-Backstop, Deploy-Refill) – best-effort, der Build bleibt hart.
+- **Exit-Codes sind Vertrag:** 0 = ok · 1 = Tagesdefizit (ehrlich rot,
+  aus `publication_check`) · 3 = Release-Crash (fail-closed, strukturiert
+  diagnostiziert: echte Hugo-Fehlerzeile + Reparaturpfad + Audit-Event).
+  Wer die Trennung einebnet, macht Crashs wieder ununterscheidbar von
+  Defiziten – genau der Zustand, der #529 öffnete.
+- Die Engine-Workflow führt die Shortcode-Wache **vor** der Endabnahme
+  (Spiegel der Kadenz-Endkontrolle) und der Wächter-Schritt am Ende
+  benennt die Klasse (`TAGESDEFIZIT` vs. `RELEASE-CRASH`) als Annotation.
+- Verdrahtung ist gepinnt: `scripts/tests/test_publication_release_wache.py`.
+  Runbook + Tathergang: `ENDABNAHME-WACHE-PREMIUM-2026-10-02.md`.
+
 ## Themen haben zwei Bahnen (seit 02.10.2026, Issue #521)
 
 Am 02.10.2026 lief die Engine, schrieb vier Artikel und veröffentlichte
