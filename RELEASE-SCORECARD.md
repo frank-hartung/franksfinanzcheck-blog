@@ -118,9 +118,15 @@
 | `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | standard | nicht erforderlich | frisch geprüft vor 6 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 6 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2026-11-16 |
-| `2026-10-02-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen` | hoch | ausstehend | Erstrecherche – noch nie faktengeprüft | unbekannt ⚠️ überfällig |
-| `2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure` | hoch | ausstehend | Erstrecherche – noch nie faktengeprüft | unbekannt ⚠️ überfällig |
+| `2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-stromrechnung-senken-20-strategien-fuer-dein` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
