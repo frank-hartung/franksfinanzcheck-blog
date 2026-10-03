@@ -50,6 +50,15 @@
 {{- with $seite }}{{ if eq .Kind "page" }}{{ $wo = "in diesem Artikel" }}{{ end }}{{ end -}}
 {{- $transparenz := "transparenz/" | relURL -}}
 {{- $methodik := "methodik/" | relURL -}}
+{{- /* VERGLEICHSGRUNDSÄTZE 03.10.2026 (Audit-Befund 8, Ausbaustufe 2):
+       Das Bewertungsraster gehört GENAU an die Stelle, an der
+       monetarisiert wird – nicht nur in Footer und Transparenz-Seiten.
+       Wer die Werbe-Kennzeichnung aufklappt, bekommt den direkten Weg
+       zu den Antworten: Wer wird berücksichtigt/ausgeschlossen, wie
+       entsteht die Reihenfolge, wann fliegt ein Link raus. V7 der
+       Wache scripts/vergleichsgrundsaetze_gate.py prüft diesen Link
+       IM Offenlegungs-Baustein jeder Seite mit Partnerlinks. */ -}}
+{{- $vergleiche := "so-entstehen-unsere-vergleiche/" | relURL -}}
 
 {{- if $off.hat -}}
 <details class="ff-offenlegung"
@@ -92,9 +101,13 @@
       empfohlen werden, in welcher Reihenfolge sie stehen und welche Zahlen im Text auftauchen.
       Fällt ein Angebot im Vergleich durch, wird es nicht empfohlen – auch dann nicht, wenn es
       vergütet würde. Alle Ratgeber sind ohne einen einzigen Klick auf einen Partnerlink vollständig nutzbar.
+      Welche Anbieter aufgenommen oder ausgeschlossen werden, wonach sortiert wird und wann ein
+      Link deaktiviert wird, steht im öffentlichen
+      <a href="{{ $vergleiche }}">Bewertungsraster</a>.
     </p>
     <p class="ff-offenlegung__wege">
       <a href="{{ $transparenz }}">Wie sich FranksFinanzcheck finanziert</a>
+      <a href="{{ $vergleiche }}">So entstehen unsere Vergleiche</a>
       <a href="{{ $methodik }}">So arbeiten wir</a>
     </p>
   </div>

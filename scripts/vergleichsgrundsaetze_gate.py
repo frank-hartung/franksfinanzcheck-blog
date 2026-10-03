@@ -48,7 +48,12 @@
 #                         Auslöser wäre wieder nur ein Satz.
 #    V7 WEGWEISER         Footer (jede Seite), /transparenz/ und
 #                         /methodik/ verlinken auf das Raster; das
-#                         Raster verlinkt zurück auf beide.
+#                         Raster verlinkt zurück auf beide. Zusätzlich
+#                         (Ausbaustufe 2, 03.10.2026): JEDE Seite mit
+#                         Partnerlinks verlinkt das Raster IN ihrem
+#                         aufklappbaren Offenlegungs-Baustein – die
+#                         Antworten stehen dort, wo monetarisiert wird,
+#                         nicht nur im Footer.
 #    V8 KURATIERUNG       SemVer-Version, ISO-Stand (nicht in der
 #                         Zukunft), Changelog vorhanden, Ausschlüsse
 #                         (>=3, je mit Grund) und Lücken-Regeln (>=3).
@@ -95,6 +100,7 @@ GRUNDSAETZE = REPO / "data" / "vergleichsgrundsaetze.yaml"
 ZIELREGISTER = REPO / "data" / "affiliate_ziele.yaml"
 METHODIK = REPO / "data" / "beweise" / "vergleichsmethodik.yaml"
 SHORTCODE = REPO / "layouts" / "shortcodes" / "vergleichsgrundsaetze.html"
+OFFENLEGUNG_PARTIAL = REPO / "layouts" / "_partials" / "ff_offenlegung.html"
 HISTORY = REPO / "data" / "vergleichsgrundsaetze_history.jsonl"
 
 SEITE_PFAD = "so-entstehen-unsere-vergleiche"
@@ -191,6 +197,49 @@ def _parse(html: str) -> _RasterParser:
     p = _RasterParser()
     p.feed(html)
     return p
+
+
+class _OffenlegungLinkParser(HTMLParser):
+    """V7 Ausbaustufe 2: Findet den Offenlegungs-Baustein einer Seite
+    (data-ff-offenlegung="mit-partnerlinks") und sammelt die Links,
+    die IN diesem Baustein stehen – der Footer-Link zählt hier nicht."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.hat_baustein = False
+        self.links_im_baustein: set[str] = set()
+        self._tiefe = 0
+        self._baustein_tiefe = 0  # 0 = außerhalb
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        self._tiefe += 1
+        if a.get("data-ff-offenlegung") == "mit-partnerlinks" and not self._baustein_tiefe:
+            self.hat_baustein = True
+            self._baustein_tiefe = self._tiefe
+        if self._baustein_tiefe and tag == "a" and a.get("href"):
+            self.links_im_baustein.add(a["href"])
+        if tag in ("br", "img", "hr", "meta", "link", "input", "source"):
+            self._tiefe -= 1
+
+    def handle_endtag(self, tag):
+        if self._baustein_tiefe and self._tiefe == self._baustein_tiefe:
+            self._baustein_tiefe = 0
+        self._tiefe = max(0, self._tiefe - 1)
+
+
+def pruefe_offenlegungs_bruecke(html: str, seite: str, fehler: list[str]) -> bool:
+    """V7: Trägt der Offenlegungs-Baustein dieser Seite den Weg zum
+    Raster? Liefert True, wenn die Seite überhaupt einen Baustein hat."""
+    p = _OffenlegungLinkParser()
+    p.feed(html)
+    if not p.hat_baustein:
+        return False
+    if not any(f"/{SEITE_PFAD}/" in h or h.rstrip("/").endswith(SEITE_PFAD)
+               for h in p.links_im_baustein):
+        fehler.append(f"V7 {seite}: Offenlegungs-Baustein verlinkt das Bewertungsraster "
+                      "nicht – die Antworten gehören dorthin, wo monetarisiert wird")
+    return True
 
 
 # ------------------------------------------------------------
@@ -359,6 +408,16 @@ def pruefe_detektor_frische() -> None:
                 f"Detektor-Fingerabdruck '{anker}' fehlt im Live-Template "
                 f"{SHORTCODE.name} – die Wache wäre blind (AI4-Lektion). "
                 "Template und Wache nur gemeinsam ändern.")
+    # Ausbaustufe 2: Die Artikel-Brücke wird über den Fingerabdruck der
+    # Offenlegungs-Wache gefunden. Verschwindet er aus dem Partial, sähe
+    # der Brücken-Scan 0 Bausteine und würde still grün – deshalb ist
+    # sein Fehlen ein WERKZEUGFEHLER, kein Befund.
+    if not OFFENLEGUNG_PARTIAL.exists():
+        raise _Werkzeugfehler(f"Offenlegungs-Partial fehlt: {OFFENLEGUNG_PARTIAL}")
+    if "data-ff-offenlegung" not in OFFENLEGUNG_PARTIAL.read_text(encoding="utf-8"):
+        raise _Werkzeugfehler(
+            "Detektor-Fingerabdruck 'data-ff-offenlegung' fehlt im Live-Partial "
+            f"{OFFENLEGUNG_PARTIAL.name} – der Brücken-Scan (V7) wäre blind.")
 
 
 def lauf(public: Path, source_only: bool, history: bool) -> int:
@@ -398,6 +457,24 @@ def lauf(public: Path, source_only: bool, history: bool) -> int:
                          pfade["startseite"].read_text(encoding="utf-8"),
                          fehler)
 
+        # V7 Ausbaustufe 2: Artikel-Brücke auf JEDER Seite mit
+        # Offenlegungs-Baustein (Posts, Pillar-Seiten, Pillar-Zentrale).
+        bausteine = 0
+        kandidaten = sorted(
+            list((public / "posts").glob("*/index.html"))
+            + list((public / "pillar").glob("*/index.html"))
+            + ([public / "pillar" / "index.html"]
+               if (public / "pillar" / "index.html").exists() else []))
+        for pf in kandidaten:
+            rel = "/" + str(pf.relative_to(public).parent) + "/"
+            if pruefe_offenlegungs_bruecke(pf.read_text(encoding="utf-8"), rel, fehler):
+                bausteine += 1
+        if not bausteine:
+            raise _Werkzeugfehler(
+                "V7-Brücken-Scan fand 0 Offenlegungs-Bausteine unter posts/ und "
+                "pillar/ – entweder ist der Build leer oder der Fingerabdruck "
+                "hat sich geändert. Unbewiesen ist nicht bewiesen.")
+
     print("VERGLEICHS-WACHE – Bewertungsraster (V1–V8)")
     print(f"  Raster v{(g.get('meta') or {}).get('version')} · "
           f"{len(ziele)} Routen · "
@@ -406,6 +483,8 @@ def lauf(public: Path, source_only: bool, history: bool) -> int:
           f"{len((g.get('deaktivierung') or {}).get('ausloeser') or [])} Deaktivierungs-Auslöser")
     if source_only:
         print("  (nur Quellen geprüft – HTML-Beweise V1–V3/V5–V7 brauchen ein Build)")
+    else:
+        print(f"  Artikel-Brücke: {bausteine} Offenlegungs-Bausteine mit Raster-Link geprüft")
     for f in fehler:
         print(f"  FEHLER  {f}")
     print(f"  => {len(fehler)} Fehler")
@@ -545,7 +624,30 @@ def selftest() -> int:
     proben.append(("Fehlender Methodik-Bereich → V5 schlägt an",
                    any(f"V5 Themenbereich '{opfer_b}'" in f for f in fehler)))
 
-    # 10: Ausschluss ohne Grund fällt durch.
+    # 10: Offenlegungs-Baustein MIT Raster-Link ist sauber; OHNE fällt durch.
+    artikel_mit = ('<article><details data-ff-offenlegung="mit-partnerlinks">'
+                   '<div><a href="/transparenz/">T</a>'
+                   f'<a href="/{SEITE_PFAD}/">Raster</a></div></details></article>'
+                   f'<footer><a href="/{SEITE_PFAD}/">Footer</a></footer>')
+    fehler = []
+    hat = pruefe_offenlegungs_bruecke(artikel_mit, "/posts/probe/", fehler)
+    proben.append(("Baustein mit Raster-Link ist sauber", hat and not fehler))
+    # Der Footer-Link außerhalb des Bausteins darf NICHT genügen:
+    artikel_ohne = ('<article><details data-ff-offenlegung="mit-partnerlinks">'
+                    '<div><a href="/transparenz/">T</a></div></details></article>'
+                    f'<footer><a href="/{SEITE_PFAD}/">Footer</a></footer>')
+    fehler = []
+    hat = pruefe_offenlegungs_bruecke(artikel_ohne, "/posts/probe/", fehler)
+    proben.append(("Baustein ohne Raster-Link → V7 schlägt an (Footer zählt nicht)",
+                   hat and any("Offenlegungs-Baustein verlinkt das Bewertungsraster nicht" in f
+                               for f in fehler)))
+    # Werbefreie Seite (kein Baustein) bleibt außen vor:
+    fehler = []
+    hat = pruefe_offenlegungs_bruecke(
+        '<p data-ff-offenlegung="ohne-partnerlinks"></p>', "/posts/frei/", fehler)
+    proben.append(("Werbefreie Seite bleibt außen vor", (not hat) and not fehler))
+
+    # 11: Ausschluss ohne Grund fällt durch.
     sab = copy.deepcopy(g)
     sab["ausschluesse"][0].pop("grund", None)
     fehler = []

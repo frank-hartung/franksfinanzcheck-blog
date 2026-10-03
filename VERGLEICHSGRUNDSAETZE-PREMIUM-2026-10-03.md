@@ -44,7 +44,7 @@ Deshalb besteht die Lösung aus drei Schichten:
      gespiegelt, nie abgetippt; Versionsnummern sichtbar.
 3. **Wache** `scripts/vergleichsgrundsaetze_gate.py` (V1–V8,
    fail-closed, attribut-tolerant via html.parser, Detektor-Frische-
-   Prüfung nach der AI4-Lektion, 10 Sabotage-Proben im `--selftest`):
+   Prüfung nach der AI4-Lektion, 13 Sabotage-Proben im `--selftest`):
    * V2 Register-Sync in beide Richtungen – eine neue `/go/`-Route ohne
      öffentliche Nennung bricht den Deploy.
    * V3 Zieltyp-Ehrlichkeit – ein Einzelangebot, das als
@@ -72,9 +72,39 @@ Deshalb besteht die Lösung aus drei Schichten:
 
 ## Messung nach dem Umbau
 
-* `vergleichsgrundsaetze_gate.py --selftest`: 10/10 Sabotage-Proben OK.
+* `vergleichsgrundsaetze_gate.py --selftest`: 13/13 Sabotage-Proben OK.
 * Gate gegen unminifizierten UND minifizierten Build: 0 Fehler
   (20 Routen, 6 Methodik-Bereiche, 5 Ausschlüsse, 5 Auslöser).
 * `beweis_gate.py`: 0 Fehler (Änderungsprotokoll-Eintrag valide).
 * Bestehende Wachen (Offenlegung O1–O7, Index-Hygiene, Playwright-Suite)
   nach dem Umbau grün – Nachweis im PR-Lauf.
+
+## Ausbaustufe 2 (03.10.2026, Nachschärfung desselben Befunds)
+
+**Lücke:** Das Raster war im Footer, auf /transparenz/ und /methodik/
+verlinkt – aber nicht an der Stelle, an der Leser der Monetarisierung
+tatsächlich begegnen: im aufklappbaren Werbe-Offenlegungs-Baustein über
+jedem Artikel.
+
+**Umsetzung:**
+
+* `layouts/_partials/ff_offenlegung.html`: Der „Was die Provision nicht
+  beeinflusst"-Absatz verweist jetzt inhaltlich auf das Bewertungsraster
+  (Aufnahme/Ausschluss, Sortierung, Link-Deaktivierung), und die
+  Wege-Zeile führt „So entstehen unsere Vergleiche" als eigenen Link
+  zwischen Finanzierung und Methodik.
+* Wache V7, Ausbaustufe 2: JEDE gebaute Seite mit Partnerlinks
+  (posts/, pillar/, Pillar-Zentrale) muss das Raster IM
+  Offenlegungs-Baustein verlinken – der Footer-Link außerhalb zählt
+  bewusst nicht (eigener Parser mit Baustein-Containment). Findet der
+  Scan 0 Bausteine, ist das ein Werkzeugfehler (Exit 2), kein grüner
+  Lauf; der `data-ff-offenlegung`-Fingerabdruck im Live-Partial gehört
+  jetzt zur Detektor-Frische-Prüfung.
+* Drei neue Sabotage-Proben (13 gesamt): Baustein mit Link sauber,
+  Baustein ohne Link fällt durch (Footer zählt nicht), werbefreie
+  Seiten bleiben außen vor.
+
+**Messung:** Selbsttest 13/13 · Gate 0 Fehler, Artikel-Brücke auf allen
+45 Offenlegungs-Bausteinen nachgewiesen · Offenlegungs-Wache O1–O7,
+Layout- und Index-Hygiene-Gates grün · Playwright-Suite grün (Nachweis
+im PR-Lauf).

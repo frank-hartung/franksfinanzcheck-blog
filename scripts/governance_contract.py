@@ -184,7 +184,7 @@ GUARDS = ["editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           # gebauten HTML – Register-Sync in beide Richtungen, Zieltyp-
           # Ehrlichkeit (Einzelangebot nie als „Marktvergleich"), die
           # wörtliche Provisions-Antwort „nein" und die Wegweiser-Kette.
-          # Ihr --selftest friert 10 Sabotage-Proben ein und gehört ins
+          # Ihr --selftest friert 13 Sabotage-Proben ein und gehört ins
           # Minimum: Ein Raster ohne Wache veraltet in die Unwahrheit.
           "vergleichsgrundsaetze_gate.py",
           # YMYL-Freigabe (02.10.2026): Ein Score ist keine Fachprüfung.

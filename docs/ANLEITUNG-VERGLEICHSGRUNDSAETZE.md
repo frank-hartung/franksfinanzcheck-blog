@@ -35,7 +35,7 @@ erscheint automatisch im Raster – nichts wird doppelt gepflegt.
 | `layouts/shortcodes/vergleichsgrundsaetze.html` | Rendering je Abschnitt (`abschnitt="kopf"`, `"v1"` … `"v7"`); trägt die Detektor-Fingerabdrücke `data-ff-vg*` |
 | `content/so-entstehen-unsere-vergleiche/index.md` | öffentliche Seite (Überschriften im Markdown → ToC) |
 | `assets/css/extended/zz-vergleichsgrundsaetze.css` | `.ff-vg*`-Styles, Dark Mode über Marken-Tokens |
-| `scripts/vergleichsgrundsaetze_gate.py` | Wache V1–V8, fail-closed, 10 Sabotage-Proben im `--selftest` |
+| `scripts/vergleichsgrundsaetze_gate.py` | Wache V1–V8, fail-closed, 13 Sabotage-Proben im `--selftest` |
 
 ## Die Verträge der Wache (V1–V8)
 
@@ -45,7 +45,7 @@ erscheint automatisch im Raster – nichts wird doppelt gepflegt.
 * **V4** `provision.antwort` MUSS wörtlich `nein` sein, sichtbar als „Nein.", mit ≥ 3 benannten Durchsetzungs-Mechanismen. **Wer diese Antwort ändern will, muss zuerst die Wache ändern – öffentlich und mit Begründung im Änderungsprotokoll.**
 * **V5** Jeder Methodik-Bereich erscheint zweimal (Rangfolge + Mindestkriterien) mit korrekter Versionsnummer.
 * **V6** ≥ 4 Deaktivierungs-Auslöser kuratiert und vollzählig gerendert.
-* **V7** Wegweiser-Kette: Footer (jede Seite), `/transparenz/` und `/methodik/` → Raster; Raster → zurück.
+* **V7** Wegweiser-Kette: Footer (jede Seite), `/transparenz/` und `/methodik/` → Raster; Raster → zurück. **Ausbaustufe 2 (03.10.2026):** Zusätzlich muss JEDE Seite mit Partnerlinks das Raster **in ihrem aufklappbaren Offenlegungs-Baustein** verlinken (`layouts/_partials/ff_offenlegung.html`) – der Footer-Link außerhalb des Bausteins zählt dabei bewusst nicht. Die Antworten stehen damit genau dort, wo monetarisiert wird.
 * **V8** Kuratierungs-Hygiene: SemVer, ISO-Stand, Changelog, Ausschlüsse nur mit Begründung, ≥ 3 Lücken-Regeln.
 
 Fail-closed wie die Offenlegungs-Wache: fehlendes `public/`, fehlende
@@ -55,7 +55,7 @@ WERKZEUGFEHLER (Exit 2), niemals „grün".
 ## Befehle
 
 ```bash
-npm run test:vergleiche        # Selbsttest (offline, 10 Sabotage-Proben)
+npm run test:vergleiche        # Selbsttest (offline, 13 Sabotage-Proben)
 npm run vergleiche:check       # Selbsttest + Quellen + Build + HTML-Beweis
 python3 scripts/vergleichsgrundsaetze_gate.py --source-only   # ohne Build
 python3 scripts/vergleichsgrundsaetze_gate.py --public public # gegen Build
