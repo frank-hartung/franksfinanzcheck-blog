@@ -2,12 +2,12 @@
   "target": 6,
   "ready": 6,
   "pool_size": 9,
-  "generated_at": "2026-10-03T09:39:49Z",
+  "generated_at": "2026-10-03T13:36:41Z",
   "candidates": [
     {
       "slug": "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
       "ready": true,
-      "sha256": "398fc367871d411a1e98adcc4d73b0ae618267c35df256af7482f408563ac0b7",
+      "sha256": "7d108d9bb6000c59d2459cd1a59582f9e023ee4298f814b14a9a809cb196d331",
       "score": 0.874,
       "parts": {
         "spelling": 0.7,
@@ -22,7 +22,7 @@
     {
       "slug": "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
       "ready": true,
-      "sha256": "1d8b962378b5793f6c6486b321370210c4daa98e1f6a325ee47a60fdce6e2df8",
+      "sha256": "27814e4ba371e87d47cb84b878d1b96e73b131c25f79e1fec56adc5e74ad96ea",
       "score": 0.892,
       "parts": {
         "spelling": 0.8,
@@ -37,7 +37,7 @@
     {
       "slug": "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
       "ready": true,
-      "sha256": "1c430917bf31be199f43c12b3924579ae3af0c743cd37e18302d49b432650156",
+      "sha256": "fe34ba9ba3359784d88f49e918e11c1d5405b61aea4818e3a82609bb119cdbc1",
       "score": 0.892,
       "parts": {
         "spelling": 0.8,
@@ -52,7 +52,7 @@
     {
       "slug": "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
       "ready": true,
-      "sha256": "c9242bfea358d46938873e5b1b7939a506120d56bbd2a2f574e5dbd0b3af049d",
+      "sha256": "33d743d5b44abf23acccfc5fb3e35375586ec244891d872bf7bf29e09255b0b7",
       "score": 0.904,
       "parts": {
         "spelling": 0.92,
@@ -67,7 +67,7 @@
     {
       "slug": "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
       "ready": true,
-      "sha256": "1e65c202f2b2c6eb8974d10fd5ecbca2e67aab6f4e726613c8e30e013b780fe3",
+      "sha256": "303f2a5e3da88d9c2ac4e1020cdb174db3949922b9d807461b1bf6785d2d719c",
       "score": 0.878,
       "parts": {
         "spelling": 0.7,
@@ -82,7 +82,7 @@
     {
       "slug": "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
       "ready": false,
-      "sha256": "3153576323ce91aeee2b6b4eae09a64dfbf2b18654d085c81962b4f20377d301",
+      "sha256": "afba0c6ed664e6687fda64ecfb1ef4c57707e93ed928c6b22574ab74faf7867b",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
       "details": [
         "🛑 2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -103,7 +103,7 @@
     {
       "slug": "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
       "ready": true,
-      "sha256": "d19e803a712bb9cbbde0a993801b7f500eca05777ab9067640232486072eab67",
+      "sha256": "9c8031b68e3f7450b40ac151556a0074fb50357c65a17c5b1baaeb37fc727242",
       "score": 0.924,
       "parts": {
         "spelling": 0.9,
@@ -139,7 +139,7 @@
     {
       "slug": "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz",
       "ready": false,
-      "sha256": "4c9fdc9d34350744221eb0374c49ab395d0354456a72c8cba7af05f3a23e5cd2",
+      "sha256": "994a0a1903d7555f1743a6f71fa024e1fe42e5d7a7041f32d340231a48311328",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)",
       "details": [
         "🛑 2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -157,5 +157,19 @@
         "readability": 0.8
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-03T13:36:41Z",
+    "renewed": [
+      "2026-10-03-bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
+      "2026-10-03-bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
+      "2026-10-03-camping-2026-kostenfallen-vermeiden-clever-planen",
+      "2026-10-03-etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
+      "2026-10-03-frugalismus-familie-clever-sparen-ohne-verzicht",
+      "2026-10-03-so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
+      "2026-10-03-stromrechnung-senken-20-strategien-fuer-dein",
+      "2026-10-03-vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
