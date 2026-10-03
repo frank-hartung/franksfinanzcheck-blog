@@ -66,7 +66,7 @@ Die Formel ist einfach und funktioniert für jeden Tarif:
 **Jahreskosten = (Jahresverbrauch in kWh × Arbeitspreis) + (12 × Grundpreis)**
 **Monatsabschlag = Jahreskosten ÷ 12**
 
-Schauen wir uns das an einem Modellfall an. Du heizt eine 70-m²-Wohnung und verbrauchst im Jahr 12.000 kWh. Dein Tarif verlangt 11 Cent je kWh und 12 € Grundpreis im Monat.
+Schauen wir uns das an einem Modellfall an: Du heizt eine rund 70 m² große Wohnung und verbrauchst im Jahr circa 12.000 kWh. Dein Tarif verlangt etwa 11 Cent je kWh und rund 12 € Grundpreis im Monat.
 
 **Rechenweg Gas:**  
 - Verbrauchskosten: 12.000 kWh × 0,11 € = 1.320 € im Jahr

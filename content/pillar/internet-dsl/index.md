@@ -114,7 +114,7 @@ Berechne hier den echten monatlichen Durchschnittspreis über die gesamte Vertra
 
 ---
 
-## 5. Entscheidungstabelle: Kündigen, Wechseln oder Nachverhandeln?
+## 5. Entscheidungstabelle: Kündigen, wechseln oder Nachverhandeln?
 
 Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
 

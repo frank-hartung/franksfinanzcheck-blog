@@ -931,6 +931,8 @@ def r_c15(text: str, hits: Sink, line: int) -> str:
         ctx, word = m.group(1), m.group(2)
         if word in C15_STOP or protect(word):
             return m.group(0)
+        if ctx == "zu" and word in tc.VERBAL_NOUNS:
+            return m.group(0)
         if word not in tc.NOUNS:
             return m.group(0)
         # E-Mail-/Domain-/Datei-Kontext erkennen (Punkt AM SATZENDE ist kein
