@@ -2,8 +2,8 @@
 title: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
 description: "Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, einer Modellrechnung und sieben Sparhebeln kommst du schuldenfrei durch die Feiertage."
 date: 2026-10-02T19:45:00Z
-draft: true
-reserve: true
+draft: false
+reserve_published: 2026-10-02
 tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
@@ -25,7 +25,7 @@ cover:
   image: "images/covers/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage.jpg"
   alt: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Wer Weihnachten Budget planen will, startet am besten schon im Herbst: Liste alle Kosten von Geschenken bis Anreise, verteile sie auf sechs Budgettöpfe und teile die Summe durch die verbleibenden Wochen bis Heiligabend. Lege das Geld auf einem separaten Tagesgeldkonto zur Seite, bezahle nur aus diesem Topf und verzichte auf Dispo und Ratenkäufe – so startest du ohne Schulden ins neue Jahr."
+kurzantwort: "Wer sein Weihnachtsbudget planen will, startet am besten schon im Herbst: Liste alle Kosten von Geschenken bis Anreise, verteile sie auf sechs Budgettöpfe und teile die Summe durch die verbleibenden Wochen bis Heiligabend. Lege das Geld auf einem separaten Tagesgeldkonto zur Seite, bezahle nur aus diesem Topf und verzichte auf Dispo und Ratenkäufe – so startest du ohne Schulden ins neue Jahr."
 ---
 
 Jedes Jahr dasselbe Muster: Im Dezember fließt das Geld für Geschenke, Plätzchenzutaten und Fahrkarten, im Januar kommt die Kreditkartenabrechnung – und das schlechte Gewissen. Dabei lässt sich das Fest mit ein paar Wochen Vorlauf komplett entspannen. Wer früh genug sein Weihnachten Budget planen kann, verteilt die Kosten auf mehrere Monate, vermeidet den Dispo und kauft Geschenke in Ruhe statt in Panik. Du bekommst hier ein bewährtes 6-Topf-Modell, eine ehrliche Modellrechnung und sieben Sofort-Sparhebel.
@@ -44,109 +44,107 @@ Jedes Jahr dasselbe Muster: Im Dezember fließt das Geld für Geschenke, Plätzc
 💡 **Schnell-Tipp von FranksFinanzcheck:** Parke dein Weihnachts-Budget mit attraktiver Verzinsung auf einem dauerhaft kostenlosen Tagesgeldkonto: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Warum ein Weihnachtsbudget im Oktober beginnt
+## Warum beginnt ein entspanntes Weihnachtsbudget schon im Oktober?
 
-Die Feiertage treffen das Budget doppelt: Sie fallen in eine ohnehin teure Jahreszeit, und sie kommen auf einen Schlag. Eine Familie mit zwei Kindern gibt für Geschenke, Festessen, Tannenbaum und Anreise schnell mehrere hundert Euro aus. Ohne Plan landet diese Summe komplett im Dezembergehalt – oder auf der Kreditkarte.
+Die Feiertage treffen das Haushaltsbudget doppelt: Sie fallen in eine ohnehin teurere Jahreszeit, und sie kommen auf einen Schlag. Eine vierköpfige Familie gibt für Präsente, Festessen, Baum und Anreise schnell mehrere hundert Euro aus. Ohne Plan landet diese Summe komplett im Dezembergehalt – oder auf der teuren Kreditkarte.
 
-Mit zehn Wochen Vorlauf sieht die Rechnung völlig anders aus. Aus einem einzelnen Schmerzbetrag werden kleine, unsichtbare Raten. Und fast nebenbei gewinnst du etwas Wertvolleres als Geld: Zeit zum Vergleichen. Wer im November statt am 22. Dezember einkauft, bezahlt Listenpreise statt Panikpreise.
+Mit rund zehn Wochen Vorlauf sieht die Rechnung völlig anders aus. Aus einem einzelnen Schmerzbetrag werden kleine, unscheinbare Sparraten. Und fast nebenbei gewinnst du etwas Wertvolleres als Geld: Zeit zum Vergleichen. Wer im November statt am 22. Dezember einkauft, bezahlt reguläre Preise statt panischer Last-Minute-Aufschläge.
 
-**Faustregel:** Plane dein Festbudget mit dem Geld, das du bereits verdient hast – nicht mit dem Weihnachtsgeld, das vielleicht kommt.
+**Faustregel:** Plane dein Festbudget stets mit dem Geld, das du bereits verdient hast – niemals mit dem Weihnachtsgeld, das vielleicht noch kommt.
 
-## Das 6-Topf-Modell für dein Festbudget
+## Wie funktioniert das 6-Topf-Modell für dein Festbudget?
 
-Statt einer einzigen großen Zahl teilst du die Weihnachtskosten auf sechs Töpfe. So siehst du sofort, wohin das Geld fließt, und erkennst früh, wo es eng wird:
+Statt einer einzigen großen Zahl teilst du die Weihnachtskosten auf sechs übersichtliche Töpfe. So siehst du sofort, wohin das Geld fließt, und erkennst früh, wo es eng wird:
 
-1. **Geschenke:** Liste pro Person mit Preisrahmen, nicht mit konkreten Produkten.
-2. **Essen und Getränke:** Festessen, Plätzchenzutaten und die Glühweinrunde mit Freunden.
-3. **Deko und Baum:** Tannenbaum, Kerzen und alles, was nur einmal im Jahr gekauft wird.
-4. **Anreise und Übernachtung:** Bahn, Sprit oder Flug zu Familie und Freunden.
-5. **Spenden und gute Taten:** Der Betrag für Zwecke, die dir wichtig sind.
-6. **Puffer:** Zehn bis fünfzehn Prozent der Gesamtsumme für alles Vergessene.
+1. **Geschenke:** Führe eine Liste pro Person mit festem Preisrahmen, nicht mit konkreten Luxuswünschen.
+2. **Essen und Festtafel:** Festmenü, Plätzchenzutaten und die Glühweinrunde im Freundeskreis.
+3. **Deko und Baum:** Tannenbaum, Lichterketten und Zubehör, das nur einmal im Jahr gekauft wird.
+4. **Anreise und Mobilität:** Bahn, Kraftstoff oder Fahrkarten zu Verwandten und Freunden.
+5. **Spenden und gute Taten:** Der bewusste Betrag für gemeinnützige Zwecke, die dir am Herzen liegen.
+6. **Puffer:** Etwa zehn bis fünfzehn Prozent der Gesamtsumme für alles Unvorhergesehene.
 
-Der Puffer ist kein Luxus. Er fängt genau die spontanen Ausgaben auf, die jedes starr kalkulierte Budget sprengen: das zusätzliche Geschenk für die Überraschungsgäste, die Klassen-Aktion in der Schule, die Adventsfeier mit Kolleginnen und Kollegen.
+Der Puffer ist kein Luxus. Er fängt genau jene spontanen Ausgaben auf, die jedes starr kalkulierte Budget sprengen: das zusätzliche Geschenk für die Überraschungsgäste, die Wichtel-Aktion im Verein oder die Adventsfeier mit Kolleginnen und Kollegen.
 
-## Weihnachten Budget planen: Die Modellrechnung
+## Welche Modellrechnung zeigt dir die passende Wochenrate?
 
-Rechnen wir das Modell für einen Haushalt mit 600 € Gesamtbudget durch. Die Verteilung auf die sechs Töpfe könnte so aussehen:
+Rechnen wir das Modell für einen Haushalt mit beispielhaft ca. 600 € Gesamtbudget durch. Die Verteilung auf die sechs Töpfe gestaltet sich im Modellfall wie folgt:
 
 | Budgettopf | Betrag | Anteil |
 |------------|--------|--------|
-| Geschenke | 300 € | 50 % |
-| Essen und Getränke | 120 € | 20 % |
-| Deko und Baum | 50 € | 8 % |
-| Anreise | 60 € | 10 % |
-| Spenden | 30 € | 5 % |
-| Puffer | 40 € | 7 % |
+| Geschenke | ca. 300 € | 50 % |
+| Essen und Festtafel | ca. 120 € | 20 % |
+| Deko und Baum | ca. 50 € | 8 % |
+| Anreise | ca. 60 € | 10 % |
+| Spenden | ca. 30 € | 5 % |
+| Puffer | ca. 40 € | 7 % |
 
-Beginnst du Mitte Oktober, bleiben bis Heiligabend rund zehn Wochen. **Rechenweg Budget:** 600 € ÷ 10 Wochen = 60 € pro Woche. Wer lieber monatlich denkt, legt zweimal 260 € plus einmal 80 € zur Seite. Beide Wege landen punktgenau bei der Zielsumme – und keiner davon tut weh.
+Beginnst du Mitte Oktober, bleiben bis Heiligabend rund zehn Wochen. **Rechenweg Budget:** Etwa 600 € Gesamtkosten geteilt durch 10 Wochen ergeben eine Sparrate von genau 60 € pro Woche. Wer lieber monatlich kalkuliert, legt beispielhaft zweimal rund 260 € plus einmal ca. 80 € zur Seite. Beide Wege landen punktgenau bei der Zielsumme – und keiner davon reißt ein Loch in deine laufende Monatsbilanz.
 
-Lebst du mit einem kleineren Einkommen, halbiere die Töpfe einfach. Das Prinzip bleibt gleich: Die Wochenrate entscheidet, nicht die Wunschliste.
+Lebst du mit einem kleineren Einkommen, halbiere die Beträge einfach. Das Prinzip bleibt identisch: Die wöchentliche Rücklage entscheidet, nicht die Wunschliste.
 
 > 💶 **Spar-Tipp zwischendurch:** kostenloses Konto mit Zinsen und Unterkonten für deinen Weihnachts-Topf: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 
-## Sieben Sofort-Sparhebel für die Feiertage
+## Welche sieben Sofort-Sparhebel entlasten dein Fest spürbar?
 
-1. **Wichteln statt Vollbedienung:** In Großfamilien und Freundeskreisen zieht jede Person ein Los und beschenkt nur eine. Aus zehn Geschenken wird eines mit höherem Wert und mehr Sorgfalt.
-2. **Preisrahmen schriftlich vereinbaren:** Eine Obergrenze pro Geschenk nimmt allen den Druck. Niemand vergleicht mehr, wer wie tief in die Tasche gegriffen hat.
-3. **Wunschlisten mit Preis-Tracking nutzen:** Lege Wunschartikel früh in den Warenkorb oder in Merklisten. Preiswecker schlagen zu, wenn der Preis fällt – oft Wochen vor dem Fest.
-4. **Erlebnisse statt Dinge schenken:** Gemeinsame Zeit, selbst gebackene Plätzchen oder ein Gutschein für deine Hilfe kosten wenig und bleiben lange im Kopf.
-5. **Festessen gemeinsam stemmen:** Jeder Gast bringt eine Komponente mit. Das entlastet das Budget der Gastgeber und macht das Essen abwechslungsreicher.
-6. **Fahrkarten sofort buchen:** Bahntickets und Mitfahrgelegenheiten werden über die Feiertage täglich teurer. Wer im Oktober bucht, zahlt oft nur den halben Preis.
-7. **Abos und Verträge vor Jahresende prüfen:** Viele Probeabos laufen pünktlich zu Weihnachten in teure Verlängerungen. Eine halbe Stunde im Oktober rettet den Januar.
+1. **Wichteln statt Vollbedienung:** In Großfamilien zieht jede Person ein Los und beschenkt nur eine andere. Aus zehn kleinen Verlegenheitsgeschenken wird ein Präsent mit echtem Mehrwert und persönlicher Sorgfalt.
+2. **Preisrahmen verbindlich vereinbaren:** Eine Obergrenze pro Geschenk nimmt allen Beteiligten den Druck. Niemand vergleicht mehr, wer wie tief in die Tasche gegriffen hat.
+3. **Wunschlisten mit Preis-Tracking nutzen:** Lege Wunschartikel frühzeitig in Merklisten. Automatische Preiswecker schlagen an, sobald der Preis fällt – oft Wochen vor dem Dezember-Ansturm.
+4. **Erlebnisse statt Gegenstände schenken:** Gemeinsame Zeit, selbst gebackene Plätzchen oder ein Gutschein für handwerkliche Hilfe kosten wenig Geld und bleiben lange in Erinnerung.
+5. **Festessen gemeinsam organisieren:** Jeder Gast bringt eine Spezialität mit. Das halbiert die Kosten für die Gastgeber und sorgt für eine abwechslungsreiche Tafel.
+6. **Fahrtickets frühzeitig buchen:** Bahntickets und Fernbusse werden über die Feiertage stetig teurer. Wer im Oktober reserviert, zahlt oft nur etwa die Hälfte des Spätpreises.
+7. **Laufende Verträge im Herbst prüfen:** Viele Probeabos laufen pünktlich zum Jahreswechsel in teure Verlängerungen. Eine halbe Stunde Check im Oktober spart im Januar bares Geld.
 
-## Rollierendes Budget: Weihnachten das ganze Jahr denken
+## Warum lohnt sich ein rollierendes Budget für das ganze Jahr?
 
-Der elegantere Rhythmus beginnt erst im kommenden Januar. Bleiben deine 600 € Zielsumme gleich, genügt ein Dauerauftrag von nur 50 € im Monat. **Rechenweg Jahresrate:** 600 € ÷ 12 Monate = 50 €. Zwölf kleine Abzüge spürst du im Alltag kaum, im Dezember liegt das Geld bereits bereit.
+Der nachhaltigste Rhythmus startet direkt im kommenden Januar. Bleibt dein Zielwert von ca. 600 € bestehen, genügt ein automatischer Dauerauftrag von monatlich rund 50 €. **Rechenweg Jahresrate:** Etwa 600 € geteilt durch 12 Monate entsprechen genau 50 € im Monat. Zwölf kleine Raten spürst du im Alltag kaum, und im Dezember steht das Festgeld vollständig bereit.
 
-Das Prinzip dahinter heißt rollierende Rücklage. Du behandelst Weihnachten wie jede andere jährliche Rechnung, etwa den Vereinsbeitrag oder die Kfz-Steuer. Wiederkehrende Kosten werden monatlich gebrochen, statt dich einmal im Jahr voll zu treffen.
+Das Konzept dahinter nennt sich rollierende Rücklage. Du behandelst Weihnachten wie jede andere planbare Jahreszahlung, etwa die Kfz-Versicherung oder Grundbesitzabgaben. Große Einmalkosten werden in monatliche Häppchen zerlegt, statt dein Girokonto zum Jahresende in die Knie zu zwingen.
 
-Nimm dir dafür das Unterkonto deiner Bank oder ein kostenloses Tagesgeldkonto mit Unterkonten-Funktion. Automatisiere den Dauerauftrag direkt nach dem Gehaltseingang. So läuft die Vorsorge ohne Disziplin und ohne Kalendererinnerung im Hintergrund weiter.
+Nutze dafür die Unterkonten deiner Direktbank oder ein kostenloses Tagesgeldkonto mit separaten Spartöpfen. Richte den Dauerauftrag direkt zum Monatsersten nach dem Gehaltseingang ein. So wächst dein Festpolster vollautomatisch heran.
 
-Die Vorweihnachtsaktion aus diesem Ratgeber bringt dich schuldenfrei durch die Feiertage. Die Jahresroutine sorgt dafür, dass du nächstes Jahr gar nicht mehr nachdenken musst.
-
-## Typische Fehler rund ums Festbudget
+## Welche typischen Fehler solltest du rund ums Festbudget vermeiden?
 
 | Fehler | Folge | Bessere Lösung |
 |--------|-------|----------------|
-| Einkaufen ohne Liste | Spontankäufe verdoppeln die Summe | Geschenkeliste mit Preisrahmen führen |
-| Dispo für Geschenke nutzen | Hohe Zinsen bis weit ins neue Jahr | Nur Geld ausgeben, das im Weihnachts-Topf liegt |
-| Auf Weihnachtsgeld hoffen | Plan bricht zusammen, wenn es ausfällt | Mit eigenem Einkommen rechnen, Extra als Bonus |
-| Letzter Einkauf am 23. Dezember | Panikpreise und Restauswahl | Geschenke bis Anfang Dezember abschließen |
-| Januar-Abbuchungen vergessen | Jahresbeiträge liefern den Kater | Fixkosten-Routine aus dem Herbst fortführen |
+| Einkaufen ohne Liste | Spontankäufe verdoppeln die Gesamtausgaben | Führe eine konkrete Liste mit Preisrahmen |
+| Dispo für Geschenke nutzen | Hohe Zinsen bis weit ins Frühjahr | Nur vorhandenes Guthaben aus dem Spartopf nutzen |
+| Auf Sonderzahlungen spekulieren | Budget bricht ein, wenn Boni entfallen | Mit dem regulären Netto planen, Boni als Extra sehen |
+| Letzter Einkauf am 23. Dezember | Teure Panikpreise und magere Auswahl | Alle Einkäufe bis Anfang Dezember abschließen |
+| Januar-Fixkosten vergessen | Versicherungsbeiträge bringen den Kater | Fixkosten-Puffer parallel im Herbst ansparen |
 
-Die teuerste Zeile dieser Tabelle ist die zweite. Dispositionszinsen liegen bei vielen Banken im zweistelligen Bereich. Ein Geschenk für 100 € im Dispo kostet nach drei Monaten spürbar mehr als der Ladenpreis.
+Die teuerste Falle dieser Übersicht ist der Griff zum Dispokredit. Überziehungszinsen liegen bei vielen Kreditinstituten bei über zwölf Prozent. Ein Geschenk für 100 € im Dispo kostet nach wenigen Monaten spürbar mehr als der ursprüngliche Ladenpreis.
 
-## Schritt-für-Schritt: Dein Budget in fünf Schritten
+## Wie gelingt die Budgetplanung Schritt für Schritt in fünf Phasen?
 
-1. **Gesamtsumme festlegen:** Entscheide ehrlich, wie viel dein Haushalt für die Feiertage ausgeben kann, ohne andere Ziele zu gefährden.
-2. **Töpfe füllen:** Verteile die Summe auf die sechs Töpfe und passe die Anteile an dein Leben an.
-3. **Wochenrate berechnen:** Teile die Summe durch die Wochen bis Heiligabend und richte einen Dauerauftrag auf ein separates Konto ein.
-4. **Geschenkeliste schreiben:** Notiere pro Person eine Idee und einen Preisrahmen und halte dich beim Kauf daran.
-5. **Wöchentlich abgleichen:** Fünf Minuten jeden Sonntag genügen, um Ausgaben zu verbuchen und den Puffer im Blick zu behalten.
+1. **Gesamtsumme ehrlich festlegen:** Bestimme den Betrag, den dein Haushalt ohne Kreditaufnahme für die Feiertage aufwenden kann.
+2. **Budgettöpfe füllen:** Verteile die Summe auf die sechs Kategorien und passe die Gewichtung an deine Prioritäten an.
+3. **Wochenrate berechnen und automatisieren:** Teile das Budget durch die verbleibenden Wochen und richte eine automatische Überweisung ein.
+4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
+5. **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen.
 
-**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/)
+**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/)  
 **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
 ## Häufige Fragen
 
 ### Wie viel Geld sollte ich für Weihnachten einplanen?
-Eine verbreitete Faustregel orientiert sich an etwa einer Woche Haushaltsnettoeinkommen. Zwei bis drei Prozent vom Jahreseinkommen sind ein zweiter guter Anker. Entscheidend ist nicht die Höhe, sondern dass die Summe zu deinem Leben passt und ohne Kredit auskommt.
+Eine bewährte Orientierungsgröße liegt bei rund einer Netto-Wochengage oder circa zwei bis drei Prozent des jährlichen Nettoeinkommens. Entscheidend ist jedoch nicht ein theoretischer Richtwert, sondern dass die Summe vollkommen schuldenfrei aus deinen laufenden Einnahmen finanziert wird.
 
-### Was mache ich, wenn das Budget nicht reicht?
-Kürze zuerst bei Deko und Essen, nicht bei den Menschen. Reduziere dann die Zahl der Beschenkten mit Wichtelvereinbarungen. Erst zum Schluss senke den Preisrahmen pro Geschenk – ein durchdachtes kleines Geschenk schlägt ein teures ohne Idee.
+### Was mache ich, wenn das Budget nicht ausreicht?
+Kürze zuerst bei aufwendiger Dekoration und teuren Delikatessen, nicht beim Zusammensein. Reduziere anschließend die Zahl der Geschenke durch Wichtelabkommen. Ein liebevolles, selbst gemachtes Präsent besitzt oft mehr emotionalen Wert als teure Massenware.
 
-### Lohnt sich ein separates Konto für das Weihnachtsgeld?
-Ja, und zwar aus psychologischen Gründen: Geld auf dem Girokonto wird ausgegeben. Ein eigenes Unterkonto mit dem Namen Weihnachten macht den Fortschritt sichtbar und schützt die Rücklage vor dem spontanen Zugriff im Alltag.
+### Lohnt sich ein separates Tagesgeldkonto für das Festbudget?
+Ja, unbedingt. Liegt das Geld auf dem alltäglichen Girokonto, vermischt es sich mit den laufenden Lebenshaltungskosten. Ein separates Unterkonto mit Sparzinsen trennt das Festgeld optisch ab und verhindert spontane Fehlausgaben im Alltag.
 
-### Wie vermeide ich den Dispo im Dezember?
-Plane mit dem Geld, das du bereits hast, nicht mit erwartetem Sondergeld. Zahle per Lastschrift oder Debit statt Kreditkarte, wenn du Ausgaben schwer im Blick behältst. Und gib niemals mehr aus, als tatsächlich im Weihnachts-Topf liegt.
+### Wie schütze ich mich vor teuren Dispozinsen im Dezember?
+Kalkuliere ausschließlich mit Mitteln, die bereits real vorhanden sind. Nutze beim Bezahlen bevorzugt Debitkarten mit sofortiger Abbuchung und deaktiviere im Zweifel den Dispositionsrahmen, um nicht in Versuchung zu geraten.
 
-### Wann ist der beste Zeitpunkt für Geschenkekäufe?
-Viele Elektronikartikel und Spielzeuge fallen im November im Preis, besonders rund um große Aktionstage. Wer ab Oktober Wunschlisten in Merklisten beobachtet, erkennt echte Angebote von Schaufensterrabatten. Spätestens Anfang Dezember sollte der Einkauf abgeschlossen sein.
+### Wann ist der günstigste Zeitpunkt für Weihnachtseinkäufe?
+Viele Spielwaren und Elektronikartikel sind im November rund um etablierte Aktionstage am preiswertesten. Wer ab Oktober Preisbeobachter nutzt, erkennt verlässliche Rabatte und umgeht die typischen Preisaufschläge der letzten Adventswoche.
 
 ---
 
-Weihnachten ist planbar wie jeder andere Fixkostenpunkt des Jahres. Lege heute deine Gesamtsumme fest, richte den Dauerauftrag für die Wochenrate ein und schreibe die Geschenkeliste – dann wird der Dezember das, was er sein soll: entspannte Zeit mit deinen Liebsten, ohne Blick aufs Konto.
+Ein entspanntes Weihnachtsfest ist kein Zufall, sondern das Resultat vorausschauender Planung. Bestimme noch heute deine Obergrenze, starte die wöchentliche Sparrate und erstelle deine Geschenkeliste – dann genießt du die Feiertage im Kreis deiner Familie vollkommen sorgenfrei und ohne böse Überraschungen auf dem Kontoauszug.
 
 ---
 
