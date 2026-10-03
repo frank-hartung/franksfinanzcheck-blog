@@ -265,13 +265,30 @@ def main() -> int:
                     if karte:
                         _fertigstellen(karte, args.dry_run)
                         gesamt += 1
-            elif typ in ("feed", "youtube"):
+            elif typ == "youtube":
                 # Einzelvideo direkt in der Watchlist → wie --quelle behandeln
                 karte = sammle_eine(url, einstellungen, transkribieren,
                                     offline=False)
                 if karte:
                     _fertigstellen(karte, args.dry_run)
                     gesamt += 1
+            elif typ == "feed":
+                # Feed/Feed-Podcast: max_neu dieser Quelle respektieren
+                eintraege = lib.hole_feed(wert)
+                if not eintraege:
+                    print("  ⚠ Feed leer oder nicht erreichbar.")
+                    continue
+                pro_runde = _max_neu(q, einstellungen, args.max_pro_quelle)
+                for e in eintraege[:pro_runde]:
+                    if not e.get("link") or lib.karte_existiert(e["link"]):
+                        continue
+                    ist_yt = "youtube.com/watch" in e.get("link", "")
+                    karte = _karte_aus_feed_eintrag(
+                        e, "youtube" if ist_yt else "podcast", einstellungen,
+                        transkribieren and not ist_yt)
+                    if karte:
+                        _fertigstellen(karte, args.dry_run)
+                        gesamt += 1
             else:
                 eintraege = lib.hole_feed(wert) if typ == "artikel" else []
                 if eintraege:  # hinter einer „normalen“ URL steckt ein Feed
