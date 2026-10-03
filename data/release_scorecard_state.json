@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-03T11:08:13Z",
+  "generated_at": "2026-10-03T17:59:55Z",
   "modus": "kandidaten",
-  "commit": "28b8c3ba75dbe9f702073ac6d0498b2af0079140",
+  "commit": "67a4a845b92850f8bbbfb0ac91cb1a94eb5c699f",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -447,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "sha256": "ef87a8f29c866ca715c1a264a98a96f70fbae246d7207dea8582cf9f0d60e4f4",
+      "sha256": "943ac0b631e390b3c299c564e4e7c41508ac2afaa3318e314f0ab3e00aca204f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
