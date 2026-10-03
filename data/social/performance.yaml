@@ -1,0 +1,95 @@
+version: 1
+generated_at: '2026-10-03T09:25:43.304199+00:00'
+window_days: 60
+min_samples: 3
+channels:
+  mastodon:
+    samples: 11
+    angles:
+      takeaway:
+        score: 1.0
+        samples: 2
+      nutzen:
+        score: 0.375
+        samples: 5
+      vergleich:
+        score: 0.5
+        samples: 3
+      zahl:
+        score: 1.0
+        samples: 1
+    pillars:
+      internet-dsl:
+        score: 1.0
+        samples: 2
+        cooldown_factor: 1.0
+      frugalismus:
+        score: 0.429
+        samples: 4
+        cooldown_factor: 1.4
+      strom-sparen:
+        score: 0.5
+        samples: 3
+        cooldown_factor: 1.4
+    top:
+    - slug: 2026-09-11-wlan-probleme-loesen-mesh-oder-repeater-im-vergleich
+      angle: takeaway
+      pillar: ''
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117258986614384406
+      title: 'WLAN-Probleme lösen: Mesh oder Repeater im Vergleich'
+    - slug: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt
+      angle: nutzen
+      pillar: internet-dsl
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117336743450810591
+      title: 'Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt'
+    - slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+      angle: nutzen
+      pillar: frugalismus
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117338793916608128
+      title: 'Finanzielle Freiheit erreichen: Denke dich reich – Geld'
+    - slug: 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
+      angle: vergleich
+      pillar: internet-dsl
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117342562196876484
+      title: 'So findest du den richtigen: DSL-Tarif für dein Zuhause'
+    - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
+      angle: zahl
+      pillar: frugalismus
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117343760979006034
+      title: 'Sparen im Herbst: Spartipps für die goldene Jahreszeit'
+    flop:
+    - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+      angle: nutzen
+      pillar: strom-sparen
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117365463246886384
+      title: 'Gasrechnung senken: Spätsommer-Check für Tarif und Heizung'
+    - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+      angle: nutzen
+      pillar: strom-sparen
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117359692643267110
+      title: 'Gasrechnung prüfen: Fehler finden und Nachzahlungen'
+    - slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+      angle: takeaway
+      pillar: frugalismus
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117355793846755045
+      title: '5 einfache Frugalismus-Tricks für den Alltag: Geld sparen'
+    - slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
+      angle: vergleich
+      pillar: strom-sparen
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117354080626572441
+      title: 'Heizkosten senken: Mit diesen Strategien sparst du sofort'
+    - slug: 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug
+      angle: nutzen
+      pillar: frugalismus
+      raw: 0.0
+      url: https://mastodon.social/@FranksFinanzcheck/117350478329944059
+      title: 'Finanzieller Puffer: Wie viel Notgroschen ist genug?'

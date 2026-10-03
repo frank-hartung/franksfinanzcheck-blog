@@ -58,7 +58,15 @@ zurück und du merkst es erst Wochen später im Cockpit.
 
 ---
 
-## 2. Kurzfristig (Woche 1–2): der fehlende Rückkanal
+## 2. Kurzfristig (Woche 1–2): der fehlende Rückkanal → **erledigt 03.10.2026**
+
+`scripts/social_perf_feedback.py` + Integration in `social_planner.py`
+(`docs/ANLEITUNG-SOCIAL-PERF-FEEDBACK.md`). Genau nach dem unten skizzierten
+Muster gebaut: Score je Winkel/Themenwelt, Bandit-Gewichtung (80/20),
+Cooldown-Anpassung, Standby-sicher ohne Daten. Ehrlicher Befund aus dem ersten
+echten Lauf: Das Mastodon-Konto hat 0 Follower, also bislang überall
+Engagement = 0 – die Lernschleife greift automatisch, sobald echte Reichweite
+entsteht. Ursprüngliche Planungsnotiz bleibt unten zur Nachvollziehbarkeit stehen.
 
 Heute plant `social_planner.py` nach Regeln (Launch-Welle + Evergreen-Rotation), aber
 **ohne Wissen darüber, was funktioniert hat**. Das ist die größte verbleibende Handarbeit,
@@ -101,11 +109,13 @@ TikTok, Facebook. Rein in `social_images.py`-Nachbarschaft als `social_video.py`
 Die Social-Sieger der Woche als „Meistgelesen"-Block automatisch in den Freitags-Newsletter;
 umgekehrt Newsletter-Klick-Sieger in die Evergreen-Rotation.
 
-**d) Ein Cockpit statt zwölf Reports**
+**d) Ein Cockpit statt zwölf Reports** → **erledigt 03.10.2026**
+(`scripts/cockpit.py`, `COCKPIT.md`, `.github/workflows/cockpit.yml`,
+`docs/ANLEITUNG-COCKPIT.md`)
 Du hast >50 Status-Markdowns im Root. Ein täglicher `COCKPIT.md` mit Ampel je Subsystem
-(Content · Social · Newsletter · SEO · Affiliate · Deploy) + Telegram-Push an dich selbst.
-Alles andere liest du nur noch, wenn eine Ampel rot ist. Das senkt deine tatsächliche
-Eingriffszeit stärker als jede weitere Automatisierung.
+(Content · Social · Newsletter · SEO · Affiliate · Deploy/Secrets) + Telegram-Push an dich
+selbst (nur bei Rot). Alles andere liest du nur noch, wenn eine Ampel rot ist. Das senkt
+deine tatsächliche Eingriffszeit stärker als jede weitere Automatisierung.
 
 ---
 
@@ -139,7 +149,7 @@ Finanz-Content: unkontrollierte Haftung.
 Sag mir, womit ich anfangen soll:
 1. ~~Secret-Setup-Runbuch je Kanal mit Klickpfad + Verifikations-Lauf~~ → **erledigt 29.09.2026**:
    `docs/RUNBUCH-SOCIAL-SECRETS.md`, `scripts/social_preflight.py`, `social-preflight.yml`,
-2. `scripts/social_perf_feedback.py` + Planer-Gewichtung bauen,
+2. ~~`scripts/social_perf_feedback.py` + Planer-Gewichtung bauen~~ → **erledigt 03.10.2026**,
 3. ~~`social_video.py` + YouTube-Adapter~~ → **erledigt 29.09.2026**,
 4. ~~Antwort-Assistent~~ → **erledigt 29.09.2026**,
-5. Cockpit-Konsolidierung (ein `COCKPIT.md` statt >50 Status-Dateien).
+5. ~~Cockpit-Konsolidierung (ein `COCKPIT.md` statt >50 Status-Dateien)~~ → **erledigt 03.10.2026**.

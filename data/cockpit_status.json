@@ -1,0 +1,81 @@
+{
+  "generated": "2026-10-03T09:45:14Z",
+  "overall": "rot",
+  "buckets": {
+    "Content-Pipeline": {
+      "level": "rot",
+      "lines": [
+        "1 Prüfpunkt(e) auffällig (lesbarkeit)",
+        "lesbarkeit: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md – Flesch 51.7 < Floor 55; 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/in…",
+        "Artikel-Reserve 6/6 bereit"
+      ],
+      "sources": [
+        "data/governance_status.json",
+        "data/reserve-readiness.json",
+        "PRODUKTIONS-STATUS.md"
+      ]
+    },
+    "SEO & Technik": {
+      "level": "gruen",
+      "lines": [
+        "Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)"
+      ],
+      "sources": [
+        "data/governance_status.json"
+      ]
+    },
+    "Affiliate & Umsatz": {
+      "level": "gelb",
+      "lines": [
+        "1 Prüfpunkt(e) auffällig (click-chain)",
+        "click-chain: /go/strom/ ohne data-umami-event=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-umami-event-slug (Ziel-Klick nicht zuordenbar); /go/strom…"
+      ],
+      "sources": [
+        "data/governance_status.json",
+        "AFFILIATE-INTEGRITY-REPORT.md",
+        "AFFILIATE-INTENT-REPORT.md"
+      ]
+    },
+    "Secrets & Zugänge": {
+      "level": "rot",
+      "lines": [
+        "1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig",
+        "`PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pi…",
+        "geprüft & lebendig: GEMINI_API_KEY, GROQ_API_KEY, MASTODON_ACCESS_TOKEN",
+        "abgelehnt (Re-Auth nötig): PINTEREST_ACCESS_TOKEN"
+      ],
+      "sources": [
+        "data/governance_status.json",
+        "data/secrets_state.json",
+        "docs/PINTEREST-TOKEN-RUNBOOK.md"
+      ]
+    },
+    "Social-Automation": {
+      "level": "gruen",
+      "lines": [
+        "1/10 Kanäle live (Mastodon)",
+        "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
+        "letzter erfolgreicher Post vor 1.9 Tag(en)",
+        "1 Fehlversuch(e) in den letzten 14 Tagen"
+      ],
+      "sources": [
+        "data/social/state.yaml",
+        "data/social/channels.yaml",
+        "SOCIAL-PERF-REPORT.md",
+        "docs/RUNBUCH-SOCIAL-SECRETS.md"
+      ]
+    },
+    "Newsletter": {
+      "level": "gelb",
+      "lines": [
+        "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
+        "5 Artikel in der Warteschlange, ältester 6 Tag(e) alt"
+      ],
+      "sources": [
+        "data/newsletter_journal.jsonl",
+        "data/newsletter_state.json",
+        "data/newsletter_kadenz.json"
+      ]
+    }
+  }
+}

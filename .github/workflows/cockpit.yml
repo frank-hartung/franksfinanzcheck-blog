@@ -1,0 +1,113 @@
+# ============================================================
+#  COCKPIT – eine Ampel-Seite statt 70+ Status-Dateien
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 03.10.2026): "Als Nächstes das Cockpit" – der
+#  Blog hat für fast jede Automation eine eigene *-STATUS.md/
+#  -REPORT.md bekommen. Richtig und wichtig für Nachvollziehbarkeit,
+#  aber niemand liest morgens 70 Dateien. Dieser Lauf aggregiert
+#  NUR (misst nichts neu, ruft kein Netz auf):
+#    data/governance_status.json, data/reserve-readiness.json,
+#    data/secrets_state.json, data/social/state.yaml + channels.yaml,
+#    data/newsletter_journal.jsonl + newsletter_state.json
+#  zu COCKPIT.md (sechs Bereiche, je eine Ampel + ein Satz).
+#
+#  ZEITPUNKT: 20:10 UTC – nachdem die wichtigsten Tages-Erzeuger
+#  bereits gelaufen sind (Deploy bei jedem Push, Pinterest-Token
+#  02:40 UTC, Perf-Feedback 04:10 UTC, Bot-Watchdog 08:30 MESZ,
+#  Newsletter-Kadenz Di/Fr 08:11 UTC) – das Cockpit zeigt also den
+#  Tagesstand, nicht einen Zwischenstand.
+#
+#  ALARM: Nur bei Gesamtbild ROT geht ein Telegram-Hinweis raus
+#  (wie PRODUKTIONS-STATUS.md/-wache.yml) – fail-safe, wenn die
+#  Secrets fehlen, bleibt der Schritt einfach ein No-Op.
+# ============================================================
+name: Cockpit
+
+on:
+  schedule:
+    - cron: "10 20 * * *"   # täglich 20:10 UTC – nach den Tages-Erzeugern
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cockpit
+  cancel-in-progress: false
+
+jobs:
+  cockpit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: PyYAML installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/cockpit.py --selftest
+
+      - name: Cockpit erzeugen
+        run: python3 scripts/cockpit.py
+
+      - name: Gesamtbild fürs Alarming ermitteln
+        run: |
+          LEVEL="$(python3 -c "import json; print(json.load(open('data/cockpit_status.json'))['overall'])")"
+          echo "LEVEL=$LEVEL" >> "$GITHUB_ENV"
+          echo "Gesamtbild: $LEVEL"
+
+      - name: Bericht in die Job-Zusammenfassung schreiben
+        if: always()
+        run: |
+          if [ -f COCKPIT.md ]; then
+            cat COCKPIT.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Telegram-Alarm (nur bei ROT)
+        if: env.LEVEL == 'rot'
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -Eeuo pipefail
+          if [ -z "${TG_TOKEN:-}" ] || [ -z "${TG_CHAT:-}" ]; then
+            echo "Telegram nicht konfiguriert – übersprungen."; exit 0
+          fi
+          msg=/tmp/tg.txt
+          {
+            echo "🔴 COCKPIT: Gesamtbild ROT"
+            echo ""
+            python3 -c "import json; d = json.load(open('data/cockpit_status.json')); [print('- ' + n + ': ' + b['lines'][0]) for n, b in d['buckets'].items() if b['level'] == 'rot']"
+            echo ""
+            echo "Details: COCKPIT.md im Repo (Job-Zusammenfassung oder main)."
+            echo "Lauf: $RUN_URL"
+          } > "$msg"
+          curl -sS --max-time 15 -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text@${msg}" \
+            --data-urlencode "disable_web_page_preview=true" >/dev/null
+          echo "Telegram-Alarm gesendet"
+
+      - name: Cockpit committen & pushen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Cockpit"
+          git config user.email "cockpit@users.noreply.github.com"
+          git add COCKPIT.md data/cockpit_status.json
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – Cockpit ist aktuell."
+          else
+            git commit -m "cockpit: Ampel-Übersicht aktualisiert (${{ env.LEVEL }})"
+            scripts/git_sync.sh --push-only
+            echo "✅ Cockpit gepusht"
+          fi

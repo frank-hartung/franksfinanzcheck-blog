@@ -92,6 +92,7 @@ jobs:
         run: |
           python3 scripts/social_studio.py --selftest
           python3 scripts/social_calendar.py --selftest
+          python3 scripts/social_perf_feedback.py --selftest
 
       - name: Plan erneuern / Status schreiben
         if: ${{ github.event.inputs.modus == 'plan' || github.event.inputs.modus == 'status' }}

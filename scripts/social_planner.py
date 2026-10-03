@@ -35,6 +35,10 @@ if SCRIPTS_DIR not in sys.path:
 DATA_DIR = os.path.join(BLOG_DIR, "data", "social")
 SCHEDULE_FILE = os.path.join(DATA_DIR, "schedule.yaml")
 STATE_FILE = os.path.join(DATA_DIR, "state.yaml")
+# Rückkanal "Was performt?" – von scripts/social_perf_feedback.py geschrieben.
+# Fehlt die Datei (frischer Checkout, noch kein Feedback-Lauf), verhält sich
+# der Planer exakt wie vorher: Winkel per Hash, Cooldown nach Playbook.
+PERFORMANCE_FILE = os.path.join(DATA_DIR, "performance.yaml")
 
 HISTORY_LIMIT = 800
 # Ein Artikel darf pro Tag auf maximal so vielen Kanälen erscheinen
@@ -145,6 +149,19 @@ def save_state(state: dict, path: str | None = None) -> None:
     _save_yaml(path or STATE_FILE, state)
 
 
+def load_performance(path: str | None = None) -> dict:
+    """Lädt den Rückkanal (Winkel-/Pillar-Gewichte aus echtem Engagement).
+
+    Leer/fehlend ist ein gültiger Zustand (kein Feedback-Lauf bisher oder
+    Testumgebung) – der Aufrufer bekommt dann einfach {} und verhält sich
+    neutral (reine Exploration, Standard-Cooldown).
+    """
+    data = _load_yaml(path or PERFORMANCE_FILE, {})
+    if not isinstance(data, dict):
+        return {}
+    return data
+
+
 def record_history(state: dict, entry: dict) -> None:
     state.setdefault("history", []).append(entry)
 
@@ -192,39 +209,75 @@ def last_channel_post(state: dict, channel: str) -> datetime | None:
 
 # ---------------------------------------------------------------- Winkelwahl
 def pick_angle(channel_cfg: dict, channel_id: str, slug: str, state: dict,
-               taken: set[str], day: date, sequence: int) -> str:
+               taken: set[str], day: date, sequence: int,
+               angle_weights: dict | None = None) -> str:
     """Wählt einen Winkel, der für (Kanal, Artikel) noch nicht lief.
 
     Rotation ist deterministisch: gleicher Tag + gleicher Artikel +
     gleicher Kanal ergibt immer denselben Winkel – der Plan bleibt
     reproduzierbar und bei einem zweiten Lauf stabil.
+
+    `angle_weights` kommt aus dem Rückkanal (data/social/performance.yaml,
+    siehe scripts/social_perf_feedback.py): {winkel: score}, 1.0 = neutral.
+    Fehlt er (None/leer), verhält sich die Auswahl exakt wie zuvor –
+    gleichverteilt per Hash. Ist er gesetzt, greift ein deterministischer
+    Multi-Armed-Bandit (80 % Sieger-Winkel aus dem verfügbaren Pool,
+    20 % Exploration über den Rest) – niemals echter Zufall, damit der
+    Plan reproduzierbar bleibt.
     """
     angles = list(channel_cfg.get("angles") or ["nutzen"])
     used = used_angles(state, channel_id, slug) | taken
     fresh = [a for a in angles if a not in used]
     pool = fresh or [a for a in angles if a not in taken] or angles
     seed = f"{channel_id}|{slug}|{day.isoformat()}|{sequence}"
-    idx = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16) % len(pool)
-    return pool[idx]
+    digest = int(hashlib.sha1(seed.encode("utf-8")).hexdigest(), 16)
+
+    if not angle_weights:
+        return pool[digest % len(pool)]
+
+    ranked = sorted(pool, key=lambda a: (-float(angle_weights.get(a, 1.0)), a))
+    if (digest % 100) < 80:
+        return ranked[0]
+    rest = ranked[1:] or ranked
+    return rest[(digest // 100) % len(rest)]
 
 
 # ------------------------------------------------------------------ Planung
-def _candidates(cfg, pool, state, now):
+def _cooldown_days(base_cooldown: int, pillar: str, channel_perf: dict | None) -> int:
+    """Passt die Sperrfrist an den Rückkanal an (siehe social_perf_feedback.py).
+
+    Top-Themenwelten (überdurchschnittlicher Score, genug Stichprobe) dürfen
+    bis zu 40 % früher wieder dran sein; Flops bis zu 40 % später. Ohne
+    Rückkanal-Daten (Standardfall ohne Feedback-Lauf) bleibt die Sperrfrist
+    exakt wie im Playbook konfiguriert – ein Sicherheits-Minimum von 14 Tagen
+    verhindert, dass ein extremer Faktor die Spam-Bremse aushebelt.
+    """
+    pillar_data = ((channel_perf or {}).get("pillars") or {}).get(pillar) if pillar else None
+    if not pillar_data:
+        return base_cooldown
+    factor = float(pillar_data.get("cooldown_factor") or 1.0)
+    return max(14, round(base_cooldown * factor))
+
+
+def _candidates(cfg, pool, state, now, performance: dict | None = None):
     """Baut die (Kanal × Artikel)-Kandidaten mit Frühzeit und Rang."""
     meta = cfg.get("meta") or {}
     window = int(meta.get("new_article_window_days") or 10)
+    performance = performance or {}
     cands = []
     for cid, ch in (cfg.get("channels") or {}).items():
         if not (ch or {}).get("enabled"):
             continue
         cadence = ch.get("cadence") or {}
-        cooldown = int(cadence.get("recycle_cooldown_days")
-                       or meta.get("recycle_cooldown_days") or 75)
+        base_cooldown = int(cadence.get("recycle_cooldown_days")
+                            or meta.get("recycle_cooldown_days") or 75)
+        channel_perf = (performance.get("channels") or {}).get(cid)
         delay = float(cadence.get("launch_delay_hours") or 0)
         min_age = float(ch.get("min_article_age_days") or 0)
 
         for art in pool:
             published = parse_dt(art.get("published") or "")
+            cooldown = _cooldown_days(base_cooldown, art.get("pillar") or "", channel_perf)
             last = last_post(state, cid, art["slug"])
             if last:
                 last_at = parse_dt(last.get("posted_at") or "")
@@ -252,14 +305,17 @@ def _candidates(cfg, pool, state, now):
     return cands
 
 
-def _not_in_cooldown(item: dict, cfg: dict, state: dict, now: datetime) -> bool:
+def _not_in_cooldown(item: dict, cfg: dict, state: dict, now: datetime,
+                     performance: dict | None = None) -> bool:
     """True, wenn dieser geplante Posten die Sperrfrist noch einhält."""
     if item.get("status") != "planned":
         return True
     meta = (cfg or {}).get("meta") or {}
     ch = ((cfg or {}).get("channels") or {}).get(item.get("channel") or "") or {}
-    cooldown = int((((ch.get("cadence")) or {}).get("recycle_cooldown_days"))
-                   or meta.get("recycle_cooldown_days") or 75)
+    base_cooldown = int((((ch.get("cadence")) or {}).get("recycle_cooldown_days"))
+                        or meta.get("recycle_cooldown_days") or 75)
+    channel_perf = ((performance or {}).get("channels") or {}).get(item.get("channel") or "")
+    cooldown = _cooldown_days(base_cooldown, item.get("pillar") or "", channel_perf)
     last = last_post(state, item.get("channel") or "", item.get("slug") or "")
     if not last:
         return True
@@ -270,8 +326,15 @@ def _not_in_cooldown(item: dict, cfg: dict, state: dict, now: datetime) -> bool:
 
 
 def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = None,
-               horizon: int | None = None, keep_existing: bool = True) -> dict:
-    """Erzeugt den rollierenden Plan (heute + horizon Tage)."""
+               horizon: int | None = None, keep_existing: bool = True,
+               performance: dict | None = None) -> dict:
+    """Erzeugt den rollierenden Plan (heute + horizon Tage).
+
+    `performance` ist der Rückkanal aus scripts/social_perf_feedback.py
+    (siehe load_performance()). Wird keiner übergeben, lädt build_plan ihn
+    selbst von der Platte – fehlt die Datei, ist das Ergebnis {} und der
+    Plan entsteht exakt wie vor Einführung des Rückkanals.
+    """
     import social_channels as sch
 
     meta = sch.meta_of(cfg)
@@ -279,6 +342,7 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     now = now or berlin_now()
     horizon = int(horizon or meta.get("plan_horizon_days") or 14)
     cap_total = int(meta.get("max_posts_per_day_total") or 12)
+    performance = performance if performance is not None else load_performance()
 
     schedule = load_schedule()
     items = [it for it in (schedule.get("items") or [])
@@ -294,9 +358,9 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     # (z. B. weil der Artikel zwischenzeitlich von Hand oder von einem
     # früheren Lauf gesendet wurde). Sonst bliebe eine überholte Planung
     # stehen und würde trotz Sperrfrist rausgehen.
-    items = [it for it in items if _not_in_cooldown(it, cfg, state, now)]
+    items = [it for it in items if _not_in_cooldown(it, cfg, state, now, performance)]
 
-    cands = _candidates(cfg, pool, state, now)
+    cands = _candidates(cfg, pool, state, now, performance)
     used_pairs = {(it.get("channel"), it.get("slug")) for it in items
                   if it.get("status") == "planned"}
     day_count: dict[str, int] = {}          # "channel|YYYY-MM-DD" → Anzahl
@@ -361,10 +425,15 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
                 chosen_pool.sort(key=lambda c: (c["tier"], c["rank"], c["slug"]))
                 pick = chosen_pool[0]
 
+                channel_perf = (performance.get("channels") or {}).get(cid) or {}
                 angle = pick_angle(ch, cid, pick["slug"], state,
                                    {it.get("angle") for it in items
                                     if it.get("channel") == cid and it.get("slug") == pick["slug"]},
-                                   day, len(items))
+                                   day, len(items),
+                                   angle_weights=channel_perf.get("angles") and {
+                                       a: d.get("score", 1.0)
+                                       for a, d in channel_perf["angles"].items()
+                                   })
                 item_id = f"{cid}:{pick['slug']}:{angle}:{day.isoformat()}"
                 if any(it.get("id") == item_id for it in items):
                     used_pairs.add((cid, pick["slug"]))
