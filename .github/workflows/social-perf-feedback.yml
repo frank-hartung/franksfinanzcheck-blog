@@ -1,0 +1,94 @@
+# ============================================================
+#  SOCIAL-PERF-FEEDBACK – der Rückkanal des Social-Autopiloten
+#  ------------------------------------------------------------
+#  AUFTRAG (Frank, 03.10.2026, Audit "Highend-Level weltweit"):
+#  Der Planer (social_planner.py) soll nicht blind nach Regeln posten,
+#  sondern aus echtem Engagement lernen. Dieser Lauf holt die
+#  Kennzahlen (aktuell: Mastodon, öffentlich, kein Token nötig),
+#  wertet sie je Winkel/Themenwelt aus und schreibt
+#  data/social/performance.yaml – das liest der Autopilot beim
+#  nächsten Plan-Lauf automatisch.
+#
+#  Läuft VOR dem ersten Social-Autopilot-Slot (05:20 UTC), damit der
+#  Tagesplan mit den frischesten Gewichten entsteht.
+#
+#  Fail-safe: fehlende/leere Kennzahlen sind kein Fehler – der Lauf
+#  bleibt grün und der Planer verhält sich dann neutral (Exploration).
+# ============================================================
+name: Social-Perf-Feedback
+
+on:
+  schedule:
+    - cron: "10 4 * * *"   # täglich 04:10 UTC, vor dem ersten Autopilot-Slot
+  workflow_dispatch:
+    inputs:
+      fetch:
+        description: "Frische Kennzahlen nachladen (Netzzugriff)?"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-perf-feedback
+  cancel-in-progress: false
+
+jobs:
+  feedback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: PyYAML installieren
+        run: |
+          python3 -m pip install -q --disable-pip-version-check pyyaml \
+            || python3 -m pip install -q --break-system-packages pyyaml
+
+      # Fail-closed: Ein kaputter Rückkanal darf den Planer nicht verbiegen.
+      - name: Selbsttest (fail-closed)
+        run: python3 scripts/social_perf_feedback.py --selftest
+
+      - name: Kennzahlen auswerten (+ nachladen, wenn gewünscht)
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE: ${{ vars.MASTODON_INSTANCE }}
+        run: |
+          ARGS=""
+          [ "${{ github.event.inputs.fetch }}" != "false" ] && ARGS="--fetch"
+          echo "Aufruf: python3 scripts/social_perf_feedback.py $ARGS"
+          python3 scripts/social_perf_feedback.py $ARGS
+
+      - name: Bericht in die Job-Zusammenfassung schreiben
+        if: always()
+        run: |
+          if [ -f SOCIAL-PERF-REPORT.md ]; then
+            cat SOCIAL-PERF-REPORT.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # SOCIAL-PERF-REPORT.md ist bewusst NICHT versioniert (Lauf-Artefakt,
+      # passt auf das Root-Muster /*-REPORT.md in .gitignore – wie das
+      # Autopilot-Cockpit SOCIAL-AUTOPILOT-STATUS.md). Es steht oben bereits
+      # in der Job-Zusammenfassung; committet werden nur die Rückkanal-Daten.
+      - name: Rückkanal-Stand committen & pushen
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Social-Perf-Feedback"
+          git config user.email "social-perf-feedback@users.noreply.github.com"
+          git add data/social/performance.yaml data/social/performance_history.jsonl \
+                  data/social/engagement_cache.json
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – Rückkanal ist aktuell."
+          else
+            git commit -m "social: Rückkanal-Kennzahlen aktualisiert (Winkel-/Pillar-Gewichte)"
+            scripts/git_sync.sh --push-only
+            echo "✅ Rückkanal-Stand gepusht"
+          fi
