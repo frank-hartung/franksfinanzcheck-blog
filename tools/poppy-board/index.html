@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Poppy-Werkbank | FranksFinanzcheck</title>
+  <link rel="stylesheet" href="style.css">
+  <script id="board-data" type="application/json">/*BOARD_DATA*/</script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt</a>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#board"><span class="brand-mark" aria-hidden="true">✿</span><span>Poppy-Werkbank<small>Quellen-Board von FranksFinanzcheck</small></span></a>
+    <p class="workspace">franksfinanzcheck.de<br><span>Kostenloser Poppy.ai-Nachbau · self-hosted</span></p>
+    <nav aria-label="Arbeitsbereiche">
+      <a href="#board" data-view="board" aria-current="page"><span aria-hidden="true">◫</span> Board <span id="nav-count" class="nav-count"></span></a>
+      <a href="#erzeugnisse" data-view="erzeugnisse"><span aria-hidden="true">✎</span> Erzeugnisse <span id="nav-done" class="nav-count"></span></a>
+      <a href="#ueber" data-view="ueber"><span aria-hidden="true">ℹ</span> So funktioniert es</a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>Deine Daten bleiben hier.</strong>
+      <p>Kein Poppy-Abo. Keine API von Drittanbietern. Nur dein Repo, deine Karten, deine Gratis-Keys (Groq/Gemini).</p>
+      <button id="theme" type="button">Darstellung wechseln</button>
+    </div>
+  </aside>
+  <div class="workspace-main">
+    <header class="topbar">
+      <span><span class="status-dot" aria-hidden="true"></span> Offline-fähig · Daten aus data/poppy/cards/</span>
+      <a href="board.json" download>Board als JSON ↓</a>
+    </header>
+    <main id="main">
+      <section id="board" aria-labelledby="h-board">
+        <div class="heading">
+          <div>
+            <p class="eyebrow">Quellen einsammeln · Insights ziehen · verwerten</p>
+            <h1 id="h-board">Dein Poppy-Board</h1>
+            <p class="intro">Jede Karte ist eine Quelle (Video, Podcast, Artikel, PDF, Notiz) mit KI-Erkenntnissen in Franks Stimme. Grüne Buttons kopieren fertige Texte – Blog-Entwürfe bleiben immer draft, bis du sie freigibst.</p>
+          </div>
+          <div class="stamp"><strong id="stamp-count">–</strong><small>Karten insgesamt</small><small id="stamp-date"></small></div>
+        </div>
+        <div class="metrics" id="metrics"></div>
+        <div class="toolbar">
+          <div class="grow"><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Titel, Insight, Autor …"></div>
+          <div><label for="filter-typ">Quelltyp</label>
+            <select id="filter-typ">
+              <option value="">alle</option>
+              <option value="youtube">YouTube</option>
+              <option value="podcast">Podcast/Feed</option>
+              <option value="artikel">Artikel</option>
+              <option value="pdf">PDF</option>
+              <option value="text">Notiz</option>
+            </select>
+          </div>
+          <div role="group" aria-label="Status filtern" class="chips" id="filter-status">
+            <button type="button" class="chip" data-status="" aria-pressed="true">Alle</button>
+            <button type="button" class="chip" data-status="neu" aria-pressed="false">Neu</button>
+            <button type="button" class="chip" data-status="verwertet" aria-pressed="false">Verwertet</button>
+          </div>
+        </div>
+        <div id="spalten" class="spalten"></div>
+        <p id="leer" class="empty" hidden>Keine Karten für diesen Filter. Sammle neue Quellen ein:
+          <code>python3 scripts/poppy_ingest.py --quelle "…"</code> oder per Workflow „Poppy-Werkbank“.</p>
+      </section>
+
+      <section id="erzeugnisse" aria-labelledby="h-erzeugnisse" class="section-block" hidden>
+        <div class="section-heading"><h2 id="h-erzeugnisse">Erzeugnisse &amp; Freigabe</h2></div>
+        <div id="erzeugnisse-liste"></div>
+      </section>
+
+      <section id="ueber" aria-labelledby="h-ueber" class="section-block" hidden>
+        <div class="section-heading"><h2 id="h-ueber">So funktioniert die Werkbank</h2></div>
+        <div class="panel">
+          <ol class="schritte">
+            <li><strong>Einsammeln:</strong> <code>python3 scripts/poppy_ingest.py --quelle &lt;URL|Notiz&gt;</code> oder <code>--watchlist</code> – YouTube-Transkripte, Podcast-Feeds, Artikel, PDFs und Notizen werden zu Karten.</li>
+            <li><strong>Verwerten:</strong> <code>python3 scripts/poppy_repurpose.py --auto</code> – aus jeder Karte entsteht ein Blog-<em>Entwurf</em> (draft) plus Newsletter-, Mastodon- und Pinterest-Texte in Franks Stimme.</li>
+            <li><strong>Freigeben:</strong> <code>python3 scripts/ki_redaktion.py --promote &lt;slug&gt;</code> – publication bleibt am bewährten cadence_guard (Mo/Mi/Fr, 2–3 Artikel).</li>
+          </ol>
+          <p class="muted">Alles läuft über die Gratis-Keys Groq/Gemini (llm_client), Podcast-Audio optional über Gratis-Whisper. Ohne Keys greifen Offline-Fallbacks – die Pipeline bricht nie. Anleitung: <code>docs/ANLEITUNG-POPPY-WERKBANK.md</code>.</p>
+        </div>
+      </section>
+    </main>
+    <footer>Poppy-Werkbank · generiert von <code>scripts/poppy_board.py</code> · Karten: <code>data/poppy/cards/</code> · Watchlist: <code>data/poppy/quellen.yaml</code></footer>
+  </div>
+</div>
+</body>
+</html>

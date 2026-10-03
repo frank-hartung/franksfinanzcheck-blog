@@ -1,0 +1,152 @@
+# ============================================================
+#  POPPY-WERKBANK (kostenloser Poppy.ai-Nachbau, self-hosted)
+#  ------------------------------------------------------------
+#  Quellen (YouTube, Podcast-Feeds, Artikel, PDF, Notizen) →
+#  Insight-Karten (data/poppy/cards/) → Verwertung in Franks
+#  Stimme: Blog-ENTWURF (draft: true) + Newsletter/Mastodon/
+#  Pinterest-Texte. KEINE Poppy.ai-API – nur die Gratis-Keys
+#  GROQ_API_KEY / GEMINI_API_KEY (wie Content-Engine & KI-Redaktion).
+#
+#  KADENZ: Di + Sa 03:23 UTC (05:23 MESZ) – bewusst entzerrt von
+#  KI-Redaktion (04:53 UTC) und Content-Engine (06:10 UTC), damit
+#  nicht drei Content-Commits in dieselbe Minute fallen
+#  (Rebase-Kollisions-Klasse #295). Slot 03:23 ist frei.
+#
+#  VERÖFFENTLICHUNG: NIE automatisch. Poppy schreibt ausschließlich
+#  Entwürfe; live geht ein Artikel nur über
+#  python3 scripts/ki_redaktion.py --promote <slug> (cadence_guard).
+#
+#  Manueller Start (workflow_dispatch):
+#    aktion=watchlist          → Watchlist abrufen + verwerten
+#    aktion=quellen            → eigene Quellen (Feld „quellen“) + verwerten
+#    aktion=nur_verwerten      → bestehende neue Karten verwerten
+#    aktion=komplett           → Watchlist + eigene Quellen + verwerten
+# ============================================================
+name: Poppy-Werkbank
+
+on:
+  schedule:
+    - cron: "23 3 * * 2,6"    # Di + Sa, 05:23 MESZ
+  workflow_dispatch:
+    inputs:
+      aktion:
+        description: "Was soll laufen?"
+        type: choice
+        options: [watchlist, quellen, nur_verwerten, komplett]
+        default: watchlist
+      quellen:
+        description: "Eigene Quellen (eine pro Zeile: YouTube/Feed/Artikel/PDF-URL oder Notiz)"
+        required: false
+        default: ""
+      transkribieren:
+        description: "Podcast-Audio per Gratis-Whisper transkribieren (kontingentintensiv)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: poppy-werkbank
+  cancel-in-progress: false
+
+jobs:
+  werkbank:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install -q pyyaml feedparser pypdf \
+            youtube-transcript-api trafilatura lxml_html_clean
+
+      - name: Selbsttest (fail-closed)
+        run: |
+          python3 scripts/poppy_lib.py
+          python3 scripts/poppy_ingest.py --selftest
+          python3 scripts/poppy_repurpose.py --selftest
+          python3 scripts/poppy_board.py --selftest
+
+      - name: Aktion bestimmen
+        id: aktion
+        run: |
+          AKTION="${{ github.event.inputs.aktion }}"
+          if [ -z "$AKTION" ]; then AKTION="watchlist"; fi
+          echo "AKTION=$AKTION" >> "$GITHUB_ENV"
+          echo "Aktion: $AKTION"
+
+      # ---- 1) Einsammeln ----
+      - name: Quellen einsammeln
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          POPPY_QUELLEN: ${{ github.event.inputs.quellen }}
+          POPPY_TRANSKRIBIEREN: ${{ github.event.inputs.transkribieren }}
+        run: |
+          set -uo pipefail
+          EXTRA=""
+          if [ "${POPPY_TRANSKRIBIEREN}" = "true" ]; then EXTRA="--transkribieren"; fi
+          if [ "$AKTION" = "watchlist" ] || [ "$AKTION" = "komplett" ]; then
+            python3 scripts/poppy_ingest.py --watchlist $EXTRA \
+              || echo "::warning::Watchlist-Lauf mit Hinweisen (siehe Log)"
+          fi
+          if { [ "$AKTION" = "quellen" ] || [ "$AKTION" = "komplett" ]; } \
+             && [ -n "${POPPY_QUELLEN// /}" ]; then
+            python3 scripts/poppy_ingest.py $EXTRA \
+              || echo "::warning::Mindestens eine Quelle konnte nicht eingesammelt werden"
+          fi
+
+      # ---- 2) Verwerten (Blog-Entwurf + Social-Texte) ----
+      - name: Karten verwerten
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+        run: |
+          python3 scripts/poppy_repurpose.py --auto \
+            || echo "::warning::Verwerten lief nicht vollständig durch"
+
+      # ---- 3) Board frisch bauen (Validierung, Ausgabe ist gitignored) ----
+      - name: Board bauen (Validierung)
+        run: python3 scripts/poppy_board.py
+
+      # INDEX-HYGIENE DEFENSE-IN-DEPTH (wie KI-Redaktion): Poppy schreibt
+      # Posts → dieselbe Registergrenze vor dem Commit.
+      - name: Taxonomie-Gate nach Writer-Lauf
+        run: |
+          set -euo pipefail
+          python3 scripts/tag_governance.py --selftest
+          for versuch in 1 2 3; do
+            echo "Taxonomie-Normalisierung, Versuch ${versuch}/3"
+            python3 scripts/tag_governance.py --apply
+            if python3 scripts/tag_governance.py --check; then
+              echo "Taxonomie-Gate grün (Versuch ${versuch})"
+              break
+            fi
+            if [ "$versuch" = 3 ]; then
+              echo "::error::Taxonomie-Gate nach drei idempotenten Läufen rot"
+              python3 scripts/tag_governance.py --json || true
+              exit 1
+            fi
+            sleep 1
+          done
+
+      - name: Karten und Entwürfe committen (drafts only)
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          # pro Pfad eigener add-Aufruf (Repo-Bugfix-Muster 14.08.2026);
+          # Reports/.cache sind gitignored.
+          git add content/ 2>/dev/null || true
+          git add data/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen – nichts zu committen."
+          else
+            git commit -m "content(poppy-werkbank): neue Quellkarten + KI-Entwürfe (draft, Rolle poppy)"
+            # zentrales git_sync.sh statt rohem Push (Non-FF-Schutz, 12.09.2026)
+            scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – nächster Lauf versucht es erneut"
+          fi

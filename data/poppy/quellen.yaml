@@ -1,0 +1,66 @@
+# ============================================================
+#  POPPY-WERKBANK – Watchlist & Einstellungen
+#  ------------------------------------------------------------
+#  Hier steht, welche Quellen die Werkbank automatisch prüft
+#  (Workflow „Poppy-Werkbank“, Di + Sa 05:23 MESZ) bzw. die du
+#  manuell mit `python3 scripts/poppy_ingest.py --watchlist`
+#  abrufst. Das ist der „Poppy-Board“-Teil: Quellen, die du
+#  beobachtest, landen automatisch als Insight-Karten.
+#
+#  TYPEN (Spalte `typ` nur zur Doku – erkannt wird automatisch):
+#    youtube_kanal  → Kanal-URL (@handle, /channel/UC…, /videos)
+#                     oder direkt …/feeds/videos.xml?channel_id=…
+#                     Handle-URLs löst die Werkbank zur Channel-ID auf.
+#    rss / podcast  → jeder RSS/Atom-Feed (Blog, Nachrichten, Podcast).
+#                     Podcast-Audio wird NUR mit audio_transkription: true
+#                     und GROQ_API_KEY per Gratis-Whisper transkribiert
+#                     (Limit Gratis-Tier: 25 MB/Episode – größere werden
+#                     sauber übersprungen, Shownotes bleiben Basis).
+#    artikel / pdf  → einzelne URL (wird als EIN Karte eingesammelt)
+#
+#  Duplikate werden automatisch übersprungen (gleiche Quell-URL).
+#  `aktiv: false` pausiert eine Quelle, ohne sie zu löschen.
+#
+#  ANLEITUNG: docs/ANLEITUNG-POPPY-WERKBANK.md
+# ============================================================
+
+watchlist:
+  # ---- Blog-/News-Feeds (Fixkosten-Nische) ----
+  - id: finanztip-blog
+    typ: rss
+    url: https://finanztip.de/feed/
+    aktiv: true
+    max_neu: 1                     # pro Lauf max. 1 neue Karte aus diesem Feed
+
+  # ---- YouTube-Kanäle (Transkripte, gratis ohne API-Key) ----
+  # Kanal-URLs mit @Handle funktionieren direkt; alternativ die
+  # videos.xml-URL mit channel_id eintragen (robuster in CI).
+  - id: finanztip-youtube
+    typ: youtube_kanal
+    url: https://www.youtube.com/@Finanztip/videos
+    aktiv: false                   # bei Bedarf auf true stellen
+    max_neu: 1
+
+  # ---- Podcasts (Shownotes; Audio nur mit Opt-in unten) ----
+  # - id: beispiel-podcast
+  #   typ: podcast
+  #   url: https://beispiel-podcast.de/feed/m4a/
+  #   aktiv: false
+  #   max_neu: 1
+
+einstellungen:
+  # Max. neue Karten PRO Quelle und Lauf (Kanäle/Feeds)
+  max_karten_pro_lauf: 3
+
+  # Max. Karten, die --auto pro Lauf verwertet (schützt Tagesform
+  # der Gratis-Kontingente; einzelne Karten via --karte immer möglich)
+  max_verwertung_pro_lauf: 2
+
+  # Wie viel Quelltext pro Karte maximal ins KI-Prompt wandert
+  transkript_max_zeichen: 20000
+  quelle_max_zeichen: 24000
+
+  # Podcast-Audio per Gratis-Whisper (Groq) transkribieren.
+  # VORSICHT: kostet Kontingent des Gratis-Tiers und dauert pro
+  # Episode einige Zeit. Standard: aus (Shownotes reichen oft).
+  audio_transkription: false
