@@ -4349,3 +4349,12 @@ details.toc a {
   .ff-kostenprofil { box-shadow: none; border: 1px solid #777; }
   .ff-kostenprofil__author img { filter: grayscale(1); }
 }
+
+/* Die Editorial-Masthead-Höhe beträgt im breiten Layout bis zu 106 px.
+   Abschnittssprünge müssen deshalb mehr Abstand als PaperMods 60-px-Header
+   reservieren; andernfalls liegt die Überschrift knapp unter der Navigation. */
+.ff-topics h2[id],
+.ff-topics-legacy-anchor,
+.ff-posts-feed-heading {
+  scroll-margin-top: 120px;
+}
