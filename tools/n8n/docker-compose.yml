@@ -1,0 +1,77 @@
+version: "3.8"
+
+# ============================================================
+#  0 € LAUFENDE KOSTEN STACK (FranksFinanzcheck Automation)
+#  Whisper lokal + n8n self-hosted + GitHub Pages
+# ============================================================
+
+services:
+  # --- n8n Workflow Automation Hub (Self-Hosted Community Edition) ---
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: ff-n8n-automation
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - NODE_ENV=production
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://localhost:5678/}
+      - GENERIC_TIMEZONE=Europe/Berlin
+      - TZ=Europe/Berlin
+      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=336 # 14 Tage History
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/home/node/workflows:ro
+      - ../../data/whisper_inbox:/data/whisper_inbox
+      - ../..:/workspace/blog:rw
+    depends_on:
+      whisper-api:
+        condition: service_healthy
+    networks:
+      - blog-net
+
+  # --- Lokaler Whisper Spracherkennungs-Dienst (0 € Cloud-Kosten) ---
+  whisper-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.whisper
+    container_name: ff-whisper-api
+    restart: unless-stopped
+    ports:
+      - "8765:8765"
+    environment:
+      - WHISPER_MODEL=${WHISPER_MODEL:-base}
+      - WHISPER_DEVICE=${WHISPER_DEVICE:-cpu}
+      - WHISPER_COMPUTE_TYPE=${WHISPER_COMPUTE_TYPE:-int8}
+      - PORT=8765
+      - TZ=Europe/Berlin
+    volumes:
+      - whisper_models:/root/.cache/huggingface
+      - ../../data/whisper_inbox:/data/inbox:rw
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8765/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - blog-net
+
+volumes:
+  n8n_data:
+    name: ff_n8n_data
+  whisper_models:
+    name: ff_whisper_models
+
+networks:
+  blog-net:
+    name: ff_blog_automation_net
+    driver: bridge

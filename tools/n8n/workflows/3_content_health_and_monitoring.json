@@ -1,0 +1,136 @@
+{
+  "name": "3. Content-Health & System-Monitoring (0 € Watchdog)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * *"
+            }
+          ]
+        }
+      },
+      "id": "node-cron-daily",
+      "name": "Täglich 07:00 Uhr",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "command": "python3 /workspace/blog/scripts/blog_health_gate.py --json"
+      },
+      "id": "node-health-gate",
+      "name": "Blog Health Gate Ausführen",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "let result = {};\ntry {\n  result = JSON.parse($json.stdout || '{}');\n} catch (e) {\n  result = { status: 'parse_error', error: e.message };\n}\n\nconst isHealthy = result.status === 'ok' || result.passed === true;\nconst fehlerAnzahl = result.errors ? result.errors.length : 0;\n\nreturn [{\n  json: {\n    isHealthy,\n    fehlerAnzahl,\n    summary: result.summary || 'Gesundheitsprüfung abgeschlossen',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-eval-health",
+      "name": "Ergebnis Bewerten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [620, 240]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isHealthy }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "node-if-healthy",
+      "name": "Ist System Grün?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [840, 240]
+    },
+    {
+      "parameters": {
+        "command": "echo '✅ [HEALTH-OK]' $(date) >> /workspace/blog/data/health_heartbeat.log"
+      },
+      "id": "node-log-ok",
+      "name": "Heartbeat Loggen",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1080, 160]
+    },
+    {
+      "parameters": {
+        "command": "python3 /workspace/blog/scripts/alert_router.py --alarm \"Health-Gate meldet Fehler: {{ $json.fehlerAnzahl }}\""
+      },
+      "id": "node-alert-fail",
+      "name": "Alarm Auslösen (Fail-Safe)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1080, 320]
+    }
+  ],
+  "connections": {
+    "Täglich 07:00 Uhr": {
+      "main": [
+        [
+          {
+            "node": "Blog Health Gate Ausführen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blog Health Gate Ausführen": {
+      "main": [
+        [
+          {
+            "node": "Ergebnis Bewerten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ergebnis Bewerten": {
+      "main": [
+        [
+          {
+            "node": "Ist System Grün?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ist System Grün?": {
+      "main": [
+        [
+          {
+            "node": "Heartbeat Loggen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Alarm Auslösen (Fail-Safe)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

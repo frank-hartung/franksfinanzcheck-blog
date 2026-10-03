@@ -79,6 +79,14 @@ npm run test:vergleiche                               # Selbsttest der Vergleich
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                                # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 
+# 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
+npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)
+npm run blogautomatik:audit                          # 0 € Kosten- & Einsparungs-Audit
+npm run blogautomatik:selftest                       # Offline-Selbsttest aller Säulen (Fail-Closed)
+npm run test:blogautomatik                           # 45 Unit-Tests für Whisper, n8n-Bridge & Orchestrator
+npm run whisper:inbox                                # Wartende Sprachaufnahmen in data/whisper_inbox/ verarbeiten
+npm run n8n:ping                                     # Latenz- & Erreichbarkeits-Check für n8n
+
 # Design-Varianten-Werkbank (26.09.2026) – Details: docs/ANLEITUNG-DESIGN-VARIANTEN.md
 python3 scripts/design_variant_gate.py               # Marke + Messvertrag + Freigabe
 python3 scripts/design_variant_gate.py --produktionswache   # läuft im Deploy VOR dem Build

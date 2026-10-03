@@ -476,6 +476,53 @@ def trigger_manuell(params: dict, ctx: dict) -> list[dict]:
              "daten": {"zeitpunkt": schaltwerk.iso(jetzt)}}]
 
 
+# ============================================================= 8 · Whisper & n8n (0 € Stack)
+def trigger_whisper_aufnahme(params: dict, ctx: dict) -> list[dict]:
+    """Prüft den Whisper-Posteingang (data/whisper_inbox/) auf neue Audiodateien."""
+    inbox = os.path.join(BLOG_DIR, str(params.get("inbox_dir") or "data/whisper_inbox"))
+    if not os.path.isdir(inbox):
+        return []
+    erlaubte_endungen = {".mp3", ".wav", ".m4a", ".ogg", ".webm", ".flac", ".aac"}
+    events = []
+    for datei in sorted(os.listdir(inbox)):
+        ext = os.path.splitext(datei)[1].lower()
+        if ext in erlaubte_endungen:
+            voll = os.path.join(inbox, datei)
+            st = os.stat(voll)
+            events.append({
+                "key": f"whisper:{datei}:{int(st.st_mtime)}",
+                "daten": {
+                    "datei": datei,
+                    "pfad": voll,
+                    "groesse_bytes": st.st_size,
+                    "kategorie": params.get("kategorie", "spartipps"),
+                },
+            })
+    return events
+
+
+def trigger_n8n_event(params: dict, ctx: dict) -> list[dict]:
+    """Empfängt ein Ereignis von n8n (via webhook oder repository_dispatch)."""
+    event = ctx.get("event")
+    if not isinstance(event, dict) or not event:
+        return []
+    typ = str(event.get("typ") or event.get("event_type") or "").strip()
+    erwartet = str(params.get("typ") or "").strip()
+    if erwartet and typ != erwartet:
+        return []
+    import schaltwerk
+
+    stempel = schaltwerk.iso(_jetzt(ctx))
+    return [{
+        "key": f"n8n:{_hash(json.dumps(event, sort_keys=True) + stempel)}",
+        "daten": {
+            "n8n": event,
+            "typ": typ,
+            **{k: v for k, v in event.items() if isinstance(v, (str, int, float, bool))},
+        },
+    }]
+
+
 # ------------------------------------------------------------- Registrierung
 PROVIDER = {
     "neuer_artikel": trigger_neuer_artikel,
@@ -490,6 +537,8 @@ PROVIDER = {
     "rss": trigger_rss,
     "webhook": trigger_webhook,
     "manuell": trigger_manuell,
+    "whisper_aufnahme": trigger_whisper_aufnahme,
+    "n8n_event": trigger_n8n_event,
 }
 
 
