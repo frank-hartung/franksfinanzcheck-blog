@@ -1,0 +1,42 @@
+# ============================================================
+#  SPAM-SCHUTZ – Budgets der täglichen Policy-Wache
+#  ------------------------------------------------------------
+#  Diese Budgets schützen den Blog dauerhaft gegen Googles
+#  „Scaled Content Abuse“-Bewertung (massenhaft unorigineller,
+#  automatisch erzeugter Content). scripts/spam_schutz_wache.py
+#  misst täglich (07:41 MESZ) und greift bei ROT automatisch:
+#
+#    NOTBREMSE → data/endredaktion.yaml wird auf modus: manuell
+#    gestellt (mit Marker) – keine automatischen Freigaben mehr,
+#    bis die Wache wieder grün ist. Frank manuell gesetzter
+#    „manuell“-Modus bleibt dabei unangetastet.
+#
+#  Kalibrierung: Ist-Zustand 03.10.2026 = 38 Live-Artikel,
+#  32 % KI-Anteil, Tempo 5/Woche, 0 Near-Duplicates. Die Budgets
+#  haben bewusst Luft – sie bremsen Pathologie, nicht den Betrieb.
+#
+#  Anleitung: docs/ANLEITUNG-SPAM-SCHUTZ.md
+# ============================================================
+
+# Veröffentlichungstempo (Frontmatter-date der Live-Artikel)
+tempo_max_pro_tag: 3            # rot: mehr an einem Kalendertag
+tempo_gelb_pro_woche: 7         # gelb: auffällig viele in 7 Tagen
+tempo_rot_pro_woche: 10         # rot: Spam-Tempo
+
+# KI-Anteil im Live-Bestand (ai_generated: true)
+ki_anteil_gelb_prozent: 50      # gelb: halber Bestand KI
+ki_anteil_rot_prozent: 65       # rot: KI dominiert den Bestand
+
+# Auto-Freigaben der Endredaktion (rollende 7 Tage)
+auto_freigaben_max_pro_woche: 3
+
+# Near-Duplicates (SimHash-Hamming über die Live-Körper,
+# SSOT: scripts/plagiat_guard.py)
+near_dup_hamming: 10            # Abstand ≤ X gilt als Near-Duplicate
+near_dup_gelb_paare: 1          # gelb: erstes verdächtiges Paar
+near_dup_rot_paare: 3           # rot: Cluster-Bildung
+
+# Harte Null-Toleranzen im Live-Bestand
+thin_live_max: 0                # Live-Artikel unter Längen-Floor
+titel_duplikate_max: 0          # gleiche Titel live
+offenlegung_fehlend_max: 0      # KI-Artikel ohne Werbe-Kennzeichnung

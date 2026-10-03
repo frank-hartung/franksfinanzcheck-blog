@@ -15,6 +15,7 @@ in temporären Verzeichnissen:
 """
 from __future__ import annotations
 
+import datetime
 import json
 import os
 import re
@@ -69,21 +70,28 @@ class EndredaktionTempFall(unittest.TestCase):
             "READ_POSTS_DIR": readability_check.POSTS_DIR,
             "CONFIG_FILE": er.CONFIG_FILE,
             "REPORT_FILE": er.REPORT_FILE,
+            "SPAM_STATUS_FILE": er.SPAM_STATUS_FILE,
             "CARD_DIR": poppy_lib.CARD_DIR,
         }
         post_utils.POSTS_DIR = posts
         readability_check.POSTS_DIR = posts
         er.CONFIG_FILE = os.path.join(self.tmp, "endredaktion.yaml")
         er.REPORT_FILE = os.path.join(self.tmp, "report.md")
+        er.SPAM_STATUS_FILE = os.path.join(self.tmp, "spam_status.json")
         poppy_lib.CARD_DIR = os.path.join(self.tmp, "cards")
         with open(er.CONFIG_FILE, "w", encoding="utf-8") as fh:
             fh.write("modus: automatisch\nmax_freigaben_pro_lauf: 1\n")
+        # Spam-Schutz-Handshake: gültig grün (wie nach dem täglichen
+        # Wachen-Lauf). Die Sperre testen die eigenen Tests unten.
+        with open(er.SPAM_STATUS_FILE, "w", encoding="utf-8") as fh:
+            json.dump({"urteil": "gruen", "probleme": []}, fh)
 
     def tearDown(self):
         post_utils.POSTS_DIR = self.alt["POSTS_DIR"]
         readability_check.POSTS_DIR = self.alt["READ_POSTS_DIR"]
         er.CONFIG_FILE = self.alt["CONFIG_FILE"]
         er.REPORT_FILE = self.alt["REPORT_FILE"]
+        er.SPAM_STATUS_FILE = self.alt["SPAM_STATUS_FILE"]
         poppy_lib.CARD_DIR = self.alt["CARD_DIR"]
         shutil.rmtree(self.tmp, ignore_errors=True)
 
@@ -91,11 +99,12 @@ class EndredaktionTempFall(unittest.TestCase):
     def schreibe_post(self, slug, *, draft=True, body=None, titel=GUTER_TITEL,
                       description=GUTE_DESC, ai_generated=False,
                       extra_fm=""):
+        heute = datetime.date.today().isoformat()
         fm = (
             "---\n"
             f"title: {json.dumps(titel, ensure_ascii=False)}\n"
             f"description: {json.dumps(description, ensure_ascii=False)}\n"
-            "date: 2026-10-03T08:00:00Z\n"
+            f"date: {heute}T08:00:00Z\n"
             + ("draft: true\n" if draft else "draft: false\n")
             + 'tags: ["Strom sparen"]\n'
             + ("ai_generated: true\n" if ai_generated else "")
@@ -278,6 +287,65 @@ class TestMastodon(EndredaktionTempFall):
         self.assertTrue(karte["erzeugnisse"].get("mastodon_gesendet"))
         self.assertEqual(m.call_args[0][0].count("https://franksfinanzcheck"
                                                 ".de/posts/"), 1)
+
+
+class TestSpamSchutz(EndredaktionTempFall):
+    """Premium-Spam-Schutz: E12, Spam-Status-Handshake, Wochenbudget."""
+
+    def test_e12_near_dup_blockiert_freigabe(self):
+        # LIVE-Artikel mit demselben Körper → Entwurf ist ein Klon
+        self.schreibe_post("2026-10-03-live-original", draft=False)
+        pfad = self.schreibe_post("2026-10-04-klon-entwurf")
+        summary = er.lauf(er.lade_config())
+        zeile = next(z for z in summary["details"]
+                     if z["slug"] == "2026-10-04-klon-entwurf")
+        self.assertEqual(zeile["zustand"], "blockiert")
+        self.assertIn("E12", {f["code"] for f in zeile["funde"]})
+        self.assertFalse(zeile["freigabe"])
+        self.assertNotIn("cadence_wait", self.lies(pfad))
+
+    def test_spam_status_rot_sperrt_auto_freigabe(self):
+        self.schreibe_post("2026-10-03-gruen-aber-rot-status")
+        with open(er.SPAM_STATUS_FILE, "w", encoding="utf-8") as fh:
+            json.dump({"urteil": "rot",
+                       "probleme": ["KI-Anteil live: 90 %"]}, fh)
+        summary = er.lauf(er.lade_config())
+        self.assertEqual(summary["freigaben"], 0)
+        zeile = summary["details"][0]
+        self.assertEqual(zeile["zustand"], "gruen")
+        self.assertIn("Spam-Schutz", zeile.get("freigabe_grund", ""))
+
+    def test_fehlendes_statusfile_sperrt_fail_closed(self):
+        self.schreibe_post("2026-10-03-ohne-status")
+        os.remove(er.SPAM_STATUS_FILE)
+        summary = er.lauf(er.lade_config())
+        self.assertEqual(summary["freigaben"], 0)
+        self.assertIn("kein Spam-Statusfile",
+                      summary["details"][0].get("freigabe_grund", ""))
+
+    def test_wochenbudget_voll_sperrt(self):
+        # Budget 1/Woche ist bereits durch eine Freigabe von heute belegt.
+        # (Eigenständiger Körper/Titel, damit nicht E10/E12 vorher greifen.)
+        anderer = ("## Andere Preise\n\n" + ABSATZ + " " + ABSATZ + "\n\n"
+                   "## Andere Fristen\n\n" + ABSATZ + "\n\n"
+                   "## Anderer Vertrag\n\n" + ABSATZ + "\n\n"
+                   + ("Die Rate bleibt gleich. " * 400))
+        self.schreibe_post(
+            "2026-10-03-bereits-freigegeben", draft=False,
+            extra_fm="endredaktion_status: freigegeben\n",
+            titel="Gaskosten senken: der andere Weg",
+            description="Gaskosten senken mit klaren Schritten und "
+                        "ehrlichen Zahlen für deinen Haushalt im Alltag.",
+            body=anderer)
+        with open(er.CONFIG_FILE, "w", encoding="utf-8") as fh:
+            fh.write("modus: automatisch\nmax_freigaben_pro_lauf: 1\n"
+                     "auto_freigaben_max_pro_woche: 1\n")
+        pfad = self.schreibe_post("2026-10-04-zweiter-gruener")
+        summary = er.lauf(er.lade_config())
+        self.assertEqual(summary["freigaben"], 0)
+        self.assertIn("Wochenbudget",
+                      summary["details"][0].get("freigabe_grund", ""))
+        self.assertNotIn("cadence_wait", self.lies(pfad))
 
 
 if __name__ == "__main__":

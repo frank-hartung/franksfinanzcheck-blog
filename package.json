@@ -106,7 +106,12 @@
     "release:scorecard": "python3 scripts/release_scorecard.py",
     "release:bestand": "python3 scripts/release_scorecard.py --live --streng",
     "release:artikel": "python3 scripts/release_scorecard.py --slug",
-    "test:release": "python3 scripts/release_scorecard.py --selftest && python3 -m unittest scripts.tests.test_release_scorecard"
+    "test:release": "python3 scripts/release_scorecard.py --selftest && python3 -m unittest scripts.tests.test_release_scorecard",
+    "spam:check": "python3 scripts/spam_schutz_wache.py",
+    "spam:messen": "python3 scripts/spam_schutz_wache.py --nur-messen",
+    "spam:status": "python3 scripts/spam_schutz_wache.py --json",
+    "spam:notbremse": "python3 -c \"import json;s=json.load(open('data/spam_schutz_status.json'));print('Urteil:',s['urteil'],'| Probleme:',s['probleme'])\"",
+    "test:spam": "python3 -m unittest scripts.tests.test_spam_schutz_wache"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

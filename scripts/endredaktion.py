@@ -70,11 +70,13 @@ import length_policy  # noqa: E402
 import readability_check  # noqa: E402
 
 from generate_drafts import PROFI_FLOSKELN  # noqa: E402  (KI-Floskel-SSOT)
+from plagiat_guard import hamming, normalize, simhash  # noqa: E402 (SSOT)
 
 import ki_shared as ks  # noqa: E402
 
 CONFIG_FILE = os.path.join(BLOG_DIR, "data", "endredaktion.yaml")
 REPORT_FILE = os.path.join(BLOG_DIR, "ENDREDAKTION-REPORT.md")
+SPAM_STATUS_FILE = os.path.join(BLOG_DIR, "data", "spam_schutz_status.json")
 
 ROLLE = "endredaktion"
 
@@ -89,6 +91,14 @@ DEFAULT_CONFIG = {
     "kanal_blog": True,
     "kanal_mastodon": True,
     "mastodon_max_pro_lauf": 1,
+    # Spam-Schutz (Premium): rollendes Wochenbudget für Auto-Freigaben …
+    "auto_freigaben_max_pro_woche": 3,
+    # … Near-Duplicate-Grenzen (SimHash-Hamming, SSOT plagiat_guard)
+    "near_dup_hamming_rot": 10,
+    "near_dup_hamming_gelb": 14,
+    # … und der Handshake mit der Spam-Schutz-Wache: Ohne gültig grünes/
+    # gelbes Statusfile gibt es KEINE Auto-Freigabe (fail-closed).
+    "spam_status_erforderlich": True,
 }
 
 LEKTOR_SYSTEM = """Du bist der Lektor der Redaktion von FranksFinanzcheck \
@@ -215,8 +225,9 @@ def _fm_set(fm: str, key: str, wert: str) -> str:
 
 
 # ---------------------------------------------------------------- Gate-Suite
-def pruefe_artikel(artikel: dict) -> list[dict]:
+def pruefe_artikel(artikel: dict, cfg: dict | None = None) -> list[dict]:
     """Die gesamte Gate-Suite für EINEN Entwurf. Funde sortiert nach Schwere."""
+    cfg = cfg or lade_config()
     funde: list[dict] = []
     body, titel = artikel["body"], artikel["titel"]
 
@@ -333,6 +344,45 @@ def pruefe_artikel(artikel: dict) -> list[dict]:
         funde.append(fund("E11", "gelb",
                           f"Description {d_len} Zeichen (Optimum 120–158)",
                           fixbar=True))
+
+    # E12 – Near-Duplicate gegen den LIVE-Bestand (Spam-Schutz).
+    # SimHash/Hamming aus plagiat_guard (SSOT): Ein Entwurf, der einem
+    # Live-Artikel zu ähnlich ist, erzeugt Duplicate Content und
+    # Keyword-Kannibalisierung – genau das, was Google als
+    # „Scaled Content Abuse“ wertet. Er wird NIE automatisch freigegeben.
+    try:
+        eigener = simhash(normalize(body))
+        for path in post_utils.list_post_paths():
+            if path == artikel["path"]:
+                continue
+            try:
+                with open(path, encoding="utf-8") as fh:
+                    kopf = fh.read(2500)
+            except OSError:
+                continue
+            if re.search(r"(?m)^draft:\s*true", kopf):
+                continue  # nur LIVE-Artikel sind Referenz
+            with open(path, encoding="utf-8") as fh:
+                teile = fh.read().split("---", 2)
+            if len(teile) < 3:
+                continue
+            abstand = hamming(eigener, simhash(normalize(teile[2])))
+            if abstand <= int(cfg["near_dup_hamming_rot"]):
+                funde.append(fund("E12", "rot",
+                                  f"Near-Duplicate (SimHash-Abstand {abstand}) "
+                                  f"zu LIVE-Artikel {post_utils.slug_of(path)} "
+                                  "– eigenständigen Artikel schreiben"))
+                break
+            if abstand <= int(cfg["near_dup_hamming_gelb"]):
+                funde.append(fund("E12", "gelb",
+                                  f"Ähnlichkeit (SimHash-Abstand {abstand}) zu "
+                                  f"{post_utils.slug_of(path)} – Politur muss "
+                                  "eigenständige Formulierungen finden",
+                                  fixbar=True))
+    except Exception as e:  # noqa: BLE001 – ohne Mess KEIN grünes Urteil
+        funde.append(fund("E12", "gelb",
+                          f"Near-Dup-Prüfung nicht möglich ({e}) – "
+                          "keine Freigabe ohne Messung"))
 
     funde.sort(key=lambda f: 0 if f["schwere"] == "rot" else 1)
     return funde
@@ -533,6 +583,55 @@ def mastodon_lauf(cfg: dict) -> list[str]:
     return zeilen
 
 
+# ---------------------------------------------------------------- Spam-Schutz-Handshake
+def spam_status_pruefen(cfg: dict) -> tuple[bool, str]:
+    """Auto-Freigabe nur mit gültigem (nicht-rotem) Spam-Status.
+
+    Fail-closed: kein Statusfile oder rot → keine Auto-Freigabe.
+    Die Spam-Schutz-Wache (scripts/spam_schutz_wache.py) schreibt das
+    File täglich VOR diesem Lauf. Notbremsen setzen zusätzlich direkt
+    modus: manuell – dieser Check ist die zweite Verteidigungslinie."""
+    if not os.path.exists(SPAM_STATUS_FILE):
+        if cfg.get("spam_status_erforderlich", True):
+            return False, ("kein Spam-Statusfile (Wache noch nicht gelaufen?) "
+                           "– Auto-Freigabe gesperrt (fail-closed)")
+        return True, "kein Spam-Statusfile (nicht erforderlich)"
+    try:
+        with open(SPAM_STATUS_FILE, encoding="utf-8") as fh:
+            status = json.load(fh)
+        urteil = str(status.get("urteil", "")).lower()
+    except Exception as e:  # noqa: BLE001 – unlesbares File = gesperrt
+        return False, f"Spam-Statusfile nicht lesbar ({e}) – gesperrt"
+    if urteil == "rot":
+        probleme = "; ".join(status.get("probleme") or [])[:200]
+        return False, (f"Spam-Schutz-Wache ROT ({probleme}) – "
+                       "Auto-Freigabe gesperrt, Notbremse prüfen")
+    return True, f"Spam-Schutz-Wache {urteil} – Auto-Freigabe erlaubt"
+
+
+def wochenbudget_status(cfg: dict) -> tuple[int, bool]:
+    """(belegt, voll) – Auto-Freigaben der letzten 7 Tage gegen das Budget.
+
+    Signal: endredaktion_status: freigegeben + Veröffentlichungsdatum im
+    7-Tage-Fenster (cadence_guard setzt das Datum bei der Promotion)."""
+    vor7 = (datetime.date.today()
+            - datetime.timedelta(days=6)).isoformat()
+    heute = datetime.date.today().isoformat()
+    belegt = 0
+    for path in post_utils.list_post_paths():
+        try:
+            with open(path, encoding="utf-8") as fh:
+                kopf = fh.read(2500)
+        except OSError:
+            continue
+        if not re.search(r"(?m)^endredaktion_status:\s*freigegeben", kopf):
+            continue
+        m = re.search(r"(?m)^date:\s*(\d{4}-\d{2}-\d{2})", kopf)
+        if m and vor7 <= m.group(1) <= heute:
+            belegt += 1
+    return belegt, belegt >= int(cfg["auto_freigaben_max_pro_woche"])
+
+
 # ---------------------------------------------------------------- Lauf
 def lauf(cfg: dict, *, nur_pruefen: bool = False,
          slug_filter: str | None = None) -> dict:
@@ -545,9 +644,18 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
     if not entwuerfe:
         return summary
 
+    # Lauf-Vorbedingungen (Premium-Spam-Schutz): Spam-Status + Wochenbudget
+    spam_ok, spam_hinweis = spam_status_pruefen(cfg)
+    budget_belegt, budget_voll = wochenbudget_status(cfg)
+    if not spam_ok or budget_voll:
+        print(f"  ⚠ Auto-Freigabe gesperrt: {spam_hinweis}"
+              + (f" | Wochenbudget {budget_belegt}/"
+                 f"{cfg['auto_freigaben_max_pro_woche']} ausgeschöpft"
+                 if budget_voll else ""))
+
     freigaben = 0
     for artikel in entwuerfe:
-        funde = pruefe_artikel(artikel)
+        funde = pruefe_artikel(artikel, cfg)
         zustand = urteil(funde)
         zeile = {"slug": artikel["slug"], "zustand": zustand, "funde": funde,
                  "fixes": [], "freigabe": False}
@@ -557,7 +665,7 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
             fixes = deterministische_fixes(artikel, funde)
             zeile["fixes"] = fixes
             if fixes:
-                funde = pruefe_artikel(artikel)  # neu bewerten
+                funde = pruefe_artikel(artikel, cfg)  # neu bewerten
                 zustand = urteil(funde)
                 zeile["zustand"] = zustand
 
@@ -566,7 +674,7 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
             for runde in range(max(1, int(cfg["max_politur_versuche"]))):
                 ok, provider = ki_politur(artikel, funde, cfg)
                 if ok:
-                    funde = pruefe_artikel(artikel)
+                    funde = pruefe_artikel(artikel, cfg)
                     zustand = urteil(funde)
                     zeile["politur"] = provider
                     if zustand != "optimieren":
@@ -576,12 +684,19 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
                     break
             zeile["zustand"] = zustand
 
-        # 3) Freigabe (nur grün + Modus automatisch + Deckel)
+        # 3) Freigabe (nur grün + Modus automatisch + Spam-Schutz + Budget
+        #    + Deckel – die Premium-Kette gegen Scaled Content Abuse)
         if (zustand == "gruen" and not nur_pruefen
                 and cfg["modus"] == "automatisch" and cfg["kanal_blog"]
                 and not artikel["cadence_wait"]
                 and freigaben < int(cfg["max_freigaben_pro_lauf"])):
-            if gib_frei(artikel):
+            if not spam_ok:
+                zeile["freigabe_grund"] = "Spam-Schutz: " + spam_hinweis
+            elif budget_voll:
+                zeile["freigabe_grund"] = (
+                    f"Wochenbudget ausgeschöpft ({budget_belegt}/"
+                    f"{cfg['auto_freigaben_max_pro_woche']})")
+            elif gib_frei(artikel):
                 zeile["freigabe"] = True
                 freigaben += 1
                 summary["freigaben"] += 1
@@ -595,6 +710,8 @@ def lauf(cfg: dict, *, nur_pruefen: bool = False,
 
 def schreibe_report(cfg: dict, summary: dict, mastodon: list[str]) -> None:
     stamp = datetime.datetime.now(datetime.timezone.utc)
+    _, spam_hinweis = spam_status_pruefen(cfg)
+    budget_belegt, _ = wochenbudget_status(cfg)
     zeilen = [
         "# ENDREDAKTION-REPORT",
         "",
@@ -602,10 +719,13 @@ def schreibe_report(cfg: dict, summary: dict, mastodon: list[str]) -> None:
         "scripts/endredaktion.py erzeugt._",
         "",
         f"- **Modus:** {cfg['modus']} | Freigaben diesen Lauf: "
-        f"{summary['freigaben']} (Deckel {cfg['max_freigaben_pro_lauf']})",
+        f"{summary['freigaben']} (Deckel {cfg['max_freigaben_pro_lauf']}/Lauf, "
+        f"{cfg['auto_freigaben_max_pro_woche']}/Woche)",
         f"- **Entwürfe geprüft:** {summary['geprueft']} – "
         f"{summary['gruen']} grün, {summary['optimiert']} optimiert, "
         f"{summary['blockiert']} blockiert",
+        f"- **Spam-Schutz:** {spam_hinweis} | Wochenbudget: {budget_belegt}/"
+        f"{cfg['auto_freigaben_max_pro_woche']} belegt",
         "- **Veröffentlichung:** ausschließlich über die Re-Queue → "
         "cadence_guard (Mo/Mi/Fr, 2–3 Artikel/Tag) – nie direkt.",
         "- **Newsletter:** läuft eigenständig über newsletter-daily "
@@ -626,6 +746,8 @@ def schreibe_report(cfg: dict, summary: dict, mastodon: list[str]) -> None:
         if z["freigabe"]:
             zeilen.append("- ✅ **In der Re-Queue** – cadence_guard "
                           "veröffentlicht ihn am nächsten Publikationstag.")
+        if z.get("freigabe_grund"):
+            zeilen.append(f"- ⛔ Freigabe gesperrt: {z['freigabe_grund']}")
         for f in z["funde"]:
             zeichen = {"rot": "🔴", "gelb": "🟡", "hinweis": "🔵"}[
                 f["schwere"]]

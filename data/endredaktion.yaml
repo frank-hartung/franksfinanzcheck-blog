@@ -33,3 +33,16 @@ min_behalte_laenge_prozent: 85 # Politur darf max. 15 % kürzen
 kanal_blog: true               # Blog-Entwürfe prüfen/optimieren/freigeben
 kanal_mastodon: true           # Poppy-Social-Texte posten (erst wenn Artikel LIVE)
 mastodon_max_pro_lauf: 1       # max. 1 Mastodon-Post pro Lauf
+
+# ---- Spam-Schutz (Premium, ab 03.10.2026) ----
+# Rollendes Wochenbudget: max. so viele Auto-Freigaben in 7 Tagen.
+auto_freigaben_max_pro_woche: 3
+# Near-Duplicate-Grenzen (SimHash-Hamming-Abstand zum LIVE-Bestand,
+# SSOT: scripts/plagiat_guard.py). ≤ rot = nie freigeben,
+# ≤ gelb = Politur muss eigenständige Formulierungen finden.
+near_dup_hamming_rot: 10
+near_dup_hamming_gelb: 14
+# Handshake mit der Spam-Schutz-Wache: Ohne gültiges Statusfile
+# (data/spam_schutz_status.json) gibt es KEINE Auto-Freigabe
+# (fail-closed). Auf false nur im bewussten Ausnahmefall.
+spam_status_erforderlich: true

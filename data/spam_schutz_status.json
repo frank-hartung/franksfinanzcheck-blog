@@ -1,0 +1,18 @@
+{
+  "stand": "2026-10-03T17:47:10Z",
+  "urteil": "gruen",
+  "probleme": [],
+  "kpis": {
+    "live_artikel": 38,
+    "ki_artikel": 12,
+    "ki_anteil_prozent": 31.6,
+    "tempo_max_pro_tag": 3,
+    "tempo_letzte7_tage": 5,
+    "auto_freigaben_letzte7_tage": 0,
+    "near_dup_paare": 0,
+    "near_dup_beispiele": [],
+    "thin_live": [],
+    "titel_duplikate": [],
+    "offenlegung_fehlt": []
+  }
+}

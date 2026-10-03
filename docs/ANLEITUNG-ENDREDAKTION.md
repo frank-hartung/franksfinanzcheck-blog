@@ -25,18 +25,20 @@ Veröffentlicher**: cadence_guard bleibt der einzige Weg ins Live-Blog.
 
 | Schritt | Was passiert | Werkzeuge (SSOT, wiederverwendet) |
 |---|---|---|
-| **1. Prüfen** | 11 Gates je Entwurf → Urteil 🔴 blockiert / 🟡 optimieren / ✅ grün / 🔵 Hinweis | `length_policy`, `check_titles`, `readability_check`, `grammar_check`, `PROFI_FLOSKELN`, URL-Hygiene, Offenlegungs-Check, Duplikat-Wache |
+| **1. Prüfen** | 12 Gates je Entwurf → Urteil 🔴 blockiert / 🟡 optimieren / ✅ grün / 🔵 Hinweis | `length_policy`, `check_titles`, `readability_check`, `grammar_check`, `PROFI_FLOSKELN`, URL-Hygiene, Offenlegungs-Check, Duplikat-Wache |
 | **2. Optimieren** | Erst deterministische Fixes (URLs, Titel, Description, CTA/Offenlegung), dann EINE KI-Politur gegen die konkrete Fundliste | Gratis-Kette Groq → Gemini über `llm_client` |
 | **3. Freigeben** | Grüne Entwürfe → `park_state.rearm()` (identisch zu `ki_redaktion.py --promote`) | `cadence_guard` veröffentlicht Mo/Mi/Fr, 2–3 Artikel/Tag |
 
-**Die 11 Gates:** E1 TODO-Marker (🔴) · E2 Länge ≥ Floor (🟡) ·
+**Die 12 Gates:** E1 TODO-Marker (🔴) · E2 Länge ≥ Floor (🟡) ·
 E3 ≥ 3 H2-Abschnitte (🔴) · E4 KI-Floskeln (🟡) · E5 Titel-Qualität
 (R1–R5, 🟡/🔴) · E6 Flesch-Amstad ≥ 60 (🟡; < 45 = 🔴) ·
 E7 Grammatik (🔵 Hinweis – die Rechtschreib-Wache prüft Live-Artikel
 täglich selbst) · E8 URL-Leerzeichen (🟡, Auto-Fix) ·
 E9 Werbe-Offenlegung bei KI-Artikeln (🟡, Auto-Fix) ·
 E10 Duplikat-Titel (🔴, blockiert nur den neueren) ·
-E11 Description-Länge (🟡, Auto-Fix).
+E11 Description-Länge (🟡, Auto-Fix) ·
+E12 Near-Duplicate zum LIVE-Bestand (🔴 bei SimHash-Abstand ≤ 10,
+🟡 bei 11–14; SSOT: plagiat_guard – ein Klon wird NIE freigegeben).
 
 ## 3. Sicherheitsvertrag der KI-Politur
 
@@ -104,15 +106,22 @@ Ein-Klick-Prozess pro Artikel (`python3 scripts/ki_redaktion.py --promote
 | `min_behalte_laenge_prozent` | `85` | Politur darf max. 15 % kürzen |
 | `kanal_blog` / `kanal_mastodon` | `true` | Kanäle an/aus |
 | `mastodon_max_pro_lauf` | `1` | Mastodon-Deckel |
+| `auto_freigaben_max_pro_woche` | `3` | Rollendes Wochenbudget Auto-Freigaben |
+| `near_dup_hamming_rot` / `near_dup_hamming_gelb` | `10` / `14` | E12-Schwellen (SimHash) |
+| `spam_status_erforderlich` | `true` | Ohne gültiges Spam-Statusfile KEINE Auto-Freigabe (fail-closed) |
 
 ## 7. Selbsttest & Pflege
 
 ```bash
-npm run test:endredaktion   # Selbsttest + 13 Unit-Tests (fail-closed)
+npm run test:endredaktion   # Selbsttest + 17 Unit-Tests (fail-closed)
 ```
 
 Die Tests frieren die Kernversprechen ein: TODO-Sperre, Duplikat-Logik
 (nur der neuere blockiert), Freigabe nur über `cadence_wait` (draft bleibt
 true), Deckel & Kill-Switch, Politur-Sicherheitsvertrag (Link-Identität!),
-Mastodon erst nach Live-Gang + Dedupe. Bei Gate-Änderungen bitte
+Mastodon erst nach Live-Gang + Dedupe – und seit dem Premium-Schutz:
+E12 blockiert Klone gegen den Live-Bestand, ROTER/fehlender Spam-Status
+der Wache sperrt Auto-Freigaben (fail-closed), das Wochenbudget
+drosselt die Freigabefrequenz. Details: docs/ANLEITUNG-SPAM-SCHUTZ.md.
+Bei Gate-Änderungen bitte
 `scripts/tests/test_endredaktion.py` miterweitern.
