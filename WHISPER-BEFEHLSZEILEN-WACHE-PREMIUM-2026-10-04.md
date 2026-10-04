@@ -49,6 +49,7 @@ gehen muss, bevor irgendein Backend den Pfad sieht:
 | NUL-Zeichen → `ValueError` | verhindert Format-String-/System-API-Missbrauch |
 | Dateiname beginnt mit `-` → `ValueError` | schließt Options-Verwechslung aus |
 | reguläre Datei erzwungen (echte Backends) | keine Verzeichnisse, Devices, FIFOs; Fehler bleibt `FileNotFoundError` wie bisher |
+| **Verzeichnis-Confinement** (echte Backends) | Audiodateien liegen zwingend innerhalb vertrauenswürdiger Wurzeln: Repo (`BLOG_DIR`), System-Temp und optional `WHISPER_AUDIO_ROOTS` — ein Webhook-Pfad kann damit nie beliebige Host-Dateien als Transkriptionsquelle missbrauchen |
 | Mock-Backend ausgenommen | hermetische Selbsttests & CI bleiben ohne Modell lauffähig |
 
 `transcribe()` kanonisiert genau einmal und reicht **nur** den Kanon weiter —
@@ -107,6 +108,21 @@ Wacht geprüft hat — ein Austausch des Pfades zwischen Prüfung und Ausführun
 
 ---
 
+### Nachtrag (gleicher Tag): Pfad-Confinement schließt die Folge-Befunde
+
+Der CodeQL-Lauf zum Pull Request bestätigte die Befehlszeilen-Reparatur (kein
+„Uncontrolled command line“ mehr) und meldete als Folgebefunde zwei neue
+**Pfad-Befunde (High)** desselben Webhook-Flusses — `os.path.isfile` und
+`os.open` mit dem externen Pfad: Wer den Bridge-Port erreicht, könnte die
+Engine beliebige Host-Dateien lesen lassen (Transkript landet im Webhook-Feedback
+bzw. Entwurf). Das war kein neuer Fehler der Reparatur, sondern das gleiche
+Eingangsproblem in der Datei-Zugriffsschicht — und wird mit derselben Disziplin
+geschlossen: **Confinement auf vertrauenswürdige Wurzeln** (`str.startswith`-
+Wächter, das von CodeQL als SafeAccessCheck anerkannte Muster). Die Engine
+liest Audiodateien nur noch innerhalb des Repos, des System-Temp-Verzeichnisses
+und per `WHISPER_AUDIO_ROOTS` freigegebener Betreiber-Ordner. Das hermetische
+Mock-Backend bleibt ausgenommen (es öffnet keine Dateien).
+
 ## 3. Bewusste Abweichung vom Copilot-Autofix (mit Beleg)
 
 Der Autofix zu Meldung #559 schlug u. a. ein „`--`“ vor dem Dateiargument vor.
@@ -137,9 +153,9 @@ unterbrochen, nicht nur weggefiltert; das gilt für alle Eingänge gleichzeitig.
 | Verifikation | Ergebnis |
 |---|---|
 | `python3 scripts/whisper_engine.py --selftest` (inkl. neuer Abschnitt 6: Eingangs-Wacht & Prozesszeilen-Vertrag) | ✅ BESTANDEN |
-| `npm run test:blogautomatik` (31 Unit-Tests: u. a. `TestEingangsWacht`, `TestWhisperCppProzessvertrag`, `TestInboxFehlerisolation`, `TestQuelldateiHaertung`, `TestSprachNormalisierung`) | ✅ 31/31 |
+| `npm run test:blogautomatik` (38 Unit-Tests: u. a. `TestEingangsWacht`, `TestVerzeichnisConfinement`, `TestWhisperCppProzessvertrag`, `TestInboxFehlerisolation`, `TestQuelldateiHaertung`, `TestSprachNormalisierung`) | ✅ 38/38 |
 | `scripts/tests/test_command_execution_security.py` + neuer `WhisperEngineExternalPathContract` | ✅ inkl. „roher Pfad erreicht nie die Prozesszeile“ |
-| Gesamtdiscovery `python3 -m unittest discover -s scripts/tests` | ✅ 1723 Tests OK |
+| Gesamtdiscovery `python3 -m unittest discover -s scripts/tests` | ✅ 1729 Tests OK |
 | CI-Selbsttests (engine_generate, reserve_pool, cadence_guard, fm_boundary_guard ×2, social_studio, blogautomatik_orchestrator) | ✅ alle OK |
 | CLI-Angriffsproben (`-angriff.mp3`, NUL-Pfad, fehlende Datei auf echtem Backend) | ✅ Exit 2 mit klarer Meldung, kein Prozessstart |
 
@@ -151,6 +167,10 @@ unterbrochen, nicht nur weggefiltert; das gilt für alle Eingänge gleichzeitig.
 * **Windows:** Das whisper.cpp-Backend ist dort jetzt bewusst fail-closed
   gesperrt (kein `/dev/fd`-Kontrakt) und verweist auf faster-whisper. Franks
   dokumentierter Stack (Linux-Server, n8n/Docker, CI) ist nicht betroffen.
+* **Eigene Aufnahme-Ordner:** Liegen Sprachaufnahmen außerhalb des Repos
+  (z. B. `~/Aufnahmen`), werden sie über die Umgebungsvariable
+  `WHISPER_AUDIO_ROOTS` (Doppelpunkt-getrennte Pfadliste) freigegeben —
+  bewusste Betreiber-Entscheidung statt stiller Freigabe.
 * **Modelle:** ggml-Dateien liegen wie bisher unter `models/` — jetzt
   auflösungsunabhängig vom Arbeitsverzeichnis (bisher brach der relative Pfad,
   wenn die Engine aus n8n/Schaltwerk heraus gestartet wurde).
@@ -164,7 +184,7 @@ unterbrochen, nicht nur weggefiltert; das gilt für alle Eingänge gleichzeitig.
 |---|---|
 | `scripts/whisper_engine.py` | Eingangs-Wacht, Deskriptor-Übergabe, Whitelists, fail-closed, Selftest-Abschnitt 6, CLI-Fehlerpfade, Frontmatter-Härtung, Inbox-Isolation |
 | `scripts/n8n_bridge.py` | Webhook-Fehlerisolation um `transcribe()` |
-| `scripts/tests/test_whisper_engine.py` | +15 Regressionstests (Eingangs-Wacht, Prozessvertrag, Inbox, Frontmatter, Sprache) |
+| `scripts/tests/test_whisper_engine.py` | +22 Regressionstests (Eingangs-Wacht, Verzeichnis-Confinement, Prozessvertrag, Inbox, Frontmatter, Sprache) |
 | `scripts/tests/test_command_execution_security.py` | +`WhisperEngineExternalPathContract` (2 Tests) gemäß SECURITY.md-Pflicht |
 | `SECURITY.md` | Vertrag „Externe Dateipfade“ dokumentiert |
 | `docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md` | Abschnitt 7 „Sicherheits-Vertrag der Whisper-Engine“ |

@@ -49,10 +49,12 @@ AUFRUF:
 
 SICHERHEIT (Code-Scanning-Alert 60 / Meldung #559, 04.10.2026):
     Externe Audiodatei-Pfade (CLI, n8n-Webhook, Inbox-Wache) werden vor jeder
-    Backend-Weitergabe kanonisiert und geprüft. Das whisper.cpp-Backend erhält
-    die Audiodatei ausschließlich als geöffneten Datei-Deskriptor
-    (-f /proc/self/fd/<n> bzw. /dev/fd/<n>, pass_fds) — rohe Pfade, Modell-
-    oder Sprachwerte erreichen niemals ungeprüft eine Prozesszeile.
+    Backend-Weitergabe kanonisiert, auf vertrauenswürdige Verzeichnis-Wurzeln
+    (Repo, System-Temp, optional WHISPER_AUDIO_ROOTS) begrenzt und geprüft.
+    Das whisper.cpp-Backend erhält die Audiodatei ausschließlich als geöffneten
+    Datei-Deskriptor (-f /proc/self/fd/<n> bzw. /dev/fd/<n>, pass_fds) — rohe
+    Pfade, Modell- oder Sprachwerte erreichen niemals ungeprüft eine
+    Prozesszeile.
     Details: WHISPER-BEFEHLSZEILEN-WACHE-PREMIUM-2026-10-04.md
 """
 from __future__ import annotations
@@ -123,6 +125,27 @@ WHISPER_LANGUAGES.update({
     "english": "en",
     "englisch": "en",
 })
+
+
+def _audio_vertrauenswurzeln() -> tuple[str, ...]:
+    """Vertrauenswürdige Verzeichnis-Wurzeln für Audiodateien (Meldung #559).
+
+    Die Engine liest Audiodateien ausschließlich innerhalb des Repos
+    (Inbox, data/audio, public/audio, …) und des System-Tempverzeichnisses
+    (Ad-hoc-Aufnahmen, QA- und Testfixtures). Der Betreiber kann eigene
+    Aufnahme-Ordner über die Umgebungsvariable ``WHISPER_AUDIO_ROOTS``
+    (Pfadliste, Doppelpunkt-getrennt) freigeben. Alles außerhalb wird
+    abgelehnt — ein Webhook-Pfad kann damit nie beliebige Dateien des
+    Hosts als Transkriptionsquelle missbrauchen.
+    """
+    wurzeln = [
+        os.path.realpath(BLOG_DIR) + os.sep,
+        os.path.realpath(tempfile.gettempdir()) + os.sep,
+    ]
+    for extra in os.environ.get("WHISPER_AUDIO_ROOTS", "").split(os.pathsep):
+        if extra.strip():
+            wurzeln.append(os.path.realpath(extra.strip()) + os.sep)
+    return tuple(dict.fromkeys(wurzeln))
 
 
 def _normalize_language(value: str | None) -> str:
@@ -319,8 +342,12 @@ class WhisperEngine:
           (Schutz vor Options-Verwechslung am Prozessstart),
         · löst den Pfad zu einem absoluten, symlink-freien Kanon auf
           (os.path.realpath),
-        · erzwingt für echte Backends ein vorhandenes, reguläres Datei-Objekt;
-          das hermetische Mock-Backend bleibt für Tests offen.
+        · erzwingt für echte Backends, dass die Datei innerhalb der
+          vertrauenswürdigen Verzeichnis-Wurzeln liegt
+          (`_audio_vertrauenswurzeln`) — externe Webhook-Pfade können so
+          keine beliebigen Host-Dateien erreichen — und dass sie als
+          reguläres Datei-Objekt existiert; das hermetische Mock-Backend
+          bleibt für Tests offen.
 
         Rückgabe ist ausschließlich der geprüfte Kanon — jede Weitergabe an
         Backends, Prozessargumente und Ergebnispfade erfolgt mit diesem Wert.
@@ -336,8 +363,19 @@ class WhisperEngine:
                 "Dateiname darf nicht mit „-“ beginnen "
                 f"(Schutz vor Options-Verwechslung): {os.path.basename(resolved)!r}"
             )
-        if self._resolved_backend != "mock" and not os.path.isfile(resolved):
-            raise FileNotFoundError(f"Audiodatei nicht gefunden oder keine reguläre Datei: {raw}")
+        if self._resolved_backend != "mock":
+            # Verzeichnis-Confinement und Existenzprüfung nur für echte Backends:
+            # Das hermetische Mock-Backend öffnet keine Dateien und bleibt für
+            # Offline-Tests aus jedem Arbeitsverzeichnis lauffähig.
+            wurzeln = _audio_vertrauenswurzeln()
+            if not resolved.startswith(wurzeln):
+                raise ValueError(
+                    "Audiodatei liegt außerhalb der erlaubten Verzeichnisse "
+                    f"({', '.join(wurzeln)}): {os.path.basename(resolved)!r} — "
+                    "eigene Aufnahme-Ordner über WHISPER_AUDIO_ROOTS freigeben."
+                )
+            if not os.path.isfile(resolved):
+                raise FileNotFoundError(f"Audiodatei nicht gefunden oder keine reguläre Datei: {raw}")
         return resolved
 
     def _transcribe_faster_whisper(
@@ -932,6 +970,20 @@ def selftest() -> bool:
         raise AssertionError("Führender Bindestrich wurde nicht abgelehnt")
     except ValueError:
         pass
+
+    # Verzeichnis-Confinement: nur echte Backends lesen Dateien — und nur
+    # innerhalb der vertrauenswürdigen Wurzeln (Webhook-Pfade sperren).
+    nur_repo = (os.path.realpath(BLOG_DIR) + os.sep,)
+    with mock.patch(f"{__name__}._audio_vertrauenswurzeln", return_value=nur_repo):
+        try:
+            cpp_engine = WhisperEngine(backend="whisper.cpp", model="base", language="de")
+            cpp_engine._safe_audio_path(tmp_audio)  # liegt im System-Temp, nicht im Repo
+            raise AssertionError("Pfad außerhalb der Wurzeln wurde angenommen")
+        except ValueError:
+            pass
+    wurzeln = _audio_vertrauenswurzeln()
+    assert (os.path.realpath(BLOG_DIR) + os.sep) in wurzeln, "Repo-Wurzel fehlt"
+    assert (os.path.realpath(tempfile.gettempdir()) + os.sep) in wurzeln, "Temp-Wurzel fehlt"
 
     cpp_engine = WhisperEngine(backend="whisper.cpp", model="base", language="de")
     try:

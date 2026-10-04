@@ -38,7 +38,10 @@ Inbox-Verzeichnis) übergeben, gilt ein verschärfter Vertrag, erzwungen durch
 `WhisperEngineExternalPathContract` im selben Regressionstest:
 
 1. Der Pfad wird vor der Übergabe zu einem absoluten Kanon aufgelöst und geprüft
-   (reguläre Datei, keine NUL-Zeichen, kein Dateiname mit führendem „-“).
+   (reguläre Datei, keine NUL-Zeichen, kein Dateiname mit führendem „-“) und
+   liegt zwingend innerhalb vertrauenswürdiger Verzeichnis-Wurzeln (Repo,
+   System-Temp, optional `WHISPER_AUDIO_ROOTS`) — ein Webhook-Pfad kann damit
+   keine beliebigen Host-Dateien als Eingabe missbrauchen.
 2. Statt des Pfades selbst wird nur ein geöffneter Datei-Deskriptor durchgereicht
    (`-f /proc/self/fd/<n>` mit `pass_fds`): Die Prozesszeile enthält strukturell
    keinen extern kontrollierten Wert, und der Kindprozess liest exakt den

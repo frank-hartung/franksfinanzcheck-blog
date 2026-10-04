@@ -153,7 +153,7 @@ npm run whisper:inbox
 | `npm run blogautomatik:selftest` | Prüft alle Systeme offline auf Herz und Nieren |
 | `npm run whisper:inbox` | Verarbeitet wartende Audiodateien in `data/whisper_inbox/` |
 | `npm run n8n:ping` | Misst Latenz und Erreichbarkeit von n8n |
-| `npm run test:blogautomatik` | Führt alle 31 Unit-Tests aus (inkl. Eingangs-Wacht & Prozesszeilen-Vertrag, Meldung #559) |
+| `npm run test:blogautomatik` | Führt alle 38 Unit-Tests aus (inkl. Eingangs-Wacht & Prozesszeilen-Vertrag, Meldung #559) |
 
 ---
 
@@ -165,8 +165,11 @@ Gilt für alle Eingänge — CLI, n8n-Webhook (`n8n_bridge.py`) und Inbox-Wache:
 1. **Eingangs-Wacht (`_safe_audio_path`):** Jeder Audiodatei-Pfad wird vor der
    Backend-Weitergabe zu einem absoluten, symlink-freien Kanon aufgelöst
    (`os.path.realpath`). NUL-Zeichen und Dateinamen mit führendem „-“ werden
-   abgelehnt (Schutz vor Options-Verwechslung); für echte Backends muss eine
-   vorhandene, reguläre Datei existieren. Abgelehnte Aufnahmen blockieren die
+   abgelehnt (Schutz vor Options-Verwechslung); für echte Backends muss die
+   Datei innerhalb vertrauenswürdiger Verzeichnis-Wurzeln liegen — Repo,
+   System-Temp und optional per Umgebungsvariable `WHISPER_AUDIO_ROOTS`
+   (Doppelpunkt-getrennte Pfadliste) freigegebene Aufnahme-Ordner — und als
+   reguläre Datei existieren. Abgelehnte Aufnahmen blockieren die
    Inbox-Verarbeitung nicht, sondern bleiben zur manuellen Prüfung liegen.
 2. **Deskriptor-Übergabe statt Pfad-Übergabe:** Das whisper.cpp-Backend öffnet
    die geprüfte Datei selbst und reicht dem Kindprozess ausschließlich

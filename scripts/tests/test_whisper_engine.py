@@ -159,6 +159,67 @@ class TestEingangsWacht(unittest.TestCase):
         self.assertEqual(res["file_path"], os.path.realpath(self.memo))
 
 
+class TestVerzeichnisConfinement(unittest.TestCase):
+    """Audiodateien dürfen nur innerhalb vertrauenswürdiger Wurzeln liegen
+    (Meldung #559, Nachtrag Pfad-Confinement): Ein Webhook-Pfad kann damit
+    keine beliebigen Host-Dateien als Transkriptionsquelle missbrauchen.
+    """
+
+    def setUp(self) -> None:
+        self.tmp_dir = tempfile.mkdtemp(prefix="test_whisper_confine_")
+        self.memo = os.path.join(self.tmp_dir, "memo.mp3")
+        with open(self.memo, "wb") as fh:
+            fh.write(b"RIFF")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp_dir, ignore_errors=True)
+
+    def test_datei_ausserhalb_der_wurzeln_wird_abgelehnt(self) -> None:
+        engine = whisper_engine.WhisperEngine(backend="whisper.cpp")
+        nur_repo = (os.path.realpath(whisper_engine.BLOG_DIR) + os.sep,)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=nur_repo):
+            with self.assertRaisesRegex(ValueError, "außerhalb der erlaubten Verzeichnisse"):
+                engine._safe_audio_path(self.memo)
+
+    def test_datei_innerhalb_der_wurzeln_wird_akzeptiert(self) -> None:
+        engine = whisper_engine.WhisperEngine(backend="whisper.cpp")
+        eigene_wurzel = (os.path.realpath(self.tmp_dir) + os.sep,)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=eigene_wurzel):
+            self.assertEqual(engine._safe_audio_path(self.memo), os.path.realpath(self.memo))
+
+    def test_mock_backend_bleibt_von_der_wurzelpruefung_ausgenommen(self) -> None:
+        engine = whisper_engine.WhisperEngine(backend="mock")
+        nur_leer = ("/gibt/es/nicht/",)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=nur_leer):
+            # Das hermetische Mock-Backend öffnet keine Dateien und bleibt
+            # aus jedem Arbeitsverzeichnis lauffähig:
+            self.assertTrue(os.path.isabs(engine._safe_audio_path(self.memo)))
+
+    def test_wurzeln_umfassen_repo_und_systemtemp(self) -> None:
+        wurzeln = whisper_engine._audio_vertrauenswurzeln()
+        self.assertIn(os.path.realpath(whisper_engine.BLOG_DIR) + os.sep, wurzeln)
+        self.assertIn(os.path.realpath(tempfile.gettempdir()) + os.sep, wurzeln)
+
+    def test_umgebungsvariable_erweitert_die_wurzeln(self) -> None:
+        extra = tempfile.mkdtemp(prefix="test_whisper_root_")
+        try:
+            with mock.patch.dict(os.environ, {"WHISPER_AUDIO_ROOTS": extra}):
+                wurzeln = whisper_engine._audio_vertrauenswurzeln()
+            self.assertIn(os.path.realpath(extra) + os.sep, wurzeln)
+        finally:
+            shutil.rmtree(extra, ignore_errors=True)
+
+    def test_webhook_pfad_ausserhalb_startet_kein_backend(self) -> None:
+        engine = whisper_engine.WhisperEngine(backend="whisper.cpp")
+        nur_repo = (os.path.realpath(whisper_engine.BLOG_DIR) + os.sep,)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=nur_repo), \
+             mock.patch.object(whisper_engine.shutil, "which", return_value="/usr/bin/whisper-cpp"), \
+             mock.patch.object(whisper_engine.subprocess, "run") as runner:
+            with self.assertRaises(ValueError):
+                engine.transcribe(self.memo)
+        runner.assert_not_called()
+
+
 class TestWhisperCppProzessvertrag(unittest.TestCase):
     """Prozesszeilen-Vertrag des whisper.cpp-Backends (Meldung #559).
 
