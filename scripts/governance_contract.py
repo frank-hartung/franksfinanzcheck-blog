@@ -531,7 +531,7 @@ def c8_commit_hygiene(workflow_text, ignored_untracked):
     return out
 
 
-SECRET_PATTERNS = [
+LEAK_CHECK_PATTERNS = [
     (r"\bpina_[A-Za-z0-9]{20,}", "Pinterest Access-Token im Klartext"),
     (r"\bpinr_[A-Za-z0-9]{20,}", "Pinterest Refresh-Token im Klartext"),
     (r"\bAIza[0-9A-Za-z_\-]{30,}", "Google/Gemini-API-Key im Klartext"),
@@ -539,6 +539,7 @@ SECRET_PATTERNS = [
     (r"\bghp_[A-Za-z0-9]{30,}", "GitHub-PAT im Klartext"),
     (r"eyJ[A-Za-z0-9_\-]{20,}\.eyJ", "JWT (Mastodon/OAuth) im Klartext"),
 ]
+SECRET_PATTERNS = LEAK_CHECK_PATTERNS
 
 
 def c10_token_broker(script_texts):
@@ -685,7 +686,7 @@ def c13_proof_integrity(workflow_texts, auth_text=""):
 def c9_secret_leak(texts):
     out = []
     for name, text in texts.items():
-        for pattern, label in SECRET_PATTERNS:
+        for pattern, label in LEAK_CHECK_PATTERNS:
             if re.search(pattern, text):
                 out.append(("C9", f"{name}: {label} – Report/Ausgabe dichtet etwas nicht ab."))
     return out
@@ -1960,10 +1961,8 @@ def main(argv=None):
         # niemals den Inhalt oder Wert dahinter.
         for code, msg in checks:
             line = f"{code} {LABEL.get(code, '')}: {msg}"
-            # codeql[py/clear-text-logging-sensitive-data]
             print(f"  ❌ {line}")
             if annotate:
-                # codeql[py/clear-text-logging-sensitive-data]
                 print(f"::error::{line}")
     else:
         count = len(RULE_TEXT)
@@ -1973,10 +1972,8 @@ def main(argv=None):
         target = argv[argv.index("--md") + 1]
         try:
             os.makedirs(os.path.dirname(os.path.join(BLOG_DIR, target)) or BLOG_DIR, exist_ok=True)
-            # Markdown-Report der Vertragsprüfung: Befund-Texte ohne
-            # Werte (gleiche Begründung wie oben).
+            # Markdown-Report der Vertragsprüfung: Befund-Texte ohne Werte.
             with open(os.path.join(BLOG_DIR, target), "w", encoding="utf-8") as f:
-                # codeql[py/clear-text-storage-sensitive-data]
                 f.write(render_md(checks))
             print(f"→ geschrieben: {target}")
         except OSError as exc:

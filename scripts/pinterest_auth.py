@@ -141,8 +141,15 @@ def _oauth_post(data: dict, app_id: str, app_secret: str) -> dict:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read().decode())
     except urllib.error.HTTPError as exc:
-        body = exc.read().decode()[:300]
-        raise RuntimeError(f"OAuth-Fehler (HTTP {exc.code}): {body}") from exc
+        err_msg = f"HTTP {exc.code}"
+        try:
+            raw_body = exc.read().decode("utf-8", errors="replace")[:300]
+            parsed = json.loads(raw_body)
+            if isinstance(parsed, dict):
+                err_msg = parsed.get("message") or parsed.get("error_description") or parsed.get("error") or err_msg
+        except Exception:
+            pass
+        raise RuntimeError(f"OAuth-Fehler (HTTP {exc.code}): {err_msg}") from exc
 
 
 def refresh_tokens(data: dict) -> dict:
@@ -293,8 +300,7 @@ def exchange_code(code: str) -> None:
             app_id, app_secret,
         )
     except RuntimeError as exc:
-        print(f"❌ {exc}")
-        print(f"→ {_explain_exchange_error(exc)}")
+        print(f"❌ {_explain_exchange_error(exc)}")
         sys.exit(1)
     if not resp.get("access_token") or not resp.get("refresh_token"):
         sys.exit("FEHLER: Pinterest lieferte keinen vollständigen Token-Satz "
@@ -348,14 +354,20 @@ def print_status() -> None:
               "python3 scripts/pinterest_token.py --status")
         return
     # Kein Token-Material ausgeben – auch keine Präfixe (#219: Logs sind öffentlich).
-    print(f"✔ Token-Datei vorhanden, gespeichert: {data.get('saved_at', '?')}")
-    print(f"✔ App-ID: {data.get('app_id')}")
-    print(f"✔ Scopes: {data.get('scope') or '(unbekannt – vor 08.09.2026 autorisiert)'}")
-    print(f"✔ Zuletzt erneuert: {data.get('refreshed_at', '?')} · Refresh rotiert: "
-          f"{data.get('refresh_rotated_at', '?')} · Ablauf Refresh: "
-          f"{data.get('refresh_expires_at', 'unbekannt')}")
-    print(f"✔ Access-Token: {'vorhanden' if data.get('access_token') else 'FEHLT'} · "
-          f"Refresh-Token: {'vorhanden' if data.get('refresh_token') else 'FEHLT'}")
+    saved_at = str(data.get("saved_at") or "?")
+    app_id = str(data.get("app_id") or "")
+    scope = str(data.get("scope") or "(unbekannt – vor 08.09.2026 autorisiert)")
+    refreshed_at = str(data.get("refreshed_at") or "?")
+    rotated_at = str(data.get("refresh_rotated_at") or "?")
+    expires_at = str(data.get("refresh_expires_at") or "unbekannt")
+    has_access = "vorhanden" if bool(data.get("access_token")) else "FEHLT"
+    has_refresh = "vorhanden" if bool(data.get("refresh_token")) else "FEHLT"
+
+    print(f"✔ Token-Datei vorhanden, gespeichert: {saved_at}")
+    print(f"✔ App-ID: {app_id}")
+    print(f"✔ Scopes: {scope}")
+    print(f"✔ Zuletzt erneuert: {refreshed_at} · Refresh rotiert: {rotated_at} · Ablauf Refresh: {expires_at}")
+    print(f"✔ Access-Token: {has_access} · Refresh-Token: {has_refresh}")
 
 
 def _selftest() -> int:

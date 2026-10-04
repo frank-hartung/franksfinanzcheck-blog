@@ -691,7 +691,7 @@ def sende_bestaetigung(token: str, root: str = BLOG_DIR, env: dict | None = None
             pass
     if rc == 0:
         worker_melden(base, key, token, "gesendet")
-        print(f"✅ Bestätigungsmail versendet an {hash16(email)} (Token …{token[-4:]}).")
+        print(f"✅ Bestätigungsmail versendet an {hash16(email)} (Ref {hash16(token)[:8]}).")
     elif rc == 1:
         worker_melden(base, key, token, "gesendet")
         print(f"⚠ Bestätigungsmail TEILWEISE an {hash16(email)} – Nachgang holt nach.")

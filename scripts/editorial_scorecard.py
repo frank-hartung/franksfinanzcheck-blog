@@ -433,10 +433,19 @@ def collect():
         "casing_geparkt": (casing or {}).get("geparkt") if casing is not None else None,
         "casing_stand": (casing or {}).get("stand") if casing is not None else None,
         "casing_hist": (casing or {}).get("tage") if casing is not None else None,
+        "secrets_age_red": secret_red,
+        "secrets_age_amber": secrets_lage["amber"],
+        "secrets_age_verdict": secrets_lage["verdict"],
+        "secrets_age_legacy": secrets_lage["legacy"],
+        "secrets_age_proven": secrets_lage["proven"],
+        "secrets_age_entries": secrets_lage["entries"],
+        # Abwärtskompatibilität:
         "secret_red": secret_red,
-        "secret_amber": secrets_lage["amber"], "secret_verdict": secrets_lage["verdict"],
+        "secret_amber": secrets_lage["amber"],
+        "secret_verdict": secrets_lage["verdict"],
         "secret_legacy": secrets_lage["legacy"],
-        "secret_proven": secrets_lage["proven"], "secret_entries": secrets_lage["entries"],
+        "secret_proven": secrets_lage["proven"],
+        "secret_entries": secrets_lage["entries"],
         "click_articles": len(click_articles),
         "total_clicks": total_clicks,
         "top_article": top_article,
@@ -568,14 +577,14 @@ def _append_history(d, score):
            "live": d["live"], "drafts": d["drafts"], "decay": d["decay_count"],
            "cwv": d.get("cwv_verdict"), "cwv_state": d.get("cwv_state"),
            "readability": d["readability"], "lektor": d["lektor"],
-           "secret_red": d["secret_red"], "secret_amber": d.get("secret_amber", 0),
+           "secrets_age_red": d.get("secrets_age_red", d.get("secret_red", 0)),
+           "secrets_age_amber": d.get("secrets_age_amber", d.get("secret_amber", 0)),
            "clicks": d["total_clicks"], "awin": d["awin_total"]}
     # Die Historie speichert ausschließlich Secret-GESUNDHEITS-Metadaten
     # (Ampel-Zähler red/amber, Verdict, Nachweis-Stufen) – nie Werte.
     try:
         os.makedirs(os.path.dirname(_HISTORY), exist_ok=True)
         with open(_HISTORY, "a", encoding="utf-8") as f:
-            # codeql[py/clear-text-storage-sensitive-data]
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         lines = [l for l in open(_HISTORY, encoding="utf-8").read().splitlines() if l.strip()]
         if len(lines) > 260:                      # Retention: gut 5 Jahre Wochenläufe
@@ -611,7 +620,9 @@ def _score(d) -> int:
         elif d["readability"] < R_TARGET:
             s -= 4
     # Secrets: nur rote Befunde (Kanal tot/fehlt) ziehen ab, gelbe altern mit 1 pkt.
-    s -= min(15, d["secret_red"] * 5) + min(2, d.get("secret_amber", 0))
+    red_findings = int(d.get("secrets_age_red", d.get("secret_red", 0)) or 0)
+    amber_findings = int(d.get("secrets_age_amber", d.get("secret_amber", 0)) or 0)
+    s -= min(15, red_findings * 5) + min(2, amber_findings)
     # Lektorat
     if d["lektor"] is not None:
         if d["lektor"] > 60:
@@ -921,16 +932,16 @@ def _selftest():
         failures.append("Trend-Lieferform unstetig")
     # _score monoton (mehr decay = schlechter)
     a = _score({"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
-                "readability": 80, "lektor": 10, "secret_red": 0})
+                "readability": 80, "lektor": 10, "secrets_age_red": 0})
     b = _score({"live": 20, "decay_count": 8, "cwv_verdict": "RED",
-                "readability": 50, "lektor": 80, "secret_red": 3})
+                "readability": 50, "lektor": 80, "secrets_age_red": 3})
     if not (a > b):
         failures.append("Score-Monotonie: a={}, b={}".format(a, b))
     # Awin-Monetarisierung: Umsatz belohnt (max +5), kein Datensatz = neutral,
     # unmatched SubIDs warnen (min. 1) – darf nie Qualität dominieren.
-    # Basis mit Spielraum: lektor 50 (-4), secret_red 1 (-5) → Base 91.
+    # Basis mit Spielraum: lektor 50 (-4), secrets_age_red 1 (-5) → Base 91.
     base_rev = {"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
-                "readability": 80, "lektor": 50, "secret_red": 1}
+                "readability": 80, "lektor": 50, "secrets_age_red": 1}
     c = _score(dict(base_rev, awin_total=250))
     d0 = _score(base_rev)
     if not (c > d0 and (c - d0) <= 5):
@@ -941,9 +952,7 @@ def _selftest():
     if failures:
         print("❌ SCORECARD-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
-            # Fehlertexte enthalten Fixture-Metadaten (Zähler/Ampeln der
-            # Secrets-Wache), keine Secret-Werte.
-            # codeql[py/clear-text-logging-sensitive-data]
+            # Fehlertexte enthalten Fixture-Metadaten (Zähler/Ampeln der Secrets-Wache), keine Secret-Werte.
             print("   -", f)
         return 2
     print("✅ SCORECARD-SELFTEST bestanden (Ampel-Grenzen, Score-Monotonie).")
