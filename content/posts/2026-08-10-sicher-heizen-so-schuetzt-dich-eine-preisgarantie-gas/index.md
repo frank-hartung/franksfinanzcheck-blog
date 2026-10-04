@@ -52,7 +52,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Nimm dir kurz Zeit und ziehe deinen aktuellen Vertrag sowie die letzte Abrechnung heran. Identifiziere den Arbeitspreis je kWh sowie den jährlichen Grundpreis. Notiere diese Werte deutlich. Markiere dir zudem das konkrete Datum, bis zu dem dein aktueller Preisschutz gilt. So kannst du sofort einordnen, ob eine Mitteilung deines Anbieters eine rechtlich zulässige Änderung oder einen Vertragsbruch darstellt.
 
-Erfasse danach deinen voraussichtlichen Jahresverbrauch. Simuliere mit diesem Wert mindestens zwei Vergleichsangebote. Ignoriere dabei im ersten Schritt den Neukundenbonus. Bei einem typischen Einfamilienhaus-Verbrauch von ca. 18.000 kWh machen bereits Unterschiede von ca. 0,4 bis 0,8 Cent pro kWh eine Summe von deutlich über 100 € im Jahr aus. Ein stabiler Preis im zweiten Jahr ist oft nachhaltiger als ein hoher Einmalrabatt zu Beginn.
+Erfasse danach deinen voraussichtlichen Jahresverbrauch. Simuliere mit diesem Wert mindestens zwei Vergleichsangebote. Ignoriere dabei im ersten Schritt den Neukundenbonus. Bei einem typischen Einfamilienhaus-Verbrauch von ca. 18.000 kWh machen bereits Unterschiede von ca. 0,4 bis 0,8 Cent pro kWh eine Summe von deutlich über 100 € im Jahr aus.
+
+Ein stabiler Preis im zweiten Jahr ist oft nachhaltiger als ein hoher Einmalrabatt zu Beginn.
 
 Setze dir zwei digitale Erinnerungen: Eine etwa acht Wochen vor Ablauf deines Preisschutzes und eine weitere zwei Wochen vor Ende deiner Kündigungsfrist. So agierst du proaktiv und gerätst nicht unter Zeitdruck, wenn neue Tarife gelten.
 

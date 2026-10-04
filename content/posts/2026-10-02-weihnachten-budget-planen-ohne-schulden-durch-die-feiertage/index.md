@@ -4,6 +4,7 @@ description: "Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, eine
 date: 2026-10-02T19:45:00Z
 draft: false
 reserve_published: 2026-10-02
+faktencheck: 2026-10-04
 tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

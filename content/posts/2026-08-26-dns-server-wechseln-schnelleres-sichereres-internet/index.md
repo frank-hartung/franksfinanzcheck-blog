@@ -121,7 +121,7 @@ Bekannte Phishing- und Malware-Seiten werden direkt blockiert. Dein Gerät baut 
 
 1. Browser öffnen, zu `http://fritz.box` navigieren und anmelden.
 2. Im linken Menü zu **Internet → Zugangsdaten → Namensserver** wechseln.
-3. Wähle **"Andere Resolver-Server verwenden"**.
+3. Wähle **"Andere DNS-Server verwenden"**.
 4. Trage ein:
    - **Bevorzugter Namensserver:** `1.1.1.1`
    - **Verzögerter DNS-Server:** `1.0.0.1`

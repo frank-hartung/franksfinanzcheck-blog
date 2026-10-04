@@ -4,6 +4,7 @@ description: "Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel
 date: 2026-10-02T21:37:08Z
 draft: false
 reserve_published: 2026-10-02
+faktencheck: 2026-10-04
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

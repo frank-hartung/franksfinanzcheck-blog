@@ -4,6 +4,7 @@ description: "Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche
 date: 2026-10-02T22:52:43Z
 draft: false
 reserve_published: 2026-10-02
+faktencheck: 2026-10-04
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
