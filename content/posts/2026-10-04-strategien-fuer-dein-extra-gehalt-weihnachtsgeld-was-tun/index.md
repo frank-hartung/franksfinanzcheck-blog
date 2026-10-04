@@ -44,7 +44,9 @@ Wir analysieren in diesem Artikel, welche Wege dein Vermögen wirklich voranbrin
 * **Zinseszins nutzen:** Schon kleine Einmalanlagen steigern dein Depotwert über Jahre massiv.
 * **Konditionen prüfen:** Vergleiche Konten und Depots, um Gebühren zu minimieren und Gewinne zu maximieren.
 
-## Weihnachtsgeld was tun? Die strategische Priorisierung
+## Weihnachtsgeld was tun?
+
+Die strategische Priorisierung
 Sobald die Sonderzahlung eintrifft, betrachte sie nicht als reines Spielgeld. Ordne diesen Geldsegen in deinem Fixkosten-Cockpit ein. Der erste Schritt meines 4K-Prüfpfads lautet: Kosten sehen. Bevor du Geld ausgibst, musst du deine aktuelle Belastung genau kennen. Das Weihnachtsgeld dient dir als Hebel, um wiederkehrende Kosten drastisch zu senken.
 
 Besitzt du einen laufenden Ratenkredit für dein Auto oder neue Möbel? Jede Sondertilgung reduziert deine Restschuld und damit die Zinslast der folgenden Monate.

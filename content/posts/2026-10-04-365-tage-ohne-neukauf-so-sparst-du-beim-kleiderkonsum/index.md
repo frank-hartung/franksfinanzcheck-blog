@@ -158,19 +158,29 @@ So arbeitest du effizient an deiner finanziellen Freiheit.
 
 ## Häufige Fragen
 
-### Wie finde ich Ersatzkleidung für besondere Anlässe? Frage in deinem Freundeskreis nach passenden Outfits zum Leihen.
+### Wie finde ich Ersatzkleidung für besondere Anlässe?
+
+Frage in deinem Freundeskreis nach passenden Outfits zum Leihen.
 Nutze lokale Tauschbörsen oder spezialisierte Second-Hand-Plattformen. Achte darauf, die geliehenen Sachen gereinigt und unversehrt zurückzugeben.
 
-### Kann ich wirklich komplett auf Neukäufe verzichten? Das ist mit einer guten Planung absolut machbar.
+### Kann ich wirklich komplett auf Neukäufe verzichten?
+
+Das ist mit einer guten Planung absolut machbar.
 Repariere vorhandene Kleidung und nutze vielseitige Basics. Sollte ein essentielles Teil irreparabel sein, greife bevorzugt auf gebrauchte Ware zurück.
 
-### Wie viel Zeit kostet die wöchentliche Inventur? Plane etwa 15 Minuten für einen kurzen Check ein.
+### Wie viel Zeit kostet die wöchentliche Inventur?
+
+Plane etwa 15 Minuten für einen kurzen Check ein.
 Prüfe deine Kleidung auf Flecken oder lose Knöpfe. So verhinderst du, dass kleine Schäden zu großen Problemen werden.
 
-### Was, wenn ich plötzlich ein wichtiges Teil verliere? Lege dir für solche Notfälle ein kleines Budget von ca. 20 € bis 30 € beiseite.
+### Was, wenn ich plötzlich ein wichtiges Teil verliere?
+
+Lege dir für solche Notfälle ein kleines Budget von ca. 20 € bis 30 € beiseite.
 Nutze dieses Geld nur für den Ersatz absolut notwendiger Dinge. Dieser Puffer gibt dir Sicherheit, ohne dein Ziel zu gefährden.
 
-### Lohnt sich das Ganze für Familien? Absolut, denn hier ist das Sparpotenzial oft am größten.
+### Lohnt sich das Ganze für Familien?
+
+Absolut, denn hier ist das Sparpotenzial oft am größten.
 Teilt euch die vorhandene Garderobe und tauscht innerhalb der Familie. Koordinierte Reparaturen senken die Ausgaben oft um bis zu 40 %.
 
 ---

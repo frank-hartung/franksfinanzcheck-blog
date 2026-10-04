@@ -144,15 +144,25 @@ Vermeide die typischen Fehler, nutze die Checkliste und prüfe regelmäßig dein
 
 ## Häufige Fragen
 
-### Wie viel kann ich mit einer smarten Steckdose wirklich sparen? Der tatsächliche Nutzen hängt vom Gerät ab. Ein Fernseher, der 3 W im Stand‑by zieht, spart etwa 26 € pro Jahr, wenn er komplett abgeschaltet wird.
+### Wie viel kann ich mit einer smarten Steckdose wirklich sparen?
 
-### Brauche ich für ein intelligentes Thermostat einen Hub? Viele Modelle arbeiten direkt über WLAN, andere benötigen ein Zigbee‑ oder Z‑Wave‑Hub. Prüfe die Herstellerangaben vor dem Kauf.
+Der tatsächliche Nutzen hängt vom Gerät ab. Ein Fernseher, der 3 W im Stand‑by zieht, spart etwa 26 € pro Jahr, wenn er komplett abgeschaltet wird.
 
-### Lohnt sich ein Energie‑Monitor, wenn ich bereits smarte Steckdosen nutze? Ja, weil er den Gesamtverbrauch visualisiert und dir zeigt, wo zusätzliche Optimierung möglich ist.
+### Brauche ich für ein intelligentes Thermostat einen Hub?
 
-### Wie häufig sollte ich die Zeitpläne anpassen? Mindestens einmal im Quartal, um veränderten Lebensgewohnheiten und Jahreszeiten Rechnung zu tragen.
+Viele Modelle arbeiten direkt über WLAN, andere benötigen ein Zigbee‑ oder Z‑Wave‑Hub. Prüfe die Herstellerangaben vor dem Kauf.
 
-### Können smarte Geräte meine Internetverbindung verlangsamen? Bei einer hohen Gerätezahl im 2,4‑GHz‑Band kann das WLAN‑Signal überlastet werden. Ein separates Mesh‑Netzwerk oder das Auslagern auf das 5‑GHz‑Band hilft.
+### Lohnt sich ein Energie‑Monitor, wenn ich bereits smarte Steckdosen nutze?
+
+Ja, weil er den Gesamtverbrauch visualisiert und dir zeigt, wo zusätzliche Optimierung möglich ist.
+
+### Wie häufig sollte ich die Zeitpläne anpassen?
+
+Mindestens einmal im Quartal, um veränderten Lebensgewohnheiten und Jahreszeiten Rechnung zu tragen.
+
+### Können smarte Geräte meine Internetverbindung verlangsamen?
+
+Bei einer hohen Gerätezahl im 2,4‑GHz‑Band kann das WLAN‑Signal überlastet werden. Ein separates Mesh‑Netzwerk oder das Auslagern auf das 5‑GHz‑Band hilft.
 
 ---
 
