@@ -243,10 +243,14 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
             audio_filename=os.path.basename(audio_kanon) if audio_kanon else "n8n_inbound.mp3",
         )
 
-        # Slug-Wacht (Härtung 2026-10): der Slug wird zu einem Dateisystem-Pfad.
-        # Whitelist statt Vertrauen: alles außer Wortzeichen und Bindestrich
-        # wird ersetzt – Pfad-Segmente („../“, „/“) sind damit ausgeschlossen.
-        slug_sicher = re.sub(r"[^\w-]+", "-", str(article.get("slug") or "entwurf")).strip("-") or "entwurf"
+        # Slug-Wacht (Härtung 2026-10, 2. Runde): Gesamtmuster-Validierung
+        # statt Ersetzung – nur ein Slug aus reinen Wortzeichen/Bindestrichen
+        # (max. 80) wird als Ordnername übernommen, alles andere (inklusive
+        # Pfad-Trennern wie „../“ oder Leerzeichen) fällt auf den Fallback
+        # zurück. Interne Slugs entstehen ohnehin per _slugify() und sind
+        # bereits [a-z0-9-] – das Verhalten für echte Artikel ändert sich nicht.
+        slug_treffer = re.fullmatch(r"[A-Za-z0-9_-]{1,80}", str(article.get("slug") or ""))
+        slug_sicher = slug_treffer.group(0) if slug_treffer else "entwurf"
         drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", slug_sicher)
         os.makedirs(drafts_dir, exist_ok=True)
         draft_file = os.path.join(drafts_dir, "index.md")

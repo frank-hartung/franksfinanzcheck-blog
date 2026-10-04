@@ -62,8 +62,8 @@ jobs:
               # Unterdrückungsstatus (suppressed=true => Code-Kommentar wirksam).
               jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:200]), suppressed: ((.suppressions // []) != []), locations, flows: [(.codeFlows[0].threadFlows[0].locations[]?.location.physicalLocation | (.artifactLocation.uri + ":" + ((.region.startLine // 0) | tostring)))]}]' "$f"
               echo ''
-              echo '# Regel-Metadaten: Anzahl + Property-Namen der ersten Regeln'
-              jq -c '{regeln_gesamt: (.runs[0].tool.driver.rules // [] | length), mit_security_severity: (.runs[0].tool.driver.rules // [] | map(select(.properties["security-severity"] != null)) | length), beispiel: (.runs[0].tool.driver.rules // [])[0:3] | map({id, props: ((.properties // {}) | keys)})}' "$f"
+              echo '# SARIF-Selbstauskunft: Wo liegen die Regel-Metadaten?'
+              jq -c '{runs: (.runs | length), driver_keys: (.runs[0].tool.driver | keys), driver_regeln: (.runs[0].tool.driver.rules // [] | length), extensions: [(.runs[0].tool.extensions // [])[].name? // "ohne-namen"], extension_regeln: [(.runs[0].tool.extensions // [])[] | (.rules // [] | length)], erste_regel: ((.runs[0].tool.driver.rules // [])[0] // null | if . then {id, props: ((.properties // {}) | keys)} else null end)}' "$f"
               echo '```'
               echo ""
             done

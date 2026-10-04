@@ -1,23 +1,25 @@
-"""Diagnose-Datei (Arena, 2026-10-04, Runde 2): Welcher Python-Idiom bricht
+"""Diagnose-Datei (Arena, 2026-10-04, Runde 3): Welcher Python-Idiom bricht
 den Taint-Flow von py/path-injection zuverlässig? Nach der Auswertung wird
-der wirksame Kandidat in n8n_bridge.py übernommen und diese Datei entfernt.
+diese Datei entfernt (der wirksame Kandidat wandert in den Produktivcode).
 
-Taint-Quelle: os.environ (von CodeQL als PathInjection-Quelle anerkannt).
+Taint-Quelle: sys.argv[1] (von CodeQL als PathInjection-Quelle anerkannt).
 Kandidaten (jeweils Sink: os.makedirs + open mit taint-abhängigem Pfad):
   K1 – dict-Lookup: taint steuert nur die Auswahl aus konstanten Pfaden
   K2 – re.fullmatch().group(0): validierter Teilstring als Pfadbestandteil
+       (identisch zum jetzt eingesetzten Fix in n8n_bridge.py)
   K3 – Zeichen-Whitelist per Comprehension (nur [A-Za-z0-9-])
-  K4 – Kontrolle: re.sub-Ersetzung wie im aktuellen n8n_bridge.py – diese
+  K4 – Kontrolle: re.sub-Ersetzung wie im alten n8n_bridge.py – diese
        Fundstelle ist die ERWARTETE Meldebestätigung (Test-Schärfe-Beweis).
 """
 import json
 import os
 import re
+import sys
 
 _WURZEL = os.path.join(os.sep, "tmp", "arena-diagnose")
 
-# Taint-Quelle (analog n8n: ungeparster Webhook-Body von außen).
-_BODY = os.environ.get("ARENA_BODY") or '{"k1": "../boese", "k2": "mein-draft", "k3": "a/b", "k4": "../../etc"}'
+# Taint-Quelle: Kommandozeilen-Argument (extern, wie der Webhook-Body in n8n).
+_BODY = sys.argv[1] if len(sys.argv) > 1 else '{"k1": "../boese", "k2": "mein-draft", "k3": "a/b", "k4": "../../etc"}'
 payload = json.loads(_BODY)
 
 
@@ -54,8 +56,8 @@ def _kandidat3_zeichenfilter(body):
 
 
 def _kontrolle_re_sub(body):
-    # K4 (Kontrolle): re.sub-Ersetzung – genau wie im aktuellen n8n_bridge.py;
-    # diese Fundstelle ERWARTET sich als Meldebestaetigung.
+    # K4 (Kontrolle): re.sub-Ersetzung – wie im alten n8n_bridge.py; diese
+    # Fundstelle ERWARTET sich als Meldebestaetigung.
     slug = re.sub(r"[^\w-]+", "-", str(body.get("k4") or "entwurf")).strip("-") or "entwurf"
     ziel = os.path.join(_WURZEL, "k4", slug)
     os.makedirs(ziel, exist_ok=True)
