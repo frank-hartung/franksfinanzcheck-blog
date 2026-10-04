@@ -1,5 +1,5 @@
 ---
-title: "Smart Home – So senkst: du deine Stromrechnung mit echten Ei"
+title: "Smart Home: So senkst du deine Stromrechnung mit echten Einsparungen"
 description: "Smart Home: Erfahre, welche Smart‑Home‑Lösungen wirklich Strom sparen, worauf du achten musst und wie du typische Fehler vermeidest."
 date: 2026-10-04T10:16:29Z
 draft: true
