@@ -217,11 +217,15 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
         # sind externe Daten. Die Whisper-Engine validiert und kanonisiert sie
         # vor jeder Weitergabe; abgelehnte Aufnahmen fallen auf Text oder den
         # Fallback-Entwurf zurück, statt den Webhook mit einem Fehler zu kippen.
+        # Härtung 2026-10 (py/path-injection): der rohe Webhook-Pfad wird hier
+        # GAR NICHT mehr angefasst – pruefe_audio_pfad() liefert ausschließlich
+        # einen geprüften Kanon innerhalb der erlaubten Wurzeln (oder None).
         transcript = None
-        if audio_file and os.path.exists(audio_file):
+        audio_kanon = whisper_engine.pruefe_audio_pfad(audio_file or "")
+        if audio_kanon:
             try:
                 engine = whisper_engine.WhisperEngine(backend="auto")
-                transcript = engine.transcribe(audio_file)
+                transcript = engine.transcribe(audio_kanon)
             except (ValueError, FileNotFoundError, RuntimeError, OSError) as exc:
                 print(f"⚠️  Sprachaufnahme von der Eingangs-Wacht abgelehnt: {exc}")
                 transcript = None
@@ -236,10 +240,14 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
             transcript=transcript,
             kategorie=kategorie,
             custom_title=titel,
-            audio_filename=os.path.basename(audio_file) if audio_file else "n8n_inbound.mp3",
+            audio_filename=os.path.basename(audio_kanon) if audio_kanon else "n8n_inbound.mp3",
         )
 
-        drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", article["slug"])
+        # Slug-Wacht (Härtung 2026-10): der Slug wird zu einem Dateisystem-Pfad.
+        # Whitelist statt Vertrauen: alles außer Wortzeichen und Bindestrich
+        # wird ersetzt – Pfad-Segmente („../“, „/“) sind damit ausgeschlossen.
+        slug_sicher = re.sub(r"[^\w-]+", "-", str(article.get("slug") or "entwurf")).strip("-") or "entwurf"
+        drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", slug_sicher)
         os.makedirs(drafts_dir, exist_ok=True)
         draft_file = os.path.join(drafts_dir, "index.md")
         with open(draft_file, "w", encoding="utf-8") as fh:

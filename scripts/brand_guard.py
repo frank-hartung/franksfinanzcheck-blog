@@ -205,7 +205,9 @@ def main() -> None:
         save_locks(values)
         print(f"🔒 Neuer Brand-Lock gespeichert ({len(values)} Einträge):")
         for k, v in values.items():
-            n_emojis = len(re.findall(r"[😀-🙏🌀-🛿☀-➿]", v or ""))
+            # Härtung 2026-10 (py/overly-large-range): Bereich kanonisiert –
+            # 1F600-1F64F (Gesichter) lag vollständig in 1F300-1F6FF.
+            n_emojis = len(re.findall(r"[\U0001F300-\U0001F6FF\u2600-\u27BF]", v or ""))
             print(f"   {k}: {str(v)[:70]!r}  (Emojis: {n_emojis})")
         return
 

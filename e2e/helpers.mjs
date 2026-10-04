@@ -145,10 +145,18 @@ export async function waitForImages(page, timeout = 15_000) {
     .catch(() => {});
 }
 
-/** Macht eine beliebige URL (auch absolute Produktions-URL) lokal testbar. */
+/** Macht eine beliebige URL (auch absolute Produktions-URL) lokal testbar.
+    Härtung 2026-10 (Code-Scanning): exakter Origin-Vergleich statt
+    startswith-Präfix – „https://franksfinanzcheck.de.böse.example“ würde
+    sonst fälschlich als eigene Produktions-URL gelten. */
 export function toLocal(url, baseURL) {
-  if (url.startsWith(SITE_ORIGIN)) {
-    return baseURL.replace(/\/$/, '') + url.slice(SITE_ORIGIN.length);
+  try {
+    const u = new URL(url);
+    if (u.origin === SITE_ORIGIN) {
+      return baseURL.replace(/\/$/, '') + u.pathname + u.search + u.hash;
+    }
+  } catch {
+    /* relative URL – unverändert zurückgeben */
   }
   return url;
 }

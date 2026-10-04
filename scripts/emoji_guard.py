@@ -40,8 +40,11 @@ DRY_RUN = "--dry-run" in sys.argv
 
 MAX_META_EMOJI = 1  # E3: Such-Snippets bleiben ruhig und gut lesbar
 
+# Härtung 2026-10 (py/overly-large-range): Bereiche kanonisiert – disjunkt,
+# explizit escapte Grenzen, Regional-Indikatoren (1F1E6–1F1FF) lagen schon in
+# 1F000–1FAFF; der Variation Selector U+FE0F bleibt bewusst als Einzelzeichen.
 EMOJI_RE = re.compile(
-    "[\U0001F000-\U0001FAFF☀-➿⬀-⯿️\U0001F1E6-\U0001F1FF]")
+    "[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\uFE0F]")
 
 # ---------------- E4: Mojibake-Tabelle (häufigste UTF-8-Brüche) ----------------
 MOJIBAKE = {

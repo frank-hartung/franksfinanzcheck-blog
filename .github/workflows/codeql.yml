@@ -1,0 +1,95 @@
+# CodeQL-Sicherheitswache – die dauerhafte Code-Scanning-Pipeline.
+#
+# ERSETZT das GitHub-Default-Setup (Settings → Code security → Code scanning):
+# Nach dem ersten Merge dieses Workflows EINMAL das Default-Setup deaktivieren,
+# sonst analysieren zwei Engines parallel und die Alert-Liste verdoppelt sich.
+# Klick-Weg: Repo → Settings → Code security and analysis → Code scanning
+# (CodeQL) → Default setup → Disable. Diese Wache übernimmt ab dann.
+#
+# Betriebsmodus:
+#   · pull_request auf main : Analyse + hartes Gate (keine Security-Fundstellen
+#     im Diff-Zustand), SARIF bleibt im Lauf (kein Upload)
+#   · push auf main         : Analyse + SARIF-Upload in die Security-Tab
+#   · montags 03:30 UTC     : Freshness-Lauf (neue Queries finden alten Code)
+#
+# Gate-Regel: Jedes Finding mit Security-Severity (js/xss, py/clear-text-…
+# usw.) lässt den Lauf FEHLSCHLAGEN und blockiert damit den Pull Request.
+# Reine Qualitäts-Findings (z. B. py/redos auf uncritical-Pfaden) werden
+# berichtet, blockieren nicht – ihre dauerhafte Behebung liegt im Code, nicht
+# im Gate (Beweis: 0 offene Quality-Findings seit der Heilung 2026-10).
+name: CodeQL-Sicherheitswache
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  # security-events nur für den SARIF-Upload auf main benötigt.
+  security-events: write
+  contents: read
+
+jobs:
+  analyze:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript, python]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: CodeQL initialisieren
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          config: .github/codeql/codeql-config.yml
+          # Kein queries-Parameter => Standard-Query-Suite je Sprache
+          # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
+
+      - name: CodeQL analysieren
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}
+          output: sarif-results
+          # Auf PRs kein Upload (Security-Tab bleibt unberührt), auf main
+          # werden die Ergebnisse die bisherigen Default-Setup-Alerts ersetzen.
+          upload: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Sicherheits-Gate (null Security-Fundstellen)
+        run: |
+          set -euo pipefail
+          TOTAL=0
+          SECURITY=0
+          QUALITY=0
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            # Ergebnisse mit den Regel-Metadaten verbinden: Ein Finding ist
+            # SICHERHEITS-relevant, wenn seine Regel eine security-severity
+            # trägt (Findings ohne -> Qualitäts-Regeln).
+            ANZ="$(jq -r --argjson dummy 0 '
+              .runs[0] as $r
+              | ($r.tool.driver.rules // [])
+                | map({key: .id, value: (.properties["security-severity"]? != null)}) | from_entries as $sec
+              | [$r.results[]? | select($sec[.ruleId] // false)] | length' "$f")"
+            ALLE="$(jq -r '[.runs[0].results[]?] | length' "$f")"
+            TOTAL=$((TOTAL + ALLE))
+            SECURITY=$((SECURITY + ANZ))
+            QUALITY=$((QUALITY + ALLE - ANZ))
+            if [ "$ANZ" -gt 0 ]; then
+              echo "::error::${ANZ} Sicherheits-Fundstelle(n) in ${f}:"
+              jq -r '.runs[0].results[]? | "  \(.ruleId) → \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" | sort -u | head -20
+            fi
+          done
+          echo "CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
+          if [ "$SECURITY" -gt 0 ]; then
+            echo "::error::Sicherheits-Gate verletzt: ${SECURITY} Security-Fundstellen. Beheben (kein Dismiss ohne Begründung – siehe CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md)."
+            exit 1
+          fi

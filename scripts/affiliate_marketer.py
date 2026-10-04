@@ -319,6 +319,10 @@ def run_selftest() -> list[str]:
         t3, n3 = normalize_gateway_links(
             "Siehe [Gas](https://franksfinanzcheck.de/go/gas) hier.",
             reg_test, "strom-sparen")
+        # Hinweis: „… in t3“ ist hier Absicht – der Selftest prüft, dass der
+        # absolute Blog-Host NIRGENDWO mehr im kanonisierten Text steht (auch
+        # nicht in einer anderen Position). Keine URL-Sanitisierung, daher
+        # bewusst keine Host-exakte Prüfung.  # codeql[py/incomplete-url-substring-sanitization]
         if n3 != 1 or "https://franksfinanzcheck.de" in t3 \
                 or "/go/gas/" not in t3:
             fehler.append(f"  NR: absoluter Blog-Host nicht kanonisiert (t3={t3})")

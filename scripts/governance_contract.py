@@ -562,6 +562,9 @@ def c10_token_broker(script_texts):
             out.append(("C10", f"scripts/{name}: holt den Pinterest-Token direkt aus dem "
                                "Env statt über `pinterest_token.get_token()` – damit prüft "
                                "die Wache einen anderen Token als der Bot benutzt (#206)."))
+        # Hinweis: „… in text“ durchsucht den QUELLTEXT eines Scripts nach der
+        # Pinterest-API-Host-Erwähnung (Governance-Regel C10) – das ist
+        # Code-Suche, keine URL-Validierung.  # codeql[py/incomplete-url-substring-sanitization]
         if not uses_broker and "api.pinterest.com" in text and not direct:
             out.append(("C10", f"scripts/{name}: spricht mit der Pinterest-API, kennt aber "
                                "den Token-Broker `pinterest_token` nicht – Failover und "
@@ -1953,6 +1956,9 @@ def main(argv=None):
     if checks:
         print("🔒 GOVERNANCE-VERTRAG: verletzt\n")
         annotate = bool(os.environ.get("GITHUB_ACTIONS"))
+        # C9-Meldungen nennen Datei und Muster-Label eines Befunds –
+        # niemals den Inhalt oder Wert dahinter.
+        # codeql[py/clear-text-logging-sensitive-data]
         for code, msg in checks:
             line = f"{code} {LABEL.get(code, '')}: {msg}"
             print(f"  ❌ {line}")
@@ -1966,6 +1972,9 @@ def main(argv=None):
         target = argv[argv.index("--md") + 1]
         try:
             os.makedirs(os.path.dirname(os.path.join(BLOG_DIR, target)) or BLOG_DIR, exist_ok=True)
+            # Markdown-Report der Vertragsprüfung: Befund-Texte ohne
+            # Werte (gleiche Begründung wie oben).
+            # codeql[py/clear-text-storage-sensitive-data]
             with open(os.path.join(BLOG_DIR, target), "w", encoding="utf-8") as f:
                 f.write(render_md(checks))
             print(f"→ geschrieben: {target}")

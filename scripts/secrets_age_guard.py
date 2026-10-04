@@ -279,6 +279,9 @@ def _save_state(state):
 def _record_success(var, proof_by="workflow"):
     var = var.strip().upper()
     if var not in SECRETS:
+        # Ausgabe nennt nur den NAMEN der Umgebungsvariablen und die
+        # erlaubten Registry-Schlüssel – nie einen Secret-Wert.
+        # codeql[py/clear-text-logging-sensitive-data]
         print(f"❌ Unbekanntes Secret '{var}' (erlaubt: {', '.join(sorted(SECRETS))})")
         return 1
     reg = SECRETS[var]
@@ -289,6 +292,8 @@ def _record_success(var, proof_by="workflow"):
         # zählbar, aber als `declared_foreign` sichtbar – die Wache meldet das
         # als Info und die Scorecard verlässt sich nicht darauf.
         quality = "declared_foreign"
+        # Nur Variablen-Name und Workflow-Namen (Metadaten) – kein Wert.
+        # codeql[py/clear-text-logging-sensitive-data]
         print(f"⚠️  {var}: Erfolg wird von '{proof_by}' vermerkt, vorgesehen für "
               f"{', '.join(allowed)} – gilt nur als deklariert, nicht als bewiesen.")
 
@@ -302,6 +307,8 @@ def _record_success(var, proof_by="workflow"):
 
     _mutate_state(mutate)
     label = SECRETS[var]["label"]
+    # Label, Variablen-Name, Datum, Nachweis-Qualität – Metadaten der
+    # Registry, kein Secret-Wert.  # codeql[py/clear-text-logging-sensitive-data]
     print(f"✅ {label} ({var}): Erfolg am {_today().isoformat()} vermerkt ({quality}, via {proof_by}).")
     try:
         from audit_log import log_event
@@ -1285,6 +1292,9 @@ def main(argv=None):
         return _selftest()
     if "--list" in argv:
         for var, reg in SECRETS.items():
+            # --list: Registry-Katalog (Name, Frist, Prüf-Adapter,
+            # berechtigende Workflows) – reine Metadaten.
+            # codeql[py/clear-text-logging-sensitive-data]
             print(f"{var}\t{reg['days']}d\t{'optional' if reg.get('optional') else 'pflicht'}"
                   f"\tprobe={reg.get('probe') or '-'}\tproof_by={','.join(reg.get('proof_by') or ())}")
         return 0

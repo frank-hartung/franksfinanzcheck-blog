@@ -177,7 +177,10 @@ export function mdToHtml(md) {
 function splitRow(row) {
   return row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
 }
-function stripTags(s) { return String(s).replace(/<[^>]*>/g, ''); }
+/* Härtung 2026-10 (Code-Scanning): auch unvollständige Tags („<script“ ohne
+   schließendes „>“) entfernen – sonst könnte ein Fragment im Further-Verlauf
+   als Markup landen. */
+function stripTags(s) { return String(s).replace(/<[^>]*>?/g, ''); }
 function slugify(s) {
   return String(s).toLowerCase().replace(/[^\wäöüß-]+/g, '-').replace(/^-+|-+$/g, '');
 }

@@ -319,7 +319,11 @@ def exchange_code(code: str) -> None:
     except (TypeError, ValueError):
         pass
     _save(data)
-    granted = set(data["scope"].replace(",", " ").split())
+    # Datenfluss-Hygiene (Code-Scanning-Härtung 2026-10): die Scope-Liste für
+    # die Ausgabe wird aus der API-Antwort (resp) gelesen, nicht aus `data` –
+    # das Dictionary enthält app_secret und access_token und bleibt damit
+    # komplett außerhalb jeder Konsolen-/Log-Ausgabe.
+    granted = set(str(resp.get("scope") or SCOPES.replace(",", " ")).replace(",", " ").split())
     wanted = set(SCOPES.replace(",", " ").split())
     print("✅ Pinterest-Autorisierung abgeschlossen!")
     print(f"   Scopes erteilt: {' '.join(sorted(granted))}")

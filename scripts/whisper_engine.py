@@ -148,6 +148,29 @@ def _audio_vertrauenswurzeln() -> tuple[str, ...]:
     return tuple(dict.fromkeys(wurzeln))
 
 
+def pruefe_audio_pfad(raw: str) -> str | None:
+    """Öffentliche Eingangswacht für Aufrufer außerhalb der Engine (n8n-Bridge).
+
+    Kanonisiert den Pfad (realpath) und prüft ihn gegen die vertrauenswürdigen
+    Verzeichnis-Wurzeln – liegt er außerhalb oder existiert er nicht, ist das
+    Ergebnis ``None``. Aufrufer fassen damit den rohen Webhook-Pfad nie direkt
+    an (Code-Scanning-Härtung 2026-10, py/path-injection). Strenger als
+    ``_safe_audio_path`` (kein Mock-Backdoor), weil externe Aufrufer
+    ausschließlich echte Dateien meinen.
+    """
+    roh = str(raw or "")
+    if "\x00" in roh or not roh.strip():
+        return None
+    kanon = os.path.realpath(roh)
+    if os.path.basename(kanon).startswith("-"):
+        return None
+    if not kanon.startswith(_audio_vertrauenswurzeln()):
+        return None
+    if not os.path.isfile(kanon):
+        return None
+    return kanon
+
+
 def _normalize_language(value: str | None) -> str:
     """Überführt eine Sprachangabe in einen Whitelist-Wert (fail-safe „auto“).
 
@@ -217,8 +240,11 @@ def clean_transcript_text(raw_text: str) -> str:
     
     # Doppel- und Mehrfachleerzeichen bereinigen
     text = re.sub(r"[ \t]+", " ", text)
-    # Leerzeichen vor Satzzeichen entfernen
-    text = re.sub(r"\s+([.,!?;:])", r"\1", text)
+    # Leerzeichen vor Satzzeichen entfernen. Possessiv („\s++“, Härtung 2026-10
+    # gegen polynomiales Backtracking): semantisch identisch zu „\s+“, weil
+    # die Folgeklasse Satzzeichen enthält und niemals Leerraum – der Matcher
+    # darf den Leerraum also ohne Rückversuch komplett verzehren.
+    text = re.sub(r"\s++([.,!?;:])", r"\1", text)
     # Mehrfache Satzzeichen normalisieren
     text = re.sub(r"\.{2,}", "...", text)
     text = re.sub(r"\?{2,}", "?", text)

@@ -48,9 +48,12 @@ if SCRIPTS_DIR not in sys.path:
 
 import social_copywriter as copy  # noqa: E402
 
+# Härtung 2026-10 (py/overly-large-range): kanonisch sortierte, disjunkte
+# Bereiche in aufsteigender Reihenfolge (Pfeile, Symbole/Dingbats,
+# Sterne/Ornamente, Regional-Indikatoren, Symbol-/Emoji-Blöcke).
 EMOJI_RX = re.compile(
-    "[" "\U0001F300-\U0001FAFF" "\U00002600-\U000027BF"
-    "\U0001F1E6-\U0001F1FF" "\U00002190-\U000021FF" "\U00002B00-\U00002BFF" "]"
+    "[" "\u2190-\u21FF" "\u2600-\u27BF" "\u2B00-\u2BFF"
+    "\U0001F1E6-\U0001F1FF" "\U0001F300-\U0001FAFF" "]"
 )
 TAG_RX = re.compile(r"(?<!\w)#([A-Za-z0-9ÄÖÜäöüß_]+)")
 NUM_RX = re.compile(r"\d[\d.,]*")

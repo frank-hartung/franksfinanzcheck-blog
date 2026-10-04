@@ -1,0 +1,21 @@
+# CodeQL-Analyse-Konfiguration – Frank's Finanzcheck
+#
+# Was hier ausgeschlossen ist, ist BEGRÜNDET ausgeschlossen (kein toter Winkel
+# für eigenen Code):
+#   · **/*.min.js / **/*.min.css – minifizierte Vendor-Bibliotheken
+#     (Fuse.js im PaperMod-Theme, GSAP unter static/premium/vendor/). Deren
+#     Quellen liegen upstream; Alerts daraus wären nicht heilbar.
+#   · .claude/skills/impeccable/scripts – vendored Skill-Tooling (Upstream
+#     v4.x, wird bei Skill-Updates überschrieben, läuft ausschließlich im
+#     Betreiber-Browser – kein Produktionscode der Website).
+#   · node_modules – Abhängigkeiten (Dependabot wacht separat über Versionen).
+#
+# Eigener Produktionscode (static/, layouts/, newsletter-worker/, scripts/,
+# e2e/, tools/) bleibt vollständig analysiert.
+name: "CodeQL-Konfiguration Frank's Finanzcheck"
+
+paths_ignore:
+  - "**/*.min.js"
+  - "**/*.min.css"
+  - ".claude/skills/impeccable/scripts/**"
+  - "node_modules/**"

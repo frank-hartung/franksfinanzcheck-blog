@@ -376,11 +376,17 @@ RULES_EN = [
     (re.compile(r"%"), "percent"),
 ]
 
+# Reihenfolge ist Sicherheits-Regel (Code-Scanning-Härtung 2026-10): &amp;
+# wird ZULETZT und genau einmal dekodiert; die generische Ersetzung klammert
+# es per Lookahead aus – sonst würde „&amp;lt;“ doppelt entschlüsselt
+# (double-escaping). Wortgleich in static/premium/ff-voice.js.
 _ENTITIES = [
-    (re.compile(r"&nbsp;"), " "), (re.compile(r"&amp;"), "&"),
+    (re.compile(r"&nbsp;"), " "),
     (re.compile(r"&szlig;"), "ß"), (re.compile(r"&uuml;"), "ü"),
     (re.compile(r"&ouml;"), "ö"), (re.compile(r"&auml;"), "ä"),
-    (re.compile(r"&euro;"), "€"), (re.compile(r"&[a-zA-Z]+;"), " "),
+    (re.compile(r"&euro;"), "€"),
+    (re.compile(r"&(?!amp;)[a-zA-Z]+;"), " "),
+    (re.compile(r"&amp;"), "&"),
 ]
 
 
