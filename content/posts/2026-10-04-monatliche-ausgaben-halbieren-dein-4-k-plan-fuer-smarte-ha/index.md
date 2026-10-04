@@ -33,6 +33,8 @@ Viele Haushalte bemerken erst spät, dass sie jahrelang zu hohe Tarife zahlen.
 Oft trennen dich nur wenige Klicks von einer spürbaren Ersparnis.  
 Du erfährst hier, wie du deine **monatlichen Ausgaben** effektiv senkst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**  
 - Ein jährlicher Check deckt oft 20–40 % Sparpotenzial auf.
 - Der 4K‑Prüfpfad hilft dir bei der Strukturierung deiner Finanzen.
