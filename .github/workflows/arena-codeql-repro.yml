@@ -1,4 +1,4 @@
-# Arena-Reproduktion: CodeQL-Analyse mit SARIF-Ausgabe als Artifact.
+# Arena-Reproduktion: CodeQL-Analyse mit SARIF-Ausgabe als PR-Kommentar.
 # Zweck: Exakte Abbildung der Code-Scanning-Fundstellen (Default-Setup-Queries),
 # ohne selbst neue Alerts in der Security-Tab anzulegen (upload: false).
 # Läuft ausschließlich auf dem Arena-Arbeitsbranch.
@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   analyze:
@@ -40,24 +41,46 @@ jobs:
           output: sarif-results
           upload: false
 
-      - name: SARIF-Zusammenfassung ausgeben
+      - name: Fundstellen aufbereiten
         run: |
           set -euo pipefail
-          echo "## CodeQL-Fundstellen (${{ matrix.language }})" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          for f in sarif-results/*.sarif; do
-            echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-            jq -r '[.runs[0].results[]?] | "Gesamt: \(length)"' "$f" >> "$GITHUB_STEP_SUMMARY" || echo "Gesamt: 0" >> "$GITHUB_STEP_SUMMARY"
-            jq -r '.runs[0].results[]? | [.ruleId, .locations[0].physicalLocations[0].artifactLocation.uri, (.locations[0].physicalLocations[0].region.startLine|tostring)] | @tsv' "$f" | sort >> "$GITHUB_STEP_SUMMARY" || true
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-            # Auch ins normale Log:
-            jq -r '.runs[0].results[]? | [.ruleId, .locations[0].physicalLocations[0].artifactLocation.uri, (.locations[0].physicalLocations[0].region.startLine|tostring)] | @tsv' "$f" | sort || true
-          done
+          {
+            echo "<!-- arena-codeql-report:${{ matrix.language }} -->"
+            echo "## CodeQL-Fundstellen (${{ matrix.language }})"
+            echo ""
+            echo "| Regel | Schwere | Datei | Zeile |"
+            echo "|---|---|---|---|"
+            for f in sarif-results/*.sarif; do
+              jq -r '
+                .runs[0].results[]? |
+                [
+                  ("`" + .ruleId + "`"),
+                  ((.properties.problem.severity // .level // "note") | tostring),
+                  ("`" + .locations[0].physicalLocations[0].artifactLocation.uri + "`"),
+                  ((.locations[0].physicalLocations[0].region.startLine // 0) | tostring)
+                ] | @tsv' "$f" | while IFS=$'\t' read -r rule sev path line; do
+                  echo "| ${rule} | ${sev} | ${path} | ${line} |"
+                done
+              done
+            echo ""
+            echo "**Gesamt (${{ matrix.language }}):** $(jq '[.runs[0].results[]?] | length' sarif-results/*.sarif | paste -sd+ | bc)"
+          } > fundstellen.md
+          cat fundstellen.md
 
-      - name: SARIF als Artifact hochladen
-        uses: actions/upload-artifact@v4
-        with:
-          name: codeql-sarif-${{ matrix.language }}
-          path: sarif-results/
-          retention-days: 7
+      - name: Fundstellen als PR-Kommentar veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PR="$(gh pr list --head "${GITHUB_REF_NAME}" --json number --jq '.[0].number')"
+          if [ -z "$PR" ]; then
+            echo "Kein PR für ${GITHUB_REF_NAME} – überspringe Kommentar."
+            exit 0
+          fi
+          # Alte Arena-Reports derselben Sprache entfernen (kein Spam)
+          gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments?per_page=100" \
+            --jq ".[] | select(.body | startswith(\"<!-- arena-codeql-report:${{ matrix.language }} -->\")) | .id" \
+          | while read -r cid; do
+            gh api -X DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${cid}" || true
+          done
+          gh pr comment "$PR" --body-file fundstellen.md
