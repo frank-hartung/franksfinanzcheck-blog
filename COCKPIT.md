@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-10-03 22:49 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-10-04 23:00 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -12,8 +12,8 @@
 | SEO & Technik | 🟢 | Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby) |
 | Affiliate & Umsatz | 🟡 | 1 Prüfpunkt(e) auffällig (click-chain) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
-| Social-Automation | 🟡 | 1/10 Kanäle live (Mastodon) |
-| Newsletter | 🟡 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
+| Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
+| Newsletter | 🔴 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
 
 ---
 
@@ -45,17 +45,17 @@ Quellen: `data/governance_status.json`, `AFFILIATE-INTEGRITY-REPORT.md`, `AFFILI
 
 Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTEREST-TOKEN-RUNBOOK.md`
 
-### Social-Automation — 🟡 GELB
+### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 2.5 Tag(en)
+- letzter erfolgreicher Post vor 0.3 Tag(en)
 - 1 Fehlversuch(e) in den letzten 14 Tagen
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
-### Newsletter — 🟡 GELB
+### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 6 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 7 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 

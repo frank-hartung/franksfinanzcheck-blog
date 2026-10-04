@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-03T22:49:26Z",
+  "generated": "2026-10-04T23:00:16Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -51,11 +51,11 @@
       ]
     },
     "Social-Automation": {
-      "level": "gelb",
+      "level": "gruen",
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 2.5 Tag(en)",
+        "letzter erfolgreicher Post vor 0.3 Tag(en)",
         "1 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
@@ -66,10 +66,10 @@
       ]
     },
     "Newsletter": {
-      "level": "gelb",
+      "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 6 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 7 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
