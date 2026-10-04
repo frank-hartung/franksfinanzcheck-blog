@@ -1,0 +1,44 @@
+{
+  "ausgeloest": {
+    "nacht-planung::planung:2026-10-04": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=TmCaACcZgN8": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=U4K-J6fDdqw": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=iMg2XuocVgs": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=uO2lRAkhLHE": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung::standby:bluesky": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung::standby:linkedin": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung::standby:threads": "2026-10-04T16:20:48+02:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00"
+  },
+  "letzter_lauf": {
+    "nacht-planung": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung": "2026-10-04T16:20:48+02:00",
+    "verbraucher-nachrichten": "2026-10-04T16:20:48+02:00"
+  },
+  "marker": {
+    "datei:data/social/channels.yaml": "f96c9bcc4af27432"
+  },
+  "slots": {
+    "slot:2026-10-04:03:40": "2026-10-04T16:20:48+02:00"
+  },
+  "version": 1,
+  "zaehler": {
+    "nacht-planung": {
+      "2026-10-04": 1
+    },
+    "reach-signale-kuratieren": {
+      "2026-10-04": 6
+    },
+    "standby-erinnerung": {
+      "2026-10-04": 3
+    },
+    "verbraucher-nachrichten": {
+      "2026-10-04": 3
+    }
+  }
+}
