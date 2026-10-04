@@ -55,11 +55,10 @@ jobs:
           config-file: .github/codeql/codeql-config.yml
           # Kein queries-Parameter => Standard-Query-Suite je Sprache
           # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
-          # AlertSuppression.ql: markiert Ergebnisse als „suppressed“, wenn die
-          # Zeile darüber `# codeql[<rule-id>] Grund` enthält. GitHub ignoriert
-          # SARIF-Suppressions beim Upload – der Filter-Schritt weiter unten
-          # entfernt sie deshalb selbst (Whitelist der Regeln, s. dort).
-          packs: ${{ matrix.language == 'python' && 'codeql/python-queries:AlertSuppression.ql' || 'codeql/javascript-queries:AlertSuppression.ql' }}
+          # AlertSuppression.ql wird ÜBER die Config-Datei geladen (dort mit
+          # Sprach-Keys) – NICHT über den packs-Input: der Input überschreibt
+          # die Konfiguration und ließ in einem Testlauf die Default-Suite
+          # stillschweigend wegfallen (0 Funde trotz 14 realer Funde).
 
       - name: CodeQL analysieren
         uses: github/codeql-action/analyze@v4
@@ -69,6 +68,18 @@ jobs:
           # Upload erfolgt erst nach dem Filter-Schritt unten – unterdrückte
           # Funde dürfen nie die Security-Tab erreichen.
           upload: false
+
+      - name: SARIF-Diagnose (Transparenz der Analyse)
+        run: |
+          set -euo pipefail
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            GESAMT="$(jq '[.runs[].results[]?] | length' "$f")"
+            UNTER="$(jq '[.runs[].results[]? | select((.suppressions // []) != [])] | length' "$f")"
+            REGLER="$(jq '[.runs[].tool.driver.rules[]?, .runs[].tool.extensions[]?.rules[]?] | length' "$f")"
+            echo "::notice::${f}: ${GESAMT} Funde (${UNTER} unterdrückt), ${REGLER} Regeln mit Metadaten"
+            echo "${f}: gesamt=${GESAMT} unterdrueckt=${UNTER} regeln=${REGLER}"
+          done
 
       - name: Unterdrückte Funde entfernen (vor Upload & Gate)
         run: |

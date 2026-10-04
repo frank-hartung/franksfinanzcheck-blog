@@ -258,8 +258,13 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
         drafts_dir = os.path.realpath(os.path.join(drafts_wurzel, slug_sicher))
         if not drafts_dir.startswith(drafts_wurzel + os.sep):
             # Kann nach der Whitelist konstruktiv nie eintreten (Defense in
-            # depth) – trotzdem geprüft, bevor irgendein Pfad geöffnet wird.
-            drafts_dir = os.path.join(drafts_wurzel, "entwurf")
+            # depth). Ein Payload, dessen kanonischer Pfad das Gefängnis
+            # verlässt, wird ABGEWIESEN – nicht still auf einen Fallback
+            # umgeleitet (kein Stillstellen des Alarms bei unklarer Lage).
+            log_bridge_event(typ, "inbound", daten, "error",
+                             "Draft abgelehnt: kanonischer Pfad verlässt das Drafts-Gefängnis")
+            return {"status": "error", "action": "draft_rejected",
+                    "reason": "slug_ausserhalb_drafts_gefaengnis"}
         os.makedirs(drafts_dir, exist_ok=True)
         draft_file = os.path.join(drafts_dir, "index.md")
         with open(draft_file, "w", encoding="utf-8") as fh:

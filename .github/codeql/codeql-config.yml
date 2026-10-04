@@ -12,7 +12,22 @@
 #
 # Eigener Produktionscode (static/, layouts/, newsletter-worker/, scripts/,
 # e2e/, tools/) bleibt vollständig analysiert.
+#
+# Zusätzlich zur Default-Suite läuft je Sprache AlertSuppression.ql: Diese
+# Query markiert Ergebnisse als „unterdrückt“, wenn die Zeile darüber einen
+# `# codeql[<rule-id>] Grund`-Kommentar trägt (GitHubs Upload ignoriert
+# SARIF-Suppressions – der Filter-Schritt im Workflow entfernt sie vor
+# dem Upload; siehe .github/workflows/codeql.yml).
+# WICHTIG: packs gehören HIERHER und nicht als init-Input – der packs-Input
+# überschreibt die Konfiguration komplett und lässt dann NUR die Packs
+# laufen (die Default-Suite würde stillschweigend wegfallen).
 name: "CodeQL-Konfiguration Frank's Finanzcheck"
+
+packs:
+  python:
+    - codeql/python-queries:AlertSuppression.ql
+  javascript:
+    - codeql/javascript-queries:AlertSuppression.ql
 
 paths_ignore:
   - "**/*.min.js"
