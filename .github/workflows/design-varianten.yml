@@ -235,4 +235,20 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/design/briefings/
           git commit -m "chore(design): Agent-Reach-Briefing $(date +%F) (Vorschlag, keine Freigabe)"
-          git push
+          # REPARATUR 04.10.2026 (Issue #547 – Vorgang WF-C545, Restfall):
+          # Hier stand ein ROHER `git push` – der einzige im ganzen
+          # Workflow-Bestand, der git_sync.sh komplett umging: kein
+          # Fetch-/Push-Retry, keine Rebase-Runde gegen parallele Bots,
+          # keine Auto-Heilung generierter Dateien. Dieser Lauf startet
+          # montags 06:45 UTC, also mitten im Takt der übrigen Bots – ein
+          # einziger paralleler Push nach main lässt ihn als
+          # non-fast-forward auflaufen und macht ihn rot (exakt die
+          # Fehlerklasse WF-C545, nur über einen anderen Workflow).
+          if scripts/git_sync.sh --push-only; then
+            echo "✅ Briefing gesichert."
+          else
+            # Kein Datenverlust: Das Briefing ist ein unverbindlicher
+            # Vorschlag ohne Freigabewirkung und wird vom nächsten
+            # Montagslauf ohnehin neu erzeugt.
+            echo "::warning::Briefing nicht gepusht – der nächste Lauf erzeugt es neu."
+          fi

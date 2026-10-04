@@ -93,5 +93,20 @@ jobs:
             echo "Keine Änderungen zum Committen."
           else
             git commit -m "chore(n8n-bridge): Automatisierte Synchronisation [skip ci]"
-            git push origin HEAD:${{ github.ref }} || echo "Push übersprungen (keine Schreibrechte)"
+            # REPARATUR 04.10.2026 (Issue #547 – Vorgang WF-C545, Restfall):
+            # Hier stand `git push origin HEAD:<ref> || echo "…"`. Zwei
+            # Mängel in einer Zeile: (1) roher Push ohne Retry/Rebase,
+            # obwohl dieser Wachhund alle 2 Stunden mitten im Takt der
+            # übrigen Bots läuft; (2) `|| echo` verschluckte JEDEN
+            # Fehlschlag als harmlose Notiz – Drafts, Whisper-Inbox und
+            # State blieben unbemerkt liegen, der Lauf blieb grün.
+            # git_sync.sh pusht auf denselben Branch (BRANCH-Default =
+            # GITHUB_REF_NAME) und bringt Retries, Rebase-Runden und eine
+            # präzise Fehlermeldung mit (inkl. Auth-Erkennung, falls dem
+            # Lauf wirklich einmal die Schreibrechte fehlen).
+            if scripts/git_sync.sh --push-only; then
+              echo "✅ Bridge-Stand gesichert."
+            else
+              echo "::warning::Bridge-Stand nicht gepusht – der nächste Lauf (alle 2 h) holt ihn nach."
+            fi
           fi
