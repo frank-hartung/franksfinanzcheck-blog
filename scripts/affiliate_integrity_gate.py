@@ -396,7 +396,14 @@ def check_cta_line(marker: str, line: str, reg_keys: set) -> list[str]:
     # syntaktisch BALANCIERTER Nachsatz sein (z. B. der Klammerzusatz
     # "_(Dieser Artikel enthält Affiliate-Links (Werbung).)_").
     rest = line[link_m.end():]
-    if rest.strip() and not re.fullmatch(r"(?:\s|\\|<br\s*/?>)+", rest):
+    # Härtung 2026-10 (py/redos): die frühere Prüfung
+    # ``re.fullmatch(r"(?:\s|\\|<br\s*/?>)+", rest)`` kombinierte Alternativen
+    # mit ``\s*`` im <br>-Zweig und einer äußeren Wiederholung – auf langen
+    # Leerzeichen-/Backslash-Ketten exponentielles Backtracking. Äquivalent
+    # und linear: <br>-Markup einmal entfernen, dann gezielt nach einem
+    # Zeichen suchen, das weder Leerraum noch „\“ ist.
+    rest_ohne_br = re.sub(r"<br\s*/?>", "", rest)
+    if rest.strip() and re.search(r"[^\s\\]", rest_ohne_br):
         tail = re.sub(r"<[^>]+>", "", rest)          # Markup-Reste ausklammern
         depth = {"(": 0, "[": 0}
         dangling = ""

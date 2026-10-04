@@ -99,6 +99,17 @@
   var cfg = {};
   try { cfg = JSON.parse(cfgEl.textContent || '{}') || {}; } catch (e) { cfg = {}; }
 
+  /* URL-Wächter (Code-Scanning-Härtung 2026-10): cfg-Angaben (permalink,
+     audio.src) stammen aus dem DOM der Seite. Würde der Seitentext manipuliert,
+     dürfte daraus nie ein schema-tragendes Ziel („javascript:“) werden –
+     Audio-Spur und Artikel-Link laufen deshalb nur mit http(s) an. */
+  function istSichereUrl(roh) {
+    try {
+      var u = new URL(String(roh), doc.location.href);
+      return u.protocol === 'https:' || u.protocol === 'http:';
+    } catch (e) { return false; }
+  }
+
   // Studio-Tonspur: eigener, austauschbarer Config-Block. Fehlt er,
   // bleibt der Browser-Pfad aktiv (kostenloser Sofort-Fallback).
   var trackEl = doc.getElementById('ff-voice-track-config');
@@ -1061,10 +1072,16 @@
       return HOLD_OPEN + (store.length - 1) + HOLD_CLOSE;
     }
 
-    // HTML-Entitäten & Steuerzeichen
-    out = out.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+    // HTML-Entitäten & Steuerzeichen. Die Reihenfolge ist Sicherheits-Regel
+    // (Code-Scanning-Härtung 2026-10): &amp; wird ZULETZT und genau einmal
+    // dekodiert; die generische Ersetzung klammert es per Lookahead aus –
+    // sonst würde „&amp;lt;“ in zwei Durchläufen zu „<“ (double-escaping).
+    // Wortgleich in scripts/ff_voice_backends.py.
+    out = out.replace(/&nbsp;/g, ' ')
       .replace(/&szlig;/g, 'ß').replace(/&uuml;/g, 'ü').replace(/&ouml;/g, 'ö')
-      .replace(/&auml;/g, 'ä').replace(/&euro;/g, '€').replace(/&[a-zA-Z]+;/g, ' ');
+      .replace(/&auml;/g, 'ä').replace(/&euro;/g, '€')
+      .replace(/&(?!amp;)[a-zA-Z]+;/g, ' ')
+      .replace(/&amp;/g, '&');
     out = out.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ' ');
     out = out.replace(/[\u2013\u2014]/g, '–');
     // Schmuckzeichen, Pfeile und Emoji sind keine Wörter — sie werden
@@ -3449,7 +3466,7 @@
     var a = cfg.audio;
     if (!a) return false;
     var url = String(typeof a === 'string' ? a : (a.src || ''));
-    if (!url) return false;
+    if (!url || !istSichereUrl(url)) return false;
     var elt = null;
     try { elt = doc.createElement('audio'); } catch (e) { return false; }
     if (!elt || typeof elt.addEventListener !== 'function') return false;
@@ -3457,7 +3474,7 @@
     elt.setAttribute('playsinline', '');
     elt.setAttribute('aria-hidden', 'true');
     elt.style.display = 'none';
-    try { elt.src = url; } catch (e) { return false; }
+    try { elt.src = new URL(url, doc.location.href).href; } catch (e) { return false; }
     track = elt;
     trackChunks = (a && a.chunks && a.chunks.length) ? a.chunks : [];
     /* Wortuhr: chunk.w = [ [rohes-Wort-Index, Sprechbeginn-ms], … ] —
@@ -4947,7 +4964,9 @@
     foot.appendChild(copyBtn);
 
     var readFull = el('a', 'ff-voice-link', T.summaryReadFull + ' \u2192');
-    readFull.href = String(cfg.permalink || doc.location.pathname);
+    var permaZiel = String(cfg.permalink || '');
+    readFull.href = istSichereUrl(permaZiel) ? new URL(permaZiel, doc.location.href).href
+                                             : doc.location.pathname;
     readFull.addEventListener('click', function () { closeDialog(); });
     foot.appendChild(readFull);
     dlg.appendChild(foot);

@@ -31,19 +31,20 @@ function parseAttrs(str) {
   return attrs;
 }
 
-/** Wert sprachfreundlich aufbereiten: HTML-Tags weg, Zahlen lesbar. */
+/** Wert sprachfreundlich aufbereiten: HTML-Tags weg, Zahlen lesbar.
+    Härtung 2026-10 (Code-Scanning, 2. Runde): Tags werden durch LEERZEICHEN
+    ersetzt statt gelöscht – ein Lösch-Replace kann aus „<scr<script>ipt>“
+    erneut „<script“ zusammensetzen; mit Trennzeichen dazwischen ist das
+    konstruktiv unmöglich. Entitäten in EINEM Durchlauf dekodiert – &amp;
+    zuletzt, sonst wäre „&amp;lt;“ doppelt entschlüsselt (double-escaping). */
+const ENTITAETEN = { nbsp: ' ', amp: '&', lt: '<', gt: '>', '#39': "'", quot: '"' };
 function cleanValue(v) {
   return String(v == null ? '' : v)
     .replace(/<br\s*\/?>/gi, ', ')
     .replace(/<small>([\s\S]*?)<\/small>/gi, '$1')
-    .replace(/<[^>]+>/g, '')
+    .replace(/<[^>]*>?/g, ' ')
     .replace(/\*\*/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
+    .replace(/&(nbsp|amp|lt|gt|#39|quot);/g, (_, e) => ENTITAETEN[e])
     .replace(/\s+/g, ' ')
     .trim();
 }

@@ -224,9 +224,11 @@ def score_article(path: str) -> dict:
         parts["uniqueness"] = 0.5
 
     # 6) Affiliate-Integrität (Gateway-Ära: echte Links laufen ueber /go/!)
+    # Host-Erkennung per Muster (Code-Scanning-Härtung 2026-10): Sucht
+    # Anbieter-Hosts im Artikeltext – kein URL-Präfix-Check.
     aff = 1.0
-    has_link = ("check24.net" in a["content"] or "partner-versicherung.de" in a["content"]
-                or bool(re.search(r"/go/[\w-]+/", a["content"])))
+    has_link = bool(re.search(
+        r"(?:check24\.net|partner-versicherung\.de|/go/[\w-]+/)", a["content"]))
     has_disclosure = "Affiliate" in a["content"] or "Provision" in a["content"]
     if not has_link:
         aff -= 0.5

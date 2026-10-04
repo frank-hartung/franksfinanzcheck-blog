@@ -916,9 +916,16 @@ def parse_article(raw, topic, angle_name):
     # KI-Ausgaben enthalten gelegentlich abgeschnittene oder doppelte
     # Satzzeichen. Normalisieren, bevor Frontmatter, Slug und Cover-Alttext
     # daraus entstehen und die Qualitäts-Gates den Fehler übernehmen.
-    title = re.sub(r"\s+", " ", title)
     title = re.sub(r"\s*[:：]\s*", ": ", title)
-    title = re.sub(r"\s*[–—-]\s*", " – ", title)
+    # Strich-Normalisierung (Fix 04.10.2026, prä-existierender Defekt aus
+    # 01d6508): Gedankenstriche (– —) werden immer auf „ – “ gebracht; ein
+    # Bindestrich wird NUR mit umgebenden Leerzeichen zum Gedankenstrich.
+    # Komposita wie „DSL-Anschluss“ oder „Corona-Impfung“ bleiben unberührt –
+    # die alte Regel \s*[–—-]\s* zog den Bindestrich auseinander und machte
+    # aus „DSL-Anschluss“ das kaputte „DSL – Anschluss“ (Schadensfall-Titel
+    # vom 02.10.2026, siehe test_prompt_echo).
+    title = re.sub(r"\s*[–—]\s*", " – ", title)
+    title = re.sub(r"\s+-\s+", " – ", title)
     title = re.sub(r"\s*:\s*–\s*|\s*–\s*:\s*", ": ", title)
     title = re.sub(r"\s+", " ", title).strip(" :-–—") or topic
     desc = _MARKER_RX.sub("", desc).strip() or topic

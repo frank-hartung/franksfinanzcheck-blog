@@ -131,7 +131,10 @@ def check_internal_links():
     # die Folge; eine Wache, die Phantome meldet, wird abgeschaltet. Also:
     # Skript-/Style-/Kommentar-Blöge vor dem Scannen entfernen. Echte Links
     # stehen nie in einem Skript-String, den der Browser nicht selbst setzt.
-    NOISE_RE = re.compile(r"<!--.*?-->|<script\b.*?</script>|<style\b.*?</style>",
+    # Härtung 2026-10 (py/bad-tag-filter, 2. Runde): End-Tags mit BELIEBIGEM
+    # Inhalt vor „>“ („</script >“, „</script\t\n bar>“) müssen erfasst
+    # werden, sonst rutscht Skript-Inhalt als href-Quelle in die Prüfung.
+    NOISE_RE = re.compile(r"<!--.*?-->|<script\b.*?</script[^>]*>|<style\b.*?</style[^>]*>",
                           re.S | re.I)
     for page in pages:
         text = open(page, encoding="utf-8", errors="ignore").read()

@@ -1,0 +1,213 @@
+# CodeQL-Sicherheitswache – die dauerhafte Code-Scanning-Pipeline.
+#
+# ERSETZT das GitHub-Default-Setup (Settings → Code security → Code scanning):
+# Nach dem ersten Merge dieses Workflows EINMAL das Default-Setup deaktivieren,
+# sonst analysieren zwei Engines parallel und die Alert-Liste verdoppelt sich.
+# Klick-Weg: Repo → Settings → Code security and analysis → Code scanning
+# (CodeQL) → Default setup → Disable. Diese Wache übernimmt ab dann.
+#
+# Betriebsmodus:
+#   · pull_request auf main : Analyse + hartes Gate (keine Security-Fundstellen
+#     im Diff-Zustand), SARIF bleibt im Lauf (kein Upload)
+#   · push auf main         : Analyse + SARIF-Upload in die Security-Tab
+#   · montags 03:30 UTC     : Freshness-Lauf (neue Queries finden alten Code)
+#
+# Gate-Regel: Jedes Finding mit Security-Severity (js/xss, py/clear-text-…
+# usw.) lässt den Lauf FEHLSCHLAGEN und blockiert damit den Pull Request.
+# Reine Qualitäts-Findings (z. B. py/redos auf uncritical-Pfaden) werden
+# berichtet, blockieren nicht – ihre dauerhafte Behebung liegt im Code, nicht
+# im Gate (Beweis: 0 offene Quality-Findings seit der Heilung 2026-10).
+name: CodeQL-Sicherheitswache
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  # security-events für den SARIF-Upload auf main, pull-requests für die
+  # Bilanz-Kommentare der Wache auf Pull Requests.
+  security-events: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  analyze:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript, python]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: CodeQL initialisieren
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          config-file: .github/codeql/codeql-config.yml
+          # Kein queries-Parameter => Standard-Query-Suite je Sprache
+          # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
+          # AlertSuppression.ql wird ÜBER die Config-Datei geladen (dort mit
+          # Sprach-Keys) – NICHT über den packs-Input: der Input überschreibt
+          # die Konfiguration und ließ in einem Testlauf die Default-Suite
+          # stillschweigend wegfallen (0 Funde trotz 14 realer Funde).
+
+      - name: CodeQL analysieren
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: /language:${{ matrix.language }}
+          output: sarif-results
+          # Upload erfolgt erst nach dem Filter-Schritt unten – unterdrückte
+          # Funde dürfen nie die Security-Tab erreichen.
+          upload: false
+
+      - name: SARIF-Diagnose (Transparenz der Analyse)
+        run: |
+          set -euo pipefail
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            GESAMT="$(jq '[.runs[].results[]?] | length' "$f")"
+            UNTER="$(jq '[.runs[].results[]? | select((.suppressions // []) != [])] | length' "$f")"
+            REGLER="$(jq '[.runs[].tool.driver.rules[]?, .runs[].tool.extensions[]?.rules[]?] | length' "$f")"
+            echo "::notice::${f}: ${GESAMT} Funde (${UNTER} unterdrückt), ${REGLER} Regeln mit Metadaten"
+            echo "${f}: gesamt=${GESAMT} unterdrueckt=${UNTER} regeln=${REGLER}"
+          done
+
+      - name: SARIF als Diagnose-Artefakt sichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: sarif-diagnose-${{ matrix.language }}
+          path: sarif-results/
+          retention-days: 7
+
+      - name: Unterdrückte Funde entfernen (vor Upload & Gate)
+        run: |
+          set -euo pipefail
+          # Nur diese Regeln dürfen per Code-Kommentar unterdrückt werden
+          # (begrenzte, dokumentierte Ausnahmen – siehe Strategie-Doc).
+          # CodeQL behandelt ein nacktes `# noqa`/`# lgtm` als Unterdrückung
+          # JEGLICHER Alerts auf der Zeile – deshalb greift die Whitelist
+          # hier zusätzlich als zweite Instanz.
+          ERLAUBT='py/clear-text-logging-sensitive-data
+          py/clear-text-storage-sensitive-data
+          py/incomplete-url-substring-sanitization
+          js/incomplete-url-substring-sanitization'
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            VORHER="$(jq '[.runs[0].results[]?] | length' "$f")"
+            jq -r --arg erlaubt "$ERLAUBT" '
+              . as $sarif
+              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
+              | [ $sarif.runs[].results[]?
+                  | select(((.suppressions // []) != [])
+                           and (.ruleId as $id | $liste | index($id))) ]
+              | map("- `" + .ruleId + "` " +
+                    (.locations[0].physicalLocation.artifactLocation.uri // "?") + ":"
+                    + ((.locations[0].physicalLocation.region.startLine // 0) | tostring)
+                    + " – " + ((.suppressions[0].justification // "Code-Kommentar") | .[0:120]))
+              | .[]
+            ' "$f" > "${f}.unterdrueckt" || true
+            jq --arg erlaubt "$ERLAUBT" '
+              . as $sarif
+              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
+              | $sarif
+              | .runs[].results |= map(select(
+                  ((.suppressions // []) == [])
+                  or (.ruleId as $id | $liste | index($id) | not)
+                ))
+            ' "$f" > "${f}.neu" && mv "${f}.neu" "$f"
+            NACHER="$(jq '[.runs[0].results[]?] | length' "$f")"
+            WEG=$((VORHER - NACHER))
+            echo "${f}: ${VORHER} → ${NACHER} Funde (${WEG} per Code-Kommentar unterdrückt)"
+          done
+
+      - name: SARIF in Security-Tab hochladen
+        if: github.ref == 'refs/heads/main'
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: sarif-results
+          category: /language:${{ matrix.language }}
+
+      - name: Sicherheits-Gate (null Security-Fundstellen)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Sicherheitsrelevant ist ein Fund, wenn seine Regel eine
+          # security-severity trägt. Die Metadaten stehen je SARIF-Dialekt
+          # in tool.driver.rules ODER tool.extensions[].rules – wir suchen
+          # dynamisch in beiden und vereinen das mit einer dokumentierten
+          # Regel-Liste (Fallback, falls ein Dialekt die Metadaten
+          # vollständig weglässt; siehe Strategie-Doc).
+          DOKU_SEC='js/xss js/xss-through-dom js/path-injection
+          js/incomplete-multi-character-sanitization
+          js/incomplete-url-substring-sanitization js/hardcoded-credentials
+          py/path-injection py/clear-text-logging-sensitive-data
+          py/clear-text-storage-sensitive-data
+          py/incomplete-url-substring-sanitization py/insecure-protocol
+          py/hardcoded-credentials'
+          TOTAL=0
+          SECURITY=0
+          QUALITY=0
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            ANZ="$(jq --arg doku "$DOKU_SEC" '
+              . as $sarif
+              | ($doku | split("\n") | join(" ") | split(" ") | map(select(length > 0))) as $doku
+              | [ $sarif.runs[].tool.driver.rules[]?, $sarif.runs[].tool.extensions[]?.rules[]? ]
+              | map(select(.properties["security-severity"]? != null) | .id) | unique + $doku | unique
+              | . as $secids
+              | [ $sarif.runs[].results[]? | select(.ruleId as $id | $secids | index($id)) ] | length
+            ' "$f")"
+            ALLE="$(jq -r '[.runs[].results[]?] | length' "$f")"
+            TOTAL=$((TOTAL + ALLE))
+            SECURITY=$((SECURITY + ANZ))
+            QUALITY=$((QUALITY + ALLE - ANZ))
+            if [ "$ANZ" -gt 0 ]; then
+              echo "::error::${ANZ} Sicherheits-Fundstelle(n) in ${f}:"
+              jq -r '.runs[].results[]? | "  \(.ruleId) → \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" | sort -u | head -20
+            fi
+          done
+          BILANZ="CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
+          echo "$BILANZ"
+          # Bilanz als PR-Kommentar festhalten (nur bei Pull Requests) –
+          # macht die Gate-Entscheidung ohne Log-Download nachvollziehbar:
+          # Zahlen, verbleibende Funde und die unterdrückten Ausnahmen.
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            PR="$(gh pr list --head "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" --json number --jq '.[0].number' 2>/dev/null || true)"
+            if [ -n "${PR:-}" ]; then
+              VERBLEIBEND="$(for f in sarif-results/*.sarif; do
+                jq -r '.runs[].results[]? | "- \(.ruleId) \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" 2>/dev/null
+              done | sort -u)"
+              UNTERDRUECKT="$(cat sarif-results/*.sarif.unterdrueckt 2>/dev/null | sort -u || true)"
+              {
+                echo "<!-- arena-wache-bilanz:${{ matrix.language }} -->"
+                echo "## Sicherheitswache (${{ matrix.language }})"
+                echo ""
+                echo "${BILANZ}"
+                if [ -n "$VERBLEIBEND" ]; then
+                  echo ""
+                  echo "**Verbleibende Funde (an GitHub gemeldet):**"
+                  echo "$VERBLEIBEND"
+                fi
+                if [ -n "$UNTERDRUECKT" ]; then
+                  echo ""
+                  echo "**Unterdrückte Ausnahmen (dokumentiert im Code, nicht gemeldet):**"
+                  echo "$UNTERDRUECKT"
+                fi
+              } > wache-bilanz.md
+              gh pr comment "$PR" --body-file wache-bilanz.md || true
+            fi
+          fi
+          if [ "$SECURITY" -gt 0 ]; then
+            echo "::error::Sicherheits-Gate verletzt: ${SECURITY} Security-Fundstellen. Beheben (kein Dismiss ohne Begründung – siehe CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md)."
+            exit 1
+          fi

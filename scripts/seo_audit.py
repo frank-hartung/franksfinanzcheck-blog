@@ -86,7 +86,12 @@ def audit_post(p):
     images = re.findall(r"!\[([^\]]*)\]", p["body"])
     no_alt = sum(1 for a in images if not a.strip())
     # Interne Links (erkennt relative Pfade ../../posts/, ../../pillar/, /posts/, /pillar/, ./)
-    internal = len(re.findall(r"\[[^\]]+\]\((?:\.\./|/|\.)*(?:posts|pillar)/", p["body"]))
+    # Härtung 2026-10 (py/redos): „(?:\.\./|/|\.)*“ erlaubte überlappende
+    # Alternativen („../“ vs. „/“ vs. „.“) – auf ../-Ketten exponentielles
+    # Backtracking. „(?:\.{0,2}/)*“ beschreibt dieselben wohlgeformten
+    # Präfixe deterministisch; auf dem gesamten Content-Korpus identisch
+    # (verifiziert), nur missgebildete Pfade wie „...posts/“ zählen nicht mehr.
+    internal = len(re.findall(r"\[[^\]]+\]\((?:\.{0,2}/)*(?:posts|pillar)/", p["body"]))
 
     # Titel
     if title_len < TITLE_MIN:

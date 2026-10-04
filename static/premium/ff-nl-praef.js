@@ -82,13 +82,24 @@
       felder.forEach(function (f) { f.addEventListener('change', zaehler); });
     }
 
+    /** URL-Wächter (Code-Scanning-Härtung 2026-10): DOM-gelesene Werte
+        (data-basis-Attribut) dürfen nur als echtes http(s)-Ziel in href
+        landen – schema-tragende Manipulationen des Seitentextes (z. B.
+        „javascript:“) laufen damit ins Leere. */
+    function sichererLink(ziel) {
+      try {
+        var u = new URL(String(ziel), window.location.href);
+        return (u.protocol === 'https:' || u.protocol === 'http:') ? u.href : '#';
+      } catch (e) { return '#'; }
+    }
+
     /** Meldung setzten; optional einen Fallback-Link dahinterhängen
         (wenn der direkte Weg über das Netz gerade nicht geht). */
     function melden(tekst, ziel, linktext) {
       meldung.textContent = tekst;
       if (!ziel) return;
       var a = document.createElement('a');
-      a.href = ziel;
+      a.href = sichererLink(ziel);
       a.textContent = linktext;
       meldung.appendChild(document.createTextNode(' '));
       meldung.appendChild(a);

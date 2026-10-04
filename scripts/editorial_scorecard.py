@@ -570,9 +570,12 @@ def _append_history(d, score):
            "readability": d["readability"], "lektor": d["lektor"],
            "secret_red": d["secret_red"], "secret_amber": d.get("secret_amber", 0),
            "clicks": d["total_clicks"], "awin": d["awin_total"]}
+    # Die Historie speichert ausschließlich Secret-GESUNDHEITS-Metadaten
+    # (Ampel-Zähler red/amber, Verdict, Nachweis-Stufen) – nie Werte.
     try:
         os.makedirs(os.path.dirname(_HISTORY), exist_ok=True)
         with open(_HISTORY, "a", encoding="utf-8") as f:
+            # codeql[py/clear-text-storage-sensitive-data]
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         lines = [l for l in open(_HISTORY, encoding="utf-8").read().splitlines() if l.strip()]
         if len(lines) > 260:                      # Retention: gut 5 Jahre Wochenläufe
@@ -938,6 +941,9 @@ def _selftest():
     if failures:
         print("❌ SCORECARD-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
+            # Fehlertexte enthalten Fixture-Metadaten (Zähler/Ampeln der
+            # Secrets-Wache), keine Secret-Werte.
+            # codeql[py/clear-text-logging-sensitive-data]
             print("   -", f)
         return 2
     print("✅ SCORECARD-SELFTEST bestanden (Ampel-Grenzen, Score-Monotonie).")

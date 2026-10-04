@@ -137,7 +137,18 @@ const server = http.createServer((req, res) => {
     }
   };
 
-  const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  // Pfad-Gefängnis (Code-Scanning-Härtung 2026-10): Anfragepfade sind externe
+  // Daten. Der Vergleich braucht den Verzeichnis-Trenner – ein bloßes
+  // startsWith(BASE) ließe auch Geschwister-Verzeichnisse („BASE-evil“) zu,
+  // und ein fehlendes resolve ließe „..“-Reste durch.
+  let urlPath;
+  try {
+    urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    res.end('Ungültiger Pfad');
+    return;
+  }
 
   if (urlPath === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -145,8 +156,9 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  let p = path.normalize(path.join(BASE, urlPath));
-  if (!p.startsWith(BASE)) {
+  const root = path.resolve(BASE);
+  let p = path.resolve(root, '.' + path.posix.normalize('/' + urlPath));
+  if (p !== root && !p.startsWith(root + path.sep)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     res.end('Verboten');
     return;

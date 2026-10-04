@@ -25,6 +25,10 @@ TIMEOUT = 8
 def main() -> int:
     try:
         ctx = ssl.create_default_context()
+        # Härtung 2026-10 (py/insecure-protocol): TLS 1.2 als explizites
+        # Minimum – der Watchdog prüft selbst TLS, seine eigene Verbindung
+        # darf keine schwächere Aushandlung zulassen.
+        ctx.minimum_version = ssl.TLSVersion.TLSv1_2
         with socket.create_connection((GITHUB_PAGES_IP, PORT), timeout=TIMEOUT) as sock:
             with ctx.wrap_socket(sock, server_hostname=HOST) as tls:
                 cert = tls.getpeercert()

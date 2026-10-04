@@ -730,7 +730,7 @@ class SendesignaturTest(unittest.TestCase):
         gesehen: dict = {}
 
         def netz(url, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if zust.ist_resend_api(url):
                 gesehen.update(headers or {})
                 return 200, json.dumps({"data": [{"name": ZONE,
                                                   "status": "verified"}]})
@@ -746,7 +746,7 @@ class SendesignaturTest(unittest.TestCase):
         gesehen: dict = {}
 
         def netz(url, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if zust.ist_resend_api(url):
                 gesehen.update(headers or {})
                 return 401, '{"message":"unauthorized"}'
             return 200, "{}"

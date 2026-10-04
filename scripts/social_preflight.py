@@ -634,6 +634,9 @@ def main(argv=None) -> int:
     bericht = preflight(kanaele=a.kanal or None, offline=a.offline)
 
     if a.json:
+        # Der Bericht listet je Kanal die NAMEN der benötigten
+        # Umgebungsvariablen (Setup-Checkliste) – keine Werte.
+        # codeql[py/clear-text-logging-sensitive-data]
         print(json.dumps(bericht, ensure_ascii=False, indent=2))
     else:
         konsole(bericht)

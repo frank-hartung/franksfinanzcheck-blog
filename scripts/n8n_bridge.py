@@ -217,11 +217,15 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
         # sind externe Daten. Die Whisper-Engine validiert und kanonisiert sie
         # vor jeder Weitergabe; abgelehnte Aufnahmen fallen auf Text oder den
         # Fallback-Entwurf zurück, statt den Webhook mit einem Fehler zu kippen.
+        # Härtung 2026-10 (py/path-injection): der rohe Webhook-Pfad wird hier
+        # GAR NICHT mehr angefasst – pruefe_audio_pfad() liefert ausschließlich
+        # einen geprüften Kanon innerhalb der erlaubten Wurzeln (oder None).
         transcript = None
-        if audio_file and os.path.exists(audio_file):
+        audio_kanon = whisper_engine.pruefe_audio_pfad(audio_file or "")
+        if audio_kanon:
             try:
                 engine = whisper_engine.WhisperEngine(backend="auto")
-                transcript = engine.transcribe(audio_file)
+                transcript = engine.transcribe(audio_kanon)
             except (ValueError, FileNotFoundError, RuntimeError, OSError) as exc:
                 print(f"⚠️  Sprachaufnahme von der Eingangs-Wacht abgelehnt: {exc}")
                 transcript = None
@@ -236,10 +240,31 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
             transcript=transcript,
             kategorie=kategorie,
             custom_title=titel,
-            audio_filename=os.path.basename(audio_file) if audio_file else "n8n_inbound.mp3",
+            audio_filename=os.path.basename(audio_kanon) if audio_kanon else "n8n_inbound.mp3",
         )
 
-        drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", article["slug"])
+        # Slug-Wacht (Härtung 2026-10, 2. Runde): Doppelte Verteidigung.
+        # 1) Gesamtmuster-Validierung: nur ein Slug aus reinen Wortzeichen/
+        #    Bindestrichen (max. 80) kommt als Ordnername in Frage – interne
+        #    Slugs entstehen ohnehin per _slugify() und sind bereits [a-z0-9-].
+        # 2) Kanonisches Pfad-Gefängnis (von CodeQL explizit anerkanntes
+        #    Idiom: os.path.realpath + startswith-Präfixwacht): der
+        #    kanonisierte Zielpfad muss INNERHALB der Drafts-Wurzel bleiben,
+        #    sonst wird er auf den Fallback-Entwurf gelegt. „../“-Reisen,
+        #    Symlink-Fluchten und absolute Pfade scheitern an beiden Mauern.
+        slug_treffer = re.fullmatch(r"[A-Za-z0-9_-]{1,80}", str(article.get("slug") or ""))
+        slug_sicher = slug_treffer.group(0) if slug_treffer else "entwurf"
+        drafts_wurzel = os.path.realpath(os.path.join(BLOG_DIR, "content", "drafts"))
+        drafts_dir = os.path.realpath(os.path.join(drafts_wurzel, slug_sicher))
+        if not drafts_dir.startswith(drafts_wurzel + os.sep):
+            # Kann nach der Whitelist konstruktiv nie eintreten (Defense in
+            # depth). Ein Payload, dessen kanonischer Pfad das Gefängnis
+            # verlässt, wird ABGEWIESEN – nicht still auf einen Fallback
+            # umgeleitet (kein Stillstellen des Alarms bei unklarer Lage).
+            log_bridge_event(typ, "inbound", daten, "error",
+                             "Draft abgelehnt: kanonischer Pfad verlässt das Drafts-Gefängnis")
+            return {"status": "error", "action": "draft_rejected",
+                    "reason": "slug_ausserhalb_drafts_gefaengnis"}
         os.makedirs(drafts_dir, exist_ok=True)
         draft_file = os.path.join(drafts_dir, "index.md")
         with open(draft_file, "w", encoding="utf-8") as fh:

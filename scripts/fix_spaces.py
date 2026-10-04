@@ -89,9 +89,20 @@ try:
     DOMAIN_HINTS |= {re.sub(r"[^a-z0-9.-]", "", v.lower()) for v in _tc.BRANDS.values()}
 except Exception:                                     # pragma: no cover
     pass
+# Härtung 2026-10 (py/redos): Die frühere Form kombinierte eine Label-Klasse,
+# die „.“ enthielt, mit „\. “-Trennern UND einer äußeren Wiederholung – auf
+# Ketten wie „-. -. -. “ exponentielles Backtracking. Neue Struktur ist
+# eindeutig und damit linear: Wiederholungs-Labels enthalten keinen Punkt
+# (Trenner zwingend „. “), nur das FINALE Label darf Punkte enthalten (eine
+# einzige {1,41}-Stufe, begrenzt rückverfolgbar). Empirisch auf dem gesamten
+# Content-Korpus identisch zu vorher verifiziert; verloren gehen nur Kandidaten
+# mit gepunktetem Label in einer WIEDERHOLUNGS-Ebene („www.heise. google. de“),
+# die Nachprüfung in _domain_fix hätte solche ohnehin verworfen müssen.
+_LABEL_OHNE_PUNKT = r"[A-Za-z0-9\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df-]{1,41}"
+_LABEL_MIT_PUNKT = r"[A-Za-z0-9.\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df-]{1,41}"
 RE_DOMAIN_FRAGMENT = re.compile(
-    r"(?<![\w./-])((?:[A-Za-z0-9.\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df-]{1,41}\. [A-Za-z0-9.\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df-]{0,41})*"
-    r"[A-Za-z0-9.\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df-]{1,41}\. ?(?:de|com|net|org|io|eu|app|info|shop|online|site|cloud|box|one|dev|at|ch|uk))"
+    r"(?<![\w./-])((?:" + _LABEL_OHNE_PUNKT + r"\. )*"
+    + _LABEL_MIT_PUNKT + r"\. ?(?:de|com|net|org|io|eu|app|info|shop|online|site|cloud|box|one|dev|at|ch|uk))"
     r"(?![A-Za-z0-9-])")
 
 

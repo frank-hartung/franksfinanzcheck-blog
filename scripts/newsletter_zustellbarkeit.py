@@ -97,6 +97,21 @@ DOH_ENDPUNKTE = (("https://dns.google/resolve", {"dnssec": "false"}),
                  ("https://cloudflare-dns.com/dns-query", {}))
 DOH_ZEITLIMIT = 8
 RESEND_API = "https://api.resend.com"
+
+
+def ist_resend_api(url: str) -> bool:
+    """Exakter Host-Vergleich für die Resend-API (Code-Scanning-Härtung 2026-10).
+
+    Ein reines ``startswith``-Präfix würde auch ``https://api.resend.com.<beliebige
+    Domain>`` durchlassen; geprüft werden hier Schema UND Host – das gilt für
+    die echten Aufrufe wie für die Netz-Fakes in Selftest und Unittests.
+    """
+    try:
+        teile = urllib.parse.urlsplit(str(url))
+    except ValueError:
+        return False
+    return teile.scheme == "https" and teile.netloc == "api.resend.com"
+
 RESEND_FREE_TAGESGRENZE = 100   # Resend Free: 3000/Monat, davon 100/Tag
 # Resend (AWS-SES-Modell, seit 2025): Authentifizierung läuft über die
 # SEND-SUBDOMAIN (Default `send.`) – SPF-TXT + Bounce-MX dort, DKIM auf
@@ -1189,7 +1204,7 @@ def _selftest() -> int:
 
     def netz_gesund(url: str, *, headers=None, timeout=15):
         kopf = headers or {}
-        if url.startswith("https://api.resend.com"):
+        if ist_resend_api(url):
             if "Authorization" not in kopf:
                 return 401, '{"status":"error","message":"Missing or Invalid API Key"}'
             return 200, json.dumps({"data": [{"domain": ZONE, "verified": True}]})
@@ -1354,7 +1369,7 @@ def _selftest() -> int:
         AUFLOESER = zone_worker_live
 
         def netz_worker_500(url: str, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return 200, json.dumps({"data": []})
             if url.rstrip("/").endswith("/export/abonnenten"):
                 return 200, json.dumps({"anzahl": 0, "abonnenten": []})
@@ -1368,7 +1383,7 @@ def _selftest() -> int:
 
         # 9. Worker: 403 mit 1010 → Kanten-Fund (kein Worker-Fehler)
         def netz_kante(url: str, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return 200, json.dumps({"data": []})
             return 403, ("{\"errors\":[{\"code\":\"1010\",\"message\":\"Access denied; "
                          "the site owner has blocked access based on your browser "
@@ -1420,7 +1435,7 @@ def _selftest() -> int:
         # 10. Resend mit Key: Domain unverifiziert → B1 Fund; Liste 150 → B3 Hinweis
         os.environ["RESEND_API_KEY"] = "re_test"
         def netz_resend(url: str, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return 200, json.dumps({"data": [{"domain": ZONE, "verified": False}]})
             if url.rstrip("/").endswith("/export/abonnenten"):
                 return 200, json.dumps({"anzahl": 150, "abonnenten": []})
@@ -1450,7 +1465,7 @@ def _selftest() -> int:
                     if r["record"] == unverified:
                         r["status"] = "pending"
                 return 200, json.dumps({"records": recs})
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return 200, json.dumps(
                     {"data": [{"domain": ZONE, "id": "dom_selftest",
                                "verified": True}]})
@@ -1491,7 +1506,7 @@ def _selftest() -> int:
                      "status": "verified"},
                     {"record": "DKIM", "name": "resend._domainkey",
                      "type": "TXT", "status": "verified"}]})
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return status, json.dumps(daten if daten is not None else {})
             if url.rstrip("/").endswith("/export/abonnenten"):
                 return 200, json.dumps({"anzahl": 0, "abonnenten": []})
@@ -1502,7 +1517,7 @@ def _selftest() -> int:
                 self.daten, self.status = daten, status
                 self.headers: dict = {}
             def __call__(self, url, *, headers=None, timeout=15):
-                if url.startswith("https://api.resend.com"):
+                if ist_resend_api(url):
                     self.headers = dict(headers or {})
                 return netz_resend_api_form(url, headers=headers,
                                             timeout=timeout,
@@ -1552,7 +1567,7 @@ def _selftest() -> int:
         # 11. Worker-Export mit falschem Key → B2 Fund
         os.environ["NEWSLETTER_WORKER_EXPORT_KEY"] = "falsch"
         def netz_403_export(url: str, *, headers=None, timeout=15):
-            if url.startswith("https://api.resend.com"):
+            if ist_resend_api(url):
                 return 200, json.dumps({"data": [{"domain": ZONE, "verified": True}]})
             if url.rstrip("/").endswith("/export/abonnenten"):
                 return 403, '{"error":"unauthorized"}'
