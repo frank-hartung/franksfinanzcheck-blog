@@ -209,3 +209,59 @@ Issue #547 wird mit Verweis auf diesen Fix geschlossen. Tritt WF-C545 erneut
 auf, ist das ein Hinweis auf eine NEUE Ursache (z. B. ein echter Fehler in
 `social_video.py`/`social_calendar.py`) – die hier behobene Konfliktklasse
 ist durch den Regressionstest dauerhaft abgedeckt.
+
+## 6) Endabnahme 04.10.2026 – Nachprüfung am Produktionsstand + Schließpfad
+
+Anlass: Meldung #547 stand trotz zusammengeführter Reparatur (#564/#565)
+weiterhin **offen**. Die Endabnahme hat zwei Fragen beantwortet: (1) Ist die
+Reparatur am Produktionsstand wirklich vollständig wirksam? (2) Warum ist die
+Meldung nicht geschlossen – und ist ihr Schließpfad dauerhaft gesichert?
+
+### A. Nachprüfung aller Fixes am Produktionsstand (`6d141cb` = HEAD von main)
+
+| Prüfung (Endabnahme, alle am HEAD neu gelaufen) | Ergebnis |
+|---|---|
+| Heilungsregel `data/social/kalender/*\|static/kalender/*` in `scripts/git_sync.sh` vorhanden | ✅ (Zeile 410) |
+| Cron-Entzerrung `26 5 * * 2,6` in `social-video.yml` aktiv (Autopilot bleibt bei `20 5,7,…`) | ✅ keine gemeinsame Taktminute mehr |
+| „Stand sichern“ ohne Blind-Fallback (`if git_sync.sh --push-only … else ::warning::`) | ✅ |
+| `python3 -m unittest scripts.tests.test_git_sync` (29 Tests, inkl. `test_social_kalender_konflikt_heilt_frischer_lauf_gewinnt`) | ✅ grün |
+| `python3 -m unittest scripts.tests.test_push_wache` (8 Tests) | ✅ grün |
+| `scripts/social_calendar.py --selftest` · `scripts/social_video.py --selftest` | ✅ · ✅ |
+| `scripts/integrity_guard.py` | ✅ Siegel gültig und verkettet |
+| Bestandssweep roher `git push` über **alle** Workflows | ✅ 0 Fundstellen (nur erklärende Kommentare) |
+| Bestandssweep `git_sync.sh … \|\|`-Fallbacks | ✅ ausnahmslos sichtbare `::warning::`/harte `::error::`-Pfade, kein Blind-Push, kein `\|\| true` |
+| **Gesamtsuite** `python3 -m unittest discover -s scripts/tests` | ✅ **1739 Tests, 0 Fehler** (23 übersprungen) |
+
+Seit der Reparatur gab es noch **keinen** planmäßigen Lauf der
+Shorts-Schmiede (nächster: Di 06.10., 05:26 UTC) – der rote Lauf 37116487089
+vom 03.10. bleibt damit der letzte und einzige dieser Klasse.
+
+### B. Warum die Meldung noch offen stand (Verfahrens-, kein Technikfehler)
+
+1. Der Vorschlag #565 trug `(#547)` nur im **Titel**, nicht als
+   `Closes #547` in der **Beschreibung**. GitHub schließt nur über das
+   Schlüsselwort in der Beschreibung; auch der tägliche Nachlauf von
+   `vorgangs-abschluss.yml` leitet Meldungen ausschließlich aus
+   `Closes #…` ab – er konnte #547 also nie finden.
+2. Ein manueller Abschlussvermerk ist mit dem hiesigen Zugangsrecht
+   unmöglich (HTTP 403, belegt erneut am 04.10.2026 an #547 – derselbe
+   bekannte Befund wie an #552); ein manueller Workflow-Start
+   (`workflow_dispatch`) scheitert mit demselben 403.
+
+### C. Der gesicherte Schließpfad (zwei unabhängige Wege)
+
+1. **Auto-Close durch die Alarm-Symmetrie:** `alert-on-failure.yml`
+   (Job `resolve`) schließt #547 über die Marker-Identität WF-C545,
+   sobald die Shorts-Schmiede wieder **grün auf main** läuft – planmäßig
+   am Di 06.10., 05:26 UTC. Dieser Pfad existiert unabhängig von jedem
+   PR-Schlüsselwort und ist der eingebaute Schließpfad aller
+   `auto-report`-Meldungen (kein neuer Wächter nötig).
+2. **`Closes #547` im Abschluss-Vorschlag dieser Endabnahme:** Beim
+   Zusammenführen schließt GitHub die Meldung, und
+   `vorgangs-abschluss.yml` schreibt den Abschlussvermerk mit dem Recht
+   des Repositorys (`issues: write`) – exakt das Verfahren, das #565
+   ausgelassen hat.
+
+**Merksatz für künftige WF-Reparaturen** (Bestätigung der bestehenden
+Dauervorgabe aus CLAUDE.md): `Closes #<Nr>` gehört in die
+**Beschreibung** des Vorschlags – eine Nummer im Titel schließt nichts.
