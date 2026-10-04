@@ -72,7 +72,9 @@ import re
 import subprocess
 import sys
 import tempfile
+from collections.abc import Sequence
 from pathlib import Path
+from urllib.parse import quote
 
 BLOG_DIR = Path(__file__).parent.parent
 sys.path.insert(0, str(BLOG_DIR / "scripts"))
@@ -158,12 +160,66 @@ def _parse_ts(raw):
     return dt if dt.tzinfo else dt.replace(tzinfo=datetime.timezone.utc)
 
 
-def run_cmd(cmd, timeout=30):
+def run_cmd(argv: Sequence[str], timeout: int | float = 30):
+    """Führt ausschließlich einen expliziten Argumentvektor ohne Shell aus.
+
+    Der Watchdog verarbeitet unter anderem Slugs aus Frontmatter sowie
+    Workflow-Namen. Diese Werte dürfen nie Teil einer Shell-Zeile werden:
+    Ein Argumentvektor übergibt sie wortwörtlich an das Zielprogramm. Strings
+    als kompletter Befehl sind daher absichtlich kein unterstütztes API.
+    """
+    if isinstance(argv, (str, bytes)) or not argv:
+        raise TypeError("run_cmd erwartet einen nicht-leeren Argumentvektor")
+    if not all(isinstance(argument, str) and argument for argument in argv):
+        raise TypeError("run_cmd akzeptiert nur nicht-leere String-Argumente")
     try:
-        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
-        return r.returncode, r.stdout, r.stderr
+        seconds = float(timeout)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("timeout muss numerisch sein") from exc
+    if not 0 < seconds <= 900:
+        raise ValueError("timeout muss zwischen 0 und 900 Sekunden liegen")
+
+    try:
+        result = subprocess.run(
+            list(argv), capture_output=True, text=True, timeout=seconds,
+            check=False, shell=False,
+        )
+        return result.returncode, result.stdout, result.stderr
     except subprocess.TimeoutExpired:
         return 124, "", "timeout"
+    except OSError as exc:
+        # Ein fehlendes curl/gh ist ein Werkzeugfehler, aber niemals ein Grund,
+        # auf eine Shell oder einen unsicheren Fallback auszuweichen.
+        return 127, "", str(exc)
+
+
+def _safe_timeout(value: object, *, maximum: int = 120) -> int | None:
+    """Normalisiert Netzwerk-Timeouts, statt externe Werte an curl zu reichen."""
+    try:
+        seconds = int(value)
+    except (TypeError, ValueError):
+        return None
+    return seconds if 1 <= seconds <= maximum else None
+
+
+def _valid_workflow_file(value: object) -> bool:
+    """Akzeptiert nur lokale Workflow-Dateinamen (keine Optionen/Pfade)."""
+    return isinstance(value, str) and bool(
+        re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*\.ya?ml", value)
+    )
+
+
+def _curl_status(url: str, request_timeout: int) -> tuple[int, str, str]:
+    """Liest einen HTTP-Status mit festem curl-Argumentvertrag.
+
+    ``--`` beendet die Optionsverarbeitung zusätzlich. Auch falls künftig ein
+    dynamischer URL-Bestandteil eingeführt wird, kann er kein curl-Flag werden.
+    """
+    return run_cmd([
+        "curl", "--location", "--silent", "--output", "/dev/null",
+        "--write-out", "%{http_code}", "--max-time", str(request_timeout),
+        "--retry", "2", "--retry-delay", "2", "--", url,
+    ], timeout=request_timeout + 8)
 
 def newest_slug():
     """Find newest article by frontmatter date (full ISO) + fallback to folder."""
@@ -222,25 +278,31 @@ def check_syntax():
     return True, ""
 
 def check_live_site(slug, timeout=20):
-    """Live-Site prüfen mit Redirect-Follow, Retry, und Offline-Erkennung."""
-    if not slug:
-        return None, "kein Slug gefunden (kein live Artikel)"
-    url = f"https://franksfinanzcheck.de/posts/{slug}/"
-    # curl mit Retry, folgt Redirects
-    cmd = f"curl -L -s -o /dev/null -w \"%{{http_code}}\" --max-time {timeout} --retry 2 --retry-delay 2 \"{url}\""
-    rc, out, err = run_cmd(cmd, timeout=timeout+8)
+    """Live-Site mit Redirect-Follow, Retry und sicherem URL-Transport prüfen."""
+    if not isinstance(slug, str) or not slug.strip():
+        return None, "kein gültiger Slug gefunden (kein live Artikel)"
+    request_timeout = _safe_timeout(timeout)
+    if request_timeout is None:
+        return None, "ungültiger Live-Site-Timeout"
+
+    # Ein Slug stammt zwar aus dem Repository, ist aber redaktionell änderbar.
+    # URL-Encoding macht daraus genau ein Pfadsegment – nie eine Option, einen
+    # zusätzlichen Pfad oder eine Shell-Syntax.
+    safe_slug = quote(slug.strip(), safe="-._~")
+    url = f"https://franksfinanzcheck.de/posts/{safe_slug}/"
+    rc, out, _ = _curl_status(url, request_timeout)
     code = out.strip()
     if code == "200":
         return True, code
     # Zweiter Versuch
     if code in ("", "000"):
         # Prüfe ob generell offline (kein Internet im Runner/Sandbox)
-        rc_off, out_off, _ = run_cmd(f"curl -L -s -o /dev/null -w \"%{{http_code}}\" --max-time 5 https://www.google.com/", timeout=8)
+        _, out_off, _ = _curl_status("https://www.google.com/", 5)
         if out_off.strip() in ("", "000"):
             # Offline-Umgebung – kein harter Fail, sondern UNKNOWN
             return None, f"offline (kein Internet, curl {code})"
         # Online, aber Seite liefert 000 -> Netzwerk/Cloudflare blockt, Retry
-        rc2, out2, _ = run_cmd(cmd, timeout=timeout+8)
+        rc2, out2, _ = _curl_status(url, request_timeout)
         code2 = out2.strip()
         if code2 == "200":
             return True, code2
@@ -252,7 +314,7 @@ def check_live_site(slug, timeout=20):
         # Redirects (z.B. trailing slash) sind ok
         return True, f"{code} (Redirect)"
     # Retry für andere Codes
-    rc2, out2, _ = run_cmd(cmd, timeout=timeout+8)
+    _, out2, _ = _curl_status(url, request_timeout)
     code2 = out2.strip()
     if code2 == "200" or code2 in ("301", "302", "303", "307", "308"):
         return True, code2
@@ -268,12 +330,17 @@ def check_tls():
         return False
 
 def check_workflow_liveness(workflow_file, hours=26):
-    """Prüft ob Workflow in letzten X Stunden lief (via gh CLI). Fallback: Report-Datei Alter."""
+    """Prüft, ob ein erlaubter Workflow im Zeitfenster lief (via gh CLI)."""
+    if not _valid_workflow_file(workflow_file):
+        return None, "ungültiger Workflow-Dateiname"
     since = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=hours)
     since_iso = since.strftime("%Y-%m-%dT%H:%M:%SZ")
-    # gh run list
-    cmd = f"gh run list --workflow={workflow_file} --created \">{since_iso}\" --json databaseId --jq 'length' 2>/tmp/gh_{workflow_file}.err"
-    rc, out, err = run_cmd(cmd, timeout=20)
+    # Jeder Wert ist ein eigenes argv-Element: keine Shell, keine Umleitung,
+    # keine Interpretation eines redaktionell konfigurierten Workflow-Namens.
+    rc, out, err = run_cmd([
+        "gh", "run", "list", "--workflow", workflow_file,
+        "--created", f">{since_iso}", "--json", "databaseId", "--jq", "length",
+    ], timeout=20)
     if rc != 0:
         # gh nicht verfügbar oder API Fehler -> Fallback auf Datei-Alter
         return None, f"gh Fehler, Fallback nötig: {err[:200]}"
@@ -300,20 +367,17 @@ def workflow_run_evidence(workflow_file, hours=30):
     dass der Beweis geführt wurde (C2: „eine nicht ausgeführte Messung ist
     kein Grün").
     """
+    if not _valid_workflow_file(workflow_file):
+        return None, None, None, "ungültiger Workflow-Dateiname"
     # Bewusst OHNE `--created`: das Flag fehlt in älteren gh-Versionen
     # (Debian 2.23) und machte die Abfrage dort zu einem Werkzeugfehler.
     # Gefiltert wird deshalb im Python-Code – gleiches Ergebnis, überall
     # lauffähig (und lokal prüfbar).
-    cmd = (f"gh run list --workflow={workflow_file} --limit 100 "
-           f"--json createdAt,status,conclusion "
-           f"2>/tmp/gh_evidence_{workflow_file}.err")
-    rc, out, err = run_cmd(cmd, timeout=25)
+    rc, out, err = run_cmd([
+        "gh", "run", "list", "--workflow", workflow_file, "--limit", "100",
+        "--json", "createdAt,status,conclusion",
+    ], timeout=25)
     if rc != 0:
-        try:
-            err = Path(f"/tmp/gh_evidence_{workflow_file}.err").read_text(
-                encoding="utf-8", errors="ignore") or err
-        except OSError:
-            pass
         return None, None, None, f"gh Fehler: {(err or out or 'ohne Meldung').strip()[:200]}"
     try:
         rows = json.loads(out.strip() or "[]")

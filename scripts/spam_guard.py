@@ -55,6 +55,7 @@ import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 import tempfile
 import urllib.error
@@ -739,24 +740,54 @@ def check_feed():
                          ]), feed
 
 
+FEED_HEALERS = frozenset({
+    "cadence_guard.py", "check_titles.py", "generate_covers.py",
+})
+
+
+def _run_feed_healer(script_name):
+    """Startet einen freigegebenen Feed-Heiler ohne Shell-Interpretation.
+
+    Der Repository-Pfad kann Leerzeichen enthalten; ein Argumentvektor bleibt
+    dabei korrekt und verhindert, dass ein Pfad oder ein künftiger Parameter
+    als Shell-Syntax ausgeführt wird. Der Name ist zusätzlich allowlisted,
+    damit dieser interne Helper keine beliebigen Repository-Skripte starten
+    kann. Die Ausgaben waren bisher bewusst unterdrückt und bleiben es, damit
+    der Watchdog-Report kompakt bleibt.
+    """
+    if script_name not in FEED_HEALERS:
+        return 126
+    path = os.path.join(BLOG_DIR, "scripts", script_name)
+    try:
+        result = subprocess.run(
+            [sys.executable, path, "--fix"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=300,
+            check=False,
+            shell=False,
+        )
+        return result.returncode
+    except subprocess.TimeoutExpired:
+        return 124
+    except OSError:
+        return 127
+
+
 def fix_feed(findings):
     """Feed-Heilung = Heilung der QUELLE (Spezial-Guards), dann Re-Check."""
     if DRY_RUN:
         return ["Feed-Heilung übersprungen (dry-run)"]
     healed = []
     rules = {r for r, _s, _m in findings if r not in ("F0", "F-OK")}
-    base = os.path.join(BLOG_DIR, "scripts")
     if "F3" in rules:
-        r = os.system(f"{sys.executable} {os.path.join(base, 'cadence_guard.py')} "
-                      f"--fix >/dev/null 2>&1")
+        r = _run_feed_healer("cadence_guard.py")
         healed.append(f"cadence_guard --fix (Exit {r})")
     if "F2" in rules:
-        r = os.system(f"{sys.executable} {os.path.join(base, 'check_titles.py')} "
-                      f"--fix >/dev/null 2>&1")
+        r = _run_feed_healer("check_titles.py")
         healed.append(f"check_titles --fix (Exit {r})")
     if "F4" in rules:
-        r = os.system(f"{sys.executable} {os.path.join(base, 'generate_covers.py')} "
-                      f" >/dev/null 2>&1")
+        r = _run_feed_healer("generate_covers.py")
         healed.append(f"generate_covers (Exit {r})")
     if rules:
         audit({"module": "spam_guard", "action": "feed-fix",
