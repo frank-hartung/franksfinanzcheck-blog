@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-04T11:04:41Z",
-  "modus": "live",
-  "commit": "65b50541a4f0dde73647961b3439a38e6a476529",
+  "generated_at": "2026-10-04T11:19:37Z",
+  "modus": "kandidaten",
+  "commit": "7b4a046d0904605085512612718e6872b02c3589",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -226,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
+      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -447,7 +447,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "sha256": "943ac0b631e390b3c299c564e4e7c41508ac2afaa3318e314f0ab3e00aca204f",
+      "sha256": "a080e3e45764c790348abe39ef4e36d701968ad77cc846b429cf5039cc8d2162",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
