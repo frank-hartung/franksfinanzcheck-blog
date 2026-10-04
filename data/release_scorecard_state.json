@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-04T11:19:37Z",
+  "generated_at": "2026-10-04T11:48:44Z",
   "modus": "kandidaten",
-  "commit": "7b4a046d0904605085512612718e6872b02c3589",
+  "commit": "c8c1ea726ebbf9ee3378927fc297b0e3c8f82795",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "72bd76ef4193ae515ed4e3fdc35b95f706ebe9a8183c6ae4a93809e4235965fc",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
