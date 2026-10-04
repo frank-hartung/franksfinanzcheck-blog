@@ -44,18 +44,18 @@ jobs:
         language: [javascript, python]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: CodeQL initialisieren
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
-          config: .github/codeql/codeql-config.yml
+          config-file: .github/codeql/codeql-config.yml
           # Kein queries-Parameter => Standard-Query-Suite je Sprache
           # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
 
       - name: CodeQL analysieren
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: /language:${{ matrix.language }}
           output: sarif-results
