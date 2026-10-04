@@ -76,8 +76,15 @@ def _eu_offset(dt_utc: datetime) -> int:
 
 
 def berlin_now() -> datetime:
+    """Aktuelle Berliner Zeit mit korrektem UTC-Offset.
+
+    Die frühere Fassung addierte zwar ein bzw. zwei Stunden auf die Uhr,
+    behielt aber fälschlich ``+00:00`` als Zeitzone. Das machte protokollierte
+    Zeitpunkte semantisch falsch und erschwerte belastbare Slot-Vergleiche.
+    """
     jetzt = datetime.now(timezone.utc)
-    return jetzt + timedelta(hours=_eu_offset(jetzt))
+    berlin = timezone(timedelta(hours=_eu_offset(jetzt)))
+    return jetzt.astimezone(berlin)
 
 
 def iso(dt: datetime) -> str:

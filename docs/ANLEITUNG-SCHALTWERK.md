@@ -200,7 +200,16 @@ nächste Lauf erkennt den Kanal, das Cockpit zeigt ihn grün.
   Protokoll, alle anderen Regeln laufen weiter.
 - **Fail-closed:** Die Engine startet nur, wenn ihr Selbsttest besteht.
 - **Self-Healing:** Eine gescheiterte Aktionskette wird nicht als erledigt
-  markiert und beim nächsten Lauf erneut versucht.
+  markiert und beim nächsten Lauf erneut versucht. Meldet die 48-h-Wache einen
+  stillen Kanal, rollt sie **vor der Eskalation** automatisch den Plan, zieht
+  genau einen sicheren Slot unter Tageslimit-/Mindestabstands-Schutz vor und
+  versucht die sofortige Zustellung.
+- **Dauerhafter State:** State, Protokoll und Social-Plan werden nur aus
+  existierenden Pfaden gestagt; ein fehlendes optionales Log darf den Commit
+  nicht mehr unbemerkt verhindern. Scheitert der Push, wird der Workflow rot.
+- **Cron-Nachholung:** Kritische Zeitregeln mit `nachholen: true` laufen beim
+  ersten GitHub-Lauf nach dem Slot am selben Tag – auch bei stundenlangem
+  Actions-Verzug – genau einmal.
 - **Keine Secrets im Repo.** Alles über GitHub-Secrets/Variables.
 
 ---
@@ -213,8 +222,9 @@ nächste Lauf erkennt den Kanal, das Cockpit zeigt ihn grün.
 | „kein Auslöser“ | Trigger findet nichts | `--dry-run --verbose`, Trigger-Params prüfen |
 | „Gate hat abgelehnt“ | Text zu lang/kurz, Link-Hygiene, Duplikat | Meldung nennt den Verstoß; Winkel wechseln |
 | Kanal bleibt Standby | Secret fehlt oder heißt anders | `docs/RUNBUCH-SOCIAL-SECRETS.md`, Namen exakt aus `channels.yaml` |
-| Workflow rot | mindestens eine Aktion gescheitert | Cockpit „Letzte Vorgänge“ + Lauf-Log |
-| Zeit-Trigger verpasst | Actions-Verzug > Toleranz | `toleranz_minuten` erhöhen |
+| Sendebereiter Kanal hat 0 geplante Beiträge | Plan war kanalblind/veraltet | Jeder Autopilot-Lauf rollt den Plan; die 48-h-Wache versucht zusätzlich eine kontrollierte Sofortzustellung vor der Eskalation |
+| Workflow rot | Aktion oder dauerhafte State-Sicherung gescheitert | Cockpit „Letzte Vorgänge“ + Lauf-Log; Push-Fehler werden nicht mehr grün maskiert |
+| Zeit-Trigger verpasst | Actions-Verzug > Toleranz | Für kritische Tagesaufgaben `nachholen: true`; sonst `toleranz_minuten` erhöhen |
 
 ```bash
 # Was hat das Schaltwerk zuletzt getan?
@@ -228,6 +238,6 @@ tail -20 data/schaltwerk_log.jsonl | python3 -m json.tool --json-lines 2>/dev/nu
 
 ```bash
 python3 scripts/schaltwerk.py --selftest              # 8 Selbsttest-Blöcke, offline
-python3 -m unittest scripts.tests.test_schaltwerk     # 31 Unit-Tests
+python3 -m unittest scripts.tests.test_schaltwerk     # 36 Unit-Tests
 npm run test:schaltwerk                               # beides
 ```

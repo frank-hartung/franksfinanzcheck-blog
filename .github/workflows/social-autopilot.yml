@@ -42,7 +42,8 @@ on:
         default: "run"
         type: choice
         options:
-          - run        # plant bei Bedarf neu und sendet fällige Beiträge
+          - run        # rollt den Plan und sendet fällige Beiträge
+          - recover    # stillen Kanal kontrolliert sofort wieder beliefern
           - plan       # erneuert nur den 14-Tage-Plan (sendet nichts)
           - dry-run    # zeigt die Beiträge, sendet nichts
           - status     # schreibt nur das Cockpit neu
@@ -104,7 +105,7 @@ jobs:
           fi
 
       - name: Autopilot-Lauf (planen · texten · prüfen · senden)
-        if: ${{ github.event.inputs.modus == 'run' || github.event.inputs.modus == 'dry-run' || github.event_name == 'schedule' }}
+        if: ${{ github.event.inputs.modus == 'run' || github.event.inputs.modus == 'recover' || github.event.inputs.modus == 'dry-run' || github.event_name == 'schedule' }}
         env:
           # --- Mastodon -----------------------------------------------------
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
@@ -152,6 +153,7 @@ jobs:
         run: |
           ARGS="--run"
           [ "${{ github.event.inputs.modus }}" = "dry-run" ] && ARGS="$ARGS --dry-run"
+          [ "${{ github.event.inputs.modus }}" = "recover" ] && ARGS="$ARGS --recover"
           [ -n "${{ github.event.inputs.kanal }}" ] && ARGS="$ARGS --channel ${{ github.event.inputs.kanal }}"
           [ -n "${{ github.event.inputs.limit }}" ] && ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"
           [ "${{ github.event.inputs.force }}" = "true" ] && ARGS="$ARGS --force"

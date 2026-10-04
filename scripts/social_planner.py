@@ -41,6 +41,11 @@ STATE_FILE = os.path.join(DATA_DIR, "state.yaml")
 PERFORMANCE_FILE = os.path.join(DATA_DIR, "performance.yaml")
 
 HISTORY_LIMIT = 800
+# Ein verspäteter GitHub-Actions-Lauf holt fällige Beiträge bis zu 48 Stunden
+# nach. Derselbe Wert gilt beim Rollen des Plans: sonst würde eine Neuplanung
+# einen 61 Minuten alten, noch zustellbaren Slot löschen, bevor due_items() ihn
+# überhaupt sehen kann.
+LATE_GRACE_HOURS = 48
 # Ein Artikel darf pro Tag auf maximal so vielen Kanälen erscheinen
 # (die Launch-Welle bewusst begrenzen – nie 10 Kanäle gleichzeitig).
 MAX_CHANNELS_PER_ARTICLE_PER_DAY = 2
@@ -327,13 +332,21 @@ def _not_in_cooldown(item: dict, cfg: dict, state: dict, now: datetime,
 
 def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = None,
                horizon: int | None = None, keep_existing: bool = True,
-               performance: dict | None = None) -> dict:
+               performance: dict | None = None,
+               ready_channels: set[str] | None = None) -> dict:
     """Erzeugt den rollierenden Plan (heute + horizon Tage).
 
     `performance` ist der Rückkanal aus scripts/social_perf_feedback.py
     (siehe load_performance()). Wird keiner übergeben, lädt build_plan ihn
     selbst von der Platte – fehlt die Datei, ist das Ergebnis {} und der
     Plan entsteht exakt wie vor Einführung des Rückkanals.
+
+    `ready_channels` nennt die in diesem Lauf wirklich sendebereiten Kanäle.
+    Deren Slots werden zuerst vergeben; alte Zukunftsslots von Standby-Kanälen
+    werden neu einsortiert. Ohne diese Priorität konnten 83 nicht zustellbare
+    Fremdkanal-Posten die globale Tageskapazität belegen, während Mastodon
+    tagelang keinen Slot bekam (#549). ``None`` erhält das neutrale Verhalten
+    für Offline-Planung und bestehende Aufrufer.
     """
     import social_channels as sch
 
@@ -347,7 +360,9 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     schedule = load_schedule()
     items = [it for it in (schedule.get("items") or [])
              if keep_existing and it.get("status") == "planned"
-             and (parse_dt(it.get("scheduled_at") or "") or now) > now - timedelta(hours=1)]
+             and (ready_channels is None or it.get("channel") in ready_channels)
+             and (parse_dt(it.get("scheduled_at") or "") or now)
+             > now - timedelta(hours=LATE_GRACE_HOURS)]
     # Bereits veröffentlichte/gescheiterte Einträge als Historie mitführen
     carried = [it for it in (schedule.get("items") or [])
                if it.get("status") in ("published", "failed", "blocked")]
@@ -381,8 +396,12 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
 
     for offset in range(horizon + 1):
         day = (now + timedelta(days=offset)).date()
-        for cid in sorted((cfg.get("channels") or {}).keys(),
-                          key=lambda c: int((channels.get(c) or {}).get("priority") or 99)):
+        for cid in sorted(
+                (cfg.get("channels") or {}).keys(),
+                key=lambda c: (
+                    0 if ready_channels is None or c in ready_channels else 1,
+                    int((channels.get(c) or {}).get("priority") or 99),
+                )):
             ch = channels.get(cid) or {}
             if not ch.get("enabled"):
                 continue
@@ -475,7 +494,7 @@ def planned_items(schedule: dict) -> list[dict]:
 
 
 def due_items(schedule: dict, now: datetime | None = None,
-              late_grace_hours: int = 48) -> list[dict]:
+              late_grace_hours: int = LATE_GRACE_HOURS) -> list[dict]:
     """Fällige Posten: geplant, Zeit erreicht, nicht hoffnungslos veraltet."""
     now = now or berlin_now()
     out = []

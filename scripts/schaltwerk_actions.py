@@ -245,7 +245,8 @@ def aktion_social_autopilot_lauf(params: dict, daten: dict, ctx: dict) -> dict:
 
     So bleibt die Planungs-Intelligenz an EINER Stelle; das Schaltwerk
     entscheidet nur, WANN sie läuft.
-    params: kanal (optional), limit (0 = alle fälligen), modus (run|plan)
+    params: kanal (optional), limit (0 = alle fälligen),
+            modus (run|plan|recover; recover zieht einen sicheren Slot vor)
     """
     try:
         import social_channels as sch
@@ -255,6 +256,8 @@ def aktion_social_autopilot_lauf(params: dict, daten: dict, ctx: dict) -> dict:
 
     cfg = sch.load_config()
     modus = str(params.get("modus") or "run")
+    if modus not in {"run", "plan", "recover"}:
+        return fehler(f"Unbekannter Autopilot-Modus: {modus}")
     if modus == "plan":
         try:
             import social_copywriter as copy
@@ -262,7 +265,8 @@ def aktion_social_autopilot_lauf(params: dict, daten: dict, ctx: dict) -> dict:
 
             state = planner.load_state()
             pool = copy.article_pool()
-            plan = planner.build_plan(cfg, pool, state)
+            plan = planner.build_plan(
+                cfg, pool, state, ready_channels=studio.ready_channel_ids(cfg))
             if ctx.get("dry_run"):
                 return uebersprungen(f"Probelauf: Plan hätte {len(planner.planned_items(plan))} Posten")
             planner.prune(plan)
@@ -274,13 +278,17 @@ def aktion_social_autopilot_lauf(params: dict, daten: dict, ctx: dict) -> dict:
     try:
         bericht = studio.run_once(cfg, dry_run=bool(ctx.get("dry_run")),
                                   channel=str(params.get("kanal") or ""),
-                                  limit=int(params.get("limit") or 0))
+                                  limit=int(params.get("limit") or 0),
+                                  recover=modus == "recover")
     except Exception as exc:  # noqa: BLE001
         return fehler(f"Autopilot-Lauf gescheitert: {exc}")
 
     if isinstance(bericht, dict):
-        gesendet = bericht.get("sent") or bericht.get("gesendet") or 0
-        misslungen = bericht.get("failed") or bericht.get("fehler") or 0
+        # run_once() kapselt die Zähler unter ``results``. Die frühere flache
+        # Auswertung meldete selbst nach echtem Versand stets „0 verarbeitet“.
+        zaehler = bericht.get("results") if isinstance(bericht.get("results"), dict) else bericht
+        gesendet = zaehler.get("sent") or zaehler.get("gesendet") or 0
+        misslungen = zaehler.get("failed") or zaehler.get("fehler") or 0
         if misslungen:
             return fehler(f"Autopilot: {gesendet} gesendet, {misslungen} gescheitert")
         return ok(f"Autopilot: {gesendet} Beiträge verarbeitet")

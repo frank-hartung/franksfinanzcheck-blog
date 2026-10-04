@@ -216,10 +216,13 @@ def trigger_zeitplan(params: dict, ctx: dict) -> list[dict]:
     """Klassischer Zeit-Trigger („Schedule by Zapier“) in Berliner Ortszeit.
 
     params: zeiten ["07:30","18:00"], tage [0..6] (Mo=0),
-            toleranz_minuten (Standard 45 – deckt Actions-Verzug ab)
+            toleranz_minuten (Standard 45 – deckt Actions-Verzug ab),
+            nachholen (bei true: erster Lauf nach dem Slot am selben Tag)
 
-    Der Slot feuert höchstens einmal pro Tag, auch wenn der Lauf
-    mehrfach in das Toleranzfenster fällt (State: slots).
+    Der Slot feuert höchstens einmal pro Tag, auch wenn der Lauf mehrfach in
+    das Toleranzfenster fällt. Kritische Tagesaufgaben setzen ``nachholen``:
+    GitHub darf einen Cron dann um Stunden verzögern, ohne dass die Aufgabe
+    für den ganzen Tag verloren ist (State: slots).
     """
     import schaltwerk
 
@@ -228,6 +231,7 @@ def trigger_zeitplan(params: dict, ctx: dict) -> list[dict]:
     if tage is not None and jetzt.weekday() not in [int(t) for t in tage]:
         return []
     toleranz = int(params.get("toleranz_minuten") or 45)
+    nachholen = bool(params.get("nachholen", False))
     state = ctx.get("state") or {}
     heute = jetzt.date().isoformat()
 
@@ -239,7 +243,7 @@ def trigger_zeitplan(params: dict, ctx: dict) -> list[dict]:
             continue
         soll = jetzt.replace(hour=stunde, minute=minute, second=0, microsecond=0)
         verzug = (jetzt - soll).total_seconds() / 60.0
-        if not (0 <= verzug <= toleranz):
+        if verzug < 0 or (verzug > toleranz and not nachholen):
             continue
         slot = f"slot:{heute}:{zeit}"
         if slot in (state.get("slots") or {}):

@@ -40,9 +40,6 @@ meta:
   base_url: "https://franksfinanzcheck.de"
   # Rolling-Plan: so viele Tage im Voraus wird geplant (Agentur-Default).
   plan_horizon_days: 14
-  # Neuplanung, wenn weniger als X geplante Posten im Horizont liegen
-  # (schützt davor, dass ein einzelner Fehlversuch den Plan leert).
-  min_planned_items: 12
   # Harte Tages-Obergrenze ÜBER ALLE Kanäle (Anti-Spam, Frequenzschutz).
   max_posts_per_day_total: 12
   # Artikel gelten so viele Tage nach Publikation als „neu“ und bekommen
