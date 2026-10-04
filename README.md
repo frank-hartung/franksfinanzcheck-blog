@@ -98,14 +98,6 @@ Empfehlungslinks (Werbung) sind der einzige Finanzierungsweg.
 individuelle Finanz-, Steuer- oder Rechtsberatung. Alle Angaben ohne Gewähr;
 Preise und Konditionen können sich jederzeit ändern.
 
-## Blogautomatik & 0 € Architektur
-
-Das Redaktionssystem arbeitet auf Basis eines eigens entwickelten, kostenlosen Stacks:
-- **Whisper lokal:** 100% on-premise Spracherkennung (`faster-whisper`, CTranslate2) für Diktate, Voice-Memos und automatische Audio-QA ohne API-Kosten.
-- **n8n self-hosted:** Workflow-Orchestrierung via Docker Compose und Webhook-Bridge (`scripts/n8n_bridge.py`).
-- **GitHub Pages:** Serverless Hosting und CI/CD Qualitäts-Gates auf Agentur-Niveau.
-- **Anleitung & Leitstand:** [docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md](docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md) und [WHISPER-N8N-INTEGRATION-PREMIUM-2026-10-03.md](WHISPER-N8N-INTEGRATION-PREMIUM-2026-10-03.md).
-
 ## Über dieses Repository
 
 Hier liegen die Quellen der Website – Artikel, Seitenlayouts, Bilder und

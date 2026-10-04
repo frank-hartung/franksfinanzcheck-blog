@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+# ============================================================
+#  COMMIT-SPERRE MARKENFLÄCHE  ·  Vorgang WF-A4E0 (Meldung #552)
+#  ------------------------------------------------------------
+#  WARUM ES DIESEN HAKEN GIBT (04.10.2026):
+#    Das README ist eine Markenfläche – es wird indexiert und steht bei
+#    einer Markensuche neben dem Ratgeber. Betriebssprache (Automatik,
+#    Abläufe, Gates, Dateipfade) gehört nach docs/ENTWICKLER-WERKZEUGE.md.
+#    Zweimal innerhalb einer Woche (01.10. und 03.10.2026) landete sie
+#    trotzdem wieder im README; beide Male fiel es erst NACH dem Push auf
+#    – als roter Lauf samt öffentlich sichtbarer Fehlermeldung.
+#    Dieser Haken zieht die Grenze dorthin, wo der Fehler entsteht.
+#
+#  WAS ER TUT:
+#    · nur aktiv, wenn README, Allowlist oder die Wache selbst gestaget sind
+#    · prüft den GESTAGETEN Stand (nicht den Arbeitsbaum – `git add -p`!)
+#    · läuft offline, ohne Netz, ohne Token, in unter einer Sekunde
+#    · beweist zuerst sich selbst (--selftest): ein blinder Haken wäre
+#      schlimmer als keiner
+#
+#  EINSCHALTEN:  npm run hooks:install   (oder: git config core.hooksPath .githooks)
+#  NOTAUSGANG :  git commit --no-verify  – dann hält das Gate im Push-Lauf.
+# ============================================================
+set -euo pipefail
+
+WURZEL="$(git rev-parse --show-toplevel)"
+WACHE="scripts/brand_surface_guard.py"
+
+GESTAGET="$(git diff --cached --name-only --diff-filter=ACMR || true)"
+betrifft_marke=0
+for pfad in README.md data/brand_surface_allowlist.txt "$WACHE"; do
+  if printf '%s\n' "$GESTAGET" | grep -qxF "$pfad"; then betrifft_marke=1; fi
+done
+[ "$betrifft_marke" -eq 1 ] || exit 0
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "🛑 Markenflächen-Sperre: python3 fehlt – der Stand ist ungeprüft."
+  echo "   Entweder python3 installieren oder bewusst umgehen:"
+  echo "   git commit --no-verify   (dann prüft der Push-Lauf)"
+  exit 1
+fi
+
+cd "$WURZEL"
+
+if ! python3 "$WACHE" --selftest >/dev/null; then
+  echo "🛑 Markenflächen-Sperre: Der Selbsttest der Wache ist rot – es wird"
+  echo "   nichts freigegeben, solange der Detektor selbst nicht beweisbar ist."
+  python3 "$WACHE" --selftest || true
+  exit 1
+fi
+
+PRUEFSTAND="$(mktemp -d -t markenflaeche-XXXXXX)"
+trap 'rm -rf "$PRUEFSTAND"' EXIT
+
+if printf '%s\n' "$GESTAGET" | grep -qxF "README.md"; then
+  # Der gestagete Inhalt ist die Wahrheit des Commits – nicht die Datei auf Platte.
+  git show :README.md > "$PRUEFSTAND/README.md"
+else
+  cp "$WURZEL/README.md" "$PRUEFSTAND/README.md"
+fi
+
+if python3 "$WACHE" --only readme --gate --offline --datei "$PRUEFSTAND/README.md"; then
+  exit 0
+fi
+
+cat <<'HINWEIS'
+
+🛑 Markenflächen-Sperre: Betriebssprache im README (Commit gestoppt).
+
+   Das README ist die öffentliche Markenfläche. Technische Abschnitte
+   (Automatik, Abläufe, Gates, Werkzeugnamen, Dateipfade) gehören nach
+   docs/ENTWICKLER-WERKZEUGE.md – im README steht nur der Verweis.
+
+   Wege nach vorn:
+     1. Abschnitt verschieben  → docs/ENTWICKLER-WERKZEUGE.md
+     2. Begründete Ausnahme    → data/brand_surface_allowlist.txt
+                                 (eine Regex pro Zeile, Begründung im Kommentar)
+     3. Erneut prüfen          → npm run marke:check
+     4. Bewusst umgehen        → git commit --no-verify
+                                 (dann meldet es der Push-Lauf öffentlich)
+
+   Hintergrund: docs/MARKEN-OBERFLAECHE-RUNBOOK.md
+HINWEIS
+exit 1

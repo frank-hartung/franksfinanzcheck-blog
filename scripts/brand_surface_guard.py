@@ -55,6 +55,13 @@ Nutzung
     python3 scripts/brand_surface_guard.py --only readme  # nur eine Oberfläche
     python3 scripts/brand_surface_guard.py --json         # Maschinenlesbarer Befund
     python3 scripts/brand_surface_guard.py --offline --snapshot fall.json   # ohne Netz (Fixtures)
+    python3 scripts/brand_surface_guard.py --only readme --gate --offline \
+            --datei /tmp/stand/README.md                  # eine andere Fassung prüfen
+
+Commit-Sperre (04.10.2026, Vorgang WF-A4E0 / #552): `.githooks/pre-commit` legt den
+GESTAGETEN README-Stand in eine temporäre Datei und prüft ihn über `--datei`, bevor
+der Commit entsteht – vorher meldete sich die Wache erst nach dem Push, als roter
+Lauf mit öffentlich sichtbarer Fehlermeldung. Einschalten: `npm run hooks:install`.
 
 Umgebung: GH_TOKEN/GITHUB_TOKEN (Lesen; Schreiben nur für --fix),
 GITHUB_REPOSITORY (owner/repo), GITHUB_STEP_SUMMARY (Kurzbericht).
@@ -180,11 +187,19 @@ def pruefe_text(text: str, quelle: str, oberflaeche: str,
     return befunde
 
 
-def pruefe_readme(pfad: str, allowlist: list[str]) -> list[Befund]:
+def pruefe_readme(pfad: str, allowlist: list[str], quelle: str = "") -> list[Befund]:
+    """Prüft eine README-Fassung.
+
+    `pfad` darf auch eine andere Fassung sein als die im Arbeitsbaum – die
+    Commit-Sperre (.githooks/pre-commit) legt den GESTAGETEN Stand in eine
+    temporäre Datei und prüft diesen. Ein Haken, der den Arbeitsbaum liest,
+    wäre blind für `git add -p` und für teilweise gestagete Änderungen.
+    """
     if not os.path.exists(pfad):
         return []
     with open(pfad, encoding="utf-8") as datei:
-        return pruefe_text(datei.read(), "README.md", "O2 README (Markenfläche)", allowlist)
+        return pruefe_text(datei.read(), quelle or os.path.basename(pfad),
+                           "O2 README (Markenfläche)", allowlist)
 
 
 def pruefe_releases(releases: list[dict]) -> tuple[list[Befund], list[Befund]]:
@@ -715,14 +730,54 @@ def selftest() -> int:
     if taub_geheilt or len(taub_offen) != 3:
         fehler.append(f"F16: unbelegte Repo-Kopf-Heilung gilt als Erfolg: {taub_geheilt}")
 
+    # ------------------------------------------------------------------
+    #  F17: Commit-Sperre (--datei). Der Haken prüft den GESTAGETEN Stand,
+    #  nicht den Arbeitsbaum. Drei Lagen müssen stimmen, sonst ist die Sperre
+    #  entweder blind (meldet Ruhe) oder lästig (meldet Unfug):
+    #    a) saubere Fassung  → Exit 0
+    #    b) Betriebssprache  → Exit 1 (und zwar aus DER Datei, nicht dem Repo)
+    #    c) Datei fehlt      → Exit 2 statt stiller Freigabe
+    # ------------------------------------------------------------------
+    import contextlib  # noqa: PLC0415 – nur der Selbsttest braucht die Stille
+    import io  # noqa: PLC0415
+    import tempfile  # noqa: PLC0415
+
+    def _still(argumente: list[str]) -> int:
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer), contextlib.redirect_stderr(puffer):
+            return main(argumente)
+
+    with tempfile.TemporaryDirectory(prefix="markenflaeche-selftest-") as ordner:
+        sauber_pfad = os.path.join(ordner, "README.md")
+        with open(sauber_pfad, "w", encoding="utf-8") as datei:
+            datei.write(marken_text)
+        if _still(["--only", "readme", "--gate", "--offline", "--datei", sauber_pfad]) != 0:
+            fehler.append("F17a: saubere gestagete Fassung wird abgelehnt")
+
+        schmutzig_pfad = os.path.join(ordner, "schmutzig.md")
+        with open(schmutzig_pfad, "w", encoding="utf-8") as datei:
+            datei.write(betrieb_text)
+        if _still(["--only", "readme", "--gate", "--offline", "--datei", schmutzig_pfad]) != 1:
+            fehler.append("F17b: Betriebssprache im gestageten Stand bleibt unentdeckt "
+                          "(Commit-Sperre wäre blind)")
+
+        if _still(["--only", "readme", "--gate", "--offline",
+                   "--datei", os.path.join(ordner, "gibtsnicht.md")]) != 2:
+            fehler.append("F17c: fehlende Prüfdatei gilt als grün – stille Freigabe")
+
+        if _still(["--gate", "--offline", "--datei", sauber_pfad]) != 2:
+            fehler.append("F17d: --datei ohne `--only readme` wird stillschweigend "
+                          "auf andere Oberflächen bezogen")
+
     if fehler:
         print("🛑 Selbsttest der Marken-Oberflächen-Wache FEHLGESCHLAGEN:")
         for f in fehler:
             print(f"   · {f}")
         return 2
-    print("✅ Selbsttest: 16 Fallgruppen bestanden "
+    print("✅ Selbsttest: 17 Fallgruppen bestanden "
           "(Erkennung, Entwurfs-, Tag- und Repo-Kopf-Heilung mit Nachprüfung, "
-          "blinder Detektor, Markenfläche, Allowlist, Repo-Kopf, Issue-Titel).")
+          "blinder Detektor, Markenfläche, Allowlist, Repo-Kopf, Issue-Titel, "
+          "Commit-Sperre auf dem gestageten Stand).")
     return 0
 
 
@@ -747,10 +802,26 @@ def main(argv: list[str] | None = None) -> int:
                                              "(repo/releases/issues) für --offline")
     zerleger.add_argument("--only", choices=["releases", "readme", "repo", "issues"],
                           help="nur eine Oberfläche prüfen")
+    zerleger.add_argument("--datei", help="andere README-Fassung prüfen (z. B. der "
+                                          "gestagete Stand aus `git show :README.md`) – "
+                                          "sinnvoll mit `--only readme --offline`")
     args = zerleger.parse_args(argv)
 
     if args.selftest:
         return selftest()
+
+    # --datei ist der Pfad der Commit-Sperre: eine fremde README-Fassung darf
+    # nicht heimlich neben Live-Oberflächen (Releases, Repo-Kopf) auftauchen –
+    # sonst steht im selben Befund der Arbeitsbaum neben dem gestageten Stand.
+    if args.datei is not None:
+        if args.only != "readme":
+            print("::error::--datei wirkt nur auf die README-Oberfläche "
+                  "(mit `--only readme` aufrufen).")
+            return 2
+        if not os.path.exists(args.datei):
+            print(f"::error::--datei {args.datei} existiert nicht – nichts geprüft "
+                  "(eine Wache, die ins Leere liest, meldet falsche Ruhe).")
+            return 2
 
     repo = os.environ.get("GITHUB_REPOSITORY", "frank-hartung/franksfinanzcheck-blog")
     token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
@@ -795,7 +866,9 @@ def main(argv: list[str] | None = None) -> int:
 
     # ---- O2 README (immer lokal prüfbar, auch offline) ----
     if args.only in (None, "readme"):
-        befunde += pruefe_readme(README_PFAD, allowlist)
+        befunde += pruefe_readme(args.datei or README_PFAD, allowlist, quelle="README.md")
+        if args.datei:
+            hinweise.append(f"Geprüfte Fassung: {args.datei} (nicht der Arbeitsbaum)")
 
     # ---- O1/O5 Releases ----
     releases = None
