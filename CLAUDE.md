@@ -53,12 +53,33 @@ Vorgang WF-A4E0 / Meldung #552 am 03.10.2026, nach demselben Fall am 01.10.).
   der Verweis darauf. Projektberichte bleiben im Root (`*-PREMIUM-*.md`).
 - **Ausnahme nur mit Begründung** in `data/brand_surface_allowlist.txt`.
 - **Vor jedem README-Commit:** `npm run marke:check`
-- **Commit-Sperre einschalten (einmalig):** `npm run hooks:install` – der Haken
-  `.githooks/pre-commit` prüft den gestageten Stand offline in unter einer
-  Sekunde. `npm install` schaltet ihn über `prepare` mit.
-- Regressionstest: `npm run test:marke` · Hintergrund:
-  `MARKENFLAECHE-README-PREMIUM-2026-10-04.md`, Runbook:
+- **Die Commit-Sperre stellt sich selbst scharf.** `scripts/haken_wache.py`
+  hängt `.githooks/pre-commit` bei `npm install` (prepare) und bei jedem
+  Marken-Lauf ein – vorhandene Haken bleiben dabei aktiv (`pre-commit.lokal`).
+  Kontrolle: `npm run hooks:status`, von Hand: `npm run hooks:install`.
+  **Niemals `core.hooksPath` von Hand setzen** – das legt alle anderen Haken
+  still; der Wächter zieht solche Arbeitskopien um und begründet es.
+- Regressionstest: `npm run test:marke` (Wache + Wächter) · Hintergrund:
+  `MARKENFLAECHE-README-PREMIUM-2026-10-04.md` und
+  `LEITPLANKEN-SELBSTSCHARF-PREMIUM-2026-10-04.md`, Runbook:
   `docs/MARKEN-OBERFLAECHE-RUNBOOK.md`.
+
+## Vorgänge werden mit Nachweis geschlossen (DAUERVORGABE)
+
+Eine behobene Meldung bekommt einen **Abschlussvermerk**, und zwar nicht von
+Hand: Das persönliche Zugangsrecht darf keine Kommentare schreiben (HTTP 403,
+belegt am 04.10.2026 an Meldung #552). Zuständig ist
+`.github/workflows/vorgangs-abschluss.yml` – sofort beim Zusammenführen und
+täglich als Nachlauf.
+
+- **Im Vorschlag immer `Closes #<Nummer>`** schreiben; daraus leitet sich der
+  Vermerk ab.
+- Nie von Hand nachkommentieren; fehlt ein Vermerk, nachtragen lassen:
+  `npm run vorgang:abschluss -- --pr <Nummer> --apply` (oder `vorgang:nachtrag`).
+- **Issue-Kommentare sind Markenfläche.** Der Text läuft vor dem Absenden durch
+  die Marken-Wache; Betriebssprache wird zurückgenommen, nicht veröffentlicht.
+- Regressionstest: `npm run test:vorgang` · Doku:
+  `docs/ENTWICKLER-WERKZEUGE.md`, Abschnitt „Abschlussvermerk an die Meldung".
 
 ## Redaktionelle Sprache (DAUERVORGABE)
 
@@ -101,7 +122,11 @@ npm run test:vergleiche                               # Selbsttest der Vergleich
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
-npm run test:marke                                    # Selbsttest (17 Fallgruppen) + 15 Regressionstests der Commit-Sperre
+npm run test:marke                                    # Wache (17 Fallgruppen) + Haken-Wächter (11) + 34 Regressionstests
+npm run hooks:status                                  # steht die Commit-Sperre in dieser Arbeitskopie? (sonst: hooks:install)
+npm run test:haken                                    # Selbstscharfstellung der Commit-Sperre (echte Wegwerf-Repos)
+npm run vorgang:abschluss -- --pr <Nr>                # Abschlussvermerk an die Meldung (Plan; --apply schreibt)
+npm run test:vorgang                                  # Abschlussvermerk: 12 Fallgruppen + 15 Verfahrenstests
 
 # 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)

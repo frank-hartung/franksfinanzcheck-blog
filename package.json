@@ -134,11 +134,17 @@
     "build:vertrag": "python3 scripts/hugo_build_vertrag.py",
     "build:selftest": "python3 scripts/hugo_build_vertrag.py --selftest",
     "test:build": "python3 scripts/hugo_build_vertrag.py --selftest && python3 -m unittest scripts.tests.test_hugo_build_vertrag",
-    "marke:check": "python3 scripts/brand_surface_guard.py --selftest && python3 scripts/brand_surface_guard.py --only readme --gate --offline",
+    "marke:check": "python3 scripts/haken_wache.py --install --leise; python3 scripts/brand_surface_guard.py --selftest && python3 scripts/brand_surface_guard.py --only readme --gate --offline",
     "marke:befund": "python3 scripts/brand_surface_guard.py --gate",
-    "test:marke": "python3 scripts/brand_surface_guard.py --selftest && python3 -m unittest scripts.tests.test_markenflaeche_readme",
-    "hooks:install": "git config core.hooksPath .githooks && echo \"Commit-Sperre aktiv (core.hooksPath=.githooks)\"",
-    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
+    "test:marke": "python3 scripts/brand_surface_guard.py --selftest && python3 scripts/haken_wache.py --selftest && python3 -m unittest scripts.tests.test_markenflaeche_readme scripts.tests.test_haken_wache",
+    "hooks:install": "python3 scripts/haken_wache.py --install",
+    "hooks:status": "python3 scripts/haken_wache.py --status",
+    "hooks:check": "python3 scripts/haken_wache.py --check",
+    "test:haken": "python3 scripts/haken_wache.py --selftest && python3 -m unittest scripts.tests.test_haken_wache",
+    "vorgang:abschluss": "python3 scripts/vorgangs_abschluss.py",
+    "vorgang:nachtrag": "python3 scripts/vorgangs_abschluss.py --nachtrag",
+    "test:vorgang": "python3 scripts/vorgangs_abschluss.py --selftest && python3 -m unittest scripts.tests.test_vorgangs_abschluss",
+    "prepare": "python3 scripts/haken_wache.py --install --leise || true"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

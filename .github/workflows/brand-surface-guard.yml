@@ -52,11 +52,15 @@ on:
       - "README.md"
       - "data/brand_surface_allowlist.txt"
       - "scripts/brand_surface_guard.py"
+      - "scripts/haken_wache.py"
+      - ".githooks/**"
   pull_request:
     paths:
       - "README.md"
       - "data/brand_surface_allowlist.txt"
       - "scripts/brand_surface_guard.py"
+      - "scripts/haken_wache.py"
+      - ".githooks/**"
   workflow_dispatch:
     inputs:
       modus:
@@ -90,6 +94,13 @@ jobs:
 
       - name: Selbsttest der Wache (blind wäre schlimmer als keine)
         run: python3 scripts/brand_surface_guard.py --selftest
+
+      # Die erste Schicht ist die Commit-Sperre. Sie nützt nur, wenn sie sich
+      # in jeder Arbeitskopie selbst scharfstellt (04.10.2026, zweite Stufe) –
+      # deshalb läuft ihr Beweis hier mit: echte Wegwerf-Repos, echter
+      # Commit-Versuch, offline und in unter zwei Sekunden.
+      - name: Selbsttest des Haken-Wächters (Selbstscharfstellung)
+        run: python3 scripts/haken_wache.py --selftest
 
       - name: README als Markenfläche prüfen (offline, schreibgeschützt)
         run: |
