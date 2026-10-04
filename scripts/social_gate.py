@@ -48,12 +48,13 @@ if SCRIPTS_DIR not in sys.path:
 
 import social_copywriter as copy  # noqa: E402
 
-# Härtung 2026-10 (py/overly-large-range): kanonisch sortierte, disjunkte
-# Bereiche in aufsteigender Reihenfolge (Pfeile, Symbole/Dingbats,
-# Sterne/Ornamente, Regional-Indikatoren, Symbol-/Emoji-Blöcke).
+# Härtung 2026-10 (py/overly-large-range, 2. Runde): Regionale Indikatoren
+# (1F1E6–1F1FF) liegen vollständig im Symbol-/Emoji-Block – als EIGENE Range
+# neben 1F300–1FAFF meldet der Scanner Überlappungsverdacht. Eine durchgehend
+# kanonisierte Klassenliste (Pfeile, Symbole/Dingbats, Sterne/Ornamente,
+# geschlossener Emoji-Block inkl. Flaggen) ist semantisch identisch.
 EMOJI_RX = re.compile(
-    "[" "\u2190-\u21FF" "\u2600-\u27BF" "\u2B00-\u2BFF"
-    "\U0001F1E6-\U0001F1FF" "\U0001F300-\U0001FAFF" "]"
+    "[" "\u2190-\u21FF" "\u2600-\u27BF" "\u2B00-\u2BFF" "\U0001F000-\U0001FAFF" "]"
 )
 TAG_RX = re.compile(r"(?<!\w)#([A-Za-z0-9ÄÖÜäöüß_]+)")
 NUM_RX = re.compile(r"\d[\d.,]*")

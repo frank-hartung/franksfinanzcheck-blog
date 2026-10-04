@@ -177,10 +177,12 @@ export function mdToHtml(md) {
 function splitRow(row) {
   return row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim());
 }
-/* Härtung 2026-10 (Code-Scanning): auch unvollständige Tags („<script“ ohne
-   schließendes „>“) entfernen – sonst könnte ein Fragment im Further-Verlauf
-   als Markup landen. */
-function stripTags(s) { return String(s).replace(/<[^>]*>?/g, ''); }
+/* Härtung 2026-10 (Code-Scanning, 2. Runde): Tags durch LEERZEICHEN ersetzen
+   statt löschen – ein Lösch-Replace kann aus „<scr<script>ipt>“ erneut
+   „<script“ zusammensetzen; mit Trennzeichen dazwischen unmöglich. Die
+   Aufrufer trimmen/greifenwortweise weiter, ein zusätzliches Leerzeichen
+   stört nie. */
+function stripTags(s) { return String(s).replace(/<[^>]*>?/g, ' '); }
 function slugify(s) {
   return String(s).toLowerCase().replace(/[^\wäöüß-]+/g, '-').replace(/^-+|-+$/g, '');
 }
