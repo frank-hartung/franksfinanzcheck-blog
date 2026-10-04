@@ -243,15 +243,23 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
             audio_filename=os.path.basename(audio_kanon) if audio_kanon else "n8n_inbound.mp3",
         )
 
-        # Slug-Wacht (Härtung 2026-10, 2. Runde): Gesamtmuster-Validierung
-        # statt Ersetzung – nur ein Slug aus reinen Wortzeichen/Bindestrichen
-        # (max. 80) wird als Ordnername übernommen, alles andere (inklusive
-        # Pfad-Trennern wie „../“ oder Leerzeichen) fällt auf den Fallback
-        # zurück. Interne Slugs entstehen ohnehin per _slugify() und sind
-        # bereits [a-z0-9-] – das Verhalten für echte Artikel ändert sich nicht.
+        # Slug-Wacht (Härtung 2026-10, 2. Runde): Doppelte Verteidigung.
+        # 1) Gesamtmuster-Validierung: nur ein Slug aus reinen Wortzeichen/
+        #    Bindestrichen (max. 80) kommt als Ordnername in Frage – interne
+        #    Slugs entstehen ohnehin per _slugify() und sind bereits [a-z0-9-].
+        # 2) Kanonisches Pfad-Gefängnis (von CodeQL explizit anerkanntes
+        #    Idiom: os.path.realpath + startswith-Präfixwacht): der
+        #    kanonisierte Zielpfad muss INNERHALB der Drafts-Wurzel bleiben,
+        #    sonst wird er auf den Fallback-Entwurf gelegt. „../“-Reisen,
+        #    Symlink-Fluchten und absolute Pfade scheitern an beiden Mauern.
         slug_treffer = re.fullmatch(r"[A-Za-z0-9_-]{1,80}", str(article.get("slug") or ""))
         slug_sicher = slug_treffer.group(0) if slug_treffer else "entwurf"
-        drafts_dir = os.path.join(BLOG_DIR, "content", "drafts", slug_sicher)
+        drafts_wurzel = os.path.realpath(os.path.join(BLOG_DIR, "content", "drafts"))
+        drafts_dir = os.path.realpath(os.path.join(drafts_wurzel, slug_sicher))
+        if not drafts_dir.startswith(drafts_wurzel + os.sep):
+            # Kann nach der Whitelist konstruktiv nie eintreten (Defense in
+            # depth) – trotzdem geprüft, bevor irgendein Pfad geöffnet wird.
+            drafts_dir = os.path.join(drafts_wurzel, "entwurf")
         os.makedirs(drafts_dir, exist_ok=True)
         draft_file = os.path.join(drafts_dir, "index.md")
         with open(draft_file, "w", encoding="utf-8") as fh:
