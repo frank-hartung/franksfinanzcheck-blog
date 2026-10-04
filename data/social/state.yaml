@@ -516,9 +516,29 @@ history:
     #WLAN #Internet #MeshNetzwerk #MeshWLAN'
   ref: '117381789225405577'
   ai: false
+- posted_at: '2026-10-04T17:50:08.910915+02:00'
+  channel: mastodon
+  slug: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp
+  title: 'Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117383431263250864
+  ok: true
+  text: 'Last Minute Urlaub?
+
+
+    Last-Minute-Urlaub buchst du am besten zwei bis acht Wochen vor der Abreise, um
+    Ersparnisse von bis zu 50 Prozent gegenüber dem regulären Preis zu erzielen.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Mietwagen #Reise #LastMinuteUrlaub'
+  ref: '117383431263250864'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-04T13:09:26.466743+02:00'
+updated_at: '2026-10-04T17:50:17.211541+02:00'
