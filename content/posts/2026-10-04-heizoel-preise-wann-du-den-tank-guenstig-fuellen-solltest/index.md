@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken", "Solltest", "Gaspreisgarantie"]
+keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Heizöl Preise: Wann du den Tank günstig füllen solltest"
 pin_description: "*Werbung | Erfahre, wie Heizöl Preise entstehen, wann der beste Kaufzeitpunkt ist und wie du mit dem 4K-Prüfpfad deine Heizkosten senken kannst. Mehr Spartipps auf FranksFinanzcheck! #heizoelpreise #heizoelbestellen #heizkostensenken"
 ai_generated: true

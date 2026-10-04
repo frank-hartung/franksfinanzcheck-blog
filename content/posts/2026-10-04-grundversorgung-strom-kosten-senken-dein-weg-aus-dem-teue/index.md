@@ -1,5 +1,5 @@
 ---
-title: "Grundversorgung Strom Kosten senken –: Dein Weg aus dem teue"
+title: "Grundversorgung Strom Kosten senken –: Dein Weg"
 description: "Grundversorgung Strom Kosten: Wie du die hohen Grundversorgung Strom Kosten erkennst, typische Fallen vermeidest und erfolgreich aus der Grundversorgung…"
 date: 2026-10-04T10:05:53Z
 draft: true

@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Black Friday Internet Angebote", "DSL Deals Black Friday", "Internet Tarif Angebote November", "Internet", "Angebote", "DSL-Wechsel", "DSL-Vergleich", "Internetvertrag wechseln"]
+keywords: ["Black Friday Internet Angebote", "DSL Deals Black Friday", "Internet Tarif Angebote November", "DSL-Wechsel", "DSL-Vergleich", "Internetvertrag wechseln"]
 pin_title: "Black Friday Internet Angebote: Lohnt der DSL-Wechsel"
 pin_description: "*Werbung | Black Friday Internet Angebote versprechen hohe Rabatte. Wir prüfen, ob DSL-Deals am Black Friday wirklich sparen oder nur geschicktes Marketing sind. Mehr Spartipps auf FranksFinanzcheck! #dsldealsblackfriday #internet #angebote"
 ai_generated: true

@@ -8,7 +8,7 @@ tags: ["Budget planen", "Geld sparen im Alltag", "Frugalismus"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Neujahrsvorsätze Geld", "Finanzielle Ziele 2027", "Sparziele erreichen", "Gewohnheiten ändern", "Neujahrsvorsätze Geld 2027"]
+keywords: ["Neujahrsvorsätze Geld", "Finanzielle Ziele 2027", "Sparziele erreichen", "Gewohnheiten ändern", "Neujahrsvorsätze Geld 2027", "Neujahrsvorsätze"]
 pin_title: "Neujahrsvorsätze Geld 2027: 8 Hebel für dein Budget"
 pin_description: "*Werbung | Plane deine Finanzen für 2027. Mit klugen Tipps für Neujahrsvorsätze Geld sparen, Sparziele erreichen und alte Gewohnheiten ändern. Jetzt lesen! Mehr Spartipps auf FranksFinanzcheck! #neujahrsvorsaetzegeld #finanzielleziele2027 #sparzieleerreichen"
 ai_generated: true

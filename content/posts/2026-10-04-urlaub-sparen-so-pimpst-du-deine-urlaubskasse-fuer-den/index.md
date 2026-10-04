@@ -1,14 +1,14 @@
 ---
-title: "Urlaub sparen: So pimpst du deine Urlaubskasse einfach auf"
+title: "Urlaub sparen: So pimpst du deine Urlaubskasse einfach"
 description: Praxisnahe Reisebudget Tipps, wie du Urlaub sparen kannst und trotzdem günstig reisen – Schritt für Schritt. So sparst du jeden Monat bares Geld.
 date: 2026-10-04T10:10:10Z
 draft: true
 reserve: true
-tags: ["Frugalismus"]
+tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Urlaubskasse", "Frugalismus"]
+keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Urlaubskasse", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Urlaub sparen: So pimpst du deine Urlaubskasse für den"
 pin_description: "*Werbung | Praxisnahe Reisebudget Tipps, wie du Urlaub sparen kannst und trotzdem günstig reisen – Schritt für Schritt. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #urlaubsparen #reisebudgettipps #guenstigreisen"
 ai_generated: true
@@ -31,6 +31,8 @@ Willst du 1.200 € mehr für deinen nächsten Sommerurlaub in der Tasche haben
 Wer klug plant, lässt seine Urlaubskasse fast von allein wachsen.  
 Dafür musst du nur die größten Geldfresser im Alltag erkennen und konsequent ausschalten.  
 Mit diesem Schritt-für-Schritt-Plan füllst du dein Budget ohne harten Verzicht.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
 - **Verträge prüfen** – ein jährlicher Check spart oft 5 bis 15 % deiner Fixkosten.
