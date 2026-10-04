@@ -1,6 +1,6 @@
 ---
 title: "Strategien für dein Extra-Gehalt: Weihnachtsgeld was tun?"
-description: "Weihnachtsgeld was tun? Ob Schulden tilgen, Geld anlegen oder Konsum – Frank Hartung zeigt dir, wie du dein Extra-Gehalt strategisch für deine Finanzen nut."
+description: "Weihnachtsgeld was tun? Ob Schulden tilgen, Geld anlegen oder Konsum – Frank Hartung zeigt dir, wie du dein Extra-Gehalt strategisch für deine Finanzen nutzt."
 date: 2026-10-04T10:05:15Z
 draft: true
 reserve: true
@@ -31,7 +31,7 @@ Stell dir vor, dein Konto zeigt plötzlich 2.000 € mehr an als gewohnt. Das N
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Sofort entstehen Bilder von der neuen Espressomaschine oder einem Luxusurlaub im Kopf. Doch wer sich fragt: **Weihnachtsgeld was tun**, sollte kurz innehalten. Mit der richtigen Taktik sicherst du dir finanzielle Freiheit für das gesamte nächste Jahr. Du entscheidest jetzt über deine finanzielle Schlagkraft.
+Sofort entstehen Bilder von der neuen Espressomaschine oder einem Luxusurlaub im Kopf. Bevor du dich entscheidest, lohnt sich ein kurzer Finanz-Check: **Weihnachtsgeld was tun**? Mit der richtigen Taktik sicherst du dir finanzielle Freiheit für das gesamte nächste Jahr. Du entscheidest jetzt über deine finanzielle Schlagkraft.
 
 Bevor du den ersten Euro ausgibst, legst du deine Prioritäten fest. Mathematische Logik schlägt hier oft das kurzfristige Glücksgefühl.
 

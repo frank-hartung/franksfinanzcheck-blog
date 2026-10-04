@@ -913,6 +913,14 @@ def parse_article(raw, topic, angle_name):
     # Letzte Sicherung: Was hier durchrutscht, geht als Google-Snippet und
     # Pinterest-Pin nach außen. Ein Marker darf dort nie landen.
     title = _MARKER_RX.sub("", title).strip() or topic
+    # KI-Ausgaben enthalten gelegentlich abgeschnittene oder doppelte
+    # Satzzeichen. Normalisieren, bevor Frontmatter, Slug und Cover-Alttext
+    # daraus entstehen und die Qualitäts-Gates den Fehler übernehmen.
+    title = re.sub(r"\s+", " ", title)
+    title = re.sub(r"\s*[:：]\s*", ": ", title)
+    title = re.sub(r"\s*[–—-]\s*", " – ", title)
+    title = re.sub(r"\s*:\s*–\s*|\s*–\s*:\s*", ": ", title)
+    title = re.sub(r"\s+", " ", title).strip(" :-–—") or topic
     desc = _MARKER_RX.sub("", desc).strip() or topic
     desc = desc[:155]
     # Code-Fences entfernen, falls die KI welche setzt

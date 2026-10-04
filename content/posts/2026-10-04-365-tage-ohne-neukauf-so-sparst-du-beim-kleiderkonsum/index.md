@@ -1,5 +1,5 @@
 ---
-title: "365 Tage ohne Neukauf: – So sparst du beim Kleiderkonsum"
+title: "365 Tage ohne Neukauf: So sparst du beim Kleiderkonsum"
 description: "365 Tage ohne Neukauf: Entdecke, welche Kosten du beim Verzicht auf neue Kleidung wirklich senken kannst und welche Fallen du vermeiden solltest."
 date: 2026-10-04T10:11:02Z
 draft: true
