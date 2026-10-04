@@ -496,9 +496,29 @@ history:
     #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
   ref: '117365463246886384'
   ai: false
+- posted_at: '2026-10-04T10:52:32.318434+02:00'
+  channel: mastodon
+  slug: 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich
+  title: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117381789225405577
+  ok: true
+  text: 'WLAN-Verstärker vs. Mesh-WLAN?
+
+
+    Ein WLAN-Verstärker (Repeater) für 20 bis 60 Euro genügt, wenn nur ein einzelner
+    Raum schlecht versorgt ist und dein Grundspeed stimmt.
+
+
+    https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #WLAN #Internet #MeshNetzwerk #MeshWLAN'
+  ref: '117381789225405577'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-04T00:11:13.762431+02:00'
+updated_at: '2026-10-04T10:52:41.892337+02:00'

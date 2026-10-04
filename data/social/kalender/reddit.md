@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 04.10.2026 00:11 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.10.2026 10:52 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,12 @@
 
 ## Kommende Beiträge
 
-### Sa, 10. Oktober 2026
-- **14:15** ⏳ Digitaler Turbo: Warum der DNS-Hack dein Netz beschleunigt — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+### Sa, 17. Oktober 2026
+- **14:15** ⏳ Heizkosten senken: Mit diesen Strategien sparst du sofort — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/
+### So, 18. Oktober 2026
+- **14:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
 
 ## Zuletzt veröffentlicht
 
