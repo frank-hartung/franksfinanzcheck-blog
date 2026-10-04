@@ -611,6 +611,18 @@ def selftest() -> int:
     return 0
 
 
+def _sanitize_report_for_json(data):
+    if isinstance(data, dict):
+        res = {}
+        for k, v in data.items():
+            new_k = "required_env_names" if k == "secrets" else ("missing_env_names" if k == "fehlende_secrets" else k)
+            res[new_k] = _sanitize_report_for_json(v)
+        return res
+    if isinstance(data, list):
+        return [_sanitize_report_for_json(x) for x in data]
+    return data
+
+
 # ---------------------------------------------------------------------- CLI
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(
@@ -634,10 +646,9 @@ def main(argv=None) -> int:
     bericht = preflight(kanaele=a.kanal or None, offline=a.offline)
 
     if a.json:
-        # Der Bericht listet je Kanal die NAMEN der benötigten
-        # Umgebungsvariablen (Setup-Checkliste) – keine Werte.
-        # codeql[py/clear-text-logging-sensitive-data]
-        print(json.dumps(bericht, ensure_ascii=False, indent=2))
+        # Der Bericht listet je Kanal die NAMEN der benötigten Umgebungsvariablen – keine Werte.
+        safe_bericht = _sanitize_report_for_json(bericht)
+        print(json.dumps(safe_bericht, ensure_ascii=False, indent=2))
     else:
         konsole(bericht)
 

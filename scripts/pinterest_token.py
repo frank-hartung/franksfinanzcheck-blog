@@ -618,9 +618,23 @@ def _may_persist(health, exists):
 
 def save_state(health, force=False):
     """Schreibt das Lagebild – ohne Token, atomar, tolerant, nur wenn beglaubigt."""
-    public = {k: v for k, v in health.items() if k != "token"}
+    allowed_keys = (
+        "checked_at", "verified", "written_by", "scopes", "state", "source",
+        "source_label", "detail", "fingerprint", "renewable", "auto_renew_armed",
+        "store_present", "access_age_days", "refresh_age_days", "refresh_days_left",
+        "refresh_expires_at", "next_action", "severity", "runbook",
+    )
+    public = {k: health[k] for k in allowed_keys if k in health}
     public["attempts"] = [
-        {k: v for k, v in a.items()} for a in health.get("attempts", [])]
+        {
+            "source": str(a.get("source") or ""),
+            "action": str(a.get("action") or ""),
+            "result": str(a.get("result") or ""),
+            "detail": str(a.get("detail") or ""),
+            "fingerprint": str(a.get("fingerprint") or ""),
+        }
+        for a in health.get("attempts", [])
+    ]
     if not force and not _may_persist(health, os.path.exists(STATE_FILE)):
         return public
     try:

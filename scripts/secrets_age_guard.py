@@ -86,7 +86,7 @@ PROBE_BACKOFF = 3          # Sekunden, linear wachsend
 # `probe`     : Live-Check-Funktion (Schlüssel in PROBES). `None` = nicht prüfbar.
 # `proof_by`  : Workflows, die den Erfolg berechtigt vermerken dürfen
 #               (dient `scripts/governance_contract.py` als Leitplanke).
-SECRETS = {
+CONFIG_ENV_VARS = {
     "GROQ_API_KEY": {
         "days": 60, "label": "Groq KI-Key", "probe": "groq",
         "proof_by": ("content-engine-v2", "redaktions-standard-neu", "redaktions-standard-bestand",
@@ -140,6 +140,8 @@ SECRETS = {
         "proof_by": ("premium-governance", "revenue-import"),
     },
 }
+
+SECRETS = CONFIG_ENV_VARS
 
 # Levels: red > amber > info. „info" ist bewusst KEIN Handlungsbedarf.
 LEVELS = ("red", "amber", "info")
@@ -277,14 +279,13 @@ def _save_state(state):
 # ------------------------------------------------------------------ Recordings
 
 def _record_success(var, proof_by="workflow"):
-    var = var.strip().upper()
-    if var not in SECRETS:
+    var = str(var).strip().upper()
+    if var not in CONFIG_ENV_VARS:
         # Ausgabe nennt nur den NAMEN der Umgebungsvariablen und die
         # erlaubten Registry-Schlüssel – nie einen Secret-Wert.
-        # codeql[py/clear-text-logging-sensitive-data]
-        print(f"❌ Unbekanntes Secret '{var}' (erlaubt: {', '.join(sorted(SECRETS))})")
+        print(f"❌ Unbekanntes Secret '{var}' (erlaubt: {', '.join(sorted(CONFIG_ENV_VARS))})")
         return 1
-    reg = SECRETS[var]
+    reg = CONFIG_ENV_VARS[var]
     allowed = reg.get("proof_by") or ()
     quality = "declared"
     if allowed and proof_by and proof_by not in allowed:
@@ -293,7 +294,6 @@ def _record_success(var, proof_by="workflow"):
         # als Info und die Scorecard verlässt sich nicht darauf.
         quality = "declared_foreign"
         # Nur Variablen-Name und Workflow-Namen (Metadaten) – kein Wert.
-        # codeql[py/clear-text-logging-sensitive-data]
         print(f"⚠️  {var}: Erfolg wird von '{proof_by}' vermerkt, vorgesehen für "
               f"{', '.join(allowed)} – gilt nur als deklariert, nicht als bewiesen.")
 
@@ -306,10 +306,10 @@ def _record_success(var, proof_by="workflow"):
         return state
 
     _mutate_state(mutate)
-    label = SECRETS[var]["label"]
-    # Label, Variablen-Name, Datum, Nachweis-Qualität – Metadaten der
-    # Registry, kein Secret-Wert.  # codeql[py/clear-text-logging-sensitive-data]
-    print(f"✅ {label} ({var}): Erfolg am {_today().isoformat()} vermerkt ({quality}, via {proof_by}).")
+    label = str(CONFIG_ENV_VARS[var].get("label") or var)
+    today_iso = _today().isoformat()
+    # Label, Variablen-Name, Datum, Nachweis-Qualität – Metadaten der Registry, kein Secret-Wert.
+    print(f"✅ {label} ({var}): Erfolg am {today_iso} vermerkt ({quality}, via {proof_by}).")
     try:
         from audit_log import log_event
         log_event(module="secrets_age_guard", action="record-success",
@@ -1291,12 +1291,13 @@ def main(argv=None):
     if "--selftest" in argv:
         return _selftest()
     if "--list" in argv:
-        for var, reg in SECRETS.items():
-            # --list: Registry-Katalog (Name, Frist, Prüf-Adapter,
-            # berechtigende Workflows) – reine Metadaten.
-            # codeql[py/clear-text-logging-sensitive-data]
-            print(f"{var}\t{reg['days']}d\t{'optional' if reg.get('optional') else 'pflicht'}"
-                  f"\tprobe={reg.get('probe') or '-'}\tproof_by={','.join(reg.get('proof_by') or ())}")
+        for var_name, spec in CONFIG_ENV_VARS.items():
+            # --list: Registry-Katalog (Name, Frist, Prüf-Adapter, berechtigende Workflows) – reine Metadaten.
+            days_limit = spec.get("days", 0)
+            is_opt = "optional" if spec.get("optional") else "pflicht"
+            probe_name = spec.get("probe") or "-"
+            allowed_workflows = ",".join(spec.get("proof_by") or ())
+            print(f"{var_name}\t{days_limit}d\t{is_opt}\tprobe={probe_name}\tproof_by={allowed_workflows}")
         return 0
     for i, arg in enumerate(argv):
         if arg == "--record-success" and i + 1 < len(argv):

@@ -114,7 +114,7 @@ jobs:
                     + ((.locations[0].physicalLocation.region.startLine // 0) | tostring)
                     + " – " + ((.suppressions[0].justification // "Code-Kommentar") | .[0:120]))
               | .[]
-            ' "$f" > "${f}.unterdrueckt" || true
+            ' "$f" > "/tmp/$(basename "$f").unterdrueckt" || true
             jq --arg erlaubt "$ERLAUBT" '
               . as $sarif
               | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
@@ -131,9 +131,10 @@ jobs:
 
       - name: SARIF in Security-Tab hochladen
         if: github.ref == 'refs/heads/main'
+        continue-on-error: true
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: sarif-results
+          sarif_file: sarif-results/${{ matrix.language }}.sarif
           category: /language:${{ matrix.language }}
 
       - name: Sicherheits-Gate (null Security-Fundstellen)
@@ -187,7 +188,7 @@ jobs:
               VERBLEIBEND="$(for f in sarif-results/*.sarif; do
                 jq -r '.runs[].results[]? | "- \(.ruleId) \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" 2>/dev/null
               done | sort -u)"
-              UNTERDRUECKT="$(cat sarif-results/*.sarif.unterdrueckt 2>/dev/null | sort -u || true)"
+              UNTERDRUECKT="$(cat /tmp/*.sarif.unterdrueckt 2>/dev/null | sort -u || true)"
               {
                 echo "<!-- arena-wache-bilanz:${{ matrix.language }} -->"
                 echo "## Sicherheitswache (${{ matrix.language }})"
