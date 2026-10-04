@@ -46,26 +46,19 @@ jobs:
           set -euo pipefail
           {
             echo "<!-- arena-codeql-report:${{ matrix.language }} -->"
-            echo "## CodeQL-Fundstellen (${{ matrix.language }})"
-            echo ""
-            echo "| Regel | Schwere | Datei | Zeile |"
-            echo "|---|---|---|---|"
-            for f in sarif-results/*.sarif; do
-              jq -r '
-                .runs[0].results[]? |
-                [
-                  ("`" + .ruleId + "`"),
-                  ((.properties.problem.severity // .level // "note") | tostring),
-                  ("`" + .locations[0].physicalLocations[0].artifactLocation.uri + "`"),
-                  ((.locations[0].physicalLocations[0].region.startLine // 0) | tostring)
-                ] | @tsv' "$f" | while IFS=$'\t' read -r rule sev path line; do
-                  echo "| ${rule} | ${sev} | ${path} | ${line} |"
-                done
-              done
+            echo "## CodeQL-Fundstellen (${{ matrix.language }}) – Rohdaten"
             echo ""
             echo "**Gesamt (${{ matrix.language }}):** $(jq '[.runs[0].results[]?] | length' sarif-results/*.sarif | paste -sd+ | bc)"
+            echo ""
+            for f in sarif-results/*.sarif; do
+              echo '```json'
+              # Kompakte Result-Objekte: Regel, Level, Message (gekürzt), Locations.
+              jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:260]), locations}]' "$f"
+              echo '```'
+              echo ""
+            done
           } > fundstellen.md
-          cat fundstellen.md
+          wc -c fundstellen.md
 
       - name: Fundstellen als PR-Kommentar veröffentlichen
         env:
@@ -77,10 +70,8 @@ jobs:
             echo "Kein PR für ${GITHUB_REF_NAME} – überspringe Kommentar."
             exit 0
           fi
-          # Alte Arena-Reports derselben Sprache entfernen (kein Spam)
-          gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments?per_page=100" \
-            --jq ".[] | select(.body | startswith(\"<!-- arena-codeql-report:${{ matrix.language }} -->\")) | .id" \
-          | while read -r cid; do
-            gh api -X DELETE "repos/${GITHUB_REPOSITORY}/issues/comments/${cid}" || true
+          # PR-Kommentare sind auf 64 KiB begrenzt: ggf. aufteilen.
+          split -b 60000 fundstellen.md fundstellen-teil-
+          for teil in fundstellen-teil-*; do
+            gh pr comment "$PR" --body-file "$teil"
           done
-          gh pr comment "$PR" --body-file fundstellen.md
