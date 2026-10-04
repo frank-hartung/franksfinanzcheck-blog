@@ -41,6 +41,25 @@ Python-Gates in `scripts/`, ausführliche Zustands-Reports im Root.
    `python3 scripts/design_handoff.py --check` prüft Marken- und Exportdrift.
    Runbook: `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`.
 
+## README ist Markenfläche (DAUERVORGABE)
+
+Das `README.md` wird indexiert und steht bei einer Markensuche neben dem
+Ratgeber. **Dort steht nichts über die Maschine.** Keine Automatik, keine
+Abläufe, keine Gates, keine Werkzeugnamen, keine Dateipfade, kein „0 € Stack" –
+auch nicht als Stolz-Abschnitt über eine frische Integration (genau so entstand
+Vorgang WF-A4E0 / Meldung #552 am 03.10.2026, nach demselben Fall am 01.10.).
+
+- **Technisches gehört nach `docs/ENTWICKLER-WERKZEUGE.md`**, im README höchstens
+  der Verweis darauf. Projektberichte bleiben im Root (`*-PREMIUM-*.md`).
+- **Ausnahme nur mit Begründung** in `data/brand_surface_allowlist.txt`.
+- **Vor jedem README-Commit:** `npm run marke:check`
+- **Commit-Sperre einschalten (einmalig):** `npm run hooks:install` – der Haken
+  `.githooks/pre-commit` prüft den gestageten Stand offline in unter einer
+  Sekunde. `npm install` schaltet ihn über `prepare` mit.
+- Regressionstest: `npm run test:marke` · Hintergrund:
+  `MARKENFLAECHE-README-PREMIUM-2026-10-04.md`, Runbook:
+  `docs/MARKEN-OBERFLAECHE-RUNBOOK.md`.
+
 ## Redaktionelle Sprache (DAUERVORGABE)
 
 Templates und wiederkehrende Formeln erzeugen Gleichförmigkeit. Für alle neuen
@@ -80,7 +99,9 @@ npm run ki:status                                      # welche Gratis-Hoster si
 npm run test:ki                                        # Gate-Selbsttest (10 Sabotage-Proben) + 28 Vertragstests
 npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
-npm run test:werkzeuge                                # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
+npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
+npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
+npm run test:marke                                    # Selbsttest (17 Fallgruppen) + 15 Regressionstests der Commit-Sperre
 
 # 0 € Blogautomatik (Whisper lokal + n8n self-hosted + Pages, 03.10.2026) – Details: docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)

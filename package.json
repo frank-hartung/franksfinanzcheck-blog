@@ -133,7 +133,12 @@
     "test:kosten": "python3 scripts/kostensperre.py --selftest && python3 -m unittest scripts.tests.test_kostensperre",
     "build:vertrag": "python3 scripts/hugo_build_vertrag.py",
     "build:selftest": "python3 scripts/hugo_build_vertrag.py --selftest",
-    "test:build": "python3 scripts/hugo_build_vertrag.py --selftest && python3 -m unittest scripts.tests.test_hugo_build_vertrag"
+    "test:build": "python3 scripts/hugo_build_vertrag.py --selftest && python3 -m unittest scripts.tests.test_hugo_build_vertrag",
+    "marke:check": "python3 scripts/brand_surface_guard.py --selftest && python3 scripts/brand_surface_guard.py --only readme --gate --offline",
+    "marke:befund": "python3 scripts/brand_surface_guard.py --gate",
+    "test:marke": "python3 scripts/brand_surface_guard.py --selftest && python3 -m unittest scripts.tests.test_markenflaeche_readme",
+    "hooks:install": "git config core.hooksPath .githooks && echo \"Commit-Sperre aktiv (core.hooksPath=.githooks)\"",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
