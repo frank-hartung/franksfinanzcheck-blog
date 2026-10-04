@@ -265,6 +265,28 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
         self.assertIn("neu", self.origin_read(manifest))
 
+    def test_social_kalender_konflikt_heilt_frischer_lauf_gewinnt(self):
+        """Issue #547 (Vorgang WF-C545): Social-Autopilot und Shorts-Schmiede
+        schreiben beide `scripts/social_calendar.py --build` ans Laufende und
+        kollidierten dabei regelmäßig auf denselben Kanal-Kalendern. Die
+        Dateien sind reine Ableitungen aus schedule.yaml/state.yaml/
+        channels.yaml – kein fachlicher Merge nötig, der frische Lauf
+        gewinnt (--theirs), analog zum Reserve-Zertifikat (#295)."""
+        md = "data/social/kalender/mastodon.md"
+        ics = "static/kalender/mastodon.ics"
+        self._commit(self.bot_a, md, "# Mastodon (Stand A)\n", "A: kalender")
+        self._commit(self.bot_a, ics, "BEGIN:VCALENDAR\nA\nEND:VCALENDAR\n",
+                     "A: kalender ics")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, md, "# Mastodon (Stand B)\n", "B: kalender")
+        self._commit(self.bot_b, ics, "BEGIN:VCALENDAR\nB\nEND:VCALENDAR\n",
+                     "B: kalender ics")
+        res = self.run_sync(["--push-only"])
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("Bot-Artefakt-Konflikte automatisch gelöst", res.stdout)
+        self.assertEqual(self.origin_read(md), "# Mastodon (Stand B)\n")
+        self.assertIn("B", self.origin_read(ics))
+
     def test_faktenfrische_artefakte_konflikt_heilt_frischer_lauf_gewinnt(self):
         """Issue #497: Faktenfrische-Queue und Dossiers sind Snapshots.
 

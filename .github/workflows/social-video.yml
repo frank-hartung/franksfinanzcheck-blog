@@ -12,8 +12,18 @@
 #    5 rendert mit ffmpeg: Ken-Burns, eingebrannte Untertitel, Marke
 #    6 lädt das Ergebnis als YouTube Short hoch (wenn der Zugang steht)
 #
-#  TAKTUNG: Di + Sa 07:20 MESZ – zwischen den Artikel-Tagen (Mo/Mi/Fr),
+#  TAKTUNG: Di + Sa 07:26 MESZ – zwischen den Artikel-Tagen (Mo/Mi/Fr),
 #  damit sich Blog- und Videoproduktion nicht im Runner drängeln.
+#  REPARATUR 04.10.2026 (Issue #547 – Vorgang WF-C545, „Stand sichern“ rot):
+#  Die Minute lag bisher exakt auf 05:20 UTC – derselben Taktminute wie der
+#  Social-Autopilot (20 5,7,… * * *) UND der YMYL-Prüfung (20 5 * * 1-5).
+#  Beide schreiben ebenfalls `data/social/kalender/` bzw. pushen zur selben
+#  Sekunde, was den Rebase beim Push regelmäßig in einen Konflikt laufen
+#  ließ (entzerrt nach demselben Muster wie die übrigen „entzerrt“-Slots
+#  in diesem Repo). Die Kalender-Dateien selbst heilen zusätzlich
+#  dauerhaft automatisch (scripts/git_sync.sh, Fall
+#  `data/social/kalender/*|static/kalender/*`) – die Minuten-Verschiebung
+#  reduziert zusätzlich, wie oft es überhaupt zum Konflikt kommt.
 #
 #  WICHTIG: ffmpeg wird per apt installiert. Die pip-Variante
 #  (imageio-ffmpeg) reicht NICHT – sie kann kein `drawtext` und damit
@@ -30,7 +40,7 @@ name: Shorts-Schmiede (Video & Reels)
 
 on:
   schedule:
-    - cron: "20 5 * * 2,6"    # Di + Sa, 07:20 MESZ
+    - cron: "26 5 * * 2,6"    # Di + Sa, 07:26 MESZ (entzerrt, Issue #547)
   workflow_dispatch:
     inputs:
       modus:
