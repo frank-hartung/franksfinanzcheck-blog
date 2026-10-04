@@ -52,8 +52,8 @@ jobs:
             echo ""
             for f in sarif-results/*.sarif; do
               echo '```json'
-              # Kompakte Result-Objekte: Regel, Level, Message (gekürzt), Locations.
-              jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:260]), locations}]' "$f"
+              # Result-Objekte mit kompakten Code-Flows (Source→Sink-Pfad je Fundstelle).
+              jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:200]), locations, flows: [(.codeFlows[0].threadFlows[0].locations[]?.location.physicalLocation | (.artifactLocation.uri + ":" + ((.region.startLine // 0) | tostring)))]}]' "$f"
               echo '```'
               echo ""
             done
