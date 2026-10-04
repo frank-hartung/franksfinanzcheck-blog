@@ -21,6 +21,7 @@ import sys
 import tempfile
 import unittest
 from datetime import datetime, timedelta
+from unittest.mock import patch
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SCRIPTS_DIR = os.path.join(BLOG_DIR, "scripts")
@@ -32,7 +33,8 @@ import social_copywriter as copy       # noqa: E402
 import social_gate as gate             # noqa: E402
 import social_images as images         # noqa: E402
 import social_planner as planner       # noqa: E402
-import social_calendar as calendar      # noqa: E402
+import social_calendar as calendar     # noqa: E402
+import social_studio as studio         # noqa: E402
 
 CFG = sch.load_config()
 CHANNELS = sch.channel_map(CFG)
@@ -341,6 +343,109 @@ class TestPlanner(unittest.TestCase):
         items = planner.planned_items(plan)
         much_later = planner.parse_dt(items[0]["scheduled_at"]) + timedelta(hours=72)
         self.assertNotIn(items[0], planner.due_items(plan, now=much_later))
+
+    def test_rollender_plan_bewahrt_nachholbaren_slot(self):
+        """Neuplanung darf einen 2 h verspäteten, noch zustellbaren Slot nicht löschen."""
+        item = {
+            "id": "mastodon:verspaetet:nutzen:2026-09-14",
+            "channel": "mastodon", "slug": "verspaetet", "angle": "nutzen",
+            "kind": "launch", "pillar": "strom-sparen",
+            "date": "2026-09-14", "time": "04:00",
+            "scheduled_at": planner.iso(self.now - timedelta(hours=2)),
+            "status": "planned", "attempts": 0, "reason": "",
+        }
+        planner.save_schedule({"version": 1, "items": [item]})
+        plan = self._plan()
+        self.assertIn(item["id"], {it["id"] for it in planner.planned_items(plan)},
+                      "Rolling hat einen innerhalb der 48-h-Nachholfrist fälligen Slot gelöscht")
+
+    def test_sendebereiter_kanal_hat_vorrang_vor_standby_rueckstau(self):
+        pool = [_article(f"bereit-{i}", days_old=3 + i) for i in range(8)]
+        for i, art in enumerate(pool):
+            art["published"] = planner.iso(self.now - timedelta(days=3 + i))
+        # Ein alter Plan reserviert viele Zukunftsslots für einen Kanal ohne
+        # Credentials. Beim Rollen müssen diese Slots neu verteilt werden.
+        fremd = [{
+            "id": f"bluesky:alt-{i}:nutzen:2026-09-14",
+            "channel": "bluesky", "slug": f"alt-{i}", "angle": "nutzen",
+            "scheduled_at": planner.iso(self.now + timedelta(hours=2, minutes=i)),
+            "status": "planned", "date": self.now.date().isoformat(),
+        } for i in range(20)]
+        planner.save_schedule({"version": 1, "items": fremd})
+
+        plan = planner.build_plan(CFG, pool, {"history": [], "failures": []},
+                                  now=self.now, ready_channels={"mastodon"})
+        mastodon = [it for it in planner.planned_items(plan)
+                    if it.get("channel") == "mastodon"]
+        self.assertTrue(mastodon)
+        self.assertEqual(mastodon[0]["date"], self.now.date().isoformat(),
+                         "Standby-Rückstau hat den sendebereiten Kanal verdrängt")
+
+
+class TestStudioRollingPlan(unittest.TestCase):
+    """Regression #549: Fremdkanal-Rückstau darf Mastodon nicht verhungern lassen."""
+
+    def test_jeder_lauf_rollt_trotz_grosser_globaler_warteschlange(self):
+        now = planner.localize(datetime(2026, 10, 4, 10, 0))
+        # 20 geplante Fremdkanal-Posten: deutlich über min_planned_items=12.
+        # Bis #549 verhinderte genau so ein globaler Bestand jede Neuplanung,
+        # obwohl Mastodon selbst keinen einzigen Slot mehr hatte.
+        schedule = {"version": 1, "horizon_days": 14, "items": [{
+            "id": f"bluesky:fremd-{i}:nutzen:2026-10-10",
+            "channel": "bluesky", "slug": f"fremd-{i}", "angle": "nutzen",
+            "scheduled_at": planner.iso(now + timedelta(days=6, minutes=i)),
+            "status": "planned",
+        } for i in range(20)]}
+        state = {"version": 1, "history": [], "failures": []}
+
+        with patch.object(studio.planner, "load_state", return_value=state), \
+             patch.object(studio.planner, "load_schedule", return_value=schedule), \
+             patch.object(studio.planner, "build_plan", return_value=schedule) as bauen, \
+             patch.object(studio.copy, "article_pool", return_value=[_article("neu")]), \
+             patch.object(studio, "write_cockpit"):
+            studio.run_once(CFG, dry_run=True, now=now)
+
+        bauen.assert_called_once()
+
+    def test_48h_recovery_zieht_genau_einen_slot_sicher_vor(self):
+        now = planner.localize(datetime(2026, 10, 4, 10, 45))
+        schedule = {"items": [
+            {"id": "m:1", "channel": "mastodon", "slug": "eins",
+             "scheduled_at": planner.iso(now + timedelta(hours=4)), "status": "planned"},
+            {"id": "m:2", "channel": "mastodon", "slug": "zwei",
+             "scheduled_at": planner.iso(now + timedelta(hours=8)), "status": "planned"},
+        ]}
+        state = {"history": [], "failures": []}
+        healed, _ = studio.accelerate_recovery_slot(
+            schedule, state, CFG, "mastodon", now, {"mastodon"})
+        self.assertTrue(healed)
+        due = [it for it in planner.due_items(schedule, now=now)
+               if it.get("channel") == "mastodon"]
+        self.assertEqual([it["slug"] for it in due], ["eins"])
+        self.assertEqual(schedule["items"][1]["slug"], "zwei")
+        self.assertGreater(planner.parse_dt(schedule["items"][1]["scheduled_at"]), now)
+
+    def test_48h_recovery_respektiert_mindestabstand(self):
+        now = planner.localize(datetime(2026, 10, 4, 10, 45))
+        schedule = {"items": [{
+            "id": "m:1", "channel": "mastodon", "slug": "eins",
+            "scheduled_at": planner.iso(now + timedelta(hours=4)), "status": "planned",
+        }]}
+        state = {"history": [{
+            "channel": "mastodon", "slug": "vorher", "ok": True,
+            "posted_at": planner.iso(now - timedelta(minutes=60)),
+        }], "failures": []}
+        healed, reason = studio.accelerate_recovery_slot(
+            schedule, state, CFG, "mastodon", now, {"mastodon"})
+        self.assertFalse(healed)
+        self.assertIn("Mindestabstand", reason)
+
+    def test_workflow_bietet_recovery_modus_an(self):
+        path = os.path.join(BLOG_DIR, ".github", "workflows", "social-autopilot.yml")
+        with open(path, encoding="utf-8") as fh:
+            workflow = fh.read()
+        self.assertIn("- recover", workflow)
+        self.assertIn('ARGS="$ARGS --recover"', workflow)
 
 
 class TestAdapterStandby(unittest.TestCase):

@@ -21,6 +21,7 @@
 #
 #  AUFRUF:
 #    python3 scripts/social_studio.py --run [--dry-run] [--channel x] [--limit n]
+#    python3 scripts/social_studio.py --run --recover --channel x --limit 1
 #    python3 scripts/social_studio.py --plan
 #    python3 scripts/social_studio.py --status
 #    python3 scripts/social_studio.py --selftest
@@ -84,6 +85,27 @@ def channel_report(cfg: dict) -> list[dict]:
     return rows
 
 
+def ready_channel_ids(cfg: dict, *, force: bool = False, channel: str = "") -> set[str]:
+    """Sendebereite Kanäle für die kapazitätsgerechte Plan-Priorisierung.
+
+    `enabled` allein reicht nicht: Kanäle ohne Zugangsdaten dürfen im Plan
+    sichtbar bleiben, aber niemals die globale Tageskapazität vor einem
+    tatsächlich sendenden Kanal belegen. ``--force`` behandelt den gewählten
+    Kanal (oder alle aktivierten Kanäle) bewusst als sendebereit.
+    """
+    ready: set[str] = set()
+    for cid, ch in sch.channel_map(cfg).items():
+        if not (ch or {}).get("enabled"):
+            continue
+        if force and (not channel or cid == channel):
+            ready.add(cid)
+            continue
+        ad = sch.get_adapter(cid, cfg)
+        if ad and ad.configured()[0]:
+            ready.add(cid)
+    return ready
+
+
 # --------------------------------------------------------------------- Bilder
 def resolve_media(article: dict, channel_cfg: dict, meta: dict) -> tuple[str, str]:
     """Liefert (lokaler Pfad, öffentliche URL) für den Beitrag."""
@@ -116,9 +138,60 @@ def build_package(article: dict, cid: str, ch: dict, angle: str, meta: dict,
     return pkg
 
 
+def accelerate_recovery_slot(schedule: dict, state: dict, cfg: dict, channel: str,
+                             now: datetime, ready: set[str]) -> tuple[bool, str]:
+    """Zieht genau einen Zukunftsslot eines 48-h-stillen Kanals auf jetzt vor.
+
+    Die Sofortheilung bleibt innerhalb aller Betriebsgrenzen: Kanal muss
+    sendebereit sein, Tages- und Gesamtlimit müssen frei sein und der
+    Mindestabstand zum letzten Post muss gelten. Bereits fällige Slots werden
+    nicht verändert – sie laufen ohnehin durch den normalen Versandpfad.
+    """
+    if not channel or channel not in ready:
+        return False, "Kanal nicht sendebereit"
+    ch = sch.channel_map(cfg).get(channel) or {}
+    if not ch.get("enabled"):
+        return False, "Kanal deaktiviert"
+
+    cadence = ch.get("cadence") or {}
+    max_day = int(cadence.get("max_per_day") or 1)
+    if planner.posts_on_day(state, channel, now.date()) >= max_day:
+        return False, f"Tageslimit {max_day} bereits erreicht"
+    total_cap = int(sch.meta_of(cfg).get("max_posts_per_day_total") or 12)
+    if planner.total_on_day(state, now.date()) >= total_cap:
+        return False, f"globales Tageslimit {total_cap} bereits erreicht"
+
+    last_at = planner.last_channel_post(state, channel)
+    min_gap = int(cadence.get("min_gap_min") or 0)
+    if last_at and min_gap and now - last_at < timedelta(minutes=min_gap):
+        return False, f"Mindestabstand {min_gap} min noch nicht erreicht"
+
+    already_due = [it for it in planner.due_items(schedule, now=now)
+                   if it.get("channel") == channel]
+    if already_due:
+        return False, "fälliger Slot bereits vorhanden"
+    future = sorted(
+        (it for it in planner.planned_items(schedule)
+         if it.get("channel") == channel
+         and (planner.parse_dt(it.get("scheduled_at") or "") or now) > now),
+        key=lambda it: it.get("scheduled_at") or "",
+    )
+    if not future:
+        return False, "kein geeigneter Zukunftsslot"
+
+    item = future[0]
+    item["scheduled_at"] = planner.iso(now)
+    item["date"] = now.date().isoformat()
+    item["time"] = now.strftime("%H:%M")
+    item["reason"] = "48-h-Sofortheilung: nächster Slot kontrolliert vorgezogen"
+    item["recovered_at"] = planner.iso(now)
+    return True, str(item.get("slug") or item.get("id") or "Slot")
+
+
 def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
-             limit: int = 0, now=None, force: bool = False) -> dict:
-    """Ein kompletter Autopilot-Lauf."""
+             limit: int = 0, now=None, force: bool = False,
+             recover: bool = False) -> dict:
+    """Ein kompletter Autopilot-Lauf; ``recover`` heilt einen stillen Kanal sofort."""
     now = now or planner.berlin_now()
     meta = sch.meta_of(cfg)
     channels = sch.channel_map(cfg)
@@ -128,15 +201,25 @@ def run_once(cfg: dict, *, dry_run: bool = False, channel: str = "",
     pool = copy.article_pool(base_url=str(meta.get("base_url") or copy.DEFAULT_BASE))
     by_slug = {a["slug"]: a for a in pool}
 
-    # 1) Plan erneuern, wenn nötig
+    # 1) Den Plan bei JEDEM Lauf rollen. Ein globaler Mindestbestand ist kein
+    # Gesundheitsbeweis für einen einzelnen Kanal: Im Vorfall #549 hielten 83
+    # Beiträge nicht eingerichteter Kanäle den Zähler über der Schwelle,
+    # während Mastodon exakt 0 geplante Beiträge hatte. build_plan() bewahrt
+    # bestehende und bis zu 48 h überfällige Slots, ergänzt aber neue Artikel
+    # und fehlende Kanäle deterministisch bis zum Horizont.
     planned_before = len(planner.planned_items(schedule))
-    if planned_before < int(meta.get("min_planned_items") or 12):
-        schedule = planner.build_plan(cfg, pool, state, now=now)
-        planner.prune(schedule)
-        print(f"🗓️  Plan erneuert: {len(planner.planned_items(schedule))} geplante Beiträge "
-              f"(Horizont {schedule.get('horizon_days')} Tage).")
-    else:
-        print(f"🗓️  Plan steht: {planned_before} geplante Beiträge.")
+    ready = ready_channel_ids(cfg, force=force, channel=channel)
+    schedule = planner.build_plan(cfg, pool, state, now=now, ready_channels=ready)
+    planner.prune(schedule)
+    planned_after = len(planner.planned_items(schedule))
+    print(f"🗓️  Plan gerollt: {planned_before} → {planned_after} geplante Beiträge "
+          f"(Horizont {schedule.get('horizon_days')} Tage).")
+
+    if recover:
+        healed, detail = accelerate_recovery_slot(
+            schedule, state, cfg, channel, now, ready)
+        mark = "🚑" if healed else "ℹ️"
+        print(f"{mark} 48-h-Sofortheilung {channel or '–'}: {detail}")
 
     due = planner.due_items(schedule, now=now)
     if channel:
@@ -516,6 +599,7 @@ def main() -> int:
     limit = int(_val("--limit", "0") or 0)
     dry = "--dry-run" in argv
     force = "--force" in argv
+    recover = "--recover" in argv
     # --now "<ISO>": Probelauf für einen anderen Zeitpunkt (z. B. "wie
     # sieht der Lauf morgen früh aus?") – ohne Netz, ohne Versand.
     now = planner.parse_dt(_val("--now")) if _val("--now") else None
@@ -524,7 +608,8 @@ def main() -> int:
         meta = sch.meta_of(cfg)
         pool = copy.article_pool(base_url=str(meta.get("base_url") or copy.DEFAULT_BASE))
         state = planner.load_state()
-        plan = planner.build_plan(cfg, pool, state)
+        plan = planner.build_plan(
+            cfg, pool, state, ready_channels=ready_channel_ids(cfg))
         planner.prune(plan)
         planner.save_schedule(plan)
         print(f"🗓️  {len(planner.planned_items(plan))} Beiträge über "
@@ -556,7 +641,7 @@ def main() -> int:
 
     # Standard: --run
     out = run_once(cfg, dry_run=dry, channel=channel, limit=limit,
-                   force=force, now=now)
+                   force=force, recover=recover, now=now)
     r = out["results"]
     print(f"\n📊 gesendet {r['sent']} · fehlgeschlagen {r['failed']} · "
           f"blockiert {r['blocked']} · Standby {r['standby']} · verschoben {r['deferred']}")

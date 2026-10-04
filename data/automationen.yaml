@@ -174,6 +174,16 @@ regeln:
       params:
         stunden: 48
     aktionen:
+      # Erst selbst heilen, dann eskalieren: Plan rollen und genau einen Slot
+      # unter Tageslimit-/Mindestabstands-Schutz auf jetzt vorziehen. Die
+      # Eskalation läuft auch nach einem API-Fehler weiter und bleibt der
+      # sichtbare Incident-Nachweis.
+      - typ: social_autopilot_lauf
+        stoppe_bei_fehler: false
+        params:
+          modus: "recover"
+          kanal: "{kanal}"
+          limit: 1
       - typ: github_issue
         params:
           titel: "Schaltwerk: Kanal {kanal_label} sendet seit 48 h nicht"
@@ -184,8 +194,10 @@ regeln:
 
             Letzter erfolgreicher Beitrag: {letzter_post}
 
-            Prüfen:
-            1. `SOCIAL-AUTOPILOT-STATUS.md` – steht der Kanal im Plan?
+            Das Schaltwerk hat vor dieser Eskalation automatisch eine
+            kontrollierte Sofortheilung versucht (Plan rollen, einen sicheren
+            Slot vorziehen und senden). Prüfen:
+            1. `SOCIAL-AUTOPILOT-STATUS.md` – wurde der Kanal wieder beliefert?
             2. Actions → „Social-Autopilot“ – letzter Lauf grün?
             3. `python3 scripts/social_studio.py --dry-run --channel {kanal}`
             4. Token noch gültig? → `docs/RUNBUCH-SOCIAL-SECRETS.md`
@@ -205,6 +217,9 @@ regeln:
       params:
         zeiten: ["03:40"]
         toleranz_minuten: 50
+        # GitHub-Schedule ist best effort. Falls 03:40 um Stunden verpasst
+        # wird, holt der erste Lauf danach die Planung am selben Tag nach.
+        nachholen: true
     aktionen:
       - typ: social_autopilot_lauf
         params:

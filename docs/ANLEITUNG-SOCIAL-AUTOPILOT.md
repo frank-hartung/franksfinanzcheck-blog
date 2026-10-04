@@ -21,7 +21,7 @@
 
 | Stufe | Baustein | Was passiert |
 |---|---|---|
-| 1 | **Planen** `social_planner.py` | 14-Tage-Plan: jeder neue Artikel läuft als **Launch-Welle** über alle Kanäle (gestaffelt nach deren Optimalzeiten); danach übernimmt das **Evergreen-Recycling** – derselbe Artikel auf demselben Kanal erst nach 60–120 Tagen Sperrfrist, und dann mit einem **anderen inhaltlichen Winkel** |
+| 1 | **Planen** `social_planner.py` | Der 14-Tage-Plan wird **bei jedem Lauf rollierend erneuert** – pro Kanal, nicht nur nach einem globalen Mengenzähler. Jeder neue Artikel läuft als **Launch-Welle** über alle Kanäle (gestaffelt nach deren Optimalzeiten); danach übernimmt das **Evergreen-Recycling** – derselbe Artikel auf demselben Kanal erst nach 60–120 Tagen Sperrfrist, und dann mit einem **anderen inhaltlichen Winkel** |
 | 2 | **Texten** `social_copywriter.py` | Aus dem Artikel werden Material-Bausteine gezogen (Kurzantwort = Hook, „Das Wichtigste in Kürze", Euro-/Prozent-Zahlen, FAQ-Frage, Pillar). Daraus entsteht pro Kanal eine **eigene Fassung** – mit dem Zeichenbudget, der Hashtag-Zahl, der Tonalität und der Link-Logik dieses Netzes |
 | 3 | **Prüfen** `social_gate.py` | 10 harte Regeln, **fail-closed**: Länge, Link-Hygiene (niemals ein Affiliate-`/go/`-Link), unzulässige Versprechen, Hashtags, Emoji-Budget, Sprache, Spam-Muster, **Duplikat-Schutz**, **Fakten-Treue** (keine erfundene Zahl), Bildpflicht |
 | 4 | **Bild** `social_images.py` | Kanäle mit Format-Zwang (Instagram 4:5) bekommen eine eigene Bildvariante. Ist die URL noch nicht live, wartet der Beitrag einen Lauf – statt mit einer 404 leerzulaufen |
@@ -30,6 +30,8 @@
 **Betriebsregeln, die du kennen solltest**
 
 * Fehlt ein Token, läuft der Kanal im **Standby** – sichtbar im Cockpit, **ohne Fehler und ohne Alarm**.
+* Ein großer Rückstau anderer oder noch nicht eingerichteter Kanäle kann keinen sendebereiten Kanal mehr aus dem Plan verdrängen: Jeder Lauf rollt alle Kanalpläne neu und vergibt die globale Tageskapazität **zuerst an Kanäle mit gültigen Zugangsdaten**.
+* Bis zu **48 Stunden verspätete Slots** bleiben beim Rollen erhalten und werden nachgeholt; ältere Slots verfallen kontrolliert statt als Posting-Lawine versendet zu werden.
 * Ein gescheitertes Senden wird **nicht sofort verworfen** (3 Versuche), ein blockierter Text bekommt **automatisch einen anderen Winkel**.
 * Nur ein echter **Vollausfall** (≥ 3 Fehler, kein Erfolg) erzeugt ein rotes Workflow-Ergebnis und damit die bestehende Alarmierung.
 
@@ -221,6 +223,10 @@ python3 scripts/social_studio.py --run --dry-run --now "2026-09-13T07:45:00+02:0
 # Nur ein Kanal / nur eine Menge
 python3 scripts/social_studio.py --run --channel mastodon --limit 2
 
+# Incident-Recovery: Plan rollen und genau einen sicheren Slot sofort zustellen
+# (Tageslimit und Mindestabstand bleiben hart; regulär vom Schaltwerk ausgelöst)
+python3 scripts/social_studio.py --run --recover --channel mastodon --limit 1
+
 # Plan erneuern (sendet nichts) · Cockpit schreiben · Gesundheitsprüfung
 python3 scripts/social_studio.py --plan
 python3 scripts/social_studio.py --status
@@ -236,7 +242,7 @@ cat data/social/schedule.yaml
 | Wunsch | Weg |
 |---|---|
 | Autopilot **stoppen** | Actions → *Social-Autopilot* → **Disable workflow** |
-| **Einmalig** starten | Actions → *Social-Autopilot* → *Run workflow* (Modus `run`, `plan`, `dry-run`, `status`) |
+| **Einmalig** starten | Actions → *Social-Autopilot* → *Run workflow* (Modus `run`, `recover`, `plan`, `dry-run`, `status`) |
 | Nur einen Kanal schicken | *Run workflow* → Feld **kanal** (z. B. `mastodon`) |
 | **Taktung** ändern | `data/social/channels.yaml` → je Kanal `cadence:` (Tage, Zeiten, `max_per_day`) |
 | **Globales Limit** | `meta.max_posts_per_day_total` (Default 12) |

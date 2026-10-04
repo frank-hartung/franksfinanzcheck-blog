@@ -24,6 +24,8 @@ import os
 import sys
 import tempfile
 import unittest
+from datetime import timedelta
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
@@ -207,6 +209,26 @@ class TestStandbyUndSelfHealing(unittest.TestCase):
         self.assertEqual(neu.get("ausgeloest"), {},
                          "Fehlgeschlagene Kette darf nicht als erledigt gelten")
 
+    def test_autopilot_aktion_liest_verschachtelte_ergebniszaehler(self):
+        bericht = {"results": {"sent": 2, "failed": 0, "blocked": 0}}
+        with patch("social_channels.load_config", return_value={}), \
+             patch("social_studio.run_once", return_value=bericht):
+            res = act.aktion_social_autopilot_lauf(
+                {"modus": "run"}, {}, {"dry_run": True})
+        self.assertEqual(res["status"], "ok")
+        self.assertIn("2 Beiträge", res["meldung"])
+
+    def test_stiller_kanal_erneuert_plan_vor_escalation(self):
+        regel = next(r for r in sw.load_regeln().get("regeln") or []
+                     if r.get("id") == "stiller-kanal")
+        aktionen = regel.get("aktionen") or []
+        self.assertGreaterEqual(len(aktionen), 2)
+        self.assertEqual(aktionen[0].get("typ"), "social_autopilot_lauf")
+        self.assertEqual((aktionen[0].get("params") or {}).get("modus"), "recover")
+        self.assertEqual((aktionen[0].get("params") or {}).get("kanal"), "{kanal}")
+        self.assertFalse(aktionen[0].get("stoppe_bei_fehler", True))
+        self.assertEqual(aktionen[1].get("typ"), "github_issue")
+
 
 class TestLeitplanken(unittest.TestCase):
     def test_pfad_ausbruch_wird_abgelehnt(self):
@@ -244,6 +266,18 @@ class TestLeitplanken(unittest.TestCase):
             for a in r.get("aktionen") or []:
                 self.assertIn((a or {}).get("typ"), act.AKTION, r.get("id"))
 
+    def test_workflow_persistiert_nur_existente_pfade_und_fail_closed(self):
+        # Repository-Root liegt drei Ebenen über dieser Testdatei; der
+        # explizite Pfad hält den Test unabhängig vom Arbeitsverzeichnis.
+        blog_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        workflow = os.path.join(blog_dir, ".github", "workflows", "schaltwerk.yml")
+        with open(workflow, encoding="utf-8") as fh:
+            text = fh.read()
+        self.assertIn('STAGE+=("$pfad")', text)
+        self.assertNotIn("git add $PFADE", text)
+        self.assertIn("scripts/git_sync.sh --push-only", text)
+        self.assertNotIn("scripts/git_sync.sh --push-only ||", text)
+
     def test_selftest_der_engine_besteht(self):
         self.assertEqual(sw.selftest(), 0)
 
@@ -262,6 +296,19 @@ class TestTrigger(unittest.TestCase):
         fremd = (JETZT.hour + 5) % 24
         self.assertEqual(trg.trigger_zeitplan(
             {"zeiten": [f"{fremd:02d}:00"], "toleranz_minuten": 10}, ctx), [])
+
+    def test_kritischer_zeitplan_holt_verpassten_slot_nach(self):
+        spaet = JETZT.replace(hour=10, minute=0, second=0, microsecond=0)
+        ctx = {"jetzt": spaet, "state": leerer_state()}
+        params = {"zeiten": ["03:40"], "toleranz_minuten": 50, "nachholen": True}
+        events = trg.trigger_zeitplan(params, ctx)
+        self.assertEqual(len(events), 1)
+        # Dedupe bleibt trotz Nachholen hart.
+        self.assertEqual(trg.trigger_zeitplan(params, ctx), [])
+
+    def test_berlin_now_traegt_echten_offset(self):
+        jetzt = sw.berlin_now()
+        self.assertIn(jetzt.utcoffset(), (timedelta(hours=1), timedelta(hours=2)))
 
     def test_datei_geaendert_feuert_beim_erstkontakt_nicht(self):
         state = leerer_state()

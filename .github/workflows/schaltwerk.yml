@@ -151,26 +151,45 @@ jobs:
           fi
           echo "code=$?" >> "$GITHUB_OUTPUT"
 
-      - name: Ergebnisse committen
+      - name: Ergebnisse dauerhaft sichern
         if: always()
         run: |
           # Hinweis: SCHALTWERK-STATUS.md ist bewusst git-ignoriert
           # (.gitignore: /*-STATUS.md – Cockpits werden erzeugt, nicht versioniert).
-          PFADE="data/schaltwerk_state.json data/schaltwerk_log.jsonl \
-                 data/schaltwerk_standby.log data/schaltwerk_konfig.log \
-                 data/agent_reach/themen_vorschlaege.yaml data/social/state.yaml \
-                 data/social/schedule.yaml"
-          # shellcheck disable=SC2086
-          if git status --porcelain $PFADE 2>/dev/null | grep -q .; then
+          #
+          # Nur vorhandene ODER bereits getrackte Pfade stagen. `git add` bricht
+          # die komplette Pfadliste ab, sobald nur ein optionales Log fehlt.
+          # Genau dadurch blieben State und Nachtplanung bis #549 unversioniert,
+          # obwohl der Workflow grün war.
+          PFADE=(
+            data/schaltwerk_state.json
+            data/schaltwerk_log.jsonl
+            data/schaltwerk_standby.log
+            data/schaltwerk_konfig.log
+            data/agent_reach/themen_vorschlaege.yaml
+            data/social/state.yaml
+            data/social/schedule.yaml
+          )
+          STAGE=()
+          for pfad in "${PFADE[@]}"; do
+            if [ -e "$pfad" ] || git ls-files --error-unmatch -- "$pfad" >/dev/null 2>&1; then
+              STAGE+=("$pfad")
+            fi
+          done
+
+          if [ "${#STAGE[@]}" -gt 0 ]; then
+            git add -- "${STAGE[@]}"
+          fi
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+          else
             git config user.name "Schaltwerk"
             git config user.email "schaltwerk@users.noreply.github.com"
-            # shellcheck disable=SC2086
-            git add $PFADE 2>/dev/null || true
-            git commit -m "chore(schaltwerk): Automationslauf $(date +%F\ %H:%M)" || true
-            scripts/git_sync.sh --push-only || git push || true
-            echo "Ergebnisse committet."
-          else
-            echo "Keine Änderungen."
+            git commit -m "chore(schaltwerk): Automationslauf $(date +%F\ %H:%M)"
+            # Persistenz ist Teil des Erfolgsvertrags. Kein `|| true`: Wenn
+            # State/Plan nicht auf der Branch ankommen, muss der Lauf rot sein.
+            scripts/git_sync.sh --push-only
+            echo "✅ Ergebnisse nachweislich committet und gepusht."
           fi
 
       - name: Exit-Vertrag durchsetzen
