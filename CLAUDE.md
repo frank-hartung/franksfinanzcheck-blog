@@ -132,7 +132,7 @@ npm run test:vorgang                                  # Abschlussvermerk: 12 Fal
 npm run blogautomatik:status                         # Live-Status aller drei Säulen (Whisper, n8n, Pages)
 npm run blogautomatik:audit                          # 0 € Kosten- & Einsparungs-Audit
 npm run blogautomatik:selftest                       # Offline-Selbsttest aller Säulen (Fail-Closed)
-npm run test:blogautomatik                           # 45 Unit-Tests für Whisper, n8n-Bridge & Orchestrator
+npm run test:blogautomatik                           # 31 Unit-Tests für Whisper, n8n-Bridge & Orchestrator
 npm run whisper:inbox                                # Wartende Sprachaufnahmen in data/whisper_inbox/ verarbeiten
 npm run n8n:ping                                     # Latenz- & Erreichbarkeits-Check für n8n
 

@@ -213,12 +213,21 @@ def handle_inbound_payload(payload: dict[str, Any]) -> dict[str, Any]:
         kategorie = daten.get("kategorie", "spartipps")
         titel = daten.get("titel") or daten.get("title")
 
+        # Eingangs-Wacht (Meldung #559 / Code-Scanning-Alert 60): Webhook-Pfade
+        # sind externe Daten. Die Whisper-Engine validiert und kanonisiert sie
+        # vor jeder Weitergabe; abgelehnte Aufnahmen fallen auf Text oder den
+        # Fallback-Entwurf zurück, statt den Webhook mit einem Fehler zu kippen.
+        transcript = None
         if audio_file and os.path.exists(audio_file):
-            engine = whisper_engine.WhisperEngine(backend="auto")
-            transcript = engine.transcribe(audio_file)
-        elif audio_text:
+            try:
+                engine = whisper_engine.WhisperEngine(backend="auto")
+                transcript = engine.transcribe(audio_file)
+            except (ValueError, FileNotFoundError, RuntimeError, OSError) as exc:
+                print(f"⚠️  Sprachaufnahme von der Eingangs-Wacht abgelehnt: {exc}")
+                transcript = None
+        if transcript is None and audio_text:
             transcript = {"text": audio_text, "cleaned_text": whisper_engine.clean_transcript_text(audio_text)}
-        else:
+        elif transcript is None:
             # Fallback Text
             sample = daten.get("inhalt", "Automatisierter Entwurf aus n8n Workflow.")
             transcript = {"text": sample, "cleaned_text": sample}

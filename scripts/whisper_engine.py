@@ -46,6 +46,14 @@ AUFRUF:
 
     # Selbsttest (offline, fail-closed):
     python3 scripts/whisper_engine.py --selftest
+
+SICHERHEIT (Code-Scanning-Alert 60 / Meldung #559, 04.10.2026):
+    Externe Audiodatei-Pfade (CLI, n8n-Webhook, Inbox-Wache) werden vor jeder
+    Backend-Weitergabe kanonisiert und geprüft. Das whisper.cpp-Backend erhält
+    die Audiodatei ausschließlich als geöffneten Datei-Deskriptor
+    (-f /proc/self/fd/<n> bzw. /dev/fd/<n>, pass_fds) — rohe Pfade, Modell-
+    oder Sprachwerte erreichen niemals ungeprüft eine Prozesszeile.
+    Details: WHISPER-BEFEHLSZEILEN-WACHE-PREMIUM-2026-10-04.md
 """
 from __future__ import annotations
 
@@ -56,8 +64,10 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -85,6 +95,46 @@ KATEGORIEN = [
     "spartipps",
     "mobilitaet",
 ]
+
+# Whitelist der von Whisper unterstützten Sprachen (ISO-639-1, wie im
+# Whisper-Tokenizer) plus deutsch-/englischsprachige Aliasse. `_normalize_language`
+# bildet jeden Eingabewert darauf ab; alles Unbekannte fällt fail-safe auf
+# "auto" (Spracherkennung durch das Modell) zurück. Die Abbildung erfolgt
+# bewusst als dict.get(): der Schlüssel (potenziell extern) fließt nie in das
+# Ergebnis, nur Whitelist-Werte oder die Konstante "auto" (Meldung #559).
+WHISPER_LANGUAGES = {
+    code: code for code in (
+        "af", "am", "ar", "as", "az", "ba", "be", "bg", "bn", "bo", "br", "bs",
+        "ca", "cs", "cy", "da", "de", "el", "en", "es", "et", "eu", "fa", "fi",
+        "fo", "fr", "gl", "gu", "ha", "haw", "he", "hi", "hr", "ht", "hu", "hy",
+        "id", "is", "it", "ja", "jw", "ka", "kk", "km", "kn", "ko", "la", "lb",
+        "ln", "lo", "lt", "lv", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "mt",
+        "my", "ne", "nl", "nn", "no", "oc", "pa", "pl", "ps", "pt", "ro", "ru",
+        "sa", "sd", "si", "sk", "sl", "sn", "so", "sq", "sr", "su", "sv", "sw",
+        "ta", "te", "tg", "th", "tk", "tl", "tr", "tt", "uk", "ur", "uz", "vi",
+        "yi", "yo", "zh", "yue",
+    )
+}
+WHISPER_LANGUAGES.update({
+    "auto": "auto",
+    "automatisch": "auto",
+    "german": "de",
+    "deutsch": "de",
+    "english": "en",
+    "englisch": "en",
+})
+
+
+def _normalize_language(value: str | None) -> str:
+    """Überführt eine Sprachangabe in einen Whitelist-Wert (fail-safe „auto“).
+
+    Regionale Angaben wie ``de-DE`` werden auf die Basissprache reduziert.
+    """
+    raw = str(value or "").strip().lower()
+    code = WHISPER_LANGUAGES.get(raw)
+    if code is None and "-" in raw:
+        code = WHISPER_LANGUAGES.get(raw.split("-", 1)[0], "auto")
+    return code or "auto"
 
 # Füllwörter und Sprachunsauberkeiten, die bei der Diktat-Transformation geglättet werden
 FUELLWOERTER = [
@@ -230,32 +280,65 @@ class WhisperEngine:
         language: str | None = None,
         prompt: str | None = None,
     ) -> dict[str, Any]:
-        """Transkribiert eine Audiodatei über das ausgewählte Backend."""
-        lang = language or self.language
-        if not os.path.isfile(audio_path) and self._resolved_backend != "mock":
-            raise FileNotFoundError(f"Audiodatei nicht gefunden: {audio_path}")
+        """Transkribiert eine Audiodatei über das ausgewählte Backend.
+
+        Sicherheitsvertrag (Meldung #559 / Code-Scanning-Alert 60): Der Pfad
+        wird vor jeder Backend-Weitergabe genau einmal kanonisiert und geprüft
+        (`_safe_audio_path`), die Sprache über eine Whitelist normalisiert.
+        Externe Rohwerte erreichen weder Backend-APIs noch Prozesszeilen.
+        """
+        lang = _normalize_language(language or self.language)
+        safe_path = self._safe_audio_path(audio_path)
 
         start_time = time.time()
 
         if self._resolved_backend == "faster-whisper":
-            res = self._transcribe_faster_whisper(audio_path, lang, prompt)
+            res = self._transcribe_faster_whisper(safe_path, lang, prompt)
         elif self._resolved_backend == "whisper":
-            res = self._transcribe_openai_whisper(audio_path, lang, prompt)
+            res = self._transcribe_openai_whisper(safe_path, lang, prompt)
         elif self._resolved_backend == "whisper.cpp":
-            res = self._transcribe_whisper_cpp(audio_path, lang)
+            res = self._transcribe_whisper_cpp(safe_path, lang)
         elif self._resolved_backend == "local-api":
-            res = self._transcribe_local_api(audio_path, lang)
+            res = self._transcribe_local_api(safe_path, lang)
         else:
-            res = self._transcribe_mock(audio_path, lang)
+            res = self._transcribe_mock(safe_path, lang)
 
         duration = round(time.time() - start_time, 3)
         res["duration_seconds"] = duration
         res["backend_used"] = self._resolved_backend
         res["model"] = self.model
-        res["file_path"] = audio_path
+        res["file_path"] = safe_path
         res["cleaned_text"] = clean_transcript_text(res.get("text", ""))
 
         return res
+
+    def _safe_audio_path(self, audio_path: str) -> str:
+        """Eingangswacht: kanonisiert und prüft einen Audiodatei-Pfad.
+
+        · lehnt NUL-Zeichen und Dateinamen mit führendem „-“ ab
+          (Schutz vor Options-Verwechslung am Prozessstart),
+        · löst den Pfad zu einem absoluten, symlink-freien Kanon auf
+          (os.path.realpath),
+        · erzwingt für echte Backends ein vorhandenes, reguläres Datei-Objekt;
+          das hermetische Mock-Backend bleibt für Tests offen.
+
+        Rückgabe ist ausschließlich der geprüfte Kanon — jede Weitergabe an
+        Backends, Prozessargumente und Ergebnispfade erfolgt mit diesem Wert.
+        """
+        raw = str(audio_path or "")
+        if "\x00" in raw:
+            raise ValueError("Audiodatei-Pfad enthält ein NUL-Zeichen — abgelehnt.")
+        if not raw.strip():
+            raise ValueError("Audiodatei-Pfad ist leer.")
+        resolved = os.path.realpath(raw)
+        if os.path.basename(resolved).startswith("-"):
+            raise ValueError(
+                "Dateiname darf nicht mit „-“ beginnen "
+                f"(Schutz vor Options-Verwechslung): {os.path.basename(resolved)!r}"
+            )
+        if self._resolved_backend != "mock" and not os.path.isfile(resolved):
+            raise FileNotFoundError(f"Audiodatei nicht gefunden oder keine reguläre Datei: {raw}")
+        return resolved
 
     def _transcribe_faster_whisper(
         self, audio_path: str, language: str, prompt: str | None
@@ -322,26 +405,114 @@ class WhisperEngine:
         }
 
     def _transcribe_whisper_cpp(self, audio_path: str, language: str) -> dict[str, Any]:
+        """whisper.cpp-CLI-Backend — Deskriptor-Übergabe, Whitelists, fail-closed.
+
+        Sicherheitsvertrag (Meldung #559 / Code-Scanning-Alert 60):
+        · Die Audiodatei wird von der Engine selbst geöffnet (nach `_safe_audio_path`)
+          und dem Kindprozess ausschließlich als Datei-Deskriptor übergeben
+          (``-f /proc/self/fd/<n>`` bzw. ``/dev/fd/<n>`` mit ``pass_fds``). Der
+          Kindprozess liest exakt den geprüften Inode — ein Austausch des Pfades
+          zwischen Prüfung und Ausführung (TOCTOU) ist ausgeschlossen, und die
+          Prozesszeile enthält keinen extern kontrollierten Wert.
+        · Modellname und Sprache stammen nur aus Whitelists.
+        · Ein „--“-Trennzeichen wird bewusst NICHT gesetzt: der Argument-Parser
+          von whisper.cpp bricht bei unbekannten Argumenten mit Exit-Code 0 und
+          Usage-Ausgabe ab (belegt an examples/cli/cli.cpp, 04.10.2026) — das
+          würde stumme Leertexte erzeugen, statt Sicherheit zu schaffen.
+        · Fehlt Binary, Modell oder JSON-Antwort, wird fail-closed abgebrochen.
+        """
         bin_path = shutil.which("whisper-cpp") or shutil.which("whisper")
-        cmd = [
-            bin_path,
-            "-m", f"models/ggml-{self.model}.bin",
-            "-f", audio_path,
-            "-l", language,
-            "-oj",  # JSON Output
-        ]
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-        json_file = f"{audio_path}.json"
-        if os.path.exists(json_file):
-            with open(json_file, encoding="utf-8") as fh:
-                data = json.load(fh)
-            os.remove(json_file)
-            return {
-                "text": data.get("transcription", [{}])[0].get("text", ""),
-                "language": language,
-                "segments": data.get("transcription", []),
-            }
-        return {"text": proc.stdout.strip(), "language": language, "segments": []}
+        if bin_path is None:
+            raise RuntimeError(
+                "whisper.cpp-Binary nicht gefunden (whisper-cpp/whisper im PATH) — Backend fail-closed gesperrt."
+            )
+
+        modell = self.model
+        if modell not in {
+            "tiny", "tiny.en", "base", "base.en", "small", "small.en",
+            "medium", "medium.en", "large-v1", "large-v2", "large-v3",
+            "large-v3-turbo", "distil-large-v3", "distil-medium.en", "distil-small.en",
+        }:
+            raise ValueError(
+                f"Unbekanntes ggml-Modell für whisper.cpp: {modell!r} — erlaubt sind nur "
+                "offizielle ggml-Namen (tiny, base, small, medium, large-v3, large-v3-turbo, …)."
+            )
+        model_path = os.path.join(BLOG_DIR, "models", f"ggml-{modell}.bin")
+        if not os.path.isfile(model_path):
+            raise FileNotFoundError(
+                f"whisper.cpp-Modell fehlt: {model_path} — herunterladen mit: "
+                f"bash models/download-ggml-model.sh {modell}"
+            )
+
+        lang = _normalize_language(language)
+
+        fd = os.open(audio_path, os.O_RDONLY)
+        try:
+            if not stat.S_ISREG(os.fstat(fd).st_mode):
+                raise ValueError(
+                    f"Audiodatei ist kein reguläres Datei-Objekt: {os.path.basename(audio_path)!r}"
+                )
+            if os.path.isdir("/proc/self/fd"):
+                fd_path = f"/proc/self/fd/{fd}"
+            elif os.path.isdir("/dev/fd"):
+                fd_path = f"/dev/fd/{fd}"
+            else:
+                raise RuntimeError(
+                    "whisper.cpp-Backend benötigt /proc/self/fd (Linux) oder /dev/fd (macOS) "
+                    "für die sichere Deskriptor-Übergabe — auf dieser Plattform fail-closed "
+                    "gesperrt. Alternative: pip install faster-whisper."
+                )
+
+            out_dir = tempfile.mkdtemp(prefix="whisper_cpp_")
+            try:
+                out_base = os.path.join(out_dir, "transcript")
+                cmd = [
+                    bin_path,
+                    "-m", model_path,
+                    "-f", fd_path,
+                    "-l", lang,
+                    "-oj",
+                    "-of", out_base,
+                ]
+                proc = subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=120,
+                    pass_fds=(fd,),
+                )
+                stderr_tail = (proc.stderr or "").strip()[-400:]
+                json_file = f"{out_base}.json"
+                if proc.returncode != 0:
+                    raise RuntimeError(
+                        f"whisper.cpp wurde mit Fehlercode {proc.returncode} beendet: "
+                        f"{stderr_tail or 'keine Fehlerausgabe'}"
+                    )
+                if not os.path.isfile(json_file):
+                    raise RuntimeError(
+                        f"whisper.cpp lieferte kein JSON-Transkript: {stderr_tail or 'keine Fehlerausgabe'}"
+                    )
+                try:
+                    with open(json_file, encoding="utf-8") as fh:
+                        data = json.load(fh)
+                except (json.JSONDecodeError, OSError) as exc:
+                    raise RuntimeError(f"whisper.cpp-JSON nicht lesbar: {exc}") from exc
+
+                segments = data.get("transcription")
+                if not isinstance(segments, list):
+                    segments = []
+                text = " ".join(
+                    str(seg.get("text", "")).strip()
+                    for seg in segments
+                    if isinstance(seg, dict)
+                ).strip()
+                if not text:
+                    text = str(data.get("result", "")).strip()
+                return {"text": text, "language": lang, "segments": segments}
+            finally:
+                shutil.rmtree(out_dir, ignore_errors=True)
+        finally:
+            os.close(fd)
 
     def _transcribe_local_api(self, audio_path: str, language: str) -> dict[str, Any]:
         import mimetypes
@@ -425,6 +596,11 @@ def transform_voice_to_article(
     """Wandelt ein Rohtranskript in einen vollwertigen Hugo-Ratgeberartikel um."""
     cleaned = transcript.get("cleaned_text") or clean_transcript_text(transcript.get("text", ""))
     
+    # Quelldatei-Name als reine Meta-Angabe härten: Externe Dateinamen (n8n-
+    # Webhook, CLI) dürfen weder Frontmatter noch Markdown brechen (Meldung #559).
+    safe_audio_name = re.sub(r"[^A-Za-z0-9._ -]+", "_", str(audio_filename or "")).strip()[:100]
+    safe_audio_name = safe_audio_name or "unbekannt.mp3"
+
     # Automatische Themen- und Titelerkennung
     if custom_title:
         title = custom_title
@@ -467,7 +643,7 @@ description: "{description}"
 categories: ["{kategorie}"]
 tags: ["{kategorie}", "fixkosten", "spartipps", "whisper-diktat"]
 readingTime: {reading_time}
-whisper_audio_source: "{audio_filename}"
+whisper_audio_source: "{safe_audio_name}"
 ---
 
 ## Auf den Punkt: Das Wichtigste in Kürze
@@ -626,8 +802,13 @@ def process_inbox_directory(
         if ext in ALLOWED_AUDIO_EXTENSIONS:
             file_path = os.path.join(inbox_dir, entry)
             print(f"🎙 Verarbeite Sprachaufnahme: {entry}...")
-            
-            transcript = whisper.transcribe(file_path)
+            try:
+                transcript = whisper.transcribe(file_path)
+            except (ValueError, FileNotFoundError, RuntimeError, OSError) as exc:
+                # Eingangswacht: Eine abgelehnte oder defekte Aufnahme blockiert
+                # die gesamte Inbox nicht — sie bleibt zur manuellen Prüfung liegen.
+                print(f"⚠️  {entry} übersprungen (Eingangswacht): {exc}")
+                continue
             article_data = transform_voice_to_article(
                 transcript=transcript,
                 kategorie="spartipps",
@@ -718,6 +899,77 @@ def selftest() -> bool:
     os.remove(tmp_article)
     print("  ✅ Audio-QA & Sprachparitäts-Wache erfolgreich.")
 
+    # 6. Eingangs-Wacht: Pfade, Optionen & whisper.cpp-Prozesszeile
+    #    (Meldung #559 / Code-Scanning-Alert 60)
+    from unittest import mock
+
+    assert _normalize_language("DE ") == "de", "Sprachnormalisierung versagt"
+    assert _normalize_language("deutsch") == "de", "deutsche Alias fehlt"
+    assert _normalize_language("klingonisch") == "auto", "unbekannte Sprache muss auf auto fallen"
+    assert _normalize_language(None) == "auto", "leere Sprache muss auf auto fallen"
+
+    for hostile, fehlerklasse in (
+        ("memo.mp3\x00.txt", ValueError),
+        ("", ValueError),
+        ("   ", ValueError),
+    ):
+        try:
+            engine._safe_audio_path(hostile)
+            raise AssertionError(f"Eingangswacht nahme {hostile!r} an")
+        except fehlerklasse:
+            pass
+
+    tmp_audio_dir = tempfile.mkdtemp(prefix="whisper_selftest_")
+    tmp_audio = os.path.join(tmp_audio_dir, "memo.mp3")
+    hostile_audio = os.path.join(tmp_audio_dir, "-angriff.mp3")
+    for pfad in (tmp_audio, hostile_audio):
+        with open(pfad, "wb") as fh:
+            fh.write(b"RIFF")
+    kanon = engine._safe_audio_path(tmp_audio)
+    assert os.path.isabs(kanon) and os.path.realpath(kanon) == kanon, "Pfadkanon fehlt"
+    try:
+        engine._safe_audio_path(hostile_audio)
+        raise AssertionError("Führender Bindestrich wurde nicht abgelehnt")
+    except ValueError:
+        pass
+
+    cpp_engine = WhisperEngine(backend="whisper.cpp", model="base", language="de")
+    try:
+        cpp_engine._safe_audio_path("gibt_es_nicht.mp3")
+        raise AssertionError("Fehlende Datei wurde für whisper.cpp nicht abgelehnt")
+    except FileNotFoundError:
+        pass
+
+    # Prozesszeilen-Vertrag: whisper.cpp sieht nur Deskriptor-Pfad, Whitelist-
+    # Werte und engine-kontrollierte Ausgabepfade — nie die rohe Eingabe.
+    fake_blog = tempfile.mkdtemp(prefix="whisper_selftest_blog_")
+    os.makedirs(os.path.join(fake_blog, "models"), exist_ok=True)
+    with open(os.path.join(fake_blog, "models", "ggml-base.bin"), "wb") as fh:
+        fh.write(b"")
+
+    def _fake_run(cmd, **kwargs):
+        out_base = cmd[cmd.index("-of") + 1]
+        with open(f"{out_base}.json", "w", encoding="utf-8") as fh:
+            json.dump({"result": "Hallo Franks Finanzcheck",
+                       "transcription": [{"text": "Hallo"}, {"text": "Franks Finanzcheck"}]}, fh)
+        return subprocess.CompletedProcess(cmd, 0, "", "")
+
+    with mock.patch.object(shutil, "which", return_value="/usr/bin/whisper-cpp"), \
+         mock.patch.object(subprocess, "run", side_effect=_fake_run) as run_mock, \
+         mock.patch(f"{__name__}.BLOG_DIR", fake_blog):
+        cpp_res = cpp_engine._transcribe_whisper_cpp(kanon, "de")
+
+    argv = run_mock.call_args.args[0]
+    assert argv[argv.index("-f") + 1].startswith(("/proc/self/fd/", "/dev/fd/")), "Kein Deskriptor-Pfad übergeben"
+    assert kanon not in argv and tmp_audio not in argv, "Roher Pfad hat die Prozesszeile erreicht"
+    assert "--" not in argv, "„--“ wird von whisper.cpp nicht verstanden und würde es abbrechen"
+    assert run_mock.call_args.kwargs.get("pass_fds"), "Deskriptor wurde nicht durchgereicht"
+    assert cpp_res["text"] == "Hallo Franks Finanzcheck", "Segmenttexte nicht verbunden"
+    shutil.rmtree(fake_blog, ignore_errors=True)
+    shutil.rmtree(os.path.dirname(tmp_audio), ignore_errors=True)
+    print("  ✅ Eingangs-Wacht & whisper.cpp-Prozesszeilen-Vertrag erfolgreich.")
+
+
     print("🎉 Alle Whisper-Engine Selbsttests BESTANDEN (0 € laufende Kosten gesichert)!")
     return True
 
@@ -780,7 +1032,15 @@ def main() -> int:
         return 1
 
     print(f"🎙 Transkribiere {args.input} mit Backend '{engine._resolved_backend}' (Modell: {engine.model})...")
-    transcript = engine.transcribe(args.input)
+    try:
+        transcript = engine.transcribe(args.input)
+    except (ValueError, FileNotFoundError) as exc:
+        # Eingangs-Wacht: saubere Fehlermeldung statt Traceback (Meldung #559)
+        print(f"⛔ Eingangs-Wacht hat die Anfrage abgelehnt: {exc}")
+        return 2
+    except (RuntimeError, OSError) as exc:
+        print(f"⛔ Backend-Fehler (fail-closed): {exc}")
+        return 3
 
     if args.to_draft:
         article = transform_voice_to_article(

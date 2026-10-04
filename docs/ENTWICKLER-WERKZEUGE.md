@@ -75,10 +75,19 @@ die Markenfläche verletzt** (Vorgang WF-A4E0, Meldung #552); er gehört hierher
 npm run blogautomatik:status     # Live-Status aller drei Säulen
 npm run blogautomatik:audit      # 0 € Kosten- und Einsparungs-Audit
 npm run blogautomatik:selftest   # Offline-Selbsttest (fail-closed)
-npm run test:blogautomatik       # 45 Unit-Tests (Whisper, Brücke, Orchestrator)
+npm run test:blogautomatik       # 31 Unit-Tests (Whisper, Brücke, Orchestrator)
 npm run whisper:inbox            # wartende Sprachaufnahmen verarbeiten
 npm run n8n:ping                 # Latenz- und Erreichbarkeitsprobe für n8n
 ```
+
+Sicherheits-Vertrag der Whisper-Engine (Meldung #559, Code-Scanning-Alert 60,
+04.10.2026): Externe Audio-Pfade werden kanonisiert und geprüft, das
+whisper.cpp-Backend erhält sie nur noch als Datei-Deskriptor
+(`/proc/self/fd/<n>`), Modell-/Sprachwerte nur aus Whitelists — erzwungen durch
+`scripts/tests/test_command_execution_security.py` und die Selbsttests.
+Details: [ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md](ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md),
+Abschnitt 7 · Report:
+[WHISPER-BEFEHLSZEILEN-WACHE-PREMIUM-2026-10-04.md](../WHISPER-BEFEHLSZEILEN-WACHE-PREMIUM-2026-10-04.md)
 
 Bedienung, Smartphone-Anbindung und Kostenvergleich:
 [ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md](ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md) ·
