@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-04T14:29:30Z",
+  "generated_at": "2026-10-04T15:17:11Z",
   "modus": "kandidaten",
-  "commit": "006a30da566bbd48b60c675802c9b52c0e653280",
+  "commit": "39be76a12828369de58358426da5df5f354af4d0",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
