@@ -148,6 +148,61 @@ Damit kann die Klasse nicht über einen neuen Workflow zurückkehren.
 | YAML-Parse `social-video.yml` / `social-dialog.yml` / `werkbank.yml` | ✅ |
 | `scripts/social_video.py --selftest` · `scripts/social_calendar.py --selftest` | ✅ · ✅ |
 
+## 4c) Nachtrag 04.10.2026 (II) – die Klasse vollständig geschlossen
+
+Nach 4b blieb eine Lücke, die der damalige Wächter konstruktionsbedingt
+nicht sehen konnte: Er suchte nur nach `git_sync.sh … || git push` bzw.
+`|| true`. Ein Workflow, der `git_sync.sh` **gar nicht erst aufruft** und
+stattdessen roh pusht, fiel durch das Raster – dieselbe Fehlerklasse, nur
+über eine andere Tür.
+
+Eine Vollprüfung des Bestands (77 Workflows) fand genau zwei solche
+Stellen – die beiden letzten rohen Pushes überhaupt:
+
+| Workflow | vorher | Risiko | nachher |
+|---|---|---|---|
+| `design-varianten.yml` („Briefing committen“) | `git push` | Lauf startet montags 06:45 UTC mitten im Bot-Takt; **kein** Retry, **kein** Rebase → ein paralleler Push nach main macht den Lauf rot (WF-C545-Klasse) | `if scripts/git_sync.sh --push-only; then ✅ else ::warning::` |
+| `n8n-schaltwerk-bridge.yml` („Änderungen festschreiben“) | `git push origin HEAD:<ref> \|\| echo "…"` | Wachhund alle 2 h, also dauerhaft im Takt der übrigen Bots; zusätzlich verschluckte `\|\| echo` **jeden** Fehlschlag – Drafts/Whisper-Inbox/State blieben unbemerkt liegen, der Lauf blieb grün | dito – mit Retry/Rebase **und** sichtbarer Warnung |
+
+Damit läuft jeder Push aller 77 Workflows ausnahmslos über
+`scripts/git_sync.sh`. Kein Datenverlust in beiden Fällen: Das Briefing ist
+ein unverbindlicher Vorschlag ohne Freigabewirkung (nächster Montagslauf
+erzeugt es neu), der Bridge-Stand wird vom nächsten Lauf (≤ 2 h) nachgeholt.
+
+**Wächter auf Klassenniveau ausgebaut** (`scripts/tests/test_push_wache.py`,
+2 → 8 Tests). Neu abgedeckt:
+
+1. **Roher `git push` am Sync-Kern vorbei** – die Lücke, durch die 4b fiel.
+2. **Umbrochene Blind-Fallbacks** – `git_sync.sh --push-only ||` mit dem
+   `git push` in der Folgezeile (auch `\`-Fortsetzung). Vorher hätte ein
+   simpler Zeilenumbruch den Wächter umgangen; er fügt Shell-Fortsetzungen
+   jetzt zu logischen Zeilen zusammen, bevor er prüft.
+3. **Begründete Ausnahme statt starrem Verbot** – fail-closed, aber nicht
+   zukunftsblind: `# push-wache: ausnahme – <Grund>` an der Fundstelle
+   erlaubt einen Sonderweg (z. B. echter Tag-Push), erzwingt aber eine
+   Begründung im Diff, die im Review sichtbar ist.
+
+Bewusst **nicht** aufgenommen (geprüft und verworfen, um keinen
+Fehlalarm-Wächter zu bauen):
+
+- *Erfolgsmeldung nach unbedingtem `git_sync.sh`* (14 Fundstellen): Die
+  Workflows nutzen durchgehend GitHub-Actions-Default-Shell `bash -e`,
+  Shell-Overrides auf git_sync-Pfaden existieren nachweislich **keine**
+  (0 von 77). Ein Fehlschlag bricht den Schritt also vor der Meldung ab –
+  die 14 Stellen sind korrekt, ein Wächter darauf wäre reines Rauschen.
+- *`continue-on-error` auf Push-Schritten* (16 Fundstellen, u. a.
+  `seo-weekly.yml`): bewusste Weich-Schritte des Bestands, keine
+  Umgehung des Sync-Kerns – Verhalten unverändert gelassen.
+
+| Prüfung (Nachtrag II) | Ergebnis |
+|---|---|
+| `python3 -m unittest scripts.tests.test_push_wache -v` (8 Tests) | ✅ grün |
+| Negativprobe: roher Push / Blind-Fallback / **umbrochener** Blind-Fallback / `\|\| true` künstlich eingesetzt | ✅ jeweils rot gemeldet (Wächter greift nachweislich) |
+| Negativprobe: begründete Ausnahme `# push-wache: ausnahme – …` | ✅ geht durch (kein Fehlalarm) |
+| `python3 -m unittest scripts.tests.test_git_sync` (29) · `test_design_varianten` (40) · `test_workflow_yaml` (6) | ✅ · ✅ · ✅ |
+| YAML-Parse + `bash -n` der geänderten Schritte | ✅ beide Workflows |
+| **Gesamtsuite** `python3 -m unittest discover -s scripts/tests` | ✅ **1739 Tests, 0 Fehler** (23 übersprungen) |
+
 ## 5) Nächster Schritt
 
 Issue #547 wird mit Verweis auf diesen Fix geschlossen. Tritt WF-C545 erneut
