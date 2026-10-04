@@ -407,6 +407,31 @@ PY
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
+        data/social/kalender/*|static/kalender/*)
+          # REPARATUR 04.10.2026 (Issue #547 – „Shorts-Schmiede“ rot an
+          # „Stand sichern“, Vorgang WF-C545):
+          #   Social-Autopilot (alle 2 h, u. a. 05:20 UTC) und Shorts-Schmiede
+          #   (Di/Sa 05:20 UTC – BEWUSST dieselbe Taktminute, damit Video- und
+          #   Text-Produktion sich nicht im Runner drängeln) schreiben beide am
+          #   Ende ihres Laufs `scripts/social_calendar.py --build` und damit
+          #   JEDEN Kanal-Kalender unter data/social/kalender/*.md/*.ics sowie
+          #   dessen öffentliche Kopie static/kalender/*.ics + index.html neu.
+          #   Starten beide Läufe in derselben Taktminute (Run 37116487089,
+          #   03.10.2026, 12:27 UTC), kollidiert der Rebase exakt auf diesen
+          #   Dateien – obwohl KEINE redaktionelle Information drinsteckt.
+          #   Diese Dateien sind REINE ABLEITUNGEN aus den versionierten
+          #   Quellen (data/social/schedule.yaml, state.yaml, channels.yaml,
+          #   video_state.yaml): `--build` schreibt sie bei JEDEM Lauf
+          #   vollständig neu, nichts darin wird von Hand gepflegt oder
+          #   akkumuliert. Ein Konflikt ist also nie fachlich – es gewinnt
+          #   deterministisch der frische Lauf (--theirs); der jeweils
+          #   nächste Lauf (spätestens in 2 h) schreibt ohnehin wieder exakt
+          #   denselben Stand aus denselben Quellen. Die Quelldateien selbst
+          #   (schedule.yaml, state.yaml, video_state.yaml) sind NICHT Teil
+          #   dieses Musters und bleiben bei echten Konflikten ein harter Stopp.
+          git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
+          git add -- "$f"
+          ;;
         data/reserve-readiness.json|data/covers_manifest.json)
           # REPARATUR 15.09.2026 (Issue #295 – „Content-Reserve rot trotz
           # gesundem Inhalt“):
