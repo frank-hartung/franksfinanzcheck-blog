@@ -103,6 +103,18 @@ jobs:
           for f in sarif-results/*.sarif; do
             [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
             VORHER="$(jq '[.runs[0].results[]?] | length' "$f")"
+            jq -r --arg erlaubt "$ERLAUBT" '
+              . as $sarif
+              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
+              | [ $sarif.runs[].results[]?
+                  | select(((.suppressions // []) != [])
+                           and (.ruleId as $id | $liste | index($id))) ]
+              | map("- `" + .ruleId + "` " +
+                    (.locations[0].physicalLocation.artifactLocation.uri // "?") + ":"
+                    + ((.locations[0].physicalLocation.region.startLine // 0) | tostring)
+                    + " – " + ((.suppressions[0].justification // "Code-Kommentar") | .[0:120]))
+              | .[]
+            ' "$f" > "${f}.unterdrueckt" || true
             jq --arg erlaubt "$ERLAUBT" '
               . as $sarif
               | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
@@ -167,11 +179,32 @@ jobs:
           BILANZ="CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
           echo "$BILANZ"
           # Bilanz als PR-Kommentar festhalten (nur bei Pull Requests) –
-          # macht die Gate-Entscheidung ohne Log-Download nachvollziehbar.
+          # macht die Gate-Entscheidung ohne Log-Download nachvollziehbar:
+          # Zahlen, verbleibende Funde und die unterdrückten Ausnahmen.
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             PR="$(gh pr list --head "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" --json number --jq '.[0].number' 2>/dev/null || true)"
             if [ -n "${PR:-}" ]; then
-              gh pr comment "$PR" --body "<!-- arena-wache-bilanz:${{ matrix.language }} --> ${BILANZ}" || true
+              VERBLEIBEND="$(for f in sarif-results/*.sarif; do
+                jq -r '.runs[].results[]? | "- \(.ruleId) \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" 2>/dev/null
+              done | sort -u)"
+              UNTERDRUECKT="$(cat sarif-results/*.sarif.unterdrueckt 2>/dev/null | sort -u || true)"
+              {
+                echo "<!-- arena-wache-bilanz:${{ matrix.language }} -->"
+                echo "## Sicherheitswache (${{ matrix.language }})"
+                echo ""
+                echo "${BILANZ}"
+                if [ -n "$VERBLEIBEND" ]; then
+                  echo ""
+                  echo "**Verbleibende Funde (an GitHub gemeldet):**"
+                  echo "$VERBLEIBEND"
+                fi
+                if [ -n "$UNTERDRUECKT" ]; then
+                  echo ""
+                  echo "**Unterdrückte Ausnahmen (dokumentiert im Code, nicht gemeldet):**"
+                  echo "$UNTERDRUECKT"
+                fi
+              } > wache-bilanz.md
+              gh pr comment "$PR" --body-file wache-bilanz.md || true
             fi
           fi
           if [ "$SECURITY" -gt 0 ]; then
