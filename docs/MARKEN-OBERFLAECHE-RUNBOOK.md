@@ -278,3 +278,44 @@ python3 scripts/alert_issue_identity.py --selftest
 python3 scripts/alert_issue_identity.py --tabelle
 python3 scripts/brand_surface_guard.py --gate      # O6 muss leer bleiben
 ```
+
+---
+
+## 8. Rückfall vom 03.10.2026 (Meldung #552) – vier Schichten, und was danach noch fehlte
+
+**Befund (04.10.2026).** Mit der Sprach-/Ablauf-Integration vom 03.10. kam der
+Abschnitt „Blogautomatik & 0 € Architektur" ins README: vier ROT-Befunde
+(Automatik-Sprache, Workflow-Sprache, `scripts/`-Pfad, Qualitäts-Gates) –
+derselbe Fall wie am 01.10. Die Wache meldete korrekt, aber **zu spät**:
+gefragt wurde erst nach dem Push, da stand die Betriebssprache schon
+öffentlich, und die Fehlermeldung selbst war eine sichtbare Markenfläche.
+
+**Geheilt (PR #558).** README geheilt, Technik nach
+`docs/ENTWICKLER-WERKZEUGE.md` verschoben (nicht gelöscht), Commit-Sperre
+`.githooks/pre-commit` auf den *gestageten* Stand, Wache um `--datei`
+erweitert (fail-closed), 15 Regressionstests auf den echten Bestand.
+
+**Der Rest, der am selben Tag auffiel – und warum er zählt.** Zwei Lücken
+blieben, beide von derselben Art: eine Leitplanke, die an einer menschlichen
+Handlung oder an einem persönlichen Recht hängt, ist keine.
+
+| Lücke | Warum sie trägt | Dauerhafte Antwort |
+|---|---|---|
+| „Einmal pro Arbeitskopie `npm run hooks:install`" | Git startet mitgelieferte Haken nie von allein. Wer es vergisst, merkt es erst am roten Lauf **nach** dem Push – genau dort, wo der Fehler öffentlich wird. | `scripts/haken_wache.py` stellt die Sperre selbst scharf: bei `npm install` (prepare), bei jedem Marken-Lauf, auf Befehl. Mit Nachprüfung, idempotent, offline. |
+| Abschlussvermerk an der Meldung fehlt | Das persönliche Zugangsrecht darf keine Kommentare schreiben (HTTP 403). Ein Vorgang schloss sich stumm. | `.github/workflows/vorgangs-abschluss.yml` schreibt den Vermerk mit dem Recht des Repositorys (`issues: write`) – sofort beim Zusammenführen und täglich als Nachlauf. |
+
+**Wichtig am Weg der Einhängung:** Der erste Entwurf setzte
+`core.hooksPath=.githooks`. Das legt **alle** anderen Haken der Arbeitskopie
+still – lautlos. Eingehängt wird deshalb als Weiterleitung in der tatsächlich
+benutzten Hakenablage; ein vorhandener `pre-commit` wird nach
+`pre-commit.lokal` bewahrt und läuft weiter. Fremde Hakenwerkzeuge (`.husky`)
+werden nie angefasst, sondern gemeldet.
+
+**Kontrolle in 30 Sekunden:**
+
+```bash
+npm run hooks:status                      # steht die Sperre in dieser Arbeitskopie?
+python3 scripts/haken_wache.py --selftest # 11 Fallgruppen, echte Wegwerf-Repos
+python3 scripts/vorgangs_abschluss.py --selftest
+npm run vorgang:nachtrag -- --tage 14     # Plan: fehlt irgendwo ein Vermerk?
+```

@@ -126,8 +126,12 @@ class CommitSperre(unittest.TestCase):
             skripte = json.load(datei)["scripts"]
         for name in ("marke:check", "test:marke", "hooks:install", "prepare"):
             self.assertIn(name, skripte, f"npm-Skript `{name}` fehlt")
-        self.assertIn("core.hooksPath", skripte["hooks:install"])
-        self.assertIn("core.hooksPath", skripte["prepare"],
+        # Geprüft wird die WIRKUNG, nicht der Weg: seit dem 04.10.2026 (zweite
+        # Stufe) hängt `scripts/haken_wache.py` die Sperre als Weiterleitung
+        # ein, statt mit `core.hooksPath` alle anderen Haken stillzulegen.
+        # Die Einzelheiten sichert scripts/tests/test_haken_wache.py.
+        self.assertIn("haken_wache.py", skripte["hooks:install"])
+        self.assertIn("haken_wache.py", skripte["prepare"],
                       "`npm install` muss die Sperre mitschalten")
 
     def test_haken_blockiert_einen_echten_commit(self):

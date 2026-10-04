@@ -1,0 +1,102 @@
+# ============================================================
+#  VORGANGS-ABSCHLUSS – kein behobener Vorgang schließt ohne Nachweis
+#  ------------------------------------------------------------
+#  WARUM (04.10.2026, Rest aus Vorgang WF-A4E0 / Meldung #552):
+#    Meldungen schließen sich beim Zusammenführen über „Closes #…" –
+#    aber stumm. Der Abschlussvermerk wurde bis dahin von Hand
+#    geschrieben, und genau daran scheiterte es: das persönliche
+#    Zugangsrecht darf keine Kommentare schreiben (HTTP 403). Ein
+#    Verfahren, das am Recht einer einzelnen Person hängt, ist keins.
+#    Hier schreibt das Repository selbst – mit dem Recht, das dieser
+#    Lauf ohnehin bekommt (issues: write).
+#
+#  ZWEI WEGE, DAMIT KEIN VERMERK VERLOREN GEHT:
+#    1. SOFORT   – beim Zusammenführen eines Änderungsvorschlags.
+#    2. NACHTRAG – täglich 04:40 UTC über die zuletzt zusammengeführten
+#       Vorschläge. Ereignisse fallen aus (belegt: Vorfall 18.09.2026,
+#       ~35 % der workflow_run-Ereignisse kamen nie an), Läufe brechen
+#       ab, Rechte fehlen zeitweise. Der Nachlauf macht das Verfahren
+#       unabhängig vom einzelnen Augenblick – er ist wiederholbar und
+#       trägt nur nach, was fehlt.
+#
+#  MARKENFLÄCHE: Issue-Kommentare sind öffentlich. Der Text läuft vor
+#    dem Absenden durch die Marken-Wache; trägt er Betriebssprache,
+#    geht die neutrale Kurzform raus – oder gar nichts.
+#
+#  SICHERHEIT: `pull_request_target` läuft mit dem Stand des Ziel-
+#    zweigs, NICHT mit dem Vorschlag. Es wird kein fremder Code aus-
+#    geführt; gelesen werden nur Nummer, Titel und Beschreibung.
+#
+#  BEWUSST NICHT in der Wacht-Liste von alert-on-failure.yml: Eine
+#    Alarm-Meldung über einen fehlenden Abschlussvermerk wäre selbst
+#    eine öffentliche Fläche. Ein roter Lauf steht im Verlauf und in
+#    der Job-Zusammenfassung; der Nachlauf versucht es am nächsten Tag
+#    erneut.
+# ============================================================
+name: Vorgangs-Abschluss (Abschlussvermerk an die Meldung)
+
+on:
+  pull_request_target:
+    types: [closed]
+  schedule:
+    - cron: "40 4 * * *"
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "Nummer eines Änderungsvorschlags (leer = Nachlauf)"
+        type: string
+        default: ""
+      tage:
+        description: "Zeitfenster des Nachlaufs in Tagen"
+        type: string
+        default: "14"
+      modus:
+        description: "Schreiben oder nur planen"
+        type: choice
+        default: schreiben
+        options: [schreiben, planen]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vorgangs-abschluss
+  cancel-in-progress: false
+
+jobs:
+  vermerk:
+    # Beim Schließen ohne Zusammenführen gibt es nichts zu vermerken.
+    if: github.event_name != 'pull_request_target' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write        # der eigentliche Zweck dieses Laufs
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Stand des Zielzweigs auschecken (kein fremder Code)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Selbsttest (ein blinder Vermerk wäre schlimmer als keiner)
+        run: python3 scripts/vorgangs_abschluss.py --selftest
+
+      - name: Abschlussvermerk setzen
+        run: |
+          set -euo pipefail
+          SCHREIBEN="--apply"
+          if [ "${{ inputs.modus }}" = "planen" ]; then SCHREIBEN=""; fi
+
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+            python3 scripts/vorgangs_abschluss.py \
+              --pr "${{ github.event.pull_request.number }}" --apply
+          elif [ -n "${{ inputs.pr }}" ]; then
+            python3 scripts/vorgangs_abschluss.py --pr "${{ inputs.pr }}" $SCHREIBEN
+          else
+            python3 scripts/vorgangs_abschluss.py \
+              --nachtrag --tage "${{ inputs.tage || '14' }}" $SCHREIBEN
+          fi

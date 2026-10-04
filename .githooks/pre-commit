@@ -18,7 +18,10 @@
 #    · beweist zuerst sich selbst (--selftest): ein blinder Haken wäre
 #      schlimmer als keiner
 #
-#  EINSCHALTEN:  npm run hooks:install   (oder: git config core.hooksPath .githooks)
+#  EINSCHALTEN:  Von allein. `scripts/haken_wache.py` hängt diesen Haken bei
+#    `npm install` (prepare) und bei jedem Marken-Lauf als Weiterleitung in die
+#    benutzte Hakenablage ein – vorhandene Haken bleiben dabei am Leben.
+#    Von Hand: `npm run hooks:install` · Kontrolle: `npm run hooks:status`
 #  NOTAUSGANG :  git commit --no-verify  – dann hält das Gate im Push-Lauf.
 # ============================================================
 set -euo pipefail
