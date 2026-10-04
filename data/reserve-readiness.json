@@ -2,12 +2,12 @@
   "target": 6,
   "ready": 5,
   "pool_size": 9,
-  "generated_at": "2026-10-04T10:21:59Z",
+  "generated_at": "2026-10-04T14:17:10Z",
   "candidates": [
     {
       "slug": "2026-10-04-grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue",
       "ready": true,
-      "sha256": "65c88c7884cc7d79111fb9e0b5e1935a38a9665c44847ab072fa31b71b1d82b5",
+      "sha256": "11b628cd02d9405e8b0112c1b7d26ed38e45c01b76d7eade49c5606a488f95a9",
       "score": 0.932,
       "parts": {
         "spelling": 0.86,
@@ -22,7 +22,7 @@
     {
       "slug": "2026-10-04-heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest",
       "ready": true,
-      "sha256": "258ab2c807d3be7d85f7dcee5629a499b87cb31d191d225998ffcf40976818ee",
+      "sha256": "d5fb5ad2cd600f82450739596bd8c1d042c7e1a61e3ba4ab604554f656c7f32f",
       "score": 0.96,
       "parts": {
         "spelling": 0.8,
@@ -37,7 +37,7 @@
     {
       "slug": "2026-10-04-neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget",
       "ready": true,
-      "sha256": "96ad3c24f575827c5f7107943bc741d9406b696464abbe050344b23d96380995",
+      "sha256": "b21ec4a95ccf0ab124fca6ac3d293782c696ab3a869731cadcf49c8197774da0",
       "score": 0.95,
       "parts": {
         "spelling": 0.78,
@@ -52,7 +52,7 @@
     {
       "slug": "2026-10-04-urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den",
       "ready": true,
-      "sha256": "9c32520d6f0ae7c5814d5c2d8a0ddf35b769d301eb27e242ae0ffdec5dbb1c9d",
+      "sha256": "86dc7b8b4756a1aad49aa36fa59aa76dcba13522f1fefeef722eec832f673474",
       "score": 0.946,
       "parts": {
         "spelling": 0.8,
@@ -67,7 +67,7 @@
     {
       "slug": "2026-10-04-waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich",
       "ready": true,
-      "sha256": "30bd99d980df104d095005c24834358cbf4f539d0d955af5950a5b4f60fb25ad",
+      "sha256": "9e5d9b981de9d454b19c47bfcc9a089232ec189f26fda42fe5f6638b7ac13b50",
       "score": 0.88,
       "parts": {
         "spelling": 0.7,
@@ -82,7 +82,7 @@
     {
       "slug": "2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum",
       "ready": false,
-      "sha256": "3de25915a8487eb12509608e36d7f7a6c668717c7780da8f09ed8666cec25629",
+      "sha256": "44dde853f2248c7bb005623894e5f799ce89599b7f85c2b2d8284339bb7cf582",
       "reason": "quality-score 0.823 < 0.85 (schwach: spelling 0.70, structure 0.70, readability 0.75)",
       "details": [
         "Reserve nicht bereit: 2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum: {'slug': '2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum', 'score': 0.823, 'parts': {'spelling': 0.7, 'meta': 0.85, 'structure': 0.7, 'typography': 1.0, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
@@ -101,7 +101,7 @@
     {
       "slug": "2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel",
       "ready": false,
-      "sha256": "47ae7e27b656d132270f391cbffa0701061e302b04c74622f3791d6178ed2036",
+      "sha256": "4f5686e73b59374a52e103649284a8fa3d243634e2121fd0ab808825c9e0ef75",
       "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 54 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%)",
       "details": [
         "🛑 2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -122,17 +122,15 @@
     {
       "slug": "2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei",
       "ready": false,
-      "sha256": "b017de016465f3adc7d4e05616d826cffa31f8397267faa28289db4a71f52b7b",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "sha256": "826e15d71f3c2963519dab37faa7d223c2986d5f57d1da7521d857d54a4e6891",
+      "reason": "quality-score 0.82 < 0.85 (schwach: meta 0.70, structure 0.70, spelling 0.80)",
       "details": [
-        "🛑 2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "Reserve nicht bereit: 2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei: {'slug': '2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei', 'score': 0.82, 'parts': {'spelling': 0.8, 'meta': 0.7, 'structure': 0.7, 'typography': 0.9, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.8}, 'verdict': 'draft+autofix'}"
       ],
-      "score": 0.865,
+      "score": 0.82,
       "parts": {
         "spelling": 0.8,
-        "meta": 1.0,
+        "meta": 0.7,
         "structure": 0.7,
         "typography": 0.9,
         "uniqueness": 1.0,
@@ -143,14 +141,14 @@
     {
       "slug": "2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun",
       "ready": false,
-      "sha256": "e15e7bc11261cd04e960d75ca57afe527246a265f39bdb1123a2122e6e5e38f9",
+      "sha256": "2bf9d4dc0c61b22a4fdf510a570f31592df6129bedae1ce62ec66631b554f6f6",
       "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
       "details": [
         "🛑 2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.916,
+      "score": 0.906,
       "parts": {
         "spelling": 0.8200000000000001,
         "meta": 1.0,
@@ -158,8 +156,23 @@
         "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 0.75
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-04T14:17:10Z",
+    "renewed": [
+      "2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum",
+      "2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel",
+      "2026-10-04-grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue",
+      "2026-10-04-heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest",
+      "2026-10-04-neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget",
+      "2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei",
+      "2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun",
+      "2026-10-04-urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den",
+      "2026-10-04-waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
