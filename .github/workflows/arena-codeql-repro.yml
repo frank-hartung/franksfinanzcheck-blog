@@ -32,12 +32,11 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          # Kein queries-Parameter => Standard-Query-Suite wie beim Default-Setup.
-          # AlertSuppression.ql (zusätzliche Pack-Query) markiert Ergebnisse als
-          # „suppressed“, wenn die Zeile darüber `# codeql[<rule-id>] Grund`
-          # enthält – GitHubs Upload wertet SARIF-Suppressions NICHT aus,
-          # deshalb filtert der Upload-Schritt sie selbst heraus (vgl. Wache).
-          packs: ${{ matrix.language == 'python' && 'codeql/python-queries:AlertSuppression.ql' || 'codeql/javascript-queries:AlertSuppression.ql' }}
+          # DIAGNOSE-TEST 2026-10-04 (rückbaubar): Gleiches Setup wie die
+          # Sicherheitswache (config-file MIT packs) – isoliert, ob die
+          # Config-Datei oder der pull_request/Merge-Kontext dafür sorgt,
+          # dass die Wache weniger Funde sieht als dieser Repro (2 vs. 12).
+          config-file: .github/codeql/codeql-config.yml
 
       - name: CodeQL-Analyse (SARIF lokal, kein Upload)
         uses: github/codeql-action/analyze@v3
