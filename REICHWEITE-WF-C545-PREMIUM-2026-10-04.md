@@ -102,6 +102,52 @@ Minute durch Lauf-Jitter weiterhin überlappen.
   „letzter Schreiber gewinnt“ verliert keine Information, die nicht der
   nächste Lauf ohnehin neu schreibt.
 
+## 4b) Nachtrag 04.10.2026 – zweite, tieferliegende Ursache beseitigt
+
+Die Nachprüfung des roten Schrittes zeigte: Selbst mit Heilung (A) und
+Taktentzerrung (B) wäre der Lauf in einem Restfall **weiterhin rot**
+geworden. Grund war die Push-Zeile im Schritt „Stand sichern“ selbst:
+
+```
+scripts/git_sync.sh --push-only || git push     # vorher
+```
+
+`git_sync.sh` bricht bei einem nicht automatisch heilbaren Konflikt
+**bewusst und sauber** ab („Kein Push – Arbeitsstand bleibt lokal sauber“) –
+genau die Meldung aus dem Fehlerlauf. Der nachgeschaltete rohe `git push`
+hebelte diese fail-closed-Entscheidung aus: Er kann nichts gewinnen, was
+git_sync (Fetch-Retry, Push-Retry, Rebase-Runden, Auto-Heilung) nicht schon
+versucht hat, wird als non-fast-forward abgelehnt und beendet den Schritt
+mit Exit 1 – mit einer Meldung, die die echte Ursache verdeckt. Exakt das
+war das rote Symptom von WF-C545.
+
+**Bereinigt (dasselbe Anti-Muster, alle Fundstellen im Bestand):**
+
+| Workflow | vorher | nachher |
+|---|---|---|
+| `social-video.yml` („Stand sichern“) | `git_sync.sh --push-only \|\| git push` | `if git_sync.sh --push-only; then ✅ else ::warning::` |
+| `social-dialog.yml` („Stand sichern“) | `git_sync.sh --push-only \|\| git push` | dito – Erfolgsmeldung erst nach belegtem Push |
+| `werkbank.yml` („Dossiers committen“) | `git_sync.sh --push-only \|\| git push \|\| true` | dito – kein verschlucktes Ergebnis mehr |
+
+Kein Datenverlust: In allen drei Fällen sind die betroffenen Stände
+(`video_state.yaml` + Kalender, `dialog_state.yaml`, Werkbank-Dossiers)
+lokal sauber committet und werden vom nächsten Lauf erneut gepusst – der
+Lauf meldet das jetzt als sichtbare Warnung statt als irreführendes Rot
+bzw. als stilles `|| true`.
+
+**Neuer Wächter:** `scripts/tests/test_push_wache.py` prüft **alle**
+Workflows (nicht nur die drei heute bereinigten) auf
+1. `git_sync.sh … || git push` (Blind-Fallback) und
+2. `git_sync.sh … || true` (verschlucktes Ergebnis).
+Damit kann die Klasse nicht über einen neuen Workflow zurückkehren.
+
+| Prüfung (Nachtrag) | Ergebnis |
+|---|---|
+| `python3 -m unittest scripts.tests.test_push_wache -v` (2 Tests) | ✅ grün |
+| `python3 -m unittest scripts.tests.test_git_sync` (29 Tests) | ✅ grün |
+| YAML-Parse `social-video.yml` / `social-dialog.yml` / `werkbank.yml` | ✅ |
+| `scripts/social_video.py --selftest` · `scripts/social_calendar.py --selftest` | ✅ · ✅ |
+
 ## 5) Nächster Schritt
 
 Issue #547 wird mit Verweis auf diesen Fix geschlossen. Tritt WF-C545 erneut

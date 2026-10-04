@@ -172,6 +172,13 @@ jobs:
             echo "Keine Änderungen am Dialog-Stand."
           else
             git commit -m "dialog: Stand der Community-Arbeit aktualisiert"
-            scripts/git_sync.sh --push-only || git push
-            echo "✅ Dialog-Stand gesichert"
+            # REPARATUR 04.10.2026 (Issue #547): kein Blind-Fallback auf rohes
+            # `git push` mehr – git_sync.sh bricht bei echtem Konflikt bewusst
+            # ab; ein roher Push danach wird nur als non-fast-forward abgelehnt
+            # und verdeckt die Ursache. Erfolg wird erst gemeldet, wenn er da ist.
+            if scripts/git_sync.sh --push-only; then
+              echo "✅ Dialog-Stand gesichert"
+            else
+              echo "::warning::Dialog-Stand nicht gepusht – der nächste Lauf antwortet ggf. erneut auf dieselben Kommentare."
+            fi
           fi

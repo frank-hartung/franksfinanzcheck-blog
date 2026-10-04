@@ -165,6 +165,23 @@ jobs:
             echo "Keine Änderungen am Videostand."
           else
             git commit -m "video: Shorts-Produktion aktualisiert"
-            scripts/git_sync.sh --push-only || git push
-            echo "✅ Videostand gesichert"
+            # REPARATUR 04.10.2026 (Issue #547 – Vorgang WF-C545):
+            # Hier stand `scripts/git_sync.sh --push-only || git push`.
+            # Genau dieser Blind-Fallback machte den Lauf rot: git_sync.sh
+            # bricht bei einem nicht automatisch heilbaren Rebase-Konflikt
+            # BEWUSST und sauber ab ("Kein Push – Arbeitsstand bleibt lokal
+            # sauber"). Der nachgeschaltete rohe `git push` versucht dann
+            # trotzdem zu pushen, wird als non-fast-forward abgelehnt und
+            # beendet den Schritt mit Exit 1 – mit einer Meldung, die die
+            # echte Ursache verdeckt. git_sync.sh enthält bereits Fetch-/
+            # Push-Retries, Rebase-Runden und die Auto-Heilung generierter
+            # Dateien; ein roher Push danach kann NICHTS gewinnen, was
+            # git_sync nicht schon versucht hat.
+            if scripts/git_sync.sh --push-only; then
+              echo "✅ Videostand gesichert"
+            else
+              # Kein Datenverlust: video_state.yaml/Kalender werden vom
+              # nächsten Lauf (Di/Sa) ohnehin neu geschrieben und gepusht.
+              echo "::warning::Videostand nicht gepusht (paralleler Bot/Transient) – der nächste Lauf holt ihn nach."
+            fi
           fi
