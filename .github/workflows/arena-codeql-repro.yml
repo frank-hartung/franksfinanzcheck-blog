@@ -1,0 +1,63 @@
+# Arena-Reproduktion: CodeQL-Analyse mit SARIF-Ausgabe als Artifact.
+# Zweck: Exakte Abbildung der Code-Scanning-Fundstellen (Default-Setup-Queries),
+# ohne selbst neue Alerts in der Security-Tab anzulegen (upload: false).
+# Läuft ausschließlich auf dem Arena-Arbeitsbranch.
+name: Arena CodeQL Reproduktion
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - arena/01a106e4-franksfinanzcheck-blog
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: CodeQL Reproduktion (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Sprachen, die CodeQL hier auto-erkennt (siehe /languages-API):
+        # Python (7,7 MB) + JavaScript (1,5 MB).
+        language: [javascript, python]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: CodeQL initialisieren
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Kein queries-Parameter => Standard-Query-Suite wie beim Default-Setup.
+
+      - name: CodeQL-Analyse (SARIF lokal, kein Upload)
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}
+          output: sarif-results
+          upload: false
+
+      - name: SARIF-Zusammenfassung ausgeben
+        run: |
+          set -euo pipefail
+          echo "## CodeQL-Fundstellen (${{ matrix.language }})" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          for f in sarif-results/*.sarif; do
+            echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            jq -r '[.runs[0].results[]?] | "Gesamt: \(length)"' "$f" >> "$GITHUB_STEP_SUMMARY" || echo "Gesamt: 0" >> "$GITHUB_STEP_SUMMARY"
+            jq -r '.runs[0].results[]? | [.ruleId, .locations[0].physicalLocations[0].artifactLocation.uri, (.locations[0].physicalLocations[0].region.startLine|tostring)] | @tsv' "$f" | sort >> "$GITHUB_STEP_SUMMARY" || true
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            # Auch ins normale Log:
+            jq -r '.runs[0].results[]? | [.ruleId, .locations[0].physicalLocations[0].artifactLocation.uri, (.locations[0].physicalLocations[0].region.startLine|tostring)] | @tsv' "$f" | sort || true
+          done
+
+      - name: SARIF als Artifact hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-sarif-${{ matrix.language }}
+          path: sarif-results/
+          retention-days: 7
