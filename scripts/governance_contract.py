@@ -1958,11 +1958,12 @@ def main(argv=None):
         annotate = bool(os.environ.get("GITHUB_ACTIONS"))
         # C9-Meldungen nennen Datei und Muster-Label eines Befunds –
         # niemals den Inhalt oder Wert dahinter.
-        # codeql[py/clear-text-logging-sensitive-data]
         for code, msg in checks:
             line = f"{code} {LABEL.get(code, '')}: {msg}"
+            # codeql[py/clear-text-logging-sensitive-data]
             print(f"  ❌ {line}")
             if annotate:
+                # codeql[py/clear-text-logging-sensitive-data]
                 print(f"::error::{line}")
     else:
         count = len(RULE_TEXT)
@@ -1974,8 +1975,8 @@ def main(argv=None):
             os.makedirs(os.path.dirname(os.path.join(BLOG_DIR, target)) or BLOG_DIR, exist_ok=True)
             # Markdown-Report der Vertragsprüfung: Befund-Texte ohne
             # Werte (gleiche Begründung wie oben).
-            # codeql[py/clear-text-storage-sensitive-data]
             with open(os.path.join(BLOG_DIR, target), "w", encoding="utf-8") as f:
+                # codeql[py/clear-text-storage-sensitive-data]
                 f.write(render_md(checks))
             print(f"→ geschrieben: {target}")
         except OSError as exc:

@@ -319,16 +319,19 @@ def exchange_code(code: str) -> None:
     except (TypeError, ValueError):
         pass
     _save(data)
-    # Datenfluss-Hygiene (Code-Scanning-Härtung 2026-10): die Scope-Liste für
-    # die Ausgabe wird aus der API-Antwort (resp) gelesen, nicht aus `data` –
-    # das Dictionary enthält app_secret und access_token und bleibt damit
-    # komplett außerhalb jeder Konsolen-/Log-Ausgabe.
+    # Datenfluss-Hygiene (Code-Scanning-Härtung 2026-10, 2. Runde): Die
+    # Console-Ausgabe wird ausschließlich aus der Konstante SCOPES konstruiert –
+    # die API-Antwort (resp) steuert nur die AUSWAHL (Membership-Test), fließt
+    # aber selbst nicht in die Ausgabe. Selbst eine manipulierte Antwort könnte
+    # damit nichts anderes als die bekannten Scope-Namen auf die Konsole bringen.
+    _erlaubte_scopes = SCOPES.replace(",", " ").split()
     granted = set(str(resp.get("scope") or SCOPES.replace(",", " ")).replace(",", " ").split())
-    wanted = set(SCOPES.replace(",", " ").split())
+    erteilt = [s for s in _erlaubte_scopes if s in granted]
+    fehlt = [s for s in _erlaubte_scopes if s not in granted]
     print("✅ Pinterest-Autorisierung abgeschlossen!")
-    print(f"   Scopes erteilt: {' '.join(sorted(granted))}")
-    if wanted - granted:
-        print(f"   ⚠️ nicht erteilt: {' '.join(sorted(wanted - granted))} – im Developer-Portal "
+    print(f"   Scopes erteilt: {' '.join(erteilt) if erteilt else '– keine –'}")
+    if fehlt:
+        print(f"   ⚠️ nicht erteilt: {' '.join(fehlt)} – im Developer-Portal "
               "für die App aktivieren und einmal neu autorisieren.")
     print("   Access-Token gültig: 30 Tage | Refresh-Token: 60 Tage, rotiert täglich (Wache)")
     if os.environ.get("GITHUB_ACTIONS"):

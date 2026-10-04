@@ -572,10 +572,10 @@ def _append_history(d, score):
            "clicks": d["total_clicks"], "awin": d["awin_total"]}
     # Die Historie speichert ausschließlich Secret-GESUNDHEITS-Metadaten
     # (Ampel-Zähler red/amber, Verdict, Nachweis-Stufen) – nie Werte.
-    # codeql[py/clear-text-storage-sensitive-data]
     try:
         os.makedirs(os.path.dirname(_HISTORY), exist_ok=True)
         with open(_HISTORY, "a", encoding="utf-8") as f:
+            # codeql[py/clear-text-storage-sensitive-data]
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         lines = [l for l in open(_HISTORY, encoding="utf-8").read().splitlines() if l.strip()]
         if len(lines) > 260:                      # Retention: gut 5 Jahre Wochenläufe

@@ -33,6 +33,11 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           # Kein queries-Parameter => Standard-Query-Suite wie beim Default-Setup.
+          # AlertSuppression.ql (zusätzliche Pack-Query) markiert Ergebnisse als
+          # „suppressed“, wenn die Zeile darüber `# codeql[<rule-id>] Grund`
+          # enthält – GitHubs Upload wertet SARIF-Suppressions NICHT aus,
+          # deshalb filtert der Upload-Schritt sie selbst heraus (vgl. Wache).
+          packs: ${{ matrix.language == 'python' && 'codeql/python-queries:AlertSuppression.ql' || 'codeql/javascript-queries:AlertSuppression.ql' }}
 
       - name: CodeQL-Analyse (SARIF lokal, kein Upload)
         uses: github/codeql-action/analyze@v3
@@ -49,14 +54,16 @@ jobs:
             echo "## CodeQL-Fundstellen (${{ matrix.language }}) – Rohdaten"
             echo ""
             echo "**Gesamt (${{ matrix.language }}):** $(jq '[.runs[0].results[]?] | length' sarif-results/*.sarif | paste -sd+ | bc)"
+            echo "**Davon per Code-Kommentar unterdrückt:** $(jq '[.runs[0].results[]? | select((.suppressions // []) != [])] | length' sarif-results/*.sarif | paste -sd+ | bc)"
             echo ""
             for f in sarif-results/*.sarif; do
               echo '```json'
-              # Kompakte Result-Objekte: Regel, Level, Message (gekürzt), Locations.
-              jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:200]), locations, flows: [(.codeFlows[0].threadFlows[0].locations[]?.location.physicalLocation | (.artifactLocation.uri + ":" + ((.region.startLine // 0) | tostring)))]}]' "$f"
+              # Kompakte Result-Objekte: Regel, Level, Message (gekürzt), Locations,
+              # Unterdrückungsstatus (suppressed=true => Code-Kommentar wirksam).
+              jq -c '[.runs[0].results[]? | {ruleId, level, msg: ((.message.text // "") | .[0:200]), suppressed: ((.suppressions // []) != []), locations, flows: [(.codeFlows[0].threadFlows[0].locations[]?.location.physicalLocation | (.artifactLocation.uri + ":" + ((.region.startLine // 0) | tostring)))]}]' "$f"
               echo ''
-              echo '# Regel-Metadaten (security-severity):'
-              jq -c '[.runs[0].tool.driver.rules[]? | select(.properties["security-severity"] != null) | {id, sev: .properties["security-severity"]}]' "$f"
+              echo '# Regel-Metadaten: Anzahl + Property-Namen der ersten Regeln'
+              jq -c '{regeln_gesamt: (.runs[0].tool.driver.rules // [] | length), mit_security_severity: (.runs[0].tool.driver.rules // [] | map(select(.properties["security-severity"] != null)) | length), beispiel: (.runs[0].tool.driver.rules // [])[0:3] | map({id, props: ((.properties // {}) | keys)})}' "$f"
               echo '```'
               echo ""
             done

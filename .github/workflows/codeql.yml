@@ -53,15 +53,56 @@ jobs:
           config-file: .github/codeql/codeql-config.yml
           # Kein queries-Parameter => Standard-Query-Suite je Sprache
           # (identisch zum bisherigen Default-Setup, Vergleichbarkeit bleibt).
+          # AlertSuppression.ql: markiert Ergebnisse als „suppressed“, wenn die
+          # Zeile darüber `# codeql[<rule-id>] Grund` enthält. GitHub ignoriert
+          # SARIF-Suppressions beim Upload – der Filter-Schritt weiter unten
+          # entfernt sie deshalb selbst (Whitelist der Regeln, s. dort).
+          packs: ${{ matrix.language == 'python' && 'codeql/python-queries:AlertSuppression.ql' || 'codeql/javascript-queries:AlertSuppression.ql' }}
 
       - name: CodeQL analysieren
         uses: github/codeql-action/analyze@v4
         with:
           category: /language:${{ matrix.language }}
           output: sarif-results
-          # Auf PRs kein Upload (Security-Tab bleibt unberührt), auf main
-          # werden die Ergebnisse die bisherigen Default-Setup-Alerts ersetzen.
-          upload: ${{ github.ref == 'refs/heads/main' }}
+          # Upload erfolgt erst nach dem Filter-Schritt unten – unterdrückte
+          # Funde dürfen nie die Security-Tab erreichen.
+          upload: false
+
+      - name: Unterdrückte Funde entfernen (vor Upload & Gate)
+        run: |
+          set -euo pipefail
+          # Nur diese Regeln dürfen per Code-Kommentar unterdrückt werden
+          # (begrenzte, dokumentierte Ausnahmen – siehe Strategie-Doc).
+          # CodeQL behandelt ein nacktes `# noqa`/`# lgtm` als Unterdrückung
+          # JEGLICHER Alerts auf der Zeile – deshalb greift die Whitelist
+          # hier zusätzlich als zweite Instanz.
+          ERLAUBT='py/clear-text-logging-sensitive-data
+          py/clear-text-storage-sensitive-data
+          py/incomplete-url-substring-sanitization
+          js/incomplete-url-substring-sanitization'
+          for f in sarif-results/*.sarif; do
+            [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
+            VORHER="$(jq '[.runs[0].results[]?] | length' "$f")"
+            jq -R -s --arg erlaubt "$ERLAUBT" '
+              . as $sarif
+              | ($erlaubt | split("\n") | map(select(length > 0))) as $liste
+              | $sarif
+              | .runs[].results |= map(select(
+                  ((.suppressions // []) == [])
+                  or (.ruleId as $id | $liste | index($id) | not)
+                ))
+            ' "$f" > "${f}.neu" && mv "${f}.neu" "$f"
+            NACHER="$(jq '[.runs[0].results[]?] | length' "$f")"
+            WEG=$((VORHER - NACHER))
+            echo "${f}: ${VORHER} → ${NACHER} Funde (${WEG} per Code-Kommentar unterdrückt)"
+          done
+
+      - name: SARIF in Security-Tab hochladen
+        if: github.ref == 'refs/heads/main'
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: sarif-results
+          category: /language:${{ matrix.language }}
 
       - name: Sicherheits-Gate (null Security-Fundstellen)
         run: |
