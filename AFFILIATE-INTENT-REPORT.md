@@ -1,10 +1,20 @@
 # 🎯 AFFILIATE-INTENT-REPORT (affiliate_intent_guard.py)
 
-**Stand:** 2026-10-03 09:34:47 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
+**Stand:** 2026-10-04 10:20:27 UTC · **Modus:** FIX · **Status:** 🟢 Jeder Link liefert das versprochene Angebot
 
-**Geprüfte Artikel:** 64 · **Gateway-Links:** 190 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
+**Geprüfte Artikel:** 66 · **Gateway-Links:** 199 · **Routen im Register:** 20 · **Nie-Paare:** 17 · **Geheilt:** 0
 
-🎉 Jeder Affiliate-Link im Bestand liefert das Angebot, das Anker, CTA-Satz und Artikelthema versprechen. Abweichungen (C24 Bank, Pauschalreise) sind im Anker benannt.
+## 🟡 Hinweise – nicht blockierend (ehrliches Cross-Selling, redaktioneller Prüfpunkt)
+
+### IW2 – Primär-CTA ↔ Artikelthema (2)
+
+- `content/posts/2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa/index.md`:45 [top] /go/allgemein/ «Jetzt Fixkosten auf CHECK24 prüfen» – top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
+- `content/posts/2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa/index.md`:179 [end] /go/allgemein/ «→ Jetzt Fixkosten auf CHECK24 prüfen» – end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung) (ℹ️ Hinweis)
+
+### IW4 – Nie-Paare (2)
+
+- `content/posts/2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch/index.md`:48 [top] /go/strom/ «Stromanbieter vergleichen & wechseln» – Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/? (ℹ️ Hinweis)
+- `content/posts/2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch/index.md`:265 [end] /go/strom/ «→ Jetzt Stromtarife vergleichen» – Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/? (ℹ️ Hinweis)
 
 ## Vertrag
 

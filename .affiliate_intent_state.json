@@ -1,11 +1,56 @@
 {
- "generated_at": "2026-10-03 09:34:47 UTC",
+ "generated_at": "2026-10-04 10:20:27 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 64,
- "checked_links": 190,
+ "checked_articles": 66,
+ "checked_links": 199,
  "healed_count": 0,
  "healed": [],
- "findings": [],
+ "findings": [
+  {
+   "code": "IW2",
+   "slug": "2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
+   "line": 18,
+   "route": "allgemein",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
+   "line": 152,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
+   "line": 20,
+   "route": "strom",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
+   "line": 237,
+   "route": "strom",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  }
+ ],
  "errors": []
 }
