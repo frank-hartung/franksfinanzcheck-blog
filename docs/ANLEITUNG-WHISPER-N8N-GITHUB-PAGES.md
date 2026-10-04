@@ -153,7 +153,7 @@ npm run whisper:inbox
 | `npm run blogautomatik:selftest` | Prüft alle Systeme offline auf Herz und Nieren |
 | `npm run whisper:inbox` | Verarbeitet wartende Audiodateien in `data/whisper_inbox/` |
 | `npm run n8n:ping` | Misst Latenz und Erreichbarkeit von n8n |
-| `npm run test:blogautomatik` | Führt alle 38 Unit-Tests aus (inkl. Eingangs-Wacht & Prozesszeilen-Vertrag, Meldung #559) |
+| `npm run test:blogautomatik` | Führt alle 39 Unit-Tests aus (inkl. Eingangs-Wacht & Prozesszeilen-Vertrag, Meldung #559) |
 
 ---
 

@@ -118,10 +118,13 @@ Engine beliebige Host-Dateien lesen lassen (Transkript landet im Webhook-Feedbac
 bzw. Entwurf). Das war kein neuer Fehler der Reparatur, sondern das gleiche
 Eingangsproblem in der Datei-Zugriffsschicht — und wird mit derselben Disziplin
 geschlossen: **Confinement auf vertrauenswürdige Wurzeln** (`str.startswith`-
-Wächter, das von CodeQL als SafeAccessCheck anerkannte Muster). Die Engine
-liest Audiodateien nur noch innerhalb des Repos, des System-Temp-Verzeichnisses
-und per `WHISPER_AUDIO_ROOTS` freigegebener Betreiber-Ordner. Das hermetische
-Mock-Backend bleibt ausgenommen (es öffnet keine Dateien).
+Wächter, das von CodeQL als SafeAccessCheck anerkannte Muster) — als zweistufige
+Wache: einmal in der Eingangs-Wacht vor der Backend-Weitergabe und zusätzlich
+direkt am Dateizugriff jedes echten Backends (whisper.cpp-Deskriptor-Öffnung,
+local-api-Upload-Lesung). Die Engine liest Audiodateien nur noch innerhalb des
+Repos, des System-Temp-Verzeichnisses und per `WHISPER_AUDIO_ROOTS` freigegebener
+Betreiber-Ordner. Das hermetische Mock-Backend bleibt ausgenommen (es öffnet
+keine Dateien).
 
 ## 3. Bewusste Abweichung vom Copilot-Autofix (mit Beleg)
 
@@ -155,7 +158,7 @@ unterbrochen, nicht nur weggefiltert; das gilt für alle Eingänge gleichzeitig.
 | `python3 scripts/whisper_engine.py --selftest` (inkl. neuer Abschnitt 6: Eingangs-Wacht & Prozesszeilen-Vertrag) | ✅ BESTANDEN |
 | `npm run test:blogautomatik` (38 Unit-Tests: u. a. `TestEingangsWacht`, `TestVerzeichnisConfinement`, `TestWhisperCppProzessvertrag`, `TestInboxFehlerisolation`, `TestQuelldateiHaertung`, `TestSprachNormalisierung`) | ✅ 38/38 |
 | `scripts/tests/test_command_execution_security.py` + neuer `WhisperEngineExternalPathContract` | ✅ inkl. „roher Pfad erreicht nie die Prozesszeile“ |
-| Gesamtdiscovery `python3 -m unittest discover -s scripts/tests` | ✅ 1729 Tests OK |
+| Gesamtdiscovery `python3 -m unittest discover -s scripts/tests` | ✅ 1731 Tests OK |
 | CI-Selbsttests (engine_generate, reserve_pool, cadence_guard, fm_boundary_guard ×2, social_studio, blogautomatik_orchestrator) | ✅ alle OK |
 | CLI-Angriffsproben (`-angriff.mp3`, NUL-Pfad, fehlende Datei auf echtem Backend) | ✅ Exit 2 mit klarer Meldung, kein Prozessstart |
 
@@ -184,7 +187,7 @@ unterbrochen, nicht nur weggefiltert; das gilt für alle Eingänge gleichzeitig.
 |---|---|
 | `scripts/whisper_engine.py` | Eingangs-Wacht, Deskriptor-Übergabe, Whitelists, fail-closed, Selftest-Abschnitt 6, CLI-Fehlerpfade, Frontmatter-Härtung, Inbox-Isolation |
 | `scripts/n8n_bridge.py` | Webhook-Fehlerisolation um `transcribe()` |
-| `scripts/tests/test_whisper_engine.py` | +22 Regressionstests (Eingangs-Wacht, Verzeichnis-Confinement, Prozessvertrag, Inbox, Frontmatter, Sprache) |
+| `scripts/tests/test_whisper_engine.py` | +23 Regressionstests (Eingangs-Wacht, Verzeichnis-Confinement inkl. Backend-Wächter, Prozessvertrag, Inbox, Frontmatter, Sprache) |
 | `scripts/tests/test_command_execution_security.py` | +`WhisperEngineExternalPathContract` (2 Tests) gemäß SECURITY.md-Pflicht |
 | `SECURITY.md` | Vertrag „Externe Dateipfade“ dokumentiert |
 | `docs/ANLEITUNG-WHISPER-N8N-GITHUB-PAGES.md` | Abschnitt 7 „Sicherheits-Vertrag der Whisper-Engine“ |

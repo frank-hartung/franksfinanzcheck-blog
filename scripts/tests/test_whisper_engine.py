@@ -219,6 +219,25 @@ class TestVerzeichnisConfinement(unittest.TestCase):
                 engine.transcribe(self.memo)
         runner.assert_not_called()
 
+    def test_whisper_cpp_backend_oeffnet_nur_pfade_innerhalb_der_wurzeln(self) -> None:
+        """Wächter am Dateizugriff selbst: Auch ein direkter Aufruf des Backends
+        (ohne Umweg über transcribe) öffnet nur Pfade innerhalb der Wurzeln."""
+        engine = whisper_engine.WhisperEngine(backend="whisper.cpp", model="base")
+        nur_repo = (os.path.realpath(whisper_engine.BLOG_DIR) + os.sep,)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=nur_repo), \
+             mock.patch.object(whisper_engine.shutil, "which", return_value="/usr/bin/whisper-cpp"), \
+             mock.patch.object(whisper_engine.subprocess, "run") as runner:
+            with self.assertRaisesRegex(ValueError, "außerhalb der erlaubten Verzeichnisse"):
+                engine._transcribe_whisper_cpp(self.memo, "de")
+        runner.assert_not_called()
+
+    def test_local_api_backend_liest_nur_pfade_innerhalb_der_wurzeln(self) -> None:
+        engine = whisper_engine.WhisperEngine(backend="local-api", model="base")
+        nur_repo = (os.path.realpath(whisper_engine.BLOG_DIR) + os.sep,)
+        with mock.patch.object(whisper_engine, "_audio_vertrauenswurzeln", return_value=nur_repo):
+            with self.assertRaisesRegex(ValueError, "außerhalb der erlaubten Verzeichnisse"):
+                engine._transcribe_local_api(self.memo, "de")
+
 
 class TestWhisperCppProzessvertrag(unittest.TestCase):
     """Prozesszeilen-Vertrag des whisper.cpp-Backends (Meldung #559).

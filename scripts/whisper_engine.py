@@ -459,6 +459,17 @@ class WhisperEngine:
           würde stumme Leertexte erzeugen, statt Sicherheit zu schaffen.
         · Fehlt Binary, Modell oder JSON-Antwort, wird fail-closed abgebrochen.
         """
+        # Verzeichnis-Confinement am Dateizugriff: Der Deskriptor wird ausschließlich
+        # für Pfade innerhalb der vertrauenswürdigen Wurzeln geöffnet
+        # (`_audio_vertrauenswurzeln`, Meldung #559).
+        wurzeln = _audio_vertrauenswurzeln()
+        if not audio_path.startswith(wurzeln):
+            raise ValueError(
+                "Audiodatei liegt außerhalb der erlaubten Verzeichnisse "
+                f"({', '.join(wurzeln)}): {os.path.basename(audio_path)!r} — "
+                "eigene Aufnahme-Ordner über WHISPER_AUDIO_ROOTS freigeben."
+            )
+
         bin_path = shutil.which("whisper-cpp") or shutil.which("whisper")
         if bin_path is None:
             raise RuntimeError(
@@ -553,6 +564,16 @@ class WhisperEngine:
             os.close(fd)
 
     def _transcribe_local_api(self, audio_path: str, language: str) -> dict[str, Any]:
+        # Verzeichnis-Confinement am Dateizugriff (wie whisper.cpp-Backend,
+        # Meldung #559): Auch der lokale API-Dienst liest die Audiodatei nur
+        # innerhalb der vertrauenswürdigen Wurzeln.
+        wurzeln = _audio_vertrauenswurzeln()
+        if not audio_path.startswith(wurzeln):
+            raise ValueError(
+                "Audiodatei liegt außerhalb der erlaubten Verzeichnisse "
+                f"({', '.join(wurzeln)}): {os.path.basename(audio_path)!r} — "
+                "eigene Aufnahme-Ordner über WHISPER_AUDIO_ROOTS freigeben."
+            )
         import mimetypes
         boundary = "----WhisperBoundary" + hex(int(time.time() * 1000))[2:]
         mimetype, _ = mimetypes.guess_type(audio_path)
@@ -979,6 +1000,11 @@ def selftest() -> bool:
             cpp_engine = WhisperEngine(backend="whisper.cpp", model="base", language="de")
             cpp_engine._safe_audio_path(tmp_audio)  # liegt im System-Temp, nicht im Repo
             raise AssertionError("Pfad außerhalb der Wurzeln wurde angenommen")
+        except ValueError:
+            pass
+        try:
+            cpp_engine._transcribe_whisper_cpp(tmp_audio, "de")  # Wächter am Dateizugriff
+            raise AssertionError("whisper.cpp-Backend öffnete Pfad außerhalb der Wurzeln")
         except ValueError:
             pass
     wurzeln = _audio_vertrauenswurzeln()

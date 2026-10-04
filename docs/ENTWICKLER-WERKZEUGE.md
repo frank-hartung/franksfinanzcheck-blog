@@ -75,7 +75,7 @@ die Markenfläche verletzt** (Vorgang WF-A4E0, Meldung #552); er gehört hierher
 npm run blogautomatik:status     # Live-Status aller drei Säulen
 npm run blogautomatik:audit      # 0 € Kosten- und Einsparungs-Audit
 npm run blogautomatik:selftest   # Offline-Selbsttest (fail-closed)
-npm run test:blogautomatik       # 38 Unit-Tests (Whisper, Brücke, Orchestrator)
+npm run test:blogautomatik       # 39 Unit-Tests (Whisper, Brücke, Orchestrator)
 npm run whisper:inbox            # wartende Sprachaufnahmen verarbeiten
 npm run n8n:ping                 # Latenz- und Erreichbarkeitsprobe für n8n
 ```
