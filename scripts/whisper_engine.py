@@ -224,6 +224,15 @@ class WhisperEngine:
         except Exception:
             return False
 
+    def _validate_audio_path(self, audio_path: str) -> str:
+        """Validiert und normalisiert eingehende Audiodatei-Pfade fail-closed."""
+        normalized = os.path.abspath(os.path.realpath(audio_path))
+        if not os.path.isfile(normalized):
+            raise FileNotFoundError(f"Audiodatei nicht gefunden: {audio_path}")
+        if os.path.basename(normalized).startswith("-"):
+            raise ValueError(f"Ungültiger Audiodateiname: {audio_path}")
+        return normalized
+
     def transcribe(
         self,
         audio_path: str,
@@ -232,19 +241,20 @@ class WhisperEngine:
     ) -> dict[str, Any]:
         """Transkribiert eine Audiodatei über das ausgewählte Backend."""
         lang = language or self.language
-        if not os.path.isfile(audio_path) and self._resolved_backend != "mock":
-            raise FileNotFoundError(f"Audiodatei nicht gefunden: {audio_path}")
+        safe_audio_path = audio_path
+        if self._resolved_backend != "mock":
+            safe_audio_path = self._validate_audio_path(audio_path)
 
         start_time = time.time()
 
         if self._resolved_backend == "faster-whisper":
-            res = self._transcribe_faster_whisper(audio_path, lang, prompt)
+            res = self._transcribe_faster_whisper(safe_audio_path, lang, prompt)
         elif self._resolved_backend == "whisper":
-            res = self._transcribe_openai_whisper(audio_path, lang, prompt)
+            res = self._transcribe_openai_whisper(safe_audio_path, lang, prompt)
         elif self._resolved_backend == "whisper.cpp":
-            res = self._transcribe_whisper_cpp(audio_path, lang)
+            res = self._transcribe_whisper_cpp(safe_audio_path, lang)
         elif self._resolved_backend == "local-api":
-            res = self._transcribe_local_api(audio_path, lang)
+            res = self._transcribe_local_api(safe_audio_path, lang)
         else:
             res = self._transcribe_mock(audio_path, lang)
 
@@ -252,7 +262,7 @@ class WhisperEngine:
         res["duration_seconds"] = duration
         res["backend_used"] = self._resolved_backend
         res["model"] = self.model
-        res["file_path"] = audio_path
+        res["file_path"] = safe_audio_path
         res["cleaned_text"] = clean_transcript_text(res.get("text", ""))
 
         return res
@@ -323,14 +333,16 @@ class WhisperEngine:
 
     def _transcribe_whisper_cpp(self, audio_path: str, language: str) -> dict[str, Any]:
         bin_path = shutil.which("whisper-cpp") or shutil.which("whisper")
+        if not bin_path:
+            raise RuntimeError("Whisper.cpp-Binary nicht gefunden (whisper-cpp/whisper).")
         cmd = [
             bin_path,
             "-m", f"models/ggml-{self.model}.bin",
-            "-f", audio_path,
+            "-f", "--", audio_path,
             "-l", language,
             "-oj",  # JSON Output
         ]
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120, shell=False)
         json_file = f"{audio_path}.json"
         if os.path.exists(json_file):
             with open(json_file, encoding="utf-8") as fh:
