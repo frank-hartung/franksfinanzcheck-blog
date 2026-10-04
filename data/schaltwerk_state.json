@@ -8,7 +8,10 @@
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=iMg2XuocVgs": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=uO2lRAkhLHE": "2026-10-04T16:20:48+02:00",
     "standby-erinnerung::standby:bluesky": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung::standby:facebook": "2026-10-04T20:20:41+02:00",
+    "standby-erinnerung::standby:instagram": "2026-10-04T20:20:41+02:00",
     "standby-erinnerung::standby:linkedin": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung::standby:pinterest": "2026-10-04T20:20:41+02:00",
     "standby-erinnerung::standby:threads": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
@@ -17,7 +20,7 @@
   "letzter_lauf": {
     "nacht-planung": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren": "2026-10-04T16:20:48+02:00",
-    "standby-erinnerung": "2026-10-04T16:20:48+02:00",
+    "standby-erinnerung": "2026-10-04T20:20:41+02:00",
     "verbraucher-nachrichten": "2026-10-04T16:20:48+02:00"
   },
   "marker": {
@@ -35,7 +38,7 @@
       "2026-10-04": 6
     },
     "standby-erinnerung": {
-      "2026-10-04": 3
+      "2026-10-04": 6
     },
     "verbraucher-nachrichten": {
       "2026-10-04": 3
