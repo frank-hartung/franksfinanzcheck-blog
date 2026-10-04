@@ -16,8 +16,10 @@ from __future__ import annotations
 
 import ast
 import importlib.util
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -29,6 +31,7 @@ sys.path.insert(0, str(SCRIPTS))
 
 import bot_watchdog as watchdog  # noqa: E402
 import spam_guard  # noqa: E402
+import whisper_engine  # noqa: E402
 
 
 def _load_server_helper():
@@ -147,6 +150,71 @@ class CommandExecutionSecurityContract(unittest.TestCase):
     def test_feed_healer_rejects_an_unapproved_script_without_starting_it(self):
         with mock.patch.object(spam_guard.subprocess, "run") as runner:
             self.assertEqual(spam_guard._run_feed_healer("untrusted.py"), 126)
+        runner.assert_not_called()
+
+
+class WhisperEngineExternalPathContract(unittest.TestCase):
+    """Meldung #559 (Code-Scanning-Alert 60): Externe Audiodatei-Pfade
+    (CLI, n8n-Webhook, Inbox-Wache) erreichen die whisper.cpp-Prozesszeile
+    ausschließlich als geöffneter Datei-Deskriptor — nie als roher Pfad.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp(prefix="whisper_security_")
+        self.audio = Path(self.tmp) / "memo.mp3"
+        self.audio.write_bytes(b"RIFF")
+        self.engine = whisper_engine.WhisperEngine(backend="whisper.cpp", model="base", language="de")
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _transcribe_with_fake_binary(self):
+        recorded = {}
+
+        def fake_run(argv, **kwargs):
+            recorded["argv"] = list(argv)
+            recorded["kwargs"] = kwargs
+            out_base = argv[argv.index("-of") + 1]
+            Path(out_base + ".json").write_text(
+                '{"result": "ok", "transcription": [{"text": "ok"}]}', encoding="utf-8"
+            )
+            return subprocess.CompletedProcess(argv, 0, "", "")
+
+        fake_blog = Path(tempfile.mkdtemp(prefix="whisper_security_blog_"))
+        (fake_blog / "models").mkdir(parents=True, exist_ok=True)
+        (fake_blog / "models" / "ggml-base.bin").write_bytes(b"")
+
+        with mock.patch.object(whisper_engine.shutil, "which", return_value="/usr/bin/whisper-cpp"), \
+             mock.patch.object(whisper_engine.subprocess, "run", side_effect=fake_run), \
+             mock.patch.object(whisper_engine, "BLOG_DIR", str(fake_blog)):
+            try:
+                self.engine.transcribe(str(self.audio))
+            finally:
+                shutil.rmtree(fake_blog, ignore_errors=True)
+        return recorded
+
+    def test_audio_file_is_passed_as_descriptor_not_as_raw_path(self):
+        recorded = self._transcribe_with_fake_binary()
+        argv = recorded["argv"]
+        kwargs = recorded["kwargs"]
+
+        self.assertNotIn(str(self.audio), argv)
+        self.assertNotIn(str(self.audio.resolve()), argv)
+        file_argument = argv[argv.index("-f") + 1]
+        self.assertRegex(file_argument, r"^/(proc/self|dev)/fd/\d+$")
+        # Options-Verwechslung ist ausgeschlossen: kein „--“, keine
+        # pfad-förmigen Argumente nach den Whitelist-Werten:
+        self.assertNotIn("--", argv)
+        self.assertIs(kwargs.get("shell", False), False)
+        pass_fds = kwargs.get("pass_fds", ())
+        self.assertEqual(len(pass_fds), 1)
+        self.assertIsInstance(pass_fds[0], int)
+
+    def test_hostile_paths_are_rejected_before_a_process_starts(self):
+        with mock.patch.object(whisper_engine.subprocess, "run") as runner:
+            for hostile in ("-angriff.mp3", "memo.mp3\x00", "gibt_es_nicht.mp3"):
+                with self.assertRaises((ValueError, FileNotFoundError)):
+                    self.engine.transcribe(hostile)
         runner.assert_not_called()
 
 

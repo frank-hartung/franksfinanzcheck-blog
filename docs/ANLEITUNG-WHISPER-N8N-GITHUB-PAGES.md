@@ -153,4 +153,42 @@ npm run whisper:inbox
 | `npm run blogautomatik:selftest` | Prüft alle Systeme offline auf Herz und Nieren |
 | `npm run whisper:inbox` | Verarbeitet wartende Audiodateien in `data/whisper_inbox/` |
 | `npm run n8n:ping` | Misst Latenz und Erreichbarkeit von n8n |
-| `npm run test:blogautomatik` | Führt alle 45 Unit-Tests aus |
+| `npm run test:blogautomatik` | Führt alle 39 Unit-Tests aus (inkl. Eingangs-Wacht & Prozesszeilen-Vertrag, Meldung #559) |
+
+---
+
+## 7. Sicherheits-Vertrag der Whisper-Engine (Meldung #559 / Code-Scanning-Alert 60)
+
+Der 04.10.2026 hat die Prozesszeilen der Engine auf Agentur-Niveau gesichert.
+Gilt für alle Eingänge — CLI, n8n-Webhook (`n8n_bridge.py`) und Inbox-Wache:
+
+1. **Eingangs-Wacht (`_safe_audio_path`):** Jeder Audiodatei-Pfad wird vor der
+   Backend-Weitergabe zu einem absoluten, symlink-freien Kanon aufgelöst
+   (`os.path.realpath`). NUL-Zeichen und Dateinamen mit führendem „-“ werden
+   abgelehnt (Schutz vor Options-Verwechslung); für echte Backends muss die
+   Datei innerhalb vertrauenswürdiger Verzeichnis-Wurzeln liegen — Repo,
+   System-Temp und optional per Umgebungsvariable `WHISPER_AUDIO_ROOTS`
+   (Doppelpunkt-getrennte Pfadliste) freigegebene Aufnahme-Ordner — und als
+   reguläre Datei existieren. Abgelehnte Aufnahmen blockieren die
+   Inbox-Verarbeitung nicht, sondern bleiben zur manuellen Prüfung liegen.
+2. **Deskriptor-Übergabe statt Pfad-Übergabe:** Das whisper.cpp-Backend öffnet
+   die geprüfte Datei selbst und reicht dem Kindprozess ausschließlich
+   `-f /proc/self/fd/<n>` (Linux) bzw. `/dev/fd/<n>` (macOS) mit `pass_fds`
+   durch. Externe Werte stehen damit strukturell nicht mehr in der Prozesszeile,
+   und der Kindprozess liest exakt den geprüften Inode (TOCTOU-sicher).
+   Ein „--“-Trennzeichen wird bewusst nicht gesetzt — der whisper.cpp-Parser
+   bricht bei unbekannten Argumenten ab.
+3. **Whitelists:** Modellnamen (offizielle ggml-Namen, Modellpfad fest an
+   `<Repo>/models/`) und Sprachwerte (Whisper-Tokenizer-Vokabular, fail-safe
+   „auto“) kommen nur aus ENGINE-KONSTANTEN, nie aus der Anfrage.
+4. **Fail-closed:** Fehlen Binary, Modell-Datei oder JSON-Antwort, oder endet
+   whisper.cpp mit Fehlercode, wird abgebrochen — keine stummen Leertexte.
+   Abgelehnte Webhook-Pfade fallen auf Text/Fallback-Entwurf zurück, statt den
+   Bridge-Server zu kippen.
+
+**Regressionsschutz (dauerhaft):** `npm run test:blogautomatik` (u. a.
+`TestEingangsWacht`, `TestWhisperCppProzessvertrag`) und der übergreifende
+Sicherheitsvertrag `scripts/tests/test_command_execution_security.py`
+(`WhisperEngineExternalPathContract`) blockieren jede Rückkehr roher Pfade in
+eine Prozesszeile. Hintergrund und Beweise:
+`WHISPER-BEFEHLSZEILEN-WACHE-PREMIUM-2026-10-04.md`.
