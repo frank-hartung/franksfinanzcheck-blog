@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Pinterest-Autorisierung – Code übernehmen | FranksFinanzcheck</title>
+<!--
+  OAuth-Landeseite (Redirect-URI der Pinterest-App), 08.09.2026 (#219).
+  Vorher landete man nach dem „Erlauben" auf einer 404-Seite und musste den
+  Code aus der Adresszeile herausschneiden – die häufigste Fehlerquelle bei
+  der Neu-Autorisierung. Diese Seite zeigt den Code an, bietet einen
+  Kopier-Knopf und verlinkt direkt auf den Workflow, der ihn eintauscht.
+
+  Sicherheit: Der Code wird NUR im Browser gelesen (location.search) und
+  nirgendwohin gesendet – kein Analytics, kein Fetch, kein Referrer.
+  Ein Code ist wenige Minuten gültig, einmalig einlösbar und ohne
+  App-Secret wertlos.
+-->
+<style>
+  :root{color-scheme:light}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:#f6f8fa;color:#19324c;line-height:1.5}
+  main{max-width:720px;margin:48px auto;padding:0 20px}
+  .card{background:#fff;border:1px solid #dfe5ec;border-radius:12px;padding:28px}
+  h1{font-size:22px;margin:0 0 6px}
+  .sub{color:#5b6b7c;margin:0 0 22px}
+  code.big{display:block;font-size:17px;word-break:break-all;background:#0f172a;color:#e2e8f0;padding:16px;border-radius:8px;user-select:all}
+  button,a.btn{display:inline-block;margin:14px 8px 0 0;padding:11px 20px;border-radius:8px;border:0;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none}
+  button{background:#0f6049;color:#fff}
+  a.btn{background:#e60023;color:#fff}
+  .ok{color:#0f6049;font-weight:600}
+  .err{background:#fff4f4;border:1px solid #f3c1c1;border-radius:8px;padding:14px;color:#8a1f1f}
+  ol{padding-left:20px}
+  li{margin:6px 0}
+  .muted{color:#798897;font-size:13px;margin-top:26px}
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1>📌 Pinterest-Autorisierung</h1>
+    <p class="sub">FranksFinanzcheck · einmaliger Handschlag für die automatische Token-Erneuerung</p>
+    <div id="out"></div>
+    <p class="muted">Diese Seite verarbeitet nichts serverseitig und sendet nichts weiter. Der Code
+      ist nur wenige Minuten gültig, genau einmal einlösbar und ohne das App-Secret wertlos.
+      Runbook: <code>docs/PINTEREST-TOKEN-RUNBOOK.md</code></p>
+  </div>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var code = (q.get('code') || '').trim();
+  var err = q.get('error');
+  var out = document.getElementById('out');
+  var wf = 'https://github.com/frank-hartung/franksfinanzcheck-blog/actions/workflows/pinterest-token.yml';
+  /* Alles per DOM-API gebaut – keine HTML-Strings. Grund: Das Qualitäts-Gate
+     (scripts/check_internal_links.sh) grept href= im gebauten HTML; ein
+     href= innerhalb eines JS-Strings würde als kaputter interner Link gelten. */
+  function el(tag, attrs, children) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    (children || []).forEach(function (c) { n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function box(cls, nodes) { return el('div', {'class': cls}, nodes); }
+  while (out.firstChild) out.removeChild(out.firstChild);
+  if (err) {
+    var desc = q.get('error_description') ? ': ' + q.get('error_description') : '';
+    out.appendChild(box('err', [
+      el('strong', {}, ['Pinterest hat keinen Code geliefert']),
+      ' (' + err + desc + ').', el('br'),
+      'Typisch: „Ablehnen“ geklickt, falsches Konto, App noch nicht freigegeben oder ein Scope ist ' +
+      'für die App nicht aktiviert. Autorisierungs-URL erneut öffnen und „Erlauben“ wählen.'
+    ]));
+    return;
+  }
+  if (!code) {
+    out.appendChild(box('err', [
+      el('strong', {}, ['Kein Code in der Adresse.']),
+      ' Diese Seite ist das Ziel der Pinterest-Autorisierung. Starte sie über ',
+      el('em', {}, ['Actions → Pinterest-Token-Wache → Run workflow → ', el('code', {}, ['show_auth_url'])]),
+      ' und öffne die dort gezeigte URL.'
+    ]));
+    return;
+  }
+  var codeEl = el('code', {'class': 'big', 'id': 'code'}, [code]);
+  var copyBtn = el('button', {'type': 'button', 'id': 'copy'}, ['Code kopieren']);
+  var link = el('a', {'class': 'btn', 'target': '_blank', 'rel': 'noopener'}, ['Zur Pinterest-Token-Wache →']);
+  link.href = wf;
+  out.appendChild(el('p', {'class': 'ok'}, ['✅ Erlaubt – hier ist dein Autorisierungs-Code:']));
+  out.appendChild(codeEl);
+  out.appendChild(copyBtn);
+  out.appendChild(link);
+  out.appendChild(el('ol', {'style': 'margin-top:22px'}, [
+    el('li', {}, ['Code kopieren (Knopf oben).']),
+    el('li', {}, ['In GitHub: ', el('strong', {}, ['Run workflow']), ' → Feld ', el('code', {}, ['auth_code']), ' → einfügen → starten.']),
+    el('li', {}, ['Fertig. Der Lauf tauscht den Code, legt ', el('code', {}, ['data/pinterest_tokens.enc']), ' an und schließt das Issue selbst.'])
+  ]));
+  out.appendChild(el('p', {'class': 'muted'}, [
+    'Zügig eintauschen – der Code verfällt nach wenigen Minuten. Falls der Tausch mit HTTP 400 scheitert: ' +
+    'URL erneut öffnen, neu erlauben, neuen Code verwenden.'
+  ]));
+  copyBtn.addEventListener('click', function () {
+    var b = this;
+    function done() { b.textContent = '✔ kopiert'; setTimeout(function () { b.textContent = 'Code kopieren'; }, 2500); }
+    function selectCode() {
+      var r = document.createRange(); r.selectNodeContents(codeEl);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { document.execCommand('copy'); done(); } catch (e) {}
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done, selectCode);
+    } else { selectCode(); }
+  });
+  /* Code aus der Browser-History nehmen (Tab-Vorschau, Sync, Verlauf). */
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Social-Autopilot Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – LinkedIn
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:linkedin:2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-b
+ eschleunigt:nutzen:2026-09-28@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20260928T054500Z
+DTEND:20260928T060000Z
+SUMMARY:LinkedIn: Digitaler Turbo: Warum der DNS-Hack dein Netz beschl
+ eunigt (nutzen)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Lin
+ kedIn\nArtikel: https://franksfinanzcheck.de/posts/2026-09-04-digital
+ er-turbo-warum-der-dns-hack-dein-netz-beschleunigt/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-digitaler-turbo-waru
+ m-der-dns-hack-dein-netz-beschleunigt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reic
+ h:frage:2026-09-29@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20260929T054500Z
+DTEND:20260929T060000Z
+SUMMARY:LinkedIn: Finanzielle Freiheit erreichen: Denke dich reich – G
+ eld (frage)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: frage\nKanal: Link
+ edIn\nArtikel: https://franksfinanzcheck.de/posts/2026-09-04-finanzie
+ lle-freiheit-erreichen-denke-dich-reich/
+URL:https://franksfinanzcheck.de/posts/2026-09-04-finanzielle-freiheit
+ -erreichen-denke-dich-reich/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dei
+ n-zuhause:zitat:2026-09-30@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20260930T054500Z
+DTEND:20260930T060000Z
+SUMMARY:LinkedIn: So findest du den richtigen: DSL-Tarif für dein Zuha
+ use (zitat)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: zitat\nKanal: Link
+ edIn\nArtikel: https://franksfinanzcheck.de/posts/2026-08-20-so-finde
+ st-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/
+URL:https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-ri
+ chtigen-dsl-tarif-fuer-dein-zuhause/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die
+ -goldene-jahreszeit:zahl:2026-10-01@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261001T054500Z
+DTEND:20261001T060000Z
+SUMMARY:LinkedIn: Sparen im Herbst: Spartipps für die goldene Jahresze
+ it (zahl)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: zahl\nKanal: Linke
+ dIn\nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-sparen-im
+ -herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die
+ -besten-spartipps-fuer-die-goldene-jahreszeit/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-g
+ enug:vergleich:2026-10-05@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261005T054500Z
+DTEND:20261005T060000Z
+SUMMARY:LinkedIn: Finanzieller Puffer: Wie viel Notgroschen ist genug?
+  (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: LinkedIn\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer
+ -wie-viel-notgroschen-ist-genug/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-
+ wie-viel-notgroschen-ist-genug/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst
+ -du-sofort:nutzen:2026-10-06@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261006T054500Z
+DTEND:20261006T060000Z
+SUMMARY:LinkedIn: Heizkosten senken: Mit diesen Strategien sparst du s
+ ofort (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-
+ diesen-strategien-sparst-du-sofort/
+URL:https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mi
+ t-diesen-strategien-sparst-du-sofort/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:frage:2026-10-07@fran
+ ksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261007T054500Z
+DTEND:20261007T060000Z
+SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
+ vertrag (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: LinkedIn\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spa
+ etsommer-vor:zitat:2026-10-08@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261008T054500Z
+DTEND:20261008T060000Z
+SUMMARY:LinkedIn: Gasrechnung prüfen: Fehler finden und Nachzahlungen 
+ (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-b
+ ereitest-du-dich-im-spaetsommer-vor/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
+ o-bereitest-du-dich-im-spaetsommer-vor/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
+ pdate-2026:zitat:2026-10-09@franksfinanzcheck.de
+DTSTAMP:20261003T221114Z
+DTSTART:20261009T054500Z
+DTEND:20261009T060000Z
+SUMMARY:LinkedIn: Dein haus sicher schuetzen das neue vorsorge update 
+ 2026 (zitat)
+DESCRIPTION:Status: geplant\nWinkel: zitat\nKanal: LinkedIn
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
