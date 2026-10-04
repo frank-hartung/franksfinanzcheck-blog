@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 04.10.2026 10:52 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.10.2026 13:09 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,23 +13,21 @@
 ## Kommende Beiträge
 
 ### So, 04. Oktober 2026
-- **12:15** ⏳ Heizkosten senken: Mit diesen Strategien sparst du sofort — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/
-- **18:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
-### Mo, 05. Oktober 2026
-- **08:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _zahl_ · Launch  
+- **18:15** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
-- **12:15** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
-### Di, 06. Oktober 2026
-- **08:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _vergleich_ · Launch  
+### Mo, 05. Oktober 2026
+- **08:15** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
+- **12:15** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
-- **12:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _mythos_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
-### Mi, 07. Oktober 2026
-- **08:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
+### Di, 06. Oktober 2026
+- **08:15** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _vergleich_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+- **12:15** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
+### Mi, 07. Oktober 2026
+- **08:15** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 - **12:15** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zitat_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Do, 08. Oktober 2026

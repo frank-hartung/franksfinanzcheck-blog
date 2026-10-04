@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Pinterest
 
-> Automatisch aktualisiert: 04.10.2026 10:52 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.10.2026 13:09 (Europe/Berlin)  
 > Profil: https://www.pinterest.de/franksfinanzcheck/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `pinterest.ics`
 
@@ -13,26 +13,26 @@
 ## Kommende Beiträge
 
 ### So, 04. Oktober 2026
-- **21:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _vergleich_ · Launch  
+- **21:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 ### Mi, 07. Oktober 2026
-- **10:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
-### Do, 08. Oktober 2026
-- **10:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-### Fr, 09. Oktober 2026
-- **10:15** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _vergleich_ · Launch  
+- **10:15** ⏳ Sicher heizen: So schützt dich eine Gaspreisgarantie — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
-### Sa, 10. Oktober 2026
-- **10:15** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
-### So, 11. Oktober 2026
-- **10:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
-### Mo, 12. Oktober 2026
-- **10:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _vergleich_ · Launch  
+### Do, 08. Oktober 2026
+- **10:15** ⏳ Kostenloses Girokonto: So findest du ein Konto ohne Gebühren — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/
+### Fr, 09. Oktober 2026
+- **10:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
+### Sa, 10. Oktober 2026
+- **10:15** ⏳ Internet & DSL wechseln: Praxis-Tipps – Highspeed Internet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+### So, 11. Oktober 2026
+- **10:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _vergleich_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
+### Mo, 12. Oktober 2026
+- **10:15** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 ### Di, 13. Oktober 2026
 - **10:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/

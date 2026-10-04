@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 04.10.2026 10:52 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.10.2026 13:09 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,22 +12,25 @@
 
 ## Kommende Beiträge
 
+### So, 04. Oktober 2026
+- **18:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Sa, 10. Oktober 2026
-- **07:00** ⏳ Heizkosten senken: Mit diesen Strategien sparst du sofort — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/
-### So, 11. Oktober 2026
-- **07:00** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _takeaway_ · Launch  
+- **07:00** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
-### Sa, 17. Oktober 2026
-- **07:00** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _frage_ · Launch  
+### So, 11. Oktober 2026
+- **07:00** ⏳ Gasrechnung prüfen: Fehler finden und Nachzahlungen — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/
-- **18:00** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _zahl_ · Launch  
+### Sa, 17. Oktober 2026
+- **07:00** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
-### So, 18. Oktober 2026
-- **07:00** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _takeaway_ · Launch  
+- **18:00** ⏳ Gasrechnung senken: Spätsommer-Check für Tarif und Heizung — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/
-- **18:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
+### So, 18. Oktober 2026
+- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
+- **18:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 
 ## Zuletzt veröffentlicht
 

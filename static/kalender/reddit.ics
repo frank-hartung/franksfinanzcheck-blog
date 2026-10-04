@@ -6,24 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:reddit:2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-d
- u-sofort:nutzen:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261004T085242Z
+UID:reddit:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaet
+ sommer-vor:zahl:2026-10-17@franksfinanzcheck.de
+DTSTAMP:20261004T110927Z
 DTSTART:20261017T121500Z
 DTEND:20261017T123000Z
-SUMMARY:Reddit: Heizkosten senken: Mit diesen Strategien sparst du sof
- ort (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-di
- esen-strategien-sparst-du-sofort/
-URL:https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mi
- t-diesen-strategien-sparst-du-sofort/
+SUMMARY:Reddit: Gasrechnung prüfen: Fehler finden und Nachzahlungen (z
+ ahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Reddit\nArtikel: htt
+ ps://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bere
+ itest-du-dich-im-spaetsommer-vor/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
+ o-bereitest-du-dich-im-spaetsommer-vor/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
  rklich:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261004T085242Z
+DTSTAMP:20261004T110927Z
 DTSTART:20261018T121500Z
 DTEND:20261018T123000Z
 SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
