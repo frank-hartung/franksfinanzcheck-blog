@@ -21,10 +21,12 @@
     "sperre_bis": "2027-04-01"
   },
   "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-29",
-    "sperre_bis": "2026-09-30"
+    "fehler": 0,
+    "grund": "produziert: black-friday-internet-angebote-lohnt-der-dsl-wechsel",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
     "abgleich_fehler": 1,
@@ -106,9 +108,11 @@
   "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (365-tage-ohne-neukauf-so-sparst-du-mit-der-kleider-challe) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: 365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-01"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?": {
     "abgleich_fehler": 1,
@@ -143,9 +147,11 @@
   "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-30"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Glasfaserausbau: Wann lohnt sich der Anschluss?": {
     "abgleich_fehler": 1,
@@ -157,9 +163,11 @@
   "Grundversorgung raus: So entkommst du dem teuersten Stromtarif": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (grundversorgung-strom-kosten-senken-so-wechselst-du-zum-g) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-09-29"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung": {
     "abgleich_fehler": 1,
@@ -185,9 +193,11 @@
   "Heizöl kaufen: Wann ist der beste Zeitpunkt?": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (heizoel-preise-so-findest-du-den-guenstigsten-kaufzeitpunkt) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-01"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Hund & Katze: Lohnt sich eine Tierversicherung?": {
     "abgleich_fehler": 1,
@@ -298,9 +308,11 @@
   "Smart Home: Diese Geräte sparen wirklich Strom": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (smart-home-so-senkst-du-deine-stromrechnung-nachhaltig) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-01"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
     "abgleich_fehler": 1,
@@ -376,9 +388,11 @@
   "Urlaubskasse clever aufbessern": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (urlaub-sparen-so-baust-du-deine-urlaubskasse-2026-clever) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-01"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Urlaubskasse clever aufbessern: 7 Tipps für mehr Reisebudget": {
     "abgleich_fehler": 1,
@@ -412,10 +426,12 @@
     "letzter_versuch": "2026-09-30"
   },
   "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?": {
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-09-29",
-    "sperre_bis": "2026-09-30"
+    "fehler": 0,
+    "grund": "produziert: strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
     "fehler": 1,
@@ -459,9 +475,11 @@
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "Artefakt fehlt (waermepumpe-oder-gasheizung-welcher-weg-spart-2026-am-meis) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-01"
+    "letzter_erfolg": "2026-10-04",
+    "letzter_versuch": "2026-10-04",
+    "sperre_bis": "2027-04-02"
   },
   "Ökostrom wechseln: Günstig und seriös im Vergleich": {
     "abgleich_fehler": 1,

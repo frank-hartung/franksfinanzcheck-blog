@@ -1,35 +1,46 @@
 {
-  "2026-10-03-die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen": {
-    "first": "2026-10-03T13:50:03Z",
+  "2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum": {
+    "first": "2026-10-04T10:17:23Z",
+    "grund": "quality-score 0.823 < 0.85 (schwach: spelling 0.70, structure 0.70, readability 0.75)",
+    "hits": 1,
+    "laeufe": [
+      "run:37193830613"
+    ],
+    "last": "2026-10-04T10:21:59Z",
+    "lauf": "run:37193830613",
+    "signatur": "quality-score <score> < <score> (schwach: spelling <score>, structure <score>, readability <score>)"
+  },
+  "2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel": {
+    "first": "2026-10-04T10:11:03Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 54 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%)",
+    "hits": 1,
+    "laeufe": [
+      "run:37193830613"
+    ],
+    "last": "2026-10-04T10:21:59Z",
+    "lauf": "run:37193830613",
+    "signatur": "lesbarkeits-gate nicht bestanden: lesbarkeits-score <n>/<n> (mindestwert <n>): flesch <n> (ziel ≥ <n>); <n>% schachtelsätze (ziel < <n>%)"
+  },
+  "2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei": {
+    "first": "2026-10-04T10:21:59Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:37193830613"
+    ],
+    "last": "2026-10-04T10:21:59Z",
+    "lauf": "run:37193830613",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
+  "2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun": {
+    "first": "2026-10-04T10:11:03Z",
     "grund": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
     "hits": 1,
     "laeufe": [
-      "run:37126707149"
+      "run:37193830613"
     ],
-    "last": "2026-10-03T14:02:58Z",
-    "lauf": "run:37126707149",
+    "last": "2026-10-04T10:21:59Z",
+    "lauf": "run:37193830613",
     "signatur": "textverständnis-gate nicht bestanden: r<n>-intro-formel: „in diesem artikel“ ×<n> (template-sprache – umformulieren)"
-  },
-  "2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa": {
-    "first": "2026-10-03T13:50:03Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:37126707149"
-    ],
-    "last": "2026-10-03T14:02:58Z",
-    "lauf": "run:37126707149",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
-  },
-  "2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-stromversorgung": {
-    "first": "2026-10-03T13:50:03Z",
-    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
-    "hits": 1,
-    "laeufe": [
-      "run:37126707149"
-    ],
-    "last": "2026-10-03T14:02:58Z",
-    "lauf": "run:37126707149",
-    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   }
 }

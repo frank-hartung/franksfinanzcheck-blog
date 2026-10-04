@@ -1,100 +1,164 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 5,
-  "generated_at": "2026-10-03T14:02:58Z",
+  "ready": 5,
+  "pool_size": 9,
+  "generated_at": "2026-10-04T10:21:59Z",
   "candidates": [
     {
-      "slug": "2026-10-03-photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
+      "slug": "2026-10-04-grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue",
       "ready": true,
-      "sha256": "ff4e6af57578b8368009f78ea2c761f3e09ba80bd15be719001d4f99a8f9d5f6",
-      "score": 0.96,
+      "sha256": "65c88c7884cc7d79111fb9e0b5e1935a38a9665c44847ab072fa31b71b1d82b5",
+      "score": 0.932,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.86,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-10-03-balkonkraftwerk-foerderung-2026-deine-optionen-fuer-zusaetzl",
-      "ready": true,
-      "sha256": "db12cd65994a837cb3378ff9c45ef3aba79a2bc301a55495913d4612df4ceb70",
-      "score": 0.876,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.88,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-03-die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen",
-      "ready": false,
-      "sha256": "9902bc0968fa1f1f2b97d27dd127c78349c0183b2a25fbb6f7782bca191807b6",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-      "details": [
-        "🛑 2026-10-03-die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.872,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.84,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
-      "ready": false,
-      "sha256": "37c992f61eba06d359f6887d4e642db7f6f2c32da1665f8e13b64a91fe4fc79c",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-03-interrail-trick-mit-bahncard-guenstig-durch-ganz-europa: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.851,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.98,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-stromversorgung",
-      "ready": false,
-      "sha256": "f33cbe0e48aadeafa8de964e9fac9e6861fa9c843f60aa6f4c327ef13f025424",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-stromversorgung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.871,
+      "slug": "2026-10-04-heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest",
+      "ready": true,
+      "sha256": "258ab2c807d3be7d85f7dcee5629a499b87cb31d191d225998ffcf40976818ee",
+      "score": 0.96,
       "parts": {
-        "spelling": 0.94,
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-04-neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget",
+      "ready": true,
+      "sha256": "96ad3c24f575827c5f7107943bc741d9406b696464abbe050344b23d96380995",
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.78,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-04-urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den",
+      "ready": true,
+      "sha256": "9c32520d6f0ae7c5814d5c2d8a0ddf35b769d301eb27e242ae0ffdec5dbb1c9d",
+      "score": 0.946,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-04-waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich",
+      "ready": true,
+      "sha256": "30bd99d980df104d095005c24834358cbf4f539d0d955af5950a5b4f60fb25ad",
+      "score": 0.88,
+      "parts": {
+        "spelling": 0.7,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum",
+      "ready": false,
+      "sha256": "3de25915a8487eb12509608e36d7f7a6c668717c7780da8f09ed8666cec25629",
+      "reason": "quality-score 0.823 < 0.85 (schwach: spelling 0.70, structure 0.70, readability 0.75)",
+      "details": [
+        "Reserve nicht bereit: 2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum: {'slug': '2026-10-04-365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum', 'score': 0.823, 'parts': {'spelling': 0.7, 'meta': 0.85, 'structure': 0.7, 'typography': 1.0, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.823,
+      "parts": {
+        "spelling": 0.7,
         "meta": 0.85,
         "structure": 0.7,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel",
+      "ready": false,
+      "sha256": "47ae7e27b656d132270f391cbffa0701061e302b04c74622f3791d6178ed2036",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 54 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%)",
+      "details": [
+        "🛑 2026-10-04-black-friday-internet-angebote-lohnt-der-dsl-wechsel: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 54 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.9,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.84,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.7
+      }
+    },
+    {
+      "slug": "2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei",
+      "ready": false,
+      "sha256": "b017de016465f3adc7d4e05616d826cffa31f8397267faa28289db4a71f52b7b",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-04-smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.865,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun",
+      "ready": false,
+      "sha256": "e15e7bc11261cd04e960d75ca57afe527246a265f39bdb1123a2122e6e5e38f9",
+      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+      "details": [
+        "🛑 2026-10-04-strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.916,
+      "parts": {
+        "spelling": 0.8200000000000001,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
       }
     }
   ]
