@@ -7,32 +7,17 @@ X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:reddit:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaet
- sommer-vor:nutzen:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261004T155018Z
-DTSTART:20261017T121500Z
-DTEND:20261017T123000Z
-SUMMARY:Reddit: Gasrechnung prüfen: Fehler finden und Nachzahlungen (n
- utzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-be
- reitest-du-dich-im-spaetsommer-vor/
-URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
- o-bereitest-du-dich-im-spaetsommer-vor/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
- rklich:zahl:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261004T155018Z
+ sommer-vor:takeaway:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261004T201344Z
 DTSTART:20261018T121500Z
 DTEND:20261018T123000Z
-SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
- h? (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Reddit\nArtikel: htt
- ps://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-w
- lan-was-brauchst-du-wirklich/
-URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
- mesh-wlan-was-brauchst-du-wirklich/
+SUMMARY:Reddit: Gasrechnung prüfen: Fehler finden und Nachzahlungen (t
+ akeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-
+ bereitest-du-dich-im-spaetsommer-vor/
+URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
+ o-bereitest-du-dich-im-spaetsommer-vor/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
