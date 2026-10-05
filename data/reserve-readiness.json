@@ -1,113 +1,151 @@
 {
   "target": 6,
-  "ready": 7,
-  "pool_size": 7,
-  "generated_at": "2026-10-05T11:00:18Z",
+  "ready": 0,
+  "pool_size": 6,
+  "generated_at": "2026-10-05T17:20:02Z",
   "candidates": [
     {
       "slug": "2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen",
-      "ready": true,
-      "sha256": "d8b8f177905508611fcd98bc5a8edb16b67d8eaa65449001b963e43fa683f953",
-      "score": 0.902,
+      "ready": false,
+      "sha256": "baf675d31c282475a5bd1f17d6d497e1ec0594abac588d959a6d78f7e18892f6",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.98,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.8200000000000001,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress",
-      "ready": true,
-      "sha256": "436835ab264fe08ae935f3d9b1a55331728ad14ca94bc9fe38d96b269b0d16b1",
-      "score": 0.928,
+      "ready": false,
+      "sha256": "fbe5156425b28c87f32aa97e99db7d008a033a67aa7d053a4b19fc1dff3e59c1",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.972,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.88,
-        "uniqueness": 1.0,
+        "typography": 0.9,
+        "uniqueness": 0.9,
         "affiliate": 1.0,
-        "readability": 0.8
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten",
-      "ready": true,
-      "sha256": "5d9aa22abeb565743833e37b7843c901a8f7078f6662840bf799eaaabf7d53b5",
-      "score": 0.866,
-      "parts": {
-        "spelling": 0.7,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.76,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf",
-      "ready": true,
-      "sha256": "72680ac9d609fb972dee4c9dca7e0f68897e390f5b7ffad3308c34e6ba7e0756",
-      "score": 0.91,
+      "ready": false,
+      "sha256": "20babff6be2c5a3ade7c781bbfbb0336df467c654aac089611e21559536dc8e9",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.924,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
+        "typography": 0.84,
+        "uniqueness": 0.9,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv",
-      "ready": true,
-      "sha256": "01272fb76a2f363c55ed0450ab253c4182d8e7589244829d0826518e69039a0f",
-      "score": 0.908,
+      "ready": false,
+      "sha256": "3d0ec7a4612082953b3e5774c42fb6695b14052bd74f0416b6f7d8868261ffc1",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.956,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.98,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben",
-      "ready": true,
-      "sha256": "25ee055e6cd07c935443140562e568858a9ad9e9a0bd9473216dce3b34b8935b",
-      "score": 0.91,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden",
-      "ready": true,
-      "sha256": "0dc674e06b382f178f909cf9f3c846056626aaa69dde1a88db69237dc35fb45f",
-      "score": 0.924,
+      "ready": false,
+      "sha256": "86b952b550d3190c68388ea8f390280b10188a456e74448ad397951360b01dba",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.98,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-05-dns-server-aendern-schnelleres-internet-ohne-mehrkosten",
+      "ready": false,
+      "sha256": "9acd0e6e9ee8a05f07dea546ed1f6fe519243dcfcdbab3f674a356e86ff5961f",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-05-dns-server-aendern-schnelleres-internet-ohne-mehrkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Profi-Affiliate-Check nicht bestanden: A3: nur 0 interne Links (< 2)",
+        "Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): Rohe Partner-URL im Artikeltext: https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4&utm_s; Roher Partner-Link im gebauten HTML (Gateway umgangen): https://a.check24.net/misc/click.php?pid=80968&aid=18&deep=dsl-anbieterwechsel&cat=4&utm_s",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.94,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.76,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-05T17:20:02Z",
+    "renewed": [
+      "2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten",
+      "2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen",
+      "2026-10-05-dns-server-aendern-schnelleres-internet-ohne-mehrkosten",
+      "2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv",
+      "2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress",
+      "2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
