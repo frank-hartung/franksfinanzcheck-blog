@@ -138,7 +138,7 @@ def _cwv_state(manifest, today=None):
             "measured": measured}
 
 
-def _secret_state(state, report_text=""):
+def _zugangsalter_state(state, report_text=""):
     """Secrets-Lage aus Report (Policy) + State (Nachweise) – nicht selbst erfunden.
 
     Formatsperre: der Report der v1-Wache hat keine `Nachweis`-Spalte und damit
@@ -383,7 +383,7 @@ def collect():
     cwv_manifest = _read_json(_CWV_M, {})
     cwv = _cwv_state(cwv_manifest)
     secrets_state = _read_json(_SECRETS_S, {"entries": {}})
-    secrets_lage = _secret_state(secrets_state, _read_text(_SECRETS_REPORT))
+    zugangslage = _zugangsalter_state(secrets_state, _read_text(_SECRETS_REPORT))
     clicks = _read_json(_CLICK_S, {})
     clicks_meta = _read_json(_CLICK_META, {}) or {}
     awin = _read_json(_AWIN_P, {})
@@ -402,7 +402,7 @@ def collect():
     # Vorher rechnete die Scorecard hier ein zweites Mal – mit anderer Regel und
     # ohne die Info-Stufen zu kennen; das Ergebnis war eine Ampel, die niemand
     # reproduzieren konnte.
-    secret_red = secrets_lage["red"]
+    zugangsalter_rot = zugangslage["red"]
 
     # Awin-Provisions-Import (Klicks → Umsatz): aggregiert, DSGVO-sicher.
     _awin_un = awin.get("unmatched", 0)
@@ -433,19 +433,12 @@ def collect():
         "casing_geparkt": (casing or {}).get("geparkt") if casing is not None else None,
         "casing_stand": (casing or {}).get("stand") if casing is not None else None,
         "casing_hist": (casing or {}).get("tage") if casing is not None else None,
-        "secrets_age_red": secret_red,
-        "secrets_age_amber": secrets_lage["amber"],
-        "secrets_age_verdict": secrets_lage["verdict"],
-        "secrets_age_legacy": secrets_lage["legacy"],
-        "secrets_age_proven": secrets_lage["proven"],
-        "secrets_age_entries": secrets_lage["entries"],
-        # Abwärtskompatibilität:
-        "secret_red": secret_red,
-        "secret_amber": secrets_lage["amber"],
-        "secret_verdict": secrets_lage["verdict"],
-        "secret_legacy": secrets_lage["legacy"],
-        "secret_proven": secrets_lage["proven"],
-        "secret_entries": secrets_lage["entries"],
+        "zugangsalter_rot": zugangsalter_rot,
+        "zugangsalter_gelb": zugangslage["amber"],
+        "zugangsalter_verdict": zugangslage["verdict"],
+        "zugangsalter_legacy": zugangslage["legacy"],
+        "zugangsalter_proven": zugangslage["proven"],
+        "zugangsalter_entries": zugangslage["entries"],
         "click_articles": len(click_articles),
         "total_clicks": total_clicks,
         "top_article": top_article,
@@ -491,14 +484,14 @@ def _cwv_lamp(d):
     return {"GREEN": "🟢", "AMBER": "🟡", "RED": "🔴"}.get(d.get("cwv_verdict"), "⚪")
 
 
-def _secret_lamp(d):
-    if d.get("secret_legacy"):
+def _zugangsalter_lampe(d):
+    if d.get("zugangsalter_legacy"):
         return "⚪"
-    if d.get("secret_red", 0) > 0:
+    if d.get("zugangsalter_rot", 0) > 0:
         return "🔴"
-    if d.get("secret_amber", 0) > 0:
+    if d.get("zugangsalter_gelb", 0) > 0:
         return "🟡"
-    if d.get("secret_verdict") == "GREEN":
+    if d.get("zugangsalter_verdict") == "GREEN":
         return "🟢"
     return "⚪"
 
@@ -538,10 +531,10 @@ def _render_datalage(d):
          .get(d.get("cwv_state"), "")),
         ("Decay-Radar", "data/decay_queue.json", "-",
          f"{d['decay_count']} Kandidat(en)"),
-        ("Secrets", "SECRETS-REPORT.md + data/secrets_state.json", d.get("secret_verdict", "-"),
+        ("Secrets", "SECRETS-REPORT.md + data/secrets_state.json", d.get("zugangsalter_verdict", "-"),
          "Report der v1-Wache – Format ohne Nachweis-Spalte, Neu erzeugen ausstehend"
-         if d.get("secret_legacy") else
-         f"{d.get('secret_proven', 0)}/{d['secret_entries']} live bewiesen"),
+         if d.get("zugangsalter_legacy") else
+         f"{d.get('zugangsalter_proven', 0)}/{d['zugangsalter_entries']} live bewiesen"),
         ("Lektorat", "LEKTOR-REPORT.md",
          "heute" if os.path.exists(os.path.join(BLOG_DIR, "LEKTOR-REPORT.md")) else "fehlt",
          f"{d['lektor'] if d['lektor'] is not None else 'n/a'} auto-behebbar, "
@@ -577,8 +570,8 @@ def _append_history(d, score):
            "live": d["live"], "drafts": d["drafts"], "decay": d["decay_count"],
            "cwv": d.get("cwv_verdict"), "cwv_state": d.get("cwv_state"),
            "readability": d["readability"], "lektor": d["lektor"],
-           "secrets_age_red": d.get("secrets_age_red", d.get("secret_red", 0)),
-           "secrets_age_amber": d.get("secrets_age_amber", d.get("secret_amber", 0)),
+           "zugangsalter_rot": d.get("zugangsalter_rot", 0),
+           "zugangsalter_gelb": d.get("zugangsalter_gelb", 0),
            "clicks": d["total_clicks"], "awin": d["awin_total"]}
     # Die Historie speichert ausschließlich Secret-GESUNDHEITS-Metadaten
     # (Ampel-Zähler red/amber, Verdict, Nachweis-Stufen) – nie Werte.
@@ -620,8 +613,8 @@ def _score(d) -> int:
         elif d["readability"] < R_TARGET:
             s -= 4
     # Secrets: nur rote Befunde (Kanal tot/fehlt) ziehen ab, gelbe altern mit 1 pkt.
-    red_findings = int(d.get("secrets_age_red", d.get("secret_red", 0)) or 0)
-    amber_findings = int(d.get("secrets_age_amber", d.get("secret_amber", 0)) or 0)
+    red_findings = int(d.get("zugangsalter_rot", 0) or 0)
+    amber_findings = int(d.get("zugangsalter_gelb", 0) or 0)
     s -= min(15, red_findings * 5) + min(2, amber_findings)
     # Lektorat
     if d["lektor"] is not None:
@@ -697,10 +690,10 @@ def render(d, score):
         f"| {_casing_lamp(d)} |",
         f"| Schreibweise – Hinweise (nur Info) | "
         f"{'n/a' if d.get('casing_hint') is None else d.get('casing_hint')} | ℹ️ |",
-        f"| Secrets ({'Wache v1 – Report veraltet' if d.get('secret_legacy') else 'rot / gelb / bewiesen'}) "
-        f"| {d['secret_red']} / {d.get('secret_amber', 0)} / "
-        f"{d.get('secret_proven', 0)} von {d['secret_entries']} | "
-        f"{_secret_lamp(d)} |",
+        f"| Secrets ({'Wache v1 – Report veraltet' if d.get('zugangsalter_legacy') else 'rot / gelb / bewiesen'}) "
+        f"| {d['zugangsalter_rot']} / {d.get('zugangsalter_gelb', 0)} / "
+        f"{d.get('zugangsalter_proven', 0)} von {d['zugangsalter_entries']} | "
+        f"{_zugangsalter_lampe(d)} |",
         f"| Affiliate-Klicks (Umsatz-Hebel) | {d['total_clicks']} über "
         f"{d['click_articles']} Artikel | "
         f"{_data_lamp(d['total_clicks'], d['click_articles'], d.get('clicks_pipeline') == 'ok')} |",
@@ -739,17 +732,17 @@ def render(d, score):
     elif d["cwv_verdict"] != "GREEN":
         recs.append("Core-Web-Vitals unter Soll – `scripts/cwv_guard.py` für Befunde; "
                     "Covers als AVIF/WebP, Bilder < 220 KB, `<img>` mit width/height.")
-    if d.get("secret_legacy"):
+    if d.get("zugangsalter_legacy"):
         recs.append("Secrets-Wache im alten Format (ohne Nachweis-Spalte) – die Zeile "
                     "bleibt ⚪, bis `premium-governance.yml` den Report neu erzeugt "
                     "(Live-Probe `--verify`).")
-    if d["secret_red"] > 0:
-        recs.append(f"**{d['secret_red']}** rote Secret-Befunde – Kanal ist tot oder "
+    if d["zugangsalter_rot"] > 0:
+        recs.append(f"**{d['zugangsalter_rot']}** rote Secret-Befunde – Kanal ist tot oder "
                     "abgelaufen: `python3 scripts/secrets_age_guard.py --verify` zeigt "
                     "live, welche API den Token ablehnt (Pinterest 30-Tage-Token, "
                     "Mastodon, KI-Keys).")
-    elif d.get("secret_amber", 0) > 0:
-        recs.append(f"{d['secret_amber']} gelber Secret-Hinweis(e) – altern, aber "
+    elif d.get("zugangsalter_gelb", 0) > 0:
+        recs.append(f"{d['zugangsalter_gelb']} gelber Secret-Hinweis(e) – altern, aber "
                     "functieren; `--verify` im Wochentakt hält den Nachweis frisch.")
     if d.get("casing"):
         recs.append(f"**{d['casing']}** harte Casing-Befunde (Marken/Akronymen/"
@@ -883,28 +876,34 @@ def _selftest():
     if _cwv_state({}, ref)["state"] != "MISSING":
         failures.append("fehlendes Manifest != MISSING")
     # --- Score: Blindflug < echter roter Befund (Reihenfolge muss stimmen)
-    base = {"live": 20, "decay_count": 0, "lektor": 0, "secret_red": 0, "readability": 80}
+    base = {"live": 20, "decay_count": 0, "lektor": 0, "zugangsalter_rot": 0, "readability": 80}
     s_ok = _score(dict(base, cwv_state="OK", cwv_verdict="GREEN"))
     s_red = _score(dict(base, cwv_state="OK", cwv_verdict="RED"))
     s_blind = _score(dict(base, cwv_state="STALE", cwv_verdict="AMBER"))
     if not (s_ok > s_blind > s_red):
         failures.append(f"Score-Hierarchie CWV falsch: ok={s_ok} blind={s_blind} rot={s_red}")
     # --- Secrets-Ampel aus Report-Policy (nicht aus eigener Rechnung)
-    lage = _secret_state({"entries": {"A": {"quality": "proven"}}},
-                         "| Secret | Status | Nachweis |\n|---|---|---|\n"
-                         "## Gesamt-Ampel: **RED**\n\n| RED | dead | `A` – tot |\n"
-                         "| AMBER | aging | `B` – alt |")
+    lage = _zugangsalter_state(
+        {"entries": {"A": {"quality": "proven"}}},
+        "| Secret | Status | Nachweis |\n|---|---|---|\n"
+        "## Gesamt-Ampel: **RED**\n\n| RED | dead | `A` – tot |\n"
+        "| AMBER | aging | `B` – alt |")
     if lage["red"] != 1 or lage["amber"] != 1 or lage["verdict"] != "RED" or lage["proven"] != 1:
         failures.append(f"Secrets-Report wird falsch gelesen: {lage}")
-    legacy = _secret_state({"entries": {"A": {}}},
-                           "| Secret | Status |\n|---|---|\n## Gesamt-Ampel: **AMBER**\n"
-                           "\n| AMBER | untracked | `PINTEREST` – kein Erfolgs-Log |")
+    legacy = _zugangsalter_state(
+        {"entries": {"A": {}}},
+        "| Secret | Status |\n|---|---|\n## Gesamt-Ampel: **AMBER**\n"
+        "\n| AMBER | untracked | `PINTEREST` – kein Erfolgs-Log |")
     if not legacy["legacy"] or legacy["red"] or legacy["amber"]:
         failures.append("v1-Report (ohne Nachweis-Spalte) wird als Bewertung gelesen")
-    if _secret_lamp({"secret_legacy": True, "secret_red": 0, "secret_amber": 0}) != "⚪":
+    legacy_lampe = {"zugangsalter_legacy": True, "zugangsalter_rot": 0, "zugangsalter_gelb": 0}
+    if _zugangsalter_lampe(legacy_lampe) != "⚪":
         failures.append("Legacy-Secrets-Zeile leuchtet trotzdem")
-    if _secret_lamp({"secret_red": 1}) != "🔴" or _secret_lamp({"secret_red": 0, "secret_amber": 2}) != "🟡" \
-            or _secret_lamp({"secret_red": 0, "secret_amber": 0, "secret_verdict": "GREEN"}) != "🟢":
+    rot_lampe = {"zugangsalter_rot": 1}
+    gelb_lampe = {"zugangsalter_rot": 0, "zugangsalter_gelb": 2}
+    gruen_lampe = {"zugangsalter_rot": 0, "zugangsalter_gelb": 0, "zugangsalter_verdict": "GREEN"}
+    if _zugangsalter_lampe(rot_lampe) != "🔴" or _zugangsalter_lampe(gelb_lampe) != "🟡" \
+            or _zugangsalter_lampe(gruen_lampe) != "🟢":
         failures.append("Secrets-Lampe inkonsistent")
     # --- Entwurfs-Lampe: 0 Entwürfe dürfen nie gelb sein (war Dauer-🟡 in #206)
     if _drafts_lamp(0) != "🟢" or _drafts_lamp(2) != "⚪" or _drafts_lamp(9) not in ("🟡", "🔴"):
@@ -932,16 +931,16 @@ def _selftest():
         failures.append("Trend-Lieferform unstetig")
     # _score monoton (mehr decay = schlechter)
     a = _score({"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
-                "readability": 80, "lektor": 10, "secrets_age_red": 0})
+                "readability": 80, "lektor": 10, "zugangsalter_rot": 0})
     b = _score({"live": 20, "decay_count": 8, "cwv_verdict": "RED",
-                "readability": 50, "lektor": 80, "secrets_age_red": 3})
+                "readability": 50, "lektor": 80, "zugangsalter_rot": 3})
     if not (a > b):
         failures.append("Score-Monotonie: a={}, b={}".format(a, b))
     # Awin-Monetarisierung: Umsatz belohnt (max +5), kein Datensatz = neutral,
     # unmatched SubIDs warnen (min. 1) – darf nie Qualität dominieren.
-    # Basis mit Spielraum: lektor 50 (-4), secrets_age_red 1 (-5) → Base 91.
+    # Basis mit Spielraum: lektor 50 (-4), zugangsalter_rot 1 (-5) → Base 91.
     base_rev = {"live": 20, "decay_count": 0, "cwv_verdict": "GREEN",
-                "readability": 80, "lektor": 50, "secrets_age_red": 1}
+                "readability": 80, "lektor": 50, "zugangsalter_rot": 1}
     c = _score(dict(base_rev, awin_total=250))
     d0 = _score(base_rev)
     if not (c > d0 and (c - d0) <= 5):

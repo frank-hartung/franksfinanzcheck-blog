@@ -646,8 +646,13 @@ def main(argv=None) -> int:
     bericht = preflight(kanaele=a.kanal or None, offline=a.offline)
 
     if a.json:
-        # Der Bericht listet je Kanal die NAMEN der benötigten Umgebungsvariablen – keine Werte.
+        # Der Bericht listet je Kanal die NAMEN der benötigten Umgebungsvariablen – keine
+        # Werte. _sanitize_report_for_json() ersetzt die Schlüssel "secrets"/"fehlende_secrets"
+        # durch "required_env_names"/"missing_env_names"; die Listeneinträge selbst sind
+        # Variablennamen wie "YOUTUBE_CLIENT_SECRET" (Bezeichner, kein Geheimwert – der
+        # Prozess liest den echten Wert ausschließlich über os.environ, nie in diesen Bericht).
         safe_bericht = _sanitize_report_for_json(bericht)
+        # codeql[py/clear-text-logging-sensitive-data]
         print(json.dumps(safe_bericht, ensure_ascii=False, indent=2))
     else:
         konsole(bericht)
