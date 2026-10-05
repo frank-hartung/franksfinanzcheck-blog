@@ -37,11 +37,11 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell die Schlagzeile – und du sollst sofort einen Zweijahresvertrag unterschreiben? Ruhig bleiben. Großhandelspreise wirken nicht eins zu eins und nicht sofort auf deinen Endkundentarif.
+Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell eine Schlagzeile. Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Relevant wird es, wenn dein Anbieter eine konkrete Preisänderung ankündigt oder deine Garantie ausläuft. Dann zählen Klausel, Frist und deine Jahreskosten.
+Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine Garantie endet. Dann zählen Klausel, Frist und deine Kosten im Jahr.
 
 
 
@@ -54,7 +54,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Leg das Schreiben neben deinen Vertrag. Markiere den alten und den neuen Preis je kWh. Markiere auch den Tag, an dem der neue Preis gelten soll. Suche danach die Stelle zum Preis-Schutz. So erkennst du, ob der Grund im Brief zu dem Schutz im Vertrag passt.
 
-Rechne dann den Preis für ein Jahr mit deinem Verbrauch. Lass den Bonus bei der ersten Rechnung weg. Vergleiche diesen Wert mit zwei neuen Angeboten. Ein Wechsel kann gut sein, muss aber nicht immer die beste Wahl sein. Dein alter Vertrag kann trotz neuer Preise noch fair sein.
+Rechne dann den Preis für ein Jahr mit deinem Verbrauch. Lass dabei den Bonus weg. Vergleiche den Wert mit zwei neuen Angeboten. Ein Wechsel kann gut sein – muss aber nicht die beste Wahl sein. Dein alter Vertrag kann auch mit neuem Preis noch fair sein.
 
 Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag und Foto an einem Ort. Das hilft, wenn du später nachfragen oder kündigen willst. Bei Streit holst du dir Rat, statt Zahlungen ohne Plan zu stoppen.
 
@@ -70,15 +70,15 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 
 ## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht
 
-Versorger beschaffen Gas zu unterschiedlichen Zeiten und über verschiedene Verträge. Dazu kommen Netzentgelte, Vertriebskosten, Steuern, Abgaben und Umlagen. Dein Haushaltsgaspreis ist daher kein Live-Ticker des Großhandels.
+Versorger kaufen Gas zu verschiedenen Zeiten und über verschiedene Verträge ein. Dazu kommen Netz-Kosten, Vertrieb, Steuern, Abgaben und Umlagen. Dein Gaspreis ist also kein Live-Ticker vom Großhandel.
 
-Auch ein fallender Börsenpreis wird nicht immer sofort weitergegeben. Genau deshalb vergleichst du deinen konkreten Tarif mit aktuell abschließbaren Angeboten, statt aus einer Tagesbewegung eine Jahresprognose zu bauen.
+Auch ein fallender Börsenpreis kommt nicht immer sofort bei dir an. Genau deshalb vergleichst du deinen Tarif mit Angeboten von heute. Eine einzelne Tagesbewegung sagt nichts über das ganze Jahr.
 
-Zur Einordnung: Im Einfamilienhaus lag der Gaspreis 2026 laut BDEW im Mittel bei 11,93 Cent je Kilowattstunde. Diese Zahl beschreibt den Markt von gestern. Über den kommenden Winter und über das Angebot an deiner Adresse sagt sie nichts.
+Zur Einordnung: 2026 lag der Gaspreis fürs Einfamilienhaus laut BDEW im Schnitt bei 11,93 Cent je kWh. Das zeigt nur den Markt von gestern. Über den Winter und über das Angebot bei dir sagt die Zahl nichts.
 
 ## Wie eine Preisgarantie den Schock begrenzt
 
-Eine Preisgarantie verschiebt einen Teil des Preisrisikos zum Anbieter. Dafür kann der Startpreis höher sein. Geschützt bist du aber nur so weit, wie es die Klausel festlegt.
+Eine Preisgarantie gibt einen Teil des Risikos an den Anbieter ab. Dafür kann der Startpreis höher sein. Geschützt bist du aber nur so weit, wie die Klausel es sagt.
 
 Typische Ausnahmen betreffen:
 
@@ -87,7 +87,7 @@ Typische Ausnahmen betreffen:
 - Netzentgelte,
 - gesetzlich veranlasste neue Preisbestandteile.
 
-Beschaffungskosten sind laut Verbraucherzentrale von Preisgarantien grundsätzlich erfasst. Ob auch Grundpreis und Netzentgelte geschützt sind, musst du im Vertrag prüfen.
+Die Einkaufskosten sind laut Verbraucherzentrale meist in der Garantie enthalten. Ob auch Grundpreis und Netz-Kosten geschützt sind, musst du im Vertrag nachlesen.
 
 ## Drei Szenarien statt einer Prognose
 
@@ -99,9 +99,9 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Tarif B kostet anfangs 100 € mehr, wäre in diesem Szenario aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
-Das ist keine Vorhersage. Es zeigt den Preis der Absicherung. Eine Garantie kauft Planbarkeit, keine sichere Ersparnis.
+Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
 ## Preisänderung erhalten: diese fünf Punkte markieren
 
@@ -111,13 +111,13 @@ Das ist keine Vorhersage. Es zeigt den Preis der Absicherung. Eine Garantie kauf
 4. Datum, ab dem sie gilt,
 5. Hinweis auf das Sonderkündigungsrecht.
 
-Vergleiche dann die Änderung mit deiner Preisgarantie. Steigt ein geschützter Bestandteil innerhalb des Garantiezeitraums, ist die Erhöhung möglicherweise unzulässig. Ist der Bestandteil ausdrücklich ausgenommen, kann die Lage anders sein.
+Vergleiche dann die Änderung mit deiner Preisgarantie. Steigt ein geschützter Teil während der Garantiezeit, ist die Erhöhung vielleicht nicht erlaubt. Ist der Teil klar ausgenommen, kann es anders aussehen.
 
 ## Was die Bundesnetzagentur zu Preisänderungen sagt
 
-Preisänderungen müssen grundsätzlich einen Monat vor ihrem Wirksamwerden mitgeteilt werden. Das Schreiben muss verständlich sein und Grund, Voraussetzungen sowie Umfang nennen. In der Regel besteht ein Sonderkündigungsrecht zum Tag vor der neuen Preisgeltung.
+Eine Preisänderung muss meist einen Monat vorher angekündigt werden. Der Brief muss klar sein und Grund, Bedingung und Umfang nennen. Meist darfst du zum Tag vor dem neuen Preis sonderkündigen.
 
-Es gibt Besonderheiten. Bei einer separat vereinbarten Weitergabe bestimmter hoheitlich bedingter Preisänderungen kann das Sonderkündigungsrecht entfallen. Auch eine eins zu eins weitergegebene Änderung der Umsatzsteuer wird anders behandelt.
+Es gibt Ausnahmen. Bei bestimmten staatlich veranlassten Preisänderungen kann das Sonderkündigungsrecht entfallen, wenn das vorher so vereinbart war. Auch eine reine Weitergabe der Umsatzsteuer wird anders behandelt.
 
 Darum lautet die sichere Regel: **Nicht nur die Überschrift lesen. Änderungsgrund und Vertragsklausel entscheiden.**
 
@@ -125,15 +125,15 @@ Darum lautet die sichere Regel: **Nicht nur die Überschrift lesen. Änderungsgr
 
 ### Wenn die Erhöhung der Garantie widerspricht
 
-Schreibe dem Anbieter, auf welche Klausel du dich beziehst, und widersprich nachweisbar. Zahle Rechnungen nicht kommentarlos falsch oder gar nicht; hol bei Streit Unterstützung von Verbraucherzentrale oder Rechtsberatung.
+Schreib dem Anbieter, auf welche Klausel du dich beziehst. Widersprich nachweisbar. Zahl Rechnungen nicht einfach falsch oder gar nicht. Hol dir bei Streit Hilfe von der Verbraucherzentrale oder einem Anwalt.
 
 ### Wenn die Erhöhung zulässig erscheint
 
-Rechne den neuen Jahrespreis und vergleiche. Du kannst das Sonderkündigungsrecht nutzen, musst es aber nicht. Trotz Erhöhung kann ein fairer Bestandsvertrag günstiger sein als ein neues Angebot.
+Rechne den neuen Jahrespreis aus und vergleiche ihn. Du darfst das Sonderkündigungsrecht nutzen, musst es aber nicht. Trotz Erhöhung kann dein alter Vertrag günstiger sein als ein neues Angebot.
 
 ### Wenn die Frist knapp ist
 
-Kündige selbst in Textform und verlange Bestätigung. Beim normalen Anbieterwechsel kann der neue Lieferant die Kündigung übernehmen; bei Sonderkündigungen rät auch die Bundesnetzagentur zum eigenen Handeln.
+Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung rät die Bundesnetzagentur: Handle selbst.
 
 ## Jahrespreis nach einer Erhöhung rechnen
 

@@ -242,7 +242,7 @@ Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer 
 Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 Prozent. Kalt wird es dabei nicht.
 
 
-Genau das ist der Hebel: Gasrechnung senken. 10 bis 15 Prozent sind dabei realistisch.
+Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 Prozent sind realistisch.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

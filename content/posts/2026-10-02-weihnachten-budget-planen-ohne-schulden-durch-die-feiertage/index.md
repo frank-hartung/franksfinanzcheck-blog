@@ -172,7 +172,7 @@ Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du run
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.
 
 
-Genau das ist der Hebel: Weihnachten Budget planen. Schon kleine Änderungen haben große Wirkung.
+Eine klare Obergrenze ist der Hebel, der dein Weihnachtsbudget schützt – schon kleine Schritte zeigen große Wirkung.
 
 ## Häufige Fragen
 
