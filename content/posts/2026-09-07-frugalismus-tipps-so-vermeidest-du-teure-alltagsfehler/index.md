@@ -41,6 +41,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Frugalismus im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
@@ -65,7 +66,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Viele Menschen glauben, ihnen fehle nur Willenskraft. Das ist ein Irrtum – und ein teurer dazu.
 
-Dein Gehirn ist auf sofortige Belohnung programmiert. Siehst du ein Produkt, schüttet dein Körper Dopamin aus, und dein rationales Denken tritt in den Hintergrund. Kluge **Frugalismus-Tipps** setzen genau hier an: Sie bauen eine kleine Barriere zwischen Kaufwunsch und Kasse. Es geht nicht darum, sich nie wieder etwas zu gönnen, sondern nur für Dinge zu bezahlen, die echten Nutzen stiften.
+Dein Gehirn ist auf sofortige Belohnung programmiert. Siehst du ein Produkt, schüttet dein Körper Dopamin aus, und dein rationales Denken tritt in den Hintergrund. Kluge **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** setzen genau hier an: Sie bauen eine kleine Barriere zwischen Kaufwunsch und Kasse. Es geht nicht darum, sich nie wieder etwas zu gönnen, sondern nur für Dinge zu bezahlen, die echten Nutzen stiften.
 
 Der zweite Hebel ist die sogenannte Lifestyle-Inflation. Mit steigendem Gehalt steigen die Ansprüche automatisch mit: das größere Auto, die teurere Wohnung, das neueste Smartphone. Wer hier nicht gegensteuert, bleibt im Hamsterrad – egal, wie viel er verdient. Die meisten Haushalte haben deshalb kein Einnahmen-, sondern ein Ausgabenproblem.
 
@@ -100,7 +101,7 @@ Impulskäufe sind der größte Feind deines Kontostands. Wenn du im Internet ode
 
 Beim Online-Shopping funktioniert das besonders gut: Artikel in den Warenkorb legen, Tab schließen. Erinnerst du dich am nächsten Tag noch aktiv daran und brauchst es wirklich, kannst du kaufen. Überraschend viele Dinge willst du dann gar nicht mehr.
 
-In der Praxis spart dieser Trick oft mehrere hundert Euro im Jahr. Du lernst dabei wieder, zwischen kurzfristigem Wunsch und echtem Bedarf zu unterscheiden – ein Grundbaustein für **Geld sparen im Alltag**.
+In der Praxis spart dieser Trick oft mehrere hundert Euro im Jahr. Du lernst dabei wieder, zwischen kurzfristigem Wunsch und echtem Bedarf zu unterscheiden – ein Grundbaustein für **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)**.
 
 ## Trick 2: Das Prinzip der No-Spend-Weekends
 
@@ -175,7 +176,7 @@ Legst du diese Summe jedes Jahr mit rund **7 % Rendite** an, stehen nach 20 Jah
 
 Sparen darf nicht wehtun. Wer sich ständig einschränkt, verliert das Ziel aus den Augen. Belohne dich deshalb für Etappenziele: Ist der erste Tausender auf dem Tagesgeldkonto, gönn dir bewusst etwas, das dir wirklich Freude macht.
 
-Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
+Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **Geld sparen im Alltag** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
 
 Und betrachte Frugalismus als Experiment: Wie wenig brauche ich wirklich, um zufrieden zu sein? Weniger Besitz bedeutet weniger Wartung, weniger Aufräumen, weniger Sorgen. Diese Entlastung ist oft mehr wert als der Betrag auf dem Konto.
 

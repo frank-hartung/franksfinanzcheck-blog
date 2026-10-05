@@ -37,6 +37,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Die Zinsen haben sich eingependelt. **Das Tagesgeldkonto** bleibt deshalb auch im Herbst 2026 ein starker Baustein für dein Geld. Das Girokonto zahlt dir weiter 0,0 Prozent.
 
 Viele Banken geben dir heute **ca. 1,7 % bis 3,2 %**. Dein Geld bleibt dabei täglich verfügbar. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** gibt es keinen besseren Platz.
@@ -147,7 +148,7 @@ Stand: Oktober 2026. Die Zinsen ändern sich täglich. Vergleiche deshalb kurz v
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von ca. 15.000 €**:
+Nehmen wir an, du parkst einen **Notgroschen von ca. 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 

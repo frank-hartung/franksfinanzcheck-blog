@@ -35,6 +35,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
+
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim Warmwasser oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -131,7 +132,7 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 
 Beispiel: Eine Gerätegruppe zieht unnötig 18 Watt. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt rund 32 €. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel“ eine echte Zahl.
+Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr, 10 Watt rund 32 €. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel“ eine echte Zahl.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 
@@ -255,7 +256,7 @@ Stromfresser findest du nicht am Alter oder an einer warmen Oberfläche, sondern
 
 Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es für 24 Stunden an das verdächtigste Kühlgerät. Danach hast du eine Zahl statt eines Verdachts.
 
-**Weiterlesen:** [Standby-Kosten gezielt reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** Standby-Kosten gezielt reduzieren · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 
 ## Häufige Fragen
 

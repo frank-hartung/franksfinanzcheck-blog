@@ -42,7 +42,7 @@ Willst du deine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-f
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ablauf ist bewusst knapp gehalten. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent pro kWh rund 180 € im Jahr aus. Deshalb prüfst du Tarif und Verbrauch getrennt, statt nur auf die Abschlagsrate zu schauen.
+Dieser Ablauf ist bewusst knapp gehalten. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent pro kWh rund 180 € im Jahr aus. Deshalb prüfst du Tarif und Verbrauch getrennt, statt nur auf die Abschlagsrate zu schauen.
 
 
 
@@ -197,7 +197,7 @@ Rechne das erste und zweite Jahr getrennt. Ein günstiges Bonusjahr kann danach 
 
 ## Was ein Wechsel realistisch bringen kann
 
-Die Bundesnetzagentur rechnete für Januar 2026 bei 20.000 kWh vor: Ein Gaslieferantenwechsel spart im Schnitt etwa 360 €. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
+Die Bundesnetzagentur rechnete für Januar 2026 bei 20.000 kWh vor: Ein Gaslieferantenwechsel spart im Schnitt etwa 360 €. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
 
 Deine Ersparnis berechnest du so:
 
@@ -207,7 +207,7 @@ Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050�
 
 ## Verbrauchssparen ohne Doppelzählung
 
-Pro Grad weniger Raumtemperatur sinkt der Heizbedarf laut Faustregel der Verbraucherzentrale um etwa 6 %. Auch andere Maßnahmen wirken: besser lüften, freie Heizkörper, angepasste Zeiten.
+Pro Grad weniger Raumtemperatur sinkt der Heizbedarf laut Faustregel der Verbraucherzentrale um etwa 6 %. Auch andere Maßnahmen wirken: besser lüften, freie Heizkörper, angepasste Zeiten.
 
 Addiere diese Prozentwerte aber nicht einfach. Sie wirken oft auf denselben unnötigen Verbrauch. Beobachte stattdessen den Zähler über mehrere vergleichbare Wochen.
 
@@ -253,7 +253,7 @@ Wenn du mit anderen zusammenwohnst, verteile Aufgaben eindeutig. „Wir lesen de
 
 Bearbeite zuerst die Sicherheit, dann Fristen, danach Geld und Komfort. Ein Gasgeruch duldet keinen Preisvergleich. Eine Kündigungsfrist kann schon morgen ablaufen. Der staubige Heizkörper wartet dagegen locker bis zum Wochenende.
 
-Für Geldthemen hilft eine einfache Regel: Beginne mit dem Punkt, der laut deiner Rechnung den größten Unterschied im Jahr macht. Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
+Für Geldthemen hilft eine einfache Regel: Beginne mit dem Punkt, der laut deiner Rechnung den größten Unterschied im Jahr macht. Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
 
 Streiche erledigte Punkte und übertrage offene Aufgaben mit neuem Datum. So bleibt das Ergebnisblatt kurz. Nach dem Winter vergleichst du es mit Rechnung und Zählerreihe. Dann siehst du, welche Entscheidung Wirkung hatte und welche nur gut klang.
 

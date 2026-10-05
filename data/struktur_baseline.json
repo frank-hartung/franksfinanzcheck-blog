@@ -324,6 +324,16 @@
       "mikro": 1,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-05-die-50-30-20-regel-einfach-erklaert": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -332,5 +342,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-10-02"
+  "stand": "2026-10-05"
 }

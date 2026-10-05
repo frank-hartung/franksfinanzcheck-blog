@@ -51,7 +51,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Starte mit einem kleinen Check
 
 
-Darum geht es hier konkret: Gasrechnung senken.
+Darum geht es hier konkret: [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/).
 
 Prüfe deine Zahlen, bevor die Heizung richtig läuft. Die Preise der Anbieter gehen im Oktober 2026 weit auseinander. Das ist dein Hebel.
 

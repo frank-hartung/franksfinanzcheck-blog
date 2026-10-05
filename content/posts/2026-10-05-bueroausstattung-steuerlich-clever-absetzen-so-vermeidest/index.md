@@ -48,9 +48,9 @@ Vieles davon landet nie in der Steuererklärung. Mal fehlt der Beleg, mal weiß 
 **Das Wichtigste in Kürze**
 
 * **Arbeitsmittel** sind Gegenstände, die du so gut wie ausschließlich beruflich nutzt – sie zählen als Werbungskosten.
-* **800 Euro netto** (rund 952 Euro brutto) ist die entscheidende Grenze: Bis dahin wirkt der Kauf sofort im Anschaffungsjahr.
+* **800 € netto** (rund 952 € brutto) ist die entscheidende Grenze: Bis dahin wirkt der Kauf sofort im Anschaffungsjahr.
 * **Teurere Möbel** verteilst du über die betriebsgewöhnliche Nutzungsdauer, bei Büromöbeln sind das 13 Jahre.
-* **Tagespauschale:** 6 Euro je Homeoffice-Tag, maximal 210 Tage und damit höchstens 1.260 Euro im Jahr.
+* **Tagespauschale:** 6 € je Homeoffice-Tag, maximal 210 Tage und damit höchstens 1.260 € im Jahr.
 * **Belege** gehören digitalisiert ins Jahresarchiv – ohne Nachweis erkennt das Finanzamt nichts an.
 
 ---
@@ -64,9 +64,9 @@ Das Finanzamt trennt scharf: Arbeitsmittel auf der einen Seite, private Käufe a
 
 Es zählt die echte Nutzung, nicht der Name auf der Rechnung. Ein Schreibtisch im Arbeitszimmer ist ein Arbeitsmittel. Derselbe Tisch im Kinderzimmer ist es nicht.
 
-Nutzt du ein Gerät gemischt, teilst du die Kosten. Liegt der Job-Anteil bei 80 Prozent, setzt du 80 Prozent vom Preis an.
+Nutzt du ein Gerät gemischt, teilst du die Kosten. Liegt der Job-Anteil bei 80 %, setzt du 80 % vom Preis an.
 
-Bei überwiegend privaten Geräten gilt eine Grenze. Liegt der berufliche Anteil unter 10 Prozent, erkennt das Finanzamt nichts an. Zwischen 10 und 90 Prozent rechnest du anteilig. Die Quote solltest du kurz begründen können.
+Bei überwiegend privaten Geräten gilt eine Grenze. Liegt der berufliche Anteil unter 10 %, erkennt das Finanzamt nichts an. Zwischen 10 und 90 % rechnest du anteilig. Die Quote solltest du kurz begründen können.
 
 ### Diese Anschaffungen sind unstrittig
 
@@ -74,6 +74,10 @@ Bei überwiegend privaten Geräten gilt eine Grenze. Liegt der berufliche Anteil
 * Schreibtisch, Rollcontainer, Schreibtischlampe und Bürostuhl
 * Aktenordner, Druckerpatronen, Papier und Porto
 * Fachliteratur und beruflich genutzte Software
+
+## Fazit: Büroausstattung steuerlich clever absetzen – So geht's
+
+Der Hebel bei **Büroausstattung steuerlich clever absetzen: So geht's** sitzt nicht im Verzicht, sondern im Nachrechnen. Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ### Diese Anschaffungen führen regelmäßig zu Rückfragen
 
@@ -84,28 +88,28 @@ Bei überwiegend privaten Geräten gilt eine Grenze. Liegt der berufliche Anteil
 
 ## Büroausstattung absetzen: sofort oder über Jahre?
 
-Entscheidend sind 800 Euro netto. Kostet ein Gegenstand höchstens 800 Euro netto, gilt er als geringwertiges Wirtschaftsgut nach § 6 Abs. 2 EStG. Dann ziehst du den vollen Betrag im Kaufjahr ab. Mit 19 Prozent Umsatzsteuer sind das rund 952 Euro brutto.
+Entscheidend sind 800 € netto. Kostet ein Gegenstand höchstens 800 € netto, gilt er als geringwertiges Wirtschaftsgut nach § 6 Abs. 2 EStG. Dann ziehst du den vollen Betrag im Kaufjahr ab. Mit 19 % Umsatzsteuer sind das rund 952 € brutto.
 
-Liegt der Preis darüber, verteilst du die Kosten über die Nutzungsdauer. Büromöbel stehen in der amtlichen Tabelle mit 13 Jahren. Ein Schreibtisch für 1.300 Euro bringt dir also rund 100 Euro pro Jahr. Dafür 13 Jahre lang.
+Liegt der Preis darüber, verteilst du die Kosten über die Nutzungsdauer. Büromöbel stehen in der amtlichen Tabelle mit 13 Jahren. Ein Schreibtisch für 1.300 € bringt dir also rund 100 € pro Jahr. Dafür 13 Jahre lang.
 
 Für Computer, Notebooks, Monitore und Zubehör erlaubt die Finanzverwaltung eine Nutzungsdauer von einem Jahr. Technik wirkt deshalb fast immer sofort. Der Preis spielt dabei keine Rolle.
 
 | Nettopreis je Gegenstand | Steuerliche Behandlung | Beispiel |
 |---------------------------|------------------------|----------|
-| bis 250 Euro | Sofortabzug, keine besondere Aufzeichnung | Schreibtischlampe, Tastatur |
-| 250,01 bis 800 Euro | Sofortabzug als geringwertiges Wirtschaftsgut | Bürostuhl für 450 Euro |
-| über 800 Euro (Möbel) | Abschreibung über 13 Jahre | Schreibtisch für 1.300 Euro |
-| Computer und Peripherie | Nutzungsdauer ein Jahr, also faktisch sofort | Notebook für 1.500 Euro |
+| bis 250 € | Sofortabzug, keine besondere Aufzeichnung | Schreibtischlampe, Tastatur |
+| 250,01 bis 800 € | Sofortabzug als geringwertiges Wirtschaftsgut | Bürostuhl für 450 € |
+| über 800 € (Möbel) | Abschreibung über 13 Jahre | Schreibtisch für 1.300 € |
+| Computer und Peripherie | Nutzungsdauer ein Jahr, also faktisch sofort | Notebook für 1.500 € |
 
-**Faustregel:** Prüfe den Preis pro Stück, nicht die Summe der Rechnung. Drei Geräte zu je 400 Euro bleiben drei geringwertige Wirtschaftsgüter. Auch wenn unten 1.200 Euro stehen.
+**Faustregel:** Prüfe den Preis pro Stück, nicht die Summe der Rechnung. Drei Geräte zu je 400 € bleiben drei geringwertige Wirtschaftsgüter. Auch wenn unten 1.200 € stehen.
 
 ## Die Tagespauschale fürs Homeoffice richtig nutzen
 
-Neben der Büroausstattung gibt es die Tagespauschale nach § 4 Abs. 5 Satz 1 Nr. 6c EStG. Für jeden Tag im Homeoffice setzt du 6 Euro an. Das Maximum sind 210 Tage im Jahr, also 1.260 Euro.
+Neben der Büroausstattung gibt es die Tagespauschale nach § 4 Abs. 5 Satz 1 Nr. 6c EStG. Für jeden Tag im Homeoffice setzt du 6 € an. Das Maximum sind 210 Tage im Jahr, also 1.260 €.
 
 Dafür brauchst du kein eigenes Arbeitszimmer. Auch der Küchentisch zählt. Am selben Tag gibt es aber nur eines: Tagespauschale oder Entfernungspauschale. Die Pauschale gilt pro Person, nicht pro Haushalt.
 
-Noch ein Punkt für deine Erwartung: Werbungskosten wirken erst über dem Pauschbetrag von 1.230 Euro. Den zieht das Finanzamt ohnehin ab. Deshalb lohnt es sich, Büroausstattung und Pauschale zusammen zu rechnen. Erst die Summe schiebt dich über die Schwelle.
+Noch ein Punkt für deine Erwartung: Werbungskosten wirken erst über dem Pauschbetrag von 1.230 €. Den zieht das Finanzamt ohnehin ab. Deshalb lohnt es sich, Büroausstattung und Pauschale zusammen zu rechnen. Erst die Summe schiebt dich über die Schwelle.
 
 > 💶 **Spar-Tipp zwischendurch:** Dein Tagesgeld liegt bei der C24 Bank verzinst und täglich verfügbar: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
@@ -126,35 +130,35 @@ Digitale Belege sind erlaubt, solange sie lesbar und unverändert sind. Fotograf
 
 ## Modellrechnung: So viel bringt deine Büroausstattung
 
-Nimm ein typisches Homeoffice-Jahr. Du kaufst einen Monitor für 300 Euro, einen Schreibtisch für 250 Euro und einen Bürostuhl für 180 Euro. Alle drei liegen unter 800 Euro. Sie wirken also sofort.
+Nimm ein typisches Homeoffice-Jahr. Du kaufst einen Monitor für 300 €, einen Schreibtisch für 250 € und einen Bürostuhl für 180 €. Alle drei liegen unter 800 €. Sie wirken also sofort.
 
 **Schritt 1 – anteilige Kosten berechnen**
 
-* Monitor: 300 Euro × 90 Prozent = 270 Euro
-* Schreibtisch: 250 Euro × 70 Prozent = 175 Euro
-* Bürostuhl: 180 Euro × 80 Prozent = 144 Euro
+* Monitor: 300 € × 90 % = 270 €
+* Schreibtisch: 250 € × 70 % = 175 €
+* Bürostuhl: 180 € × 80 % = 144 €
 
 **Schritt 2 – Arbeitsmittel summieren**
 
-270 Euro + 175 Euro + 144 Euro = **589 Euro**
+270 € + 175 € + 144 € = **589 €**
 
 **Schritt 3 – Tagespauschale addieren**
 
-Bei 150 Homeoffice-Tagen kommen 150 × 6 Euro = **900 Euro** hinzu.
+Bei 150 Homeoffice-Tagen kommen 150 × 6 € = **900 €** hinzu.
 
 **Schritt 4 – Ergebnis einordnen**
 
-Zusammen sind das 1.489 Euro Werbungskosten. Der Pauschbetrag von 1.230 Euro war dir ohnehin sicher. Wirksam werden also nur 259 Euro.
+Zusammen sind das 1.489 € Werbungskosten. Der Pauschbetrag von 1.230 € war dir ohnehin sicher. Wirksam werden also nur 259 €.
 
-Bei 30 Prozent Grenzsteuersatz bringt dir das rund 78 Euro zurück. Kommt im selben Jahr ein Notebook für 900 Euro dazu, steigt der wirksame Betrag auf 1.159 Euro. Die Erstattung liegt dann bei etwa 348 Euro.
+Bei 30 % Grenzsteuersatz bringt dir das rund 78 € zurück. Kommt im selben Jahr ein Notebook für 900 € dazu, steigt der wirksame Betrag auf 1.159 €. Die Erstattung liegt dann bei etwa 348 €.
 
 Das Beispiel zeigt den Hebel: Einzelne Kleinbeträge verpuffen im Pauschbetrag. Wer Käufe bündelt und die Tagespauschale mitnimmt, kommt klar darüber.
 
 ## Fünf Fehler, die dich bares Geld kosten
 
-1. **Keine Trennung von privat und beruflich.** Wer 100 Prozent ansetzt, obwohl das Gerät abends im Wohnzimmer steht, riskiert die komplette Streichung.
-2. **Belege zu spät gesichert.** Ohne Rechnung kein Abzug. Scanne direkt nach dem Kauf, nicht im folgenden Frühjahr.
-3. **Die Grenze falsch gelesen.** Maßgeblich sind 800 Euro netto je Gegenstand – nicht der Bruttobetrag und nicht die Rechnungssumme.
+1. **Keine Trennung von privat und beruflich.** Wer 100 % ansetzt, obwohl das Gerät abends im Wohnzimmer steht, riskiert die komplette Streichung.
+2. **Belege zu spät gesichert.** Ohne Rechnung kein Abzug. Scanne direkt nach dem Kauf, nicht im Folgenden Frühjahr.
+3. **Die Grenze falsch gelesen.** Maßgeblich sind 800 € netto je Gegenstand – nicht der Bruttobetrag und nicht die Rechnungssumme.
 4. **Pauschale und Pendlerweg doppelt angesetzt.** Für denselben Tag gibt es nur eines von beidem. Das fällt beim Abgleich sofort auf.
 5. **Abschreibung nicht fortgeführt.** Teure Möbel wirken 13 Jahre lang. Wer die Folgejahre vergisst, verschenkt den größten Teil.
 
@@ -164,7 +168,7 @@ Setze dir vier feste Termine: April, Juli, Oktober und Januar. Zehn Minuten pro 
 
 Plane auch die Erstattung ein. Wer das Geld nicht sofort ausgibt, sondern auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) legt, finanziert damit den nächsten Kauf. Mit einem Haushaltsbuch behältst du die Beträge im Blick.
 
-Prüfe vor jedem Neukauf drei Dinge. Brauchst du das Gerät wirklich beruflich? Liegt der Nettopreis unter 800 Euro? Passt der Kauf noch in dieses Steuerjahr?
+Prüfe vor jedem Neukauf drei Dinge. Brauchst du das Gerät wirklich beruflich? Liegt der Nettopreis unter 800 €? Passt der Kauf noch in dieses Steuerjahr?
 
 Wer im Dezember bestellt, verschiebt den Abzug oft ins Folgejahr. Es zählt das Datum der Anschaffung.
 
@@ -181,7 +185,7 @@ Du brauchst die Rechnung oder einen lesbaren Scan. Darauf gehören Kaufdatum, Ve
 
 ### Wie hoch darf der private Nutzungsanteil sein?
 
-Bis zu 10 Prozent private Nutzung sind unschädlich. Darüber rechnest du anteilig. Unter 10 Prozent Job-Anteil ist kein Abzug möglich.
+Bis zu 10 % private Nutzung sind unschädlich. Darüber rechnest du anteilig. Unter 10 % Job-Anteil ist kein Abzug möglich.
 
 ### Kann ich gebrauchte Möbel absetzen?
 

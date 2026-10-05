@@ -67,9 +67,9 @@ Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu an – 
 
 Höhere Rechnungen belasten die Kasse. Ein früher Check bringt dir Ruhe.
 
-Du findest rasch einen günstigen Tarif. Das schützt dich vor bösen Überraschungen. Du behältst die Kontrolle über deine Kosten.
+Du findest rasch einen günstigen Tarif. Das [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor bösen Überraschungen. Du behältst die Kontrolle über deine Kosten.
 
-Ein Beispiel macht das klar. Bei 3.500 kWh Strom und 15.000 kWh Gas bringt schon 1 Cent Ersparnis viel. Du sparst rasch über 200 € im Jahr. Dieses Geld stärkt deinen Notgroschen oder dein Sparen.
+Ein Beispiel macht das klar. Bei 3.500 kWh Strom und 15.000 kWh Gas bringt schon 1 Cent Ersparnis viel. Du sparst rasch über 200 € im Jahr. Dieses Geld stärkt deinen [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) oder dein Sparen.
 
 Achte auch auf die Preisgarantie. Lange Bindungen klingen gut. Aber sinken die Marktpreise, zahlst du zu viel. Dein **Energie-Update** sollte flexibel bleiben.
 

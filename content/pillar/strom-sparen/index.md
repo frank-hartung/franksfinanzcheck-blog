@@ -72,7 +72,7 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">CO₂-Preis 2026</div>
-      <div class="ff-radar-kpi__value">55–65 €/t</div>
+      <div class="ff-radar-kpi__value">55–65 €/t</div>  
       <div class="ff-radar-kpi__source">Gesetzliche Staffel nach BEHG</div>
     </div>
   </div>
@@ -356,7 +356,7 @@ Möchtest du deine laufenden Energiekosten dauerhaft ohne bürokratischen Aufwan
   <div class="ff-course-series-box__head">
     <span class="ff-course-series-box__badge">Kostenlose E-Mail-Serie</span>
     <h3 class="ff-course-series-box__title">Der 4-Tage Energie-Autopilot</h3>
-    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p>
+    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p>  
   </div>
   <div class="ff-course-syllabus">
     <div class="ff-course-day">

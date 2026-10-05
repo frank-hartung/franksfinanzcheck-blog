@@ -29,14 +29,14 @@ cover:
 kurzantwort: "Dein Gasabschlag ist eine Vorauszahlung auf die Jahresrechnung: Multipliziere deinen Jahresverbrauch in kWh mit dem Arbeitspreis, addiere zwölf Monate Grundpreis und teile das Ergebnis durch zwölf. Liegt dein Abschlag deutlich über diesem Wert oder zahlst du teure Grundversorgung, solltest du Zählerstand melden, den Abschlag anpassen lassen und den Tarif vor der Heizsaison wechseln."
 ---
 
-Der Briefkasten liefert es jeden Herbst: die Preisanpassung deines Gasanbieters. Gleichzeitig steht die Heizsaison vor der Tür – und mit ihr die Frage, ob dein monatlicher Abschlag überhaupt stimmt. Wer jetzt seinen Gasabschlag berechnen kann, erkennt sofort, ob er zu viel zahlt, ob eine Nachzahlung droht und ob sich der Griff zum Tarifrechner wieder lohnt. Du bekommst hier die Formel, eine komplette Modellrechnung und fünf bewährte Hebel für entspannte Heizkosten.
+Der Briefkasten liefert es jeden Herbst: die Preisanpassung deines Gasanbieters. Gleichzeitig steht die Heizsaison vor der Tür und mit ihr die Frage, ob dein monatlicher Abschlag überhaupt stimmt. Wer jetzt seinen Gasabschlag berechnen kann, erkennt sofort, ob er zu viel zahlt, ob eine Nachzahlung droht und ob sich der Griff zum Tarifrechner wieder lohnt. Du bekommst hier die Formel, eine komplette Modellrechnung und fünf bewährte Hebel für entspannte Heizkosten.
 
 **Das Wichtigste in Kürze**
 * Der Abschlag ist eine Vorauszahlung auf die Jahresrechnung, kein Festpreis.
 * **Formel:** Jahresverbrauch × Arbeitspreis + 12 × Grundpreis, geteilt durch 12 Monate.
 * Grundversorgung ist fast immer der teuerste Tarif – prüfen lohnt sich.
-* **Nachzahlung vermeiden:** Zählerstand regelmäßig ablesen und Abschlag anpassen lassen.
-* Ein Grad weniger Raumtemperatur spart nach Einschätzung der Verbraucherzentralen rund 6 % Heizenergie.
+* **[Nachzahlung vermeiden](../../posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/):** Zählerstand regelmäßig ablesen und Abschlag anpassen lassen.
+* Ein Grad weniger Raumtemperatur spart nach Einschätzung der Verbraucherzentralen rund 6 % Heizenergie.
 
 
 
@@ -67,15 +67,15 @@ Die Formel ist einfach und funktioniert für jeden Tarif:
 **Jahreskosten = (Jahresverbrauch in kWh × Arbeitspreis) + (12 × Grundpreis)**
 **Monatsabschlag = Jahreskosten ÷ 12**
 
-Schauen wir uns das an einem Modellfall an: Du heizt eine rund 70 m² große Wohnung und verbrauchst im Jahr circa 12.000 kWh. Dein Tarif verlangt etwa 11 Cent je kWh und rund 12 € Grundpreis im Monat.
+Schauen wir uns das an einem Modellfall an: Du heizt eine rund 70 m² große Wohnung und verbrauchst im Jahr circa 12.000 kWh. Dein Tarif verlangt etwa 11 Cent je kWh und rund 12 € Grundpreis im Monat.
 
-**Rechenweg Gas:**  
-- Verbrauchskosten: 12.000 kWh × 0,11 € = 1.320 € im Jahr
-- Grundpreis: 12 € × 12 Monate = 144 € im Jahr
-- Jahreskosten: 1.320 € + 144 € = 1.464 €
-- Monatsabschlag: 1.464 € ÷ 12 = 122 €
+**Rechenweg Gas:**
+- Verbrauchskosten: 12.000 kWh × 0,11 € = 1.320 € im Jahr
+- Grundpreis: 12 € × 12 Monate = 144 € im Jahr
+- Jahreskosten: 1.320 € + 144 € = 1.464 €
+- Monatsabschlag: 1.464 € ÷ 12 = 122 €
 
-Zahlt dein Anbieter mit 150 € im Monat deutlich mehr, verschenkst du ein zinsloses Darlehen. Zahlst du nur 90 €, droht im Frühjahr eine Nachzahlung von fast 400 €. Beide Fehlausrichtungen lassen sich mit einer kurzen Nachfrage beim Anbieter korrigieren.
+Zahlt dein Anbieter mit 150 € im Monat deutlich mehr, verschenkst du ein zinsloses Darlehen. Zahlst du nur 90 €, droht im Frühjahr eine Nachzahlung von fast 400 €. Beide Fehlausrichtungen lassen sich mit einer kurzen Nachfrage beim Anbieter korrigieren.
 
 ## Warum der Oktober der richtige Moment ist
 
@@ -110,7 +110,7 @@ Mit dieser Routine wird die Heizsaison planbar. Du weißt vor der ersten kalten 
 
 Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden Saison:
 
-1. **Raumtemperatur um ein Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
+1. **Raumtemperatur um ein Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie. Von 23 auf 21 Grad sind das im Modellfall bis zu 160 € im Jahr.
 2. **Abschlag an den echten Verbrauch anpassen:** Melde deinem Anbieter den aktuellen Zählerstand. Er muss einen nachweislich zu hohen oder zu niedrigen Abschlag korrigieren.
 3. **Aus der Grundversorgung wechseln:** Der Grundtarif der Stadtwerke ist die Notversorgung, nicht der Bestpreis. Ein Wechsel ist jederzeit mit kurzer Frist möglich.
 4. **Stoßlüften statt Dauerlüften:** Fünf bis zehn Minuten weit geöffnete Fenster tauschen die Luft komplett, ohne die Wände auszukühlen. Gekippte Fenster heizen für die Straße.
@@ -125,7 +125,7 @@ Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden 
 | Zählerstand nie ablesen | Abschlag bleibt Fantasiewert | Erinnerung am Monatsersten setzen |
 | Preiserhöhung hinnnehmen | Teurer Altvertrag läuft weiter | Sonderkündigungsrecht prüfen und wechseln |
 
-Gerade der zweite Punkt kostet jedes Jahr viele Haushalte dreistellige Beträge. Ein Tarif mit 200 € Sofortbonus, der danach 15 % teurer ist, verliert gegen den ehrlichen Durchschnittstarif fast immer.
+Gerade der zweite Punkt kostet jedes Jahr viele Haushalte dreistellige Beträge. Ein Tarif mit 200 € Sofortbonus, der danach 15 % teurer ist, verliert gegen den ehrlichen Durchschnittstarif fast immer.
 
 ## Schritt-für-Schritt: Dein Abschlags-Check in 30 Minuten
 

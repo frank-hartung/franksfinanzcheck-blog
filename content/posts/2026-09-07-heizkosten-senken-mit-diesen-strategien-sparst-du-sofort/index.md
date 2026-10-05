@@ -77,7 +77,7 @@ Das sind nur Richtwerte, keine feste Regel. Gebäude, Feuchtigkeit und persönli
 
 ### Was 1 °C weniger in Euro bedeuten kann
 
-Kostet deine Heizenergie 1.600 € im Jahr, sind 6 % rechnerisch **96 €**. Das ist eine Faustzahl, keine Garantie. Sie gilt nur, wenn du die Temperatur wirklich im Schnitt senkst und sonst alles ähnlich bleibt.
+Kostet deine Heizenergie 1.600 € im Jahr, sind 6 % rechnerisch **96 €**. Das ist eine Faustzahl, keine Garantie. Sie gilt nur, wenn du die Temperatur wirklich im Schnitt senkst und sonst alles ähnlich bleibt.
 
 ## 2. Stoßlüften statt Dauer-Kipp
 
@@ -132,11 +132,11 @@ Für einen Gasvertrag brauchst du vier Zahlen:
 
 Beispiel: 16.000 kWh × 0,105 €/kWh + 180 € Grundpreis ergeben **1.860 €**. Bei zwölf gleichen Abschlägen wären das rechnerisch 155 € im Monat.
 
-Ein Abschlag von 130 € macht den Tarif nicht günstiger. Er baut in diesem Beispiel nur eine mögliche Nachzahlung auf.
+Ein Abschlag von 130 € macht den Tarif nicht günstiger. Er baut in diesem Beispiel nur eine mögliche Nachzahlung auf.
 
 ## Was mehrere Maßnahmen zusammen bringen können
 
-Prozentwerte lassen sich nicht einfach addieren. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
+Prozentwerte lassen sich nicht einfach addieren. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
 
 Seriöser ist ein Vorher-nachher-Vergleich:
 

@@ -203,7 +203,7 @@ Die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich zunächst auszublend
 
 ## Was tun bei einer angekündigten Preiserhöhung?
 
-Lies das Schreiben ganz durch. Laut Bundesnetzagentur muss eine Preisänderung klar angekündigt und begründet sein. Meist darfst du zum Zeitpunkt der Änderung sonderkündigen.
+Lies das Schreiben ganz durch. Laut Bundesnetzagentur muss eine Preisänderung klar angekündigt und begründet sein. Meist darfst du zum Zeitpunkt der Änderung Sonderkündigen.
 
 Kündige in diesem Fall selbst, und zwar rechtzeitig. Verlass dich nicht auf den neuen Anbieter, wenn die Frist knapp ist. Heb Schreiben und Kündigungsnachweis gut auf.
 

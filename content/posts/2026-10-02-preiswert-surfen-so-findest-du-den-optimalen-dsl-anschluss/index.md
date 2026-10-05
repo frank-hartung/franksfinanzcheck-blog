@@ -152,7 +152,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 | Ignorieren von Anschlussgebühren | Einmalige Kosten erhöhen die Gesamtsumme | Addiere einmalige Kosten zur Jahresrechnung |
 | Keine Preisgarantie | Unerwartete Preissteigerungen | Wähle Tarife mit mindestens 12 Monaten Preisgarantie |
 
-**Faustregel:** Ein DSL‑Tarif ist erst dann preiswert, wenn dein Jahresgesamtpreis nicht mehr als 1 % deines Haushaltsnettoeinkommens beträgt.
+**Faustregel:** Ein DSL‑Tarif ist erst dann preiswert, wenn dein Jahresgesamtpreis nicht mehr als 1 % deines Haushaltsnettoeinkommens beträgt.
 
 
 
@@ -164,7 +164,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 So gehst du vor:  
 
 1. **Bedarf ermitteln:** Notiere, welche Geräte du hast und wie viel Bandbreite du im Alltag nutzt.
-2. **Tarife recherchieren:** Nutze Vergleichsportale, filtere nach Grundpreis < 30 € und Mindestlaufzeit ≤ 12 Monate.
+2. **Tarife recherchieren:** Nutze Vergleichsportale, filtere nach Grundpreis < 30 € und Mindestlaufzeit ≤ 12 Monate.
 3. **Kosten kalkulieren:** Erstelle eine Mini‑Tabelle mit Grundpreis, Zusatzgebühren und möglichen Einrichtungs‑Aufwendungen.
 4. **Kündigungsfrist prüfen:** Trage das Datum des nächsten möglichen Wechsels in deinen Kalender ein.
 5. **Vertrag unterschreiben:** Achte darauf, dass alle besprochenen Konditionen schriftlich festgehalten sind.
@@ -172,20 +172,20 @@ So gehst du vor:
 ## Modellrechnung: Was kostet ein DSL‑Anschluss bei 50 Mbps?
 
 **Annahmen**  
-- Grundpreis: 25 € pro Monat
-- Router‑Miete: 5 € pro Monat
-- Einrichtungsgebühr: 30 € einmalig
+- Grundpreis: 25 € pro Monat
+- Router‑Miete: 5 € pro Monat
+- Einrichtungsgebühr: 30 € einmalig
 - Vertragslaufzeit: 24 Monate
 
 **Formel**  
 Jahreskosten = (Grundpreis + Router‑Miete) × 12 + Einrichtungsgebühr  
 
 **Rechenweg**  
-(25 € + 5 €) × 12 = 360 €  
-360 € + 30 € = 390 €  
+(25 € + 5 €) × 12 = 360 €  
+360 € + 30 € = 390 €  
 
 **Ergebnis**  
-Der DSL‑Anschluss kostet dich 390 € über die ersten 12 Monate, also rund 32,50 € pro Monat inkl. Einrichtungsgebühr.  
+Der DSL‑Anschluss kostet dich 390 € über die ersten 12 Monate, also rund 32,50 € pro Monat inkl. Einrichtungsgebühr.  
 
 Die Rechnung zeigt es klar. Ein kleiner Grundpreis sagt wenig aus, wenn Gebühren dazukommen. Nutze diese Formel für jedes Angebot.
 
@@ -193,10 +193,10 @@ Die Rechnung zeigt es klar. Ein kleiner Grundpreis sagt wenig aus, wenn Gebühre
 
 | Anbieter | Geschwindigkeit | Grundpreis (Monat) | Router‑Miete | Preisgarantie |
 |----------|------------------|--------------------|--------------|---------------|
-| Anbieter A | 50 Mbps | 22 € | 0 € | 12 Monate |
-| Anbieter B | 100 Mbps | 28 € | 4 € | 24 Monate |
-| Anbieter C | 250 Mbps | 35 € | 0 € | 6 Monate |
-| Anbieter D | 50 Mbps | 20 € | 3 € | 12 Monate |
+| Anbieter A | 50 Mbps | 22 € | 0 € | 12 Monate |
+| Anbieter B | 100 Mbps | 28 € | 4 € | 24 Monate |
+| Anbieter C | 250 Mbps | 35 € | 0 € | 6 Monate |
+| Anbieter D | 50 Mbps | 20 € | 3 € | 12 Monate |
 
 Die Tabelle zeigt ein Muster. Ein kleiner Grundpreis geht oft mit einem gratis Router einher. Achte auf die Summe, nicht auf eine einzelne Zahl.
 

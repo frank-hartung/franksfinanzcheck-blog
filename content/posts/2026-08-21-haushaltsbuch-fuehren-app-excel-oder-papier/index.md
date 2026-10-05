@@ -37,6 +37,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
+
 Am Monatsende ist das Konto leer. Du weißt nicht, wohin das Geld geflossen ist? So geht es rund **60 % der Haushalte** in Deutschland. Das zeigt eine Auswertung der Stiftung Warentest.
 
 Schon fünf Minuten im Monat reichen, um das zu ändern. Wer ein **Haushaltsbuch führt**, sieht alle Einnahmen und Ausgaben auf einen Blick. Auch teure Abos, schlechte Tarife und Konsum-Fallen fallen so auf.
@@ -203,7 +204,7 @@ Wenn du dabei bleibst, wird aus Kontrolle mit der Zeit echte [finanzielle](../..
 
 Später kannst du jederzeit auf Excel umsteigen. Wichtig ist nur eines: **Fang heute an**. Jeder Monat ohne Haushaltsbuch lässt dich vielleicht hunderte Euro verlieren.
 
-**Weiterlesen:** [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · Geld sparen im Alltag: Einfache Tipps, die jeder umsetzen kann · [Pillar: Konto & Karten](../../pillar/konto-karten/)
+**Weiterlesen:** [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Geld sparen im Alltag](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/): Einfache Tipps, die jeder umsetzen kann · [Pillar: Konto & Karten](../../pillar/konto-karten/)
 
 ## Häufige Fragen
 

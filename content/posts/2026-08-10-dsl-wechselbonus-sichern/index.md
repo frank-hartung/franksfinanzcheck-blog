@@ -73,7 +73,7 @@ Wichtig ist nur: Schau genau hin, **wie** dieser Vorteil verrechnet wird – und
 
 ## Der häufigste Denkfehler: Bonus mit Ersparnis verwechseln
 
-Ein Tarif mit **ca. 200 € bis 300 € Bonus** wirkt auf den ersten Blick unschlagbar. Steigt der Preis aber ab dem 13. Monat stark an, oder kommt eine hohe Routermiete dazu, kann die Rechnung nach 24 Monaten am Ende höher sein. Ein Tarif mit kleinerem Bonus, aber fairer Grundgebühr, schneidet dann oft besser ab.
+Ein Tarif mit **ca. 200 € bis 300 € Bonus** wirkt auf den ersten Blick unschlagbar. Steigt der Preis aber ab dem 13. Monat stark an, oder kommt eine hohe Routermiete dazu, kann die Rechnung nach 24 Monaten am Ende höher sein. Ein Tarif mit kleinerem Bonus, aber fairer Grundgebühr, schneidet dann oft besser ab.
 
 Es gilt weiterhin die goldene Regel:
 
@@ -128,7 +128,7 @@ Das ist die einfachste Variante. Der Bonus wird direkt mit deinen ersten Rechnun
 Dieser Bonus ist oft hoch. Dafür musst du selbst aktiv werden. Meist musst du nach dem Start deines Anschlusses die erste Rechnung im Portal hochladen. Wer die Frist verpasst, verliert bares Geld.
 
 ### 3. Freimonate oder stark reduzierte Startpreise
-Hier läuft der Bonus über den Preis selbst. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) nur einen kleinen Betrag von **ca. 10 € bis 20 €**. Danach steigt der Preis auf das normale Niveau.
+Hier läuft der Bonus über den Preis selbst. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) nur einen kleinen Betrag von **ca. 10 € bis 20 €**. Danach steigt der Preis auf das normale Niveau.
 
 ### 4. Hardware-Zuschuss
 Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brauchst du die Hardware wirklich? Oder wäre ein echter Preisnachlass mehr wert für dich?
@@ -149,7 +149,7 @@ Ein Wechsel senkt oft nicht nur den Preis. Er bringt dir bei gleichen Kosten oft
 
 Ein großer Bonus darf nie über schlechte Leistung oder hohe Folgekosten hinwegtäuschen. Kritisch wird es dann, wenn der Tarif ab Jahr zwei so teuer wird, dass er die ganze Ersparnis wieder auffrisst. Auch versteckte Kosten sind ein Warnsignal: Manche Extras werden nach drei Probemonaten von selbst zum teuren Abo.
 
-Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summieren sich über zwei Jahre zu einer stattlichen Summe. Das schmälert den "tollen Bonus" schnell wieder.
+Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summieren sich über zwei Jahre zu einer stattlichen Summe. Das schmälert den "tollen Bonus" schnell wieder.
 
 ## Warum du nicht bis zur letzten Woche warten solltest
 
@@ -230,13 +230,13 @@ Ein Top-Angebot im Oktober 2026 erkennst du an diesen Merkmalen:
 - eine Bandbreite, die tatsächlich an deinem Standort ankommt,
 - flexible Optionen für die Hardware (Miete oder eigenes Gerät).
 
-Besonders gut sind Tarife mit einer Preisgarantie über die vollen 24 Monate. Dann schützt dich das vor plötzlichen Preissprüngen.
+Besonders gut sind Tarife mit einer Preisgarantie über die vollen 24 Monate. Dann [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) das vor plötzlichen Preissprüngen.
 
 ## Ein realistisches Sparbeispiel für einen normalen Haushalt
 
-Nehmen wir an, du zahlst für deinen alten DSL-Vertrag **ca. 49 € pro Monat**. Ein aktueller Vergleichstarif bietet dir einen **Effektivpreis von ca. 31 € pro Monat**.
+Nehmen wir an, du zahlst für deinen alten DSL-Vertrag **ca. 49 € pro Monat**. Ein aktueller Vergleichstarif bietet dir einen **Effektivpreis von ca. 31 € pro Monat**.
 
-Das ist eine Ersparnis von **18 € im Monat**. Auf zwei Jahre gerechnet sparst du so **432 €**. Mit Cashback kann die Ersparnis sogar über 500 € liegen.
+Das ist eine Ersparnis von **18 € im Monat**. Auf zwei Jahre gerechnet sparst du so **432 €**. Mit Cashback kann die Ersparnis sogar über 500 € liegen.
 
 Diese Summe entlastet dein Budget spürbar – und du brauchst dafür nur wenige Klicks.
 
@@ -268,13 +268,13 @@ Für deinen Geldbeutel zählt die Summe, die am Ende nach 24 Monaten übrig blei
 Das ist ein Geldvorteil für Neukunden. Er kommt als Gutschrift, Cashback oder Hardware-Rabatt. So macht er den Wechsel attraktiver.
 
 ### Wie hoch kann die Ersparnis realistisch sein?
-Je nach Tarif sparen Haushalte durch den Wechsel oft **ca. 300 € bis 500 €** über die ganze Laufzeit von zwei Jahren.
+Je nach Tarif sparen Haushalte durch den Wechsel oft **ca. 300 € bis 500 €** über die ganze Laufzeit von zwei Jahren.
 
 ### Ist Cashback besser als eine direkte Gutschrift?
 Das hängt von dir ab. Gutschriften auf der Rechnung sind bequem, denn sie laufen von selbst. Cashback ist oft höher, du musst aber selbst Unterlagen einreichen.
 
 ### Sollte ich meinen Router mieten oder kaufen?
-Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). Oft ist der Kauf nach zwei Jahren günstiger. Dann gehört dir das Gerät auch.
+Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). Oft ist der Kauf nach zwei Jahren günstiger. Dann gehört dir das Gerät auch.
 
 ### Wie früh sollte ich mit dem Wechsel anfangen?
 Am besten startest du **ca. 3 bis 6 Monate** vor Ende deiner Laufzeit mit dem Vergleich. So bleibt genug Zeit für die besten Bonus-Aktionen.

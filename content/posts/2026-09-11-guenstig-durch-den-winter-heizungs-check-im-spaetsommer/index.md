@@ -59,7 +59,7 @@ Mieter dokumentieren Mängel und melden sie. Eigentümer sammeln Daten für den 
 
 Erstens: Beobachte die Wärme beim normalen Probelauf. Zweitens: Notiere Raum, Problem und Datum. Drittens: Ändere nur eine Einstellung und prüfe später erneut. Ein Foto von Manometer und Zähler hilft beim Vergleich. Es ersetzt aber keine Fachdiagnose.
 
-Bei 18.000 kWh im Jahr macht schon ein Cent Preisunterschied rund 180 € im Jahr aus. Darum gehören Technik-Check und Tarif-Check zusammen – aber nicht in denselben Handgriff.
+Bei 18.000 kWh im Jahr macht schon ein Cent Preisunterschied rund 180 € im Jahr aus. Darum gehören Technik-Check und Tarif-Check zusammen – aber nicht in denselben Handgriff.
 
 
 

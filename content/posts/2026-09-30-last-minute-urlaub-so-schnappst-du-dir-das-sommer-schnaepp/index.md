@@ -198,7 +198,7 @@ Bis 48 Stunden vor dem Abflug findest du oft noch sehr gute Preise. Einige Porta
 Am größten sind die Rabatte dort, wo es viele Hotels gibt. Klassiker sind Mallorca, die Türkei und die Algarve.
 
 ### Ist ein Last Minute Urlaub sicher?
-Vor dem Gesetz zählt die gleiche Regel wie bei jeder Pauschalreise. Der Sicherungsschein des Veranstalters schützt dich auch hier.
+Vor dem Gesetz zählt die gleiche Regel wie bei jeder Pauschalreise. Der Sicherungsschein des Veranstalters [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) auch hier.
 
 ### Wie viel Kaution sollte ich einplanen?
 Für einen kleinen Wagen sind 1.000 € bis 2.000 € üblich. Dein Kartenlimit muss diese Summe zusätzlich zum Reisepreis tragen.

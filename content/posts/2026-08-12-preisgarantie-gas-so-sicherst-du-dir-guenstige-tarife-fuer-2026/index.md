@@ -193,7 +193,7 @@ Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitu
 
 Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr. Grundpreis und Bonus können die Differenz verändern.
 
-Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
+Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
 
 Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
 

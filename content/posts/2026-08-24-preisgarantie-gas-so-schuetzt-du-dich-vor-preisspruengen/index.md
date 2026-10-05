@@ -99,7 +99,7 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -115,7 +115,7 @@ Vergleiche dann die Änderung mit deiner Preisgarantie. Steigt ein geschützter 
 
 ## Was die Bundesnetzagentur zu Preisänderungen sagt
 
-Eine Preisänderung muss meist einen Monat vorher angekündigt werden. Der Brief muss klar sein und Grund, Bedingung und Umfang nennen. Meist darfst du zum Tag vor dem neuen Preis sonderkündigen.
+Eine Preisänderung muss meist einen Monat vorher angekündigt werden. Der Brief muss klar sein und Grund, Bedingung und Umfang nennen. Meist darfst du zum Tag vor dem neuen Preis Sonderkündigen.
 
 Es gibt Ausnahmen. Bei bestimmten staatlich veranlassten Preisänderungen kann das Sonderkündigungsrecht entfallen, wenn das vorher so vereinbart war. Auch eine reine Weitergabe der Umsatzsteuer wird anders behandelt.
 

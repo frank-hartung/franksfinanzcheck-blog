@@ -29,7 +29,7 @@ cover:
 kurzantwort: "Starte schon im Herbst: Schreibe alle Kosten auf, von Geschenken bis zur Fahrt. Teile sie auf sechs Töpfe auf und rechne die Summe auf die Wochen bis Heiligabend um. Lege das Geld auf ein eigenes Tagesgeldkonto, zahle nur aus diesem Topf und meide Dispo und Raten. So startest du ohne Schulden ins neue Jahr."
 ---
 
-Weihnachten Budget planen im Check: Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
+Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) im Check: Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
 
 Dabei reichen ein paar Wochen Vorlauf, um das Fest ruhig zu planen. Wer früh startet, verteilt die Kosten auf mehrere Monate. Du bleibst aus dem Dispo und kaufst in Ruhe statt in Panik.
 
@@ -89,12 +89,12 @@ Rechnen wir ein Beispiel mit 600 € durch. So verteilt sich die Summe auf die 
 
 | Budgettopf | Betrag | Anteil |
 |------------|--------|--------|
-| Geschenke | ca. 300 € | 50 % |
-| Essen und Festtafel | ca. 120 € | 20 % |
-| Deko und Baum | ca. 50 € | 8 % |
-| Anreise | ca. 60 € | 10 % |
-| Spenden | ca. 30 € | 5 % |
-| Puffer | ca. 40 € | 7 % |
+| Geschenke | ca. 300 € | 50 % |
+| Essen und Festtafel | ca. 120 € | 20 % |
+| Deko und Baum | ca. 50 € | 8 % |
+| Anreise | ca. 60 € | 10 % |
+| Spenden | ca. 30 € | 5 % |
+| Puffer | ca. 40 € | 7 % |
 
 Startest du Mitte Oktober, bleiben rund zehn Wochen bis Heiligabend. **Rechenweg Budget:** 600 € geteilt durch 10 Wochen sind 60 € pro Woche.
 
@@ -122,7 +122,7 @@ Zwölf kleine Raten merkst du im Alltag kaum. Im Dezember liegt das Geld dann be
 
 Fachleute nennen das eine rollende Rücklage. Du behandelst das Fest wie jede andere Zahlung im Jahr. Die Kfz-Versicherung planst du ja auch nicht spontan.
 
-Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses Tagesgeldkonto. Lege den Auftrag auf den Tag nach dem Gehalt. So wächst dein Polster ganz von allein.
+Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Lege den Auftrag auf den Tag nach dem Gehalt. So wächst dein Polster ganz von allein.
 
 ## Welche Kosten übersehen die meisten Haushalte?
 
@@ -168,14 +168,13 @@ Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du run
 4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
 5. **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen.
 
-**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/)  
-**Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
+**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
 
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.
 
 
-Eine klare Obergrenze ist der Hebel, der dein Weihnachtsbudget schützt – schon kleine Schritte zeigen große Wirkung.
+Eine klare Obergrenze ist der Hebel, der dein Weihnachtsbudget schützt – schon kleine Schritte zeigen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Häufige Fragen
 

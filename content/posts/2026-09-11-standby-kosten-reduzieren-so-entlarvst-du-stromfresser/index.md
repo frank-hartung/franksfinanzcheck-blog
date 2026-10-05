@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Standby Kosten im Check: Zwei Watt im Standby wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
+Standby Kosten im Check: Zwei Watt im Standby wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -152,7 +152,7 @@ Angenommen, die TV-Ecke zieht ausgeschaltet 14 Watt. Du trennst sie im Schnitt 1
 - Kostenersparnis bei 0,37 €/kWh: **rund 34 € pro Jahr**
 - Preis der Leiste: beispielsweise 15 €
 
-In diesem Fall zahlt sich der Kauf schon im ersten Jahr aus. Zieht die Gruppe aber nur 1 Watt, spart dieselbe Leiste kaum 2,50 € im Jahr.
+In diesem Fall zahlt sich der Kauf schon im ersten Jahr aus. Zieht die Gruppe aber nur 1 Watt, spart dieselbe Leiste kaum 2,50 € im Jahr.
 
 ## Der 30-Minuten-Standby-Check
 

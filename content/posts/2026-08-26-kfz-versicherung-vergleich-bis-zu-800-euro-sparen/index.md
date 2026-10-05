@@ -383,11 +383,11 @@ Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
 
 | SF-Klasse | Schadenfreie Jahre | Ungefährer Beitrags-Satz |
 |:---:|:---:|---:|
-| SF 0 | 0 (Fahranfänger) | ca. 100 % (junge Fahrer deutlich mehr) |
-| SF 5 | 5 | 60 % |
-| SF 10 | 10 | 40 % |
-| SF 20 | 20 | 28 % |
-| SF 35 | 35 | 20 % |
+| SF 0 | 0 (Fahranfänger) | ca. 100 % (junge Fahrer deutlich mehr) |
+| SF 5 | 5 | 60 % |
+| SF 10 | 10 | 40 % |
+| SF 20 | 20 | 28 % |
+| SF 35 | 35 | 20 % |
 
 Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
 

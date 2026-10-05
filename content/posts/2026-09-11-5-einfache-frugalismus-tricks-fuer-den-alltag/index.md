@@ -18,8 +18,8 @@ cover:
   image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
-pin_title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
-pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten! Mit Rechenbeispiel (120 €)."
+pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
+pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -37,7 +37,8 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-5 einfache [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
+
+5 einfache [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/)-Tricks für den Alltag helfen dir, teure Alltagsfehler zu vermeiden. [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) klingt für viele nach kahler Wohnung, No-Name-Nudeln und einem Leben ohne Spaß. Genau das schreckt ab. Im Alltag ist Frugalismus aber viel unspektakulärer – und viel nützlicher.
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 
@@ -281,7 +282,7 @@ Diese **5 einfachen Frugalismus-Tricks für den Alltag** zeigen vor allem eins: 
 
 Du musst nicht morgen ein anderer Mensch sein. Es reicht, heute mit einem Hebel zu starten. Wenn daraus jede Woche oder jeden Monat ein kleiner nächster Schritt wird, verändert sich dein Konto oft spürbar schneller, als du denkst.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Frugalismus-Tipps: So vermeidest du teure Alltagsfehler](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) · [Haushaltsbuch führen](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Frugalismus-Tipps](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/): So vermeidest du teure Alltagsfehler · [Haushaltsbuch führen](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
