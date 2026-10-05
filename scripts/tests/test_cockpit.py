@@ -155,11 +155,11 @@ class BucketSecretsTest(unittest.TestCase):
 
 class BucketSocialTest(unittest.TestCase):
     CHANNELS = {"channels": {
-        "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
-        "pinterest": {"enabled": True, "label": "Pinterest", "secrets": ["PINTEREST_ACCESS_TOKEN"]},
+        "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
+        "pinterest": {"enabled": True, "label": "Pinterest", "pflicht_env": ["PINTEREST_ACCESS_TOKEN"]},
         "bluesky": {"enabled": True, "label": "Bluesky",
-                    "secrets": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
-        "x": {"enabled": False, "label": "X (deaktiviert)", "secrets": ["X_TOKEN"]},
+                    "pflicht_env": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
+        "x": {"enabled": False, "label": "X (deaktiviert)", "pflicht_env": ["X_TOKEN"]},
     }}
 
     def test_kein_kanal_live_ist_rot(self):
@@ -239,7 +239,7 @@ class BuildAndRenderTest(unittest.TestCase):
     def setUp(self):
         self.gov = {"steps": {"lesbarkeit": {"level": "red", "message": "zu schwer"}}}
         self.channels = {"channels": {
-            "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
+            "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
         }}
         self.secrets_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
         self.social_state = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}],

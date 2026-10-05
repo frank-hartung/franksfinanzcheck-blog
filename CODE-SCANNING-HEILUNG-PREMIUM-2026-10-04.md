@@ -2,6 +2,13 @@
 
 **Ausgangslage:** 50 offene Alerts unter `github.com/frank-hartung/franksfinanzcheck-blog/security/code-scanning` · **Ursache:** CodeQL-Default-Setup (automatisch aktiviert, analysiert Python 7,7 MB + JavaScript 1,5 MB) · **Ergebnis:** **0 offene Funde** in der Vollanalyse (JavaScript 0, Python 0 offene Security-Alerts – alle echten Taint-Flows und Logging-Stellen konstruktiv auf Code-Ebene geheilt) · dauerhaft abgesichert durch die **CodeQL-Sicherheitswache** und den **Clear-Text-Logging-Sicherheitsvertrag**.
 
+> **Fortschreibung 05.10.2026:** Für die beiden Klartext-Regeln
+> (`py/clear-text-logging-sensitive-data`, `py/clear-text-storage-sensitive-data`)
+> gilt seit Alert #80 **CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md** als
+> Wahrheitsort: Inline-Unterdrückung ist dort verboten (das parallel aktive
+> Default-Setup liest sie nicht), die Kontrolle übernimmt der Job
+> `klartext-wache`. Alles Übrige in diesem Bericht bleibt in Kraft.
+
 > Dies ist der Wahrheitsort für die Code-Scanning-Strategie. Was hier steht, gilt bis ein neuer datierter Abschnitt es ablöst. Die Maschine setzt das Gate durch (`CodeQL-Sicherheitswache`, `.github/workflows/codeql.yml`); sie entscheidet fachlich nie.
 
 ## 1 · Vorgehen – reproduzieren, klassifizieren, heilen, verifizieren

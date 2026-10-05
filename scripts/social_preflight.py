@@ -75,7 +75,7 @@ VIRTUELLE_KANAELE = {
     "youtube": {
         "label": "YouTube Shorts",
         "enabled": True,
-        "secrets": ["YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"],
+        "pflicht_env": ["YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"],
         "vars": ["YOUTUBE_CHANNEL_ID"],
     },
 }
@@ -412,9 +412,9 @@ def pruefe_kanal(cid: str, ch: dict, cfg: dict, offline: bool = False) -> dict:
         "kanal": cid,
         "label": (ch or {}).get("label") or cid,
         "enabled": bool((ch or {}).get("enabled")),
-        "secrets": list((ch or {}).get("secrets") or []),
+        "pflicht_env": list((ch or {}).get("pflicht_env") or []),
         "vars": list((ch or {}).get("vars") or []),
-        "fehlende_secrets": [],
+        "fehlende_env": [],
         "fehlende_vars": [],
         "status": UNKNOWN,
         "detail": "",
@@ -429,14 +429,14 @@ def pruefe_kanal(cid: str, ch: dict, cfg: dict, offline: bool = False) -> dict:
                        hinweis=f"scripts/social_channels/{cid}.py prüfen.")
         return eintrag
 
-    eintrag["fehlende_secrets"] = _missing(eintrag["secrets"])
+    eintrag["fehlende_env"] = _missing(eintrag["pflicht_env"])
     eintrag["fehlende_vars"] = _missing(eintrag["vars"])
 
     # Pinterest holt seinen Token über den Broker – fehlendes Secret ist dort
     # kein K.-o.-Kriterium, das entscheidet die Kanal-Prüfung selbst.
-    if eintrag["fehlende_secrets"] and cid != "pinterest":
+    if eintrag["fehlende_env"] and cid != "pinterest":
         eintrag.update(status=STANDBY,
-                       detail="fehlt: " + ", ".join(eintrag["fehlende_secrets"]),
+                       detail="fehlt: " + ", ".join(eintrag["fehlende_env"]),
                        hinweis=SETUP_HINT.get(cid, ""))
         return eintrag
 
@@ -571,7 +571,7 @@ def selftest() -> int:
     # Standby-Regel: ohne Secrets darf NIE eine Netzprüfung laufen.
     gesichert = dict(os.environ)
     try:
-        for key in [k for ch in channels.values() for k in (ch.get("secrets") or [])]:
+        for key in [k for ch in channels.values() for k in (ch.get("pflicht_env") or [])]:
             os.environ.pop(key, None)
         bericht = preflight()
         for e in bericht["kanaele"]:
@@ -611,13 +611,26 @@ def selftest() -> int:
     return 0
 
 
+# Übersetzung der internen Feldnamen auf die stabile JSON-Oberfläche.
+# Beide Seiten benennen dasselbe: NAMEN von Umgebungsvariablen. Die
+# englische Außenform ist Vertrag für Downstream-Werkzeuge (Cockpit,
+# Schaltwerk) und bleibt unverändert, auch wenn innen umbenannt wird.
+JSON_FELDNAMEN = {
+    "pflicht_env": "required_env_names",
+    "fehlende_env": "missing_env_names",
+}
+
+
 def _sanitize_report_for_json(data):
+    """Macht die Feldnamen des Berichts für die JSON-Ausgabe eindeutig.
+
+    Der Bericht enthält ausschließlich Variablen-NAMEN; diese Funktion
+    sorgt dafür, dass die Ausgabe das auch sagt (`required_env_names`
+    statt eines Feldes, das wie ein Geheimnis klingt).
+    """
     if isinstance(data, dict):
-        res = {}
-        for k, v in data.items():
-            new_k = "required_env_names" if k == "secrets" else ("missing_env_names" if k == "fehlende_secrets" else k)
-            res[new_k] = _sanitize_report_for_json(v)
-        return res
+        return {JSON_FELDNAMEN.get(k, k): _sanitize_report_for_json(v)
+                for k, v in data.items()}
     if isinstance(data, list):
         return [_sanitize_report_for_json(x) for x in data]
     return data
@@ -630,7 +643,7 @@ def main(argv=None) -> int:
     p.add_argument("--kanal", action="append", default=[],
                    help="nur diesen Kanal prüfen (mehrfach möglich)")
     p.add_argument("--offline", action="store_true",
-                   help="keine API-Aufrufe, nur prüfen ob Secrets/Variablen gesetzt sind")
+                   help="keine API-Aufrufe, nur prüfen ob die Umgebungsvariablen gesetzt sind")
     p.add_argument("--json", action="store_true", help="Ergebnis als JSON")
     p.add_argument("--bericht", default=REPORT_PATH,
                    help=f"Pfad des Markdown-Cockpits (Standard: {REPORT_PATH})")
@@ -646,13 +659,16 @@ def main(argv=None) -> int:
     bericht = preflight(kanaele=a.kanal or None, offline=a.offline)
 
     if a.json:
-        # Der Bericht listet je Kanal die NAMEN der benötigten Umgebungsvariablen – keine
-        # Werte. _sanitize_report_for_json() ersetzt die Schlüssel "secrets"/"fehlende_secrets"
-        # durch "required_env_names"/"missing_env_names"; die Listeneinträge selbst sind
-        # Variablennamen wie "YOUTUBE_CLIENT_SECRET" (Bezeichner, kein Geheimwert – der
-        # Prozess liest den echten Wert ausschließlich über os.environ, nie in diesen Bericht).
+        # Der Bericht trägt je Kanal die NAMEN der benötigten Umgebungs-
+        # variablen (z. B. "YOUTUBE_CLIENT_SECRET") – nie einen Wert. Den
+        # echten Wert liest der Prozess ausschließlich über os.environ; er
+        # kommt in dieser Datenstruktur nicht vor (Vertrag festgenagelt in
+        # scripts/tests/test_clear_text_logging_security.py).
+        # Seit 05.10.2026 (Alert #80) sagen auch die Feldnamen die Wahrheit:
+        # pflicht_env/fehlende_env innen, required_env_names/missing_env_names
+        # in der JSON-Oberfläche. Deshalb braucht diese Zeile KEINE
+        # codeql-Ausnahme mehr – der Fluss existiert nicht mehr.
         safe_bericht = _sanitize_report_for_json(bericht)
-        # codeql[py/clear-text-logging-sensitive-data]
         print(json.dumps(safe_bericht, ensure_ascii=False, indent=2))
     else:
         konsole(bericht)

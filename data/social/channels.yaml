@@ -31,6 +31,17 @@
 #  variables → Actions). Beim nächsten Lauf erkennt der Autopilot den
 #  Kanal automatisch – sonst nichts zu tun. Anleitung:
 #  ANLEITUNG-SOCIAL-AUTOPILOT.md
+#
+#  FELD `pflicht_env` (seit 05.10.2026, Code-Scanning-Alert #80):
+#  Hier stehen ausschließlich die NAMEN der benötigten Umgebungs-
+#  variablen – niemals ein Wert. Das Feld hieß früher `secrets`; dieser
+#  Name behauptete, die Liste trage Geheimnisse, und war damit für
+#  Menschen irreführend und für die Code-Analyse ein Fehlsignal
+#  (CodeQL klassifiziert allein nach Namen). Wer das Feld umbenennt,
+#  muss scripts/social_preflight.py, scripts/cockpit.py,
+#  scripts/schaltwerk_actions.py, scripts/schaltwerk_triggers.py und
+#  scripts/social_channels/__init__.py mitziehen – der Vertrag ist in
+#  scripts/tests/test_clear_text_logging_security.py festgenagelt.
 # ============================================================
 
 version: 1
@@ -114,7 +125,7 @@ channels:
     enabled: true
     priority: 1
     profile: "https://mastodon.social/@FranksFinanzcheck"
-    secrets: ["MASTODON_ACCESS_TOKEN"]
+    pflicht_env: ["MASTODON_ACCESS_TOKEN"]
     vars: ["MASTODON_INSTANCE"]
     text:
       max_chars: 500                       # Mastodon-Standard (500 Zeichen)
@@ -152,7 +163,7 @@ channels:
     enabled: true
     priority: 2
     profile: "https://bsky.app/profile/franksfinanzcheck.de"
-    secrets: ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]
+    pflicht_env: ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]
     vars: ["BLUESKY_PDS"]
     text:
       max_chars: 300                       # 300 Graphem – URL zählt voll mit
@@ -189,7 +200,7 @@ channels:
     enabled: true
     priority: 3
     profile: "https://www.linkedin.com/"
-    secrets: ["LINKEDIN_ACCESS_TOKEN"]
+    pflicht_env: ["LINKEDIN_ACCESS_TOKEN"]
     vars: ["LINKEDIN_PERSON_URN", "LINKEDIN_ORG_URN"]
     text:
       max_chars: 2900                      # Profi-Fenster: 1300–1800 lesen sich am besten
@@ -228,7 +239,7 @@ channels:
     enabled: true
     priority: 4
     profile: "https://x.com/"
-    secrets: ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_SECRET"]
+    pflicht_env: ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_SECRET"]
     vars: []
     text:
       max_chars: 280                       # Standard-Account (ohne Premium)
@@ -265,7 +276,7 @@ channels:
     enabled: true
     priority: 5
     profile: "https://www.threads.net/"
-    secrets: ["THREADS_ACCESS_TOKEN"]
+    pflicht_env: ["THREADS_ACCESS_TOKEN"]
     vars: ["THREADS_USER_ID"]
     text:
       max_chars: 500
@@ -301,7 +312,7 @@ channels:
     enabled: true
     priority: 6
     profile: "https://www.facebook.com/"
-    secrets: ["FACEBOOK_PAGE_TOKEN"]
+    pflicht_env: ["FACEBOOK_PAGE_TOKEN"]
     vars: ["FACEBOOK_PAGE_ID"]
     text:
       max_chars: 1200
@@ -339,7 +350,7 @@ channels:
     enabled: true
     priority: 7
     profile: "https://www.instagram.com/"
-    secrets: ["INSTAGRAM_ACCESS_TOKEN"]
+    pflicht_env: ["INSTAGRAM_ACCESS_TOKEN"]
     vars: ["INSTAGRAM_ACCOUNT_ID"]
     text:
       max_chars: 2200
@@ -377,7 +388,7 @@ channels:
     enabled: true
     priority: 8
     profile: "https://www.pinterest.de/franksfinanzcheck/"
-    secrets: ["PINTEREST_TOKEN_KEY"]
+    pflicht_env: ["PINTEREST_TOKEN_KEY"]
     vars: ["PINTEREST_BOARD_ID"]
     text:
       max_chars: 500                       # Pin-Beschreibung (Titel separat ≤ 100)
@@ -419,7 +430,7 @@ channels:
     enabled: true
     priority: 9
     profile: "https://t.me/"
-    secrets: ["TELEGRAM_BOT_TOKEN"]
+    pflicht_env: ["TELEGRAM_BOT_TOKEN"]
     vars: ["TELEGRAM_CHAT_ID"]
     text:
       max_chars: 4096
@@ -458,7 +469,7 @@ channels:
     enabled: true
     priority: 10
     profile: "https://www.reddit.com/"
-    secrets: ["REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET", "REDDIT_USERNAME", "REDDIT_PASSWORD"]
+    pflicht_env: ["REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET", "REDDIT_USERNAME", "REDDIT_PASSWORD"]
     vars: ["REDDIT_SUBREDDIT"]
     text:
       max_chars: 40000

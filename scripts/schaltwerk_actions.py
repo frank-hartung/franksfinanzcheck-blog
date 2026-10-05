@@ -85,7 +85,7 @@ def kanal_zustand(cfg: dict | None = None) -> list[dict]:
             "enabled": enabled,
             "bereit": bool(bereit),
             "grund": "" if bereit else grund,
-            "secrets": list((ch or {}).get("secrets") or []),
+            "pflicht_env": list((ch or {}).get("pflicht_env") or []),
             "vars": list((ch or {}).get("vars") or []),
         })
     return zeilen

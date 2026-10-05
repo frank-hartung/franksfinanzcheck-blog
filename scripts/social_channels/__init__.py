@@ -65,9 +65,12 @@ def enabled_channels(cfg: dict) -> list[str]:
 
 
 def missing_env(channel: dict) -> list[str]:
-    """Welche Secrets/Variablen für diesen Kanal fehlen (leer = einsatzbereit)."""
+    """Welche Umgebungsvariablen dieses Kanals fehlen (leer = einsatzbereit).
+
+    `pflicht_env` im Kanal-Playbook listet NAMEN, keine Werte (Alert #80).
+    """
     missing = []
-    for key in (channel or {}).get("secrets") or []:
+    for key in (channel or {}).get("pflicht_env") or []:
         if not (os.environ.get(key) or "").strip():
             missing.append(key)
     return missing

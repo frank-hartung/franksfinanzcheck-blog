@@ -319,7 +319,7 @@ def bucket_social(secrets_state: dict, channels_cfg: dict, social_state: dict, n
             continue
         enabled_total += 1
         label = cfg.get("label", key)
-        needed = cfg.get("secrets", []) or []
+        needed = cfg.get("pflicht_env", []) or []
         states = [entries.get(s) for s in needed]
         if any(s and s.get("verify") == "dead" for s in states):
             dead.append(label)
@@ -573,9 +573,10 @@ def selftest() -> bool:
 
     # -- bucket_social ----------------------------------------------------
     channels_cfg = {"channels": {
-        "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
-        "pinterest": {"enabled": True, "label": "Pinterest", "secrets": ["PINTEREST_ACCESS_TOKEN"]},
-        "bluesky": {"enabled": True, "label": "Bluesky", "secrets": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
+        "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
+        "pinterest": {"enabled": True, "label": "Pinterest", "pflicht_env": ["PINTEREST_ACCESS_TOKEN"]},
+        "bluesky": {"enabled": True, "label": "Bluesky",
+                    "pflicht_env": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
     }}
     secrets_social = {"entries": {
         "MASTODON_ACCESS_TOKEN": {"quality": "proven"},

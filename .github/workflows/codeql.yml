@@ -12,6 +12,16 @@
 #   · push auf main         : Analyse + SARIF-Upload in die Security-Tab
 #   · montags 03:30 UTC     : Freshness-Lauf (neue Queries finden alten Code)
 #
+# LEHRE AUS ALERT #80 (05.10.2026): Solange das Default-Setup parallel aktiv
+# ist, lehnt GitHub das SARIF dieser erweiterten Konfiguration ab
+# („CodeQL analyses from advanced configurations cannot be processed when the
+# default setup is enabled") – die Wache meldet dann grün, während das
+# Default-Setup weiter Alerts erzeugt. Es ignoriert zudem `paths-ignore` UND
+# `# codeql[...]`-Kommentare. Deshalb hängt unter dieser Datei der Job
+# `klartext-wache`: eine lokale, vom Upload unabhängige Nachbildung der beiden
+# Klartext-Regeln, die fail-closed blockiert. Siehe
+# CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md.
+#
 # Gate-Regel: Jedes Finding mit Security-Severity (js/xss, py/clear-text-…
 # usw.) lässt den Lauf FEHLSCHLAGEN und blockiert damit den Pull Request.
 # Reine Qualitäts-Findings (z. B. py/redos auf uncritical-Pfaden) werden
@@ -96,9 +106,13 @@ jobs:
           # CodeQL behandelt ein nacktes `# noqa`/`# lgtm` als Unterdrückung
           # JEGLICHER Alerts auf der Zeile – deshalb greift die Whitelist
           # hier zusätzlich als zweite Instanz.
-          ERLAUBT='py/clear-text-logging-sensitive-data
-          py/clear-text-storage-sensitive-data
-          py/incomplete-url-substring-sanitization
+          # Seit Alert #80 NICHT mehr unterdrückbar:
+          # py/clear-text-logging-sensitive-data und
+          # py/clear-text-storage-sensitive-data. Das Default-Setup sieht den
+          # Kommentar ohnehin nicht – diese Regeln werden im Code geheilt
+          # (ehrliche Namen, entschärfte Werte) und vom Job `klartext-wache`
+          # dauerhaft bewacht.
+          ERLAUBT='py/incomplete-url-substring-sanitization
           js/incomplete-url-substring-sanitization'
           for f in sarif-results/*.sarif; do
             [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
@@ -214,3 +228,28 @@ jobs:
             echo "::error::Sicherheits-Gate verletzt: ${SECURITY} Security-Fundstellen. Beheben (kein Dismiss ohne Begründung – siehe CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md)."
             exit 1
           fi
+
+  klartext-wache:
+    name: Klartext-Wache (unabhängig vom SARIF-Upload)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Abhängigkeiten der Tests
+        run: python3 -m pip install -q pyyaml
+
+      - name: Eigenprüfung der Wache (Positiv- und Gegenproben)
+        run: python3 scripts/clear_text_logging_guard.py --selftest
+
+      - name: Alle Python-Dateien auf Klartext-Flüsse prüfen
+        run: python3 scripts/clear_text_logging_guard.py
+
+      - name: Sicherheitsvertrag (Regressionstest zu #77/#80)
+        run: python3 -m unittest scripts.tests.test_clear_text_logging_security -v

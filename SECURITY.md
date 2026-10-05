@@ -52,3 +52,24 @@ Inbox-Verzeichnis) übergeben, gilt ein verschärfter Vertrag, erzwungen durch
    (whisper.cpp beendet sich dann mit Exit-Code 0 und Usage-Text); dort schützt
    die Kombination aus Kanonisierung und Deskriptor-Übergabe.
 
+## Klartext-Logging sensibler Daten (seit Code-Scanning-Alert #77, verschärft mit #80, 05.10.2026)
+
+Für `py/clear-text-logging-sensitive-data` und `py/clear-text-storage-sensitive-data` gilt im
+gesamten Repository ein Namensvertrag, erzwungen durch `scripts/clear_text_logging_guard.py`
+(„Klartext-Wache") und `scripts/tests/test_clear_text_logging_security.py`:
+
+1. **Bezeichner sagen die Wahrheit.** Ein Name darf nur dann nach Geheimnis klingen
+   (`secret`, `password`, `oauth`, `api_key`, …), wenn er tatsächlich Geheimmaterial trägt.
+   Listen von Variablen-NAMEN heißen `pflicht_env`/`fehlende_env`
+   (JSON-Oberfläche: `required_env_names`/`missing_env_names`), Befund-Listen heißen nach dem
+   Befund (`c9_klartext_leck`), nicht nach dem Gesuchten.
+2. **Echte Werte erreichen keine Ausgabe.** Zulässig sind Status-Strings (`vorhanden`/`FEHLT`),
+   SHA-256-Kurzhashes (`hash16`), Fingerabdrücke und Positiv-Whitelists sicherer Telemetriefelder.
+3. **Unterdrückung ist keine Heilung.** Ein `# codeql[py/clear-text-…]`-Kommentar ist für diese
+   beiden Regeln untersagt und gilt der Wache selbst als Befund: Das GitHub-Default-Setup liest
+   weder `paths-ignore` noch Inline-Kommentare – ein so „stillgelegter" Fund bleibt ein offener Alert.
+4. **Jede Änderung ist bewacht.** Der CI-Job `klartext-wache` (`.github/workflows/codeql.yml`) läuft
+   unabhängig vom SARIF-Upload über alle Python-Dateien und blockiert fail-closed.
+
+Hintergrund, Beweisführung und Runbook: `CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md`.
+
