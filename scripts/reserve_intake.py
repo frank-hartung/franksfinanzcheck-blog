@@ -314,6 +314,21 @@ def markdown(bericht: dict) -> str:
 # ---------------------------------------------------------------------------
 #  Selbsttest – Sabotagefälle statt Schönwetter
 # ---------------------------------------------------------------------------
+try:  # Determinismus-Garantie (scripts/selftest_clock.py)
+    from selftest_clock import (MITTAG as _MITTAG,  # type: ignore
+                                MODUS_STRIKT as _UHR_STRIKT,
+                                stempel as _stempel, uhr as _uhr)
+except Exception:  # noqa: BLE001
+    _MITTAG = _UHR_STRIKT = _stempel = _uhr = None
+
+
+# Sechs Probetage statt „heute": Schalttag, Jahreswechsel, Monatsenden und
+# der Tag, an dem audio_coverage_check kippte. Gleiche Eingabe, gleiches
+# Ergebnis – an jedem Kalendertag.
+PROBETAGE = (dt.date(2026, 3, 1), dt.date(2024, 2, 29), dt.date(2026, 12, 24),
+             dt.date(2027, 1, 1), dt.date(2026, 6, 30), dt.date(2025, 10, 5))
+
+
 def _post(posts: Path, slug: str, fm: str, body: str = "Text") -> Path:
     d = posts / slug
     d.mkdir(parents=True, exist_ok=True)
@@ -322,10 +337,20 @@ def _post(posts: Path, slug: str, fm: str, body: str = "Text") -> Path:
     return p
 
 
-def run_selftest() -> int:
+def _szenario(heute: dt.date) -> list[str]:
+    """Ein vollständiger Durchlauf gegen ein VORGEGEBENES Testdatum.
+
+    DETERMINISMUS-VERTRAG (Nachzug 05.10.2026, WF-B594):
+    Die erste Fassung dieses Selbsttests las `dt.date.today()` und stempelte
+    ihre Fixtures mit der echten Wanduhr – unter der CI-Probe mit um 97 bzw.
+    1461 Tage vorgestellter Uhr fielen alle reifen Entwürfe auf „unreif",
+    weil die Triage sie am Verfallsfenster altern sah. Genau die Bauart, vor
+    der `scripts/selftest_clock.py` seit dem 18.09.2026 warnt. Jeder Fall ist
+    deshalb RELATIV zum Testdatum beschrieben, jedes Dateialter wird ABSOLUT
+    gestempelt, und der Prüfpfad läuft unter Uhr-Zwang.
+    """
     import tempfile
     fehler: list[str] = []
-    heute = dt.date.today()
     body = ("[A](../../posts/live-thema/) und [B](../../posts/live-zwei/)\n"
             + "\n".join(f"## Abschnitt {i}\nNutzwert mit Zahlen und Beispielen."
                         for i in range(6)) * 90)
@@ -348,40 +373,49 @@ def run_selftest() -> int:
             return (f'title: "{titel}"\n{kopf}draft: true\n{ai}\n'
                     f'cover:\n  image: "images/covers/{slug}.jpg"\n{extra}')
 
+        # Slug-Präfix RELATIV zum Testdatum (nie "2026-01-01"): ein Entwurf
+        # mit Datum aus der Zukunft des Testtages ist für die Triage nicht
+        # fällig und fiele als "unreif" durch.
+        pfx = (heute - dt.timedelta(days=3)).isoformat()
         _post(posts, "live-thema", f'title: "Live Thema"\n{kopf}draft: false',
               body)
         _post(posts, "live-zwei", f'title: "Live Zwei"\n{kopf}draft: false',
               body)
-        _post(posts, "2026-01-01-frei",
+        _post(posts, f"{pfx}-frei",
               fm("frei", "Strom sparen im Haushalt clever geplant"), body)
-        _post(posts, "2026-01-01-fremd",
+        _post(posts, f"{pfx}-fremd",
               fm("fremd", "Zweiter freier Entwurf mit Nutzwert",
                  extra="cadence_wait: true\n"), body)
-        _post(posts, "2026-01-01-hand",
+        _post(posts, f"{pfx}-hand",
               fm("hand", "Handentwurf der Redaktion ohne Maschine",
                  ai="ai_generated: false"), body)
-        _post(posts, "2026-01-01-kurz", fm("kurz", "Zu kurzer Rohtext"),
+        _post(posts, f"{pfx}-kurz", fm("kurz", "Zu kurzer Rohtext"),
               "## Nur ein Anfang\nViel zu wenig Text.")
-        _post(posts, "2026-01-01-ymyl",
+        _post(posts, f"{pfx}-ymyl",
               fm("ymyl", "Kfz-Versicherung vergleichen und sparen",
                  extra='pillar: "versicherungen"\n'), body)
-        _post(posts, "2026-01-01-live-thema",
+        _post(posts, f"{pfx}-live-thema",
               fm("dublette", "Ganz anderer Titel, gleicher Slug-Rumpf"), body)
-        _post(posts, "2026-01-01-angebot",
+        _post(posts, f"{pfx}-angebot",
               fm("angebot", "Angebot der KI-Redaktion mit Nutzwert",
                  extra='ki_redaktion: "claude"\n'
                        'ki_redaktion_status: "review"\n'), body)
 
+        # Alter ABSOLUT stempeln – nie „JETZT minus n Tage". Drei Tage alt:
+        # sicher innerhalb des Triage-Fensters, egal welcher Kalendertag.
+        for index in posts.glob("*/index.md"):
+            _stempel(str(index), heute - dt.timedelta(days=3))
+
         b = bestandsaufnahme(root, heute)
         zustand = {x["slug"]: x["zustand"] for x in b["befunde"]}
         erwartet = {
-            "2026-01-01-frei": "uebernehmbar",
-            "2026-01-01-fremd": "fremd",
-            "2026-01-01-hand": "handarbeit",
-            "2026-01-01-kurz": "unreif",
-            "2026-01-01-ymyl": "ymyl",
-            "2026-01-01-live-thema": "dublette",
-            "2026-01-01-angebot": "angebot",
+            f"{pfx}-frei": "uebernehmbar",
+            f"{pfx}-fremd": "fremd",
+            f"{pfx}-hand": "handarbeit",
+            f"{pfx}-kurz": "unreif",
+            f"{pfx}-ymyl": "ymyl",
+            f"{pfx}-live-thema": "dublette",
+            f"{pfx}-angebot": "angebot",
         }
         for slug, soll in erwartet.items():
             if zustand.get(slug) != soll:
@@ -391,7 +425,7 @@ def run_selftest() -> int:
             fehler.append("Live-Artikel wurde als Entwurf gewertet")
 
         # Übernahme schreibt die Fahne genau einmal und protokolliert.
-        index = posts / "2026-01-01-frei" / "index.md"
+        index = posts / f"{pfx}-frei" / "index.md"
         r1 = uebernehmen(index, "Selbsttest", root=root, heute=heute)
         r2 = uebernehmen(index, "Selbsttest", root=root, heute=heute)
         text = index.read_text(encoding="utf-8")
@@ -406,18 +440,37 @@ def run_selftest() -> int:
             fehler.append(f"Ledger falsch: {ledger}")
         # Nach der Übernahme ist derselbe Entwurf nicht mehr herrenlos.
         b2 = bestandsaufnahme(root, heute)
-        if any(x["slug"] == "2026-01-01-frei" and x["zustand"] == "uebernehmbar"
+        if any(x["slug"] == f"{pfx}-frei" and x["zustand"] == "uebernehmbar"
                for x in b2["befunde"]):
             fehler.append("übernommener Entwurf gilt weiter als herrenlos")
 
+    return fehler
+
+
+def run_selftest() -> int:
+    if _stempel is None or _uhr is None or _MITTAG is None:
+        print("🛑 SELBSTTEST reserve_intake FEHLGESCHLAGEN:\n"
+              "  - scripts/selftest_clock.py fehlt oder ist nicht importierbar –\n"
+              "    ohne Uhr-Zwang wäre dieser Selbsttest wieder eine\n"
+              "    Verabredung mit dem Kalender.")
+        return 2
+    fehler: list[str] = []
+    for tag in PROBETAGE:
+        # Uhr-Zwang: Ein Lesezugriff auf die Wanduhr im Prüfpfad dieses
+        # Moduls ist ein Fehler, keine Nebensache.
+        with _uhr(dt.datetime.combine(tag, _MITTAG, tzinfo=dt.timezone.utc),
+                  _UHR_STRIKT, module=[sys.modules[__name__]]):
+            fehler += [f"[Testdatum {tag.isoformat()}] {e}"
+                       for e in _szenario(tag)]
     if fehler:
         print("🛑 SELBSTTEST reserve_intake FEHLGESCHLAGEN:")
         for f in fehler:
             print(f"   ✗ {f}")
         return 2
-    print("✅ Selbsttest reserve_intake: herrenlose Reife erkannt; fremde "
-          "Fahne, Handentwurf, unreif, YMYL und Dublette abgelehnt; "
-          "KI-Review bleibt Angebot; Übernahme idempotent und protokolliert.")
+    print(f"✅ Selbsttest reserve_intake ({len(PROBETAGE)} Probetage, Uhr-Zwang): "
+          "herrenlose Reife erkannt; fremde Fahne, Handentwurf, unreif, YMYL "
+          "und Dublette abgelehnt; KI-Review bleibt Angebot; Übernahme "
+          "idempotent und protokolliert.")
     return 0
 
 

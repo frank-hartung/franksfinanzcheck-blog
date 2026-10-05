@@ -14,7 +14,7 @@
 | gate-fertige Kandidaten | **0** | **5** (Ziel 6, Alarm unter 4) |
 | Reserve-Pool (Entwürfe mit Fahne) | 1 | 5 |
 | Entwürfe im Bestand, die niemand sah | 14 reife Entwürfe lagen außerhalb des Pools | 0 unbeachtet – jeder trägt eine protokollierte Entscheidung |
-| Regressionsnetz `test_reserve_pipeline.py` | 78 Tests | **108 Tests** (30 neu unter WF-B594) |
+| Regressionsnetz `test_reserve_pipeline.py` | 78 Tests | **111 Tests** (33 neu unter WF-B594) |
 | Gesamtsuite | 1834 | **1842** Tests |
 
 Das Zertifikat liegt in `data/reserve-readiness.json`, das Übernahmeprotokoll
@@ -53,6 +53,7 @@ derselben Klasse auf – beide sind in diesem Vorgang mitrepariert:
 |---|---|---|
 | **B7** | Das Gedächtnis des Bestands-Wächters schlüsselt **datumslos**. Zwei Entwürfe teilten sich den Stamm `konto-karten-update-…`. | `--heal` setzte die Reserve-Fahne am **falschen** Artikel: ein nie übernommener Entwurf wanderte still in den Pool, das Übernahmeprotokoll kannte ihn nicht, und der Ledger-Eintrag zeigte danach auf den falschen Slug. |
 | **B8** | Der Linker kannte Shortcodes, Code, Links und Überschriften als Sperrzone – **nicht** die kanonischen CTA-Blöcke. | Mit dem neuen `--file`-Bezirk lief er erstmals über Entwürfe **mit** CTA und setzte zwei Links mitten in die Schnell-Tipp-Zeile, die `affiliate_integrity_gate` bytegenau prüft. |
+| **B9** | Die beiden **neuen** Wachen (`reserve_intake`, `reserve_janitor`) alterten ihre Selbsttest-Fixtures mit der echten Wanduhr. | Das PR-Gate fiel rot: Unter der Uhr-Probe (+97/+1461 Tage) galt jeder reife Entwurf als „unreif", und beim Aufräumer griff die **Karenz** nicht mehr – die Regel, die vor unwiderruflichem Löschen schützt. Zeitbombe am Tag des Einbaus gefangen. |
 
 ---
 
@@ -117,6 +118,14 @@ berichtet und nicht angefasst – Übernahme läuft ausschließlich über
 `reserve_intake.py`. Alt-Einträge ohne gemerkten Slug bleiben über den Stamm
 heilbar (Rückwärtskompatibilität).
 
+### Schicht 8 – Wachen sind uhrfest (B9)
+Beide neuen Selbsttests laufen gegen **sechs feste Probetage** (inkl.
+Schalttag und Jahreswechsel), stempeln jedes Dateialter **absolut**
+(`selftest_clock.stempel`) und laufen unter Uhr-Zwang `strikt`. Fixture-Daten
+und Slug-Präfixe sind relativ zum Testdatum beschrieben, nie absolut. Der
+Beweis läuft in der CI mit: `selftest_runner.py` prüft 158 Wachen unter einer
+um 97 und 1461 Tage vorgestellten Uhr.
+
 ### Schicht 7 – Werbeblöcke sind kein Fließtext (B8)
 `internal_linker.cta_ranges()` sperrt Schnell-Tipp-, Spar-Tipp-,
 Abschluss-CTA- und Offenlegungszeilen sowie jede Zeile mit `/go/`-Ziel. Der
@@ -135,6 +144,8 @@ reserve_healer_coverage.loeschdeckung()    → keine Lücken, keine toten Eintr�
 reserve_intake.run_selftest()              → rc 0
 reserve_custody.py --selftest              → rc 0
 internal_linker.py --selftest              → rc 0 (CTA-Sperrzone abgedeckt)
+selftest_runner.py                         → 158 Wachen, 316 Uhr-Proben, alle grün
+governance_contract.py --quick             → 21 Regeln erfüllt
 reserve_readiness.py                       → ready 5 / pool 5 / target 6
 bot_watchdog.check_content_reserve()       → (True, 'Reserve ausreichend …')
 ```
@@ -162,7 +173,7 @@ wurde – und zwar **vor** dem ersten Produktionslauf.
 
 ## 4. Regressionsnetz
 
-`scripts/tests/test_reserve_pipeline.py` – **108 Tests**, davon 30 neu in
+`scripts/tests/test_reserve_pipeline.py` – **111 Tests**, davon 33 neu in
 diesem Vorgang:
 
 | Testklasse | nagelt fest |
@@ -173,6 +184,7 @@ diesem Vorgang:
 | `BestandsaufnahmeTests` | Übernahme nur mit Grund; Zertifizierung nimmt auf, bevor sie zählt; KI-Angebote bleiben beim Menschen. |
 | `CustodyIdentitaetTests` | Nur der gemerkte Slug bekommt die Fahne; namensgleiche Geschwister werden berichtet; Alt-Einträge bleiben heilbar. |
 | `LinkerCtaSperrzoneTests` | CTA-, Spar-Tipp- und Offenlegungszeilen sind tabu; Fließtext bleibt verlinkbar. |
+| `UhrZwangDerReserveWachenTests` | Beide neuen Wachen bleiben unter +97 und +1461 Tagen grün; Fixtures werden absolut gestempelt. |
 
 Gesamtsuite: **1842 Tests**. Abweichungen, die nicht zu diesem Vorgang
 gehören: zwei Loader-Fehler (`test_automation_premium_audit`,

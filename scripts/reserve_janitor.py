@@ -717,7 +717,30 @@ def _write_post(posts: Path, slug: str, fm: str, body: str = "Text") -> Path:
     return p
 
 
-def run_selftest() -> int:
+try:  # Determinismus-Garantie (scripts/selftest_clock.py)
+    from selftest_clock import (MITTAG as _MITTAG,  # type: ignore
+                                MODUS_STRIKT as _UHR_STRIKT,
+                                stempel as _stempel, uhr as _uhr)
+except Exception:  # noqa: BLE001
+    _MITTAG = _UHR_STRIKT = _stempel = _uhr = None
+
+
+# Sechs Probetage statt „heute" – Schalttag, Jahreswechsel, Monatsenden.
+PROBETAGE = (dt.date(2026, 3, 1), dt.date(2024, 2, 29), dt.date(2026, 12, 24),
+             dt.date(2027, 1, 1), dt.date(2026, 6, 30), dt.date(2025, 10, 5))
+
+
+def _szenario(heute: dt.date) -> list[str]:
+    """Ein vollständiger Lösch-Durchlauf gegen ein VORGEGEBENES Testdatum.
+
+    DETERMINISMUS-VERTRAG (Nachzug 05.10.2026, WF-B594): Die erste Fassung
+    las `dt.date.today()` und ließ die Fixtures mit der echten Wanduhr
+    altern. Unter der CI-Probe mit vorgestellter Uhr war der frisch
+    geschriebene Entwurf plötzlich 97 Tage alt, die Karenz griff nicht mehr
+    und der Prüffall „Karenz schont junges Material" fiel durch – eine
+    Zeitbombe in genau der Wache, die vor unwiderruflichem Löschen schützt.
+    Jedes Dateialter wird deshalb ABSOLUT auf das Testdatum gestempelt.
+    """
     errors: list[str] = []
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
@@ -728,29 +751,33 @@ def run_selftest() -> int:
         for sub in ("", "360", "webp", "avif/360"):
             (covers / sub).mkdir(parents=True, exist_ok=True)
 
+        # Fixture-Datum RELATIV zum Testdatum (nie "2026-09-01"): ein
+        # Artikel, der aus Sicht des Testtages in der Zukunft liegt, ist für
+        # die Triage nicht fällig – dann prüft der Selbsttest nichts mehr.
+        d0 = (heute - dt.timedelta(days=5)).isoformat()
         body_ok = ("[A](../../posts/live-a/) und [B](../../posts/live-b/)\n" +
                    "\n".join(f"## Abschnitt {i}\nNutzwert mit Zahlen und Beispielen." for i in range(6)) * 90)
-        _write_post(posts, "live-a", 'title: "Live A"\ndate: 2026-09-01\ndraft: false', body_ok)
-        _write_post(posts, "live-b", 'title: "Live B"\ndate: 2026-09-01\ndraft: false', body_ok)
-        _write_post(posts, "rueck", 'title: "Rück"\ndate: 2026-09-01\ndraft: true\nreserve_published: 2026-09-01\ncover:\n  image: "images/covers/rueck.jpg"', body_ok)
+        _write_post(posts, "live-a", f'title: "Live A"\ndate: {d0}\ndraft: false', body_ok)
+        _write_post(posts, "live-b", f'title: "Live B"\ndate: {d0}\ndraft: false', body_ok)
+        _write_post(posts, "rueck", f'title: "Rück"\ndate: {d0}\ndraft: true\nreserve_published: {d0}\ncover:\n  image: "images/covers/rueck.jpg"', body_ok)
         # „blocked" = echter Torso: vollständiger Körper, aber OHNE Titel.
         # Unheilbar (die Kette erfindet keine redaktionelle Aussage), also
         # löschbar – aber erst mit Beleg aus zwei Läufen (WF-B594).
         _write_post(posts, "blocked",
-                    'title: ""\ndate: 2026-09-01\nlastmod: 2026-09-01\n'
+                    f'title: ""\ndate: {d0}\nlastmod: {d0}\n'
                     'description: "Eine ordentliche Beschreibung mit genug '
                     'Zeichen fuer das Meta-Gate der Reserve dieses Blogs."\n'
                     'draft: true\nreserve: true\ncover:\n'
                     '  image: "images/covers/blocked.jpg"', body_ok)
         # „heilbar-kurz" = der Realfall aus #594: Maschinen-Entwurf, dem nur
         # Länge, Struktur und interne Links fehlen. Muss ÜBERLEBEN.
-        _write_post(posts, "heilbar-kurz", 'title: "Kurz aber heilbar"\ndate: 2026-09-01\nlastmod: 2026-09-01\ndescription: "Eine ordentliche Beschreibung mit genug Zeichen fuer das Meta-Gate der Reserve."\ndraft: true\nreserve: true\ncover:\n  image: "images/covers/heilbar-kurz.jpg"', "## Nur ein Anfang\nNoch zu kurz, aber heilbar.")
-        _write_post(posts, "manual", 'title: "Hand"\ndate: 2026-09-01\ndraft: true', "zu kurz")
-        _write_post(posts, "live-old-reserve", 'title: "Alt"\ndate: 2026-09-01\ndraft: false\nreserve_published: 2026-09-01', body_ok)
-        _write_post(posts, "ref", 'title: "Ref"\ndate: 2026-09-01\ndraft: false',
+        _write_post(posts, "heilbar-kurz", f'title: "Kurz aber heilbar"\ndate: {d0}\nlastmod: {d0}\ndescription: "Eine ordentliche Beschreibung mit genug Zeichen fuer das Meta-Gate der Reserve."\ndraft: true\nreserve: true\ncover:\n  image: "images/covers/heilbar-kurz.jpg"', "## Nur ein Anfang\nNoch zu kurz, aber heilbar.")
+        _write_post(posts, "manual", f'title: "Hand"\ndate: {d0}\ndraft: true', "zu kurz")
+        _write_post(posts, "live-old-reserve", f'title: "Alt"\ndate: {d0}\ndraft: false\nreserve_published: {d0}', body_ok)
+        _write_post(posts, "ref", f'title: "Ref"\ndate: {d0}\ndraft: false',
                     "Siehe [Rück](../../posts/rueck/) und [Block](../../posts/blocked/).")
-        _write_post(posts, "shared", 'title: "Shared"\ndate: 2026-09-01\ndraft: false\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
-        _write_post(posts, "doomed-shared", 'title: "Doomed Shared"\ndate: 2026-09-01\ndraft: true\nreserve_published: 2026-09-01\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
+        _write_post(posts, "shared", f'title: "Shared"\ndate: {d0}\ndraft: false\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
+        _write_post(posts, "doomed-shared", f'title: "Doomed Shared"\ndate: {d0}\ndraft: true\nreserve_published: {d0}\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
 
         for base in ("rueck", "blocked", "shared"):
             for p in (covers / f"{base}.jpg", covers / "360" / f"{base}.jpg",
@@ -780,7 +807,11 @@ def run_selftest() -> int:
             "- [Keep](https://example.org/posts/keep/): bleibt\n",
             encoding="utf-8")
 
-        heute = dt.date.today()
+        # Alter ABSOLUT stempeln: Die Entwürfe sind am Testtag entstanden –
+        # unabhängig davon, welcher Kalendertag beim Lauf gerade herrscht.
+        for index in posts.glob("*/index.md"):
+            _stempel(str(index), heute)
+
         umwelt = {k: os.environ.get(k) for k in
                   ("RESERVE_JANITOR_HITS", "RESERVE_JANITOR_KARENZ_TAGE",
                    "RESERVE_JANITOR_AUSMUSTERUNG_TAGE")}
@@ -878,16 +909,32 @@ def run_selftest() -> int:
         if rep["state_pruned"].get("quarantine") != 1:
             errors.append(f"Quarantäne-Zähler nicht bereinigt: {rep['state_pruned']}")
 
+    return errors
+
+
+def run_selftest() -> int:
+    if _stempel is None or _uhr is None or _MITTAG is None:
+        print("🛑 reserve_janitor-Selbsttest FEHLGESCHLAGEN:\n"
+              "  - scripts/selftest_clock.py fehlt oder ist nicht importierbar –\n"
+              "    eine Lösch-Wache ohne Uhr-Zwang ist eine Verabredung mit\n"
+              "    dem Kalender.")
+        return 2
+    errors: list[str] = []
+    for tag in PROBETAGE:
+        with _uhr(dt.datetime.combine(tag, _MITTAG, tzinfo=dt.timezone.utc),
+                  _UHR_STRIKT, module=[sys.modules[__name__]]):
+            errors += [f"[Testdatum {tag.isoformat()}] {e}"
+                       for e in _szenario(tag)]
     if errors:
         print("🛑 reserve_janitor-Selbsttest FEHLGESCHLAGEN:")
         for e in errors:
             print(f"   - {e}")
         return 2
-    print("✅ reserve_janitor-Selbsttest grün: Rückläufer sofort gelöscht, "
-          "Torso erst mit 2 Läufen Beleg, heilbarer Kurz-Entwurf verschont "
-          "(#594), Karenz greift, Trockenlauf zählt nicht, Handentwurf/Live "
-          "geschützt, Links, llms.txt, Cover, Audio und Gedächtnisse "
-          "bereinigt.")
+    print(f"✅ reserve_janitor-Selbsttest grün ({len(PROBETAGE)} Probetage, "
+          "Uhr-Zwang): Rückläufer sofort gelöscht, Torso erst mit 2 Läufen "
+          "Beleg, heilbarer Kurz-Entwurf verschont (#594), Karenz greift, "
+          "Trockenlauf zählt nicht, Handentwurf/Live geschützt, Links, "
+          "llms.txt, Cover, Audio und Gedächtnisse bereinigt.")
     return 0
 
 

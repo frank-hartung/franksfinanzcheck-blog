@@ -742,9 +742,13 @@ auffüllt, repariert den Melder – nicht die Linie. Deshalb gilt dauerhaft:
   Geschwister werden berichtet, nie adoptiert.
 - **CTA- und Offenlegungsblöcke sind für Heiler tabu.** Der interne Linker
   verlinkt Fließtext, nie Werbekennzeichnung (`cta_ranges()`).
+- **Neue Wachen sind uhrfest.** Selbsttests laufen gegen feste Probetage und
+  stempeln Dateialter absolut (`selftest_clock.stempel`) – nie „JETZT minus n
+  Tage". Beide Wachen dieses Vorgangs fielen genau daran im PR-Gate auf.
 - Verträge: `BestandsaufnahmeTests`, `LoeschRechtTests`,
   `LoeschDeckungsWacheTests`, `TriageFensterTests`, `CustodyIdentitaetTests`,
-  `LinkerCtaSperrzoneTests` in `scripts/tests/test_reserve_pipeline.py`.
+  `LinkerCtaSperrzoneTests`, `UhrZwangDerReserveWachenTests` in
+  `scripts/tests/test_reserve_pipeline.py`.
 - Vorgangsbericht: `BOT-WATCHDOG-RESERVE-594-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
 
 ## Release-Scorecard: die Produktionswahrheit (seit 03.10.2026)

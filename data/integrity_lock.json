@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-05T19:07:02.746209+00:00",
+  "signed_at": "2026-10-05T19:20:11.925502+00:00",
   "head": "e222553",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
@@ -49,95 +49,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
-  "audit_start_sha256": "de2a1bf388b4eacda0834a8fa444f5e4fa58b00ddc9934dda4a0ae18b5c8eb34",
+  "audit_start_sha256": "0f7c806b6a512bf70d2962ce9c3875948d5aada31ff89b709ea9022ad29a3ecc",
   "audit": [
-    {
-      "date": "2026-10-01",
-      "art": "set-current",
-      "head": "c04fd47",
-      "geaendert": [
-        "data/brand_lock.yaml",
-        "hugo.toml",
-        "layouts/_partials/home_clusters.html",
-        "layouts/pillar/list.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c04fd47",
-              "datum": "2026-10-01",
-              "betreff": "feat: establish Fixkosten-Cockpit product core"
-            },
-            {
-              "sha": "7205a4f",
-              "datum": "2026-10-01",
-              "betreff": "content: unabhängige Redaktionsreserve auffüllen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "data/brand_lock.yaml",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c04fd47",
-              "datum": "2026-10-01",
-              "betreff": "feat: establish Fixkosten-Cockpit product core"
-            },
-            {
-              "sha": "7205a4f",
-              "datum": "2026-10-01",
-              "betreff": "content: unabhängige Redaktionsreserve auffüllen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/home_clusters.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c04fd47",
-              "datum": "2026-10-01",
-              "betreff": "feat: establish Fixkosten-Cockpit product core"
-            },
-            {
-              "sha": "7205a4f",
-              "datum": "2026-10-01",
-              "betreff": "content: unabhängige Redaktionsreserve auffüllen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/list.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c04fd47",
-              "datum": "2026-10-01",
-              "betreff": "feat: establish Fixkosten-Cockpit product core"
-            },
-            {
-              "sha": "7205a4f",
-              "datum": "2026-10-01",
-              "betreff": "content: unabhängige Redaktionsreserve auffüllen"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "78e9ee4df3699cd1ddfe463880a01ced4d9b9603bf9dd8c0febd9c4ba48950e6",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-01",
       "art": "set-current",
@@ -161,7 +74,7 @@
         }
       ],
       "files_sha256": "e1a5984dd74293823f06f69f669491dbb364e7dd949340e789033b72398c98ba",
-      "prev_sha256": "de2a1bf388b4eacda0834a8fa444f5e4fa58b00ddc9934dda4a0ae18b5c8eb34"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-02",
@@ -542,7 +455,15 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "ca1f8eef7d8cb60c4d4ecac6b7a2921a9513e97b4d1b607f8373a2a86cf71161",
+      "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
+      "prev_sha256": "ca1f8eef7d8cb60c4d4ecac6b7a2921a9513e97b4d1b607f8373a2a86cf71161"
+    },
+    {
+      "date": "2026-10-05",
+      "art": "set-current",
+      "head": "e222553",
+      "geaendert": [],
+      "prev_sha256": "300d1fbd35b364a22b08b4e4e82a8f896abef1e369ec62bf96d43c3aee048e67",
       "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b"
     }
   ]

@@ -1968,3 +1968,45 @@ class LinkerCtaSperrzoneTests(unittest.TestCase):
         quelle = (SCRIPTS / "internal_linker.py").read_text(encoding="utf-8")
         self.assertIn("WF-B594", quelle)
         self.assertIn("def cta_ranges", quelle)
+
+
+class UhrZwangDerReserveWachenTests(unittest.TestCase):
+    """B9: Ein Selbsttest, der die Wanduhr liest, ist eine Verabredung mit
+    dem Kalender.
+
+    Beide in diesem Vorgang neu gebauten Wachen hatten genau diese Bauart:
+    Fixtures mit der echten Uhr gealtert, Erwartung gegen ein gedachtes
+    Heute. Unter der CI-Probe (+97/+1461 Tage) fiel der Reserve-Aufnahme
+    jeder reife Entwurf auf „unreif", und beim Aufräumer griff die Karenz
+    nicht mehr – ausgerechnet die Regel, die vor unwiderruflichem Löschen
+    schützt. Das Gate hat es gefangen; dieser Vertrag hält es fest.
+    """
+
+    def _trap(self, script, offset):
+        sc = SCRIPTS / "selftest_clock.py"
+        p = subprocess.run(
+            [sys.executable, str(sc), "--trap", f"scripts/{script}",
+             "--offset", str(offset), "--selftest-args=--selftest"],
+            cwd=str(SCRIPTS.parent), capture_output=True, text=True)
+        return p
+
+    def test_aufnahme_ist_uhrfest(self):
+        for offset in (97, 1461):
+            with self.subTest(offset=offset):
+                p = self._trap("reserve_intake.py", offset)
+                self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_aufraeumer_ist_uhrfest(self):
+        for offset in (97, 1461):
+            with self.subTest(offset=offset):
+                p = self._trap("reserve_janitor.py", offset)
+                self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+
+    def test_fixtures_stempeln_absolut(self):
+        for name in ("reserve_intake.py", "reserve_janitor.py"):
+            quelle = (SCRIPTS / name).read_text(encoding="utf-8")
+            with self.subTest(name=name):
+                self.assertIn("_stempel(", quelle,
+                              "Dateialter wird nicht absolut gestempelt")
+                self.assertIn("PROBETAGE", quelle,
+                              "Selbsttest läuft nicht gegen feste Testdaten")
