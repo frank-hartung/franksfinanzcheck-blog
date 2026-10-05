@@ -76,7 +76,22 @@ TIMEOUT = float(os.environ.get("LIVE_POLICY_TIMEOUT", "25"))
 # ein Fehlen Hysterese (Info, self-healing, wird NICHT verschwiegen). Danach ist
 # dasselbe Fehlen echte Drift und bleibt ROT. Das Fenster ist knapp bemessen:
 # Build + Deploy + Cache liegen bei dieser Site deutlich unter 90 Minuten.
-GRACE_MIN = float(os.environ.get("LIVE_POLICY_GRACE_MIN", "90"))
+def _env_float(name: str, default: float, *, minimum: float = 0.0) -> float:
+    """Liest eine numerische Policy-Option fehlertolerant aus der Umgebung.
+
+    Deploy-Umgebungen übernehmen Variablen aus mehreren Quellen. Ein leerer
+    oder versehentlich textueller Wert darf die Governance-Wache nicht vor dem
+    eigentlichen Check abstürzen lassen (und damit dauerhaft rot färben).
+    """
+    raw = os.environ.get(name, str(default)).strip()
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        return default
+    return value if value >= minimum else default
+
+
+GRACE_MIN = _env_float("LIVE_POLICY_GRACE_MIN", 90.0)
 UA = "Mozilla/5.0 (compatible; FranksFinanzcheckLiveGuard/1.0; +https://franksfinanzcheck.de)"
 ANSWER_BOTS = ("OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Perplexity-User",
                "DuckAssistBot", "Claude-User", "meta-externalfetcher")
