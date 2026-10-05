@@ -29,6 +29,8 @@ kurzantwort: "Nutze einen Autostromtarif oder einen dynamischen Tarif. Dann läd
 
 Das E‑Auto gilt als günstig im Unterhalt. Doch viele stecken das Kabel einfach in die Steckdose. Den Vertrag prüft dabei kaum jemand. Dann schockt die Jahresrechnung.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Die **E‑Auto Ladekosten** hängen an zwei Dingen. Erstens an deiner Technik. Zweitens am Zeitpunkt. In meinem Fixkosten‑Cockpit ist das Laden einer der größten Hebel.  
