@@ -12,6 +12,11 @@ on:
       # werden hier mitgeprüft (WF-A4E0): Änderungen am Haken müssen die
       # Regressionstests auslösen, sonst prüft niemand die Leitplanke.
       - '.githooks/**'
+      # Der Zugangs-Namensvertrag (Code-Scanning-Alert #78) liest das
+      # Kanal-Playbook direkt: Eine Änderung an data/social/** muss die
+      # Regressionstests auslösen, sonst könnte das Feld `pflicht_env:`
+      # unbemerkt wieder `secrets:` heißen.
+      - 'data/social/**'
   workflow_dispatch: {}
 permissions:
   contents: read

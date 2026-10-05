@@ -64,12 +64,57 @@ def enabled_channels(cfg: dict) -> list[str]:
     return [cid for cid, c in channel_map(cfg).items() if (c or {}).get("enabled", False)]
 
 
+# --------------------------------------------------- Zugangs-Namensvertrag
+# `pflicht_env` führt die NAMEN der Umgebungsvariablen, die ein Kanal zum
+# Senden braucht – niemals deren Werte. Der Feldname ist bewusst gewählt
+# (Code-Scanning-Alert #78, 05.10.2026): Das Feld hieß bis 04.10.2026
+# `secrets:` – ein Name, der Geheimnisse behauptete und damit jede
+# Berichts-Ausgabe dieser Liste für statische Analysen (CodeQL
+# `py/clear-text-logging-sensitive-data`) und für Menschen zum
+# Fehlsignal machte. Werte stehen ausschließlich in den GitHub-Secrets
+# und werden nur über os.environ gelesen. Der Feldname wird hier EINMAL
+# zentral definiert – es gibt keinen zweiten Ort, an dem die Liste wieder
+# `secrets` heißen darf. Bewacht durch scripts/tests/test_zugangs_namensvertrag.py.
+ENV_FELD = "pflicht_env"
+ENV_FELD_ALT = "secrets"  # Feldname bis 04.10.2026 – nur Migrationserkennung
+
+
+def pflicht_env_namen(channel: dict) -> list[str]:
+    """Die NAMEN der Umgebungsvariablen, die dieser Kanal braucht.
+
+    Rückgabe sind ausschließlich Variablen-Bezeichner (z. B.
+    "MASTODON_ACCESS_TOKEN"). Werte werden hier nie gelesen, nie
+    zurückgegeben und nie protokolliert.
+    """
+    ch = channel or {}
+    if not isinstance(ch, dict):
+        return []
+    namen = ch.get(ENV_FELD)
+    if namen is None:
+        # Fail-loud statt stiller Rückfall: Ein Kanal, dessen Pflichtfeld
+        # noch den alten Namen trägt, würde sonst unbemerkt als „braucht
+        # keine Zugangsdaten“ gelten und ohne Token zu senden versuchen.
+        if ENV_FELD_ALT in ch:
+            raise ValueError(
+                "channels.yaml: Feld `%s` heißt seit 05.10.2026 `%s` "
+                "(Namensvertrag, siehe Kopf von data/social/channels.yaml "
+                "und CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md). "
+                "Bitte umbenennen." % (ENV_FELD_ALT, ENV_FELD)
+            )
+        return []
+    return list(namen or [])
+
+
 def missing_env(channel: dict) -> list[str]:
-    """Welche Secrets/Variablen für diesen Kanal fehlen (leer = einsatzbereit)."""
+    """Welche Pflicht-Umgebungsvariablen für diesen Kanal fehlen (leer = einsatzbereit).
+
+    Geprüft wird ausschließlich „gesetzt und nicht leer“ – der WERT wird
+    weder zurückgegeben noch protokolliert, nur sein NAME.
+    """
     missing = []
-    for key in (channel or {}).get("secrets") or []:
-        if not (os.environ.get(key) or "").strip():
-            missing.append(key)
+    for name in pflicht_env_namen(channel):
+        if not (os.environ.get(name) or "").strip():
+            missing.append(name)
     return missing
 
 

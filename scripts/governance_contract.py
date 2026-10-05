@@ -413,10 +413,15 @@ def c4_issue_policy(workflow_text):
     return out
 
 
-def c5_record_provenance(workflow_texts, secrets_text):
-    """Nachweis-Provenienz: workflow_texts = dict pfad -> Text."""
+def c5_record_provenance(workflow_texts, wachen_quelltext):
+    """Nachweis-Provenienz: workflow_texts = dict pfad -> Text.
+
+    `wachen_quelltext` ist der QUELLTEXT von scripts/secrets_age_guard.py,
+    daraus werden ausschließlich die registrierten Variablen-NAMEN gelesen –
+    niemals Werte (Namensvertrag, Code-Scanning-Alert #78).
+    """
     out = []
-    known = set(re.findall(r'^\s{4}"([A-Z0-9_]+)":\s*\{', secrets_text, re.M))
+    known = set(re.findall(r'^\s{4}"([A-Z0-9_]+)":\s*\{', wachen_quelltext, re.M))
     for path, raw_text in workflow_texts.items():
         rel = os.path.basename(path)
         # Shell-Zeilenfortsetzung ( \ + Umbruch ) zusammenziehen, sonst übersieht
@@ -539,7 +544,6 @@ LEAK_CHECK_PATTERNS = [
     (r"\bghp_[A-Za-z0-9]{30,}", "GitHub-PAT im Klartext"),
     (r"eyJ[A-Za-z0-9_\-]{20,}\.eyJ", "JWT (Mastodon/OAuth) im Klartext"),
 ]
-SECRET_PATTERNS = LEAK_CHECK_PATTERNS
 
 
 def c10_token_broker(script_texts):
@@ -683,7 +687,16 @@ def c13_proof_integrity(workflow_texts, auth_text=""):
     return out
 
 
-def c9_secret_leak(texts):
+def c9_leak_wache(texts):
+    """C9: Findet Zugangs-Material im Klartext in Reports und data/*.json.
+
+    Rückgabe sind ausschließlich BEFUNDE (Dateiname + Muster-Label) – nie der
+    gefundene Wert selbst. Die Funktion hieß bis 05.10.2026 `c9_secret_leak`;
+    allein dieser Name machte ihren Rückgabewert für CodeQL
+    (`SensitiveFunctionCall`) zu „sensiblen Daten“ und damit jede Ausgabe des
+    Vertragsberichts zum Klartext-Logging-Befund (Alert #78). Siehe
+    CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md.
+    """
     out = []
     for name, text in texts.items():
         for pattern, label in LEAK_CHECK_PATTERNS:
@@ -1365,7 +1378,8 @@ def c18_dauerzustand(zustand, wache_text="", runbook_text=""):
 def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     gov = _read(os.path.join(root, ".github", "workflows", "premium-governance.yml"))
     gate = _read(os.path.join(root, "scripts", "governance_gate.py"))
-    secrets = _read(os.path.join(root, "scripts", "secrets_age_guard.py"))
+    # Quelltext der Secrets-Wache – Grundlage für C5 (registrierte NAMEN).
+    wachen_quelltext = _read(os.path.join(root, "scripts", "secrets_age_guard.py"))
     wflows = {}
     for path in sorted(glob.glob(os.path.join(root, ".github", "workflows", "*.yml"))):
         wflows[path] = _read(path)
@@ -1401,7 +1415,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c2_build_not_swallowed(gov)
     checks += c3_measure_chain_complete(gov, gate)
     checks += c4_issue_policy(gov)
-    checks += c5_record_provenance(wflows, secrets)
+    checks += c5_record_provenance(wflows, wachen_quelltext)
     checks += c6_selftests(python_bin=python_bin, quick=quick)
     checks += c7_data_consistency(report_texts, manifest)
     checks += c8_commit_hygiene(gov, ignored)
@@ -1409,7 +1423,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     for path in glob.glob(os.path.join(root, "data", "*.json")):
         if os.path.getsize(path) < 400_000:
             leak_texts[os.path.relpath(path, root)] = _read(path)
-    checks += c9_secret_leak(leak_texts)
+    checks += c9_leak_wache(leak_texts)
     script_texts = {}
     for path in sorted(glob.glob(os.path.join(root, "scripts", "*.py"))):
         script_texts[os.path.basename(path)] = _read(path)
@@ -1648,10 +1662,10 @@ def _selftest():
     if c8_commit_hygiene("          git add data/x.json 2>/dev/null || true\n", set()):
         failures.append("C8: Shell-Reste werden als Pfad fehlinterpretiert")
     # --- C9: Leak-Erkennung
-    res = c9_secret_leak({"X.md": "token: gsk_" + "A" * 32})
+    res = c9_leak_wache({"X.md": "token: gsk_" + "A" * 32})
     if not res:
         failures.append("C9: Klartext-Secret im Report wird nicht erkannt")
-    if c9_secret_leak({"X.md": "Pinterest-Status: ok, keine Daten"}):
+    if c9_leak_wache({"X.md": "Pinterest-Status: ok, keine Daten"}):
         failures.append("C9: Fehlalarm bei normalem Text")
     # --- C3: fehlender Emit-Zweig
     res = c3_measure_chain_complete("- name: x\n        run: echo",
@@ -1961,16 +1975,18 @@ def main(argv=None):
         # niemals den Inhalt oder Wert dahinter.
         for code, msg in checks:
             line = f"{code} {LABEL.get(code, '')}: {msg}"
-            # LABEL/msg sind feste Regel-Bezeichner und Muster-Namen (z. B. "API-Key
-            # im Klartext") aus LEAK_CHECK_PATTERNS – nie der gefundene Geheimwert
-            # selbst (siehe c9_secret_leak: nur `label` wird übernommen, kein Match-
-            # Text). Dauerhaft abgesichert durch test_clear_text_logging_security.py.
-            # codeql[py/clear-text-logging-sensitive-data]
+            # LABEL/msg sind feste Regel-Bezeichner und Muster-Namen (z. B.
+            # "API-Key im Klartext") aus LEAK_CHECK_PATTERNS – nie der gefundene
+            # Geheimwert selbst (c9_leak_wache übernimmt nur `label`, nie den
+            # Match-Text). Bis 05.10.2026 stand hier eine `# codeql[...]`-
+            # Unterdrückung; sie ist entfallen, weil die Ursache geheilt wurde:
+            # Die Wache heißt nicht mehr `c9_secret_leak`, und keine Quelle
+            # dieses Datenflusses trägt noch einen Namen, der Zugangsdaten
+            # behauptet. Dauerhaft bewacht durch test_clear_text_logging_security.py
+            # und test_zugangs_namensvertrag.py.
             print(f"  ❌ {line}")
             if annotate:
-                # Identische Begründung wie eine Zeile zuvor: ::error:: trägt
-                # denselben geprüften Befund-Text, keinen Geheimwert.
-                # codeql[py/clear-text-logging-sensitive-data]
+                # ::error:: trägt denselben geprüften Befund-Text – kein Geheimwert.
                 print(f"::error::{line}")
     else:
         count = len(RULE_TEXT)
@@ -1984,8 +2000,10 @@ def main(argv=None):
             with open(os.path.join(BLOG_DIR, target), "w", encoding="utf-8") as f:
                 # render_md() setzt nur LABEL/RULE_TEXT (feste Regel-Beschreibungen)
                 # und dieselben wertfreien `msg`-Texte wie oben zusammen – niemals
-                # einen gefundenen Geheimwert. Siehe test_clear_text_logging_security.py.
-                # codeql[py/clear-text-storage-sensitive-data]
+                # einen gefundenen Geheimwert. Die frühere `# codeql[...]`-
+                # Unterdrückung ist entfallen: Der Fund kam von der lokalen
+                # Variablen `secrets` (jetzt `wachen_quelltext`), nicht vom
+                # Inhalt. Siehe CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md.
                 f.write(render_md(checks))
             print(f"→ geschrieben: {target}")
         except OSError as exc:

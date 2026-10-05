@@ -297,7 +297,7 @@ def trigger_kanal_standby(params: dict, ctx: dict) -> list[dict]:
         events.append({
             "key": f"standby:{kanal['id']}:{periode}",
             "daten": {"kanal": kanal["id"], "kanal_label": kanal["label"],
-                      "grund": kanal["grund"], "secrets": kanal["secrets"]},
+                      "grund": kanal["grund"], "pflicht_env": kanal["pflicht_env"]},
         })
     return events
 

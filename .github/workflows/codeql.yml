@@ -44,6 +44,23 @@ jobs:
       fail-fast: false
       matrix:
         language: [javascript, python]
+    env:
+      # KERNEINSTELLUNG DER WACHE – nicht entfernen.
+      #
+      # Seit codeql-action v3.28 analysiert die Action bei `pull_request`
+      # standardmäßig NUR die im Diff berührten Zeilen („diff-informed
+      # queries“; die Cleartext-Queries tragen dafür
+      # `observeDiffInformedIncrementalMode`). Folge im Echtbetrieb:
+      # Ein Pull Request, der die betroffene Datei nicht anfasst, meldete
+      # „0 Funde – Gate grün“, während derselbe Commit beim push auf main
+      # mit 6 Sicherheits-Fundstellen rot ging (Alert #78: PR #575 grün,
+      # derselbe Commit auf main rot). Das Gate war damit keine Wache,
+      # sondern eine Diff-Vorschau.
+      #
+      # `false` erzwingt in JEDEM Ereignis die Vollanalyse des gesamten
+      # Codebestands. Ein PR ist nur dann grün, wenn das Repository als
+      # Ganzes sauber ist – das ist die Zusage, die dieses Gate gibt.
+      CODEQL_ACTION_DIFF_INFORMED_QUERIES: false
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
@@ -96,9 +113,13 @@ jobs:
           # CodeQL behandelt ein nacktes `# noqa`/`# lgtm` als Unterdrückung
           # JEGLICHER Alerts auf der Zeile – deshalb greift die Whitelist
           # hier zusätzlich als zweite Instanz.
-          ERLAUBT='py/clear-text-logging-sensitive-data
-          py/clear-text-storage-sensitive-data
-          py/incomplete-url-substring-sanitization
+          #
+          # DIE Clear-Text-Regeln stehen NICHT mehr hier (05.10.2026, Alert
+          # #78): Funde dieser Klasse werden an der Quelle geheilt, nie
+          # unterdrückt. Eine Unterdrückung bliebe damit in der SARIF
+          # sichtbar und würde das Gate rot machen – doppelt gesichert
+          # durch test_zugangs_namensvertrag.py (Unterdrückungsverbot).
+          ERLAUBT='py/incomplete-url-substring-sanitization
           js/incomplete-url-substring-sanitization'
           for f in sarif-results/*.sarif; do
             [ -e "$f" ] || { echo "Keine SARIF-Datei – Analyse unvollständig."; exit 1; }
@@ -130,12 +151,42 @@ jobs:
           done
 
       - name: SARIF in Security-Tab hochladen
+        id: upload
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: sarif-results/${{ matrix.language }}.sarif
           category: /language:${{ matrix.language }}
+
+      - name: Upload-Ergebnis sichtbar machen (Default-Setup-Konflikt)
+        if: github.ref == 'refs/heads/main' && steps.upload.outcome != 'success'
+        run: |
+          set -euo pipefail
+          # Der Upload steht bewusst auf continue-on-error: Ein blockierter
+          # Upload darf die Analyse nicht verschlucken. Er darf aber auch
+          # nicht STILL scheitern – sonst zeigt die Security-Tab monatelang
+          # Alerts aus einer zweiten, parallel laufenden Engine.
+          #
+          # Häufigste Ursache (und genau die, die hier auftrat):
+          #   "CodeQL analyses from advanced configurations cannot be
+          #    processed when the default setup is enabled"
+          # Das GitHub-Default-Setup ist dann noch aktiv und blockiert den
+          # Upload dieser Wache. Solange das so ist, stammen die Alert-
+          # Nummern in der Security-Tab vom DEFAULT-Setup, nicht von hier.
+          {
+            echo "### ⚠ SARIF-Upload blockiert (${{ matrix.language }})"
+            echo ""
+            echo "Die Analyse lief vollständig, der Upload in die Security-Tab wurde abgelehnt."
+            echo ""
+            echo "**Einmalige Handlung des Betreibers (Klick-Weg):**"
+            echo "Repo → Settings → Code security and analysis → Code scanning (CodeQL)"
+            echo "→ **Default setup → Disable**. Danach übernimmt diese Wache die Security-Tab."
+            echo ""
+            echo "Bis dahin gilt das Gate dieses Laufs als maßgeblich – es prüft denselben"
+            echo "Bestand und schlägt bei jeder Security-Fundstelle fehl."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::warning title=SARIF-Upload blockiert::Default-Setup vermutlich noch aktiv – Settings → Code security → Code scanning → Default setup → Disable. Analyse und Gate liefen trotzdem vollständig."
 
       - name: Sicherheits-Gate (null Security-Fundstellen)
         env:
@@ -177,6 +228,23 @@ jobs:
               jq -r '.runs[].results[]? | "\(.ruleId) → \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" | sort -u | head -20 | while IFS= read -r ZEILE; do
                 echo "::error::  ${ZEILE}"
               done
+              # Jede einzelne Fundstelle wird zusätzlich als Datei-Annotation
+              # ausgegeben. Grund: Die Zeilen oben stehen nur im Lauf-LOG –
+              # erreichbar praktisch nur als ZIP-Download. Annotationen stehen
+              # an der Codezeile im PR-Diff, im Lauf-Kopf UND maschinenlesbar
+              # in der Checks-API. So kennt jeder (Mensch wie Automat) die
+              # Fundstelle ohne Log-Download (Lehre aus Alert #78, der über
+              # mehrere „grüne“ PRs hinweg unbemerkt blieb).
+              jq -r '
+                .runs[].results[]?
+                | . as $r
+                | ($r.locations[0].physicalLocation // {}) as $loc
+                | "::error file=\($loc.artifactLocation.uri // "unbekannt")"
+                  + ",line=\($loc.region.startLine // 1)"
+                  + ",title=CodeQL \($r.ruleId)"
+                  + "::\($r.ruleId) – "
+                  + (($r.message.text // "") | gsub("[\r\n]+"; " ") | .[0:400])
+              ' "$f" | sort -u
             fi
           done
           BILANZ="CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."

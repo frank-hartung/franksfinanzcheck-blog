@@ -175,16 +175,20 @@ class ClearTextLoggingRuntimeContract(unittest.TestCase):
         self.assertIn("PINTEREST_ACCESS_TOKEN\t15d\tpflicht", list_out)
 
     def test_social_preflight_json_output_does_not_use_raw_secret_keys(self):
+        # Seit 05.10.2026 heißen die internen Felder `pflicht_env` /
+        # `fehlende_env` (Namensvertrag gegen Code-Scanning-Alert #78; siehe
+        # scripts/tests/test_zugangs_namensvertrag.py). Die JSON-Oberfläche
+        # bleibt stabil: required_env_names / missing_env_names.
         raw_report = {
-            "zeit": "04.10.2026 12:00 Uhr",
+            "zeit": "05.10.2026 12:00 Uhr",
             "kanaele": [
                 {
                     "kanal": "mastodon",
                     "label": "Mastodon",
                     "enabled": True,
-                    "secrets": ["MASTODON_ACCESS_TOKEN"],
+                    "pflicht_env": ["MASTODON_ACCESS_TOKEN"],
                     "vars": ["MASTODON_INSTANCE"],
-                    "fehlende_secrets": ["MASTODON_ACCESS_TOKEN"],
+                    "fehlende_env": ["MASTODON_ACCESS_TOKEN"],
                     "fehlende_vars": [],
                     "status": "standby",
                     "detail": "fehlt: MASTODON_ACCESS_TOKEN",
@@ -196,9 +200,11 @@ class ClearTextLoggingRuntimeContract(unittest.TestCase):
         }
         sanitized = social_preflight._sanitize_report_for_json(raw_report)
         payload_str = json.dumps(sanitized)
-        # Überprüfen, dass Schlüssel nicht "secrets" oder "fehlende_secrets" heißen
+        # Kein Schlüssel darf behaupten, Zugangsdaten zu enthalten.
         self.assertNotIn('"secrets":', payload_str)
         self.assertNotIn('"fehlende_secrets":', payload_str)
+        self.assertNotIn('"pflicht_env":', payload_str)
+        self.assertNotIn('"fehlende_env":', payload_str)
         self.assertIn('"required_env_names":', payload_str)
         self.assertIn('"missing_env_names":', payload_str)
 
