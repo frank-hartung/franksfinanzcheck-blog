@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 4,
-  "pool_size": 4,
-  "generated_at": "2026-10-05T21:55:48Z",
+  "ready": 3,
+  "pool_size": 3,
+  "generated_at": "2026-10-05T23:21:44Z",
   "candidates": [
     {
       "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
@@ -14,21 +14,6 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
-      "ready": true,
-      "sha256": "5700b70af6ae3a5446707b9816f0d5b7ca35373801c63b28992503d2662107b5",
-      "score": 0.9,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -66,10 +51,8 @@
     }
   ],
   "recert": {
-    "at": "2026-10-05T21:55:48Z",
-    "renewed": [
-      "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest"
-    ],
+    "at": "2026-10-05T23:21:44Z",
+    "renewed": [],
     "tool": "scripts/reserve_recert.py"
   }
 }
