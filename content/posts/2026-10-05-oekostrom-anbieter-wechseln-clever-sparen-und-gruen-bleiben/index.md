@@ -2,7 +2,9 @@
 title: "Ökostrom Anbieter: wechseln – clever sparen und grün bleiben"
 description: "Ökostrom Anbieter wechseln: Ökostrom Anbieter wechseln leicht gemacht – Praxis‑Tipps, Checkliste und Fehler vermeiden, um grünen Strom günstig zu beziehen."
 date: 2026-10-05T11:04:41Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-05T14:09:00Z
+cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
 reserve_published: 2026-10-05
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]

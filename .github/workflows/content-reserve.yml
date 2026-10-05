@@ -235,7 +235,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: pip install -q pyyaml cryptography pillow pillow-avif-plugin fonttools brotli
+      - run: pip install -q pyyaml feedparser cryptography pillow pillow-avif-plugin fonttools brotli
       # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
       - uses: ./.github/actions/install-hugo
         with:

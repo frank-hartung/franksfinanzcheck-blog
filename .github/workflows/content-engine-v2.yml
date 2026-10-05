@@ -495,8 +495,12 @@ jobs:
           # `faktencheck`) – der Artikeltext bleibt unberührt, fachliche
           # Befunde landen im FAKTENFRISCHE-REPORT.md.
           # Exit 3 = keine Quelle erreichbar → Warnung, kein Abbruch.
+          # Der finale Publish-Gate-Collector ist dagegen hart: Ohne
+          # `faktencheck` bleibt der Artikel als Hold erhalten und erreicht
+          # weder Hugo-Auslieferung noch Release-Scorecard (WF-54C4/#583).
           python3 -m pip install -q feedparser >/dev/null 2>&1 || true
-          python3 scripts/faktenfrische.py --neu --apply || echo "⚠ Faktenfrische (nicht kritisch)"
+          python3 scripts/faktenfrische.py --selftest
+          python3 scripts/faktenfrische.py --neu --apply || echo "⚠ Faktenfrische-Recherche nicht abgeschlossen – Publish-Gate hält Kandidaten zurück"
           echo "== Hold-Requeue nach Heilung (PREMIUM-FIX 25.09.2026: Phase 0.5 rearmt VOR der Heilung – was Phase 2/3 heilt, würde sonst nie rearmt (stale Hold → 404)) =="
           python3 scripts/requeue_quality_holds.py --fix || echo "⚠ Hold-Requeue – Funde im Log"
           git config user.name "Content-Bot"

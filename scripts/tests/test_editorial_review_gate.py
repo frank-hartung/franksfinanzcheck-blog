@@ -220,6 +220,7 @@ class EditorialReviewGateTests(unittest.TestCase):
                      patch.object(publish_gate, "keyword_self_heal_candidates", return_value=0), \
                      patch.object(publish_gate, "check_length_failures", return_value=(set(), None)), \
                      patch.object(publish_gate, "seo_audit_failures", return_value=(set(), None)), \
+                     patch.object(publish_gate, "faktenfrische_failures", return_value=({}, None, False)), \
                      patch.object(publish_gate, "affiliate_profi_failures", return_value=({}, None)), \
                      patch.object(publish_gate, "affiliate_integrity_failures", return_value=({}, None, False)), \
                      patch.object(publish_gate, "affiliate_intent_failures", return_value=({}, None, False)), \

@@ -40,7 +40,13 @@ Prüfungen bestehen:
                                   ein Artikel mit falscher oder fehlender
                                   Kennzeichnung live gehen, weil niemand die
                                   Kennzeichnung gegen das Ergebnis prüfte.)
-  7. editorial_review_gate.py   – YMYL-Freigabe für Baufinanzierung,
+  7. faktenfrische.py           – artikelgenaue Erst- und Folgeprüfung:
+                                  Jeder Kandidat braucht einen nachweisbaren,
+                                  noch gültigen `faktencheck` aus der Recherche-
+                                  kette. Ein fehlender oder überfälliger
+                                  Faktenstand darf nie bis zur Scorecard/
+                                  Veröffentlichung durchgereicht werden.
+  8. editorial_review_gate.py   – YMYL-Freigabe für Baufinanzierung,
                                   Altersvorsorge, Kredite und Versicherungen:
                                   Autor, Prüfer/Quellenbasis, Prüfdatum,
                                   geprüfte Zahlen, Änderungsgrund, nächster
@@ -204,6 +210,63 @@ def seo_audit_failures():
             failed.add(slug)
     sitemap_issues = [s for s in data.get("sitemap_issues", []) if s]
     return failed, ("; ".join(sitemap_issues) if sitemap_issues else None)
+
+
+def faktenfrische_failures(candidates=None, stichtag=None):
+    """Faktenstand der Veröffentlichungskandidaten fail-closed prüfen.
+
+    Die Release-Scorecard hatte am 05.10.2026 zwei bereits `draft: false`
+    gesetzte Artikel mit „Erstrecherche – noch nie faktengeprüft“ entdeckt
+    (WF-54C4 / #583). Die Faktenfrische lief bis dahin nur als best-effort
+    Schreibschritt in der Content-Engine; fiel die Recherche aus oder traf
+    ihr Budget nicht den neuen Artikel, konnte der Publish-Pfad trotzdem
+    weiterlaufen. Damit gab es zwei Wahrheiten: Publish-Gate grün, Scorecard
+    rot.
+
+    Diese Funktion ist der gemeinsame Collector für beide Stellen. Sie liest
+    ausschließlich die SSOT-Intervalle und Frontmatter, schreibt nichts und
+    liefert dieselbe Matrix wie ``faktenfrische.py``:
+
+      ({slug: [Gründe]}, Warnung|None, Werkzeugfehler_bool)
+
+    Ein nicht lesbarer Kandidat oder ein nicht ladbarer Recherche-Vertrag ist
+    ein Werkzeugfehler – niemals ein grünes „keine Funde“. Kandidaten mit
+    fehlendem oder überfälligem `faktencheck` bleiben als dokumentierter
+    Review-Hold erhalten; der Inhalt wird nicht gelöscht.
+    """
+    try:
+        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+        import faktenfrische
+        cfg = faktenfrische.lade_config()
+    except Exception as exc:  # noqa: BLE001 – Veröffentlichung fail-closed
+        return {}, ("Faktenfrische nicht beweisbar: Recherche-Vertrag/Modul "
+                    f"nicht ladbar ({exc})"), True
+
+    wanted = set(candidates) if candidates is not None else None
+    stichtag = stichtag or datetime.date.today()
+    failed = {}
+    gesehen = set()
+    try:
+        for art in faktenfrische.alle_artikel("posts"):
+            slug = str(art.get("slug") or "").strip()
+            if not slug or (wanted is not None and slug not in wanted):
+                continue
+            gesehen.add(slug)
+            status = faktenfrische.faelligkeit(art, cfg, stichtag)
+            if status.get("faellig"):
+                failed[slug] = [
+                    f"{status.get('grund', 'Faktencheck fällig')} "
+                    "– keine Veröffentlichung ohne aktuellen Beleg"
+                ]
+    except Exception as exc:  # noqa: BLE001 – auch Parserfehler sind Beweisfehler
+        return {}, f"Faktenfrische nicht auswertbar: {exc}", True
+
+    if wanted is not None:
+        fehlende = sorted(wanted - gesehen)
+        if fehlende:
+            return {}, ("Faktenfrische konnte Kandidat(en) nicht laden: "
+                        + ", ".join(fehlende)), True
+    return failed, None, False
 
 
 def affiliate_profi_failures():
@@ -716,6 +779,7 @@ def main():
     today = datetime.date.today().isoformat()
     len_fail, len_warn = check_length_failures()
     seo_fail, seo_warn = seo_audit_failures()
+    facts_fail, facts_warn, facts_tool_error = faktenfrische_failures(candidates)
     aff_fail, aff_warn = affiliate_profi_failures()
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)
@@ -726,7 +790,7 @@ def main():
     keyword_fail, keyword_warn = keyword_failures(candidates)
     readability_fail, readability_warn = readability_failures(candidates)
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
-    for w in (len_warn, seo_warn):
+    for w in (len_warn, seo_warn, facts_warn):
         if w:
             print(f"⚠ {w}")
     if aff_warn:
@@ -751,6 +815,21 @@ def main():
     # Also: nichts veröffentlichen – aber auch NICHTS vernichten. Exit 1 bricht
     # den Deploy-Schritt sichtbar ab (alert-on-failure meldet es), die Artikel
     # bleiben unangetastet und gehen beim nächsten Lauf erneut ins Gate.
+    if facts_tool_error:
+        print("\n🛑 FAKTENFRISCHE NICHT BEWEISBAR → Publish-Gate stoppt "
+              "(fail-closed, kein Artikel wird verworfen):")
+        print(f"   {facts_warn}")
+        print("   Diagnose: python3 scripts/faktenfrische.py --selftest")
+        try:
+            sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+            from audit_log import log_event
+            log_event(module="publish_gate", action="faktenfrische_tool_error",
+                      input={"candidates": candidates},
+                      output={"reason": facts_warn}, status="fail_closed")
+        except Exception:
+            pass
+        return 1
+
     if review_tool_error:
         print("\n🛑 REDAKTIONELLE YMYL-PRÜFUNG NICHT BEWEISBAR → Publish-Gate "
               "stoppt (fail-closed, kein Artikel wird verworfen):")
@@ -822,6 +901,9 @@ def main():
             reasons.append("Zeichenlänge (check_length.py) nicht bestanden")
         if slug in seo_fail:
             reasons.append("SEO-Audit (seo_audit.py) nicht bestanden")
+        if slug in facts_fail:
+            reasons.append("Faktenfrische nicht bestanden: "
+                           + "; ".join(facts_fail[slug]))
         if slug in aff_fail:
             reasons.append("Profi-Affiliate-Check nicht bestanden: " + "; ".join(aff_fail[slug]))
         if slug in integ_fail:
@@ -872,6 +954,33 @@ def main():
                         park_state.hold(path, grund)
                     except Exception as exc:
                         print(f"  ⚠ {slug}: Review-Hold nicht sauber schreibbar ({exc})")
+                        content = open(path, encoding="utf-8").read()
+                        content = re.sub(r"(?m)^draft:\s*false\s*$",
+                                         "draft: true", content, count=1)
+                        open(path, "w", encoding="utf-8").write(content)
+            elif slug in facts_fail:
+                # Faktenrecherche ist kein Grund, einen Artikel zu vernichten:
+                # Der Text bleibt als transparenter Hold erhalten und wird erst
+                # nach einem erfolgreichen Recherche-/Beleglauf wieder in die
+                # Re-Queue gelegt. So kann ein transienter Feed-/API-Ausfall
+                # weder live gehen noch Content-Verlust erzeugen.
+                gated.append((slug, reasons))
+                demoted.append(slug)
+                print(f"  🛑 {slug}: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, "
+                      "keine Veröffentlichung")
+                for r in reasons:
+                    print(f"     - {r}")
+                if not DRY_RUN:
+                    path = os.path.join(POSTS_DIR, slug, "index.md")
+                    try:
+                        sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+                        import park_state
+                        grund = "faktenfrische: " + "; ".join(facts_fail[slug])
+                        if len(grund) > 180:
+                            grund = grund[:177] + "…"
+                        park_state.hold(path, grund)
+                    except Exception as exc:
+                        print(f"  ⚠ {slug}: Faktenfrische-Hold nicht sauber schreibbar ({exc})")
                         content = open(path, encoding="utf-8").read()
                         content = re.sub(r"(?m)^draft:\s*false\s*$",
                                          "draft: true", content, count=1)
