@@ -174,7 +174,9 @@ jobs:
             QUALITY=$((QUALITY + ALLE - ANZ))
             if [ "$ANZ" -gt 0 ]; then
               echo "::error::${ANZ} Sicherheits-Fundstelle(n) in ${f}:"
-              jq -r '.runs[].results[]? | "  \(.ruleId) → \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" | sort -u | head -20
+              jq -r '.runs[].results[]? | "\(.ruleId) → \(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.startLine)"' "$f" | sort -u | head -20 | while IFS= read -r ZEILE; do
+                echo "::error::  ${ZEILE}"
+              done
             fi
           done
           BILANZ="CodeQL-Bilanz (${{ matrix.language }}): ${TOTAL} Funde – ${SECURITY} sicherheitsrelevant, ${QUALITY} Qualitäts-Hinweise."
