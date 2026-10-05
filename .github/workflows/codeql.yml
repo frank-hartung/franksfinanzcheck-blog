@@ -1,10 +1,22 @@
 # CodeQL-Sicherheitswache – die dauerhafte Code-Scanning-Pipeline.
 #
-# ERSETZT das GitHub-Default-Setup (Settings → Code security → Code scanning):
-# Nach dem ersten Merge dieses Workflows EINMAL das Default-Setup deaktivieren,
-# sonst analysieren zwei Engines parallel und die Alert-Liste verdoppelt sich.
-# Klick-Weg: Repo → Settings → Code security and analysis → Code scanning
-# (CodeQL) → Default setup → Disable. Diese Wache übernimmt ab dann.
+# ERSETZT das GitHub-Default-Setup. Nach dem ersten Merge dieses Workflows
+# EINMAL das Default-Setup deaktivieren, sonst analysieren zwei Engines
+# parallel und die Alert-Liste verdoppelt sich.
+#
+# Klick-Weg (GitHub-UI, Stand 10/2026). ACHTUNG: Die Einstellungsseite hieß
+# bis 2025 "Code security and analysis" – unter diesem Namen ist sie NICHT
+# mehr zu finden. Sie heißt jetzt "Advanced Security":
+#   Repo → Settings → Seitenleiste, Abschnitt "Security and quality"
+#   → Advanced Security → Abschnitt "Code Security"
+#   → Zeile "CodeQL analysis" → "..."-Menü rechts → Disable CodeQL
+# Direktlink: https://github.com/<owner>/<repo>/settings/security_analysis
+#
+# Danach einmalig die stale gewordene Konfiguration entfernen, sonst bleiben
+# ihre Alerts dauerhaft offen stehen: Reiter "Security and quality"
+# → Code scanning → Alert öffnen → "Affected branches" → main
+# → Dialog "Configurations analyzing" → alte Konfiguration löschen → Save.
+# Diese Wache übernimmt ab dann.
 #
 # Betriebsmodus:
 #   · pull_request auf main : Analyse + hartes Gate (keine Security-Fundstellen
@@ -179,14 +191,29 @@ jobs:
             echo ""
             echo "Die Analyse lief vollständig, der Upload in die Security-Tab wurde abgelehnt."
             echo ""
-            echo "**Einmalige Handlung des Betreibers (Klick-Weg):**"
-            echo "Repo → Settings → Code security and analysis → Code scanning (CodeQL)"
-            echo "→ **Default setup → Disable**. Danach übernimmt diese Wache die Security-Tab."
+            echo "**Einmalige Handlung des Betreibers (Klick-Weg, Stand 10/2026):**"
+            echo ""
+            echo "1. <https://github.com/${GITHUB_REPOSITORY}/settings/security_analysis>"
+            echo "   (manuell: Repo → **Settings** → Seitenleiste \"Security and quality\" →"
+            echo "   **Advanced Security**. Die Seite hieß bis 2025 \"Code security and"
+            echo "   analysis\" – unter dem alten Namen ist sie nicht mehr zu finden.)"
+            echo "2. Abschnitt **\"Code Security\"** → Zeile **\"CodeQL analysis\"**"
+            echo "3. Rechts das **\"...\"-Menü** öffnen → **Disable CodeQL**"
+            echo "   (Steht dort \"Switch to advanced\", ist das Default-Setup bestätigt aktiv."
+            echo "   Trotzdem **Disable CodeQL** wählen – \"Switch to advanced\" legt eine"
+            echo "   zweite, generierte codeql.yml an und macht das Problem schlimmer.)"
+            echo "4. Nachsorge, sonst bleiben die alten Alerts dauerhaft offen:"
+            echo "   Reiter **Security and quality** → **Code scanning** → einen Alert öffnen"
+            echo "   → rechts **\"Affected branches\"** → \`main\` → Dialog"
+            echo "   **\"Configurations analyzing\"** → alte Konfiguration per Papierkorb"
+            echo "   löschen (die Einträge \`/language:…\` dieser Wache stehen lassen) → **Save changes**"
+            echo ""
+            echo "Danach übernimmt diese Wache die Security-Tab."
             echo ""
             echo "Bis dahin gilt das Gate dieses Laufs als maßgeblich – es prüft denselben"
             echo "Bestand und schlägt bei jeder Security-Fundstelle fehl."
           } >> "$GITHUB_STEP_SUMMARY"
-          echo "::warning title=SARIF-Upload blockiert::Default-Setup vermutlich noch aktiv – Settings → Code security → Code scanning → Default setup → Disable. Analyse und Gate liefen trotzdem vollständig."
+          echo "::warning title=SARIF-Upload blockiert::Default-Setup vermutlich noch aktiv – Settings → Advanced Security → Code Security → Zeile 'CodeQL analysis' → ...-Menü → Disable CodeQL. Analyse und Gate liefen trotzdem vollständig."
 
       - name: Sicherheits-Gate (null Security-Fundstellen)
         env:
