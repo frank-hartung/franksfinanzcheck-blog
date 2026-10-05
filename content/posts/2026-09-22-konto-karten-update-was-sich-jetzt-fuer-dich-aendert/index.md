@@ -1,10 +1,10 @@
 ---
 lastmod: 2026-09-28
 title: "Konto & Karten-Update: Was sich jetzt für dich ändert"
-description: "Gebühren, Gratis-Kriterien und Kartenkosten ändern sich laufend. So prüfst du dein Girokonto, vermeidest stille Mehrkosten und vergleichst klug."
-date: 2026-09-22T09:23:53Z
-draft: true
-reserve: true
+description: "Konto & Karten-Update: Was sich jetzt für dich ändert: Gebühren, Gratis-Kriterien und Kartenkosten ändern sich laufend. So prüfst du dein Girokonto…"
+date: 2026-10-05T22:40:03Z
+draft: false
+reserve_published: 2026-10-05
 reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["News"]

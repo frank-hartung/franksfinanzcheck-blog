@@ -44,6 +44,8 @@ kurzantwort: "Viele Banken stellen ihre Standardkarten auf kostenlose Debit-Visa
 
 **Stand: 29.09.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Bei Tagesgeld‑ und Zinsangeboten lohnt sich gerade ein zweiter Blick. Viele Anbieter locken mit hohen Zinsen für Neukunden. Diese Zinsen gelten aber nur kurz und sinken dann wieder. Aus einem starken Angebot wird so schnell ein mittelmäßiges.
 
 ## Was ist passiert?

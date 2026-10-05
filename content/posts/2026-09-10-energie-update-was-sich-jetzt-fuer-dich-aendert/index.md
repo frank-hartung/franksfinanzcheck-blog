@@ -3,7 +3,9 @@ title: "Energie-Update: Was sich jetzt für dich ändert"
 description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
 date: 2026-10-05T21:26:21Z
 lastmod: 2026-09-25
-draft: false
+draft: true
+cadence_demoted: 2026-10-05T22:40:03Z
+cadence_grund: "publish-gate: Lesbarkeits-Gate nicht bestanden: Flesch 44.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585); Textverständn…"
 reserve_published: 2026-10-05
 reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Stromkosten senken"]
@@ -38,7 +40,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-**Stand: 10.09.2026.** Diese News-Einordnung fasst die aktuelle Lage kompakt zusammen. Tarife und Regeln ändern sich laufend – prüfe Details immer direkt beim jeweiligen Anbieter.
+Energie-Update: Was sich jetzt für dich ändert im Check: **Stand: 10.09.2026.** Diese News-Einordnung fasst die aktuelle Lage kompakt zusammen. Tarife und Regeln ändern sich laufend – prüfe Details immer direkt beim jeweiligen Anbieter.
 
 Der herannahende Herbst markiert für Haushalte eine entscheidende Zäsur in der Budgetplanung. Bevor die Heizperiode die Verbräuche in die Höhe treibt, bietet das Spätsommerfenster die Chance, die Weichen für das kommende Jahr neu zu stellen. Ein strukturiertes Energie-Update schützt vor dem automatischen Abfluss liquider Mittel im Frühjahr.
 
