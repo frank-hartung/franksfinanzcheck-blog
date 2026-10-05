@@ -1,0 +1,100 @@
+# ============================================================
+#  SLOT-WACHE (Content-Linie) – verpasste Engine-/Kadenz-Slots
+#  nachziehen, statt sie still zu verlieren.
+#
+#  WARUM (05.10.2026, Issue #601 „Tagesdefizit 1/2 LIVE“):
+#  GitHubs Scheduler lieferte an diesem Montag 4 von 7 planmäßigen
+#  Slots der Content-Linie nicht oder erst Stunden später:
+#    · Engine-Haupt-Slot 06:10 UTC  – nie gestartet
+#    · Engine-Fallback    17:40 UTC  – nie gestartet
+#    · Kadenz 10:35 / 16:35          – erst 19:22 UTC angekommen
+#  Ein Lauf, der nie startet, wird nie rot – kein Alerting, kein
+#  Issue, stille Tagesspitze. Das Repo kannte die Klasse bereits
+#  (Newsletter-Kadenz-Wache, 23.09.2026: „GitHub verwirft schedule-
+#  Ereignisse unter Last“), nur die Content-Linie hatte keinen
+#  Schutz. Details: TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-
+#  PREMIUM-2026-10-05.md
+#
+#  DIESE WACHE (Netz Nr. 4): Sie kennt die Soll-Slots aus den
+#  Workflow-Dateien selbst (geparst, nie abgetippt), erklärt einen
+#  Slot nach Soll + 45 min Gnadenfrist ohne einzigen Laufversuch
+#  für VERPASST und holt ihn über die GitHub-API nach
+#  (`gh workflow run` – dieselbe Freigabestufe wie der Cron, nichts
+#  darüber). Nur an Publikationstagen (Mo/Mi/Fr) und nur solange
+#  das Tagesziel (LIVE ≥ 2) offen ist. Nach dem letzten Slot
+#  meldet sie ein weiterbestehendes Defizit selbst
+#  (engine_issue.py --deficit), falls jeder Kadenz-Lauf und jeder
+#  Dispatch versagte.
+#
+#  WARUM ALLER 20 MINUTEN: Der eigene Cron hängt am selben Haken
+#  wie die Last – ein Netz, das nur einmal am Tag hängt, ist keins
+#  (Vorfall 25.09., newsletter-cadence.yml). Bei einem Tick alle
+#  20 Minuten überlebt die Wache selbst den Ausfall der Hälfte
+#  aller Ticks mit einem Tick pro Stunde; der Trockenlauf auf
+#  Ruhetagen kostet Sekunden.
+#
+#  Doppel-Fall ungefährlich: Kommt ein verschobener Cron doch
+#  noch, reiht ihn die concurrency-Gruppe `content-bot` hinter den
+#  Nachhol-Lauf; das Kadenz-Gate (2–3 LIVE) und der Mitternachts-
+#  Wächter in reserve_pool verhindern Über- wie Rückdatierung.
+#
+#  Diese Wache steht in der Wacht-Liste des Fehler-Alertings:
+#  Kann sie selbst nicht nachholen (fehlende actions:write,
+#  Netz), wird der Befund laut – ein Wächter, der schweigt, wäre
+#  die alte Lücke neu.
+# ============================================================
+name: Slot-Wache (Content-Slots nachziehen)
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"   # alle 20 min – häufige Ticks überleben Tick-Verluste
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:                    # NUR die Wache selbst – kein Lauf pro Commit
+      - ".github/workflows/slot-wache.yml"
+      - "scripts/slot_wache.py"
+
+permissions:
+  contents: read     # Bestand für die Tagesquote lesen
+  actions: write     # Laufbücher zählen + Nachhol-Dispatch
+  issues: write      # Defizit-Notmeldung nach letztem Slot (engine_issue)
+
+concurrency:
+  group: slot-wache
+  cancel-in-progress: false
+
+jobs:
+  wache:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Wachen-Selbsttest (Slot-Plan, Gnadenfrist, Vorfall 05.10.)
+        run: python3 scripts/slot_wache.py --selftest
+
+      - name: Slots nachzählen (und verpasste Läufe nachholen)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -o pipefail
+          python3 scripts/slot_wache.py --pruefen --md | tee /tmp/slot-wache.log
+          rc=${PIPESTATUS[0]}
+          cat /tmp/slot-wache.log >> "$GITHUB_STEP_SUMMARY"
+          exit "$rc"
+
+      - name: Befund laut machen (Annotation)
+        if: failure()
+        run: |
+          BEFUND=$(grep -m1 "Quote offen\|blind\|fehlgeschlagen" /tmp/slot-wache.log | sed 's/^[[:space:]]*//' | cut -c1-350)
+          echo "::error::Slot-Wache: Ein Content-Slot wurde verpasst und konnte nicht zuverlässig nachgeholt werden – Tagesziel gefährdet. ${BEFUND:-Details im Lauf-Log.}"

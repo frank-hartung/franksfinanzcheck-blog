@@ -97,6 +97,21 @@ def _diagnose() -> str:
     except Exception as e:  # noqa: BLE001 – Alarm geht IMMER raus
         zeilen.append(f"\n_(Kapazitäts-Diagnose nicht verfügbar: {e})_\n")
 
+    # Slot-Protokoll des Tages (ISSUE #601, 05.10.2026): Die Kapazitäts-
+    # Diagnose meldete an diesem Montag „29 frei disponierbare AUTO-Themen –
+    # Tagesziel gedeckt“, und trotzdem blieb der Tag bei 1/2 LIVE. Die
+    # Ursache stand in keinem der drei Reports, die das Issue empfahl:
+    # GitHubs Scheduler hatte 4 von 7 planmäßigen Slots der Content-Linie
+    # nie gestartet. Ein Defizit-Issue, das die Lauf-Realität des Tages
+    # verschweigt, nennt Zahlen, aber nicht die Ursache – deshalb hängt
+    # die Slot-Wache ihr Protokoll jetzt direkt an den Alarm (fail-open).
+    try:
+        import slot_wache as sw
+        zeilen.append(sw.diagnose_zeilen(
+            repo=os.environ.get("GITHUB_REPOSITORY", "")))
+    except Exception as e:  # noqa: BLE001 – Alarm geht IMMER raus
+        zeilen.append(f"\n_(Slot-Protokoll nicht verfügbar: {e})_\n")
+
     # Entwürfe, die fertig sind, aber auf einen Menschen warten.
     try:
         import json as _json
@@ -123,8 +138,10 @@ def _diagnose() -> str:
         "python3 scripts/engine_capacity.py   # Lage in einem Blick\n"
         "python3 scripts/reserve_topics.py --abgleich  # Phantom-Sperren lösen\n"
         "python3 scripts/reserve_topics.py --bericht   # Themen-Gedächtnis\n"
+        "python3 scripts/slot_wache.py --pruefen --ohne-dispatch  # Slot-Lage\n"
         "```\n\n"
-        "Hintergrund: `CONTENT-ENGINE-KAPAZITAET-PREMIUM-2026-10-02.md`\n")
+        "Hintergrund: `CONTENT-ENGINE-KAPAZITAET-PREMIUM-2026-10-02.md` · "
+        "`TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-PREMIUM-2026-10-05.md`\n")
     return "".join(zeilen)
 
 

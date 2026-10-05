@@ -108,6 +108,7 @@ on:
       - "Premium-Governance"
       - "Lesehilfen-Gate (Vorlesen + Kurzfassung)"
       - "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)"
+      - "Slot-Wache (Content-Slots nachziehen)"   # #601: holt verpasste Cron-Slots nach – kann sie das nicht, muss es laut werden
       - "Fristen-Check (Recht)"
       - "Redaktions-Standard Bestand (Capital/WiWo/ZEIT)"
       - "Redaktions-Standard neu (Capital/WiWo/ZEIT)"
