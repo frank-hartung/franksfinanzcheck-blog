@@ -157,9 +157,36 @@ Arbeit – sie brauchen gar keine neuen Themen.
 
 ---
 
+## Wenn die Slots gar nicht erst starten (Slot-Wache, #601)
+
+Am 05.10.2026 war die Kapazität top (29 freie AUTO-Themen) – und der Tag
+endete trotzdem mit 1/2 LIVE, weil GitHubs Scheduler 4 von 7 planmäßigen
+Slots der Content-Linie **nie gestartet** hatte. Ein Lauf, der nie startet,
+wird nie rot. Deshalb gibt es die Slot-Wache:
+
+```bash
+python3 scripts/slot_wache.py --pruefen --ohne-dispatch   # Trockenlauf (npm run engine:slots)
+python3 scripts/slot_wache.py --pruefen                   # verpasste Slots nachholen (CI)
+npm run test:engine:slots                                 # Selbsttest + 29 Unit-Tests
+```
+
+Sie kennt die Soll-Slots aus den Workflow-Dateien selbst (geparst, nie
+abgetippt), erklärt einen Slot nach **Soll + 45 Minuten ohne einzigen
+Laufversuch** für verpasst und holt ihn per Dispatch nach – aber nur an
+Publikationstagen und nur, solange das Tagesziel offen ist. Das
+Defizit-Issue trägt seit #601 zusätzlich das Slot-Protokoll des Tages
+(`Soll-Slots / verpasst / LIVE`), damit der Alarm die Ursache nennt und
+nicht nur das Symptom.
+
+Details und Beweisführung: `TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
+
+---
+
 ## Tests
 
 ```bash
 npm run test:engine:kapazitaet    # Selbsttest + 20 Unit-Tests
 npm run test:prompt:echo          # R16-Prompt-Echo, 14 Unit-Tests
+npm run test:engine:slots         # Slot-Wache: Selbsttest + 29 Unit-Tests
 ```
+

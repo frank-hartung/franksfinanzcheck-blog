@@ -173,6 +173,15 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Entscheidungslogik ein (Ruhetag, Fenstergrenze, Vorfall-Erkennung,
           # kein Auto-Retry nach rotem Lauf) und gehört ins Minimum.
           "newsletter_cadence.py",
+          # Slot-Wache der Content-Linie (05.10.2026, #601): Dieselbe
+          # Fehlerklasse wie oben, nur am Herzstück – GitHubs Scheduler
+          # startete 4 von 7 planmäßigen Slots nie, der Tag endete 1/2 LIVE,
+          # und kein einziger Lauf war rot. Die Wache parst den Soll-Plan aus
+          # den Workflow-Dateien (keine zweite Handliste), holt verpasste
+          # Slots per Dispatch nach und meldet das Defizit, wenn nichts mehr
+          # nachholbar ist. Ihr --selftest stellt den Vorfall nach und
+          # gehört ins vertragliche Minimum.
+          "slot_wache.py",
           # Zustellbarkeits-Wache (23.09.2026, Lauf #21): Der Versand war
           # dreifach verriegelt, die Kette davor ungeprüft. Ein Lauf meldete
           # „Absender-Problem“ für eine Cloudflare-Signaturblockage vor der API,

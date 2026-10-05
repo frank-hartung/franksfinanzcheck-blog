@@ -791,6 +791,42 @@ Version wirklich die geprüfte war. Die Antwort ist die **Release-Scorecard**:
   `npm run release:artikel -- <slug>` · `npm run test:release`.
   Runbook mit den sechs Antworten: `docs/ANLEITUNG-RELEASE-SCORECARD.md`.
 
+## Verpasste Slots werden nachgeholt, nicht beklagt (Slot-Wache, seit #601, 05.10.2026)
+
+Am 05.10.2026 endete ein Publikationstag mit 1/2 LIVE, obwohl die
+Kapazität grün war – GitHubs Scheduler hatte 4 von 7 planmäßigen Slots der
+Content-Linie nie gestartet (Engine 06:10 + 17:40, Kadenz 10:35 + 16:35;
+der 16:35er kam erst 2 h 47 min später als einziger). Ein Lauf, der nie
+startet, wird nie rot. Das Repo kannte die Klasse von der Newsletter-
+Kadenz-Wache (23.09.) – nur die Content-Linie hatte keinen Schutz.
+
+- **Soll-Plan geparsed, nie abgetippt:** `scripts/slot_wache.py` liest die
+  cron-Zeilen aus `content-engine-v2.yml` und `kadenz-endkontrolle.yml` –
+  wer den Plan verschiebt, verschiebt die Wache mit. Nicht verstandene
+  cron-Syntax wird abgelehnt und gemeldet, nie geraten.
+- **Urteil:** Slot + 45 min Gnadenfrist ohne einzigen Laufversuch =
+  verpasst. Ein FEHLGESCHLAGENER oder LAUFENDER Lauf bedient den Slot
+  (laut, kein Auto-Retry) – dieselbe Disziplin wie bei der Newsletter-
+  Kadenz-Wache.
+- **Eingriff begrenzt:** nur an Publikationstagen (SSOT
+  `cadence_guard.PUBLICATION_DAYS`), nur solange LIVE < Mindestziel, ein
+  Nachhol-Dispatch je Workflow und Tick (`gh workflow run`, dieselbe
+  Freigabestufe wie der Cron). Der Doppel-Fall ist harmlos: concurrency-
+  Gruppe `content-bot` reiht ein, das Kadenz-Gate deckelt 2–3 LIVE.
+- **Notmeldung:** Nach dem letzten Slot + Gnadenfrist mit offener Quote
+  meldet die Wache das Defizit selbst (`engine_issue.py --deficit`, nur
+  wenn noch kein offenes existiert) – der Alarm geht auch raus, wenn jeder
+  Cron UND jeder Dispatch versagte.
+- **Das Defizit-Issue nennt die Ursache:** `engine_issue._diagnose()`
+  hängt das Slot-Protokoll des Tages an (Soll-Slots / verpasst / LIVE).
+- **Eigener Takt:** `slot-wache.yml` tickt alle 20 Minuten (häufige Ticks
+  überleben Tick-Verluste am selben Haken), beweist sich bei jedem Merge
+  (push auf die eigenen Pfade) und steht in der Wacht-Liste des Fehler-
+  Alertings sowie in `governance_contract.GUARDS`.
+- Bedienung: `npm run engine:slots` (Trockenlauf) ·
+  `npm run test:engine:slots` (Selbsttest + 29 Unit-Tests).
+  Vorgangsbericht: `TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
