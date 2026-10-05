@@ -119,7 +119,7 @@ Prüfe deine Konten regelmäßig und beobachte den Markt. Ändern sich die Bedin
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Angebote vergleichen**](/go/girokonto/)
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt C24 Bank Girokonto ansehen**](/go/girokonto/)
 
 ***Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
