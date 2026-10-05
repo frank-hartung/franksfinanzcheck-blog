@@ -100,6 +100,38 @@
 #    dieselbe Exit-128-Klasse bereits 28.08./31.08.2026 (gelöschte
 #    Feature-Branches), siehe scripts/tests/test_git_sync.py.
 #
+#  HÄRTUNG #590 (Content-Engine v2, Vorgang WF-A535, 05.10.2026):
+#    Run 37325495772 lief 23 Minuten fehlerfrei und verlor am Ende ALLES:
+#    drei fertige Bot-Commits (Qualitäts-Fixes, Sofort-Optimierung, finale
+#    Veröffentlichungsgates) wurden nie gepusht. Hergang:
+#      14:26  Engine startet auf main-Stand 30263d66.
+#      14:46  Ein Mensch merged PR #585 und schreibt neun BESTANDS-Artikel
+#             redaktionell um; 14:47 heilt der Deploy-Lauf drei davon erneut.
+#      14:53  Der Phase-2-Push rebaset gegen diesen neuen Stand und trifft auf
+#             sieben Konflikte in `content/posts/*/index.md`. Harter Stopp
+#             (richtig: kein Blind-Merge über Content) – aber der Schritt hat
+#             `continue-on-error: true`, also lief der Lauf weiter.
+#      14:55  Phase 3 und die Endabnahme stapeln zwei weitere Commits auf den
+#             NICHT gepushten Stand. Der letzte Schritt ohne `continue-on-error`
+#             („Persist final acceptance corrections") scheitert am selben
+#             Konflikt → roter Lauf, Fehlerticket #590 rät zu API-Keys.
+#    Beides war falsch: der Tagesertrag darf nicht an einer parallelen
+#    Bearbeitung sterben, und redaktioneller Text darf nicht überschrieben
+#    werden. Auflösung (OPT-IN, Default bleibt hart):
+#      GIT_SYNC_BESTAND_POLICY=bestand-gewinnt
+#        → Kollidiert ein Bestands-Artikel, gewinnt der FREMDE (neuere) Stand
+#          aus origin/$BRANCH (`--ours` im Rebase). Kein Zeichen fremder
+#          Redaktion geht verloren; verloren geht nur die maschinelle Heilung
+#          für genau diese Datei – und die ist deterministisch reproduzierbar.
+#        → Jeder so aufgelöste Pfad wird in $GIT_SYNC_NACHHEIL_LOG protokolliert.
+#          `scripts/nachheilung.py --fix` zieht die Heilung danach auf dem
+#          neuen Textstand nach (Content-Engine tut das im selben Lauf).
+#        → Wird ein Bot-Commit dadurch vollständig gegenstandslos, wird er
+#          übersprungen (`git rebase --skip`) statt den Rebase zu blockieren.
+#    Ohne die Variable verhält sich der Kern exakt wie vorher: echter
+#    Content-Konflikt = harter Stopp. Belege: Run 37325495772 (#590),
+#    37066812647, 37007043195; Tests in scripts/tests/test_git_sync.py.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -113,6 +145,9 @@
 #    GIT_SYNC_TRIES        Gesamt-Runden Rebase+Push   (Default: 3)
 #    GIT_SYNC_FETCH_TRIES  Fetch-Versuche pro Runde    (Default: 3)
 #    GIT_SYNC_BACKOFF      Backoff-Basis in Sekunden   (Default: 4)
+#    GIT_SYNC_BESTAND_POLICY  hart (Default) | bestand-gewinnt  (#590, s. o.)
+#    GIT_SYNC_NACHHEIL_LOG    Protokoll der nachzuheilenden Artikel
+#                             (Default: .git_sync_nachheilung.txt, gitignored)
 #
 #  Exit-Codes:
 #    0 = alles ok (oder nichts zu committen / nichts zu pushen)
@@ -136,6 +171,15 @@ SYNC_OK_VAR="${SYNC_OK_VAR:-GEHEILT}"
 GIT_SYNC_TRIES="${GIT_SYNC_TRIES:-3}"
 GIT_SYNC_FETCH_TRIES="${GIT_SYNC_FETCH_TRIES:-3}"
 GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
+# #590 (WF-A535): Umgang mit Konflikten auf BESTANDS-Artikeln.
+#   hart            = wie bisher: kein Blind-Merge, Lauf endet rot.
+#   bestand-gewinnt = der fremde (neuere) Stand aus origin/$BRANCH gewinnt,
+#                     die maschinelle Heilung wird protokolliert und später
+#                     auf dem neuen Text nachgezogen.
+GIT_SYNC_BESTAND_POLICY="${GIT_SYNC_BESTAND_POLICY:-hart}"
+GIT_SYNC_NACHHEIL_LOG="${GIT_SYNC_NACHHEIL_LOG:-.git_sync_nachheilung.txt}"
+# Zähler für die Abschlussmeldung (wie viele Artikel wurden abgegeben?).
+BESTAND_UEBERNOMMEN=0
 
 # Warum der letzte Synchronisierungsversuch gescheitert ist:
 #   netzwerk | auth | schutz | konflikt | rebase | autostash | leer | ref_fehlt
@@ -301,6 +345,28 @@ fetch_mit_retry() {
 # während andere Bots Reports/JSONL-Historien fortschreiben. Das ist kein
 # fachlicher Konflikt und soll keinen roten Run erzeugen (#233-Klasse).
 # Content-Dateien bleiben bewusst tabu: echter Textkonflikt => harter Fehler.
+# --- #590: Bestands-Konflikt sauber abgeben statt blockieren -----------------
+#  Voraussetzung: Die Datei existiert auf BEIDEN Seiten (Stufe 2 = origin,
+#  Stufe 3 = der gerade anzuwendende Bot-Commit). Lösch-/Umbenenn-Konflikte
+#  bleiben bewusst hart – dort ist „wer gewinnt" keine Formsache.
+bestand_konflikt_abgebbar() {
+  local f="$1"
+  git show ":2:$f" >/dev/null 2>&1 || return 1
+  git show ":3:$f" >/dev/null 2>&1 || return 1
+  return 0
+}
+
+# Pfad für die spätere Nachheilung vormerken (dedupliziert, eine Zeile je Datei).
+nachheilung_vormerken() {
+  local f="$1" log="$GIT_SYNC_NACHHEIL_LOG"
+  [ -n "$log" ] || return 0
+  mkdir -p "$(dirname "$log")" 2>/dev/null || true
+  if [ -f "$log" ] && grep -qxF "$f" "$log" 2>/dev/null; then
+    return 0
+  fi
+  printf '%s\n' "$f" >> "$log"
+}
+
 auto_resolve_generated_rebase_conflicts() {
   local conflicts f safe=1 guard=0
   conflicts=$(git diff --name-only --diff-filter=U || true)
@@ -484,6 +550,25 @@ sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
 ' "$f"; then
             git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
             git add -- "$f"
+          elif [ "$GIT_SYNC_BESTAND_POLICY" = "bestand-gewinnt" ] \
+               && bestand_konflikt_abgebbar "$f"; then
+            # REPARATUR 05.10.2026 (Issue #590, Vorgang WF-A535):
+            # Ein BESTANDS-Artikel wurde parallel fremd bearbeitet (Mensch per
+            # PR, Deploy-Heilung, Bestands-Workflow), während dieser Lauf ihn
+            # maschinell geheilt hat. Beide Seiten sind legitim – aber nur eine
+            # ist unwiederbringlich: der fremde TEXT. Die Heilung dieses Laufs
+            # ist deterministisch und auf dem neuen Text in Sekunden erneut
+            # herstellbar.
+            # Deshalb: der fremde (neuere) Stand gewinnt (`--ours` = origin),
+            # der Pfad wandert ins Nachheil-Protokoll, und `nachheilung.py`
+            # zieht die Heilung unmittelbar danach auf dem neuen Text nach.
+            # Diese Klasse ist OPT-IN (GIT_SYNC_BESTAND_POLICY) – ohne die
+            # Variable bleibt es beim harten Stopp.
+            git checkout --ours -- "$f" >/dev/null 2>&1 || safe=0
+            git add -- "$f"
+            nachheilung_vormerken "$f"
+            BESTAND_UEBERNOMMEN=$(( BESTAND_UEBERNOMMEN + 1 ))
+            echo "    ↪ Bestand gewinnt: $f (fremde Fassung übernommen, Heilung wird nachgezogen)"
           else
             safe=0
           fi
@@ -504,7 +589,18 @@ sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
       return 1
     fi
 
-    GIT_EDITOR=true git rebase --continue 2>&1 | sed 's/^/  rebase: /' || true
+    # #590: Nach einer Abgabe an den Bestand kann der Bot-Commit vollständig
+    # gegenstandslos sein (alle seine Änderungen sind im Zielstand bereits
+    # enthalten oder wurden bewusst dem Bestand überlassen). `git rebase
+    # --continue` bricht dann mit „No changes" ab und der komplette Rebase
+    # bliebe stecken – obwohl es nichts mehr zu entscheiden gibt. Genau das
+    # darf keinen roten Lauf erzeugen: der Commit wird übersprungen.
+    if git diff --cached --quiet 2>/dev/null; then
+      echo "  rebase: Commit nach Konfliktlösung gegenstandslos – wird übersprungen."
+      GIT_EDITOR=true git rebase --skip 2>&1 | sed 's/^/  rebase: /' || true
+    else
+      GIT_EDITOR=true git rebase --continue 2>&1 | sed 's/^/  rebase: /' || true
+    fi
   done
 
   # Der Rebase muss jetzt WIRKLICH beendet sein (kein rebase-merge/-apply
@@ -513,6 +609,28 @@ sys.exit(0 if is_reserve_draft(stage(2)) and is_reserve_draft(stage(3)) else 1)
      [ -d "$(git rev-parse --git-path rebase-apply 2>/dev/null)" ]; then
     echo "  rebase: trotz Konfliktlösung nicht abgeschlossen – Abbruch."
     return 1
+  fi
+
+  # #590: Eine Abgabe an den Bestand ist kein Fehler, aber auch keine
+  # Nebensache – sie steht sichtbar im Lauf und benennt den Nachheil-Auftrag.
+  if [ "$BESTAND_UEBERNOMMEN" -gt 0 ]; then
+    echo "::warning::git_sync.sh: $BESTAND_UEBERNOMMEN Bestands-Artikel wurden "\
+         "parallel fremd bearbeitet – die fremde (neuere) Fassung gewinnt, "\
+         "kein Text geht verloren. Die maschinelle Heilung wird auf dem neuen "\
+         "Stand nachgezogen (Protokoll: $GIT_SYNC_NACHHEIL_LOG, Werkzeug: "\
+         "python3 scripts/nachheilung.py --fix)."
+    if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+      {
+        echo "### Bestands-Abgleich (WF-A535 #590)"
+        echo ""
+        echo "$BESTAND_UEBERNOMMEN Artikel wurden parallel fremd bearbeitet; die fremde Fassung gewinnt."
+        echo "Die maschinelle Heilung wird auf dem neuen Textstand nachgezogen:"
+        echo ""
+        echo '```'
+        cat "$GIT_SYNC_NACHHEIL_LOG" 2>/dev/null || true
+        echo '```'
+      } >> "$GITHUB_STEP_SUMMARY"
+    fi
   fi
   return 0
 }
@@ -535,6 +653,11 @@ rebase_gegen_origin() {
     printf '%s\n' "$out" | sed 's/^/  rebase: /'
     rebase_dir=$(git rev-parse --git-path rebase-merge 2>/dev/null || true)
     if [ -d "$rebase_dir" ] || [ -d "$(git rev-parse --git-path rebase-apply 2>/dev/null || true)" ]; then
+      # #590: Die Dateiliste ist die Diagnose. Sie wird VOR dem Abbruch
+      # gesichert, damit die Annotation (und damit das Fehlerticket) die
+      # Wahrheit nennt, statt zu API-Keys und GitHub-Status zu raten.
+      local offene
+      offene=$(git diff --name-only --diff-filter=U 2>/dev/null | head -n 12 | tr '\n' ' ')
       if auto_resolve_generated_rebase_conflicts; then
         echo "  rebase: generierte Bot-Artefakt-Konflikte automatisch gelöst."
         return 0
@@ -543,9 +666,12 @@ rebase_gegen_origin() {
       SYNC_FAIL_URSACHE=konflikt
       echo "::error::git_sync.sh: Rebase-Konflikt gegen origin/$BRANCH "\
            "(ein paralleler Workflow hat dieselben Zeilen geändert). "\
+           "Betroffen: ${offene:-unbekannt}. "\
            "Kein Push – Arbeitsstand bleibt lokal sauber. "\
            "Nur echte Content-Konflikte benötigen manuelles Mergen; "\
-           "generierte Report-/JSONL-Konflikte werden automatisch geheilt."
+           "generierte Report-/JSONL-Konflikte werden automatisch geheilt. "\
+           "Bestands-Artikel kann der Aufrufer per "\
+           "GIT_SYNC_BESTAND_POLICY=bestand-gewinnt abgeben (WF-A535 #590)."
     elif printf '%s' "$out" | grep -qi 'autostash'; then
       # Extremfall: Rebase selbst ok, aber das Wiedereinsetzen des Autostash
       # stand in Konflikt. Die Änderungen liegen sicher im Stash – laut

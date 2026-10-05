@@ -45,6 +45,16 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # WF-A535 (#590, 05.10.2026): Dieser Lauf schreibt 20–40 Minuten lang an
+    # einem Bestand, an dem gleichzeitig Menschen (PR-Merges) und andere
+    # Workflows arbeiten. Kollidiert eine maschinelle Heilung mit einer
+    # fremden Fassung desselben Artikels, gewinnt die FREMDE, neuere Fassung
+    # (`git_sync.sh`), der Artikel wird protokolliert und die Heilung
+    # unmittelbar danach auf dem neuen Text nachgezogen
+    # (`scripts/nachheilung.py`). Vorher starb daran der komplette
+    # Tagesertrag: drei fertige Commits, nie gepusht (Run 37325495772).
+    env:
+      GIT_SYNC_BESTAND_POLICY: bestand-gewinnt
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v7.0.1
@@ -563,13 +573,62 @@ jobs:
           python3 scripts/reserve_recert.py --selftest
           python3 scripts/reserve_recert.py --fix || true
 
+      # WF-A535 (#590, 05.10.2026): Dieser Schritt war die einzige Stelle der
+      # Linie OHNE Fehlertoleranz – und damit die Stelle, an der ein Problem
+      # sichtbar wurde, das 20 Minuten früher entstanden war. Er bleibt die
+      # Wahrheitsinstanz (ein nicht gepushter Tagesertrag ist ehrlich rot),
+      # aber er meldet die Ursache jetzt selbst, statt den Lauf wortlos
+      # abzubrechen: `continue-on-error` + Auswertung im Abschluss-Schritt.
+      # So laufen Nachheilung, Status und Defizit-Wache noch, und das
+      # Fehlerticket nennt „Synchronisation" statt „API-Key prüfen".
       - name: Persist final acceptance corrections
+        id: persist
         if: ${{ !cancelled() }}
+        continue-on-error: true
         run: |
           git add -A
           if ! git diff --cached --quiet; then
             git commit -m "content: finale Veröffentlichungsgates und geprüfte Reserve"
             scripts/git_sync.sh --push-only
+          fi
+
+      # WF-A535 (#590): Was der Bestand gewonnen hat, bekommt seine Heilung
+      # zurück – im selben Lauf, auf dem NEUEN Text. Ohne diesen Schritt
+      # bliebe ein fremd überschriebener Artikel bis zur nächsten
+      # blog-health-daily ungeheilt (bis zu 24 h).
+      - name: "Heilung nach Fremdänderung nachziehen (WF-A535 #590)"
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          python3 scripts/nachheilung.py --selftest
+          if python3 scripts/nachheilung.py --hat-arbeit; then
+            python3 scripts/nachheilung.py --fix || echo "⚠ Nachheilung unvollständig – Auftrag bleibt im Protokoll"
+            git add -A
+            if ! git diff --cached --quiet; then
+              git commit -m "content: Heilung nach paralleler Bearbeitung nachgezogen"
+              scripts/git_sync.sh --push-only
+            else
+              echo "Nachheilung ohne Änderung – der neue Textstand war bereits sauber."
+            fi
+          else
+            echo "Kein Bestands-Artikel abgegeben – nichts nachzuheilen."
+          fi
+
+      # WF-A535 (#590): Ehrlichkeits-Wache. Ein Lauf, der lokal committet und
+      # nie gepusht hat, sieht im Log aus wie ein Erfolg – genau das war der
+      # Schaden. Diese Zeile macht den Unterschied zwischen „getan" und
+      # „angekommen" sichtbar, auch wenn alles andere grün ist.
+      - name: "Synchronstand prüfen (WF-A535 #590)"
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          git fetch -q origin main --prune --no-tags || true
+          OFFEN=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+          if [ "${OFFEN:-0}" -gt 0 ]; then
+            echo "::warning::$OFFEN Commit(s) dieses Laufs sind NICHT auf main angekommen – siehe Schritt „Persist final acceptance corrections“ und git_sync-Meldung."
+            git log --oneline origin/main..HEAD | sed 's/^/  nicht gepusht: /'
+          else
+            echo "✅ Synchron: alle Commits dieses Laufs liegen auf main."
           fi
 
       # ================= PHASE 4: STATUS & TAGESDEFIZIT (26.08.2026) =================
@@ -603,6 +662,16 @@ jobs:
         if: ${{ !cancelled() }}
         run: |
           RC='${{ steps.final_release.outputs.rc }}'
+          # WF-A535 (#590): Die dritte ehrlich rote Klasse ist der
+          # SYNCHRONVERLUST – fertige Arbeit, die main nie erreicht hat.
+          # Sie wird zuerst geprüft, weil sie die teuerste ist: Ein Lauf, der
+          # produziert und nicht abliefert, sieht in jeder anderen Statistik
+          # nach Erfolg aus (Run 37325495772: drei Commits, 23 Minuten Arbeit,
+          # nichts auf main, Ticket riet zu API-Schlüsseln).
+          if [ "${{ steps.persist.outcome }}" != 'success' ]; then
+            echo "::error::SYNCHRONVERLUST (WF-A535 #590) – die Endabnahme konnte ihren Stand nicht nach main bringen. Ursache steht wörtlich im Schritt „Persist final acceptance corrections“ (git_sync.sh nennt Datei und Klasse: konflikt/schutz/auth/netzwerk). Kein Tagesdefizit, kein API-Key-Problem. Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md bzw. den genannten Artikel von Hand angleichen."
+            exit 1
+          fi
           if [ "${{ steps.final_release.outcome }}" = 'success' ]; then
             exit 0
           fi

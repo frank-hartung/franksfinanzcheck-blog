@@ -180,6 +180,28 @@ Abschnitt Troubleshooting, und `docs/INCIDENT-2026-10-01-e2e-suite-492.md`.
 - Agenten-Tokens haben KEINE `workflows`-Permission: Workflow-Dateien nur
   per Patch/PR mit vollwertigem Token ändern (siehe README, Known Issue).
 
+## Parallele Bearbeitung: der Bestand gewinnt (seit #590, 05.10.2026)
+
+Menschen (PR-Merges) und Automatik arbeiten am selben Bestand. Kollidiert eine
+**maschinelle Heilung** mit einer **fremden, neueren Fassung** desselben
+Artikels, gewinnt die fremde Fassung – und die Heilung wird nachgezogen, nicht
+vergessen. Unwiederbringlich ist Text; Heilung ist reproduzierbar.
+
+- **Schalter (Opt-in, nicht global):** `GIT_SYNC_BESTAND_POLICY=bestand-gewinnt`
+  in `content-engine-v2.yml`. Ohne die Variable bleibt ein Content-Konflikt in
+  `scripts/git_sync.sh` ein **harter Stopp** – kein Blind-Merge, nirgends.
+- **Nachheilung:** `scripts/git_sync.sh` protokolliert jeden abgegebenen
+  Artikel in `.git_sync_nachheilung.txt` (gitignored),
+  `scripts/nachheilung.py --fix` heilt ihn im selben Lauf auf dem neuen Text
+  (offline, deterministisch, keine Geldfläche, < 1 s).
+- **Reserve bleibt Maschinensache:** Bei zwei Reserve-Entwürfen gewinnt
+  weiterhin der frische Lauf (#295) – diese Regel hat Vorrang.
+- **Ehrlichkeit:** Ein nicht gepushter Tagesertrag bleibt rot, aber als eigene
+  Klasse (`SYNCHRONVERLUST`) mit Datei und Ursache – nie wieder „API-Key
+  prüfen", während ein Rebase klemmt.
+- Vor jedem Umbau am Sync-Kern: `npm run test:sync` (47 Verträge) · Hintergrund:
+  `SYNCHRONVERLUST-ENGINE-590-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
+
 ## Alarm-Routing (seit #272, 12.09.2026)
 
 **Nie wieder einen Befund ohne Besitzer melden.** Jeder neue Melde-Befund
