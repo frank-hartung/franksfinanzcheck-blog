@@ -126,6 +126,13 @@ def _selftest() -> list[str]:
                     err.append(f"dichte_saetze: „{wort}“ doppelt in „{satz}“")
             if not satz.endswith("."):
                 err.append(f"dichte_saetze: kein Satzende in „{satz}“")
+    for kw_fp in ("Bankgebühren sparen", "Online-Konten", "Gasrechnung senken"):
+        geheilt = heal_first_paragraph("Ein ganz normaler Einleitungsabsatz ohne das "
+                                  "Stichwort, lang genug für die Heilung.", kw_fp)
+        if kw_fp not in geheilt:
+            err.append(f"heal_first_para: Keyword nicht wortgleich bei „{kw_fp}“")
+        if kw_fp.lower() != kw_fp and kw_fp.lower() in geheilt:
+            err.append(f"heal_first_para: Keyword kleingeschrieben bei „{kw_fp}“")
     if dichte_saetze("") or dichte_saetze(None):
         err.append("dichte_saetze: leeres Keyword liefert Sätze")
     # Idempotenz: eine zweite Heilung darf nichts mehr anfügen.
@@ -315,16 +322,11 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
                     f"ordnest die nächsten Schritte anhand transparenter Kriterien ein.\n\n")
         return lead + einstieg + body
     first_para = paras[first_idx].strip()
-    lowered_kw = main_kw.lower()
-    if "gasrechnung" in norm(main_kw):
-        new_first = f"Wer seine {lowered_kw} senken will, sollte im Spätsommer handeln. {first_para}"
-    elif "frugalismus" in norm(main_kw):
-        new_first = f"{main_kw} helfen dir, teure Alltagsfehler zu vermeiden. {first_para}"
-    elif "dsl" in norm(main_kw) or "wlan" in norm(main_kw) or "dns" in norm(main_kw):
-        new_first = f"{main_kw} im Check: {first_para}"
-    else:
-        # natürliche Einleitung
-        new_first = f"Du willst {lowered_kw}? {first_para}"
+    # #585-Nachtrag: KEIN `.lower()` und keine Themen-Sonderlocken mehr. Beides
+    # hat Ruinen erzeugt („Du willst bankgebühren sparen?", „Du willst
+    # online-konten?"). Das Keyword steht wortgleich vor dem Doppelpunkt – die
+    # einzige Stellung, die für jede Wortart grammatisch trägt.
+    new_first = f"{main_kw} im Check: {first_para}"
     paras[first_idx] = new_first
     return lead + "\n\n".join(paras)
 

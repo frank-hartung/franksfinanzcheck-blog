@@ -625,6 +625,37 @@ def check_keyword_ruinen(rel: str, body: str, keywords=()) -> list:
                         "Keyword, bitte korrigieren)",
                         m.group(0)))
 
+    # Dritter Beweisweg: das vollständige Keyword steht im Text, aber ein darin
+    # großgeschriebenes Wort ist klein („Du willst mietwagen buchen?",
+    # „Du willst standby kosten?"). Nur die GANZE Phrase zählt – ein einzelnes
+    # Wort könnte auch als Verb gemeint sein („sparen"), die Phrase nicht.
+    for kw in keywords or ():
+        teile = str(kw).split()
+        if len(teile) < 2 or not any(w[:1].isupper() for w in teile):
+            continue
+        muster_kw = re.compile(r"\b" + r"\s+".join(re.escape(w) for w in teile) + r"\b",
+                               re.IGNORECASE)
+        for m in muster_kw.finditer(text):
+            gefunden = m.group(0).split()
+            # Folgt dem klein geschriebenen Wort im Text ein GROSSES, war es
+            # ein Adjektiv vor seinem Substantiv („deine finanzielle Freiheit")
+            # – im Keyword steht es nur wegen der Titel-Schreibweise groß.
+            schief = [soll for i, (soll, ist) in enumerate(zip(teile, gefunden))
+                      if soll[:1].isupper() and ist[:1].islower()
+                      and not (i + 1 < len(gefunden) and gefunden[i + 1][:1].isupper())
+                      # Das ERSTE Keyword-Wort steht nur wegen der
+                      # Titel-Schreibweise groß („Sicher heizen"). Beweis muss
+                      # dann aus dem Text kommen: mindestens einmal satzintern
+                      # groß – sonst ist es Adjektiv oder Verb.
+                      and (i > 0 or gross.get(soll.lower(), 0) >= 1)]
+            if schief and m.group(0) not in gemeldet:
+                gemeldet.add(m.group(0))
+                out.append((rel, "R17-KEYWORD-KASUS",
+                            f"Keyword klein geschrieben: \u201e{m.group(0)}\u201c statt "
+                            f"\u201e{kw}\u201c (maschinell eingesetztes Keyword, bitte "
+                            "korrigieren)",
+                            m.group(0)))
+
     for absatz in absaetze:
         if re.search(r"\]\(|https?://|👉|💶|💡|→", absatz):
             continue

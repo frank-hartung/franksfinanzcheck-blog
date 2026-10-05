@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Du willst standby kosten? Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro Kilowattstunde aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein ziemlich teures rotes Lämpchen.
+Standby Kosten im Check: Zwei Watt im Bereitschaftsmodus wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro Kilowattstunde aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein ziemlich teures rotes Lämpchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

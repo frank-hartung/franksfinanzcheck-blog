@@ -33,7 +33,7 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-Du willst mietwagen buchen? Die Vorfreude ist groß. Doch am Schalter kommt oft das böse Erwachen.
+Mietwagen buchen im Check: Die Vorfreude ist groß. Doch am Schalter kommt oft das böse Erwachen.
 
 Der Vermieter verlangt eine **Kaution zwischen 900 € und 2.500 €**. Sie wird auf der Kreditkarte blockiert. Wer keine echte Kreditkarte hat, steht ohne Auto da.
 
