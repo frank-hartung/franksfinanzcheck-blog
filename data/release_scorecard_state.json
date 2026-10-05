@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T18:41:57Z",
+  "generated_at": "2026-10-05T21:27:36Z",
   "modus": "kandidaten",
-  "commit": "e2225531acf5d02db95a8ddb0214c2aef7489ecf",
+  "commit": "2c33fccf8295016a4b5858b3b62c8f81980c9a31",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "3202c21f77050508ced5699bd8aafcb02d0ab980251c21b60875e11354b20e5a",
@@ -446,6 +446,23 @@
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
     },
+    "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert": {
+      "sha256": "c93bdbf3db9d2a3e53094736b9d5d1ebf1c6a570c06ffede5bdd1d6eef0865b7",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-11",
+      "siegel_drift": "neu versiegelt"
+    },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
       "sha256": "943ac0b631e390b3c299c564e4e7c41508ac2afaa3318e314f0ab3e00aca204f",
       "urteil": "freigabe-reif",
@@ -617,7 +634,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-      "sha256": "d244cf4953e80dfddf6f98d7141c024da7b39deac708069c21c17be06c8a3176",
+      "sha256": "676e2bdeef7c1b62b13b752b71fee2184ac1feac82e0d6dc5968f197b30492ad",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -631,7 +648,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
       "sha256": "f418b520cd146b97a4a60f34d62a5de4e88b4f73917746f49fbc6e87cc3dfc5b",
