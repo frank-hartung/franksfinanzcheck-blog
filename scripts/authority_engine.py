@@ -22,7 +22,9 @@ import json
 import os
 import re
 import sys
+import tempfile
 from pathlib import Path
+from urllib.parse import urlsplit
 
 try:
     import yaml
@@ -36,6 +38,29 @@ MEASUREMENTS = ROOT / "data/authority_measurements"
 REPORT = ROOT / "AUTHORITY-RADAR.md"
 BRAND_RE = re.compile(r"franks?\s*finanzcheck|frank\s+hartung", re.I)
 VALID_EVIDENCE = {"editorial_link", "media_mention", "interview", "cooperation"}
+VALID_SOURCES = {"google-search-console-csv", "first-party-audience-aggregate"}
+RATE_KEYS = {"newsletter_click_rate", "returning_reader_rate", "conversion_rate"}
+PERIOD_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+
+
+def valid_period(value):
+    return bool(PERIOD_RE.fullmatch(str(value or "")))
+
+
+def atomic_json_write(path, payload):
+    """Replace a measurement atomically so a cancelled run cannot leave half JSON."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    handle, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(handle, "w", encoding="utf-8") as stream:
+            json.dump(payload, stream, ensure_ascii=False, indent=2)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 def parse_date(value):
@@ -97,12 +122,23 @@ def validate(strategy, evidence):
             p = local_path(a.get(field))
             if p and not p.exists():
                 errors.append(f"{aid}: Datei fehlt: {p.relative_to(ROOT)}")
-    for item in evidence.get("evidence") or []:
+    evidence_items = evidence.get("evidence") or []
+    evidence_ids = [item.get("id") for item in evidence_items]
+    if any(not ident for ident in evidence_ids):
+        errors.append("Jeder Evidenzbeleg braucht eine id.")
+    if len(evidence_ids) != len(set(evidence_ids)):
+        errors.append("Evidenz-IDs sind doppelt vergeben.")
+    for item in evidence_items:
         ident = item.get("id") or "Evidenz ohne id"
         if item.get("kind") not in VALID_EVIDENCE:
             errors.append(f"{ident}: ungültiger kind-Wert.")
-        if not str(item.get("url") or "").startswith("https://"):
+        url = str(item.get("url") or "")
+        parsed = urlsplit(url)
+        if parsed.scheme != "https" or not parsed.netloc:
             errors.append(f"{ident}: öffentliche https-URL fehlt.")
+        if any(key.lower().startswith(("utm_", "fbclid", "gclid")) for key in
+               (part.split("=", 1)[0] for part in parsed.query.split("&") if part)):
+            errors.append(f"{ident}: Beleg-URL enthält Tracking-Parameter.")
         if not parse_date(item.get("published")):
             errors.append(f"{ident}: published-Datum fehlt/ungültig.")
     # Belegte Zahlen dürfen nie ohne Evidenz existieren.
@@ -119,12 +155,63 @@ def load_measurements():
         return out
     for path in sorted(MEASUREMENTS.glob("*.json")):
         try:
+            display_path = str(path.relative_to(ROOT))
+        except ValueError:
+            display_path = str(path)
+        try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            data["_file"] = str(path.relative_to(ROOT))
+            data["_file"] = display_path
             out.append(data)
         except (OSError, json.JSONDecodeError):
-            out.append({"_file": str(path.relative_to(ROOT)), "invalid": True})
+            out.append({"_file": display_path, "invalid": True})
     return out
+
+
+def validate_measurements(measurements):
+    """Validate persisted aggregates independently of the import path."""
+    errors, seen = [], set()
+    for item in measurements:
+        name = item.get("_file", "unbekannte Datei")
+        if item.get("invalid"):
+            errors.append(f"{name}: ungültiges JSON.")
+            continue
+        period, source = item.get("period"), item.get("source")
+        if item.get("schema") != 1:
+            errors.append(f"{name}: nicht unterstütztes Schema.")
+        if not valid_period(period):
+            errors.append(f"{name}: period muss YYYY-MM und ein echter Monat sein.")
+        if source not in VALID_SOURCES:
+            errors.append(f"{name}: unbekannte Quelle {source!r}.")
+        key = (period, source)
+        if key in seen:
+            errors.append(f"{name}: Quelle/Periode {source}/{period} ist doppelt.")
+        seen.add(key)
+        if not parse_date(item.get("imported")):
+            errors.append(f"{name}: imported-Datum fehlt/ungültig.")
+        if source == "google-search-console-csv":
+            values = item.get("gsc")
+            if not isinstance(values, dict):
+                errors.append(f"{name}: gsc-Aggregat fehlt.")
+                continue
+            for field in ("clicks", "impressions", "brand_clicks", "brand_impressions"):
+                value = values.get(field)
+                if not isinstance(value, (int, float)) or isinstance(value, bool) or value < 0:
+                    errors.append(f"{name}: {field} muss eine nichtnegative Zahl sein.")
+            if isinstance(values.get("clicks"), (int, float)) and isinstance(values.get("impressions"), (int, float)) and values["clicks"] > values["impressions"]:
+                errors.append(f"{name}: Klicks dürfen Impressionen nicht übersteigen.")
+        elif source == "first-party-audience-aggregate":
+            values = item.get("metrics")
+            if not isinstance(values, dict) or not values:
+                errors.append(f"{name}: metrics-Aggregat fehlt.")
+                continue
+            if not item.get("provenance"):
+                errors.append(f"{name}: provenance fehlt.")
+            for field, value in values.items():
+                if not isinstance(value, (int, float)) or isinstance(value, bool) or value < 0:
+                    errors.append(f"{name}: {field} muss eine nichtnegative Zahl sein.")
+                elif field in RATE_KEYS and value > 1:
+                    errors.append(f"{name}: {field} muss zwischen 0 und 1 liegen.")
+    return errors
 
 
 def evaluate(strategy, evidence, as_of):
@@ -171,6 +258,8 @@ def num(value):
 
 
 def import_gsc(path, period):
+    if not valid_period(period):
+        raise ValueError("Periode muss YYYY-MM und ein echter Monat sein.")
     raw = Path(path).read_text(encoding="utf-8-sig")
     dialect = csv.Sniffer().sniff(raw[:4096], delimiters=",;\t")
     rows = list(csv.DictReader(raw.splitlines(), dialect=dialect))
@@ -190,6 +279,8 @@ def import_gsc(path, period):
     clicks = impressions = brand_clicks = brand_impressions = 0.0
     for row in rows:
         c, i = num(row.get(fields["clicks"])), num(row.get(fields["impressions"]))
+        if c < 0 or i < 0 or c > i:
+            raise ValueError("GSC-Werte müssen nichtnegativ sein; Klicks dürfen Impressionen nicht übersteigen.")
         clicks += c; impressions += i
         if fields["query"] and BRAND_RE.search(row.get(fields["query"]) or ""):
             brand_clicks += c; brand_impressions += i
@@ -201,14 +292,15 @@ def import_gsc(path, period):
                 "brand_clicks": round(brand_clicks), "brand_impressions": round(brand_impressions)},
         "privacy": "Nur Aggregate; Suchanfragen wurden nicht gespeichert."
     }
-    MEASUREMENTS.mkdir(parents=True, exist_ok=True)
     target = MEASUREMENTS / f"{period}-gsc.json"
-    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_json_write(target, payload)
     return target
 
 
 def import_audience(path, period):
     """Importiert bereits aggregierte First-Party-KPIs, nie Empfängerdaten."""
+    if not valid_period(period):
+        raise ValueError("Periode muss YYYY-MM und ein echter Monat sein.")
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
     allowed = {
         "newsletter_subscribers", "newsletter_click_rate",
@@ -221,15 +313,18 @@ def import_audience(path, period):
         raise ValueError("provenance (Export-/Dashboard-Beleg) fehlt.")
     if any(not isinstance(value, (int, float)) or isinstance(value, bool) for value in metrics.values()):
         raise ValueError("Audience-Kennzahlen müssen Zahlen sein.")
+    if any(value < 0 for value in metrics.values()):
+        raise ValueError("Audience-Kennzahlen dürfen nicht negativ sein.")
+    if any(metrics[key] > 1 for key in RATE_KEYS & metrics.keys()):
+        raise ValueError("Audience-Raten müssen als Anteil zwischen 0 und 1 vorliegen.")
     payload = {
         "schema": 1, "period": period, "source": "first-party-audience-aggregate",
         "imported": dt.date.today().isoformat(), "metrics": metrics,
         "provenance": str(raw["provenance"]),
         "privacy": "Nur Aggregate; keine E-Mail-Adressen, IDs oder Ereigniszeilen."
     }
-    MEASUREMENTS.mkdir(parents=True, exist_ok=True)
     target = MEASUREMENTS / f"{period}-audience.json"
-    target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    atomic_json_write(target, payload)
     return target
 
 
@@ -251,7 +346,16 @@ def write_report(strategy, evidence, as_of, quarter, actions, measurements):
         f"| Mediennennungen | {counts['media_mention']} |",
         f"| Experteninterviews | {counts['interview']} |",
         f"| Aktive Kooperationen | {counts['cooperation']} |", "",
-        "## Quartalsprogramm", "", "| Quartal | Asset | Status/Termin |", "|---|---|---|"]
+        "## Nachweisregister", ""]
+    evidence_items = evidence.get("evidence") or []
+    if evidence_items:
+        lines += ["| Datum | Typ | Nachweis |", "|---|---|---|"]
+        for item in sorted(evidence_items, key=lambda value: str(value.get("published", "")), reverse=True):
+            label = str(item.get("title") or item.get("publisher") or item.get("id")).replace("|", "\\|")
+            lines.append(f"| {item.get('published')} | {item.get('kind')} | [{label}]({item.get('url')}) |")
+    else:
+        lines.append("_Keine externe Autorität behauptet: Im Evidenzregister liegt noch kein prüfbarer Beleg._")
+    lines += ["", "## Quartalsprogramm", "", "| Quartal | Asset | Status/Termin |", "|---|---|---|"]
     for q in strategy.get("quarters") or []:
         timing = q.get("release") or q.get("release_due") or "–"
         lines.append(f"| {q.get('quarter')} | `{q.get('asset_id')}` | {q.get('status')} · {timing} |")
@@ -286,8 +390,8 @@ def main(argv=None):
     if args.selftest:
         selftest(); return 0
     if args.import_gsc or args.import_audience:
-        if not args.period or not re.fullmatch(r"\d{4}-\d{2}", args.period):
-            print("Import braucht --period YYYY-MM", file=sys.stderr); return 2
+        if not valid_period(args.period):
+            print("Import braucht --period YYYY-MM mit echtem Monat", file=sys.stderr); return 2
         try:
             if args.import_gsc:
                 target = import_gsc(args.import_gsc, args.period)
@@ -299,6 +403,7 @@ def main(argv=None):
             print(f"Importfehler: {exc}", file=sys.stderr); return 2
     strategy, evidence = load_yaml(STRATEGY), load_yaml(EVIDENCE)
     errors = validate(strategy, evidence)
+    errors += validate_measurements(load_measurements())
     if errors:
         print("\n".join(f"FEHLER: {e}" for e in errors), file=sys.stderr); return 2
     as_of = parse_date(args.as_of) if args.as_of else dt.date.today()
