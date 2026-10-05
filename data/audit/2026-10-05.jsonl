@@ -193,3 +193,6 @@
 {"ts": "2026-10-05T21:47:36Z", "module": "fix_spaces", "action": "apply", "input": {"files": 61}, "output": {"fixes": 107}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-05T21:49:22Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 55}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-10-05T21:54:53Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 3}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-05T22:09:05Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 61}, "output": {"changes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-05T22:09:06Z", "module": "fix_spaces", "action": "apply", "input": {"files": 61}, "output": {"fixes": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-10-05T22:10:57Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 55}, "output": {"changed": 1}, "status": "ok", "critical": false, "commit": null}

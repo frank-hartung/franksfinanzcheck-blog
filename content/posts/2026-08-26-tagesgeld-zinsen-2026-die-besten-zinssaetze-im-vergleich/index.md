@@ -38,7 +38,8 @@ faktencheck: "2026-09-27"
 ---
 
 
-Die Zinsen haben sich eingependelt. **Das Tagesgeldkonto** bleibt deshalb auch im Herbst 2026 ein starker Baustein für dein Geld. Das Girokonto zahlt dir weiter 0,0 Prozent.
+
+Die Zinsen haben sich eingependelt. **Das Tagesgeldkonto** bleibt deshalb auch im Herbst 2026 ein starker Baustein für dein Geld. Das Girokonto zahlt dir weiter 0,0 %.
 
 Viele Banken geben dir heute **ca. 1,7 % bis 3,2 %**. Dein Geld bleibt dabei täglich verfügbar. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** gibt es keinen besseren Platz.
 
@@ -84,7 +85,7 @@ Drei Gründe sprechen dafür:
 | Zinsgarantie | keine | variabel (oft Aktionszinsen) | über die gesamte Laufzeit |
 | Kursrisiko | nein | nein | nein |
 | Einlagensicherung | ✅ 100.000 € | ✅ 100.000 € | ✅ 100.000 € |
-| Ideal für | Gehalt & Miete | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), Urlaubskasse | Geplante Anschaffungen (2-5 J.) |
+| Ideal für | Gehalt & Miete | [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/), Urlaubskasse | Geplante Anschaffungen (2–5 J.) |
 
 {{< tabellenstand quelle="Eigene Recherche & öffentliche Vergleichsportale" stand="Oktober 2026" >}}
 
@@ -148,7 +149,7 @@ Stand: Oktober 2026. Die Zinsen ändern sich täglich. Vergleiche deshalb kurz v
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von ca. 15.000 €**:
+Nehmen wir an, du parkst einen **Notgroschen von ca. 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 

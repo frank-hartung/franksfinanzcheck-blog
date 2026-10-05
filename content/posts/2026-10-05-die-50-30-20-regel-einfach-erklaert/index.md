@@ -23,6 +23,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
 faktencheck: 2026-10-05
+kurzantwort: "Die 50-30-20-Regel teilt das monatliche Nettoeinkommen in drei feste Kategorien auf: 50 Prozent für Grundbedürfnisse, 30 Prozent für persönliche Wünsche und 20 Prozent für das Sparen oder den Schuldenabbau. Diese einfache Budgetierungsmethode hilft dabei, die Ausgaben zu kontrollieren und gleichzeitig kontinuierlich Vermögen aufzubauen."
 ---
 
 Am Monatsende ist das Geld weg. Wohin es floss, weißt du oft nicht. Dabei hast du einen festen Job und feste Ausgaben.
@@ -135,7 +136,7 @@ Viele unterschätzen zudem den Vergleich. Ein kurzer Blick ins Portal genügt of
 
 ## Fazit: Die 50-30-20-Regel einfach erklärt
 
-Der Hebel bei **Die 50-30-20-Regel einfach erklärt** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Die 50–30–20-Regel einfach erklärt** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 
 

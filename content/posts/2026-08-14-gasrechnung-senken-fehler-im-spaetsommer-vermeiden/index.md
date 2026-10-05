@@ -35,6 +35,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
+
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte jetzt handeln. Die ersten kalten Nächte sind da. In diesen Wochen entscheidet sich, wie teuer dein Winter wird.
 
 Wer erst im Januar prüft, zahlt meist drauf. Wer jetzt startet, bekommt die besseren Preise (Stand: Oktober 2026).

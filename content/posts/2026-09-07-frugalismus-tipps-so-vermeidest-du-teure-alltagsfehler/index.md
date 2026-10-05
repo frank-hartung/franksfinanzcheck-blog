@@ -42,7 +42,8 @@ faktencheck: "2026-09-27"
 ---
 
 
-Frugalismus im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
+
+[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
 
@@ -66,7 +67,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Viele Menschen glauben, ihnen fehle nur Willenskraft. Das ist ein Irrtum – und ein teurer dazu.
 
-Dein Gehirn ist auf sofortige Belohnung programmiert. Siehst du ein Produkt, schüttet dein Körper Dopamin aus, und dein rationales Denken tritt in den Hintergrund. Kluge **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** setzen genau hier an: Sie bauen eine kleine Barriere zwischen Kaufwunsch und Kasse. Es geht nicht darum, sich nie wieder etwas zu gönnen, sondern nur für Dinge zu bezahlen, die echten Nutzen stiften.
+Dein Gehirn ist auf sofortige Belohnung programmiert. Siehst du ein Produkt, schüttet dein Körper Dopamin aus, und dein rationales Denken tritt in den Hintergrund. Kluge **Frugalismus-Tipps** setzen genau hier an: Sie bauen eine kleine Barriere zwischen Kaufwunsch und Kasse. Es geht nicht darum, sich nie wieder etwas zu gönnen, sondern nur für Dinge zu bezahlen, die echten Nutzen stiften.
 
 Der zweite Hebel ist die sogenannte Lifestyle-Inflation. Mit steigendem Gehalt steigen die Ansprüche automatisch mit: das größere Auto, die teurere Wohnung, das neueste Smartphone. Wer hier nicht gegensteuert, bleibt im Hamsterrad – egal, wie viel er verdient. Die meisten Haushalte haben deshalb kein Einnahmen-, sondern ein Ausgabenproblem.
 
