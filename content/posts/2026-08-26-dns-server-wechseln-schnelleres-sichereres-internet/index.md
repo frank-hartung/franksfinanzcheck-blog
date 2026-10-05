@@ -46,7 +46,7 @@ Die meisten nutzen automatisch den DNS-Server ihres Anbieters. Es gibt aber schn
 
 Der Wechsel ist kostenlos. Er dauert fünf Minuten. Und er verkürzt oft die Ladezeit.
 
-Wenn du schon **39 € im Monat** für deinen Anschluss zahlst, solltest du keine unnötigen Umwege in der Namensauflösung mitfinanzieren. Schon **10 % bis 20 %** schnellere Antworten fühlen sich beim täglichen Surfen oft direkter an. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
+Wenn du schon **39 € im Monat** für deinen Anschluss zahlst, solltest du keine unnötigen Umwege über einen langsamen DNS-Server mitfinanzieren. Schon **10 % bis 20 %** schnellere Antworten fühlen sich beim täglichen Surfen oft direkter an. Welche Anbieter 2026 zählen, zeigt der [Ratgeber Internet & DSL](../../pillar/internet-dsl/).
 
 
 
@@ -193,7 +193,7 @@ Wichtig ist nur, realistisch zu bleiben: Ein DNS-Wechsel ersetzt weder ein gutes
 
 ## Was du real erwarten kannst
 
-Ein guter Resolver spart dir nicht plötzlich fünf Minuten Wartezeit pro Webseite. Realistisch ist eher, dass Seiten schneller anfangen zu laden und sich das Surfen direkter anfühlt.
+Ein guter DNS-Server spart dir nicht plötzlich fünf Minuten Wartezeit pro Webseite. Realistisch ist eher, dass Seiten schneller anfangen zu laden und sich das Surfen direkter anfühlt.
 
 Gerade auf Nachrichtenseiten, Preisvergleichen, Foren oder Shops mit vielen externen Elementen summieren sich kleine Zeitgewinne. Dazu kommt ein zweiter Vorteil: Du gewinnst Kontrolle zurück. Statt einfach den Standard deines Providers hinzunehmen, entscheidest du bewusst, wer deine Namensauflösung übernimmt.
 

@@ -34,11 +34,11 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach beginnt die eigentliche Arbeit: Filter zurücksetzen, Bonus ausblenden und prüfen, ob Preisgarantie und Vertragslaufzeit überhaupt zusammenpassen.
+Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit überhaupt zueinander passen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Ganz oben steht nicht automatisch der günstigste Vertrag. Dieser Leitfaden führt dich in zehn Minuten von der Jahresabrechnung bis zur belastbaren Auswahl.
+Ganz oben steht nicht immer der günstigste Vertrag. Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sicheren Wahl.
 
 
 
@@ -75,7 +75,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
-Dein Abschlag gehört nicht in das Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nutzt du statt 18.000 kWh versehentlich 18.000 Eurocent oder eine Standardschätzung, vergleicht das Portal am falschen Bedarf.
+Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nutzt du aus Versehen 18.000 Eurocent statt 18.000 kWh, oder nur eine grobe Schätzung, dann vergleicht das Portal am falschen Bedarf.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -103,7 +103,7 @@ Warum? Vergleichsportale verdienen an vermittelten Abschlüssen. Das macht sie n
 
 ## Minute 4: Laufzeit und Kündigung prüfen
 
-Rund zwölf Monate Laufzeit bilden für viele Haushalte einen vernünftigen Mittelweg. Du bekommst Planbarkeit und bleibst beweglich.
+Rund zwölf Monate Laufzeit sind für viele Haushalte ein guter Mittelweg. Du hast feste Preise und bleibst trotzdem flexibel.
 
 Prüfe:
 
@@ -116,7 +116,7 @@ Zeitlich sollte die Garantie nicht deutlich vor der festen Bindung enden. Sonst 
 
 ## Minute 5: Garantieumfang lesen
 
-Eingeschränkte Preisgarantien können Steuern, Abgaben, Umlagen oder Netzentgelte ausnehmen. Eine weitreichende Garantie schützt mehr, ist aber häufig teurer.
+Eine enge Garantie lässt oft Steuern, Abgaben, Umlagen oder Netz-Kosten außen vor. Eine breite Garantie schützt mehr. Sie kostet aber meist auch mehr.
 
 Markiere in den Tarifbedingungen:
 
@@ -164,7 +164,7 @@ Schau nicht nur auf Sterne im Portal. Prüfe:
 - aktuelle Beschwerden aus seriösen Quellen,
 - klare Angaben zu Abschlag und Bonus.
 
-Hohe Empfehlungsquoten können nützlich sein, sollte aber keine harte Vorauswahl ersetzen. Wichtig ist, dass Vertrag und Anbieter zu deinem Risikoprofil passen.
+Hohe Empfehlungsquoten können nützlich sein. Sie sollten aber keine harte Vorauswahl ersetzen. Wichtig ist, dass Vertrag und Anbieter zu dir passen.
 
 ## Minute 9: Portal und Anbieter abgleichen
 
@@ -183,9 +183,9 @@ Mach vor dem Abschluss Screenshots oder speichere die Unterlagen. Abweichungen k
 
 Für den Abschluss brauchst du meist Zählernummer oder Marktlokations-ID, bisherigen Lieferanten und Kundennummer. Beim regulären Wechsel übernimmt der neue Anbieter häufig die Kündigung und den Datenaustausch.
 
-Ausnahmen: Bei sehr knapper Kündigungsfrist, Sonderkündigung wegen Preiserhöhung oder Umzug kümmerst du dich besser selbst um die fristgerechte Kündigung.
+Ausnahmen: Bei sehr knapper Frist, bei Sonderkündigung wegen Preiserhöhung oder bei Umzug kümmerst du dich besser selbst um die Kündigung.
 
-Notiere den Zählerstand zum Wechseltermin und übermittle ihn wie angefordert. Leitung und Zähler bleiben unverändert; bei Verzögerungen ist die Versorgung über Grund- oder Ersatzversorgung gesichert.
+Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Kommt es zu Verzögerungen, greift die Grund- oder Ersatzversorgung.
 
 ## Wie du die mögliche Ersparnis berechnest
 
@@ -193,9 +193,9 @@ Notiere den Zählerstand zum Wechseltermin und übermittle ihn wie angefordert. 
 
 Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr. Grundpreis und Bonus können die Differenz verändern.
 
-Für Januar 2026 modellierte die Bundesnetzagentur bei einem typischen Verbrauch von 20.000 kWh durchschnittlich rund 360 € Einsparpotenzial beim Anbieterwechsel. Das ist ein Durchschnittswert, kein persönliches Versprechen.
+Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
 
-Der BDEW-Durchschnitt von 11,93 Cent pro kWh im Einfamilienhaus hilft nur zur Markteinordnung. Regionale Angebote und Bestandsverträge weichen ab.
+Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
 
 ## Wann 24 Monate trotzdem passen können
 
