@@ -1,179 +1,109 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 9,
-  "generated_at": "2026-10-04T15:13:20Z",
+  "ready": 7,
+  "pool_size": 7,
+  "generated_at": "2026-10-05T11:00:18Z",
   "candidates": [
     {
-      "slug": "2026-10-04-monatliche-ausgaben-halbieren-dein-4-k-plan-fuer-smarte-ha",
+      "slug": "2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen",
       "ready": true,
-      "sha256": "cd2c8cded0715ad25436bc761890d1c9d9ee511ee8bba43f73806d5168c46b63",
-      "score": 0.898,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-04-stromkosten-senken-smarte-haushaltsgeraete-gezielt-einsetz",
-      "ready": true,
-      "sha256": "c31e4bb8d2af069077f4ed4744ff7781a595035db06f915d99735725b630de80",
-      "score": 0.894,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 0.8,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.8
-      }
-    },
-    {
-      "slug": "2026-10-04-apps-die-dein-sparschwein-digital-aufruesten",
-      "ready": false,
-      "sha256": "3fce2a7f30c712174306ba3281046a0e5ab24542c2e7b80af1f1dcdcdf9e5249",
-      "reason": "quality-score 0.828 < 0.85 (schwach: readability 0.60, typography 0.70, spelling 0.80)",
-      "details": [
-        "Reserve nicht bereit: 2026-10-04-apps-die-dein-sparschwein-digital-aufruesten: {'slug': '2026-10-04-apps-die-dein-sparschwein-digital-aufruesten', 'score': 0.828, 'parts': {'spelling': 0.8, 'meta': 0.85, 'structure': 1.0, 'typography': 0.7, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.6}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.828,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.7,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.6
-      }
-    },
-    {
-      "slug": "2026-10-04-dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich",
-      "ready": false,
-      "sha256": "bb56f649b48db58ea3d6d502ea27fc488e4d54220b0ab7797351a8939ad977ea",
-      "reason": "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-      "details": [
-        "🛑 2026-10-04-dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.89,
+      "sha256": "d8b8f177905508611fcd98bc5a8edb16b67d8eaa65449001b963e43fa683f953",
+      "score": 0.902,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.8,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-04-flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu",
-      "ready": false,
-      "sha256": "b62b333fe4910bf70ae3466ca7f9ad72e942e15a37ca1d0ef5ee4480885d8376",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-04-flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Profi-Affiliate-Check nicht bestanden: A3: nur 0 interne Links (< 2)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.857,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 1.0,
+        "typography": 0.8200000000000001,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-04-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v",
-      "ready": false,
-      "sha256": "60190bab708cabf3c679b20a7224ee224b08e24dee2fc9eb212ee5f3f178591a",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-04-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Profi-Affiliate-Check nicht bestanden: A3: nur 0 interne Links (< 2)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.867,
+      "slug": "2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress",
+      "ready": true,
+      "sha256": "436835ab264fe08ae935f3d9b1a55331728ad14ca94bc9fe38d96b269b0d16b1",
+      "score": 0.928,
       "parts": {
-        "spelling": 0.92,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-04-haushaltskosten-senken-7-ueberraschende-tricks-die-sofort",
-      "ready": false,
-      "sha256": "ed595740181f02c37d4b22a41ace60743d673fcfac9bf290f5e635bc99804e4e",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-04-haushaltskosten-senken-7-ueberraschende-tricks-die-sofort: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.867,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 0.85,
-        "structure": 0.7,
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
         "typography": 0.88,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.75
-      }
-    },
-    {
-      "slug": "2026-10-04-online-banking-optimieren-kontomanagement-smarter",
-      "ready": false,
-      "sha256": "51783f3b3acca3a9532f691dd8f3c9f20c1b13b4340cb112dfa3fde858f57e81",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-04-online-banking-optimieren-kontomanagement-smarter: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.877,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
         "readability": 0.8
       }
     },
     {
-      "slug": "2026-10-04-stromspar-apps-im-test-so-senkst-du-deine",
-      "ready": false,
-      "sha256": "d7d3870e67ff6444e62bb489e6deb878a819dfba16644737ff4e96335c304238",
-      "reason": "quality-score 0.828 < 0.85 (schwach: typography 0.70, readability 0.75, spelling 0.80)",
-      "details": [
-        "Reserve nicht bereit: 2026-10-04-stromspar-apps-im-test-so-senkst-du-deine: {'slug': '2026-10-04-stromspar-apps-im-test-so-senkst-du-deine', 'score': 0.828, 'parts': {'spelling': 0.8, 'meta': 0.85, 'structure': 0.8, 'typography': 0.7, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
-      ],
-      "score": 0.828,
+      "slug": "2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten",
+      "ready": true,
+      "sha256": "5d9aa22abeb565743833e37b7843c901a8f7078f6662840bf799eaaabf7d53b5",
+      "score": 0.866,
+      "parts": {
+        "spelling": 0.7,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.76,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf",
+      "ready": true,
+      "sha256": "72680ac9d609fb972dee4c9dca7e0f68897e390f5b7ffad3308c34e6ba7e0756",
+      "score": 0.91,
       "parts": {
         "spelling": 0.8,
-        "meta": 0.85,
-        "structure": 0.8,
-        "typography": 0.7,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv",
+      "ready": true,
+      "sha256": "01272fb76a2f363c55ed0450ab253c4182d8e7589244829d0826518e69039a0f",
+      "score": 0.908,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben",
+      "ready": true,
+      "sha256": "25ee055e6cd07c935443140562e568858a9ad9e9a0bd9473216dce3b34b8935b",
+      "score": 0.91,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden",
+      "ready": true,
+      "sha256": "0dc674e06b382f178f909cf9f3c846056626aaa69dde1a88db69237dc35fb45f",
+      "score": 0.924,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75

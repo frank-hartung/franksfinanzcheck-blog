@@ -611,81 +611,63 @@
    "savings": ""
   }
  },
- "2026-10-04-monatliche-ausgaben-halbieren-dein-4-k-plan-fuer-smarte-ha": {
-  "title": "Monatliche Ausgaben halbieren –: dein 4‑K‑Plan für smarte Ha",
-  "ts": "2026-10-04T15:09:05+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-04-apps-die-dein-sparschwein-digital-aufruesten": {
-  "title": "Apps, die dein Sparschwein: digital aufrüsten – Sparen Geld",
-  "ts": "2026-10-04T15:08:26+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-04-dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich": {
-  "title": "DSL – Anbieter wechseln – so: senkst du 2026 deine monatlich",
-  "ts": "2026-10-04T15:08:30+00:00",
-  "design": {
-   "v": 3,
-   "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-04-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v": {
-  "title": "Handyvertrag kündigen – So: entkommst du der automatischen V",
-  "ts": "2026-10-04T15:08:36+00:00",
-  "design": {
-   "v": 3,
-   "badge": "INTERNET & DSL",
-   "savings": ""
-  }
- },
- "2026-10-04-stromkosten-senken-smarte-haushaltsgeraete-gezielt-einsetz": {
-  "title": "Stromkosten senken: – smarte Haushaltsgeräte gezielt einsetz",
-  "ts": "2026-10-04T15:09:08+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-10-04-flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu": {
-  "title": "Flugverspätung Entschädigung: – So holst du dir dein Geld zu",
-  "ts": "2026-10-04T15:08:33+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GÜNSTIG REISEN",
-   "savings": ""
-  }
- },
- "2026-10-04-haushaltskosten-senken-7-ueberraschende-tricks-die-sofort": {
-  "title": "Haushaltskosten senken: 7 überraschende Tricks, die sofort",
-  "ts": "2026-10-04T15:08:40+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-04-online-banking-optimieren-kontomanagement-smarter": {
-  "title": "Online – Banking optimieren: Kontomanagement smarter",
-  "ts": "2026-10-04T15:08:43+00:00",
+ "2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen": {
+  "title": "Digital-Banking: Vorteile moderner Online-Konten nutzen",
+  "ts": "2026-10-05T10:58:52+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  },
- "2026-10-04-stromspar-apps-im-test-so-senkst-du-deine": {
-  "title": "Stromspar – Apps im Test: So senkst – Stromspar-Apps",
-  "ts": "2026-10-04T15:08:46+00:00",
+ "2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf": {
+  "title": "Budget‑App 2026 –: So beherrschst du deine Ausgaben ohne Auf",
+  "ts": "2026-10-05T10:58:42+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress": {
+  "title": "Konto wechseln 2026: So sparst du Gebühren ohne Stress",
+  "ts": "2026-10-05T10:58:45+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben": {
+  "title": "Ökostrom Anbieter: wechseln – clever sparen und grün bleiben",
+  "ts": "2026-10-05T10:58:49+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden": {
+  "title": "Strom und Gas: Teure Fehler beim Vergleichen vermeiden",
+  "ts": "2026-10-05T10:57:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten": {
+  "title": "Bankgebühren sparen: So halbierst du deine Kontokosten",
+  "ts": "2026-10-05T10:58:39+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
+ },
+ "2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv": {
+  "title": "E-Auto Ladekosten: So drückst du deine Ausgaben massiv",
+  "ts": "2026-10-05T10:57:27+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
