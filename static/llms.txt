@@ -39,9 +39,12 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 36 Beiträge)
+## Alle Artikel (neueste zuerst, 39 Beiträge)
 
-- [Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden](https://franksfinanzcheck.de/posts/2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden/): Du willst deine Urlaubskasse aufbessern? Ohne Nebenjob und Überstunden zeigen wir dir, wie du hunderte Euro in deinem Alltag durch Budget-Optimierung finde.
+- [Preiswert surfen: So findest du den optimalen DSL‑Anschluss](https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/): Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche Tarife 2026 sinnvoll sind und wie du beim Wechsel Geld sparst.
+- [Energie-Update: Was sich jetzt für dich ändert](https://franksfinanzcheck.de/posts/2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert/): Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …
+- [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/): Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, einer Modellrechnung und sieben Sparhebeln kommst du schuldenfrei durch die Feiertage.
+- [Gasabschlag berechnen: So planst du die Heizsaison richtig](https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/): Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison.
 - [Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp](https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/): Last Minute Urlaub: Erfahre, wie du Last Minute Urlaub clever buchst, Reiseangebote günstig sicherst und im Sommer große Ersparnisse erzielst.
 - [WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?](https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/): WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit klaren Kosten, Grenzen und einer einfachen Entscheidung.
 - [Gasrechnung senken: Spätsommer-Check für Tarif und Heizung](https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/): Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode: Gastarif rechnen, Zählerstand sichern, Heizkörper prüfen und Aufgaben für Fachbetrieb oder…
@@ -87,4 +90,4 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-10-02.*
+(scripts/generate_llms_txt.py). Stand: 2026-10-05.*

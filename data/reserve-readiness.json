@@ -1,24 +1,9 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 5,
-  "generated_at": "2026-10-05T19:02:57Z",
+  "ready": 4,
+  "pool_size": 4,
+  "generated_at": "2026-10-05T21:55:48Z",
   "candidates": [
-    {
-      "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
-      "ready": true,
-      "sha256": "1d091228fa86e3671f6d585e35b62dc8bfb79498512286e2c7a74f597fba4441",
-      "score": 0.9,
-      "parts": {
-        "spelling": 0.5,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
       "ready": true,
@@ -67,17 +52,24 @@
     {
       "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
       "ready": true,
-      "sha256": "8920c3905a24fed75d7a2b7dc6f49125cdc939f54b35dcfdaf038ebd492bcc1f",
-      "score": 0.89,
+      "sha256": "3b052b106df754bfa04df672fe4f03324924bcbd1336ab73e4170b2baf0262c9",
+      "score": 0.958,
       "parts": {
-        "spelling": 0.5,
+        "spelling": 0.86,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-05T21:55:48Z",
+    "renewed": [
+      "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
