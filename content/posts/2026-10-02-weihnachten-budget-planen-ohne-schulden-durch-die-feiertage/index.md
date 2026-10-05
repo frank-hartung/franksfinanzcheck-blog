@@ -52,6 +52,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Warum beginnt ein entspanntes Weihnachtsbudget schon im Oktober?
 
 
+Genau das ist der Hebel: Weihnachten Budget planen.
+
+
 Darum geht es hier konkret: Weihnachten Budget planen.
 
 
