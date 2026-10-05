@@ -92,7 +92,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Krypto-Bibliothek
         run: python3 -m pip install -q cryptography

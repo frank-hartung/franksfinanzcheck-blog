@@ -147,7 +147,7 @@ jobs:
           github.event.workflow_run.conclusion == 'cancelled' }}
     steps:
       - name: Repository auschecken (Identitäts-Quelle)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Selbsttest der Namensgebung (ein blinder Namensgeber wäre schlimmer)
         run: python3 scripts/alert_issue_identity.py --selftest
@@ -392,7 +392,7 @@ jobs:
           github.event.workflow_run.event != 'pull_request' }}
     steps:
       - name: Repository auschecken (Identitäts-Quelle)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Behobene Fehlermeldung schließen (Marker-Identität, Alt-Titel inbegriffen)
         env:

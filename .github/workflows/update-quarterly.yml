@@ -44,7 +44,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Python-Abhängigkeiten installieren
         run: |

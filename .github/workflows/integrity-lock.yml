@@ -90,7 +90,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Repository auschecken (volle Historie für die Herkunft)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -103,6 +103,15 @@ jobs:
 
       - name: Kern-Beweis des Guards (schreibt nie)
         run: python3 scripts/integrity_guard.py --selftest
+
+      # Dauerhafte Antwort auf #571 (setup-python v5 -> v7): Dependabot hebt
+      # Action-Versionen an, trifft aber nicht immer jede Fundstelle. Diese
+      # Wache verlangt EINE Version je Action im ganzen Repo - der Selbsttest
+      # davor stellt sicher, dass ein kaputter Messer nicht gruen meldet.
+      - name: Actions-Versions-Wache (eine Version je Action)
+        run: |
+          python3 scripts/actions_version_guard.py --selftest
+          python3 scripts/actions_version_guard.py --gate
 
       # Wächter des Wächters: Verlangt der Branch-Schutz des Ziel-Zweigs
       # (GITHUB_BASE_REF) genau den Check, der hier gerade läuft? Liest den

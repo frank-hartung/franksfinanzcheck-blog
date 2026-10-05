@@ -75,7 +75,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Python einrichten
         uses: actions/setup-python@v7
@@ -131,7 +131,7 @@ jobs:
       # (TikTok, LinkedIn) von Hand hochladen willst.
       - name: Video als Artefakt sichern
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: shorts
           path: |
