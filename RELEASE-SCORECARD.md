@@ -70,7 +70,7 @@
 | `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-01 | **warnung** |
 | `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
 | `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-18 | **warnung** |
-| `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
+| `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ✅ bestanden | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
 
 ## Blockierende Funde (0 Artikel)
 
@@ -79,11 +79,11 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 
 - `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11718 Zeichen, Optimum 12.000–18.000)
 - `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11888 Zeichen, Optimum 12.000–18.000)
-- `2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11726 Zeichen, Optimum 12.000–18.000)
-- `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11420 Zeichen, Optimum 12.000–18.000)
-- `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10269 Zeichen, Optimum 12.000–18.000)
+- `2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11885 Zeichen, Optimum 12.000–18.000)
+- `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11501 Zeichen, Optimum 12.000–18.000)
+- `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10353 Zeichen, Optimum 12.000–18.000)
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11118 Zeichen, Optimum 12.000–18.000)
-- `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische); T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (11633 Zeichen, Optimum 12.000–18.000)
+- `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` – Q2-quellen-vorhanden: keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
@@ -104,7 +104,7 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 | `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-16 |
 | `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` | erhoeht | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-11-19 |
-| `2026-10-05-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 90 Tage) | 2027-01-03 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
