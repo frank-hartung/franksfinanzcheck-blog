@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       # ------------------------------------------------------------
       #  GOVERNANCE-VERTRAG + SELBSTTESTS (seit 07.09.2026, Befund #206)

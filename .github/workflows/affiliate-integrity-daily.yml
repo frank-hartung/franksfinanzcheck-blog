@@ -104,7 +104,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       - name: Python
         uses: actions/setup-python@v7
@@ -367,7 +367,7 @@ jobs:
 
       - name: Deploy anstoßen (nur wenn wirklich geheilt UND der Nachweis gepusht wurde)
         if: ${{ (steps.state.outputs.healed == 'true' || steps.intent.outputs.healed == 'true') && steps.commit.outputs.pushed == 'true' && steps.commit.outputs.push_verified == 'true' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           HEALED_COUNT: ${{ steps.state.outputs.healed_count }}
         with:
@@ -383,7 +383,7 @@ jobs:
       # ============ STAGE 4: ISSUE-PFLEGE (idempotent) ============
       - name: Issue pflegen (öffnen/aktualisieren bei Rot, schließen bei Grün)
         if: ${{ always() && !cancelled() }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           GATE_EXIT: ${{ steps.gate.outputs.exit_code }}
           HEALED: ${{ steps.state.outputs.healed }}

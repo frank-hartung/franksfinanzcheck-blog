@@ -90,7 +90,7 @@ jobs:
       contents: read
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       - name: Selbsttest der Wache (blind wäre schlimmer als keine)
         run: python3 scripts/brand_surface_guard.py --selftest
@@ -121,7 +121,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       # ----------------------------------------------------------------
       #  O6 – Markenfläche „öffentliche Issue-Titel" (Issue #496):

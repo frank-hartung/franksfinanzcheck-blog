@@ -79,7 +79,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -241,7 +241,7 @@ jobs:
       - name: Issue bei fertigem GitHub-Zertifikat (Hinweis Full strict)
         if: ${{ env.CHECK4 == 'OK' }}
         continue-on-error: true
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             try {

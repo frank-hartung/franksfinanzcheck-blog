@@ -69,7 +69,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       - name: Python einrichten
         uses: actions/setup-python@v7

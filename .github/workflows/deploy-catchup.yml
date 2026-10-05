@@ -80,7 +80,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Live-Stand (gh-pages) und Deploy-Job-Erfolg mit main vergleichen, ggf. anstoßen
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const owner = context.repo.owner;
