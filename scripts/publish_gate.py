@@ -543,7 +543,7 @@ def textverstaendnis_failures(candidates):
     """
     try:
         from textverstaendnis_guard import (
-            split_body, load_terminologie, check_article,
+            split_body, load_terminologie, check_article, frontmatter_keywords,
         )
         hard_rules = {
             "R2-KEYWORD-DUMP", "R3-TERMINOLOGIE",
@@ -553,6 +553,11 @@ def textverstaendnis_failures(candidates):
             "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
             "R13-DATUM-PUNKT", "R14-MARKER-RUINE",
             "R15-PHRASEN-DOPPEL",
+            # R17 (05.10.2026, Nachtrag #585): maschinell verstümmelte
+            # Keyword-Einsetzungen („die gasrechnung senken um bis zu 15 %
+            # senken") sind nie veröffentlichungsfähig. Die Lesbarkeitsnote
+            # sieht sie nicht – sie misst Satzlängen, keine Grammatik.
+            "R17-KEYWORD-KASUS", "R17-KEYWORD-DOPPEL",
             # R16 (02.10.2026, Issue #521): Prompt-Echo im Artikeltext und
             # in den Meta-Feldern. Der Entwurf vom 02.10. trug „TITLE: …“
             # im Fließtext, in der description UND im Pinterest-Text –
@@ -564,10 +569,13 @@ def textverstaendnis_failures(candidates):
         for slug in candidates:
             path = os.path.join(POSTS_DIR, slug, "index.md")
             with open(path, encoding="utf-8") as fh:
-                body = split_body(fh.read())
+                raw = fh.read()
+            body = split_body(raw)
+            # Frontmatter-Keywords sind Beweislage für R17 (Kleinschreibung
+            # eines Keyword-Substantivs reicht dann als einzelner Fund).
             finds = [f for f in check_article(
                 os.path.join("content", "posts", slug, "index.md"),
-                body, term
+                body, term, frontmatter_keywords(raw)
             ) if f[1] in hard_rules]
             if finds:
                 failed[slug] = [f"{rule}: {detail}" for _, rule, detail, _ in finds[:5]]

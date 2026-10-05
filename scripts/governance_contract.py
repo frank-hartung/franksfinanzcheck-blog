@@ -1165,6 +1165,60 @@ def c20_lesbarkeit_und_hysterese(script_texts, gate_text):
                                "würde wieder ein Issue erzeugen."))
     return out
 
+# --- C21: Maschinell eingefügte Sätze (Nachtrag zu #585, 05.10.2026) ---
+# Auslöser: Die Keyword-Heilung schrieb „Mit dem richtigen Vorgehen lässt sich
+# die gasrechnung senken um bis zu 15 % senken." in einen Live-Artikel – das
+# Keyword gebeugt, kleingeschrieben und das Verb doppelt. Niemand hat es
+# gesehen: Die Lesbarkeits-Wache misst Satz- und Wortlängen, keine Grammatik,
+# und der Artikel stand mit Flesch 79 glänzend da. Eine Maschine, die Sätze in
+# fremde Texte schreibt, kennt die Wortart des eingesetzten Keywords nicht –
+# deshalb darf sie es NIE in eine Satzgrammatik einpassen (`.lower()`,
+# Deklination, feste Schablonen mit Verb). Erlaubt ist nur die Apposition nach
+# Doppelpunkt, und was trotzdem durchrutscht, fängt R17 im Verständnis-Guard.
+def c21_maschinensaetze(script_texts):
+    out = []
+    ko = script_texts.get("keyword_optimizer.py", "")
+    tg = script_texts.get("textverstaendnis_guard.py", "")
+    pg = script_texts.get("publish_gate.py", "")
+    if not ko or not tg or not pg:
+        out.append(("C21", "keyword_optimizer.py / textverstaendnis_guard.py / "
+                           "publish_gate.py nicht lesbar – der Vertrag ist nicht prüfbar."))
+        return out
+    start = ko.find("def heal_density(")
+    ende = ko.find("\ndef ", start + 1) if start >= 0 else -1
+    block = ko[start:ende] if start >= 0 and ende > start else ""
+    if not block:
+        out.append(("C21", "scripts/keyword_optimizer.py: `heal_density` fehlt."))
+    else:
+        if re.search(r"main_kw\.lower\(\)", block):
+            out.append(("C21", "scripts/keyword_optimizer.py: `heal_density` beugt das "
+                               "Keyword mit `.lower()` – deutsche Substantive werden "
+                               "kleingeschrieben eingesetzt (#585-Nachtrag)."))
+        if "dichte_saetze" not in block:
+            out.append(("C21", "scripts/keyword_optimizer.py: `heal_density` benutzt die "
+                               "geprüfte Satz-SSOT `dichte_saetze` nicht – freie "
+                               "Schablonen im Heiler sind grammatisch ungedeckt."))
+        if "in body" not in block:
+            out.append(("C21", "scripts/keyword_optimizer.py: `heal_density` prüft nicht "
+                               "auf bereits vorhandene Sätze – die Heilung wäre nicht "
+                               "idempotent."))
+    for schablone in re.findall(r'"([^"]*\{kw\}[^"]*)"', ko):
+        # Erlaubt ist genau eine Form: vollständiger Satz, Doppelpunkt,
+        # Keyword, Punkt. Alles andere stellt Wörter NACH das Keyword – und
+        # genau dort entstand die Ruine („… {kw} um bis zu 15 % senken.").
+        if ":" not in schablone.split("{kw}")[0] or not schablone.rstrip().endswith("{kw}."):
+            out.append(("C21", f"scripts/keyword_optimizer.py: Schablone „{schablone}“ "
+                               "setzt das Keyword mitten in die Satzgrammatik – erlaubt "
+                               "ist nur die Apposition nach Doppelpunkt am Satzende."))
+    if "R17-KEYWORD-KASUS" not in tg or "R17-KEYWORD-DOPPEL" not in tg:
+        out.append(("C21", "scripts/textverstaendnis_guard.py: R17 (Keyword-Ruinen) "
+                           "fehlt – kleingeschriebene Keyword-Substantive und doppelte "
+                           "Verben blieben unsichtbar."))
+    if "R17-KEYWORD-KASUS" not in pg or "R17-KEYWORD-DOPPEL" not in pg:
+        out.append(("C21", "scripts/publish_gate.py: R17 steht nicht unter den harten "
+                           "Regeln – eine Keyword-Ruine könnte erneut live gehen."))
+    return out
+
 # --- C18: Pflicht-Check-Vertrag (der Name im Branch-Schutz ist ein Vertrag) ---
 # Auslöser (19.09.2026, Nachtrag zu #316 / PR #317): Das neue PR-Gate
 # integrity-lock.yml meldete sich bei GitHub als Check „lock" – die Job-ID, weil
@@ -1540,6 +1594,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                _read(os.path.join(root, runbook_pfad)) if runbook_pfad else "")
     checks += c19_release_ssot(script_texts, root=root)
     checks += c20_lesbarkeit_und_hysterese(script_texts, gate)
+    checks += c21_maschinensaetze(script_texts)
     return checks
 
 
@@ -1614,6 +1669,13 @@ RULE_TEXT = {
            "(`deploy_hysterese`, INFO, nie ein Issue) von echter Drift (ROT) – sonst "
            "meldet eine Wache hinterher, was ein offenes Tor durchgelassen hat, und "
            "eine andere meldet wöchentlich die Physik (#585).",
+    "C21": "Eine Maschine, die Sätze in fremde Texte schreibt, kennt die Wortart des "
+           "eingesetzten Keywords nicht: Die Keyword-Heilung beugt das Keyword nie "
+           "(`.lower()`/Deklination verboten), benutzt ausschließlich die geprüfte "
+           "Satz-SSOT `dichte_saetze` mit Apposition nach Doppelpunkt, ist idempotent – "
+           "und was trotzdem entsteht, fangen R17-KEYWORD-KASUS/-DOPPEL im "
+           "Verständnis-Guard und im Publish-Gate ab. Die Lesbarkeitsnote sieht solche "
+           "Ruinen nicht, sie misst Satzlängen, keine Grammatik (Nachtrag #585).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -1633,7 +1695,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag",
          "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check",
          "C19": "Release-Scorecard",
-         "C20": "Lesbarkeits-Tor & Deploy-Hysterese"}
+         "C20": "Lesbarkeits-Tor & Deploy-Hysterese",
+         "C21": "Maschinensätze"}
 
 
 def render_md(checks, ok_notes=()):

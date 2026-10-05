@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TEXTVERSTÄNDNIS-GUARD (R2–R16) für FranksFinanzcheck.
+TEXTVERSTÄNDNIS-GUARD (R2–R17) für FranksFinanzcheck.
 
 Die Verständnis-Regeln aus dem Textverständnis-Audit (01.09.2026), die
 KEIN bestehendes Gate misst:
@@ -186,7 +186,7 @@ def load_terminologie() -> dict:
     return data.get("begriffe", {}) if isinstance(data, dict) else {}
 
 
-def check_article(rel: str, body: str, term: dict) -> list:
+def check_article(rel: str, body: str, term: dict, keywords=()) -> list:
     finds = []
     paras = flow_paragraphs(body)
 
@@ -305,6 +305,7 @@ def check_article(rel: str, body: str, term: dict) -> list:
     finds += check_wortdopplung(rel, body)
     finds += check_politur_ruinen(rel, body)
     finds += check_phrasendoppel(rel, body)
+    finds += check_keyword_ruinen(rel, body, keywords)
     return finds
 
 
@@ -525,6 +526,179 @@ def check_phrasendoppel(rel: str, body: str) -> list:
     return out
 
 
+# R17-KEYWORD-RUINE (05.10.2026, Nachtrag zu #585):
+# Die Keyword-Heilung (`keyword_optimizer.heal_density`) hat Keywords mit
+# `.lower()` in feste Satzschablonen gestanzt. Zwei Defekte gingen live und
+# standen auf `main`:
+#   · „Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu
+#     15 % senken." – das Keyword ist selbst ein Verbalausdruck, die Schablone
+#     liefert das Verb ein zweites Mal (R17-KEYWORD-DOPPEL).
+#   · „Gerade für weihnachten budget planen gilt: …" – deutsche Substantive
+#     kleingeschrieben (R17-KEYWORD-KASUS).
+# Die Lesbarkeits-Wache konnte das nicht sehen: Sie misst Satz- und Wortlängen,
+# keine Grammatik – der Artikel stand mit Flesch 79 glänzend da. Beide Regeln
+# sind bewusst eng gefasst, damit sie ohne Wörterbuch auskommen:
+#   KASUS: ein kleingeschriebenes Wort nach Artikel/Possessiv/Präposition, das
+#          im selben Artikel mindestens zweimal satzintern GROSS vorkommt – der
+#          Beweis, dass es ein Substantiv ist.
+#   DOPPEL: das letzte Wort eines Satzes steht ein zweites Mal im selben Satz,
+#          endet auf „-en" und kommt im Artikel NIE groß vor (also ein Verb,
+#          kein Substantiv wie „Millisekunden"). Zeilen mit Links, Pfeilen oder
+#          CTA-Emojis sind Struktur und bleiben außen vor.
+R17_BEGLEITER = (
+    "die", "der", "das", "den", "dem", "des", "eine", "einen", "einem", "einer",
+    "dein", "deine", "deinen", "deinem", "deiner", "mein", "meine", "meinen",
+    "ihre", "ihren", "seine", "seinen", "unsere", "unseren", "für", "bei",
+    "mit", "nach", "vor", "über", "ohne", "um", "auf", "beim", "zum", "zur",
+)
+R17_WORT = r"[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß\-]{3,}"
+
+
+def _r17_grossschreibung(text: str) -> dict:
+    """Wörter, die satzintern (nicht am Satzanfang) groß geschrieben sind."""
+    zaehler = {}
+    for satz in re.split(r"(?<=[.!?:])\s+", text):
+        satz = satz.lstrip()
+        for m in re.finditer(rf"\b([A-ZÄÖÜ][a-zäöüß\-]{{3,}})\b", satz):
+            # Satzanfang zählt nicht – dort ist Großschreibung kein Substantiv-Beweis.
+            # (Position prüfen, NICHT den ersten Treffer überspringen: kurze
+            #  Artikel wie „Die" fallen nicht unter das Muster und hätten sonst
+            #  das erste echte Substantiv verschluckt.)
+            if m.start() == 0:
+                continue
+            w = m.group(1).lower()
+            zaehler[w] = zaehler.get(w, 0) + 1
+    return zaehler
+
+
+def frontmatter_keywords(raw: str) -> list:
+    """`keywords: [...]` aus dem Frontmatter – Beweisquelle für R17."""
+    m = re.search(r"(?m)^keywords:\s*\[(.*?)\]", raw)
+    if not m:
+        return []
+    return [k.strip().strip("\"'") for k in m.group(1).split(",") if k.strip()]
+
+
+def keyword_substantive(keywords) -> set:
+    """Großgeschriebene Bestandteile der Frontmatter-Keywords (Beweislage)."""
+    raus = set()
+    for kw in keywords or ():
+        for teil in re.findall(r"[A-Za-zÄÖÜäöüß\-]{4,}", str(kw)):
+            if teil[:1].isupper():
+                raus.add(teil.lower())
+    return raus
+
+
+def check_keyword_ruinen(rel: str, body: str, keywords=()) -> list:
+    """Erkennt maschinell verstümmelte Keyword-Einsetzungen – hart.
+
+    `keywords` (Frontmatter) ist zusätzliche Beweislage: Steht ein Wort dort
+    groß, ist EIN kleingeschriebenes Vorkommen im Text schon der Fund. Ohne
+    diese Quelle gilt die strengere Eigenbeweis-Schwelle (2× satzintern groß),
+    damit Adjektive und Pronomen („dieser", „viele") keine Fehlalarme werfen.
+    """
+    out = []
+    kw_nomen = keyword_substantive(keywords)
+    absaetze = [re.sub(r"\*+", "", a) for a in flow_paragraphs(body)]
+    text = " ".join(absaetze)
+    gross = _r17_grossschreibung(text)
+    klein_only = {w for w in re.findall(rf"\b({R17_WORT})\b", text)
+                  if w[:1].islower() and gross.get(w.lower(), 0) == 0}
+
+    # Folgt dem kleingeschriebenen Wort ein GROSSES, ist es ein Adjektiv vor
+    # seinem Substantiv („deine finanzielle Freiheit") – kein Fund. Genau diese
+    # Stellung unterscheidet das Adjektiv von der Keyword-Ruine
+    # („deine gasrechnung senken").
+    muster = re.compile(rf"\b({'|'.join(R17_BEGLEITER)})\s+([a-zäöüß][a-zäöüß\-]{{3,}})"
+                        r"\b(?!\s+[A-ZÄÖÜ])")
+    gemeldet = set()
+    for m in muster.finditer(text):
+        wort = m.group(2)
+        belegt = gross.get(wort.lower(), 0) >= 2 or wort.lower() in kw_nomen
+        if belegt and wort.lower() not in gemeldet:
+            gemeldet.add(wort.lower())
+            out.append((rel, "R17-KEYWORD-KASUS",
+                        f"Substantiv klein geschrieben: \u201e{m.group(0)}\u201c \u2013 "
+                        f"im selben Artikel steht \u201e{wort.capitalize()}\u201c "
+                        f"{max(gross.get(wort.lower(), 0), 1)}\u00d7 gro\u00df bzw. im "
+                        "Keyword-Feld (maschinell eingesetztes "
+                        "Keyword, bitte korrigieren)",
+                        m.group(0)))
+
+    # Dritter Beweisweg: das vollständige Keyword steht im Text, aber ein darin
+    # großgeschriebenes Wort ist klein („Du willst mietwagen buchen?",
+    # „Du willst standby kosten?"). Nur die GANZE Phrase zählt – ein einzelnes
+    # Wort könnte auch als Verb gemeint sein („sparen"), die Phrase nicht.
+    for kw in keywords or ():
+        teile = str(kw).split()
+        if len(teile) < 2 or not any(w[:1].isupper() for w in teile):
+            continue
+        muster_kw = re.compile(r"\b" + r"\s+".join(re.escape(w) for w in teile) + r"\b",
+                               re.IGNORECASE)
+        for m in muster_kw.finditer(text):
+            gefunden = m.group(0).split()
+            # Folgt dem klein geschriebenen Wort im Text ein GROSSES, war es
+            # ein Adjektiv vor seinem Substantiv („deine finanzielle Freiheit")
+            # – im Keyword steht es nur wegen der Titel-Schreibweise groß.
+            schief = [soll for i, (soll, ist) in enumerate(zip(teile, gefunden))
+                      if soll[:1].isupper() and ist[:1].islower()
+                      and not (i + 1 < len(gefunden) and gefunden[i + 1][:1].isupper())
+                      # Das ERSTE Keyword-Wort steht nur wegen der
+                      # Titel-Schreibweise groß („Sicher heizen"). Beweis muss
+                      # dann aus dem Text kommen: mindestens einmal satzintern
+                      # groß – sonst ist es Adjektiv oder Verb.
+                      and (i > 0 or gross.get(soll.lower(), 0) >= 1)]
+            if schief and m.group(0) not in gemeldet:
+                gemeldet.add(m.group(0))
+                out.append((rel, "R17-KEYWORD-KASUS",
+                            f"Keyword klein geschrieben: \u201e{m.group(0)}\u201c statt "
+                            f"\u201e{kw}\u201c (maschinell eingesetztes Keyword, bitte "
+                            "korrigieren)",
+                            m.group(0)))
+
+    # Vierter Beweisweg: die CTA-Frage der alten Healing-Schablone
+    # („Du willst heizungs-check?“). Nach „Du willst/brauchst/suchst“ steht ein
+    # kleingeschriebenes Wort, das derselbe Artikel groß kennt – also ein
+    # Substantiv, das die Maschine klein gestanzt hat.
+    muster_cta = re.compile(
+        r"\b[Dd]u\s+(?:willst|brauchst|suchst|m\u00f6chtest)\s+"
+        r"([a-z\u00e4\u00f6\u00fc\u00df][a-z\u00e4\u00f6\u00fc\u00df\\-]{3,})\b(?!\s+[A-Z\u00c4\u00d6\u00dc])")
+    for m in muster_cta.finditer(text):
+        wort = m.group(1)
+        # Folgt ein Infinitiv, war das Wort ein Adverb: „Du willst sicher
+        # heizen?“ / „Du willst preiswert surfen?“ sind korrektes Deutsch.
+        if re.match(r"\s+[a-z\u00e4\u00f6\u00fc\u00df]{3,}(?:en|ln|rn)\b",
+                    text[m.end():m.end() + 30]):
+            continue
+        belegt = gross.get(wort.lower(), 0) >= 2 or wort.lower() in kw_nomen
+        if belegt and m.group(0) not in gemeldet:
+            gemeldet.add(m.group(0))
+            out.append((rel, "R17-KEYWORD-KASUS",
+                        f"Substantiv klein geschrieben: \u201e{m.group(0)}\u201c \u2013 "
+                        f"\u201e{wort.capitalize()}\u201c steht im selben Artikel gro\u00df "
+                        "(Reste der alten Keyword-Schablone, bitte neu formulieren)",
+                        m.group(0)))
+
+    for absatz in absaetze:
+        if re.search(r"\]\(|https?://|👉|💶|💡|→", absatz):
+            continue
+        for satz in re.split(r"(?<=[.!?])\s+", absatz):
+            m = re.search(rf"({R17_WORT})\s*[.!?]\s*$", satz)
+            if not m:
+                continue
+            letztes = m.group(1).lower()
+            if not letztes.endswith("en") or letztes not in klein_only:
+                continue
+            toks = [w.lower() for w in re.findall(rf"\b({R17_WORT})\b", satz)]
+            if toks.count(letztes) > 1:
+                out.append((rel, "R17-KEYWORD-DOPPEL",
+                            f"Verb \u201e{letztes}\u201c steht zweimal im selben "
+                            f"Satz: \u201e{satz.strip()[:110]}\u201c \u2013 Keyword in "
+                            "eine fertige Satzschablone gestanzt, bitte neu formulieren",
+                            letztes))
+    return out
+
+
 def run_selftest() -> list:
     fehler = []
     term = {"dns": {"leitbegriff": "DNS-Server", "synonyme": ["Resolver", "Namensauflösung"],
@@ -695,6 +869,42 @@ def run_selftest() -> list:
     if any(f[1] == "R15-PHRASEN-DOPPEL" for f in check_article("t", body15b, {})):
         fehler.append("R15: False-Positive bei 9-Wort-Titel-Echo")
 
+    # ---------- R17 Keyword-Ruinen (Nachtrag #585, Realfall 05.10.2026) ----------
+    body17 = ("TEXT\n\nMit dem richtigen Vorgehen lässt sich die gasrechnung senken "
+              "um bis zu 15 % senken. Deine Gasrechnung steigt im Winter. "
+              "Die Gasrechnung kommt im Februar.")
+    f17 = [f[1] for f in check_article("t", body17, {})]
+    if "R17-KEYWORD-DOPPEL" not in f17:
+        fehler.append("R17: doppeltes Verb aus der Keyword-Schablone nicht erkannt")
+    if "R17-KEYWORD-KASUS" not in f17:
+        fehler.append("R17: kleingeschriebenes Substantiv (Eigenbeweis 2× groß) nicht erkannt")
+    # Frontmatter-Keywords sind Beweislage: EIN Vorkommen genügt dann.
+    body17b = "TEXT\n\nGerade für weihnachten budget planen gilt eine klare Regel."
+    if not any(f[1] == "R17-KEYWORD-KASUS" for f in
+               check_article("t", body17b, {}, ["Weihnachten Budget planen"])):
+        fehler.append("R17: Keyword-Kleinschreibung trotz Frontmatter-Beleg nicht erkannt")
+    # Negativ 1: Adjektiv vor seinem Substantiv bleibt frei.
+    body17c = ("TEXT\n\nSo erreichst du deine finanzielle Freiheit. Die Finanzielle "
+               "Freiheit ist ein Ziel. Finanzielle Freiheit braucht Zeit.")
+    if any(f[1] == "R17-KEYWORD-KASUS" for f in
+           check_article("t", body17c, {}, ["Finanzielle Freiheit"])):
+        fehler.append("R17: False-Positive bei Adjektiv vor Substantiv")
+    # Positiv 3: CTA-Frage der alten Schablone („Du willst heizungs-check?“).
+    body17e = ("TEXT\n\nDu willst heizungs-check? Ein Heizungs-check im September "
+               "spart Geld. Der Heizungs-check dauert eine Stunde.")
+    if not any(f[1] == "R17-KEYWORD-KASUS" for f in check_article("t", body17e, {})):
+        fehler.append("R17: klein gestanzte CTA-Frage (Du willst …) nicht erkannt")
+    # Negativ 3: Adverb vor Infinitiv bleibt frei („Du willst sicher heizen?“).
+    body17f = ("TEXT\n\nDu willst sicher heizen? Wer Sicher heizen will, prüft den "
+               "Tarif. Sicher heizen heißt vorher rechnen.")
+    if any(f[1] == "R17-KEYWORD-KASUS" for f in check_article("t", body17f, {})):
+        fehler.append("R17: False-Positive bei Adverb vor Infinitiv")
+    # Negativ 2: wiederholtes Substantiv am Satzende ist kein Verb-Doppel.
+    body17d = ("TEXT\n\nDienste antworten in 20 Millisekunden statt in "
+               "100 Millisekunden.")
+    if any(f[1] == "R17-KEYWORD-DOPPEL" for f in check_article("t", body17d, {})):
+        fehler.append("R17: False-Positive bei wiederholtem Substantiv")
+
     # ---------- R16 Prompt-Echo (Issue #521, Realfall 02.10.2026) ----------
     # Exakt die Form, die am 02.10.2026 im Entwurf stand: eine Leerzeile
     # zwischen TITLE und DESCRIPTION – genau die Form, die parse_article
@@ -762,7 +972,7 @@ def main() -> int:
         if fehler:
             print("SELFTEST FEHLGESCHLAGEN – nichts geschrieben.")
             return 2
-        print("✅ Verständnis-Selbsttest: R2–R16 grün (inkl. Prompt-Echo im Text und im Frontmatter).")
+        print("✅ Verständnis-Selbsttest: R2–R17 grün (inkl. Prompt-Echo und Keyword-Ruinen).")
         return 0
 
     term = load_terminologie()
@@ -781,7 +991,8 @@ def main() -> int:
     for p in paths:
         rel = str(p.relative_to(ROOT))
         raw = p.read_text(encoding="utf-8")
-        all_finds += check_article(rel, split_body(raw), term)
+        all_finds += check_article(rel, split_body(raw), term,
+                                   frontmatter_keywords(raw))
         # Frontmatter separat: split_body() schneidet es ab, der Schaden
         # vom 02.10.2026 saß aber genau dort (description/pin_description).
         all_finds += check_meta_prompt_echo(rel, raw)
@@ -829,6 +1040,10 @@ def main() -> int:
                   "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT", "R10-DOPPELWORT",
                   "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE", "R13-DATUM-PUNKT",
                   "R14-MARKER-RUINE", "R15-PHRASEN-DOPPEL",
+                  # R17 (05.10.2026, Nachtrag #585): maschinell verstümmelte
+                  # Keyword-Einsetzungen blockieren – deckungsgleich mit
+                  # publish_gate.textverstaendnis_failures.
+                  "R17-KEYWORD-KASUS", "R17-KEYWORD-DOPPEL",
                   "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]

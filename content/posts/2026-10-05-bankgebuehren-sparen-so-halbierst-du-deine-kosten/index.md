@@ -24,14 +24,16 @@ cover:
   image: "images/covers/2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten.jpg"
   alt: "Bankgebühren sparen: So halbierst du deine Kosten"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Prüfe, ob dein Girokonto monatlich 5 € – 12 € kostet und Leistungen enthält, die du nicht nutzt; ein kostenloses Basiskonto eliminiert diese Gebühr komplett. Nutze digitale Banken oder reine Online‑Konten, die 0 € Kontoführung und kostenfreie Überweisungen bieten. Vermeide Dispozinsen und Fremdwährungsaufschläge, indem du dein Konto nicht überziehst und Transaktionen im Voraus planst."
+kurzantwort: "Schau nach, was dein Girokonto im Monat kostet. Üblich sind 5 € bis 12 €. Oft zahlst du für Leistungen, die du nie nutzt. Ein kostenloses Konto bei einer Online-Bank streicht diese Gebühr ganz. Überziehe dein Konto nicht, dann sparst du auch die hohen Zinsen."
 ---
 
-Du willst bankgebühren sparen? Zahlst du jährlich über 100 € für ein einfaches Girokonto?
+Zahlst du mehr als 100 € im Jahr für dein Girokonto? Dann verschenkst du jeden Monat Geld.
 
-Viele Bankkunden verschenken Monat für Monat bares Geld durch unnötige Gebühren. Mit dem richtigen Vergleich halbierst du deine Fixkosten für die Kontoführung innerhalb weniger Minuten. Oft sind es versteckte Konto-gebühren – diese summieren sich über das Jahr auf beachtliche Beträge.
+Ein Vergleich dauert nur ein paar Minuten. Danach zahlst du oft die Hälfte.
 
-Dieser Artikel zeigt dir den direkten Weg zur Gebühren-Reduzierung. Du lernst, welche Posten dein Budget belasten und wie du schnell wechselst. Wer seine Bankgebühren aktiv steuert, gewinnt finanzielle Freiheit für wichtigere Investitionen. Folge diesen Schritten, um dauerhaft Bankgebühren sparen zu können.
+Teuer sind vor allem die kleinen Posten. Einzeln fallen sie kaum auf. Über ein Jahr kommt viel zusammen.
+
+Dieser Ratgeber zeigt dir den kurzen Weg. Du erfährst, welche Posten dein Budget belasten. Und du siehst, wie schnell ein Wechsel geht.
 
 **Das Wichtigste in Kürze**  
 - **Analyse**: Erfasse alle wiederkehrenden Kosten deiner Kontoführung inklusive versteckter Einzelposten.
@@ -49,11 +51,17 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was kostet dich das aktuelle Kontomodell?
 
-Jedes Girokonto verursacht Kosten durch Grundgebühren oder spezielle Serviceleistungen. Die meisten Institute verlangen heute zwischen 5 € und 12 € pro Monat als Basispreis. Zusätzlich zahlst du oft für jede Überweisung oder für die Zusendung von Papierauszügen. Diese Einzelposten summieren sich am Jahresende schnell auf über 150 € an Gesamtkosten. 
+Jedes Konto kostet Geld. Der Grundpreis liegt heute meist bei 5 € bis 12 € im Monat.
 
-Prüfe deine Kontoauszüge der letzten zwölf Monate auf regelmäßige Entgelte. Oft verstecken Banken Preiserhöhungen in langen AGB-Änderungen, die du leicht übersiehst. Seit dem wegweisenden Urteil des Bundesgerichtshofs (BGH) vom April 2021 dürfen Banken Gebühren nicht mehr einfach stillschweigend erhöhen. Dennoch bleiben viele Alttarife bestehen, die im Vergleich zu modernen Direktbanken völlig überteuert sind. 
+Dazu kommen Einzelposten. Du zahlst für Überweisungen oder für Auszüge per Post. Am Jahresende stehen schnell über 150 € auf der Rechnung.
 
-Nur wenn du den exakten Preis kennst, kannst du effektiv Bankgebühren sparen. Hohe Bankgebühren sind kein Schicksal, sondern eine Entscheidung für den falschen Anbieter. Schau dir besonders die folgenden Posten an:
+Nimm dir die Auszüge der letzten zwölf Monate vor. Suche nach allem, was regelmäßig abgebucht wird.
+
+Preiserhöhungen stecken gern in langen AGB-Briefen. Seit einem Urteil des BGH von 2021 darf deine Bank still nichts mehr erhöhen. Viele alte Tarife sind trotzdem geblieben, und sie sind teuer.
+
+Du sparst nur, wenn du deinen Preis kennst. Eine hohe Gebühr ist kein Schicksal. Sie ist die Folge des falschen Anbieters.
+
+Prüfe diese Posten:
 - **Monatlicher Grundpreis**: Die fixe Basisgebühr für die Kontoführung.
 - **Kosten für die Girocard/Debitkarte**: Viele Banken verlangen mittlerweile 10 € bis 15 € pro Jahr für die Plastikkarte.
 - **Beleglose Buchungen**: Kosten für Online-Überweisungen oder Daueraufträge.
@@ -62,15 +70,19 @@ Nur wenn du den exakten Preis kennst, kannst du effektiv Bankgebühren sparen. H
 
 ## Warum lohnt sich Bankgebühren sparen?
 
-Weniger Ausgaben für die Bank bedeuten mehr Geld für deine privaten Wünsche. Bei einem knappen Budget erhöht eine Ersparnis von 120 € direkt deine monatliche Liquidität. Darüber hinaus bewerten Banken deine Bonität besser, wenn die Fixkosten niedrig bleiben. Ein schlankes Konto ist die Basis für jeden erfolgreichen Vermögensaufbau. 
+Weniger Gebühr heißt mehr Geld für dich. Bei knappem Budget sind 120 € im Jahr spürbar.
 
-Banken verdienen an deiner Trägheit und an veralteten Verträgen. **Durch einen Wechsel setzt du ein Zeichen für faire Wettbewerbsbedingungen am Markt.** Du erhältst bei modernen Anbietern oft bessere digitale Funktionen für weniger Geld. So sicherst du dir moderne Technik und behältst dein Kapital bei dir.
+Niedrige Fixkosten helfen auch bei der Bonität. Ein schlankes Konto ist der Anfang von jedem Vermögensaufbau.
 
-Betrachte das Sparpotenzial über einen längeren Zeitraum. Wenn du 10 € im Monat sparst und diese stattdessen in einen ETF mit einer durchschnittlichen Rendite von 7 % investierst, hast du nach 30 Jahren über 12.000 € angesammelt. Das zeigt: Die Gebühren-Reduzierung ist kein Kleinvieh, sondern ein massiver Hebel für deine Altersvorsorge. 
+Banken verdienen an alten Verträgen und an Bequemlichkeit. **Mit einem Wechsel stärkst du den Wettbewerb.** Bei modernen Anbietern bekommst du dazu die bessere App für weniger Geld.
+
+Denke das Ganze langfristig. Du sparst 10 € im Monat und legst das Geld in einen ETF.
+
+Bei 7 Prozent Rendite liegen nach 30 Jahren über 12.000 € auf dem Konto. Die Gebühr ist also kein Kleingeld, sondern ein großer Hebel.
 
 ## Welche Alternativen ermöglichen eine Gebühren-Reduzierung?
 
-Die Bankenlandschaft hat sich stark gewandelt. Während Filialbanken mit hohem Personalaufwand kämpfen, nutzen Direktbanken effiziente digitale Prozesse, um Kosten an dich weiterzugeben.
+Der Markt hat sich stark verändert. Eine Filialbank zahlt Miete und Personal. Eine Direktbank arbeitet digital und gibt den Vorteil an dich weiter.
 
 | Kontotyp                     | Jahresgebühr (Beispiel) | Besonderheiten | Zielgruppe |
 |------------------------------|------------------------|----------------|------------|
@@ -80,45 +92,59 @@ Die Bankenlandschaft hat sich stark gewandelt. Während Filialbanken mit hohem P
 | **Hybrid-Konto (Kombination)**  | 24 € – 48 €             | Eingeschränkter Filialzugang, günstige Grundgebühr | Kompromiss-Suchende |
 | **Kreditkarte ohne Jahresgebühr** | 0 €                    | Vorsicht vor hohen Zinsen bei Teilzahlung | Ergänzung zum Basiskonto |
 
-Die günstigste Wahl ist meist ein reines Online-Konto ohne teures Filialnetz. Brauchst du jedoch oft Beratung vor Ort oder musst regelmäßig Bargeld einzahlen, ist ein Hybrid-Modell sinnvoll. Hier zahlst du eine geringe Gebühr, behältst aber den Zugang zu einem Automatennetz oder Schalterdiensten. Vergleiche immer die Leistungen mit deinem tatsächlichen Nutzungsverhalten.
+Am billigsten ist ein reines Online-Konto. Du brauchst Beratung vor Ort oder zahlst oft Bargeld ein?
+
+Dann passt ein Mischmodell besser. Du zahlst eine kleine Gebühr und behältst den Zugang zum Schalter. Vergleiche die Leistungen immer mit dem, was du wirklich nutzt.
 
 **Faustregel:** Wenn deine monatlichen Geldeingänge über 700 € liegen, findest du fast immer ein kostenloses Konto. Viele Neobanken wie C24 oder Revolut bieten sogar Kontomodelle ohne fixen Mindesteingang an, wobei der volle Funktionsumfang oft an einen Gehaltseingang gekoppelt ist.
 
 ## Detaillierte Analyse der versteckten Konto-gebühren
 
-Um deine Kosten wirklich zu halbierst, musst du die Psychologie der Preisgestaltung verstehen. Viele Konten werben mit "0 € Grundgebühr", holen sich das Geld aber an anderer Stelle zurück.
+Viele Konten werben mit „0 € Grundgebühr“. Das Geld holt sich die Bank an anderer Stelle zurück. Diese Stellen solltest du kennen.
 
 ### 1. Die Bargeld-Falle
-Einige Banken erlauben nur drei oder fünf kostenlose Abhebungen pro Monat. Jede weitere Transaktion kostet dann zwischen 2 € und 5 €. Wer häufig kleine Beträge abhebt, zahlt hier massiv drauf. Prüfe, wie oft du tatsächlich Bargeld benötigst.
+Viele Banken erlauben nur drei bis fünf Abhebungen im Monat. Jede weitere kostet 2 € bis 5 €.
+
+Wer oft kleine Beträge holt, zahlt hier viel drauf. Zähle einmal nach, wie oft du Bargeld brauchst.
 
 ### 2. Auslandseinsatzentgelt (AEE)
-Wenn du im Urlaub außerhalb der Euro-Zone (z. B. USA, Schweiz, Thailand) mit der Karte zahlst, berechnen viele Institute eine Gebühr von 1,5 % bis 2,5 % des Umsatzes. Bei einem Urlaub mit 2.000 € Ausgaben sind das bereits 40 € bis 50 € zusätzliche Bankgebühren. Kostenlose Reise-Kreditkarten oder moderne Neobanken verzichten oft komplett auf dieses Entgelt.
+Du zahlst im Urlaub mit Karte, etwa in den USA oder der Schweiz. Dann kostet das 1,5 bis 2,5 Prozent vom Umsatz.
+
+Bei 2.000 € Ausgaben sind das 40 € bis 50 €. Gute Reisekarten und viele Online-Banken verzichten darauf.
 
 ### 3. Dispositionszinsen (Dispo)
-Obwohl die Zinsen am Markt schwanken, verlangen einige Filialbanken immer noch 12 % bis 14 % für die Kontoüberziehung. Wenn du dein Konto regelmäßig überziehst, ist der Dispozins der wichtigste Faktor für die Gebühren-Reduzierung. Ein Wechsel zu einer Bank mit 8 % Dispozins kann bei einem permanenten Minus von 2.000 € über 100 € pro Jahr einsparen.
+Manche Filialbanken verlangen noch 12 bis 14 Prozent für das Minus auf dem Konto. Bist du oft im Minus, ist das dein größter Posten.
+
+Rechne es durch: Bei 2.000 € Minus und 8 statt 14 Prozent sparst du über 100 € im Jahr.
 
 ### 4. Gebühren für Push-Benachrichtigungen oder SMS
-Während Push-Benachrichtigungen in der App meist gratis sind, lassen sich einige Institute die Sicherheit per SMS-TAN teuer bezahlen. Wer viel überweist, sollte auf App-basierte Freigabeverfahren umsteigen, um Bankgebühren sparen zu können.
+Die Nachricht in der App ist meist gratis. Für jede SMS-TAN kassieren manche Banken extra. Wer viel überweist, gibt Zahlungen besser in der App frei.
 
 ## So gehst du vor: 4K-Prüfpfad für deine Konten
 
-Die Umstellung deines Finanzlebens wirkt oft komplizierter, als sie ist. Mit dem 4K-Prüfpfad strukturierst du den Wechsel effizient.
+Der Wechsel wirkt größer, als er ist. Der 4K-Prüfpfad führt dich in vier Schritten hindurch.
 
 ### 1. Kosten sehen
-Erstelle eine Liste mit allen Gebühren der letzten zwölf Monate. Nimm dir ein Blatt Papier oder eine Excel-Tabelle. Addiere die Grundpreise, Kreditkartengebühren, Transaktionskosten und Dispozinsen. Die Summe wird dich wahrscheinlich überraschen.
+Liste alle Gebühren der letzten zwölf Monate auf. Ein Blatt Papier reicht.
+
+Addiere Grundpreis, Karte, Buchungen und Zinsen. Die Summe überrascht fast jeden.
 
 ### 2. Konditionen rechnen
-Vergleiche die Kosten mit aktuellen Angeboten für Online-Girokonten. Nutze Vergleichsportale, aber lies immer das offizielle Preis-Leistungs-Verzeichnis (PLV) der Bank. Achte auf:
+Stelle deine Summe neben aktuelle Angebote. Nutze ein Vergleichsportal. Lies aber immer auch die offizielle Preisliste der Bank. Achte auf:
 - Wie viele kostenlose Abhebungen sind inklusive?
 - Welches Automatennetz wird genutzt (Cash Group, Cashpool, Sparkassen-Verbund)?
 - Gibt es eine echte Kreditkarte oder eine Debitkarte?
 - Ist eine Echtzeit-Überweisung (Instant Payment) kostenlos möglich?
 
 ### 3. Kündigungsfenster sichern
-Prüfe die Fristen für den Kontowechsel. Girokonten können in der Regel jederzeit ohne lange Fristen gekündigt werden. Nutze den gesetzlich vorgeschriebenen Kontowechselservice (§ 20 Zahlungskontengesetz). Deine neue Bank kontaktiert dabei die alte Bank und fordert eine Liste aller Lastschriften und Daueraufträge der letzten 13 Monate an. Die Umstellung erfolgt meist innerhalb von 12 Geschäftstagen.
+Ein Girokonto kannst du fast immer sofort kündigen. Lange Fristen gibt es nicht.
+
+Nutze die gesetzliche Wechselhilfe. Deine neue Bank fragt bei der alten alle Lastschriften und Daueraufträge der letzten 13 Monate ab. Nach etwa zwölf Werktagen ist alles umgestellt.
 
 ### 4. Kurs halten
-Kontrolliere deine Kontokosten alle zwei Jahre auf neue Sparpotenziale. Der Markt ist extrem dynamisch. Was heute das beste Angebot ist, kann in 24 Monaten durch neue Anbieter oder geänderte Konditionen veraltet sein. Setze dir einen Kalendereintrag für den "Finanz-Check".
+Prüfe deine Kosten alle zwei Jahre erneut. Der Markt dreht sich schnell.
+
+Das beste Angebot von heute ist in zwei Jahren Mittelmaß. Trage dir dafür einen Termin in den Kalender.
 
 
 
@@ -127,7 +153,7 @@ Kontrolliere deine Kontokosten alle zwei Jahre auf neue Sparpotenziale. Der Mark
 
 ## Vor- und Nachteile eines Bankwechsels
 
-Ein Wechsel bietet enorme Chancen, bringt aber auch kleine Herausforderungen mit sich.
+Ein Wechsel bringt viel. Ein paar Mühen gehören aber dazu.
 
 **Vorteile:**
 - **Direkte Kostenersparnis**: Oft über 100 € pro Jahr sofort mehr in der Tasche.
@@ -150,7 +176,7 @@ Ein Wechsel bietet enorme Chancen, bringt aber auch kleine Herausforderungen mit
 
 ## Modellrechnung: Wie viel kannst du wirklich einsparen?
 
-Um zu verdeutlichen, wie du deine Kosten halbierst (oder sogar ganz eliminierst), schauen wir uns zwei Profile an.
+Zwei Beispiele zeigen, wie viel drinsteckt.
 
 ### Szenario A: Der klassische Filialbank-Nutzer
 - **Altes Konto**: 9,90 € Grundgebühr/Monat + 30 €/Jahr für die Kreditkarte + 5 €/Jahr für SMS-TANs.
@@ -166,27 +192,33 @@ Um zu verdeutlichen, wie du deine Kosten halbierst (oder sogar ganz eliminierst)
 - **Ersparnis**: 91,20 € pro Jahr.
 
 **Ergebnis**  
-Die Gebühren-Reduzierung ist in beiden Fällen massiv. Über zehn Jahre gerechnet sind das im Szenario A über 1.500 € zusätzliches Kapital. Diese Summe kannst du stattdessen in einen ETF-Sparplan investieren, was bei einer konservativen Wertentwicklung zu einer Gesamtsumme von fast 2.200 € führt. Das zeigt deutlich, wie effektiv du Bankgebühren sparen kannst, wenn du einmalig aktiv wirst.
+In beiden Fällen ist die Ersparnis groß. Über zehn Jahre sind es im ersten Beispiel über 1.500 €.
+
+Lege diese Summe in einen ETF-Sparplan. Bei vorsichtiger Rechnung werden daraus fast 2.200 €. Dafür musst du nur einmal aktiv werden.
 
 ## Strategien für den Übergang: Das Zwei-Konten-Modell
 
-Ein cleverer Trick, um die Gebühren-Reduzierung ohne Risiko zu testen, ist das Zwei-Konten-Modell. 
+Du willst ohne Risiko testen? Dann führe zwei Konten parallel. 
 1. Du eröffnest ein neues, kostenloses Online-Konto.
 2.
 
-Du lässt dein altes Konto für zwei bis drei Monate parallel laufen, reduzierst es aber auf das günstigste Basis-Modell.
+Lass das alte Konto zwei bis drei Monate weiterlaufen. Stelle es dabei auf das billigste Modell um.
 3. Du überweist dein Gehalt bereits auf das neue Konto und beobachtest, ob noch Lastschriften vom alten Konto abgehen.
 4 Sobald das alte Konto "stillsteht", kündigst du es endgültig.
 
-Dieser sanfte Übergang nimmt die Angst davor, dass wichtige Zahlungen (Miete, Strom, Kreditraten) ins Leere laufen könnten. Die meisten Banken bieten heute digitale "Wechselassistenten", die deine Zahlungspartner automatisch per Brief oder E-Mail über die neue Bankverbindung informieren.
+So kann keine wichtige Zahlung ins Leere laufen. Miete, Strom und Kreditrate bleiben sicher.
+
+Die meisten Banken haben dafür einen digitalen Helfer. Er schreibt deine Zahlungspartner selbst an.
 
 ## Fazit und nächste Schritte
 
-Du hast nun das Wissen, um deine Bankkosten drastisch zu senken. Analysiere heute noch deine Auszüge und identifiziere teure Konto-gebühren.
+Jetzt kennst du die Hebel. Nimm dir heute deine Auszüge vor und markiere jede Gebühr.
 
-Der Prozess dauert oft weniger als 30 Minuten, bringt dir aber eine lebenslange Ersparnis. Wähle danach ein Modell, das deine Anforderungen an Service und Preis erfüllt. Ob Neobank mit modernster App oder solide Direktbank mit großem Automatennetz – die Auswahl war nie besser.
+Die Arbeit dauert keine 30 Minuten. Die Ersparnis bleibt dir jedes Jahr.
 
-Ein schneller Wechsel ist der erste Schritt zu deiner finanziellen Optimierung. Halte dich an den 4K-Prüfpfad und lass dich nicht von bürokratischen Hürden abschrecken. **Wer seine Bankgebühren aktiv steuert, übernimmt die Kontrolle über eigene Finanzen.**
+Wähle danach ein Konto, das zu dir passt. Ob App-Bank oder Direktbank mit großem Automatennetz: Die Auswahl war nie besser.
+
+Halte dich an die vier Schritte. **Wer seine Gebühren steuert, hat seine Finanzen im Griff.**
 
 ---
 
@@ -198,25 +230,39 @@ Ein schneller Wechsel ist der erste Schritt zu deiner finanziellen Optimierung. 
 ## Häufige Fragen
 
 ### Wie finde ich das passende Gratis-Konto? 
-Nutze Online-Vergleichsportale und achte besonders auf die Bedingungen für den Geldeingang. Viele Banken verlangen einen monatlichen Eingang von 700 €, damit die Gebühr entfällt. Prüfe zudem, ob du mit der dazugehörigen Karte weltweit kostenlos Bargeld abheben kannst und ob das Institut Einlagensicherung innerhalb der EU bietet.
+Nutze ein Vergleichsportal und achte auf die Bedingung beim Geldeingang. Oft müssen 700 € im Monat eingehen.
+
+Prüfe dann zwei Dinge: Hebst du mit der Karte gratis Bargeld ab? Und sitzt die Bank in der EU mit Einlagenschutz?
 
 ### Muss ich meine Girokarte beim Wechsel verlieren? 
-Ja, du erhältst von deiner neuen Bank eine neue Karte mit neuer PIN. Deine alte Karte wird nach der Kontokündigung ungültig und sollte sicher vernichtet werden (Chip und Magnetstreifen zerstören). Achte darauf, dass du die neue Karte erst vollständig im Alltag testest, bevor du das alte Exemplar entsorgst.
+Ja. Du bekommst eine neue Karte mit neuer PIN.
+
+Die alte Karte wird nach der Kündigung ungültig. Zerstöre dann Chip und Magnetstreifen. Teste die neue Karte aber erst im Alltag.
 
 ### Wie oft sollte ich meine Kontokosten überprüfen? 
-Ein Check alle 12 bis 24 Monate ist absolut ausreichend. So stellst du sicher, dass du nicht unbemerkt in teure Alttarife rutschst, wenn die Bank ihre Konditionen anpasst. Besonders nach Fusionen von Banken ändern sich oft die Preismodelle zum Nachteil der Altkunden.
+Alle ein bis zwei Jahre reicht. So rutschst du nicht unbemerkt in einen teuren Alttarif. Nach einer Fusion ändern Banken ihre Preise besonders oft.
 
 ### Was kostet ein Kontowechsel in der Praxis? 
-Der Wechsel selbst ist dank gesetzlicher Regelungen für dich kostenlos. Die Banken müssen beim Umzug deiner Daueraufträge und Lastschriften kooperieren und dürfen dafür keine Gebühren verlangen. Lediglich Porto für die Information deiner Vertragspartner könnte anfallen, falls du den digitalen Wechselservice nicht nutzt.
+Der Wechsel ist für dich gratis. Das schreibt das Gesetz vor.
+
+Beide Banken müssen mithelfen und dürfen dafür nichts verlangen. Nur Porto kann anfallen, wenn du selbst Briefe schreibst.
 
 ### Können meine Ersparnisse durch Kreditkarten-Gebühren wieder aufgebraucht werden? 
-Ja, wenn du eine kostenpflichtige Karte zum eigentlich kostenlosen Konto buchst. Viele Banken bieten "Gold-" oder "Platin-Karten" mit Versicherungen an, die oft 100 € bis 200 € im Jahr kosten. Prüfe kritisch, ob du diese Versicherungen (z. B. Reiserücktritt) wirklich brauchst oder ob eine separate Versicherung nicht günstiger wäre. Wähle daher immer ein Paket, bei dem die Basiskarte bereits inklusive ist.
+Ja. Das passiert, wenn du eine teure Karte dazubuchst.
+
+Gold- und Platin-Karten kosten oft 100 € bis 200 € im Jahr. Dafür gibt es Versicherungen.
+
+Frage dich, ob du diesen Schutz brauchst. Einzeln gekauft ist er oft billiger. Nimm lieber ein Paket mit kostenloser Basiskarte.
 
 ### Was passiert mit meinen Daueraufträgen beim Wechsel?
-Im Rahmen der gesetzlichen Kontowechselhilfe übermittelt deine alte Bank der neuen Bank eine Liste aller bestehenden Daueraufträge. Die neue Bank richtet diese dann zu den gewünschten Terminen neu ein. Du solltest dennoch am ersten Tag nach dem Wechsel prüfen, ob alle wichtigen Zahlungen wie die Miete korrekt ausgeführt wurden.
+Deine alte Bank schickt der neuen eine Liste aller Daueraufträge. Die neue Bank richtet sie zum gewünschten Termin ein.
+
+Prüfe am Tag danach trotzdem selbst. Vor allem die Miete sollte korrekt abgehen.
 
 ### Sind Neobanken so sicher wie klassische Filialbanken?
-In Deutschland ansässige Neobanken verfügen über eine Vollbanklizenz und unterliegen der Aufsicht durch die BaFin. Dein Guthaben ist bis zu 100.000 € über die gesetzliche Einlagensicherung geschützt. In puncto IT-Sicherheit sind Neobanken oft sogar moderner aufgestellt (Zwei-Faktor-Authentisierung via Smartphone-Biometrie), auch wenn sie keine physischen Filialen als Anlaufstelle bieten.
+App-Banken aus Deutschland haben eine volle Banklizenz. Die BaFin prüft sie wie jede andere Bank.
+
+Dein Guthaben ist bis 100.000 € geschützt. Bei der Technik sind sie oft sogar moderner: Du gibst jede Zahlung per Fingerabdruck frei.
 
 ---
 
