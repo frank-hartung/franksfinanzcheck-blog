@@ -12,48 +12,47 @@
     "sperre_bis": "2026-10-03"
   },
   "Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: balkonkraftwerk-foerderung-2026-deine-optionen-fuer-zusaetzl",
+    "grund": "Artefakt fehlt (balkonkraftwerk-foerderung-2026-deine-optionen-fuer-zusaetzl) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: black-friday-internet-angebote-lohnt-der-dsl-wechsel",
+    "grund": "Artefakt fehlt (black-friday-internet-angebote-lohnt-der-dsl-wechsel) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern",
+    "grund": "Artefakt fehlt (bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Campingurlaub 2026: So hältst du die Kosten im Rahmen": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: camping-2026-kostenfallen-vermeiden-clever-planen",
+    "grund": "Artefakt fehlt (camping-2026-kostenfallen-vermeiden-clever-planen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
+  },
+  "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif": {
+    "fehler": 0,
+    "grund": "produziert: dns-server-aendern-schnelleres-internet-ohne-mehrkosten",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-10-05",
+    "letzter_versuch": "2026-10-05",
+    "sperre_bis": "2027-04-03"
   },
   "DSL-Anbieter wechseln und Geld sparen": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich",
+    "grund": "Artefakt fehlt (dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "DSL-Anbieter wechseln: Wie du den besten Tarif findest": {
     "fehler": 1,
@@ -63,13 +62,11 @@
     "sperre_bis": "2026-10-03"
   },
   "Dein Online-Banking und Kontomanagement optimieren": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: online-banking-optimieren-kontomanagement-smarter",
+    "grund": "Artefakt fehlt (online-banking-optimieren-kontomanagement-smarter) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Die Vorteile von Online-Konten und wie du sie nutzt": {
     "abgleich_fehler": 1,
@@ -81,13 +78,11 @@
     "sperre_bis": "2027-04-03"
   },
   "Die besten Apps für das Sparen von Geld": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: apps-die-dein-sparschwein-digital-aufruesten",
+    "grund": "Artefakt fehlt (apps-die-dein-sparschwein-digital-aufruesten) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Die verschiedenen Arten von Reiseversicherungen im Vergleich": {
     "abgleich_fehler": 1,
@@ -106,22 +101,18 @@
     "sperre_bis": "2027-04-03"
   },
   "ETF-Sparplan für Einsteiger: So startest du monatlich": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten",
+    "grund": "Artefakt fehlt (etf-sparplan-vermoegensaufbau-ohne-hohe-gebuehren-starten) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: 365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum",
+    "grund": "Artefakt fehlt (365-tage-ohne-neukauf-so-sparst-du-beim-kleiderkonsum) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?": {
     "abgleich_fehler": 1,
@@ -131,21 +122,18 @@
     "letzter_versuch": "2026-09-30"
   },
   "Flugverspätung: So bekommst du deine Entschädigung": {
-    "fehler": 0,
-    "grund": "produziert: flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu",
-    "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
-  },
-  "Frugal leben mit Familie: So klappt Sparen auch mit Kindern": {
     "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: frugalismus-familie-clever-sparen-ohne-verzicht",
+    "grund": "Artefakt fehlt (flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-04"
+  },
+  "Frugal leben mit Familie: So klappt Sparen auch mit Kindern": {
+    "abgleich_fehler": 2,
+    "fehler": 0,
+    "grund": "Artefakt fehlt (frugalismus-familie-clever-sparen-ohne-verzicht) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "infra_fehler": 0,
+    "letzter_versuch": "2026-10-03"
   },
   "Gas-Abschlag winterfest: So planst du die Heizsaison richtig": {
     "abgleich_fehler": 1,
@@ -155,13 +143,11 @@
     "letzter_versuch": "2026-09-29"
   },
   "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget",
+    "grund": "Artefakt fehlt (neujahrsvorsaetze-geld-2027-8-hebel-fuer-dein-budget) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Glasfaserausbau: Wann lohnt sich der Anschluss?": {
     "abgleich_fehler": 1,
@@ -171,30 +157,25 @@
     "letzter_versuch": "2026-10-01"
   },
   "Grundversorgung raus: So entkommst du dem teuersten Stromtarif": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue",
+    "grund": "Artefakt fehlt (grundversorgung-strom-kosten-senken-dein-weg-aus-dem-teue) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v",
+    "grund": "Artefakt fehlt (handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Haushaltskosten reduzieren mit einfachen Mitteln": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: haushaltskosten-senken-7-ueberraschende-tricks-die-sofort",
+    "grund": "Artefakt fehlt (haushaltskosten-senken-7-ueberraschende-tricks-die-sofort) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Hauskauf finanzieren: Darlehen clever vergleichen": {
     "abgleich_fehler": 1,
@@ -204,13 +185,11 @@
     "letzter_versuch": "2026-10-01"
   },
   "Heizöl kaufen: Wann ist der beste Zeitpunkt?": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest",
+    "grund": "Artefakt fehlt (heizoel-preise-wann-du-den-tank-guenstig-fuellen-solltest) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Hund & Katze: Lohnt sich eine Tierversicherung?": {
     "abgleich_fehler": 1,
@@ -220,13 +199,11 @@
     "letzter_versuch": "2026-10-01"
   },
   "Interrail und Bahncard: Günstig mit dem Zug durch Europa": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: interrail-trick-mit-bahncard-guenstig-durch-ganz-europa",
+    "grund": "Artefakt fehlt (interrail-trick-mit-bahncard-guenstig-durch-ganz-europa) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Jahreskosten fürs Auto minimieren": {
     "abgleich_fehler": 1,
@@ -267,13 +244,11 @@
     "sperre_bis": "2027-03-29"
   },
   "Photovoltaik: Lohnt sich eine Solaranlage 2026?": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch",
+    "grund": "Artefakt fehlt (photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Preiswerter DSL-Anschluss für Zuhause": {
     "fehler": 0,
@@ -291,12 +266,11 @@
     "letzter_versuch": "2026-09-29"
   },
   "Reisekrankenversicherung: Wann sie sich wirklich lohnt": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: reisekrankenversicherung-so-vermeidest-du-teure",
+    "grund": "Artefakt fehlt (reisekrankenversicherung-so-vermeidest-du-teure) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-02",
-    "letzter_versuch": "2026-10-02",
-    "sperre_bis": "2027-03-31"
+    "letzter_versuch": "2026-10-02"
   },
   "Reiseversicherungen im Test": {
     "fehler": 1,
@@ -320,22 +294,18 @@
     "letzter_versuch": "2026-09-29"
   },
   "Smart Home: Diese Geräte sparen wirklich Strom": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei",
+    "grund": "Artefakt fehlt (smart-home-so-senkst-du-deine-stromrechnung-mit-echten-ei) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: stromrechnung-senken-20-strategien-fuer-dein",
+    "grund": "Artefakt fehlt (stromrechnung-senken-20-strategien-fuer-dein) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Strom sparen im Sommer: 10 Tipps für heiße Monate": {
     "fehler": 1,
@@ -354,30 +324,25 @@
     "sperre_bis": "2027-04-03"
   },
   "Stromanbieter wechseln und bis zu 300 Euro sparen": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung",
+    "grund": "Artefakt fehlt (so-pruefst-du-deinen-stromtarif-2026-teure-grundversorgung) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Stromanbieter-Insolvenz: Was du jetzt wissen musst": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: stromanbieter-pleite-so-sicherst-du-deine-stromversorgung",
+    "grund": "Artefakt fehlt (stromanbieter-pleite-so-sicherst-du-deine-stromversorgung) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Stromkosten senken mit cleveren Haushaltsgeräten": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: stromkosten-senken-smarte-haushaltsgeraete-gezielt-einsetz",
+    "grund": "Artefakt fehlt (stromkosten-senken-smarte-haushaltsgeraete-gezielt-einsetz) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Strompreis-Anpassung im Sommer ausnutzen": {
     "fehler": 1,
@@ -387,30 +352,25 @@
     "sperre_bis": "2026-10-01"
   },
   "Stromspar-Apps im Test für den Haushalt": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: stromspar-apps-im-test-so-senkst-du-deine",
+    "grund": "Artefakt fehlt (stromspar-apps-im-test-so-senkst-du-deine) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Stromspeicher fürs Eigenheim: Lohnt sich die Anschaffung?": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher",
+    "grund": "Artefakt fehlt (stromspeicher-kaufen-lohnt-sich-ein-batteriespeicher) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Urlaubskasse clever aufbessern": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den",
+    "grund": "Artefakt fehlt (urlaub-sparen-so-pimpst-du-deine-urlaubskasse-fuer-den) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Urlaubskasse clever aufbessern: 7 Tipps für mehr Reisebudget": {
     "abgleich_fehler": 1,
@@ -420,21 +380,18 @@
     "letzter_versuch": "2026-10-02"
   },
   "VPN für Zuhause: Brauchst du das wirklich?": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz",
+    "grund": "Artefakt fehlt (vpn-zuhause-brauchst-du-das-extra-sicherheitsnetz) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Vergleich von Hausratversicherungen und wie du sparst": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: hausratversicherung-optimieren-schutz-pruefen-und-sparen",
+    "grund": "Artefakt fehlt (hausratversicherung-optimieren-schutz-pruefen-und-sparen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-02",
-    "letzter_versuch": "2026-10-02",
-    "sperre_bis": "2027-03-31"
+    "letzter_versuch": "2026-10-02"
   },
   "Weihnachtsbudget planen: Ohne Schulden durch die Feiertage": {
     "abgleich_fehler": 1,
@@ -444,12 +401,11 @@
     "letzter_versuch": "2026-09-30"
   },
   "Weihnachtsgeld klug einsetzen: Tilgen, sparen oder genießen?": {
+    "abgleich_fehler": 1,
     "fehler": 0,
-    "grund": "produziert: strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun",
+    "grund": "Artefakt fehlt (strategien-fuer-dein-extra-gehalt-weihnachtsgeld-was-tun) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Wie du deine Bankgebühren um 50 % reduzieren kannst": {
     "fehler": 0,
@@ -460,22 +416,18 @@
     "sperre_bis": "2027-04-03"
   },
   "Wie du deine monatlichen Ausgaben reduzieren kannst": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: monatliche-ausgaben-halbieren-dein-4-k-plan-fuer-smarte-ha",
+    "grund": "Artefakt fehlt (monatliche-ausgaben-halbieren-dein-4-k-plan-fuer-smarte-ha) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Wie du deine monatlichen Bankgebühren reduzieren kannst": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: bankgebuehren-senken-7-ueberraschende-wege-zum-sparen",
+    "grund": "Artefakt fehlt (bankgebuehren-senken-7-ueberraschende-wege-zum-sparen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Wie du mit einem Budget-App deine Ausgaben kontrollieren kannst": {
     "abgleich_fehler": 1,
@@ -487,22 +439,18 @@
     "sperre_bis": "2027-04-03"
   },
   "Wohnmobil mieten statt kaufen: Was günstiger ist": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen",
+    "grund": "Artefakt fehlt (die-nackte-wahrheit-2026-wohnmobil-mieten-oder-kaufen) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-03",
-    "letzter_versuch": "2026-10-03",
-    "sperre_bis": "2027-04-01"
+    "letzter_versuch": "2026-10-03"
   },
   "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?": {
-    "abgleich_fehler": 1,
+    "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "produziert: waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich",
+    "grund": "Artefakt fehlt (waermepumpe-oder-gas-was-rechnet-sich-2026-wirklich) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
     "infra_fehler": 0,
-    "letzter_erfolg": "2026-10-04",
-    "letzter_versuch": "2026-10-04",
-    "sperre_bis": "2027-04-02"
+    "letzter_versuch": "2026-10-04"
   },
   "Ökostrom wechseln: Günstig und seriös im Vergleich": {
     "abgleich_fehler": 1,
