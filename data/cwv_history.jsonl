@@ -6,3 +6,4 @@
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1538, "findings": 0, "generated": "2026-09-20", "html_files": 377, "img_nosize": 0, "inline_js": 412, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1403, "findings": 0, "generated": "2026-09-21", "html_files": 380, "img_nosize": 0, "inline_js": 284, "verdict": "GREEN", "worst_cover_bytes": 138530}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1509, "findings": 0, "generated": "2026-09-28", "html_files": 395, "img_nosize": 0, "inline_js": 415, "verdict": "GREEN", "worst_cover_bytes": 138530}
+{"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 1075, "findings": 0, "generated": "2026-10-05", "html_files": 107, "img_nosize": 0, "inline_js": 463, "verdict": "GREEN", "worst_cover_bytes": 138530}

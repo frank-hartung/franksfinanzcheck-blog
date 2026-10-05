@@ -78,3 +78,4 @@
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-25", "decay": 0, "drafts": 19, "lektor": null, "live": 42, "readability": 67.2, "score": 100, "secret_amber": 0, "secret_red": 0}
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-28", "decay": 0, "drafts": 14, "lektor": null, "live": 42, "readability": 63.6, "score": 94, "secret_amber": 1, "secret_red": 1}
 {"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-09-28", "decay": 0, "drafts": 11, "lektor": null, "live": 42, "readability": 64.8, "score": 85, "secret_amber": 0, "secret_red": 3}
+{"ampel": "GREEN", "awin": 0, "clicks": 0, "cwv": "GREEN", "cwv_state": "OK", "date": "2026-10-05", "decay": 0, "drafts": 22, "lektor": null, "live": 40, "readability": 61.2, "score": 96, "zugangsalter_gelb": 0, "zugangsalter_rot": 0}
