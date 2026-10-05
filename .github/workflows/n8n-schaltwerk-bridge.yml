@@ -57,7 +57,7 @@ jobs:
         # v6 nutzt die aktuelle Node-Runtime der Actions-Plattform. Kein
         # pip-cache: Der Bridge-Job ist klein; ein Cache-Ausfall darf den
         # produktiven Watchdog nicht bereits beim Runtime-Setup blockieren.
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           check-latest: false
