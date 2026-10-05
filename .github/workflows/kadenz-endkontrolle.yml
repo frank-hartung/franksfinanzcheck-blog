@@ -55,8 +55,27 @@ jobs:
         id: release
         continue-on-error: true
         run: |
+          set +e
           python3 scripts/check_covers.py --fix
+          covers_rc=$?
+          if [ "$covers_rc" -ne 0 ]; then
+            echo "::error::KADENZ-VORPRÜFUNG – Cover-/Artikelkorrektur scheitert vor der Endabnahme. Kein Tagesdefizit, sondern ein Gate-Crash."
+            echo "rc=$covers_rc" >> "$GITHUB_OUTPUT"
+            echo "class=cover-crash" >> "$GITHUB_OUTPUT"
+            exit "$covers_rc"
+          fi
+
           python3 scripts/publication_release.py
+          rc=$?
+          case "$rc" in
+            0) klasse=ok ;;
+            1) klasse=tagesdefizit ;;
+            3) klasse=release-crash ;;
+            *) klasse=unknown ;;
+          esac
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          echo "class=$klasse" >> "$GITHUB_OUTPUT"
+          exit "$rc"
       - name: Persist accepted articles and gate corrections even on deficit
         if: ${{ !cancelled() }}
         run: |
@@ -73,10 +92,42 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy.yml --ref main
       - name: Reconcile final source quota and deficit issue
+        id: quota
         if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set +e
           python3 scripts/engine_issue.py --deficit
+          issue_rc=$?
           python3 scripts/publication_check.py
-          test '${{ steps.release.outcome }}' = success
+          check_rc=$?
+          echo "issue_rc=$issue_rc" >> "$GITHUB_OUTPUT"
+          echo "check_rc=$check_rc" >> "$GITHUB_OUTPUT"
+          if [ "$issue_rc" -ne 0 ]; then
+            echo "::warning::Defizit-Fachmeldung konnte nicht sauber abgeglichen werden (Exit $issue_rc). Fehler-Alerting bleibt fail-open."
+          fi
+          if [ "$check_rc" -eq 0 ]; then
+            echo "✅ Source-Tagesziel erfüllt; keine rote Kadenz-Meldung nötig."
+          else
+            echo "::notice::Source-Tagesziel noch unter Minimum; engine-deficit ist der Fachkanal."
+          fi
+          exit 0
+
+      - name: RELEASE-CRASH – Endabnahme blockiert
+        if: ${{ !cancelled() && steps.release.outputs.class == 'release-crash' }}
+        run: |
+          echo "::error::RELEASE-CRASH (WF-1F8C) – Hugo-Build oder Gate-Werkzeug versagt in der Kadenz-Endabnahme. Das ist KEIN Tagesdefizit; Diagnose steht im Schritt „Final gates and validated reserve“."
+          exit 1
+
+      - name: KADENZ-GATE-CRASH – Vorprüfung oder Endabnahme unklassifiziert
+        if: ${{ !cancelled() && steps.release.outcome != 'success' && steps.release.outputs.class != 'tagesdefizit' && steps.release.outputs.class != 'release-crash' }}
+        run: |
+          echo "::error::KADENZ-GATE-CRASH (WF-1F8C) – die Kadenz-Endkontrolle scheitert vor/innerhalb der Endabnahme ohne Tagesdefizit-Klasse. Log des Schritts „Final gates and validated reserve“ prüfen; kein API-Key-Rateversuch."
+          exit 1
+
+      - name: TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig
+        if: ${{ !cancelled() && (steps.release.outputs.class == 'tagesdefizit' || (steps.release.outputs.class == 'ok' && steps.quota.outputs.check_rc != '' && steps.quota.outputs.check_rc != '0')) }}
+        run: |
+          echo "::error::TAGESDEFIZIT (WF-1F8C) – Source liegt unter dem Mindestziel. Der Fachkanal ist das auto-schließende Issue mit Label engine-deficit; kein zweites Wartungs-Issue und kein API-Key-Runbook."
+          exit 1
