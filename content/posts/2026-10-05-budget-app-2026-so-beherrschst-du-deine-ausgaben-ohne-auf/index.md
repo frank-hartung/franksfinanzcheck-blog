@@ -1,9 +1,9 @@
 ---
 title: "Budget‑App 2026 –: So beherrschst du deine Ausgaben ohne Auf"
 description: "Budget‑App 2026 –: Erfahre, wie moderne Budget‑Apps 2026 funktionieren, welche Neuerungen es gibt und wie du sie optimal nutzt."
-date: 2026-10-05T10:46:13Z
-draft: true
-reserve: true
+date: 2026-10-05T11:04:36Z
+draft: false
+reserve_published: 2026-10-05
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
