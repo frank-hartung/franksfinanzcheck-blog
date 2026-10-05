@@ -32,6 +32,11 @@ __pycache__/
 .meta_report.json
 .affiliate_report.json
 .indexnow_submitted.json
+
+# Nachheil-Auftrag aus git_sync.sh (WF-A535 #590): Laufnotiz, kein Zustand.
+# Er entsteht im Lauf, wird im selben Lauf abgearbeitet und darf niemals
+# nach main wandern – sonst heilt der nächste Lauf einen fremden Auftrag.
+.git_sync_nachheilung.txt
 .keyword_suggestions.json
 .grammar_report.json
 .sprachglatt_report.json

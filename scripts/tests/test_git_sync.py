@@ -684,3 +684,124 @@ class SchutzKlasseTests(GitSyncTestBase):
         self.assertEqual(res.returncode, 1, log)
         self.assertNotIn("Branch-Schutz/Ruleset", log)
         self.assertEqual(self._push_versuche(), 3, "drei Versuche bei Race")
+
+
+# --------------------------------------------------------------------------- #
+#  Vorfall 05.10.2026 (Meldung #590, Vorgang WF-A535): Tagesertrag verloren
+# --------------------------------------------------------------------------- #
+#  Die Content-Engine lief 23 Minuten, heilte und veröffentlichte – und verlor
+#  am Ende drei fertige Commits, weil ein Mensch (PR #585) und der Deploy-Lauf
+#  parallel dieselben Bestands-Artikel bearbeitet hatten. Der harte Stopp war
+#  inhaltlich richtig (kein Blind-Merge über Content), die Folge aber falsch:
+#  roter Lauf, verworfener Tagesertrag, Fehlerticket mit API-Key-Rateschlägen.
+#
+#  Auflösung (OPT-IN, Default bleibt hart): Mit
+#  GIT_SYNC_BESTAND_POLICY=bestand-gewinnt gibt der Kern den Artikel an den
+#  Bestand ab – die FREMDE, neuere Fassung gewinnt, kein Zeichen Redaktion geht
+#  verloren – und protokolliert ihn für `scripts/nachheilung.py`.
+class BestandsAbgabeTests(GitSyncTestBase):
+    SLUG = "content/posts/2026-10-02-weihnachten-budget-planen/index.md"
+
+    @staticmethod
+    def _live(body):
+        return ("---\ntitle: Weihnachten\ndate: 2026-10-02T06:00:00Z\n"
+                "draft: false\n---\n" + body + "\n")
+
+    def _policy(self, **extra):
+        env = {"GIT_SYNC_BESTAND_POLICY": "bestand-gewinnt"}
+        env.update(extra)
+        return env
+
+    def _nachheil_log(self, repo=None):
+        pfad = (repo or self.bot_b) / ".git_sync_nachheilung.txt"
+        return pfad.read_text(encoding="utf-8").splitlines() if pfad.exists() else []
+
+    def test_fremd_bearbeiteter_bestand_gewinnt_und_lauf_bleibt_gruen(self):
+        # A = Mensch/Deploy schreibt den Artikel redaktionell um …
+        self._commit(self.bot_a, self.SLUG, self._live("Fassung des Menschen"),
+                     "A: redaktionelle Überarbeitung (PR)")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        # … B = die Engine hat denselben Artikel maschinell geheilt.
+        self._commit(self.bot_b, self.SLUG, self._live("Maschinelle Heilung"),
+                     "B: Qualitäts-Fixes")
+        # Damit der Lauf etwas zu pushen HAT, hängt wie im Original ein
+        # zweiter, unstrittiger Commit darüber (Reserve-Zertifikat).
+        self._commit(self.bot_b, "data/reserve-readiness.json",
+                     '{"ready": 4}\n', "B: finale Veröffentlichungsgates")
+
+        res = self.run_sync(["--push-only"], env_extra=self._policy())
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 0, log)
+        self.assertIn("Bestand gewinnt", log)
+        # Der TEXT des Menschen steht live – die Maschine hat ihn nicht ersetzt.
+        self.assertIn("Fassung des Menschen", self.origin_read(self.SLUG))
+        self.assertNotIn("Maschinelle Heilung", self.origin_read(self.SLUG))
+        # Der unstrittige Teil des Laufs ist gerettet (genau das ging verloren).
+        self.assertIn('"ready": 4', self.origin_read("data/reserve-readiness.json"))
+        # Und die abgegebene Heilung ist protokolliert, nicht vergessen.
+        self.assertIn(self.SLUG, self._nachheil_log())
+
+    def test_gegenstandsloser_commit_wird_uebersprungen_statt_zu_blockieren(self):
+        # Der Bot-Commit besteht AUSSCHLIESSLICH aus der Heilung, die nun dem
+        # Bestand überlassen wird: Nach der Auflösung bleibt nichts übrig.
+        # Früher blieb der Rebase hier stecken („No changes") – heute wird der
+        # Commit übersprungen und der Lauf läuft weiter.
+        self._commit(self.bot_a, self.SLUG, self._live("Fassung des Menschen"),
+                     "A: redaktionelle Überarbeitung (PR)")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._live("Maschinelle Heilung"),
+                     "B: Qualitäts-Fixes")
+
+        res = self.run_sync(["--push-only"], env_extra=self._policy())
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 0, log)
+        self.assertIn("gegenstandslos", log)
+        self.assertIn("Fassung des Menschen", self.origin_read(self.SLUG))
+        # Kein Halbzustand: der Arbeitsbaum ist sauber, kein Rebase hängt.
+        status = subprocess.run(["git", "-C", str(self.bot_b), "status", "--porcelain"],
+                                capture_output=True, text=True, check=True).stdout
+        self.assertNotIn("UU ", status)
+
+    def test_ohne_opt_in_bleibt_der_harte_stopp(self):
+        # Alle anderen Workflows erben NICHTS: ohne die Variable ist ein
+        # Content-Konflikt weiterhin ein harter, lauter Stopp.
+        self._commit(self.bot_a, self.SLUG, self._live("Fassung des Menschen"),
+                     "A: redaktionelle Überarbeitung (PR)")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, self._live("Maschinelle Heilung"),
+                     "B: Qualitäts-Fixes")
+
+        res = self.run_sync(["--push-only"])
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("Kein Push", log)
+        self.assertIn("Fassung des Menschen", self.origin_read(self.SLUG))
+        self.assertEqual(self._nachheil_log(), [])
+
+    def test_konfliktdiagnose_nennt_die_betroffenen_dateien(self):
+        # Die Annotation ist die Diagnose: Sie muss die Datei nennen, sonst
+        # rät das Fehlerticket wieder zu API-Schlüsseln (#590).
+        self._commit(self.bot_a, "content/handbuch.md", "A\n", "A: handbuch")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, "content/handbuch.md", "B\n", "B: handbuch")
+
+        res = self.run_sync(["--push-only"], env_extra=self._policy())
+        log = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1, log)
+        self.assertIn("content/handbuch.md", log)
+        self.assertIn("Betroffen:", log)
+
+    def test_reserve_entwurf_bleibt_sache_der_maschine(self):
+        # Die ältere Regel (#295) hat Vorrang: Bei zwei Reserve-Entwürfen
+        # gewinnt weiterhin der frische Lauf – nicht der Bestand.
+        kopf = ("---\ntitle: Probe\ndate: 2026-10-05T06:00:00Z\n"
+                "draft: true\nreserve: true\n---\n")
+        self._commit(self.bot_a, self.SLUG, kopf + "A: stale\n", "A: reserve")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, self.SLUG, kopf + "B: frisch\n", "B: reserve")
+
+        res = self.run_sync(["--push-only"], env_extra=self._policy())
+        self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
+        self.assertIn("B: frisch", self.origin_read(self.SLUG))
+        self.assertEqual(self._nachheil_log(), [],
+                         "Reserve-Kandidaten brauchen keine Nachheilung")

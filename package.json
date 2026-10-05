@@ -144,6 +144,9 @@
     "vorgang:abschluss": "python3 scripts/vorgangs_abschluss.py",
     "vorgang:nachtrag": "python3 scripts/vorgangs_abschluss.py --nachtrag",
     "test:vorgang": "python3 scripts/vorgangs_abschluss.py --selftest && python3 -m unittest scripts.tests.test_vorgangs_abschluss",
+    "nachheilung": "python3 scripts/nachheilung.py",
+    "nachheilung:fix": "python3 scripts/nachheilung.py --fix",
+    "test:sync": "python3 scripts/nachheilung.py --selftest && python3 -m unittest scripts.tests.test_git_sync scripts.tests.test_nachheilung",
     "prepare": "python3 scripts/haken_wache.py --install --leise || true"
   },
   "devDependencies": {
