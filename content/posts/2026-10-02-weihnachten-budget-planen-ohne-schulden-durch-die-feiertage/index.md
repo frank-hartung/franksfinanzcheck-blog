@@ -29,7 +29,7 @@ cover:
 kurzantwort: "Starte schon im Herbst: Schreibe alle Kosten auf, von Geschenken bis zur Fahrt. Teile sie auf sechs Töpfe auf und rechne die Summe auf die Wochen bis Heiligabend um. Lege das Geld auf ein eigenes Tagesgeldkonto, zahle nur aus diesem Topf und meide Dispo und Raten. So startest du ohne Schulden ins neue Jahr."
 ---
 
-Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
+Du willst weihnachten budget planen? Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
 
 Dabei reichen ein paar Wochen Vorlauf, um das Fest ruhig zu planen. Wer früh startet, verteilt die Kosten auf mehrere Monate. Du bleibst aus dem Dispo und kaufst in Ruhe statt in Panik.
 
@@ -50,6 +50,9 @@ Hier bekommst du drei Dinge: ein Modell mit sechs Töpfen, eine ehrliche Rechnun
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum beginnt ein entspanntes Weihnachtsbudget schon im Oktober?
+
+
+Beim Thema Weihnachten Budget planen lohnt sich ein genauer Blick auf die Details.
 
 
 Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer Monat. Und die Kosten kommen alle auf einmal.
@@ -167,6 +170,9 @@ Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du run
 
 
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.
+
+
+Gerade für weihnachten budget planen gilt: Kleine Änderungen bringen große Wirkung.
 
 ## Häufige Fragen
 

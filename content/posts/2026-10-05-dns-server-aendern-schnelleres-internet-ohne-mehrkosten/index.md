@@ -22,7 +22,10 @@ redaktionelle_pruefung:
 
 inspiration: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
 ---
+
 Stell dir einen Modellfall vor: Ein Haushalt nutzt einen soliden DSL-Tarif mit 100 Mbit/s. Die monatlichen Fixkosten sind optimiert, die Hardware ist aktuell. Dennoch fühlt sich das Surfen zäh an. Webseiten bauen sich erst nach einer spürbaren Gedenksekunde auf, obwohl die Leitung laut Speedtest die volle Leistung bringt. Das Problem liegt hier oft nicht an der Bandbreite, sondern an der "Auskunft" des Internets. Wenn du deinen **dns server ändern** möchtest, setzt du genau an dieser unsichtbaren Bremse an, ohne einen Cent mehr für einen teureren Tarif auszugeben.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 In meinem Fixkosten-Cockpit ordne ich diesen Schritt dem Bereich "Konditionen rechnen" zu. Es geht darum, die maximale Leistung aus einem bestehenden Vertrag herauszuholen, bevor man über einen Wechsel oder ein Upgrade nachdenkt. Oft schlummert in den Standardeinstellungen deines Routers ungenutztes Potenzial, das du mit wenigen Klicks aktivieren kannst.
 

@@ -50,6 +50,9 @@ _(Dieser Artikel enth채lt Affiliate-Links (Werbung). Beim Abschluss 체ber einen 
 
 ## Starte mit einem kleinen Check
 
+
+Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+
 Pr체fe deine Zahlen, bevor die Heizung richtig l채uft. Die Preise der Anbieter gehen im Oktober 2026 weit auseinander. Das ist dein Hebel.
 
 Nimm dir heute zehn ruhige Minuten. Hol die letzte Rechnung und notiere drei Werte: Verbrauch, Preis je kWh und Grundpreis im Jahr.
@@ -237,6 +240,9 @@ Lies den Z채hler nach zwei Wochen Heizbetrieb erneut ab. So siehst du Fehler fr�
 Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer nur auf den Preis schaut und dabei W채rme verschenkt, zahlt am Ende trotzdem zu viel.
 
 Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 Prozent. Kalt wird es dabei nicht.
+
+
+Mit dem richtigen Vorgehen l채sst sich die gasrechnung senken um bis zu 15 % senken.
 
 ## Fazit: F체nf Fehler, eine klare Reihenfolge
 
