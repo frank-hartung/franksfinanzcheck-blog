@@ -130,36 +130,36 @@ class BucketAffiliateTest(unittest.TestCase):
         self.assertTrue(any("ohne Datenlage" in l for l in lines))
 
 
-class BucketSecretsTest(unittest.TestCase):
+class BucketZugaengeTest(unittest.TestCase):
     def test_totes_token_ist_rot_mit_beiden_listen(self):
         gov = {"steps": {"secrets": {"level": "red", "message": "Pinterest tot"}}}
-        secrets_state = {"entries": {
+        zugang_state = {"entries": {
             "GEMINI_API_KEY": {"quality": "proven"},
             "PINTEREST_ACCESS_TOKEN": {"verify": "dead"},
         }}
-        lvl, lines, _ = cockpit.bucket_secrets(gov, secrets_state)
+        lvl, lines, _ = cockpit.bucket_zugaenge(gov, zugang_state)
         self.assertEqual(lvl, "rot")
         joined = " ".join(lines)
         self.assertIn("GEMINI_API_KEY", joined)
         self.assertIn("PINTEREST_ACCESS_TOKEN", joined)
 
     def test_alles_proven_ist_gruen(self):
-        secrets_state = {"entries": {"GEMINI_API_KEY": {"quality": "proven"}}}
-        lvl, lines, _ = cockpit.bucket_secrets({}, secrets_state)
+        zugang_state = {"entries": {"GEMINI_API_KEY": {"quality": "proven"}}}
+        lvl, lines, _ = cockpit.bucket_zugaenge({}, zugang_state)
         self.assertEqual(lvl, "gruen")
 
     def test_keine_daten_ist_grau(self):
-        lvl, lines, _ = cockpit.bucket_secrets({}, {})
+        lvl, lines, _ = cockpit.bucket_zugaenge({}, {})
         self.assertEqual(lvl, "grau")
 
 
 class BucketSocialTest(unittest.TestCase):
     CHANNELS = {"channels": {
-        "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
-        "pinterest": {"enabled": True, "label": "Pinterest", "secrets": ["PINTEREST_ACCESS_TOKEN"]},
+        "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
+        "pinterest": {"enabled": True, "label": "Pinterest", "pflicht_env": ["PINTEREST_ACCESS_TOKEN"]},
         "bluesky": {"enabled": True, "label": "Bluesky",
-                    "secrets": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
-        "x": {"enabled": False, "label": "X (deaktiviert)", "secrets": ["X_TOKEN"]},
+                    "pflicht_env": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
+        "x": {"enabled": False, "label": "X (deaktiviert)", "pflicht_env": ["X_TOKEN"]},
     }}
 
     def test_kein_kanal_live_ist_rot(self):
@@ -169,24 +169,24 @@ class BucketSocialTest(unittest.TestCase):
         self.assertTrue(any("0/3" in l for l in lines))  # X ist deaktiviert, zählt nicht mit
 
     def test_live_kanal_mit_frischem_post_ist_gruen(self):
-        secrets_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
+        zugang_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
         state = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}], "failures": []}
-        lvl, lines, _ = cockpit.bucket_social(secrets_state, self.CHANNELS, state, NOW)
+        lvl, lines, _ = cockpit.bucket_social(zugang_state, self.CHANNELS, state, NOW)
         self.assertEqual(lvl, "gruen")
 
     def test_totes_token_zieht_auf_gelb_trotz_frischem_post(self):
-        secrets_state = {"entries": {
+        zugang_state = {"entries": {
             "MASTODON_ACCESS_TOKEN": {"quality": "proven"},
             "PINTEREST_ACCESS_TOKEN": {"verify": "dead"},
         }}
         state = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}], "failures": []}
-        lvl, lines, _ = cockpit.bucket_social(secrets_state, self.CHANNELS, state, NOW)
+        lvl, lines, _ = cockpit.bucket_social(zugang_state, self.CHANNELS, state, NOW)
         self.assertEqual(lvl, "gelb")
 
     def test_alter_post_ist_rot(self):
-        secrets_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
+        zugang_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
         state = {"history": [{"ok": True, "posted_at": "2026-09-01T10:00:00+00:00"}], "failures": []}
-        lvl, lines, _ = cockpit.bucket_social(secrets_state, self.CHANNELS, state, NOW)
+        lvl, lines, _ = cockpit.bucket_social(zugang_state, self.CHANNELS, state, NOW)
         self.assertEqual(lvl, "rot")
 
     def test_keine_kanaele_konfiguriert_ist_grau_nicht_rot(self):
@@ -194,9 +194,9 @@ class BucketSocialTest(unittest.TestCase):
         self.assertEqual(lvl, "grau")
 
     def test_standby_kanaele_werden_aufgelistet(self):
-        secrets_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
+        zugang_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
         state = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}], "failures": []}
-        _, lines, _ = cockpit.bucket_social(secrets_state, self.CHANNELS, state, NOW)
+        _, lines, _ = cockpit.bucket_social(zugang_state, self.CHANNELS, state, NOW)
         self.assertTrue(any("Standby" in l and "Bluesky" in l for l in lines))
 
 
@@ -239,9 +239,9 @@ class BuildAndRenderTest(unittest.TestCase):
     def setUp(self):
         self.gov = {"steps": {"lesbarkeit": {"level": "red", "message": "zu schwer"}}}
         self.channels = {"channels": {
-            "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
+            "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
         }}
-        self.secrets_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
+        self.zugang_state = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
         self.social_state = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}],
                               "failures": []}
         self.journal = [{"modus": "sendefile", "ausgabe": "2026-10-02-ausgabe", "status": "zugestellt",
@@ -249,7 +249,7 @@ class BuildAndRenderTest(unittest.TestCase):
 
     def test_gesamtbild_ist_schlechteste_einzelampel(self):
         overall, buckets = cockpit.build_cockpit(
-            NOW, self.gov, {"ready": 6, "target": 6}, self.secrets_state, self.channels,
+            NOW, self.gov, {"ready": 6, "target": 6}, self.zugang_state, self.channels,
             self.social_state, self.journal, {"pending": []},
         )
         self.assertEqual(overall, "rot")  # wegen Content-Pipeline
@@ -264,7 +264,7 @@ class BuildAndRenderTest(unittest.TestCase):
 
     def test_render_markdown_enthaelt_alle_bereiche(self):
         overall, buckets = cockpit.build_cockpit(
-            NOW, self.gov, {"ready": 6, "target": 6}, self.secrets_state, self.channels,
+            NOW, self.gov, {"ready": 6, "target": 6}, self.zugang_state, self.channels,
             self.social_state, self.journal, {"pending": []},
         )
         md = cockpit.render_markdown(NOW, overall, buckets)
@@ -275,7 +275,7 @@ class BuildAndRenderTest(unittest.TestCase):
 
     def test_status_json_ist_serialisierbar(self):
         overall, buckets = cockpit.build_cockpit(
-            NOW, self.gov, {"ready": 6, "target": 6}, self.secrets_state, self.channels,
+            NOW, self.gov, {"ready": 6, "target": 6}, self.zugang_state, self.channels,
             self.social_state, self.journal, {"pending": []},
         )
         status = cockpit.build_status_json(NOW, overall, buckets)

@@ -17,8 +17,12 @@ veröffentlicht**. Gesamtaufwand für alle Kanäle: **rund 90 Minuten, einmalig,
    **Variables** (nicht geheim: IDs, Instanz-URLs) im Reiter daneben unter *Variables*.
    Das ist kein Detail – eine ID als Secret zu hinterlegen funktioniert zwar, macht sie
    aber in Logs unlesbar („***"), was jede Fehlersuche blockiert.
-2. **Namen exakt übernehmen.** Sie stehen in `data/social/channels.yaml` und sind
+2. **Namen exakt übernehmen.** Sie stehen in `data/social/channels.yaml` im Feld
+   **`pflicht_env:`** (bis 04.10.2026 hieß das Feld `secrets:`) und sind
    Vertrag zwischen Workflow und Adapter. Ein Tippfehler = stiller Standby.
+   Dort stehen ausschließlich die **Namen** der Umgebungsvariablen, nie deren
+   Werte – Preflight, Cockpit und Scorecard geben genau diese Namen aus.
+   Warum die Umbenennung: `CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
 3. **Nach jedem Kanal verifizieren** (Abschnitt 1). Nie „hinterlegen und hoffen".
 
 ---

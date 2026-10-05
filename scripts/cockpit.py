@@ -68,7 +68,9 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 GOVERNANCE_PATH = os.path.join(BLOG_DIR, "data", "governance_status.json")
 RESERVE_PATH = os.path.join(BLOG_DIR, "data", "reserve-readiness.json")
-SECRETS_PATH = os.path.join(BLOG_DIR, "data", "secrets_state.json")
+# Zugangs-NACHWEISE (Ampel/Datum/Nachweisstufe) unter data/secrets_state.json –
+# der DATEINAME bleibt (Datenbestand-Vertrag), die Variable sagt, was drin ist.
+ZUGANG_STATE_PATH = os.path.join(BLOG_DIR, "data", "secrets_state.json")
 SOCIAL_CHANNELS_PATH = os.path.join(BLOG_DIR, "data", "social", "channels.yaml")
 SOCIAL_STATE_PATH = os.path.join(BLOG_DIR, "data", "social", "state.yaml")
 NEWSLETTER_JOURNAL_PATH = os.path.join(BLOG_DIR, "data", "newsletter_journal.jsonl")
@@ -269,7 +271,7 @@ def bucket_affiliate(governance: dict):
     ]
 
 
-def bucket_secrets(governance: dict, secrets_state: dict):
+def bucket_zugaenge(governance: dict, zugang_state: dict):
     steps = governance.get("steps", {}) or {}
     gov_lvl = None
     detail = None
@@ -278,7 +280,7 @@ def bucket_secrets(governance: dict, secrets_state: dict):
         if gov_lvl in ("rot", "gelb"):
             detail = _short(steps["secrets"].get("message", ""), 200)
 
-    entries = secrets_state.get("entries", {}) or {}
+    entries = zugang_state.get("entries", {}) or {}
     proven = sorted(n for n, s in entries.items() if s.get("quality") == "proven")
     dead = sorted(n for n, s in entries.items() if s.get("verify") == "dead")
 
@@ -308,9 +310,9 @@ def bucket_secrets(governance: dict, secrets_state: dict):
     return lvl, lines, ["data/governance_status.json", "data/secrets_state.json", "docs/PINTEREST-TOKEN-RUNBOOK.md"]
 
 
-def bucket_social(secrets_state: dict, channels_cfg: dict, social_state: dict, now: datetime.datetime):
+def bucket_social(zugang_state: dict, channels_cfg: dict, social_state: dict, now: datetime.datetime):
     channels = channels_cfg.get("channels", {}) or {}
-    entries = secrets_state.get("entries", {}) or {}
+    entries = zugang_state.get("entries", {}) or {}
 
     live, standby, dead = [], [], []
     enabled_total = 0
@@ -319,7 +321,8 @@ def bucket_social(secrets_state: dict, channels_cfg: dict, social_state: dict, n
             continue
         enabled_total += 1
         label = cfg.get("label", key)
-        needed = cfg.get("secrets", []) or []
+        # NAMEN der Pflicht-Umgebungsvariablen dieses Kanals (Namensvertrag #78).
+        needed = list(cfg.get("pflicht_env") or [])
         states = [entries.get(s) for s in needed]
         if any(s and s.get("verify") == "dead" for s in states):
             dead.append(label)
@@ -436,14 +439,14 @@ BUCKET_ORDER = [
 ]
 
 
-def build_cockpit(now, governance, reserve, secrets_state, channels_cfg, social_state,
+def build_cockpit(now, governance, reserve, zugang_state, channels_cfg, social_state,
                    journal_rows, newsletter_state):
     buckets = {}
     buckets["Content-Pipeline"] = bucket_content(governance, reserve)
     buckets["SEO & Technik"] = bucket_seo(governance)
     buckets["Affiliate & Umsatz"] = bucket_affiliate(governance)
-    buckets["Secrets & Zugänge"] = bucket_secrets(governance, secrets_state)
-    buckets["Social-Automation"] = bucket_social(secrets_state, channels_cfg, social_state, now)
+    buckets["Secrets & Zugänge"] = bucket_zugaenge(governance, zugang_state)
+    buckets["Social-Automation"] = bucket_social(zugang_state, channels_cfg, social_state, now)
     buckets["Newsletter"] = bucket_newsletter(journal_rows, newsletter_state, now)
 
     overall = worst(lvl for lvl, _, _ in buckets.values())
@@ -561,34 +564,34 @@ def selftest() -> bool:
     check("bucket_seo: nur info-Umami bei sonst grün bleibt grün (Standby != Fehler)",
           lvl3 == "gruen")
 
-    # -- bucket_secrets ----------------------------------------------------
-    secrets_mixed = {"entries": {
+    # -- bucket_zugaenge ---------------------------------------------------
+    zugang_mixed = {"entries": {
         "GEMINI_API_KEY": {"quality": "proven"},
         "PINTEREST_ACCESS_TOKEN": {"verify": "dead"},
     }}
-    gov_secrets_red = {"steps": {"secrets": {"level": "red", "message": "Pinterest tot"}}}
-    lvl4, bl4, _ = bucket_secrets(gov_secrets_red, secrets_mixed)
-    check("bucket_secrets: totes Token -> rot, beide Listen in der Begründung",
+    gov_zugang_rot = {"steps": {"secrets": {"level": "red", "message": "Pinterest tot"}}}
+    lvl4, bl4, _ = bucket_zugaenge(gov_zugang_rot, zugang_mixed)
+    check("bucket_zugaenge: totes Token -> rot, beide Listen in der Begründung",
           lvl4 == "rot" and any("GEMINI" in x for x in bl4) and any("PINTEREST" in x for x in bl4))
 
     # -- bucket_social ----------------------------------------------------
     channels_cfg = {"channels": {
-        "mastodon": {"enabled": True, "label": "Mastodon", "secrets": ["MASTODON_ACCESS_TOKEN"]},
-        "pinterest": {"enabled": True, "label": "Pinterest", "secrets": ["PINTEREST_ACCESS_TOKEN"]},
-        "bluesky": {"enabled": True, "label": "Bluesky", "secrets": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
+        "mastodon": {"enabled": True, "label": "Mastodon", "pflicht_env": ["MASTODON_ACCESS_TOKEN"]},
+        "pinterest": {"enabled": True, "label": "Pinterest", "pflicht_env": ["PINTEREST_ACCESS_TOKEN"]},
+        "bluesky": {"enabled": True, "label": "Bluesky", "pflicht_env": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"]},
     }}
-    secrets_social = {"entries": {
+    zugang_social = {"entries": {
         "MASTODON_ACCESS_TOKEN": {"quality": "proven"},
         "PINTEREST_ACCESS_TOKEN": {"verify": "dead"},
     }}
     state_fresh = {"history": [{"ok": True, "posted_at": "2026-10-02T10:00:00+00:00"}], "failures": []}
-    lvl5, bl5, _ = bucket_social(secrets_social, channels_cfg, state_fresh, now)
+    lvl5, bl5, _ = bucket_social(zugang_social, channels_cfg, state_fresh, now)
     check("bucket_social: 1 live Kanal + frischer Post + 1 totes Token -> gelb (Re-Auth nötig)",
           lvl5 == "gelb" and any("Mastodon" in x for x in bl5))
 
     state_stale = {"history": [{"ok": True, "posted_at": "2026-09-01T10:00:00+00:00"}], "failures": []}
-    secrets_only_mastodon = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
-    lvl6, bl6, _ = bucket_social(secrets_only_mastodon, channels_cfg, state_stale, now)
+    zugang_only_mastodon = {"entries": {"MASTODON_ACCESS_TOKEN": {"quality": "proven"}}}
+    lvl6, bl6, _ = bucket_social(zugang_only_mastodon, channels_cfg, state_stale, now)
     check("bucket_social: letzter Post vor Wochen -> rot", lvl6 == "rot")
 
     lvl7, _, _ = bucket_social({"entries": {}}, channels_cfg, {"history": [], "failures": []}, now)
@@ -611,7 +614,7 @@ def selftest() -> bool:
 
     # -- build_cockpit + render_markdown ----------------------------------------------------
     overall, buckets = build_cockpit(
-        now, gov_red, {"ready": 6, "target": 6}, secrets_mixed, channels_cfg,
+        now, gov_red, {"ready": 6, "target": 6}, zugang_mixed, channels_cfg,
         state_fresh, journal_recent, {"pending": []},
     )
     check("build_cockpit: Gesamtbild ist die schlechteste Einzelampel (hier rot wg. Content)",
@@ -637,14 +640,14 @@ def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     governance = _load_json(GOVERNANCE_PATH, {})
     reserve = _load_json(RESERVE_PATH, {})
-    secrets_state = _load_json(SECRETS_PATH, {})
+    zugang_state = _load_json(ZUGANG_STATE_PATH, {})
     channels_cfg = _load_yaml(SOCIAL_CHANNELS_PATH, {})
     social_state = _load_yaml(SOCIAL_STATE_PATH, {})
     journal_rows = _load_jsonl(NEWSLETTER_JOURNAL_PATH)
     newsletter_state = _load_json(NEWSLETTER_STATE_PATH, {})
 
     overall, buckets = build_cockpit(
-        now, governance, reserve, secrets_state, channels_cfg, social_state,
+        now, governance, reserve, zugang_state, channels_cfg, social_state,
         journal_rows, newsletter_state,
     )
 

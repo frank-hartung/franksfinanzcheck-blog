@@ -64,3 +64,15 @@ Jede Ausnahme trägt einen `# codeql[regel-id]`-Kommentar **mit Begründung dire
 - **Neuer Security-Fund auf main:** Wache schlägt rot (Gate) bzw. Alert erscheint in der Security-Tab → Code lesen, Query-Logik prüfen, echt fixen.
 - **Qualitäts-Fund (z. B. py/redos):** beheben, wo sinnvoll; das Gate blockiert bewusst nicht darauf.
 - **Gate-Zahlen prüfen:** Bilanz-Kommentar am PR; SARIF-Diagnose-Notice im Lauf; Diagnose-Artefakt `sarif-diagnose-<sprache>`.
+
+---
+
+## Nachtrag 05.10.2026 · Alert #78 („Clear-text logging of sensitive information")
+
+Sechs Tage nach der Heilung meldete die Analyse denselben Regeltyp erneut
+(Alert #78, 6 Fundstellen) – und das Gate sah sie nicht, weil es seit
+`codeql-action` v3.28 bei `pull_request` nur den Diff analysierte. Beide
+Lücken sind dauerhaft geschlossen; der Sonderfall ist vollständig dokumentiert
+in **`CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md`** (Wahrheitsort
+für #78): Namensvertrag statt Unterdrückung, Vollanalyse in jedem Ereignis,
+Wert-Dichtheitstest und Unterdrückungsverbot für die Clear-Text-Regeln.
