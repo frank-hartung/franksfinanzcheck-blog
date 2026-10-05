@@ -56,9 +56,15 @@ def audit_file(path: Path) -> dict:
         ) or not re.search(
             rf"^  {re.escape(job)}:[\s\S]*?^    timeout-minutes:", text, re.MULTILINE)]
         data = {"name": name, "jobs": job_names,
-                "on": {"schedule": True} if re.search(r"^\s+schedule:", text, re.MULTILINE) else {},
-                "permissions": True if re.search(r"^permissions:", text, re.MULTILINE) else None,
-                "concurrency": True if re.search(r"^concurrency:", text, re.MULTILINE) else None}
+                "on": {"schedule": True} if re.search(r"^\s+schedule:", text, re.MULTILINE) else {}}
+        # Schlüssel nur bei einem echten Top-Level-Vertrag setzen. Zuvor wurde
+        # auch bei Abwesenheit `permissions: None` eingetragen; die spätere
+        # Schlüsselprüfung meldete dadurch ausgerechnet fehlende Permissions
+        # fälschlich als vorhanden.
+        if re.search(r"^permissions:\s*(?:#.*)?$", text, re.MULTILINE):
+            data["permissions"] = {}
+        if re.search(r"^concurrency:\s*(?:#.*)?$", text, re.MULTILINE):
+            data["concurrency"] = {}
     else:
         data = load(path)
         jobs = data.get("jobs") if isinstance(data.get("jobs"), dict) else {}
@@ -73,7 +79,9 @@ def audit_file(path: Path) -> dict:
         "name": data.get("name", path.stem),
         "scheduled": has_schedule(data),
         "jobs": len(jobs),
-        "has_permissions": "permissions" in data,
+        # Nur die granulare Mapping-Form ist ein belastbarer Least-Privilege-
+        # Vertrag. `permissions: null`, `read-all` und `write-all` zählen nicht.
+        "has_permissions": isinstance(data.get("permissions"), dict),
         "has_concurrency": "concurrency" in data,
         "missing_timeout_jobs": missing_timeout,
         "floating_action_refs": floating,
@@ -124,7 +132,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="maschinenlesbarer Bericht")
     parser.add_argument("--strict", action="store_true",
-                        help="nicht erfolgreich bei doppelten Namen oder fehlenden Timeouts")
+                        help="nicht erfolgreich bei doppelten Namen, fehlenden Timeouts "
+                             "oder fehlenden/ungültigen Permissions")
     args = parser.parse_args(argv)
     rows = [audit_file(path) for path in sorted(WORKFLOWS.glob("*.yml"))]
     report = build_report(rows)
@@ -132,7 +141,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         print_text(report)
-    if args.strict and (report["duplicate_names"] or report["missing_timeout"]):
+    if args.strict and (report["duplicate_names"] or report["missing_timeout"]
+                        or report["missing_permissions"]):
         return 1
     return 0
 

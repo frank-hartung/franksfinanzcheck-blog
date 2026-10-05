@@ -23,6 +23,10 @@ on:
 # Kein contents:write nötig – MASTODON-PROFILE-REPORT.md ist seit dem
 # Profi-Cleanup (31.08.2026) bewusst nicht versioniert (.gitignore).
 # Der Report wird als CI-Artefakt gesichert statt committet (Fix #205-Klasse).
+# Der explizite Block ist zugleich die Least-Privilege-Grenze für GITHUB_TOKEN:
+# Checkout darf lesen; alle nicht genannten Rechte stehen damit auf `none`.
+permissions:
+  contents: read
 
 concurrency:
   group: mastodon-profile
