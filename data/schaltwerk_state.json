@@ -1,6 +1,7 @@
 {
   "ausgeloest": {
     "nacht-planung::planung:2026-10-04": "2026-10-04T16:20:48+02:00",
+    "nacht-planung::planung:2026-10-05": "2026-10-05T08:55:53+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=TmCaACcZgN8": "2026-10-04T16:20:48+02:00",
@@ -20,7 +21,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00"
   },
   "letzter_lauf": {
-    "nacht-planung": "2026-10-04T16:20:48+02:00",
+    "nacht-planung": "2026-10-05T08:55:53+02:00",
     "reach-signale-kuratieren": "2026-10-04T16:20:48+02:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "verbraucher-nachrichten": "2026-10-04T16:20:48+02:00"
@@ -29,12 +30,14 @@
     "datei:data/social/channels.yaml": "f96c9bcc4af27432"
   },
   "slots": {
-    "slot:2026-10-04:03:40": "2026-10-04T16:20:48+02:00"
+    "slot:2026-10-04:03:40": "2026-10-04T16:20:48+02:00",
+    "slot:2026-10-05:03:40": "2026-10-05T08:55:53+02:00"
   },
   "version": 1,
   "zaehler": {
     "nacht-planung": {
-      "2026-10-04": 1
+      "2026-10-04": 1,
+      "2026-10-05": 1
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6
