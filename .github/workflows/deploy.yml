@@ -318,7 +318,7 @@ jobs:
     timeout-minutes: 150
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
         with:
           submodules: true
           fetch-depth: 0
@@ -923,10 +923,10 @@ jobs:
       # Artefakt für `actions/deploy-pages`.
       # ------------------------------------------------------------
       - name: GitHub Pages konfigurieren (Workflow-Quelle)
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Artefakt für offizielles Pages-Deployment hochladen
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 

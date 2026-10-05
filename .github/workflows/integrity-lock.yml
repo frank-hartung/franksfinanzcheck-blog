@@ -90,7 +90,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Repository auschecken (volle Historie für die Herkunft)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 

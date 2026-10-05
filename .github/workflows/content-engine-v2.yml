@@ -47,7 +47,7 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
 
       # COMMIT-IDENTITÄT FRÜH UND EINMAL (19.09.2026, Issue #316): Bisher setzte
       # jeder Commit-Schritt die Identität selbst. Läuft ein früher Schritt hart

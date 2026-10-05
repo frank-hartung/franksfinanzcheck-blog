@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: Repository auschecken
         # v4 – unveränderlich gepinnt (der Wächter selbst darf keine bewegliche Abhängigkeit haben)
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Python-Abhängigkeit (PyYAML für die Wacht-Liste, Fallback im Skript)
         run: python3 -m pip install -q --break-system-packages pyyaml 2>/dev/null || python3 -m pip install -q pyyaml 2>/dev/null || true

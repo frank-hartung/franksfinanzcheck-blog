@@ -36,7 +36,7 @@ jobs:
       - name: Repository auschecken
         # checkout@v5 (09.09.2026): v4 zielt auf Node.js 20 (deprecated,
         # erzeugte in jedem Lauf eine Warn-Annotation).
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -135,7 +135,7 @@ jobs:
         # verpuffte in continue-on-error. Jetzt dediziertes Issue mit
         # Dedupe (offenes Issue gleichen Titels -> Kommentar statt Duplikat).
         if: ${{ steps.kw.outcome == 'failure' && !cancelled() }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -420,7 +420,7 @@ jobs:
         # Betroffene Artikel werden NIE gelöscht (siehe bestand_gate.py) –
         # nur gemeldet, damit ein Mensch echte Textarbeit leisten kann.
         if: steps.bestand.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -527,7 +527,7 @@ jobs:
         # übrig sind (Exit 1). Erstellt ein GitHub-Issue mit allen Details –
         # der wöchentliche Lauf ist damit zu 100 % autonom.
         if: steps.meta_gate.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -561,7 +561,7 @@ jobs:
         # Lücke geschlossen: A11y-Fehler wurden bisher nur geloggt, nie
         # gemeldet. Jetzt automatisches Issue – konsistent zum SEO-Audit.
         if: steps.a11y.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
@@ -620,7 +620,7 @@ jobs:
 
       - name: Issue bei kritischen SEO-Problemen erstellen
         if: steps.audit.outcome == 'failure'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');
