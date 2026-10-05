@@ -106,14 +106,14 @@ Lies deine Kontoauszüge der letzten 12 Monate. Brauchst du drei Streaming‑D
 ### 5. Bankgebühren und Kontoführungsentgelte streichen
 Zahlst du 5 bis 9 € im Monat für dein Konto? Auch Überweisungen und Kreditkarten kosten oft extra. Viele Direktbanken sind kostenlos. Dazu gibt es eine Visa‑ oder Mastercard. Bargeld bekommst du weltweit ohne Gebühr.
 
-**Vergleichstabelle (Stand 2024):**
+**Vergleichstabelle (Stand: Oktober 2026):**
 
 | Bank | Kontoführungsgebühr | Kredit‑/Debit‑Karte | Auslandseinsatzgebühr | Besonderheiten |
 |:---|---:|---:|---:|:---|
-| DKB | 0 € | kostenfrei (Visa) | 0 % | Gratis‑Girokonto, 1 % Zinsen auf Tagesgeld |
-| N26 (Standard) | 0 € | kostenfrei (Mastercard) | 1,7 % nach 200 € | Echtzeit‑Benachrichtigungen |
-| ING | 0 € | kostenfrei (Visa) | 0 % | 3,75 % Tagesgeld (bis 100.000 €) |
-| Sparkasse (regional) | 4‑9 € | 5‑12 € | 1,5 % | Filialnetz, aber Gebühren |
+| DKB | 0 € ab 700 € Geldeingang (unter 28 Jahren bedingungslos), sonst 4,50 €/Monat | kostenfrei (Visa) | 0 € weltweit abheben | Aktivkunden-Modell, Dispo 7,91–8,51 % |
+| N26 (Standard) | 0 € ohne Bedingungen | kostenfrei (Mastercard) | 1,70 % Fremdwährung | Echtzeit‑Benachrichtigungen, Tagesgeld 0,25–1,5 % |
+| ING | 0 € ohne Bedingungen | kostenfrei (Visa) | 0 € weltweit bezahlen | Dispo 9,14 %, girocard optional |
+| Sparkasse (regional) | 4‑9 € | 5‑12 € | 1,5 % | Filialnetz, aber Gebühren |
 
 **Tipp:** Wechsel zu einer **gebührenfreien Direktbank** und richte deine Daueraufträge sofort um. So sparst du nicht nur Geld, sondern hast auch einen schnelleren Überblick über deine Ausgaben.
 

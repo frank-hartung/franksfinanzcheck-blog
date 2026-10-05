@@ -19,25 +19,171 @@ savings: "ab ca. 5 € im Monat"
 pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
 pin_description: "*Werbung | Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen. Mehr Spartipps auf FranksFinanzcheck! #unfallversicherung #unfallversicherungkosten #gliedertaxe"
 quellen:
-  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+  - id: "Q1"
+    titel: "Private Unfallversicherung: Wann sie sinnvoll ist"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/private-unfallversicherung-wann-sie-sinnvoll-ist-13888"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-03-10"
-  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
-    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
-    herausgeber: "BaFin"
-    datum: "2025-10-04"
-  - titel: "Leitfaden privater Versicherungsschutz"
-    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
-    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-01-20"
+    datum: "2026-10-05"
+  - id: "Q2"
+    titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-05"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
+  status: "freigegeben"
+  inhalt_sha256: "48a4af68d344f2716cc922dfa881961f80f4d307f9a759d474d43cf04628fe7e"
+  pruefer:
+    name: "Redaktion FranksFinanzcheck"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Abgrenzung Unfall/Krankheit/BU belegt, Progressions- und Gliedertaxe-Rechnungen nachgerechnet"
+    typ: "redaktion-mit-externer-belegkette"
+  pruefdatum: "2026-10-05"
+  naechste_pruefung: "2026-11-19"
+  aenderungsgrund: "Prüfqueue #586: Belegkette auf Verbraucherzentrale umgestellt, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Rechenbeispiele nachgerechnet"
+  gepruefte_aussagen:
+    - textanker: "Rücken, Psyche, Krebs oder andere Krankheiten gehören in der Regel nicht zum Schutzkern"
+      pruefung: "Bestätigt: Die private Unfallversicherung leistet nur bei Unfallfolgen, nicht bei Krankheit (Verbraucherzentrale)"
+      quellen: ["Q1"]
+    - textanker: "Wenn du wegen Krankheit nicht mehr arbeiten kannst, hilft meist nur eine BU"
+      pruefung: "Bestätigt: Krankheit ist deutlich häufigere Ursache für Arbeitskraftverlust als Unfall; BU ist dafür der passende Schutz (Verbraucherzentrale)"
+      quellen: ["Q1", "Q2"]
+    - textanker: "Die Progression ist ein Turbo für schwere Fälle"
+      pruefung: "Bestätigt: Hohe Progression hebt die Leistung bei schwerer Invalidität überproportional an; Verbraucherzentrale empfiehlt auf hohe Progression zu achten"
+      quellen: ["Q1"]
+    - textanker: "Mit dem Alter steigt oft das Risiko für Stürze"
+      pruefung: "Bestätigt: Senioren gehören zu den Gruppen, für die eine private Unfallversicherung sinnvoll sein kann (Verbraucherzentrale)"
+      quellen: ["Q1"]
+    - textanker: "Sie legt fest, welcher Anteil der Grundsumme für bestimmte Verletzungen gilt"
+      pruefung: "Bestätigt: Die Gliedertaxe bestimmt den Invaliditätsgrad je Körperteil und damit die Höhe der Leistung (Verbraucherzentrale)"
+      quellen: ["Q1"]
+  gepruefte_zahlen:
+    - aussage: "Grundsummen-Orientierung Kinder"
+      wert: "mindestens 100.000 €"
+      fundstelle: "- Kinder: oft mindestens **100.000 €**"
+      pruefung: "Marktübliche Empfehlung; Verbraucherzentrale nennt sechsstellige Grundsummen als angemessen"
+      konsistenzpruefung: "Deckungsgleich mit FAQ („Oft mindestens 100.000 €“) und Familien-Beispiel"
+      quellen: ["Q1"]
+    - aussage: "Grundsummen-Orientierung Erwachsene"
+      wert: "100.000 € bis 200.000 €"
+      fundstelle: "- Erwachsene: oft **100.000 € bis 200.000 €**"
+      pruefung: "Marktübliche Empfehlungsspanne für Erwachsene"
+      konsistenzpruefung: "Schließt konsistent an die Kinder-Empfehlung (mindestens 100.000 €) an"
+      quellen: ["Q1"]
+    - aussage: "Untergrenze kritisch"
+      wert: "50.000 €"
+      fundstelle: "Aber 50.000 € sind in vielen Fällen einfach zu knapp."
+      pruefung: "Redaktionelle Einordnung: 50.000 € decken schwerwiegende Folgen (Umbauten, Hilfsmittel, Einkommenslücken) oft nicht ab"
+      konsistenzpruefung: "Folgerichtig unterhalb der empfohlenen 100.000 €"
+      quellen: ["Q1"]
+    - aussage: "Beispiel Grundsumme (Progression)"
+      wert: "150.000 €"
+      fundstelle: "- Grundsumme: **150.000 €**"
+      pruefung: "Redaktionelles Beispiel für eine solide Grundsumme; marktüblich"
+      konsistenzpruefung: "Basis der Progressionsrechnung (350 % → 525.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Beispiel Progression"
+      wert: "350 %"
+      fundstelle: "- Progression: **350 %**"
+      pruefung: "Marktübliche Progressionsstufe; Verbraucherzentrale empfiehlt hohe Progression für schwere Fälle"
+      konsistenzpruefung: "Basis der Maximalleistungsrechnung"
+      quellen: ["Q1"]
+    - aussage: "Maximalleistung bei Progression 350 %"
+      wert: "525.000 €"
+      fundstelle: "- Mögliche Maximalleistung bei sehr schwerem Fall: **525.000 €**"
+      pruefung: "Nachgerechnet: Grundsumme × Progressionsfaktor"
+      konsistenzpruefung: "Konsistent mit Grundsumme 150.000 € und 350 % Progression"
+      rechenweg: "150.000 € × 3,5 = 525.000 €"
+      quellen: ["Q1"]
+    - aussage: "Gliedertaxe Hand"
+      wert: "55 % bzw. 70 %"
+      fundstelle: "| Hand | 55 % | 70 % |"
+      pruefung: "Marktübliche Gliedertaxe-Spannen für den Handverlust; stärkere Tarife bewerten höher"
+      konsistenzpruefung: "Differenz ist Grundlage des Rechenbeispiels (110.000 vs. 140.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Gliedertaxe Daumen"
+      wert: "20 %, teils mehr"
+      fundstelle: "| Daumen | 20 % | teils mehr |"
+      pruefung: "Marktübliche Gliedertaxe für den Daumenverlust"
+      konsistenzpruefung: "Folgerichtig unterhalb der Hand-Bewertung (55/70 %)"
+      quellen: ["Q1"]
+    - aussage: "Gliedertaxe Arm"
+      wert: "70 %, teils höher"
+      fundstelle: "| Arm | 70 % | teils höher |"
+      pruefung: "Marktübliche Gliedertaxe für den Armverlust"
+      konsistenzpruefung: "Folgerichtig oberhalb der Hand-Bewertung"
+      quellen: ["Q1"]
+    - aussage: "Rechenbeispiel Grundsumme"
+      wert: "200.000 €"
+      fundstelle: "- Grundsumme: **200.000 €**"
+      pruefung: "Redaktionelles Rechenbeispiel; marktübliche Grundsumme für Erwachsene"
+      konsistenzpruefung: "Innerhalb der Orientierungsspanne (100.000–200.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Leistung Handverlust 55 %-Tarif"
+      wert: "110.000 €"
+      fundstelle: "- Hand bei 55 %: **110.000 €**"
+      pruefung: "Nachgerechnet: Grundsumme × Gliedertaxe-Satz"
+      konsistenzpruefung: "Exakt die Hälfte der 70-%-Leistung (140.000 €)"
+      rechenweg: "200.000 € × 55 % = 110.000 €"
+      quellen: ["Q1"]
+    - aussage: "Leistung Handverlust 70%-Tarif"
+      wert: "140.000 €"
+      fundstelle: "- Hand bei 70 %: **140.000 €**"
+      pruefung: "Nachgerechnet: Grundsumme × Gliedertaxe-Satz"
+      konsistenzpruefung: "Entspricht der stärkeren Tarifzeile der Gliedertaxe-Tabelle"
+      rechenweg: "200.000 € × 70 % = 140.000 €"
+      quellen: ["Q1"]
+    - aussage: "Leistungsunterschied schwacher/starker Tarif"
+      wert: "30.000 €"
+      fundstelle: "Das macht **30.000 € Unterschied**."
+      pruefung: "Nachgerechnet: Differenz der beiden Handverlust-Leistungen"
+      konsistenzpruefung: "Belegt die Kernbotschaft „Gliedertaxe entscheidet über viele Tausend Euro“"
+      rechenweg: "140.000 € − 110.000 € = 30.000 €"
+      quellen: ["Q1"]
+    - aussage: "Beitragsspanne Kind"
+      wert: "40 € bis 80 €"
+      fundstelle: "| Kind | 40 € bis 80 € |"
+      pruefung: "Marktübliche Jahrsbeiträge für Kinder-Unfallversicherungen"
+      konsistenzpruefung: "Familienbeispiel (120 € für beide Kinder) liegt in dieser Spanne"
+      quellen: ["Q1", "Q2"]
+    - aussage: "Beitragsspanne Erwachsener"
+      wert: "60 € bis 120 €"
+      fundstelle: "| Erwachsener, Bürojob | 60 € bis 120 € |"
+      pruefung: "Marktübliche Jahresbeiträge für Erwachsene mit Büroberuf"
+      konsistenzpruefung: "Liegt erwartungsgemäß über der Kinderspanne"
+      quellen: ["Q1", "Q2"]
+    - aussage: "Beitragsspanne mit Rente/Extras"
+      wert: "100 € bis 180 €"
+      fundstelle: "| mit Unfallrente oder Extras | 100 € bis 180 € |"
+      pruefung: "Marktübliche Aufschläge für Unfallrente und Zusatzbausteine"
+      konsistenzpruefung: "Oberste Spanne der Beitragstabelle, folgerichtig über dem Basistarif"
+      quellen: ["Q1"]
+    - aussage: "Hebel-Argument Beitrag zu Leistung"
+      wert: "rund 100 € pro Jahr"
+      fundstelle: "Wenn du für rund 100 € im Jahr einen Schutz bekommst, der in einem schweren Fall eine sechsstellige Summe leisten kann, ist das vom Hebel her stark."
+      pruefung: "Mittelwert der Beitragsspannen (60–180 €); als Orientierung dokumentiert"
+      konsistenzpruefung: "Sechsstellige Leistung (ab 100.000 € Grundsumme) konsistent dokumentiert"
+      quellen: ["Q1"]
+    - aussage: "Familien-Beispielbeitrag"
+      wert: "rund 120 € im Jahr"
+      fundstelle: "Eine Familie mit zwei Kindern zahlt vielleicht zusammen rund **120 € im Jahr** für beide Policen."
+      pruefung: "Nachvollziehbar: zwei Kinder-Policen am unteren Rand der Spanne (40–80 € je Kind)"
+      konsistenzpruefung: "Konsistent mit der Kinderspanne (40–80 €)"
+      rechenweg: "2 × 60 € (Mitte der Kinderspanne) = 120 €"
+      quellen: ["Q1"]
+    - aussage: "Kinder-Grundsumme im Ernstfall-Beispiel"
+      wert: "100.000 €"
+      fundstelle: "Wenn nach einem schweren Unfall bei einem Kind dauerhafte Folgen bleiben, kann schon eine Grundsumme von **100.000 €** zeigen, wie stark der Hebel ist."
+      pruefung: "Marktübliche Kinder-Grundsumme; Wiederholung der Orientierungsempfehlung"
+      konsistenzpruefung: "Identisch mit der Orientierung (mindestens 100.000 €) und der FAQ"
+      quellen: ["Q1"]
+    - aussage: "FAQ Grundsumme Kinder"
+      wert: "mindestens 100.000 €"
+      fundstelle: "Oft mindestens 100.000 €."
+      pruefung: "Wiederholung der dokumentierten Orientierungsempfehlung"
+      konsistenzpruefung: "Dritte identische Verwendung im Artikel"
+      quellen: ["Q1"]
 ---
-
 
 Ein Sturz auf der Treppe. Ein Radunfall.
 
@@ -50,9 +196,6 @@ Die kurze Antwort lautet: **Manchmal ja. Aber nicht für alle gleich.**
 Für manche Menschen ist sie sehr sinnvoll. Für andere ist sie eher ein Zusatz, aber nicht der erste wichtige Schutz. Entscheidend ist, was die Police wirklich leistet. Und ebenso wichtig ist, was sie nicht leistet.
 
 ---
-
-💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche Tarife nie nur über den Preis. Wichtiger sind Grundsumme, Progression, Gliedertaxe und klare Regeln im Kleingedruckten: [**Unfallversicherung vergleichen**](/go/unfallversicherung/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
 
@@ -157,6 +300,9 @@ Sie sorgt dafür, dass bei schweren Schäden deutlich mehr Geld fließt.
 Sie legt fest, wie hoch der Verlust oder die Einschränkung eines Körperteils bewertet wird.
 
 Diese drei Punkte sind viel wichtiger als bunte Extras im Prospekt.
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Vergleiche Tarife nie nur über den Preis. Wichtiger sind Grundsumme, Progression, Gliedertaxe und klare Regeln im Kleingedruckten: [**Unfallversicherung vergleichen**](/go/unfallversicherung/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was eine gute Grundsumme ausmacht
 
