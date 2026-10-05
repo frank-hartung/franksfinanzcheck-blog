@@ -1,4 +1,4 @@
-# Authority-Radar – 2026-10-02
+# Authority-Radar – 2026-10-05
 
 > Belegt externe Autorität, Distribution und Audience-Kennzahlen. Unbekannt bleibt unbekannt: `null` ist niemals `0`.
 
