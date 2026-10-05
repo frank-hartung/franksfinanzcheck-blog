@@ -1,10 +1,10 @@
 ---
 title: "Energie-Update: Was sich jetzt für dich ändert"
 description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun …"
-date: 2026-09-23T08:10:00Z
+date: 2026-10-05T21:26:21Z
 lastmod: 2026-09-25
-draft: true
-reserve: true
+draft: false
+reserve_published: 2026-10-05
 reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Stromkosten senken"]
 categories: ["News"]
