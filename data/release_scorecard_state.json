@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T18:08:38Z",
+  "generated_at": "2026-10-05T18:41:57Z",
   "modus": "kandidaten",
-  "commit": "9a1c40ed7d2ce9e0360975b781c02d52c8ee2698",
+  "commit": "e2225531acf5d02db95a8ddb0214c2aef7489ecf",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "3202c21f77050508ced5699bd8aafcb02d0ab980251c21b60875e11354b20e5a",
@@ -206,7 +206,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "8cab9a9ab0e69422482999d7e1655dbc7b163e60eeb241c022fafe7a3cd43d23",
@@ -223,7 +223,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
       "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
@@ -410,7 +410,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
       "sha256": "748ee34cb7af939b69e2474dc52d1d5b663b69d7b5b48adcd4d9cb42c4c2647b",
