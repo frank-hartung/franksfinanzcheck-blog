@@ -14,6 +14,13 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     labels: ["dependencies"]
+    # Gebuendelt statt haeppchenweise (Lehre aus #571): Einzel-PRs je Action
+    # fuehrten zu Teil-Merges und damit zu Versions-Drift zwischen den
+    # Workflows (setup-python@v6 neben @v7). Ein PR je Woche haelt den
+    # Bestand einheitlich; scripts/actions_version_guard.py bewacht es.
+    groups:
+      github-actions:
+        patterns: ["*"]
 
   # E2E-Tests (Playwright) – Design-Skills-Rollout 12.09.2026:
   # Root-Paket pflegen (@playwright/test), Minor/Patch automatisch.

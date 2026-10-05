@@ -49,12 +49,12 @@ jobs:
 
     steps:
       - name: Code auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Python 3.11 einrichten
-        # v6 nutzt die aktuelle Node-Runtime der Actions-Plattform. Kein
+        # v7 nutzt die aktuelle Node-Runtime der Actions-Plattform. Kein
         # pip-cache: Der Bridge-Job ist klein; ein Cache-Ausfall darf den
         # produktiven Watchdog nicht bereits beim Runtime-Setup blockieren.
         uses: actions/setup-python@v7

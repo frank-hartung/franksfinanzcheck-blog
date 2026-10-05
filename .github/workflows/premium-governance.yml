@@ -56,7 +56,7 @@ jobs:
       GOV_TITLE: "🗞️ Governance-Report: Redaktionelle & technische Handlungsfelder"
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Python-Abhängigkeiten
         run: python3 -m pip install -q pyyaml cryptography pillow 2>/dev/null || true

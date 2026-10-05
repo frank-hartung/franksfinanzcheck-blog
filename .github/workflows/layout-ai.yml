@@ -86,7 +86,7 @@ jobs:
       ISSUE_TITLE: "⚠ Layout-Automatisierung: Probleme gefunden"
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
