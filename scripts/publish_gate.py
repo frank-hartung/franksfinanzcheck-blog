@@ -411,13 +411,28 @@ def editorial_review_failures(candidates):
 
 
 def readability_failures(candidates):
-    """Live-Kandidaten mit Lesbarkeits-Score unter Top-Level (75) finden.
+    """Live-Kandidaten mit Lesbarkeits-Score < 75 ODER Flesch unter Floor finden.
 
     Der Publish-Pfad bewertet bewusst pro Kandidat. Fällt der Prüfer selbst
     aus, gilt fail-closed: kein neuer Artikel darf ungeprüft live gehen.
+
+    WARUM DIE ZWEITE BEDINGUNG (Governance-Report #585, 05.10.2026):
+    Das Tor prüfte nur den zusammengesetzten Score. Der ist aber ein Mittel
+    aus sechs Teilnoten – ein Flesch-Wert von 47 kostet dort lediglich 20
+    Punkte. Ein Artikel konnte also mit 80/100 durch das Tor gehen und
+    trotzdem weit unter dem Bestands-Floor (55) liegen. Genau so sind die
+    neun Artikel aus #585 live gegangen und haben den Ø des Bestands unter
+    das Ziel gezogen: Das Tor war offen, die Bestands-Wache konnte hinterher
+    nur noch melden, was sie nicht mehr verhindern durfte.
+
+    Deshalb gilt ab sofort zusätzlich die SSOT-Schwelle aus
+    `readability_check`: `NEW_FLESCH_MIN` (60.0) – mit Sicherheitsabstand zum
+    Bestands-Floor (55.0), damit ein neuer Artikel den Durchschnitt hebt statt
+    ihn zu drücken. Die Schwelle wird importiert, nicht kopiert; der
+    `--selftest` des Prüfers verteidigt sie gegen stilles Absenken.
     """
     try:
-        from readability_check import load_article, analyze
+        from readability_check import load_article, analyze, NEW_FLESCH_MIN
     except Exception as exc:
         reason = f"Lesbarkeitsprüfung nicht verfügbar: {exc}"
         return {slug: [reason] for slug in candidates}, None
@@ -435,11 +450,21 @@ def readability_failures(candidates):
         if not result:
             failed[slug] = [error]
             continue
+        gruende = []
         if result.get("score", 0) < 75:
             detail = "; ".join(result.get("issues", [])) or "Score unter 75"
-            failed[slug] = [
+            gruende.append(
                 f"Lesbarkeits-Score {result.get('score', 0)}/100 (Mindestwert 75): {detail}"
-            ]
+            )
+        flesch = result.get("flesch")
+        if flesch is None or flesch < NEW_FLESCH_MIN:
+            gruende.append(
+                f"Flesch {flesch if flesch is not None else 'nicht messbar'} "
+                f"(Mindestwert {NEW_FLESCH_MIN:g}) – ein Artikel unter dieser Schwelle "
+                "zieht den Bestands-Durchschnitt nach unten (#585)"
+            )
+        if gruende:
+            failed[slug] = gruende
     return failed, None
 
 

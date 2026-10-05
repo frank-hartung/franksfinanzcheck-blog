@@ -1068,6 +1068,103 @@ def c19_release_ssot(script_texts, root=BLOG_DIR):
     return out
 
 
+# --- C20: Lesbarkeits-Vertrag + Deploy-Hysterese (Governance-Report #585) ---
+# Auslöser (05.10.2026, #585): Zwei Befunde, eine gemeinsame Bauart – eine Wache
+# meldete etwas, das ein anderer Teil der Kette hätte verhindern bzw. gar nicht
+# erst als Fehler werten dürfen.
+#   · Lesbarkeit: 9 Live-Artikel lagen unter dem Bestands-Floor (55), der Ø unter
+#     dem Ziel (62). Möglich war das, weil das Publish-Tor NUR den zusammen-
+#     gesetzten Score (< 75) prüfte. Ein Flesch von 47 kostet dort 20 Punkte –
+#     zu wenig, um zu blocken. Die Bestands-Wache durfte also hinterher melden,
+#     was das Tor vorher durchgelassen hat. Eine Wache ohne Tor ist ein Protokoll.
+#   · Live-Konsistenz: Die Live-Wache lief im selben Lauf, in dem veröffentlicht
+#     wurde, und wertete die Laufzeit von Build + Pages-Deploy + CDN als Drift.
+#     Dauer-Rot ohne Handlung ist Alarm-Müdigkeit.
+# Beide Reparaturen sind strukturell und müssen strukturell verteidigt werden:
+# das Tor darf die Flesch-Schwelle nicht wieder verlieren, die Schwelle muss die
+# importierte SSOT bleiben (nie eine Kopie), das Deploy-Fenster muss endlich und
+# konfigurierbar sein, und sein Hinweis-Code darf nie ein Issue erzeugen.
+def c20_lesbarkeit_und_hysterese(script_texts, gate_text):
+    out = []
+    pg = script_texts.get("publish_gate.py", "")
+    rc = script_texts.get("readability_check.py", "")
+    lp = script_texts.get("live_policy_guard.py", "")
+    if not pg or not rc or not lp:
+        out.append(("C20", "publish_gate.py / readability_check.py / "
+                           "live_policy_guard.py nicht lesbar – der Vertrag ist "
+                           "nicht prüfbar."))
+        return out
+
+    # a) Das Publish-Tor prüft die Flesch-Schwelle, nicht nur den Score.
+    start = pg.find("def readability_failures(")
+    ende = pg.find("\ndef ", start + 1) if start >= 0 else -1
+    block = pg[start:ende] if start >= 0 and ende > start else ""
+    if not block:
+        out.append(("C20", "scripts/publish_gate.py: `readability_failures` fehlt – "
+                           "ohne Collector gibt es kein Lesbarkeits-Tor (#585)."))
+    else:
+        if "NEW_FLESCH_MIN" not in block:
+            out.append(("C20", "scripts/publish_gate.py: `readability_failures` prüft "
+                               "`NEW_FLESCH_MIN` nicht – ein Artikel mit Flesch 47 "
+                               "käme wieder durch das Tor und zöge den Bestand unter "
+                               "das Ziel (#585)."))
+        if "from readability_check import" not in block:
+            out.append(("C20", "scripts/publish_gate.py: `readability_failures` "
+                               "importiert die Schwelle nicht aus `readability_check` – "
+                               "eine kopierte Zahl ist eine zweite Wahrheit (#585)."))
+        if re.search(r"NEW_FLESCH_MIN\s*=", block):
+            out.append(("C20", "scripts/publish_gate.py: definiert `NEW_FLESCH_MIN` "
+                               "selbst – die Schwelle gehört in readability_check (SSOT)."))
+
+    # b) Die Schwellen der SSOT bleiben, wo sie sind (Absenken = Sabotage).
+    for name, mindest in (("AVG_TARGET", 62.0), ("NEW_FLESCH_MIN", 60.0)):
+        m = re.search(rf"(?m)^{name}\s*=\s*([0-9.]+)", rc)
+        if not m:
+            out.append(("C20", f"scripts/readability_check.py: `{name}` fehlt – die "
+                               "Lesbarkeits-SSOT ist nicht mehr auffindbar."))
+        elif float(m.group(1)) < mindest:
+            out.append(("C20", f"scripts/readability_check.py: `{name}` = {m.group(1)} "
+                               f"liegt unter dem vertraglichen Mindestwert {mindest:g} – "
+                               "ein abgesenktes Ziel heilt nichts, es misst nur anders."))
+    m = re.search(r"(?m)^FLOOR_MIN\s*=\s*([0-9.]+)", rc)
+    if not m:
+        out.append(("C20", "scripts/readability_check.py: `FLOOR_MIN` fehlt."))
+    elif float(m.group(1)) > 55.0:
+        out.append(("C20", f"scripts/readability_check.py: `FLOOR_MIN` = {m.group(1)} "
+                           "wurde angehoben – der Bestands-Boden darf nicht weicher "
+                           "werden als 55."))
+
+    # c) Das Deploy-Fenster ist endlich, konfigurierbar und läuft ab.
+    if "GRACE_MIN" not in lp:
+        out.append(("C20", "scripts/live_policy_guard.py: kein Deploy-Fenster "
+                           "(`GRACE_MIN`) – die Wache wertet die Auslieferungszeit "
+                           "wieder als Drift (#585)."))
+    else:
+        if "LIVE_POLICY_GRACE_MIN" not in lp:
+            out.append(("C20", "scripts/live_policy_guard.py: das Deploy-Fenster ist "
+                               "nicht über `LIVE_POLICY_GRACE_MIN` einstellbar."))
+        m = re.search(r'LIVE_POLICY_GRACE_MIN["\']?,\s*["\']([0-9.]+)["\']', lp)
+        if m and float(m.group(1)) > 180:
+            out.append(("C20", f"scripts/live_policy_guard.py: Deploy-Fenster "
+                               f"{m.group(1)} min ist zu groß – ein Fenster, das länger "
+                               "offen steht als ein Deploy dauert, verdeckt echte Drift."))
+    if "HYSTERESE_CODE" not in lp:
+        out.append(("C20", "scripts/live_policy_guard.py: Hysterese-Hinweise tragen "
+                           "keinen eigenen Code – sie liefen unter dem Namen des "
+                           "Fehlers, den sie gerade ausschließen."))
+    if "deploy_hysterese" not in gate_text:
+        out.append(("C20", "scripts/governance_gate.py: `deploy_hysterese` steht nicht "
+                           "in der Ledger-Policy – ein Hinweis ohne Einstufung wird "
+                           "entweder zum Issue oder zum blinden Fleck (#585)."))
+    elif "INFO_AMBER" in gate_text:
+        info = gate_text[gate_text.find("INFO_AMBER"):]
+        info = info[:info.find("}") + 1]
+        if "deploy_hysterese" not in info:
+            out.append(("C20", "scripts/governance_gate.py: `deploy_hysterese` ist "
+                               "nicht als INFO_AMBER eingestuft – die Deploy-Laufzeit "
+                               "würde wieder ein Issue erzeugen."))
+    return out
+
 # --- C18: Pflicht-Check-Vertrag (der Name im Branch-Schutz ist ein Vertrag) ---
 # Auslöser (19.09.2026, Nachtrag zu #316 / PR #317): Das neue PR-Gate
 # integrity-lock.yml meldete sich bei GitHub als Check „lock" – die Job-ID, weil
@@ -1442,6 +1539,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c18_dauerzustand(dauerz, script_texts.get(PFLICHT_CHECK_WACHE, ""),
                                _read(os.path.join(root, runbook_pfad)) if runbook_pfad else "")
     checks += c19_release_ssot(script_texts, root=root)
+    checks += c20_lesbarkeit_und_hysterese(script_texts, gate)
     return checks
 
 
@@ -1507,6 +1605,15 @@ RULE_TEXT = {
            "meldet genau diesen Befund als BEKANNT statt als Vorfall, jeder andere bleibt "
            "rot, und `--strict` zieht auch den bekannten Befund wieder auf Exit 1 "
            "(20.09.2026).",
+    "C20": "Lesbarkeit ist ein Tor, kein Protokoll, und Auslieferungszeit ist keine "
+           "Drift: Das Publish-Gate blockiert jeden neuen Artikel unter der "
+           "importierten SSOT-Schwelle `readability_check.NEW_FLESCH_MIN`, die "
+           "Schwellen AVG_TARGET/NEW_FLESCH_MIN/FLOOR_MIN dürfen nicht aufgeweicht "
+           "werden, und die Live-Wache trennt über ein endliches, konfigurierbares "
+           "Deploy-Fenster (`LIVE_POLICY_GRACE_MIN`) den frisch deployten Artikel "
+           "(`deploy_hysterese`, INFO, nie ein Issue) von echter Drift (ROT) – sonst "
+           "meldet eine Wache hinterher, was ein offenes Tor durchgelassen hat, und "
+           "eine andere meldet wöchentlich die Physik (#585).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -1525,7 +1632,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C13": "Nachweis-Echtheit", "C14": "Alarm-Routing",
          "C15": "Beweis-Trockenlauf", "C16": "Wache-Herzschlag",
          "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check",
-         "C19": "Release-Scorecard"}
+         "C19": "Release-Scorecard",
+         "C20": "Lesbarkeits-Tor & Deploy-Hysterese"}
 
 
 def render_md(checks, ok_notes=()):
