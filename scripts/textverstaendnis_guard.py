@@ -656,6 +656,29 @@ def check_keyword_ruinen(rel: str, body: str, keywords=()) -> list:
                             "korrigieren)",
                             m.group(0)))
 
+    # Vierter Beweisweg: die CTA-Frage der alten Healing-Schablone
+    # („Du willst heizungs-check?“). Nach „Du willst/brauchst/suchst“ steht ein
+    # kleingeschriebenes Wort, das derselbe Artikel groß kennt – also ein
+    # Substantiv, das die Maschine klein gestanzt hat.
+    muster_cta = re.compile(
+        r"\b[Dd]u\s+(?:willst|brauchst|suchst|m\u00f6chtest)\s+"
+        r"([a-z\u00e4\u00f6\u00fc\u00df][a-z\u00e4\u00f6\u00fc\u00df\\-]{3,})\b(?!\s+[A-Z\u00c4\u00d6\u00dc])")
+    for m in muster_cta.finditer(text):
+        wort = m.group(1)
+        # Folgt ein Infinitiv, war das Wort ein Adverb: „Du willst sicher
+        # heizen?“ / „Du willst preiswert surfen?“ sind korrektes Deutsch.
+        if re.match(r"\s+[a-z\u00e4\u00f6\u00fc\u00df]{3,}(?:en|ln|rn)\b",
+                    text[m.end():m.end() + 30]):
+            continue
+        belegt = gross.get(wort.lower(), 0) >= 2 or wort.lower() in kw_nomen
+        if belegt and m.group(0) not in gemeldet:
+            gemeldet.add(m.group(0))
+            out.append((rel, "R17-KEYWORD-KASUS",
+                        f"Substantiv klein geschrieben: \u201e{m.group(0)}\u201c \u2013 "
+                        f"\u201e{wort.capitalize()}\u201c steht im selben Artikel gro\u00df "
+                        "(Reste der alten Keyword-Schablone, bitte neu formulieren)",
+                        m.group(0)))
+
     for absatz in absaetze:
         if re.search(r"\]\(|https?://|👉|💶|💡|→", absatz):
             continue
@@ -866,6 +889,16 @@ def run_selftest() -> list:
     if any(f[1] == "R17-KEYWORD-KASUS" for f in
            check_article("t", body17c, {}, ["Finanzielle Freiheit"])):
         fehler.append("R17: False-Positive bei Adjektiv vor Substantiv")
+    # Positiv 3: CTA-Frage der alten Schablone („Du willst heizungs-check?“).
+    body17e = ("TEXT\n\nDu willst heizungs-check? Ein Heizungs-check im September "
+               "spart Geld. Der Heizungs-check dauert eine Stunde.")
+    if not any(f[1] == "R17-KEYWORD-KASUS" for f in check_article("t", body17e, {})):
+        fehler.append("R17: klein gestanzte CTA-Frage (Du willst …) nicht erkannt")
+    # Negativ 3: Adverb vor Infinitiv bleibt frei („Du willst sicher heizen?“).
+    body17f = ("TEXT\n\nDu willst sicher heizen? Wer Sicher heizen will, prüft den "
+               "Tarif. Sicher heizen heißt vorher rechnen.")
+    if any(f[1] == "R17-KEYWORD-KASUS" for f in check_article("t", body17f, {})):
+        fehler.append("R17: False-Positive bei Adverb vor Infinitiv")
     # Negativ 2: wiederholtes Substantiv am Satzende ist kein Verb-Doppel.
     body17d = ("TEXT\n\nDienste antworten in 20 Millisekunden statt in "
                "100 Millisekunden.")
