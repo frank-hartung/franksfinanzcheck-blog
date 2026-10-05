@@ -707,11 +707,16 @@ def classify(var, meta, ent, today=None, verification=None, live_check_available
                f"die Live-Probe läuft im Premium-Governance-Workflow"})
 
 
-# ---------------------------------------------------------------- OAuth-Empfänger
-OAUTH_SEITE = os.path.join(BLOG_DIR, "static", "pinterest-oauth.html")
-OAUTH_ZWILLING = os.path.join(BLOG_DIR, "static", "pinterest-oauth", "index.html")
+# ------------------------------------------------- Empfänger der OAuth-Rückleitung
+# NAMENSVERTRAG (Alert #80): Bezeichner in diesem Abschnitt heißen
+# `rueckleitung_*` und nicht `oauth_*`. Hier liegen Dateipfade und Prüfbefunde
+# zur statischen Landeseite – kein Zugangsmaterial. Der alte Name behauptete
+# fälschlich einen sensiblen Rückgabewert und vergiftete dessen Ausgabe für die
+# namensbasierte CodeQL-Analyse.
+RUECKLEITUNG_SEITE = os.path.join(BLOG_DIR, "static", "pinterest-oauth.html")
+RUECKLEITUNG_ZWILLING = os.path.join(BLOG_DIR, "static", "pinterest-oauth", "index.html")
 # Was die Seite können muss, damit die Handlungsanweisung aus #246 funktioniert.
-OAUTH_MARKEN = (("URLSearchParams", "liest den code-Parameter nicht (der Code "
+RUECKLEITUNG_MARKEN = (("URLSearchParams", "liest den code-Parameter nicht (der Code "
                  "landet nirgends – Kopieren unmöglich)"),
                 ("opy", "kein Kopierweg (clipboard-Knopf oder select-all) – "
                  "manuelles Abtipieren eines 200-Zeichen-Codes ist der übliche Fehler"),
@@ -719,8 +724,13 @@ OAUTH_MARKEN = (("URLSearchParams", "liest den code-Parameter nicht (der Code "
                  "nicht in Suchmaschinen (meta robots noindex)"))
 
 
-def oauth_empfaenger_findings(pruef_pfad: str = "", zwilling_pfad: str = "") -> list:
+def rueckleitung_findings(pruef_pfad: str = "", zwilling_pfad: str = "") -> list:
     """Prüft den Empfänger der Pinterest-Rückleitung – die Empfehlung muss helfen.
+
+    Liefert ausschließlich Befund-Dicts zu einer statischen HTML-Seite;
+    Zugangsdaten sind weder Ein- noch Ausgabe. Bis Alert #80 hieß die Funktion
+    `oauth_empfaenger_findings`: Der sensible Name machte die spätere Ausgabe
+    der harmlosen Befunde für CodeQL formal zu einem Klartext-Leck.
 
     Der Fund `manual_token` (und jeder #246-Lauf) schickt den Betreiber auf
     /pinterest-oauth.html: dort liegt der `?code=…` aus der Pinterest-Umleitung,
@@ -734,8 +744,8 @@ def oauth_empfaenger_findings(pruef_pfad: str = "", zwilling_pfad: str = "") -> 
     dann da, wenn gerade niemand hinsieht, und die Prüfung muss in jedem Lauf
     laufen können – auch offline im Selbsttest.
     """
-    haupt = pruef_pfad or OAUTH_SEITE
-    zwil = zwilling_pfad or OAUTH_ZWILLING
+    haupt = pruef_pfad or RUECKLEITUNG_SEITE
+    zwil = zwilling_pfad or RUECKLEITUNG_ZWILLING
     out = []
     if not os.path.isfile(haupt):
         return [{"level": "red", "code": "oauth_page_missing",
@@ -751,7 +761,7 @@ def oauth_empfaenger_findings(pruef_pfad: str = "", zwilling_pfad: str = "") -> 
         return [{"level": "red", "code": "oauth_page_missing",
                  "var": "PINTEREST_ACCESS_TOKEN",
                  "msg": f"Empfänger-Seite ist nicht lesbar ({exc.strerror})"}]
-    for marke, grund in OAUTH_MARKEN:
+    for marke, grund in RUECKLEITUNG_MARKEN:
         if marke not in text:
             out.append({"level": "red", "code": "oauth_page_incomplete",
                         "var": "PINTEREST_ACCESS_TOKEN",
@@ -871,7 +881,7 @@ def audit(verification=None, live_check_available=False, pin_health=None):
     if pin_health is None and _present("PINTEREST_ACCESS_TOKEN"):
         pin_health = _pinterest_health(verify=False)     # ohne Netz, nur Bestand
     findings += pinterest_lifecycle_findings(pin_health, token_dead=token_dead)
-    findings += oauth_empfaenger_findings()
+    findings += rueckleitung_findings()
     return findings, summary
 
 
@@ -1157,11 +1167,11 @@ def _selftest():
             failures.append("toter Kanal erzeugt zusätzlich einen Lebenszyklus-Befund "
                             "(Doppel-Alarm)")
         # --- OAuth-Empfänger: die Handlungsanweisung muss ausführbar bleiben
-        if oauth_empfaenger_findings():
+        if rueckleitung_findings():
             failures.append("intakter Pinterest-Code-Empfänger meldet Befunde "
                             "(die Wache wäre bei #246 störend, nicht helfend): "
-                            f"{oauth_empfaenger_findings()}")
-        if not oauth_empfaenger_findings(pruef_pfad=os.path.join(
+                            f"{rueckleitung_findings()}")
+        if not rueckleitung_findings(pruef_pfad=os.path.join(
                 os.sep, "gibt", "es", "nicht", "pinterest-oauth.html")):
             failures.append("fehlende Empfänger-Seite bleibt unsichtbar – die "
                             "Anweisung aus #246 führte ins Leere")
@@ -1170,7 +1180,7 @@ def _selftest():
             _bl = os.path.join(_td, "pinterest-oauth.html")
             with open(_bl, "w", encoding="utf-8") as _fh:
                 _fh.write("<html><body><p>Umgebaut, ohne Code-Leserei</p></body></html>")
-            _f = oauth_empfaenger_findings(
+            _f = rueckleitung_findings(
                 pruef_pfad=_bl, zwilling_pfad=os.path.join(_td, "weg", "index.html"))
             if len([x for x in _f if x["code"] == "oauth_page_incomplete"]) != 3:
                 failures.append("stumpfe Empfänger-Seite wird nicht vollständig "
@@ -1224,11 +1234,11 @@ def _selftest():
         # tote Access-Probe darf nur als Info sichtbar sein, nicht als
         # Governance-Handlungsbefund.
         orig_parked = globals()["pinterest_channel_parked"]
-        orig_oauth = globals()["oauth_empfaenger_findings"]
+        orig_rueckleitung = globals()["rueckleitung_findings"]
         try:
             globals()["pinterest_channel_parked"] = lambda path=None: {
                 "since": "2026-08-27T13:58:16Z", "reason": "Domain gesperrt"}
-            globals()["oauth_empfaenger_findings"] = lambda *a, **k: []
+            globals()["rueckleitung_findings"] = lambda *a, **k: []
             globals()["_present"] = lambda var: var in {
                 "GROQ_API_KEY", "GEMINI_API_KEY", "MASTODON_ACCESS_TOKEN",
                 "PINTEREST_ACCESS_TOKEN", "PINTEREST_TOKEN_KEY"}
@@ -1250,7 +1260,7 @@ def _selftest():
                 failures.append("#439-Parklage wird im Report nicht transparent als Hinweis gezeigt")
         finally:
             globals()["pinterest_channel_parked"] = orig_parked
-            globals()["oauth_empfaenger_findings"] = orig_oauth
+            globals()["rueckleitung_findings"] = orig_rueckleitung
             globals()["_present"] = orig_present
         # --- Report-Format muss vom Governance-Gate parsebar bleiben
         rep = render_report([{"level": "red", "code": "dead", "var": "X", "msg": "tot"}],

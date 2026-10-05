@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Sicherheitsvertrag gegen Klartext-Logging sensibler Daten (Code-Scanning Alert #77).
+"""Sicherheitsvertrag gegen Klartext-Logging sensibler Daten (Alerts #77/#78/#80).
 
-Prüft auf zwei Ebenen:
+Prüft auf drei Ebenen:
 1. AST-basierte statische Analyse über alle Produktions-Skripte:
    - Keine rohen Secret-/Token-/Passwort-Variablen in print(), logging.* oder sys.stdout/stderr.write.
    - Keine unverschlüsselten Speicherungen sensibler Schlüssel im Klartext.
@@ -11,6 +11,12 @@ Prüft auf zwei Ebenen:
    - secrets_age_guard (_record_success, --list)
    - social_preflight (JSON-Ausgabe)
    - newsletter_versand (Bestätigungs-Logging mit Hash)
+3. Repository-weite Klartext-Wache:
+   - lokale, inhalts-sensitive Nachbildung der beiden CodeQL-Clear-Text-Regeln
+   - alle versionierten und neuen, nicht ignorierten Python-Dateien
+   - Inline-Unterdrückungen sind selbst ein Befund (kein Wegfiltern)
+
+Hintergrund: CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md.
 """
 from __future__ import annotations
 
@@ -18,6 +24,7 @@ import ast
 import io
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -224,6 +231,74 @@ class ClearTextLoggingRuntimeContract(unittest.TestCase):
         self.assertNotIn(raw_token[-4:], log)
         self.assertIn(expected_hash, log)
         self.assertIn(expected_ref, log)
+
+
+class KlartextWacheContract(unittest.TestCase):
+    """Alert #80: upload-unabhängige, fail-closed Klartext-Kontrolle."""
+
+    WACHE = SCRIPTS / "clear_text_logging_guard.py"
+
+    def _lauf(self, *args):
+        return subprocess.run(
+            [sys.executable, str(self.WACHE), *args],
+            capture_output=True, text=True, cwd=str(ROOT), timeout=120,
+            check=False)
+
+    def test_wache_existiert_und_besteht_eigenpruefung(self):
+        """Eine Wache ohne scharfe Positiv- und Gegenproben ist Scheinsicherheit."""
+        self.assertTrue(self.WACHE.is_file(),
+                        "scripts/clear_text_logging_guard.py fehlt")
+        erg = self._lauf("--selftest")
+        self.assertEqual(
+            erg.returncode, 0,
+            f"Eigenprüfung der Klartext-Wache fehlgeschlagen:\n{erg.stdout}\n{erg.stderr}")
+        self.assertIn("Positivproben", erg.stdout)
+        self.assertIn("Gegenproben", erg.stdout)
+
+    def test_repository_ist_frei_von_klartext_fluessen(self):
+        """Der Regressionsschutz für beide Clear-Text-Regeln und alle .py-Dateien."""
+        erg = self._lauf("--json", "--quiet")
+        try:
+            bericht = json.loads(erg.stdout)
+        except json.JSONDecodeError as exc:
+            self.fail(f"Klartext-Wache lieferte kein valides JSON ({exc}):\n"
+                      f"{erg.stdout}\n{erg.stderr}")
+        self.assertEqual(
+            bericht.get("fehler"), [],
+            "Fail-closed: mindestens eine Python-Datei war nicht analysierbar: "
+            f"{bericht.get('fehler')}")
+        befunde = bericht.get("befunde", [])
+        details = "\n".join(
+            f"  {b['datei']}:{b['zeile']} [{b['regel']}] "
+            f"{b['art']}: {b['quelle']} → {b['senke']}"
+            for b in befunde)
+        self.assertEqual(
+            befunde, [],
+            "Klartext-Fluss oder verbotene Unterdrückung gefunden. Namen ehrlich "
+            "machen, Werte entschärfen oder Ausgabe entfernen – nie wegfiltern:\n"
+            + details)
+        self.assertEqual(erg.returncode, 0, erg.stderr)
+        self.assertGreaterEqual(bericht.get("geprueft", 0), 1)
+
+    def test_nicht_analysierbarer_code_ist_fail_closed(self):
+        """Ein Parsefehler liefert Exit 2 und kann nie als „sauber“ durchgehen."""
+        with tempfile.TemporaryDirectory() as tmp:
+            kaputt = Path(tmp) / "kaputt.py"
+            kaputt.write_text("def unvollstaendig(:\n", encoding="utf-8")
+            erg = self._lauf("--json", "--quiet", str(kaputt))
+        self.assertEqual(erg.returncode, 2, erg.stderr)
+        bericht = json.loads(erg.stdout)
+        self.assertEqual(bericht.get("befunde"), [])
+        self.assertEqual(len(bericht.get("fehler", [])), 1)
+        self.assertIn("Syntaxfehler", bericht["fehler"][0])
+
+    def test_namensvertrag_der_alert_80_fundstelle(self):
+        """Die HTML-Prüfung heißt nach ihrem Inhalt, nicht nach Zugangsmaterial."""
+        quelltext = (SCRIPTS / "secrets_age_guard.py").read_text(encoding="utf-8")
+        self.assertNotIn("def oauth_empfaenger_findings(", quelltext)
+        self.assertNotIn("OAUTH_SEITE =", quelltext)
+        self.assertIn("def rueckleitung_findings(", quelltext)
+        self.assertIn("RUECKLEITUNG_SEITE =", quelltext)
 
 
 if __name__ == "__main__":
