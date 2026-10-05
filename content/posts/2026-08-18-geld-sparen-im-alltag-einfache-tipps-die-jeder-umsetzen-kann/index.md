@@ -2,12 +2,11 @@
 lastmod: 2026-09-02
 title: "Geld sparen im Alltag: Tipps, die jeder umsetzen kann"
 description: "Geld sparen im Alltag: 10 sofort umsetzbare Spartipps für Haushalt, Einkaufen, Verträge & Finanzen. Baue mühelos 3.500 € Notgroschen auf!"
-date: 2026-08-31T13:47:31Z
+date: 2026-10-05T12:54:02Z
 draft: true
+cadence_demoted: 2026-10-05T12:54:12Z
+cadence_grund: "publish-gate: Redaktionelle YMYL-Freigabe nicht bestanden: E16: veralteter Artikelstand 2024 in einem Beitrag aus 2026"
 endredaktion_status: freigegeben
-cadence_wait: true
-cadence_demoted: 2026-10-05T12:43:04Z
-cadence_grund: "Endredaktion: alle Gates grün – automatisch freigegeben (2026-10-05)"
 tags: ["Geld sparen im Alltag", "Haushaltsbuch führen", "Tagesgeld und Zinsen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
