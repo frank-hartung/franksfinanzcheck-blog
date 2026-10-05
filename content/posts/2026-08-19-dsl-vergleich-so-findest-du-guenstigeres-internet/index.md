@@ -169,7 +169,7 @@ Mehr Speed ist nicht immer besser, wenn er ungenutzt bleibt. Ein kleinerer Tarif
 - Dein WLAN-Router ohnehin nicht mehr als ca. 100 Mbit/s stabil verteilen kann.
 - Du deine monatlichen Fixkosten konsequent minimieren willst.
 
-Die Ersparnis zwischen einem 250er und einem 100er Tarif liegt oft bei ca. 10 € pro Monat. Über zwei Jahre sind das rund **240 €**, die du ohne spürbaren Leistungsverlust sparst, wenn dein Bedarf gedeckt ist. Ein präziser DSL-Vergleich hilft dir, genau dieses Sparpotenzial zu finden.
+Die Ersparnis zwischen einem 250er und einem 100er Tarif liegt oft bei ca. 10 € pro Monat. Über zwei Jahre sind das rund **240 €**, die du ohne spürbaren Leistungsverlust sparst, wenn dein Bedarf gedeckt ist. Ein präziser [DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) hilft dir, genau dieses Sparpotenzial zu finden.
 
 ## Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen
 

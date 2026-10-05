@@ -1,0 +1,50 @@
+{
+  "slug": "2026-10-05-die-50-30-20-regel-einfach-erklaert",
+  "titel": "Die 50-30-20-Regel einfach erklärt",
+  "erzeugt": "2026-10-05 21:55 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite destatis.de",
+      "url": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "datum": "",
+      "quelle": "destatis.de",
+      "kanal": "web",
+      "auszug": "Title: Verbraucherpreisindex und Inflationsrate\n\n*   [Was wir machen](https://www.destatis.de/DE/Ueber-uns/Aufgaben/_inhalt.html \"Aufgaben\")\n    *   [Wer wir sind](https://www.destatis.de/DE/Ueber-uns/Organisation/_inhalt.html \"Organisation\")\n    *   [Was uns besonders macht](https://www.destatis.de/DE/Ueber-uns/Anspruch/_inhalt.html \"Unser Anspruch\")\n    *   [Die Menschen bei uns](https://www.destatis.de/DE/Ueber-uns/Beschaeftigte-Kultur/_inhalt.html \"Beschäftigte und Kultur\")\n    *   [Wir als Arbeitgeber](https://www.destatis.de/DE/Ueber-uns/Karriere/_inhalt.html \"Karriere\")\n    *   [Kurz erklärt im Video](https://www.destatis.de/DE/Ueber-uns/Video/_inhalt.html \"Kurz gesehen\")[](https://www.destatis.de/#mm-13 \"Mehr anzeigen\")\n\n*   [GENESIS-Online Startseite](https://genesis.destatis.de/datenbank/online \"Externer Link Link zur Datenbank Genesis (Öffnet neues Fenster)\")\n*   [Dashboard Deutschland](https://www.dashboard-deutschland.de/ \"Externer Link Dashboard Deutschland (Öffnet neues Fenster)\")\n*    Über uns\n    *   [Übersicht: Über uns](https://www.destatis.de/DE/Ueber-uns/_inhalt.html)\n    *   [Was wir machen](https://www.destatis.de/DE/Ueber-uns/Aufgaben/_inhalt.html)\n    *   [Wer wir sind](https://www.destatis.de/DE/Ueber-uns/Organisation/_inhalt.html)\n    *   [Was uns besonders macht](https://www.destatis.de/DE/Ueber-uns/Anspruch/_inhalt.html)\n    *   [Die Menschen bei uns](https://www.destatis.de/DE/Ueber-uns/Beschaeftigte-Kultur/_inhalt.html)\n    *   [Wir als Arbeitgeber](https://www.destatis.de/DE/Ueber-uns/Karriere/_inhalt.html)\n    *   [Kurz erklärt im Video](https://www.destatis.de/DE/Ueber-uns/Video/_inhalt.html)\n        *   [Was wir machen](https://www.destatis.de/DE/Ueber-uns/Aufgaben/_inhalt.html \"Aufgaben\")\n        *   [Wer wir sind](https://www.destati",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Statistisches Bundesamt",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [],
+  "fehler": [
+    "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
+  ]
+}

@@ -1,84 +1,25 @@
 {
-  "erzeugt": "2026-10-02 19:50 UTC",
+  "erzeugt": "2026-10-05 21:55 UTC",
   "uebersicht": {
-    "gesamt": 62,
+    "gesamt": 61,
     "ratgeber": 6,
-    "faellig": 7,
-    "bearbeitet": 3,
-    "geo_schnitt": 92,
+    "faellig": 1,
+    "bearbeitet": 1,
+    "geo_schnitt": 95,
     "befunde": 0,
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 2,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 10,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 7,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 1,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 7,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 4,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 7,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
-  "offen": [
-    {
-      "slug": "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen",
-      "titel": "Hausratversicherung optimieren: Schutz prüfen und sparen",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
-      "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
-      "titel": "Preiswert surfen: So findest du den optimalen DSL‑Anschluss",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 67
-    },
-    {
-      "slug": "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure",
-      "titel": "Reisekrankenversicherung: So vermeidest du teure Arztkosten",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    },
-    {
-      "slug": "2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden",
-      "titel": "Urlaubskasse aufbessern: Reisebudget ohne Nebenjob finden",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "geo": 50
-    }
-  ],
+  "offen": [],
   "laeufe": [
     {
-      "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
-      "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 4,
-      "quellen": 4,
-      "befunde": [],
-      "geo": 17,
-      "fehler": [
-        "Verbraucherzentrale – Aktuelle Meldungen: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 4 Belege",
-        "faktencheck: 2026-10-02"
-      ]
-    },
-    {
-      "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-      "titel": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [],
-      "geo": 67,
-      "fehler": [
-        "Verbraucherzentrale – Reise: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-02"
-      ]
-    },
-    {
-      "slug": "2026-10-02-die-50-30-20-regel-einfach-erklaert",
+      "slug": "2026-10-05-die-50-30-20-regel-einfach-erklaert",
       "titel": "Die 50-30-20-Regel einfach erklärt",
       "bereich": "artikel",
       "grund": "Erstrecherche – noch nie faktengeprüft",
@@ -91,7 +32,7 @@
       ],
       "aenderungen": [
         "quellen: 1 Belege",
-        "faktencheck: 2026-10-02"
+        "faktencheck: 2026-10-05"
       ]
     }
   ]

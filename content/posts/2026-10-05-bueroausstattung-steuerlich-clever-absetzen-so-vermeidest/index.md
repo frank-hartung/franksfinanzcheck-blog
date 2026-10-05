@@ -8,9 +8,9 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Büroausstattung steuerlich clever absetzen", "Büroausstattung", "Steuerlich", "Absetzen", "Vermeidest"]
+keywords: ["Büroausstattung steuerlich clever absetzen", "Büroausstattung", "Steuerlich", "Vermeidest"]
 pin_title: "Büroausstattung steuerlich clever absetzen: So geht's"
-pin_description: "*Werbung | Welche Bürogeräte du sofort absetzen kannst, wann du abschreiben musst und welche Fehler dich bares Geld kosten. Mehr Spartipps auf FranksFinanzcheck! #bueroausstattung #steuerlich #absetzen"
+pin_description: "*Werbung | Büroausstattung steuerlich clever absetzen: Welche Geräte sofort zählen, wann du abschreiben musst und welche fünf Fehler dich bares Geld kosten. Mehr Spartipps auf FranksFinanzcheck! #bueroausstattung #steuerlich #vermeidest"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

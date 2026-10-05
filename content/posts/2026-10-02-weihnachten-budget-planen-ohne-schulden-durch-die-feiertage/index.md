@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Warum beginnt ein entspanntes Weihnachtsbudget schon im Oktober?
 
 
-Genau das ist der Hebel: Weihnachten Budget planen.
+Genau das ist der Hebel: Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 
 Darum geht es hier konkret: Weihnachten Budget planen.
@@ -142,7 +142,7 @@ Nimm diese Posten in deinen Puffer auf. Dann bleibt der Topf auch dann heil, wen
 
 Viele Betriebe zahlen im November ein Weihnachtsgeld. Dieses Geld ist eine Chance, kein Freibrief. Teile es deshalb vorher auf, nicht danach.
 
-Bewährt hat sich eine einfache Drittel-Regel. Ein Drittel geht in das Fest, ein Drittel auf das Tagesgeld, ein Drittel tilgt teure Schulden. Hast du keinen Kredit, wandert dieser Teil in deinen Notgroschen.
+Bewährt hat sich eine einfache Drittel-Regel. Ein Drittel geht in das Fest, ein Drittel auf das Tagesgeld, ein Drittel tilgt teure Schulden. Hast du keinen Kredit, wandert dieser Teil in deinen [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/).
 
 Ein Beispiel mit 900 € netto: 300 € für das Fest, 300 € als Rücklage, 300 € gegen den Dispo. Damit senkst du die Zinsen im Januar und hast das Fest trotzdem bezahlt. Wer alles sofort ausgibt, spürt im Februar nichts mehr davon.
 

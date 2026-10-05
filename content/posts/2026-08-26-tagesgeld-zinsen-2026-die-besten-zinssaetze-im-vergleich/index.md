@@ -148,7 +148,7 @@ Stand: Oktober 2026. Die Zinsen ändern sich täglich. Vergleiche deshalb kurz v
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Nehmen wir an, du parkst einen **Notgroschen von ca. 15.000 €**:
+Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von ca. 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 
