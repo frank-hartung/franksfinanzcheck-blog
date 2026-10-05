@@ -56,7 +56,8 @@ Jede Ausnahme trägt einen `# codeql[regel-id]`-Kommentar **mit Begründung dire
 ## 4 · Umstellung – einmalig nach dem Merge
 
 1. PR mergen.
-2. **Einmalig das Default-Setup deaktivieren** (sonst analysieren zwei Engines parallel): Repo → Settings → Code security and analysis → Code scanning (CodeQL) → **Default setup → Disable**.
+2. **Einmalig das Default-Setup deaktivieren** (sonst analysieren zwei Engines parallel): Repo → **Settings** → Seitenleiste „Security and quality“ → **Advanced Security** → Abschnitt „Code Security“ → Zeile „CodeQL analysis“ → **`...`-Menü → Disable CodeQL**. Direktlink: `https://github.com/frank-hartung/franksfinanzcheck-blog/settings/security_analysis`.
+   *Die Seite hieß bis 2025 „Code security and analysis“ und ist unter diesem Namen nicht mehr zu finden. Vollständige Anleitung inkl. Nachsorge (stale Konfiguration entfernen) und Kontrollschritten: `CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md`, Abschnitt 1, Ursache B.*
 3. Die Wache übernimmt ab dem nächsten push auf `main` mit Vollanalyse + Upload.
 
 ## 5 · Runbook für künftige Funde

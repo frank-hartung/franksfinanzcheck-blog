@@ -30,11 +30,41 @@ Die Security-Tab zeigt bislang die Alerts des **GitHub-Default-Setups** (erkennb
 
 **Fix (technisch):** Neuer Schritt **„Upload-Ergebnis sichtbar machen (Default-Setup-Konflikt)“** schreibt bei abgelehntem Upload eine Job-Summary mit Klick-Anleitung plus `::warning`-Annotation. Zusätzlich gibt das Gate jetzt **jede einzelne Fundstelle als Datei-Annotation** aus (`::error file=…,line=…,title=…`) – sichtbar an der Codezeile im PR-Diff, im Lauf-Kopf und maschinenlesbar über die Checks-API. Vorher standen die Fundstellen nur im Lauf-Log, das praktisch nur als ZIP-Download erreichbar ist – genau deshalb blieb Alert #78 über mehrere „grüne“ PRs hinweg unbemerkt.
 
-**Fix (organisatorisch) – einmalige Handlung des Betreibers, nur per Klick möglich:**
+**Fix (organisatorisch) – einmalige Handlung des Betreibers, nur per Klick möglich.**
 
-> **Repo → Settings → Code security and analysis → Code scanning (CodeQL) → Default setup → _Disable_.**
->
-> Danach übernimmt die Wache (`.github/workflows/codeql.yml`) die Security-Tab, und die dort gezeigten Alert-Nummern stammen aus der Konfiguration, die auch das Gate fährt. Bis dahin ist das **Gate des jeweiligen Laufs** maßgeblich – es prüft denselben Bestand (seit Ursache A: vollständig) und schlägt bei jeder Security-Fundstelle fehl.
+Danach übernimmt die Wache (`.github/workflows/codeql.yml`) die Security-Tab, und die dort gezeigten Alert-Nummern stammen aus der Konfiguration, die auch das Gate fährt. Bis dahin ist das **Gate des jeweiligen Laufs** maßgeblich – es prüft denselben Bestand (seit Ursache A: vollständig) und schlägt bei jeder Security-Fundstelle fehl.
+
+> ⚠️ **Die Einstellungsseite heißt nicht mehr so, wie überall beschrieben.** GitHub hat „Code security and analysis“ 2025 in **„Advanced Security“** umbenannt. Unter dem alten Namen ist sie nicht auffindbar – das ist der häufigste Grund, warum diese Umstellung liegenbleibt. (Nachtrag 05.10.2026, nachdem der Betreiber die Einstellung genau deshalb nicht fand.)
+
+**Teil 1 – Default-Setup abschalten**
+
+1. **<https://github.com/frank-hartung/franksfinanzcheck-blog/settings/security_analysis>**
+   (manuell: Repo → Reiter **Settings** → linke Seitenleiste, Abschnitt **„Security and quality“** → **Advanced Security**)
+2. Auf der Seite zum Abschnitt **„Code Security“** scrollen, dort die Zeile **„CodeQL analysis“** suchen.
+3. Rechts in dieser Zeile das **`...`-Menü** öffnen. Steht dort **„Switch to advanced“**, ist das Default-Setup bestätigt aktiv.
+4. Im selben Menü **„Disable CodeQL“** wählen und bestätigen.
+   *Nicht* „Switch to advanced“ – das legt eine zweite, von GitHub generierte `codeql.yml` an, die mit dieser Wache konkurriert.
+
+**Teil 2 – Nachsorge, sonst bleibt Alert #78 ewig offen stehen**
+
+Das Abschalten schließt die Alerts des Default-Setups **nicht**. Die Konfiguration wird laut GitHub-Doku „stale“, zeigt veraltete Status, und ihre Alerts „stay open indefinitely“. Einmal aufräumen:
+
+1. Repo → Reiter **Security and quality** → linke Seitenleiste **Code scanning**.
+2. Einen Alert der alten Konfiguration öffnen (z. B. #78).
+3. Rechts im Abschnitt **„Affected branches“** auf **`main`** klicken.
+4. Im Dialog **„Configurations analyzing“** die Konfiguration des Default-Setups per **Papierkorb-Symbol** löschen. Die Einträge dieser Wache (Kategorie `/language:python` bzw. `/language:javascript`) stehen lassen.
+5. **Save changes**.
+
+**Teil 3 – Kontrolle beim nächsten Push auf `main`**
+
+- In der Actions-Liste tauchen **keine** Jobs `Analyze (python)` / `Analyze (javascript-typescript)` / `Analyze (actions)` mehr auf – das sind die des Default-Setups.
+- Im Lauf **„CodeQL-Sicherheitswache“** ist der Schritt *„SARIF in Security-Tab hochladen“* **grün** und *„Upload-Ergebnis sichtbar machen (Default-Setup-Konflikt)“* wird **übersprungen**.
+
+Trifft beides zu, speist dieselbe Konfiguration die Security-Tab, die auch das Gate fährt.
+
+**Alternative, falls das Default-Setup bewusst bleiben soll:** Dann muss umgekehrt der SARIF-Upload der Wache entfallen (Schritt „SARIF in Security-Tab hochladen“ entfernen). Zwei Engines parallel sind der einzige Zustand, der dauerhaft nicht funktioniert – Gate und Security-Tab zeigen dann unterschiedliche Wahrheiten.
+
+Dieselbe Anleitung steht automatisiert in der Job-Summary, wenn der Upload blockiert wird – niemand muss sie hier suchen.
 
 ### Ursache C – die erste „Behebung“ unterdrückte statt zu heilen
 
