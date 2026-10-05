@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-10-05 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-10-05 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -19,7 +19,14 @@
 
 | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung |
 |---|---|---|---|---|---|---|---|
-| ❌ blockiert | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
+| ❌ blockiert | ⚠️ warnung | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ❌ blockiert |
+
+## Heutige Live-Kandidaten (Deploy-Scope)
+
+| Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
+|---|---|---|---|---|---|---|---|---|---|
+| `2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf` | ✅ bestanden | ⚠️ warnung | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | unbekannt (Erstrecherche ausstehend) (überfällig) | **blockiert** |
+| `2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben` | ✅ bestanden | ⚠️ warnung | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | unbekannt (Erstrecherche ausstehend) (überfällig) | **blockiert** |
 
 ## Live-Bestand (Artikel für Artikel)
 
@@ -63,8 +70,10 @@
 | `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
 | `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-18 | **warnung** |
 | `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ⚠️ warnung | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-03 | **warnung** |
+| `2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf` | ✅ bestanden | ⚠️ warnung | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | unbekannt (Erstrecherche ausstehend) (überfällig) | **blockiert** |
+| `2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben` | ✅ bestanden | ⚠️ warnung | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | unbekannt (Erstrecherche ausstehend) (überfällig) | **blockiert** |
 
-## Blockierende Funde (2 Artikel)
+## Blockierende Funde (4 Artikel)
 
 ### `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` (blockiert, Risikoklasse standard)
 
@@ -73,6 +82,14 @@
 ### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` (blockiert, Risikoklasse erhoeht)
 
 - **T6-textverstaendnis** [technik]: R3-TERMINOLOGIE: Konzept „Tagesgeldkonto“: 9 Synonym-Vorkommen (Tagesgeld×9) – Leitbegriff verwenden
+
+### `2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf` (blockiert, Risikoklasse standard)
+
+- **F1-faktenfrische** [faktenalter]: Faktencheck fällig: Erstrecherche – noch nie faktengeprüft
+
+### `2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben` (blockiert, Risikoklasse standard)
+
+- **F1-faktenfrische** [faktenalter]: Faktencheck fällig: Erstrecherche – noch nie faktengeprüft
 
 ## Warnungen ohne Blockade (4 Artikel)
 
@@ -101,15 +118,12 @@
 | `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 8 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-11-16 |
-| `2026-10-04-apps-die-dein-sparschwein-digital-aufruesten` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-dsl-anbieter-wechseln-so-senkst-du-2026-deine-monatlich` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-flugverspaetung-entschaedigung-so-holst-du-dir-dein-geld-zu` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-handyvertrag-kuendigen-so-entkommst-du-der-automatischen-v` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-haushaltskosten-senken-7-ueberraschende-tricks-die-sofort` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-monatliche-ausgaben-halbieren-dein-4-k-plan-fuer-smarte-ha` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-online-banking-optimieren-kontomanagement-smarter` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-stromkosten-senken-smarte-haushaltsgeraete-gezielt-einsetz` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
-| `2026-10-04-stromspar-apps-im-test-so-senkst-du-deine` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-die-50-30-20-regel-einfach-erklaert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 

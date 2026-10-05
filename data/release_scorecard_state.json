@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T09:16:46Z",
-  "modus": "kandidaten",
-  "commit": "0f6badaffd60d875aa9e21780c27655d2ff0c878",
+  "generated_at": "2026-10-05T12:13:18Z",
+  "modus": "live",
+  "commit": "c8a62d6f5f9024e41f646f2be49596e211d606cc",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -226,7 +226,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "3e7438251c1b2d1c403dec9339e5693c719f856292a26c34897515480d47a1e1",
+      "sha256": "f5d0d8b9cf59a8c2b531f7a56f5c0cf225449030209bdb3dde18914597857bca",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "72bd76ef4193ae515ed4e3fdc35b95f706ebe9a8183c6ae4a93809e4235965fc",
@@ -649,6 +649,40 @@
       },
       "naechste_pruefung": "2026-11-03",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf": {
+      "sha256": "e4dba51cac444d994e5fce77defd778142168ac9142abd2eef8251883816d4d5",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "warnung",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "blockiert"
+      },
+      "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
+      "siegel_drift": "neu versiegelt"
+    },
+    "2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben": {
+      "sha256": "ec6b3de807c851bf383796b4e86f7f8d702386e8a0bf32e007dd56593c1b78ab",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "warnung",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "blockiert"
+      },
+      "naechste_pruefung": "unbekannt (Erstrecherche ausstehend)",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
