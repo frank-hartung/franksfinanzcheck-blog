@@ -99,7 +99,7 @@ Zuletzt: Vertraue nicht blind jedem "Geheimtipp" für DNS-Server aus dubiosen Fo
 
 ## Internet beschleunigen: DNS-Tuning für unterwegs
 
-Nicht nur zu Hause, auch unterwegs kannst du dein **internet beschleunigen**. In öffentlichen WLAN-Netzen, etwa im Hotel oder im Zug, sind die DNS-Server oft noch langsamer und instabiler als bei privaten Heimanschlüssen. Hier hilft es, die Einstellungen direkt auf dem Smartphone oder Laptop anzupassen.
+Nicht nur zu Hause, auch unterwegs kannst du dein **Internet beschleunigen**. In öffentlichen WLAN-Netzen, etwa im Hotel oder im Zug, sind die DNS-Server oft noch langsamer und instabiler als bei privaten Heimanschlüssen. Hier hilft es, die Einstellungen direkt auf dem Smartphone oder Laptop anzupassen.
 
 Wenn du auf deinem Mobilgerät den DNS änderst, wirkt sich das sowohl auf das WLAN als auch auf die mobile Datenverbindung aus. Das ist besonders in Gebieten mit schwacher Netzabdeckung hilfreich, da dort jede gesparte Millisekunde bei der Namensauflösung den Unterschied zwischen "Seite lädt" und "Timeout" ausmachen kann.
 

@@ -51,7 +51,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Das Wichtigste in Kürze
 
 
-Beim Thema [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) lohnt sich ein genauer Blick auf die Details.
+Darum geht es hier konkret: [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/).
 
 - Die Verbraucherzentrale nennt **rund 6 % weniger Heizenergie pro Grad** als Faustwert.
 - Wohnräume liegen oft bei etwa **20 °C**, Schlafzimmer bei **16 bis 18 °C** sinnvoll.
@@ -219,7 +219,7 @@ Bei sehr hohen oder unerklärlichen Werten lohnt ein Blick auf den Heizspiegel u
 Miss, statt zu raten.
 
 
-Gerade für [Heizkosten senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
+Genau das ist der Hebel: Heizkosten senken. Schon kleine Änderungen haben [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 

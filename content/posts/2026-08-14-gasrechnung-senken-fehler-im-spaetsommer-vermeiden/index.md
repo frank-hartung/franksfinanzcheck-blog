@@ -51,7 +51,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Starte mit einem kleinen Check
 
 
-Gerade wenn du deine gasrechnung senken willst, lohnt sich ein Check vor der Heizperiode.
+Darum geht es hier konkret: Gasrechnung senken.
 
 Prüfe deine Zahlen, bevor die Heizung richtig läuft. Die Preise der Anbieter gehen im Oktober 2026 weit auseinander. Das ist dein Hebel.
 
@@ -242,7 +242,7 @@ Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer 
 Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 Prozent. Kalt wird es dabei nicht.
 
 
-Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu 15 % senken.
+Genau das ist der Hebel: Gasrechnung senken. 10 bis 15 Prozent sind dabei realistisch.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 

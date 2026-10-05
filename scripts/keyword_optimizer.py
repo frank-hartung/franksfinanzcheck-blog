@@ -109,6 +109,32 @@ def fm_set_list(content: str, key: str, items: list[str]) -> str:
 
 def _selftest() -> list[str]:
     err = []
+    # --- Dichte-Sätze (Nachtrag #585, 05.10.2026) -------------------------
+    # Realfall auf main: „Mit dem richtigen Vorgehen lässt sich die
+    # gasrechnung senken um bis zu 15 % senken." Zwei Defekte in einem Satz –
+    # gebeugtes/kleingeschriebenes Keyword und doppeltes Verb.
+    for kw in ("Gasrechnung senken", "Weihnachten Budget planen",
+               "Tagesgeld Zinsen 2026", "Ökostrom Anbieter wechseln"):
+        for satz in dichte_saetze(kw):
+            if kw not in satz:
+                err.append(f"dichte_saetze: Keyword nicht wortgleich in „{satz}“")
+            if kw.lower() in satz and kw.lower() != kw:
+                err.append(f"dichte_saetze: Keyword kleingeschrieben in „{satz}“")
+            kern = satz.split(":", 1)[0]
+            for wort in kw.split():
+                if len(wort) >= 5 and wort.lower() in kern.lower():
+                    err.append(f"dichte_saetze: „{wort}“ doppelt in „{satz}“")
+            if not satz.endswith("."):
+                err.append(f"dichte_saetze: kein Satzende in „{satz}“")
+    if dichte_saetze("") or dichte_saetze(None):
+        err.append("dichte_saetze: leeres Keyword liefert Sätze")
+    # Idempotenz: eine zweite Heilung darf nichts mehr anfügen.
+    body_dicht = "## Überschrift\n\nEin kurzer Text ohne Keyword.\n\n## Fazit\n\nEnde.\n"
+    einmal = heal_density(body_dicht, "Gasrechnung senken")
+    if einmal == body_dicht:
+        err.append("heal_density: hat bei zu geringer Dichte nicht geheilt")
+    if heal_density(einmal, "Gasrechnung senken") != einmal:
+        err.append("heal_density: nicht idempotent – fügt denselben Satz erneut ein")
     if norm("Frugalismus-Tipps") != "frugalismus tipps":
         err.append("norm Frugalismus-Tipps")
     if norm("Gasrechnung senken") != "gasrechnung senken":
@@ -329,6 +355,42 @@ def heal_h2(body: str, main_kw: str) -> str:
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------------------------
+# Dichte-Sätze (Governance-Report #585, Nachtrag 05.10.2026)
+#
+# WARUM DIESE FUNKTION EXISTIERT: Die alte Heilung hat das Keyword mit
+# `main_kw.lower()` in fertige Satzschablonen gestanzt. Zwei Defekte, beide
+# live gegangen:
+#   · „Mit dem richtigen Vorgehen lässt sich die gasrechnung senken um bis zu
+#     15 % senken." – das Keyword IST ein Verbalausdruck („Gasrechnung
+#     senken"), die Schablone liefert das Verb ein zweites Mal.
+#   · „Gerade für weihnachten budget planen gilt: …" – `.lower()` macht aus
+#     deutschen Substantiven Kleinschreibung. Falsches Deutsch, und für die
+#     Suche ist die Exact-Match-Schreibweise des Keywords sowieso besser.
+# Dazu kam eine Themen-Sonderlocke („vor der Heizperiode"), die in jedem
+# Nicht-Heiz-Artikel schlicht falsch war.
+#
+# DIE REGEL, DIE DARAUS FOLGT: Ein maschinell eingefügter Satz darf NIE
+# versuchen, ein beliebiges Keyword in eine Satzgrammatik einzupassen – er
+# kennt dessen Wortart nicht. Grammatisch sicher ist nur die Apposition nach
+# Doppelpunkt: Davor steht ein vollständiger Satz, dahinter das Keyword
+# wortgleich. Das funktioniert für Nominalphrasen („Tagesgeld Zinsen 2026")
+# genauso wie für Verbalphrasen („Gasrechnung senken") und lässt die
+# Schreibweise unangetastet.
+DICHTE_SCHABLONEN = (
+    "Darum geht es hier konkret: {kw}.",
+    "Genau das ist der Hebel: {kw}.",
+)
+
+
+def dichte_saetze(main_kw: str) -> list:
+    """Grammatisch sichere Dichte-Sätze – Keyword wortgleich, nie gebeugt."""
+    kw = " ".join((main_kw or "").split()).strip(" .:;,")
+    if not kw:
+        return []
+    return [s.format(kw=kw) for s in DICHTE_SCHABLONEN]
+
+
 def heal_density(body: str, main_kw: str) -> str:
     main_kw = (main_kw or "").strip()
     if not main_kw:
@@ -344,22 +406,11 @@ def heal_density(body: str, main_kw: str) -> str:
     density = count / total if total else 0
     if density >= DENSITY_MIN:
         return body
-    inserts = []
-    if "gasrechnung" in nk:
-        inserts = [
-            f"Gerade wenn du deine {main_kw.lower()} willst, lohnt sich ein Check vor der Heizperiode.",
-            f"Mit dem richtigen Vorgehen lässt sich die {main_kw.lower()} um bis zu 15 % senken.",
-        ]
-    elif "frugalismus" in nk:
-        inserts = [
-            f"Diese {main_kw} funktionieren im Alltag, weil sie auf Gewohnheiten statt auf Verzicht setzen.",
-            f"Wer {main_kw.lower()} konsequent anwendet, spart laut Praxisbeispielen 200 bis 500 € pro Monat.",
-        ]
-    else:
-        inserts = [
-            f"Beim Thema {main_kw} lohnt sich ein genauer Blick auf die Details.",
-            f"Gerade für {main_kw.lower()} gilt: Kleine Änderungen bringen große Wirkung.",
-        ]
+    inserts = dichte_saetze(main_kw)
+    # Idempotenz: bereits gesetzte Sätze nie ein zweites Mal einfügen.
+    inserts = [s for s in inserts if s.strip() not in body]
+    if not inserts:
+        return body
     lines = body.split("\n")
     for i, line in enumerate(lines):
         if re.match(r"^##\s+", line):
@@ -711,7 +762,7 @@ def main():
             for e in errs:
                 print(f"  - {e}")
             return 2
-        print("✅ KEYWORD-SELFTEST bestanden (Norm, Stamm-Matching, Titel-Healing, Description, First-Para, H2).")
+        print("✅ KEYWORD-SELFTEST bestanden (Norm, Stamm-Matching, Titel-Healing, Description, First-Para, H2, Dichte-Sätze).")
         return 0
 
     if do_fix:

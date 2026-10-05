@@ -75,7 +75,7 @@ Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank, ei
 ## Das Wichtigste in Kürze – Energiediebe stoppen
 
 
-Beim Thema Energiediebe stoppen lohnt sich ein genauer Blick auf die Details.
+Darum geht es hier konkret: Energiediebe stoppen.
 
 - Nutze deinen **eigenen Arbeitspreis** aus dem Stromvertrag, nicht irgendeinen Werbewert.
 - Miss Kühl- und Gefriergeräte mindestens **24 Stunden**, besser mehrere Tage.
@@ -247,7 +247,7 @@ Prüfe bei unerklärlich hoher Grundlast außerdem, ob Gemeinschaftsstrom oder e
 Speichere Messwert, Datum und Strompreis gemeinsam. Sonst vergleichst du später kWh und Euro aus verschiedenen Annahmen.
 
 
-Gerade für Energiediebe stoppen gilt: Kleine Änderungen bringen [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
+Genau das ist der Hebel: Energiediebe stoppen. Schon kleine Änderungen haben [große Wirkung](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 
 ## Fazit: Der größte Stromfresser ist der ungeprüfte
 

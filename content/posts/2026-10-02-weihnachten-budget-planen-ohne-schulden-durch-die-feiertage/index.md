@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 ## Warum beginnt ein entspanntes Weihnachtsbudget schon im Oktober?
 
 
-Beim Thema Weihnachten Budget planen lohnt sich ein genauer Blick auf die Details.
+Darum geht es hier konkret: Weihnachten Budget planen.
 
 
 Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer Monat. Und die Kosten kommen alle auf einmal.
@@ -172,7 +172,7 @@ Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du run
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.
 
 
-Gerade für weihnachten budget planen gilt: Kleine Änderungen bringen große Wirkung.
+Genau das ist der Hebel: Weihnachten Budget planen. Schon kleine Änderungen haben große Wirkung.
 
 ## Häufige Fragen
 
