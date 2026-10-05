@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'Energiepreise: Preise für Benzin und Diesel steigen wieder leicht'
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-06T00:34:19'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: Stromverbrauch reduzieren Teil 2 ⚡ [Tutorial] Stromkosten senken & Energie Sparen!
   url: https://www.youtube.com/watch?v=VpOv9XBgO-c
   quelle: YouTube
@@ -107,4 +114,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-05T17:55:29'
+zuletzt_ergaenzt: '2026-10-06T00:34:19'
