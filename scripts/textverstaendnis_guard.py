@@ -1040,6 +1040,10 @@ def main() -> int:
                   "R8-URL-LEERZEICHEN", "R8-NESTED-LINK", "R9-KLEBEWORT", "R10-DOPPELWORT",
                   "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE", "R13-DATUM-PUNKT",
                   "R14-MARKER-RUINE", "R15-PHRASEN-DOPPEL",
+                  # R17 (05.10.2026, Nachtrag #585): maschinell verstümmelte
+                  # Keyword-Einsetzungen blockieren – deckungsgleich mit
+                  # publish_gate.textverstaendnis_failures.
+                  "R17-KEYWORD-KASUS", "R17-KEYWORD-DOPPEL",
                   "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META")
     hard = [f for f in uniq if f[1] in hard_rules]
     soft = [f for f in uniq if f[1] not in hard_rules]
