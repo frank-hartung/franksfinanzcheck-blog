@@ -16,7 +16,9 @@ Diese Datei schließt die Lücke. Sie prüft ALLE Workflows auf:
   3. vorhandenen `on:`-Auslöser,
   4. je Job `runs-on` und Steps, die entweder `run` oder `uses` tragen,
   5. Step-Namen ohne YAML-Fallen (Doppelpunkt + Leerzeichen in einem
-     unquotierten Skalar wäre wieder ein Parserfehler).
+     unquotierten Skalar wäre wieder ein Parserfehler),
+  6. einen expliziten Top-Level-`permissions:`-Block als Least-Privilege-
+     Grenze; breite Kurzformen wie `write-all` sind auch je Job verboten.
 
 Läuft ohne Netz und ohne GitHub – Teil von `python3 -m unittest discover
 -s scripts/tests`.
@@ -41,6 +43,7 @@ WORKFLOWS = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
 STEP_KEYS = {"name", "id", "if", "uses", "with", "run", "env", "shell",
              "working-directory", "continue-on-error", "timeout-minutes",
              "strategy", "permissions"}
+PERMISSION_LEVELS = {"read", "write", "none"}
 
 
 class UniqueKeyLoader(yaml.SafeLoader if yaml else object):
@@ -63,6 +66,39 @@ class WorkflowYamlTests(unittest.TestCase):
     def test_workflows_vorhanden(self):
         self.assertGreaterEqual(len(WORKFLOWS), 20,
                                 "Workflow-Ordner wirkt leer – Pfad prüfen?")
+
+    def test_permissions_sind_explizit_und_eng(self):
+        """Jeder Workflow begrenzt GITHUB_TOKEN selbst – unabhängig von den
+        veränderlichen Repository-Defaults. Das verhindert die von OpenSSF
+        Scorecard gemeldete Klasse „Workflow does not contain permissions".
+
+        Nur die Mapping-Schreibweise ist erlaubt: `read-all`/`write-all` wären
+        breite Kurzformen und hebelten die nachvollziehbare Einzelvergabe aus.
+        Job-Overrides werden nach demselben Maß geprüft. `permissions: {}` ist
+        als bewusstes Deny-all gültig.
+        """
+        def pruefe(block, ort):
+            self.assertIsInstance(
+                block, dict,
+                f"{ort}: `permissions` muss ein Mapping einzelner Rechte sein "
+                "(kein read-all/write-all)")
+            for scope, level in block.items():
+                self.assertIsInstance(scope, str, f"{ort}: ungültiger Permission-Key")
+                self.assertIn(
+                    level, PERMISSION_LEVELS,
+                    f"{ort}: Permission `{scope}` hat ungültigen Wert {level!r}")
+
+        for path in WORKFLOWS:
+            with self.subTest(workflow=path.name):
+                data = yaml.load(path.read_text(encoding="utf-8"),
+                                 Loader=UniqueKeyLoader)
+                self.assertIn(
+                    "permissions", data,
+                    f"{path.name}: expliziter Top-Level-`permissions:`-Block fehlt")
+                pruefe(data["permissions"], path.name)
+                for job_name, job in (data.get("jobs") or {}).items():
+                    if isinstance(job, dict) and "permissions" in job:
+                        pruefe(job["permissions"], f"{path.name}/{job_name}")
 
     def test_yaml_parst_und_struktur_stimmt(self):
         for path in WORKFLOWS:

@@ -25,6 +25,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 -m pip install -q pyyaml pillow cryptography
+      # Harte, verständliche Vorprüfung für die Actions-Kontrollfläche. Das
+      # Unit-Test-Netz darunter enthält zusätzlich Sabotageproben des Audits.
+      - name: Workflow-Permissions und Betriebsverträge prüfen
+        run: python3 scripts/automation_premium_audit.py --strict
       - run: |
           python3 -m unittest discover -s scripts/tests -v
           python3 scripts/engine_generate.py --selftest
