@@ -9,6 +9,41 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Stromverbrauch reduzieren Teil 2 ⚡ [Tutorial] Stromkosten senken & Energie Sparen!
+  url: https://www.youtube.com/watch?v=VpOv9XBgO-c
+  quelle: YouTube
+  erfasst: '2026-10-05T17:55:29'
+  brief: 2026-10-05-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-05-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Strompreise vergleichen – Energiekosten senken
+  url: https://www.youtube.com/watch?v=wkf3AhUQGL8
+  quelle: YouTube
+  erfasst: '2026-10-05T17:55:29'
+  brief: 2026-10-05-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-05-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Stromanbieter Wechsel mit Check24 I komplette Anleitung zum Stromtarif-Wechsel
+  url: https://www.youtube.com/watch?v=Q3pvk9PyRs8
+  quelle: YouTube
+  erfasst: '2026-10-05T17:55:29'
+  brief: 2026-10-05-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-05-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Flugpreise: Preise für Tickets ab Deutschland haben sich seit 2010 verdoppelt'
+  url: https://www.spiegel.de/wirtschaft/service/flugpreise-tickets-ab-deutschland-seit-2010-im-schnitt-verdoppelt-a-2a070709-c88f-4826-a4d7-5c7ecf35cff2#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-10-05T17:55:29'
+  brief: 2026-10-05-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-05-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Preise für Flugtickets aus Deutschland seit 2010 etwa verdoppelt
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/luftfahrt-flugtickets-preise-100.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-10-05T17:55:29'
+  brief: 2026-10-05-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-10-05-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: 'Verträge gekündigt: Volkswagen steht vor neuem Tarifkampf'
   url: https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -72,4 +107,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-04T16:20:48'
+zuletzt_ergaenzt: '2026-10-05T17:55:29'
