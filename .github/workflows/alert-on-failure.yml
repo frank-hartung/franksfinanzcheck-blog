@@ -276,6 +276,55 @@ jobs:
               state: 'open',
               per_page: 100
             });
+
+            // ================================================================
+            //  FACHKANAL-STUMMSCHALTUNG FÜR TAGESDEFIZITE (WF-1F8C #602)
+            //  --------------------------------------------------------------
+            //  Die Kadenz-Endkontrolle muss bei einem echten Quotendefizit rot
+            //  bleiben (keine grüne Lüge), erstellt/aktualisiert dafür aber
+            //  bereits das auto-schließende Fach-Issue `engine-deficit` mit
+            //  Lage, Slugs und Slot-Protokoll. Genau diese ehrliche rote
+            //  Schlussstufe erzeugte #602: ein zweites, generisches
+            //  `auto-report`-Issue mit API-Key-/Transient-Runbook – also
+            //  Rauschen statt Entscheidung.
+            //
+            //  Regel: Nur wenn der Workflow selbst den Fehler ausdrücklich als
+            //  „TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig“
+            //  klassifiziert UND dieses Fach-Issue offen sowie für diesen Lauf
+            //  frisch aktualisiert nachweisbar ist, schweigt das zentrale
+            //  Fehler-Alerting. Fehlt der Fachkanal (Token/API kaputt, Label
+            //  weg, Marker fehlt, veraltetes Issue), bleibt es fail-open und
+            //  legt das generische Issue an. Release-/Build-Crashs haben andere
+            //  Schritt-Namen und werden weiterhin gemeldet.
+            // ================================================================
+            const failedStepNames = failedJobs.flatMap(j => j.steps || []);
+            const labelsOf = issue => (issue.labels || [])
+              .map(l => typeof l === 'string' ? l : (l && l.name) || '')
+              .filter(Boolean);
+            const routedToEngineDeficit = failedStepNames.some(s =>
+              String(s).includes('TAGESDEFIZIT') && String(s).includes('engine-deficit')
+            );
+            const freshForThisRun = issue => {
+              const issueUpdated = Date.parse(issue.updated_at || issue.updatedAt || '');
+              const runCreated = Date.parse(run.created_at || '');
+              return !Number.isNaN(issueUpdated) && !Number.isNaN(runCreated) &&
+                issueUpdated >= (runCreated - 10 * 60 * 1000);
+            };
+            const engineDeficitIssue = existing.find(i =>
+              !i.pull_request &&
+              labelsOf(i).includes('engine-deficit') &&
+              String(i.body || '').includes('<!-- engine-deficit-id: tagesdefizit -->') &&
+              freshForThisRun(i)
+            );
+            if (routedToEngineDeficit && engineDeficitIssue) {
+              console.log('Tagesdefizit ist bereits im Fachkanal engine-deficit (#' +
+                engineDeficitIssue.number + ') gemeldet – kein generisches auto-report-Duplikat.');
+              return;
+            }
+            if (routedToEngineDeficit && !engineDeficitIssue) {
+              console.log('Tagesdefizit-Schritt gefunden, aber kein offenes engine-deficit-Issue – fail-open: generische Meldung wird erstellt.');
+            }
+
             // ================================================================
             //  IDENTITÄT: Marker statt Titel (Marken-Oberfläche #496)
             //  Der Titel ist jetzt markenneutral und taugt nicht mehr als

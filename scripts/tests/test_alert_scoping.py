@@ -32,10 +32,15 @@ dass die Regeln nicht still zurückgebaut werden:
   5. DIAGNOSE: Der Alarm trägt die fehlgeschlagenen Jobs/Schritte ins
      Issue (Lehre aus INCIDENT-2026-09-19: „die Meldung riet, das Log
      hätte es gewusst").
-  6. VERHALTEN: Die Verhaltens-Simulation (scripts/tests/sim/
+  6. FACHKANAL: Ein ausdrücklich klassifiziertes Tagesdefizit erzeugt
+     kein zweites generisches auto-report-Issue, wenn das engine-deficit-
+     Fach-Issue offen nachweisbar ist (#602); fehlt der Fachkanal,
+     bleibt das Alerting fail-open.
+  7. VERHALTEN: Die Verhaltens-Simulation (scripts/tests/sim/
      alert_scoping_sim.mjs) führt das Inline-Skript mit gestubbtem
-     github-script-Kontext aus – neun Szenarien, inkl. exakter
-     #343-Reproduktion, Phantom-Filter (#218), Dedupe und Fail-open.
+     github-script-Kontext aus – die Produktionsszenarien inkl. exakter
+     #343-Reproduktion, Phantom-Filter (#218), Dedupe, Fachkanal-
+     Stummschaltung und Fail-open.
 
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
@@ -104,6 +109,18 @@ class ProdScopingAlarm(unittest.TestCase):
         # Vertrag 5: Der Alarm benennt die roten Jobs/Schritte im Issue.
         self.assertIn("listJobsForWorkflowRun", self.code)
         self.assertIn("Fehlgeschlagene Schritte", self.code)
+
+    def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
+        # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
+        # stummgeschaltet werden, wenn das engine-deficit-Fach-Issue mit
+        # Marker offen nachweisbar ist; sonst bleibt das Alerting fail-open.
+        self.assertIn("engine-deficit", self.code)
+        self.assertIn("engine-deficit-id: tagesdefizit", self.code)
+        self.assertIn("routedToEngineDeficit", self.code)
+        self.assertIn("freshForThisRun", self.code)
+        self.assertIn("updated_at", self.code)
+        self.assertIn("kein generisches auto-report-Duplikat", self.code)
+        self.assertIn("fail-open", self.code)
 
     def test_timeout_ist_echter_produktionsfehler(self):
         # GitHub unterscheidet `timed_out` von `failure`. Ohne diese explizite
@@ -204,13 +221,13 @@ class TitelUndLabelVertrag(unittest.TestCase):
 
 
 class VerhaltensSimulation(unittest.TestCase):
-    """Vertrag 6 (Verhalten, nicht nur Text): Das alarm-Skript wird mit
-    gestubbtem github-script-Kontext WIRKLICH ausgeführt – neun Szenarien
-    inkl. der exakten #343-Konstellation. Harness:
+    """Vertrag 7 (Verhalten, nicht nur Text): Das alarm-Skript wird mit
+    gestubbtem github-script-Kontext WIRKLICH ausgeführt – alle Kern-
+    Szenarien inkl. der exakten #343-Konstellation. Harness:
     scripts/tests/sim/alert_scoping_sim.mjs (node; GitHub-Runner bringen es
     mit, lokal ohne node/pyyaml → Skip, kein Scheingrün)."""
 
-    def test_neun_szenarien(self):
+    def test_kern_szenarien(self):
         import shutil
         import subprocess
         import tempfile

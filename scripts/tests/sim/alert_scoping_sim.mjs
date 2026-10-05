@@ -5,9 +5,10 @@
 // docs/INCIDENT-2026-09-21-layout-ai-fehlalarm-343.md) ist Inline-JS in YAML.
 // Struktur-Tests (test_alert_scoping.py) prüfen nur, dass die Regeln IM TEXT
 // stehen; diese Simulation führt das Skript wirklich aus und beweist das
-// Verhalten in neun Szenarien – inklusive der exakten #343-Konstellation
-// (roter pull_request-Lauf eines arena-Zweigs → KEIN Alarm) und der
-// Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall).
+// Verhalten in Produktionsszenarien – inklusive der exakten #343-Konstellation
+// (roter pull_request-Lauf eines arena-Zweigs → KEIN Alarm), der
+// Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall)
+// und der #602-Fachkanal-Regel für Tagesdefizite.
 //
 // Aufruf:  node scripts/tests/sim/alert_scoping_sim.mjs <pfad-zum-rohskript.js>
 // Exit 0 = alle Szenarien korrekt, Exit 1 = mindestens ein Szenario falsch.
@@ -177,6 +178,41 @@ await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entst
     openIssues: [{ number: 101, title: '🔧 Wartung · Newsletter · Vorgang WF-0000',
                    body: '<!-- alert-key: WF-0000 -->' }] },
   true, ['Häufigste Ursachen']);
+
+// 12. #602-Klasse: Die Kadenz bleibt bei einem echten Tagesdefizit ehrlich
+//     rot, aber das Fach-Issue engine-deficit besitzt bereits die Arbeit.
+//     Dann darf das zentrale Alerting KEIN generisches API-Key-Runbook daneben
+//     legen.
+await run('Tagesdefizit mit offenem engine-deficit-Fachissue → kein auto-report-Duplikat',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/602',
+             steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
+    openIssues: [{ number: 601, title: 'Content-Engine: Tagesdefizit 2026-10-05 (1/2 LIVE)',
+                   body: '<!-- engine-deficit-id: tagesdefizit -->\nDetails',
+                   labels: [{ name: 'engine-deficit' }],
+                   updated_at: '2026-09-21T17:18:00Z' }] },
+  false);
+
+// 13. Fehlt der Fachkanal, bleibt das Alerting fail-open: Dann ist nicht das
+//     Defizit das Problem, sondern die Zustellung der Fachmeldung.
+await run('Tagesdefizit ohne engine-deficit-Fachissue → generischer Alarm fail-open',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/603',
+             steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }] },
+  true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
+
+// 14. Ein altes engine-deficit-Issue darf die aktuelle Zustellstörung nicht
+//     verschlucken. Der Fachkanal zählt nur, wenn er für diesen Lauf frisch
+//     aktualisiert wurde.
+await run('Tagesdefizit mit veraltetem engine-deficit-Issue → generischer Alarm fail-open',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/604',
+             steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
+    openIssues: [{ number: 600, title: 'Content-Engine: Tagesdefizit alt',
+                   body: '<!-- engine-deficit-id: tagesdefizit -->\nAlt',
+                   labels: [{ name: 'engine-deficit' }],
+                   updated_at: '2026-09-20T17:18:00Z' }] },
+  true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
 console.log(failed === 0
   ? `\n✅ SIMULATION: alle ${count} Szenarien korrekt`
