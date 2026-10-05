@@ -41,7 +41,6 @@ quellen:
 faktencheck: "2026-09-27"
 ---
 
-
 Frugalismus im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
@@ -101,7 +100,7 @@ Impulskäufe sind der größte Feind deines Kontostands. Wenn du im Internet ode
 
 Beim Online-Shopping funktioniert das besonders gut: Artikel in den Warenkorb legen, Tab schließen. Erinnerst du dich am nächsten Tag noch aktiv daran und brauchst es wirklich, kannst du kaufen. Überraschend viele Dinge willst du dann gar nicht mehr.
 
-In der Praxis spart dieser Trick oft mehrere hundert Euro im Jahr. Du lernst dabei wieder, zwischen kurzfristigem Wunsch und echtem Bedarf zu unterscheiden – ein Grundbaustein für **[Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/)**.
+In der Praxis spart dieser Trick oft mehrere hundert Euro im Jahr. Du lernst dabei wieder, zwischen kurzfristigem Wunsch und echtem Bedarf zu unterscheiden – ein Grundbaustein für **Geld sparen im Alltag**.
 
 ## Trick 2: Das Prinzip der No-Spend-Weekends
 

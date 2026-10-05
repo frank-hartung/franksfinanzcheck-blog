@@ -11,6 +11,10 @@ author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
 ki_redaktion_status: "review"
+cover:
+  image: "images/covers/2026-10-05-die-50-30-20-regel-einfach-erklaert.jpg"
+  alt: "Die 50-30-20-Regel einfach erklärt"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Am Monatsende ist das Geld weg. Wohin es floss, weißt du oft nicht. Dabei hast du einen festen Job und feste Ausgaben.

@@ -258,7 +258,7 @@ Ein Mietwagen ohne Kaution ist im Ausland selten. Doch eine gute Tarifwahl senkt
 
 Drei Regeln zählen: **Vergleiche online. Buche Vollkasko ohne Selbstbeteiligung. Sage am Schalter Nein zu Extras.**
 
-**Weiterlesen:** [Geld sparen im Alltag](../../posts/2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann/) · [Mehr Freiheit durch Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekranken­versicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
+**Weiterlesen:** Geld sparen im Alltag · [Mehr Freiheit durch Verzicht](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [Pillar: Mietwagen & Reisen](../../pillar/mietwagen/) · [Reisekranken­versicherung: Was wirklich schützt](/go/reisekrankenversicherung/)
 
 ## Fazit: Mietwagen ohne Kautionsfallen – So sparst du im Urlaub
 
