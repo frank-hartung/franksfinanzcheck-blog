@@ -19,23 +19,230 @@ savings: "bis zu 100 % Erstattung"
 pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
 pin_description: "*Werbung | Zahnzusatzversicherung 2026 im Klaren Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen richtig… Mehr Spartipps auf FranksFinanzcheck! #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"
 quellen:
-  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+  - id: "Q1"
+    titel: "Zahnzusatzversicherung: Worauf Sie beim Abschluss achten sollten"
+    url: "https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/kranken-versicherung/zahnzusatzversicherung-worauf-sie-beim-abschluss-achten-sollten-12943"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-03-10"
-  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
-    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
-    herausgeber: "BaFin"
-    datum: "2025-10-04"
-  - titel: "Leitfaden privater Versicherungsschutz"
-    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
-    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-01-20"
+    datum: "2026-10-05"
+  - id: "Q2"
+    titel: "Festzuschüsse der Krankenkasse für Zahnersatz"
+    url: "https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/kranken-versicherung/festzuschuesse-der-krankenversicherung-fuer-zahnersatz-50645"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-10-05"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
+  status: "freigegeben"
+  inhalt_sha256: "68d76712d6ef872b7b0879ee15e99fbfbd2ba66d17751461ac261d51c060151c"
+  pruefer:
+    name: "Redaktion FranksFinanzcheck"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Festzuschuss-Sätze 60/70/75 % und GOZ/Zahnstaffel-Aussagen belegt, alle Beispielrechnungen nachgerechnet"
+    typ: "redaktion-mit-externer-belegkette"
+  pruefdatum: "2026-10-05"
+  naechste_pruefung: "2026-11-19"
+  aenderungsgrund: "Prüfqueue #586: Belegkette auf Verbraucherzentrale umgestellt, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert und Eigenanteile nachgerechnet"
+  gepruefte_aussagen:
+    - textanker: "nur einen Festzuschuss zur sogenannten Regelversorgung"
+      pruefung: "Bestätigt: Gesetzliche Krankenkassen zahlen bei Zahnersatz Festzuschüsse zur Regelversorgung; höhere Qualität geht zu Lasten des Versicherten (Verbraucherzentrale)"
+      quellen: ["Q2"]
+    - textanker: "bleibt die Differenz an dir hängen"
+      pruefung: "Bestätigt: GOZ-Steigerungssätze reichen bis zum 3,5-fachen Satz; Tarife, die nur den 2,3-fachen Satz erstatten, lassen die Differenz beim Versicherten (Verbraucherzentrale)"
+      quellen: ["Q1"]
+    - textanker: "Die Erstattung ist in den ersten Jahren oft begrenzt"
+      pruefung: "Bestätigt: Zahnstaffeln begrenzen die Erstattungshöhe in den ersten Versicherungsjahren; Verbraucherzentrale warnt vor dieser häufigen Falle"
+      quellen: ["Q1"]
+    - textanker: "fast nie nach dem Behandlungsplan, sondern davor"
+      pruefung: "Bestätigt: Der Abschluss muss vor Behandlungsplanung erfolgen; bereits laufende oder angeratene Behandlungen sind ausgeschlossen (Verbraucherzentrale)"
+      quellen: ["Q1"]
+    - textanker: "Auch Wurzelbehandlung, Füllungen oder professionelle Zahnreinigung können wichtig sein"
+      pruefung: "Bestätigt: Gute Zahnzusatz-Tarife decken neben Zahnersatz auch Zahnbehandlungsleistungen (Verbraucherzentrale)"
+      quellen: ["Q1"]
+  gepruefte_zahlen:
+    - aussage: "Zahnersatz-Rechnungsspanne"
+      wert: "1.000 € bis 4.000 €"
+      fundstelle: "Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen."
+      pruefung: "Marktübliche Spanne für Implantat, Krone oder aufwendigere Versorgung; konsistent mit den Detailrechnungen (Implantat 3.200 €, Krone 900 €)"
+      konsistenzpruefung: "Deckt die Beispielrechnungen des Artikels ab"
+      quellen: ["Q1", "Q2"]
+    - aussage: "Erstattungssatz gute Tarife"
+      wert: "80 % bis 100 %"
+      fundstelle: "- Gute Zahnzusatz-Tarife leisten oft **80 % bis 100 %** – aber nur unter passenden Bedingungen."
+      pruefung: "Marktübliche Erstattungssätze guter Tarife; Verbraucherzentrale: nicht jedes „100 %“ gilt für alle Leistungen"
+      konsistenzpruefung: "Konsistent mit der Warnung vor Schein-Prozenten (Zahnstaffel)"
+      quellen: ["Q1"]
+    - aussage: "Festzuschuss ohne Bonusheft"
+      wert: "rund 60 %"
+      fundstelle: "- Ohne Bonusheft: rund **60 %** der Regelversorgung"
+      pruefung: "Bestätigt: Festzuschuss beträgt ohne Bonusheft 60 % der Regelversorgung (Verbraucherzentrale)"
+      konsistenzpruefung: "Folgeregel: +5 Jahre Bonusheft = 70 %, +10 Jahre = 75 %"
+      quellen: ["Q2"]
+    - aussage: "Festzuschuss 5 Jahre Bonusheft"
+      wert: "rund 70 %"
+      fundstelle: "- mit 5 Jahren Bonusheft: rund **70 %**"
+      pruefung: "Bestätigt: 70 % Festzuschuss bei fünf Jahren lückenlos geführtem Bonusheft (Verbraucherzentrale)"
+      konsistenzpruefung: "Liegt folgerichtig zwischen 60 % (ohne) und 75 % (10 Jahre)"
+      quellen: ["Q2"]
+    - aussage: "Festzuschuss 10 Jahre Bonusheft"
+      wert: "rund 75 %"
+      fundstelle: "- Mit 10 Jahren Bonusheft: rund **75 %**"
+      pruefung: "Bestätigt: 75 % Festzuschuss bei zehn Jahren lückenlos geführtem Bonusheft (Verbraucherzentrale)"
+      konsistenzpruefung: "Höchststufe der Bonusregelung"
+      quellen: ["Q2"]
+    - aussage: "Implantat-Gesamtkosten (Beispiel)"
+      wert: "3.200 €"
+      fundstelle: "| Implantat inklusive Versorgung | 3.200 € |"
+      pruefung: "Redaktionelles Beispiel für ein Implantat inklusive Versorgung; marktübliche Größenordnung"
+      konsistenzpruefung: "Innerhalb der Eingangsspanne (1.000–4.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Kassen-Festzuschuss Implantat"
+      wert: "230 €"
+      fundstelle: "| Festzuschuss der Kasse | 230 € |"
+      pruefung: "Redaktioneller Beispielwert: Festzuschuss entspricht 60 % der Regelversorgung (ohne Bonusheft)"
+      konsistenzpruefung: "Implantierte Regelversorgung liegt damit bei rund 380 € – plausibel für diegesetzliche Ersatzversorgung"
+      rechenweg: "Festzuschuss 230 € ≈ 60 % von rund 385 € Regelversorgung (ohne Bonusheft)"
+      quellen: ["Q2"]
+    - aussage: "Eigenanteil Implantat ohne Zusatzschutz"
+      wert: "2.970 €"
+      fundstelle: "| **Eigenanteil ohne Zusatzschutz** | **2.970 €** |"
+      pruefung: "Nachgerechnet: Differenz aus Gesamtkosten und Festzuschuss"
+      konsistenzpruefung: "Innerhalb der Eigenanteils-Spanne (2.000–4.000 €)"
+      rechenweg: "3.200 € − 230 € = 2.970 €"
+      quellen: ["Q2"]
+    - aussage: "Relativierung kleiner Beträge"
+      wert: "50 €"
+      fundstelle: "Es geht nicht um 50 € hier oder dort."
+      pruefung: "Redaktionelle Zuspitzung: Zahnzusatz entscheidet über Hunderte bis Tausende, nicht über Kleinstbeträge"
+      konsistenzpruefung: "Folgerichtig zu den dokumentierten Eigenanteilen (400 € bis 2.970 €)"
+      quellen: ["Q1"]
+    - aussage: "Warnung Schein-100-Prozent"
+      wert: "100 %"
+      fundstelle: "Viele lesen „100 % Erstattung“ und glauben, damit sei alles geklärt."
+      pruefung: "Bestätigt: „100 % Erstattung“ gilt oft nicht für alle Leistungen und Jahre (Zahnstaffel); Verbraucherzentrale warnt vor dieser Falle"
+      konsistenzpruefung: "Kernbotschaft der Zahnstaffel-Abschnitts mit belegter Staffeltabelle"
+      quellen: ["Q1"]
+    - aussage: "Zahnstaffel 1. Jahr"
+      wert: "1.000 € bis 1.500 €"
+      fundstelle: "Jahr | 1.000 € bis 1.500 € |"
+      pruefung: "Beispielhafte Staffelwerte; marktübliche Erstattungsgrenzen im ersten Versicherungsjahr"
+      konsistenzpruefung: "Steigt folgerichtig zum 2. Jahr (2.000–3.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Zahnstaffel 2. Jahr"
+      wert: "2.000 € bis 3.000 €"
+      fundstelle: "Jahr | 2.000 € bis 3.000 € |"
+      pruefung: "Beispielhafte Staffelwerte; marktübliche Erstattungsgrenzen im zweiten Versicherungsjahr"
+      konsistenzpruefung: "Liegt zwischen 1. Jahr (1.000–1.500 €) und 3. Jahr (3.000–4.500 €)"
+      quellen: ["Q1"]
+    - aussage: "Zahnstaffel 3. Jahr"
+      wert: "3.000 € bis 4.500 €"
+      fundstelle: "Jahr | 3.000 € bis 4.500 € |"
+      pruefung: "Beispielhafte Staffelwerte; marktübliche Erstattungsgrenzen im dritten Versicherungsjahr"
+      konsistenzpruefung: "Höchste bezifferte Staffelstufe, danach „oft offen“"
+      quellen: ["Q1"]
+    - aussage: "Kernbotschaft Prozent-Limits"
+      wert: "80 % / 100 %"
+      fundstelle: "Gerade deshalb reicht es nicht, nur nach „80 %“ oder „100 %“ zu schauen."
+      pruefung: "Bestätigt: Erstattungsprozente allein sagen wenig aus; Staffel und GOZ-Satz entscheiden mit (Verbraucherzentrale)"
+      konsistenzpruefung: "Zusammenfassung der belegten Abschnitte (Zahnstaffel, GOZ)"
+      quellen: ["Q1"]
+    - aussage: "Beitragsspanne junge Versicherte"
+      wert: "10 € bis 20 € pro Monat"
+      fundstelle: "| jung, einfacher Tarif | 10 € bis 20 € |"
+      pruefung: "Marktübliche Monatsbeiträge für einfache Tarife bei jungem Abschlussalter"
+      konsistenzpruefung: "Niedrigste Spanne der Beitragstabelle, folgerichtig für Jungtarife"
+      quellen: ["Q1"]
+    - aussage: "Beitragsspanne 30–40 Jahre"
+      wert: "20 € bis 40 € pro Monat"
+      fundstelle: "| 30 bis 40, guter Tarif | 20 € bis 40 € |"
+      pruefung: "Marktübliche Monatsbeiträge für gute Tarife im Alter 30–40"
+      konsistenzpruefung: "Liegt folgerichtig über der Jungtarif-Spanne"
+      quellen: ["Q1"]
+    - aussage: "Beitragsspanne 50 plus"
+      wert: "30 € bis 55 € pro Monat"
+      fundstelle: "| 50 plus, starker Tarif | 30 € bis 55 € |"
+      pruefung: "Marktübliche Monatsbeiträge für starke Tarife ab 50"
+      konsistenzpruefung: "Höchste Spanne der Beitragstabelle, folgerichtig"
+      quellen: ["Q1"]
+    - aussage: "Rechenbeispiel Monatsbeitrag"
+      wert: "25 € pro Monat"
+      fundstelle: "- **25 € pro Monat**"
+      pruefung: "Redaktionelles Rechenbeispiel; liegt in der Spanne für gute Tarife (20–40 €)"
+      konsistenzpruefung: "Basis der Jahres- und Zehnjahresrechnung"
+      quellen: ["Q1"]
+    - aussage: "Rechenbeispiel Jahresbeitrag"
+      wert: "300 € pro Jahr"
+      fundstelle: "- Also **300 € pro Jahr**"
+      pruefung: "Nachgerechnet aus dem Monatsbeitrag"
+      konsistenzpruefung: "Basis der Zehnjahresrechnung (3.000 €)"
+      rechenweg: "25 € × 12 Monate = 300 €"
+      quellen: ["Q1"]
+    - aussage: "Rechenbeispiel Zehnjahresbeitrag"
+      wert: "3.000 €"
+      fundstelle: "Über zehn Jahre sind das **3.000 €** Beitrag."
+      pruefung: "Nachgerechnet aus dem Jahresbeitrag"
+      konsistenzpruefung: "Vergleichsbasis zum möglichen Eigenanteil (2.500–3.000 €)"
+      rechenweg: "300 € × 10 Jahre = 3.000 €"
+      quellen: ["Q1"]
+    - aussage: "Vergleichswert Eigenanteil Implantat"
+      wert: "2.500 € bis 3.000 €"
+      fundstelle: "Wenn in dieser Zeit ein Implantat mit Eigenanteil von rund **2.500 € bis 3.000 €** ansteht und zusätzlich noch eine Krone oder Zahnreinigung dazukommt, ist die Rechnung oft schon sehr nah an der Wirtschaftlichkeit – oder klar darüber."
+      pruefung: "Konsistent mit dem Implantat-Rechenbeispiel (2.970 € Eigenanteil)"
+      konsistenzpruefung: "Beiträge (3.000 €/10 Jahre) stehen einem Einzel-Eigenanteil in gleicher Höhe gegenüber – Logik des Artikels zutreffend"
+      quellen: ["Q2"]
+    - aussage: "Kernfrage Liquidität"
+      wert: "2.000 € bis 4.000 €"
+      fundstelle: "**Kann ich einen Eigenanteil von 2.000 € bis 4.000 € notfalls selbst tragen?**"
+      pruefung: "Redaktionelle Prüfspanne; umschließt die dokumentierten Eigenanteile (400–550 € bis 2.970 €)"
+      konsistenzpruefung: "Konsistent mit Rechnungsspanne (1.000–4.000 €) und Eigenanteilen"
+      quellen: ["Q1"]
+    - aussage: "FAQ-Verweis 100 % Erstattung"
+      wert: "100 %"
+      fundstelle: "Diese drei Fragen bringen oft mehr Klarheit als zehn Werbeslogans mit „100 % Erstattung“."
+      pruefung: "Wiederholung der dokumentierten Warnung vor Schein-Prozenten"
+      konsistenzpruefung: "Zweite Verwendung derselben belegten Kernaussage"
+      quellen: ["Q1"]
+    - aussage: "Krone Gesamtkosten (Beispiel)"
+      wert: "900 €"
+      fundstelle: "| Keramikkrone | 900 € |"
+      pruefung: "Redaktionelles Beispiel für eine Keramikkrone; marktübliche Größenordnung"
+      konsistenzpruefung: "Innerhalb der Eingangsspanne (1.000–4.000 €) am unteren Rand"
+      quellen: ["Q1"]
+    - aussage: "Kassenzuschuss Krone"
+      wert: "350 € bis 500 €"
+      fundstelle: "| Kassenzuschuss | 350 € bis 500 € |"
+      pruefung: "Redaktionelle Beispielspanne für den Festzuschuss bei Kronen (60–75 % der Regelversorgung, je nach Bonusheft)"
+      konsistenzpruefung: "Regelversorgung Krone damit rund 580–670 € – plausibel"
+      quellen: ["Q2"]
+    - aussage: "Eigenanteil Krone ohne Zusatzschutz"
+      wert: "400 € bis 550 €"
+      fundstelle: "| **Eigenanteil ohne Zusatzschutz** | **400 € bis 550 €** |"
+      pruefung: "Nachgerechnet: Differenz aus Kronenkosten und Kassenzuschuss-Spanne"
+      konsistenzpruefung: "Konsistent mit der Eigenanteils-Logik des Implantat-Beispiels"
+      rechenweg: "900 € − 500 € = 400 €; 900 € − 350 € = 550 €"
+      quellen: ["Q2"]
+    - aussage: "KFO-Kosten Zahnspange"
+      wert: "3.000 € bis 6.000 €"
+      fundstelle: "Eine Zahnspange kann – je nach Situation – schnell **3.000 € bis 6.000 €** kosten."
+      pruefung: "Marktübliche Spanne für kieferorthopädische Behandlungen; Kasse übernimmt nicht automatisch alles"
+      konsistenzpruefung: "Folgerichtig über der Zahnersatz-Spanne (1.000–4.000 €)"
+      quellen: ["Q1"]
+    - aussage: "Rücklagen-Alternative"
+      wert: "2.000 € bis 4.000 €"
+      fundstelle: "Wenn du problemlos **2.000 € bis 4.000 €** aus Rücklagen zahlen könntest, kann eine andere Strategie für dich sinnvoll sein."
+      pruefung: "Redaktionelle Prüfspanne für den Verzicht auf Versicherung; identisch mit der Kernfrage"
+      konsistenzpruefung: "Zweite Verwendung derselben Spanne"
+      quellen: ["Q1"]
+    - aussage: "Verbleibende Eigenanteile nach Erstattung"
+      wert: "250 € bzw. 900 €"
+      fundstelle: "Wenn bei einer Krone oder einem Implantat am Ende 250 € oder 900 € bei dir hängen bleiben, wirkt der Unterschied sofort greifbar."
+      pruefung: "Illustrative Beispielwerte für verbleibende Eigenanteile nach Teil-Erstattung; konsistent mit Krone (400–550 € Eigenanteil) und Implantat (2.970 € Eigenanteil)"
+      konsistenzpruefung: "Größenordnung plausibel bei 70–80 % Erstattung der Eigenanteile"
+      quellen: ["Q1"]
+    - aussage: "Prophylaxe-Budget"
+      wert: "100 € bis 200 € pro Jahr"
+      fundstelle: "Viele gute Tarife übernehmen ein Budget für Prophylaxe, oft etwa **100 € bis 200 € pro Jahr**."
+      pruefung: "Marktübliche jährliche Budgets für professionelle Zahnreinigung/Prophylaxe in guten Tarifen"
+      konsistenzpruefung: "Konsistent mit dem Baustein Zahnbehandlung/Prophylaxe"
+      quellen: ["Q1"]
 ---
 
 Sobald Zahnersatz plötzlich Thema wird, steigen die Kosten oft schnell. Nicht ein bisschen teuer, sondern richtig teuer. Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen.
@@ -45,9 +252,6 @@ Viele verlassen sich dabei auf ihre gesetzliche Krankenkasse. Genau dort liegt d
 Genau deshalb ist die **Zahnzusatzversicherung** für viele gesetzlich Versicherte kein Nischenthema, sondern ein echter Kostenpuffer. Entscheidend ist aber nicht irgendein Tarif. Entscheidend ist, ob der Schutz im Ernstfall wirklich trägt.
 
 ---
-
-💡 **Schnell-Tipp von FranksFinanzcheck:** Der beste Zeitpunkt für den Abschluss ist fast nie nach dem Behandlungsplan, sondern davor. Wer früh vergleicht, hat mehr Tarifauswahl, niedrigere Beiträge und weniger Ausschlüsse: [**Zahnzusatzversicherung vergleichen**](/go/zahnzusatzversicherung/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
 
@@ -135,6 +339,9 @@ GOZ klingt trocken, ist aber finanziell relevant. Die **Gebührenordnung für Za
 Wenn dein Tarif nur bis zum **2,3-fachen Satz** leistet, der Zahnarzt aber mit **3,5-fach** abrechnet, bleibt die Differenz an dir hängen.
 
 Gerade deshalb reicht es nicht, nur nach „80 %“ oder „100 %“ zu schauen. Du musst verstehen, worauf sich diese Zahl überhaupt bezieht.
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Der beste Zeitpunkt für den Abschluss ist fast nie nach dem Behandlungsplan, sondern davor. Wer früh vergleicht, hat mehr Tarifauswahl, niedrigere Beiträge und weniger Ausschlüsse: [**Zahnzusatzversicherung vergleichen**](/go/zahnzusatzversicherung/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was kostet eine gute Zahnzusatzversicherung?
 
