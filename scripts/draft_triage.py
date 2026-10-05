@@ -101,7 +101,20 @@ def fm_and_body(text: str) -> tuple[dict, str, list, list]:
         return {}, text, ["fm-anfang: Datei beginnt nicht mit einer Frontmatter-Zeile"], notiz
     lines = text.split("\n")
     ende = None
-    for i in range(1, min(len(lines), 120)):
+    # REPARATUR 05.10.2026 (WF-B594, #594): Hier stand ein Fenster von 120
+    # Zeilen. Seit der YMYL-Freigabe (#586/#591) trägt ein geprüfter Artikel
+    # sein komplettes Prüfprotokoll im Frontmatter – `redaktionelle_pruefung.
+    # gepruefte_aussagen` allein ist über 200 Zeilen lang. Die Triage fand die
+    # schließende `---`-Zeile deshalb nicht mehr und meldete für ACHT
+    # fachlich freigegebene Entwürfe „keine schließende ---Zeile", „titel:
+    # leer", „beschreibung: leer" -> Zustand BLOCKIERT. Harmlos sah das nur
+    # aus, solange die Artikel keinen Maschinen-Marker trugen: Der
+    # Reserve-Janitor löscht BLOCKIERTE, maschinenverwaltete Entwürfe – und
+    # `cadence_wait: true` (Re-Queue) genügt als Marker. Ein Fenster, das den
+    # Bestand nach Dateilänge beurteilt, ist deshalb kein Schutz, sondern ein
+    # Zeitzünder. Gesucht wird jetzt die echte Grenze; Hugo kennt auch keine
+    # Obergrenze.
+    for i in range(1, len(lines)):
         if lines[i].startswith("---"):
             ende = i
             if lines[i].strip() != "---":

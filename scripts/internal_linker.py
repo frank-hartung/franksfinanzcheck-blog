@@ -16,8 +16,24 @@ Nutzung:
     python3 scripts/internal_linker.py --dry-run      # Vorschläge anzeigen
     python3 scripts/internal_linker.py --apply        # Links einfügen
     python3 scripts/internal_linker.py --apply --max 3
+    python3 scripts/internal_linker.py --apply --file content/posts/<slug>/index.md
 
 Workflow: seo-weekly.yml ruft es mit --apply auf (nach Keyword-Optimierung).
+
+ERWEITERUNG 05.10.2026 (Vorgang WF-B594, Issue #594) – `--file`:
+    Die Reserve-Heiler-Kette (reserve_finisher.HEALER_CHAIN) braucht genau
+    EINEN Entwurf, nicht den Korpus. Ohne diesen Schalter war „interne
+    links: < 2" der einzige Triage-Blocker, den KEIN Werkzeug der Kette
+    auflösen konnte – und weil der Janitor blockierte Entwürfe löschte,
+    verlor die Reserve genau daran acht fertige Artikel (Commit c56382b).
+
+    `--file` dreht Quelle und Ziel sauber auseinander:
+      * QUELLE  = allein die genannte Datei, auch wenn sie `draft: true`
+                  ist (nur so bekommt ein Reserve-Entwurf je Links),
+      * ZIELE   = weiterhin ausschließlich LIVE-Artikel aus load_pages()
+                  (die Draft-Isolation von 26.08. bleibt unangetastet),
+      * SCHREIBT nur in diese eine Datei – kein Nebeneffekt auf den
+                  Live-Korpus, was die Reserve-Kette zwingend braucht.
 """
 import os
 import re
@@ -158,6 +174,31 @@ def html_tag_ranges(body):
             for m in re.finditer(r"</?[A-Za-z][^>\n]*>", body)]
 
 
+# Kanonische Werbe-/Hinweisblöcke: CTA-Zeilen, Spar-Tipp-Zitate und die
+# Offenlegung. Sie werden deterministisch erzeugt (fix_cta_hygiene,
+# affiliate_profi_check, affiliate_integrity_gate) und bytegenau geprüft.
+RE_CTA_ZEILEN = re.compile(
+    r"(?m)^(?:>\s*)?(?:💡|💶|👉|🔎|⚠️)?\s*(?:\*{1,2})?(?:Schnell-Tipp|Spar-Tipp|"
+    r"Jetzt\b|Dieser Artikel enthält|_\(Dieser Artikel enthält).*$")
+RE_GO_ZEILEN = re.compile(r"(?m)^.*\]\(/go/[^)]*\).*$")
+
+
+def cta_ranges(body):
+    """CTA- und Offenlegungszeilen sind Werbekennzeichnung, kein Fließtext.
+
+    REPARATUR 05.10.2026 (WF-B594): Mit `--file` läuft der Linker erstmals
+    über Reserve-ENTWÜRFE – und die tragen den kanonischen CTA-Block. Beim
+    ersten Lauf setzte er prompt zwei interne Links mitten in die
+    Schnell-Tipp-Zeile („kostenloses [Tagesgeldkonto](…) gibt es bei der
+    [C24 Bank](…)"). Das ist doppelt schädlich: Die Zeile wird zur
+    Link-Suppe, und `affiliate_integrity_gate` prüft diesen Block
+    bytegenau. Werbe- und Hinweisblöcke sind deshalb Sperrzone – wie
+    Shortcodes, Code und Überschriften.
+    """
+    return ([(m.start(), m.end()) for m in RE_CTA_ZEILEN.finditer(body)]
+            + [(m.start(), m.end()) for m in RE_GO_ZEILEN.finditer(body)])
+
+
 def find_anchor(body, phrase):
     """Findet das erste Vorkommen einer Phrase im Body, außerhalb von
     Überschriften, Links, Code, Shortcodes, HTML-Tags und Frontmatter."""
@@ -174,7 +215,8 @@ def find_anchor(body, phrase):
         head_ranges.append((m.start(), m.end()))
 
     blocked = (code_ranges + link_ranges + head_ranges
-               + shortcode_ranges(body) + html_tag_ranges(body))
+               + shortcode_ranges(body) + html_tag_ranges(body)
+               + cta_ranges(body))
 
     def is_blocked(pos):
         return any(s <= pos < e for s, e in blocked)
@@ -304,6 +346,19 @@ def selftest():
     nur_shortcode = '{{< rechner typ="notgroschen" >}}\n'
     if find_anchor(nur_shortcode, "notgroschen") is not None:
         fails.append("Shortcode-Parameter wurde als Anker angeboten")
+    cta = ('💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein '
+           'kostenloses Tagesgeldkonto gibt es bei der C24 Bank: '
+           '[**Jetzt ansehen**](/go/tagesgeld/)\n'
+           '_(Dieser Artikel enthält Affiliate-Links (Werbung).)_\n\n'
+           'Erst hier im Fließtext darf ein Tagesgeldkonto verlinkt werden.\n')
+    treffer = find_anchor(cta, "Tagesgeldkonto")
+    if treffer is None:
+        fails.append("CTA-Sperrzone hat den Fließtext mitgesperrt")
+    elif treffer[0] < cta.index("Erst hier im Fließtext"):
+        fails.append("Anker landete im kanonischen CTA-Block (WF-B594)")
+    if find_anchor('> 💶 **Spar-Tipp:** Dein Tagesgeld bei der C24 Bank.\n',
+                   "Tagesgeld") is not None:
+        fails.append("Spar-Tipp-Zitat wurde als Anker angeboten")
     nur_html = '<img alt="notgroschen">\n'
     if find_anchor(nur_html, "notgroschen") is not None:
         fails.append("HTML-Attribut wurde als Anker angeboten")
@@ -312,8 +367,36 @@ def selftest():
             print(f"❌ Linker-Selbsttest: {f}")
         return 2
     print("✅ Linker-Selbsttest: Shortcodes/HTML/Code/Links/Überschriften "
-          "sind Sperrzonen – nur Fließtext wird verlinkt.")
+          "und kanonische CTA-/Offenlegungsblöcke sind Sperrzonen – nur "
+          "Fließtext wird verlinkt.")
     return 0
+
+
+def load_single_source(arg):
+    """Lädt EINE Datei als Verlink-Quelle – auch einen Entwurf (WF-B594).
+
+    Akzeptiert den Pfad zur index.md, den Ordnerpfad oder den nackten Slug.
+    Gibt {} zurück, wenn nichts Lesbares dahintersteht; der Aufrufer
+    (Heiler-Kette) darf daran nicht scheitern.
+    """
+    kandidaten = [arg,
+                  os.path.join(arg, "index.md"),
+                  os.path.join(POSTS_DIR, arg, "index.md"),
+                  os.path.join(POSTS_DIR, arg)]
+    pfad = next((k for k in kandidaten
+                 if k and os.path.isfile(k)), None)
+    if not pfad:
+        print(f"⚠ Linker: Quelldatei nicht gefunden: {arg}")
+        return {}
+    pfad = os.path.abspath(pfad)
+    slug = slug_of(pfad)
+    content = open(pfad, encoding="utf-8").read()
+    fm, body = parse_frontmatter(content)
+    keywords = [k.strip().lower() for k in (fm.get("keywords") or [])]
+    tags = [t.strip().lower() for t in (fm.get("tags") or [])]
+    return {slug: {"title": fm.get("title", slug), "keywords": keywords,
+                   "tags": tags, "body": body,
+                   "score": 50 + 10 * min(len(keywords), 3), "path": pfad}}
 
 
 def main():
@@ -327,14 +410,31 @@ def main():
             max_links = int(sys.argv[sys.argv.index("--max") + 1])
         except (ValueError, IndexError):
             pass
+    datei = None
+    if "--file" in sys.argv:
+        try:
+            datei = sys.argv[sys.argv.index("--file") + 1]
+        except IndexError:
+            print("❌ --file ohne Pfad")
+            raise SystemExit(2)
 
+    # ZIELE bleiben immer der LIVE-Korpus (Draft-Isolation seit 26.08.).
     pages = load_pages()
     candidates = build_anchor_candidates(pages)
-    print(f"Artikel: {len(pages)} | Kandidaten-Phrasen: {len(candidates)}\n")
+    # QUELLEN sind normalerweise dieselben Artikel – mit --file genau einer,
+    # auch wenn er noch ein Entwurf ist (Reserve-Heilung, WF-B594).
+    sources = pages
+    if datei:
+        sources = load_single_source(datei)
+        if not sources:
+            raise SystemExit(2)
+        print(f"Linker-Modus: eine Quelle ({next(iter(sources))}), "
+              f"{len(pages)} LIVE-Ziele")
+    print(f"Artikel: {len(sources)} | Kandidaten-Phrasen: {len(candidates)}\n")
 
     total_added = 0
     lnkrx = re.compile(r"\]\(\.\./\.\./posts/")
-    for src_fn, src in sorted(pages.items()):
+    for src_fn, src in sorted(sources.items()):
         added = 0
         existing = len(lnkrx.findall(src["body"]))
         if existing >= MAX_TOTAL_PER_ARTICLE:
@@ -414,7 +514,7 @@ def main():
         if added:
             print(f"  → {src_fn}: {added} Link(s) {'eingefügt' if apply else 'vorgeschlagen'}")
     print(f"\nFertig: {total_added} Links {'eingefügt' if apply else 'vorgeschlagen'} "
-          f"({len(pages)} Artikel).")
+          f"({len(sources)} Artikel).")
 
 
 if __name__ == "__main__":

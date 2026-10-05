@@ -235,3 +235,7 @@
 {"date": "2026-10-02", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-03", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/header.html"]}
 {"date": "2026-10-04", "kritisch": 0, "fest": 3, "modus": "set-current", "geaendert": ["scripts/affiliate_integrity_gate.py", "scripts/affiliate_marketer.py", "scripts/brand_guard.py"]}
+{"date": "2026-10-05", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/internal_linker.py"]}
+{"date": "2026-10-05", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-10-05", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/internal_linker.py"]}
+{"date": "2026-10-05", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}

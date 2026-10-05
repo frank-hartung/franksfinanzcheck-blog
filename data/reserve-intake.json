@@ -1,0 +1,24 @@
+{
+  "uebernahmen": [
+    {
+      "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
+      "datum": "2026-10-05",
+      "grund": "WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
+    },
+    {
+      "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "datum": "2026-10-05",
+      "grund": "WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
+    },
+    {
+      "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+      "datum": "2026-10-05",
+      "grund": "WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
+    },
+    {
+      "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+      "datum": "2026-10-05",
+      "grund": "WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
+    }
+  ]
+}
