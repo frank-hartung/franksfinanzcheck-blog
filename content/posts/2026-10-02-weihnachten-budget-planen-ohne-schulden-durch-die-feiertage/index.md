@@ -56,7 +56,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 Genau das ist der Hebel: Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 
-Darum geht es hier konkret: Weihnachten Budget planen.
+Darum geht es hier konkret: Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 
 Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer Monat. Und die Kosten kommen alle auf einmal.

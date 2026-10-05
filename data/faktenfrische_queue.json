@@ -1,39 +1,20 @@
 {
-  "erzeugt": "2026-10-05 21:55 UTC",
+  "erzeugt": "2026-10-05 22:18 UTC",
   "uebersicht": {
     "gesamt": 61,
     "ratgeber": 6,
-    "faellig": 1,
-    "bearbeitet": 1,
-    "geo_schnitt": 95,
+    "faellig": 0,
+    "bearbeitet": 0,
+    "geo_schnitt": 96,
     "befunde": 0,
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 2,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 1,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 4,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 7,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 6,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     }
   },
   "offen": [],
-  "laeufe": [
-    {
-      "slug": "2026-10-05-die-50-30-20-regel-einfach-erklaert",
-      "titel": "Die 50-30-20-Regel einfach erklärt",
-      "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [],
-      "geo": 50,
-      "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar"
-      ],
-      "aenderungen": [
-        "quellen: 1 Belege",
-        "faktencheck: 2026-10-05"
-      ]
-    }
-  ]
+  "laeufe": []
 }
