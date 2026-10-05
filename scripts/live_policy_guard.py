@@ -24,6 +24,12 @@ Deshalb prüft diese Wache die SCHNITTSTELLE, nicht nur den Quelltext:
                         /manifest.json ist erreichbar und hat JSON-MIME
                         (application/json reicht, application/manifest+json nicht zwingend)
 
+Deploy-Fenster (#585): Zwischen `git push` und ausgelieferter Seite liegen Build,
+Pages-Deploy und CDN. Ein Artikel, dessen Veröffentlichung weniger als
+LIVE_POLICY_GRACE_MIN (Vorgabe 90) Minuten her ist, fehlt live erlaubt – das ist
+Hysterese (Hinweis `deploy_hysterese`, nie ein Issue), kein Drift. Nach Ablauf des
+Fensters ist derselbe Befund ROT.
+
 Netzwerk ist nie eine Ausrede: ohne Erreichbarkeit endet der Lauf mit Hinweis und
 Exit 0, außer --require-live setzt den Fall auf Exit 1 (CI-Nacht: wer nicht kann,
 soll rot werden, damit die Frage nicht offen bleibt).
@@ -32,7 +38,8 @@ Nutzung:
     python3 scripts/live_policy_guard.py                    # live gegen public/
     python3 scripts/live_policy_guard.py --require-live      # CI-Modus
     python3 scripts/live_policy_guard.py --json
-    python3 scripts/live_policy_guard.py --selftest         # 5 Fälle, ohne Netz
+    python3 scripts/live_policy_guard.py --selftest         # 9 Fälle, ohne Netz
+    LIVE_POLICY_GRACE_MIN=30 python3 scripts/live_policy_guard.py   # engeres Deploy-Fenster
     SCHEMA_LIVE_BASE=https://beispiel.de python3 scripts/live_policy_guard.py
 
 Exit: 0 = konsistent (oder nicht erreichbar ohne --require-live) · 1 = Drift · 2 = Fehler
@@ -52,8 +59,24 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC = os.path.join(BLOG_DIR, "public")
+POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 BASE = os.environ.get("SCHEMA_LIVE_BASE", "https://franksfinanzcheck.de").rstrip("/")
 TIMEOUT = float(os.environ.get("LIVE_POLICY_TIMEOUT", "25"))
+# ------------------------------------------------------------------ Deploy-Fenster
+# WARUM (Governance-Report #585, 05.10.2026):
+# Die Wache lief im selben Lauf, in dem die Content-Engine veröffentlicht hatte.
+# Zwischen `git push` und der ausgelieferten Seite liegen aber zwangsläufig
+# Build, Pages-Deploy und CDN-Invalidierung. Die beiden Befunde („2 Money-URLs
+# fehlen live", „/posts/…/ liefert live HTTP 404") beschrieben deshalb KEINEN
+# Fehler, sondern die Physik der Auslieferung – und erzeugten trotzdem ROT.
+# Genau diese Sorte Dauer-Rot macht eine Wache wertlos (Alarm-Müdigkeit).
+#
+# Die ehrliche Trennung: Ein Artikel kann erst live sein, wenn sein
+# Veröffentlichungszeitpunkt lange genug her ist. Innerhalb dieses Fensters ist
+# ein Fehlen Hysterese (Info, self-healing, wird NICHT verschwiegen). Danach ist
+# dasselbe Fehlen echte Drift und bleibt ROT. Das Fenster ist knapp bemessen:
+# Build + Deploy + Cache liegen bei dieser Site deutlich unter 90 Minuten.
+GRACE_MIN = float(os.environ.get("LIVE_POLICY_GRACE_MIN", "90"))
 UA = "Mozilla/5.0 (compatible; FranksFinanzcheckLiveGuard/1.0; +https://franksfinanzcheck.de)"
 ANSWER_BOTS = ("OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Perplexity-User",
                "DuckAssistBot", "Claude-User", "meta-externalfetcher")
@@ -76,6 +99,70 @@ def fetch(url: str) -> tuple[int, str, str]:
         return exc.code, body, exc.headers.get("Content-Type", "") if exc.headers else ""
     except Exception:  # noqa: BLE001  (DNS, TLS, Timeout, Sandbox ohne Egress)
         return 0, "", ""
+
+
+# --------------------------------------------------------- Deploy-Hysterese (testbar)
+_FM_DATE_RE = re.compile(r"(?m)^(?:date|reserve_published|lastmod):\s*\"?([0-9][0-9T:+\-\.Z]*)")
+
+
+def slug_of(url_or_path: str) -> str:
+    """Letztes Pfadsegment einer Artikel-URL/eines Artikelpfads („…/posts/x/" -> „x")."""
+    path = urllib.parse.urlsplit(url_or_path).path or url_or_path
+    parts = [p for p in path.split("/") if p]
+    return parts[-1] if parts else ""
+
+
+def _parse_iso(value: str) -> datetime.datetime | None:
+    raw = value.strip().rstrip("Z")
+    for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M", "%Y-%m-%d"):
+        try:
+            return datetime.datetime.strptime(raw[:len(fmt) + 2].strip(), fmt).replace(
+                tzinfo=datetime.timezone.utc)
+        except ValueError:
+            continue
+    try:  # +02:00-Offsets u. Ä.
+        return datetime.datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def published_at(slug: str, posts_dir: str = POSTS_DIR) -> datetime.datetime | None:
+    """Jüngster Zeitstempel aus dem Frontmatter (date/reserve_published/lastmod).
+
+    Der späteste dieser Werte ist der Moment, ab dem die Seite überhaupt
+    ausgeliefert werden KANN. Fehlt die Datei (Taxonomie, Pillar, Startseite),
+    gibt es kein Fenster – dann gilt die Seite als alt und damit als hart.
+    """
+    path = os.path.join(posts_dir, slug, "index.md")
+    if not os.path.exists(path):
+        path = os.path.join(posts_dir, slug + ".md")
+        if not os.path.exists(path):
+            return None
+    try:
+        head = open(path, encoding="utf-8").read().split("---", 2)[1]
+    except (OSError, IndexError):
+        return None
+    stamps = [s for s in (_parse_iso(m) for m in _FM_DATE_RE.findall(head)) if s]
+    return max(stamps) if stamps else None
+
+
+def make_fresh_check(posts_dir: str = POSTS_DIR, grace_min: float = GRACE_MIN,
+                     now: datetime.datetime | None = None):
+    """Liefert fresh(url) -> (bool, Minuten|None): liegt die URL im Deploy-Fenster?"""
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+
+    def fresh(url: str):
+        stamp = published_at(slug_of(url), posts_dir)
+        if stamp is None:
+            return False, None
+        age = (now - stamp).total_seconds() / 60.0
+        return age < grace_min, age
+
+    return fresh
+
+
+def _never_fresh(_url: str):
+    return False, None
 
 
 def read_local(rel: str, public: str = PUBLIC) -> str:
@@ -132,7 +219,7 @@ def check_robots(live: str, local: str, F: list, soft: list) -> None:
                         "verbietet Suchmaschinen den Bezug, nicht nur das Training"))
 
 
-def check_sitemap(live: str, local: str, F: list, soft: list) -> None:
+def check_sitemap(live: str, local: str, F: list, soft: list, fresh=_never_fresh) -> None:
     if not live:
         F.append(("L2", "sitemap.xml ist live nicht abrufbar"))
         return
@@ -149,17 +236,34 @@ def check_sitemap(live: str, local: str, F: list, soft: list) -> None:
         money = {u for u in local_urls if re.search(r"/(posts|pillar)/[^/]+/$", u)
                  or u.rstrip("/") == BASE}
         fehlt = sorted(money - live_urls)
-        if fehlt:
-            F.append(("L2", f"{len(fehlt)} Money-URL(s) fehlen live in der Sitemap, "
-                            f"z. B. {fehlt[0]} – Deploy/Cache-Hysterese"))
+        # Deploy-Hysterese (#585): frisch veröffentlichte URLs KÖNNEN live noch
+        # nicht da sein. Sie werden benannt, aber als Info – alles Ältere ist Drift.
+        jung = [u for u in fehlt if fresh(u)[0]]
+        alt = [u for u in fehlt if u not in jung]
+        if alt:
+            F.append(("L2", f"{len(alt)} Money-URL(s) fehlen live in der Sitemap, "
+                            f"z. B. {alt[0]} – echte Drift (Deploy-Fenster "
+                            f"{GRACE_MIN:.0f} min überschritten)"))
+        if jung:
+            soft.append(("L2", f"{len(jung)} frisch veröffentlichte Money-URL(s) noch "
+                               f"nicht live, z. B. {jung[0]} – innerhalb des "
+                               f"Deploy-Fensters ({GRACE_MIN:.0f} min), heilt von allein"))
     else:
         soft.append(("L2", "kein public/-Build gefunden – Vergleich Repo↔live "
                            "übersprungen (nur Live-Selbstprüfung gelaufen)"))
 
 
-def check_page(live_html: str, local_html: str, url: str, F: list, soft: list) -> None:
+def check_page(live_html: str, local_html: str, url: str, F: list, soft: list,
+               fresh=_never_fresh) -> None:
     if not live_html:
-        F.append(("L3", f"{url} ist live nicht abrufbar"))
+        # Deploy-Hysterese (#585): dieselbe Trennung wie in der Sitemap-Prüfung.
+        jung, age = fresh(url)
+        if jung:
+            soft.append(("L3", f"{url} ist live noch nicht abrufbar – erst vor "
+                               f"{age:.0f} min veröffentlicht (Deploy-Fenster "
+                               f"{GRACE_MIN:.0f} min), heilt von allein"))
+        else:
+            F.append(("L3", f"{url} ist live nicht abrufbar"))
         return
     def grab(text: str, pattern: str) -> str:
         m = re.search(pattern, text, re.I | re.S)
@@ -214,6 +318,12 @@ def check_http(F: list, soft: list) -> None:
 CODES = {"L1": "robots_drift", "L2": "sitemap_drift", "L3": "page_drift",
          "L4": "http_hygiene", "Netz": "site_unreachable"}
 SOFT_CODES = {"Netz": "unreachable"}
+# #585: Hinweise aus dem Deploy-Fenster tragen einen EIGENEN Code. Sonst liefen
+# sie unter `sitemap_drift`/`page_drift` – also unter dem Namen genau des
+# Fehlers, den sie gerade ausschließen. `deploy_hysterese` steht in
+# governance_gate.INFO_AMBER: sichtbar im Report, nie ein Issue. Die Eskalation
+# übernimmt das Fenster selbst – nach GRACE_MIN wird derselbe Fund ROT.
+HYSTERESE_CODE = "deploy_hysterese"
 
 
 def write_report(path: str, hard: list, soft: list, live: bool) -> None:
@@ -237,7 +347,8 @@ def write_report(path: str, hard: list, soft: list, live: bool) -> None:
     for reg, msg in hard:
         zeilen.append(f"| RED | {CODES.get(reg, 'fund')} | {reg}: {msg} |")
     for reg, msg in soft:
-        code = SOFT_CODES.get(reg, CODES.get(reg, "hinweis"))
+        code = (HYSTERESE_CODE if "Deploy-Fenster" in msg
+                else SOFT_CODES.get(reg, CODES.get(reg, "hinweis")))
         zeilen.append(f"| AMBER | {code} | {reg}: {msg} |")
     if not hard and not soft:
         zeilen.append("_Keine Abweichung zwischen Build und Live-Auslieferung._")
@@ -251,9 +362,10 @@ def write_report(path: str, hard: list, soft: list, live: bool) -> None:
         fh.write("\n".join(zeilen))
 
 
-def run(require_live: bool, public: str = PUBLIC) -> tuple[list, list, bool]:
+def run(require_live: bool, public: str = PUBLIC, fresh=None) -> tuple[list, list, bool]:
     hard: list = []
     soft: list = []
+    fresh = fresh or make_fresh_check()
     code, robots_live, _ = fetch(f"{BASE}/robots.txt")
     if code == 0:
         msg = "keine Verbindung zur Site (DNS/TLS/Zeitlimit)"
@@ -261,23 +373,37 @@ def run(require_live: bool, public: str = PUBLIC) -> tuple[list, list, bool]:
         return hard, soft, False
     check_robots(robots_live, read_local("robots.txt", public), hard, soft)
     _, sitemap_live, _ = fetch(f"{BASE}/sitemap.xml")
-    check_sitemap(sitemap_live, read_local("sitemap.xml", public), hard, soft)
-    # Probe Seiten: Startseite + der neueste Artikel aus dem Build (oder live-Erstling)
+    check_sitemap(sitemap_live, read_local("sitemap.xml", public), hard, soft, fresh)
+    # Probe Seiten: Startseite + ein Artikel aus dem Build.
+    # #585: NICHT blind der neueste – der ist im Zweifel genau der, der gerade
+    # erst deployt wird. Geprüft wird der jüngste Artikel, der das Deploy-Fenster
+    # bereits verlassen hat; nur wenn es keinen solchen gibt, der neueste (dann
+    # greift die Hysterese in check_page/unten und stuft den Befund weich ein).
     probes = ["/"]
     arts = sorted(glob.glob(os.path.join(public, "posts", "*", "index.html")))
-    if arts:
-        probes.append("/posts/" + os.path.basename(os.path.dirname(arts[-1])) + "/")
-    else:
+    cands = ["/posts/" + os.path.basename(os.path.dirname(a)) + "/" for a in arts]
+    if not cands:
         m = re.search(r"<loc>\s*(https?://[^<]*/posts/[^<]+)/\s*</loc>", sitemap_live)
         if m:
-            probes.append(m.group(1)[len(BASE):] + "/")
+            cands = [m.group(1)[len(BASE):] + "/"]
+    reif = [u for u in cands if not fresh(u)[0]]
+    if reif:
+        probes.append(reif[-1])
+    elif cands:
+        probes.append(cands[-1])
     for p in probes:
         c, live_html, _ = fetch(BASE + p)
         if c != 200:
-            hard.append(("L3", f"{p} liefert live HTTP {c}"))
+            jung, age = fresh(p)
+            if jung:
+                soft.append(("L3", f"{p} liefert live HTTP {c} – erst vor {age:.0f} min "
+                                   f"veröffentlicht (Deploy-Fenster {GRACE_MIN:.0f} min), "
+                                   "heilt von allein"))
+            else:
+                hard.append(("L3", f"{p} liefert live HTTP {c}"))
             continue
         check_page(live_html, read_local(p.strip("/") + "/index.html" if p != "/"
-                                         else "index.html", public), p, hard, soft)
+                                         else "index.html", public), p, hard, soft, fresh)
     check_http(hard, soft)
     return hard, soft, True
 
@@ -295,6 +421,10 @@ def _selftest() -> int:
              f'<url><loc>{BASE}/pillar/strom-sparen/</loc></url></urlset>')
     SM_BAD = (f'<urlset><url><loc>{BASE}/tags/x/</loc></url>'
               f'<url><loc>{BASE}/page/2/</loc></url></urlset>')
+    # Repo-Stand mit einem Artikel mehr, als live ausgeliefert ist (frisch deployt).
+    SM_LOCAL = (f'<urlset><url><loc>{BASE}/posts/a/</loc></url>'
+                f'<url><loc>{BASE}/posts/b/</loc></url>'
+                f'<url><loc>{BASE}/pillar/strom-sparen/</loc></url></urlset>')
     PAGE_OK = (f'<html><head><link rel="canonical" href="{BASE}/posts/a/">'
                f'<meta property="og:image" content="{BASE}/c.jpg">'
                '<script type="application/ld+json">'
@@ -319,6 +449,13 @@ def _selftest() -> int:
     keep = fetch
     import tempfile
     tmp = tempfile.mkdtemp(prefix="live-policy-selftest-")
+    tmp2 = tempfile.mkdtemp(prefix="live-policy-selftest-deploy-")
+    tmp3 = tempfile.mkdtemp(prefix="live-policy-selftest-solo-")
+    tmp4 = tempfile.mkdtemp(prefix="live-policy-selftest-content-")
+
+    def fresh_b(url: str):
+        return (True, 7.0) if slug_of(url) == "b" else (False, None)
+
     os.makedirs(os.path.join(tmp, "posts", "a"), exist_ok=True)
     open(os.path.join(tmp, "index.html"), "w").write(PAGE_OK)
     open(os.path.join(tmp, "posts", "a", "index.html"), "w").write(PAGE_OK)
@@ -383,24 +520,92 @@ def _selftest() -> int:
         hard, _, _ = _run_for_test(True, pub)
         if not any(r == "Netz" for r, _ in hard):
             errs.append("--require-live meldet Netz-Ausfall nicht hart")
+
+        # 6) #585 – Deploy-Hysterese: Artikel b ist frisch veröffentlicht und
+        #    live (Sitemap + Seite) noch nicht da. Erwartung: KEIN roter Fund,
+        #    stattdessen ein benannter Hinweis, und die Seiten-Probe weicht auf
+        #    den bereits ausgelieferten Artikel a aus, statt auf dem 404 zu
+        #    bestehen. Genau dieser Fall stand als ROT in Issue #585.
+        os.makedirs(os.path.join(tmp2, "posts", "a"), exist_ok=True)
+        os.makedirs(os.path.join(tmp2, "posts", "b"), exist_ok=True)
+        open(os.path.join(tmp2, "index.html"), "w").write(PAGE_OK)
+        open(os.path.join(tmp2, "posts", "a", "index.html"), "w").write(PAGE_OK)
+        open(os.path.join(tmp2, "posts", "b", "index.html"), "w").write(PAGE_OK)
+        open(os.path.join(tmp2, "sitemap.xml"), "w").write(SM_LOCAL)
+        fetch = make_fetch({"/robots.txt": (200, ROBOTS_OK, "text/plain"),
+                           "/sitemap.xml": (200, SM_OK, "application/xml"),
+                           "/": (200, PAGE_OK, "text/html"),
+                           "/posts/a/": (200, PAGE_OK, "text/html"),
+                           "/manifest.json": (200, '{"name":"x"}', "application/json")})
+        hard, soft, _ = _run_for_test(True, tmp2, fresh=fresh_b)
+        if hard:
+            errs.append(f"frischer Artikel im Deploy-Fenster meldet ROT: {hard}")
+        if not any(r == "L2" and "Deploy-Fenster" in m for r, m in soft):
+            errs.append(f"Deploy-Fenster wird nicht als Hinweis benannt: {soft}")
+
+        # 7) … derselbe Stand, aber das Fenster ist abgelaufen: jetzt ROT.
+        hard, _, _ = _run_for_test(True, tmp2, fresh=_never_fresh)
+        if not any(r == "L2" for r, _ in hard):
+            errs.append(f"fehlende Money-URL nach Ablauf des Fensters bleibt weich: {hard}")
+
+        # 8) … und der 404 der frischen Seite selbst bleibt weich, wenn sie die
+        #    einzige im Build ist (kein reifer Artikel zum Ausweichen).
+        os.makedirs(os.path.join(tmp3, "posts", "b"), exist_ok=True)
+        open(os.path.join(tmp3, "index.html"), "w").write(PAGE_OK)
+        open(os.path.join(tmp3, "posts", "b", "index.html"), "w").write(PAGE_OK)
+        hard, soft, _ = _run_for_test(True, tmp3, fresh=fresh_b)
+        if any(r == "L3" for r, _ in hard):
+            errs.append(f"404 der frisch deployten Seite wird hart gewertet: {hard}")
+        if not any(r == "L3" and "Deploy-Fenster" in m for r, m in soft):
+            errs.append(f"404 im Deploy-Fenster wird nicht benannt: {soft}")
+        hard, _, _ = _run_for_test(True, tmp3, fresh=_never_fresh)
+        if not any(r == "L3" for r, _ in hard):
+            errs.append(f"404 nach Ablauf des Fensters bleibt weich: {hard}")
+
+        # 9) Fenster-Arithmetik gegen echtes Frontmatter (nicht gegen eine Attrappe).
+        os.makedirs(os.path.join(tmp4, "frisch"), exist_ok=True)
+        os.makedirs(os.path.join(tmp4, "alt"), exist_ok=True)
+        jetzt = datetime.datetime.now(datetime.timezone.utc)
+        open(os.path.join(tmp4, "frisch", "index.md"), "w").write(
+            "---\ntitle: x\ndate: "
+            + (jetzt - datetime.timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            + "\n---\n\ntext\n")
+        open(os.path.join(tmp4, "alt", "index.md"), "w").write(
+            "---\ntitle: x\ndate: "
+            + (jetzt - datetime.timedelta(days=3)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            + "\n---\n\ntext\n")
+        check = make_fresh_check(tmp4, grace_min=90, now=jetzt)
+        if not check(f"{BASE}/posts/frisch/")[0]:
+            errs.append("5 Minuten alter Artikel gilt nicht als frisch")
+        if check(f"{BASE}/posts/alt/")[0]:
+            errs.append("3 Tage alter Artikel gilt noch als frisch")
+        if check(f"{BASE}/posts/gibtsnicht/")[0]:
+            errs.append("unbekannte URL erhält ein Deploy-Fenster (fail-open!)")
     except Exception as exc:  # noqa: BLE001
         errs.append(f"Ausführung: {exc.__class__.__name__}: {exc}")
     finally:
         fetch = keep
         import shutil
-        shutil.rmtree(tmp, ignore_errors=True)
+        for d in (tmp, tmp2, tmp3, tmp4):
+            shutil.rmtree(d, ignore_errors=True)
     if errs:
         print("🛑 live_policy_guard-Selbsttest FEHLGESCHLAGEN:")
         for e in errs:
             print("  -", e)
         return 2
-    print("✅ Live-Policy-Selbsttest: 5 Fälle grün (inkl. Cloudflare-/Cache-Falle).")
+    print("✅ Live-Policy-Selbsttest: 9 Fälle grün (inkl. Cloudflare-/Cache-Falle "
+          "und Deploy-Hysterese #585).")
     return 0
 
 
-def _run_for_test(require_live: bool, public: str | None = None) -> tuple[list, list, bool]:
-    """run() gegen ein übergebenes public-Verzeichnis (Test-Baum, nicht der echte)."""
-    return run(require_live, public=public or PUBLIC)
+def _run_for_test(require_live: bool, public: str | None = None,
+                  fresh=None) -> tuple[list, list, bool]:
+    """run() gegen ein übergebenes public-Verzeichnis (Test-Baum, nicht der echte).
+
+    `fresh` injiziert das Deploy-Fenster, damit der Selbsttest nicht vom echten
+    Veröffentlichungsdatum im Repo abhängt (sonst wäre er heute grün und morgen rot).
+    """
+    return run(require_live, public=public or PUBLIC, fresh=fresh)
 
 
 def main() -> int:

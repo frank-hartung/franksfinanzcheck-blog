@@ -120,6 +120,12 @@ INFO_AMBER = {
     # heilt von allein. Eskalation läuft über die Alters-Regel: bleibt der
     # Nachweis aus, wird der Befund beim Überschreiten der Frist ROT (`stale`).
     "unreachable", "operating_boundary", "channel_disabled",
+    # 05.10.2026 (#585): `deploy_hysterese` = eine frisch veröffentlichte Seite
+    # ist live noch nicht da. Das ist die Laufzeit von Build + Pages-Deploy +
+    # CDN, kein Handlungsfeld – und es heilt garantiert von allein. Die
+    # Eskalation steckt in der Wache selbst: nach LIVE_POLICY_GRACE_MIN meldet
+    # sie denselben Sachverhalt als `sitemap_drift`/`page_drift` in ROT.
+    "deploy_hysterese",
 }
 # Step-spezifische Marker: Berichte ohne eigene Ampel/Befundtabelle (die beiden
 # Monetarisierungs-Importe) werden über diese Zeilen auswertbar – sonst wäre ein
