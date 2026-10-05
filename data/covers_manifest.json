@@ -143,15 +143,6 @@
    "savings": "bis zu 1.250 € sparen"
   }
  },
- "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
-  "title": "Geld sparen im Alltag: Tipps, die jeder umsetzen kann",
-  "ts": "2026-08-26T13:47:45+00:00",
-  "design": {
-   "v": 3,
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
   "title": "So findest du den richtigen: DSL-Tarif für dein Zuhause",
   "ts": "2026-08-25T16:24:14+00:00",
@@ -611,66 +602,12 @@
    "savings": ""
   }
  },
- "2026-10-05-digital-banking-vorteile-moderner-online-konten-nutzen": {
-  "title": "Digital-Banking: Vorteile moderner Online-Konten nutzen",
-  "ts": "2026-10-05T11:05:28+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf": {
-  "title": "Budget‑App 2026 –: So beherrschst du deine Ausgaben",
-  "ts": "2026-10-05T11:41:10+00:00",
+ "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
+  "title": "Büroausstattung steuerlich clever absetzen: – so vermeidest",
+  "ts": "2026-10-05T17:33:28+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": ""
-  }
- },
- "2026-10-05-konto-wechseln-2026-so-sparst-du-gebuehren-ohne-stress": {
-  "title": "Konto wechseln 2026: So sparst du Gebühren ohne Stress",
-  "ts": "2026-10-05T11:05:18+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-05-oekostrom-anbieter-wechseln-clever-sparen-und-gruen-bleiben": {
-  "title": "Ökostrom Anbieter: wechseln – clever sparen und grün bleiben",
-  "ts": "2026-10-05T11:05:24+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-10-05-strom-und-gas-teure-fehler-beim-vergleichen-vermeiden": {
-  "title": "Strom und Gas: Teure Fehler beim Vergleichen vermeiden",
-  "ts": "2026-10-05T11:05:09+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
-   "savings": ""
-  }
- },
- "2026-10-05-bankgebuehren-sparen-so-halbierst-du-deine-kosten": {
-  "title": "Bankgebühren sparen: So halbierst du deine Kontokosten",
-  "ts": "2026-10-05T11:05:12+00:00",
-  "design": {
-   "v": 3,
-   "badge": "KONTO & FINANZEN",
-   "savings": ""
-  }
- },
- "2026-10-05-e-auto-ladekosten-so-drueckst-du-deine-ausgaben-massiv": {
-  "title": "E‑Auto Ladekosten: So drückst du deine Ausgaben massiv",
-  "ts": "2026-10-05T16:13:34+00:00",
-  "design": {
-   "v": 3,
-   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

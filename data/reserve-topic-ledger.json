@@ -28,9 +28,11 @@
   "Büroausstattung: Diese Kosten kannst du von der Steuer absetzen": {
     "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "Artefakt fehlt (bueroausstattung-clever-absetzen-so-sparst-du-2026-steuern) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
+    "grund": "produziert: bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
     "infra_fehler": 0,
-    "letzter_versuch": "2026-10-03"
+    "letzter_erfolg": "2026-10-05",
+    "letzter_versuch": "2026-10-05",
+    "sperre_bis": "2027-04-03"
   },
   "Campingurlaub 2026: So hältst du die Kosten im Rahmen": {
     "abgleich_fehler": 2,
@@ -56,10 +58,10 @@
   },
   "DSL-Anbieter wechseln: Wie du den besten Tarif findest": {
     "fehler": 1,
-    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GEMINI); leere Antwort (GROQ))",
-    "infra_fehler": 1,
-    "letzter_versuch": "2026-10-02",
-    "sperre_bis": "2026-10-03"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 2,
+    "letzter_versuch": "2026-10-05",
+    "sperre_bis": "2026-10-06"
   },
   "Dein Online-Banking und Kontomanagement optimieren": {
     "abgleich_fehler": 2,
@@ -246,9 +248,10 @@
   "Photovoltaik: Lohnt sich eine Solaranlage 2026?": {
     "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "Artefakt fehlt (photovoltaik-2026-lohnt-sich-der-kauf-jetzt-noch) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-03"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-10-05",
+    "sperre_bis": "2026-10-06"
   },
   "Preiswerter DSL-Anschluss für Zuhause": {
     "fehler": 0,
@@ -303,9 +306,10 @@
   "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung": {
     "abgleich_fehler": 2,
     "fehler": 0,
-    "grund": "Artefakt fehlt (stromrechnung-senken-20-strategien-fuer-dein) – Erfolgsmeldung zurückgenommen, Thema wieder frei (Dubletten-Schutz bleibt aktiv)",
-    "infra_fehler": 0,
-    "letzter_versuch": "2026-10-03"
+    "grund": "3 Versuche ohne Erfolg [infra] (leere Antwort (GROQ); leere Antwort (GEMINI))",
+    "infra_fehler": 1,
+    "letzter_versuch": "2026-10-05",
+    "sperre_bis": "2026-10-06"
   },
   "Strom sparen im Sommer: 10 Tipps für heiße Monate": {
     "fehler": 1,

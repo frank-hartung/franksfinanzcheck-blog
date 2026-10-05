@@ -1,1 +1,13 @@
-{}
+{
+  "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
+    "first": "2026-10-05T17:26:21Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "laeufe": [
+      "run:37347512536"
+    ],
+    "last": "2026-10-05T17:34:59Z",
+    "lauf": "run:37347512536",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  }
+}
