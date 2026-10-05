@@ -189,6 +189,33 @@ def main():
     except Exception as exc:  # noqa: BLE001 – Absicherung, kein Gate
         print(f"⚠ Bestands-Wächter übersprungen: {exc}")
 
+    # BESTANDSAUFNAHME (05.10.2026, WF-B594, #594): Erst zurückgeben, was dem
+    # Pool gehört – DANN zählen. Befund F des Vorgangs: Am 05.10. meldete der
+    # Watchdog „0 gate-fertige Artikel", während fünf Entwürfe im Repo lagen,
+    # die am echten Gate 0,898–0,90 erreichten. Ihnen fehlte nur die Zeile
+    # `reserve: true`; der Pool ist fahnen-definiert und sah sie deshalb nie.
+    # Die Aufnahme übernimmt ausschließlich HERRENLOSE, maschinell erzeugte,
+    # triage-reife, standardriskante und dublettenfreie Entwürfe (sechs
+    # Prüfungen, jede Ablehnung mit Grund). Alles andere bleibt ein Angebot an
+    # die Redaktion. Best-effort, nie blockierend – eine Bestandsaufnahme darf
+    # die Zertifizierung nicht aufhalten.
+    try:
+        import reserve_intake
+        aufnahme = reserve_intake.bestandsaufnahme()
+        for kandidat in aufnahme["uebernehmbar"]:
+            index = ROOT / "content" / "posts" / kandidat["slug"] / "index.md"
+            ergebnis = reserve_intake.uebernehmen(
+                index, "herrenlose Reife (automatische Bestandsaufnahme)")
+            if ergebnis.get("ok") and not ergebnis.get("schon"):
+                print(f"📥 In den Pool aufgenommen: {kandidat['slug']} "
+                      f"– {kandidat['grund']}")
+        if aufnahme["angebote"]:
+            print(f"ℹ {len(aufnahme['angebote'])} fertige(r) Entwurf/Entwürfe "
+                  "warten auf eine bewusste Freigabe "
+                  "(python3 scripts/reserve_intake.py --md)")
+    except Exception as exc:  # noqa: BLE001 – Aufnahme ist Zubringer, kein Gate
+        print(f"⚠ Reserve-Bestandsaufnahme übersprungen: {exc}")
+
     rows = []
     # Nur aktuelle Reserve-Entwürfe (draft+reserve). Bereits veröffentlichte
     # Kandidaten (reserve_published) erscheinen hier bewusst nicht mehr.

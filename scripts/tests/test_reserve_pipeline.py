@@ -1525,3 +1525,446 @@ class PufferInvarianteTests(unittest.TestCase):
         os.environ["RESERVE_TARGET"] = "1"
         self.assertEqual(re_.ziel(warnungen), re_.ZIEL_MIN)
         self.assertTrue(warnungen, "Eine Klemmung muss sich melden")
+
+
+# ===========================================================================
+#  VORGANG WF-B594 (Issue #594, 05.10.2026) – „Löschen braucht einen Beweis"
+#
+#  Achter Vorfall derselben Klasse (#251, #272, #281, #393, #446, #462, #520).
+#  Diesmal war die Ursache nicht fehlende Produktion, sondern VERNICHTUNG:
+#  Um 17:20 Uhr zertifizierte der Lauf acht Kandidaten mit ausschließlich
+#  heilbaren Gründen, um 17:35 Uhr löschte `reserve_janitor.purge()` genau
+#  diese acht Entwürfe samt 24 Cover-Dateien (Commit c56382b). Vier Verträge
+#  werden hier festgenagelt:
+#
+#   B4  Die Triage darf ein langes Frontmatter nicht für einen Quelldefekt
+#       halten (120-Zeilen-Fenster -> acht YMYL-Entwürfe „titel: leer").
+#   B3/B2 Gelöscht wird nur, was unheilbar ist – belegt über zwei Läufe und
+#       nach einer Karenz. Heilbares ist Material, kein Müll.
+#   B5  Eine zweite Deckungswache prüft das LÖSCHRECHT: Jeder heilbare
+#       Triage-Blocker braucht seinen Heiler in der Kette.
+#   B1  Fertige, herrenlose Entwürfe werden dem Pool zugeführt, statt neben
+#       ihm zu verhungern (Watchdog meldete 0/6, während 5 Kandidaten am
+#       echten Gate 0,898–0,90 erreichten).
+# ===========================================================================
+class TriageFensterTests(unittest.TestCase):
+    """B4: Das 120-Zeilen-Fenster der Frontmatter-Suche.
+
+    `fm_and_body()` suchte die schließende `---`-Zeile nur in den ersten 120
+    Zeilen. Die acht YMYL-Versicherungsentwürfe tragen ~246 Zeilen
+    Frontmatter (Quellen, Zahlenprotokoll, Freigabe-Block) – die Triage hielt
+    deshalb den gesamten Artikel für einen Quelldefekt und meldete
+    „titel: leer", „datum: nicht lesbar". Beides stand in Wahrheit sauber im
+    Kopf. Der Janitor löschte sie als BLOCKIERT.
+    """
+
+    def _entwurf(self, fm_zeilen: int) -> str:
+        fm = ['title: "Ein ordentlicher Titel fuer den Fenster-Test"',
+              "date: 2026-09-01", "lastmod: 2026-09-01",
+              'description: "Eine ordentliche Beschreibung mit genug Zeichen '
+              'fuer das Meta-Gate der Reserve dieses Blogs."',
+              "draft: true", "reserve: true"]
+        fm += ["quellen:"] + [f'  - titel: "Beleg {i}"'
+                              for i in range(fm_zeilen)]
+        body = "\n".join(f"## Abschnitt {i}\nNutzwert mit Zahlen."
+                         for i in range(6))
+        return "---\n" + "\n".join(fm) + "\n---\n\n" + body + "\n"
+
+    def test_langes_frontmatter_ist_kein_quelldefekt(self):
+        import draft_triage as triage
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "content" / "posts" / "2026-09-01-lang"
+            posts.mkdir(parents=True)
+            (posts / "index.md").write_text(self._entwurf(300),
+                                            encoding="utf-8")
+            zeilen = triage.collect(tmp, dt.date(2026, 9, 26), 21)
+        self.assertEqual(len(zeilen), 1)
+        blocker = zeilen[0]["blocker"]
+        for verboten in ("fm-", "titel:", "datum:"):
+            self.assertFalse(
+                [b for b in blocker if b.startswith(verboten)],
+                f"{verboten} darf bei langem Frontmatter nicht auftauchen: "
+                f"{blocker}")
+
+    def test_kein_zeilenfenster_mehr_in_der_quelle(self):
+        quelle = (SCRIPTS / "draft_triage.py").read_text(encoding="utf-8")
+        self.assertNotIn("lines[1:121]", quelle,
+                         "Das 120-Zeilen-Fenster darf nicht zurückkehren")
+        self.assertIn("WF-B594", quelle,
+                      "Die Reparatur muss an Ort und Stelle erklärt sein")
+
+
+class LoeschRechtTests(unittest.TestCase):
+    """B3/B2: Wer unwiderruflich löscht, trägt die Beweislast."""
+
+    def setUp(self):
+        import reserve_blocker_klassen as bk
+        import reserve_janitor as rj
+        self.bk, self.rj = bk, rj
+        self.umwelt = {k: os.environ.get(k) for k in
+                       ("RESERVE_JANITOR_HITS", "RESERVE_JANITOR_KARENZ_TAGE")}
+        os.environ["RESERVE_JANITOR_HITS"] = "2"
+        os.environ["RESERVE_JANITOR_KARENZ_TAGE"] = "0"
+        self.addCleanup(self._umwelt_zurueck)
+
+    def _umwelt_zurueck(self):
+        for k, v in self.umwelt.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+    def test_der_reale_fall_594_waere_verschont(self):
+        """Die Gründe aus dem Zertifikat 601030e, Wort für Wort."""
+        loeschen, bewertet = self.bk.loeschbar([
+            "laenge: 5677 Zeichen < Soll 10000 (Wache: length_guard.py)",
+            "interne links: 1 (Soll ≥ 2) – link_density_guard.py zählt den "
+            "Artikel als unterversorgt"])
+        self.assertFalse(loeschen,
+                         "heilbare Gründe dürfen keine Löschung tragen")
+        self.assertTrue(all(e["klasse"] == self.bk.HEILBAR for e in bewertet))
+
+    def test_unbekannter_blocker_ist_niemals_loeschbar(self):
+        self.assertFalse(self.bk.loeschbar(["voellig neuer fund: xyz"])[0])
+        self.assertFalse(self.bk.klassifiziere("voellig neuer fund: xyz")
+                         ["bekannt"])
+
+    def test_quelldefekt_bleibt_raeumbar(self):
+        """Sonst entsteht eine Halde, die kein Werkzeug anfassen kann."""
+        self.assertTrue(self.bk.loeschbar([
+            "fm-grenze: keine schließende `---`-Zeile gefunden",
+            "laenge: 80 Zeichen < Soll 10000"])[0])
+
+    def test_menschensache_wird_nie_automatisch_geloescht(self):
+        loeschen, bewertung = self.bk.gate_befund_loeschbar(
+            "editorial_review: Freigabe fehlt (Risikoklasse hoch)")
+        self.assertFalse(loeschen)
+        self.assertEqual(bewertung["klasse"], self.bk.MENSCHLICH)
+
+    def _repo(self, tmp: Path, body: str, fm_extra: str = "") -> Path:
+        """Synthetischer Kandidat – alles in Ordnung außer dem Prüffall."""
+        posts = tmp / "content" / "posts"
+        d = posts / "2026-09-01-kandidat"
+        d.mkdir(parents=True)
+        covers = tmp / "static" / "images" / "covers"
+        covers.mkdir(parents=True, exist_ok=True)
+        (covers / "kandidat.jpg").write_text("img", encoding="utf-8")
+        (d / "index.md").write_text(
+            '---\ntitle: "Kandidat mit ordentlichem Titel"\n'
+            "date: 2026-09-01\nlastmod: 2026-09-01\n"
+            'description: "Eine ordentliche Beschreibung mit genug Zeichen '
+            'fuer das Meta-Gate der Reserve dieses Blogs."\n'
+            "draft: true\nreserve: true\n"
+            'cover:\n  image: "images/covers/kandidat.jpg"\n'
+            f"{fm_extra}---\n\n{body}\n",
+            encoding="utf-8")
+        return d / "index.md"
+
+    def test_janitor_verschont_heilbares_und_sagt_warum(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._repo(root, "## Anfang\nNoch viel zu kurz.")
+            ziele, _, geschont = self.rj.find_targets(
+                root, today=dt.date.today(), run_key="run:1",
+                zaehler_schreiben=False)
+        self.assertEqual(ziele, {}, "ein heilbarer Entwurf ist kein Löschziel")
+        self.assertEqual(len(geschont), 1)
+        self.assertEqual(geschont[0]["klasse"], self.bk.HEILBAR)
+        self.assertTrue(geschont[0]["grund"],
+                        "Verschonen ohne Begründung wäre stilles Horten")
+
+    # Ein Körper, an dem NICHTS heilbar ist: lang genug, strukturiert,
+    # verlinkt. So bleibt der geleerte Titel der einzige Befund – und damit
+    # der einzige Grund, über eine Löschung überhaupt nachzudenken.
+    VOLLER_KOERPER = ("[A](../../posts/live-a/) und [B](../../posts/live-b/)\n"
+                      + "\n".join(f"## Abschnitt {i}\nNutzwert mit Zahlen."
+                                  for i in range(6)) * 90)
+
+    def test_unheilbares_braucht_zwei_laeufe(self):
+        body = self.VOLLER_KOERPER
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index = self._repo(root, body)
+            # Titel leeren -> einziger, unheilbarer Befund.
+            index.write_text(index.read_text(encoding="utf-8").replace(
+                'title: "Kandidat mit ordentlichem Titel"', 'title: ""'),
+                encoding="utf-8")
+            heute = dt.date.today()
+            ziele1, _, geschont1 = self.rj.find_targets(
+                root, today=heute, run_key="run:1")
+            self.assertEqual(ziele1, {},
+                             "ein einziger Lauf ist kein Beweis")
+            self.assertEqual(geschont1[0]["klasse"], "beleg")
+            ziele2, _, _ = self.rj.find_targets(root, today=heute,
+                                                run_key="run:2")
+            self.assertIn("2026-09-01-kandidat", ziele2,
+                          "zwei Läufe mit demselben Fund rechtfertigen die "
+                          "Löschung")
+            # Derselbe Lauf darf nicht doppelt zählen.
+            zaehler = json.loads((root / self.rj.JANITOR_STATE)
+                                 .read_text(encoding="utf-8"))
+            self.assertEqual(zaehler["2026-09-01-kandidat"]["hits"], 2)
+
+    def test_karenz_schuetzt_junge_entwuerfe(self):
+        os.environ["RESERVE_JANITOR_KARENZ_TAGE"] = "2"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            index = self._repo(root, self.VOLLER_KOERPER)
+            index.write_text(index.read_text(encoding="utf-8").replace(
+                'title: "Kandidat mit ordentlichem Titel"', 'title: ""'),
+                encoding="utf-8")
+            ziele, _, geschont = self.rj.find_targets(
+                root, today=dt.date.today(), run_key="run:1",
+                zaehler_schreiben=False)
+        self.assertEqual(ziele, {})
+        self.assertEqual(geschont[0]["klasse"], "karenz")
+
+    def test_trockenlauf_zaehlt_nicht(self):
+        """Ein Bericht darf keine Löschung herbeirechnen."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._repo(root, "kurz")
+            for lauf in ("run:a", "run:b", "run:c"):
+                self.rj.purge(root, dry_run=True, today=dt.date.today(),
+                              run_key=lauf)
+            self.assertFalse((root / self.rj.JANITOR_STATE).exists(),
+                             "der Trockenlauf hat den Beleg-Zähler geschrieben")
+
+    def test_startsperre_bei_lueckenhafter_deckung(self):
+        """Ohne belastbare Klassen wird gar nicht erst gelöscht."""
+        import reserve_healer_coverage as rhc_
+        luecke = {"luecken": [{"blocker": "interne links:",
+                               "art": "nicht-in-der-kette",
+                               "heiler": ["internal_linker.py"]}],
+                  "tote_eintraege": []}
+        with patch.object(rhc_, "loeschdeckung", lambda *a, **k: luecke):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                rc = self.rj.loesch_wache()
+        self.assertEqual(rc, 1)
+        self.assertIn("::error::", buf.getvalue())
+
+    def test_echtes_repo_darf_heute_nichts_verlieren(self):
+        """Scharfer Lauf: Im echten Bestand steht kein Löschziel."""
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            bericht = self.rj.purge(ROOT, dry_run=True)
+        self.assertEqual(bericht["deleted_slugs"], [],
+                         f"der Janitor würde heute löschen: "
+                         f"{bericht['deleted_slugs']}")
+
+
+class LoeschDeckungsWacheTests(unittest.TestCase):
+    """B5: Der Weg nach UNTEN braucht dieselbe Wache wie der Weg nach OBEN."""
+
+    def test_jeder_triage_blocker_ist_gedeckt(self):
+        b = rhc.loeschdeckung()
+        self.assertEqual(b["luecken"], [],
+                         "ein Triage-Blocker ohne Heiler oder Klasse")
+        self.assertEqual(b["tote_eintraege"], [])
+        self.assertIn("interne links:", {e["blocker"] for e in b["heilbar"]},
+                      "die #594-Klasse muss ausdrücklich gedeckt sein")
+
+    def test_fehlender_linker_faellt_sofort_auf(self):
+        """Der reale Zustand vor der Reparatur: Blocker ohne jeden Heiler."""
+        kette = [e for e in rf.HEALER_CHAIN if e[0] != "internal_linker.py"]
+        b = rhc.loeschdeckung(chain=kette)
+        self.assertIn(("interne links:", "nicht-in-der-kette"),
+                      {(e["blocker"], e["art"]) for e in b["luecken"]})
+
+    def test_neuer_blocker_ohne_klasse_ist_eine_luecke(self):
+        b = rhc.loeschdeckung(praefixe=["laenge:", "brandneu:"])
+        self.assertIn(("brandneu:", "unklassifiziert"),
+                      {(e["blocker"], e["art"]) for e in b["luecken"]})
+
+    def test_linker_laeuft_datei_bezirkelt_in_der_kette(self):
+        eintrag = [e for e in rf.HEALER_CHAIN if e[0] == "internal_linker.py"]
+        self.assertEqual(len(eintrag), 1, "genau einmal, nicht korpusweit")
+        self.assertEqual(eintrag[0][2], "file",
+                         "nur --file: der Live-Korpus bleibt unberührt")
+        quelle = (SCRIPTS / "internal_linker.py").read_text(encoding="utf-8")
+        self.assertIn("def load_single_source", quelle)
+        self.assertIn("sources = load_single_source", quelle)
+
+    def test_luecke_stoppt_die_veredelung_vor_jedem_schreibzugriff(self):
+        luecke = {"luecken": [{"blocker": "interne links:",
+                               "art": "nicht-in-der-kette",
+                               "heiler": ["internal_linker.py"]}],
+                  "tote_eintraege": []}
+        gerufen = {}
+
+        def fake_write_report(results, targets, started, isolation=None,
+                              deckung=None):
+            gerufen["targets"] = targets
+
+        def platzt(*a, **kw):
+            raise AssertionError("finish() hat den Pool angefasst, obwohl das "
+                                 "Löschrecht ungedeckt ist")
+
+        with patch.object(rf, "loesch_deckung", lambda: luecke), \
+                patch.object(rf, "write_report", fake_write_report), \
+                patch.object(rf, "certified_slugs", platzt), \
+                patch.object(rf, "now_utc_iso", lambda: "2026-10-05T18:00:00Z"):
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                rc_ = rf.finish()
+        self.assertEqual(rc_, 1)
+        self.assertIn("::error::", buf.getvalue())
+        self.assertEqual(gerufen["targets"], [])
+
+
+class BestandsaufnahmeTests(unittest.TestCase):
+    """B1: Fertige Entwürfe dürfen nicht neben dem Pool verhungern."""
+
+    def setUp(self):
+        import reserve_intake as ri
+        self.ri = ri
+
+    def test_selbsttest_der_aufnahme_ist_gruen(self):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc_ = self.ri.run_selftest()
+        self.assertEqual(rc_, 0, buf.getvalue())
+
+    def test_zertifizierung_nimmt_auf_bevor_sie_zaehlt(self):
+        quelle = (SCRIPTS / "reserve_readiness.py").read_text(encoding="utf-8")
+        self.assertIn("reserve_intake", quelle)
+        self.assertLess(quelle.index("reserve_intake.bestandsaufnahme"),
+                        quelle.index("for index in rp.reserve_drafts()"),
+                        "erst zurückgeben, was dem Pool gehört – dann zählen")
+
+    def test_ki_redaktion_kann_reserve_nicht_zweitverwerten(self):
+        quelle = (SCRIPTS / "ki_redaktion.py").read_text(encoding="utf-8")
+        self.assertIn("reserve:\\s*true", quelle.replace("\\\\s", "\\s"),
+                      "Doppelbesitz-Sperre fehlt")
+
+    def test_jede_ablehnung_traegt_einen_grund(self):
+        bericht = self.ri.bestandsaufnahme()
+        for b in bericht["befunde"]:
+            self.assertTrue(b.get("grund"),
+                            f"{b['slug']} wurde ohne Begründung einsortiert")
+
+    def test_angebote_werden_nicht_still_uebernommen(self):
+        """KI-Redaktions-Entwürfe gehören einem Menschen, bis er abgibt."""
+        bericht = self.ri.bestandsaufnahme()
+        for b in bericht["angebote"]:
+            self.assertNotIn(b, bericht["uebernehmbar"])
+
+
+# ---------------------------------------------------------------------------
+#  VORGANG WF-B594, Nachtrag 2 (05.10.2026) – zwei Lecks, die beim scharfen
+#  Durchlauf der reparierten Kette auffielen und beide dieselbe Handschrift
+#  tragen: Automatik fasst etwas an, das ihr nicht gehört.
+#
+#  B7  IDENTITÄT STATT NAMENSÄHNLICHKEIT. Das Gedächtnis des Bestands-
+#      Wächters ist datumslos verschlüsselt (`schluessel()`), damit das
+#      Umdatieren der Veredelungs-Stufe keine Einträge verliert. Im Bestand
+#      liegen aber zwei Entwürfe mit demselben Stamm
+#      (`2026-09-22-konto-karten-update-…` und `2026-09-29-…`). `--heal`
+#      setzte die Reserve-Fahne am falschen von beiden: ein nie
+#      übernommener Entwurf wanderte still in den Pool, das Übernahme-
+#      protokoll (data/reserve-intake.json) kannte ihn nicht, und der
+#      Ledger-Eintrag zeigte anschließend auf den falschen Slug.
+#  B8  CTA-BLÖCKE SIND KEIN FLIESSTEXT. Mit `--file` läuft der interne
+#      Linker erstmals über Reserve-Entwürfe. Beim ersten scharfen Lauf
+#      setzte er zwei Links mitten in die kanonische Schnell-Tipp-Zeile –
+#      genau den Block, den affiliate_integrity_gate bytegenau prüft.
+# ---------------------------------------------------------------------------
+class CustodyIdentitaetTests(unittest.TestCase):
+    """B7: Gleicher Slug-Stamm ist nicht derselbe Artikel."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import reserve_custody as rc
+        self.rc = rc
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.posts = Path(self.tmp.name) / "posts"
+        self.ledger = Path(self.tmp.name) / "custody.json"
+        self.posts.mkdir(parents=True)
+        for slug in ("2026-09-22-konto-karten-update",
+                     "2026-09-29-konto-karten-update"):
+            d = self.posts / slug
+            d.mkdir()
+            (d / "index.md").write_text(
+                '---\ntitle: "Konto & Karten-Update"\ndraft: true\n---\n\n'
+                "Body.\n", encoding="utf-8")
+        self.ledger.write_text(json.dumps({
+            "konto-karten-update": {
+                "zustand": "pool", "seit": "2026-10-01",
+                "slug": "2026-09-22-konto-karten-update"}}), encoding="utf-8")
+
+    def _heal(self):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            lage = self.rc.heilen(self.posts, pfad=self.ledger)
+        return lage, buf.getvalue()
+
+    def test_nur_der_gemerkte_slug_bekommt_die_fahne_zurueck(self):
+        self._heal()
+        richtig = (self.posts / "2026-09-22-konto-karten-update"
+                   / "index.md").read_text(encoding="utf-8")
+        falsch = (self.posts / "2026-09-29-konto-karten-update"
+                  / "index.md").read_text(encoding="utf-8")
+        self.assertIn("reserve: true", richtig)
+        self.assertNotIn("reserve: true", falsch,
+                         "namensgleicher Fremdentwurf wurde in den Pool gezogen")
+
+    def test_namensgleicher_entwurf_wird_berichtet_statt_verschwiegen(self):
+        lage, _ = self._heal()
+        gemeldet = [e["slug"] for e in lage.get("namensgleich", [])]
+        self.assertIn("2026-09-29-konto-karten-update", gemeldet)
+        self.assertIn("2026-09-29-konto-karten-update",
+                      self.rc.markdown(lage))
+
+    def test_gedaechtnis_behaelt_den_richtigen_slug(self):
+        self._heal()
+        eintrag = json.loads(self.ledger.read_text(
+            encoding="utf-8"))["konto-karten-update"]
+        self.assertEqual(eintrag["slug"], "2026-09-22-konto-karten-update")
+
+    def test_altlast_ohne_slug_bleibt_ueber_den_stamm_heilbar(self):
+        self.ledger.write_text(json.dumps({
+            "konto-karten-update": {"zustand": "pool", "seit": "2026-10-01"}}),
+            encoding="utf-8")
+        lage, _ = self._heal()
+        self.assertTrue(lage["geheilt"], "Alt-Eintrag ohne Slug blieb liegen")
+
+
+class LinkerCtaSperrzoneTests(unittest.TestCase):
+    """B8: Werbe- und Offenlegungsblöcke sind für den Linker tabu."""
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import internal_linker as il
+        self.il = il
+
+    def test_schnell_tipp_zeile_ist_sperrzone(self):
+        body = ("💡 **Schnell-Tipp von FranksFinanzcheck:** Zinsen auf ein "
+                "kostenloses Tagesgeldkonto gibt es bei der C24 Bank: "
+                "[**Jetzt ansehen**](/go/tagesgeld/)\n\n"
+                "Im Fließtext darf ein Tagesgeldkonto verlinkt werden.\n")
+        treffer = self.il.find_anchor(body, "Tagesgeldkonto")
+        self.assertIsNotNone(treffer, "Fließtext darf nicht mitgesperrt sein")
+        self.assertGreater(treffer[0], body.index("Im Fließtext"))
+
+    def test_offenlegung_und_spar_tipp_sind_sperrzone(self):
+        for zeile in (
+            "> 💶 **Spar-Tipp zwischendurch:** Dein Tagesgeld bei der C24 Bank.\n",
+            "_(Dieser Artikel enthält Affiliate-Links (Werbung).)_\n",
+            "👉 **Jetzt das Tagesgeld-Angebot ansehen:** [**Link**](/go/tagesgeld/)\n",
+        ):
+            with self.subTest(zeile=zeile[:32]):
+                self.assertIsNone(self.il.find_anchor(zeile, "Tagesgeld"))
+
+    def test_selbsttest_deckt_die_sperrzone_ab(self):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc_ = self.il.selftest()
+        self.assertEqual(rc_, 0, buf.getvalue())
+        self.assertIn("CTA", buf.getvalue())
+
+    def test_reparatur_ist_im_quelltext_begruendet(self):
+        quelle = (SCRIPTS / "internal_linker.py").read_text(encoding="utf-8")
+        self.assertIn("WF-B594", quelle)
+        self.assertIn("def cta_ranges", quelle)

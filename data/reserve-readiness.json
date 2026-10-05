@@ -1,29 +1,82 @@
 {
   "target": 6,
-  "ready": 0,
-  "pool_size": 1,
-  "generated_at": "2026-10-05T17:34:59Z",
+  "ready": 5,
+  "pool_size": 5,
+  "generated_at": "2026-10-05T19:02:57Z",
   "candidates": [
     {
-      "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
-      "ready": false,
-      "sha256": "0326884534082f454ff7d450cbe87459ed6fbdc234176911694988128ad492e3",
-      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
-      "details": [
-        "🛑 2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Zeichenlänge (check_length.py) nicht bestanden",
-        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 49 (Ziel ≥ 60); 12% Schachtelsätze (Ziel < 10%); Flesch 48.6 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.865,
+      "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
+      "ready": true,
+      "sha256": "1d091228fa86e3671f6d585e35b62dc8bfb79498512286e2c7a74f597fba4441",
+      "score": 0.9,
       "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 0.7,
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.7
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "ready": true,
+      "sha256": "611548c13a917842875ad29a1004da1e9192adff7d8c9a969842d53d9e033603",
+      "score": 0.898,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+      "ready": true,
+      "sha256": "5700b70af6ae3a5446707b9816f0d5b7ca35373801c63b28992503d2662107b5",
+      "score": 0.9,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+      "ready": true,
+      "sha256": "0891afc1757896c5bdd5c1ce8e2c7b3caf62b8cb49597bd16096dc16ae0ff7a5",
+      "score": 0.9,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
+      "ready": true,
+      "sha256": "8920c3905a24fed75d7a2b7dc6f49125cdc939f54b35dcfdaf038ebd492bcc1f",
+      "score": 0.89,
+      "parts": {
+        "spelling": 0.5,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ]

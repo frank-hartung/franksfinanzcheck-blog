@@ -178,9 +178,15 @@ def lift_to_today(index: Path) -> Path:
 
 
 # ---------------------------------------------------------------------------
-# Heiler-Kette (identisch mit Phase 2 + Phase 3 der Live-Engine v2, ohne
-# internal_linker: ein Reserve-ENTWURF darf keine Backlinks von Live-Artikeln
-# einsammeln; ohne Pillar-Length-Guard: betrifft nur Pillar-Seiten).
+# Heiler-Kette (identisch mit Phase 2 + Phase 3 der Live-Engine v2; ohne
+# Pillar-Length-Guard: betrifft nur Pillar-Seiten).
+#
+# Zum internal_linker (Stand 05.10.2026, WF-B594): Die alte Regel „gar kein
+# Linker" war halb richtig – ein Reserve-ENTWURF darf keine Backlinks von
+# Live-Artikeln einsammeln (tote Links, sobald er wieder zurückgestuft wird,
+# Issue #85). Er MUSS aber selbst hinaus verlinken, sonst ist „interne links:
+# < 2" ein Blocker ohne Heiler. Seit `internal_linker.py --file` sind beide
+# Richtungen getrennt: Quelle = nur der Kandidat, Ziele = nur LIVE.
 #
 # SCOPE-VERTRAG (Stufe-2-Kommentar im Workflow): Die Kette veredelt NUR die
 # Pool-Kandidaten, NIE den Live-Bestand.
@@ -283,7 +289,7 @@ HEALER_CHAIN = [
     # solche Änderungen ohnehin zurückstellen; hier wird der Bedarf gar nicht
     # erst erzeugt (schneller, kein Cover-Churn, keine KI-/Render-Kosten).
     ("generate_covers.py", ["--slug", "{slug}"], "slug"),
-    # --- Phase 3 (Sofort-Optimierung, ohne internal_linker) ---
+    # --- Phase 3 (Sofort-Optimierung) ---
     # WF-54C4/#583: Ein Reserve-Artikel darf nicht erst beim Deploy auffallen,
     # wenn seine Erstrecherche fehlt. Der echte Rechercheweg läuft
     # datei-bezirkelt; ohne belastbaren Beleg bleibt der Kandidat Entwurf und
@@ -319,8 +325,22 @@ HEALER_CHAIN = [
     # Keyword-Diagnose am Ende der Kette (zweiter Lauf wie in der Live-Engine):
     # nach Meta-/Titel-Heilung kann sich die Keyword-Verteilung verschieben.
     ("keyword_optimizer.py", ["--fix", "--include-drafts"]),
+    # REPARATUR 05.10.2026 (WF-B594, Issue #594): Der Internal-Linker fehlte
+    # in dieser Kette – als EINZIGER Blocker der Triage ohne jeden Heiler.
+    # Folge: Jeder frische Reserve-Entwurf trug „interne links: 0/1 (Soll
+    # >= 2)" dauerhaft vor sich her, die Triage meldete ihn als BLOCKIERT,
+    # und der Janitor löschte ihn in derselben Nacht (Commit c56382b, acht
+    # Artikel). Der alte Kettenkopf nannte das sogar: „Phase 3 ohne
+    # internal_linker" – weil der Linker korpusweit lief und Entwürfe als
+    # Quelle übersprang, hätte er die Live-Korpus-Isolation verletzt.
+    # Genau dafür hat er jetzt `--file`: EINE Quelle (auch draft:true),
+    # ZIELE weiterhin nur LIVE-Artikel. Damit ist die Klasse „heilbarer
+    # Blocker ohne Heiler" geschlossen – reserve_healer_coverage.py
+    # erzwingt diese Zeile und stoppt den Lauf, falls sie je verschwindet.
+    ("internal_linker.py", ["--apply"], "file"),
     # Die deterministische URL-Hygiene schreibt interne Links um (R8) – sie
-    # läuft deshalb VOR dem letzten Wort.
+    # läuft deshalb VOR dem letzten Wort (und direkt nach dem Linker, damit
+    # frisch gesetzte Links dieselbe kanonische Form bekommen).
     ("fix_url_hygiene.py", ["--fix"]),
     # ALLERLETZTES WORT: das Intent-Gate (#349). Es ist ein hartes
     # Publish-Gate-Kriterium (IW0–IW9) und bewertet genau die Klasse, die
@@ -621,6 +641,25 @@ def heiler_deckung() -> dict | None:
         return None
 
 
+def loesch_deckung() -> dict | None:
+    """Zweite Deckung (WF-B594, #594): Triage-Blocker ↔ Heiler ↔ Löschrecht.
+
+    Die erste Wache sichert den Weg nach OBEN (Gate-Regel ohne Heiler =
+    unerreichbarer Zielbestand). Diese sichert den Weg nach UNTEN: Ein
+    Triage-Blocker, den die Klassen-Tabelle „heilbar" nennt, dessen Heiler
+    aber in DIESER Kette fehlt, macht den betroffenen Entwurf unsterblich
+    blockiert – und der Janitor löschte genau solche Entwürfe (8 Artikel,
+    Commit c56382b). Lücke = rc=1, noch vor dem ersten Schreibzugriff.
+    """
+    try:
+        sys.path.insert(0, str(BLOG_DIR / "scripts"))
+        import reserve_healer_coverage as rhc
+        return rhc.loeschdeckung(chain=HEALER_CHAIN)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ⚠ Lösch-Deckungs-Wache nicht auswertbar: {exc}")
+        return None
+
+
 def write_report(results: list, targets: list, started_iso: str,
                  isolation: list | None = None,
                  deckung: dict | None = None) -> None:
@@ -726,6 +765,23 @@ def finish() -> int:
         print("::error::Reserve-Heiler-Deckung lückenhaft – der Zielbestand "
               "ist strukturell unerreichbar (Details in "
               "RESERVE-FINISH-REPORT.md).")
+        write_report([], [], started, None, deckung)
+        return 1
+    # WF-B594: dieselbe Prüfung für das Löschrecht – ebenfalls VOR jeder Arbeit.
+    loeschen = loesch_deckung()
+    if loeschen and (loeschen["luecken"] or loeschen["tote_eintraege"]):
+        print("🛑 LÖSCH-DECKUNG UNVOLLSTÄNDIG – ein Triage-Blocker hat "
+              "keinen Heiler in dieser Kette oder keine Klasse:")
+        for e in loeschen["luecken"]:
+            print(f"   - {e['blocker']}: {e['art']}"
+                  + (f" ({', '.join(e.get('heiler', []))})"
+                     if e.get("heiler") else ""))
+        for e in loeschen["tote_eintraege"]:
+            print(f"   - {e['blocker']}: {e['art']} (deckt nichts mehr)")
+        print("   Diagnose: python3 scripts/reserve_healer_coverage.py")
+        print("::error::Lösch-Deckung lückenhaft – blockierte Entwürfe "
+              "könnten gelöscht werden, bevor ein Heiler sie anfasst "
+              "(Issue #594).")
         write_report([], [], started, None, deckung)
         return 1
     certified = certified_slugs()

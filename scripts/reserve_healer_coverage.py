@@ -51,6 +51,12 @@ WARUM DIESE DATEI EXISTIERT (Reparatur 22.09.2026, Issue #349, Run
   bei einer Lücke mit rc=1 ab – ein struktureller Fehler wird damit sofort
   und laut sichtbar, statt als „5/6 ohne Grund“ am End-Gate.
 
+ERWEITERUNG 05.10.2026 (WF-B594, Issue #594): Zweite Deckung `loeschdeckung()`
+  – dieselbe Logik für den Weg nach UNTEN. Siehe Kommentarblock vor der
+  Funktion: Ein Triage-Blocker, der „heilbar" heißt, ohne dass sein Heiler in
+  der Kette läuft, ist eine Todesfalle für Entwürfe; ein Blocker ohne Klasse
+  ist eine unentschiedene Zuständigkeit. Beides stoppt jetzt den Lauf.
+
 MODI:
     python3 scripts/reserve_healer_coverage.py            # Bericht (Mensch)
     python3 scripts/reserve_healer_coverage.py --json     # Maschine
@@ -227,6 +233,161 @@ def deckung(publish_gate_text: str | None = None,
     return bericht
 
 
+# ---------------------------------------------------------------------------
+#  ZWEITE DECKUNG (05.10.2026, Vorgang WF-B594, Issue #594):
+#  Triage-Blocker ↔ Heiler ↔ LÖSCHRECHT.
+#
+#  Die erste Deckung oben bewacht den Weg nach OBEN (Gate-Regel braucht einen
+#  Heiler, sonst ist der Zielbestand unerreichbar). #594 hat gezeigt, dass der
+#  Weg nach UNTEN genauso bewacht gehört: `reserve_janitor.py` löschte
+#  Entwürfe, deren Blocker („laenge:", „interne links:") von KEINEM Werkzeug
+#  der Kette bearbeitet wurden – die Löschliste war faktisch die
+#  Produktionsliste der Nacht (Commit c56382b: 8 Artikel, 24 Cover).
+#
+#  Diese Wache prüft deshalb drei Dinge gegeneinander, alle drei GELESEN:
+#    1. Welche Blocker kann `draft_triage.classify()` überhaupt erzeugen?
+#       (`reserve_blocker_klassen.triage_blocker_praefixe()` liest die Quelle)
+#    2. Ist jeder davon in `reserve_blocker_klassen.KLASSEN` klassifiziert?
+#       Ein unklassifizierter Blocker ist fail-closed nie löschbar – aber er
+#       ist eine Lücke, weil niemand entschieden hat, wem er gehört.
+#    3. Hat jeder HEILBARE Blocker seinen Heiler WIRKLICH in
+#       `reserve_finisher.HEALER_CHAIN`? Sonst ist „heilbar" eine Behauptung:
+#       Der Entwurf bleibt blockiert, der Janitor sieht ihn jede Nacht wieder,
+#       und die Reserve verliert Material, das nie eine Chance hatte.
+#  Unheilbare Klassen brauchen stattdessen eine Begründung im Klartext – wer
+#  Text vernichtet, muss sagen warum.
+# ---------------------------------------------------------------------------
+def loeschdeckung(praefixe: list[str] | None = None,
+                  klassen: tuple[dict, ...] | None = None,
+                  chain: list | None = None,
+                  scripts_dir: Path | None = None) -> dict:
+    """Deckungs-Bericht für das Löschrecht des Janitors (fail-closed).
+
+    Rein lesend und injizierbar (Selbsttest ohne echtes Repo).
+    """
+    sys.path.insert(0, str(SCRIPTS))
+    import reserve_blocker_klassen as bk
+
+    scripts_dir = Path(scripts_dir) if scripts_dir else SCRIPTS
+    tabelle = tuple(bk.KLASSEN if klassen is None else klassen)
+    if praefixe is None:
+        praefixe = bk.triage_blocker_praefixe()
+    vorhanden = chain_skripte(chain)
+    # Der Kettenläufer selbst ist ein Heiler: `reserve_finisher.lift_to_today()`
+    # datiert jeden Kandidaten auf heute um und zieht dabei `lastmod` über
+    # `sync_lastmod_to_date()` verlustfrei nach – noch vor dem ersten Eintrag
+    # der Kette. Er steht deshalb nie IN der Liste, deckt aber nachweislich.
+    vorhanden.add("reserve_finisher.py")
+
+    bericht = {"blocker": sorted(praefixe), "heilbar": [], "unheilbar": [],
+               "menschlich": [], "luecken": [], "tote_eintraege": []}
+    index = {e["praefix"]: e for e in tabelle}
+
+    for praefix in sorted(praefixe):
+        treffer = next((e for e in tabelle
+                        if praefix.startswith(e["praefix"])), None)
+        if treffer is None:
+            bericht["luecken"].append(
+                {"blocker": praefix, "art": "unklassifiziert"})
+            continue
+        klasse = treffer["klasse"]
+        if klasse == bk.HEILBAR:
+            heiler = list(treffer.get("heiler") or ())
+            if not heiler:
+                bericht["luecken"].append(
+                    {"blocker": praefix, "art": "heilbar-ohne-heiler"})
+                continue
+            fehlend = [h for h in heiler if not (scripts_dir / h).is_file()]
+            if fehlend:
+                bericht["luecken"].append(
+                    {"blocker": praefix, "art": "heiler-fehlt-im-repo",
+                     "heiler": fehlend})
+                continue
+            nicht_verdrahtet = [h for h in heiler if h not in vorhanden]
+            if nicht_verdrahtet:
+                bericht["luecken"].append(
+                    {"blocker": praefix, "art": "nicht-in-der-kette",
+                     "heiler": nicht_verdrahtet})
+                continue
+            bericht["heilbar"].append({"blocker": praefix, "heiler": heiler})
+        elif klasse == bk.MENSCHLICH:
+            bericht["menschlich"].append(
+                {"blocker": praefix, "grund": treffer.get("grund", "")})
+        elif klasse == bk.UNHEILBAR:
+            if not str(treffer.get("grund") or "").strip():
+                bericht["luecken"].append(
+                    {"blocker": praefix, "art": "loeschgrund-fehlt"})
+                continue
+            bericht["unheilbar"].append(
+                {"blocker": praefix, "grund": treffer["grund"]})
+        else:
+            bericht["luecken"].append(
+                {"blocker": praefix, "art": f"unbekannte-klasse:{klasse}"})
+
+    # Ein Klassen-Eintrag, den die Triage gar nicht mehr erzeugen kann, ist
+    # kein harmloser Rest: Er kann ein Löschrecht für einen Befund behaupten,
+    # den niemand mehr prüft (Kodex des Selbsttest-Runners).
+    for praefix in index:
+        if not any(p.startswith(praefix) for p in praefixe):
+            bericht["tote_eintraege"].append(
+                {"blocker": praefix, "art": "blocker-verschwunden"})
+    return bericht
+
+
+def loeschdeckung_text(b: dict) -> str:
+    zeilen = [
+        "# 🪦 Lösch-Deckung (Triage-Blocker ↔ Heiler ↔ Löschrecht)",
+        "",
+        f"- Blocker-Klassen der Triage: **{len(b['blocker'])}**",
+        f"- Heilbar (mit Heiler in der Kette): **{len(b['heilbar'])}** · "
+        f"unheilbar (löschbar, begründet): **{len(b['unheilbar'])}** · "
+        f"Menschensache: **{len(b['menschlich'])}** · "
+        f"Lücken: **{len(b['luecken'])}**",
+        "",
+    ]
+    for e in b["heilbar"]:
+        zeilen.append(f"- ✅ `{e['blocker']}` → heilbar via "
+                      + ", ".join(f"`{h}`" for h in e["heiler"]))
+    for e in b["menschlich"]:
+        zeilen.append(f"- 🧑 `{e['blocker']}` → Menschensache: {e['grund']}")
+    for e in b["unheilbar"]:
+        zeilen.append(f"- 🪦 `{e['blocker']}` → löschbar: {e['grund']}")
+    for e in b["luecken"]:
+        if e["art"] == "nicht-in-der-kette":
+            zeilen.append(
+                f"- 🛑 `{e['blocker']}` → als heilbar deklariert, aber "
+                f"{', '.join(e['heiler'])} läuft nicht in "
+                "reserve_finisher.HEALER_CHAIN. Der Entwurf bleibt damit "
+                "ewig blockiert – genau die Falle aus #594.")
+        elif e["art"] == "heilbar-ohne-heiler":
+            zeilen.append(f"- 🛑 `{e['blocker']}` → „heilbar\" ohne genannten "
+                          "Heiler ist eine Behauptung.")
+        elif e["art"] == "heiler-fehlt-im-repo":
+            zeilen.append(f"- 🛑 `{e['blocker']}` → Heiler "
+                          f"{', '.join(e['heiler'])} existiert nicht in "
+                          "scripts/.")
+        elif e["art"] == "loeschgrund-fehlt":
+            zeilen.append(f"- 🛑 `{e['blocker']}` → unheilbar ohne "
+                          "Begründung: Wer Text vernichtet, muss sagen warum.")
+        else:
+            zeilen.append(f"- 🛑 `{e['blocker']}` → {e['art']}: kein Eintrag "
+                          "in reserve_blocker_klassen.KLASSEN – niemand hat "
+                          "entschieden, wem dieser Befund gehört.")
+    for e in b["tote_eintraege"]:
+        zeilen.append(f"- 🛑 `{e['blocker']}` → {e['art']}: die Klasse "
+                      "behauptet ein Löschrecht für einen Befund, den die "
+                      "Triage nicht mehr erzeugt.")
+    if not b["luecken"] and not b["tote_eintraege"]:
+        zeilen += ["", "🎉 Jeder Triage-Blocker ist klassifiziert: heilbar "
+                       "(mit verdrahtetem Heiler), Menschensache oder "
+                       "begründet löschbar. Kein Entwurf kann mehr an einem "
+                       "Mangel sterben, den kein Werkzeug anfasst."]
+    zeilen += ["", "_Wahrheit: `draft_triage.classify()` (Blocker, gelesen), "
+                   "`reserve_blocker_klassen.KLASSEN` (Klasse + Heiler) und "
+                   "`reserve_finisher.HEALER_CHAIN` (Verdrahtung)._", ""]
+    return "\n".join(zeilen)
+
+
 def bericht_text(b: dict) -> str:
     zeilen = [
         "# 🧩 Reserve-Heiler-Deckung (Regel ↔ Heiler)",
@@ -345,6 +506,71 @@ def run_selftest() -> int:
     if not any(e["art"] == "heiler-fehlt-im-repo" for e in b6["luecken"]):
         fehler.append("Heiler-Tippfehler nicht erkannt")
 
+    # --- Lösch-Deckung (WF-B594): der Weg nach UNTEN ----------------------
+    sys.path.insert(0, str(SCRIPTS))
+    import reserve_blocker_klassen as bk
+
+    fix_klassen = (
+        {"praefix": "laenge:", "klasse": bk.HEILBAR,
+         "heiler": ("check_length.py",), "grund": "Verlängerer"},
+        {"praefix": "interne links:", "klasse": bk.HEILBAR,
+         "heiler": ("internal_linker.py",), "grund": "Linker"},
+        {"praefix": "titel:", "klasse": bk.UNHEILBAR, "heiler": (),
+         "grund": "Torso ohne redaktionelle Aussage"},
+    )
+    kette_ohne_linker = [("check_length.py", ["--fix"], "file")]
+
+    # 7) DER REALE BEFUND #594: „interne links:" ist als heilbar deklariert,
+    #    aber kein Werkzeug der Kette setzt je einen Link.
+    l1 = loeschdeckung(["laenge:", "interne links:", "titel:"], fix_klassen,
+                       kette_ohne_linker, SCRIPTS)
+    if ("interne links:", "nicht-in-der-kette") not in {
+            (e["blocker"], e["art"]) for e in l1["luecken"]}:
+        fehler.append(f"#594-Lücke (Blocker ohne Heiler) nicht erkannt: "
+                      f"{l1['luecken']}")
+
+    # 8) Mit verdrahtetem Linker ist dieselbe Tabelle grün.
+    l2 = loeschdeckung(["laenge:", "interne links:", "titel:"], fix_klassen,
+                       kette_ohne_linker + [("internal_linker.py",
+                                             ["--apply"], "file")], SCRIPTS)
+    if l2["luecken"] or l2["tote_eintraege"]:
+        fehler.append(f"verdrahteter Linker wird als Lücke gemeldet: {l2}")
+
+    # 9) Ein NEUER Triage-Blocker ohne Klasse ist eine Lücke (niemand hat
+    #    entschieden, wem er gehört) – und bleibt fail-closed unlöschbar.
+    l3 = loeschdeckung(["laenge:", "brandneu:"], fix_klassen,
+                       kette_ohne_linker, SCRIPTS)
+    if ("brandneu:", "unklassifiziert") not in {
+            (e["blocker"], e["art"]) for e in l3["luecken"]}:
+        fehler.append("neuer Triage-Blocker ohne Klasse nicht erkannt")
+    if bk.loeschbar(["brandneu: irgendwas"])[0]:
+        fehler.append("unklassifizierter Blocker darf nie löschbar sein")
+
+    # 10) Unheilbar ohne Begründung: Wer Text vernichtet, muss sagen warum.
+    l4 = loeschdeckung(["titel:"],
+                       ({"praefix": "titel:", "klasse": bk.UNHEILBAR,
+                         "heiler": (), "grund": "  "},),
+                       kette_ohne_linker, SCRIPTS)
+    if ("titel:", "loeschgrund-fehlt") not in {
+            (e["blocker"], e["art"]) for e in l4["luecken"]}:
+        fehler.append("Löschrecht ohne Begründung nicht erkannt")
+
+    # 11) Eine Klasse für einen Blocker, den die Triage nicht mehr erzeugt,
+    #     behauptet ein Löschrecht ins Leere.
+    l5 = loeschdeckung(["laenge:"], fix_klassen, kette_ohne_linker, SCRIPTS)
+    if "titel:" not in {e["blocker"] for e in l5["tote_eintraege"]}:
+        fehler.append(f"toter Klassen-Eintrag nicht erkannt: "
+                      f"{l5['tote_eintraege']}")
+
+    # 12) Und der scharfe Fall: das ECHTE Repo muss grün sein.
+    try:
+        echt = loeschdeckung()
+        if echt["luecken"] or echt["tote_eintraege"]:
+            fehler.append(f"Lösch-Deckung im echten Repo lückenhaft: "
+                          f"{echt['luecken']} {echt['tote_eintraege']}")
+    except Exception as exc:  # noqa: BLE001
+        fehler.append(f"Lösch-Deckung nicht auswertbar: {exc}")
+
     if fehler:
         print("🛑 RESERVE-HEILER-DECKUNG-SELFTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -352,7 +578,9 @@ def run_selftest() -> int:
         return 2
     print("✅ Selbsttest reserve_healer_coverage: fehlender Heiler (#349), "
           "neue Gate-Regel, begründete/lückenhafte Ausnahme, verschwundene "
-          "Regel und Heiler-Tippfehler werden erkannt.")
+          "Regel und Heiler-Tippfehler werden erkannt – und die Lösch-"
+          "Deckung (#594): Blocker ohne Heiler, unklassifizierter Blocker, "
+          "Löschrecht ohne Begründung, toter Eintrag.")
     return 0
 
 
@@ -366,14 +594,19 @@ def main() -> int:
         return run_selftest()
     try:
         b = deckung()
+        lb = loeschdeckung()
     except Exception as exc:  # noqa: BLE001 – fail-closed, aber erklärbar
         print(f"🛑 Deckungs-Wache nicht auswertbar: {exc}", file=sys.stderr)
         return 2
     if args.json:
-        print(json.dumps(b, ensure_ascii=False, indent=1))
+        print(json.dumps({"gate_deckung": b, "loesch_deckung": lb},
+                         ensure_ascii=False, indent=1))
     else:
         print(bericht_text(b))
-    return 1 if (b["luecken"] or b["tote_ausnahmen"]) else 0
+        print(loeschdeckung_text(lb))
+    offen = (b["luecken"] or b["tote_ausnahmen"]
+             or lb["luecken"] or lb["tote_eintraege"])
+    return 1 if offen else 0
 
 
 if __name__ == "__main__":

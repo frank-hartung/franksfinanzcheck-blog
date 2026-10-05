@@ -711,6 +711,42 @@ Zielbestand und Alarmschwelle der Content-Reserve haben **einen** Besitzer:
   `scripts/tests/test_reserve_pipeline.py`.
 - Vorfallbericht: `docs/INCIDENT-2026-09-26-bot-watchdog-393.md`.
 
+## Die Reserve füllt sich aus dem Bestand, nicht nur aus Neuproduktion (DAUERVORGABE, seit #594, 05.10.2026)
+
+Achter Vorfall der Klasse „Content-Reserve niedrig" (#251, #272, #281, #393,
+#446, #462, #520, #594). Am 05.10. waren **14 Entwürfe reif** und **0** im
+Pool: Die Reserve war nicht leer, sie war abgeschnitten. Wer den Vorrat nur
+auffüllt, repariert den Melder – nicht die Linie. Deshalb gilt dauerhaft:
+
+- **Übernahme ist ein Werkzeug, kein Handgriff.** `scripts/reserve_intake.py`
+  entscheidet nach Triage-Reife, Risikoklasse, Themen-Dublette, Eigentum und
+  Faktenfrische – und schreibt **jede** Entscheidung mit Grund nach
+  `data/reserve-intake.json`. Auch jede Ablehnung. Eine Übernahme ohne
+  Begründung ist ein Testfehler.
+- **YMYL bleibt beim Menschen.** Risikoklasse `erhoeht` (Versicherung,
+  Kredit, Steuer) wird nie automatisch in den Pool gezogen. Ein hoher Zähler
+  ist kein Qualitätsnachweis.
+- **Löschen braucht einen Beweis.** Unheilbare Klasse **und** zwei Läufe
+  Beleg (`RESERVE_JANITOR_HITS`) **und** Karenz
+  (`RESERVE_JANITOR_KARENZ_TAGE`). Trockenläufe zählen nicht, derselbe
+  `run_key` zählt einmal. Geschontes erscheint im `--md`-Bericht mit
+  Einzelbegründung – nichts verschwindet lautlos.
+- **Keine Heilung ohne geprüfte Deckung.** `reserve_blocker_klassen.py` ist
+  die einzige Stelle, die „heilbar" definiert; `reserve_healer_coverage.py`
+  prüft sie gegen die Kette. Fehlt die Deckung: Aufräumer rc=0 mit
+  `::error::` (der Nachtlauf darf daran nicht sterben), Finisher rc=1 ohne
+  Schreibzugriff.
+- **Identität schlägt Namensähnlichkeit.** Das Custody-Gedächtnis
+  schlüsselt datumslos; zwei Entwürfe können denselben Stamm tragen.
+  `--heal` setzt die Fahne nur auf dem **gemerkten** Slug, namensgleiche
+  Geschwister werden berichtet, nie adoptiert.
+- **CTA- und Offenlegungsblöcke sind für Heiler tabu.** Der interne Linker
+  verlinkt Fließtext, nie Werbekennzeichnung (`cta_ranges()`).
+- Verträge: `BestandsaufnahmeTests`, `LoeschRechtTests`,
+  `LoeschDeckungsWacheTests`, `TriageFensterTests`, `CustodyIdentitaetTests`,
+  `LinkerCtaSperrzoneTests` in `scripts/tests/test_reserve_pipeline.py`.
+- Vorgangsbericht: `BOT-WATCHDOG-RESERVE-594-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
+
 ## Release-Scorecard: die Produktionswahrheit (seit 03.10.2026)
 
 Das Repo hat viele Gates, Reports, Zustandsdateien und Wachen – stark, aber

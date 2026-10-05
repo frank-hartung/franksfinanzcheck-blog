@@ -1,8 +1,22 @@
 {
+  "7-gewohnheiten-fuer-finanzielle-freiheit": {
+    "seit": "2026-10-05",
+    "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+    "titel": "7 Gewohnheiten für finanzielle Freiheit",
+    "zuletzt_im_pool": "2026-10-05",
+    "zustand": "pool"
+  },
   "bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
     "seit": "2026-10-05",
     "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
-    "titel": "Büroausstattung steuerlich clever absetzen: – so vermeidest",
+    "titel": "Büroausstattung steuerlich clever absetzen: So geht's",
+    "zuletzt_im_pool": "2026-10-05",
+    "zustand": "pool"
+  },
+  "energie-update-was-sich-jetzt-fuer-dich-aendert": {
+    "seit": "2026-10-05",
+    "slug": "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert",
+    "titel": "Energie-Update: Was sich jetzt für dich ändert",
     "zuletzt_im_pool": "2026-10-05",
     "zustand": "pool"
   },
@@ -23,6 +37,22 @@
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+    "zustand": "pool"
+  },
+  "internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
+    "seit": "2026-10-05",
+    "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+    "titel": "Internet & DSL-Update: Was sich jetzt für dich ändert",
+    "zuletzt_im_pool": "2026-10-05",
+    "zustand": "pool"
+  },
+  "konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
+    "geheilt": 2,
+    "seit": "2026-10-05",
+    "slug": "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+    "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
+    "zuletzt_geheilt": "2026-10-05",
+    "zuletzt_im_pool": "2026-10-05",
     "zustand": "pool"
   },
   "last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {

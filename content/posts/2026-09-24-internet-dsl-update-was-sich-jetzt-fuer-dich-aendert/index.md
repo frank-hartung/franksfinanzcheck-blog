@@ -4,6 +4,8 @@ title: "Internet & DSL-Update: Was sich jetzt für dich ändert"
 description: "Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll."
 date: 2026-09-24T09:24:26Z
 draft: true
+reserve: true
+reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["News"]
 pillar: "internet-dsl"

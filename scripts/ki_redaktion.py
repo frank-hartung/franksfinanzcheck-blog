@@ -141,6 +141,17 @@ def cmd_promote(args) -> int:
     if not re.search(r"(?m)^draft:\s*true", content):
         print("ℹ Artikel ist bereits live bzw. nicht mehr Entwurf.")
         return 0
+    # DOPPELBESITZ-SPERRE (05.10.2026, WF-B594/#594): Seit der
+    # Reserve-Bestandsaufnahme kann ein KI-Entwurf bewusst in den Vorrat
+    # übernommen worden sein (`reserve: true`). Würde er zusätzlich in die
+    # Kadenz-Queue wandern, hätten zwei Fließbänder denselben Artikel – genau
+    # die Geisterzustände, die #387 gekostet haben.
+    if re.search(r"(?m)^reserve:\s*true\s*$", content):
+        print("❌ Dieser Entwurf gehört bereits dem Content-Vorrat "
+              "(reserve: true). Entweder die Reserve veröffentlicht ihn "
+              "regulär – oder du nimmst ihm zuerst die Fahne.")
+        print("   Bestand ansehen: python3 scripts/reserve_intake.py --md")
+        return 1
     if "TODO(KI-REDAKTION" in content:
         print("❌ Offline-Gerüst ohne Inhalt – erst fertigstellen, "
               "dann promoten.")

@@ -153,10 +153,28 @@ def fahne_setzen(text: str) -> str | None:
 
 
 def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> dict:
-    """Aktueller Zustand aller je bekannten Kandidaten + Befunde."""
+    """Aktueller Zustand aller je bekannten Kandidaten + Befunde.
+
+    IDENTITÄTS-REGEL (Reparatur WF-B594, 05.10.2026, Issue #594):
+    Der Ledger-Schlüssel ist datumslos (`schluessel()`), damit die
+    Veredelungs-Stufe Ordner umdatieren darf. Zwei Artikel können denselben
+    Stamm tragen – im Bestand etwa `2026-09-22-konto-karten-update-…` und
+    `2026-09-29-konto-karten-update-…`. Vor dieser Reparatur heilte
+    `--heal` die Fahne am FALSCHEN der beiden: Der Nachtlauf zog einen nie
+    übernommenen Entwurf still in den Pool, überschrieb im Ledger den
+    gemerkten Slug und umging damit das Übernahmeprotokoll
+    (`data/reserve-intake.json`). Genau diese Sorte stiller Pool-Mutation
+    produziert die Watchdog-Befunde, die dann Handarbeit verlangen.
+
+    Deshalb gilt: Hat das Ledger einen konkreten `slug` gemerkt, heilt nur
+    dieser eine Pfad. Namensgleiche Geschwister landen in `namensgleich`
+    und werden berichtet, nicht angefasst. Alt-Einträge ohne `slug` bleiben
+    wie bisher über den Stamm heilbar.
+    """
     pfad = ledger_pfad(pfad)
     ledger = ledger_laden(pfad)
     pool, verloren, ruecklaeufer, blockiert, zurueckgezogen = [], [], [], [], []
+    namensgleich: list[dict] = []
     gesehen = set()
     if posts_dir.is_dir():
         for index in sorted(posts_dir.glob("*/index.md")):
@@ -180,9 +198,16 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> di
                 ruecklaeufer.append(eintrag)
             elif zu == ZUSTAND_VERLOREN and ledger.get(
                     schluessel(slug), {}).get("zustand") == ZUSTAND_POOL:
+                merk = ledger[schluessel(slug)]
+                gemerkter_slug = merk.get("slug")
+                if gemerkter_slug and gemerkter_slug != slug:
+                    # NAMENSGLEICH, aber nicht derselbe Artikel (WF-B594).
+                    namensgleich.append({**eintrag,
+                                         "gemerkter_slug": gemerkter_slug})
+                    continue
                 # Der Kern-Befund: war im Pool, ist Entwurf, Fahne fehlt.
-                eintrag["seit"] = ledger[schluessel(slug)].get("seit")
-                eintrag["herkunft"] = ledger[schluessel(slug)].get("herkunft", "")
+                eintrag["seit"] = merk.get("seit")
+                eintrag["herkunft"] = merk.get("herkunft", "")
                 verloren.append(eintrag)
     # Kandidaten, die das Ledger kennt, die es aber nicht mehr gibt.
     verwaist = [kennung for kennung, e in ledger.items()
@@ -190,7 +215,7 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> di
                 and e.get("zustand") == ZUSTAND_POOL]
     return {"pool": pool, "verloren": verloren, "ruecklaeufer": ruecklaeufer,
             "blockiert": blockiert, "zurueckgezogen": zurueckgezogen,
-            "verwaist": sorted(verwaist)}
+            "verwaist": sorted(verwaist), "namensgleich": namensgleich}
 
 
 def heilen(posts_dir: Path = POSTS, *, pfad: Path | None = None,
@@ -266,6 +291,14 @@ def markdown(lage: dict) -> str:
                       "danach wieder auf `draft` gesetzt")
         for e in lage["ruecklaeufer"]:
             zeilen.append(f"  - `{e['slug']}`")
+    if lage.get("namensgleich"):
+        zeilen.append(f"- **Namensgleich, nicht angefasst:** "
+                      f"{len(lage['namensgleich'])} – gleicher Slug-Stamm wie "
+                      "ein Pool-Kandidat, aber ein anderer Artikel "
+                      "(Übernahme nur über `reserve_intake.py`)")
+        for e in lage["namensgleich"]:
+            zeilen.append(f"  - `{e['slug']}` (Gedächtnis kennt "
+                          f"`{e['gemerkter_slug']}`)")
     if lage.get("verwaist"):
         zeilen.append(f"- **Verschwunden:** {len(lage['verwaist'])} "
                       "(im Gedächtnis, aber keine Datei mehr)")
@@ -287,6 +320,10 @@ def heal_quiet(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> int:
     for e in lage.get("geheilt", []):
         print(f"🧾 Reserve-Fahne wiederhergestellt: {e['slug']} "
               f"(war im Pool, Fahne fehlte – Entwurf unverändert)")
+    for e in lage.get("namensgleich", []):
+        print(f"ℹ Namensgleicher Entwurf geschont: {e['slug']} – das "
+              f"Gedächtnis meint `{e['gemerkter_slug']}`. Keine Fahne "
+              "gesetzt; Übernahme läuft nur über reserve_intake.py.")
     if lage.get("ruecklaeufer"):
         print(f"ℹ Rückläufer im Bestand ({len(lage['ruecklaeufer'])}): "
               "veröffentlicht und wieder auf draft gesetzt – "

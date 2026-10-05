@@ -4,6 +4,8 @@ description: "Energie-Update: Was sich jetzt für dich ändert – aktuelle Eino
 date: 2026-09-23T08:10:00Z
 lastmod: 2026-09-25
 draft: true
+reserve: true
+reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Stromkosten senken"]
 categories: ["News"]
 keywords: ["Energie-Update: Was sich jetzt für dich ändert", "Energie-Update", "Energie Update"]

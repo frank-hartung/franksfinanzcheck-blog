@@ -4,6 +4,8 @@ title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "Diese 7 Gewohnheiten helfen dir, Fixkosten zu senken, Rücklagen aufzubauen und finanzielle Freiheit Schritt für Schritt realistischer zu machen."
 date: 2026-09-21T10:05:51Z
 draft: true
+reserve: true
+reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
