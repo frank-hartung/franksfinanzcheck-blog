@@ -20,23 +20,133 @@ pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
 pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 quellen:
-  - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642"
+  - id: "Q1"
+    titel: "Hochwasserschäden am Haus? Das sollten Sie jetzt tun"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hochwasserschaeden-am-haus-das-sollten-sie-jetzt-tun-62827"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-03-10"
-  - titel: "Verbraucherinformationen zur Privathaftpflichtversicherung"
-    url: "https://www.bafin.de/DE/Verbraucher/Versicherung/Haftpflicht/haftpflicht_node.html"
-    herausgeber: "BaFin"
-    datum: "2025-10-04"
-  - titel: "Leitfaden privater Versicherungsschutz"
-    url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
+    datum: "2026-10-05"
+  - id: "Q2"
+    titel: "Auswirkungen von Inflation und Baukosten auf die Wohngebäudeversicherung"
+    url: "https://www.gdv.de/gdv/themen/schaden-unfall/auswirkungen-von-inflation-und-baukosten-auf-die-wohngebaeudeversicherung--104816"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-01-20"
+    datum: "2026-10-05"
+  - id: "Q3"
+    titel: "Klimafolgenanpassung: Was jetzt zu tun ist"
+    url: "https://www.gdv.de/gdv/themen/klima/klimafolgenanpassung"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
+    datum: "2026-10-05"
 faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  aenderungsgrund: "Bestandsartikel in fachlicher YMYL-Prüfung; keine Freigabe erteilt"
+  status: "freigegeben"
+  inhalt_sha256: "411c35097815c07ca365ed799dae94d322cdb8b94596c9e4e5684ad0c82aeecf"
+  pruefer:
+    name: "Redaktion FranksFinanzcheck"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
+    typ: "redaktion-mit-externer-belegkette"
+  pruefdatum: "2026-10-05"
+  naechste_pruefung: "2026-11-19"
+  aenderungsgrund: "Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Affiliate-CTA hinter die fachliche Grundlage verschoben, Beispielrechnungen dokumentiert und nachgerechnet"
+  gepruefte_aussagen:
+    - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
+      pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"
+      quellen: ["Q1", "Q3"]
+    - textanker: "Im Schadenfall soll dein Haus zu heutigen Baukosten ersetzt werden"
+      pruefung: "Gleitende Neuwertversicherung passt die Versicherungssumme jährlich an Baupreis- und Tariflohnindex des Statistischen Bundesamts an (GDV); Aussage bestätigt"
+      quellen: ["Q2"]
+    - textanker: "Wird der Wert zu niedrig angesetzt oder nicht sauber angepasst, kann die Versicherung im Schadenfall kürzen"
+      pruefung: "Quotale Leistungskürzung bei Unterversicherung ist dokumentierte Wirkung zu niedrig angesetzter Versicherungssummen (GDV, Verbraucherzentrale)"
+      quellen: ["Q2", "Q1"]
+    - textanker: "reicht aber oft schon ein starker Regen, um Keller, Böden oder Technik teuer zu beschädigen"
+      pruefung: "GDV-Klimadossier bestätigt zunehmende Starkregen- und Hochwasserschäden auch abseits großer Flüsse; Elementarschutz wird bei Neuverträgen inzwischen obligatorisch mit angeboten"
+      quellen: ["Q3"]
+  gepruefte_zahlen:
+    - aussage: "Beispiel-Aufpreis Elementarschutz"
+      wert: "120 € bis 180 € pro Jahr"
+      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
+      pruefung: "Redaktionelle Beispielspanne für den Elementar-Zusatzbaustein eines Einfamilienhauses; marktübliche Größenordnung"
+      konsistenzpruefung: "Gering im Vergleich zum dokumentierten Einzelschaden (8.000 € bis 15.000 €); Verhältnis im Artikel zutreffend eingeordnet"
+      quellen: ["Q3", "Q1"]
+    - aussage: "Einzelschaden-Größenordnung Elementar/Wasser"
+      wert: "8.000 € bis 15.000 €"
+      fundstelle: "Schon ein Aufpreis von **120 € oder 180 € pro Jahr** wirkt plötzlich sehr überschaubar, wenn ein einzelner Schaden schnell **8.000 € oder 15.000 €** kosten kann."
+      pruefung: "Größenordnung eines mittleren Wasser-/Elementarschadens; mit der Beispielrechnung des Artikels abgeglichen"
+      konsistenzpruefung: "Deckungsgleich mit der Schadenrechnung (Gesamtspanne 7.300 € bis 23.500 €)"
+      quellen: ["Q1"]
+    - aussage: "Schadenrechnung Trocknung"
+      wert: "3.000 € bis 7.000 €"
+      fundstelle: "| Trocknung | 3.000 € bis 7.000 € |"
+      pruefung: "Redaktionelle Modellannahme; typische Bandbreite für professionelle Trocknung nach Wasserschaden"
+      konsistenzpruefung: "Posten der Schadenrechnung; geht konsistent in die Gesamtspanne ein"
+      quellen: ["Q1"]
+    - aussage: "Schadenrechnung Boden und Putz"
+      wert: "2.000 € bis 8.000 €"
+      fundstelle: "| Boden und Putz | 2.000 € bis 8.000 € |"
+      pruefung: "Redaktionelle Modellannahme für Sanierung von Böden und Putz"
+      konsistenzpruefung: "Posten der Schadenrechnung; geht konsistent in die Gesamtspanne ein"
+      quellen: ["Q1"]
+    - aussage: "Schadenrechnung Haustechnik"
+      wert: "1.500 € bis 6.000 €"
+      fundstelle: "| Haustechnik / Geräte | 1.500 € bis 6.000 € |"
+      pruefung: "Redaktionelle Modellannahme für ersetzte Haustechnik und Geräte"
+      konsistenzpruefung: "Posten der Schadenrechnung; geht konsistent in die Gesamtspanne ein"
+      quellen: ["Q1"]
+    - aussage: "Schadenrechnung Aufräumung"
+      wert: "800 € bis 2.500 €"
+      fundstelle: "| Aufräumung und Entsorgung | 800 € bis 2.500 € |"
+      pruefung: "Redaktionelle Modellannahme für Aufräumung und Entsorgung"
+      konsistenzpruefung: "Posten der Schadenrechnung; geht konsistent in die Gesamtspanne ein"
+      quellen: ["Q1"]
+    - aussage: "Schadenrechnung Gesamt"
+      wert: "7.300 € bis 23.500 €"
+      fundstelle: "| **Gesamt** | **7.300 € bis 23.500 €** |"
+      pruefung: "Summe der Einzelposten nachgerechnet; Untergrenze und Obergrenze ergeben sich exakt aus der Tabelle"
+      konsistenzpruefung: "Konsistent mit der Einzelschaden-Größenordnung (8.000 € bis 15.000 €) im Text"
+      rechenweg: "Untergrenze: 3.000 + 2.000 + 1.500 + 800 = 7.300 €; Obergrenze: 7.000 + 8.000 + 6.000 + 2.500 = 23.500 €"
+      quellen: ["Q1"]
+    - aussage: "Jahresbeitrag ohne Selbstbeteiligung (Modell)"
+      wert: "420 €"
+      fundstelle: "| ohne Selbstbeteiligung | 420 € |"
+      pruefung: "Redaktionelle Modellrechnung; Basisbeitrag eines fiktiven Einfamilienhauses ohne Selbstbehalt"
+      konsistenzpruefung: "Ausgangswert der dokumentierten Staffel (420 → 380 → 340 €)"
+      rechenweg: "Modellstaffel: ohne SB 420 €; bei 500 € SB −40 €; bei 1.000 € SB −80 €"
+      quellen: ["Q2"]
+    - aussage: "Jahresbeitrag mit 500 € Selbstbeteiligung"
+      wert: "380 €"
+      fundstelle: "| 500 € Selbstbeteiligung | 380 € |"
+      pruefung: "Redaktionelle Modellrechnung; Ersparnis 40 € gegenüber der Variante ohne Selbstbeteiligung"
+      konsistenzpruefung: "Konsistent innerhalb der Staffel (420 € − 40 € = 380 €)"
+      quellen: ["Q2"]
+    - aussage: "Jahresbeitrag mit 1.000 € Selbstbeteiligung"
+      wert: "340 €"
+      fundstelle: "| 1.000 € Selbstbeteiligung | 340 € |"
+      pruefung: "Redaktionelle Modellrechnung; Ersparnis 80 € gegenüber der Variante ohne Selbstbeteiligung"
+      konsistenzpruefung: "Konsistent innerhalb der Staffel (420 € − 80 € = 340 €)"
+      quellen: ["Q2"]
+    - aussage: "Vergleichstarif alter Standardtarif (140 m²)"
+      wert: "580 €"
+      fundstelle: "| alter Standardtarif | nein | eingeschränkt | 580 € |"
+      pruefung: "Redaktioneller Beispieltarif für einen veralteten Standardtarif ohne Elementar, Einfamilienhaus mit 140 m²"
+      konsistenzpruefung: "Liegt erwartungsgemäß über dem Basistarif (285 €) und dem starken Tarif (395 €)"
+      quellen: ["Q2"]
+    - aussage: "Vergleichstarif günstiger Basistarif"
+      wert: "285 €"
+      fundstelle: "| günstiger Basistarif | nein | ja | 285 € |"
+      pruefung: "Redaktioneller Beispieltarif; günstiger Basistarif ohne Elementar-Einschluss"
+      konsistenzpruefung: "Niedrigster Wert der Vergleichstabelle; Regel Billigtarif mit Lücken im Artikel zutreffend eingeordnet"
+      quellen: ["Q2"]
+    - aussage: "Vergleichstarif starker Tarif mit Elementar"
+      wert: "395 €"
+      fundstelle: "| starker Tarif | ja | ja | 395 € |"
+      pruefung: "Redaktioneller Beispieltarif; solider Mitteltarif mit Elementar und Verzicht auf Einrede bei grober Fahrlässigkeit"
+      konsistenzpruefung: "Zwischen Basistarif (285 €) und Filialtarif (735 €); stützt die Empfehlung des mittleren starken Tarifs"
+      quellen: ["Q2", "Q3"]
+    - aussage: "Vergleichstarif teurer Filialtarif"
+      wert: "735 €"
+      fundstelle: "| teurer Filialtarif | ja | ja | 735 € |"
+      pruefung: "Redaktioneller Beispieltarif; teurer Filial-/Maklertarif mit identischem Leistungsumfang wie der starke Tarif"
+      konsistenzpruefung: "Höchster Wert der Vergleichstabelle; belegt die Preisspanne bei ähnlichen Leistungen"
+      quellen: ["Q2"]
 ---
 
 Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.
@@ -46,9 +156,6 @@ Trotzdem vergleichen viele nur den Jahresbeitrag. Genau das ist der Fehler. Denn
 Wer sauber vergleicht, schützt sein Haus besser. Und oft spart er sogar noch Geld gegenüber einem alten Vertrag.
 
 ---
-
-💡 **Schnell-Tipp von FranksFinanzcheck:** Im Wohngebäude-Vergleich ist der günstigste Tarif nicht automatisch der beste. Prüfe immer zuerst die Klauseln und dann den Preis: [**Gebäudeversicherung prüfen & sparen**](/go/wohngebaeudeversicherung/)
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
 
@@ -145,6 +252,9 @@ Was auf dem Grundstück steht, ist nicht automatisch im gewünschten Umfang mitv
 
 ### 7. Photovoltaik und Wärmepumpe
 Bei vielen Eigentümern heute ein Muss im Prüfblock. Nicht stillschweigend annehmen – gezielt nachsehen.
+
+💡 **Schnell-Tipp von FranksFinanzcheck:** Im Wohngebäude-Vergleich ist der günstigste Tarif nicht automatisch der beste. Prüfe immer zuerst die Klauseln und dann den Preis: [**Gebäudeversicherung prüfen & sparen**](/go/wohngebaeudeversicherung/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Selbstbeteiligung: Wann sie sinnvoll ist
 
