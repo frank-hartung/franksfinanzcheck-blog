@@ -43,9 +43,12 @@
 #       können dieses Skript nicht verlassen.
 #    5. Anwenden (eng begrenzt, deshalb gefahrlos automatisierbar):
 #       nur die Frontmatter-Felder `faktencheck` (Datum der Prüfung)
-#       und `quellen` (Belegkette). Der ARTIKELTEXT wird NIE
-#       automatisch umgeschrieben; fachliche Befunde landen in
-#       data/faktenfrische_queue.json + FAKTENFRISCHE-REPORT.md.
+#       und `quellen` (Belegkette). Ein von publish_gate gesetzter
+#       `faktenfrische:`-Hold darf nach erfolgreicher Recherche außerdem
+#       ausschließlich in die Re-Queue zurückkehren – nie direkt live.
+#       Der ARTIKELTEXT wird NIE automatisch umgeschrieben; fachliche
+#       Befunde landen in data/faktenfrische_queue.json +
+#       FAKTENFRISCHE-REPORT.md.
 #       `lastmod` bleibt unangetastet (keine Frische-Inflation).
 #
 #  NUTZUNG
@@ -241,6 +244,7 @@ def lade_artikel(pfad: str) -> dict | None:
         "keywords": keywords,
         "draft": fm_wert(fm, "draft").lower() == "true",
         "reserve": fm_wert(fm, "reserve").lower() == "true",
+        "cadence_grund": fm_wert(fm, "cadence_grund"),
         "datum": datum_von(fm_wert(fm, "date")),
         "faktencheck": datum_von(fm_wert(fm, "faktencheck")),
         "quellen_vorhanden": bool(re.search(r"^quellen:\s*$", fm, re.MULTILINE)),
@@ -792,6 +796,29 @@ def artikel_anwenden(art: dict, quellen: list[dict], datum: str,
     return aenderungen
 
 
+def rearm_faktenfrische_hold(art: dict, beleg: str) -> bool:
+    """Reife Fakten-Holds nur nach echtem Faktencheck in die Re-Queue legen.
+
+    `publish_gate` markiert fehlende/überfällige Recherche mit dem eindeutigen
+    Präfix ``faktenfrische:`` und hält den Inhalt bewusst ohne
+    `cadence_wait`. Sobald dieser Lauf einen neuen Faktencheck geschrieben
+    hat, darf nur diese maschinenverwaltete Hold-Klasse wieder warten; manuelle
+    Entwürfe und andere redaktionelle Holds bleiben unangetastet. Es gibt
+    weiterhin keinen Direkt-Publish – die Kadenz und das vollständige Gate
+    entscheiden im nächsten Slot.
+    """
+    if not str(art.get("cadence_grund") or "").startswith("faktenfrische:"):
+        return False
+    try:
+        import park_state
+        grund = (f"faktenfrische aufgehoben: {beleg} – Re-Queue für "
+                 "vollständigen Publish-Gate-Lauf")
+        return bool(park_state.rearm(art["pfad"], grund))
+    except Exception as exc:  # noqa: BLE001 – Hold bleibt sicher stehen
+        print(f"  ⚠ Faktenfrische-Hold nicht rearmt ({art.get('slug')}): {exc}")
+        return False
+
+
 # ----------------------------------------------------------------------
 # Report
 # ----------------------------------------------------------------------
@@ -1025,6 +1052,10 @@ def main() -> int:
             aenderungen = artikel_anwenden(art, quellen, heute().isoformat(), trocken=False)
             for a in aenderungen:
                 print(f"  ✍ {a}")
+            if any(a.startswith("faktencheck:") for a in aenderungen):
+                if rearm_faktenfrische_hold(art, "; ".join(aenderungen)):
+                    aenderungen.append("faktenfrische-Hold: Re-Queue aktiviert")
+                    print("  ♻ Faktenfrische-Hold: Re-Queue aktiviert (kein Direkt-Publish)")
         elif quellen:
             print(f"  (Trockenlauf) {len(quellen)} Belege bereit – mit --apply schreiben")
 

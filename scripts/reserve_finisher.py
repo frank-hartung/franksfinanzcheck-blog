@@ -284,6 +284,11 @@ HEALER_CHAIN = [
     # erst erzeugt (schneller, kein Cover-Churn, keine KI-/Render-Kosten).
     ("generate_covers.py", ["--slug", "{slug}"], "slug"),
     # --- Phase 3 (Sofort-Optimierung, ohne internal_linker) ---
+    # WF-54C4/#583: Ein Reserve-Artikel darf nicht erst beim Deploy auffallen,
+    # wenn seine Erstrecherche fehlt. Der echte Rechercheweg läuft
+    # datei-bezirkelt; ohne belastbaren Beleg bleibt der Kandidat Entwurf und
+    # die Zertifizierung meldet den konkreten Grund.
+    ("faktenfrische.py", ["--apply"], "file"),
     ("meta_optimizer.py", ["--fix", "--ai"], "file"),
     ("check_titles.py", ["--fix"]),
     # Cover-Referenzen prüfen/heilen. Läuft korpusweit (er hält sich an die
@@ -358,8 +363,14 @@ PROTECTED_ROOTS = ("content", "static", "data", "layouts", "assets",
 # Maschinengenerierte Artefakte, die die Kette absichtlich neu schreibt
 # (werden von jedem Lauf komplett neu erzeugt; letzter Schreiber gewinnt,
 # siehe scripts/git_sync.sh).
-ALLOWED_ARTIFACTS = ("data/reserve-readiness.json",
-                     "data/covers_manifest.json")
+ALLOWED_ARTIFACTS = (
+    "data/reserve-readiness.json",
+    "data/covers_manifest.json",
+    # Faktenfrische schreibt beim datei-bezirkelt ausgeführten Recherchelauf
+    # den maschinenlesbaren Queue-Zustand. Die eigentlichen Dossiers werden
+    # unten nur für den jeweiligen Pool-Slug freigegeben.
+    "data/faktenfrische_queue.json",
+)
 QUARANTINE = Path(tempfile.gettempdir()) / "reserve-isolation-quarantine"
 
 
@@ -401,6 +412,12 @@ def allowed_paths_for(targets: list) -> set:
         slug = index.parent.name
         allowed.add(f"content/posts/{slug}")
         allowed.add(f"static/images/covers/{slug}")
+        # Faktenfrische läuft mit --file genau auf diesem Kandidaten. Ohne
+        # diese beiden Pfade würde der Isolation-Wächter den gerade erzeugten
+        # Belegnachweis in Quarantäne verschieben und den Faktencheck von
+        # seiner Beweisbasis trennen.
+        allowed.add(f"data/research/artikel/{slug}.md")
+        allowed.add(f"data/research/artikel/{slug}.json")
     return allowed
 
 

@@ -77,6 +77,10 @@ PUBLISH_GATE = SCRIPTS / "publish_gate.py"
 #  (`<regel>_failures`); sie werden dort GELESEN, nicht abgetippt.
 # ---------------------------------------------------------------------------
 REGEL_HEILER: dict[str, tuple[str, ...]] = {
+    # Artikelgenaue Erst-/Folgerecherche: fehlende Faktennachweise werden
+    # nicht heuristisch simuliert, sondern mit dem echten Rechercheweg
+    # nachgezogen. Bleibt die Recherche ohne Beleg, blockiert das Gate.
+    "faktenfrische_failures": ("faktenfrische.py",),
     # Länge/Struktur (Floor) – deterministischer Verlängerer, entwurfsfähig.
     "check_length_failures": ("check_length.py",),
     # SEO-Audit: Meta-Längen/Felder, Titel, Alt-Texte.

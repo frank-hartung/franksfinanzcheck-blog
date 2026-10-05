@@ -267,6 +267,7 @@ class R5HoldRecoveryTests(unittest.TestCase):
             with patch.object(pg, 'todays_live_candidates', return_value=[slug]), \
                  patch.object(pg, 'check_length_failures', return_value=(set(), None)), \
                  patch.object(pg, 'seo_audit_failures', return_value=(set(), None)), \
+                 patch.object(pg, 'faktenfrische_failures', return_value=({}, None, False)), \
                  patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
                  patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
                  patch.object(pg, 'affiliate_intent_failures', return_value=({}, None, False)), \

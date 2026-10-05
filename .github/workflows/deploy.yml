@@ -542,7 +542,13 @@ jobs:
       - name: Spam-Gate (Blog, RSS-Feed, CSV, API – selbstheilend)
         run: python3 scripts/spam_guard.py --check blog feed csv api --fix || echo "⚠ Spam-Gate – Funde in SPAM-REPORT.md (selbstgeheilt, kein Content-Verlust)"
 
-      - name: Publish-Gate (harte Qualitäts-, Affiliate- und YMYL-Freigaben)
+      # Faktenfrische ist eine Veröffentlichungs-Voraussetzung, nicht nur
+      # ein nachgelagerter Report: Der Collector wird im Publish-Gate und in
+      # der Release-Scorecard gemeinsam genutzt (WF-54C4/#583).
+      - name: Faktenfrische-Selbsttest (Recherchevertrag vor Veröffentlichung)
+        run: python3 scripts/faktenfrische.py --selftest
+
+      - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
 
       # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
