@@ -536,9 +536,30 @@ history:
     #Mietwagen #Reise #LastMinuteUrlaub'
   ref: '117383431263250864'
   ai: false
+- posted_at: '2026-10-05T14:22:52.281444+02:00'
+  channel: mastodon
+  slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
+  title: 'Gasabschlag berechnen: So planst du die Heizsaison richtig'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117388279584058422
+  ok: true
+  text: 'Gasabschlag berechnen?
+
+
+    Dein Gasabschlag ist eine Vorauszahlung auf die Jahresrechnung: Multipliziere
+    deinen Jahresverbrauch in kWh mit dem Arbeitspreis, addiere zwölf Monate Grundpreis
+    und …
+
+
+    https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Gasrechnung #Heizkosten #GasabschlagBerechnen #GasAbschlagSenken'
+  ref: '117388279584058422'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-04T22:13:43.308427+02:00'
+updated_at: '2026-10-05T14:23:16.787842+02:00'

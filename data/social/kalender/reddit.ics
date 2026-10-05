@@ -6,11 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
+UID:reddit:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-05@fra
+ nksfinanzcheck.de
+DTSTAMP:20261005T122317Z
+DTSTART:20261005T121500Z
+DTEND:20261005T123000Z
+SUMMARY:Reddit: DSL-Wechselbonus sichern: So sparst du beim Internetve
+ rtrag (takeaway)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: takeaway\nKanal: R
+ eddit\nArtikel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wec
+ hselbonus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:reddit:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaet
- sommer-vor:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261004T201344Z
-DTSTART:20261018T121500Z
-DTEND:20261018T123000Z
+ sommer-vor:takeaway:2026-10-19@franksfinanzcheck.de
+DTSTAMP:20261005T122317Z
+DTSTART:20261019T121500Z
+DTEND:20261019T123000Z
 SUMMARY:Reddit: Gasrechnung prüfen: Fehler finden und Nachzahlungen (t
  akeaway)
 DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
