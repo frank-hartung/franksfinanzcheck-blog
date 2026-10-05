@@ -53,7 +53,7 @@ Inbox-Verzeichnis) übergeben, gilt ein verschärfter Vertrag, erzwungen durch
    die Kombination aus Kanonisierung und Deskriptor-Übergabe.
 
 
-## Zugangs-Namensvertrag (seit Code-Scanning-Alert #78, 05.10.2026)
+## Zugangs-Namensvertrag und Klartext-Wache (Code-Scanning-Alerts #78/#80, 05.10.2026)
 
 Der Betrieb veröffentlicht laufend Statusberichte (Social-Preflight, Cockpit,
 Redaktions-Scorecard, Governance-Kontrakt, Schaltwerk-Ereignisse) nach STDOUT,
@@ -82,11 +82,21 @@ ist, gilt:
    Unterdrückung – sie stehen auch nicht in der Unterdrückungs-Whitelist der
    CodeQL-Wache. Funde dieser Klasse werden an der Quelle geheilt.
 
-Erzwungen wird der Vertrag durch `scripts/tests/test_zugangs_namensvertrag.py`
-(21 Tests, drei Beine): Er baut die CodeQL-Heuristik 1:1 nach und prüft damit
-rekursiv jeden Schlüssel der erzeugten Berichtsstrukturen; er vergiftet
-zusätzlich alle Zugangsvariablen mit einem Marker, der in keiner erzeugten
-Ausgabe (Konsole, JSON, Markdown, Historie) auftauchen darf; und er verbietet
-Clear-Text-Unterdrückungen im gesamten Bestand. Alle Beine tragen Gegenproben,
-die fehlschlagen, wenn der Vertrag selbst stumpf wird.
-Hintergrund und Fundstellen: `CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
+Erzwungen wird der Vertrag auf vier unabhängigen Ebenen:
+
+- `scripts/tests/test_zugangs_namensvertrag.py` baut die CodeQL-Heuristik
+  nach, prüft rekursiv die erzeugten Berichtsstrukturen, vergiftet alle
+  Zugangsvariablen mit einem Marker und verbietet Clear-Text-Unterdrückungen.
+- `scripts/clear_text_logging_guard.py` verfolgt sensible Quellen
+  inhaltsbezogen bis zu Logging- und Klartext-Speichersenken über **alle**
+  versionierten sowie neuen, nicht ignorierten Python-Dateien. Ein echter
+  `# codeql[...]`-Kommentar für die beiden Regeln ist selbst ein Befund.
+- `scripts/tests/test_clear_text_logging_security.py` verankert Eigenprüfung,
+  Repository-Nullbefund und den Namen der geheilten #80-Fundstelle.
+- Der eigenständige CI-Job `klartext-wache` läuft fail-closed und unabhängig
+  von CodeQL-SARIF-Upload und GitHub-Default-Setup.
+
+Jede Wache trägt Positiv- und Gegenproben; eine stumpf gewordene Kontrolle wird
+somit selbst rot. Beweisführung und Runbook:
+`CODE-SCANNING-ALERT-78-DAUERHEILUNG-PREMIUM-2026-10-05.md` und
+`CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md`.

@@ -58,6 +58,7 @@ import os
 import re
 import sys
 import tempfile
+import tokenize
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
@@ -203,6 +204,8 @@ class HeuristikIstScharf(unittest.TestCase):
             "zugangsalter_proven", "zugangsalter_entries",
             # neue Funktions-/Parameternamen
             "c9_leak_wache", "bucket_zugaenge", "wachen_quelltext",
+            "rueckleitung_findings", "RUECKLEITUNG_SEITE",
+            "RUECKLEITUNG_ZWILLING", "RUECKLEITUNG_MARKEN",
             # stabile JSON-Oberfläche
             "required_env_names", "missing_env_names",
             "required_var_names", "missing_var_names",
@@ -486,10 +489,16 @@ class Unterdrueckungsverbot(unittest.TestCase):
             if pfad.resolve() == selbst:
                 continue
             text = pfad.read_text(encoding="utf-8", errors="replace")
-            for zeile_nr, zeile in enumerate(text.splitlines(), 1):
+            # Nur echte Python-Kommentare zählen. Die Klartext-Wache enthält
+            # die Marker bewusst in Docstring und Test-Fixture; ein bloßer
+            # Substring-Scan würde den Wächter mit seinem Lehrstoff verwechseln.
+            for token in tokenize.generate_tokens(io.StringIO(text).readline):
+                if token.type != tokenize.COMMENT:
+                    continue
                 for verboten in self.VERBOTEN:
-                    if verboten in zeile:
-                        befunde.append(f"{pfad.relative_to(ROOT)}:{zeile_nr}")
+                    if verboten in token.string:
+                        befunde.append(
+                            f"{pfad.relative_to(ROOT)}:{token.start[0]}")
         self.assertEqual(
             befunde, [],
             "Clear-Text-Funde werden an der Quelle geheilt, nie unterdrückt: "

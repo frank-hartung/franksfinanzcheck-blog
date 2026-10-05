@@ -310,7 +310,7 @@ class QuellvertragTests(unittest.TestCase):
     def test_collectoren_vorhanden(self):
         import publish_gate as pg
         for name in ("check_length_failures", "seo_audit_failures",
-                     "affiliate_profi_failures", "affiliate_integrity_failures",
+                     "faktenfrische_failures", "affiliate_profi_failures", "affiliate_integrity_failures",
                      "affiliate_intent_failures", "offenlegung_failures",
                      "editorial_review_failures", "title_integrity_failures",
                      "keyword_failures", "readability_failures",

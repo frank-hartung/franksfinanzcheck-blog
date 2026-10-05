@@ -24,6 +24,12 @@
 #   · push auf main         : Analyse + SARIF-Upload in die Security-Tab
 #   · montags 03:30 UTC     : Freshness-Lauf (neue Queries finden alten Code)
 #
+# LEHRE AUS ALERT #80: Solange das Default-Setup parallel aktiv ist, kann
+# GitHub den SARIF-Upload dieser Advanced-Konfiguration ablehnen. Deshalb läuft
+# zusätzlich `klartext-wache`: eine lokale, fail-closed Kontrolle beider
+# Python-Clear-Text-Regeln über den ganzen Bestand. Sie hängt weder vom Upload
+# noch von der GitHub-Konfiguration ab und verbietet Inline-Unterdrückungen.
+#
 # Gate-Regel: Jedes Finding mit Security-Severity (js/xss, py/clear-text-…
 # usw.) lässt den Lauf FEHLSCHLAGEN und blockiert damit den Pull Request.
 # Reine Qualitäts-Findings (z. B. py/redos auf uncritical-Pfaden) werden
@@ -309,3 +315,25 @@ jobs:
             echo "::error::Sicherheits-Gate verletzt: ${SECURITY} Security-Fundstellen. Beheben (kein Dismiss ohne Begründung – siehe CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md)."
             exit 1
           fi
+
+  klartext-wache:
+    name: Klartext-Wache (unabhängig vom SARIF-Upload)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Eigenprüfung (Positiv- und Gegenproben)
+        run: python3 scripts/clear_text_logging_guard.py --selftest
+
+      - name: Alle Python-Dateien auf Klartext-Flüsse prüfen
+        run: python3 scripts/clear_text_logging_guard.py
+
+      - name: Sicherheitsvertrag zu Alert 77/78/80
+        run: python3 -m unittest scripts.tests.test_clear_text_logging_security -v

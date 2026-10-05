@@ -125,6 +125,7 @@ ERG_CODE_ZU_CHECK = {
 PUBLISH_GATE_HART_FAMILIEN = {
     "T1-zeichenlaenge": "check_length.py",
     "T2-seo-audit": "seo_audit.py",
+    "F1-faktenfrische": "faktenfrische.py",
     "T3-titel-r5": "check_titles.py",
     "T4-keyword-score": "keyword_optimizer.py",
     "T5-lesbarkeit": "readability_check.py",
@@ -524,6 +525,18 @@ def sammle(live_slugs: list[str], heute: dt.date) -> tuple[dict, dict, dict]:
         tool_fehler["RD1-duplikate"] = f"Duplikat-Wache nicht auswertbar: {exc}"
 
     # ---------- Faktenfrische (Faktenalter + nächste Überprüfung) ----------
+    # Die Scorecard und das Publish-Gate benutzen denselben Collector. Damit
+    # kann ein best-effort-Recherche-Schritt keinen Zustand erzeugen, in dem
+    # der Publish-Pfad grün und erst die Scorecard rot ist (WF-54C4 / #583).
+    try:
+        f1_fail, f1_warn, f1_tool = publish_gate.faktenfrische_failures(
+            live_slugs, stichtag=heute)
+        if f1_tool:
+            tool_fehler["F1-faktenfrische"] = f1_warn or "Faktenfrische nicht beweisbar"
+    except Exception as exc:  # noqa: BLE001 – fail-closed, nie still grün
+        f1_fail, f1_tool = {}, True
+        tool_fehler["F1-faktenfrische"] = f"Faktenfrische nicht auswertbar: {exc}"
+
     try:
         faktenfrische = _importiere_gate_module("faktenfrische")
         cfg = faktenfrische.lade_config()
@@ -533,9 +546,8 @@ def sammle(live_slugs: list[str], heute: dt.date) -> tuple[dict, dict, dict]:
                 continue
             faellig = faktenfrische.faelligkeit(art, cfg, stichtag=heute)
             kontext["fakten"][slug] = {"art": art, "faellig": faellig}
-            if faellig.get("faellig"):
-                _merke(befunde, slug, "F1-faktenfrische",
-                       f"Faktencheck fällig: {faellig.get('grund')}")
+            if slug in f1_fail:
+                _merke(befunde, slug, "F1-faktenfrische", "; ".join(f1_fail[slug]))
             if not art.get("quellen_vorhanden"):
                 erg_result = kontext["erg"].get(slug) or {}
                 if erg_result.get("risk") != erg.RISK_HIGH:

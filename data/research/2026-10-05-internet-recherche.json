@@ -1,0 +1,229 @@
+{
+  "datum": "2026-10-05",
+  "erzeugt_utc": "2026-10-05 14:46 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Tote nach Schiffsunglück im Schwarzen Meer - Drohnenangriff?",
+            "url": "https://www.tagesschau.de/ausland/europa/schwarzes-meer-schiff-verunglueckt-100.html",
+            "datum": "2026-10-05T14:33",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Preise für Flugtickets aus Deutschland seit 2010 etwa verdoppelt",
+            "url": "https://www.tagesschau.de/wirtschaft/verbraucher/luftfahrt-flugtickets-preise-100.html",
+            "datum": "2026-10-05T13:44",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Russland dementiert Pestfall nach Tod in Forschungslabor",
+            "url": "https://www.tagesschau.de/ausland/asien/sibirien-infektion-100.html",
+            "datum": "2026-10-05T12:45",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Talfahrt geht weiter: Euro fällt unter 1,12 Dollar",
+            "url": "https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-euro-frankreich-spanien-100.html",
+            "datum": "2026-10-05T12:11",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Nach tagelangen Regenfällen: Auf Kreta beginnen die Aufräumarbeiten",
+            "url": "https://www.tagesschau.de/ausland/europa/griechenland-ueberflutung-100.html",
+            "datum": "2026-10-05T12:06",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "EU: Deutschland und Frankreich drängen auf neue Instrumente gegen unfaire Handelspartner",
+            "url": "https://www.spiegel.de/wirtschaft/eu-deutschland-und-frankreich-draengen-auf-neue-instrumente-gegen-unfaire-handelspartner-a-eaab940d-fe8d-4873-8e20-116e81cca69e#ref=rss",
+            "datum": "Mon, 5 Oct 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Flugpreise: Preise für Tickets ab Deutschland haben sich seit 2010 verdoppelt",
+            "url": "https://www.spiegel.de/wirtschaft/service/flugpreise-tickets-ab-deutschland-seit-2010-im-schnitt-verdoppelt-a-2a070709-c88f-4826-a4d7-5c7ecf35cff2#ref=rss",
+            "datum": "Mon, 5 Oct 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "China: Autos holen bei Reparaturfreundlichkeit auf",
+            "url": "https://www.spiegel.de/wirtschaft/service/china-aufholjagd-bei-auto-reparaturkosten-setzt-europaeische-hersteller-unter-druck-a-922de8d2-fd41-4a48-b3ac-06bb2408c628#ref=rss",
+            "datum": "Mon, 5 Oct 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Weihnachten: Händler sehen kaum Konsumstimmung zum Jahresende",
+            "url": "https://www.spiegel.de/wirtschaft/service/weihnachten-haendler-sehen-kaum-konsumstimmung-zum-jahresende-a-311e9bd5-cba2-451a-91ef-649fc8615e7b#ref=rss",
+            "datum": "Mon, 5 Oct 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Carsten Schneider: Umweltminister will Rechenzentren mehr für Wasser zahlen lassen",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/casten-schneider-betreiber-von-ki-rechenzentren-sollen-mehr-fuer-wasser-zahlen-a-a87bbb29-1d6e-4253-9d94-beb2b45fa238#ref=rss",
+            "datum": "Mon, 5 Oct 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Nachrichtendienstchefs: Weniger Löschen müssen und mehr können dürfen",
+            "url": "https://www.heise.de/news/Nachrichtendienstchefs-Weniger-Loeschen-muessen-und-mehr-koennen-duerfen-11476531.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-05T16:40",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Dieser Over-Ear-Kopfhörer schlägt Bose beim ANC: Technics EAH-A1000 im Test",
+            "url": "https://www.heise.de/bestenlisten/testbericht/dieser-over-ear-kopfhoerer-schlaegt-bose-beim-anc-technics-eah-a1000-im-test/t9mp3hy?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-05T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Google schränkt Gemini-Zugriff für AI-Plus-Kunden ein",
+            "url": "https://www.heise.de/news/Google-Gemini-Pro-Modelle-erfordern-ab-Oktober-ein-AI-Pro-Abo-11476479.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-05T15:50",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Digitale Kommunen: „Deutschland-Stack muss bis ins kleinste Rathaus reichen“",
+            "url": "https://www.heise.de/news/Digitale-Kommunen-Deutschland-Stack-muss-bis-ins-kleinste-Rathaus-reichen-11476509.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-05T15:33",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "software-architektur.tv: Der Architektur-Turing-Test",
+            "url": "https://www.heise.de/news/software-architektur-tv-Der-Architektur-Turing-Test-11476349.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-10-05T15:06",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Stromanbieter Wechsel mit Check24 I komplette Anleitung zum Stromtarif-Wechsel",
+            "url": "https://www.youtube.com/watch?v=Q3pvk9PyRs8",
+            "kanal": "Verbraucher-Info24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Drastically reduce electricity costs when growing – online calculator shows your savings potential!",
+            "url": "https://www.youtube.com/watch?v=I0_3kUfiS84",
+            "kanal": "Growtutorials",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Strompreise vergleichen – Energiekosten senken",
+            "url": "https://www.youtube.com/watch?v=wkf3AhUQGL8",
+            "kanal": "eprimo",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Stromverbrauch reduzieren Teil 2 ⚡ [Tutorial] Stromkosten senken & Energie Sparen!",
+            "url": "https://www.youtube.com/watch?v=VpOv9XBgO-c",
+            "kanal": "Finanzen-im-Griff",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "💳  💳  💳 Kreditkarten Vergleich - Kreditkarte kostenlos - Kreditkarte beantragen 💳  💳  💳",
+            "url": "https://www.youtube.com/watch?v=gP8ibA0yuWQ",
+            "kanal": "Digitale Infoprodukte",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich, Test online kostenlos beantragen (unbedingt ansehen!)",
+            "url": "https://www.youtube.com/watch?v=zNxtV6nPw98",
+            "kanal": "GeldWiki",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
