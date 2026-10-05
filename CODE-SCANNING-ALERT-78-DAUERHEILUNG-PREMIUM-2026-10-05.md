@@ -2,7 +2,7 @@
 
 **Ausgangslage:** Alert #78 (`py/clear-text-logging-sensitive-data` / `py/clear-text-storage-sensitive-data`) erschien am 05.10.2026 mit **6 Fundstellen** in 3 produktiven Skripten – sechs Tage nach der Heilungsrunde vom 04.10. (`CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md`, PR #569/#570, events #77) · **Besonderheit:** Das CodeQL-Gate der Wache meldete auf mehreren Pull Requests „0 Funde – grün“, während dieselben Commits auf `main` rot gingen. Der Alert war also nicht nur offen – er war **unsichtbar im Prozess, der ihn hätte blockieren sollen**. · **Ergebnis:** Alle 6 Fundstellen konstruktiv auf Code-Ebene geheilt (**keine Unterdrückung, kein Dismiss** – die 4 Inline-Unterdrückungen aus dem zwischenzeitlich gemergten PR #579 sind zurückgebaut), die zwei Blindheits-Ursachen des Gates behoben, und ein Dauervertrag mit drei Beinen (Namensebene, Werteebene, Unterdrückungsverbot) stellt die Wiederkehr ab: **`scripts/tests/test_zugangs_namensvertrag.py`, 21 Tests.**
 
-> Dieser Bericht ist der Wahrheitsort für den Sonderfall #78; die Gesamtstrategie bleibt in `CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md` (dortiger Nachtrag verweist hierher). Was hier steht, gilt bis ein neuer datierter Abschnitt es ablöst.
+> Dieser Bericht ist der Wahrheitsort für den Sonderfall #78; die Gesamtstrategie bleibt in `CODE-SCANNING-HEILUNG-PREMIUM-2026-10-04.md` (dortiger Nachtrag verweist hierher). **Fortschreibung:** Alert #80 und die zusätzliche, SARIF-unabhängige Klartext-Wache sind in `CODE-SCANNING-ALERT-80-PREMIUM-2026-10-05.md` dokumentiert. Was hier steht, gilt bis ein neuer datierter Abschnitt es ablöst.
 
 ---
 
