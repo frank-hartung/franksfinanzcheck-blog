@@ -197,6 +197,8 @@ redaktionelle_pruefung:
 
 Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Versicherungen sind ein trockenes Thema. Bis das Wetter umschlägt.
 
 Dann steht der Keller unter Wasser. Oder der Sturm deckt das Dach ab. Erst jetzt zeigt sich, ob dein Schutz hält. (Stand: Oktober 2026)

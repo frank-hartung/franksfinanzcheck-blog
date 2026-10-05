@@ -361,6 +361,8 @@ redaktionelle_pruefung:
 
 Dein Girokonto steht mit rund 3.000 € im Minus. Der Dispo verlangt dafür im Schnitt 11,30 % Zinsen im Jahr. Ein Ratenkredit kostet laut Bundesbank im Schnitt nur 7,60 % – und löst den Dispo mit einer einzigen Überweisung ab.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Der **Ratenkredit** ist damit das günstigste Werkzeug gegen teure Schulden. Feste Rate, festes Ende, planbare Kosten. Doch die Zinsspannen sind riesig: von unter 4 % für Top-Bonitäten bis über 12 % bei schwacher Kreditwürdigkeit.
 
 Dieser Vergleich zeigt dir, welche Zinsen aktuell realistisch sind. Dazu: wann sich Umschuldung und Dispo-Ablösung lohnen. Und welche fünf Fallen du unbedingt umgehen musst.

@@ -222,6 +222,8 @@ redaktionelle_pruefung:
 
 Ein Haustier kostet nicht nur Futter, Streu oder Zubehör. Teuer wird es oft dann, wenn gesundheitlich etwas passiert. Und das oft plötzlich. Eine OP, Diagnostik, Nachsorge oder längere Behandlung kann aus einer kleinen Rechnung schnell einen Budgetschock machen.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Darum kommt früher oder später die Frage auf: **Brauche ich eine Tierkrankenversicherung für Hund oder Katze – oder spare ich das Geld lieber selbst?**
 
 Die ehrliche Antwort ist: Es kommt darauf an. Für manche Haushalte ist eine Versicherung ein guter Schutz für die Planung. Für andere passt Rücklage plus OP-Schutz besser. Entscheidend ist, ob du hohe Einmal-Kosten gut tragen kannst – nicht, ob der Monatsbeitrag erst einmal klein aussieht.

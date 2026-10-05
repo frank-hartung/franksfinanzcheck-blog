@@ -147,6 +147,8 @@ redaktionelle_pruefung:
 
 Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Im schlimmsten Fall verletzt sich ein Mensch. Dann geht es nicht um Kleingeld. Dann geht es um Summen, die dich über Jahre belasten.
 
 Deshalb ist die **Privathaftpflicht** 2026 die Basis jeder Absicherung (Stand: Oktober 2026). Sie verhindert kein Missgeschick. Sie schützt aber dein Vermögen.

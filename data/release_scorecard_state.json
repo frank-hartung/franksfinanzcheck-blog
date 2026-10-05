@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T15:02:43Z",
+  "generated_at": "2026-10-05T15:33:30Z",
   "modus": "kandidaten",
-  "commit": "91218bb5544570e4be773816668de2b62302e1c1",
+  "commit": "ba54d31d44971fdaf7533295f1f52da989caa60a",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "7d6679f059ebd003ebae28fbe1f0eaf4886d7fcfd6fb6bbc319983bcade0d33b",
@@ -36,7 +36,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "38e5d0dc60266a94bc9105a42f225553e75d7d8573a4c8b01c0fe6869c1932b4",
@@ -70,7 +70,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "37aa3ff004fc667921db34dc365989e0355504e817f5305163dbbb32f709b5c1",
@@ -138,7 +138,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1ae2f82ed5b4a9a54a4fa3153d6fb21423b4d73aeb5ddf72688d6da95af04262",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "72bd76ef4193ae515ed4e3fdc35b95f706ebe9a8183c6ae4a93809e4235965fc",
@@ -308,7 +308,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "sha256": "d2a8b78b56aba5c17e031b457ff523b100a31729e63e5c4b236f8567b65b678e",
@@ -461,7 +461,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "6bc1fcbf167613f6556455c7092e061a4c69cb910f062cdd9be6c0db09a5a3bf",
@@ -597,7 +597,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "b2ed68adb86737c368890a77903e9e92b4f20a184571e4ea948621fbf23a876e",
@@ -631,7 +631,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
       "sha256": "ad7591a9c04568afdcda5014ff34bf13e3e38b2805f4b5aa7d31758215dc9ade",
@@ -648,7 +648,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     }
   }
 }

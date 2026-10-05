@@ -187,6 +187,8 @@ redaktionelle_pruefung:
 
 Ein Sturz auf der Treppe. Ein Radunfall.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Eine Verletzung beim Sport. Solche Dinge passieren oft in der Freizeit. Genau dort zahlt die gesetzliche Unfallversicherung meist nicht.
 
 Viele fragen sich deshalb: **Brauche ich eine private Unfallversicherung?**

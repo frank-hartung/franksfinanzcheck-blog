@@ -148,6 +148,8 @@ redaktionelle_pruefung:
 
 **Stand: 17.09.2026.** Dieses **Versicherung-Update** zeigt, warum gerade jetzt ein Blick auf deine Policen wichtig ist – und warum Bequemlichkeit in diesem Bereich schnell teuer wird.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Versicherungen laufen oft im Hintergrund. Genau deshalb prüft sie kaum jemand aktiv. Die Beiträge gehen ab. Die Unterlagen liegen digital oder im Ordner.
 
 Solange kein Schaden passiert, wirkt alles ruhig. Genau in dieser Ruhe werden Policen aber oft still teurer oder unpassender.
