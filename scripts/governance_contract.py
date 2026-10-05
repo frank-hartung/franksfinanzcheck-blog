@@ -1961,8 +1961,16 @@ def main(argv=None):
         # niemals den Inhalt oder Wert dahinter.
         for code, msg in checks:
             line = f"{code} {LABEL.get(code, '')}: {msg}"
+            # LABEL/msg sind feste Regel-Bezeichner und Muster-Namen (z. B. "API-Key
+            # im Klartext") aus LEAK_CHECK_PATTERNS – nie der gefundene Geheimwert
+            # selbst (siehe c9_secret_leak: nur `label` wird übernommen, kein Match-
+            # Text). Dauerhaft abgesichert durch test_clear_text_logging_security.py.
+            # codeql[py/clear-text-logging-sensitive-data]
             print(f"  ❌ {line}")
             if annotate:
+                # Identische Begründung wie eine Zeile zuvor: ::error:: trägt
+                # denselben geprüften Befund-Text, keinen Geheimwert.
+                # codeql[py/clear-text-logging-sensitive-data]
                 print(f"::error::{line}")
     else:
         count = len(RULE_TEXT)
@@ -1974,6 +1982,10 @@ def main(argv=None):
             os.makedirs(os.path.dirname(os.path.join(BLOG_DIR, target)) or BLOG_DIR, exist_ok=True)
             # Markdown-Report der Vertragsprüfung: Befund-Texte ohne Werte.
             with open(os.path.join(BLOG_DIR, target), "w", encoding="utf-8") as f:
+                # render_md() setzt nur LABEL/RULE_TEXT (feste Regel-Beschreibungen)
+                # und dieselben wertfreien `msg`-Texte wie oben zusammen – niemals
+                # einen gefundenen Geheimwert. Siehe test_clear_text_logging_security.py.
+                # codeql[py/clear-text-storage-sensitive-data]
                 f.write(render_md(checks))
             print(f"→ geschrieben: {target}")
         except OSError as exc:
