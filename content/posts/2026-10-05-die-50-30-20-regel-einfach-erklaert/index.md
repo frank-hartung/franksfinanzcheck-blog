@@ -15,6 +15,8 @@ ki_redaktion_status: "review"
 
 Du bekommst am Monatsende immer wieder das Gefühl, dass das Geld schneller verschwindet, als du es nachverfolgen kannst. Du hast einen festen Job, ein paar regelmäßige Ausgaben und möchtest trotzdem etwas Geld für die Zukunft zurücklegen. Die 50‑30‑20‑Regel bietet dafür einen klaren Rahmen, den du ohne viel Aufwand in den Alltag integrieren kannst. Sie hilft dir, deine Ausgaben zu strukturieren, ohne dass du jeden Cent einzeln zählen musst.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Die 50‑30‑20‑Regel im Überblick  
 
 Die Regel teilt dein Nettoeinkommen in drei große Bereiche:  
