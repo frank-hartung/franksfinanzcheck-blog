@@ -18,6 +18,10 @@
 | Experteninterviews | 0 |
 | Aktive Kooperationen | 0 |
 
+## Nachweisregister
+
+_Keine externe Autorität behauptet: Im Evidenzregister liegt noch kein prüfbarer Beleg._
+
 ## Quartalsprogramm
 
 | Quartal | Asset | Status/Termin |

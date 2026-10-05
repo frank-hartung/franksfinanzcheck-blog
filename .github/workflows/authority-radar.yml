@@ -47,14 +47,31 @@ jobs:
             git commit -m "authority: Monatsradar aktualisiert"
             scripts/git_sync.sh --push-only
           fi
-      - name: Handlungsbedarf als einzelnes Issue melden
-        if: steps.radar.outputs.exit == '1'
+      - name: Authority-Issue idempotent abgleichen
         env:
           GH_TOKEN: ${{ github.token }}
+          RADAR_EXIT: ${{ steps.radar.outputs.exit }}
         run: |
-          gh label create externe-autoritaet --color "1b665c" --description "Earned Media, Linkable Assets und Distribution" --force || true
-          if ! gh issue list --state open --label externe-autoritaet --json number --jq 'length' | grep -q '^[1-9]'; then
-            gh issue create --title "Authority-Radar: Distribution und Nachweise prüfen ($(date +%F))" --label externe-autoritaet --body-file AUTHORITY-RADAR.md
-          else
-            echo "Offenes Authority-Issue vorhanden – kein Duplikat."
+          set -euo pipefail
+          label="externe-autoritaet"
+          title="Authority-Radar: Distribution und Nachweise prüfen ($(date -u +%F))"
+          gh label create "$label" --color "1b665c" --description "Earned Media, Linkable Assets und Distribution" --force
+
+          # Genau ein Radar-Ticket: ältere Duplikate werden geschlossen, das jüngste
+          # Ticket wird bei jedem Lauf aktualisiert statt mit einem veralteten Body stehen zu bleiben.
+          mapfile -t issues < <(gh issue list --state open --label "$label" --limit 100 --json number --jq 'sort_by(.number) | reverse | .[].number')
+          keeper="${issues[0]:-}"
+          for duplicate in "${issues[@]:1}"; do
+            gh issue close "$duplicate" --comment "Automatisch geschlossen: Das laufende Authority-Radar wird in #${keeper} konsolidiert."
+          done
+
+          if [[ "$RADAR_EXIT" == "1" ]]; then
+            if [[ -n "$keeper" ]]; then
+              gh issue edit "$keeper" --title "$title" --body-file AUTHORITY-RADAR.md
+              gh issue comment "$keeper" --body "Radar am $(date -u +%F) neu geprüft und vollständig synchronisiert."
+            else
+              gh issue create --title "$title" --label "$label" --body-file AUTHORITY-RADAR.md
+            fi
+          elif [[ -n "$keeper" ]]; then
+            gh issue close "$keeper" --comment "Automatisch erledigt: Der aktuelle Authority-Radar enthält keinen Handlungsbedarf mehr."
           fi
