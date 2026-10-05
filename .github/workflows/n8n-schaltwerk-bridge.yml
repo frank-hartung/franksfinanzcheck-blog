@@ -34,7 +34,13 @@ on:
 
 permissions:
   contents: write
-  issues: write
+
+# Der Zwei-Stunden-Wächter darf sich nicht selbst mit einem parallel laufenden
+# Lauf um denselben State/Draft-Commit bekämpfen. Wartende Läufe werden bewusst
+# nicht abgebrochen, sondern seriell abgearbeitet.
+concurrency:
+  group: n8n-whisper-bridge-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   bridge:
@@ -48,15 +54,19 @@ jobs:
           fetch-depth: 0
 
       - name: Python 3.11 einrichten
-        uses: actions/setup-python@v5
+        # v6 nutzt die aktuelle Node-Runtime der Actions-Plattform. Kein
+        # pip-cache: Der Bridge-Job ist klein; ein Cache-Ausfall darf den
+        # produktiven Watchdog nicht bereits beim Runtime-Setup blockieren.
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
-          cache: "pip"
+          check-latest: false
 
       - name: Grund-Abhängigkeiten installieren
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install pyyaml
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --retries 5 --timeout 30 \
+            -r requirements-n8n-bridge.txt
 
       - name: Selbsttest aller 3 Säulen (Fail-Closed)
         run: |

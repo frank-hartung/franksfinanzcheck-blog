@@ -1,0 +1,4 @@
+# Reproduzierbare Laufzeitabhängigkeiten für den n8n-/Whisper-Bridge-Workflow.
+# Bewusst klein: Whisper selbst ist optional und wird lokal über das vorhandene
+# Backend erkannt; YAML wird vom Schaltwerk und vom Master-Orchestrator benötigt.
+PyYAML==6.0.2
