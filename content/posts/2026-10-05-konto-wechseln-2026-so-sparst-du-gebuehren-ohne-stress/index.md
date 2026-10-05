@@ -8,7 +8,7 @@ tags: ["Girokonto"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Konto wechseln", "Kontowechsel Anleitung", "Girokonto kündigen", "Konto wechseln 2026", "Wechseln"]
+keywords: ["Konto wechseln", "Kontowechsel Anleitung", "Girokonto kündigen", "Konto wechseln 2026", "Girokonto vergleichen", "Konto ohne Gebühren"]
 pin_title: "Konto wechseln 2026: So sparst du Gebühren ohne Stress"
 pin_description: "*Werbung | Willst du dein Konto wechseln? Meine Anleitung zeigt dir, wie du Gebühren sparst, dein Girokonto kündigen kannst und beim Umzug keine Frist verpasst. Mehr Spartipps auf FranksFinanzcheck! #kontowechseln #kontowechselanleitung #girokontokuendigen"
 ai_generated: true

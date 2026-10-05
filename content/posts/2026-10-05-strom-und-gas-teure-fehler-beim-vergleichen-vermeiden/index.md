@@ -8,9 +8,9 @@ tags: ["Gastarif wechseln", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Strom", "Gas", "Vergleichen", "Sparen", "Strom und Gas", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
+keywords: ["Vergleichen", "Strom und Gas", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken"]
 pin_title: "Strom und Gas: Teure Fehler beim Vergleichen vermeiden"
-pin_description: "*Werbung | Wer Strom und Gas vergleichen möchte, tappt oft in Kostenfallen. Erfahre, wie du Tarife richtig prüfst und beim Sparen echte Ergebnisse erzielst. Mehr Spartipps auf FranksFinanzcheck! #strom #gas #vergleichen"
+pin_description: "*Werbung | Wer Strom und Gas vergleichen möchte, tappt oft in Kostenfallen. Erfahre, wie du Tarife richtig prüfst und beim Sparen echte Ergebnisse erzielst. Mehr Spartipps auf FranksFinanzcheck! #vergleichen #stromundgas #gaspreisgarantie"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

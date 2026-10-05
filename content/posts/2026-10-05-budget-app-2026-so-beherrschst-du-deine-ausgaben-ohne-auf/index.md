@@ -1,5 +1,5 @@
 ---
-title: "Budget‑App 2026 –: So beherrschst du deine Ausgaben ohne Auf"
+title: "Budget‑App 2026 –: So beherrschst du deine Ausgaben"
 description: "Budget‑App 2026 –: Erfahre, wie moderne Budget‑Apps 2026 funktionieren, welche Neuerungen es gibt und wie du sie optimal nutzt."
 date: 2026-10-05T11:04:36Z
 draft: false
@@ -8,9 +8,9 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Budget‑App 2026 –", "Beherrschst", "Ausgaben"]
+keywords: ["Budget‑App 2026 –", "Beherrschst", "Geld sparen"]
 pin_title: "Budget‑App 2026 –: So beherrschst du deine Ausgaben ohne Auf"
-pin_description: "*Werbung | Budget‑App 2026 –: Erfahre, wie moderne Budget‑Apps 2026 funktionieren, welche Neuerungen es gibt und wie du sie optimal nutzt. Mehr Spartipps auf FranksFinanzcheck! #budgetapp2026 #beherrschst #ausgaben"
+pin_description: "*Werbung | Budget‑App 2026 –: Erfahre, wie moderne Budget‑Apps 2026 funktionieren, welche Neuerungen es gibt und wie du sie optimal nutzt. Mehr Spartipps auf FranksFinanzcheck! #budgetapp2026 #beherrschst #geldsparen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

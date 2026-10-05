@@ -4,11 +4,11 @@ description: Erfahre, wie du Bankgebühren sparen kannst, indem du dein Kontomod
 date: 2026-10-05T10:53:05Z
 draft: true
 reserve: true
-tags: ["Girokonto"]
+tags: ["Girokonto", "Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Bankgebühren sparen", "Konto-gebühren", "Gebühren-Reduzierung", "Bankgebühren", "Halbierst"]
+keywords: ["Bankgebühren sparen", "Konto-gebühren", "Gebühren-Reduzierung", "Bankgebühren", "Kontokosten", "Frugalismus", "Geld sparen"]
 pin_title: "Bankgebühren sparen: So halbierst du deine Kosten"
 pin_description: "*Werbung | Erfahre, wie du Bankgebühren sparen kannst, indem du dein Kontomodell prüfst, Alternativen nutzt und typische Fallstricke vermeidest. Mehr Spartipps auf FranksFinanzcheck! #bankgebuehrensparen #kontogebuehren #gebuehrenreduzierung"
 ai_generated: true

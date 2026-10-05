@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen", "Ökostrom Anbieter", "Ökostrom"]
+keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen", "Ökostrom Anbieter", "Frugalismus"]
 pin_title: "Ökostrom Anbieter: wechseln – clever sparen und grün bleiben"
 pin_description: "*Werbung | Ökostrom Anbieter wechseln: Ökostrom Anbieter wechseln leicht gemacht – Praxis‑Tipps, Checkliste und Fehler vermeiden, um grünen Strom günstig zu beziehen. Mehr Spartipps auf FranksFinanzcheck! #gruenerstromguenstig #oekostromanbieter #oekostrom"
 ai_generated: true

@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "E-Auto", "Ladekosten"]
+keywords: ["E-Auto Ladekosten", "Stromtarif E-Auto", "Wallbox sparen", "E-Auto", "Ladekosten", "E Auto Ladekosten"]
 pin_title: "E-Auto Ladekosten: So drückst du deine Ausgaben massiv"
 pin_description: "*Werbung | Senke deine E-Auto Ladekosten effektiv. Erfahre, wie du den passenden Stromtarif für dein E-Auto findest und beim Wallbox-Laden spürbar sparst. Mehr Spartipps auf FranksFinanzcheck! #eautoladekosten #stromtarifeauto #wallboxsparen"
 ai_generated: true
