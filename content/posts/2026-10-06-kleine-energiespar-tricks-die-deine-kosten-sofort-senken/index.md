@@ -215,19 +215,33 @@ Die Investition amortisiert sich meist innerhalb 2–4 Jahren, weil die automa
 
 ## Häufige Fragen
 
-### Wie schnell zeigen sich die ersten Einsparungen? Nach der Umstellung auf LED‑Lampen bemerkst du bereits in der ersten Abrechnung eine Reduktion von etwa 5 % – das entspricht rund 20 € bis 30 €.
+### Wie schnell zeigen sich die ersten Einsparungen?
 
-### Lohnt sich das Ausschalten von Stand‑by für jedes Gerät? Ja. Selbst Geräte mit geringem Verbrauch summieren sich über ein Jahr zu mehreren Euro. Ein kompletter Ausschalt‑Steckerstreifen ist eine einfache Lösung.
+Nach der Umstellung auf LED‑Lampen bemerkst du bereits in der ersten Abrechnung eine Reduktion von etwa 5 % – das entspricht rund 20 € bis 30 €.
 
-### Was ist beim Heizen im Winter besonders zu beachten? Reduziere die Raumtemperatur um maximal 1 °C – das spart etwa 3 % der Heizkosten, ohne den Komfort stark zu beeinträchtigen.
+### Lohnt sich das Ausschalten von Stand‑by für jedes Gerät?
 
-### Wie oft sollte ich meine Energiemaßnahmen überprüfen? Ein vierteljährlicher Check reicht aus, um sicherzustellen, dass alle Geräte weiterhin effizient arbeiten und keine neuen Energiefresser entstanden sind.
+Ja. Selbst Geräte mit geringem Verbrauch summieren sich über ein Jahr zu mehreren Euro. Ein kompletter Ausschalt‑Steckerstreifen ist eine einfache Lösung.
 
-### Kann ich meine Einsparungen auch ohne technische Hilfsmittel messen? Ja. Vergleiche regelmäßig deine monatlichen Rechnungen und notiere Abweichungen. Ein einfaches Spreadsheet reicht, um Trends zu erkennen.
+### Was ist beim Heizen im Winter besonders zu beachten?
 
-### Welche Maßnahmen lohnen sich in einem Altbau mit schlechter Dämmung am meisten? Dichtungen an Fenstern und Türen reduzieren Wärmeverlust um bis zu 15 %. Kombiniert mit einem programmierbaren Thermostat erreichst du die größte Kostenreduktion, weil die Heizung weniger nachrüsten muss.
+Reduziere die Raumtemperatur um maximal 1 °C – das spart etwa 3 % der Heizkosten, ohne den Komfort stark zu beeinträchtigen.
 
-### Wie beeinflussen Förderprogramme meine Investitionsrechnung? Viele Bundesländer bieten Zuschüsse für LED‑Umrüstung oder Smart‑Thermostate (bis zu 30 % der Kosten). Rechne den Förderbetrag von der Anschaffung ab, dann verkürzt sich die Amortisationszeit erheblich.
+### Wie oft sollte ich meine Energiemaßnahmen überprüfen?
+
+Ein vierteljährlicher Check reicht aus, um sicherzustellen, dass alle Geräte weiterhin effizient arbeiten und keine neuen Energiefresser entstanden sind.
+
+### Kann ich meine Einsparungen auch ohne technische Hilfsmittel messen?
+
+Ja. Vergleiche regelmäßig deine monatlichen Rechnungen und notiere Abweichungen. Ein einfaches Spreadsheet reicht, um Trends zu erkennen.
+
+### Welche Maßnahmen lohnen sich in einem Altbau mit schlechter Dämmung am meisten?
+
+Dichtungen an Fenstern und Türen reduzieren Wärmeverlust um bis zu 15 %. Kombiniert mit einem programmierbaren Thermostat erreichst du die größte Kostenreduktion, weil die Heizung weniger nachrüsten muss.
+
+### Wie beeinflussen Förderprogramme meine Investitionsrechnung?
+
+Viele Bundesländer bieten Zuschüsse für LED‑Umrüstung oder Smart‑Thermostate (bis zu 30 % der Kosten). Rechne den Förderbetrag von der Anschaffung ab, dann verkürzt sich die Amortisationszeit erheblich.
 
 ---
 
