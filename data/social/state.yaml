@@ -557,9 +557,28 @@ history:
     #Gasrechnung #Heizkosten #GasabschlagBerechnen #GasAbschlagSenken'
   ref: '117388279584058422'
   ai: false
+- posted_at: '2026-10-06T14:05:21.281875+02:00'
+  channel: mastodon
+  slug: 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss
+  title: 'Preiswert surfen: So findest du den optimalen DSL‑Anschluss'
+  angle: vergleich
+  url: https://mastodon.social/@FranksFinanzcheck/117393872454593493
+  ok: true
+  text: 'Preiswert surfen oder So findest du den optimalen DSL‑Anschluss?
+
+
+    Neukunden bekommen die besten Preise.
+
+
+    https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #WLAN #Internet #DSL #Handytarif'
+  ref: '117393872454593493'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-05T14:23:16.787842+02:00'
+updated_at: '2026-10-06T14:05:37.617648+02:00'

@@ -6,33 +6,33 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:reddit:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-05@fra
- nksfinanzcheck.de
-DTSTAMP:20261005T122317Z
-DTSTART:20261005T121500Z
-DTEND:20261005T123000Z
-SUMMARY:Reddit: DSL-Wechselbonus sichern: So sparst du beim Internetve
- rtrag (takeaway)
-DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: takeaway\nKanal: R
- eddit\nArtikel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wec
- hselbonus-sichern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
+UID:reddit:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaiso
+ n-richtig:takeaway:2026-10-06@franksfinanzcheck.de
+DTSTAMP:20261006T120538Z
+DTSTART:20261006T121500Z
+DTEND:20261006T123000Z
+SUMMARY:Reddit: Gasabschlag berechnen: So planst du die Heizsaison ric
+ htig (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-
+ so-planst-du-die-heizsaison-richtig/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
+ n-so-planst-du-die-heizsaison-richtig/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:reddit:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaet
- sommer-vor:takeaway:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261005T122317Z
-DTSTART:20261019T121500Z
-DTEND:20261019T123000Z
-SUMMARY:Reddit: Gasrechnung prüfen: Fehler finden und Nachzahlungen (t
- akeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-
- bereitest-du-dich-im-spaetsommer-vor/
-URL:https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-s
- o-bereitest-du-dich-im-spaetsommer-vor/
+UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
+ rklich:nutzen:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261006T120538Z
+DTSTART:20261020T121500Z
+DTEND:20261020T123000Z
+SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
+ h? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh
+ -wlan-was-brauchst-du-wirklich/
+URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
+ mesh-wlan-was-brauchst-du-wirklich/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
