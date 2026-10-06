@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
  rklich:zahl:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261006T185650Z
+DTSTAMP:20261006T230741Z
 DTSTART:20261020T121500Z
 DTEND:20261020T123000Z
 SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
@@ -18,6 +18,21 @@ DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Reddit\nArtikel: htt
  lan-was-brauchst-du-wirklich/
 URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
  mesh-wlan-was-brauchst-du-wirklich/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:reddit:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somme
+ r-schnaepp:takeaway:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261006T230741Z
+DTSTART:20261021T121500Z
+DTEND:20261021T123000Z
+SUMMARY:Reddit: Last Minute Urlaub: – So schnappst du dir das Sommer‑S
+ chnäpp (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-
+ schnappst-du-dir-das-sommer-schnaepp/
+URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
+ o-schnappst-du-dir-das-sommer-schnaepp/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

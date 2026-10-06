@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 06.10.2026 20:56 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.10.2026 01:07 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -32,6 +32,7 @@
 ## Zurückgestellt (Autopilot hat blockiert)
 
 - 🚫 30.09. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
+- 🚫 06.10. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*
