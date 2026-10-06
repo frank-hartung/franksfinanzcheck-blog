@@ -1,13 +1,13 @@
 {
-  "generated": "2026-10-04T23:00:16Z",
+  "generated": "2026-10-06T01:16:21Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "rot",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig",
-        "lesbarkeit: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md – Flesch 51.7 < Floor 55; 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/in…",
-        "Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig"
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig",
+        "lesbarkeit: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-fei…",
+        "Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -16,19 +16,19 @@
       ]
     },
     "SEO & Technik": {
-      "level": "gruen",
+      "level": "rot",
       "lines": [
-        "Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)"
+        "1 Prüfpunkt(e) auffällig (live-policy)",
+        "live-policy: L2: 2 Money-URL(s) fehlen live in der Sitemap, z. B. https://franksfinanzcheck.de/posts/2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf/ – Deploy/Ca…"
       ],
       "sources": [
         "data/governance_status.json"
       ]
     },
     "Affiliate & Umsatz": {
-      "level": "gelb",
+      "level": "gruen",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (click-chain)",
-        "click-chain: /go/strom/ ohne data-umami-event=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-umami-event-slug (Ziel-Klick nicht zuordenbar); /go/strom…"
+        "in Ordnung (3 Kennzahl(en) noch ohne Datenlage)"
       ],
       "sources": [
         "data/governance_status.json",
@@ -40,7 +40,6 @@
       "level": "rot",
       "lines": [
         "1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig",
-        "`PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pi…",
         "geprüft & lebendig: GEMINI_API_KEY, GROQ_API_KEY, MASTODON_ACCESS_TOKEN",
         "abgelehnt (Re-Auth nötig): PINTEREST_ACCESS_TOKEN"
       ],
@@ -55,7 +54,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)",
+        "letzter erfolgreicher Post vor 0.5 Tag(en)",
         "1 Fehlversuch(e) in den letzten 14 Tagen"
       ],
       "sources": [
@@ -69,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 7 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 9 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",

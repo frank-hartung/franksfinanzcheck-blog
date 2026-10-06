@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-10-04 23:00 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-10-06 01:16 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,9 +8,9 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🔴 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig |
-| SEO & Technik | 🟢 | Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby) |
-| Affiliate & Umsatz | 🟡 | 1 Prüfpunkt(e) auffällig (click-chain) |
+| Content-Pipeline | 🔴 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig |
+| SEO & Technik | 🔴 | 1 Prüfpunkt(e) auffällig (live-policy) |
+| Affiliate & Umsatz | 🟢 | in Ordnung (3 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
 | Newsletter | 🔴 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
@@ -20,26 +20,25 @@
 ## Details
 
 ### Content-Pipeline — 🔴 ROT
-- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
-- lesbarkeit: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md – Flesch 51.7 < Floor 55; 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/in…
-- Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- lesbarkeit: 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md – Flesch 47.4 < Floor 55; 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-fei…
+- Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
-### SEO & Technik — 🟢 GRÜN
-- Kernwerte (CWV/Build/Live-Policy) in Ordnung; Umami-Daten noch nicht importiert (Standby)
+### SEO & Technik — 🔴 ROT
+- 1 Prüfpunkt(e) auffällig (live-policy)
+- live-policy: L2: 2 Money-URL(s) fehlen live in der Sitemap, z. B. https://franksfinanzcheck.de/posts/2026-10-05-budget-app-2026-so-beherrschst-du-deine-ausgaben-ohne-auf/ – Deploy/Ca…
 
 Quellen: `data/governance_status.json`
 
-### Affiliate & Umsatz — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (click-chain)
-- click-chain: /go/strom/ ohne data-umami-event=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-umami-event-slug (Ziel-Klick nicht zuordenbar); /go/strom…
+### Affiliate & Umsatz — 🟢 GRÜN
+- in Ordnung (3 Kennzahl(en) noch ohne Datenlage)
 
 Quellen: `data/governance_status.json`, `AFFILIATE-INTEGRITY-REPORT.md`, `AFFILIATE-INTENT-REPORT.md`
 
 ### Secrets & Zugänge — 🔴 ROT
 - 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig
-- `PINTEREST_ACCESS_TOKEN` – Pinterest Access-Token: Live-Check abgelehnt – Einmalige Neu-Autorisierung nötig (danach trägt sich der Kanal selbst): docs/PINTEREST-TOKEN-RUNBOOK.md – `python3 scripts/pi…
 - geprüft & lebendig: GEMINI_API_KEY, GROQ_API_KEY, MASTODON_ACCESS_TOKEN
 - abgelehnt (Re-Auth nötig): PINTEREST_ACCESS_TOKEN
 
@@ -48,14 +47,14 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.3 Tag(en)
+- letzter erfolgreicher Post vor 0.5 Tag(en)
 - 1 Fehlversuch(e) in den letzten 14 Tagen
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 7 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 9 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
