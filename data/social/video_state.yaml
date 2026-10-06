@@ -1,2 +1,7 @@
 version: 1
-produziert: []
+produziert:
+- slug: 2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss
+  zeit: '2026-10-06T12:07:00.371375+00:00'
+  dauer: 26.7
+  datei: /home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/.cache/social-video/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.mp4
+  engine: edge

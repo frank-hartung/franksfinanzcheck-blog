@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-som
  mer-schnaepp:takeaway:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261006T160000Z
 DTEND:20261006T161500Z
 SUMMARY:Telegram (Kanal): Last Minute Urlaub: – So schnappst du dir da
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spa
  etsommer-vor:zahl:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261010T050000Z
 DTEND:20261010T051500Z
 SUMMARY:Telegram (Kanal): Gasrechnung prüfen: Fehler finden und Nachza
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-
  wirklich:nutzen:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261011T050000Z
 DTEND:20261011T051500Z
 SUMMARY:Telegram (Kanal): WLAN-Verstärker vs. Mesh-WLAN: Was brauchst 
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hun
  derte-euro:zahl:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261017T050000Z
 DTEND:20261017T051500Z
 SUMMARY:Telegram (Kanal): Gasrechnung senken: Spätsommer-Check für Tar
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
  die-feiertage:takeaway:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261018T050000Z
 DTEND:20261018T051500Z
 SUMMARY:Telegram (Kanal): Weihnachten Budget planen: Ohne Schulden dur
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:takeaway:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261019T050000Z
 DTEND:20261019T051500Z
 SUMMARY:Telegram (Kanal): Gasabschlag berechnen: So planst du die Heiz
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
  sl-anschluss:vergleich:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261019T160000Z
 DTEND:20261019T161500Z
 SUMMARY:Telegram (Kanal): Preiswert surfen: So findest du den optimale
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
  tie-gas:takeaway:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261020T050000Z
 DTEND:20261020T051500Z
 SUMMARY:Telegram (Kanal): Sicher heizen: So schützt dich eine Gaspreis
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-10-dsl-wechselbonus-sichern:takeaway:2026-10-20@f
  ranksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261020T160000Z
 DTEND:20261020T161500Z
 SUMMARY:Telegram (Kanal): DSL-Wechselbonus sichern: So sparst du beim 

@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:instagram:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-so
  mmer-schnaepp:zahl:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261006T164500Z
 DTEND:20261006T170000Z
 SUMMARY:Instagram: Last Minute Urlaub: – So schnappst du dir das Somme
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-sp
  aetsommer-vor:mythos:2026-10-08@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261008T094500Z
 DTEND:20261008T100000Z
 SUMMARY:Instagram: Gasrechnung prüfen: Fehler finden und Nachzahlungen
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du
  -wirklich:zahl:2026-10-09@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261009T094500Z
 DTEND:20261009T100000Z
 SUMMARY:Instagram: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirk
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hu
  nderte-euro:takeaway:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261010T094500Z
 DTEND:20261010T100000Z
 SUMMARY:Instagram: Gasrechnung senken: Spätsommer-Check für Tarif und 
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch
  -die-feiertage:zahl:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261011T094500Z
 DTEND:20261011T100000Z
 SUMMARY:Instagram: Weihnachten Budget planen: Ohne Schulden durch die 
@@ -83,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsa
  ison-richtig:frage:2026-10-12@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261012T094500Z
 DTEND:20261012T100000Z
 SUMMARY:Instagram: Gasabschlag berechnen: So planst du die Heizsaison 
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-
  dsl-anschluss:karussell:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261013T094500Z
 DTEND:20261013T100000Z
 SUMMARY:Instagram: Preiswert surfen: So findest du den optimalen DSL‑A
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
  ntie-gas:zahl:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261014T094500Z
 DTEND:20261014T100000Z
 SUMMARY:Instagram: Sicher heizen: So schützt dich eine Gaspreisgaranti
@@ -128,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-10-dsl-wechselbonus-sichern:karussell:2026-10-15
  @franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261015T094500Z
 DTEND:20261015T100000Z
 SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
@@ -143,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstig
  e-tarife-fuer-2026:karussell:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261016T094500Z
 DTEND:20261016T100000Z
 SUMMARY:Instagram: Preisgarantie Gas: So sicherst du günstige Tarife (
@@ -158,7 +158,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-a
  nbieterwechsel:zahl:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261017T094500Z
 DTEND:20261017T100000Z
 SUMMARY:Instagram: Internet & DSL wechseln: Praxis-Tipps – Highspeed I
@@ -173,7 +173,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verm
  eiden:karussell:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261018T094500Z
 DTEND:20261018T100000Z
 SUMMARY:Instagram: Gasrechnung senken: Fehler im Spätsommer vermeiden 
@@ -188,7 +188,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto
  -ohne-gebuehren:zahl:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261019T094500Z
 DTEND:20261019T100000Z
 SUMMARY:Instagram: Kostenloses Girokonto: So findest du ein Konto ohne
@@ -203,7 +203,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inte
  rnet:frage:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261006T120538Z
+DTSTAMP:20261006T120702Z
 DTSTART:20261020T094500Z
 DTEND:20261020T100000Z
 SUMMARY:Instagram: DSL-Vergleich: So findest du den günstigsten Intern

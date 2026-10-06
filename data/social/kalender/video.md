@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 06.10.2026 14:05 (Europe/Berlin)  
+> Automatisch aktualisiert: 06.10.2026 14:07 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -19,6 +19,10 @@
 - 🎬 Di, 20. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Sa, 24. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
 - 🎬 Di, 27. Oktober 2026 · 07:20 — Shorts-Produktion (bis zu 2 Videos)
+
+## Zuletzt produziert
+
+- ✅  · Preiswert surfen: So findest du den optimalen DSL‑Anschluss
 
 ---
 *Erzeugt von `scripts/social_calendar.py`. Regie: `data/social/video.yaml` · Produktion: `scripts/social_video.py` (Workflow „Shorts-Schmiede“).*
