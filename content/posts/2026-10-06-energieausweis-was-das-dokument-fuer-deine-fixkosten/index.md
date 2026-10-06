@@ -3,7 +3,8 @@ title: "Energieausweis: Was das Dokument für deine Fixkosten"
 description: Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt.
 date: 2026-10-06T10:49:15Z
 draft: true
-reserve: true
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.2 (Mindestw"
+reserve_blocked_at: 2026-10-06T15:37:21Z
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -146,7 +147,7 @@ Wenn du merkst, dass dein aktuelles Dokument abläuft oder du für einen Verkauf
 1. **Unterlagen sammeln:** Suche Grundrisse, Baubeschreibungen und die Heizkostenabrechnungen der letzten drei Jahre zusammen. Prüfe, wann genau das Haus gebaut wurde und ob es Sanierungen (z. B. neues Dach 2010) gab.
 2. **Ausweistyp bestimmen:** Prüfe, ob für dein Haus die freie Wahl besteht oder ob du aufgrund des Baujahres und der Wohnungsanzahl zwingend einen Bedarfsausweis benötigst.
 3. **Anbieter prüfen:** Suche nach zertifizierten Energieberatern, Architekten oder Schornsteinfegern. Online-Anbieter sind günstig, aber bei einem komplexen Haus ist die Beratung vor Ort oft wertvoller.
-4. **Daten übermitteln:** Gib die Daten gewissenhaft an. Falsche Angaben können den Ausweis ungültig machen und dich rechtlich angreifbar machen.
+4. **Daten übermitteln:** Gib die Angaben gewissenhaft an. Falsche Angaben können den Ausweis ungültig machen und dich rechtlich angreifbar machen.
 5. **Empfehlungen prüfen:** Schau dir nach Erhalt besonders die Seite mit den Modernisierungshinweisen an. Diese sind oft die Basis für staatliche Förderungen (KfW/BAFA).
 
 ## Typische Fehler beim Energieausweis

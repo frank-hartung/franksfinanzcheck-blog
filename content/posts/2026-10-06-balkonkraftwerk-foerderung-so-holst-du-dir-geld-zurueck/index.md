@@ -3,7 +3,8 @@ title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
 description: Du willst Stromkosten senken? Entdecke aktuelle Balkonkraftwerk Förderung & Zuschüsse. Wir zeigen dir, wie du beim Steckersolar-Kauf bares Geld sparst.
 date: 2026-10-06T10:50:01Z
 draft: true
-reserve: true
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 51 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 10 Passiv-Formulierungen; Flesch 51.0 (Mindestwert 60) – ei"
+reserve_blocked_at: 2026-10-06T15:37:21Z
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
