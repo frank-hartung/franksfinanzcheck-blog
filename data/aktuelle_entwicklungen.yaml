@@ -79,6 +79,7 @@
   ab: "2026-01-01"
   bis: ""
   hook: "Google bewertet Ratgeberseiten zunehmend danach, ob echte Erfahrung und nachvollziehbare Quellen hinter den Tipps stehen statt nur oberflächlicher Zusammenfassungen."
+  ki_news_used: true
 
 - id: energie-variable-vs-fest
   kategorie: energie
