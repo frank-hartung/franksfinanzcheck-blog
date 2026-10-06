@@ -40,6 +40,8 @@ Ein Jahres‑Check deiner Gewohnheiten macht das möglich.
 Fünf schnelle Spartricks zeigen sofort Wirkung.  
 Setze die Tipps um und behalte mehr Geld auf dem Konto.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Das Wichtigste in Kürze**  
 - **Beleuchtung**: LED‑Leuchten mit Bewegungsmeldern senken den Verbrauch um bis zu 30 %.
 - **Heizung**: Entlüftete Heizkörper und smarte Thermostate sparen im Schnitt 10 % der Kosten.
