@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 3,
   "pool_size": 10,
-  "generated_at": "2026-10-06T11:21:16Z",
+  "generated_at": "2026-10-06T15:23:22Z",
   "candidates": [
     {
       "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
@@ -52,7 +52,7 @@
     {
       "slug": "2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
       "ready": false,
-      "sha256": "1fa541e9a64682db6d5e82d6a8d9e7ee37893be4a76e80413c6a5d56d65c3d82",
+      "sha256": "3e4b4da06bb57b26a862fd6ee948444718ccefc0cf08484c000e36a6ef0d94d9",
       "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 51 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 10 Passiv-Formulierungen; Flesch 51.0 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschn",
       "details": [
         "🛑 2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -74,7 +74,7 @@
     {
       "slug": "2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
       "ready": false,
-      "sha256": "2ac42245f198b4e8c6e0dcf5f2977dc3d4f5c2c8687851d9f95d6c83e6dcd27e",
+      "sha256": "6f8054c7afc942e71467852218360f341879d694b46395a2636e8c9add5fd9cc",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -96,11 +96,12 @@
     {
       "slug": "2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
       "ready": false,
-      "sha256": "ef420784d0c2da33d54d2d186612f62c88589410ae29997abe4ae69c2d5469c9",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 58.7 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "sha256": "7c9b1a30d17a258a47190f59db323c5be2a6f33be7f9bc00e889841bd6c76584",
+      "reason": "Keyword-Gate nicht bestanden: Keyword-Score 33/100 (<60 kritisch): Keyword nicht in: Titel; Keyword nicht in: Description; Keyword nicht in: Erster Absatz",
       "details": [
         "🛑 2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Flesch 58.7 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Keyword-Gate nicht bestanden: Keyword-Score 33/100 (<60 kritisch): Keyword nicht in: Titel; Keyword nicht in: Description; Keyword nicht in: Erster Absatz",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 58.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
       "score": 0.878,
@@ -117,7 +118,7 @@
     {
       "slug": "2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": false,
-      "sha256": "13566b8515cef264794f9c2d2b91a1350e74552a39fb6702d94f703893edf6dd",
+      "sha256": "7bc3481fa1ad3d018c5e2751b5f621bd778a7e08170b8893cd0b7d04cce6265e",
       "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.2 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestan",
       "details": [
         "🛑 2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -138,12 +139,12 @@
     {
       "slug": "2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks",
       "ready": false,
-      "sha256": "c6da6c1a0403f6b3949a2228933eb64ec382f56b46aa960fd3629adceeeb23d3",
+      "sha256": "a16b4f26912b0b2761732d6a251d8bb8c71d496c8794330feebe7da04907473c",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
-        "Lesbarkeits-Gate nicht bestanden: Flesch 55.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 57.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
       "score": 0.901,
@@ -160,7 +161,7 @@
     {
       "slug": "2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
       "ready": false,
-      "sha256": "8c779f9de0e6808f9bd17633b38697fcc8d90c603245c83a4ab4ff2c52538211",
+      "sha256": "95beda355ee8c083d4cd9a5d903e16d7b5775e209aab627267735e9de913fc29",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 58.0 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -168,12 +169,12 @@
         "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.884,
+      "score": 0.904,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.74,
+        "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.75
@@ -182,11 +183,11 @@
     {
       "slug": "2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
       "ready": false,
-      "sha256": "928dcdd0d9f4e7db75b42a1e534555816d9b3c0252439584236a6fc968d1a9e5",
-      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 50.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "sha256": "8e9e48c9744eafe54874a277cf7d8d5a7d781b6af34a6ed3ce1aa0f965d245ac",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 50.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Lesbarkeits-Gate nicht bestanden: Flesch 50.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 50.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
       "score": 0.92,
@@ -200,5 +201,18 @@
         "readability": 0.8
       }
     }
-  ]
+  ],
+  "recert": {
+    "at": "2026-10-06T15:23:22Z",
+    "renewed": [
+      "2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
+      "2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks",
+      "2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  }
 }
