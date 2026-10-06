@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-05T23:22:51Z",
+  "generated_at": "2026-10-06T00:42:35Z",
   "modus": "kandidaten",
-  "commit": "381f748f615575cfc575b5cfd7c8053d5d577082",
+  "commit": "ada0b5d3325894bd328ed35925b89d007f83c87f",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "6dd3aadb75b0ccfe761305211a669a7c31cc6dc31a3baeab4055c750b4c98d87",
@@ -563,23 +563,6 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
-    },
-    "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
-      "sha256": "c199a740c6262130f56b32d85c4ca6f5bffdbc64e7873e0c874d6e40d1f05dfc",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "standard",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
