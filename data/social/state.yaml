@@ -576,9 +576,21 @@ history:
     #WLAN #Internet #DSL #Handytarif'
   ref: '117393872454593493'
   ai: false
+- posted_at: '2026-10-06T20:56:44.329038+02:00'
+  channel: mastodon
+  slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  title: 'Weihnachten Budget planen: Ohne Schulden durch die Feiertage'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117395489343468673
+  ok: true
+  text: 'Vermeide Weihnachts‑Schulden, wenn du früh planst. Starte im Oktober und
+    notiere jede Ausgabe – Geschenke, Essen, Anreise, Deko, Spenden, Puffer. 📋 https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #Tagesgeld #Zinsen'
+  ref: '117395489343468673'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-06T14:05:37.617648+02:00'
+updated_at: '2026-10-06T20:56:48.997915+02:00'

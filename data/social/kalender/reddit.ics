@@ -6,31 +6,16 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:reddit:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaiso
- n-richtig:takeaway:2026-10-06@franksfinanzcheck.de
-DTSTAMP:20261006T120702Z
-DTSTART:20261006T121500Z
-DTEND:20261006T123000Z
-SUMMARY:Reddit: Gasabschlag berechnen: So planst du die Heizsaison ric
- htig (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-
- so-planst-du-die-heizsaison-richtig/
-URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
- n-so-planst-du-die-heizsaison-richtig/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
- rklich:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261006T120702Z
+ rklich:zahl:2026-10-20@franksfinanzcheck.de
+DTSTAMP:20261006T185650Z
 DTSTART:20261020T121500Z
 DTEND:20261020T123000Z
 SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
- h? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh
- -wlan-was-brauchst-du-wirklich/
+ h? (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Reddit\nArtikel: htt
+ ps://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-w
+ lan-was-brauchst-du-wirklich/
 URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
  mesh-wlan-was-brauchst-du-wirklich/
 STATUS:TENTATIVE
