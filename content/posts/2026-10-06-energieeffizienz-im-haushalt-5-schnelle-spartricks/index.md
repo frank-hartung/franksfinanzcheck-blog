@@ -8,9 +8,9 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Energieeffizienz", "Haushalt", "Energie sparen", "Energieeffizienz im Haushalt", "Schnelle"]
+keywords: ["Energieeffizienz", "Energie sparen", "Energieeffizienz im Haushalt", "Spartricks"]
 pin_title: "Energieeffizienz im Haushalt: 5 schnelle Spartricks"
-pin_description: "*Werbung | Energieeffizienz: Entdecke fünf praxisnahe Maßnahmen, mit denen du im Haushalt Energie sparen und deine Kosten senken kannst. Mehr Spartipps auf FranksFinanzcheck! #energieeffizienz #haushalt #energiesparen"
+pin_description: "*Werbung | Energieeffizienz: Entdecke fünf praxisnahe Maßnahmen, mit denen du im Haushalt Energie sparen und deine Kosten senken kannst. Mehr Spartipps auf FranksFinanzcheck! #energieeffizienz #energiesparen #spartricks"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

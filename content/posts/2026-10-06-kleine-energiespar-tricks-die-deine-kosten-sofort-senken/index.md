@@ -8,7 +8,7 @@ tags: ["Stromkosten senken", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Energie", "Kosten", "SparTipps", "Kleine Energiespar‑Tricks,", "Energiespar"]
+keywords: ["Kleine Energiespar‑Tricks", "Energiespar", "Kleine Energiespar‑Tricks,"]
 pin_title: "Kleine Energiespar‑Tricks,: die deine Kosten sofort senken"
 pin_description: "*Werbung | Praktische SparTipps, wie du mit kleinen Änderungen den Energieverbrauch reduzierst und deine Kosten im Griff behältst. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #energie #kosten #spartipps"
 ai_generated: true

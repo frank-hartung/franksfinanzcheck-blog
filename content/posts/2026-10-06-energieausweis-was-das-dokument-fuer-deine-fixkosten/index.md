@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Energieausweis", "Energieausweis Kosten", "Energieeffizienzklasse Haus", "Dokument", "Fixkosten"]
+keywords: ["Energieausweis", "Energieausweis Kosten", "Energieeffizienzklasse Haus"]
 pin_title: "Energieausweis: Was das Dokument für deine Fixkosten"
 pin_description: "*Werbung | Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt. Mehr Spartipps auf FranksFinanzcheck! #energieausweis #energieausweiskosten #dokument"
 ai_generated: true

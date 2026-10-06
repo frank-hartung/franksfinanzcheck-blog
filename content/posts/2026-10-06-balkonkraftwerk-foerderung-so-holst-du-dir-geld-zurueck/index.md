@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Balkonkraftwerk Förderung", "Solaranlage Zuschuss", "Steckersolar", "Balkonkraftwerk", "Förderung"]
+keywords: ["Balkonkraftwerk Förderung", "Solaranlage Zuschuss", "Steckersolar", "Balkonkraftwerk"]
 pin_title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
 pin_description: "*Werbung | Du willst Stromkosten senken? Entdecke aktuelle Balkonkraftwerk Förderung und Zuschüsse. Wir zeigen dir, wie du beim Steckersolar-Kauf bares Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #solaranlagezuschuss #steckersolar #balkonkraftwerk"
 ai_generated: true

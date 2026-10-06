@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Energiekosten", "Smart-Home-Geräte", "Haushalt", "Energiekosten senken"]
+keywords: ["Energiekosten", "Smart-Home-Geräte", "Energiekosten senken"]
 pin_title: "Energiekosten senken: Smarte Helfer für den Haushalt"
 pin_description: "*Werbung | Reduziere deine Energiekosten mit gezielten Smart-Home-Geräten. Frank Hartung zeigt dir, wie du Technik und den 4K-Prüfpfad für deine Fixkosten nutzt. Mehr Spartipps auf FranksFinanzcheck! #energiekosten #smarthomegeraete #haushalt"
 ai_generated: true
