@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T17:25:06.447105+00:00",
-  "head": "3e04044",
+  "signed_at": "2026-10-07T17:25:22.231322+00:00",
+  "head": "da2556e",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -151,7 +151,15 @@
           "commits_art": "unbekannt"
         }
       ],
-      "prev_sha256": null,
+      "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
+      "prev_sha256": null
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "da2556e",
+      "geaendert": [],
+      "prev_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
       "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364"
     }
   ]
