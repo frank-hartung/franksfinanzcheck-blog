@@ -1,0 +1,42 @@
+# ============================================================
+#  data/robustheit_ausnahmen.yaml – begründete Ausnahmen vom Robustheits-Gate
+#  ------------------------------------------------------------
+#  Das Gate (scripts/robustheits_gate.py) hält Vertrag C31: Jeder
+#  Baustein hat ein Fangnetz, jeder Fetch ein Zeitlimit, jeder
+#  Speicherzugriff ein try/catch.
+#
+#  Eine Ausnahme gehört hierher, NICHT in die Prüflogik. Wer eine Regel
+#  aufweicht, damit ein Befund verschwindet, nimmt der Wache ihre
+#  Aussagekraft – genau das war die Lehre aus Issue #338 (eine Wache,
+#  die nur Fehlalarme liefert, wird abgeschaltet oder ignoriert).
+#
+#  Vertrag je Eintrag:
+#    pfad        Datei, für die die Regel nicht gilt (relativ zur Wurzel)
+#    regel       Regel-Kennung (R1…R12)
+#    grund       warum die Ausnahme richtig ist – nicht warum sie bequem ist
+#    entscheidung  wer es entschieden hat (Mensch, Datum, Vorgang)
+#    faellig     wann die Ausnahme spätestens zu prüfen ist (JJJJ-MM-TT).
+#                Eine Ausnahme ohne Fälligkeit ist eine stille Abschaffung.
+#
+#  Das Gate meldet jede genutzte Ausnahme im Bericht (Zeile „Ausnahme
+#  genutzt"), damit sie sichtbar bleibt und nicht vererbt wird.
+# ============================================================
+
+ausnahmen:
+  - pfad: layouts/_partials/head.html
+    regel: R8
+    grund: >-
+      PaperMod-Erbe: Die Theme-Umschaltung liest localStorage ohne try/catch
+      (vier Stellen). Der ganze Zweig ist durch `disableThemeToggle = true`
+      in hugo.toml tot – er wird nicht gerendert, die gebaute Seite trägt
+      diesen Zugriff nicht. Die Datei gehört zur Klasse KRITISCH
+      (scripts/integrity_guard.py): Sie zu ändern braucht eine menschliche
+      Signatur im selben Commit. Ein Gate, das eine versiegelte Datei
+      dauerhaft rot meldet, ist ein Dauer-Alarm und wird abgeschaltet.
+    entscheidung: Frank Hartung, 07.10.2026 (Vertrag C31, Robustheit Premium)
+    faellig: "2027-01-07"
+
+# Fremdcode (static/premium/vendor/) steht bewusst NICHT hier: Er ist per
+# Bauart aus der Prüfung ausgeschlossen (`erstpartei_js()` liest nur *.js
+# direkt unter static/premium/). Seine Unversehrtheit trägt die
+# Versions-Wache (tools/update-gsap-vendor.sh), nicht dieses Gate.

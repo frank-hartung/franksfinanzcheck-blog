@@ -115,24 +115,87 @@
       senden();
     });
 
-    function senden() {
-      var ziel = form.getAttribute('action');
-      var daten = new FormData(form);
-      var körper = [];
-      daten.forEach(function (wert, schlüssel) {
-        if (wert === '' && schlüssel !== 'consent') return;
-        körper.push(encodeURIComponent(schlüssel) + '=' + encodeURIComponent(wert));
+    /* Doppelklick-Sperre: Ein zweiter Klick während der laufenden Anmeldung
+       legte bisher eine zweite Anfrage an – derselbe Mensch, zweimal „Wird
+       übermittelt …", zweimal Arbeit im Worker. */
+    var unterwegs = false;
+
+    /* EIN WEG MIT ZEITLIMIT (Härtung C31, 07.10.2026). Die Resilienzschicht
+       (FFRobust.hole) liefert ihn; fehlt sie, gilt dieselbe Logik hier.
+       Befund: Ohne Zeitlimit blieb der Knopf bei einem hängenden Worker für
+       immer auf „Wird übermittelt …" stehen UND war gesperrt – der Leser
+       konnte weder wiederholen noch abbrechen, und die Seite schwieg. */
+    function anfragen(ziel, optionen) {
+      var robust = window.FFRobust;
+      if (robust && typeof robust.hole === 'function') return robust.hole(ziel, optionen);
+      var zeitlimit = typeof optionen.zeitlimit === 'number' ? optionen.zeitlimit : 15000;
+      var kopie = {};
+      for (var k in optionen) {
+        if (!Object.prototype.hasOwnProperty.call(optionen, k)) continue;
+        if (k === 'zeitlimit' || k === 'versuche' || k === 'warte' || k === 'quelle') continue;
+        kopie[k] = optionen[k];
+      }
+      var steuerung = window.AbortController ? new window.AbortController() : null;
+      var abbruch = null;
+      if (steuerung) {
+        kopie.signal = steuerung.signal;
+        abbruch = setTimeout(function () { try { steuerung.abort(); } catch (e) {} }, zeitlimit);
+      }
+      return window.fetch(ziel, kopie).then(function (antwort) {
+        if (abbruch) clearTimeout(abbruch);
+        return { ok: true, unbekannt: antwort.type === 'opaque', status: antwort.status };
+      }).catch(function () {
+        if (abbruch) clearTimeout(abbruch);
+        return { ok: false, fehler: 'zeitlimit' };
       });
+    }
+
+    function senden() {
+      if (unterwegs) return;
+      var ziel = form.getAttribute('action');
+      var körper = [];
+      try {
+        var daten = new FormData(form);
+        if (typeof daten.forEach !== 'function') throw new Error('FormData ohne forEach');
+        daten.forEach(function (wert, schlüssel) {
+          if (wert === '' && schlüssel !== 'consent') return;
+          körper.push(encodeURIComponent(schlüssel) + '=' + encodeURIComponent(wert));
+        });
+      } catch (e) {
+        /* Ohne FormData (alter Browser) übernimmt der native POST: derselbe
+           Weg wie ohne JavaScript – die Anmeldung funktioniert trotzdem. */
+        try { form.submit(); } catch (e2) {}
+        return;
+      }
+      unterwegs = true;
       if (button) button.disabled = true;
       setzen('sendet', 'Wird übermittelt …');
-      window.fetch(ziel, {
+      anfragen(ziel, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
         body: körper.join('&'),
         mode: 'no-cors',
         credentials: 'omit',
-        keepalive: true
-      }).then(function () {
+        keepalive: true,
+        zeitlimit: 15000,
+        versuche: 2,
+        quelle: 'newsletter-anmeldung'
+      }).then(function (ergebnis) {
+        unterwegs = false;
+        /* Zeitlimit oder Netzabbruch NACH dem Wiederholungsversuch: ehrlich
+           melden und den Knopf freigeben. `unbekannt` (opaque Antwort aus
+           dem no-cors-Fetch) ist KEIN Fehler – sie sagt nur „durchgekommen,
+           Inhalt nicht lesbar", und genau so behandelt die Meldung unten sie. */
+        if (ergebnis && ergebnis.ok === false) {
+          if (button) button.disabled = false;
+          form.dataset.status = 'fehler';
+          if (status) {
+            status.textContent = 'Die Übermittlung ist nicht durchgekommen – das liegt an der ' +
+              'Verbindung, nicht an dir. Bitte erneut versuchen, oder melde dich direkt über ' +
+              'kontakt@franksfinanzcheck.de an.';
+          }
+          return;
+        }
         try { localStorage.setItem(SCHLUESSEL, 'angemeldet'); } catch (e) { /* privat-Modus */ }
         document.documentElement.setAttribute('data-ff-nl', 'angemeldet');
         setzen('ok', 'Bestätigungsmail ausgelöst. Sie kommt in den nächsten Minuten – ' +
@@ -148,6 +211,10 @@
            stiller Startwert an jeder späteren Wiederanmeldung. */
         try { localStorage.removeItem(AUSWAHL); } catch (e) { /* Privat-Modus */ }
       }).catch(function () {
+        /* `anfragen` lehnt nie ab – dieses Netz bleibt trotzdem stehen:
+           ein Fehler HIER (z. B. im Erfolgszweig) darf den Knopf nicht
+           gesperrt lassen. */
+        unterwegs = false;
         if (button) button.disabled = false;
         form.dataset.status = 'fehler';
         if (status) {

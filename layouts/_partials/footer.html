@@ -89,11 +89,17 @@
         // (dataset.theme, html.ff-consent-set) → Forced Reflow beim Laden
         // (Lighthouse 'erzwungener dynamischer Umbruch'). Nach load + Leerlauf
         // ist das Layout stabil und der Write liegt außerhalb des Messfensters.
+        /* HÄRTUNG (C31, 07.10.2026): Web Storage wirft in Safari privat, bei
+           blockierten Cookies und bei voller Quota. Ohne Fangnetz starb hier
+           das ganze Skript – und mit ihm der Top-Link und der Kopier-Knopf
+           darunter. Die Scroll-Position ist Bequemlichkeit, kein Zustand. */
         function restoreMenuScroll() {
-            var scrollPosition = localStorage.getItem("menu-scroll-position");
-            if (scrollPosition) {
-                menu.scrollLeft = parseInt(scrollPosition, 10);
-            }
+            try {
+                var scrollPosition = localStorage.getItem("menu-scroll-position");
+                if (scrollPosition) {
+                    menu.scrollLeft = parseInt(scrollPosition, 10);
+                }
+            } catch (e) { /* kein Speicher → kein Wiederherstellen, mehr nicht */ }
         }
         function scheduleMenuScrollRestore() {
             if ('requestIdleCallback' in window) {
@@ -115,7 +121,12 @@
             if (!menuScrollTicking) {
                 menuScrollTicking = true;
                 requestAnimationFrame(function () {
-                    localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+                    /* Derselbe Befund: Dieser Wurf kam bei jedem Scrollen in
+                       privatem Modus – ein Dauerfeuer in der Konsole und ein
+                       Frame, der nie zu Ende lief. */
+                    try {
+                        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+                    } catch (e) { /* kein Speicher → nichts merken */ }
                     menuScrollTicking = false;
                 });
             }
@@ -182,52 +193,115 @@
 {{- end }}
 
 {{- if (and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") (.Param "ShowCodeCopyButtons")) }}
+{{- /* HÄRTUNG (Vertrag C31, 07.10.2026 – Robustheit Premium)
+       Drei stille Ausfälle dieses Bausteins, alle belegt:
+       1. `navigator.clipboard.writeText()` liefert ein Promise. Schlug es
+          fehl (Fokus verloren, Erlaubnis entzogen, unsicherer Kontext),
+          stand trotzdem „copied!" am Knopf und ein nicht abgefangenes
+          Promise in der Konsole – der Leser glaubte einem Knopf, der
+          nichts kopiert hatte.
+       2. Ein TypeError in der Elternkette (`parentNode.parentNode…`)
+          beendete die ganze Schleife: EIN unerwartetes Markup nahm ALLEN
+          Codeblöcken der Seite den Knopf.
+       3. `innerHTML` für einen Übersetzungstext – hier zwar vertraut, aber
+          dieselbe Technik, die das Anmelde-Skript zu Recht nicht benutzt.
+       Jetzt: Fangnetz je Codeblock, `textContent`, ehrlicher Erfolg erst
+       nach der Antwort, Rückfall auf `execCommand` und – fehlt auch der –
+       eine stehen bleibende Auswahl statt einer falschen Zusage. */ -}}
 <script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
+(function () {
+    var texte = {
+        kopieren: '{{- i18n "code_copy" | default "copy" }}',
+        kopiert: '{{- i18n "code_copied" | default "copied!" }}'
+    };
 
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = '{{- i18n "code_copy" | default "copy" }}';
-
-        function copyingDone() {
-            copybutton.innerHTML = '{{- i18n "code_copied" | default "copied!" }}';
-            setTimeout(() => {
-                copybutton.innerHTML = '{{- i18n "code_copy" | default "copy" }}';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
+    function alterWeg(codeblock, kopiert) {
+        /* Rückfall ohne Clipboard-API: Auswahl stehen lassen, damit der
+           Leser selbst kopieren kann – keine falsche Zusage. */
+        try {
+            var range = document.createRange();
             range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
+            var selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { }
-            selection.removeRange(range);
+            var ok = document.execCommand ? document.execCommand('copy') : false;
+            selection.removeAllRanges();
+            if (ok) kopiert();
+            return !!ok;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function knopfBauen(codeblock) {
+        var container = codeblock.parentNode ? codeblock.parentNode.parentNode : null;
+        if (!container) return;
+
+        var copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        /* type="button": Ohne Typ würde ein Knopf in einem Formular
+           absenden – ein Codeblock im Artikel darf das nie auslösen. */
+        copybutton.type = 'button';
+        copybutton.textContent = texte.kopieren;
+
+        function copyingDone() {
+            copybutton.textContent = texte.kopiert;
+            setTimeout(function () { copybutton.textContent = texte.kopieren; }, 2000);
+        }
+
+        copybutton.addEventListener('click', function () {
+            /* Vorzugsweise die Resilienzschicht (zweiter Weg + ehrliche
+               Antwort); fehlt sie, gilt dieselbe Logik hier. */
+            var robust = window.FFRobust;
+            if (robust && typeof robust.zwischenablage === 'function') {
+                try {
+                    robust.zwischenablage(codeblock.textContent).then(function (ok) {
+                        if (ok) copyingDone(); else alterWeg(codeblock, copyingDone);
+                    });
+                    return;
+                } catch (e) { /* unten weiter */ }
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    navigator.clipboard.writeText(codeblock.textContent).then(function () {
+                        copyingDone();
+                    }, function () {
+                        alterWeg(codeblock, copyingDone);
+                    });
+                    return;
+                } catch (e) { /* synchroner Wurf → alter Weg */ }
+            }
+            alterWeg(codeblock, copyingDone);
         });
 
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            // td containing LineNos
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            // table containing LineNos and code
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        var ziel = null;
+        if (container.classList && container.classList.contains('highlight')) {
+            ziel = container;
+        } else if (container.parentNode && container.parentNode.firstChild === container) {
+            return;  /* td mit Zeilennummern – bewusst kein Knopf */
         } else {
-            // code blocks not having highlight as parent class
-            codeblock.parentNode.appendChild(copybutton);
+            /* PaperMod legt Code in Tabellen mit Zeilennummern vier Ebenen
+               tiefer. Fehlt eine Ebene, ist dieser Block übersprungen –
+               nicht die ganze Seite. */
+            var ebene = container;
+            for (var i = 0; i < 4 && ebene && ebene.parentNode; i++) ebene = ebene.parentNode;
+            if (ebene && ebene.nodeName === 'TABLE') ziel = ebene;
+            else if (codeblock.parentNode) ziel = codeblock.parentNode;
+        }
+        if (ziel && ziel.appendChild) ziel.appendChild(copybutton);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('pre > code'), function (codeblock) {
+        try {
+            knopfBauen(codeblock);
+        } catch (e) {
+            /* EIN kaputter Codeblock darf den übrigen den Knopf nicht nehmen. */
+            if (window.FFRobust && window.FFRobust.melden) {
+                window.FFRobust.melden({ quelle: 'code-knopf', text: String((e && e.message) || e || '') });
+            }
         }
     });
+})();
 </script>
 {{- end }}
 

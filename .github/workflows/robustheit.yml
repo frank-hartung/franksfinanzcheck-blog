@@ -1,0 +1,118 @@
+# ============================================================
+#  ROBUSTHEITS-WACHE – die Seite darf nie stumm sterben (C31, 07.10.2026)
+#  ------------------------------------------------------------
+#  WARUM: Die lauten Fehler dieses Blogs fangen die übrigen Wachen
+#  (Build bricht ab, Gate wird rot, Deploy bleibt liegen). Die teuren
+#  Fehler sind die stillen: ein Rechner, der beim Initialisieren stirbt
+#  und einen toten Knopf hinterlässt; ein Anmeldeformular, das unbegrenzt
+#  auf einen hängenden Worker wartet; ein Service Worker, dessen
+#  Cache-Fehler einen Request verschluckt, der ohne ihn durchgegangen
+#  wäre; ein Kopierversuch, der „copied!" verspricht, obwohl die
+#  Zwischenablage die Erlaubnis verweigert hat. Alle vier waren real,
+#  alle vier blieben unsichtbar, weil die Seite BAUTE.
+#
+#  Diese Wache prüft die Gegenmittel als Vertrag: Fehler-Horcher im
+#  <head> (ohne neues Head-Kind), Zeitlimit an jedem Fetch, fail-offener
+#  Service Worker mit Offline-Fangnetz, Fangnetz je interaktivem
+#  Baustein, Markup nur aus statischem Text, Web Storage nur im
+#  try/catch, sichtbarer Ausfall-Satz im Markenton.
+#
+#  Wache:    scripts/robustheits_gate.py (R1–R12, mit Selbsttest)
+#  Schicht:  static/premium/ff-robust.js + Bootstrap in extend_head.html
+#  Ausnahmen: data/robustheit_ausnahmen.yaml (begründet, datiert, fällig)
+#  Runbook:  docs/ANLEITUNG-ROBUSTHEIT.md
+#  Hintergrund: ROBUSTHEIT-PREMIUM-2026-10-07.md
+#
+#  Läuft bei jedem Push/PR, der Laufzeit-Code berührt, und jede Nacht –
+#  damit auch ein Drift aus einem fremden Merge auffällt. Der Selbsttest
+#  läuft zuerst: Eine sabotierte Prüflogik darf kein grünes Gate liefern.
+# ============================================================
+name: Robustheits-Wache (Laufzeit-Fangnetze)
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "static/premium/**"
+      - "layouts/**"
+      - "assets/css/extended/**"
+      - "scripts/robustheits_gate.py"
+      - "scripts/tests/test_robustheits_gate.py"
+      - "tools/robust.test.mjs"
+      - "data/robustheit_ausnahmen.yaml"
+      - ".github/workflows/robustheit.yml"
+  pull_request:
+    paths:
+      - "static/premium/**"
+      - "layouts/**"
+      - "assets/css/extended/**"
+      - "scripts/robustheits_gate.py"
+      - "scripts/tests/test_robustheits_gate.py"
+      - "tools/robust.test.mjs"
+      - "data/robustheit_ausnahmen.yaml"
+      - ".github/workflows/robustheit.yml"
+  schedule:
+    # Jede Nacht – ein Drift aus einem Merge, den kein Pfade-Filter sah,
+    # soll nicht erst beim nächsten Deploy auffallen.
+    - cron: "35 4 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: robustheit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  robustheit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Node bereitstellen (Syntaxprüfung und jsdom-Test)
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python3 -m pip install --quiet pyyaml || python3 -m pip install --quiet --break-system-packages pyyaml
+          npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+
+      # Eine Wache, die sich nicht selbst beweist, ist ein grüner Haken
+      # ohne Aussage. Deshalb immer zuerst.
+      - name: Selbsttest der Wache (13 Sabotage-Proben, 2 Gegenproben)
+        run: python3 scripts/robustheits_gate.py --selftest
+
+      - name: Quelle prüfen (R1–R12, ohne Build)
+        run: python3 scripts/robustheits_gate.py --source-only
+
+      - name: Resilienzschicht im Browser-DOM testen (jsdom)
+        run: node --test tools/robust.test.mjs
+
+      - name: Einheitstests der Wache
+        run: python3 -m unittest scripts.tests.test_robustheits_gate
+
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+
+      - name: Build (minifiziert – wie im Deploy)
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public"
+          label: "Robustheits-Wache"
+
+      # Die gebaute Wahrheit: Steht das Fangnetz auch in der ausgelieferten
+      # Seite (Bootstrap im HTML, gehärteter sw.js, keine Hugo-Platzhalter)?
+      - name: Gebaute Wahrheit prüfen (public/)
+        run: python3 scripts/robustheits_gate.py --public public --strict

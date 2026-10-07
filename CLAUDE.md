@@ -123,6 +123,9 @@ npm run test:ki                                        # Gate-Selbsttest (10 Sab
 npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
+npm run robustheit:check                              # Robustheit R1–R12: Selbsttest + Quelle + Build + gebaute Wahrheit
+npm run test:robustheit                               # Robustheit: Gate-Selbsttest + Unit-Tests + Verhalten im jsdom
+python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
 npm run test:h1                                       # 20 Regressionstests der H1-Wache (Vertrag C30)
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
@@ -1036,6 +1039,75 @@ die Ursachen lagen davor:
   `--file <pfad>` (Trockenlauf) bzw. `--fix`. Tests:
   `python3 -m unittest scripts.tests.test_reserve_pipeline`.
   Vorgangsbericht: `WF-D4E0-612-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
+## Die Seite darf nie stumm sterben (Robustheit der Laufzeit, C31, seit 07.10.2026)
+
+**Lehre aus vier Befunden, die kein Build-Gate sehen konnte.** Dieser Blog hat
+zwei Fehlerklassen. Die lauten fangen die übrigen Wachen: Der Build bricht ab,
+ein Gate wird rot, der Deploy bleibt liegen. Die stillen sind teurer, weil die
+Seite **baut** – der Ausfall passiert erst im Browser, bei einem Leser, auf
+einem Gerät, das hier niemand hat. Am 07.10.2026 lagen vier solcher Fälle real
+im Bestand:
+
+1. `ff-rechner.js` initialisierte alle Rechner einer Seite in einer Schleife
+   **ohne Fangnetz**. Ein einziger Rechner mit unerwartetem Markup warf – und
+   nahm den übrigen die Verdrahtung mit: Formular sichtbar, Absenden lädt die
+   Seite neu, keine Rechnung.
+2. Die Newsletter-Anmeldung wartete **unbegrenzt** auf den Worker: `fetch` ohne
+   Zeitlimit, Knopf `disabled`. Hing der Worker, stand „Wird übermittelt …" für
+   immer; wiederholen ging nicht, abbrechen auch nicht.
+3. Der Service Worker öffnete seinen Cache außerhalb jedes `try/catch`. Wirft
+   das Cache-API (volle Quota, privater Modus), lehnte `respondWith` ab – ein
+   Request, der ohne den SW problemlos durchgegangen wäre, kam nicht an.
+4. Der Kopier-Knopf meldete „copied!" **bevor** die Zwischenablage antwortete
+   und ließ ein abgelehntes Promise zurück.
+
+**Die Regel daraus:** Ein gefangener Fehler ist erst behoben, wenn der Leser
+weiß, woran er ist. Ein Knopf, der nichts tut, ist schlechter als ein Satz, der
+sagt, was geht und was nicht.
+
+**Zwei Stufen, eine Wahrheit.** Stufe 1 ist der Bootstrap im `<head>`
+(`layouts/_partials/extend_head.html`, **im vorhandenen** Consent-Skript – kein
+zusätzliches Head-Kind, 58 ist die Lighthouse-Grenze): Er sieht jeden Fehler,
+auch den der Inline-Skripte, und stellt `FFRobust.hole()` – Fetch mit
+Zeitlimit, das **nie** ablehnt. Stufe 2 ist `static/premium/ff-robust.js`
+(defer, Fuß des Body): Fehlergrenzen (`insel`), Speicher-Fangnetz (`ablage`),
+ehrliche Zwischenablage, Diagnose (`bericht()`). Beide sind idempotent
+(`R.boot`), beide first-party, beide ohne Versand nach außen.
+
+**Was ein Agent beim Bauen eines interaktiven Bausteins tut:**
+
+1. Fangnetz **je Instanz**, nicht je Seite: `FFRobust.insel('name', init,
+   { ziel: ergebnisFeld })` oder ein eigenes `try/catch` pro Element.
+2. Im Ausfall einen Satz: `role="status"`, Marke, keine Technik.
+3. Jeder Netzaufruf über `FFRobust.hole(url, { zeitlimit, versuche, quelle })`;
+   der Knopf wird im Fehlerfall wieder freigegeben.
+4. Web Storage nur mit Fangnetz (`FFRobust.ablage` oder `try/catch`) – die Seite
+   bleibt ohne Speicher bedienbar.
+5. Kein `innerHTML` aus Text, kein `document.write`, kein `eval()`.
+
+**Zwei Vertragspunkte, die nicht verhandelbar sind.** `opaque` (Antwort aus
+einem `no-cors`-Fetch) ist **kein** Fehler: Sie sagt „durchgekommen, Inhalt
+nicht lesbar" – die Newsletter-Anmeldung sendet bewusst `no-cors`, und
+`test_kein_erfolgsversprechen` hält fest, dass sie deshalb nie einen Erfolg
+behauptet. Und: Wiederholt wird nur bei `netz`, nie bei `zeitlimit` – ein
+Request, der ins Zeitlimit lief, hat den Dienst schon beschäftigt.
+
+**Wache:** `scripts/robustheits_gate.py` (R1–R12, `--selftest` mit 13
+Sabotage-Proben und 2 Gegenproben, `--public` für die gebaute Wahrheit). Sie
+läuft in `robustheit.yml` (Push/PR/Nacht) und im Deploy **vor** dem Build,
+fail-closed. Sie heilt nie selbst: Ein Fangnetz, das sich selbst wieder
+einhängt, wäre keines.
+
+**Ausnahmen** stehen in `data/robustheit_ausnahmen.yaml` – begründet, mit
+Entscheidung und **Fälligkeit**, im Bericht genannt. Eine Ausnahme ohne
+Fälligkeit ist eine stille Abschaffung. Aktuell eine: `head.html` (KRITISCH
+versiegelt, R8) – der nackte `localStorage`-Zugriff dort ist PaperMod-Erbe und
+durch `disableThemeToggle = true` tot; ihn zu ändern braucht eine menschliche
+Signatur.
+
+Runbook: `docs/ANLEITUNG-ROBUSTHEIT.md` · Befund und Beweis:
+`ROBUSTHEIT-PREMIUM-2026-10-07.md`
 
 ## Wichtige Konventionen
 
