@@ -338,6 +338,17 @@ HEALER_CHAIN = [
     # NIE einen Text, der unter der Schwelle bleibt: Tor T1–T4, fail-closed,
     # byte-identisch bei Zweifel – genau deshalb darf er hier stehen, wo Gate
     # und Zertifizierung gleich danach messen.
+    # REPARATUR 07.10.2026 (BOT-WATCHDOG-614): VOR dem Lesbarkeits-Heiler und
+    # NACH allen KI-Umschreibern läuft der Politur-Heiler. Er entfernt genau
+    # die Maschinen-Reste, für die es bis heute keinen Heiler gab und die
+    # deshalb als „manuell reparieren" im Zertifikat standen (R14-Marker-Ruine
+    # „SATZ:", R15-PHrasen-Doppel aus mehrfachen Keyword-Stempeln, R7-Intro-
+    # Formel). Die Reihenfolge ist kein Geschmack: Das Tor des Lesbarkeits-
+    # Heilers (T2) verwirft jede Schrift, die danach noch einen harten
+    # Textverständnis-Fund trägt – ein bestehender Rest hätte die
+    # Flesch-Heilung also blockiert. Deckung + Wirkung erzwingt
+    # reserve_healer_coverage.py (PROBEN_PFLICHT), die Governance-Regel C25.
+    ("politur_heiler.py", ["--fix"], "file"),
     ("lesbarkeit_heiler.py", ["--fix"], "file"),
     # REPARATUR 05.10.2026 (WF-B594, Issue #594): Der Internal-Linker fehlte
     # in dieser Kette – als EINZIGER Blocker der Triage ohne jeden Heiler.

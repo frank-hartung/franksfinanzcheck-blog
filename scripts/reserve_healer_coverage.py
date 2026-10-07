@@ -57,6 +57,15 @@ ERWEITERUNG 05.10.2026 (WF-B594, Issue #594): Zweite Deckung `loeschdeckung()`
   der Kette läuft, ist eine Todesfalle für Entwürfe; ein Blocker ohne Klasse
   ist eine unentschiedene Zuständigkeit. Beides stoppt jetzt den Lauf.
 
+ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Derselbe Nachweis gilt jetzt
+  auch für `textverstaendnis_failures`. Die Regel stand als „gedeckt" in der
+  Tabelle, obwohl die genannten Heiler nur R5 (Absatz) und R8-URL kennen –
+  die harten Politur-Regeln R7/R11–R16 hatten keinen Heiler. Beweis aus dem
+  Reserve-Zertifikat vom 07.10.2026: „R14-MARKER-RUINE … manuell reparieren",
+  „R15-PHRASEN-DOPPEL … manuell reparieren". Der neue `politur_heiler.py`
+  heilt die Klasse und ist über `PROBEN_PFLICHT` an seinen
+  `--wirkungsprobe`-Nachweis gebunden.
+
 ERWEITERUNG 07.10.2026 (WACHE-609): Dritte Deckung `wirkungsdeckung()`
   – „Deckung heißt Wirkung". Der Auslöser ist die zweite Hälfte des Befunds:
   `readability_failures` galt als gedeckt, weil `profi_polish.py` in der Kette
@@ -122,7 +131,16 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
     # beweist seine Wirkung als Maschinenvertrag (`--wirkungsprobe`).
     "readability_failures": ("lesbarkeit_heiler.py", "profi_polish.py"),
     # R2/R3/R5/R7/R8: Absatz-Splitter heilt R5, URL-Hygiene heilt R8-URL.
-    "textverstaendnis_failures": ("r5_absatz_splitter.py",
+    # REPARATUR 07.10.2026 (BOT-WATCHDOG-614): Diese Zeile stand bis heute für
+    # den GANZEN Regel-Ordner `textverstaendnis_failures` – obwohl die beiden
+    # genannten Heiler nur R5 und R8-URL kennen. Die harten Politur-Regeln
+    # (R7/R11–R16) waren damit formal „gedeckt", praktisch unheilbar: Im
+    # Reserve-Zertifikat standen sie als „manuell reparieren", der Vorrat
+    # blieb unter dem Zielbestand und der Bot-Watchdog öffnete dieselbe
+    # Meldung jede Nacht neu (#614). Der Politur-Heiler schließt die Klasse –
+    # mit eigener Wirkungsprobe und Pflicht-Nachweis (PROBEN_PFLICHT).
+    "textverstaendnis_failures": ("politur_heiler.py",
+                                  "r5_absatz_splitter.py",
                                   "fix_url_hygiene.py"),
 }
 
@@ -162,12 +180,20 @@ AUSNAHMEN: dict[str, str] = {
 #  wirklich bewegt, und das Tor T1–T4 hält.
 WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
     "lesbarkeit_heiler.py": ("--wirkungsprobe",),
+    # ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Der Politur-Heiler heilt die
+    # harten Regeln R7/R11–R16 und beweist das an einem Fixture (alle fünf
+    # Defekte hinein, keiner heraus, Tor T1–T3 hält, idempotent).
+    "politur_heiler.py": ("--wirkungsprobe",),
 }
 
 #  Regeln mit Zahlen-Versprechen: Mindestens einer ihrer Heiler MUSS eine
 #  grüne Wirkungsprobe haben. Die Liste wächst mit jedem neuen Zahlen-Heiler,
 #  nicht mit jedem Heiler (Alt-Werkzeuge ohne Schwelle bleiben unberührt).
-PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",)
+#  `textverstaendnis_failures` ist der zweite Eintrag: Die Regel galt als
+#  gedeckt, während im Zertifikat „manuell reparieren" stand (#614) – genau
+#  die Bauart, gegen die diese Liste existiert (#609).
+PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",
+                                   "textverstaendnis_failures")
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")
 # (Hinweis auf Aufrufe wird nicht geparst: die Kette ist die Wahrheit.)

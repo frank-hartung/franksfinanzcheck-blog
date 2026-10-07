@@ -122,6 +122,17 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # verlangt, fuehrt irgendwann niemand aus - deshalb steht sein
           # Selbsttest hier im vertraglichen Minimum (C6).
           "lesbarkeit_heiler.py",
+          # Politur-Heiler (07.10.2026, BOT-WATCHDOG #614): Er heilt die
+          # Maschinen-Reste, fuer die es bis dahin KEINEN Heiler gab (R7-Intro-
+          # Formel, R11/R13 Zahlen-Datums-Ruinen, R14-Marker, R15-PHrasen-Doppel,
+          # R16-Prompt-Echo) - genau die Funde, die das Zertifikat als „manuell
+          # reparieren" auswies und die das Tor T2 des Lesbarkeits-Heilers
+          # deshalb JEDE KI-Heilung verwerfen liessen. Er laeuft in der Kette
+          # VOR dem Lesbarkeits-Heiler und beweist seine Wirkung als
+          # Maschinenvertrag (`--wirkungsprobe`, Governance C25). Eine Wache,
+          # die niemand verlangt, fuehrt irgendwann niemand aus - deshalb steht
+          # sein Selbsttest hier im vertraglichen Minimum (C6).
+          "politur_heiler.py",
           # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
           # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
           # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam
