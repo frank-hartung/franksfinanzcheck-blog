@@ -3,7 +3,9 @@ lastmod: 2026-09-25
 title: "7 Gewohnheiten für finanzielle Freiheit"
 description: "Diese 7 Gewohnheiten helfen dir, Fixkosten zu senken, Rücklagen aufzubauen und finanzielle Freiheit Schritt für Schritt realistischer zu machen."
 date: 2026-10-07T01:34:21Z
-draft: false
+draft: true
+cadence_demoted: 2026-10-07T13:19:49Z
+cadence_grund: "Redaktions-Standard: RS2, RS3"
 reserve_published: 2026-10-07
 reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, RELEASE-SCORECARD Freigabe nicht erforderlich (Faktenstand frisch, naechste Pruefung 2026-11-11) - bewusste Uebernahme in den Vorrat statt Leerlauf der Automatik"
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen"]
