@@ -243,4 +243,8 @@
 {"date": "2026-10-05", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-10-07", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/publikations_vertrag.py", "scripts/redaktions_standard.py"]}
 {"date": "2026-10-07", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py"]}
+{"date": "2026-10-07", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
 {"date": "2026-10-07", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": ["scripts/politur_ruine_heiler.py"]}
+{"date": "2026-10-07", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
+{"date": "2026-10-07", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
+{"date": "2026-10-07", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}

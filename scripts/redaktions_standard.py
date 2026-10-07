@@ -66,6 +66,28 @@ from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
 import groq_config  # noqa: E402
 
+# YMYL-Schutz (Premium-Fix #613): Hochrisiko-Artikel mit gültigem Siegel
+# dürfen nicht von der KI-Heilung umgeschrieben werden – sonst bricht das
+# Siegel (E17) und die verankerten Aussagen/Zahlen (E13/E18/E19). Die Wache
+# prüft das vor jeder Schreiboperation.
+try:  # noqa: E402
+    import editorial_review_gate as _ymyl_gate
+    _YMYL_AVAILABLE = True
+except Exception:  # noqa: BLE001
+    _ymyl_gate = None
+    _YMYL_AVAILABLE = False
+
+
+def _is_ymyl_sealed(path: str) -> bool:
+    """True, wenn der Artikel Hochrisiko + freigegeben + Hash gültig ist."""
+    if not _YMYL_AVAILABLE or _ymyl_gate is None:
+        return False
+    try:
+        result = _ymyl_gate.evaluate_path(path)
+        return bool(result.get("approved") and not result.get("blocking") and result.get("risk") == "hoch")
+    except Exception:
+        return False
+
 # PUBLIKATIONS-VERTRAG (Vorgang WF-54C4/#607, 07.10.2026): Die KI-Heilung
 # prüfte bisher nur die STRUKTUR ihrer Änderung (Links, H2-Anzahl, Länge,
 # Trennlinien) – nicht die Regeln, die über die Veröffentlichung entscheiden.
@@ -780,6 +802,9 @@ def main():
     # --- Deterministische Heilung (RS7), immer bei --fix --------------------
     if DO_FIX:
         for a in posts:
+            if _is_ymyl_sealed(a["path"]):
+                print(f"  ⏭ YMYL-Siegel aktiv – RS7 übersprungen: {a['slug']}")
+                continue
             neu = fix_rs7(a["path"], a)
             if neu and not DRY_RUN:
                 with open(a["path"], "w", encoding="utf-8") as fh:
@@ -806,6 +831,12 @@ def main():
             budget = min(budget, 3)  # Geburtstag: nie mehr als 3 KI-Durchgänge
         ziel = kandidaten[:backlog] if backlog else kandidaten[:budget]
         for r in ziel:
+            if _is_ymyl_sealed(r["path"]):
+                print(f"  ⏭ YMYL-Siegel aktiv – KI-Heilung übersprungen: {r['slug']}")
+                verworfen.append({"slug": r["slug"], "regel": "YMYL",
+                                  "aktion": "ki-heilung-ymyl-skip",
+                                  "grund": "Hochrisiko-Artikel mit gültigem Siegel – keine KI-Umschreibung"})
+                continue
             a = load_article(r["path"])
             if not a:
                 continue

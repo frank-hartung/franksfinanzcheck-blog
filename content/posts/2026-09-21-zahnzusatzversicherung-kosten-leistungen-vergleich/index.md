@@ -33,7 +33,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "68d76712d6ef872b7b0879ee15e99fbfbd2ba66d17751461ac261d51c060151c"
+  inhalt_sha256: "a613451a3e111b34c0dcfa78e4bb7186176a60a4af887917e6b46c1ee09df8c7"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Festzuschuss-Sätze 60/70/75 % und GOZ/Zahnstaffel-Aussagen belegt, alle Beispielrechnungen nachgerechnet"

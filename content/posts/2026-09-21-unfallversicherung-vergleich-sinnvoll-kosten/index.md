@@ -33,7 +33,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "48a4af68d344f2716cc922dfa881961f80f4d307f9a759d474d43cf04628fe7e"
+  inhalt_sha256: "54148463ac4637bd4dfc1c7f1f6329ba24f71792128d16838f50cc231e372239"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale); Abgrenzung Unfall/Krankheit/BU belegt, Progressions- und Gliedertaxe-Rechnungen nachgerechnet"

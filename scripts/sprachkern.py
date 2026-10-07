@@ -34,6 +34,27 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from post_utils import list_post_paths, join_article  # noqa: E402
 
+# YMYL-Schutz (Premium-Fix #613): Hochrisiko-Artikel mit gültigem Siegel
+# dürfen nicht von der Sprach-Politur umgeschrieben werden. Der Schutz liegt
+# im Kern, damit alle Engines (grammar_check, sprachglatt, zeit_rechtschreibung)
+# automatisch profitieren.
+try:
+    import editorial_review_gate as _ymyl_gate
+    _YMYL_AVAILABLE = True
+except Exception:
+    _ymyl_gate = None
+    _YMYL_AVAILABLE = False
+
+
+def _is_ymyl_sealed(path: str) -> bool:
+    if not _YMYL_AVAILABLE or _ymyl_gate is None:
+        return False
+    try:
+        result = _ymyl_gate.evaluate_path(path)
+        return bool(result.get("approved") and not result.get("blocking") and result.get("risk") == "hoch")
+    except Exception:
+        return False
+
 # ---------------------------------------------------------------- Schutzzonen
 PROTECT_RX = re.compile(
     r"(```.*?```"                # Code-Block
@@ -270,6 +291,8 @@ def politur_ruine_funde(text: str) -> list:
 
 def write_verified(a: dict, new_content: str, engine: str) -> tuple[bool, str]:
     """Verifikation VOR dem Schreiben (Repo-Vertrag). Rückgabe: (geschrieben, Grund)."""
+    if _is_ymyl_sealed(a["path"]):
+        return False, "YMYL-Siegel aktiv – keine automatische Politur"
     old, new = a["content"], new_content
     if link_count(old) != link_count(new):
         return False, "Link-Zahl verändert"
