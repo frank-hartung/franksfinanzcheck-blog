@@ -43,3 +43,5 @@
 {"zeit": "2026-10-07T13:20:49.817823+00:00", "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert", "regel": "RS1-RS6", "aktion": "fix-ki"}
 {"zeit": "2026-10-07T13:20:49.920189+00:00", "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit", "regel": "GATE", "aktion": "draft (hold)"}
 {"zeit": "2026-10-07T16:48:54.716913+00:00", "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-10-07T22:18:31.701873+00:00", "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "V1 Lesbarkeit: Flesch 44.8 liegt unter der Publish-Schwelle 60 und verschlechtert den Text (68.5 → 44.8) – dieser Artikel würde vom Publish-Gate blockiert (Bel…"}
+{"zeit": "2026-10-07T22:18:31.701873+00:00", "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: H2-Anzahl verändert – Heilung verworfen"}
