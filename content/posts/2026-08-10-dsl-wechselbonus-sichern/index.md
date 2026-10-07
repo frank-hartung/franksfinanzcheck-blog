@@ -138,7 +138,7 @@ Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brau
 Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100-250 Mbit/s) zahlst,
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,
 - du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.

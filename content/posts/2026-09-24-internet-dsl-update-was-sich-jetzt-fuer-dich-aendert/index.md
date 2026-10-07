@@ -151,7 +151,7 @@ Darum gilt:
 | Monate 1–6 | 6 × 9,99 € = 59,94 € (Beispiel) | 6 × 19,99 € = 119,94 € (Beispiel) |
 | Monate 7–24 | 18 × 39,99 € = 719,82 € (Beispiel) | 18 × 29,99 € = 539,82 € (Beispiel) |
 | Router | 5,99 € × 24 = 143,76 € (Beispiel) | 0 € |
-| Bonus | –80 € (Beispiel) | –40 € (Beispiel) |
+| Bonus | – 80 € (Beispiel) | – 40 € (Beispiel) |
 | **Gesamtkosten 24 Monate** | **843,52 €** | **619,76 €** |
 
 Hier wirkt Tarif A am Anfang günstiger, ist über zwei Jahre aber deutlich teurer.
@@ -168,13 +168,15 @@ Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
 ## Was du jetzt konkret prüfen solltest
 
-### 1. Vertrag und Rechnung ansehen Wie hoch ist dein aktueller Monatspreis wirklich?
+### 1. Vertrag und Rechnung ansehen wie hoch ist dein aktueller Monatspreis wirklich?
 
 ### 2. Geschwindigkeit ehrlich einordnen Braucht dein Haushalt wirklich 250 Mbit/s oder mehr?
 
-### 3. Routerfrage klären Zahlst du Miete? Ist der Router technisch noch okay?
+### 3. Routerfrage klären Zahlst du Miete?
 
-### 4. WLAN und Tarif trennen Hast du ein Netzproblem oder ein Tarifproblem?
+Ist der Router technisch noch okay?
+
+### 4. WLAN und Tarif trennen hast du ein Netzproblem oder ein Tarifproblem?
 
 ### 5. Effektivpreis rechnen Nicht nur auf die ersten Rabattmonate schauen.
 
@@ -182,7 +184,7 @@ Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
 Ein Wechsel lohnt sich oft besonders, wenn …
 
-- dein Vertrag schon länger läuft,
+- Dein Vertrag schon länger läuft,
 - du den hohen Standardpreis zahlst,
 - die Routermiete teuer ist,
 - du längst weniger oder anders nutzt,
@@ -207,7 +209,9 @@ Dazu kommen mögliche Einsparungen durch geringere Routerkosten.
 
 ### Fehler 1: nur auf die Mbit‑Zahl schauen Mehr ist nicht automatisch besser.
 
-### Fehler 2: WLAN‑Probleme mit teurem Tarif lösen wollen Das klappt oft nicht.
+### Fehler 2: WLAN‑Probleme mit teurem Tarif lösen wollen
+
+Das klappt oft nicht.
 
 ### Fehler 3: alten Vertrag aus Bequemlichkeit weiterzahlen Genau dort verstecken sich stille Mehrkosten.
 
@@ -239,7 +243,7 @@ Nicht immer musst du den Anbieter sofort komplett wechseln. Manchmal reicht scho
 
 Das lohnt sich vor allem, wenn:
 
-- du grundsätzlich zufrieden bist,
+- Du grundsätzlich zufrieden bist,
 - nur der Preis nicht mehr passt,
 - ein kleinerer Tarif innerhalb des Anbieters reicht,
 - du die Technik nicht anfassen willst.
@@ -314,17 +318,29 @@ Wenn du deinen Vertrag ehrlich auf Bedarf, Routerkosten und 24‑Monats‑Preis 
 
 ## Häufige Fragen
 
-### Wie viel Bandbreite brauche ich wirklich? Für viele Ein‑ bis Zwei‑Personen‑Haushalte reichen 50 bis 100 Mbit/s oft aus. Bei Familien oder sehr intensiver Nutzung kann mehr sinnvoll sein.
+### Wie viel Bandbreite brauche ich wirklich?
 
-### Ist langsames Internet immer ein Tarifproblem? Nein. Häufig liegt das Problem eher am WLAN, am Router oder an der Wohnsituation.
+Für viele Ein‑ bis Zwei‑Personen‑Haushalte reichen 50 bis 100 Mbit/s oft aus. Bei Familien oder sehr intensiver Nutzung kann mehr sinnvoll sein.
 
-### Lohnt sich ein Wechsel auch ohne Anbieterwechsel? Ja. Manchmal reicht schon ein interner Tarifwechsel oder ein kleineres Paket beim gleichen Anbieter.
+### Ist langsames Internet immer ein Tarifproblem?
 
-### Warum ist der Effektivpreis so wichtig? Weil Rabattmonate, Bonus, Anschlusskosten und Routermiete das Angebot sonst schnell schöner wirken lassen, als es wirklich ist.
+Nein. Häufig liegt das Problem eher am WLAN, am Router oder an der Wohnsituation.
 
-### Was bringt ein kleinerer Tarif finanziell? Je nach Ausgangslage oft **120 € bis 300 € pro Jahr**. Bei teuren Altverträgen kann es auch mehr sein.
+### Lohnt sich ein Wechsel auch ohne Anbieterwechsel?
 
-### Soll ich lieber mehr Speed als Reserve buchen? Nur begrenzt. Ein kleiner Puffer ist okay, dauerhaft stark überbuchte Tarife sind aber oft unnötig teuer.
+Ja. Manchmal reicht schon ein interner Tarifwechsel oder ein kleineres Paket beim gleichen Anbieter.
+
+### Warum ist der Effektivpreis so wichtig?
+
+Weil Rabattmonate, Bonus, Anschlusskosten und Routermiete das Angebot sonst schnell schöner wirken lassen, als es wirklich ist.
+
+### Was bringt ein kleinerer Tarif finanziell?
+
+Je nach Ausgangslage oft **120 € bis 300 € pro Jahr**. Bei teuren Altverträgen kann es auch mehr sein.
+
+### Soll ich lieber mehr Speed als Reserve buchen?
+
+Nur begrenzt. Ein kleiner Puffer ist okay, dauerhaft stark überbuchte Tarife sind aber oft unnötig teuer.
 
 ## Ausblick: Was du künftig beim Internet stärker beobachten solltest
 

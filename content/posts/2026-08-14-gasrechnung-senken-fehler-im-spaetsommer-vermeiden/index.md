@@ -162,12 +162,12 @@ Vorsicht gilt beim Nachfüllen von Wasser. Viele neue Geräte brauchen aufbereit
 1. Aktuelle Einstellungen dokumentieren (Foto der Anzeige).
 2. Die offizielle Bedienungsanleitung zurate ziehen.
 3. Änderungen nur in kleinen Schritten vornehmen.
-4. Die Auswirkung über 2-3 Tage beobachten.
+4. Die Auswirkung über 2–3 Tage beobachten.
 5. Bei Unsicherheit die Einstellungen auf den Ursprungswert zurücksetzen.
 
 ## Was Verbrauchsmaßnahmen realistisch bringen
 
-Ein Grad weniger spart rechnerisch rund 6 Prozent. Das klappt aber nur, wenn es dauerhaft kühler bleibt. Und wenn dein Haus das mitmacht.
+Ein Grad weniger spart rechnerisch rund 6 %. Das klappt aber nur, wenn es dauerhaft kühler bleibt. Und wenn dein Haus das mitmacht.
 
 Bei 2.000 € Gaskosten im Jahr sind das rund 120 €. Auch kurzes Lüften mit weit offenem Fenster hilft. Nachts die Rollläden zu schließen, bringt ebenfalls etwas.
 
@@ -240,10 +240,10 @@ Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab. So siehst du Fehler fr�
 
 Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer nur auf den Preis schaut und dabei Wärme verschenkt, zahlt am Ende trotzdem zu viel.
 
-Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 Prozent. Kalt wird es dabei nicht.
+Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 %. Kalt wird es dabei nicht.
 
 
-Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 Prozent sind realistisch.
+Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 % sind realistisch.
 
 ## Fazit: Fünf Fehler, eine klare Reihenfolge
 
@@ -267,7 +267,7 @@ Vergleiche, wenn deine Preisgarantie endet. Oder wenn eine Erhöhung ins Haus st
 Nein, das musst du nicht. Entlüfte nur, wenn es gluckert oder der Heizkörper ungleich warm wird. Zu häufiges Entlüften senkt den Druck ohne Grund.
 
 ### Wie viel spart ein Grad weniger?
-Pro Grad weniger sparst du rund 6 Prozent der Heizenergie. Wie viel Euro das sind, hängt von deinem Haus und vom Preis ab.
+Pro Grad weniger sparst du rund 6 % der Heizenergie. Wie viel Euro das sind, hängt von deinem Haus und vom Preis ab.
 
 ### Darf ich den Gasanbieter auch im Winter wechseln?
 Ja. Du darfst jederzeit wechseln, wenn du die Frist einhältst. Oder wenn du ein Sonderkündigungsrecht hast. Dein Gas fließt dabei ohne Lücke weiter.

@@ -1,10 +1,8 @@
 {
- "generated_at": "2026-09-30T14:57:05.561883+00:00",
- "exit_code": 1,
- "checked": 44,
+ "generated_at": "2026-10-07T15:30:31.287922+00:00",
+ "exit_code": 0,
+ "checked": 40,
  "healing_attempted": [],
- "still_affected": [
-  "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler"
- ],
+ "still_affected": [],
  "errors": []
 }

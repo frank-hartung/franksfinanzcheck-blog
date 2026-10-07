@@ -32,7 +32,7 @@ faktencheck: 2026-10-02
 
 ## Last-Minute-Urlaub: Wie du die Preissignale des Marktes für dich nutzt
 
-Wer erst kurz vor dem Abflug bucht, zahlt oft deutlich weniger. Früh planen kostet Geld. Spontan sein bringt Rabatt: meist 20 bis 40 Prozent unter dem normalen Preis.
+Wer erst kurz vor dem Abflug bucht, zahlt oft deutlich weniger. Früh planen kostet Geld. Spontan sein bringt Rabatt: meist 20 bis 40 % unter dem normalen Preis.
 
 Der Grund dafür ist simpel. Ein leerer Sitz im Flieger bringt null Euro. Ein leeres Bett im Hotel auch.
 
@@ -41,7 +41,7 @@ Deshalb geben Airlines und Hotels die letzten Plätze billig ab. Lieber ein klei
 Bleibst du beim Ziel und beim Abflug flexibel, zahlst du oft ein Drittel weniger als ein Frühbucher. Das ist kein Glück. Das ist ein Markt, der am Ende die Preise senkt.
 
 **Das Wichtigste in Kürze**  
-- **Flexibilität als Renditebringer:** Wer spontan entscheidet, spart gegenüber dem Normalpreis häufig zwischen 20 und 40 Prozent ein.
+- **Flexibilität als Renditebringer:** Wer spontan entscheidet, spart gegenüber dem Normalpreis häufig zwischen 20 und 40 % ein.
 - **Transparenz durch Portale:** Vergleichsplattformen bündeln aktuelle Restkapazitäten und machen Preissprünge in Echtzeit sichtbar.
 - **Kostenfalle Mietwagen:** Achte penibel auf die Kautionsregelungen, damit dein Liquiditätsspielraum vor Ort nicht unnötig eingeschränkt wird.
 - **Strukturierte Suche:** Mit einem klaren Plan lassen sich attraktive Angebote identifizieren, ohne in Hektik zu verfallen.
@@ -117,12 +117,12 @@ Dieses Geld fehlt dir dann im Urlaub. Prüfe also vorher, wie hoch dein Limit is
 
 Teuer sind auch die Extras am Schalter. Ein Navi oder ein Kindersitz kostet pro Tag mehr, als viele denken. Schau außerdem in deine Kreditkarte: Oft ist eine Vollkasko für Mietwagen schon dabei.
 
-**Faustregel:** Sollte die geforderte Kaution ca. 30 Prozent der gesamten Reisekosten überschreiten, ist ein Anbieterwechsel meist wirtschaftlich sinnvoll.
+**Faustregel:** Sollte die geforderte Kaution ca. 30 % der gesamten Reisekosten überschreiten, ist ein Anbieterwechsel meist wirtschaftlich sinnvoll.
 
 ### Tipps zur Kostenreduktion
 
 1. **Station am Flughafen wählen** – Trotz Flughafen-Gebühr oft günstiger als Stadtbüros mit Shuttle-Zwang.
-2. **Fahrzeugklasse optimieren** – Ein Kleinwagen reduziert nicht nur den Mietpreis, sondern spart ca. 20 bis 25 Prozent bei den Kraftstoffkosten.
+2. **Fahrzeugklasse optimieren** – Ein Kleinwagen reduziert nicht nur den Mietpreis, sondern spart ca. 20 bis 25 % bei den Kraftstoffkosten.
 3. **Tank-Regelung beachten** – Wähle immer „Full-to-Full“, um überteuerte Servicegebühren fürs Tanken zu vermeiden.
 4. **Karten-Vorteile nutzen** – Viele Premium-Kreditkarten decken den Selbstbehalt im Schadensfall ab.
 
@@ -139,11 +139,11 @@ Lies auch die Regeln für eine Absage. Sehr billige Angebote bekommst du selten 
 * **Loyalitätsprogramme nutzen** – Das Umwandeln von Kreditkarten-Punkten in Meilen oder Hotel-Guthaben kann den Cash-Anteil deiner Buchung weiter senken.
 * **Selektiver Versicherungsschutz** – Reiseversicherungen im Paket sind oft überteuert. Ein separater Jahres-Reiseschutz ist meist günstiger und bietet bessere Deckungssummen für medizinische Notfälle.
 * **Devisen-Management** – In Ländern wie Marokko oder der Türkei können Barzahlungen in Lokalwährung günstiger sein, sofern deine Bank keine hohen Gebühren für den Auslandseinsatz erhebt.
-* **Skaleneffekte bei Gruppenreisen** – Das Teilen eines Mietwagens oder einer Villa mit Freunden senkt die Pro-Kopf-Kosten erfahrungsgemäß um bis zu ca. 40 Prozent.
+* **Skaleneffekte bei Gruppenreisen** – Das Teilen eines Mietwagens oder einer Villa mit Freunden senkt die Pro-Kopf-Kosten erfahrungsgemäß um bis zu ca. 40 %.
 
 ## So gehst du vor: Schritt für Schritt zum Schnäppchen
 
-Lege zuerst ein Zeitfenster von drei bis vier Tagen fest. Setze dann ein Limit in Euro. Gut sind rund 30 Prozent unter dem üblichen Preis.
+Lege zuerst ein Zeitfenster von drei bis vier Tagen fest. Setze dann ein Limit in Euro. Gut sind rund 30 % unter dem üblichen Preis.
 
 Hast du ein Angebot gefunden, prüfe sofort den Mietwagen mit. Wichtig sind Kaution und Schutz im Schadensfall. Beides entscheidet über den wahren Preis.
 
@@ -163,9 +163,9 @@ Arbeite die Liste unten in Ruhe ab. Gute Angebote sind schnell weg. Wer vorberei
 
 Rechnen wir eine Woche Mallorca durch. Normal kosten Flug und Hotel rund 500 €. Kurz vor dem Start zahlst du für das gleiche Paket oft nur 340 €.
 
-Das sind 160 € weniger, also rund 32 Prozent. Die Kaution für den Mietwagen wird nur auf der Karte geblockt. Nach der Rückgabe ist sie wieder frei.
+Das sind 160 € weniger, also rund 32 %. Die Kaution für den Mietwagen wird nur auf der Karte geblockt. Nach der Rückgabe ist sie wieder frei.
 
-Zweites Beispiel: Antalya, sieben Tage, normal rund 850 €. Buchst du fünf Tage vorher, sind es etwa 580 €. Du sparst 270 € oder gut 31 Prozent.
+Zweites Beispiel: Antalya, sieben Tage, normal rund 850 €. Buchst du fünf Tage vorher, sind es etwa 580 €. Du sparst 270 € oder gut 31 %.
 
 Hat deine Kreditkarte schon einen Schutz für Mietwagen? Dann fallen noch einmal rund 50 € für die Vollkasko weg.
 
