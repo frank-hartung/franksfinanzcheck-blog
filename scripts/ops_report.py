@@ -94,7 +94,7 @@ def _playbooks() -> list[dict]:
 
 def _today_events() -> list[dict]:
     today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
-    path = os.path.join(audit_log.AUDIT_DIR, f"{today}.jsonl")
+    path = os.path.join(audit_log.audit_verzeichnis(), f"{today}.jsonl")
     events = []
     if os.path.exists(path):
         with open(path, encoding="utf-8") as fh:

@@ -258,30 +258,41 @@ class R5HoldRecoveryTests(unittest.TestCase):
         self.assertGreaterEqual(text.count('\n\n'), 2)
 
     def test_publish_gate_heilt_r5_vor_der_harten_pruefung(self):
+        # ISOLATION (C27, Nebenbefund zu #610): pg.main() läuft hier mit
+        # DRY_RUN=False. Scheitert der Kandidat am Gate, schreibt main() am
+        # Ende einen gate-Entscheid ins VERSIONIERTE data/audit/ – und zwar
+        # mit diesem Fixture-Slug. Am 03.10.2026 stand genau diese Zeile im
+        # Buch: {"module": "publish_gate", "action": "gate",
+        # "input": {"candidates": ["2026-09-07-r5-live"]}}. Ein Artikel, den
+        # es nie gab, galt damit als real am Gate verworfen.
+        # Der Pfad feuert nicht in jedem Lauf (greift die R5-Heilung, bleibt
+        # `gated` leer) – er ist deshalb LATENT, nicht harmlos: Die Sandbox
+        # macht das Ergebnis unabhängig vom Heil-Zufall.
+        from repo_isolation import beweis_ledger_unangetastet
         slug = '2026-09-07-r5-live'
         index = self.long_post(slug, draft=False, hold=False)
         old = (pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT)
-        try:
-            pg.POSTS_DIR = str(self.posts)
-            pg.DRY_RUN = False
-            pg.STRICT = True
-            with patch.object(pg, 'todays_live_candidates', return_value=[slug]), \
-                 patch.object(pg, 'check_length_failures', return_value=(set(), None)), \
-                 patch.object(pg, 'seo_audit_failures', return_value=(set(), None)), \
-                 patch.object(pg, 'faktenfrische_failures', return_value=({}, None, False)), \
-                 patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
-                 patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
-                 patch.object(pg, 'affiliate_intent_failures', return_value=({}, None, False)), \
-                 patch.object(pg, 'offenlegung_failures', return_value=({}, None, False)), \
-                 patch.object(pg, 'title_integrity_failures', return_value=set()), \
-                 patch.object(pg, 'readability_failures', return_value=({}, None)), \
-                 patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \
-                 patch.object(pg, 'offenlegung_failures', return_value=({}, None, False)), \
-                 patch.object(pg, 'keyword_failures', return_value=({}, None)), \
-                 patch.object(pg, 'keyword_self_heal_candidates', return_value=0):
-                self.assertEqual(pg.main(), 0)
-        finally:
-            pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT = old
+        with beweis_ledger_unangetastet('publish_gate'):
+            try:
+                pg.POSTS_DIR = str(self.posts)
+                pg.DRY_RUN = False
+                pg.STRICT = True
+                with patch.object(pg, 'todays_live_candidates', return_value=[slug]), \
+                     patch.object(pg, 'check_length_failures', return_value=(set(), None)), \
+                     patch.object(pg, 'seo_audit_failures', return_value=(set(), None)), \
+                     patch.object(pg, 'faktenfrische_failures', return_value=({}, None, False)), \
+                     patch.object(pg, 'affiliate_profi_failures', return_value=({}, None)), \
+                     patch.object(pg, 'affiliate_integrity_failures', return_value=({}, None, False)), \
+                     patch.object(pg, 'affiliate_intent_failures', return_value=({}, None, False)), \
+                     patch.object(pg, 'offenlegung_failures', return_value=({}, None, False)), \
+                     patch.object(pg, 'title_integrity_failures', return_value=set()), \
+                     patch.object(pg, 'readability_failures', return_value=({}, None)), \
+                     patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \
+                     patch.object(pg, 'keyword_failures', return_value=({}, None)), \
+                     patch.object(pg, 'keyword_self_heal_candidates', return_value=0):
+                    self.assertEqual(pg.main(), 0)
+            finally:
+                pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT = old
         text = index.read_text(encoding='utf-8')
         self.assertIn('draft: false', text)
         self.assertFalse(r5.hard_r5_findings(text, 'fixture'))

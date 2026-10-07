@@ -1885,6 +1885,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c25_deckung_wirkung(script_texts, root=root,
                                   python_bin=python_bin)
     checks += c26_beleg_je_tag(script_texts, wflows, root=root)
+    checks += c27_ledger_isolation(script_texts, wflows, root=root)
     return checks
 
 
@@ -2082,6 +2083,122 @@ def c26_beleg_je_tag(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
+RE_C27_LOGEVENT = re.compile(r"def\s+log_event\s*\(.*?(?=\ndef\s)", re.S)
+
+
+def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
+    """C27: Beweisen ist nicht Fabrizieren.
+
+    Ausloeser (07.10.2026, Nebenbefund zu #610 – Selbstfund beim Siegeln der
+    Auslieferungs-Heilung): Drei Unit-Tests schrieben echte Zeilen in
+    `data/audit/*.jsonl`, ein versioniertes, von history_guard H6 als
+    append-only bewachtes Beweis-Ledger. Die teuerste Zeile war ein
+    gate-Entscheid fuer den Fixture-Artikel `2026-09-07-r5-live`, committet am
+    03.10.2026: Das Buch behauptete einen am Gate verworfenen Live-Artikel,
+    den es nie gab. Vier weitere Zeilen bescheinigten GROQ_API_KEY einen
+    Erfolg `via content-engine-v2`, obwohl in CI ausschliesslich
+    pinterest-ai.yml und pinterest-token.yml `--record-success` aufrufen – und
+    zwar nur fuer PINTEREST_TOKEN_KEY.
+
+    Die Regel ist die Schwester von C15: Dort darf ein Beweislauf nicht heilen,
+    was er prueft; hier darf er nicht behaupten, was nie geschah. Geprueft wird
+    der Engpass (audit_log), die Sandbox (repo_isolation), die Beobachtung
+    (Regressionstest) und die empirische Leitplanke im Qualitaets-Gate.
+    """
+    out = []
+
+    def _wf(name: str) -> str:
+        for path, text in (wflows or {}).items():
+            if os.path.basename(path) == name:
+                return text
+        return ""
+
+    al = script_texts.get("audit_log.py", "")
+    ri = script_texts.get("repo_isolation.py", "")
+    if not al:
+        out.append(("C27", "scripts/audit_log.py nicht lesbar – der Engpass des "
+                           "Beweis-Ledgers ist nicht prüfbar."))
+        return out
+
+    # a) Der Engpass trägt den Vertrag – in der UMGEBUNG, nicht im Prozess.
+    #    Leckstelle 1 entsteht in einem Kindprozess (publish_gate ruft
+    #    affiliate_profi_check.py); ein Monkeypatch erreicht das Kind nicht.
+    if "FFC_AUDIT_DIR" not in al:
+        out.append(("C27", "audit_log.py kennt FFC_AUDIT_DIR nicht: Die Umlenkung "
+                           "erreicht Kindprozesse nicht (publish_gate → "
+                           "affiliate_profi_check.py) – ein Testlauf schreibt "
+                           "weiter echte Zeilen ins Beweis-Ledger."))
+    if "FFC_AUDIT_DISABLE" not in al:
+        out.append(("C27", "audit_log.py kennt FFC_AUDIT_DISABLE nicht – es gibt "
+                           "keinen harten No-Op für Läufe, die überhaupt nichts "
+                           "protokollieren dürfen."))
+    for funktion in ("audit_verzeichnis", "audit_abgeschaltet"):
+        if not re.search(rf"def\s+{funktion}\s*\(", al):
+            out.append(("C27", f"audit_log.py stellt `{funktion}()` nicht bereit – "
+                               "Schreib- und Lesepfad könnten auseinanderlaufen "
+                               "(ein umgelenkter Lauf läse das echte Buch)."))
+    m = RE_C27_LOGEVENT.search(al)
+    koerper = m.group(0) if m else ""
+    if not koerper:
+        out.append(("C27", "audit_log.py: `log_event()` nicht auffindbar – der "
+                           "einzige Schreibpfad ins Ledger ist nicht prüfbar."))
+    else:
+        if "audit_abgeschaltet()" not in koerper:
+            out.append(("C27", "log_event() prüft die Stummschaltung nicht – "
+                               "FFC_AUDIT_DISABLE wäre wirkungslos."))
+        if "audit_verzeichnis()" not in koerper:
+            out.append(("C27", "log_event() schreibt nicht über audit_verzeichnis() "
+                               "– FFC_AUDIT_DIR wäre wirkungslos."))
+    # Gegenrichtung (Schein-Sicherheit): Ohne Schalter MUSS das Ledger scharf
+    # bleiben. Ein Engpass, der im Betrieb stumm ist, vernichtet Beweise statt
+    # sie zu fabrizieren – und wäre der teurere der beiden Fehler.
+    if "return ziel or AUDIT_DIR" not in al.replace("  ", " "):
+        out.append(("C27", "audit_verzeichnis() fällt nicht auf data/audit zurück – "
+                           "im Betrieb würde das Beweis-Ledger still abgeschaltet."))
+
+    # b) Die Sandbox für Testläufe.
+    if not ri:
+        out.append(("C27", "scripts/repo_isolation.py fehlt – ohne Sandbox müssen "
+                           "Tests das Ledger von Hand schützen, und genau das ist "
+                           "am 07.10.2026 dreimal nicht passiert."))
+    else:
+        for baustein in ("ledger_sandbox", "beweis_ledger_unangetastet",
+                         "fingerabdruck", "ledger_abweichung"):
+            if not re.search(rf"def\s+{baustein}\s*\(", ri):
+                out.append(("C27", f"repo_isolation.py stellt `{baustein}()` nicht "
+                                   f"bereit – die Sandbox ist unvollständig."))
+        if "FFC_AUDIT_DIR" in ri and "AUDIT_DIR_ENV" not in ri:
+            out.append(("C27", "repo_isolation.py schreibt den Variablennamen fest, "
+                               "statt audit_log.AUDIT_DIR_ENV zu benutzen – eine "
+                               "Umbenennung im Engpass bliebe unbemerkt."))
+
+    # c) Beobachtung: Der Vertrag braucht einen Regressionstest.
+    regress = _read(os.path.join(root, "scripts", "tests",
+                                 "test_audit_ledger_isolation.py"))
+    if not regress:
+        out.append(("C27", "scripts/tests/test_audit_ledger_isolation.py fehlt – "
+                           "der Ledger-Vertrag wäre unbeobachtet und könnte "
+                           "stillschweigend verrotten."))
+    elif "erbt_sich_in_den_subprozess" not in regress:
+        out.append(("C27", "test_audit_ledger_isolation.py prüft die Vererbung in "
+                           "den Kindprozess nicht – genau dort entstand die "
+                           "erste Leckstelle."))
+
+    # d) Empirische Leitplanke im Qualitäts-Gate: unberührtes Ledger nach dem
+    #    Suite-Lauf. Statische Regeln allein genügen nicht (Vorbild C15: „wurde
+    #    empirisch erhoben, nicht statisch klassifiziert").
+    wf = _wf("publication-reliability-tests.yml")
+    if not wf:
+        out.append(("C27", "publication-reliability-tests.yml nicht lesbar – die "
+                           "empirische Ledger-Leitplanke ist nicht prüfbar."))
+    elif "git status --porcelain -- data/audit" not in wf:
+        out.append(("C27", "publication-reliability-tests.yml prüft nicht, ob "
+                           "data/audit/ nach dem Suite-Lauf unberührt ist – ein "
+                           "künftiger Test könnte wieder Beweise fabrizieren, "
+                           "ohne dass ein Lauf rot wird."))
+    return out
+
+
 RULE_TEXT = {
     "C1": "Die Sicht (Chefredakteur-Scorecard) läuft nach allen Messungen – sonst "
           "zeigt sie Werte des Vorlaufs als aktuellen Befund (#206).",
@@ -2206,6 +2323,19 @@ RULE_TEXT = {
            "zurück, statt als „Kopie“ vernichtet zu werden, und die Endabnahme "
            "füllt konvergent nach, bis das Mindestziel steht oder das Material "
            "ehrlich erschöpft ist (#610).",
+    "C27": "Beweisen ist nicht Fabrizieren: `data/audit/*.jsonl` ist ein "
+           "versioniertes, append-only bewachtes Beweis-Ledger (history_guard "
+           "H6) – jede Zeile behauptet einen echten Betriebsvorgang. Ein "
+           "Testlauf schreibt deshalb in einen Sandkasten: `audit_log` lenkt "
+           "über FFC_AUDIT_DIR um und schaltet über FFC_AUDIT_DISABLE stumm, "
+           "beides in der UMGEBUNG, weil die Wachen einander als Subprozesse "
+           "aufrufen (publish_gate → affiliate_profi_check.py) und ein "
+           "Monkeypatch im Testprozess das Kind nicht erreicht. Schwester von "
+           "C15: Dort darf ein Beweislauf nicht heilen, was er prüft – hier "
+           "darf er nicht behaupten, was nie geschah. Am 03.10.2026 stand ein "
+           "gate-Entscheid für den Fixture-Artikel `2026-09-07-r5-live` im "
+           "Buch: ein verworfener Live-Artikel, den es nie gab (Nebenbefund zu "
+           "#610, 07.10.2026).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -2230,7 +2360,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C22": "Publikations-Vertrag der Schreib-Seite",
          "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)",
          "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)",
-         "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)"}
+         "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)",
+         "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -2841,12 +2972,60 @@ def _selftest():
             if "Artefakt" in f[1]]:
         failures.append("C26: ein fehlendes Tages-Artefakt bleibt unentdeckt "
                         "(#610).")
+    # --- C27: Beweisen ist nicht Fabrizieren (Nebenbefund #610, 07.10.2026) --
+    echte_ledgerakte = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                        for name in ("audit_log.py", "repo_isolation.py")}
+    if c27_ledger_isolation(echte_ledgerakte, wflows_echt):
+        failures.append(f"C27: der echte Zustand wird beanstandet: "
+                        f"{c27_ledger_isolation(echte_ledgerakte, wflows_echt)}")
+    # (a) Der Engpass verliert die Umlenkung – der Zustand vor dem 07.10.2026.
+    ohne_umlenkung = dict(echte_ledgerakte, **{
+        "audit_log.py": echte_ledgerakte["audit_log.py"]
+        .replace("FFC_AUDIT_DIR", "FFC_AUDIT_XXX")})
+    if not [f for f in c27_ledger_isolation(ohne_umlenkung, wflows_echt)
+            if "FFC_AUDIT_DIR" in f[1]]:
+        failures.append("C27: ein Engpass ohne FFC_AUDIT_DIR bleibt unentdeckt "
+                        "(Nebenbefund #610).")
+    # (b) log_event() schreibt wieder fest ins Repo – Umlenkung wirkungslos.
+    fest_verdrahtet = dict(echte_ledgerakte, **{
+        "audit_log.py": echte_ledgerakte["audit_log.py"]
+        .replace("audit_verzeichnis()", "AUDIT_DIR")})
+    if not [f for f in c27_ledger_isolation(fest_verdrahtet, wflows_echt)
+            if "wirkungslos" in f[1]]:
+        failures.append("C27: ein fest verdrahteter Schreibpfad bleibt "
+                        "unentdeckt (Nebenbefund #610).")
+    # (c) SCHEIN-SICHERHEIT: Der Rückfall auf data/audit verschwindet. Diese
+    #     „Isolation" wäre eine Abschaltung des Betriebs-Ledgers – sie würde
+    #     Beweise vernichten statt zu fabrizieren, und ist der teurere Fehler.
+    stumm = dict(echte_ledgerakte, **{
+        "audit_log.py": echte_ledgerakte["audit_log.py"]
+        .replace("return ziel or AUDIT_DIR", "return ziel or ''")})
+    if not [f for f in c27_ledger_isolation(stumm, wflows_echt)
+            if "still abgeschaltet" in f[1]]:
+        failures.append("C27: eine als Isolation getarnte Abschaltung des "
+                        "Betriebs-Ledgers bleibt unentdeckt (Nebenbefund #610).")
+    # (d) Die Sandbox fehlt – jeder Test müsste das Ledger von Hand schützen.
+    ohne_sandbox = dict(echte_ledgerakte, **{"repo_isolation.py": ""})
+    if not [f for f in c27_ledger_isolation(ohne_sandbox, wflows_echt)
+            if "repo_isolation.py fehlt" in f[1]]:
+        failures.append("C27: eine fehlende Sandbox bleibt unentdeckt "
+                        "(Nebenbefund #610).")
+    # (e) Die empirische Leitplanke fällt aus dem Qualitäts-Gate.
+    wflows_ohne_leitplanke = dict(wflows_echt)
+    for pfad in list(wflows_ohne_leitplanke):
+        if os.path.basename(pfad) == "publication-reliability-tests.yml":
+            wflows_ohne_leitplanke[pfad] = wflows_ohne_leitplanke[pfad].replace(
+                "git status --porcelain -- data/audit", "true")
+    if not [f for f in c27_ledger_isolation(echte_ledgerakte, wflows_ohne_leitplanke)
+            if "unberührt" in f[1]]:
+        failures.append("C27: eine fehlende Ledger-Leitplanke im Qualitäts-Gate "
+                        "bleibt unentdeckt (Nebenbefund #610).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C26 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C27 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
