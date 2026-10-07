@@ -40,6 +40,8 @@ faktencheck: "2026-09-27"
 
 **Stand: 24.09.2026.** Dieses **Internet & DSL-Update** ordnet ein, warum aktuell nicht nur der Anbieterwechsel zählt, sondern vor allem die ehrliche Frage: **Passt dein Tarif überhaupt zu deinem Alltag?**
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Teure Internetverträge sind selten das Ergebnis teurer Technik an der eigenen Adresse. Sie zahlen zu viel, weil sie vor Jahren einen Tarif abgeschlossen haben, der heute nicht mehr zu ihrer Nutzung passt – oder weil sie sich beim Abschluss von möglichst viel Geschwindigkeit haben beeindrucken lassen.
 
 Genau deshalb ist das wichtigste Update im Markt oft kein großer Technik‑Skandal, sondern etwas viel Alltäglicheres: **Zu viele Menschen buchen mehr Bandbreite, als sie wirklich brauchen – und behalten zu teure Altverträge zu lange.**
