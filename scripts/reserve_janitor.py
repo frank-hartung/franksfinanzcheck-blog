@@ -324,21 +324,27 @@ def schreibe_zaehler(root: Path, state: dict) -> None:
 
 
 def _zaehle(state: dict, slug: str, signatur: str, grund: str,
-            run_key: str) -> int:
-    """Zählt denselben Befund je LAUF genau einmal (Vertrag wie #349)."""
+            run_key: str, jetzt: "dt.datetime | None" = None) -> int:
+    """Zählt denselben Befund je LAUF genau einmal (Vertrag wie #349).
+
+    `jetzt` kommt vom Aufrufer und ist im Zweifel aus dem Urteils-Tag
+    abgeleitet (Mittag UTC), nicht aus der Wanduhr. Grund: Der eigene
+    `--selftest` läuft unter einer STRIKTEN Uhr (scripts/selftest_clock.py) –
+    ein echter Uhr-Lesezugriff hier wäre ein Uhr-Verstoß, und der Zählerstand
+    wäre für denselben Tag nicht reproduzierbar (07.10.2026: als die
+    Uhr-Probe lernte, Alias-Importe umzubiegen, flog genau das auf).
+    """
+    stamp = (jetzt or dt.datetime.now(dt.timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
     eintrag = state.get(slug)
     if not isinstance(eintrag, dict) or eintrag.get("signatur") != signatur:
-        eintrag = {"signatur": signatur, "hits": 0,
-                   "first": dt.datetime.now(dt.timezone.utc)
-                   .strftime("%Y-%m-%dT%H:%M:%SZ")}
+        eintrag = {"signatur": signatur, "hits": 0, "first": stamp}
     if eintrag.get("lauf") != run_key:
         eintrag["hits"] = int(eintrag.get("hits", 0)) + 1
         eintrag["lauf"] = run_key
         laeufe = [l for l in (eintrag.get("laeufe") or []) if l != run_key]
         laeufe.append(run_key)
         eintrag["laeufe"] = laeufe[-5:]
-    eintrag["last"] = dt.datetime.now(dt.timezone.utc).strftime(
-        "%Y-%m-%dT%H:%M:%SZ")
+    eintrag["last"] = stamp
     eintrag["grund"] = grund[:220]
     state[slug] = eintrag
     return int(eintrag["hits"])
@@ -486,7 +492,9 @@ def find_targets(root: Path, *, today: dt.date | None = None,
         signatur = _signatur("; ".join(sorted(blocker)))
         gesehen.add(slug)
         hits = _zaehle(state, slug, signatur,
-                       "; ".join(blocker), run_key)
+                       "; ".join(blocker), run_key,
+                       jetzt=dt.datetime.combine(today, dt.time(12, 0),
+                                                 tzinfo=dt.timezone.utc))
         alter = row.get("tage_seit_letzte_aenderung")
         if isinstance(alter, int) and alter < karenz:
             geschont.append({

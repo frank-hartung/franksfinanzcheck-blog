@@ -122,13 +122,33 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # verlangt, fuehrt irgendwann niemand aus - deshalb steht sein
           # Selbsttest hier im vertraglichen Minimum (C6).
           "lesbarkeit_heiler.py",
-          # Politur-Ruinen-Heiler (07.10.2026, WF-D4E0/#612): R11/R13/R14
-          # sind harte Publish-Regeln (#482) und hatten in der Reserve-Kette
-          # keinen Schreiber. Ohne ihn blieb ein fertiger Kandidat an einem
-          # „SATZ: “-Rest hängen, wanderte nach zwei Laeufen in die Quarantaene
-          # und der Vorrat fiel unter das Ziel (roter End-Gate, #612). Sein
-          # Selbsttest steht im vertraglichen Minimum (C6).
+          # Politur-Heiler (07.10.2026, BOT-WATCHDOG #614): Er heilt die
+          # Maschinen-Reste, fuer die es bis dahin KEINEN Heiler gab (R7-Intro-
+          # Formel, R11/R13 Zahlen-Datums-Ruinen, R14-Marker, R15-PHrasen-Doppel,
+          # R16-Prompt-Echo) - genau die Funde, die das Zertifikat als „manuell
+          # reparieren" auswies und die das Tor T2 des Lesbarkeits-Heilers
+          # deshalb JEDE KI-Heilung verwerfen liessen. Er laeuft in der Kette
+          # VOR dem Lesbarkeits-Heiler und beweist seine Wirkung als
+          # Maschinenvertrag (`--wirkungsprobe`, Governance C25). Eine Wache,
+          # die niemand verlangt, fuehrt irgendwann niemand aus - deshalb steht
+          # sein Selbsttest hier im vertraglichen Minimum (C6).
+          "politur_heiler.py",
+          # Politur-Ruinen-Heiler (07.10.2026, WF-D4E0/#612, aus main): das
+          # schmale, deterministische Werkzeug fuer R11/R13/R14. Beide Heiler
+          # sind Absicht: der schmale heilt seine drei Klassen ohne KI-Zutun,
+          # der breite deckt die uebrige Familie (R7/R15/R16) und wirkt als
+          # Auffangnetz. Beide mit Wirkungsprobe (C25) und Selbsttest (C6).
           "politur_ruine_heiler.py",
+          # Satz-Heiler (07.10.2026, BOT-WATCHDOG #614): Der Lesbarkeits-
+          # Heiler kann die Schwelle (< 60) mit Stufe A nicht erreichen und
+          # mit Stufe B (Ganztext) nicht schreiben - die Klasse war damit
+          # unheilbar gebaut, und genau sie hielt den Reserve-Vorrat bei 2/6.
+          # Der Satz-Heiler gibt der KI nur Sätze ohne Zahlen/Markup und
+          # laesst das Ganztext-Tor T1-T4 unveraendert entscheiden; seine
+          # Wirkung ist Maschinenvertrag (`--wirkungsprobe`, C25). Damit gilt
+          # auch fuer ihn: eine Wache, die niemand verlangt, fuehrt irgendwann
+          # niemand aus - Selbsttest ins vertragliche Minimum (C6).
+          "satz_heiler.py",
           # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
           # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
           # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam

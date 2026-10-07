@@ -57,6 +57,15 @@ ERWEITERUNG 05.10.2026 (WF-B594, Issue #594): Zweite Deckung `loeschdeckung()`
   der Kette läuft, ist eine Todesfalle für Entwürfe; ein Blocker ohne Klasse
   ist eine unentschiedene Zuständigkeit. Beides stoppt jetzt den Lauf.
 
+ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Derselbe Nachweis gilt jetzt
+  auch für `textverstaendnis_failures`. Die Regel stand als „gedeckt" in der
+  Tabelle, obwohl die genannten Heiler nur R5 (Absatz) und R8-URL kennen –
+  die harten Politur-Regeln R7/R11–R16 hatten keinen Heiler. Beweis aus dem
+  Reserve-Zertifikat vom 07.10.2026: „R14-MARKER-RUINE … manuell reparieren",
+  „R15-PHRASEN-DOPPEL … manuell reparieren". Der neue `politur_heiler.py`
+  heilt die Klasse und ist über `PROBEN_PFLICHT` an seinen
+  `--wirkungsprobe`-Nachweis gebunden.
+
 ERWEITERUNG 07.10.2026 (WACHE-609): Dritte Deckung `wirkungsdeckung()`
   – „Deckung heißt Wirkung". Der Auslöser ist die zweite Hälfte des Befunds:
   `readability_failures` galt als gedeckt, weil `profi_polish.py` in der Kette
@@ -120,18 +129,30 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
     # Lesbarkeits-Heiler ist genau dafür gebaut (Stufe A deterministisch,
     # Stufe B KI-gezielt auf die Silben je Wort, Tor T1–T4 fail-closed) und
     # beweist seine Wirkung als Maschinenvertrag (`--wirkungsprobe`).
-    "readability_failures": ("lesbarkeit_heiler.py", "profi_polish.py"),
+    # ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Der Satz-Heiler heilt die
+    # Klasse satzweise (siehe reserve_finisher.HEALER_CHAIN). Der
+    # Lesbarkeits-Heiler bleibt in der Kette - er ist die zweite Chance für
+    # Texte, die satzweise nicht über die Schwelle kommen.
+    "readability_failures": ("satz_heiler.py", "lesbarkeit_heiler.py",
+                             "profi_polish.py"),
     # R2/R3/R5/R7/R8: Absatz-Splitter heilt R5, URL-Hygiene heilt R8-URL.
-    # REPARATUR 07.10.2026 (WF-D4E0, #612): R11/R13/R14 (Politur-Ruinen,
-    # harte Publish-Regeln seit #482) hatten in dieser Kette KEINEN
-    # Schreiber – die Zeile deckte die Familie formal, nicht faktisch. Der
-    # Kandidat `2026-10-07-wie-smart-home-…` scheiterte einzig an der
-    # Marker-Ruine „SATZ: | Thread | …“ und die Quarantäne nahm ihn als
-    # `reserve_blocked` aus dem Spiel; der Vorrat fiel unter das Ziel
-    # (roter End-Gate, Issue #612). Der Heiler heilt genau die beweisbaren Klassen und
-    # meldet die nicht heilbaren (R12/R16) fail-closed.
-    "textverstaendnis_failures": ("r5_absatz_splitter.py",
-                                  "politur_ruine_heiler.py",
+    # REPARATUR 07.10.2026: Die Zeile stand für den GANZEN Regel-Ordner
+    # `textverstaendnis_failures` – obwohl die genannten Heiler zunächst nur
+    # R5 und R8-URL kannten. Zwei Reparaturen desselben Tages schließen die
+    # Klasse jetzt von zwei Seiten:
+    #   * WF-D4E0 (#612, aus main): R11/R13/R14 (Politur-Ruinen, harte
+    #     Publish-Regeln seit #482) hatten KEINEN Schreiber. Der reale Fall
+    #     `2026-10-07-wie-smart-home-…` scheiterte einzig an der
+    #     Marker-Ruine „SATZ: | Thread | …“; die Quarantäne nahm ihn als
+    #     `reserve_blocked` aus dem Spiel, der Vorrat fiel unter das Ziel.
+    #   * BOT-WATCHDOG #614: R7-Intro-Formel, R15-PHrasen-Doppel und
+    #     R16-Prompt-Echo standen als „manuell reparieren“ im Zertifikat,
+    #     obwohl der breite Politur-Heiler sie fail-closed heilt – und genau
+    #     diese Rest-Hartfunde ließen das Tor T2 des Lesbarkeits-Heilers
+    #     JEDE KI-Heilung verwerfen.
+    "textverstaendnis_failures": ("politur_ruine_heiler.py",
+                                  "politur_heiler.py",
+                                  "r5_absatz_splitter.py",
                                   "fix_url_hygiene.py"),
 }
 
@@ -171,16 +192,28 @@ AUSNAHMEN: dict[str, str] = {
 #  wirklich bewegt, und das Tor T1–T4 hält.
 WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
     "lesbarkeit_heiler.py": ("--wirkungsprobe",),
-    # Zweiter Heiler mit Zahlen-/Regel-Versprechen (WF-D4E0, #612): Die
-    # Politur-Ruinen-Familie verschwindet nachweislich (Fixture je Klasse,
-    # Tor T1–T4, zweiter Lauf = Fixpunkt). Die Probe läuft ohne Netz.
+    # WF-D4E0 (#612, aus main): die Politur-Ruinen-Familie verschwindet
+    # nachweislich (Fixture je Klasse, Tor T1–T4, zweiter Lauf = Fixpunkt).
     "politur_ruine_heiler.py": ("--wirkungsprobe",),
+    # ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Der Politur-Heiler heilt die
+    # harten Regeln R7/R11–R16 und beweist das an einem Fixture (alle fünf
+    # Defekte hinein, keiner heraus, Tor T1–T3 hält, idempotent).
+    "politur_heiler.py": ("--wirkungsprobe",),
+    # ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Der Satz-Heiler beweist seine
+    # Wirkung an der ECHTEN Flesch-Formel (readability_check) - ein schwerer
+    # Fixture-Text geht über die importierte Schwelle, das Ganztext-Tor T1–T4
+    # hält, und die Probe läuft ohne Netz (KI injiziert).
+    "satz_heiler.py": ("--wirkungsprobe",),
 }
 
 #  Regeln mit Zahlen-Versprechen: Mindestens einer ihrer Heiler MUSS eine
 #  grüne Wirkungsprobe haben. Die Liste wächst mit jedem neuen Zahlen-Heiler,
 #  nicht mit jedem Heiler (Alt-Werkzeuge ohne Schwelle bleiben unberührt).
-PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",)
+#  `textverstaendnis_failures` ist der zweite Eintrag: Die Regel galt als
+#  gedeckt, während im Zertifikat „manuell reparieren" stand (#614) – genau
+#  die Bauart, gegen die diese Liste existiert (#609).
+PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",
+                                   "textverstaendnis_failures")
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")
 # (Hinweis auf Aufrufe wird nicht geparst: die Kette ist die Wahrheit.)
@@ -556,6 +589,182 @@ def bericht_text(b: dict) -> str:
     return "\n".join(zeilen)
 
 
+# ---------------------------------------------------------------------------
+#  VORRATSSCHUTZ-BEWEIS (Reparatur 07.10.2026, BOT-WATCHDOG #614)
+# ---------------------------------------------------------------------------
+#  Am 07.10.2026 nahm ein einziger Lauf zehn Kandidaten die Pool-Fahne
+#  (Zertifikat 2/6, Pool 12 -> 2) – Grund: `reserve_quarantine` zählte nur
+#  LÄUFE mit gleichem Befund und fragte nie nach der KLASSE. Die Befunde
+#  standen alle in `GATE_BEFUNDE` und waren dort als heilbar geführt.
+#  Dieser Beweis friert die Gegenregel ein und läuft in jedem CI-Durchgang
+#  (`--selftest`), nicht nur im Kopf des Autors.
+VORFALL_614 = "37645894042"
+
+VORFALL_614_BEFUNDE: tuple[str, ...] = (
+    ("Lesbarkeits-Gate nicht bestanden: Flesch 58.0 (Mindestwert 60) – ein "
+     "Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach "
+     "unten (#585)"),
+    ("Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein "
+     "Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach "
+     "unten (#585)"),
+    ("Lesbarkeits-Gate nicht bestanden: Flesch 55.8 (Mindestwert 60) – ein "
+     "Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach "
+     "unten (#585)"),
+    ("Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert "
+     "75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 "
+     "Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60)"),
+    "Zeichenlänge (check_length.py) nicht bestanden",
+    ("quality-score 0.839 < 0.85 (schwach: structure 0.70, readability 0.75, "
+     "typography 0.84)"),
+    ("Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: Politur-Ruine "
+     "„SATZ:“ – Überrest eines automatisierten Politur-Laufs, manuell "
+     "reparieren"),
+)
+
+
+def vorratsschutz() -> dict:
+    """Beweist, dass der Vorrat nicht mehr für heilbare Befunde blutet (#614).
+
+    Vier Zusagen, ohne Netz, in einem temporären Bestand:
+      1. Heilbarer Befund -> Fahne bleibt, Schonung begründet (Klasse+Heiler)
+         – geprüft mit den ORIGINAL-Befunden des Vorfalls.
+      2. Unheilbarer Befund -> Fahne fällt (die Zusage #295 bleibt scharf).
+      3. Unbekannter Befund -> Fahne bleibt (fail-closed).
+      4. Rückholung: ausgemustert + heilbare Klasse + Wirkungsnachweis in der
+         Kette -> Fahne zurück; ohne Wirkungsnachweis -> bleibt ausgemustert.
+    """
+    import tempfile
+    import reserve_quarantine as rq
+    import reserve_custody as cu
+    import reserve_blocker_klassen as bk
+    import reserve_finisher as fin
+
+    fehler: list[str] = []
+    geprueft = {"vorfall_befunde": 0, "geschont": 0, "ausgemustert": 0,
+                "fail_closed": 0, "rueckgeholt": 0, "rueckholung_verweigert": 0}
+
+    def _post(posts, slug, fm):
+        ordner = posts / slug
+        ordner.mkdir(parents=True, exist_ok=True)
+        ziel = ordner / "index.md"
+        ziel.write_text(f"---\n{fm}\n---\n\nText.\n", encoding="utf-8")
+        return ziel
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = __import__("pathlib").Path(tmp)
+        posts = root / "posts"
+        lesbarkeit = VORFALL_614_BEFUNDE[0]
+
+        # 1) Die Original-Befunde des Vorfalls dürfen nie eine Fahne kosten.
+        for i, grund in enumerate(VORFALL_614_BEFUNDE):
+            _post(posts, f"vorfall-{i}", 'title: "Vorfall"\ndate: 2026-10-07\n'
+                                         'draft: true\nreserve: true')
+            zustand = root / f"zustand-{i}.json"
+            blockiert: list[dict] = []
+            geschont_je_fall: list[dict] = []
+            for lauf in (f"run:{VORFALL_614}A", f"run:{VORFALL_614}B"):
+                blockiert += rq.record([{"slug": f"vorfall-{i}", "ready": False,
+                                         "reason": grund}], zustand, posts,
+                                       apply=True, run_key=lauf,
+                                       geschont_out=geschont_je_fall)
+            text = (posts / f"vorfall-{i}" / "index.md").read_text("utf-8")
+            if blockiert or "reserve_blocked" in text:
+                fehler.append(f"Vorfall-Befund kostete die Fahne: {grund[:60]}")
+            if "reserve: true" not in text:
+                fehler.append(f"Vorfall-Befund vertrieb den Kandidaten: "
+                              f"{grund[:60]}")
+            if not geschont_je_fall:
+                fehler.append(f"Schonung nicht begründet gemeldet: {grund[:60]}")
+            if bk.gate_befund_klasse(grund)["klasse"] != bk.HEILBAR:
+                fehler.append(f"Vorfall-Befund gilt nicht als heilbar: "
+                              f"{grund[:60]}")
+            geprueft["vorfall_befunde"] += 1
+            geprueft["geschont"] += 1
+
+        # 2) Unheilbar mustert weiterhin aus (Zusage #295 bleibt scharf).
+        _post(posts, "torso", 'title: "Torso"\ndate: 2026-10-07\ndraft: true\n'
+                              'reserve: true')
+        dublette = ("Dublette: identischer Inhalt zu "
+                    "2026-09-01-energie-update-tarife (0.97)")
+        for lauf in ("run:t1", "run:t2"):
+            blockiert = rq.record([{"slug": "torso", "ready": False,
+                                    "reason": dublette}], root / "t.json",
+                                  posts, apply=True, run_key=lauf)
+        text = (posts / "torso" / "index.md").read_text("utf-8")
+        if not blockiert or "reserve_blocked" not in text:
+            fehler.append("unheilbarer Befund mustert nicht mehr aus")
+        if "reserve: true" in text:
+            fehler.append("unheilbarer Befund behielt die Fahne")
+        geprueft["ausgemustert"] += len(blockiert)
+
+        # 3) Unbekannt bleibt fail-closed im Pool (Fahne ist kein Zufall).
+        _post(posts, "unbekannt", 'title: "Unbekannt"\ndate: 2026-10-07\n'
+                                  'draft: true\nreserve: true')
+        for lauf in ("run:u1", "run:u2"):
+            rq.record([{"slug": "unbekannt", "ready": False,
+                        "reason": "brandneuer Befund ohne Klasse"}],
+                      root / "u.json", posts, apply=True, run_key=lauf)
+        text = (posts / "unbekannt" / "index.md").read_text("utf-8")
+        if "reserve_blocked" in text or "reserve: true" not in text:
+            fehler.append("unbekannter Befund wurde ausgemustert (nicht "
+                          "fail-closed)")
+        geprueft["fail_closed"] += 1
+
+        # 4) Rückholung mit Beweis – und die Verweigerung ohne Beweis.
+        ausgemustert = _post(
+            posts, "rueckhol-kandidat",
+            'title: "Rückholkandidat"\ndate: 2026-10-07\ndraft: true\n'
+            f'reserve_blocked: "{lesbarkeit}"\n'
+            'reserve_blocked_at: 2026-10-07T16:07:55Z')
+        lage = cu.bestandsaufnahme(posts, pfad=root / "custody.json")
+        if not [e for e in lage["blockiert"]]:
+            fehler.append("ausgemusterter Kandidat nicht als solcher gelesen")
+        zurueck = cu.rueckholen(lage, posts, jetzt=__import__("datetime").date(2026, 10, 7))
+        text = ausgemustert.read_text(encoding="utf-8")
+        if len(zurueck) != 1 or "reserve: true" not in text:
+            fehler.append(f"Rückholung griff nicht: {zurueck}")
+        if "reserve_blocked" in text or "reserve_reaktiviert" not in text:
+            fehler.append("Rückholung ohne saubere Belegzeile")
+        else:
+            geprueft["rueckgeholt"] += 1
+
+        # Ohne Wirkungsnachweis in der Kette bleibt der Kandidat ausgemustert:
+        # Hier wird die Kette kurzzeitig beschnitten (Heiler raus) – der
+        # Beweis muss dann NEIN sagen, obwohl die Klasse heilbar heißt.
+        opfer = _post(posts, "ohne-nachweis",
+                      'title: "Ohne Nachweis"\ndate: 2026-10-07\ndraft: true\n'
+                      f'reserve_blocked: "{lesbarkeit}"')
+        echte_kette = fin.HEALER_CHAIN
+        try:
+            fin.HEALER_CHAIN = tuple(
+                e for e in echte_kette
+                if e[0] not in ("lesbarkeit_heiler.py", "satz_heiler.py"))
+            lage2 = cu.bestandsaufnahme(posts, pfad=root / "custody2.json")
+            cu.rueckholen(lage2, posts)
+        finally:
+            fin.HEALER_CHAIN = echte_kette
+        if "reserve: true" in opfer.read_text(encoding="utf-8"):
+            fehler.append("Rückholung ohne Wirkungsnachweis in der Kette")
+        else:
+            geprueft["rueckholung_verweigert"] += 1
+
+    return {"ok": not fehler, "fehler": fehler, "geprueft": geprueft,
+            "vorfall": VORFALL_614}
+
+
+def vorratsschutz_text(b: dict) -> str:
+    marke = "✅" if b["ok"] else "🛑"
+    g = b["geprueft"]
+    zeilen = [f"{marke} Vorratsschutz (#614, Lauf {b['vorfall']}): "
+              f"{g['vorfall_befunde']} Original-Befunde ohne Fahnenverlust · "
+              f"{g['ausgemustert']} unheilbare Ausmusterung(en) · "
+              f"{g['fail_closed']} fail-closed gehalten · "
+              f"{g['rueckgeholt']} Rückholung mit Beweis · "
+              f"{g['rueckholung_verweigert']} Verweigerung ohne Beweis"]
+    zeilen += [f"   - {f}" for f in b["fehler"]]
+    return "\n".join(zeilen)
+
+
 def run_selftest() -> int:
     fehler: list[str] = []
     gate = ("def check_length_failures():\n    pass\n"
@@ -719,6 +928,16 @@ def run_selftest() -> int:
     except Exception as exc:  # noqa: BLE001
         fehler.append(f"Wirkungsproben nicht auswertbar: {exc}")
 
+    # --- Vorratsschutz (#614): heilbare Befunde dürfen keine Fahne kosten --
+    # 16) Der scharfe Fall: Die Original-Befunde des Vorfalls, unheilbare
+    #     Torsi, unbekannte Befunde und die Rückholung – alles im Echtzustand.
+    try:
+        vs = vorratsschutz()
+        if not vs["ok"]:
+            fehler.append(f"Vorratsschutz nicht bewiesen: {vs['fehler']}")
+    except Exception as exc:  # noqa: BLE001
+        fehler.append(f"Vorratsschutz nicht auswertbar: {exc}")
+
     if fehler:
         print("🛑 RESERVE-HEILER-DECKUNG-SELFTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -729,7 +948,10 @@ def run_selftest() -> int:
           "Regel und Heiler-Tippfehler werden erkannt – und die Lösch-"
           "Deckung (#594): Blocker ohne Heiler, unklassifizierter Blocker, "
           "Löschrecht ohne Begründung, toter Eintrag – und die Wirkungs-"
-          "Deckung (#609): Regel ohne Probe, rote Probe, fehlendes Skript.")
+          "Deckung (#609): Regel ohne Probe, rote Probe, fehlendes Skript – "
+          "und der Vorratsschutz (#614): kein Fahnenverlust für heilbare "
+          "Befunde, Ausmusterung nur für Unheilbares, Rückholung nur mit "
+          "Wirkungsnachweis.")
     return 0
 
 
@@ -738,9 +960,16 @@ def main() -> int:
         description="Deckungs-Wache: Publish-Gate-Regeln ↔ Reserve-Heiler")
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--vorratsschutz", action="store_true",
+                    help="Maschinenbeweis: heilbare Befunde kosten keine Fahne")
     args = ap.parse_args()
     if args.selftest:
         return run_selftest()
+    if args.vorratsschutz:
+        b = vorratsschutz()
+        print(json.dumps(b, ensure_ascii=False) if args.json
+              else vorratsschutz_text(b))
+        return 0 if b["ok"] else 2
     try:
         b = volldeckung()
         lb = loeschdeckung()
@@ -753,6 +982,7 @@ def main() -> int:
     else:
         print(bericht_text(b))
         print(loeschdeckung_text(lb))
+        print(vorratsschutz_text(vorratsschutz()))
     offen = (b["luecken"] or b["tote_ausnahmen"]
              or lb["luecken"] or lb["tote_eintraege"])
     return 1 if offen else 0

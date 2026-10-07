@@ -288,6 +288,36 @@ def heal_description(old_desc: str, main_kw: str, body: str = "") -> str:
     return base
 
 
+def erster_para_index(paras: list) -> int:
+    """Index des ersten FLIESSABSATZES – eine Quelle für Prüfung und Stempel.
+
+    BOT-WATCHDOG #614 (07.10.2026): `check_article` prüfte die ersten 350
+    ZEICHEN, `heal_first_paragraph` stempelte den ersten Fließabsatz. Bei
+    Reserve-Entwürfen liegt der aber hinter Transparenzhinweis, Kasten und
+    „Das Wichtigste in Kürze" – die beiden Fenster sahen also auseinander.
+    Folge: Jeder Lauf meldete „Keyword fehlt", stempelte erneut und der
+    Stempel blieb außerhalb des Prüffensters (aus einem wurden drei, vier,
+    fünf). Beide Seiten benutzen deshalb jetzt dieselbe Auswahl.
+    """
+    for i, p in enumerate(paras):
+        t = p.strip()
+        if not t:
+            continue
+        # Skip markdown constructs, but NOT numeric values like "1.072 €"
+        if (t.startswith("#") or t.startswith("|") or t.startswith(">")
+                or t.startswith("```") or t.startswith("---")
+                or t.startswith("💡") or t.startswith("👉")):
+            continue
+        if re.match(r"^[-*]\s", t):
+            continue
+        if re.match(r"^\d+\.\s", t):  # ordered list "1. "
+            continue
+        if len(t) < 20:
+            continue
+        return i
+    return -1
+
+
 def heal_first_paragraph(body: str, main_kw: str) -> str:
     main_kw = (main_kw or "").strip()
     if not main_kw:
@@ -301,27 +331,20 @@ def heal_first_paragraph(body: str, main_kw: str) -> str:
     lead = body[:len(body) - len(body.lstrip("\n"))]
     body = body.lstrip("\n")
     paras = body.split("\n\n")
-    first_idx = -1
-    for i, p in enumerate(paras):
-        t = p.strip()
-        if not t:
-            continue
-        # Skip markdown constructs, but NOT numeric values like "1.072 €"
-        if t.startswith("#") or t.startswith("|") or t.startswith(">") or t.startswith("```") or t.startswith("---") or t.startswith("💡") or t.startswith("👉"):
-            continue
-        if re.match(r"^[-*]\s", t):
-            continue
-        if re.match(r"^\d+\.\s", t):  # ordered list "1. "
-            continue
-        if len(t) < 20:
-            continue
-        first_idx = i
-        break
+    first_idx = erster_para_index(paras)
     if first_idx == -1:
         einstieg = (f"{main_kw} im Check: So erkennst du typische Fehler und "
                     f"ordnest die nächsten Schritte anhand transparenter Kriterien ein.\n\n")
         return lead + einstieg + body
     first_para = paras[first_idx].strip()
+    # IDEMPOTENZ AM ZIEL (BOT-WATCHDOG #614, 07.10.2026): Der Wächter oben
+    # prüft die ersten 350 Zeichen, gestempelt wird aber der erste
+    # Fließabsatz. Liegt der weiter hinten, war der Stempel für den Wächter
+    # unsichtbar – jeder Lauf stempelte erneut und der Vorrat fiel an der
+    # R15-PHrasen-Doppel-Ruine aus der Zertifizierung. Trägt der Zielabsatz
+    # den Stempel schon, ist der Heiler fertig.
+    if re.match(r"^" + re.escape(main_kw) + r"\s+im Check\b", first_para):
+        return body
     # #585-Nachtrag: KEIN `.lower()` und keine Themen-Sonderlocken mehr. Beides
     # hat Ruinen erzeugt („Du willst bankgebühren sparen?", „Du willst
     # online-konten?"). Das Keyword steht wortgleich vor dem Doppelpunkt – die
@@ -456,6 +479,13 @@ def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, li
     nb = norm(body)
     nslug = norm(slug)
     first_250 = norm(body[:350])
+    # BOT-WATCHDOG #614: Das Prüffenster (350 Zeichen) und das Stempelziel
+    # (erster Fließabsatz) waren zwei verschiedene Dinge. Der Absatz zählt
+    # deshalb mit – sonst meldet die Prüfung dauerhaft „Keyword fehlt", obwohl
+    # der Stempel längst steht, und der Heiler stempelt Lauf für Lauf erneut.
+    _paras = body.lstrip("\n").split("\n\n")
+    _i_abs = erster_para_index(_paras)
+    erster_absatz = norm(_paras[_i_abs]) if _i_abs >= 0 else ""
     core = next((t for t in nk.split() if len(t) >= 3), nk)
 
     def has_kw(text):
@@ -471,7 +501,7 @@ def heal_article_file(path: str, include_drafts: bool = False) -> tuple[bool, li
     checks = {}
     checks["Titel"] = has_kw(nt)
     checks["Description"] = has_kw(nd)
-    checks["Erster Absatz"] = has_kw(first_250)
+    checks["Erster Absatz"] = has_kw(first_250) or has_kw(erster_absatz)
     checks["Überschrift"] = any(has_kw(norm(h)) for h in re.findall(r"^#{2,3}\s+(.+)$", body, re.M))
     checks["Slug"] = has_kw(nslug)
     words = re.findall(r"\w+", body)
@@ -594,6 +624,11 @@ def check_article(a):
     nb = norm(a["body"])
     nslug = norm(a["slug"])
     first_200 = norm(a["body"][:350])
+    # BOT-WATCHDOG #614: derselbe Doppelbefund wie in `heal_article_file` –
+    # das Prüffenster (350 Zeichen) lag vor dem Stempel (erster Fließabsatz).
+    _paras = a["body"].lstrip("\n").split("\n\n")
+    _i_abs = erster_para_index(_paras)
+    erster_absatz = norm(_paras[_i_abs]) if _i_abs >= 0 else ""
 
     core = next((t for t in nk.split() if len(t) >= 3), nk)
 
@@ -609,7 +644,7 @@ def check_article(a):
 
     checks["Titel"] = has_kw(nt)
     checks["Description"] = has_kw(nd)
-    checks["Erster Absatz"] = has_kw(first_200)
+    checks["Erster Absatz"] = has_kw(first_200) or has_kw(erster_absatz)
     checks["Überschrift (H2/H3)"] = any(
         has_kw(norm(h)) for h in re.findall(r"^#{2,3}\s+(.+)$", a["body"], re.M))
     checks["URL-Slug"] = has_kw(nslug)

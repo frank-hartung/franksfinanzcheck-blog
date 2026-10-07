@@ -42,6 +42,16 @@ jobs:
           python3 scripts/fm_boundary_guard.py --selftest
           python3 scripts/social_studio.py --selftest
           python3 scripts/fm_boundary_guard.py --check
+      # Zeitbomben-Schutz (Nebenbefund zu #614): Am 01.10.2026 wurde genau
+      # diese Prüfung rot, ohne dass jemand Code angefasst hatte –
+      # test_social_perf_feedback baute seine Fixtures von der echten Wanduhr
+      # und plante gleichzeitig für den 14.09.2026 (drei Wochen später lag
+      # jeder Artikel hinter allen Slots). Als `--selftest`-Skript hätte die
+      # Uhr-Probe das am ersten Tag gefunden; Testmodule kannte sie nicht.
+      # Jetzt läuft die ganze Suite ein zweites Mal unter einer um 97 Tage
+      # vorgestellten Uhr: dieselben Tests, fremdes Datum, gleiches Ergebnis.
+      - name: Uhr-Probe – die Suite muss an jedem Kalendertag grün sein
+        run: python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
       # Ledger-Isolation (C27, Nebenbefund zu #610): audit_log trägt den
       # Vertrag, repo_isolation stellt die Sandbox für Tests. Beide prüfen in
       # beide Richtungen – Umlenkung wirkt UND Normalfall bleibt scharf.

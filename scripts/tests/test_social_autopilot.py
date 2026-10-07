@@ -41,8 +41,19 @@ CHANNELS = sch.channel_map(CFG)
 META = sch.meta_of(CFG)
 
 
-def _article(slug: str, pillar: str = "strom-sparen", days_old: int = 3) -> dict:
-    now = planner.berlin_now()
+def _article(slug: str, pillar: str = "strom-sparen", days_old: int = 3,
+             bezug=None) -> dict:
+    """Fixture-Artikel; `bezug` ist die Uhr, von der aus `days_old` zählt.
+
+    Standard ist die echte Wanduhr. Wer mit einer GEPINNTEN Plan-Uhr arbeitet
+    (TestPlanner: 14.09.2026), muss sie übergeben – sonst entsteht eine
+    Zeitbombe: Die Artikel wären „neuer" als die geplante Zukunft, kein
+    Kandidat passt mehr in einen Slot und der Plan bleibt leer. Genau das legte
+    am 01.10.2026 die Publication-Reliability-Prüfung lahm (Schwesterfall
+    test_social_perf_feedback, dortige Klasse). `selftest_clock --trap-modul`
+    findet diese Klasse seither.
+    """
+    now = bezug or planner.berlin_now()
     return {
         "slug": slug,
         "path": "",
@@ -258,22 +269,37 @@ class TestPlanner(unittest.TestCase):
         self.old_state = planner.STATE_FILE
         planner.SCHEDULE_FILE = os.path.join(self.tmp, "schedule.yaml")
         planner.STATE_FILE = os.path.join(self.tmp, "state.yaml")
-        self.pool = [_article(f"artikel-{i:02d}",
-                              ["strom-sparen", "internet-dsl", "versicherungen",
-                               "konto-karten", "frugalismus", "mietwagen"][i % 6],
-                              days_old=2 + i) for i in range(12)]
         self.now = planner.localize(datetime(2026, 9, 14, 6, 0))
+        self.pool = self._pool(self.now)
 
     def tearDown(self):
         planner.SCHEDULE_FILE = self.old_schedule
         planner.STATE_FILE = self.old_state
 
-    def _plan(self, state=None):
-        return planner.build_plan(CFG, self.pool, state or {"history": [], "failures": []},
-                                  now=self.now)
+    @staticmethod
+    def _pool(pn):
+        """Zwölf Artikel, datiert von der übergebenen Plan-Uhr aus."""
+        return [_article(f"artikel-{i:02d}",
+                         ["strom-sparen", "internet-dsl", "versicherungen",
+                          "konto-karten", "frugalismus", "mietwagen"][i % 6],
+                         days_old=2 + i, bezug=pn) for i in range(12)]
+
+    def _plan(self, state=None, pn=None):
+        pn = pn or self.now
+        return planner.build_plan(CFG, self._pool(pn),
+                                  state or {"history": [], "failures": []}, now=pn)
 
     def test_plan_ist_gefuellt(self):
         self.assertTrue(planner.planned_items(self._plan()))
+
+    def test_plan_haengt_nicht_an_der_echten_wanduhr(self):
+        """Drei Uhren, dieselbe Rechnung – der Plan darf kein Kalender-Zufall sein."""
+        for pn in (self.now,
+                   planner.localize(datetime(2027, 3, 1, 6, 0)),
+                   planner.localize(datetime(2030, 12, 29, 6, 0))):
+            with self.subTest(uhr=pn.isoformat()):
+                self.assertTrue(planner.planned_items(self._plan(pn=pn)),
+                                f"kein Plan für die Uhr {pn.isoformat()}")
 
     def test_tagesgrenzen_pro_kanal(self):
         plan = self._plan()

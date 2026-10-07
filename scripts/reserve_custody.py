@@ -73,10 +73,16 @@ def ledger_pfad(pfad: Path | None = None) -> Path:
     return Path(ziel) if ziel else LEDGER
 
 RE_DRAFT_TRUE = re.compile(r"(?m)^draft:\s*true\s*$")
-RE_DRAFT_ZEILE = re.compile(r"(?m)^draft:\s*\S+\s*$")
+# Reparatur 07.10.2026 (#614): `\s*$` läuft mit (?m) über Zeilenenden
+# hinweg – steht `draft: true` als LETZTE Frontmatter-Zeile, landete die
+# Fahne dadurch am Ende des Kopfes (statt dahinter) oder die Suche griff
+# ins Leere. [ \t] statt \s hält den Treffer auf seiner Zeile.
+RE_DRAFT_ZEILE = re.compile(r"(?m)^draft:[ \t]*\S+[ \t]*$")
 RE_RESERVE = re.compile(r"(?m)^reserve:\s*(?:true|yes|1)\s*$")
 RE_PUBLISHED = re.compile(r"(?m)^reserve_published:")
 RE_BLOCKED = re.compile(r"(?m)^reserve_blocked:")
+RE_BLOCKED_GRUND = re.compile(r'(?m)^reserve_blocked:\s*"?(?P<grund>.*?)"?\s*$')
+RE_BLOCKED_AT = re.compile(r"(?m)^reserve_blocked_at:.*$\n?")
 RE_RETIRED = re.compile(r"(?m)^reserve_retired:\s*(?:true|yes|1)\s*$")
 RE_TITEL = re.compile(r'(?m)^title:\s*["\']?(.+?)["\']?\s*$')
 RE_DATUMSPRAEFIX = re.compile(r"^\d{4}-\d{2}-\d{2}-")
@@ -150,6 +156,147 @@ def fahne_setzen(text: str) -> str | None:
     offset = text.index("---") + 3
     ende = offset + m.end()
     return text[:ende] + "\nreserve: true" + text[ende:]
+
+
+# ---------------------------------------------------------------------------
+#  RÜCKHOLUNG MIT BEWEIS (Reparatur 07.10.2026, BOT-WATCHDOG #614)
+# ---------------------------------------------------------------------------
+#  Bis hierher war die Ausmusterung eine EINBAHNSTRASSE. `reserve_quarantine`
+#  nimmt einem Kandidaten die Fahne, sobald derselbe Befund in zwei Läufen
+#  steht; dieser Wächter setzt das Gedächtnis auf „ausgemustert“ – und kein
+#  Pfad führte je zurück. Am 07.10.2026 (Run 37645894042) nahm ein einziger
+#  Lauf ZEHN Fahnen (Pool 12 -> 2); der halbe Vorrat war danach für die
+#  Automatik unerreichbar, obwohl sechs der Befunde eine Klasse waren, die der
+#  Politur-Heiler bzw. der Satz-Heiler inzwischen heilt. Ein Wächter, der
+#  Material endgültig aussperrt, während die Heiler besser werden, macht den
+#  Vorrat genau dann kleiner, wenn er gebraucht wird – „Automatisierung
+#  braucht Eingriff“ (#614) in Reinform.
+#
+#  Deshalb gilt jetzt die Gegenregel, in derselben Bauart wie „Löschen braucht
+#  einen Beweis“ (WF-B594) und „Nichts wird gelöscht“ (#295):
+#
+#      RÜCKHOLUNG BRAUCHT EINEN WIRKUNGS-NACHWEIS.
+#
+#  Ein ausgemusterter Entwurf kehrt in den Pool zurück, wenn ALLE drei gelten:
+#    1. Sein Befund gehört einer Klasse an, die `reserve_blocker_klassen` als
+#       HEILBAR führt (SSOT – geraten wird nichts),
+#    2. mindestens einer der dort genannten Heiler läuft in der echten Kette
+#       (`reserve_finisher.HEALER_CHAIN`), UND
+#    3. genau dieser Heiler besitzt einen grünen Wirkungsnachweis
+#       (`reserve_healer_coverage.WIRKUNGS_PROBEN`, Vertrag C25).
+#  Fehlt einer der drei Belege, bleibt der Kandidat ausgemustert und wird mit
+#  Grund gemeldet („unheilbar“, „kein Wirkungsnachweis“) – die Lücke ist der
+#  Bericht, nicht der stille Verlust.
+def rueckholbar(grund: str) -> tuple[bool, dict]:
+    """Darf dieser ausgemusterte Befund den Vorrat zurückbekommen?"""
+    grund = (grund or "").strip()
+    try:
+        import reserve_blocker_klassen as bk
+    except Exception as exc:  # noqa: BLE001 – fail-closed: nichts zurückholen
+        return False, {"klasse": "unbekannt", "beweis": [],
+                       "warum": f"Klassen-SSOT nicht ladbar: {exc}"}
+    bewertung = bk.gate_befund_klasse(grund)
+    if bewertung["klasse"] != bk.HEILBAR:
+        return False, {"klasse": bewertung["klasse"], "beweis": [],
+                       "warum": bewertung["grund"]}
+    try:
+        import reserve_finisher as fin
+        import reserve_healer_coverage as rhc
+        kette = {e[0] for e in fin.HEALER_CHAIN}
+        proben = set(rhc.WIRKUNGS_PROBEN)
+    except Exception as exc:  # noqa: BLE001 – ohne prüfbare Kette kein Beweis
+        return False, {"klasse": bewertung["klasse"], "beweis": [],
+                       "warum": f"Kette/Nachweise nicht prüfbar: {exc}"}
+    beweis = sorted(set(bewertung["heiler"]) & kette & proben)
+    if not beweis:
+        return False, {"klasse": bewertung["klasse"], "beweis": [],
+                       "warum": ("Klasse ist heilbar, aber kein Heiler der "
+                                 "Klasse hat einen grünen Wirkungsnachweis in "
+                                 "der Kette")}
+    return True, {"klasse": bewertung["klasse"], "beweis": beweis,
+                  "warum": bewertung["grund"]}
+
+
+def reaktivieren(text: str, hinweis: str) -> str | None:
+    """Fahne zurück + Belegzeile – oder None, wenn es kein Entwurf ist.
+
+    Der Entwurf wird NIE inhaltlich angefasst: Es fallen nur die beiden
+    Ausmusterungs-Zeilen, `reserve: true` kommt hinter `draft: true` (wie in
+    `fahne_setzen`) und die Rückholung wird mit Datum, Klasse und Beweis
+    begründet – der nächste Leser soll nicht raten müssen, warum ein
+    ehemals ausgemusterter Text wieder im Pool steht.
+    """
+    if not RE_DRAFT_TRUE.search(frontmatter(text)):
+        return None
+    teile = text.split("---", 2)
+    if len(teile) != 3 or teile[0] != "":
+        return None
+    fm_neu = RE_BLOCKED_AT.sub("", teile[1])
+    fm_neu = RE_BLOCKED_GRUND.sub("", fm_neu)
+    fm_neu = re.sub(r"\n{3,}", "\n\n", fm_neu)
+    neu = fahne_setzen("---" + fm_neu + "---" + teile[2])
+    if neu is None:
+        return None
+    zeile = "reserve_reaktiviert: " + json.dumps(hinweis, ensure_ascii=False)
+    # Belegzeile direkt hinter die Fahne. Muster bewusst mit [ \t] statt \s:
+    # `\s*$` läuft mit (?m) über Zeilenenden hinweg und frisst den Text –
+    # genau dieser Fehler wurde beim Bau gegen die Fixture gefunden.
+    return re.sub(r"(?m)^(reserve:[ \t]*true[ \t]*)$",
+                  lambda m: m.group(1) + "\n" + zeile, neu, count=1)
+
+
+def _quarantaene_zuruecksetzen(slug: str) -> None:
+    """Zähler eines zurückgeholten Kandidaten löschen (er beginnt bei null)."""
+    try:
+        import reserve_quarantine as rq
+        state = rq.load_state(rq.STATE)
+        if state.pop(slug, None) is not None:
+            rq.save_state(state, rq.STATE)
+    except Exception:  # noqa: BLE001 – Bestands-Wächter ist keine Blockade
+        pass
+
+
+def rueckholen(lage: dict, posts_dir: Path = POSTS, *, dry_run: bool = False,
+               jetzt: dt.date | None = None) -> list[dict]:
+    """Heilbare Ausgemusterte zurück in den Vorrat holen (mit Beweis).
+
+    Rückgabe: die zurückgeholten Einträge. `lage` wird mitgeführt –
+    Zurückgeholte wandern von `blockiert` nach `pool`, damit das Gedächtnis
+    (und der Bericht) denselben Stand liest wie die Dateien.
+    """
+    reaktiviert: list[dict] = []
+    abgelehnt: list[dict] = []
+    for eintrag in list(lage.get("blockiert") or []):
+        index = Path(eintrag.get("pfad") or "")
+        try:
+            text = index.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        m = RE_BLOCKED_GRUND.search(frontmatter(text))
+        grund = (m.group("grund") if m else "") or ""
+        ok, info = rueckholbar(grund)
+        if not ok:
+            abgelehnt.append({**eintrag, "klasse": info["klasse"],
+                              "warum": info["warum"]})
+            continue
+        hinweis = (f"{heute(jetzt)} – Rückholung (#614): Befund der Klasse "
+                   f"\u201e{info['klasse']}\u201c ist heilbar, "
+                   f"Wirkungsnachweis {', '.join(info['beweis'])}")
+        neu = reaktivieren(text, hinweis)
+        if neu is None:
+            abgelehnt.append({**eintrag, "klasse": info["klasse"],
+                              "warum": "nicht reaktivierbar (kein Entwurf)"})
+            continue
+        if not dry_run:
+            index.write_text(neu, encoding="utf-8")
+            _quarantaene_zuruecksetzen(eintrag["slug"])
+        reaktiviert.append({**eintrag, "klasse": info["klasse"],
+                            "beweis": info["beweis"], "hinweis": hinweis})
+        lage["blockiert"].remove(eintrag)
+        lage["pool"].append(eintrag)
+    lage["reaktiviert"] = reaktiviert
+    lage["nicht_reaktiviert"] = abgelehnt
+    return reaktiviert
 
 
 def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> dict:
@@ -245,6 +392,9 @@ def heilen(posts_dir: Path = POSTS, *, pfad: Path | None = None,
     pfad = ledger_pfad(pfad)
     lage = bestandsaufnahme(posts_dir, pfad=pfad)
     ledger = ledger_laden(pfad)
+    # Rückholung VOR dem Gedächtnis-Schreiben: Ein zurückgeholter Kandidat ist
+    # wieder Pool und darf unten nicht als „ausgemustert“ vermerkt werden.
+    reaktiviert = rueckholen(lage, posts_dir, dry_run=dry_run, jetzt=jetzt)
     geheilt = []
     for eintrag in lage["verloren"]:
         index = Path(eintrag["pfad"])
@@ -268,6 +418,17 @@ def heilen(posts_dir: Path = POSTS, *, pfad: Path | None = None,
             e["zuletzt_geheilt"] = heute(jetzt)
             ledger[kennung] = e
         geheilt.append(eintrag)
+
+    if reaktiviert and not dry_run:
+        # Der Beweis reist mit: Wer einen Kandidaten zurückholt, hinterlässt
+        # die Zählung im Gedächtnis (nachvollziehbar, nicht nur gedruckt).
+        for eintrag in reaktiviert:
+            kennung = schluessel(eintrag["slug"])
+            e = dict(ledger.get(kennung) or {})
+            e["reaktiviert"] = int(e.get("reaktiviert") or 0) + 1
+            e["zuletzt_reaktiviert"] = heute(jetzt)
+            e["reaktiviert_mit"] = list(eintrag.get("beweis") or [])
+            ledger[kennung] = e
 
     if not dry_run:
         # Fortschreiben: aktueller Pool + Zustandswechsel dokumentieren.
@@ -306,6 +467,18 @@ def markdown(lage: dict) -> str:
                       "(Kandidat war im Pool, Entwurf vorhanden, Fahne fehlte)")
         for e in lage["geheilt"]:
             zeilen.append(f"  - `{e['slug']}`")
+    if lage.get("reaktiviert"):
+        zeilen.append(f"- **Rückholung mit Beweis (#614):** "
+                      f"{len(lage['reaktiviert'])} – ausgemustert war eine "
+                      "Sackgasse; die Befund-Klasse ist heilbar und hat einen "
+                      "grünen Wirkungsnachweis")
+        for e in lage["reaktiviert"]:
+            zeilen.append(f"  - `{e['slug']}` ← "
+                          f"{', '.join(e.get('beweis') or []) or '?'}")
+    if lage.get("nicht_reaktiviert"):
+        zeilen.append(f"- **Weiter ausgemustert:** "
+                      f"{len(lage['nicht_reaktiviert'])} (unheilbar oder ohne "
+                      "Wirkungsnachweis – der Befund ist der Bericht)")
     if lage.get("ruecklaeufer"):
         zeilen.append(f"- **Rückläufer (Mensch entscheidet):** "
                       f"{len(lage['ruecklaeufer'])} – veröffentlicht und "
@@ -406,6 +579,17 @@ def run_selftest() -> int:
         blockiert = _schreibe(posts, "2026-09-19-blockiert",
                               'title: "Ausgemustert"\ndate: 2026-09-19\n'
                               'draft: true\nreserve_blocked: R5')
+        # REPARATUR 07.10.2026 (#614): Ein ausgemusterter Kandidat, dessen
+        # Befund eine heilbare Klasse MIT grünem Wirkungsnachweis ist, kehrt
+        # zurück. Der Befund ist wörtlich der des Vorfalls (Flesch 58.0).
+        heilbar_blockiert = _schreibe(
+            posts, "2026-09-18-heilbar-blockiert",
+            'title: "Ausgemustert, aber heilbar"\ndate: 2026-09-18\n'
+            'draft: true\n'
+            'reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 58.0 '
+            '(Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den '
+            'Bestands-Durchschnitt nach unten (#585)"\n'
+            'reserve_blocked_at: 2026-09-18T06:00:00Z')
 
         # Gedächtnis: „verloren", „retired" und „blockiert" waren im Pool.
         ledger_speichern({
@@ -413,6 +597,7 @@ def run_selftest() -> int:
                          "herkunft": "Zertifikat 2026-09-25"},
             "zurueckgezogen": {"zustand": "pool", "seit": "2026-09-23"},
             "blockiert": {"zustand": "pool", "seit": "2026-09-19"},
+            "heilbar-blockiert": {"zustand": "pool", "seit": "2026-09-18"},
         }, pfad)
 
         lage = heilen(posts, pfad=pfad, jetzt=dt.date(2026, 9, 26))
@@ -456,11 +641,35 @@ def run_selftest() -> int:
             fehler.append("Nachweis-loser Nachschub wurde in den Pool gezogen "
                           "(nur der Janitor holt ihn zurück, #610)")
 
+        # 2b. RÜCKHOLUNG MIT BEWEIS (#614): Der heilbar Ausgemusterte ist
+        #     wieder Pool – mit Belegzeile, ohne Ausmusterungs-Zeilen, und der
+        #     Inhalt ist unangetastet. Der unklassifizierte "R5"-Fall bleibt
+        #     dagegen ausgemustert (fail-closed).
+        reaktiviert = [e["slug"] for e in lage.get("reaktiviert", [])]
+        if reaktiviert != ["2026-09-18-heilbar-blockiert"]:
+            fehler.append(f"Rückholung traf die falschen Dateien: {reaktiviert}")
+        text_hb = heilbar_blockiert.read_text(encoding="utf-8")
+        if "reserve: true" not in text_hb:
+            fehler.append("Rückholung hat die Fahne nicht gesetzt")
+        if "reserve_blocked:" in text_hb or "reserve_blocked_at:" in text_hb:
+            fehler.append("Rückholung ließ die Ausmusterungs-Zeilen stehen")
+        if "reserve_reaktiviert:" not in text_hb:
+            fehler.append("Rückholung ohne Belegzeile (nicht nachvollziehbar)")
+        if "Wirkungsnachweis" not in text_hb:
+            fehler.append("Belegzeile nennt den Wirkungsnachweis nicht")
+        if "Text." not in text_hb:
+            fehler.append("Rückholung hat den Artikelinhalt verändert")
+        haerte = [e["slug"] for e in lage.get("nicht_reaktiviert", [])]
+        if haerte != ["2026-09-19-blockiert"]:
+            fehler.append(f"Fail-closed-Liste falsch: {haerte}")
+
         # 3. Idempotenz: zweiter Lauf heilt nichts mehr.
         vorher = verloren.read_text(encoding="utf-8")
         lage2 = heilen(posts, pfad=pfad, jetzt=dt.date(2026, 9, 26))
         if lage2["geheilt"]:
             fehler.append("Heilung ist nicht idempotent")
+        if lage2.get("reaktiviert"):
+            fehler.append("Rückholung ist nicht idempotent")
         if verloren.read_text(encoding="utf-8") != vorher:
             fehler.append("Zweiter Lauf hat die Datei erneut verändert")
 
@@ -470,6 +679,10 @@ def run_selftest() -> int:
             fehler.append("Pool-Kandidat landet nicht im Gedächtnis")
         if ledger.get("blockiert", {}).get("zustand") != ZUSTAND_BLOCKIERT:
             fehler.append("Zustandswechsel (ausgemustert) nicht vermerkt")
+        if ledger.get("heilbar-blockiert", {}).get("zustand") != ZUSTAND_POOL:
+            fehler.append("Rückgeholter Kandidat nicht als Pool vermerkt")
+        if int(ledger.get("heilbar-blockiert", {}).get("reaktiviert") or 0) != 1:
+            fehler.append("Rückholung nicht im Gedächtnis gezählt")
 
         # 4b. RE-DATING (die Veredelung hebt Kandidaten auf heute und
         #     benennt den Ordner um): Das Gedächtnis darf dabei nichts
@@ -510,7 +723,8 @@ def run_selftest() -> int:
         for f in fehler:
             print(f"   - {f}")
         return 2
-    print("✅ Bestands-Wächter-Selbsttest grün (Fahne zurück, Inhalt "
+    print("✅ Bestands-Wächter-Selbsttest grün (Rückholung mit Beweis #614, "
+          "Fahne zurück, Inhalt "
           "unberührt, Live/Rückläufer/Fremd/zurückgezogen/ausgemustert "
           "unangetastet, Rückläufer nur MIT LIVE-Nachweis, Nachschub ohne "
           "Nachweis als eigener Zustand (#610), idempotent, Trockenlauf "
@@ -549,6 +763,12 @@ def main() -> int:
               f"{len(lage['zurueckgezogen'])} von Hand zurückgezogen")
         for e in lage["geheilt"]:
             print(f"   🧾 Fahne wiederhergestellt: {e['slug']}")
+        for e in lage.get("reaktiviert", []):
+            print(f"   ♻️  Rückgeholt (Klassen-Beweis): {e['slug']} ← "
+                  f"{', '.join(e.get('beweis') or [])}")
+        for e in lage.get("nicht_reaktiviert", []):
+            print(f"   🧱 bleibt ausgemustert: {e['slug']} "
+                  f"[{e.get('klasse') or '?'}] – {e.get('warum', '')[:90]}")
         geheilt = {e["slug"] for e in lage["geheilt"]}
         for e in lage["verloren"]:
             if e["slug"] in geheilt:

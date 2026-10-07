@@ -25,6 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import fm_boundary_guard as fm  # noqa: E402
+import keyword_optimizer as ko  # noqa: E402
 import post_utils  # noqa: E402  – Naht-SSOT (join/split/heal)
 
 try:
@@ -217,6 +218,72 @@ def preher_body(text):
     _zeilen, _begin, ende = fm.split_fm(text)
     return "\n".join(text.split("\n")[ende:]) if ende else text
 
+
+# ------------------------------- R15-Stempel (BOT-WATCHDOG #614, 07.10.2026)
+class StempelIdempotenzTests(unittest.TestCase):
+    """#614: Der Keyword-Stempel darf sich nicht stapeln.
+
+    Die R15-PHrasen-Doppel-Ruine des Reserve-Vorrats („Dein Weg zu geringeren
+    im Check: … ×3") war kein Inhaltsfehler, sondern ein Automatik-Defekt:
+    Prüfung und Heilung benutzten ZWEI Fenster. `check_article` sah die ersten
+    350 ZEICHEN, `heal_first_paragraph` stempelte den ersten FLIESSABSATZ.
+    Im realen Entwurf beginnt dieser bei Zeichen 357 (Divider, Schnell-Tipp
+    und Überschrift stehen davor) – der Stempel lag damit dauerhaft außerhalb
+    des Prüffensters: Jeder Lauf meldete „Keyword fehlt" und stempelte erneut.
+    Diese Tests halten den Realfall fest: Zielabsatz hinter dem Prüffenster,
+    zweiter Lauf ist Fixpunkt, die Prüfung sieht den Stempel – und der ganze
+    Bestand bleibt stempelfest.
+    """
+
+    # Reale Kopfstruktur eines Reserve-Entwurfs (gekürzt, Länge gewahrt):
+    # Divider + Schnell-Tipp-Kasten + Einleitungs-Überschrift davor.
+    KOPF = ("\n\n---\n\n"
+            "💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest "
+            "du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**]"
+            "(/go/strom/)\n_(Dieser Artikel enthält Affiliate-Links (Werbung). "
+            "Beim Abschluss über einen Link erhalten wir eine Provision – für dich "
+            "entstehen keine Mehrkosten.)_\n\n"
+            "## Einleitung – der Moment, der alles ändert\n\n")
+    INTRO = ("Stell dir vor, du könntest jeden Monat 50 € oder mehr im Portemonnaie "
+             "haben, ohne dafür mehr arbeiten zu müssen.\n")
+
+    def test_fixture_bildet_den_realfall_ab(self):
+        """Der Stempelabsatz MUSS hinter Zeichen 350 beginnen – sonst prüft
+        dieser Test die Ursache nicht mehr (dann greift schon der alte Kopf-Wächter)."""
+        self.assertGreater(len(self.KOPF), 350)
+
+    def test_stempel_ist_nach_dem_ersten_lauf_fixpunkt(self):
+        body = self.KOPF + self.INTRO
+        einmal = ko.heal_first_paragraph(body, "Dein Weg zu geringeren")
+        self.assertEqual(einmal.count("Dein Weg zu geringeren im Check"), 1)
+        for lauf in range(2, 6):
+            einmal = ko.heal_first_paragraph(einmal, "Dein Weg zu geringeren")
+            self.assertEqual(einmal.count("Dein Weg zu geringeren im Check"), 1,
+                             f"Lauf {lauf} hat erneut gestempelt (R15-Ruine)")
+
+    def test_pruefung_sieht_den_stempel_im_zielabsatz(self):
+        geheilt = ko.heal_first_paragraph(self.KOPF + self.INTRO,
+                                          "Dein Weg zu geringeren")
+        artikel = {"file": "x.md", "path": None, "slug": "dein-weg",
+                   "title": "Dein Weg zu geringeren", "description": "",
+                   "keywords": ["Dein Weg zu geringeren"], "body": geheilt}
+        self.assertNotIn("Keyword nicht in: Erster Absatz",
+                         ko.check_article(artikel)["issues"],
+                         "der Stempel steht im ersten Fließabsatz – die Prüfung "
+                         "muss ihn dort sehen, sonst stempelt der nächste Lauf erneut")
+
+    def test_bestand_stempelt_sich_nicht_erneut(self):
+        """Klassen-Wächter: Für JEDEN Artikel im Bestand ist die Heilung ein
+        Fixpunkt. Vor dem Fix fiel dieser Test am realen Reserve-Entwurf."""
+        geprueft = 0
+        for a in ko.load_articles(include_drafts=True):
+            if not a["keywords"]:
+                continue
+            geprueft += 1
+            einmal = ko.heal_first_paragraph(a["body"], a["keywords"][0])
+            zweimal = ko.heal_first_paragraph(einmal, a["keywords"][0])
+            self.assertEqual(einmal, zweimal, f"nicht idempotent: {a['file']}")
+        self.assertGreater(geprueft, 0, "kein Artikel gefunden – Test blind?")
 
 if __name__ == "__main__":
     unittest.main()

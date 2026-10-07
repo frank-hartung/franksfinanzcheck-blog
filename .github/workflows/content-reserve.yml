@@ -412,6 +412,16 @@ jobs:
           #        Content wieder aus dem Index und meldet, was liegen bleibt,
           #     3. git_sync.sh          – heilt Rebase-Konflikte auf den
           #        maschinengenerierten Artefakten (Zertifikat, Cover-Manifest).
+          # REPARATUR 07.10.2026 (BOT-WATCHDOG #614): Die Chronik-Zeile des
+          # End-Gates entstand bisher NACH diesem Commit – und wurde damit nie
+          # gepusht. Ergebnis: data/reserve-history.jsonl auf main trug keinen
+          # einzigen CI-Lauf (nur „lokal“-Zeilen), und mit ihm war der
+          # Blocker-Verlauf über Läufe hinweg unsichtbar: „Warum hebt Lauf N
+          # den Kandidaten nicht?“ ließ sich nicht aus dem Repo beantworten,
+          # nur aus einem Log, das niemand aufbewahrt. Diese Zeile schreibt den
+          # Zustand VOR der Sicherung; das End-Gate schreibt sie danach nur
+          # noch einmal in den flüchtigen Arbeitsbaum.
+          python3 scripts/reserve_gate.py --chronik
           echo "── Arbeitsbaum vor dem Commit ──────────────────────────────"
           git status --porcelain | head -40
           python3 scripts/reserve_stage_guard.py

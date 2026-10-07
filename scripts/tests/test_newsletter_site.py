@@ -429,6 +429,10 @@ class Kadenz(unittest.TestCase):
                                  f"Kadenz-Betreff für Wochentag {tag} sprengt das "
                                  f"Längen-Gate (Q8): {laenge} > {grenze['max_zeichen']}")
 
+    @unittest.skipIf(os.environ.get("FFC_FREMD_UHR"),
+                     "baut aus dem ECHTEN Bestand der letzten 50 Tage – unter "
+                     "einer vorgestellten Uhr ist der Bestand leer, ohne dass "
+                     "der Code etwas falsch macht (scripts/selftest_clock.py)")
     def test_beide_versandtage_bauen_eine_mail_mit_identitaet(self):
         """End-to-End durchs Studio: Dienstag und Freitag liefern verschiedene
         Ausgaben – Name, Kopfzeile, Betreff und nächsten Termin."""

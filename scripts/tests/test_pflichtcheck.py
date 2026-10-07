@@ -22,6 +22,7 @@ Branch-Schutz an DREI Stellen gehalten wird und keine davon still versagen kann:
 Ausführung wie Bestands-Tests:  python3 -m unittest discover -s scripts/tests -v
 """
 import contextlib
+import datetime as _dt
 import io
 import json
 import os
@@ -37,8 +38,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import governance_contract as gc  # noqa: E402
 import pflichtcheck_guard as pg  # noqa: E402
 import selftest_runner as sr  # noqa: E402
+import selftest_clock as uhr_zwang  # noqa: E402
 
 WF_PFAD = ROOT / ".github" / "workflows" / gc.PFLICHT_CHECK_WORKFLOW
+
+# Gepinnter Prüfzeitpunkt INNERHALB der dokumentierten Prüffrist
+# (`pruefung_bis` 2026-12-31): Dieser Test prüft den Vorfall-Vertrag, nicht
+# den Kalender. Ohne Pin wäre er ab dem 01.01.2027 von selbst rot.
+_FRIST_INNEN = _dt.datetime(2026, 11, 4, 12, 0, tzinfo=_dt.timezone.utc)
 WF_KEY = f".github/workflows/{gc.PFLICHT_CHECK_WORKFLOW}"
 
 
@@ -314,7 +321,12 @@ class ProbeOffline(unittest.TestCase):
                 return detail, ""
             return None, f"unerwarteter Pfad: {pfad}"
         puffer = io.StringIO()
-        with mock.patch.object(pg, "api_get", side_effect=fake_api), \
+        # Die Uhr wird gepinnt: Der Befund hängt an der dokumentierten Prüffrist
+        # (`pruefung_bis`, Menschen-Entscheidung). Ohne Pin würde dieser Test am
+        # 01.01.2027 von selbst rot – und unter einer vorgestellten Uhr sofort.
+        with uhr_zwang.uhr(_FRIST_INNEN, uhr_zwang.MODUS_VERSCHOBEN,
+                           module=[pg]), \
+                mock.patch.object(pg, "api_get", side_effect=fake_api), \
                 mock.patch.dict(os.environ, {"GITHUB_ACTIONS": "1", "PFLICHTCHECK_STRICT": ""},
                                 clear=False), \
                 contextlib.redirect_stdout(puffer):

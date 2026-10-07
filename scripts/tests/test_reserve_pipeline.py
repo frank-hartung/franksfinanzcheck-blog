@@ -59,6 +59,7 @@ import reserve_gate as rg            # noqa: E402
 import reserve_economy as re_        # noqa: E402
 import reserve_healer_coverage as rhc  # noqa: E402
 import reserve_quarantine as rq      # noqa: E402
+import selftest_clock as uhr_zwang    # noqa: E402
 import reserve_readiness as rr       # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
 import generate_drafts as gd          # noqa: E402
@@ -646,6 +647,13 @@ class QuarantaeneTests(unittest.TestCase):
 
     FUND = ("Affiliate-Link-Integrität nicht bestanden: Kein vollständiger "
             "Markdown-Link in CTA-Zeile ('Spar-Tipp zwischendurch')")
+    # REPARATUR 07.10.2026 (#614): Diese Klasse prüft die Quarantäne-MECHANIK
+    # (Schwelle, Lauf-Kennung, Staging-Eigentum). Dafür braucht sie einen
+    # Befund, der ausmustern DARF – seit dem Klassen-Tor ist das nur noch
+    # Unheilbares (Torso/Dublette). Der Affiliate-Fund oben ist heilbar und
+    # wird geschont; die Schon-Seite steht in test_reserve_vorratsschutz.py.
+    TORSO = ("Dublette: identischer Inhalt zu "
+             "2026-09-01-energie-update-tarife (0.97)")
 
     def setUp(self):
         sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -663,7 +671,8 @@ class QuarantaeneTests(unittest.TestCase):
             encoding="utf-8")
 
     def test_pool_verlaesst_den_zaehler_nach_schwelle(self):
-        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": self.TORSO}]
         self.assertEqual(
             self.rq.record(rows, self.state, self.posts, run_key="run:1"), [])
         self.assertTrue(self.rp.reserve_drafts(self.posts),
@@ -676,7 +685,8 @@ class QuarantaeneTests(unittest.TestCase):
 
     def test_mehrere_zertifizierungen_eines_laufs_zaehlen_einmal(self):
         """#349: Eine Nacht zertifiziert mehrfach (Stufe 3 + Konvergenz)."""
-        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": self.TORSO}]
         for _ in range(3):          # derselbe Workflow-Lauf
             self.assertEqual(
                 self.rq.record(rows, self.state, self.posts, run_key="run:1"),
@@ -689,6 +699,25 @@ class QuarantaeneTests(unittest.TestCase):
         # Zweiter Lauf mit demselben Fund -> Schwelle erreicht, Quarantäne.
         blocked = self.rq.record(rows, self.state, self.posts, run_key="run:2")
         self.assertEqual([b["slug"] for b in blocked], ["2026-09-15-block"])
+
+    def test_heilbarer_fund_wird_geschont_statt_ausgemustert(self):
+        """#614: Sechs der zehn Vorfall-Kandidaten hingen am Lesbarkeits-Gate.
+
+        Ein Befund, dessen Klasse einen Heiler mit Wirkungsnachweis in der
+        Kette hat, darf die Fahne nicht kosten – sonst leert ein Lauf den
+        halben Vorrat (real: 12 -> 2 am 07.10.2026).
+        """
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": ("Lesbarkeits-Gate nicht bestanden: Flesch 58.0 "
+                            "(Mindestwert 60)")}]
+        for lauf in ("run:1", "run:2", "run:3"):
+            self.assertEqual(
+                self.rq.record(rows, self.state, self.posts, run_key=lauf), [])
+        self.assertTrue(self.rp.reserve_drafts(self.posts),
+                        "heilbarer Befund darf den Kandidaten nicht vertreiben")
+        self.assertTrue(
+            self.rq.geschonte(self.state),
+            "die Schonung muss begründet im Zustand stehen")
 
     def test_lauf_kennung_kommt_aus_der_umgebung(self):
         import os
@@ -723,12 +752,12 @@ class QuarantaeneTests(unittest.TestCase):
         """
         self.assertEqual(
             self.rq.record([{"slug": "2026-09-15-block", "ready": False,
-                             "reason": self.FUND}], self.state, self.posts,
+                             "reason": self.TORSO}], self.state, self.posts,
                            run_key="run:1"), [])
         self.assertEqual(
             [b["slug"] for b in self.rq.record(
                 [{"slug": "2026-09-15-block", "ready": False,
-                  "reason": self.FUND}], self.state, self.posts,
+                  "reason": self.TORSO}], self.state, self.posts,
                 run_key="run:2")], ["2026-09-15-block"])
         index = self.posts / "2026-09-15-block" / "index.md"
         self.assertIn("reserve_blocked:", index.read_text(encoding="utf-8"))
@@ -1360,6 +1389,55 @@ class WorkflowVertragTests(unittest.TestCase):
         self.assertIn("data/reserve-topic-ledger.json", sync)
         self.assertIn("data/reserve-custody.json", sync)
 
+    def test_chronik_entsteht_vor_der_sicherung(self):
+        """#614: Der Blocker-Verlauf muss das Repo erreichen, nicht nur das Log.
+
+        Das End-Gate ist der LETZTE Schritt des Laufs. Seine Chronik-Zeile
+        entstand damit erst nach dem Commit – `data/reserve-history.jsonl` auf
+        main trug deshalb keinen einzigen CI-Lauf. Der Workflow schreibt sie
+        jetzt VOR dem Staging.
+        """
+        root = Path(__file__).resolve().parents[2]
+        wf = (root / ".github" / "workflows" /
+              "content-reserve.yml").read_text(encoding="utf-8")
+        self.assertIn("reserve_gate.py --chronik", wf)
+        self.assertLess(
+            wf.index("reserve_gate.py --chronik"),
+            wf.index("if ! git diff --cached --quiet; then"),
+            "die Chronik-Zeile muss VOR dem Commit entstehen")
+
+    def test_chronik_bahn_schreibt_genau_eine_zeile(self):
+        """`--chronik` ist eine eigene, schreibende Bahn – und sie testet sich."""
+        import tempfile
+        root = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = Path(tmp) / "cert.json"
+            ziel = 6
+            cert.write_text(json.dumps({
+                "target": ziel, "ready": 2, "generated_at": "2026-10-07T13:20:00Z",
+                "candidates": [
+                    {"slug": "a", "ready": True, "score": 0.96},
+                    {"slug": "b", "ready": True, "score": 0.95},
+                    {"slug": "c", "ready": False, "score": 0.4,
+                     "reason": "Zeichenlänge"},
+                ]}), encoding="utf-8")
+            historie = Path(tmp) / "history.jsonl"
+            env = dict(os.environ, RESERVE_HISTORY=str(historie),
+                       RESERVE_TARGET=str(ziel), GITHUB_RUN_ID="12345")
+            r = subprocess.run(
+                [sys.executable, str(root / "scripts" / "reserve_gate.py"),
+                 "--cert", str(cert), "--chronik"],
+                cwd=root, env=env, capture_output=True, text=True, timeout=120)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            zeilen = [z for z in historie.read_text(encoding="utf-8").splitlines()
+                      if z.strip()]
+            self.assertEqual(1, len(zeilen), "genau EINE Zeile pro Lauf")
+            daten = json.loads(zeilen[0])
+            self.assertEqual(2, daten["ready"])
+            self.assertEqual(ziel, daten["target"])
+            self.assertEqual(["c"], daten["blocker"])
+            self.assertEqual("12345", daten["lauf"])
+
 
 # ===========================================================================
 #  #393 – DIE MESSLATTE GEHÖRT NICHT DEM GEMESSENEN
@@ -1711,14 +1789,21 @@ class LoeschRechtTests(unittest.TestCase):
 
     def test_karenz_schuetzt_junge_entwuerfe(self):
         os.environ["RESERVE_JANITOR_KARENZ_TAGE"] = "2"
+        # Gepinntes Testdatum statt Wanduhr: Das Dateialter wird ABSOLUT
+        # gestempelt (scripts/selftest_clock.py, Lehre aus dem draft_triage-Fall).
+        # Vorher las der Test `date.today()` und der Fixture-Alter kam von der
+        # echten Uhr – unter einer vorgestellten Uhr war der Entwurf 97 Tage alt
+        # und die Karenz griff nicht mehr.
+        tag = dt.date(2026, 9, 14)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             index = self._repo(root, self.VOLLER_KOERPER)
             index.write_text(index.read_text(encoding="utf-8").replace(
                 'title: "Kandidat mit ordentlichem Titel"', 'title: ""'),
                 encoding="utf-8")
+            uhr_zwang.stempel(str(index), tag)
             ziele, _, geschont = self.rj.find_targets(
-                root, today=dt.date.today(), run_key="run:1",
+                root, today=tag, run_key="run:1",
                 zaehler_schreiben=False)
         self.assertEqual(ziele, {})
         self.assertEqual(geschont[0]["klasse"], "karenz")
@@ -1748,6 +1833,10 @@ class LoeschRechtTests(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("::error::", buf.getvalue())
 
+    @unittest.skipIf(os.environ.get("FFC_FREMD_UHR"),
+                     "prüft den ECHTEN Bestand am ECHTEN Kalendertag "
+                     "(scripts/selftest_clock.py: FFC_FREMD_UHR gesetzt) – unter "
+                     "einer vorgestellten Uhr hat der Satz keine Aussage")
     def test_echtes_repo_darf_heute_nichts_verlieren(self):
         """Scharfer Lauf: Im echten Bestand steht kein Löschziel."""
         buf = io.StringIO()
@@ -2208,6 +2297,30 @@ class RuinenKlassenDeckungTests(unittest.TestCase):
             "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: "
             "Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs")
         self.assertEqual(b["klasse"], rbk.HEILBAR)
+        # #612: Der Fund nennt den SPEZIFISCHEN Ruinen-Heiler ZUERST – wer den
+        # genauen Defekt kennt, gewinnt. Seit #614 darf danach der breite
+        # Politur-Heiler folgen (dieselbe Klasse, fail-closed, mit
+        # Wirkungsnachweis): Er ist das Netz für die Ruinen, die der schmale
+        # Heiler bewusst liegen lässt – etwa den doppelten Titel-Einstieg, an
+        # dem der Reserve-Vorrat am 07.10. auf 2/6 fiel.
         self.assertEqual(b["heiler"], ["politur_ruine_heiler.py"])
+        # Jeder genannte Schreiber muss existieren UND in der echten Kette
+        # laufen – sonst ist die Klassen-Zusage nur Prosa.
+        kette = {eintrag[0] for eintrag in rf.HEALER_CHAIN}
+        for name in b["heiler"]:
+            self.assertTrue((Path(__file__).resolve().parents[1] / name).exists(),
+                            f"genannter Heiler fehlt im Repo: {name}")
+            self.assertIn(name, kette,
+                          f"genannter Heiler läuft nicht in der Kette: {name}")
         self.assertFalse(rbk.gate_befund_loeschbar("R14-MARKER-RUINE: x")[0],
                          "ein heilbarer Fund darf nie ein Löschgrund sein")
+
+    def test_breite_familie_nennt_den_politur_heiler(self):
+        """#614: Die RESTLICHE harte Familie (R7/R15/R16) nennt den breiten
+        Politur-Heiler – er ist ihr Schreiber, mit Wirkungsnachweis in der Kette."""
+        b = rbk.gate_befund_klasse(
+            "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: "
+            "„in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)")
+        self.assertEqual(b["klasse"], rbk.HEILBAR)
+        self.assertIn("politur_heiler.py", b["heiler"],
+                      "die breite Familie braucht ihren Schreiber (#614)")

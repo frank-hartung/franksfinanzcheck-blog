@@ -362,6 +362,40 @@ def l5_echo(line: str) -> list[tuple]:
     return out
 
 
+def _ohne_marker_echo(text: str) -> str:
+    """Streicht einen Prompt-Echo-Marker am ANFANG der KI-Antwort.
+
+    REPARATUR 07.10.2026 (BOT-WATCHDOG-614): Beide Prompt-Vorlagen unten
+    beginnen mit „SATZ: {satz}". Modelle antworten gelegentlich mit genau
+    diesem Präfix statt nur mit dem Satz – das Präfix landete dann
+    unverändert im Fließtext und wurde dort zur HARTEN Politur-Ruine
+    (R14-MARKER-RUINE, real: smart-home-Artikel; R16-PROMPT-ECHO, real
+    02.10.2026, #521). Bisher gab es dagegen nur eine Wache, keinen Heiler
+    und keine Vorbeugung.
+
+    Die Muster kommen aus der SSOT (`sprachkern.POLITUR_RUINEN`): entfernt
+    wird genau das, was die Wache sonst als Ruine meldet – nichts geraten.
+    Bleibt nach dem Marker kein Inhalt übrig, ist das Ergebnis leer und die
+    Aufrufer lehnen es ab (fail-closed: lieber der Original-Satz als eine
+    Zeile, die nur ein Marker wäre).
+    """
+    text = (text or "").strip().strip("`").strip()
+    if not text:
+        return ""
+    try:
+        import sprachkern as sk
+    except Exception:  # noqa: BLE001 – ohne SSOT wird nicht geraten
+        return text
+    for name, muster, _ in sk.POLITUR_RUINEN:
+        if name not in ("R14-MARKER-RUINE", "R16-PROMPT-ECHO"):
+            continue
+        treffer = muster.match(text)
+        if treffer:
+            rest = text[treffer.end():].lstrip(" :|·-–")
+            return rest
+    return text
+
+
 def l5_ai_rewrite(satz: str, woerter: list) -> str | None:
     """KI formuliert den Satz ohne Echo um (mit Gate)."""
     if not (GROQ_KEY or GEMINI_KEY):
@@ -392,7 +426,9 @@ Antworte NUR mit dem korrigierten Satz, nichts anderes."""
                     headers={"x-goog-api-key": key}, method="POST")
                 with urllib.request.urlopen(req, timeout=60) as r:
                     out = json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"].strip()
-            fixed = out.splitlines()[0].strip()
+            fixed = _ohne_marker_echo(out.splitlines()[0])
+            if not fixed:
+                return None
             # Gates: keine URLs verloren, Laenge plausibel, kein Echo mehr:
             if re.findall(r"https?://\S+", satz) != re.findall(r"https?://\S+", fixed):
                 return None
@@ -433,7 +469,9 @@ Markdown bleibt, keine Faktaenderung. Antworte NUR mit dem neuen Satz."""
                     headers={"x-goog-api-key": key}, method="POST")
                 with urllib.request.urlopen(req, timeout=60) as r:
                     out = json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"].strip()
-            fixed = out.splitlines()[0].strip()
+            fixed = _ohne_marker_echo(out.splitlines()[0])
+            if not fixed:
+                return None
             # Grammatik-Gate: du + konjugiertes Verb in Singular-Endung (-st) muessen vorkommen
             if not re.search(r"\bdu\s+\w+(st|est)\b", fixed, re.I) and not re.search(r"\b(dir|deine?r?[smn]?)\b", fixed):
                 return None

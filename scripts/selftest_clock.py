@@ -42,6 +42,8 @@ Nutzung:
     python3 scripts/selftest_clock.py --selftest
     python3 scripts/selftest_clock.py --trap scripts/draft_triage.py --offset 1461
     python3 scripts/selftest_clock.py --trap scripts/x.py --offset 97 --selftest-args "--selftest"
+    python3 scripts/selftest_clock.py --trap-modul scripts.tests.test_x --offset 97
+    python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
 
 Exit: 0 = grün · 1 = Zeitabhängigkeit gefunden (Trap) · 2 = Fehler
 """
@@ -176,6 +178,37 @@ def _shim_zeit(instant, modus: str) -> types.ModuleType:
     return shim
 
 
+def _ist_uhrbindung(wert) -> bool:
+    """Zeigt `wert` auf das echte `datetime`/`time`-Modul – oder auf einen Shim?
+
+    Der zweite Fall ist der wichtige: Läuft bereits eine fremde Uhr und wird ein
+    Modul erst DANACH importiert, dann hält es nicht das echte Modul, sondern
+    den Shim der äußeren Uhr.
+    """
+    if wert is _echt_dt or wert is _echt_time:
+        return True
+    return getattr(wert, "FFC_ECHT", None) in (_echt_dt, _echt_time)
+
+
+def _umbiegen_namen(m) -> dict:
+    """Namen im Namensraum von `m`, die auf eine Uhr zeigen (auch als Alias).
+
+    Ohne das bliebe `import datetime as dt` unentdeckt: Der Modulname ist `dt`,
+    nicht `datetime`. Am 07.10.2026 scheiterte genau daran der Uhr-Pin in
+    `test_pflichtcheck` – die Wache las weiter die fremde Uhr, obwohl der Test
+    sie festgeschrieben hatte.
+    """
+    return {name: wert for name, wert in list(vars(m).items())
+            if _ist_uhrbindung(wert)}
+
+
+def _binde(m, shim_dt, shim_t) -> None:
+    """Alle echten Uhr-Referenzen des Namensraums durch die Shims ersetzen."""
+    for name, wert in _umbiegen_namen(m).items():
+        echt = getattr(wert, "FFC_ECHT", wert)
+        setattr(m, name, shim_dt if echt is _echt_dt else shim_t)
+
+
 @contextlib.contextmanager
 def uhr(instant: _echt_dt.datetime | None = None, modus: str = MODUS_VERSCHOBEN,
         module: list | None = None):
@@ -185,6 +218,12 @@ def uhr(instant: _echt_dt.datetime | None = None, modus: str = MODUS_VERSCHOBEN,
     genannten Module neu – nötig, weil ein Modul-Level-`import datetime` sonst
     längst das echte Objekt hält (das ist der ganze Unterschied zwischen
     „sys.modules tauschen" und „wirklich keine echte Uhr mehr lesen").
+
+    Während der fremden Uhr steht `FFC_FREMD_UHR` (ISO-Zeitpunkt) in der
+    Umgebung. Das ist der ehrliche Ausweg für Tests, die den ECHTEN Bestand am
+    ECHTEN Kalendertag prüfen: Sie melden sich damit ausdrücklich ab
+    (`skipIf`), statt unter einer vorgestellten Uhr etwas zu behaupten, was sie
+    nicht geprüft haben – und statt einen Fehlalarm zu erzeugen.
     """
     if instant is None:
         instant = _echt_dt.datetime.now(_echt_dt.timezone.utc)
@@ -194,26 +233,27 @@ def uhr(instant: _echt_dt.datetime | None = None, modus: str = MODUS_VERSCHOBEN,
     shim_t = _shim_zeit(instant, modus)
     alt_sys = {"datetime": sys.modules.get("datetime"), "time": sys.modules.get("time")}
     ziele = list(module or [])
-    alt_namen = [(m, getattr(m, "datetime", None), getattr(m, "time", None)) for m in ziele]
+    alt_namen = [(m, dict(_umbiegen_namen(m))) for m in ziele]
+    alt_fremd = os.environ.get("FFC_FREMD_UHR")
     try:
+        os.environ["FFC_FREMD_UHR"] = instant.isoformat()
         sys.modules["datetime"], sys.modules["time"] = shim_dt, shim_t
         for m in ziele:
-            if hasattr(m, "datetime"):
-                m.datetime = shim_dt
-            if hasattr(m, "time") and getattr(m, "time", None) is _echt_time:
-                m.time = shim_t
+            _binde(m, shim_dt, shim_t)
         yield instant
     finally:
+        if alt_fremd is None:
+            os.environ.pop("FFC_FREMD_UHR", None)
+        else:
+            os.environ["FFC_FREMD_UHR"] = alt_fremd
         for key, wert in alt_sys.items():
             if wert is None:
                 sys.modules.pop(key, None)
             else:
                 sys.modules[key] = wert
-        for m, dt, t in alt_namen:
-            if dt is not None:
-                m.datetime = dt
-            if t is not None:
-                m.time = t
+        for m, namen in alt_namen:
+            for name, wert in namen.items():
+                setattr(m, name, wert)
 
 
 # ------------------------------------------------------------------ Datei-Alter
@@ -267,6 +307,72 @@ def trap(script: str, offset_tage: int, args: tuple[str, ...] = ("--selftest",),
             print(f"🛑 Uhr-Verstoß: {exc}")
             return 2
     return 0
+
+
+def trap_modul(modul: str, offset_tage: int, discover: bool = False,
+               modus: str = MODUS_VERSCHOBEN) -> int:
+    """Unit-Test-MODUL (oder ein Testverzeichnis) unter fremder Uhr ausführen.
+
+    Gegenstück zu `trap()` für `scripts/tests/`: Dessen Fixtures kommen oft von
+    der echten Wanduhr, während die geprüfte Logik ein gepinntes Datum erwartet.
+    Genau diese Mischung legte am 01.10.2026 die Publication-Reliability-Prüfung
+    lahm (`test_social_perf_feedback` baute „veröffentlicht = JETZT minus 2 Tage"
+    und plante dann für den 14.09.2026 – drei Wochen später war kein Slot mehr
+    erreichbar). Als `--selftest`-Skript wäre das sofort aufgefallen; als
+    Testmodul lief es unter dem Radar, weil die Uhr-Probe nur Skripte kannte.
+
+    `discover=True` nimmt ein VERZEICHNIS (`scripts/tests`): dann läuft die
+    gesamte Fundstelle unter der fremden Uhr – der Beweis, dass die Suite an
+    jedem Kalendertag grün ist, nicht nur an dem, an dem sie geschrieben wurde.
+
+    Rückgabe: 0 = grün · 1 = Datumsabhängigkeit gefunden · 2 = Probe nicht
+    lauffähig (Import-/Sammelfehler). Die Unterscheidung ist keine Kosmetik:
+    Eine Probe, die ihr Ziel nicht laden kann, ist kein Datumsbefund – sie würde
+    sonst einen Fehlalarm erzeugen und den echten Befund verwässern.
+    """
+    import unittest
+
+    # Dieselbe Falle wie in `trap()`: `python3 scripts/selftest_clock.py` legt
+    # nur `scripts/` auf sys.path. Ohne die folgenden Zeilen scheitert schon der
+    # Import von `scripts.tests.…` – und der Trap schlüge Alarm, obwohl nichts
+    # datumsabhängig ist (selbst erlebt beim Einbau am 07.10.2026).
+    hier = os.path.dirname(os.path.abspath(__file__))
+    for kandidat in (hier, os.path.dirname(hier), os.getcwd()):
+        if kandidat and kandidat not in sys.path:
+            sys.path.insert(0, kandidat)
+    instant = (_echt_dt.datetime.now(_echt_dt.timezone.utc)
+               + _echt_dt.timedelta(days=offset_tage, hours=3, minutes=7))
+    loader = unittest.TestLoader()
+    # Frisch laden: Die Uhr wirkt nur beim IMPORT – ein bereits importiertes
+    # Modul hielte die echte `datetime`-Referenz fest und die Probe wäre blind
+    # (genau das zeigte der eigene Selbsttest beim zweiten Aufruf). In der CI
+    # läuft je Probe ein eigener Prozess; innerhalb eines Prozesses räumt das hier auf.
+    if discover:
+        for name in [n for n in sys.modules
+                     if n.startswith("test_") or n.startswith("scripts.tests")]:
+            sys.modules.pop(name, None)
+    else:
+        for name in [modul] + [n for n in sys.modules if n.startswith(modul + ".")]:
+            sys.modules.pop(name, None)
+    with uhr(instant, modus):
+        if discover:
+            start = os.path.abspath(modul)
+            if start not in sys.path:
+                sys.path.insert(0, start)
+            suite = loader.discover(start, pattern="test_*.py")
+        else:
+            suite = loader.loadTestsFromName(modul)
+        ergebnis = unittest.TextTestRunner(verbosity=1).run(suite)
+    # NICHT über `suite` laufen: `TextTestRunner.run()` räumt die Suite auf
+    # (Tests werden durch None ersetzt) – die Prüfung muss über das Ergebnis
+    # gehen. Auch das war ein eigener Fehlversuch am 07.10.2026.
+    kaputt = [t for t, _ in ergebnis.errors + ergebnis.failures
+              if type(t).__name__ == "_FailedTest"]
+    if kaputt:
+        for t in kaputt:
+            print(f"🛑 Probe nicht lauffähig: {t}")
+        return 2
+    return 0 if ergebnis.wasSuccessful() else 1
 
 
 # ------------------------------------------------------------------- Selbsttest
@@ -344,6 +450,7 @@ def _selftest() -> int:
         # 3b) `module=…` bindet den Shim in einen fremden Namensraum und stellt zurück
         dummy = types.ModuleType("dummy_wache")
         dummy.datetime, dummy.time = _echt_dt, _echt_time
+        dummy.dt_alias = _echt_dt          # `import datetime as dt` – der reale Fall
         with uhr(probe, MODUS_STRIKT, module=[dummy]):
             try:
                 dummy.datetime.date.today()
@@ -354,6 +461,27 @@ def _selftest() -> int:
                 fehler.append("module=…: `time` wurde im fremden Namensraum nicht neu gebunden")
         if dummy.datetime is not _echt_dt or dummy.time is not _echt_time:
             fehler.append("module=…: fremder Namensraum wurde nicht zurückgestellt")
+        if dummy.dt_alias is not _echt_dt:
+            fehler.append("module=…: Alias-Import (`import datetime as dt`) wurde "
+                          "nicht zurückgestellt")
+        with uhr(probe, MODUS_VERSCHOBEN, module=[dummy]):
+            if dummy.dt_alias is _echt_dt:
+                fehler.append("module=…: Alias-Import (`import datetime as dt`) "
+                              "wird nicht umgebogen – der Modulname heißt nicht "
+                              "`datetime`")
+        # Verschachtelte Uhr: ein Modul, das erst unter der ÄUSSEREN Uhr
+        # importiert wurde, hält den äußeren Shim – auch der muss weichen.
+        aussen = _shim_datum(probe, MODUS_VERSCHOBEN)
+        dummy2 = types.ModuleType("dummy_wache_aussen")
+        dummy2.dt = aussen
+        innen2 = _echt_dt.datetime(2027, 2, 1, 12, tzinfo=_echt_dt.timezone.utc)
+        with uhr(innen2, MODUS_VERSCHOBEN, module=[dummy2]):
+            if dummy2.dt is aussen:
+                fehler.append("module=…: äußerer Shim wird nicht umgebogen – "
+                              "eine verschachtelte Uhr wirkt nicht")
+            if dummy2.dt.date.today() != innen2.date():
+                fehler.append("module=…: verschachtelte Uhr liefert nicht den "
+                              "inneren Zeitpunkt")
 
         # 3c) Verschachtelung: Die CI-Probe legt eine fremde Uhr um einen
         #     Selbsttest, der selbst Uhr-Zwang einschaltet (draft_triage tut das).
@@ -432,6 +560,54 @@ def _selftest() -> int:
             fehler.append("trap schweigt zu einem fehlenden Skript")
         except FileNotFoundError:
             pass
+
+        # 6) trap_modul: findet dieselbe Bombe als TESTMODUL – und schweigt bei
+        #    einem festen Modul. Der reale Fall (test_social_perf_feedback) war
+        #    ein Testmodul, kein Skript; ohne diese Probe bliebe die Lücke offen.
+        modul_dir = os.path.join(tmp, "modulprobe")
+        os.makedirs(modul_dir, exist_ok=True)
+        os.environ["MODUL_BOMBE_GRENZE"] = (_echt_dt.date.today()
+                                            + _echt_dt.timedelta(days=2)).isoformat()
+        with open(os.path.join(modul_dir, "test_bombe_mod.py"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("import datetime, os, unittest\n"
+                     "class BombeTest(unittest.TestCase):\n"
+                     "    def test_grenze(self):\n"
+                     "        grenze = datetime.date.fromisoformat(\n"
+                     "            os.environ['MODUL_BOMBE_GRENZE'])\n"
+                     "        self.assertGreater(grenze, datetime.date.today())\n")
+        with open(os.path.join(modul_dir, "test_fest_mod.py"), "w",
+                  encoding="utf-8") as fh:
+            fh.write("import datetime, unittest\n"
+                     "class FestTest(unittest.TestCase):\n"
+                     "    def test_abstand(self):\n"
+                     "        ref = datetime.date(2026, 9, 12)\n"
+                     "        self.assertEqual((ref - datetime.date(2026, 8, 16)).days, 27)\n")
+        sys.path.insert(0, modul_dir)
+        try:
+            if trap_modul("test_fest_mod", 1461) != 0:
+                fehler.append("trap_modul meldet ein festes Testmodul fälschlich")
+            if trap_modul("test_bombe_mod", 0) != 0:
+                fehler.append("Modul-Bombe ist schon ohne Uhr-Verschiebung rot")
+            if trap_modul("test_bombe_mod", 97) == 0:
+                fehler.append("trap_modul lässt ein datumsabhängiges Testmodul "
+                              "bei kleinem Offset grün durch")
+            if trap_modul("test_bombe_mod", 1461) == 0:
+                fehler.append("trap_modul lässt ein datumsabhängiges Testmodul "
+                              "grün durch")
+            if trap_modul(modul_dir, 0, discover=True) != 0:
+                fehler.append("trap_modul(discover) ist unter der echten Uhr rot")
+            if trap_modul(modul_dir, 1461, discover=True) == 0:
+                fehler.append("trap_modul(discover) findet die Bombe im "
+                              "Verzeichnis nicht")
+            # Ein unladbares Modul ist ein Probe-Fehler (2), kein Datumsbefund (1).
+            if trap_modul("gibt_es_nicht_xyz", 97) != 2:
+                fehler.append("trap_modul verwechselt einen Importfehler mit "
+                              "einem Datumsbefund (Rückgabe muss 2 sein)")
+        finally:
+            sys.path.remove(modul_dir)
+            sys.modules.pop("test_bombe_mod", None)
+            sys.modules.pop("test_fest_mod", None)
     except Exception as exc:  # noqa: BLE001
         fehler.append(f"Ausführung: {exc.__class__.__name__}: {exc}")
     finally:
@@ -443,7 +619,8 @@ def _selftest() -> int:
             print("  -", f)
         return 2
     print("✅ Uhr-Zwang-Selbsttest grün: strikt/verschoben, isinstance-Treue, "
-          "absolutes Dateialter (5 Tage + 5 Zeitzonen), Trap findet Zeitbomben.")
+          "absolutes Dateialter (5 Tage + 5 Zeitzonen), Trap findet Zeitbomben "
+          "in Skripten UND Testmodulen (discover inklusive).")
     return 0
 
 
@@ -451,11 +628,30 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Determinismus-Garantie für Selbsttests")
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--trap", metavar="SCRIPT", help="Selbsttest eines Skripts unter fremder Uhr")
+    ap.add_argument("--trap-modul", metavar="MODUL",
+                    help="Unit-Test-Modul unter fremder Uhr (z. B. scripts.tests.test_x)")
+    ap.add_argument("--trap-discover", metavar="VERZEICHNIS",
+                    help="ganzes Testverzeichnis unter fremder Uhr (z. B. scripts/tests)")
     ap.add_argument("--offset", type=int, default=1461, help="Tage in die Zukunft (Standard 1461)")
     ap.add_argument("--selftest-args", default="--selftest")
     ap.add_argument("--strikt", action="store_true",
                     help="Trap-Modus: jede echte Uhr-Zeitlesung ist ein Fehler")
     args = ap.parse_args()
+    if args.trap_modul or args.trap_discover:
+        was = args.trap_modul or args.trap_discover
+        code = trap_modul(was, args.offset, discover=bool(args.trap_discover),
+                          modus=MODUS_STRIKT if args.strikt else MODUS_VERSCHOBEN)
+        if code == 2:
+            print(f"🛑 {was}: Uhr-Probe nicht lauffähig (Import-/Sammelfehler) – "
+                  "das ist kein Datumsbefund, sondern eine kaputte Probe.")
+            return 2
+        if code:
+            print(f"🛑 {was} ist datumsabhängig (Uhr um {args.offset} Tage "
+                  f"vorgestellt, Exit {code}).")
+            return 1
+        print(f"✅ {was}: bleibt unter einer um {args.offset} Tage vorgestellten "
+              "Uhr grün.")
+        return 0
     if args.trap:
         code = trap(args.trap, args.offset, tuple(args.selftest_args.split()),
                     MODUS_STRIKT if args.strikt else MODUS_VERSCHOBEN)

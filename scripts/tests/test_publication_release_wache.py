@@ -35,8 +35,17 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import datetime as dt
+
 import audit_log
 import publication_release as pr
+import selftest_clock as uhr_zwang
+
+# Gepinnter Publikationstag (Mittwoch): `--refill-only` füllt nur an
+# cadence_guard.PUBLICATION_DAYS nach. Der Test gilt damit an jedem
+# Kalendertag – vorher war er am Wochenende und unter jeder vorgestellten
+# Uhr rot, weil der Lauf dann gar nichts tut.
+_POSTTAG = dt.datetime(2026, 11, 4, 12, 0, tzinfo=dt.timezone.utc)
 
 
 # Das echte Hugo-Log des fehlgeschlagenen Laufs 37052950135 (WF-A535 #529):
@@ -137,7 +146,14 @@ class ExitCodeVertragTests(unittest.TestCase):
         def toter_build(*a, **kw):
             raise subprocess.CalledProcessError(1, ['hugo', '--minify'])
 
-        with patch.object(pr, 'heal_shortcode_damage', lambda *a, **kw: True), \
+        # Die Uhr wird auf einen Publikationstag (Mittwoch) gepinnt: An
+        # Nicht-Publikationstagen füllt `--refill-only` nichts nach
+        # (cadence_guard.PUBLICATION_DAYS) und der Crash-Vertrag wäre gar nicht
+        # prüfbar – der Test würde am Wochenende bzw. unter einer vorgestellten
+        # Uhr rot, ohne dass der Code sich geändert hätte.
+        with uhr_zwang.uhr(_POSTTAG, uhr_zwang.MODUS_VERSCHOBEN,
+                           module=[pr]), \
+             patch.object(pr, 'heal_shortcode_damage', lambda *a, **kw: True), \
              patch.object(pr, 'refill_to_min', toter_build), \
              patch.object(audit_log, 'log_event', lambda **kw: '/dev/null'), \
              patch('builtins.print'):

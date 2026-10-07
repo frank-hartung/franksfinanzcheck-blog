@@ -218,17 +218,14 @@ GATE_BEFUNDE: tuple[dict, ...] = (
      "grund": ("Flesch ≥ 60 hebt der Lesbarkeits-Heiler (Stufe A "
                "deterministisch, Stufe B KI auf die Silben je Wort, Tor "
                "T1–T4); das Polish der Kette bleibt der zweite Hebel.")},
-    # Politur-Ruinen (WF-D4E0 #612, 07.10.2026): Die drei BEWEISBAR heilbaren
-    # Klassen der Textverständnis-Familie (harte Publish-Regeln seit #482)
-    # haben einen Schreiber: `politur_ruine_heiler.py` (deterministisch, Tor
-    # T1–T4, Wirkungsprobe, reserve_finisher-Kette). Der reale Fall: Der
-    # Kandidat `2026-10-07-wie-smart-home-…` (Qualität 0,95) scheiterte
-    # EINZIG an „R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines
+    # Politur-Ruinen (WF-D4E0 #612, 07.10.2026, aus main): Die drei BEWEISBAR
+    # heilbaren Klassen der Textverständnis-Familie (harte Publish-Regeln seit
+    # #482) haben einen Schreiber: `politur_ruine_heiler.py` (deterministisch,
+    # Tor T1–T4, Wirkungsprobe, reserve_finisher-Kette). Der reale Fall: Der
+    # Kandidat `2026-10-07-wie-smart-home-…` (Qualität 0,95) scheiterte EINZIG
+    # an „R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines
     # automatisierten Politur-Laufs“, blieb liegen, zog zwei Läufe und der
-    # Vorrat fiel unter das Ziel – der rote End-Gate aus #612. Die NICHT
-    # heilbaren Geschwister (R12-ZAHL-RUINE, R16-PROMPT-ECHO) stehen hier
-    # bewusst NICHT: Ein Muster „ruine“ würde einen Schreiber behaupten, der
-    # sie erklärt ablehnt – sie bleiben „unbekannt“, fail-closed unantastbar.
+    # Vorrat fiel unter das Ziel – der rote End-Gate aus #612.
     {"muster": "r11-jahreszahl-split", "klasse": HEILBAR,
      "heiler": ("politur_ruine_heiler.py",),
      "grund": ("Ein Jahreszahl-Split in Zeilen/Tabellen wird vom "
@@ -244,6 +241,21 @@ GATE_BEFUNDE: tuple[dict, ...] = (
      "grund": ("Überreste automatisierter Politur-Läufe („SATZ:“) entfernt "
                "der Ruinen-Heiler – der Kandidat bleibt Vorrat statt "
                "Quarantäne (WF-D4E0 #612).")},
+    # REPARATUR 07.10.2026 (BOT-WATCHDOG #614): Der REST der harten
+    # Textverständnis-Familie (R7-Intro-Formel, R15-PHrasen-Doppel,
+    # R16-Prompt-Echo) stand als „manuell reparieren" in den Befunden,
+    # obwohl ihn der Politur-Heiler fail-closed heilt (Kette, grüner
+    # Wirkungsnachweis C25). Dieses Muster steht bewusst NACH den drei
+    # präzisen Ruinen-Mustern: Wer den genauen Fall kennt, gewinnt; die
+    # breite Klasse fängt den Rest. Das Muster ist ohne Umlaut geschrieben,
+    # weil der Befund-Text aus JSON kommt.
+    {"muster": "textverst", "klasse": HEILBAR,
+     "heiler": ("politur_heiler.py", "politur_ruine_heiler.py",
+                "r5_absatz_splitter.py"),
+     "grund": ("Harte Textverständnis-Funde (R7/R11–R16) heilen die "
+               "Politur-Heiler und der R5-Absatz-Splitter – alle mit "
+               "Wirkungsprobe in der Kette. „manuell reparieren“ beschreibt "
+               "die Lücke vor der Reparatur, nicht das Urteil über den Text.")},
     {"muster": "quality-score", "klasse": HEILBAR,
      "heiler": ("profi_polish.py", "spellcheck.py", "check_length.py"),
      "grund": ("Der Score ist die Summe heilbarer Teile (Rechtschreibung, "

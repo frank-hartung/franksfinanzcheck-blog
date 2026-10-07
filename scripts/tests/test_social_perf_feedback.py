@@ -153,7 +153,24 @@ class TestPlannerBandit(unittest.TestCase):
 
 
 class TestBuildPlanMitRueckkanal(unittest.TestCase):
-    """build_plan bleibt mit performance={} funktional identisch zum Altzustand."""
+    """build_plan bleibt mit performance={} funktional identisch zum Altzustand.
+
+    Fixtures werden relativ zur GEPLANTEN Uhr gebaut – nie relativ zur echten
+    Wanduhr. Der frühere Aufbau las `planner.berlin_now()` und plante
+    gleichzeitig für den 14.09.2026: Solange das echte Heute nahe am gepinnten
+    Stichtag lag, fielen die Artikel noch ins Fenster `[now, now + horizon]`
+    und der Test war grün. Mit jedem Tag rückten sie heraus – am 07.10.2026 ab
+    ca. 19:00 Berliner Zeit war der Test rot, ab dem 08.10. jederzeit. Ein Test,
+    der mit dem Kalender altert, prüft die Uhr und nicht den Planer.
+
+    Sichtbar wurde das nur in CI (`publication-reliability-tests.yml` läuft
+    ausschließlich auf Pull Requests). Seither findet
+    `scripts/selftest_clock.py --trap-modul` genau diese Klasse – der Test ist
+    unter jeder vorgestellten Uhr grün (`--trap-discover scripts/tests`), und
+    `test_plan_haengt_nicht_an_der_echten_wanduhr` hält die Eigenschaft fest.
+    """
+
+    PLAN_UHR = planner.localize(datetime(2026, 9, 14, 6, 0))
 
     def setUp(self):
         import tempfile
@@ -163,17 +180,15 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
         self.old_state = planner.STATE_FILE
         planner.SCHEDULE_FILE = os.path.join(self.tmp, "schedule.yaml")
         planner.STATE_FILE = os.path.join(self.tmp, "state.yaml")
-        # Der Plan wird gegen ein GEPINNTES `now` gebaut (unten). Der Pool muss
-        # deshalb ebenfalls gegen dieses `now` datiert sein – nicht gegen die
-        # echte Wanduhr. Bis 07.10.2026 stand hier `planner.berlin_now()`:
-        # Solange das echte Heute nahe am gepinnten Stichtag lag, fielen die
-        # Artikel noch ins Planfenster `[now, now + plan_horizon_days]` und der
-        # Test war grün. Mit jedem vergehenden Tag rückten die Pool-Daten aus
-        # dem Fenster – am 07.10.2026 ab ca. 19:00 Berliner Zeit war der Test
-        # rot, ab dem 08.10.2026 zu jeder Tageszeit. Ein Test, der mit dem
-        # Kalender altert, prüft die Uhr und nicht den Planer.
-        self.now = planner.localize(datetime(2026, 9, 14, 6, 0))
-        self.pool = [
+
+    def tearDown(self):
+        planner.SCHEDULE_FILE = self.old_schedule
+        planner.STATE_FILE = self.old_state
+
+    @staticmethod
+    def _pool(pn) -> list:
+        """Acht veröffentlichte Artikel, datiert von der übergebenen Plan-Uhr aus."""
+        return [
             {
                 "slug": f"artikel-{i:02d}", "path": "", "title": f"Titel {i}",
                 "description": "x", "kurzantwort": "x", "hook": "x",
@@ -181,33 +196,43 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
                 "faq_question": "x", "faq_answer": "x", "tags": ["x"], "keywords": ["x"],
                 "pillar": ["strom-sparen", "internet-dsl"][i % 2], "pin_title": "x",
                 "cover": "", "cover_alt": "", "draft": False, "reserve": False,
-                "published": planner.iso(self.now - timedelta(days=2 + i)),
+                "published": planner.iso(pn - timedelta(days=2 + i)),
                 "url": f"https://franksfinanzcheck.de/posts/artikel-{i:02d}/", "raw_fm": "",
             }
             for i in range(8)
         ]
 
-    def tearDown(self):
-        planner.SCHEDULE_FILE = self.old_schedule
-        planner.STATE_FILE = self.old_state
+    def _plan(self, pn, performance=None) -> dict:
+        return planner.build_plan(CFG, self._pool(pn), {"history": [], "failures": []},
+                                  now=pn, performance=performance or {})
 
     def test_leerer_rueckkanal_aendert_plan_nicht_kaputt(self):
-        plan_ohne = planner.build_plan(CFG, self.pool, {"history": [], "failures": []},
-                                       now=self.now, performance={})
+        plan_ohne = self._plan(self.PLAN_UHR)
         self.assertTrue(planner.planned_items(plan_ohne))
+
+    def test_plan_haengt_nicht_an_der_echten_wanduhr(self):
+        """Dieselbe Rechnung an drei Uhren – der Plan darf kein Kalender-Zufall sein.
+
+        Der 14.09.2026 ist die Uhr, an der die Bombe entstand; 2027 wechseln
+        Wochentag und Saison, 2030/31 läuft der Plan über den Jahreswechsel.
+        """
+        for pn in (self.PLAN_UHR,
+                   planner.localize(datetime(2027, 3, 1, 6, 0)),
+                   planner.localize(datetime(2030, 12, 29, 6, 0))):
+            with self.subTest(uhr=pn.isoformat()):
+                self.assertTrue(planner.planned_items(self._plan(pn)),
+                                f"kein Plan für die Uhr {pn.isoformat()}")
 
     def test_rueckkanal_mit_daten_bleibt_innerhalb_der_regeln(self):
         performance = {"channels": {cid: {
             "angles": {"nutzen": {"score": 1.5}, "zahl": {"score": 0.6}},
             "pillars": {"strom-sparen": {"cooldown_factor": 0.7},
-                       "internet-dsl": {"cooldown_factor": 1.3}},
+                        "internet-dsl": {"cooldown_factor": 1.3}},
         } for cid in CHANNELS}}
-        plan = planner.build_plan(CFG, self.pool, {"history": [], "failures": []},
-                                  now=self.now, performance=performance)
-        items = planner.planned_items(plan)
+        items = planner.planned_items(self._plan(self.PLAN_UHR, performance))
         self.assertTrue(items)
         # Tagesgrenzen gelten weiterhin unverändert.
-        counts: dict[str, int] = {}
+        counts: dict = {}
         for it in items:
             key = f"{it['channel']}|{it['date']}"
             counts[key] = counts.get(key, 0) + 1
@@ -215,7 +240,6 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
             cid = key.split("|")[0]
             cap = int(((CHANNELS[cid].get("cadence")) or {}).get("max_per_day") or 99)
             self.assertLessEqual(n, cap)
-
 
 if __name__ == "__main__":
     unittest.main()
