@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T11:46:43.102678+00:00",
-  "head": "edfb7ce",
+  "signed_at": "2026-10-07T16:33:47.237895+00:00",
+  "head": "f161190",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -35,7 +35,7 @@
     "scripts/generate_covers.py": "a4cc9448cb6ad5702e1d690078921a7a8633a1abac4166be169b5580efc59985",
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
-    "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
+    "scripts/lektor_guard.py": "a3046e18adbe96d9f17a551f106ec29574cca4c75e39882de9e69fa08b07d1f9",
     "scripts/lesbarkeit_heiler.py": "26c981a10101bc15839cd338f8e504536e459673bff660fe32e4546bd93ec413",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
@@ -50,48 +50,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1",
-  "audit_start_sha256": "4377ff88ddeee4c9289f4278db76be2d5a8165137a0d71f0dd24fbbbc50f62b9",
+  "files_sha256": "871ceab1d7b783cbb9890076e48115ef92f7a32afa79bbb33504014d1d73da3d",
+  "audit_start_sha256": "6b1fc72778e93f9a266fbe284ce112a1ee1ca01e5bdc4fe8d6ef3bae13cd2807",
   "audit": [
-    {
-      "date": "2026-10-02",
-      "art": "heal",
-      "head": "f52bce0",
-      "geaendert": [
-        "layouts/pillar/list.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/pillar/list.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "f52bce0",
-              "datum": "2026-10-02",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "f52bce0",
-              "datum": "2026-10-02",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "088c2dca90dc0c0b5aeed753c96e4435f215e793914b528ac3ca705eea9bbfb7",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-02",
       "art": "set-current",
@@ -115,7 +76,7 @@
         }
       ],
       "files_sha256": "55d81ea72666c28b68cb8308c923ea42928ec096a5dd45217067959548d83cc2",
-      "prev_sha256": "4377ff88ddeee4c9289f4278db76be2d5a8165137a0d71f0dd24fbbbc50f62b9"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-02",
@@ -448,8 +409,38 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "e7fdc25fd37ebf351f7c1685efc864aafeab21c9920898fbeb1f28a8acdeeca3",
-      "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1"
+      "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1",
+      "prev_sha256": "e7fdc25fd37ebf351f7c1685efc864aafeab21c9920898fbeb1f28a8acdeeca3"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "f161190",
+      "geaendert": [
+        "scripts/lektor_guard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lektor_guard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "700d903",
+              "datum": "2026-10-07",
+              "betreff": "fix(reserve): #614 dauerhaft – Politur-Heiler, Ketten-Ordnung, Quell-Vorbeugung"
+            },
+            {
+              "sha": "0d5ebc0",
+              "datum": "2026-10-07",
+              "betreff": "fix(audit): #610-Nebenbefund – ein Testlauf fabriziert keine Beweise (C27) (#621)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "d530fb31c18cd5c7d03124f34d0948416747f78b9041284caee369b9b329cec6",
+      "files_sha256": "871ceab1d7b783cbb9890076e48115ef92f7a32afa79bbb33504014d1d73da3d"
     }
   ]
 }
