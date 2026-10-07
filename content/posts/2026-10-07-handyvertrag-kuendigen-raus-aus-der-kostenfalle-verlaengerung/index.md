@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel", "Handyvertrag", "Kündigen"]
+keywords: ["Handyvertrag kündigen", "Mobilfunk sparen", "Tarifwechsel", "Handyvertrag", "Kostenfalle", "Verlängerung"]
 pin_title: "Handyvertrag kündigen: Raus aus der Kostenfalle Verlängerung"
 pin_description: "*Werbung | Du willst deinen Handyvertrag kündigen? Erfahre, wie du die automatische Verlängerung stoppst, effektiv Mobilfunk sparen kannst und den Tarifwechsel meiste Mehr Spartipps auf FranksFinanzcheck! #handyvertragkuendigen #mobilfunksparen #tarifwechsel"
 ai_generated: true

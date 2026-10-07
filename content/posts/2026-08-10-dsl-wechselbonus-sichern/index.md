@@ -17,7 +17,7 @@ cover:
 kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn zusammen mit Grundgebühr, Anschlusskosten und Laufzeit rechnest. Gute Angebote drücken den Effektivpreis über 24 Monate spürbar – oft um 10 € bis 20 € pro Monat. Wer nur auf den Bonus schaut, tappt schnell in die Rabattfalle."
 
 social_posted: true
-keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A", "bieter Vergleich", "Wechselprämie DSL"]
+keywords: ["DSL-Wechselbonus sichern", "DSL-Wechselbonus", "Internetvertrag wechseln", "DSL-Vergleich", "Cashback DSL", "günstiges Internet", "DSL Wechselbonus sichern", "DSL A"]
 pin_title: "DSL-Wechselbonus mitnehmen: Cashback & Rabatte sichern"
 pin_description: "*Werbung | Beim DSL-Wechsel winken aktuell Wechselboni von bis zu 200 € – als Cashback, Gutschrift oder Hardware-Rabatt. Wir zeigen, wie du Bonus UND günstigen Tarif kombinierst, ohne in die Vertragsfalle zu tappen. Jetzt Angebote vergleichen und Bonus kassieren!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"

@@ -8,7 +8,7 @@ tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
-keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Frugalismus", "Geld sparen"]
+keywords: ["Urlaub sparen", "Reisebudget Tipps", "Günstig Reisen", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Urlaub sparen: 7 clevere Wege, deine Kasse zu füllen"
 pin_description: "*Werbung | Entdecke praxisnahe Tipps, wie du Urlaub sparen kannst, dein Reisebudget optimierst und günstig reist – ohne versteckte Kosten. Mehr Spartipps auf FranksFinanzcheck! #urlaubsparen #reisebudgettipps #guenstigreisen"
 ai_generated: true
