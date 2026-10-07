@@ -152,7 +152,7 @@ Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar
 Wenn du damit anfangen willst, helfen dir diese Artikel weiter:
 
 - [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
-- [DSL-Tarif passend wählen](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/)
+- [DSL-Tarif passend wählen](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
 - [Standby-Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)
 
 ## Frugalismus-Tipp 4: Essen planen statt spontan bezahlen
