@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "003bdf033176bbbf94b1465640c2a732655c3fb1fdf6195303a0f2afaa17de5f"
+  inhalt_sha256: "15ed1e0d9bf8e4801d8933b4a5c4b82ea703642fbdee759a78e3f9ceb2d273ba"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV, § 40 VVG); Regionalklassen-Angabe auf GDV-Zahlen korrigiert, SF-Tabelle bereinigt, Eigenvergleiche dokumentiert"

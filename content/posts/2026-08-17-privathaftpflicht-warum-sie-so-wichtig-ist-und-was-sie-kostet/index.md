@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "ce347f22973f4dc3be23e87a7fc1b9f333d7dc87d68838420b593ab9e78c2054"
+  inhalt_sha256: "75156bc19868208b89163daaee087863dc28cfe35f64cd26a96e19dd805f7cf7"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, BaFin); Beitrags- und Schadenbandbreiten abgeglichen, Beispielrechnung nachgerechnet"
@@ -138,7 +138,7 @@ redaktionelle_pruefung:
       quellen: ["Q1"]
     - aussage: "Monatspreis guter Schutz (Fazit)"
       wert: "4 bis 8 Euro im Monat"
-      fundstelle: "4 bis 8 Euro im Monat erhältlich."
+      fundstelle: "4 bis 8 € im Monat erhältlich."
       pruefung: "Umrechnung der dokumentierten Jahresbandbreiten in Monatswerte; entspricht der Verbraucherzentrale-Einordnung (guter Schutz für wenige Euro im Monat)"
       konsistenzpruefung: "48–96 € im Jahr decken sich mit der Single-Bandbreite (45–75 €) und dem Komfort-Beispieltarif (59 €)"
       rechenweg: "45 € bis 96 € Jahresbeitrag ÷ 12 Monate = ca. 4 bis 8 €/Monat"

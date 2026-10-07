@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T16:43:24.284914+00:00",
-  "head": "b1067036",
+  "signed_at": "2026-10-07T16:44:00.735853+00:00",
+  "head": "f3d3b191",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -52,71 +52,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
-  "audit_start_sha256": "997dec145ceb4d8c1d33753850bf3f0d664098644537825f9dd76f0b4c28be9b",
+  "audit_start_sha256": "357417041813592a58888f2755d3b4a2faf45501bc156d2ee4c5c1346faca0b1",
   "audit": [
-    {
-      "date": "2026-10-02",
-      "art": "set-current",
-      "head": "eb62152",
-      "geaendert": [
-        "scripts/internal_linker.py",
-        "scripts/link_density_guard.py",
-        "scripts/shortcode_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "eb62152",
-              "datum": "2026-10-02",
-              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
-            },
-            {
-              "sha": "80beeb3",
-              "datum": "2026-10-03",
-              "betreff": "fix(watchdog): Alarm nach Reserve-Heilung sofort abgleichen (#520) (#535)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/link_density_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "eb62152",
-              "datum": "2026-10-02",
-              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
-            },
-            {
-              "sha": "80beeb3",
-              "datum": "2026-10-03",
-              "betreff": "fix(watchdog): Alarm nach Reserve-Heilung sofort abgleichen (#520) (#535)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "scripts/shortcode_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "eb62152",
-              "datum": "2026-10-02",
-              "betreff": "fix(linker): WF-1F8C – Shortcode-Parameter dauerhaft vor Link-Inserts schützen (#522)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "8b1115dd8fb7a30e7bc547acb109ca0398f677b714dd40f783aa5d4e8951186f",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-03",
       "art": "set-current",
@@ -140,7 +77,7 @@
         }
       ],
       "files_sha256": "bdaf8650847e20c1d772427d9fa87f0dadc28c48ac35c3ed01359a5846ccde6d",
-      "prev_sha256": "997dec145ceb4d8c1d33753850bf3f0d664098644537825f9dd76f0b4c28be9b"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-03",
@@ -417,7 +354,15 @@
       "art": "set-current",
       "head": "b1067036",
       "geaendert": [],
-      "prev_sha256": "b2d7ac8ce1ced5928da977c25b09967fd3f354b60d94f6c357ea0de497641397",
+      "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
+      "prev_sha256": "b2d7ac8ce1ced5928da977c25b09967fd3f354b60d94f6c357ea0de497641397"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "f3d3b191",
+      "geaendert": [],
+      "prev_sha256": "882e0cac84c6418c351598befc33ed9e610b21b739b697dc08c1347f7f1c3acc",
       "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b"
     }
   ]
