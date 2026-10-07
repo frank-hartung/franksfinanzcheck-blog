@@ -399,6 +399,99 @@ def refill_to_min(posts_dir=None, validator=None, *, finalize: bool = True) -> l
     return published
 
 
+# =========================================================================
+# WF-54C4 #610 (07.10.2026): Nachschub ist Material, kein Rückläufer.
+# =========================================================================
+# Befund aus dem Vorfall vom 05.10.2026 (Issue #610): Der Tag stand nach dem
+# letzten Gate auf 1/2. Der nachgeschobene Reserve-Artikel war um 22:41 von
+# `publish_gate` zurückgestuft worden – und wurde in derselben Nacht vom
+# Reserve-Janitor als „Rückläufer“ (reserve_published + draft: true)
+# vernichtet, obwohl er nie öffentlich war. Der Tag verlor damit nicht nur
+# eine Auslieferung, sondern auch den Text, der den nächsten Tag hätte
+# tragen können.
+#
+# Zwei Hebel machen das dauerhaft unmöglich:
+#   1. `sichere_verworfene_nachschuebe()`: Ein zurückgestufter Nachschub
+#      kehrt sofort als Material in den Vorrat zurück (ohne LIVE-Nachweis;
+#      mit Zwilling bleibt er Rückläufer – Sichtung, nicht Vorrat).
+#   2. `refill_until_min()`: begrenzte Konvergenz. Fällt ein Nachschub am
+#      eigenen Abschluss-Gate erneut durch, greift die nächste Runde den
+#      nächsten Kandidaten – die Endabnahme endet nie unter dem Mindestziel,
+#      solange Material da ist (statt wie am 05.10. einfach aufzuhören).
+
+
+def sichere_verworfene_nachschuebe(posts_dir=None,
+                                   history_path=None) -> list[str]:
+    """Zurückgestuften Nachschub in den Vorrat zurückholen (#610).
+
+    Nur `reserve_published`-Entwürfe ohne LIVE-Zwilling: Wer öffentlich lebt,
+    bleibt Rückläufer und geht in die Sichtung. Jede Rettung wird laut
+    gemeldet – Stilles Retten wäre von stillem Verlust nicht unterscheidbar.
+    """
+    import cadence_guard as cg
+    import reserve_pool as rp
+    posts_dir = Path(posts_dir or ROOT / 'content' / 'posts')
+    gerettet: list[str] = []
+    for post in cg.load_posts(str(posts_dir)):
+        if not post.get('draft'):
+            continue
+        index = Path(post['path'])
+        try:
+            text = index.read_text(encoding='utf-8')
+        except OSError:
+            continue
+        if not rp.RE_RESERVE_PUBLISHED.search(text):
+            continue
+        grund = str(post.get('grund') or 'spätes Gate nach Nachschub')
+        ok, meldung = rp.zurueck_in_den_pool(index, grund, posts_dir=posts_dir,
+                                             history_path=history_path)
+        if ok:
+            gerettet.append(index.parent.name)
+            print(f"  ♻️  {meldung} – Material erhalten statt Rückläufer-Verlust")
+        else:
+            print(f"  ℹ {index.parent.name}: {meldung}")
+    return gerettet
+
+
+def refill_until_min(posts_dir=None, validator=None, *, runden: int = 3,
+                     finalize: bool = True,
+                     history_path=None) -> list[str]:
+    """Quote bis zum Mindestziel – konvergent, begrenzt, ohne Endlosschleife.
+
+    Warum nicht wie bisher genau ein (doppelter) Durchgang? Der eigene
+    Abschluss-Lauf (`publish_gate` im finalize) ist die letzte Instanz und
+    darf einen frisch nachgeschobenen Artikel erneut zurückstufen. Am
+    05.10.2026 blieb der Tag danach bei 1/2 stehen, obwohl der Vorrat noch
+    Material hatte – die Endabnahme hatte schlicht keinen zweiten Griff mehr.
+    Diese Funktion hat ihn: jede Runde räumt den verworfenen Nachschub zurück
+    in den Vorrat und greift dann den nächsten Kandidaten.
+
+    Abbruchbedingungen: Mindestziel erreicht, keine Runde mit Fortschritt
+    (kein Nachschub und keine Rettung) oder `runden` erschöpft.
+    """
+    import cadence_guard as cg
+    published: list[str] = []
+    _live, _minimum, heute = live_count_today(posts_dir)
+    if heute.weekday() not in cg.PUBLICATION_DAYS:
+        return published          # Off-Day: keine Runde, die nichts tun darf
+    for runde in range(1, max(1, runden) + 1):
+        neu = list(refill_to_min(posts_dir=posts_dir, validator=validator,
+                                 finalize=finalize))
+        published.extend(neu)
+        gerettet = sichere_verworfene_nachschuebe(posts_dir,
+                                                  history_path=history_path)
+        live, minimum, today = live_count_today(posts_dir)
+        if today.weekday() not in cg.PUBLICATION_DAYS or live >= minimum:
+            break
+        if not neu and not gerettet:
+            print(f"  ⚠ Nachfüll-Runde {runde}: kein Fortschritt – "
+                  f"LIVE {live}/{minimum}, Material erschöpft (ehrliches Defizit).")
+            break
+        print(f"  ↻ Nachfüll-Runde {runde}: LIVE {live}/{minimum} – "
+              "der nächste Kandidat bekommt seine Chance (#610).")
+    return published
+
+
 def hold_under_score_candidates() -> list[str]:
     """Parkt LIVE-Kandidaten unter dem Publish-Score, bevor das harte Gate läuft."""
     import publish_gate
@@ -459,12 +552,11 @@ def _dispatch(args) -> int:
     if args.refill_only:
         # Deploy-Pfad (#287): publish_gate hat gerade verworfen/gehalten.
         # Hier nur nachfüllen – Commit/Rebuild macht der Aufrufer.
-        # Zwei Pässe: falls finalize's zweites publish_gate einen Nachschub
-        # wieder verwirft, greift der zweite Pass den nächsten Kandidaten.
-        published = list(refill_to_min(finalize=True))
-        live, minimum, _ = live_count_today()
-        if live < minimum:
-            published.extend(refill_to_min(finalize=True))
+        # WF-54C4 #610: begrenzte Konvergenz statt fester zwei Durchgänge –
+        # ein Nachschub, den das eigene Abschluss-Gate erneut zurückstuft,
+        # kehrt als Material zurück und die nächste Runde greift den
+        # nächsten Kandidaten.
+        published = list(refill_until_min(finalize=True))
         live, minimum, today = live_count_today()
         import cadence_guard as cg
         if today.weekday() not in cg.PUBLICATION_DAYS:
@@ -492,8 +584,11 @@ def _dispatch(args) -> int:
     run(sys.executable, 'scripts/draft_link_healer.py', '--fix')
     build_site()
     run(sys.executable, 'scripts/publish_gate.py')
-    # Falls das zweite Gate erneut etwas verworfen hat: noch einmal nachfüllen.
-    refill_to_min(finalize=True)
+    # WF-54C4 #610: Das zweite Gate kann einen frischen Nachschub erneut
+    # zurückstufen. Statt danach einfach zu enden (05.10.2026: 1/2), räumt
+    # die Konvergenz den Nachschub zurück in den Vorrat und greift den
+    # nächsten Kandidaten – begrenzt, nie endlos.
+    refill_until_min(finalize=True)
 
     import publication_check as receipt
     day = dt.datetime.now(dt.timezone.utc).date()
