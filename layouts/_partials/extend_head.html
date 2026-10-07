@@ -86,7 +86,27 @@
 {{- /* theme-color kommt bereits aus PaperMod (mit Light-/Dark-Variante) –
        hier extra zu setzen wäre ein doppeltes Meta-Tag. */ -}}
 
-{{- /* ---------- Consent-Banner: LCP-/CLS-optimierte Anzeige ---------- */ -}}
+{{- /* ---------- Consent-Banner: LCP-/CLS-optimierte Anzeige ----------
+       + ROBUSTHEITS-BOOTSTRAP (Vertrag C31, 07.10.2026)
+
+       Warum der Bootstrap IN DIESEM <script> steht und kein eigenes Tag
+       bekommt: Artikel-Seiten tragen 48–58 Kinder im <head>, und 58 ist
+       die Lighthouse-Messgrenze (scripts/dom_audit.py → LIMIT.head_children).
+       Repo-Regel (docs/LAYOUT-AUTOMATISIERUNG.md): „Wer ein Tag ergänzt,
+       nimmt ein anderes weg.“ Der Bootstrap braucht kein eigenes Tag – er
+       muss nur VOR den Skripten im Body laufen, und genau das tut er hier.
+
+       Warum er überhaupt im <head> steht: Fehler, die während des Parsens
+       oder in den Inline-Skripten des Body passieren (Consent, Kopier-Knopf,
+       Lese-Fortschritt), sind weg, bevor ein Skript am Fuß des Body seinen
+       Fehler-Horcher anmelden kann. Diese ~70 Zeilen sind die einzige
+       Stelle, die JEDEN Fehler der Seite sieht – auch den der Module, die
+       ihn selbst verschlucken.
+
+       Zweite Stufe: static/premium/ff-robust.js (defer, Fuß des Body)
+       ergänzt die Bausteine, die Zeit haben: Fehlergrenzen für interaktive
+       Inseln, Speicher-Wache, Zwischenablage, Diagnosebericht.
+       Runbook: docs/ANLEITUNG-ROBUSTHEIT.md · Wache: scripts/robustheits_gate.py */ -}}
 <script>
 (function () {
   try {
@@ -94,6 +114,162 @@
       document.documentElement.classList.add('ff-consent-set');
     }
   } catch (e) {}
+})();
+
+/* ---- Robustheits-Bootstrap: die Seite stirbt nie stumm ---- */
+(function () {
+  var R = window.FFRobust = window.FFRobust || {};
+  if (R.boot) return;                      // idempotent (Cache, Doppel-Einbindung)
+  R.boot = true;
+  R.fassung = '1.0.0';
+  R.fehler = [];                           // Ringpuffer – Diagnose, kein Versand
+  R.status = {};                           // je interaktive Insel: ok | fehler
+  R.max = 25;
+  R.zaehler = 0;
+  R.offline = ('onLine' in navigator) ? navigator.onLine === false : false;
+
+  function stempel() {
+    try { return new Date().toISOString(); } catch (e) { return ''; }
+  }
+
+  /* Zentrale Meldung. Sie sendet NICHTS nach außen (Datenschutz: kein
+     Tracking, kein Drittanbieter) – sie macht Fehler sichtbar, die sonst
+     nur in einer Konsole landen, die kein Leser öffnet. */
+  R.melden = function (eintrag) {
+    try {
+      if (!eintrag) return eintrag;
+      eintrag.zeit = eintrag.zeit || stempel();
+      eintrag.pfad = eintrag.pfad || (window.location ? window.location.pathname : '');
+      if (R.fehler.length >= R.max) R.fehler.shift();
+      R.fehler.push(eintrag);
+      R.zaehler += 1;
+      /* Ab fünf Fehlern gilt die Seite als belastet: CSS kann darauf
+         reagieren, die Diagnose findet den Zustand, und ein Mensch mit
+         offener Konsole sieht die Häufung statt fünf Einzelrätsel. */
+      if (R.zaehler >= 5) document.documentElement.setAttribute('data-ff-robust', 'belastet');
+      if (window.CustomEvent) {
+        document.dispatchEvent(new CustomEvent('ff:fehler', { detail: eintrag }));
+      }
+      if (window.console && console.debug) {
+        console.debug('[FFRobust]', eintrag.quelle || 'unbenannt', eintrag.text || '');
+      }
+    } catch (e) { /* die Wache darf nie selbst zur Fehlerquelle werden */ }
+    return eintrag;
+  };
+
+  /* Einzelfunktion abfangen: ein kaputter Helfer beendet nicht den Baustein. */
+  R.sicher = function (fn, rueckfall, quelle) {
+    try { return fn(); } catch (fehler) {
+      R.melden({ quelle: quelle || 'sicher', text: String((fehler && fehler.message) || fehler || '') });
+      return rueckfall;
+    }
+  };
+
+  /* Ressourcen-Fehler (Bild, Skript, CSS) kommen NUR in der Capture-Phase
+     an – sie bubble'n nicht. Ohne `true` bliebe ein fehlendes Cover stumm. */
+  window.addEventListener('error', function (ev) {
+    try {
+      var ziel = ev && ev.target;
+      if (ziel && ziel !== window && (ziel.src || ziel.href)) {
+        R.melden({ quelle: 'ressource', tag: String(ziel.tagName || ''),
+                   text: String(ziel.src || ziel.href || '').slice(0, 200) });
+        return;
+      }
+      R.melden({ quelle: 'skript', text: String((ev && ev.message) || '').slice(0, 200),
+                 datei: String((ev && ev.filename) || '').slice(-80), zeile: ev && ev.lineno });
+    } catch (e) {}
+  }, true);
+
+  /* Ein nicht abgefangenes Promise ist der häufigste stille Ausfall moderner
+     Bausteine (Fetch ohne .catch). Hier wird er sichtbar, ohne ihn zu ändern. */
+  window.addEventListener('unhandledrejection', function (ev) {
+    try {
+      var grund = ev && ev.reason;
+      R.melden({ quelle: 'promise', text: String((grund && grund.message) || grund || '').slice(0, 200) });
+    } catch (e) {}
+  });
+
+  window.addEventListener('offline', function () {
+    R.offline = true;
+    document.documentElement.setAttribute('data-ff-offline', '1');
+  });
+  window.addEventListener('online', function () {
+    R.offline = false;
+    document.documentElement.removeAttribute('data-ff-offline');
+  });
+  if (R.offline) document.documentElement.setAttribute('data-ff-offline', '1');
+
+  R.warte = function (ms) {
+    return new window.Promise(function (loesen) { setTimeout(loesen, Math.max(0, ms || 0)); });
+  };
+
+  /* Fetch MIT Zeitlimit, Wiederholung und ehrlicher Antwort.
+     Vertrag: `hole` lehnt NIE ab – es liefert immer ein Ergebnisobjekt.
+     Damit ist ein vergessenes .catch() kein stiller Ausfall mehr, und ein
+     hängender Worker friert keinen Knopf mehr ein (Befund C31: das
+     Anmeldeformular wartete unbegrenzt auf eine Antwort, die nie kam).
+
+     `opaque` (Antwort aus einem no-cors-Fetch) ist KEIN Fehler: Sie sagt
+     nur „durchgekommen, Inhalt nicht lesbar“. Sie als Misserfolg zu deuten
+     hieße, ehrliche Anmeldungen als Fehler zu melden. */
+  if (typeof window.Promise === 'function' && typeof window.fetch === 'function') {
+    R.hole = function (url, opts) {
+      opts = opts || {};
+      var zeitlimit = typeof opts.zeitlimit === 'number' ? opts.zeitlimit : 12000;
+      var versuche = Math.max(1, Math.min(3, opts.versuche || 1));
+      var wartezeit = typeof opts.warte === 'number' ? opts.warte : 400;
+      var kopie = {};
+      for (var k in opts) {
+        if (!Object.prototype.hasOwnProperty.call(opts, k)) continue;
+        if (k === 'zeitlimit' || k === 'versuche' || k === 'warte' || k === 'quelle') continue;
+        kopie[k] = opts[k];
+      }
+      var quelle = opts.quelle || 'fetch';
+
+      function einmal(n) {
+        var steuerung = window.AbortController ? new window.AbortController() : null;
+        var abbruch = null;
+        if (steuerung && !kopie.signal) {
+          kopie.signal = steuerung.signal;
+          if (zeitlimit > 0) {
+            abbruch = setTimeout(function () {
+              try { steuerung.abort(); } catch (e) {}
+            }, zeitlimit);
+          }
+        }
+        return window.fetch(url, kopie).then(function (antwort) {
+          if (abbruch) clearTimeout(abbruch);
+          if (antwort.type === 'opaque') {
+            return { ok: true, unbekannt: true, status: 0, versuche: n + 1, antwort: antwort };
+          }
+          if (!antwort.ok) {
+            return { ok: false, status: antwort.status, versuche: n + 1,
+                     fehler: 'http-' + antwort.status, antwort: antwort };
+          }
+          return { ok: true, status: antwort.status, versuche: n + 1, antwort: antwort };
+        })['catch'](function (fehler) {
+          if (abbruch) clearTimeout(abbruch);
+          var grund = (fehler && fehler.name === 'AbortError') ? 'zeitlimit' : 'netz';
+          if (grund === 'netz' && n + 1 < versuche) {
+            /* Exponentiell mit Zittern: drei gleichzeitig neu ladende
+               Leser dürfen den Worker nicht im selben Augenblick treffen. */
+            return R.warte(wartezeit * Math.pow(2, n) + Math.floor(Math.random() * 120))
+              .then(function () { return einmal(n + 1); });
+          }
+          R.melden({ quelle: quelle, text: grund + ' nach ' + (n + 1) + ' Versuch(en)' });
+          return { ok: false, status: 0, versuche: n + 1, fehler: grund,
+                   text: String((fehler && fehler.message) || fehler || '') };
+        });
+      }
+
+      try {
+        return einmal(0);
+      } catch (fehler) {
+        R.melden({ quelle: quelle, text: 'Aufruf fehlgeschlagen' });
+        return window.Promise.resolve({ ok: false, status: 0, versuche: 0, fehler: 'aufruf' });
+      }
+    };
+  }
 })();
 </script>
 <noscript><style>#ff-consent-banner{display:none}</style></noscript>

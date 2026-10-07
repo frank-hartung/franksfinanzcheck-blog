@@ -1,0 +1,51 @@
+/* ============================================================
+   zz-robustheit.css – Sichtbarkeit der Resilienzschicht (C31, 07.10.2026)
+   ------------------------------------------------------------
+   Die Resilienzschicht (static/premium/ff-robust.js + Bootstrap im
+   <head>) fängt Ausfälle ab, die sonst still blieben: ein Rechner, der
+   beim Starten stirbt, eine Anmeldung, die nicht durchkommt, ein
+   Kopierversuch ohne Erlaubnis. Ein gefangener Fehler ist erst dann
+   behoben, wenn der Leser weiß, woran er ist – sonst sieht er einen
+   Knopf, der nichts tut.
+
+   Diese Datei liefert genau dafür EINEN Baustein: `.ff-robust-hinweis`
+   (role="status", aria-live polite). Bewusst zurückhaltend: Es ist eine
+   Auskunft, kein Alarm. Kein Rot, kein Icon-Lärm, keine Animation –
+   derselbe Ton wie `.ff-callout--tip`, nur ohne Überschrift.
+
+   Marken-Vertrag (PRODUCT.md / DESIGN.md):
+     · Smaragd-Fläche hell/dunkel, Text ≥ 4.5:1 in beiden Themen
+     · Radius aus der Skala (12 px über --ff-radius-md, mit Rückfall)
+     · Kein Übergang auf Layout-Eigenschaften (hier: gar keiner)
+     · Mobile first: 390 px, kein horizontaler Overflow
+     · `prefers-reduced-motion` braucht hier nichts – es bewegt sich nichts
+   Wache: scripts/robustheits_gate.py (R7)
+   ============================================================ */
+
+.ff-robust-hinweis {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(14, 90, 67, 0.2);
+  border-left: 4px solid var(--ff-emerald, #0E5A43);
+  border-radius: var(--ff-radius-md, 12px);
+  background: var(--ff-emerald-soft, #EAF4EF);
+  color: #064e3b;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  /* Lange Wörter (Pfade, Tokens) dürfen die 390-px-Breite nicht sprengen. */
+  overflow-wrap: anywhere;
+}
+
+:root[data-theme="dark"] .ff-robust-hinweis {
+  border-color: rgba(127, 209, 180, 0.25);
+  border-left-color: var(--ff-emerald-bright, #7FD1B4);
+  background: rgba(127, 209, 180, 0.12);
+  color: #EAF4EF;
+}
+
+/* Ein Hinweis darf nie als einziger Inhalt eines leeren Slots stehen und
+   dabei die Seite springen lassen: Mindesthöhe bleibt, wo der Baustein
+   seinen Platz schon reserviert hat (CLS ≈ 0, PRODUCT.md §6). */
+.ff-robust-hinweis:empty {
+  display: none;
+}

@@ -292,30 +292,89 @@
     }
   }
 
-  function initialisiere() {
-    document.querySelectorAll('[data-ff-rechner]').forEach(function (container) {
-      var typ = container.getAttribute('data-typ');
-      var logik = LOGIK[typ];
-      if (!logik) return;
-      var form = container.querySelector('form');
-      if (!form) return;
-      var rechnen = function () { rendere(typ, logik(werteLesen(container)), container); };
-      form.addEventListener('submit', function (ev) {
-        ev.preventDefault();
+  /* ---------- Härtung (Vertrag C31, 07.10.2026 – Robustheit Premium) ----------
+     Befund: `initialisiere()` lief ohne Fangnetz. Ein einziger Rechner mit
+     unerwartetem Markup (fehlendes Formular, fremde Shortcode-Variante) warf
+     mitten in der Schleife – und nahm ALLEN übrigen Rechnern derselben Seite
+     die Verdrahtung mit. Der Leser sah ein Formular, das beim Absenden die
+     Seite neu lud und nichts rechnete: ein stiller Totalausfall pro Seite.
+     Jetzt gilt: Fangnetz JE Rechner, Befund an die Resilienzschicht, und ein
+     sichtbarer Satz im Ergebnisfeld statt eines Knopfs, der nichts tut. */
+
+  function robust() {
+    return (typeof window !== 'undefined' && window.FFRobust) ? window.FFRobust : null;
+  }
+
+  function ergebnisFeld(container) {
+    try { return container.querySelector('[data-ff-rechner-ergebnis]'); } catch (e) { return null; }
+  }
+
+  function ausfallHinweis(container) {
+    var ziel = ergebnisFeld(container);
+    if (!ziel || typeof document === 'undefined' || !document.createElement) return;
+    try {
+      var p = document.createElement('p');
+      p.className = 'ff-robust-hinweis';
+      p.setAttribute('role', 'status');
+      p.textContent = 'Dieser Rechner konnte nicht gestartet werden. Der Ratgeber ' +
+        'bleibt vollständig lesbar – die Rechnung steht als Formel im Text.';
+      ziel.appendChild(p);
+    } catch (e) { /* Hinweis ist Kür, der Befund steht im Ringpuffer */ }
+  }
+
+  function verdrahten(container) {
+    var typ = container.getAttribute('data-typ');
+    var logik = LOGIK[typ];
+    if (!logik) return;
+    var form = container.querySelector('form');
+    if (!form) return;
+    var rechnen = function () { rendere(typ, logik(werteLesen(container)), container); };
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      /* Auch die Rechnung selbst läuft im Fangnetz: Eine unerwartete Eingabe
+         darf keinen toten Knopf hinterlassen. */
+      try {
         rechnen();
-      });
-      form.querySelectorAll('input, select').forEach(function (el) {
-        el.addEventListener('change', rechnen);
-      });
-      // Slider-Wert live daneben zeigen
-      var slider = container.querySelector('[data-feld="reserve"]');
-      if (slider) {
-        var anzeige = container.querySelector('[data-ff-rechner-slider-wert]');
-        var sync = function () { if (anzeige) anzeige.textContent = slider.value + '×'; };
-        slider.addEventListener('input', sync);
-        sync();
+      } catch (fehler) {
+        var r = robust();
+        if (r) r.melden({ quelle: 'rechner:' + typ, text: String((fehler && fehler.message) || fehler) });
+        ausfallHinweis(container);
       }
-      rechnen(); // Anfangszustand (meist „Bitte ausfüllen")
+    });
+    Array.prototype.forEach.call(form.querySelectorAll('input, select'), function (el) {
+      el.addEventListener('change', function () {
+        try { rechnen(); } catch (e) { /* der nächste Wechsel versucht es erneut */ }
+      });
+    });
+    // Slider-Wert live daneben zeigen
+    var slider = container.querySelector('[data-feld="reserve"]');
+    if (slider) {
+      var anzeige = container.querySelector('[data-ff-rechner-slider-wert]');
+      var sync = function () { if (anzeige) anzeige.textContent = slider.value + '×'; };
+      slider.addEventListener('input', sync);
+      sync();
+    }
+    rechnen(); // Anfangszustand (meist „Bitte ausfüllen")
+  }
+
+  function initialisiere() {
+    var liste;
+    try { liste = document.querySelectorAll('[data-ff-rechner]'); } catch (e) { return; }
+    Array.prototype.forEach.call(liste, function (container) {
+      var typ = container.getAttribute('data-typ') || 'unbekannt';
+      var r = robust();
+      /* Fehlergrenze der Resilienzschicht, sonst das eigene Fangnetz:
+         beides hält den Ausfall beim EINZELNEN Rechner. */
+      if (r && typeof r.insel === 'function') {
+        r.insel('rechner:' + typ, function () { verdrahten(container); }, { text: false });
+        if (r.status && r.status['rechner:' + typ] === 'fehler') ausfallHinweis(container);
+        return;
+      }
+      try {
+        verdrahten(container);
+      } catch (fehler) {
+        ausfallHinweis(container);
+      }
     });
   }
 

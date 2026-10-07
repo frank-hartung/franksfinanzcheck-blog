@@ -391,6 +391,23 @@ jobs:
           python3 scripts/werkzeuge_gate.py --selftest
           python3 scripts/werkzeuge_gate.py --source-only
 
+      # ===== ROBUSTHEITS-WACHE (Vertrag C31, 07.10.2026) ==================
+      # Kernbefund: Die lauten Fehler fangen die Gates oben (Build, Kadenz,
+      # Cover, H1). Die stillen nicht – ein Rechner, der beim Starten stirbt
+      # und einen toten Knopf hinterlässt, ein Anmeldeformular, das
+      # unbegrenzt auf einen hängenden Worker wartet, ein Service Worker,
+      # dessen Cache-Fehler einen Request verschluckt. Die Seite BAUT in
+      # allen vier Fällen, also sah sie keine Wache.
+      # Diese Prüfung läuft VOR dem Build gegen die Quelle (ohne Hugo, < 1 s)
+      # und fail-closed: Ein fehlendes Fangnetz stoppt den Deploy, statt
+      # still auszuliefern. Der Selbsttest läuft zuerst – eine sabotierte
+      # Prüflogik darf kein grünes Gate liefern.
+      # Runbook: docs/ANLEITUNG-ROBUSTHEIT.md
+      - name: Robustheit – Laufzeit-Fangnetze (fail-closed)
+        run: |
+          python3 scripts/robustheits_gate.py --selftest
+          python3 scripts/robustheits_gate.py --source-only --strict
+
       # ===== H1-WACHE (Dauerheilung #623, 07.10.2026) ======================
       # Kernbefund: /presse/ und /studien/ trugen ZWEI H1 – das Layout
       # setzt die H1 aus dem Titel, das Markdown-Dokument lieferte eine
