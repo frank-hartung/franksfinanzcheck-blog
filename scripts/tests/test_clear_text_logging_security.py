@@ -164,20 +164,38 @@ class ClearTextLoggingRuntimeContract(unittest.TestCase):
                 self.assertNotIn("pina_", saved_json)
 
     def test_secrets_age_guard_record_success_and_list_are_clean(self):
-        buf = io.StringIO()
-        with redirect_stdout(buf), mock.patch.object(secrets_age_guard, "_mutate_state"):
-            rc = secrets_age_guard._record_success("GROQ_API_KEY", proof_by="content-engine-v2")
-        self.assertEqual(rc, 0)
-        out = buf.getvalue()
-        self.assertIn("GROQ_API_KEY", out)
-        self.assertIn("Groq KI-Key", out)
-        self.assertNotIn("gsk_", out)
+        # ISOLATION (C27, Nebenbefund zu #610): `_mutate_state` war hier schon
+        # gepatcht – der AUDIT-Zweig von _record_success() aber nicht. Der Test
+        # schrieb deshalb echte Zeilen `secrets_age_guard/record-success` für
+        # GROQ_API_KEY ins versionierte data/audit/. Das ist die teuerste der
+        # drei Leckstellen: In CI ruft ausschließlich pinterest-ai.yml und
+        # pinterest-token.yml `--record-success` auf, und zwar nur für
+        # PINTEREST_TOKEN_KEY. Die Zeilen behaupteten also einen Nachweis, den
+        # nie ein Workflow geführt hat – genau die „fremde Erfolgsmeldung", die
+        # secrets_age_guard selbst als `declared_foreign` abwertet.
+        from repo_isolation import beweis_ledger_unangetastet, sandbox_zeilen
+        with beweis_ledger_unangetastet("secrets_age_guard") as ledger:
+            buf = io.StringIO()
+            with redirect_stdout(buf), mock.patch.object(secrets_age_guard, "_mutate_state"):
+                rc = secrets_age_guard._record_success("GROQ_API_KEY", proof_by="content-engine-v2")
+            self.assertEqual(rc, 0)
+            out = buf.getvalue()
+            self.assertIn("GROQ_API_KEY", out)
+            self.assertIn("Groq KI-Key", out)
+            self.assertNotIn("gsk_", out)
 
-        # --list
-        buf_list = io.StringIO()
-        with redirect_stdout(buf_list):
-            secrets_age_guard.main(["--list"])
-        list_out = buf_list.getvalue()
+            # Die Protokollierung selbst bleibt eingeschaltet – sie landet nur
+            # im Sandkasten. Ohne diese Gegenprobe würde eine zu grobe
+            # Stummschaltung als „geheilt" durchgehen.
+            self.assertEqual(
+                [(z["module"], z["action"]) for z in sandbox_zeilen(ledger)],
+                [("secrets_age_guard", "record-success")])
+
+            # --list
+            buf_list = io.StringIO()
+            with redirect_stdout(buf_list):
+                secrets_age_guard.main(["--list"])
+            list_out = buf_list.getvalue()
         self.assertIn("GROQ_API_KEY\t60d\tpflicht", list_out)
         self.assertIn("PINTEREST_ACCESS_TOKEN\t15d\tpflicht", list_out)
 

@@ -42,3 +42,31 @@ jobs:
           python3 scripts/fm_boundary_guard.py --selftest
           python3 scripts/social_studio.py --selftest
           python3 scripts/fm_boundary_guard.py --check
+      # Ledger-Isolation (C27, Nebenbefund zu #610): audit_log trägt den
+      # Vertrag, repo_isolation stellt die Sandbox für Tests. Beide prüfen in
+      # beide Richtungen – Umlenkung wirkt UND Normalfall bleibt scharf.
+      - name: Beweis-Ledger-Isolation (Selbsttests)
+        run: |
+          python3 scripts/audit_log.py --selftest
+          python3 scripts/repo_isolation.py --selftest
+      # Empirische Leitplanke statt statischer Regel: data/audit/ ist ein
+      # versioniertes, append-only bewachtes BEWEIS-Ledger (history_guard H6).
+      # Bis 07.10.2026 schrieben drei Unit-Tests echte Zeilen hinein – u. a.
+      # einen gate-Entscheid für den Fixture-Artikel `2026-09-07-r5-live`, der
+      # am 03.10.2026 committet wurde. Der Schritt läuft auch nach einem
+      # fehlgeschlagenen Testlauf: Gerade dann ist die Frage interessant, ob
+      # das Buch sauber geblieben ist.
+      - name: Beweis-Ledger muss nach den Tests unberührt sein
+        if: ${{ !cancelled() }}
+        run: |
+          if [ -n "$(git status --porcelain -- data/audit)" ]; then
+            echo "🛑 C27 verletzt: Ein Testlauf hat ins versionierte Beweis-Ledger geschrieben."
+            echo "   data/audit/ ist append-only (history_guard H6) – ein Testeintrag ist ein fabrizierter Beweis."
+            git status --porcelain -- data/audit
+            git diff --stat -- data/audit
+            echo "   Heilung: Den Aufruf in \`with beweis_ledger_unangetastet(…)\` fassen"
+            echo "   (scripts/repo_isolation.py). Die Wache test_audit_ledger_isolation.py"
+            echo "   meldet denselben Befund bereits mit Datei und Zeile."
+            exit 1
+          fi
+          echo "✅ data/audit/ unverändert – die Tests schreiben keine Beweise."

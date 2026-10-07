@@ -553,9 +553,23 @@ class TagesgeldIntentRegression493(unittest.TestCase):
                         f"verify_update hat Intent-Verletzung nicht abgefangen: {problems}")
 
     def test_bestand_gate_checks_intent_dimension(self):
-        """bestand_gate.run_gate muss die Intent-Dimension prüfen."""
+        """bestand_gate.run_gate muss die Intent-Dimension prüfen.
+
+        ISOLATION (C27, Nebenbefund zu #610): run_gate() startet echte
+        Subprozesse – publish_gate.affiliate_profi_failures() ruft
+        `affiliate_profi_check.py --json`, und dessen main() schreibt bei
+        jedem Fund eine Zeile ins VERSIONIERTE Beweis-Ledger data/audit/
+        (append-only bewacht durch history_guard H6). Ein Testlauf hätte
+        damit einen Betriebserfolg fabriziert. Die übrigen Tests dieser
+        Datei setzen dafür `aig.DRY_RUN = True` („Beweislauf schreibt
+        nichts ins Repo"); hier genügte das nicht, weil die Zeile im
+        KINDPROZESS entsteht. FFC_AUDIT_DIR erbt sich in jedes Kind –
+        ein Monkeypatch im Testprozess täte das nicht.
+        """
         import bestand_gate as bg
-        findings, errors = bg.run_gate()
+        from repo_isolation import beweis_ledger_unangetastet
+        with beweis_ledger_unangetastet("bestand_gate"):
+            findings, errors = bg.run_gate()
         self.assertIn("intent", findings)
 
 

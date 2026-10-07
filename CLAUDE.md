@@ -107,6 +107,8 @@ python3 scripts/layout_audit.py      # statisches Layout-Gate (Links, Covers, Al
 python3 scripts/dom_audit.py --top 15 # DOM-Budget jeder Seite (Kinder/Head/Tiefe/Elemente, browser-treu ohne Chrome)
 node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_PATH) – siehe docs/LAYOUT-AUTOMATISIERUNG.md
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
+python3 scripts/audit_log.py --selftest              # Beweis-Ledger: Umlenkung/Stummschaltung (C27)
+python3 scripts/repo_isolation.py --selftest         # Test-Sandbox: data/audit/ bleibt unberührt (C27)
 npm run test:release                                 # Release-Scorecard: Selbsttest + 41 Unit-Tests (Produktionswahrheit)
 python3 scripts/release_scorecard.py                 # Release-Scorecard: acht Dimensionen je Live-Artikel + Siegel
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
@@ -869,6 +871,72 @@ neue Messung. Deshalb gilt für `engine_issue.py` (und seine Aufrufer):
 - Bedienung: `npm run engine:deficit` (Zustand, Trockenlauf) ·
   `npm run test:engine:deficit` (Selbsttest + 39 Unit-Tests).
   Vorgangsbericht: `WF-1F8C-608-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
+## Beweisen ist nicht Fabrizieren (Beweis-Ledger-Isolation, C27, seit 07.10.2026)
+
+`data/audit/*.jsonl` ist kein Logfile, sondern ein **versioniertes
+Beweis-Ledger**: `history_guard.py` bewacht es als append-only (Regel H6), und
+jede Zeile behauptet einen echten Betriebsvorgang. Am 07.10.2026 – beim Siegeln
+der Auslieferungs-Heilung #610 – fiel auf, dass **drei Unit-Tests echte Zeilen
+hineinschrieben**. Die teuerste stand seit dem 03.10.2026 im Buch:
+
+```json
+{"module": "publish_gate", "action": "gate",
+ "input": {"candidates": ["2026-09-07-r5-live"]},
+ "output": {"gated": ["2026-09-07-r5-live"], "demoted": ["2026-09-07-r5-live"]}}
+```
+
+Ein am Gate verworfener Live-Artikel, den es nie gab – `2026-09-07-r5-live` ist
+eine Test-Fixture. Vier weitere Zeilen bescheinigten `GROQ_API_KEY` einen Erfolg
+`via content-engine-v2`, obwohl in CI ausschließlich `pinterest-ai.yml` und
+`pinterest-token.yml` `--record-success` aufrufen, und nur für
+`PINTEREST_TOKEN_KEY`. Genau die „fremde Erfolgsmeldung", die `secrets_age_guard`
+selbst als `declared_foreign` abwertet, stand damit als Beweis im Buch.
+
+- **Die Lehre ist die Schwester von C15:** Dort darf ein Beweislauf nicht
+  heilen, was er prüft. Hier darf er nicht behaupten, was nie geschah. Beides
+  sind Fälle, in denen die Messung ihre eigene Grundlage verändert.
+- **Warum drei Stellen nicht reichen:** `run_gate()` → `publish_gate` →
+  **Subprozess** `affiliate_profi_check.py --json`. Ein `mock.patch.object` im
+  Testprozess erreicht das Kind nicht. Deshalb liegt der Vertrag in der
+  **Umgebung**, die sich in jedes Kind erbt:
+  `FFC_AUDIT_DIR` (Ziel umlenken) und `FFC_AUDIT_DISABLE` (harter No-Op).
+- **Eine Zeile fehlt nicht, sie liegt woanders:** Die Sandbox schaltet das
+  Protokollieren nicht ab. `beweis_ledger_unangetastet()` liefert den Pfad, und
+  die Tests lesen die umgelenkte Zeile ausdrücklich zurück – sonst ginge eine
+  zu grobe Stummschaltung als Heilung durch (Schein-Sicherheit).
+- **Die dritte Leckstelle war latent:** `pg.main()` schreibt den gate-Entscheid
+  nur, wenn ein Kandidat scheitert. Greift die R5-Heilung, bleibt `gated` leer.
+  Der Pfad ist damit zufallsabhängig – und gerade deshalb nicht durch
+  „passiert bei mir nicht" widerlegt. Die committete Zeile vom 03.10.2026 ist
+  der Beweis, dass er feuert.
+- **Gebrauch in Tests:**
+  ```python
+  from repo_isolation import beweis_ledger_unangetastet
+
+  with beweis_ledger_unangetastet("bestand_gate"):
+      findings, errors = bg.run_gate()
+  ```
+  Der Block bricht mit AssertionError ab, sobald im echten `data/audit/` eine
+  Zeile entsteht, wächst oder verschwindet – der Beweis läuft **nach** dem
+  Block, also auch dann, wenn die Prüfung selbst wirft. Das ältere Muster
+  `patch.object(audit_log, "log_event")` bleibt gültig.
+- **Empirisch statt statisch:** `publication-reliability-tests.yml` prüft nach
+  dem Suite-Lauf `git status --porcelain -- data/audit` und wird rot, wenn auch
+  nur eine Zeile entsteht – auch nach einem fehlgeschlagenen Testlauf
+  (`if: !cancelled()`). Eine statische Regel allein würde nur bekannte Muster
+  finden; die Leitplanke findet jeden künftigen.
+- **Vertrag:** Regel **C27** in `governance_contract.py` friert Engpass,
+  Sandbox, Regressionstest und Leitplanke ein; sabotierte Fassungen werden im
+  Kontrakt-Selbsttest rot. Die Wache in
+  `test_audit_ledger_isolation.py` meldet zusätzlich jeden Test, der einen
+  bekannten Einstieg (`bestand_gate.run_gate`, `secrets_age_guard
+  ._record_success`, `publish_gate.main`, `audit_log.log_event`) ohne Sandbox
+  aufruft – mit Datei und Zeile.
+- Bedienung: `python3 scripts/audit_log.py --selftest` ·
+  `python3 scripts/repo_isolation.py --selftest` ·
+  `python3 -m unittest scripts.tests.test_audit_ledger_isolation`.
+  Vorgangsbericht: `BEWEIS-LEDGER-ISOLATION-C27-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
 
 ## Wichtige Konventionen
 
