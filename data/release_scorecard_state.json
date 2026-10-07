@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-07T12:57:49Z",
+  "generated_at": "2026-10-07T13:34:08Z",
   "modus": "kandidaten",
-  "commit": "28fe5a27eddfe74ea5b7c91d4888f8c4e3413da2",
+  "commit": "27fee06e361a7f72f7cc1f1707422829064f27a6",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "6dd3aadb75b0ccfe761305211a669a7c31cc6dc31a3baeab4055c750b4c98d87",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
@@ -565,25 +565,8 @@
       "naechste_pruefung": "2026-10-28",
       "siegel_drift": "unverändert"
     },
-    "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "d2e91b1710894956b58166a68016539b358b7929f6b1c58fb86a17986160a7ae",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "standard",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "nicht erforderlich",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
-    },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
-      "sha256": "66afc7a3a94dc16f03f5acd1ecb0ff795a03ac2d1e2138686a91d6da6de2dd8e",
+      "sha256": "6c0caa30af13607d6d9dc91fea7639b39883be8d9cf24ba5e57b42405fdf5bb7",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -597,7 +580,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
       "sha256": "d5b4906f8761bd9de1d585a584e73538778de15413b867f8c1cafed715fe06d1",
@@ -683,6 +666,23 @@
       },
       "naechste_pruefung": "2026-11-03",
       "siegel_drift": "unverändert"
+    },
+    "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
+      "sha256": "0fd409f2f94ca93e5f04495275bcee687cf4b5000406378745e97bedc1198857",
+      "urteil": "warnung",
+      "risikoklasse": "erhoeht",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     }
   }
 }
