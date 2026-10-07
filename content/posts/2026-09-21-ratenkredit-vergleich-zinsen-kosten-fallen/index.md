@@ -50,7 +50,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "42b77ec12f606173bb08e025c33aa50467757d6a118c5227b5e48a46d7e4e416"
+  inhalt_sha256: "1b54a68f87dcd76ea607cfa6baacc53a7a20196e0e77c5c2b0ddeffe5da637ce"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand Primärquelle Bundesbank-Zinsstatistik sowie Verbraucherzentrale und § 502 BGB; Zinssatz auf Juli 2026 korrigiert, Rechenfehler im Umschuldungsbeispiel behoben, alle Annuitäten nachgerechnet"

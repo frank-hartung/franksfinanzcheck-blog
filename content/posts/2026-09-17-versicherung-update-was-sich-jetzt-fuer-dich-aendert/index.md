@@ -50,7 +50,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "5c5a6861e520e9438cbab4bc67cd451bf6ece3b21c91b454fb5e2f219d7daae3"
+  inhalt_sha256: "9c0b0d564df2a0fc43ef118127d7a1ac6a2a7f53bc48158d8d702aac8d1082b7"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, § 40 VVG); Fristen- und Sonderkündigungs-Aussagen belegt, Beispielrechnungen nachgerechnet"

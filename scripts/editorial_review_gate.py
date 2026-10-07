@@ -56,6 +56,32 @@ MIN_WORDS_BEFORE_AFFILIATE = 600
 MIN_H2_BEFORE_AFFILIATE = 2
 MIN_ANCHOR_LENGTH = 12
 
+# Typografische Normalisierung: Geschütztes Leerzeichen (U+00A0), schmales
+# geschütztes Leerzeichen (U+202F) und verwandte Varianten sind im Blog
+# Pflicht zwischen Zahl und Einheit (fix_spaces.py, spellcheck). Für die
+# YMYL-Prüfung sind sie inhaltlich identisch mit einem normalen Leerzeichen –
+# andernfalls bricht jede automatische Typografie-Korrektur das Siegel (E17)
+# und die Ankerprüfung (E13/E18/E19). Premium-Fix #613.
+_NORMALIZE_TABLE = str.maketrans({
+    "\u00a0": " ",  # NBSP
+    "\u202f": " ",  # NARROW NBSP
+    "\u2007": " ",  # FIGURE SPACE
+    "\u2009": " ",  # THIN SPACE
+    "\ufeff": " ",  # ZERO WIDTH NBSP
+})
+
+
+def _normalize_for_match(text: str) -> str:
+    if not text:
+        return ""
+    return text.translate(_NORMALIZE_TABLE)
+
+
+def _normalize_for_fingerprint(text: str) -> str:
+    if not text:
+        return ""
+    return text.replace("\r\n", "\n").translate(_NORMALIZE_TABLE).strip()
+
 # Aussagen, bei denen generische KI-Texte besonders häufig unzulässig
 # pauschalisieren. Jede Fundstelle muss im Prüfprotokoll auf eine konkrete,
 # sichtbare Aussage und deren Quellen abgebildet sein.
@@ -228,7 +254,7 @@ def content_fingerprint(fm: dict, body: str) -> str:
         "author": fm.get("author"),
         "quellen": fm.get("quellen") or [],
         "redaktionelle_pruefung": review,
-        "body": body.replace("\r\n", "\n").strip(),
+        "body": _normalize_for_fingerprint(body),
     }
     payload = json.dumps(_json_safe(relevant), ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"))
@@ -419,11 +445,11 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
         if len(anchor) < MIN_ANCHOR_LENGTH:
             findings.append(_finding(
                 "E18", f"geprüfte Aussage {pos}: eindeutiger Textanker fehlt/ist zu kurz"))
-        elif anchor.casefold() not in body.casefold():
+        elif _normalize_for_match(anchor).casefold() not in _normalize_for_match(body).casefold():
             findings.append(_finding(
                 "E18", f"geprüfte Aussage {pos}: Textanker kommt im Artikel nicht vor"))
         else:
-            claim_anchors.append(anchor.casefold())
+            claim_anchors.append(_normalize_for_match(anchor).casefold())
         if len(check) < 10:
             findings.append(_finding(
                 "E18", f"geprüfte Aussage {pos}: konkretes Prüfergebnis fehlt"))
@@ -434,7 +460,7 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
     sentences = _body_sentences(body)
     for sentence in sentences:
         if any(pattern.search(sentence) for pattern in BLANKET_CLAIM_PATTERNS):
-            folded = sentence.casefold()
+            folded = _normalize_for_match(sentence).casefold()
             if not any(anchor in folded for anchor in claim_anchors):
                 findings.append(_finding(
                     "E18", "pauschale/entscheidungsrelevante Aussage ohne geprüften "
@@ -468,11 +494,11 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
         if len(anchor) < MIN_ANCHOR_LENGTH:
             findings.append(_finding(
                 "E13", f"geprüfte Zahl {pos}: eindeutige Fundstelle fehlt/ist zu kurz"))
-        elif anchor.casefold() not in body.casefold():
+        elif _normalize_for_match(anchor).casefold() not in _normalize_for_match(body).casefold():
             findings.append(_finding(
                 "E13", f"geprüfte Zahl {pos}: Fundstelle kommt im Artikel nicht vor"))
         else:
-            figure_anchors.append(anchor.casefold())
+            figure_anchors.append(_normalize_for_match(anchor).casefold())
         refs = claim.get("quellen") or []
         if isinstance(refs, str):
             refs = [refs]
@@ -493,11 +519,17 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
     # Jede materielle Zahl im Artikel (Euro/Prozent) muss über eine exakte
     # Fundstelle im Zahlenprotokoll erfasst sein. Ein allgemeines „geprüft“
     # neben einer Quellenliste reicht ausdrücklich nicht.
+    # Premium-Fix #613: Fundstelle darf länger als Satz sein (Satz in Fundstelle)
+    # – sonst meldet E19 fälschlich „40 € ohne Fundstelle“, obwohl die Fundstelle
+    # den Satz plus Erklärung enthält.
     for sentence in sentences:
         for number in MATERIAL_NUMBER_RE.findall(sentence):
-            folded = sentence.casefold()
-            token = number.casefold().strip()
-            if not any(anchor in folded and token in anchor for anchor in figure_anchors):
+            folded = _normalize_for_match(sentence).casefold()
+            token = _normalize_for_match(number).casefold().strip()
+            if not any(
+                (anchor in folded or folded in anchor) and token in anchor
+                for anchor in figure_anchors
+            ):
                 findings.append(_finding(
                     "E19", f"Zahl ohne Fundstelle im Prüfprotokoll: „{_short(sentence)}“"))
 
@@ -775,6 +807,20 @@ def selftest() -> list[str]:
         f["code"] == "E14" for f in contradicted["findings"]))
     missing = validate_article({"title": "Baufinanzierung", "author": "A"}, "Text", today=today)
     expect("fehlende Freigabe blockiert", missing["blocking"] and missing["risk"] == RISK_HIGH)
+
+    # Premium-Fix #613: Typografie darf das Siegel nicht brechen
+    body_nbsp = body.replace("10.000 Euro", "10.000\u00a0Euro")
+    fm_nbsp = copy.deepcopy(fm)
+    fm_nbsp["redaktionelle_pruefung"]["inhalt_sha256"] = content_fingerprint(fm, body_nbsp)
+    ok_nbsp = validate_article(copy.deepcopy(fm_nbsp), body_nbsp, today=today)
+    expect("NBSP im Body bricht Siegel nicht", not ok_nbsp["findings"] and ok_nbsp["approved"])
+    # Anker mit normalem Leerzeichen muss Body mit NBSP matchen
+    fm_space_anchor = copy.deepcopy(fm)
+    fm_space_anchor["redaktionelle_pruefung"]["gepruefte_zahlen"][0]["fundstelle"] = "Die Modellrate nutzt 10.000 Euro als freie Annahme."
+    fm_space_anchor["redaktionelle_pruefung"]["inhalt_sha256"] = content_fingerprint(fm_space_anchor, body_nbsp)
+    ok_anchor = validate_article(fm_space_anchor, body_nbsp, today=today)
+    expect("Anker mit Space matcht Body mit NBSP", not any(f["code"] == "E13" for f in ok_anchor["findings"]))
+
     return errors
 
 
