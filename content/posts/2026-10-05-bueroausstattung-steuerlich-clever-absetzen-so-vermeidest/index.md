@@ -1,9 +1,9 @@
 ---
 title: "Büroausstattung steuerlich clever absetzen: So geht's"
 description: "Büroausstattung steuerlich clever absetzen: Welche Geräte sofort zählen, wann du abschreiben musst und welche fünf Fehler dich bares Geld kosten."
-date: 2026-10-05T17:22:26Z
-draft: true
-reserve: true
+date: 2026-10-07T13:32:02Z
+draft: false
+reserve_published: 2026-10-07
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

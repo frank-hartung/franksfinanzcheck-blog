@@ -4,3 +4,4 @@
 {"ts": "2026-10-02T19:33:56Z", "ready": 0, "target": 6, "pool": 3, "lauf": "lokal", "blocker": ["2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen", "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss", "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure"], "themen": 0}
 {"ts": "2026-10-02T20:21:46Z", "ready": 6, "target": 6, "pool": 6, "lauf": "lokal", "blocker": [], "themen": 6}
 {"ts": "2026-10-02T20:55:40Z", "ready": 6, "target": 6, "pool": 6, "lauf": "lokal", "blocker": [], "themen": 6}
+{"ts": "2026-10-07T13:32:10Z", "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit", "ereignis": "zurueck_in_den_pool", "grund": "Redaktions-Standard: RS2, RS3"}
