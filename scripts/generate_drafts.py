@@ -439,6 +439,41 @@ PROFI_FLOSKELN = [
 ]
 
 
+def lesbarkeits_befund(body: str):
+    """Flesch-Amstad des Rohtexts gegen die IMPORTIERTE Schwelle (#585).
+
+    Rückgabe: Befund-Text oder None (über der Schwelle). Jeder Messfehler ist
+    ein Befund – „nicht gemessen“ ist niemals „freigegeben“ (V3, #607).
+
+    WARUM HIER (WF-D4E0, #612): Das Geburts-Gate („Profi-Gate“) prüfte Länge,
+    Module, Keywords und Struktur – aber nicht die Regel, die über die
+    Veröffentlichung entscheidet. Genau diese Lücke erzeugte die Dauer-Engpässe
+    der Reserve: Kandidaten wurden mit Flesch 52–60 GEBOREN, die Zertifizierung
+    (hartes Gate, `readability_check.NEW_FLESCH_MIN`) wies sie danach
+    geschlossen zurück, und der Vorrat fiel unter das Ziel – der harte
+    End-Gate „Stock shortage must not look successful“ wurde Nacht für Nacht
+    rot (Issues #513, #609, #612). Verhindern statt protokollieren: Was die
+    Zertifizierung ablehnt, darf gar nicht erst als Rohtext entstehen.
+    """
+    try:
+        import readability_check as rc      # Import HIER: Modul bleibt leicht
+        satz = rc.parse_article('---\ntitle: "geburts-messung"\n---\n\n'
+                                + (body or ""), "geburts-gate/index.md")
+        if not satz:
+            return ("Lesbarkeit nicht messbar (Rohtext ohne Grenzen) – "
+                    "fail-closed (V3)")
+        wert = rc.analyze(satz).get("flesch")
+    except Exception as exc:  # noqa: BLE001 – Messfehler ist ein Befund
+        return (f"Lesbarkeit nicht messbar ({type(exc).__name__}) – "
+                f"fail-closed (V3)")
+    if wert is None or wert < rc.NEW_FLESCH_MIN:
+        zahl = f"{wert:.1f}" if isinstance(wert, (int, float)) else "nicht messbar"
+        return (f"Lesbarkeit: Flesch {zahl} < {rc.NEW_FLESCH_MIN:g} "
+                f"(hartes Publish-Kriterium R6/#585) – kürzere Sätze und "
+                f"alltägliche Wörter statt langer Komposita")
+    return None
+
+
 def profi_quality_ok(body, keywords=None):
     """Prüft einen frisch generierten Artikel auf Profi-Niveau.
     Liefert (ok, probleme). Wird in der Regenerierungs-Schleife genutzt."""
@@ -463,6 +498,13 @@ def profi_quality_ok(body, keywords=None):
     floskeln = [f for f in PROFI_FLOSKELN if f in text]
     if floskeln:
         problems.append(f"KI-Floskeln: {', '.join(floskeln[:2])}")
+    # WF-D4E0 (#612): Die Lesbarkeit ist ein HARTES Publish-Kriterium (#585)
+    # und fehlte bis hier – Texte wurden unter der Schwelle geboren und
+    # mussten nachgelagert geheilt werden (oder blieben liegen). Die Messung
+    # nutzt ausschließlich die importierte SSOT-Schwelle, keine zweite Zahl.
+    lesbarkeit = lesbarkeits_befund(body)
+    if lesbarkeit:
+        problems.append(lesbarkeit)
     if keywords:
         kws = [k.strip().strip('"').lower() for k in keywords if k.strip()]
         if kws and kws[0] not in text:
@@ -657,7 +699,7 @@ PROVIDERS = [
 ]
 
 
-def generate_article_text(topic, angle, perspective=None, pin=None, keywords=None, pillar=None):
+def generate_article_text(topic, angle, perspective=None, pin=None, keywords=None, pillar=None, hinweise=None):
     """Baut den Prompt und ruft die KI auf. Liefert (rohtext, provider).
 
     - angle:      Schreibstil (Ratgeber, Vergleich, FAQ …)
@@ -666,6 +708,10 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
                   der Artikel muss eigenständig formuliert sein.
     - keywords:   Ziel-Keywords – der Artikel soll sie natürlich einbauen
                   (automatische Keyword-Optimierung neuer Artikel).
+    - hinweise:   konkrete Befunde des VORHERIGEN Versuchs (z. B. gemessene
+                  Lesbarkeit, fehlende Module). Sie gehen als Korrektur-Auftrag
+                  in den Prompt, statt denselben Fehler blind neu zu würfeln
+                  (WF-D4E0, #612). `None` = erster Versuch.
     """
     if os.environ.get("DEMO_MODE") == "1":
         return demo_article(topic, angle), "Demo (ohne API-Key)"
@@ -755,6 +801,18 @@ def generate_article_text(topic, angle, perspective=None, pin=None, keywords=Non
             "transparent hergeleitete Modellannahme verwenden. Verwende keinen als aktuell "
             "bezeichneten Artikelstand vor " + str(current_year) + ".\n"
         )
+    # KORREKTUR-AUFTRAG (WF-D4E0, #612): Der vorherige Versuch wurde vom
+    # Geburts-Gate mit KONKRETEN Befunden abgelehnt. Blind neu zu würfeln
+    # verschwendet Kontingent und trifft dieselbe Regel mit derselben
+    # Wahrscheinlichkeit wieder; dieser Block macht aus dem Retry einen
+    # Auftrag. Leer (None/[]), wenn es der erste Versuch ist.
+    korrektur_block = ""
+    befunde = [str(h).strip() for h in (hinweise or []) if str(h).strip()]
+    if befunde:
+        korrektur_block = (
+            "\nKORREKTUR-AUFTRAG – der vorige Versuch wurde ABGELEHNT. Behebe "
+            "GENAU diese Punkte und ändere dabei nichts, was schon gut war:\n"
+            + "\n".join(f"- {b}" for b in befunde[:6]) + "\n")
     prompt = f"""Schreibe einen EINZIGARTIGEN, hilfreichen deutschen Blog-Artikel zum Thema:
 "{topic}"
 
@@ -791,6 +849,14 @@ Ab Zeile 3: Der Artikel in Markdown:
 - 1.500 bis 2.200 Wörter insgesamt (mindestens 1.400 Wörter / 10.000 Zeichen – darunter gilt der Artikel als zu kurz und wird abgelehnt). Zielkorridor Premium: 12.000–18.000 Zeichen Fließtext. Substanz, keine Floskeln.
 - Absätze max. 3–4 Sätze (eine Idee pro Absatz), aktive Sprache ("du"),
   kurze Sätze (max. ~20 Wörter); nach einem langen Satz folgen 1–2 kurze (Satzrhythmus)
+- LESBARKEIT ist ein MESSBARES, hartes Kriterium (Flesch-Amstad nach Amstad-Formel,
+  Publish-Schwelle – an ihr wird der Artikel gemessen, bevor er erscheint):
+  Ø Satzlänge höchstens 12 Wörter, Ø höchstens ~1,9 Silben je Wort. Konkret:
+  ersetzt lange Komposita durch Alltagswörter („Wohngebäudeversicherung“ → „Hausrat“;
+  „Verbraucherverhalten“ → „Verhalten“), zerlegt Bandwurmsätze an „und/aber/denn/doch/
+  sondern“ in zwei Sätze und streicht Füllphrasen („im Rahmen von“, „zum jetzigen
+  Zeitpunkt“). Deutsche Alltagssprache schlägt Amtsdeutsch: „nutzen“ statt „Verwendung
+  finden“, „Kosten“ statt „Kostenaufwendungen“.
 - KEINE Komma-Listen: nie mehr als 15 Begriffe in einer Aufzählung hintereinander;
   stattdessen Tabellen oder Listen mit je einem erklärenden Satz
 - TERMINOLOGIE: pro Artikel EINEN Leitbegriff für das Hauptkonzept wählen und
@@ -807,7 +873,7 @@ Ab Zeile 3: Der Artikel in Markdown:
 - KEINE Links einfügen, KEINE konkreten Zahlen erfinden
 - Deutsche Orthografie: korrekte Groß-/Kleinschreibung, korrekte Anführungszeichen ("…")
 - Originalität ist Pflicht: eigener Wortlaut, eigene Beispiele, eigene Abschnittsfolge
-"""
+{korrektur_block}"""
     forced = os.environ.get("AI_PROVIDER")
     for name, fn in PROVIDERS:
         if forced and forced.lower() not in name.lower():
@@ -1053,10 +1119,12 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
                 reason = f"zu ähnlich zum Pinterest-Pin ({hits} gleiche Phrasen)"
                 for ex in examples:
                     print(f"    → „{ex}…“")
+        letzte_befunde = []
         if not reason:
             ok_profi, prob = profi_quality_ok(body, keywords)
             if not ok_profi:
                 reason = "Profi-Qualität nicht erreicht: " + "; ".join(prob)
+                letzte_befunde = list(prob)
         if reason:
             print(f"  ⚠ {reason} (Versuch {attempt}/3)")
             print(f"  ↻ Generiere mit anderem Stil neu …")
@@ -1064,7 +1132,8 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
             new_angle = random.choice(other_angles) if other_angles else angle
             raw, provider_name = generate_article_text(topic, new_angle,
                                                        perspective=random.choice(PERSPECTIVES),
-                                                       pin=pin, keywords=keywords)
+                                                       pin=pin, keywords=keywords,
+                                                       hinweise=letzte_befunde or None)
             if not raw:
                 return False
             angle = new_angle

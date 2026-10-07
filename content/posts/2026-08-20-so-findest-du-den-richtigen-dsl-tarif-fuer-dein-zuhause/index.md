@@ -172,7 +172,7 @@ Falls dein WLAN das Nadelöhr ist, schau hier rein: [WLAN verbessern: So bringst
 ## Vier Regeln vor der Unterschrift
 
 ### 1. Nur den Effektivpreis vergleichen
-Lass dich nicht von "0 Euro in den ersten Monaten" blenden. Die Wahrheit steht in der Kalkulation über 24 Monate.
+Lass dich nicht von "0 € in den ersten Monaten" blenden. Die Wahrheit steht in der Kalkulation über 24 Monate.
 
 ### 2. Den Wechsel möglichst vom neuen Anbieter steuern lassen
 In der Regel übernimmt der neue Provider die Kündigung beim alten Anbieter und sorgt für einen nahtlosen Übergang. Das spart Nerven und verhindert Tage ohne Internet. Details dazu hier: [Praxis-Tipps beim DSL- und Internetwechsel](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/).
@@ -192,7 +192,7 @@ In der Regel genügen hier **50 bis 100 Mbit/s**. Das reicht für zwei parallele
 Wenn Gaming, Netflix und Homeoffice gleichzeitig stattfinden, sind **100 bis 250 Mbit/s** die sicherste Wahl, um Frust zu vermeiden.
 
 ### Profil 3: Power-User oder kreative Berufe
-Wer professionell streamt oder große Datenmengen bewegt, sollte auf **Glasfaser oder High-Speed-Kabel mit mindestens 250-500 Mbit/s** setzen, idealerweise mit hohem Upload-Anteil.
+Wer professionell streamt oder große Datenmengen bewegt, sollte auf **Glasfaser oder High-Speed-Kabel mit mindestens 250–500 Mbit/s** setzen, idealerweise mit hohem Upload-Anteil.
 
 ### Profil 4: Preisfokussierte Haushalte
 Hier steht die Kostenoptimierung im Vordergrund. Oft ist ein dauerhaft günstiger 50-Mbit/s-Tarif ohne Schnickschnack die beste Wahl für das Budget.

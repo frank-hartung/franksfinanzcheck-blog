@@ -146,30 +146,30 @@ Der Markt unterscheidet vier grundlegende Tarifmodelle. Die folgende Matrix zeig
       <tr>
         <td><strong>12-Monats-Festpreis</strong></td>
         <td>Fester Arbeitspreis für 12 Monate, monatliche Kündigung danach</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Sehr hoch</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Sehr hoch</span></td>
         <td>Haushalte, die maximale Planungssicherheit vor dem Winter wollen</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Standard-Empfehlung</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Standard-Empfehlung</span></td>
       </tr>
       <tr>
         <td><strong>Dynamischer Börsenstromtarif</strong></td>
         <td>Stündliche Abrechnung nach EPEX Spot Börsenpreisen</td>
-        <td><span class="ff-decision-badge ff-decision-badge--warn">Variabel</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Variabel</span></td>
         <td>Haushalte mit Smart Meter, Wärmepumpe, Heimspeicher oder E-Auto</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Top bei steuerbarer Last</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Top bei steuerbarer Last</span></td>
       </tr>
       <tr>
         <td><strong>Wärmepumpenstrom (§ 14a EnWG)</strong></td>
         <td>Separater Zählertarif mit reduzierten Netzentgelten</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Hoch</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Hoch</span></td>
         <td>Haushalte mit eigener Wärmepumpe ab ca. 3.000 kWh WP-Strom</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Pflicht-Check für Eigentümer</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Pflicht-Check für Eigentümer</span></td>
       </tr>
       <tr>
         <td><strong>Örtliche Grundversorgung</strong></td>
         <td>Gesetzlicher Standardtarif, 2 Wochen Kündigungsfrist</td>
-        <td><span class="ff-decision-badge ff-decision-badge--warn">Niedrig</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Niedrig</span></td>
         <td>Nur als Übergangslösung bei kurzfristigem Umzug</td>
-        <td><span class="ff-decision-badge ff-decision-badge--no">Zu teuer (Wechseln!)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – no">Zu teuer (Wechseln!)</span></td>
       </tr>
     </tbody>
   </table>

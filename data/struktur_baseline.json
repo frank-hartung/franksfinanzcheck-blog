@@ -1,7 +1,7 @@
 {
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "mikro": 7,
+      "mikro": 6,
       "serien": 0,
       "ueberlang": false
     },
@@ -47,11 +47,6 @@
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-08-18-geld-sparen-im-alltag-einfache-tipps-die-jeder-umsetzen-kann": {
-      "mikro": 4,
       "serien": 0,
       "ueberlang": false
     },
@@ -120,11 +115,6 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-09-03-hausratversicherung-kosten-leistungen-vergleich": {
-      "mikro": 3,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
       "mikro": 3,
       "serien": 0,
@@ -151,17 +141,12 @@
       "ueberlang": false
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "mikro": 10,
+      "mikro": 9,
       "serien": 0,
       "ueberlang": false
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-10-energie-update-was-sich-jetzt-fuer-dich-aendert": {
-      "mikro": 6,
       "serien": 0,
       "ueberlang": false
     },
@@ -181,12 +166,12 @@
       "ueberlang": false
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "mikro": 9,
+      "mikro": 7,
       "serien": 0,
       "ueberlang": false
     },
     "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert": {
-      "mikro": 30,
+      "mikro": 29,
       "serien": 1,
       "ueberlang": false
     },
@@ -221,16 +206,11 @@
       "ueberlang": false
     },
     "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten": {
-      "mikro": 17,
+      "mikro": 16,
       "serien": 0,
       "ueberlang": false
     },
     "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich": {
-      "mikro": 31,
-      "serien": 1,
-      "ueberlang": false
-    },
-    "2026-09-22-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
       "mikro": 30,
       "serien": 1,
       "ueberlang": false
@@ -241,21 +221,11 @@
       "ueberlang": false
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
-      "mikro": 19,
+      "mikro": 18,
       "serien": 1,
       "ueberlang": false
     },
-    "2026-09-27-rente-2026-so-baust-du-heute-deine-sichere-altersvorsorge": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-28-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
       "mikro": 2,
       "serien": 0,
       "ueberlang": false
@@ -265,48 +235,13 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-09-30-autokosten-senken-so-sparst-du-hunderte-euro-jaehrlich": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-30-e-auto-ladekosten-senken-strategien-fuer-guenstigen-strom": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-30-e-bike-sichern-lohnt-sich-eine-fahrradversicherung": {
-      "mikro": 7,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
-    "2026-09-30-neujahrsvorsaetze-geld-8-ziele-die-2027-wirklich-klappen": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-30-so-wechselst-du-oekostrom-anbieter-guenstig-serioes-im-uebe": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-09-30-weihnachten-budget-planen-entspannt-feiern-ohne-schulden": {
-      "mikro": 3,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-02-die-50-30-20-regel-einfach-erklaert": {
-      "mikro": 3,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-02-hausratversicherung-optimieren-schutz-pruefen-und-sparen": {
-      "mikro": 1,
+    "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
@@ -315,13 +250,8 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-10-02-reisekrankenversicherung-so-vermeidest-du-teure": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-10-02-urlaubskasse-aufbessern-reisebudget-ohne-nebenjob-finden": {
-      "mikro": 1,
+    "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
@@ -334,6 +264,106 @@
       "mikro": 2,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
+      "mikro": 6,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
+      "mikro": 7,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
+      "mikro": 6,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert": {
+      "mikro": 3,
+      "serien": 1,
+      "ueberlang": false
+    },
+    "2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
+      "mikro": 8,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+      "mikro": 8,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
+      "mikro": 9,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
+      "mikro": 9,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -342,5 +372,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-10-05"
+  "stand": "2026-10-07"
 }

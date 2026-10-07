@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T16:41:56.675371+00:00",
-  "head": "4b6d280",
+  "signed_at": "2026-10-07T16:43:16.619333+00:00",
+  "head": "915918a5",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -39,6 +39,7 @@
     "scripts/lesbarkeit_heiler.py": "26c981a10101bc15839cd338f8e504536e459673bff660fe32e4546bd93ec413",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
+    "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
     "scripts/redaktions_standard.py": "7df1aa4fd66288b6d12a9da0f621f4fd01f63c2b6acb80e8c2b2f02af57c92b5",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
@@ -50,34 +51,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "33dc724b7d293673ced30b0ced8fcb83ea896be4b3916b7b7c3d4332c351d040",
-  "audit_start_sha256": "6b1fc72778e93f9a266fbe284ce112a1ee1ca01e5bdc4fe8d6ef3bae13cd2807",
+  "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
+  "audit_start_sha256": "73ba7ca1bf954ae927372890348a980ca207d40f2baf6065cc9daabf9fac3ae2",
   "audit": [
-    {
-      "date": "2026-10-02",
-      "art": "set-current",
-      "head": "fd89544",
-      "geaendert": [
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "bada5c6",
-              "datum": "2026-10-02",
-              "betreff": "feat(werkzeuge): eigenständige Tool-Erfahrung unter /werkzeuge/ (Befund 5)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "55d81ea72666c28b68cb8308c923ea42928ec096a5dd45217067959548d83cc2",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-02",
       "art": "set-current",
@@ -106,7 +82,7 @@
         }
       ],
       "files_sha256": "4b24e330ba76fdcb3968a567c17c613a8e131cd6950e8372f696ba6b5d99d1c5",
-      "prev_sha256": "6b1fc72778e93f9a266fbe284ce112a1ee1ca01e5bdc4fe8d6ef3bae13cd2807"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-02",
@@ -415,7 +391,26 @@
     {
       "date": "2026-10-07",
       "art": "set-current",
-      "head": "4b6d280",
+      "head": "ab9c8223",
+      "geaendert": [
+        "scripts/politur_ruine_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/politur_ruine_heiler.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "ad3759dcbea0d4a425ded95769a2c3a8c9d321db4e9212b09926972247c7d3e2",
+      "prev_sha256": "d530fb31c18cd5c7d03124f34d0948416747f78b9041284caee369b9b329cec6"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "915918a5",
       "geaendert": [
         "scripts/redaktions_standard.py"
       ],
@@ -426,21 +421,26 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "4b6d280",
+              "sha": "4b6d2805",
               "datum": "2026-10-07",
               "betreff": "fix(ymyl): #613 – dauerhafte Premium-Heilung der YMYL-Prüfqueue"
             },
             {
-              "sha": "0d5ebc0",
+              "sha": "ca144d51",
               "datum": "2026-10-07",
-              "betreff": "fix(audit): #610-Nebenbefund – ein Testlauf fabriziert keine Beweise (C27) (#621)"
+              "betreff": "WF-54C4 #607: Publikations-Vertrag – KI-Heilung schreibt nicht mehr unter die Publish-Schwelle (#615)"
+            },
+            {
+              "sha": "69b2e757",
+              "datum": "2026-10-02",
+              "betreff": "feat: YMYL-Freigaben fail-closed absichern (#512)"
             }
           ],
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "d530fb31c18cd5c7d03124f34d0948416747f78b9041284caee369b9b329cec6",
-      "files_sha256": "33dc724b7d293673ced30b0ced8fcb83ea896be4b3916b7b7c3d4332c351d040"
+      "prev_sha256": "ce869a11a5af55ca072f0170a2c7cfb03f3bf42fe1b952e3e7a3bdb9b892130b",
+      "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b"
     }
   ]
 }

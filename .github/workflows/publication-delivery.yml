@@ -1,3 +1,49 @@
+# ============================================================
+#  PUBLICATION DELIVERY (öffentlicher Nachweis)
+#  ------------------------------------------------------------
+#  Misst die Auslieferungs-SLO: Sind die LIVE-Artikel des
+#  gemessenen Publikationstags (jüngster Publikationstag ≤ heute,
+#  SSOT cadence_guard) öffentlich in Sitemap UND Artikel-HTML
+#  erreichbar? Fällt der Nachweis rot, läuft eine begrenzte
+#  Wiederherstellung (Kadenz-Backstop + Deploy) und danach ein
+#  zweiter Beleg.
+#
+#  WF-7C1F #611 (07.10.2026) – DIE KLASSE GEHT DEM KANAL VOR
+#  ------------------------------------------------------------
+#  Am 05./06.10.2026 lief dieser Workflow zweimal rot. Der Beleg
+#  sprach für sich selbst: `source: 1`, `delivered: 1`,
+#  `errors: []` – die Auslieferung war vollständig, aber die
+#  QUELLE trug den gemessenen Montag (05.10.) nur mit 1/2 LIVE.
+#  Diesen Tag kann kein Lauf mehr heilen (Nachtragen von Inhalten
+#  ist verboten). Weil der rote Schritt „Missing public delivery
+#  is a failed run“ die Ursache nicht benannte, legte das zentrale
+#  Fehler-Alerting das generische Wartungs-Issue #611 mit
+#  API-Key-/Transient-Runbook an – eine Meldung an den falschen
+#  Besitzer, obwohl der Fachkanal `engine-deficit` (WF-1F8C
+#  #602/#608) für genau diesen Zustand existiert.
+#
+#  Deshalb endet der Workflow nicht mehr in einem Sammel-Boolean:
+#  `publication_check.py --klasse` liest den GÜLTIGEN Beleg (der
+#  zweite, wenn die Wiederherstellung lief) und der Lauf antwortet
+#  der Klasse mit einem eigenen, ehrlichen Schritt:
+#
+#    * quelle_unter  → Schritt „TAGESDEFIZIT – Fachmeldung
+#      engine-deficit ist zuständig (Auslieferungs-SLO)“: belegt
+#      den Fachkanal (engine_issue.py --deficit, Frischebeweis für
+#      die Stumm-Schaltung des Alertings) und bleibt rot.
+#    * quelle_ueber  → eigener roter Schritt „KADENZ-ÜBERSCHUSS …“:
+#      das Kadenz-Gate stuft im nächsten Deploy zurück; kein
+#      API-Key-Runbook, keine stille Überpublikation.
+#    * auslieferung  → eigener roter Schritt „AUSLIEFERUNGS-DEFIZIT
+#      …“: Bestand im Zielband, öffentlich fehlt etwas – der
+#      Fachkanal ist „P1: Öffentliche Artikel-Auslieferung unter
+#      Mindestziel“ (#610), die Ursache liegt bei Deploy/CDN.
+#    * unbekannt     → fail-closed laut (kein lesbarer Beleg).
+#
+#  Der P1-Kanal (`publication_incident.py`) bleibt unverändert der
+#  Buchhalter des Tages; diese Klasse bestimmt nur, WER gerufen
+#  wird – und wer nicht.
+# ============================================================
 name: Publication Delivery (öffentlicher Nachweis)
 on:
   schedule:
@@ -61,9 +107,52 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RECEIPT_OK: true
         run: python3 scripts/publication_incident.py
-      - name: Missing public delivery is a failed run
+      # ============================================================
+      #  KLASSE STATT SAMMEL-BOOLEAN (WF-7C1F #611)
+      #  `tmp/publication-receipt.json` trägt immer den GÜLTIGEN Beleg:
+      #  Hat die Wiederherstellung einen zweiten Lauf erzeugt, steht
+      #  dessen Ergebnis in der Datei (der erste Beleg bleibt als
+      #  tagesgenaues Artefakt erhalten). Ohne Beleg ist die Klasse
+      #  `unbekannt` – und unbekannt ist laut, nie still.
+      # ============================================================
+      - name: Auslieferungsklasse des gültigen Belegs
+        id: klasse
+        if: ${{ !cancelled() }}
         run: |
-          if [ '${{ steps.receipt.outcome }}' = success ]; then
-            exit 0
-          fi
-          test '${{ steps.recovered_receipt.outcome }}' = success
+          set -uo pipefail
+          KLASSE="$(python3 scripts/publication_check.py --klasse \
+            --report tmp/publication-receipt.json 2>/dev/null || true)"
+          case "$KLASSE" in
+            ok|quelle_unter|quelle_ueber|auslieferung) ;;
+            *) KLASSE=unbekannt ;;
+          esac
+          echo "klasse=$KLASSE" >> "$GITHUB_OUTPUT"
+          echo "Auslieferungsklasse des gültigen Belegs: $KLASSE"
+      # Der Fachkanal wird VOR dem roten Schritt belegt: Das zentrale
+      # Fehler-Alerting schweigt nur, wenn der Kanal `engine-deficit` offen
+      # UND für diesen Lauf frisch aktualisiert nachweisbar ist (Regel aus
+      # #602). Der Schrittname trägt deshalb ausdrücklich beide Kennwörter
+      # („TAGESDEFIZIT“ + „engine-deficit“) – er ist der Zuordnungsvertrag.
+      - name: TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig (Auslieferungs-SLO)
+        if: ${{ !cancelled() && steps.klasse.outputs.klasse == 'quelle_unter' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Der Bestand trägt den gemessenen Tag nicht – das ist kein
+          # API-Key-Fehler und kein CDN-Lag. Der Besitzer ist die
+          # Defizit-Wache, die an jedem Kalendertag den jüngsten
+          # Publikationstag misst (WF-1F8C #608).
+          python3 scripts/engine_issue.py --deficit \
+            || echo "::warning::Zustandskanal konnte nicht belegt werden – das Fehler-Alerting meldet dann fail-open generisch (Melder-Defekt, kein Quotendefekt)."
+          echo "::error::TAGESDEFIZIT (WF-7C1F) – die Quelle liegt unter dem Mindestziel des gemessenen Publikationstags. Der Fachkanal ist das Issue mit Label engine-deficit; die Auslieferung war vollständig (delivered == source)."
+          exit 1
+      - name: KADENZ-ÜBERSCHUSS – Bestand über dem Tagesmaximum
+        if: ${{ !cancelled() && steps.klasse.outputs.klasse == 'quelle_ueber' }}
+        run: |
+          echo "::error::KADENZ-ÜBERSCHUSS (WF-7C1F) – der Bestand überfüllt den gemessenen Publikationstag (mehr LIVE als das Tagesmaximum 3). Besitzer ist das Kadenz-Gate (Mo/Mi/Fr, 2–3/Tag), das im nächsten Deploy zurückstuft; kein API-Key-Runbook, keine stille Überpublikation."
+          exit 1
+      - name: AUSLIEFERUNGS-DEFIZIT – öffentlicher Nachweis fehlt
+        if: ${{ !cancelled() && (steps.klasse.outputs.klasse == 'auslieferung' || steps.klasse.outputs.klasse == 'unbekannt') }}
+        run: |
+          echo "::error::AUSLIEFERUNGS-DEFIZIT (WF-7C1F) – der Bestand liegt im Zielband, öffentlich fehlt etwas (oder es gibt keinen lesbaren Beleg). Fachkanal ist „P1: Öffentliche Artikel-Auslieferung unter Mindestziel“; Ursache liegt bei Deploy/CDN bzw. beim Beleg selbst – kein Quotendefekt."
+          exit 1

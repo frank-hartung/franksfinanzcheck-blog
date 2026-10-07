@@ -144,7 +144,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 
 ## Typische Fehler beim DSL‑Wechsel – und wie du sie vermeidest
 
-| Fehler | Warum er kostet | Wie du ihn vermeidest |
+| Fehler | Warum er kostet | Wie du ihn [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) |
 |--------|----------------|-----------------------|
 | Kündigungsfrist übersehen | Vertragsbindung verlängert sich automatisch | Setze dir eine Erinnerungs‑E‑Mail 30 Tage vor Ablauf |
 | Mehrere Router gleichzeitig mieten | Doppelte Mietkosten | Nutze den vorhandenen Router, wenn er kompatibel ist |

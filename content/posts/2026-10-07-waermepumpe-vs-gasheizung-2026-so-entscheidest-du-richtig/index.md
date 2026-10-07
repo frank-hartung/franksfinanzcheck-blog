@@ -3,12 +3,13 @@ title: "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"
 description: Wärmepumpe oder Gasheizung? Wir zeigen, welche Anlage 2026 deine Heizkosten senken kann – klarer Heizung Vergleich. So sparst du jeden Monat bares Geld.
 date: 2026-10-07T10:28:02Z
 draft: true
-reserve: true
-tags: ["Heizkosten senken"]
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+reserve_blocked_at: 2026-10-07T16:07:55Z
+tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpe vs. Gasheizung 2026", "Gasheizung"]
+keywords: ["Wärmepumpe", "Heizung Vergleich", "Heizkosten senken", "Wärmepumpe vs. Gasheizung 2026", "Gasheizung", "entscheidest", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"
 pin_description: "*Werbung | Wärmepumpe oder Gasheizung? Wir zeigen, welche Anlage 2026 deine Heizkosten senken kann – klarer Heizung Vergleich. So sparst du jeden Monat bares Geld. Mehr Spartipps auf FranksFinanzcheck! #waermepumpe #heizungvergleich #heizkostensenken"
 ai_generated: true

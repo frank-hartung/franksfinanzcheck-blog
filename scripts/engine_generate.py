@@ -435,6 +435,20 @@ def _reserve_vorstufe_ok(body: str, probleme: list[str]) -> tuple[bool, list[str
     Struktur-/FAQ-/Floskel-/Modulfehler bleiben bereits an der Geburt hart.
     Ein absoluter Substanz-Floor verhindert, dass ein Gerüst teure Heilerzeit
     bindet.
+
+    Bewusst NICHT milde (Nachtrag 07.10.2026, WF-D4E0/#612): die Lesbarkeit.
+    Sie ist seit #585 ein HARTES Publish-Kriterium, hat seit #609 einen Heiler
+    mit Wirkungsprobe – und trotzdem bleibt sie an der Geburt streng. Grund
+    ist gemessen, nicht gemeint: Auf den echten Kandidaten des Vorrats bewegt
+    Stufe A des Lesbarkeits-Heilers nur ±0,1 Flesch-Punkte (Satzschnitt findet
+    bei Ø 9–13 Wörtern kaum eine Naht); über die Schwelle trägt dort allein
+    die KI-Stufe. Ein Text, der UNTER der Schwelle geboren wird, hängt damit
+    am Kontingent eines zweiten KI-Aufrufs – genau die Abhängigkeit, die den
+    Vorrat am 07.10.2026 unter das Ziel fallen ließ (#612: 2/6, sieben
+    Kandidaten an Flesch 53,1–59,9). Die Regel lautet deshalb: was die
+    Zertifizierung nachweislich ablehnt, entsteht gar nicht erst – der Versuch
+    wird verworfen und mit dem konkreten Befund als Korrektur-Auftrag neu
+    geschrieben (Retry mit Gedächtnis).
     """
     text = re.sub(r"[#*_>`|~\[\]()-]", " ", body or "")
     words = len(re.findall(r"\w+", text))
@@ -475,6 +489,12 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
     random.shuffle(providers)  # Modell-Rotation gegen Provider-Schwäche
 
     ursachen = []
+    # WF-D4E0 (#612): Der nächste Versuch erfährt, WARUM der vorige verworfen
+    # wurde. Vorher würfelte jede Wiederholung blind – mit derselben Regel
+    # verletzte sie dieselbe Schwelle mit derselben Wahrscheinlichkeit, und
+    # das Kontingent war nach drei Versuchen aufgebraucht. Die Befunde gehen
+    # jetzt als Korrektur-Auftrag in den Prompt (`generate_article_text`).
+    letzte_hinweise: list[str] = []
     for attempt in range(1, max_attempts + 1):
         provider = providers[(attempt - 1) % len(providers)]
         os.environ["AI_PROVIDER"] = provider
@@ -483,7 +503,7 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
         try:
             raw, provider_name = g.generate_article_text(
                 topic, angle, perspective=perspective, pin=pin,
-                keywords=keywords,
+                keywords=keywords, hinweise=letzte_hinweise or None,
             )
         except Exception as exc:  # noqa: BLE001 – kein Abbruch bei Provider-Fehler
             print(f"  ✗ Provider-Fehler ({provider}): {exc}")
@@ -520,6 +540,7 @@ def try_generate(topic, keywords, pin, used_titles, relaxed=False, max_attempts=
                     print(f"  ⚠ Profi-Gate: {'; '.join(prob[:3])} "
                           f"(Versuch {attempt}/{max_attempts}, {provider})")
                     ursachen.append(("inhalt", f"Profi-Gate: {'; '.join(prob[:2])}"))
+                    letzte_hinweise = list(prob)
                     continue
                 print("  🧰 Reserve-Vorstufe angenommen: substanzieller Rohtext, "
                       f"belegte Heiler folgen für {', '.join(vorstufe_heiler)} "

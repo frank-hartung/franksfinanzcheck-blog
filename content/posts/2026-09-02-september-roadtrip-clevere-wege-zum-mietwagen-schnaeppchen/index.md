@@ -68,7 +68,7 @@ Der Weg zum günstigen Leihwagen führt über den Vergleich. Viele buchen das er
 
 Der **Mietwagen-Tagespreis** schwankt ähnlich stark wie ein Flugticket. Meine Erfahrung: Wer antizyklisch sucht, gewinnt. Unter der Woche, vor allem dienstags und mittwochs, sind die Raten oft niedriger. Dahinter stecken Algorithmen. Sie reagieren auf die Masse, und die plant meist am Wochenende.
 
-Nutze Vergleichsportale, die viele Anbieter bündeln. Dort setzt du Filter für deine Wünsche, etwa Automatik oder Kindersitz. So vermeidest du Überraschungen bei der Endsumme. Ein niedriger Basispreis sagt wenig aus. Teure Extras machen ihn schnell zunichte.
+Nutze Vergleichsportale, die viele Anbieter bündeln. Dort setzt du Filter für deine Wünsche, etwa Automatik oder Kindersitz. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen bei der Endsumme. Ein niedriger Basispreis sagt wenig aus. Teure Extras machen ihn schnell zunichte.
 
 ## Die Bedeutung der Versicherungsoptionen
 

@@ -3,7 +3,8 @@ title: "Wie smart Home‑Geräte: deine Stromrechnung wirklich drücken"
 description: "Smart Home: Entdecke, welche Smart Home‑Lösungen Energie sparen, wie smarte Steckdosen funktionieren und wo typische Fehler lauern."
 date: 2026-10-07T10:31:02Z
 draft: true
-reserve: true
+reserve_blocked: "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -196,7 +197,7 @@ Die Zahlen zeigen, dass bereits eine moderate Ausstattung von Smart‑Home‑Kom
 |----------|----------|----------------------|----------------------------|-----------------------|
 | WLAN (2,4 GHz) | 2,4 GHz | 30 m (Innen) | 0,5–1 W (Idle) | kein Hub nötig |
 | Zigbee | 2,4 GHz | 10–20 m (Mesh) | 0,1–0,3 W | 30–60 € |
-SATZ: | Thread | 2,4 GHz | 10–20 m (Mesh) | 0,05–0,2 W | 40–80 € |
+| Thread | 2,4 GHz | 10–20 m (Mesh) | 0,05–0,2 W | 40–80 € |
 | Z‑Wave | 868 MHz | 30 m (Mesh) | 0,1–0,3 W | 25–50 € |
 
 **Fazit:** Für reine Energie‑Optimierung sind Zigbee und Thread am sparsamsten, weil sie im Idle‑Zustand kaum Strom ziehen. WLAN‑Geräte sind einfacher zu integrieren, kosten aber mehr im Dauerbetrieb.

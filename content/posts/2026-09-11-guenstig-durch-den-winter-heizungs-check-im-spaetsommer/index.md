@@ -207,7 +207,7 @@ Das Ziel ist keine Komplettoptimierung in einer Stunde. Du schaffst eine belastb
 - ungewöhnlich lauten mechanischen Geräuschen,
 - Arbeiten an Brenner, Gasleitung oder Abgasweg.
 
-Bei Gasgeruch vermeidest du Flammen und elektrische Schalter, öffnest Fenster, schließt wenn gefahrlos möglich die Gaszufuhr, verlässt das Gebäude und alarmierst von draußen Netzbetreiber oder Feuerwehr.
+Bei Gasgeruch [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Flammen und elektrische Schalter, öffnest Fenster, schließt wenn gefahrlos möglich die Gaszufuhr, verlässt das Gebäude und alarmierst von draußen Netzbetreiber oder Feuerwehr.
 
 ## Verbrauch nach dem Check beobachten
 
