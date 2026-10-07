@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-06 10:57:23 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-07 10:46:09 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 38 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
+**Geprüfte Live-Artikel:** 40 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -45,6 +45,8 @@
 | 2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor | 2 → 3 ✅ | /go/gas/ |
 | 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro | 2 → 3 ✅ | /go/gas/ |
+| 2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit | 3 → 3 ✅ | /go/tagesgeld/ |
+| 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp | 2 → 3 ✅ | /go/mietwagen/ |
 | 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig | 3 → 3 ✅ | /go/gas/ |
