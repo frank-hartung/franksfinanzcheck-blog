@@ -35,6 +35,7 @@ from __future__ import annotations
 import ast
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -428,6 +429,144 @@ class WacheGegenNeueLeckstellen(unittest.TestCase):
             """)
         self.assertEqual(["publish_gate.main()"],
                          self._ledger_einstiege(methode, echt))
+
+
+# --------------------------------------------------------------------- #
+# 4) Das Buch selbst: frei von Einträgen, die kein Betrieb erzeugen konnte
+# --------------------------------------------------------------------- #
+#: Fixture-Slugs der Test-Suite. Sie dürfen niemals in einem Betriebsbeweis
+#: stehen – es sind Etiketten, keine Artikel.
+FIXTURE_SLUGS = (
+    "2026-09-07-r5-live",
+    "2026-09-07-r5-hold",
+    "2026-09-07-r5-reserve",
+)
+
+
+def record_success_aufrufe() -> set:
+    """(VAR, proof_by)-Paare, die ein Workflow tatsächlich erzeugen kann.
+
+    Selbstlernend statt abgeschrieben: Gelesen wird, welche Workflows
+    `--record-success` überhaupt aufrufen und mit welchem `--proof-by`. Ein
+    Paar, das kein Workflow erzeugen kann, ist kein Betriebsbeweis – so war
+    der Nachweis für die vier GROQ-Zeilen vom 05.10.2026 geführt: Das Register
+    ERLAUBT `content-engine-v2` für GROQ_API_KEY, aber kein Workflow ruft es
+    auf. Erlaubt heißt nicht erfolgt.
+    """
+    paare = set()
+    for pfad in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+        text = pfad.read_text(encoding="utf-8")
+        # Backslash-Fortführung auflösen, wie die Shell sie sieht.
+        glatt = re.sub(r"\\\s*\n\s*", " ", text)
+        for m in re.finditer(
+                r"--record-success\s+(\S+)\s+--proof-by\s+([A-Za-z0-9_.-]+)", glatt):
+            paare.add((m.group(1), m.group(2)))
+    return paare
+
+
+def ledger_zeilen_mit_fund(finde):
+    """Alle Ledger-Zeilen, auf die `finde(entry, raw)` zutrifft."""
+    funde = []
+    for datei in sorted(LEDGER.glob("*.jsonl")):
+        for nummer, roh in enumerate(
+                datei.read_text(encoding="utf-8").splitlines(), 1):
+            roh = roh.strip()
+            if not roh:
+                continue
+            try:
+                eintrag = json.loads(roh)
+            except json.JSONDecodeError:
+                continue
+            grund = finde(eintrag, roh)
+            if grund:
+                funde.append(f"{datei.name}:{nummer} {grund}")
+    return funde
+
+
+class FabrizierteEintraege(unittest.TestCase):
+    """Bewacht den IST-Zustand des Buches, nicht nur den Schreibpfad.
+
+    Die Isolation oben verhindert neue fabrizierte Beweise. Diese Klasse
+    stellt sicher, dass die bereits aufgefundenen nicht zurückkehren – und
+    dass ein künftiger Eintrag derselben Art sofort auffällt.
+
+    Abgrenzung, empirisch erhoben am 07.10.2026: Ein gate-Entscheid für einen
+    Slug, der nicht in der Content-Historie steht, ist KEIN Beleg für eine
+    Fälschung. `publish_gate.discard_article()` löscht einen verworfenen neuen
+    Artikel (`shutil.rmtree`), bevor er je committet wird – 161 solcher Zeilen
+    sind echt. Entscheidend ist deshalb, ob der Slug eine Test-Fixture ist und
+    ob ein Workflow den Eintrag überhaupt erzeugen konnte.
+    """
+
+    def test_kein_fixture_slug_im_buch(self):
+        def finde(_eintrag, roh):
+            for slug in FIXTURE_SLUGS:
+                if slug in roh:
+                    return (f"nennt die Test-Fixture `{slug}` – ein Etikett aus "
+                            f"scripts/tests/, kein Artikel")
+            return ""
+
+        funde = ledger_zeilen_mit_fund(finde)
+        self.assertEqual([], funde, "\n".join(funde))
+
+    def test_record_success_nur_aus_echtem_workflow(self):
+        """Jede Erfolgsbescheinigung muss ein Workflow erzeugen können.
+
+        `secrets_age_guard` selbst wertet eine fremde Erfolgsmeldung als
+        `declared_foreign` ab; `social-autopilot.yml` hält fest: „Probe und
+        nicht `--record-success`: eine fremde Erfolgsmeldung gilt nicht."
+        Im Buch stand sie trotzdem – mit `quality: declared`, also aufgewertet.
+        """
+        erlaubt = record_success_aufrufe()
+        # Blindheits-Probe: Ohne erkennbaren Workflow-Aufruf wäre jede Zeile ein
+        # Fund und die Regel unbrauchbar – dann lieber laut scheitern.
+        self.assertTrue(erlaubt,
+                        "kein Workflow ruft --record-success auf – die Probe "
+                        "wäre blind (Parser prüfen)")
+
+        def finde(eintrag, _roh):
+            if eintrag.get("module") != "secrets_age_guard":
+                return ""
+            if eintrag.get("action") != "record-success":
+                return ""
+            eingabe = eintrag.get("input") or {}
+            paar = (eingabe.get("var"), eingabe.get("proof_by"))
+            if paar in erlaubt:
+                return ""
+            return (f"bescheinigt {paar[0]} einen Erfolg via `{paar[1]}` – kein "
+                    f"Workflow ruft `--record-success` dafür auf (erzeugbar: "
+                    f"{sorted(erlaubt)})")
+
+        funde = ledger_zeilen_mit_fund(finde)
+        self.assertEqual([], funde, "\n".join(funde))
+
+    def test_die_buchwache_ist_nicht_blind(self):
+        """Schein-Sicherheits-Probe: Die Wache muss anschlagen, sonst ist das
+        saubere Buch oben nur eine leere Menge."""
+        kunst = ('{"ts": "2026-10-03T18:26:51Z", "module": "publish_gate", '
+                 '"action": "gate", "input": {"candidates": '
+                 '["2026-09-07-r5-live"]}}')
+        self.assertTrue(any(slug in kunst for slug in FIXTURE_SLUGS))
+
+        erfunden = {"module": "secrets_age_guard", "action": "record-success",
+                    "input": {"var": "GROQ_API_KEY",
+                              "proof_by": "content-engine-v2"}}
+        erlaubt = record_success_aufrufe()
+        self.assertNotIn(("GROQ_API_KEY", "content-engine-v2"), erlaubt,
+                         "ein Workflow ruft das Paar inzwischen selbst auf – "
+                         "die Regel muss dann neu gelesen werden")
+
+    def test_echter_gate_entscheid_ist_kein_fund(self):
+        """Gegenrichtung: Ein gate-Entscheid für einen echten Artikel bleibt
+        stehen – auch wenn der Slug nicht in der Content-Historie steht, weil
+        `discard_article()` ihn nach dem Verwurf gelöscht hat."""
+        echt = {"module": "publish_gate", "action": "gate",
+                "input": {"candidates": [
+                    "2026-10-03-stromanbieter-pleite-so-sicherst-du-deine-"
+                    "stromversorgung"]}}
+        roh = json.dumps(echt, ensure_ascii=False)
+        self.assertFalse(any(slug in roh for slug in FIXTURE_SLUGS),
+                         "ein echter Artikel-Slug wird als Fixture behandelt")
 
 
 if __name__ == "__main__":

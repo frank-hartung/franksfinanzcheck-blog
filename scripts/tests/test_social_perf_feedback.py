@@ -157,13 +157,17 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
 
     Fixtures werden relativ zur GEPLANTEN Uhr gebaut – nie relativ zur echten
     Wanduhr. Der frühere Aufbau las `planner.berlin_now()` und plante
-    gleichzeitig für den 14.09.2026: Ab dem 01.10.2026 lag damit jeder
-    Fixture-Artikel hinter allen Slots, der Plan war leer und der Test rot –
-    ohne eine einzige Code-Änderung. Sichtbar wurde das nur in CI
-    (`publication-reliability-tests.yml` läuft ausschließlich auf Pull Requests),
-    weshalb die Bombe drei Wochen lang niemandem auffiel. Seither findet
+    gleichzeitig für den 14.09.2026: Solange das echte Heute nahe am gepinnten
+    Stichtag lag, fielen die Artikel noch ins Fenster `[now, now + horizon]`
+    und der Test war grün. Mit jedem Tag rückten sie heraus – am 07.10.2026 ab
+    ca. 19:00 Berliner Zeit war der Test rot, ab dem 08.10. jederzeit. Ein Test,
+    der mit dem Kalender altert, prüft die Uhr und nicht den Planer.
+
+    Sichtbar wurde das nur in CI (`publication-reliability-tests.yml` läuft
+    ausschließlich auf Pull Requests). Seither findet
     `scripts/selftest_clock.py --trap-modul` genau diese Klasse – der Test ist
-    unter jeder vorgestellten Uhr grün (`--trap-discover scripts/tests`).
+    unter jeder vorgestellten Uhr grün (`--trap-discover scripts/tests`), und
+    `test_plan_haengt_nicht_an_der_echten_wanduhr` hält die Eigenschaft fest.
     """
 
     PLAN_UHR = planner.localize(datetime(2026, 9, 14, 6, 0))
