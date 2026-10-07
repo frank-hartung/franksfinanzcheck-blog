@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Was die Metall-Tarifrunde so kompliziert macht
+  url: https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-10-07T09:10:22'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Energiepreise: Preise für Benzin und Diesel steigen wieder leicht'
   url: https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -114,4 +121,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-06T00:34:19'
+zuletzt_ergaenzt: '2026-10-07T09:10:22'
