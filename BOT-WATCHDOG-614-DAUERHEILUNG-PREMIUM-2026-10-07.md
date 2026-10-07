@@ -353,3 +353,109 @@ Klasse (Politur-Heiler, erste Nachtschicht), dann **bestrafte** das System sie.
   `pull_request`-Läufe** ausgelöst; `workflow_dispatch` ist dem Token verweigert
   (HTTP 403). Die vollständige Testentdeckung ist deshalb lokal belegt, das
   Zertifikat (≥ 4) liefert der erste Produktionslauf nach dem Merge.
+
+---
+
+## Nachtrag 2, 07.10.2026 – der dritte Befund: der Stempel stempelt sich selbst
+
+### Warum dieser Nachtrag nötig war
+
+Der zweiten Nachtschicht fehlte noch die Antwort auf die Frage, die seit
+Wochen im Zertifikat stand: **warum hebt die KI-Stufe die sieben
+Lesbarkeits-Kandidaten nie über die Schwelle?** Die Suche danach hat einen
+Fehler gefunden, der gar nichts mit der KI zu tun hat – und der dieselbe Ruine
+jede Nacht neu erzeugt hätte, die der Politur-Heiler gerade geheilt hatte.
+
+### Befund (reproduziert, nicht vermutet)
+
+`keyword_optimizer.heal_first_paragraph` prüft, ob das Hauptkeyword schon
+vorn steht – in den **ersten 350 Zeichen** – und stempelt sonst den **ersten
+Fließabsatz**:
+
+```python
+if norm(main_kw) in norm(body[:350]):
+    return body                      # Kopf-Wächter
+...
+paras[first_idx] = f"{main_kw} im Check: {first_para}"   # Stempel
+```
+
+In einem Reserve-Entwurf liegen die beiden Fenster auseinander. Am echten
+Kandidaten `2026-10-07-dein-weg-…`:
+
+* Divider, Schnell-Tipp-Kasten und Einleitungs-Überschrift stehen davor,
+* der erste Fließabsatz beginnt bei **Zeichen 357**,
+* der Kopf-Wächter sieht den Stempel also nie.
+
+Ergebnis: Jeder Lauf meldet „Keyword fehlt", stempelt erneut, und der neue
+Stempel liegt wieder außerhalb des Fensters. Mit der echten Datei gemessen:
+
+| Aufruf | Stempel „… im Check" im Absatz |
+|---|---|
+| vorher (Bestand `main`) | 1 |
+| 1. Heil-Lauf | **2** |
+| 2. Heil-Lauf | **3** |
+| 3. Heil-Lauf | **4** |
+
+Die Kette ruft `keyword_optimizer.py --fix --include-drafts` **zweimal je
+Nachtlauf** (`reserve_finisher.HEALER_CHAIN`), dazu kommen Konvergenz-Runden
+und der Meldelauf – genau so entstand die R15-PHrasen-Doppel-Ruine, an der
+der Kandidat aus der Zertifizierung fiel. Die Ruine war also **selbstgebaut**,
+und der Politur-Heiler allein hätte sie jede Nacht neu heilen müssen.
+
+### Reparatur (drei Teile, alle am selben Fenster)
+
+1. `erster_para_index()` ist jetzt die **eine Quelle** für Prüfung und Stempel
+   (kein Markup, keine Listen, ≥ 20 Zeichen – dieselben Regeln wie zuvor im
+   Heiler, nur nicht mehr doppelt implementiert).
+2. Der Heiler ist **am Ziel** idempotent: Trägt der erste Fließabsatz bereits
+   „<Keyword> im Check:", ist er fertig – auch wenn der Kopf-Wächter ihn nicht
+   sieht. Ein zweiter Stempel ist nie ein Qualitätsgewinn.
+3. `check_article` zählt den ersten Fließabsatz mit. Vorher meldete die
+   Prüfung dauerhaft „Keyword nicht in: Erster Absatz" (Fehlalarm), obwohl der
+   Stempel stand – **dieser Fehlalarm hielt die Automatik in Gang.**
+
+### Wachen und Tests (dreifach, nicht einfach)
+
+* `keyword_gate --selftest` prüft die **reale Geometrie** (Stempelabsatz hinter
+  Zeichen 350): kein zweiter Stempel, dritter Lauf = Fixpunkt. Ohne den Fix ist
+  die Probe rot – nachgestellt und belegt.
+* `test_fm_boundaries.StempelIdempotenzTests`: vier Regressionstests, **drei
+  davon ohne den Fix rot** (Fixpunkt, Prüf-Sicht, Bestands-Wächter über alle
+  73 Artikel).
+* Klassen-Wächter über den ganzen Bestand: Für **jeden** Artikel im Repo ist
+  `heal_first_paragraph` ein Fixpunkt. Diese Wache hätte den Befund in der
+  Nacht seiner Entstehung gemeldet.
+
+### Zusammenführung mit der Schwester-Reparatur (#612) aus `main`
+
+`main` hatte am selben Tag die Geschwister-Ruine repariert
+(`politur_ruine_heiler.py`, WF-D4E0) und dafür Klassen-Muster, Deckung und
+Governance angepasst. Der Merge wurde **nicht** als Sieger-Entscheid
+aufgelöst: der schmale, deterministische Ruinen-Heiler bleibt der **erste**
+Schreiber je Ruinen-Muster, der breite Politur-Heiler folgt als Netz für die
+restliche Familie (R7/R15/R16). Beide stehen in Kette, Deckung, Probenpflicht
+und Governance-Minimum; der Klassen-Vertrag aus #612 („der spezifische Heiler
+steht zuerst") ist im Test festgehalten und um die Prüfung erweitert, dass
+**jeder** genannte Schreiber existiert und wirklich in der Kette läuft.
+
+### Nachweise nach Reparatur und Merge
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 -m unittest discover -s scripts/tests` | **2058 Tests · OK** (23 skipped) |
+| `reserve_healer_coverage --vorratsschutz` | rc=0 – 7 Original-Befunde ohne Fahnenverlust, 1 unheilbare Ausmusterung, 1 fail-closed, 1 Rückholung, 1 Verweigerung ohne Beweis |
+| `keyword_gate --selftest` (mit Fix) | grün – mit der #614-Geometrie |
+| `keyword_gate --selftest` (ohne Fix, nachgestellt) | rot: „Stempel-Automatik nicht idempotent (Stapel-Ruine #614)" |
+| `StempelIdempotenzTests` (ohne Fix, nachgestellt) | 3 von 4 Tests rot |
+| `integrity_guard --gate` | grün (47 Kerndateien, Herkunft im Lock) |
+| Rückhol-Probe (`reserve_custody --heal`, lokal) | **13 Kandidaten zurück in den Pool**, 4 bleiben mit Grund (Klasse heilbar, aber kein Heiler mit grünem Wirkungsnachweis: `bankgebuehren`, `energieeffizienz`, `etf-sparplan`, `heizoel`) – die Probe wurde nicht committet, der Nachtlauf führt sie selbst aus |
+
+### Offene Restverifikation
+
+Das Zertifikat („≥ 4 zertifiziert") stellt nur der Produktionslauf aus
+(Hugo-Bau, hunspell, KI-Stufen). Erwartung nach diesem PR: Die Rückholung
+stellt 15 Kandidaten in den Pool, acht davon sind inhaltlich bereits geheilt
+(3 politurfrei, 5 ohne harte Funde), und die Lesbarkeits-Klasse hat jetzt eine
+Kette, die nicht mehr von unsichtbaren Stempeln blockiert wird. Der nächste
+`content-reserve.yml`-Lauf muss das zeigen; der harte End-Gate hält die Zahl
+fest.
