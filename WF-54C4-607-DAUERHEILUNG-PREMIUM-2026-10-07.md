@@ -126,8 +126,9 @@ melde­nde Tor, sondern der Schreiber, der die Blockade erzeugt hat.
 - `python3 scripts/governance_contract.py --selftest` → bestanden (C1–C22
   mit Kunstbefunden); `--quick` und der volle Lauf → „alle 22 Regeln“
   erfüllt.
-- `python3 -m unittest discover -s scripts/tests` → grün (siehe
-  Lauf-Ausgabe; die neuen Tests sind Teil des Netzes).
+- `python3 -m unittest discover -s scripts/tests` → **1890 Tests, 0 Fehler,
+  18 übersprungen** (die neuen Regressionstests und der Sabotage-Schutz des
+  Siegels sind Teil des Netzes).
 - Die eingefrorenen Originaltexte (`scripts/tests/sim/wf54c4/`) sind die
   echten Fassungen aus `48e3534f` und `2d8fc01`, keine Nachbauten.
 

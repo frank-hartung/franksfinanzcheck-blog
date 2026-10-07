@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T10:30:08.653021+00:00",
-  "head": "29b0120",
+  "signed_at": "2026-10-07T10:32:36.861314+00:00",
+  "head": "8da1ac5",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -445,7 +445,7 @@
     {
       "date": "2026-10-07",
       "art": "set-current",
-      "head": "29b0120",
+      "head": "8da1ac5",
       "geaendert": [
         "scripts/publikations_vertrag.py",
         "scripts/redaktions_standard.py"
@@ -457,7 +457,7 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "29b0120",
+              "sha": "8da1ac5",
               "datum": "2026-10-07",
               "betreff": "fix(redaktion): Publikations-Vertrag – KI-Heilung schreibt nicht mehr unter die Publish-Schwelle (WF-54C4 #607)"
             },
