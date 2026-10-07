@@ -380,6 +380,19 @@ jobs:
           python3 scripts/draft_triage.py --check-decisions \
             || echo "::warning::Reife Entwürfe verfallen oder Quellen sind defekt – Liste in der Lauf-Zusammenfassung"
 
+      # WF-D4E0 (#612): Die Chronik gehört VOR den Sicherungs-Commit. Bis
+      # hierher schrieb sie der harte End-Gate – also NACH dem einzigen
+      # Commit-Schritt des Laufs. Jeder rote Lauf verlor seine Zeile damit
+      # wieder, und verloren ging genau die Evidenz der Nacht, die man später
+      # erklären will: Der letzte CI-Eintrag in data/reserve-history.jsonl
+      # stammte vom 02.10., alle späteren Zeilen waren lokale Reparaturläufe.
+      # Der End-Gate am Ende liest dieselbe Messung und schreibt nichts
+      # doppelt (Idempotenz je `lauf`).
+      - name: Reserve-Chronik schreiben (Trend-Beweis, auch bei Engpass)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: python3 scripts/reserve_gate.py --chronik
+
       - name: Entwürfe, Zertifikate und Reporte sichern (auch bei Engpass)
         if: ${{ !cancelled() }}
         run: |

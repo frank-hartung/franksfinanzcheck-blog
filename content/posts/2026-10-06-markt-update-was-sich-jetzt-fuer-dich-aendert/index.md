@@ -36,11 +36,11 @@ Wenn du regelmäßig nach Tipps zu Finanzen, Gesundheit oder Technik suchst, wir
 
 ## Was du jetzt konkret tun kannst
 
-1. Prüfe die Quellenangaben, bevor du einem Ratschlag folgst.  
-2. Achte darauf, ob der Autor eigene Erfahrungen schildert oder nur allgemein wiederholt.  
-3. Nutze mehrere unabhängige Seiten, um ein Bild zu erhalten.  
-4. Frage bei Unsicherheiten beim Anbieter nach, ob er weiterführende Nachweise liefern kann.  
-5. Speichere dir vertrauenswürdige Seiten, die bereits transparent arbeiten.  
+1. Prüfe die Quellenangaben, bevor du einem Ratschlag folgst.
+2. Achte darauf, ob der Autor eigene Erfahrungen schildert oder nur allgemein wiederholt.
+3. Nutze mehrere unabhängige Seiten, um ein Bild zu erhalten.
+4. Frage bei Unsicherheiten beim Anbieter nach, ob er weiterführende Nachweise liefern kann.
+5. Speichere dir vertrauenswürdige Seiten, die bereits transparent arbeiten.
 6. Prüfe die Details bei deinem Anbieter, wenn du konkrete Produkte oder Dienstleistungen vergleichen willst.
 
 ## Hintergrund: So funktioniert der Markt dahinter
@@ -52,6 +52,11 @@ Faustregel: Wer glaubwürdige, tiefgehende Inhalte liefert, wird langfristig bes
 Faustregel: Transparente Quellen erhöhen das Vertrauen der Nutzer und damit die Klickrate. Wenn Nutzer sehen, dass ein Tipp nachweislich belegt ist, klicken sie eher auf die Seite und bleiben länger. Das signalisiert Google, dass die Seite wertvoll ist.  
 
 Faustregel: Eigene Erfahrung wirkt wie ein Qualitätsstempel. Wenn ein Autor aus seiner Praxis berichtet, wirkt das authentisch und wird von Suchmaschinen als positiv bewertet. Das stärkt die Autorität der Seite und verbessert das Ranking.
+
+
+
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)
 
 ## FAQ – die wichtigsten Fragen zur Meldung
 

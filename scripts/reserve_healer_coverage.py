@@ -136,15 +136,22 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
     "readability_failures": ("satz_heiler.py", "lesbarkeit_heiler.py",
                              "profi_polish.py"),
     # R2/R3/R5/R7/R8: Absatz-Splitter heilt R5, URL-Hygiene heilt R8-URL.
-    # REPARATUR 07.10.2026 (BOT-WATCHDOG-614): Diese Zeile stand bis heute für
-    # den GANZEN Regel-Ordner `textverstaendnis_failures` – obwohl die beiden
-    # genannten Heiler nur R5 und R8-URL kennen. Die harten Politur-Regeln
-    # (R7/R11–R16) waren damit formal „gedeckt", praktisch unheilbar: Im
-    # Reserve-Zertifikat standen sie als „manuell reparieren", der Vorrat
-    # blieb unter dem Zielbestand und der Bot-Watchdog öffnete dieselbe
-    # Meldung jede Nacht neu (#614). Der Politur-Heiler schließt die Klasse –
-    # mit eigener Wirkungsprobe und Pflicht-Nachweis (PROBEN_PFLICHT).
-    "textverstaendnis_failures": ("politur_heiler.py",
+    # REPARATUR 07.10.2026: Die Zeile stand für den GANZEN Regel-Ordner
+    # `textverstaendnis_failures` – obwohl die genannten Heiler zunächst nur
+    # R5 und R8-URL kannten. Zwei Reparaturen desselben Tages schließen die
+    # Klasse jetzt von zwei Seiten:
+    #   * WF-D4E0 (#612, aus main): R11/R13/R14 (Politur-Ruinen, harte
+    #     Publish-Regeln seit #482) hatten KEINEN Schreiber. Der reale Fall
+    #     `2026-10-07-wie-smart-home-…` scheiterte einzig an der
+    #     Marker-Ruine „SATZ: | Thread | …“; die Quarantäne nahm ihn als
+    #     `reserve_blocked` aus dem Spiel, der Vorrat fiel unter das Ziel.
+    #   * BOT-WATCHDOG #614: R7-Intro-Formel, R15-PHrasen-Doppel und
+    #     R16-Prompt-Echo standen als „manuell reparieren“ im Zertifikat,
+    #     obwohl der breite Politur-Heiler sie fail-closed heilt – und genau
+    #     diese Rest-Hartfunde ließen das Tor T2 des Lesbarkeits-Heilers
+    #     JEDE KI-Heilung verwerfen.
+    "textverstaendnis_failures": ("politur_ruine_heiler.py",
+                                  "politur_heiler.py",
                                   "r5_absatz_splitter.py",
                                   "fix_url_hygiene.py"),
 }
@@ -185,6 +192,9 @@ AUSNAHMEN: dict[str, str] = {
 #  wirklich bewegt, und das Tor T1–T4 hält.
 WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
     "lesbarkeit_heiler.py": ("--wirkungsprobe",),
+    # WF-D4E0 (#612, aus main): die Politur-Ruinen-Familie verschwindet
+    # nachweislich (Fixture je Klasse, Tor T1–T4, zweiter Lauf = Fixpunkt).
+    "politur_ruine_heiler.py": ("--wirkungsprobe",),
     # ERWEITERUNG 07.10.2026 (BOT-WATCHDOG-614): Der Politur-Heiler heilt die
     # harten Regeln R7/R11–R16 und beweist das an einem Fixture (alle fünf
     # Defekte hinein, keiner heraus, Tor T1–T3 hält, idempotent).

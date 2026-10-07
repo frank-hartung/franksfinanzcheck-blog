@@ -57,12 +57,12 @@ Hier sind die aktuellen Benchmark-Daten für Sparrücklagen, Zinsen und Konsumau
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Top-Tagesgeldzinsen</div>
-      <div class="ff-radar-kpi__value">3,10 – 3,45 % p. a.</div>
+      <div class="ff-radar-kpi__value">3,10–3,45 % p. a.</div>
       <div class="ff-radar-kpi__source">Führende Anbieter ohne befristete Lockangebote</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Festgeld 12 Monate</div>
-      <div class="ff-radar-kpi__value">3,00 – 3,30 % p. a.</div>
+      <div class="ff-radar-kpi__value">3,00–3,30 % p. a.</div>
       <div class="ff-radar-kpi__source">Feste Zinsgarantie für planbare Rücklagen</div>
     </div>
     <div class="ff-radar-kpi">
@@ -72,7 +72,7 @@ Hier sind die aktuellen Benchmark-Daten für Sparrücklagen, Zinsen und Konsumau
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Dispozins Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">11,5 – 13,8 %</div>
+      <div class="ff-radar-kpi__value">11,5–13,8 %</div>
       <div class="ff-radar-kpi__source">Vermeidbare Kosten bei Überziehung des Girokontos</div>
     </div>
   </div>
@@ -143,28 +143,28 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
         <td><strong>3 Monats-Fixkosten</strong><br>(z. B. 3 × 1.400 € = 4.200 €)</td>
         <td>Kündigungsschutz und Lohnfortzahlung greifen; Risiko beschränkt sich auf Haushaltsgeräte.</td>
         <td>Verzinstes Tagesgeldkonto (täglich verfügbar)</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Standard-Puffer</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Standard-Puffer</span></td>
       </tr>
       <tr>
         <td><strong>Familie mit Eigenheim &amp; Auto</strong></td>
         <td><strong>4–6 Monats-Fixkosten</strong><br>(z. B. 5 × 2.400 € = 12.000 €)</td>
         <td>Höheres Instandhaltungsrisiko (Heizung, Dach, Kfz-Reparatur, Kinderbedarf).</td>
         <td>Tagesgeld (60 %) + 12M-Festgeldstaffel (40 %)</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Erweiterter Puffer</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Erweiterter Puffer</span></td>
       </tr>
       <tr>
         <td><strong>Selbstständige &amp; Freiberufler</strong></td>
         <td><strong>6–9 Monats-Lebenshaltung</strong><br>(z. B. 6 × 2.800 € = 16.800 €)</td>
         <td>Umsatzschwankungen, Steuernachzahlungen und fehlendes Krankengeld abfedern.</td>
         <td>Tagesgeld (50 %) + Geldmarktfonds/Festgeld</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Existenz-Sicherung</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Existenz-Sicherung</span></td>
       </tr>
       <tr>
         <td><strong>Berufseinsteiger / Azubis</strong></td>
-        <td><strong>1.500 – 2.500 €</strong><br>(Basisschutz)</td>
+        <td><strong>1.500–2.500 €</strong><br>(Basisschutz)</td>
         <td>Schützt vor dem Dispokredit bei Umzug oder ersten unerwarteten Rechnungen.</td>
         <td>Kostenloses Tagesgeldkonto</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Sofort-Start</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Sofort-Start</span></td>
       </tr>
     </tbody>
   </table>
@@ -242,7 +242,7 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
   <div class="ff-case-study-box__header">
     <div>
       <div class="ff-case-study-box__kicker">Praxis-Fallstudie · Familienbudget</div>
-      <h3 class="ff-case-study-box__title">Familie Becker: Dispo-Befreiung &amp; 50-30-20-Einführung</h3>
+      <h3 class="ff-case-study-box__title">Familie Becker: Dispo-Befreiung &amp; 50–30–20-Einführung</h3>
     </div>
     <span class="ff-case-study-box__profile">👨👩👦 3 Personen · Nettoeinkommen: 4.100 € / Monat</span>
   </div>
@@ -330,7 +330,7 @@ Möchtest du dein Haushaltsbudget dauerhaft auf Autopilot stellen? Die 4-teilige
   <div class="ff-course-syllabus">
     <div class="ff-course-day">
       <span class="ff-course-day__tag">Tag 1</span>
-      <h4 class="ff-course-day__title">Die 50-30-20-Formel</h4>
+      <h4 class="ff-course-day__title">Die 50–30–20-Formel</h4>
       <p class="ff-course-day__desc">Wie du deine Fixkosten ohne schmerzhaften Verzicht auf unter 50 % deines Einkommens bringst.</p>
     </div>
     <div class="ff-course-day">
@@ -379,7 +379,7 @@ Das ist bei steigenden Mieten und Lebenshaltungskosten keine Seltenheit. Gehe de
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.2</span>
       <span class="ff-changelog-item__date">02.10.2026</span>
-      <span>Vollständige Überarbeitung als Flagship-Kernbereich für Haushaltsbudget &amp; finanzielle Puffer: Zins-Marktradar Q4 2026 integriert, 50-30-20-Rechner, 7-Punkte-Checkliste, Notgroschen-Matrix und Fallstudien Becker/Lea ergänzt.</span>
+      <span>Vollständige Überarbeitung als Flagship-Kernbereich für Haushaltsbudget &amp; finanzielle Puffer: Zins-Marktradar Q4 2026 integriert, 50–30–20-Rechner, 7-Punkte-Checkliste, Notgroschen-Matrix und Fallstudien Becker/Lea ergänzt.</span>
     </li>
     <li class="ff-changelog-item">
       <span class="ff-changelog-item__version">v2.1</span>

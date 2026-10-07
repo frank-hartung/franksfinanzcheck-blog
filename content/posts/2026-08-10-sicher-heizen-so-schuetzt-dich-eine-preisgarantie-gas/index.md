@@ -209,7 +209,7 @@ Prüfe daher parallel zum Tarif:
 - das Lüftungsverhalten (Stoßlüften statt Kippen),
 - die Dämmung von Heizungsrohren im Keller.
 
-Senkst du deinen Verbrauch um 10 Prozent, sparst du beim heutigen Preis oft mehr als durch einen etwas billigeren Tarif.
+Senkst du deinen Verbrauch um 10 %, sparst du beim heutigen Preis oft mehr als durch einen etwas billigeren Tarif.
 
 ## Sonderfälle: Umzug, Insolvenz und Vertragsende
 

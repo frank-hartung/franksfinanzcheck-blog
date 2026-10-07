@@ -530,6 +530,16 @@ jobs:
           # nachweislich über die importierte Schwelle hebt – ein „Versuch“
           # schreibt sich nicht fest (fail-closed).
           python3 scripts/lesbarkeit_heiler.py --new-only --fix || echo "⚠ Lesbarkeits-Heiler – Restlücke im Log (fail-closed, nichts Halbfertiges geschrieben)"
+          echo "== Politur-Ruinen-Heiler (R11/R13/R14, Tor T1-T4, fail-closed, WF-D4E0/#612) =="
+          # Die Ruinen-Familie ist ein HARTES Publish-Kriterium (#482) und hatte
+          # in KEINER Kette einen Schreiber: Der Kandidat
+          # `2026-10-07-wie-smart-home-…` scheiterte einzig an „SATZ: | Thread |
+          # …“ (Zertifikat: Qualität 0,95, alle übrigen Tore grün), blieb
+          # liegen und der Reserve-Vorrat fiel unter das Ziel (roter
+          # End-Gate). Der Heiler entfernt nur beweisbare Ruinen
+          # (R11/R13/R14), lässt R12/R16 als Befund stehen und schreibt nie
+          # etwas, das das Tor T1–T4 nicht erfüllt.
+          python3 scripts/politur_ruine_heiler.py --new-only --fix || echo "⚠ Politur-Ruinen-Heiler – Restlücke im Log (fail-closed, nichts Halbfertiges geschrieben)"
           echo "== Hold-Requeue nach Heilung (PREMIUM-FIX 25.09.2026: Phase 0.5 rearmt VOR der Heilung – was Phase 2/3 heilt, würde sonst nie rearmt (stale Hold → 404)) =="
           python3 scripts/requeue_quality_holds.py --fix || echo "⚠ Hold-Requeue – Funde im Log"
           git config user.name "Content-Bot"

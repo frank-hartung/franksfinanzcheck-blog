@@ -938,6 +938,100 @@ selbst als `declared_foreign` abwertet, stand damit als Beweis im Buch.
   `python3 -m unittest scripts.tests.test_audit_ledger_isolation`.
   Vorgangsbericht: `BEWEIS-LEDGER-ISOLATION-C27-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
 
+## Die Klasse geht dem Kanal vor (Auslieferungs-SLO, C28, seit #611, 07.10.2026)
+
+Am 05.10.2026 endete der Montag bei **1/2 LIVE** (der 19:22 UTC nachgelieferte
+Slot rettete genau einen Artikel). Am 06.10. lief der öffentliche Nachweis
+(`Publication Delivery`) zweimal rot – um 01:17 und 14:10 UTC. Der Beleg sagte
+die Ursache selbst:
+
+```json
+{"day": "2026-10-05", "source": ["…preiswert-surfen…"], "delivered": ["…preiswert-surfen…"],
+ "errors": [], "ok": false, "minimum": 2, "maximum": 3}
+```
+
+`delivered == source`, keine Fehler: **Die Auslieferung war vollständig – der
+Bestand trug den Tag nicht.** Weil der rote Sammel-Schritt („Missing public
+delivery is a failed run“) keine Ursache nannte, legte das zentrale
+Fehler-Alerting das generische Wartungs-Issue **#611** mit API-Key-/Transient-
+Runbook an, obwohl der Fachkanal `engine-deficit` (C23) längst existierte –
+dieselbe Doppelmeldung wie #602/#608, nur beim zweiten Melder derselben Sache.
+
+`ok` ist die Summe zweier Wahrheiten mit zwei Besitzern; der Beleg trägt sie
+jetzt getrennt (`publication_check.klasse()`):
+
+| Klasse | Bedeutung | Besitzer |
+|---|---|---|
+| `ok` | Tag bestätigt (Mindestziel…Maximum öffentlich) | niemand – grün |
+| `quelle_unter` | Bestand unter dem Mindestziel des gemessenen Tages | Fachkanal `engine-deficit` (Nachfüllung) |
+| `quelle_ueber` | Bestand über dem Tagesmaximum | Kadenz-Gate (stuft im Deploy zurück) |
+| `auslieferung` | Bestand im Zielband, öffentlich fehlt etwas | Deploy/CDN, P1-Kanal (#610) |
+| `unbekannt` | kein lesbarer Beleg | fail-closed laut |
+
+- **Die Klasse ist additiv.** `ok` behält seine Bedeutung; kein Aufrufer
+  verliert ein Feld. Zusätzlich steht die Klasse in der versionierten Historie
+  (`data/publication-delivery-history.jsonl`), damit ein roter Tag später
+  seinem Besitzer zuordenbar bleibt.
+- **Der Workflow antwortet der Klasse**, nicht dem Sammel-Boolean: eigener
+  roter Schritt je Klasse. Nur `quelle_unter` ruft den Defizit-Fachkanal und
+  belegt ihn **vor** dem roten Exit (`engine_issue.py --deficit`); sein
+  Schrittname trägt beide Kennwörter („TAGESDEFIZIT“ + „engine-deficit“), an
+  denen die Stummschaltung des Alertings hängt (#602-Regel). Überschuss und
+  Auslieferungsdefizit bleiben laut mit ehrlichem Namen.
+- **Ein bestätigter Tag hat keine Klasse nötig:** `ok` wird zuerst geprüft,
+  ein unbekannter Beleg ist niemals still.
+- **Vertrag:** Regel **C28** in `governance_contract.py` friert Klasse,
+  Schritt-Namen, Reihenfolge (Beleg vor rotem Exit) und die beidseitige
+  Alerting-Zuordnung ein; sechs Kunstbefunde werden im Kontrakt-Selbsttest rot.
+- Bedienung: `npm run delivery:klasse` (Klasse des gültigen Belegs) ·
+  `npm run test:delivery` (Regressionen) ·
+  `python3 scripts/publication_check.py --selftest` (Logik-Beweis, uhrfest) ·
+  `python3 scripts/publication_check.py --online` (voller Nachweis).
+  Vorgangsbericht: `WF-7C1F-611-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
+## Ein harter Blocker braucht einen Heiler (Content-Reserve, C29, seit #612, 07.10.2026)
+
+Der harte End-Gate der Reserve („Stock shortage must not look successful“) war
+rot, weil der Vorrat bei **Ziel 6 / bereit 2** stand – und er hatte recht: fünf
+der letzten sechs Läufe endeten so. Die Zertifizierung hatte korrekt abgelehnt;
+die Ursachen lagen davor:
+
+- **Ein fertiger Kandidat hing an einem Politur-Rest.** R11/R13/R14
+  (Politur-Ruinen) entscheiden seit #482 über die Veröffentlichung, aber keine
+  Kette durfte sie heilen. `2026-10-07-wie-smart-home-…` scheiterte einzig an
+  einem `SATZ: `-Präfix vor einer vollständig intakten Tabellenzeile
+  (Zertifikat 0,95) und wurde als `reserve_blocked` aus dem Pool genommen.
+  `scripts/politur_ruine_heiler.py` heilt die drei Klassen jetzt **beweisbar**
+  (Tor T1–T4: keine Ruine bleibt, keine neue, Frontmatter/Links/Shortcodes
+  stabil, Wortzahl ≥ 97 % − belegter Verlust) und **idempotent** – R12/R16
+  werden nur gemeldet, Raten wäre eine Fälschung. Er läuft in Reserve- und
+  Live-Kette, in der Deckung (`--wirkungsprobe`) und unter Siegel (FEST).
+- **Die Geburt maß die Publish-Regel nicht.** `profi_quality_ok` prüfte alles
+  außer der Lesbarkeit (Flesch ≥ 60 ist seit #585 hart): sieben Kandidaten
+  wurden mit 53,1–59,9 geboren und fielen später geschlossen durch.
+  `generate_drafts.lesbarkeits_befund` misst gegen die **importierte** SSOT
+  `readability_check.NEW_FLESCH_MIN` – keine zweite Zahl.
+- **Der Retry war blind.** Die Befunde des Vorversuchs gingen nie an den
+  nächsten Versuch. `generate_article_text(…, hinweise=…)` baut daraus einen
+  **KORREKTUR-AUFTRAG** im Prompt; `engine_generate.try_generate` reicht ihn
+  weiter.
+- **Der Trend-Beweis starb mit dem roten Lauf.** Die Chronik-Zeile entstand
+  nach dem einzigen Commit-Schritt (letzter CI-Eintrag: 02.10.). Jetzt schreibt
+  `reserve_gate.py --chronik` **vor** der Sicherung und ist je `lauf` idempotent;
+  der End-Gate am Ende schreibt nichts doppelt.
+
+- **Vertrag:** Regel **C29** in `governance_contract.py` friert alle vier
+  Lektionen am echten Baum ein (Geburtsmessung, Retry-Gedächtnis,
+  Chronik-Reihenfolge, Ruinen-Heiler in Kette/Deckung/Wirkungsprobe); sabotierte
+  Fassungen werden im Kontrakt-Selbsttest rot. Klassen und Löschrechte stehen in
+  `reserve_blocker_klassen.GATE_BEFUNDE` – R12/R16 bleiben bewusst „unbekannt“
+  (fail-closed, nichts wird gelöscht, was niemand heilen kann).
+- Bedienung: `python3 scripts/politur_ruine_heiler.py --selftest` ·
+  `--wirkungsprobe` (Wirkung je Klasse + Idempotenz) ·
+  `--file <pfad>` (Trockenlauf) bzw. `--fix`. Tests:
+  `python3 -m unittest scripts.tests.test_reserve_pipeline`.
+  Vorgangsbericht: `WF-D4E0-612-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
