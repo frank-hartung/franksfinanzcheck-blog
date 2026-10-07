@@ -1,7 +1,7 @@
 # Wartung · Inhaltsqualität · Vorgang WF-1F8C (#608) — Dauerheilung auf Premium-Niveau
 
 **Datum:** 07.10.2026 · **Issue:** #608 · **Workflow:** `Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)`
-**Vorgänger-Vorgänge:** #602 (Melde-Routing), #601 (Tagesdefizit 05.10.), #603 (Slot-Wache)
+**Reparatur-Vorschlag:** PR #616 („Closes #608“) · **Vorgänger-Vorgänge:** #602 (Melde-Routing), #601 (Tagesdefizit 05.10.), #603 (Slot-Wache)
 
 ## Kurzfassung
 
@@ -281,7 +281,8 @@ Zustand → **kein** Schreibzugriff.
   gehört in die Betrachtung der Auslieferung, nicht in eine korrigierte
   Statistik.
 * **#608 selbst** schließt über den Reparatur-Vorschlag dieses Vorgangs
-  („Closes #608“) – mit Abschlussvermerk des Repositories.
+  (**PR #616**, „Closes #608“); der Vorgangs-Abschluss setzt danach als
+  zweites, unabhängiges Signal den Prüfvermerk des Repositories.
 
 ---
 
