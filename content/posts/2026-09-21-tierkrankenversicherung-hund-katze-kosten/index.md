@@ -39,7 +39,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "09d4e43315a166415f9083d7cf45f435aa8ba0f960985f0782df4c29bd2239a5"
+  inhalt_sha256: "03cb450580b246b03b3bd1b73a7367fc12c5b3b10bcfad9fc6fba42d15443551"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (GOT 2022 als Primärquelle, Stiftung Warentest, Verbraucherzentrale); GOT-Angaben und test.de-Zitate verifiziert, Beispielrechnungen nachgerechnet"
