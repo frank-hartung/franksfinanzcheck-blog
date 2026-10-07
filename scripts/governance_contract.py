@@ -203,6 +203,14 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # stellt den Vorfall nach (Ruhetag gemessen, rot Geschlossenes
           # wieder geöffnet, ehrlich geschlossen) und gehört ins Minimum.
           "engine_issue.py",
+          # H1-Wache (07.10.2026, WF-A11Y #623): „Genau eine H1 pro Seite“
+          # ist die unsichtbarste Barrierefreiheits-Regel im Haus – sie
+          # bricht nur, wenn jemand eine `# …`-Zeile in einen Fließtext
+          # tippt, und sie trifft genau die Leser, die sich nicht
+          # beschweren können (Screenreader, Inhaltsverzeichnis,
+          # KI-Antworten). Ihr Selbsttest friert Quell-, Layout- und
+          # Build-Regel mit Sabotageproben ein und läuft im Minimum (C6).
+          "h1_wache.py",
           # Slot-Wache der Content-Linie (05.10.2026, #601): Dieselbe
           # Fehlerklasse wie oben, nur am Herzstück – GitHubs Scheduler
           # startete 4 von 7 planmäßigen Slots nie, der Tag endete 1/2 LIVE,
@@ -1896,6 +1904,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c28_klassen_routing(script_texts, wflows, root=root)
     checks += c29_geburts_tor(script_texts, wflows, root=root,
                               python_bin=python_bin)
+    checks += c30_eine_h1(script_texts, wflows, root=root,
+                          python_bin=python_bin)
     return checks
 
 
@@ -2488,7 +2498,183 @@ def c29_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
     return out
 
 
+# --- C30: Eine Seite hat genau eine H1 (WF-A11Y #623, 07.10.2026) -----------
+#
+# DER BEFUND: Am 07.10.2026 meldete das wöchentliche Audit auf /presse/ und
+# /studien/ je ZWEI H1. Ursache: Beide Markdown-Dokumente trugen im
+# FLIESSTEXT eine eigene `# …`-Zeile, obwohl jedes Layout die H1 bereits
+# aus dem Titel setzt. Für Screenreader, Inhaltsverzeichnisse und
+# KI-Antworten kippt damit die Gliederung (WCAG 1.3.1 / 2.4.6).
+#
+# DER EIGENTLICHE SCHADEN war größer als die Meldung und lag in zwei
+# Blindstellen, die dieser Vertrag schließt:
+#   1. STICHPROBE: Das Audit prüfte 20 von 107 gebauten Seiten. Die dritte
+#      Doppel-H1 (/studien/fixkosten-index-2026-q4/) stand im selben Build
+#      und blieb unsichtbar. Wer ein Fünftel misst, würfelt.
+#   2. TOTER ZWEIG: Die Einzelansicht lag ZWEIMAL im Repo
+#      (_default/single.html und single.html), gepflegt „deckungsgleich“,
+#      mit dem Vermerk „layouts/single.html gewinnt die Template-Auflösung“.
+#      Ein Baustein-Marker im gebauten HTML bewies das Gegenteil: Hugo
+#      löst `_default/single.html` ZUERST auf. Die Kopie war der Zweig, der
+#      ins Leere lief – jede künftige Heilung dort wäre versandet.
+#
+# Was der Vertrag verlangt: EIN Baustein trägt die H1 und ehrt `heading:`
+# (eine eigene Schirmzeile, ohne dass der Fließtext eine zweite H1
+# liefert). Die Wache prüft Quelle UND Build – und das Audit prüft ALLE
+# Seiten, keine Stichprobe. Geheilt wird nie automatisch: Eine H1 zu
+# löschen hieße, einen redaktionellen Satz zu vernichten.
+RE_C30_H1 = re.compile(r"<h1(?=[\s>])")
+
+
+def c30_eine_h1(script_texts, wflows, root=BLOG_DIR, python_bin=None):
+    out = []
+    wache = script_texts.get("h1_wache.py", "")
+    audit = script_texts.get("a11y_audit.py", "")
+    baustein = _read(os.path.join(root, "layouts", "_partials",
+                                  "artikel_einzeln.html"))
+    single_default = _read(os.path.join(root, "layouts", "_default", "single.html"))
+    single_wurzel = _read(os.path.join(root, "layouts", "single.html"))
+    liste = _read(os.path.join(root, "layouts", "_default", "list.html"))
+    deploy = ""
+    for pfad, text in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == "deploy.yml":
+            deploy = text
+            break
+    paket = _read(os.path.join(root, "package.json"))
+    tests = os.path.join(root, "scripts", "tests", "test_h1_wache.py")
+
+    if not wache:
+        out.append(("C30", "scripts/h1_wache.py fehlt – ohne Wache ist „genau "
+                           "eine H1 pro Seite“ eine Behauptung, kein Zustand "
+                           "(#623, fail-closed)."))
+    else:
+        # a) Quelle UND Build: nur eine Seite der Wahrheit zu prüfen, ist
+        #    genau die Halbheit, die #623 teuer machte. Geprüft wird nicht
+        #    die ERWÄHNUNG der Flagge (eine Doku-Zeile genügt sonst als
+        #    Alibi), sondern Registrierung UND Auswertung – eine Flagge,
+        #    die niemand liest, ist Papier.
+        for flagge, feld, sinn in (("--source-only", "args.source_only",
+                                    "Quellprüfung ohne Build"),
+                                   ("--public", "args.public",
+                                    "Prüfung der gebauten Seiten"),
+                                   ("--selftest", "args.selftest",
+                                    "Sabotageproben der Wache")):
+            if f'"{flagge}"' not in wache or feld not in wache:
+                out.append(("C30", f"scripts/h1_wache.py registriert `{flagge}` "
+                                   f"nicht oder wertet sie nicht aus ({sinn}) – "
+                                   f"eine Wache ohne diesen Pfad lässt die "
+                                   f"Hälfte des Befunds wieder durch (#623)."))
+        if "archetypes" not in wache:
+            out.append(("C30", "scripts/h1_wache.py prüft die Archetypen nicht – "
+                               "eine H1 in einer Vorlage vererbt sich an jeden "
+                               "neuen Artikel (#623)."))
+        if "--fix" in wache:
+            out.append(("C30", "scripts/h1_wache.py bietet ein `--fix` an: Eine H1 "
+                               "automatisch zu löschen vernichtet einen "
+                               "redaktionellen Satz. Die Wache meldet den "
+                               "Handgriff, sie führt ihn nicht aus (#623)."))
+        # b) Wirkungsprobe: der Selbsttest der Wache muss JETZT grün sein.
+        bin_ = python_bin or sys.executable or "python3"
+        try:
+            lauf = subprocess.run(
+                [bin_, os.path.join(root, "scripts", "h1_wache.py"), "--selftest"],
+                cwd=root, capture_output=True, text=True, timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C30", f"Wirkungsprobe der H1-Wache nicht ausführbar "
+                               f"({exc.__class__.__name__}) – fail-closed."))
+        else:
+            if lauf.returncode != 0:
+                zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
+                out.append(("C30", "Wirkungsprobe der H1-Wache ROT: "
+                            + (zeilen[-1][:160] if zeilen
+                               else f"Exit {lauf.returncode}")))
+
+    # c) EIN Baustein, EINE H1 – und beide Zweige zeigen auf ihn.
+    if not baustein.strip():
+        out.append(("C30", "layouts/_partials/artikel_einzeln.html fehlt – damit "
+                           "liegt die Einzelansicht wieder in zwei Kopien, von "
+                           "denen eine nie rendert (toter Zweig, #623)."))
+    else:
+        if len(RE_C30_H1.findall(baustein)) != 1:
+            out.append(("C30", "layouts/_partials/artikel_einzeln.html rendert nicht "
+                               "genau eine H1 – jede weitere ist eine Doppel-H1 "
+                               "(#623)."))
+        if ".Params.heading" not in baustein:
+            out.append(("C30", "layouts/_partials/artikel_einzeln.html ehrt "
+                               "`.Params.heading` nicht – eine eigene Schirmzeile "
+                               "ließe sich nur über eine `# …`-Zeile im Fließtext "
+                               "setzen, also über die zweite H1 aus #623."))
+    for name, text in (("_default/single.html", single_default),
+                       ("single.html", single_wurzel)):
+        if not text.strip():
+            out.append(("C30", f"layouts/{name} ist leer – die Einzelansicht würde "
+                               "nicht rendern."))
+        elif 'partial "artikel_einzeln.html"' not in text:
+            out.append(("C30", f"layouts/{name} bindet den gemeinsamen Baustein "
+                               "nicht ein – eine zweite Kopie der Einzelansicht "
+                               "wäre wieder ein Zweig, der ins Leere läuft "
+                               "(#623)."))
+    if ".Params.heading" not in liste:
+        out.append(("C30", "layouts/_default/list.html ehrt `.Params.heading` nicht "
+                           "– Abschnittsseiten bräuchten für eine Schirmzeile "
+                           "wieder eine H1 im Fließtext (#623)."))
+
+    # d) Das Audit darf keine Stichprobe mehr sein: 20 von 107 Seiten sahen
+    #    die dritte Doppel-H1 nicht.
+    if not audit:
+        out.append(("C30", "scripts/a11y_audit.py nicht lesbar – ohne das Audit ist "
+                           "die H1-Regel nur zur Hälfte belegt (#623)."))
+    else:
+        if re.search(r"\[\s*20\s*\]|STICHPROBE\s*=|files\[:\s*\d+\s*\]", audit):
+            out.append(("C30", "scripts/a11y_audit.py prüft wieder nur eine "
+                               "STICHPROBE – genau die Blindstelle, die die dritte "
+                               "Doppel-H1 am 07.10.2026 verdeckt hat (#623)."))
+        if "AUSNAHMEN" not in audit:
+            out.append(("C30", "scripts/a11y_audit.py führt seine Ausnahmen nicht "
+                               "aus der H1-Wache – zwei Ausnahme-Listen driften "
+                               "auseinander, und eine ohne Grund ist eine Lücke."))
+
+    # e) Verdrahtung: geprüft wird erst, wenn der Deploy es verlangt.
+    if deploy:
+        if "scripts/h1_wache.py --source-only" not in deploy:
+            out.append(("C30", "deploy.yml ruft die H1-Wache nicht VOR dem Build – "
+                               "die Quelle käme ungeprüft in den Build (#623)."))
+        if "scripts/h1_wache.py --public public" not in deploy:
+            out.append(("C30", "deploy.yml prüft die gebauten Seiten nicht – die "
+                               "Doppel-H1 stünde wieder live, bevor jemand sie "
+                               "sieht (#623)."))
+    else:
+        out.append(("C30", "deploy.yml nicht lesbar – die Verdrahtung der H1-Wache "
+                           "ist nicht prüfbar."))
+    if paket and '"h1:check"' not in paket:
+        out.append(("C30", "package.json kennt `h1:check` nicht – eine Wache, die "
+                           "man lokal nicht rufen kann, wartet auf den nächsten "
+                           "Montag (#623)."))
+    if not os.path.isfile(tests):
+        out.append(("C30", "scripts/tests/test_h1_wache.py fehlt – ohne "
+                           "Regressionstest fällt die nächste Doppel-H1 erst im "
+                           "wöchentlichen Audit auf (#623)."))
+    return out
+
+
 RULE_TEXT = {
+    "C30": "Eine Seite hat genau eine H1: Die Schirmzeile gehoert dem Layout, "
+           "nie dem Markdown-Fliesstext – wer eine eigene braucht, setzt sie "
+           "als `heading:` ins Frontmatter. Eine Wache (scripts/h1_wache.py) "
+           "prueft Quelle (content/ + archetypes/, inklusive "
+           "Template-Verdrahtung) UND Build (jede gebaute Seite), und das "
+           "Barrierefreiheits-Audit prueft ALLE Seiten statt einer "
+           "Stichprobe. Geheilt wird nie automatisch: Eine H1 zu loeschen "
+           "hiesze, einen redaktionellen Satz zu vernichten. Am 07.10.2026 "
+           "trugen /presse/ und /studien/ je zwei H1 – und weil das Audit "
+           "nur 20 von 107 Seiten sah, blieb die dritte "
+           "(/studien/fixkosten-index-2026-q4/) im selben Build unsichtbar. "
+           "Dahinter lag der eigentliche Schaden: Die Einzelansicht lag "
+           "zweimal im Repo (_default/single.html und single.html) mit dem "
+           "Vermerk, layouts/single.html gewinne die Template-Aufloesung. "
+           "Ein Baustein-Marker im gebauten HTML bewies das Gegenteil – die "
+           "Kopie war der tote Zweig, in dem jede kuenftige Heilung "
+           "versandet waere (#623).",
     "C1": "Die Sicht (Chefredakteur-Scorecard) läuft nach allen Messungen – sonst "
           "zeigt sie Werte des Vorlaufs als aktuellen Befund (#206).",
     "C2": "Der Hugo-Build darf keinen Fehler mit `|| true` verschlucken und meldet sein "
@@ -2686,7 +2872,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C28": "Die Klasse geht dem Kanal vor (Melder-Routing der "
                 "Auslieferungs-SLO)",
          "C29": "Der Schreiber prüft, was über ihn entscheidet (Geburts-Tor, "
-                "Retry-Gedächtnis, Chronik-Reihenfolge, Ruinen-Heiler)"}
+                "Retry-Gedächtnis, Chronik-Reihenfolge, Ruinen-Heiler)",
+         "C30": "Eine Seite hat genau eine H1 (Quelle + Build, kein toter "
+                "Zweig, Audit ohne Stichprobe)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -3460,12 +3648,78 @@ def _selftest():
             if "HEALER_CHAIN" in f[1] or "Politur" in f[1]]:
         failures.append("C29: ein aus der Reserve-Kette entfernter "
                         "Politur-Ruinen-Heiler bleibt unentdeckt (#612).")
+    # --- C30: Eine Seite hat genau eine H1 (#623) -------------------------
+    # Der echte Baum muss still bleiben; jede Sabotage muss GENAU ihren
+    # Zweig treffen. Die Wirkungsprobe der Wache läuft dabei einmal echt.
+    h1_dateien = ("h1_wache.py", "a11y_audit.py")
+    echte_h1 = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                for name in h1_dateien}
+    echte_h1_befunde = c30_eine_h1(echte_h1, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+    if echte_h1_befunde:
+        failures.append(f"C30: der echte Zustand wird beanstandet: "
+                        f"{echte_h1_befunde}")
+    # (a) Die Wache prüft nur die Quelle: die gebaute Wahrheit fiele wieder
+    #     durch – genau die Hälfte, die #623 sichtbar machte.
+    ohne_build = dict(echte_h1, **{
+        "h1_wache.py": echte_h1["h1_wache.py"].replace(
+            '"--public"', '"--oeffentlich"')})
+    if not [f for f in c30_eine_h1(ohne_build, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+            if "gebauten Seiten" in f[1] or "--public" in f[1]]:
+        failures.append("C30: eine Wache ohne Build-Prüfung bleibt unentdeckt "
+                        "(#623).")
+    # (b) Die Stichprobe kehrt zurück: 20 von 107 Seiten sahen die dritte
+    #     Doppel-H1 nicht.
+    stichprobe = dict(echte_h1, **{
+        "a11y_audit.py": echte_h1["a11y_audit.py"].replace(
+            "    return files", "    return files[:20]  # STICHPROBE")})
+    if not [f for f in c30_eine_h1(stichprobe, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+            if "STICHPROBE" in f[1]]:
+        failures.append("C30: eine wieder eingeführte Stichprobe im Audit "
+                        "bleibt unentdeckt (#623).")
+    # (c) Die Wache fällt aus dem Deploy: geprüft wäre nur, was jemand von
+    #     Hand ruft – und die Doppel-H1 stünde wieder live.
+    def _deploy_variante(ersetzung):
+        """Kopie der Workflows mit einer Sabotage in deploy.yml."""
+        kopie = dict(wflows_echt)
+        for pfad, text_ in list(kopie.items()):
+            if os.path.basename(pfad) == "deploy.yml":
+                kopie[pfad] = text_.replace(*ersetzung)
+        return kopie
+
+    if not [f for f in c30_eine_h1(echte_h1,
+                                   _deploy_variante(("scripts/h1_wache.py --source-only",
+                                                     "# Wache entfernt")),
+                                   python_bin=sys.executable or "python3")
+            if "source-only" in f[1] or "deploy.yml" in f[1]]:
+        failures.append("C30: eine aus deploy.yml entfernte Quell-Prüfung der "
+                        "H1-Wache bleibt unentdeckt (#623).")
+    if not [f for f in c30_eine_h1(echte_h1,
+                                   _deploy_variante(("scripts/h1_wache.py --public public",
+                                                     "# Build-Prüfung entfernt")),
+                                   python_bin=sys.executable or "python3")
+            if "gebauten Seiten" in f[1] or "deploy.yml" in f[1]]:
+        failures.append("C30: eine aus deploy.yml entfernte Build-Prüfung der "
+                        "H1-Wache bleibt unentdeckt (#623).")
+    # (d) Eine Wache, die selbst heilt, vernichtet Sätze.
+    mit_fix = dict(echte_h1, **{
+        "h1_wache.py": echte_h1["h1_wache.py"].replace(
+            'parser.add_argument("--json"',
+            'parser.add_argument("--fix", action="store_true")\n'
+            '    parser.add_argument("--json"')})
+    if not [f for f in c30_eine_h1(mit_fix, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+            if "--fix" in f[1]]:
+        failures.append("C30: eine selbst heilende H1-Wache bleibt unentdeckt "
+                        "(Content-Verlust, #623).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C29 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C30 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

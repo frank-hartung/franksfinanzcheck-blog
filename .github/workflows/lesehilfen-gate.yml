@@ -32,6 +32,10 @@ on:
       - "assets/css/extended/ff-voice.css"
       - "assets/css/extended/z-premium-blog.css"
       - "layouts/_partials/ff_voice_toolbar.html"
+      # Dauerheilung #623 (07.10.2026): Die Artikel-Ansicht liegt seitdem im
+      # gemeinsamen Baustein – ohne diesen Pfad liefe eine Änderung an der
+      # Einbindung der Lesehilfen nicht mehr durch dieses Gate.
+      - "layouts/_partials/artikel_einzeln.html"
       - "layouts/single.html"
       - "layouts/_default/single.html"
       - "layouts/pillar/single.html"

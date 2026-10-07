@@ -1,10 +1,9 @@
 ---
 title: "Daten & Studien"
+heading: "Daten, die man prüfen und zitieren kann"
 description: "Offene Datensätze, nachvollziehbare Modellrechnungen und quartalsweise Reports von FranksFinanzcheck – mit Methodik, Quellen und Downloads."
 draft: false
 ---
-
-# Daten, die man prüfen und zitieren kann
 
 Hier veröffentlicht FranksFinanzcheck **mindestens einmal pro Quartal** ein eigenständiges, verlinkbares Datenstück: Report, Tracker, Kalender oder Atlas. Jede Ausgabe enthält den Datensatz, die Rechenmethode, Primärquellen, Grenzen und ein zitierbares Presseformat.
 

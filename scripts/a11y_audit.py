@@ -13,10 +13,21 @@ Prüft auf allen Seiten:
   - Kontrast der Branding-Farben (WCAG AA: 4.5:1 normal, 3:1 groß)
 
 Nutzung:
-    python3 scripts/a11y_audit.py            # Audit
+    python3 scripts/a11y_audit.py            # Audit (alle gebauten Seiten)
     python3 scripts/a11y_audit.py --json     # JSON-Report
 
 Exit-Code: 0 = ok, 1 = A11y-Probleme
+
+BLINDER FLECK GESCHLOSSEN (Dauerheilung #623, 07.10.2026):
+Bis dahin prüfte dieses Audit eine STICHPROBE von 20 Seiten – von 107
+gebauten Seiten. Die dritte Doppel-H1 des Befundtages
+(/studien/fixkosten-index-2026-q4/) stand im selben Build und blieb
+UNSICHTBAR; gemeldet wurden nur /presse/ und /studien/. Ein Audit,
+das ein Fünftel sieht, würfelt. Jetzt läuft der Lauf über ALLE
+gebauten Seiten (eine Sekunde, kein Grund für eine Stichprobe) und
+nennt bei einer falschen H1-Anzahl die Überschriften TEXTLICH, damit
+das automatische Issue ohne Nachfrage erklärt, was zu tun ist.
+Die H1-Regel selbst gehört der Wache scripts/h1_wache.py (S1–S3).
 """
 import json
 import os
@@ -46,30 +57,54 @@ def hex_rgb(h):
     return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
 
-# Dateien, die bewusst minimal sind und NICHT geprüft werden:
-#  - google*.html: Verifikationsdatei (Google verlangt exakten Inhalt)
-#  - pinterest-*.html: Pinterest-Verifizierung (gleiche Logik)
-#  - page/N/: automatische Redirect-Seiten (leiten sofort weiter)
-#  - go/: Affiliate-Redirect-Seiten (leiten sofort weiter, keine echten Seiten)
-#  - BingSiteAuth.xml: keine HTML-Seite
-SKIP_PATTERNS = ("google", "pinterest-", "page/", "go/", "BingSiteAuth")
+# Seiten, die bewusst minimal sind und NICHT geprüft werden. Die Liste
+# gehört der H1-Wache (eine Wahrheit, keine zweite Ausnahme-Quelle):
+#   scripts/h1_wache.py → AUSNAHMEN_SEITE. Jeder Eintrag trägt dort
+#   seinen Grund; eine Ausnahme ohne Grund ist eine Lücke mit Etikett.
+#   - Verifikationsdateien (Google/Pinterest verlangen exakten Inhalt)
+#   - /page/N/: Blätter-Redirects ohne Seiteninhalt
+#   - /go/ und /pinterest-oauth*: reine Weiterleitungen (noindex)
+#   - BingSiteAuth.xml: keine HTML-Seite
+try:  # a11y_audit.py liegt wie die Wache in scripts/ – direkter Import.
+    from h1_wache import AUSNAHMEN_SEITE as AUSNAHMEN  # type: ignore
+except ImportError:  # fail-closed gemeldet, nicht stillschweigend grün
+    AUSNAHMEN = (
+        (r"(^|/)google[^/]*\.html$", "Verifikationsdatei"),
+        (r"(^|/)pinterest-[a-z0-9]+\.html$", "Verifikationsdatei"),
+        (r"(^|/)page/[0-9]+/", "Blätter-Redirect"),
+        (r"^pinterest-oauth/index\.html$", "Client-Redirect"),
+        (r"^go/", "Affiliate-Redirect"),
+        (r"^pinterest-oauth\.html$", "Client-Redirect"),
+    )
+    print("⚠ a11y_audit: scripts/h1_wache.py nicht ladbar – Ausnahmen "
+          "ersatzweise aus der eingebauten Liste (Gründe: h1_wache.py).")
+
+SKIP_PATTERNS = ("BingSiteAuth",)
 
 
 def collect_html_files():
+    """ALLE gebauten Seiten – seit #623 keine Stichprobe mehr.
+
+    Begründung: Eine Stichprobe von 20 aus 107 Seiten hat die dritte
+    Doppel-H1 des Befundtages nicht gesehen. Der vollständige Lauf
+    kostet rund eine Sekunde; eine Auslassung kostet ein Issue.
+    """
     files = []
     for root, dirs, names in os.walk(PUBLIC_DIR):
-        if "assets" in root or "tags" in root or "categories" in root:
+        if "assets" in root:
             continue
         for n in names:
             if not n.endswith(".html"):
                 continue
-            rel = os.path.relpath(os.path.join(root, n), PUBLIC_DIR)
+            rel = os.path.relpath(os.path.join(root, n), PUBLIC_DIR).replace(os.sep, "/")
             if any(p in rel for p in SKIP_PATTERNS):
                 continue
+            if any(re.search(muster, rel) for muster, _grund in AUSNAHMEN):
+                continue
             files.append(os.path.join(root, n))
-    # Wichtige Seiten zuerst
+    # Wichtige Seiten zuerst (flach vor tief) – nur die Ausgabe-Ordnung
     files.sort(key=lambda f: (f.count(os.sep), f))
-    return files[:20]  # Stichprobe
+    return files
 
 
 def audit_page(path):
@@ -84,9 +119,18 @@ def audit_page(path):
         issues.append("lang-Attribut fehlt")
     if '<title>' not in html and "<title>" not in html:
         issues.append("title fehlt")
-    h1s = len(re.findall(r"<h1[\s>]", html))
-    if h1s != 1:
-        issues.append(f"{h1s} h1 (erwartet: 1)")
+    h1s = re.findall(r"<h1[\s>].*?</h1>", html, re.S)
+    if len(h1s) != 1:
+        # Seit #623 textlich benannt: ein Issue, das nur „2 h1“ sagt,
+        # zwingt zum Nachfragen. Die Texte zeigen sofort, welche
+        # Überschrift aus dem Fließtext stammt (dort liegt die Ursache).
+        texte = []
+        for roh in h1s[:3]:
+            innen = re.sub(r"</h1>\s*$", "", re.sub(r"^<h1[^>]*>", "", roh, flags=re.S))
+            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", innen)).strip()
+            texte.append(f"„{text[:60]}“" if text else "„“ (leer)")
+        issues.append(f"{len(h1s)} h1 (erwartet: 1): " + " · ".join(texte)
+                      if texte else f"{len(h1s)} h1 (erwartet: 1)")
     # Bilder ohne alt-Text. WICHTIG: Ein nacktes `alt`-Attribut ist nach
     # HTML5 identisch mit alt="" (dekorativ) – Hugo --minify kürzt leere
     # Attribute genau so. Wir zählen also nur Bilder, die gar kein
@@ -195,15 +239,27 @@ def main():
             "css_probleme": css_issues,
             "kontrast": contrast_results,
             "gesamt_probleme": total_issues,
+            "ausnahmen": sorted({grund for _m, grund in AUSNAHMEN}),
         }, ensure_ascii=False, indent=2))
         sys.exit(1 if total_issues > 0 or contrast_fail else 0)
 
-    print(f"Barrierefreiheits-Audit: {len(page_results)} Seiten geprüft\n")
+    # Vollständiger Lauf (seit #623 keine Stichprobe): saubere Seiten
+    # werden nur gezählt, nicht aufgezählt – der Report bleibt lesbar.
+    sauber = [p for p in page_results if not p["probleme"]]
+    print(f"Barrierefreiheits-Audit: {len(page_results)} Seiten geprüft "
+          f"(vollständig, {len(sauber)} ohne Befund)\n")
     for p in page_results:
-        status = "✅" if not p["probleme"] else f"⚠️ ({len(p['probleme'])})"
-        print(f"{status} {p['seite']}")
+        if not p["probleme"]:
+            continue
+        print(f"⚠️ ({len(p['probleme'])}) {p['seite']}")
         for i in p["probleme"][:4]:
             print(f"     • {i}")
+    if len(page_results) != len(sauber):
+        print("")
+    for p in sauber[:12]:
+        print(f"✅ {p['seite']}")
+    if len(sauber) > 12:
+        print(f"✅ … und {len(sauber) - 12} weitere Seiten ohne Befund")
 
     print("\n=== CSS-Grundlagen ===")
     for i in css_issues:

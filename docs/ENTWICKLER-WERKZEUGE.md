@@ -198,3 +198,39 @@ Eigenschaften, auf die es ankommt:
   Vorschlags Betriebssprache, geht die neutrale Kurzform raus – oder gar nichts.
 - **Kein fremder Code.** `pull_request_target` checkt den Zielzweig aus und
   liest vom Vorschlag nur Nummer, Titel und Beschreibung.
+
+## Genau eine H1 pro Seite (Barrierefreiheit)
+
+Zwei H1 auf einer Seite sind unsichtbarer Schaden: Der Leser merkt kaum etwas,
+Screenreader, Inhaltsverzeichnis und KI-Antworten aber verlieren die Gliederung
+(WCAG 1.3.1 / 2.4.6). Deshalb gehört die H1 dem **Layout**, nie dem
+Markdown-Fließtext.
+
+```bash
+npm run h1:check      # Sabotageproben + Quelle + Hugo-Build + gebaute Seiten
+npm run a11y:check    # dieselbe Wache, danach das vollständige A11y-Audit
+npm run test:h1       # 20 Regressionstests der Wache
+python3 scripts/h1_wache.py --source-only    # nur Quelle (kein Build nötig)
+python3 scripts/h1_wache.py --public public  # nur die gebauten Seiten
+python3 scripts/h1_wache.py --json           # maschinenlesbar
+```
+
+**Für die Redaktion:** Wer statt des Titels eine eigene Schirmzeile über dem
+Artikel will, setzt sie als `heading:` ins Frontmatter – die H1 übernimmt
+diesen Text, Titel, Breadcrumb und SEO-Zeile bleiben unangetastet:
+
+```markdown
+---
+title: "Daten & Studien"
+heading: "Daten, die man prüfen und zitieren kann"
+---
+```
+
+Eine `# …`-Zeile im Fließtext ist dagegen tabu: Sie erzeugt die zweite H1, die
+Meldung #623 auslöste. Genau deshalb **heilt die Wache nicht selbst** – eine H1
+automatisch zu löschen hieße, einen redaktionellen Satz zu vernichten. Der
+Befund nennt Datei, Zeile und den Handgriff.
+
+**Hintergrund:** Meldung #623 (07.10.2026), Bericht
+`A11Y-EINE-H1-DAUERHEILUNG-PREMIUM-2026-10-07.md`, Vertrag C30 in
+`scripts/governance_contract.py`.

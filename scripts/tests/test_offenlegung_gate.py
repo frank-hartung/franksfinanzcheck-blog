@@ -200,7 +200,12 @@ class TestBauteilInvarianten(unittest.TestCase):
         self.assertIn("affiliate_ziele_data.html", ssot)
 
     def test_kennzeichnung_haengt_im_artikelkopf(self):
-        for layout in ("layouts/single.html", "layouts/_default/single.html",
+        # Dauerheilung #623 (07.10.2026): Die Einzelansicht liegt seitdem
+        # EINMAL im Baustein artikel_einzeln.html; layouts/single.html und
+        # layouts/_default/single.html binden ihn nur noch ein. Geprüft wird
+        # deshalb der Baustein – die Aussage bleibt dieselbe: Die Werbe-
+        # Kennzeichnung steht VOR dem Artikelinhalt.
+        for layout in ("layouts/_partials/artikel_einzeln.html",
                        "layouts/pillar/single.html", "layouts/pillar/list.html"):
             pfad = os.path.join(BLOG_DIR, layout)
             with self.subTest(layout=layout):

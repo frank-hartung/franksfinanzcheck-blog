@@ -12,8 +12,12 @@ class MarkenobjektVertrag(unittest.TestCase):
         return (ROOT / path).read_text(encoding="utf-8")
 
     def test_kostenprofil_ist_auf_startseite_und_artikel(self):
+        # Dauerheilung #623 (07.10.2026): Die Artikel-Ansicht liegt seitdem
+        # im gemeinsamen Baustein artikel_einzeln.html (vorher in zwei
+        # Kopien, von denen eine nie rendert). Der Vertrag gilt unverändert:
+        # Startseite und Artikel zeigen dasselbe Kostenprofil-Markenobjekt.
         home = self.read("layouts/_partials/home_info.html")
-        article = self.read("layouts/single.html")
+        article = self.read("layouts/_partials/artikel_einzeln.html")
         self.assertIn('partial "kostenprofil.html"', home)
         self.assertIn('"mode" "home"', home)
         self.assertIn('partial "kostenprofil.html"', article)

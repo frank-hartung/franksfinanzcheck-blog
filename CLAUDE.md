@@ -123,6 +123,8 @@ npm run test:ki                                        # Gate-Selbsttest (10 Sab
 npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
+npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
+npm run test:h1                                       # 20 Regressionstests der H1-Wache (Vertrag C30)
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
 npm run test:marke                                    # Wache (17 Fallgruppen) + Haken-Wächter (11) + 34 Regressionstests
 npm run hooks:status                                  # steht die Commit-Sperre in dieser Arbeitskopie? (sonst: hooks:install)
@@ -581,10 +583,13 @@ Artikel sagen das aktiv.
 → Kopf-Kennzeichnung (`ff_offenlegung.html`), Abbinder (`trust_box.html`),
 Partnerregister (`/transparenz/`). Nie eine zweite Partnerliste anlegen.
 
-**Beim Layout-Arbeiten:** Die Kennzeichnung hängt in **vier** Layouts
-(`single.html`, `_default/single.html`, `pillar/single.html`,
+**Beim Layout-Arbeiten:** Die Kennzeichnung hängt in **drei** Stellen
+(`_partials/artikel_einzeln.html`, `pillar/single.html`,
 `pillar/list.html` – letzteres mit `extraKeys`, weil Template-CTAs nicht in
-`.Content` stehen). Sie muss im `<header>` bleiben: `python3
+`.Content` stehen). Bis zur Dauerheilung #623 (07.10.2026) hing sie in
+*vier* Dateien, weil die Artikel-Ansicht doppelt lag (`single.html` und
+`_default/single.html`); seitdem binden beide Templates denselben Baustein
+ein – eine Änderung gehört dorthin, nie in eine zweite Kopie. Sie muss im `<header>` bleiben: `python3
 scripts/offenlegung_gate.py` (O1–O7, fail-closed) prüft Position **vor** dem
 ersten Partnerlink, Zahl/Partner artikelgenau, Pflichtangaben und
 Sichtbarkeit (kein `hidden`/`display:none`/`font-size:0`/`aria-hidden`).
