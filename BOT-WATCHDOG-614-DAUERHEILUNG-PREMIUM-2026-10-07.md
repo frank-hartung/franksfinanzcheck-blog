@@ -271,3 +271,85 @@ werden (Hugo-Build, hunspell, Zeichenlängen-Politik, KI-Stufe). Deshalb gilt:
 | `.github/workflows/reserve-nachweis.yml` | **neu** – Probe auf einem Ref, nur `workflow_dispatch` |
 | `scripts/tests/test_reserve_pipeline.py` | 2 Verträge: Chronik-Reihenfolge + genau eine Zeile |
 | `content/posts/2026-10-07-{dein-weg…,dsl-anbieter…,wie-smart-home…}/index.md` | geheilt (3 × 1 Zeile) |
+
+---
+
+## Nachtrag 07.10.2026, ~16:45Z – der zweite Befund: der Vorrat blutete
+
+### Befund (Belege, keine Vermutung)
+
+* Lauf `37645894042` (07.10., fertig 16:15Z): Zertifikat **2/6**, **`pool_size` 2** – vorher 12.
+* Die zehn verschwundenen Kandidaten tragen auf `main` im Frontmatter
+  `reserve_blocked` + `reserve_blocked_at: 2026-10-07T16:07:55Z` – aber **keine**
+  `reserve: true`-Fahne mehr (Kontrolle: die zwei verbliebenen Kandidaten tragen sie).
+* `data/reserve-custody.json` (main): zehn Einträge `zustand: ausgemustert`,
+  `zuletzt_im_pool: 2026-10-07`.
+* `data/reserve-quarantine.json` (main): `{}` – die Quarantäne hatte **ihren eigenen
+  Beleg schon gelöscht**: `record()` streicht Kandidaten aus dem Zähler, die nicht mehr
+  im Pool sind. Genau deshalb war der Verlust im Repo unsichtbar (und nur über die
+  vergossenen Frontmatter-Zeilen rekonstruierbar).
+* `reserve_readiness.py` (Stufe 3) ruft `reserve_quarantine.record(rows)` auf;
+  `record()` entschied **nur nach Laufzahl** (`hits >= RESERVE_QUARANTINE_HITS`), nie
+  nach der **Klasse** – obwohl genau dieselben Befunde in der SSOT
+  `reserve_blocker_klassen.GATE_BEFUNDE` als **heilbar** geführt werden
+  (7× Lesbarkeit, 1× Zeichenlänge, 1× quality-score, 1× Textverständnis).
+* Reihenfolge: Stufe 2 (Heiler-Kette) → Stufe 3 (Zertifikat + Ausmusterung). Der
+  Bestands-Wächter der Folgeläufe (Stufe 0b) heilt nur **verlorene** Fahnen – nicht
+  **ausgemusterte** (Ledger-Zustand `ausgemustert`). Damit war die Ausmusterung eine
+  **Einbahnstraße**.
+
+### Die Klasse (nicht der Einzelfall)
+
+Eine Automatik, die Material für einen *heilbaren* Befund dauerhaft aussperrt, wird
+genau dann kleiner, wenn die Heiler besser werden. Am 07.10. traf es zehn Kandidaten in
+einem Lauf – 100 % der nicht zertifizierten Reserve. Der Watchdog konnte danach nur
+noch „Vorrat niedrig" melden; die Ursache (eine Politik, kein Inhalt) stand nirgends
+im Repo. Das ist die zweite Hälfte von „Deckung ohne Wirkung": erst heilte niemand die
+Klasse (Politur-Heiler, erste Nachtschicht), dann **bestrafte** das System sie.
+
+### Reparatur (vier Schichten)
+
+1. **Klassen-Tor** in `reserve_quarantine.record()`: Ausmustern nur noch, wenn die
+   SSOT den Befund als UNHEILBAR führt. Heilbar, Menschsache, Werkzeugfehler und
+   Unbekanntes lassen die Fahne stehen (fail-closed); die Schonung wird mit Klasse,
+   Heiler und Laufzahl begründet, im Zustand geführt und im Zertifikat als `geschont`
+   ausgewiesen. Die Textverständnis-Klasse (R7/R11–R16) ist in der SSOT jetzt als
+   heilbar geführt (Politur-Heiler + Absatz-Splitter).
+2. **Rückholung mit Beweis** in `reserve_custody.py`: Ein ausgemusterter Kandidat kehrt
+   zurück, wenn (a) seine Klasse heilbar ist, (b) ein Heiler der Klasse in der echten
+   Kette läuft und (c) dieser Heiler einen **grünen Wirkungsnachweis** hat (C25).
+   Setzt Fahne + Belegzeile `reserve_reaktiviert`, Inhalt unberührt, Quarantäne-Zähler
+   zurück, idempotent, Trockenlauf schreibfrei. Ohne Beweis bleibt er ausgemustert –
+   und wird mit Grund gemeldet. Nebenbei behoben: `RE_DRAFT_ZEILE` fraß mit `\s*$`
+   über Zeilenenden (die Fahne konnte am Kopf-Ende landen).
+3. **Satz-Heiler** `scripts/satz_heiler.py`: heilt die Lesbarkeits-Klasse satzweise
+   mit der KI (die KI sieht nur Sätze ohne Zahlen/Markup, das Ganztext-Tor T1–T4
+   entscheidet unverändert; R5-Absätze teilt die SSOT). Kettenglied **vor** dem
+   Lesbarkeits-Heiler; Wirkungsprobe grün (Flesch 42 → 67 an der echten Formel);
+   in `REGEL_HEILER`, `WIRKUNGS_PROBEN` und `governance_contract.GUARDS`.
+4. **Maschinenbeweis** `reserve_healer_coverage.py --vorratsschutz` – läuft in jedem
+   CI-Durchgang und prüft mit den **zehn Original-Befunden des Vorfalls**: kein
+   Fahnenverlust für Heilbares · Ausmusterung nur für Unheilbares · Unbekanntes bleibt
+   fail-closed · Rückholung nur mit Wirkungsnachweis.
+
+### Nachweise (lokal ausgeführt)
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 -m unittest discover -s scripts/tests` | **2032 Tests · OK** (23 skipped) – nach Re-Signatur des Kerns |
+| `integrity_guard --drift-audit` / `--gate` | Herkunft `700d903` dokumentiert, neu signiert, Gate **grün** |
+| `reserve_healer_coverage --vorratsschutz` | 7 Original-Befunde ohne Fahnenverlust · 1 unheilbare Ausmusterung · 1 fail-closed · 1 Rückholung · 1 Verweigerung ohne Nachweis |
+| `reserve_quarantine --selftest` / `reserve_custody --selftest` | grün (inkl. Klassen-Tor und Rückholung als Vertrag) |
+| `governance_contract --selftest` | C1–C27 grün |
+| `test_reserve_vorratsschutz.py` / `test_reserve_pipeline.py` | 20 / 114 Tests grün |
+
+### Offene Punkte (bewusst benannt)
+
+* **Klassen ohne Wirkungsnachweis**: `zeichenlänge` (check_length → extend_articles)
+  und `quality-score` (profi_polish/spellcheck/check_length). Deshalb bleiben
+  `heizoel-preise-2026-…` und `etf-sparplan-…` vorerst ausgemustert – ein
+  Wirkungsnachweis für diese Klasse(n) gibt sie automatisch zurück.
+* **CI-Evidenz**: GitHub hat für die letzten Pushes dieser Session **keine neuen
+  `pull_request`-Läufe** ausgelöst; `workflow_dispatch` ist dem Token verweigert
+  (HTTP 403). Die vollständige Testentdeckung ist deshalb lokal belegt, das
+  Zertifikat (≥ 4) liefert der erste Produktionslauf nach dem Merge.
