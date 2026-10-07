@@ -24,7 +24,7 @@
     "seit": "2026-10-05",
     "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
     "titel": "Büroausstattung steuerlich clever absetzen: So geht's",
-    "zuletzt_im_pool": "2026-10-06",
+    "zuletzt_im_pool": "2026-10-07",
     "zustand": "pool"
   },
   "campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
@@ -33,6 +33,20 @@
     "titel": "Urlaub sparen: Clever sparen ohne Komfortverlust",
     "zuletzt_im_pool": "2026-10-06",
     "zustand": "ausgemustert"
+  },
+  "dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+    "titel": "Dein Weg zu geringeren: Monatskosten – Schritt für Schritt",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+    "titel": "DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
   },
   "energieausweis-was-das-dokument-fuer-deine-fixkosten": {
     "seit": "2026-10-06",
@@ -55,6 +69,13 @@
     "zuletzt_im_pool": "2026-10-06",
     "zustand": "ausgemustert"
   },
+  "etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+    "titel": "ETF‑Sparplan starten: Schritt‑für‑Schritt zum monatlichen",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
   "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
     "seit": "2026-10-02",
     "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
@@ -72,6 +93,27 @@
     "herkunft": "Zertifikat 2026-09-25 (data/reserve-readiness.json, Commit 89810ed) – ready=True",
     "seit": "2026-09-25",
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+    "zustand": "pool"
+  },
+  "handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+    "titel": "Handyvertrag kündigen: Raus aus der Kostenfalle Verlängerung",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+    "titel": "Haushaltskosten reduzieren: So gewinnst du die Kontrolle",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+    "titel": "Heizöl Preise: 2026 – So findest du den optimalen Kaufzeitpu",
+    "zuletzt_im_pool": "2026-10-07",
     "zustand": "pool"
   },
   "internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
@@ -102,11 +144,46 @@
     "zuletzt_im_pool": "2026-10-02",
     "zustand": "pool"
   },
+  "stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+    "titel": "Stromkosten senken: – clevere Haushaltsgeräte im Überblick",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+    "titel": "Urlaub sparen: 7 clevere Wege, deine Kasse zu füllen",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+    "titel": "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
+  "waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+    "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+    "zuletzt_im_pool": "2026-10-07",
+    "zustand": "pool"
+  },
   "weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
     "seit": "2026-10-02",
     "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
     "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
     "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
+  "wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
+    "seit": "2026-10-07",
+    "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
+    "titel": "Wie smart Home‑Geräte: deine Stromrechnung wirklich drücken",
+    "zuletzt_im_pool": "2026-10-07",
     "zustand": "pool"
   },
   "wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {

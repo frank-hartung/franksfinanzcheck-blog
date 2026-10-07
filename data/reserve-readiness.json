@@ -1,39 +1,9 @@
 {
   "target": 6,
-  "ready": 3,
-  "pool_size": 3,
-  "generated_at": "2026-10-06T15:44:02Z",
+  "ready": 2,
+  "pool_size": 12,
+  "generated_at": "2026-10-07T11:11:50Z",
   "candidates": [
-    {
-      "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
-      "ready": true,
-      "sha256": "611548c13a917842875ad29a1004da1e9192adff7d8c9a969842d53d9e033603",
-      "score": 0.954,
-      "parts": {
-        "spelling": 0.78,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
-      "ready": true,
-      "sha256": "0891afc1757896c5bdd5c1ce8e2c7b3caf62b8cb49597bd16096dc16ae0ff7a5",
-      "score": 0.964,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
     {
       "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
       "ready": true,
@@ -44,6 +14,232 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+      "ready": true,
+      "sha256": "f98e1d95fd085069239960e4fb4bd259fc9611d81a0fd43599d9f9c61f80dc4e",
+      "score": 0.966,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "ready": false,
+      "sha256": "e2ca865da413de53bd6d4207416fa7edbb049dca0110c100d494923f077d328d",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 57.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 57.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…dein weg zu geringeren im check dein weg zu geringeren…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.878,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.8,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+      "ready": false,
+      "sha256": "e6d8c936e31b7e36f55a5b060580ec895e18f5faf8db12c2f64b0e45d9b05e8e",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 59.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 59.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.94,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "ready": false,
+      "sha256": "29bead36a15cb359bedb6dad3faf0ecfce0e595d6ba8aa1411386e7b8c1218ae",
+      "reason": "quality-score 0.839 < 0.85 (schwach: structure 0.70, readability 0.75, typography 0.84)",
+      "details": [
+        "Reserve nicht bereit: 2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen: {'slug': '2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen', 'score': 0.839, 'parts': {'spelling': 0.86, 'meta': 0.85, 'structure': 0.7, 'typography': 0.84, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
+      ],
+      "score": 0.839,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 0.84,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "ready": false,
+      "sha256": "1685884d248861c9095869f8c3562a2ed5f6cbf675bdf171e2630452a595cf30",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.94,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": false,
+      "sha256": "e96b6ac11a92bc11b718ddeccffa1f627271cd5bbccfe22f87afad713938f6ba",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
+      "details": [
+        "🛑 2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 53.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.879,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 0.85,
+        "structure": 0.7,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.75
+      }
+    },
+    {
+      "slug": "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "ready": false,
+      "sha256": "689c8abb7d46b8b03a1de0d6bcf88a25d834df87339e749b158756a56938529f",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschni",
+      "details": [
+        "🛑 2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.884,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.84,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.7
+      }
+    },
+    {
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "ready": false,
+      "sha256": "39e1c305e8b327c81e584dbce1cda5af34dcdbdf54954284a2b5e1f78db061b1",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.888,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.6799999999999999,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+      "ready": false,
+      "sha256": "d5649230c349eeb5ac2a770a1101c8464421a748ee373375d011f28979cd9b91",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 55.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 55.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.892,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "ready": false,
+      "sha256": "ef97139711a18508b6a14bd5a7df1a05f8ab88319b58dcb1c3c8538f24cdf773",
+      "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+      "details": [
+        "🛑 2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.936,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.8
+      }
+    },
+    {
+      "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
+      "ready": false,
+      "sha256": "10039ba17f304b53f51996d678f6edb49543dbb0ba95bc13369f94aa79b1a9f1",
+      "reason": "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
+      "details": [
+        "🛑 2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.95,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
