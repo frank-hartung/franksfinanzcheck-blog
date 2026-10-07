@@ -281,7 +281,7 @@ Wenn Engpässe nur punktuell auftreten, löst ein teurerer Tarif das Problem oft
 
 Ein guter Tarif wirkt erst im längeren Blick wirklich günstig.
 
-Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate. Genau diese Zahl schützt dich besser vor Lockangeboten als jede große Mbit‑Werbung.
+Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate. Genau diese Zahl [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) besser vor Lockangeboten als jede große Mbit‑Werbung.
 
 ## Meine Kurz‑Checkliste für heute
 
