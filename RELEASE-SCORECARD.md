@@ -95,7 +95,6 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 | `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 30 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
-| `2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit` | standard | nicht erforderlich | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-21-tierkrankenversicherung-hund-katze-kosten` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
 | `2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten` | hoch | ausstehend | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | unbekannt ⚠️ überfällig |
@@ -111,6 +110,7 @@ Keine – der komplette Live-Bestand ist frei von blockierenden Funden.
 | `2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-06-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2026-11-20 |
 | `2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert` | standard | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | standard | nicht erforderlich | frisch geprüft vor 10 Tagen (Intervall 45 Tage) | 2026-11-11 |
 | `2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 90 Tage) | 2027-01-05 |
 | `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-11-21 |
 | `2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | erhoeht | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-11-21 |
