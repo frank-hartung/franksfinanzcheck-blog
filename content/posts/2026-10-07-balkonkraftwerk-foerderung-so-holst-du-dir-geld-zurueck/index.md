@@ -62,7 +62,7 @@ Wer nach einer zentralen Stelle sucht, die jedem Haushalt pauschal einen Scheck 
 
 Städte wie Berlin, München oder viele kleinere Gemeinden haben eigene Budgets reserviert, um ihre lokalen Klimaziele zu erreichen. Für dich bedeutet das: Du musst in deinem direkten Wohnumfeld recherchieren. Oft sind diese Töpfe begrenzt und werden nach dem Windhundprinzip ("Wer zuerst kommt, mahlt zuerst") geleert. Wenn das Budget für ein Kalenderjahr erschöpft ist, schauen Spätentschlossene oft in die Röhre.
 
-Ein weiterer Aspekt ist der indirekte **Solaranlage Zuschuss** durch den Wegfall der Mehrwertsteuer. Dies ist die einzige wirklich flächendeckende Erleichterung, die der Bund dauerhaft etabliert hat. Sie reduziert den Kaufpreis direkt beim Händler, ohne dass du ein Formular ausfüllen musst. Im Vergleich zu den kommunalen Zuschüssen ist dies die sicherste Ersparnis, die du fest in deine Kalkulation einplanen kannst.
+Ein weiterer Aspekt ist der indirekte **Solaranlage Zuschuss** durch den Wegfall der Mehrwertsteuer. Dies ist die einzige wirklich flächendeckende Erleichterung, die der Bund dauerhaft etabliert hat. Du reduzierst den Kaufpreis direkt beim Händler, ohne dass du ein Formular ausfüllen musst. Im Vergleich zu den kommunalen Zuschüssen ist dies die sicherste Ersparnis, die du fest in deine Kalkulation einplanen kannst.
 
 ## Welche Städte und Regionen zahlen aktuell einen Zuschuss?
 

@@ -171,7 +171,7 @@ Wenn du diese Routine 5 Tage pro Woche beibehältst, hast du **280 €** pro
 
 ## Praktische Tipps für ein schlankes Reisebudget
 Transparenz ist die wichtigste Basis für jeden günstigen Trip in die Ferne.  
-Erstelle eine einfache Liste für Transport, Verpflegung und deine Freizeitaktivitäten.  
+Mach eine einfache Liste für Fahrt, Essen und deine Freizeit.  
 Markiere die teuersten Posten und suche gezielt nach günstigeren Alternativen.  
 Ein Picknick aus dem Supermarkt statt eines teuren Hotel‑Frühstücks spart viel Geld.  
 Oft sparst du so problemlos 10 € bis 15 € pro Person und Tag.
@@ -187,7 +187,7 @@ Oft sparst du so problemlos 10 € bis 15 € pro Person und Tag.
 Gute Reisekreditkarten helfen dir massiv dabei, beim Buchen aktiv **[Geld sparen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)** zu können.  
 Du sammelst bei jedem Flug und jeder Unterkunft Punkte oder direktes Bargeld.  
 Oft fließen so 1 % bis 2 % der Gesamtsumme an dich zurück.  
-Achte darauf, dass die Karte keine versteckten Gebühren im Ausland verlangt. So refinanzierst du einen Teil deiner Urlaubsausgaben vollkommen automatisch.
+Achte darauf, dass die Karte keine versteckten Gebühren im Ausland verlangt. So deckst du einen Teil deiner Urlaubskosten automatisch.
 
 ## Bonus‑Strategie: Automatischer Sparplan für die Reisekasse
 - **Monatlicher Dauerauftrag:** Leite am 1. jedes Monats 5 % deines Nettoeinkommens (z. B. 150 € bei 3.000 € Netto) auf ein separates Sparkonto.
@@ -220,7 +220,7 @@ Prüfe im Kleingedruckten die Regelungen zu Kaution, Kilometern und der Tankfül
 Ein einfaches Notizbuch oder eine Excel‑Tabelle reichen für den Überblick völlig aus. Wichtig ist nur, dass du jede Ausgabe konsequent und zeitnah einträgst.
 
 ### Was tun, wenn ich über mein Budget komme?
-Greife sofort auf deinen zuvor eingeplanten Puffer von 1 % pro Tag zurück. Reduziere gleichzeitig deine Ausgaben für Restaurantbesuche oder Shopping für den Rest der Reise.
+Greife sofort auf deinen zuvor eingeplanten Puffer von 1 % pro Tag zurück. Spare gleichzeitig bei Essen gehen und beim Einkaufen für den Rest der Reise.
 
 ### Wie baue ich automatisiert eine Reisekasse auf?
 Richte einen Dauerauftrag ein, der monatlich 5 % deines Nettoeinkommens auf ein separates Sparkonto überweist. Kombiniere das mit Rundungs‑Sparen‑Apps, um jede kleine Ausgabe in deine Kasse zu leiten.
