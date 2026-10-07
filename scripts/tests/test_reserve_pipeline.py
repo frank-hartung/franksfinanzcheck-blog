@@ -1356,6 +1356,55 @@ class WorkflowVertragTests(unittest.TestCase):
         self.assertIn("data/reserve-topic-ledger.json", sync)
         self.assertIn("data/reserve-custody.json", sync)
 
+    def test_chronik_entsteht_vor_der_sicherung(self):
+        """#614: Der Blocker-Verlauf muss das Repo erreichen, nicht nur das Log.
+
+        Das End-Gate ist der LETZTE Schritt des Laufs. Seine Chronik-Zeile
+        entstand damit erst nach dem Commit – `data/reserve-history.jsonl` auf
+        main trug deshalb keinen einzigen CI-Lauf. Der Workflow schreibt sie
+        jetzt VOR dem Staging.
+        """
+        root = Path(__file__).resolve().parents[2]
+        wf = (root / ".github" / "workflows" /
+              "content-reserve.yml").read_text(encoding="utf-8")
+        self.assertIn("reserve_gate.py --chronik", wf)
+        self.assertLess(
+            wf.index("reserve_gate.py --chronik"),
+            wf.index("if ! git diff --cached --quiet; then"),
+            "die Chronik-Zeile muss VOR dem Commit entstehen")
+
+    def test_chronik_bahn_schreibt_genau_eine_zeile(self):
+        """`--chronik` ist eine eigene, schreibende Bahn – und sie testet sich."""
+        import tempfile
+        root = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = Path(tmp) / "cert.json"
+            ziel = 6
+            cert.write_text(json.dumps({
+                "target": ziel, "ready": 2, "generated_at": "2026-10-07T13:20:00Z",
+                "candidates": [
+                    {"slug": "a", "ready": True, "score": 0.96},
+                    {"slug": "b", "ready": True, "score": 0.95},
+                    {"slug": "c", "ready": False, "score": 0.4,
+                     "reason": "Zeichenlänge"},
+                ]}), encoding="utf-8")
+            historie = Path(tmp) / "history.jsonl"
+            env = dict(os.environ, RESERVE_HISTORY=str(historie),
+                       RESERVE_TARGET=str(ziel), GITHUB_RUN_ID="12345")
+            r = subprocess.run(
+                [sys.executable, str(root / "scripts" / "reserve_gate.py"),
+                 "--cert", str(cert), "--chronik"],
+                cwd=root, env=env, capture_output=True, text=True, timeout=120)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            zeilen = [z for z in historie.read_text(encoding="utf-8").splitlines()
+                      if z.strip()]
+            self.assertEqual(1, len(zeilen), "genau EINE Zeile pro Lauf")
+            daten = json.loads(zeilen[0])
+            self.assertEqual(2, daten["ready"])
+            self.assertEqual(ziel, daten["target"])
+            self.assertEqual(["c"], daten["blocker"])
+            self.assertEqual("12345", daten["lauf"])
+
 
 # ===========================================================================
 #  #393 – DIE MESSLATTE GEHÖRT NICHT DEM GEMESSENEN

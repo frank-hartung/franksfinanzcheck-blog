@@ -278,8 +278,13 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
 
 
 def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
-    """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag."""
-    pfad = ROOT / "data" / "reserve-history.jsonl"
+    """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag.
+
+    Zielpfad über `RESERVE_HISTORY` umlenkbar (dieselbe Konvention wie
+    `RESERVE_TOPIC_LEDGER`), damit Tests nicht in das echte Gedächtnis schreiben.
+    """
+    pfad = Path(os.environ.get("RESERVE_HISTORY")
+                or ROOT / "data" / "reserve-history.jsonl")
     zeile = {
         "ts": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ready": ready, "target": target, "pool": len(candidates),
@@ -455,10 +460,28 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Harter End-Gate der Content-Reserve")
     ap.add_argument("--selftest", action="store_true", help="interne Tests ausführen")
     ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat (für Tests)")
+    ap.add_argument("--chronik", action="store_true",
+                    help="NUR die Chronik-Zeile dieses Laufs schreiben (für den "
+                         "Sicherungs-Schritt VOR dem Push) – dieselbe Zeile, "
+                         "die das End-Gate sonst erst nach dem Commit anlegt")
     args = ap.parse_args()
     if args.selftest:
         return run_selftest()
     cert = Path(args.cert)
+    if args.chronik:
+        # BOT-WATCHDOG #614 (07.10.2026): Das End-Gate läuft NACH dem Push
+        # („Stock shortage must not look successful“ ist der letzte Schritt).
+        # Seine Chronik-Zeile entstand dadurch erst nach der Sicherung und
+        # wurde nie committet: `data/reserve-history.jsonl` auf main trug
+        # keinen einzigen CI-Lauf, sondern nur „lokal“-Zeilen – der
+        # Blocker-Verlauf über Läufe hinweg war unsichtbar. Der Workflow ruft
+        # diese Bahn jetzt VOR dem Staging auf.
+        ready, target, candidates = evaluate(cert)
+        chronik_schreiben(ready, target, candidates)
+        print(f"Chronik geschrieben: {ready}/{target} bereit · "
+              f"{sum(1 for c in candidates if not c.get('ready'))} Blocker · "
+              f"Lauf {os.environ.get('GITHUB_RUN_ID', 'lokal')}")
+        return 0
     ready, target, candidates = evaluate(cert)
     report(ready, target, candidates)
     chronik_schreiben(ready, target, candidates)
