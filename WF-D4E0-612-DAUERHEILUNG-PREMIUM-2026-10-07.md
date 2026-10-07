@@ -108,7 +108,7 @@ für Nacht neu.
    grüne `--wirkungsprobe`; `reserve_blocker_klassen.GATE_BEFUNDE` klassifiziert
    die drei heilbaren Ruinen als `heilbar` **mit** ihrem Heiler (die nicht
    rekonstruierbaren Geschwister bleiben bewusst „unbekannt"/fail-closed); die
-   neue **Governance-Regel C28** („Der Schreiber prüft, was über ihn
+   neue **Governance-Regel C29** („Der Schreiber prüft, was über ihn
    entscheidet") prüft die vier blinden Stellen am echten Baum **und** mit
    Sabotagen im Selbsttest; der Heiler steht unter Integritäts-Siegel
    (FEST-Liste, Akte „NEU UNTER SIEGEL").
@@ -126,16 +126,27 @@ für Nacht neu.
   davon **14 neue** (Ruinen-Heilung je Klasse, fail-closed-Fälle, Idempotenz,
   Realfall smart-home, Geburtsmessung gegen die SSOT, Retry-Gedächtnis,
   Chronik-Idempotenz + Workflow-Reihenfolge, Klassen-Deckung).
-* **Suiten:** `selftest_runner.py` → **166 Wachen, 332 Uhr-Proben, alles grün**;
+* **Suiten:** `selftest_runner.py` → **167 Wachen, 334 Uhr-Proben, alles grün**;
   `reserve_gate --selftest` ✅; `reserve_healer_coverage --selftest` ✅;
   `reserve_blocker_klassen --selftest` ✅.
-* **Governance:** `governance_contract.py --selftest` ✅ (C1–C28 mit
-  Kunstbefunden; jede Sabotage wird erkannt) · Vollprüfung ✅ („alle 27 Regeln
+* **Governance:** `governance_contract.py --selftest` ✅ (C1–C29 mit
+  Kunstbefunden; jede Sabotage wird erkannt) · Vollprüfung ✅ („alle 28 Regeln
   prüfen in beide Richtungen").
 * **Build:** Hugo 0.164.0 (extended) — 78 Seiten, 1.324 statische Dateien, grün.
 * **Integrität:** Neusignatur mit `--set-current` (zweiter Commit dieser PR):
   Akte „NEU UNTER SIEGEL" für `scripts/politur_ruine_heiler.py`, Historie-Zeile
   in `data/integrity_history.jsonl`.
+
+## Nach dem Zusammenführen mit `main`
+
+Während dieser Reparatur sind zehn Commits auf `main` gelandet (u. a. **#624**
+mit einer eigenen Governance-Regel „C28 – Die Klasse geht dem Kanal vor" für die
+Auslieferungs-SLO, #611). Der Stand wurde zusammengeführt, **die neue Regel
+dieser Reparatur heißt darum C29** – doppelte Regelnummern wären in Logs und
+Greps zwei Wahrheiten. Die Zusammenführung ist grün nachgeprüft: Tests, Suiten,
+Governance-Selbsttest (C1–C29) und Integritäts-Gate (47 Kerndateien).
+
+
 
 ## Grenzen – ehrlich benannt
 
@@ -167,7 +178,7 @@ für Nacht neu.
 ## Regressionen
 
 Alle 14 neuen Tests sind dauerhafte Verträge. Zusätzlich hält die
-Governance-Regel C28 (inkl. Selbsttest mit Sabotagen) fest, dass die vier
+Governance-Regel C29 (inkl. Selbsttest mit Sabotagen) fest, dass die vier
 blinden Stellen nicht wiederkommen können. Die Integritäts-Akte zeichnet den
 Heiler als Schwellen-Wache unter Siegel nach.
 
