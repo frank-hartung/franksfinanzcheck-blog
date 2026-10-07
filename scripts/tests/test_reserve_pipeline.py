@@ -2291,9 +2291,7 @@ class RuinenKlassenDeckungTests(unittest.TestCase):
         # Wirkungsnachweis): Er ist das Netz für die Ruinen, die der schmale
         # Heiler bewusst liegen lässt – etwa den doppelten Titel-Einstieg, an
         # dem der Reserve-Vorrat am 07.10. auf 2/6 fiel.
-        self.assertEqual(b["heiler"][0], "politur_ruine_heiler.py")
-        self.assertIn("politur_heiler.py", b["heiler"],
-                      "der breite Politur-Heiler deckt dieselbe Klasse (#614)")
+        self.assertEqual(b["heiler"], ["politur_ruine_heiler.py"])
         # Jeder genannte Schreiber muss existieren UND in der echten Kette
         # laufen – sonst ist die Klassen-Zusage nur Prosa.
         kette = {eintrag[0] for eintrag in rf.HEALER_CHAIN}
@@ -2304,3 +2302,13 @@ class RuinenKlassenDeckungTests(unittest.TestCase):
                           f"genannter Heiler läuft nicht in der Kette: {name}")
         self.assertFalse(rbk.gate_befund_loeschbar("R14-MARKER-RUINE: x")[0],
                          "ein heilbarer Fund darf nie ein Löschgrund sein")
+
+    def test_breite_familie_nennt_den_politur_heiler(self):
+        """#614: Die RESTLICHE harte Familie (R7/R15/R16) nennt den breiten
+        Politur-Heiler – er ist ihr Schreiber, mit Wirkungsnachweis in der Kette."""
+        b = rbk.gate_befund_klasse(
+            "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: "
+            "„in diesem ratgeber“ ×1 (Template-Sprache – umformulieren)")
+        self.assertEqual(b["klasse"], rbk.HEILBAR)
+        self.assertIn("politur_heiler.py", b["heiler"],
+                      "die breite Familie braucht ihren Schreiber (#614)")

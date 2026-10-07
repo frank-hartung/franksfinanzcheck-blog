@@ -227,17 +227,17 @@ GATE_BEFUNDE: tuple[dict, ...] = (
     # automatisierten Politur-Laufs“, blieb liegen, zog zwei Läufe und der
     # Vorrat fiel unter das Ziel – der rote End-Gate aus #612.
     {"muster": "r11-jahreszahl-split", "klasse": HEILBAR,
-     "heiler": ("politur_ruine_heiler.py", "politur_heiler.py"),
+     "heiler": ("politur_ruine_heiler.py",),
      "grund": ("Ein Jahreszahl-Split in Zeilen/Tabellen wird vom "
                "Politur-Ruinen-Heiler deterministisch zusammengesetzt "
                "(Tor T1–T4, sonst Byte-identisch zurück).")},
     {"muster": "r13-datum-punkt", "klasse": HEILBAR,
-     "heiler": ("politur_ruine_heiler.py", "politur_heiler.py"),
+     "heiler": ("politur_ruine_heiler.py",),
      "grund": ("Zerlegte Datumsangaben liest der Ruinen-Heiler verlustfrei "
                "zusammen; die Verifikation vergleicht Wortzahl und harte "
                "Regeln vor/nach dem Eingriff.")},
     {"muster": "r14-marker-ruine", "klasse": HEILBAR,
-     "heiler": ("politur_ruine_heiler.py", "politur_heiler.py"),
+     "heiler": ("politur_ruine_heiler.py",),
      "grund": ("Überreste automatisierter Politur-Läufe („SATZ:“) entfernt "
                "der Ruinen-Heiler – der Kandidat bleibt Vorrat statt "
                "Quarantäne (WF-D4E0 #612).")},
