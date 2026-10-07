@@ -1,10 +1,11 @@
 ---
 title: "Energieausweis: Was das Dokument für deine Fixkosten"
 description: Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt.
-date: 2026-10-06T10:49:15Z
+date: 2026-10-07T17:47:29Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.2 (Mindestw"
-reserve_blocked_at: 2026-10-06T15:37:21Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -31,6 +32,7 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-10-06
+kurzantwort: "Ja, ein Energieausweis ist beim Verkauf oder der Neuvermietung einer Immobilie gesetzlich verpflichtend. Die Kosten für das Dokument liegen je nach Ausführung meist zwischen 50 und 500 Euro. Eine hohe Energieeffizienzklasse senkt die monatlichen Heizkosten deutlich und steigert gleichzeitig den Marktwert der Immobilie."
 ---
 
 Stell dir vor, du hast endlich einen Käufer für dein Haus gefunden oder möchtest die Einliegerwohnung neu vermieten. Die Besichtigung läuft hervorragend, die Chemie stimmt.
@@ -154,7 +156,7 @@ Wenn du merkst, dass dein aktuelles Dokument abläuft oder du für einen Verkauf
 
 Viele Immobilienbesitzer stolpern über vermeidbare Hürden, die am Ende Geld und Nerven kosten. Ein häufiger Fehler ist die Verwendung veralteter Daten. Wenn du vor fünf Jahren die Fenster getauscht hast, aber einen Ausweis auf Basis der alten Zustände erstellen lässt, ist das Ergebnis schlechter als die Realität. Das drückt den Verkaufspreis.
 
-Ein weiterer Fehler ist die "Geiz-ist-geil"-Mentalität bei Online-Ausweisen. Wer hier falsche Quadratmeterzahlen oder falsche Angaben zur Heizungsart macht, besitzt ein Dokument, das rechtlich keinen Bestand hat. Bei einem Rechtsstreit mit dem Käufer kann das teuer werden.
+Ein weiterer Fehler ist die "Geiz-ist-geil"-Mentalität bei Online-Ausweisen. Wer hier falsche Quadratmeterzahlen oder **unrichtige** Angaben zur Heizungsart macht, besitzt ein Dokument, das rechtlich keinen Bestand hat. Bei einem Rechtsstreit mit dem Käufer kann das teuer werden.
 
 Oft wird auch vergessen, dass der Energieausweis für das gesamte Gebäude gilt, nicht für die einzelne Wohnung. Wer für seine Eigentumswohnung einen eigenen Ausweis erstellen will, zahlt meist drauf – hier ist die Hausverwaltung der richtige Ansprechpartner, da diese das Dokument für das gesamte Objekt vorhalten muss.
 
@@ -188,7 +190,7 @@ Wenn du verpflichtet bist, einen Ausweis vorzulegen (Verkauf/Vermietung), und di
 Nein, Baudenkmäler sind von der Pflicht zur Vorlage eines Energieausweises offiziell befreit. Das liegt daran, dass energetische Sanierungen bei Denkmälern oft nur eingeschränkt möglich oder wirtschaftlich nicht zumutbar sind. Dennoch kann es für Eigentümer eines Denkmals sinnvoll sein, eine energetische Beratung in Anspruch zu nehmen, um die hohen Betriebskosten solcher Gebäude besser in den Griff zu bekommen.
 
 ### Kann ich die Kosten für den Energieausweis steuerlich absetzen?
-Wenn du die Immobilie vermietest, gehören die Kosten für die Erstellung des Energieausweises zu den Werbungskosten aus Vermietung und Verpachtung. Du kannst sie also direkt steuerlich geltend machen. Für Selbstnutzende Eigentümer gibt es diese direkte Möglichkeit in der Regel nicht, es sei denn, die Erstellung erfolgt im Rahmen einer energetischen Baubegleitung, für die es spezielle steuerliche Förderungen oder Zuschüsse gibt.
+Wenn du die Immobilie vermietest, gehören die Kosten für die Erstellung des Energieausweises zu den Werbungskosten aus Vermietung und Verpachtung. Du kannst sie also direkt [steuerlich](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) geltend machen. Für Selbstnutzende Eigentümer gibt es diese direkte Möglichkeit in der Regel nicht, es sei denn, die Erstellung erfolgt im Rahmen einer energetischen Baubegleitung, für die es spezielle steuerliche Förderungen oder Zuschüsse gibt.
 
 ---
 

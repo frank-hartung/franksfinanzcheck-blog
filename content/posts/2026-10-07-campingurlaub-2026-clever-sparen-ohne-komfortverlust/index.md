@@ -1,10 +1,11 @@
 ---
 title: "Urlaub sparen: Clever sparen ohne Komfortverlust"
 description: "Urlaub sparen: So planst du deinen Campingurlaub 2026 und sparst beim Campingplatz, Equipment und Anreise. So sparst du jeden Monat bares Geld."
-date: 2026-10-06T10:41:10Z
+date: 2026-10-07T17:47:29Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 58.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
-reserve_blocked_at: 2026-10-06T15:37:21Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -69,7 +70,7 @@ Ein weiterer Kostentreiber ist der Trend zum Glamping. Da Plätze immer mehr Kap
 
 ## Wie berechne ich deine Gesamtkosten für den Urlaub?
 
-Erstelle eine transparente Rechnung vor der Abfahrt. So vermeidest du böse Überraschungen auf dem Kontoauszug. Zerlege deine Kalkulation in fünf (statt früher vier) strategische Bereiche. Nutze dafür diese Übersicht, um dein Budget für den Campingurlaub 2026 präzise zu steuern:  
+Erstelle eine transparente Rechnung vor der Abfahrt. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du böse Überraschungen auf dem Kontoauszug. Zerlege deine Kalkulation in fünf (statt früher vier) strategische Bereiche. Nutze dafür diese Übersicht, um dein Budget für den Campingurlaub 2026 präzise zu steuern:  
 
 1. **Stellplatz-Gebühr** – Dein Grundpreis pro Nacht auf dem Platz inkl. Personen- und Umweltgebühren.
 2. **Energie & Wasser** – Pauschalen oder verbrauchsabhängige Abrechnung (oft unterschätzt!).

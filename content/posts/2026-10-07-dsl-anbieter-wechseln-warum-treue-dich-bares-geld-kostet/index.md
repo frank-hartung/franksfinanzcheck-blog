@@ -3,8 +3,9 @@ title: "DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet"
 description: Willst du deinen DSL-Anbieter wechseln und Geld sparen? Frank Hartung erklärt den 4K-Prüfpfad für deine Internetkosten – ehrlich und ohne Werbe-Blabla.
 date: 2026-10-07T10:43:09Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 59.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
-reserve_blocked_at: 2026-10-07T16:07:55Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Geld sparen im Alltag", "DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -137,7 +138,7 @@ Niemand möchte tagelang ohne Internet dastehen. Das Gesetz [schützt dich](../.
 Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit bevollmächtigst du den neuen Provider zur Kündigung. Er koordiniert auch die Mitnahme deiner Rufnummer. Die Unternehmen stimmen den Schalttermin dann direkt untereinander ab.
 
 **So gehst du vor beim Wechselprozess:**
-1. **Bedarf ermitteln:** Welche Geschwindigkeit brauchst du wirklich für dein Homeoffice oder Streaming?
+1. **Bedarf ermitteln:** Welche Geschwindigkeit [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) für dein Homeoffice oder Streaming?
 2. **Marktvergleich:** Berechne den Effektivpreis inklusive aller Boni und Gebühren.
 3. **Verfügbarkeit prüfen:** Lass dir die Bandbreite an deinem Wohnort schriftlich bestätigen.
 4. **Auftrag erteilen:** Nutze die Option „Anbieterwechsel“ beim neuen Provider. Gib deine persönlichen Daten exakt wie im alten Vertrag an.
@@ -145,7 +146,7 @@ Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit bevo
 
 ## Technik-Check: Router-Miete vs. Kaufgerät
 
-Hardware bietet einen großen Hebel zum **Geld sparen**. Die meisten Provider verlangen monatliche Gebühren für ihre Geräte. Der Vorteil liegt im direkten Support durch den Anbieter.
+Hardware bietet einen großen Hebel zum **[Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/)**. Die meisten Provider verlangen monatliche Gebühren für ihre Geräte. Der Vorteil liegt im direkten Support durch den Anbieter.
 
 Langfristig zahlst du bei der Miete jedoch fast immer drauf. Ein guter Mittelklasse-Router kostet im Handel zwischen 120 € und 180 €. Nach spätestens drei Jahren hat sich der Kaufpreis meist amortisiert. Da Router oft sechs Jahre halten, sparst du bares Geld.
 

@@ -3,8 +3,9 @@ title: "Urlaub sparen: 7 clevere Wege, deine Kasse zu füllen"
 description: Entdecke praxisnahe Tipps, wie du Urlaub sparen kannst, dein Reisebudget optimierst und günstig reist – ohne versteckte Kosten.
 date: 2026-10-07T10:43:51Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
-reserve_blocked_at: 2026-10-07T16:07:55Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"

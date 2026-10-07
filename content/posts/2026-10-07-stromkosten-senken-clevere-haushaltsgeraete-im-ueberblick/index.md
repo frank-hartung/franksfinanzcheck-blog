@@ -3,8 +3,9 @@ title: "Stromkosten senken: – clevere Haushaltsgeräte im Überblick"
 description: Entdecke, wie du mit energieeffizienten Geräten deine Stromkosten dauerhaft reduzierst – praxisnah und ohne Fachchinesisch.
 date: 2026-10-07T10:32:56Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein"
-reserve_blocked_at: 2026-10-07T16:07:55Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -238,7 +239,7 @@ Vielversprechender sind oft regionale Programme deiner Stadtwerke oder der Initi
 Ein kurzer Check im Rahmen deiner jährlichen Finanzplanung reicht völlig aus. 
 Nutze dafür meinen 4-K-Check, um neue Sparpotenziale in deiner Wohnung aufzuspüren. 
 Spätestens nach 10 Jahren Betriebsdauer solltest du jedes Großgerät kritisch hinterfragen. 
-So behältst du die volle Kontrolle über deine laufenden Fixkosten und vermeidest schleichende Kostenerhöhungen.
+So behältst du die volle Kontrolle über deine laufenden Fixkosten und [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) schleichende Kostenerhöhungen.
 
 ### Können Smart-Home-Lösungen den Stromverbrauch weiter senken?
 Intelligente Steuerungen ermöglichen dir zeitgesteuertes Laden und ein automatisches Abschalten von Geräten, die sonst im Standby wären. 

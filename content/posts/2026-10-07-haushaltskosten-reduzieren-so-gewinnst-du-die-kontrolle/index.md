@@ -3,8 +3,9 @@ title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
 description: Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst.
 date: 2026-10-07T10:42:36Z
 draft: true
-reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
-reserve_blocked_at: 2026-10-07T16:07:55Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
+
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

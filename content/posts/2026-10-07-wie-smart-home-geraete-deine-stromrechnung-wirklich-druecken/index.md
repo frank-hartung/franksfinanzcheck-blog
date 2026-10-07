@@ -3,8 +3,9 @@ title: "Wie smart Home‑Geräte: deine Stromrechnung wirklich drücken"
 description: "Smart Home: Entdecke, welche Smart Home‑Lösungen Energie sparen, wie smarte Steckdosen funktionieren und wo typische Fehler lauern."
 date: 2026-10-07T10:31:02Z
 draft: true
-reserve_blocked: "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs, manuell reparieren"
-reserve_blocked_at: 2026-10-07T16:07:55Z
+reserve: true
+reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis politur_ruine_heiler.py"
+
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

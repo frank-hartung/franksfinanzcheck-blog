@@ -1,1 +1,134 @@
-{}
+{
+  "2026-10-07-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 51 (Ziel ≥ 60); 1 Absätze > 4 Sätze; 10 Passiv-Formulierungen; Flesch 51.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschn",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: lesbarkeits-score <n>/<n> (mindestwert <n>): flesch <n> (ziel ≥ <n>); <n> absätze > <n> sätze; <n> passiv-formulierungen; flesch <n>.<n> (mindestwert <n>) – ein artik"
+  },
+  "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 58.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 57.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 59.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 65/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 11% Schachtelsätze (Ziel < 10%); 14 Passiv-Formulierungen; Flesch 52.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestan",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: lesbarkeits-score <n>/<n> (mindestwert <n>): flesch <n> (ziel ≥ <n>); <n>% schachtelsätze (ziel < <n>%); <n> passiv-formulierungen; flesch <n>.<n> (mindestwert <n>) –"
+  },
+  "2026-10-07-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 58.0 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 50.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n><score> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschni",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: lesbarkeits-score <n>/<n> (mindestwert <n>): flesch <n> (ziel ≥ <n>); <n> absätze > <n> sätze; <n> passiv-formulierungen; flesch <n>.<n> (mindestwert <n>) – ein artik"
+  },
+  "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 55.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  },
+  "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
+    "first": "2026-10-07T18:18:46Z",
+    "grund": "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
+    "hits": 1,
+    "laeufe": [
+      "run:37661347502"
+    ],
+    "last": "2026-10-07T18:42:22Z",
+    "lauf": "run:37661347502",
+    "signatur": "lesbarkeits-gate nicht bestanden: flesch <n>.<n> (mindestwert <n>) – ein artikel unter dieser schwelle zieht den bestands-durchschnitt nach unten (#<n>)"
+  }
+}
