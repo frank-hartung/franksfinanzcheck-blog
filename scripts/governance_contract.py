@@ -1886,6 +1886,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                   python_bin=python_bin)
     checks += c26_beleg_je_tag(script_texts, wflows, root=root)
     checks += c27_ledger_isolation(script_texts, wflows, root=root)
+    checks += c28_klassen_routing(script_texts, wflows, root=root)
     return checks
 
 
@@ -2199,6 +2200,154 @@ def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
+# --- C28: Die Klasse geht dem Kanal vor (WF-7C1F #611, 07.10.2026) --------
+# Auslöser: Der öffentliche Nachweis („Publication Delivery“) lief am
+# 05./06.10.2026 zweimal rot, weil die QUELLE den gemessenen Montag (05.10.)
+# nur mit 1/2 LIVE trug. Der Beleg sagte das selbst: `source: 1`,
+# `delivered: 1`, `errors: []` – die Auslieferung war vollständig. Der
+# Sammel-Schritt „Missing public delivery is a failed run“ nannte keine
+# Ursache, also legte das zentrale Fehler-Alerting das generische
+# Wartungs-Issue #611 mit API-Key-/Transient-Runbook an, obwohl der Fachkanal
+# `engine-deficit` (#602/#608) für genau diesen Zustand existiert. Es ist
+# dieselbe Klasse wie #602 – nur beim zweiten Melder derselben Sache.
+#
+# Die Regel hält fest: Die Auslieferungs-SLO trägt eine KLASSE (`ok`,
+# `quelle_unter`, `quelle_ueber`, `auslieferung`, `unbekannt`), der Workflow
+# antwortet der Klasse mit einem eigenen, ehrlichen roten Schritt, und nur das
+# Bestandsdefizit ruft den Defizit-Fachkanal – mit Frischebeweis VOR dem roten
+# Exit, weil das Alerting nur einen offenen UND frisch belegten Kanal als
+# Zuständigkeit akzeptiert.
+def c28_klassen_routing(script_texts, wflows, root=BLOG_DIR):
+    out = []
+
+    def _wf(name: str) -> str:
+        for path, text in (wflows or {}).items():
+            if os.path.basename(path) == name:
+                return text
+        return ""
+
+    def _schritte(text: str):
+        """(Name, Block) je benanntem Workflow-Schritt – grob, aber stabil."""
+        bloecke, name, block = [], None, []
+        for zeile in text.splitlines():
+            if zeile.lstrip().startswith("- name:"):
+                if name:
+                    bloecke.append((name, "\n".join(block)))
+                name = zeile.split("- name:", 1)[1].strip()
+                block = [zeile]
+            elif name is not None:
+                block.append(zeile)
+        if name:
+            bloecke.append((name, "\n".join(block)))
+        return bloecke
+
+    pc = script_texts.get("publication_check.py", "")
+    pd = _wf("publication-delivery.yml")
+    af = _wf("alert-on-failure.yml")
+    if not pc or not pd:
+        out.append(("C28", "publication_check.py / publication-delivery.yml nicht "
+                           "lesbar – die Klasse des Auslieferungs-Nachweises ist "
+                           "nicht prüfbar."))
+        return out
+
+    # a) Die Klasse selbst: vollständig, rein, `ok` zuerst, im Beleg und in der
+    #    Historie – sonst endet der Lauf wieder in einem Sammel-Boolean.
+    for konst in ("KLASSE_QUELLE_UNTER", "KLASSE_QUELLE_UEBER",
+                  "KLASSE_AUSLIEFERUNG", "KLASSE_UNBEKANNT"):
+        if konst not in pc:
+            out.append(("C28", f"publication_check.py kennt `{konst}` nicht – "
+                               "die Klasse des Belegs ist unvollständig (#611)."))
+    if not re.search(r"def\s+klasse\s*\(\s*result\s*\)", pc):
+        out.append(("C28", "publication_check.py hat keine reine `klasse(result)` "
+                           "– ohne sie endet der Lauf wieder in einem "
+                           "Sammel-Boolean (#611)."))
+    if "result.get('ok')" not in pc:
+        out.append(("C28", "publication_check.py prüft `ok` nicht ZUERST – ein "
+                           "bestätigter Tag trüge dann eine Defizitklasse."))
+    if "result['klasse'] = klasse(result)" not in pc:
+        out.append(("C28", "publication_check.py schreibt die Klasse nicht in den "
+                           "Beleg (`check()` → `result['klasse']`) – der Workflow "
+                           "hätte nichts zu lesen (#611)."))
+    if "klasse_aus_beleg" not in pc:
+        out.append(("C28", "publication_check.py hat keinen Lesepfad "
+                           "`klasse_aus_beleg` – ein fehlender Beleg bliebe "
+                           "unbemerkt statt fail-closed laut."))
+    if "'klasse':" not in pc:
+        out.append(("C28", "publication_check.py schreibt die Klasse nicht in die "
+                           "versionierte Historie – ein roter Tag wäre später "
+                           "keinem Besitzer zuzuordnen."))
+
+    # b) Der Workflow antwortet der Klasse – kein Sammel-Boolean, kein stiller
+    #    unbekannter Beleg.
+    if "Missing public delivery is a failed run" in pd:
+        out.append(("C28", "publication-delivery.yml endet wieder im Sammel-"
+                           "Schritt „Missing public delivery is a failed run“ – "
+                           "genau so entstand #611 (Ursache unbenannt)."))
+    if "publication_check.py --klasse" not in pd:
+        out.append(("C28", "publication-delivery.yml liest die Klasse nicht "
+                           "(`publication_check.py --klasse`) – der rote Schritt "
+                           "kann den Besitzer nicht nennen (#611)."))
+    if "unbekannt" not in pd:
+        out.append(("C28", "publication-delivery.yml kennt den unbekannten Beleg "
+                           "nicht – ein fehlender Nachweis bliebe still statt "
+                           "fail-closed laut."))
+
+    # c) Jede Klasse hat ihren eigenen, ehrlichen roten Schritt – und nur das
+    #    Bestandsdefizit ruft den Defizit-Fachkanal (Schrittname = Zuordnung).
+    bloecke = _schritte(pd)
+    fach = [(n, b) for n, b in bloecke
+            if "TAGESDEFIZIT" in n and "engine-deficit" in n]
+    if not fach:
+        out.append(("C28", "publication-delivery.yml hat keinen Schritt, den das "
+                           "zentrale Fehler-Alerting dem Fachkanal zuordnet – die "
+                           "Kennwörter „TAGESDEFIZIT“ + „engine-deficit“ im "
+                           "Schrittnamen fehlen (#602-Regel)."))
+    else:
+        name, block = fach[0]
+        if "engine_issue.py --deficit" not in block:
+            out.append(("C28", f"der Schritt „{name}“ belegt den Fachkanal nicht "
+                               "(`engine_issue.py --deficit`) – ohne Frischebeweis "
+                               "meldet das Alerting fail-open generisch."))
+        elif block.find("engine_issue.py --deficit") > block.find("exit 1"):
+            out.append(("C28", f"der Schritt „{name}“ belegt den Fachkanal erst "
+                               "NACH dem roten Exit – der Frischebeweis käme zu "
+                               "spät (#602)."))
+        if "exit 1" not in block:
+            out.append(("C28", f"der Schritt „{name}“ endet nicht rot – ein "
+                               "Bestandsdefizit darf nicht als grün durchgehen."))
+        if "quelle_unter" not in block:
+            out.append(("C28", f"der Fachkanal-Schritt „{name}“ gilt nicht "
+                               "ausschließlich dem Bestandsdefizit "
+                               "(`quelle_unter`)."))
+    for klasse in ("quelle_unter", "quelle_ueber", "auslieferung"):
+        if klasse not in pd:
+            out.append(("C28", f"publication-delivery.yml antwortet der Klasse "
+                               f"`{klasse}` nicht – der rote Lauf nennt die "
+                               "Ursache nicht (#611)."))
+    weitere = [n for n, b in bloecke if "TAGESDEFIZIT" in n
+               and "engine-deficit" in n and "exit 1" in b
+               and n != (fach[0][0] if fach else "")]
+    if weitere:
+        out.append(("C28", "weitere rote Schritte tragen die Fachkanal-Kennwörter "
+                           f"({', '.join(weitere)}) – die Stummschaltung wäre "
+                           "nicht mehr klasse-scharf."))
+
+    # d) Die Zuordnung ist beidseitig eingefroren: Das Alerting sucht genau
+    #    diese Kennwörter in den fehlgeschlagenen Schrittnamen.
+    if af:
+        if "'TAGESDEFIZIT'" not in af or "'engine-deficit'" not in af:
+            out.append(("C28", "alert-on-failure.yml hat die Fachkanal-Regel "
+                               "(„TAGESDEFIZIT“ + „engine-deficit“ in den "
+                               "fehlgeschlagenen Schrittnamen) verloren – die "
+                               "Stummschaltung des generischen Issues greift "
+                               "nicht mehr."))
+        if '"Publication Delivery (öffentlicher Nachweis)"' not in af:
+            out.append(("C28", "alert-on-failure.yml beobachtet „Publication "
+                               "Delivery (öffentlicher Nachweis)“ nicht mehr – "
+                               "ein roter Nachweis bliebe unbemerkt."))
+    return out
+
+
 RULE_TEXT = {
     "C1": "Die Sicht (Chefredakteur-Scorecard) läuft nach allen Messungen – sonst "
           "zeigt sie Werte des Vorlaufs als aktuellen Befund (#206).",
@@ -2345,6 +2494,21 @@ RULE_TEXT = {
            "versiegeltem Versionsnachweis. Wer eine blockierende Prüfung zur "
            "Warnung herabstuft oder eine zweite Messregel einzieht, macht die "
            "Scorecard zur Lüge (Befund 10, 03.10.2026).",
+    "C28": "Die Klasse geht dem Kanal vor: Der öffentliche Nachweis trägt eine "
+           "Klasse (`ok` · `quelle_unter` · `quelle_ueber` · `auslieferung` · "
+           "`unbekannt`) – der Bestand wird gegen das Tagesband geprüft, und "
+           "`ok` steht zuerst, damit ein bestätigter Tag nie eine "
+           "Defizitklasse trägt. Der Workflow antwortet der Klasse mit einem "
+           "eigenen, ehrlichen roten Schritt; nur das Bestandsdefizit belegt "
+           "den Fachkanal `engine-deficit` – mit Frischebeweis VOR dem roten "
+           "Exit und mit beiden Kennwörtern im Schrittnamen, an denen das "
+           "zentrale Fehler-Alerting seine Stummschaltung festmacht. "
+           "Überschuss und Auslieferungsdefizit bleiben laut (Kadenz-Gate "
+           "bzw. P1-Kanal), ein fehlender Beleg ist fail-closed laut. Am "
+           "05./06.10.2026 fiel der Nachweis rot, weil die Quelle den "
+           "gemessenen Montag nur mit 1/2 trug – der unbenannte Sammel-Schritt "
+           "erzeugte das generische Wartungs-Issue #611 mit API-Key-Runbook, "
+           "obwohl der Fachkanal existierte.",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -2361,7 +2525,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)",
          "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)",
          "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)",
-         "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)"}
+         "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)",
+         "C28": "Die Klasse geht dem Kanal vor (Melder-Routing der "
+                "Auslieferungs-SLO)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -3020,12 +3186,75 @@ def _selftest():
             if "unberührt" in f[1]]:
         failures.append("C27: eine fehlende Ledger-Leitplanke im Qualitäts-Gate "
                         "bleibt unentdeckt (Nebenbefund #610).")
+    # --- C28: Die Klasse geht dem Kanal vor (WF-7C1F #611, 07.10.2026) --------
+    echte_klassenakte = {
+        "publication_check.py": _read(os.path.join(BLOG_DIR, "scripts",
+                                                   "publication_check.py"))}
+
+    def _wf_variante(ersetzung, was):
+        """Kopie der Workflows mit einer Sabotage im Auslieferungs-Nachweis."""
+        kopie = dict(wflows_echt)
+        for pfad, text_ in list(kopie.items()):
+            if os.path.basename(pfad) == "publication-delivery.yml":
+                kopie[pfad] = text_.replace(*ersetzung)
+        return kopie
+
+    if c28_klassen_routing(echte_klassenakte, wflows_echt):
+        failures.append(f"C28: der echte Zustand wird beanstandet: "
+                        f"{c28_klassen_routing(echte_klassenakte, wflows_echt)}")
+    # (a) Der Beleg verliert seine Klasse – der Workflow hätte nichts zu lesen.
+    ohne_klasse = dict(echte_klassenakte, **{
+        "publication_check.py": echte_klassenakte["publication_check.py"].replace(
+            "result['klasse'] = klasse(result)", "pass")})
+    if not [f for f in c28_klassen_routing(ohne_klasse, wflows_echt)
+            if "Beleg" in f[1]]:
+        failures.append("C28: ein Beleg ohne Klasse bleibt unentdeckt (#611).")
+    # (b) Die Historie verliert den Besitzer – ein roter Tag wäre später blind.
+    ohne_historie = dict(echte_klassenakte, **{
+        "publication_check.py": echte_klassenakte["publication_check.py"].replace(
+            "'klasse':", "'keine_klasse':")})
+    if not [f for f in c28_klassen_routing(ohne_historie, wflows_echt)
+            if "Historie" in f[1]]:
+        failures.append("C28: eine Historie ohne Klasse bleibt unentdeckt (#611).")
+    # (c) Der Sammel-Boolean kehrt zurück – genau der Befund #611.
+    sp = ("      - name: AUSLIEFERUNGS-DEFIZIT",
+          "      - name: Missing public delivery is a failed run\n"
+          "        run: exit 0\n"
+          "      - name: AUSLIEFERUNGS-DEFIZIT")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(sp, ""))
+            if "Sammel" in f[1]]:
+        failures.append("C28: der Sammel-Boolean ohne Ursache bleibt unentdeckt "
+                        "(#611).")
+    # (d) SCHEIN-SICHERHEIT: Der Frischebeweis wandert HINTER den roten Exit –
+    #     der Kanal wäre belegt, aber zu spät für dieses Alerting (#602).
+    spaet = ("          # Der Bestand trägt den gemessenen Tag nicht",
+             "          exit 1\n"
+             "          # Der Bestand trägt den gemessenen Tag nicht")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(spaet, ""))
+            if "NACH dem roten Exit" in f[1]]:
+        failures.append("C28: ein Frischebeweis nach dem roten Exit bleibt "
+                        "unentdeckt (#602).")
+    # (e) Der Schrittname verliert die Kennwörter – die Stummschaltung des
+    #     zentralen Fehler-Alertings greift nicht mehr.
+    namen = ("- name: TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig "
+             "(Auslieferungs-SLO)",
+             "- name: Bestandsdefizit (Auslieferungs-SLO)")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(namen, ""))
+            if "Kennwörter" in f[1]]:
+        failures.append("C28: ein Schrittname ohne die Alerting-Kennwörter bleibt "
+                        "unentdeckt (#602).")
+    # (f) Fail-open: Ein unbekannter Beleg wird still zu „ok“ erklärt.
+    if not [f for f in c28_klassen_routing(echte_klassenakte,
+                                           _wf_variante(("unbekannt", "ok"), ""))
+            if "unbekannten Beleg" in f[1]]:
+        failures.append("C28: ein stiller unbekannter Beleg bleibt unentdeckt "
+                        "(#611).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C27 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C28 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

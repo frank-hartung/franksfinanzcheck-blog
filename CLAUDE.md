@@ -938,6 +938,57 @@ selbst als `declared_foreign` abwertet, stand damit als Beweis im Buch.
   `python3 -m unittest scripts.tests.test_audit_ledger_isolation`.
   Vorgangsbericht: `BEWEIS-LEDGER-ISOLATION-C27-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
 
+## Die Klasse geht dem Kanal vor (Auslieferungs-SLO, C28, seit #611, 07.10.2026)
+
+Am 05.10.2026 endete der Montag bei **1/2 LIVE** (der 19:22 UTC nachgelieferte
+Slot rettete genau einen Artikel). Am 06.10. lief der öffentliche Nachweis
+(`Publication Delivery`) zweimal rot – um 01:17 und 14:10 UTC. Der Beleg sagte
+die Ursache selbst:
+
+```json
+{"day": "2026-10-05", "source": ["…preiswert-surfen…"], "delivered": ["…preiswert-surfen…"],
+ "errors": [], "ok": false, "minimum": 2, "maximum": 3}
+```
+
+`delivered == source`, keine Fehler: **Die Auslieferung war vollständig – der
+Bestand trug den Tag nicht.** Weil der rote Sammel-Schritt („Missing public
+delivery is a failed run“) keine Ursache nannte, legte das zentrale
+Fehler-Alerting das generische Wartungs-Issue **#611** mit API-Key-/Transient-
+Runbook an, obwohl der Fachkanal `engine-deficit` (C23) längst existierte –
+dieselbe Doppelmeldung wie #602/#608, nur beim zweiten Melder derselben Sache.
+
+`ok` ist die Summe zweier Wahrheiten mit zwei Besitzern; der Beleg trägt sie
+jetzt getrennt (`publication_check.klasse()`):
+
+| Klasse | Bedeutung | Besitzer |
+|---|---|---|
+| `ok` | Tag bestätigt (Mindestziel…Maximum öffentlich) | niemand – grün |
+| `quelle_unter` | Bestand unter dem Mindestziel des gemessenen Tages | Fachkanal `engine-deficit` (Nachfüllung) |
+| `quelle_ueber` | Bestand über dem Tagesmaximum | Kadenz-Gate (stuft im Deploy zurück) |
+| `auslieferung` | Bestand im Zielband, öffentlich fehlt etwas | Deploy/CDN, P1-Kanal (#610) |
+| `unbekannt` | kein lesbarer Beleg | fail-closed laut |
+
+- **Die Klasse ist additiv.** `ok` behält seine Bedeutung; kein Aufrufer
+  verliert ein Feld. Zusätzlich steht die Klasse in der versionierten Historie
+  (`data/publication-delivery-history.jsonl`), damit ein roter Tag später
+  seinem Besitzer zuordenbar bleibt.
+- **Der Workflow antwortet der Klasse**, nicht dem Sammel-Boolean: eigener
+  roter Schritt je Klasse. Nur `quelle_unter` ruft den Defizit-Fachkanal und
+  belegt ihn **vor** dem roten Exit (`engine_issue.py --deficit`); sein
+  Schrittname trägt beide Kennwörter („TAGESDEFIZIT“ + „engine-deficit“), an
+  denen die Stummschaltung des Alertings hängt (#602-Regel). Überschuss und
+  Auslieferungsdefizit bleiben laut mit ehrlichem Namen.
+- **Ein bestätigter Tag hat keine Klasse nötig:** `ok` wird zuerst geprüft,
+  ein unbekannter Beleg ist niemals still.
+- **Vertrag:** Regel **C28** in `governance_contract.py` friert Klasse,
+  Schritt-Namen, Reihenfolge (Beleg vor rotem Exit) und die beidseitige
+  Alerting-Zuordnung ein; sechs Kunstbefunde werden im Kontrakt-Selbsttest rot.
+- Bedienung: `npm run delivery:klasse` (Klasse des gültigen Belegs) ·
+  `npm run test:delivery` (Regressionen) ·
+  `python3 scripts/publication_check.py --selftest` (Logik-Beweis, uhrfest) ·
+  `python3 scripts/publication_check.py --online` (voller Nachweis).
+  Vorgangsbericht: `WF-7C1F-611-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
