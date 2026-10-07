@@ -97,6 +97,33 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 
+# Harte Textverständnis-Regeln (SSOT für Gate UND Vor-Schreib-Prüfung).
+# Seit dem Vorfall WF-54C4/#607 steht die Liste auf Modulebene: Der
+# Publikations-Vertrag (scripts/publikations_vertrag.py) prüft Textänderungen
+# VOR dem Schreiben gegen genau diese Namen – würde er eine eigene Kopie
+# führen, könnte eine Regel im Gate hart sein und in der Schreibwache fehlen
+# (genau die Bauart, die am 05.10.2026 einen Live-Artikel mit „In diesem
+# Beitrag…“ und Flesch 44,3 durch die KI-Redaktion gelassen hat).
+HARTE_REGELN = {
+    "R2-KEYWORD-DUMP", "R3-TERMINOLOGIE",
+    "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
+    "R8-URL-LEERZEICHEN", "R8-NESTED-LINK",
+    "R9-KLEBEWORT", "R10-DOPPELWORT",
+    "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
+    "R13-DATUM-PUNKT", "R14-MARKER-RUINE",
+    "R15-PHRASEN-DOPPEL",
+    # R17 (05.10.2026, Nachtrag #585): maschinell verstümmelte
+    # Keyword-Einsetzungen („die gasrechnung senken um bis zu 15 %
+    # senken") sind nie veröffentlichungsfähig. Die Lesbarkeitsnote
+    # sieht sie nicht – sie misst Satzlängen, keine Grammatik.
+    "R17-KEYWORD-KASUS", "R17-KEYWORD-DOPPEL",
+    # R16 (02.10.2026, Issue #521): Prompt-Echo im Artikeltext und
+    # in den Meta-Feldern. Der Entwurf vom 02.10. trug „TITLE: …“
+    # im Fließtext, in der description UND im Pinterest-Text –
+    # gestoppt hat ihn nur zufällig die Zeichenlänge.
+    "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META",
+}
+
 DRY_RUN = "--dry-run" in sys.argv
 STRICT = "--strict" in sys.argv
 
@@ -545,25 +572,7 @@ def textverstaendnis_failures(candidates):
         from textverstaendnis_guard import (
             split_body, load_terminologie, check_article, frontmatter_keywords,
         )
-        hard_rules = {
-            "R2-KEYWORD-DUMP", "R3-TERMINOLOGIE",
-            "R5-ABSATZ-HART", "R7-INTRO-FORMEL",
-            "R8-URL-LEERZEICHEN", "R8-NESTED-LINK",
-            "R9-KLEBEWORT", "R10-DOPPELWORT",
-            "R11-JAHRESZAHL-SPLIT", "R12-ZAHL-RUINE",
-            "R13-DATUM-PUNKT", "R14-MARKER-RUINE",
-            "R15-PHRASEN-DOPPEL",
-            # R17 (05.10.2026, Nachtrag #585): maschinell verstümmelte
-            # Keyword-Einsetzungen („die gasrechnung senken um bis zu 15 %
-            # senken") sind nie veröffentlichungsfähig. Die Lesbarkeitsnote
-            # sieht sie nicht – sie misst Satzlängen, keine Grammatik.
-            "R17-KEYWORD-KASUS", "R17-KEYWORD-DOPPEL",
-            # R16 (02.10.2026, Issue #521): Prompt-Echo im Artikeltext und
-            # in den Meta-Feldern. Der Entwurf vom 02.10. trug „TITLE: …“
-            # im Fließtext, in der description UND im Pinterest-Text –
-            # gestoppt hat ihn nur zufällig die Zeichenlänge.
-            "R16-PROMPT-ECHO", "R16-PROMPT-ECHO-META",
-        }
+        hard_rules = HARTE_REGELN
         term = load_terminologie()
         failed = {}
         for slug in candidates:

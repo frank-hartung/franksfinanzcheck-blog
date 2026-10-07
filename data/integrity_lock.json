@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-05T19:20:11.925502+00:00",
-  "head": "e222553",
+  "signed_at": "2026-10-07T10:32:36.861314+00:00",
+  "head": "8da1ac5",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -38,7 +38,8 @@
     "scripts/lektor_guard.py": "695a369e7b0aa7f04c8cd5903bd2d5519ccdd34a036542e9a711b96926c0d895",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
-    "scripts/redaktions_standard.py": "d01d51f67d3e824236ef96fd4380fb1c923406517c4e8ccbeb02fb7b2d107f68",
+    "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
+    "scripts/redaktions_standard.py": "7388380126e08f0e8cdb5bb9ff9d3dfbacac0a1f62f40e7e25b10a363b212a81",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
@@ -48,34 +49,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
-  "audit_start_sha256": "0f7c806b6a512bf70d2962ce9c3875948d5aada31ff89b709ea9022ad29a3ecc",
+  "files_sha256": "bc9d6d297ac05efc99285e6227d5863842a7cacd6ca7019ba11130f7f5108e31",
+  "audit_start_sha256": "5a26379d7e438f3c97b1d436ce8f44e11a78e0fefc9019f25cc77ac7cab59a3c",
   "audit": [
-    {
-      "date": "2026-10-01",
-      "art": "set-current",
-      "head": "2a831905",
-      "geaendert": [
-        "layouts/_partials/head.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "2a831905",
-              "datum": "2026-10-01",
-              "betreff": "social: Autopilot-Plan aktualisiert + Beiträge versendet"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "e1a5984dd74293823f06f69f669491dbb364e7dd949340e789033b72398c98ba",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-02",
       "art": "set-current",
@@ -123,7 +99,7 @@
         }
       ],
       "files_sha256": "22d93f9891a3e94a429fa7e701d98bd218a5e41b9ddd9ab625af00aa80c2796b",
-      "prev_sha256": "0f7c806b6a512bf70d2962ce9c3875948d5aada31ff89b709ea9022ad29a3ecc"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-02",
@@ -463,8 +439,46 @@
       "art": "set-current",
       "head": "e222553",
       "geaendert": [],
-      "prev_sha256": "300d1fbd35b364a22b08b4e4e82a8f896abef1e369ec62bf96d43c3aee048e67",
-      "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b"
+      "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
+      "prev_sha256": "300d1fbd35b364a22b08b4e4e82a8f896abef1e369ec62bf96d43c3aee048e67"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "8da1ac5",
+      "geaendert": [
+        "scripts/publikations_vertrag.py",
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "8da1ac5",
+              "datum": "2026-10-07",
+              "betreff": "fix(redaktion): Publikations-Vertrag – KI-Heilung schreibt nicht mehr unter die Publish-Schwelle (WF-54C4 #607)"
+            },
+            {
+              "sha": "c14e000",
+              "datum": "2026-10-05",
+              "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "scripts/publikations_vertrag.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "266f0311f3a0ca66f578f083d66016f7f6e548493f8b165c97e9b60e00e9936d",
+      "files_sha256": "bc9d6d297ac05efc99285e6227d5863842a7cacd6ca7019ba11130f7f5108e31"
     }
   ]
 }

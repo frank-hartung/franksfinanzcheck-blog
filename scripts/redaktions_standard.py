@@ -39,6 +39,10 @@
 #    - H2-Anzahl bleibt stabil (nur Text darf sich ändern)
 #    - Länge ≥ 90 % des Originals
 #    - Frontmatter bleibt byte-identisch
+#    - Publikations-Vertrag (07.10.2026, WF-54C4/#607): Flesch fällt nicht
+#      unter die importierte Publish-Schwelle, und die Änderung führt keine
+#      NEUEN harten Verständnis-Regeln ein – sonst wird sie verworfen
+#      (fail-closed, Beleg: scripts/publikations_vertrag.py)
 #    - Idempotenz: nach der Heilung sind die Detektoren grün
 #  Selbsttest (eingefrorene Fälle) schützt die Detektoren selbst:
 #  Exit 2 = Sabotage an der Wache → CI bricht ab.
@@ -61,6 +65,22 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
 import groq_config  # noqa: E402
+
+# PUBLIKATIONS-VERTRAG (Vorgang WF-54C4/#607, 07.10.2026): Die KI-Heilung
+# prüfte bisher nur die STRUKTUR ihrer Änderung (Links, H2-Anzahl, Länge,
+# Trennlinien) – nicht die Regeln, die über die Veröffentlichung entscheiden.
+# Am 05.10.2026 schrieb sie Flesch 44,3 und die Intro-Formel „In diesem
+# Beitrag…“ in einen Live-Artikel; blockiert hat das erst der nächste
+# Deploy-Lauf (Exit 1, roter Produktionsalarm). Ab jetzt gilt: Kein
+# KI-Text geht raus, der die Veröffentlichungsschwelle reißt oder neue harte
+# Verständnis-Funde einführt. Ohne prüfbaren Vertrag wird nicht geschrieben.
+try:  # noqa: E402
+    from publikations_vertrag import pruefe as _vertrag_pruefe, verstoesse_kurz
+    _VERTRAG_FEHLER = ""
+except Exception as exc:  # noqa: BLE001 – ohne Vertrag KEINE KI-Änderung
+    _vertrag_pruefe = None
+    verstoesse_kurz = None
+    _VERTRAG_FEHLER = f"{exc.__class__.__name__}: {exc}"
 
 REPORT = os.path.join(BLOG_DIR, "REDAKTIONS-STANDARD-REPORT.md")
 HISTORY = os.path.join(BLOG_DIR, "data", "redaktions_standard_history.jsonl")
@@ -360,8 +380,51 @@ def _verify(orig_body, new_body, allow_h2_text_change=True):
     return True, "ok"
 
 
-def heal_article_ai(a, res):
-    """Ein KI-Durchgang für alle fehlenden Module. Liefert neuen Body oder None."""
+def _merke_verworfen(verworfen, a, grund):
+    """Hält eine abgelehnte KI-Änderung fest (Report + Historie).
+
+    Ein Stopp, der nur im Log steht, ist beim nächsten Lauf vergessen. Diese
+    Liste macht sichtbar, wie oft die Wache eine KI-Änderung verhindert hat –
+    und warum (Vorfall WF-54C4/#607: genau dieser Nachweis fehlte).
+    """
+    if verworfen is None:
+        return
+    verworfen.append({"slug": a["slug"], "regel": "VERTRAG",
+                      "aktion": "ki-heilung-verworfen", "grund": grund})
+
+
+def _vertrag_gruende(a, neu_body):
+    """Verstöße einer GEPLANTEN KI-Änderung gegen den Publikations-Vertrag.
+
+    Fail-closed: Ist der Vertrag nicht prüfbar, gilt die Änderung als
+    unzulässig (genau der Zustand, der am 05.10.2026 einen blockierten
+    Deploy verursacht hat – nur diesmal VOR dem Schreiben).
+    """
+    if _vertrag_pruefe is None:
+        return [f"V3 Messbarkeit: Publikations-Vertrag nicht verfügbar "
+                f"({_VERTRAG_FEHLER}) – fail-closed, die Änderung wird verworfen"]
+    try:
+        alt_raw = join_article(a["fm"], a["body"])
+        neu_raw = join_article(a["fm"], neu_body)
+        return _vertrag_pruefe(a["slug"], alt_raw, neu_raw)
+    except Exception as exc:  # noqa: BLE001 – ohne Mess KEIN grünes Urteil
+        return [f"V3 Messbarkeit: Publikations-Vertrag nicht auswertbar "
+                f"({exc.__class__.__name__}: {exc}) – fail-closed, die Änderung "
+                f"wird verworfen"]
+
+
+def heal_article_ai(a, res, verworfen=None):
+    """Ein KI-Durchgang für alle fehlenden Module. Liefert neuen Body oder None.
+
+    Prüf-Kette VOR dem Schreiben (jede Stufe kann die Änderung verwerfen):
+      1. `_verify`            – Struktur (Links, H2-Anzahl, Länge, Trennlinien)
+      2. Publikations-Vertrag – V1 Lesbarkeit, V2 neue harte Verständnis-Funde
+      3. Idempotenz           – harte RS-Module danach wirklich geschlossen
+    Die dritte Stufe war schon da; Stufe 2 fehlte – und ohne sie ging am
+    05.10.2026 ein Text mit Flesch 44,3 und „In diesem Beitrag…“ in den
+    Bestand (WF-54C4/#607). `verworfen` sammelt die Ablehnungen für Report
+    und Historie, damit ein Stopp nachvollziehbar bleibt statt still zu sein.
+    """
     fehlend = res["hart_missing"]
     weiche = []
     if not res["rs5"][0]:
@@ -431,6 +494,18 @@ def heal_article_ai(a, res):
     ok, meldung = _verify(a["body"], neu)
     if not ok:
         print(f"  🛑 Verifikation fehlgeschlagen: {meldung}")
+        _merke_verworfen(verworfen, a, f"Struktur: {meldung}")
+        return None
+    # Publikations-Vertrag: Die Änderung darf den Artikel nicht unter die
+    # Veröffentlichungsschwelle drücken und keine neuen harten Verständnis-
+    # Funde einführen (Kernfall WF-54C4/#607, 05.10.2026).
+    vertrag = _vertrag_gruende(a, neu)
+    if vertrag:
+        print("  🛑 Publikations-Vertrag verletzt – KI-Heilung verworfen:")
+        for grund in vertrag:
+            print(f"     • {grund}")
+        _merke_verworfen(verworfen, a, verstoesse_kurz(vertrag) if verstoesse_kurz
+                         else vertrag[0][:160])
         return None
     # Idempotenz-Nachweis: nach der Heilung müssen die harten Detektoren grün sein
     a2 = dict(a)
@@ -438,9 +513,12 @@ def heal_article_ai(a, res):
     res2 = analyse_article(a2)
     if res2["hart_missing"]:
         print(f"  ✗ Nach-Heilung noch offen: {', '.join(res2['hart_missing'])} – verworfen.")
+        _merke_verworfen(verworfen, a,
+                         f"Idempotenz: {', '.join(res2['hart_missing'])} weiter offen")
         return None
     if res2["rs5"][2] > res["rs5"][2] or res2["rs6"][2] > res["rs6"][2]:
         print("  ✗ Nach-Heilung mehr Zahlen-/Quellen-Funde – verworfen.")
+        _merke_verworfen(verworfen, a, "Idempotenz: mehr Zahlen-/Quellen-Funde")
         return None
     return neu
 
@@ -449,7 +527,7 @@ def heal_article_ai(a, res):
 # Report & Historie
 # ---------------------------------------------------------------------------
 
-def write_report(results, mode, gehärtet=None):
+def write_report(results, mode, gehärtet=None, verworfen=None):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M UTC")
     n = len(results)
     n_ok = sum(1 for r in results if not r["hart_missing"])
@@ -496,6 +574,14 @@ def write_report(results, mode, gehärtet=None):
         lines += ["", "## In diesem Lauf geheilt", ""]
         for g in gehärtet:
             lines.append(f"- ✅ {g}")
+    if verworfen:
+        # Ein Stopp ist ein Ergebnis, kein Zwischenfall – und muss sichtbar
+        # bleiben (sonst heilt der nächste Lauf dieselbe Ursache erneut).
+        lines += ["", "## Vom Publikations-Vertrag gestoppte KI-Änderungen", ""]
+        for v in verworfen[:10]:
+            lines.append(f"- 🛑 `{v['slug']}` – {v.get('grund', '')}")
+        if len(verworfen) > 10:
+            lines.append(f"- … und {len(verworfen) - 10} weitere (siehe Log).")
     lines += ["", "_Wird bei jedem Lauf der Redaktions-Standard-Wache aktualisiert._",
               "_Methoden-Quellen: REDAKTIONS-STANDARD-CAPITAL-WIWO-ZEIT.md_"]
     with open(REPORT, "w", encoding="utf-8") as fh:
@@ -622,6 +708,32 @@ SELFTEST = [
         "## Eins\n\n## Zwei", "## Eins")[0], False),
     ("Verify-laenge", lambda: _verify(
         "x" * 1000, "x" * 400)[0], False),
+    # --- Publikations-Vertrag (WF-54C4/#607, 05.10.2026) ---------------------
+    # Der Anlass: Die KI-Heilung schrieb Flesch 44,3 und „In diesem Beitrag…“
+    # in einen Live-Artikel; die Struktur-Prüfung fand nichts, blockiert hat
+    # erst der nächste Deploy-Lauf. Diese Fälle frieren die Schreib-Wache ein.
+    ("Vertrag-gute-aenderung-still", lambda: not _vertrag_gruende(
+        {"slug": "gut", "fm": 'title: "X"',
+         "body": "Kurzer Satz hier. Noch ein kurzer Satz. Der Text bleibt leicht."},
+        "Kurzer Satz steht hier. Noch ein kurzer Satz folgt. Der Text bleibt "
+        "leicht lesbar."), True),
+    ("Vertrag-flesch-absturz", lambda: any(
+        g.startswith("V1") for g in _vertrag_gruende(
+            {"slug": "hart", "fm": 'title: "X"',
+             "body": "Kurzer Satz hier. Noch ein kurzer Satz. Der Text bleibt leicht."},
+            "Die vorgenommene Umstrukturierung der Tariflandschaft, die sich "
+            "insbesondere durch die Anpassung der Netzentgelte sowie der "
+            "CO₂-Bepreisung im Kontext der fortschreitenden Dekarbonisierung der "
+            "Energieversorgungssysteme ergibt, erfordert eine grundlegende "
+            "Neubewertung der individuellen Vertragskonstellationen, wobei die "
+            "Berücksichtigung der jeweiligen Verbrauchsprofile unabdingbar "
+            "erscheint.")), True),
+    ("Vertrag-neue-intro-formel", lambda: any(
+        g.startswith("V2") for g in _vertrag_gruende(
+            {"slug": "r7", "fm": 'title: "X"',
+             "body": "Kurzer Satz hier. Noch ein kurzer Satz. Der Text bleibt leicht."},
+            "In diesem Beitrag erfährst du alles Wichtige. Der Text bleibt leicht "
+            "lesbar. Kurze Sätze helfen jedem Leser.")), True),
 ]
 
 
@@ -663,6 +775,7 @@ def main():
     results = [analyse_article(a) for a in posts]
     gehärtet = []
     history = []
+    verworfen = []
 
     # --- Deterministische Heilung (RS7), immer bei --fix --------------------
     if DO_FIX:
@@ -696,7 +809,7 @@ def main():
             a = load_article(r["path"])
             if not a:
                 continue
-            neu_body = heal_article_ai(a, r)
+            neu_body = heal_article_ai(a, r, verworfen)
             if not neu_body:
                 continue
             # Prompt-Gerüst („TITEL: …/ARTIKEL:") ist kein Artikeltext: Die KI
@@ -749,20 +862,31 @@ def main():
             except Exception as e:  # noqa: BLE001
                 print(f"  ⚠ parken fehlgeschlagen ({r['slug']}): {e}")
 
+    # Ein gestoppter Schreibvorgang ist ein Befund, kein Betriebsgeräusch:
+    # in der CI als Annotation sichtbar. Die Workflows kürzen Exit-Codes mit
+    # `|| echo` (redaktions-standard-neu.yml) – ohne diese Zeile verschwände
+    # der Stopp im Log-Rauschen, und genau solche unsichtbaren Ausgänge hat
+    # der Vorfall #607 begünstigt.
+    if verworfen and os.environ.get("GITHUB_ACTIONS"):
+        for v in verworfen:
+            grund = str(v.get("grund", "")).replace("%", "%25").replace("\n", "%0A")
+            print(f"::warning::Publikations-Vertrag: {v['slug']} – {grund[:220]}")
+
     # --- Report + Historie ---------------------------------------------------
     mode = ("gate" if DO_GATE else
             "fix+ai" if (DO_FIX and DO_AI) else
             "fix" if DO_FIX else
             "new-only" if NEW_ONLY else "report")
     if not DRY_RUN:
-        write_report(results, mode, gehärtet)
-        log_history(history)
+        write_report(results, mode, gehärtet, verworfen)
+        log_history(history + verworfen)
 
     n_offen = sum(1 for r in results if r["hart_missing"])
     print(f"Redaktions-Standard: {len(results)} Artikel geprüft · "
           f"{n_offen} mit offenen harten Regeln · "
           f"{sum(r['rs5'][2] for r in results)} ungehedgte Zahlen-Sätze · "
-          f"{sum(r['rs6'][2] for r in results)} Phantom-Quellen.")
+          f"{sum(r['rs6'][2] for r in results)} Phantom-Quellen · "
+          f"{len(verworfen)} KI-Änderung(en) vom Publikations-Vertrag gestoppt.")
     return 1 if (n_offen and DO_GATE and not DRY_RUN) else 0
 
 

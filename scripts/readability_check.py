@@ -66,8 +66,21 @@ def _strip_shortcodes(body):
     return body
 
 
-def load_article(path):
-    c = open(path, encoding='utf-8').read()
+def parse_article(text, file_label):
+    """Rohtext (Frontmatter + Body) → Mess-Datensatz, OHNE Dateizugriff.
+
+    Braucht der Publikations-Vertrag (scripts/publikations_vertrag.py): Eine
+    geplante Textänderung muss VOR dem Schreiben gemessen werden können –
+    eine Messung, die erst nach dem Schreiben möglich ist, ist keine
+    Verhinderung, sondern ein Protokoll (Vorfall WF-54C4/#607: Die
+    KI-Redaktion schrieb Flesch 44,3 in einen Live-Artikel; blockiert hat es
+    erst der nächste Deploy).
+
+    Der zurückgegebene Datensatz trägt den Rohtext unter ``raw``; ``analyze``
+    nutzt ihn, statt die Datei erneut zu lesen. Alle übrigen Felder sind
+    identisch zu ``load_article``.
+    """
+    c = text
     parts = c.split('---', 2)
     if len(parts) < 3:
         return None
@@ -158,8 +171,13 @@ def load_article(path):
     body = body.replace('\x00', '\n')
     fm = parts[1]
     is_draft = bool(re.search(r'^draft:\s*true\s*$', fm, re.M | re.I))
-    return {'file': os.path.relpath(path, POSTS_DIR), 'body': body,
-            'draft': is_draft}
+    return {'file': file_label, 'body': body, 'draft': is_draft, 'raw': c}
+
+
+def load_article(path):
+    with open(path, encoding='utf-8') as fh:
+        c = fh.read()
+    return parse_article(c, os.path.relpath(path, POSTS_DIR))
 
 
 def count_syllables(word):
@@ -218,7 +236,13 @@ def analyze(a):
 
     # Keyword-Dumps (R2): Komma-Ketten als eigene Metrik zählen –
     # sie verzerren sonst Satzlängen-Maxima und verstecken sich vor der Messung
-    raw = open(os.path.join(POSTS_DIR, a['file']), encoding='utf-8').read()
+    if a.get('raw') is not None:
+        # Unveröffentlichter Text (Publikations-Vertrag): der Rohtext kommt aus
+        # dem Datensatz selbst – keine zweite Quelle, keine Datei-Annahme.
+        raw = a['raw']
+    else:
+        with open(os.path.join(POSTS_DIR, a['file']), encoding='utf-8') as fh:
+            raw = fh.read()
     raw_body = raw.split('---', 2)[2]
     dumps = 0
     for line in raw_body.split('\n'):

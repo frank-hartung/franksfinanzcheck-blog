@@ -245,6 +245,12 @@ FEST = {
     # Die Wache entscheidet über Entwurf-Statt-Publikation – deshalb
     # gehört sie unter Siegel (wie alle Schwellen-Wachen).
     "scripts/redaktions_standard.py",
+    # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Dieselbe Klasse –
+    # er entscheidet VOR dem Schreiben, ob eine KI-Textänderung überhaupt
+    # eine Veröffentlichungschance bekommt. Ein stiller Ausfall dieser
+    # Prüfung (oder ein eingeschleustes `return []`) hätte genau den
+    # Vorfall wiederholt, deshalb unter dasselbe Siegel.
+    "scripts/publikations_vertrag.py",
 }
 
 NEU_OHNE_SIGNATUR = " (neu ohne Signatur)"
@@ -864,14 +870,37 @@ def signieren(root: Path = ROOT, grund: str = "set-current", audit=None) -> dict
         "head": git_head(root),
         "geaendert": geaendert,
     }
-    if audit:
-        akte["herkunft"] = [{
-            "pfad": e["pfad"],
-            "klasse": e["klasse"],
-            "urteil": e["urteil"],
-            "commits": (e.get("commits") or [])[:COMMIT_MAX],
-            "commits_art": e.get("commits_art", "unbekannt"),
-        } for e in audit if e["pfad"] in geaendert]
+    herkunft = [{
+        "pfad": e["pfad"],
+        "klasse": e["klasse"],
+        "urteil": e["urteil"],
+        "commits": (e.get("commits") or [])[:COMMIT_MAX],
+        "commits_art": e.get("commits_art", "unbekannt"),
+    } for e in (audit or []) if e["pfad"] in geaendert]
+    # Jeder gezeichnete Pfad nennt seine Herkunft – auch der neu aufgenommene.
+    # Auslöser (07.10.2026, WF-54C4/#607): `scripts/publikations_vertrag.py`
+    # kam als zusätzliche Schwellen-Wache unter das Siegel, hatte aber noch
+    # keinen Commit „seit der letzten Signatur“ – die Akte zeichnete ihn ohne
+    # jede Erklärung, und genau das verbietet der Vertrag der Akte („wer
+    # zeichnet, nennt die Herkunft JEDER gezeichneten Datei“). Ein neuer
+    # gesperrter Knoten wird deshalb als das benannt, was er ist: neu unter
+    # Siegel, ohne Vorgeschichte.
+    bekannt = {e["pfad"] for e in herkunft}
+    # Nur gegenüber einer BESTEHENDEN Signatur: „neu unter Siegel“ beschreibt
+    # eine Aufnahme, keine Ersteinrichtung (die Ersteinrichtung hat keine
+    # Vorgeschichte, die sie nennen könnte – dort bleibt die Akte schlank).
+    if alt.get("files"):
+        for pfad in geaendert:
+            if pfad not in bekannt:
+                herkunft.append({
+                    "pfad": pfad,
+                    "klasse": "kritisch" if pfad in KRITISCH else "fest",
+                    "urteil": "NEU UNTER SIEGEL",
+                    "commits": [],
+                    "commits_art": "neu-unter-siegel",
+                })
+    if herkunft or (geaendert and alt.get("files")):
+        akte["herkunft"] = herkunft
     dokument = _lock_dokument(root, files, list(alt.get("audit") or []), akte)
     ok, meldung = lock_schreiben(root, dokument)
     if not ok:
