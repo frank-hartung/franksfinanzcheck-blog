@@ -539,3 +539,64 @@ Lokal auf demselben Baum: `unittest discover` **2065 Tests OK** (4 skipped),
 Damit ist der Weg frei: Der Produktionslauf auf `main` stellt das Zertifikat
 aus – erwartet werden die zurückgeholten Kandidaten und ≥ 4 zertifizierte
 Reserve-Artikel.
+
+---
+
+## Nachtrag 5 (07.10.2026) – der Satz-Heiler schrieb an der falschen Stelle
+
+### Befund
+
+Der Lauf **37666773476** blieb bei **3/6**. Der Satz-Heiler, der die
+Lesbarkeits-Klasse übernehmen sollte, hatte keinen einzigen Ersatz in eine
+Datei geschrieben. Die Ursache war ein Koordinatenfehler: `saetze_finden()`
+lieferte Positionen relativ zu `teile[2]` (dem Body); gespleißt wurde aber mit
+`aktuell[start:…]` im vollständigen Artikel. Beim DSL-Kandidaten lag der Kopf
+rund 2.5k Zeichen vor diesem Koordinatensystem. `start = 140` traf deshalb
+Frontmatter statt des Satzes. T4 erkannte die Änderung korrekt und verwarf
+alles – fail-closed, aber ohne Fortschritt.
+
+Die alte Wirkungsprobe hatte nur einen etwa 74 Zeichen langen Kopf. Dort traf
+dieselbe falsche Position den Body und zerstückelte den Satzanfang
+(„NotierWie …“); keine Prüfung bemerkte den Schaden. Eine grüne Probe bewies
+also nicht, dass die Wirkung heil war.
+
+### Reparatur auf Klassenebene
+
+1. **Datei-Koordinaten:** `saetze_finden(..., base_offset=…)` hebt alle
+   Zeiger in den Dateiraum. `_finde_satz()` sucht vor jedem Ersatz frisch im
+   aktuellen Body und liefert `0` als ungültigen Sentinel; der Kopf wird nie
+   durchsucht.
+2. **Unabhängige Kopf-Wache:** Frontmatter und Trenner müssen vor jeder
+   Freigabe byte-identisch sein. Das gilt zusätzlich zu T4 und unabhängig von
+   der Positionsrechnung.
+3. **Satzschutz:** `unversehrte_saetze()` baut den erwarteten Text aus dem
+   Original und den vollständigen, freigegebenen Ersetzungen erneut auf. Ein
+   beschädigter Satz oder eine Änderung außerhalb der Ersetzung wird
+   fail-closed verworfen; R5 darf nur Absatz-Whitespace ergänzen.
+4. **Ehrliche Wirkungsprobe:** Das Fixture hat nun einen Kopf von mindestens
+   2.532 Zeichen. Die Gegenprobe erzwingt `_finde_satz → 0`; ein solcher Finder
+   muss fail-closed gehen und der Selbsttest wird bei externer Sabotage rot.
+5. **Teilfortschritt:** Unterhalb Flesch 60 darf ein sauberer Sprung von
+   mindestens **+0,3 Punkten** geschrieben werden, wenn ausschließlich die
+   T1-Schwelle offen ist. `--nur-ganz` und
+   `FFC_SATZ_NUR_GANZ=1` stellen das bisherige Alles-oder-nichts wieder her.
+
+### Nachweis in dieser Arbeitskopie
+
+| Prüfung | Ergebnis |
+|---|---|
+| `satz_heiler.py --wirkungsprobe --json` | ✅ Flesch **42,0 → 73,6**; realistischer Kopf, Kopf-Tor und Satzschutz erfüllt |
+| `satz_heiler.py --selftest` | ✅ Wirkung, Idempotenz und `_finde_satz → 0` fail-closed |
+| `python -m unittest scripts.tests.test_satz_heiler -v` | ✅ **19 Regressionstests** |
+| `selftest_clock --trap-modul scripts.tests.test_satz_heiler --offset 97` | ✅ 19 Tests unter vorgestellter Uhr |
+| Vollständige Suite (`PyYAML 6.0.2`) | ✅ **2.108 Tests, 24 begründete Skips** |
+| `reserve_healer_coverage.py --selftest` / `--vorratsschutz` | ✅ Deckung und Fahnen-Schutz grün |
+| Read-only Reserve-Scan | ✅ **12 Kandidaten** unter Flesch 60; DSL 59,5, Haushaltskosten 59,9; keine Kandidatendatei geändert, keine Live-KI aufgerufen |
+
+Der im vorherigen lokalen Lauf genannte mechanische Stub-Nachweis
+(**0/12 → 5/12**, DSL 59,5 → 60,1, Haushaltskosten 59,9 → 60,0) ist
+Übergabe-Evidenz; er wurde in dieser Arbeitskopie nicht erneut mit einem
+Stub-Modell gefahren. Der zertifizierende Produktionslauf und der Dispatch
+„Reserve-Nachweis #614“ bleiben ausstehend. Nach dem Push auf den freigegebenen
+Ref muss der Nutzer den Dispatch auslösen; erst ein grünes Zertifikat belegt
+≥ 4 Kandidaten und gehört anschließend ins Siegel.
