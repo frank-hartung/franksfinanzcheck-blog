@@ -129,6 +129,10 @@ Veröffentlichungsdatum nachgetragen.
 - `python3 scripts/selftest_runner.py` → siehe Laufprotokoll; der neue Melder
   wird entdeckt (quotierte Kennung) und läuft in Basis + Uhr-Proben; der
   Arbeitsbaum bleibt unverändert (C15: ein Prüf-Aufruf heilt nicht).
+- Pull Request **#620** (Branch `arena/b0de38e3-franksfinanzcheck-blog`):
+  Qualitäts-Gate (Build + interne Links), Publication reliability regression
+  tests, Integritäts-Lock (PR-Gate), CodeQL (python/javascript) und
+  Klartext-Wache → **alle grün**.
 - Erster echter Beleg der neuen Historie (07.10.2026, source):
   `{"ts": "2026-10-07T12:41:07Z", "day": "2026-10-07", "mode": "source",
   "source": 2, "delivered": 2, "ok": true}` –
