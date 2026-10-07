@@ -328,7 +328,14 @@ bewusst – nachgewiesen disjunkte Muster.
   verifiziert für jedes Cover die vollständige Text-Renderbarkeit
   (1:1-Nachbau des Render-Flows; `--fix` rendert neu).
   Untertages-Ziel-Defizite macht `engine_issue.py --deficit` (Phase 6)
-  sichtbar (auto-schließendes Issue). Report: `CADENCE-GATE-REPORT.md`.
+  sichtbar. Der Kanal ist ein **Zustandskanal** (Lehre aus #601/#608,
+  07.10.2026): Eigentümerin ist die Messung selbst, gemessen wird an jedem
+  Kalendertag der jüngste Publikationstag (SSOT
+  `cadence_guard.letzter_publikationstag`), und geschlossen wird nur durch
+  die eigene Messung – ein Reparatur-Merge kann eine Ursache beheben, aber
+  keinen Messwert. Wer den Kanal rot schließt, findet ihn beim nächsten
+  Lauf offen; Einzelheiten in `docs/ANLEITUNG-ENGINE-KAPAZITAET.md` und
+  Regel **C23** des Governance-Vertrags. Report: `CADENCE-GATE-REPORT.md`.
   Beleg 26.08: 7 Verstöße geheilt (5 Off-Day + 2 Over-Cap) → 18 live,
   jeder Tag exakt 2–3; 6 Titel repariert + Covers neu gerendert.
 - **Empfohlene Zeichenlänge pro Blogartikel (Premium, 31.08.2026): 12.000–18.000 Zeichen**
@@ -565,7 +572,7 @@ python3 scripts/sprachglatt.py --fix
   Zeitstempel/abgelaufen/gelöscht) | Render-Guard in `layouts/_default/_markup/render-link.html` (Ankertext als
   Klartext, Link lebt bei Rückkehr selbst auf) + `draft_link_healer` (entlinkt im
   Inhalt nur noch dauerhaft gelöschte Ziele; SSOT: `post_utils.build_state`) |
-| Tagesende unter Mindestziel | engine_issue --deficit (Issue, auto-schließend) |
+| Tagesende unter Mindestziel | `engine_issue.py --deficit` führt den Zustandskanal `engine-deficit`: täglich belegt, Schließung nur durch eigene Messung (Ziel erreicht / Fehltag verbucht), Wiederöffnen nach rotem Schließen – C23 (#608) |
 | Kadenz-Gate selbst defekt | cadence_guard --selftest (Exit 2 bricht CI ab) |
 | Re-Queue-Flagge verloren → fertig geparkter Post bleibt für immer unsichtbar (Root-Cause von #129) | `cadence_guard.py --fix` ruft `queue_integrity()` (Park-Zustand via `park_state.py`): rearmt `lost`, bereinigt `stale`, respektiert `hold`/`manual`; `--check` meldet es als Fehler |
 | bewusste Gate-Hemmung wird vergessen / führt zu Ping-Pong | `publish_gate.py` + `check_uniqueness.py` schreiben ihren Grund (`cadence_grund`) → `hold` wird nie automatisch gefördert, aber ab 7 Tagen im Report markiert (Verlust-Radar) |

@@ -148,7 +148,7 @@ Moduls: Es hat genau einen Eigentümer, `scripts/reserve_economy.py`.
 |---|---|
 | `scripts/bot_preflight.py` (Phase 0) | misst die Lage, löst vorher Phantom-Sperren, schreibt `::warning::` ins Actions-Log – **bricht nie ab** |
 | `scripts/engine_generate.py` | wählt Themen ausschließlich aus der AUTO-Bahn |
-| `scripts/engine_issue.py` | hängt die Lage an das Tagesdefizit-Issue, damit der Alarm seine Ursache kennt |
+| `scripts/engine_issue.py` | **führt den Zustandskanal** `engine-deficit`: misst die Tagesquote, öffnet/belegt/schließt das Issue und hängt die Lage als Diagnose an |
 
 Dass der Pre-Flight bei Engpass **nicht** abbricht, ist Absicht: Ein leerer
 Themenpool heilt nicht dadurch, dass die Engine stillsteht. Re-Queue-
@@ -182,11 +182,49 @@ Details und Beweisführung: `TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-PREMIUM-2026-1
 
 ---
 
+## Wenn der Tag unter dem Mindestziel bleibt (Zustandskanal, #601/#608)
+
+Das Fach-Issue **`engine-deficit`** ist der einzige Kanal für „LIVE unter
+Mindestziel“. Es ist **kein Arbeitsauftrag, sondern ein Zustand** – und ein
+Zustand endet nicht mit einem Merge, sondern nur mit einer neuen Messung.
+Das ist die Lehre aus dem 05./06.10.2026: Der Tag endete 1/2, das Issue
+#601 wurde um 21:21 vom Reparatur-Merge #603 geschlossen („Closes #601“),
+am Ruhetag übersprang der Melder den Tag – und der nachgelieferte
+Montags-Slot meldete um 00:55 UTC ehrlich rot, während das zentrale
+Fehler-Alerting fail-open ein generisches Wartungs-Issue mit
+API-Key-Runbook anlegen musste (#608).
+
+```bash
+npm run engine:deficit            # Zustand in einem Blick (Trockenlauf, kein Schreibzugriff)
+python3 scripts/engine_issue.py --deficit   # Kanal belegen (CI: Engine, Kadenz, Produktions-Wache)
+npm run test:engine:deficit       # Selbsttest + 39 Unit-Tests
+```
+
+| Frage | Antwort |
+|---|---|
+| **Wer besitzt den Kanal?** | Die Messung selbst (`scripts/engine_issue.py`) – nicht der Vorschlag, der die Ursache heilt, und nicht die Hand. |
+| **Wann wird gemessen?** | An **jedem** Tag. Gemessen wird immer der jüngste Publikationstag (SSOT `cadence_guard.letzter_publikationstag`); an Ruhetagen belegt die Produktions-Wache (20:00 UTC) den Kanal. |
+| **Wann schließt er?** | Nur durch die eigene Messung: (1) Der gemessene Tag hat das Ziel noch erreicht, oder (2) der Fehltag ist vorbei – nicht nachholbar, weil Inhalte nie nachträglich datiert werden – und ein folgender Publikationstag erreicht das Ziel nachweislich. Der Schließvermerk sagt das ausdrücklich. |
+| **Was, wenn ihn jemand rot schließt?** | Die nächste Messung öffnet ihn wieder – mit Begründung. Danach schließt er sich von selbst; es entsteht kein Dauerläufer. |
+| **Warum hängt das Fehler-Alerting daran?** | Die Kadenz-Endkontrolle bleibt bei einem echten Quotendefizit ehrlich rot. Das zentrale Fehler-Alerting schweigt nur, wenn dieser rote Schritt durch einen **offenen, für denselben Lauf frisch belegten** Fachkanal gedeckt ist (#602-Regel) – sonst meldet es fail-open generisch. |
+
+Zustände: `offen` (Publikationstag läuft, Slots können noch liefern) ·
+`verbucht` (Tag vorbei, nicht nachholbar – Kanal bleibt offen) ·
+`erfuellt` (Ziel erreicht, Kanal schließt sich). Die Zustandslogik steht
+als reine Funktion in `engine_issue.quoten_lage()`/`urteil()` und ist im
+Selbsttest mit dem echten 05./06.10. nachgestellt; Regel **C23** des
+Governance-Vertrags friert Besitz, Kalender-SSOT, Ruhetag-Messung, Reopen
+und die Marker-Identität ein. Vorgangsbericht:
+`WF-1F8C-608-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
+---
+
 ## Tests
 
 ```bash
 npm run test:engine:kapazitaet    # Selbsttest + 20 Unit-Tests
 npm run test:prompt:echo          # R16-Prompt-Echo, 14 Unit-Tests
 npm run test:engine:slots         # Slot-Wache: Selbsttest + 29 Unit-Tests
+npm run test:engine:deficit       # Zustandskanal: Selbsttest + 39 Unit-Tests
 ```
 

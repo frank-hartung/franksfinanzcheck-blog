@@ -254,6 +254,31 @@ jobs:
           fi
 
       # -------------------------------------------------------
+      # Quoten-Fachkanal belegen (WF-1F8C #608) – an JEDEM Tag, auch an
+      # Ruhetagen. Ein Zustand („jüngster Publikationstag unter Mindestziel“)
+      # ist kein Arbeitsauftrag: Er endet nicht mit einem Merge und nicht
+      # mit dem Wochenende. Am 06.10.2026 fehlte der Kanal genau deshalb:
+      # An einem Dienstag übersprang engine_issue den Tag („Kein
+      # Publikationstag“), das Issue #601 war am Abend zuvor von einem
+      # Reparatur-Merge geschlossen worden – und der um 00:55 UTC
+      # nachgelieferte Montags-Slot der Kadenz-Endkontrolle meldete zwar
+      # ehrlich rot, hatte aber keinen offenen, frischen Fachkanal, auf den
+      # das zentrale Fehler-Alerting sich stützen konnte. Es musste
+      # fail-open generisch melden (#608, API-Key-Runbook).
+      # Diese Wache ist der tägliche Beleg: öffnen, belegen, wieder öffnen
+      # oder – ausschließlich per eigener Messung – schließen.
+      # -------------------------------------------------------
+      - name: Quoten-Fachkanal belegen (auch an Ruhetagen)
+        # In der WARTEND-Frist (Publikationstag, noch 0 Artikel, Fallback-Slots
+        # 14:10/17:40 laufen noch) wird bewusst nicht gemeldet – die Slots sind
+        # der Nachholweg, ein rotes Issue wäre hier ein Fehlalarm.
+        if: env.LEVEL != 'WARTEND'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MIN_ARTIKEL_PRO_TAG: ${{ vars.MIN_ARTIKEL_PRO_TAG || '2' }}
+        run: python3 scripts/engine_issue.py --deficit
+
+      # -------------------------------------------------------
       # Alarm + Issue (mit Fingerprint – kein täglicher Doppelpost)
       # -------------------------------------------------------
       - name: Telegram-Alarm (P1)

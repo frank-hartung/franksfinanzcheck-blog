@@ -179,6 +179,16 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Entscheidungslogik ein (Ruhetag, Fenstergrenze, Vorfall-Erkennung,
           # kein Auto-Retry nach rotem Lauf) und gehört ins Minimum.
           "newsletter_cadence.py",
+          # Zustandskanal der Tagesquote (07.10.2026, WF-1F8C #608): Die
+          # Quote ist ein Zustand, kein Arbeitsauftrag. Am 05.10. endete der
+          # Tag 1/2, das Fach-Issue #601 wurde per Reparatur-Merge
+          # geschlossen, der Ruhetag am 06.10. wurde übersprungen – und der
+          # nachgelieferte Montags-Slot meldete ehrlich rot, während das
+          # zentrale Fehler-Alerting fail-open ein generisches Wartungs-Issue
+          # mit API-Key-Runbook anlegte (#608). Der Selbsttest dieser Wache
+          # stellt den Vorfall nach (Ruhetag gemessen, rot Geschlossenes
+          # wieder geöffnet, ehrlich geschlossen) und gehört ins Minimum.
+          "engine_issue.py",
           # Slot-Wache der Content-Linie (05.10.2026, #601): Dieselbe
           # Fehlerklasse wie oben, nur am Herzstück – GitHubs Scheduler
           # startete 4 von 7 planmäßigen Slots nie, der Tag endete 1/2 LIVE,
@@ -1518,6 +1528,125 @@ def pflichtcheck_name_aus_workflow(text):
     return ""
 
 
+# --- C23: Zustandskanal (WF-1F8C #608, 07.10.2026) --------------------------
+# Auslöser: Der 05.10.2026 endete mit 1/2 LIVE. Das Fach-Issue #601 existierte
+# korrekt, wurde aber um 21:21 durch den Reparatur-Merge #603 geschlossen
+# („Closes #601“) – der gemessene Tag blieb rot. Am 06.10. (Dienstag) übersprang
+# `engine_issue.py` den Tag vollständig („Kein Publikationstag“); der um 00:55
+# UTC nachgelieferte Montags-Slot der Kadenz-Endkontrolle meldete ehrlich rot
+# („TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig“) – und das zentrale
+# Fehler-Alerting fand keinen offenen, frischen Fachkanal. Es musste fail-open
+# das generische Wartungs-Issue #608 mit API-Key-Runbook anlegen.
+# Der Fehler war keine Alarmregel, sondern eine Besitzfrage: Eine QUOTE ist ein
+# Zustand, kein Arbeitsauftrag. Ein Arbeitsauftrag endet mit einem Merge – ein
+# Zustand nur durch eine neue MESSUNG. Diese Regel friert den Kanal ein:
+#   * Besitzer = die Messung selbst (engine_issue.py), tägliche Kadenz
+#   * gemessen wird der jüngste Publikationstag (SSOT cadence_guard) – auch
+#     an Ruhetagen, denn ein Ruhetag vergisst keinen offenen Zustand
+#   * Schließpfad = nur die eigene Messung (Ziel erreicht, mit ehrlichem
+#     Vermerk, dass ein Fehltag NICHT nachgeholt wird)
+#   * Reopen = wer den Kanal rot schließt, findet ihn beim nächsten Lauf offen
+def c23_zustandskanal(script_texts, wflows, root=BLOG_DIR):
+    out = []
+
+    def _wf(name: str) -> str:
+        for path, text in (wflows or {}).items():
+            if os.path.basename(path) == name:
+                return text
+        return ""
+
+    ei = script_texts.get("engine_issue.py", "")
+    cg = script_texts.get("cadence_guard.py", "")
+    pc = script_texts.get("publication_check.py", "")
+    if not ei or not cg or not pc:
+        out.append(("C23", "engine_issue.py / cadence_guard.py / "
+                           "publication_check.py nicht lesbar – der Zustandskanal "
+                           "ist nicht prüfbar."))
+        return out
+
+    # a) Der Selbsttest der Wache läuft im vertraglichen Minimum (C6).
+    if "engine_issue.py" not in GUARDS:
+        out.append(("C23", "scripts/engine_issue.py steht nicht in GUARDS – sein "
+                           "Selbsttest liefe nicht in C6, und eine Wache, die niemand "
+                           "verlangt, führt irgendwann niemand mehr aus."))
+
+    # b) EIN Kalender: der jüngste Publikationstag kommt aus der SSOT.
+    if "def letzter_publikationstag(" not in cg:
+        out.append(("C23", "scripts/cadence_guard.py: `letzter_publikationstag` fehlt – "
+                           "ohne die eine Kalenderquelle baut sich jeder Melder seinen "
+                           "eigenen Tag (#608)."))
+    if "cg.letzter_publikationstag(" not in ei:
+        out.append(("C23", "scripts/engine_issue.py misst nicht über "
+                           "`cadence_guard.letzter_publikationstag` – ein zweiter "
+                           "Kalender im Melder ist die Ursache #608."))
+    if "cg.letzter_publikationstag(" not in pc:
+        out.append(("C23", "scripts/publication_check.py hat wieder eine eigene "
+                           "Kalenderlogik – drei Melder, drei Tage (#608)."))
+
+    # c) Kein Ruhetag-Sprung: Ein Zustand gilt auch am Dienstag.
+    if "Kein Publikationstag – Defizit-Wache übersprungen" in ei:
+        out.append(("C23", "scripts/engine_issue.py überspringt Ruhetage wieder "
+                           "(„Kein Publikationstag“) – genau dann fehlte der Fachkanal "
+                           "am 06.10.2026 (#608)."))
+    if re.search(r"if\s+\w+\.weekday\(\)\s+not\s+in\s+cg\.PUBLICATION_DAYS", ei):
+        out.append(("C23", "scripts/engine_issue.py kehrt an Ruhetagen vorzeitig "
+                           "zurück – der Zustandskanal bliebe unbesetzt."))
+
+    # d) Besitz: Der Kanal wird belegt und, falls rot geschlossen, wieder geöffnet.
+    if 'gh("issue", "reopen"' not in ei:
+        out.append(("C23", "scripts/engine_issue.py kennt kein Wiederöffnen – ein "
+                           "Zustand, den ein Merge schließt, bliebe geschlossen (#608)."))
+    if "wieder_oeffnen" not in ei:
+        out.append(("C23", "scripts/engine_issue.py: die Entscheidung "
+                           "`wieder_oeffnen` fehlt – ohne sie entsteht am nächsten roten "
+                           "Lauf wieder ein generisches Wartungs-Issue."))
+    if ei.count('gh("issue", "close"') != 1:
+        out.append(("C23", "scripts/engine_issue.py schließt an mehr als einer Stelle "
+                           "(oder gar nicht) – der Schließpfad muss die eigene Messung "
+                           "sein, sonst schließt ihn am Ende ein Merge."))
+    if "def schluss_kommentar(" not in ei or "nachgeholt" not in ei:
+        out.append(("C23", "scripts/engine_issue.py: der Schließvermerk spricht die "
+                           "Nicht-Nachholbarkeit nicht aus – dann behauptet der "
+                           "Abschluss Fortschritt, den es nicht gibt."))
+
+    # e) Identität bleibt Marker + Label: daran hängt die Stummschaltung des
+    #    zentralen Fehler-Alertings (Meldung #602). Wer den Marker ändert, macht
+    #    die Dedupe blind – und erzeugt wieder generische Doppelmeldungen.
+    if 'MARKER = "<!-- engine-deficit-id: tagesdefizit -->"' not in ei:
+        out.append(("C23", "scripts/engine_issue.py: der Marker "
+                           "`<!-- engine-deficit-id: tagesdefizit -->` fehlt oder ist "
+                           "verändert – die Fachkanal-Dedupe des Fehler-Alertings "
+                           "greift nicht mehr."))
+    if 'LABEL = "engine-deficit"' not in ei:
+        out.append(("C23", "scripts/engine_issue.py: das Label `engine-deficit` fehlt "
+                           "oder ist verändert – das Alerting findet den Fachkanal nicht."))
+
+    # f) Kadenz: JEDEN Tag ein Beleg – an Ruhetagen von der Produktions-Wache.
+    pw = _wf("produktions-wache.yml")
+    if "engine_issue.py --deficit" not in pw:
+        out.append(("C23", "produktions-wache.yml belegt den Quoten-Fachkanal nicht – "
+                           "an Ruhetagen (Di/Do/Sa/So) bliebe er unbesetzt, und genau "
+                           "dort entstand #608."))
+    if not re.search(r'cron:\s*"0 20 \* \* \*"', pw):
+        out.append(("C23", "produktions-wache.yml hat keinen täglichen Takt mehr – "
+                           "der Zustandskanal braucht einen Beleg an jedem Kalendertag."))
+    if "env.LEVEL != 'WARTEND'" not in pw:
+        out.append(("C23", "produktions-wache.yml kennt die WARTEND-Frist nicht mehr – "
+                           "in den Fallback-Slots (14:10/17:40) darf kein Defizit "
+                           "gemeldet werden, die Slots laufen noch."))
+    ke = _wf("kadenz-endkontrolle.yml")
+    pos_beleg = ke.find("engine_issue.py --deficit")
+    pos_messung = ke.find("publication_check.py")
+    if pos_beleg < 0:
+        out.append(("C23", "kadenz-endkontrolle.yml ruft die Defizit-Wache nicht mehr "
+                           "auf – der rote TAGESDEFIZIT-Schritt hätte keinen Fachkanal."))
+    elif 0 <= pos_messung < pos_beleg:
+        out.append(("C23", "kadenz-endkontrolle.yml misst die Quote VOR dem Beleg des "
+                           "Fachkanals – das Alerting liest nach dem Lauf und fände "
+                           "einen veralteten Kanal (fail-open, #608)."))
+    return out
+
+
 def c18_pflicht_check(wflows):
     """C18: Der Pflicht-Check heißt, wie der Branch-Schutz ihn verlangt – und er
     berichtet in jeder Lage (kein Pfadfilter, kein `if:`, kein Verschlucken)."""
@@ -1736,6 +1865,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c20_lesbarkeit_und_hysterese(script_texts, gate)
     checks += c21_maschinensaetze(script_texts)
     checks += c22_publikations_vertrag(script_texts, root=root)
+    checks += c23_zustandskanal(script_texts, wflows, root=root)
     return checks
 
 
@@ -1829,6 +1959,20 @@ RULE_TEXT = {
            "Beitrag …“ umgeschrieben; ihre Struktur-Prüfung sah nichts, blockiert hat "
            "erst der nächste Deploy-Lauf – Exit 1, Produktionsalarm WF-54C4, "
            "abgebrochene Auslieferung (#607).",
+    "C23": "Eine Quote ist ein Zustand, kein Arbeitsauftrag: Das Fach-Issue "
+           "`engine-deficit` gehört seiner Messung (`scripts/engine_issue.py`) – "
+           "Besitzer, tägliche Kadenz, Schließpfad. Gemessen wird der jüngste "
+           "Publikationstag (`cadence_guard.letzter_publikationstag`, EINE "
+           "Kalenderquelle für Defizit-Wache, Produktions-Wache und "
+           "Auslieferungs-SLO) – auch an Ruhetagen, denn ein Ruhetag vergisst "
+           "keinen offenen Zustand. Geschlossen wird nur durch die eigene "
+           "Messung (Ziel erreicht), und der Vermerk sagt ausdrücklich, dass ein "
+           "Fehltag NICHT nachgeholt wird (kein Nachtragen von Inhalten). Wer "
+           "den Kanal rot schließt – Merge, Hand, Missverständnis –, findet ihn "
+           "beim nächsten Lauf wieder offen. Am 05./06.10.2026 war #601 nach "
+           "einem Reparatur-Merge zu, der Ruhetag wurde übersprungen, und das "
+           "zentrale Fehler-Alerting musste fail-open das generische "
+           "Wartungs-Issue #608 mit API-Key-Runbook anlegen (#608).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -1850,7 +1994,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C19": "Release-Scorecard",
          "C20": "Lesbarkeits-Tor & Deploy-Hysterese",
          "C21": "Maschinensätze",
-         "C22": "Publikations-Vertrag der Schreib-Seite"}
+         "C22": "Publikations-Vertrag der Schreib-Seite",
+         "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -2312,12 +2457,74 @@ def _selftest():
     if not [f for f in c19_release_ssot(blind) if "Collector" in f[1] or "DRY_RUN" in f[1]]:
         failures.append("C19: eine Engine ohne Publish-Gate-Collectoren und ohne "
                         "Beweislauf-Erzwingung bleibt unentdeckt (zweite Messregel).")
+    # --- C23: Zustandskanal (WF-1F8C #608, 07.10.2026) --------------------------
+    # Der Kanal gehört seiner Messung: tägliche Kadenz, eine Kalenderquelle,
+    # Schließpfad nur durch Messung, Wiederöffnen nach rotem Schließen.
+    echte_waechter = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                      for name in ("engine_issue.py", "cadence_guard.py",
+                                   "publication_check.py")}
+    wflows_echt = {}
+    for pfad in sorted(glob.glob(os.path.join(BLOG_DIR, ".github", "workflows", "*.yml"))):
+        wflows_echt[pfad] = _read(pfad)
+    if c23_zustandskanal(echte_waechter, wflows_echt):
+        failures.append(f"C23: der echte Zustand wird beanstandet: "
+                        f"{c23_zustandskanal(echte_waechter, wflows_echt)}")
+    # (a) Ruhetag-Sprung zurückgebaut: genau die Lücke, die #608 möglich machte.
+    mit_sprung = dict(echte_waechter, **{
+        "engine_issue.py": echte_waechter["engine_issue.py"].replace(
+            "    heute = dt.datetime.now(dt.timezone.utc).date()",
+            "    heute = dt.datetime.now(dt.timezone.utc).date()\n"
+            "    if heute.weekday() not in cg.PUBLICATION_DAYS:\n"
+            "        print(\"Kein Publikationstag – Defizit-Wache übersprungen.\")\n"
+            "        return 0")})
+    if not [f for f in c23_zustandskanal(mit_sprung, wflows_echt)
+            if "Ruhetage" in f[1]]:
+        failures.append("C23: ein wieder eingebauter Ruhetag-Sprung bleibt unentdeckt (#608).")
+    # (b) Zweiter Kalender: der Melder bestimmt seinen Tag selbst.
+    eigene_uhr = dict(echte_waechter, **{
+        "engine_issue.py": echte_waechter["engine_issue.py"].replace(
+            "cg.letzter_publikationstag(heute)", "heute")})
+    if not [f for f in c23_zustandskanal(eigene_uhr, wflows_echt)
+            if "Kalender" in f[1] or "letzter_publikationstag" in f[1]]:
+        failures.append("C23: ein zweiter Kalender im Melder bleibt unentdeckt (#608).")
+    # (c) Wiederöffnen entfernt: ein Merge könnte den Zustand dann endgültig schließen.
+    ohne_reopen = dict(echte_waechter, **{
+        "engine_issue.py": echte_waechter["engine_issue.py"].replace(
+            "wieder_oeffnen", "ignorieren")})
+    if not [f for f in c23_zustandskanal(ohne_reopen, wflows_echt)
+            if "wieder" in f[1].lower() or "Wieder" in f[1]]:
+        failures.append("C23: ein fehlender Wiederöffnen-Pfad bleibt unentdeckt (#608).")
+    # (d) Der tägliche Beleg verschwindet aus der Produktions-Wache.
+    ohne_beleg = dict(wflows_echt, **{
+        os.path.join(BLOG_DIR, ".github", "workflows", "produktions-wache.yml"):
+            wflows_echt[os.path.join(BLOG_DIR, ".github", "workflows",
+                                     "produktions-wache.yml")].replace(
+                "engine_issue.py --deficit", "# Beleg entfernt")})
+    if not [f for f in c23_zustandskanal(echte_waechter, ohne_beleg)
+            if "Ruhetagen" in f[1]]:
+        failures.append("C23: ein fehlender Tagesbeleg bleibt unentdeckt – an "
+                        "Ruhetagen entstünde wieder #608.")
+    # (e) Identität (Marker/Label) verändert: die Dedupe des Alertings erblindet.
+    fremder_marker = dict(echte_waechter, **{
+        "engine_issue.py": echte_waechter["engine_issue.py"].replace(
+            "<!-- engine-deficit-id: tagesdefizit -->", "<!-- irgendwas -->")})
+    if not [f for f in c23_zustandskanal(fremder_marker, wflows_echt)
+            if "Marker" in f[1]]:
+        failures.append("C23: ein veränderter Fachkanal-Marker bleibt unentdeckt "
+                        "(die Stummschaltung aus #602 würde blind).")
+    # (f) Kalender-SSOT in cadence_guard entfernt: alle Melder müssten raten.
+    ohne_ssot = dict(echte_waechter, **{
+        "cadence_guard.py": echte_waechter["cadence_guard.py"].replace(
+            "def letzter_publikationstag(", "def _entfernt(")})
+    if not [f for f in c23_zustandskanal(ohne_ssot, wflows_echt)
+            if "letzter_publikationstag" in f[1]]:
+        failures.append("C23: eine entfernte Kalender-SSOT bleibt unentdeckt.")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C22 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C23 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

@@ -98,6 +98,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set +e
+          # Der Zustandskanal wird VOR der Klassifikation belegt (WF-1F8C #608):
+          # engine_issue.py misst seit dem 07.10.2026 an JEDEM Tag den jüngsten
+          # Publikationstag (SSOT cadence_guard.letzter_publikationstag), belegt
+          # den Fachkanal `engine-deficit` und öffnet ihn wieder, wenn er
+          # geschlossen wurde, obwohl der gemessene Tag rot ist. Genau das
+          # fehlte am 06.10.2026 (Ruhetag, #601 per Merge geschlossen): Der
+          # verspätete Montags-Slot meldete hier ehrlich rot, das zentrale
+          # Fehler-Alerting fand aber keinen offenen, frischen Fachkanal und
+          # legte fail-open das generische Wartungs-Issue #608 mit
+          # API-Key-Runbook an.
           python3 scripts/engine_issue.py --deficit
           issue_rc=$?
           python3 scripts/publication_check.py
@@ -105,7 +115,7 @@ jobs:
           echo "issue_rc=$issue_rc" >> "$GITHUB_OUTPUT"
           echo "check_rc=$check_rc" >> "$GITHUB_OUTPUT"
           if [ "$issue_rc" -ne 0 ]; then
-            echo "::warning::Defizit-Fachmeldung konnte nicht sauber abgeglichen werden (Exit $issue_rc). Fehler-Alerting bleibt fail-open."
+            echo "::warning::Zustandskanal konnte nicht belegt werden (Exit $issue_rc) – ohne offenen, frischen Fachkanal meldet das Fehler-Alerting fail-open generisch. Das ist ein Melder-Defekt, kein Quotendefekt."
           fi
           if [ "$check_rc" -eq 0 ]; then
             echo "✅ Source-Tagesziel erfüllt; keine rote Kadenz-Meldung nötig."
