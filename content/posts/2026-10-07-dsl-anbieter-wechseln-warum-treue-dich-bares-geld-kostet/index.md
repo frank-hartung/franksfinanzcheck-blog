@@ -3,7 +3,8 @@ title: "DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet"
 description: Willst du deinen DSL-Anbieter wechseln und Geld sparen? Frank Hartung erklärt den 4K-Prüfpfad für deine Internetkosten – ehrlich und ohne Werbe-Blabla.
 date: 2026-10-07T10:43:09Z
 draft: true
-reserve: true
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 59.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Geld sparen im Alltag", "DSL-Vergleich"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -45,7 +46,7 @@ Dein **DSL-Anbieter** belohnt Treue fast nie. Meist zahlst du nach zwei Jahren d
 
 Das **Wechseln** gelingt heute unkompliziert und ohne Technik-Chaos. Neukunden locken die Provider mit extremen Rabatten und hohen Gutschriften.
 
-Bestandskunden finanzieren diese Angebote oft durch überhöhte Grundgebühren. In diesem Artikel erfährst du, wie du effektiv **[Geld sparen](../../posts/2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit/)** kannst. Nutze die Freiheit der neuen Gesetze für deinen Vorteil.
+Bestandskunden finanzieren diese Angebote oft durch überhöhte Grundgebühren. In diesem Artikel erfährst du, wie du effektiv **[Geld sparen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)** kannst. Nutze die Freiheit der neuen Gesetze für deinen Vorteil.
 
 **Das Wichtigste in Kürze**
 - **Wechsel-Logik:** Bestpreise erhalten fast ausschließlich Neukunden oder Rückkehrer nach einer Sperrfrist.
@@ -71,7 +72,7 @@ Du profitierst häufig von modernerer Technik wie Glasfaser (FTTH). So steigerst
 
 Viele alte Verträge schleppen zudem unnötigen Ballast mit. Vielleicht zahlst du noch für eine Festnetz-Flatrate, die du nie nutzt.
 
-Durch das **Wechseln** passt du deinen Tarif an deinen aktuellen Bedarf an. Du zahlst nur für die Leistung, die du wirklich benötigst. So lässt sich am Jahresende spürbar **Geld sparen**.
+Durch das **Wechseln** passt du deinen Tarif an deinen aktuellen Bedarf an. Du zahlst nur für die Leistung, die du wirklich benötigst. So lässt sich am Jahresende spürbar **[Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/)**.
 
 ## Kosten sehen: Die Bestandsaufnahme deiner Fixkosten
 
@@ -120,7 +121,7 @@ Willst du deinen **DSL-Anbieter wechseln**, musst du den Effektivpreis berechnen
 3. Bonus abziehen: 720 € – 100 € = 620 €
 4. Durch Laufzeit teilen: 620 € / 24 Monate = **25,83 € Effektivpreis pro Monat**
 
-Vergleiche diesen Wert mit deinem aktuellen Preis. Sparst du monatlich 14 €, summiert sich das auf über 300 € Ersparnis. Ein umfassender **DSL-Vergleich** liefert dir die nötigen Daten für diese Rechnung.
+Vergleiche diesen Wert mit deinem aktuellen Preis. Sparst du monatlich 14 €, summiert sich das auf über 300 € Ersparnis. Ein umfassender **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)** liefert dir die nötigen Daten für diese Rechnung.
 
 Ein Wechsel lohnt sich meist ab einer Ersparnis von 10 % – bezogen auf deine aktuelle monatliche Grundgebühr.
 
@@ -131,7 +132,7 @@ Ein Wechsel lohnt sich meist ab einer Ersparnis von 10 % – bezogen auf deine 
 
 ## Kündigungsfenster sichern: So gelingt der reibungslose Übergang
 
-Niemand möchte tagelang ohne Internet dastehen. Das Gesetz schützt dich vor langen Ausfallzeiten. Dein alter Anbieter versorgt dich theoretisch weiter, bis die neue Leitung steht. Dennoch ist eine gute Planung für den Erfolg entscheidend.
+Niemand möchte tagelang ohne Internet dastehen. Das Gesetz [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor langen Ausfallzeiten. Dein alter Anbieter versorgt dich theoretisch weiter, bis die neue Leitung steht. Dennoch ist eine gute Planung für den Erfolg entscheidend.
 
 Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit bevollmächtigst du den neuen Provider zur Kündigung. Er koordiniert auch die Mitnahme deiner Rufnummer. Die Unternehmen stimmen den Schalttermin dann direkt untereinander ab.
 

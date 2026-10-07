@@ -3,7 +3,8 @@ title: "Urlaub sparen: 7 clevere Wege, deine Kasse zu füllen"
 description: Entdecke praxisnahe Tipps, wie du Urlaub sparen kannst, dein Reisebudget optimierst und günstig reist – ohne versteckte Kosten.
 date: 2026-10-07T10:43:51Z
 draft: true
-reserve: true
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -182,7 +183,7 @@ Oft sparst du so problemlos 10 € bis 15 € pro Person und Tag.
 5. **Kontrolle** – Aktualisiere deine Liste bei jeder neuen Buchung sofort. Nutze dafür eine Excel‑Tabelle mit automatischen Summen‑ und Prozent‑Formeln.
 
 ## Geld sparen mit Kreditkarten‑Cashback
-Gute Reisekreditkarten helfen dir massiv dabei, beim Buchen aktiv **[Geld sparen](../../posts/2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit/)** zu können.  
+Gute Reisekreditkarten helfen dir massiv dabei, beim Buchen aktiv **[Geld sparen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)** zu können.  
 Du sammelst bei jedem Flug und jeder Unterkunft Punkte oder direktes Bargeld.  
 Oft fließen so 1 % bis 2 % der Gesamtsumme an dich zurück.  
 Achte darauf, dass die Karte keine versteckten Gebühren im Ausland verlangt. So refinanzierst du einen Teil deiner Urlaubsausgaben vollkommen automatisch.

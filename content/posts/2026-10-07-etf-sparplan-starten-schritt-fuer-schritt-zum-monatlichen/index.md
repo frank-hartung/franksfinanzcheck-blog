@@ -3,7 +3,8 @@ title: "ETF‑Sparplan starten: Schritt‑für‑Schritt zum monatlichen"
 description: "ETF‑Sparplan starten: Erfahre, wie du als Einsteiger einen ETF‑Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch."
 date: 2026-10-07T10:54:29Z
 draft: true
-reserve: true
+reserve_blocked: "quality-score 0.839 < 0.85 (schwach: structure 0.70, readability 0.75, typography 0.84)"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
@@ -107,7 +108,7 @@ Die Einrichtung dauert meist weniger als 15 Minuten. Sobald der Plan läuft, k
 - Endkapital ≈ 50 € × ((1 + 0,00417)^{240} − 1)/0,00417
 - Ergebnis liegt bei rund 30 000 €.
 
-Die Rechnung verdeutlicht, wie sich kleine Beträge über lange Zeit vervielfachen.  
+Die Rechnung verdeutlicht, wie sich [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) über lange Zeit vervielfachen.  
 
 ## Typische Fehler und wie du sie vermeidest
 
@@ -115,7 +116,7 @@ Die Rechnung verdeutlicht, wie sich kleine Beträge über lange Zeit vervielfach
 |----------------------------|------------|------------------|
 | Zu häufiges Umschichten    | Hohe Transaktions‑ und Spread‑Kosten | Halte dich an den ursprünglichen ETF, prüfe nur halbjährlich. |
 | Ignorieren der TER         | Verringerte Netto‑Rendite | Wähle ETFs mit TER ≤ 0,1 %. |
-| Keine [Notfallreserve](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)       | Gefahr, Sparplan zu unterbrechen | Baue vorher einen Liquiditätspuffer von 3 Monatsausgaben auf. |
+| Keine [Notfallreserve](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)       | Gefahr, Sparplan zu unterbrechen | Baue vorher einen Liquiditätspuffer von 3 [Monatsausgaben](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) auf. |
 | Fehlende Vertrags‑Check‑Fristen | Ungewollte Verlängerungen | Nutze den 4K‑Prüfpfad, setze Erinnerungen für Kündigungsfristen. |
 
 Durch das Bewusstsein für diese Fallen kannst du deine Rendite schützen.  

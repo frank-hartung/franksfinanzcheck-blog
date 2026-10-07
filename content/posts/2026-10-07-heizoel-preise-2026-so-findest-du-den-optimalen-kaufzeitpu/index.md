@@ -3,7 +3,8 @@ title: "Heizöl Preise: 2026 – So findest du den optimalen Kaufzeitpu"
 description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen solltest, um Heizkosten zu senken und Fehler zu vermeiden.
 date: 2026-10-07T10:54:35Z
 draft: true
-reserve: true
+reserve_blocked: "Zeichenlänge (check_length.py) nicht bestanden"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -59,7 +60,7 @@ Verfolge die wöchentliche Entwicklung auf deinem bevorzugten Portal, um das Mus
 ## Warum lohnt es sich, Heizöl rechtzeitig zu bestellen?
 
 Ein früher Kauf sichert dir den Tiefpreis, bevor die Saisonhochphase beginnt.  
-Du vermeidest Nachzahlungen von 10 % bis 20 % im Herbst.  
+Du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) Nachzahlungen von 10 % bis 20 % im Herbst.  
 Zudem wählst du den Liefertermin flexibel – ein klarer Vorteil bei schlechtem Wetter.  
 
 ## Welche Faktoren treiben die Heizöl Preise?
