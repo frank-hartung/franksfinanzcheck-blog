@@ -320,6 +320,29 @@ class SetCurrentTests(Fixture):
                          "ohne Drift gibt es keine Herkunft zu erfinden")
         self.assertEqual(self.driften(), ([], []))
 
+    def test_neu_aufgenommener_knoten_wird_als_solcher_benannt(self):
+        """Ein neu gesperrter Pfad ohne Vorgeschichte wird erklärt, nicht verschwiegen.
+
+        Auslöser (07.10.2026, WF-54C4/#607): `scripts/publikations_vertrag.py`
+        kam als zusätzliche Schwellen-Wache unter das Siegel und hatte noch
+        keinen Commit „seit der letzten Signatur“ – die Akte zeichnete ihn
+        ohne jede Herkunft. Der Vertrag der Akte lautet: wer zeichnet, nennt
+        die Herkunft JEDER gezeichneten Datei.
+        """
+        self.signieren()
+        neu_rel = "scripts/publikations_vertrag.py"   # FEST-Mitglied, neu im Lock
+        self.schreibe(neu_rel, "#!/usr/bin/env python3\nprint('wache')\n")
+        _commit(self.root, "feat: neue Schwellen-Wache unter das Siegel")
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.set_current(self.root), 0)
+        akte = ig.load_lock(self.lock_pfad)["audit"][-1]
+        self.assertEqual(akte["geaendert"], [neu_rel])
+        herkunft = {e["pfad"]: e for e in akte["herkunft"]}
+        self.assertIn(neu_rel, herkunft, "gezeichneter Pfad ohne Herkunft")
+        self.assertEqual(herkunft[neu_rel]["urteil"], "NEU UNTER SIEGEL")
+        self.assertEqual(herkunft[neu_rel]["commits"], [])
+        self.assertEqual(herkunft[neu_rel]["commits_art"], "neu-unter-siegel")
+
     def test_set_current_hinterlaesst_eine_zeile_in_der_historie(self):
         self.signieren()
         self.schreibe(FEST_REL, "print('neu')\n")

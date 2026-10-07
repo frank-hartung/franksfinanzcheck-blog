@@ -34,6 +34,7 @@ und Artikel entstehen nicht nur über diesen einen Pfad.
 from __future__ import annotations
 
 import importlib.util
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -162,9 +163,9 @@ class WacheTests(unittest.TestCase):
                          f"R16 schlägt im Bestand an: {treffer}")
 
     @staticmethod
-    def _hard_rules_block(quelle: str) -> str:
-        """Der Literal-Block hinter `hard_rules =`, über Klammer-Bilanz."""
-        start = quelle.index("hard_rules =")
+    def _literal_block(quelle: str, name: str) -> str:
+        """Der Literal-Block hinter `name =`, über Klammer-Bilanz."""
+        start = quelle.index(f"{name} =")
         auf = min((i for i in (quelle.find("(", start), quelle.find("{", start))
                    if i != -1))
         paare = {"(": ")", "{": "}"}
@@ -176,7 +177,36 @@ class WacheTests(unittest.TestCase):
                 tiefe -= 1
                 if tiefe == 0:
                     return quelle[auf:i + 1]
-        raise AssertionError("hard_rules-Block nicht geschlossen")
+        raise AssertionError(f"{name}-Block nicht geschlossen")
+
+    @classmethod
+    def _hard_rules_block(cls, quelle: str) -> str:
+        """Der harte Regelsatz einer Datei – Literal oder über die SSOT-Konstante.
+
+        Seit WF-54C4/#607 (07.10.2026) steht der Satz in publish_gate.py als
+        Modul-Konstante `HARTE_REGELN`, weil der Publikations-Vertrag ihn
+        VOR dem Schreiben braucht (`publikations_vertrag.pruefe`); die
+        Funktion bindet nur noch `hard_rules = HARTE_REGELN`. Beide Formen
+        sind hier zulässig – die Invariante bleibt unverändert: die Liste des
+        Guards und die Liste des Gates müssen identisch sein.
+        """
+        m = re.search(r"hard_rules = ([A-Za-z_][A-Za-z0-9_]*)\s*\n", quelle)
+        if m:
+            return cls._literal_block(quelle, m.group(1))
+        return cls._literal_block(quelle, "hard_rules")
+
+    def test_publish_gate_bindet_die_ssot(self):
+        """Die Funktion darf keine zweite Liste führen (Lehre aus #607).
+
+        Ohne diese Prüfung könnte jemand `HARTE_REGELN` stehen lassen und in
+        `textverstaendnis_failures` eine eigene, kleinere Liste einhängen:
+        Der Gleichheits-Test bliebe grün, das Gate blockte aber weniger
+        Regeln als die Schreibwache prüft.
+        """
+        quelle = (SCRIPTS / "publish_gate.py").read_text(encoding="utf-8")
+        self.assertIn("hard_rules = HARTE_REGELN", quelle,
+                      "publish_gate.textverstaendnis_failures bindet nicht die "
+                      "Modul-SSOT HARTE_REGELN")
 
     def test_r16_blockiert_hart_in_beiden_gates(self):
         """Eine Regel, die nur meldet, hätte den 02.10. nicht verhindert."""
@@ -196,7 +226,7 @@ class WacheTests(unittest.TestCase):
             block = self._hard_rules_block(
                 (SCRIPTS / datei).read_text(encoding="utf-8"))
             saetze[datei] = {m for m in
-                             __import__("re").findall(r'"(R\d+[A-Z\-]*)"', block)}
+                             re.findall(r'"(R\d+[A-Z\-]*)"', block)}
         nur_guard = saetze["textverstaendnis_guard.py"] - saetze["publish_gate.py"]
         nur_gate = saetze["publish_gate.py"] - saetze["textverstaendnis_guard.py"]
         self.assertEqual(

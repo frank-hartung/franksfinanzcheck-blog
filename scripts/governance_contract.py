@@ -115,6 +115,12 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           "hugo_build_vertrag.py",
           "editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
+          # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
+          # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
+          # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam
+          # erst vom Deploy-Lauf. Diese Wache haelt den Vertrag selbst,
+          # damit die Schreib-Seite nie ohne pruefbare Schwelle heilt.
+          "publikations_vertrag.py",
           "umami_clicks.py", "click_attribution.py", "awin_provisions.py",
           # Umsatz-Messkette (19.09.2026): Views-Nenner, Awin-API-Import,
           # Wochen-Trichter und Ketten-Guard sind Wachen wie alle anderen –
@@ -1228,6 +1234,131 @@ def c21_maschinensaetze(script_texts):
                            "Regeln – eine Keyword-Ruine könnte erneut live gehen."))
     return out
 
+# --- C22: Publikations-Vertrag auf der SCHREIB-Seite (WF-54C4/#607, 07.10.2026) ---
+# Auslöser: Die KI-Heilung prüfte die STRUKTUR ihrer Änderung (Links, H2-Anzahl,
+# Länge, Trennlinien) – aber nicht die Regeln, die über die Veröffentlichung
+# entscheiden. Am 05.10.2026 um 22:20 UTC schrieb sie den Live-Artikel
+# `2026-09-10-energie-update-…` von Flesch 68,7 auf 44,3 und fügte „In diesem
+# Beitrag erfährst du …“ ein. Der nächste Deploy-Lauf (22:27 UTC) blockierte
+# korrekt – Exit 1, roter Produktionsalarm WF-54C4, abgebrochener Deploy.
+# Die Lehre aus #585 war „eine Wache ohne Tor ist ein Protokoll“; hier ist die
+# Umkehrung: Ein Schreiber ohne Tor ist ein Blocker-Produzent. Der Vertrag V1–V3
+# (scripts/publikations_vertrag.py) sitzt deshalb zwischen KI und Schreiben:
+#   V1 Lesbarkeit  – importierte SSOT `readability_check.NEW_FLESCH_MIN`,
+#                    keine zweite Zahl.
+#   V2 Verständnis – nur NEUE harte Funde, Regelliste importiert aus
+#                    `publish_gate.HARTE_REGELN` (dieselbe wie am Gate).
+#   V3 Messbarkeit – nicht messbar heißt verworfen (fail-closed).
+# Was hier bewacht wird, ist der Weg, nicht das Ergebnis: Wer den Aufruf
+# entfernt, das Urteil weichzeichnet oder die Schwellen kopiert, verliert die
+# Heilung, ohne dass ein Test rot würde – genau die Lücke, die #607 möglich
+# machte.
+def c22_publikations_vertrag(script_texts, root=BLOG_DIR):
+    out = []
+    vertrag = script_texts.get("publikations_vertrag.py", "")
+    schreiber = script_texts.get("redaktions_standard.py", "")
+    pg = script_texts.get("publish_gate.py", "")
+    if not vertrag or not schreiber or not pg:
+        out.append(("C22", "publikations_vertrag.py / redaktions_standard.py / "
+                           "publish_gate.py nicht lesbar – der Vertrag ist nicht prüfbar."))
+        return out
+
+    # a) Der Selbsttest der Wache läuft im vertraglichen Minimum (C6).
+    if "publikations_vertrag.py" not in GUARDS:
+        out.append(("C22", "scripts/publikations_vertrag.py steht nicht in GUARDS – "
+                           "sein Sabotage-Selbsttest liefe nicht in C6, und eine Wache, "
+                           "die niemand verlangt, läuft irgendwann niemand mehr."))
+
+    # b) Der Schreiber kennt den Vertrag und wendet ihn VOR dem Schreiben an.
+    if "from publikations_vertrag import" not in schreiber:
+        out.append(("C22", "scripts/redaktions_standard.py importiert den "
+                           "Publikations-Vertrag nicht – die KI-Heilung schriebe wie am "
+                           "05.10.2026 ungeprüft in Live-Artikel (#607)."))
+    start = schreiber.find("def heal_article_ai(")
+    ende = schreiber.find("\ndef ", start + 1) if start >= 0 else -1
+    block = schreiber[start:ende] if start >= 0 and ende > start else ""
+    if not block:
+        out.append(("C22", "scripts/redaktions_standard.py: `heal_article_ai` fehlt – "
+                           "ohne diese Funktion ist die KI-Strecke nicht prüfbar."))
+    else:
+        if "_vertrag_gruende(" not in block:
+            out.append(("C22", "scripts/redaktions_standard.py: `heal_article_ai` ruft "
+                               "`_vertrag_gruende` nicht auf – die KI-Änderung ginge ohne "
+                               "Flesch-/R7-Prüfung in die Datei."))
+        if "return None" not in block:
+            out.append(("C22", "scripts/redaktions_standard.py: `heal_article_ai` verwirft "
+                               "bei Verstoß nicht (kein `return None`) – der Vertrag wäre "
+                               "eine Empfehlung statt einer Wache."))
+    start = schreiber.find("def _vertrag_gruende(")
+    ende = schreiber.find("\ndef ", start + 1) if start >= 0 else -1
+    block = schreiber[start:ende] if start >= 0 and ende > start else ""
+    if not block:
+        out.append(("C22", "scripts/redaktions_standard.py: `_vertrag_gruende` fehlt – "
+                           "die Vertragsprüfung ist nicht verdrahtet."))
+    else:
+        if "_vertrag_pruefe is None" not in block:
+            out.append(("C22", "scripts/redaktions_standard.py: `_vertrag_gruende` kennt "
+                               "den Fall „Vertrag nicht verfügbar“ nicht – ohne Import "
+                               "wäre die Heilung stillschweigend freigegeben (fail-open)."))
+        if "join_article(a[\"fm\"], neu_body)" not in block:
+            out.append(("C22", "scripts/redaktions_standard.py: `_vertrag_gruende` misst "
+                               "nicht den kanonischen Rohtext (`join_article(a[\"fm\"], "
+                               "neu_body)`) – gemessen würde etwas anderes als das "
+                               "Geschriebene."))
+
+    # c) Der Vertrag selbst: Schwellen importiert, nicht kopiert; neue Funde nur
+    #    als Differenz; Unmessbarkeit ein Verstoß.
+    if "def pruefe(" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: `pruefe(` fehlt."))
+    if "readability_check.NEW_FLESCH_MIN" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: benutzt nicht die importierte "
+                           "Schwelle `readability_check.NEW_FLESCH_MIN` – eine zweite Zahl "
+                           "wäre ein zweiter Maßstab (#585)."))
+    if re.search(r"(?m)^NEW_FLESCH_MIN\s*=", vertrag):
+        out.append(("C22", "scripts/publikations_vertrag.py: definiert `NEW_FLESCH_MIN` "
+                           "selbst – die Schwelle gehört in readability_check (SSOT)."))
+    if "parse_article" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: nutzt nicht "
+                           "`readability_check.parse_article` – eine Messung erst nach dem "
+                           "Schreiben verhindert keinen Blocker."))
+    if "publish_gate.HARTE_REGELN" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: prüft das Textverständnis nicht "
+                           "gegen die importierte Regelliste `publish_gate.HARTE_REGELN` – "
+                           "Schreiber und Gate könnten verschiedene Regeln kennen (#607)."))
+    if "check_article" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: ruft den Verständnis-Detektor "
+                           "`textverstaendnis_guard.check_article` nicht auf."))
+    if "V3" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: kein V3-Fall – „nicht "
+                           "gemessen“ könnte als „freigegeben“ durchgehen (fail-open)."))
+
+    # d) Die Gate-Seite bleibt die eine Quelle der harten Regeln.
+    if not re.search(r"(?m)^HARTE_REGELN\s*=", pg):
+        out.append(("C22", "scripts/publish_gate.py: `HARTE_REGELN` steht nicht auf "
+                           "Modulebene – Schreiber und Gate hätten je eine eigene Liste."))
+    start = pg.find("def textverstaendnis_failures(")
+    ende = pg.find("\ndef ", start + 1) if start >= 0 else -1
+    block = pg[start:ende] if start >= 0 and ende > start else ""
+    if not block:
+        out.append(("C22", "scripts/publish_gate.py: `textverstaendnis_failures` fehlt."))
+    elif "HARTE_REGELN" not in block:
+        out.append(("C22", "scripts/publish_gate.py: `textverstaendnis_failures` nutzt "
+                           "nicht die SSOT `HARTE_REGELN` – die Blockade des Gates und die "
+                           "Prüfung des Schreibers liefen auseinander."))
+
+    # e) Der reale Vorfall bleibt als Beweismittel eingefroren (kein Nachbau).
+    sim_dir = os.path.join(root, "scripts", "tests", "sim", "wf54c4")
+    if "wf54c4" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: die eingefrorene Vorfallprobe "
+                           "WF-54C4 wird nicht mehr geladen."))
+    for name in ("vorher.md", "nachher.md"):
+        pfad = os.path.join(sim_dir, name)
+        if not os.path.exists(pfad) or os.path.getsize(pfad) < 500:
+            out.append(("C22", f"Vorfall-Material fehlt oder ist unbrauchbar: "
+                               f"scripts/tests/sim/wf54c4/{name} – ohne den echten Text "
+                               f"prüft der Vertrag nur gegen Nachbauten."))
+    return out
+
 # --- C18: Pflicht-Check-Vertrag (der Name im Branch-Schutz ist ein Vertrag) ---
 # Auslöser (19.09.2026, Nachtrag zu #316 / PR #317): Das neue PR-Gate
 # integrity-lock.yml meldete sich bei GitHub als Check „lock" – die Job-ID, weil
@@ -1604,6 +1735,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c19_release_ssot(script_texts, root=root)
     checks += c20_lesbarkeit_und_hysterese(script_texts, gate)
     checks += c21_maschinensaetze(script_texts)
+    checks += c22_publikations_vertrag(script_texts, root=root)
     return checks
 
 
@@ -1685,6 +1817,18 @@ RULE_TEXT = {
            "und was trotzdem entsteht, fangen R17-KEYWORD-KASUS/-DOPPEL im "
            "Verständnis-Guard und im Publish-Gate ab. Die Lesbarkeitsnote sieht solche "
            "Ruinen nicht, sie misst Satzlängen, keine Grammatik (Nachtrag #585).",
+    "C22": "Ein Schreiber ohne Tor ist ein Blocker-Produzent: Bevor die KI-Heilung "
+           "einen Artikel ändert, prüft der Publikations-Vertrag die GEPLANTE Fassung "
+           "gegen die Regeln, die über die Veröffentlichung entscheiden – V1 Flesch "
+           "nicht unter die importierte SSOT-Schwelle `readability_check.NEW_FLESCH_MIN` "
+           "bei gleichzeitiger Verschlechterung, V2 keine NEUEN harten "
+           "Verständnis-Funde gegen die importierte Regelliste `publish_gate."
+           "HARTE_REGELN` (Altlasten bleiben unangetastet), V3 nicht messbar = "
+           "verworfen (fail-closed). Am 05.10.2026 hatte die KI-Heilung den Live-"
+           "Artikel `2026-09-10-energie-update-…` auf Flesch 44,3 mit „In diesem "
+           "Beitrag …“ umgeschrieben; ihre Struktur-Prüfung sah nichts, blockiert hat "
+           "erst der nächste Deploy-Lauf – Exit 1, Produktionsalarm WF-54C4, "
+           "abgebrochene Auslieferung (#607).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -1705,7 +1849,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C17": "Pinterest-Duplikate", "C18": "Pflicht-Check",
          "C19": "Release-Scorecard",
          "C20": "Lesbarkeits-Tor & Deploy-Hysterese",
-         "C21": "Maschinensätze"}
+         "C21": "Maschinensätze",
+         "C22": "Publikations-Vertrag der Schreib-Seite"}
 
 
 def render_md(checks, ok_notes=()):
@@ -2127,6 +2272,42 @@ def _selftest():
                         f"{c19_release_ssot(echtes_script)}")
     if not c19_release_ssot({}):
         failures.append("C19: fehlende Engine bleibt unentdeckt.")
+    # --- C22: Publikations-Vertrag der Schreib-Seite (WF-54C4/#607, 07.10.2026)
+    echte = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+             for name in ("publikations_vertrag.py", "redaktions_standard.py",
+                          "publish_gate.py")}
+    if c22_publikations_vertrag(echte):
+        failures.append(f"C22: der echte Zustand wird beanstandet: "
+                        f"{c22_publikations_vertrag(echte)}")
+    # (a) Schreiber ohne Vertrag: genau die Lücke, die #607 möglich machte.
+    ohne_import = dict(echte, **{"redaktions_standard.py":
+                                 echte["redaktions_standard.py"].replace(
+                                     "from publikations_vertrag import", "import xyz")})
+    if not [f for f in c22_publikations_vertrag(ohne_import) if "importiert" in f[1]]:
+        failures.append("C22: loser Schreiber ohne Vertrags-Import bleibt unentdeckt (#607).")
+    # (b) Aufruf entfernt / Bypass: `_vertrag_gruende` wird nicht mehr aufgerufen.
+    ohne_aufruf = dict(echte, **{"redaktions_standard.py":
+                                 echte["redaktions_standard.py"].replace(
+                                     "vertrag = _vertrag_gruende(a, neu)",
+                                     "vertrag = []  # Vertrag umgangen")})
+    if not [f for f in c22_publikations_vertrag(ohne_aufruf) if "_vertrag_gruende" in f[1]]:
+        failures.append("C22: umgangener Vertragsaufruf bleibt unentdeckt.")
+    # (c) Schwelle kopiert statt importiert (zweiter Maßstab, Lehre #585).
+    kopiert = dict(echte, **{"publikations_vertrag.py":
+                             "NEW_FLESCH_MIN = 60.0\n" + echte["publikations_vertrag.py"]})
+    if not [f for f in c22_publikations_vertrag(kopiert) if "SSOT" in f[1]]:
+        failures.append("C22: kopierte Flesch-Schwelle bleibt unentdeckt (zweite Wahrheit).")
+    # (d) Schreiber und Gate kennen verschiedene harte Regeln.
+    eigene_regeln = dict(echte, **{"publikations_vertrag.py":
+                                   echte["publikations_vertrag.py"].replace(
+                                       "publish_gate.HARTE_REGELN", "EIGENE_REGELN")})
+    if not [f for f in c22_publikations_vertrag(eigene_regeln) if "HARTE_REGELN" in f[1]]:
+        failures.append("C22: eigene Regelliste statt Gate-SSOT bleibt unentdeckt (#607).")
+    # (e) Vorfall-Material fehlt: Ohne den echten Text prüft der Vertrag gegen
+    #     Nachbauten – dann verschwindet der Beweis mit dem nächsten Refactoring.
+    if not [f for f in c22_publikations_vertrag(echte, root=os.path.join(BLOG_DIR, "nix"))
+            if "wf54c4" in f[1]]:
+        failures.append("C22: fehlende Vorfall-Fixtures bleiben unentdeckt.")
     blind = {RELEASE_ENGINE: "print('hallo')"}
     if not [f for f in c19_release_ssot(blind) if "Collector" in f[1] or "DRY_RUN" in f[1]]:
         failures.append("C19: eine Engine ohne Publish-Gate-Collectoren und ohne "
@@ -2136,7 +2317,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C18 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C22 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

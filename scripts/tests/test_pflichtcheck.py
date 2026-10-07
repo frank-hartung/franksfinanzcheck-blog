@@ -420,12 +420,21 @@ class Verdrahtung(unittest.TestCase):
         self.assertEqual([], sr.verdrahtet("pflichtcheck_guard.py"),
                          "pflichtcheck_guard läuft nicht im Qualitäts-Gate")
 
-    def test_kontrakt_selbsttest_kennt_c18(self):
+    def test_kontrakt_selbsttest_kennt_alle_regeln(self):
+        """Der Abschluss des Kontrakt-Selbsttests nennt wirklich alle Regeln.
+
+        Auslöser (07.10.2026, WF-54C4/#607): Die Meldung stand noch auf
+        „C1–C18“, obwohl C19–C21 längst eingeführt waren – eine Anzeige, die
+        neue Regeln verschweigt, lässt einen Selbsttest kleiner wirken, als er
+        ist. Der Test liest die Obergrenze deshalb aus LABEL statt sie zu
+        wiederholen: Kommt C23 dazu, muss die Meldung mitwandern.
+        """
         puffer = io.StringIO()
         with contextlib.redirect_stdout(puffer):
             rc = gc._selftest()
         self.assertEqual(0, rc, puffer.getvalue())
-        self.assertIn("C1–C18", puffer.getvalue())
+        hoechste = max(int(k[1:]) for k in gc.LABEL)
+        self.assertIn(f"C1–C{hoechste}", puffer.getvalue())
 
 
 class BypassWarnung(unittest.TestCase):
