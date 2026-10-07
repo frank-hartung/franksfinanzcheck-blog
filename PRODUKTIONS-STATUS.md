@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-07 13:20 UTC  
+**Stand:** 2026-10-07 20:01 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-10-07): 2 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 0 Tage: ymyl-review: E18: geprüfte Aussage 1: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 2: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 4: Textanker kom…)
 
