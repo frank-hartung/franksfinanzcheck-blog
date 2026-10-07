@@ -43,12 +43,15 @@ REGELN
     Intro-Formel (R7) und keine Ruine (R14/R16) – geprüft gegen die SSOT.
   * Gedeckelt: höchstens `--max-ki` Anfragen je Artikel, höchstens 7 %
     Textverlust insgesamt (T4 verlangt ≥ 90 % – der Puffer gehört dem Tor).
-  * Geschrieben wird NUR mit `--fix` und NUR, wenn das Ganztext-Tor schweigt
-    und die Schwelle erreicht ist. Sonst bleibt der Text unangetastet.
+  * Geschrieben wird NUR mit `--fix`. Standardmäßig darf ein sicherer
+    Teilfortschritt bestehen bleiben: mindestens +0,3 Flesch-Punkte, alle
+    Nicht-Lesbarkeitstore still. `--nur-ganz` oder
+    `FFC_SATZ_NUR_GANZ=1` stellt Alles-oder-nichts wieder her.
 
 MODI
   python3 scripts/satz_heiler.py --file <index.md> [--fix] [--json]
   python3 scripts/satz_heiler.py --reserve --fix          # Pool-Kandidaten
+  python3 scripts/satz_heiler.py --nur-ganz               # nur ≥ Schwelle schreiben
   python3 scripts/satz_heiler.py --selftest               # Sabotage-Schutz
   python3 scripts/satz_heiler.py --wirkungsprobe          # Maschinenvertrag (C25)
 """
@@ -80,6 +83,8 @@ MAX_SCHWUND = 0.07                   # höchstens 7 % Textlänge (T4: 90 %)
 MAX_ANTEIL = 0.5                     # höchstens die Hälfte der Fließsätze
 MIN_WOERTER = 6                      # kürzere Sätze lohnen keinen Umbau
 MAX_ERSATZ_TOLERANZ = 0.20           # höchstens 20 % Wortverlust je Satz
+MIN_FORTSCHRITT = 0.3                # sauberer Teilfortschritt unterhalb der Schwelle
+SATZ_NUR_GANZ_ENV = "FFC_SATZ_NUR_GANZ"
 
 MARKUP = set("[]()|{}<>`")
 _WORT = re.compile(r"[A-Za-zÄÖÜäöüß0-9]+")
@@ -139,8 +144,12 @@ def _ist_prosa(zeile: str) -> bool:
     return True
 
 
-def saetze_finden(body: str) -> list[dict]:
-    """Fließtext-Sätze mit Zeiger, Länge und Wortzahl (ohne Ziffern/Markup)."""
+def saetze_finden(body: str, *, base_offset: int = 0) -> list[dict]:
+    """Fließtext-Sätze mit Datei-Zeiger, Länge und Wortzahl.
+
+    `base_offset` hebt Body-Zeiger in das Koordinatensystem der vollständigen
+    Datei. Ohne Offset bleibt die Funktion für reine Body-Analysen kompatibel.
+    """
     treffer = []
     for offset, zeile in _zeilen_mit_offset(body):
         if not _ist_prosa(zeile):
@@ -153,7 +162,8 @@ def saetze_finden(body: str) -> list[dict]:
                 continue
             if _BANNED.search(satz) or "http" in satz:
                 continue
-            start = offset + führend + m.start() + (len(m.group(0)) - len(m.group(0).lstrip()))
+            start = (base_offset + offset + führend + m.start()
+                     + (len(m.group(0)) - len(m.group(0).lstrip())))
             treffer.append({"start": start, "satz": satz,
                             "woerter": [w for w in woerter],
                             "lang": sum(1 for w in woerter if len(w) > 12)})
@@ -235,6 +245,76 @@ def _teile(rohtext: str):
     return parts if len(parts) == 3 else None
 
 
+def _body_offset(rohtext: str, teile: list[str] | None = None) -> int:
+    """Datei-Koordinate des Bodys; Frontmatter bleibt strikt außerhalb."""
+    teile = teile if teile is not None else _teile(rohtext)
+    if teile is None:
+        return 0
+    return len(rohtext) - len(teile[2])
+
+
+def _kopf_bis_body(rohtext: str) -> str | None:
+    """Exakte Kopf-/Trennzeichenfolge bis zum ersten Body-Zeichen."""
+    teile = _teile(rohtext)
+    if teile is None:
+        return None
+    return rohtext[:_body_offset(rohtext, teile)]
+
+
+def _finde_satz(rohtext: str, satz: str,
+                 start_hint: int | None = None) -> int:
+    """Sucht einen vollständigen Satz frisch im Body und liefert Datei-Offset.
+
+    `0` ist bewusst ein ungültiger Sentinel: gültiges Frontmatter liegt immer
+    davor. Der Kopf wird nie durchsucht, auch dann nicht, wenn er denselben
+    Wortlaut enthält. `start_hint` dient nur der Zuordnung identischer Sätze;
+    die Position wird aus dem aktuellen Text neu berechnet.
+    """
+    teile = _teile(rohtext)
+    if teile is None or not satz:
+        return 0
+    body_offset = _body_offset(rohtext, teile)
+    fundstellen = [e["start"] for e in saetze_finden(
+        teile[2], base_offset=body_offset) if e["satz"] == satz]
+    if not fundstellen:
+        return 0
+    if start_hint is not None:
+        return min(fundstellen, key=lambda pos: abs(pos - start_hint))
+    return fundstellen[0]
+
+
+def unversehrte_saetze(alt_raw: str, neu_raw: str,
+                       ersetzungen: list[tuple[str, str]] | None = None) -> list[str]:
+    """Prüft, dass nur vollständige, protokollierte Sätze geändert wurden.
+
+    Der erwartete Text wird aus dem Original und den zugelassenen Ersetzungen
+    unabhängig neu aufgebaut. Ein Vergleich nach Whitespace-Normalisierung
+    erlaubt dem R5-Splitter Absatzumbrüche, aber keine verlorenen Satzteile,
+    fremden Änderungen oder beschädigten Nachbarsätze.
+    """
+    alt_teile, neu_teile = _teile(alt_raw), _teile(neu_raw)
+    if alt_teile is None or neu_teile is None:
+        return ["Satzschutz: Frontmatter-Grenzen fehlen – fail-closed"]
+    if _kopf_bis_body(alt_raw) != _kopf_bis_body(neu_raw):
+        return ["Kopf-Tor: Frontmatter/Trenner nicht byte-identisch"]
+
+    erwartet = alt_raw
+    for vorher, nachher in ersetzungen or []:
+        position = _finde_satz(erwartet, vorher)
+        if position <= 0:
+            return [f"Satzschutz: vollständiger Ausgangssatz nicht gefunden: {vorher[:70]!r}"]
+        erwartet = (erwartet[:position] + nachher
+                    + erwartet[position + len(vorher):])
+
+    erwartet_teile = _teile(erwartet)
+    if erwartet_teile is None:
+        return ["Satzschutz: erwartete Frontmatter-Grenzen fehlen – fail-closed"]
+    if " ".join(erwartet_teile[2].split()) != " ".join(neu_teile[2].split()):
+        return ["Satz-Zerstückelung: außerhalb vollständiger Ersetzungen wurde "
+                "Text verändert"]
+    return []
+
+
 def _slug_von(pfad: str) -> str:
     return os.path.basename(os.path.dirname(str(pfad)))
 
@@ -244,12 +324,21 @@ def _ist_entwurf(rohtext: str) -> bool:
     return bool(teile) and bool(re.search(r"(?m)^draft:\s*true\s*$", teile[1], re.I))
 
 
+def _nur_ganz_aktiv(wert: bool | None = None) -> bool:
+    if wert is not None:
+        return bool(wert)
+    return os.environ.get(SATZ_NUR_GANZ_ENV, "").strip().lower() in {
+        "1", "true", "yes", "on"}
+
+
 def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
-               ki: bool = True) -> dict:
-    """Heilt einen Text satzweise über die Schwelle – oder lässt ihn liegen."""
+               ki: bool = True, nur_ganz: bool | None = None) -> dict:
+    """Heilt satzweise; sichere Zwischenstufen sind standardmäßig schreibbar."""
+    nur_ganz = _nur_ganz_aktiv(nur_ganz)
     ergebnis = {"slug": slug, "ok": False, "neu_raw": rohtext, "vor": None,
                 "nach": None, "ersetzt": [], "verworfen": [], "anfragen": 0,
-                "gruende": [], "geschrieben": False}
+                "gruende": [], "geschrieben": False, "vollstaendig": False,
+                "teilfortschritt": False}
     teile = _teile(rohtext)
     if teile is None:
         ergebnis["gruende"] = ["Frontmatter-Grenzen fehlen – fail-closed"]
@@ -260,7 +349,7 @@ def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
         ergebnis["gruende"] = ["Text nicht messbar – fail-closed"]
         return ergebnis
     if vor >= MINDEST:
-        ergebnis.update(ok=True, nach=vor,
+        ergebnis.update(ok=True, nach=vor, vollstaendig=True,
                         befund=f"bereits über der Schwelle ({vor:.1f} ≥ {MINDEST:g})")
         return ergebnis
     if not ki:
@@ -269,7 +358,10 @@ def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
                                "nachweislich nicht)"]
         return ergebnis
 
-    satzliste = saetze_finden(teile[2])
+    # saetze_finden misst im Body. Der Offset hebt jeden Zeiger in das
+    # Datei-Koordinatensystem, bevor er als Kandidat gespeichert wird.
+    body_offset = _body_offset(rohtext, teile)
+    satzliste = saetze_finden(teile[2], base_offset=body_offset)
     if not satzliste:
         ergebnis["gruende"] = ["keine heilbaren Fließtext-Sätze gefunden"]
         return ergebnis
@@ -283,6 +375,7 @@ def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
     aktuelle_flesch = vor
     runde = 0
     ki_ausfall = False
+    ersatz_protokoll: list[tuple[str, str]] = []
     while (ergebnis["anfragen"] < max_ki and aktuelle_flesch < MINDEST
            and kandidaten and runde < 12 and not ki_ausfall):
         runde += 1
@@ -305,30 +398,47 @@ def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
                 ki_ausfall = True
                 break
             zugeordnet = _antwort_zerlegen(antwort, len(gruppe))
-            # Von HINTEN einsetzen, damit die Zeiger gültig bleiben.
+            # Jedes alte Wort wird weiter geprüft, aber nie über einen
+            # gespeicherten Body-Offset in den aktuellen Ganztext gespleißt.
             for nummer in sorted(zugeordnet, reverse=True):
                 eintrag = gruppe[nummer - 1]
-                neu = zugeordnet[nummer]
-                beanstandet = pruefe_ersatz(eintrag["satz"], neu)
+                vorher, neu = eintrag["satz"], zugeordnet[nummer]
+                beanstandet = pruefe_ersatz(vorher, neu)
                 if beanstandet:
                     ergebnis["verworfen"].append(
-                        {"satz": eintrag["satz"][:70], "gruende": beanstandet})
+                        {"satz": vorher[:70], "gruende": beanstandet})
                     continue
-                if len(neu) - len(eintrag["satz"]) > 0:
+                if len(neu) > len(vorher):
                     ergebnis["verworfen"].append(
-                        {"satz": eintrag["satz"][:70],
-                         "gruende": ["länger als der Satz"]})
+                        {"satz": vorher[:70], "gruende": ["länger als der Satz"]})
                     continue
-                if budget_zeichen + (len(neu) - len(eintrag["satz"])) < 0:
+                if budget_zeichen + (len(neu) - len(vorher)) < 0:
                     ergebnis["verworfen"].append(
-                        {"satz": eintrag["satz"][:70],
+                        {"satz": vorher[:70],
                          "gruende": ["Textverlust-Budget erschöpft"]})
                     continue
-                teile_neu = _teile(aktuell)
-                aktuell = (aktuell[:eintrag["start"]] + neu
-                           + aktuell[eintrag["start"] + len(eintrag["satz"]):])
-                budget_zeichen += len(neu) - len(eintrag["satz"])
-                ergebnis["ersetzt"].append({"vorher": eintrag["satz"][:70],
+
+                # Nicht den beim ersten Scan veralteten Zeiger benutzen:
+                # jedes Mal im AKTUELLEN Body frisch suchen; 0 bleibt ungültig.
+                position = _finde_satz(aktuell, vorher,
+                                       start_hint=eintrag["start"])
+                aktuell_teile = _teile(aktuell)
+                aktuell_body_start = _body_offset(aktuell, aktuell_teile)
+                if position <= 0 or position < aktuell_body_start:
+                    ergebnis["verworfen"].append(
+                        {"satz": vorher[:70],
+                         "gruende": ["vollständiger Satz im Body nicht gefunden"]})
+                    continue
+                if aktuell[position:position + len(vorher)] != vorher:
+                    ergebnis["verworfen"].append(
+                        {"satz": vorher[:70],
+                         "gruende": ["Satz-Zeiger stimmt nicht mehr – fail-closed"]})
+                    continue
+                aktuell = (aktuell[:position] + neu
+                           + aktuell[position + len(vorher):])
+                ersatz_protokoll.append((vorher, neu))
+                budget_zeichen += len(neu) - len(vorher)
+                ergebnis["ersetzt"].append({"vorher": vorher[:70],
                                             "nachher": neu[:70]})
             aktuelle_flesch = lh.flesch(aktuell, slug)
             if aktuelle_flesch is None or aktuelle_flesch >= MINDEST:
@@ -348,20 +458,70 @@ def heile_text(slug: str, rohtext: str, *, max_ki: int = MAX_KI_STANDARD,
             ergebnis["absaetze_geteilt"] = geteilt
             aktuelle_flesch = lh.flesch(aktuell, slug)
 
+    # Das explizite Kopf-Tor ist unabhängig von der Positionsrechnung und
+    # dem allgemeinen T4: bei jeder Abweichung wird komplett zurückgerollt.
+    if _kopf_bis_body(rohtext) != _kopf_bis_body(aktuell):
+        ergebnis["gruende"].append(
+            "Kopf-Tor: Frontmatter/Trenner nicht byte-identisch – nichts geschrieben")
+        return ergebnis
+    satzfehler = unversehrte_saetze(rohtext, aktuell, ersatz_protokoll)
+    if satzfehler:
+        ergebnis["gruende"].extend(satzfehler)
+        return ergebnis
+
     ergebnis["nach"] = aktuelle_flesch
     if aktuell == rohtext:
         ergebnis["gruende"].append(
             f"Flesch {vor:.1f} blieb unverändert – fail-closed, nichts geschrieben")
         return ergebnis
-    # DAS GANZTEIL-TOR: dieselben Prüfungen wie beim Lesbarkeits-Heiler.
+    if aktuelle_flesch is None:
+        ergebnis["gruende"].append("Flesch im Ergebnis nicht messbar – fail-closed")
+        return ergebnis
+
+    # Das Ganztext-Tor bleibt unverändert. Unter der Schwelle darf nur dessen
+    # isolierter T1-Schwellenhinweis toleriert werden – und nur bei +0,3 Punkten.
     tor = lh.verifiziere(slug, rohtext, aktuell)
-    if tor:
+    teilfortschritt = False
+    if aktuelle_flesch < MINDEST:
+        delta = aktuelle_flesch - vor
+        schwellenfehler = [g for g in tor
+                           if g.startswith("T1 Lesbarkeit: Flesch ")
+                           and " < Schwelle " in g]
+        sonstige_fehler = [g for g in tor if g not in schwellenfehler]
+        teilfortschritt = (
+            not nur_ganz and delta + 1e-9 >= MIN_FORTSCHRITT
+            and bool(schwellenfehler) and not sonstige_fehler)
+        if not teilfortschritt:
+            ergebnis["gruende"] += [f"Tor: {g}" for g in tor]
+            if nur_ganz and schwellenfehler:
+                ergebnis["gruende"].append(
+                    "Teilfortschritt verworfen: Alles-oder-nichts aktiv")
+            elif not schwellenfehler:
+                if delta < MIN_FORTSCHRITT:
+                    ergebnis["gruende"].append(
+                        f"Teilfortschritt zu klein ({delta:.1f} < "
+                        f"{MIN_FORTSCHRITT:.1f} Flesch)")
+                else:
+                    ergebnis["gruende"].append(
+                        "Teilfortschritt nicht fail-closed freigabefähig")
+            ergebnis["neu_raw"] = rohtext
+            ergebnis["nach"] = vor
+            return ergebnis
+    elif tor:
         ergebnis["gruende"] += [f"Tor: {g}" for g in tor]
         ergebnis["neu_raw"] = rohtext
         ergebnis["nach"] = vor
         return ergebnis
-    ergebnis.update(ok=True, neu_raw=aktuell)
-    ergebnis["befund"] = (f"{len(ergebnis['ersetzt'])} Satz-Ersatz/Ersätze, "
+
+    ergebnis.update(ok=True, neu_raw=aktuell,
+                    vollstaendig=aktuelle_flesch >= MINDEST,
+                    teilfortschritt=teilfortschritt)
+    if teilfortschritt:
+        ergebnis["gruende"].append(
+            f"Teilfortschritt: +{aktuelle_flesch - vor:.1f} Flesch; "
+            f"alle Tore außer T1-Schwelle still; Ziel ≥ {MINDEST:g} bleibt offen")
+    status = "Teilfortschritt" if teilfortschritt else "vollständig"
+    ergebnis["befund"] = (f"{status}: {len(ergebnis['ersetzt'])} Satz-Ersatz/Ersätze, "
                           f"{ergebnis['anfragen']} KI-Anfrage(n), "
                           f"Flesch {vor:.1f} → {aktuelle_flesch:.1f}")
     return ergebnis
@@ -404,12 +564,24 @@ def hole_reserve() -> list[str]:
 # ---------------------------------------------------------------------------
 #  SELBSTTEST + WIRKUNGSPROBE (Maschinenvertrag, Governance C25)
 # ---------------------------------------------------------------------------
-SATZ_FIXTURE_KOPF = (
+_FIXTURE_KOPF_BASIS = (
     "---\n"
     "title: \"Probe: Satz-Heiler\"\n"
     "date: 2026-10-07\n"
     "draft: true\n"
-    "---\n\n"
+)
+# Realistische Kopfgröße (≥ 2.532 Zeichen wie beim Kandidaten aus Lauf
+# 37666773476); der YAML-String steht stellvertretend für Quellen- und
+# Redaktionsmetadaten, die in echten Reserve-Artikeln vor dem Body liegen.
+_FIXTURE_KOPF_FUELLER = (
+    "quellenvermerk fuer die redaktionelle pruefung und den reserve nachweis "
+    "bleibt als metadatum vor dem artikelkoerper erhalten "
+)
+SATZ_FIXTURE_KOPF = (
+    _FIXTURE_KOPF_BASIS
+    + 'fixture_metadata: "'
+    + (_FIXTURE_KOPF_FUELLER * 80)[:2600]
+    + '"\n---\n\n'
 )
 SCHWER = (
     "Prüfe deine Abrechnung genau. So findest du teure Verträge schnell. "
@@ -468,18 +640,22 @@ def wirkungsprobe() -> tuple[bool, str]:
                            f"{ergebnis['gruende'][:2]}")
         if nach is None or nach < MINDEST:
             return False, f"Schwelle nicht erreicht: Flesch {nach} < {MINDEST:g}"
+        if _body_offset(raw) < 2532:
+            return False, "Wirkungsprobe nutzt kein realistisches Frontmatter (≥ 2532 Zeichen)"
+        if _kopf_bis_body(raw) != _kopf_bis_body(ergebnis["neu_raw"]):
+            return False, "Kopf-Tor: Frontmatter/Trenner wurden verändert"
         if nebenwirkung := lh.harte_funde(ergebnis["neu_raw"], "probe"):
             return False, f"neuer harter Fund: {sorted(nebenwirkung)}"
         return True, (f"Flesch {vor:.1f} → {nach:.1f} (≥ {MINDEST:g}) über "
-                      f"{len(ergebnis['ersetzt'])} Satz-Ersatz/Ersätze, Tor T1–T4 "
-                      "erfüllt")
+                      f"{len(ergebnis['ersetzt'])} Satz-Ersatz/Ersätze, Tor T1–T4, "
+                      "Kopf-Tor und Satzschutz erfüllt")
     finally:
         KI_CALL = alt_ki
 
 
 def run_selftest() -> int:
     fehler: list[str] = []
-    global KI_CALL
+    global KI_CALL, _finde_satz
     alt_ki = KI_CALL
 
     def pruefe(bedingung: bool, text: str) -> None:
@@ -499,8 +675,28 @@ def run_selftest() -> int:
         zweit = heile_text("probe", erst["neu_raw"])
         pruefe(zweit["ok"] and zweit["nach"] >= MINDEST,
                "der geheilte Text gilt nicht als fertig (nicht idempotent)")
+        pruefe(_body_offset(raw) >= 2532,
+               "Wirkungsprobe hat kein Frontmatter in realer Größe")
+        pruefe(_kopf_bis_body(raw) == _kopf_bis_body(erst["neu_raw"]),
+               "Wirkungsprobe hat den Kopf verändert")
 
-        # 3) Sabotage: Ziffer im Ersatz wird verworfen
+        # Gegenprobe: 0 ist niemals ein gültiger Offset. Wenn der Finder
+        # ausfällt, muss der Heiler fail-closed bleiben statt im Dateikopf zu
+        # schreiben. Diese Probe wird absichtlich mit einem defekten Finder
+        # ausgeführt und muss selbst grün bleiben.
+        finder_orig = _finde_satz
+        try:
+            _finde_satz = lambda *_args, **_kwargs: 0
+            r = heile_text("probe", raw, max_ki=1)
+            pruefe(not r["ok"] and r["neu_raw"] == raw and not r["ersetzt"],
+                   "_finde_satz → 0 wurde nicht fail-closed abgewiesen")
+            pruefe(any("vollständiger Satz im Body nicht gefunden" in v["gruende"]
+                       for v in r["verworfen"]),
+                   "Gegenprobe _finde_satz → 0 hinterließ keinen Befund")
+        finally:
+            _finde_satz = finder_orig
+
+        # 4) Sabotage: Ziffer im Ersatz wird verworfen
         def ki_zahl(_text):
             return "1) Die Kosten sinken um 20 Euro."
         KI_CALL = ki_zahl
@@ -546,8 +742,9 @@ def run_selftest() -> int:
         for f in fehler:
             print(f"   - {f}")
         return 1
-    print("✅ Satz-Heiler-Selbsttest bestanden: Wirkung an der echten Flesch-Formel, "
-          "Idempotenz, Tor lehnt Ziffer/Markup/Kürzung/Sie-Form/Intro-Formel ab, "
+    print("✅ Satz-Heiler-Selbsttest bestanden: Wirkung an echter Flesch-Formel "
+          "mit realem Kopf, _finde_satz→0 fail-closed, Idempotenz, "
+          "Tore lehnen Ziffer/Markup/Kürzung/Sie-Form/Intro-Formel ab, "
           "ohne KI-Antwort wird nichts geschrieben, Schwelle importiert.")
     return 0
 
@@ -556,7 +753,8 @@ def run_selftest() -> int:
 #  CLI
 # ---------------------------------------------------------------------------
 def _verarbeite(pfade: list[str], *, fix: bool, max_n: int | None,
-                max_ki: int, auch_live: bool = False) -> tuple[list[dict], int]:
+                max_ki: int, auch_live: bool = False, ki: bool = True,
+                nur_ganz: bool | None = None) -> tuple[list[dict], int]:
     berichte, befund = [], 0
     for pfad in pfade[:max_n] if max_n else pfade:
         try:
@@ -572,7 +770,8 @@ def _verarbeite(pfade: list[str], *, fix: bool, max_n: int | None,
                              "stufe": "übersprungen",
                              "befund": "kein Entwurf (draft: false) – Scope-Schutz"})
             continue
-        ergebnis = heile_text(_slug_von(pfad), rohtext, max_ki=max_ki)
+        ergebnis = heile_text(_slug_von(pfad), rohtext, max_ki=max_ki,
+                              ki=ki, nur_ganz=nur_ganz)
         veraendert = ergebnis["neu_raw"] != rohtext
         if veraendert and ergebnis["ok"]:
             if fix:
@@ -601,7 +800,8 @@ def _menschen_text(berichte: list[dict], befund: int) -> str:
             continue
         vor = f"{b['vor']:.1f}" if b.get("vor") is not None else "–"
         nach = f"{b['nach']:.1f}" if b.get("nach") is not None else "–"
-        marke = "🟢" if b.get("ok") else "🔴"
+        marke = ("🟡" if b.get("teilfortschritt") else
+                 "🟢" if b.get("ok") else "🔴")
         haken = " ✍️" if b.get("geschrieben") else ""
         zeilen.append(f"{marke} {b.get('slug')}{haken}: Flesch {vor} → {nach} "
                       f"({len(b.get('ersetzt') or [])} Ersatz, "
@@ -632,6 +832,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--max", type=int, default=None, help="höchstens N Kandidaten")
     ap.add_argument("--max-ki", type=int, default=MAX_KI_STANDARD,
                     help=f"KI-Anfragen je Artikel (Standard {MAX_KI_STANDARD})")
+    ap.add_argument("--nur-ganz", action="store_true",
+                    help="Teilfortschritt verwerfen; nur ab erreichter Schwelle schreiben")
     ap.add_argument("--keine-ki", action="store_true", help="nur Analyse")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--report", action="store_true",
@@ -672,7 +874,9 @@ def main(argv: list[str] | None = None) -> int:
 
     berichte, befund = _verarbeite(sorted(dict.fromkeys(pfade)), fix=args.fix,
                                    max_n=args.max, max_ki=args.max_ki,
-                                   auch_live=args.auch_live)
+                                   auch_live=args.auch_live,
+                                   ki=not args.keine_ki,
+                                   nur_ganz=True if args.nur_ganz else None)
     text = _menschen_text(berichte, befund)
     if args.json:
         print(json.dumps({"befund": befund, "berichte": berichte},
