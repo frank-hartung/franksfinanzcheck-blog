@@ -2,27 +2,12 @@
   "target": 6,
   "ready": 2,
   "pool_size": 12,
-  "generated_at": "2026-10-07T13:20:00Z",
+  "generated_at": "2026-10-07T15:42:57Z",
   "candidates": [
-    {
-      "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
-      "ready": true,
-      "sha256": "3b052b106df754bfa04df672fe4f03324924bcbd1336ab73e4170b2baf0262c9",
-      "score": 0.958,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
     {
       "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
       "ready": true,
-      "sha256": "f98e1d95fd085069239960e4fb4bd259fc9611d81a0fd43599d9f9c61f80dc4e",
+      "sha256": "efb93ad8c141f269bf33de324f3272a9961cd146b163105350ad041714f17199",
       "score": 0.966,
       "parts": {
         "spelling": 0.92,
@@ -59,7 +44,7 @@
     {
       "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
       "ready": false,
-      "sha256": "e6d8c936e31b7e36f55a5b060580ec895e18f5faf8db12c2f64b0e45d9b05e8e",
+      "sha256": "5c695442a65ccea48ae8c84adbb64f619721aac7b582bb75d6b05231d7744961",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 59.4 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -81,7 +66,7 @@
     {
       "slug": "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
       "ready": false,
-      "sha256": "92a17be678d8dd347ecee6e607de207daebe5eaef05c57d697c2b2bc54d5babb",
+      "sha256": "bcd7edb0594768c47f6b1f8297a0f7981506e1e5338bab8ab1c85b6af87b7714",
       "reason": "quality-score 0.839 < 0.85 (schwach: structure 0.70, readability 0.75, typography 0.84)",
       "details": [
         "Reserve nicht bereit: 2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen: {'slug': '2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen', 'score': 0.839, 'parts': {'spelling': 0.86, 'meta': 0.85, 'structure': 0.7, 'typography': 0.84, 'uniqueness': 1.0, 'affiliate': 1.0, 'readability': 0.75}, 'verdict': 'draft+autofix'}"
@@ -100,7 +85,7 @@
     {
       "slug": "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
       "ready": false,
-      "sha256": "1685884d248861c9095869f8c3562a2ed5f6cbf675bdf171e2630452a595cf30",
+      "sha256": "a61287db20822d52ac7042dcb3b9a783aa94de19cb95e57f8d3f030ce8aa1432",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 59.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -121,7 +106,7 @@
     {
       "slug": "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": false,
-      "sha256": "4cd6f66f56803d73cb48de5d3a90027b303f9dec8ab93fd8a694842fdabb1959",
+      "sha256": "c220dbed9028c9c65d9a86ae0636b26bb0118192ef7ffe7f186e897e3236ae9c",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -143,7 +128,7 @@
     {
       "slug": "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
       "ready": false,
-      "sha256": "689c8abb7d46b8b03a1de0d6bcf88a25d834df87339e749b158756a56938529f",
+      "sha256": "c859545451ba1edef1e1874330405b870986811190b0b3a993ba1e44763d202e",
       "reason": "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschni",
       "details": [
         "🛑 2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -164,7 +149,7 @@
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "ready": false,
-      "sha256": "659d393df6c9dea89849c0604c5f390791507eb8d2b77656ad0e1c2e94fb57a8",
+      "sha256": "073a65e0d8817cb5e0b744e83f302f5258d9d4465858c703631942c74528fd22",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 58.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -185,7 +170,7 @@
     {
       "slug": "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
       "ready": false,
-      "sha256": "d5649230c349eeb5ac2a770a1101c8464421a748ee373375d011f28979cd9b91",
+      "sha256": "2a8161885bd86f250cace8663d82d9562eae345ae28e19d8e03aad3df4303b68",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 55.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -206,7 +191,7 @@
     {
       "slug": "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "ready": false,
-      "sha256": "ef97139711a18508b6a14bd5a7df1a05f8ab88319b58dcb1c3c8538f24cdf773",
+      "sha256": "b1797e3edf7ce97a26a6406327c05d91d52eaa5cc14653ed5b8406a51b4db222",
       "reason": "Lesbarkeits-Gate nicht bestanden: Flesch 53.1 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)",
       "details": [
         "🛑 2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -244,14 +229,36 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "ready": true,
+      "sha256": "0425b176e8aa343cb4f6501adace38f19921d2ef5f2b09f7a118c35fcd726f14",
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.78,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     }
   ],
   "recert": {
-    "at": "2026-10-07T13:20:00Z",
+    "at": "2026-10-07T15:42:57Z",
     "renewed": [
+      "2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
       "2026-10-07-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+      "2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
       "2026-10-07-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+      "2026-10-07-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+      "2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig"
     ],
     "tool": "scripts/reserve_recert.py"
   }
