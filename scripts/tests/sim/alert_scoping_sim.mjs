@@ -8,7 +8,8 @@
 // Verhalten in Produktionsszenarien – inklusive der exakten #343-Konstellation
 // (roter pull_request-Lauf eines arena-Zweigs → KEIN Alarm), der
 // Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall)
-// und der #602-Fachkanal-Regel für Tagesdefizite.
+// und der #602-#608-Fachkanal-Regel für Tagesdefizite (ein Zustandskanal,
+// der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch).
 //
 // Aufruf:  node scripts/tests/sim/alert_scoping_sim.mjs <pfad-zum-rohskript.js>
 // Exit 0 = alle Szenarien korrekt, Exit 1 = mindestens ein Szenario falsch.
@@ -212,6 +213,34 @@ await run('Tagesdefizit mit veraltetem engine-deficit-Issue → generischer Alar
                    body: '<!-- engine-deficit-id: tagesdefizit -->\nAlt',
                    labels: [{ name: 'engine-deficit' }],
                    updated_at: '2026-09-20T17:18:00Z' }] },
+  true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
+
+// 15. #608-Konstellation: Ein verspäteter Montags-Slot der Kadenz-Endkontrolle
+//     läuft in der Nacht auf einem RUHETAG und meldet den Vortag ehrlich rot.
+//     Nach der Reparatur (WF-1F8C #608) belegt die Messung den Fachkanal an
+//     JEDEM Tag: `engine_issue.py --deficit` hat das am Abend zuvor von einem
+//     Reparatur-Merge geschlossene Issue #601 in genau diesem Lauf wieder
+//     geöffnet und mit einem Zustandskommentar belegt (updated_at = Laufzeit).
+//     Ergebnis: kein generisches auto-report-Issue mit API-Key-Runbook.
+await run('#608: Ruhetag-Lauf, frisch wiedereröffneter Fachkanal → kein Duplikat',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/608',
+             steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
+    openIssues: [{ number: 601, title: 'Content-Engine: Tagesdefizit 2026-10-05 (1/2 LIVE) – nicht nachholbar',
+                   body: '<!-- engine-deficit-id: tagesdefizit -->\n'
+                       + '<!-- engine-deficit-tag: 2026-10-05 -->\nDetails',
+                   labels: [{ name: 'engine-deficit' }],
+                   updated_at: '2026-09-21T17:17:40Z' }] },
+  false);
+
+// 16. Gegenprobe zu 15: Ist der Fachkanal nach dem Merge NICHT wieder geöffnet
+//     worden (alte Fassung des Melders, Rechte fehlen, gh-Ausfall), bleibt das
+//     Alerting fail-open – dann ist der Melder das Problem, nicht die Quote.
+await run('#608-Gegenprobe: Fachkanal blieb geschlossen → generischer Alarm fail-open',
+  { branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/609',
+             steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
+    openIssues: [] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
 console.log(failed === 0

@@ -128,6 +128,47 @@ def is_publication_day(day):
     return day.weekday() in PUBLICATION_DAYS
 
 
+def letzter_publikationstag(heute):
+    """Jüngster Publikationstag ≤ heute (einzige Definition im Repo).
+
+    WARUM DIESE FUNKTION (WF-1F8C #608, 07.10.2026):
+    Am 06.10.2026 (Dienstag) meldeten drei Werkzeuge drei verschiedene
+    „Tage“: `engine_issue.py` nahm `date.today()` und übersprang den
+    Ruhetag ganz („Kein Publikationstag“), `publication_check.py` maß den
+    letzten Publikationstag (05.10.), die Produktions-Wache baute sich den
+    letzten Publikationstag in einer eigenen Schleife nach. Ergebnis: Der
+    Alarmgeber (Kadenz-Endkontrolle) meldete ein Defizit, der Fachkanal
+    existierte dafür aber nicht – und das zentrale Fehler-Alerting musste
+    fail-open ein generisches Wartungs-Issue anlegen (#608, Runbook
+    „API-Key abgelaufen?“).
+    Ein Ruhetag ist kein Grund, einen offenen Zustand zu vergessen: Der
+    Zustand gehört dem letzten Publikationstag. Diese Funktion ist die
+    eine Quelle dafür – an jedem Kalendertag, auch Di/Do/Sa/So.
+    """
+    tag = heute
+    for _ in range(8):
+        if tag.weekday() in PUBLICATION_DAYS:
+            return tag
+        tag -= datetime.timedelta(days=1)
+    # Unerreichbar, solange PUBLICATION_DAYS nicht leer ist – und ein
+    # leerer Kalender wäre ein Konfigurationsfehler, kein stiller Wert.
+    raise RuntimeError("PUBLICATION_DAYS enthält keinen Wochentag")
+
+
+def publikationstage_zurueck(heute, anzahl=3):
+    """Die letzten `anzahl` Publikationstage ≤ heute, jüngster zuerst.
+
+    Für die Rückstands-Zeile des Defizit-Issues: Ein verbuchter Tag darf
+    nicht verschwinden, nur weil inzwischen ein neuerer Tag gemessen wird.
+    """
+    tage = []
+    tag = letzter_publikationstag(heute)
+    for _ in range(max(0, anzahl)):
+        tage.append(tag)
+        tag = letzter_publikationstag(tag - datetime.timedelta(days=1))
+    return tage
+
+
 def now_utc_iso():
     """UTC-Zeitstempel (1 Minute zurück – nie ein Future-Post)."""
     return (datetime.datetime.now(datetime.timezone.utc)
@@ -525,6 +566,31 @@ def run_selftest():
     errors = []
     min_d, max_d = 2, 3
 
+    # Kalender-SSOT (WF-1F8C #608): Der „letzte Publikationstag“ muss an
+    # jedem Wochentag derselbe sein, egal wer fragt. 2026-10-05 = Montag,
+    # 2026-10-06 = Dienstag (Ruhetag), 2026-10-07 = Mittwoch.
+    erwartet = {
+        datetime.date(2026, 10, 5): datetime.date(2026, 10, 5),   # Mo
+        datetime.date(2026, 10, 6): datetime.date(2026, 10, 5),   # Di → Mo
+        datetime.date(2026, 10, 7): datetime.date(2026, 10, 7),   # Mi
+        datetime.date(2026, 10, 8): datetime.date(2026, 10, 7),   # Do → Mi
+        datetime.date(2026, 10, 9): datetime.date(2026, 10, 9),   # Fr
+        datetime.date(2026, 10, 10): datetime.date(2026, 10, 9),  # Sa → Fr
+        datetime.date(2026, 10, 11): datetime.date(2026, 10, 9),  # So → Fr
+    }
+    for heute, soll in erwartet.items():
+        ist = letzter_publikationstag(heute)
+        if ist != soll:
+            errors.append(f"letzter_publikationstag({heute}) = {ist}, "
+                          f"erwartet {soll}")
+    zurueck = publikationstage_zurueck(datetime.date(2026, 10, 7), 3)
+    if zurueck != [datetime.date(2026, 10, 7), datetime.date(2026, 10, 5),
+                   datetime.date(2026, 10, 2)]:
+        errors.append(f"publikationstage_zurueck falsch: {zurueck}")
+    if publikationstage_zurueck(datetime.date(2026, 10, 7), 3) != zurueck:
+        errors.append("publikationstage_zurueck ist nicht deterministisch "
+                      "(Wanduhr im Spiel?)")
+
     def mk(tmp, slug, date_raw, draft, wait=False, demoted=None,
            grund=None):
         d = os.path.join(tmp, "content", "posts", slug)
@@ -695,7 +761,7 @@ def main():
             sys.exit(2)
         print("✅ CADENCE-SELFTEST bestanden (Off-Day, Over-Cap, Re-Queue, "
               "Draft-Schutz, Park-Zustände queue/hold/manual/lost/stale, "
-              "Promotion-Hygiene, Idempotenz).")
+              "Promotion-Hygiene, Idempotenz, Kalender-SSOT).")
         sys.exit(0)
 
     do_fix = "--fix" in args

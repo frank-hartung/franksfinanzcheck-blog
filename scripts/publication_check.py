@@ -23,9 +23,15 @@ class ArticleHTML(HTMLParser):
 
 
 def expected_day(today):
-    while today.weekday() not in cg.PUBLICATION_DAYS:
-        today -= dt.timedelta(days=1)
-    return today
+    """Der Tag, den die Auslieferungs-SLO bewertet: jüngster Publikationstag.
+
+    Die Logik liegt seit WF-1F8C #608 in `cadence_guard` – EINE Quelle für
+    Kadenz-Endkontrolle, Defizit-Wache und Produktions-Wache. Diese Funktion
+    bleibt als Name bestehen (Aufrufer und Tests), entscheidet aber nichts
+    mehr selbst: Am 06.10.2026 maßen drei Werkzeuge drei verschiedene Tage,
+    und der Alarm über den einen Tag hatte keinen Fachkanal für den anderen.
+    """
+    return cg.letzter_publikationstag(today)
 
 
 def public_article(slug, opener=urllib.request.urlopen):

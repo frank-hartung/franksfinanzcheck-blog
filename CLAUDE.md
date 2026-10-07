@@ -827,6 +827,49 @@ Kadenz-Wache (23.09.) – nur die Content-Linie hatte keinen Schutz.
   `npm run test:engine:slots` (Selbsttest + 29 Unit-Tests).
   Vorgangsbericht: `TAGESDEFIZIT-ENGINE-601-DAUERHEILUNG-PREMIUM-2026-10-05.md`.
 
+## Eine Quote ist ein Zustand, kein Arbeitsauftrag (Zustandskanal, seit #608, 07.10.2026)
+
+Der 05.10.2026 endete mit 1/2 LIVE. Das Fach-Issue **#601** existierte
+korrekt – wurde aber um 21:21 durch den Reparatur-Merge #603 geschlossen
+(„Closes #601“), obwohl der gemessene Tag rot blieb. Am 06.10. (Dienstag)
+übersprang `engine_issue.py` den Tag vollständig („Kein Publikationstag“),
+also gab es keinen offenen, frischen Fachkanal. Der um 00:55 UTC
+nachgelieferte Montags-Slot der Kadenz-Endkontrolle meldete daraufhin
+ehrlich rot („TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig“) –
+und das zentrale Fehler-Alerting musste **fail-open** melden: Es legte das
+generische Wartungs-Issue **#608** mit API-Key-/GitHub-/Transient-Runbook
+an. Doppelte Buchführung und eine falsche Handlungsanweisung.
+
+Die Ursache war keine Alarmregel, sondern eine **Besitzfrage**: Ein
+Arbeitsauftrag ist mit einem Merge erledigt – ein Zustand nur durch eine
+neue Messung. Deshalb gilt für `engine_issue.py` (und seine Aufrufer):
+
+- **Besitzer** des Kanals `engine-deficit` ist die Messung selbst – nicht
+  der Vorschlag, der die Ursache heilt, und nicht die Hand.
+- **Kadenz: jeder Tag.** Gemessen wird immer der jüngste Publikationstag
+  (SSOT `cadence_guard.letzter_publikationstag`) – auch Di/Do/Sa/So belegt
+  die Produktions-Wache den Kanal (`npm run engine:deficit` zeigt den
+  Zustand). Ein Ruhetag vergisst keinen offenen Zustand.
+- **Schließpfad: nur die eigene Messung**, in zwei ehrlichen Fällen – Ziel
+  am Tag selbst noch erreicht, oder der Fehltag ist vorbei (nicht
+  nachholbar, kein Nachtragen von Inhalten) und ein folgender
+  Publikationstag erreicht das Ziel nachweislich. Der Vermerk sagt das
+  ausdrücklich; repariert wird die Ursache, nicht die Statistik.
+- **Reopen:** Wurde der Kanal geschlossen, während der gemessene Tag rot
+  war (Merge, Hand, Missverständnis), öffnet die nächste Messung ihn
+  wieder – mit Begründung. Danach schließt er sich von selbst, sobald ein
+  Publikationstag das Ziel erreicht: kein Dauerläufer.
+- **Das zentrale Alerting hängt daran:** Nur wenn der offene Fachkanal für
+  denselben Lauf frisch belegt ist, schweigt die generische Meldung
+  (#602-Regel). Wer den Kanal an einem Tag nicht belegt, erzeugt am
+  nächsten roten Lauf wieder ein generisches Wartungs-Issue – genau #608.
+- **Vertrag:** Regel **C23** in `governance_contract.py` friert Besitz,
+  Kalender-SSOT, Ruhetag-Messung, Reopen und Marker/Label ein; sabotierte
+  Fassungen werden im Kontrakt-Selbsttest rot.
+- Bedienung: `npm run engine:deficit` (Zustand, Trockenlauf) ·
+  `npm run test:engine:deficit` (Selbsttest + 39 Unit-Tests).
+  Vorgangsbericht: `WF-1F8C-608-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung
