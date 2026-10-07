@@ -39,8 +39,10 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 39 Beiträge)
+## Alle Artikel (neueste zuerst, 40 Beiträge)
 
+- [Büroausstattung steuerlich clever absetzen: So geht's](https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/): Büroausstattung steuerlich clever absetzen: Welche Geräte sofort zählen, wann du abschreiben musst und welche fünf Fehler dich bares Geld kosten.
+- [Internet & DSL-Update: Was sich jetzt für dich ändert](https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/): Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll.
 - [Preiswert surfen: So findest du den optimalen DSL‑Anschluss](https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/): Entdecke, wie ein preiswerter DSL‑Anschluss funktioniert, welche Tarife 2026 sinnvoll sind und wie du beim Wechsel Geld sparst.
 - [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/): Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, einer Modellrechnung und sieben Sparhebeln kommst du schuldenfrei durch die Feiertage.
 - [Gasabschlag berechnen: So planst du die Heizsaison richtig](https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/): Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison.
@@ -89,4 +91,4 @@ von FranksFinanzcheck korrekt einzuordnen, zusammenzufassen und zu zitieren.
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-10-05.*
+(scripts/generate_llms_txt.py). Stand: 2026-10-07.*
