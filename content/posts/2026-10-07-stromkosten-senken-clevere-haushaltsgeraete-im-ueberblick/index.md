@@ -3,12 +3,13 @@ title: "Stromkosten senken: – clevere Haushaltsgeräte im Überblick"
 description: Entdecke, wie du mit energieeffizienten Geräten deine Stromkosten dauerhaft reduzierst – praxisnah und ohne Fachchinesisch.
 date: 2026-10-07T10:32:56Z
 draft: true
-reserve: true
+reserve_blocked: "Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 (Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; 9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60) – ein"
+reserve_blocked_at: 2026-10-07T16:07:55Z
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz", "Stromkosten senken", "Überblick"]
+keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz", "Stromkosten senken"]
 pin_title: "Stromkosten senken: – clevere Haushaltsgeräte im Überblick"
 pin_description: "*Werbung | Entdecke, wie du mit energieeffizienten Geräten deine Stromkosten dauerhaft reduzierst – praxisnah und ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #stromkosten #haushaltsgeraete #energieeffizienz"
 ai_generated: true
@@ -140,7 +141,7 @@ Nach weniger als vier Jahren hast du den Kaufpreis durch die Stromrechnung "verd
 4. **Kurs halten** – Ersetze das Gerät nur bei einer Amortisationszeit von maximal 5 bis 7 Jahren. Achte beim Kauf darauf, keine unnötigen Zusatzfunktionen ("Smart Fridge" mit Display) zu wählen, die den Stromverbrauch wieder künstlich erhöhen.
 
 Durch diesen systematischen Prozess erkennst du deine größten Kostenblöcke sofort. 
-Du handelst faktenbasiert und vermeidest emotionale Fehlkäufe im Elektromarkt. 
+Du handelst faktenbasiert und [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) emotionale Fehlkäufe im Elektromarkt. 
 Priorisiere Geräte, die rund um die Uhr laufen (Kühlschrank, Gefriertruhe). Dort ist der Hebel für Ersparnisse am größten, da jede eingesparte Wattstunde 8.760 Mal im Jahr (Stunden pro Jahr) zählt.
 
 ## Typische Fehler beim Gerätetausch

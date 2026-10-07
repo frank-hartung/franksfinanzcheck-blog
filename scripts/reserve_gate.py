@@ -278,12 +278,32 @@ def diagnose(ready: int, target: int, candidates: list[dict]) -> list[str]:
 
 
 def chronik_schreiben(ready: int, target: int, candidates: list[dict]) -> None:
-    """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag."""
+    """Eine Zeile pro Lauf – damit ein Trend sichtbar wird, nicht nur der Tag.
+
+    IDEMPOTENT JE LAUF (WF-D4E0, #612): Der Workflow schreibt die Chronik
+    jetzt VOR dem Sicherungs-Commit (`--chronik`) und wird am Ende noch einmal
+    vom harten Gate gelesen. Ohne die Sperre stünde jeder Lauf zweimal im Buch;
+    mit ihr bleibt die Zeile stehen, auch wenn der End-Gate rot endet.
+    """
     pfad = ROOT / "data" / "reserve-history.jsonl"
+    lauf = os.environ.get("GITHUB_RUN_ID", "lokal")
+    # Lauf-Kennung aus dem DATEI-INHALT, nicht aus dem Prozessgedächtnis: der
+    # Gate-Aufruf ist ein zweiter Prozess und darf die Zeile nicht doppeln.
+    try:
+        if pfad.exists():
+            for zeile_json in pfad.read_text(encoding="utf-8").splitlines():
+                try:
+                    alt = json.loads(zeile_json)
+                except ValueError:
+                    continue
+                if alt.get("lauf") == lauf and "ready" in alt:
+                    return
+    except OSError:
+        pass
     zeile = {
         "ts": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ready": ready, "target": target, "pool": len(candidates),
-        "lauf": os.environ.get("GITHUB_RUN_ID", "lokal"),
+        "lauf": lauf,
         "blocker": [c.get("slug") for c in candidates if not c.get("ready")],
         "themen": themen_vielfalt(candidates)[0],
     }
@@ -455,11 +475,27 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Harter End-Gate der Content-Reserve")
     ap.add_argument("--selftest", action="store_true", help="interne Tests ausführen")
     ap.add_argument("--cert", default=str(CERT), help="Pfad zum Zertifikat (für Tests)")
+    ap.add_argument("--chronik", action="store_true",
+                    help="NUR die Chronik-Zeile schreiben (Exit 0) – für den "
+                         "Aufruf VOR dem Sicherungs-Commit (WF-D4E0, #612)")
     args = ap.parse_args()
     if args.selftest:
         return run_selftest()
     cert = Path(args.cert)
     ready, target, candidates = evaluate(cert)
+    if args.chronik:
+        # WF-D4E0 (#612): Die Chronik ist der einzige Ort, an dem ein Trend
+        # sichtbar wird. Sie wurde bis hier NACH dem Sicherungs-Commit
+        # geschrieben – jeder rote Lauf verlor seine Zeile und mit ihr die
+        # Evidenz genau der Nacht, die man später erklären will (der letzte
+        # CI-Eintrag stammte vom 02.10., alle späteren Zeilen sind lokale
+        # Reparaturläufe). Der Workflow ruft diesen Modus jetzt VOR dem Commit
+        # auf; das harte Gate am Ende liest dieselbe Messung und schreibt
+        # nichts doppelt (Idempotenz je `lauf`).
+        print(f"📈 Reserve-Chronik: {ready}/{target} (Pool {len(candidates)}) "
+              f"→ data/reserve-history.jsonl")
+        chronik_schreiben(ready, target, candidates)
+        return 0
     report(ready, target, candidates)
     chronik_schreiben(ready, target, candidates)
     frisch, meldung = freshness(cert)

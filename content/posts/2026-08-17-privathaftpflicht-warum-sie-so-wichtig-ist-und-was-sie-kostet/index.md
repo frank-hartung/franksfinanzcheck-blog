@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "0495f346a1907165be54affbc24d816d552f4d9d952418e45a2ceb495dbdc82f"
+  inhalt_sha256: "75156bc19868208b89163daaee087863dc28cfe35f64cd26a96e19dd805f7cf7"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, BaFin); Beitrags- und Schadenbandbreiten abgeglichen, Beispielrechnung nachgerechnet"
@@ -50,16 +50,16 @@ redaktionelle_pruefung:
   naechste_pruefung: "2026-11-19"
   aenderungsgrund: "Prüfqueue #586: tote Beleg-URLs ersetzt, Affiliate-CTA hinter die fachliche Grundlage verschoben, Tippfehler korrigiert, alle Zahlen und Bandbreiten dokumentiert"
   gepruefte_aussagen:
-    - textanker: "sie fungiert als Schutzschild gegen Schadenersatzforderungen, die privat existenzbedrohend werden können"
+    - textanker: "Denn Forderungen können deine Existenz bedrohen."
       pruefung: "Mit den BaFin-Verbraucherinformationen zur Haftpflichtversicherung abgeglichen: Sie deckt gesetzliche Schadenersatzansprüche Dritter bis zur vereinbarten Deckungssumme"
       quellen: ["Q2", "Q1"]
-    - textanker: "für die du per Gesetz mit deinem gesamten gegenwärtigen und zukünftigen Vermögen haftest"
+    - textanker: "Hier haftest du per Gesetz mit deinem ganzen Vermögen."
       pruefung: "Unbeschränkte persönliche Haftung bestätigt; Verbraucherzentrale und BaFin weisen beide auf das Existenzrisiko ohne Privathaftpflicht hin"
       quellen: ["Q1", "Q2"]
-    - textanker: "Wenn dir jemand einen Schaden zufügt und dieser weder versichert noch zahlungsfähig ist, übernimmt dein eigener Versicherer die Kosten"
+    - textanker: "Dann zahlt deine eigene Haftpflicht."
       pruefung: "Forderungsausfalldeckung ist laut Verbraucherzentrale Teil des wichtigen Grundschutzes; Beschreibung der Wirkweise ist zutreffend"
       quellen: ["Q1"]
-    - textanker: "bleibt auch im Jahr 2026 die wichtigste freiwillige Versicherung für Privatpersonen"
+    - textanker: "Die **Privathaftpflicht** bleibt 2026 die wichtigste freiwillige Versicherung."
       pruefung: "Verbraucherzentrale stuft die Privathaftpflicht als absolute Muss-Versicherung für alle ein; Einordnung bestätigt"
       quellen: ["Q1", "Q3"]
   gepruefte_zahlen:
@@ -138,7 +138,7 @@ redaktionelle_pruefung:
       quellen: ["Q1"]
     - aussage: "Monatspreis guter Schutz (Fazit)"
       wert: "4 bis 8 Euro im Monat"
-      fundstelle: "4 bis 8 Euro im Monat erhältlich."
+      fundstelle: "4 bis 8 € im Monat erhältlich."
       pruefung: "Umrechnung der dokumentierten Jahresbandbreiten in Monatswerte; entspricht der Verbraucherzentrale-Einordnung (guter Schutz für wenige Euro im Monat)"
       konsistenzpruefung: "48–96 € im Jahr decken sich mit der Single-Bandbreite (45–75 €) und dem Komfort-Beispieltarif (59 €)"
       rechenweg: "45 € bis 96 € Jahresbeitrag ÷ 12 Monate = ca. 4 bis 8 €/Monat"
@@ -371,7 +371,7 @@ Stell dir eine Frage: **Schützt mich mein Vertrag bei einem schweren Personensc
 
 Die **Privathaftpflicht** bleibt 2026 die wichtigste freiwillige Versicherung. Ihr Wert zeigt sich nicht bei kleinen Schäden. Er zeigt sich, wenn es um alles geht.
 
-Guter Schutz ist schon für 4 bis 8 Euro im Monat erhältlich. Achte auf moderne Bedingungen. Dazu zählen Forderungsausfall und Schlüsselverlust. Sonst bleibst du im Ernstfall auf den Kosten sitzen.
+Guter Schutz ist schon für 4 bis 8 € im Monat erhältlich. Achte auf moderne Bedingungen. Dazu zählen Forderungsausfall und Schlüsselverlust. Sonst bleibst du im Ernstfall auf den Kosten sitzen.
 
 **Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · Haus sicher schützen: Vorsorge-Update · [Kostenloses Girokonto finden](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/)
 

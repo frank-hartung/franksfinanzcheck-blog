@@ -169,7 +169,7 @@ Warum das wichtig ist:
 
 - Rufnummernmitnahme läuft sauberer
 - Schalttermine werden besser abgestimmt
-- du vermeidest eher Versorgungslücken
+- du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) eher Versorgungslücken
 - der Ablauf ist insgesamt einfacher
 
 Natürlich gibt es Sonderfälle. Wenn eine Frist sehr knapp wird, musst du aufpassen. Aber als Standardregel ist es meistens sinnvoller, den Wechsel geordnet über den neuen Anbieter laufen zu lassen.

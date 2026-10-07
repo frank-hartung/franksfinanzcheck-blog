@@ -42,7 +42,7 @@ faktencheck: "2026-09-27"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "39dbe64977581d04a3843dd2caa7b776717c7c70bb125d8d99ff94eeba866830"
+  inhalt_sha256: "78d22ca55a0dc1ed832ca558322038ded11d2d8ce6d8f07079ceafc4413df283"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Hausrat-Richtwert auf belegte 650 €/m² korrigiert, Modellrechnungen nachgerechnet"
@@ -51,16 +51,16 @@ redaktionelle_pruefung:
   naechste_pruefung: "2026-11-19"
   aenderungsgrund: "Prüfqueue #586: Belegkette themengerecht ersetzt (tote URLs), Hausrat-Richtwert faktenbasiert korrigiert, Affiliate-CTA hinter die fachliche Grundlage verschoben, alle Zahlen dokumentiert"
   gepruefte_aussagen:
-    - textanker: "Viele Versicherte gehen fälschlicherweise davon aus, dass Überschwemmungen durch Starkregen oder Rückstau automatisch mitversichert sind"
+    - textanker: "Viele denken, Starkregen und Rückstau seien automatisch dabei."
       pruefung: "Bestätigt: Schäden durch Starkregen, Rückstau oder Überschwemmung sind nur über den Baustein Erweiterte Elementargefahren abgedeckt (Verbraucherzentrale)"
       quellen: ["Q1"]
-    - textanker: "hat der Versicherer das Recht, die Leistung im Schadenfall prozentual zu kürzen"
+    - textanker: "Ist deine Summe zu niedrig, darf die Versicherung kürzen."
       pruefung: "Quotale Kürzung bei Unterversicherung auch bei Teilschätzen bestätigt; mit den Verbraucherzentrale-Hinweisen zur ausreichend hohen Versicherungssumme abgeglichen"
       quellen: ["Q3", "Q2"]
     - textanker: "wird durch die Wohngebäudeversicherung geschützt"
       pruefung: "Abgrenzung Gebäude versus bewegliches Inventar (Wohngebäude- vs. Hausratversicherung) mit den Quellen beider Sparten abgeglichen"
       quellen: ["Q2", "Q3"]
-    - textanker: "Standardtarife decken oft nur Leitungswasser ab"
+    - textanker: "Der Standard zahlt nur bei Wasser aus der Leitung."
       pruefung: "Bestätigt: Für eindringendes Wasser oder Rückstau braucht es den Elementar-Baustein; Standard ist nur Leitungswasser (Verbraucherzentrale)"
       quellen: ["Q1"]
   gepruefte_zahlen:
