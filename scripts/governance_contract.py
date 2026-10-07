@@ -115,6 +115,13 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           "hugo_build_vertrag.py",
           "editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
+          # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er ist der Heiler
+          # der zweiten Haelfte des Lesbarkeits-Tors (Flesch >= 60 als
+          # Publish-Kriterium, #585) und beweist seine Wirkung als
+          # Maschinenvertrag (`--wirkungsprobe`). Eine Wache, die niemand
+          # verlangt, fuehrt irgendwann niemand aus - deshalb steht sein
+          # Selbsttest hier im vertraglichen Minimum (C6).
+          "lesbarkeit_heiler.py",
           # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
           # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
           # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam
@@ -1866,7 +1873,78 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c21_maschinensaetze(script_texts)
     checks += c22_publikations_vertrag(script_texts, root=root)
     checks += c23_zustandskanal(script_texts, wflows, root=root)
+    checks += c25_deckung_wirkung(script_texts, root=root,
+                                  python_bin=python_bin)
     return checks
+
+
+# --- C25: Deckung heißt Wirkung (WACHE-609, 07.10.2026)
+# Der Code ist bewusst NICHT C24: „C24“ bezeichnet im Haus die
+# C24 Bank (Affiliate-Anker/Tooltips). Eine Governance-Regel „C24“
+# wäre in Logs und Greps nicht mehr von der Marke zu unterscheiden.
+# ---------------------------------------------------------------------------
+# Auslöser: `readability_failures` galt als gedeckt, weil `profi_polish.py`
+# in der Heiler-Kette der Reserve stand – und der Vorrat stand trotzdem bei
+# 2/6, sieben Kandidaten allein an der Lesbarkeit geparkt (Flesch 53,1–59,9);
+# der Publikationstag endete 1/2 (Produktions-Wache, P2, Issue #609).
+# Ein Name in der Kette ist eine Behauptung – die Wache beweist sie:
+#   * Regeln mit Zahlen-Versprechen (PROBEN_PFLICHT) brauchen mindestens
+#     einen Heiler mit Wirkungsprobe,
+#   * der Heiler muss in `reserve_finisher.HEALER_CHAIN` wirklich laufen,
+#   * die Schwelle muss importiert sein (keine zweite Zahl, Lehre #585),
+#   * und die Probe muss JETZT grün laufen (Exit 0) – auf diesem Baum.
+def c25_deckung_wirkung(script_texts, root=BLOG_DIR, python_bin=None):
+    out = []
+    rhc = script_texts.get("reserve_healer_coverage.py", "")
+    rf = script_texts.get("reserve_finisher.py", "")
+    heiler = script_texts.get("lesbarkeit_heiler.py", "")
+    if not rhc or not rf or not heiler:
+        out.append(("C25", "reserve_healer_coverage.py / reserve_finisher.py / "
+                           "lesbarkeit_heiler.py nicht lesbar – die Wirkungs-"
+                           "Deckung ist nicht prüfbar."))
+        return out
+    if "WIRKUNGS_PROBEN" not in rhc or "def wirkungsdeckung(" not in rhc:
+        out.append(("C25", "scripts/reserve_healer_coverage.py: Wirkungsproben "
+                           "fehlen – eine Deckung ohne Wirkung ist Papier (#609)."))
+    if "PROBEN_PFLICHT" not in rhc or "readability_failures" not in rhc:
+        out.append(("C25", "scripts/reserve_healer_coverage.py: die Pflicht-Regeln "
+                           "mit Zahlen-Versprechen fehlen (readability_failures)."))
+    if "lesbarkeit_heiler.py" not in rhc:
+        out.append(("C25", "scripts/reserve_healer_coverage.py nennt den "
+                           "Lesbarkeits-Heiler nicht – das Tor gälte wieder als "
+                           "gedeckt, ohne dass es jemand bewegt (#609)."))
+    if '("lesbarkeit_heiler.py"' not in rf:
+        out.append(("C25", "reserve_finisher.HEALER_CHAIN fährt den Lesbarkeits-"
+                           "Heiler nicht – die Reserve bliebe bei Flesch < 60 "
+                           "strukturell unerreichbar (#609)."))
+    if "NEW_FLESCH_MIN" not in heiler:
+        out.append(("C25", "scripts/lesbarkeit_heiler.py importiert die Schwelle "
+                           "`readability_check.NEW_FLESCH_MIN` nicht – zweite "
+                           "Wahrheit (#585)."))
+    if re.search(r"NEW_FLESCH_MIN\s*=\s*[0-9]", heiler):
+        out.append(("C25", "scripts/lesbarkeit_heiler.py definiert die Flesch-"
+                           "Schwelle selbst – die importierte SSOT ist die eine "
+                           "Wahrheit (#585)."))
+    if "--wirkungsprobe" not in heiler or "def wirkungsprobe(" not in heiler:
+        out.append(("C25", "scripts/lesbarkeit_heiler.py: `--wirkungsprobe` fehlt "
+                           "– ein Heiler ohne Probe kann seine Wirkung nicht belegen."))
+    # Der scharfe Teil: die Probe muss JETZT grün sein (Exit 0).
+    bin_ = python_bin or sys.executable or "python3"
+    try:
+        lauf = subprocess.run(
+            [bin_, os.path.join(root, "scripts", "lesbarkeit_heiler.py"),
+             "--wirkungsprobe"],
+            cwd=root, capture_output=True, text=True, timeout=180)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        out.append(("C25", f"Wirkungsprobe nicht ausführbar "
+                           f"({exc.__class__.__name__}) – fail-closed."))
+        return out
+    if lauf.returncode != 0:
+        zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
+        out.append(("C25", "Wirkungsprobe ROT: "
+                           + (zeilen[-1][:160] if zeilen
+                              else f"Exit {lauf.returncode}")))
+    return out
 
 
 RULE_TEXT = {
@@ -1959,6 +2037,16 @@ RULE_TEXT = {
            "Beitrag …“ umgeschrieben; ihre Struktur-Prüfung sah nichts, blockiert hat "
            "erst der nächste Deploy-Lauf – Exit 1, Produktionsalarm WF-54C4, "
            "abgebrochene Auslieferung (#607).",
+    "C25": "Eine Deckung ohne Wirkung ist Papier: Fuer Regeln mit Zahlen-"
+           "Versprechen (die Lesbarkeit ist das erste: Flesch >= "
+           "`readability_check.NEW_FLESCH_MIN` als Publish-Kriterium, #585) "
+           "verlangt die Deckungs-Wache der Reserve nicht nur einen Namen in "
+           "`reserve_finisher.HEALER_CHAIN`, sondern eine GRUENE "
+           "Wirkungsprobe des genannten Heilers – `--wirkungsprobe`, Exit 0, "
+           "ohne Netz und ohne Kontingent. Am 07.10.2026 stand der Vorrat bei "
+           "2/6, sieben Kandidaten allein an Flesch 53,1–59,9 geparkt, "
+           "waehrend `profi_polish.py` die Regel formal deckte; der Tag "
+           "endete 1/2 (Produktions-Wache P2, #609).",
     "C23": "Eine Quote ist ein Zustand, kein Arbeitsauftrag: Das Fach-Issue "
            "`engine-deficit` gehört seiner Messung (`scripts/engine_issue.py`) – "
            "Besitzer, tägliche Kadenz, Schließpfad. Gemessen wird der jüngste "
@@ -1995,7 +2083,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C20": "Lesbarkeits-Tor & Deploy-Hysterese",
          "C21": "Maschinensätze",
          "C22": "Publikations-Vertrag der Schreib-Seite",
-         "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)"}
+         "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)",
+         "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -2519,12 +2608,46 @@ def _selftest():
     if not [f for f in c23_zustandskanal(ohne_ssot, wflows_echt)
             if "letzter_publikationstag" in f[1]]:
         failures.append("C23: eine entfernte Kalender-SSOT bleibt unentdeckt.")
+    # --- C25: Deckung heißt Wirkung (WACHE-609, 07.10.2026) ---------------
+    # Von hier an prüft der SELFTEST die Regel mit Kunstbefunden: erst der
+    # echte Baum (muss still bleiben), dann drei Sabotagen, die je genau
+    # einen Zweig von c25_deckung_wirkung treffen müssen.
+    echte_wirkung = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                     for name in ("reserve_healer_coverage.py",
+                                  "reserve_finisher.py", "lesbarkeit_heiler.py")}
+    if c25_deckung_wirkung(echte_wirkung):
+        failures.append(f"C25: der echte Zustand wird beanstandet: "
+                        f"{c25_deckung_wirkung(echte_wirkung)}")
+    # (a) Wirkungsproben aus der Deckungs-Wache entfernt: die Deckung wäre
+    #     wieder ein Name ohne Nachweis – genau der Zustand vor #609.
+    ohne_proben = dict(echte_wirkung, **{
+        "reserve_healer_coverage.py":
+            echte_wirkung["reserve_healer_coverage.py"].replace(
+                "WIRKUNGS_PROBEN", "WIRKUNGSTABELLE").replace(
+                "def wirkungsdeckung(", "def _wirkungsdeckung_entfernt(")})
+    if not [f for f in c25_deckung_wirkung(ohne_proben)
+            if "Wirkungsproben" in f[1] or "Wirkungs" in f[1]]:
+        failures.append("C25: entfernte Wirkungsproben bleiben unentdeckt (#609).")
+    # (b) Schwelle kopiert statt importiert: zweite Wahrheit im Heiler (#585).
+    kopiert = dict(echte_wirkung, **{
+        "lesbarkeit_heiler.py": "NEW_FLESCH_MIN = 60.0\n"
+                                + echte_wirkung["lesbarkeit_heiler.py"]})
+    if not [f for f in c25_deckung_wirkung(kopiert) if "Wahrheit" in f[1]]:
+        failures.append("C25: kopierte Flesch-Schwelle im Heiler bleibt "
+                        "unentdeckt (#585).")
+    # (c) Heiler aus der Reserve-Kette entfernt: das Tor wäre unerreichbar.
+    ohne_kette = dict(echte_wirkung, **{
+        "reserve_finisher.py": echte_wirkung["reserve_finisher.py"].replace(
+            '("lesbarkeit_heiler.py"', '("x_lesbarkeit_heiler.py"')})
+    if not [f for f in c25_deckung_wirkung(ohne_kette) if "HEALER_CHAIN" in f[1]]:
+        failures.append("C25: ein aus der Kette entfernter Wirkungs-Heiler "
+                        "bleibt unentdeckt (#609).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C23 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C25 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
