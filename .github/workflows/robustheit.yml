@@ -89,7 +89,7 @@ jobs:
 
       # Eine Wache, die sich nicht selbst beweist, ist ein grüner Haken
       # ohne Aussage. Deshalb immer zuerst.
-      - name: Selbsttest der Wache (13 Sabotage-Proben, 2 Gegenproben)
+      - name: Selbsttest der Wache (13 Sabotage-Proben, 3 Gegenproben)
         run: python3 scripts/robustheits_gate.py --selftest
 
       - name: Quelle prüfen (R1–R12, ohne Build)

@@ -37,10 +37,19 @@ function ohneHugoKommentare(text) {
   return text.replace(/\{\{-?\s*\/\*[\s\S]*?\*\/\s*-?\}\}/g, '');
 }
 
-function bootstrapQuelltext() {
-  const sauber = ohneHugoKommentare(HEAD);
-  const bloecke = [...sauber.matchAll(/<script(?![^>]*\btype=)[^>]*>([\s\S]*?)<\/script>/g)]
+/** Inhalt aller <script>-Blöcke ohne type=…-Dateninseln (JSON-LD).
+    Das End-Tag erlaubt alles bis zur Klammer (`</script >`, `</script\n>`,
+    `</script data-ff="1">`): Browser nehmen Leerraum und Attribute hin und
+    ignorieren sie. Ein Schnitt, der sie nicht nimmt, findet den Block nicht –
+    und ein Test, der einen Block nie gesehen hat, ist grün ohne Prüfung.
+    Derselbe Befund, den CodeQL am 07.10.2026 im Gate fand (py/bad-tag-filter). */
+function skriptBloecke(text) {
+  return [...text.matchAll(/<script(?![^>]*\btype=)[^>]*>([\s\S]*?)<\/script[^>]*>/g)]
     .map((m) => m[1]);
+}
+
+function bootstrapQuelltext() {
+  const bloecke = skriptBloecke(ohneHugoKommentare(HEAD));
   const block = bloecke.find((b) => b.includes('FFRobust'));
   assert.ok(block, 'Bootstrap im <head> nicht gefunden');
   assert.ok(block.includes('ff_cookie_consent'),
@@ -362,4 +371,38 @@ test('Offline-Zustand steht am Dokument, nicht im Verborgenen', () => {
   win.dispatchEvent(new win.Event('online'));
   assert.equal(false, R.offline);
   assert.equal(null, win.document.documentElement.getAttribute('data-ff-offline'));
+});
+
+/* ------------------------------------------------------------------ */
+/* Der Schnitt selbst: ein Gate und ein Test, die einen Block übersehen, */
+/* sind grün, ohne geprüft zu haben.                                    */
+/* ------------------------------------------------------------------ */
+test('Skript-Schnitt sieht ein End-Tag mit Leerraum (py/bad-tag-filter)', () => {
+  assert.deepEqual(
+    skriptBloecke('<script>\nvar a = 1;\n</script >'),
+    ['\nvar a = 1;\n'],
+    '`</script >` ist gültiges HTML – der Schnitt darf den Block nicht übersehen'
+  );
+  assert.deepEqual(
+    skriptBloecke('<script type="application/ld+json">{"a":1}</script><script>var b = 2;</script>'),
+    ['var b = 2;'],
+    'Dateninseln mit type= bleiben draußen'
+  );
+  // CodeQL (py/bad-tag-filter) verlangt mehr als Leerraum: Auch Attribute im
+  // End-Tag sind gültiges HTML und müssen den Block sichtbar lassen.
+  for (const ende of ['</script >', '</script\n  data-ff="1">', '</script\t>']) {
+    assert.deepEqual(
+      skriptBloecke(`<script>var c = 3;${ende}`),
+      ['var c = 3;'],
+      `End-Tag ${JSON.stringify(ende)} darf den Block nicht unsichtbar machen`
+    );
+  }
+  // Der echte Beweis am Bestand: Leerraum-End-Tags dürfen keinen Block
+  // unsichtbar machen, sonst prüft dieser Test das Head-Skript nicht.
+  const sauber = ohneHugoKommentare(HEAD);
+  assert.equal(
+    skriptBloecke(sauber.replaceAll('</script>', '</script >')).length,
+    skriptBloecke(sauber).length,
+    'extend_head.html: Zahl der sichtbaren Blöcke darf durch `</script >` nicht fallen'
+  );
 });

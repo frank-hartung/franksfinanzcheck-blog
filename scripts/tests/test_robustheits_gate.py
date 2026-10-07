@@ -201,6 +201,59 @@ class GegenprobenTests(unittest.TestCase):
         self.assertEqual([], [f for f in funde_von(root) if f.startswith("R4")])
 
 
+class SchnittTests(unittest.TestCase):
+    """Die Werkzeuge des Gates: ein Schnitt, der einen Block übersieht,
+    liefert ein Grün ohne Prüfung.
+
+    Befund `py/bad-tag-filter` (CodeQL, 07.10.2026): `</script>` passt nicht
+    auf `</script >`, obwohl Browser diese Schreibweise annehmen."""
+
+    def test_end_tag_mit_leerraum_wird_gesehen(self):
+        self.assertEqual(gate.skript_bloecke("<script>\nvar a = 1;\n</script >"),
+                         ["\nvar a = 1;\n"])
+
+    def test_end_tag_mit_umbruch_wird_gesehen(self):
+        self.assertEqual(gate.skript_bloecke("<script>var a = 1;</script\n>"),
+                         ["var a = 1;"])
+
+    def test_end_tag_mit_attribut_wird_gesehen(self):
+        """CodeQL (py/bad-tag-filter) verlangt mehr als Leerraum: Attribute im
+        End-Tag sind gültiges HTML und werden vom Parser ignoriert."""
+        for ende in ('</script >', '</script\n  data-ff="1">', '</script\t>',
+                     '</script foo="bar">'):
+            with self.subTest(ende=ende):
+                self.assertEqual(gate.skript_bloecke(f"<script>var a = 1;{ende}"),
+                                 ["var a = 1;"])
+
+    def test_dateninseln_bleiben_draussen(self):
+        roh = ('<script type="application/ld+json">{"a": 1}</script>'
+               "<script>var b = 2;</script >")
+        self.assertEqual(gate.skript_bloecke(roh), ["var b = 2;"],
+                         "JSON-LD ist kein Prüfgegenstand, Code schon")
+
+    def test_leerraum_macht_keinen_block_des_bestands_unsichtbar(self):
+        inhalt = gate.text(ROOT, gate.BOOTSTRAP)
+        selbst = gate.skript_bloecke(inhalt)
+        verstellt = gate.skript_bloecke(inhalt.replace("</script>", "</script >"))
+        self.assertTrue(selbst, "Der Bootstrap-Baum enthält keine Skript-Blöcke?")
+        self.assertEqual(len(verstellt), len(selbst),
+                         "End-Tags in Leerraum-Schreibweise dürfen keinen Block "
+                         "unsichtbar machen – sonst prüft das Gate ihn nie")
+
+    def test_selftest_kennt_die_dritte_gegenprobe(self):
+        """Die Gegenprobe muss im Selbsttest stehen, nicht nur im Unit-Test:
+        `--selftest` läuft in CI zuerst (robustheit.yml, deploy.yml)."""
+        quell = gate.text(ROOT, "scripts/robustheits_gate.py")
+        self.assertIn("GEGENPROBE 3", quell)
+        self.assertIn("py/bad-tag-filter", quell)
+        self.assertIn("</script[^>]*>", quell,
+                      "`\\s*` deckt Leerraum, aber keine Attribute ab – genau "
+                      "das war der zweite Befund von CodeQL")
+        for schreibweise in ('"</script >"', '"</script\\t>"'):
+            self.assertIn(schreibweise, quell,
+                          f"Die Gegenprobe prüft {schreibweise} nicht")
+
+
 class AufrufVertragTests(unittest.TestCase):
     """Was die Bausteine abrufen, muss die Schicht anbieten (Drift-Schutz)."""
 

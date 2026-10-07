@@ -1094,7 +1094,7 @@ behauptet. Und: Wiederholt wird nur bei `netz`, nie bei `zeitlimit` – ein
 Request, der ins Zeitlimit lief, hat den Dienst schon beschäftigt.
 
 **Wache:** `scripts/robustheits_gate.py` (R1–R12, `--selftest` mit 13
-Sabotage-Proben und 2 Gegenproben, `--public` für die gebaute Wahrheit). Sie
+Sabotage-Proben und 3 Gegenproben, `--public` für die gebaute Wahrheit). Sie
 läuft in `robustheit.yml` (Push/PR/Nacht) und im Deploy **vor** dem Build,
 fail-closed. Sie heilt nie selbst: Ein Fangnetz, das sich selbst wieder
 einhängt, wäre keines.

@@ -5,8 +5,8 @@
 Premium-Level einer Profi-Agentur."
 **Ergebnis:** Vier reale, stille Ausfälle geheilt, eine Resilienzschicht in zwei
 Stufen eingezogen, der Service Worker fail-open gemacht und alles zusammen als
-prüfbarer Vertrag R1–R12 hinterlegt – mit Wache, Selbsttest, 33 Unit-Tests und
-20 Verhaltenstests im Browser-DOM.
+prüfbarer Vertrag R1–R12 hinterlegt – mit Wache, Selbsttest, 39 Unit-Tests und
+21 Verhaltenstests im Browser-DOM.
 
 ---
 
@@ -228,9 +228,9 @@ first-party, keine sendet etwas nach außen.
 | `static/premium/ff-summary-safety.js` | `document.body`/`MutationObserver`-Prüfung, Fangnetz je Durchlauf, Leistungsschalter nach drei Fehlern |
 | `layouts/_partials/footer.html` | Kopier-Knopf: Erfolg **nach** der Antwort, Rückfall `execCommand`, Fangnetz je Codeblock, `textContent`, `type="button"`; Menü-Scroll: Speicher im `try/catch` |
 | `assets/css/extended/zz-robustheit.css` **(neu)** | `.ff-robust-hinweis` im Markenton, Dark-Variante, `overflow-wrap: anywhere`, keine Layout-Animation |
-| `scripts/robustheits_gate.py` **(neu)** | Wache R1–R12, `--selftest` (13 Sabotage-Proben, 2 Gegenproben), `--source-only`, `--public`, `--json`, `--strict` |
+| `scripts/robustheits_gate.py` **(neu)** | Wache R1–R12, `--selftest` (13 Sabotage-Proben, 3 Gegenproben), `--source-only`, `--public`, `--json`, `--strict` |
 | `scripts/tests/test_robustheits_gate.py` **(neu)** | 33 Regressionstests inkl. Aufruf-Vertrag und CI-Verdrahtung |
-| `tools/robust.test.mjs` **(neu)** | 20 Verhaltenstests im jsdom (Fehler-Horcher, Zeitlimit, Wiederholung, Speicher, Inseln, Zwischenablage, offline) |
+| `tools/robust.test.mjs` **(neu)** | 21 Verhaltenstests im jsdom (Fehler-Horcher, Zeitlimit, Wiederholung, Speicher, Inseln, Zwischenablage, offline) |
 | `data/robustheit_ausnahmen.yaml` **(neu)** | Begründete Ausnahmen mit Entscheidung und **Fälligkeit** |
 | `.github/workflows/robustheit.yml` **(neu)** | Push/PR auf Laufzeit-Pfade, jede Nacht 04:35 UTC, Build + gebaute Wahrheit |
 | `.github/workflows/deploy.yml` | Robustheits-Prüfung **vor** dem Build, fail-closed |
@@ -258,17 +258,17 @@ jsdom 30):
 
 ```
 $ python3 scripts/robustheits_gate.py --selftest
-✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 2 Gegenproben freigegeben, echter Stand grün
+✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 3 Gegenproben freigegeben, echter Stand grün
 
 $ python3 scripts/robustheits_gate.py --source-only --strict --no-report ; echo $?
 0
 
 $ python3 -m unittest scripts.tests.test_robustheits_gate
-Ran 33 tests in 13.8s
+Ran 39 tests in 16.7s
 OK
 
 $ node --test tools/robust.test.mjs
-# tests 20 · # pass 20 · # fail 0
+# tests 21 · # pass 21 · # fail 0
 ```
 
 **Der Selbsttest ist der Beweis, dass die Wache nicht nur grün ist.** 13
@@ -279,9 +279,55 @@ Head-Skript verschoben (R2), Capture-Phase entfernt (R2), Fetch ohne Zeitlimit
 (R4), dynamisches `innerHTML` (R7), `document.write` (R7), Speicherzugriff ohne
 `try/catch` (R8), Schicht nicht mehr eingebunden (R12), Dark-Variante des
 Hinweises gelöscht (R9), Insel-Fangnetz entfernt (R6), API-Baustein umbenannt
-(R1). Dazu zwei Gegenproben, die **nicht** anschlagen dürfen: statisches
-`innerHTML`-Literal und ein Fetch mit Zeitlimit – sonst ist das Gate schärfer
-als der Vertrag und wird abgeschaltet.
+(R1). Dazu drei Gegenproben, die **nicht** anschlagen dürfen: statisches
+`innerHTML`-Literal, ein Fetch mit Zeitlimit und End-Tags in gültigen, aber
+ungebräuchlichen Schreibweisen (`</script >`, `</script data-ff="1">`) – sonst
+ist das Gate schärfer als der Vertrag (oder blind) und wird abgeschaltet.
+
+### Der Beweislauf fand einen Befund – in der Wache selbst, in zwei Runden
+
+Der CodeQL-Lauf des Pull Requests (#633) meldete eine Security-Fundstelle. Sie
+lag nicht im Blog, sondern im neuen Gate:
+
+```
+py/bad-tag-filter → scripts/robustheits_gate.py:187
+This regular expression does not match script end tags like </script >.
+```
+
+Der Schnitt, der die `<script>`-Blöcke aus `extend_head.html` holt, endete auf
+`</script>` und passte damit nicht auf `</script >`. Die Folge ist genau die
+Fehlerklasse, die dieser Vorgang abschaffen soll: Trägt ein Template je ein
+End-Tag in einer Schreibweise, die der Schnitt nicht kennt, sieht das Gate den
+Block nicht, findet also weder Bootstrap noch Consent darin – und meldet
+**grün, ohne geprüft zu haben**. Derselbe blinde Schnitt lag im Helfer von
+`tools/robust.test.mjs`: Gate und Test wären zusammen blind gewesen.
+
+**Runde 1** heilte mit `</script\s*>`. **CodeQL blieb rot – und hatte recht:**
+
+```
+py/bad-tag-filter → scripts/robustheits_gate.py:195
+This regular expression does not match script end tags like </script\t\n bar>.
+```
+
+Ein End-Tag darf auch Attribute tragen (`</script data-ff="1">`); Parser
+ignorieren sie, gültig ist die Schreibweise trotzdem. **Runde 2** heilt mit
+`</script[^>]*>` – alles bis zur Klammer, im Gate *und* im Test-Helfer.
+
+Der Beweis, dass die Heilung hält und nicht nur der Befund verschwindet:
+
+* **Gegenprobe 3** im Selbsttest, je Schreibweise (`</script >`,
+  `</script\n  data-ff="1">`, `</script\t>`) in zwei Hälften: Gültige End-Tags
+  allein dürfen **keinen** Befund erzeugen – sonst ist das Gate schärfer als
+  HTML und wird abgeschaltet. Und mit ihnen muss R2 **weiter anschlagen**, wenn
+  der Bootstrap doch ein eigenes Head-Kind bekommt – sonst ist der Schnitt
+  blind, während das Gate grün meldet.
+* **Zähne zweifach nachgewiesen.** Mit dem blinden Muster `</script>` fällt der
+  Selbsttest (`Gegenprobe 3a ('</script >')`), und mit der Halbheilung
+  `</script\s*>` fällt er ebenfalls (`Gegenprobe 3a ('</script\n data-ff="1">')`).
+  Eine Gegenprobe, die nie fehlschlägt, beweist nichts.
+* 6 Unit-Tests (`SchnittTests`, darunter `</script foo="bar">` und die
+  Dateninsel mit `type=`) und 1 jsdom-Test, der die Blockzahl am echten Bestand
+  einfriert.
 
 **Bestand unverändert grün** (Regression gegen dieselben Wachen wie vorher):
 

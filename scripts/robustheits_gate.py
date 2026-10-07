@@ -183,8 +183,17 @@ def erstpartei_js(root: Path) -> list[str]:
 
 
 def skript_bloecke(quelltext: str) -> list[str]:
-    """Inhalt aller <script>-Blöcke (ohne type=…-Dateninseln wie JSON-LD)."""
-    return re.findall(r"<script(?![^>]*\btype=)[^>]*>(.*?)</script>",
+    """Inhalt aller <script>-Blöcke (ohne type=…-Dateninseln wie JSON-LD).
+
+    Das End-Tag erlaubt alles bis zur Klammer (`</script >`, `</script\n>`,
+    `</script data-ff="1">`): Browser nehmen Leerraum und Attribute im End-Tag
+    hin und ignorieren sie. Ein Schnitt, der sie nicht nimmt, findet den Block
+    nicht – und ein Gate, das einen Block nie gesehen hat, meldet grün, ohne
+    geprüft zu haben. Das ist der Befund `py/bad-tag-filter`, den CodeQL am
+    07.10.2026 in dieser Zeile fand; `\s*` reichte ihm nicht, erst `[^>]*` deckt
+    die Schreibweisen ab. Gegenprobe 3 im Selbsttest friert alle drei ein.
+    """
+    return re.findall(r"<script(?![^>]*\btype=)[^>]*>(.*?)</script[^>]*>",
                       quelltext, re.S | re.I)
 
 
@@ -768,12 +777,47 @@ def selbsttest() -> int:
             fehler.append("Gegenprobe: statisches innerHTML-Literal wird zu Unrecht "
                           "gemeldet (R7 ist zu scharf)")
 
+        # GEGENPROBE 3: `</script >` ist gültiges HTML (Leerraum vor der
+        # Klammer). Zwei Hälften, beide nötig:
+        #   3a  Die Schreibweise allein darf KEINEN Befund erzeugen – sonst
+        #       ist das Gate schärfer als HTML und wird abgeschaltet.
+        #   3b  Mit dieser Schreibweise muss R2 weiter anschlagen, wenn der
+        #       Bootstrap doch ein eigenes Head-Kind bekommt. Bleibt R2 hier
+        #       stumm, sieht der Schnitt die Blöcke nicht: ein blindes Gate.
+        gegen3 = baum()
+        pfad3 = gegen3 / BOOTSTRAP
+        roh3 = pfad3.read_text(encoding="utf-8")
+        if "</script>" not in roh3:
+            fehler.append("Gegenprobe 3: kein </script> im Bootstrap-Anker")
+        else:
+            # Alle Schreibweisen, die ein Browser im End-Tag hinnimmt. CodeQL
+            # (py/bad-tag-filter) verlangt genau das: `\s*` deckt Leerraum,
+            # aber keine Attribute ab.
+            for schreibweise in ("</script >", "</script\n  data-ff=\"1\">",
+                                 "</script\t>"):
+                variante = roh3.replace("</script>", schreibweise)
+                pfad3.write_text(variante, encoding="utf-8")
+                funde3 = lauf(gegen3)
+                if funde3:
+                    fehler.append(f"Gegenprobe 3a ({schreibweise!r}): gültige "
+                                  f"End-Tags erzeugen Befunde "
+                                  f"({[f[:60] for f in funde3][:3]})")
+                pfad3.write_text(variante.replace(
+                    "})();\n\n/* ---- Robustheits-Bootstrap",
+                    "})();\n" + schreibweise +
+                    "\n<script>\n/* ---- Robustheits-Bootstrap", 1),
+                    encoding="utf-8")
+                if not any(f.startswith("R2") for f in lauf(gegen3)):
+                    fehler.append(f"Gegenprobe 3b ({schreibweise!r}): Der Schnitt "
+                                  "sieht die Blöcke nicht – R2 bleibt stumm "
+                                  "(py/bad-tag-filter wäre zurück)")
+
     if fehler:
         print("❌ SELBSTTEST FEHLGESCHLAGEN")
         for f in fehler:
             print("   · " + f)
         return 1
-    print("✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 2 Gegenproben freigegeben, "
+    print("✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 3 Gegenproben freigegeben, "
           "echter Stand grün")
     return 0
 

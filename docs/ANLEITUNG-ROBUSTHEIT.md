@@ -180,9 +180,9 @@ npm run robustheit          # Quelle (ohne Hugo, < 1 s)
 npm run robustheit:check    # Selbsttest + Quelle + Build + gebaute Wahrheit
 npm run robustheit:strict   # maschinenlesbar (JSON), node fehlt = Befund
 npm run robustheit:ausnahmen# welche Ausnahme wird gerade genutzt?
-npm run test:robustheit     # Selbsttest + Unit-Tests + 20 jsdom-Tests
+npm run test:robustheit     # Selbsttest + Unit-Tests + 21 jsdom-Tests
 
-python3 scripts/robustheits_gate.py --selftest           # 13 Sabotage-Proben, 2 Gegenproben
+python3 scripts/robustheits_gate.py --selftest           # 13 Sabotage-Proben, 3 Gegenproben
 python3 scripts/robustheits_gate.py --public public      # gebaute Wahrheit
 node --test tools/robust.test.mjs                        # Verhalten im Browser-DOM
 ```
