@@ -41,10 +41,10 @@ Die Faustregel „3‑6 Monatsnetto“ gilt seit langem als sicherer Rahmen. S
 
 Die 50‑30‑20‑Regel hilft, das monatliche Budget zu strukturieren: 50 % für feste Ausgaben, 30 % für variable Kosten und 20 % für Sparen und Schuldentilgung. Ein Teil dieses Sparanteils kann gezielt für den Notgroschen verwendet werden. Viele Finanzratgeber empfehlen, zunächst 10 % des Nettoeinkommens in den Notgroschen zu stecken, bis die gewünschte Größe erreicht ist.
 
-> **Rechenbeispiel:**  
-> Du verdienst netto 2 500 € pro Monat. 10 % davon sind 250 €.  
-> Zielgröße: 4 Monatsnetto = 4 × 2 500 € = 10 000 €.  
-> Monatliche Einzahlung: 250 € → 10 000 € / 250 € = 40 Monate.  
+> **Rechenbeispiel:**
+> Du verdienst netto 2 500 € pro Monat. 10 % davon sind 250 €.
+> Zielgröße: 4 Monatsnetto = 4 × 2 500 € = 10 000 €.
+> Monatliche Einzahlung: 250 € → 10 000 € / 250 € = 40 Monate.
 > In etwas mehr als drei Jahren hast du das Polster aufgebaut, ohne deine Lebensqualität zu stark einzuschränken.
 
 Wenn du schneller vorankommen willst, kannst du den Prozentsatz erhöhen oder einmalige Überschüsse (Steuererstattung, Bonus) komplett in den Notgroschen leiten. Wichtig ist, dass das Geld jederzeit verfügbar bleibt – ein Tagesgeldkonto mit kostenfreiem Zugriff ist dafür ideal.
@@ -60,9 +60,9 @@ Der 4K‑Prüfpfad aus dem Fixkosten‑Kompass lässt dich strukturiert vorgehen
 | **Kündigungsfenster sichern** | Vertrags- und Prüftermine sichtbar machen | Du nutzt Fristen, um zu wechseln |
 | **Kurs halten** | Nur bei sinnvoller Rechnung handeln und quartalsweise nachprüfen | Du behältst das Polster stabil |
 
-1. **Kosten sehen** – Schreibe alle festen Posten (Miete, Versicherungen, Abos) in eine Excel‑Tabelle. Markiere die, die du reduzieren könntest.  
-2. **Konditionen rechnen** – Vergleiche aktuelle Verträge über CHECK24. So erkennst du, ob du bei Strom, Telefon oder Versicherung sparen kannst.  
-3. **Kündigungsfenster sichern** – Setze dir Erinnerungen im Kalender, damit du rechtzeitig kündigen oder neu verhandeln kannst.  
+1. **Kosten sehen** – Schreibe alle festen Posten (Miete, Versicherungen, Abos) in eine Excel‑Tabelle. Markiere die, die du reduzieren könntest.
+2. **Konditionen rechnen** – Vergleiche aktuelle Verträge über CHECK24. So erkennst du, ob du bei Strom, Telefon oder Versicherung sparen kannst.
+3. **Kündigungsfenster sichern** – Setze dir Erinnerungen im Kalender, damit du rechtzeitig kündigen oder neu verhandeln kannst.
 4. **Kurs halten** – Kontrolliere alle drei Monate, ob deine monatliche Einzahlung noch passt und ob du das Polster bereits vergrößert hast.
 
 Durch diesen Prozess sparst du nicht nur bei laufenden Kosten, sondern schaffst gleichzeitig Raum für den Notgroschen.
@@ -71,9 +71,9 @@ Durch diesen Prozess sparst du nicht nur bei laufenden Kosten, sondern schaffst 
 
 Frugalismus bedeutet nicht, auf alles zu verzichten. Es geht um bewussten Konsum, bei dem du Geld für das ausgibst, was dir wirklich wichtig ist. Das Prinzip lässt sich leicht auf den Notgroschen übertragen:
 
-- **Ausgaben prüfen** – Frage dich bei jedem Kauf, ob er langfristig Nutzen bringt.  
-- **Preis‑Leistungs‑Check** – Nutze CHECK24, um die günstigste Option zu finden, bevor du etwas bestellst.  
-- **Selbstgemacht statt gekauft** – Repariere Kleidung oder koche zu Hause, das reduziert die Ausgaben und erhöht den Sparbetrag.  
+- **Ausgaben prüfen** – Frage dich bei jedem Kauf, ob er langfristig Nutzen bringt.
+- **Preis‑Leistungs‑Check** – Nutze CHECK24, um die günstigste Option zu finden, bevor du etwas bestellst.
+- **Selbstgemacht statt gekauft** – Repariere Kleidung oder koche zu Hause, das reduziert die Ausgaben und erhöht den Sparbetrag.
 - **Automatisierung** – Richte einen Dauerauftrag ein, der direkt nach Gehaltseingang den Notgroschen‑Betrag überweist. So vergisst du ihn nicht.
 
 Durch kleine Anpassungen im Alltag kannst du den monatlichen Sparbetrag leicht um 5‑10 % erhöhen, ohne dass du dich eingeschränkt fühlst. Das stärkt dein Polster und gibt dir gleichzeitig mehr Freiheit, größere Anschaffungen bewusst zu planen.
@@ -89,6 +89,11 @@ Durch kleine Anpassungen im Alltag kannst du den monatlichen Sparbetrag leicht u
 | **Spontane Ausgaben ohne Gegenwert** | Der Notgroschen schrumpft ständig | Setze dir ein monatliches „Freizeitbudget“ und halte dich daran |
 
 Indem du diese Stolperfallen erkennst, kannst du dein Polster stabil halten und gleichzeitig flexibel bleiben.
+
+
+
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

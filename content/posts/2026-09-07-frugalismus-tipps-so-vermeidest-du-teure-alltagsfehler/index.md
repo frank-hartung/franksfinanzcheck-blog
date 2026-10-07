@@ -43,7 +43,7 @@ faktencheck: "2026-09-27"
 
 
 
-[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
+[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
 

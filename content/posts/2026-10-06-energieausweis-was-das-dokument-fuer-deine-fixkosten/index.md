@@ -176,7 +176,7 @@ Betrachte das Dokument also nicht als lästiges Papier für das Amt. Es ist die 
 ## Häufige Fragen
 
 ### Wie lange ist ein Energieausweis gültig?
-In der Regel hat das Dokument eine Gültigkeitsdauer von zehn Jahren. Wenn du jedoch nach der Erstellung umfangreiche energetische Sanierungen durchführst – zum Beispiel die Fassade dämmst oder eine neue Heizung einbaust – , solltest du einen neuen Ausweis erstellen lassen. Nur so spiegeln die Kennwerte den tatsächlichen (besseren) Zustand deiner Immobilie wider, was besonders bei einem Verkauf oder einer Neuvermietung von großem Vorteil ist.
+In der Regel hat das Dokument eine Gültigkeitsdauer von zehn Jahren. Wenn du jedoch nach der Erstellung umfangreiche energetische Sanierungen durchführst – zum Beispiel die Fassade dämmst oder eine neue Heizung einbaust –, solltest du einen neuen Ausweis erstellen lassen. Nur so spiegeln die Kennwerte den tatsächlichen (besseren) Zustand deiner Immobilie wider, was besonders bei einem Verkauf oder einer Neuvermietung von großem Vorteil ist.
 
 ### Wer darf einen Energieausweis ausstellen?
 Nicht jeder darf dieses Dokument rechtssicher erstellen. Die Befugnis ist an bestimmte berufliche Qualifikationen und Praxiserfahrungen gebunden. In der Regel sind dies Architekten, Bauingenieure, zertifizierte Energieberater oder Handwerksmeister mit entsprechender Zusatzqualifikation (z. B. Schornsteinfeger oder Heizungsbauer). Achte darauf, dass der Aussteller eine Berufshaftpflichtversicherung hat und die Anforderungen des Gebäudeenergiegesetzes (GEG) erfüllt.
