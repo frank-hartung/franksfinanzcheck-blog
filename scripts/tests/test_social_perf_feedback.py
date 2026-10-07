@@ -163,6 +163,16 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
         self.old_state = planner.STATE_FILE
         planner.SCHEDULE_FILE = os.path.join(self.tmp, "schedule.yaml")
         planner.STATE_FILE = os.path.join(self.tmp, "state.yaml")
+        # Der Plan wird gegen ein GEPINNTES `now` gebaut (unten). Der Pool muss
+        # deshalb ebenfalls gegen dieses `now` datiert sein – nicht gegen die
+        # echte Wanduhr. Bis 07.10.2026 stand hier `planner.berlin_now()`:
+        # Solange das echte Heute nahe am gepinnten Stichtag lag, fielen die
+        # Artikel noch ins Planfenster `[now, now + plan_horizon_days]` und der
+        # Test war grün. Mit jedem vergehenden Tag rückten die Pool-Daten aus
+        # dem Fenster – am 07.10.2026 ab ca. 19:00 Berliner Zeit war der Test
+        # rot, ab dem 08.10.2026 zu jeder Tageszeit. Ein Test, der mit dem
+        # Kalender altert, prüft die Uhr und nicht den Planer.
+        self.now = planner.localize(datetime(2026, 9, 14, 6, 0))
         self.pool = [
             {
                 "slug": f"artikel-{i:02d}", "path": "", "title": f"Titel {i}",
@@ -171,12 +181,11 @@ class TestBuildPlanMitRueckkanal(unittest.TestCase):
                 "faq_question": "x", "faq_answer": "x", "tags": ["x"], "keywords": ["x"],
                 "pillar": ["strom-sparen", "internet-dsl"][i % 2], "pin_title": "x",
                 "cover": "", "cover_alt": "", "draft": False, "reserve": False,
-                "published": planner.iso(planner.berlin_now() - timedelta(days=2 + i)),
+                "published": planner.iso(self.now - timedelta(days=2 + i)),
                 "url": f"https://franksfinanzcheck.de/posts/artikel-{i:02d}/", "raw_fm": "",
             }
             for i in range(8)
         ]
-        self.now = planner.localize(datetime(2026, 9, 14, 6, 0))
 
     def tearDown(self):
         planner.SCHEDULE_FILE = self.old_schedule
