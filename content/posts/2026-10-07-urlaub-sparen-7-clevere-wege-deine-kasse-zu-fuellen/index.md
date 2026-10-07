@@ -82,7 +82,7 @@ Dieses gesparte Geld wandert direkt als Bonus in deine Reisekasse.
 So finanzierst du deinen nächsten Strandurlaub fast im Vorbeigehen.
 
 ### Checkliste: 5 Sparschritte vor der Buchung
-- **Strom‑ und Gasvertrag:** Ein Anbieterwechsel spart oft 10 % bis 15 % ein. *Tipp:* Nutze Vergleichsportale, die die Kündigungsfrist automatisch berücksichtigen.
+- **Strom‑ und Gasvertrag:** Ein Anbieterwechsel spart oft 10 % bis 15 % ein. *Tipp:* Nutze Vergleichsportale, die Kündigungsfrist automatisch berücksichtigen.
 - **Versicherungspolicen:** Prüfe Kombi‑Rabatte bei deinen aktuellen Versicherern. Bündelung von KFZ‑, Haftpflicht‑ und Hausratversicherung kann 12 % reduzieren.
 - **Bankgebühren:** Nutze ein Girokonto ohne monatliche Grundgebühr für den Alltag. Viele Direktbanken bieten kostenlose Auslandsabhebungen – ein Plus von bis zu 30 € pro Jahr.
 - **Abos:** Kündige ungenutzte Streaming‑Dienste für ca. 15 € Ersparnis im Monat. Ein Jahres‑Abo‑Check spart im Schnitt 180 €.

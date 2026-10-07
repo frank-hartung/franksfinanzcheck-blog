@@ -141,19 +141,29 @@ So verfallen deine Bemühungen nicht nach wenigen Wochen.
 
 ## Häufige Fragen
 
-### Wie schnell zeigen sich die ersten Einsparungen? Erste Effekte erkennst du nach einem Monat auf deinem Stromzähler.
+### Wie schnell zeigen sich die ersten Einsparungen?
+
+Erste Effekte erkennst du nach einem Monat auf deinem Stromzähler.
 LED‑Lampen und konsequentes Ausschalten senken die Lastkurve sofort.
 
-### Lohnt sich der Austausch von alten Geräten sofort? Kühlschränke, die älter als zehn Jahre sind, zahlen sich meist beim Neukauf.
+### Lohnt sich der Austausch von alten Geräten sofort?
+
+Kühlschränke, die älter als zehn Jahre sind, zahlen sich meist beim Neukauf.
 Geräte der Klasse A benötigen nur ein Drittel des Stroms früherer Modelle.
 
-### Kann ich ohne Fachmann meine Heizungsanlage optimieren? Entlüften und Dichtungen anbringen erledigst du problemlos selbst.
+### Kann ich ohne Fachmann meine Heizungsanlage optimieren?
+
+Entlüften und Dichtungen anbringen erledigst du problemlos selbst.
 Für den hydraulischen Abgleich solltest du jedoch einen Profi beauftragen.
 
-### Wie oft sollte ich meine Strom‑Tarife überprüfen? Mindestens einmal pro Jahr.
+### Wie oft sollte ich meine Strom‑Tarife überprüfen?
+
+Mindestens einmal pro Jahr.
 Nutze neutrale Vergleichsportale, um den besten Preis für deine Region zu finden.
 
-### Was mache ich, wenn ich beim Jahres‑Check keine Einsparungen finde? Nutze den 4K‑Pfad und suche nach versteckten Stromfressern.
+### Was mache ich, wenn ich beim Jahres‑Check keine Einsparungen finde?
+
+Nutze den 4K‑Pfad und suche nach versteckten Stromfressern.
 Oft laufen alte Pumpen im Keller oder defekte Gefriertruhen unbemerkt.
 
 👉 **Sparend zuerst vergleichen:** [**→ Stromanbieter vergleichen & wechseln**](/go/strom/)

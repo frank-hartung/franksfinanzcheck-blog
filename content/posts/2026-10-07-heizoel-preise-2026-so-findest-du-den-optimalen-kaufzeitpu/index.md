@@ -127,19 +127,29 @@ Bestelle dein Heizöl, wenn die Preise mindestens vier Wochen unter dem 12‑Mon
 
 ## Häufige Fragen
 
-### Wie erkenne ich den Tiefpreis? Beobachte den wöchentlichen Durchschnitt über mindestens vier Wochen.
+### Wie erkenne ich den Tiefpreis?
+
+Beobachte den wöchentlichen Durchschnitt über mindestens vier Wochen.
 Sinkt der Preis kontinuierlich und liegt unter dem Jahresdurchschnitt, hast du den Tiefpunkt gefunden.
 
-### Kann ich den Preis für mehrere Jahre festschreiben? Einige Anbieter bieten mehrjährige Festpreise an, doch selten sind sie günstiger als ein gut getimter Einjahres‑Deal.
+### Kann ich den Preis für mehrere Jahre festschreiben?
+
+Einige Anbieter bieten mehrjährige Festpreise an, doch selten sind sie günstiger als ein gut getimter Einjahres‑Deal.
 Prüfe die Vertragsbedingungen genau.
 
-### Was ist, wenn mein Tank im Winter leer ist? Rufe sofort deinen Lieferanten an und frage nach einer Express‑Lieferung.
+### Was ist, wenn mein Tank im Winter leer ist?
+
+Rufe sofort deinen Lieferanten an und frage nach einer Express‑Lieferung.
 Sie kostet mehr, verhindert aber einen Notkauf zum Spitzenpreis.
 
-### Wie oft sollte ich den Heizöl‑Check durchführen? Mindestens einmal pro Quartal, idealerweise zu Beginn jedes neuen Heizungszyklus.
+### Wie oft sollte ich den Heizöl‑Check durchführen?
+
+Mindestens einmal pro Quartal, idealerweise zu Beginn jedes neuen Heizungszyklus.
 So behältst du die Preisentwicklung im Blick.
 
-### Welche Rolle spielt das 4‑K‑Prüfpfad‑Modell? Es strukturiert deinen Entscheidungsprozess: Du siehst die Kosten, rechnest die Konditionen, sicherst das Kündigungsfenster und hältst den Kurs.
+### Welche Rolle spielt das 4‑K‑Prüfpfad‑Modell?
+
+Es strukturiert deinen Entscheidungsprozess: Du siehst die Kosten, rechnest die Konditionen, sicherst das Kündigungsfenster und hältst den Kurs.
 Damit reduzierst du Fehlentscheidungen erheblich.
 
 ---

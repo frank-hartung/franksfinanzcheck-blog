@@ -46,8 +46,6 @@ kurzantwort: "Viele Banken stellen ihre Standardkarten auf kostenlose Debit-Visa
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.  
-
 Der aktuelle Zinswettbewerb führt zu immer kürzeren Aktionszeiträumen. Deshalb lohnt es sich, die Bedingungen genau zu prüfen, bevor du ein Tagesgeldkonto eröffnest.  
 
 ## Was ist passiert?

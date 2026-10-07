@@ -138,15 +138,25 @@ Ein kurzer Blick auf die Liste vor dem Start spart spätere Nachfragen.
 
 ## Häufige Fragen
 
-### Wie oft kann ich den Sparbetrag anpassen? Du kannst den Betrag jederzeit ändern, die meisten Broker erlauben eine Anpassung pro Quartal ohne Zusatzkosten.
+### Wie oft kann ich den Sparbetrag anpassen?
 
-### Gibt es ein Mindestvolumen für gebührenfreie Sparpläne? Einige Anbieter setzen ein Mindestvolumen von 100 € pro Monat, andere bieten komplett gebührenfrei – prüfe die Konditionen im Vorfeld.
+Du kannst den Betrag jederzeit ändern, die meisten Broker erlauben eine Anpassung pro Quartal ohne Zusatzkosten.
 
-### Was passiert, wenn mein Konto nicht genug Deckung hat? Der Broker storniert die Order und informiert dich per E‑Mail. Der fehlgeschlagene Betrag wird nicht belastet.
+### Gibt es ein Mindestvolumen für gebührenfreie Sparpläne?
 
-### Wie lange sollte ich den Sparplan laufen lassen? Langfristig denken zahlt sich aus. Ein Zeitraum von mindestens 10 Jahren nutzt den Cost‑Averaging‑Effekt optimal aus.
+Einige Anbieter setzen ein Mindestvolumen von 100 € pro Monat, andere bieten komplett gebührenfrei – prüfe die Konditionen im Vorfeld.
 
-### Kann ich den ETF wechseln, wenn er mir nicht mehr gefällt? Ja, du kannst den Sparplan kündigen und auf einen anderen ETF umstellen. Beachte dabei mögliche Ausführungs‑Spreads und Kündigungsfristen.
+### Was passiert, wenn mein Konto nicht genug Deckung hat?
+
+Der Broker storniert die Order und informiert dich per E‑Mail. Der fehlgeschlagene Betrag wird nicht belastet.
+
+### Wie lange sollte ich den Sparplan laufen lassen?
+
+Langfristig denken zahlt sich aus. Ein Zeitraum von mindestens 10 Jahren nutzt den Cost‑Averaging‑Effekt optimal aus.
+
+### Kann ich den ETF wechseln, wenn er mir nicht mehr gefällt?
+
+Ja, du kannst den Sparplan kündigen und auf einen anderen ETF umstellen. Beachte dabei mögliche Ausführungs‑Spreads und Kündigungsfristen.
 
 ---
 
