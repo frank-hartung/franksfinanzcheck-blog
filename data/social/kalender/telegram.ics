@@ -6,9 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
+UID:telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
+ die-feiertage:vergleich:2026-10-07@franksfinanzcheck.de
+DTSTAMP:20261007T115055Z
+DTSTART:20261007T160000Z
+DTEND:20261007T161500Z
+SUMMARY:Telegram (Kanal): Weihnachten Budget planen: Ohne Schulden dur
+ ch die Feiertage (vergleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten
+ -budget-planen-ohne-schulden-durch-die-feiertage/
+URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
+ lanen-ohne-schulden-durch-die-feiertage/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:telegram:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-
  wirklich:nutzen:2026-10-10@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+DTSTAMP:20261007T115055Z
 DTSTART:20261010T050000Z
 DTEND:20261010T051500Z
 SUMMARY:Telegram (Kanal): WLAN-Verstärker vs. Mesh-WLAN: Was brauchst 
@@ -23,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-som
  mer-schnaepp:frage:2026-10-11@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+DTSTAMP:20261007T115055Z
 DTSTART:20261011T050000Z
 DTEND:20261011T051500Z
 SUMMARY:Telegram (Kanal): Last Minute Urlaub: – So schnappst du dir da
@@ -38,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsai
  son-richtig:vergleich:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+DTSTAMP:20261007T115055Z
 DTSTART:20261017T050000Z
 DTEND:20261017T051500Z
 SUMMARY:Telegram (Kanal): Gasabschlag berechnen: So planst du die Heiz
@@ -51,93 +66,48 @@ URL:https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechne
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-
- die-feiertage:nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+UID:telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
+ sl-anschluss:zahl:2026-10-18@franksfinanzcheck.de
+DTSTAMP:20261007T115055Z
 DTSTART:20261018T050000Z
 DTEND:20261018T051500Z
-SUMMARY:Telegram (Kanal): Weihnachten Budget planen: Ohne Schulden dur
- ch die Feiertage (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-bu
- dget-planen-ohne-schulden-durch-die-feiertage/
-URL:https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-p
- lanen-ohne-schulden-durch-die-feiertage/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-d
- sl-anschluss:frage:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
-DTSTART:20261019T050000Z
-DTEND:20261019T051500Z
 SUMMARY:Telegram (Kanal): Preiswert surfen: So findest du den optimale
- n DSL‑Anschluss (frage)
-DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Telegram (Kanal)\nA
- rtikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfe
- n-so-findest-du-den-optimalen-dsl-anschluss/
+ n DSL‑Anschluss (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Telegram (Kanal)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen
+ -so-findest-du-den-optimalen-dsl-anschluss/
 URL:https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-
  findest-du-den-optimalen-dsl-anschluss/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
- tie-gas:vergleich:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
-DTSTART:20261020T050000Z
-DTEND:20261020T051500Z
-SUMMARY:Telegram (Kanal): Sicher heizen: So schützt dich eine Gaspreis
- garantie (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heiz
- en-so-schuetzt-dich-eine-preisgarantie-gas/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
- uetzt-dich-eine-preisgarantie-gas/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-20@fra
- nksfinanzcheck.de
-DTSTAMP:20261006T230741Z
-DTSTART:20261020T160000Z
-DTEND:20261020T161500Z
-SUMMARY:Telegram (Kanal): DSL-Wechselbonus sichern: So sparst du beim 
- Internetvertrag (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbon
- us-sichern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
- -tarife-fuer-2026:zahl:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+UID:telegram:2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit:vergl
+ eich:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261007T115055Z
 DTSTART:20261021T050000Z
 DTEND:20261021T051500Z
-SUMMARY:Telegram (Kanal): Preisgarantie Gas: So sicherst du günstige T
- arife (zahl)
-DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Telegram (Kanal)\nAr
- tikel: https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-ga
- s-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
- -sicherst-du-dir-guenstige-tarife-fuer-2026/
+SUMMARY:Telegram (Kanal): 7 Gewohnheiten für finanzielle Freiheit (ver
+ gleich)
+DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
+ )\nArtikel: https://franksfinanzcheck.de/posts/2026-09-21-7-gewohnhei
+ ten-fuer-finanzielle-freiheit/
+URL:https://franksfinanzcheck.de/posts/2026-09-21-7-gewohnheiten-fuer-
+ finanzielle-freiheit/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
- bieterwechsel:vergleich:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261006T230741Z
+UID:telegram:2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-a
+ endert:zahl:2026-10-21@franksfinanzcheck.de
+DTSTAMP:20261007T115055Z
 DTSTART:20261021T160000Z
 DTEND:20261021T161500Z
-SUMMARY:Telegram (Kanal): Internet & DSL wechseln: Praxis-Tipps – High
- speed Internet (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-08-14-internet-ds
- l-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechsel
- n-praxis-tipps-fuer-den-anbieterwechsel/
+SUMMARY:Telegram (Kanal): Internet & DSL-Update: Was sich jetzt für di
+ ch ändert (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Telegram (Kanal)\nAr
+ tikel: https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-upd
+ ate-was-sich-jetzt-fuer-dich-aendert/
+URL:https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-
+ was-sich-jetzt-fuer-dich-aendert/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

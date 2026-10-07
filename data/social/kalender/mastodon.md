@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 07.10.2026 01:07 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.10.2026 13:50 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,14 @@
 
 ## Kommende Beiträge
 
-### Mi, 07. Oktober 2026
-- **07:30** ⏳ Budget app 2026 so beherrschst du deine ausgaben ohne auf — _frage_ · Launch
-- **11:30** ⏳ Oekostrom anbieter wechseln clever sparen und gruen bleiben — _zitat_ · Launch
+### Do, 08. Oktober 2026
+- **07:30** ⏳ 7 Gewohnheiten für finanzielle Freiheit — _thread_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **11:30** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
+### Fr, 09. Oktober 2026
+- **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _mythos_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
 
 ## Zuletzt veröffentlicht
 
@@ -33,6 +38,8 @@
 
 - 🚫 30.09. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 06.10. 11:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
+- 🚫 07.10. 07:30 · Budget app 2026 so beherrschst du deine ausgaben ohne auf · Artikel nicht mehr im Bestand
+- 🚫 07.10. 11:30 · Oekostrom anbieter wechseln clever sparen und gruen bleiben · Artikel nicht mehr im Bestand
 
 ---
 *Erzeugt von `scripts/social_calendar.py` aus dem versionierten Plan `data/social/schedule.yaml`. Der Plan selbst kommt vom Social-Autopilot (`scripts/social_studio.py`). Regeln: `data/social/channels.yaml`.*
