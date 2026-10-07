@@ -218,6 +218,18 @@ GATE_BEFUNDE: tuple[dict, ...] = (
      "grund": ("Flesch ≥ 60 hebt der Lesbarkeits-Heiler (Stufe A "
                "deterministisch, Stufe B KI auf die Silben je Wort, Tor "
                "T1–T4); das Polish der Kette bleibt der zweite Hebel.")},
+    # REPARATUR 07.10.2026 (BOT-WATCHDOG #614): Die harte R-Klasse
+    # (R7/R11–R16, R5) stand als „manuell reparieren“ in den Befunden –
+    # obwohl sie seit dem Politur-Heiler bzw. dem Absatz-Splitter geheilt
+    # wird (beide in der Kette, beide mit grünem Wirkungsnachweis). Das
+    # Muster ist bewusst ohne Umlaut geschrieben: Der Befund-Text kommt aus
+    # JSON und darf nicht an der Normalisierung von „ä" scheitern.
+    {"muster": "textverst", "klasse": HEILBAR,
+     "heiler": ("politur_heiler.py", "r5_absatz_splitter.py"),
+     "grund": ("Harte Textverständnis-Funde (R7/R11–R16) heilt der "
+               "Politur-Heiler, R5-Absätze der Splitter – beide mit "
+               "Wirkungsprobe in der Kette. „manuell reparieren“ beschreibt "
+               "die Lücke vor der Reparatur, nicht das Urteil über den Text.")},
     {"muster": "quality-score", "klasse": HEILBAR,
      "heiler": ("profi_polish.py", "spellcheck.py", "check_length.py"),
      "grund": ("Der Score ist die Summe heilbarer Teile (Rechtschreibung, "

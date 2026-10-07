@@ -349,6 +349,16 @@ HEALER_CHAIN = [
     # Flesch-Heilung also blockiert. Deckung + Wirkung erzwingt
     # reserve_healer_coverage.py (PROBEN_PFLICHT), die Governance-Regel C25.
     ("politur_heiler.py", ["--fix"], "file"),
+    # REPARATUR 07.10.2026 (BOT-WATCHDOG-614), zweite Lage: Der Satz-Heiler
+    # heilt die Lesbarkeits-Klasse satzweise mit der KI. Er steht VOR dem
+    # Lesbarkeits-Heiler, weil dessen Stufe A die Schwelle nachweislich nicht
+    # erreicht (58,1–59,9 < 60) und seine Stufe B (Ganztext) an T4 scheitert:
+    # Eine Modellantwort müsste 74 Zahlen, 7 Tabellenzeilen und 21
+    # Überschriften byte-genau reproduzieren - deshalb stand der Vorrat seit
+    # Tagen bei 2/6. Hier bekommt die KI nur Sätze ohne Zahlen und Markup,
+    # das Ganztext-Tor entscheidet danach unverändert. Deckung + Wirkung:
+    # reserve_healer_coverage.WIRKUNGS_PROBEN (C25).
+    ("satz_heiler.py", ["--fix"], "file"),
     ("lesbarkeit_heiler.py", ["--fix"], "file"),
     # REPARATUR 05.10.2026 (WF-B594, Issue #594): Der Internal-Linker fehlte
     # in dieser Kette – als EINZIGER Blocker der Triage ohne jeden Heiler.

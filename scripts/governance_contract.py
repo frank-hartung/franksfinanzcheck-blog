@@ -133,6 +133,16 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # die niemand verlangt, fuehrt irgendwann niemand aus - deshalb steht
           # sein Selbsttest hier im vertraglichen Minimum (C6).
           "politur_heiler.py",
+          # Satz-Heiler (07.10.2026, BOT-WATCHDOG #614): Der Lesbarkeits-
+          # Heiler kann die Schwelle (< 60) mit Stufe A nicht erreichen und
+          # mit Stufe B (Ganztext) nicht schreiben - die Klasse war damit
+          # unheilbar gebaut, und genau sie hielt den Reserve-Vorrat bei 2/6.
+          # Der Satz-Heiler gibt der KI nur Sätze ohne Zahlen/Markup und
+          # laesst das Ganztext-Tor T1-T4 unveraendert entscheiden; seine
+          # Wirkung ist Maschinenvertrag (`--wirkungsprobe`, C25). Damit gilt
+          # auch fuer ihn: eine Wache, die niemand verlangt, fuehrt irgendwann
+          # niemand aus - Selbsttest ins vertragliche Minimum (C6).
+          "satz_heiler.py",
           # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
           # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
           # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam

@@ -1,0 +1,157 @@
+# ============================================================
+#  Reserve-Nachweis für #614 (Probe auf EINEM Ref, kein main-Eingriff)
+#  ------------------------------------------------------------
+#  WARUM (BOT-WATCHDOG #614, 07.10.2026):
+#  Der Vorfall war keine Content-Panne, sondern eine Politik-Panne:
+#    * `reserve_quarantine` musterte nach zwei Läufen mit demselben Befund
+#      aus, ohne die KLASSE des Befunds zu fragen. Am 07.10.2026 standen
+#      zehn Kandidaten (der halbe Vorrat) auf heilbaren Befunden – ein Lauf
+#      nahm zehn Fahnen, das Zertifikat fiel auf 2/6 (Pool 2).
+#    * Ausgemusterte Kandidaten konnten nie zurückkehren, auch nicht, als
+#      ihre Befund-Klasse längst einen Heiler mit Wirkungsnachweis hatte.
+#  Beides ist repariert (Klassen-Tor + Rückholung mit Beweis). Dieser Lauf
+#  beweist die Reparatur mit den ECHTEN Gates (hugo, hunspell, KI-Stufen der
+#  Heiler-Kette) – dieselben Schritte wie `content-reserve.yml`, aber:
+#
+#    1. Er läuft per `workflow_dispatch` auf JEDEM Ref und schiebt seinen
+#       Nachweis ausschließlich auf den Ref, der ihn gestartet hat
+#       (`BRANCH=$GITHUB_REF_NAME`) – `main` bleibt unberührt. Damit ist die
+#       Reparatur VOR dem Merge beweisbar.
+#    2. Er fährt den Janitor (Stufe 0a) NICHT: Eine Probefahrt darf keine
+#       Kandidaten löschen. Der Bestands-Wächter (Stufe 0b) schon – er heilt
+#       verlorene Fahnen und holt heilbare Ausgemusterte zurück.
+#    3. Das Zertifikat wird mit der Produktions-Latte (`RESERVE_TARGET`)
+#       gemessen, damit es mit dem `main`-Lauf vergleichbar ist. Die
+#       Ticket-Schwelle (≥ 4, Akzeptanz #614) wird am Ende SEPARAT geprüft.
+# ============================================================
+name: Reserve-Nachweis #614 (Probe auf einem Ref)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: reserve-nachweis-614
+  cancel-in-progress: false
+
+jobs:
+  nachweis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      # Produktions-Latte, nicht Ticket-Latte: Das Zertifikat dieses Laufs
+      # soll mit dem echten content-reserve.yml-Zertifikat vergleichbar sein.
+      RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -q pyyaml feedparser cryptography pillow pillow-avif-plugin fonttools brotli
+      # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
+      - uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
+
+      # Der Beweis der Reparatur selbst – ohne Netz, mit den zehn
+      # Original-Befunden des Vorfalls als Fixture (Wirkungsnachweis, C25).
+      - name: Vorratsschutz beweisen (#614)
+        run: python3 scripts/reserve_healer_coverage.py --vorratsschutz
+
+      # Stufe 0b: verlorene Fahnen heilen – und ausgemusterte Kandidaten
+      # ZURÜCKHOLEN, wenn ihre Befund-Klasse einen Wirkungsnachweis hat.
+      - name: Stufe 0b – Bestands-Wächter (Fahnen + Rückholung)
+        continue-on-error: true
+        run: python3 scripts/reserve_custody.py --heal
+
+      # Stufe 2: die echte Heiler-Kette MIT KI (Satz-Heiler + Lesbarkeit).
+      - name: Stufe 2 – Kandidaten veredeln (Heiler-Kette, nur Pool)
+        id: finish
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+        run: python3 scripts/reserve_finisher.py --finish
+
+      # Stufe 3: dieselben Gates wie die Produktion (hugo, hunspell,
+      # publish_gate, Lesbarkeit, Textverständnis, Länge).
+      - name: Stufe 3 – Reife durch Produktions-Gates beweisen
+        id: readiness
+        continue-on-error: true
+        run: python3 scripts/reserve_readiness.py
+
+      - name: Zertifikat drucken (maschinenlesbar + Tabelle)
+        if: ${{ !cancelled() }}
+        run: |
+          python3 - <<'PY' | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}"
+          import json, pathlib, os
+          p = pathlib.Path("data/reserve-readiness.json")
+          if not p.exists():
+              print("⚠ Kein Zertifikat entstanden – der Lauf ist nicht bewertbar.")
+              raise SystemExit(0)
+          d = json.loads(p.read_text())
+          print(f"## Reserve-Nachweis #614 (Ref `{os.environ.get('GITHUB_REF_NAME', '?')}`)")
+          print()
+          print(f"**Ziel (Produktions-Latte):** {d['target']} · "
+                f"**bereit:** {d['ready']} · **Pool:** {d.get('pool_size')} · "
+                f"**Zertifikat:** {d.get('generated_at')}")
+          print()
+          print("| Kandidat | bereit | Score | Grund |")
+          print("|---|---|---|---|")
+          for c in d["candidates"]:
+              grund = (c.get("reason") or "–").replace("|", "/")[:150]
+              print(f"| `{c['slug'][:60]}` | {'✅' if c['ready'] else '⛔'} "
+                    f"| {c.get('score')} | {grund} |")
+          for feld in ("geschont", "blocked"):
+              if d.get(feld):
+                  print()
+                  print(f"**{feld}:**")
+                  for e in d[feld]:
+                      print(f"- `{e['slug'][:60]}` · {e.get('klasse', '')} "
+                            f"· {e.get('hits', '')} · {(e.get('grund') or '')[:120]}")
+          PY
+
+      - name: Nachweis sichern (nur auf den eigenen Ref)
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git status --porcelain | head -40
+          python3 scripts/reserve_stage_guard.py
+          git diff --cached --stat | tail -15
+          if ! git diff --cached --quiet; then
+            git commit -m "content: Reserve-Nachweis #614 auf ${GITHUB_REF_NAME} (Rückholung + Heiler-Kette)"
+            if ! BRANCH="${GITHUB_REF_NAME}" scripts/git_sync.sh --push-only; then
+              echo "::error::Push des Nachweises auf ${GITHUB_REF_NAME} fehlgeschlagen."
+              exit 1
+            fi
+          else
+            echo "Keine Änderungen am Pool – nichts zu committen."
+          fi
+
+      # ================= AKZEPTANZ DES TICKETS #614 =================
+      - name: Akzeptanz #614 – mindestens 4 zertifizierte Kandidaten
+        if: ${{ !cancelled() }}
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          d = json.loads(pathlib.Path("data/reserve-readiness.json").read_text())
+          bereit, ziel, pool = d["ready"], d["target"], d.get("pool_size")
+          print(f"Zertifikat: {bereit}/{ziel} bereit (Pool {pool}) · "
+                f"Ticket #614 verlangt ≥ 4")
+          if bereit < 4:
+              print("::error::Ticket #614 NICHT erfüllt – weniger als 4 "
+                    "zertifizierte Kandidaten.")
+              sys.exit(1)
+          print(f"✅ Ticket #614 erfüllt: {bereit} zertifizierte Kandidaten.")
+          PY

@@ -227,9 +227,10 @@ def main():
     # RESERVE_QUARANTINE_HITS Läufen mit demselben Fund verlässt er den Pool
     # (bleibt als BLOCKIERT im Bestand) und gibt den Platz für Nachschub frei.
     blocked = []
+    geschont: list[dict] = []
     try:
         import reserve_quarantine as rq
-        blocked = rq.record(rows)
+        blocked = rq.record(rows, geschont_out=geschont)
     except Exception as exc:  # noqa: BLE001 – Quarantäne darf nie blockieren
         print(f"⚠ Reserve-Quarantäne nicht ausführbar: {exc}")
     if blocked:
@@ -240,6 +241,16 @@ def main():
         for b in blocked:
             print(f"   - {b['slug']}: {b['grund']} "
                   f"({b['hits']} Läufe mit demselben Fund)")
+
+    if geschont:
+        # Reparatur 07.10.2026 (#614): Die Ausmusterung war unsichtbar. Wer den
+        # Pool kleiner macht, muss sagen, wen er gehalten hat und warum – sonst
+        # erklärt niemand dem Watchdog, warum der Vorrat schrumpft.
+        print("\n🌱 Ausmusterung geschont (Befund-Klasse ist heilbar, Fahne "
+              f"bleibt im Pool): {len(geschont)} Kandidat(en)")
+        for g in geschont:
+            print(f"   - {g['slug']}: [{g['klasse']}] {g['hits']} Lauf/Läufe · "
+                  f"{(g.get('heiler') and ', '.join(g['heiler'])) or 'Heiler –'}")
 
     rows = prune_stale_rows(rows)
     goal = target()
@@ -261,6 +272,12 @@ def main():
         # nicht „die Produktion ist eingeschlafen“.
         report["blocked"] = [{"slug": b["slug"], "grund": b["grund"],
                               "hits": b["hits"]} for b in blocked]
+    if geschont:
+        # Die zweite Hälfte derselben Erklärung (#614): Ein gehaltener
+        # Kandidat ist kein Zufall, sondern eine Klassen-Entscheidung.
+        report["geschont"] = [{"slug": g["slug"], "klasse": g["klasse"],
+                               "hits": g["hits"], "heiler": g["heiler"],
+                               "warum": g["warum"]} for g in geschont]
     (ROOT / "data" / "reserve-readiness.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")

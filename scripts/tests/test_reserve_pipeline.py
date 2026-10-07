@@ -642,6 +642,13 @@ class QuarantaeneTests(unittest.TestCase):
 
     FUND = ("Affiliate-Link-Integrität nicht bestanden: Kein vollständiger "
             "Markdown-Link in CTA-Zeile ('Spar-Tipp zwischendurch')")
+    # REPARATUR 07.10.2026 (#614): Diese Klasse prüft die Quarantäne-MECHANIK
+    # (Schwelle, Lauf-Kennung, Staging-Eigentum). Dafür braucht sie einen
+    # Befund, der ausmustern DARF – seit dem Klassen-Tor ist das nur noch
+    # Unheilbares (Torso/Dublette). Der Affiliate-Fund oben ist heilbar und
+    # wird geschont; die Schon-Seite steht in test_reserve_vorratsschutz.py.
+    TORSO = ("Dublette: identischer Inhalt zu "
+             "2026-09-01-energie-update-tarife (0.97)")
 
     def setUp(self):
         sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -659,7 +666,8 @@ class QuarantaeneTests(unittest.TestCase):
             encoding="utf-8")
 
     def test_pool_verlaesst_den_zaehler_nach_schwelle(self):
-        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": self.TORSO}]
         self.assertEqual(
             self.rq.record(rows, self.state, self.posts, run_key="run:1"), [])
         self.assertTrue(self.rp.reserve_drafts(self.posts),
@@ -672,7 +680,8 @@ class QuarantaeneTests(unittest.TestCase):
 
     def test_mehrere_zertifizierungen_eines_laufs_zaehlen_einmal(self):
         """#349: Eine Nacht zertifiziert mehrfach (Stufe 3 + Konvergenz)."""
-        rows = [{"slug": "2026-09-15-block", "ready": False, "reason": self.FUND}]
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": self.TORSO}]
         for _ in range(3):          # derselbe Workflow-Lauf
             self.assertEqual(
                 self.rq.record(rows, self.state, self.posts, run_key="run:1"),
@@ -685,6 +694,25 @@ class QuarantaeneTests(unittest.TestCase):
         # Zweiter Lauf mit demselben Fund -> Schwelle erreicht, Quarantäne.
         blocked = self.rq.record(rows, self.state, self.posts, run_key="run:2")
         self.assertEqual([b["slug"] for b in blocked], ["2026-09-15-block"])
+
+    def test_heilbarer_fund_wird_geschont_statt_ausgemustert(self):
+        """#614: Sechs der zehn Vorfall-Kandidaten hingen am Lesbarkeits-Gate.
+
+        Ein Befund, dessen Klasse einen Heiler mit Wirkungsnachweis in der
+        Kette hat, darf die Fahne nicht kosten – sonst leert ein Lauf den
+        halben Vorrat (real: 12 -> 2 am 07.10.2026).
+        """
+        rows = [{"slug": "2026-09-15-block", "ready": False,
+                 "reason": ("Lesbarkeits-Gate nicht bestanden: Flesch 58.0 "
+                            "(Mindestwert 60)")}]
+        for lauf in ("run:1", "run:2", "run:3"):
+            self.assertEqual(
+                self.rq.record(rows, self.state, self.posts, run_key=lauf), [])
+        self.assertTrue(self.rp.reserve_drafts(self.posts),
+                        "heilbarer Befund darf den Kandidaten nicht vertreiben")
+        self.assertTrue(
+            self.rq.geschonte(self.state),
+            "die Schonung muss begründet im Zustand stehen")
 
     def test_lauf_kennung_kommt_aus_der_umgebung(self):
         import os
@@ -719,12 +747,12 @@ class QuarantaeneTests(unittest.TestCase):
         """
         self.assertEqual(
             self.rq.record([{"slug": "2026-09-15-block", "ready": False,
-                             "reason": self.FUND}], self.state, self.posts,
+                             "reason": self.TORSO}], self.state, self.posts,
                            run_key="run:1"), [])
         self.assertEqual(
             [b["slug"] for b in self.rq.record(
                 [{"slug": "2026-09-15-block", "ready": False,
-                  "reason": self.FUND}], self.state, self.posts,
+                  "reason": self.TORSO}], self.state, self.posts,
                 run_key="run:2")], ["2026-09-15-block"])
         index = self.posts / "2026-09-15-block" / "index.md"
         self.assertIn("reserve_blocked:", index.read_text(encoding="utf-8"))

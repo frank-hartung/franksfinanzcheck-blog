@@ -44,6 +44,29 @@ Run 34967470666):
   über Läufe hinweg gültig). Jeder Eingriff wird zusätzlich nach
   data/audit/<datum>.jsonl geschrieben, falls audit_log verfügbar ist.
 
+REPARATUR 07.10.2026 (BOT-WATCHDOG #614, Run 37645894042) – DIE FAHNE FÄLLT
+NUR NOCH FÜR UNHEILBARES:
+  Die Regel „zwei Läufe, dann ausmustern“ zählte bis hierher NUR die Zahl der
+  Läufe – sie fragte nie, WELCHER Fund da stand. Am 07.10.2026 standen zehn
+  Kandidaten (der halbe Vorrat) auf demselben Befund „Lesbarkeits-Gate nicht
+  bestanden / quality-score / Zeichenlänge“ – allesamt Klassen, die
+  `reserve_blocker_klassen` als HEILBAR führt und für die die Kette Heiler
+  fährt. Ein einziger Lauf nahm damit zehn Fahnen und ließ den Pool von 12 auf
+  2 fallen; das Zertifikat stand bei 2/6, die Watchdog-Meldung blieb offen,
+  und der Nachschub konnte die Lücke nicht schließen (Themen-Ledger endlich).
+  Genau das ist die Klasse, gegen die #614 existiert: Die Automatik bestraffte
+  den Vorrat für eine Reparatur, die sie selbst noch vor sich hatte.
+
+  Deshalb entscheidet jetzt die SSOT (`reserve_blocker_klassen.GATE_BEFUNDE`),
+  wer ausgemustert werden darf:
+
+      AUSGEMUSTERT wird nur, was als UNHEILBAR gilt (Torso, Dublette,
+      Quelltext-Defekt) – dort ist die Fahne eine Last ohne Nutzen.
+      GESCHONT (Fahne bleibt) wird alles, was heilbar, Menschensache,
+      Werkzeugfehler oder UNBEKANNT ist. Unbekannt heißt fail-closed:
+      Wer nicht beweisen kann, dass niemand den Befund heilen kann, nimmt
+      keine Fahne – er meldet die Lücke (Deckungswache, C25).
+
 MODI:
     python3 scripts/reserve_quarantine.py                 # Zustand melden
     python3 scripts/reserve_quarantine.py --status --json # maschinenlesbar
@@ -65,6 +88,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
+import reserve_blocker_klassen as bk  # noqa: E402  – SSOT: heilbar oder nicht?
 
 STATE = ROOT / "data" / "reserve-quarantine.json"
 POSTS_DIR = ROOT / "content" / "posts"
@@ -178,7 +202,8 @@ def block_candidate(slug: str, grund: str, posts_dir: Path = POSTS_DIR) -> str |
 
 def record(rows: list[dict], state_path: Path | None = None,
            posts_dir: Path | None = None, *, apply: bool = True,
-           run_key: str | None = None) -> list[dict]:
+           run_key: str | None = None,
+           geschont_out: list[dict] | None = None) -> list[dict]:
     """Zählt Funde je Kandidat und mustert Reparatur-resistenten aus.
 
     `rows` ist die Kandidatenliste der Zertifizierung (data/reserve-readiness
@@ -202,6 +227,7 @@ def record(rows: list[dict], state_path: Path | None = None,
     limit = hits_limit()
     state = load_state(state_path)
     blocked: list[dict] = []
+    geschont: list[dict] = []
     seen = set()
 
     for row in rows:
@@ -234,6 +260,26 @@ def record(rows: list[dict], state_path: Path | None = None,
         state[slug] = eintrag
         if eintrag["hits"] < limit:
             continue
+        # ---- Klassen-Tor (Reparatur 07.10.2026, #614) --------------------
+        # Nicht die Zahl der Läufe entscheidet, sondern die Klasse des
+        # Befunds. Nur Unheilbares verliert die Fahne; alles andere bleibt
+        # Material für die Heiler-Kette (siehe Kopf-Doku).
+        loeschbar, bewertung = bk.gate_befund_loeschbar(grund)
+        eintrag["klasse"] = bewertung["klasse"]
+        if not loeschbar:
+            eintrag["geschont"] = True
+            eintrag["heiler"] = list(bewertung["heiler"])
+            state[slug] = eintrag
+            geschont.append({"slug": slug, "grund": grund,
+                             "hits": eintrag["hits"],
+                             "klasse": bewertung["klasse"],
+                             "heiler": list(bewertung["heiler"]),
+                             "warum": bewertung["grund"]})
+            print(f"🌱 Quarantäne geschont: {slug} – Klasse "
+                  f"„{bewertung['klasse']}“ ({eintrag['hits']}/{limit} Läufe), "
+                  f"Fahne bleibt. Heiler: "
+                  f"{', '.join(bewertung['heiler']) or '–'}")
+            continue
         if apply:
             gesetzt = block_candidate(slug, grund, posts_dir)
             if gesetzt is None:
@@ -247,7 +293,20 @@ def record(rows: list[dict], state_path: Path | None = None,
 
     if apply:
         save_state(state, state_path)
+    if geschont_out is not None:
+        geschont_out.extend(geschont)
     return blocked
+
+
+def geschonte(state_path: Path | None = None) -> list[dict]:
+    """Geschonte Kandidaten (Fahne blieb, Klasse ist heilbar) – für Berichte.
+
+    Der Zertifikat-Bericht muss erklären können, WER im Pool gehalten wurde
+    und warum. Ohne diese Liste wäre ein voller Pool nur eine Zahl.
+    """
+    state = load_state(Path(state_path) if state_path else STATE)
+    return [{"slug": slug, **eintrag} for slug, eintrag in sorted(state.items())
+            if eintrag.get("geschont")]
 
 
 def status(state_path: Path | None = None, as_json: bool = False) -> int:
@@ -262,8 +321,9 @@ def status(state_path: Path | None = None, as_json: bool = False) -> int:
     print(f"🧱 Reserve-Quarantäne: {len(state)} Kandidat(en) mit offenen "
           f"Zählern (Grenze {hits_limit()} Läufe mit demselben Fund):")
     for slug, e in sorted(state.items()):
-        print(f"   - {slug}: {e.get('hits')}/{hits_limit()} · "
-              f"{(e.get('grund') or '')[:120]}")
+        marke = "🌱 geschont" if e.get("geschont") else "🧱 ausgemustert"
+        print(f"   - {slug}: {marke} · {e.get('hits')}/{hits_limit()} · "
+              f"[{e.get('klasse') or '?'}] {(e.get('grund') or '')[:100]}")
     return 0
 
 
@@ -308,12 +368,23 @@ def run_selftest() -> int:
         if int(load_state(state_path)["2026-09-15-block"]["hits"]) != 1:
             fehler.append("mehrere Zertifizierungen eines Laufs zählen mehrfach")
 
-        # 2) Zweiter LAUF mit demselben Fund (andere Messwerte -> gleiche
-        #    Signatur) -> Quarantäne greift.
-        rows[0]["reason"] = ("quality-score 0.84 < 0.85 (schwach: spelling "
-                             "0.52, typography 0.80)")
+        # 2) Zweiter LAUF mit demselben UNHEILBAREN Fund (andere Messwerte ->
+        #    gleiche Signatur) -> Quarantäne greift. Der Fund ist bewusst ein
+        #    Torso (Dublette): Seit der Reparatur vom 07.10.2026 (#614) darf
+        #    NUR Unheilbares die Fahne verlieren – vorher entschied allein die
+        #    Zahl der Läufe, und zehn heilbare Kandidaten verloren an einem
+        #    Tag ihre Fahne (Pool 12 -> 2).
+        rows[0]["reason"] = ("Dublette: identischer Inhalt zu "
+                             "2026-09-01-energie-update-tarife (0.97)")
+        # 2a) Ein NEUER Fund (andere Signatur) beginnt bei null – der erste
+        #     Lauf mit dem Torso blockiert noch nicht.
+        sofort = record(rows, state_path, posts, apply=True, run_key="run:2")
+        if sofort:
+            fehler.append(f"neue Signatur darf nicht sofort blockieren: {sofort}")
+        # 2b) Derselbe Torso im nächsten Lauf -> die Fahne fällt (hier ist die
+        #     Ausmusterung richtig: niemand kann eine Dublette heilen).
         blocked = record(rows, state_path, posts, apply=True,
-                         run_key="run:2")
+                         run_key="run:3")
         if len(blocked) != 1 or blocked[0]["slug"] != "2026-09-15-block":
             fehler.append(f"zweiter gleicher Fund muss blockieren: {blocked}")
         text = (posts / "2026-09-15-block" / "index.md").read_text("utf-8")
@@ -326,12 +397,64 @@ def run_selftest() -> int:
         if text.startswith("---\n") is False or "\n---\n" not in text:
             fehler.append("Frontmatter-Grenzen müssen intakt bleiben")
 
+        # 2b) DER VORFALL ALS VERTRAG: Die zehn Original-Befunde aus dem Lauf
+        #     37645894042 dürfen nie wieder eine Fahne kosten. Jeder Befund
+        #     zählt in zwei Läufen auf die Schwelle – der Kandidat bleibt im
+        #     Pool, und die Schonung ist begründet (Klasse + Heiler).
+        import reserve_blocker_klassen as bk
+        (posts / "2026-09-15-heilbar").mkdir(parents=True, exist_ok=True)
+        heilbar = posts / "2026-09-15-heilbar" / "index.md"
+        heilbar.write_text(
+            '---\ntitle: "Heilbar"\ndate: 2026-09-15\ndraft: true\n'
+            'reserve: true\npillar: "frugalismus"\n---\n\nText.\n',
+            encoding="utf-8")
+        vorfall = [
+            ("Lesbarkeits-Gate nicht bestanden: Flesch 58.0 (Mindestwert 60) – "
+             "ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt "
+             "nach unten (#585)"),
+            ("Lesbarkeits-Gate nicht bestanden: Lesbarkeits-Score 70/100 "
+             "(Mindestwert 75): Flesch 52 (Ziel ≥ 60); 2 Absätze > 4 Sätze; "
+             "9 Passiv-Formulierungen; Flesch 52.3 (Mindestwert 60)"),
+            "Zeichenlänge (check_length.py) nicht bestanden",
+            ("quality-score 0.839 < 0.85 (schwach: structure 0.70, readability "
+             "0.75, typography 0.84)"),
+            ("Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: "
+             "Politur-Ruine „SATZ:“ – Überrest eines automatisierten "
+             "Politur-Laufs, manuell reparieren"),
+        ]
+        for i, grund in enumerate(vorfall):
+            p_state = root / f"zustand-{i}.json"
+            geschont_je_fall = []
+            for lauf in ("run:1", "run:2"):
+                gemeldet = record([{"slug": "2026-09-15-heilbar",
+                                    "ready": False, "reason": grund}],
+                                  p_state, posts, apply=True, run_key=lauf,
+                                  geschont_out=geschont_je_fall)
+                if gemeldet:
+                    fehler.append(f"heilbarer Fund wurde ausgemustert: "
+                                  f"{grund[:60]} -> {gemeldet}")
+            text_h = heilbar.read_text(encoding="utf-8")
+            if "reserve: true" not in text_h or "reserve_blocked" in text_h:
+                fehler.append(f"Fahne ging bei heilbarem Fund verloren: "
+                              f"{grund[:60]}")
+            if not geschont_je_fall:
+                fehler.append(f"Schonung nicht begründet gemeldet: "
+                              f"{grund[:60]}")
+            else:
+                bewertet = bk.gate_befund_klasse(grund)
+                if bewertet["klasse"] != bk.HEILBAR:
+                    fehler.append(f"Vorfall-Befund nicht als heilbar erkannt: "
+                                  f"{grund[:60]} -> {bewertet['klasse']}")
+            if int(load_state(p_state)["2026-09-15-heilbar"]["hits"]) != 2:
+                fehler.append("geschonter Kandidat muss weiter zählen "
+                              "(Sichtbarkeit), nicht verstummen")
+
         # 3) Idempotenz: Derselbe Fund in einem dritten Lauf – der Kandidat ist
         #    bereits ausgemustert, also kein zweiter Eingriff, kein Churn.
         before = text
         blocked2 = record([{"slug": "2026-09-15-block", "ready": False,
                             "reason": rows[0]["reason"]}], state_path, posts,
-                          apply=True, run_key="run:3")
+                          apply=True, run_key="run:4")
         if blocked2:
             fehler.append(f"bereits blockiert darf nicht erneut melden: {blocked2}")
         if (posts / "2026-09-15-block" / "index.md").read_text("utf-8") != before:
@@ -390,7 +513,9 @@ def run_selftest() -> int:
         return 2
     print("✅ Selbsttest reserve_quarantine: Zähler je LAUF (#349), Schwelle, "
           "Idempotenz, Heilung, Werkzeugfehler-Ausnahme, Lauf-Kennung, "
-          "Signatur-Bildung.")
+          "Signatur-Bildung – und seit #614 das Klassen-Tor: Die zehn "
+          "Original-Befunde des Vorfalls dürfen keine Fahne kosten, während "
+          "unheilbare Torsi weiterhin ausgemustert werden.")
     return 0
 
 
