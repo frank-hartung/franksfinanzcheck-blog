@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T16:54:29.637979+00:00",
-  "head": "8290391",
+  "signed_at": "2026-10-07T17:25:06.447105+00:00",
+  "head": "3e04044",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -52,322 +52,106 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
-  "audit_start_sha256": "5e538b2ea4f3dd87d80c48b788fcb63f5853eeae9895a3ed76f1cbade4a8f1eb",
+  "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
-      "date": "2026-10-03",
+      "date": "2026-10-07",
       "art": "set-current",
-      "head": "f1a3c6f",
+      "head": "3e04044",
       "geaendert": [
+        "assets/css/extended/custom.css",
+        "data/brand_lock.yaml",
         "hugo.toml",
-        "layouts/_partials/header.html"
+        "layouts/_default/_markup/render-link.html",
+        "layouts/_partials/affiliate_anchor_attrs.html",
+        "layouts/_partials/affiliate_ziele_data.html",
+        "layouts/_partials/cover.html",
+        "layouts/_partials/extend_footer.html",
+        "layouts/_partials/extend_post_content.html",
+        "layouts/_partials/head.html",
+        "layouts/_partials/header.html",
+        "layouts/_partials/home_clusters.html",
+        "layouts/_partials/pillar_box.html",
+        "layouts/index.sw.js",
+        "layouts/pillar/list.html",
+        "layouts/pillar/single.html",
+        "layouts/robots.txt",
+        "layouts/shortcodes/einspartabelle.html",
+        "layouts/shortcodes/tarifvergleich.html",
+        "scripts/affiliate_integrity_gate.py",
+        "scripts/affiliate_marketer.py",
+        "scripts/bake_brand.py",
+        "scripts/blog_doctor.py",
+        "scripts/brand_guard.py",
+        "scripts/casing_guard.py",
+        "scripts/check24_links.yaml",
+        "scripts/check_covers.py",
+        "scripts/content_audit.py",
+        "scripts/fazit_schmiede.py",
+        "scripts/generate_covers.py",
+        "scripts/hardcases_guard.py",
+        "scripts/internal_linker.py",
+        "scripts/lektor_guard.py",
+        "scripts/lesbarkeit_heiler.py",
+        "scripts/link_density_guard.py",
+        "scripts/plagiat_guard.py",
+        "scripts/politur_ruine_heiler.py",
+        "scripts/publikations_vertrag.py",
+        "scripts/redaktions_standard.py",
+        "scripts/shortcode_guard.py",
+        "scripts/stil_guard.py",
+        "scripts/tag_casing.py",
+        "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt",
+        "static/apple-touch-icon.png",
+        "static/favicon.svg",
+        "static/images/brand/logo-light.svg",
+        "static/images/brand/logo.svg"
       ],
       "herkunft": [
         {
           "pfad": "hugo.toml",
           "klasse": "kritisch",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "f1a3c6f",
-              "datum": "2026-10-03",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
-          "pfad": "layouts/_partials/header.html",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "f1a3c6f",
-              "datum": "2026-10-03",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "8c75b37d7d7a319d4bd80b7e41dbc79d28cae12ce8d87b93b65b5f5afecc385e",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-04",
-      "art": "set-current",
-      "head": "9504dd8",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/affiliate_marketer.py",
-        "scripts/brand_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "6072257",
-              "datum": "2026-10-04",
-              "betreff": "fix(security): 49 Code-Scanning-Fundstellen auf Code-Ebene geheilt"
-            },
-            {
-              "sha": "01d6508",
-              "datum": "2026-10-04",
-              "betreff": "fix(content): clear release scorecard blockers"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "pfad": "layouts/_default/_markup/render-link.html",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
-          "pfad": "scripts/affiliate_marketer.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "6072257",
-              "datum": "2026-10-04",
-              "betreff": "fix(security): 49 Code-Scanning-Fundstellen auf Code-Ebene geheilt"
-            },
-            {
-              "sha": "01d6508",
-              "datum": "2026-10-04",
-              "betreff": "fix(content): clear release scorecard blockers"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "pfad": "layouts/_partials/extend_footer.html",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
+          "commits": [],
+          "commits_art": "unbekannt"
         },
         {
-          "pfad": "scripts/brand_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "6072257",
-              "datum": "2026-10-04",
-              "betreff": "fix(security): 49 Code-Scanning-Fundstellen auf Code-Ebene geheilt"
-            },
-            {
-              "sha": "01d6508",
-              "datum": "2026-10-04",
-              "betreff": "fix(content): clear release scorecard blockers"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "b2d0b2b0a44bc208e7655bb021c44ee88db60e1f6b977e26a88ea32e1dd610c0",
-      "prev_sha256": "5e538b2ea4f3dd87d80c48b788fcb63f5853eeae9895a3ed76f1cbade4a8f1eb"
-    },
-    {
-      "date": "2026-10-05",
-      "art": "set-current",
-      "head": "e222553",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
-          "commits": [
-            {
-              "sha": "e222553",
-              "datum": "2026-10-05",
-              "betreff": "fix(authority): Radar-Nachweise dauerhaft absichern (#598)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "cf100d8fe669d303585227a7c1a8daad84f3e770833af5e2c220a750a65c340f",
-      "prev_sha256": "a37e9c8f78e28e5c5d8037e782121bb459575dd1754a0567c1cab4e05bcab7ad"
-    },
-    {
-      "date": "2026-10-05",
-      "art": "set-current",
-      "head": "e222553",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "UNERKLÄRT",
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
           "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
-      "prev_sha256": "ca1f8eef7d8cb60c4d4ecac6b7a2921a9513e97b4d1b607f8373a2a86cf71161"
-    },
-    {
-      "date": "2026-10-05",
-      "art": "set-current",
-      "head": "e222553",
-      "geaendert": [],
-      "files_sha256": "3dd87a1fc9477e688dee7aefe76cc09a681be420e605378ce96b9d7d002ec18b",
-      "prev_sha256": "300d1fbd35b364a22b08b4e4e82a8f896abef1e369ec62bf96d43c3aee048e67"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "8da1ac5",
-      "geaendert": [
-        "scripts/publikations_vertrag.py",
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "8da1ac5",
-              "datum": "2026-10-07",
-              "betreff": "fix(redaktion): Publikations-Vertrag – KI-Heilung schreibt nicht mehr unter die Publish-Schwelle (WF-54C4 #607)"
-            },
-            {
-              "sha": "c14e000",
-              "datum": "2026-10-05",
-              "betreff": "content: finale Veröffentlichungsgates und geprüfte Reserve"
-            }
-          ],
-          "commits_art": "seit-signatur"
+          "commits_art": "unbekannt"
         },
         {
-          "pfad": "scripts/publikations_vertrag.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
+          "pfad": "layouts/robots.txt",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
           "commits": [],
-          "commits_art": "neu-unter-siegel"
-        }
-      ],
-      "files_sha256": "bc9d6d297ac05efc99285e6227d5863842a7cacd6ca7019ba11130f7f5108e31",
-      "prev_sha256": "266f0311f3a0ca66f578f083d66016f7f6e548493f8b165c97e9b60e00e9936d"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "edfb7ce",
-      "geaendert": [
-        "scripts/lesbarkeit_heiler.py"
-      ],
-      "herkunft": [
+          "commits_art": "unbekannt"
+        },
         {
-          "pfad": "scripts/lesbarkeit_heiler.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
+          "pfad": "scripts/check24_links.yaml",
+          "klasse": "kritisch",
+          "urteil": "NEU OHNE SIGNATUR",
           "commits": [],
-          "commits_art": "neu-unter-siegel"
+          "commits_art": "unbekannt"
         }
       ],
-      "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1",
-      "prev_sha256": "e7fdc25fd37ebf351f7c1685efc864aafeab21c9920898fbeb1f28a8acdeeca3"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "ab9c8223",
-      "geaendert": [
-        "scripts/politur_ruine_heiler.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/politur_ruine_heiler.py",
-          "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
-          "commits": [],
-          "commits_art": "neu-unter-siegel"
-        }
-      ],
-      "files_sha256": "ad3759dcbea0d4a425ded95769a2c3a8c9d321db4e9212b09926972247c7d3e2",
-      "prev_sha256": "d530fb31c18cd5c7d03124f34d0948416747f78b9041284caee369b9b329cec6"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "915918a5",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "4b6d2805",
-              "datum": "2026-10-07",
-              "betreff": "fix(ymyl): #613 – dauerhafte Premium-Heilung der YMYL-Prüfqueue"
-            },
-            {
-              "sha": "ca144d51",
-              "datum": "2026-10-07",
-              "betreff": "WF-54C4 #607: Publikations-Vertrag – KI-Heilung schreibt nicht mehr unter die Publish-Schwelle (#615)"
-            },
-            {
-              "sha": "69b2e757",
-              "datum": "2026-10-02",
-              "betreff": "feat: YMYL-Freigaben fail-closed absichern (#512)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
-      "prev_sha256": "ce869a11a5af55ca072f0170a2c7cfb03f3bf42fe1b952e3e7a3bdb9b892130b"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "b1067036",
-      "geaendert": [],
-      "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
-      "prev_sha256": "b2d7ac8ce1ced5928da977c25b09967fd3f354b60d94f6c357ea0de497641397"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "f3d3b191",
-      "geaendert": [],
-      "files_sha256": "d824e02b03ff96bd0033022137578db61638660316242347bc6f4aec1e6bf55b",
-      "prev_sha256": "882e0cac84c6418c351598befc33ed9e610b21b739b697dc08c1347f7f1c3acc"
-    },
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "8290391",
-      "geaendert": [
-        "scripts/lektor_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/lektor_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "700d903",
-              "datum": "2026-10-07",
-              "betreff": "fix(reserve): #614 dauerhaft – Politur-Heiler, Ketten-Ordnung, Quell-Vorbeugung"
-            },
-            {
-              "sha": "0d5ebc0",
-              "datum": "2026-10-07",
-              "betreff": "fix(audit): #610-Nebenbefund – ein Testlauf fabriziert keine Beweise (C27) (#621)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "prev_sha256": "cbd58cad08a5a6c4bf125b22ef3aac3d251c9a8753abe1f819de107b0b029a3e",
+      "prev_sha256": null,
       "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364"
     }
   ]
