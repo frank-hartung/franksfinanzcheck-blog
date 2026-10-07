@@ -133,6 +133,13 @@ für Nacht neu.
   Kunstbefunden; jede Sabotage wird erkannt) · Vollprüfung ✅ („alle 28 Regeln
   prüfen in beide Richtungen").
 * **Build:** Hugo 0.164.0 (extended) — 78 Seiten, 1.324 statische Dateien, grün.
+* **CI des Vorschlags #625 (Commit `e68eb4bf`): alle zwölf Prüfungen grün** – u. a.
+  „Integritäts-Siegel" (PR-Gate, HARD STOP) 21 s, „regression"
+  (`python3 -m unittest discover -s scripts/tests`, **inklusive der 14 neuen
+  Verträge**) 2 m 23 s, „Qualitäts-Gate (Build + interne Links)" 2 m,
+  „Klartext-Wache", „Quellen, Stand, Einheit und Methodik", Playwright-Suite
+  (Desktop + Mobile) 3 m 45 s und CodeQL (python + javascript). Der PR ging
+  dabei **ohne Konflikt** durch die Zusammenführung mit `main` (`mergeable`).
 * **Integrität:** Neusignatur mit `--set-current` (zweiter Commit dieser PR):
   Akte „NEU UNTER SIEGEL" für `scripts/politur_ruine_heiler.py`, Historie-Zeile
   in `data/integrity_history.jsonl`.
