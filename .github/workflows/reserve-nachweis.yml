@@ -1,0 +1,163 @@
+# ============================================================
+#  Reserve-Nachweis (Probe auf einem Ref)
+#  ------------------------------------------------------------
+#  WARUM (BOT-WATCHDOG #614, 07.10.2026):
+#  Das Zertifikat `data/reserve-readiness.json` darf nur von den ECHTEN
+#  Produktions-Gates ausgestellt werden – hugo (Gate-Ausnahme), hunspell
+#  (Rechtschreib-Score), die KI-Stufen der Heiler-Kette und die
+#  Zeichenlängen-Politik. Genau diese Gates fehlen in einer Sandbox, in der
+#  weder hugo noch hunspell noch ein KI-Schlüssel existieren. Ein Nachweis
+#  „≥ 4 zertifizierte Kandidaten" (Akzeptanz von #614) ist deshalb NUR hier
+#  zu führen: auf einem beliebigen Ref, mit denselben Schritten wie der
+#  Produktionslauf.
+#
+#  WAS DIESER LAUF ANDERS MACHT ALS `content-reserve.yml`:
+#    1. Er läuft auf JEDEM Ref (`workflow_dispatch`), nicht nur auf main –
+#       deshalb kann die Reparatur VOR dem Merge bewiesen werden.
+#    2. Er schiebt seinen Nachweis ausschließlich auf den Ref, der ihn
+#       gestartet hat (`BRANCH=$GITHUB_REF_NAME`) – main bleibt unberührt.
+#    3. Der Janitor (Stufe 0a) läuft NICHT: Eine Probefahrt darf keine
+#       Kandidaten löschen. Der Bestands-Wächter (Stufe 0b) schon – er
+#       repariert nur verlorene Reserve-Fahnen.
+#    4. Die Ziel-Latte bleibt die Produktions-Latte (`RESERVE_TARGET`), damit
+#       das Zertifikat mit dem des Produktionslaufs vergleichbar ist. Die
+#       Ticket-Schwelle (≥ 4) wird am Ende SEPARAT geprüft und benannt.
+#
+#  Was dieser Lauf NICHT ist: ein Ersatz für den Produktionslauf. Der
+#  Produktionslauf bleibt `content-reserve.yml` auf main.
+# ============================================================
+name: Reserve-Nachweis (Probe auf einem Ref)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: reserve-nachweis
+  cancel-in-progress: false
+
+jobs:
+  nachweis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      RESERVE_TARGET: ${{ vars.RESERVE_TARGET || '6' }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -q pyyaml feedparser cryptography pillow pillow-avif-plugin fonttools brotli
+      # Hugo Extended, verifiziert + PyPI-Fallback (Flake-Klasse #209/#220)
+      - uses: ./.github/actions/install-hugo
+        with:
+          version: "0.164.0"
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq hunspell hunspell-de-de
+
+      # Jeder Heiler beweist erst seinen Selbsttest (dieselbe Entdeckung wie im
+      # Produktionslauf – inklusive Uhr-Probe und Schreibfreiheit, C15).
+      - name: Selbsttests aller Wachen (entdeckt, uhrfest, schreibfrei)
+        run: |
+          set -o pipefail
+          python3 scripts/selftest_runner.py | tee selbsttests.log
+
+      - name: Deckung + Wirkung der Heiler-Kette
+        run: python3 scripts/reserve_healer_coverage.py --selftest
+
+      - name: Stufe 0b – Bestands-Wächter (verlorene Reserve-Fahnen heilen)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: python3 scripts/reserve_custody.py --heal
+
+      # ================= VEREDELUNG (mit KI, echte Gates) =================
+      - name: Stufe 2 – Kandidaten veredeln (Phase-2/3-Kette, nur Pool)
+        id: finish
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_AUTHOR: ${{ vars.BLOG_AUTHOR }}
+          AFFILIATE_URL: ${{ vars.AFFILIATE_URL }}
+        run: python3 scripts/reserve_finisher.py --finish
+
+      - name: Stufe 3 – Reife durch Produktions-Gates beweisen
+        id: readiness
+        continue-on-error: true
+        run: python3 scripts/reserve_readiness.py
+
+      - name: Stufe 4 – Konvergenz-Nachschub bis zum Zielbestand
+        id: converge
+        continue-on-error: true
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 scripts/reserve_converge.py --runden 2 --max-minuten 25
+
+      # ================= NACHWEIS LESBAR MACHEN =================
+      - name: Nachweis drucken (Zertifikat, maschinenlesbar + Tabelle)
+        if: ${{ !cancelled() }}
+        run: |
+          python3 - <<'PY' | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}"
+          import json, pathlib
+          d = json.loads(pathlib.Path("data/reserve-readiness.json").read_text())
+          print(f"## Reserve-Nachweis (Ref `{__import__('os').environ.get('GITHUB_REF_NAME', '?')}`)")
+          print()
+          print(f"**Ziel (Produktions-Latte):** {d['target']} · "
+                f"**bereit:** {d['ready']} · **Pool:** {d.get('pool_size')} · "
+                f"**Zertifikat:** {d.get('generated_at')}")
+          print()
+          print("| Kandidat | bereit | Score | Grund |")
+          print("|---|---|---|---|")
+          for c in d["candidates"]:
+              grund = (c.get("reason") or "–").replace("|", "/")[:150]
+              print(f"| `{c['slug'][:60]}` | {'✅' if c['ready'] else '⛔'} "
+                    f"| {c.get('score')} | {grund} |")
+          PY
+
+      - name: Nachweis sichern (nur auf den eigenen Ref)
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "Content-Bot"
+          git config user.email "content-bot@users.noreply.github.com"
+          git status --porcelain | head -40
+          python3 scripts/reserve_stage_guard.py
+          git diff --cached --stat | tail -15
+          if ! git diff --cached --quiet; then
+            git commit -m "content: Reserve-Nachweis (#614) auf ${GITHUB_REF_NAME}"
+            if ! BRANCH="${GITHUB_REF_NAME}" scripts/git_sync.sh --push-only; then
+              echo "::error::Push des Nachweises auf ${GITHUB_REF_NAME} fehlgeschlagen."
+              exit 1
+            fi
+          else
+            echo "Keine Änderungen am Pool – nichts zu committen."
+          fi
+
+      # ================= PRODUKTIONS-GATE (informativ) =================
+      - name: Produktions-Gate (Zielbestand, informativ)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: python3 scripts/reserve_gate.py
+
+      # ================= AKZEPTANZ DES TICKETS #614 =================
+      - name: Akzeptanz #614 – mindestens 4 zertifizierte Kandidaten
+        if: ${{ !cancelled() }}
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          d = json.loads(pathlib.Path("data/reserve-readiness.json").read_text())
+          bereit, ziel, pool = d["ready"], d["target"], d.get("pool_size")
+          print(f"Zertifikat: {bereit}/{ziel} bereit (Pool {pool}) · "
+                f"Ticket #614 verlangt ≥ 4")
+          if bereit < 4:
+              print("::error::Ticket #614 NICHT erfüllt – weniger als 4 "
+                    "zertifizierte Kandidaten.")
+              sys.exit(1)
+          print(f"✅ Ticket #614 erfüllt: {bereit} zertifizierte Kandidaten.")
+          PY
