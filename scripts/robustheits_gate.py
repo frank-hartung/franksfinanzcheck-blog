@@ -48,6 +48,11 @@ R10 SYNTAX       Jedes Erstparteienskript ist parsebar (node --check), der
                  Service Worker eingeschlossen.
 R11 FIRST-PARTY  Resilienzschicht und Bootstrap laden keine fremde Domain.
 R12 EINE EINBINDUNG  ff-robust.js wird genau einmal geladen.
+R13 FRISTEN    Jede Ausnahme ist datiert, und ihre Frist liegt JENSEITS des
+                 Uhr-Proben-Horizonts der CI: Eine Frist, die ein Lauf an
+                 einem Kalendertag rot färbt, ist eine Zeitbombe
+                 (scripts/selftest_clock.py, 18.09.2026). Abgelaufene
+                 Fristen stehen deshalb im BERICHT, nicht im Exit-Code.
 
 Das Gate repariert nie selbst. Ein Fangnetz, das sich selbst wieder einhängt,
 wäre keines.
@@ -64,7 +69,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+from datetime import date
 import shutil
 import subprocess
 import sys
@@ -98,6 +105,18 @@ HEAD_SKRIPT_ERWARTET = 8
 # pfad, regel, grund, entscheidung, faellig). Ausnahmen werden im Bericht
 # genannt – sie verschwinden nicht still.
 AUSNAHMEN = "data/robustheit_ausnahmen.yaml"
+
+# Fristen (R13) werden NIE gegen die Wanduhr gemessen. Der Grund steht in
+# scripts/selftest_clock.py: Am 18.09.2026 färbte ein Selbsttest, der sein
+# Fixture-Alter von „heute" baute, das Qualitäts-Gate rot – sechs Tage nach
+# dem Commit, ohne eine einzige Code-Änderung. Die CI lässt deshalb die ganze
+# Suite mit einer fremden Uhr laufen
+# (.github/workflows/publication-reliability-tests.yml, Schritt „Uhr-Probe",
+# Offset +97 Tage). Eine Frist innerhalb dieses Horizonts würde genau denselben
+# Schaden anrichten: rot an einem Tag, den niemand im Blick hat.
+UHR_PROBE_TAGE = 97
+# Obergrenze: „irgendwann" ist keine Frist, sondern eine stille Abschaffung.
+AUSNAHMEN_MAX_TAGE = 730
 
 # Bausteine, die ihr eigenes Fangnetz brauchen (R6): Datei → Marker.
 INSELN: dict[str, tuple[str, ...]] = {
@@ -161,8 +180,92 @@ def genutzte_ausnahmen(root: Path) -> list[str]:
     schlüssel = str(root)
     if schlüssel not in _AUSNAHMEN_PUFFER:
         _AUSNAHMEN_PUFFER[schlüssel] = ausnahmen_laden(root)
-    return [f"{e.get('regel')} · {e.get('pfad')} (fällig {e.get('faellig', 'unbekannt')})"
-            for e in _AUSNAHMEN_PUFFER[schlüssel]]
+    zeilen = []
+    for e in _AUSNAHMEN_PUFFER[schlüssel]:
+        tage = ueberfaellig_tage(e)
+        verzug = (f" – ⚠️ ÜBERFÄLLIG seit {tage} Tagen: Entscheidung fällig, "
+                  "dann Frist neu setzen oder Regel heilen") if tage else ""
+        zeilen.append(f"{e.get('regel')} · {e.get('pfad')} "
+                      f"(fällig {e.get('faellig', 'unbekannt')}){verzug}")
+    return zeilen
+
+
+def entscheidungsdatum(eintrag: dict) -> date | None:
+    """Datum aus `entscheidung` (z. B. „Frank Hartung, 07.10.2026 (C31)")."""
+    m = re.search(r"(\d{1,2})\.(\d{1,2})\.(\d{4})",
+                  str(eintrag.get("entscheidung", "")))
+    if not m:
+        return None
+    tag, monat, jahr = (int(x) for x in m.groups())
+    try:
+        return date(jahr, monat, tag)
+    except ValueError:
+        return None
+
+
+def faelligkeit(eintrag: dict) -> date | None:
+    """Datum aus `faellig` (JJJJ-MM-TT) – None, wenn es keine Frist gibt."""
+    try:
+        jahr, monat, tag = (int(x) for x in
+                            str(eintrag.get("faellig", "")).strip().split("-"))
+        return date(jahr, monat, tag)
+    except (ValueError, TypeError):
+        return None
+
+
+def ueberfaellig_tage(eintrag: dict, heute: date | None = None) -> int:
+    """Tage seit Ablauf der Frist (0 = noch nicht fällig).
+
+    Bewusst NUR für den Bericht: Ein Datum darf keinen Lauf rot färben, sonst
+    ist die Wache eine Zeitbombe (R13 misst gegen das Entscheidungsdatum, nicht
+    gegen heute). `heute` ist als Parameter offen, damit ein Test die Uhr selbst
+    setzen kann, statt sie zu lesen.
+    """
+    frist = faelligkeit(eintrag)
+    if frist is None:
+        return 0
+    return max(0, ((heute or date.today()) - frist).days)
+
+
+def pruefe_fristen(root: Path) -> list[str]:
+    """R13 – Ausnahmen sind datiert, und ihre Frist trägt den CI-Uhr-Proben.
+
+    Gemessen wird gegen das DATUM DER ENTSCHEIDUNG aus der Ausnahme selbst,
+    nie gegen die Wanduhr: So bleibt die Prüfung an jedem Kalendertag gleich
+    (Uhr-Probe der CI, Offset +97 Tage).
+    """
+    funde: list[str] = []
+    for e in ausnahmen_laden(root):
+        pfad = str(e.get("pfad", "?"))
+        entscheidung = entscheidungsdatum(e)
+        frist = faelligkeit(e)
+        if entscheidung is None:
+            funde.append(f"R13 Ausnahme für {pfad} nennt kein Entscheidungsdatum "
+                         "(Format TT.MM.JJJJ) – eine Ausnahme ohne Datum ist "
+                         "nicht revidierbar")
+            continue
+        if frist is None:
+            funde.append(f"R13 Ausnahme für {pfad} hat keine lesbare Frist "
+                         "(`faellig: JJJJ-MM-TT`) – eine Ausnahme ohne Frist ist "
+                         "eine stille Abschaffung")
+            continue
+        spanne = (frist - entscheidung).days
+        if spanne < 0:
+            funde.append(f"R13 Ausnahme für {pfad}: Frist {frist} liegt VOR der "
+                         f"Entscheidung {entscheidung}")
+        elif spanne < UHR_PROBE_TAGE:
+            funde.append(f"R13 Ausnahme für {pfad}: Frist {frist} liegt nur "
+                         f"{spanne} Tage nach der Entscheidung – die CI-Uhr-Probe "
+                         f"verschiebt die Uhr um {UHR_PROBE_TAGE} Tage "
+                         "(scripts/selftest_clock.py). Eine Frist innerhalb des "
+                         "Horizonts färbt einen Lauf rot, ohne dass jemand Code "
+                         "anfasst. Frist weiter setzen (Abgelaufenes steht im "
+                         "Bericht, nicht im Exit-Code).")
+        elif spanne > AUSNAHMEN_MAX_TAGE:
+            funde.append(f"R13 Ausnahme für {pfad}: Frist {frist} liegt {spanne} "
+                         f"Tage nach der Entscheidung (Obergrenze "
+                         f"{AUSNAHMEN_MAX_TAGE}) – ein Termin auf irgendwann ist keine Frist")
+    return funde
 
 
 def text(root: Path, rel: str) -> str:
@@ -594,6 +697,7 @@ REGELN: tuple[tuple[str, str, Callable[[Path], list[str]]], ...] = (
     ("R10", "Jedes Skript ist parsebar", pruefe_syntax),
     ("R11", "Resilienz ist first-party", pruefe_first_party),
     ("R12", "Die Schicht läuft genau einmal", pruefe_einbindung),
+    ("R13", "Ausnahmen sind datiert und tragen die Uhr-Probe", pruefe_fristen),
 )
 
 
@@ -641,7 +745,8 @@ def selbsttest() -> int:
         def baum() -> Path:
             """Kopie der echten Dateien (nur die, die das Gate liest)."""
             ziel = Path(tempfile.mkdtemp(prefix="fall-", dir=sandbox))
-            for rel in [SCHICHT, BOOTSTRAP, EINBINDUNG, SW, FUSS, CSS] + erstpartei_js(quelle):
+            for rel in ([SCHICHT, BOOTSTRAP, EINBINDUNG, SW, FUSS, CSS, AUSNAHMEN]
+                        + erstpartei_js(quelle)):
                 original = quelle / rel
                 if not original.exists():
                     continue
@@ -765,6 +870,24 @@ def selbsttest() -> int:
         # FALL 12: Schicht ohne API-Baustein.
         sabotage("Fall12", SCHICHT, "zwischenablage", "clipboardWeg", "R1", alle=True)
 
+        # FALL 13: Die Frist einer Ausnahme liegt innerhalb des Uhr-Proben-
+        # Horizonts – die Zeitbombe, die am 07.10.2026 den CI-Lauf
+        # „Uhr-Probe" rot färbte (publication-reliability-tests.yml).
+        sabotage("Fall13", AUSNAHMEN, 'faellig: "2027-04-07"',
+                 'faellig: "2026-11-15"', "R13")
+
+        # GEGENPROBE 4: Eine weite, aber begrenzte Frist ist richtig – sonst
+        # wäre R13 schärfer als der Vertrag und jede Ausnahme ein Alarm.
+        gegen4 = baum()
+        pfad4 = gegen4 / AUSNAHMEN
+        roh4 = pfad4.read_text(encoding="utf-8")
+        pfad4.write_text(roh4.replace('faellig: "2027-04-07"',
+                                      'faellig: "2028-06-30"'), encoding="utf-8")
+        funde4 = [f for f in lauf(gegen4) if f.startswith("R13")]
+        if funde4:
+            fehler.append("Gegenprobe 4: Eine Frist innerhalb der Obergrenze wird "
+                          f"zu Unrecht gemeldet ({[f[:60] for f in funde4][:2]})")
+
         # GEGENPROBE: Ein statisches innerHTML-Literal ist erlaubt.
         gegen = baum()
         pfad = gegen / "static/premium/ff-feedback.js"
@@ -817,7 +940,7 @@ def selbsttest() -> int:
         for f in fehler:
             print("   · " + f)
         return 1
-    print("✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 3 Gegenproben freigegeben, "
+    print("✅ SELBSTTEST OK – 14 Sabotage-Proben erkannt, 4 Gegenproben freigegeben, "
           "echter Stand grün")
     return 0
 
@@ -845,7 +968,9 @@ def bericht(funde: list[str], modus: str, root: Path | None = None) -> str:
         nach_regel: dict[str, list[str]] = {}
         for f in funde:
             nach_regel.setdefault(f.split(" ", 1)[0], []).append(f)
-        for regel, _, titel in REGELN:
+        # REGELN trägt (Kennung, Titel, Prüffunktion) – der Mensch, der einen
+        # roten Bericht liest, braucht den Titel, nicht das Funktionsobjekt.
+        for regel, titel, _ in REGELN:
             if regel not in nach_regel:
                 continue
             zeilen += [f"## ✗ {regel} – {titel}", ""]
@@ -903,6 +1028,16 @@ def main(argv: list[str]) -> int:
             "ok": not funde,
         }, ensure_ascii=False, indent=2))
         return 1 if funde else 0
+
+    # Abgelaufene Fristen: sichtbar, aber NIE lauf-färbend. Ein Exit-Code, der
+    # an einem Kalendertag kippt, ist eine Zeitbombe (R13, selftest_clock.py).
+    # In CI wird daraus eine Warnzeile im Laufprotokoll.
+    for e in ausnahmen_laden(root):
+        tage = ueberfaellig_tage(e)
+        if tage and os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning file={AUSNAHMEN}::Ausnahme {e.get('regel')} für "
+                  f"{e.get('pfad')} ist seit {tage} Tagen überfällig – "
+                  "Entscheidung fällig (heilen oder Frist neu setzen)")
 
     if not args.no_report:
         print(bericht(funde, "gebaute Wahrheit" if args.public else "Quelle", root))

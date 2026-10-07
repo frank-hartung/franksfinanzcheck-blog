@@ -123,7 +123,7 @@ npm run test:ki                                        # Gate-Selbsttest (10 Sab
 npm run test:vergleiche                               # Selbsttest der Vergleichs-Wache (10 Sabotage-Proben, offline)
 npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbsttest + Quelle + Build + public/
 npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
-npm run robustheit:check                              # Robustheit R1–R12: Selbsttest + Quelle + Build + gebaute Wahrheit
+npm run robustheit:check                              # Robustheit R1–R13: Selbsttest + Quelle + Build + gebaute Wahrheit
 npm run test:robustheit                               # Robustheit: Gate-Selbsttest + Unit-Tests + Verhalten im jsdom
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
@@ -1093,15 +1093,25 @@ nicht lesbar" – die Newsletter-Anmeldung sendet bewusst `no-cors`, und
 behauptet. Und: Wiederholt wird nur bei `netz`, nie bei `zeitlimit` – ein
 Request, der ins Zeitlimit lief, hat den Dienst schon beschäftigt.
 
-**Wache:** `scripts/robustheits_gate.py` (R1–R12, `--selftest` mit 13
-Sabotage-Proben und 3 Gegenproben, `--public` für die gebaute Wahrheit). Sie
+**Wache:** `scripts/robustheits_gate.py` (R1–R13, `--selftest` mit 14
+Sabotage-Proben und 4 Gegenproben, `--public` für die gebaute Wahrheit). Sie
 läuft in `robustheit.yml` (Push/PR/Nacht) und im Deploy **vor** dem Build,
 fail-closed. Sie heilt nie selbst: Ein Fangnetz, das sich selbst wieder
 einhängt, wäre keines.
 
 **Ausnahmen** stehen in `data/robustheit_ausnahmen.yaml` – begründet, mit
 Entscheidung und **Fälligkeit**, im Bericht genannt. Eine Ausnahme ohne
-Fälligkeit ist eine stille Abschaffung. Aktuell eine: `head.html` (KRITISCH
+Fälligkeit ist eine stille Abschaffung. Für die Frist gilt R13, und R13 ist aus
+einem echten Befund entstanden: Die CI-Uhr-Probe
+(`publication-reliability-tests.yml`, ganze Suite mit +97 Tagen) fand am
+07.10.2026 einen Test, der `faellig` gegen `date.today()` maß – die Suite wäre
+ab dem Stichtag **jeden Tag rot** geworden, ohne Code-Änderung. Deshalb: Fristen
+werden gegen das **Entscheidungsdatum aus den Daten** gemessen (Spanne ≥ 97 und
+≤ 730 Tage), eine abgelaufene Frist steht im **Bericht** und als `::warning`,
+nie im Exit-Code (Vorbild `fristen_check.py`), und
+`selftest_clock.py --trap-modul scripts.tests.test_robustheits_gate --offset 97`
+läuft im Robustheits-Lauf mit. Wer einen Test schreibt, der die Wanduhr liest,
+baut eine Zeitbombe – `scripts/selftest_clock.py` erklärt die Klasse. Aktuell eine: `head.html` (KRITISCH
 versiegelt, R8) – der nackte `localStorage`-Zugriff dort ist PaperMod-Erbe und
 durch `disableThemeToggle = true` tot; ihn zu ändern braucht eine menschliche
 Signatur.

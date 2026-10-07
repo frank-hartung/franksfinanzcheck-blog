@@ -5,7 +5,7 @@
 Premium-Level einer Profi-Agentur."
 **Ergebnis:** Vier reale, stille Ausfälle geheilt, eine Resilienzschicht in zwei
 Stufen eingezogen, der Service Worker fail-open gemacht und alles zusammen als
-prüfbarer Vertrag R1–R12 hinterlegt – mit Wache, Selbsttest, 39 Unit-Tests und
+prüfbarer Vertrag R1–R13 hinterlegt – mit Wache, Selbsttest, 42 Unit-Tests und
 21 Verhaltenstests im Browser-DOM.
 
 ---
@@ -228,11 +228,11 @@ first-party, keine sendet etwas nach außen.
 | `static/premium/ff-summary-safety.js` | `document.body`/`MutationObserver`-Prüfung, Fangnetz je Durchlauf, Leistungsschalter nach drei Fehlern |
 | `layouts/_partials/footer.html` | Kopier-Knopf: Erfolg **nach** der Antwort, Rückfall `execCommand`, Fangnetz je Codeblock, `textContent`, `type="button"`; Menü-Scroll: Speicher im `try/catch` |
 | `assets/css/extended/zz-robustheit.css` **(neu)** | `.ff-robust-hinweis` im Markenton, Dark-Variante, `overflow-wrap: anywhere`, keine Layout-Animation |
-| `scripts/robustheits_gate.py` **(neu)** | Wache R1–R12, `--selftest` (13 Sabotage-Proben, 3 Gegenproben), `--source-only`, `--public`, `--json`, `--strict` |
+| `scripts/robustheits_gate.py` **(neu)** | Wache R1–R13, `--selftest` (14 Sabotage-Proben, 4 Gegenproben), `--source-only`, `--public`, `--json`, `--strict` |
 | `scripts/tests/test_robustheits_gate.py` **(neu)** | 33 Regressionstests inkl. Aufruf-Vertrag und CI-Verdrahtung |
 | `tools/robust.test.mjs` **(neu)** | 21 Verhaltenstests im jsdom (Fehler-Horcher, Zeitlimit, Wiederholung, Speicher, Inseln, Zwischenablage, offline) |
 | `data/robustheit_ausnahmen.yaml` **(neu)** | Begründete Ausnahmen mit Entscheidung und **Fälligkeit** |
-| `.github/workflows/robustheit.yml` **(neu)** | Push/PR auf Laufzeit-Pfade, jede Nacht 04:35 UTC, Build + gebaute Wahrheit |
+| `.github/workflows/robustheit.yml` **(neu)** | Push/PR auf Laufzeit-Pfade, jede Nacht 04:35 UTC, Build + gebaute Wahrheit + Uhr-Probe der Fristen |
 | `.github/workflows/deploy.yml` | Robustheits-Prüfung **vor** dem Build, fail-closed |
 | `package.json` | `robustheit`, `robustheit:check`, `robustheit:strict`, `robustheit:ausnahmen`, `test:robustheit` |
 | `CLAUDE.md` | Abschnitt C31 + drei Zeilen in der Test-Pipeline |
@@ -242,7 +242,7 @@ first-party, keine sendet etwas nach außen.
 und `layouts/_partials/extend_footer.html` (KRITISCH-versiegelt). Der nackte
 `localStorage`-Zugriff in `head.html` stammt aus dem PaperMod-Erbe und sein
 Zweig ist durch `disableThemeToggle = true` tot – er wird nicht gerendert. Er
-steht als begründete Ausnahme (R8, fällig 2027-01-07) in
+steht als begründete Ausnahme (R8, fällig 2027-04-07) in
 `data/robustheit_ausnahmen.yaml`, statt die Wache dauerhaft rot zu machen: Eine
 Wache, die nur Fehlalarme liefert, wird abgeschaltet (Issue #338).
 
@@ -258,20 +258,20 @@ jsdom 30):
 
 ```
 $ python3 scripts/robustheits_gate.py --selftest
-✅ SELBSTTEST OK – 13 Sabotage-Proben erkannt, 3 Gegenproben freigegeben, echter Stand grün
+✅ SELBSTTEST OK – 14 Sabotage-Proben erkannt, 4 Gegenproben freigegeben, echter Stand grün
 
 $ python3 scripts/robustheits_gate.py --source-only --strict --no-report ; echo $?
 0
 
 $ python3 -m unittest scripts.tests.test_robustheits_gate
-Ran 39 tests in 16.7s
+Ran 42 tests in 17.8s
 OK
 
 $ node --test tools/robust.test.mjs
 # tests 21 · # pass 21 · # fail 0
 ```
 
-**Der Selbsttest ist der Beweis, dass die Wache nicht nur grün ist.** 13
+**Der Selbsttest ist der Beweis, dass die Wache nicht nur grün ist.** 14
 Sabotagen an den echten Dateien, jede muss ihre Regel auslösen: Cache-Öffnung
 ohne Fangnetz (R5), Offline-Seite aus `PRECACHE` entfernt (R5), Range-Umgehung
 gelöscht (R5), `SKIP_WAITING` umbenannt (R5), Bootstrap in ein eigenes
@@ -279,10 +279,12 @@ Head-Skript verschoben (R2), Capture-Phase entfernt (R2), Fetch ohne Zeitlimit
 (R4), dynamisches `innerHTML` (R7), `document.write` (R7), Speicherzugriff ohne
 `try/catch` (R8), Schicht nicht mehr eingebunden (R12), Dark-Variante des
 Hinweises gelöscht (R9), Insel-Fangnetz entfernt (R6), API-Baustein umbenannt
-(R1). Dazu drei Gegenproben, die **nicht** anschlagen dürfen: statisches
-`innerHTML`-Literal, ein Fetch mit Zeitlimit und End-Tags in gültigen, aber
-ungebräuchlichen Schreibweisen (`</script >`, `</script data-ff="1">`) – sonst
-ist das Gate schärfer als der Vertrag (oder blind) und wird abgeschaltet.
+(R1), Ausnahme-Frist innerhalb des Uhr-Proben-Horizonts (R13). Dazu vier
+Gegenproben, die **nicht** anschlagen dürfen: statisches `innerHTML`-Literal,
+ein Fetch mit Zeitlimit, End-Tags in gültigen aber ungebräuchlichen
+Schreibweisen (`</script >`, `</script data-ff="1">`) und eine weite, aber
+begrenzte Frist – sonst ist das Gate schärfer als der Vertrag (oder blind) und
+wird abgeschaltet.
 
 ### Der Beweislauf fand einen Befund – in der Wache selbst, in zwei Runden
 
@@ -328,6 +330,50 @@ Der Beweis, dass die Heilung hält und nicht nur der Befund verschwindet:
 * 6 Unit-Tests (`SchnittTests`, darunter `</script foo="bar">` und die
   Dateninsel mit `type=`) und 1 jsdom-Test, der die Blockzahl am echten Bestand
   einfriert.
+
+### Die Uhr-Probe fand eine Zeitbombe – in der Ausnahme dieses Vorgangs
+
+Der zweite rote Lauf kam nicht von CodeQL, sondern von der Uhr-Probe der CI
+(`publication-reliability-tests.yml` lässt die ganze Suite ein zweites Mal mit
+einer um **97 Tage** vorgestellten Uhr laufen). Sie fand genau das, wovor
+`scripts/selftest_clock.py` seit dem 18.09.2026 warnt – in meinem eigenen Test:
+
+`test_ausnahmen_sind_begruendet_und_faellig` maß die Frist der
+`head.html`-Ausnahme (`faellig: 2027-01-07`) gegen `date.today()`. Unter der
+vorgestellten Uhr (12.01.2027) schlug `assertGreaterEqual(date(2027, 1, 7),
+heute)` fehl. Die Suite wäre ab dem Stichtag **jeden Tag rot** geworden, ohne
+eine einzige Code-Änderung. Ein Test, der die Wanduhr liest, ist keine Prüfung,
+sondern eine Verabredung mit dem Kalender.
+
+Heilung in vier Teilen:
+
+1. **R13 FRISTEN** im Gate: Jede Ausnahme nennt Entscheidungsdatum und Frist,
+   gemessen wird die **Spanne zwischen beiden** – nie gegen heute. Sie muss
+   jenseits des Uhr-Proben-Horizonts liegen (≥ 97 Tage) und innerhalb der
+   Obergrenze (≤ 730 Tage, denn ein Termin auf irgendwann ist keine Frist).
+2. **Frist** der Ausnahme auf `2027-04-07` gesetzt (sechs Monate), mit dem
+   Horizont als Begründung in `data/robustheit_ausnahmen.yaml` selbst.
+3. **Abgelaufen heißt sichtbar, nicht rot.** Eine Frist, die im echten Leben
+   verstreicht, steht im Bericht (`⚠️ ÜBERFÄLLIG seit N Tagen`) und als
+   `::warning` im Laufprotokoll – den Exit-Code färbt sie nicht. Vorbild ist
+   `fristen_check.py`: „Exit 0 = Lauf ok (auch bei überfälligen Fristen – die
+   Eskalation läuft über eigene Issues, nicht über rote Runs."
+4. **Die Uhr-Probe läuft jetzt auch im Robustheits-Lauf.** Eine Änderung an
+   `data/robustheit_ausnahmen.yaml` löst die Regressionssuite nicht aus (sie
+   wacht auf `content/`, `scripts/`, `.github/workflows/`), also hätte niemand
+   die nächste kurze Frist gemerkt. Lokal bewiesen:
+   `selftest_clock.py --trap-modul scripts.tests.test_robustheits_gate --offset 97`
+   → 42 Tests grün unter fremder Uhr; das Gate-Selbsttest ebenso.
+
+Dazu prüft sich der Test selbst: `test_dieser_test_liest_nicht_die_wanduhr`
+verbietet Uhr-Zugriffe im Testmodul – die verbotenen Muster sind aus Einzelteilen
+zusammengesetzt, damit der Test nicht sein eigenes Verbot in seinem eigenen
+Quelltext findet.
+
+Nebenbefund, ebenfalls im Berichtsweg: Der rote Bericht des Gates nannte statt
+des Regel-Titels das Funktionsobjekt (`## ✗ R13 – <function pruefe_fristen …>`) –
+`bericht()` entpackte das Regel-Tripel in der falschen Reihenfolge. Wer einen
+roten Bericht liest, braucht den Titel der Regel, nicht ihre Speicheradresse.
 
 **Bestand unverändert grün** (Regression gegen dieselben Wachen wie vorher):
 
@@ -383,6 +429,7 @@ ebenfalls nicht; die geänderten Pfade sind verhaltensgleich im Gutfall
 | R10 | Jedes Erstparteienskript und der SW sind parsebar (`node --check`) |
 | R11 | Schicht und Bootstrap nennen keine fremde Domain |
 | R12 | Die Schicht läuft genau einmal, mit Cache-Busting |
+| R13 | Jede Ausnahme ist datiert, und ihre Frist liegt jenseits des Uhr-Proben-Horizonts (≥ 97 Tage) und innerhalb der Obergrenze (≤ 730 Tage) – gemessen gegen die Daten, nie gegen die Wanduhr |
 
 Das Gate heilt nie selbst. Ein Fangnetz, das sich selbst wieder einhängt, wäre
 keines.
@@ -393,7 +440,7 @@ keines.
 
 1. **`head.html` (KRITISCH).** Vier nackte `localStorage`-Zugriffe im toten
    Theme-Zweig. Heilung braucht eine menschliche Signatur
-   (`integrity_guard.py --set-current`); Ausnahme R8 ist auf **2027-01-07**
+   (`integrity_guard.py --set-current`); Ausnahme R8 ist auf **2027-04-07**
    befristet, der Unit-Test meldet Überfälligkeit rot.
 2. **Fehlertelemetrie ist bewusst keine eingebaut.** `bericht()` bleibt im
    Browser, es gibt kein Fehler-Backend. Für einen Betrieb mit mehreren

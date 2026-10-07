@@ -12,7 +12,7 @@
 #
 #  Vertrag je Eintrag:
 #    pfad        Datei, für die die Regel nicht gilt (relativ zur Wurzel)
-#    regel       Regel-Kennung (R1…R12)
+#    regel       Regel-Kennung (R1…R13)
 #    grund       warum die Ausnahme richtig ist – nicht warum sie bequem ist
 #    entscheidung  wer es entschieden hat (Mensch, Datum, Vorgang)
 #    faellig     wann die Ausnahme spätestens zu prüfen ist (JJJJ-MM-TT).
@@ -34,7 +34,16 @@ ausnahmen:
       Signatur im selben Commit. Ein Gate, das eine versiegelte Datei
       dauerhaft rot meldet, ist ein Dauer-Alarm und wird abgeschaltet.
     entscheidung: Frank Hartung, 07.10.2026 (Vertrag C31, Robustheit Premium)
-    faellig: "2027-01-07"
+    # Sechs Monate, nicht drei – und das ist keine Bequemlichkeit, sondern
+    # Regel R13: Die CI lässt die ganze Suite mit einer um 97 Tage
+    # vorgestellten Uhr laufen (Uhr-Probe in
+    # .github/workflows/publication-reliability-tests.yml). Eine Frist
+    # INNERHALB dieses Horizonts färbt diesen Lauf rot, ohne dass jemand
+    # Code angefasst hätte – genau die Zeitbombe, vor der
+    # scripts/selftest_clock.py warnt (18.09.2026, Run 35312783057).
+    # Abgelaufen ist die Frist deshalb im BERICHT sichtbar (und als
+    # ::warning im Laufprotokoll), nie im Exit-Code.
+    faellig: "2027-04-07"
 
 # Fremdcode (static/premium/vendor/) steht bewusst NICHT hier: Er ist per
 # Bauart aus der Prüfung ausgeschlossen (`erstpartei_js()` liest nur *.js

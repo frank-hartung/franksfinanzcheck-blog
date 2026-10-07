@@ -4,7 +4,7 @@
 Netzaufruf ein Zeitlimit, jeder Speicherzugriff ein `try/catch`, der Service
 Worker ist fail-open, und jeder gefangene Fehler wird sichtbar – im Befund
 (`FFRobust.bericht()`) und, wo der Leser es braucht, als Satz auf der Seite.
-Niemand pflegt das von Hand: `scripts/robustheits_gate.py` prüft R1–R12 an
+Niemand pflegt das von Hand: `scripts/robustheits_gate.py` prüft R1–R13 an
 jedem Push, jedem PR, jedem Deploy und jede Nacht.
 
 ---
@@ -128,6 +128,7 @@ nie ein schlechterer.
 | **R10** Syntax | Jedes Erstparteienskript und der Service Worker sind parsebar (`node --check`). |
 | **R11** First-Party | Schicht und Bootstrap nennen keine fremde Domain. |
 | **R12** Einbindung | `ff-robust.js` wird genau einmal geladen, über `asset_url.html` (Cache-Busting). |
+| **R13** Fristen | Jede Ausnahme nennt Entscheidungsdatum **und** Frist; die Spanne dazwischen liegt jenseits des CI-Uhr-Proben-Horizonts (≥ 97 Tage) und innerhalb der Obergrenze (≤ 730 Tage). Gemessen wird gegen die Daten, nie gegen die Wanduhr. |
 
 Das Gate **heilt nie selbst**. Ein Fangnetz, das sich selbst wieder einhängt,
 wäre keines.
@@ -159,9 +160,25 @@ keine Layout-Animation, Dark-Variante für jede Farbe.
 `data/robustheit_ausnahmen.yaml`. Eine Ausnahme gehört dorthin, **nicht** in
 die Prüflogik. Vertrag je Eintrag: `pfad`, `regel`, `grund`, `entscheidung`
 (Mensch + Datum + Vorgang), `faellig` (JJJJ-MM-TT). Eine Ausnahme ohne
-Fälligkeit ist eine stille Abschaffung – der Test
-`scripts/tests/test_robustheits_gate.py::AusnahmenTests` meldet überfällige
-Einträge rot.
+Fälligkeit ist eine stille Abschaffung.
+
+**Zwei Regeln für die Frist, beide aus einem echten Befund gelernt (R13):**
+
+1. Die Frist muss **jenseits des Uhr-Proben-Horizonts** liegen. Die CI lässt die
+   ganze Suite mit einer um 97 Tage vorgestellten Uhr laufen
+   (`publication-reliability-tests.yml`, Schritt „Uhr-Probe"; Grundlage
+   `scripts/selftest_clock.py`). Eine Frist innerhalb dieses Horizonts färbt
+   diesen Lauf rot – an einem Kalendertag, ohne eine Code-Änderung.
+2. **Abgelaufen heißt sichtbar, nicht rot.** Eine Frist, die im echten Leben
+   verstreicht, steht im Bericht (`⚠️ ÜBERFÄLLIG seit N Tagen`) und als
+   `::warning` im Laufprotokoll. Den Exit-Code färbt sie nicht – sonst wäre die
+   Wache eine Zeitbombe. Vorbild: `scripts/fristen_check.py` („Exit 0 = Lauf ok
+   (auch bei überfälligen Fristen – die Eskalation läuft über eigene Issues,
+   nicht über rote Runs)").
+
+Gemessen wird deshalb immer gegen das **Entscheidungsdatum aus der Datei**, nie
+gegen `date.today()`; `AusnahmenTests::test_dieser_test_liest_nicht_die_wanduhr`
+verbietet den Uhr-Zugriff im Testmodul.
 
 Das Gate nennt jede genutzte Ausnahme im Bericht, damit sie sichtbar bleibt.
 
@@ -182,7 +199,9 @@ npm run robustheit:strict   # maschinenlesbar (JSON), node fehlt = Befund
 npm run robustheit:ausnahmen# welche Ausnahme wird gerade genutzt?
 npm run test:robustheit     # Selbsttest + Unit-Tests + 21 jsdom-Tests
 
-python3 scripts/robustheits_gate.py --selftest           # 13 Sabotage-Proben, 3 Gegenproben
+python3 scripts/robustheits_gate.py --selftest           # 14 Sabotage-Proben, 4 Gegenproben
+python3 scripts/selftest_clock.py --trap-modul \
+        scripts.tests.test_robustheits_gate --offset 97   # Uhr-Probe: keine Zeitbombe
 python3 scripts/robustheits_gate.py --public public      # gebaute Wahrheit
 node --test tools/robust.test.mjs                        # Verhalten im Browser-DOM
 ```
@@ -219,7 +238,7 @@ wenn sie sich häufen.
 
 * **`head.html` ist versiegelt.** Der tote Theme-Zweig mit nackten
   `localStorage`-Zugriffen bleibt, bis ein Mensch ihn signiert ändert
-  (Ausnahme R8, fällig 2027-01-07).
+  (Ausnahme R8, fällig 2027-04-07).
 * **Ohne `AbortController` kein Zeitlimit.** Alte Browser bekommen den
   schlichten Fetch – derselbe Zustand wie vorher, nie ein schlechterer.
 * **Die gebaute Wahrheit braucht Hugo.** `--public` prüft nur, was gebaut

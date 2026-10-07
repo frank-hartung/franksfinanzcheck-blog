@@ -17,7 +17,7 @@
 #  Baustein, Markup nur aus statischem Text, Web Storage nur im
 #  try/catch, sichtbarer Ausfall-Satz im Markenton.
 #
-#  Wache:    scripts/robustheits_gate.py (R1–R12, mit Selbsttest)
+#  Wache:    scripts/robustheits_gate.py (R1–R13, mit Selbsttest)
 #  Schicht:  static/premium/ff-robust.js + Bootstrap in extend_head.html
 #  Ausnahmen: data/robustheit_ausnahmen.yaml (begründet, datiert, fällig)
 #  Runbook:  docs/ANLEITUNG-ROBUSTHEIT.md
@@ -89,10 +89,10 @@ jobs:
 
       # Eine Wache, die sich nicht selbst beweist, ist ein grüner Haken
       # ohne Aussage. Deshalb immer zuerst.
-      - name: Selbsttest der Wache (13 Sabotage-Proben, 3 Gegenproben)
+      - name: Selbsttest der Wache (14 Sabotage-Proben, 4 Gegenproben)
         run: python3 scripts/robustheits_gate.py --selftest
 
-      - name: Quelle prüfen (R1–R12, ohne Build)
+      - name: Quelle prüfen (R1–R13, ohne Build)
         run: python3 scripts/robustheits_gate.py --source-only
 
       - name: Resilienzschicht im Browser-DOM testen (jsdom)
@@ -100,6 +100,17 @@ jobs:
 
       - name: Einheitstests der Wache
         run: python3 -m unittest scripts.tests.test_robustheits_gate
+
+      # Zeitbomben-Schutz (R13, Befund vom 07.10.2026): Die Regressionssuite
+      # läuft nur bei Änderungen an content/, scripts/ oder workflows/ – eine
+      # neue Frist in data/robustheit_ausnahmen.yaml löst sie NICHT aus, also
+      # läuft die Uhr-Probe hier. Dieselben Tests mit einer um 97 Tage
+      # vorgestellten Uhr (scripts/selftest_clock.py, Lehre vom 18.09.2026):
+      # Am 07.10.2026 maß ein Test dieses Vorgangs `faellig` gegen
+      # `date.today()` – die Suite wäre ab dem Stichtag JEDEN TAG rot geworden,
+      # ohne dass jemand Code angefasst hätte.
+      - name: Uhr-Probe der Ausnahme-Fristen (+97 Tage)
+        run: python3 scripts/selftest_clock.py --trap-modul scripts.tests.test_robustheits_gate --offset 97
 
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo

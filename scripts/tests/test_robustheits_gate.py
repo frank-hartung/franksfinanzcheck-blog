@@ -46,6 +46,22 @@ def pruefbaum() -> Path:
     return sandbox
 
 
+def pruefbaum_in(sandbox: Path) -> Path:
+    """Wie `pruefbaum()`, aber in ein vorgegebenes Verzeichnis (Temporär-
+    verwaltung durch den Test, nicht durch das Modul)."""
+    rels = ([gate.SCHICHT, gate.BOOTSTRAP, gate.EINBINDUNG, gate.SW, gate.FUSS,
+             gate.CSS, gate.AUSNAHMEN]
+            + gate.erstpartei_js(ROOT) + gate.layout_dateien(ROOT))
+    for rel in rels:
+        original = ROOT / rel
+        if not original.exists():
+            continue
+        kopie = sandbox / rel
+        kopie.parent.mkdir(parents=True, exist_ok=True)
+        kopie.write_text(original.read_text(encoding="utf-8"), encoding="utf-8")
+    return sandbox
+
+
 def funde_von(root: Path) -> list[str]:
     funde: list[str] = []
     for _, _, pruefung in gate.REGELN:
@@ -72,7 +88,7 @@ class EchterStandTests(unittest.TestCase):
         self.assertEqual(0, proc.returncode, proc.stdout + proc.stderr)
         daten = json.loads(proc.stdout)
         self.assertTrue(daten["ok"])
-        self.assertEqual(12, len(daten["regeln"]), "zwölf Regeln sind der Vertrag")
+        self.assertEqual(13, len(daten["regeln"]), "dreizehn Regeln sind der Vertrag")
 
     def test_public_modus_meldet_fehlenden_build(self):
         """Ohne Build darf die Prüfung der gebauten Wahrheit nicht grün tun."""
@@ -300,22 +316,104 @@ class AufrufVertragTests(unittest.TestCase):
 
 
 class AusnahmenTests(unittest.TestCase):
-    def test_ausnahmen_sind_begruendet_und_faellig(self):
+    """Eine Ausnahme ohne Begründung ist eine Abschaffung – und eine Frist,
+    die an einem Kalendertag kippt, ist eine Zeitbombe (R13).
+
+    Der Vorgänger dieses Tests maß `faellig` gegen die echte Wanduhr. Am
+    07.10.2026 färbte das den CI-Lauf „Uhr-Probe" rot
+    (publication-reliability-tests.yml: ganze Suite mit +97 Tagen), ohne dass
+    jemand Code angefasst hätte – exakt die Klasse aus scripts/selftest_clock.py
+    (18.09.2026, Run 35312783057). Gemessen wird deshalb gegen das
+    ENTSCHEIDUNGSDATUM aus den Daten."""
+
+    def test_ausnahmen_sind_begruendet_und_befristet(self):
         eintraege = gate.ausnahmen_laden(ROOT)
         self.assertTrue(eintraege, "die Ausnahmen-Datei ist leer oder unlesbar")
-        heute = date.today()
         for e in eintraege:
             for feld in ("pfad", "regel", "grund", "entscheidung", "faellig"):
                 self.assertTrue(str(e.get(feld, "")).strip(),
                                 f"Ausnahme für {e.get('pfad')} ohne `{feld}` – "
                                 "eine Ausnahme ohne Begründung ist eine Abschaffung")
             self.assertRegex(str(e["regel"]), r"^R\d+$")
-            jahr, monat, tag = (int(x) for x in str(e["faellig"]).split("-"))
-            self.assertGreaterEqual(date(jahr, monat, tag), heute,
-                                    f"Ausnahme für {e['pfad']} ist überfällig "
-                                    "(data/robustheit_ausnahmen.yaml prüfen)")
+            entscheidung = gate.entscheidungsdatum(e)
+            frist = gate.faelligkeit(e)
+            self.assertIsNotNone(entscheidung,
+                                 f"Ausnahme für {e['pfad']} ohne lesbares "
+                                 "Entscheidungsdatum (TT.MM.JJJJ)")
+            self.assertIsNotNone(frist,
+                                 f"Ausnahme für {e['pfad']} ohne lesbare Frist "
+                                 "(JJJJ-MM-TT)")
+            spanne = (frist - entscheidung).days
+            self.assertGreaterEqual(
+                spanne, gate.UHR_PROBE_TAGE,
+                f"Ausnahme für {e['pfad']}: {spanne} Tage Frist liegen innerhalb "
+                f"des CI-Uhr-Proben-Horizonts ({gate.UHR_PROBE_TAGE} Tage) – die "
+                "Wache würde an einem Kalendertag rot, ohne Code-Änderung")
+            self.assertLessEqual(
+                spanne, gate.AUSNAHMEN_MAX_TAGE,
+                f"Ausnahme für {e['pfad']}: {spanne} Tage Frist sind kein Termin, "
+                "sondern ein Aufschub auf irgendwann")
             self.assertTrue((ROOT / str(e["pfad"])).exists(),
                             f"Ausnahme für {e['pfad']} zeigt auf eine Datei, die es nicht gibt")
+
+    def test_dieser_test_liest_nicht_die_wanduhr(self):
+        """Selbstprüfung der Selbstprüfung: Kein Uhr-Zugriff in diesem Modul.
+        Wer die Wanduhr zurückbringt, bringt die Zeitbombe zurück.
+
+        Die verbotenen Muster sind zusammengesetzt, sonst fände dieser Test
+        sein eigenes Verbot in seinem eigenen Quelltext – ein Selbsttest, der
+        immer sich selbst meldet, ist so nutzlos wie einer, der nie meldet."""
+        quell = Path(__file__).read_text(encoding="utf-8")
+        verbote = [".".join(("date", "today()")),
+                   ".".join(("datetime", "now()")),
+                   ".".join(("time", "time()"))]
+        for verboten in verbote:
+            self.assertNotIn(verboten, quell,
+                             f"`{verboten}` in diesem Modul macht die Suite "
+                             "kalenderabhängig (scripts/selftest_clock.py) – "
+                             "Termine werden gegen Daten aus den DATEN gemessen")
+
+    def test_kurze_frist_wird_gemeldet(self):
+        """R13 an einer Fixture: 39 Tage Frist < Uhr-Proben-Horizont."""
+        with tempfile.TemporaryDirectory() as tmp:
+            sandbox = Path(tmp)
+            self.assertIn("R13", " ".join(funde_von(self._baum_mit_frist(
+                sandbox, "2026-11-15"))))
+
+    def test_abgelaufene_frist_ist_sichtbar_faerbt_aber_nicht(self):
+        """Die Frist darf im echten Leben ablaufen – dann steht sie im Bericht,
+        nicht im Exit-Code. Entscheidung 2025, Frist 2026: unter der echten Uhr
+        UND unter der Uhr-Probe (+97 Tage) abgelaufen, also deterministisch."""
+        with tempfile.TemporaryDirectory() as tmp:
+            sandbox = Path(tmp)
+            funde = funde_von(self._baum_mit_frist(sandbox, "2026-01-01",
+                                                   entscheidung="01.01.2025"))
+            self.assertEqual([], [f for f in funde if f.startswith("R13")],
+                             "Ein abgelaufenes Datum darf keinen Lauf rot färben "
+                             "(Zeitbombe) – es gehört in den Bericht")
+            eintrag = gate.ausnahmen_laden(sandbox)[0]
+            self.assertGreater(gate.ueberfaellig_tage(eintrag, heute=date(2026, 10, 7)),
+                               200, "Die Frist ist lange abgelaufen – der Zähler "
+                               "muss das zeigen, wenn die Uhr gesetzt ist")
+            gate._AUSNAHMEN_PUFFER.pop(str(sandbox), None)
+            meldung = " ".join(gate.genutzte_ausnahmen(sandbox))
+            self.assertIn("ÜBERFÄLLIG", meldung,
+                          "Abgelaufene Fristen müssen im Bericht auffallen")
+
+    def _baum_mit_frist(self, sandbox: Path, frist: str,
+                        entscheidung: str = "07.10.2026") -> Path:
+        """Prüfbaum mit dem Bestand plus einer Ausnahme mit gegebener Frist."""
+        ziel = pruefbaum_in(sandbox)
+        gate._AUSNAHMEN_PUFFER.pop(str(ziel), None)
+        pfad = ziel / gate.AUSNAHMEN
+        roh = pfad.read_text(encoding="utf-8")
+        pfad.write_text(
+            roh.replace('faellig: "2027-04-07"', f'faellig: "{frist}"')
+               .replace("07.10.2026 (Vertrag C31, Robustheit Premium)",
+                        entscheidung),
+            encoding="utf-8")
+        gate._AUSNAHMEN_PUFFER.pop(str(ziel), None)
+        return ziel
 
     def test_ausnahme_befreit_versiegelte_datei(self):
         """head.html ist KRITISCH-versiegelt: Das Gate darf sie nicht dauerrot melden."""
@@ -329,7 +427,7 @@ class AusnahmenTests(unittest.TestCase):
             pfad.write_text("ausnahmen:\n  - pfad: layouts/x.html\n    regel: R8\n"
                             "    grund: >-\n      Text\n"
                             "    entscheidung: Mensch, 07.10.2026\n"
-                            '    faellig: "2027-01-07"\n', encoding="utf-8")
+                            '    faellig: "2027-04-07"\n', encoding="utf-8")
             sandbox = Path(tmp)
             ziel = sandbox / gate.AUSNAHMEN
             ziel.parent.mkdir(parents=True, exist_ok=True)
