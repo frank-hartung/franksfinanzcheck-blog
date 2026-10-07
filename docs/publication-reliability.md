@@ -476,3 +476,73 @@ Regressionen: `scripts/tests/test_publication_reliability.py`
 `python3 scripts/reserve_custody.py --selftest`,
 `python3 scripts/reserve_janitor.py --selftest`,
 `python3 scripts/publication_release.py --selftest`.
+
+## Nachtrag 07.10.2026 – WF-7C1F #611: „Die Klasse geht dem Kanal vor" (#611)
+
+Der öffentliche Nachweis (`Publication Delivery`, Marker
+`<!-- publication-delivery-slo -->`) lief am **05./06.10.2026 zweimal rot** und
+erzeugte das generische Wartungs-Issue **#611** („Häufigste Ursachen: API-Key
+abgelaufen / GitHub-Ausfall / transienter Fehler"). Keine dieser Ursachen traf
+zu. Der Beleg sprach für sich selbst:
+
+```json
+{"day": "2026-10-05", "mode": "public", "minimum": 2, "maximum": 3,
+ "source": ["2026-10-02-preiswert-surfen-…"], "delivered": ["2026-10-02-preiswert-surfen-…"],
+ "errors": [], "ok": false}
+```
+
+`delivered == source` und `errors: []`: **Die Auslieferung war vollständig –
+der Bestand trug den gemessenen Tag nicht.** Der Montag endete bei 1/2 LIVE
+(der 19:22 UTC nachgelieferte Slot rettete genau einen Artikel, und Nachtragen
+von Inhalten ist verboten). Damit konnte kein Lauf diesen Tag mehr bestätigen;
+jeder weitere Lauf musste rot bleiben und meldete die Ursache nicht, weil der
+Schritt „Missing public delivery is a failed run" nur ein Sammel-Boolean prüfte.
+Das zentrale Fehler-Alerting legte deshalb ein Wartungs-Issue mit falschem
+Runbook an – obwohl der Fachkanal `engine-deficit` (C23, #602/#608) für genau
+diesen Zustand existiert: dieselbe Doppelmeldung, nur beim zweiten Melder
+derselben Sache.
+
+### Dauerhafte Reparatur
+
+1. **Die Klasse gehört in den Beleg** (`scripts/publication_check.py`): Neue
+   reine Funktion `klasse(result)` mit vier Defizitklassen plus `ok` –
+   `quelle_unter` (Bestand unter Mindestziel), `quelle_ueber` (über
+   Tagesmaximum), `auslieferung` (Bestand im Band, öffentlich fehlt etwas),
+   `unbekannt` (kein lesbarer Beleg, fail-closed). `ok` wird zuerst geprüft;
+   die Klasse steht im Beleg (`check()`), im tagesgenauen Beleg, in der
+   Historie (`data/publication-delivery-history.jsonl`) und auf der Kommando-
+   zeile (`--klasse`, ohne Netz und ohne Schreiben; Exit 2 = kein Beleg).
+   Die Klasse ist **additiv** – `ok` behält seine Bedeutung.
+2. **Der Workflow antwortet der Klasse** (`.github/workflows/publication-delivery.yml`):
+   Nach den beiden Belegen wird die Klasse des gültigen Nachweises gelesen
+   (der zweite, wenn die Wiederherstellung lief) und mit einem eigenen,
+   ehrlichen roten Schritt beantwortet statt mit dem Sammel-Boolean.
+3. **Fachkanal mit Frischebeweis:** Der Schritt „TAGESDEFIZIT – Fachmeldung
+   engine-deficit ist zuständig (Auslieferungs-SLO)" belegt den Fachkanal
+   (`engine_issue.py --deficit`) **vor** dem roten Exit – nur dieser Schritt
+   trägt die beiden Kennwörter, an denen die Stummschaltung des zentralen
+   Fehler-Alertings hängt (#602-Regel). Überschuss (`quelle_ueber`) und
+   Auslieferungsdefizit (`auslieferung`) bleiben laut mit eigenem Namen.
+4. **Governance C28 („Die Klasse geht dem Kanal vor")** friert Klasse,
+   Schrittnamen, Reihenfolge und die beidseitige Alerting-Zuordnung ein – mit
+   sechs Kunstbefunden im Kontrakt-Selbsttest (u. a. Frischebeweis hinter dem
+   roten Exit und ein stiller unbekannter Beleg).
+5. **Regressionen:** `scripts/tests/test_publication_delivery_workflow.py`
+   (Workflow-Vertrag: Klassenschritt, Schrittnamen, Reihenfolge, Alerting-
+   Kennwörter, fail-closed) und `KlassenRoutingTests` in
+   `scripts/tests/test_publication_reliability.py` (Klasse, Beleg, Historie,
+   CLI). Bedienung: `npm run delivery:klasse` ·
+   `python3 scripts/publication_check.py --selftest` (Logik-Beweis, uhrfest –
+   läuft seit dieser Heilung automatisch im Qualitäts-Gate mit).
+
+### Betrieb: welche Klasse ruft wen
+
+| Klasse | Bedeutung | Zuständig |
+|---|---|---|
+| `quelle_unter` | Bestand unter dem Mindestziel des gemessenen Tages | Fachkanal `engine-deficit` (Nachfüllung durch Kadenz/Reserve) |
+| `quelle_ueber` | Bestand über dem Tagesmaximum | Kadenz-Gate (stuft im nächsten Deploy zurück) |
+| `auslieferung` | Bestand im Zielband, öffentlich fehlt etwas | Deploy/CDN, P1-Kanal (#610) |
+| `unbekannt` | kein lesbarer Beleg | fail-closed laut – Belegkette prüfen |
+
+Ein vergangener Fehltag wird weiterhin **nicht** nachdatiert: Der P1-Kanal
+verbucht ihn als Quittung, die Klasse nennt nur den Besitzer der Heilung.
