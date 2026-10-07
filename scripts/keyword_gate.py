@@ -80,6 +80,36 @@ def _selftest() -> list[str]:
         # nicht zu Duplikaten führt – toleranter Check: beide enthalten Keyword
         if "test keyword" not in ko.norm(healed1[:400]) or "test keyword" not in ko.norm(healed2[:400]):
             err.append("heal_first_paragraph nicht idempotent")
+        # BOT-WATCHDOG #614 (07.10.2026): Der reale Defekt lag NICHT im kurzen
+        # Beispiel, sondern in der Geometrie der Reserve-Entwürfe. Dort beginnt
+        # der Stempelabsatz hinter Zeichen 350 (Divider, Schnell-Tipp-Kasten,
+        # Tabelle und Überschrift stehen davor), der Kopf-Wächter war blind –
+        # und jeder Lauf stempelte erneut. Aus einem Stempel wurden drei
+        # („Dein Weg zu geringeren im Check: … ×3"), der Kandidat fiel aus der
+        # Zertifizierung. Diese Probe hält die Klasse, nicht den Einzelfall.
+        kopf = ("\n\n---\n\n"
+                "💡 **Schnell-Tipp:** Vergleich lohnt sich.\n"
+                "_(Werbung – Provision, keine Mehrkosten.)_\n\n"
+                "## Einleitung – worum es eigentlich geht\n\n")
+        tabelle = ("| Anbieter | Monatspreis |\n|---|---|\n"
+                   + "| Tarif mit langem Namen | 39,99 € |\n" * 6 + "\n")
+        ziel = "Du kannst jeden Monat bares Geld sparen, ohne mehr zu arbeiten.\n"
+        roh = kopf + tabelle + ziel
+        if roh.index(ziel.strip()[:20]) <= 350:
+            err.append("Probe #614 prüft die Geometrie nicht (Stempelabsatz im "
+                       "350-Zeichen-Fenster)")
+        s1 = ko.heal_first_paragraph(roh, "Dein Weg zu geringeren")
+        s2 = ko.heal_first_paragraph(s1, "Dein Weg zu geringeren")
+        s3 = ko.heal_first_paragraph(s2, "Dein Weg zu geringeren")
+        # Der erste Lauf darf die Absatz-Naht normalisieren (er schreibt den
+        # gestempelten Absatz neu zusammen); entscheidend ist, dass KEIN
+        # zweiter Stempel entsteht und der zweite Lauf ein Fixpunkt ist.
+        stempel = "Dein Weg zu geringeren im Check"
+        # Die Naht darf der erste Lauf einmal normalisieren (er setzt den
+        # Absatz neu zusammen) – verboten ist jeder ZWEITE Stempel und jede
+        # weitere Änderung im dritten Lauf.
+        if s1.count(stempel) != 1 or s2.count(stempel) != 1 or s2 != s3:
+            err.append("Stempel-Automatik nicht idempotent (Stapel-Ruine #614)")
     except Exception as exc:
         err.append(f"Idempotenz-Check fehlgeschlagen: {exc}")
     return err

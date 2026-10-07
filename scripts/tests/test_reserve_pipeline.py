@@ -2285,6 +2285,22 @@ class RuinenKlassenDeckungTests(unittest.TestCase):
             "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: "
             "Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs")
         self.assertEqual(b["klasse"], rbk.HEILBAR)
-        self.assertEqual(b["heiler"], ["politur_ruine_heiler.py"])
+        # #612: Der Fund nennt den SPEZIFISCHEN Ruinen-Heiler ZUERST – wer den
+        # genauen Defekt kennt, gewinnt. Seit #614 darf danach der breite
+        # Politur-Heiler folgen (dieselbe Klasse, fail-closed, mit
+        # Wirkungsnachweis): Er ist das Netz für die Ruinen, die der schmale
+        # Heiler bewusst liegen lässt – etwa den doppelten Titel-Einstieg, an
+        # dem der Reserve-Vorrat am 07.10. auf 2/6 fiel.
+        self.assertEqual(b["heiler"][0], "politur_ruine_heiler.py")
+        self.assertIn("politur_heiler.py", b["heiler"],
+                      "der breite Politur-Heiler deckt dieselbe Klasse (#614)")
+        # Jeder genannte Schreiber muss existieren UND in der echten Kette
+        # laufen – sonst ist die Klassen-Zusage nur Prosa.
+        kette = {eintrag[0] for eintrag in rf.HEALER_CHAIN}
+        for name in b["heiler"]:
+            self.assertTrue((Path(__file__).resolve().parents[1] / name).exists(),
+                            f"genannter Heiler fehlt im Repo: {name}")
+            self.assertIn(name, kette,
+                          f"genannter Heiler läuft nicht in der Kette: {name}")
         self.assertFalse(rbk.gate_befund_loeschbar("R14-MARKER-RUINE: x")[0],
                          "ein heilbarer Fund darf nie ein Löschgrund sein")
