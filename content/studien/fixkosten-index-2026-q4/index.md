@@ -14,9 +14,7 @@ datasetLicense: "/studien/fixkosten-index-2026-q4/#nutzung-und-zitierweise"
 
 <p style="font-size:.9em;color:#555">Veröffentlicht: 02.10.2026 · Datenstand: 28.09.2026 · Autor und Rechnung: Frank Hartung · Version 1.0</p>
 
-# Energie kostet im Modell 2.356,60 Euro pro Jahr
-
-Ein modellierter Zwei-Personen-Haushalt mit **2.500 kWh Strom** und eine gasbeheizte Einheit mit **12.000 kWh Gas** kommt mit den veröffentlichten BDEW-Preisständen auf **2.356,60 Euro pro Jahr** beziehungsweise **196,38 Euro pro Monat**. Das ist eine reproduzierbare Planungsgröße – kein individueller Tarifpreis und kein repräsentativer Gesamtindex aller Haushaltskosten.
+**2.356,60 Euro pro Jahr** – so viel Energie kostet im Modell. Ein modellierter Zwei-Personen-Haushalt mit **2.500 kWh Strom** und eine gasbeheizte Einheit mit **12.000 kWh Gas** kommt mit den veröffentlichten BDEW-Preisständen auf **196,38 Euro pro Monat**. Das ist eine reproduzierbare Planungsgröße – kein individueller Tarifpreis und kein repräsentativer Gesamtindex aller Haushaltskosten.
 
 <figure>
   <img src="/downloads/fixkosten-index-2026-q4-pressegrafik.svg" alt="Modellrechnung mit 925 Euro Stromkosten, 1.431,60 Euro Gaskosten und 2.356,60 Euro Energiekosten pro Jahr" width="1200" height="628" loading="eager">

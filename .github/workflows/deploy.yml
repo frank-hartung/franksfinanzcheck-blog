@@ -391,6 +391,25 @@ jobs:
           python3 scripts/werkzeuge_gate.py --selftest
           python3 scripts/werkzeuge_gate.py --source-only
 
+      # ===== H1-WACHE (Dauerheilung #623, 07.10.2026) ======================
+      # Kernbefund: /presse/ und /studien/ trugen ZWEI H1 – das Layout
+      # setzt die H1 aus dem Titel, das Markdown-Dokument lieferte eine
+      # zweite `# …`-Zeile dazu. Screenreader und Inhaltsverzeichnis
+      # verloren die Gliederung (WCAG 1.3.1). Die dritte Doppel-H1
+      # (/studien/fixkosten-index-2026-q4/) stand im selben Build und
+      # blieb UNSICHTBAR, weil das wöchentliche Audit nur 20 von 107
+      # Seiten stichprobenartig prüfte.
+      # Diese Wache läuft deshalb ZWEIMAL: hier als Quellprüfung VOR dem
+      # Build (billig, ohne Hugo), nach dem Build als Prüfung der
+      # gebauten Wahrheit (jede Seite: genau eine nicht-leere H1).
+      # Sie heilt nie selbst – eine H1 zu löschen hieße, einen
+      # redaktionellen Satz zu vernichten. Der Befund nennt Datei, Zeile
+      # und den Handgriff (`heading:` ins Frontmatter).
+      - name: H1-Wache – Quell- und Layoutvertrag (genau eine H1)
+        run: |
+          python3 scripts/h1_wache.py --selftest
+          python3 scripts/h1_wache.py --source-only
+
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
       # Kernbefund Mi 02.09.2026: Ein fertiger Artikel wurde wegen einer
       # Markdown-URL mit Leerzeichen (R8-URL-LEERZEICHEN, „…-zu Hause/“
@@ -498,6 +517,30 @@ jobs:
         with:
           args: "--minify"
           label: "Produktions-Build (Publish-Gate)"
+
+      # Zweiter Teil der H1-Wache (#623): die GEBAUTE Wahrheit. Die
+      # Quellprüfung oben sieht nur Markdown und Templates – hier zählt
+      # jede gerenderte Seite (ALLE, keine Stichprobe). Genau die
+      # Stichprobe von 20 aus 107 Seiten hatte die dritte Doppel-H1 des
+      # Befundtages verdeckt; deshalb ist dieser Schritt hart.
+      - name: H1-Wache – gebaute Seiten (jede Seite genau eine H1)
+        run: |
+          set +e
+          # Protokoll in $RUNNER_TEMP, nicht ins Repo: Maschinen-Artefakte
+          # gehören nicht in den Baum (Hausregel seit #346, 22.09.2026).
+          protokoll="${RUNNER_TEMP:-/tmp}/h1wache.log"
+          python3 scripts/h1_wache.py --public public | tee "$protokoll"
+          wache_status=${PIPESTATUS[0]}
+          {
+            echo "### H1-Wache (genau eine H1 pro Seite)"
+            echo '```'
+            sed -n '1,60p' "$protokoll"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$wache_status" -ne 0 ]; then
+            echo "::error title=H1-Wache::Doppelte oder fehlende H1 im Build – Gliederung für Screenreader und Inhaltsverzeichnis beschädigt"
+          fi
+          exit "$wache_status"
 
       # ================= INDEX-HYGIENE (Crawl-Fläche, 29.09.2026) =================
       # Die bestehenden Wachen prüfen jede Seite EINZELN und korrekt

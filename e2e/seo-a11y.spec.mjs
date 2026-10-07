@@ -29,6 +29,30 @@ test.describe('SEO & A11y (Stichprobe Kern-Seiten)', () => {
     }
   });
 
+  // Regression #623 (07.10.2026): /presse/ und /studien/ trugen je ZWEI H1 –
+  // das Layout setzt sie aus dem Titel, das Markdown-Dokument lieferte eine
+  // zweite `# …`-Zeile dazu. Eine dritte Seite (/studien/fixkosten-index-…/)
+  // war im selben Build betroffen und blieb unsichtbar, weil das Audit nur
+  // 20 von 107 Seiten stichprobenartig prüfte. Der Browser ist die letzte
+  // Instanz: hier zählt, was der Leser wirklich bekommt.
+  test('genau eine gefüllte H1 – auch auf den Sonderseiten (#623)', async ({ page }) => {
+    for (const p of [
+      '/',
+      '/posts/',
+      '/presse/',
+      '/studien/',
+      '/studien/fixkosten-index-2026-q4/',
+    ]) {
+      await page.goto(p);
+      const h1 = page.locator('h1');
+      expect(await h1.count(), `Genau eine H1: ${p}`).toBe(1);
+      expect(
+        ((await h1.first().innerText()) || '').trim().length,
+        `H1 trägt sichtbaren Text: ${p}`
+      ).toBeGreaterThan(0);
+    }
+  });
+
   test('Landmarks & Skip-Link auf Startseite und Artikel', async ({ page }) => {
     for (const p of ['/', await newestArticlePath(page)]) {
       await page.goto(p);

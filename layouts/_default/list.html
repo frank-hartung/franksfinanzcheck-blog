@@ -28,8 +28,13 @@
   <a class="ff-posts-jump" href="{{ "posts/" | relURL }}#deine-6-themenwelten"><span aria-hidden="true">←</span> Zurück zu den Themenwelten</a>
   {{- end }}
   {{- else }}
+  {{- /* GENAU EINE H1 (Dauerheilung #623, 07.10.2026): Auch Abschnittsseiten
+         tragen ihre H1 aus dem Titel – eine `# …`-Zeile im Markdown-Body
+         wäre die zweite. Eine eigene Schirmzeile gehört als `heading:` ins
+         Frontmatter (gleiche Mechanik wie im Ratgeber-Zweig darüber).
+         Wache: scripts/h1_wache.py · Audit: scripts/a11y_audit.py */ -}}
   <h1>
-    {{ .Title | plainify }}
+    {{ .Params.heading | default .Title | plainify }}
     {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
     {{- with .OutputFormats.Get "rss" }}
     <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">

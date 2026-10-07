@@ -1,11 +1,10 @@
 ---
 title: "Presse & Expertise"
+heading: "Presse, Interviews und fachliche Zusammenarbeit"
 description: "Pressekontakt, Expertenthemen, zitierfähige Daten und Interviewanfragen an Frank Hartung von FranksFinanzcheck."
 draft: false
 showToc: true
 ---
-
-# Presse, Interviews und fachliche Zusammenarbeit
 
 **Pressekontakt:** Frank Hartung · [kontakt@franksfinanzcheck.de](mailto:kontakt@franksfinanzcheck.de)  
 **Antwortziel:** werktags innerhalb von zwei Arbeitstagen  

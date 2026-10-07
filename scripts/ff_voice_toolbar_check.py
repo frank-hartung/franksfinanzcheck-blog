@@ -36,8 +36,13 @@ DEPLOY = os.path.join(ROOT, ".github", "workflows", "deploy.yml")
 QA_PKG = os.path.join(ROOT, "tools", "ff-voice-qa", "package.json")
 
 LAYOUTS = [
-    os.path.join(ROOT, "layouts", "single.html"),
-    os.path.join(ROOT, "layouts", "_default", "single.html"),
+    # Dauerheilung #623 (07.10.2026): Die Artikel-Ansicht liegt seitdem genau
+    # EINMAL im gemeinsamen Baustein artikel_einzeln.html – vorher zweimal
+    # (_default/single.html und single.html), und die Kopie in
+    # layouts/single.html lief ins Leere, weil Hugo `_default/` zuerst
+    # auflöst (im gebauten HTML mit einem Baustein-Marker belegt). Die
+    # Einbindung wird deshalb am Baustein geprüft, nicht an zwei Kopien.
+    os.path.join(ROOT, "layouts", "_partials", "artikel_einzeln.html"),
     os.path.join(ROOT, "layouts", "pillar", "single.html"),
 ]
 
