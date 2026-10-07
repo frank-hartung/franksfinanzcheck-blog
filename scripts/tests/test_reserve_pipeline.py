@@ -61,6 +61,10 @@ import reserve_healer_coverage as rhc  # noqa: E402
 import reserve_quarantine as rq      # noqa: E402
 import reserve_readiness as rr       # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
+import generate_drafts as gd          # noqa: E402
+import politur_ruine_heiler as prh    # noqa: E402
+import readability_check as rdc      # noqa: E402
+import reserve_blocker_klassen as rbk  # noqa: E402
 
 
 # Die Reserve-Linie führt zwei GEDÄCHTNISSE (Themen-Cooldowns, Pool-Besitz).
@@ -2010,3 +2014,200 @@ class UhrZwangDerReserveWachenTests(unittest.TestCase):
                               "Dateialter wird nicht absolut gestempelt")
                 self.assertIn("PROBETAGE", quelle,
                               "Selbsttest läuft nicht gegen feste Testdaten")
+
+
+class PoliturRuinenHeilerTests(unittest.TestCase):
+    """WF-D4E0 (#612): Die R11/R13/R14-Ruinen sind beweisbar heilbar.
+
+    Realfall 07.10.2026: Der Reserve-Kandidat
+    `2026-10-07-wie-smart-home-…` (Qualität 0,95) scheiterte EINZIG an
+    „R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines automatisierten
+    Politur-Laufs“, blieb liegen und der Vorrat fiel unter das Ziel – der rote
+    End-Gate „Stock shortage must not look successful“ aus #612. Der Heiler
+    schneidet ausschließlich die drei beweisbaren Klassen aus der Muster-SSOT
+    (`sprachkern.POLITUR_RUINEN`); die nicht rekonstruierbaren Geschwister
+    (R12-ZAHL-RUINE, R16-PROMPT-ECHO) meldet er nur.
+    """
+
+    _R14 = ("---\ntitle: \"X\"\ndraft: true\n---\n\n"
+            "Der Wechsel lohnt sich für viele Haushalte.\n\n"
+            "| Standard | Frequenz |\n|---|---|\n"
+            "| Zigbee | 2,4 GHz |\n"
+            "SATZ: | Thread | 2,4 GHz |\n")
+
+    def test_r14_marker_verschwindet_die_zeile_bleibt(self):
+        erg = prh.heile_text("fixture", self._R14)
+        self.assertTrue(erg["ok"], erg["gruende"])
+        self.assertEqual((erg["vor"], erg["nach"]), (1, 0))
+        self.assertNotIn("SATZ:", erg["neu_raw"])
+        self.assertIn("| Thread | 2,4 GHz |", erg["neu_raw"])
+
+    def test_r11_und_r13_werden_deterministisch_repariert(self):
+        roh = ("---\ntitle: \"X\"\ndraft: true\n---\n\n"
+               "Der Vertrag startet am 2 Januar 2026 und gilt bis 20 30.\n")
+        erg = prh.heile_text("fixture", roh)
+        self.assertTrue(erg["ok"], erg["gruende"])
+        self.assertIn("2. Januar 2026", erg["neu_raw"])
+        self.assertIn("2030", erg["neu_raw"])
+
+    def test_unbeteiligter_text_bleibt_byte_identisch(self):
+        roh = ("---\ntitle: \"X\"\ndraft: true\n---\n\n"
+               "Ein ruhiger Satz über Preise, Tarife und Verträge.\n")
+        erg = prh.heile_text("fixture", roh)
+        self.assertEqual(erg["stufe"], "nichts-zu-tun", erg["gruende"])
+        self.assertEqual(erg["neu_raw"], roh)
+
+    def test_r12_zahl_ruine_wird_nie_geraten(self):
+        roh = ("---\ntitle: \"X\"\ndraft: true\n---\n\n"
+               "Die Rückzahlung aus der 2 im Januar fehlt weiterhin.\n")
+        regeln = {name for name, _ in prh._ruinen(roh)}
+        self.assertIn("R12-ZAHL-RUINE", regeln,
+                      "die Fixture muss die nicht heilbare Familie treffen")
+        self.assertNotIn("R12-ZAHL-RUINE", prh.HEILBAR)
+        erg = prh.heile_text("fixture", roh)
+        self.assertEqual(erg["neu_raw"], roh,
+                         "R12 darf nie angefasst werden (Raten = Fälschung)")
+
+    def test_halber_marker_bleibt_liegen_fail_closed(self):
+        roh = ("---\ntitle: \"X\"\ndraft: true\n---\n\n"
+               "TODO: nur zwei Worte\n")
+        erg = prh.heile_text("fixture", roh)
+        self.assertFalse(erg["ok"])
+        self.assertEqual(erg["neu_raw"], roh,
+                         "nichts Halbfertiges schreiben (Tor ist Alles-oder-Nichts)")
+        self.assertTrue(erg["offen"], "der offene Rest muss gemeldet werden")
+
+    def test_heilung_ist_idempotent(self):
+        eins = prh.heile_text("fixture", self._R14)
+        zwei = prh.heile_text("fixture", eins["neu_raw"])
+        self.assertEqual(zwei["stufe"], "nichts-zu-tun")
+        self.assertEqual(zwei["neu_raw"], eins["neu_raw"])
+
+    def test_realfall_smart_home_bleibt_ohne_marker_ruine(self):
+        """Der Kandidat aus #612 bleibt geheilt (Regression der Ursache)."""
+        pfad = (ROOT / "content/posts/2026-10-07-wie-smart-home-geraete-"
+                "deine-stromrechnung-wirklich-druecken/index.md")
+        if not pfad.exists():
+            self.skipTest("Realfall nicht im Checkout")
+        roh = pfad.read_text(encoding="utf-8")
+        self.assertNotIn("SATZ: | Thread", roh)
+        self.assertEqual([f for f in prh._ruinen(roh) if f[0] in prh.HEILBAR],
+                         [], "healbare Ruinen dürfen sich nicht zurückfinden")
+
+
+class GeburtsLesbarkeitTests(unittest.TestCase):
+    """WF-D4E0 (#612): Die Lesbarkeit wird an der GEBURT gemessen.
+
+    Die Zertifizierung lehnt seit #585 jeden Text unter Flesch 60 ab – bis
+    zum 07.10.2026 fehlte genau diese Messung im Geburts-Gate: Kandidaten
+    wurden mit 53–60 geboren, fielen später geschlossen durch die
+    Zertifizierung und banden Heiler-/KI-Zeit. Genau daran fiel der Vorrat
+    unter das Ziel (#612).
+    """
+
+    def test_einfacher_kurzer_text_ist_kein_befund(self):
+        self.assertIsNone(gd.lesbarkeits_befund(
+            "Der Hund läuft. Die Katze schläft. Das Kind spielt im Garten."))
+
+    def test_komposita_wand_wird_gegen_die_ssot_schwelle_gemessen(self):
+        wand = " ".join(["Die Versicherungswirtschaft kalkuliert ihre "
+                         "Beiträge über Versicherungsmathematik."] * 40)
+        befund = gd.lesbarkeits_befund(wand)
+        self.assertIsNotNone(befund)
+        self.assertIn(f"< {rdc.NEW_FLESCH_MIN:g}", befund,
+                      "die Messung muss die importierte SSOT-Schwelle nennen")
+
+    def test_das_profi_gate_ruft_die_messung_auf(self):
+        quelle = (SCRIPTS / "generate_drafts.py").read_text(encoding="utf-8")
+        koerper = quelle.split("def profi_quality_ok", 1)[1].split("\ndef ", 1)[0]
+        self.assertIn("lesbarkeits_befund(body)", koerper,
+                      "das Geburts-Gate misst die Publish-Regel nicht (#612)")
+
+
+class RetryGedaechtnisTests(unittest.TestCase):
+    """#612: Der nächste Versuch kennt die Befunde des vorigen.
+
+    Vorher würfelte jede Wiederholung blind – mit derselben Regel verletzte
+    sie dieselbe Schwelle mit derselben Wahrscheinlichkeit, und nach drei
+    Versuchen war das Kontingent aufgebraucht.
+    """
+
+    def test_zweiter_versuch_traegt_den_korrektur_auftrag(self):
+        gesehen = []
+        roh = ("TITLE: Strom sparen: So senkst du die Kosten\n"
+               "DESCRIPTION: Ein ruhiger Leitfaden zu Stromkosten im Haushalt\n\n"
+               "Ein kurzer, ruhiger Testtext für den Versuch.\n")
+        befund = "Lesbarkeit: Flesch 58.0 < 60 – kürzere Sätze bilden"
+
+        def fake_gen(topic, angle, perspective=None, pin=None, keywords=None,
+                     pillar=None, hinweise=None):
+            gesehen.append(hinweise)
+            return roh, "Test-Provider"
+
+        def fake_gate(body, keywords=None):
+            if len(gesehen) < 2:
+                return False, [befund]
+            return True, []
+
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), \
+                patch.object(eg.g, "generate_article_text", side_effect=fake_gen), \
+                patch.object(eg.g, "profi_quality_ok", side_effect=fake_gate), \
+                patch.object(eg, "normalize_title", side_effect=lambda s: s):
+            ergebnis, _info = eg.try_generate({"title": "Strom sparen"}, [],
+                                              None, set(), max_attempts=2)
+        self.assertIsNotNone(ergebnis, "der zweite Versuch muss angenommen werden")
+        self.assertIsNone(gesehen[0], "der erste Versuch hat keine Vorbefunde")
+        self.assertEqual(gesehen[1], [befund],
+                         "der zweite Versuch muss den Korrektur-Auftrag tragen")
+
+
+class ReserveChronikTests(unittest.TestCase):
+    """#612: Der Trend-Beweis überlebt den roten Lauf.
+
+    `reserve_gate` schrieb die Chronik-Zeile bisher NACH dem einzigen
+    Commit-Schritt des Laufs; jeder rote Lauf verlor sie wieder. Der letzte
+    CI-Eintrag stammte vom 02.10.2026 – alle späteren Zeilen waren lokale
+    Reparaturläufe. Jetzt schreibt der Workflow VOR dem Commit
+    (`--chronik`), und die Zeile ist je Lauf idempotent, damit der End-Gate
+    sie nicht doppelt setzt.
+    """
+
+    def test_chronik_ist_je_lauf_idempotent(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.object(rg, "ROOT", Path(tmp)):
+                pfad = Path(tmp) / "data" / "reserve-history.jsonl"
+                with patch.dict(os.environ, {"GITHUB_RUN_ID": "TESTLAUF-1"}):
+                    rg.chronik_schreiben(2, 6, [])
+                    rg.chronik_schreiben(2, 6, [])
+                zeilen = [json.loads(z) for z in
+                          pfad.read_text(encoding="utf-8").splitlines() if z.strip()]
+                self.assertEqual(len(zeilen), 1,
+                                 "ein Lauf darf genau eine Chronik-Zeile haben")
+                self.assertEqual(zeilen[0]["lauf"], "TESTLAUF-1")
+                with patch.dict(os.environ, {"GITHUB_RUN_ID": "TESTLAUF-2"}):
+                    rg.chronik_schreiben(3, 6, [])
+                zeilen = [json.loads(z) for z in
+                          pfad.read_text(encoding="utf-8").splitlines() if z.strip()]
+                self.assertEqual(len(zeilen), 2,
+                                 "der nächste Lauf bekommt seine eigene Zeile")
+
+    def test_workflow_schreibt_die_chronik_vor_dem_commit(self):
+        yml = (ROOT / ".github/workflows/content-reserve.yml").read_text(
+            encoding="utf-8")
+        self.assertIn("reserve_gate.py --chronik", yml)
+        self.assertLess(yml.find("reserve_gate.py --chronik"),
+                        yml.find("Entwürfe, Zertifikate und Reporte sichern"),
+                        "die Chronik muss VOR dem Sicherungs-Commit stehen")
+
+
+class RuinenKlassenDeckungTests(unittest.TestCase):
+    """#612: Der reale Gate-Fund nennt seinen Heiler – und bleibt verschont."""
+
+    def test_r14_fund_ist_heilbar_und_nennt_den_ruinen_heiler(self):
+        b = rbk.gate_befund_klasse(
+            "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: "
+            "Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs")
+        self.assertEqual(b["klasse"], rbk.HEILBAR)
+        self.assertEqual(b["heiler"], ["politur_ruine_heiler.py"])
+        self.assertFalse(rbk.gate_befund_loeschbar("R14-MARKER-RUINE: x")[0],
+                         "ein heilbarer Fund darf nie ein Löschgrund sein")

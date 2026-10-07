@@ -122,7 +122,16 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
     # beweist seine Wirkung als Maschinenvertrag (`--wirkungsprobe`).
     "readability_failures": ("lesbarkeit_heiler.py", "profi_polish.py"),
     # R2/R3/R5/R7/R8: Absatz-Splitter heilt R5, URL-Hygiene heilt R8-URL.
+    # REPARATUR 07.10.2026 (WF-D4E0, #612): R11/R13/R14 (Politur-Ruinen,
+    # harte Publish-Regeln seit #482) hatten in dieser Kette KEINEN
+    # Schreiber – die Zeile deckte die Familie formal, nicht faktisch. Der
+    # Kandidat `2026-10-07-wie-smart-home-…` scheiterte einzig an der
+    # Marker-Ruine „SATZ: | Thread | …“ und die Quarantäne nahm ihn als
+    # `reserve_blocked` aus dem Spiel; der Vorrat fiel unter das Ziel
+    # (roter End-Gate, Issue #612). Der Heiler heilt genau die beweisbaren Klassen und
+    # meldet die nicht heilbaren (R12/R16) fail-closed.
     "textverstaendnis_failures": ("r5_absatz_splitter.py",
+                                  "politur_ruine_heiler.py",
                                   "fix_url_hygiene.py"),
 }
 
@@ -162,6 +171,10 @@ AUSNAHMEN: dict[str, str] = {
 #  wirklich bewegt, und das Tor T1–T4 hält.
 WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
     "lesbarkeit_heiler.py": ("--wirkungsprobe",),
+    # Zweiter Heiler mit Zahlen-/Regel-Versprechen (WF-D4E0, #612): Die
+    # Politur-Ruinen-Familie verschwindet nachweislich (Fixture je Klasse,
+    # Tor T1–T4, zweiter Lauf = Fixpunkt). Die Probe läuft ohne Netz.
+    "politur_ruine_heiler.py": ("--wirkungsprobe",),
 }
 
 #  Regeln mit Zahlen-Versprechen: Mindestens einer ihrer Heiler MUSS eine

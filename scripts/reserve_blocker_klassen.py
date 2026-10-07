@@ -218,6 +218,32 @@ GATE_BEFUNDE: tuple[dict, ...] = (
      "grund": ("Flesch ≥ 60 hebt der Lesbarkeits-Heiler (Stufe A "
                "deterministisch, Stufe B KI auf die Silben je Wort, Tor "
                "T1–T4); das Polish der Kette bleibt der zweite Hebel.")},
+    # Politur-Ruinen (WF-D4E0 #612, 07.10.2026): Die drei BEWEISBAR heilbaren
+    # Klassen der Textverständnis-Familie (harte Publish-Regeln seit #482)
+    # haben einen Schreiber: `politur_ruine_heiler.py` (deterministisch, Tor
+    # T1–T4, Wirkungsprobe, reserve_finisher-Kette). Der reale Fall: Der
+    # Kandidat `2026-10-07-wie-smart-home-…` (Qualität 0,95) scheiterte
+    # EINZIG an „R14-MARKER-RUINE: Politur-Ruine „SATZ:“ – Überrest eines
+    # automatisierten Politur-Laufs“, blieb liegen, zog zwei Läufe und der
+    # Vorrat fiel unter das Ziel – der rote End-Gate aus #612. Die NICHT
+    # heilbaren Geschwister (R12-ZAHL-RUINE, R16-PROMPT-ECHO) stehen hier
+    # bewusst NICHT: Ein Muster „ruine“ würde einen Schreiber behaupten, der
+    # sie erklärt ablehnt – sie bleiben „unbekannt“, fail-closed unantastbar.
+    {"muster": "r11-jahreszahl-split", "klasse": HEILBAR,
+     "heiler": ("politur_ruine_heiler.py",),
+     "grund": ("Ein Jahreszahl-Split in Zeilen/Tabellen wird vom "
+               "Politur-Ruinen-Heiler deterministisch zusammengesetzt "
+               "(Tor T1–T4, sonst Byte-identisch zurück).")},
+    {"muster": "r13-datum-punkt", "klasse": HEILBAR,
+     "heiler": ("politur_ruine_heiler.py",),
+     "grund": ("Zerlegte Datumsangaben liest der Ruinen-Heiler verlustfrei "
+               "zusammen; die Verifikation vergleicht Wortzahl und harte "
+               "Regeln vor/nach dem Eingriff.")},
+    {"muster": "r14-marker-ruine", "klasse": HEILBAR,
+     "heiler": ("politur_ruine_heiler.py",),
+     "grund": ("Überreste automatisierter Politur-Läufe („SATZ:“) entfernt "
+               "der Ruinen-Heiler – der Kandidat bleibt Vorrat statt "
+               "Quarantäne (WF-D4E0 #612).")},
     {"muster": "quality-score", "klasse": HEILBAR,
      "heiler": ("profi_polish.py", "spellcheck.py", "check_length.py"),
      "grund": ("Der Score ist die Summe heilbarer Teile (Rechtschreibung, "
@@ -452,6 +478,14 @@ def run_selftest() -> int:
                           f"-> {bewertung['klasse']}")
     if gate_befund_klasse("Zeichenlänge …")["klasse"] != HEILBAR:
         fehler.append("Zeichenlängen-Fund muss heilbar sein (#594)")
+    # 7c) Der reale #612-Fund benennt seinen Heiler – und bleibt verschont.
+    _ruine = gate_befund_klasse(
+        "Textverständnis-Gate nicht bestanden: R14-MARKER-RUINE: "
+        "Politur-Ruine „SATZ:“ – Überrest eines automatisierten Politur-Laufs")
+    if _ruine["heiler"] != ["politur_ruine_heiler.py"] or \
+            _ruine["klasse"] != HEILBAR or gate_befund_loeschbar(
+                "R14-MARKER-RUINE: Politur-Ruine")[0]:
+        fehler.append("R14-Marker-Ruine muss den Ruinen-Heiler nennen (#612)")
     if gate_befund_klasse("Gate-Ausnahme: x")["klasse"] != TRANSIENT:
         fehler.append("Werkzeugfehler muss transient sein")
     if gate_befund_klasse("Freigabe fehlt")["klasse"] != MENSCHLICH:

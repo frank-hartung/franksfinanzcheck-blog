@@ -122,6 +122,13 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # verlangt, fuehrt irgendwann niemand aus - deshalb steht sein
           # Selbsttest hier im vertraglichen Minimum (C6).
           "lesbarkeit_heiler.py",
+          # Politur-Ruinen-Heiler (07.10.2026, WF-D4E0/#612): R11/R13/R14
+          # sind harte Publish-Regeln (#482) und hatten in der Reserve-Kette
+          # keinen Schreiber. Ohne ihn blieb ein fertiger Kandidat an einem
+          # „SATZ: “-Rest hängen, wanderte nach zwei Laeufen in die Quarantaene
+          # und der Vorrat fiel unter das Ziel (roter End-Gate, #612). Sein
+          # Selbsttest steht im vertraglichen Minimum (C6).
+          "politur_ruine_heiler.py",
           # Publikations-Vertrag (07.10.2026, WF-54C4/#607): Die KI-Heilung
           # pruefte nur Struktur und schrieb am 05.10.2026 einen Text mit
           # Flesch 44,3 + „In diesem Beitrag…“ in den Bestand; der Alarm kam
@@ -1886,6 +1893,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                   python_bin=python_bin)
     checks += c26_beleg_je_tag(script_texts, wflows, root=root)
     checks += c27_ledger_isolation(script_texts, wflows, root=root)
+    checks += c28_geburts_tor(script_texts, wflows, root=root,
+                              python_bin=python_bin)
     return checks
 
 
@@ -2199,6 +2208,137 @@ def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
+# --- C28: Der Schreiber prüft, was über ihn entscheidet (WF-D4E0 #612, 07.10.2026)
+# Auslöser: Die Content-Reserve lief N acht für Nacht rot, weil der Vorrat
+# unter dem Ziel stand (`ready 2/6`, #612). Die Wurzel lag nicht in der
+# Zertifizierung – die hat korrekt abgelehnt – sondern in der GEBURT: Das
+# „Profi-Gate“ (`generate_drafts.profi_quality_ok`) prüfte Länge, Module,
+# Keywords und Struktur, aber NICHT die Lesbarkeit, obwohl Flesch ≥ 60 seit
+# #585 ein hartes Publish-Kriterium ist. Kandidaten wurden mit Flesch 53–60
+# geboren, fielen geschlossen durch die Zertifizierung und banden danach
+# Heiler-/KI-Zeit; blieb die Heilung aus, nahm die Quarantäne sie nach zwei
+# Läufen aus dem Pool (#513, #609, #612).
+#
+# Die zweite Hälfte desselben Befunds: Der Retry war blind. `try_generate`
+# sammelte die Ablehnungsgründe, gab sie aber nie an den nächsten Versuch
+# weiter – dreimal derselbe Fehler mit dreimal derselben Wahrscheinlichkeit.
+#
+# Die dritte: Der Trend-Beweis war strukturell blind. `reserve_gate` schrieb
+# die Chronik-Zeile NACH dem einzigen Commit-Schritt des Laufs; jeder rote
+# Lauf verlor sie wieder. Der letzte CI-Eintrag stammte vom 02.10., alle
+# späteren Zeilen waren lokale Reparaturläufe – genau die Nächte fehlten, die
+# man später erklären will.
+#
+# Diese Regel hält die drei Lektionen fest und prüft sie am echten Baum:
+#   * `profi_quality_ok` misst die Lesbarkeit über die IMPORTIERTE SSOT
+#     (`readability_check.NEW_FLESCH_MIN`) – keine zweite Zahl (#585),
+#   * `generate_article_text` kennt Korrektur-Hinweise, und `try_generate`
+#     gibt die Befunde des Vorversuchs weiter (Retry mit Gedächtnis),
+#   * die Chronik wird VOR dem Sicherungs-Commit geschrieben und ist je Lauf
+#     idempotent,
+#   * der Politur-Ruinen-Heiler (#612) hält die harte R11/R13/R14-Familie in
+#     der Reserve-Kette heilbar und beweist seine Wirkung JETZT (Exit 0).
+RE_C28_QUALITY_FN = re.compile(r"def\s+profi_quality_ok\s*\(.*?(?=\ndef\s)", re.S)
+
+
+def c28_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
+    out = []
+    gd = script_texts.get("generate_drafts.py", "")
+    eg = script_texts.get("engine_generate.py", "")
+    rg = script_texts.get("reserve_gate.py", "")
+    heiler = script_texts.get("politur_ruine_heiler.py", "")
+    kette = script_texts.get("reserve_finisher.py", "")
+    deckung = script_texts.get("reserve_healer_coverage.py", "")
+    if not gd or not eg or not rg:
+        out.append(("C28", "generate_drafts.py / engine_generate.py / "
+                           "reserve_gate.py nicht lesbar – das Geburts-Tor ist "
+                           "nicht prüfbar (fail-closed)."))
+        return out
+
+    # a) Die Geburt misst die Regel, die über die Veröffentlichung entscheidet.
+    if "lesbarkeits_befund" not in gd:
+        out.append(("C28", "generate_drafts.py misst die Lesbarkeit nicht am "
+                           "Geburts-Gate – Kandidaten entstehen wieder unter der "
+                           "Publish-Schwelle und die Zertifizierung lehnt sie "
+                           "geschlossen ab (#612)."))
+    else:
+        koerper = RE_C28_QUALITY_FN.search(gd)
+        if not koerper or "lesbarkeits_befund(body)" not in koerper.group(0):
+            out.append(("C28", "`profi_quality_ok` ruft die Lesbarkeits-Messung "
+                               "nicht auf – eine Funktion ohne Aufruf ist "
+                               "Papier (#612)."))
+    if "NEW_FLESCH_MIN" not in gd:
+        out.append(("C28", "generate_drafts.py liest die Schwelle nicht aus der "
+                           "SSOT `readability_check.NEW_FLESCH_MIN` (#585)."))
+    if re.search(r"NEW_FLESCH_MIN\s*=\s*[0-9]", gd):
+        out.append(("C28", "generate_drafts.py definiert die Flesch-Schwelle "
+                           "selbst – zweite Wahrheit (#585)."))
+
+    # b) Der Retry hat ein Gedächtnis.
+    if "KORREKTUR-AUFTRAG" not in gd or "hinweise" not in gd:
+        out.append(("C28", "`generate_article_text` kennt keinen "
+                           "Korrektur-Auftrag – der nächste Versuch würfelt "
+                           "denselben Fehler blind neu (#612)."))
+    if "hinweise=" not in eg:
+        out.append(("C28", "`engine_generate.try_generate` gibt die Befunde des "
+                           "Vorversuchs nicht an den Schreiber weiter (#612)."))
+
+    # c) Die Chronik gehört VOR den Sicherungs-Commit.
+    if "--chronik" not in rg or "chronik_schreiben(" not in rg:
+        out.append(("C28", "reserve_gate.py kennt den Chronik-Modus nicht – der "
+                           "Trend-Beweis ginge wieder verloren (#612)."))
+    yml = wflows.get(os.path.join(root, ".github", "workflows",
+                                  "content-reserve.yml"), "")
+    if not yml:
+        out.append(("C28", "content-reserve.yml nicht lesbar – die "
+                           "Chronik-Reihenfolge ist nicht prüfbar."))
+    else:
+        if "reserve_gate.py --chronik" not in yml:
+            out.append(("C28", "content-reserve.yml schreibt die Reserve-Chronik "
+                               "nicht VOR dem Commit – rote Läufe verlören ihre "
+                               "Zeile (der letzte CI-Eintrag stammte vom "
+                               "02.10., #612)."))
+        else:
+            pos_chronik = yml.find("reserve_gate.py --chronik")
+            pos_commit = yml.find("Entwürfe, Zertifikate und Reporte sichern")
+            if pos_commit != -1 and pos_chronik > pos_commit:
+                out.append(("C28", "die Chronik steht in content-reserve.yml NACH "
+                                   "dem Sicherungs-Commit – genau die Reihenfolge, "
+                                   "die den Trend-Beweis rot machte (#612)."))
+
+    # d) Der Ruinen-Heiler: in der Kette, in der Deckung, Wirkung JETZT.
+    if not heiler:
+        out.append(("C28", "scripts/politur_ruine_heiler.py fehlt – R11/R13/R14 "
+                           "wären wieder ein harter Blocker ohne Heiler (#612)."))
+    else:
+        if '("politur_ruine_heiler.py"' not in kette:
+            out.append(("C28", "reserve_finisher.HEALER_CHAIN fährt den "
+                               "Politur-Ruinen-Heiler nicht – ein fertiger "
+                               "Kandidat bliebe an einem „SATZ: “-Rest hängen "
+                               "(#612)."))
+        if "politur_ruine_heiler.py" not in deckung:
+            out.append(("C28", "reserve_healer_coverage.py nennt den "
+                               "Politur-Ruinen-Heiler nicht – die Familie gälte "
+                               "wieder als gedeckt, ohne dass jemand sie heilt."))
+        bin_ = python_bin or sys.executable or "python3"
+        try:
+            lauf = subprocess.run(
+                [bin_, os.path.join(root, "scripts", "politur_ruine_heiler.py"),
+                 "--wirkungsprobe"], cwd=root, capture_output=True, text=True,
+                timeout=180)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C28", f"Wirkungsprobe des Ruinen-Heilers nicht "
+                               f"ausführbar ({exc.__class__.__name__}) – "
+                               f"fail-closed."))
+            return out
+        if lauf.returncode != 0:
+            zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
+            out.append(("C28", "Wirkungsprobe des Ruinen-Heilers ROT: "
+                               + (zeilen[-1][:160] if zeilen
+                                  else f"Exit {lauf.returncode}")))
+    return out
+
+
 RULE_TEXT = {
     "C1": "Die Sicht (Chefredakteur-Scorecard) läuft nach allen Messungen – sonst "
           "zeigt sie Werte des Vorlaufs als aktuellen Befund (#206).",
@@ -2323,6 +2463,23 @@ RULE_TEXT = {
            "zurück, statt als „Kopie“ vernichtet zu werden, und die Endabnahme "
            "füllt konvergent nach, bis das Mindestziel steht oder das Material "
            "ehrlich erschöpft ist (#610).",
+    "C28": "Ein Schreiber prüft, was über ihn entscheidet: Das Geburts-Gate "
+           "der Content-Engine (`generate_drafts.profi_quality_ok`) misst die "
+           "Lesbarkeit gegen die importierte SSOT "
+           "`readability_check.NEW_FLESCH_MIN` – ein Text, den die "
+           "Zertifizierung nachweislich ablehnt, darf gar nicht erst als "
+           "Rohtext entstehen (Flesch >= 60 ist hartes Publish-Kriterium, "
+           "#585). Der Retry hat ein Gedächtnis: `try_generate` gibt die "
+           "Befunde des Vorversuchs als Korrektur-Auftrag an den Schreiber. "
+           "Der Trend-Beweis gehört vor den Commit: Die Reserve-Chronik wird "
+           "VOR dem Sicherungs-Commit geschrieben (`reserve_gate.py --chronik`, "
+           "idempotent je Lauf) – bis zum 07.10.2026 verlor jeder rote Lauf "
+           "genau die Zeile, die seine Nacht erklärt hätte. Und ein harter "
+           "Blocker hat einen Heiler: R11/R13/R14 (Politur-Ruinen, #482) "
+           "heilt `politur_ruine_heiler.py` beweisbar (Tor T1-T4) in Reserve- "
+           "und Live-Kette; sonst blieb ein fertiger Kandidat an einem "
+           "„SATZ: “-Rest hängen und der Vorrat fiel unter das Ziel "
+           "(WF-D4E0, #612).",
     "C27": "Beweisen ist nicht Fabrizieren: `data/audit/*.jsonl` ist ein "
            "versioniertes, append-only bewachtes Beweis-Ledger (history_guard "
            "H6) – jede Zeile behauptet einen echten Betriebsvorgang. Ein "
@@ -2361,7 +2518,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)",
          "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)",
          "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)",
-         "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)"}
+         "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)",
+         "C28": "Der Schreiber prüft, was über ihn entscheidet (Geburts-Tor, "
+                "Retry-Gedächtnis, Chronik-Reihenfolge, Ruinen-Heiler)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -3020,12 +3179,64 @@ def _selftest():
             if "unberührt" in f[1]]:
         failures.append("C27: eine fehlende Ledger-Leitplanke im Qualitäts-Gate "
                         "bleibt unentdeckt (Nebenbefund #610).")
+    # --- C28: Der Schreiber prüft, was über ihn entscheidet (#612) ----------
+    # Von hier an prüft der SELFTEST die neue Regel mit Kunstbefunden. Der
+    # echte Baum muss still bleiben; jede Sabotage muss GENAU ihren Zweig
+    # treffen. Der Ruinen-Heiler läuft dabei EINMAL echt (Wirkungsprobe).
+    echte_schreiber = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                       for name in ("generate_drafts.py", "engine_generate.py",
+                                    "reserve_gate.py", "politur_ruine_heiler.py",
+                                    "reserve_finisher.py",
+                                    "reserve_healer_coverage.py")}
+    echt_befunde = c28_geburts_tor(echte_schreiber, wflows_echt,
+                                   python_bin=sys.executable or "python3")
+    if echt_befunde:
+        failures.append(f"C28: der echte Zustand wird beanstandet: {echt_befunde}")
+    # (a) Das Geburts-Gate misst die Lesbarkeit nicht mehr: #612 kehrt zurück.
+    ohne_messung = dict(echte_schreiber, **{
+        "generate_drafts.py": echte_schreiber["generate_drafts.py"].replace(
+            "lesbarkeits_befund(body)", "None")})
+    if not [f for f in c28_geburts_tor(ohne_messung, wflows_echt,
+                                       python_bin=sys.executable or "python3")
+            if "Papier" in f[1] or "Lesbarkeit" in f[1]]:
+        failures.append("C28: eine abgeschaltete Lesbarkeits-Messung im "
+                        "Geburts-Gate bleibt unentdeckt (#612).")
+    # (b) Der Retry verliert sein Gedächtnis – genau der Zustand vor #612.
+    ohne_gedaechtnis = dict(echte_schreiber, **{
+        "engine_generate.py": echte_schreiber["engine_generate.py"].replace(
+            "hinweise=letzte_hinweise or None", "")})
+    if not [f for f in c28_geburts_tor(ohne_gedaechtnis, wflows_echt,
+                                       python_bin=sys.executable or "python3")
+            if "Vorversuchs" in f[1]]:
+        failures.append("C28: ein Retry ohne Gedächtnis bleibt unentdeckt (#612).")
+    # (c) Die Chronik steht wieder NACH dem Commit: der Trend-Beweis wäre bei
+    #     jedem roten Lauf verloren, obwohl der Heiler ihn liefern kann.
+    yml_chronik = dict(wflows_echt)
+    for pfad in list(yml_chronik):
+        if os.path.basename(pfad) == "content-reserve.yml":
+            yml_chronik[pfad] = yml_chronik[pfad].replace(
+                "reserve_gate.py --chronik", "# Chronik entfernt")
+    if not [f for f in c28_geburts_tor(echte_schreiber, yml_chronik,
+                                       python_bin=sys.executable or "python3")
+            if "VOR dem Commit" in f[1] or "Chronik" in f[1]]:
+        failures.append("C28: eine fehlende Chronik-Vorverlagerung bleibt "
+                        "unentdeckt (WF-D4E0 #612).")
+    # (d) Der Ruinen-Heiler fällt aus der Kette: der Kandidat hängt wieder an
+    #     einem „SATZ: “-Rest und der Vorrat fällt unter das Ziel (#612).
+    ohne_heiler = dict(echte_schreiber, **{
+        "reserve_finisher.py": echte_schreiber["reserve_finisher.py"].replace(
+            '("politur_ruine_heiler.py"', '("x_politur_ruine_heiler.py"')})
+    if not [f for f in c28_geburts_tor(ohne_heiler, wflows_echt,
+                                       python_bin=sys.executable or "python3")
+            if "HEALER_CHAIN" in f[1] or "Politur" in f[1]]:
+        failures.append("C28: ein aus der Reserve-Kette entfernter "
+                        "Politur-Ruinen-Heiler bleibt unentdeckt (#612).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C27 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C28 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
