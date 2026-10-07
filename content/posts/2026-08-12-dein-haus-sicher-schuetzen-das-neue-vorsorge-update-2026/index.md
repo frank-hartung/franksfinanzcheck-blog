@@ -2,12 +2,11 @@
 lastmod: 2026-10-01
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Dein Haus sicher schützen: Welche Bausteine Eigentümer und Mieter 2026 wirklich brauchen: Wohngebäude, Hausrat, Elementarschutz, Unterversicherung und die…"
-date: 2026-08-12T08:15:00Z
+date: 2026-10-07T01:34:14Z
 draft: true
+cadence_demoted: 2026-10-07T01:34:21Z
+cadence_grund: "ymyl-review: E18: geprüfte Aussage 1: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 2: Textanker kommt im Artikel nicht vor; E18: geprüfte Aussage 4: Textanker kom…"
 endredaktion_status: freigegeben
-cadence_wait: true
-cadence_demoted: 2026-10-06T12:12:50Z
-cadence_grund: "Endredaktion: alle Gates grün – automatisch freigegeben (2026-10-06)"
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
