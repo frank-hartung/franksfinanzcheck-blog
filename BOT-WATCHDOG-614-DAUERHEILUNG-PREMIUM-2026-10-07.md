@@ -1,0 +1,273 @@
+# Bot-Watchdog · Content-Reserve · Vorgang #614 — Dauerheilung auf Premium-Niveau
+
+**Datum:** 07.10.2026 · **Issue:** #614 („⚠️ Bot-Watchdog: Automatisierung braucht Eingriff", Label `bot-watchdog`, offen seit 06.10.2026 15:23 UTC)
+**Workflow:** `.github/workflows/content-reserve.yml` (letzter abgeschlossener Lauf `37607427999`, 07.10. 10:26 UTC; laufender Nachweislauf `37645894042`, 07.10. 15:40 UTC)
+**Reparatur-Vorschlag:** PR **#626** („Closes #614") · **Vorgänger:** #585 (Lesbarkeits-Gate), #594 (Blocker-Klassen), #609 (Lesbarkeits-Heiler), #610 (Audit-Ledger)
+
+## Kurzfassung
+
+#614 war **kein Textproblem und kein Werkzeugausfall**. Der Befund hat zwei
+Hälften – und die erste ist die Folge der zweiten:
+
+> Von zehn geparkten Reserve-Kandidaten trugen **drei einen harten
+> Textverständnis-Fund, für den es keinen Heiler gab** (R14-Marker-Ruine
+> „SATZ:", R7-Intro-Formel, R15-PHrasen-Doppel). Das Zertifikat notierte dazu
+> wörtlich „manuell reparieren". Zugleich verwirft das Tor **T2** des
+> Lesbarkeits-Heilers jede Schrift, die danach noch einen harten Fund trägt.
+> **Jede KI-Heilung dieser drei Artikel war damit von vornherein
+> aussichtslos:** Der Heiler hatte eine Deckung, aber keine Wirkung – und der
+> Vorrat blieb bei 2/6.
+
+Die Dauerheilung schließt die Lücke **an der Wurzel**, in fünf Lagen: ein
+Heiler für die Klasse, die richtige Stelle in der Kette, Vorbeugung an der
+Quelle, ein Vertrag, der beides verlangt – und ein Lauf, der seinen
+Blocker-Verlauf endlich im Repo hinterlässt, statt nur im Log.
+
+## Befund
+
+### Was das Ticket meldet (Zitat, gekürzt)
+
+> **P2 · Content-Reserve niedrig** (Maschine) – Reserve unter Mindestbestand
+> (2 gate-fertige Artikel (Ziel 6, Alarm unter 4), 12 Reserve-Entwürfe;
+> Blocker: Lesbarkeits-Gate nicht bestanden: Flesch 57.9 …) →
+> `data/reserve-readiness.json` auf konkrete Gate-Blocker prüfen; anschließend
+> den letzten Lauf von `content-reserve.yml` kontrollieren und mindestens
+> **4 zertifizierte Kandidaten** herstellen.
+
+### Die Gate-Blocker (Zertifikat 07.10. 13:20 UTC, `data/reserve-readiness.json`)
+
+| # | Kandidat (Slug, gekürzt) | Blocker im Zertifikat |
+|---|---|---|
+| 1 | `2026-10-05-bueroausstattung-steuerlich-clever-absetzen…` | ✅ **bereit** (Score 0,958) |
+| 2 | `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle…` | ✅ **bereit** (Score 0,966) |
+| 3 | `2026-10-07-dein-weg-zu-geringeren-monatskosten…` | Flesch 57,9 **+ R15-PHRASEN-DOPPEL** |
+| 4 | `2026-10-07-dsl-anbieter-wechseln…` | Flesch 59,4 **+ R7-INTRO-FORMEL** |
+| 5 | `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken…` | **R14-MARKER-RUINE („SATZ:")** |
+| 6 | `2026-10-07-haushaltskosten-reduzieren…` | Flesch 59,9 |
+| 7 | `2026-10-07-heizoel-preise-2026…` | Zeichenlänge (`check_length.py`) |
+| 8 | `2026-10-07-stromkosten-senken…` | Lesbarkeits-Score 70/100 (Flesch 52, 2 Absätze > 4 Sätze, 9 Passiv) |
+| 9 | `2026-10-07-urlaub-sparen…` | Flesch 58,8 |
+| 10 | `2026-10-07-vpn-zuhause…` | Flesch 55,8 |
+| 11 | `2026-10-07-waermepumpe-vs-gasheizung…` | Flesch 53,1 |
+| 12 | `2026-10-07-etf-sparplan-starten…` | quality-score 0,839 (structure 0,70) |
+
+Ziel 6 · bereit **2** · Pool 12 · `recert` erneuert: `etf-sparplan`,
+`heizoel`, `urlaub-sparen`.
+
+### Der letzte Lauf von `content-reserve.yml` (Lauf 37607427999)
+
+**Steps 1–16 grün** – Hugo Extended, hunspell, Selbsttests aller Wachen,
+Janitor, Bestands-Wächter, Kandidaten-Erzeugung, Veredelungs-Kette,
+Zertifizierung, Konvergenz (3 Runden / 45 min), Triage, Staging, Push.
+**Rot war nur Step 17** („Stock shortage must not look successful",
+`reserve_gate.py`); Steps 18/19 wurden deshalb übersprungen.
+
+Der Befund ist damit präzise: **Die Kette lief. Das Ziel wurde verfehlt.**
+Das harte End-Gate hat genau das gemeldet, wofür es gebaut ist – „ein
+Engpass darf nicht wie Erfolg aussehen". Die Ursache lag nicht im Lauf,
+sondern in einer Lücke der Kette, die sechs Tage lang unsichtbar war.
+
+### Die eigentliche Ursache: eine Besitz-Lücke in der Kette
+
+Drei Beobachtungen greifen ineinander:
+
+1. **Das Zertifikat benennt den Fund als unheilbar.** Für die drei Kandidaten
+   stand dort ein *harter* Fund der Regeln R7/R14/R15 – genau der Regeln, die
+   `publish_gate.HARTE_REGELN` als ablehnend führt.
+2. **Der Deckungsbericht führte die Klasse trotzdem als „gedeckt"**, weil für
+   `textverstaendnis_failures` zwei Heiler eingetragen waren
+   (`r5_absatz_splitter.py`, `fix_url_hygiene.py`) – beide kurieren ganz andere
+   Defekte (Absatzlänge, URL-Hygiene) als einen Marker-Rest oder ein
+   Phrasen-Doppel. **Ein Name in der Kette ist eine Behauptung; erst die
+   Wirkungsprobe ist ein Beweis.**
+3. **Das Tor T2 macht die Lücke tödlich.**
+   `lesbarkeit_heiler.verifiziere()` verwirft jede Heilung, die danach noch
+   einen harten Textverständnis-Fund trägt:
+
+   ```python
+   neue_funde = harte_funde(neu_raw, slug)
+   for regel in sorted(neue_funde):
+       gruende.append(f"T2 Textverständnis: harter Fund {regel} im Ergebnis")
+   ```
+
+   Für einen Artikel mit R14/R15-Rest heißt das: **Die Flesch-Heilung wird nie
+   geschrieben.** Lokal reproduzierbar (Sandbox, ohne KI-Schlüssel):
+
+   ```
+   $ python3 scripts/lesbarkeit_heiler.py --file content/posts/…dein-weg…/index.md
+   Stufe A hob intern auf Flesch 58.1 …
+   🛑 T1 Lesbarkeit: Flesch 58.1 < Schwelle 60  →  verworfen
+   ⚠ Stufe B (Versuch 1): keine KI-Antwort  →  fail-closed, Text unangetastet
+   ```
+
+   Zwei Tore, dieselbe Wirkung: Der Text bleibt stehen – nicht weil die
+   Schwelle zu hoch wäre, sondern weil vorher niemand den Rest entfernt.
+
+### Woher die Reste kommen (Quell-Prävention, nicht Kosmetik)
+
+* **R14 „SATZ:"** – Die Prompt-Vorlage in `lektor_guard.l5_ai_rewrite()`
+  beginnt mit `SATZ: {satz}`. Antwortet das Modell mit genau diesem Präfix,
+  landete es unverändert im Fließtext (Realfall: smart-home-Artikel, Zeile
+  mit Markdown-Tabelle). Dieselbe Vorlagen-Klasse in `dash_guard.py`.
+* **R7/R15** – `keyword_optimizer.heal_intro()` stempelt die Intro-Formel und
+  läuft in der Kette **zweimal** (`--fix --include-drafts`, an zwei Stellen).
+  Ohne Idempotenz-Guard entstehen Doppel- und Dreifach-Präfixe
+  („Dein Weg zu geringeren im Check: Dein Weg zu geringeren im Check: …").
+* **R11/R13** – Zahlen-/Datums-Ruinen aus früheren Politur-Läufen
+  („20 26", „2 Januar").
+
+### Zweite Lücke: der Lauf hinterließ keinen Blocker-Verlauf
+
+Beim Nachweis fiel auf, dass `data/reserve-history.jsonl` auf `main`
+**keinen einzigen CI-Lauf** enthielt – nur „lokal"-Zeilen vom 02.10. Ursache:
+Das End-Gate ist der **letzte** Schritt; seine Chronik-Zeile entstand erst
+**nach** Commit und Push. Damit war „warum hebt Lauf N diesen Kandidaten
+nicht?" nur aus einem Log zu beantworten, das niemand aufbewahrt.
+
+## Dauerhafte Reparatur (fünf Lagen)
+
+### 1. `scripts/politur_heiler.py` (neu) – der fehlende Heiler der Klasse
+
+| Eigenschaft | Umsetzung |
+|---|---|
+| Regeln | R7, R11, R13, R14, R15, R16 (R12 bleibt liegen: Ersetzungs-Ruine, nicht automatisch entscheidbar) |
+| SSOT | Muster aus `sprachkern.POLITUR_RUINEN`, Intro-Formeln aus `tv.INTRO_FORMELN`, Wiederholungs-Schwelle `tv.R15_N`, Zielregeln `pg.HARTE_REGELN`, Naht `post_utils.join_article` – alles **gelesen, nicht abgetippt** |
+| Tor T1 | nur strikte Teilmenge der vorherigen Funde; kein neuer harter Fund |
+| Tor T2 | Frontmatter bytegleich, Links, `/go/`-Anker, Überschriften, Shortcodes, Tabellenzellen, Zahlen; Wortzahl ≥ 90 % |
+| Tor T3 | ohne Wirkung kein Schreiben (Text unverändert ⇒ niemals „geheilt") |
+| Verhalten | idempotent; Markup wird nie zerschnitten; R15 behält das **letzte** Vorkommen (der fortsetzende Satzrest hängt daran) |
+| CLI | `--file`, `--reserve`, `--blocked`, `--fix`, `--auch-live`, `--max`, `--json`, `--report`, `--wirkungsprobe`, `--selftest` |
+| Exit-Code | 0 heißt in **jeder** Betriebsart „nichts mehr zu heilen": sauberer Text, geschriebene Heilung. Trockenlauf mit heilbarem Rest und verworfene Heilung sind **offene Punkte** (1) – ein Trockenlauf darf nie „Pool ist sauber" behaupten |
+
+### 2. Ketten-Ordnung: Politur läuft **vor** dem Lesbarkeits-Heiler
+
+```python
+("politur_heiler.py", ["--fix"], "file"),
+("lesbarkeit_heiler.py", ["--fix"], "file"),
+```
+
+Die Reihenfolge ist kein Geschmack, sondern die direkte Folge von T2: Läuft
+der Lesbarkeits-Heiler zuerst, verwirft er seine eigene Heilung an einem Rest,
+den niemand vorher entfernt hat.
+
+### 3. Quell-Vorbeugung in `lektor_guard.py`
+
+`_ohne_marker_echo()` entfernt ein Prompt-Präfix am Anfang der KI-Antwort,
+**bevor** daraus eine Zeile im Artikel wird. Die Muster kommen aus derselben
+SSOT, die sie sonst als Ruine melden (`sprachkern.POLITUR_RUINEN`, R14/R16);
+bleibt nur der Marker übrig, ist das Ergebnis leer und die Aufrufer lehnen ab
+(fail-closed). Ein normaler Satz bleibt unberührt – auch „Satz:" in
+Kleinschreibung, das keine Ruine ist.
+
+### 4. Vertrag: Deckung **und** Wirkung
+
+* `reserve_healer_coverage.REGEL_HEILER["textverstaendnis_failures"]` führt
+  jetzt `politur_heiler.py` – als **ersten** in der Liste.
+* `WIRKUNGS_PROBEN["politur_heiler.py"] = ("--wirkungsprobe",)`, und
+  `PROBEN_PFLICHT` verlangt die Probe für `textverstaendnis_failures`.
+* `governance_contract.GUARDS` nimmt den Heiler ins vertragliche Minimum
+  (C6) – sein Selbsttest läuft damit im Qualitäts-Gate, unter der Uhr-Probe
+  (+97/+1461 Tage) und unter dem Schreibfreiheits-Check (C15).
+* `scripts/tests/test_politur_heiler.py` (16 Tests) friert ein: Wirkung,
+  Fail-closed-Verhalten (Trockenlauf, verworfene Heilung, Idempotenz),
+  SSOT-Bindung, Quell-Vorbeugung für **jeden** Marker der SSOT und die
+  Ketten-Ordnung – inklusive des *Grundes*: Nach der Politur darf kein
+  harter Fund übrig bleiben, sonst verwirft T2 (und zwar messbar).
+
+### 5. Nachweis und Gedächtnis
+
+* `scripts/reserve_gate.py --chronik` schreibt genau **eine** Zeile pro Lauf
+  (bereit, Ziel, Blocker-Slugs, Lauf-ID) – Pfad über `RESERVE_HISTORY`
+  umlenkbar, damit Tests nicht ins echte Gedächtnis schreiben.
+* `content-reserve.yml` ruft diese Bahn im Sicherungs-Schritt **vor** dem
+  Staging auf. Der Blocker-Verlauf erreicht damit `main`, und die Frage
+  „warum hebt Lauf N den Kandidaten nicht?" ist aus dem Repo beantwortbar.
+* `.github/workflows/reserve-nachweis.yml` (neu, **nur** `workflow_dispatch`)
+  fährt dieselben Stufen 2/3/4 auf einem beliebigen Ref, lässt das Löschrecht
+  (Janitor) bewusst aus, sichert ausschließlich auf den eigenen Ref und prüft
+  am Ende die Ticket-Akzeptanz (≥ 4 zertifizierte Kandidaten) als harten
+  Schritt. Das ist der Weg, eine Reparatur **vor** dem Merge mit echten Gates
+  zu beweisen – der Produktionslauf bleibt `content-reserve.yml` auf `main`.
+
+## Nachweis
+
+### Geheilte Kandidaten (Diff, vollständig)
+
+```
+ dein-weg…/index.md      | 2 +-
+ dsl-anbieter…/index.md  | 2 +-
+ wie-smart-home…/index.md| 2 +-
+```
+
+| Kandidat | vorher | nachher |
+|---|---|---|
+| `dein-weg…` | „Dein Weg zu geringeren im Check: Dein Weg zu geringeren im Check: Dein Weg zu geringeren im Check – stell dir vor…" | „Dein Weg zu geringeren im Check – stell dir vor…" |
+| `dsl-anbieter…` | „**In diesem Artikel** erfährst du, wie du effektiv …" | „**Hier** erfährst du, wie du effektiv …" |
+| `wie-smart-home…` | „`SATZ: | Thread | 2,4 GHz | …`" | „`| Thread | 2,4 GHz | …`" (Tabellenzeile intakt) |
+
+### Messung nach der Heilung (lokale Korpus-Prüfung mit den echten Wachen)
+
+| Kandidat | hart vorher | hart nachher | Flesch (lokale Messung) |
+|---|---|---|---|
+| `dein-weg…` | R15-PHRASEN-DOPPEL | **—** | 57,8 |
+| `dsl-anbieter…` | R7-INTRO-FORMEL | **—** | 59,5 |
+| `wie-smart-home…` | R14-MARKER-RUINE | **—** | 62,7 ✅ |
+| alle übrigen 9 | — | — | 52,3–65,8 |
+
+**Ergebnis: Kein Reserve-Entwurf trägt nach der Heilung noch einen harten
+Textverständnis-Fund** (`tv.check_article(…) ∩ pg.HARTE_REGELN = ∅` für alle
+12). Damit ist der strukturelle Block weg: Die verbleibenden Blocker sind
+reine Flesch-/Score-/Längen-Fälle – genau die Klasse, für die die KI-Stufe der
+Kette zuständig ist und die vorher an T2 scheiterte.
+
+### Tests und Verträge (lokal, ohne Netz, ohne Hugo)
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 -m unittest scripts.tests.test_politur_heiler` | **16 Tests OK** |
+| `python3 -m unittest scripts.tests.test_reserve_pipeline` | **113 Tests OK** (inkl. 2 neuen Chronik-Verträgen) |
+| `python3 -m unittest …test_reserve_pipeline test_lesbarkeit_heiler test_politur_heiler test_bot_watchdog_routing` | **177 Tests OK** |
+| `politur_heiler.py --selftest` / `--wirkungsprobe` / `--reserve` (Pool sauber) | Exit 0 |
+| `selftest_clock.py --trap scripts/politur_heiler.py --offset 97 / 1461` | grün (uhrfest) |
+| `governance_contract.py --selftest` | C1–C27 bestanden |
+| `reserve_healer_coverage.py` | 12 Regeln · 10 gedeckt · 2 begründete Ausnahmen · **0 Lücken**; Wirkungsnachweise für `lesbarkeit_heiler.py` (Flesch 51,3 → 72,3) und `politur_heiler.py` (5 harte Funde behoben, T1–T3, idempotent) |
+| Datenbestand | `git checkout`-geprüft: keine Sandbox-Läufe in `data/` (Zertifikat, Custody, Quarantäne, Historien unberührt) |
+
+## Verifikation nach dem Merge (die letzten Zentimeter)
+
+Das Zertifikat darf nur von den **echten** Produktions-Gates ausgestellt
+werden (Hugo-Build, hunspell, Zeichenlängen-Politik, KI-Stufe). Deshalb gilt:
+
+1. **Nach dem Merge** läuft `content-reserve.yml` (nächtlich 03:25 UTC oder
+   per Watchdog-Dispatch) und schreibt ein neues
+   `data/reserve-readiness.json`. Erwartung: **≥ 4 ready**, und die
+   Flesch-Werte der bisher geparkten Kandidaten müssen sich **bewegen**
+   (Beweis, dass die KI-Stufe greift und T2 sie nicht mehr verwirft).
+2. **Sofortnachweis auf einem Ref:** `Reserve-Nachweis (Probe auf einem Ref)`
+   per `workflow_dispatch` – schreibt den Nachweis nur auf den gestarteten
+   Ref und prüft die Akzeptanz (≥ 4) als harten Schritt.
+   *Hinweis:* GitHub registriert dispatchbare Workflows erst mit ihrer Datei
+   auf dem Default-Branch; die Probe ist deshalb erst nach dem Merge
+   startbar.
+3. **Was offen bleibt** und im nächsten Zertifikat beantwortet wird:
+   * ob die KI-Stufe (`gemini-3-flash-preview` → Groq-Fallback) im
+     Produktionslauf tatsächlich Flesch ≥ 60 erreicht – die drei
+     T2-blockierten Kandidaten sind ab jetzt beweisbar *heilbar*;
+   * `etf-sparplan` (structure 0,70) – dafür gibt es bis heute keinen
+     eigenen Heiler; die Chronik macht den Verlauf sichtbar.
+
+## Geänderte Dateien
+
+| Datei | Änderung |
+|---|---|
+| `scripts/politur_heiler.py` | **neu** – Heiler der Klasse (R7/R11/R13/R14/R15/R16), Tor T1–T3, Wirkungsprobe, Selbsttest |
+| `scripts/tests/test_politur_heiler.py` | **neu** – 16 Regressionstests (Wirkung, Fail-closed, Quell-Vorbeugung, Verdrahtung) |
+| `scripts/lektor_guard.py` | Quell-Vorbeugung `_ohne_marker_echo()` (R14/R16-Marker aus KI-Antworten) |
+| `scripts/reserve_finisher.py` | Kette: Politur **vor** Lesbarkeit, mit Begründung |
+| `scripts/reserve_healer_coverage.py` | Deckung + Wirkungsprobe + Probenpflicht für die Textverständnis-Klasse |
+| `scripts/governance_contract.py` | Heiler ins vertragliche Minimum (C6) |
+| `scripts/reserve_gate.py` | `--chronik` (eine Zeile pro Lauf, `RESERVE_HISTORY`-Seam) |
+| `.github/workflows/content-reserve.yml` | Chronik **vor** dem Staging (Blocker-Verlauf erreicht `main`) |
+| `.github/workflows/reserve-nachweis.yml` | **neu** – Probe auf einem Ref, nur `workflow_dispatch` |
+| `scripts/tests/test_reserve_pipeline.py` | 2 Verträge: Chronik-Reihenfolge + genau eine Zeile |
+| `content/posts/2026-10-07-{dein-weg…,dsl-anbieter…,wie-smart-home…}/index.md` | geheilt (3 × 1 Zeile) |
