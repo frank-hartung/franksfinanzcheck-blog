@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-07T11:43:48Z",
-  "modus": "live",
-  "commit": "459a644995fd14259811edf196924116826dc603",
+  "generated_at": "2026-10-07T11:55:36Z",
+  "modus": "kandidaten",
+  "commit": "4085a07cf92bbe9a0d1608332f42e029e7a795ad",
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "6dd3aadb75b0ccfe761305211a669a7c31cc6dc31a3baeab4055c750b4c98d87",
@@ -240,7 +240,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "a52b77e15d959b13bb5253de232919f0e426f8c3d2115ae03d9fff7553b0b43f",
