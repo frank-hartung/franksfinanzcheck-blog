@@ -518,3 +518,24 @@ aus der Wanduhr – damit ist der Zählerstand für denselben Tag reproduzierbar
 | `selftest_clock --trap-modul … --offset 97/1461` (6 Module) | grün – vorher 11 rote Tests in 7 Modulen |
 | `selftest_clock --selftest` | grün (Trap findet Bomben in Skripten UND Testmodulen) |
 | `reserve_janitor --selftest` | grün, auch unter fremder Uhr |
+
+---
+
+## Nachtrag 4 (07.10.2026, 17:35Z) – CI-Beleg: die zwei roten Gates sind grün
+
+Kopf `445ce8e` (Merge der zwischenzeitlichen main-Commits, u. a. C27):
+
+| Check | Ergebnis |
+|---|---|
+| **Publication reliability regression tests** (Run 37659099315) | success – **alle Schritte grün**, inkl. des neuen Schritts „Uhr-Probe – die Suite muss an jedem Kalendertag grün sein" |
+| **Qualitäts-Gate (Build + interne Links)** | success (169 Wachen · 338 Uhr-Proben, `reserve_blocker_klassen --selftest` unter +97/+1461 Tagen) |
+| Integritäts-Lock (PR-Gate) | success – 47 Kerndateien, Herkunft im Lock |
+| Beweis-Gate, CodeQL, Lesehilfen, Themenwelten, Daten-/Visualisierung, E2E | success |
+
+Lokal auf demselben Baum: `unittest discover` **2065 Tests OK** (4 skipped),
+`selftest_clock --trap-discover scripts/tests --offset 97` **2069 Tests OK**
+(6 begründete Skips), `integrity_guard --gate` grün.
+
+Damit ist der Weg frei: Der Produktionslauf auf `main` stellt das Zertifikat
+aus – erwartet werden die zurückgeholten Kandidaten und ≥ 4 zertifizierte
+Reserve-Artikel.
