@@ -203,6 +203,13 @@ FEST = {
     # heilt, heilt gegen das Tor. Deshalb unter Siegel; die erste Signatur
     # nach dem Merge nimmt ihn als „NEU UNTER SIEGEL" mit Herkunft auf.
     "scripts/lesbarkeit_heiler.py",
+    # Politur-Ruinen-Heiler (07.10.2026, WF-D4E0/#612): Er hält die harten
+    # Publish-Regeln R11/R13/R14 (Politur-Ruinen, #482) beweisbar heilbar
+    # (Tor T1–T4, Wirkungsprobe) und fährt in Reserve- UND Live-Kette. Wer
+    # hier heilt, heilt gegen dasselbe Tor wie publikations_vertrag und
+    # lesbarkeit_heiler – deshalb unter Siegel; die erste Signatur nimmt
+    # ihn als „NEU UNTER SIEGEL“ mit Herkunft auf.
+    "scripts/politur_ruine_heiler.py",
     "data/brand_lock.yaml",
     "layouts/_partials/header.html",
     "static/images/brand/logo.svg",

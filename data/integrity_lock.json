@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-07T11:46:43.102678+00:00",
-  "head": "edfb7ce",
+  "signed_at": "2026-10-07T15:41:47.195169+00:00",
+  "head": "ab9c8223",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -39,6 +39,7 @@
     "scripts/lesbarkeit_heiler.py": "26c981a10101bc15839cd338f8e504536e459673bff660fe32e4546bd93ec413",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
+    "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
     "scripts/redaktions_standard.py": "7388380126e08f0e8cdb5bb9ff9d3dfbacac0a1f62f40e7e25b10a363b212a81",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
@@ -50,48 +51,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1",
-  "audit_start_sha256": "4377ff88ddeee4c9289f4278db76be2d5a8165137a0d71f0dd24fbbbc50f62b9",
+  "files_sha256": "ad3759dcbea0d4a425ded95769a2c3a8c9d321db4e9212b09926972247c7d3e2",
+  "audit_start_sha256": "6b1fc72778e93f9a266fbe284ce112a1ee1ca01e5bdc4fe8d6ef3bae13cd2807",
   "audit": [
-    {
-      "date": "2026-10-02",
-      "art": "heal",
-      "head": "f52bce0",
-      "geaendert": [
-        "layouts/pillar/list.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/pillar/list.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "f52bce0",
-              "datum": "2026-10-02",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "f52bce0",
-              "datum": "2026-10-02",
-              "betreff": "fix(gate): Kadenz-/Titel-/Cover-Heilungen vor Veröffentlichung (automatisch)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "088c2dca90dc0c0b5aeed753c96e4435f215e793914b528ac3ca705eea9bbfb7",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-02",
       "art": "set-current",
@@ -115,7 +77,7 @@
         }
       ],
       "files_sha256": "55d81ea72666c28b68cb8308c923ea42928ec096a5dd45217067959548d83cc2",
-      "prev_sha256": "4377ff88ddeee4c9289f4278db76be2d5a8165137a0d71f0dd24fbbbc50f62b9"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-02",
@@ -448,8 +410,27 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "e7fdc25fd37ebf351f7c1685efc864aafeab21c9920898fbeb1f28a8acdeeca3",
-      "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1"
+      "files_sha256": "fb3bfe2fc8d79e64d804860f8fccd1c228bc2f90319e900f211bf233797e63e1",
+      "prev_sha256": "e7fdc25fd37ebf351f7c1685efc864aafeab21c9920898fbeb1f28a8acdeeca3"
+    },
+    {
+      "date": "2026-10-07",
+      "art": "set-current",
+      "head": "ab9c8223",
+      "geaendert": [
+        "scripts/politur_ruine_heiler.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/politur_ruine_heiler.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "d530fb31c18cd5c7d03124f34d0948416747f78b9041284caee369b9b329cec6",
+      "files_sha256": "ad3759dcbea0d4a425ded95769a2c3a8c9d321db4e9212b09926972247c7d3e2"
     }
   ]
 }

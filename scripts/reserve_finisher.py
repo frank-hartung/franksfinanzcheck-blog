@@ -339,6 +339,18 @@ HEALER_CHAIN = [
     # byte-identisch bei Zweifel – genau deshalb darf er hier stehen, wo Gate
     # und Zertifizierung gleich danach messen.
     ("lesbarkeit_heiler.py", ["--fix"], "file"),
+    # REPARATUR 07.10.2026 (WF-D4E0, #612): Der fehlende Heiler der
+    # Politur-Ruinen-Familie (R11/R13/R14). Sie ist ein hartes
+    # Publish-Gate-Kriterium (#482), stand in der Deckungstabelle aber nur
+    # über R5-Splitter/URL-Hygiene – für die Marker-Ruine „SATZ: | Thread | …“
+    # gab es KEINEN Schreiber. Der Kandidat `2026-10-07-wie-smart-home-…` war
+    # fertig (Qualität 0,89, Lesbarkeit 0,95) und wurde allein an diesem Rest
+    # nie veröffentlicht; nach zwei Läufen nahm die Quarantäne ihn aus dem
+    # Pool, der Vorrat fiel unter das Ziel, der harte End-Gate wurde rot.
+    # Der Heiler schneidet ausschließlich beweisbare Ruinen (Tor T1–T4,
+    # fail-closed, byte-identisch bei Zweifel) und läuft datei-bezirkelt nach
+    # dem Lesbarkeits-Heiler, also nach jedem KI-Schreiber.
+    ("politur_ruine_heiler.py", ["--fix"], "file"),
     # REPARATUR 05.10.2026 (WF-B594, Issue #594): Der Internal-Linker fehlte
     # in dieser Kette – als EINZIGER Blocker der Triage ohne jeden Heiler.
     # Folge: Jeder frische Reserve-Entwurf trug „interne links: 0/1 (Soll
