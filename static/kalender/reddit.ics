@@ -5,33 +5,4 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
-BEGIN:VEVENT
-UID:reddit:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-10-07@frank
- sfinanzcheck.de
-DTSTAMP:20261007T115055Z
-DTSTART:20261007T121500Z
-DTEND:20261007T123000Z
-SUMMARY:Reddit: DSL-Wechselbonus sichern: So sparst du beim Internetve
- rtrag (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
- ttps://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:reddit:2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-somme
- r-schnaepp:takeaway:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261007T115055Z
-DTSTART:20261021T121500Z
-DTEND:20261021T123000Z
-SUMMARY:Reddit: Last Minute Urlaub: – So schnappst du dir das Sommer‑S
- chnäpp (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-
- schnappst-du-dir-das-sommer-schnaepp/
-URL:https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-s
- o-schnappst-du-dir-das-sommer-schnaepp/
-STATUS:TENTATIVE
-END:VEVENT
 END:VCALENDAR

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 07.10.2026 13:50 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.10.2026 21:23 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,13 +13,14 @@
 ## Kommende Beiträge
 
 ### Do, 08. Oktober 2026
-- **07:30** ⏳ 7 Gewohnheiten für finanzielle Freiheit — _thread_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-21-7-gewohnheiten-fuer-finanzielle-freiheit/
+- **07:30** ⏳ 7 gewohnheiten fuer finanzielle freiheit — _thread_ · Launch
 - **11:30** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 ### Fr, 09. Oktober 2026
 - **07:30** ⏳ 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/
+- **07:30** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _frage_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
 
 ## Zuletzt veröffentlicht
 
