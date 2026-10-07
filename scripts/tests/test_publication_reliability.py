@@ -695,8 +695,10 @@ class BelegJeTagTests(unittest.TestCase):
             pfad, tagespfad = pc.beleg_schreiben(ergebnis, 'tmp/beleg.json')
         self.assertTrue(pfad.exists() and tagespfad.exists())
         self.assertEqual(tagespfad.name, 'beleg-2026-10-05.json')
+        # WF-7C1F #611/C28: Jeder Beleg trägt seine Klasse – auch wenn der
+        # Aufrufer sie nicht mitgibt, wird sie nachgerechnet.
         self.assertEqual(json.loads(pfad.read_text(encoding='utf-8')),
-                         ergebnis)
+                         dict(ergebnis, klasse='quelle_unter'))
         zeile = json.loads(history.read_text(encoding='utf-8').strip())
         self.assertEqual(zeile['day'], '2026-10-05')
         self.assertEqual(zeile['delivered'], 1)
@@ -764,6 +766,117 @@ class BelegJeTagTests(unittest.TestCase):
         self.assertIn('reserve: true', index.read_text(encoding='utf-8'))
         self.assertTrue((self.root / 'data' / 'reserve-history.jsonl').exists(),
                         'Die Rettung muss im Gedächtnis stehen')
+
+
+class KlassenRoutingTests(unittest.TestCase):
+    """WF-7C1F #611: Die Klasse geht dem Kanal vor.
+
+    Am 05./06.10.2026 lief der öffentliche Nachweis zweimal rot, weil die
+    Quelle den gemessenen Montag nur mit 1/2 LIVE trug – die Auslieferung war
+    vollständig (`delivered == source`, keine Fehler). Der rote Lauf nannte
+    keine Ursache, also legte das zentrale Fehler-Alerting das generische
+    Wartungs-Issue #611 mit API-Key-Runbook an. Diese Klasse trennt die zwei
+    Wahrheiten: Bestand (Quelle trägt den Tag) und Auslieferung (öffentlich
+    erreichbar).
+    """
+
+    # Der eingefrorene Beleg aus dem P1-Issue (#610, Body vom 06.10.2026):
+    # Source LIVE 1/2 am Montag – die öffentliche Auslieferung war vollständig.
+    FEHLTAG = {
+        'day': '2026-10-05', 'mode': 'public', 'minimum': 2, 'maximum': 3,
+        'source': ['2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss'],
+        'delivered': ['2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss'],
+        'errors': [], 'ok': False}
+
+    def test_bestandsband_entscheidet_den_besitzer(self):
+        faelle = (
+            (self.FEHLTAG, pc.KLASSE_QUELLE_UNTER),
+            ({**self.FEHLTAG, 'source': [], 'delivered': []},
+             pc.KLASSE_QUELLE_UNTER),
+            ({**self.FEHLTAG, 'source': ['a', 'b', 'c', 'd'],
+              'delivered': ['a', 'b', 'c', 'd']}, pc.KLASSE_QUELLE_UEBER),
+            ({**self.FEHLTAG, 'source': ['a', 'b'], 'delivered': ['a']},
+             pc.KLASSE_AUSLIEFERUNG),
+            ({**self.FEHLTAG, 'source': ['a', 'b'], 'delivered': ['a', 'b'],
+              'errors': ['sitemap: timeout']}, pc.KLASSE_AUSLIEFERUNG),
+            ({**self.FEHLTAG, 'source': ['a', 'b'], 'delivered': ['a', 'b'],
+              'ok': True}, pc.KLASSE_OK),
+        )
+        for ergebnis, erwartet in faelle:
+            with self.subTest(erwartet=erwartet, source=len(ergebnis['source'])):
+                self.assertEqual(pc.klasse(ergebnis), erwartet)
+
+    def test_kein_unbekannter_beleg_wird_still(self):
+        for kaputt in ({}, None, [], {'ok': False},
+                       {'ok': False, 'source': ['a'], 'minimum': None,
+                        'maximum': 3}):
+            with self.subTest(beleg=kaputt):
+                self.assertEqual(pc.klasse(kaputt), pc.KLASSE_UNBEKANNT)
+        # Fail-closed: Unbekannt ist niemals „ok“ und niemals still.
+        self.assertNotEqual(pc.KLASSE_UNBEKANNT, pc.KLASSE_OK)
+        self.assertIn('unbekannt', pc.besitzer(pc.KLASSE_UNBEKANNT).lower())
+
+    def test_kein_roter_tag_wird_gruen(self):
+        """Die Klasse ist additiv – sie darf `ok` nie ersetzen."""
+        self.assertFalse(self.FEHLTAG['ok'])
+        self.assertNotEqual(pc.klasse(self.FEHLTAG), pc.KLASSE_OK)
+        self.assertEqual(pc.klasse(dict(self.FEHLTAG, ok=True)), pc.KLASSE_OK)
+
+    def test_check_traegt_die_klasse_und_sie_passt_zum_beleg(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp)
+            (posts / 'a').mkdir()
+            (posts / 'a' / 'index.md').write_text(
+                '---\ntitle: A\ndate: 2026-10-05T06:00:00Z\ndraft: false\n---\n',
+                encoding='utf-8')
+            ergebnis = pc.check(dt.date(2026, 10, 5), posts_dir=posts)
+        self.assertFalse(ergebnis['ok'])
+        self.assertEqual(ergebnis['klasse'], pc.KLASSE_QUELLE_UNTER)
+        self.assertIn(ergebnis['klasse'], pc.KLASSEN)
+
+    def test_beleg_und_historie_tragen_die_klasse(self):
+        self.addCleanup(os.chdir, os.getcwd())
+        with tempfile.TemporaryDirectory() as tmp:
+            os.chdir(tmp)
+            history = Path(tmp) / 'data' / 'historie.jsonl'
+            ergebnis = dict(self.FEHLTAG, klasse=pc.KLASSE_QUELLE_UNTER)
+            with patch.object(pc, 'HISTORY', history):
+                pfad, _ = pc.beleg_schreiben(ergebnis, 'tmp/beleg.json')
+            self.assertIn('quelle_unter',
+                          json.loads(pfad.read_text(encoding='utf-8'))['klasse'])
+            zeile = json.loads(history.read_text(encoding='utf-8').strip())
+            self.assertEqual(zeile['klasse'], 'quelle_unter')
+            self.assertEqual(zeile['day'], '2026-10-05')
+            # Ein alter Aufrufer ohne Klassenfeld fabriziert keine Lücke:
+            # beleg_schreiben rechnet die Klasse selbst nach.
+            with patch.object(pc, 'HISTORY', history):
+                pc.beleg_schreiben(dict(self.FEHLTAG), 'tmp/beleg.json')
+            zeile2 = json.loads(
+                history.read_text(encoding='utf-8').strip().splitlines()[-1])
+            self.assertEqual(zeile2['klasse'], 'quelle_unter')
+
+    def test_cli_klasse_ist_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fehlt = os.path.join(tmp, 'kein-beleg.json')
+            with patch.object(sys, 'argv',
+                              ['publication_check.py', '--klasse',
+                               '--report', fehlt]):
+                aus = io.StringIO()
+                with redirect_stdout(aus):
+                    rc = pc.main()
+            self.assertEqual(rc, 2, 'Ohne Beleg bleibt der Aufruf laut (Exit 2)')
+            self.assertEqual(aus.getvalue().strip(), 'unbekannt')
+
+            beleg = os.path.join(tmp, 'beleg.json')
+            Path(beleg).write_text(json.dumps(self.FEHLTAG), encoding='utf-8')
+            with patch.object(sys, 'argv',
+                              ['publication_check.py', '--klasse',
+                               '--report', beleg]):
+                aus = io.StringIO()
+                with redirect_stdout(aus):
+                    rc = pc.main()
+            self.assertEqual(rc, 0)
+            self.assertEqual(aus.getvalue().strip(), 'quelle_unter')
 
 
 if __name__ == '__main__':

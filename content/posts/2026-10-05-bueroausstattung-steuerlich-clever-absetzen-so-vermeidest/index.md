@@ -77,7 +77,7 @@ Bei überwiegend privaten Geräten gilt eine Grenze. Liegt der berufliche Anteil
 
 ## Fazit: Büroausstattung steuerlich clever absetzen – So geht's
 
-Der Hebel bei **Büroausstattung steuerlich clever absetzen: So geht's** sitzt nicht im Verzicht, sondern im Nachrechnen. Nutze attraktive Tagesgeld-Angebote der C24 Bank, um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **Büroausstattung steuerlich clever absetzen: So geht's** sitzt nicht im Verzicht, sondern im Nachrechnen. Nutze attraktive Tagesgeld-Angebote der [C24 Bank](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/), um dein Erspartes flexibel, sicher und rentabel vor der Inflation zu schützen. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 ### Diese Anschaffungen führen regelmäßig zu Rückfragen
 

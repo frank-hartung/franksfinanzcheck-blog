@@ -4,11 +4,11 @@ description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen 
 date: 2026-10-07T10:54:35Z
 draft: true
 reserve: true
-tags: ["Heizkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken", "Optimalen", "Kaufzeitpu"]
+keywords: ["Heizöl Preise", "Heizöl bestellen", "Heizkosten senken", "Kaufzeitpu", "Gaspreisgarantie", "Gastarif wechseln"]
 pin_title: "Heizöl Preise: 2026 – So findest du den optimalen Kaufzeitpu"
 pin_description: "*Werbung | Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen solltest, um Heizkosten zu senken und Fehler zu vermeiden. Mehr Spartipps auf FranksFinanzcheck! #heizoelpreise #heizoelbestellen #heizkostensenken"
 ai_generated: true

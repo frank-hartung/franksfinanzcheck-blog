@@ -57,22 +57,22 @@ Hier sind die aktuellen Markt-Benchmarks für Festnetz- und Mobilfunkverträge i
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">VDSL 50 / 100 Effektivpreis</div>
-      <div class="ff-radar-kpi__value">24,99 – 32,90 €</div>
+      <div class="ff-radar-kpi__value">24,99–32,90 €</div>
       <div class="ff-radar-kpi__source">Monatlicher Effektivpreis inkl. Wechselboni</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Glasfaser Gigabit (FTTH)</div>
-      <div class="ff-radar-kpi__value">44,99 – 59,99 €</div>
+      <div class="ff-radar-kpi__value">44,99–59,99 €</div>
       <div class="ff-radar-kpi__source">Regulärer Grundpreis nach Aktionsphase</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">5G Allnet-Flat (SIM-Only)</div>
-      <div class="ff-radar-kpi__value">7,99 – 14,99 €</div>
+      <div class="ff-radar-kpi__value">7,99–14,99 €</div>
       <div class="ff-radar-kpi__source">20–40 GB Datenvolumen monatlich kündbar</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Routermiete Vermeidbar</div>
-      <div class="ff-radar-kpi__value">120 – 190 € / 24M</div>
+      <div class="ff-radar-kpi__value">120–190 € / 24M</div>
       <div class="ff-radar-kpi__source">Ersparnis durch Kaufrouter statt 5–8 €/M Miete</div>
     </div>
   </div>
@@ -137,28 +137,28 @@ Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
       <tr>
         <td><strong>Vertrag älter als 24 Monate</strong> (Rabatt entfallen)</td>
         <td>Kündigen &amp; Wechseln</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (10 Min.)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Gering (10 Min.)</span></td>
         <td>150–350 € / 2 Jahre</td>
         <td>Neuen Anbieter beauftragen; dieser kündigt den Altvertrag automatisch zum Monatsende.</td>
       </tr>
       <tr>
         <td><strong>Zufrieden mit Leitung, aber Preis steigt</strong></td>
         <td>Kündigen &amp; Nachverhandeln</td>
-        <td><span class="ff-decision-badge ff-decision-badge--yes">Gering (1 Anruf)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – yes">Gering (1 Anruf)</span></td>
         <td>100–200 € / 2 Jahre</td>
         <td>Kündigung vormerken; bei der Kundenrückgewinnung (Retention) Neukundenrabatt einfordern.</td>
       </tr>
       <tr>
         <td><strong>Glasfaser-Ausbaugebiet (FTTH verfügbar)</strong></td>
         <td>Technologiewechsel</td>
-        <td><span class="ff-decision-badge ff-decision-badge--warn">Mittel (Montage)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Montage)</span></td>
         <td>Höhere Stabilität</td>
         <td>Kostenlosen Hausanschluss während der Nachfragebündelung sichern; Tarif vergleichen.</td>
       </tr>
       <tr>
         <td><strong>Anhaltende Leitungsstörungen / Unterversorgung</strong></td>
         <td>Sonderkündigung nach TKG</td>
-        <td><span class="ff-decision-badge ff-decision-badge--warn">Mittel (Messung)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Messung)</span></td>
         <td>Sofortiger Ausstieg</td>
         <td>BNetzA-Desktop-App nutzen (30 Messungen an 3 Tagen) → Fristlose Kündigung nach § 57 TKG.</td>
       </tr>

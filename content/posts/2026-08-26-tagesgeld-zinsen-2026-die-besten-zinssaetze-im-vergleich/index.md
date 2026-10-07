@@ -179,7 +179,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 
 ## Tagesgeld und Notgroschen: So hoch sollte er sein
 
-Ein guter Notgroschen trägt deine Finanzen. Üblich sind **drei bis sechs Netto-Gehälter**:
+Ein guter [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) trägt deine Finanzen. Üblich sind **drei bis sechs Netto-Gehälter**:
 
 - **Alleinstehende (ca. 2.500 € Netto):** ca. 7.500 € bis 15.000 €
 - **Haushalt mit Kindern (ca. 5.000 € Netto):** ca. 15.000 € bis 30.000 €

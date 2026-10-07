@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Haushaltskosten", "Reduzieren", "Mitteln", "Haushaltskosten reduzieren", "Gewinnst"]
+keywords: ["Haushaltskosten", "Reduzieren", "Haushaltskosten reduzieren"]
 pin_title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
 pin_description: "*Werbung | Willst du effektiv deine Haushaltskosten reduzieren? Frank Hartung zeigt dir, wie du mit einfachen Mitteln und dem 4K-Prüfpfad deine Fixkosten senkst. Mehr Spartipps auf FranksFinanzcheck! #haushaltskosten #reduzieren #mitteln"
 ai_generated: true

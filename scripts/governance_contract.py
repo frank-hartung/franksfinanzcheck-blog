@@ -1893,7 +1893,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
                                   python_bin=python_bin)
     checks += c26_beleg_je_tag(script_texts, wflows, root=root)
     checks += c27_ledger_isolation(script_texts, wflows, root=root)
-    checks += c28_geburts_tor(script_texts, wflows, root=root,
+    checks += c28_klassen_routing(script_texts, wflows, root=root)
+    checks += c29_geburts_tor(script_texts, wflows, root=root,
                               python_bin=python_bin)
     return checks
 
@@ -2208,7 +2209,155 @@ def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
     return out
 
 
-# --- C28: Der Schreiber prüft, was über ihn entscheidet (WF-D4E0 #612, 07.10.2026)
+# --- C28: Die Klasse geht dem Kanal vor (WF-7C1F #611, 07.10.2026) --------
+# Auslöser: Der öffentliche Nachweis („Publication Delivery“) lief am
+# 05./06.10.2026 zweimal rot, weil die QUELLE den gemessenen Montag (05.10.)
+# nur mit 1/2 LIVE trug. Der Beleg sagte das selbst: `source: 1`,
+# `delivered: 1`, `errors: []` – die Auslieferung war vollständig. Der
+# Sammel-Schritt „Missing public delivery is a failed run“ nannte keine
+# Ursache, also legte das zentrale Fehler-Alerting das generische
+# Wartungs-Issue #611 mit API-Key-/Transient-Runbook an, obwohl der Fachkanal
+# `engine-deficit` (#602/#608) für genau diesen Zustand existiert. Es ist
+# dieselbe Klasse wie #602 – nur beim zweiten Melder derselben Sache.
+#
+# Die Regel hält fest: Die Auslieferungs-SLO trägt eine KLASSE (`ok`,
+# `quelle_unter`, `quelle_ueber`, `auslieferung`, `unbekannt`), der Workflow
+# antwortet der Klasse mit einem eigenen, ehrlichen roten Schritt, und nur das
+# Bestandsdefizit ruft den Defizit-Fachkanal – mit Frischebeweis VOR dem roten
+# Exit, weil das Alerting nur einen offenen UND frisch belegten Kanal als
+# Zuständigkeit akzeptiert.
+def c28_klassen_routing(script_texts, wflows, root=BLOG_DIR):
+    out = []
+
+    def _wf(name: str) -> str:
+        for path, text in (wflows or {}).items():
+            if os.path.basename(path) == name:
+                return text
+        return ""
+
+    def _schritte(text: str):
+        """(Name, Block) je benanntem Workflow-Schritt – grob, aber stabil."""
+        bloecke, name, block = [], None, []
+        for zeile in text.splitlines():
+            if zeile.lstrip().startswith("- name:"):
+                if name:
+                    bloecke.append((name, "\n".join(block)))
+                name = zeile.split("- name:", 1)[1].strip()
+                block = [zeile]
+            elif name is not None:
+                block.append(zeile)
+        if name:
+            bloecke.append((name, "\n".join(block)))
+        return bloecke
+
+    pc = script_texts.get("publication_check.py", "")
+    pd = _wf("publication-delivery.yml")
+    af = _wf("alert-on-failure.yml")
+    if not pc or not pd:
+        out.append(("C28", "publication_check.py / publication-delivery.yml nicht "
+                           "lesbar – die Klasse des Auslieferungs-Nachweises ist "
+                           "nicht prüfbar."))
+        return out
+
+    # a) Die Klasse selbst: vollständig, rein, `ok` zuerst, im Beleg und in der
+    #    Historie – sonst endet der Lauf wieder in einem Sammel-Boolean.
+    for konst in ("KLASSE_QUELLE_UNTER", "KLASSE_QUELLE_UEBER",
+                  "KLASSE_AUSLIEFERUNG", "KLASSE_UNBEKANNT"):
+        if konst not in pc:
+            out.append(("C28", f"publication_check.py kennt `{konst}` nicht – "
+                               "die Klasse des Belegs ist unvollständig (#611)."))
+    if not re.search(r"def\s+klasse\s*\(\s*result\s*\)", pc):
+        out.append(("C28", "publication_check.py hat keine reine `klasse(result)` "
+                           "– ohne sie endet der Lauf wieder in einem "
+                           "Sammel-Boolean (#611)."))
+    if "result.get('ok')" not in pc:
+        out.append(("C28", "publication_check.py prüft `ok` nicht ZUERST – ein "
+                           "bestätigter Tag trüge dann eine Defizitklasse."))
+    if "result['klasse'] = klasse(result)" not in pc:
+        out.append(("C28", "publication_check.py schreibt die Klasse nicht in den "
+                           "Beleg (`check()` → `result['klasse']`) – der Workflow "
+                           "hätte nichts zu lesen (#611)."))
+    if "klasse_aus_beleg" not in pc:
+        out.append(("C28", "publication_check.py hat keinen Lesepfad "
+                           "`klasse_aus_beleg` – ein fehlender Beleg bliebe "
+                           "unbemerkt statt fail-closed laut."))
+    if "'klasse':" not in pc:
+        out.append(("C28", "publication_check.py schreibt die Klasse nicht in die "
+                           "versionierte Historie – ein roter Tag wäre später "
+                           "keinem Besitzer zuzuordnen."))
+
+    # b) Der Workflow antwortet der Klasse – kein Sammel-Boolean, kein stiller
+    #    unbekannter Beleg.
+    if "Missing public delivery is a failed run" in pd:
+        out.append(("C28", "publication-delivery.yml endet wieder im Sammel-"
+                           "Schritt „Missing public delivery is a failed run“ – "
+                           "genau so entstand #611 (Ursache unbenannt)."))
+    if "publication_check.py --klasse" not in pd:
+        out.append(("C28", "publication-delivery.yml liest die Klasse nicht "
+                           "(`publication_check.py --klasse`) – der rote Schritt "
+                           "kann den Besitzer nicht nennen (#611)."))
+    if "unbekannt" not in pd:
+        out.append(("C28", "publication-delivery.yml kennt den unbekannten Beleg "
+                           "nicht – ein fehlender Nachweis bliebe still statt "
+                           "fail-closed laut."))
+
+    # c) Jede Klasse hat ihren eigenen, ehrlichen roten Schritt – und nur das
+    #    Bestandsdefizit ruft den Defizit-Fachkanal (Schrittname = Zuordnung).
+    bloecke = _schritte(pd)
+    fach = [(n, b) for n, b in bloecke
+            if "TAGESDEFIZIT" in n and "engine-deficit" in n]
+    if not fach:
+        out.append(("C28", "publication-delivery.yml hat keinen Schritt, den das "
+                           "zentrale Fehler-Alerting dem Fachkanal zuordnet – die "
+                           "Kennwörter „TAGESDEFIZIT“ + „engine-deficit“ im "
+                           "Schrittnamen fehlen (#602-Regel)."))
+    else:
+        name, block = fach[0]
+        if "engine_issue.py --deficit" not in block:
+            out.append(("C28", f"der Schritt „{name}“ belegt den Fachkanal nicht "
+                               "(`engine_issue.py --deficit`) – ohne Frischebeweis "
+                               "meldet das Alerting fail-open generisch."))
+        elif block.find("engine_issue.py --deficit") > block.find("exit 1"):
+            out.append(("C28", f"der Schritt „{name}“ belegt den Fachkanal erst "
+                               "NACH dem roten Exit – der Frischebeweis käme zu "
+                               "spät (#602)."))
+        if "exit 1" not in block:
+            out.append(("C28", f"der Schritt „{name}“ endet nicht rot – ein "
+                               "Bestandsdefizit darf nicht als grün durchgehen."))
+        if "quelle_unter" not in block:
+            out.append(("C28", f"der Fachkanal-Schritt „{name}“ gilt nicht "
+                               "ausschließlich dem Bestandsdefizit "
+                               "(`quelle_unter`)."))
+    for klasse in ("quelle_unter", "quelle_ueber", "auslieferung"):
+        if klasse not in pd:
+            out.append(("C28", f"publication-delivery.yml antwortet der Klasse "
+                               f"`{klasse}` nicht – der rote Lauf nennt die "
+                               "Ursache nicht (#611)."))
+    weitere = [n for n, b in bloecke if "TAGESDEFIZIT" in n
+               and "engine-deficit" in n and "exit 1" in b
+               and n != (fach[0][0] if fach else "")]
+    if weitere:
+        out.append(("C28", "weitere rote Schritte tragen die Fachkanal-Kennwörter "
+                           f"({', '.join(weitere)}) – die Stummschaltung wäre "
+                           "nicht mehr klasse-scharf."))
+
+    # d) Die Zuordnung ist beidseitig eingefroren: Das Alerting sucht genau
+    #    diese Kennwörter in den fehlgeschlagenen Schrittnamen.
+    if af:
+        if "'TAGESDEFIZIT'" not in af or "'engine-deficit'" not in af:
+            out.append(("C28", "alert-on-failure.yml hat die Fachkanal-Regel "
+                               "(„TAGESDEFIZIT“ + „engine-deficit“ in den "
+                               "fehlgeschlagenen Schrittnamen) verloren – die "
+                               "Stummschaltung des generischen Issues greift "
+                               "nicht mehr."))
+        if '"Publication Delivery (öffentlicher Nachweis)"' not in af:
+            out.append(("C28", "alert-on-failure.yml beobachtet „Publication "
+                               "Delivery (öffentlicher Nachweis)“ nicht mehr – "
+                               "ein roter Nachweis bliebe unbemerkt."))
+    return out
+
+
+# --- C29: Der Schreiber prüft, was über ihn entscheidet (WF-D4E0 #612, 07.10.2026)
 # Auslöser: Die Content-Reserve lief N acht für Nacht rot, weil der Vorrat
 # unter dem Ziel stand (`ready 2/6`, #612). Die Wurzel lag nicht in der
 # Zertifizierung – die hat korrekt abgelehnt – sondern in der GEBURT: Das
@@ -2216,8 +2365,8 @@ def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
 # Keywords und Struktur, aber NICHT die Lesbarkeit, obwohl Flesch ≥ 60 seit
 # #585 ein hartes Publish-Kriterium ist. Kandidaten wurden mit Flesch 53–60
 # geboren, fielen geschlossen durch die Zertifizierung und banden danach
-# Heiler-/KI-Zeit; blieb die Heilung aus, nahm die Quarantäne sie nach zwei
-# Läufen aus dem Pool (#513, #609, #612).
+# Heiler-/KI-Zeit; blieb die Heilung aus, nahm die Quarantäne den Kandidaten
+# aus dem Pool (#513, #609, #612).
 #
 # Die zweite Hälfte desselben Befunds: Der Retry war blind. `try_generate`
 # sammelte die Ablehnungsgründe, gab sie aber nie an den nächsten Versuch
@@ -2238,10 +2387,10 @@ def c27_ledger_isolation(script_texts, wflows, root=BLOG_DIR):
 #     idempotent,
 #   * der Politur-Ruinen-Heiler (#612) hält die harte R11/R13/R14-Familie in
 #     der Reserve-Kette heilbar und beweist seine Wirkung JETZT (Exit 0).
-RE_C28_QUALITY_FN = re.compile(r"def\s+profi_quality_ok\s*\(.*?(?=\ndef\s)", re.S)
+RE_C29_QUALITY_FN = re.compile(r"def\s+profi_quality_ok\s*\(.*?(?=\ndef\s)", re.S)
 
 
-def c28_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
+def c29_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
     out = []
     gd = script_texts.get("generate_drafts.py", "")
     eg = script_texts.get("engine_generate.py", "")
@@ -2250,51 +2399,51 @@ def c28_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
     kette = script_texts.get("reserve_finisher.py", "")
     deckung = script_texts.get("reserve_healer_coverage.py", "")
     if not gd or not eg or not rg:
-        out.append(("C28", "generate_drafts.py / engine_generate.py / "
+        out.append(("C29", "generate_drafts.py / engine_generate.py / "
                            "reserve_gate.py nicht lesbar – das Geburts-Tor ist "
                            "nicht prüfbar (fail-closed)."))
         return out
 
     # a) Die Geburt misst die Regel, die über die Veröffentlichung entscheidet.
     if "lesbarkeits_befund" not in gd:
-        out.append(("C28", "generate_drafts.py misst die Lesbarkeit nicht am "
+        out.append(("C29", "generate_drafts.py misst die Lesbarkeit nicht am "
                            "Geburts-Gate – Kandidaten entstehen wieder unter der "
                            "Publish-Schwelle und die Zertifizierung lehnt sie "
                            "geschlossen ab (#612)."))
     else:
-        koerper = RE_C28_QUALITY_FN.search(gd)
+        koerper = RE_C29_QUALITY_FN.search(gd)
         if not koerper or "lesbarkeits_befund(body)" not in koerper.group(0):
-            out.append(("C28", "`profi_quality_ok` ruft die Lesbarkeits-Messung "
+            out.append(("C29", "`profi_quality_ok` ruft die Lesbarkeits-Messung "
                                "nicht auf – eine Funktion ohne Aufruf ist "
                                "Papier (#612)."))
     if "NEW_FLESCH_MIN" not in gd:
-        out.append(("C28", "generate_drafts.py liest die Schwelle nicht aus der "
+        out.append(("C29", "generate_drafts.py liest die Schwelle nicht aus der "
                            "SSOT `readability_check.NEW_FLESCH_MIN` (#585)."))
     if re.search(r"NEW_FLESCH_MIN\s*=\s*[0-9]", gd):
-        out.append(("C28", "generate_drafts.py definiert die Flesch-Schwelle "
+        out.append(("C29", "generate_drafts.py definiert die Flesch-Schwelle "
                            "selbst – zweite Wahrheit (#585)."))
 
     # b) Der Retry hat ein Gedächtnis.
     if "KORREKTUR-AUFTRAG" not in gd or "hinweise" not in gd:
-        out.append(("C28", "`generate_article_text` kennt keinen "
+        out.append(("C29", "`generate_article_text` kennt keinen "
                            "Korrektur-Auftrag – der nächste Versuch würfelt "
                            "denselben Fehler blind neu (#612)."))
     if "hinweise=" not in eg:
-        out.append(("C28", "`engine_generate.try_generate` gibt die Befunde des "
+        out.append(("C29", "`engine_generate.try_generate` gibt die Befunde des "
                            "Vorversuchs nicht an den Schreiber weiter (#612)."))
 
     # c) Die Chronik gehört VOR den Sicherungs-Commit.
     if "--chronik" not in rg or "chronik_schreiben(" not in rg:
-        out.append(("C28", "reserve_gate.py kennt den Chronik-Modus nicht – der "
+        out.append(("C29", "reserve_gate.py kennt den Chronik-Modus nicht – der "
                            "Trend-Beweis ginge wieder verloren (#612)."))
     yml = wflows.get(os.path.join(root, ".github", "workflows",
                                   "content-reserve.yml"), "")
     if not yml:
-        out.append(("C28", "content-reserve.yml nicht lesbar – die "
+        out.append(("C29", "content-reserve.yml nicht lesbar – die "
                            "Chronik-Reihenfolge ist nicht prüfbar."))
     else:
         if "reserve_gate.py --chronik" not in yml:
-            out.append(("C28", "content-reserve.yml schreibt die Reserve-Chronik "
+            out.append(("C29", "content-reserve.yml schreibt die Reserve-Chronik "
                                "nicht VOR dem Commit – rote Läufe verlören ihre "
                                "Zeile (der letzte CI-Eintrag stammte vom "
                                "02.10., #612)."))
@@ -2302,22 +2451,22 @@ def c28_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
             pos_chronik = yml.find("reserve_gate.py --chronik")
             pos_commit = yml.find("Entwürfe, Zertifikate und Reporte sichern")
             if pos_commit != -1 and pos_chronik > pos_commit:
-                out.append(("C28", "die Chronik steht in content-reserve.yml NACH "
+                out.append(("C29", "die Chronik steht in content-reserve.yml NACH "
                                    "dem Sicherungs-Commit – genau die Reihenfolge, "
                                    "die den Trend-Beweis rot machte (#612)."))
 
     # d) Der Ruinen-Heiler: in der Kette, in der Deckung, Wirkung JETZT.
     if not heiler:
-        out.append(("C28", "scripts/politur_ruine_heiler.py fehlt – R11/R13/R14 "
+        out.append(("C29", "scripts/politur_ruine_heiler.py fehlt – R11/R13/R14 "
                            "wären wieder ein harter Blocker ohne Heiler (#612)."))
     else:
         if '("politur_ruine_heiler.py"' not in kette:
-            out.append(("C28", "reserve_finisher.HEALER_CHAIN fährt den "
+            out.append(("C29", "reserve_finisher.HEALER_CHAIN fährt den "
                                "Politur-Ruinen-Heiler nicht – ein fertiger "
                                "Kandidat bliebe an einem „SATZ: “-Rest hängen "
                                "(#612)."))
         if "politur_ruine_heiler.py" not in deckung:
-            out.append(("C28", "reserve_healer_coverage.py nennt den "
+            out.append(("C29", "reserve_healer_coverage.py nennt den "
                                "Politur-Ruinen-Heiler nicht – die Familie gälte "
                                "wieder als gedeckt, ohne dass jemand sie heilt."))
         bin_ = python_bin or sys.executable or "python3"
@@ -2327,13 +2476,13 @@ def c28_geburts_tor(script_texts, wflows, root=BLOG_DIR, python_bin=None):
                  "--wirkungsprobe"], cwd=root, capture_output=True, text=True,
                 timeout=180)
         except (OSError, subprocess.TimeoutExpired) as exc:
-            out.append(("C28", f"Wirkungsprobe des Ruinen-Heilers nicht "
+            out.append(("C29", f"Wirkungsprobe des Ruinen-Heilers nicht "
                                f"ausführbar ({exc.__class__.__name__}) – "
                                f"fail-closed."))
             return out
         if lauf.returncode != 0:
             zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
-            out.append(("C28", "Wirkungsprobe des Ruinen-Heilers ROT: "
+            out.append(("C29", "Wirkungsprobe des Ruinen-Heilers ROT: "
                                + (zeilen[-1][:160] if zeilen
                                   else f"Exit {lauf.returncode}")))
     return out
@@ -2463,7 +2612,7 @@ RULE_TEXT = {
            "zurück, statt als „Kopie“ vernichtet zu werden, und die Endabnahme "
            "füllt konvergent nach, bis das Mindestziel steht oder das Material "
            "ehrlich erschöpft ist (#610).",
-    "C28": "Ein Schreiber prüft, was über ihn entscheidet: Das Geburts-Gate "
+    "C29": "Ein Schreiber prüft, was über ihn entscheidet: Das Geburts-Gate "
            "der Content-Engine (`generate_drafts.profi_quality_ok`) misst die "
            "Lesbarkeit gegen die importierte SSOT "
            "`readability_check.NEW_FLESCH_MIN` – ein Text, den die "
@@ -2502,6 +2651,21 @@ RULE_TEXT = {
            "versiegeltem Versionsnachweis. Wer eine blockierende Prüfung zur "
            "Warnung herabstuft oder eine zweite Messregel einzieht, macht die "
            "Scorecard zur Lüge (Befund 10, 03.10.2026).",
+    "C28": "Die Klasse geht dem Kanal vor: Der öffentliche Nachweis trägt eine "
+           "Klasse (`ok` · `quelle_unter` · `quelle_ueber` · `auslieferung` · "
+           "`unbekannt`) – der Bestand wird gegen das Tagesband geprüft, und "
+           "`ok` steht zuerst, damit ein bestätigter Tag nie eine "
+           "Defizitklasse trägt. Der Workflow antwortet der Klasse mit einem "
+           "eigenen, ehrlichen roten Schritt; nur das Bestandsdefizit belegt "
+           "den Fachkanal `engine-deficit` – mit Frischebeweis VOR dem roten "
+           "Exit und mit beiden Kennwörtern im Schrittnamen, an denen das "
+           "zentrale Fehler-Alerting seine Stummschaltung festmacht. "
+           "Überschuss und Auslieferungsdefizit bleiben laut (Kadenz-Gate "
+           "bzw. P1-Kanal), ein fehlender Beleg ist fail-closed laut. Am "
+           "05./06.10.2026 fiel der Nachweis rot, weil die Quelle den "
+           "gemessenen Montag nur mit 1/2 trug – der unbenannte Sammel-Schritt "
+           "erzeugte das generische Wartungs-Issue #611 mit API-Key-Runbook, "
+           "obwohl der Fachkanal existierte.",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -2519,7 +2683,9 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)",
          "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)",
          "C27": "Beweis-Ledger-Isolation (ein Testlauf fabriziert keine Beweise)",
-         "C28": "Der Schreiber prüft, was über ihn entscheidet (Geburts-Tor, "
+         "C28": "Die Klasse geht dem Kanal vor (Melder-Routing der "
+                "Auslieferungs-SLO)",
+         "C29": "Der Schreiber prüft, was über ihn entscheidet (Geburts-Tor, "
                 "Retry-Gedächtnis, Chronik-Reihenfolge, Ruinen-Heiler)"}
 
 
@@ -3179,7 +3345,70 @@ def _selftest():
             if "unberührt" in f[1]]:
         failures.append("C27: eine fehlende Ledger-Leitplanke im Qualitäts-Gate "
                         "bleibt unentdeckt (Nebenbefund #610).")
-    # --- C28: Der Schreiber prüft, was über ihn entscheidet (#612) ----------
+    # --- C28: Die Klasse geht dem Kanal vor (WF-7C1F #611, 07.10.2026) --------
+    echte_klassenakte = {
+        "publication_check.py": _read(os.path.join(BLOG_DIR, "scripts",
+                                                   "publication_check.py"))}
+
+    def _wf_variante(ersetzung, was):
+        """Kopie der Workflows mit einer Sabotage im Auslieferungs-Nachweis."""
+        kopie = dict(wflows_echt)
+        for pfad, text_ in list(kopie.items()):
+            if os.path.basename(pfad) == "publication-delivery.yml":
+                kopie[pfad] = text_.replace(*ersetzung)
+        return kopie
+
+    if c28_klassen_routing(echte_klassenakte, wflows_echt):
+        failures.append(f"C28: der echte Zustand wird beanstandet: "
+                        f"{c28_klassen_routing(echte_klassenakte, wflows_echt)}")
+    # (a) Der Beleg verliert seine Klasse – der Workflow hätte nichts zu lesen.
+    ohne_klasse = dict(echte_klassenakte, **{
+        "publication_check.py": echte_klassenakte["publication_check.py"].replace(
+            "result['klasse'] = klasse(result)", "pass")})
+    if not [f for f in c28_klassen_routing(ohne_klasse, wflows_echt)
+            if "Beleg" in f[1]]:
+        failures.append("C28: ein Beleg ohne Klasse bleibt unentdeckt (#611).")
+    # (b) Die Historie verliert den Besitzer – ein roter Tag wäre später blind.
+    ohne_historie = dict(echte_klassenakte, **{
+        "publication_check.py": echte_klassenakte["publication_check.py"].replace(
+            "'klasse':", "'keine_klasse':")})
+    if not [f for f in c28_klassen_routing(ohne_historie, wflows_echt)
+            if "Historie" in f[1]]:
+        failures.append("C28: eine Historie ohne Klasse bleibt unentdeckt (#611).")
+    # (c) Der Sammel-Boolean kehrt zurück – genau der Befund #611.
+    sp = ("      - name: AUSLIEFERUNGS-DEFIZIT",
+          "      - name: Missing public delivery is a failed run\n"
+          "        run: exit 0\n"
+          "      - name: AUSLIEFERUNGS-DEFIZIT")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(sp, ""))
+            if "Sammel" in f[1]]:
+        failures.append("C28: der Sammel-Boolean ohne Ursache bleibt unentdeckt "
+                        "(#611).")
+    # (d) SCHEIN-SICHERHEIT: Der Frischebeweis wandert HINTER den roten Exit –
+    #     der Kanal wäre belegt, aber zu spät für dieses Alerting (#602).
+    spaet = ("          # Der Bestand trägt den gemessenen Tag nicht",
+             "          exit 1\n"
+             "          # Der Bestand trägt den gemessenen Tag nicht")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(spaet, ""))
+            if "NACH dem roten Exit" in f[1]]:
+        failures.append("C28: ein Frischebeweis nach dem roten Exit bleibt "
+                        "unentdeckt (#602).")
+    # (e) Der Schrittname verliert die Kennwörter – die Stummschaltung des
+    #     zentralen Fehler-Alertings greift nicht mehr.
+    namen = ("- name: TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig "
+             "(Auslieferungs-SLO)",
+             "- name: Bestandsdefizit (Auslieferungs-SLO)")
+    if not [f for f in c28_klassen_routing(echte_klassenakte, _wf_variante(namen, ""))
+            if "Kennwörter" in f[1]]:
+        failures.append("C28: ein Schrittname ohne die Alerting-Kennwörter bleibt "
+                        "unentdeckt (#602).")
+    # (f) Fail-open: Ein unbekannter Beleg wird still zu „ok“ erklärt.
+    if not [f for f in c28_klassen_routing(echte_klassenakte,
+                                           _wf_variante(("unbekannt", "ok"), ""))
+            if "unbekannten Beleg" in f[1]]:
+        failures.append("C28: ein stiller unbekannter Beleg bleibt unentdeckt "
+                        "(#611).")
+    # --- C29: Der Schreiber prüft, was über ihn entscheidet (#612) ----------
     # Von hier an prüft der SELFTEST die neue Regel mit Kunstbefunden. Der
     # echte Baum muss still bleiben; jede Sabotage muss GENAU ihren Zweig
     # treffen. Der Ruinen-Heiler läuft dabei EINMAL echt (Wirkungsprobe).
@@ -3188,27 +3417,27 @@ def _selftest():
                                     "reserve_gate.py", "politur_ruine_heiler.py",
                                     "reserve_finisher.py",
                                     "reserve_healer_coverage.py")}
-    echt_befunde = c28_geburts_tor(echte_schreiber, wflows_echt,
+    echt_befunde = c29_geburts_tor(echte_schreiber, wflows_echt,
                                    python_bin=sys.executable or "python3")
     if echt_befunde:
-        failures.append(f"C28: der echte Zustand wird beanstandet: {echt_befunde}")
+        failures.append(f"C29: der echte Zustand wird beanstandet: {echt_befunde}")
     # (a) Das Geburts-Gate misst die Lesbarkeit nicht mehr: #612 kehrt zurück.
     ohne_messung = dict(echte_schreiber, **{
         "generate_drafts.py": echte_schreiber["generate_drafts.py"].replace(
             "lesbarkeits_befund(body)", "None")})
-    if not [f for f in c28_geburts_tor(ohne_messung, wflows_echt,
+    if not [f for f in c29_geburts_tor(ohne_messung, wflows_echt,
                                        python_bin=sys.executable or "python3")
             if "Papier" in f[1] or "Lesbarkeit" in f[1]]:
-        failures.append("C28: eine abgeschaltete Lesbarkeits-Messung im "
+        failures.append("C29: eine abgeschaltete Lesbarkeits-Messung im "
                         "Geburts-Gate bleibt unentdeckt (#612).")
     # (b) Der Retry verliert sein Gedächtnis – genau der Zustand vor #612.
     ohne_gedaechtnis = dict(echte_schreiber, **{
         "engine_generate.py": echte_schreiber["engine_generate.py"].replace(
             "hinweise=letzte_hinweise or None", "")})
-    if not [f for f in c28_geburts_tor(ohne_gedaechtnis, wflows_echt,
+    if not [f for f in c29_geburts_tor(ohne_gedaechtnis, wflows_echt,
                                        python_bin=sys.executable or "python3")
             if "Vorversuchs" in f[1]]:
-        failures.append("C28: ein Retry ohne Gedächtnis bleibt unentdeckt (#612).")
+        failures.append("C29: ein Retry ohne Gedächtnis bleibt unentdeckt (#612).")
     # (c) Die Chronik steht wieder NACH dem Commit: der Trend-Beweis wäre bei
     #     jedem roten Lauf verloren, obwohl der Heiler ihn liefern kann.
     yml_chronik = dict(wflows_echt)
@@ -3216,27 +3445,27 @@ def _selftest():
         if os.path.basename(pfad) == "content-reserve.yml":
             yml_chronik[pfad] = yml_chronik[pfad].replace(
                 "reserve_gate.py --chronik", "# Chronik entfernt")
-    if not [f for f in c28_geburts_tor(echte_schreiber, yml_chronik,
+    if not [f for f in c29_geburts_tor(echte_schreiber, yml_chronik,
                                        python_bin=sys.executable or "python3")
             if "VOR dem Commit" in f[1] or "Chronik" in f[1]]:
-        failures.append("C28: eine fehlende Chronik-Vorverlagerung bleibt "
+        failures.append("C29: eine fehlende Chronik-Vorverlagerung bleibt "
                         "unentdeckt (WF-D4E0 #612).")
     # (d) Der Ruinen-Heiler fällt aus der Kette: der Kandidat hängt wieder an
     #     einem „SATZ: “-Rest und der Vorrat fällt unter das Ziel (#612).
     ohne_heiler = dict(echte_schreiber, **{
         "reserve_finisher.py": echte_schreiber["reserve_finisher.py"].replace(
             '("politur_ruine_heiler.py"', '("x_politur_ruine_heiler.py"')})
-    if not [f for f in c28_geburts_tor(ohne_heiler, wflows_echt,
+    if not [f for f in c29_geburts_tor(ohne_heiler, wflows_echt,
                                        python_bin=sys.executable or "python3")
             if "HEALER_CHAIN" in f[1] or "Politur" in f[1]]:
-        failures.append("C28: ein aus der Reserve-Kette entfernter "
+        failures.append("C29: ein aus der Reserve-Kette entfernter "
                         "Politur-Ruinen-Heiler bleibt unentdeckt (#612).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C28 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C29 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 

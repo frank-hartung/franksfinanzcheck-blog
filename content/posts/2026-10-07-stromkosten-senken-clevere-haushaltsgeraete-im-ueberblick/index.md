@@ -8,7 +8,7 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz", "Stromkosten senken", "Überblick"]
+keywords: ["Stromkosten", "Haushaltsgeräte", "Energieeffizienz", "Stromkosten senken"]
 pin_title: "Stromkosten senken: – clevere Haushaltsgeräte im Überblick"
 pin_description: "*Werbung | Entdecke, wie du mit energieeffizienten Geräten deine Stromkosten dauerhaft reduzierst – praxisnah und ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #stromkosten #haushaltsgeraete #energieeffizienz"
 ai_generated: true

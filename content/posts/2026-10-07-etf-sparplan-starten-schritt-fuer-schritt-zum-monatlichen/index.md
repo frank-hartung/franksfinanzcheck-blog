@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["ETF‑Sparplan starten", "Sparplan", "Monatlichen"]
+keywords: ["ETF‑Sparplan starten", "Monatlichen", "Geld sparen"]
 pin_title: "ETF‑Sparplan starten: Schritt‑für‑Schritt zum monatlichen"
 pin_description: "*Werbung | ETF‑Sparplan starten: Erfahre, wie du als Einsteiger einen ETF‑Sparplan aufsetzt, Fehler vermeidest und monatlich clever investierst – ohne Fachchinesisch. Mehr Spartipps auf FranksFinanzcheck! #etfsparplanstarten #sparplan #monatlichen"
 ai_generated: true
