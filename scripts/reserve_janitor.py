@@ -102,6 +102,10 @@ DATA = ROOT / "data"
 
 sys.path.insert(0, str(ROOT / "scripts"))
 import reserve_blocker_klassen as bk  # noqa: E402 – SSOT der Löschklassen
+import reserve_pool as rp  # noqa: E402 – Nachweis/Rückholung (#610)
+#     Absichtlich auf Modulebene: Im Selbsttest ist die Kalender-Uhr ersetzt
+#     (Uhr-Zwang). Ein späterer Import würde `datetime` aus dem Shim binden –
+#     und die Rückholung läse danach dauerhaft eine fremde Uhr.
 
 # Beweislast des Löschens (WF-B594). Alle drei Schwellen sind per Umgebung
 # verstellbar, aber nie abschaltbar: `hits_limit()` bleibt >= 1.
@@ -383,12 +387,37 @@ def find_targets(root: Path, *, today: dt.date | None = None,
         lage = {"ruecklaeufer": [], "blockiert": []}
 
     # 1) Rückläufer: Der Inhalt lebt live weiter, der Entwurf ist die Kopie.
-    #    Hier bleibt es bei der Sofort-Löschung (unverändert seit #24).
+    #    Sofort-Löschung (unverändert seit #24) – ABER nur mit NACHWEIS
+    #    (WF-54C4 #610, 07.10.2026): `reserve_published` + `draft: true` allein
+    #    belegt gar nichts. Am 05.10.2026 wurde der nachgeschobene Reserve-
+    #    Artikel um 22:41 vom Gate zurückgestuft – nie ausgeliefert – und in
+    #    der Nacht als „Rückläufer“ vernichtet. Deshalb: ein LIVE-Artikel mit
+    #    demselben Thema (Titel oder Slug-Rumpf) muss die Veröffentlichung
+    #    belegen; fehlt er, ist der Entwurf Material und wird zurückgeholt.
     for e in lage.get("ruecklaeufer", []):
         slug = e.get("slug")
         if slug:
             targets.setdefault(slug, {"slug": slug, "gruende": []}
-                               )["gruende"].append("Rückläufer")
+                               )["gruende"].append(
+                f"Rückläufer (belegt durch {e.get('live_zwilling')})")
+
+    # 1b) Rückläufer-VERDACHT ohne Nachweis (#610): kein Löschziel.
+    #     Fail-closed zugunsten des Textes: Wer nicht beweisen kann, dass der
+    #     Inhalt öffentlich lebt, darf ihn nicht vernichten. Diese Entwürfe
+    #     kehren in den Vorrat zurück (`zurueck_in_den_pool`, in `purge`)
+    #     und stehen mit Grund im Bericht.
+    for e in lage.get("ruecklaeufer_ohne_nachweis", []):
+        slug = e.get("slug")
+        if not slug:
+            continue
+        geschont.append({
+            "slug": slug, "quelle": "ruecklaeufer",
+            "klasse": "ohne-nachweis",
+            "grund": ("kein LIVE-Zwilling für die Veröffentlichung nachweisbar – "
+                      "kein Löschgrund, Material kehrt in den Vorrat zurück "
+                      "(#610)"),
+            "befund": "reserve_published + draft: true, aber kein LIVE-Artikel "
+                      "mit gleichem Thema"})
 
     # 2) Ausgemusterte (`reserve_blocked`, gesetzt von reserve_quarantine):
     #    Material auf Zeit. Gelöscht wird erst nach der Alterungsfrist – und
@@ -637,6 +666,31 @@ def purge(root: Path = ROOT, *, dry_run: bool = False,
     links_removed = unlink_content_references(root, slugs, dry_run=dry_run)
     llms_removed = prune_llms_txt(root, slugs, dry_run=dry_run)
 
+    # WF-54C4 #610: Nicht ausgelieferten Nachschub zurück in den Vorrat holen.
+    # Die Rettung ist die *Umkehrung* der Löschung: Sie braucht keinen Beweis
+    # gegen den Text, sondern stellt die Kandidaten-Fahne wieder her. Nur im
+    # Echtlauf; der Trockenlauf meldet die Rettung nur.
+    wiederhergestellt: list[str] = []
+    stamp_tag = today or dt.date.today()
+    for e in (geschont or []):
+        if e.get("klasse") != "ohne-nachweis" or e.get("quelle") != "ruecklaeufer":
+            continue
+        slug = str(e.get("slug") or "")
+        if not slug or dry_run:
+            continue
+        try:
+            index = post_index(root / "content" / "posts", slug)
+            stamp = f"{stamp_tag.isoformat()}T12:00:00Z"
+            ok, meldung = rp.zurueck_in_den_pool(
+                index, "Reserve-Janitor #610: kein LIVE-Nachweis – Material erhalten",
+                posts_dir=root / "content" / "posts", when=stamp,
+                history_path=root / "data" / "reserve-history.jsonl")
+        except Exception as exc:  # noqa: BLE001 – Rettung darf den Lauf nie kippen
+            ok, meldung = False, f"Rettung nicht ausführbar: {exc}"
+        print(("  ♻️  " if ok else "  ⚠ ") + meldung)
+        if ok:
+            wiederhergestellt.append(slug)
+
     if not dry_run:
         for slug in sorted(slugs):
             d = root / "content" / "posts" / slug
@@ -656,6 +710,7 @@ def purge(root: Path = ROOT, *, dry_run: bool = False,
         "targets": [targets[s] for s in sorted(slugs)],
         "skipped": skipped,
         "geschont": sorted(geschont, key=lambda e: str(e.get("slug"))),
+        "wiederhergestellt": sorted(wiederhergestellt),
         "regeln": {"hits": hits_limit(), "karenz_tage": karenz_tage(),
                    "ausmusterung_tage": ausmusterung_tage()},
         "cover_files": [str(p.relative_to(root)) for p in cover_files],
@@ -680,6 +735,13 @@ def markdown(report: dict) -> str:
         for t in report["targets"]:
             grund = "; ".join(dict.fromkeys(t.get("gruende") or []))
             lines.append(f"- `{t['slug']}` – {grund}")
+    wieder = report.get("wiederhergestellt") or []
+    if wieder:
+        lines += ["", f"### ♻️ Zurück in den Vorrat (#610, {len(wieder)})", "",
+                  "Kein LIVE-Nachweis für die Veröffentlichung – Material bleibt "
+                  "erhalten statt als „Rückläufer“ vernichtet zu werden.", ""]
+        for slug in wieder:
+            lines.append(f"- `{slug}` – reserve_published entfernt, Fahne gesetzt")
     geschont = report.get("geschont") or []
     regeln = report.get("regeln") or {}
     if geschont:
@@ -778,6 +840,15 @@ def _szenario(heute: dt.date) -> list[str]:
                     "Siehe [Rück](../../posts/rueck/) und [Block](../../posts/blocked/).")
         _write_post(posts, "shared", f'title: "Shared"\ndate: {d0}\ndraft: false\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
         _write_post(posts, "doomed-shared", f'title: "Doomed Shared"\ndate: {d0}\ndraft: true\nreserve_published: {d0}\ncover:\n  image: "images/covers/shared.jpg"', body_ok)
+        # WF-54C4 #610: Der LIVE-NACHWEIS für einen Rückläufer. Ohne ihn wird
+        # nicht gelöscht, sondern zurückgeholt (nächste Fixture).
+        _write_post(posts, "live-rueck", f'title: "Rück"\ndate: {d0}\ndraft: false', body_ok)
+        _write_post(posts, "live-doomed", f'title: "Doomed Shared"\ndate: {d0}\ndraft: false', body_ok)
+        # Der reale #610-Fall: nachgeschobener Reserve-Artikel, vom späten Gate
+        # zurückgestuft, NIE ausgeliefert. reserve_published + draft: true ist
+        # hier ein VERDACHT ohne Beweis – er muss überleben und in den Vorrat
+        # zurückkehren. Frühere Fassung des Janitors hätte ihn vernichtet.
+        _write_post(posts, "rueck-ohne-nachweis", f'title: "Ohne Nachweis"\ndate: {d0}\ndraft: true\nreserve_published: {d0}\ncadence_grund: "publish-gate: Lesbarkeits-Gate"', body_ok)
 
         for base in ("rueck", "blocked", "shared"):
             for p in (covers / f"{base}.jpg", covers / "360" / f"{base}.jpg",
@@ -839,6 +910,14 @@ def _szenario(heute: dt.date) -> list[str]:
                 errors.append("Trockenlauf hat den Zähler geschrieben")
             if set(dry["deleted_slugs"]) != {"rueck", "doomed-shared"}:
                 errors.append(f"Trockenlauf-Ziele falsch: {dry['deleted_slugs']}")
+            if "rueck-ohne-nachweis" in dry["deleted_slugs"]:
+                errors.append("Rückläufer-Verdacht ohne LIVE-Nachweis wurde "
+                              "zum Löschziel (#610)")
+            if not any(g["slug"] == "rueck-ohne-nachweis"
+                       and g["klasse"] == "ohne-nachweis"
+                       for g in dry["geschont"]):
+                errors.append(f"Nachweis-loser Nachschub nicht begründet "
+                              f"gemeldet: {dry['geschont']}")
             if not (posts / "rueck" / "index.md").exists():
                 errors.append("Trockenlauf hat gelöscht")
 
@@ -855,6 +934,37 @@ def _szenario(heute: dt.date) -> list[str]:
             zaehler = json.loads((root / JANITOR_STATE).read_text(encoding="utf-8"))
             if zaehler.get("blocked", {}).get("hits") != 1:
                 errors.append(f"Beleg-Zähler falsch: {zaehler}")
+
+            # (3b) #610: Der Nachschub ohne LIVE-Nachweis kehrt in den Vorrat
+            #      zurück – Fahne gesetzt, Rückläufer-Signatur weg, Inhalt
+            #      byte-identisch. Genau das rettet den Text, den der Tag
+            #      vorher verlor.
+            if "rueck-ohne-nachweis" not in erst["wiederhergestellt"]:
+                errors.append(f"Nachschub ohne Nachweis nicht zurückgeholt: "
+                              f"{erst['wiederhergestellt']}")
+            ohne = (posts / "rueck-ohne-nachweis" / "index.md")
+            if not ohne.exists():
+                errors.append("Nachschub ohne Nachweis wurde gelöscht (#610)")
+            else:
+                ohne_text = ohne.read_text(encoding="utf-8")
+                if "reserve: true" not in ohne_text:
+                    errors.append("Fahne des zurückgeholten Nachschubs fehlt")
+                if "reserve_published" in ohne_text:
+                    errors.append("Rückläufer-Signatur nicht entfernt")
+                if "draft: false" in ohne_text:
+                    errors.append("Rückgeholter Nachschub ist live geschaltet")
+                if "Nutzwert" not in ohne_text:
+                    errors.append("Rückholung hat den Inhalt verändert")
+            #      Zweiter Lauf: idempotent, keine zweite Rettung.
+            zweit = purge(root, dry_run=True, today=heute, run_key="run:1b")
+            if "rueck-ohne-nachweis" in zweit["deleted_slugs"]:
+                errors.append("Zurückgeholter Nachschub ist erneut Löschziel")
+            if "rueck-ohne-nachweis" in [
+                    e.get("slug") for e in zweit.get("geschont", [])
+                    if e.get("klasse") == "ohne-nachweis"]:
+                errors.append("Zurückgeholter Nachschub wird erneut als "
+                              "Nachweis-loser Rückläufer gemeldet "
+                              "(Rettung nicht idempotent)")
 
             # (4) Der #594-Realfall überlebt JEDEN Lauf: nur heilbare Mängel.
             if not (posts / "heilbar-kurz" / "index.md").exists():
@@ -875,7 +985,8 @@ def _szenario(heute: dt.date) -> list[str]:
         for slug in ("rueck", "blocked", "doomed-shared"):
             if (posts / slug).exists():
                 errors.append(f"{slug} wurde nicht gelöscht")
-        for slug in ("manual", "live-old-reserve", "shared", "heilbar-kurz"):
+        for slug in ("manual", "live-old-reserve", "shared", "heilbar-kurz",
+                     "rueck-ohne-nachweis"):
             if not (posts / slug / "index.md").exists():
                 errors.append(f"{slug} wurde fälschlich gelöscht")
 
@@ -931,10 +1042,12 @@ def run_selftest() -> int:
             print(f"   - {e}")
         return 2
     print(f"✅ reserve_janitor-Selbsttest grün ({len(PROBETAGE)} Probetage, "
-          "Uhr-Zwang): Rückläufer sofort gelöscht, Torso erst mit 2 Läufen "
-          "Beleg, heilbarer Kurz-Entwurf verschont (#594), Karenz greift, "
-          "Trockenlauf zählt nicht, Handentwurf/Live geschützt, Links, "
-          "llms.txt, Cover, Audio und Gedächtnisse bereinigt.")
+          "Uhr-Zwang): Rückläufer nur MIT LIVE-Nachweis sofort gelöscht, "
+          "Nachschub ohne Nachweis zurück in den Vorrat geholt (#610), Torso "
+          "erst mit 2 Läufen Beleg, heilbarer Kurz-Entwurf verschont (#594), "
+          "Karenz greift, Trockenlauf zählt nicht, Handentwurf/Live "
+          "geschützt, Links, llms.txt, Cover, Audio und Gedächtnisse "
+          "bereinigt.")
     return 0
 
 

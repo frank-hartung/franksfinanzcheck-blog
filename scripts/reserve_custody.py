@@ -173,9 +173,14 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> di
     """
     pfad = ledger_pfad(pfad)
     ledger = ledger_laden(pfad)
-    pool, verloren, ruecklaeufer, blockiert, zurueckgezogen = [], [], [], [], []
+    (pool, verloren, ruecklaeufer, blockiert, zurueckgezogen,
+     ohne_nachweis) = [], [], [], [], [], []
     namensgleich: list[dict] = []
     gesehen = set()
+    # Rückläufer-VERDACHT (reserve_published + draft) wird erst mit einem
+    # LIVE-Zwilling zum Rückläufer; ohne Nachweis: `ruecklaeufer_ohne_nachweis`
+    # → Material, das der Janitor zurückschont und in den Vorrat zurückholt.
+
     if posts_dir.is_dir():
         for index in sorted(posts_dir.glob("*/index.md")):
             slug = index.parent.name
@@ -195,7 +200,22 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> di
             elif zu == ZUSTAND_ZURUECKGEZOGEN:
                 zurueckgezogen.append(eintrag)
             elif zu == ZUSTAND_RUECKLAEUFER:
-                ruecklaeufer.append(eintrag)
+                # WF-54C4 #610 (07.10.2026): `reserve_published` + `draft: true`
+                # ist ein VERDACHT, kein Beweis. Erst ein LIVE-Artikel mit
+                # demselben Thema (Titel oder Slug-Rumpf) belegt, dass „der
+                # Inhalt live weiterlebt“. Ohne Zwilling kehrt der Entwurf als
+                # Material zurück (reserve_pool.zurueck_in_den_pool) und wird
+                # niemals als Rückläufer gelöscht – genau diese Verwechslung
+                # vernichtete am 05.10.2026 den einzigen Nachschub des Tages.
+                try:
+                    import reserve_pool as _rp
+                    eintrag["live_zwilling"] = _rp.live_zwilling(slug, posts_dir)
+                except Exception:  # noqa: BLE001 – fail-closed: ohne Beweis kein Löschen
+                    eintrag["live_zwilling"] = None
+                if eintrag["live_zwilling"]:
+                    ruecklaeufer.append(eintrag)
+                else:
+                    ohne_nachweis.append(eintrag)
             elif zu == ZUSTAND_VERLOREN and ledger.get(
                     schluessel(slug), {}).get("zustand") == ZUSTAND_POOL:
                 merk = ledger[schluessel(slug)]
@@ -215,6 +235,7 @@ def bestandsaufnahme(posts_dir: Path = POSTS, *, pfad: Path | None = None) -> di
                 and e.get("zustand") == ZUSTAND_POOL]
     return {"pool": pool, "verloren": verloren, "ruecklaeufer": ruecklaeufer,
             "blockiert": blockiert, "zurueckgezogen": zurueckgezogen,
+            "ruecklaeufer_ohne_nachweis": ohne_nachweis,
             "verwaist": sorted(verwaist), "namensgleich": namensgleich}
 
 
@@ -291,6 +312,13 @@ def markdown(lage: dict) -> str:
                       "danach wieder auf `draft` gesetzt")
         for e in lage["ruecklaeufer"]:
             zeilen.append(f"  - `{e['slug']}`")
+    if lage.get("ruecklaeufer_ohne_nachweis"):
+        zeilen.append("- **Ohne LIVE-Nachweis (Material, kein Rückläufer):** "
+                      f"{len(lage['ruecklaeufer_ohne_nachweis'])} – "
+                      "`reserve_published` + `draft`, aber kein LIVE-Artikel "
+                      "mit gleichem Thema; wird nicht gelöscht (#610)")
+        for e in lage["ruecklaeufer_ohne_nachweis"]:
+            zeilen.append(f"  - `{e['slug']}`")
     if lage.get("namensgleich"):
         zeilen.append(f"- **Namensgleich, nicht angefasst:** "
                       f"{len(lage['namensgleich'])} – gleicher Slug-Stamm wie "
@@ -361,6 +389,14 @@ def run_selftest() -> int:
         rueck = _schreibe(posts, "2026-09-21-ruecklaeufer",
                           'title: "Rückläufer"\ndate: 2026-09-21\ndraft: true\n'
                           'reserve_published: 2026-09-21')
+        # WF-54C4 #610: Der LIVE-Nachweis macht den Verdacht zum Rückläufer.
+        _schreibe(posts, "2026-09-20-ruecklaeufer-live",
+                  'title: "Rückläufer"\ndate: 2026-09-20\ndraft: false')
+        # Ohne diesen Nachweis ist es KEIN Rückläufer, sondern nicht
+        # ausgelieferter Nachschub – Material, das zurück in den Vorrat muss.
+        ohne_nachweis = _schreibe(posts, "2026-09-21-ohne-nachweis",
+                                  'title: "Ohne Nachweis"\ndate: 2026-09-21\n'
+                                  'draft: true\nreserve_published: 2026-09-21')
         fremd = _schreibe(posts, "2026-09-22-fremd",
                           'title: "Fremder Entwurf"\ndate: 2026-09-22\n'
                           'draft: true')
@@ -408,6 +444,17 @@ def run_selftest() -> int:
         if [e["slug"] for e in lage["ruecklaeufer"]] != \
                 ["2026-09-21-ruecklaeufer"]:
             fehler.append(f"Rückläufer nicht gemeldet: {lage['ruecklaeufer']}")
+        if lage["ruecklaeufer"] and lage["ruecklaeufer"][0].get(
+                "live_zwilling") != "2026-09-20-ruecklaeufer-live":
+            fehler.append("LIVE-Nachweis des Rückläufers fehlt: "
+                          f"{lage['ruecklaeufer'][0]}")
+        if [e["slug"] for e in lage["ruecklaeufer_ohne_nachweis"]] != \
+                ["2026-09-21-ohne-nachweis"]:
+            fehler.append("Nachschub ohne Nachweis nicht als eigener Zustand "
+                          f"gemeldet: {lage['ruecklaeufer_ohne_nachweis']}")
+        if "reserve: true" in ohne_nachweis.read_text(encoding="utf-8"):
+            fehler.append("Nachweis-loser Nachschub wurde in den Pool gezogen "
+                          "(nur der Janitor holt ihn zurück, #610)")
 
         # 3. Idempotenz: zweiter Lauf heilt nichts mehr.
         vorher = verloren.read_text(encoding="utf-8")
@@ -465,7 +512,9 @@ def run_selftest() -> int:
         return 2
     print("✅ Bestands-Wächter-Selbsttest grün (Fahne zurück, Inhalt "
           "unberührt, Live/Rückläufer/Fremd/zurückgezogen/ausgemustert "
-          "unangetastet, idempotent, Trockenlauf schreibfrei, Gedächtnis).")
+          "unangetastet, Rückläufer nur MIT LIVE-Nachweis, Nachschub ohne "
+          "Nachweis als eigener Zustand (#610), idempotent, Trockenlauf "
+          "schreibfrei, Gedächtnis).")
     return 0
 
 
@@ -494,6 +543,8 @@ def main() -> int:
         print(f"Reserve-Bestand: {len(lage['pool'])} im Pool · "
               f"{len(lage['verloren'])} ohne Fahne · "
               f"{len(lage['ruecklaeufer'])} Rückläufer · "
+              f"{len(lage.get('ruecklaeufer_ohne_nachweis', []))} ohne "
+              f"LIVE-Nachweis · "
               f"{len(lage['blockiert'])} ausgemustert · "
               f"{len(lage['zurueckgezogen'])} von Hand zurückgezogen")
         for e in lage["geheilt"]:

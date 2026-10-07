@@ -1,5 +1,6 @@
 import datetime as dt
 import io
+import os
 import json
 import sys
 import tempfile
@@ -469,6 +470,289 @@ class TwinSchutzTests(unittest.TestCase):
         grund = twin.twin_schutz_grund(
             "content/posts/2026-09-20-ohne-datum/index.md", "", geteilt=set())
         self.assertNotEqual(grund, "")
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+class NachschubOhneNachweisTests(unittest.TestCase):
+    """WF-54C4 #610: „Rückläufer“ braucht einen LIVE-Beweis – sonst Material.
+
+    Der Vorfall: Ein Reserve-Artikel wurde 21:27 als Tageskandidat geführt,
+    um 22:20 KI-geheilt, um 22:41 vom späten Gate auf `draft: true`
+    zurückgestuft – und in der Nacht vom Janitor als „Rückläufer“ vernichtet,
+    obwohl er nie öffentlich war. Der Tag fiel auf 1/2, und der Vorrat verlor
+    das Material, das den nächsten Tag hätte tragen können.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.posts = self.root / 'content' / 'posts'
+        self.posts.mkdir(parents=True)
+        self.history = self.root / 'data' / 'reserve-history.jsonl'
+
+    def _post(self, slug, *, draft=True, titel=None, day='2026-10-05',
+              extra=''):
+        p = self.posts / slug / 'index.md'
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(
+            f'---\ntitle: "{titel or slug}"\ndate: {day}T12:00:00Z\n'
+            f'draft: {str(draft).lower()}\n{extra}---\nBody\n',
+            encoding='utf-8')
+        return p
+
+    def test_live_zwilling_ueber_slug_rumpf(self):
+        self._post('2026-09-10-energie-update', draft=False)
+        self._post('2026-10-05-energie-update')
+        self.assertEqual(
+            rp.live_zwilling('2026-10-05-energie-update', self.posts),
+            '2026-09-10-energie-update')
+
+    def test_live_zwilling_ueber_titel(self):
+        self._post('2026-09-10-energie-update', draft=False,
+                   titel='Energie-Update: Was sich jetzt ändert')
+        self._post('2026-10-05-energie-update-nachgeschoben',
+                   titel='Energie-Update: Was sich jetzt ändert')
+        self.assertEqual(
+            rp.live_zwilling('2026-10-05-energie-update-nachgeschoben',
+                             self.posts),
+            '2026-09-10-energie-update')
+
+    def test_ohne_live_zwilling_kein_nachweis(self):
+        self._post('2026-10-05-energie-update', draft=False,
+                   titel='Ein ganz anderes Thema')
+        self._post('2026-10-05-nachschub')
+        self.assertIsNone(rp.live_zwilling('2026-10-05-nachschub', self.posts))
+
+    def test_custody_trennt_verdacht_von_beweis(self):
+        import reserve_custody as rc
+        self._post('2026-09-21-ruecklaeufer', titel='Rückläufer',
+                   extra='reserve_published: 2026-09-21\n')
+        self._post('2026-09-20-ruecklaeufer-live', draft=False,
+                   titel='Rückläufer')
+        ohne = self._post('2026-09-21-ohne-nachweis', titel='Ohne Nachweis',
+                          extra='reserve_published: 2026-09-21\n')
+        lage = rc.bestandsaufnahme(self.posts, pfad=self.root / 'custody.json')
+        self.assertEqual([e['slug'] for e in lage['ruecklaeufer']],
+                         ['2026-09-21-ruecklaeufer'])
+        self.assertEqual(
+            [e['slug'] for e in lage['ruecklaeufer_ohne_nachweis']],
+            ['2026-09-21-ohne-nachweis'])
+        # Die Sichtung darf den Text nicht angefasst haben.
+        self.assertIn('reserve_published', ohne.read_text(encoding='utf-8'))
+
+    def test_zurueck_in_den_pool_macht_material_und_protokolliert(self):
+        p = self._post('2026-10-05-nachschub',
+                       extra='reserve_published: 2026-10-05\n'
+                             'cadence_wait: true\n'
+                             'cadence_demoted: 2026-10-05T22:41:00Z\n'
+                             'cadence_grund: "publish-gate: Lesbarkeits-Gate"\n')
+        with patch('reserve_pool.now_utc_iso',
+                   lambda: '2026-10-07T12:00:00Z'):
+            ok, meldung = rp.zurueck_in_den_pool(
+                p, 'Janitor #610: kein LIVE-Nachweis',
+                posts_dir=self.posts, history_path=self.history)
+        self.assertTrue(ok, meldung)
+        text = p.read_text(encoding='utf-8')
+        self.assertNotIn('reserve_published', text)
+        self.assertIn('reserve: true', text)
+        self.assertIn('draft: true', text)
+        self.assertNotIn('cadence_grund', text)
+        zeile = json.loads(self.history.read_text(encoding='utf-8').strip())
+        self.assertEqual(zeile['slug'], '2026-10-05-nachschub')
+        self.assertEqual(zeile['ts'], '2026-10-07T12:00:00Z')
+        self.assertIn('kein LIVE-Nachweis', zeile['grund'])
+
+    def test_zurueck_in_den_pool_verweigert_echten_ruecklaeufer(self):
+        self._post('2026-09-10-energie-update', draft=False)
+        p = self._post('2026-10-05-energie-update',
+                       extra='reserve_published: 2026-09-10\n')
+        before = p.read_bytes()
+        ok, meldung = rp.zurueck_in_den_pool(
+            p, 'Test', posts_dir=self.posts, history_path=self.history)
+        self.assertFalse(ok)
+        self.assertIn('LIVE-Zwilling', meldung)
+        self.assertEqual(p.read_bytes(), before)
+        self.assertFalse(self.history.exists())
+
+    def test_rescue_in_release_holt_verworfenen_nachschub(self):
+        p = self._post('2026-10-05-nachschub',
+                       extra='reserve_published: 2026-10-05\n')
+        with patch('reserve_pool.now_utc_iso',
+                   lambda: '2026-10-07T12:00:00Z'), \
+             redirect_stdout(io.StringIO()) as aus:
+            gerettet = pr.sichere_verworfene_nachschuebe(
+                self.posts, history_path=self.history)
+        self.assertEqual(gerettet, ['2026-10-05-nachschub'])
+        self.assertIn('♻️', aus.getvalue())
+        self.assertIn('reserve: true', p.read_text(encoding='utf-8'))
+
+    def test_rescue_laesst_belegten_ruecklaeufer_liegen(self):
+        self._post('2026-09-10-energie-update', draft=False)
+        p = self._post('2026-10-05-energie-update',
+                       extra='reserve_published: 2026-09-10\n')
+        before = p.read_bytes()
+        with redirect_stdout(io.StringIO()):
+            gerettet = pr.sichere_verworfene_nachschuebe(
+                self.posts, history_path=self.history)
+        self.assertEqual(gerettet, [])
+        self.assertEqual(p.read_bytes(), before)
+
+
+class KonvergenzTests(unittest.TestCase):
+    """WF-54C4 #610: Die Endabnahme endet nie unter dem Mindestziel, solange
+    Material da ist – aber immer begrenzt (keine Endlosschleife)."""
+
+    WED = dt.date(2026, 10, 7)    # Mittwoch = Publikationstag
+    TUE = dt.date(2026, 10, 6)    # Dienstag = Ruhetag
+
+    def _run(self, refill_folge, rescue_folge, live_folge, tag=None,
+             runden=3):
+        """live_folge: LIVE-Zahl in Aufruf-Reihenfolge – erst die Vorprüfung,
+        dann nach jeder Runde."""
+        tag = tag or self.WED
+        with patch.object(pr, 'refill_to_min',
+                          side_effect=refill_folge) as refill, \
+             patch.object(pr, 'sichere_verworfene_nachschuebe',
+                          side_effect=rescue_folge) as rescue, \
+             patch.object(pr, 'live_count_today',
+                          side_effect=[(n, 2, tag) for n in live_folge]) as live, \
+             redirect_stdout(io.StringIO()) as aus:
+            published = pr.refill_until_min(object(), runden=runden)
+        return published, refill, rescue, live, aus.getvalue()
+
+    def test_naechste_runde_greift_den_naechsten_kandidaten(self):
+        # Runde 1 schiebt 'a' nach – das späte Gate stuft ihn zurück, der Tag
+        # steht weiter bei 1/2. Genau hier hatte die Endabnahme am 05.10.2026
+        # keinen zweiten Griff mehr.
+        published, refill, _, _, aus = self._run(
+            [['a'], ['b']], [[], []], [1, 1, 2])
+        self.assertEqual(published, ['a', 'b'])
+        self.assertEqual(refill.call_count, 2)
+        self.assertIn('↻', aus)
+
+    def test_ohne_fortschritt_wird_das_defizit_ehrlich_gemeldet(self):
+        published, refill, _, _, aus = self._run(
+            [[]], [[]], [0, 0])
+        self.assertEqual(published, [])
+        self.assertEqual(refill.call_count, 1)
+        self.assertIn('kein Fortschritt', aus)
+        self.assertIn('ehrliches Defizit', aus)
+
+    def test_rettung_zaehlt_als_fortschritt(self):
+        published, refill, rescue, _, _ = self._run(
+            [[], ['c']], [['x'], []], [1, 1, 2])
+        self.assertEqual(published, ['c'])
+        self.assertEqual(rescue.call_count, 2)
+
+    def test_runden_sind_begrenzt(self):
+        published, refill, _, _, _ = self._run(
+            [['a'], ['b'], ['c'], ['d']], [[], [], [], []], [1, 1, 1, 1],
+            runden=3)
+        self.assertEqual(published, ['a', 'b', 'c'])
+        self.assertEqual(refill.call_count, 3)
+
+    def test_offday_ist_kein_konvergenzfall(self):
+        published, refill, _, _, _ = self._run([['a']], [[]], [1],
+                                               tag=self.TUE)
+        self.assertEqual(published, [])
+        self.assertEqual(refill.call_count, 0)
+
+
+class BelegJeTagTests(unittest.TestCase):
+    """WF-54C4 #610: Ein Beleg gehört seinem Tag – nie still schließen."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.addCleanup(os.chdir, os.getcwd())
+        os.chdir(self.root)
+
+    def test_beleg_schreibt_tagesdatei_und_historie(self):
+        import publication_incident as pi
+        history = self.root / 'data' / 'historie.jsonl'
+        ergebnis = {'day': '2026-10-05', 'mode': 'public', 'minimum': 2,
+                    'maximum': 3,
+                    'source': ['2026-10-02-preiswert-surfen'],
+                    'delivered': ['2026-10-02-preiswert-surfen'],
+                    'errors': [], 'ok': False}
+        with patch.object(pc, 'HISTORY', history):
+            pfad, tagespfad = pc.beleg_schreiben(ergebnis, 'tmp/beleg.json')
+        self.assertTrue(pfad.exists() and tagespfad.exists())
+        self.assertEqual(tagespfad.name, 'beleg-2026-10-05.json')
+        self.assertEqual(json.loads(pfad.read_text(encoding='utf-8')),
+                         ergebnis)
+        zeile = json.loads(history.read_text(encoding='utf-8').strip())
+        self.assertEqual(zeile['day'], '2026-10-05')
+        self.assertEqual(zeile['delivered'], 1)
+        self.assertEqual(zeile['source'], 1)
+        self.assertFalse(zeile['ok'])
+        self.assertTrue(pc.HISTORY.name.endswith('.jsonl'))
+
+    def test_fremder_tag_wird_quittiert_nicht_behauptet(self):
+        import publication_incident as pi
+        urteil, text = pi.abschluss_entscheidung(
+            '2026-10-05', {'day': '2026-10-07'}, receipt_ok=True,
+            zahlen={'minimum': 2, 'source': 1, 'delivered': 1})
+        self.assertEqual(urteil, 'quittung')
+        self.assertIn('2026-10-05', text)
+        self.assertIn('2026-10-07', text)
+        self.assertIn('verbucht, nicht behoben', text)
+
+    def test_altes_issue_610_traegt_seinen_tag(self):
+        import publication_incident as pi
+        body = (pi.MARKER + '\n- **Source LIVE:** 1/2\n'
+                '```json\n{"day": "2026-10-05", "minimum": 2, "source": [],'
+                ' "delivered": []}\n```\n')
+        self.assertEqual(pi.tag_aus_body(body), '2026-10-05')
+        self.assertEqual(pi.zahlen_aus_body(body),
+                         {'minimum': 2, 'source': 0, 'delivered': 0})
+
+    def test_ohne_beleg_kein_abschluss(self):
+        import publication_incident as pi
+        self.assertEqual(
+            pi.abschluss_entscheidung('2026-10-05', {}, receipt_ok=True)[0],
+            'offen')
+        self.assertEqual(
+            pi.abschluss_entscheidung('2026-10-05', {'day': '2026-10-07'},
+                                      receipt_ok=False)[0],
+            'offen')
+
+    def test_incident_selftest_laeuft_unter_fremder_uhr(self):
+        import publication_incident as pi
+        self.assertEqual(pi.run_selftest(), 0)
+
+    def test_workflow_laedt_den_tagesbeleg_mit_hoch(self):
+        yml = (Path(__file__).resolve().parents[2] / '.github' / 'workflows' /
+               'publication-delivery.yml').read_text(encoding='utf-8')
+        self.assertIn('tmp/publication-receipt*.json', yml,
+                      'Der tagesgenaue Beleg muss als Artefakt erhalten bleiben')
+
+    def test_janitor_holt_nachschub_ohne_nachweis_zurueck(self):
+        """Der Janitor rettet, statt zu löschen – und protokolliert den Beweis."""
+        import reserve_janitor as rj
+        posts = self.root / 'content' / 'posts'
+        (posts / '2026-09-30-nachschub').mkdir(parents=True)
+        index = posts / '2026-09-30-nachschub' / 'index.md'
+        index.write_text(
+            '---\ntitle: "Nachschub"\ndate: 2026-09-30T12:00:00Z\n'
+            'draft: true\nreserve_published: 2026-09-30\n'
+            'cadence_grund: "publish-gate: Lesbarkeits-Gate"\n---\n'
+            + ('Wort ' * 400), encoding='utf-8')
+        heute = dt.date(2026, 10, 7)
+        with patch.object(rj, 'post_index',
+                          lambda p, s: p / s / 'index.md'):
+            erst = rj.purge(self.root, dry_run=False, today=heute,
+                            run_key='run:1')
+        self.assertNotIn('2026-09-30-nachschub', erst['deleted_slugs'])
+        self.assertIn('2026-09-30-nachschub', erst['wiederhergestellt'])
+        self.assertIn('reserve: true', index.read_text(encoding='utf-8'))
+        self.assertTrue((self.root / 'data' / 'reserve-history.jsonl').exists(),
+                        'Die Rettung muss im Gedächtnis stehen')
 
 
 if __name__ == '__main__':

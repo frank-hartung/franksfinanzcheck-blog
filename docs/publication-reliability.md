@@ -375,3 +375,104 @@ Die dauerhafte Reparatur hat vier Teile:
 Regressionen: `scripts/tests/test_lesbarkeit_heiler.py` (29 Tests: Wirkung,
 Tor-Sabotage, Stufe-B-Attrappe, Scope, Verdrahtung) und der erweiterte
 Selbsttest der Deckungs-Wache.
+
+## Nachtrag 07.10.2026 – WF-54C4 #610: „Ein Beleg gehört seinem Tag“ (#610)
+
+Der Auslieferungskanal (P1, Marker `<!-- publication-delivery-slo -->`) meldete
+für den **05.10.2026**: `Source LIVE 1/2`, `Öffentlich geliefert 1/2`
+(Beleg-JSON im Issue-Body, UTC 2026-10-06T14:15:07Z). Der Fehltag selbst ist
+nicht nachholbar – wohl aber die zwei Lücken, die ihn **unsichtbar** und den
+Vorrat **schmaler** gemacht hätten.
+
+**Die Nacht des 05.10.2026 in der Akte** (`data/audit/2026-10-05.jsonl`,
+`data/content_fingerprints.jsonl`, `data/reserve-intake.json`):
+
+| Zeit (UTC) | Ereignis |
+|---|---|
+| 21:27/21:59 | Der intakte Reserve-Kandidat `2026-09-10-energie-update-…` steht als Tageskandidat in der Scorecard (`live` 39, `freigabe_reif` 32, `blockiert` 0). |
+| 21:51/22:16 | Zwei Fingerabdrücke desselben Textes (1557 → 1554 Wörter). |
+| 22:20 | „Redaktions-Standard neu“ schreibt ihn KI-geheilt um – Flesch 44,3 + R7-Intro-Formel (Reparatur #607). |
+| 22:41 | `publish_gate` stuft ihn auf `draft: true` zurück; der Tag steht bei **1/2**. |
+| Nacht | Sichtung/Janitor lesen `reserve_published` + `draft: true` als **Rückläufer** („der Inhalt lebt live weiter“) und löschen den Text. Er war nie öffentlich; mit ihm verschwand das Material, das den nächsten Tag hätte tragen können. |
+
+### Die zwei Befunde
+
+1. **Der Beweis gehörte niemandem.** `scripts/publication_check.py` schrieb
+   seinen Beleg bei jedem Lauf in dieselbe Datei `tmp/publication-receipt.json`,
+   und `scripts/publication_incident.py` schloss das offene Issue bei jedem
+   grünen Lauf – ohne zu prüfen, **welchem Tag** der Beleg gehört. Die SLO misst
+   aber immer den *jüngsten* Publikationstag: Das Ticket vom 05.10. wäre am
+   07.10. mit dem Beleg des 07.10. geschlossen worden. Der Fehltag wäre nie
+   verbucht worden – und der Beweis mit der Datei überschrieben. Ein grüner
+   Fremdtag darf keinen roten Tag abräumen.
+2. **„Rückläufer“ war eine Behauptung.** `reserve_published` + `draft: true`
+   galt Sichtung und Janitor als Beweis, dass der Inhalt öffentlich weiterlebt
+   – die Signatur entsteht aber schon durch eine späte Gate-Zurückstufung
+   (`publish_gate` → `park_state.hold`). Wer nicht beweisen kann, dass ein Text
+   veröffentlicht wurde, darf ihn nicht als Kopie vernichten.
+
+### Dauerhafte Reparatur
+
+1. **Tagesgebundener Beleg:** `publication_check.py` schreibt zusätzlich
+   `tmp/publication-receipt-<tag>.json` und eine versionierte Zeile in
+   `data/publication-delivery-history.jsonl` (`beleg_schreiben()`). Der
+   generische Beleg bleibt als Lauf-Artefakt; der Tagesbeleg ist der Beweis, der
+   einem Tag gehört. Der Workflow lädt beide hoch
+   (`tmp/publication-receipt*.json`).
+2. **Tagesgebundener Abschluss:** `publication_incident.py` schließt nur mit
+   einem Beleg **desselben** Tages. Zieht der gemessene Tag weiter, wird der
+   Fehltag als **Quittung** verbucht („verbucht, nicht behoben“, Zahlen aus dem
+   eingefrorenen Issue-JSON, Hinweis auf die verbotene Nachdatierung) – ohne Tag
+   oder ohne Zahlen bleibt das Issue offen (fail-closed). Der Issue-Body trägt
+   den gemessenen Tag sichtbar (`- **Gemessener Tag:** …`); Alt-Issues wie #610
+   liefern ihn aus dem eingefrorenen Beleg-JSON.
+3. **Nachweis-Pflicht beim Rückläufer:** `reserve_pool.live_zwilling()` sucht den
+   LIVE-Artikel mit demselben Thema (gleicher Slug-Rumpf ODER gleicher
+   normalisierter Titel). Ohne Zwilling ist der Entwurf kein Rückläufer, sondern
+   **nicht ausgelieferter Nachschub**: `reserve_custody.bestandsaufnahme()`
+   führt ihn als `ruecklaeufer_ohne_nachweis`, der Janitor löscht ihn nicht
+   (Klasse `ohne-nachweis`, Berichtsfeld `wiederhergestellt`) und
+   `reserve_pool.zurueck_in_den_pool()` holt ihn zurück in den Vorrat
+   (Protokoll in `data/reserve-history.jsonl`). Mit belegtem Zwilling bleibt es
+   bei der Sichtung – jetzt mit dem Zwilling im Löschgrund.
+4. **Konvergente Nachfüllung:** `publication_release.py` füllt nicht mehr mit
+   genau einem (doppelten) Durchgang nach, sondern in begrenzten Runden
+   (`refill_until_min()`, Standard 3): Jede Runde räumt verworfenen Nachschub
+   zurück in den Vorrat (`sichere_verworfene_nachschuebe()`) und greift dann den
+   nächsten Kandidaten. Abbrüche: Mindestziel erreicht, kein Fortschritt (dann
+   ausdrücklich „ehrliches Defizit“), Runden erschöpft, Off-Day (eine Runde, die
+   nichts tun darf, wird gar nicht erst gestartet). Die Rettung zählt als
+   Fortschritt – Zurückstufen darf Material kosten, aber nicht den nächsten
+   Versuch.
+5. **Governance C26 („Ein Beleg gehört seinem Tag“):** Die Regel prüft
+   Tagesbeleg + Historie, den tagesgebundenen Schließpfad des Melders, die
+   Konvergenz, die Nachweis-Pflicht beim Rückläufer und das Tages-Artefakt im
+   Workflow – mit fünf Kunstbefunden im Kontrakt-Selbsttest.
+   `publication_incident.py` steht zusätzlich in `GUARDS` (Selbsttest im
+   vertraglichen Minimum, inklusive Uhr-Proben über `selftest_runner.py`).
+
+### Betrieb: was tun, wenn ein Tag als Quittung verbucht ist
+
+- **Vergangen ist vergangen.** Ein Fehltag wird nicht nachdatiert: kein
+  Nachschieben mit altem Datum, kein Absenken von Schwellen, kein
+  „kosmetisches“ Zurücksetzen des Messwerts. Die Quittung ist die Buchung.
+- **Nachsehen, was der Tag wirklich hatte:** `data/publication-delivery-history.jsonl`
+  (eine Zeile je Lauf: `day`, `source`, `delivered`, `ok`), der tagesgenaue
+  Beleg im Lauf-Artefakt (`publication-receipt`) und der eingefrorene
+  Beleg-JSON im Issue-Body.
+- **Vorwärts heilen:** Zuerst die Ursache des Fehltags, dann die Reserve.
+  `python3 scripts/reserve_custody.py --md` zeigt, was ohne LIVE-Nachweis im
+  Vorrat liegt; `python3 scripts/publication_release.py --refill-only` füllt
+  konvergent nach; die Reserve-Kette (`content-reserve.yml`) heilt die Klassen,
+  bevor der nächste Slot greift.
+- **Rückläufer prüfen:** Ein Löschgrund des Janitors nennt jetzt den belegenden
+  Zwilling. Fehlt der Nachweis, ist der Text Material – er landet wieder im
+  Vorrat statt im Nichts.
+
+Regressionen: `scripts/tests/test_publication_reliability.py`
+(`NachschubOhneNachweisTests`, `KonvergenzTests`, `BelegJeTagTests`),
+`python3 scripts/publication_incident.py --selftest`,
+`python3 scripts/reserve_pool.py --selftest`,
+`python3 scripts/reserve_custody.py --selftest`,
+`python3 scripts/reserve_janitor.py --selftest`,
+`python3 scripts/publication_release.py --selftest`.

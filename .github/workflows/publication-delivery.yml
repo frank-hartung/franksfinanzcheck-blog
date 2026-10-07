@@ -33,7 +33,10 @@ jobs:
         if: always()
         with:
           name: publication-receipt
-          path: tmp/publication-receipt.json
+          # WF-54C4 #610: Der generische Beleg wird bei jedem Lauf
+          # überschrieben – der tagesgenaue Beleg (`publication-receipt-<tag>`)
+          # ist der Beweis, der einem Tag gehört und bleiben muss.
+          path: tmp/publication-receipt*.json
       - name: Reconcile delivery incident without racing recovery
         if: ${{ !cancelled() }}
         env:

@@ -35,6 +35,7 @@ MODI:
 
 import contextlib
 import datetime
+import json
 import os
 import re
 import sys
@@ -225,6 +226,146 @@ def publish_one(index: Path, when=None) -> str:
                   f"reserve_published: {iso[:10]}\n", text, count=1)
     index.write_text(text, encoding="utf-8")
     return iso
+
+
+# ===========================================================================
+# NACHWEIS-PFLICHT statt Rückläufer-Verdacht (WF-54C4 #610, 07.10.2026)
+# ===========================================================================
+# Ein Reserve-Artikel, der als LIVE-Kandidat am späten Gate durchfällt, wird
+# von `publish_gate` auf `draft: true` zurückgestuft. Sein Frontmatter trägt
+# danach weiterhin `reserve_published` – genau die Signatur, mit der
+# `reserve_custody` und der Reserve-Janitor ihn als RÜCKLÄUFER lesen
+# („der Inhalt lebt live weiter, der Entwurf ist die Kopie“) und SOFORT
+# löschen. Beim Vorfall #610 (05.10.2026) war dieser Satz falsch:
+#   * 21:27/21:59  Der intaken Kandidat `2026-09-10-energie-update-…` stand
+#                  als Tageskandidat in der Scorecard.
+#   * 22:20        „Redaktions-Standard neu“ schrieb ihn KI-geheilt um
+#                  (Flesch 44,3 + R7-Intro-Formel – Reparatur #607).
+#   * 22:41        `publish_gate` stufte ihn zurück → der Tag fiel auf 1/2.
+#   * Nacht        Der Janitor las `reserve_published` + `draft: true` als
+#                  Rückläufer und VERNICHTETE den Text – er war nie öffentlich.
+# Der Tag verlor damit nicht nur eine Auslieferung, sondern auch das Material,
+# das den nächsten Tag hätte tragen können.
+#
+# Deshalb gilt ab jetzt (fail-closed, gleiche Bauart wie „Löschen braucht
+# einen Beweis“ aus WF-B594):
+#   „RÜCKLÄUFER“ ist erst dann einer, wenn ein LIVE-Artikel dasselbe Thema
+#   öffentlich belegt (gleicher Titel ODER gleicher Slug-Rumpf). Fehlt dieser
+#   Nachweis, ist der Entwurf KEIN Rückläufer, sondern nicht ausgelieferter
+#   Nachschub – er kehrt als Material in den Vorrat zurück.
+RE_RESERVE_PUBLISHED = re.compile(r"(?m)^reserve_published:\s*\S+\s*$")
+RE_RESERVE_RETIRED = re.compile(r"(?m)^reserve_retired:")
+
+
+def _rumpf(slug: str) -> str:
+    """Slug ohne Datumspräfix – die Themen-Identität (SSOT reserve_intake)."""
+    return re.sub(r"^\d{4}-\d{2}-\d{2}-", "", slug or "").strip("-")
+
+
+def _norm_titel(titel: str) -> str:
+    return re.sub(r"[^a-z0-9äöüß]+", " ", (titel or "").lower()).strip()
+
+
+def live_zwilling(slug: str, posts_dir: Path = POSTS) -> str | None:
+    """Slug eines LIVE-Artikels mit demselben Thema – der Lösch-Nachweis.
+
+    Gleicher Slug-Rumpf ODER gleicher normalisierter Titel. Das ist dieselbe
+    Identitäts-Regel wie Prüfung 6 der Reserve-Übernahme (`reserve_intake`):
+    eine zweite Ausgabe desselben Textes ist Kannibalisierung, keine Kopie,
+    die man wegwerfen darf.
+    """
+    rumpf = _rumpf(slug)
+    try:
+        eigener_titel = _norm_titel(
+            _titel((posts_dir / slug / "index.md").read_text(encoding="utf-8")))
+    except OSError:
+        eigener_titel = ""
+    for post in cadence_guard.load_posts(str(posts_dir)):
+        if post.get("draft"):
+            continue
+        fremder_slug = str(post.get("slug") or Path(post.get("path", "")).parent.name)
+        if fremder_slug == slug:
+            continue
+        if rumpf and _rumpf(fremder_slug) == rumpf:
+            return fremder_slug
+        try:
+            fremder_titel = _norm_titel(
+                _titel(Path(post["path"]).read_text(encoding="utf-8")))
+        except (OSError, KeyError):
+            continue
+        if eigener_titel and fremder_titel == eigener_titel:
+            return fremder_slug
+    return None
+
+
+def zurueck_in_den_pool(index, grund: str, *,
+                        posts_dir: Path = POSTS,
+                        when: str | None = None,
+                        history_path: Path | None = None) -> tuple[bool, str]:
+    """Nicht ausgelieferten Nachschub zurück in den Vorrat holen (#610).
+
+    Entfernt `reserve_published` (die Rückläufer-Signatur), setzt
+    `reserve: true`, räumt die Park-Felder des Gate-Verwurfs und schreibt die
+    Herkunft ins Gedächtnis. Verweigert fail-closed:
+      * Handentscheidungen (`reserve_retired`) bleiben unangetastet,
+      * ein belegter LIVE-Zwilling macht den Entwurf zu einem echten
+        Rückläufer – der gehört nicht in den Vorrat, sondern zur Sichtung.
+
+    Rückgabe: (geändert, Meldung).
+    """
+    path = Path(index)
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        return False, f"nicht lesbar: {exc}"
+    if not is_draft(text) or not RE_RESERVE_PUBLISHED.search(text):
+        return False, "kein Nachschub (draft: true + reserve_published fehlen)"
+    if RE_RESERVE_RETIRED.search(text):
+        return False, "reserve_retired: menschliche Entscheidung – unangetastet"
+    slug = path.parent.name
+    zwilling = live_zwilling(slug, posts_dir)
+    if zwilling:
+        return False, (f"LIVE-Zwilling {zwilling} belegt die Veröffentlichung – "
+                       "bleibt Rückläufer (Sichtung, nicht Vorrat)")
+
+    neu = RE_RESERVE_PUBLISHED.sub("", text, count=1)
+    neu = re.sub(r"\n{3,}", "\n\n", neu)
+    neu = re.sub(r"(?m)^(draft:\s*true\s*)$", r"\1\nreserve: true", neu, count=1)
+    if not re.search(r"(?m)^reserve:\s*true\s*$", _frontmatter(neu)):
+        return False, "reserve-Fahne konnte nicht gesetzt werden"
+    path.write_text(neu, encoding="utf-8")
+
+    # Park-Zustand des Gate-Verwurfs räumen: Ein Pool-Kandidat ist kein Hold.
+    try:
+        import park_state
+        for feld in ("cadence_wait", "cadence_demoted", "cadence_grund"):
+            park_state.set_field(path, feld, None)
+    except Exception as exc:  # noqa: BLE001 – Fahne zählt, Kosmetik nicht
+        print(f"  ⚠ {slug}: Park-Felder nicht geräumt ({exc})")
+
+    _historie(slug, grund, when=when or now_utc_iso(), path=history_path)
+    return True, f"{slug}: zurück in den Vorrat ({grund})"
+
+
+def _historie(slug: str, grund: str, *, when: str,
+              path: Path | None = None) -> None:
+    """Eine Zeile Beweis – dieselbe Datei wie die Reserve-Rückläufer-Historie.
+
+    Der Zeitstempel kommt von außen (Uhr-Zwang `selftest_clock`): Ein
+    Selbsttest, der diese Heilung nachstellt, hat seine eigene Uhr und darf
+    hier keine echte lesen. Dasselbe gilt für den Pfad: Ein Selbsttest
+    schreibt in seinen Temp-Baum, nicht in das echte Gedächtnis.
+    """
+    pfad = Path(path) if path is not None else ROOT / "data" / "reserve-history.jsonl"
+    try:
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        zeile = json.dumps({"ts": when, "slug": slug,
+                            "ereignis": "zurueck_in_den_pool",
+                            "grund": grund[:200]}, ensure_ascii=False)
+        with pfad.open("a", encoding="utf-8") as fh:
+            fh.write(zeile + "\n")
+    except OSError:
+        pass
 
 
 def publish_to_min(min_per_day: int | None = None,

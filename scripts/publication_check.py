@@ -45,6 +45,45 @@ def public_article(slug, opener=urllib.request.urlopen):
         return response.status == 200 and response.url.rstrip('/') == url.rstrip('/') and parser.found
 
 
+# WF-54C4 #610 (07.10.2026): Ein Beleg gehört seinem Tag.
+# Die Auslieferungs-SLO misst den jüngsten Publikationstag. Der generische
+# Beleg `tmp/publication-receipt.json` wird aber bei JEDEM Lauf überschrieben –
+# ein Issue über den 05.10. wurde so später mit dem Beleg des 07.10.
+# geschlossen. Deshalb: tagesgenauer Beleg unter
+# `tmp/publication-receipt-<tag>.json` UND eine versionierte Zeile in
+# `data/publication-delivery-history.jsonl` – der Fehltag eines vergangenen
+# Publikationstages darf nicht mit dem Lauf verschwinden.
+HISTORY = Path('data/publication-delivery-history.jsonl')
+
+
+def beleg_schreiben(result, report='tmp/publication-receipt.json'):
+    """Schreibt Beleg (generisch + tagesgenau) und die versionierte Historie."""
+    pfad = Path(report)
+    pfad.parent.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(result, ensure_ascii=False, indent=2) + '\n'
+    pfad.write_text(text, encoding='utf-8')
+    tagespfad = pfad.with_name(f"{pfad.stem}-{result['day']}{pfad.suffix}")
+    tagespfad.write_text(text, encoding='utf-8')
+    zeile = json.dumps({
+        'ts': dt.datetime.now(dt.timezone.utc).isoformat(),
+        'day': result['day'],
+        'mode': result['mode'],
+        'minimum': result['minimum'],
+        'maximum': result['maximum'],
+        'source': len(result['source']),
+        'delivered': len(result['delivered']),
+        'ok': bool(result['ok']),
+        'errors': result.get('errors') or [],
+    }, ensure_ascii=False)
+    try:
+        HISTORY.parent.mkdir(parents=True, exist_ok=True)
+        with HISTORY.open('a', encoding='utf-8') as fh:
+            fh.write(zeile + '\n')
+    except OSError as exc:  # Historie ist Beweis, kein Gate
+        print(f'⚠ Auslieferungs-Historie nicht schreibbar: {exc}')
+    return pfad, tagespfad
+
+
 def check(day, online=False, posts_dir=None):
     minimum, maximum = cg.effective_limits()
     posts = cg.published_on(cg.load_posts(posts_dir), day)
@@ -88,9 +127,9 @@ def main():
             break
         if attempt + 1 < args.attempts:
             time.sleep(args.delay)
-    path = Path(args.report)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+    path, tagespfad = beleg_schreiben(result, args.report)
+    print(f'Beleg: {path} · tagesgenau: {tagespfad} · '
+          f'Historie: {HISTORY}')
     return 0 if result['ok'] else 1
 
 

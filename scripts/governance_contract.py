@@ -297,7 +297,16 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # Collectoren (keine zweite Messregel), versiegelt gegen die
           # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
           # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
-          "release_scorecard.py"]
+          "release_scorecard.py",
+          # Auslieferungs-Melder (07.10.2026, WF-54C4/#610): Am 05.10.2026
+          # lieferte der Blog 1/2 Artikel öffentlich; der Kanal dazu hätte
+          # JEDEN späteren grünen Beleg als Abschluss akzeptiert – der
+          # Fehltag wäre still verschwunden. Seit der Reparatur schließt er
+          # nur mit einem Beleg DESSELBEN Tages und verbucht einen
+          # vergangenen Fehltag als Quittung („verbucht, nicht behoben“).
+          # Ohne Selbsttest im vertraglichen Minimum wäre genau dieser
+          # Schließpfad wieder eine unbewachte Zeile.
+          "publication_incident.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -1875,6 +1884,7 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c23_zustandskanal(script_texts, wflows, root=root)
     checks += c25_deckung_wirkung(script_texts, root=root,
                                   python_bin=python_bin)
+    checks += c26_beleg_je_tag(script_texts, wflows, root=root)
     return checks
 
 
@@ -1944,6 +1954,131 @@ def c25_deckung_wirkung(script_texts, root=BLOG_DIR, python_bin=None):
         out.append(("C25", "Wirkungsprobe ROT: "
                            + (zeilen[-1][:160] if zeilen
                               else f"Exit {lauf.returncode}")))
+    return out
+
+
+# --- C26: Ein Beleg gehört seinem Tag (WF-54C4 #610, 07.10.2026) -----------
+# Auslöser: `publication_check.py` schrieb seinen Beleg bei JEDEM Lauf in
+# dieselbe Datei `tmp/publication-receipt.json`, und `publication_incident.py`
+# schloss das offene Issue bei JEDEM grünen Lauf. Die SLO misst aber immer den
+# JÜNGSTEN Publikationstag: Das Ticket über den 05.10.2026 (Source und öffentlich
+# je 1/2) wäre am 07.10. mit dem Beleg des 07.10. geschlossen worden – der
+# Fehltag wäre nie verbucht worden, und der Beweis wäre mit der Datei
+# überschrieben. Dazu die zweite Hälfte derselben Nacht: Ein Reserve-Artikel,
+# vom späten Gate auf `draft: true` zurückgestuft, trug noch
+# `reserve_published` – die Signatur, mit der Sichtung und Janitor ihn als
+# „Rückläufer“ lasen (der Inhalt lebe live) und sofort löschten. Er war nie
+# öffentlich: Der Tag verlor Auslieferung UND Material. Diese Regel hält
+# fest, dass ein Beleg seinem Tag gehört und ein Löschgrund einen Beweis
+# braucht.
+def c26_beleg_je_tag(script_texts, wflows, root=BLOG_DIR):
+    out = []
+
+    def _wf(name: str) -> str:
+        for path, text in (wflows or {}).items():
+            if os.path.basename(path) == name:
+                return text
+        return ""
+
+    pi = script_texts.get("publication_incident.py", "")
+    pc = script_texts.get("publication_check.py", "")
+    pr_ = script_texts.get("publication_release.py", "")
+    rp = script_texts.get("reserve_pool.py", "")
+    rc = script_texts.get("reserve_custody.py", "")
+    rj = script_texts.get("reserve_janitor.py", "")
+    fehlend = [name for name, text in (
+        ("publication_incident.py", pi), ("publication_check.py", pc),
+        ("publication_release.py", pr_), ("reserve_pool.py", rp),
+        ("reserve_custody.py", rc), ("reserve_janitor.py", rj)) if not text]
+    if fehlend:
+        out.append(("C26", f"{', '.join(fehlend)} nicht lesbar – der "
+                           "Tages-Beleg ist nicht prüfbar."))
+        return out
+
+    # a) Der Melder ist selbst eine Wache: sein Schließpfad läuft im Selbsttest.
+    if "publication_incident.py" not in GUARDS:
+        out.append(("C26", "scripts/publication_incident.py steht nicht in "
+                           "GUARDS – sein Schließpfad liefe in keinem "
+                           "Selbsttest mit."))
+
+    # b) Schließen ausschließlich über die Tages-Entscheidung (fail-closed).
+    m = re.search(r"if\s+urteil\s+in\s*\(([^)]*)\)\s*:", pi)
+    if not m or "'schliessen'" not in m.group(1) or "'quittung'" not in m.group(1):
+        out.append(("C26", "publication_incident.py schließt nicht "
+                           "ausschließlich über die Tages-Entscheidung "
+                           "(schliessen|quittung) – ein grüner Fremdtag würde "
+                           "den Fehltag still schließen (#610)."))
+    if "receipt_ok" not in pi:
+        out.append(("C26", "publication_incident.py prüft `receipt_ok` nicht – "
+                           "ein roter Beleg könnte abschließen."))
+    if "Quittung" not in pi or "verbucht, nicht behoben" not in pi:
+        out.append(("C26", "publication_incident.py verbucht einen vergangenen "
+                           "Fehltag nicht ausdrücklich als Quittung – der "
+                           "Abschluss wäre eine Beschönigung statt einer "
+                           "Buchung (#610)."))
+    if "Gemessener Tag" not in pi or "tag_aus_body" not in pi:
+        out.append(("C26", "publication_incident.py führt den gemessenen Tag "
+                           "nicht im Issue-Body – die Akte verliert ihren Tag "
+                           "(#610)."))
+
+    # c) publication_check: tagesgenauer Beleg UND versionierte Historie.
+    if "publication-receipt-" not in pc or "def beleg_schreiben(" not in pc:
+        out.append(("C26", "publication_check.py schreibt keinen tagesgenauen "
+                           "Beleg (`publication-receipt-<tag>`) – der Beweis "
+                           "wird bei jedem Lauf überschrieben (#610)."))
+    if "publication-delivery-history" not in pc:
+        out.append(("C26", "publication_check.py führt keine versionierte "
+                           "Auslieferungs-Historie – ein Fehltag wäre nach "
+                           "dem nächsten Lauf nicht mehr nachweisbar (#610)."))
+    if "beleg_schreiben(" not in pc.replace("def beleg_schreiben(", ""):
+        out.append(("C26", "publication_check.py benutzt `beleg_schreiben` "
+                           "nicht – der Tagesbeleg wäre toter Code."))
+
+    # d) Konvergenz der Nachfüllung: nicht aufhören, solange Material da ist.
+    if "def refill_until_min(" not in pr_ or pr_.count("refill_until_min(") < 3:
+        out.append(("C26", "publication_release.py füllt nicht konvergent nach "
+                           "(`refill_until_min` an den Aufrufstellen) – ein "
+                           "später Gate-Verwurf beendete den Tag wieder bei "
+                           "1/2 (#610)."))
+    if ("def sichere_verworfene_nachschuebe(" not in pr_ or
+            "sichere_verworfene_nachschuebe(" not in
+            pr_.replace("def sichere_verworfene_nachschuebe(", "")):
+        out.append(("C26", "publication_release.py holt verworfenen Nachschub "
+                           "nicht zurück (`sichere_verworfene_nachschuebe`) – "
+                           "Material ginge mit der Zurückstufung verloren "
+                           "(#610)."))
+
+    # e) Nachweis-Pflicht beim Rückläufer (Löschen braucht einen Beweis).
+    if "def live_zwilling(" not in rp or "def zurueck_in_den_pool(" not in rp:
+        out.append(("C26", "reserve_pool.py hat keinen LIVE-Nachweis und "
+                           "keinen Rückweg (`live_zwilling` / "
+                           "`zurueck_in_den_pool`) – „Rückläufer“ bliebe eine "
+                           "Behauptung (#610)."))
+    if "ruecklaeufer_ohne_nachweis" not in rc:
+        out.append(("C26", "reserve_custody.py meldet `reserve_published` + "
+                           "draft ohne LIVE-Nachweis nicht als eigenen Zustand "
+                           "– der Janitor würde nicht ausgelieferten Nachschub "
+                           "als Rückläufer vernichten (#610)."))
+    if "zurueck_in_den_pool(" not in rj:
+        out.append(("C26", "reserve_janitor.py holt nachweis-losen Nachschub "
+                           "nicht zurück (`zurueck_in_den_pool`) – Löschen "
+                           "ohne Beweis (#610)."))
+
+    # f) Der Auslieferungs-Workflow bewahrt den Tagesbeleg und meldet auf
+    #    beiden Pfaden (rot = öffnen/aktualisieren, grün = abschließen).
+    pd = _wf("publication-delivery.yml")
+    if not pd:
+        out.append(("C26", "publication-delivery.yml nicht lesbar – die "
+                           "Auslieferungs-Beweiskette ist nicht prüfbar."))
+    else:
+        if "publication-receipt*.json" not in pd:
+            out.append(("C26", "publication-delivery.yml lädt den tagesgenauen "
+                               "Beleg nicht als Artefakt hoch – die "
+                               "Beweiskette endet mit dem Lauf (#610)."))
+        if pd.count("publication_incident.py") < 2:
+            out.append(("C26", "publication-delivery.yml ruft den Melder nicht "
+                               "auf beiden Pfaden (öffnen und abschließen) – "
+                               "der Kanal wäre halb verdrahtet."))
     return out
 
 
@@ -2061,6 +2196,16 @@ RULE_TEXT = {
            "einem Reparatur-Merge zu, der Ruhetag wurde übersprungen, und das "
            "zentrale Fehler-Alerting musste fail-open das generische "
            "Wartungs-Issue #608 mit API-Key-Runbook anlegen (#608).",
+    "C26": "Ein Beleg gehört seinem Tag: Die Auslieferungs-SLO schreibt einen "
+           "tagesgenauen Beleg und eine versionierte Historie, und der Melder "
+           "schließt nur mit einem Nachweis DESSELBEN Tages – ein vergangener "
+           "Fehltag wird als Quittung verbucht („verbucht, nicht behoben“), nie "
+           "beschönigt. Dazu die zweite Lehre derselben Nacht: Ein Rückläufer "
+           "braucht einen LIVE-Beweis. Ein zurückgestufter Reserve-Artikel ohne "
+           "Zwilling ist nicht ausgelieferter Nachschub – er kehrt in den Vorrat "
+           "zurück, statt als „Kopie“ vernichtet zu werden, und die Endabnahme "
+           "füllt konvergent nach, bis das Mindestziel steht oder das Material "
+           "ehrlich erschöpft ist (#610).",
     "C19": "Die Produktionswahrheit ist eine deklarierte, deckungsgleiche Sicht: "
            "data/release_scorecard.yaml erklärt jede harte Publish-Gate-Familie "
            "als blockierend (und jeden reinen Hinweis als Warnung), dokumentiert "
@@ -2084,7 +2229,8 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
          "C21": "Maschinensätze",
          "C22": "Publikations-Vertrag der Schreib-Seite",
          "C23": "Zustandskanal (Besitz, Kadenz, Schließpfad)",
-         "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)"}
+         "C25": "Deckung heißt Wirkung (Wirkungsprobe der Zahlen-Heiler)",
+         "C26": "Ein Beleg gehört seinem Tag (Tages-Nachweis & Nachweis-Pflicht)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -2642,12 +2788,65 @@ def _selftest():
     if not [f for f in c25_deckung_wirkung(ohne_kette) if "HEALER_CHAIN" in f[1]]:
         failures.append("C25: ein aus der Kette entfernter Wirkungs-Heiler "
                         "bleibt unentdeckt (#609).")
+    # --- C26: Ein Beleg gehört seinem Tag (WF-54C4 #610, 07.10.2026) ------
+    echte_tagesakte = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
+                       for name in ("publication_incident.py",
+                                    "publication_check.py",
+                                    "publication_release.py", "reserve_pool.py",
+                                    "reserve_custody.py", "reserve_janitor.py")}
+    if c26_beleg_je_tag(echte_tagesakte, wflows_echt):
+        failures.append(f"C26: der echte Zustand wird beanstandet: "
+                        f"{c26_beleg_je_tag(echte_tagesakte, wflows_echt)}")
+    # (a) Der Schließpfad wird wieder tagesblind (genau der Zustand vor #610).
+    tagesblind = dict(echte_tagesakte, **{
+        "publication_incident.py": echte_tagesakte["publication_incident.py"]
+        .replace("if urteil in ('schliessen', 'quittung'):",
+                 "if True:  # Tagesbindung umgangen")})
+    if not [f for f in c26_beleg_je_tag(tagesblind, wflows_echt)
+            if "Tages-Entscheidung" in f[1]]:
+        failures.append("C26: ein tagesblinder Schließpfad bleibt unentdeckt "
+                        "(#610).")
+    # (b) Der tagesgenaue Beleg verschwindet – der generische überschreibt.
+    ohne_tag = dict(echte_tagesakte, **{
+        "publication_check.py": echte_tagesakte["publication_check.py"]
+        .replace("publication-receipt-", "receipt-").replace(
+            "def beleg_schreiben(", "def _beleg_entfernt(")})
+    if not [f for f in c26_beleg_je_tag(ohne_tag, wflows_echt)
+            if "tagesgenauen Beleg" in f[1]]:
+        failures.append("C26: ein fehlender Tagesbeleg bleibt unentdeckt "
+                        "(#610).")
+    # (c) Die Nachweis-Pflicht in der Sichtung wird entfernt.
+    ohne_nachweis = dict(echte_tagesakte, **{
+        "reserve_custody.py": echte_tagesakte["reserve_custody.py"]
+        .replace("ruecklaeufer_ohne_nachweis", "ruecklaeufer_wie_immer")})
+    if not [f for f in c26_beleg_je_tag(ohne_nachweis, wflows_echt)
+            if "eigenen Zustand" in f[1]]:
+        failures.append("C26: eine entfernte Nachweis-Pflicht bleibt unentdeckt "
+                        "(#610).")
+    # (d) Der Rückweg aus dem Janitor wird entfernt (Löschen ohne Beweis).
+    ohne_rueckweg = dict(echte_tagesakte, **{
+        "reserve_janitor.py": echte_tagesakte["reserve_janitor.py"]
+        .replace("zurueck_in_den_pool(", "_zurueck_entfernt(")})
+    if not [f for f in c26_beleg_je_tag(ohne_rueckweg, wflows_echt)
+            if "Löschen ohne Beweis" in f[1] or "nicht zurück" in f[1]]:
+        failures.append("C26: ein entfernter Rückweg im Janitor bleibt "
+                        "unentdeckt (#610).")
+    # (e) Das Artefakt des Tagesbelegs fällt aus dem Workflow.
+    wflows_ohne_beleg = dict(wflows_echt)
+    for pfad in list(wflows_ohne_beleg):
+        if os.path.basename(pfad) == "publication-delivery.yml":
+            wflows_ohne_beleg[pfad] = wflows_ohne_beleg[pfad].replace(
+                "publication-receipt*.json", "publication-receipt.json")
+    if not [f for f in c26_beleg_je_tag(echte_tagesakte, wflows_ohne_beleg)
+            if "Artefakt" in f[1]]:
+        failures.append("C26: ein fehlendes Tages-Artefakt bleibt unentdeckt "
+                        "(#610).")
     if failures:
         print("❌ KONTRAKT-SELFTEST FEHLGESCHLAGEN:")
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C25 mit Kunstbefunden: Fehler erkannt, "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C26 mit Kunstbefunden: Fehler erkannt, "
           "gutes Setup bleibt still).")
     return 0
 
