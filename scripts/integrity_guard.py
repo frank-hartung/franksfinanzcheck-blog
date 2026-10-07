@@ -197,6 +197,12 @@ FEST = {
     # Marken-Lockup & Artefakte (12.08. Runde 2: Logo = Blog-weite Marke):
     "scripts/bake_brand.py",
     "scripts/brand_guard.py",
+    # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er bewegt das harte
+    # Publish-Kriterium `readability_check.NEW_FLESCH_MIN` (60,0) und ist
+    # damit eine Schwellen-Wache wie publikations_vertrag.py – wer hier
+    # heilt, heilt gegen das Tor. Deshalb unter Siegel; die erste Signatur
+    # nach dem Merge nimmt ihn als „NEU UNTER SIEGEL" mit Herkunft auf.
+    "scripts/lesbarkeit_heiler.py",
     "data/brand_lock.yaml",
     "layouts/_partials/header.html",
     "static/images/brand/logo.svg",

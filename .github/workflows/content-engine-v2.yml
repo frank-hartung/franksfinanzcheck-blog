@@ -152,6 +152,15 @@ jobs:
         # Links auf die betroffenen Posts in andern live Artikeln entlinken
         # (draft_link_healer) – IM SELBEN COMMIT, damit der Push nie defekte
         # interne Links nach main bringt (Issue #85).
+        #
+        # WACHE-609: Die Hold-Requeue heilt seit dem 07.10.2026 auch die
+        # Lesbarkeits-Klasse (Flesch ≥ 60) – dafür braucht sie DIESELBEN
+        # Keys wie Phase 2. Ohne sie bliebe der Hold bis zur Phase-2-Heilung
+        # liegen und der Slot bliebe in der Frühphase unbesetzt (genau die
+        # 1/2-Lage, aus der die Produktions-Wache entstand).
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/fix_url_hygiene.py --selftest
           python3 scripts/fix_url_hygiene.py --fix
@@ -511,6 +520,16 @@ jobs:
           python3 -m pip install -q feedparser >/dev/null 2>&1 || true
           python3 scripts/faktenfrische.py --selftest
           python3 scripts/faktenfrische.py --neu --apply || echo "⚠ Faktenfrische-Recherche nicht abgeschlossen – Publish-Gate hält Kandidaten zurück"
+          echo "== Lesbarkeits-Heiler (Flesch >= 60, Tor T1-T4, fail-closed, WACHE-609) =="
+          # Die Lesbarkeit ist ein HARTES Publish-Kriterium (#585) und war bis
+          # zum 07.10.2026 der einzige Blocker ohne Heiler MIT Wirkung: Der
+          # Vorrat stand bei 2/6, sieben Kandidaten allein an Flesch 53,1–59,9
+          # geparkt, und der Publikationstag endete 1/2 (Produktions-Wache P2,
+          # Issue #609). Der Heiler läuft hier auf die Artikel des Tages
+          # (Phase 1) und lässt JEDEN Text byte-identisch liegen, den er nicht
+          # nachweislich über die importierte Schwelle hebt – ein „Versuch“
+          # schreibt sich nicht fest (fail-closed).
+          python3 scripts/lesbarkeit_heiler.py --new-only --fix || echo "⚠ Lesbarkeits-Heiler – Restlücke im Log (fail-closed, nichts Halbfertiges geschrieben)"
           echo "== Hold-Requeue nach Heilung (PREMIUM-FIX 25.09.2026: Phase 0.5 rearmt VOR der Heilung – was Phase 2/3 heilt, würde sonst nie rearmt (stale Hold → 404)) =="
           python3 scripts/requeue_quality_holds.py --fix || echo "⚠ Hold-Requeue – Funde im Log"
           git config user.name "Content-Bot"

@@ -208,8 +208,16 @@ GATE_BEFUNDE: tuple[dict, ...] = (
                "Cooldown (Realfall #594).")},
     {"muster": "faktenfrische", "klasse": HEILBAR, "heiler": ("faktenfrische.py",),
      "grund": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."},
-    {"muster": "lesbarkeit", "klasse": HEILBAR, "heiler": ("profi_polish.py",),
-     "grund": "Satzbau/Absätze hebt das Polish der Kette."},
+    # REPARATUR 07.10.2026 (WACHE-609): Bis hierher stand nur
+    # `profi_polish.py` als Heiler – der Name stand in der Kette, die Wirkung
+    # nicht (Vorrat 2/6, sieben Kandidaten an Flesch 53,1–59,9 geparkt). Der
+    # Lesbarkeits-Heiler ist der Heiler, der die Schwelle nachweislich
+    # bewegt; `profi_polish` bleibt als zweiter (weicher) Hebel genannt.
+    {"muster": "lesbarkeit", "klasse": HEILBAR,
+     "heiler": ("lesbarkeit_heiler.py", "profi_polish.py"),
+     "grund": ("Flesch ≥ 60 hebt der Lesbarkeits-Heiler (Stufe A "
+               "deterministisch, Stufe B KI auf die Silben je Wort, Tor "
+               "T1–T4); das Polish der Kette bleibt der zweite Hebel.")},
     {"muster": "quality-score", "klasse": HEILBAR,
      "heiler": ("profi_polish.py", "spellcheck.py", "check_length.py"),
      "grund": ("Der Score ist die Summe heilbarer Teile (Rechtschreibung, "

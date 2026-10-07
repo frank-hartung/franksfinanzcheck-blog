@@ -57,6 +57,15 @@ ERWEITERUNG 05.10.2026 (WF-B594, Issue #594): Zweite Deckung `loeschdeckung()`
   der Kette läuft, ist eine Todesfalle für Entwürfe; ein Blocker ohne Klasse
   ist eine unentschiedene Zuständigkeit. Beides stoppt jetzt den Lauf.
 
+ERWEITERUNG 07.10.2026 (WACHE-609): Dritte Deckung `wirkungsdeckung()`
+  – „Deckung heißt Wirkung". Der Auslöser ist die zweite Hälfte des Befunds:
+  `readability_failures` galt als gedeckt, weil `profi_polish.py` in der Kette
+  stand – und der Vorrat stand trotzdem bei 2/6, sieben Kandidaten allein an
+  der Lesbarkeit geparkt (Flesch 53,1–59,9). Ein Name in der Kette beweist
+  keine Wirkung: Ein Heiler, der eine Schwelle verspricht, muss sie BEWEGEN
+  können – maschinell nachgewiesen (`--wirkungsprobe`), ohne Netz, ohne
+  Kontingent. Fehlt der Nachweis, ist der Lauf fail-closed rot.
+
 MODI:
     python3 scripts/reserve_healer_coverage.py            # Bericht (Mensch)
     python3 scripts/reserve_healer_coverage.py --json     # Maschine
@@ -103,10 +112,15 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
     # Keyword-Score < 60 (hart). Am Gate heilt nur der LIVE-Pfad selbst –
     # Entwürfe überspringt `keyword_self_heal_candidates()` bewusst (#349).
     "keyword_failures": ("keyword_optimizer.py",),
-    # Lesbarkeit < 75. Es gibt KEINEN deterministischen Satzbau-Heiler; das
-    # KI-Polish (`profi_polish.py`) kürzt Sätze/Absätze und ist der einzige
-    # Hebel der Kette (Live-Kodex, Phase 2).
-    "readability_failures": ("profi_polish.py",),
+    # Lesbarkeit (Flesch ≥ 60 als Publish-Kriterium, #585). REPARATUR
+    # 07.10.2026 (WACHE-609): Bis hierher stand nur `profi_polish.py` in
+    # der Tabelle – ein Name, keine Wirkung: Der Vorrat lag bei 2/6, sieben
+    # Kandidaten allein an der Lesbarkeit geparkt (53,1–59,9), und kein
+    # Werkzeug der Kette konnte sie über die Schwelle heben. Der
+    # Lesbarkeits-Heiler ist genau dafür gebaut (Stufe A deterministisch,
+    # Stufe B KI-gezielt auf die Silben je Wort, Tor T1–T4 fail-closed) und
+    # beweist seine Wirkung als Maschinenvertrag (`--wirkungsprobe`).
+    "readability_failures": ("lesbarkeit_heiler.py", "profi_polish.py"),
     # R2/R3/R5/R7/R8: Absatz-Splitter heilt R5, URL-Hygiene heilt R8-URL.
     "textverstaendnis_failures": ("r5_absatz_splitter.py",
                                   "fix_url_hygiene.py"),
@@ -138,6 +152,22 @@ AUSNAHMEN: dict[str, str] = {
         "Hochrisiko-Kandidaten bleiben als Review-Hold erhalten; Quellen, "
         "Zahlen und Prüfer werden redaktionell dokumentiert und versiegelt.",
 }
+
+# ---------------------------------------------------------------------------
+#  WIRKUNGS-NACHWEISE (WACHE-609, 07.10.2026, Issue #609)
+# ---------------------------------------------------------------------------
+#  Eine Zahl, die ein Heiler verspricht, braucht einen Maschinenbeweis –
+#  sonst ist „gedeckt“ eine Behauptung. Die Probe läuft OHNE Netz und ohne
+#  API-Kontingent (Fixture → Stufe A) und Exit 0 heißt: die Schwelle wird
+#  wirklich bewegt, und das Tor T1–T4 hält.
+WIRKUNGS_PROBEN: dict[str, tuple[str, ...]] = {
+    "lesbarkeit_heiler.py": ("--wirkungsprobe",),
+}
+
+#  Regeln mit Zahlen-Versprechen: Mindestens einer ihrer Heiler MUSS eine
+#  grüne Wirkungsprobe haben. Die Liste wächst mit jedem neuen Zahlen-Heiler,
+#  nicht mit jedem Heiler (Alt-Werkzeuge ohne Schwelle bleiben unberührt).
+PROBEN_PFLICHT: tuple[str, ...] = ("readability_failures",)
 
 RE_REGEL = re.compile(r"(?m)^def ([a-z0-9_]+_failures)\(")
 # (Hinweis auf Aufrufe wird nicht geparst: die Kette ist die Wahrheit.)
@@ -257,6 +287,78 @@ def deckung(publish_gate_text: str | None = None,
 #  Unheilbare Klassen brauchen stattdessen eine Begründung im Klartext – wer
 #  Text vernichtet, muss sagen warum.
 # ---------------------------------------------------------------------------
+def wirkungsdeckung(proben: dict | None = None,
+                    scripts_dir: Path | None = None,
+                    timeout: int = 300) -> dict:
+    """Führt die Wirkungsproben aus – Deckung muss Wirkung beweisen (#609).
+
+    Rückgabe: {"nachgewiesen": [...], "luecken": [...]}. `proben` ist
+    injizierbar, damit der Selbsttest rote/fehlende/abgestürzte Proben zeigen
+    kann, ohne echte Werkzeuge zu beschädigen.
+    """
+    import subprocess
+
+    tabelle = dict(WIRKUNGS_PROBEN if proben is None else proben)
+    scripts_dir = Path(scripts_dir) if scripts_dir else SCRIPTS
+    bericht: dict = {"nachgewiesen": [], "luecken": []}
+
+    # a) Jede Regel mit Zahlen-Versprechen braucht mindestens eine Probe.
+    for regel in PROBEN_PFLICHT:
+        heiler = REGEL_HEILER.get(regel, ())
+        if not [h for h in heiler if h in tabelle]:
+            bericht["luecken"].append(
+                {"heiler": ", ".join(heiler) or "–",
+                 "art": "regel-ohne-wirkungsprobe", "regel": regel})
+
+    # b) Jede Probe muss laufen UND bestehen (Exit 0).
+    for heiler, args in tabelle.items():
+        skript = scripts_dir / heiler
+        if not skript.is_file():
+            bericht["luecken"].append({"heiler": heiler, "art": "skript-fehlt"})
+            continue
+        try:
+            lauf = subprocess.run([sys.executable or "python3", str(skript), *args],
+                                  cwd=str(ROOT), capture_output=True, text=True,
+                                  timeout=timeout)
+        except (OSError, subprocess.TimeoutExpired) as exc:  # noqa: BLE001
+            bericht["luecken"].append(
+                {"heiler": heiler, "art": f"probe-{exc.__class__.__name__}"})
+            continue
+        if lauf.returncode != 0:
+            ausgabe = (lauf.stdout or lauf.stderr or "").strip().splitlines()
+            bericht["luecken"].append(
+                {"heiler": heiler, "art": "probe-rot",
+                 "befund": ausgabe[-1][:200] if ausgabe else ""})
+            continue
+        zeilen = (lauf.stdout or "").strip().splitlines()
+        bericht["nachgewiesen"].append(
+            {"heiler": heiler,
+             "befund": zeilen[-1][:200] if zeilen else "Exit 0"})
+    return bericht
+
+
+def volldeckung(chain: list | None = None) -> dict:
+    """Beide Deckungen + Wirkung in EINEM Bericht (Wahrheit der Wache, #609).
+
+    Die Wirkungs-Lücken wandern zusätzlich in `luecken`, damit JEDER Aufrufer,
+    der bisher nur `luecken`/`tote_ausnahmen` prüft (reserve_finisher und der
+    harte End-Gate-Pfad), ohne Änderung fail-closed bleibt.
+    """
+    b = deckung(chain=chain)
+    try:
+        w = wirkungsdeckung()
+    except Exception as exc:  # noqa: BLE001 – nie ohne Urteil weiterlaufen
+        w = {"nachgewiesen": [], "luecken": [
+            {"heiler": "–", "art": "wirkung-nicht-auswertbar",
+             "befund": str(exc)[:160]}]}
+    b["wirkung"] = w
+    for e in w["luecken"]:
+        b["luecken"].append(
+            {"regel": f"Wirkungsprobe `{e['heiler']}`", "art": e["art"],
+             "heiler": [e["heiler"]], "befund": e.get("befund", "")})
+    return b
+
+
 def loeschdeckung(praefixe: list[str] | None = None,
                   klassen: tuple[dict, ...] | None = None,
                   chain: list | None = None,
@@ -420,6 +522,14 @@ def bericht_text(b: dict) -> str:
     for e in b["tote_ausnahmen"]:
         zeilen.append(f"- 🛑 `{e['regel']}` → {e['art']}: der Eintrag deckt "
                       "nichts mehr und altert sonst still.")
+    wirkung = b.get("wirkung")
+    if wirkung is not None:
+        zeilen += ["", "## Wirkungs-Nachweise (Deckung heißt Wirkung, #609)", ""]
+        for e in wirkung["nachgewiesen"]:
+            zeilen.append(f"- 🧪 `{e['heiler']}` → {e['befund']}")
+        for e in wirkung["luecken"]:
+            zeilen.append(f"- 🛑 `{e['heiler']}` → {e['art']}: "
+                          f"{e.get('befund') or 'keine grüne Wirkungsprobe'}")
     if not b["luecken"] and not b["tote_ausnahmen"]:
         zeilen += ["", "🎉 Jede ablehnende Regel des harten Publish-Gates hat "
                        "einen Heiler in der Reserve-Veredelung (oder eine "
@@ -571,6 +681,31 @@ def run_selftest() -> int:
     except Exception as exc:  # noqa: BLE001
         fehler.append(f"Lösch-Deckung nicht auswertbar: {exc}")
 
+    # --- Wirkungs-Deckung (WACHE-609): Deckung ohne Wirkung ist Papier --
+    # 13) Eine Regel mit Zahlen-Versprechen, aber ohne Wirkungsprobe.
+    wd_leer = wirkungsdeckung(proben={}, scripts_dir=SCRIPTS)
+    if not [e for e in wd_leer["luecken"]
+            if e["art"] == "regel-ohne-wirkungsprobe"]:
+        fehler.append("Regel mit Zahlen-Versprechen ohne Wirkungsprobe bleibt "
+                      "unentdeckt (#609)")
+    # 14) Eine rote Probe (Werkzeug verweigert) und ein fehlendes Skript.
+    wd_rot = wirkungsdeckung(proben={"lesbarkeit_heiler.py": ("--gibtsnicht",)},
+                             scripts_dir=SCRIPTS)
+    if not [e for e in wd_rot["luecken"] if e["art"] == "probe-rot"]:
+        fehler.append("rote Wirkungsprobe bleibt unentdeckt (#609)")
+    wd_fehlt = wirkungsdeckung(proben={"gibtsnicht.py": ("--wirkungsprobe",)},
+                               scripts_dir=SCRIPTS)
+    if not [e for e in wd_fehlt["luecken"] if e["art"] == "skript-fehlt"]:
+        fehler.append("fehlendes Probe-Skript bleibt unentdeckt (#609)")
+    # 15) Und der scharfe Fall: die echten Proben müssen grün sein.
+    try:
+        wd = wirkungsdeckung()
+        if wd["luecken"] or not wd["nachgewiesen"]:
+            fehler.append(f"Wirkungsproben im echten Repo nicht grün: "
+                          f"{wd['luecken'] or 'keine Probe nachgewiesen'}")
+    except Exception as exc:  # noqa: BLE001
+        fehler.append(f"Wirkungsproben nicht auswertbar: {exc}")
+
     if fehler:
         print("🛑 RESERVE-HEILER-DECKUNG-SELFTEST FEHLGESCHLAGEN:")
         for f in fehler:
@@ -580,7 +715,8 @@ def run_selftest() -> int:
           "neue Gate-Regel, begründete/lückenhafte Ausnahme, verschwundene "
           "Regel und Heiler-Tippfehler werden erkannt – und die Lösch-"
           "Deckung (#594): Blocker ohne Heiler, unklassifizierter Blocker, "
-          "Löschrecht ohne Begründung, toter Eintrag.")
+          "Löschrecht ohne Begründung, toter Eintrag – und die Wirkungs-"
+          "Deckung (#609): Regel ohne Probe, rote Probe, fehlendes Skript.")
     return 0
 
 
@@ -593,7 +729,7 @@ def main() -> int:
     if args.selftest:
         return run_selftest()
     try:
-        b = deckung()
+        b = volldeckung()
         lb = loeschdeckung()
     except Exception as exc:  # noqa: BLE001 – fail-closed, aber erklärbar
         print(f"🛑 Deckungs-Wache nicht auswertbar: {exc}", file=sys.stderr)

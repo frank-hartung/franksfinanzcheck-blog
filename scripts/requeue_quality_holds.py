@@ -32,6 +32,14 @@ Dieses Skript ist die gezielte Selbstheilung für genau diese Klassen:
     `r5_absatz_splitter.py` an Satzgrenzen geteilt und anschließend mit dem
     echten `textverstaendnis_guard.py` gegengeprüft. Nur wenn danach **0**
     harte R5-Funde übrig sind, wird der Artikel wieder in die Re-Queue gelegt.
+  - Holds der LESBARKEITS-Klasse („Lesbarkeits-Gate“/„Lesbarkeits-Score“,
+    WACHE-609) → in-memory mit `lesbarkeit_heiler.heile_text` geheilt
+    (Stufe A deterministisch, Stufe B KI, Tor T1–T4 fail-closed). Nur wenn
+    die importierte Schwelle `readability_check.NEW_FLESCH_MIN` im ERGEBNIS
+    steht, wird der Hold aufgehoben – ein „Versuch“ rearmt nichts. Anlass:
+    Am 07.10.2026 lagen sieben Reserve-Kandidaten allein an der Lesbarkeit
+    geparkt; die Kadenz-Wache rearmt Holds nie von selbst, also blieben sie
+    unsterblich (und der Vorrat bei 2/6).
   - Liegt der NEUE Score ≥ 0.80 (Review-Schwelle) bzw. die Länge im Korridor,
     wird der Hold in eine Re-Queue verwandelt (cadence_wait: true) – der
     Artikel durchläuft beim nächsten Slot den VOLLEN Gate-Durchlauf
@@ -77,6 +85,16 @@ def is_r5_hold(grund):
     return bool(grund) and "R5-ABSATZ-HART" in str(grund)
 
 
+def is_readability_hold(grund):
+    """Ein Lesbarkeits-Hold des Publish-Gates? (WACHE-609)
+
+    Wort-Erkennung wie überall hier: Das Gate darf seinen Satz umformulieren
+    (Flesch/Schwelle), ohne dass der Hold unerreichbar wird.
+    """
+    return bool(grund) and ("Lesbarkeits-Gate" in str(grund)
+                            or "Lesbarkeits-Score" in str(grund))
+
+
 def length_reif(text):
     """Länge neu gemessen am SSOT – Rückgabe (reif?, Belegtext).
 
@@ -118,6 +136,39 @@ def r5_reif(text, rel="candidate"):
     return True, "R5-ABSATZ-HART nicht mehr nachweisbar (0 harte Funde)", text
 
 
+def lesbarkeit_reif(text, rel="candidate"):
+    """Lesbarkeits-Hold nachheilen – Rückgabe (reif?, Belegtext, neuer_text).
+
+    Der Heiler (SSOT `lesbarkeit_heiler.py`) entscheidet, nicht dieser
+    Aufrufer: Er schreibt nur, was das Tor T1–T4 passiert (Flesch ≥
+    `readability_check.NEW_FLESCH_MIN`, keine neuen harten Textverständnis-
+    Funde, Vertrag V1–V3, Links/Zahlen/Frontmatter bewahrt). Hier wird
+    dieselbe Entscheidung für die Re-Queue nachvollzogen – ein Hold ohne
+    belegten Effekt bleibt Hold („nicht gemessen“ ist kein Freispruch).
+    """
+    import lesbarkeit_heiler as lh
+
+    ergebnis = lh.heile_text(_slug_aus_rel(rel), text, ki=True)
+    gruende = [g for g in (ergebnis.get("gruende") or []) if g]
+    if not ergebnis.get("ok"):
+        return False, "; ".join(gruende[:2]) or "Heilung nicht messbar (fail-closed)", text
+    nach = ergebnis.get("nach")
+    if nach is None:
+        return False, "Ergebnis nicht messbar (fail-closed)", text
+    neu = ergebnis["neu_raw"]
+    if neu == text:
+        return (True, f"bereits über der Schwelle (Flesch {nach:.1f} ≥ "
+                      f"{lh.MINDEST_FLESCH:g})", text)
+    return (True, f"Flesch {ergebnis['vor']:.1f} → {nach:.1f} "
+                  f"(Stufe {ergebnis['stufe']}, ≥ {lh.MINDEST_FLESCH:g})", neu)
+
+
+def _slug_aus_rel(rel):
+    """Slug aus einem Pfad wie content/posts/<slug>/index.md (nur für Meldungen)."""
+    teile = str(rel).replace("\\", "/").split("/")
+    return teile[-2] if len(teile) >= 2 else str(rel)
+
+
 def should_requeue(score):
     """Neu bewerteter Artikel ist reif genug für den vollen Gate-Durchlauf."""
     return score is not None and score >= REQUEUE_BAR
@@ -129,6 +180,7 @@ def _holds(cg, posts_dir=None):
         grund = p.get("grund")
         if p.get("state") == "hold" and (
             is_quality_hold(grund) or is_length_hold(grund) or is_r5_hold(grund)
+            or is_readability_hold(grund)
         ):
             yield p
 
@@ -149,6 +201,8 @@ def bewertung(p, qs):
     text = Path(p["path"]).read_text(encoding="utf-8")
     if is_r5_hold(p.get("grund")):
         return r5_reif(text, f"content/posts/{p['slug']}/index.md")
+    if is_readability_hold(p.get("grund")):
+        return lesbarkeit_reif(text, f"content/posts/{p['slug']}/index.md")
     reif, beleg = length_reif(text)
     return reif, beleg, None
 
@@ -191,6 +245,7 @@ def fix(posts_dir=None):
                 Path(p["path"]).write_text(new_text, encoding="utf-8")
             kind = ("quality-hold" if is_quality_hold(p.get("grund"))
                     else "r5-hold" if is_r5_hold(p.get("grund"))
+                    else "lesbarkeit-hold" if is_readability_hold(p.get("grund"))
                     else "length-hold")
             grund = (f"{kind} aufgehoben: {beleg} – Re-Queue für vollen "
                      f"Gate-Durchlauf (#286/#289)")
@@ -239,6 +294,32 @@ def run_selftest() -> list:
             "Der dritte Satz hat genug Wörter. Der vierte Satz hat genug Wörter. "
             "Der fünfte Satz hat genug Wörter. Der sechste Satz hat genug Wörter. "
             "Der siebte Satz hat genug Wörter.\n")
+    les_grund = ("publish-gate: Lesbarkeits-Gate nicht bestanden: Flesch 57.9 "
+                 "(Mindestwert 60) – ein Abschnitt …")
+    if not is_readability_hold(les_grund):
+        fehler.append("Lesbarkeits-Hold wird nicht erkannt (#609)")
+    if is_readability_hold("publish-gate: Textverständnis-Gate nicht bestanden") \
+            or is_readability_hold(None):
+        fehler.append("fremder/leerer Grund wird als Lesbarkeits-Hold erkannt (#609)")
+    # Unter der Schwelle bleibt der Hold – der Heiler darf nichts behaupten.
+    schlecht = ("---\ntitle: Test\ndate: 2026-09-07\ndraft: true\n---\n\n"
+                "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
+                "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
+                "eine Überprüfung der Vertragsbedingungen.\n")
+    reif_l, beleg_l, text_l = lesbarkeit_reif(schlecht, "fixture")
+    if reif_l or text_l != schlecht:
+        fehler.append(f"Lesbarkeits-Hold unter der Schwelle wird freigegeben: {beleg_l}")
+    # Über der Schwelle ist der Hold erledigt (bereits) – ohne Schreiben.
+    gut = schlecht.replace(
+        "Die Beitragsanpassung der Versicherungsgesellschaft erhöht die "
+        "monatliche Belastung der Kunden. Die Verbraucherzentrale empfiehlt "
+        "eine Überprüfung der Vertragsbedingungen.",
+        "Die Kasse hebt den Beitrag jedes Jahr an. Die Kunden merken das "
+        "erst bei der Abrechnung. Die Beratung notiert, was sie mit dir "
+        "ausgemacht hat. Das Geld für den Monat bleibt so unter Kontrolle.")
+    reif_g, beleg_g, text_g = lesbarkeit_reif(gut, "fixture")
+    if not reif_g or text_g != gut:
+        fehler.append(f"Hold über der Schwelle wird nicht freigegeben: {beleg_g}")
     r5_ok, r5_beleg, r5_text = r5_reif(body, "fixture")
     if not r5_ok or "0 harte Funde" not in r5_beleg:
         fehler.append(f"R5-Heilung gibt nicht frei: {r5_beleg}")

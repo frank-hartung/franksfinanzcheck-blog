@@ -325,6 +325,20 @@ HEALER_CHAIN = [
     # Keyword-Diagnose am Ende der Kette (zweiter Lauf wie in der Live-Engine):
     # nach Meta-/Titel-Heilung kann sich die Keyword-Verteilung verschieben.
     ("keyword_optimizer.py", ["--fix", "--include-drafts"]),
+    # REPARATUR 07.10.2026 (WACHE-609): Das harte Lesbarkeits-Gate
+    # (Flesch ≥ 60, #585) hatte in dieser Kette nur den KI-Polish als
+    # „Deckung“ – der Name stand da, die WIRKUNG nicht. Am 07.10.2026 stand
+    # der Vorrat bei 2/6, sieben Kandidaten allein an der Lesbarkeit geparkt
+    # (Flesch 53,1–59,9), ein achter am Textverständnis. Ein verpasster Slot
+    # (#601) oder ein Synchronverlust (#590) konnte so nicht aus dem Vorrat
+    # aufgefüllt werden – der Tag endete 1/2 und erzeugte die nächste
+    # Produktions-Wache. Der Lesbarkeits-Heiler läuft deshalb als LETZTER
+    # Textschritt (nach allen KI-Umschreibern) datei-bezirkelt; was nach ihm
+    # kommt (Linker, URL-Hygiene, Intent), ändert nur noch Links. Er schreibt
+    # NIE einen Text, der unter der Schwelle bleibt: Tor T1–T4, fail-closed,
+    # byte-identisch bei Zweifel – genau deshalb darf er hier stehen, wo Gate
+    # und Zertifizierung gleich danach messen.
+    ("lesbarkeit_heiler.py", ["--fix"], "file"),
     # REPARATUR 05.10.2026 (WF-B594, Issue #594): Der Internal-Linker fehlte
     # in dieser Kette – als EINZIGER Blocker der Triage ohne jeden Heiler.
     # Folge: Jeder frische Reserve-Entwurf trug „interne links: 0/1 (Soll
@@ -631,11 +645,17 @@ def heiler_deckung() -> dict | None:
     geprüft; eine Lücke stoppt die Veredelung laut und früh statt leise im
     Zertifikat. Werkzeugfehler (Modul nicht ladbar) sind kein Struktur-Befund
     – sie werden gewarnt und blockieren den Lauf nicht.
+
+    Seit 07.10.2026 (WACHE-609) ist die Deckung nicht mehr Papier:
+    `volldeckung()` verlangt für Regeln mit Zahlen-Versprechen (Lesbarkeit,
+    Flesch ≥ 60) zusätzlich eine GRÜNE Wirkungsprobe des genannten Heilers
+    („Deckung heißt Wirkung") – der Vorrat stand bei 2/6, obwohl die Tabelle
+    formal vollständig war.
     """
     try:
         sys.path.insert(0, str(BLOG_DIR / "scripts"))
         import reserve_healer_coverage as rhc
-        return rhc.deckung(chain=HEALER_CHAIN)
+        return rhc.volldeckung(chain=HEALER_CHAIN)
     except Exception as exc:  # noqa: BLE001 – Heiler-Deckung darf nie werfen
         print(f"  ⚠ Heiler-Deckungs-Wache nicht auswertbar: {exc}")
         return None
@@ -694,7 +714,10 @@ def write_report(results: list, targets: list, started_iso: str,
         for e in deckung["luecken"]:
             lines.append(f"- 🛑 `{e['regel']}` → {e['art']}"
                          + (f" ({', '.join(e.get('heiler', []))})"
-                            if e.get("heiler") else ""))
+                            if e.get("heiler") else "")
+                         + (f" – {e['befund']}" if e.get("befund") else ""))
+        for e in (deckung.get("wirkung") or {}).get("nachgewiesen", []):
+            lines.append(f"- 🧪 `{e['heiler']}` → {e['befund']}")
         for e in deckung["tote_ausnahmen"]:
             lines.append(f"- 🛑 `{e['regel']}` → {e['art']} "
                          "(deckt nichts mehr, altert sonst still)")
@@ -758,7 +781,8 @@ def finish() -> int:
         for e in deckung["luecken"]:
             print(f"   - {e['regel']}: {e['art']}"
                   + (f" ({', '.join(e.get('heiler', []))})"
-                     if e.get("heiler") else ""))
+                     if e.get("heiler") else "")
+                  + (f" – {e['befund']}" if e.get("befund") else ""))
         for e in deckung["tote_ausnahmen"]:
             print(f"   - {e['regel']}: {e['art']} (deckt nichts mehr)")
         print("   Diagnose: python3 scripts/reserve_healer_coverage.py")
@@ -927,6 +951,15 @@ def selftest() -> int:
                                                for d in deckung["gedeckt"]}:
             fehler.append("Intent-Gate (publish_gate-Kriterium 5) ist in der "
                           "Reserve-Kette nicht gedeckt (#349)")
+        # WACHE-609: Die Lesbarkeit ist ein Zahlen-Tor – gedeckt ist sie
+        # nur mit dem echten Heiler und einer grünen Wirkungsprobe.
+        if "lesbarkeit_heiler.py" not in {
+                h for d in deckung["gedeckt"] if d["regel"] == "readability_failures"
+                for h in d["heiler"]}:
+            fehler.append("Lesbarkeits-Gate ist ohne `lesbarkeit_heiler.py` "
+                          "als gedeckt gemeldet – ein Name ist keine Wirkung (#609)")
+        if not (deckung.get("wirkung") or {}).get("nachgewiesen"):
+            fehler.append("keine grüne Wirkungsprobe für die Zahlen-Heiler (#609)")
     intent_schritte = [e for e in HEALER_CHAIN
                        if e[0] == "affiliate_intent_guard.py"]
     if not intent_schritte or not all("--fix" in e[1] and e[2] == "file"

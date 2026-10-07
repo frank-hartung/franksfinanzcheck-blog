@@ -325,3 +325,53 @@ nach Gate-Verlust im Deploy (#287)**, Reserve-Zertifikat ohne LIVE-Geister (#295
 
 Vollständige Provider-/Hugo-/Pages-Integration wird in der Produktionsabnahme
 geprüft; lokale Unit-Tests allein beweisen keine erfolgreiche Auslieferung.
+
+## Nachtrag 07.10.2026 – WACHE-609: „Deckung heißt Wirkung" (#609)
+
+Die Produktions-Wache meldete für den 05.10.2026 **1/2** Artikel (P2) und
+nannte im selben Body den Bestand: „2 von Gates gehalten". Die Ursache war
+kein Alarm-, sondern ein **Heilungsproblem**: `data/reserve-readiness.json`
+stand bei *Ziel 6, bereit 2* – **sieben Kandidaten allein am harten
+Lesbarkeits-Gate** (Flesch 53,1–59,9; Schwelle `NEW_FLESCH_MIN` = 60 seit
+#585), ein achter am Textverständnis. Die Deckungs-Wache führte die Regel
+formal als „gedeckt", weil `profi_polish.py` in der Kette stand – **ein Name,
+keine Wirkung**. Ein Vorrat, der sein Ziel nicht erreicht, kann weder einen
+verpassten Slot (#601) noch einen Synchronverlust (#590) auffangen; der Tag
+endet 1/2, die Wache öffnet den nächsten Auftrag. **Die Quote ist das
+Symptom; der trockene Vorrat ist die Krankheit.**
+
+Die dauerhafte Reparatur hat vier Teile:
+
+1. `scripts/lesbarkeit_heiler.py` (**neu**) – der fehlende Heiler der Klasse.
+   Stufe A deterministisch (Schachtelsätze an sicheren Nahtstellen zerlegen,
+   Füllphrasen kürzen, Absatz-Split über die R5-SSOT), Stufe B KI-gezielt auf
+   den echten Hebel: Flesch hängt hier an den **Silben je Wort** (VPN-Text:
+   Ø Satzlänge 9,9 Wörter, Ø 1,95 Silben/Wort ⇒ 55,8), deshalb verlangt der
+   Auftrag lange Komposita durch Alltagswörter zu ersetzen, bevor Sätze
+   geschnitten werden. Das **Tor T1–T4** entscheidet, nicht der Schreiber:
+   Flesch ≥ importierte Schwelle UND besser als vorher, kein neuer harter
+   Textverständnis-Fund (`publish_gate.HARTE_REGELN`), Publikations-Vertrag
+   V1–V3 (#607), formale Bewahrung (Links, /go/-Anker, Überschriften,
+   Shortcodes, Tabellen, Zahlen-Multiset, Frontmatter byte-identisch, Länge
+   ≥ 90 %). Scheitert eine Zeile, bleibt die Datei **byte-identisch** liegen.
+2. **Wirkungsnachweis statt Namensliste:** `reserve_healer_coverage.py` führt
+   jetzt `WIRKUNGS_PROBEN` + `wirkungsdeckung()` – für Regeln mit
+   Zahlen-Versprechen (`PROBEN_PFLICHT`, zuerst `readability_failures`) muss
+   mindestens ein Heiler eine **grüne Wirkungsprobe** haben
+   (`python3 scripts/lesbarkeit_heiler.py --wirkungsprobe`, Exit 0, ohne Netz
+   und Kontingent). `reserve_finisher.HEALER_CHAIN` fährt den Heiler als
+   letzten Textschritt, vor Linker/URL-Hygiene/Intent.
+3. **Governance-Regel C25 („Deckung heißt Wirkung")**: Code C25, weil „C24"
+   im Haus die C24 Bank bezeichnet. Sie prüft Struktur **und** Wirkung (Probe
+   jetzt grün), damit die Regel nicht wieder zu einer Behauptung veraltet.
+4. **Der Weg zurück in die Produktion:** `requeue_quality_holds.py` kennt die
+   Lesbarkeits-Klasse (Wort-Erkennung „Lesbarkeits-Gate"/„Lesbarkeits-Score")
+   und hebt einen Hold nur auf, wenn die Schwelle im **Ergebnis** steht; die
+   Live-Engine heilt in Phase 0.5 (Keys ergänzt) und Phase 2 die Artikel des
+   Tages (`--new-only --fix`). `reserve_blocker_klassen.py` nennt den Heiler
+   als Klassen-Heiler; `integrity_guard.FEST` führt ihn unter Siegel
+   (Schwellen-Wache wie `publikations_vertrag.py`).
+
+Regressionen: `scripts/tests/test_lesbarkeit_heiler.py` (29 Tests: Wirkung,
+Tor-Sabotage, Stufe-B-Attrappe, Scope, Verdrahtung) und der erweiterte
+Selbsttest der Deckungs-Wache.
