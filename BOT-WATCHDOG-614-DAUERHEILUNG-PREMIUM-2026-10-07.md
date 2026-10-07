@@ -459,3 +459,62 @@ stellt 15 Kandidaten in den Pool, acht davon sind inhaltlich bereits geheilt
 Kette, die nicht mehr von unsichtbaren Stempeln blockiert wird. Der nächste
 `content-reserve.yml`-Lauf muss das zeigen; der harte End-Gate hält die Zahl
 fest.
+
+---
+
+## Nachtrag 3 (07.10.2026) – die Prüfung selbst war eine Zeitbombe
+
+Beim Lesen der CI-Läufe zu diesem PR fiel eine **zweite, unabhängige** rote
+Klasse auf – und diesmal lag es nicht an #614:
+
+* `Publication reliability regression tests` war rot. Ursache:
+  `test_social_perf_feedback` baute seine Fixtures von der echten Wanduhr
+  (`planner.berlin_now() - 2 Tage`), plante aber für den **gepinnten**
+  14.09.2026. Ab dem 01.10.2026 lag damit jeder Fixture-Artikel hinter allen
+  Slots: kein Kandidat passt mehr, der Plan ist leer, der Test rot – ohne dass
+  jemand eine Zeile Code angefasst hätte.
+* Beweis, dass es nicht unsere Änderung war: derselbe Fehler reproduziert im
+  frischen `origin/main`-Worktree (`5bcc31e`) – zwei rote Tests, exakt dieselben.
+* Unsichtbar blieb sie, weil der Workflow **nur auf Pull Requests** läuft (main
+  sah ihn nie) und `scripts/selftest_clock.py` bis heute nur Skripte mit
+  `--selftest` unter fremde Uhren legen konnte – Testmodule kannte die Probe
+  nicht.
+
+### Reparatur (vier Teile, alles im selben PR)
+
+1. **Wurzel**: Der Fixture-Bestand wird jetzt von der gepinnten Plan-Uhr aus
+   datiert (`_pool(pn)`), plus ein Eigenschaftstest „der Plan hängt nicht an
+   der echten Wanduhr" über drei Uhren (2026, 2027, Jahreswechsel 2030/31).
+2. **Werkzeug**: `selftest_clock.trap_modul()` und die CLI-Wege
+   `--trap-modul` / `--trap-discover` legen **Unit-Testmodule** unter eine
+   vorgestellte Uhr (`0` grün · `1` Datumsbefund · `2` Probe nicht lauffähig –
+   ein Importfehler ist kein Datumsbefund, sonst entsteht ein Fehlalarm). Der
+   eigene Selbsttest deckt Bombe, festes Modul, Discover und den Alias-Fall ab.
+   `uhr(module=…)` biegt jetzt **jeden** Namen um, der auf das echte (oder ein
+   Shim-)`datetime`/`time` zeigt – `import datetime as dt` war zuvor eine
+   Lücke; und `FFC_FREMD_UHR` macht die fremde Uhr für Tests sichtbar, die
+   bewusst den echten Bestand am echten Tag prüfen (sie melden sich mit Grund
+   ab, statt zu scheitern).
+3. **Vier weitere Zeitbomben geheilt**: `test_social_autopilot` (dasselbe
+   Fixture-Muster, 4 rote Tests unter fremder Uhr), `test_reserve_pipeline`
+   (Karenz-Fixture wird absolut gestempelt), `test_pflichtcheck` und
+   `test_publication_release_wache` (Uhr wird auf den Vertragszeitpunkt bzw.
+   einen Publikationstag gepinnt – vorher wäre der erste Test am 01.01.2027 von
+   selbst rot geworden, der zweite an jedem Wochenende).
+4. **Wache in CI**: neuer Schritt „Uhr-Probe – die Suite muss an jedem
+   Kalendertag grün sein" in `publication-reliability-tests.yml`. Er fährt die
+   komplette Suite ein zweites Mal unter einer um 97 Tage vorgestellten Uhr.
+
+**Nebenfund** (und der Beweis, dass die verschärfte Probe wirkt): Unter der
+STRENGEN Uhr flog ein echter Uhr-Lesezugriff in `reserve_janitor._zaehle` auf.
+Der Zähler-Stempel kommt jetzt aus dem Urteils-Tag (`today`, Mittag UTC) statt
+aus der Wanduhr – damit ist der Zählerstand für denselben Tag reproduzierbar.
+
+### Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| `selftest_clock --trap-discover scripts/tests --offset 97` | **2065 Tests · OK** (6 skipped, jeweils begründet) |
+| `selftest_clock --trap-modul … --offset 97/1461` (6 Module) | grün – vorher 11 rote Tests in 7 Modulen |
+| `selftest_clock --selftest` | grün (Trap findet Bomben in Skripten UND Testmodulen) |
+| `reserve_janitor --selftest` | grün, auch unter fremder Uhr |

@@ -59,6 +59,7 @@ import reserve_gate as rg            # noqa: E402
 import reserve_economy as re_        # noqa: E402
 import reserve_healer_coverage as rhc  # noqa: E402
 import reserve_quarantine as rq      # noqa: E402
+import selftest_clock as uhr_zwang    # noqa: E402
 import reserve_readiness as rr       # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
 import generate_drafts as gd          # noqa: E402
@@ -1788,14 +1789,21 @@ class LoeschRechtTests(unittest.TestCase):
 
     def test_karenz_schuetzt_junge_entwuerfe(self):
         os.environ["RESERVE_JANITOR_KARENZ_TAGE"] = "2"
+        # Gepinntes Testdatum statt Wanduhr: Das Dateialter wird ABSOLUT
+        # gestempelt (scripts/selftest_clock.py, Lehre aus dem draft_triage-Fall).
+        # Vorher las der Test `date.today()` und der Fixture-Alter kam von der
+        # echten Uhr – unter einer vorgestellten Uhr war der Entwurf 97 Tage alt
+        # und die Karenz griff nicht mehr.
+        tag = dt.date(2026, 9, 14)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             index = self._repo(root, self.VOLLER_KOERPER)
             index.write_text(index.read_text(encoding="utf-8").replace(
                 'title: "Kandidat mit ordentlichem Titel"', 'title: ""'),
                 encoding="utf-8")
+            uhr_zwang.stempel(str(index), tag)
             ziele, _, geschont = self.rj.find_targets(
-                root, today=dt.date.today(), run_key="run:1",
+                root, today=tag, run_key="run:1",
                 zaehler_schreiben=False)
         self.assertEqual(ziele, {})
         self.assertEqual(geschont[0]["klasse"], "karenz")
@@ -1825,6 +1833,10 @@ class LoeschRechtTests(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("::error::", buf.getvalue())
 
+    @unittest.skipIf(os.environ.get("FFC_FREMD_UHR"),
+                     "prüft den ECHTEN Bestand am ECHTEN Kalendertag "
+                     "(scripts/selftest_clock.py: FFC_FREMD_UHR gesetzt) – unter "
+                     "einer vorgestellten Uhr hat der Satz keine Aussage")
     def test_echtes_repo_darf_heute_nichts_verlieren(self):
         """Scharfer Lauf: Im echten Bestand steht kein Löschziel."""
         buf = io.StringIO()
