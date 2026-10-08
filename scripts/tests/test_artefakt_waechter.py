@@ -126,6 +126,47 @@ class ErkennungTests(unittest.TestCase):
         tmp = _baum({"data/leer.json": "", "data/leer.yaml": ""})
         self.assertIsInstance(aw.pruefe_alle(tmp), list)
 
+    def test_ohne_yaml_werkzeug_gibt_es_keinen_freispruch(self):
+        """#661: Fehlt das Werkzeug, ist das ein Befund – nie Stille.
+
+        Vier Stunden lang war der Integritäts-Lock rot, weil das CI kein
+        PyYAML hatte (`actions/setup-python` bringt es nicht mit) und die
+        Wache daraufhin „nichts gefunden“ meldete, wo sie „nichts gemessen“
+        hätte sagen müssen. Ein Hart-Gate ohne Messwerkzeug darf nicht grün
+        werden – es muss sagen, dass es blind ist.
+        """
+        sauber = _baum({"data/x.yaml": "a: 1\nb: 2\n"})
+        blind = aw.pruefe_yaml(sauber / "data" / "x.yaml", "data/x.yaml",
+                               mit_werkzeug=False)
+        self.assertTrue(any("NICHT geprüft" in f.meldung for f in blind),
+                        "ohne Werkzeug darf die Wache nicht schweigen")
+
+        kaputt = _baum({"data/x.yaml": "a: 1\na: 2\n"})
+        funde = aw.pruefe_yaml(kaputt / "data" / "x.yaml", "data/x.yaml",
+                               mit_werkzeug=False)
+        self.assertTrue(any("doppelte" in f.meldung for f in funde),
+                        "doppelte Schlüssel finden der eigene Scanner auch "
+                        "ohne Drittwerkzeug")
+
+    def test_ohne_yaml_werkzeug_bleibt_auch_frontmatter_laut(self):
+        tmp = _baum({"content/p/index.md":
+                     "---\ntitle: \"A\"\ndraft: true\n---\n\nText\n"})
+        blind = aw.pruefe_frontmatter(tmp / "content" / "p" / "index.md",
+                                      "content/p/index.md",
+                                      mit_werkzeug=False)
+        self.assertTrue(any("NICHT geprüft" in f.meldung for f in blind))
+
+    def test_yaml_werkzeug_da_heisst_vollstaendig_pruefen(self):
+        """Mit Werkzeug ist „nicht geprüft“ nie zu sehen (kein Dauer-Alarm)."""
+        if aw._yaml_modul() is None:  # pragma: no cover – Umgebung ohne PyYAML
+            self.skipTest("PyYAML nicht installiert")
+        sauber = _baum({"data/x.yaml": "a: 1\nb: 2\n",
+                        "content/p/index.md":
+                        "---\ntitle: \"A\"\n---\n\nText\n"})
+        self.assertEqual(aw.pruefe_yaml(sauber / "data" / "x.yaml"), [])
+        self.assertEqual(
+            aw.pruefe_frontmatter(sauber / "content" / "p" / "index.md"), [])
+
 
 class HeilungsTests(unittest.TestCase):
     """`--heal` darf die Aussage nie verändern – und nie Inhalt erfinden."""

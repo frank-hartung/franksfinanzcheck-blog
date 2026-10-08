@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T18:44:31.459536+00:00",
-  "head": "21e1defa",
+  "signed_at": "2026-10-08T20:24:32.438585+00:00",
+  "head": "7da71fd",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -24,7 +24,7 @@
     "layouts/shortcodes/tarifvergleich.html": "0f7f7c3a6624c9563b7c94028ece63978aefd4d6b86e4a765b8ad8d4b0347b31",
     "scripts/affiliate_integrity_gate.py": "d40139ed377cfe976e2a0f652b5cf3ec47cff3f55e9cee6f8a044142bcdf247b",
     "scripts/affiliate_marketer.py": "0c61e9822be05958657799a62de52826226fc4ba36ddea124b720f6ff47ae9e1",
-    "scripts/artefakt_waechter.py": "569ae4e9d22efdc13989e1ca02cf72bb319f45bd33fe21bcdd2f3dd51179d4d9",
+    "scripts/artefakt_waechter.py": "6f8b831495acc8f865d1d72af212b37f89ab511362673ed9e64eb345549b8625",
     "scripts/bake_brand.py": "b02e1332152e67fbc0fbbc772699f7d6379bebc22bd750187a81c3e0a52401eb",
     "scripts/blog_doctor.py": "b468c8138496aecd39c93193e501caa4be2810cf644bc61c55ece81312eef93f",
     "scripts/brand_guard.py": "caad0d0abcf8506158218e4e7b51a97b35aec83aedf0055f9f653e9bc7ca5ba7",
@@ -43,6 +43,7 @@
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
     "scripts/redaktions_standard.py": "410c65072122855850620a63c4e51147541fbfc6423fa87121187b1af65b305c",
+    "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
@@ -52,116 +53,16 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
-  "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
+  "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd",
+  "audit_start_sha256": "342ab5a1b98a735a8250610fb5cf8575533dbca6d073e7ba115ed739344ad445",
   "audit": [
-    {
-      "date": "2026-10-07",
-      "art": "set-current",
-      "head": "3e04044",
-      "geaendert": [
-        "assets/css/extended/custom.css",
-        "data/brand_lock.yaml",
-        "hugo.toml",
-        "layouts/_default/_markup/render-link.html",
-        "layouts/_partials/affiliate_anchor_attrs.html",
-        "layouts/_partials/affiliate_ziele_data.html",
-        "layouts/_partials/cover.html",
-        "layouts/_partials/extend_footer.html",
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/head.html",
-        "layouts/_partials/header.html",
-        "layouts/_partials/home_clusters.html",
-        "layouts/_partials/pillar_box.html",
-        "layouts/index.sw.js",
-        "layouts/pillar/list.html",
-        "layouts/pillar/single.html",
-        "layouts/robots.txt",
-        "layouts/shortcodes/einspartabelle.html",
-        "layouts/shortcodes/tarifvergleich.html",
-        "scripts/affiliate_integrity_gate.py",
-        "scripts/affiliate_marketer.py",
-        "scripts/bake_brand.py",
-        "scripts/blog_doctor.py",
-        "scripts/brand_guard.py",
-        "scripts/casing_guard.py",
-        "scripts/check24_links.yaml",
-        "scripts/check_covers.py",
-        "scripts/content_audit.py",
-        "scripts/fazit_schmiede.py",
-        "scripts/generate_covers.py",
-        "scripts/hardcases_guard.py",
-        "scripts/internal_linker.py",
-        "scripts/lektor_guard.py",
-        "scripts/lesbarkeit_heiler.py",
-        "scripts/link_density_guard.py",
-        "scripts/plagiat_guard.py",
-        "scripts/politur_ruine_heiler.py",
-        "scripts/publikations_vertrag.py",
-        "scripts/redaktions_standard.py",
-        "scripts/shortcode_guard.py",
-        "scripts/stil_guard.py",
-        "scripts/tag_casing.py",
-        "static/6t77zzoan6sl5i4b9jwcvx073202rgm9.txt",
-        "static/apple-touch-icon.png",
-        "static/favicon.svg",
-        "static/images/brand/logo-light.svg",
-        "static/images/brand/logo.svg"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        },
-        {
-          "pfad": "layouts/_default/_markup/render-link.html",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        },
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        },
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        },
-        {
-          "pfad": "layouts/robots.txt",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        },
-        {
-          "pfad": "scripts/check24_links.yaml",
-          "klasse": "kritisch",
-          "urteil": "NEU OHNE SIGNATUR",
-          "commits": [],
-          "commits_art": "unbekannt"
-        }
-      ],
-      "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-07",
       "art": "set-current",
       "head": "da2556e",
       "geaendert": [],
       "files_sha256": "ae35bfe1947c83e0ad6979c0d4178f63ee9fd91999aa34b17668b39307096364",
-      "prev_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-07",
@@ -496,8 +397,46 @@
       "art": "set-current",
       "head": "21e1defa",
       "geaendert": [],
-      "prev_sha256": "5e5d3197fe10c9d5b87d9dcdf11e6ef2802ae1ea77f2dda5874306498e1beddc",
-      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292"
+      "files_sha256": "0d0cc31ba63a7e6b531ce07359b94ec1ac9df2195c6f499b5d0d44cefefbb292",
+      "prev_sha256": "5e5d3197fe10c9d5b87d9dcdf11e6ef2802ae1ea77f2dda5874306498e1beddc"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "7da71fd",
+      "geaendert": [
+        "scripts/artefakt_waechter.py",
+        "scripts/reserve_artifacts.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/artefakt_waechter.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "7da71fd",
+              "datum": "2026-10-08",
+              "betreff": "Dauerheilung #661: Wache meldet „nicht geprüft“, nie „heil“, wenn ihr Werkzeug fehlt"
+            },
+            {
+              "sha": "70ed6d8",
+              "datum": "2026-10-08",
+              "betreff": "Dauerheilung #653 (WF-D4E0): Ein Artefakt-Defekt darf nicht mehr als leerer Vorrat aussehen (#662)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/reserve_artifacts.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "5cdf675fb97f11a7d35aa0e786b5687a6abeb6b81e01b90bd7ac31f756bd5cc9",
+      "files_sha256": "a7db47e1bbdb68d3615c63221b5250a436de0bf0134abeb16446d07bf18003bd"
     }
   ]
 }
