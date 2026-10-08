@@ -207,6 +207,11 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "/studien/"
     weight = 6
 [[menu.main]]
+    identifier = "suche"
+    name = "Suche"
+    url = "/suche/"
+    weight = 7
+[[menu.main]]
     identifier = "ueber"
     name = "Über mich"
     url = "/ueber/"
