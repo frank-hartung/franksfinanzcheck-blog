@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 08.10.2026 21:19 (Europe/Berlin)  
+> Automatisch aktualisiert: 09.10.2026 01:47 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -13,7 +13,7 @@
 ## Kommende Beiträge
 
 ### Sa, 10. Oktober 2026
-- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
+- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### So, 11. Oktober 2026
 - **07:00** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _takeaway_ · Launch  
@@ -22,13 +22,18 @@
 - **07:00** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
 ### So, 18. Oktober 2026
-- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _takeaway_ · Launch  
+- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Do, 22. Oktober 2026
-- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _vergleich_ · Launch  
+- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
-- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _frage_ · Launch  
+- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _vergleich_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
+### Fr, 23. Oktober 2026
+- **07:00** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
+- **18:00** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _zahl_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 

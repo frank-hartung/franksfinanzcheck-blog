@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wi
+ rklich:takeaway:2026-10-23@franksfinanzcheck.de
+DTSTAMP:20261008T234750Z
+DTSTART:20261023T121500Z
+DTEND:20261023T123000Z
+SUMMARY:Reddit: WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklic
+ h? (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Reddit\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-me
+ sh-wlan-was-brauchst-du-wirklich/
+URL:https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-
+ mesh-wlan-was-brauchst-du-wirklich/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR
