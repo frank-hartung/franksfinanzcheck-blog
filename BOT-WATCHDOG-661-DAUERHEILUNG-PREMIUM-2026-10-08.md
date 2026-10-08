@@ -1,6 +1,6 @@
 # Bot-Watchdog #661: Der Nachweis war krank, nicht der Vorrat
 
-**Stand:** 08.10.2026 · **Meldung:** [#661](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/661)
+**Stand:** 08.10.2026 (Nachtrag: zweiter Gang) · **Meldung:** [#661](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/661)
 · **Klasse:** maschinell behebbar, Besitzer Content-Automatisierung
 
 > **„P2 · Content-Reserve niedrig (Maschine) – Reife-Zertifikat nicht verfügbar
@@ -16,7 +16,7 @@ dafür noch eine maschinelle Heilung. Das Ticket riet deshalb, vier neue
 Kandidaten zu *produzieren* – eine Heilung, die an einem defekten JSON nichts
 ändern kann.
 
-## Die vier Ursachen
+## Die Ursachen der Meldung (U1–U4)
 
 | # | Ursache | Beleg |
 |---|---|---|
@@ -117,11 +117,91 @@ Erweiterung von `npm run test:reserve`.
   sind redaktionelle Qualitätsfragen an KI-Rohtexten, kein Automationsdefekt;
   der Vorrat erreicht sein Ziel ohne sie (6/6).
 
+## Nachtrag (gleicher Tag, zweiter Gang): zwei weitere Ursachen
+
+Beim Beweisgang für diesen Vorgang fiel auf, dass die Meldung #661 noch
+einen zweiten und einen dritten Boden hat. Beide gehören in denselben
+Vorgang, weil beide dieselbe Verwechslung betreiben: **„nicht gemessen“
+wurde als „nichts gefunden“ ausgegeben.**
+
+### U5 · Der Messvertrag war zwischenzeitlich stillgelegt
+
+29 Regressionstests fielen auf `main` – ausgerechnet jene, die belegen,
+dass ein Zertifikat nur gilt, wenn **Bytes, Nachbar-Gedächtnisse und Alter**
+stimmen. Der Rückbau unter #662 hatte vier Funktionen auf einen reinen
+JSON-Blick reduziert:
+
+| Funktion | Vertrag (aus #634/#393/#295) | Stand unter #662 | Wirkung |
+|---|---|---|---|
+| `reserve_gate.evaluate()` | zählt Kandidaten **gegen die Entwurfsdateien** (`artifacts.verified_rows`) | liest nur das JSON | 10 Tests rot: ohne Bestand war jede Zahl eine Behauptung |
+| `max_age_hours()` | klemmt `NaN`/`inf`/`≤0` auf 36 h (C2) | keine Klemmung | 4 Tests rot: die Notbremse war per Konfiguration abschaltbar |
+| `cert_age_hours()` | echtes ISO-Datum mit Zone | Teilstring-Vermutung | 4 Tests rot: zukünftige und zonenlose Stempel galten als Alter |
+| `freshness()` | fehlender **oder** zukünftiger Stempel ist **kein Nachweis** | nur Warnung | 6 Tests rot: „6 von irgendwann“ zählte als Vorrat |
+
+Im Schreiber (`reserve_readiness.py`) kam Viererlei hinzu: Er stellte nach
+der Messung nicht mehr **bytegenau** wieder her (CRLF-Zeilenenden gingen
+verloren – der gespeicherte SHA-256 passte zu keinem Byte auf der Platte),
+er nahm den Beweis-Abdruck nicht mehr **vor** dem Gate (eine Vorheilung
+während der Messung blieb unbemerkt), er suchte die Frontmatter-Grenze
+wieder selbst (die Zaun-Falle F1–F7 war damit zurück: eine `---`-Zeile in
+einem YAML-Wert galt als „nicht lesbar“), und er lief ohne Vorprüfung in
+ein beschädigtes Gedächtnis hinein.
+
+**Maßnahmen (alle mit Regressionstest):**
+
+* `evaluate()` prüft wieder gegen den Bestand; `max_age_hours()` klemmt
+  wieder; `cert_age_hours()` liest ISO; `freshness()` ist wieder
+  fail-closed. Das CLI bietet `--posts-dir` wieder an, und der Selbsttest
+  legt seinen Bestand wieder **echt** auf die Platte – er darf die
+  Quellenprüfung nicht weglassen, um grün zu bleiben.
+* `reserve_readiness.py` misst und stellt bytegenau wieder her, nimmt den
+  Abdruck **vor** dem Gate, stoppt vor **jeder** Mutation bei beschädigtem
+  Gedächtnis (Exit 2) oder fehlendem Messwerkzeug (Exit 3) und schreibt das
+  Zertifikat über den **einen** versiegelten Schreiber
+  `artifacts.write_object` – mit Gegenprobe auf doppelte Schlüssel nach dem
+  Tausch.
+* **C33** verlangt den Beweis dafür jetzt dort, wo er erbracht wird: nicht
+  ein eigenes `os.replace(` im Schreiber, sondern die Abgabe an den
+  versiegelten Weg (der fsync, Rückleseprobe und Doppelschlüssel-Prüfung
+  in sich vereint). Zusätzlich steht `scripts/reserve_artifacts.py` wieder
+  unter dem Integritäts-Siegel – sonst wäre die Abgabe nur eine
+  verschobene Behauptung.
+
+### U6 · Das Messwerkzeug fehlte im CI – und die Wache schwieg dazu
+
+Vier Stunden war der Integritäts-Lock rot, **ohne dass ein Artefakt kaputt
+war**: Der Artefakt-Wächter liest YAML und Frontmatter mit PyYAML, und
+`actions/setup-python` bringt PyYAML nicht mit. Jeder andere Python-Job
+dieses Repos installiert es von Hand; im Integritäts-Lock fehlte der
+Schritt.
+
+Der eigentliche Fehler saß aber im Messgerät: `_yaml_laden()` fing das
+fehlende Werkzeug mit `return [], []` ab. Auf einem Rechner ohne PyYAML
+meldete die Wache damit **„386 Artefakte heil“**, ohne ein einziges YAML
+gelesen zu haben. Ein Hart-Gate, das bei fehlendem Messwerkzeug grün wird,
+ist schlimmer als keins: Es bezeugt eine Prüfung, die nie stattfand.
+
+**Maßnahmen:**
+
+* **Fail-closed:** Fehlt das Werkzeug, ist das ein **Befund** („nicht
+  geprüft“) statt Stille. Wer das Werkzeug hat, merkt davon nichts; wer es
+  nicht hat, sieht rot und die Ursache.
+* **Der eigene Scanner trägt allein:** Doppelte Schlüssel findet
+  `_yaml_doppelte_schluessel()` ohne jedes Drittwerkzeug. Der Selbsttest
+  prüft jetzt **beide Welten** (mit und ohne PyYAML) und verlangt in beiden
+  dasselbe Urteil; drei neue Regressionstests frieren das ein.
+* **Der fehlende Schritt:** `integrity-lock.yml` installiert PyYAML wie
+  alle anderen Python-Jobs. Jobname (`Integritäts-Siegel`), Filter und
+  Reihenfolge bleiben unangetastet (C18).
+* Das geänderte Siegel (`scripts/artefakt_waechter.py` steht unter
+  Integritäts-Siegel) wurde **im selben Commit neu signiert** – 49
+  Kerndateien, Herkunft im Lock.
+
 ## Nachweise
 
 | Prüfung | Ergebnis |
 |---|---|
-| Gesamtsuite (`python3 -m unittest discover -s scripts/tests`) | **2.428 Tests**, davon 3 Fehler – alle drei `test_ki_transportweg` (fremd, vorbestehend, s. u.), 25 Skips |
+| Gesamtsuite (`python3 -m unittest discover -s scripts/tests`) | **2.462 Tests**, davon 3 Fehler – alle drei `test_ki_transportweg` (fremd, vorbestehend, s. u.), 25 Skips. **29 Fehler aus U5 sind damit weg** (vorher 32) |
 | Neue Regressionen `test_reserve_snapshot_heiler.py` | **10 Tests OK** (7 Sabotageproben + Befundklasse + Idempotenz) |
 | Erweiterte Regressionen `test_git_sync.py` | **44 Tests OK** (davon 5 neu: zwei heilbare Klassen, zwei Schutzproben, ein harter Stopp ohne Opt-in) |
 | Reserve-, Sync- und Routing-Module im Verbund | **116 Tests OK** |
@@ -132,14 +212,31 @@ Erweiterung von `npm run test:reserve`.
 | `reserve_gate.py` | **6/6 zertifiziert**, Zertifikat frisch |
 | `bot_watchdog.py --selftest` | grün |
 | `automation_premium_audit.py --strict` | Exit 0 |
-| `integrity_guard.py --gate` | grün, 48 Kerndateien unverändert |
+| `integrity_guard.py --gate` | grün, **49 Kerndateien** unverändert (Siegel neu signiert) |
+| `artefakt_waechter.py --selftest` | grün **mit und ohne** PyYAML (zwei Welten, ein Urteil) |
+| `artefakt_waechter.py` am echten Bestand | grün, 386 Artefakte strukturell heil |
+| `reserve_gate.py --selftest` / `--chronik` | grün (8 Fälle, `--posts-dir` wieder verdrahtet) |
+| `governance_contract.py` Kontrakt-Selbsttest | grün (C33-Kunstbefund zeigt auf die neue Marke) |
+| `pflichtcheck_guard.py` | Exit 0 |
+| `fm_boundary_guard.py --check` | grün (109 Dateien) |
 | `manifest_guard.py` | grün (1 vorbestehende Warnung) |
 | Synthetische End-to-End-Proben gegen `git_sync.sh` | Fall a (auf `main` gelöscht) und Fall b (auf `main` veröffentlicht) heilen mit Opt-in, bleiben ohne Opt-in harter Stopp **mit Klassen-Diagnose** |
 
-**Vorbestehender Fremdbefund (nicht Teil von #661):** `ki_transportweg.py`
-meldet `T6: cloudflare/ki-assistent/worker.js spricht den Gemini-Endpunkt
-direkt an` – drei Tests und eine Wache rot. Diese Datei wurde hier nicht
-angefasst; der Befund gehört in einen eigenen Vorgang.
+**Vorbestehende Fremdbefunde (nicht Teil von #661, alle nachgewiesen auf
+`main` selbst):**
+
+* **`ki_transportweg.py`, T6** – `cloudflare/ki-assistent/worker.js` spricht
+  den Gemini-Endpunkt direkt an. Drei Tests und eine Wache rot. Diese Datei
+  wurde hier nicht angefasst; der Befund ist unter **Issue #665** erfasst und
+  färbt *jeden* offenen Pull Request rot (verifiziert: gleiche Jobs, gleiche
+  Meldung, auf `main` seit 17:15 Uhr und auf drei fremden PR-Branches).
+* **`robustheits_gate.py`** – Selbsttest rot (ebenfalls Issue #665).
+
+Die zwei in diesem PR damit roten Checks (`gate`, `regression`) sind
+**nicht** durch diesen Vorgang entstanden: Sie fallen an exakt derselben
+Stelle (`unittest discover`, Schritt 7) auf Branches, die mit #661 nichts zu
+tun haben. Kein Fund dieses Vorgangs wurde unterdrückt, um sie grün zu
+bekommen.
 
 ## Betriebsabnahme
 
@@ -155,6 +252,14 @@ angefasst; der Befund gehört in einen eigenen Vorgang.
 ## Dateien
 
 ```
+scripts/reserve_gate.py                             – Messvertrag restauriert (evaluate/max_age/ISO/freshness, --posts-dir, Selbsttest-Bestand)
+scripts/reserve_readiness.py                        – bytegenau, Beweis vor dem Gate, Vorprüfungen, ein versiegelter Schreiber
+scripts/artefakt_waechter.py                        – fail-closed ohne YAML-Werkzeug (Siegel neu signiert)
+scripts/governance_contract.py                      – C33: Beweismarke + Siegelpflicht des Schreibers
+scripts/integrity_guard.py                          – scripts/reserve_artifacts.py wieder unter Siegel
+scripts/tests/test_artefakt_waechter.py             – 3 neue Regressionen (zwei Welten, ein Urteil)
+.github/workflows/integrity-lock.yml                – PyYAML für den Wächter (wie in allen anderen Python-Jobs)
+data/integrity_lock.json, data/integrity_history.jsonl – Siegel neu signiert (49 Dateien)
 scripts/reserve_snapshot_heiler.py            (neu)  – Prüfen, Heilen, Belegen
 scripts/tests/test_reserve_snapshot_heiler.py (neu)  – 10 Regressionen
 scripts/bot_watchdog.py                              – eigene Befundklasse #661
