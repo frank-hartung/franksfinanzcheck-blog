@@ -108,8 +108,12 @@ kaputter Lockfile-Stand zeigt sich vorher in `npm ci` und in `test_suche_pagefin
 - Die Eingabe wird nicht an einen Server geschickt und nicht in der URL oder im Speicher abgelegt.
 - Die Indexdateien kommen vom selben Hoster (GitHub Pages) wie alle Seiten. Dateiabrufe
   erscheinen dort wie bei jeder Seite in den Zugriffslogs.
-- Offen: Ob die Datenschutzerklärung dafür einen Satz braucht. Das ist eine redaktionelle
-  und rechtliche Frage, keine technische; sie ist nicht entschieden.
+- Die Datenschutzerklärung beschreibt die Suche unter „Website-Suche (lokale Suche)“
+  (`content/datenschutz/index.md`, Abschnitt 2): Begriffe bleiben im Browser, kein
+  Suchdienst, keine Suchhistorie, Indexdateien von dieser Website. Die frühere
+  Offen-Frage ist damit **entschieden und erledigt** (08.10.2026); der Offen-Hinweis in
+  `SUCHE-PAGEFIND-DAUERHEILUNG-PREMIUM-2026-10-08.md` ist als Tagesprotokoll überholt.
+  Vertrag: `scripts/tests/test_suche_pagefind.py`, Klasse `DatenschutzVersprechen`.
 
 ## Abschalten
 

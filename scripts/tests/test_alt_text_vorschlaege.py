@@ -225,6 +225,14 @@ class Repo(unittest.TestCase):
         for verbot in ("git add ", "git commit", "git push"):
             self.assertNotIn(verbot, text)
 
+    def test_redaktionsstandard_bleibt_mit_der_anleitung_verwaehlt(self):
+        """#644 brachte den Standard, niemand verlinkte ihn (Befund 11). Beides bleibt."""
+        standard = ROOT / "docs" / "ALT-TEXT-REDAKTIONSSTANDARD.md"
+        self.assertTrue(standard.exists(), "Redaktionsstandard fehlt")
+        anleitung = (ROOT / "docs" / "ANLEITUNG-ALT-TEXTE.md").read_text(encoding="utf-8")
+        self.assertIn("ALT-TEXT-REDAKTIONSSTANDARD.md", anleitung,
+                      "verwaister Standard: die Anleitung nennt ihn nicht mehr")
+
 
 if __name__ == "__main__":
     unittest.main()

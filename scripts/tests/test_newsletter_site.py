@@ -574,5 +574,39 @@ class Journeys(unittest.TestCase):
             self.assertIn(pflicht, abschnitt[:4000], f"Datenschutz-Abschnitt ohne {pflicht}")
 
 
+CHECKLISTE = "content/newsletter-checkliste/index.md"
+
+
+class Checkliste(unittest.TestCase):
+    """Der 15-Minuten-Fixkosten-Check ist der Newsletter-Anreiz aus #644:
+    ohne E-Mail-Gate, frei zugänglich, von der Anmeldeseite verlinkt.
+    Verloren geht so etwas nicht durch einen Fehler, sondern durch eine
+    gut gemeinte Änderung – hier steht der Vertrag dagegen."""
+
+    def _koerper(self, rel: str) -> str:
+        text = _text(rel)
+        ende = text.index("\n---\n", 4)
+        return text[ende + len("\n---\n"):]
+
+    def test_checkliste_ist_ohne_gate(self):
+        koerper = self._koerper(CHECKLISTE)
+        self.assertIn("Kein E-Mail-Gate", koerper, "aus dem Anreiz wurde ein Lock")
+        self.assertIn("ohne Anmeldung", koerper, "die Checkliste bleibt frei nutzbar")
+        self.assertIn("(/newsletter/)", koerper,
+                      "die Checkliste führt zum Newsletter – Anreiz, keine Sackgasse")
+
+    def test_checkliste_bleibt_auffindbar(self):
+        schuppe = _text(CHECKLISTE).split("---")[1]
+        self.assertNotRegex(schuppe, r"(?m)^draft:\s*true", "Anreiz im Draft – niemand sieht ihn")
+        self.assertNotRegex(schuppe, r"(?m)^robotsNoIndex:\s*true",
+                            "ein versteckter Anreiz wächst nicht")
+        self.assertNotRegex(schuppe, r"(?m)^\s+disable:\s*true", "Checkliste aus der Sitemap")
+
+    def test_newsletter_seite_verlinkt_die_checkliste(self):
+        text = _text("content/newsletter/index.md")
+        self.assertIn("(/newsletter-checkliste/)", text,
+                      "der Anreiz muss von der Anmeldeseite aus erreichbar sein")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

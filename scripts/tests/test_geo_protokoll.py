@@ -149,6 +149,14 @@ class Doku(unittest.TestCase):
         for stichwort in ("manuell", "Perplexity", "franksfinanzcheck.de", "--pruefen", "--auswerten"):
             self.assertIn(stichwort, text)
 
+    def test_redaktionsprotokoll_bleibt_mit_der_anleitung_verwaehlt(self):
+        """#644 brachte das GEO-Redaktionsprotokoll, niemand verlinkte es (Befund 11)."""
+        standard = ROOT / "docs" / "GEO-REDAKTIONSPROTOKOLL.md"
+        self.assertTrue(standard.exists(), "GEO-Redaktionsprotokoll fehlt")
+        anleitung = (ROOT / "docs" / "ANLEITUNG-GEO-PROTOKOLL.md").read_text(encoding="utf-8")
+        self.assertIn("GEO-REDAKTIONSPROTOKOLL.md", anleitung,
+                      "verwaistes Protokoll: die Anleitung nennt es nicht mehr")
+
 
 if __name__ == "__main__":
     unittest.main()
