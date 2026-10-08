@@ -129,34 +129,6 @@ Prüfe vor der Abfahrt, wo du tanken, rasten oder das Fahrzeug abstellen kannst.
 
 Plane Mahlzeiten grob vor. Notiere, welche Vorräte du schon hast und was du am Urlaubsort kaufen willst.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
-
-**Das Wichtigste in Kürze**
-
-## Welche Kosten gehören in ein Campingbudget?
-
-Das gilt nicht auf jedem Platz. Es ist eine Liste für deine Prüfung.
-
-## Wie erkennst du Zusatzkosten vor der Buchung?
-
-Dann kannst du später prüfen, was im Preis enthalten war.
-
-Schau dir Fotos und Beschreibung kritisch an. Ist die Küche nutzbar?
-
-Gibt es Schatten? Wie weit liegt der Platz von Einkauf und Wasser entfernt?
-
-Rechne statt zu raten.
-
-## Was zeigt eine Modellrechnung?
-
-## Wie vergleichst du zwei Campingplätze fair?
-
-## Welche Ausrüstung brauchst du wirklich?
-
-So kaufst du unterwegs weniger aus Zeitdruck.
-
-## Wie planst du Fahrt und Essen ohne Schönrechnen?
-
 Ein einfacher Plan senkt die Zahl der spontanen Einkäufe. Lass trotzdem Platz für lokale Mahlzeiten oder einen Regentag.
 
 Ein Budget darf echte Erholung enthalten.

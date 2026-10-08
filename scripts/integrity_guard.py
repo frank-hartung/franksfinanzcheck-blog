@@ -210,6 +210,14 @@ FEST = {
     # lesbarkeit_heiler – deshalb unter Siegel; die erste Signatur nimmt
     # ihn als „NEU UNTER SIEGEL“ mit Herkunft auf.
     "scripts/politur_ruine_heiler.py",
+    # Artefakt-Wächter (08.10.2026, WF-D4E0 #653): Er entscheidet, ob ein
+    # Maschinen-Artefakt strukturell heil ist – und damit, ob der harte
+    # End-Gate der Reserve eine Messung hat oder nur ein halbes Artefakt.
+    # Sechs Nächte lang las niemand die Artefakte gegen; „0/6“ war das
+    # Fehlen einer Messung, gemeldet als leerer Vorrat. Wer diese Wache
+    # still verändern kann, kann den Engpass wieder erfinden – deshalb
+    # unter Siegel (signaturpflichtig, Herkunft wird protokolliert).
+    "scripts/artefakt_waechter.py",
     "data/brand_lock.yaml",
     "layouts/_partials/header.html",
     "static/images/brand/logo.svg",

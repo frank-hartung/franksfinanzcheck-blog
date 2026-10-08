@@ -141,36 +141,6 @@ Wenn du deine Festnetznummer behalten willst, gib das beim neuen Anbieter an. An
 
 **Faustregel:** Entscheide nach Preis, Leistung und Wechselablauf zusammen. Ein günstiger Startpreis reicht nicht, wenn der Gesamtpreis oder die Bedingungen unklar bleiben.
 
-## Was kostet der neue Vertrag wirklich?
-
-So kannst du die spätere Rechnung damit vergleichen.
-
-## Passt die Leistung zu deinem Zuhause?
-
-Denke auch an den Router. Ein neues Gerät muss nicht automatisch nötig sein.
-
-Entscheide nach der ganzen Laufzeit und den Bedingungen.
-
-## Wie läuft der Anbieterwechsel ab?
-
-## Was solltest du vor dem Klick prüfen?
-
-## Was bereitest du zu Hause vor?
-
-## Was machst du, wenn der Wechsel stockt?
-
-## So wechselst du Schritt für Schritt
-
-1. Lies Enddatum und Kündigungsweg in deinem Vertrag.
-
-2. Prüfe, welche Anschlussart an deiner Adresse verfügbar ist.
-
-3. Addiere alle Kosten für dieselbe Vertragszeit.
-
-4. Beauftrage den neuen Anbieter mit der Wechselkoordination.
-
-5. Speichere Vertrag, Wechseltag und Bestätigungen.
-
 **Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [DSL-Vergleich: Anschluss und Tarif prüfen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
 
 ## Häufige Fragen

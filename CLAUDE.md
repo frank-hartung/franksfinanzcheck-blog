@@ -701,6 +701,16 @@ verkettete Akte, eigene Prüfsummen. Es wird ausschließlich von
   Signatur" — es heißt, dass keine Aussage möglich ist.
 - Schreiben ist atomar + rückgelesen: Ein abgebrochener Lauf hinterlässt den
   vorigen Stand, nie ein halbes Siegel.
+- **Die Lehre von #346 gilt für den ganzen `data/`-Baum, nicht nur für das
+  Siegel** (08.10.2026, #653): Sechs Nächte hintereinander meldete der harte
+  End-Gate „🛑 RESERVE-ENGPAß: nur 0/6 Kandidaten gate-fertig“ – bei vollem
+  Vorrat. `data/reserve-readiness.json` und `data/reserve-quarantine.json`
+  lagen nach einem Merge als ungültiges JSON in `main`; der End-Gate las
+  daraus eine `0` und leitete eine komplette Ursachenliste ab („PRODUKTION: 6
+  Kandidaten fehlen im Pool“). Der Schaden war nicht der rote Lauf, sondern
+  die falsche Wegbeschreibung. Siehe
+  `WF-D4E0-653-DAUERHEILUNG-PREMIUM-2026-10-08.md` und
+  „Eine fehlgeschlagene Messung ist kein leerer Vorrat“ (C33) weiter unten.
 
 ## Die Messlatte der Reserve gehört nicht dem Gemessenen (seit 26.09.2026, #393)
 
@@ -1196,6 +1206,39 @@ kritischen Pfad.
   `python3 scripts/selftest_ki.py --liste` (🔑 = läuft heute schon mit Schlüssel) ·
   `python3 -m unittest scripts.tests.test_selftest_ki`.
   Vorgangsbericht: `CONTENT-ENGINE-138-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
+
+## Eine fehlgeschlagene Messung ist kein leerer Vorrat (C33, seit #653, 08.10.2026)
+
+Sechs Nächte lang „0/6 gate-fertig“ bei vollem Vorrat – weil ein Merge zwei
+Zertifikatsstände verschmolzen hatte und niemand die Artefakte gegenlas. Drei
+Regeln halten die Klasse jetzt:
+
+- **Artefakte werden gegengelesen.** `python3 scripts/artefakt_waechter.py`
+  prüft alle versionierten Maschinen-Artefakte in sechs Klassen (A1 JSON-Syntax
+  · A2 doppelte JSON-Schlüssel · A3 JSONL-Zeilen · A4 Konfliktmarker · A5 YAML ·
+  A6 Frontmatter) – 386 Artefakte in 1,8 s, hart, ohne Fehlalarme. Geheilt wird
+  **nur A2** und nur beweisbar (letzter Eintrag gewinnt == `json.loads`-Lesart,
+  Gegenprobe auf Gleichheit, idempotent, Einzug wie gelesen). Alles andere
+  bleibt Fund: Ein nicht mehr parsfähiges Artefakt zu rekonstruieren hieße,
+  Inhalt zu erfinden.
+- **Der End-Gate nennt die Klasse, nicht nur die Zahl.**
+  `reserve_gate.py` unterscheidet `ok` · `engpass` · `artefakt` · `kette` ·
+  `wachen`. Ohne Messung bleibt er rot (C2), aber er **erfindet keine
+  Ursachen**: keine „URSACHEN DIESES ENGPASSES“-Liste aus einer Zahl, die
+  dieser Lauf nicht gemessen hat. Ohne diese Unterscheidung weist die Diagnose
+  die Reparatur in die falsche Richtung – sechs Nächte lang.
+- **Messen läuft immer, heilen kommt vor urteilen.** Stufe 3
+  (Zertifizierung) hängt an keinem anderen Schritt (`if: !cancelled()`): Wer
+  das Artefakt schreibt, aus dem der End-Gate urteilt, darf nicht übersprungen
+  werden. Der Artefakt-Wächter steht **hinter** ihr – ein Wächter am Lauf-Anfang
+  würde die Stufe abschalten, die seinen eigenen Fund heilt.
+
+Dazu: `scripts/reserve_readiness.py` schreibt Zertifikate atomar
+(`os.replace`) und liest sie gegen, bevor es sie für gültig erklärt.
+
+Vertrag: **C33** in `governance_contract.py` (Wache · Klassen · fail-closed ·
+Verdrahtung in PR-Pfad und Reserve-Lauf in der richtigen Reihenfolge ·
+Ursachenklassen · atomarer Schreiber · Siegel · Regressionstest).
 
 ## Wichtige Konventionen
 

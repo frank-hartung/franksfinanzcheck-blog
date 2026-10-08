@@ -218,6 +218,66 @@ def prune_stale_rows(rows: list[dict]) -> list[dict]:
     return [r for r in rows if r.get("slug")]
 
 
+
+def schreibe_zertifikat(pfad: Path, report: dict) -> None:
+    """Schreibt das Zertifikat atomisch UND prüft, was es geschrieben hat.
+
+    WARUM (08.10.2026, WF-D4E0 #653): Das Zertifikat wurde mit einem nackten
+    `write_text` geschrieben. Fällt der Prozess mitten im Schreiben um, steht
+    eine halbe Datei im Repo; wird sie danach von einem Merge verschmolzen,
+    steht ein strukturell kaputtes Artefakt in `main` – und der harte
+    End-Gate liest daraus „0/6 gate-fertig“ und meldet einen Vorrats-Engpass,
+    den es nie gab.
+
+    Zwei Lagen:
+      1. ATOMAR – erst in eine temporäre Datei desselben Verzeichnisses,
+         dann `os.replace`. Ein Zertifikat ist danach entweder alt oder neu,
+         nie halb.
+      2. SELBSTPRÜFUNG – der geschriebene Stand wird zurückgelesen und gegen
+         den Bericht abgeglichen (parsebar, Objekt, Kandidatenliste, gleiche
+         `ready`-Zahl, keine doppelten Schlüssel). Schlägt die Prüfung fehl,
+         bleibt die alte Datei unangetastet und der Lauf stirbt laut –
+         kein stilles „Zertifikat geschrieben“.
+    """
+
+    def doppelte(paare):
+        gesehen: set = set()
+        for schluessel, _ in paare:
+            if schluessel in gesehen:
+                raise ValueError(
+                    f"doppelter Schlüssel {schluessel!r} im Zertifikat")
+            gesehen.add(schluessel)
+        return dict(paare)
+
+    text = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
+    try:
+        json.loads(text, object_pairs_hook=doppelte)
+    except ValueError as exc:
+        raise RuntimeError(
+            f"Zertifikat nicht serialisierbar – es wird NICHT geschrieben: "
+            f"{exc}") from exc
+
+    pfad.parent.mkdir(parents=True, exist_ok=True)
+    tmp = pfad.with_suffix(pfad.suffix + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    try:
+        geprueft = json.loads(tmp.read_text(encoding="utf-8"),
+                              object_pairs_hook=doppelte)
+    except (OSError, ValueError) as exc:
+        tmp.unlink(missing_ok=True)
+        raise RuntimeError(
+            f"Zertifikat nicht gegenlesbar – es wird NICHT geschrieben: "
+            f"{exc}") from exc
+    if geprueft.get("ready") != report.get("ready") or \
+            len(geprueft.get("candidates") or []) != \
+            len(report.get("candidates") or []):
+        tmp.unlink(missing_ok=True)
+        raise RuntimeError(
+            "Zertifikat stimmt nach dem Gegenlesen nicht mit dem Bericht "
+            "überein – es wird NICHT geschrieben.")
+    os.replace(tmp, pfad)
+
+
 def main():
     # BESTANDS-WÄCHTER (26.09.2026, #387): Bevor irgendetwas über den Pool
     # geurteilt wird, bekommt er zurück, was ihm gehört. Fremde Umschreibungen
@@ -320,9 +380,7 @@ def main():
         report["geschont"] = [{"slug": g["slug"], "klasse": g["klasse"],
                                "hits": g["hits"], "heiler": g["heiler"],
                                "warum": g["warum"]} for g in geschont]
-    (ROOT / "data" / "reserve-readiness.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8")
+    schreibe_zertifikat(ROOT / "data" / "reserve-readiness.json", report)
     print(json.dumps(report, ensure_ascii=False))
     if ready_count < goal:
         print(f"\n🛑 RESERVE-ENGPAß: {ready_count}/{goal} Kandidaten "
