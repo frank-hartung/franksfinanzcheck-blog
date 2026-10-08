@@ -2137,19 +2137,45 @@ def c33_artefakt_waechter(script_texts, wflows, root=BLOG_DIR,
     # i) Der Schreiber prüft, was er geschrieben hat: atomar und mit
     #    Gegenprobe. Ein Zertifikat ist danach entweder alt oder neu, nie
     #    halb – und ein halbes hätte niemand bemerkt (#653).
+    #
+    #    NACHTRAG 08.10.2026 (#661): Der Beweis für den unteilbaren Tausch
+    #    ist NICHT mehr ein eigenes `os.replace(` in dieser Datei, sondern
+    #    die Abgabe an `artifacts.write_object` – den EINEN versiegelten
+    #    Schreiber für Schnappschüsse und Zertifikate (#634). Warum das die
+    #    strengere Fassung ist: `os.replace(` im Quelltext sagt nur, dass
+    #    irgendwo unteilbar getauscht wird – eine zweite Schreibroutine
+    #    daneben (mit eigener, schwächerer Gegenprobe) erfüllte die alte
+    #    Marke trotzdem, und genau so stand es nach #662 da: zwei Wege zum
+    #    Zertifikat, einer mit fsync und doppelter-Schlüssel-Prüfung, einer
+    #    ohne. Die Marke verlangt jetzt, dass dieser Schreiber den
+    #    versiegelten Weg benutzt; Regel (j) verlangt zusätzlich, dass
+    #    dieser Weg selbst unter Siegel steht. Beides zusammen ist mehr
+    #    als die alte Probe, nicht weniger.
     if not readiness:
         out.append(("C33", "scripts/reserve_readiness.py fehlt – ohne den "
                            "Schreiber gibt es kein Zertifikat (#653)."))
     else:
         for marke, sinn in (("def schreibe_zertifikat(",
                              "das atomische Schreiben"),
-                            ("os.replace(", "der unteilbare Tausch"),
+                            ("artifacts.write_object(",
+                             "der unteilbare Tausch im einen versiegelten "
+                             "Schreiber"),
                             ("object_pairs_hook",
                              "die Gegenprobe auf doppelte Schlüssel")):
             if marke not in readiness:
                 out.append(("C33", f"scripts/reserve_readiness.py: {marke} "
                                    f"fehlt – ohne {sinn} kann ein halbes "
                                    "Artefakt im Repo stehen (#653)."))
+
+    # j2) Der Schreiber, an den oben abgegeben wird, muss selbst unter
+    #     Siegel stehen. Delegation an eine Datei, die jeder ändern darf,
+    #     wäre nur eine verschobene Behauptung (#661).
+    if "reserve_artifacts.py" not in kerndateien:
+        out.append(("C33", "scripts/reserve_artifacts.py steht nicht unter "
+                           "dem Integritäts-Siegel – reserve_readiness.py "
+                           "gibt den unteilbaren Tausch an ihn ab; als "
+                           "ungesiegelte Datei könnte der Schreiber still "
+                           "verändert werden (#661)."))
 
     # j) Siegel und Regressionstest: eine Wache, die man löschen darf,
     #    ohne dass irgendwo etwas rot wird, ist eine Empfehlung.
@@ -4503,12 +4529,17 @@ def _selftest():
                         "unentdeckt (#653).")
     # (e) Der Schreiber schreibt wieder unteilbar-falsch: ein halbes
     #     Zertifikat stünde wieder im Repo.
+    # NACHTRAG 08.10.2026 (#661): der Kunstbefund zielt auf die neue Marke.
+    # Nicht mehr „os.replace( durch os.rename( ersetzt“, sondern „die
+    # Abgabe an den versiegelten Schreiber durch ein nacktes write_text
+    # ersetzt“ – das ist der Rückfall, den die Regel heute wirklich
+    # verhindern muss (siehe Kommentar bei (i)).
     ohne_atomar = dict(echte_c33, **{
         "reserve_readiness.py": echte_c33["reserve_readiness.py"].replace(
-            "os.replace(", "os.rename(")})
+            "artifacts.write_object(", "pfad.write_text(")})
     if not [f for f in c33_artefakt_waechter(
             ohne_atomar, wflows_echt, python_bin=sys.executable or "python3")
-            if "os.replace" in f[1]]:
+            if "artifacts.write_object" in f[1]]:
         failures.append("C33: ein nicht atomar schreibender Zertifikats-"
                         "Schreiber bleibt unentdeckt (#653).")
     if failures:

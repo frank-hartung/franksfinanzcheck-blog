@@ -35,6 +35,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import reserve_artifacts as artifacts  # noqa: E402  (Ganz-Schnappschüsse, #634)
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 import reserve_pool as rp  # noqa: E402
 from publication_release import accept_candidate  # noqa: E402
@@ -121,15 +122,19 @@ def reserve_editorial_findings(index: Path, content: str) -> list[str]:
     So kann weder ein guter Score noch ein erfolgreiches Hugo-Rendering eine
     unbelegte Zahl, Phantomquelle oder H2-Zerstückelung überstimmen.
     """
-    parts = (content or "").split("---", 2)
-    if len(parts) != 3 or parts[0] != "":
-        return ["Reserve-Qualitäts-Gate: Frontmatter-Grenze nicht lesbar"]
-    fm, body = parts[1], parts[2]
+    # NACHTRAG 08.10.2026 (#661): Die Grenze zwischen Frontmatter und
+    # Fließtext wird NICHT hier neu erfunden. `split_article` kennt die
+    # Zaun-Falle (F1–F7): ein `````-Block oder eine ``---``-Trennlinie
+    # INNERHALB eines YAML-Wertes darf die Grenze nicht verschieben. Die
+    # Dauerheilung #653 hatte hier ein schlichtes `content.split("---", 2)`
+    # hineingesetzt – damit galt bei jedem Entwurf mit einer solchen Zeile
+    # der Rest des Textes als „nicht lesbar“ und der Kandidat fiel durch,
+    # obwohl er sauber war. Ein Messwerkzeug, das die falschen Bytes
+    # begutachtet, ist schlimmer als gar keins.
     try:
-        import yaml
-        metadata = yaml.safe_load(fm) or {}
-        if not isinstance(metadata, dict):
-            return ["Reserve-Qualitäts-Gate: Frontmatter ist kein Mapping"]
+        metadata = artifacts.reserve_metadata(content)
+        from post_utils import split_article
+        _prefix, _fm, body = split_article(content)
         import redaktions_standard as rs
         return rs.reserve_quality_findings(
             body, author=metadata.get("author") or "",
@@ -152,7 +157,13 @@ def certify_one(index) -> dict:
     danach BYTEGENAU zurückgeschrieben – das Zertifikat gilt für genau
     diese Bytes.
     """
-    original = index.read_text(encoding="utf-8")
+    # NACHTRAG 08.10.2026 (#661): BYTEGENAU, nicht textgenau. #653 hatte
+    # hier auf read_text/write_text umgestellt; dabei gehen CRLF-Zeilenenden
+    # und damit der Bezug zwischen Zertifikat und Datei verloren: der
+    # gespeicherte sha256 passte zu keinem Byte mehr auf der Platte, und
+    # die Wiederherstellung nach der Messung veränderte den Entwurf.
+    original_bytes = index.read_bytes()
+    original = original_bytes.decode("utf-8")
     diag = score_diagnosis(index)
     # Unabhängig vom groben Lesbarkeits-Score: 58,0 → 59,0 bleibt dort
     # häufig 80/100. Konvergenz muss sichere Zwischenstufen erkennen können.
@@ -162,7 +173,7 @@ def certify_one(index) -> dict:
     content_findings = reserve_editorial_findings(index, original)
     if content_findings:
         row = {"slug": index.parent.name, "ready": False,
-               "sha256": hashlib.sha256(original.encode()).hexdigest(),
+               "sha256": hashlib.sha256(original_bytes).hexdigest(),
                "flesch": measured_flesch,
                "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
                "details": content_findings}
@@ -173,8 +184,19 @@ def certify_one(index) -> dict:
     ready, reason, details = False, None, []
     try:
         rp.publish_one(index)
+        # NACHTRAG 08.10.2026 (#661): Beweis-Gegenprobe. Der Abdruck wird
+        # NACH dem Umschalten, aber VOR dem Gate genommen: verändert das
+        # Gate den Entwurf während der Messung, wurde nicht die Fassung
+        # begutachtet, deren Hash später im Zertifikat steht. Dann ist die
+        # Messung wertlos – unabhängig davon, was sie sagt (fail-closed).
+        proof_bytes = index.read_bytes()
         ready, gate_text = capture_gate(index)
-        if not ready:
+        if ready and index.read_bytes() != proof_bytes:
+            ready = False
+            details = ["Gate-Vorheilung hat die Messfassung verändert – "
+                       "erst dauerhaft heilen, dann erneut zertifizieren"]
+            reason = details[0]
+        if not ready and not reason:
             details = gate_findings(gate_text)
             if diag and diag.get("score") is not None \
                     and diag["score"] < 0.85:
@@ -191,9 +213,9 @@ def certify_one(index) -> dict:
     except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
         ready, reason = False, f"Gate-Ausnahme: {exc}"
     finally:
-        index.write_text(original, encoding="utf-8")
+        index.write_bytes(original_bytes)
     row = {"slug": index.parent.name, "ready": ready,
-           "sha256": hashlib.sha256(original.encode()).hexdigest(),
+           "sha256": hashlib.sha256(original_bytes).hexdigest(),
            "flesch": measured_flesch}
     if reason:
         row["reason"] = reason
@@ -240,6 +262,16 @@ def schreibe_zertifikat(pfad: Path, report: dict) -> None:
          kein stilles „Zertifikat geschrieben“.
     """
 
+    # NACHTRAG 08.10.2026 (#661): Der Weg zum Zertifikat ist EINER. Die
+    # Dauerheilung #653 hatte hier eine zweite, eigene Schreibroutine
+    # gebaut – mit denselben Absichten (temporäre Datei, Gegenlesen,
+    # os.replace), aber ohne die doppelten Schlüssel zu prüfen und ohne
+    # fsync. Zwei Schreiber für dasselbe Beweisstück sind die Sorte
+    # zweiter Wahrheit, die dieses Repo teuer bezahlt hat: der eine prüft
+    # scharf, der andere nicht, und niemand sieht, welcher gelaufen ist.
+    # `artifacts.write_object` ist der scharfe Weg (atomar, fsync,
+    # Rückleseprobe, doppelte Schlüssel abgelehnt) – also benutzt ihn
+    # auch dieser Pfad. Eigene Logik bleibt hier keine.
     def doppelte(paare):
         gesehen: set = set()
         for schluessel, _ in paare:
@@ -249,36 +281,59 @@ def schreibe_zertifikat(pfad: Path, report: dict) -> None:
             gesehen.add(schluessel)
         return dict(paare)
 
-    text = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
-    try:
-        json.loads(text, object_pairs_hook=doppelte)
-    except ValueError as exc:
+    zeilen = artifacts.certificate_rows(report)
+    if len(zeilen) != len(report.get("candidates") or []):
         raise RuntimeError(
-            f"Zertifikat nicht serialisierbar – es wird NICHT geschrieben: "
-            f"{exc}") from exc
-
-    pfad.parent.mkdir(parents=True, exist_ok=True)
-    tmp = pfad.with_suffix(pfad.suffix + ".tmp")
-    tmp.write_text(text, encoding="utf-8")
+            "Zertifikat nicht gegenlesbar – Kandidatenliste stimmt nach dem "
+            "Prüfen nicht mit dem Bericht überein; es wird NICHT geschrieben.")
     try:
-        geprueft = json.loads(tmp.read_text(encoding="utf-8"),
-                              object_pairs_hook=doppelte)
+        artifacts.write_object(pfad, report)
     except (OSError, ValueError) as exc:
-        tmp.unlink(missing_ok=True)
         raise RuntimeError(
-            f"Zertifikat nicht gegenlesbar – es wird NICHT geschrieben: "
+            f"Zertifikat nicht schreibbar – es wird NICHT geschrieben: "
             f"{exc}") from exc
-    if geprueft.get("ready") != report.get("ready") or \
-            len(geprueft.get("candidates") or []) != \
-            len(report.get("candidates") or []):
-        tmp.unlink(missing_ok=True)
+    # Gegenprobe NACH dem Tausch: steht wirklich draußen, was beschlossen
+    # wurde – und hat kein Schlüssel ein Doppel? Erst dieser Blick macht
+    # aus „geschrieben“ ein Beweisstück; er liest die Datei, nicht die
+    # Absicht. Schlägt er fehl, steht das Zertifikat bereits (alt oder
+    # neu, nie halb) – der Lauf stirbt dann laut mit dieser Meldung.
+    try:
+        zurueck = json.loads(pfad.read_text(encoding="utf-8"),
+                             object_pairs_hook=doppelte)
+    except (OSError, ValueError) as exc:
+        raise RuntimeError(
+            f"Zertifikat nicht gegenlesbar – es steht im Repo, ohne dem "
+            f"Bericht zu entsprechen: {exc}") from exc
+    if zurueck != report:
         raise RuntimeError(
             "Zertifikat stimmt nach dem Gegenlesen nicht mit dem Bericht "
-            "überein – es wird NICHT geschrieben.")
-    os.replace(tmp, pfad)
+            "überein – dieser Lauf ist kein Nachweis.")
 
 
 def main():
+    # NACHTRAG 08.10.2026 (#661): VORPRÜFUNGEN VOR JEDER MUTATION.
+    # Die Dauerheilung #653 hatte die beiden Sperren entfernt, mit denen
+    # #634 den Volllauf stillgelegt hatte, solange das Messwerkzeug fehlt
+    # oder ein Gedächtnis beschädigt ist. Ohne sie läuft der Volllauf in
+    # ein kaputtes Gedächtnis hinein, heilt daran herum und schreibt ein
+    # Zertifikat über einen Zustand, den niemand mehr lesen kann – der
+    # Schaden wird dann Beleg. Deshalb: erst prüfen, dann anfassen.
+    try:
+        artifacts.check_memories(ROOT / "data")
+    except ValueError as exc:
+        print(f"\U0001f6d1 Reserve-Zertifizierung angehalten: "
+              f"Gedächtnis beschädigt ({exc})")
+        return 2
+
+    # #634: Auch der volle Lauf muss dieselbe echte Messkette beweisen wie
+    # die Nachzertifizierung. Bei Werkzeugausfall KEINE Fahnen, Quarantäne,
+    # Custody oder Zertifikate verändern; der vorhandene Beleg altert normal.
+    from reserve_recert import gate_verfuegbar
+    verfuegbar, grund = gate_verfuegbar()
+    if not verfuegbar:
+        print(f"\U0001f6d1 Reserve-Zertifizierung angehalten: {grund}")
+        return 3
+
     # BESTANDS-WÄCHTER (26.09.2026, #387): Bevor irgendetwas über den Pool
     # geurteilt wird, bekommt er zurück, was ihm gehört. Fremde Umschreibungen
     # (Agenten, KI-Redaktion, Heiler) hatten am 25.09. zwei zertifizierte

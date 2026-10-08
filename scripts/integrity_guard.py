@@ -210,6 +210,16 @@ FEST = {
     # lesbarkeit_heiler – deshalb unter Siegel; die erste Signatur nimmt
     # ihn als „NEU UNTER SIEGEL“ mit Herkunft auf.
     "scripts/politur_ruine_heiler.py",
+    # #634 / NACHTRAG 08.10.2026 (#661): Ein READY-Nachweis braucht
+    # eindeutige JSON-Identitäten, exakte Draft-Bytes und atomare Zustände.
+    # Dieser Vertrag ist signaturpflichtig – und er bleibt es. Die
+    # Dauerheilung #653 hatte ihn beim Hinzufügen des Artefakt-Wächters
+    # (#662) aus der Liste genommen; damit durfte genau das Werkzeug
+    # unbemerkt verändert werden, das festlegt, wie ein Zertifikat zu
+    # lesen, zu hashen und zu schreiben ist. Der Artefakt-Wächter prüft
+    # Artefakte, `reserve_artifacts` definiert sie – beides gehört unter
+    # Siegel, nicht nur eines von beiden.
+    "scripts/reserve_artifacts.py",
     # Artefakt-Wächter (08.10.2026, WF-D4E0 #653): Er entscheidet, ob ein
     # Maschinen-Artefakt strukturell heil ist – und damit, ob der harte
     # End-Gate der Reserve eine Messung hat oder nur ein halbes Artefakt.
