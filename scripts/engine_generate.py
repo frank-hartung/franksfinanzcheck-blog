@@ -923,7 +923,8 @@ def _reserve_topup(topics, quelle, used_titles, used_topics,
         certified = {}
         ready = 0
         try:
-            report = json.loads(Path("data/reserve-readiness.json").read_text())
+            from reserve_artifacts import read_certificate
+            report = read_certificate(Path("data/reserve-readiness.json"))
             certified = {r["slug"]: r for r in report["candidates"] if r["ready"]}
             ready = sum(1 for p in pool if p.parent.name in certified
                         and hashlib.sha256(p.read_bytes()).hexdigest()

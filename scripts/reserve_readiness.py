@@ -35,6 +35,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import reserve_artifacts as artifacts  # noqa: E402
 import reserve_economy  # noqa: E402  (SSOT für Ziel und Alarmschwelle, #393)
 import reserve_pool as rp  # noqa: E402
 from publication_release import accept_candidate  # noqa: E402
@@ -121,15 +122,10 @@ def reserve_editorial_findings(index: Path, content: str) -> list[str]:
     So kann weder ein guter Score noch ein erfolgreiches Hugo-Rendering eine
     unbelegte Zahl, Phantomquelle oder H2-Zerstückelung überstimmen.
     """
-    parts = (content or "").split("---", 2)
-    if len(parts) != 3 or parts[0] != "":
-        return ["Reserve-Qualitäts-Gate: Frontmatter-Grenze nicht lesbar"]
-    fm, body = parts[1], parts[2]
     try:
-        import yaml
-        metadata = yaml.safe_load(fm) or {}
-        if not isinstance(metadata, dict):
-            return ["Reserve-Qualitäts-Gate: Frontmatter ist kein Mapping"]
+        metadata = artifacts.reserve_metadata(content)
+        from post_utils import split_article
+        _prefix, _fm, body = split_article(content)
         import redaktions_standard as rs
         return rs.reserve_quality_findings(
             body, author=metadata.get("author") or "",
@@ -152,7 +148,8 @@ def certify_one(index) -> dict:
     danach BYTEGENAU zurückgeschrieben – das Zertifikat gilt für genau
     diese Bytes.
     """
-    original = index.read_text(encoding="utf-8")
+    original_bytes = index.read_bytes()
+    original = original_bytes.decode("utf-8")
     diag = score_diagnosis(index)
     # Unabhängig vom groben Lesbarkeits-Score: 58,0 → 59,0 bleibt dort
     # häufig 80/100. Konvergenz muss sichere Zwischenstufen erkennen können.
@@ -162,7 +159,7 @@ def certify_one(index) -> dict:
     content_findings = reserve_editorial_findings(index, original)
     if content_findings:
         row = {"slug": index.parent.name, "ready": False,
-               "sha256": hashlib.sha256(original.encode()).hexdigest(),
+               "sha256": hashlib.sha256(original_bytes).hexdigest(),
                "flesch": measured_flesch,
                "reason": f"Reserve-Qualitäts-Gate: {content_findings[0]}",
                "details": content_findings}
@@ -173,8 +170,14 @@ def certify_one(index) -> dict:
     ready, reason, details = False, None, []
     try:
         rp.publish_one(index)
+        proof_bytes = index.read_bytes()
         ready, gate_text = capture_gate(index)
-        if not ready:
+        if ready and index.read_bytes() != proof_bytes:
+            ready = False
+            details = ["Gate-Vorheilung hat die Messfassung verändert – "
+                       "erst dauerhaft heilen, dann erneut zertifizieren"]
+            reason = details[0]
+        if not ready and not reason:
             details = gate_findings(gate_text)
             if diag and diag.get("score") is not None \
                     and diag["score"] < 0.85:
@@ -191,9 +194,9 @@ def certify_one(index) -> dict:
     except Exception as exc:  # noqa: BLE001 – nie am Gate scheitern
         ready, reason = False, f"Gate-Ausnahme: {exc}"
     finally:
-        index.write_text(original, encoding="utf-8")
+        index.write_bytes(original_bytes)
     row = {"slug": index.parent.name, "ready": ready,
-           "sha256": hashlib.sha256(original.encode()).hexdigest(),
+           "sha256": hashlib.sha256(original_bytes).hexdigest(),
            "flesch": measured_flesch}
     if reason:
         row["reason"] = reason
@@ -219,6 +222,21 @@ def prune_stale_rows(rows: list[dict]) -> list[dict]:
 
 
 def main():
+    try:
+        artifacts.check_memories(ROOT / "data")
+    except ValueError as exc:
+        print(f"🛑 Reserve-Zertifizierung angehalten: Gedächtnis beschädigt ({exc})")
+        return 2
+
+    # #634: Auch der volle Lauf muss dieselbe echte Messkette beweisen wie
+    # die Nachzertifizierung. Bei Werkzeugausfall KEINE Fahnen, Quarantäne,
+    # Custody oder Zertifikate verändern; der vorhandene Beleg altert normal.
+    from reserve_recert import gate_verfuegbar
+    verfuegbar, grund = gate_verfuegbar()
+    if not verfuegbar:
+        print(f"🛑 Reserve-Zertifizierung angehalten: {grund}")
+        return 3
+
     # BESTANDS-WÄCHTER (26.09.2026, #387): Bevor irgendetwas über den Pool
     # geurteilt wird, bekommt er zurück, was ihm gehört. Fremde Umschreibungen
     # (Agenten, KI-Redaktion, Heiler) hatten am 25.09. zwei zertifizierte
@@ -320,9 +338,8 @@ def main():
         report["geschont"] = [{"slug": g["slug"], "klasse": g["klasse"],
                                "hits": g["hits"], "heiler": g["heiler"],
                                "warum": g["warum"]} for g in geschont]
-    (ROOT / "data" / "reserve-readiness.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8")
+    artifacts.certificate_rows(report)
+    artifacts.write_object(ROOT / "data" / "reserve-readiness.json", report)
     print(json.dumps(report, ensure_ascii=False))
     if ready_count < goal:
         print(f"\n🛑 RESERVE-ENGPAß: {ready_count}/{goal} Kandidaten "

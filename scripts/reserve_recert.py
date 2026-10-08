@@ -66,6 +66,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CERT = ROOT / "data" / "reserve-readiness.json"
 sys.path.insert(0, str(ROOT / "scripts"))
+import reserve_artifacts as artifacts  # noqa: E402
 
 
 def _now() -> str:
@@ -105,7 +106,7 @@ def last_touch(path: Path, root: Path = ROOT) -> str:
 
 def load_cert(cert_path: Path = CERT) -> dict | None:
     try:
-        data = json.loads(cert_path.read_text(encoding="utf-8"))
+        data = artifacts.read_certificate(cert_path)
     except (OSError, ValueError):
         return None
     if not isinstance(data, dict) or not isinstance(data.get("candidates"), list):
@@ -191,6 +192,17 @@ def messkette_rechtschreibung() -> tuple[bool, str]:
     """Beweist an einer Probe, dass die Rechtschreib-Wertung echt misst."""
     try:
         import spellcheck as sc
+        # #634: Ein vorhandener CLI-Pfad ist noch kein Messwerkzeug. Manche
+        # Hunspell-Installationen ohne de_DE liefern eine leere Trefferliste;
+        # das darf weder „fehlerfrei“ noch einen frischen READY-Beleg ergeben.
+        probe = subprocess.run(
+            ["hunspell", "-d", "de_DE", "-l"],
+            input="Haushalt\nFheler\n", text=True, capture_output=True,
+            timeout=15, check=False,
+        )
+        if probe.returncode != 0 or probe.stdout.split() != ["Fheler"]:
+            raise RuntimeError("Hunspell/de_DE erkennt die Kontrollwörter "
+                               "nicht korrekt (Wörterbuch/CLI prüfen)")
         wl = sc.load_whitelist()
         sc.analyze_article({"body": "Ein kurzer Satz zur Probe.",
                             "content": "Ein kurzer Satz zur Probe.",
@@ -198,7 +210,7 @@ def messkette_rechtschreibung() -> tuple[bool, str]:
     except Exception as exc:  # noqa: BLE001 – jede Ursache ist dieselbe Gefahr
         return False, (f"Rechtschreib-Kette nicht lauffähig ({exc}) – "
                        f"quality_score würde spelling=0.5 („unbekannt“) "
-                       f"werten und gesunde Kandidaten abwerten. "
+                       f"werten – kein vollständiger Zertifizierungsnachweis. "
                        f"Abhilfe: `sudo apt-get install -y hunspell "
                        f"hunspell-de-de`.")
     return True, "Rechtschreib-Kette lauffähig"
@@ -385,8 +397,8 @@ def main(argv=None) -> int:
     except Abwertungsverdacht as exc:
         print(f"🛑 Nachzertifizierung abgebrochen: {exc}")
         return 3
-    CERT.write_text(json.dumps(neu, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8")
+    artifacts.certificate_rows(neu)
+    artifacts.write_object(CERT, neu)
     ready = neu["ready"]
     print(f"✅ Zertifikat nachgezogen: {len(neu['recert']['renewed'])} "
           f"Kandidat(en) neu gemessen · {ready}/{neu['target']} gate-fertig "

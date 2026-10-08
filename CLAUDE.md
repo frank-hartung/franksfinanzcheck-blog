@@ -1197,6 +1197,28 @@ kritischen Pfad.
   `python3 -m unittest scripts.tests.test_selftest_ki`.
   Vorgangsbericht: `CONTENT-ENGINE-138-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
 
+## Reserve-Beweise sind ganze Fassungen (seit #634, 08.10.2026)
+
+- `scripts/reserve_artifacts.py` ist die gemeinsame Stelle für striktes
+  Reserve-JSON, sichere Kandidaten und die Rohbyte-/Fahnenprüfung. Neue Leser
+  und Writer dürfen diese Prüfungen nicht mit tolerantem `json.loads` oder
+  „bei Fehler leeres Gedächtnis“ umgehen. JSON-Snapshots atomar ganz schreiben.
+- READY ist ein Quellenbeweis, kein Summenfeld: SHA-256, gültiges F1–F7-YAML,
+  `draft: true`, `reserve: true`, kein LIVE/Blockiert/Zurückgezogen. Die
+  Produktionsfrische bleibt maximal 36 h; ein kaputter Zeitstempel ist kein
+  Nachweis. Fehlende Messwerkzeuge halten Voll-/Nachzertifizierung vor jeder
+  Mutation an, auch wenn ein Hunspell-Pfad ohne deutsches Wörterbuch existiert.
+- Drei Reserve-Snapshots und die sechs Premium-Textstämme tragen
+  `merge=binary`. Nicht durch Text-/Union-Merge ersetzen. Readiness ist eine
+  ganze Laufversion; Custody/Quarantäne sind strikt schlüsselweise vereinte
+  Gedächtnisse. Neue Quarantäne-Funde erben keine Treffer alter Signaturen.
+  Beschädigte Konfliktseiten, LIVE- oder Menschenkonflikte stoppen den Sync.
+- Pflicht nach Änderungen: `npm run reserve:check`, `npm run test:reserve`,
+  ganze Unit-/Uhr-Suite und bestehende Integrity-Prüfung. Simulationen erhalten
+  die Originalbytes; anschließend das normale Produktionsartefakt neu bauen.
+- Diagnose, Wiederherstellungsherkunft, Messnachweise und Runbook:
+  `RESERVE-634-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
+
 ## Wichtige Konventionen
 
 - Commits: Conventional Style mit deutschprachiger Beschreibung

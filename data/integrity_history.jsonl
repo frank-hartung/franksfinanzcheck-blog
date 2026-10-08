@@ -258,3 +258,5 @@
 {"date": "2026-10-07", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
 {"date": "2026-10-08", "kritisch": 2, "fest": 0, "modus": "set-current", "geaendert": ["hugo.toml", "layouts/_partials/head.html"]}
 {"date": "2026-10-08", "kritisch": 1, "fest": 0, "modus": "set-current", "geaendert": ["layouts/_partials/head.html"]}
+{"date": "2026-10-08", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": ["scripts/reserve_artifacts.py"]}
+{"date": "2026-10-08", "kritisch": 0, "fest": 2, "modus": "set-current", "geaendert": ["scripts/lesbarkeit_heiler.py", "scripts/reserve_artifacts.py"]}

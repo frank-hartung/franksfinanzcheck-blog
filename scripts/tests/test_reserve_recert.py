@@ -16,6 +16,7 @@ Beide Klassen werden hier festgenagelt.
 """
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -84,6 +85,43 @@ class MesswerkzeugSicherheit(unittest.TestCase):
             ok, grund = rr.gate_verfuegbar()
         self.assertFalse(ok)
         self.assertIn("hugo", grund)
+
+    def test_vorhandenes_hunspell_ohne_woerterbuch_ist_keine_messkette(self):
+        for code, stdout in ((1, ''), (0, ''), (0, 'Haushalt\nFheler\n')):
+            with self.subTest(code=code, stdout=stdout), \
+                    patch.object(rr.subprocess, 'run',
+                                 return_value=rr.subprocess.CompletedProcess(
+                                     ['hunspell'], code, stdout, '')):
+                ok, grund = rr.messkette_rechtschreibung()
+                self.assertFalse(ok)
+                self.assertIn('Kontrollwörter', grund)
+
+    def test_echte_kontrollwoerter_und_analyse_ergeben_messkette(self):
+        import spellcheck
+        with patch.object(rr.subprocess, 'run',
+                          return_value=rr.subprocess.CompletedProcess(
+                              ['hunspell'], 0, 'Fheler\n', '')), \
+                patch.object(spellcheck, 'load_whitelist', return_value=set()), \
+                patch.object(spellcheck, 'analyze_article', return_value={}):
+            self.assertTrue(rr.messkette_rechtschreibung()[0])
+
+    def test_vollzertifizierung_stoppt_vor_jeder_mutation_bei_werkzeugmangel(self):
+        import reserve_readiness
+        import reserve_custody
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            snapshot = root / 'data' / 'reserve-readiness.json'
+            snapshot.parent.mkdir()
+            snapshot.write_bytes(b'{"ready":6}\r\n')
+            with patch.object(reserve_readiness, 'ROOT', root), \
+                    patch.object(rr, 'gate_verfuegbar',
+                                 return_value=(False, 'hunspell fehlt')), \
+                    patch.object(reserve_custody, 'heal_quiet') as heal, \
+                    patch.object(reserve_readiness.rp, 'reserve_drafts') as drafts:
+                self.assertEqual(reserve_readiness.main(), 3)
+                heal.assert_not_called()
+                drafts.assert_not_called()
+            self.assertEqual(snapshot.read_bytes(), b'{"ready":6}\r\n')
 
     def test_massenabwertung_mit_einem_muster_wird_gestoppt(self):
         alt = _cert([{"slug": s, "ready": True, "sha256": "x"}

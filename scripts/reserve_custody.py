@@ -58,6 +58,7 @@ import re
 import sys
 from pathlib import Path
 
+import reserve_artifacts as artifacts  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 LEDGER = ROOT / "data" / "reserve-custody.json"
@@ -116,20 +117,18 @@ def heute(jetzt: dt.date | None = None) -> str:
     return (jetzt or dt.date.today()).isoformat()
 
 
+
 def ledger_laden(pfad: Path | None = None) -> dict:
     pfad = ledger_pfad(pfad)
     try:
-        data = json.loads(pfad.read_text(encoding="utf-8"))
-        return data if isinstance(data, dict) else {}
-    except (OSError, ValueError):
+        return artifacts.read_object(pfad)
+    except FileNotFoundError:
         return {}
 
 
 def ledger_speichern(data: dict, pfad: Path | None = None) -> None:
     pfad = ledger_pfad(pfad)
-    pfad.parent.mkdir(parents=True, exist_ok=True)
-    pfad.write_text(json.dumps(data, ensure_ascii=False, indent=2,
-                               sort_keys=True) + "\n", encoding="utf-8")
+    artifacts.write_object(pfad, data, sort_keys=True)
 
 
 def zustand(text: str) -> str:

@@ -170,6 +170,8 @@
     "nachheilung": "python3 scripts/nachheilung.py",
     "nachheilung:fix": "python3 scripts/nachheilung.py --fix",
     "test:sync": "python3 scripts/nachheilung.py --selftest && python3 -m unittest scripts.tests.test_git_sync scripts.tests.test_nachheilung",
+    "reserve:check": "python3 scripts/reserve_artifacts.py --check",
+    "test:reserve": "python3 -m unittest scripts.tests.test_reserve_artifacts scripts.tests.test_reserve_editorial_contract scripts.tests.test_reserve_recert scripts.tests.test_reserve_convergence_progress scripts.tests.test_reserve_pipeline scripts.tests.test_reserve_vorratsschutz",
     "prepare": "python3 scripts/haken_wache.py --install --leise || true"
   },
   "devDependencies": {

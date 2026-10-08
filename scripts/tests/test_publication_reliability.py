@@ -1,4 +1,5 @@
 import datetime as dt
+import hashlib
 import io
 import os
 import json
@@ -418,27 +419,29 @@ class ReserveCertFreshnessTests(unittest.TestCase):
 
     def test_evaluate_recounts_ready_from_candidates(self):
         import reserve_gate as rg
-        with tempfile.TemporaryDirectory() as tmp:
+        with tempfile.TemporaryDirectory() as tmp, \
+                patch.dict(os.environ, {"RESERVE_TARGET": "6"}):
             cert = Path(tmp) / 'reserve-readiness.json'
-            # Absichtlich inkonsistent: ready=6, aber nur 4 true-Kandidaten
-            # (zwei bereits live und fälschlich noch in der Liste).
+            posts = Path(tmp) / 'content' / 'posts'
+            rows = []
+            # A whole, syntactically valid certificate can still be stale:
+            # six READY flags, but two sources have already gone LIVE.
+            for slug in ('a', 'b', 'c', 'd', 'live-e', 'live-f'):
+                index = posts / slug / 'index.md'
+                index.parent.mkdir(parents=True)
+                draft = 'false' if slug.startswith('live-') else 'true'
+                raw = f'---\ndraft: {draft}\nreserve: true\n---\nText.\n'.encode()
+                index.write_bytes(raw)
+                rows.append({'slug': slug, 'ready': True,
+                             'sha256': hashlib.sha256(raw).hexdigest()})
             cert.write_text(json.dumps({
-                'target': 6,
-                'ready': 6,  # veraltet / gelogen
-                'candidates': [
-                    {'slug': 'a', 'ready': True},
-                    {'slug': 'b', 'ready': True},
-                    {'slug': 'c', 'ready': True},
-                    {'slug': 'd', 'ready': True},
-                    {'slug': 'live-e', 'ready': False},
-                    {'slug': 'live-f', 'ready': False},
-                ],
+                'target': 6, 'ready': 6, 'candidates': rows,
             }), encoding='utf-8')
-            ready, target, cands = rg.evaluate(cert)
-            self.assertEqual(target, 6)
-            self.assertEqual(ready, 4)  # neu gezählt, nicht dem Feld vertraut
-            self.assertEqual(len(cands), 6)
-            self.assertEqual(rg.main.__doc__ is not None or True, True)
+            ready, target, candidates = rg.evaluate(cert, posts)
+            self.assertEqual((ready, target), (4, 6))
+            self.assertEqual(len(candidates), 6)
+            self.assertTrue(all(not row['ready'] for row in candidates[-2:]))
+            self.assertTrue(all('draft' in row['reason'] for row in candidates[-2:]))
 
     def test_prune_drops_empty_rows(self):
         import reserve_readiness as rr

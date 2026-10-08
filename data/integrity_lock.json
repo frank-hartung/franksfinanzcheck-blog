@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T10:23:30.250238+00:00",
-  "head": "bea9813",
+  "signed_at": "2026-10-08T15:00:04.257598+00:00",
+  "head": "a96825e",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
@@ -36,12 +36,13 @@
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
     "scripts/lektor_guard.py": "a3046e18adbe96d9f17a551f106ec29574cca4c75e39882de9e69fa08b07d1f9",
-    "scripts/lesbarkeit_heiler.py": "26c981a10101bc15839cd338f8e504536e459673bff660fe32e4546bd93ec413",
+    "scripts/lesbarkeit_heiler.py": "bbeebb18aed7b3dd351dc817a5ec55b642e6e691c36bd2964dc2850975be33fa",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
     "scripts/redaktions_standard.py": "282acfc81639f9fc1158e8ee2e752c2a8b00f8f93eaeaca82509ef5c9ca9c7bd",
+    "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "687fdf80ea6b393a68ded36792a1595e3f458c33a934cb0b7ef45edbc7194486",
@@ -51,7 +52,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "6208f4294c0b20e6577ac986e964ed2905807cc838d5c578c519885ac8445481",
+  "files_sha256": "6561a8ca8ce524e2fd1bc41fa189795c05ff8b5b12ef60bb91fac15656f6848c",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -288,8 +289,54 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "b8101019a13987f5c09f340d4af5297bca0bf35cdcaa13a980d70db20945f1be",
-      "files_sha256": "6208f4294c0b20e6577ac986e964ed2905807cc838d5c578c519885ac8445481"
+      "files_sha256": "6208f4294c0b20e6577ac986e964ed2905807cc838d5c578c519885ac8445481",
+      "prev_sha256": "b8101019a13987f5c09f340d4af5297bca0bf35cdcaa13a980d70db20945f1be"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "a96825e",
+      "geaendert": [
+        "scripts/reserve_artifacts.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/reserve_artifacts.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "068bbbae97ba5298494213353e986e2e42e19ea293bd4f810fe3387d465387d6",
+      "prev_sha256": "7780859056844c10647717c541eb141cc3eb8b5ff10243778b6a04b3486a2ee4"
+    },
+    {
+      "date": "2026-10-08",
+      "art": "set-current",
+      "head": "a96825e",
+      "geaendert": [
+        "scripts/lesbarkeit_heiler.py",
+        "scripts/reserve_artifacts.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "scripts/reserve_artifacts.py",
+          "klasse": "fest",
+          "urteil": "NICHT VERSIONIERT",
+          "commits": [],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "81c8f6ccdaf029862e7473df6571b357a0b3fc78f5b1028328fa94ef80ea7e24",
+      "files_sha256": "6561a8ca8ce524e2fd1bc41fa189795c05ff8b5b12ef60bb91fac15656f6848c"
     }
   ]
 }

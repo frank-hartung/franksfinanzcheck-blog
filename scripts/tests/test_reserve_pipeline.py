@@ -40,6 +40,7 @@ import contextlib
 import datetime as dt
 import os
 import io
+import hashlib
 import json
 import subprocess
 import sys
@@ -93,6 +94,19 @@ SCRIPTS = Path(__file__).resolve().parents[1]
 ROOT = SCRIPTS.parent
 LIVE_POST = "content/posts/2026-09-01-live/index.md"
 POOL_POST = "content/posts/2026-09-15-pool/index.md"
+
+
+def _certificate_in_pool(tmp, payload, name="reserve-readiness.json"):
+    posts = Path(tmp) / "content" / "posts"
+    for row in payload["candidates"]:
+        index = posts / row["slug"] / "index.md"
+        index.parent.mkdir(parents=True, exist_ok=True)
+        raw = b"---\ndraft: true\nreserve: true\n---\nFixture.\n"
+        index.write_bytes(raw)
+        row["sha256"] = hashlib.sha256(raw).hexdigest()
+    path = Path(tmp) / name
+    path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    return path
 
 
 def _git(root: Path, *args):
@@ -415,10 +429,7 @@ class ProviderVertragTests(unittest.TestCase):
 
 class GateFrischeTests(unittest.TestCase):
     def _cert(self, tmp, payload):
-        path = Path(tmp) / "reserve-readiness.json"
-        path.write_text(json.dumps(payload, ensure_ascii=False),
-                        encoding="utf-8")
-        return path
+        return _certificate_in_pool(tmp, payload)
 
     def test_veraltetes_zertifikat_ist_kein_nachweis(self):
         now = dt.datetime.now(dt.timezone.utc)
@@ -445,7 +456,7 @@ class GateFrischeTests(unittest.TestCase):
             })
             frisch, _ = rg.freshness(cert)
             self.assertTrue(frisch)
-            ready, target, _ = rg.evaluate(cert)
+            ready, target, _ = rg.evaluate(cert, Path(tmp) / "content" / "posts")
             self.assertEqual((ready, target), (6, 6))
 
 
@@ -1416,22 +1427,22 @@ class WorkflowVertragTests(unittest.TestCase):
         import tempfile
         root = Path(__file__).resolve().parents[2]
         with tempfile.TemporaryDirectory() as tmp:
-            cert = Path(tmp) / "cert.json"
             ziel = 6
-            cert.write_text(json.dumps({
+            cert = _certificate_in_pool(tmp, {
                 "target": ziel, "ready": 2, "generated_at": "2026-10-07T13:20:00Z",
                 "candidates": [
                     {"slug": "a", "ready": True, "score": 0.96},
                     {"slug": "b", "ready": True, "score": 0.95},
                     {"slug": "c", "ready": False, "score": 0.4,
                      "reason": "Zeichenlänge"},
-                ]}), encoding="utf-8")
+                ]}, name="cert.json")
             historie = Path(tmp) / "history.jsonl"
             env = dict(os.environ, RESERVE_HISTORY=str(historie),
                        RESERVE_TARGET=str(ziel), GITHUB_RUN_ID="12345")
             r = subprocess.run(
                 [sys.executable, str(root / "scripts" / "reserve_gate.py"),
-                 "--cert", str(cert), "--chronik"],
+                 "--cert", str(cert), "--posts-dir",
+                 str(Path(tmp) / "content" / "posts"), "--chronik"],
                 cwd=root, env=env, capture_output=True, text=True, timeout=120)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             zeilen = [z for z in historie.read_text(encoding="utf-8").splitlines()
@@ -1476,10 +1487,7 @@ class MesslattenBesitzTests(unittest.TestCase):
                 os.environ[k] = v
 
     def _cert(self, tmp, payload):
-        path = Path(tmp) / "reserve-readiness.json"
-        path.write_text(json.dumps(payload, ensure_ascii=False),
-                        encoding="utf-8")
-        return path
+        return _certificate_in_pool(tmp, payload)
 
     # --- Der Kern: ein magerer Lauf senkt die Latte nicht ------------------
     def test_zertifikat_setzt_sein_ziel_nicht_selbst(self):
@@ -1492,7 +1500,7 @@ class MesslattenBesitzTests(unittest.TestCase):
                 "candidates": [{"slug": f"k{i}", "ready": True}
                                for i in range(4)],
             })
-            ready, target, _ = rg.evaluate(cert)
+            ready, target, _ = rg.evaluate(cert, Path(tmp) / "content" / "posts")
         self.assertEqual(target, 6,
                          "Das Ziel muss aus der Produktionsumgebung kommen, "
                          "nicht aus dem geprüften Zertifikat")
@@ -1512,7 +1520,7 @@ class MesslattenBesitzTests(unittest.TestCase):
                 "candidates": [{"slug": f"k{i}", "ready": True}
                                for i in range(4)],
             })
-            ready, target, cands = rg.evaluate(cert)
+            ready, target, cands = rg.evaluate(cert, Path(tmp) / "content" / "posts")
             puffer = io.StringIO()
             with contextlib.redirect_stdout(puffer):
                 rg.report(ready, target, cands)
@@ -1534,7 +1542,7 @@ class MesslattenBesitzTests(unittest.TestCase):
                 "candidates": [{"slug": f"k{i}", "ready": True}
                                for i in range(4)],
             })
-            st = rc.cert_state(cert)
+            st = rc.cert_state(cert, Path(tmp) / "content" / "posts")
         self.assertEqual(st["target"], 6,
                          "Konvergenz muss auf das Produktionsziel hinarbeiten")
         self.assertEqual(st["zertifikat_ziel"], 4,

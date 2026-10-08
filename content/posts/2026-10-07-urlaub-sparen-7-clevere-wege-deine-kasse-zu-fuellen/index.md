@@ -115,8 +115,6 @@ Ein Mietwagenvergleich kann Angebote sichtbar machen. Er prüft aber nicht autom
 
 ## Wie behältst du die Ausgaben vor Ort im Blick?
 
-## Wie behältst du die Ausgaben vor Ort im Blick?
-
 Vor Ort fallen oft kleine Posten an. Ein Bus, ein Snack, ein Bad oder ein Kaffee wirkt für sich nicht groß. Notiere Käufe am selben Tag in einer App, auf dem Handy oder auf Papier. So siehst du, was noch in deiner Reisekasse liegt.
 
 Prüfe vor der Reise, welche Gebühren deine Bank für Karten und Bargeld nennt. Lies auch, wie eine Zahlung in fremder Währung abgerechnet wird. Frag bei Unklarheit deine Bank. Nimm nicht einfach die erste Umrechnung am Gerät an, wenn du sie nicht verstehst.

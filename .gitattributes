@@ -13,6 +13,25 @@
 # Kein `merge=union`: Ein Vereinigen der Akten wäre hier eine Fälschung.
 data/integrity_lock.json merge=binary
 
+# Reserve-Snapshots sind ebenfalls ganze Beweise, keine Textbausteine (#634).
+# Ein paralleler Merge hatte Zeitstempel, Kandidaten und Quarantäne-Akten zu
+# ungültigem JSON vermischt. Ganze Fassung wählen, Readiness danach erneuern;
+# git_sync.sh kennt diese Zustände bereits als maschinelle Ganzdatei-Konflikte.
+data/reserve-readiness.json merge=binary
+data/reserve-custody.json merge=binary
+data/reserve-quarantine.json merge=binary
+
+# Die sechs wiederhergestellten Redaktionsfassungen bleiben auch nach einem
+# Datums-Lift unteilbar: kein stiller Zusammenschnitt von geprüften Absätzen.
+# Die Reserve-Konfliktpolitik in git_sync.sh entscheidet weiterhin anhand der
+# draft-/reserve-Fahnen; LIVE- und menschliche Konflikte bleiben ein Stopp.
+content/posts/*-7-gewohnheiten-fuer-finanzielle-freiheit/index.md merge=binary
+content/posts/*-campingurlaub-2026-clever-sparen-ohne-komfortverlust/index.md merge=binary
+content/posts/*-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md merge=binary
+content/posts/*-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md merge=binary
+content/posts/*-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md merge=binary
+content/posts/*-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md merge=binary
+
 # Root-Reports sind Maschinenausgaben der Wachen: als CI-Dashboard versioniert,
 # aber nicht als Diff gelesen. Ohne diese Zeilen bläht jeder Lauf jeden PR-Diff
 # (70 Dateien, meiste Zeilen = Zeitstempel). linguist-generated blendet sie zudem

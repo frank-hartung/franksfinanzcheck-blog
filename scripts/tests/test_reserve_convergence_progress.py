@@ -58,11 +58,18 @@ class ProgressTests(unittest.TestCase):
     def test_alte_zertifikate_bleiben_lesbar_ohne_erfundene_messung(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "cert.json"
-            path.write_text(json.dumps({"candidates": [{"ready": True}]}))
-            result = rc.cert_state(path)
+            posts = Path(tmp) / "content" / "posts"
+            index = posts / "legacy" / "index.md"
+            index.parent.mkdir(parents=True)
+            raw = b"---\ndraft: true\nreserve: true\n---\nTest.\n"
+            index.write_bytes(raw)
+            path.write_text(json.dumps({"candidates": [{
+                "slug": "legacy", "ready": True,
+                "sha256": hashlib.sha256(raw).hexdigest()}]}))
+            result = rc.cert_state(path, posts)
             self.assertEqual(result["ready"], 1)
             self.assertEqual([], rc.partial_progress(result, state(59, "neu")))
-            for candidates in ("defekt", [None, "defekt"]):
+            for candidates in ("defekt", [None, "defekt"], [{"ready": True}]):
                 path.write_text(json.dumps({"candidates": candidates}))
                 self.assertEqual(rc.cert_state(path)["ready"], 0)
 
