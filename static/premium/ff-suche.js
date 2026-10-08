@@ -12,6 +12,10 @@
  * als HTML-Fragment mit <mark>; sie werden hier zerlegt und als Text über
  * textContent eingesetzt. Verlinkt wird nur gleich-seitiger Pfad (/…).
  *
+ * TREFFER: Ein Treffer zählt nur mit sichtbarer, passender Fundstelle oder Titel
+ *  (Pagefind liefert sonst Teilstücke wie einzelne Buchstaben). Angezeigt
+ *  werden zuerst 10; der Knopf „Mehr Treffer anzeigen“ lädt die nächste
+ *  Seite nach – die Zählzeile nennt immer die Gesamtzahl.
  * LADEN: Der Index wird erst bei der ersten Eingabe geladen, nicht schon
  * beim Seitenaufruf (Bandbreite, Lighthouse).
  *
@@ -40,7 +44,8 @@
     });
   }
 
-  /* Auszug (HTML mit <mark>) → Liste aus { text, markiert }. Fremde Tags fallen weg. */
+  /* Auszug (HTML mit <mark>) → Liste aus { text, markiert }. Nur <mark> zählt als Markierung;
+     fremdes Markup bleibt Text. Ausgegeben wird ausschließlich über textContent. */
   function auszugSegmente(auszug) {
     var teile = String(auszug || '').split(/(<\/?mark\b[^>]*>)/i);
     var segmente = [];
@@ -49,7 +54,7 @@
       if (!teil) { return; }
       if (/^<mark\b/i.test(teil)) { markiert = true; return; }
       if (/^<\/mark\b/i.test(teil)) { markiert = false; return; }
-      var text = entschluesseln(teil.replace(/<[^>]*>/g, ''));
+      var text = entschluesseln(teil); // nur <mark> ist Markup; alles andere bleibt Text
       if (text) { segmente.push({ text: text, markiert: markiert }); }
     });
     return segmente;
@@ -59,6 +64,29 @@
   function sichereUrl(url) {
     var u = String(url || '');
     return (u.charAt(0) === '/' && u.charAt(1) !== '/' && u.charAt(1) !== '\\') ? u : null;
+  }
+
+  /* Vergleichsform: klein, ohne Umlaut-Punkte und ß (Kündigung = kundigung). */
+  function normalisieren(text) {
+    return String(text || '').toLowerCase().replace(/ß/g, 'ss')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  /* Pagefind bestätigt bei unbekannten Begriffen auch Teilstücke (z. B. das
+     einzelne Zeichen „z.“ aus „z.B.“). Ein Treffer zählt deshalb nur, wenn
+     eine markierte Fundstelle oder der Titel den Anfang eines Suchworts trägt
+     (die ersten fünf Buchstaben). Flexion (Kündigungsfristen) bleibt treffbar. */
+  function fundstelleTrifft(d, begriff) {
+    var woerter = normalisieren(begriff).split(/\s+/).filter(function (w) { return w.length >= 2; });
+    if (!woerter.length) { return false; }
+    var quellen = auszugSegmente(d.excerpt || '').filter(function (s) { return s.markiert; })
+      .map(function (s) { return s.text; });
+    if (d.meta && d.meta.title) { quellen.push(String(d.meta.title)); }
+    var texte = quellen.map(normalisieren);
+    return woerter.some(function (w) {
+      var wurzel = w.slice(0, 5);
+      return texte.some(function (t) { return t.indexOf(wurzel) !== -1; });
+    });
   }
 
   /* Zählzeile in ganzen Sätzen – ohne Pluralfehler. */
@@ -82,9 +110,13 @@
     if (!form || !eingabe || !status || !liste) { return null; }
 
     var pfad = root.getAttribute('data-ff-suche-pfad') || '/pagefind/pagefind.js';
+    var mehrKnopf = root.querySelector('[data-ff-suche-mehr]');
     var indexZusage = null;
     var laufendeNummer = 0;
     var timer = null;
+    var trefferListe = [];   // voller gefilterter Satz der laufenden Suche
+    var trefferBegriff = '';
+    var sichtbar = 0;        // wie viele davon in der Liste stehen
 
     function index() {
       if (!indexZusage) {
@@ -131,40 +163,62 @@
       return li;
     }
 
-    function zeigeErgebnis(ergebnis, begriff) {
+    function zeigeErgebnis(echte, begriff) {
       liste.textContent = '';
-      if (ergebnis.gesamt === 0) {
+      trefferListe = echte;
+      trefferBegriff = begriff;
+      sichtbar = 0;
+      if (mehrKnopf) { mehrKnopf.hidden = true; }
+      if (!echte.length) {
         status.textContent = trefferText(0, begriff) +
           ' Probiere einen allgemeineren Begriff, zum Beispiel Frist oder Rechner.';
         return;
       }
-      var hinweis = ergebnis.gesamt > ergebnis.daten.length
-        ? ' Die ersten ' + ergebnis.daten.length + ' werden angezeigt.'
+      rendereSeite();
+    }
+
+    /* Die nächste Seite der Trefferliste anhängen (höchstens MAX_TREFFER
+       je Klick); die Zählzeile nennt weiter die Gesamtzahl. */
+    function rendereSeite() {
+      var ende = Math.min(trefferListe.length, sichtbar + MAX_TREFFER);
+      for (var i = sichtbar; i < ende; i++) {
+        liste.appendChild(trefferZeile(trefferListe[i]));
+      }
+      sichtbar = ende;
+      var rest = trefferListe.length - sichtbar;
+      if (mehrKnopf) {
+        mehrKnopf.hidden = rest <= 0;
+        mehrKnopf.textContent = rest > 0
+          ? 'Mehr Treffer anzeigen (noch ' + rest + ')'
+          : 'Mehr Treffer anzeigen';
+      }
+      var hinweis = (rest > 0 && !mehrKnopf)
+        ? ' Die ersten ' + sichtbar + ' werden angezeigt.'
         : '';
-      status.textContent = trefferText(ergebnis.gesamt, begriff) + hinweis;
-      ergebnis.daten.forEach(function (d) { liste.appendChild(trefferZeile(d)); });
+      status.textContent = trefferText(trefferListe.length, trefferBegriff) + hinweis;
     }
 
     function zeigeFehler() {
       liste.textContent = '';
+      if (mehrKnopf) { mehrKnopf.hidden = true; }
       status.textContent = 'Die Suche konnte gerade nicht geladen werden. Bitte die Seite neu laden oder Artikel und Werkzeuge über das Menü öffnen.';
     }
 
     function suche(begriff) {
       var nummer = ++laufendeNummer;
       liste.textContent = '';
+      if (mehrKnopf) { mehrKnopf.hidden = true; }
       status.textContent = 'Suche läuft …';
       index().then(function (pf) {
         return pf.search(begriff).then(function (antwort) {
-          var treffer = antwort.results || [];
-          var ersten = treffer.slice(0, MAX_TREFFER);
-          return Promise.all(ersten.map(function (t) { return t.data(); })).then(function (daten) {
-            return { gesamt: treffer.length, daten: daten };
+          var kandidaten = antwort.results || [];
+          return Promise.all(kandidaten.map(function (t) { return t.data(); })).then(function (alle) {
+            return alle.filter(function (d) { return fundstelleTrifft(d, begriff); });
           });
         });
-      }).then(function (ergebnis) {
+      }).then(function (echte) {
         if (nummer !== laufendeNummer) { return; } // veraltete Antwort verwerfen
-        zeigeErgebnis(ergebnis, begriff);
+        zeigeErgebnis(echte, begriff);
       }).catch(function () {
         if (nummer !== laufendeNummer) { return; }
         zeigeFehler();
@@ -176,6 +230,7 @@
       if (begriff.length < MIN_ZEICHEN) {
         laufendeNummer++; // laufende Suche verwerfen
         liste.textContent = '';
+        if (mehrKnopf) { mehrKnopf.hidden = true; }
         status.textContent = begriff ? 'Gib mindestens zwei Zeichen ein.' : '';
         return;
       }
@@ -191,9 +246,14 @@
       window.clearTimeout(timer);
       aktualisiere();
     });
+    if (mehrKnopf) {
+      mehrKnopf.addEventListener('click', function () {
+        rendereSeite(); // nächste Seite der bereits gefilterten Treffer
+      });
+    }
 
     form.hidden = false; // ohne JavaScript bleibt das Formular verborgen
-    return { suche: suche, aktualisiere: aktualisiere };
+    return { suche: suche, aktualisiere: aktualisiere, rendereSeite: rendereSeite };
   }
 
   function beimLaden() {
@@ -208,6 +268,8 @@
     auszugSegmente: auszugSegmente,
     sichereUrl: sichereUrl,
     trefferText: trefferText,
+    fundstelleTrifft: fundstelleTrifft,
+    normalisieren: normalisieren,
     ffSucheStarten: ffSucheStarten
   };
 

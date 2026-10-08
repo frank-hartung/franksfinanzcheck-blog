@@ -227,6 +227,30 @@ class GemeinsamerClient(unittest.TestCase):
     def test_alle_rufer_nutzen_llm_client(self):
         self.assertEqual(kt.t6_ein_transportweg(kt.lade_ssot()), [])
 
+    def test_nebenstrecke_neben_dem_client_wird_gemeldet(self):
+        """Sabotage: import llm_client plus direkter Endpunkt ist T6-Bruch."""
+        probe = SCRIPTS / ".vertragstest_t6.py"
+        spur = "https://api." + "groq.com/x"
+        probe.write_text(f'import llm_client\nURL = "{spur}"\n',
+                         encoding="utf-8")
+        kt.RUFER.append("scripts/.vertragstest_t6.py")
+        try:
+            befunde = kt.t6_ein_transportweg(kt.lade_ssot())
+        finally:
+            kt.RUFER.remove("scripts/.vertragstest_t6.py")
+            probe.unlink(missing_ok=True)
+        self.assertTrue(any("T6" in b and "Endpunkt" in b for b in befunde),
+                        "T6 übersieht einen direkten Modell-Endpunkt.")
+
+    def test_alt_texte_sind_ueber_den_client_angebunden(self):
+        """#647: Cover-Alt-Texte nutzen den gemeinsamen Weg, nicht Gemini direkt."""
+        self.assertIn("scripts/alt_text_vorschlaege.py", kt.RUFER)
+        text = (ROOT / "scripts" / "alt_text_vorschlaege.py").read_text(
+            encoding="utf-8")
+        self.assertIn("import llm_client", text)
+        self.assertNotIn("generativelanguage.googleapis.com", text,
+                         "kein zweiter Gemini-Endpunkt neben llm_client")
+
     def test_betroffene_skripte_haben_eine_nachvollziehbare_reihenfolge(self):
         for rel in ("scripts/faktenfrische.py",
                     "scripts/saisonaler_hero_refresh.py"):
@@ -324,7 +348,6 @@ class WriterFlags(unittest.TestCase):
     """Die CLI darf keinen kostenpflichtigen Weg mehr anbieten."""
 
     def test_writer_bieten_nur_gratis_provider_an(self):
-        import re
         for rel in ("scripts/claude_writer.py", "scripts/news_writer.py"):
             text = (ROOT / rel).read_text(encoding="utf-8")
             self.assertNotRegex(

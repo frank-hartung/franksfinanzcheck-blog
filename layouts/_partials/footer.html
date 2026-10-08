@@ -31,8 +31,8 @@
     {{- end }}
 
     <span>
-        {{- /* SUCHE 08.10.2026: Such-Link siteweit im Footer statt im Menü –
-               die Menü-Tests bleiben unberührt. Die Suche selbst: content/suche/. */ -}}
+        {{- /* SUCHE 08.10.2026: Such-Link siteweit auch im Footer – zusätzlich zum
+               Hauptmenü-Eintrag (hugo.toml). Die Suche selbst: content/suche/. */ -}}
         <a href="{{ "suche/" | absURL }}">Suche</a>
         {{- print " · " -}}
         <a href="{{ "impressum/" | absURL }}">Impressum</a>

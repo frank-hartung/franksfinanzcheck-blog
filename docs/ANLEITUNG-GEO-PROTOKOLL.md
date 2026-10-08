@@ -2,6 +2,7 @@
 
 Stand: 08.10.2026 · Skript: `scripts/geo_protokoll.py` · Tests: `scripts/tests/test_geo_protokoll.py`
 Daten: `data/geo/protokoll-JJJJ-MM.csv` (versioniert, ohne personenbezogene Angaben)
+Regeln für jeden Beitrag: `docs/GEO-REDAKTIONSPROTOKOLL.md`. Diese Anleitung beschreibt nur die monatliche Messung.
 
 ## Wozu
 

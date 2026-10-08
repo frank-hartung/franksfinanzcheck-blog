@@ -7,7 +7,8 @@ Screenreader-Nutzern nicht. Dieses Skript schlägt beschreibende Alt-Texte vor.
 
 Ablauf (Mensch bleibt in der Schleife):
   1. --report        Kandidaten zählen (fehlt / leer / Titel-Kopie)
-  2. --vorschlagen   Gemini (Gratis-Tier) beschreibt das Titelbild; Eintrag in
+  2. --vorschlagen   Gemini (Gratis-Tier, via scripts/llm_client.py)
+                     beschreibt das Titelbild; Eintrag in
                      data/alt_texte/vorschlaege.yaml mit freigegeben: false
   3. Mensch prüft   Text ändern oder übernehmen; freigegeben: true und
                      freigegeben_von: "<Name>" setzen
@@ -16,6 +17,8 @@ Ablauf (Mensch bleibt in der Schleife):
 
 Regeln:
   - Kein Automatismus: der Befehl läuft nie in einem Workflow.
+  - Der Modellaufruf geht ausschließlich durch scripts/llm_client.py
+    (T6 des KI-Transportwegs: ein Ort für Schlüssel, Retries und Kosten).
   - Ein Vorschlag wird nur angewendet, wenn der aktuelle Alt-Text noch dem
     Stand des Vorschlags entspricht (kein Überschreiben fremder Änderungen).
   - Bestehende Einträge werden nie neu erzeugt oder überschrieben.
@@ -34,7 +37,6 @@ Runbook: docs/ANLEITUNG-ALT-TEXTE.md
 from __future__ import annotations
 
 import argparse
-import base64
 import datetime as dt
 import json
 import os
@@ -42,9 +44,12 @@ import re
 import sys
 import tempfile
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
+
+BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+
+import llm_client  # noqa: E402  (T6: der einzige Modell-Transportweg)
 
 try:
     import yaml
@@ -54,7 +59,6 @@ except ImportError:  # CI installiert PyYAML; lokal: pip install pyyaml
 ROOT = Path(__file__).resolve().parents[1]
 DATEI = ROOT / "data" / "alt_texte" / "vorschlaege.yaml"
 MODELL = "gemini-3-flash-preview"  # wie in data/ki_transportweg.yaml (Gratis-Tier)
-ENDPUNKT = "https://generativelanguage.googleapis.com/v1beta/models/{modell}:generateContent"
 MAX_BYTES = 4 * 1024 * 1024
 MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}
 ALT_MAX = 125
@@ -180,29 +184,28 @@ def setze_cover_alt(text: str, neuer_alt: str) -> str:
 
 
 # ---------------------------------------------------------------- Anbieter
-def gemini_anbieter(api_key: str, modell: str = MODELL, timeout: int = 60):
-    url = ENDPUNKT.format(modell=modell)
+def gemini_anbieter(modell: str = MODELL, timeout: int = 60):
+    """Gemini-Bildbeschreibung ausschließlich über scripts/llm_client.py.
+
+    T6 des KI-Transportwegs: Schlüssel, Retries und Kosten liegen an
+    einer Stelle. Diese Fabrik sieht den Schlüssel nie – er steht nur in
+    der Umgebung (GEMINI_API_KEY) und wird vom Client gelesen.
+    """
 
     def anbieter(bild: bytes, mime: str, titel: str) -> str:
-        body = {
-            "contents": [{"role": "user", "parts": [
-                {"text": PROMPT.format(titel=titel)},
-                {"inline_data": {"mime_type": mime, "data": base64.b64encode(bild).decode("ascii")}},
-            ]}],
-            "generationConfig": {"temperature": 0.2, "maxOutputTokens": 300},
-        }
-        req = urllib.request.Request(
-            url, data=json.dumps(body).encode("utf-8"), method="POST",
-            headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
+        roh = llm_client.chat(
+            "gemini",
+            messages=[{"role": "user", "content": PROMPT.format(titel=titel)}],
+            model=modell,
+            temperature=0.2,
+            max_tokens=300,
+            timeout=timeout,
+            bilder=[{"mime": mime, "data": bild}],
         )
-        try:
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                daten = json.loads(resp.read().decode("utf-8"))
-        except urllib.error.HTTPError as e:  # Schlüssel nie ausgeben
-            raise RuntimeError(f"Gemini HTTP {e.code}") from None
-        kandidaten = daten.get("candidates") or [{}]
-        teile = (kandidaten[0].get("content") or {}).get("parts") or []
-        return "".join(t.get("text", "") for t in teile)
+        if not roh:
+            raise RuntimeError("Gemini ohne Antwort – siehe llm_client-"
+                               "Meldung im Log (Schlüssel, Modell, Kontingent)")
+        return roh
 
     return anbieter
 
@@ -464,7 +467,7 @@ def main(argv: list[str] | None = None, root: Path = ROOT, env: dict | None = No
         if not schluessel:
             print("Alt-Texte: übersprungen – GEMINI_API_KEY ist nicht gesetzt. Es wurde nichts geschrieben.")
             return 0
-        neu, verworfen = vorschlagen(root, gemini_anbieter(schluessel), args.max)
+        neu, verworfen = vorschlagen(root, gemini_anbieter(), args.max)
         print(f"Neue Vorschläge: {neu} (offen zur Prüfung in data/alt_texte/vorschlaege.yaml)")
         for seite, grund in verworfen:
             print(f"  verworfen {seite}: {grund}")

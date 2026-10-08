@@ -37,12 +37,20 @@
 #  NUR Standardbibliothek (urllib) – keine neuen Abhängigkeiten,
 #  damit alle GitHub-Workflows ohne extra pip-Installation laufen.
 #
+#  BILDER (seit 08.10.2026): Auch Bildaufrufe gehen durch diesen
+#  Client – ein Transportweg bleibt einer, auch für Cover-Alt-Texte.
+#  chat(..., bilder=[{"mime": "image/jpeg", "data": <bytes>}]) trägt
+#  die Bildteile im jeweiligen Protokoll (Gemini inline_data bzw.
+#  OpenAI-kompatible Inhalts-Teile mit data-URL). Der Vertrag T6 des
+#  Gates scripts/ki_transportweg.py erzwingt den Weg.
+#
 #  Verhalten: kein Key → None (nie ein Crash). Die Writer haben
 #  zusätzlich einen Offline-Modus (Gerüst-Entwurf), damit die
 #  Pipeline auch ohne Keys testbar bleibt.
 # ============================================================
 from __future__ import annotations
 
+import base64
 import json
 import os
 import re
@@ -163,8 +171,50 @@ def _post_json(url: str, headers: dict, payload: dict, timeout: int) -> dict:
         return json.loads(resp.read().decode("utf-8"))
 
 
+def _bild_teile(bilder) -> list:
+    """{mime, data(bytes)} → [(mime, base64-ascii)].
+
+    Fehler sind laut, nie still: Wer eine Base64-Zeichenkette oder ein
+    fehlendes Feld übergibt, bekommt einen ValueError – ein still
+    verzerrtes Bild wäre die Schadensklasse, die niemand findet.
+    """
+    teile = []
+    for b in bilder or []:
+        if not isinstance(b, dict) or not str(b.get("mime") or "").strip():
+            raise ValueError("Bildteil braucht {'mime': …, 'data': bytes}")
+        daten = b.get("data")
+        if not isinstance(daten, (bytes, bytearray)):
+            raise ValueError("Bildteil: data muss bytes sein (Rohdaten, "
+                             "nicht Base64)")
+        teile.append((str(b["mime"]).strip(),
+                      base64.b64encode(bytes(daten)).decode("ascii")))
+    return teile
+
+
+def _mit_bildern(messages: list, bild_teile: list) -> list:
+    """OpenAI-kompatible Inhalts-Teile: Bilder an die letzte User-Nachricht."""
+    if not bild_teile:
+        return messages
+    letzte_user = max((i for i, m in enumerate(messages)
+                       if m.get("role") != "assistant"), default=-1)
+    aus = []
+    for i, m in enumerate(messages):
+        if i != letzte_user:
+            aus.append(m)
+            continue
+        inhalt = []
+        if m.get("content"):
+            inhalt.append({"type": "text", "text": m["content"]})
+        for mime, b64 in bild_teile:
+            inhalt.append({"type": "image_url",
+                           "image_url": {"url": f"data:{mime};base64,{b64}"}})
+        aus.append({"role": m.get("role", "user"),
+                    "content": inhalt or [{"type": "text", "text": ""}]})
+    return aus
+
+
 def _call_openai_like(url, api_key, messages, system, model,
-                      temperature, max_tokens, timeout):
+                      temperature, max_tokens, timeout, bild_teile=None):
     """Chat-Completions-PROTOKOLL (nicht der Anbieter OpenAI).
 
     Groq, NVIDIA NIM und Cloudflare Workers AI sprechen alle dieses
@@ -174,7 +224,7 @@ def _call_openai_like(url, api_key, messages, system, model,
     msgs = []
     if system:
         msgs.append({"role": "system", "content": system})
-    msgs.extend(messages)
+    msgs.extend(_mit_bildern(messages, bild_teile))
     payload = _post_json(
         url,
         {
@@ -220,23 +270,33 @@ def _ohne_denkspuren(text: str) -> str:
 
 
 def _call_openai_kompatibel_frei(provider, messages, system, model,
-                                 temperature, max_tokens, timeout):
+                                 temperature, max_tokens, timeout,
+                                 bild_teile=None):
     """NVIDIA NIM und Cloudflare Workers AI – beide OpenAI-kompatibel."""
     url = NVIDIA_URL if provider == "nvidia" else cloudflare_url()
     roh = _call_openai_like(url, key_for(provider), messages, system, model,
-                            temperature, max_tokens, timeout)
+                            temperature, max_tokens, timeout, bild_teile)
     return _ohne_denkspuren(roh or "")
 
 
-def _call_gemini(messages, system, model, temperature, max_tokens, timeout):
+def _call_gemini(messages, system, model, temperature, max_tokens, timeout,
+                 bild_teile=None):
     key = key_for("gemini")
     url = ("https://generativelanguage.googleapis.com/v1beta/models/"
            f"{model}:generateContent?key={key}")
+    letzte_user = max((i for i, m in enumerate(messages)
+                       if m.get("role") != "assistant"), default=-1)
     contents = []
-    for m in messages:
+    for i, m in enumerate(messages):
+        teile = []
+        if m["content"]:
+            teile.append({"text": m["content"]})
+        if bild_teile and i == letzte_user:
+            for mime, b64 in bild_teile:
+                teile.append({"inline_data": {"mime_type": mime, "data": b64}})
         contents.append({
             "role": "user" if m["role"] != "assistant" else "model",
-            "parts": [{"text": m["content"]}],
+            "parts": teile or [{"text": ""}],
         })
     body = {
         "contents": contents,
@@ -263,12 +323,18 @@ def chat(provider: str,
          temperature: float = 0.4,
          max_tokens: int = 4096,
          timeout: int = 180,
-         attempts: int = 3) -> str | None:
+         attempts: int = 3,
+         bilder: list | None = None) -> str | None:
     """Einheitlicher Chat-Call. Liefert Antworttext oder None.
 
     None bedeutet: Provider nicht verfügbar (kein Key) oder endgültiger
     Fehler nach allen Retries. Aufrufer entscheiden selbst über den
     Fallback – dieser Client wirft nie in die Pipeline hinein.
+
+    `bilder` nimmt optional [{'mime': 'image/jpeg', 'data': <bytes>}]
+    entgegen und trägt die Bildteile über denselben Weg aus (T6: ein
+    Transportweg bleibt einer – auch für Bildaufrufe). Ungültige
+    Bildangaben wirfen einen ValueError (Aufruferfehler, laut und früh).
     """
     if provider in ENTFERNT:
         # Lauter Fehlschlag statt stillem None: Ein alter Aufruf soll
@@ -283,6 +349,7 @@ def chat(provider: str,
     if messages is None:
         messages = [{"role": "user", "content": prompt or ""}]
     model = model_for(provider, model)
+    bild_teile = _bild_teile(bilder)
 
     last_err: Exception | None = None
     for i in range(max(1, attempts)):
@@ -290,15 +357,16 @@ def chat(provider: str,
             if provider in ("nvidia", "cloudflare"):
                 return _call_openai_kompatibel_frei(
                     provider, messages, system, model,
-                    temperature, max_tokens, timeout)
+                    temperature, max_tokens, timeout, bild_teile)
             if provider == "gemini":
                 return _call_gemini(messages, system, model,
-                                    temperature, max_tokens, timeout)
+                                    temperature, max_tokens, timeout,
+                                    bild_teile)
             if provider == "groq" and groq_config:
                 msgs = []
                 if system:
                     msgs.append({"role": "system", "content": system})
-                msgs.extend(messages)
+                msgs.extend(_mit_bildern(messages, bild_teile))
                 return groq_config.chat(messages=msgs,
                                         temperature=temperature,
                                         max_tokens=max_tokens,

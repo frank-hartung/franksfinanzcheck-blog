@@ -85,12 +85,16 @@ NPM_PFLICHT = ("ki:transportweg", "ki:status", "test:ki")
 
 # Skripte, die ein Modell rufen – sie müssen über den gemeinsamen
 # Client gehen (T6). Wer hier etwas hinzufügt, erweitert den Vertrag.
-RUFER = (
+# Liste (nicht Tupel): Der Selbsttest hängt eine Sabotage-Probe an.
+RUFER = [
     "scripts/claude_writer.py",
     "scripts/news_writer.py",
     "scripts/faktenfrische.py",
     "scripts/saisonaler_hero_refresh.py",
-)
+    # Vertragserweiterung 08.10.2026: Die Cover-Alt-Texte (#647) rufen
+    # Gemini mit Bildteil – derselbe Weg wie jeder andere Modellaufruf.
+    "scripts/alt_text_vorschlaege.py",
+]
 
 # Workflows, die ein Sprachmodell rufen → die Aufgabe, die sie bedienen.
 # T9 verlangt, dass jeder davon mindestens ZWEI Gratis-Schlüssel
@@ -343,8 +347,27 @@ def t5_keine_bruecken(_ssot: dict) -> list[str]:
     return befunde
 
 
+# Modell-Endpunkte, die im Quelltext eines RUFER-Skripts nichts zu
+# suchen haben (T6). Frei verfügbare Hoster sind eingeschlossen: Auch
+# ein 0-€-Endpunkt neben dem Client ist ein zweiter Transportweg.
+# Nur scripts/llm_client.py spricht sie an – bewusst außerhalb der
+# RUFER-Liste.
+DIREKTE_ENDPUNKTE = (
+    (r"https?://generativelanguage\.googleapis\.com", "Gemini-Endpunkt"),
+    (r"https?://api\.groq\.com", "Groq-Endpunkt"),
+    (r"https?://integrate\.api\.nvidia\.com", "NVIDIA-Endpunkt"),
+    (r"https?://api\.cloudflare\.com", "Cloudflare-Endpunkt"),
+)
+
+
 def t6_ein_transportweg(_ssot: dict) -> list[str]:
-    """Alle Rufer gehen über scripts/llm_client.py."""
+    """Alle Rufer gehen über scripts/llm_client.py – auch die Endpunkte.
+
+    Zwei Prüfungen je Rufer: (1) der gemeinsame Client wird importiert,
+    (2) kein direkter Modell-Endpunkt im Quelltext. „import llm_client“
+    allein genügt nicht – ein zweiter urllib-Aufruf neben dem Client ist
+    ein zweiter Transportweg mit eigenem Schlüssel, Retries und Kosten.
+    """
     befunde = []
     for rel in RUFER:
         pfad = ROOT / rel
@@ -357,6 +380,11 @@ def t6_ein_transportweg(_ssot: dict) -> list[str]:
                 f"T6: {rel} ruft ein Modell, ohne den gemeinsamen Client zu "
                 "importieren. Ein zweiter Transportweg heißt: zwei Orte für "
                 "Schlüssel, Retries und Kosten.")
+        for muster, klartext in DIREKTE_ENDPUNKTE:
+            if re.search(muster, text):
+                befunde.append(
+                    f"T6: {rel} spricht {klartext} direkt an. Der "
+                    "Modellaufruf gehört nach scripts/llm_client.py.")
     return befunde
 
 
@@ -804,6 +832,34 @@ def selftest() -> list[str]:
                           "nicht gefunden.")
     finally:
         probe.unlink(missing_ok=True)
+
+    # ST9d: T6 muss beide Seiten des Vertrags beweisen – Import des
+    #       gemeinsamen Clients UND kein direkter Modell-Endpunkt.
+    t6_endpunkt = ROOT / "scripts" / ".transportweg_t6_endpunkt.py"
+    t6_client = ROOT / "scripts" / ".transportweg_t6_client.py"
+    try:
+        # Literale bewusst zusammengesetzt (Hausstil der Selbstproben).
+        spur = "https://api." + "groq.com/openai/v1/chat/completions"
+        t6_endpunkt.write_text(
+            f'import llm_client\nURL = "{spur}"\n', encoding="utf-8")
+        t6_client.write_text(
+            'URL = "https://" + "example.invalid/x"\n', encoding="utf-8")
+        RUFER.append("scripts/.transportweg_t6_endpunkt.py")
+        RUFER.append("scripts/.transportweg_t6_client.py")
+        try:
+            treffer = t6_ein_transportweg(echt)
+        finally:
+            RUFER.remove("scripts/.transportweg_t6_endpunkt.py")
+            RUFER.remove("scripts/.transportweg_t6_client.py")
+        if not any("Endpunkt" in t for t in treffer):
+            fehler.append("Sabotage 'direkter Modell-Endpunkt': T6 hat die "
+                          "Nebenstrecke neben llm_client nicht gefunden.")
+        if not any("gemeinsamen Client" in t for t in treffer):
+            fehler.append("Sabotage 'Ruft ohne llm_client': T6 hat den "
+                          "fehlenden Import nicht gefunden.")
+    finally:
+        t6_endpunkt.unlink(missing_ok=True)
+        t6_client.unlink(missing_ok=True)
 
     # ST9: Kostenklassen-Karte und Client müssen deckungsgleich bleiben.
     for a in (echt.get("anbieter") or []):

@@ -126,6 +126,8 @@ npm run werkzeuge:check                               # Werkzeuge W1–W7: Selbs
 npm run test:werkzeuge                               # 18 Gate-Unit-Tests + 55 Rechenkern-Tests (jsdom)
 npm run robustheit:check                              # Robustheit R1–R13: Selbsttest + Quelle + Build + gebaute Wahrheit
 npm run test:robustheit                               # Robustheit: Gate-Selbsttest + Unit-Tests + Verhalten im jsdom
+npm run test:suche                                    # Suche: jsdom + Suchindex-Wache (Selbsttest) + Python-Verträge (#644)
+npm run test:suche:browser                            # Suche im Chromium: Trefferregel, Datenschutz, Tastatur, Mobil
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
 npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (33 Regressionstests, C30)
