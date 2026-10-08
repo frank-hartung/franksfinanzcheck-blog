@@ -49,7 +49,8 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import yaml  # noqa: E402
-from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
+from post_utils import (list_post_paths, slug_of, join_article,  # noqa: E402
+                        doppel_freies_feld)
 
 PLAN_FILE = os.path.join(BLOG_DIR, "data", "pinterest_plan.yaml")
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-PIN-TEXT-SYNC-REPORT.md")
@@ -117,6 +118,7 @@ def fm_set(content: str, key: str, value: str) -> str:
         fm2 = re.sub(rf"^{re.escape(key)}\s*:.*$", line, fm, count=1, flags=re.M)
     else:
         fm2 = fm.rstrip("\n") + "\n" + line + "\n"
+    fm2 = doppel_freies_feld(fm2, key)      # F7-Schlussregel (WF-54C4 #643)
     return join_article(fm2, body)
 
 

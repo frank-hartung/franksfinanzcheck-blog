@@ -343,6 +343,39 @@ def join_article(fm, body, prefix=""):
             f"{(body or '').lstrip(chr(10))}")
 
 
+def doppel_freies_feld(fm: str, key: str) -> str:
+    """Nur EIN Top-Level-Feld `key` im Frontmatter – der ERSTE Treffer bleibt.
+
+    F7 (WF-54C4 #643, 08.10.2026): Ein doppelter Mapping-Schlüssel lässt Hugo
+    den ganzen Build abbrechen (`mapping key "…" already defined`), während
+    PyYAML dieselbe Datei still liest (der letzte Wert gewinnt). Ein Schreiber,
+    der nur das ERSTE Vorkommen ersetzt (`count=1`), ließe die zweite Zeile
+    stehen – er würde die Bau-Falle damit nicht heilen, sondern nur unsichtbar
+    machen. Diese Schlussregel gehört zu JEDEM FM-Schreiber: nach dem Schreiben
+    existiert der Schlüssel genau einmal; die Zeilen des Duplikats fallen weg
+    (eine etwaige Blockliste des Duplikats inklusive – sie ist Inhalt desselben
+    Schlüssels, kein eigener Eintrag).
+
+    Der erste Treffer bleibt stehen, weil ihn der Aufrufer soeben geschrieben
+    hat; alles andere im Block wird Byte für Byte übernommen.
+    """
+    muster = re.compile(rf"^{re.escape(key)}:")
+    fortsetzung = re.compile(r"^[ \t]*-[ \t]*\S")
+    zeilen, raus, gesehen, ueberspringen = fm.split("\n"), [], False, False
+    for zeile in zeilen:
+        if ueberspringen:
+            if fortsetzung.match(zeile):
+                continue
+            ueberspringen = False
+        if muster.match(zeile):
+            if gesehen:
+                ueberspringen = True
+                continue
+            gesehen = True
+        raus.append(zeile)
+    return "\n".join(raus)
+
+
 def glued_close(text):
     """(Zeilenindex, Kleberest) der Frontmatter-Schlussgrenze.
 
