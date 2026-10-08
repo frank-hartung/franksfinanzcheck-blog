@@ -182,3 +182,47 @@ Sie haben eine Verschiebung gemeldet, bevor sie in Produktion ging.
 | `/presse/` | „Presse, Interviews und fachliche Zusammenarbeit“ |
 | `/studien/` | „Daten, die man prüfen und zitieren kann“ |
 | `/studien/fixkosten-index-2026-q4/` | „Fixkosten-Index Deutschland: Energie-Baseline Q4 2026“ |
+
+---
+
+## Nachhärtung des Audits (08.10.2026)
+
+Die Dauerheilung aus #623/#630 war bereits im Bestand. Bei der erneuten
+Premium-Abnahme fiel jedoch eine Implementierungslücke zwischen Anspruch und
+Code auf: `a11y_audit.py` enthielt trotz des dokumentierten Single-Source-
+Anspruchs noch eine eigene Ersatzliste, übersprang HTML-Dateien zusätzlich
+über nicht dokumentierte Asset-/Substring-Filter und meldete einen fehlenden
+`public/`-Build mit Exit 0. Außerdem verwendeten Build-Wache und A11y-Audit
+unterschiedliche Regex-Pfade für die H1-Erkennung. Das konnte eine grüne
+Meldung ohne vollständige Prüfung erzeugen.
+
+**Nachgehärtet:**
+
+- `h1_wache.py` und `a11y_audit.py` verwenden jetzt denselben
+  HTML-aware Parser aus der Python-Standardbibliothek. HTML in Kommentaren,
+  Skriptstrings oder inertem `<template>` wird nicht als Seiten-H1 gezählt;
+  `&amp;` bleibt sichtbarer Text, während NBSP-, numerische und reine
+  Zero-Width-Zeichen keine gefüllte H1 vortäuschen.
+- Die Ausnahmen sind routenscharf und ausschließlich in `h1_wache.py`
+  registriert. Das A11y-Audit hat keine Ersatzliste, keine pauschalen
+  `assets`-/Substring-Skips und prüft wieder alle nicht ausgenommenen HTML-
+  Dateien – auch wenn sie in einem Ordner `assets/` liegen.
+- Fehlende Wache, fehlender Build oder null prüfbare HTML-Seiten sind jetzt
+  **Exit 2 / `ok: false`**, nicht „übersprungen und grün“. Eine einzelne
+  leere oder unsichtbare H1 wird im Voll-Audit ebenfalls ausdrücklich
+  gemeldet.
+- Vertrag C30 prüft den gemeinsamen Parser, das eine Ausnahmenregister,
+  fail-closed-Verhalten, die Regressionstests sowie deren Verdrahtung in
+  Deploy, npm und E2E-Pfadfilter. Der alte, falsche Template-Kommentar zur
+  angeblich gewinnenden `layouts/single.html`-Auflösung ist bereinigt.
+
+**Nachweis der Nachhärtung:** `hugo --minify --destination public
+--cleanDestinationDir` erfolgreich (78 Hugo-Seiten, 107 HTML-Dateien);
+`h1_wache.py --source-only` und `--public public` grün; A11y-Audit über alle
+75 prüfbaren Seiten **0 Probleme, 0 Kontrast-Fehler**; H1-/A11y-Regressionen
+**33/33 grün**; `governance_contract.py --selftest` **C1–C30 grün**.
+
+Sabotage-Gegenprobe: ohne `public/` sowie ohne H1-Wache liefert das Audit
+jeweils Exit 2 und `ok: false`; in `assets/`, in einer `BingSiteAuth.html`
+oder in einer Unterseite namens `google-example.html` versteckte HTML-Seiten
+fallen nicht mehr aus dem Vollscan.

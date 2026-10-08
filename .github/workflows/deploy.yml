@@ -425,6 +425,7 @@ jobs:
       - name: H1-Wache – Quell- und Layoutvertrag (genau eine H1)
         run: |
           python3 scripts/h1_wache.py --selftest
+          python3 -m unittest scripts.tests.test_h1_wache scripts.tests.test_a11y_audit
           python3 scripts/h1_wache.py --source-only
 
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================

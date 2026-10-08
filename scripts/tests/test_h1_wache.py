@@ -90,7 +90,7 @@ class LayoutWacheTests(unittest.TestCase):
 
     def test_baustein_traegt_genau_eine_h1_und_ehrt_heading(self):
         text = wache._lesen(wache.ARTIKEL_BAUSTEIN)
-        self.assertEqual(len(wache.H1_TAG.findall(text)), 1)
+        self.assertEqual(len(wache.h1_der_seite(text)), 1)
         self.assertIn(".Params.heading", text)
 
     def test_zweiter_baustein_im_template_ist_ein_befund(self):
@@ -108,6 +108,24 @@ class LayoutWacheTests(unittest.TestCase):
                 '<h1>{{ .Params.heading | default .Title }}</h1>', encoding="utf-8")
             funde = wache.s2_layout(wurzel)
             self.assertTrue(funde, "eine eigene H1 im Template muss auffallen")
+
+
+class HTMLH1ParserTests(unittest.TestCase):
+    def test_echte_h1_werden_gezaehlt_skript_kommentar_und_template_nicht(self):
+        html = (
+            '<!-- <h1>Kommentar</h1> -->'
+            '<script>const markup = "<h1>Skript</h1>";</script>'
+            '<template><h1>Inerte Vorlage</h1></template>'
+            '<h1>Text &amp; <em>Mehr</em></h1>'
+        )
+        self.assertEqual(wache.h1_der_seite(html), ["Text & Mehr"])
+
+    def test_entities_sind_text_und_unicode_leerzeichen_bleiben_leer(self):
+        self.assertEqual(wache.h1_der_seite("<h1>&amp;</h1>"), ["&"])
+        self.assertEqual(wache.h1_der_seite("<h1>&nbsp;&#160;&#xA0;</h1>"), [""])
+
+    def test_unvollstaendige_h1_wird_trotzdem_gezaehlt(self):
+        self.assertEqual(wache.h1_der_seite("<h1>Offene Überschrift"), ["Offene Überschrift"])
 
 
 class BuildWacheTests(unittest.TestCase):
@@ -144,6 +162,15 @@ class BuildWacheTests(unittest.TestCase):
             # Ausnahme eine Lücke mit Etikett.
             self.assertTrue(any("page/2/index.html" in f for f in wache.s3_build(public, ausnahmen=())))
 
+    def test_ausnahmen_sind_routenscharf(self):
+        self.assertTrue(wache.ausnahme_grund("google123.html"))
+        self.assertTrue(wache.ausnahme_grund("page/2/index.html"))
+        self.assertTrue(wache.ausnahme_grund("posts/page/2/index.html"))
+        self.assertEqual(wache.ausnahme_grund("docs/google123.html"), "")
+        self.assertEqual(wache.ausnahme_grund("page/2/inhalt.html"), "")
+        self.assertEqual(wache.ausnahme_grund("go/strom/index.html"), "")
+        self.assertTrue(wache.ausnahme_grund("go/strom/index.html", wache.AUSNAHMEN_SEITE))
+
     def test_jede_ausnahme_traegt_einen_grund(self):
         for muster, grund in wache.AUSNAHMEN_H1 + wache.AUSNAHMEN_SEITE:
             self.assertGreater(len(grund.strip()), 10, f"Ausnahme {muster} ohne Begründung")
@@ -151,7 +178,7 @@ class BuildWacheTests(unittest.TestCase):
     def test_h1_wache_prueft_strenger_als_das_vollaudit(self):
         # /go/ hat eine H1, aber keine Seitennavigation: die H1-Wache
         # prüft sie (eine H1 ist eine H1), das Komplett-Audit nicht.
-        self.assertTrue(any(m == r"^go/" for m, _ in wache.AUSNAHMEN_SEITE))
+        self.assertTrue(any(m == r"^go/[^/]+/index\.html$" for m, _ in wache.AUSNAHMEN_SEITE))
         self.assertFalse(any(m == r"^go/" for m, _ in wache.AUSNAHMEN_H1))
 
     def test_echter_build_ist_gruen(self):
