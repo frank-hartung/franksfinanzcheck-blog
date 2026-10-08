@@ -47,7 +47,7 @@ Dein **DSL-Anbieter** belohnt Treue fast nie. Meist zahlst du nach zwei Jahren d
 
 Das **Wechseln** gelingt heute unkompliziert und ohne Technik-Chaos. Neukunden locken die Provider mit extremen Rabatten und hohen Gutschriften.
 
-Bestandskunden finanzieren diese Angebote oft durch überhöhte Grundgebühren. Hier erfährst du, wie du effektiv **[Geld sparen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)** kannst. Nutze die Freiheit der neuen Gesetze für deinen Vorteil.
+Wer schon lange beim selben Anbieter ist, zahlt oft mehr als neue Kunden. Hier erfährst du, wie du effektiv **[Geld sparen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)** kannst. Nutze die Freiheit der neuen Gesetze für deinen Vorteil.
 
 **Das Wichtigste in Kürze**
 - **Wechsel-Logik:** Bestpreise erhalten fast ausschließlich Neukunden oder Rückkehrer nach einer Sperrfrist.
@@ -65,11 +65,11 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum lohnt es sich, den DSL-Anbieter regelmäßig zu vergleichen?
 
-Die Telekommunikationsbranche kalkuliert ihre Gewinne über lange Zeiträume. In den ersten zwei Jahren verdienen die Anbieter oft kaum an dir. Marketing und Hardware-Rabatte drücken die Marge des Providers. Erst danach sprudeln die Gewinne durch hohe Standardpreise.
+Für Anbieter zählt nicht nur der Preis zum Start. Sie rechnen damit, dass Kunden viele Jahre bleiben. In den ersten zwei Jahren verdienen die Anbieter oft kaum an dir. Werbung und Rabatte auf Router kosten den Anbieter Geld. Erst danach sprudeln die Gewinne durch hohe Standardpreise.
 
 Hinterfrage deinen **DSL-Anbieter** deshalb alle 24 Monate konsequent. Ein neuer Vertrag bringt dir oft nicht nur eine Ersparnis.
 
-Du profitierst häufig von modernerer Technik wie Glasfaser (FTTH). So steigerst du die [Internetgeschwindigkeit](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) in deinem Zuhause deutlich. Ein Wechsel wirkt wie eine Verjüngungskur für deine digitale Infrastruktur.
+Du profitierst häufig von modernerer Technik wie Glasfaser (FTTH). So steigerst du die [Internetgeschwindigkeit](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) in deinem Zuhause deutlich. Prüfe aber erst, welche Leitung an deiner Adresse liegt. Ein neuer Tarif allein macht dein Netz noch nicht schneller.
 
 Viele alte Verträge schleppen zudem unnötigen Ballast mit. Vielleicht zahlst du noch für eine Festnetz-Flatrate, die du nie nutzt.
 
@@ -83,13 +83,13 @@ Zerlege die Kosten in einzelne Positionen. Was kostet die reine Internetleitung 
 
 Wie viel zahlst du für die Miete deines Routers? Oft verstecken sich [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) für Sicherheitspakete oder Cloud-Speicher in der Rechnung. Diese kosten oft 2 € bis 5 € zusätzlich.
 
-Notiere dir das Ende deiner Mindestvertragslaufzeit genau. Dank moderner Gesetze bist du danach sehr flexibel.
+Notiere, bis wann du an deinen Vertrag gebunden bist. Dank moderner Gesetze bist du danach sehr flexibel.
 
 Du kündigst dann mit einer Frist von nur einem Monat. Das nimmt den Zeitdruck aus deiner Entscheidung. Nur wer seine Kosten schwarz auf weiß kennt, erkennt ein echtes Schnäppchen.
 
 ## Welche Fehler kosten dich beim Wechseln wirklich Geld?
 
-Wähle nicht einfach das erste Angebot in einer Suchmaschine. Klassische Fehler vernichten deinen Spareffekt sofort. Sie sorgen zudem für unnötigen Ärger im digitalen Alltag.
+Wähle nicht einfach das erste Angebot in einer Suchmaschine. Schon ein kleiner Fehler kann die ganze Ersparnis aufzehren. Sie sorgen zudem für unnötigen Ärger im digitalen Alltag.
 
 Ein häufiger Fehler betrifft die Einmalkosten. Ein Vertrag wirkt durch eine niedrige Grundgebühr sehr günstig.
 
@@ -133,9 +133,9 @@ Ein Wechsel lohnt sich meist ab einer Ersparnis von 10 % – bezogen auf deine 
 
 ## Kündigungsfenster sichern: So gelingt der reibungslose Übergang
 
-Niemand möchte tagelang ohne Internet dastehen. Das Gesetz [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor langen Ausfallzeiten. Dein alter Anbieter versorgt dich theoretisch weiter, bis die neue Leitung steht. Dennoch ist eine gute Planung für den Erfolg entscheidend.
+Wer zu Hause arbeitet, braucht einen Anschluss, auf den er sich verlassen kann. Das Gesetz [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor langen Ausfallzeiten. Dein alter Anbieter versorgt dich theoretisch weiter, bis die neue Leitung steht. Dennoch ist eine gute Planung für den Erfolg entscheidend.
 
-Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit bevollmächtigst du den neuen Provider zur Kündigung. Er koordiniert auch die Mitnahme deiner Rufnummer. Die Unternehmen stimmen den Schalttermin dann direkt untereinander ab.
+Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit darf der neue Anbieter den alten Vertrag für dich kündigen. Er koordiniert auch die Mitnahme deiner Rufnummer. Beide Anbieter klären dann direkt, an welchem Tag sie die Leitung umstellen.
 
 **So gehst du vor beim Wechselprozess:**
 1. **Bedarf ermitteln:** Welche Geschwindigkeit [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) für dein Homeoffice oder Streaming?
