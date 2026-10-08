@@ -227,20 +227,20 @@ class GemeinsamerClient(unittest.TestCase):
     def test_alle_rufer_nutzen_llm_client(self):
         self.assertEqual(kt.t6_ein_transportweg(kt.lade_ssot()), [])
 
-    def test_nebenstrecke_neben_dem_client_wird_gemeldet(self):
-        """Sabotage: import llm_client plus direkter Endpunkt ist T6-Bruch."""
-        probe = SCRIPTS / ".vertragstest_t6.py"
+    def test_nebenstrecke_neben_dem_client_wird_repo_weit_gemeldet(self):
+        """T6 findet Endpunkte auch in Skripten, Shells, HTML und YAML."""
         spur = "https://api." + "groq.com/x"
-        probe.write_text(f'import llm_client\nURL = "{spur}"\n',
-                         encoding="utf-8")
-        kt.RUFER.append("scripts/.vertragstest_t6.py")
-        try:
-            befunde = kt.t6_ein_transportweg(kt.lade_ssot())
-        finally:
-            kt.RUFER.remove("scripts/.vertragstest_t6.py")
-            probe.unlink(missing_ok=True)
-        self.assertTrue(any("T6" in b and "Endpunkt" in b for b in befunde),
-                        "T6 übersieht einen direkten Modell-Endpunkt.")
+        for suffix in (".py", ".sh", ".html", ".yaml"):
+            with self.subTest(suffix=suffix):
+                probe = SCRIPTS / "tests" / f".vertragstest_t6{suffix}"
+                probe.write_text(f'URL = "{spur}"\n', encoding="utf-8")
+                try:
+                    befunde = kt.t6_ein_transportweg(kt.lade_ssot())
+                finally:
+                    probe.unlink(missing_ok=True)
+                self.assertTrue(
+                    any("T6" in b and "Endpunkt" in b for b in befunde),
+                    f"T6 übersieht einen direkten Modell-Endpunkt in {suffix}.")
 
     def test_alt_texte_sind_ueber_den_client_angebunden(self):
         """#647: Cover-Alt-Texte nutzen den gemeinsamen Weg, nicht Gemini direkt."""
@@ -248,7 +248,8 @@ class GemeinsamerClient(unittest.TestCase):
         text = (ROOT / "scripts" / "alt_text_vorschlaege.py").read_text(
             encoding="utf-8")
         self.assertIn("import llm_client", text)
-        self.assertNotIn("generativelanguage.googleapis.com", text,
+        gemini_host = "generativelanguage." + "googleapis.com"
+        self.assertNotIn(gemini_host, text,
                          "kein zweiter Gemini-Endpunkt neben llm_client")
 
     def test_betroffene_skripte_haben_eine_nachvollziehbare_reihenfolge(self):

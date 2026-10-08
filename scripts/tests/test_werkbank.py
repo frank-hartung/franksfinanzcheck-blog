@@ -20,6 +20,7 @@ import os
 import sys
 import unittest
 import urllib.request
+from unittest import mock
 from pathlib import Path
 
 import yaml
@@ -88,6 +89,31 @@ class SsotTests(unittest.TestCase):
             self.assertGreaterEqual(int(f["takt_tage"]), 7, "Takt zu eng (Höflichkeit)")
             self.assertNotIn(f["id"], ids, "doppelte Frage-id")
             ids.add(f["id"])
+
+
+class SyntheseTransportTests(unittest.TestCase):
+    """Gemini/Groq-Synthese bleibt im gemeinsamen Client gebündelt."""
+
+    def test_groq_und_gemini_synthese_nutzen_llm_client(self):
+        beleg = [{
+            "herausgeber": "Testquelle",
+            "url": "https://example.test/bericht",
+            "passagen": [{"satz": "Belegsatz mit einer überprüfbaren Zahl 42."}],
+        }]
+        for provider, fn in (("groq", aw.synthese_groq),
+                             ("gemini", aw.synthese_gemini)):
+            konfiguration = next(
+                x for x in lade()["antwortwerk"]["synthese"]
+                if x["id"] == provider)
+            with mock.patch.object(aw.llm_client, "available", return_value=True):
+                with mock.patch.object(aw.llm_client, "chat", return_value="Antwort") as chat:
+                    result = fn("Was ist belegt?", beleg, konfiguration, 17)
+            self.assertEqual(result["text"], "Antwort")
+            args, kwargs = chat.call_args
+            self.assertEqual(args[0], provider)
+            self.assertEqual(kwargs["model"], konfiguration["modell"])
+            self.assertEqual(kwargs["timeout"], 17)
+            self.assertIn("Belegsatz", kwargs["prompt"])
 
 
 class VertragTests(unittest.TestCase):

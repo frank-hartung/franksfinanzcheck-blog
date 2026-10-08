@@ -26,7 +26,7 @@ import sys
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of, safe_title_cut
-import groq_config
+import llm_client
 CACHE_FILE = os.path.join(BLOG_DIR, ".meta_cache.json")
 
 TITLE_MIN, TITLE_MAX = 30, 60
@@ -128,9 +128,26 @@ def generate_description(a):
     return desc
 
 
+def _llm_meta(prompt: str, max_tokens: int) -> str | None:
+    """Gemini zuerst, Groq als Fallback – alle Transporte liegen im Client."""
+    for provider in ("gemini", "groq"):
+        if not llm_client.available(provider):
+            continue
+        try:
+            text = llm_client.chat(
+                provider, prompt=prompt,
+                model="gemini-3-flash-preview" if provider == "gemini" else None,
+                max_tokens=max_tokens, timeout=60, attempts=2,
+            )
+            if text:
+                return text
+        except Exception:
+            continue
+    return None
+
+
 def ai_description(a):
     """KI-generierte, klickstarke Description (mit Cache)."""
-    import urllib.request
     cache = {}
     if os.path.exists(CACHE_FILE):
         try:
@@ -142,7 +159,7 @@ def ai_description(a):
     if key_id in cache:
         return cache[key_id]
 
-    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GROQ_API_KEY")):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         return None
 
     title = a["title"][:80]
@@ -154,40 +171,15 @@ def ai_description(a):
               f"{anrede_hint} "
               f"Artikel-Titel: '{title}'. Nur die Description, ohne Anführungszeichen.")
 
-    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    if gemini_key:
-        try:
-            body = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
-            if text:
-                cache[key_id] = text
-                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception:
-            pass
-
-    if groq_config.available():
-        try:
-            text = groq_config.chat(prompt, max_tokens=100, timeout=60)
-            if text:
-                cache[key_id] = text
-                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception:
-            pass
-    return None
+    text = _llm_meta(prompt, max_tokens=100)
+    if text:
+        cache[key_id] = text
+        json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+    return text
 
 
 def ai_title(a):
     """KI-generierter, klickstarker Titel (50–60 Zeichen) mit Cache."""
-    import urllib.request
     cache = {}
     if os.path.exists(CACHE_FILE):
         try:
@@ -199,7 +191,7 @@ def ai_title(a):
     if key_id in cache:
         return cache[key_id]
 
-    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GROQ_API_KEY")):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         return None
 
     title = a["title"][:80]
@@ -214,35 +206,11 @@ def ai_title(a):
               f"unbedingt bei – kein 'dieses Jahr' o. Ä. am Ende, keine "
               f"Bindestrich-Komposita (z. B. 'Riester-Rente') auseinanderreißen.")
 
-    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    if gemini_key:
-        try:
-            body = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
-            if text:
-                cache[key_id] = text
-                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception:
-            pass
-
-    if groq_config.available():
-        try:
-            text = groq_config.chat(prompt, max_tokens=80, timeout=60)
-            if text:
-                cache[key_id] = text
-                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception:
-            pass
-    return None
+    text = _llm_meta(prompt, max_tokens=80)
+    if text:
+        cache[key_id] = text
+        json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+    return text
 
 
 # --- Titel-Gate: schützt Blog-Konventionen vor Verschlimmbesserung --------

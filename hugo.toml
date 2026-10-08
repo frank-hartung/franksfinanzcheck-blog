@@ -192,40 +192,40 @@ copyright = "© 2026 FranksFinanzcheck – Alle Rechte vorbehalten"
     url = "/werkzeuge/"
     weight = 3
 [[menu.main]]
+    identifier = "suche"
+    name = "Suche"
+    url = "/suche/"
+    weight = 4
+[[menu.main]]
     identifier = "posts"
     name = "Blog"
     url = "/posts/"
-    weight = 4
+    weight = 5
 [[menu.main]]
     identifier = "pillars"
     name = "Ratgeber"
     url = "/pillar/"
-    weight = 5
+    weight = 6
 [[menu.main]]
     identifier = "studien"
     name = "Daten & Studien"
     url = "/studien/"
-    weight = 6
-[[menu.main]]
-    identifier = "suche"
-    name = "Suche"
-    url = "/suche/"
     weight = 7
 [[menu.main]]
     identifier = "ueber"
     name = "Über mich"
     url = "/ueber/"
-    weight = 7
+    weight = 8
 [[menu.main]]
     identifier = "impressum"
     name = "Impressum"
     url = "/impressum/"
-    weight = 8
+    weight = 9
 [[menu.main]]
     identifier = "datenschutz"
     name = "Datenschutz"
     url = "/datenschutz/"
-    weight = 9
+    weight = 10
 
 # ---------------------------------------------------------------------
 # TAXONOMIEN – bewusst KEINE (Index-Hygiene, Entscheidung 29.09.2026)

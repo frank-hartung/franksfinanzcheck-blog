@@ -40,11 +40,9 @@
 # ============================================================
 
 import json
-import os
 import re
 import subprocess
 import sys
-import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -52,11 +50,11 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "LENGTH-REPORT.md"
 HISTORY = ROOT / "data" / "length_history.jsonl"
 
-import groq_config
+import llm_client
 import length_policy as lp
 
-GROQ_KEY = groq_config.api_key()
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+GROQ_KEY = llm_client.available("groq")
+GEMINI_KEY = llm_client.available("gemini")
 
 DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
@@ -92,21 +90,11 @@ def ai(system: str, prompt: str, max_tokens: int = 3500) -> str | None:
         if not key:
             continue
         try:
-            if provider == "groq":
-                return groq_config.chat(
-                    prompt, system=system, temperature=0.3,
-                    max_tokens=max_tokens, timeout=120, raise_on_error=True,
-                )
-            else:
-                req = urllib.request.Request(
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-                    data=json.dumps({"systemInstruction": {"parts": [{"text": system}]},
-                                     "contents": [{"parts": [{"text": prompt}]}],
-                                     "generationConfig": {"temperature": 0.3,
-                                                          "maxOutputTokens": max_tokens}}).encode(),
-                    headers={"x-goog-api-key": key}, method="POST")
-                with urllib.request.urlopen(req, timeout=120) as r:
-                    return json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"]
+            return llm_client.chat(
+                provider, prompt=prompt, system=system,
+                temperature=0.3, max_tokens=max_tokens, timeout=120,
+                attempts=3, raise_on_error=True,
+            )
         except Exception as e:
             print(f"    ⚠ {provider}: {str(e)[:90]}")
     return None

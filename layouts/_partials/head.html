@@ -155,10 +155,9 @@
 <style>{{ $stylesheet.Content | safeCSS }}{{ partial "ff_fontfaces.html" . | safeCSS }}</style>
 {{- /* Fonts sind immer eingebettet (first-party). */ -}}
 
-{{- /* Search: seit #644 läuft die Suche auf /suche/ vollständig über Pagefind
-       (layouts/search/single.html). Der frühere Fuse-Block lud /index.json –
-       diese Datei wird nicht gebaut (Home-Outputs: HTML, RSS, SWJS) → toter Link
-       und toter Fetch. Entfernt, damit das Qualitäts-Gate (Link-Check) grün wird. */}}
+{{- /* Suche: /suche/ nutzt die eigene Pagefind-Oberfläche. Der Client liegt
+       in static/premium/ff-suche.js; Pagefind erzeugt den Index beim Deploy
+       aus dem fertigen public/-Stand. Es gibt keine zweite Suchoberfläche. */}}
 
 {{- /* Favicons (12.08. Runde 2, Frank): Marken-Favicon aus bake_brand.py –
        modernes SVG (gold-Haken auf Tiefgruen) + Apple-Touch-Icon.

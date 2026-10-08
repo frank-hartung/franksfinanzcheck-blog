@@ -5,8 +5,7 @@
 #  Einheitlicher Chat-Zugang für die Rollen der Blog-Automatik
 #  (Schema: lange Artikel, schnelle News, SEO). Provider:
 #
-#    groq       → GRATIS, openai/gpt-oss-120b     (GROQ_API_KEY,
-#                 nutzt scripts/groq_config.py als SSOT)
+#    groq       → GRATIS, openai/gpt-oss-120b     (GROQ_API_KEY)
 #    nvidia     → GRATIS, openai/gpt-oss-120b     (NVIDIA_API_KEY)
 #    cloudflare → GRATIS, @cf/openai/gpt-oss-120b (CLOUDFLARE_API_TOKEN
 #                 + CLOUDFLARE_ACCOUNT_ID)
@@ -37,12 +36,10 @@
 #  NUR Standardbibliothek (urllib) – keine neuen Abhängigkeiten,
 #  damit alle GitHub-Workflows ohne extra pip-Installation laufen.
 #
-#  BILDER (seit 08.10.2026): Auch Bildaufrufe gehen durch diesen
-#  Client – ein Transportweg bleibt einer, auch für Cover-Alt-Texte.
-#  chat(..., bilder=[{"mime": "image/jpeg", "data": <bytes>}]) trägt
-#  die Bildteile im jeweiligen Protokoll (Gemini inline_data bzw.
-#  OpenAI-kompatible Inhalts-Teile mit data-URL). Der Vertrag T6 des
-#  Gates scripts/ki_transportweg.py erzwingt den Weg.
+#  BILDER UND AUDIO: Bildaufrufe sowie der optionale Groq-Whisper-Aufruf
+#  laufen über diesen Client. Modell-Key-Proben für die Secret-Wache sind
+#  ebenfalls hier gebündelt. T6 in scripts/ki_transportweg.py erzwingt
+#  den einzigen Transportweg.
 #
 #  Verhalten: kein Key → None (nie ein Crash). Die Writer haben
 #  zusätzlich einen Offline-Modus (Gerüst-Entwurf), damit die
@@ -56,6 +53,7 @@ import os
 import re
 import sys
 import time
+import uuid
 import urllib.error
 import urllib.request
 
@@ -63,7 +61,7 @@ BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 try:
-    import groq_config  # noqa: E402  (SSOT für den Gratis-Fallback)
+    import groq_config  # noqa: E402 (nur Key-/Modell-Konfiguration, kein HTTP)
 except Exception:  # noqa: BLE001
     groq_config = None
 
@@ -73,8 +71,9 @@ USER_AGENT = (
 )
 
 # Modell-Defaults (über Env oder data/ki_redaktion.yaml überschreibbar).
-# Bewusst konservativ: unbekannte IDs quittieren die APIs mit einem
-# klaren Fehler – dann einfach CLAUDE_MODEL / OPENAI_MODEL setzen.
+# Bewusst konservativ: Unbekannte IDs quittieren die APIs mit einem
+# klaren Fehler – dann das Modell des Gratis-Providers konfigurieren
+# (GROQ_MODEL, GEMINI_MODEL, NVIDIA_MODEL oder CLOUDFLARE_MODEL).
 DEFAULT_MODELS = {
     # Die OpenAI-Bahn: dasselbe offene OpenAI-Modell bei drei Hostern.
     "nvidia": os.environ.get("NVIDIA_MODEL") or "openai/gpt-oss-120b",
@@ -82,7 +81,11 @@ DEFAULT_MODELS = {
                    or "@cf/openai/gpt-oss-120b"),
 }
 
+GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODELS_URL = "https://api.groq.com/openai/v1/models"
+GROQ_AUDIO_TRANSCRIPTIONS_URL = "https://api.groq.com/openai/v1/audio/transcriptions"
 NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+GEMINI_MODELS_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 
 # Alle bekannten Provider in stabiler Reihenfolge. Diese Liste ist
 # vollständig: Was hier nicht steht, kann der Blog nicht anrufen.
@@ -214,17 +217,26 @@ def _mit_bildern(messages: list, bild_teile: list) -> list:
 
 
 def _call_openai_like(url, api_key, messages, system, model,
-                      temperature, max_tokens, timeout, bild_teile=None):
-    """Chat-Completions-PROTOKOLL (nicht der Anbieter OpenAI).
+                      temperature, max_tokens, timeout, bild_teile=None,
+                      extra_payload=None):
+    """Chat-Completions-Protokoll bei den kostenlosen Dritt-Hostern.
 
-    Groq, NVIDIA NIM und Cloudflare Workers AI sprechen alle dieses
-    Format. Der Name beschreibt das Protokoll – es führt kein Pfad zur
-    kostenpflichtigen OpenAI-API.
+    Der Name beschreibt das Protokoll – es führt nie zur kostenpflichtigen
+    OpenAI-API. Anbieterspezifische Felder kommen ausschließlich über
+    ``extra_payload`` aus diesem zentralen Client.
     """
     msgs = []
     if system:
         msgs.append({"role": "system", "content": system})
     msgs.extend(_mit_bildern(messages, bild_teile))
+    body = {
+        "model": model,
+        "messages": msgs,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+    }
+    if extra_payload:
+        body.update(extra_payload)
     payload = _post_json(
         url,
         {
@@ -232,12 +244,7 @@ def _call_openai_like(url, api_key, messages, system, model,
             "Authorization": f"Bearer {api_key}",
             "User-Agent": USER_AGENT,
         },
-        {
-            "model": model,
-            "messages": msgs,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        },
+        body,
         timeout,
     )
     return ((payload.get("choices") or [{}])[0]
@@ -269,13 +276,23 @@ def _ohne_denkspuren(text: str) -> str:
     return text.strip()
 
 
-def _call_openai_kompatibel_frei(provider, messages, system, model,
-                                 temperature, max_tokens, timeout,
-                                 bild_teile=None):
-    """NVIDIA NIM und Cloudflare Workers AI – beide OpenAI-kompatibel."""
-    url = NVIDIA_URL if provider == "nvidia" else cloudflare_url()
-    roh = _call_openai_like(url, key_for(provider), messages, system, model,
-                            temperature, max_tokens, timeout, bild_teile)
+def _call_openai_compatible_provider(provider, messages, system, model,
+                                     temperature, max_tokens, timeout,
+                                     bild_teile=None):
+    """Groq, NVIDIA NIM und Cloudflare – ein gemeinsamer HTTP-Transport."""
+    if provider == "groq":
+        url = GROQ_CHAT_URL
+        extra = ({"include_reasoning": False}
+                 if model.startswith("openai/gpt-oss") else None)
+    elif provider == "nvidia":
+        url, extra = NVIDIA_URL, None
+    elif provider == "cloudflare":
+        url, extra = cloudflare_url(), None
+    else:
+        raise ValueError(f"Unbekannter Chat-Completions-Provider: {provider}")
+    roh = _call_openai_like(
+        url, key_for(provider), messages, system, model, temperature,
+        max_tokens, timeout, bild_teile, extra_payload=extra)
     return _ohne_denkspuren(roh or "")
 
 
@@ -283,7 +300,7 @@ def _call_gemini(messages, system, model, temperature, max_tokens, timeout,
                  bild_teile=None):
     key = key_for("gemini")
     url = ("https://generativelanguage.googleapis.com/v1beta/models/"
-           f"{model}:generateContent?key={key}")
+           f"{model}:generateContent")
     letzte_user = max((i for i, m in enumerate(messages)
                        if m.get("role") != "assistant"), default=-1)
     contents = []
@@ -308,10 +325,96 @@ def _call_gemini(messages, system, model, temperature, max_tokens, timeout,
     if system:
         body["systemInstruction"] = {"parts": [{"text": system}]}
     payload = _post_json(url, {"Content-Type": "application/json",
-                               "User-Agent": USER_AGENT}, body, timeout)
+                               "User-Agent": USER_AGENT,
+                               "x-goog-api-key": key}, body, timeout)
     cand = (payload.get("candidates") or [{}])[0]
     parts = (cand.get("content") or {}).get("parts") or []
     return "".join(p.get("text", "") for p in parts).strip()
+
+
+def probe_key(provider: str, secret: str, timeout: int = 20) -> tuple[int | None, str | None]:
+    """Prüft nur die Gültigkeit eines Schlüssels; gibt nie Key-Material zurück.
+
+    Rückgabe ist ``(HTTP-Status, Fehlerklasse)``. Die Gemini-Key-Übertragung
+    nutzt absichtlich einen Header statt eines Query-Parameters, damit der
+    Schlüssel nicht in URL-Logs oder Fehlermeldungen landet.
+    """
+    secret = (secret or "").strip()
+    if not secret:
+        return None, "Key fehlt"
+    if provider == "groq":
+        url = GROQ_MODELS_URL
+        headers = {"Authorization": f"Bearer {secret}", "User-Agent": USER_AGENT}
+    elif provider == "gemini":
+        url = GEMINI_MODELS_URL
+        headers = {"x-goog-api-key": secret, "User-Agent": USER_AGENT}
+    else:
+        return None, "Provider nicht unterstützt"
+    req = urllib.request.Request(url, headers=headers, method="GET")
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            resp.read(1)
+            return getattr(resp, "status", 200), None
+    except urllib.error.HTTPError as exc:
+        return exc.code, f"HTTP {exc.code}"
+    except (urllib.error.URLError, TimeoutError, OSError) as exc:
+        return None, type(exc).__name__
+
+
+def transcribe_audio(data: bytes, *, model: str = "whisper-large-v3-turbo",
+                     filename: str = "audio.mp3", mime_type: str = "audio/mpeg",
+                     timeout: int = 300, attempts: int = 2,
+                     raise_on_error: bool = False) -> str | None:
+    """Audio via den zentralen Groq-Whisper-Transport transkribieren.
+
+    Die Eingabe muss bereits begrenzt und lokal geladen sein; der Aufrufer
+    verantwortet Download-Quelle und Größenlimit. Hier werden Multipart-
+    Payload, Schlüssel, HTTP-Fehler und Retries zentral behandelt.
+    """
+    if not available("groq"):
+        return None
+    if not isinstance(data, (bytes, bytearray)) or not data:
+        raise ValueError("Audio muss nichtleere Rohdaten enthalten")
+    if not re.fullmatch(r"[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+", mime_type or ""):
+        raise ValueError("Ungültiger Audio-MIME-Type")
+    safe_name = re.sub(r"[^A-Za-z0-9._-]", "_",
+                       os.path.basename(filename or "audio.mp3")) or "audio.mp3"
+    boundary = "ff-audio-" + uuid.uuid4().hex
+    body = b"".join((
+        f"--{boundary}\r\n".encode("ascii"),
+        b'Content-Disposition: form-data; name="model"\r\n\r\n',
+        model.encode("utf-8"), b"\r\n",
+        f"--{boundary}\r\n".encode("ascii"),
+        (f'Content-Disposition: form-data; name="file"; filename="{safe_name}"\r\n'
+         f"Content-Type: {mime_type}\r\n\r\n").encode("utf-8"),
+        bytes(data), b"\r\n",
+        f"--{boundary}--\r\n".encode("ascii"),
+    ))
+    req = urllib.request.Request(
+        GROQ_AUDIO_TRANSCRIPTIONS_URL, data=body,
+        headers={"Authorization": f"Bearer {key_for('groq')}",
+                 "Content-Type": f"multipart/form-data; boundary={boundary}",
+                 "User-Agent": USER_AGENT}, method="POST")
+    last_err: Exception | None = None
+    for i in range(max(1, attempts)):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                payload = json.loads(resp.read().decode("utf-8"))
+            return str(payload.get("text") or "").strip() or None
+        except urllib.error.HTTPError as exc:
+            last_err = exc
+            if exc.code in (400, 401, 403, 404):
+                break
+        except Exception as exc:  # noqa: BLE001
+            last_err = exc
+        if i + 1 < max(1, attempts):
+            time.sleep(4 * (i + 1))
+    if last_err is not None:
+        print(f"  ⚠ llm_client[groq-audio/{model}]: "
+              f"{type(last_err).__name__}: {last_err}", file=sys.stderr)
+        if raise_on_error:
+            raise last_err
+    return None
 
 
 def chat(provider: str,
@@ -324,17 +427,18 @@ def chat(provider: str,
          max_tokens: int = 4096,
          timeout: int = 180,
          attempts: int = 3,
-         bilder: list | None = None) -> str | None:
+         bilder: list | None = None,
+         raise_on_error: bool = False) -> str | None:
     """Einheitlicher Chat-Call. Liefert Antworttext oder None.
 
     None bedeutet: Provider nicht verfügbar (kein Key) oder endgültiger
-    Fehler nach allen Retries. Aufrufer entscheiden selbst über den
-    Fallback – dieser Client wirft nie in die Pipeline hinein.
+    Fehler nach allen Retries. Mit ``raise_on_error=True`` wird ein
+    endgültiger Transport-/HTTP-Fehler nach dem gemeinsamen Retry-Plan
+    erneut ausgelöst; das erhält vorhandene Provider-Rotationen.
 
     `bilder` nimmt optional [{'mime': 'image/jpeg', 'data': <bytes>}]
-    entgegen und trägt die Bildteile über denselben Weg aus (T6: ein
-    Transportweg bleibt einer – auch für Bildaufrufe). Ungültige
-    Bildangaben wirfen einen ValueError (Aufruferfehler, laut und früh).
+    entgegen und trägt die Bildteile über denselben Weg aus. Ungültige
+    Bildangaben werfen einen ValueError (Aufruferfehler, laut und früh).
     """
     if provider in ENTFERNT:
         # Lauter Fehlschlag statt stillem None: Ein alter Aufruf soll
@@ -354,23 +458,14 @@ def chat(provider: str,
     last_err: Exception | None = None
     for i in range(max(1, attempts)):
         try:
-            if provider in ("nvidia", "cloudflare"):
-                return _call_openai_kompatibel_frei(
+            if provider in ("groq", "nvidia", "cloudflare"):
+                return _call_openai_compatible_provider(
                     provider, messages, system, model,
                     temperature, max_tokens, timeout, bild_teile)
             if provider == "gemini":
                 return _call_gemini(messages, system, model,
                                     temperature, max_tokens, timeout,
                                     bild_teile)
-            if provider == "groq" and groq_config:
-                msgs = []
-                if system:
-                    msgs.append({"role": "system", "content": system})
-                msgs.extend(_mit_bildern(messages, bild_teile))
-                return groq_config.chat(messages=msgs,
-                                        temperature=temperature,
-                                        max_tokens=max_tokens,
-                                        timeout=timeout)
             return None
         except urllib.error.HTTPError as e:
             last_err = e
@@ -380,16 +475,18 @@ def chat(provider: str,
             if i + 1 < attempts:
                 time.sleep(4 * (i + 1))
                 continue
-            return None
+            break
         except Exception as e:  # noqa: BLE001
             last_err = e
             if i + 1 < attempts:
                 time.sleep(4 * (i + 1))
                 continue
-            return None
+            break
     if last_err is not None:
-        print(f"  ⚠ llm_client[{provider}/{model}]: {last_err}",
-              file=sys.stderr)
+        print(f"  ⚠ llm_client[{provider}/{model}]: "
+              f"{type(last_err).__name__}: {last_err}", file=sys.stderr)
+        if raise_on_error:
+            raise last_err
     return None
 
 

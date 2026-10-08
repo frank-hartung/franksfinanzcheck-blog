@@ -27,18 +27,15 @@ Aufruf:  python3 scripts/fix_linebreaks.py             (alle Dateien)
          python3 scripts/fix_linebreaks.py --file X    (eine Datei)
 """
 import glob
-import json
 import os
 import re
 import sys
 import time
-import urllib.error
-import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
-import groq_config
+import llm_client
 
 # REPARATUR 11.09.2026 (Reserve #5): Auch „## FAQ – kurze Antworten“ gilt
 # als FAQ-Anfang (alter Regex endete auf \s*$ und erkannte ihn nicht;
@@ -116,24 +113,18 @@ def _llm_call(prompt: str, provider: str) -> str | None:
     """Ruft Groq oder Gemini an. Liefert Antwort-Text oder None."""
     try:
         if provider == "GROQ":
-            out = groq_config.chat(prompt, temperature=0.1, max_tokens=2000, timeout=60)
+            out = llm_client.chat(
+                "groq", prompt=prompt, temperature=0.1, max_tokens=2000,
+                timeout=60, attempts=3,
+            )
             if out:
                 time.sleep(4)  # Rate-Limit-Schutz (Gratis-Key)
             return out
         else:
-            key = os.environ.get("GEMINI_API_KEY", "")
-            url = ("https://generativelanguage.googleapis.com/v1beta/models/"
-                   + os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
-                   + ":generateContent?key=" + key)
-            data = json.dumps({
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {"temperature": 0.1, "maxOutputTokens": 2000},
-            }).encode()
-            req = urllib.request.Request(url, data=data, headers={
-                "Content-Type": "application/json",
-                "User-Agent": "Mozilla/5.0 (Finanzblog-Automation)"})
-            with urllib.request.urlopen(req, timeout=60) as r:
-                return json.loads(r.read().decode())["candidates"][0]["content"]["parts"][0]["text"]
+            return llm_client.chat(
+                "gemini", prompt=prompt,
+                temperature=0.1, max_tokens=2000, timeout=60, attempts=1,
+            )
     except Exception as e:  # noqa: BLE001
         print(f"    ⚠ {provider}-Fehler: {e}")
         return None

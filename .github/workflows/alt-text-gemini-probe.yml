@@ -1,0 +1,57 @@
+name: Alt-Text-Gemini-Probe (manuell)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alt-text-gemini-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken (read-only)
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python einrichten
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: PyYAML installieren
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'PyYAML>=6.0'
+
+      - name: Offline-Selbsttest
+        run: python scripts/alt_text_vorschlaege.py --selftest
+
+      - name: Genau einen Kandidaten prüfen
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        shell: bash
+        run: |
+          mkdir -p probe-artifact
+          set +e
+          python scripts/alt_text_vorschlaege.py --vorschlagen --max 1 2>&1 | tee probe-artifact/probe.log
+          probe_status=${PIPESTATUS[0]}
+          printf '%s\n' "$probe_status" > probe-artifact/exit-code.txt
+          if [ -f data/alt_texte/vorschlaege.yaml ]; then
+            cp data/alt_texte/vorschlaege.yaml probe-artifact/vorschlaege.yaml
+          fi
+          git diff --no-ext-diff -- data/alt_texte/vorschlaege.yaml > probe-artifact/vorschlaege.diff
+          exit "$probe_status"
+
+      - name: Ergebnis als Artifact veröffentlichen (kein Repository-Commit)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: alt-text-gemini-probe-${{ github.run_id }}
+          path: probe-artifact/
+          if-no-files-found: warn
+          retention-days: 14
