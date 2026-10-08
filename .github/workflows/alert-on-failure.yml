@@ -318,6 +318,13 @@ jobs:
             //  Schritt-Namen und werden weiterhin gemeldet.
             // ================================================================
             const failedStepNames = failedJobs.flatMap(j => j.steps || []);
+            // WF-7B6B / #654 (08.10.2026): Ein fehlgeschlagener Install-Schritt ist
+            // fast nie der API-Key. Der Vorfall: package.json war ungültiges JSON
+            // (Merge-Rest), npm ci brach in Sekunde 1 ab – die Meldung riet trotzdem
+            // zu API-Schlüsseln. Install- und Manifest-Schritte bekommen deshalb die
+            // Manifest-Diagnose. Die übrigen Ratschläge bleiben unverändert.
+            const installFailed = failedStepNames.some(s =>
+              /Abhängigkeiten|npm ci|npm install|Manifest/i.test(String(s)));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -425,7 +432,12 @@ jobs:
                     '2. Öffne dessen Log und lies die `::error::`-Annotation. Sie unterscheidet FRÜHABBRUCH, TAGESDEFIZIT, RELEASE-CRASH und SYNCHRONVERLUST und nennt den zuständigen Schritt.',
                     '3. Folge der dort genannten Diagnose. API-Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
                   ]
-                : [
+                : installFailed
+                  ? [
+                      '1. **Abhängigkeiten nicht installierbar.** Zum Installieren braucht der Lauf keinen API-Key – die Ursache liegt im Paketstand. Bei npm ist meist `package.json` oder `package-lock.json` defekt (z. B. ein Merge-Rest): `python3 scripts/manifest_guard.py` (oder `npm run manifest:check`) nennt Datei, Zeile und Ursache.',
+                      '2. Bei pip: Paketname und Version im roten Schritt prüfen. Erst danach einen Registry- oder GitHub-Ausfall prüfen (https://www.githubstatus.com) und den Lauf neu starten.'
+                    ]
+                  : [
                     failedJobs.length > 0
                       ? '1. Öffne das Log des oben rot markierten Schritts – es nennt die echte Ursache.'
                       : '1. Öffne den Run-Link oben und schaue in das Log des fehlgeschlagenen Schritts.',

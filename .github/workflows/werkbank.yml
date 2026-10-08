@@ -95,6 +95,13 @@ jobs:
       - name: Unit-Tests der Werkbank
         run: python3 -m unittest scripts.tests.test_werkbank -v
 
+      # WF-7B6B / #654 (08.10.2026): Manifest und Lockfile vor dem npm-Install prüfen.
+      # Runbook: docs/ANLEITUNG-MANIFEST-WACHE.md
+      - name: Manifest-Wache (package.json & Lockfile vor npm ci)
+        run: |
+          python3 scripts/manifest_guard.py --selftest
+          python3 scripts/manifest_guard.py
+
       - name: Browser für den Beweis bereitstellen
         id: browser
         continue-on-error: true

@@ -341,7 +341,14 @@ GUARDS = [# Kostensperre (03.10.2026): Schreibschutz vor den zwei
           # vergangenen Fehltag als Quittung („verbucht, nicht behoben“).
           # Ohne Selbsttest im vertraglichen Minimum wäre genau dieser
           # Schließpfad wieder eine unbewachte Zeile.
-          "publication_incident.py"]
+          "publication_incident.py",
+          # Manifest-Wache (WF-7B6B / #654, 08.10.2026): Ein Merge-Rest in
+          # package.json (ungültiges JSON) hat den E2E-Lauf und danach zwei
+          # Stunden lang jeden Produktions-Deploy rot gemacht – `npm ci` brach
+          # in Sekunde 1 ab. Die Wache prüft Manifest und Lockfile vor dem
+          # Install. Eine Wache, die niemand verlangt, führt niemand aus –
+          # deshalb steht ihr Selbsttest im vertraglichen Minimum (C6).
+          "manifest_guard.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
