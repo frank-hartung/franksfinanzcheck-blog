@@ -4,11 +4,15 @@
 {{- $nl := partialCached "newsletter_studio_data.html" "nl-studio" -}}
 {{- $ort := .ort | default "footer" -}}
 {{- $seite := .seite -}}
-{{- $pfad := $seite.RelPermalink -}}
+{{- /* Path ist die Content-Route ohne baseURL-Unterpfad; RelPermalink wäre
+       unter GitHub Pages z. B. /franksfinanzcheck-blog/newsletter/ und würde
+       die Ausschlussregeln für Newsletter/Rechtsseiten verfehlen. */ -}}
+{{- $pfad := $seite.Path -}}
 {{- $blog := or $seite.IsHome (eq $seite.Section "posts") -}}
 {{- $ausgeschlossen := or (hasPrefix $pfad "/newsletter") (hasPrefix $pfad "/impressum") (hasPrefix $pfad "/datenschutz") -}}
 {{- $position := or (and $blog (eq $ort "kopf")) (and (not $blog) (eq $ort "footer")) -}}
 {{- if and $nl.aktiv (not $ausgeschlossen) $position -}}
+{{- $anmeldung := $nl.journeys.anmeldung | default "newsletter/" -}}
 {{- if $blog -}}
 <aside class="newsletter-footer ff-nl-strip ff-nl-top" aria-label="Kostenloser Spar-Newsletter">
   <div class="ff-nl-top__copy">
@@ -16,7 +20,7 @@
     <p class="ff-nl-top__description">Dienstags die Zahlen der Woche, freitags die Fristen davor. <strong>Keine Rabatt-Post.</strong></p>
     <p class="ff-nl-top__meta">Dienstag &amp; Freitag · kostenlos · ein Klick zum Abmelden</p>
   </div>
-  <a class="ff-nl-top__cta" href="{{ $nl.journeys.anmeldung | default "/newsletter/" }}#newsletter-anmeldung">
+  <a class="ff-nl-top__cta" href="{{ $anmeldung | relURL }}#newsletter-anmeldung">
     Newsletter abonnieren
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
   </a>
@@ -33,7 +37,7 @@
   {{- else }}
   <p class="ff-nl-strip__text">{{ $nl.capture.versprechen }}</p>
   {{- end }}
-  <a class="ff-nl-strip__cta" href="/newsletter/#newsletter-anmeldung">Newsletter abonnieren <span aria-hidden="true">→</span></a>
+  <a class="ff-nl-strip__cta" href="{{ "newsletter/" | relURL }}#newsletter-anmeldung">Newsletter abonnieren <span aria-hidden="true">→</span></a>
   <p class="ff-nl-strip__klein">Dienstag &amp; Freitag · kostenlos · ein Klick zum Abmelden</p>
 </div>
 {{- end -}}
