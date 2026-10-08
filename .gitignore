@@ -128,3 +128,11 @@ playwright-report/
 # Temp-Fassung neben dem Ziel liegen. Sie ist Müll, kein Artefakt – sie darf
 # nie in einen Commit rutschen (der Guard räumt sie beim nächsten Schreiben weg).
 data/integrity_lock.json.tmp
+
+# Provisionsdaten (08.10.2026): echte Monatssummen je Partner bleiben lokal –
+# das Repo ist öffentlich. Versioniert ist nur die Vorlage (nur Kopfzeile).
+data/provisionen/provisionen.csv
+
+# KI-Alt-Texte (08.10.2026): die Vorschlagsdatei wird atomar über eine .tmp-Datei
+# geschrieben. Bleibt sie nach einem Abbruch liegen, darf sie nie in einen Commit.
+data/alt_texte/*.tmp

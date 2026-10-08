@@ -1,0 +1,5 @@
+# KI-Vorschläge für Cover-Alt-Texte (Gemini-Gratis-Tier).
+# Nur Vorschläge: angewendet wird ausschließlich mit freigegeben: true
+# und freigegeben_von (Name). Runbook: docs/ANLEITUNG-ALT-TEXTE.md
+version: 1
+vorschlaege: []
