@@ -12,6 +12,8 @@
 //       über das Menü (kein toter Knopf).
 //    5. Leere Suche und Ein-Zeichen-Eingabe: konkrete Ansage.
 //    6. Tastatur: Fokus sichtbar. Mobil: kein horizontales Scrollen.
+//    7. Mehr als 10 Treffer: „Mehr Treffer“ lädt die nächste Seite
+//       nach – kein Ergebnis bleibt hinter einem Schnitt versteckt.
 //  Voraussetzung: der Suchindex ist gebaut (npm run build bzw.
 //  npm run suchindex). Fehlt er, scheitert der Test mit Klartext.
 // ============================================================
@@ -81,6 +83,33 @@ test.describe('Suche auf /suche/', () => {
     expect(speicher, 'der Suchbegriff landet in keinem Speicher').not.toContain('Tagesgeld');
 
     assertNoErrors(fehler, 'Suche Tagesgeld');
+  });
+
+  test('Mehr als 10 Treffer: „Mehr Treffer“ lädt die nächste Seite nach', async ({ page }) => {
+    await page.goto('/suche/');
+    await page.locator(EINGABE).fill('Tagesgeld');
+    await expect(page.locator(STATUS)).toContainText('Treffer für „Tagesgeld“', { timeout: 20_000 });
+    const anzeige = (await page.locator(STATUS).textContent()) || '';
+    const gesamt = parseInt((anzeige.match(/(\d+) Treffer/) || [])[1] || '0', 10);
+    expect(gesamt, 'für diesen Test braucht „Tagesgeld“ mehr als 10 echte Treffer').toBeGreaterThan(10);
+
+    const mehr = page.locator('[data-ff-suche-mehr]');
+    await expect(mehr).toBeVisible();
+    await expect(mehr).toContainText('Mehr Treffer anzeigen');
+    await expect(page.locator(TREFFER), 'erste Seite: 10 Treffer').toHaveCount(10);
+
+    await mehr.click();
+    await expect(page.locator(TREFFER), 'zweite Seite nachgeladen').toHaveCount(Math.min(gesamt, 20));
+    if (gesamt > 20) {
+      await expect(mehr, 'es gibt noch eine dritte Seite').toBeVisible();
+    } else {
+      await expect(mehr, 'am Ende verschwindet der Knopf').toBeHidden();
+    }
+    const ziele = await page.locator(TITEL_LINK).evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(ziele.length).toBe(Math.min(gesamt, 20));
+    for (const ziel of ziele) {
+      expect(ziel, `Treffer ist ein gleich-seitiger Pfad: ${ziel}`).toMatch(/^\/(?!\/)/);
+    }
   });
 
   test('Enter sendet kein GET-Formular: URL bleibt ohne ?q=', async ({ page }) => {

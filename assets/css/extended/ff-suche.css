@@ -53,6 +53,7 @@
 
 .ff-suche__eingabe:focus-visible,
 .ff-suche__knopf:focus-visible,
+.ff-suche__mehr:focus-visible,
 .ff-suche__titel:focus-visible {
   outline: 3px solid var(--ff-emerald-bright, var(--ff-emerald));
   outline-offset: 2px;
@@ -72,6 +73,25 @@
 
 .ff-suche__knopf:hover {
   background: var(--ff-emerald-dark, var(--ff-emerald));
+}
+
+/* Nachlade-Knopf für weitere Treffer – nur sichtbar, wenn es mehr gibt. */
+.ff-suche__mehr {
+  min-height: 44px;
+  margin: 12px 0 0;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--entry);
+  color: var(--primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ff-suche__mehr:hover {
+  border-color: var(--ff-emerald);
+  color: var(--ff-emerald-dark, var(--ff-emerald));
 }
 
 .ff-suche__status {

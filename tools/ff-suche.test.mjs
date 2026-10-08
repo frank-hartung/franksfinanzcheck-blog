@@ -32,6 +32,7 @@ function fixture() {
       </form>
       <p data-ff-suche-status aria-live="polite"></p>
       <ol data-ff-suche-liste></ol>
+      <button type="button" data-ff-suche-mehr hidden>Mehr Treffer anzeigen</button>
     </div>`;
   return document.querySelector('[data-ff-suche]');
 }
@@ -238,4 +239,54 @@ test('echte Fundstellen zählen – ohne Umlaute und in Flexion', async () => {
   await settle();
   assert.equal(root.querySelector('[data-ff-suche-status]').textContent, '1 Treffer für „Kundigung“.');
   assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 1);
+});
+
+function tagesgeldTreffer(anzahl) {
+  return Array.from({ length: anzahl }, (_, i) => ({
+    url: `/posts/tagesgeld-${i}/`,
+    meta: { title: `Tagesgeld-Vergleich ${i}` },
+    excerpt: 'Die <mark>Tagesgeld</mark>-Zinsen im Überblick',
+  }));
+}
+
+test('Mehr Treffer lädt die nächste Seite nach und verschwindet am Ende', async () => {
+  const root = fixture();
+  api.ffSucheStarten(root, async () => fakeIndex({ Tagesgeld: tagesgeldTreffer(12) }));
+  sucheAbschicken('Tagesgeld');
+  await settle();
+
+  const knopf = root.querySelector('[data-ff-suche-mehr]');
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 10, 'erste Seite');
+  assert.equal(knopf.hidden, false, 'es gibt mehr als die erste Seite');
+  assert.equal(knopf.textContent, 'Mehr Treffer anzeigen (noch 2)');
+  assert.equal(root.querySelector('[data-ff-suche-status]').textContent, '12 Treffer für „Tagesgeld“.');
+
+  knopf.dispatchEvent(new window.Event('click', { bubbles: true }));
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 12, 'zweite Seite nachgeladen');
+  assert.equal(knopf.hidden, true, 'am Ende gibt es nichts mehr zu laden');
+  assert.equal(root.querySelector('[data-ff-suche-status]').textContent, '12 Treffer für „Tagesgeld“.');
+});
+
+test('Neue Suche beginnt wieder mit der ersten Seite', async () => {
+  const root = fixture();
+  api.ffSucheStarten(root, async () => fakeIndex({ Tagesgeld: tagesgeldTreffer(12) }));
+  sucheAbschicken('Tagesgeld');
+  await settle();
+  const knopf = root.querySelector('[data-ff-suche-mehr]');
+  knopf.dispatchEvent(new window.Event('click', { bubbles: true }));
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 12);
+
+  sucheAbschicken('Tagesgeld');
+  await settle();
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 10, 'wieder nur die erste Seite');
+  assert.equal(knopf.hidden, false, 'der Knopf meldet sich zurück');
+});
+
+test('Bei wenigen Treffern bleibt der Nachlade-Knopf verborgen', async () => {
+  const root = fixture();
+  api.ffSucheStarten(root, async () => fakeIndex({ Tagesgeld: tagesgeldTreffer(3) }));
+  sucheAbschicken('Tagesgeld');
+  await settle();
+  assert.equal(root.querySelectorAll('[data-ff-suche-liste] > li').length, 3);
+  assert.equal(root.querySelector('[data-ff-suche-mehr]').hidden, true, 'kein toter Knopf ohne weitere Treffer');
 });

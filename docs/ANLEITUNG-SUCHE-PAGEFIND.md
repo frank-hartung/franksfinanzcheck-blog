@@ -49,8 +49,11 @@ neutral verglichen). Flexion bleibt treffbar („Kündigungsfristen“ für „K
 Die Regel steht in den jsdom-Tests (`tools/ff-suche.test.mjs`) und im Browser-Test
 (`e2e/suche.spec.mjs`, „Zyklotronbeschleuniger“ → keine Treffer).
 
-Begrenzung: Es werden die ersten zehn Treffer angezeigt, mit Zählzeile. Weitere Treffer
-lassen sich nicht nachladen. Das ist eine bewusste Folgearbeit, kein Fehler.
+Seitenweise Anzeige: Es werden zuerst die ersten zehn Treffer angezeigt; die Zählzeile
+nennt immer die Gesamtzahl. Der Knopf „Mehr Treffer anzeigen“ unter der Liste lädt die
+nächsten zehn Treffer nach und verschwindet, sobald alle sichtbar sind. Geprüft in
+`tools/ff-suche.test.mjs` (Nachladen, Neustart, kein toter Knopf) und im Browser-Test
+(`e2e/suche.spec.mjs`, „Mehr Treffer“).
 
 ## Version
 
