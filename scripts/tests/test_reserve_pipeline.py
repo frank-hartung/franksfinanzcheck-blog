@@ -58,7 +58,6 @@ import reserve_finisher as rf        # noqa: E402
 import reserve_gate as rg            # noqa: E402
 import reserve_economy as re_        # noqa: E402
 import reserve_healer_coverage as rhc  # noqa: E402
-import reserve_quarantine as rq      # noqa: E402
 import selftest_clock as uhr_zwang    # noqa: E402
 import reserve_readiness as rr       # noqa: E402
 import reserve_stage_guard as rsg    # noqa: E402
@@ -392,24 +391,26 @@ class ProviderVertragTests(unittest.TestCase):
     def test_gemini_hat_output_budget_und_verliert_keine_text_parts(self):
         gesehen = {}
 
-        def fake_http(_url, data=None, headers=None, **_kwargs):
-            gesehen["body"] = json.loads(data.decode("utf-8"))
-            gesehen["headers"] = headers
+        def fake_post(url, headers, payload, timeout):
+            gesehen.update(url=url, headers=headers, body=payload, timeout=timeout)
             return {"candidates": [{"content": {"parts": [
                 {"text": "Teil A"}, {"text": " + Teil B"},
             ]}}]}
 
         with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), \
-                patch.object(eg.g, "http_json", side_effect=fake_http):
+                patch.object(eg.g.llm_client, "_post_json", side_effect=fake_post):
             text = eg.g.call_gemini("Langer Premium-Artikel")
         self.assertEqual(text, "Teil A + Teil B")
         cfg = gesehen["body"]["generationConfig"]
         self.assertEqual(cfg["maxOutputTokens"], 8192)
         self.assertGreater(cfg["temperature"], 0)
+        self.assertNotIn("test-key", gesehen["url"])
+        self.assertEqual(gesehen["headers"]["x-goog-api-key"], "test-key")
 
     def test_gemini_ohne_candidate_ist_ehrlich_leer(self):
         with patch.dict(os.environ, {"GEMINI_API_KEY": "test-key"}), \
-                patch.object(eg.g, "http_json", return_value={"candidates": []}):
+                patch.object(eg.g.llm_client, "_post_json",
+                             return_value={"candidates": []}):
             self.assertIsNone(eg.g.call_gemini("Test"))
 
 

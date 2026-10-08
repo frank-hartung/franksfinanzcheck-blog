@@ -44,6 +44,7 @@ import argparse
 import copy
 import datetime
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -83,17 +84,43 @@ PFLICHT_AUFGABEN = ("lang", "news", "faktenpruefung", "politur")
 # npm-Skripte, die laut Vertrag existieren müssen (T8).
 NPM_PFLICHT = ("ki:transportweg", "ki:status", "test:ki")
 
-# Skripte, die ein Modell rufen – sie müssen über den gemeinsamen
-# Client gehen (T6). Wer hier etwas hinzufügt, erweitert den Vertrag.
+# Skripte, die Modellaufrufe, Transkription oder Key-Proben ausführen –
+# jeder muss den gemeinsamen Client importieren (T6). Die Liste ist die
+# Vertragsinventarliste; zusätzlich scannt T6 unten ALLE relevanten Quell-
+# und Konfigurationsdateien repo-weit nach direkten Anbieter-Endpunkten.
+# `selftest_ki.py` ist ein Netzwerk-Sandbox-Test, kein produktiver Modellrufer;
+# er bleibt trotzdem im repo-weiten Endpunkt-Scan.
 # Liste (nicht Tupel): Der Selbsttest hängt eine Sabotage-Probe an.
 RUFER = [
     "scripts/claude_writer.py",
     "scripts/news_writer.py",
     "scripts/faktenfrische.py",
     "scripts/saisonaler_hero_refresh.py",
-    # Vertragserweiterung 08.10.2026: Die Cover-Alt-Texte (#647) rufen
-    # Gemini mit Bildteil – derselbe Weg wie jeder andere Modellaufruf.
     "scripts/alt_text_vorschlaege.py",
+    "scripts/antwortwerk.py",
+    "scripts/compound_guard.py",
+    "scripts/dash_guard.py",
+    "scripts/endredaktion.py",
+    "scripts/extend_articles.py",
+    "scripts/fix_linebreaks.py",
+    "scripts/generate_drafts.py",
+    "scripts/groq_config.py",
+    "scripts/jasper_seo.py",
+    "scripts/keyword_optimizer.py",
+    "scripts/ki_transportweg.py",
+    "scripts/lektor_guard.py",
+    "scripts/length_guard.py",
+    "scripts/lesbarkeit_heiler.py",
+    "scripts/meta_optimizer.py",
+    "scripts/poppy_lib.py",
+    "scripts/profi_polish.py",
+    "scripts/redaktions_standard.py",
+    "scripts/secrets_age_guard.py",
+    "scripts/social_copywriter.py",
+    "scripts/social_dialog.py",
+    "scripts/social_video.py",
+    "scripts/spellcheck.py",
+    "scripts/update_articles.py",
 ]
 
 # Workflows, die ein Sprachmodell rufen → die Aufgabe, die sie bedienen.
@@ -200,7 +227,7 @@ def _ketten(ssot: dict) -> dict:
 
 
 # ====================================================================
-#  VERTRAGSREGELN T1–T8
+#  VERTRAGSREGELN T1–T10
 #  Jede Funktion gibt eine Liste von Befunden zurück. Leer = grün.
 # ====================================================================
 def t1_kostenregel(ssot: dict) -> list[str]:
@@ -347,26 +374,62 @@ def t5_keine_bruecken(_ssot: dict) -> list[str]:
     return befunde
 
 
-# Modell-Endpunkte, die im Quelltext eines RUFER-Skripts nichts zu
-# suchen haben (T6). Frei verfügbare Hoster sind eingeschlossen: Auch
-# ein 0-€-Endpunkt neben dem Client ist ein zweiter Transportweg.
-# Nur scripts/llm_client.py spricht sie an – bewusst außerhalb der
-# RUFER-Liste.
+# Modell-Endpunkte, die in keiner produktiven Nebenstrecke auftauchen
+# dürfen. Frei verfügbare Hoster sind eingeschlossen: Auch ein 0-€-
+# Endpunkt neben dem Client ist ein zweiter Transportweg.
 DIREKTE_ENDPUNKTE = (
     (r"https?://generativelanguage\.googleapis\.com", "Gemini-Endpunkt"),
     (r"https?://api\.groq\.com", "Groq-Endpunkt"),
     (r"https?://integrate\.api\.nvidia\.com", "NVIDIA-Endpunkt"),
     (r"https?://api\.cloudflare\.com", "Cloudflare-Endpunkt"),
+    (r"https?://text\.pollinations\.ai", "Pollinations-Endpunkt"),
 )
+T6_QUELL_SUFFIXES = {".py", ".pyw", ".js", ".mjs", ".cjs", ".ts", ".tsx",
+                     ".jsx", ".sh", ".bash", ".html", ".htm", ".yml",
+                     ".yaml", ".toml", ".json"}
+T6_AUSGESCHLOSSENE_PFADE = {
+    Path("scripts/llm_client.py"),  # der einzige erlaubte Transport
+    Path("scripts/ki_transportweg.py"),  # Gate benennt die Muster selbst
+}
+T6_AUSGESCHLOSSENE_ORDNER = {
+    ".git", ".arena", ".cache", ".venv", "venv", "node_modules",
+    "__pycache__", "build", "dist", "coverage", "target", "out",
+}
 
+
+def _t6_quelltexte():
+    """Alle Code-/Konfigurationsquellen des Repos, nicht nur die Ruferliste.
+
+    Tests bleiben absichtlich eingeschlossen: Eine Probe mit echter URL muss
+    ebenfalls durch T6 auffallen. Nur generierte/abhängige Verzeichnisse,
+    Dokumentation und der zentrale Transport selbst sind ausgenommen.
+    """
+    for basis, ordner, dateien in os.walk(ROOT):
+        ordner[:] = sorted(d for d in ordner if d not in T6_AUSGESCHLOSSENE_ORDNER)
+        verzeichnis = Path(basis)
+        for name in sorted(dateien):
+            pfad = verzeichnis / name
+            if pfad.suffix.lower() not in T6_QUELL_SUFFIXES:
+                continue
+            try:
+                rel = pfad.relative_to(ROOT)
+            except ValueError:
+                continue
+            if rel in T6_AUSGESCHLOSSENE_PFADE:
+                continue
+            try:
+                yield pfad, pfad.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
 
 def t6_ein_transportweg(_ssot: dict) -> list[str]:
-    """Alle Rufer gehen über scripts/llm_client.py – auch die Endpunkte.
+    """Ein Client pro Modellruf – vertraglich und repo-weit erzwungen.
 
-    Zwei Prüfungen je Rufer: (1) der gemeinsame Client wird importiert,
-    (2) kein direkter Modell-Endpunkt im Quelltext. „import llm_client“
-    allein genügt nicht – ein zweiter urllib-Aufruf neben dem Client ist
-    ein zweiter Transportweg mit eigenem Schlüssel, Retries und Kosten.
+    Die bekannte Ruferliste muss den gemeinsamen Client importieren. Davon
+    unabhängig durchsucht T6 alle Code- und Konfigurationsquellen im Repo,
+    auch Unterordner, Tests und Workflows, nach direkten Anbieter-Endpunkten.
+    So kann ein neuer Rufer nicht durch vergessene Listenpflege eine zweite
+    urllib-Strecke neben llm_client einführen.
     """
     befunde = []
     for rel in RUFER:
@@ -380,13 +443,15 @@ def t6_ein_transportweg(_ssot: dict) -> list[str]:
                 f"T6: {rel} ruft ein Modell, ohne den gemeinsamen Client zu "
                 "importieren. Ein zweiter Transportweg heißt: zwei Orte für "
                 "Schlüssel, Retries und Kosten.")
+
+    for pfad, text in _t6_quelltexte():
+        rel = pfad.relative_to(ROOT).as_posix()
         for muster, klartext in DIREKTE_ENDPUNKTE:
             if re.search(muster, text):
                 befunde.append(
                     f"T6: {rel} spricht {klartext} direkt an. Der "
                     "Modellaufruf gehört nach scripts/llm_client.py.")
     return befunde
-
 
 def t7_routing_vollstaendig(ssot: dict) -> list[str]:
     befunde = []
@@ -835,7 +900,7 @@ def selftest() -> list[str]:
 
     # ST9d: T6 muss beide Seiten des Vertrags beweisen – Import des
     #       gemeinsamen Clients UND kein direkter Modell-Endpunkt.
-    t6_endpunkt = ROOT / "scripts" / ".transportweg_t6_endpunkt.py"
+    t6_endpunkt = ROOT / "scripts" / "tests" / ".transportweg_t6_endpunkt.py"
     t6_client = ROOT / "scripts" / ".transportweg_t6_client.py"
     try:
         # Literale bewusst zusammengesetzt (Hausstil der Selbstproben).
@@ -844,12 +909,12 @@ def selftest() -> list[str]:
             f'import llm_client\nURL = "{spur}"\n', encoding="utf-8")
         t6_client.write_text(
             'URL = "https://" + "example.invalid/x"\n', encoding="utf-8")
-        RUFER.append("scripts/.transportweg_t6_endpunkt.py")
+        # Der direkte Endpunkt wird repo-weit erkannt, ohne ihn in RUFER
+        # einzutragen. Nur die Import-Probe braucht die Vertragsliste.
         RUFER.append("scripts/.transportweg_t6_client.py")
         try:
             treffer = t6_ein_transportweg(echt)
         finally:
-            RUFER.remove("scripts/.transportweg_t6_endpunkt.py")
             RUFER.remove("scripts/.transportweg_t6_client.py")
         if not any("Endpunkt" in t for t in treffer):
             fehler.append("Sabotage 'direkter Modell-Endpunkt': T6 hat die "

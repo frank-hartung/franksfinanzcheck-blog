@@ -29,26 +29,20 @@ KI nicht erreichbare) Artikel.
 import os
 import re
 import sys
-import json
 import time
 import glob
 import random
-import urllib.error
-import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
-import groq_config
+import llm_client
 import length_policy as lp
 MIN_CHARS = int(os.environ.get("LENGTH_MIN_CHARS") or lp.POSTS["target_min_chars"])
 MIN_WORDS = int(os.environ.get("LENGTH_MIN_WORDS") or max(1400, MIN_CHARS // 7))
 # Zielzone relativ zum Floor: nie unter der Schwelle landen, sonst Heilungs-Loop.
 TARGET_MIN = None
 TARGET_MAX = None 
-
-UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
 PROFI_FLOSKELN = {
     "in der heutigen schnelllebigen welt", "in der heutigen zeit",
@@ -61,58 +55,22 @@ PROFI_FLOSKELN = {
 }
 
 
-def http_json(url, data=None, headers=None, timeout=90):
-    hdrs = {"User-Agent": UA}
-    if headers:
-        hdrs.update(headers)
-    req = urllib.request.Request(url, data=data, headers=hdrs)
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
-
-
-def _retry(fn, attempts=3, base_delay=4.0):
-    last_err = None
-    for i in range(attempts):
-        try:
-            return fn()
-        except urllib.error.HTTPError as e:
-            last_err = f"HTTP {e.code}"
-            if e.code == 429:
-                time.sleep(base_delay * (i + 1))
-                continue
-            if e.code in (401, 403):
-                break
-            time.sleep(base_delay * (i + 1))
-        except (TimeoutError, urllib.error.URLError, ConnectionError) as e:
-            last_err = str(e)
-            time.sleep(base_delay * (i + 1))
-    raise RuntimeError(last_err or "API nicht erreichbar")
-
-
 def call_groq(prompt):
-    return groq_config.chat(
-        prompt, temperature=0.4, max_tokens=6000, raise_on_error=True,
+    return llm_client.chat(
+        "groq", prompt=prompt, temperature=0.4, max_tokens=6000,
+        timeout=90, raise_on_error=True,
     )
 
 
 def call_gemini(prompt):
-    key = os.environ.get("GEMINI_API_KEY")
-    if not key:
+    if not llm_client.available("gemini"):
         return None
-    model = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
-    body = {"contents": [{"parts": [{"text": prompt}]}]}
-    data = json.dumps(body).encode("utf-8")
-
-    def _call():
-        resp = http_json(
-            f"https://generativelanguage.googleapis.com/v1beta/models/{model}"
-            f":generateContent?key={key}",
-            data=data,
-            headers={"Content-Type": "application/json"},
-        )
-        return resp["candidates"][0]["content"]["parts"][0]["text"]
-
-    return _retry(_call)
+    return llm_client.chat(
+        "gemini", prompt=prompt,
+        model=os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview"),
+        temperature=0.4, max_tokens=8192, timeout=90, attempts=3,
+        raise_on_error=True,
+    )
 
 
 def clean_words(text):

@@ -139,6 +139,7 @@ import publikations_vertrag as vertrag   # noqa: E402 – V1–V3 (WF-54C4/#607)
 import textverstaendnis_guard as tv      # noqa: E402 – echter Verständnis-Prüfer
 import r5_absatz_splitter as r5          # noqa: E402 – Abkürzungen + Absatz-Splitter
 from post_utils import join_article      # noqa: E402 – Naht-SSOT
+import llm_client                         # noqa: E402 – einziger KI-Transportweg
 
 # Die Schwelle ist IMPORTIERT – eine Regel, zwei Leser, eine Zahl.
 MINDEST_FLESCH = rc.NEW_FLESCH_MIN
@@ -510,31 +511,21 @@ def _ki_prompt(rohtext: str, slug: str, ziel: float, versuch: int) -> str:
 
 
 def _ki_chat(prompt: str) -> str | None:
-    """Gemini zuerst, dann Groq – dieselbe Reihenfolge wie profi_polish."""
-    import urllib.request
-    ua = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
-          "Chrome/126.0 Safari/537.36")
-    gemini_key = (os.environ.get("GEMINI_API_KEY") or "").strip()
-    if gemini_key:
+    """Gemini zuerst, dann Groq – beide ausschließlich über llm_client."""
+    for provider in ("gemini", "groq"):
+        if not llm_client.available(provider):
+            continue
         try:
-            payload = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/"
-                "gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(payload).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=180).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
+            text = llm_client.chat(
+                provider, prompt=prompt,
+                model="gemini-3-flash-preview" if provider == "gemini" else None,
+                max_tokens=8000, timeout=180, attempts=3,
+                raise_on_error=True,
+            )
             if text:
                 return text
-        except Exception as exc:  # noqa: BLE001 – Stufe B ist ein Versuch, kein Muss
-            print(f"  ⚠ Gemini (Lesbarkeits-Heiler): {exc}")
-    try:
-        import groq_config
-        if groq_config.available():
-            return groq_config.chat(prompt, max_tokens=8000, timeout=180)
-    except Exception as exc:  # noqa: BLE001
-        print(f"  ⚠ Groq (Lesbarkeits-Heiler): {exc}")
+        except Exception as exc:  # noqa: BLE001 – KI-Feinschliff bleibt optional
+            print(f"  ⚠ {provider.capitalize()} (Lesbarkeits-Heiler): {exc}")
     return None
 
 

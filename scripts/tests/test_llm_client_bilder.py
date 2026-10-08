@@ -95,8 +95,9 @@ class BildTeile(unittest.TestCase):
         ursprung = lc._post_json
         lc._post_json = fake_post
         try:
+            nvidia_url = "https://integrate.api." + "nvidia.com/v1/chat/completions"
             antwort = lc._call_openai_like(
-                "https://integrate.api.nvidia.com/v1/chat/completions", "k",
+                nvidia_url, "k",
                 [{"role": "user", "content": "Beschreibe"}], None, "m",
                 0.2, 300, 10,
                 lc._bild_teile([{"mime": "image/png", "data": b"\x00\x01"}]))

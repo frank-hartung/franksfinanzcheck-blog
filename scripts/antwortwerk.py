@@ -47,7 +47,6 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
-import os
 import re
 import sys
 import urllib.request
@@ -58,6 +57,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import werkbank_adapters as wa  # noqa: E402
+import llm_client  # noqa: E402 – einziger Modell-Transportweg
 
 ROOT = wa.ROOT
 AUSGABE_DIR = ROOT / "data" / "werkbank" / "antworten"
@@ -202,53 +202,34 @@ def _llm_prompt(frage: str, belege: list[dict]) -> str:
     )
 
 
-def synthese_groq(frage: str, belege: list[dict], anbieter: dict, timeout: int) -> dict | None:
-    schluessel = (os.environ.get(anbieter.get("env", "")) or "").strip()
-    if not schluessel or not belege:
+def _synthese_llm(provider: str, frage: str, belege: list[dict],
+                  anbieter: dict, timeout: int) -> dict | None:
+    """LLM-Synthese über den zentralen Transport – Belege bleiben Pflicht."""
+    if not belege or not llm_client.available(provider):
         return None
-    nutzlast = json.dumps({
-        "model": anbieter.get("modell", "llama-3.3-70b-versatile"),
-        "temperature": 0.1,
-        "max_tokens": 600,
-        "messages": [{"role": "user", "content": _llm_prompt(frage, belege)}],
-    }).encode()
     try:
-        req = urllib.request.Request(
-            anbieter["endpunkt"], data=nutzlast,
-            headers={"Authorization": f"Bearer {schluessel}",
-                     "Content-Type": "application/json",
-                     "User-Agent": wa.USER_AGENT})
-        with urllib.request.urlopen(req, timeout=timeout) as antw:
-            daten = json.loads(antw.read().decode("utf-8", errors="replace"))
-        text = (daten["choices"][0]["message"]["content"] or "").strip()
+        text = llm_client.chat(
+            provider, prompt=_llm_prompt(frage, belege),
+            model=anbieter.get("modell"), temperature=0.1,
+            max_tokens=600, timeout=timeout, attempts=2,
+        )
     except Exception as exc:  # noqa: BLE001 – LLM-Ausfall ist kein Laufabbruch
-        return {"weg": "groq", "text": "", "fehler": f"{type(exc).__name__}: {exc}"}
-    return {"weg": "groq", "text": text,
-            "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden."}
+        return {"weg": provider, "text": "",
+                "fehler": f"{type(exc).__name__}: {exc}"}
+    if not text:
+        return {"weg": provider, "text": "", "fehler": "keine Antwort"}
+    hinweis = ("Freier Groq-Zugang, streng an die Belege gebunden."
+               if provider == "groq" else
+               "Freier Gemini-Zugang, streng an die Belege gebunden.")
+    return {"weg": provider, "text": text, "hinweis": hinweis}
+
+
+def synthese_groq(frage: str, belege: list[dict], anbieter: dict, timeout: int) -> dict | None:
+    return _synthese_llm("groq", frage, belege, anbieter, timeout)
 
 
 def synthese_gemini(frage: str, belege: list[dict], anbieter: dict, timeout: int) -> dict | None:
-    schluessel = (os.environ.get(anbieter.get("env", "")) or "").strip()
-    if not schluessel or not belege:
-        return None
-    modell = anbieter.get("modell", "gemini-2.0-flash")
-    ziel = f"{anbieter['endpunkt']}/{modell}:generateContent?key={schluessel}"
-    nutzlast = json.dumps({
-        "contents": [{"parts": [{"text": _llm_prompt(frage, belege)}]}],
-        "generationConfig": {"temperature": 0.1, "maxOutputTokens": 600},
-    }).encode()
-    try:
-        req = urllib.request.Request(
-            ziel, data=nutzlast,
-            headers={"Content-Type": "application/json", "User-Agent": wa.USER_AGENT})
-        with urllib.request.urlopen(req, timeout=timeout) as antw:
-            daten = json.loads(antw.read().decode("utf-8", errors="replace"))
-        text = daten["candidates"][0]["content"]["parts"][0]["text"].strip()
-    except Exception as exc:  # noqa: BLE001
-        return {"weg": "gemini", "text": "", "fehler": f"{type(exc).__name__}: {exc}"}
-    return {"weg": "gemini", "text": text,
-            "hinweis": "Freier Gemini-Zugang, streng an die Belege gebunden."}
-
+    return _synthese_llm("gemini", frage, belege, anbieter, timeout)
 
 def synthetisiere(frage: str, belege: list[dict], ssot: dict) -> dict:
     """Extraktiv ist Pflicht, LLM ist Kür. Beides landet im Dossier."""

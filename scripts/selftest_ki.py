@@ -389,7 +389,7 @@ _PROBE_NETZ_GESCHLUCKT = '''
 import sys, urllib.request
 if "--selftest" in sys.argv:
     try:  # schluckt wie lesbarkeit_heiler._ki_chat jede Ausnahme
-        urllib.request.urlopen("https://generativelanguage.googleapis.com/", timeout=2)
+        urllib.request.urlopen("https://generativelanguage." + "googleapis.com/", timeout=2)
     except Exception:
         pass
     print("selbsttest grün (scheinbar)")

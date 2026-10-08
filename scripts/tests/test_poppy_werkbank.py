@@ -14,13 +14,12 @@ Netzwerk (alle Pfade in temporären Verzeichnissen):
 """
 from __future__ import annotations
 
-import json
 import os
-import re
 import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
     os.path.abspath(__file__))))
@@ -252,6 +251,34 @@ class TestBoard(WerkbankTempFall):
         with open(os.path.join(BLOG_DIR, "tools", "poppy-board", "index.html"),
                   encoding="utf-8") as fh:
             self.assertIn("/*BOARD_DATA*/", fh.read())
+
+
+class TestAudioTransport(unittest.TestCase):
+    """Podcast-Transkription darf nur den gemeinsamen LLM-Client nutzen."""
+
+    def test_audio_download_und_transkription_sind_sauber_getrennt(self):
+        with patch.dict(os.environ, {"GROQ_API_KEY": "test-key"}):
+            with patch.object(lib, "http_get",
+                              return_value=(b"audio-data", "audio/mpeg", None)) as download:
+                with patch.object(lib.llm_client, "transcribe_audio",
+                                  return_value="Transkript") as transcribe:
+                    result = lib.transkribiere_audio("https://example.test/episode.mp3")
+
+        self.assertEqual(result, ("Transkript", "groq-whisper"))
+        download.assert_called_once_with(
+            "https://example.test/episode.mp3", timeout=120,
+            max_bytes=24 * 1_000_000)
+        transcribe.assert_called_once_with(
+            b"audio-data", model="whisper-large-v3-turbo",
+            filename="episode.mp3", mime_type="audio/mpeg",
+            timeout=300, attempts=2)
+
+    def test_ohne_groq_key_wird_audio_nicht_heruntergeladen(self):
+        with patch.dict(os.environ, {"GROQ_API_KEY": ""}):
+            with patch.object(lib, "http_get") as download:
+                self.assertEqual(lib.transkribiere_audio("https://example.test/a.mp3"),
+                                 (None, "kein GROQ_API_KEY"))
+        download.assert_not_called()
 
 
 if __name__ == "__main__":

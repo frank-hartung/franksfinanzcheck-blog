@@ -6,7 +6,8 @@ Festgehalten wird:
   2. Nur freigegebene Vorschläge mit benanntem Freigeber werden geschrieben.
   3. Ohne GEMINI_API_KEY: exit 0, „übersprungen“, kein Netzwerkzugriff, keine Datei.
   4. Die Anwendung ändert nur die alt-Zeile im cover-Block.
-  5. Kein Workflow ruft das Skript auf (Vorschläge sind nie automatisch).
+  5. Nur ein manueller `--max 1`-Probe-Workflow darf das Skript aufrufen;
+     er veröffentlicht ein Artifact und schreibt/committet nichts ins Repo.
   6. Der Bestand im Repo ist konsistent: die Zählung deckt alle Seiten mit Titelbild.
 """
 from __future__ import annotations
@@ -149,7 +150,8 @@ class Transportweg(unittest.TestCase):
     def test_skript_hat_keinen_eigenen_endpunkt(self):
         text = SKRIPT.read_text(encoding="utf-8")
         self.assertIn("import llm_client", text)
-        self.assertNotIn("generativelanguage.googleapis.com", text,
+        gemini_host = "generativelanguage." + "googleapis.com"
+        self.assertNotIn(gemini_host, text,
                          "kein zweiter Gemini-Endpunkt neben llm_client")
         self.assertNotIn("urllib.request", text)
 
@@ -205,10 +207,23 @@ class Repo(unittest.TestCase):
         for e in store["vorschlaege"]:
             self.assertIn(e.get("freigegeben"), (True, False))
 
-    def test_kein_workflow_ruft_das_skript_auf(self):
-        wf = ROOT / ".github" / "workflows"
-        for datei in wf.glob("*.yml"):
-            self.assertNotIn("alt_text_vorschlaege", datei.read_text(encoding="utf-8"), datei.name)
+    def test_nur_manueller_probe_ruft_das_skript_auf_und_committet_nichts(self):
+        wf_dir = ROOT / ".github" / "workflows"
+        aufrufer = [p for p in wf_dir.glob("*.yml")
+                    if "alt_text_vorschlaege" in p.read_text(encoding="utf-8")]
+        workflow = wf_dir / "alt-text-gemini-probe.yml"
+        self.assertEqual(aufrufer, [workflow])
+        text = workflow.read_text(encoding="utf-8")
+        self.assertIn("workflow_dispatch:", text)
+        for trigger in ("schedule:", "push:", "pull_request:", "workflow_call:"):
+            self.assertNotIn(trigger, text)
+        aufruf = "python scripts/alt_text_vorschlaege.py --vorschlagen --max 1"
+        self.assertEqual(text.count(aufruf), 1)
+        self.assertIn("contents: read", text)
+        self.assertIn("persist-credentials: false", text)
+        self.assertIn("actions/upload-artifact@v7", text)
+        for verbot in ("git add ", "git commit", "git push"):
+            self.assertNotIn(verbot, text)
 
 
 if __name__ == "__main__":

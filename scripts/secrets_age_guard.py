@@ -64,6 +64,7 @@ import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
+import llm_client  # noqa: E402 – Modell-Proben nutzen den zentralen Transport
 
 REPORT = os.path.join(BLOG_DIR, "SECRETS-REPORT.md")
 STATE = os.path.join(BLOG_DIR, "data", "secrets_state.json")
@@ -387,8 +388,7 @@ def _pinterest_token():
 
 # Jede Probe gibt ("ok" | "dead" | "error", detail) zurück.
 def _probe_groq(secret):
-    code, err = _http_status("https://api.groq.com/openai/v1/models",
-                             {"Authorization": f"Bearer {secret}"})
+    code, err = llm_client.probe_key("groq", secret, timeout=PROBE_TIMEOUT)
     if code == 200:
         return "ok", "Groq /models 200"
     if code in (401, 403):
@@ -397,8 +397,7 @@ def _probe_groq(secret):
 
 
 def _probe_gemini(secret):
-    code, err = _http_status(
-        "https://generativelanguage.googleapis.com/v1beta/models?key=" + urllib.parse.quote(secret))
+    code, err = llm_client.probe_key("gemini", secret, timeout=PROBE_TIMEOUT)
     if code == 200:
         return "ok", "Gemini /models 200"
     if code in (400, 401, 403):

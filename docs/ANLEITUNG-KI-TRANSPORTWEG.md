@@ -67,7 +67,7 @@ API, eigenem Schlüssel und sauberen Nutzungsbedingungen.
 ## 3. Bedienung
 
 ```bash
-npm run ki:transportweg     # Vertrag T1–T8 prüfen + Cockpit schreiben
+npm run ki:transportweg     # Vertrag T1–T10 prüfen + Cockpit schreiben
 npm run ki:status           # nur Betriebslage (wer ist erreichbar?)
 npm run ki:json             # maschinenlesbar, ohne Cockpit-Schreiben
 npm run ki:ping             # echte Live-Probe (verbraucht Kontingent!)
@@ -85,7 +85,7 @@ Exit-Codes sind Vertrag:
 
 ---
 
-## 4. Der Vertrag T1–T8
+## 4. Der Vertrag T1–T10
 
 | Regel | Inhalt | Warum |
 |---|---|---|
@@ -94,17 +94,39 @@ Exit-Codes sind Vertrag:
 | **T3** | Mindestens zwei Gratis-Glieder je Kette | Ein leeres Tageskontingent darf die Produktion nicht anhalten |
 | **T4** | Mindestens ein kostenloser OpenAI-Modell-Hoster je Kette | Das ist die eingelöste Fassung von „ChatGPT einbauen" |
 | **T5** | Keine Browser-Brücke, kein UI-Scraping, kein geteiltes Fremdkonto | Issue #514 |
-| **T6** | Alle Rufer nutzen `scripts/llm_client.py` | Ein Ort für Schlüssel, Retries, Kosten |
+| **T6** | Bekannte Rufer importieren `scripts/llm_client.py`; repo-weiter Scan aller Code-/Konfigurationsquellen findet direkte Modell-Endpunkte | Ein Ort für Schlüssel, Retries, Kosten; neue Rufer können die Liste nicht umgehen |
 | **T7** | Jede Pflicht-Aufgabe hat eine Kette | Eine Aufgabe ohne Kette fällt still aus |
 | **T8** | Runbook, Cockpit und npm-Skripte existieren | Eine Wache ohne Bedienung ist keine |
+| **T9** | Jeder KI-Workflow reicht mindestens zwei passende Gratis-Schlüssel durch | Keine Aufgabe hängt an einem erschöpften Kontingent |
+| **T10** | Kostenpflichtige Nebenpfade sind durch die Kostensperre verriegelt | Auch Bild-, Audio- und andere Geldflächen bleiben kostenfrei |
 
 Der Selbsttest sabotiert das Gate **selbst**: Er schmuggelt einen
 Paid-Anbieter in eine Kette, lügt eine Kostenklasse um, setzt einen
 Phantom-Provider ein, kürzt eine Kette auf ein Glied, entfernt die
 OpenAI-Bahn, löscht eine Pflicht-Aufgabe, unterversorgt einen Workflow
-und schleust je eine Brücken- und eine Paid-Spur in echte Dateien ein.
-Bemerkt das Gate eine dieser Sabotagen nicht, ist der Selbsttest rot.
-Eine Wache, die nur verspricht, ist keine Wache.
+und schleust Brücken-, Paid- und direkte Modell-Endpunkt-Spuren in
+Dateien ein. Die T6-Endpunkt-Probe liegt absichtlich außerhalb der
+Ruferliste: Nur der repo-weite Scan kann sie finden. Bemerkt das Gate
+eine dieser Sabotagen nicht, ist der Selbsttest rot. Eine Wache, die
+nur verspricht, ist keine Wache.
+
+### T6-Rollout 08.10.2026
+
+Alle 18 vereinbarten Altdateien wurden geprüft: `compound_guard.py`,
+`dash_guard.py`, `extend_articles.py`, `fix_linebreaks.py`,
+`generate_drafts.py`, `groq_config.py`, `keyword_optimizer.py`,
+`lektor_guard.py`, `length_guard.py`, `lesbarkeit_heiler.py`,
+`meta_optimizer.py`, `poppy_lib.py`, `profi_polish.py`,
+`redaktions_standard.py`, `secrets_age_guard.py`, `selftest_ki.py`,
+`spellcheck.py` und `update_articles.py`. Produktive Chat-Aufrufe,
+Audiotranskription und Groq-/Gemini-Modellschlüsselproben laufen nun über
+den Client; `selftest_ki.py` enthält nur eine
+synthetische Netzwerk-Sandbox-Fixture, keinen produktiven Modellaufruf.
+Zusätzlich wurde der zuvor
+dynamisch aus der Werkbank-Konfiguration gebaute Aufruf in
+`antwortwerk.py` zentralisiert; Gemini-/Groq-Endpunkte stehen nicht mehr
+in `data/werkbank.yaml`. Der nicht mehr betriebene Pollinations-Fallback
+in `generate_drafts.py` ist entfernt.
 
 ### T1 ist eine Dauersperre, kein Hinweis
 
@@ -162,7 +184,7 @@ npm run ki:ping       # fragt jeden erreichbaren Hoster wirklich
 | Redundant | ✅ | ≥ 2 Gratis-Hoster erreichbar | nichts |
 | Dünn | ⚠️ | nur 1 Hoster erreichbar | zweiten Schlüssel nachrüsten |
 | Standby | ⏸ | kein Schlüssel gesetzt | kein Fehler, aber auch kein Betrieb: die Writer erzeugen nur Offline-Gerüste |
-| Vertragsbruch | ❌ | T1–T8 verletzt | nach dieser Anleitung reparieren |
+| Vertragsbruch | ❌ | T1–T10 verletzt | nach dieser Anleitung reparieren |
 
 **Standby ist grün, aber nicht still.** Das Cockpit sagt deutlich, dass
 kein Text entsteht. Genau diese Ehrlichkeit fehlte bei Issue #514, wo
@@ -173,7 +195,7 @@ ein struktureller Dauerausfall als „übersprungen" durchlief.
 ## 7. Eine Kette ändern
 
 1. `data/ki_transportweg.yaml` → `routing.<aufgabe>.kette` anpassen.
-2. `npm run test:ki` – der Selbsttest prüft T1–T8 gegen den neuen Stand.
+2. `npm run test:ki` – der Selbsttest prüft T1–T10 gegen den neuen Stand.
 3. `npm run ki:transportweg` – Cockpit neu schreiben.
 
 Wer einen **neuen Anbieter** aufnimmt, braucht drei Schritte:

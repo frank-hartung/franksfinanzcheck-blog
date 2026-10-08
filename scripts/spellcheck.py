@@ -41,7 +41,7 @@ import glob
 import subprocess
 from datetime import date
 
-import groq_config
+import llm_client
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -817,10 +817,7 @@ def apply_fix(a, problem):
 
 def ai_decide(article, problems):
     """KI entscheidet für unsichere Fälle (type=unknown). Liefert Liste mit fix."""
-    import urllib.request
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    groq_key = os.environ.get("GROQ_API_KEY", "")
-    if not (gemini_key or groq_key):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         return problems
 
     unsure = [p for p in problems if p["type"] == "unknown"]
@@ -840,25 +837,20 @@ def ai_decide(article, problems):
         + "\n".join(ctx_lines) +
         "\n\nAntworte im Format: Nummer|OK oder Nummer|korrektesWort – eine Zeile pro Nummer."
     )
-    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
-
     text = None
-    if gemini_key:
+    for provider in ("gemini", "groq"):
+        if not llm_client.available(provider):
+            continue
         try:
-            body = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=90).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
+            text = llm_client.chat(
+                provider, prompt=prompt,
+                model="gemini-3-flash-preview" if provider == "gemini" else None,
+                max_tokens=500, timeout=90, attempts=2,
+            )
         except Exception:
-            pass
-    if not text and groq_key:
-        try:
-            text = groq_config.chat(prompt, max_tokens=500, timeout=90)
-        except Exception:
-            pass
+            text = None
+        if text:
+            break
     if not text:
         return problems
 

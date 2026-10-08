@@ -33,21 +33,20 @@
 # ============================================================
 
 import json
-import os
 import re
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
+
+import llm_client
 
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT_DIRS = [ROOT / "content" / "posts", ROOT / "content" / "pillar"]
 REPORT = ROOT / "COMPOUND-REPORT.md"
 
-GROQ_KEY = os.environ.get("GROQ_API_KEY", "").strip()
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+GROQ_KEY = llm_client.available("groq")
+GEMINI_KEY = llm_client.available("gemini")
 
 DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
@@ -138,8 +137,9 @@ def target_files():
 def ai_call(system: str, prompt: str) -> str | None:
     if GROQ_KEY:
         try:
-            out = groq_config.chat(
-                prompt, system=system, temperature=0.0, max_tokens=300, timeout=45,
+            out = llm_client.chat(
+                "groq", prompt=prompt, system=system, temperature=0.0,
+                max_tokens=300, timeout=45, attempts=3, raise_on_error=True,
             )
             if out:
                 return out
@@ -147,20 +147,12 @@ def ai_call(system: str, prompt: str) -> str | None:
             print(f"  ⚠ groq: {e}")
     if GEMINI_KEY:
         try:
-            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-            payload = {
-                "systemInstruction": {"parts": [{"text": system}]},
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {"temperature": 0.0, "maxOutputTokens": 300},
-            }
-            req = urllib.request.Request(
-                url, data=json.dumps(payload).encode(),
-                headers={"Content-Type": "application/json", "x-goog-api-key": GEMINI_KEY},
-                method="POST",
+            return llm_client.chat(
+                "gemini", prompt=prompt, system=system,
+                temperature=0.0,
+                max_tokens=300, timeout=45, attempts=1,
+                raise_on_error=True,
             )
-            with urllib.request.urlopen(req, timeout=45) as r:
-                data = json.loads(r.read())
-            return data["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as e:
             print(f"  ⚠ gemini: {e}")
     return None

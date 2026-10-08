@@ -30,13 +30,12 @@ import re
 import sys
 import json
 import datetime
-import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
-import groq_config
+import llm_client
 CACHE_FILE = os.path.join(BLOG_DIR, ".polish_cache.json")
 
 
@@ -72,9 +71,7 @@ def ai_polish(a):
     if key in cache:
         return cache[key]
 
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    groq_key = os.environ.get("GROQ_API_KEY", "")
-    if not (gemini_key or groq_key):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         print("  ⚠️ Keine API-Keys – kein Polish möglich.")
         return None
 
@@ -152,33 +149,22 @@ ARTIKEL:
 
 Liefere NUR den vollständigen polierten Markdown-Text (ohne Frontmatter, ohne Erklärungen)."""
 
-    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36"
-
-    if gemini_key:
+    for provider in ("gemini", "groq"):
+        if not llm_client.available(provider):
+            continue
         try:
-            body = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=120).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
+            text = llm_client.chat(
+                provider, prompt=prompt,
+                model="gemini-3-flash-preview" if provider == "gemini" else None,
+                max_tokens=8000 if provider == "gemini" else 4000,
+                timeout=120, attempts=3,
+            )
             if text:
                 cache[key] = text
                 json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception as e:
-            print(f"  ⚠️ Gemini: {e}")
-
-    if groq_key:
-        try:
-            text = groq_config.chat(prompt, max_tokens=4000, timeout=120)
-            if text:
-                cache[key] = text
-                json.dump(cache, open(CACHE_FILE, "w", encoding="utf-8"), ensure_ascii=False)
-            return text
-        except Exception as e:
-            print(f"  ⚠️ Groq: {e}")
+                return text
+        except Exception as exc:
+            print(f"  ⚠️ {provider.capitalize()}: {exc}")
     return None
 
 

@@ -44,7 +44,7 @@ POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of, safe_title_cut,  # noqa: E402
                         join_article, doppel_freies_feld)
-import groq_config  # noqa: E402
+import llm_client  # noqa: E402
 
 DENSITY_MIN = 0.003
 DENSITY_MAX = 0.03
@@ -692,23 +692,20 @@ def save_cache(cache):
 
 
 def _call_ai(prompt):
-    import urllib.request
-    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-    gemini_key = os.environ.get("GEMINI_API_KEY", "")
-    if gemini_key:
+    if llm_client.available("gemini"):
         try:
-            body = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=60).read())
-            return resp["candidates"][0]["content"]["parts"][0]["text"]
+            return llm_client.chat(
+                "gemini", prompt=prompt, model="gemini-3-flash-preview",
+                max_tokens=200, timeout=60, attempts=1,
+            )
         except Exception:
             pass
-    if groq_config.available():
+    if llm_client.available("groq"):
         try:
-            return groq_config.chat(prompt, max_tokens=200, timeout=60)
+            return llm_client.chat(
+                "groq", prompt=prompt, max_tokens=200, timeout=60,
+                attempts=3,
+            )
         except Exception:
             pass
     return None
@@ -718,7 +715,7 @@ def ai_suggest(main_kw):
     cache = load_cache()
     if main_kw in cache:
         return cache[main_kw]
-    if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GROQ_API_KEY")):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         return None
     prompt = (f"Für das Haupt-Keyword '{main_kw}' eines deutschen Finanz-/Spar-Blogs: "
               f"nenne genau 5 verwandte Suchbegriffe (LSI-Keywords), die Nutzer zusätzlich "

@@ -59,6 +59,10 @@ Zur Beschleunigung wiederholter Besuche setzt diese Website einen **Service Work
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer schnellen Bereitstellung der Website).
 
+### Website-Suche (lokale Suche)
+
+Die Suchbegriffe werden im Browser verarbeitet und nicht an einen Suchdienst übermittelt oder als Suchhistorie gespeichert. Für die Suche lädt der Browser statische Indexdateien von dieser Website; dabei anfallende technische Zugriffsdaten sind in Abschnitt 2 beschrieben.
+
 ### Statistik und Reichweitenmessung (Umami – cookieless)
 
 Diese Website nutzt zur Reichweitenmessung das datenschutzfreundliche Analyse-Tool **Umami** (Open Source). Umami ist **cookieless**: Es werden **keine Cookies** gesetzt und **keine personenbezogenen Daten** gespeichert. Erfasst werden ausschließlich anonyme, aggregierte Kennzahlen:
