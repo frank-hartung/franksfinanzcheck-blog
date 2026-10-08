@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 08.10.2026 14:06 (Europe/Berlin)  
+> Automatisch aktualisiert: 08.10.2026 21:19 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,25 +12,22 @@
 
 ## Kommende Beiträge
 
-### Do, 08. Oktober 2026
-- **18:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _zahl_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
 ### Sa, 10. Oktober 2026
-- **07:00** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
 ### So, 11. Oktober 2026
+- **07:00** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+### Sa, 17. Oktober 2026
 - **07:00** ⏳ WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich? — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/
-### Sa, 17. Oktober 2026
-- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### So, 18. Oktober 2026
-- **07:00** ⏳ Preiswert surfen: So findest du den optimalen DSL‑Anschluss — _vergleich_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/
+- **07:00** ⏳ Gasabschlag berechnen: So planst du die Heizsaison richtig — _takeaway_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/
 ### Do, 22. Oktober 2026
-- **07:00** ⏳ Büroausstattung steuerlich clever absetzen: So geht's — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/
-- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _vergleich_ · Launch  
+- **07:00** ⏳ Weihnachten Budget planen: Ohne Schulden durch die Feiertage — _vergleich_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/
+- **18:00** ⏳ Internet & DSL-Update: Was sich jetzt für dich ändert — _frage_ · Launch  
   https://franksfinanzcheck.de/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/
 
 ## Zuletzt veröffentlicht

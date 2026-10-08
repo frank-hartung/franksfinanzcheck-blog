@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 08.10.2026 14:06 (Europe/Berlin)  
+> Automatisch aktualisiert: 08.10.2026 21:19 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,12 +12,7 @@
 
 ## Kommende Beiträge
 
-### Do, 08. Oktober 2026
-- **14:15** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### Do, 22. Oktober 2026
-- **14:15** ⏳ Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/
+_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
 
 ## Zuletzt veröffentlicht
 
