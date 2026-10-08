@@ -1,7 +1,7 @@
 ---
 title: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
 description: Du willst Stromkosten senken? Entdecke aktuelle Balkonkraftwerk Förderung & Zuschüsse. Wir zeigen dir, wie du beim Steckersolar-Kauf bares Geld sparst.
-date: 2026-10-07T17:47:29Z
+date: 2026-10-08T00:11:05Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"

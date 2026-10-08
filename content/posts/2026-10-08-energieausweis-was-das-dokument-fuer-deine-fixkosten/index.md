@@ -1,7 +1,7 @@
 ---
 title: "Energieausweis: Was das Dokument für deine Fixkosten"
 description: Brauchst du einen Energieausweis? Erfahre alles über gesetzliche Pflichten, die Energieausweis Kosten und wie die Energieeffizienzklasse Haus-Kosten senkt.
-date: 2026-10-07T17:47:29Z
+date: 2026-10-08T00:11:05Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"

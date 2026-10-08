@@ -1,7 +1,7 @@
 ---
 title: "Kleine Energiespar‑Tricks,: die deine Kosten sofort senken"
 description: Praktische SparTipps, wie du mit kleinen Änderungen den Energieverbrauch reduzierst und deine Kosten im Griff behältst. So sparst du jeden Monat bares Geld.
-date: 2026-10-07T17:47:29Z
+date: 2026-10-08T00:11:05Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"

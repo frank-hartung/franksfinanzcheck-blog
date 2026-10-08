@@ -1,7 +1,7 @@
 ---
 title: "DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet"
 description: Willst du deinen DSL-Anbieter wechseln und Geld sparen? Frank Hartung erklärt den 4K-Prüfpfad für deine Internetkosten – ehrlich und ohne Werbe-Blabla.
-date: 2026-10-07T10:43:09Z
+date: 2026-10-08T00:11:05Z
 draft: true
 reserve: true
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -65,11 +65,11 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum lohnt es sich, den DSL-Anbieter regelmäßig zu vergleichen?
 
-Die Telekommunikationsbranche kalkuliert ihre Gewinne über lange Zeiträume. In den ersten zwei Jahren verdienen die Anbieter oft kaum an dir. Marketing und Hardware-Rabatte drücken die Marge des Providers. Erst danach sprudeln die Gewinne durch hohe Standardpreise.
+Die Branche kalkuliert ihre Gewinne über lange Zeiträume. In den ersten zwei Jahren verdienen die Anbieter oft kaum an dir. Marketing und Hardware-Rabatte drücken die Marge des Providers. Erst danach sprudeln die Gewinne durch hohe Standardpreise.
 
 Hinterfrage deinen **DSL-Anbieter** deshalb alle 24 Monate konsequent. Ein neuer Vertrag bringt dir oft nicht nur eine Ersparnis.
 
-Du profitierst häufig von modernerer Technik wie Glasfaser (FTTH). So steigerst du die [Internetgeschwindigkeit](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) in deinem Zuhause deutlich. Ein Wechsel wirkt wie eine Verjüngungskur für deine digitale Infrastruktur.
+Du profitierst häufig von neuer Technik wie Glasfaser (FTTH). So steigerst du die [Internetgeschwindigkeit](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) in deinem Zuhause deutlich. Ein Wechsel wirkt wie eine Frischekur für deine digitale Infrastruktur.
 
 Viele alte Verträge schleppen zudem unnötigen Ballast mit. Vielleicht zahlst du noch für eine Festnetz-Flatrate, die du nie nutzt.
 
@@ -79,11 +79,11 @@ Durch das **Wechseln** passt du deinen Tarif an deinen aktuellen Bedarf an. Du z
 
 Kenne deine aktuelle Situation im Detail. Das ist der erste Schritt im 4K-Prüfpfad: Kosten sehen. Nimm deine letzte Rechnung zur Hand. Schau nicht nur auf die Gesamtsumme deines Bankeinzugs.
 
-Zerlege die Kosten in einzelne Positionen. Was kostet die reine Internetleitung pro Monat?
+Zerlege die Kosten in einzelne Positionen. Was kostet die reine Leitung pro Monat?
 
 Wie viel zahlst du für die Miete deines Routers? Oft verstecken sich [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) für Sicherheitspakete oder Cloud-Speicher in der Rechnung. Diese kosten oft 2 € bis 5 € zusätzlich.
 
-Notiere dir das Ende deiner Mindestvertragslaufzeit genau. Dank moderner Gesetze bist du danach sehr flexibel.
+Notiere dir das Ende deiner Mindestlaufzeit genau. Dank moderner Gesetze bist du danach sehr flexibel.
 
 Du kündigst dann mit einer Frist von nur einem Monat. Das nimmt den Zeitdruck aus deiner Entscheidung. Nur wer seine Kosten schwarz auf weiß kennt, erkennt ein echtes Schnäppchen.
 
@@ -135,7 +135,7 @@ Ein Wechsel lohnt sich meist ab einer Ersparnis von 10 % – bezogen auf deine 
 
 Niemand möchte tagelang ohne Internet dastehen. Das Gesetz [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor langen Ausfallzeiten. Dein alter Anbieter versorgt dich theoretisch weiter, bis die neue Leitung steht. Dennoch ist eine gute Planung für den Erfolg entscheidend.
 
-Wähle bei der Bestellung den sogenannten Anbieterwechselauftrag aus. Damit bevollmächtigst du den neuen Provider zur Kündigung. Er koordiniert auch die Mitnahme deiner Rufnummer. Die Unternehmen stimmen den Schalttermin dann direkt untereinander ab.
+Wähle bei der Bestellung den sogenannten Wechselauftrag aus. Damit bevollmächtigst du den neuen Provider zur Kündigung. Er koordiniert auch die Mitnahme deiner Rufnummer. Die Unternehmen stimmen den Schalttermin dann direkt untereinander ab.
 
 **So gehst du vor beim Wechselprozess:**
 1. **Bedarf ermitteln:** Welche Geschwindigkeit [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) für dein Homeoffice oder Streaming?
@@ -182,18 +182,18 @@ Wähle die passende Technologie für deinen Bedarf. Nicht jede Art von Anschluss
 Die Umstellung dauert meist nur wenige Stunden am Schalttag. Gesetzlich darf die Unterbrechung maximal einen Kalendertag betragen. Beauftrage den neuen Anbieter mit der Kündigung für maximale Sicherheit. So minimierst du das Risiko eines langen Ausfalls erheblich.
 
 ### Kann ich meine alte Festnetznummer behalten?
-Ja, das ist beim **Wechseln** fast immer möglich. Gib diesen Wunsch einfach im Anbieterwechselauftrag an. Profis nennen diesen Vorgang Portierung. Kündige deinen alten Vertrag keinesfalls selbst, sonst droht der Verlust der Nummer.
+Ja, das ist beim **Wechseln** fast immer möglich. Gib diesen Wunsch einfach im Wechselauftrag an. Profis nennen diesen Vorgang Portierung. Kündige deinen alten Vertrag keinesfalls selbst, sonst droht der Verlust der Nummer.
 
 ### Was passiert mit meinem gemieteten Router nach dem Wechsel?
 Mietgeräte gehören weiterhin dem Provider. Du musst den Router nach Vertragsende meist innerhalb von 14 Tagen zurückschicken. Sonst stellt dir der Anbieter den Zeitwert des Geräts in Rechnung. Bewahre den Einsendebeleg der Post als Nachweis unbedingt gut auf.
 
 ### Lohnt sich ein Wechsel auch innerhalb des gleichen Anbieters?
-Ein interner Tarifwechsel ist oft schwierig für Bestandskunden. Attraktive Rabatte gelten meistens nur für Neukunden. Signalisiere der Kündigungshotline jedoch deutlich deine Wechselabsicht. Oft erhältst du dann spezielle Rückholangebote mit besseren Konditionen.
+Ein interner Tarifwechsel ist oft schwierig für Bestandskunden. Attraktive Rabatte gelten meistens nur für Neukunden. Signalisiere der Hotline jedoch deutlich deine Wechselabsicht. Oft erhältst du dann spezielle Rückholangebote mit besseren Konditionen.
 
 ### Wie finde ich heraus, wie viel Speed ich wirklich brauche?
 Das hängt von deiner persönlichen Nutzung ab. Für einfaches Surfen und Video-Calls genügen oft 50 Mbit/s. Mehrere Personen mit 4K-Streaming benötigen eher 100 oder 250 Mbit/s. Wer für ungenutzte Geschwindigkeit bezahlt, verschenkt unnötig Geld.
 
-Verstehe die Logik der Anbieter und handle proaktiv. Verwandle deinen Internetanschluss von einer Kostenfalle in einen aktiv gemanagten Teil deiner Finanzen. Es zählt das beste Preis-Leistungs-Verhältnis für deinen individuellen Alltag. Behalte deine Konditionen und Kündigungsfristen fest im Blick.
+Verstehe die Logik der Anbieter und handle proaktiv. Verwandle deinen Anschluss von einer Kostenfalle in einen aktiv gemanagten Teil deiner Finanzen. Es zählt das beste Preis-Leistungs-Verhältnis für deinen individuellen Alltag. Behalte deine Konditionen und Kündigungsfristen fest im Blick.
 
 ---
 
