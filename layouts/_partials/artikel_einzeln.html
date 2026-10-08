@@ -107,8 +107,8 @@
          26.09.2026 (Premium): Signet statt Glühbirne – animierte Marke der
          Themenwelt des Artikels (layouts/_partials/kurzantwort_icon.html),
          Optik in z-premium-blog.css (Sicherungsblock „Kurzantwort-Box“).
-         HINWEIS: Diese Datei und layouts/single.html werden deckungsgleich
-         gepflegt; layouts/single.html gewinnt die Template-Auflösung. */ -}}
+         Der Inhalt sitzt zentral im gemeinsamen `artikel_einzeln`-Baustein;
+         die Einzel-Templates sind nur dünne Wrapper (Vertrag S2). */ -}}
   {{- $readerShort := .Params.kurzantwort | default .Description | default "" -}}
   {{- if and (eq .Section "posts") $readerShort }}
   <div class="ff-kurzantwort" role="note" aria-labelledby="ff-kurzantwort-label-{{ .File.UniqueID }}">

@@ -128,7 +128,8 @@ npm run robustheit:check                              # Robustheit R1–R13: Sel
 npm run test:robustheit                               # Robustheit: Gate-Selbsttest + Unit-Tests + Verhalten im jsdom
 python3 scripts/robustheits_gate.py --source-only     # Laufzeit-Fangnetze ohne Hugo (< 1 s, fail-closed im Deploy)
 npm run h1:check                                      # H1-Wache: genau eine H1 pro Seite (Quelle + Build)
-npm run test:h1                                       # 20 Regressionstests der H1-Wache (Vertrag C30)
+npm run test:h1                                       # H1-Wache + vollständiges A11y-Audit (33 Regressionstests, C30)
+npm run test:a11y                                     # fokussierte Vollscan-/Fail-closed-Regressionen
 npm run marke:check                                   # Markenfläche README: Selbsttest + Gate (offline, < 1 s)
 npm run test:marke                                    # Wache (17 Fallgruppen) + Haken-Wächter (11) + 34 Regressionstests
 npm run hooks:status                                  # steht die Commit-Sperre in dieser Arbeitskopie? (sonst: hooks:install)

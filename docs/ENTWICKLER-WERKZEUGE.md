@@ -209,7 +209,8 @@ Markdown-Fließtext.
 ```bash
 npm run h1:check      # Sabotageproben + Quelle + Hugo-Build + gebaute Seiten
 npm run a11y:check    # dieselbe Wache, danach das vollständige A11y-Audit
-npm run test:h1       # 20 Regressionstests der Wache
+npm run test:h1       # H1-Wache + Voll-Audit (33 Regressionstests)
+npm run test:a11y     # fokussierte Vollscan-/Fail-closed-Regressionen
 python3 scripts/h1_wache.py --source-only    # nur Quelle (kein Build nötig)
 python3 scripts/h1_wache.py --public public  # nur die gebauten Seiten
 python3 scripts/h1_wache.py --json           # maschinenlesbar
