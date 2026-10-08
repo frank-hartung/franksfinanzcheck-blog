@@ -42,7 +42,8 @@
     });
   }
 
-  /* Auszug (HTML mit <mark>) → Liste aus { text, markiert }. Fremde Tags fallen weg. */
+  /* Auszug (HTML mit <mark>) → Liste aus { text, markiert }. Nur <mark> zählt als Markierung;
+     fremdes Markup bleibt Text. Ausgegeben wird ausschließlich über textContent. */
   function auszugSegmente(auszug) {
     var teile = String(auszug || '').split(/(<\/?mark\b[^>]*>)/i);
     var segmente = [];
@@ -51,7 +52,7 @@
       if (!teil) { return; }
       if (/^<mark\b/i.test(teil)) { markiert = true; return; }
       if (/^<\/mark\b/i.test(teil)) { markiert = false; return; }
-      var text = entschluesseln(teil.replace(/<[^>]*>/g, ''));
+      var text = entschluesseln(teil); // nur <mark> ist Markup; alles andere bleibt Text
       if (text) { segmente.push({ text: text, markiert: markiert }); }
     });
     return segmente;

@@ -62,14 +62,15 @@ test('entschluesseln löst nur bekannte und numerische Entities auf', () => {
   assert.equal(api.entschluesseln('&#99999999;'), '&#99999999;', 'ungültiger Codepunkt bleibt');
 });
 
-test('auszugSegmente trennt Markierungen und entfernt fremde Tags', () => {
+test('auszugSegmente trennt Markierungen; fremdes Markup bleibt Text', () => {
   assert.deepEqual(api.auszugSegmente('Die <mark>Kündigungsfrist</mark> &amp; mehr'), [
     { text: 'Die ', markiert: false },
     { text: 'Kündigungsfrist', markiert: true },
     { text: ' & mehr', markiert: false },
   ]);
   const boese = api.auszugSegmente('<img src=x onerror="alert(1)"><script>x()</script>Text');
-  assert.equal(boese.map((s) => s.text).join(''), 'x()Text', 'Tags weg, nur Text bleibt');
+  assert.equal(boese.map((s) => s.text).join(''), '<img src=x onerror="alert(1)"><script>x()</script>Text',
+    'fremdes Markup wird als Text geführt, nie als Element');
   assert.ok(boese.every((s) => !s.markiert));
   assert.deepEqual(api.auszugSegmente(''), []);
 });
