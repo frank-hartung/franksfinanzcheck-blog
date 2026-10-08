@@ -7,8 +7,9 @@
 // stehen; diese Simulation führt das Skript wirklich aus und beweist das
 // Verhalten in Produktionsszenarien – inklusive der exakten #343-Konstellation
 // (roter pull_request-Lauf eines arena-Zweigs → KEIN Alarm), der
-// Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall)
-// und der #602-#608-Fachkanal-Regel für Tagesdefizite (ein Zustandskanal,
+// Bestandszusagen (Phantom-Filter #218, Dedupe, Fail-open bei API-Ausfall),
+// der #632-Frühabbruch-Diagnose für Phase 0.5 und der #602-#608-Fachkanal-
+// Regel für Tagesdefizite (ein Zustandskanal,
 // der auch an Ruhetagen belegt wird – sonst meldet das Alerting generisch).
 //
 // Aufruf:  node scripts/tests/sim/alert_scoping_sim.mjs <pfad-zum-rohskript.js>
@@ -16,6 +17,8 @@
 // Der Test-Haken läuft in CI über scripts/tests/test_alert_scoping.py
 // (unittest discover; GitHub-Runner bringen node mit).
 import fs from 'fs';
+import { tmpdir } from 'os';
+import { join } from 'path';
 import { createRequire } from 'module';
 
 // github-script stellt dem Skript ein CommonJS-`require` bereit; dieses
@@ -32,7 +35,7 @@ if (!identPfad) {
   console.error('ALARM_IDENTITAET fehlt – die Simulation braucht die echte Identitäts-Quelle.');
   process.exit(2);
 }
-const IDENT = JSON.parse(fs.readFileSync(identPfad, 'utf8'));
+const IDENTITIES = JSON.parse(fs.readFileSync(identPfad, 'utf8'));
 
 const scriptPath = process.argv[2];
 if (!scriptPath) {
@@ -41,7 +44,7 @@ if (!scriptPath) {
 }
 const raw = fs.readFileSync(scriptPath, 'utf8');
 
-function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = null, jobsFail = false, openIssues = [] }) {
+function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId = 42, attempt = 1, jobs = null, jobsFail = false, openIssues = [] }) {
   const created = [];
   const updated = [];
   const github = {
@@ -68,7 +71,7 @@ function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = nu
     payload: {
       repository: { default_branch: 'main' },
       workflow_run: {
-        id: runId, name: 'Layout-AI', conclusion, html_url: 'https://x/runs/' + runId,
+        id: runId, name: workflowName, conclusion, html_url: 'https://x/runs/' + runId,
         head_branch: branch, head_sha: '41e56bd7deadbeef', event, run_attempt: attempt,
         created_at: '2026-09-21T17:17:23Z',
       },
@@ -80,15 +83,31 @@ function makeCtx({ branch, event, conclusion, runId = 42, attempt = 1, jobs = nu
 let failed = 0;
 let count = 0;
 
-async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = null) {
+async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = null, expectNotInBody = []) {
   count++;
-  const { github, context, created, updated } = makeCtx(cfg);
+  const workflowName = cfg.workflowName || 'Layout-AI';
+  const identity = IDENTITIES[workflowName];
+  if (!identity) throw new Error('Keine Identität für Workflow „' + workflowName + '“');
+  const { github, context, created, updated } = makeCtx({ ...cfg, workflowName });
   const logs = [];
+  // github-script liest die Identität pro Lauf aus einer Datei. Die Simulation
+  // wechselt dieselbe Quelle passend zum simulierten Workflow statt etwa
+  // Content-Engine-Fehler mit der Layout-AI-Identität zu testen.
+  const identityFile = join(tmpdir(), `alert-identity-${process.pid}-${count}.json`);
+  const previousIdentityFile = process.env.ALARM_IDENTITAET;
+  fs.writeFileSync(identityFile, JSON.stringify(identity), { encoding: 'utf8', flag: 'wx' });
+  process.env.ALARM_IDENTITAET = identityFile;
   // github-script führt den `script:`-Block als async-Funktionsrumpf aus –
   // genau das wird hier nachgebildet (return auf oberster Ebene ist dort legal).
   const fn = new Function('github', 'context', 'console', 'require', 'process',
     'return (async () => {' + raw + '\n})()');
-  await fn(github, context, { log: (m) => logs.push(String(m)) }, requireShim, process);
+  try {
+    await fn(github, context, { log: (m) => logs.push(String(m)) }, requireShim, process);
+  } finally {
+    if (previousIdentityFile === undefined) delete process.env.ALARM_IDENTITAET;
+    else process.env.ALARM_IDENTITAET = previousIdentityFile;
+    fs.unlinkSync(identityFile);
+  }
   const got = created.length > 0;
   const body = created[0] ? created[0].body : '';
   const title = created[0] ? created[0].title : '';
@@ -96,25 +115,26 @@ async function run(name, cfg, expectIssue, expectInBody = [], expectUpdates = nu
   if (ok && expectIssue) {
     // Markenfläche: der Titel nennt weder Workflow noch „fehlgeschlagen“;
     // die Identität steckt unsichtbar als Marker im Body.
-    ok = title === IDENT.titel;
-    if (!body.includes(IDENT.marker)) ok = false;
-    if (/fehlgeschlagen|Layout-AI/.test(title)) ok = false;
+    ok = title === identity.titel;
+    if (!body.includes(identity.marker)) ok = false;
+    if (/fehlgeschlagen|Layout-AI|Content-Engine/.test(title)) ok = false;
     for (const needle of expectInBody) if (!body.includes(needle)) ok = false;
+    for (const needle of expectNotInBody) if (body.includes(needle)) ok = false;
     if (created[0].labels && JSON.stringify(created[0].labels) !== JSON.stringify(['auto-report'])) ok = false;
   }
   if (ok && expectUpdates !== null) {
     ok = updated.length === expectUpdates.anzahl;
     if (ok && expectUpdates.anzahl > 0) {
       ok = updated[0].issue_number === expectUpdates.nummer &&
-           updated[0].title === IDENT.titel &&
-           String(updated[0].body).includes(IDENT.marker);
+           updated[0].title === identity.titel &&
+           String(updated[0].body).includes(identity.marker);
     }
   }
   console.log((ok ? '✅' : '❌') + ' ' + name + (got ? ' → Issue' : ' → kein Issue') +
     (logs[0] ? ' | ' + logs[0].slice(0, 95) : ''));
   if (!ok) {
     failed++;
-    console.log('   ERWARTET: ' + (expectIssue ? 'Issue „' + IDENT.titel + '“ mit: ' + expectInBody.join(' / ') : 'KEIN Issue'));
+    console.log('   ERWARTET: ' + (expectIssue ? 'Issue „' + identity.titel + '“ mit: ' + expectInBody.join(' / ') : 'KEIN Issue'));
     console.log('   TITEL: ' + title);
     console.log('   BODY: ' + body.slice(0, 400));
     console.log('   UPDATES: ' + JSON.stringify(updated).slice(0, 300));
@@ -140,39 +160,81 @@ await run('schedule-Lauf main rot → Alarm + Schritt-Diagnose',
              steps: [{ name: 'Website bauen', conclusion: 'success' },
                      { name: 'Browser-Audit', conclusion: 'failure' }] }] },
   true, ['### Fehlgeschlagene Schritte', 'Browser-Audit', 'https://x/jobs/9', '**Event:** `schedule`', 'Layout-AI']);
-// 5. push auf main rot → Alarm (Produktion)
+// 5. WF-A535 #632: Frühabbruch in Phase 0.5 darf nicht mit dem generischen
+//    API-Key-/GitHub-Runbook oder dem irreführenden Tagesdefizit-Label enden.
+await run('#632-Reproduktion: Phase 0.5 + Schlussklassifikation → präzises Runbook',
+  { workflowName: 'Content-Engine v2', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'engine', conclusion: 'failure', html_url: 'https://x/jobs/632',
+             steps: [
+               { name: 'Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)', conclusion: 'failure' },
+               { name: 'Do not report a quota deficit as success', conclusion: 'failure' },
+             ] }] },
+  true,
+  ['Vorgang **WF-A535**', 'Frühabbruch vor der Endabnahme', 'Phase 0.5',
+   'Selbsttest-Exit 2', 'python3 scripts/selftest_ki.py --trap <skript>'],
+  null,
+  ['Häufigste Ursachen', 'API-Key abgelaufen', 'GitHub-Ausfall', 'Transienter Fehler']);
+
+// 6. Andere Content-Engine-Klasse: den Annotation-Classifier erklären, ohne
+//    die Phase-0.5-spezifische KI-Probe zu behaupten.
+await run('Content-Engine-Schluss-Classifier → Klassen-Runbook ohne Key-Raten',
+  { workflowName: 'Content-Engine v2', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'engine', conclusion: 'failure', html_url: 'https://x/jobs/633',
+             steps: [{ name: 'Do not report a quota deficit as success', conclusion: 'failure' }] }] },
+  true,
+  ['Abschluss-Classifier', 'FRÜHABBRUCH', 'TAGESDEFIZIT', 'RELEASE-CRASH', 'SYNCHRONVERLUST'],
+  null,
+  ['Häufigste Ursachen', 'API-Key abgelaufen', 'GitHub-Ausfall', 'Transienter Fehler',
+   'selftest_ki.py --trap']);
+
+// 7. Identische Schritttexte in einem anderen Workflow dürfen nicht in die
+//    Content-Engine-Sonderbehandlung geraten.
+await run('gleichnamige Schritte in fremdem Workflow → Standard-Runbook',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/634',
+             steps: [
+               { name: 'Phase 0.5 – Kadenz-Gate sicherstellen (Selbsttest + Selbstheilung)', conclusion: 'failure' },
+               { name: 'Do not report a quota deficit as success', conclusion: 'failure' },
+             ] }] },
+  true,
+  ['Häufigste Ursachen'],
+  null,
+  ['Frühabbruch vor der Endabnahme', 'selftest_ki.py --trap <skript>']);
+
+// 8. push auf main rot → Alarm (Produktion)
 await run('push-Lauf main rot → Alarm',
   { branch: 'main', event: 'push', conclusion: 'failure', jobs: [] }, true, ['**Event:** `push`']);
-// 6. Phantom (#218): cancelled auf main, keine ausgeführten Schritte → KEIN Alarm
+// 9. Phantom (#218): cancelled auf main, keine ausgeführten Schritte → KEIN Alarm
 await run('verdrängter Wartelauf main (cancelled, 0 Schritte) → kein Alarm',
   { branch: 'main', event: 'push', conclusion: 'cancelled',
     jobs: [{ name: 'deploy', conclusion: 'cancelled', html_url: 'j', steps: [] }] }, false);
-// 7. Echter Abbruch: cancelled auf main MIT erfolgreichen Schritten → Alarm
+// 10. Echter Abbruch: cancelled auf main MIT erfolgreichen Schritten → Alarm
 await run('echter Abbruch main (cancelled, Schritte liefen) → Alarm',
   { branch: 'main', event: 'workflow_dispatch', conclusion: 'cancelled', attempt: 2,
     jobs: [{ name: 'deploy', conclusion: 'cancelled', html_url: 'j',
              steps: [{ name: 'Build', conclusion: 'success' },
                      { name: 'Upload', conclusion: 'cancelled' }] }] },
   true, ['**Versuch:** 2', 'Upload']);
-// 8. Dedupe über den ALT-TITEL (Übergangszeit) → kein Duplikat, aber stille
+// 11. Dedupe über den ALT-TITEL (Übergangszeit) → kein Duplikat, aber stille
 //    Migration auf den markenneutralen Titel samt Marker.
 await run('Dedupe: offene Alt-Meldung existiert → kein Duplikat, Titel wird migriert',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
     openIssues: [{ number: 99, title: '⚠️ Workflow fehlgeschlagen: Layout-AI (failure)',
                    body: 'alter Text ohne Marker' }] },
   false, [], { anzahl: 1, nummer: 99 });
-// 9. Fail-open: Job-API tot bei main-Fehler → Alarm trotzdem (ohne Diagnose)
+// 12. Fail-open: Job-API tot bei main-Fehler → Alarm trotzdem (ohne Diagnose)
 await run('Job-API-Ausfall bei main-Fehler → Alarm trotzdem',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobsFail: true },
   true, ['Häufigste Ursachen']);
 
-// 10. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
+// 13. Dedupe über den MARKER (Normalfall nach der Umstellung): kein Duplikat
 //     und auch keine überflüssige Umbenennung.
 await run('Dedupe: offene Meldung mit Marker → kein Duplikat, keine Umschrift',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
-    openIssues: [{ number: 100, title: IDENT.titel, body: IDENT.marker + '\nDetails' }] },
+    openIssues: [{ number: 100, title: IDENTITIES['Layout-AI'].titel,
+                   body: IDENTITIES['Layout-AI'].marker + '\nDetails' }] },
   false, [], { anzahl: 0 });
-// 11. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
+// 14. Fremder Vorgang offen → der eigene Alarm darf NICHT verschluckt werden
 //     (die Dedupe-Vergiftung aus #218/#343 in neuer Gestalt).
 await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entsteht',
   { branch: 'main', event: 'schedule', conclusion: 'failure', jobs: [],
@@ -180,7 +242,7 @@ await run('Dedupe: offene Meldung eines ANDEREN Vorgangs → eigener Alarm entst
                    body: '<!-- alert-key: WF-0000 -->' }] },
   true, ['Häufigste Ursachen']);
 
-// 12. #602-Klasse: Die Kadenz bleibt bei einem echten Tagesdefizit ehrlich
+// 15. #602-Klasse: Die Kadenz bleibt bei einem echten Tagesdefizit ehrlich
 //     rot, aber das Fach-Issue engine-deficit besitzt bereits die Arbeit.
 //     Dann darf das zentrale Alerting KEIN generisches API-Key-Runbook daneben
 //     legen.
@@ -194,7 +256,7 @@ await run('Tagesdefizit mit offenem engine-deficit-Fachissue → kein auto-repor
                    updated_at: '2026-09-21T17:18:00Z' }] },
   false);
 
-// 13. Fehlt der Fachkanal, bleibt das Alerting fail-open: Dann ist nicht das
+// 16. Fehlt der Fachkanal, bleibt das Alerting fail-open: Dann ist nicht das
 //     Defizit das Problem, sondern die Zustellung der Fachmeldung.
 await run('Tagesdefizit ohne engine-deficit-Fachissue → generischer Alarm fail-open',
   { branch: 'main', event: 'schedule', conclusion: 'failure',
@@ -202,7 +264,7 @@ await run('Tagesdefizit ohne engine-deficit-Fachissue → generischer Alarm fail
              steps: [{ name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
-// 14. Ein altes engine-deficit-Issue darf die aktuelle Zustellstörung nicht
+// 17. Ein altes engine-deficit-Issue darf die aktuelle Zustellstörung nicht
 //     verschlucken. Der Fachkanal zählt nur, wenn er für diesen Lauf frisch
 //     aktualisiert wurde.
 await run('Tagesdefizit mit veraltetem engine-deficit-Issue → generischer Alarm fail-open',
@@ -215,7 +277,7 @@ await run('Tagesdefizit mit veraltetem engine-deficit-Issue → generischer Alar
                    updated_at: '2026-09-20T17:18:00Z' }] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
-// 15. #608-Konstellation: Ein verspäteter Montags-Slot der Kadenz-Endkontrolle
+// 18. #608-Konstellation: Ein verspäteter Montags-Slot der Kadenz-Endkontrolle
 //     läuft in der Nacht auf einem RUHETAG und meldet den Vortag ehrlich rot.
 //     Nach der Reparatur (WF-1F8C #608) belegt die Messung den Fachkanal an
 //     JEDEM Tag: `engine_issue.py --deficit` hat das am Abend zuvor von einem
@@ -233,7 +295,7 @@ await run('#608: Ruhetag-Lauf, frisch wiedereröffneter Fachkanal → kein Dupli
                    updated_at: '2026-09-21T17:17:40Z' }] },
   false);
 
-// 16. Gegenprobe zu 15: Ist der Fachkanal nach dem Merge NICHT wieder geöffnet
+// 19. Gegenprobe zu 18: Ist der Fachkanal nach dem Merge NICHT wieder geöffnet
 //     worden (alte Fassung des Melders, Rechte fehlen, gh-Ausfall), bleibt das
 //     Alerting fail-open – dann ist der Melder das Problem, nicht die Quote.
 await run('#608-Gegenprobe: Fachkanal blieb geschlossen → generischer Alarm fail-open',
