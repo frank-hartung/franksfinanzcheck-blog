@@ -109,6 +109,7 @@ node scripts/layout_browser_check.js # Browser-Audit (Puppeteer; braucht CHROME_
 python3 -m unittest discover -s scripts/tests        # Unit-Tests (u. a. Alarm-Routing)
 python3 scripts/audit_log.py --selftest              # Beweis-Ledger: Umlenkung/Stummschaltung (C27)
 python3 scripts/repo_isolation.py --selftest         # Test-Sandbox: data/audit/ bleibt unberührt (C27)
+python3 scripts/selftest_ki.py --trap-workflows      # KI-Probe: kein Selbsttest hängt an Modell/Netz (#138)
 npm run test:release                                 # Release-Scorecard: Selbsttest + 41 Unit-Tests (Produktionswahrheit)
 python3 scripts/release_scorecard.py                 # Release-Scorecard: acht Dimensionen je Live-Artikel + Siegel
 python3 scripts/alert_router.py --selftest           # Routing-Regeln (Besitz/Kadenz/Schließpfad)
@@ -1118,6 +1119,41 @@ Signatur.
 
 Runbook: `docs/ANLEITUNG-ROBUSTHEIT.md` · Befund und Beweis:
 `ROBUSTHEIT-PREMIUM-2026-10-07.md`
+
+## Ein Selbsttest urteilt über den Code, nicht über das Modell (KI-Probe, seit #138, 08.10.2026)
+
+Engine-Lauf **#138** (Run `37694986440`, 07.10.2026 22:15 UTC) starb in Phase
+0.5 mit Exit 2 – vor Phase 1, ohne Artikel, ohne Endabnahme. Kein Code war
+kaputt: `requeue_quality_holds.py --selftest` rief den Lesbarkeits-Heiler mit
+`ki=True` **ohne Attrappe** auf. Lokal und im PR-CI fehlen Schlüssel → grün. In
+Phase 0.5 stehen seit WACHE-609 echte GROQ/GEMINI-Schlüssel → das Live-Modell
+schrieb den „schlechten“ Fixture-Text gut um (Flesch 2.9 → 86) und der Test
+urteilte „Hold unter der Schwelle wird freigegeben“. #136/#137 waren am selben
+Tag grün, weil das Modell zufällig schlechter antwortete. Ein Münzwurf im
+kritischen Pfad.
+
+- **Regel:** Jeder Selbsttest führt seinen KI-Weg über die vorhandene Attrappe
+  (`lesbarkeit_heiler.KI_CALL`, `satz_heiler.KI_CALL`, Modul-`chat` austauschen,
+  Netz-Trigger über `schaltwerk_triggers.NETZ_TRIGGER`) und erreicht **nie**
+  den echten Transport. „Offline, da kein Key im Selbsttest“ ist eine Annahme,
+  keine Garantie – Schritte bekommen Schlüssel nachträglich (genau so entstand
+  #138). Muster: `requeue_quality_holds._KiAttrappe` (zählt Aufrufe, stellt
+  zurück, prüft stumm / Vertragsbruch / gelungen / gar nicht gefragt).
+- **Leitplanke (empirisch):** `scripts/selftest_ki.py --trap-workflows` fährt in
+  `publication-reliability-tests.yml` JEDEN Selbsttest, den ein Workflow
+  aufruft, mit Attrappen-Schlüsseln (SSOT `data/ki_transportweg.yaml`) und
+  gesperrtem Netz (Loopback frei). Jeder Netzversuch wird mit Datei und Zeile
+  protokolliert – auch wenn der Aufrufer die Ausnahme schluckt. Stand
+  08.10.2026: 98/98 grün.
+- **Diagnose:** Phase 0.5 nennt per ERR-Falle den exakten Befehl als
+  Annotation; die Engine-Endkontrolle kennt die Klasse **FRÜHABBRUCH** (ein
+  Pflichtschritt vor der Endabnahme ist gestorben) statt „Endabnahme ohne
+  Exit-Code“.
+- Bedienung: `python3 scripts/selftest_ki.py --selftest` ·
+  `python3 scripts/selftest_ki.py --trap scripts/<skript>.py` ·
+  `python3 scripts/selftest_ki.py --liste` (🔑 = läuft heute schon mit Schlüssel) ·
+  `python3 -m unittest scripts.tests.test_selftest_ki`.
+  Vorgangsbericht: `CONTENT-ENGINE-138-DAUERHEILUNG-PREMIUM-2026-10-08.md`.
 
 ## Wichtige Konventionen
 
