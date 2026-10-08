@@ -1,0 +1,133 @@
+{{- /* ============================================================
+    KI-ASSISTENT – Chat-Shortcode (2026-10-08)
+    ------------------------------------------------------------
+    Einbettung des KI-Assistenten in beliebige Seiten.
+
+    Aufruf:
+      {{< ki-assistent >}}                     Standard-Vorschläge
+      {{< ki-assistent endpoint="https://..." >}}  Eigener Endpoint
+      {{< ki-assistent >}}
+        Was kann ich fragen?
+        Hilfe bei Stromwechsel
+        Kündigung meiner Versicherung
+      {{< /ki-assistent >}}                    Eigene Vorschläge
+
+    DSGVO: Kein Netzwerkverkehr, bis der Nutzer eine Frage stellt.
+    ============================================================ */ -}}
+
+{{- $endpoint := .Get "endpoint" | default (site.Params.kiAssistentEndpoint | default "") -}}
+{{- $hasInner := gt (len (trim .Inner "\n\r ")) 0 -}}
+
+{{- /* Vorschläge: aus dem Shortcode-Inhalt oder Defaults */ -}}
+{{- $suggestions := slice -}}
+{{- if $hasInner -}}
+  {{- range split (trim .Inner "\n\r") "\n" -}}
+    {{- $line := trim . " \t" -}}
+    {{- if gt (len $line) 0 -}}
+      {{- $suggestions = $suggestions | append $line -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq (len $suggestions) 0 -}}
+  {{- $suggestions = slice "Stromtarif vergleichen" "Kündigungsfrist prüfen" "Notgroschen berechnen" -}}
+{{- end -}}
+
+{{- $slug := .Page.File.BaseFileName | default "seite" -}}
+{{- if or (eq $slug "_index") (eq $slug "index") -}}
+  {{- $segs := split (trim .Page.RelPermalink "/") "/" -}}
+  {{- $slug = index $segs (sub (len $segs) 1) | default "seite" -}}
+{{- end -}}
+
+<div class="ff-ki-widget" id="ff-ki-widget" data-slug="{{ $slug }}">
+  <noscript>
+    <p class="ff-ki-noscript" style="text-align:center;padding:16px;font-size:0.88rem;color:var(--secondary);">
+      Der KI-Assistent benötigt JavaScript. Du kannst stattdessen die
+      <a href="/suche/">Suche</a> nutzen.
+    </p>
+  </noscript>
+
+  {{- /* Floating Trigger Button */ -}}
+  <button type="button"
+          class="ff-ki-trigger"
+          id="ff-ki-trigger"
+          aria-label="KI-Assistent öffnen"
+          aria-expanded="false"
+          aria-controls="ff-ki-panel"
+          aria-haspopup="dialog">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.04 2 11c0 2.76 1.36 5.22 3.48 6.86L4 22l4.5-2.14C9.64 20.22 10.8 20.5 12 20.5c5.52 0 10-4.04 10-9S17.52 2 12 2Zm0 16.5c-1.04 0-2.04-.2-2.94-.56l-.3-.12-2.9 1.38.84-2.76-.24-.32C5.1 15.12 4.14 13.64 4.14 12c0-4.42 3.86-7.5 7.86-7.5s7.86 3.08 7.86 7.5-3.86 7.5-7.86 7.5Z"/>
+      <circle cx="8.5" cy="12" r="1.2" fill="currentColor"/>
+      <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+      <circle cx="15.5" cy="12" r="1.2" fill="currentColor"/>
+    </svg>
+  </button>
+
+  {{- /* Chat Panel */ -}}
+  <div class="ff-ki-panel"
+       id="ff-ki-panel"
+       role="dialog"
+       aria-label="KI-Assistent"
+       aria-hidden="true">
+
+    {{- /* Header */ -}}
+    <div class="ff-ki-header">
+      <div class="ff-ki-header__icon" aria-hidden="true">◈</div>
+      <div class="ff-ki-header__text">
+        <h3>Franks KI-Assistent</h3>
+        <p>Kostenlose Finanz-Fragen · Kein Account nötig</p>
+      </div>
+      <button type="button"
+              class="ff-ki-header__close"
+              id="ff-ki-close"
+              aria-label="Assistent schließen">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+          <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z"/>
+        </svg>
+      </button>
+    </div>
+
+    {{- /* Messages */ -}}
+    <div class="ff-ki-messages" id="ff-ki-messages" role="log" aria-live="polite" aria-label="Gesprächsverlauf">
+      <div class="ff-ki-msg ff-ki-msg--welcome" role="status">
+        <strong>Hallo! 👋</strong>
+        Ich beantworte deine Fragen zu Fixkosten, Versicherungen, Strom, Gas und Sparen – kostenlos und ohne Anmeldung.
+      </div>
+
+      {{- /* Vorschläge */ -}}
+      <div class="ff-ki-suggestions" role="group" aria-label="Fragen-Vorschläge">
+        {{- range $suggestions -}}
+        <button type="button" class="ff-ki-suggestion">{{ . }}</button>
+        {{- end -}}
+      </div>
+    </div>
+
+    {{- /* Input */ -}}
+    <div class="ff-ki-input">
+      <label for="ff-ki-input-field" class="ff-ki-sr-only">Deine Frage an den Assistenten</label>
+      <textarea class="ff-ki-input__field"
+                id="ff-ki-input-field"
+                placeholder="Stell deine Frage…"
+                rows="1"
+                maxlength="2000"
+                aria-label="Deine Frage an den Assistenten"></textarea>
+      <button type="button"
+              class="ff-ki-input__send"
+              id="ff-ki-send"
+              aria-label="Frage senden"
+              title="Frage senden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    {{- /* Footer */ -}}
+    <div class="ff-ki-footer">
+      KI-generiert · Keine Anlageberatung · <a href="/datenschutz/" rel="noopener">Datenschutz</a>
+    </div>
+  </div>
+
+  {{- /* Konfiguration für das JS */ -}}
+  <script type="application/json" id="ff-ki-config">{{ dict "endpoint" $endpoint "slug" $slug | jsonify | safeJS }}</script>
+  <script defer src="{{ partial "asset_url.html" "premium/ki-assistent.js" }}"></script>
+</div>

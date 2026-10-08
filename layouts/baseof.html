@@ -44,6 +44,9 @@
         {{- block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . -}}
+    {{- /* KI-Assistent: Chat-Widget auf allen Seiten (DSGVO-konform,
+           kein Netzwerkverkehr bis Nutzeraktion) */ -}}
+    {{- partial "ki_assistent.html" . }}
 </body>
 
 </html>

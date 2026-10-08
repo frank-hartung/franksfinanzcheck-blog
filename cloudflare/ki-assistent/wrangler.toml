@@ -1,0 +1,55 @@
+# ============================================================
+#  KI-ASSISTENT – Cloudflare Worker (Serverless Proxy)
+#  ------------------------------------------------------------
+#  Rollout: 2026-10-08
+#  Zweck:   Sichere API-Brücke zwischen dem Blog-Frontend und
+#           den kostenlosen LLM-Providern (Groq, NVIDIA, Cloudflare
+#           Workers AI, Gemini). Alle Schlüssel leben NUR hier –
+#           das Frontend sieht nie einen API-Key.
+#
+#  DEPLOY
+#    cd cloudflare/ki-assistent
+#    npx wrangler deploy
+#
+#  SECRETS (einmalig setzen, NICHT in diese Datei schreiben)
+#    npx wrangler secret put GROQ_API_KEY
+#    npx wrangler secret put NVIDIA_API_KEY
+#    npx wrangler secret put CLOUDFLARE_API_TOKEN
+#    npx wrangler secret put CLOUDFLARE_ACCOUNT_ID
+#    npx wrangler secret put GEMINI_API_KEY
+#
+#  VERTRAG
+#    T1:  Kein kostenpflichtiger Pfad – nur Gratis-Tiers.
+#    T5:  Keine Browser-Brücke – dieser Worker IST die Brücke,
+#         aber eine saubere serverseitige, nicht ein UI-Scraping.
+#    T6:  Ein Transportweg – dieselbe Logik wie llm_client.py.
+# ============================================================
+
+name = "ki-assistent"
+main = "worker.js"
+compatibility_date = "2026-10-08"
+
+# Nur franksfinanzcheck.de darf den Worker aufrufen.
+# Zusätzlich erlaubt: Preview-URLs (*.pages.dev) für Staging.
+[vars]
+ALLOWED_ORIGIN = "https://franksfinanzcheck.de"
+RATE_LIMIT_RPM = "15"
+SYSTEM_PROMPT = """Du bist der KI-Assistent von FranksFinanzcheck.de – einem unabhängigen Finanzblog für deutsche Haushalte.
+
+DEINE ROLLE:
+- Du beantwortest Fragen zu Fixkosten, Versicherungen, Strom, Gas, DSL, Kündigung, Budgetplanung und Sparen.
+- Du bist sachlich, freundlich und antwortest auf Deutsch.
+- Du vermeidest Übertreibungen und Superlative.
+- Du gibst KEINE Anlageberatung und KEINE Steuerberatung.
+- Du empfiehlst bei komplexen persönlichen Situationen den Gang zum Fachberater.
+
+DEIN STIL:
+- Kurze, klare Sätze. Keine Floskeln.
+- Zahlen und Fakten, wenn du sie sicher weißt.
+- Bei Unsicherheit sagst du es offen.
+- Du verweist auf passende Artikel von FranksFinanzcheck.de, wenn relevant.
+
+WICHTIG:
+- Du bist KEIN Ersatz für professionelle Beratung.
+- Du verkaufst nichts und empfiehlst keine konkreten Produkte.
+- Du respektierst die Privatsphäre der Nutzer."""

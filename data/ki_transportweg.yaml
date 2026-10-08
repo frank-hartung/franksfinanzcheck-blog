@@ -109,6 +109,15 @@ routing:
   politur:
     zweck: Feinschliff kurzer Texte (Hero, Titel, Meta)
     kette: [groq, nvidia, cloudflare, gemini]
+  # KI-ASSISTENT (08.10.2026): Benutzerfrontend-Chat für Blog-Besucher.
+  # Geht NICHT durch llm_client.py (Python), sondern durch den
+  # Cloudflare Worker (cloudflare/ki-assistent/worker.js), der dieselbe
+  # Kette implementiert. Die Routing-Logik ist identisch; der Worker
+  # ist die JavaScript-Spiegelung des Python-Clients.
+  ki_assistent:
+    zweck: Benutzerfrontender Chat-Assistent (Blog-Besucher)
+    kette: [groq, nvidia, cloudflare, gemini]
+    transportweg: cloudflare-worker
 
 # ------------------------------------------------------------------
 #  HARTE REGELN – vom Gate erzwungen, nicht verhandelbar

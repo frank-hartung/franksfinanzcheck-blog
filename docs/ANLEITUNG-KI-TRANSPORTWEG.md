@@ -85,7 +85,7 @@ Exit-Codes sind Vertrag:
 
 ---
 
-## 4. Der Vertrag T1–T10
+## 4. Der Vertrag T1–T11
 
 | Regel | Inhalt | Warum |
 |---|---|---|
@@ -99,6 +99,7 @@ Exit-Codes sind Vertrag:
 | **T8** | Runbook, Cockpit und npm-Skripte existieren | Eine Wache ohne Bedienung ist keine |
 | **T9** | Jeder KI-Workflow reicht mindestens zwei passende Gratis-Schlüssel durch | Keine Aufgabe hängt an einem erschöpften Kontingent |
 | **T10** | Kostenpflichtige Nebenpfade sind durch die Kostensperre verriegelt | Auch Bild-, Audio- und andere Geldflächen bleiben kostenfrei |
+| **T11** | KI-Assistent – Gate und Worker-Code vorhanden | Benutzerfrontende Chat-API muss dieselben Regeln einhalten |
 
 Der Selbsttest sabotiert das Gate **selbst**: Er schmuggelt einen
 Paid-Anbieter in eine Kette, lügt eine Kostenklasse um, setzt einen
