@@ -22,7 +22,11 @@ die ein Mensch freigibt.
 - **Kein Überschreiben fremder Änderungen.** Stimmt der aktuelle Alt-Text nicht
   mehr mit dem Stand des Vorschlags überein, wird der Vorschlag als „veraltet“
   abgewiesen.
-- **Kein Workflow.** Das Skript läuft nie in GitHub Actions (ein Test prüft das).
+- **Kein automatisches Anwenden.** Einziger Actions-Aufruf ist der manuelle Workflow
+  `.github/workflows/alt-text-gemini-probe.yml`: `workflow_dispatch`, genau
+  `--vorschlagen --max 1`, schreibgeschützte Berechtigungen, kein Commit; das Ergebnis
+  wird als Artifact abgelegt. Der Workflow muss zuerst in den Default-Branch gemergt
+  werden, bevor GitHub ihn dispatchen kann. Ein Test prüft diese Grenzen.
 - **Nur das Titelbild** wird an den Anbieter geschickt. Keine Personendaten.
 - Anbieter: Google Gemini, Gratis-Tier, Modell `gemini-3-flash-preview`
   (wie in `data/ki_transportweg.yaml`). Kein kostenpflichtiger Weg.
@@ -60,6 +64,17 @@ Vorschläge bleiben erhalten, auch wenn sie noch nicht geprüft sind.
 
 Ohne `GEMINI_API_KEY` meldet das Skript „übersprungen“, beendet sich mit Exit 0
 und schreibt nichts.
+
+## Manueller Gemini-Probelauf in GitHub Actions
+
+Der Workflow `.github/workflows/alt-text-gemini-probe.yml` ist bewusst nur über
+`workflow_dispatch` startbar. **Er muss zuerst in den Default-Branch gemergt
+werden**, bevor GitHub ihn zur manuellen Ausführung anbietet. Der Workflow führt
+exakt `python scripts/alt_text_vorschlaege.py --vorschlagen --max 1` aus und
+lädt Protokoll, Vorschlagsdatei und Diff als Artifact hoch. Er hat nur
+`contents: read`, persistiert keine Checkout-Credentials und committet oder pusht
+keine Repository-Änderungen. Den Artifact anschließend im Actions-Lauf öffnen;
+ein echter Gemini-Aufruf ist erst mit diesem Workflow validiert.
 
 ## Qualitätsregeln für den Text
 

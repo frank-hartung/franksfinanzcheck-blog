@@ -409,35 +409,19 @@ def transkribiere_audio(url: str, max_mb: int = 24) -> tuple[str | None, str]:
     Grenzen des Gratis-Tiers: 25 MB pro Datei – größere Episoden werden
     sauber übersprungen (Shownotes bleiben die Basis der Karte).
     """
-    key = os.environ.get("GROQ_API_KEY", "").strip()
-    if not key:
+    if not llm_client.available("groq"):
         return None, "kein GROQ_API_KEY"
     daten, _, fehler = http_get(url, timeout=120, max_bytes=max_mb * 1_000_000)
     if fehler or not daten:
         return None, f"audio nicht ladbar ({fehler})"
     try:
-        grenze = "----poppy" + datetime.datetime.now().strftime("%H%M%S%f")
-        body = io.BytesIO()
-        body.write(f"--{grenze}\r\n".encode())
-        body.write(b'Content-Disposition: form-data; name="model"\r\n\r\n')
-        body.write("whisper-large-v3-turbo\r\n".encode())
-        body.write(f"--{grenze}\r\n".encode())
-        body.write(
-            b'Content-Disposition: form-data; name="file"; '
-            b'filename="episode.mp3"\r\n'
-            b'Content-Type: audio/mpeg\r\n\r\n')
-        body.write(daten)
-        body.write(f"\r\n--{grenze}--\r\n".encode())
-        req = urllib.request.Request(
-            "https://api.groq.com/openai/v1/audio/transcriptions",
-            data=body.getvalue(),
-            headers={"Authorization": f"Bearer {key}",
-                     "Content-Type": f"multipart/form-data; boundary={grenze}",
-                     "User-Agent": USER_AGENT},
-            method="POST")
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            payload = json.loads(resp.read().decode("utf-8"))
-        return (payload.get("text") or "").strip(), "groq-whisper"
+        text = llm_client.transcribe_audio(
+            daten, model="whisper-large-v3-turbo", filename="episode.mp3",
+            mime_type="audio/mpeg", timeout=300, attempts=2,
+        )
+        if not text:
+            return None, "whisper ohne Antwort"
+        return text, "groq-whisper"
     except Exception as e:  # noqa: BLE001
         return None, f"whisper fehlgeschlagen ({type(e).__name__}: {e})"
 

@@ -22,7 +22,7 @@ einzigartig, wertvoll und google-sicher.
 Nutzung:
     python3 scripts/generate_drafts.py                # 1 Entwurf
     MAX_ARTIKEL_PRO_LAUF=2 python3 scripts/...        # 2 Entwürfe
-    AI_PROVIDER=pollinations python3 scripts/...      # Provider erzwingen
+    AI_PROVIDER=gemini python3 scripts/...            # Provider erzwingen
 """
 
 import datetime
@@ -33,8 +33,6 @@ import re
 import sys
 import time
 import urllib.error
-import urllib.parse
-import urllib.request
 
 import yaml
 
@@ -42,7 +40,7 @@ import yaml
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of, join_article  # Naht-SSOT
-import groq_config
+import llm_client
 # AGC-AUTOPILOT (08.09.2026): optionaler Kontext aus der Blog-Automatik
 # (Brand Brain + geroutete Tages-Recherche + Kampagnen-CTA). Der Import DARF
 # NIE brechen: fehlt das Modul, schreibt der Bot exakt wie bisher.
@@ -216,7 +214,7 @@ def refill_topics(topics, used_titles, target=16):
         f"PILLAR: <einer von: {', '.join(PILLARS)}>\n"
     )
     raw = None
-    for fn in (call_groq, call_gemini, call_pollinations):
+    for fn in (call_groq, call_gemini):
         try:
             raw = fn(prompt)
             if raw and len(raw.strip()) > 200:
@@ -360,25 +358,6 @@ def yaml_str(s):
     """Sicheres Quoting für YAML-Frontmatter."""
     s = s.replace("\\", "\\\\").replace('"', '\\"')
     return f'"{s}"'
-
-
-def http_json(url, data=None, headers=None, timeout=90):
-    """HTTP-Helfer (nur Standardbibliothek).
-    WICHTIG: Browser-User-Agent setzen – Cloudflare blockt Requests ohne
-    User-Agent (Error 1010/403), wie es im GitHub-Runner passiert ist."""
-    hdrs = dict(headers or {})
-    hdrs.setdefault("User-Agent",
-                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
-    req = urllib.request.Request(url, data=data, headers=hdrs)
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
-
-
-def http_text(url, timeout=90):
-    req = urllib.request.Request(url, headers={"User-Agent": "hugo-blog-bot/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read().decode("utf-8")
 
 
 # ---------------------------------------------------------------- Pinterest-Inspiration
@@ -606,55 +585,27 @@ def _retry(fn, attempts=4, base_delay=5):
 
 
 def call_groq(prompt):
-    return groq_config.chat(
-        prompt,
-        system=SYSTEM_PROMPT,
-        temperature=0.9,
-        max_tokens=6000,
+    return llm_client.chat(
+        "groq", prompt=prompt, system=SYSTEM_PROMPT,
+        temperature=0.9, max_tokens=6000, timeout=180,
         raise_on_error=True,
     )
 
 
 def call_gemini(prompt):
-    key = os.environ.get("GEMINI_API_KEY")
-    if not key:
+    if not llm_client.available("gemini"):
         return None
     model = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
-    # Run 36407111494 (#436): Gemini lieferte in fast jeder Themenrunde eine
-    # leere/zu kurze Antwort. Anders als Groq hatte dieser Pfad weder ein
-    # explizites Ausgabelimit noch eine Temperatur und las nur den ersten
-    # Content-Part. Für einen 1.500–2.200-Wörter-Auftrag ist ein impliziter
-    # Provider-Default kein belastbarer Produktionsvertrag.
-    body = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.8,
-            "maxOutputTokens": 8192,
-        },
-    }
-    data = json.dumps(body).encode("utf-8")
-
+    # Explizites Ausgabelimit hält den 1.500–2.200-Wörter-Auftrag unabhängig
+    # vom impliziten Modell-Default; der gemeinsame Client liest alle Antwort-Parts.
     def _call():
-        resp = http_json(
-            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
-            data=data,
-            headers={"Content-Type": "application/json"},
+        text = llm_client.chat(
+            "gemini", prompt=prompt, model=model, temperature=0.8,
+            max_tokens=8192, timeout=90, attempts=1, raise_on_error=True,
         )
-        candidates = resp.get("candidates") or []
-        if not candidates:
-            return None
-        parts = (candidates[0].get("content") or {}).get("parts") or []
-        # Gemini kann Text in mehrere Parts teilen (u. a. bei Thinking-
-        # Modellen). Kein valider Part darf still verloren gehen.
-        return "".join(str(p.get("text") or "") for p in parts).strip() or None
-
+        return text or None
     return _retry(_call)
 
-
-def call_pollinations(prompt):
-    """Key-lose Fallback-API – 2026 weitgehend abgekündigt (meist 402)."""
-    url = "https://text.pollinations.ai/" + urllib.parse.quote(prompt)
-    return http_text(url, timeout=120)
 
 
 def demo_article(topic, angle):
@@ -703,7 +654,6 @@ def demo_article(topic, angle):
 PROVIDERS = [
     ("Groq (Gratis-Key: console.groq.com)", call_groq),
     ("Gemini (Gratis-Key: aistudio.google.com)", call_gemini),
-    ("Pollinations (legacy, meist deaktiviert)", call_pollinations),
 ]
 
 
@@ -882,7 +832,10 @@ Ab Zeile 3: Der Artikel in Markdown:
 - Deutsche Orthografie: korrekte Groß-/Kleinschreibung, korrekte Anführungszeichen ("…")
 - Originalität ist Pflicht: eigener Wortlaut, eigene Beispiele, eigene Abschnittsfolge
 {korrektur_block}"""
-    forced = os.environ.get("AI_PROVIDER")
+    forced = (os.environ.get("AI_PROVIDER") or "").strip().lower()
+    if forced and forced not in {"groq", "gemini"}:
+        print(f"  ✗ Unbekannter AI_PROVIDER={forced!r}; erlaubt sind groq und gemini.")
+        return None, None
     for name, fn in PROVIDERS:
         if forced and forced.lower() not in name.lower():
             continue

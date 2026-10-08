@@ -50,12 +50,9 @@
 # ============================================================
 
 import json
-import os
 import re
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -63,10 +60,10 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "LEKTOR-REPORT.md"
 HISTORY = ROOT / "data" / "lektor_history.jsonl"
 
-import groq_config
+import llm_client
 
-GROQ_KEY = groq_config.api_key()
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+GROQ_KEY = llm_client.available("groq")
+GEMINI_KEY = llm_client.available("gemini")
 
 DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
@@ -413,19 +410,11 @@ Antworte NUR mit dem korrigierten Satz, nichts anderes."""
         if not key:
             continue
         try:
-            if provider == "groq":
-                out = groq_config.chat(
-                    prompt, temperature=0.2, max_tokens=500, timeout=60,
-                    raise_on_error=True,
-                ) or ""
-            else:
-                req = urllib.request.Request(
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-                    data=json.dumps({"contents": [{"parts": [{"text": prompt}]}],
-                                     "generationConfig": {"temperature": 0.2, "maxOutputTokens": 500}}).encode(),
-                    headers={"x-goog-api-key": key}, method="POST")
-                with urllib.request.urlopen(req, timeout=60) as r:
-                    out = json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"].strip()
+            out = llm_client.chat(
+                provider, prompt=prompt,
+                temperature=0.2, max_tokens=500, timeout=60, attempts=3,
+                raise_on_error=True,
+            ) or ""
             fixed = _ohne_marker_echo(out.splitlines()[0])
             if not fixed:
                 return None
@@ -456,19 +445,11 @@ Markdown bleibt, keine Faktaenderung. Antworte NUR mit dem neuen Satz."""
         if not key:
             continue
         try:
-            if provider == "groq":
-                out = groq_config.chat(
-                    prompt, temperature=0.2, max_tokens=500, timeout=60,
-                    raise_on_error=True,
-                ) or ""
-            else:
-                req = urllib.request.Request(
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-                    data=json.dumps({"contents": [{"parts": [{"text": prompt}]}],
-                                     "generationConfig": {"temperature": 0.2, "maxOutputTokens": 500}}).encode(),
-                    headers={"x-goog-api-key": key}, method="POST")
-                with urllib.request.urlopen(req, timeout=60) as r:
-                    out = json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"].strip()
+            out = llm_client.chat(
+                provider, prompt=prompt,
+                temperature=0.2, max_tokens=500, timeout=60, attempts=3,
+                raise_on_error=True,
+            ) or ""
             fixed = _ohne_marker_echo(out.splitlines()[0])
             if not fixed:
                 return None

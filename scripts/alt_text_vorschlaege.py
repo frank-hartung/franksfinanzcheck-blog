@@ -16,7 +16,9 @@ Ablauf (Mensch bleibt in der Schleife):
                      Seite (--trocken zeigt vorher, was passieren würde)
 
 Regeln:
-  - Kein Automatismus: der Befehl läuft nie in einem Workflow.
+  - Kein Veröffentlichungs-Automatismus: genau ein manueller workflow_dispatch
+    darf --vorschlagen --max 1 ausführen; --anwenden läuft nie in Actions.
+    Der Probelauf hat nur Leserechte und veröffentlicht sein Ergebnis als Artifact.
   - Der Modellaufruf geht ausschließlich durch scripts/llm_client.py
     (T6 des KI-Transportwegs: ein Ort für Schlüssel, Retries und Kosten).
   - Ein Vorschlag wird nur angewendet, wenn der aktuelle Alt-Text noch dem

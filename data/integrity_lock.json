@@ -1,18 +1,18 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-08T15:00:04.257598+00:00",
-  "head": "a96825e",
+  "signed_at": "2026-10-08T15:42:37.969262+00:00",
+  "head": "132373c",
   "files": {
     "assets/css/extended/custom.css": "b8979747324c5a6e82c848292cb01faa53bfffc00a73f8bcac056978b3ecf692",
     "data/brand_lock.yaml": "3eec543d4cfc6f8b9e6a9dcb2cab2313e242333f2938da56cdd97bcbe545848e",
-    "hugo.toml": "b85b8ae1cb22f23c8466756dacce9395e3aec6a8957e3638d716cba6ca0ef462",
+    "hugo.toml": "a38d961154cc8a570ed6623e0ddd583b9cf4a47db8a1b57ab01748d2e51a20cc",
     "layouts/_default/_markup/render-link.html": "7f6547ea0b13c17636590b2afeee1bffc5bb9385218186bec83a8c337c2e498b",
     "layouts/_partials/affiliate_anchor_attrs.html": "2c06efbb74e0802ebbb90a9154ed740f072089c30b7c72d508b23c36cbeae915",
     "layouts/_partials/affiliate_ziele_data.html": "1cffa1279f9dafbf08e5a128546a83a9a5cc3a6918479b01b7612a08a4ac0822",
     "layouts/_partials/cover.html": "fa66220e98bec55227474cb9e6e2175c6bbe4aab9722d525fd3c1e391828a3f6",
     "layouts/_partials/extend_footer.html": "8fb36b8fcfb807c6c2d175d39aa8aa5f191814473f88df083627a02714f286d7",
     "layouts/_partials/extend_post_content.html": "71c8fa455f718632c41b93124bc87bf9d7daf4318ef7ff3c040921d5cc9b54dc",
-    "layouts/_partials/head.html": "3567ae4215e299586207e59fe22ad65cf9ea9408351df38af867286a07db9565",
+    "layouts/_partials/head.html": "e91bf0b087c2e541c2e27b78fe6f7e9c892cec4b29f105d0cffe8142776c5b03",
     "layouts/_partials/header.html": "7583701b962707f902ca094f899e4de52be4d5e1a48620c9c39791252d83c554",
     "layouts/_partials/home_clusters.html": "578bb6c7f00fdef0856808774c66f0f3b573177867b26b0eadb999ec7a8bde78",
     "layouts/_partials/pillar_box.html": "a9d2b6ccfa82f5add8c4de77e4d81f7129b47288f4946dcb6643ddb6ccbf0766",
@@ -35,13 +35,13 @@
     "scripts/generate_covers.py": "a4cc9448cb6ad5702e1d690078921a7a8633a1abac4166be169b5580efc59985",
     "scripts/hardcases_guard.py": "0fd718daec95f887d42dc12432953839e303537e496426d163165756392f73bd",
     "scripts/internal_linker.py": "d19dee6b438ed06fb2b74718a90defc4b0ec0f5b40635254c5dd2c91ebdb0e14",
-    "scripts/lektor_guard.py": "a3046e18adbe96d9f17a551f106ec29574cca4c75e39882de9e69fa08b07d1f9",
-    "scripts/lesbarkeit_heiler.py": "bbeebb18aed7b3dd351dc817a5ec55b642e6e691c36bd2964dc2850975be33fa",
+    "scripts/lektor_guard.py": "0f6eb11dbf468907eb24c460dfeff42833fe50dc855ab4345fa5dd35fa22a166",
+    "scripts/lesbarkeit_heiler.py": "8b9f40a5f1e706d4131973e15dd9d19ee6d6929365cdc78108a960d5861d4ebd",
     "scripts/link_density_guard.py": "72ea45b35eeb0b3a57ba067215e7322c90a948a4949df5bbf25d2dceccfe8ac5",
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "07308bca2790276a7938daaa26ba43c9ba1fd9f9abddf95f8ff01b4a49af6941",
-    "scripts/redaktions_standard.py": "282acfc81639f9fc1158e8ee2e752c2a8b00f8f93eaeaca82509ef5c9ca9c7bd",
+    "scripts/redaktions_standard.py": "410c65072122855850620a63c4e51147541fbfc6423fa87121187b1af65b305c",
     "scripts/reserve_artifacts.py": "291dea98a703c2c1d19de91f4cbd2c6a2df33b914d07ad4aba793aa0d68ec652",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
@@ -52,7 +52,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "6561a8ca8ce524e2fd1bc41fa189795c05ff8b5b12ef60bb91fac15656f6848c",
+  "files_sha256": "8be11896948dbcd70a86e9cb95f5d0ef3454a8136e1ac4637512523ac7d0edec",
   "audit_start_sha256": "191cd019d49105827a2a370ef0d86997fb95235dcde17e673498e2c377025548",
   "audit": [
     {
@@ -295,26 +295,113 @@
     {
       "date": "2026-10-08",
       "art": "set-current",
-      "head": "a96825e",
+      "head": "9d15f6a",
       "geaendert": [
-        "scripts/reserve_artifacts.py"
+        "hugo.toml",
+        "layouts/_partials/head.html",
+        "scripts/lektor_guard.py",
+        "scripts/lesbarkeit_heiler.py",
+        "scripts/redaktions_standard.py"
       ],
       "herkunft": [
         {
-          "pfad": "scripts/reserve_artifacts.py",
+          "pfad": "hugo.toml",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9d15f6a",
+              "datum": "2026-10-08",
+              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
+            },
+            {
+              "sha": "bc76acb",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "layouts/_partials/head.html",
+          "klasse": "kritisch",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9d15f6a",
+              "datum": "2026-10-08",
+              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
+            },
+            {
+              "sha": "bc76acb",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/lektor_guard.py",
           "klasse": "fest",
-          "urteil": "NEU UNTER SIEGEL",
-          "commits": [],
-          "commits_art": "neu-unter-siegel"
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9d15f6a",
+              "datum": "2026-10-08",
+              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
+            },
+            {
+              "sha": "bc76acb",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/lesbarkeit_heiler.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9d15f6a",
+              "datum": "2026-10-08",
+              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
+            },
+            {
+              "sha": "bc76acb",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "9d15f6a",
+              "datum": "2026-10-08",
+              "betreff": "fix: centralize legacy AI transports and add manual Gemini probe"
+            },
+            {
+              "sha": "bc76acb",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
         }
       ],
-      "files_sha256": "068bbbae97ba5298494213353e986e2e42e19ea293bd4f810fe3387d465387d6",
+      "files_sha256": "aad14c94488d7ad8a150a658f9f0d0c64d382ad368c7d11c2fdaa539c7c5d1a3",
       "prev_sha256": "7780859056844c10647717c541eb141cc3eb8b5ff10243778b6a04b3486a2ee4"
     },
     {
       "date": "2026-10-08",
       "art": "set-current",
-      "head": "a96825e",
+      "head": "132373c",
       "geaendert": [
         "scripts/lesbarkeit_heiler.py",
         "scripts/reserve_artifacts.py"
@@ -324,19 +411,30 @@
           "pfad": "scripts/lesbarkeit_heiler.py",
           "klasse": "fest",
           "urteil": "UNERKLÄRT",
-          "commits": [],
-          "commits_art": "seit-signatur"
+          "commits": [
+            {
+              "sha": "132373c",
+              "datum": "2026-10-08",
+              "betreff": "fix(reserve): sechs Premium-Entwürfe dauerhaft gegen Belegkorruption sichern (#634)"
+            },
+            {
+              "sha": "a96825e",
+              "datum": "2026-10-08",
+              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
+            }
+          ],
+          "commits_art": "letzte-commits"
         },
         {
           "pfad": "scripts/reserve_artifacts.py",
           "klasse": "fest",
-          "urteil": "NICHT VERSIONIERT",
+          "urteil": "NEU UNTER SIEGEL",
           "commits": [],
-          "commits_art": "seit-signatur"
+          "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "81c8f6ccdaf029862e7473df6571b357a0b3fc78f5b1028328fa94ef80ea7e24",
-      "files_sha256": "6561a8ca8ce524e2fd1bc41fa189795c05ff8b5b12ef60bb91fac15656f6848c"
+      "prev_sha256": "01c7203bab8b00fd871ace3922d2b8244e2b24fe205d829f6871b30562bc7421",
+      "files_sha256": "8be11896948dbcd70a86e9cb95f5d0ef3454a8136e1ac4637512523ac7d0edec"
     }
   ]
 }

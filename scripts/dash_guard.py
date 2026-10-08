@@ -39,12 +39,9 @@
 # ============================================================
 
 import json
-import os
 import re
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -53,12 +50,12 @@ POSTS_DIRS = [ROOT / "content" / "posts", ROOT / "content" / "pillar"]
 REPORT = ROOT / "DASH-REPORT.md"
 HISTORY = ROOT / "data" / "dash_guard_history.jsonl"
 
-import groq_config
 sys.path.insert(0, str(ROOT / "scripts"))
+import llm_client
 import post_utils                                # Naht-SSOT (R9)
 
-GROQ_KEY = groq_config.api_key()
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+GROQ_KEY = llm_client.available("groq")
+GEMINI_KEY = llm_client.available("gemini")
 
 DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
@@ -230,34 +227,24 @@ def style_check(text: str, fname: str, base_offset: int = 0) -> None:
 # ------------------------------------------------------------- KI-Schiedsamt
 
 def ai_call(prompt: str) -> str | None:
-    msgs = [{"role": "user", "content": prompt}]
     try:
         if GROQ_KEY:
-            return groq_config.chat(
-                messages=[
-                    {"role": "system", "content": "Du bist ein deutscher Profi-Lektor (Duden, Webtypografie). Antworte NUR mit JSON."},
-                    *msgs,
-                ],
-                temperature=0.1,
-                max_tokens=900,
-                timeout=60,
+            return llm_client.chat(
+                "groq", prompt=prompt,
+                system="Du bist ein deutscher Profi-Lektor (Duden, Webtypografie). Antworte NUR mit JSON.",
+                temperature=0.1, max_tokens=900, timeout=60, attempts=3,
                 raise_on_error=True,
             )
     except Exception as e:
         print(f"  ⚠ Groq: {e}")
     try:
         if GEMINI_KEY:
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-                params={}, data=json.dumps({
-                    "systemInstruction": {"parts": [{"text": "Du bist ein deutscher Profi-Lektor (Duden, Webtypografie). Antworte NUR mit JSON."}]},
-                    "contents": [{"parts": [{"text": prompt}]}],
-                    "generationConfig": {"temperature": 0.1, "maxOutputTokens": 900},
-                }).encode(),
-                headers={"x-goog-api-key": GEMINI_KEY, "Content-Type": "application/json"},
-                method="POST")
-            with urllib.request.urlopen(req, timeout=60) as r:
-                return json.loads(r.read())["candidates"][0]["content"]["parts"][0]["text"]
+            return llm_client.chat(
+                "gemini", prompt=prompt,
+                system="Du bist ein deutscher Profi-Lektor (Duden, Webtypografie). Antworte NUR mit JSON.",
+                temperature=0.1, max_tokens=900, timeout=60, attempts=1,
+                raise_on_error=True,
+            )
     except Exception as e:
         print(f"  ⚠ Gemini: {e}")
     return None

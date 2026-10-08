@@ -57,7 +57,6 @@ import os
 import re
 import sys
 import unicodedata
-import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
@@ -65,7 +64,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
-import groq_config  # noqa: E402
+import llm_client  # noqa: E402
 
 # YMYL-Schutz (Premium-Fix #613): Hochrisiko-Artikel mit gültigem Siegel
 # dürfen nicht von der KI-Heilung umgeschrieben werden – sonst bricht das
@@ -476,31 +475,21 @@ def fix_rs7(path, a):
 # ---------------------------------------------------------------------------
 
 def _call_ai(prompt, max_tokens=6000):
-    """Gemini zuerst, dann Groq (gleiche Logik wie profi_polish)."""
-    ua = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-          "Chrome/126.0 Safari/537.36")
-    gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if gemini_key:
+    """Gemini zuerst, dann Groq – alle Aufrufe laufen über llm_client."""
+    for provider in ("gemini", "groq"):
+        if not llm_client.available(provider):
+            continue
         try:
-            payload = {"contents": [{"parts": [{"text": prompt}]}]}
-            req = urllib.request.Request(
-                "https://generativelanguage.googleapis.com/v1beta/models/"
-                "gemini-3-flash-preview:generateContent?key=" + gemini_key,
-                data=json.dumps(payload).encode(),
-                headers={"Content-Type": "application/json", "User-Agent": ua})
-            resp = json.loads(urllib.request.urlopen(req, timeout=180).read())
-            text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
+            text = llm_client.chat(
+                provider, prompt=prompt,
+                model=os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
+                if provider == "gemini" else None,
+                max_tokens=max_tokens, timeout=180, attempts=3,
+            )
             if text:
                 return text
         except Exception as e:  # noqa: BLE001
-            print(f"  ⚠ Gemini: {e}")
-    if groq_config.available():
-        try:
-            text = groq_config.chat(prompt, max_tokens=max_tokens, timeout=180)
-            if text:
-                return text
-        except Exception as e:  # noqa: BLE001
-            print(f"  ⚠ Groq: {e}")
+            print(f"  ⚠ {provider.capitalize()}: {e}")
     return None
 
 
@@ -575,7 +564,7 @@ def heal_article_ai(a, res, verworfen=None):
         weiche.append(f"RS6 Phantom-Quellen ({res['rs6'][2]} Stellen)")
     if not fehlend and not weiche:
         return None
-    if not (os.environ.get("GEMINI_API_KEY") or groq_config.available()):
+    if not (llm_client.available("gemini") or llm_client.available("groq")):
         print("  ⚠ keine API-Keys – KI-Heilung übersprungen")
         return None
 

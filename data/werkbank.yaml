@@ -187,8 +187,7 @@ antwortwerk:
       kostenpflichtig: false
       schluessel_noetig: true
       env: GROQ_API_KEY
-      endpunkt: "https://api.groq.com/openai/v1/chat/completions"
-      modell: "llama-3.3-70b-versatile"
+      modell: "openai/gpt-oss-120b"
       bemerkung: "Schreibt die Beleglage zu einem Fließtext zusammen."
 
     - id: gemini
@@ -196,8 +195,7 @@ antwortwerk:
       kostenpflichtig: false
       schluessel_noetig: true
       env: GEMINI_API_KEY
-      endpunkt: "https://generativelanguage.googleapis.com/v1beta/models"
-      modell: "gemini-2.0-flash"
+      modell: "gemini-3-flash-preview"
       bemerkung: "Zweiter Gratis-Weg, falls Groq drosselt."
 
   # --- 2.3 Budget --------------------------------------------------

@@ -128,7 +128,7 @@ class ProbeIstScharf(unittest.TestCase):
             pfad.write_text(code, encoding="utf-8")
             erg = selftest_ki.trap(str(pfad), timeout=120)
         self.assertEqual(erg["befund"], "NETZ", erg["ausgabe"][-800:])
-        self.assertTrue(any("lesbarkeit_heiler.py" in v["ort"] or "groq_config.py" in v["ort"]
+        self.assertTrue(any("llm_client.py" in v["ort"]
                             for v in erg["versuche"]), erg["versuche"])
 
     def test_entdeckung_kennt_phase_05(self):

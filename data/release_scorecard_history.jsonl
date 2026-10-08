@@ -95,3 +95,5 @@
 {"blockiert": [], "commit": "a979120fa6d3c504ae79c580add224e86a323539", "freigabe_reif": 33, "kandidaten": [], "live": 40, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-08T12:16:30Z", "warnung": 7}
 {"blockiert": [], "commit": "e185a970ee043fc85363270d3d3fa7c2ffb8cd60", "freigabe_reif": 33, "kandidaten": [], "live": 40, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-08T12:51:50Z", "warnung": 7}
 {"blockiert": [], "commit": "bc76acbda5965a1e2ec58470e51510a721c9bc64", "freigabe_reif": 33, "kandidaten": [], "live": 40, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-08T13:51:42Z", "warnung": 7}
+{"blockiert": [], "commit": "8f9344aa70be4bdfd180463c025e4f08dfbb0c87", "freigabe_reif": 33, "kandidaten": [], "live": 40, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-08T14:19:02Z", "warnung": 7}
+{"blockiert": [], "commit": "742decd950a6f9e802e8fe6caaa524be509d76a3", "freigabe_reif": 33, "kandidaten": [], "live": 40, "modus": "kandidaten", "tool_fehler": [], "ts": "2026-10-08T14:47:04Z", "warnung": 7}
